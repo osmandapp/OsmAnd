@@ -86,27 +86,26 @@ public class PoiFiltersHelper {
 	
 	private List<PoiFilter> getUserDefinedDefaultFilters() {
 		List<PoiFilter> filters = new ArrayList<PoiFilter>();
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_accomodation), PoiFilter.USER_PREFIX + UDF_ACCOMMODATION,
+				configureDefaultUserDefinedFilter(null, UDF_ACCOMMODATION), application));
 		filters.add(new PoiFilter(application.getString(R.string.poi_filter_car_aid), PoiFilter.USER_PREFIX + UDF_CAR_AID,
 				configureDefaultUserDefinedFilter(null, UDF_CAR_AID), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_food_shop), PoiFilter.USER_PREFIX + UDF_FOOD_SHOP,
+				configureDefaultUserDefinedFilter(null, UDF_FOOD_SHOP), application));
 		filters.add(new PoiFilter(application.getString(R.string.poi_filter_for_tourists), PoiFilter.USER_PREFIX + UDF_FOR_TOURISTS,
 				configureDefaultUserDefinedFilter(null, UDF_FOR_TOURISTS), application));
 		filters.add(new PoiFilter(application.getString(R.string.poi_filter_fuel), PoiFilter.USER_PREFIX + UDF_FUEL,
 				configureDefaultUserDefinedFilter(null, UDF_FUEL), application));
-		filters.add(new PoiFilter(application.getString(R.string.poi_filter_food_shop), PoiFilter.USER_PREFIX + UDF_FOOD_SHOP,
-				configureDefaultUserDefinedFilter(null, UDF_FOOD_SHOP), application));
-		filters.add(new PoiFilter(application.getString(R.string.poi_filter_sightseeing), PoiFilter.USER_PREFIX + UDF_SIGHTSEEING,
-				configureDefaultUserDefinedFilter(null, UDF_SIGHTSEEING), application));
-
-		// UDF_EMERGENCY = "emergency";
-		// UDF_ENTERTAINMENT = "entertainment";
-		filters.add(new PoiFilter(application.getString(R.string.poi_filter_accomodation), PoiFilter.USER_PREFIX + UDF_ACCOMMODATION,
-				configureDefaultUserDefinedFilter(null, UDF_ACCOMMODATION), application));
-		filters.add(new PoiFilter(application.getString(R.string.poi_filter_restaurants), PoiFilter.USER_PREFIX + UDF_RESTAURANTS,
-				configureDefaultUserDefinedFilter(null, UDF_RESTAURANTS), application));
-		filters.add(new PoiFilter(application.getString(R.string.poi_filter_public_transport),
-				PoiFilter.USER_PREFIX + UDF_PUBLIC_TRANSPORT, configureDefaultUserDefinedFilter(null, UDF_PUBLIC_TRANSPORT), application));
 		filters.add(new PoiFilter(application.getString(R.string.poi_filter_parking), PoiFilter.USER_PREFIX + UDF_PARKING,
 				configureDefaultUserDefinedFilter(null, UDF_PARKING), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_public_transport),
+				PoiFilter.USER_PREFIX + UDF_PUBLIC_TRANSPORT, configureDefaultUserDefinedFilter(null, UDF_PUBLIC_TRANSPORT), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_restaurants), PoiFilter.USER_PREFIX + UDF_RESTAURANTS,
+				configureDefaultUserDefinedFilter(null, UDF_RESTAURANTS), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_sightseeing), PoiFilter.USER_PREFIX + UDF_SIGHTSEEING,
+				configureDefaultUserDefinedFilter(null, UDF_SIGHTSEEING), application));
+		// UDF_EMERGENCY = "emergency";
+		// UDF_ENTERTAINMENT = "entertainment";
 		return filters;
 	}
 	
@@ -114,14 +113,16 @@ public class PoiFiltersHelper {
 		if(types == null) {
 			types = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
 		}
-		if(UDF_CAR_AID.equals(key)){
+		if(UDF_ACCOMMODATION.equals(key)){
+			putValues(types, AmenityType.TOURISM, "camp_site",
+					"caravan_site","picnic_site","alpine_hut", "chalet","guest_house",
+					"hostel", "hotel","motel");
+		} else if (UDF_CAR_AID.equals(key)) {
 			putValues(types, AmenityType.TRANSPORTATION, "fuel", "car_wash", "car_repair","car", "car_sharing");
 			putValues(types, AmenityType.SHOP, "fuel", "car_wash", "car_repair","car", "car_parts");
-		} else if(UDF_SIGHTSEEING.equals(key)){
-			putAll(types, AmenityType.HISTORIC);
-			putAll(types, AmenityType.TOURISM);
-			putAll(types, AmenityType.OSMWIKI);
-			putValues(types, AmenityType.OTHER, "place_of_worship");
+		} else if (UDF_FOOD_SHOP.equals(key)) {
+			putValues(types, AmenityType.SHOP, "alcohol", "bakery", "beverages", "butcher", "convenience", "department_store",
+					"convenience", "farm", "general", "ice_cream", "kiosk", "seafood", "supermarket", "variety_store");
 		} else if(UDF_FOR_TOURISTS.equals(key)){
 			putAll(types, AmenityType.HISTORIC);
 			putAll(types, AmenityType.TOURISM);
@@ -133,18 +134,6 @@ public class PoiFiltersHelper {
 					"post_office","telephone", "toilets");
 		} else if(UDF_FUEL.equals(key)){
 			putValues(types, AmenityType.TRANSPORTATION, "fuel");
-		} else if (UDF_FOOD_SHOP.equals(key)) {
-			putValues(types, AmenityType.SHOP, "alcohol", "bakery", "beverages", "butcher", "convenience", "department_store",
-					"convenience", "farm", "general", "ice_cream", "kiosk", "seafood", "supermarket", "variety_store");
-		} else if (UDF_SIGHTSEEING.equals(key)) {
-			putAll(types, AmenityType.HISTORIC);
-			putValues(types, AmenityType.TOURISM, "attraction",
-					"artwork","zoo","theme_park", "museum","viewpoint");
-			putValues(types, AmenityType.OTHER, "place_of_worship");
-		} else if (UDF_ACCOMMODATION.equals(key)) {
-			putValues(types, AmenityType.TOURISM, "camp_site",
-					"caravan_site","picnic_site","alpine_hut", "chalet","guest_house",
-					"hostel", "hotel","motel");
 		} else if (UDF_PARKING.equals(key)) {
 			putValues(types, AmenityType.TRANSPORTATION, "parking",
 					"bicycle_parking");
@@ -166,13 +155,18 @@ public class PoiFiltersHelper {
 		} else if (UDF_RESTAURANTS.equals(key)) {
 			putValues(types, AmenityType.SUSTENANCE, "restaurant",
 					"cafe", "food_court", "fast_food", "pub", "bar", "biergarten");
+		} else if (UDF_SIGHTSEEING.equals(key)) {
+			putAll(types, AmenityType.HISTORIC);
+			putValues(types, AmenityType.TOURISM, "attraction",
+					"artwork","zoo","theme_park", "museum","viewpoint");
+			putAll(types, AmenityType.OSMWIKI);
+			putValues(types, AmenityType.OTHER, "place_of_worship");
 		} else if (UDF_EMERGENCY.equals(key)) {
 			putAll(types, AmenityType.HEALTHCARE);
 			putAll(types, AmenityType.EMERGENCY);
 		} else if (UDF_ENTERTAINMENT.equals(key)) {
 			putAll(types, AmenityType.ENTERTAINMENT);
 		}
-		
 		return types;
 	}
 	
