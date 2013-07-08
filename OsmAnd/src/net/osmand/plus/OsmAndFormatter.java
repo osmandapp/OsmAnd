@@ -128,54 +128,55 @@ public class OsmAndFormatter {
 		}
 		return "";
 	}
+
 	public static String toPublicString(AmenityType t, ClientContext ctx) {
 		switch (t) {
-		case SUSTENANCE:
-			return ctx.getString(R.string.amenity_type_sustenance);
+		case ADMINISTRATIVE:
+			return ctx.getString(R.string.amenity_type_administrative);
+		case BARRIER:
+			return ctx.getString(R.string.amenity_type_barrier);
 		case EDUCATION:
 			return ctx.getString(R.string.amenity_type_education);
-		case TRANSPORTATION:
-			return ctx.getString(R.string.amenity_type_transportation);
-		case FINANCE:
-			return ctx.getString(R.string.amenity_type_finance);
-		case HEALTHCARE:
-			return ctx.getString(R.string.amenity_type_healthcare);
+		case EMERGENCY:
+			return ctx.getString(R.string.amenity_type_emergency);
 		case ENTERTAINMENT:
 			return ctx.getString(R.string.amenity_type_entertainment);
-		case TOURISM:
-			return ctx.getString(R.string.amenity_type_tourism);
+		case FINANCE:
+			return ctx.getString(R.string.amenity_type_finance);
+		case GEOCACHE:
+			return ctx.getString(R.string.amenity_type_geocache);
+		case HEALTHCARE:
+			return ctx.getString(R.string.amenity_type_healthcare);
 		case HISTORIC:
 			return ctx.getString(R.string.amenity_type_historic);
+		case LANDUSE:
+			return ctx.getString(R.string.amenity_type_landuse);
+		case LEISURE:
+			return ctx.getString(R.string.amenity_type_leisure);
+		case MAN_MADE:
+			return ctx.getString(R.string.amenity_type_manmade);
+		case MILITARY:
+			return ctx.getString(R.string.amenity_type_military);
 		case NATURAL:
 			return ctx.getString(R.string.amenity_type_natural);
+		case OFFICE:
+			return ctx.getString(R.string.amenity_type_office);
+		case OTHER:
+			return ctx.getString(R.string.amenity_type_other);
+		case SHOP:
+			return ctx.getString(R.string.amenity_type_shop);
+		case SPORT:
+			return ctx.getString(R.string.amenity_type_sport);
+		case SUSTENANCE:
+			return ctx.getString(R.string.amenity_type_sustenance);
+		case TOURISM:
+			return ctx.getString(R.string.amenity_type_tourism);
+		case TRANSPORTATION:
+			return ctx.getString(R.string.amenity_type_transportation);
 		case USER_DEFINED:
 			return ctx.getString(R.string.amenity_type_user_defined);
 		case OSMWIKI :
 			return ctx.getString(R.string.amenity_type_wikiosm);
-		case SHOP:
-			return ctx.getString(R.string.amenity_type_shop);
-		case LEISURE:
-			return ctx.getString(R.string.amenity_type_leisure);
-		case SPORT:
-			return ctx.getString(R.string.amenity_type_sport);
-		case BARRIER:
-			return ctx.getString(R.string.amenity_type_barrier);
-		case LANDUSE:
-			return ctx.getString(R.string.amenity_type_landuse);
-		case MAN_MADE:
-			return ctx.getString(R.string.amenity_type_manmade);
-		case OFFICE:
-			return ctx.getString(R.string.amenity_type_office);
-		case EMERGENCY:
-			return ctx.getString(R.string.amenity_type_emergency);
-		case MILITARY:
-			return ctx.getString(R.string.amenity_type_military);
-		case ADMINISTRATIVE:
-			return ctx.getString(R.string.amenity_type_administrative);
-		case GEOCACHE:
-			return ctx.getString(R.string.amenity_type_geocache);
-		case OTHER:
-			return ctx.getString(R.string.amenity_type_other);
 		}
 		return "";
 	}
