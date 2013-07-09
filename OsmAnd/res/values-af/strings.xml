@@ -183,7 +183,7 @@
   <string name="use_fluorescent_overlays_descr">Gebruik helder kleure om paaie en roetes te vertoon</string>
   <string name="offline_edition">Aflyn redigering</string>
   <string name="offline_edition_descr">Gebruik altyd aflyn redigering</string>
-  <string name="tip_recent_changes_0_7_1_t">"Veranderinge in 0.7.1:\n t-aflyn interessante plek redigering\n t-Lewendige spoor-natrek opsie - stuur koördinate na web diens van tyd tot tyd (lees hoe om jou eie web op te stel in Howto Artikels)\n t-Wys opgeneemde spoor op die kaart\n t-rigting waarneming: \"Maak \'n U-draai\" word aangedui en aangekondig wanneer in die teenoorgestelde rigting beweeg word of na `n gemiste draai\n t-Nuwe-stem aankondiging \"Roete herbereken \'\n t-Sigbare aanduiding van \'n dreigende draai binne 100m deur rigting pyl wat kleur verander\n t-aktualiteit van gedeaktiveerde indeks lêers ook nou gewys op Aflaai skerm in donker groen en donker blou\n t-ander veranderinge "
+  <string name="tip_recent_changes_0_7_1_t">"Veranderinge in 0.7.1:\n t-aflyn interessante plek redigering\n t-Lewendige spoor-natrek keuse - stuur koördinate na web diens van tyd tot tyd (lees hoe om jou eie web op te stel in Howto Artikels)\n t-Wys opgeneemde spoor op die kaart\n t-rigting waarneming: \"Maak \'n U-draai\" word aangedui en aangekondig wanneer in die teenoorgestelde rigting beweeg word of na `n gemiste draai\n t-Nuwe-stem aankondiging \"Roete herbereken \'\n t-Sigbare aanduiding van \'n dreigende draai binne 100m deur rigting pyl wat kleur verander\n t-aktualiteit van gedeaktiveerde indeks lêers ook nou gewys op Aflaai skerm in donker groen en donker blou\n t-ander veranderinge "
 	</string>
   <string name="update_poi_does_not_change_indexes">Interessante plek veranderinge binne die toepassing raak nie afgelaaide kaart lêers nie, veranderinge word eerder in `n plaaslike lêer gestoor.</string>
   <string name="local_openstreetmap_uploading">Besig om op te laai …</string>
@@ -250,7 +250,7 @@
   <string name="tip_day_night_mode">Dag/nag gebruikswyse</string>
   
   <string name="tip_osm_improve">Verbetering van OSM inligting</string>
-  <string name="tip_osm_improve_t">\tOsmAnd gebruik kaarte gebaseer op Openstreetmap.org (OSM) inligting en behalwe vir besigtiging en navigasie, kan dit ook gebruik word om die kwaliteit van OSM inligting te verbeter. Jy kan nuwe interessante plekke skep of OSM foutverslae oplaai met net \'n paar klieke!\n\tHiervoor moet jy eers jou OSM login inligting in \'Stellings\' -&gt; \'Algemene verstellings\' -&gt; \'OSM Redigering\' voorsien.\n\tOm \'n nuwe interessante plek by te voeg gebruik opsie \'skep interessante plek\' in die kaart konteks kieslys. Tik die inligting oor die nuwe interessante plek in \'Skep interessante plek\' se dialoog in en stuur dit dan in.\n\tFoute in kaarte kan onmiddellik aangemeld word via OSM fout, en die OSM gemeenskap kan dan vinniger hierdie probleem oplos.\n\tOm `n OSM fout by te voeg gebruik keuse \'Open OSM fout\' in die kaart konteks kieslys. Tik dan die beskrywing van die probleem en pos dit met die \'Voeg by\' knoppie.\n\tLet daarop dat `n internet verbinding nodig is vir die OSM interessante plek en OSM fout bydraes.</string>
+  <string name="tip_osm_improve_t">\tOsmAnd gebruik kaarte gebaseer op Openstreetmap.org (OSM) inligting en behalwe vir besigtiging en navigasie, kan dit ook gebruik word om die kwaliteit van OSM inligting te verbeter. Jy kan nuwe interessante plekke skep of OSM foutverslae oplaai met net \'n paar klieke!\n\tHiervoor moet jy eers jou OSM login inligting in \'Stellings\' -&gt; \'Algemene verstellings\' -&gt; \'OSM Redigering\' voorsien.\n\tOm \'n nuwe interessante plek by te voeg gebruik keuse \'skep interessante plek\' in die kaart konteks kieslys. Tik die inligting oor die nuwe interessante plek in \'Skep interessante plek\' se dialoog in en stuur dit dan in.\n\tFoute in kaarte kan onmiddellik aangemeld word via OSM fout, en die OSM gemeenskap kan dan vinniger hierdie probleem oplos.\n\tOm `n OSM fout by te voeg gebruik keuse \'Open OSM fout\' in die kaart konteks kieslys. Tik dan die beskrywing van die probleem en pos dit met die \'Voeg by\' knoppie.\n\tLet daarop dat `n internet verbinding nodig is vir die OSM interessante plek en OSM fout bydraes.</string>
   <string name="download_files_not_enough_space">Daar is nie genoeg spasie om %1$s MB af te laai nie(beskikbaar:%2$s).</string>
   <string name="download_files_question_space">Beskibare geheue nou {2} MB! Laai {0} lêer(s) ({1} MB) af ?</string>
   <string name="tip_select_destination_point">Kies bestemming</string>
@@ -281,7 +281,8 @@
   <string name="layer_poi_label">Interessante plek etikette</string>
   <string name="animate_route_off">stop animasie</string>
   <string name="animate_route">Begin animasie</string>
-  <string name="tip_recent_changes_0_6_8_t">"Veranderinge in 0.6.8:\n\t-heeltemal herontwerpte soek (interessante plek, adres)! Maak adres soek baie vinniger en meer responsief. Skep \'n soektog koppelvlak met baie verskillende keuses.\n\t-Implementeer interessante plek soek met die naam in groot gebiede (lande)\n\t-Herstel flikkerende kaart skerm vir tablette (Nommer 641)\n\t-Outo-senter kaart uitsig opsie (Nommer 356)\n\t-GPX navigasie verskuif na \'Aanwysings\' en \'Berg Aanwysings \'geskuif na \' Oor roete\n\t-POI inligting in obf lêer. (alle aflaai indekse na 01/10/11)\n\t-Stem aankondiging oplossing (GPS ligging oplossing, weglating van eerste opdrag)\n\t-klein verbeteringe "</string>
+  <string name="tip_recent_changes_0_6_8_t">"Veranderinge in 0.6.8:\n\t-heeltemal herontwerpte soek (interessante plek, adres)! Maak adres soek baie vinniger en meer responsief. Skep \'n soektog koppelvlak met baie verskillende keuses.\n\t-Implementeer interessante plek soek met die naam in groot gebiede (lande)\n\t-Herstel flikkerende kaart skerm vir tablette (Nommer 641)\n\t-Outo-senter kaart uitsig keuse (Nommer 356)\n\t-GPX navigasie verskuif na \'Aanwysings\' en \'Berg Aanwysings \'geskuif na \' Oor roete\n\t-POI inligting in obf lêer. (alle aflaai indekse na 01/10/11)\n\t-Stem aankondiging oplossing (GPS ligging oplossing, weglating van eerste opdrag)\n\t-klein verbeteringe "
+	</string>
   <string name="file_can_not_be_renamed">Lêer kan nie herbenoem word nie.</string>
   <string name="file_with_name_already_exists">Lêer met daardie naam bestaan reeds.</string>
   <string name="gpx_navigation">GPX roete</string>
@@ -405,7 +406,7 @@
   <string name="tip_location_sharing_t">\tJy kan kan die ligging van interessante plekke op jou reis met familie of vriende deel.\n\tOm \'n ligging te deel:\n\tGebruik \'Kaart inhoud kieslys\' -&gt; \'Deel ligging\' kieslys.\n\tKies dan \'n manier om jou ligging te deel. Die keuses is: E-pos, SMS (teks), of kopiëer net die koördinate na die knipbord.
 	</string>
   <string name="tip_favorites">Gunsteling punte</string>
-  <string name="tip_favorites_t">\tDikwels gebruikte punte kan geberg word as gunstelinge.\n\tOm `n punt te berg as `n gunsteling, gaan na die kaart inhoud kieslys, kies opsie \'Voeg by gunstelinge\' en tik dan \'n naam in daarvoor. Nadat jy \'n gunsteling geberg het,  is dit beskikbaar in \'Hoof Kieslys\' -&gt; \'_gunstelinge\'.\n\tLank druk op \'n gunsteling, in die \'gunstelinge\' kieslys bied keuses om dit as bestemming te stel, te wysig of te skrap.\n\tOm al die gunsteling punte op die kaart te wys, skakel die \'gunstelinge\' vel aan in \'Kaart inhoud kieslys\' -&gt; \'Definieer vertoon\'.
+  <string name="tip_favorites_t">\tDikwels gebruikte punte kan geberg word as gunstelinge.\n\tOm `n punt te berg as `n gunsteling, gaan na die kaart inhoud kieslys, Keuse\'Voeg by gunstelinge\' en tik dan \'n naam in daarvoor. Nadat jy \'n gunsteling geberg het,  is dit beskikbaar in \'Hoof Kieslys\' -&gt; \'_gunstelinge\'.\n\tLank druk op \'n gunsteling, in die \'gunstelinge\' kieslys bied keuses om dit as bestemming te stel, te wysig of te skrap.\n\tOm al die gunsteling punte op die kaart te wys, skakel die \'gunstelinge\' vel aan in \'Kaart inhoud kieslys\' -&gt; \'Definieer vertoon\'.
 	</string>
   <string name="create_poi_link_to_osm_doc">"<u> Aanlyn OSM </u> kaart klassifikasie met prentjies"</string>
   <string name="error_doing_search">Fout het voorgekom tydens aflyn soek</string>
@@ -610,7 +611,7 @@
   <string name="menu_mute_on">Klank is af</string>
   <string name="voice_provider_descr">Kies stem begeleiding vir navigasie</string>
   <string name="voice_provider">Stem begeleiding</string>
-  <string name="voice_data_initializing">Besig om stem inligting gereed te maak…</string>
+  <string name="voice_data_initializing">Stem inligting gereedmaak…</string>
   <string name="voice_data_not_supported">Die weergawe van stem inligting word nie ondersteun nie</string>
   <string name="voice_data_corrupted">Gespesifiseerde stem is beskadig</string>
   <string name="voice_data_unavailable">gekose stem is nie beskikbaar nie</string>
@@ -628,7 +629,7 @@
   <string name="route_head">Mik</string>
   <string name="first_time_continue">Later</string>
   <string name="first_time_download">laai gebiede af</string>
-  <string name="search_poi_location">Besig om `n sein te soek…</string>
+  <string name="search_poi_location">Besig om sein te soek…</string>
   <string name="search_near_map">Soek naby die laaste kaart ligging</string>
   <string name="search_nearby">Soek naby</string>
   <string name="map_orientation_default">Dieselfde as toestel</string>
