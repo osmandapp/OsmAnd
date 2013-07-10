@@ -89,31 +89,35 @@ public class VoiceRouter {
 	public void updateAppMode(){
 		// turn prompt starts either at distance, or if actual-lead-time(currentSpeed) < maximum-lead-time  
 		// lead time criterion only for TURN_IN and TURN
-		PREPARE_LONG_DISTANCE = 3500; // (105 sec) - 120 km/h
-		PREPARE_LONG_DISTANCE_END = 3000; // (90 sec) - 120 km/h
+		PREPARE_LONG_DISTANCE = 3500;             // [105 sec] - 120 km/h
+		PREPARE_LONG_DISTANCE_END = 3000;         // [ 90 sec] - 120 km/h
 		if(router.getAppMode() == ApplicationMode.PEDESTRIAN){
+			// prepare_long_distance warning not needed for pedestrian
+			PREPARE_LONG_DISTANCE_END = PREPARE_LONG_DISTANCE + 100; // do not play
 			// prepare distance is not needed for pedestrian
-			PREPARE_DISTANCE = 200;     //(100 sec)
-			PREPARE_DISTANCE_END = 150 + 100; //( 75 sec) + not play
-			TURN_IN_DISTANCE = 100;     //  50 sec
-			TURN_IN_DISTANCE_END = 70;  //  35 sec
-			TURN_DISTANCE = 25;         //  12 sec
-			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 2f;         //   7,2 km/h
+			PREPARE_DISTANCE = 200;           // [100 sec]
+			PREPARE_DISTANCE_END = 150 + 100; // [ 75 sec] + not play
+			TURN_IN_DISTANCE = 50;            //   25 sec, (was 100m, 50 sec)
+			TURN_IN_DISTANCE_END = 30;        //   15 sec  (was  70m, 35 sec)
+			TURN_DISTANCE = 15;               //   7,5sec (was  25m, 12 sec). Check if this works with GPS accuracy!
+			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 2f;  //   7,2 km/h
 		} else if(router.getAppMode() == ApplicationMode.BICYCLE){
-			PREPARE_DISTANCE = 500;     //(100 sec)
-			PREPARE_DISTANCE_END = 350; //( 70 sec)
-			TURN_IN_DISTANCE = 225;     //  45 sec
-			TURN_IN_DISTANCE_END = 80;  //  16 sec
-			TURN_DISTANCE = 45;         //   9 sec  
-			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 5;          //  18 km/h
+			PREPARE_LONG_DISTANCE = 500;      // [100 sec]
+			PREPARE_LONG_DISTANCE_END = 300;  // [ 60 sec]
+			PREPARE_DISTANCE = 200;           // [ 40 sec] (was 500m, 100sec)
+			PREPARE_DISTANCE_END = 120;       // [ 24 sec] (was 350m,  70sec)
+			TURN_IN_DISTANCE = 80;            //   45 sec  (was 225m,  45sec)
+			TURN_IN_DISTANCE_END = 60;        //   16 sec  (was  80m,  16sec)
+			TURN_DISTANCE = 30;               //    9 sec  (was  45m,   9sec). Check if this works with GPS accuracy!
+			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 5;   //  18 km/h
 		} else {
-			PREPARE_DISTANCE = 1500;    //(125 sec)
-			PREPARE_DISTANCE_END = 1200;//(100 sec)
-			TURN_IN_DISTANCE = 390;     //  30 sec
-			TURN_IN_DISTANCE_END = 182; //  14 sec
-			TURN_DISTANCE = 50;         //  7 sec
-			TURN_DEFAULT_SPEED = 7f; 	//  25 km/h
-			DEFAULT_SPEED = 13;         //  48 km/h
+			PREPARE_DISTANCE = 1500;          // [125 sec]
+			PREPARE_DISTANCE_END = 1200;      // [100 sec]
+			TURN_IN_DISTANCE = 390;           //   30 sec
+			TURN_IN_DISTANCE_END = 182;       //   14 sec
+			TURN_DISTANCE = 50;               //   7 sec
+			TURN_DEFAULT_SPEED = 7f;          //   25 km/h
+			DEFAULT_SPEED = 13;               //   48 km/h
 		}
 	}
 	
