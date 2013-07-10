@@ -157,7 +157,7 @@
 	<string name="show_traffic_warnings">顯示交通狀況提醒</string>
 	<string name="avoid_toll_roads">避開付費道路</string>
 	<string name="continue_follow_previous_route_auto">先前的導航未完成。要按照它繼續嗎？ (%1$s 秒)</string>
-	<string name="route_updated_loc_found">一旦找到定位時導航路線將重新規劃</string>
+	<string name="route_updated_loc_found">一旦找到定位時，導航路線將重新規劃</string>
 	<string name="osmand_parking_hours">小時</string>
 	<string name="osmand_parking_minutes">分鐘</string>
 	<string name="osmand_parking_position_description_add_time">您的愛車停在：</string>
@@ -236,7 +236,7 @@
 	<string name="online_map_settings_descr">組態線上或暫存的地圖圖磚來源</string>
 	<string name="map_settings">地圖設定</string>
 	<string name="map_settings_descr">設定地圖顯示</string>
-	<string name="osmand_rastermaps_plugin_description">顯示設定來組態多種線上或暫存的地圖圖磚作為基本地圖或者覆蓋/襯底的地圖，這些地圖還可以準備好離線複製到 OsmAnd 資料夾中。</string>
+	<string name="osmand_rastermaps_plugin_description">顯示設定去組態多種線上或暫存的地圖圖磚，以作為基本地圖或者覆蓋/襯底的地圖，這些地圖還可以在離線時準備，並複製到 OsmAnd 資料夾中。</string>
 	<string name="osmand_background_plugin_description">可在休眠(螢幕關閉)模式下經由定期的喚醒 GPS 進行追蹤與導航。</string>
 	<string name="osmand_accessibility_description">顯示特殊協助工具的設定。</string>
 	<string name="extra_settings">進階設定</string>
