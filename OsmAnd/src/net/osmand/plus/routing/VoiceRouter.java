@@ -106,16 +106,16 @@ public class VoiceRouter {
 			PREPARE_LONG_DISTANCE_END = 300;  // [ 60 sec]
 			PREPARE_DISTANCE = 200;           // [ 40 sec] (was 500m, 100sec)
 			PREPARE_DISTANCE_END = 120;       // [ 24 sec] (was 350m,  70sec)
-			TURN_IN_DISTANCE = 80;            //   45 sec  (was 225m,  45sec)
-			TURN_IN_DISTANCE_END = 60;        //   16 sec  (was  80m,  16sec)
-			TURN_DISTANCE = 30;               //    9 sec  (was  45m,   9sec). Check if this works with GPS accuracy!
+			TURN_IN_DISTANCE = 80;            //   16 sec  (was 225m,  45sec)
+			TURN_IN_DISTANCE_END = 60;        //   12 sec  (was  80m,  16sec)
+			TURN_DISTANCE = 30;               //    6 sec  (was  45m,   9sec). Check if this works with GPS accuracy!
 			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 5;   //  18 km/h
 		} else {
 			PREPARE_DISTANCE = 1500;          // [125 sec]
 			PREPARE_DISTANCE_END = 1200;      // [100 sec]
 			TURN_IN_DISTANCE = 390;           //   30 sec
 			TURN_IN_DISTANCE_END = 182;       //   14 sec
-			TURN_DISTANCE = 50;               //   7 sec
+			TURN_DISTANCE = 50;               //    7 sec
 			TURN_DEFAULT_SPEED = 7f;          //   25 km/h
 			DEFAULT_SPEED = 13;               //   48 km/h
 		}
