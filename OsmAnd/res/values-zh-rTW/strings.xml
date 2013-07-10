@@ -1499,5 +1499,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="av_camera_focus_macro">微距(特寫)對焦模式</string>
 	<string name="av_camera_focus_continuous">相機連續對焦</string>
 	<string name="av_photo_play_sound">快門音效</string>
-	<string name="av_photo_play_sound_descr">在拍照時發出快門音效</string>
+	<string name="av_photo_play_sound_descr">選擇在按下快門拍照時，是否發出音效</string>
 </resources>
