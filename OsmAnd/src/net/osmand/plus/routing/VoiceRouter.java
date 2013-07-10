@@ -95,8 +95,10 @@ public class VoiceRouter {
 			// prepare_long_distance warning not needed for pedestrian
 			PREPARE_LONG_DISTANCE_END = PREPARE_LONG_DISTANCE + 100; // do not play
 			// prepare distance is not needed for pedestrian
-			PREPARE_DISTANCE = 200;           // [100 sec]
-			PREPARE_DISTANCE_END = 150 + 100; // [ 75 sec] + not play
+			//PREPARE_DISTANCE = 200;           // [100 sec]
+			//PREPARE_DISTANCE_END = 150 + 100; // [ 75 sec] + not play
+			PREPARE_DISTANCE = 100;           // [ 50 sec]
+			PREPARE_DISTANCE_END = 70;        // [ 35 sec]
 			TURN_IN_DISTANCE = 50;            //   25 sec, (was 100m, 50 sec)
 			TURN_IN_DISTANCE_END = 30;        //   15 sec  (was  70m, 35 sec)
 			TURN_DISTANCE = 15;               //   7,5sec (was  25m, 12 sec). Check if this works with GPS accuracy!
