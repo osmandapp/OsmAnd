@@ -204,7 +204,8 @@
 	<string name="map_widget_appearance">Diverse:</string>
 	<string name="map_widget_view_direction">Synsretning</string>
 	<string name="map_widget_transparent">Gennemsigtig layout</string>
-	<string name="monitoring_mode_off">Optag GPX-spor</string>
+	<string name="monitoring_mode_off">Optag 
+\nGPX-spor</string>
 	<string name="monitoring_mode_on">Stop
 \nGPX-opt.</string>
 	<string name="bg_service_sleep_mode_off">Aktiver
