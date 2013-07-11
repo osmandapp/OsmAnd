@@ -1451,5 +1451,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="av_camera_focus_macro">Makro (close-up) način ostrenja</string>
 	<string name="av_camera_focus_continuous">Kamera nenehno poskuša ostriti</string>
 	<string name="av_photo_play_sound">Predvajaj zvok pri slikanju</string>
-	<string name="av_photo_play_sound_descr">Ko slikate se bo predvajal zvok</string>
+	<string name="av_photo_play_sound_descr">Izberite ali naj se predvaja zvok ob fotografiranju</string>
 </resources>
