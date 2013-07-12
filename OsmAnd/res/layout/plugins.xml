@@ -7,5 +7,5 @@
 <TextView android:id="@+id/Label" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/select_plugin_to_activate"></TextView>
 
 <ListView android:id="@android:id/list" android:layout_width="fill_parent" android:layout_weight="1" android:layout_height="wrap_content" 
-		android:layout_marginTop="3dp"></ListView>
+		android:layout_marginTop="10dp"></ListView>
 </LinearLayout>

@@ -2,25 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/expandable_category_color">
+    android:background="?attr/expandable_category_color"
+    android:paddingBottom="5dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="5dp" >
 
     <ImageView
         android:id="@+id/explist_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:paddingLeft="10dp"
+        android:paddingLeft="6dp"
         android:src="@drawable/expandable_category_unpushed" />
 
     <TextView
         android:id="@+id/category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
         android:autoLink="web"
         android:gravity="center_vertical"
-        android:textSize="22sp">
+        android:textSize="18sp">
     </TextView>
     
         <LinearLayout
