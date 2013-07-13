@@ -21,7 +21,7 @@
 		<copy todir="assets">
 			<fileset dir="../../resources/" >
 				<include name="specialphrases/**"/>
-				<include name="voice/**"/>
+				<include name="voice/**/*.p"/>
 			</fileset>
 		</copy>
 		<copy todir="res/">
