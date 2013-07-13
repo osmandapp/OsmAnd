@@ -37,6 +37,7 @@
                         android:scrollHorizontally="true" 
     					android:lines="1"
     					android:ellipsize="end"
+    					android:layout_width="150dp"
     					/>
 
                     <ImageButton
@@ -63,6 +64,7 @@
                         android:scrollHorizontally="true" 
     					android:lines="1"
     					android:ellipsize="end" 
+    					android:layout_width="150dp"
                         />
 
                     <ImageButton
@@ -89,6 +91,7 @@
                         android:scrollHorizontally="true" 
     					android:lines="1"
     					android:ellipsize="end"
+    					android:layout_width="150dp"
                          />
 
                     <ImageButton
@@ -115,6 +118,7 @@
                         android:scrollHorizontally="true" 
     					android:lines="1"
     					android:ellipsize="end"
+    					android:layout_width="150dp"
     					 />
 
                     <ImageButton
