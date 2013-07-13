@@ -25,7 +25,7 @@
   <string name="live_monitoring">Activer le suivi en ligne</string>
   <string name="live_monitoring_interval_descr">Préciser l\'intervalle pour le suivi en ligne</string>
   <string name="live_monitoring_interval">Intervalle pour le suivi en ligne</string>
-  <string name="live_monitoring_url_descr">Précisez l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+  <string name="live_monitoring_url_descr">Précisez l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
   <string name="gpx_monitoring_disabled_warn">Veuillez activer \'Enregistrer l\'itinéraire en GPX\' en paramètre de suivi.</string>
   <string name="show_current_gpx_title">Afficher le trajet en cours</string>

@@ -43,7 +43,7 @@
   <string name="live_monitoring">Seguimiento en directo</string>
   <string name="live_monitoring_interval_descr">Especifica el intervalo de seguimiento en directo</string>
   <string name="live_monitoring_interval">Intervalo de seguimiento en directo</string>
-  <string name="live_monitoring_url_descr">Especifica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+  <string name="live_monitoring_url_descr">Especifica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Dirección web de Seguimiento en directo</string>
   <string name="gpx_monitoring_disabled_warn">Por favor, active la opción \'Guardar traza en fichero GPX\'.</string>
   <string name="show_current_gpx_title">Mostrar traza actual</string>

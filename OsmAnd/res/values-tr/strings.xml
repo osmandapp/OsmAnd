@@ -657,7 +657,7 @@
 	<string name="live_monitoring">Çevrimiçi canlı izleme</string>
 	<string name="live_monitoring_interval_descr">Canlı izleme aralığı belirtin</string>
 	<string name="live_monitoring_interval">Canlı izleme aralığı</string>
-	<string name="live_monitoring_url_descr">"Parametre sözdizimi ile web adresini belirtin: Enlem={0}, Boylam={1}, Damga zamanı={2}, HDOP={3}, Rakım={4}, Hız={5} "</string>
+	<string name="live_monitoring_url_descr">"Parametre sözdizimi ile web adresini belirtin: Enlem={0}, Boylam={1}, Damga zamanı={2}, HDOP={3}, Rakım={4}, Hız={5}, bearing={6} "</string>
 	<string name="live_monitoring_url">Web adresinden izlemeyi canlı izlemek</string>
 	<string name="gpx_monitoring_disabled_warn">Lütfen \'GPX dosyası yolunda oturum\'ayarlarını etkinleştirin.</string>
 	<string name="show_current_gpx_title">Geçerli izi göster</string>

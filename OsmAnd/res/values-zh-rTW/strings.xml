@@ -341,7 +341,7 @@
 	<string name="live_monitoring">線上即時追蹤</string>
 	<string name="live_monitoring_interval_descr">指定線上即時追蹤間隔</string>
 	<string name="live_monitoring_interval">線上即時追蹤間隔</string>
-	<string name="live_monitoring_url_descr">指定位置的參數語法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url_descr">指定位置的參數語法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">線上即時追蹤網路地址</string>
 	<string name="gpx_monitoring_disabled_warn">請啟用\'記錄航跡成 GPX 檔案\'設定。</string>
 	<string name="show_current_gpx_title">顯示目前航跡</string>

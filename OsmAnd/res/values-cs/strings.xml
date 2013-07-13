@@ -102,7 +102,7 @@
   <string name="live_monitoring">Přímý přenos pozice</string>
   <string name="live_monitoring_interval_descr">Zadejte interval nahrávání pozice na server</string>
   <string name="live_monitoring_interval">Interval přímého přenosu</string>
-  <string name="live_monitoring_url_descr">Zadejte webovou adresu serveru pro přímý přenos pozice. Parametry: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+  <string name="live_monitoring_url_descr">Zadejte webovou adresu serveru pro přímý přenos pozice. Parametry: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Server pro přímý přenos</string>
   <string name="gpx_monitoring_disabled_warn">Prosím, zapněte funkci \'Uložit trasu do GPX\'.</string>
   <string name="show_current_gpx_title">Zobrazit aktuální trasu</string>

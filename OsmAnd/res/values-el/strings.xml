@@ -336,7 +336,7 @@
 	<string name="live_monitoring">Online ιχνηλάτηση</string>
 	<string name="live_monitoring_interval_descr">Καθορίστε το διάστημα της online ιχνηλάτησης</string>
 	<string name="live_monitoring_interval">Διάστημα online ιχνηλάτησης</string>
-	<string name="live_monitoring_url_descr">Καθορίστε τη διεύθυνση web με την σύνταξη παραμέτρων : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url_descr">Καθορίστε τη διεύθυνση web με την σύνταξη παραμέτρων : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">Διαδικτυακή διεύθυνση online ιχνηλάτησης</string>
 	<string name="gpx_monitoring_disabled_warn">Παρακαλώ ενεργοποιήστε τις ρυθμίσεις \'Εγγραφή ίχνους σε αρχείο GPX\'.</string>
 	<string name="show_current_gpx_title">Εμφάνιση τρέχοντος ίχνους</string>

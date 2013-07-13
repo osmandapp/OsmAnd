@@ -91,7 +91,7 @@
 	<string name="live_monitoring">라이브 트래킹 활성화</string>
 	<string name="live_monitoring_interval_descr">라이브 트래킹 시간 간격을 설정합니다</string>
 	<string name="live_monitoring_interval">라이브 트래킹 시간 간격</string>
-	<string name="live_monitoring_url_descr">라이브 트래킹 웹 주소를 설정합니다. 매개변수 형식 : 위도={0}, 경도={1}, 시간={2}, hdop={3}, 고도={4}, 속도={5}</string>
+	<string name="live_monitoring_url_descr">라이브 트래킹 웹 주소를 설정합니다. 매개변수 형식 : 위도={0}, 경도={1}, 시간={2}, hdop={3}, 고도={4}, 속도={5}, bearing={6}</string>
 	<string name="live_monitoring_url">라이브 트래킹 웹 주소</string>
 	<string name="gpx_monitoring_disabled_warn">\'Log track to GPX\' 트래킹 설정을 활성화하세요</string>
 	<string name="show_current_gpx_title">현재 트랙을 보여줍니다</string>

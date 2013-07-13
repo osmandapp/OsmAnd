@@ -201,7 +201,7 @@
   <string name="live_monitoring">Aanlyn lewendige spoor-natrek</string>
   <string name="live_monitoring_interval_descr">Spesifiseer lewendige spoor-natrek interval</string>
   <string name="live_monitoring_interval">Lewendige spoor-natrek interval</string>
-  <string name="live_monitoring_url_descr">Spesifiseer die web adres met parameteroordrag sinsbou: lat = {0}, lon = {1}, tyd stempel = {2}, hdop = {3}, hoogte = {4}, spoed = {5}</string>
+  <string name="live_monitoring_url_descr">Spesifiseer die web adres met parameteroordrag sinsbou: lat = {0}, lon = {1}, tyd stempel = {2}, hdop = {3}, hoogte = {4}, spoed = {5}, bearing={6}</string>
   <string name="live_monitoring_url">Lewendige spoor-natrek webadres</string>
   <string name="gpx_monitoring_disabled_warn">Skakel asseblief \'Meld spoor na GPX\' aan in natrekking instellings.</string>
   <string name="show_current_gpx_title">Wys huidige spoor</string>

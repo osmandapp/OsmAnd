@@ -147,7 +147,7 @@
   <string name="live_monitoring">დევნა მიმდინარე რეჟიმში</string>
   <string name="live_monitoring_interval_descr">მიუთითეთ მიმდინარე რეჟიმში დევნის ინტერვალი</string>
   <string name="live_monitoring_interval">ცოცხალი დევნის ინტერვალი</string>
-  <string name="live_monitoring_url_descr">მიუთითეთ ვებ მისამართუ შემდეგი პარამეტრების სინტაქსით : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+  <string name="live_monitoring_url_descr">მიუთითეთ ვებ მისამართუ შემდეგი პარამეტრების სინტაქსით : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">ცოცხალი დევნის ვებ-მისამართი</string>
   <string name="gpx_monitoring_disabled_warn">გთხოვთ ჩართოთ \'დევნის GPX ჟურნალში ჩაწერა\' დევნის პარამეტრებში.</string>
   <string name="show_current_gpx_title">მიმდინარე დევნის ჩვენება</string>

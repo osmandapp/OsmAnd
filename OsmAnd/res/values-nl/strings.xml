@@ -129,7 +129,7 @@
   <string name="live_monitoring">Online tracking</string>
   <string name="live_monitoring_interval_descr">Specificeer interval voor online tracking</string>
   <string name="live_monitoring_interval">Interval voor online tracking</string>
-  <string name="live_monitoring_url_descr">Specificeer het webadres met parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, hoogte={4}, snelheid={5}</string>
+  <string name="live_monitoring_url_descr">Specificeer het webadres met parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, hoogte={4}, snelheid={5}, bearing={6}</string>
   <string name="live_monitoring_url">Webadres voor online tracking</string>
   <string name="gpx_monitoring_disabled_warn">Zet eerst \'Registreer track in GPX-bestand\' aan.</string>
   <string name="show_current_gpx_title">Toon huidige track</string>

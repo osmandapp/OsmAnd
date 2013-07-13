@@ -369,7 +369,7 @@
 	<string name="live_monitoring">Monitorizare online a poziției</string>
 	<string name="live_monitoring_interval_descr">Specificarea intervalului de timp între două trimiteri consecutive ale poziției curente</string>
 	<string name="live_monitoring_interval">Intervalul de trimitere a poziției</string>
-	<string name="live_monitoring_url_descr">Specificarea adresei de web la care se trimit coordonatele poziției curente cu sintaxa: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url_descr">Specificarea adresei de web la care se trimit coordonatele poziției curente cu sintaxa: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">Adresa web a serviciului de monitorizare</string>
 	<string name="gpx_monitoring_disabled_warn">Vă rog să activați opțiunea \'Salvează traseul GPX\'.</string>
 	<string name="show_current_gpx_title">Arată traseul curent</string>

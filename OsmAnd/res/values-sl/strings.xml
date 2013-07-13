@@ -688,7 +688,7 @@
 	<string name="live_monitoring">Spletno sledenje v živo</string>
 	<string name="live_monitoring_interval_descr">Določi interval sledenja v živo</string>
 	<string name="live_monitoring_interval">Interval sledenja v živo</string>
-	<string name="live_monitoring_url_descr">Določite spletne naslove s skladnjo parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url_descr">Določite spletne naslove s skladnjo parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">Spletni naslov za sledenje v živo</string>
 	<string name="gpx_monitoring_disabled_warn">Omogočite nastavitev \'Beleži sled v datoteko GPX\'.</string>
 	<string name="profile_settings">Za profil določene nastavitve</string>

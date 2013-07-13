@@ -158,7 +158,7 @@
   <string name="live_monitoring">Включить Live слежение</string>
   <string name="live_monitoring_interval_descr">Укажите интервал Live слежения</string>
   <string name="live_monitoring_interval">Интервал Live слежения</string>
-  <string name="live_monitoring_url_descr">Укажите адрес Live слежения со следующими параметрами : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+  <string name="live_monitoring_url_descr">Укажите адрес Live слежения со следующими параметрами : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Web адрес Live слежения</string>
   <string name="gpx_monitoring_disabled_warn">Пожалуйста включите \'Записывать путь в GPX\' в Настройках.</string>
   <string name="show_current_gpx_title">Показывать текущий путь</string>

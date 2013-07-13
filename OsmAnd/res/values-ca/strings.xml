@@ -225,7 +225,7 @@
 <string name="test_voice_prompts">Prova els indicadors de veu</string>
 <string name="support_new_features">Ajuda per a noves característiques</string>
 <string name="rendering_out_of_memory">No hi ha prou memòria de procés per mostrar l\'àrea seleccionada</string>
-<string name="live_monitoring_url_descr">Especifiqueu l\'adreça de la pàgina web amb la sintaxi dels paràmetres: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+<string name="live_monitoring_url_descr">Especifiqueu l\'adreça de la pàgina web amb la sintaxi dels paràmetres: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 <string name="index_name_north_america">Amèrica del Nord</string>
 <string name="index_name_us">Amèrica del Nord - Estats Units</string>
 <string name="index_name_central_america">Amèrica Central</string>

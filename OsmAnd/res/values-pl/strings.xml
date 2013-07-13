@@ -787,7 +787,7 @@
   <string name="live_monitoring">Śledzenie online</string>
   <string name="live_monitoring_interval_descr">Określ interwał pomiędzy wysyłaniem danych</string>
   <string name="live_monitoring_interval">Interwał wysyłania danych</string>
-  <string name="live_monitoring_url_descr">Określ adres usługi webowej używając następujących parametrów ({n} określa dany parametr): {0}=lat, {1}=lon, {2}=znacznik czasu, {3}=HDOP, {4}=wysokość, {5}=prędkość</string>
+  <string name="live_monitoring_url_descr">Określ adres usługi webowej używając następujących parametrów ({n} określa dany parametr): {0}=lat, {1}=lon, {2}=znacznik czasu, {3}=HDOP, {4}=wysokość, {5}=prędkość, bearing={6}</string>
   <string name="live_monitoring_url">Adres śledzenia online</string>
   <string name="gpx_monitoring_disabled_warn">Proszę włączyć ustawienia \'Zapisuj ślad GPX\'.</string>
   <string name="show_current_gpx_title">Pokaż aktualną ścieżkę</string>

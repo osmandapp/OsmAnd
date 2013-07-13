@@ -213,7 +213,7 @@
   <string name="live_monitoring">Tiesioginis sekimas internete</string>
   <string name="live_monitoring_interval_descr">Nurodyti tiesioginio sekimo intervalą</string>
   <string name="live_monitoring_interval">Tiesioginio sekimo intervalas</string>
-  <string name="live_monitoring_url_descr">Nurodykite interneto adresą su tokia parametrų sintakse : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+  <string name="live_monitoring_url_descr">Nurodykite interneto adresą su tokia parametrų sintakse : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Tiesioginio sekimo tarnybos interneto adresas</string>
   <string name="gpx_monitoring_disabled_warn">Turite įjungti \'Išsaugoti kelionės istoriją į GPX\' sekimo nustatymą.</string>
   <string name="show_current_gpx_title">Rodyti dabartinės kelionės istoriją</string>

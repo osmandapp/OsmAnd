@@ -103,7 +103,7 @@
   <string name="live_monitoring">Tiešsaistes sekošana</string>
   <string name="live_monitoring_interval_descr">Norādīt tiešsaistes sekošanas intervālu</string>
   <string name="live_monitoring_interval">Tiešaistes sekošanas intervāls</string>
-  <string name="live_monitoring_url_descr">Norādiet web adresi ar parametru sintaksi : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+  <string name="live_monitoring_url_descr">Norādiet web adresi ar parametru sintaksi : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Tiešaistes sekošanas web adrese</string>
   <string name="gpx_monitoring_disabled_warn">Lūdzu iespējojat \'Ierakstīt treku GPX failā\' uzstādījumu.</string>
   <string name="show_current_gpx_title">Rādīt tekošo treku</string>

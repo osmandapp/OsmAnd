@@ -318,7 +318,7 @@
 <string name="live_monitoring">Online Live-spårning</string>
 <string name="live_monitoring_interval_descr">Ange intervall för Live tracking</string>
 <string name="live_monitoring_interval">Intervall för Live tracking</string>
-<string name="live_monitoring_url_descr">Ange webbadressen med parametersyntax: lat={0}, lon={1}, tidsstämpel={2}, hdop={3}, höjd={4}, hastighet={5}</string>
+<string name="live_monitoring_url_descr">Ange webbadressen med parametersyntax: lat={0}, lon={1}, tidsstämpel={2}, hdop={3}, höjd={4}, hastighet={5}, bearing={6}</string>
 <string name="live_monitoring_url">Webbadress för Live tracking</string>
 <string name="gpx_monitoring_disabled_warn">Aktivera \'Logga spår till GPX-fil\'-inställningar.</string>
 <string name="show_current_gpx_title">Visa aktuellt spår</string>

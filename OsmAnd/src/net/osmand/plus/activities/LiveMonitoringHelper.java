@@ -47,21 +47,18 @@ public class LiveMonitoringHelper  {
 		if (OsmAndLocationProvider.isPointAccurateForRouting(location) && isLiveMonitoringEnabled()
 				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 			long locationTime = System.currentTimeMillis();
-			insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
-					location.getSpeed(), location.getAccuracy(), locationTime, settings);
+			//* 1000 in next line seems to be wrong with new IntervalChooseDialog
+			//if (time - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get() * 1000) {
+			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
+				LiveMonitoringData data = new LiveMonitoringData((float)location.getLatitude(), (float)location.getLongitude(),
+						(float) location.getAltitude(),(float) location.getSpeed(),(float) location.getAccuracy(), (float) location.getBearing(), locationTime );
+				new LiveSender().execute(data);
+				lastTimeUpdated = locationTime;
+			}
 		}
 		
 	}
 	
-	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
-		//* 1000 in next line seems to be wrong with new IntervalChooseDialog
-		//if (time - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get() * 1000) {
-		if (time - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
-			LiveMonitoringData data = new LiveMonitoringData((float)lat, (float)lon,(float) alt,(float) speed,(float) hdop, time );
-			new LiveSender().execute(data);
-			lastTimeUpdated = time;
-		}
-	}
 	
 	private static class LiveMonitoringData {
 
@@ -69,16 +66,18 @@ public class LiveMonitoringHelper  {
 		private final float lon;
 		private final float alt;
 		private final float speed;
+		private final float bearing;
 		private final float hdop;
 		private final long time;
 
-		public LiveMonitoringData(float lat, float lon, float alt, float speed, float hdop, long time) {
+		public LiveMonitoringData(float lat, float lon, float alt, float speed, float hdop, float bearing, long time) {
 			this.lat = lat;
 			this.lon = lon;
 			this.alt = alt;
 			this.speed = speed;
 			this.hdop = hdop;
 			this.time = time;
+			this.bearing = bearing;
 		}
 		
 	}
@@ -99,7 +98,7 @@ public class LiveMonitoringHelper  {
 		String st = settings.LIVE_MONITORING_URL.get();
 		List<String> prm = new ArrayList<String>();
 		int maxLen = 0;
-		for(int i = 0; i < 6; i++) {
+		for(int i = 0; i < 7; i++) {
 			boolean b = st.contains("{"+i+"}");
 			if(b) {
 				maxLen = i;
@@ -124,6 +123,9 @@ public class LiveMonitoringHelper  {
 				break;
 			case 5:
 				prm.add(data.speed + "");
+				break;
+			case 6:
+				prm.add(data.bearing + "");
 				break;
 
 			default:

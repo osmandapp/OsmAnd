@@ -349,7 +349,7 @@
 	<string name="live_monitoring">מעקב חי מקוון</string>
 	<string name="live_monitoring_interval_descr">נא לציין הפסקות בין דיווחי מעקב חי</string>
 	<string name="live_monitoring_interval">הפסקות בין דיווחי מעקב חי</string>
-	<string name="live_monitoring_url_descr">נא לציין את כתובת השרת עם תחביר הפרמטרים הבא: רוחב={0}, אורך={1}, חותמת_זמן={2}, hdop‏={3}, גובה={4}, מהירות={5}</string>
+	<string name="live_monitoring_url_descr">נא לציין את כתובת השרת עם תחביר הפרמטרים הבא: רוחב={0}, אורך={1}, חותמת_זמן={2}, hdop‏={3}, גובה={4}, מהירות={5}, bearing={6} </string>
 	<string name="live_monitoring_url">כתובת שרת המעקב החי</string>
 	<string name="gpx_monitoring_disabled_warn">נא להפעיל את \'מעקב אחר המסלול לקובץ GPX\' בהגדרות.</string>
 	<string name="show_current_gpx_title">הצגת המסלול הנוכחי</string>

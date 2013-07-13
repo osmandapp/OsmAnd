@@ -178,7 +178,7 @@
   <string name="live_monitoring">Online live tracking</string>
   <string name="live_monitoring_interval_descr">Specify live tracking interval</string>
   <string name="live_monitoring_interval">Live tracking interval</string>
-  <string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+  <string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Live tracking web address</string>
   <string name="gpx_monitoring_disabled_warn">Будь ласка, ввімкніть \"Записувати шлях в GPX\" в Нашаштуваннях.</string>
   <string name="show_current_gpx_title">Відображати пройдений шлях</string>
