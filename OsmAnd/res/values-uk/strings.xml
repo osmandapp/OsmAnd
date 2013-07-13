@@ -691,7 +691,7 @@
   <string name="opening_hours">Робочі години</string>
   <string name="opening_changeset">Відкриття пакету правок…</string>
   <string name="closing_changeset">Закриття пакету правок…</string>
-  <string name="commiting_node">Збереження об'єкта…</string>
+  <string name="commiting_node">Збереження об\'єкта…</string>
   <string name="loading_poi_obj">Завантаження POI…</string>
   <string name="auth_failed">Помилка авторизації</string>
   <string name="failed_op">, помилка</string>
