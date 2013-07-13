@@ -3,5 +3,5 @@
     <string name="default_buttons_yes">Так</string>
     <string name="osmand_app_not_found">Osmand не встановлено</string>
     <string name="app_name">Паркування OsmAnd</string>
-    <string name="parking_plugin_installed">Втулок Паркування OsmAnd встановлено та увімкнено у налаштуваннях OsmAnd.</string>
+    <string name="parking_plugin_installed">Плагін Паркування OsmAnd встановлено та увімкнено у налаштуваннях OsmAnd.</string>
 </resources>
