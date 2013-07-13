@@ -545,10 +545,10 @@
   <string name="unzipping_file">Файл распаковывается…</string>
   <string name="route_tr">Поверните направо и двигайтесь</string>
   <string name="route_tshr">Поверните резко направо и двигайтесь</string>
-  <string name="route_tslr">Поверните направо и двигайтесь</string>
+  <string name="route_tslr">Поверните слегка направо и двигайтесь</string>
   <string name="route_tl">Поверните налево и двигайтесь</string>
   <string name="route_tshl">Поверните резко налево и двигайтесь</string>
-  <string name="route_tsll">Поверните налево и двигайтесь</string>
+  <string name="route_tsll">Поверните слегка налево и двигайтесь</string>
   <string name="route_tu">Выполните разворот и двигайтесь</string>
   <string name="route_head">Двигайтесь</string>
   <string name="first_time_continue">Продолжить</string>
