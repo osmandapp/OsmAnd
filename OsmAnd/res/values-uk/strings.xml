@@ -353,7 +353,7 @@
   <string name="gpx_option_reverse_route">Виберіть зворотній напрямок</string>
   <string name="gpx_option_destination_point">Використовувати поточний пункт призначення</string>
   <string name="gpx_option_from_start_point">Пройти увесь шлях спочатку</string>
-  <string name="switch_to_vector_map_to_see">Для цього регіону доступні оффлайн векторні мапи\n\t\n\tДля їх використання виберіть пункт меню \"Мапа\" → \"Джерело мапи\" → \"Оффлайн векторні мапи\".</string>
+  <string name="switch_to_vector_map_to_see">Для цього регіону доступні оффлайн векторні мапи\n\t\n\tДля їх використання виберіть пункт меню \"Мапа\" → \"Джерело мапи\" → \"Офлайн векторні мапи\".</string>
   <string name="choose_audio_stream">Голосові інструкції</string>
   <string name="choose_audio_stream_descr">Виберіть канал для голосових інструкцій (залежить від системи)</string>
   <string name="voice_stream_voice_call">Потік голосових дзвінків</string>
@@ -1446,10 +1446,10 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="av_camera_focus_auto">Автофокус</string>
 	<string name="av_camera_focus_macro">Макро-режим фокусування (крупний план)</string>
 	<string name="av_camera_focus_continuous">Постійне фокусування</string>
-	<string name="av_camera_focus_hiperfocal">Гіпер-фокальне фокусування</string>
+	<string name="av_camera_focus_hiperfocal">Гіперфокальне фокусування</string>
 	<string name="av_camera_focus_edof">Збільшення глибини різкості</string>
 	<string name="av_camera_focus_infinity">Фокус встановлюється на нескінченність</string>
 	<string name="av_photo_play_sound">Відтворювати звук затвору камери</string>
-	<string name="av_photo_play_sound_descr">Під час знімання відтворювати звук</string>
+	<string name="av_photo_play_sound_descr">Під час фотографування відтворювати звук</string>
 <string name="osmand_net_previously_installed">У вас встановлена попередня версія OsmAnd. Всі локальні дані підтримуються новою версією. Але улюблені точки потрібно експортувати з попередньої версії і імпортувати в нову.</string>
 	</resources>
