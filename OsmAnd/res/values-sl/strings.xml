@@ -1452,4 +1452,9 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="av_camera_focus_continuous">Kamera nenehno poskuša ostriti</string>
 	<string name="av_photo_play_sound">Predvajaj zvok pri slikanju</string>
 	<string name="av_photo_play_sound_descr">Izberite ali naj se predvaja zvok ob fotografiranju</string>
-</resources>
+<string name="speak_warnings_title">Napoved alarmov …</string>
+	<string name="speak_warnings_descr">Nastavitev za prometna opozorila (prisilna ustavitev, ležeči policaji), opozorila merilnikov hitrosti, omejitve hitrosti</string>
+    <string name="speak_speed_limit">Napovej omejitve hitrosti</string>
+    <string name="speak_cameras">Napovej hitrostne kamere</string>
+	<string name="speak_traffic_warnings">Napovej prometna opozorila</string>
+	</resources>
