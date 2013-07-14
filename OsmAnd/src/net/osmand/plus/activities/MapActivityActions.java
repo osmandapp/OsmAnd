@@ -6,7 +6,6 @@ import java.io.File;
 import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -889,9 +888,8 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
 					// Issue 1929: Consistently show IntermediatePointDialog, without subsequent Directions screen
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
-					int sz = targets.getIntermediatePoints().size();
 					// TODO: enhance next statement to transmit getSelectedObjectName for clicked objects like favorites instead of just coordinates
-					settings.insertIntermediatePoint(latitude, longitude, mapActivity.getResources().getString(R.string.point_on_map, latitude, longitude), sz, false);
+					int sz = targets.getIntermediatePoints().size();
 					targets.navigateToPoint(new LatLon(latitude, longitude), true, sz);
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				// For button-less search UI
