@@ -27,6 +27,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:background="@drawable/ic_background_tabinfotext"
+				android:textColor="@color/color_white"
 				android:text="@string/poi_search_desc"
 				android:textAppearance="?android:attr/textAppearanceSmall"/>
 		</LinearLayout>

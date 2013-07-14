@@ -7,7 +7,7 @@
 		android:layout_width="80dp" android:layout_height="fill_parent" android:gravity="left"
 		android:textSize="20sp"/>  -->
 	<TextView android:id="@+id/label" android:layout_weight="1" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:textSize="20sp" />
+		android:layout_height="wrap_content" style="@style/ListText" />
 		
 	<ImageButton android:id="@+id/remove" android:layout_width="wrap_content" android:background="?attr/reset_image" 
 		android:contentDescription="@string/default_buttons_delete"

@@ -4,7 +4,7 @@
 
 	<net.osmand.access.ExplorableTextView android:text="" android:id="@+id/TipDescription" android:layout_marginLeft="4dp" android:scrollbars="vertical"
 		android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginRight="4dp" android:layout_weight="1"
-		android:textSize="18sp" android:gravity="fill_horizontal"
+		style="@style/ListText" android:gravity="fill_horizontal"
 		/>
 
 <!-- 	<TextView android:text="@string/poi_dialog_other_tags_message" android:id="@+id/TextView" android:layout_marginLeft="5dp"

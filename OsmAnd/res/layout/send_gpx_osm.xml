@@ -4,7 +4,7 @@
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:stretchColumns="1">
    <TextView android:id="@+id/DescriptionTextTop"  android:layout_marginLeft="5dp" android:layout_marginBottom="5dp"
-            android:textSize="20sp" android:gravity="center_horizontal"
+            style="@style/ListText" android:gravity="center_horizontal"
   			android:layout_height="wrap_content" android:text="@string/send_files_to_osm"></TextView>
   <TableRow android:layout_width="fill_parent">
   <TextView android:id="@+id/TextView"  android:layout_marginLeft="5dp"
