@@ -605,7 +605,7 @@
 	<string name="send_location">傳送位置</string>
 	<string name="context_menu_item_share_location">分享位置</string>
 	<string name="add_waypoint_dialog_added">中途點\'\'{0}\'\'已成功加入</string>
-	<string name="add_waypoint_dialog_title">增加中途點到已記錄 GPX 航跡</string>
+	<string name="add_waypoint_dialog_title">增加中途點到已記錄 GPX 行跡</string>
 	<string name="context_menu_item_add_waypoint">增加 GPX 中途點</string>
 	<string name="amenity_type_administrative">行政機關</string>
 	<string name="amenity_type_barrier">路障</string>
@@ -658,7 +658,7 @@
 	<string name="select_build_to_install">選擇 OsmAnd 建置安裝</string>
 	<string name="contribution_activity">安裝的版本</string>
 	<string name="gps_status_app_not_found">GPS 狀態工具未安裝，到 Play 商場找嗎？</string>
-	<string name="voice_is_not_available_msg">語音導航無法使用。請到設定功能選喜歡的語音資料且下載它。</string>
+	<string name="voice_is_not_available_msg">語音導航無法使用。請到設定功能，選取喜歡的語音資料並且下載它。</string>
 	<string name="voice_is_not_available_title">未選定語音導航</string>
 	<string name="daynight_mode_day">日間</string>
 	<string name="daynight_mode_night">夜間</string>
