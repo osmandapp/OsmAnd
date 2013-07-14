@@ -62,28 +62,10 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		Node entity = new Node(n.getLocation().getLatitude(),
 							   n.getLocation().getLongitude(),
 							   nodeId);
-
-		Map<AmenityType, Map<String, String>> typeNameToTagVal = MapRenderingTypes.getDefault().getAmenityTypeNameToTagVal();
-		AmenityType type = n.getType();
-		String tag = type.getDefaultTag();
-		String subType = n.getSubType();
-		String val = subType;
-		if (typeNameToTagVal.containsKey(type)) {
-			Map<String, String> map = typeNameToTagVal.get(type);
-			if (map.containsKey(subType)) {
-				String res = map.get(subType);
-				if (res != null) {
-					int i = res.indexOf(' ');
-					if (i != -1) {
-						tag = res.substring(0, i);
-						val = res.substring(i + 1);
-					} else {
-						tag = res;
-					}
-				}
-			}
-		}
-		entity.putTag(tag, val);
+		StringBuilder tag = new StringBuilder();
+		StringBuilder value = new StringBuilder();
+		MapRenderingTypes.getDefault().getAmenityTagValue(n.getType(), n.getSubType(), tag, value);
+		entity.putTag(tag.toString(), value.toString());
 		entity.putTag(OSMTagKey.NAME.getValue(), n.getName());
 		entity.putTag(OSMTagKey.OPENING_HOURS.getValue(), n.getOpeningHours());
  

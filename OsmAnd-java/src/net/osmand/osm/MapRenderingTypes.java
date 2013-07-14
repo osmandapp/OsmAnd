@@ -64,8 +64,34 @@ public class MapRenderingTypes {
 			init();
 		}
 	}
+	
+	public void getAmenityTagValue(AmenityType type, String subType, StringBuilder tag, StringBuilder value) {
+		tag.setLength(0);
+		tag.append(type.getDefaultTag());
+		value.setLength(0);
+		value.append(subType);
+		Map<AmenityType, Map<String, String>> m = getAmenityTypeNameToTagVal();
+		if (m.containsKey(type)) {
+			Map<String, String> map = m.get(type);
+			if (map.containsKey(subType)) {
+				String res = map.get(subType);
+				if (res != null) {
+					int i = res.indexOf(' ');
+					if (i != -1) {
+						tag.setLength(0);
+						tag.append(res.substring(0, i));
+						value.setLength(0);
+						value.append(res.substring(i + 1));
+					} else {
+						tag.setLength(0);
+						tag.append(res);
+					}
+				}
+			}
+		}		
+	}
 
-	public Map<AmenityType, Map<String, String>> getAmenityTypeNameToTagVal() {
+	private Map<AmenityType, Map<String, String>> getAmenityTypeNameToTagVal() {
 		if (amenityTypeNameToTagVal == null) {
 			Map<String, AmenityRuleType> types = getAmenityEncodingRuleTypes();
 			amenityTypeNameToTagVal = new LinkedHashMap<AmenityType, Map<String, String>>();
@@ -88,6 +114,7 @@ public class MapRenderingTypes {
 		}
 		return amenityTypeNameToTagVal;
 	}
+	
 	
 	
 	public Map<String, AmenityType> getAmenityNameToType(){
@@ -320,6 +347,6 @@ public class MapRenderingTypes {
 		protected boolean poiSpecified;
 		protected AmenityRuleType targetTagValue;
 	}
-	
+
 }
 

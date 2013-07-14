@@ -10,6 +10,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmAndFormatter;
@@ -181,10 +182,13 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				canvas.drawCircle(x, y, r, pointAltUI);
 				canvas.drawCircle(x, y, r, point);
 				String id = null;
-				if (RenderingIcons.containsIcon(o.getType().getDefaultTag() + "_" + o.getSubType())) {
-					id = o.getType().getDefaultTag() + "_" + o.getSubType();
-				} else if(RenderingIcons.containsIcon(o.getSubType())){
-					id = o.getSubType();
+				StringBuilder tag = new StringBuilder();
+				StringBuilder value = new StringBuilder();
+				MapRenderingTypes.getDefault().getAmenityTagValue(o.getType(), o.getSubType(), tag, value);
+				if (RenderingIcons.containsIcon(tag + "_" + value)) {
+					id = tag + "_" + value;
+				} else if(RenderingIcons.containsIcon(tag.toString())){
+					id = tag.toString();
 				} 
 				if(id != null){
 					Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id);

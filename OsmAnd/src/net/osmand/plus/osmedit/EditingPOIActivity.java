@@ -434,27 +434,11 @@ public class EditingPOIActivity implements DialogProvider {
 				final String msg = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources
 						.getString(R.string.poi_action_change);
 				OsmPoint.Action action = n.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
-				Map<AmenityType, Map<String, String>> typeNameToTagVal = MapRenderingTypes.getDefault().getAmenityTypeNameToTagVal();
-				AmenityType type = a.getType();
-				String tag = type.getDefaultTag();
+				StringBuilder tag = new StringBuilder();
+				StringBuilder value = new StringBuilder();
 				String subType = typeText.getText().toString();
-				String val = subType;
-				if (typeNameToTagVal.containsKey(type)) {
-					Map<String, String> map = typeNameToTagVal.get(type);
-					if (map.containsKey(subType)) {
-						String res = map.get(subType);
-						if (res != null) {
-							int i = res.indexOf(' ');
-							if (i != -1) {
-								tag = res.substring(0, i);
-								val = res.substring(i + 1);
-							} else {
-								tag = res;
-							}
-						}
-					}
-				}
-				n.putTag(tag, val);
+				MapRenderingTypes.getDefault().getAmenityTagValue(a.getType(), subType, tag, value);
+				n.putTag(tag.toString(), value.toString());
 				String name = nameText.getText().toString();
 				if(name.length() > 0) {
 					n.putTag(OSMTagKey.NAME.getValue(), name);
