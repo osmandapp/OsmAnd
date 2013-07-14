@@ -1492,7 +1492,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="av_camera_focus_continuous">Voortdurend blijven scherpstellen</string>
 	<string name="av_photo_play_sound_descr">Kies of er een geluid wordt afgespeeld tijdens het nemen van foto\'s</string>
 <string name="speak_warnings_title">Waarschuw bij…</string>
-	<string name="speak_warnings_descr">Configureer gesproken waarschuwingen bij stopborden, verkeersdrempels, snelheids-camera's, snelheidsbeperkingen</string>
+	<string name="speak_warnings_descr">Configureer gesproken waarschuwingen bij stopsignalen, verkeersdrempels, snelheids-camera's, snelheidsbeperkingen</string>
     <string name="speak_speed_limit">Meld snelheidsbeperking</string>
     <string name="speak_cameras">Meld snelheids-camera's</string>
 	<string name="speak_traffic_warnings">Meld verkeers-waarschuwingen</string>
