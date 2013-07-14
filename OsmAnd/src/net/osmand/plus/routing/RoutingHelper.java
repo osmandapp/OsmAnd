@@ -509,6 +509,10 @@ public class RoutingHelper {
 		return route.getLeftTime(lastFixedLocation);
 	}
 	
+	public OsmandSettings getSettings() {
+		return settings;
+	}
+	
 	public String getGeneralRouteInformation(){
 		int dist = getLeftDistance();
 		int hours = getLeftTime() / (60 * 60);

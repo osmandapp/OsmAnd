@@ -174,7 +174,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		} else if (preference == speakAlarms) {
 			showBooleanSettings(new String[] { getString(R.string.speak_traffic_warnings), getString(R.string.speak_cameras), 
 					getString(R.string.speak_speed_limit) }, new OsmandPreference[] { settings.SPEAK_TRAFFIC_WARNINGS, 
-					settings.SPEAK_SPEAD_CAMERAS , settings.SPEAK_SPEED_LIMIT});
+					settings.SPEAK_SPEED_CAMERA , settings.SPEAK_SPEED_LIMIT});
 			return true;
 		}
 		return false;

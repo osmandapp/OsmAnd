@@ -27,6 +27,9 @@ public class VoiceRouter {
  
 	private int currentStatus = STATUS_UNKNOWN;
 	private float playGoAheadDist = 0;
+	private long lastAnnouncedSpeedLimit = 0;
+	private long lastAnnouncedSpeedCamera = 0;
+	private long lastAnnouncedWarning = 0;
 
 	// private long lastTimeRouteRecalcAnnounced = 0;
 	
@@ -180,8 +183,36 @@ public class VoiceRouter {
 	
 
 	public void announceAlarm(AlarmInfo alarm) {
-		// TODO Auto-generated method stub
-		
+		if(alarm == null) {
+			return;
+		}
+		long ms = System.currentTimeMillis();
+		if (alarm.getTime() == AlarmInfo.SPEED_LIMIT) {
+			if (router.getSettings().SPEAK_SPEED_LIMIT.get()  && ms - lastAnnouncedSpeedLimit > 120 * 60 * 1000) {
+				CommandBuilder p = getNewCommandPlayerToPlay();
+				if (p != null) {
+					lastAnnouncedSpeedLimit = ms;
+					p.speedAlarm().play();
+				}
+			}
+		} else if (alarm.getTime() == AlarmInfo.SPEED_CAMERA) {
+			if (router.getSettings().SPEAK_SPEED_CAMERA.get() && ms - lastAnnouncedSpeedCamera > 120 * 60 * 1000) {
+				CommandBuilder p = getNewCommandPlayerToPlay();
+				if (p != null) {
+					lastAnnouncedSpeedCamera = ms;
+					p.speedAlarm().play();
+				}
+			}
+		} else {
+			if (router.getSettings().SPEAK_TRAFFIC_WARNINGS.get() && ms - lastAnnouncedWarning > 120 * 60 * 1000) {
+				CommandBuilder p = getNewCommandPlayerToPlay();
+				if (p != null) {
+					lastAnnouncedWarning = ms;
+					p.speedAlarm().play();
+				}
+			}
+		}
+
 	}
 	
 	/**
