@@ -1425,7 +1425,7 @@ public class MapActivityActions implements DialogProvider {
     
     
 	public static void addWaypointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name) {
-		OsmandApplication ctx = (OsmandApplication) act.getApplication();
+		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
 		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
 		if (targetPointsHelper.getPointToNavigate() != null) {
 			Builder builder = new AlertDialog.Builder(act);
@@ -1443,11 +1443,13 @@ public class MapActivityActions implements DialogProvider {
 							} else {
 								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, 0);
 							}
+							ctx.getSettings().navigateDialog();
 							MapActivity.launchMapActivityMoveToTop(act);
 						}
 					});
 			builder.show();
 		} else {
+			ctx.getSettings().navigateDialog();
 			targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1);
 			MapActivity.launchMapActivityMoveToTop(act);
 		}

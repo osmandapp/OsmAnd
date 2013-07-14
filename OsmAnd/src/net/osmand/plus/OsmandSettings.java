@@ -1154,6 +1154,9 @@ public class OsmandSettings {
 	public boolean setPointToNavigate(double latitude, double longitude, String historyDescription) {
 		return setPointToNavigate(latitude, longitude, false, historyDescription);
 	}
+	public boolean navigateDialog() {
+		return settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_ROUTE, "true").commit();
+	}
 
 	public boolean setPointToNavigate(double latitude, double longitude, boolean navigate, String historyDescription) {
 		boolean add = settingsAPI.edit(globalPreferences).putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
