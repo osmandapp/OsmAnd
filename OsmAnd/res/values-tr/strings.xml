@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 <string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
@@ -50,7 +49,7 @@
 	<string name="filterpoi_activity">POI filtresi yarat</string>
 	<string name="recalculate_route_to_your_location">Ulaşım modu:</string>
 	<string name="select_navigation_mode">Ulaşım modunu seç</string>
-	<string name="monitor_preferences">Takip etme</string>
+	
 	<string name="day_night_info">Gündüz/gece bilgisi</string>
 	<string name="map_widget_day_night">Gündüz/gece haritası</string>
 	<string name="osmand_short_description_80_chars">OsmAnd açık kaynak kodlu, çevrımdışı ve çevrimiçi çalışabilen bir navigasyon uygulamasıdır</string>
@@ -63,7 +62,7 @@
 	<string name="int_continuosly">Devam et</string>
 	<string name="screen_is_locked">Ekran kilidini açmak için kilit simgesine basın</string>
 	<string name="map_widget_top_text">Sokak ismi</string>
-	<string name="map_widget_map_select">Harita kaynağı</string>
+	
 	<string name="map_widget_back_to_loc">Neredeyim</string>
 	<string name="map_widget_lock_screen">Ekran kilidi</string>
 	<string name="map_widget_compass">Pusula</string>
@@ -167,10 +166,10 @@
     <string name="map_widget_av_notes">Ses/video notları</string>
     <string name="osmand_srtm_short_description_80_chars">Çevrimdışı kontur hatları için OsmAnd eklentisi</string>
     <string name="osmand_srtm_long_description_1000_chars">Bu eklenti OsmAnd adlı çevrimdışı haritalar gösterilebilir kontür çizgileri sağlar. Global veri (70 derece kuzey ve 70 derece güney arasındaki) SRTM (Mekik Radar Topografi Misyonu) ve ASTER (Gelişmiş Uzay Termal Yayılma ve Yansıma Radyometre), bir görüntüleme aracı onboard Terra, NASA&amp;#39;nın Earth Gözlem amiral gemisi uydudan ölçümleri esas Sistemi. ASTER NASA arasında bir kooperatif çabadır, Ekonomi, Ticaret ve Sanayi Odası (METI) ve Japonya Uzay Sistemleri (J-spacesystems) Japonya Bakanlığı.</string>
-    <string name="osmand_distance_plugin_description">Iki veya daha fazla nokta arasındaki mesafeyi ölçün. Kısa bir tıklama ile puan ekleyin ve uzun süre basarak kaldırabilirsiniz.</string>
-    <string name="osmand_distance_plugin_name">Mesafe hesaplayıcı</string>
-    <string name="use_clear_distance_measurement">Ölçüm noktaları temizlemek için bir kez daha tıklayın.</string>
-    <string name="use_distance_measurement">Bir noktaya işaretlemek için dokunun, tuşuna basın ve önceki noktalarını silmek için basılı tutun, çıkmak için ölçüm gereci tıklayın.</string>
+    
+    
+    
+    
     <string name="map_widget_distancemeasurement">Mesafe ölçümü</string>
     <string name="audionotes_location_not_defined">Notu ile ilişkilendirmek Yer henüz tanımlanmamıştır. &amp;quot;Konumu kullan ...&amp;quot; Belirtilen yere not atamak</string>
     <string name="monitoring_control_stop">Durdur</string>
@@ -199,9 +198,8 @@
     <string name="map_widget_max_speed">Hız limiti</string>
     <string name="route_descr_lat_lon">Enlem %1$.3f, boylam %2$.3f</string>
     <string name="route_descr_current_location">Geçerli konum</string>
-    <string name="route_descr_from_to">Gönderen:%1$s\nKime:%2$s</string>
-    <string name="route_descr_from_to_via">Gönderen:%1$s
-\nVia:%2$s için\nKime:%3$s</string>
+    
+    
     <string name="no_buildings_found">Bina bulunmadı.</string>
     <string name="incremental_search_city">Adım adım şehiri arama</string>
     <string name="search_villages_and_postcodes">Köyleri arama / posta kodu</string>
@@ -411,7 +409,7 @@
 	<string name="address">Adres</string>
 	<string name="download_index_success">İndirme başarılı</string>
 	<string name="error_io_error">I/O hatası oluştu</string>
-	<string name="downloading_file">Dosya indiriliyor…</string>
+	
 	<string name="downloading">İndiriliyor…</string>
 	<string name="show_poi_on_map">Haritada göster</string>
 	<string name="loading_poi_obj">POI yükleniyor…</string>
@@ -546,7 +544,7 @@
 	<string name="first_time_msg">"OsmAnd kullandığınız için teşekkür ederiz. - Bu uygulama birçok özellikler için &amp;#39;Ayarlar&amp;#39;ı üzerinden  &amp;gt; &amp;#39;Veri Yönetimi&amp;#39; indirebilirsiniz. bazı bölgesel çevrimdışı veri gerekir. Ardından, haritalarına adreslerini bulmak, İÇN aramak, ve toplu taşıma bulmak mümkün olacak."</string>    
 	<string name="basemap_was_selected_to_download">Baz haritası doğru uygulama çalışması için gereklidir ve indirmek için seçildi.</string>
 	<string name="local_indexes_cat_tile">Çevrimiçi ve çini haritalar</string>
-	<string name="gpx_index_settings_descr">(GPX analizörü içerir)</string>
+	
 	<string name="index_settings_descr">Haritaları indirin ve cihazınızda saklanan çevrimdışı verileri yönetmek</string>
 	<string name="map_online_plugin_is_not_installed">Farklı harita kaynaklarını seçmek için çevrimiçi haritalar eklentisini etkinleştirin</string>
 	<string name="map_online_data">Çevrimiçi ve çini harita</string>

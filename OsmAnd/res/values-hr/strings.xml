@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
@@ -42,10 +41,10 @@
     <string name="av_control_stop">stani</string>
     <string name="av_control_start">započni</string>
     <string name="map_widget_av_notes">Zvučni i video zapisi</string>
-    <string name="osmand_distance_plugin_description">Mjerenje udaljenosti između dvije ili više točaka. Dodajte točke kratkim pritiskom, a uklonite dužim pritiskom.</string>
-    <string name="osmand_distance_plugin_name">Mjerenje udaljenosti</string>
-    <string name="use_clear_distance_measurement">Dodirnite još jednom da biste uklonili točke.</string>
-    <string name="use_distance_measurement">Dodirnite kako biste označili točku, pritisnite i držite za brisanje prethodne točke, kliknite na mjerni widget za izlaz.</string>
+    
+    
+    
+    
     <string name="map_widget_distancemeasurement">Mjerenje udaljenosti</string>
     <string name="monitoring_control_stop">zaustavi</string>
     <string name="map_widget_audionotes">Zvučni zapisi</string>
@@ -71,8 +70,8 @@
     <string name="map_widget_max_speed">Ograničenje brzine</string>
     <string name="route_descr_lat_lon">Z. širina %1$.3f, z. dužina %2$.3f</string>
     <string name="route_descr_current_location">Trenutna pozicija</string>
-    <string name="route_descr_from_to">Od: %1$s\nDo: %2$s</string>
-    <string name="route_descr_from_to_via">Od: %1$s\nPreko: %2$s\nDo: %3$s</string>
+    
+    
     <string name="no_buildings_found">Građevine nisu pronađene.</string>
     <string name="incremental_search_city">Postupno traži grad</string>
     <string name="search_villages_and_postcodes">Traži sela / poštanski broj</string>
@@ -112,7 +111,7 @@
     <string name="filterpoi_activity">Stvori POI filter</string>
 	<string name="recalculate_route_to_your_location">Način prijevoza:</string>
 	<string name="select_navigation_mode">Odaberite načina prijevoza</string>
-	<string name="monitor_preferences">Praćenje</string>
+	
 	<string name="day_night_info_description">Izlazak sunca: %1$s
 \nZalazak sunca: %2$s</string>
 	<string name="day_night_info">Informacije dan/noć</string>
@@ -137,7 +136,7 @@
 	<string name="screen_is_locked">Za otključavanje zaslona pritisnite ikonu zaključavanja</string>
 	<string name="map_widget_top_text">Naziv ulice</string>
 	<string name="map_widget_config">Konfiguracija zaslona</string>
-	<string name="map_widget_map_select">Izvor karte</string>
+	
 	<string name="map_widget_back_to_loc">Gdje sam</string>
 	<string name="map_widget_lock_screen">Zaključaj zaslon</string>
 	<string name="map_widget_compass">Kompas</string>
@@ -399,7 +398,7 @@
 	<string name="update_existing">Zamijeni</string>
 	<string name="only_show">Samo prikaži</string>
 	<string name="show_poi_on_map">Prikaži na karti</string>
-	<string name="downloading_file">Preuzimanje datoteka...</string>
+	
 	<string name="downloading">Preuzimanje...</string>
 	<string name="downloading_list_indexes">Preuzimam popis dostupnih regija...</string>
 	<string name="list_index_files_was_not_loaded">Popis regija nije preuzet sa osmand.net.</string>
@@ -441,7 +440,7 @@
 	<string name="route_tshl">Skrenite oštro ulijevo i nastavite voziti po</string>
 	<string name="route_tsll">Skrenite blago ulijevo i nastavite voziti po</string>
 	<string name="route_tu">Polukružno se okrenite i nastavite voziti po</string>
-	<string name="stop_routing">Zaustavite naviga.</string>
+	
 	<string name="menu_mute_off">Zvuk je uključen</string>
 	<string name="menu_mute_on">Zvuk je isključen</string>
 	<string name="voice_provider_descr">Odaberite glasovno navođenje za navigaciju</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="local_index_gpx_timespan">\nTime span: %1$d:%2$02d:%3$02d</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_index_gpx_timespan">\nTime span: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nTime moving: %1$d:%2$02d:%3$02d</string>
 	<string name="app_mode_default">Browse map</string>
 	<string name="settings_preset">Default profile</string>
@@ -208,8 +207,8 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="route_descr_current_location">Гэтае месца</string>
-    <string name="route_descr_from_to">Ад: %1$s\nУ: %2$s</string>
-    <string name="route_descr_from_to_via">Ад: %1$s\nПраз: %2$s\nУ: %3$s</string>
+    
+    
     <string name="no_buildings_found">No buildings found.</string>
     <string name="incremental_search_city">Search city incrementally</string>
     <string name="search_villages_and_postcodes">Search villages/postcode</string>
@@ -522,7 +521,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="screen_is_locked">To unlock screen press lock icon</string>
 	<string name="map_widget_top_text">Street name</string>
 	<string name="map_widget_config">Сканфігураваць экран</string>
-	<string name="map_widget_map_select">Map source</string>
+	
 	<string name="map_widget_back_to_loc">Я тут</string>
 	<string name="map_widget_lock_screen">Lock screen</string>
 	<string name="map_widget_compass">Compass</string>

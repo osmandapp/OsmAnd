@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追踪外掛元件，用位置日誌服務(GPX 記錄，網上追踪查詢)</string>
@@ -15,7 +14,7 @@
 	<string name="delete_target_point">移除中途點</string>
 	<string name="target_point">中途點 %1$s</string>
     <string name="intermediate_point">中途點 %1$s</string>
-    <string name="navigate_to">設為目的地</string>
+    
     <string name="context_menu_item_last_intermediate_point">增為最後一個中途點</string>
     <string name="context_menu_item_first_intermediate_point">增為第一個中途點</string>
     <string name="add_as_last_destination_point">增為最後一個中途點</string>
@@ -102,7 +101,7 @@
 	<string name="filterpoi_activity">建立興趣點篩選</string>
 	<string name="recalculate_route_to_your_location">交通模式：</string>
 	<string name="select_navigation_mode">選擇交通模式</string>
-	<string name="monitor_preferences">追蹤中</string>
+	
 	<string name="day_night_info_description">日出：%1$s \n日落：%2$s</string>
 	<string name="day_night_info">日/夜資訊</string>
 	<string name="map_widget_day_night">日/夜地圖</string>
@@ -132,7 +131,7 @@
 	<string name="screen_is_locked">要解鎖螢幕，按下鎖圖示</string>
 	<string name="map_widget_top_text">街道名稱</string>
 	<string name="map_widget_config">組態顯示畫面</string>
-	<string name="map_widget_map_select">地圖來源</string>
+	
 	<string name="map_widget_back_to_loc">目前位置</string>
 	<string name="map_widget_lock_screen">鎖住螢幕</string>
 	<string name="map_widget_compass">電子羅盤</string>
@@ -228,7 +227,7 @@
 	<string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參考http://osmand.net)。</string>
 	<string name="local_indexes_cat_tile">線上地圖圖磚</string>
 	<string name="local_indexes_cat_map">離線地圖(向量地圖)</string>
-	<string name="gpx_index_settings_descr"> (包含GPX分析器)</string>
+	
 	<string name="index_settings_descr">在您的裝置上，下載地圖與管理離線圖資存儲</string>
 	<string name="map_online_plugin_is_not_installed">啟用線上地圖外掛元件，來選擇不同的地圖來源</string>
 	<string name="map_online_data">線上地圖圖磚</string>
@@ -771,7 +770,7 @@
 	<string name="voice_data_not_supported">不支援的語音資料版本</string>
 	<string name="voice_data_corrupted">指定的語音已損毀</string>
 	<string name="voice_data_unavailable">選定的語音不能使用</string>
-	<string name="stop_routing">停止導航</string>
+	
 	<string name="sd_unmounted">SD卡無法存取。\n您將無法看到地圖或找地點。</string>
 	<string name="sd_mounted_ro">SD卡是唯讀。\n您只能看預載的地圖且無法由網路下載。</string>
 	<string name="unzipping_file">解壓縮檔案…</string>
@@ -845,7 +844,7 @@
 	<string name="address">地址</string>
 	<string name="download_index_success">下載成功</string>
 	<string name="error_io_error">存取發生錯誤</string>
-	<string name="downloading_file">下載檔案…</string>
+	
 	<string name="downloading">下載中…</string>
 	<string name="downloading_list_indexes">下載可用的地區列表…</string>
 	<string name="list_index_files_was_not_loaded">無法由 osmand.net 取得地區列表。</string>
@@ -1177,8 +1176,8 @@
 	<string name="map_widget_max_speed">速限</string>
     <string name="route_descr_lat_lon">緯度 %1$.3f, 經度 %2$.3f</string>
     <string name="route_descr_current_location">目前位置</string>
-    <string name="route_descr_from_to">從：%1$s\n到：%2$s</string>
-    <string name="route_descr_from_to_via">從：%1$s\n經：%2$s\n到：%3$s</string>
+    
+    
     <string name="no_buildings_found">無建築物符合。</string>
     <string name="search_villages_and_postcodes">查尋城鎮/郵遞區號</string>
 	<string name="rendering_attr_showRoadMaps_description">選擇何時顯示僅有道路的地圖：</string>

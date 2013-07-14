@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους …</string>
     <string name="poi_filter_parking">Στάθμευση</string>
     <string name="poi_filter_emergency">Επείγοντα</string>
@@ -65,7 +64,7 @@
 	<string name="filterpoi_activity">Δημιουργία φίλτρου ΣΕ</string>
 	<string name="recalculate_route_to_your_location">Τρόπος μετακίνησης:</string>
 	<string name="select_navigation_mode">Επιλογή τρόπου μετακίνησης</string>
-	<string name="monitor_preferences">Ιχνηλάτηση</string>
+	
 	<string name="day_night_info_description">Ανατολή : %1$s \nΔύση : %2$s</string>
 	<string name="day_night_info">Πληρ. Ημέρας/Νύχτας</string>
 	<string name="map_widget_day_night">Χάρτης ημέρας/νύχτας</string>
@@ -95,7 +94,7 @@
 	<string name="screen_is_locked">Για ξεκλείδωμα της οθόνης πατήστε το εικονίδιο της κλειδαριάς</string>
 	<string name="map_widget_top_text">Όνομα οδού</string>
 	<string name="map_widget_config">Ρύθμιση οθόνης</string>
-	<string name="map_widget_map_select">Πηγή χάρτη</string>
+	
 	<string name="map_widget_back_to_loc">Πού είμαι</string>
 	<string name="map_widget_lock_screen">Κλείδωμα οθόνης</string>
 	<string name="map_widget_compass">Πυξίδα</string>
@@ -200,7 +199,7 @@
 	<string name="select_index_file_to_download">Δεν βρέθηκε τίποτα. Εάν δεν μπορείτε να βρείτε την περιοχή σας, μπορείτε να τη φτιάξετε μόνοι σας (βλέπε http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online και πλακίδια χάρτες</string>
 	<string name="local_indexes_cat_map">Offline χάρτες (διανυσματικοί)</string>
-	<string name="gpx_index_settings_descr">" (περιλαμβάνει αναλυτή GPX)"</string>
+	
 	<string name="index_settings_descr">Λήψη χαρτών και διαχείριση εκτός σύνδεσης δεδομένων αποθηκευμένων στη συσκευή σας</string>
 	<string name="map_online_plugin_is_not_installed">Ενεργοποιήστε το πρόσθετο για τους online χάρτες για να επιλέξετε διαφορετικές πηγές χάρτη</string>
 	<string name="map_online_data">Online και χάρτες πλακίδια</string>
@@ -800,7 +799,7 @@
 	<string name="voice_data_not_supported">Μη υποστηριζόμενη έκδοση των δεδομένων φωνής</string>
 	<string name="voice_data_corrupted">Τα καθορισμένα δεδομένα φωνής είναι κατεστραμμένα</string>
 	<string name="voice_data_unavailable">Τα επιλεγμένα δεδομένα φωνής δεν είναι διαθέσιμα</string>
-	<string name="stop_routing">Διακοπή πλοήγ.</string>
+	
 	<string name="sd_unmounted">Η κάρτα SD δεν είναι προσβάσιμη.\nΔεν μπορείς να δεις χάρτες ή να αναζητήσεις διάφορα.</string>
 	<string name="sd_mounted_ro">Η SD κάρτα είναι μόνο για ανάγνωση.\nΜπορείτε μόνο να δείτε τον προφορτωμένο χάρτη αλλά όχι να κάνετε λήψη από το Διαδίκτυο.</string>
 	<string name="unzipping_file">Αποσυμπίεση αρχείου …</string>
@@ -874,7 +873,7 @@
 	<string name="address">Διεύθυνση</string>
 	<string name="download_index_success">Επιτυχής λήψη</string>
 	<string name="error_io_error">Προέκυψε σφάλμα Εισ/Εξ</string>
-	<string name="downloading_file">Λήψη αρχείου…</string>
+	
 	<string name="downloading">Λήψη …</string>
 	<string name="downloading_list_indexes">Λήψη λίστας διαθέσιμων περιοχών …</string>
 	<string name="list_index_files_was_not_loaded">Η λίστα των περιοχών δεν έχει ανακτηθεί από το osmand.net.</string>
@@ -1105,8 +1104,8 @@
 	<string name="no_buildings_found">Δεν βρέθηκαν κτήρια.</string>
     <string name="route_descr_lat_lon">Πλ %1$.3f μήκ %2$.3f</string>
     <string name="route_descr_current_location">Τρέχουσα θέση</string>
-    <string name="route_descr_from_to">Από %1$s\nΠρος %2$s</string>
-    <string name="route_descr_from_to_via">Από : %1$s\nΜέσω : %2$s\nΠρος : %3$s</string>
+    
+    
     <string name="map_widget_max_speed">Όριο ταχύτητας</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="tip_altitude_offset_t">"\tΟι περισσότερες συσκευές GPS εμφανίζουν το υψόμετρο σε σύστημα αναφοράς βασισμένο στο ελλειψοειδές WGS84, από το οποίο η μετατροπή στα συστήματα που χρησιμοποιούνται τοπικά απαιτεί διόρθωση εξαρτούμενη από τη θέση.
@@ -1123,16 +1122,16 @@
     <string name="srtm_plugin_description">Διευκολύνει τη λήψη offline υψομετρικών γραμμών και ανάγλυφου (Ρυθμίσεις -&gt; Διαχείριση Δεδομένων -&gt; Λήψη -&gt; Επιλογή του επιθυμητού τύπου χάρτη).</string>
     <string name="srtm_plugin_name">Πρόσθετο ισοϋψών γραμμών</string>
     <string name="download_srtm_maps">Ισοϋψείς γραμμές</string>
-    <string name="osmand_distance_plugin_description">Μέτρηση απόστασης μεταξύ δύο ή περισσότερων σημείων. Προσθήκη σημείων με γρήγορο κλικ και αφαίρεση μέσω παρατεταμένου πατήματος.</string>
-	<string name="osmand_distance_plugin_name">Υπολογιστής απόστασης</string>
+    
+	
 <string name="index_srtm_parts">μέρη</string>
     <string name="monitoring_control_stop">σταμάτημα</string>
     <string name="map_widget_audionotes">Ηχητικές σημειώσεις</string>
     <string name="audionotes_plugin_description">Κάντε σημειώσεις ήχου/video κατά τη διάρκεια του ταξιδιού</string>
     <string name="audionotes_plugin_name">Σημειώσεις ήχου/video</string>
-    <string name="srtm_plugin_attribution">το ASTER είναι ένα προϊόν των METI και NASA</string>
+    
     <string name="osmand_srtm_short_description_80_chars">πρόσθετο του OsmAnd για ισοϋψείς γραμμές χωρίς σύνδεση</string>
-    <string name="use_clear_distance_measurement">Κλικ άλλη μια φορά για καθαρισμό των σημείων μέτρησης.</string>
+    
     <string name="map_widget_distancemeasurement">Μέτρηση απόστασης</string>
     <string name="recording_is_recorded">Εγγραφή Ήχου/video σε εξέλιξη. Για σταμάτημα πατήστε το γραφικό στοιχείο AV.</string>
     <string name="recording_playing">Ένας ήχος από την συγκεκριμένη εγγραφή αναπαράγεται.\n%1$s</string>
@@ -1167,7 +1166,7 @@
     <string name="av_video_format_descr">Επιλέξτε μορφή εξόδου video</string>
     <string name="av_video_format">Μορφή εξόδου video</string>
     <string name="av_use_external_recorder_descr">Χρήση τού εγγραφέα συστήματος για video</string>
-    <string name="use_distance_measurement">Αγγίξτε για δημιουργία σημείου, πιέστε και κρατήστε για διαγραφή προηγούμενου σημείου, κλικ στο γραφικό στοιχείο μέτρησης για έξοδο.</string>
+    
     <string name="av_settings_descr">Διαμόρφωση ρυθμίσεων ήχου και video</string>
     <string name="dropbox_plugin_description">Το πρόσθετο dropbox επιτρέπει τον συγχρονισμό ιχνών και σημειώσεων εικόνας/ήχου με τον dropbox λογαριασμό σας.</string>
     <string name="dropbox_plugin_name">Πρόσθετο dropbox</string>

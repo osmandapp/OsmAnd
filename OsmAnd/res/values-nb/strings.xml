@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -62,7 +61,7 @@
 	<string name="map_widget_appearance">Diverse:</string>
 	<string name="map_widget_top_text">Gatenavn</string>
 	<string name="map_widget_config">Still inn skjerm</string>
-	<string name="map_widget_map_select">Kartkilde</string>
+	
 	<string name="map_widget_back_to_loc">Hvor er jeg</string>
 	<string name="map_widget_lock_screen">Lås skjerm</string>
 	<string name="map_widget_compass">Kompass</string>
@@ -112,7 +111,7 @@
 	<string name="unknown_location">Posisjon ennå ikke kjent</string>
 	<string name="local_indexes_cat_tile">Nettbaserte kart (fliser)</string>
 	<string name="local_indexes_cat_map">Offline-kart (vektor)</string>
-	<string name="gpx_index_settings_descr"> (inkluderer GPX-analyse)</string>
+	
 	<string name="index_settings_descr">Last ned, vis detaljer og behandle offline-kart</string>
 	<string name="map_online_plugin_is_not_installed">Aktiver programtillegg for nettbaserte kart for å velge ulike kartkilder</string>
 	<string name="map_online_data">Nettbaserte kart (fliser)</string>
@@ -509,7 +508,7 @@
 	<string name="address">Adresse</string>
 	<string name="download_index_success">Nedlasting vellykket</string>
 	<string name="error_io_error">I/O feil oppstod</string>
-	<string name="downloading_file">Laster ned fil…</string>
+	
 	<string name="downloading">Laster ned…</string>
 	<string name="downloading_list_indexes">Laster ned liste over tilgjengelige regioner…</string>
 	<string name="list_index_files_was_not_loaded">Listen over regioner ble ikke hentet fra osmand.net.</string>

@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использование в оффлайн режиме.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
@@ -39,10 +38,10 @@
     <string name="map_widget_av_notes">Аудио заметки</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd плагин для линий высот</string>
     
-    <string name="osmand_distance_plugin_description">Вычисляет расстояние на карте для 2 и более точек. Добавляйте точки коротким нажатием и удаляйте долгим.</string>
-    <string name="osmand_distance_plugin_name">Калькулятор растоянний</string>
-    <string name="use_clear_distance_measurement">Нажмите еще раз, чтобы очистить карту от точек.</string>
-    <string name="use_distance_measurement">Добавляйте точки коротким нажатием и удаляйте долгим, нажмите на виджет, чтобы выйти из режима редактирования точек.</string>
+    
+    
+    
+    
     <string name="map_widget_distancemeasurement">Измерение расстояний</string>
     <string name="audionotes_location_not_defined">Текущее местоположение для заметки ещё не определено. Используйте контекстное меню для привязки заметки к определённой точке.</string>
     <string name="monitoring_control_stop">стоп</string>
@@ -97,7 +96,7 @@
   <string name="select_index_file_to_download">Ничего не было найдено. Вы можете создать карту самостоятельно (смотрите на osmand.net).</string>
   <string name="local_indexes_cat_tile">Онлайн карты (растровые)</string>
   <string name="local_indexes_cat_map">Локальные карты (векторные)</string>
-  <string name="gpx_index_settings_descr">" (включая GPX анализатор)"</string>
+  
   <string name="index_settings_descr">Загрузка и управление локальными картами</string>
   <string name="map_online_plugin_is_not_installed">Активируйте плагин онлайн карт, чтобы выбирать различные источники карт</string>
   <string name="map_online_data">Онлайн карты</string>
@@ -120,11 +119,11 @@
   <string name="tip_recent_changes_0_8_0_t">"Изменения в 0.8.0:\n\n\t *Поддержка плагинов* \t - Большая часть функциональности разделена на плагины и может быть включена/выключена в Менеджере плагинов. Там вы можете активировать выбор растровых карт, настроек мониторинга и другие, новые и ранее существующие, возможности. \t *Новый формат карт* \t - Отрисовка карт стала быстрее и более точной (решено большинство проблем прибрежной зоны).\n\n\t - Вам понадобится полностью обновить локальные карты (старый формат больше не поддерживается и может быть удален) \t *Автономная прокладка маршрута*\n\n\t - Автономная прокладка маршрута стала гораздо стабильней и работает на более дальние расстояния \t *Графический интерфейс и взаимодействие* \t - Улучшено во многих направлениях "</string>
   <string name="osm_editing_plugin_description">Плагин для работы с OSM. Позволяет создавать и редактировать POI, создавать и комментировать неточности OSM Bugs, выгружать треки GPX (требует учётные данные OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Векторные карты могут отображаться быстрее. Поддерживается не всеми устройствами.</string>
-  <string name="simulate_route_progression_manually">Вручную смоделировать движение по маршруту</string>
+  
   <string name="play_commands_of_currently_selected_voice">Воспроизвести команды выбранным голосом</string>
   <string name="debugging_and_development">Отладка и разработка</string>
   <string name="native_rendering">Быстрый рендеринг</string>
-  <string name="animate_routing">Смоделировать движение по маршруту</string>
+  
   <string name="test_voice_prompts">Протестировать голосовые подсказки</string>
   <string name="switch_to_raster_map_to_see">Для текущей позиции карта отсутствует. Вы можете загрузить карту с помощью меню Настройки-&gt;Данные или переключиться на использование онлайн карт.</string>
   <string name="tip_recent_changes_0_7_2_t">"Изменения в 0.7.2:\n\n\t- Быстрый рендеринг для всех устройств\n\n\t- Offline POI редактирование\n\n\t- Дополнительные возможности (Accessibility)\n\n\t- Большое количество исправлений и улучшений "</string>
@@ -135,7 +134,7 @@
   <string name="validate_gpx_upload_name_pwd">Пожалуйста укажите пользователя OSM и его пароль для выгрузки GPX файлов в OpenStreetMap.</string>
   <string name="default_buttons_support">Поддержка</string>
   <string name="support_new_features">Поддержать разработку новых функций</string>
-  <string name="show_ruler_level_descr">Показывать масштабную линейку</string>
+  
   <string name="show_ruler_level">Показывать масштаб</string>
   <string name="info_button">Информация</string>
   <string name="use_fluorescent_overlays">Флуоресцентные цвета</string>
@@ -147,7 +146,7 @@
   <string name="local_openstreetmap_uploading">Выгрузка…</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs были выгружены в OpenStreetMap</string>
   <string name="local_openstreetmap_uploadall">Выгрузить все</string>
-  <string name="local_openstreetmap_items">" "</string>
+  
   <string name="local_openstreetmap_show">Показать на карте</string>
   <string name="local_openstreetmap_upload">Выгрузить изменения в OSM</string>
   <string name="local_openstreetmap_delete">Удалить созданные</string>
@@ -194,7 +193,7 @@
   <string name="tip_select_destination_point">Выбор точки назначения</string>
   <string name="tip_select_destination_point_t">"\tВы можете выбрать точку назначения на карте, в результатах поиска или списке избранного через пункт \'Идти к\' в контекстном меню.\n\n\tТочка назначения отображается на карте как оранжевый круг, направление к ней отображается оранжевой стрелкой. Так-же, в правом верхнем углу отображается расстояние по прямой до неё. "</string>
   <string name="tip_recent_changes_0_6_9_t">"Изменения в 0.6.9:\n\n\t- Более детальная отрисовка векторных карт\n\n\t- Быстрая аппаратная отрисовка карт(экспериментальные настройки)\n\n\t- Существенные изменения внешнего вида\n\n\t- Информация о высоте\n\n\t- Исправления ошибок и мелкие улучшения "</string>
-  <string name="use_transparent_map_theme_descr">Использовать прозрачные информационные элементы на карте</string>
+  
   <string name="use_transparent_map_theme">Прозрачная тема</string>
   <string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
   <string name="init_native_library">Инициализация нативной библиотеки…</string>
@@ -271,7 +270,7 @@
   <string name="local_index_address_data">Адрес</string>
   <string name="local_index_transport_data">Транспорт</string>
   <string name="local_index_map_data">Карта</string>
-  <string name="local_index_items">" "</string>
+  
   <string name="local_indexes_cat_backup">Архив</string>
   <string name="local_indexes_cat_tts">Голосовые данные (TTS)</string>
   <string name="local_indexes_cat_voice">Голосовые данные (запись)</string>
@@ -333,10 +332,9 @@
   <string name="preferred_locale_descr">Изменить язык программы</string>
   <string name="preferred_locale">Локализация</string>
   <string name="tip_map_switch">Источник карты</string>
-  <string name="tip_map_switch_t">Быстро изменить источник карты и отображаемые слои можно выбором \'Меню\'-&gt;\'Слои\'. \t Используя меню \'Источник карты...\' вы можете выбрать предварительно загруженные локальные векторные карты, online-сервисы растровых карт или карты, собственноручно созданные с помощью OsmAndMapCreator. \tOsmAnd поддерживает пользовательские источники карт.</string>
+  
   <string name="tip_app_mode">Профиль приложения</string>
-  <string name="tip_app_mode_t">OsmAnd поддерживает различные типовые режимы отображения карты.
-\n\tВы можете изменить режим в \'Меню\'-&gt;\'Настройки\'-&gt;\'Режим работы\', при этом меняется большинство настроек карты.</string>
+  
   <string name="tip_navigation">Навигация</string>
   <string name="tip_navigation_t">Чтобы использовать навигацию, необходимо выбрать точку назначения. После этого нажмите \'Меню\'-&gt;\'Навигация\' на карте и выберите тип.</string>
   <string name="tip_search">Поиск</string>
@@ -537,7 +535,7 @@
   <string name="voice_data_not_supported">Голосовые данные не поддерживаются текущей версией приложения</string>
   <string name="voice_data_corrupted">Выбранные голосовые данные не правильного формата</string>
   <string name="voice_data_unavailable">Выбранные голосовые данные не доступны</string>
-  <string name="stop_routing">Отменить маршрут.</string>
+  
   <string name="sd_unmounted">SD-накопитель недоступен.
 \nВы не сможете работать с картой.</string>
   <string name="sd_mounted_ro">SD-накопитель доступен только для чтения.
@@ -614,7 +612,7 @@
   <string name="address">Адрес</string>
   <string name="download_index_success">Локальная карта успешно загружена</string>
   <string name="error_io_error">Произошла ошибка ввода/вывода</string>
-  <string name="downloading_file">Загрузка файла…</string>
+  
   <string name="downloading">Загрузка…</string>
   <string name="downloading_list_indexes">Загружается список доступных регионов…</string>
   <string name="list_index_files_was_not_loaded">Невозможно получить список доступных регионов с osmand.net</string>
@@ -666,7 +664,7 @@
   <string name="user_password_descr">Указать пароль для работы с OSM</string>
   <string name="user_password">Пароль</string>
   <string name="osm_settings_descr">Установка логина/пароля OpenStreetMap</string>
-  <string name="monitor_preferences_descr">Включение мониторинга, установка интервала сохранения</string>
+  
   <string name="data_settings_descr">Настройка данных: язык, обновление данных</string>
   <string name="map_preferences_descr">Настройка источника, параметров карты, доступа в Интернет, ориентации экрана</string>
   <string name="data_settings">Данные</string>
@@ -679,7 +677,7 @@
   <string name="save_current_track">Сохранить текущий трек GPX</string>
   <string name="save_track_interval_descr">Указать интервал сохранения точек трека</string>
   <string name="save_track_interval">Интервал сохранения</string>
-  <string name="monitor_preferences">Мониторинг</string>
+  
   <string name="save_track_to_gpx_descrp">Сохранять трек в формате GPX в папку track</string>
   <string name="save_track_to_gpx">Записывать трек в файл GPX</string>
   <string name="update_tile">Обновить карту</string>
@@ -701,7 +699,7 @@
   <string name="ChooseCountry">Выберите регион</string>
   <string name="position_on_map_descr">Установить расположение текущей позиции на карте</string>
   <string name="position_on_map">Текущая позиция</string>
-  <string name="show_view_angle_descr">Показывать угол обзора в соответствии с компасом</string>
+  
   <string name="show_view_angle">Угол обзора</string>
   <string name="map_view_3d_descr">Включить 3D вид для карты</string>
   <string name="map_view_3d">3D вид</string>
@@ -869,18 +867,9 @@
   <string name="accessibility_preferences_descr">Настройки для невизуального доступа</string>
   <string name="accessibility_preferences">Специальные возможности</string>
   <string name="tip_rotation_switching">Поворот карты</string>
-  <string name="tip_rotation_switching_t">\tВы можете выбрать, как будет вращаться карта, в \'Настройки\' -&gt; \'Внешний вид\' -&gt; \'Вращать карту\'.
-\n\tВарианты:
-\n\t\'Не вращать\' - Карта не будет вращаться. Север всегда будет вверху.
-\n\t\'По направлению движения\' - Карта будет поворачиваться по ходу вашего движения.
-\n\t\'По направлению компаса\' - Карта будет поворачиваться согласно показаниям компаса устройства.
-\n\tПодсказка: Чтобы быстро переключаться между вращением по направлению компаса и тем режимом что вы выбрали, нажмите на изображение стрелки компаса на карте.</string>
+  
   <string name="tip_day_night_mode">Дневной/ночной режим</string>
-  <string name="tip_day_night_mode_t">\tВекторные карты поддерживают дневной и ночной режимы отрисовки.
-\n\tПри ночном режиме для отрисовки карты используются менее яркие цвета, которые более безопасны для вождения в темное время суток. \tВы можете установить правило переключения между дневным и ночным режимами с экрана карты, используя кнопку \'Настройки\' (в правом верхнем углу) -&gt; \'Дневной/ночной режим\'.
-\n\tВарианты:
-\n\t\'Восход/закат\' - автоматический режим, использующий время восхода и заката (по умолчанию);
-\n\t\'Дневной\' - всегда использовать Дневной режим; \t\'Ночной\' - всегда использовать Ночной режим; \t\'Датчик света\' - режим контролируется показаниями датчика света устройства (если датчик присутствует).</string>
+  
   <string name="pref_vector_rendering">Настройки векторного рендеринга</string>
   <string name="pref_overlay">Дополнительные слои</string>
   <string name="pref_raster_map">Настройки онлайн карт</string>
@@ -974,9 +963,9 @@
   <string name="use_compass_navigation">Использовать компас</string>
   <string name="route_updated_loc_found">Маршрут будет пересчитан после определения местоположения</string>
   <string name="continue_follow_previous_route_auto">Предыдущий маршрут не был закончен. Продолжить следование по нему? (%1$s секунд)</string>
-  <string name="show_cameras_descr">Показать скоростные камеры (может быть запрещено в некоторых странах)</string>
-  <string name="show_traffic_warnings_descr">Показать ограничения скорости и лежачих полицейских</string>
-  <string name="avoid_toll_roads_descr">Избегать платных дорог при прокладке маршрута</string>
+  
+  
+  
   <string name="show_cameras">Показать камеры контроля скорости</string>
   <string name="show_traffic_warnings">Показать ограничения скорости</string>
   <string name="avoid_toll_roads">Избегать платных дорог</string>
@@ -984,7 +973,7 @@
   <string name="screen_is_locked">Для разблокировки экрана коснитесь значка блокировки</string>
   <string name="map_widget_top_text">Название улицы</string>
   <string name="map_widget_config">Конфигурация</string>
-  <string name="map_widget_map_select">Источник карты</string>
+  
   <string name="map_widget_back_to_loc">Где я</string>
   <string name="map_widget_lock_screen">Заблокировать экран</string>
   <string name="map_widget_compass">Компас</string>
@@ -1083,8 +1072,8 @@
     <string name="rendering_attr_roadColors_description">Выберите цветовую схему дорог:</string>
 	<string name="rendering_attr_roadColors_name">Цветовая схема дорог</string>
     <string name="route_descr_current_location">Текущая позиция</string>
-    <string name="route_descr_from_to">Из %1$s До %2$s</string>
-    <string name="route_descr_from_to_via">Из : %1$s Через : %2$s До : %3$s</string>
+    
+    
     <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
 	<string name="incomplete_locale">незавершенное</string>
 	<string name="map_widget_max_speed">Ограничение скорости</string>

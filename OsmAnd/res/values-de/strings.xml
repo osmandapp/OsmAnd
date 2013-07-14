@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 	<string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
@@ -23,8 +22,8 @@
 	<string name="map_widget_max_speed">Tempolimit</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
 	<string name="route_descr_current_location">Aktueller Standort</string>
-	<string name="route_descr_from_to">Von: %1$s\nNach: %2$s</string>
-	<string name="route_descr_from_to_via">Von: %1$s\nÜber: %2$s\nNach: %3$s</string>
+	
+	
 	<string name="no_buildings_found">Kein Gebäude gefunden.</string>
 	<string name="incremental_search_city">Suche Stadt inkrementell</string>
 	<string name="search_villages_and_postcodes">Suche Dörfer oder Postleitzahlen</string>
@@ -84,79 +83,7 @@
 
 		OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test (Fahrten) neuer Funktionen. Bitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf osmand.net.
 	</string>
-	<string name="osmand_long_description_4000_chars">
-OsmAnd ist eine Landkarten- und Navigations-Applikation basierend auf dem kostenlosen, globalen, qualitativ hochwertigen OpenStreetMap (OSM) Kartenmaterial. Alle Karten können zur Offline-Verwendung auf dem Handy oder Tablet PC gespeichert werden. Mittels GPS kann OsmAnd auch navigieren (optische Richtungsanzeige und Sprachansagen), mit Auto-, Fahrrad- oder Fußgängermodus. Alle Grundfunktionen funktionieren sowohl online wie auch offline (ohne Internetzugang).
-
-OsmAnd+ ist die Kaufversion der Applikation. Durch den Kauf unterstützen Sie das Projekt und ermöglichen die Entwicklung neuer Funktionen.
-
-Einige Kernfunktionen:
-
-Navigation
- - Online (schnell) oder offline (keine Daten-/ Roamingkosten)
- - Inklusive Sprachnavigation (aufgenommene oder synthetische Stimmen)
- - Fahrspuranzeige, mitlaufende Straßennamenanzeige, geschätzte Ankunftszeit
- - Unterstützt die Angabe von Zwischenzielen
- - Automatische Routenneuberechnung nach Abweichen
- - Ortssuche nach Adressen, nach Typ (z.B. Restaurant, Hotel, Tankstelle, Museum), oder nach Koordinaten
-
-Landkartenfunktionen
- - Anzeige der eigenen Position und Blickrichtung
- - Optionale Kartenausrichtung nach Kompass oder Bewegungsrichtung
- - Orte können als Favoriten gespeichert werden
- - Suche und Anzeige von POI (Attraktionen, “Points of Interest”)
- - Anzeigemöglichkeit auch gängiger Online-Karten
- - Anzeigemöglichkeit für Satellitenkarten (Bing)
- - Anzeigemöglichkeit für Overlays, wie GPX-Touren oder -Routen und zusätzlicher Landkarten mit einstellbarer Transparenz
- - Ortsbezeichnungen in englischer, ortsüblicher oder phonetischer Schreibweise
-
-Nutzung von OpenStreetMap und Wikipedia-Daten:
- - Qualitativ hochwertige Information aus den weltbesten Kollaborations-Projekten
- - Global verfügbare Landkarten von OpenStreetMap
- - Wikipedia POIs, hervorragend für Besichtigungstouren (nicht verfügbar in der kostenlosen OsmAnd-Version)
- - Unbegrenztes Herunterladen kostenloser Landkarten direkt in der App (Download Limit 16 für kostenlose Version)
- - Immer aktuelle Karten (oft 1-2 Updates pro Monat)
- - Kompaktes Vektorkartenformat
- - Wahl zwischen vollständigen Landkarten oder lediglich Straßenkarten (Beispiel: Japan komplett 700 MB, oder 200 MB nur Straßennetz)
- - Unterstützt auch Online- oder lokale Kachelkarten
-
-Sicherheitsfunktionen
- - Optional automatische Tag- / Nachtdarstellung
- - Optional Anzeige von Geschwindigkeitsbegrenzungen, mit Warnung bei Überschreitung
- - Optional geschwindigkeitsabhängiger Kartenmaßstab
- - Unterstützt die Übermittlung der eigenen Position
-
-Fahrrad und Fußgängerfunktionen
- - Die Landkarten beinhalten Fuß-, Wander- und Fahrradwege, nützlich für Outdoor-Aktivitäten
- - Spezielle Routing- und Anzeigemodi für Fahrradfahrer und Fußgänger
- - Optionale Anzeige der ÖPNV-Haltestellen und -Linien (Bus, Straßenbahn, Zug)
- - Optionale Strecken-Aufzeichnung in lokaler GPX-Datei oder Online
- - Optionale Anzeige von Geschwindigkeit oder Höhe
- - Anzeige von Höhenlinien oder Geländerelief möglich (über separates Plugin-Modul)
-
-Direkte Zuarbeit bei OSM möglich
- - Kartenfehler melden
- - Versenden von GPX-Dateien an OSM direkt aus der App
- - Erstellen von POIs und direktes Versenden an OSM (oder später, falls offline)
- - Optionale Streckenaufzeichnung auch im Hintergrund-Modus, also mit ausgeschaltetem Bildschirm
-
-OsmAnd ist ein Open-Source Projekt und wird aktiv weiterentwickelt. Jeder kann beitragen, entweder durch Meldung von Fehlern, Mithilfe bei Übersetzungen, oder Programmierung neuer Funktionen. Das Projekt entwickelt sich dadurch lebhaft weiter. Durch den Kauf von OsmAnd+ helfen Sie die App weiter zu verbessern! Sie können auch gezielt spezielle neue Funktionen bezuschussen, oder für das Projekt allgemein spenden.
-
-Kartenabdeckung und Qualitätsabschätzung:
- - Westeuropa: ****
- - Osteuropa: ***
- - Russland: ***
- - Nordamerika: ***
- - Südamerika: **
- - Asien: **
- - Japan &amp; Korea: ***
- - Mittlerer Osten: **
- - Afrika: **
- - Antarktis: *
-
-Es steht eine globale Liste von Landkarten für fast alle Länder weltweit zum Herunterladen bereit, u.a.
-
-Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua und Barbuda, Äquatorialguinea, Argentinien, Armenien, Aruba, Äthiopien, Australien, Aserbaidschan, Bahamas, Bahrain, Bangladesch, Barbados, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivien, Bonaire, Bosnien und Herzegowina, Botswana, Brasilien, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodia, Chile, China, Costa Rica, Curacao, Dänemark, Deutschland, Dominica, Dominikanische Republik, Dschibuti, Ecuador, Elfenbeinküste, El Salvador, Eritrea, Estland, Fidschi, Finnland, Frankreich, Französisch Guyana, Französisch-Polynesien, Gabun, Gambia, Georgien, Ghana, Gibraltar, Griechenland, Grenada, Grönland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikan, Honduras, Hong Kong, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaika, Japan, Jemen, Jersey, Jordanien, Kamerun, Kanada, Kapverdische Inseln, Kasachstan, Katar, Kenia, Kirgisistan, Kiribati, Kolumbien, Komoren, Kongo, Nord-Korea und Süd-Korea, Kroatien, Kuba, Kuwait, Laos, Libanon, Lesotho, Lettland, Liberia, Libyen, Liechtenstein, Litauen, Luxemburg, Macao, Mazedonien, Madagaskar, Malawi, Malaysia, Malediven, Mali, Malta, Marokko, Martinique, Mauretanien, Mauritius, Mayotte, Mexiko, Mikronesien, Moldawien, Monaco, Mongolische Republik, Montenegro, Montserrat, Mosambik, Myanmar, Namibia, Nauru, Nepal, Niederlande, Niederländische Antillen, Neukaledonien, Neuseeland, Nikaragua, Niger, Nigeria, Norwegen, Oman, Österreich, Pakistan, Palau, Palestinian Territory, Panama, Papua-Neuguinea, Paraguay, Peru, Philippinen, Polen, Portugal, Puerto Rico, Ruanda, Rumänien, Russland, Saint-Barthelemy, Saint Helena, Saint Kitts und Nevis, Saint Lucia, Saint Martin, Saint Pierre und Miquelon, Saint Vincent und die Grenadinen, Samoa, San Marino, Saudi Arabien, Schweden, Schweiz, Senegal, Serbien, Seychellen, Sierra Leone, Simbabwe, Singapur, Slowakei, Slowenien, Somalia, Spanien, Südafrika, Südgeorgien, Süd Sudan, Sri Lanka, Sudan, Surinam, Swasiland, Syrien, Taiwan, Tadschikistan , Tansania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad und Tobago, Tschad, Tschechien, Tunesien, Türkei, Turkmenistan, Tuvalu, Uganda, Ukraine, Ungarn, Vereinigte Arabische Emirate, Vereinigtes Königreich (UK), Vereinigte Staaten von Amerika (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Virgin Islands (Britisch), Weißrussland, Wallis und Futuna, Westsahara, Sambia, Zentralafrikanische Republik, Zypern.
-	</string>
+	
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Karten &amp; Navigation</string>
 	<string name="osmand_plus_short_description_80_chars">Globale Landkarten- und Navigations-Applikation für Offline und Online-Karten</string>
 	<string name="osmand_plus_long_description_1000_chars">
@@ -180,78 +107,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 		-  optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung
 		-  optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
 	</string>
-	<string name="osmand_plus_long_description_4000_chars">
-OsmAnd ist eine Landkarten- und Navigations-Applikation basierend auf dem kostenlosen, globalen, qualitativ hochwertigen OpenStreetMap (OSM) Kartenmaterial. Alle Karten können zur Offline-Verwendung auf dem Handy oder Tablet PC gespeichert werden. Mittels GPS kann OsmAnd auch navigieren (optische Richtungsanzeige und Sprachansagen), mit Auto-, Fahrrad- oder Fußgängermodus. Alle Grundfunktionen funktionieren sowohl online wie auch offline (ohne Internetzugang).
-
-OsmAnd+ ist die Kaufversion der Applikation. Durch den Kauf unterstützen Sie das Projekt und ermöglichen die Entwicklung neuer Funktionen.
-
-Einige Kernfunktionen:
-
-Navigation
- - Online (schnell) oder offline (keine Daten-/ Roamingkosten)
- - Inklusive Sprachnavigation (aufgenommene oder synthetische Stimmen)
- - Fahrspuranzeige, mitlaufende Straßennamenanzeige, geschätzte Ankunftszeit
- - Unterstützt die Angabe von Zwischenzielen
- - Automatische Routenneuberechnung nach Abweichen
- - Ortssuche nach Adressen, nach Typ (z.B. Restaurant, Hotel, Tankstelle, Museum), oder nach Koordinaten
-
-Landkartenfunktionen
- - Anzeige der eigenen Position und Blickrichtung
- - Optionale Kartenausrichtung nach Kompass oder Bewegungsrichtung
- - Orte können als Favoriten gespeichert werden
- - Suche und Anzeige von POI (Attraktionen, “Points of Interest”)
- - Anzeigemöglichkeit auch gängiger Online-Karten
- - Anzeigemöglichkeit für Satellitenkarten (Bing)
- - Anzeigemöglichkeit für Overlays, wie GPX-Touren oder -Routen und zusätzlicher Landkarten mit einstellbarer Transparenz
- - Ortsbezeichnungen in englischer, ortsüblicher oder phonetischer Schreibweise
-
-Nutzung von OpenStreetMap und Wikipedia-Daten:
- - Qualitativ hochwertige Information aus den weltbesten Kollaborations-Projekten
- - Global verfügbare Landkarten von OpenStreetMap
- - Wikipedia POIs, hervorragend für Besichtigungstouren
- - Unbegrenztes Herunterladen kostenloser Landkarten direkt in der App
- - Immer aktuelle Karten (oft 1-2 Updates pro Monat)
- - Kompaktes Vektorkartenformat
- - Wahl zwischen vollständigen Landkarten oder lediglich Straßenkarten (Beispiel: Japan komplett 700 MB, oder 200 MB nur Straßennetz)
- - Unterstützt auch Online- oder lokale Kachelkarten
-
-Sicherheitsfunktionen
- - Optional automatische Tag- / Nachtdarstellung
- - Optional Anzeige von Geschwindigkeitsbegrenzungen, mit Warnung bei Überschreitung
- - Optional geschwindigkeitsabhängiger Kartenmaßstab
- - Unterstützt die Übermittlung der eigenen Position
-
-Fahrrad und Fußgängerfunktionen
- - Die Landkarten beinhalten Fuß-, Wander- und Fahrradwege, nützlich für Outdoor-Aktivitäten
- - Spezielle Routing- und Anzeigemodi für Fahrradfahrer und Fußgänger
- - Optionale Anzeige der ÖPNV-Haltestellen und -Linien (Bus, Straßenbahn, Zug)
- - Optionale Strecken-Aufzeichnung in lokaler GPX-Datei oder Online
- - Optionale Anzeige von Geschwindigkeit oder Höhe
- - Anzeige von Höhenlinien oder Geländerelief möglich (über separates Plugin-Modul)
-
-Direkte Zuarbeit bei OSM möglich
- - Kartenfehler melden
- - Versenden von GPX-Dateien an OSM direkt aus der App
- - Erstellen von POIs und direktes Versenden an OSM (oder später, falls offline)
- - Optionale Streckenaufzeichnung auch im Hintergrund-Modus, also mit ausgeschaltetem Bildschirm
-
-OsmAnd ist ein Open-Source Projekt und wird aktiv weiterentwickelt. Jeder kann beitragen, entweder durch Meldung von Fehlern, Mithilfe bei Übersetzungen, oder Programmierung neuer Funktionen. Das Projekt entwickelt sich dadurch lebhaft weiter. Durch den Kauf von OsmAnd+ helfen Sie die App weiter zu verbessern! Sie können auch gezielt spezielle neue Funktionen bezuschussen, oder für das Projekt allgemein spenden.
-
-Kartenabdeckung und Qualitätsabschätzung:
- - Westeuropa: ****
- - Osteuropa: ***
- - Russland: ***
- - Nordamerika: ***
- - Südamerika: **
- - Asien: **
- - Japan &amp; Korea: ***
- - Mittlerer Osten: **
- - Afrika: **
- - Antarktis: *
-
-Es steht eine globale Liste von Landkarten für fast alle Länder weltweit zum Herunterladen bereit, u.a.
-
-Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua und Barbuda, Äquatorialguinea, Argentinien, Armenien, Aruba, Äthiopien, Australien, Aserbaidschan, Bahamas, Bahrain, Bangladesch, Barbados, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivien, Bonaire, Bosnien und Herzegowina, Botswana, Brasilien, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodia, Chile, China, Costa Rica, Curacao, Dänemark, Deutschland, Dominica, Dominikanische Republik, Dschibuti, Ecuador, Elfenbeinküste, El Salvador, Eritrea, Estland, Fidschi, Finnland, Frankreich, Französisch Guyana, Französisch-Polynesien, Gabun, Gambia, Georgien, Ghana, Gibraltar, Griechenland, Grenada, Grönland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikan, Honduras, Hong Kong, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaika, Japan, Jemen, Jersey, Jordanien, Kamerun, Kanada, Kapverdische Inseln, Kasachstan, Katar, Kenia, Kirgisistan, Kiribati, Kolumbien, Komoren, Kongo, Nord-Korea und Süd-Korea, Kroatien, Kuba, Kuwait, Laos, Libanon, Lesotho, Lettland, Liberia, Libyen, Liechtenstein, Litauen, Luxemburg, Macao, Mazedonien, Madagaskar, Malawi, Malaysia, Malediven, Mali, Malta, Marokko, Martinique, Mauretanien, Mauritius, Mayotte, Mexiko, Mikronesien, Moldawien, Monaco, Mongolische Republik, Montenegro, Montserrat, Mosambik, Myanmar, Namibia, Nauru, Nepal, Niederlande, Niederländische Antillen, Neukaledonien, Neuseeland, Nikaragua, Niger, Nigeria, Norwegen, Oman, Österreich, Pakistan, Palau, Palestinian Territory, Panama, Papua-Neuguinea, Paraguay, Peru, Philippinen, Polen, Portugal, Puerto Rico, Ruanda, Rumänien, Russland, Saint-Barthelemy, Saint Helena, Saint Kitts und Nevis, Saint Lucia, Saint Martin, Saint Pierre und Miquelon, Saint Vincent und die Grenadinen, Samoa, San Marino, Saudi Arabien, Schweden, Schweiz, Senegal, Serbien, Seychellen, Sierra Leone, Simbabwe, Singapur, Slowakei, Slowenien, Somalia, Spanien, Südafrika, Südgeorgien, Süd Sudan, Sri Lanka, Sudan, Surinam, Swasiland, Syrien, Taiwan, Tadschikistan , Tansania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad und Tobago, Tschad, Tschechien, Tunesien, Türkei, Turkmenistan, Tuvalu, Uganda, Ukraine, Ungarn, Vereinigte Arabische Emirate, Vereinigtes Königreich (UK), Vereinigte Staaten von Amerika (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Virgin Islands (Britisch), Weißrussland, Wallis und Futuna, Westsahara, Sambia, Zentralafrikanische Republik, Zypern.	</string>
+	
 	<string name="select_navigation_mode">Nutzerprofil wählen:</string>
 	<string name="day_night_info_description">Sonnenaufgang: %1$s
 \nSonnenuntergang: %2$s</string>
@@ -300,11 +156,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	</string>
 	<string name="osm_editing_plugin_description">Ermöglicht das Erstellen und Bearbeiten von OSM POI Objekten und Fehlermeldungen, sowie das Hochladen von GPX-Dateien (benötigt ein OSM-Benutzerkonto).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden eventuell schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
-	<string name="simulate_route_progression_manually">Simuliere die Navigation</string>
+	
 	<string name="play_commands_of_currently_selected_voice">Spiele Ansagen der aktuell ausgewählten Stimme ab</string>
 	<string name="debugging_and_development">OsmAnd Debugging</string>
 	<string name="native_rendering">Natives Rendern</string>
-	<string name="animate_routing">Simuliere Navigation</string>
+	
 	<string name="test_voice_prompts">Sprachansagen testen</string>
 	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Vektor-Karte via \'Einstellungen\' → \'Daten-Management\' laden.
 \n\nAlternativ auf Online-Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).</string>
@@ -322,7 +178,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="default_buttons_support">Unterstütze OsmAnd</string>
 	<string name="support_new_features">Unterstütze neue Funktionen</string>
 	<string name="support_new_features_descr">Fördere mit einer Spende die Entwicklung neuer Funktionen für die Anwendung</string>
-	<string name="show_ruler_level_descr">Zeige Maßstab auf der Karte an</string>
+	
 	<string name="show_ruler_level">Zeige Maßstab an</string>
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Zurück zum Standort</string>
@@ -402,7 +258,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="local_openstreetmap_uploading">hochladen…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs wurden hochgeladen</string>
 	<string name="local_openstreetmap_uploadall">Alle hochladen</string>
-	<string name="local_openstreetmap_items">" "</string>
+	
 	<string name="local_openstreetmap_show">Auf Karte zeigen</string>
 	<string name="local_openstreetmap_upload">Änderung auf OSM hochladen</string>
 	<string name="local_openstreetmap_delete">Änderung löschen</string>
@@ -446,8 +302,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="profile_settings">Profilspezifische Einstellungen</string>
 	<string name="settings_preset">Standardprofil</string>
 	<string name="settings_preset_descr">Karten- und Navigations-Einstellungen werden je Profil gespeichert. Hier Standardprofil vorauswählen.</string>
-	<string name="monitor_preferences">Standort-Aufzeichnung</string>
-	<string name="monitor_preferences_descr">Standort-Aufzeichnung konfigurieren</string>
+	
+	
 	<string name="routing_settings">Navigation</string>
 	<string name="routing_settings_descr">Nutzerprofilspezifische Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
 	<string name="global_settings">Globale Einstellungen</string>
@@ -495,7 +351,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 		\n\t- Neue Sprachversionen (vietnamesisch, polnisch)
 		\n\t- Weitere kleine Funktionalitäten "
 	</string>
-	<string name="use_transparent_map_theme_descr">Transparente Schaltflächen verwenden</string>
+	
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
 	<string name="native_library_not_supported">Native Library wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Library wird initialisiert…</string>
@@ -606,7 +462,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="local_index_address_data">Adress-Daten</string>
 	<string name="local_index_transport_data">ÖPNV-Daten</string>
 	<string name="local_index_map_data">Karten-Daten</string>
-	<string name="local_index_items">" "</string>
+	
 	<string name="local_indexes_cat_backup">Deaktiviert</string>
 	<string name="local_indexes_cat_tts">Sprachansagen (TTS)</string>
 	<string name="local_indexes_cat_voice">Sprachansagen (Aufnahmen)</string>
@@ -896,7 +752,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="voice_data_not_supported">Sprachpaket-Version wird nicht unterstützt.</string>
 	<string name="voice_data_corrupted">Sprachpaket ist defekt</string>
 	<string name="voice_data_unavailable">Das aktuelle Sprachpaket ist nicht verfügbar</string>
-	<string name="stop_routing">Navig.stoppen</string>
+	
 	<string name="sd_unmounted">Die SD-Karte ist nicht verfügbar. \nKarte lässt sich nicht darstellen.</string>
 	<string name="sd_mounted_ro">Die SD-Karte befindet sich im Nur-Lesen Modus. \nSie können nur vorgeladene Karten sehen. Der Internetdownload ist deaktiviert.</string>
 	<string name="unzipping_file">Datei wird entpackt…</string>
@@ -971,7 +827,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="address">Adresse</string>
 	<string name="download_index_success">Daten erfolgreich heruntergeladen</string>
 	<string name="error_io_error">I/O Fehler aufgetreten.</string>
-	<string name="downloading_file">Lade Datei(en)…</string>
+	
 	<string name="downloading">Herunterladen…</string>
 	<string name="downloading_list_indexes">Eine Liste verfügbarer Regionen wird geladen…</string>
 	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
@@ -1048,7 +904,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="choose_street">Straße wählen</string>
 	<string name="choose_city">Ort wählen</string>
 	<string name="ChooseCountry">Land wählen</string>
-	<string name="show_view_angle_descr">Blickrichtung gemäß Kompass anzeigen</string>
+	
 	<string name="show_view_angle">Blickrichtung einblenden</string>
 	<string name="map_view_3d_descr">3D-Kartenansicht verwenden</string>
 	<string name="map_view_3d">3D-Kartenansicht</string>
@@ -1164,7 +1020,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="unknown_from_location">Startpunkt ist noch nicht ermittelt</string>
 	<string name="confirm_interrupt_download">Möchten Sie den Datei-Download abbrechen?</string>
 	<string name="basemap_was_selected_to_download">Die Basis-Karte wird für die korrekte Benutzung der Anwendungen benötigt und ist für das Herunterladen vorausgewählt.</string>
-	<string name="gpx_index_settings_descr">" (beinhaltet GPX-Analyse)"</string>
+	
 	<string name="local_index_routing_data">Routing-Daten</string>
 	<string name="navigate_point_format">Format:</string>
 	<string name="poi_search_desc">POI-(Point of Interest) Suche</string>
@@ -1220,15 +1076,15 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="osmand_parking_position_description_add_time">Das Auto wurde hier geparkt:</string>
 	<string name="route_updated_loc_found">Route wird neu berechnet sobald Standort ermittelt</string>
 	<string name="continue_follow_previous_route_auto">Vorherige Navigation wurde nicht beendet. Der Route weiter folgen? (%1$s Sekunden)</string>
-	<string name="show_cameras_descr">Radarkontrollen anzeigen (in einigen Ländern illegal!)</string>
-	<string name="show_traffic_warnings_descr">Geschwindigkeitsbegrenzungen und Verkehrsberuhigungen anzeigen</string>
-	<string name="avoid_toll_roads_descr">Mautpflichtige Straßen vermeiden</string>
+	
+	
+	
 	<string name="show_cameras">Radarfallen anzeigen</string>
 	<string name="show_traffic_warnings">Verkehrswarnungen anzeigen</string>
 	<string name="avoid_toll_roads">Vermeide Mautstraßen</string>
 	<string name="map_widget_top_text">Straßenname</string>
 	<string name="map_widget_config">Konfiguration</string>
-	<string name="map_widget_map_select">Kartenauswahl</string>
+	
 	<string name="map_widget_back_to_loc">Wo bin ich</string>
 	<string name="map_widget_lock_screen">Bildschimr sperren</string>
 	<string name="map_widget_compass">Kompass</string>
@@ -1325,8 +1181,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="srtm_plugin_name">Höhenlinien-Plugin</string>
     <string name="download_select_map_types">Andere Karten</string>
     <string name="download_srtm_maps">Höhenlinien</string>
-    <string name="osmand_distance_plugin_description">Entfernung zwischen zwei oder mehr Punkten messen. Start/Ziel antippen und löschen durch langes drücken.</string>
-	<string name="osmand_distance_plugin_name">Entfernungsmesser</string>
+    
+	
 <string name="av_def_action_video">Video aufzeichnen</string>
     <string name="av_def_action_audio">Audio aufnehmen</string>
     <string name="av_widget_action_descr">Legt fest, welche Aktion das Widget standardmäßig ausführt</string>
@@ -1361,8 +1217,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="av_control_start">AV</string>
     <string name="map_widget_av_notes">Audio/Video-Notiz</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-Plugin für Offline-Höhenlinien</string>
-    <string name="use_clear_distance_measurement">Klicken Sie nochmal zum Löschen der Meßpunkte.</string>
-    <string name="use_distance_measurement">Tippen Sie, um einen Punkt zu erstellen, Drücken und Halten Sie, um vorhergehende Punkte zu Löschen, klicken Sie auf das Meß-Widget zum Verlassen.</string>
+    
+    
     <string name="map_widget_distancemeasurement">Entfernungsmessung</string>
     <string name="monitoring_control_stop">GPX</string>
     <string name="map_widget_audionotes">Audio-Notiz</string>

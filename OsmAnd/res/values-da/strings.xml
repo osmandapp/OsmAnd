@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -38,10 +37,10 @@
     <string name="map_widget_av_notes">Audio-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
     <string name="osmand_srtm_long_description_1000_chars">Udvidelsen indeholder højdekurver, der kan vises i OsmAnd\'s offline kort. De globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced rumbårne Thermal Emission og Reflection Radiometer), en billeddannende instrument ombord Terra, flagskib satellit fra NASAs Earth Observering systemet. ASTER er et samarbejde mellem NASA, Japans ministerium for økonomi, handel og industri (METI), og Japan Space Systems (J-spacesystems).</string>
-    <string name="osmand_distance_plugin_description">Mål afstanden mellem to eller flere punkter. Tilføj punkt med et kort klik og fjern med et langt tryk.</string>
-    <string name="osmand_distance_plugin_name">Afstandsberegner</string>
-    <string name="use_clear_distance_measurement">Klik en gang mere for at rydde målepunkter.</string>
-    <string name="use_distance_measurement">Tryk for at lave et punkt, tryk og hold for at slette tidligere punkt, klik på målingsmodul for at afslutte.</string>
+    
+    
+    
+    
     <string name="av_control_stop">stop</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
     <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering ...\' for at tildele en note til den angivne placering</string>
@@ -73,11 +72,8 @@
 	</string>
     <string name="map_widget_max_speed">Fartgrænse</string>
     <string name="route_descr_current_location">Aktuel position</string>
-    <string name="route_descr_from_to">Fra : %1$s
-\nTil : %2$s</string>
-    <string name="route_descr_from_to_via">Fra : %1$s
-\nVia : %2$s
-\nTil : %3$s</string>
+    
+    
     <string name="no_buildings_found">Ingen bygninger fundet.</string>
     <string name="incremental_search_city">Søg efter by trinvist</string>
     <string name="search_villages_and_postcodes">Søg landsbyer/postnummer</string>
@@ -184,7 +180,7 @@
 	<string name="filterpoi_activity">Opret interessepunkt-filter</string>
 	<string name="recalculate_route_to_your_location">Transportform:</string>
 	<string name="select_navigation_mode">Vælg transportmetode</string>
-	<string name="monitor_preferences">Sporing</string>
+	
 	<string name="day_night_info_description">Solopgang: %1$s
 \nSolnedgang: %2$s</string>
 	<string name="day_night_info">Dag/nat information</string>
@@ -220,7 +216,7 @@
 	<string name="screen_is_locked">Tryk på låseikonet for at låse skærmen op</string>
 	<string name="map_widget_top_text">Gadenavn</string>
 	<string name="map_widget_config">Konfigurer skærm</string>
-	<string name="map_widget_map_select">Vælg kortkilde</string>
+	
 	<string name="map_widget_back_to_loc">Hvor er jeg</string>
 	<string name="map_widget_lock_screen">Lås skærm</string>
 	<string name="map_widget_compass">Kompas</string>
@@ -270,7 +266,7 @@
 	<string name="bg_service_screen_lock_toast">Skærmen er låst</string>
 	<string name="bg_service_interval">Indstil opvågningsinterval:</string>
 	<string name="show_cameras">Vis fartkameraer</string>
-	<string name="show_speed_limits">Vis trafik advarsler</string>
+	
 	<string name="avoid_toll_roads">Undgå betalingsveje</string>
 	<string name="continue_follow_previous_route_auto">Forrige navigation var ufærdig. Fortsæt den? (%1$s sekunder)</string>
 	<string name="route_updated_loc_found">Ruten beregnes, når position er fundet</string>
@@ -358,7 +354,7 @@
 	<string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online- og delkort</string>
 	<string name="local_indexes_cat_map">Offlinekort (vektor)</string>
-	<string name="gpx_index_settings_descr">" (inkluderer GPX-analysering)"</string>
+	
 	<string name="index_settings_descr">Hent kort og håndter offlinedata gemt på enheden</string>
 	<string name="map_online_plugin_is_not_installed">Aktiver onlinekort udvidelse for at vælge andre kortkilder</string>
 	<string name="map_online_data">Online- og delkort</string>
@@ -1194,7 +1190,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="gps_provider">GPS</string>
 	<string name="int_min">min.</string>
 	<string name="search_poi_filter">Filter</string>
-	<string name="stop_routing">Stop navigation</string>
+	
 	<string name="sd_unmounted">SD-kort er ikke tilgængelig.
 \nKort kan ikke vises.</string>
 	<string name="sd_mounted_ro">SD-kortet er skrivebeskyttet.
@@ -1318,7 +1314,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="address">Adresse</string>
 	<string name="download_index_success">Hentet</string>
 	<string name="error_io_error">Der skete en I/O fejl</string>
-	<string name="downloading_file">Henter fil…</string>
+	
 	<string name="downloading">Henter…</string>
 	<string name="downloading_list_indexes">Henter liste over tilgængelige regioner…</string>
 	<string name="list_index_files_was_not_loaded">Listen over regioner blev ikke hentet fra osmand.net.</string>

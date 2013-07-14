@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="avoid_in_routing_title">Osgoi…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="avoid_in_routing_title">Osgoi…</string>
 <string name="avoid_in_routing_descr">Osgoi tollffyrdd, ffyrdd garw, fferïau</string>
 <string name="show_warnings_title">Dangos larymau</string>
 <string name="show_warnings_descr">Dangos cyfyngiad cyflymder, camerâu cyflymder a thwmpathau traffig</string>
@@ -17,7 +16,7 @@
 <string name="screen_is_locked">I ddatgloi\'r sgrin pwyswch yr eicon cloi</string>
 <string name="map_widget_top_text">Enw stryd</string>
 <string name="map_widget_config">Ffurfweddiad</string>
-<string name="map_widget_map_select">Dewis map</string>
+
 <string name="map_widget_back_to_loc">Lle\'r ydw i</string>
 <string name="map_widget_lock_screen">Cloi\'e sgrin</string>
 <string name="map_widget_compass">Cwmpawd</string>
@@ -39,8 +38,8 @@
 <string name="bg_service_screen_unlock">Sgrin datgloi</string>
 <string name="bg_service_screen_lock_toast">Mae\'r sgrin wedi cloi</string>
 <string name="bg_service_interval">Gosod cyfnod deffro:</string>
-<string name="show_traffic_warnings_descr">Dangos terfynau cyflymder a thwmpathau traffig</string>
-<string name="avoid_toll_roads_descr">Osgoi tollffyrdd wrth gyfrifo taith</string>
+
+
 <string name="show_cameras">Dangos camerâu cyflymder</string>
 <string name="show_traffic_warnings">Dangos cyfyngiadau cyflymder</string>
 <string name="avoid_toll_roads">Osgoi tollffyrdd</string>
@@ -93,7 +92,7 @@ tip_recent_changes_0_8_3_t Cyd-destun</string>
 <string name="filterpoi_activity">Creu POI hidlo</string>
 <string name="recalculate_route_to_your_location">Dull trafnidiaeth:</string>
 <string name="select_navigation_mode">Dewiswch dull trafnidiaeth</string>
-<string name="monitor_preferences">Olrhain</string>
+
 <string name="day_night_info_description">Sunrise : %1$s \nSunset : %2$s</string>
 <string name="day_night_info">Dydd/nos info</string>
 <string name="map_widget_day_night">Dydd/nos map</string>
@@ -159,7 +158,7 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="select_index_file_to_download">Ni ddaethpwyd o hyd. Os gallwch ni all ddod o hyd i\'ch rhanbarth, gallwch wneud eich hun (gweler http://osmand.net).</string>
 <string name="local_indexes_cat_tile">Mapiau Ar-lein (teils)</string>
 <string name="local_indexes_cat_map">Fapiau all-lein (fector)</string>
-<string name="gpx_index_settings_descr">  (yn cynnwys GPX dadansoddwr)</string>
+
 <string name="index_settings_descr">Lawrlwythwch, gweld y manylion, a rheoli mapiau all-lein</string>
 <string name="map_online_plugin_is_not_installed">Galluogi mapiau plugin ar-lein i ddewis ffynonellau map gwahanol</string>
 <string name="map_online_data">Mapiau Ar-lein (teils)</string>

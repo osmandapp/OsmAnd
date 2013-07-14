@@ -1,10 +1,9 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="show_warnings_title">Mostra els missatges d\'avís...</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís...</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
 <string name="map_widget_top_text">Nom del carrer</string>
-<string name="map_widget_map_select">Font del mapa</string>
+
 <string name="map_widget_back_to_loc">On sou</string>
 <string name="map_widget_reset">Reinicia els valors per defecte</string>
 <string name="map_widget_parking">Aparcament</string>
@@ -424,7 +423,7 @@
 \n\t* Connector Aparcament («On heu aparcat el cotxe?»)
 \n\t* Giny Habilita/deshabilita el registre "</string>
 <string name="rendering_attr_contourLines_description">Seleccioneu el nivell mínim de zoom per mostrar el mapa si està disponible. Caldrà el fitxer SRTM separat:</string>
-<string name="gpx_index_settings_descr">" (inclou l\'analitzador de GPX)"</string>
+
 <string name="osmand_monitoring_description">Mostra la configuració que us facilitarà l\'enregistrament de les vostres excursions en fitxers GPX o bé el seguiment d\'una traça per mitjà d\'un servei web.</string>
 <string name="osmand_development_plugin_description">Mostra la configuració de característiques en desenvolupament o que s\'estan depurant com ara la navegació animada o la visualització del rendiment de la renderització.</string>
 <string name="accessibility_default">En consonància amb la configuració global del sistema</string>
@@ -555,7 +554,7 @@
 <string name="searching_address">S\'està cercant l\'adreça...</string>
 <string name="search_offline_address">Fora de línia</string>
 <string name="download_index_success">Baixada amb èxit</string>
-<string name="downloading_file">S\'està baixant el fitxer...</string>
+
 <string name="show_poi_on_map">Mostrar al mapa</string>
 <string name="show_gps_status">Mostrar estat del GPS</string>
 <string name="opening_hours">Horari d\'obertura</string>
@@ -610,7 +609,7 @@
 <string name="use_trackball_descr">Utilitzeu el ratolí de bola per moure el mapa</string>
 <string name="use_trackball">Utilitza el ratolí de bola</string>
 <string name="process_navigation_service">Servei de navegació de l\'OsmAnd</string>
-<string name="monitor_preferences">Seguiment</string>
+
 <string name="live_monitoring_mode_off">Inicia\n el seguiment en viu</string>
 <string name="live_monitoring_mode_on">Atura\n el seguiment en viu</string>
 <string name="osmand_parking_position_description_add">Per recollir el cotxe a:</string>
@@ -849,8 +848,8 @@
 \n\tLa disponibilitat de les actualitzacions es representen amb els següents colors:
 \n\t«Verd» - Indica que les dades al dispositiu i al servidor són idèntiques\n\t«Blau» - Indica que hi ha actualitzacions disponibles al servidor
 \n\t«Blau/verd fosc» - Indica (a més del significat del blau i el verd) que les dades estan desactivades al dispositiu</string>
-	<string name="local_openstreetmap_items"/>
-	<string name="local_index_items"/>
+	
+	
 	<string name="create_poi_link_to_osm_doc">LLegenda del mapa <u>OSM en línia</u> amb imatges</string><string name="osmand_routing_experimental">La navegació fora de línia de l\'OsmAnd és una característica experimental i no funciona per distàncies superiors als 20Km.\n\nEl servei de navegació s\'ha desviat temporalment cap a CloudMade en línia.</string>
 	<string name="renderer_load_exception">Ha succeït una excepció: El renderitzador no s\'ha carregat</string>
 	<string name="context_menu_item_search_transport">Cerca de transport</string>
@@ -861,7 +860,7 @@
 	<string name="background_service_int">Interval de despertament</string>
 	<string name="voice_provider_descr">Seleccioneu el guiatge per veu per la navegació</string>
 	<string name="voice_provider">Guiatge per veu</string>
-	<string name="stop_routing">Atura naveg.</string>
+	
 	<string name="route_tr">Gireu a la dreta i continueu</string>
 	<string name="route_tshr">Gireu fortament a la dreta i continueu</string>
 	<string name="route_tslr">Gireu lleugerament a la dreta i continueu</string>
@@ -980,7 +979,7 @@
     <string name="recording_context_menu_vrecord">Enregistra una nota de vídeo</string>
     <string name="recording_context_menu_delete">Elimina l\'enregistrament</string>
     <string name="av_use_external_recorder">Usa un enregistrador extern</string>
-    <string name="osmand_distance_plugin_description">Mesureu la distància entre dos punts. Afegiu els punts amb un clic i elimineu-los amb una pressió llarga.</string>
+    
     <string name="download_select_map_types">Altres mapes</string>
     <string name="rendering_attr_noAdminboundaries_name">Amaga els límits administratius</string>
 	<string name="download_roads_only_maps">Mapes de només carreteres</string>
@@ -992,8 +991,8 @@
     <string name="rendering_attr_showRoadMaps_name">Mapes amb només carreteres</string>
     <string name="no_buildings_found">No s\'han trobat edificis.</string>
     <string name="search_villages_and_postcodes">Cerca municipis i codis postals</string>
-	<string name="route_descr_from_to">Des de: %1$s\nFins a: %2$s</string>
-    <string name="route_descr_from_to_via">Des de: %1$s\nPer: %2$s\nFins a: %3$s</string>
+	
+    
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="intermediate_points_change_order">Canvia l\'ordre</string>
     <string name="recording_delete_confirm">Voleu eliminar aquest enregistrament?</string>
@@ -1006,15 +1005,15 @@
     <string name="srtm_paid_version_title">Connector de corbes de nivell</string>
     <string name="av_video_format">Format de sortida de vídeo</string>
     <string name="av_use_external_recorder_descr">Usa l\'enregistrament de vídeo del sistema</string>
-    <string name="osmand_distance_plugin_name">Calculadora de distàncies</string>
+    
     <string name="recording_is_recorded">S\'està enregistrant àudio/vídeo. Per aturar-ho, premeu el botó d\'aturada del giny.</string>
     <string name="map_widget_audionotes">Notes d\'àudio</string>
     <string name="recording_playing">S\'està reproduint l\'àudio de l\'enregistrament especificat.\n%1$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Canvis a 1.1.0:\n\t* Connector de càlcul de distàncies\n\t* Connector de notes d\'àudio\n\t* Connector de corbes de nivell\n\t* Correccions d\'errors\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option\n\t* EGM96 geoid offset correction for GPS altitude readings "</string>
     <string name="av_control_start">enreg.</string>
     <string name="osmand_srtm_short_description_80_chars">Connector de l\'OsmAnd per a corbes de nivell fora de línia</string>
-    <string name="use_clear_distance_measurement">Feu clic una vegada per netejar els punts de mesura.</string>
-    <string name="use_distance_measurement">Feu un toc per crear un punt, i manteniu premut per eleminar el punt anterior, cliqueu al giny de mesura per sortir.</string>
+    
+    
     <string name="map_widget_distancemeasurement">Mesura de distàncies</string>
     <string name="audionotes_location_not_defined">Encara no teniu definida la localització a la nota. «Usa una localització...» per assignar una nota a la localitzacio especificada</string>
     <string name="monitoring_control_stop">Atura</string>

@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_8_1_t">"Promjene u 0.8.1 : "</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">"Promjene u 0.8.1 : "</string>
   <string name="asap">Što prije</string>
   <string name="save_route_as_gpx">Sačuvajte put kao GPX datoteku</string>
   <string name="route_roundabout">Kružni tok : idite %1$d izlaz i idite</string>
@@ -32,7 +31,7 @@
   <string name="select_index_file_to_download">Ništa nije pronađeno. Ako ne možete pronaći svoju regiju, možete ju sami napraviti (opširnije na http://osmand.net).</string>
   <string name="local_indexes_cat_tile">Mape van mreže (u sličicama)</string>
   <string name="local_indexes_cat_map">Mape van mreže (vektori)</string>
-  <string name="gpx_index_settings_descr">" (ubraja i GPX analizer)"</string>
+  
   <string name="index_settings_descr">Preuzmite, pogledajte detalje i uredite mape van mreže</string>
   <string name="map_online_plugin_is_not_installed">Omogući nadogradnju za izbor drugačijih izvora javnih mapa</string>
   <string name="map_online_data">Javne mape (u sličicama)</string>
@@ -97,7 +96,7 @@
     <string name="recording_default_name">Snimanje</string>
     <string name="av_control_stop">stani</string>
     <string name="av_control_start">pokreni</string>
-    <string name="osmand_distance_plugin_name">Mjerenje udaljenosti</string>
+    
     <string name="monitoring_control_stop">zaustavi</string>
     <string name="index_srtm_parts">dijelovi</string>
     <string name="download_roads_only_item">Samo ceste</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -102,7 +101,7 @@
 	<string name="map_widget_transparent">پوسته شفاف</string>
 	<string name="int_continuosly">مداوم</string>
 	<string name="map_widget_top_text">نام خیابان</string>
-	<string name="map_widget_map_select">منبع نقشه</string>
+	
 	<string name="map_widget_back_to_loc">موقعیت من</string>
 	<string name="map_widget_compass">قطب نما</string>
 	<string name="map_widget_top_stack">نوار وضعیت:</string>
@@ -553,8 +552,8 @@
     <string name="osmodroid_plugin_name">افزونه OsMoDroid</string>
 	<string name="tip_altitude_offset">نمایش ارتفاع- تصحیح مقدار جابجایی</string>
 	<string name="tip_altitude_offset_t">"\tبیشتر دستگاههای GPS مقدار ارتفاع را براساس سیستم مرجع WGS84 هذلولی نشان میدهند که تبدیل آن به سیستمهای مورد استفاده محلی نیازمند تصحیح موقعیت میباشد.\n\tیک مقدار تقریب بهتر به این سیستم محلی مرجع EGM96 میباشد. OsmAnd نیز از نمایش خودکار ارتفاع در سیستم EGM96 پشتیبانی میکند.\n\tبرای رسیدن به این منظور، فایل WW15MGH.DAC را براحتی از طریق مدیریت داده ها دانلود کنید (منبع اصلی http://earthinfo.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC میباشد). "</string>
-    <string name="route_descr_from_to">از: %1$s\nبه: %2$s</string>
-    <string name="route_descr_from_to_via">از: %1$s\nاز طریق: %2$s\nبه: %3$s</string>
+    
+    
     <string name="incremental_search_city">جستجوی یک به یک شهر</string>
     <string name="rendering_attr_showRoadMaps_name">فقط نقشه راهها</string>
     <string name="safe_mode_description">اجرای برنامه در حالت Safe mode (از آندروئید که کندتر میباشد به جای کد بومی استفاده میکند).</string>
@@ -568,7 +567,7 @@
     <string name="non_optimal_route_calculation">محاسبه مسیر غیر بهینه احتمالی در مسافتهای طولانی</string>
 	<string name="gps_not_available">لطفاً GPS را از طریق تنظیمات فعال کنید</string>
     <string name="map_widget_monitoring_services">خدمات ثبت و ضبط</string>
-	<string name="navigate_to">مسیرها</string>
+	
     <string name="show_warnings_descr">تنظیم هشدارهای ترافیکی (حداکثر سرعت، ایستگاههای بازرسی، سرعتگیرها)، هشدار دوربینهای کنترل سرعت و اطلاعات لاین ها</string>
 	<string name="use_compass_navigation_descr">از قطب نما استفاده کن وگرنه جهت شناسایی نمیشود</string>
 	<string name="avoid_motorway">اجتناب از اتوبانها</string>

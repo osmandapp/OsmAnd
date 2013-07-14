@@ -187,7 +187,7 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 				}
 			};
 
-			adapter.item(map.getString(R.string.navigate_to)).listen(listener).reg();
+			adapter.item(map.getString(R.string.get_directions)).listen(listener).reg();
 
 		}
 	}

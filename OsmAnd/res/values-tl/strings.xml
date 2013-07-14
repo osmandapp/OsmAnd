@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 <string name="save_current_track_widget">i-save</string>
 	<string name="map_widget_gps_info">Impormasyon ng GPS</string>
     <string name="access_arrival_time">Oras ng Pagdating</string>

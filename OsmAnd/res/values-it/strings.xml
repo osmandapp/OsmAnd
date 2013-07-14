@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -15,7 +14,7 @@
   <string name="local_openstreetmap_uploading">Caricamento…</string>
   <string name="local_openstreetmap_were_uploaded">{0} PDI/gli errori sono stati caricati</string>
   <string name="local_openstreetmap_uploadall">Carica tutti</string>
-  <string name="local_openstreetmap_items">" "</string>
+  
   <string name="local_openstreetmap_show">Visualizza nella mappa</string>
   <string name="local_openstreetmap_upload">Carica in OSM la modifica</string>
   <string name="local_openstreetmap_delete">Elimina la modifica</string>
@@ -43,8 +42,8 @@
   <string name="profile_settings">Impostazioni specifiche del profilo</string>
   <string name="settings_preset">Profilo d\'uso</string>
   <string name="settings_preset_descr">Seleziona un profilo d\'uso con impostazioni per la mappa e la navigazione personalizzate.</string>
-  <string name="monitor_preferences">Tracking</string>
-  <string name="monitor_preferences_descr">Specifica le impostazioni di tracking</string>
+  
+  
   <string name="routing_settings">Navigazione</string>
   <string name="routing_settings_descr">Specifica le opzioni di navigazione</string>
   <string name="global_settings">Impostazioni globali</string>
@@ -60,18 +59,11 @@
   <string name="osmand_service">Servizio in background</string>
   <string name="osmand_service_descr">Usato per eseguire OsmAnd con lo schermo spento</string>
   <string name="tip_rotation_switching">Orientamento della mappa</string>
-  <string name="tip_rotation_switching_t">Suggerimento_interruttore_rotazione_t</string>
+  
   <string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. Ne puoi scaricare una in \'Impostazioni (Dati offline), o passare alle mappe online.</string>
   <string name="binary_map_download_success">Download completato.\n\t\n\tPer usarle attivare o usa \'Impostazioni\' -&gt; \'Configurazione delle mappe\' -&gt; \'Mappe vettoriali offline\'.</string>
   <string name="tip_day_night_mode">Modo giorno/notte</string>
-  <string name="tip_day_night_mode_t">\tL\'aspetto della mappa può essere cambiato per alcune mappe vettoriali tra giorno (più luminoso) e notte (più scuro).
-\n\tI colori scuri sono più sicuri per la guida notturna.
-\n\tPuoi impostare una regola per il cambio giorno/notte in \'Impostazioni\' -&gt; \'Aspetto delle mappe\' -&gt; \'Modo giorno/notte\'.
-\n\tLe scelte sono:
-\n\t\'Alba/Tramonto\' - automatico, controllato dalla posizione del sole (predefinito)
-\n\t\'Giorno\' - usa sempre la modalità giorno
-\n\t\'Notte\' - usa sempre la modalità notte
-\n\t\'Sensore luminosità\' - l\'aspetto della mappa è controllato dal sensore del tuo dispositivo (solo se è presente)</string>
+  
   <string name="tip_osm_improve">Migliora i dati OSM</string>
   <string name="tip_osm_improve_t">\tOsmAnd usa mappe basate sui dati di Openstreetmap.org (OSM) e -oltre a visualizzare e navigare le mappe- può essere usato per migliorare la qualità dei dati OSM. Puoi creare e caricare facilmente nuovi PDI o segnalazioni di errori con solo un paio di clic!
 \n\tPer questo devi prima fornire le credenziali d\'accesso ad OSM in \'Impostazioni\' -&gt; \'Impostazioni generali\' -&gt; \'Editing OSM\'.
@@ -91,7 +83,7 @@
 \n\t- Informazioni sull\'altitudine
 \n\t- Nuove lingue (vietnamita, polacco)
 \n\t- Altre piccole funzionalità "</string>
-  <string name="use_transparent_map_theme_descr">Usa controlli trasparenti</string>
+  
   <string name="use_transparent_map_theme">Tema trasparente</string>
   <string name="native_library_not_supported">La libreria nativa non è supportata da questo dispositivo.</string>
   <string name="init_native_library">Inizializzazione libreria nativa…</string>
@@ -201,7 +193,7 @@
   <string name="local_index_address_data">Dati indirizzi</string>
   <string name="local_index_transport_data">Dati trasporti</string>
   <string name="local_index_map_data">Dati mappa</string>
-  <string name="local_index_items">" "</string>
+  
   <string name="local_indexes_cat_backup">Disattivato</string>
   <string name="local_indexes_cat_tts">Dati voce (TTS)</string>
   <string name="local_indexes_cat_voice">Dati voce (registrata)</string>
@@ -281,9 +273,9 @@
   <string name="preferred_locale_descr">Seleziona lingua interfaccia</string>
   <string name="preferred_locale">Lingua interfaccia</string>
   <string name="tip_map_switch">Fonte mappa</string>
-  <string name="tip_map_switch_t">suggerimento_cambia_mappa_t</string>
+  
   <string name="tip_app_mode">Profilo utente</string>
-  <string name="tip_app_mode_t">suggerimento_modo_app_t</string>
+  
   <string name="tip_navigation">Navigazione</string>
   <string name="tip_navigation_t">\tPrima di iniziare la navigazione devi selezionare una destinazione. Dopo averla selezionata seleziona \'Menu\' -&gt; \'Percorsi\' sulla mappa e seleziona il tipo di navigazione.</string>
   <string name="tip_search">Ricerca</string>
@@ -484,7 +476,7 @@
   <string name="voice_data_not_supported">Versione di dati vocali non supportata</string>
   <string name="voice_data_corrupted">I dati voce specificati sono corrotti</string>
   <string name="voice_data_unavailable">Dati voce non disponibili</string>
-  <string name="stop_routing">Ferma la navigazione.</string>
+  
   <string name="sd_unmounted">La scheda SD non accessibile.
 \nImpossibile visualizzare le mappe e cercare alcunchè.</string>
   <string name="sd_mounted_ro">Scheda SD accessibile in sola lettura.
@@ -561,7 +553,7 @@
   <string name="address">Indirizzo</string>
   <string name="download_index_success">Download completato</string>
   <string name="error_io_error">Errore di I/O</string>
-  <string name="downloading_file">Ricezione file…</string>
+  
   <string name="downloading">In ricezione…</string>
   <string name="downloading_list_indexes">Ricezione elenco regioni disponibili…</string>
   <string name="list_index_files_was_not_loaded">I file indice non sono stati trovati su osmand.net.</string>
@@ -642,7 +634,7 @@
   <string name="ChooseCountry">Scegli la nazione</string>
   <string name="position_on_map_descr">Scegli la localizzazione del marcatore della posizione sulla mappa</string>
   <string name="position_on_map">Marcatore della posizione</string>
-  <string name="show_view_angle_descr">Visualizza aspetto della vista basato sulla bussola</string>
+  
   <string name="show_view_angle">Visualizza direzione di osservazione</string>
   <string name="map_view_3d_descr">Abilita la vista 3D della mappa</string>
   <string name="map_view_3d">Vista mappa 3D</string>
@@ -760,7 +752,7 @@
   <string name="unknown_from_location">La posizione di partenza non è ancora stata determinata</string>
   <string name="confirm_interrupt_download">Vuoi interrompere il download dei file?</string>
   <string name="basemap_was_selected_to_download">La mappa di base è richiesta per il funzionamento corretto dell\'applicazione ed è stata selezionata per il download.</string>
-  <string name="gpx_index_settings_descr">" (include l\'analizzatore GPX)"</string>
+  
   <string name="map_online_plugin_is_not_installed">Abilita il plugin per le mappe online per visualizzare altre sorgenti</string>
   <string name="map_online_data">Mappe online (tasselli)</string>
   <string name="map_online_data_descr">Usa le mappe online (scarica e archivia i tasselli sulla scheda SD)</string>
@@ -782,11 +774,11 @@
   <string name="tip_recent_changes_0_8_0_t">"Novità della v. 0.8.0:\n\t- *Funzionalità a plugin*\n\t- Molte delle funzionalità sono raggruppate per caratteristiche e possono essere abilitate/disabilitate nel Plugin Manager. Si possono abilitare sorgenti di mappe a tasselli (online o in cache), impostazioni per il tracking e molte altre funzionalità nuove o preesistenti.\n\t- *Nuovo supporto alle mappe offline*\n\t- Devi scaricare dati offline completamente nuovi (i vecchi non saranno più supportati)\n\t- *Calcolo dei percorsi offline*\n\t- Il calcolo dei percorsi offline diventa più solido\n\t- *Miglioramento usabilità e UI*\n\t- Miglioramenti in svariate aree "</string>
   <string name="osm_editing_plugin_description">Visualizza le impostazioni necessarie per contributi a OSM come la raccolta/modifica dei PDI di OSM, aprire/commentare errori di OSM e inviare file GPX registrati (richiede le credenziali di OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
-  <string name="simulate_route_progression_manually">Simula l\'avanzamento del tragitto manualmente</string>
+  
   <string name="play_commands_of_currently_selected_voice">Esegui i comandi della voce attualmente selezionata</string>
   <string name="debugging_and_development">Sviluppo di OsmAnd</string>
   <string name="native_rendering">Rendering nativo</string>
-  <string name="animate_routing">Navigazione animata</string>
+  
   <string name="test_voice_prompts">Prova i comandi vocali</string>
   <string name="tip_recent_changes_0_7_2_t">"Novità della v. 0.7.2:\n\t- Disegno nativo per tutti i dispositivi\n\t- Creazione offline dei PDI\n\t- Accessibilità\n\t- Svariate correzioni di errori "</string>
   <string name="send_files_to_osm">Inviare i file GPX a OSM?</string>
@@ -796,7 +788,7 @@
   <string name="validate_gpx_upload_name_pwd">Imposta utente e password di OSM per caricare file GPX.</string>
   <string name="default_buttons_support">Sostieni</string>
   <string name="support_new_features">Sostieni nuove caratteristiche</string>
-  <string name="show_ruler_level_descr">Visualizza la scala grafica</string>
+  
   <string name="show_ruler_level">Visualizza la scala grafica</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Torna alla posizione</string>
@@ -943,9 +935,9 @@
   <string name="use_compass_navigation">Usa la bussola</string>
   <string name="route_updated_loc_found">Il percorso verrà calcolato quando sarà individuata la posizione</string>
   <string name="continue_follow_previous_route_auto">La precedente navigazione non è stata completata. Continuare a seguirla? (%1$s secondi)</string>
-  <string name="show_cameras_descr">Visualizza gli autovelox (potrebbe essere vietato in qualche nazione)</string>
-  <string name="show_traffic_warnings_descr">Visualizza limiti di velocità descr</string>
-  <string name="avoid_toll_roads_descr">Evita strade a pedaggio per il calcolo dell\'itinerario</string>
+  
+  
+  
   <string name="show_cameras">Visualizza autovelox</string>
   <string name="show_traffic_warnings">Visualizza limiti di velocità</string>
   <string name="avoid_toll_roads">Evita strade a pedaggio</string>
@@ -956,7 +948,7 @@
 \n* Pulsante blocco schermo con servizi di registrazione\n* Migliorate la scrittura in arabo e kannada e lingue RTL "</string>
   <string name="map_widget_top_text">Nome della strada</string>
   <string name="map_widget_config">Configurazione</string>
-  <string name="map_widget_map_select">Selezione della mappa</string>
+  
   <string name="map_widget_back_to_loc">Dove sono</string>
   <string name="map_widget_lock_screen">Blocca lo schermo</string>
   <string name="map_widget_compass">Bussola</string>
@@ -1116,8 +1108,8 @@
     <string name="tip_recent_changes_1_0_0_t">"Novità della v. 1.0.0:\n\t*Migliorata la navigazione: più veloce e precisa, fino a 250 km\n\t*Aggiunte le mappe solo-strade\n\t*La mappa non perde il posizionamento dopo le interruzioni\n\t*Abilitazione del servizio in background durante la navigazione "</string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="route_descr_current_location">Posizione corrente</string>
-    <string name="route_descr_from_to">Da %1$s A %2$s</string>
-    <string name="route_descr_from_to_via">Da: %1$s↵\nper: %2$s↵\na: %3$s</string>
+    
+    
     <string name="no_buildings_found">Nessun edificio trovato.</string>
     <string name="search_villages_and_postcodes">Ricerca comuni/codice postale</string>
 	<string name="rendering_attr_showRoadMaps_description">Seleziona per visualizzare mappe solo strade:</string>
@@ -1144,17 +1136,17 @@
     <string name="index_srtm_ele">Linee di livello</string>
     <string name="audionotes_plugin_description">Prendi note audio/video durante il viaggio</string>
     <string name="audionotes_plugin_name">Plugin appunti audio</string>
-    <string name="osmand_distance_plugin_description">Misura una distanza tra due o più punti. Aggiungi i punti con un breve clic e rimuovili con una pressione prolungata.</string>
-	<string name="osmand_distance_plugin_name">Calcolatore distanza</string>
+    
+	
 <string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione...\" per assegnare una nota alla posizione specificata</string>
     <string name="monitoring_control_stop">ferma</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin Osmand per le curve di livello offline</string>
     <string name="osmand_srtm_long_description_1000_chars">Questo plugin fornisce le linee di livello che possono essere visualizzate nelle mappe offline di OsmAnd. I dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), uno strumento misuratore di terra a bordo, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).</string>
-    <string name="use_clear_distance_measurement">Fai clic ancora per eliminare i punti di misurazione.</string>
-    <string name="use_distance_measurement">Tocca per fare un punto, premi e tieni premuto per eliminare i punti precedenti, fai clic sul widget di misurazione per uscire.</string>
+    
+    
     <string name="map_widget_distancemeasurement">Misurazione della distanza</string>
     <string name="map_widget_audionotes">Note audio</string>
-    <string name="srtm_plugin_attribution">ASTER è un prodotto di METI e NASA</string>
+    
     <string name="av_def_action_video">Registra video</string>
     <string name="av_def_action_audio">Registra audio</string>
     <string name="av_widget_action_descr">Seleziona l\'azione predefinita del widget</string>

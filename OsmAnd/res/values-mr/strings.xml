@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
   <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, २५५ - अपारदर्शक)</string>
   <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
@@ -19,7 +18,7 @@
   <string name="validate_gpx_upload_name_pwd">जीपीएक्स फाइल्स अपलोड करण्यासाठी ओएसएम युजरनेम आणि पासवर्ड सांगा.</string>
   <string name="default_buttons_support">सहाय्य</string>
   <string name="support_new_features">नविन वैशिठ्यासाठी सहाय्य करा</string>
-  <string name="show_ruler_level_descr">नकाशावर पट्टी दाखवा</string>
+  
   <string name="show_ruler_level">पट्टी दाखवा</string>
   <string name="info_button">माहिती</string>
   <string name="help">मदत</string>
@@ -84,7 +83,7 @@
   <string name="index_name_asia">आशिया</string>
   <string name="index_name_oceania">ओशेनिया</string>
   <string name="amenity_type_wikiosm">विकिपेडिया (ऑफलाइन)</string>
-  <string name="monitor_preferences">ट्रॅकिंग</string>
+  
   <string name="routing_settings">दिशादर्शन</string>
   <string name="routing_settings_descr">दिशादर्शनाचे पर्याय ठरवा</string>
   <string name="index_settings">ऑफलाइन डेटा (डाउनलोड)</string>
@@ -201,7 +200,7 @@
   <string name="menu_mute_on">आवाज बंद आहे</string>
   <string name="voice_provider_descr">दिशादशर्नासाठी आवाज मार्गदर्शन निवडा</string>
   <string name="voice_provider">आवाज मार्गदर्शन</string>
-  <string name="stop_routing">मार्गदर्शन थांबवा.</string>
+  
   <string name="route_tr">उजवीकडे वळा आणि जा</string>
   <string name="route_tshr">पटकन उजवीकडे वळा आणि जा</string>
   <string name="route_tslr">हलके उजवीकडे वळा आणि जा</string>
@@ -242,7 +241,7 @@
   <string name="download_question">डाउनलोड {0} - {1} ?</string>
   <string name="address">पत्ता</string>
   <string name="download_index_success">डाउनलोड यशस्वी</string>
-  <string name="downloading_file">फाइल डाउनलोड करत आहे…</string>
+  
   <string name="downloading">डाउनलोड करत आहे…</string>
   <string name="downloading_list_indexes">उपलब्ध प्रदेशांची यादी डाउनलोड करत आहे…</string>
   <string name="list_index_files_was_not_loaded">प्रदेशांची यादी osmand.net वरून काढू शकलो नाही.</string>
@@ -393,8 +392,8 @@
     <string name="monitoring_control_start">जिपिएक्स</string>
     <string name="route_descr_lat_lon">अक्षांश %1$.3f, रेखांश %2$.3f</string>
     <string name="route_descr_current_location">सध्याची स्थिती</string>
-    <string name="route_descr_from_to">%1$s पासून \n%2$s पर्यंत</string>
-    <string name="route_descr_from_to_via">%1$s पासून\n%2$s मार्गे\n%3$s पर्यंत</string>
+    
+    
     <string name="no_buildings_found">इमारत सापडली नाही.</string>
     <string name="map_widget_show_destination_arrow">इच्छित स्थळाची दिशा दाखवा</string>
     <string name="no_route">मार्ग नाही</string>
@@ -402,7 +401,7 @@
     <string name="position_on_map">स्थिती दर्षक</string>
 	<string name="position_on_map_descr">स्थिती दर्षकाची नकाशावर जागा निवडा</string>
 	<string name="map_widget_top_text">रस्त्याचे नाव</string>
-	<string name="map_widget_map_select">नकाशाचा स्त्रोत</string>
+	
 	<string name="map_widget_back_to_loc">मी कुठे आहे</string>
 	<string name="map_widget_compass">कंपास</string>
 	<string name="map_widget_parking">वाहनतळ</string>

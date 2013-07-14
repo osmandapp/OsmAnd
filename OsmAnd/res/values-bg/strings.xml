@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_8_4_t">Промени в 0.8.4:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_4_t">Промени в 0.8.4:
 	\n\t* Коригиране на неточности в програмата
 	\n\t* Картата вече не загубва позиция при прекъсване
 	\n\t* Разрешаване на режим sleep по време на навигация
@@ -50,7 +49,7 @@
 	<string name="map_widget_day_night">Дневен/нощен режим</string>
 	<string name="map_widget_renderer">Стил на картата</string>
 	<string name="position_on_map_descr">Разположение на текущата позиция върху картата</string>
-	<string name="map_widget_map_select">Източник на карти</string>
+	
 	<string name="map_widget_mini_route">Малка карта за маршрут</string>
 	<string name="rendering_attr_appMode_description">Оптимизация на картата за</string>
 	<string name="rendering_attr_hmRendered_description">Увеличаване на подробностите по картата</string>

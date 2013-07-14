@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
      <string name="tip_select_destination_point">目的地点を選択</string>
      <string name="tip_select_destination_point_t">
 \tNEW VERSION, PLEASE ADAPT TRANSLATION: \tYou get directions to a place in the map directly (context menu, then \'Directions\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
@@ -12,8 +11,7 @@
 することができます</string>
 
      <string name="installing_new_resources">新しいデータを解凍中…</string>
-     <string
-name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
+     <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
      <string name="tts_language_not_supported">選択された言語は
@@ -27,26 +25,17 @@ name="internet_connection_required_for_online_route">オンライン経路案内
      <string name="gpx_option_destination_point">現在の目的地点を使用</string>
      <string name="gpx_option_from_start_point">トラック全体をパス</string>
      <string name="tip_rotation_switching">マップ回転</string>
-     <string name="tip_rotation_switching_t">\tマップ表示の回転有無、あるいはその方法を
-選択できます\'設定\' ->
-\'設定全般\' -> \'マップ回転\'。
-     \n選択内容:
-
-     \n\t\'回転しない\' - マップは回転しません。常に北が上
-     \n\t\'移動方向へ\' - あなたの向かっている方向に合わせます
-     \n\t\'コンパスへ\' - マップは読み取ったコンパス装置で合わせます
-     \n\tヒント: マップビューでコンパスの針をタップするだけで、コンパスとそれ以外のあなたが設定で選んだ回転
-方法とを素早く切り替えられます。</string>
+     
 
      <string name="switch_to_raster_map_to_see">現在の位置は
 あなたのオフラインベクターマップではカバーされていません、
-追加でベクターマップをダウンロードする場合、メニュー(ビュー定義 -> マップソース…)
+追加でベクターマップをダウンロードする場合、メニュー(ビュー定義 -&gt; マップソース…)
 でマップソースを切り替えられます。</string>
      <string name="switch_to_vector_map_to_see">マップを見るには
-メニュー(ビュー定義 -> マップソース… -> オフラインベクターマップ)
+メニュー(ビュー定義 -&gt; マップソース… -&gt; オフラインベクターマップ)
 でオフラインベクターマップに切り替えられます。</string>
      <string name="binary_map_download_success">成功。
-メニュー(ビュー定義 -> マップソース… -> オフラインベクターマップ)で
+メニュー(ビュー定義 -&gt; マップソース… -&gt; オフラインベクターマップ)で
 オフラインベクターマップに切り替えられます。</string>
      <string name="choose_audio_stream">音声案内ストリーム</string>
      <string name="choose_audio_stream_descr">音声案内を再生するにはチャンネルを
@@ -80,9 +69,9 @@ name="internet_connection_required_for_online_route">オンライン経路案内
      <string name="tip_update_index_t">\t最新のマップデータを持っていることは
 とても重要です。OsmAnd は利用できるオフラインデータの更新をチェックできる
 ダウンロードマネージャを提供しています。
-     \n\t更新をチェックするにはこちらへ。\'メインメニュー\' -> \'設定\'
--> \'オフラインデータ\' -> \'オフラインデータのダウンロード\'。
-地域リストが参照されると、オプション(\'メニュー\' ->
+     \n\t更新をチェックするにはこちらへ。\'メインメニュー\' -&gt; \'設定\'
+-&gt; \'オフラインデータ\' -&gt; \'オフラインデータのダウンロード\'。
+地域リストが参照されると、オプション(\'メニュー\' -&gt;
 \'ダウンロード済フィルター\')からあなたの装置上にすでにある
 データだけの更新を通知するように選択できます。
      \n\t更新の利用可否は次の色で表わされます:
@@ -94,20 +83,11 @@ name="internet_connection_required_for_online_route">オンライン経路案内
      <string name="level_to_switch_vector_raster">最小ベクターズームレベル</string>
 
      <string name="tip_day_night_mode">日中/夜間 モード</string>
-     <string name="tip_day_night_mode_t">\tマップの外観を
-ベクターマップによって日中(明るく)と夜間(暗く)で変えることができます。
-     \n\t夜間用の色は夜間の運転用に安全です。
-     \n\t \'メインメニュー\' -> \'設定\' -> \'マップ外観\' ->\'日中/夜間 モード\'で
-日中/夜間 切替用のポリシーをセットできます。
-     \n\t選択肢:
-     \n\t\'日の出/日の入\' - 自動モード、太陽の位置で制御(既定値)
-     \n\t\'日中\' - 常に日中モードを使用
-     \n\t\'夜間\' - 常に夜間モードを使用
-     \n\t\'ライトセンサー\' - マップ外観はあなたの端末装置のライトセンサーで制御(装備されていれば)</string>
+     
      <string name="tip_location_sharing">位置をシェア</string>
      <string name="tip_location_sharing_t">\t旅行中の興味深い場所の位置を家族や友人とシェアできます。
      \n\t位置をシェアする場合は:
-     \n\t \'マップコンテキストメニュー\' -> \'位置をシェア\' メニューを使用します。
+     \n\t \'マップコンテキストメニュー\' -&gt; \'位置をシェア\' メニューを使用します。
      \n\tそしてウェイを選択してあなたの位置をシェアしてください。次の方法があります:
 Eメール, SMS(テキスト), あるいはクリップボードに位置座標をコピー。</string>
 
@@ -115,18 +95,18 @@ Eメール, SMS(テキスト), あるいはクリップボードに位置座標�
      <string name="tip_favorites_t">\tよく使われる地点はお気に入りに保存できます。
      \n\t地点をお気に入りに保存するにはマップコンテキストメニューに移動して、
 \'Add to favorites\'オプションを選択してその名前を付けてください。
-お気に入り保存後は、\'メインメニュー\' -> \'お気に入り\'経由で使うことができます。
+お気に入り保存後は、\'メインメニュー\' -&gt; \'お気に入り\'経由で使うことができます。
      \n\t\'お気に入り\'メニュー内でお気に入りを長押しすると
 ナビゲート先のオプションが現れ、編集や削除を行えます。
      \n\tマップ上に直接全てのお気に入り地点を表示するには、
-\'マップコンテキストメニュー\' ->\'ビュー定義\'内の\'お気に入り\'レイヤーを有効化してください。</string>
+\'マップコンテキストメニュー\' -&gt;\'ビュー定義\'内の\'お気に入り\'レイヤーを有効化してください。</string>
 
      <string name="tip_osm_improve">OSMデータ改善</string>
      <string name="tip_osm_improve_t">\tOsmAndはOpenstreetmap.org (OSM)のマップを利用しています。
 -マップ閲覧や経路案内以外にも- OSMデータ品質の向上に使うことができます。
 新しいPOIやOSMバグレポートを数クリックで簡単に作成してアップロードすることができます！
 \n\tこのためには最初にOSMログイン情報を
-\'メインメニュー\' -> \'設定\' -> \'OSM\'で入力する必要があります。
+\'メインメニュー\' -&gt; \'設定\' -&gt; \'OSM\'で入力する必要があります。
 \n\t新しいPOIを登録するにはマップコンテキストメニュー内の
 \'POIを作成\' オプションを使ってください。
 \'POIを作成\'ダイアログ内の新しいPOIについての情報を入力して先に進み
@@ -149,23 +129,15 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="preferred_locale">表示言語</string>
 
      <string name="tip_map_switch">マップソース</string>
-     <string name="tip_map_switch_t">\t表示中のマップソース及びレイヤーを変更する
-いちばん早い方法はマップメニューの\'メニュー\' -> \'ビュー定義\'を押すことです。
-\n\t\'マップソース…\'の下で、プリロード済オフラインベクターマップ、
-定義済(オンライン)タイルソース、PC上のOsmAndMapCreatorなどを使って手動作成されたマップ
-などを選択することができます。
-\n\tOsmAndはカスタムソースもサポートします。</string>
+     
 
      <string name="tip_app_mode">アプリケーションモード</string>
-     <string name="tip_app_mode_t">\tOsmAnd は用途に合わせて異なる
-アプリケーションプロファイルをサポートしています。
-\n\t\'メニュー\' -> \'設定\' -> \'アプリケーションモード\'
-で、またはルート作成時にプロファイルを変更できます。</string>
+     
 
      <string name="tip_navigation">ナビゲーション</string>
      <string name="tip_navigation_t">\tナビゲーション(経路案内)を始める前に
 目的地点をまず選ぶ必要があります。その後でマップ上の
-\'メニュー\' -> \'方向\' を押してナビゲーションタイプを選んでください。</string>
+\'メニュー\' -&gt; \'方向\' を押してナビゲーションタイプを選んでください。</string>
 
      <string name="tip_search">検索</string>
      <string name="tip_search_t">\t場所をマップ上で直接、住所で、位置で、POIとして、
@@ -253,7 +225,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="version_index_is_not_supported">索引 \'\'{0}\'\' のバージョンは
 サポートされていません</string>
 
-     <string name="use_osmand_routing_service">OsmAnd 経路案内 >20km</string>
+     <string name="use_osmand_routing_service">OsmAnd 経路案内 &gt;20km</string>
      <string name="use_osmand_routing_service_descr">長距離のオフライン経路案内に
 OsmAndを使用(実験版)</string>
      <string name="osmand_routing_experimental">OsmAndオフライン経路案内は実験的な機能であり
@@ -318,8 +290,7 @@ MB)をダウンロードしますか?</string>
 {1} 件のタイル({2} MB)をダウンロード</string>
      <string name="context_menu_item_download_map">マップをダウンロード</string>
      <string name="select_max_zoom_preload_area">プリロードする最大ズームを選択</string>
-     <string
-name="maps_could_not_be_downloaded">このマップはダウンロードできませんでした</string>
+     <string name="maps_could_not_be_downloaded">このマップはダウンロードできませんでした</string>
 
      <string name="continuous_rendering">連続レンダリング</string>
      <string name="continuous_rendering_descr">一括画像の代わりに連続レンダリングを表示</string>
@@ -392,7 +363,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="layer_poi">POI…</string>
      <string name="layer_map">マップソース…</string>
      <string name="menu_layers">ビュー定義</string>
-     <string name="continue_follow_previous_route">以前の経路案内が終わっていません。続けますか？</string>
+     
      <string name="context_menu_item_search_poi">POIを検索</string>
      <string name="context_menu_item_show_route">ルート開始位置</string>
      <string name="use_trackball_descr">トラックボールを使用してマップを動かす</string>
@@ -429,7 +400,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="voice_data_not_supported">サポートしていない音声データのバージョン</string>
      <string name="voice_data_corrupted">指定した音声データは破損しています</string>
      <string name="voice_data_unavailable">選択した音声データは利用できません</string>
-     <string name="stop_routing">経路案内を停止</string>
+     
      <string name="sd_unmounted">SDカードにアクセスできません。\nマップを参照したり何かを探したりすることはできません。</string>
      <string name="sd_mounted_ro">SDカードは読み取り専用です。
 \nプリロードマップだけを見ることができ、インターネットからのダウンロードはできません。</string>
@@ -518,7 +489,7 @@ POIの更新は利用できません</string>
      <string name="address">住所</string>
      <string name="download_index_success">ダウンロード完了</string>
      <string name="error_io_error">I/O エラー発生</string>
-     <string name="downloading_file">ファイルをダウンロード中…</string>
+     
      <string name="downloading">ダウンロード中…</string>
      <string name="downloading_list_indexes">利用可能な地域のリストをダウンロード中</string>
      <string name="list_index_files_was_not_loaded">地域のリストはosmand.net 
@@ -531,8 +502,7 @@ POIの更新は利用できません</string>
      <string name="update_existing">置換</string>
      <string name="only_show">表示のみ</string>
      <string name="follow">フォロー</string>
-     <string
-name="recalculate_route_to_your_location">現在地に従ってルートを再計算中</string>
+     <string name="recalculate_route_to_your_location">現在地に従ってルートを再計算中</string>
      <string name="mark_final_location_first">最初に目的地を選んでください</string>
      <string name="get_directions">方向</string>
  <string name="show_gps_status">GPSステータスを表示</string>
@@ -574,7 +544,7 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="user_password_descr">あなたのOSM パスワード</string>
  <string name="user_password">OSM パスワード</string>
  <string name="osm_settings_descr">OSM登録に必要なOpenstreetmap.org (OSM)設定を指定</string>
- <string name="monitor_preferences_descr">トラッキングの設定を指定</string>
+ 
  <string name="data_settings_descr">言語、データのダウンロード/リロードを指定</string>
  <string name="data_settings">データ</string>
  <string name="map_preferences_descr">マップ設定を指定: マップソース、回転、
@@ -590,7 +560,7 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="save_current_track">現在のトラックを保存</string>
  <string name="save_track_interval_descr">トラックの位置取得間隔を選択</string>
  <string name="save_track_interval">トラック間隔</string>
- <string name="monitor_preferences">トラッキング</string>
+ 
  <string name="save_track_to_gpx_descrp">トラックは日ごとにグループ化されたトラック用ディレクトリに
  保存されます</string>
  <string name="save_track_to_gpx">トラックをGPXにログ</string>
@@ -613,7 +583,7 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="ChooseCountry">国を選ぶ</string>
  <string name="position_on_map_descr">マップ上の位置マーカの位置を選ぶ</string>
  <string name="position_on_map">位置マーカ</string>
- <string name="show_view_angle_descr">コンパスに従って視線方向を表示</string>
+ 
  <string name="show_view_angle">視線方向を表示</string>
  <string name="map_view_3d_descr">マップの3Dビューを有効化</string>
  <string name="map_view_3d">マップビュー3D</string>
@@ -631,7 +601,7 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="show_gps_coordinates_text">マップ上にGPS座標を表示</string>
  <string name="use_internet_to_download_tile">見つからないマップタイルのダウンロードに
 インターネットを使用</string>
- <string name="app_name">OsmAnd</string>
+ 
  <string name="app_description">ナビゲーションアプリケーション</string>
 
 <string name="exit_Button">戻る</string>

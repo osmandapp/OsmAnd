@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
@@ -72,8 +71,8 @@
   <string name="profile_settings">Opciones específicas por perfil</string>
   <string name="settings_preset">Perfil de usuario</string>
   <string name="settings_preset_descr">Selecciona un perfil de uso con ajustes de mapa y navegación personalizados.</string>
-  <string name="monitor_preferences">Seguimiento</string>
-  <string name="monitor_preferences_descr">Especifica los parámetros de seguimiento</string>
+  
+  
   <string name="routing_settings">Navegación</string>
   <string name="routing_settings_descr">Especifica opciones de navegación</string>
   <string name="global_settings">Opciones Globales</string>
@@ -89,11 +88,11 @@
   <string name="osmand_service">Funcionalidad de bajo consumo</string>
   <string name="osmand_service_descr">Para ejecutar OsmAnd mientras la pantalla está apagada</string>
   <string name="tip_rotation_switching">Rotación del mapa</string>
-  <string name="tip_rotation_switching_t">\tPuedes elegir cómo se rota el mapa en \'Opciones\' -&gt; \'Apariencia del mapa\' -&gt; \'Rotación del mapa\'. \n\tLas opciones son: \n\t\- \'No rotar\': no se girará el mapa. El Norte estará siempre arriba \n\t\- \'En la dirección del movimiento\': el mapa estará continuamente alineado con la dirección y sentido de su movimiento \n\t\- \'A la brújula\': el mapa estará continuamente alineado con la lectura de la brújula del dispositivo \n\tNota: Para cambiar rápidamente entre rotación por brújula y la seleccionada en las opciones, basta con pulsar sobre la aguja de la brújula en el mapa.</string>
+  
   <string name="switch_to_raster_map_to_see">No hay mapa vectorial descargado para esta localización. \n\t\n\tPuedes descargarlo en \'Opciones\' -&gt; \'Descarga de datos\', o pasar a mapas en línea vía \'Opciones\' -&gt; \'Mapas\'.</string>
   <string name="binary_map_download_success">Descarga correcta.\n\t\n\tPara usarla, activa \'Opciones\' -&gt; \'Configuración de mapas\' -&gt; \'Mapas descargados\'.</string>
   <string name="tip_day_night_mode">Modo Día/Noche</string>
-  <string name="tip_day_night_mode_t">\tLa apariencia del mapa se puede cambiar, para algunos mapas vectoriales, entre Día (más brillante) y Noche (más oscuro). \n\tLos colores Noche son más seguros para la conducción nocturna. \n\tPuedes definir la política para cambiar entre Día y Noche en \'Opciones\' -&gt; \'Apariencia del mapa\' -&gt;\'Modo Día/Noche\'. \n\tLas opciones son: \n\t\- \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto) \n\t\- \'Día\': siempre usa el modo Día \n\t\- \'Noche\': siempre usa el modo Noche \n\t\- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si lo tiene)</string>
+  
   <string name="tip_osm_improve">Mejora de los datos OSM</string>
   <string name="tip_osm_improve_t">\tOsmAnd usa mapas basados en datos de Openstreetmap.org (OSM) y, además de para ver mapas y navegar, se puede utilizar para mejorar la calidad de los datos OSM. Puedes crear y enviar fácilmente nuevos PDI o informes de fallos de OSM tan sólo con unos pocos clicks. \n\tPara ello necesitas primero proporcionar tu información de conexión OSM en \'Opciones\' -&gt; \'Opciones Generales\' -&gt; \'Edición OSM\'. \n\tPara añadir un nuevo PDI usa la opción \'Crear PDI\' en el menú contextual del mapa. Introduce la información sobre el nuevo PDI en el formulario \'Crear PDI\' y por último envíala. \n\tLos errores en los mapas pueden ser notificados inmediatamente mediante fallos OSM, y la comunidad OSM puede resolver el problema más rápidamente. \n\tPara añadir un fallo OSM usa la opción \'Abrir fallo OSM\' en el menú contextual del mapa. Luego escribe la descripción detallada del problema y por último envíala pulsando el botón \'Añadir\'. \n\tNecesitas conexión a Internet para enviar tus contribuciones a PDIs y fallos OSM.</string>
   <string name="download_files_not_enough_space">No hay suficente espacio para descargar %1$s MB (disponible: %2$s).</string>
@@ -102,7 +101,7 @@
   <string name="tip_select_destination_point_t">"\tPuedes escoger el destino directamente en el mapa (menú contextual y luego \'Fijar como destino\'), en las búsquedas, o mediante una pulsación larga en tu \'Lista de Puntos Favoritos\'.
 \n\tEl destino está marcado en el mapa como un disco naranja y OsmAnd muestra la distancia al mismo y la dirección a seguir (triángulo naranja). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Cambios en 0.6.9 : \n\t- Mejorado el dibujado de mapas sin conexión \n\t- Dibujado nativo rápido - mira en las funcionalidades experimentales (puede no funcionar en algunos dispositivos) \n\t- Numerosos cambios en el estilo visual \n\t- Información de altitud \n\t- Nuevas traducciones (Vietnamita, Polaco) \n\t- Otras pequeñas funcionalidades "</string>
-  <string name="use_transparent_map_theme_descr">Usa controles de mapa transparentes</string>
+  
   <string name="use_transparent_map_theme">Tema transparente</string>
   <string name="native_library_not_supported">La biblioteca nativa no está soportada en este dispositivo.</string>
   <string name="init_native_library">Inicializando biblioteca nativa…</string>
@@ -268,9 +267,9 @@
   <string name="preferred_locale_descr">Selecciona el idioma de visualización</string>
   <string name="preferred_locale">Idioma de visualización</string>
   <string name="tip_map_switch">Fuente de mapas</string>
-  <string name="tip_map_switch_t">\tEl modo más rápido de cambiar la fuente del mapa y las capas mostradas es pulsando \'Menú\' -&gt; \'Definir vista\' en la vista del mapa. \n\tEn \'Fuente del mapa…\' puede elegir usar los mapas vectoriales descargados, fuentes de teselas predefinidas (con conexión), o mapas creados manualmente, por ejemplo con OsmAndMapCreator en un PC. \n\tOsmAnd también soporta fuentes personalizadas.</string>
+  
   <string name="tip_app_mode">Perfil de usuario</string>
-  <string name="tip_app_mode_t">\tOsmAnd soporta diferentes perfiles de aplicación (configurables) para diferentes usos. \n\tPuedes cambiar los perfiles en \'Menú\' -&gt; \'Opciones\' -&gt; \'Perfil de usuario\', o cuando crees una ruta.</string>
+  
   <string name="tip_navigation">Navegación</string>
   <string name="tip_navigation_t">\tAntes de empezar una navegación necesitas seleccionar un destino. Después, pulsa \'Menú\' -&gt; \'Indicaciones\' en el mapa y selecciona el tipo de navegación.</string>
   <string name="tip_search">Buscando</string>
@@ -471,7 +470,7 @@
   <string name="voice_data_not_supported">Versión no soportada de datos de voz</string>
   <string name="voice_data_corrupted">El dato de voz especificado está corrupto</string>
   <string name="voice_data_unavailable">El dato de voz escogido no está disponible</string>
-  <string name="stop_routing">Parar nave.</string>
+  
   <string name="sd_unmounted">No se puede acceder a la tarjeta SD.\nNo puede ver mapas ni encontrar cosas.</string>
   <string name="sd_mounted_ro">La tarjeta SD está en modo sólo lectura. \nSolamente puede ver el mapa precargado y no puede descargar de Internet.</string>
   <string name="unzipping_file">Descomprimiendo archivo…</string>
@@ -547,7 +546,7 @@
   <string name="address">Dirección</string>
   <string name="download_index_success">Descarga correcta</string>
   <string name="error_io_error">Ocurrió un error de entrada/salida</string>
-  <string name="downloading_file">Descargando fichero…</string>
+  
   <string name="downloading">Descargando…</string>
   <string name="downloading_list_indexes">Descargando lista de regiones disponibles…</string>
   <string name="list_index_files_was_not_loaded">La lista de regiones no se ha descargado de osmand.net.</string>
@@ -628,7 +627,7 @@
   <string name="ChooseCountry">Elige país</string>
   <string name="position_on_map_descr">Elige la ubicación del marcador de posición en el mapa</string>
   <string name="position_on_map">Marcador de posición</string>
-  <string name="show_view_angle_descr">Mostrar la dirección de la vista en el mapa</string>
+  
   <string name="show_view_angle">Mostrar dirección de visualización</string>
   <string name="map_view_3d_descr">Habilita visión 3D del mapa</string>
   <string name="map_view_3d">Visión 3D del mapa</string>
@@ -745,7 +744,7 @@
   <string name="unknown_from_location">El punto de inicio no ha sido determinado</string>
   <string name="confirm_interrupt_download">¿Quieres interrumpir la descarga de archivo?</string>
   <string name="basemap_was_selected_to_download">El Mapa Base (World Basemap) se necesita para el correcto funcionamiento de la aplicación y se seleccionó para su descarga.</string>
-  <string name="gpx_index_settings_descr">" (incluye analizador GPX)"</string>
+  
   <string name="map_online_plugin_is_not_installed">Activa el extra de mapas online para seleccionar diferentes fuentes de mapas</string>
   <string name="map_online_data">Mapas Online (teselas)</string>
   <string name="map_online_data_descr">Usa mapas online (descarga y guarda teselas en la tarjeta SD)</string>
@@ -770,11 +769,11 @@
 \n\t - Mejoras en muchas áreas "</string>
   <string name="osm_editing_plugin_description">Muestra parámetros para la colaboración con OSM como recolectar / modificar objetos PDI de OSM, crear / comentar fallos de OSM, y contribuir con trazas GPX (requiere credenciales OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
-  <string name="simulate_route_progression_manually">Simular la progresión de la ruta manualmente</string>
+  
   <string name="play_commands_of_currently_selected_voice">Reproduce algunas indicaciones de la voz seleccionada actualmente</string>
   <string name="debugging_and_development">Desarrollo de OsmAnd</string>
   <string name="native_rendering">Dibujo nativo</string>
-  <string name="animate_routing">Navegación animada</string>
+  
   <string name="test_voice_prompts">Probar avisos de voz</string>
   <string name="tip_recent_changes_0_7_2_t">"Cambios en 0.7.2 : \n\t- Dibujo nativo para todos los dispositivos \n\t- Edición de PDI sin conexión\n\t- Accessibilidad \n\t- Muchos arreglos de fallos "</string>
   <string name="send_files_to_osm">¿Enviar ficheros GPX a OSM?</string>
@@ -784,7 +783,7 @@
   <string name="validate_gpx_upload_name_pwd">Por favor, especifique usuario y contraseña de OSM para subir ficheros GPX.</string>
   <string name="default_buttons_support">Soporte</string>
   <string name="support_new_features">Soporte de nuevas características</string>
-  <string name="show_ruler_level_descr">Mostrar escala en el mapa</string>
+  
   <string name="show_ruler_level">Mostrar escala</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Volver a localización</string>
@@ -915,9 +914,9 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
   <string name="use_compass_navigation">Usar brújula</string>
   <string name="route_updated_loc_found">La ruta será recalculada cuando se encuentre la localización</string>
   <string name="continue_follow_previous_route_auto">La navegación anterior no ha finalizado. ¿Continuar siguiéndola? (%1$s segundos)</string>
-  <string name="show_cameras_descr">Muestra radares (puede estar prohibido en algunos países)</string>
-  <string name="show_traffic_warnings_descr">Muestra límites de velocidad y puntos negros</string>
-  <string name="avoid_toll_roads_descr">Evita peajes para cálculo de la ruta</string>
+  
+  
+  
   <string name="show_cameras">Mostrar radares</string>
   <string name="show_traffic_warnings">Mostrar límites de velocidad</string>
   <string name="avoid_toll_roads">Evitar peajes</string>
@@ -925,7 +924,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 \n\t* Mejoras en Navegación\n\t* Widgets de mapas dinámicos\n\t* Configuración de mapa movido a la pantalla de mapa\n\t* Botón de bloqueo de mapa con servicios de registro\n\t* Arreglado Árabe, Kannada y lenguajes RTL "</string>
   <string name="map_widget_top_text">Nombre de calle</string>
   <string name="map_widget_config">Configuración</string>
-  <string name="map_widget_map_select">Selección de mapa</string>
+  
   <string name="map_widget_back_to_loc">¿Dónde estoy?</string>
   <string name="map_widget_lock_screen">Bloquear pantalla</string>
   <string name="map_widget_compass">Brújula</string>
@@ -1023,8 +1022,8 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="incomplete_locale">incompleto</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="route_descr_current_location">Posición actual</string>
-    <string name="route_descr_from_to">De %1$s\nA %2$s</string>
-    <string name="route_descr_from_to_via">De: %1$s\nVia: %2$s\nA: %3$s</string>
+    
+    
     <string name="no_buildings_found">No se han encontrado edificios.</string>
     <string name="search_villages_and_postcodes">Buscar pueblos/códigos postales</string>
 	<string name="tip_altitude_offset_t">"\tLa mayoría de dispositivos GPS informan de las medidas de altitud en el sistema de referencia WGS84 basado en elipsoide, que requiere de una corrección dependiente de la posición para su conversión a sistemas utilizados localmente.
@@ -1044,19 +1043,19 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="srtm_plugin_name">Extra SRTM</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Mapas SRTM</string>
-    <string name="osmand_distance_plugin_description">Mide una distancia entre dos puntos. Tienes que especificar el origen / destino / borra la medida con una pulsación larga.</string>
-	<string name="osmand_distance_plugin_name">Calculadora de distancia</string>
+    
+	
 <string name="audionotes_plugin_description">Toma notas de audio durante el viaje</string>
     <string name="audionotes_plugin_name">Extra de notas de audio</string>
     <string name="osmand_srtm_short_description_80_chars">Extra de OsmAnd para curvas de nivel sin conexión</string>
     <string name="osmand_srtm_long_description_1000_chars">Este extra proporciona curvas de nivel que se pueden visualizar en mapas descargados de OsmAnd. Los datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones realizadas por SRTM (Shuttle Radar Topography Mission, Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
-    <string name="use_clear_distance_measurement">Pulsa una vez más para borrar puntos de medición.</string>
-    <string name="use_distance_measurement">Toca para hacer un punto, mantén presionado para eliminar el punto anterior, pulsa en el mecanismo de medición para salir.</string>
+    
+    
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">La localización no está definida aún para tomar notas de audio</string>
     <string name="monitoring_control_stop">para</string>
     <string name="map_widget_audionotes">Notas de audio</string>
-    <string name="srtm_plugin_attribution">ASTER es un producto de METI y NASA</string>
+    
     <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Para del mecanismo.</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
     <string name="recording_delete_confirm">¿Quieres eliminar esta grabación?</string>

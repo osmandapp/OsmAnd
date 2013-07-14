@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 	<string name="default_buttons_no">לא</string>
 	<string name="default_buttons_yes">כן</string>
 	<string name="close_changeset">סגירת ערכת השינויים</string>
@@ -71,7 +70,7 @@
 	<string name="filterpoi_activity">יצירת מסנן נ״ע</string>
 	<string name="recalculate_route_to_your_location">מצב תעבורה:</string>
 	<string name="select_navigation_mode">בחירת מצב תעבורה</string>
-	<string name="monitor_preferences">מעקב</string>
+	
 	<string name="day_night_info_description">זריחה : %1$s
 \nשקיעה : %2$s</string>
 	<string name="day_night_info">פרטי יום/לילה</string>
@@ -101,7 +100,7 @@
 	<string name="screen_is_locked">כדי לשחרר את המסכים יש ללחוץ על סמל הנעילה</string>
 	<string name="map_widget_top_text">שם הרחוב</string>
 	<string name="map_widget_config">מסך ההגדרות</string>
-	<string name="map_widget_map_select">מקור המפה</string>
+	
 	<string name="map_widget_back_to_loc">איפה אני</string>
 	<string name="map_widget_lock_screen">נעילת המסך</string>
 	<string name="map_widget_compass">מצפן</string>
@@ -213,7 +212,7 @@
 	<string name="select_index_file_to_download">לא נמצא כלום. אם האזור שלך לא נמצא, ניתן ליצור אותו בעצמך (לפרטים http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">מפות מקוונות ואריחים</string>
 	<string name="local_indexes_cat_map">מפות בלתי מקוונות (וקטור)</string>
-	<string name="gpx_index_settings_descr">" (לרבות מנתח GPX)"</string>
+	
 	<string name="index_settings_descr">הורדה, צפייה בפרטים וניהול של מפות בלתי מקוונות</string>
 	<string name="map_online_plugin_is_not_installed">ניתן להפעיל את תוסף המפות המקוונות כדי לבחור במקורות שונים למפה</string>
 	<string name="map_online_data">מפות מקוונות ואריחים</string>
@@ -338,7 +337,7 @@
 	<string name="local_openstreetmap_uploading">מתבצעת שליחה…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} נ״ע/תקלות נשלחו</string>
 	<string name="local_openstreetmap_uploadall">לשלוח הכול</string>
-	<string name="local_openstreetmap_items">‌</string>
+	
 	<string name="local_openstreetmap_show">הצגה במפה</string>
 	<string name="local_openstreetmap_upload">שליחת השינויים ל־OSM</string>
 	<string name="local_openstreetmap_delete">מחיקת השינוי</string>
@@ -533,7 +532,7 @@
 	<string name="local_index_address_data">נתוני כתובת</string>
 	<string name="local_index_transport_data">נתוני תעבורה</string>
 	<string name="local_index_map_data">נתוני מפה</string>
-	<string name="local_index_items">‌</string>
+	
 	<string name="local_indexes_cat_backup">מנוטרל</string>
 	<string name="local_indexes_cat_tts">נתוני קול (טקסט לדיבור)</string>
 	<string name="local_indexes_cat_voice">נתוני קול (מוקלטים)</string>
@@ -779,7 +778,7 @@
 	<string name="layer_favorites">מועדפים</string>
 	<string name="layer_osm_bugs">תקלות ב־OSM</string>
 	<string name="layer_transport">תחנות תחבורה</string>
-	<string name="stop_routing">הפסקת הניווט</string>
+	
 	<string name="transport_Stop">תחנה</string>
 	<string name="transport_stops">תחנות</string>
 	<string name="transport_Routes">מסלולים</string>
@@ -883,7 +882,7 @@
 	<string name="address">כתובת</string>
 	<string name="download_index_success">ההורדה הצליחה</string>
 	<string name="error_io_error">אירעה שגיאת קלט/פלט</string>
-	<string name="downloading_file">הקובץ בהורדה…</string>
+	
 	<string name="downloading">בהורדה…</string>
 	<string name="downloading_list_indexes">רשימת האזורים הזמינה מתקבלת…</string>
 	<string name="list_index_files_was_not_loaded">רשימת האזורים לא התקבלה מ־osmand.net.</string>
@@ -1090,8 +1089,8 @@
 	<string name="no_buildings_found">לא נמצאו בניינים.</string>
     <string name="route_descr_lat_lon">רוחב %1$.3f אורך %2$.3f</string>
     <string name="route_descr_current_location">המיקום הנוכחי</string>
-    <string name="route_descr_from_to">מ־%1$s\nאל %2$s</string>
-    <string name="route_descr_from_to_via">מהמיקום : %1$s\nדרך : %2$s\nאל : %3$s</string>
+    
+    
     <string name="map_widget_max_speed">מהירות מותרת</string>
     <string name="tip_altitude_offset">תצוגת גובה - תיקון סטייה</string>
 	<string name="monitoring_control_start">התחלה</string>
@@ -1109,18 +1108,18 @@
     <string name="srtm_plugin_name">תוסף SRTM</string>
     <string name="download_select_map_types">מפות אחרות</string>
     <string name="download_srtm_maps">מפות SRTM</string>
-    <string name="osmand_distance_plugin_description">מדידת המרחק בין שתי נקודות. יש להגדיר את המקור / יעד / להתעלם מהמדידות על ידי לחיצה ארוכה.</string>
-	<string name="osmand_distance_plugin_name">מחשבון מרחק</string>
+    
+	
 <string name="audionotes_location_not_defined">המיקום לא מוגדר עדיין לצורכי שמירת הערות קוליות</string>
     <string name="monitoring_control_stop">עצירה</string>
     <string name="map_widget_audionotes">הערות קוליות</string>
     <string name="audionotes_plugin_description">תיאור תוסף ההערות הקוליות</string>
     <string name="audionotes_plugin_name">תוסף הערות קוליות</string>
-    <string name="srtm_plugin_attribution">ASTER הוא מוצר מבית METIS ו־NASA</string>
+    
     <string name="osmand_srtm_short_description_80_chars">תוסף ל־OsmAnd לקווי מתאר בלתי מקוונים</string>
-    <string name="use_clear_distance_measurement">יש ללחוץ פעם נוספת כדי למחוק את נקודות המדידה.</string>
+    
     <string name="map_widget_distancemeasurement">מדידת מרחק</string>
-    <string name="use_distance_measurement">יש לגעת כדי להציב נקודה, ללחוץ ולהחזיק כדי למחוק את הנקודה הקודמת, ללחוץ על וידג׳ט המדידה כדי לצאת.</string>
+    
     <string name="recording_is_recorded">השמע/וידאו מוקלטים. כדי להפסיק זאת יש ללחוץ על לחצן העצירה בווידג׳ט.</string>
     <string name="recording_playing">השמע מההקלטה שצוינה מושמע.\n%1$s</string>
     <string name="recording_open_external_player">פתיחת נגן חיצוני</string>

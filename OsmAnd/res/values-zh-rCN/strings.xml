@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 <string name="email">電子郵件</string>
 <string name="poi_dialog_name">名稱</string>
 	<string name="poi_dialog_opening_hours">打開</string>
@@ -43,7 +42,7 @@
 	<string name="tip_update_index">離線數據的更新</string>
 	<string name="recalculate_route_to_your_location">運輸方式：</string>
 	<string name="select_navigation_mode">選擇傳輸模式</string>
-	<string name="monitor_preferences">跟踪</string>
+	
 	<string name="map_widget_renderer">地圖風格</string>
 	<string name="position_on_map">位置標記</string>
 	<string name="avoid_in_routing_descr">避開收費公路，土路，渡輪</string>
@@ -65,13 +64,13 @@
     <string name="intermediate_points_change_order">变更顺序</string>
     <string name="av_use_external_camera">使用相机的应用程序</string>
     <string name="av_control_start">开始</string>
-    <string name="osmand_distance_plugin_name">距离计算器</string>
+    
     <string name="download_roads_only_item">道路只</string>
     <string name="download_srtm_maps">等高线</string>
     <string name="download_regular_maps">定期地图</string>
     <string name="rendering_attr_noAdminboundaries_name">隐藏边界</string>
-	<string name="route_descr_from_to">来自： %1$s↵\n到： %2$s</string>
-    <string name="route_descr_from_to_via">来自： %1$s↵\n威盛： %2$s↵\n到： %3$s</string>
+	
+    
     <string name="no_buildings_found">没有建筑物。</string>
     <string name="incremental_search_city">搜寻城市增量</string>
     <string name="search_villages_and_postcodes">搜索村庄/邮政编码</string>
@@ -119,7 +118,7 @@
 	<string name="history_search_desc">搜索历史</string>
 	<string name="unknown_from_location">出发点是尚未确定</string>
 	<string name="unknown_location">位置尚不清楚</string>
-	<string name="gpx_index_settings_descr">..（包括GPX仪）</string>
+	
 	<string name="extra_settings">高级设置</string>
 	<string name="plugins_screen">插件</string>
 	<string name="prefs_plugins">插件</string>

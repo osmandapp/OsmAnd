@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="no_route">Ei reittiä</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista välietappi</string>
 	<string name="target_point">Välietappi %1$s</string>
     <string name="intermediate_point">Välietappi %1$s</string>
@@ -38,7 +37,7 @@
 	<string name="osmand_plus_short_description_80_chars">OsmAnd on avoimen lähdekoodin navigointisovellus offline ja online kartoille</string>
 	<string name="recalculate_route_to_your_location">Liikennemuoto:</string>
 	<string name="select_navigation_mode">Valitse liikennemuoto</string>
-	<string name="monitor_preferences">Seuranta</string>
+	
 	<string name="day_night_info_description">Auringon nousu : %1$s
 \nAuringon lasku : %2$s</string>
 	<string name="day_night_info">Päivä/yö info</string>
@@ -258,7 +257,7 @@
 	<string name="voice_data_not_supported">Äänidatan versiota ei tueta</string>
 	<string name="voice_data_corrupted">Valittu äänidata on vioittunut</string>
 	<string name="voice_data_unavailable">Valittu äänidata ei ole saatavilla</string>
-	<string name="stop_routing">Lopeta nav.</string>
+	
 	<string name="sd_unmounted">Muistikortti ei ole saatavilla.\nEt voi nähdä karttoja tai löytää asioita.</string>
 	<string name="sd_mounted_ro">Muistikortti on kirjoitussuojattu.\nVoit käyttää vain ennalta ladattuja karttoja etkä voi ladata niitä netistä.</string>
 	<string name="unzipping_file">Puretaan tiedostoa…</string>
@@ -323,7 +322,7 @@
 	<string name="address">Osoite</string>
 	<string name="download_index_success">Lataus onnistui</string>
 	<string name="error_io_error">Tapahtui I/O virhe</string>
-	<string name="downloading_file">Ladataan tiedostoa…</string>
+	
 	<string name="downloading">Ladataan…</string>
 	<string name="downloading_list_indexes">Ladataan saatavilla olevien alueiden listaa…</string>
 	<string name="list_index_files_was_not_loaded">Listaa alueista ei noudettu osmand.net:stä</string>
@@ -449,7 +448,7 @@
 	<string name="poi_filter_car_aid">Autotuki</string>
 	<string name="layer_map_appearance">Muokkaa näyttöä</string>
 	<string name="screen_is_locked">Poistaaksesi näytön lukituksen paina lukitus kuvaketta</string>
-	<string name="map_widget_map_select">Kartan lähde</string>
+	
 	<string name="map_widget_config">Muokkaa näyttöä</string>
 	<string name="map_widget_top_stack">Tilan näyttö:</string>
 	<string name="map_widget_left_stack">Vasen panelli:</string>
@@ -586,7 +585,7 @@
 	<string name="route_descr_current_location">Nykyinen sijainti</string>
     <string name="download_roads_only_item">"Tiet "</string>
     <string name="download_regular_maps">Tavalliset kartat</string>
-    <string name="route_descr_from_to_via">Mistä:%1$s\nKautta:%2$s\nMihin:%3$s</string>
+    
     <string name="no_buildings_found">Rakennuksia ei löytynyt.</string>
     <string name="search_villages_and_postcodes">Etsi pienempiä paikkakuntia/postinumeroita</string>
 	<string name="map_widget_max_speed">Nopeusrajoitus</string>
@@ -605,7 +604,7 @@
 	<string name="basemap_was_selected_to_download">Peruskartta vaaditaan sovelluksen kunnolliseen toimintaan ja siksi se on valittu ladattavaksi.</string>
 	<string name="select_index_file_to_download">Ei löydetty mitään. Jos et löydä omaa aluettasi voit tehdä sen itse (katso http://osmand.net).</string>
 	<string name="local_indexes_cat_map">Offline kartat (vektori)</string>
-	<string name="gpx_index_settings_descr">" (sisältää GPX analysaattorin)"</string>
+	
 	<string name="index_settings_descr">Lataa, katso lisätietoja ja hallinnoi offline karttoja</string>
 	<string name="online_map_settings">Online kartat</string>
 	<string name="process_navigation_service">OsmAnd navigointipalvelu</string>
@@ -617,9 +616,9 @@
 	<string name="search_poi_filter">Suodatin</string>
 	<string name="failed_op">epäonnistui</string>
 	<string name="error_calculating_route_occured">Tapahtui virhe laskettaessa reittiä</string>
-	<string name="osmand_distance_plugin_description">Mittaa etäisyyden kahden tai useamman pisteen välillä. Lisää pisteitä lyhyellä painalluksella, poista pitkällä.</string>
-    <string name="osmand_distance_plugin_name">Etäisyyslaskuri</string>
-    <string name="use_clear_distance_measurement">Paina vielä kerran nollataksesi mittauspisteet.</string>
+	
+    
+    
     <string name="map_widget_distancemeasurement">Etäisyyden mittaus</string>
     <string name="download_select_map_types">Muut kartat</string>
     <string name="map_settings_descr">Karttanäytön asetukset</string>

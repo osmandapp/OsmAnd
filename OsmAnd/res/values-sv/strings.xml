@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -31,7 +30,7 @@
 <string name="filterpoi_activity">Skapa POI-filter</string>
 <string name="recalculate_route_to_your_location">Transportsätt:</string>
 <string name="select_navigation_mode">Välj transportsätt</string>
-<string name="monitor_preferences">Spårning</string>
+
 <string name="day_night_info_description">Soluppgång: %1$s
 \nSolnedgång: %2$s</string>
 <string name="day_night_info">Dag-/nattinformation</string>
@@ -53,7 +52,7 @@
 <string name="monitoring_mode_on">Stoppa\n GPX-insp.</string>
 <string name="gps_wakeup_interval">GPS-väckningsintervall: %s</string>
 <string name="int_continuosly">Kontinuerlig</string>
-<string name="map_widget_map_select">Kartkälla</string>
+
 <string name="map_widget_reset">Återställ till standard</string>
 <string name="map_widget_time">Tid som gått/Tid som är kvar</string>
 <string name="osmand_short_description_80_chars">OsmAnd är en open source-navigeringsapp för offline- och onlinekartor</string>
@@ -148,7 +147,7 @@
 <string name="confirm_interrupt_download">Vill du avbryta nedladdningen?</string>
 <string name="local_indexes_cat_tile">Online-kartor och kartbitar (tiles)</string>
 <string name="local_indexes_cat_map">Offline-kartor (vektor)</string>
-<string name="gpx_index_settings_descr">" (inkluderar GPX analysator)"</string>
+
 <string name="index_settings_descr">Ladda ner, visa detaljer, och hantera offline-kartor</string>
 <string name="online_map_settings">Online-kartor</string>
 <string name="osmand_accessibility_description">Visa inställningar för speciella tillgänglighetsanpassning.</string>
@@ -738,7 +737,7 @@
 	<string name="voice_data_not_supported">Version som inte stöds av röstdata</string>
 	<string name="voice_data_corrupted">Specificerade röstdata är skadade</string>
 	<string name="voice_data_unavailable">"Valda röstdata  är inte tillgängliga"</string>
-	<string name="stop_routing">Stoppa navigeringen</string>
+	
 	<string name="sd_unmounted">SD-kortet är inte tillgängligt.\nDu kommer inte att kunna se kartor eller hitta saker.</string>
 	<string name="sd_mounted_ro">SD-kortet är skrivskyddat.\nDu kan bara se den förinstallerade kartan och kan inte ladda ner från Internet.</string>
 	<string name="unzipping_file">Packar upp filen …</string>
@@ -807,7 +806,7 @@
 	<string name="address">Adress</string>
 	<string name="download_index_success">Nedladdningen slutfördes utan problem</string>
 	<string name="error_io_error">Ett I/O-fel inträffade</string>
-	<string name="downloading_file">Laddar ner filen …</string>
+	
 	<string name="downloading">Laddar ner …</string>
 	<string name="downloading_list_indexes">Laddar ner lista över tillgängliga regioner…</string>
 	<string name="list_index_files_was_not_loaded">Listan över regioner hämtades inte från osmand.net.</string>
@@ -911,7 +910,7 @@
     <string name="av_control_stop">Stoppa</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin för höjdkurvor offline</string>
-    <string name="osmand_distance_plugin_name">Avståndsberäknare</string>
+    
     <string name="map_widget_distancemeasurement">Avståndsmätning</string>
     <string name="monitoring_control_stop">stopp</string>
     <string name="map_widget_audionotes">Ljudanteckningar</string>
@@ -926,13 +925,13 @@
 \n\t* Plugin för beräkning av avstånd\n\t* Plugin för ljud-/videoanteckningar\n\t* Plugin för höjdkurvor\n\t* Buggfixar
 \n\t* \'Touring View\' - kartutseende med mer kartdetaljer, nytt utseende för vägar, mer kontrast och fjällvandringsalternativ (SAC-skala)
 \n\t* EGM96 geoid offsetkorrigering för GPS-höjdavläsningar</string>
-    <string name="osmand_distance_plugin_description">Mät avståndet mellan två eller fler punkter. Lägg till punkter med ett kort klick och ta bort dem med en lång tryckning.</string>
-    <string name="use_clear_distance_measurement">Klicka en gång till för att ta bort mätpunkterna.</string>
-    <string name="use_distance_measurement">Knacka för att skapa en punkt, tryck och håll för att ta bort tidigare punkter, klicka på mätwidgeten för att avsluta.</string>
+    
+    
+    
     <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte angiven än. \"Använd platsen ...\" för att knyta en anteckning till den angivna platsen</string>
     <string name="route_descr_current_location">Aktuell position</string>
-    <string name="route_descr_from_to">Från: %1$s↵\nTill: %2$s</string>
-    <string name="route_descr_from_to_via">Från: %1$s↵\nVia: %2$s↵\nTill: %3$s</string>
+    
+    
     <string name="close_changeset">Stäng changeset</string>
 	<string name="map_widget_show_destination_arrow">Visa destinationsriktning</string>
     <string name="gps_not_available">Aktivera GPS i inställningarna</string>

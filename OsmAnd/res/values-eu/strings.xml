@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="offline_navigation_not_available">Offline nabigazioa zerbitzuz kanpo dago orain.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_navigation_not_available">Offline nabigazioa zerbitzuz kanpo dago orain.</string>
   <string name="left_side_navigation">Trafikoa ezkerraldetik</string>
   <string name="left_side_navigation_descr">Trafikoa ezkerraldetik duten herrialdeentzako hautatu</string>
   <string name="download_link_and_local_description">Klikatu hemen offlineko datuak deskargatzeko edo eguneratzeko.\nKlikatu edozein elementu xehetasunak ikusteko, klikatu eta mantendu desaktibatzeko edo ezabatzeko. Oraingo datuak (%1$s libre):</string>
@@ -12,7 +11,7 @@
   <string name="select_index_file_to_download">Ez da ezer aurkitu. Zure herrialdea ezin baduzu aurkitu, zuk prestatu dezakezu (begiratu http://osmand.net).</string>
   <string name="local_indexes_cat_tile">Online mapak (teselak)</string>
   <string name="local_indexes_cat_map">Offline Mapak (bektore)</string>
-  <string name="gpx_index_settings_descr">(GPX analizatzailea barnean)</string>
+  
   <string name="index_settings_descr">Lineaz kanpoko mapak deskargatu, xehetasunak begiratu, eta kudeatu</string>
   <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
   <string name="map_online_data">Online mapak (teselak)</string>
@@ -27,9 +26,9 @@
     </string>
   <string name="osmand_parking_hours">Orduak</string>
   <string name="osmand_parking_minutes">Minutuak</string>
-  <string name="show_cameras_descr">Radarrak erakutsi (herrialde batzuetan debekatuta egon daiteke)</string>
-  <string name="show_traffic_warnings_descr">Abiadura mugak eta puntu arriskutsuak erakutsi</string>
-  <string name="avoid_toll_roads_descr">Saihestu bidesariak ibilbidea kalkulatzeko</string>
+  
+  
+  
   <string name="show_cameras">Radarrak erakutsi</string>
   <string name="show_traffic_warnings">Abiadura mugak erakutsi</string>
   <string name="avoid_toll_roads">Saihestu bidesariak</string>
@@ -73,7 +72,7 @@
     <string name="av_control_stop">gelditu</string>
     <string name="av_control_start">hasi</string>
     <string name="map_widget_av_notes">Soinu/bideo oharrak</string>
-    <string name="osmand_distance_plugin_name">Distantzia kalkulagailua</string>
+    
     <string name="map_widget_distancemeasurement">Distantzia neurketa</string>
     <string name="monitoring_control_stop">gelditu</string>
     <string name="map_widget_audionotes">Soinu oharrak</string>
@@ -86,8 +85,8 @@
 	<string name="map_widget_max_speed">Abiadura muga</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="route_descr_current_location">Oraingo kokapena</string>
-    <string name="route_descr_from_to">%1$s -tik\n%2$s -ra</string>
-    <string name="route_descr_from_to_via">%1$s -tik\n%2$s -ren bidez\n%3$s -ra</string>
+    
+    
     <string name="search_villages_and_postcodes">Bilatu herriak/posta-kodeak</string>
 	<string name="rendering_attr_showRoadMaps_name">Errepideak-bakarrik mapak</string>
     <string name="no_route">Rutarik gabe</string>

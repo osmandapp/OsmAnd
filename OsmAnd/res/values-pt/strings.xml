@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -166,7 +165,7 @@
   <string name="voice_data_not_supported">Os dados de voz utilizam uma versão não suportada</string>
   <string name="voice_data_corrupted">Dados de voz corrompidos</string>
   <string name="voice_data_unavailable">Dados de voz selecionados não estão acessíveis</string>
-  <string name="stop_routing">Parar navegação.</string>
+  
   <string name="sd_unmounted">O cartão SD está inacessível. \n Será impossível ver mapas ou procurar coisas.</string>
   <string name="sd_mounted_ro">O cartão SD está disponivel só para leitura. \nVocê não pode baixar da Internet, só pode visualizar os mapas pré-carregados.</string>
   <string name="unzipping_file">Descomprimindo arquivo...</string>
@@ -241,7 +240,7 @@
   <string name="address">Endereço</string>
   <string name="download_index_success">Download do índice com sucesso</string>
   <string name="error_io_error">Um erro de entrada/saída ocorreu</string>
-  <string name="downloading_file">Baixando arquivo…</string>
+  
   <string name="downloading">Baixando…</string>
   <string name="downloading_list_indexes">Baixando lista de regiões disponíveis…</string>
   <string name="list_index_files_was_not_loaded">Os arquivos de índice não puderam ser recuperados de osmand.net.</string>
@@ -294,7 +293,7 @@
   <string name="user_password_descr">Sua senha do OpenStreetMap</string>
   <string name="user_password">Senha</string>
   <string name="osm_settings_descr">Definir os parâmetros de conexão OpenStreetMap</string>
-  <string name="monitor_preferences_descr">Definir parâmetros de gravação da viagem</string>
+  
   <string name="data_settings_descr">Definir o idioma, atualizar os dados</string>
   <string name="data_settings">Dados</string>
   <string name="map_preferences_descr">Definir os parâmetros do mapa: fonte do mapa, rotação, posição do marcador, a orientação da tela</string>
@@ -309,7 +308,7 @@
   <string name="save_current_track">Salvar a trilha atual</string>
   <string name="save_track_interval_descr">Escolher o intervalo entre posições nas trilhas</string>
   <string name="save_track_interval">Intervalo de gravação</string>
-  <string name="monitor_preferences">Registro de trilhas</string>
+  
   <string name="save_track_to_gpx_descrp">As trilhas serão gravadas no diretório tracks agrupadas por dia</string>
   <string name="save_track_to_gpx">salvar trilhas em GPX</string>
   <string name="update_tile">Atualizar mapa</string>
@@ -331,7 +330,7 @@
   <string name="ChooseCountry">Escolher país</string>
   <string name="position_on_map_descr">Escolha a posição do marcador no mapa</string>
   <string name="position_on_map">Posição do marcador</string>
-  <string name="show_view_angle_descr">Mostrar ângulo de visão baseado na bússola</string>
+  
   <string name="show_view_angle">Mostrar ângulo de visão</string>
   <string name="map_view_3d_descr">Ativar a visualização em 3D do mapa</string>
   <string name="map_view_3d">Visualização em 3D</string>
@@ -456,7 +455,7 @@
   <string name="basemap_was_selected_to_download">O Mapa-Base é necessário para o funcionamento adequado da aplicação e foi seleccionado para download.</string>
   <string name="local_indexes_cat_tile">Online maps (tiles)</string>
   <string name="local_indexes_cat_map">Mapas offline (vectoriais)</string>
-  <string name="gpx_index_settings_descr">" (Inclui analisador GPX )"</string>
+  
   <string name="map_online_plugin_is_not_installed">Activar plugin de mapas on-line para seleccionar diferentes fontes de mapas</string>
   <string name="map_online_data">Mapas Online e Mosaicos</string>
   <string name="map_online_data_descr">Usar mapas on-line (obter e armazenar mosaicos no cartão SD)</string>
@@ -478,11 +477,11 @@
   <string name="tip_recent_changes_0_8_0_t">"Changes in 0.8.0 : \n\t- Plugin functionality \n\t- New offline map data support \n\t- Improve usability and simplify Profile concept \n\t- Lots of bug fixes "</string>
   <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Mapas vectoriais são visualizados mais rápido. Podem não funcionar bem em alguns dispositivos.</string>
-  <string name="simulate_route_progression_manually">Simulate route progression manually</string>
+  
   <string name="play_commands_of_currently_selected_voice">Tocar comandos de voz actualmente seleccionada</string>
   <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
   <string name="native_rendering">Renderização nativa</string>
-  <string name="animate_routing">Animate navigation</string>
+  
   <string name="test_voice_prompts">Testar comandos de voz</string>
   <string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
   <string name="tip_recent_changes_0_7_2_t">"Changes in 0.7.2 : \n\t- Native rendering for all devices \n\t- Offline POI editing \n\t- Accessibility \n\t- Lots of bug fixes "</string>
@@ -493,7 +492,7 @@
   <string name="validate_gpx_upload_name_pwd">Especifique o nome e senha de utilizador do OSM para upload de arquivos GPX.</string>
   <string name="default_buttons_support">Apoiar</string>
   <string name="support_new_features">Apoiar novas funcionalidades</string>
-  <string name="show_ruler_level_descr">Display ruler on the map</string>
+  
   <string name="show_ruler_level">Mostrar escala</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Back to location</string>
@@ -603,10 +602,10 @@
   <string name="global_settings">Configurações Globais</string>
   <string name="global_app_settings">Configurações globais da aplicação</string>
   <string name="tip_rotation_switching">Orientação do Mapa</string>
-  <string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -&gt; \'Map appearance\' -&gt; \'Map rotation\'. \n\tThe choices are: \n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up \n\t\'To direction of movement\' - Map will continuously be aligned with your heading \n\t\'To compass\' - Map will continuously be aligned with device compass reading \n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
+  
   <string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Settings\' -&gt; \'Map configuration\' -&gt; \'Offline vector maps\'.</string>
   <string name="tip_day_night_mode">Modo Dia/Noite</string>
-  <string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker). \n\tNight colors are safer for night driving. \n\tYou can set a policy for day/night switching in \'Settings\' -&gt; \'Map appearance\' -&gt;\'Day/night mode\'. \n\tChoices are: \n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default) \n\t\'Day\' - always use day mode \n\t\'Night\' - always use night mode \n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>
+  
   <string name="tip_osm_improve">Melhorar dados OSM</string>
   <string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks! \n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM Editing\'. \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it. \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem. \n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button. \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
   <string name="download_files_not_enough_space">Espaço livre insuficiente, precisa de %1$s MB (só tem: %2$s disponíveis).</string>
@@ -616,7 +615,7 @@
 \n\tO destino aparece marcado no mapa como um círculo laranja com uma bandeira de xadrez, sendo exibida a distância a que se encontra o ponto e sua direção (triângulo laranja). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Mudanças em 0.6.9:\n\t- Melhoria da renderização de mapa off-line\n\t- Rápidas prestações da renderização Nativa off-line - ver em recursos experimentais (pode não funcionar em alguns dispositivos)\n\t- Mudanças maciças na aparência e interação
 \n\t- Informação de Altitude\n\t- Novas traduções (Vienamita, Polaco)\n\t- Outras pequenas características "</string>
-  <string name="use_transparent_map_theme_descr">Use transparent map controls</string>
+  
   <string name="use_transparent_map_theme">Tema transparente</string>
   <string name="native_library_not_supported">Biblioteca Nativa não é compatível com este dispositivo.</string>
   <string name="init_native_library">A iniciar biblioteca nativa…</string>
@@ -771,9 +770,9 @@
   <string name="preferred_locale_descr">Seleccione linguagem</string>
   <string name="preferred_locale">Linguagem</string>
   <string name="tip_map_switch">Origem dos Mapas</string>
-  <string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -&gt; \'Define view\' in map view. \n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC. \n\tOsmAnd also supports custom sources.</string>
+  
   <string name="tip_app_mode">Perfil</string>
-  <string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases. \n\tYou can change profiles in \'Menu\' -&gt; \'Settings\' -&gt; \'User Profile\', or when creating a route.</string>
+  
   <string name="tip_navigation">Navegação</string>
   <string name="tip_navigation_t">\tAntes de iniciar uma navegação você precisa selecionar um destino. Depois pressione \'Menu\' -&gt; \'Navegação\' no mapa e selecione o modo de transporte.</string>
   <string name="tip_search">Buscando</string>
@@ -873,16 +872,16 @@
   <string name="use_compass_navigation">Usar bússola</string>
   <string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
   <string name="continue_follow_previous_route_auto">A navegação anterior nao foi terminada, quer continua-la? (%1$s segundos)</string>
-  <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>
-  <string name="show_traffic_warnings_descr">Show speed limits and traffic bumps</string>
-  <string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string>
+  
+  
+  
   <string name="show_cameras">Mostrar radares</string>
   <string name="show_traffic_warnings">Mostrar limites de velocidade</string>
   <string name="avoid_toll_roads">Evitar portagens</string>
   <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string>
   <string name="map_widget_top_text">Nome da Rua</string>
   <string name="map_widget_config">Configuração da tela</string>
-  <string name="map_widget_map_select">Seleção de mapas</string>
+  
   <string name="map_widget_back_to_loc">Onde estou</string>
   <string name="map_widget_lock_screen">Bloquear tela</string>
   <string name="map_widget_compass">Compasso</string>
@@ -975,8 +974,8 @@
     <string name="map_widget_intermediate_distance">Ponto de passagem</string>
     <string name="ending_point_too_far">Destino muito longe da estrada mais próxima.</string>
     <string name="btn_add_tag">Adicionar tag</string>
-    <string name="local_openstreetmap_items"/>
-	<string name="local_index_items"/>
+    
+	
 	<string name="rendering_attr_showRoadMaps_description">Selecione quando exibir mapas somente de estradas:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mapas de estradas</string>
     <string name="download_roads_only_item">Só Estradas</string>
@@ -988,8 +987,8 @@
     <string name="background_service_is_enabled_question">Serviço em segundo plano ainda em execução. Deseja cancelá-lo?</string>
     <string name="close_changeset">Fechar conjunto de alterações</string>
 	<string name="route_descr_current_location">Localização atual</string>
-    <string name="route_descr_from_to">De %1$s↵\nAté %2$s</string>
-    <string name="route_descr_from_to_via">De : %1$s↵\nVia : %2$s↵\nAté : %3$s</string>
+    
+    
     <string name="search_villages_and_postcodes">Pesquisa por CEP</string>
 	<string name="dropbox_plugin_description">O plugin Dropbox permite sincronizar trilhos e notas de video/audio com a sua conta Dropbox.</string>
     <string name="animate_routing_using_gpx">Quer usar o ficheiro GPX actual?</string>
@@ -1046,10 +1045,10 @@
     <string name="av_control_start">Iniciar</string>
     <string name="map_widget_av_notes">Notas de Áudio/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd para curvas de nível off-line</string>
-    <string name="osmand_distance_plugin_description">Medir a distância entre dois ou mais pontos. Adicione pontos com um clique curto e remova com um toque longo.</string>
-    <string name="osmand_distance_plugin_name">Calculador de distância</string>
-    <string name="use_clear_distance_measurement">Clique mais uma vez para eliminar os pontos de medição.</string>
-    <string name="use_distance_measurement">Toque para marcar um ponto, pressione e segure para excluir pontos anteriores, clique na ferramenta de medição para sair.</string>
+    
+    
+    
+    
     <string name="map_widget_distancemeasurement">Medição da distância</string>
     <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar localização...\" para atribuir uma nota para o local especificado</string>
     <string name="monitoring_control_stop">Parar</string>

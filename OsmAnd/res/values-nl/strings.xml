@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -19,11 +18,11 @@
   <string name="gps_wakeup_interval">Activeer GPS om de %s</string>
   <string name="int_continuosly">Continue</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
-  <string name="simulate_route_progression_manually">Simuleer routeverloop handmatig</string>
+  
   <string name="play_commands_of_currently_selected_voice">Luister naar de commando\\\'s van de gekozen stem</string>
   <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
   <string name="native_rendering">Interne kaartgeneratie</string>
-  <string name="animate_routing">Simuleer navigatie</string>
+  
   <string name="test_voice_prompts">Test stem-instructies</string>
   <string name="switch_to_raster_map_to_see">Geen offline vectorkaart aanwezig voor deze locatie. Je kan deze downloaden via Instellingen (Offline gegevens), of overschakelen naar online kaarten.</string>
   <string name="tip_recent_changes_0_7_2_t">Wijzigingen in 0.7.2:
@@ -39,7 +38,7 @@
   <string name="validate_gpx_upload_name_pwd">Geef je OSM gebruikersnaam en wachtwoord voor het uploaden van GPX-bestanden.</string>
   <string name="default_buttons_support">Ondersteuning</string>
   <string name="support_new_features">Ondersteun nieuwe functies</string>
-  <string name="show_ruler_level_descr">Schaal-lineaal op de kaart weergeven</string>
+  
   <string name="show_ruler_level">Schaal-lineaal weergeven</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Terug naar locatie</string>
@@ -118,7 +117,7 @@
   <string name="local_openstreetmap_uploading">Uploaden…</string>
   <string name="local_openstreetmap_were_uploaded">{0} interessepunten/Bugs zijn ge-upload</string>
   <string name="local_openstreetmap_uploadall">Upload alle</string>
-  <string name="local_openstreetmap_items">" "</string>
+  
   <string name="local_openstreetmap_show">Toon op kaart</string>
   <string name="local_openstreetmap_upload">Upload wijziging naar OSM</string>
   <string name="local_openstreetmap_delete">Wis de wijziging</string>
@@ -158,8 +157,8 @@
   <string name="profile_settings">Profielspecifieke instellingen</string>
   <string name="settings_preset">Standaardprofiel</string>
   <string name="settings_preset_descr">Kaart- en navigatieinstellingen worden per profiel onthouden. Kies hier het standaardprofiel.</string>
-  <string name="monitor_preferences">Tracking</string>
-  <string name="monitor_preferences_descr">Specifieke tracking instellingen</string>
+  
+  
   <string name="routing_settings">Navigatie</string>
   <string name="routing_settings_descr">Opties voor navigatie</string>
   <string name="global_settings">Algemene instellingen</string>
@@ -175,10 +174,10 @@
   <string name="osmand_service">Achtergrondservice</string>
   <string name="osmand_service_descr">Dit is om OsmAnd te gebruiken als het scherm uit is</string>
   <string name="tip_rotation_switching">kaartrotatie</string>
-  <string name="tip_rotation_switching_t">\tJe kan kiezen of en hoe de kaart geroteerd wordt in \'Instellingen\' -&gt; \'Kaart uiterlijk\' -&gt; \'Kaart rotatie\'. \n\tDe keuzes zijn: \n\t\'Niet roteren - de kaart wordt niet geroteerd. Het noorden is altijd boven \n\t\'In de beweegrichting\' - de kaart wordt permanent aangepast aan de beweegrichting \n\t\'Naar kompas\' - de kaartkanteling wordt permanent aangepast aan de ingebouwde kompas \n\tHint: Om snel te wisslen van rotatie-instelling, toets de kompasnaald in het kaartscherm.</string>
+  
   <string name="binary_map_download_success">Download succesvol.\n\t\n\tOm te gebruiken, activeer \'Menu\' -&gt; \'Definieer beeld\' -&gt; \'Kaarbron…\' -&gt; \'Offline vectorkaarten\'.</string>
   <string name="tip_day_night_mode">Dag/Nacht modus</string>
-  <string name="tip_day_night_mode_t">\tDe kaartweegave kan voor sommige vectorkaarten worden ingesteld op dag (helderder) en nacht (donkerder). \n\tNachtkleuren zijn veiliger voor nachtelijke ritten. \n\tJe kan de dag/nacht-omschakeling instellen bij \'Instellingen\' -&gt; \'Kaart uiterlijk\' -&gt;\'Dag/nacht modus\'. \n\tDe keuzes zijn: \n\t\'Zonsopkomst/Zonsondergang\' - automatische modus, gerelateerd aan de positie van de zon (standaardinstelling) \n\t\'Dag\' - gebruik altijd de dag-modus \n\t\'Nacht\' - gebruik altijd de nacht-modus \n\t\'Lichtsensor\' - de kaartweegave wordt bepaald door de lichtsensor van het apparaat (indien aanwezig)</string>
+  
   <string name="tip_osm_improve">Verbeter openstreetmap gegevens</string>
   <string name="tip_osm_improve_t">\tOsmAnd gebruikt kaarten, gebaseerd op Openstreetmap.org (OSM) gegevens en kan -behalve voor kaartweergave en navigatie- gebruikt worden om de kwaliteit van OSM gegevens te verbeteren. Je kan eenvoudig met een paar klikken interessepunten of OSM foutrapporten uploaden! \n\tHiervoor moet je eerst je OSM login informatie opgeven bij \'Instellingen\' -&gt; \'Algemene instellingen\' -&gt; \'OSM bewerken\'. \n\tOm een nieuw interessepunt toe te voegen, gebruik de optie \'Creëer interessepunt\' in het kaartcontextmenu. Vervolg met het ingeven van de informatie over het interessepunt en bevestig de wijziging. \n\tFouten in de kaarten kunnen direct worden gerapporteerd via OSM bug, de OSM groep kan het probleem dan sneller oplossen. \n\Om een fout te rapporteren, gebruik de optie \'Open OSM bug\' in het kaartcontextmenu. Geef daar een gedetailleerde beschrijving van het probleem en stuur het op met de \'Toevoegen\' knop. \n\tEr is een Internetverbinding nodig voor het aanmelden van bugs en interessepunten.</string>
   <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
@@ -194,7 +193,7 @@
 \n\t- Nieuwe vertalingen (Vietnamees, Pools)
 \n\t- Andere kleine functies
 	</string>
-  <string name="use_transparent_map_theme_descr">Gebruik transparante kaarttoetsen</string>
+  
   <string name="use_transparent_map_theme">Transparant thema</string>
   <string name="native_library_not_supported">Interne bibliotheek wordt niet ondersteund op dit apparaat.</string>
   <string name="init_native_library">Voorbereiden interne bibliotheek…</string>
@@ -292,7 +291,7 @@
   <string name="local_index_address_data">Adresgegevens</string>
   <string name="local_index_transport_data">OV-gegevens</string>
   <string name="local_index_map_data">Kaartgegevens</string>
-  <string name="local_index_items">" "</string>
+  
   <string name="local_indexes_cat_backup">Gedeactiveerd</string>
   <string name="local_indexes_cat_tts">Stemgegevens (stemgenerator)</string>
   <string name="local_indexes_cat_voice">Stemgegevens (opgenomen)</string>
@@ -377,9 +376,9 @@
   <string name="preferred_locale_descr">Kies taal</string>
   <string name="preferred_locale">Taal</string>
   <string name="tip_map_switch">Kaartbron</string>
-  <string name="tip_map_switch_t">\tDe snelste manier de kaartbron en de lagen te veranderen is via: \'Menu\' -&gt; \'Definieer beeld\'. \n\tBij \'Kaartbron…\'Je kan een selectie maken uit de aanwezige offline vectorkaarten, ingestelde (online) kaartsegmenten, of handmatig vervaardigde kaarten bijvoorbeeld d.m.v OsmAndMapCreator op een PC. \n\tOsmAnd ondersteunt ook eigen kaartbronnen.</string>
+  
   <string name="tip_app_mode">Gebruiksprofiel</string>
-  <string name="tip_app_mode_t">\tOsmAnd ondersteunt verschillende (aanpasbare) programmaprofielen voor verschillende toepassingen. \n\tJe kan het profiel instellen in \'Menu\' -&gt; \'Instellingen\' -&gt; \'Gebruiksprofiel\', of bij het creëren van een route.</string>
+  
   <string name="tip_navigation">Navigatie</string>
   <string name="tip_navigation_t">\tVoor het starten van navigatie moet je een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en kies het type navigatie.</string>
   <string name="tip_search">Zoeken</string>
@@ -582,7 +581,7 @@
   <string name="voice_data_not_supported">Niet-ondersteunde versie van stemgegevens</string>
   <string name="voice_data_corrupted">Stemgegevens zijn beschadigd</string>
   <string name="voice_data_unavailable">Geselecteerde stemgegevens niet beschikbaar</string>
-  <string name="stop_routing">Stop navigatie</string>
+  
   <string name="sd_unmounted">SD kaart niet toegankelijk.\nJe kan dan geen kaarten zien of gegevens vinden.</string>
   <string name="sd_mounted_ro">SD kaart is alleen-lezen.\nJe kan alleen vooraf geladen kaarten zien en kan niet downloaden van het Internet.</string>
   <string name="unzipping_file">Bestand wordt uitgepakt…</string>
@@ -657,7 +656,7 @@
   <string name="address">Adres</string>
   <string name="download_index_success">Download succesvol</string>
   <string name="error_io_error">Lees/schrijffout opgetreden</string>
-  <string name="downloading_file">Downloaden bestand…</string>
+  
   <string name="downloading">Downloaden…</string>
   <string name="downloading_list_indexes">Lijst van beschikbare regio\'s wordt gedownload…</string>
   <string name="list_index_files_was_not_loaded">De lijst van regio\'s werd niet geladen van osmand.net.</string>
@@ -738,7 +737,7 @@
   <string name="ChooseCountry">Kies land</string>
   <string name="position_on_map_descr">Kies plek van de positiemarkering op de kaart</string>
   <string name="position_on_map">Positiemarkering</string>
-  <string name="show_view_angle_descr">Richtingweergave gebaseerd op het kompas</string>
+  
   <string name="show_view_angle">Toon kijkrichting</string>
   <string name="map_view_3d_descr">Activeer 3D kaartbeeld</string>
   <string name="map_view_3d">Kaartbeeld 3D</string>
@@ -790,7 +789,7 @@
   <string name="search_address_building_option">Gebouwen</string>
   <string name="search_address_street_option">Dwarsstraat</string>
   <string name="search_tabs_location">Locatie</string>
-  <string name="context_menu_item_navigate_point">Aanwijzingen</string>
+  
   <string name="context_menu_item_add_favorite">Voeg toe aan favorieten</string>
   <string name="context_menu_item_update_map">Kaart bijwerken</string>
   <string name="context_menu_item_open_bug">Meld fout in OpenStreetMap</string>
@@ -856,7 +855,7 @@
   <string name="unknown_from_location">Startlocatie is nog niet bepaald</string>
   <string name="confirm_interrupt_download">Wil je het downloaden afbreken?</string>
   <string name="basemap_was_selected_to_download">De basiskaart is nodig voor OsmAnd en is al geselecteerd om te downloaden.</string>
-  <string name="gpx_index_settings_descr">" (met GPX analysator)"</string>
+  
   <string name="map_online_plugin_is_not_installed">Activeer de online kaarten-plugin om andere kaartbronnen te kunnen selecteren</string>
   <string name="map_online_data">Online (raster-) kaarten</string>
   <string name="map_online_data_descr">Gebruik online kaarten (download en bewaar deze op SD-kaart)</string>
@@ -964,9 +963,9 @@
   <string name="use_compass_navigation">Gebruik kompas</string>
   <string name="route_updated_loc_found">Route wordt herberekend als de locatie gevonden is</string>
   <string name="continue_follow_previous_route_auto">Vorige navigatie was nog niet klaar. Nu daarmee doorgaan? (%1$s seconden)</string>
-  <string name="show_cameras_descr">Toon snelheidscontrole-camera\'s (is mogelijk verboden in sommige landen)</string>
-  <string name="show_traffic_warnings_descr">Toon maximaal toegestane snelheden en verkeersdrempels</string>
-  <string name="avoid_toll_roads_descr">Vermijd tolwegen bij routeberekening</string>
+  
+  
+  
   <string name="show_cameras">Toon snelheidscontroles</string>
   <string name="show_traffic_warnings">Toon maximumsnelheden</string>
   <string name="avoid_toll_roads">Vermijd tolwegen</string>
@@ -979,7 +978,7 @@
 	</string>
   <string name="map_widget_top_text">Straatnaam</string>
   <string name="map_widget_config">Configuratie</string>
-  <string name="map_widget_map_select">Kaartselectie</string>
+  
   <string name="map_widget_back_to_loc">Waar ben ik</string>
   <string name="map_widget_lock_screen">Vergrendel scherm</string>
   <string name="map_widget_compass">Kompas</string>
@@ -1145,8 +1144,8 @@
     <string name="search_villages_and_postcodes">Zoek dorp/postcode</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f Lon %2$.3f</string>
     <string name="route_descr_current_location">Huidige positie</string>
-    <string name="route_descr_from_to">Van: %1$s\nNaar: %2$s</string>
-    <string name="route_descr_from_to_via">Van: %1$s\nVia: %2$s\nNaar: %3$s</string>
+    
+    
     <string name="map_widget_max_speed">Snelheidslimiet</string>
     <string name="tip_altitude_offset">Hoogteweergave - Afwijkingscorrectie</string>
 	<string name="tip_altitude_offset_t">"\tDe meeste GPS ontvangers geven hoogtemetingen in het WGS84-systeem. De conversie naar lokale systemen vereist een positie-afhankelijke correctie.
@@ -1164,18 +1163,18 @@
     <string name="srtm_plugin_name">Hoogtelijnen-plugin</string>
     <string name="download_select_map_types">Andere kaarten</string>
     <string name="download_srtm_maps">Hoogtelijnen</string>
-    <string name="osmand_distance_plugin_description">Meet de afstand tussen twee of meer punten. Voeg punten toe met een korte aanraking en verwijder ze door ze lang aan te raken.</string>
-	<string name="osmand_distance_plugin_name">Afstand berekenen</string>
+    
+	
 <string name="audionotes_plugin_description">Audio/video-notities maken tijdens de reis</string>
     <string name="audionotes_plugin_name">Audio/video-notities</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin voor offline hoogtelijnen</string>
     <string name="osmand_srtm_long_description_1000_chars">Met deze plugin kunnen hoogtelijnen worden weergegeven in OsmAnd\'s offline kaarten. De wereldwijde gegevens (van 70 graden noorderbreedte en 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
-    <string name="use_clear_distance_measurement">Klik nog een keer om de meetpunten te wissen.</string>
-    <string name="use_distance_measurement">Klik om een punt te markeren, lang klikken om het vorige punt te wissen, klik op de meting-widget om te stoppen.</string>
+    
+    
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
     <string name="audionotes_location_not_defined">Nog geen locatie gedefinieerd om aan notitie te koppelen. \"Gebruik locatie…\" om een notatie aan een specifieke locatie toe te wijzen</string>
     <string name="map_widget_audionotes">Audionotities</string>
-    <string name="srtm_plugin_attribution">ASTER is een product van METI en NASA</string>
+    
     <string name="monitoring_control_stop">stoppen</string>
     <string name="recording_is_recorded">Audio/video wordt opgenomen. Om te stoppen, druk op de AV-widget.</string>
     <string name="recording_playing">Een geluidsfragment van de gekozen opname wordt afgespeeld.\n%1$s</string>

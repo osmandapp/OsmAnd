@@ -1,28 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" android:orientation="vertical" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-<!--   <TextView android:layout_width="fill_parent" android:textSize="18dp" android:layout_height="wrap_content" android:gravity="center" android:layout_marginTop="10dp" android:layout_marginBottom="10dp" android:text="@string/recalculate_route_to_your_location"></TextView> -->
-<LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:gravity="center" android:layout_height="wrap_content" android:orientation="horizontal">
-<ToggleButton android:contentDescription="@string/app_mode_car" android:textOn="" android:textOff=""  android:id="@+id/CarButton" 
-    android:layout_gravity="center" android:layout_width="64dp" android:layout_height="64dp"  android:layout_marginLeft="10dp" />
-<ToggleButton android:contentDescription="@string/app_mode_bicycle" android:textOn="" android:textOff="" android:id="@+id/BicycleButton" 
-    android:layout_gravity="center" android:layout_width="64dp" android:layout_height="64dp"  android:layout_marginLeft="10dp" />
-<ToggleButton android:contentDescription="@string/app_mode_pedestrian" android:textOn="" android:textOff="" android:id="@+id/PedestrianButton" 
-    android:layout_width="64dp" android:layout_height="64dp"  
-        android:layout_gravity="center" android:layout_marginLeft="10dp" />
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/LinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
 
-<ScrollView android:layout_height="wrap_content" android:layout_width="fill_parent"  
-    android:layout_marginTop="5dp" android:layout_marginBottom="5dp" android:layout_marginLeft="10dp">
-<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="vertical">
-<TextView android:id="@+id/TextView" android:gravity="left" android:textSize="18dp" 
-    android:layout_height="wrap_content" android:layout_width="fill_parent"  
-    />
-<CheckBox android:id="@+id/OptimalCheckox" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/non_optimal_route_calculation"/>
-</LinearLayout>
-</ScrollView>
+        <ToggleButton
+            android:id="@+id/CarButton"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:contentDescription="@string/app_mode_car"
+            android:textOff=""
+            android:textOn="" />
+
+        <ToggleButton
+            android:id="@+id/BicycleButton"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:contentDescription="@string/app_mode_bicycle"
+            android:textOff=""
+            android:textOn="" />
+
+        <ToggleButton
+            android:id="@+id/PedestrianButton"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:contentDescription="@string/app_mode_pedestrian"
+            android:textOff=""
+            android:textOn="" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="@string/route_from"
+                    android:textSize="18sp" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/FromSpinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" >
+                </Spinner>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/TextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:gravity="left"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/OptimalCheckox"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/non_optimal_route_calculation" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

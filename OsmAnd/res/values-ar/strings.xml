@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>    
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>    
 <string name="recording_context_menu_show">عرضإظهار</string>
     <string name="av_def_action_picture">التقاط صورةالتقاط صورة</string>
     <string name="animate_routing_using_gpx">هل تريد استخدام ملف GPX القائمة؟</string>
@@ -8,7 +7,7 @@
     <string name="av_use_external_recorder">استخدام مسجل الخارجية</string>
     <string name="av_settings">"إعدادات الصوت / الفيديو "</string>
     <string name="recording_camera_not_available">الكاميرا ليست متاحة</string>
-    <string name="use_clear_distance_measurement">انقر مرة أخرى لمسح نقطة القياس.</string>
+    
     <string name="search_villages_and_postcodes">البحث القرى / الرمز البريدي</string>
 	<string name="gps_not_available">يرجى تمكين GPS في إعدادات</string>
     <string name="replace_destination_point">استبدال نقطة الوجهة</string>
@@ -53,7 +52,7 @@
     <string name="av_control_stop">توقف</string>
     <string name="av_control_start">بداية</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd المساعد لخطوط كفاف متواجد حاليا</string>
-    <string name="osmand_distance_plugin_name">حاسبة مسافة</string>
+    
     <string name="map_widget_distancemeasurement">قياس المسافة</string>
     <string name="monitoring_control_stop">توقف</string>
     <string name="map_widget_audionotes">الصوت تلاحظ</string>
@@ -67,8 +66,8 @@
     <string name="rendering_attr_noAdminboundaries_name">إخفاء حدود</string>
 	<string name="map_widget_max_speed">تحديد السرعة</string>
     <string name="route_descr_current_location">الوظيفة الحالية</string>
-    <string name="route_descr_from_to">من: %1$s↵\nإلى: %2$s</string>
-    <string name="route_descr_from_to_via">من: %1$s↵\nعن طريق: %2$s↵\nإلى: %3$s</string>
+    
+    
     <string name="no_buildings_found">العثور على المباني.</string>
     <string name="incremental_search_city">البحث المدينة تدريجيا</string>
     <string name="safe_mode">الوضع الآمن</string>
@@ -97,7 +96,7 @@
 	<string name="use_compass_navigation">يستخدمون البوصلة</string>
 	<string name="avoid_motorway">تجنب الطرق السريعة</string>
 	<string name="tip_update_index">تحديث البيانات دون اتصال</string>
-	<string name="monitor_preferences">ملاحقة</string>
+	
 	<string name="show_lanes">عرض الممرات</string>
 	<string name="avoid_unpaved">تجنب الطرق غير المعبدة</string>
 	<string name="avoid_ferries">تجنب العبارات</string>
@@ -147,7 +146,7 @@
 	<string name="offline_navigation_not_available">OsmAnd متواجد حاليا التصفح غير متاح مؤقتا.</string>
 	<string name="unknown_from_location">نقطة الانطلاق لم يتحدد بعد</string>
 	<string name="local_indexes_cat_map">خرائط حاليا (ناقلات)</string>
-	<string name="gpx_index_settings_descr">..(ويشمل GPX محلل)</string>
+	
 	<string name="index_settings_descr">تنزيل الخرائط وإدارة متواجد حاليا البيانات المخزنة على جهازك</string>
 	<string name="extra_settings">الإعدادات المتقدمة</string>
 	<string name="osmand_monitoring_description">يظهر من إعدادات تسهيل لتسجيل الرحلات الخاصة بك إلى ملفات GPX المحلية أو عبر الإنترنت باستخدام خدمة ويب.</string>

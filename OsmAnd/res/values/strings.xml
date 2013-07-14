@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="route_descr_to">To: %1$s</string>
+    <string name="route_descr_to_via">Via: %1$s\nTo: %2$s</string>
+    <string name="route_from">From:</string>
     <string name="speak_warnings_title">Announce alarms&#8230;</string>
 	<string name="speak_warnings_descr">Configure traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits</string>
     <string name="speak_speed_limit">Announce speed limit</string>
@@ -223,8 +226,6 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="route_descr_current_location">Current position</string>
-    <string name="route_descr_from_to">From: %1$s\nTo: %2$s</string>
-    <string name="route_descr_from_to_via">From: %1$s\nVia: %2$s\nTo: %3$s</string>
     <string name="no_buildings_found">No buildings found.</string>
     <string name="incremental_search_city">Search city incrementally</string>
     <string name="search_villages_and_postcodes">Search villages/postcode</string>

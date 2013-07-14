@@ -6,6 +6,7 @@ import java.io.File;
 import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -74,6 +75,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -426,11 +428,6 @@ public class MapActivityActions implements DialogProvider {
     } 
     
 	public String generateRouteDescription(Location fromOrCurrent, LatLon to) {
-		String from = mapActivity.getString(R.string.route_descr_current_location);
-		if (fromOrCurrent != null && fromOrCurrent.getProvider().equals("map")) {
-			from = getRoutePointDescription(fromOrCurrent.getLatitude(),
-					fromOrCurrent.getLongitude());
-		}
 		TargetPointsHelper targets = getTargets();
 		String tos;
 		if(to == null) {
@@ -442,7 +439,7 @@ public class MapActivityActions implements DialogProvider {
 		
 		int sz = targets.getIntermediatePoints().size();
 		if(sz == 0) {
-			return mapActivity.getString(R.string.route_descr_from_to, from, tos);
+			return mapActivity.getString(R.string.route_descr_to, tos);
 		} else {
 			String via = "";
 			List<String> names = targets.getIntermediatePointNames();
@@ -450,7 +447,7 @@ public class MapActivityActions implements DialogProvider {
 				via += "\n - " + getRoutePointDescription(targets.getIntermediatePoints().get(i),
 						names.get(i));
 			}
-			return mapActivity.getString(R.string.route_descr_from_to_via, from, via, tos);
+			return mapActivity.getString(R.string.route_descr_to_via, via, tos);
 		}
 	}
     
@@ -473,6 +470,17 @@ public class MapActivityActions implements DialogProvider {
 		
 		TextView tv = ((TextView) view.findViewById(R.id.TextView));
 		tv.setText(generateRouteDescription(fromOrCurrent, to));
+		String from = mapActivity.getString(R.string.route_descr_current_location);
+		if (fromOrCurrent != null && fromOrCurrent.getProvider().equals("map")) {
+			from = getRoutePointDescription(fromOrCurrent.getLatitude(),
+					fromOrCurrent.getLongitude());
+		}
+		Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
+		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(view.getContext(), 
+				android.R.layout.simple_spinner_item, 
+				new ArrayList<String>(Arrays.asList(new String[]{from}))
+				);
+		fromSpinner.setAdapter(fromAdapter);
 		ApplicationMode appMode = settings.getApplicationMode();
 		if(appMode == ApplicationMode.DEFAULT) {
 			appMode = ApplicationMode.CAR;

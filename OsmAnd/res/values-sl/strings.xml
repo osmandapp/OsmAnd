@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="search_button">Išči</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
 	<string name="settings_Button">Nastavitve</string>
 	<string name="favorites_Button">Priljubljene</string>
@@ -230,7 +229,7 @@
 	<string name="monitoring_mode_off">Snemaj sled</string>
 	<string name="monitoring_mode_on">Zaustavi\n snemanje sledi</string>
 	<string name="save_route_as_gpx">Shrani pot kot datoteko GPX</string>
-	<string name="gpx_index_settings_descr">" (vključuje GPX sledi)"</string>
+	
 	<string name="osmand_monitoring_description">Pokaži nastavitve, ki določajo snemanje sledi v GPX datoteke oz. sledenje v živo s pomočjo spletne storitve.</string>
 	<string name="send_files_to_osm">Pošljem datoteko GPX na OSM?</string>
 	<string name="validate_gpx_upload_name_pwd">Določite OSM uporabniško ime in geslo za nalaganje GPX datotek.</string>
@@ -332,7 +331,7 @@
 	<string name="filterpoi_activity">Ustvari POI filter</string>
 	<string name="recalculate_route_to_your_location">Način prevoza:</string>
 	<string name="select_navigation_mode">Izberi način prevoza</string>
-	<string name="monitor_preferences">Sledenje</string>
+	
 	<string name="day_night_info_description">Vzhod: %1$s\nZahod: %2$s</string>
 	<string name="live_monitoring_mode_off">Začni\nsledenje</string>
 	<string name="live_monitoring_mode_on">Zaustavi\n sledenje v živo</string>
@@ -362,7 +361,7 @@
 	<string name="int_continuosly">Neprekinjeno</string>
 	<string name="screen_is_locked">Za odklepanje zaslona pritisnite ikono ključavnice</string>
 	<string name="map_widget_top_text">Ime ceste</string>
-	<string name="map_widget_map_select">Vir karte</string>
+	
 	<string name="map_widget_mini_route">Mini zemljevid poti</string>
 	<string name="select_animate_speedup">Izberite hitrost animacije poti</string>
     	<string name="osmand_parking_warning">Opozorilo</string>
@@ -588,7 +587,7 @@
 	\n\t\'Temno zelena/modra\' - podobno, le da so podatki deaktivirani na napravi</string>
 	<string name="download_files_question">Prenesi {0} datotek(o) ({1} MB)?</string>
 	<string name="download_files">Prenesi</string>
-	<string name="downloading_file">Prenos datoteke…</string>
+	
 	<string name="downloading">Prenašanje …</string>
 	<string name="installing_new_resources">Odpakiranje novih podatkov …</string>
 	<string name="tip_navigation_t">\tPred začetkom navigacije morate izbrati cilj. Nato izberite \'Meni\' -&gt; \'Navodila\' in izberite tip navigacije.</string>
@@ -653,8 +652,8 @@
 	<string name="tip_map_context_menu">Kontekstni meni zemljevida</string>
 	<string name="tip_map_context_menu_t">"\tKontekstni meni zemljevida je na voljo z daljšim pritiskom na zemljevidu ali s pritiskom na kolešček.\n\tTo naredi okvir z izpisano koordinato. Če želite odpreti kontekstni meni, pritisnite na okvir. (Ali pa pritisnite in držite da se skrije.)\n\tKontekstni meni zemljevida vsebuje vse akcije, ki se nanašajo na točko (mesto). "</string>
 	<string name="tip_search_t">"\tIščete lahko direktno na zemljevidu ali pa po naslovu, po mestu, kot POI ali priljubljenih mestih.\n\tS pritiskom na \'Iskanje\' v glavnem meniju se odpre iskalno okno. Za vse zadetke iskanja ponuja kontekstni meni 2 možnosti: \'Nastavi kot cilj\' in \'Prikaži na zemljevidu\'. "</string>
-	<string name="route_descr_from_to">Od %1$s\ndo %2$s</string>
-    <string name="route_descr_from_to_via">Od: %1$s\nprek: %2$s\ndo: %3$s</string>
+	
+    
     <string name="route_descr_lat_lon">Dol %1$.3f šir %2$.3f</string>
     <string name="route_descr_current_location">Trenutno mesto</string>
     <string name="first_time_msg">Hvala, ker uporabljate OsmAnd. Za uporabo veliko zmožnosti tega programa, boste potrebovali krajevne podatke, ki jih lahko prejmete preko \'Nastavitve\'-&gt;\'Krajevni podatki\'. Potem boste lahko videli zemljevide, našli naslove, našli točke POI in našli javni prevoz.</string>    
@@ -949,7 +948,7 @@ Pomembnejše lastnosti:
 	<string name="background_router_service">Izvajaj v ozadju</string>
 	<string name="off_router_service_no_gps_available">Storitev navigacije v ozadju zahteva, da je vsaj en ponudnik mesta vklopljen.</string>
 	<string name="search_poi_filter">Filter</string>
-	<string name="stop_routing">Ustavi navigac.</string>
+	
 	<string name="sd_unmounted">SD kartica ni dosegljiva.\nNe boste mogli gledati zemljevidov ali najti stvari.</string>
 	<string name="sd_mounted_ro">SD kartica je samo za branje.\nVidite lahko samo prednaloženi zemljevid in ne more prenesti z interneta.</string>
 	<string name="unzipping_file">Odzipanje datoteke …</string>
@@ -1142,8 +1141,8 @@ Pomembnejše lastnosti:
     <string name="av_control_stop">ustavi</string>
     <string name="map_widget_av_notes">Zvočni zapisi</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd vtičnik za izohipse brez povezave</string>
-    <string name="osmand_distance_plugin_name">Računanje razdalj</string>
-    <string name="use_clear_distance_measurement">Kliknite še enkrat, če želite počistiti merilne točke.</string>
+    
+    
     <string name="map_widget_distancemeasurement">Merjenje razdalj</string>
     <string name="monitoring_control_stop">ustavi</string>
     <string name="map_widget_audionotes">Zvočni zapisi</string>
@@ -1170,8 +1169,8 @@ Pomembnejše lastnosti:
     <string name="recording_is_recorded">Zvok/video se snema. Za ustavitev pritisnite gumb ustavi na pripomočku.</string>
     <string name="layer_recordings">Plast posnetkov</string>
     <string name="av_control_start">snemaj</string>
-    <string name="osmand_distance_plugin_description">Merjenje razdalje med dvema ali več točkami. Dodajte točke s kratkim klikom in odstranite jih z dolgim pritiskom.</string>
-    <string name="use_distance_measurement">Pritisnite za dodati točko, pritisnite in držite za izbrisati prejšnjo točko, kliknite na pripomoček za merjenje za izhod.</string>
+    
+    
     <string name="av_def_action_video">Snemanje videa</string>
     <string name="av_def_action_audio">Snemanje zvoka</string>
     <string name="av_widget_action_descr">Izberite privzeto dejanje za pripomoček</string>
