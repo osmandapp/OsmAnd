@@ -150,14 +150,12 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 			if(model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
 				icon.setImageResource(android.R.drawable.ic_input_get);
 			} else if (model.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)) {
-				//label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 				icon.setImageResource(android.R.drawable.ic_search_category_default);
 			} else {
-//				label.setTypeface(Typeface.DEFAULT);
 				if(RenderingIcons.containsBigIcon(model.getSimplifiedId())) {
 					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), model.getSimplifiedId()));
 				} else {
-					icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.list_favorite);
+					icon.setImageResource(R.drawable.mx_user_defined);
 				}
 			}
 			ImageView editIcon = (ImageView) row.findViewById(R.id.folder_edit_icon);

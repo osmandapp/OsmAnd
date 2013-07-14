@@ -23,6 +23,7 @@ import net.osmand.access.NavigationInfo;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -806,9 +807,14 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					direction.setImageResource(R.drawable.closed_poi);
 				}
 			}
-			String i = amenity.getType().getDefaultTag().toLowerCase() + "_" + amenity.getSubType().toLowerCase();
-			if(RenderingIcons.containsBigIcon(i)) {
-				icon.setImageResource(RenderingIcons.getBigIconResourceId(i));
+			StringBuilder tag = new StringBuilder();
+			StringBuilder value = new StringBuilder();
+			MapRenderingTypes.getDefault().getAmenityTagValue(amenity.getType(), amenity.getSubType(),
+					tag, value);
+			if(RenderingIcons.containsBigIcon(tag.toString() + "_" + value.toString())) {
+				icon.setImageResource(RenderingIcons.getBigIconResourceId(tag.toString() + "_" + value.toString()));
+			} else if(RenderingIcons.containsBigIcon(value.toString())) {
+				icon.setImageResource(RenderingIcons.getBigIconResourceId(value.toString()));
 			} else {
 				icon.setImageDrawable(null);
 			}
