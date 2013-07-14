@@ -5,6 +5,9 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:background="?attr/expandable_category_color"
+        android:paddingTop="6dp"
+        android:paddingBottom="3dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
         <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingLeft="5dp"
@@ -17,10 +20,11 @@
         android:id="@+id/plugin_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:gravity="top"
         android:textStyle="bold"
         android:textColor="?android:textColorPrimary"
-        style="@style/ListText.Small" android:text="@string/extra_settings"
-         android:paddingLeft="5dp" android:paddingRight="10dp">
+        style="@style/ListText" android:text="@string/extra_settings"
+        android:paddingRight="10dp">
     </TextView>
 	</LinearLayout>
     <TextView
@@ -31,7 +35,11 @@
         android:maxLines="7"
         android:text="@string/osmand_extra_settings_description"
         android:textColor="?android:textColorSecondary"
-        android:textSize="14sp" android:paddingLeft="10dp" android:paddingRight="10dp">
+        android:textSize="14sp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
     </TextView>
 
