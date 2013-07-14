@@ -128,6 +128,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 				hideZoomLevelInTime();
 			}
 		}
+		int sh = Color.WHITE;
+		if (nightMode != null && nightMode.isNightMode()) {
+			sh = 0xffC8C8C8;
+		}
+		if(shadowColor != sh) {
+			shadowColor = sh;
+			zoomTextPaint.setColor(sh == Color.WHITE ? Color.BLACK : sh);
+			rulerTextPaint.setColor(sh == Color.WHITE ? Color.BLACK : sh);
+		}
 		if (showZoomLevel || !view.getSettings().SHOW_RULER.get()) {
 			drawZoomLevel(canvas);
 		} else {
