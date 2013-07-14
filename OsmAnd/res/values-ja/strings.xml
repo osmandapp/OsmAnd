@@ -365,7 +365,7 @@ MB)をダウンロードしますか?</string>
      <string name="menu_layers">ビュー定義</string>
      
      <string name="context_menu_item_search_poi">POIを検索</string>
-     <string name="context_menu_item_show_route">ルート開始位置</string>
+     
      <string name="use_trackball_descr">トラックボールを使用してマップを動かす</string>
      <string name="use_trackball">トラックボールを使用</string>
      <string name="background_service_wait_int_descr">位置修正用の待ち時間をセット</string>

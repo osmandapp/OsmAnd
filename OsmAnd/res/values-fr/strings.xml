@@ -466,7 +466,7 @@
   <string name="layer_map">Source de la carte…</string>
   <string name="menu_layers">Couches</string>
   <string name="context_menu_item_search_poi">Chercher un Point d\'Intérêt</string>
-  <string name="context_menu_item_show_route">Partir depuis ce point</string>
+  
   <string name="use_trackball_descr">Utiliser le pointeur pour se déplacer sur la carte</string>
   <string name="use_trackball">Utiliser le pointeur</string>
   <string name="background_service_wait_int_descr">Configurer le délai d\'attente pour déterminer l\'emplacement</string>

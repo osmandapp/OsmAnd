@@ -132,7 +132,7 @@
   <string name="layer_map">Fonte dos mapas…</string>
   <string name="menu_layers">Definir exibição</string>
   <string name="context_menu_item_search_poi">Encontre um Ponto de Interesse</string>
-  <string name="context_menu_item_show_route">Exibir rota a partir daqui</string>
+  
   <string name="use_trackball_descr">Utilize o cursor para mover o mapa</string>
   <string name="use_trackball">Use o cursor</string>
   <string name="background_service_wait_int_descr">Definir o tempo limite para determinar a localização</string>

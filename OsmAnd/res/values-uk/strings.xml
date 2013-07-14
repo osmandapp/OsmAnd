@@ -569,7 +569,7 @@
   <string name="layer_map">Джерело мапи…</string>
   <string name="menu_layers">Мапа</string>
   <string name="context_menu_item_search_poi">Шукати POI</string>
-  <string name="context_menu_item_show_route">Маршрут звідси</string>
+  
   <string name="use_trackball_descr">Використовувати трекбол для руху мапи</string>
   <string name="use_trackball">Використовувати трекбол</string>
   <string name="background_service_wait_int_descr">Виберіть максимальний час для пошуку позиції</string>

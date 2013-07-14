@@ -649,7 +649,7 @@
   <string name="layer_map">Žemėlapių šaltiniai…</string>
   <string name="menu_layers">Nustatyti vaizdą</string>
   <string name="context_menu_item_search_poi">Ieškoti LV</string>
-  <string name="context_menu_item_show_route">Rodyti maršrutą nuo čia</string>
+  
   <string name="use_trackball_descr">Naudoti manipuliatoriaus rutulį žemėlapiui pastumti</string>
   <string name="use_trackball">Naudoti manipuliatoriaus rutulį</string>
   <string name="background_service_wait_int_descr">Nustatyti didžiausią laukimo laiką kiekvienam foniniam vietos nustatymui</string>

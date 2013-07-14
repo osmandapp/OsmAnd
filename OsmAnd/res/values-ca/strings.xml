@@ -605,7 +605,7 @@
 <string name="layer_route">Ruta</string>
 <string name="layer_favorites">Preferits</string>
 <string name="menu_layers">Defineix la visualització</string>
-<string name="context_menu_item_show_route">Mostra la ruta des d\'aquí</string>
+
 <string name="use_trackball_descr">Utilitzeu el ratolí de bola per moure el mapa</string>
 <string name="use_trackball">Utilitza el ratolí de bola</string>
 <string name="process_navigation_service">Servei de navegació de l\'OsmAnd</string>

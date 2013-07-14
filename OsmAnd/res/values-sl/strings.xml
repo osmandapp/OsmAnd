@@ -530,7 +530,7 @@
 	<string name="download_roads_only_item">Le ceste</string>
     <string name="download_regular_maps">Običajni zemljevidi</string>
     <string name="download_link_and_local_description">Kliknite tu za prenos oz. posodobitev podatkov.\nKliknite na katerokoli element za prikaz podrobnosti, pritisnite in držite za izklop ali brisanje. Količina prostora na napravi (%1$s prosto):</string>
-	<string name="context_menu_item_show_route">Prikaži pot od tu</string>
+	
 	<string name="local_index_mi_restore">Vklopi</string>
 	<string name="local_index_mi_backup">Izklopi</string>
 	<string name="local_index_mi_delete">Briši</string>

@@ -740,7 +740,7 @@
 	<string name="layer_map">地圖來源…</string>
 	<string name="menu_layers">定義檢視</string>
 	<string name="context_menu_item_search_poi">查尋興趣點</string>
-	<string name="context_menu_item_show_route">由此顯示導航路徑</string>
+	
 	<string name="use_trackball_descr">使用軌跡球移動地圖</string>
 	<string name="use_trackball">使用軌跡球</string>
 	<string name="background_service_wait_int_descr">設定背景定位等待時間</string>

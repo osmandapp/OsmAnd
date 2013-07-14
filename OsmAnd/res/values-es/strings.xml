@@ -440,7 +440,7 @@
   <string name="layer_map">Fuente de mapas…</string>
   <string name="menu_layers">Definir vista</string>
   <string name="context_menu_item_search_poi">Buscar PDI</string>
-  <string name="context_menu_item_show_route">Mostrar ruta desde aquí</string>
+  
   <string name="use_trackball_descr">Usa trackball para mover el mapa</string>
   <string name="use_trackball">Usar trackball</string>
   <string name="background_service_wait_int_descr">Fijar el tiempo de espera máximo para determinar la posición en cada lectura del servicio de fondo</string>

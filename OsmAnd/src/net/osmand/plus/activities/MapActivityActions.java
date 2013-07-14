@@ -427,33 +427,40 @@ public class MapActivityActions implements DialogProvider {
     	return "";
     } 
     
-	public String generateRouteDescription(Location fromOrCurrent, LatLon to) {
+	public String generateViaDescription() {
 		TargetPointsHelper targets = getTargets();
-		String tos;
-		if(to == null) {
-			tos = getRoutePointDescription(targets.getPointToNavigate(), 
-					targets.getPointNavigateDescription());
-		} else {
-			tos = getRoutePointDescription(to, "");
+		String via = "";
+		List<String> names = targets.getIntermediatePointNames();
+		if (names.size() == 0) {
+			return via;
+		}
+		for (int i = 0; i < names.size(); i++) {
+			via += "\n - " + getRoutePointDescription(targets.getIntermediatePoints().get(i), names.get(i));
+		}
+		return mapActivity.getString(R.string.route_via) + via;
+	}
+	
+	public static class DirectionDialogStyle {
+		public boolean gpxRouteEnabled;
+		public boolean routeToMapPoint;
+
+		public static DirectionDialogStyle create() {
+			return new DirectionDialogStyle();
+		}
+		public DirectionDialogStyle gpxRouteEnabled() {
+			gpxRouteEnabled = true;
+			return this;
 		}
 		
-		int sz = targets.getIntermediatePoints().size();
-		if(sz == 0) {
-			return mapActivity.getString(R.string.route_descr_to, tos);
-		} else {
-			String via = "";
-			List<String> names = targets.getIntermediatePointNames();
-			for (int i = 0; i < sz ; i++) {
-				via += "\n - " + getRoutePointDescription(targets.getIntermediatePoints().get(i),
-						names.get(i));
-			}
-			return mapActivity.getString(R.string.route_descr_to_via, via, tos);
+		public DirectionDialogStyle routeToMapPoint() {
+			routeToMapPoint = true;
+			return this;
 		}
 	}
     
     
-	public void getDirections(final Location fromOrCurrent, final LatLon to, boolean gpxRouteEnabled) {
-
+	public void getDirections(final Location mapView, DirectionDialogStyle style) {
+		final Location current = getLastKnownLocation();
 		Builder builder = new AlertDialog.Builder(mapActivity);
 		final TargetPointsHelper targets = getTargets();
 
@@ -468,19 +475,19 @@ public class MapActivityActions implements DialogProvider {
 		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
 		buttons[ApplicationMode.PEDESTRIAN.ordinal()].setButtonDrawable(R.drawable.ic_pedestrian);
 		
-		TextView tv = ((TextView) view.findViewById(R.id.TextView));
-		tv.setText(generateRouteDescription(fromOrCurrent, to));
-		String from = mapActivity.getString(R.string.route_descr_current_location);
-		if (fromOrCurrent != null && fromOrCurrent.getProvider().equals("map")) {
-			from = getRoutePointDescription(fromOrCurrent.getLatitude(),
-					fromOrCurrent.getLongitude());
+		final Spinner fromSpinner = setupFromSpinner(mapView, view);
+		final List<LatLon> toList = new ArrayList<LatLon>();
+		final Spinner toSpinner = setupToSpinner(mapView, view, toList, style);
+		
+		
+		String via = generateViaDescription();
+		if(via.length() == 0){
+			((TextView) view.findViewById(R.id.ViaView)).setVisibility(View.GONE);
+		} else {
+			((TextView) view.findViewById(R.id.ViaView)).setVisibility(View.VISIBLE);
+			((TextView) view.findViewById(R.id.ViaView)).setText(via);
 		}
-		Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
-		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(view.getContext(), 
-				android.R.layout.simple_spinner_item, 
-				new ArrayList<String>(Arrays.asList(new String[]{from}))
-				);
-		fromSpinner.setAdapter(fromAdapter);
+		
 		ApplicationMode appMode = settings.getApplicationMode();
 		if(appMode == ApplicationMode.DEFAULT) {
 			appMode = ApplicationMode.CAR;
@@ -529,13 +536,14 @@ public class MapActivityActions implements DialogProvider {
 		DialogInterface.OnClickListener onlyShowCall = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if (to != null) {
-					targets.navigateToPoint(to, false, -1);
+				LatLon tos = toList.get(toSpinner.getSelectedItemPosition());
+				if ( tos != null && tos != targets.getPointToNavigate()) {
+					targets.navigateToPoint(tos, false, -1);
 				}
 				if (!targets.checkPointToNavigate(getMyApplication())) {
 					return;
 				}
-				Location from = fromOrCurrent;
+				Location from = fromSpinner.getSelectedItemPosition() == 0 ? current : mapView;
 				if (from == null) {
 					from = getLastKnownLocation();
 				}
@@ -557,24 +565,21 @@ public class MapActivityActions implements DialogProvider {
 		DialogInterface.OnClickListener followCall = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(to != null) {
-					targets.navigateToPoint(to, false, -1);
+				LatLon tos = toList.get(toSpinner.getSelectedItemPosition());
+				if ( tos != null && tos != targets.getPointToNavigate()) {
+					targets.navigateToPoint(tos, false, -1);
 				}
 				if (!targets.checkPointToNavigate(getMyApplication())) {
 					return;
 				}
 				boolean msg = true;
-				Location current = fromOrCurrent;
-				if(current == null) {
-					current = getLastKnownLocation();
-				}
-				
-				if (!OsmAndLocationProvider.isPointAccurateForRouting(current)) {
-					current = null;
-				}
 				Location lastKnownLocation = getLastKnownLocation();
+				Location from = fromSpinner.getSelectedItemPosition() == 0 ? current : mapView;
+				if(from == null) {
+					from = lastKnownLocation;
+				}
 				if (OsmAndLocationProvider.isPointAccurateForRouting(lastKnownLocation)) {
-					current = lastKnownLocation;
+					from = lastKnownLocation;
 					msg = false;
 				}
 				if (msg) {
@@ -584,15 +589,16 @@ public class MapActivityActions implements DialogProvider {
 				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, !nonoptimal.isChecked());
 				dialog.dismiss();
 				mapActivity.followRoute(mode, targets.getPointToNavigate(), targets.getIntermediatePoints(), 
-						current, null);
+						from, null);
 			}
 		};
 
 		DialogInterface.OnClickListener useGpxNavigation = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(to != null) {
-					targets.navigateToPoint(to, false, -1);
+				LatLon tos = toList.get(toSpinner.getSelectedItemPosition());
+				if ( tos != null && tos != targets.getPointToNavigate()) {
+					targets.navigateToPoint(tos, false, -1);
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				navigateUsingGPX(mode);
@@ -603,12 +609,57 @@ public class MapActivityActions implements DialogProvider {
 		builder.setTitle(R.string.get_directions);
 		builder.setPositiveButton(R.string.follow, followCall);
 		builder.setNeutralButton(R.string.only_show, onlyShowCall);
-		if (gpxRouteEnabled) {
+		if (style.gpxRouteEnabled) {
 			builder.setNegativeButton(R.string.gpx_navigation, useGpxNavigation);
 		} else {
 			builder.setNegativeButton(R.string.no_route, null);
 		}
 		builder.show();
+	}
+
+	private Spinner setupFromSpinner(final Location mapView, View view) {
+		String currentLocation = mapActivity.getString(R.string.route_descr_current_location);
+		ArrayList<String> fromActions = new ArrayList<String>();
+		fromActions.add(currentLocation);
+		if(mapView != null) {
+			String mapLocation = mapActivity.getString(R.string.route_descr_map_location) + " " + getRoutePointDescription(mapView.getLatitude(),
+				mapView.getLongitude());
+			fromActions.add(mapLocation);
+		}
+		final Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
+		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(view.getContext(), 
+				android.R.layout.simple_spinner_item, 
+				fromActions
+				);
+		fromSpinner.setAdapter(fromAdapter);
+		return fromSpinner;
+	}
+	
+	private Spinner setupToSpinner(final Location mapView, View view, List<LatLon> locs, DirectionDialogStyle style) {
+		final TargetPointsHelper targets = getTargets();
+		ArrayList<String> toActions = new ArrayList<String>();
+		if (targets.getPointToNavigate() != null) {
+			toActions.add(mapActivity.getString(R.string.route_descr_destination) + " "
+					+ getRoutePointDescription(targets.getPointToNavigate(), targets.getPointNavigateDescription()));
+			locs.add(targets.getPointToNavigate());
+		}
+		if(mapView != null) {
+			String mapLocation = mapActivity.getString(R.string.route_descr_map_location) + " " + getRoutePointDescription(mapView.getLatitude(),
+				mapView.getLongitude());
+			toActions.add(mapLocation);
+			locs.add(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
+		}
+		if(style.routeToMapPoint) {
+			Collections.reverse(locs);
+			Collections.reverse(toActions);
+		}
+		final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
+		ArrayAdapter<String> toAdapter = new ArrayAdapter<String>(view.getContext(), 
+				android.R.layout.simple_spinner_item, 
+				toActions
+				);
+		toSpinner.setAdapter(toAdapter);
+		return toSpinner;
 	}
     
     protected Location getLastKnownLocation() {
@@ -764,7 +815,7 @@ public class MapActivityActions implements DialogProvider {
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;
 
-		adapter.item(R.string.get_directions).icons(
+		adapter.item(R.string.context_menu_item_directions_to).icons(
 				R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		final OsmandSettings settings = getMyApplication().getSettings();
@@ -776,7 +827,7 @@ public class MapActivityActions implements DialogProvider {
 			adapter.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_flag_dark,
 					R.drawable.ic_action_flag_light).reg();
 		}
-		adapter.item(R.string.context_menu_item_show_route).icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
+		adapter.item(R.string.context_menu_item_directions_from).icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
 		adapter.item(R.string.context_menu_item_search).icons(R.drawable.ic_action_search_dark, 
 				R.drawable.ic_action_search_light).reg();
 		adapter.item(R.string.context_menu_item_share_location).icons(
@@ -810,20 +861,21 @@ public class MapActivityActions implements DialogProvider {
 					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					mapActivity.startActivity(intent);
-				} else if (standardId == R.string.get_directions) {
-					//getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(latitude, longitude), true, -1);
-					settings.setPointToNavigate(latitude, longitude, false, mapActivity.getResources().getString(R.string.point_on_map, latitude, longitude));
-					targets.updatePointsFromSettings();
-					// always enable and follow and let calculate it (GPS is not accessible in garage)
+				} else if (standardId == R.string.context_menu_item_directions_to) {
 					if(!routingHelper.isRouteBeingCalculated() && !routingHelper.isRouteCalculated() ) {
-						getDirections(null, new LatLon(latitude, longitude), true);
+						Location loc = new Location("map");
+						loc.setLatitude(latitude);
+						loc.setLongitude(longitude);
+						getDirections(loc, DirectionDialogStyle.create().gpxRouteEnabled().routeToMapPoint());
+					} else {
+						targets.navigateToPoint(new LatLon(latitude, longitude), true, -1);
 					}
-				} else if (standardId == R.string.context_menu_item_show_route) {
+				} else if (standardId == R.string.context_menu_item_directions_from) {
 					if (targets.checkPointToNavigate(getMyApplication())) {
 						Location loc = new Location("map");
 						loc.setLatitude(latitude);
 						loc.setLongitude(longitude);
-						getDirections(loc, null, true);
+						getDirections(loc, DirectionDialogStyle.create().gpxRouteEnabled());
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
 					// Issue 1929: Consistently show IntermediatePointDialog, without subsequent Directions screen
@@ -1012,7 +1064,10 @@ public class MapActivityActions implements DialogProvider {
 						if (routingHelper.isRouteCalculated()) {
 							aboutRoute();
 						} else {
-							getDirections(null, null, true);
+							Location loc = new Location("map");
+							loc.setLatitude(mapView.getLatitude());
+							loc.setLongitude(mapView.getLongitude());
+							getDirections(loc, DirectionDialogStyle.create().gpxRouteEnabled());
 						}						
 					}
 				}).reg();

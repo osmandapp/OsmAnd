@@ -190,7 +190,7 @@
   <string name="layer_favorites">आवडती ठिकाणे</string>
   <string name="layer_map">नकाशाचा स्त्रोत…</string>
   <string name="context_menu_item_search_poi">पिओआय शोधा</string>
-  <string name="context_menu_item_show_route">इथून रस्ता दाखवा</string>
+  
   <string name="where_am_i">मी कुठे आहे?</string>
   <string name="network_provider">नेटवर्क</string>
   <string name="gps_provider">जीपीइस</string>

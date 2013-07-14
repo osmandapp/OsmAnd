@@ -534,7 +534,7 @@
   <string name="layer_map">Zdroj map…</string>
   <string name="menu_layers">Mapová data</string>
   <string name="context_menu_item_search_poi">Hledat POI</string>
-  <string name="context_menu_item_show_route">Cestovat odsud</string>
+  
   <string name="use_trackball_descr">Použít trackball k posouvání mapy</string>
   <string name="use_trackball">Použít trackball</string>
   <string name="background_service_wait_int_descr">Vyberte čekací dobu pro určení polohy</string>

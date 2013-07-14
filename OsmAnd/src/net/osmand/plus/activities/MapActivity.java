@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
@@ -23,6 +24,7 @@ import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivityActions.DirectionDialogStyle;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -36,7 +38,6 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -300,7 +301,10 @@ public class MapActivity extends AccessibleActivity  {
 		Object toShow = settings.getAndClearObjectToShow();
 		if(settings.isRouteToPointNavigateAndClear()){
 			// always enable and follow and let calculate it (GPS is not accessible in garage)
-			mapActions.getDirections(null, null, false);
+			Location loc = new Location("map");
+			loc.setLatitude(mapView.getLatitude());
+			loc.setLongitude(mapView.getLongitude());
+			mapActions.getDirections(loc, DirectionDialogStyle.create());
 		}
 		if(mapLabelToShow != null && latLonToShow != null){
 			mapLayers.getContextMenuLayer().setSelectedObject(toShow);

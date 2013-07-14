@@ -453,7 +453,7 @@
 	<string name="layer_map">Kartkilde…</string>
 	<string name="menu_layers">Vis</string>
 	<string name="context_menu_item_search_poi">Søk interessepunkt</string>
-	<string name="context_menu_item_show_route">Vis rute herfra</string>
+	
 	<string name="where_am_i">Hvor er jeg?</string>
 	<string name="process_navigation_service">OsmAnd navigeringstjeneste</string>
 	<string name="network_provider">Nettverk</string>

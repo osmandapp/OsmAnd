@@ -769,7 +769,7 @@
 	<string name="layer_map">Πηγή χάρτη …</string>
 	<string name="menu_layers">Ορισμός εμφάνισης</string>
 	<string name="context_menu_item_search_poi">Αναζήτηση ΣΕ</string>
-	<string name="context_menu_item_show_route">Εμφάνιση διαδρομής από εδώ</string>
+	
 	<string name="use_trackball_descr">Χρήση του trackball για μετακίνηση του χάρτη</string>
 	<string name="use_trackball">Χρήση του trackball</string>
 	<string name="background_service_wait_int_descr">Ορίστε το μέγιστο χρόνο αναμονής για κάθε εύρεση θέσης στο παρασκήνιο</string>

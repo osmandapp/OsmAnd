@@ -579,7 +579,7 @@
 	<string name="menu_layers">뷰 정의</string>
 	
 	<string name="context_menu_item_search_poi">POI 검색</string>
-	<string name="context_menu_item_show_route">시작지점으로</string>
+	
 	<string name="use_trackball_descr">맵을 이동하는 데 트랙볼을 사용합니다</string>
 	<string name="use_trackball">트랙볼 사용</string>
 	<string name="background_service_wait_int_descr">위치를 찾는 대기 시간을 선택합니다</string>

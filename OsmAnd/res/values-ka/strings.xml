@@ -529,7 +529,7 @@
   <string name="layer_map">რუკის წყარო…</string>
   <string name="menu_layers">ხედის აღწერა</string>
   <string name="context_menu_item_search_poi">POI-ის ძებნა</string>
-  <string name="context_menu_item_show_route">გზების ჩვენება მოცემული წერტილიდან</string>
+  
   <string name="use_trackball_descr">რუკის სამოძრაოდ გამოიყენეთ ტრეკბოლი</string>
   <string name="use_trackball">გამოიყენეთ ტრეკბოლი</string>
   <string name="background_service_wait_int_descr">გთხოვთ დააყენოთ ფონური პოზიცირების ჩასასწორებელი მაქსიმალური დრო</string>

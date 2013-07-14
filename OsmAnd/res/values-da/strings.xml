@@ -1133,7 +1133,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="layer_map">Vælg kortkilde…</string>
 	<string name="menu_layers">Definer visning</string>
 	<string name="context_menu_item_search_poi">Søg interessepunkt</string>
-	<string name="context_menu_item_show_route">Vis rute herfra</string>
+	
 	<string name="use_trackball_descr">Brug trackball for at flytte kortet</string>
 	<string name="use_trackball">Brug trackball</string>
 	<string name="background_service_wait_int_descr">Indstil maksimal ventetid mellem hver positionssøgning i baggrunden</string>

@@ -495,7 +495,7 @@
   <string name="layer_map">Kartes avots…</string>
   <string name="menu_layers">Definēt skatu</string>
   <string name="context_menu_item_search_poi">Meklēt POI</string>
-  <string name="context_menu_item_show_route">Rādīt ceļu no šejienes</string>
+  
   <string name="use_trackball_descr">Lietojiet trackball lai pārvietotu karti</string>
   <string name="use_trackball">Lietot trackball</string>
   <string name="background_service_wait_int_descr">"Uzstādiet maksimālo gaidīšanas laiku katram fona pozīcijas labojumam"</string>

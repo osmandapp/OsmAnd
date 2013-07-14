@@ -640,7 +640,7 @@
   <string name="layer_map">Zdroj mapy…</string>
   <string name="menu_layers">Zobrazenie</string>
   <string name="context_menu_item_search_poi">Hľadať bod záujmu (POI)</string>
-  <string name="context_menu_item_show_route">Zobraziť trasu odtiaľto</string>
+  
   <string name="use_trackball_descr">Použitie trackballu na pohyb po mape</string>
   <string name="use_trackball">Použiť trackball</string>
   <string name="background_service_wait_int_descr">Nastaví max. čakaciu dobu pre každú ustálenú pozíciu na pozadí</string>

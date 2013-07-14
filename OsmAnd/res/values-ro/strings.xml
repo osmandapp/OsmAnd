@@ -806,7 +806,7 @@
 	<string name="layer_map">Sursă hartă…</string>
 	<string name="menu_layers">Straturi</string>
 	<string name="context_menu_item_search_poi">Caută POI</string>
-	<string name="context_menu_item_show_route">Calculează ruta începând de aici</string>
+	
 	<string name="use_trackball_descr">Folosește trackball pentru mișcare hartă</string>
 	<string name="use_trackball">Folosește trackball</string>
 	<string name="background_service_wait_int_descr">Alege timpul maxim de așteptare pentru fiecare localizare exactă a poziției în fundal</string>

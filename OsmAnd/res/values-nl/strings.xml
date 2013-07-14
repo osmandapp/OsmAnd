@@ -551,7 +551,7 @@
   <string name="layer_map">Kaartbron…</string>
   <string name="menu_layers">Definieer beeld</string>
   <string name="context_menu_item_search_poi">Zoek interessepunt</string>
-  <string name="context_menu_item_show_route">Toon route vanaf hier</string>
+  
   <string name="use_trackball_descr">Gebruik trackball om de kaart te verschuiven</string>
   <string name="use_trackball">Gebruik trackball</string>
   <string name="background_service_wait_int_descr">Maximum wachttijd voor elke achtergrond positiebepaling</string>

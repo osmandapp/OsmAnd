@@ -350,7 +350,7 @@
   <string name="layer_map">Źródło mapy…</string>
   <string name="menu_layers">Zdefiniuj widok</string>
   <string name="context_menu_item_search_poi">Szukaj POI</string>
-  <string name="context_menu_item_show_route">Pokaż trasę z tego miejsca</string>
+  
   <string name="use_trackball_descr">Użyj trackballa do przesuwania mapy</string>
   <string name="use_trackball">Używaj trackballa</string>
   <string name="background_service_wait_int_descr">Czas oczekiwania na poprawną pozycję GPS</string>

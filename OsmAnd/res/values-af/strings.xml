@@ -584,7 +584,7 @@
   <string name="layer_map">Kaartbron…</string>
   <string name="menu_layers">Definieer uitsig</string>
   <string name="context_menu_item_search_poi">Soek interessante plek</string>
-  <string name="context_menu_item_show_route">Wys roete van hier af</string>
+  
   <string name="use_trackball_descr">Gebruik die trekbal om die kaart te skuif</string>
   <string name="use_trackball">Gebruik die trekbal</string>
   <string name="background_service_wait_int_descr">Stel maksimum wagtyd vir agtergrond ligging-vasstelling</string>

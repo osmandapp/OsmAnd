@@ -800,7 +800,7 @@
 	<string name="layer_map">מקור המפה…</string>
 	<string name="menu_layers">הגדרת תצוגה</string>
 	<string name="context_menu_item_search_poi">חיפוש נ״ע</string>
-	<string name="context_menu_item_show_route">הצגת מסלול מכאן</string>
+	
 	<string name="use_trackball_descr">יש להשתמש בכדור מעקב כדי להזיז את המפה</string>
 	<string name="where_am_i">איפה אני?</string>
 	<string name="update_poi_success">נתוני הנ״ע עודכנו בהצלחה ({0} נטענו)</string>

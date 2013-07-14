@@ -706,7 +706,7 @@
 	<string name="layer_map">Kartkälla…</string>
 	<string name="menu_layers">Definiera vy</string>
 	<string name="context_menu_item_search_poi">Sök POI</string>
-	<string name="context_menu_item_show_route">Visa rutt härifrån</string>
+	
 	<string name="use_trackball_descr">Använd styrkulan för att flytta kartan</string>
 	<string name="use_trackball">Använd styrkula</string>
 	<string name="background_service_wait_int_descr">Ange maximal väntetid för varje positionsbestämning i bakgrunden</string>

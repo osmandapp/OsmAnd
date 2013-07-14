@@ -484,7 +484,7 @@
   <string name="layer_map">Térképforrás…</string>
   <string name="menu_layers">Rétegek</string>
   <string name="context_menu_item_search_poi">POI keresése</string>
-  <string name="context_menu_item_show_route">Mutasd az utat innen</string>
+  
   <string name="use_trackball_descr">Trackball használata a térkép mozgatásához</string>
   <string name="use_trackball">Trackball használata</string>
   <string name="background_service_wait_int_descr">Maximális várakozási idő minden sikeres helymeghatározásra</string>

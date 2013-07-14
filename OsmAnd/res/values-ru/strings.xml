@@ -504,7 +504,7 @@
   <string name="layer_map">Источник карты…</string>
   <string name="menu_layers">Слои</string>
   <string name="context_menu_item_search_poi">Искать POI</string>
-  <string name="context_menu_item_show_route">Маршрут отсюда</string>
+  
   <string name="use_trackball_descr">Использовать трекбол, чтобы перемещать карту</string>
   <string name="use_trackball">Использовать трекбол</string>
   <string name="background_service_wait_int_descr">Выберите максимальное время поиска позиции сервиса</string>

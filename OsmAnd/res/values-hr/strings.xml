@@ -459,7 +459,7 @@
 	<string name="context_menu_item_search_poi">Traži POI</string>
 	<string name="layer_transport">Postaje javnog prijevoza</string>
 	<string name="layer_poi">POI...</string>
-	<string name="context_menu_item_show_route">Prikaži rutu odavde</string>
+	
 	<string name="layer_transport_route">Putovi javnoga prijevoza</string>
 	<string name="layer_route">Ruta</string>
 	<string name="layer_favorites">Favoriti</string>
