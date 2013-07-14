@@ -471,7 +471,7 @@
 	<string name="favourites_delete_multiple_succesful">我的最愛點已刪除成功。</string>
 	<string name="favorite_delete_multiple">您將刪除 %1$d 個我的最愛與 %2$d 我的最愛群組，您確定？</string>
 	<string name="favorite_home_category">住家</string>
-	<string name="favorite_friends_category">友人</string>
+	<string name="favorite_friends_category">朋友</string>
 	<string name="favorite_places_category">地點</string>
 	<string name="favorite_default_category">其它</string>
 	<string name="favourites_edit_dialog_name">名稱</string>
@@ -482,7 +482,7 @@
 	<string name="local_index_gpx_info_show">\n\n按壓不放會出現選項</string>
 	<string name="local_index_gpx_info_speed">\n平均速度： %1$s \n最大速度：%2$s</string>
 	<string name="local_index_gpx_info_elevation">\n平均高度：%1$s\n最低高度：%2$s\n最高高度：%3$s\n上坡：%4$s\n下坡：%5$s</string>
-	<string name="local_index_gpx_info">子航跡：%1$d\n總點數：%2$d\n中途點：%3$d\n總距離：%4$s\n出發時間：%5$tF,  %5$tR\n終止時間：%6$tF,  %6$tR</string>
+	<string name="local_index_gpx_info">子行跡：%1$d\n總點數：%2$d\n中途點：%3$d\n總距離：%4$s\n出發時間：%5$tF,  %5$tR\n終止時間：%6$tF,  %6$tR</string>
 	<string name="local_index_installed">版本</string>
 	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已解除成功。</string>
 	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已刪除成功。</string>
@@ -521,7 +521,7 @@
 	<string name="tts_missing_language_data">您選的語言未安裝，您要到 Play 商場安裝嗎？</string>
 	<string name="gpx_option_reverse_route">反轉 GPX 方向</string>
 	<string name="gpx_option_destination_point">使用目前的目的地</string>
-	<string name="gpx_option_from_start_point">沿著整條航跡往前</string>
+	<string name="gpx_option_from_start_point">沿著整條行跡往前</string>
 	<string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'定義檢視\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
 	<string name="choose_audio_stream">語音導航輸出</string>
 	<string name="choose_audio_stream_descr">選擇播放語音導航輸出(依靠系統)</string>
