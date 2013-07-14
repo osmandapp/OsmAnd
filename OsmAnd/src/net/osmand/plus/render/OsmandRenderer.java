@@ -292,7 +292,7 @@ public class OsmandRenderer {
 		int[] alreadyDrawnIcons = new int[iconsW * iconsH / 32];
 		for (IconDrawInfo icon : rc.iconsToDraw) {
 			if (icon.resId != null) {
-				Bitmap ico = RenderingIcons.getIcon(context, icon.resId);
+				Bitmap ico = RenderingIcons.getSmallPoiIcon(context, icon.resId);
 				if (ico != null) {
 					if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
 						int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);

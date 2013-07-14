@@ -23,6 +23,7 @@ public class RenderingIcons {
 	private static final Log log = PlatformUtil.getLog(RenderingIcons.class);
 	
 	private static Map<String, Integer> icons = new LinkedHashMap<String, Integer>();
+	private static Map<String, Integer> smallIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Integer> bigIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Bitmap> iconsBmp = new LinkedHashMap<String, Bitmap>();
 	private static DisplayMetrics dm;
@@ -82,6 +83,14 @@ public class RenderingIcons {
 		return null;
 	}
 	
+	public static Bitmap getSmallPoiIcon(Context ctx, String s) {
+		Integer resId = smallIcons.get(s);
+		if (resId != null) {
+			return BitmapFactory.decodeResource(ctx.getResources(), resId, null);
+		}
+		return null;
+	}
+	
 	public static Bitmap getIcon(Context ctx, String s) {
 		if (!iconsBmp.containsKey(s)) {
 			Integer resId = icons.get(s);
@@ -115,7 +124,15 @@ public class RenderingIcons {
 		for (Field f : cl.getDeclaredFields()) {
 			if (f.getName().startsWith("h_") || f.getName().startsWith("mm_")) {
 				try {
-					icons.put(f.getName().substring(f.getName().startsWith("mm_")? 3 : 2), f.getInt(null));
+					String id = f.getName().substring(f.getName().startsWith("mm_") ? 3 : 2);
+					int i = f.getInt(null);
+					// don't override shader or map icons (h) 
+					if(f.getName().startsWith("h_") || !icons.containsKey(id)) {
+						icons.put(id, i);
+					}
+					if(f.getName().startsWith("mm_")) {
+						smallIcons.put(id, i);
+					}
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {

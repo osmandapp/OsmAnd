@@ -301,9 +301,10 @@ public class PoiFilter {
 	public String getSimplifiedId(){
 		if(filterId.startsWith(STD_PREFIX)) {
 			return filterId.substring(STD_PREFIX.length()).toLowerCase();
-		} else {
+		} else if(filterId.startsWith(USER_PREFIX)) {
 			return filterId.substring(USER_PREFIX.length()).toLowerCase();
 		}
+		return filterId;
 	}
 	
 	

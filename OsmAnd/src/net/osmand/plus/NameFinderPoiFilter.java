@@ -51,7 +51,7 @@ public class NameFinderPoiFilter extends PoiFilter {
 	public void setQuery(String query) {
 		this.query = query;
 	}
-
+	
 	@Override
 	protected List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, ResultMatcher<Amenity> matcher) {
