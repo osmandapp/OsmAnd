@@ -25,6 +25,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private Preference avoidRouting;
 	private Preference preferRouting;
 	private Preference showAlarms;
+	private Preference speakAlarms;
 	private ListPreference routerServicePreference;
 	public static final String MORE_VALUE = "MORE_VALUE";
 	
@@ -91,6 +92,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		
 		showAlarms = (Preference) screen.findPreference("show_routing_alarms");
 		showAlarms.setOnPreferenceClickListener(this);
+		
+		speakAlarms = (Preference) screen.findPreference("speak_routing_alarms");
+		speakAlarms.setOnPreferenceClickListener(this);
 	}
 	
 	
@@ -166,6 +170,11 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			showBooleanSettings(new String[] { getString(R.string.show_traffic_warnings), getString(R.string.show_cameras), 
 					getString(R.string.show_lanes) }, new OsmandPreference[] { settings.SHOW_TRAFFIC_WARNINGS, 
 					settings.SHOW_CAMERAS, settings.SHOW_LANES });
+			return true;
+		} else if (preference == speakAlarms) {
+			showBooleanSettings(new String[] { getString(R.string.speak_traffic_warnings), getString(R.string.speak_cameras), 
+					getString(R.string.speak_speed_limit) }, new OsmandPreference[] { settings.SPEAK_TRAFFIC_WARNINGS, 
+					settings.SPEAK_SPEAD_CAMERAS , settings.SPEAK_SPEED_LIMIT});
 			return true;
 		}
 		return false;

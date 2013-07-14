@@ -638,7 +638,7 @@ public class RouteInfoWidgetsFactory {
 						RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
 						Location loc = locationProvider.getLastKnownLocation();
 						if(ro != null && loc != null) {
-							alarm = RoutingHelper.calculateMostImportantAlarm(ro, loc, settings.METRIC_SYSTEM.get(), cams);
+							alarm = rh.calculateMostImportantAlarm(ro, loc, settings.METRIC_SYSTEM.get(), cams);
 						} else {
 							alarm = null;
 						}

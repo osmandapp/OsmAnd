@@ -29,6 +29,9 @@ public class CommandBuilder {
 	protected static final String C_AND_ARRIVE_INTERMEDIATE = "and_arrive_intermediate";  //$NON-NLS-1$
 	protected static final String C_REACHED_INTERMEDIATE = "reached_intermediate";  //$NON-NLS-1$
 	protected static final String C_THEN = "then";  //$NON-NLS-1$
+	protected static final String C_SPEAD_ALARM = "speed_alarm";  //$NON-NLS-1$
+	protected static final String C_ATTENTION = "attention";  //$NON-NLS-1$
+	
 	
 	protected static final String C_BEAR_LEFT = "bear_left";  //$NON-NLS-1$
 	protected static final String C_BEAR_RIGHT = "bear_right";  //$NON-NLS-1$
@@ -106,6 +109,16 @@ public class CommandBuilder {
 	public CommandBuilder makeUT(){
 		return addCommand(C_MAKE_UT);
 	}
+	
+	public CommandBuilder speedAlarm(){
+		return addCommand(C_SPEAD_ALARM);
+	}
+	
+	public CommandBuilder attention(){
+		return addCommand(C_ATTENTION);
+	}
+	
+	
 	
 	public CommandBuilder makeUT(double dist){
 		return addCommand(C_MAKE_UT, dist);

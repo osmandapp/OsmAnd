@@ -97,7 +97,7 @@ public class TestVoiceActivity extends SherlockActivity {
 		addButton(ll, "When possible, make a U-turn", builder(p).makeUTwp());
 		addButton(ll, "Prepare to enter a roundabout after 750m", builder(p).prepareRoundAbout(750));
 		addButton(ll, "After 450m enter the roundabout and take the 1st exit", builder(p).roundAbout(450, 0, 1));
-		addButton(ll, "Roundabout: Take the 3rd exit", builder(p).roundAbout(0, 3));
+		addButton(ll, "Roundabout: Take the 2th exit", builder(p).roundAbout(0, 2));
 		addButton(ll, "GPS signal lost", builder(p).gpsLocationLost());
 		addButton(ll, "Route recalculated (23150m)", builder(p).routeRecalculated(23150));
 		addButton(ll, "Continue straight ahead", builder(p).goAhead());
@@ -106,6 +106,8 @@ public class TestVoiceActivity extends SherlockActivity {
 		addButton(ll, "Arrive at waypoint", builder(p).arrivedAtIntermediatePoint());
 		addButton(ll, "Follow the road for 800m and arrive at destination", builder(p).goAhead(800).andArriveAtDestination());
 		addButton(ll, "Arrive at destination", builder(p).arrivedAtDestination());
+		addButton(ll, "You exceed speed limit", builder(p).speedAlarm());
+		addButton(ll, "Attention (bump, speed camera)", builder(p).attention());
 		ll.forceLayout();
 	}
 	

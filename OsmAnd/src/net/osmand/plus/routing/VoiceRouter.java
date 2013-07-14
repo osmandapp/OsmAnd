@@ -178,6 +178,12 @@ public class VoiceRouter {
 
 	}
 	
+
+	public void announceAlarm(AlarmInfo alarm) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/**
 	 * Updates status of voice guidance 
 	 * @param currentLocation 
@@ -521,5 +527,6 @@ public class VoiceRouter {
 			}
 		}
 	}
+
 
 }
