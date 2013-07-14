@@ -1328,4 +1328,9 @@
 	<string name="av_camera_focus_continuous">Die Kamera kontinuierlich scharf stellen</string>
 	<string name="av_photo_play_sound">Tom bei Auslösung abspielen</string>
 	<string name="av_photo_play_sound_descr">Auswählen, ob beim Aufnehmen eines Fotos ein Ton abgespielt werden soll</string>
-</resources>
+<string name="speak_warnings_title">Sprachausgabe für Alarme…</string>
+	<string name="speak_warnings_descr">Verkehrs-Warnungen (Stop-Schilder, Bodenwellen), Blitzer, Geschwindigkeitsbegrenzungen konfigurieren</string>
+    <string name="speak_speed_limit">Höchstgeschwindigkeit ansagen</string>
+    <string name="speak_cameras">Vor Blitzern warnen</string>
+	<string name="speak_traffic_warnings">Verkehrswarnungen ansagen</string>
+	</resources>
