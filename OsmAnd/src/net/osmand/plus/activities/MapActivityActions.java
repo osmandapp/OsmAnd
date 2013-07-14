@@ -443,6 +443,7 @@ public class MapActivityActions implements DialogProvider {
 	public static class DirectionDialogStyle {
 		public boolean gpxRouteEnabled;
 		public boolean routeToMapPoint;
+		public boolean routeFromMapPoint;
 
 		public static DirectionDialogStyle create() {
 			return new DirectionDialogStyle();
@@ -453,6 +454,11 @@ public class MapActivityActions implements DialogProvider {
 		}
 		
 		public DirectionDialogStyle routeToMapPoint() {
+			routeToMapPoint = true;
+			return this;
+		}
+		
+		public DirectionDialogStyle routeFromMapPoint() {
 			routeToMapPoint = true;
 			return this;
 		}
@@ -475,7 +481,7 @@ public class MapActivityActions implements DialogProvider {
 		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
 		buttons[ApplicationMode.PEDESTRIAN.ordinal()].setButtonDrawable(R.drawable.ic_pedestrian);
 		
-		final Spinner fromSpinner = setupFromSpinner(mapView, view);
+		final Spinner fromSpinner = setupFromSpinner(mapView, view, style);
 		final List<LatLon> toList = new ArrayList<LatLon>();
 		final Spinner toSpinner = setupToSpinner(mapView, view, toList, style);
 		
@@ -617,7 +623,7 @@ public class MapActivityActions implements DialogProvider {
 		builder.show();
 	}
 
-	private Spinner setupFromSpinner(final Location mapView, View view) {
+	private Spinner setupFromSpinner(final Location mapView, View view, DirectionDialogStyle style) {
 		String currentLocation = mapActivity.getString(R.string.route_descr_current_location);
 		ArrayList<String> fromActions = new ArrayList<String>();
 		fromActions.add(currentLocation);
@@ -632,6 +638,9 @@ public class MapActivityActions implements DialogProvider {
 				fromActions
 				);
 		fromSpinner.setAdapter(fromAdapter);
+		if(style.routeFromMapPoint && mapView != null) {
+			fromSpinner.setSelection(1);
+		}
 		return fromSpinner;
 	}
 	
@@ -875,7 +884,7 @@ public class MapActivityActions implements DialogProvider {
 						Location loc = new Location("map");
 						loc.setLatitude(latitude);
 						loc.setLongitude(longitude);
-						getDirections(loc, DirectionDialogStyle.create().gpxRouteEnabled());
+						getDirections(loc, DirectionDialogStyle.create().gpxRouteEnabled().routeFromMapPoint());
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
 					// Issue 1929: Consistently show IntermediatePointDialog, without subsequent Directions screen
@@ -883,15 +892,12 @@ public class MapActivityActions implements DialogProvider {
 					int sz = targets.getIntermediatePoints().size();
 					// TODO: enhance next statement to transmit getSelectedObjectName for clicked objects like favorites instead of just coordinates
 					settings.insertIntermediatePoint(latitude, longitude, mapActivity.getResources().getString(R.string.point_on_map, latitude, longitude), sz, false);
-					targets.updatePointsFromSettings();
+					targets.navigateToPoint(new LatLon(latitude, longitude), true, sz);
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				// For button-less search UI
 				} else if (standardId == R.string.context_menu_item_destination_point) {
-					// Issue 1929: Consistently show IntermediatePointDialog, without subsequent Directions screen
-					//targets.navigateToPoint(new LatLon(latitude, longitude), true, -1);
 					// TODO: enhance next statement to transmit getSelectedObjectName for clicked objects like favorites instead of just coordinates
-					settings.setPointToNavigate(latitude, longitude, false, mapActivity.getResources().getString(R.string.point_on_map, latitude, longitude));
-					targets.updatePointsFromSettings();
+					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1);
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
