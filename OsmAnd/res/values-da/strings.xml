@@ -135,7 +135,7 @@
 	<string name="poi_filter_for_tourists">For turister</string>
 	<string name="poi_filter_fuel">Brændstof</string>
 	<string name="show_warnings_title">Vis alarmer…</string>
-	<string name="show_warnings_descr">Konfigurer trafikadvarsler (fartgrænser, tvungne stop, vejbump), fotofælde advarsler og vognbane oplysninger</string>
+	<string name="show_warnings_descr">Konfigurer trafikadvarsler (fartgrænser, tvungne stop, vejbump), fotofældeadvarsler og vognbane oplysninger</string>
 	<string name="use_compass_navigation_descr">Brug kompasset, når ingen retning er registret</string>
 	<string name="use_compass_navigation">Kompas</string>
 	<string name="avoid_motorway">Undgå motorveje</string>
@@ -1537,4 +1537,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
 	<string name="av_photo_play_sound_descr">Spil lyd når foto tages</string>
 <string name="av_photo_play_sound">Kameralyd</string>
-	</resources>
+	<string name="speak_traffic_warnings">Meddel trafikadvarsler</string>
+	<string name="speak_cameras">Meddel fotofælder</string>
+	<string name="speak_speed_limit">Meddel hastighedsgrænse</string>
+    <string name="speak_warnings_title">Meddel alarmer…</string>
+	<string name="speak_warnings_descr">Konfigurer trafikadvarsler (tvungne stop, vejbump), fotofældeadvarsler, hastighedsgrænser</string>
+    </resources>
