@@ -458,7 +458,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 		
 		public DirectionDialogStyle routeFromMapPoint() {
-			routeToMapPoint = true;
+			routeFromMapPoint = true;
 			return this;
 		}
 	}
