@@ -304,7 +304,7 @@ public class MapActivity extends AccessibleActivity  {
 			Location loc = new Location("map");
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
-			mapActions.getDirections(loc, DirectionDialogStyle.create());
+			mapActions.getDirections(loc, null, DirectionDialogStyle.create());
 		}
 		if(mapLabelToShow != null && latLonToShow != null){
 			mapLayers.getContextMenuLayer().setSelectedObject(toShow);

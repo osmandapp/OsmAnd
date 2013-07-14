@@ -274,18 +274,9 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 				dlg.show();
 				MapActivityActions.prepareAddFavouriteDialog(getActivity(), dlg, b, lat, lon, getString(R.string.point_on_map, lat, lon));
 			} else if (mode == NAVIGATE_TO) {
-				targetPointsHelper.setDestination(lat, lon, getString(R.string.point_on_map, lat, lon));
-				MapActivity.launchMapActivityMoveToTop(getActivity());
+				MapActivityActions.directionsToDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));
 			} else if (mode == ADD_WAYPOINT) {
-				MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));
-				// Issue 1929 TODO: show IntermediatePointsDialog here instead of navigatePointDialog, without subsequent Directions
-				//if (targetPointsHelper.getIntermediatePoints().size() == 0) {
-				//	targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1);
-				//} else {
-				//	targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, targetPointsHelper.getIntermediatePoints().size());
-				//}
-				//IntermediatePointsDialog.openIntermediatePointsDialog(getActivity());
-				//MapActivity.launchMapActivityMoveToTop(getActivity());
+				MapActivityActions.addWaypointDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));
 			} else if (mode == SHOW_ON_MAP){
 				OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 				app.getSettings().setMapLocationToShow(lat, lon, Math.max(12, app.getSettings().getLastKnownMapZoom()),

@@ -165,6 +165,10 @@ public class TargetPointsHelper {
 	}
 	
 	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate){
+		navigateToPoint(point, updateRoute, intermediate, null);
+	}
+	
+	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate, String historyName){
 		if(point != null){
 			if(intermediate < 0) {
 				settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
@@ -178,7 +182,6 @@ public class TargetPointsHelper {
 		}
 		readFromSettings(settings);
 		updateRouteAndReferesh(updateRoute);
-		
 	}
 	
 	public boolean checkPointToNavigate(ClientContext ctx ){
@@ -189,20 +192,5 @@ public class TargetPointsHelper {
     	return true;
     }
 	
-	
-	public void setDestination(double lat, double lon, String historyName) {
-		//clearPointToNavigate(false);
-		// Do not delete waypoints here
-		settings.clearPointToNavigate();
-		settings.setPointToNavigate(lat, lon, true, historyName);
-		updatePointsFromSettings();
-		
-	}
-	
-
-	public void updatePointsFromSettings() {
-		readFromSettings(settings);		
-	}
-
 	
 }
