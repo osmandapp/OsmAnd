@@ -130,12 +130,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		int sh = Color.WHITE;
 		if (nightMode != null && nightMode.isNightMode()) {
-			sh = 0xffC8C8C8;
+			sh = Color.TRANSPARENT;
 		}
 		if(shadowColor != sh) {
 			shadowColor = sh;
-			zoomTextPaint.setColor(sh == Color.WHITE ? Color.BLACK : sh);
-			rulerTextPaint.setColor(sh == Color.WHITE ? Color.BLACK : sh);
+			zoomTextPaint.setColor(sh == Color.WHITE ? Color.BLACK : 0xffC8C8C8);
+			rulerTextPaint.setColor(sh == Color.WHITE ? Color.BLACK : 0xffC8C8C8);
 		}
 		if (showZoomLevel || !view.getSettings().SHOW_RULER.get()) {
 			drawZoomLevel(canvas);
