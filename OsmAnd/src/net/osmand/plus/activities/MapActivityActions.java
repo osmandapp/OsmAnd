@@ -949,15 +949,15 @@ public class MapActivityActions implements DialogProvider {
 						String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
 						getDirections(loc, name, DirectionDialogStyle.create().gpxRouteEnabled().routeFromMapPoint());
 					}
-				} else if (standardId == R.string.context_menu_item_intermediate_point) {
+				} else if (standardId == R.string.context_menu_item_intermediate_point || 
+						standardId == R.string.context_menu_item_destination_point) {
+					boolean dest = standardId == R.string.context_menu_item_destination_point;
 					String selected = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-					int sz = targets.getIntermediatePoints().size();
-					targets.navigateToPoint(new LatLon(latitude, longitude), true, sz, selected);
-					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
-				// For button-less search UI
-				} else if (standardId == R.string.context_menu_item_destination_point) {
-					String selected = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, selected);
+					if(selected == null){
+						selected = mapActivity.getString(R.string.route_descr_lat_lon, latitude, longitude);
+					}
+					targets.navigateToPoint(new LatLon(latitude, longitude), true, 
+							dest ? -1 : targets.getIntermediatePoints().size(), selected);
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
