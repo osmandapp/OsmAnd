@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -347,8 +348,8 @@
 <string name="amenity_type_user_defined">Användardefinierat</string>
 <string name="fav_export_confirmation">En fil med tidigare exporterade favoriter finns redan. Vill du ersätta den?</string>
 <string name="profile_settings">Profilspecifika inställningar</string>
-<string name="settings_preset">Användarprofil</string>
-<string name="settings_preset_descr">Välj en användarprofil med anpassade kart- och navigeringsinställningar</string>
+<string name="settings_preset">Standardprofil</string>
+<string name="settings_preset_descr">Kartvy och navigeringsinställningar är kopplade till din profil. Ange din standardprofil här.</string>
 <string name="routing_settings">Navigering</string>
 <string name="routing_settings_descr">Ange navigeringsalternativ</string>
 <string name="global_settings">Globala inställningar</string>
@@ -606,7 +607,7 @@
     <string name="poi_filter_entertainment">Underhållning</string>
     <string name="poi_filter_accomodation">Boende</string>
     <string name="poi_filter_restaurants">Restauranger</string>
-    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-karta - klassificering med bilder</string><string name="tip_map_context_menu_t">\tSnabbmenyn för kartor finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulans knapp.\n\tDå visas en ruta med koordinaterna. För att öppna dialogrutan, trycker du på den. (Eller tryck och håll på den för att dölja rutan igen.)\n\tSnabbmenyn för kartor innehåller alla åtgärder som hänför sig till en punkt (plats).</string>
+    <string name="tip_map_context_menu_t">\tSnabbmenyn för kartor finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulans knapp.\n\tDå visas en ruta med koordinaterna. För att öppna dialogrutan, trycker du på den. (Eller tryck och håll på den för att dölja rutan igen.)\n\tSnabbmenyn för kartor innehåller alla åtgärder som hänför sig till en punkt (plats).</string>
 	<string name="tip_initial_t">"\tOsmAnd är en navigeringsapp med många funktioner.\n\tSom en introduktion finns ett antal tips och tricks länkade på huvudskärmen (se \'?\'-ikonen). "</string>
 	<string name="application_dir">Lagringskatalog</string>
 	<string name="application_dir_change_warning">Ändring av lagringskatalogen flyttar inte eller tar bort data. Detta måste utföras separat och utanför OsmAnd. Fortsätta ändå?</string>
@@ -1040,7 +1041,7 @@
 	<string name="search_POI_level_btn">Sök efter fler</string>
 	<string name="choose_available_region">Välj region från lista</string>
 	<string name="choose_intersected_street">Välj korsande gata</string>
-	<string name="app_mode_default">Standard</string>
+	<string name="app_mode_default">Bläddra i kartan</string>
 	<string name="app_mode_car">Bil</string>
 	<string name="app_mode_bicycle">Cykel</string>
 	<string name="app_mode_pedestrian">Fotgängare</string>
@@ -1123,14 +1124,15 @@
     <string name="route_head">Riktning</string>
 	<string name="wait_current_task_finished">Vänta tills aktuell uppgift är slutförd</string>
     <string name="downloading_file_new">"Laddar ner "</string>
-	<string name="tip_recent_changes_1_4_t">"Ändringar i 1.4:
+	<string name="tip_recent_changes_1_4_t">Ändringar i 1.4:
 \n\t* Sortera waypoints på bästa möjliga sätt för att besöka alla (handelsresande, dörr-till-dörr)
 \n\t* Sök efter gatnamn (i närheten)
 \n\t* Plugin för planering (ladda/redigera/spara GPX-spår)
 \n\t* Ny nedladdningsskärm (ladda ned i bakgrunden)
 \n\t* Stöd för GPX-undermappar (organisera dina GPX-spår)
 \n\t* Ta bort SRTM-filer
-\n\t* Stöd för OSM-anteckningar "</string>
+\n\t* Stöd för OSM-anteckningar 
+    </string>
     <string name="search_street_in_neighborhood_cities">Sök gator i grannstäder</string>
     <string name="intermediate_items_sort_return">Platser ordnade för att bilda en optimal rutt från positionen på kartan till destinationen</string>
     <string name="intermediate_items_sort_by_distance">Sortera (dörr-till-dörr)</string>
@@ -1156,4 +1158,12 @@
     <string name="please_select_address">Välj stad eller gata först</string>
     <string name="destination_point">Destination %1$s</string>
     <string name="context_menu_item_destination_point">Ange som destination</string>
+    <string name="speak_warnings_title">Meddela om larm…</string>
+	<string name="speak_warnings_descr">Konfigurera trafikvarningar (fartbulor etc), varningar för fartkameror, hastighetsbegränsningar</string>
+    <string name="speak_speed_limit">Meddela om hastihetsbegränsningar</string>
+    <string name="speak_cameras">Meddela om fartkameror</string>
+	<string name="speak_traffic_warnings">Meddela om trafikvarningar</string>
+	<string name="local_index_gpx_timespan">\nTidsspann: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nTid i rörelse: %1$d:%2$02d:%3$02d</string>
+	<string name="plugin_distance_point_hdop">precision</string>
     </resources>
