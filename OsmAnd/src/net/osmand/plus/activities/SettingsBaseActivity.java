@@ -21,7 +21,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -305,18 +304,17 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 	protected void profileDialog() {
 		Builder b = new AlertDialog.Builder(this);
 		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-		View v = MapActivityActions.showActivityActionsDialog(this, selected, false);
+		View v = MapActivityActions.showActivityActionsDialog(this, selected, false, 
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if(selected.size() > 0) {
+							setSelectedAppMode(selected.iterator().next());
+						}						
+					}
+				});
 		b.setTitle(R.string.profile_settings);
 		b.setView(v);
-		b.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if(selected.size() > 0) {
-					setSelectedAppMode(selected.iterator().next());
-				}
-			}
-		});
 		b.show();
 	}
 

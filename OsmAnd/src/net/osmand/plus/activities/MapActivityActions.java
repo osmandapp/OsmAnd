@@ -465,7 +465,8 @@ public class MapActivityActions implements DialogProvider {
 	}
     
     
-	public static View showActivityActionsDialog(Activity a, final Set<ApplicationMode> selected, boolean showDefault) {
+	public static View showActivityActionsDialog(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
+			final View.OnClickListener onClickListener) {
 		View view = a.getLayoutInflater().inflate(R.layout.mode_toggles, null);
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		boolean lc = settings.isLightContentMenu();
@@ -522,6 +523,9 @@ public class MapActivityActions implements DialogProvider {
 							if (revert) {
 								buttons[ind].setChecked(true);
 							}
+						}
+						if(onClickListener != null) {
+							onClickListener.onClick(null);
 						}
 					}
 				});
