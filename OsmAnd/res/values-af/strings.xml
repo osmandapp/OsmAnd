@@ -1248,4 +1248,9 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="av_camera_focus_continuous">Die kamera prbeer heeltyd in fokus bly</string>
 	<string name="av_photo_play_sound">Speel geluid wanneer foto geneem word</string>
 	<string name="av_photo_play_sound_descr">Speel geluid wanneer foto geneem word</string>
-</resources>
+<string name="speak_warnings_title">Kondig alarms aan…</string>
+	<string name="speak_warnings_descr">Verstel verkeer waarskuwings (geforseerde stoppe, spoedbulte), spoedkamera waarskuwings, spoedbeperkings</string>
+    <string name="speak_speed_limit">Kondig spoedbeperking aan</string>
+    <string name="speak_cameras">Kondig spoedkameras aan</string>
+	<string name="speak_traffic_warnings">Kondig verkeerswaarskuwings aan</string>
+	</resources>
