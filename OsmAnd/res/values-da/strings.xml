@@ -471,7 +471,7 @@
 	<string name="live_monitoring">Online sporing</string>
 	<string name="live_monitoring_interval_descr">Indstil interval for onlinesporing</string>
 	<string name="live_monitoring_interval">Interval for online sporing</string>
-	<string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
+	<string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, long={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}</string>
 	<string name="live_monitoring_url">Webadresse for online sporing</string>
 	<string name="gpx_monitoring_disabled_warn">Aktiver \'Log spor til GPX-fil\' indstilling.</string>
 	<string name="show_current_gpx_title">Vis aktuelt spor</string>
