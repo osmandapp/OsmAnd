@@ -171,10 +171,10 @@ public class TargetPointsHelper {
 	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate, String historyName){
 		if(point != null){
 			if(intermediate < 0) {
-				settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
+				settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), historyName);
 			} else {
-				settings.insertIntermediatePoint(point.getLatitude(), point.getLongitude(), null, 
-						intermediate, false);
+				settings.insertIntermediatePoint(point.getLatitude(), point.getLongitude(), historyName, 
+						intermediate);
 			}
 		} else {
 			settings.clearPointToNavigate();

@@ -1100,15 +1100,11 @@ public class OsmandSettings {
 		return list;
 	}
 	
-	public boolean insertIntermediatePoint(double latitude, double longitude, String historyDescription, int index,
-			boolean navigate) {
+	public boolean insertIntermediatePoint(double latitude, double longitude, String historyDescription, int index) {
 		List<LatLon> ps = getIntermediatePoints();
 		List<String> ds = getIntermediatePointDescriptions(ps.size());
 		ps.add(index, new LatLon(latitude, longitude));
 		ds.add(index, historyDescription);
-		if(navigate) {
-			settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_ROUTE, "true").commit();
-		}
 		if (historyDescription != null) {
 			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
 		}
@@ -1148,28 +1144,21 @@ public class OsmandSettings {
 	
 	public boolean clearPointToNavigate() {
 		return settingsAPI.edit(globalPreferences).remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).
-				remove(POINT_NAVIGATE_DESCRIPTION).remove(POINT_NAVIGATE_ROUTE).commit();
+				remove(POINT_NAVIGATE_DESCRIPTION).commit();
 	}
 	
 	public boolean setPointToNavigate(double latitude, double longitude, String historyDescription) {
-		return setPointToNavigate(latitude, longitude, false, historyDescription);
-	}
-	public boolean navigateDialog() {
-		return settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_ROUTE, "true").commit();
-	}
-
-	public boolean setPointToNavigate(double latitude, double longitude, boolean navigate, String historyDescription) {
 		boolean add = settingsAPI.edit(globalPreferences).putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
 		settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_DESCRIPTION, historyDescription).commit();
-		if(navigate) {
-			settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_ROUTE, "true").commit();
-		}
 		if(add){
 			if(historyDescription != null){
 				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
 			}
 		}
 		return add;
+	}
+	public boolean navigateDialog() {
+		return settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_ROUTE, "true").commit();
 	}
 
 

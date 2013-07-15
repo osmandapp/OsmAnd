@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
@@ -464,6 +465,66 @@ public class MapActivityActions implements DialogProvider {
 	}
     
     
+	public static View showActivityActionsDialog(Activity a, AlertDialog.Builder builder, final Set<ApplicationMode> selected) {
+		View view = a.getLayoutInflater().inflate(R.layout.mode_toggles, null);
+		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
+		boolean lc = settings.isLightContentMenu();
+		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
+		buttons[ApplicationMode.DEFAULT.ordinal()] = (ToggleButton) view.findViewById(R.id.DefaultButton);
+		buttons[ApplicationMode.DEFAULT.ordinal()].setButtonDrawable(R.drawable.ic_action_globus_light );
+		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
+		buttons[ApplicationMode.CAR.ordinal()].setButtonDrawable(R.drawable.ic_car );
+		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
+		buttons[ApplicationMode.BICYCLE.ordinal()].setButtonDrawable(R.drawable.ic_bicycle);
+		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
+		buttons[ApplicationMode.PEDESTRIAN.ordinal()].setButtonDrawable(R.drawable.ic_pedestrian);
+		
+		ApplicationMode appMode = settings.getApplicationMode();
+		for (int i = 0; i < buttons.length; i++) {
+			if (buttons[i] != null) {
+				final int ind = i;
+				ToggleButton b = buttons[i];
+				final ApplicationMode buttonAppMode = ApplicationMode.values()[i];
+				b.setChecked(appMode == buttonAppMode);
+				if(appMode == buttonAppMode) {
+					selected.add(appMode);
+				}
+				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						if (isChecked) {
+							selected.clear();
+							for (int j = 0; j < buttons.length; j++) {
+								if (buttons[j] != null) {
+									if(ind == j) {
+										selected.add(ApplicationMode.values()[j]);
+									}
+									if (buttons[j].isChecked() != (ind == j)) {
+										buttons[j].setChecked(ind == j);
+									}
+								}
+							}
+						} else {
+							// revert state
+							boolean revert = true;
+							for (int j = 0; j < buttons.length; j++) {
+								if (buttons[j] != null) {
+									if (buttons[j].isChecked()) {
+										revert = false;
+										break;
+									}
+								}
+							}
+							if (revert) {
+								buttons[ind].setChecked(true);
+							}
+						}
+					}
+				});
+			}
+		}
+		return view;
+	}
 	public void getDirections(final Location mapView, String name, DirectionDialogStyle style) {
 		final Location current = getLastKnownLocation();
 		Builder builder = new AlertDialog.Builder(mapActivity);
@@ -877,7 +938,8 @@ public class MapActivityActions implements DialogProvider {
 						String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
 						getDirections(loc, name, DirectionDialogStyle.create().gpxRouteEnabled().routeToMapPoint());
 					} else {
-						targets.navigateToPoint(new LatLon(latitude, longitude), true, -1);
+						String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+						targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, name);
 					}
 				} else if (standardId == R.string.context_menu_item_directions_from) {
 					if (targets.checkPointToNavigate(getMyApplication())) {
@@ -1398,7 +1460,7 @@ public class MapActivityActions implements DialogProvider {
 	}
     
     public static void directionsToDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name) {
-		OsmandApplication ctx = (OsmandApplication) act.getApplication();
+		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
 		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
 		if (targetPointsHelper.getIntermediatePoints().size() > 0) {
 			Builder builder = new AlertDialog.Builder(act);
@@ -1412,13 +1474,15 @@ public class MapActivityActions implements DialogProvider {
 							if (which == 1) {
 								targetPointsHelper.clearPointToNavigate(false);
 							}
-							targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1);
+							ctx.getSettings().navigateDialog();
+							targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
 							MapActivity.launchMapActivityMoveToTop(act);
 						}
 					});
 			builder.show();
 		} else {
-			targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1);
+			ctx.getSettings().navigateDialog();
+			targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
 			MapActivity.launchMapActivityMoveToTop(act);
 		}
 	}
@@ -1437,20 +1501,18 @@ public class MapActivityActions implements DialogProvider {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							if (which == 0) {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1);
+								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
 							} else if (which == 2) {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, targetPointsHelper.getIntermediatePoints().size());
+								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, targetPointsHelper.getIntermediatePoints().size(), name);
 							} else {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, 0);
+								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, 0, name);
 							}
-							ctx.getSettings().navigateDialog();
 							MapActivity.launchMapActivityMoveToTop(act);
 						}
 					});
 			builder.show();
 		} else {
-			ctx.getSettings().navigateDialog();
-			targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1);
+			targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
 			MapActivity.launchMapActivityMoveToTop(act);
 		}
 	}
