@@ -306,6 +306,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		Builder b = new AlertDialog.Builder(this);
 		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
 		View v = MapActivityActions.showActivityActionsDialog(this, selected, false);
+		b.setTitle(R.string.profile_settings);
 		b.setView(v);
 		b.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
 			
