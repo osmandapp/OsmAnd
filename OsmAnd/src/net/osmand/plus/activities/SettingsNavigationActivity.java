@@ -95,7 +95,11 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		
 		speakAlarms = (Preference) screen.findPreference("speak_routing_alarms");
 		speakAlarms.setOnPreferenceClickListener(this);
+		
+		profileDialog();
 	}
+
+
 	
 	
 

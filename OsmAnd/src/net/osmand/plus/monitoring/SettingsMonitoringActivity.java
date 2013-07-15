@@ -49,6 +49,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		if(REGISTER_BG_SETTINGS) {
 			registerBackgroundSettings();
 		}
+		profileDialog();
     }
 
 

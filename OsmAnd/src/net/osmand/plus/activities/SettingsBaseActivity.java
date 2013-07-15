@@ -3,9 +3,11 @@ package net.osmand.plus.activities;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
@@ -19,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -28,6 +31,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -289,22 +293,44 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		super.onResume();
 		if (profileSettings) {
 			previousAppMode = settings.getApplicationMode();
-			int ind = 0;
-			boolean found = false;
-			for (ApplicationMode a : modes) {
-				if (previousAppMode == a) {
-					getSupportActionBar().setSelectedNavigationItem(ind);
-					found = true;
-					break;
-				}
-				ind++;
-			}
+			boolean found = setSelectedAppMode(previousAppMode);
 			if (!found) {
 				getSupportActionBar().setSelectedNavigationItem(0);
 			}
 		} else {
 			updateAllSettings();
 		}
+	}
+	
+	protected void profileDialog() {
+		Builder b = new AlertDialog.Builder(this);
+		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
+		View v = MapActivityActions.showActivityActionsDialog(this, selected, false);
+		b.setView(v);
+		b.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if(selected.size() > 0) {
+					setSelectedAppMode(selected.iterator().next());
+				}
+			}
+		});
+		b.show();
+	}
+
+	protected boolean setSelectedAppMode(ApplicationMode am) {
+		int ind = 0;
+		boolean found = false;
+		for (ApplicationMode a : modes) {
+			if (am == a) {
+				getSupportActionBar().setSelectedNavigationItem(ind);
+				found = true;
+				break;
+			}
+			ind++;
+		}
+		return found;
 	}
 	
 	@Override

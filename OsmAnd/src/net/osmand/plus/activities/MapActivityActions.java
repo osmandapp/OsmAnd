@@ -465,13 +465,17 @@ public class MapActivityActions implements DialogProvider {
 	}
     
     
-	public static View showActivityActionsDialog(Activity a, AlertDialog.Builder builder, final Set<ApplicationMode> selected) {
+	public static View showActivityActionsDialog(Activity a, final Set<ApplicationMode> selected, boolean showDefault) {
 		View view = a.getLayoutInflater().inflate(R.layout.mode_toggles, null);
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		boolean lc = settings.isLightContentMenu();
 		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
-		buttons[ApplicationMode.DEFAULT.ordinal()] = (ToggleButton) view.findViewById(R.id.DefaultButton);
-		buttons[ApplicationMode.DEFAULT.ordinal()].setButtonDrawable(R.drawable.ic_action_globus_light );
+		if(showDefault) {
+			buttons[ApplicationMode.DEFAULT.ordinal()] = (ToggleButton) view.findViewById(R.id.DefaultButton);
+			buttons[ApplicationMode.DEFAULT.ordinal()].setButtonDrawable(R.drawable.ic_browse_map );
+		} else {
+			view.findViewById(R.id.DefaultButton).setVisibility(View.GONE);
+		}
 		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
 		buttons[ApplicationMode.CAR.ordinal()].setButtonDrawable(R.drawable.ic_car );
 		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
