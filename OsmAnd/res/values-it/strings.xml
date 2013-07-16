@@ -315,7 +315,7 @@
   <string name="amenity_type_finance">Finanza</string>
   <string name="amenity_type_geocache">Geocache</string>
   <string name="amenity_type_healthcare">Sanità</string>
-  <string name="amenity_type_historic">Cronolgia</string>
+  <string name="amenity_type_historic">Storia</string>
   <string name="amenity_type_landuse">Uso del terreno</string>
   <string name="amenity_type_leisure">Tempo Libero</string>
   <string name="amenity_type_manmade">Artificiale</string>
@@ -1207,14 +1207,15 @@
 \n\t* Corretto Geo Intent (Foursquare, c:geo)
 \n\t* Corretto il tremolio dello schermo durante la navigazione
 \n\t* Altri piccoli errori
-\nNovità della v. 1.2:
+\n\nNovità della v. 1.2:
 \n\t* Correzione di errori (affinata la navigazione, ricerca, registrazione AV, indicazioni vocali, alcuni miglioramenti di visualizzazione)
 \n\t* Configurazione dell\'ombreggiatura dei rilievi più facile (richiede il Plugin Linee di Contorno)
 \n\t* Ora accetta i collegamenti di localizzazione maps.google.com
 \n\t* Nuovo widget (informazioni GPS)
 \n\t* Aggiunto il supporto alle finestre multiple per i recenti dispositivi Samsung
 \n\t* Filtro Kalman per la bussola
-\n\t* Supporto dell\'orologio Pebble "</string>
+\n\t* Supporto dell\'orologio Pebble "
+	</string>
     <string name="max_speed_none">nessuno</string>
     <string name="prefer_in_routing_descr">Preferisci autostrade</string>
     <string name="prefer_motorways">Preferisci le autostrade</string>
