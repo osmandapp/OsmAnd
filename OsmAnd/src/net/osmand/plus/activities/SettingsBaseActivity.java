@@ -53,6 +53,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 	private Map<String, OsmandPreference<Integer>> seekBarPreferences = new LinkedHashMap<String, OsmandPreference<Integer>>();
 
 	private Map<String, Map<String, ?>> listPrefValues = new LinkedHashMap<String, Map<String, ?>>();
+	private AlertDialog profileDialog;
 	
 	public SettingsBaseActivity() {
 		this(false);
@@ -310,12 +311,16 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 					public void onClick(View v) {
 						if(selected.size() > 0) {
 							setSelectedAppMode(selected.iterator().next());
-						}						
+						}
+						if(profileDialog != null && profileDialog.isShowing()) {
+							profileDialog.dismiss();
+						}
+						profileDialog = null;
 					}
 				});
 		b.setTitle(R.string.profile_settings);
 		b.setView(v);
-		b.show();
+		profileDialog = b.show();
 	}
 
 	protected boolean setSelectedAppMode(ApplicationMode am) {

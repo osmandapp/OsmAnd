@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal" android:layout_gravity="center_horizontal" android:gravity="center_horizontal"
-    android:layout_marginTop="7dp"
-    android:layout_marginBottom="7dp">
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp">
     
     	<ToggleButton
             android:id="@+id/DefaultButton"
