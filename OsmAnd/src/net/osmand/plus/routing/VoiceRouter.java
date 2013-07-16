@@ -28,6 +28,7 @@ public class VoiceRouter {
 	private int currentStatus = STATUS_UNKNOWN;
 	private float playGoAheadDist = 0;
 	private long lastAnnouncedSpeedLimit = 0;
+	private long waitAnnouncedSpeedLimit = 0;
 	private long lastAnnouncedSpeedCamera = 0;
 	private long lastAnnouncedWarning = 0;
 
@@ -188,15 +189,29 @@ public class VoiceRouter {
 		}
 		long ms = System.currentTimeMillis();
 		if (alarm.getTime() == AlarmInfo.SPEED_LIMIT) {
-			if (router.getSettings().SPEAK_SPEED_LIMIT.get()  && ms - lastAnnouncedSpeedLimit > 120 * 60 * 1000) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
-				if (p != null) {
-					lastAnnouncedSpeedLimit = ms;
-					p.speedAlarm().play();
+
+			if (waitAnnouncedSpeedLimit == 0) {
+				// wait 10 seconds before announcement
+				if (ms - lastAnnouncedSpeedLimit > 120 * 1000) {
+					waitAnnouncedSpeedLimit = ms;
+				}	
+			} else {
+				// if we wait before more than 20 sec (reset counter)
+				if (ms - waitAnnouncedSpeedLimit > 20 * 1000) {
+					waitAnnouncedSpeedLimit = 0;
+				} else if (router.getSettings().SPEAK_SPEED_LIMIT.get()  && ms - waitAnnouncedSpeedLimit > 10 * 1000 ) {
+					CommandBuilder p = getNewCommandPlayerToPlay();
+					if (p != null) {
+						lastAnnouncedSpeedLimit = ms;
+						waitAnnouncedSpeedLimit = 0;
+						p.speedAlarm().play();
+					}
 				}
 			}
+			
+			
 		} else if (alarm.getTime() == AlarmInfo.SPEED_CAMERA) {
-			if (router.getSettings().SPEAK_SPEED_CAMERA.get() && ms - lastAnnouncedSpeedCamera > 120 * 60 * 1000) {
+			if (router.getSettings().SPEAK_SPEED_CAMERA.get() && ms - lastAnnouncedSpeedCamera > 100 * 1000) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					lastAnnouncedSpeedCamera = ms;
@@ -204,7 +219,7 @@ public class VoiceRouter {
 				}
 			}
 		} else {
-			if (router.getSettings().SPEAK_TRAFFIC_WARNINGS.get() && ms - lastAnnouncedWarning > 120 * 60 * 1000) {
+			if (router.getSettings().SPEAK_TRAFFIC_WARNINGS.get() && ms - lastAnnouncedWarning > 100 * 1000) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					lastAnnouncedWarning = ms;
