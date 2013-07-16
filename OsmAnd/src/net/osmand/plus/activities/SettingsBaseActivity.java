@@ -305,7 +305,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 	protected void profileDialog() {
 		Builder b = new AlertDialog.Builder(this);
 		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-		View v = MapActivityActions.showActivityActionsDialog(this, selected, false, 
+		View v = MapActivityActions.prepareAppModeView(this, selected, false, null,
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {

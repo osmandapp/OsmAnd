@@ -67,6 +67,7 @@ import android.text.Html;
 import android.util.FloatMath;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -465,9 +466,9 @@ public class MapActivityActions implements DialogProvider {
 	}
     
     
-	public static View showActivityActionsDialog(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
-			final View.OnClickListener onClickListener) {
-		View view = a.getLayoutInflater().inflate(R.layout.mode_toggles, null);
+	public static View prepareAppModeView(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
+			ViewGroup parent, final View.OnClickListener onClickListener) {
+		View view = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		boolean lc = settings.isLightContentMenu();
 		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];

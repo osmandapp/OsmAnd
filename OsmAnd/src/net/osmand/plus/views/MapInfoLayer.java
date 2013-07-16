@@ -18,6 +18,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.extrasettings.OsmandExtraSettings;
 import net.osmand.plus.routing.RoutingHelper;
@@ -53,9 +54,12 @@ import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -497,7 +501,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		final ArrayList<Object> list = new ArrayList<Object>();
 		String appMode = settings.getApplicationMode().toHumanString(view.getApplication());
-		list.add(map.getString(R.string.map_widget_reset) + " [" + appMode  +"] ");
+		list.add(map.getString(R.string.map_widget_reset));
 		list.add(map.getString(R.string.map_widget_top_stack));
 		list.addAll(mapInfoControls.getTop());
 		list.add(map.getString(R.string.map_widget_right_stack));
@@ -516,11 +520,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 
 		// final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);
-		
-		final ApplicationMode mode = settings.getApplicationMode();
-		ListAdapter listAdapter = new ArrayAdapter<Object>(map, R.layout.layers_list_activity_item, R.id.title, list) {
+		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
+		final ArrayAdapter<Object> listAdapter = new ArrayAdapter<Object>(map, R.layout.layers_list_activity_item, R.id.title, list) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
+				final ApplicationMode mode = settings.getApplicationMode();
 				View v = convertView;
 				if (v == null) {
 					v = map.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
@@ -586,11 +590,27 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		};
 		Builder b = new AlertDialog.Builder(map);
-		b.setAdapter(listAdapter, new OnClickListener() {
-			
+		View confirmDialog = view.inflate(view.getContext(), R.layout.configuration_dialog, null);
+		final ListView lv = (ListView) confirmDialog.findViewById(android.R.id.list);
+		MapActivityActions.prepareAppModeView(map, selected, true, 
+				(ViewGroup) confirmDialog.findViewById(R.id.TopBar), 
+				new View.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Object o = list.get(which);
+			public void onClick(View v) {
+				if(selected.size() > 0) {
+					view.getSettings().APPLICATION_MODE.set(selected.iterator().next());
+					listAdapter.notifyDataSetChanged();
+				}
+			}
+		});
+		
+		
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				final ApplicationMode mode = settings.getApplicationMode();
+				Object o = list.get(position);
 				if (o instanceof MapWidgetRegInfo) {
 					final MapWidgetRegInfo mi = (MapWidgetRegInfo) o;
 					final boolean selecteable = mi.selecteable();
@@ -599,12 +619,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 						mapInfoControls.changeVisibility(mi);
 					}
 					recreateControls();
-				} else if(which == 0) {
+				} else if(position == 0) {
 					mapInfoControls.resetToDefault();
 					recreateControls();
-				}
+				}				
 			}
 		});
+		lv.setAdapter(listAdapter);
+		b.setView(confirmDialog);
 		final AlertDialog dlg = b.create();
 		// listener.setDialog(dlg);
 		dlg.setCanceledOnTouchOutside(true);
