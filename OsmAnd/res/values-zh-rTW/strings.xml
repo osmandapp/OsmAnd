@@ -405,7 +405,7 @@
 		\n\t若要新增興趣點，使用地圖快顯功能表中\'建立興趣點\'。然後在\'建立興趣點\'的對話框輸入興趣點相關資訊，最後按確認。
 		\n\t地圖上的錯誤可透過 OSM 錯誤立即回報，OSM 社群即可快速修正該問題。
 		\n\t若要新增 OSM 錯誤回報，使用地圖快顯功能表中\'開啟 OSM 錯誤\'。然後輸入詳細的問題敘述，最後按下 \'新增\'按鈕。
-		\n\t請注意網路是否連通，OSM 興趣點與提供錯誤需要上網。</string>
+		\n\t請注意網路是否連通，提供 OSM 興趣點與 OSM 錯誤回報需要上網。</string>
 	<string name="download_files_not_enough_space">空間不足以下載 %1$s MB (空間剩餘：%2$s)。</string>
 	<string name="download_files_question_space">目前可用空間剩下 {2} MB！ 要下載 {0} 個檔 ({1} MB)？</string>
 	<string name="tip_select_destination_point">取得指示</string>
