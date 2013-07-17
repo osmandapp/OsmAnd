@@ -847,4 +847,61 @@
 	<string name="mark_point">هدف</string>
 	<string name="show_osm_bugs_descr">نشان دادن OpenStreetBugs بر روی نقشه</string>
 	<string name="show_osm_bugs">نشان دادن OpenStreetBugs</string>
+<<<<<<< HEAD
 	</resources>
+=======
+	<string name="speak_warnings_title">هشدار دهنده …</string>
+	<string name="speak_warnings_descr">پیکربندی هشدارهای ترافیک (توقف اجباری، سرعت گیر)، هشدار دوربین سرعت سنج، محدودیت سرعت</string>
+    <string name="speak_speed_limit">اعلام محدودیت سرعت</string>
+    <string name="speak_cameras">اعلام دوربین سرعت سنج</string>
+	<string name="speak_traffic_warnings">اعلام ترافیک</string>
+	<string name="tip_recent_changes_1_4_t">تغییرات نسخه 1.4:↵
+→\n\t* بهینه سازی استگاههای بین راهی↵
+→\n\t* جستجوی خیابانها با نام (محله)) ↵
+→\n\t* افزونه طراحی مسیر (بارگزاری/ویرایش/ذخیره فایل GPX))↵
+→\n\t*  نمایش دانلود های جدید (دانلود در پس زمینه))↵
+→\n\t* پشتیبانی از پوشه GPX (سازماندهی فایل GPX))↵
+→\n\t* حذف فایل SRTM↵
+→\n\t*  پشتیبانی از یاداشتهای OSM ↵ 
+    </string>
+    <string name="osmand_distance_planning_plugin_description">ایجاد مسیر (یا استفاده از / تغییر فایل های GPX موجود) برای اندازه گیری فاصله بین دو نقطه ،ذخیره به عنوان GPX، می تواند مورد استفاده قرار گیرد برای برنامه ریزی مسیر GPX.</string>
+    <string name="tip_recent_changes_1_3_t">تغییرات نسخه 1.3:↵
+\n\t* پشتیبانی از صفحه نمایش های بزرگ↵
+\n\t* تم هلو (سفارشی))↵
+\n\t* تنظیم قطب نما↵
+\n\t* دکمه سمت چپ بالای صفحه نمایش جایگزین دکمه منو↵
+    </string>
+    <string name="osmand_monitoring_plugin_description">فعال کردن ردیابی و راهبری در خواب (صفحه نمایش خاموش) جالت زمان بندی شده برای روشن شدن جی پی اس.↵
+ تنظیمات آسان ظبط سفرهای خود در فایل GPX و یا به صورت آنلاین با یک سرویس اینترنتی</string>
+    <string name="tip_recent_changes_1_2_t">تغییرات مسخه 1.2.1:↵
+→ \n\t*تعمیر اهداف جغرافیایی (Foursquare, c:geo)↵
+→ \n\t*رفع مشکل لرزش در صفحه نمایش هنگام راهبری ↵
+→ \n\t*رفع مشکلات کوچک دیگر↵
+→ \n\nتغییرات در نسخه 1.2:↵
+→→\n\t* رفع مشکلات (تنظیم مسیر یابی، جستجو، ظبط AV، اعلانها، نمایش↵
+→→\n\t* پیکربندی راحت تر پوشش سایه ↵
+→→\n\t* پذیرش لینک از گوگل مپ↵
+→→\n\t* افزونه جدید(اطلاعات GPS) ↵
+→→\n\t* پشتیبانی از قابلیت جدید محصولات سامسونگ به صورت چند پنجره↵
+→→\n\t* فیلتر کالمن برای قطب نما↵
+→→\n\t* پشتبانی نمایش ریگی↵
+→
+	</string>
+    <string name="layer_hillshade">لایه سایه تپه</string>
+    <string name="tip_recent_changes_1_1_4_t">تغییرات نسخه 1.1.4:↵
+\n\t* UI طرااحی مجدد↵
+→→\n\t* رفع مشکلات↵
+    </string>
+    <string name="index_name_openmaps">باز کردن نقشه های اتحادیه اروپا</string>
+    <string name="download_hillshade_item">سایه تپه</string>
+    <string name="download_hillshade_maps">پوشش سایه تپه</string>
+    <string name="tip_recent_changes_1_1_2_t">تغییرات نسخه 1.1.2:↵
+→→\n\t* ارتقاء افزونه صوتی/تصویری)↵
+→→\n\t* بازسازی افزونه کنتور جاده ↵
+→→\n\t* بسته سایه تپه برای افزونه کنتور جاده↵
+→→\n\t* رفع مشکل (مسیریابی بهینه)↵
+    </string>
+    <string name="osmand_srtm_long_description_1000_chars">این افزونه فراهم می کند و خطوط است که می تواند در نقشه های آفلاین OsmAnd \ 'نمایش داده می شود.داده های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) بر اساس اندازه گیری های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (Spaceborne انتشار حرارتی پیشرفته و انعکاس پرتو)، یک ابزار تصویربرداری پردازنده ترا، گل سرسبد های ماهواره ای NASA \ 'زمین رعایت سیستم. ASTER تلاش مشترک میان ناسا، ژاپن \ 'وزارت اقتصاد، تجارت و صنعت (METI)، و سیستم های فضایی ژاپن (J-spacesystems) است.</string>
+    <string name="srtm_plugin_description">تسهیل دانلود از خطوط کانتور آنلاین و تپه سایه (تنظیمات -&gt; مدیریت داده ها -&gt; دانلود -&gt; انتخاب نوع نقشه مورد نظر).</string>
+    <string name="monitoring_control_start">GPX</string>
+    </resources>
