@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources>
-<string name="default_buttons_yes">بله</string>
+<resources><string name="default_buttons_yes">بله</string>
     <string name="default_buttons_no">خیر</string>
-    </resources>
+    <string name="osmand_app_not_found">OsmAnd نصب نشده است</string>
+    <string name="app_name">پارکینگ OsmAnd</string>
+    <string name="parking_plugin_installed">افزونه پارکینگ osmand نصب شده در تنظیمات OsmAnd فعال کنید.</string>
+</resources>
