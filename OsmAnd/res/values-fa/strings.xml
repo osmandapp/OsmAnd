@@ -871,8 +871,8 @@
 \n\t* تنظیم قطب نما↵
 \n\t* دکمه سمت چپ بالای صفحه نمایش جایگزین دکمه منو↵
     </string>
-    <string name="osmand_monitoring_plugin_description">فعال کردن ردیابی و راهبری در خواب (صفحه نمایش خاموش) جالت زمان بندی شده برای روشن شدن جی پی اس.↵
- تنظیمات آسان ظبط سفرهای خود در فایل GPX و یا به صورت آنلاین با یک سرویس اینترنتی</string>
+    <string name="osmand_monitoring_plugin_description">فعال کردن ردیابی و راهبری در خواب (صفحه نمایش خاموش) توسط روشن کردن منتاوب جی پی اس.↵
+ تنظیمات آسان ضبط سفرهای خود در فایل GPX و یا به صورت آنلاین با یک سرویس اینترنتی.</string>
     <string name="tip_recent_changes_1_2_t">تغییرات مسخه 1.2.1:↵
 → \n\t*تعمیر اهداف جغرافیایی (Foursquare, c:geo)↵
 → \n\t*رفع مشکل لرزش در صفحه نمایش هنگام راهبری ↵
@@ -904,4 +904,12 @@
     <string name="osmand_srtm_long_description_1000_chars">این افزونه فراهم می کند و خطوط است که می تواند در نقشه های آفلاین OsmAnd \ 'نمایش داده می شود.داده های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) بر اساس اندازه گیری های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (Spaceborne انتشار حرارتی پیشرفته و انعکاس پرتو)، یک ابزار تصویربرداری پردازنده ترا، گل سرسبد های ماهواره ای NASA \ 'زمین رعایت سیستم. ASTER تلاش مشترک میان ناسا، ژاپن \ 'وزارت اقتصاد، تجارت و صنعت (METI)، و سیستم های فضایی ژاپن (J-spacesystems) است.</string>
     <string name="srtm_plugin_description">تسهیل دانلود از خطوط کانتور آنلاین و تپه سایه (تنظیمات -&gt; مدیریت داده ها -&gt; دانلود -&gt; انتخاب نوع نقشه مورد نظر).</string>
     <string name="monitoring_control_start">GPX</string>
-    </resources>
+    <string name="rendering_attr_noPolygons_description">محو کردن همه عوارض زمین روی نقشه</string>
+	<string name="rendering_attr_noPolygons_name">مخفی کردن چندضلعی ها</string>
+	<string name="rendering_attr_appMode_name">حالت رندرکردن</string>
+	<string name="rendering_attr_appMode_description">بهینه سازی نقشه برای</string>
+	<string name="rendering_attr_contourLines_description">نشان دادن از سطح زوم (نیازمند داده های خطوط همتراز):</string>
+	<string name="rendering_attr_contourLines_name">نشان دادن خطوط هم تراز</string>
+	<string name="rendering_attr_hmRendered_description">افزایش جزئیات نقشه</string>
+	<string name="local_index_routing_data">داده های مسیریابی</string>
+	</resources>
