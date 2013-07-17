@@ -42,11 +42,7 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		
-//		setContentView(R.layout.searchpoilist);
-		
 		// ListActivity has a ListView, which you can get with:
 		ListView lv = getListView();
 
@@ -78,14 +74,6 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 	private void updateIntentToLaunch(Intent intentToLaunch){
 		LatLon loc = null;
 		boolean searchAround = false;
-		Intent intent = getSherlockActivity().getIntent();
-		if(intent != null){
-			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
-			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
-			if(lat != 0 || lon != 0){
-				loc = new LatLon(lat, lon);
-			}
-		}
 		SherlockFragmentActivity parent = getSherlockActivity();
 		if (loc == null && parent instanceof SearchActivity) {
 			loc = ((SearchActivity) parent).getSearchPoint();
