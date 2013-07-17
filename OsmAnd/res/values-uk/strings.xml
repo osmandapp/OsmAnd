@@ -200,7 +200,7 @@
   <string name="index_name_tts_voice">Голосові дані (TTS)</string>
   <string name="amenity_type_wikiosm">Вікіпедія (оффлайн)</string>
   <string name="amenity_type_user_defined">Користувацькі</string>
-  <string name="fav_export_confirmation">Файл з Обраним вже існує. Ви хочете його замінити?</string>
+  <string name="fav_export_confirmation">Файл з Закладками вже існує. Ви хочете його замінити?</string>
   <string name="profile_settings">Налаштування профілю</string>
   <string name="settings_preset">Профіль</string>
   <string name="settings_preset_descr">Виберіть профіль роботи програми (кожен профіль зберігає налаштування окремо).</string>
@@ -213,8 +213,8 @@
   <string name="general_settings">Загальні</string>
   <string name="general_settings_descr">Налаштування екрану, локалізації, одиниці вимірювання і ін</string>
   <string name="global_app_settings">Загальні налаштування</string>
-  <string name="user_name">Ім\'я користувача</string>
-  <string name="user_name_descr">Вказати ім\'я користувача для роботи з OSM</string>
+  <string name="user_name">Ім’я користувача</string>
+  <string name="user_name_descr">Вкажіть ім’я користувача для роботи з OSM</string>
   <string name="user_password">Пароль</string>
   <string name="user_password_descr">Потрібно для роботи з openstreetmap.org</string>
   <string name="osmand_service">Фоновий режим</string>
@@ -261,7 +261,8 @@
   <string name="layer_poi_label">POI мітки</string>
   <string name="animate_route_off">Закінчити моделювання</string>
   <string name="animate_route">Почати моделювання</string>
-  <string name="tip_recent_changes_0_6_8_t">"Changes in 0.6.8 : \n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options. \n\t- Implement POI search by name in big areas (countries) \n\t- Fix flickering map screen for tablets (Issue 641) \n\t- Auto-center map view option (Issue 356) \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\' \n\t- POI data included in .obf file (all download indexes after 01/10/11) \n\t- Voice prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "</string>
+  <string name="tip_recent_changes_0_6_8_t">"Changes in 0.6.8 : \n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options. \n\t- Implement POI search by name in big areas (countries) \n\t- Fix flickering map screen for tablets (Issue 641) \n\t- Auto-center map view option (Issue 356) \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\' \n\t- POI data included in .obf file (all download indexes after 01/10/11) \n\t- Voice prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "
+	</string>
   <string name="file_can_not_be_renamed">Файл не можна перейменувати.</string>
   <string name="file_with_name_already_exists">Файл з таким ім\'ям вже існує.</string>
   <string name="gpx_navigation">GPX маршрут</string>
@@ -287,12 +288,12 @@
   <string name="context_menu_item_search">Шукати поруч</string>
   <string name="save_route_dialog_title">Зберегти маршрут як GPX трек</string>
   <string name="route_successfully_saved_at">Маршрут успішно збережено в \'%1$s\'.</string>
-  <string name="filename_input">"Ім\'я файлу: " </string>
+  <string name="filename_input">Ім’я файлу: </string>
   <string name="file_with_name_already_exist">Файл з таким ім’ям вже існує.</string>
   <string name="default_buttons_save">Зберегти</string>
   <string name="menu_save_directions">Зберегти маршрут</string>
   <string name="local_index_upload_gpx_description">Відіслати GPX файли на OSM сервер. Вони будуть використані для покращення мап і завантажені на osm.org.</string>
-  <string name="local_index_items_uploaded">%1$d з %2$d об\'єктів успішно завантажено.</string>
+  <string name="local_index_items_uploaded">%1$d з %2$d об’єктів успішно завантажено.</string>
   <string name="local_index_mi_upload_gpx">Відправити в OSM</string>
   <string name="show_more_map_detail">Показати більше деталей</string>
   <string name="show_more_map_detail_descr">Відображати деталі (дороги та інше) починаючи з малого масштабу</string>
@@ -305,17 +306,17 @@
   <string name="favourites_edit_dialog_name">Назва</string>
   <string name="favourites_edit_dialog_category">Категорія</string>
   <string name="vector_map_not_needed">Ні, дякую</string>
-  <string name="basemap_missing">Базова карта (яка покриває цілий світ) відсутня. Будь ласка, завантажте World_basemap_x.obf для повноцінної роботи програми.</string>
+  <string name="basemap_missing">Базова мапа (яка покриває цілий світ) відсутня. Будь ласка, завантажте World_basemap_x.obf для повноцінної роботи програми.</string>
   <string name="vector_data_missing">SD-карта не містить завантажених даних. Будь ласка, завантажте їх, щоб використовувати мапу без інтернету.</string>
   <string name="local_index_gpx_info_show">\n\nТривале натискання для перегляду на мапі</string>
-  <string name="local_index_gpx_info_speed">"\nAverage speed : %1$s \nMaximum speed : %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nAverage altitude : %1$s\nMinimum altitude : %2$s\nMaximum altitude : %3$s\nAscents : %4$s\nDescents : %5$s"</string>
+  <string name="local_index_gpx_info_speed">\nСередня швидкість: %1$s \nМаксимальна швидкість: %2$s"</string>
+  <string name="local_index_gpx_info_elevation">\nСередня висота: %1$s\nМінімальна висота: %2$s\nМаксимальна висота: %3$s\nПідйом вгору: %4$s\nСпуск вниз: %5$s"</string>
   <string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tF, %5$tR\nEnd time : %6$tF, %6$tR</string>
   <string name="local_index_installed">Редакція</string>
-  <string name="local_index_items_backuped">%1$d з %2$d об\'єктів успішно деактивовано.</string>
-  <string name="local_index_items_deleted">%1$d з %2$d об\'єктів успішно вилучено.</string>
-  <string name="local_index_items_restored">%1$d з %2$d об\'єктів успішно активовано.</string>
-  <string name="local_index_no_items_to_do">Нема об\'єктів в %1$s</string>
+  <string name="local_index_items_backuped">%1$d з %2$d об’єктів успішно деактивовано.</string>
+  <string name="local_index_items_deleted">%1$d з %2$d об’єктів успішно вилучено.</string>
+  <string name="local_index_items_restored">%1$d з %2$d об’єктів успішно активовано.</string>
+  <string name="local_index_no_items_to_do">Нема об’єктів в %1$s</string>
   <string name="local_index_action_do">Ви дійсно хочете вилучити %1$s %2$s об\'єктів?</string>
   <string name="local_index_descr_title">Дані</string>
   <string name="local_index_mi_restore">Активувати</string>
@@ -325,8 +326,8 @@
   <string name="local_index_download">Завантажити</string>
   <string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
   <string name="local_index_poi_data">POI дані</string>
-  <string name="local_index_address_data">Адрес</string>
-  <string name="local_index_transport_data">Transport data</string>
+  <string name="local_index_address_data">Адреси</string>
+  <string name="local_index_transport_data">Траснпорт</string>
   <string name="local_index_map_data">Мапа</string>
   
   <string name="local_indexes_cat_backup">Деактивовані</string>
@@ -352,7 +353,7 @@
   <string name="gpx_option_reverse_route">Виберіть зворотній напрямок</string>
   <string name="gpx_option_destination_point">Використовувати поточний пункт призначення</string>
   <string name="gpx_option_from_start_point">Пройти увесь шлях спочатку</string>
-  <string name="switch_to_vector_map_to_see">Для цього регіону доступні оффлайн векторні мапи\n\t\n\tДля їх використання виберіть пункт меню \"Мапа\" → \"Джерело мапи\" → \"Офлайн векторні мапи\".</string>
+  <string name="switch_to_vector_map_to_see">Для цього регіону доступні оффлайн векторні мапи\n\t\n\tДля їх використання виберіть пункт меню \"Мапа\" → \"Джерело мапи\" → \"Оффлайн векторні мапи\".</string>
   <string name="choose_audio_stream">Голосові інструкції</string>
   <string name="choose_audio_stream_descr">Виберіть канал для голосових інструкцій (залежить від системи)</string>
   <string name="voice_stream_voice_call">Потік голосових дзвінків</string>
@@ -428,7 +429,7 @@
   <string name="send_location_way_choose_title">Поділитись, використовуючи</string>
   <string name="send_location_sms_pattern">Координати: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Для того, щоб побачити місцерозташування натисніть на посилання %1$s або android посилання %2$s</string>
-  <string name="send_location">Відправити місцезнаходження</string>
+  <string name="send_location">Надіслати місцезнаходження</string>
   <string name="context_menu_item_share_location">Поділитись місцезнаходженням</string>
   <string name="add_waypoint_dialog_added">Точка \'\'{0}\'\' успішно додана</string>
   <string name="add_waypoint_dialog_title">Додати точку до записаного треку</string>
@@ -440,7 +441,7 @@
   <string name="amenity_type_entertainment">Розваги</string>
   <string name="amenity_type_finance">Фінанси</string>
   <string name="amenity_type_geocache">Геокешинг</string>
-  <string name="amenity_type_healthcare">Здоров\'я</string>
+  <string name="amenity_type_healthcare">Здоров’я</string>
   <string name="amenity_type_historic">Історичні</string>
   <string name="amenity_type_landuse">Землекористування</string>
   <string name="amenity_type_leisure">Дозвілля</string>
@@ -502,7 +503,7 @@
   <string name="select_all">Вибрати все</string>
   <string name="reload">Перезавантажити</string>
   <string name="fast_route_mode">Найшвидший маршрут</string>
-  <string name="fast_route_mode_descr">"Надавати перевагу найшвидшому маршруту перед найкоротшим " </string>
+  <string name="fast_route_mode_descr">Надавати перевагу найшвидшому маршруту перед найкоротшим </string>
   <string name="tiles_to_download_estimated_size">На масштабі{0} завантажувати {1} тайли ({2} MB)</string>
   <string name="context_menu_item_download_map">Завантажити мапу</string>
   <string name="select_max_zoom_preload_area">Вибрати максимальний масштаб для завантаження</string>
@@ -585,7 +586,7 @@
   <string name="background_service_int">Інтервал позиціонування</string>
   <string name="background_service_provider_descr">Виберіть джерело позиціонування для сервісу</string>
   <string name="background_service_provider">Джерело позиціонування</string>
-  <string name="background_router_service_descr">Запускай OsmAnd у фоновому режимі для відслідковування місцерозташування при вимкненому екрані</string>
+  <string name="background_router_service_descr">Запускає OsmAnd у фоновому режимі для відслідковування місцерозташування при вимкненому екрані</string>
   <string name="background_router_service">Запускати у фоні</string>
   <string name="off_router_service_no_gps_available">Фоновому сервісу необхідна інформація про місцезнаходження.</string>
   <string name="hide_poi_filter">Сховати фільтр</string>
@@ -1291,7 +1292,12 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		- показ руху по смугах та обмежень швидкості, голосове супроводження (записане чи синтезоване).
 	</string>
 	<string name="live_monitoring_mode_on">Вимкнути трекінг\nв реальному режимі</string>
-	<string name="tip_rotation_switching_t_v2">"\tНатиснувши на іконку компаса на екрані з мапою ви можете змінити режим повороту мапи\n\tДоступні варіанти\n\t  \"Не обертати\" - Мапа не буде обертатись. Північ завжди вгорі.\n\t  \"За напрямком руху\" - Мапа буде обертатись у відповідності з напрямком вашого руху. Вгорі - напрямок руху\n\t  \"За напрямком компаса\" - Мапа буде обертатись так, щоб сумістити північ мапи і північний напрямок (використовуються дані компаса з пристрою) "</string>
+	<string name="tip_rotation_switching_t_v2">\tНатиснувши на іконку компаса на екрані з мапою ви можете змінити режим повороту мапи
+		\n\tДоступні варіанти
+		\n\t  \"Не обертати\" - Мапа не буде обертатись. Північ завжди вгорі.
+		\n\t  \"За напрямком руху\" - Мапа буде обертатись у відповідності з напрямком вашого руху. Вгорі - напрямок руху
+		\n\t  \"За напрямком компаса\" - Мапа буде обертатись так, щоб сумістити північ мапи і північний напрямок (використовуються дані компаса з пристрою)
+	</string>
 	<string name="tip_day_night_mode_t_v2">\tДля деяких векторних мап можна змінювати вигляд залежно від часу доби
 		\n\tНічний режим безпечніший для використання в темряві
 		\n\tДля зміни денного/нічного режимів натисніть на іконку налаштування на екрані мапи і виберіть \"Денний/нічний режим\"
@@ -1301,7 +1307,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		\n\t\"Нічний\" - завжди використовується нічний режим
 		\n\t\"Датчик освітленості\" - вигляд мапи змінюється автоматично в залежності від датчика освітленості (при його наявності) у вашому пристрої
 	</string>	
-	<string name="tip_map_switch_t_v2">\tМапи і шари можна змінювати вибравши \"Налаштування вигляду\" (іконка глобуса) на екрані мапи
+	<string name="tip_map_switch_t_v2">\tМапи і шари можна змінювати вибравши \"Мапа\" (іконка глобуса) на екрані мапи
 		\n\tВ \"Джерела мап…\" можна вибрати попередньо завантажені векторі мапи, онлайн мапи з різних джерел (для використання потрібно увімкнути втулок \"Онлайн мапи\") або самостійно створені мапи (наприклад, за допомогою OsmAndMapCreator для ПК).
 		\n\tOsmAnd також підтримує джерела користувача.
 	</string>
@@ -1469,4 +1475,5 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="speak_speed_limit">Попереджати про обмеження швидкості</string>
     <string name="speak_cameras">Попереджати про камери фіксації швидкості</string>
 	<string name="speak_traffic_warnings">Попереджати про перешкоди на шляху</string>
+	<string name="binary_map_download_success">Завантаження закінчено.\n\t\n\tДля використання мап скористайтесь \'Меню\' -&gt; \'Мапа\' -&gt; \'Джерело мапи…\' -&gt; \'Оффлайн векторні мапи\'.</string>
 	</resources>
