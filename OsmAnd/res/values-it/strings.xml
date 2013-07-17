@@ -1296,7 +1296,7 @@
 \n\t* Possibilità di eliminare i file SRTM
 \n\t* Supporto alle note OSM 
     </string>
-    <string name="search_street_in_neighborhood_cities">Cerca la strada in un quartiere della città</string>
+    <string name="search_street_in_neighborhood_cities">Cerca la strada nelle città vicine</string>
     <string name="intermediate_items_sort_return">Punti intermedi riordinati in modo da ottimizzare il percorso verso la destinazione.</string>
     <string name="intermediate_items_sort_by_distance">Ordina (porta a porta)</string>
     <string name="please_select_address">Scegli prima la città o la strada</string>
