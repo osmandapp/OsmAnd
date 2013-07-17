@@ -1270,7 +1270,7 @@
 	<string name="plugin_distance_point_time">orario</string>
     <string name="plugin_distance_point_hdop">precisione</string>
     <string name="plugin_distance_point_speed">velocità</string>
-    <string name="plugin_distance_point_ele">elevazione</string>
+    <string name="plugin_distance_point_ele">altitudine</string>
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nome del file GPX</string>
     <string name="gpx_saved_sucessfully">File GPX salvato con successo in {0}</string>
