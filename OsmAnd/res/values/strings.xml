@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osb_author_or_password_not_specified">Please specify OSM user and password in Settings</string>
     <string name="clear_intermediate_points">Clear intermediate points</string>
     <string name="keep_intermediate_points">Keep intermediate points</string>
     <string name="new_directions_point_dialog">You already have intermediate points set.</string>
@@ -1479,6 +1480,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osb_add_dialog_title">Enter bug text</string>
 	<string name="osb_add_dialog_success">Bug successfully created</string>
 	<string name="osb_add_dialog_error">Exception occured: bug was not created</string>
+	<string name="osb_author_dialog_password">OSM password (optional)</string>
 	<string name="osb_comment_menu_item">Add comment</string>
 	<string name="osb_comment_dialog_message">Message</string>
 	<string name="osb_comment_dialog_author">Author name</string>

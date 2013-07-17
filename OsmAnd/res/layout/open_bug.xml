@@ -15,6 +15,12 @@
   <EditText android:id="@+id/AuthorName" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
   			android:layout_height="wrap_content"  android:text="NoName"></EditText>
   </TableRow>
+  <TableRow>
+  <TextView android:id="@+id/TextView" android:layout_marginLeft="5dp"
+  			android:layout_height="wrap_content" android:text="@string/osb_author_dialog_password"></TextView>
+  <EditText android:id="@+id/Password" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
+  			android:layout_height="wrap_content"  android:text="" android:inputType="textPassword"></EditText>
+  </TableRow>
   
 
 

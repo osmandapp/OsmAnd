@@ -375,16 +375,14 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		builder.setTitle(R.string.osb_add_dialog_title);
 		builder.setView(openBug);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		((EditText)view.findViewById(R.id.Password)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
+		((EditText)view.findViewById(R.id.AuthorName)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.get());
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				final double latitude = args.getDouble(KEY_LATITUDE);
 				final double longitude = args.getDouble(KEY_LONGITUDE);
-
-				final String text = ((EditText)openBug.findViewById(R.id.BugMessage)).getText().toString();
-				final String author = ((EditText)openBug.findViewById(R.id.AuthorName)).getText().toString();
-				// do not set name as author it is ridiculous in that case
-				((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.set(author);
+				final String text = getTextAndUpdateUserPwd(openBug);
 				createNewBugAsync(latitude, longitude, text);
 			}
 
@@ -447,18 +445,26 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		final View view = activity.getLayoutInflater().inflate(R.layout.open_bug, null);
 		builder.setView(view);
 		((EditText)view.findViewById(R.id.AuthorName)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.get());
+		((EditText)view.findViewById(R.id.Password)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.osb_comment_dialog_add_button, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				OpenStreetNote bug = (OpenStreetNote) args.getSerializable(KEY_BUG);
-				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
-				String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
-				((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_NAME.set(author);
+				String text = getTextAndUpdateUserPwd(view);
 				addingCommentAsync(bug, text);
 			}
 		});
 		return builder.create();
+	}
+	
+	private String getTextAndUpdateUserPwd(final View view) {
+		String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
+		String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
+		String pwd = ((EditText)view.findViewById(R.id.Password)).getText().toString();
+		((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_NAME.set(author);
+		((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_PASSWORD.set(pwd);
+		return text;
 	}
 	
 	public void refreshMap(){
@@ -480,6 +486,12 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				OpenStreetNote bug = (OpenStreetNote) args.getSerializable(KEY_BUG);
+				String us = activity.getMyApplication().getSettings().USER_NAME.get();
+				String pwd = activity.getMyApplication().getSettings().USER_PASSWORD.get();
+				if(us.length() == 0 || pwd.length() == 0) {
+					AccessibleToast.makeText(activity, activity.getString(R.string.osb_author_or_password_not_specified),
+							Toast.LENGTH_SHORT).show();
+				}
 				closingAsync(bug, "");
 			}
 		});
