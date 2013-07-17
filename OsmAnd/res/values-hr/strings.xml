@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
-    <string name="map_widget_gps_info">GPS informacije</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
     <string name="item_unchecked">neprovjereno</string>
@@ -201,7 +201,6 @@
 	<string name="backToMenu">Povratak na izbornik</string>
 	<string name="zoomOut">Udalji</string>
 	<string name="zoomIn">Približi</string>
-	<string name="zoomIs"/>
 	<string name="north">sjever</string>
 	<string name="north_north_east">sjever-sjeveroistok</string>
 	<string name="north_east">sjeveroistok</string>
@@ -936,4 +935,7 @@
     <string name="gpx_saved_sucessfully">GPX datoteka je uspješno spremljena na {0}</string>
     <string name="destination_point">Odredište %1$s</string>
     <string name="context_menu_item_destination_point">Postavi kao odredište</string>
-    </resources>
+    <string name="speak_speed_limit">Najavi ograničenja brzine</string>
+    <string name="speak_cameras">Najavi kamere za kontrolu brzine</string>
+	<string name="speak_traffic_warnings">Najavi prometna upozorenja</string>
+	</resources>
