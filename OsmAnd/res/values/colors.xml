@@ -32,7 +32,9 @@
 	<color name="gpx_track_fluorescent">#B400FFFF</color>
 	<!-- magenta is alternate track color for cyan but less contrast in many situations: color name="gpx_track_fluorescent">#B4FF00FF</color -->
 	<color name="pos_heading">#320000FF</color>
+	<color name="pos_heading_night">#880000FF</color>
 	<color name="pos_area">#280000FF</color>
+	<color name="pos_area_night">#660000FF</color>
 	<color name="pos_around">#707CDC</color>  <!-- family blue similar to above -->
 
 	<!-- <color name="nav_track">#960000FF</color>  Old blue colors - not bright enough especially in night mode -->

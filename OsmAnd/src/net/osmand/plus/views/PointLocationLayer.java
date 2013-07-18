@@ -32,6 +32,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 	private Bitmap bearingIcon;
 	private Bitmap locationIcon;
 	private OsmAndLocationProvider locationProvider;
+	private boolean nm;
 
 	private void initUI() {
 		locationPaint = new Paint();
@@ -78,6 +79,12 @@ public class PointLocationLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		// draw
+		boolean nm = nightMode != null && nightMode.isNightMode();
+		if(nm != this.nm) {
+			this.nm = nm;
+			area.setColor(view.getResources().getColor(!nm?R.color.pos_area : R.color.pos_area_night));
+			headingPaint.setColor(view.getResources().getColor(!nm?R.color.pos_heading :R.color.pos_heading_night));
+		}
 		Location lastKnownLocation = locationProvider.getLastKnownLocation();
 		if(lastKnownLocation == null || view == null){
 			return;
