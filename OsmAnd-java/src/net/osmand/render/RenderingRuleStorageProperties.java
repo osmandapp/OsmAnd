@@ -14,6 +14,7 @@ public class RenderingRuleStorageProperties {
 	public static final String ATTR_COLOR_VALUE = "attrColorValue";
 	public static final String ATTR_STRING_VALUE = "attrStringValue";
 	public static final String TEST = "test";
+	public static final String DISABLE = "disable";
 	
 	public static final String TEXT_LENGTH = "textLength";
 	public static final String NAME_TAG = "nameTag";
@@ -67,6 +68,7 @@ public class RenderingRuleStorageProperties {
 
 	
 	public RenderingRuleProperty R_TEST;
+	public RenderingRuleProperty R_DISABLE;
 	public RenderingRuleProperty R_ATTR_INT_VALUE;
 	public RenderingRuleProperty R_ATTR_BOOL_VALUE;
 	public RenderingRuleProperty R_ATTR_COLOR_VALUE;
@@ -156,6 +158,7 @@ public class RenderingRuleStorageProperties {
 		R_TEXT_LENGTH = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(TEXT_LENGTH));
 		R_NAME_TAG = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(NAME_TAG));
 
+		R_DISABLE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(DISABLE));
 		R_ATTR_INT_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ATTR_INT_VALUE));
 		R_ATTR_BOOL_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(ATTR_BOOL_VALUE));
 		R_ATTR_COLOR_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(ATTR_COLOR_VALUE));
