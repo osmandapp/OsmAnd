@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -1542,4 +1543,21 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="speak_speed_limit">Meddel hastighedsgrænse</string>
     <string name="speak_warnings_title">Meddel alarmer…</string>
 	<string name="speak_warnings_descr">Konfigurer trafikadvarsler (tvungne stop, vejbump), fotofældeadvarsler, hastighedsgrænser</string>
+    <string name="route_descr_map_location">Kort: </string>
+    <string name="route_to">Til:</string>
+    <string name="route_via">Via:</string>
+    <string name="route_from">Fra:</string>
+    <string name="osb_author_dialog_password">OSM kodeord (valgfrit)</string>
+	<string name="tip_recent_changes_1_5_t">Ændringer i 1.5:↵
+→\n * Stemmeadvarsler om hastighedsbegrænsninger og kameraer↵
+→\n * Høj densitet kortikoner↵
+→\n * masser af Brugergrænseflade ændringer↵
+→\n * fejlrettelser i afstandsvisning, GPX analysator, rutepunkt håndtering, planlægnings modul, overførelse til OSM, https håndtering↵
+    </string>
+    <string name="osb_author_or_password_not_specified">Angiv OSM bruger og adgangskode i \'Indstillinger\'</string>
+    <string name="clear_intermediate_points">Slet mellemliggende punkter</string>
+    <string name="keep_intermediate_points">Behold mellemliggende punkter</string>
+    <string name="new_directions_point_dialog">Der er allerede mellemliggende punkter.</string>
+    <string name="context_menu_item_directions_to">Kørselsvejledning til</string>
+    <string name="context_menu_item_directions_from">Kørselsvejledning fra</string>
     </resources>
