@@ -1150,7 +1150,7 @@
     <string name="install_paid">Полная версия</string>
     <string name="cancel_route">Отменить маршрут</string>
     <string name="clear_destination">Удалить пункт назначения</string>
-    <string name="search_street_in_neighborhood_cities">Искать в других НП</string>
+    <string name="search_street_in_neighborhood_cities">Искать в ближайших населённых пунктах</string>
     <string name="intermediate_items_sort_by_distance">Упорядочить по расстоянию</string>
     <string name="tip_recent_changes_1_4_t">"Изменения в версии 1.4:
 \n\t* Расчёт задачи коммивояжера для промежуточных точек (сортировка по расстоянию)
@@ -1170,7 +1170,7 @@
     <string name="local_osm_changes_backup_failed">Запись OsmChange-файла не удалась</string>
     <string name="local_osm_changes_backup">Сохранение POI в OsmChange-файл</string>
     <string name="plugin_distance_point_ele">высота</string>
-    <string name="local_osm_changes_backup_successful">OsmChange-файл создан в %1$s</string>
+    <string name="local_osm_changes_backup_successful">OsmChange-файл создан за %1$s</string>
     <string name="use_distance_measurement_help">* Нажмите, чтобы отметить точку.
 \n* Нажмите и удерживайте на карте, чтобы удалить предыдущую точку.
 \n* Нажмите и удерживайте на точке, чтобы посмотреть описание.
