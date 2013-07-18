@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
 \n\t- Offline editace POI
@@ -160,7 +161,7 @@
 \n\t OSM chybu nahlásíte pomocí volby \'Otevřít chybu OSM\' v kontextovém menu mapy. Tím se otevře dialog, kde můžete zadat detailní popis problému. Chybu odešlete tlačítkem \'Přidat\'.
 \n\t Pro zmíněné funkce je nutné internetové připojení.</string>
   <string name="download_files_not_enough_space">Nedostatek místa pro stažení %1$s MB dat (volné: %2$s).</string>
-  <string name="download_files_question_space">Stáhnout {0} soubor(y) ({1} MB)? Volné místo: {2} MB.</string>
+  <string name="download_files_question_space">Volné místo: {2} MB. Stáhnout {0} soubor(y) ({1} MB)?</string>
   <string name="tip_select_destination_point">Výbrat cíl</string>
   <string name="tip_select_destination_point_t">"\tCílový bod můžete vybrat přímo v mapě (kontextové menu, pak vybrat \'Nastavit jako cíl\'), v každém módu vyhledávání nebo dlouhým stiskem položky ve vašem \'Seznamu oblíbených míst\'.
 \n\tCíl je označen oranžovou tečkou na mapě. OsmAnd zobrazuje vzdálenost a směr do cíle (oranžová šipka). "</string>
@@ -399,7 +400,7 @@
   <string name="install_more">Instalovat další…</string>
   <string name="level_to_switch_vector_raster_descr">Zobrazovat vektorové mapy od minimálního zvětšení</string>
   <string name="level_to_switch_vector_raster">Zvětšení vektorové mapy</string>
-  <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> - mapová klasifikace s obrázky</string><string name="error_doing_search">Při offline hledání došlo k chybě</string>
+  <string name="error_doing_search">Při offline hledání došlo k chybě</string>
   <string name="search_offline_geo_error">Nemohu rozpoznat geo intent:\'%s\'</string>
   <string name="search_osm_offline">Hledat adresu pomocí offline map</string>
   <string name="system_locale">Podle systému</string>
@@ -465,7 +466,7 @@
   <string name="select_all">Vybrat vše</string>
   <string name="reload">Načíst znovu</string>
   <string name="fast_route_mode">Nejrychlejší trasa</string>
-  <string name="fast_route_mode_descr">Zapněte pro výpočet nejrychlejší trasy, vypněte, pokud chcete hledat tu nejkratší</string>
+  <string name="fast_route_mode_descr">Zapněte pro výpočet nejrychlejší trasy, vypněte, pokud chcete hledat tu nejkratší </string>
   <string name="tiles_to_download_estimated_size">Pro zvětšení {0} je třeba stáhnout {1} mapových dlaždic, celkem {2} MB</string>
   <string name="context_menu_item_download_map">Stáhnout mapu</string>
   <string name="select_max_zoom_preload_area">Vyberte maximální zvětšení stahovaných map</string>
@@ -502,7 +503,7 @@
   <string name="error_reading_gpx">Chyba při načítání dat GPX</string>
   <string name="vector_data">Vektorové mapy OSM</string>
   <string name="transport_context_menu">Hledat dopravu ze zastávky</string>
-  <string name="point_on_map">Poloha:\n Šíř. %1$.5f Dél. %2$.5f</string>
+  <string name="point_on_map">Poloha:\n Šíř. %1$.5f\n Dél. %2$.5f</string>
   <string name="osb_bug_name">Chyba</string>
   <string name="poi_context_menu_modify">Upravit POI</string>
   <string name="poi_context_menu_delete">Smazat POI</string>
@@ -613,8 +614,8 @@
   <string name="update_poi_is_not_available_for_zoom">POI nelze aktualizovat při malém zvětšení</string>
   <string name="context_menu_item_update_poi">Aktualizovat POI</string>
   <string name="context_menu_item_update_map_confirm">Opravdu chcete aktualizovat lokální data z internetu?</string>
-  <string name="search_history_city">Město:\n {0}</string>
-  <string name="search_history_street">Ulice:\n {0}, {1}</string>
+  <string name="search_history_city">Město: {0}</string>
+  <string name="search_history_street">Ulice: {0}, {1}</string>
   <string name="search_history_int_streets">Křižovatka ulic: {0} x {1} v {2}</string>
   <string name="search_history_building">Budova: {0}, {1}, {2}</string>
   <string name="favorite">Oblíbené</string>
@@ -981,8 +982,8 @@
 <string name="map_widget_show_ruler">Měřítko</string>
 <string name="map_widget_appearance">Ostatní:</string>
 <string name="map_widget_transparent">Průhledné ovládání</string>
-<string name="monitoring_mode_off">Záznam\ntrasy do GPX</string>
-<string name="monitoring_mode_on">Zastavit\nzáznam trasy</string>
+<string name="monitoring_mode_off">Záznam do GPX</string>
+<string name="monitoring_mode_on">Zastavit záznam</string>
 <string name="email">E-mail</string>
 <string name="live_monitoring_mode_off">Zapnout\n přímý přenos</string>
 <string name="live_monitoring_mode_on">Vypnout\n přímý přenos</string>
@@ -1132,8 +1133,8 @@
     <string name="av_use_external_recorder_descr">Použít systémový záznamník videa</string>
     <string name="av_use_external_recorder">Použít externí záznamník</string>
     <string name="av_settings_descr">Nastavit možnosti zvuku a videa</string>
-    <string name="av_settings">"Nastavení zvuku a videa "</string>
-    <string name="recording_error">"Při nahrávání došlo k chybě "</string>
+    <string name="av_settings">Nastavení zvuku a videa </string>
+    <string name="recording_error">Při nahrávání došlo k chybě </string>
     <string name="recording_camera_not_available">Kamera není dostupná</string>
     <string name="recording_playing">Přehrávám zvuk z nahrávky:\n%1$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Změny ve verzi 1.1.0 :
@@ -1252,4 +1253,38 @@
     <string name="intermediate_items_sort_by_distance">Utřídit (ode dveří ke dveřím)</string>
     <string name="tip_recent_changes_1_4_t">"Změny ve verzi 1.4:
 \n\t* Optimální třídění průchozích bodů (obchodní cestující, ode dveří ke dveřím)\n\t* Hledání ulic podle jména (v okolí)\n\t* Modul plánování (nahrání/úprava/uložení tras GPX)\n\t* Nová obrazovka stahování (stahování na pozadí)\n\t* Organizace GPX do adresářů\n\t* Mazání souborů s vrstevnicemi\n\t* Podpora OSM poznámek "</string>
-    </resources>
+    <string name="tip_recent_changes_1_5_t">Změny ve verzi 1.5:
+	\n\t* Hlasová upozornění na rychlostní omezení a radary
+	\n\t* Mapové ikony s vysokým rozlišením
+	\n\t* Četné změny uživatelského rozhraní
+	\n\t* Oprava chyb v zobrazení vzdálenosti, GPX analyzéru, zpracování bodů trasy, plánovacím modulu, nahrávání do OSM uploading, HTTPS
+    </string>
+    <string name="osb_author_or_password_not_specified">Prosím zadejte v Nastaveních uživatelské jméno a heslo pro vstup do OSM</string>
+    <string name="clear_intermediate_points">Smazat body trasy</string>
+    <string name="keep_intermediate_points">Zachovat body trasy</string>
+    <string name="route_descr_map_location">Mapa: </string>
+    <string name="route_to">Do:</string>
+    <string name="route_via">Přes:</string>
+    <string name="route_from">Z:</string>
+    <string name="speak_warnings_title">Hlásit upozornění…</string>
+	<string name="speak_warnings_descr">Nastavit hlášení dopravních upozornění (nucené zastavení, retardéry), radarů, rychlostních omezení</string>
+    <string name="speak_speed_limit">Hlásit rychlostní omezení</string>
+    <string name="speak_cameras">Hlásit radary</string>
+	<string name="speak_traffic_warnings">Hlásit dopravní upozornění</string>
+	<string name="local_index_gpx_timespan">\nČasový interval: %1$d:%2$02d:%3$02d</string>
+	<string name="osb_author_dialog_password">Heslo OSM (volitelné)</string>
+	<string name="av_camera_focus">Typ ostření fotoaparátu</string>
+	<string name="av_camera_focus_descr">Zvolte způsob ostření vestavěného fotoaparátu</string>
+	<string name="av_camera_focus_auto">Automatické ostření</string>
+	<string name="av_camera_focus_hiperfocal">Fix-focus</string>
+	<string name="av_camera_focus_edof">Fix-focus</string>
+	<string name="av_camera_focus_infinity">Ostření na nekonečno</string>
+	<string name="av_camera_focus_macro">Makro</string>
+	<string name="av_camera_focus_continuous">Kamera ostří souvisle</string>
+	<string name="av_photo_play_sound">Přehrát zvuk závěrky</string>
+	<string name="av_photo_play_sound_descr">Zvolte zda při vyfotografování snímku má být přehrán zvuk závěrky</string>
+<string name="new_directions_point_dialog">Body trasy jsou již zvoleny.</string>
+    <string name="context_menu_item_directions_to">Navigovat sem</string>
+    <string name="context_menu_item_directions_from">Navigovat odsud</string>
+    <string name="local_index_gpx_timemoving">\nČas pohybu: %1$d:%2$02d:%3$02d</string>
+	</resources>
