@@ -1251,9 +1251,6 @@
     <string name="context_menu_item_destination_point">Ustaw jako punkt docelowy</string>
     <string name="please_select_address">Wybierz miasto lub ulicę</string>
     <string name="destination_point">Punkt docelowy %1$s</string>
-<<<<<<< HEAD
-    </resources>
-=======
     <string name="local_index_gpx_timespan">\nCzas: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nCzas podróży: %1$d:%2$02d:%3$02d</string>
 	<string name="av_camera_focus">Typ fokusu kamery</string>
@@ -1267,4 +1264,3 @@
 	<string name="av_photo_play_sound">Odtwórz dźwięk przy robieniu zdjęć</string>
 	<string name="av_photo_play_sound_descr">Odtwarzanie dźwięku przy robieniu zdjęć</string>
 </resources>
->>>>>>> Translated using Weblate.

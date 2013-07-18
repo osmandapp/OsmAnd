@@ -847,9 +847,6 @@
 	<string name="mark_point">هدف</string>
 	<string name="show_osm_bugs_descr">نشان دادن OpenStreetBugs بر روی نقشه</string>
 	<string name="show_osm_bugs">نشان دادن OpenStreetBugs</string>
-<<<<<<< HEAD
-	</resources>
-=======
 	<string name="speak_warnings_title">هشدار دهنده …</string>
 	<string name="speak_warnings_descr">پیکربندی هشدارهای ترافیک (توقف اجباری، سرعت گیر)، هشدار دوربین سرعت سنج، محدودیت سرعت</string>
     <string name="speak_speed_limit">اعلام محدودیت سرعت</string>
@@ -901,7 +898,7 @@
 →→\n\t* بسته سایه تپه برای افزونه کنتور جاده↵
 →→\n\t* رفع مشکل (مسیریابی بهینه)↵
     </string>
-    <string name="osmand_srtm_long_description_1000_chars">این افزونه فراهم می کند و خطوط است که می تواند در نقشه های آفلاین OsmAnd \ 'نمایش داده می شود.داده های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) بر اساس اندازه گیری های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (Spaceborne انتشار حرارتی پیشرفته و انعکاس پرتو)، یک ابزار تصویربرداری پردازنده ترا، گل سرسبد های ماهواره ای NASA \ 'زمین رعایت سیستم. ASTER تلاش مشترک میان ناسا، ژاپن \ 'وزارت اقتصاد، تجارت و صنعت (METI)، و سیستم های فضایی ژاپن (J-spacesystems) است.</string>
+    <string name="osmand_srtm_long_description_1000_chars">این افزونه فراهم می کند و خطوط است که می تواند در نقشه های آفلاین OsmAnd \'نمایش داده می شود.داده های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) بر اساس اندازه گیری های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (Spaceborne انتشار حرارتی پیشرفته و انعکاس پرتو)، یک ابزار تصویربرداری پردازنده ترا، گل سرسبد های ماهواره ای NASA \'زمین رعایت سیستم. ASTER تلاش مشترک میان ناسا، ژاپن \'وزارت اقتصاد، تجارت و صنعت (METI)، و سیستم های فضایی ژاپن (J-spacesystems) است.</string>
     <string name="srtm_plugin_description">تسهیل دانلود از خطوط کانتور آنلاین و تپه سایه (تنظیمات -&gt; مدیریت داده ها -&gt; دانلود -&gt; انتخاب نوع نقشه مورد نظر).</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noPolygons_description">محو کردن همه عوارض زمین روی نقشه</string>
