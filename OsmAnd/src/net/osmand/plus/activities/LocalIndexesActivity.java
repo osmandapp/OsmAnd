@@ -228,6 +228,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 					if (dest.exists()) {
 						AccessibleToast.makeText(LocalIndexesActivity.this, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
 					} else {
+						if(!f.getParentFile().exists()) {
+							f.getParentFile().mkdirs();
+						}
 						if(f.renameTo(dest)){
 							reloadIndexes();
 						} else {
