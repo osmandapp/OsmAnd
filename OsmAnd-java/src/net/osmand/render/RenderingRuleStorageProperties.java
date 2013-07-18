@@ -44,6 +44,7 @@ public class RenderingRuleStorageProperties {
 	public static final String COLOR__1 = "color__1";
 	public static final String TEXT_BOLD = "textBold";
 	public static final String TEXT_ORDER = "textOrder";
+	public static final String ICON_ORDER = "iconOrder";
 	public static final String TEXT_MIN_DISTANCE = "textMinDistance";
 	public static final String TEXT_ON_PATH = "textOnPath";
 	public static final String ICON = "icon";
@@ -101,6 +102,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_COLOR__1;
 	public RenderingRuleProperty R_TEXT_BOLD;
 	public RenderingRuleProperty R_TEXT_ORDER;
+	public RenderingRuleProperty R_ICON_ORDER;
 	public RenderingRuleProperty R_TEXT_MIN_DISTANCE;
 	public RenderingRuleProperty R_TEXT_ON_PATH;
 	public RenderingRuleProperty R_ICON;
@@ -175,6 +177,7 @@ public class RenderingRuleStorageProperties {
 		R_TEXT_HALO_RADIUS = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_HALO_RADIUS));
 		R_TEXT_SIZE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_SIZE));
 		R_TEXT_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_ORDER));
+		R_ICON_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ICON_ORDER));
 		R_TEXT_MIN_DISTANCE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_MIN_DISTANCE));
 		R_TEXT_SHIELD = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(TEXT_SHIELD));
 		

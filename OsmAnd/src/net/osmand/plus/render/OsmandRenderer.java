@@ -5,6 +5,8 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +72,7 @@ public class OsmandRenderer {
 		float x = 0;
 		float y = 0;
 		String resId;
+		int iconOrder;
 	}
 	
 	
@@ -286,6 +289,13 @@ public class OsmandRenderer {
 	}
 
 	private void drawIconsOverCanvas(RenderingContext rc, Canvas cv) {
+		// 1. Sort text using text order
+		Collections.sort(rc.iconsToDraw, new Comparator<IconDrawInfo>() {
+			@Override
+			public int compare(IconDrawInfo object1, IconDrawInfo object2) {
+				return object1.iconOrder - object2.iconOrder;
+			}
+		});
 		int skewConstant = (int) rc.getDensityValue(16);
 		int iconsW = rc.width / skewConstant;
 		int iconsH = rc.height / skewConstant;
@@ -598,6 +608,7 @@ public class OsmandRenderer {
 			IconDrawInfo ico = new IconDrawInfo();
 			ico.x = ps.x;
 			ico.y = ps.y;
+			ico.iconOrder = render.getIntPropertyValue(render.ALL.R_ICON_ORDER, 100);
 			ico.resId = resId;
 			rc.iconsToDraw.add(ico);
 		}
