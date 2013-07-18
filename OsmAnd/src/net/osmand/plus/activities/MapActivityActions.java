@@ -703,7 +703,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 		final Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
 		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(view.getContext(), 
-				android.R.layout.simple_spinner_item, 
+				android.R.layout.simple_spinner_dropdown_item, 
 				fromActions
 				);
 		fromSpinner.setAdapter(fromAdapter);
@@ -733,7 +733,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 		final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
 		ArrayAdapter<String> toAdapter = new ArrayAdapter<String>(view.getContext(), 
-				android.R.layout.simple_spinner_item, 
+				android.R.layout.simple_spinner_dropdown_item, 
 				toActions
 				);
 		toSpinner.setAdapter(toAdapter);
@@ -1146,6 +1146,15 @@ public class MapActivityActions implements DialogProvider {
 						}						
 					}
 				}).reg();
+		if (getTargets().getPointToNavigate() != null) {
+			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)
+					.listen(new OnContextMenuClick() {
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							openIntermediatePointsDialog();
+						}
+					}).reg();
+		}
 		if (mapActivity.getPointToNavigate() != null) {
 			int nav;
 			if(routingHelper.isFollowingMode()) {
@@ -1213,18 +1222,6 @@ public class MapActivityActions implements DialogProvider {
 				mapActivity.startActivity(newIntent);
 			}
 		}).reg();
-		
-		// 10-11 Waypoints, Use location
-		if (getTargets().getPointToNavigate() != null) {
-			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark,
-					R.drawable.ic_action_flage_light)
-					.listen(new OnContextMenuClick() {
-				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-					openIntermediatePointsDialog();
-				}
-			}).reg();
-		}
 		optionsMenuHelper.item(R.string.show_point_options).icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light )
 				.listen(new OnContextMenuClick() {
 			@Override

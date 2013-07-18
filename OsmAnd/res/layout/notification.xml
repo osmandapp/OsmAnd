@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/layout"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:orientation="vertical">
+	android:orientation="vertical" android:background="@color/color_black">
 
 	<net.osmand.access.NotificationTextView android:id="@+id/message"
 		android:layout_marginLeft="4dp" android:layout_marginRight="4dp"
