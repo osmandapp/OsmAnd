@@ -324,7 +324,6 @@
 \n\tДля добавления POI используйте \'Добавить POI\' в контекстном меню карты.
 \n\tЕсли вы нашли неточность на карте, то можете сообщить об этом сообществу OpenStreetMap.
 \n\tНе забывайте, что для работы этих функций вам понадобится Интернет.</string>
-  <string name="create_poi_link_to_osm_doc"><u>Интернет OSM</u> классификация</string>
   <string name="error_doing_search">Ошибка автономного поиска</string>
   <string name="search_offline_geo_error">Невозможно разобрать запрос: \'%s\'</string>
   <string name="search_osm_offline">Поиск по адресу в локальных картах</string>
@@ -1134,8 +1133,6 @@
     <string name="av_def_action_choose">Выберите по запросу</string>
     <string name="osmand_play_title_30_chars">OsmAnd карты и навигация</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ карты и навигация</string>
-	<string name="osmand_extended_description_4000_chars"/>
-	<string name="osmand_plus_extended_description_4000_chars"/>
 	<string name="use_kalman_filter_compass_descr">Использовать фильтр Калмана для данных GPS</string>
     <string name="use_kalman_filter_compass">Использовать фильтр Калмана</string>
     <string name="cancel_navigation">Прекратить навигацию</string>
@@ -1184,8 +1181,7 @@
     <string name="local_indexes_cat_srtm">Данные горизонталей</string>
     <string name="downloading_file_new">Загрузка</string>
 	<string name="osmand_distance_planning_plugin_description">Создание путей (или модификация существующего файла GPX) для измерения дистанции между точками. Сохранить как GPX (может использоваться для планирования маршрутов GPX).</string>
-    <string name="osmand_extended_description_4000_chars"/>
-	<string name="context_menu_item_destination_point">Установить как пункт назначения</string>
+    <string name="context_menu_item_destination_point">Установить как пункт назначения</string>
     <string name="please_select_address">Сначала выберите город или улицу</string>
     <string name="destination_point">Пункт назначения %1$s</string>
 	<string name="av_camera_focus">Режим фокусировки камеры</string>
@@ -1198,4 +1194,9 @@
 	<string name="av_camera_focus_continuous">Постоянная фокусировка</string>
 	<string name="av_photo_play_sound">Звук затвора</string>
 	<string name="av_photo_play_sound_descr">Проигрывать звук при фотографировании</string>
+    <string name="speak_warnings_title">Голосовые предупреждения</string>
+	<string name="speak_speed_limit">Сообщать о превышении скорости</string>
+    <string name="speak_cameras">Сообщать о камерах</string>
+	<string name="speak_traffic_warnings">Сообщать о препятствиях</string>
+	<string name="speak_warnings_descr">Настройка сообщений о препятствиях (принудительная остановка, лежачие полицейские), камеры, ограничение скорости.</string>
     </resources>
