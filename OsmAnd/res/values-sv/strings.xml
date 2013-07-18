@@ -1166,4 +1166,20 @@
 	<string name="local_index_gpx_timespan">\nTidsspann: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nTid i rörelse: %1$d:%2$02d:%3$02d</string>
 	<string name="plugin_distance_point_hdop">precision</string>
+    <string name="tip_recent_changes_1_5_t">Förändringar i 1.5:
+	\n\t* Röstvarningar angående hastighetsbegränsningar och fartkameror
+	\n\t* Högkvalitativa kartikoner
+	\n\t* Massor av förändringar i gränssnittet
+	\n\t* Buggfixar i avståndsvisning, GPX-analys, behandling av waypoints, planeringswidget, OSM-uppladdning, https-behandling
+    </string>
+    <string name="osb_author_or_password_not_specified">Ange OSM-användare och -lösenord i inställningarna</string>
+    <string name="clear_intermediate_points">Ta bort mellanliggande punkter</string>
+    <string name="keep_intermediate_points">Behåll mellanliggande punkter</string>
+    <string name="new_directions_point_dialog">Du har redan angivit mellanliggande punkter.</string>
+    <string name="context_menu_item_directions_to">Vägvisning till</string>
+    <string name="context_menu_item_directions_from">Vägvisning från</string>
+    <string name="route_descr_map_location">Karta: </string>
+    <string name="route_to">Till:</string>
+    <string name="route_via">Via:</string>
+    <string name="route_from">Från:</string>
     </resources>
