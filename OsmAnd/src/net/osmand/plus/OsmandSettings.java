@@ -1071,11 +1071,7 @@ public class OsmandSettings {
 		List<String> list = new ArrayList<String>();
 		String ip = settingsAPI.getString(globalPreferences,INTERMEDIATE_POINTS_DESCRIPTION, "");
 		if (ip.trim().length() > 0) {
-			StringTokenizer tok = new StringTokenizer(ip, "--");
-			while (tok.hasMoreTokens()) {
-				String d = tok.nextToken();
-				list.add(d);
-			}
+			list.addAll(Arrays.asList(ip.split("--")));
 		}
 		while(list.size() < sz) {
 			list.add("");
