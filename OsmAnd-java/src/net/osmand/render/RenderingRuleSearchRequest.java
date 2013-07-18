@@ -138,11 +138,15 @@ public class RenderingRuleSearchRequest {
 	private boolean searchInternal(int state, int tagKey, int valueKey, boolean loadOutput) {
 		values[storage.PROPS.R_TAG.getId()] = tagKey;
 		values[storage.PROPS.R_VALUE.getId()] = valueKey;
+		values[storage.PROPS.R_DISABLE.getId()] = 0;
 		RenderingRule accept = storage.getRule(state, tagKey, valueKey);
 		if (accept == null) {
 			return false;
 		}
 		boolean match = visitRule(accept, loadOutput);
+		if(match && values[storage.PROPS.R_DISABLE.getId()] != 0) {
+			return false;
+		}
 		return match;
 	}
 
@@ -160,6 +164,10 @@ public class RenderingRuleSearchRequest {
 				if (!match) {
 					return false;
 				}
+			} else if(rp == storage.PROPS.R_DISABLE){
+				// quick disable return even without load output
+				RenderingRuleProperty p = storage.PROPS.R_DISABLE;
+				values[rp.getId()] = rule.getIntProp(i);
 			}
 		}
 		if (!loadOutput) {
