@@ -1169,7 +1169,7 @@
     <string name="tip_recent_changes_1_5_t">Förändringar i 1.5:
 	\n\t* Röstvarningar angående hastighetsbegränsningar och fartkameror
 	\n\t* Högkvalitativa kartikoner
-	\n\t* Massor av förändringar i gränssnittet
+	\n\t* Massor av förändringar av gränssnittet
 	\n\t* Buggfixar i avståndsvisning, GPX-analys, behandling av waypoints, planeringswidget, OSM-uppladdning, https-behandling
     </string>
     <string name="osb_author_or_password_not_specified">Ange OSM-användare och -lösenord i inställningarna</string>
