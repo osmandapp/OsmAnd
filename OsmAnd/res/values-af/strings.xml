@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
@@ -1253,4 +1254,21 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="speak_speed_limit">Kondig spoedbeperking aan</string>
     <string name="speak_cameras">Kondig spoedkameras aan</string>
 	<string name="speak_traffic_warnings">Kondig verkeerswaarskuwings aan</string>
+	<string name="tip_recent_changes_1_5_t">Veranderings in 1.5:
+	\n\t* Stem waarskuwings oor spoed beperkings en kameras
+	\n\t* Hoë ditheid kaart simbole
+	\n\t* Baie UI veranderings
+	\n\t* Bugfixes in afstand vertoon, GPX analiseerder, oorgangspunt hantering, beplanning funksie, OSM oplaai, https hantering
+    </string>
+    <string name="osb_author_or_password_not_specified">Spesifiseer asseblief OSM gebruiker en kodewoord in Stellings</string>
+    <string name="clear_intermediate_points">Verwyder tussenpunte</string>
+    <string name="keep_intermediate_points">Hou tussenpunte</string>
+    <string name="new_directions_point_dialog">Jy het alreeds tussenpunte gestel.</string>
+    <string name="context_menu_item_directions_to">Aanwysings Na</string>
+    <string name="context_menu_item_directions_from">Aanwysings Van</string>
+    <string name="route_descr_map_location">Kaart: </string>
+    <string name="route_to">Na:</string>
+    <string name="route_via">Via:</string>
+    <string name="route_from">Van:</string>
+    <string name="osb_author_dialog_password">OSM kodewoord (opsioneel)</string>
 	</resources>
