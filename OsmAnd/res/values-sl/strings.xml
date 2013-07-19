@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Išči</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
 	<string name="settings_Button">Nastavitve</string>
 	<string name="favorites_Button">Priljubljene</string>
@@ -1457,4 +1458,20 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="speak_speed_limit">Napovej omejitve hitrosti</string>
     <string name="speak_cameras">Napovej hitrostne kamere</string>
 	<string name="speak_traffic_warnings">Napovej prometna opozorila</string>
-	</resources>
+	<string name="tip_recent_changes_1_5_t">Spremembe v 1.5:
+	\n\t* Glasovna opozorila o omejitvah hitrosti in kamere
+	\n\t* Ikone za mape visoke gostote
+	\n\t* Veliko sprememb v uporabniškem vmesniku
+	\n\t* Popravek hroščev pri prikazu razdalj, GPX analizator, upravljanje točk, gradnika za načrtovanje, nalaganje na OSM, pri uporabi https protokola
+    </string>
+    <string name="osb_author_or_password_not_specified">Prosimo da v nastavitvah vpišete uporabniško ime in geslo za OSM</string>
+    <string name="clear_intermediate_points">Počisti vmesne točke</string>
+    <string name="keep_intermediate_points">Obdrži vmesne točke</string>
+    <string name="new_directions_point_dialog">Že nastavljene vmesne točke.</string>
+    <string name="context_menu_item_directions_to">Navodila za</string>
+    <string name="context_menu_item_directions_from">Navodila od</string>
+    <string name="route_descr_map_location">Zemljevid: </string>
+    <string name="route_to">Do:</string>
+    <string name="route_via">Prek:</string>
+    <string name="route_from">Od:</string>
+    </resources>
