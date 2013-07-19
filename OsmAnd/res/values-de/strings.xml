@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
-	<string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
@@ -1329,4 +1328,14 @@
     <string name="speak_speed_limit">Höchstgeschwindigkeit ansagen</string>
     <string name="speak_cameras">Vor Blitzern warnen</string>
 	<string name="speak_traffic_warnings">Verkehrswarnungen ansagen</string>
+	<string name="osb_author_or_password_not_specified">Bitte OSM-Usernamen und Passwort in den Einstellungen eingeben</string>
+    <string name="clear_intermediate_points">Zwischenpunkte löschen</string>
+    <string name="keep_intermediate_points">Zwischenpunkte behalten</string>
+    <string name="new_directions_point_dialog">Es sind bereits Zwischenpunkte gesetzt.</string>
+    <string name="context_menu_item_directions_to">Navigiere zu</string>
+    <string name="route_descr_map_location">Karte: </string>
+    <string name="route_to">nach:</string>
+    <string name="route_via">via:</string>
+    <string name="route_from">von:</string>
+    <string name="osb_author_dialog_password">OSM-Passwort (optional)</string>
 	</resources>
