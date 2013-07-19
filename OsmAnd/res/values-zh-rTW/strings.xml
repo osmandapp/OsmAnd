@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追踪外掛元件，用位置日誌服務(GPX 記錄，網上追踪查詢)</string>
@@ -1500,4 +1501,26 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="av_camera_focus_continuous">相機連續對焦</string>
 	<string name="av_photo_play_sound">快門音效</string>
 	<string name="av_photo_play_sound_descr">選擇在按下快門拍照時，是否發出音效</string>
-</resources>
+<string name="tip_recent_changes_1_5_t">在1.5.0的變更：
+	\n\t* 車速限制和測速照相的語音警告
+	\n\t* 高密度地圖圖示
+	\n\t* 更改很多的使用者界面
+	\n\t* 距離顯示的錯誤修正，GPX 分析器，中途點的管理，計劃小工具，OSM 上傳，HTTPS 管理
+    </string>
+    <string name="osb_author_or_password_not_specified">請在設定裡指定 OSM 的使用者名稱和密碼</string>
+    <string name="clear_intermediate_points">清除中間點</string>
+    <string name="keep_intermediate_points">保留中間點</string>
+    <string name="new_directions_point_dialog">您已經有中間點設置。</string>
+    <string name="context_menu_item_directions_to">指示到</string>
+    <string name="context_menu_item_directions_from">指示來自</string>
+    <string name="route_descr_map_location">地圖： </string>
+    <string name="route_to">到：</string>
+    <string name="route_via">經過：</string>
+    <string name="route_from">從：</string>
+    <string name="speak_warnings_title">預告警示…</string>
+	<string name="speak_warnings_descr">組態交通流量警示（強制停止，減速丘），測速照相警告，速限</string>
+    <string name="speak_speed_limit">預告速限</string>
+    <string name="speak_cameras">預告測速照相</string>
+	<string name="speak_traffic_warnings">預告交通流量警示</string>
+	<string name="osb_author_dialog_password">OSM 密碼 (選項)</string>
+	</resources>
