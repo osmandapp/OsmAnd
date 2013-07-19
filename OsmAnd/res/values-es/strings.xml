@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
@@ -1195,4 +1196,13 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	<string name="av_camera_focus_continuous">la camera intenta enfocar continuamente</string>
 	<string name="av_photo_play_sound">reproducir sonido de disparo</string>
 	<string name="av_photo_play_sound_descr">reproducir sonido de disparo</string>
-</resources>
+<string name="context_menu_item_directions_from">Instrucciones desde</string>
+    <string name="route_via">Vía:</string>
+    <string name="route_from">Desde:</string>
+    <string name="speak_warnings_title">Anunciar avisos…</string>
+	<string name="speak_warnings_descr">Configurar alertas de tráfico (paradas forzosas, reductores de velocidad), radares, límitaciones de velocidad</string>
+    <string name="speak_speed_limit">Anunciar limitación de velocidad</string>
+    <string name="speak_cameras">Anunciar radares</string>
+	<string name="speak_traffic_warnings">Anunciar avisos de tráfico</string>
+	<string name="osb_author_dialog_password">Contraseña OSM (opcional)</string>
+	</resources>
