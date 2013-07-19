@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
-    <string name="btn_advanced_mode">Λειτουργία για προχωρημένους …</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
+    <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
     <string name="poi_filter_emergency">Επείγοντα</string>
     <string name="poi_filter_public_transport">Δημόσιες Μεταφορές</string>
@@ -11,7 +12,7 @@
 	<string name="poi_filter_food_shop">Κατάστημα τροφίμων</string>
 	<string name="poi_filter_for_tourists">Τουριστικά</string>
 	<string name="poi_filter_fuel">Καύσιμα</string>
-	<string name="show_warnings_title">Εμφάνιση προειδοποιήσεων …</string>
+	<string name="show_warnings_title">Εμφάνιση προειδοποιήσεων…</string>
 	<string name="show_warnings_descr">Ρύθμιση προειδοποιήσεων κυκλοφορίας (όρια ταχύτητας, αναγκαστικές στάσεις, μειωτές ταχύτητας) προειδοποιήσεις καμερών ταχύτητας, και πληροφορίες λωρίδων</string>
 	<string name="use_compass_navigation_descr">Χρήση της πυξίδας όταν η κατεύθυνση δεν έχει εντοπιστεί διαφορετικά</string>
 	<string name="use_compass_navigation">Χρήση πυξίδας</string>
@@ -78,7 +79,7 @@
 	<string name="show_lanes">Εμφάνιση λωρίδων</string>
 	<string name="avoid_unpaved">Αποφυγή χωματόδρομων</string>
 	<string name="avoid_ferries">Αποφυγή πορθμείων</string>
-	<string name="avoid_in_routing_title">Αποφυγή …</string>
+	<string name="avoid_in_routing_title">Αποφυγή…</string>
 	<string name="avoid_in_routing_descr">Αποφυγή διοδίων, χωματόδρομων, πορθμείων</string>
 	<string name="map_widget_fluorescent">Φωτεινές διαδρομές</string>
 	<string name="map_widget_show_ruler">Χάρακας</string>
@@ -335,7 +336,7 @@
 	<string name="live_monitoring">Online ιχνηλάτηση</string>
 	<string name="live_monitoring_interval_descr">Καθορίστε το διάστημα της online ιχνηλάτησης</string>
 	<string name="live_monitoring_interval">Διάστημα online ιχνηλάτησης</string>
-	<string name="live_monitoring_url_descr">Καθορίστε τη διεύθυνση web με την σύνταξη παραμέτρων : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
+	<string name="live_monitoring_url_descr">Καθορίστε τη διεύθυνση web με την σύνταξη παραμέτρων : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5},bearing={6}</string>
 	<string name="live_monitoring_url">Διαδικτυακή διεύθυνση online ιχνηλάτησης</string>
 	<string name="gpx_monitoring_disabled_warn">Παρακαλώ ενεργοποιήστε τις ρυθμίσεις \'Εγγραφή ίχνους σε αρχείο GPX\'.</string>
 	<string name="show_current_gpx_title">Εμφάνιση τρέχοντος ίχνους</string>
@@ -386,7 +387,7 @@
 \n\t\'Χωρίς περιστροφή (ο βορράς επάνω)\' - Ο χάρτης δεν θα περιστρέφεται. Ο βορράς θα είναι πάντα επάνω
 \n\t\'Προς την κατεύθυνση κίνησης\' - Ο χάρτης συνεχώς θα συγχρονίζεται με την κατεύθυνσή σας
 \n\t\'Πυξίδα\' - Ο χάρτης συνεχώς θα συγχρονίζεται με την κατεύθυνση της πυξίδας "</string>
-	<string name="binary_map_download_success">Η λήψη ήταν επιτυχής.\n\t\n\tΓια χρήση ενεργοποιήστε \'Μενού\' -&gt; \'Ορισμός εμφάνισης\' -&gt; \'Πηγή χάρτη …\' -&gt; \'Offline διανυσματικοί χάρτες\'.</string>
+	<string name="binary_map_download_success">Η λήψη ήταν επιτυχής.\n\t\n\tΓια χρήση ενεργοποιήστε \'Μενού\' -&gt; \'Ορισμός εμφάνισης\' -&gt; \'Πηγή χάρτη…\' -&gt; \'Offline διανυσματικοί χάρτες\'.</string>
 	<string name="tip_day_night_mode">Λειτουργία ημέρας/νύχτας</string>
 	<string name="tip_day_night_mode_t_v2">"\tΗ εμφάνιση μπορεί σε μερικούς διανυσματικούς χάρτες να αλλάξει μεταξύ ημέρας (πιο φωτεινό) και νύχτας (πιο σκοτεινό).
 \n\tΤα νυχτερινά χρώματα είναι πιο ασφαλή για νυχτερινή οδήγηση.
@@ -418,7 +419,7 @@
 \n\t- Other small features "</string>
 	<string name="use_transparent_map_theme">Διάφανο θέμα</string>
 	<string name="native_library_not_supported">Η εγγενής βιβλιοθήκη δεν υποστηρίζεται σε αυτήν τη συσκευή.</string>
-	<string name="init_native_library">Αρχικοποίηση εγγενούς βιβλιοθήκης …</string>
+	<string name="init_native_library">Αρχικοποίηση εγγενούς βιβλιοθήκης…</string>
 	<string name="choose_auto_follow_route">Αυτο-κεντράρισμα όψης χάρτη</string>
 	<string name="choose_auto_follow_route_descr">Χρόνος μέχρι η οπτική του χάρτη συγχρονιστεί με την τρέχουσα θέση</string>
 	<string name="auto_follow_route_never">Ποτέ</string>
@@ -460,13 +461,13 @@
 	<string name="local_index_mi_rename">Μετονομασία</string>
 	<string name="show_gpx_route">Εμφάνιση στο χάρτη</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="search_position_current_location_search">Αναζήτηση θέσης …</string>
+	<string name="search_position_current_location_search">Αναζήτηση θέσης…</string>
 	<string name="search_position_current_location_found">Θέση (βρέθηκε)</string>
-	<string name="search_position_address">Διεύθυνση …</string>
-	<string name="search_position_favorites">Αγαπημένα …</string>
+	<string name="search_position_address">Διεύθυνση…</string>
+	<string name="search_position_favorites">Αγαπημένα…</string>
 	<string name="search_position_undefined">Ακαθόριστο</string>
 	<string name="search_position_fixed">Fixed</string>
-	<string name="search_position_current_location">Τρέχουσα θέση …</string>
+	<string name="search_position_current_location">Τρέχουσα θέση…</string>
 	<string name="search_position_map_view">Τελευταία οπτική χάρτη</string>
 	<string name="select_search_position">Αναζήτηση κοντά:</string>
 	<string name="context_menu_item_search">Αναζήτηση εδώ κοντά</string>
@@ -548,7 +549,7 @@
 \n\t- UI update and large bug fixing "</string>
 	<string name="voice_not_use">Να μη χρησιμοποιηθεί</string>
 	<string name="voice_not_specified">Κανένα</string>
-	<string name="installing_new_resources">Αποσυμπίεση νέων δεδομένων …</string>
+	<string name="installing_new_resources">Αποσυμπίεση νέων δεδομένων…</string>
 	<string name="internet_connection_required_for_online_route">Επιλέχτηκε μια online υπηρεσία πλοήγησης αλλά δεν υπάρχει σύνδεση στο διαδίκτυο.</string>
 	<string name="tts_language_not_supported_title">Η γλώσσα δεν υποστηρίζεται</string>
 	<string name="tts_language_not_supported">Η επιλεγμένη γλώσσα δεν υποστηρίζεται από την εγκατεστημένη μηχανή TTS (κείμενο σε ομιλία) του Android. Θέλετε να μεταβείτε στο Market για να αναζητήσετε κάποια άλλη μηχανή TTS? Ειδάλλως θα χρησιμοποιηθεί η προεπιλεγμένη γλώσσα TTS.</string>
@@ -557,7 +558,7 @@
 	<string name="gpx_option_reverse_route">Αντιστροφή κατεύθυνσης GPX</string>
 	<string name="gpx_option_destination_point">Χρήση τρέχοντος προορισμού</string>
 	<string name="gpx_option_from_start_point">Πέρασμα κατά μήκος ολόκληρου του ίχνους</string>
-	<string name="switch_to_vector_map_to_see">Υπάρχουν διαθέσιμοι offline διανυσματικοί χάρτες για αυτή την τοποθεσία.\n\nΓια χρήση ενεργοποιήστε \'Μενού\' -&gt; \'Ορισμός εμφάνισης\' -&gt; \'Πηγή χάρτη …\' -&gt; \'Offline διανυσματικοί χάρτες\'.</string>
+	<string name="switch_to_vector_map_to_see">Υπάρχουν διαθέσιμοι offline διανυσματικοί χάρτες για αυτή την τοποθεσία.\n\nΓια χρήση ενεργοποιήστε \'Μενού\' -&gt; \'Ορισμός εμφάνισης\' -&gt; \'Πηγή χάρτη…\' -&gt; \'Offline διανυσματικοί χάρτες\'.</string>
 	<string name="choose_audio_stream">Έξοδος φωνητικής καθοδήγησης</string>
 	<string name="choose_audio_stream_descr">Επιλέξτε το κανάλι εκτέλεσης της φωνητικής καθοδήγησης (εξαρτώμενο από το σύστημα)</string>
 	<string name="voice_stream_voice_call">Ήχος κλήσης φωνής</string>
@@ -568,17 +569,17 @@
 	<string name="overlay_transparency">Διαφάνεια επικάλυψης</string>
 	<string name="map_transparency_descr">Τροποποίηση διαφάνειας βασικού χάρτη</string>
 	<string name="map_transparency">Διαφάνεια βασικού χάρτη</string>
-	<string name="layer_underlay">Χάρτης υποστρώματος …</string>
+	<string name="layer_underlay">Χάρτης υποστρώματος…</string>
 	<string name="map_underlay">Χάρτης υποστρώματος</string>
 	<string name="map_underlay_descr">Επιλογή χάρτη υποστρώματος</string>
-	<string name="layer_overlay">Χάρτης επικάλυψης …</string>
+	<string name="layer_overlay">Χάρτης επικάλυψης…</string>
 	<string name="default_none">Κανένα</string>
 	<string name="map_overlay">Χάρτης επικάλυψης</string>
 	<string name="map_overlay_descr">Επιλογή χάρτη επικάλυψης</string>
 	<string name="tile_source_already_installed">Ο χάρτης είναι ήδη εγκατεστημένος, οι ρυθμίσεις θα ενημερωθούν</string>
 	<string name="select_tile_source_to_install">Επιλέξτε χάρτες (πλακίδια) για εγκατάσταση ή ενημέρωση</string>
 	<string name="internet_not_available">Σύνδεση στο Διαδίκτυο που απαιτείται για τη λειτουργία δεν είναι διαθέσιμη</string>
-	<string name="install_more">Εγκατάσταση περισσότερων …</string>
+	<string name="install_more">Εγκατάσταση περισσότερων…</string>
 	<string name="level_to_switch_vector_raster_descr">Ελάχιστη κλίμακα εστίασης για χρήση διανυσματικών χαρτών</string>
 	<string name="level_to_switch_vector_raster">Ελαχ. κλιμ. διανυσματικών</string>
 	<string name="tip_location_sharing">Διαμοιρασμός Τοποθεσίας</string>
@@ -599,7 +600,7 @@
 	<string name="preferred_locale">Γλώσσα εμφάνισης</string>
 	<string name="tip_map_switch">Πηγή Χάρτη</string>
 	<string name="tip_map_switch_t_v2">"\tΗ πηγή χάρτη και οι στρώσεις που εμφανίζονται αλλάζουν μέσω του \'Μενού\' -&gt; \'Ορισμός Εμφάνισης\' στην όψη χάρτη.
-\n\tΚάτω από το \'Πηγή χάρτη …\' μπορείτε να επιλέξετε τη χρήση των εγκατεστημένων offline διανυσματικών χαρτών, προκαθορισμένων (online) πηγών πλακιδίων (ενεργοποιήστε το πρόσθετο \'Online χάρτες\' για αυτό), ή χάρτες που κατασκευάστηκαν χειροκίνητα χρησιμοποιώντας π.χ. το OsmAndMapCreator σε κάποιο PC.
+\n\tΚάτω από το \'Πηγή χάρτη…\' μπορείτε να επιλέξετε τη χρήση των εγκατεστημένων offline διανυσματικών χαρτών, προκαθορισμένων (online) πηγών πλακιδίων (ενεργοποιήστε το πρόσθετο \'Online χάρτες\' για αυτό), ή χάρτες που κατασκευάστηκαν χειροκίνητα χρησιμοποιώντας π.χ. το OsmAndMapCreator σε κάποιο PC.
 \n\tΟ OsmAnd επίσης υποστηρίζει προσαρμόσιμες πηγές. "
 	</string>
 	<string name="tip_app_mode">Προφίλ Χρήστη</string>
@@ -657,10 +658,10 @@
 	<string name="amenity_type_sustenance">Διατροφή</string>
 	<string name="amenity_type_tourism">Τουρισμός</string>
 	<string name="amenity_type_transportation">Μεταφορές</string>
-	<string name="indexing_address">Ευρετηρίαση διευθύνσεων …</string>
-	<string name="indexing_map">Ευρετηρίαση χάρτη …</string>
-	<string name="indexing_poi">Ευρετηρίαση Σημ. Ενδ …</string>
-	<string name="indexing_transport">Ευρετηρίαση μεταφορών …</string>
+	<string name="indexing_address">Ευρετηρίαση διευθύνσεων…</string>
+	<string name="indexing_map">Ευρετηρίαση χάρτη…</string>
+	<string name="indexing_poi">Ευρετηρίαση Σημ. Ενδ…</string>
+	<string name="indexing_transport">Ευρετηρίαση μεταφορών…</string>
 	<string name="input_output_error">Σφάλμα Εισ/Εξ</string>
 	<string name="km">χλμ</string>
 	<string name="km_h">χλμ/ω</string>
@@ -669,7 +670,7 @@
 	<string name="poi_filter_closest_poi">Πλησιέστερο ΣΕ</string>
 	<string name="poi_filter_custom_filter">Προσαρμοσμένο φίλτρο</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
-	<string name="reading_cached_tiles">Ανάγνωση αποθηκευμένων πλακιδίων …</string>
+	<string name="reading_cached_tiles">Ανάγνωση αποθηκευμένων πλακιδίων…</string>
 	<string name="version_index_is_big_for_memory">Το ευρετήριο \'\'{0}\'\' δεν χωράει στη μνήμη</string>
 	<string name="version_index_is_not_supported">Η εκδοχή \'\'{0}\'\' του ευρετηρίου δεν υποστηρίζεται</string>
 	<string name="use_osmand_routing_service">Πλοήγηση OsmAnd &gt;20χλμ</string>
@@ -680,10 +681,10 @@
 	<string name="application_dir_change_warning">Αλλάζοντας τον κατάλογο αποθήκευσης δεν θα μετακινηθούν ούτε θα διαγραφούν τα δεδομένα. Αυτό πρέπει να γίνει ξεχωριστά και εκτός του OsmAnd. Συνέχεια?</string>
 	<string name="osmand_net_previously_installed">Μια προηγούμενη έκδοση OsmAnd είναι εγκατεστημένη. Όλα τα offline δεδομένα θα υποστηρίζονται από τη νέα εφαρμογή. Αλλά τα Αγαπημένα σημεία θα πρέπει να εξαχθούν από την παλιά εφαρμογή και στη συνέχεια να εισαχθούν στη νέα.</string>
 	<string name="build_installed">Το Build {0} εγκαταστάθηκε επιτυχώς ({1}).</string>
-	<string name="downloading_build">Λήψη build …</string>
+	<string name="downloading_build">Λήψη build…</string>
 	<string name="install_selected_build">Θέλετε να εγκαταστήσετε το OsmAnd - {0} από {1} {2} MB ?</string>
 	<string name="loading_builds_failed">Η ανάκτηση της λίστας των OsmAnd builds απέτυχε</string>
-	<string name="loading_builds">Φόρτωση OsmAnd builds …</string>
+	<string name="loading_builds">Φόρτωση OsmAnd builds…</string>
 	<string name="select_build_to_install">Επιλέξτε ένα από τα OsmAnd builds προς εγκατάσταση</string>
 	<string name="contribution_activity">Εγκατάσταση έκδοσης</string>
 	<string name="gps_status_app_not_found">Η εφαρμογή GPS Status δεν είναι εγκατεστημένη. Αναζήτηση στο Market;</string>
@@ -733,7 +734,7 @@
 	<string name="no_vector_map_loaded">Οι διανυσματικοί χάρτες δεν φορτώθηκαν</string>
 	<string name="map_route_by_gpx">Πλοήγηση χρησιμοποιώντας GPX</string>
 	<string name="gpx_files_not_found">Τα GPX αρχεία δεν βρέθηκαν στον κατάλογο /tracks</string>
-	<string name="layer_gpx_layer">Ίχνος GPX …</string>
+	<string name="layer_gpx_layer">Ίχνος GPX…</string>
 	<string name="error_reading_gpx">Σφάλμα ανάγνωσης δεδομένων GPX</string>
 	<string name="vector_data">Offline διανυσματικοί χάρτες</string>
 	<string name="transport_context_menu">Αναζήτηση μέσου μεταφοράς στη στάση</string>
@@ -765,8 +766,8 @@
 	<string name="layer_favorites">Αγαπημένα</string>
 	<string name="layer_osm_bugs">Σφάλματα OSM</string>
 	<string name="layer_transport">Στάσεις ΜΜΜ</string>
-	<string name="layer_poi">Σημ Ενδ …</string>
-	<string name="layer_map">Πηγή χάρτη …</string>
+	<string name="layer_poi">Σημ Ενδ…</string>
+	<string name="layer_map">Πηγή χάρτη…</string>
 	<string name="menu_layers">Ορισμός εμφάνισης</string>
 	<string name="context_menu_item_search_poi">Αναζήτηση ΣΕ</string>
 	
@@ -795,14 +796,14 @@
 	<string name="menu_mute_on">Ήχος κλειστός</string>
 	<string name="voice_provider_descr">Επιλέξτε φωνητική καθοδήγηση για την πλοήγηση</string>
 	<string name="voice_provider">Φωνητική καθοδήγηση</string>
-	<string name="voice_data_initializing">Αρχικοποίηση δεδομένων φωνής …</string>
+	<string name="voice_data_initializing">Αρχικοποίηση δεδομένων φωνής…</string>
 	<string name="voice_data_not_supported">Μη υποστηριζόμενη έκδοση των δεδομένων φωνής</string>
 	<string name="voice_data_corrupted">Τα καθορισμένα δεδομένα φωνής είναι κατεστραμμένα</string>
 	<string name="voice_data_unavailable">Τα επιλεγμένα δεδομένα φωνής δεν είναι διαθέσιμα</string>
 	
 	<string name="sd_unmounted">Η κάρτα SD δεν είναι προσβάσιμη.\nΔεν μπορείς να δεις χάρτες ή να αναζητήσεις διάφορα.</string>
 	<string name="sd_mounted_ro">Η SD κάρτα είναι μόνο για ανάγνωση.\nΜπορείτε μόνο να δείτε τον προφορτωμένο χάρτη αλλά όχι να κάνετε λήψη από το Διαδίκτυο.</string>
-	<string name="unzipping_file">Αποσυμπίεση αρχείου …</string>
+	<string name="unzipping_file">Αποσυμπίεση αρχείου…</string>
 	<string name="route_tr">Στρίψτε δεξιά και προχωρήστε</string>
 	<string name="route_tshr">Στρίψτε κλειστά δεξιά και προχωρήστε</string>
 	<string name="route_tslr">Στρίψτε ελαφρώς δεξιά και προχωρήστε</string>
@@ -813,7 +814,7 @@
 	<string name="route_head">Προχωρήστε</string>
 	<string name="first_time_continue">Αργότερα</string>
 	<string name="first_time_download">Λήψη περιοχών</string>
-	<string name="search_poi_location">Αναζήτηση σήματος …</string>
+	<string name="search_poi_location">Αναζήτηση σήματος…</string>
 	<string name="search_near_map">Αναζήτηση κοντά στην τελευταία τοποθεσία του χάρτη</string>
 	<string name="search_nearby">Αναζήτηση στη γύρω περιοχή</string>
 	<string name="map_orientation_default">Το ίδιο με τη συσκευή</string>
@@ -853,11 +854,11 @@
 	<string name="favorite">Αγαπημένο</string>
 	<string name="clear_all">Καθαρισμός όλων</string>
 	<string name="history">Ιστορικό</string>
-	<string name="uploading_data">Αποστολή δεδομένων …</string>
-	<string name="uploading">Αποστολή …</string>
+	<string name="uploading_data">Αποστολή δεδομένων…</string>
+	<string name="uploading">Αποστολή…</string>
 	<string name="search_nothing_found">Δε βρέθηκε τίποτα</string>
-	<string name="searching">Αναζήτηση …</string>
-	<string name="searching_address">Αναζήτηση διεύθυνσης …</string>
+	<string name="searching">Αναζήτηση…</string>
+	<string name="searching_address">Αναζήτηση διεύθυνσης…</string>
 	<string name="search_osm_nominatim">Αναζήτηση διεύθυνσης χρησιμοποιώντας το OSM Nominatim</string>
 	<string name="hint_search_online">Αριθμός σπιτιού, οδός, πόλη</string>
 	<string name="search_offline_address">Χωρίς σύνδεση</string>
@@ -874,8 +875,8 @@
 	<string name="download_index_success">Επιτυχής λήψη</string>
 	<string name="error_io_error">Προέκυψε σφάλμα Εισ/Εξ</string>
 	
-	<string name="downloading">Λήψη …</string>
-	<string name="downloading_list_indexes">Λήψη λίστας διαθέσιμων περιοχών …</string>
+	<string name="downloading">Λήψη…</string>
+	<string name="downloading_list_indexes">Λήψη λίστας διαθέσιμων περιοχών…</string>
 	<string name="list_index_files_was_not_loaded">Η λίστα των περιοχών δεν έχει ανακτηθεί από το osmand.net.</string>
 	<string name="show_poi_on_map">Εμφάνιση στο χάρτη</string>
 	<string name="fav_points_edited">Το αγαπημένο σημείο έχει επεξεργαστεί</string>
@@ -887,18 +888,18 @@
 	<string name="get_directions">Οδηγίες</string>
 	<string name="show_gps_status">Εμφάνιση κατάστασης GPS</string>
 	<string name="opening_hours">Ώρες λειτουργίας</string>
-	<string name="opening_changeset">Άνοιγμα ομάδας αλλαγών …</string>
-	<string name="closing_changeset">Κλείσιμο ομάδας αλλαγών …</string>
-	<string name="commiting_node">Committing node …</string>
-	<string name="loading_poi_obj">Φόρτωση ΣΕ …</string>
+	<string name="opening_changeset">Άνοιγμα ομάδας αλλαγών…</string>
+	<string name="closing_changeset">Κλείσιμο ομάδας αλλαγών…</string>
+	<string name="commiting_node">Committing node…</string>
+	<string name="loading_poi_obj">Φόρτωση ΣΕ…</string>
 	<string name="auth_failed">Αποτυχία εξουσιοδότησης</string>
 	<string name="failed_op">απέτυχε</string>
-	<string name="converting_names">Μετατροπή εγγενών/Αγγλικών ονομάτων …</string>
+	<string name="converting_names">Μετατροπή εγγενών/Αγγλικών ονομάτων…</string>
 	<string name="loading_streets_buildings">Φόρτωση δρόμων/κτηρίων…</string>
-	<string name="loading_postcodes">Φόρτωση ταχυδρομικών κωδικών …</string>
-	<string name="loading_streets">Φόρτωση δρόμων …</string>
-	<string name="loading_cities">Φόρτωση πόλεων …</string>
-	<string name="loading">Φόρτωση …</string>
+	<string name="loading_postcodes">Φόρτωση ταχυδρομικών κωδικών…</string>
+	<string name="loading_streets">Φόρτωση δρόμων…</string>
+	<string name="loading_cities">Φόρτωση πόλεων…</string>
+	<string name="loading">Φόρτωση…</string>
 	<string name="poi">Σημ Ενδ</string>
 	<string name="error_occurred_saving_gpx">Σφάλμα κατά την αποθήκευση του GPX</string>
 	<string name="error_calculating_route">Σφάλμα υπολογισμού διαδρομής</string>
@@ -909,10 +910,10 @@
 	<string name="invalid_locations">Οι συντεταγμένες δεν είναι έγκυρες!</string>
 	<string name="go_back_to_osmand">Επιστροφή στον χάρτη OsmAnd</string>
 	<string name="close">Κλείσιμο</string>
-	<string name="loading_data">Φόρτωση δεδομένων …</string>
-	<string name="reading_indexes">Ανάγνωση τοπικών δεδομένων …</string>
+	<string name="loading_data">Φόρτωση δεδομένων…</string>
+	<string name="reading_indexes">Ανάγνωση τοπικών δεδομένων…</string>
 	<string name="previous_run_crashed">Η τελευταία εκτέλεση του OsmAnd κατέρρευσε. Το αρχείο καταγραφής είναι στο {0}. Παρακαλώ αναφέρετε το συμβάν και επισυνάψτε το αρχείο καταγραφής.</string>
-	<string name="saving_gpx_tracks">Αποθήκευση ιχνών GPX στην SD …</string>
+	<string name="saving_gpx_tracks">Αποθήκευση ιχνών GPX στην SD…</string>
 	<string name="finished_task">Ολοκληρώθηκε</string>
 	<string name="reload_indexes_descr">Επανανάγνωση των offline διανυσματικών χαρτών και των δεδομένων από την κάρτα SD</string>
 	<string name="reload_indexes">Επανανάγνωση των offline δεδομένων</string>
@@ -1198,7 +1199,7 @@
     <string name="osmand_srtm_long_description_1000_chars">Αυτό το πρόσθετο παρέχει ισοϋψείς γραμμές οι οποίες μπορούν να εμφανιστούν στου εκτός σύνδεσης χάρτες του OsmAnd. Τα παγκόσμια δεδομένα (μεταξύ 70 μοιρών βόρεια και 70 μοιρών νότια) είναι βασισμένα σε μετρήσεις από το SRTM (Shuttle Radar Topography Mission) και το ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ένα όργανο απεικόνισης πάνω στον Terra, τη ναυαρχίδα των δορυφόρων του Συστήματος Παρακολούθησης της Γης της NASA. Το ASTER είναι μια συνεργασία μεταξύ της NASA, Του Υπουργείου οικονομίας. εμπορίου και βιομηχανίας της Ιαπωνίας (METI), και της Japan Space Systems (J-spacesystems).</string>
     <string name="support_new_features_descr">Δωρίστε ώστε να δείτε νέα χαρακτηριστικά να πραγματοποιούνται στην εφαρμογή</string>
 	<string name="prefer_motorways">Προτίμηση αυτοκινητοδρόμων</string>
-	<string name="prefer_in_routing_title">Προτίμηση …</string>
+	<string name="prefer_in_routing_title">Προτίμηση…</string>
 	<string name="prefer_in_routing_descr">Προτίμηση αυτοκινητοδρόμων</string>
     <string name="max_speed_none">καμία</string>
     <string name="map_view">Χάρτης</string>
@@ -1268,4 +1269,24 @@
     <string name="local_osm_changes_backup_failed">Η δημιουργία αντιγράφου ασφαλείας αλλαγών OSM απέτυχε</string>
     <string name="local_osm_changes_backup">Δημιουργία αντιγράφου ασφαλείας αλλαγών OSM</string>
     <string name="layer_hillshade">Στρώση σκίασης αναγλύφου</string>
-    </resources>
+    <string name="clear_intermediate_points">Καθαρισμός ενδιάμεσων σημείων</string>
+    <string name="keep_intermediate_points">Διατήρηση ενδιάμεσων σημείων</string>
+    <string name="context_menu_item_directions_to">Οδηγίες προς</string>
+    <string name="context_menu_item_directions_from">Οδηγίες Από</string>
+    <string name="route_descr_map_location">Χάρτης:… </string>
+    <string name="route_to">Προς:</string>
+    <string name="route_via">Μέσω:</string>
+    <string name="route_from">Από:</string>
+    <string name="speak_warnings_title">Εκφώνηση προειδοποιήσεων…</string>
+	<string name="speak_warnings_descr">Διαμόρφωση προειδοποιήσεων κυκλοφορίας (αναγκαστικές στάσεις, σαμαράκια), προειδοποιήσεις καμερών ταχύτητας, ορίων ταχύτητας</string>
+    <string name="speak_speed_limit">Εκφώνηση ορίου ταχύτητας</string>
+    <string name="speak_cameras">Εκφώνηση καμερών ταχύτητας</string>
+	<string name="speak_traffic_warnings">Εκφώνηση προειδοποιήσεων κυκλοφορίας</string>
+	<string name="search_street_in_neighborhood_cities">Αναζήτηση οδού σε γειτονικές πόλεις</string>
+    <string name="index_name_openmaps">OpenMaps EU</string>
+    <string name="osb_author_dialog_password">Κωδικός OSM Προαιρετικό)</string>
+	<string name="av_camera_focus_auto">Αυτόματη εστίαση</string>
+	<string name="av_camera_focus_edof">Εκτεταμένου βάθους πεδίου (EDOF)</string>
+	<string name="av_camera_focus_infinity">Η εστίαση ρυθμίστηκε στο άπειρο</string>
+	<string name="av_photo_play_sound">Αναπαραγωγή ήχου κατά τη λήψη φωτογραφίας</string>
+	</resources>
