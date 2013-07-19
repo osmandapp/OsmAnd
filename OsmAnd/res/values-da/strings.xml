@@ -171,7 +171,7 @@
     <string name="av_use_external_camera">Brug kamera</string>
     <string name="osmodroid_plugin_name">OsMoDroid udvidelse</string>
 	<string name="monitoring_control_start">GPX</string>
-    <string name="route_descr_lat_lon">Lat %1$.3f, long %2$.3f</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, Long %2$.3f</string>
     <string name="intermediate_point">Rutepunkt %1$s</string>
     <string name="snap_to_road_descr">Hold position til vejen under navigation</string>
 	<string name="snap_to_road">Fastgør til vejen</string>
@@ -1538,21 +1538,21 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
 	<string name="av_photo_play_sound_descr">Spil lyd når foto tages</string>
 <string name="av_photo_play_sound">Kameralyd</string>
-	<string name="speak_traffic_warnings">Meddel trafikadvarsler</string>
-	<string name="speak_cameras">Meddel fotofælder</string>
-	<string name="speak_speed_limit">Meddel hastighedsgrænse</string>
-    <string name="speak_warnings_title">Meddel alarmer…</string>
-	<string name="speak_warnings_descr">Konfigurer trafikadvarsler (tvungne stop, vejbump), fotofældeadvarsler, hastighedsgrænser</string>
+	<string name="speak_traffic_warnings">Meddel om trafikadvarsler</string>
+	<string name="speak_cameras">Meddel om fotofælder</string>
+	<string name="speak_speed_limit">Meddel om hastighedsgrænse</string>
+    <string name="speak_warnings_title">Meddel om alarmer…</string>
+	<string name="speak_warnings_descr">Konfigurer trafikadvarsler (tvungne stop, vejbump), advarsler om fotofælder, hastighedsgrænser</string>
     <string name="route_descr_map_location">Kort: </string>
     <string name="route_to">Til:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">Fra:</string>
     <string name="osb_author_dialog_password">OSM kodeord (valgfrit)</string>
 	<string name="tip_recent_changes_1_5_t">Ændringer i 1.5:↵
-→\n * Stemmeadvarsler om hastighedsbegrænsninger og kameraer↵
-→\n * Høj densitet kortikoner↵
-→\n * masser af Brugergrænseflade ændringer↵
-→\n * fejlrettelser i afstandsvisning, GPX analysator, rutepunkt håndtering, planlægnings modul, overførelse til OSM, https håndtering↵
+\n * Stemmeadvarsler om hastighedsbegrænsninger og fotofælder↵
+\n * Høj densitet kortikoner↵
+\n * Masser af brugergrænseflade ændringer↵
+\n * Fejlrettelser i afstandsvisning, GPX analyse, rutepunkt håndtering, planlægnings modul, overførelse til OSM, https håndtering↵
     </string>
     <string name="osb_author_or_password_not_specified">Angiv OSM bruger og adgangskode i \'Indstillinger\'</string>
     <string name="clear_intermediate_points">Slet mellemliggende punkter</string>
