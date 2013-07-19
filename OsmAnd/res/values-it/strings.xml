@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -1319,4 +1320,21 @@
     <string name="speak_speed_limit">Annuncia limite di velocità</string>
     <string name="speak_cameras">Annuncia autovelox</string>
 	<string name="speak_traffic_warnings">Annuncia avvisi di traffico</string>
+	<string name="tip_recent_changes_1_5_t">Cambiamenti nella 1.5:↵
+→\n\t* Avvisi vocali per autovelox e limiti di velocità↵
+→\n\t* Icone mappe ad alta densità↵
+→\n\t* Molti camimenti dell'interfaccia grafica↵
+→\n\t* Correzione di errori nella visualizzazione della distanza, l'analizzatore GPX, utilizzo punti di passaggio, widget di pianificazione, upload OSM, utilizzo https↵
+    </string>
+    <string name="osb_author_or_password_not_specified">Prego specificare il nome utente OSM e la password nelle Impostazioni</string>
+    <string name="clear_intermediate_points">Cancella i punti intermedi</string>
+    <string name="keep_intermediate_points">Mantieni i punti intermedi</string>
+    <string name="new_directions_point_dialog">Hai già punti intermedi impostati.</string>
+    <string name="context_menu_item_directions_to">Indicazioni Per</string>
+    <string name="context_menu_item_directions_from">Indicazioni Da</string>
+    <string name="route_descr_map_location">Mappa: </string>
+    <string name="route_to">A:</string>
+    <string name="route_via">Per:</string>
+    <string name="route_from">Da:</string>
+    <string name="osb_author_dialog_password">Password OSM (opzionale)</string>
 	</resources>
