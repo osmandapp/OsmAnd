@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -847,19 +848,19 @@
 	<string name="mark_point">هدف</string>
 	<string name="show_osm_bugs_descr">نشان دادن OpenStreetBugs بر روی نقشه</string>
 	<string name="show_osm_bugs">نشان دادن OpenStreetBugs</string>
-	<string name="speak_warnings_title">هشدار دهنده …</string>
+	<string name="speak_warnings_title">اعلام هشدارها…</string>
 	<string name="speak_warnings_descr">پیکربندی هشدارهای ترافیک (توقف اجباری، سرعت گیر)، هشدار دوربین سرعت سنج، محدودیت سرعت</string>
     <string name="speak_speed_limit">اعلام محدودیت سرعت</string>
     <string name="speak_cameras">اعلام دوربین سرعت سنج</string>
-	<string name="speak_traffic_warnings">اعلام ترافیک</string>
+	<string name="speak_traffic_warnings">اعلام هشدارهای ترافیکی</string>
 	<string name="tip_recent_changes_1_4_t">تغییرات نسخه 1.4:↵
-→\n\t* بهینه سازی استگاههای بین راهی↵
+→\n\t* بهینه سازی ایستگاههای بین راهی↵
 →\n\t* جستجوی خیابانها با نام (محله)) ↵
-→\n\t* افزونه طراحی مسیر (بارگزاری/ویرایش/ذخیره فایل GPX))↵
-→\n\t*  نمایش دانلود های جدید (دانلود در پس زمینه))↵
-→\n\t* پشتیبانی از پوشه GPX (سازماندهی فایل GPX))↵
-→\n\t* حذف فایل SRTM↵
-→\n\t*  پشتیبانی از یاداشتهای OSM ↵ 
+→\n\t* فزونه طراحی مسیر (بارگزاری/ویرایش/ذخیره فایل GPX))↵
+→\n\t* نمایش دانلود های جدید (دانلود در پس زمینه))↵
+→\n\t* پشتیبانی از پوشه GPX (ساماندهی فایل GPX))↵
+→\n\t* حذف فایلهای SRTM↵
+→\n\t* پشتیبانی از یاداشتهای OSM ↵ 
     </string>
     <string name="osmand_distance_planning_plugin_description">ایجاد مسیر (یا استفاده از / تغییر فایل های GPX موجود) برای اندازه گیری فاصله بین دو نقطه ،ذخیره به عنوان GPX، می تواند مورد استفاده قرار گیرد برای برنامه ریزی مسیر GPX.</string>
     <string name="tip_recent_changes_1_3_t">تغییرات نسخه 1.3:↵
@@ -909,4 +910,6 @@
 	<string name="rendering_attr_contourLines_name">نشان دادن خطوط هم تراز</string>
 	<string name="rendering_attr_hmRendered_description">افزایش جزئیات نقشه</string>
 	<string name="local_index_routing_data">داده های مسیریابی</string>
-	</resources>
+	<string name="route_via">از طریق:</string>
+    <string name="route_from">از:</string>
+    </resources>
