@@ -128,8 +128,8 @@
   <string name="tip_rotation_switching">Orientacja mapy</string>
   
   <string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz pobrać nową w Ustawieniach lub przełączyć się na mapy online.</string>
-  <string name="switch_to_vector_map_to_see">Możesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy… -&gt; Wektorowe mapy offline) by zobaczyć mapę.</string>
-  <string name="binary_map_download_success">Zakończono. Możesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy… -&gt; Wektorowe mapy offline).</string>
+  <string name="switch_to_vector_map_to_see">Wektorowa mapa offline jest dostępna dla tej lokalizacji. \n\t\n\tMożesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy… -&gt; Wektorowe mapy offline).</string>
+  <string name="binary_map_download_success">Pobieranie zakończone.\n\t\n\tMożesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy… -&gt; Wektorowe mapy offline).</string>
   <string name="choose_audio_stream">Wyjście głosu nawigatora</string>
   <string name="choose_audio_stream_descr">Wybierz kanał do odtwarzania głosu nawigatora (zależne od możliwości systemu)</string>
   <string name="voice_stream_voice_call">Kanał głosowy</string>
@@ -254,10 +254,10 @@
   <string name="application_dir_change_warning">Zmiana katalogu danych nie przeniesie ani nie usunie znajdujących się w nim plików. Musisz zrobić do ręcznie poza OsmAnd. Kontynuować mimo to?</string>
   <string name="osmand_net_previously_installed">Poprzednia wersja OsmAnd jest zainstalowana. Wszystkie dane offline są obsługiwane przez nową wersję aplikacji ale punkty ulubione powinny być wyeksportowane w starej wersji aplikacji i zaimportowane w nowej.</string>
   <string name="build_installed">Kompilacja {0} zainstalowana pomyślnie ({1}).</string>
-  <string name="downloading_build">Pobieram kompilację programu…</string>
+  <string name="downloading_build">Pobieranie kompilacji…</string>
   <string name="install_selected_build">Kontynuować instalację OsmAnd - {0} z {1} {2} MB ?</string>
   <string name="loading_builds_failed">Pobieranie listy kompilacji OsmAnd nie powiodło się</string>
-  <string name="loading_builds">Ładuję listę kompilacji OsmAnd…</string>
+  <string name="loading_builds">Wczytywanie listy kompilacji OsmAnd…</string>
   <string name="select_build_to_install">Wybierz, którą kompilację OsmAnd zainstalować</string>
   <string name="contribution_activity">Specialne opcje dla wersji \"contribution\"</string>
   <string name="gps_status_app_not_found">Nie zainstalowano aplikacji GPS Status. Wyszukać ją w Market?</string>
@@ -282,7 +282,7 @@
   <string name="osmand_service">Tryb uśpienia</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
   <string name="fast_route_mode">Najszybsza trasa</string>
-  <string name="fast_route_mode_descr">"Włącz dla najszybszej lub wyłącz dla najkrótszej trasy "</string>
+  <string name="fast_route_mode_descr">Włącz, aby obliczać najszybszą trasę lub wyłącz dla najkrótszej </string>
   <string name="tiles_to_download_estimated_size">Na poziomie {0} pobrano {1} kafelków ({2} MB)</string>
   <string name="context_menu_item_download_map">Pobierz mapę</string>
   <string name="select_max_zoom_preload_area">Wybierz maksymalne przybliżenie do pobrania</string>
@@ -291,7 +291,7 @@
   <string name="continuous_rendering_descr">Używaj ciągłego rysowania podczas wyświetlania zamiast rysować jeden obrazek na raz</string>
   <string name="rendering_exception">Wystąpił błąd podczas rysowania wybranej powierzchni</string>
   <string name="rendering_out_of_memory">Brak wystarczającej ilości pamięci, by wyświetlić wybrany obszar</string>
-  <string name="show_point_options">Opcje punktu...</string>
+  <string name="show_point_options">Użyj lokalizacji…</string>
   <string name="renderer_load_sucess">Render uruchomiony</string>
   <string name="renderer_load_exception">Wystąpił błąd, render nie został uruchomiony</string>
   <string name="renderers">Render wektorowy</string>
@@ -379,7 +379,7 @@
   <string name="menu_mute_on">Włącz dźwięk</string>
   <string name="voice_provider_descr">Wybierz głos nawigatora</string>
   <string name="voice_provider">Głos nawigatora</string>
-  <string name="voice_data_initializing">Inicjalizacja danych głosowych…</string>
+  <string name="voice_data_initializing">Inicjowanie danych głosowych…</string>
   <string name="voice_data_not_supported">Niewspierana wersja danych głosowych</string>
   <string name="voice_data_corrupted">Wybrane dane z głosem są uszkodzone</string>
   <string name="voice_data_unavailable">Wybrane dane z głosem są niedostępne</string>
@@ -499,7 +499,7 @@
   <string name="loading_data">Wczytywanie danych…</string>
   <string name="reading_indexes">Wczytywanie danych lokalnych…</string>
   <string name="previous_run_crashed">Program poprzednio uległ awarii. Log z informacjami jest w {0}. Wyślij zgłoszenie i załącz ten plik.</string>
-  <string name="saving_gpx_tracks">Zapisywanie śladów GPX do karty SD…</string>
+  <string name="saving_gpx_tracks">Zapisywanie śladów GPX na kartę SD…</string>
   <string name="finished_task">Zakończono</string>
   <string name="reload_indexes_descr">Wczytaj ponownie dane wektorowe map i inne dane z karty SD</string>
   <string name="reload_indexes">Wczytaj ponownie dane offline</string>
@@ -787,7 +787,7 @@
   <string name="live_monitoring">Śledzenie online</string>
   <string name="live_monitoring_interval_descr">Określ interwał pomiędzy wysyłaniem danych</string>
   <string name="live_monitoring_interval">Interwał wysyłania danych</string>
-  <string name="live_monitoring_url_descr">Określ adres usługi webowej używając następujących parametrów ({n} określa dany parametr): {0}=lat, {1}=lon, {2}=znacznik czasu, {3}=HDOP, {4}=wysokość, {5}=prędkość, bearing={6}</string>
+  <string name="live_monitoring_url_descr">Określ adres usługi webowej używając następujących parametrów ({n} określa dany parametr): {0}=szer., {1}=dł., {2}=znacznik czasu, {3}=HDOP, {4}=wysokość, {5}=prędkość, kierunek={6}</string>
   <string name="live_monitoring_url">Adres śledzenia online</string>
   <string name="gpx_monitoring_disabled_warn">Proszę włączyć ustawienia \'Zapisuj ślad GPX\'.</string>
   <string name="show_current_gpx_title">Pokaż aktualną ścieżkę</string>
@@ -902,10 +902,13 @@
   <string name="show_cameras">Fotoradary</string>
   <string name="show_traffic_warnings">Ostrzeżenia</string>
   <string name="avoid_toll_roads">Dróg płatnych</string>
-  <string name="tip_recent_changes_0_8_2_t">"Zmiany w 0.8.2:
-\n\t* Poprawiony routing
+  <string name="tip_recent_changes_0_8_2_t">Zmiany w 0.8.2:
+\n\t* Poprawiona nawigacja
 \n\t* Dynamiczne widżety mapy
-\n\t* Ustawienia mapy przeniesione na ekran mapy "</string>
+\n\t* Ustawienia mapy przeniesione na ekran mapy
+\n\t* Przycisk blokady ekranu z usługami śledzenia
+\n\t* Naprawione arabskie, kanadyjskie skrypty oraz języki RTL 
+	</string>
   <string name="map_widget_top_text">Ulica</string>
   <string name="map_widget_config">Konfiguracja</string>
   
@@ -985,9 +988,11 @@
 <string name="map_widget_day_night">Mapa dzień/noc</string>
 <string name="map_widget_vector_attributes">Atrybuty rysowania:</string>
 <string name="show_lanes">Pasy ruchu</string>
-<string name="tip_recent_changes_0_8_4_t">"Zmiany w 0.8.4:\n\t* Kilka drobnych poprawek
+<string name="tip_recent_changes_0_8_4_t">Zmiany w 0.8.4:
+\n\t* Kilka drobnych poprawek
 \n\t* Mapa nie traci pozycji po przerwaniach
-\n\t* Usługa w tle podczas nawigacji "</string>
+\n\t* Usługa w tle podczas nawigacji
+    </string>
     <string name="gps_not_available">Włącz w ustawieniach odbiornik GPS</string>
     <string name="map_widget_monitoring_services">Usługi rejestrowania</string>
 	<string name="no_route">Brak trasy</string>
@@ -1027,7 +1032,13 @@
 	<string name="monitoring_mode_on">Zatrzymaj\nrejestrację GPX.</string>
 	<string name="gps_wakeup_interval">Częstość wybudzania GPS: %s</string>
 	<string name="int_continuosly">Ciągły</string>
-	<string name="tip_day_night_mode_t_v2">"\tTryb wyświetlania niektórych map wektorowych może być wybierany jako dzienny (jaśniejszy) lub nocny (ciemniejszy).\n\tNocne kolory są bezpieczniejsze podczas jazdy w nocy.\n\tMożesz przełączyć tryb dzienny/nocny wybierając \'Menu\'-&gt;\'Zdefiniuj widok\'-&gt;\'Konfiguruj ekran...\'-&gt;\'mapa dzień/noc\'.\n\tMożliwość wyboru:\n\t\'Wschód/Zachód\' - tryb automatyczny, kontrolowany przez pozycję Słońca (domyślny)\n\t\'Dzień\' - zawsze używaj trybu dziennego\n\t\'Noc\' - Zawsze używaj trybu nocnego\n\t\'Czujnik światła\' - wygląd mapy kontrolowany jest przez czujnik światła w Twoim urządzeni (jeśli taki posiadasz) "</string>	
+	<string name="tip_day_night_mode_t_v2">\tTryb wyświetlania niektórych map wektorowych może być wybierany jako dzienny (jaśniejszy) lub nocny (ciemniejszy).
+		\n\tNocne kolory są bezpieczniejsze podczas jazdy w nocy.
+		\n\tMożesz przełączyć tryb dzienny/nocny wybierając \'Menu\'-&gt;\'Zdefiniuj widok\'-&gt;\'Konfiguruj ekran\'-&gt;\'mapa dzień/noc\'.
+		\n\tMożliwość wyboru:\n\t\'Wschód/Zachód\' - tryb automatyczny, kontrolowany przez pozycję Słońca (domyślny)
+		\n\t\'Dzień\' - zawsze używaj trybu dziennego\n\t\'Noc\' - Zawsze używaj trybu nocnego
+		\n\t\'Czujnik światła\' - wygląd mapy kontrolowany jest przez czujnik światła w Twoim urządzeni (jeśli taki posiadasz)
+	</string>	
 	<string name="tip_map_switch_t_v2">"\tŹródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Zdefiniuj widok\' w widoku mapy.\n\tWskazując \'Źródło mapy\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Online maps\', lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC\n\tOsmAnd wspiera również własne źródła map.
 \n "</string>
 	<string name="tip_app_mode_t_v2">"\tOsmAnd wspiera różne (konfigurowalne) profile aplikacji do różnych przypadków użycia.\n\tProfile można zmienić wybierając przycisk w lewym dolnym rogu ekranu (ikonka samochodu, roweru lub pieszego), lub podczas wybierania trasy. "</string>
@@ -1051,10 +1062,12 @@
     <string name="safe_mode">Tryb bezpieczny</string>
     <string name="native_library_not_running">Program działa w trybie bezpiecznym (wyłącz go w ustawieniach).</string>
     <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Czy chcesz ją zatrzymać?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Zmiany w 1.0.0:\n\t* Poprawiony routing: szybszy, dokładniejszy, do 250 km
+    <string name="tip_recent_changes_1_0_0_t">Zmiany w 1.0.0:
+\n\t* Poprawiony routing: szybszy, dokładniejszy, do 250 km
 \n\t* Wprowadzenie map tylko samochodowych
 \n\t* Mapa nie gubi ustalonej pozycji po przerwaniu
-\n\t* Włączenie usługi w tle podczas nawigacji "</string>
+\n\t* Włączenie usługi w tle podczas nawigacji
+    </string>
     <string name="close_changeset">Zamknij zestaw zmian</string>
 	<string name="zxing_barcode_scanner_not_found">Skaner kodów kreskowych ZXing nie jest zainstalowany. Poszukać w Market?</string>
 	<string name="incomplete_locale">niekompletne</string>
@@ -1076,9 +1089,9 @@
     <string name="index_srtm_parts">części</string>
     
 	
-<string name="audionotes_plugin_description">Twórz notatki dźwiękowe podczas podróży.</string>
+<string name="audionotes_plugin_description">Twórz notatki dźwiękowe podczas podróży</string>
     <string name="audionotes_plugin_name">Notatki głosowe</string>
-    <string name="audionotes_location_not_defined">Lokalizacja dla notatki głosowej nie jest jeszcze ustalona</string>
+    <string name="audionotes_location_not_defined">Lokalizacja dla notatki głosowej nie jest jeszcze ustalona. \"Użyj lokalizacji…\", aby przypisać notatkę do wybranej lokalizacji</string>
     <string name="monitoring_control_stop">zatrzymaj</string>
     <string name="map_widget_audionotes">Notatki głosowe</string>
     
@@ -1091,20 +1104,21 @@
     <string name="av_use_external_recorder_descr">Użyj kamery systemowej do nagrywania filmów</string>
     <string name="av_use_external_recorder">Użyj systemowej kamery</string>
     <string name="av_settings_descr">Konfiguruj ustawienia dźwięku i obrazu</string>
-    <string name="av_settings">"Ustawienia obrazu/dźwięku "</string>
-    <string name="recording_error">"Wystąpił błąd podczas nagrywania "</string>
+    <string name="av_settings">Ustawienia obrazu/dźwięku </string>
+    <string name="recording_error">Wystąpił błąd podczas nagrywania </string>
     <string name="recording_camera_not_available">Kamera jest niedostępna</string>
     <string name="recording_is_recorded">Dźwięk/obraz jest nagrywany. Aby zatrzymać naciśnij przycisk stop na widżecie.</string>
     <string name="recording_playing">Dźwięk z wybranego nagrania jest odtwarzany.\n%1$s</string>
     <string name="recording_open_external_player">Otwórz zewnętrzny odtwarzacz</string>
     <string name="recording_delete_confirm">Czy chcesz usunąć to nagranie?</string>
-    <string name="tip_recent_changes_1_1_0_t">"Zmiany w 1.1.0:
+    <string name="tip_recent_changes_1_1_0_t">Zmiany w 1.1.0:
 \n\t* Wtyczka kalkulatora odległości
 \n\t* Wtyczka notatek dźwiękowych
 \n\t* Wtyczka wyświetlająca poziomice
 \n\t* Poprawki błędów
 \n\t* Opcja \\\'widok turystyczny\\\' z większą ilością szczegółów, nowymi stylami dróg, większym kontrastem oraz opcją dla wspinaczek alpejskich (skala SAC)
-\n\t* Korekcja przesunięcia EGM96 dla odczytów wysokości "</string>
+\n\t* Korekcja przesunięcia EGM96 dla odczytów wysokości
+    </string>
     <string name="recording_unavailable">niedostępne</string>
     <string name="layer_recordings">Warstwa nagrywania</string>
     <string name="recording_can_not_be_played">Nagranie nie może zostać odtworzone</string>
@@ -1139,11 +1153,12 @@
     <string name="local_indexes_cat_av">Dane audio/video</string>
     <string name="dist_control_start">Start</string>
     <string name="support_new_features_descr">Wesprzyj prace nad nowymi funkcjami przez przekazanie darowizny</string>
-	<string name="tip_recent_changes_1_1_2_t">"Zmiany w 1.1.2:
+	<string name="tip_recent_changes_1_1_2_t">Zmiany w 1.1.2:
 \n\t* Rozszerzenie wtyczki audio/video (zdjęcia z danymi EXIF)
 \n\t* Poprawki w funkcjonalności wtyczki dodającej poziomice
 \n\t* Paczki cieniowania wzniesień dla wtyczki dodającej poziomice
-\n\t* Poprawki błędów i nawigacji "</string>
+\n\t* Poprawki błędów i nawigacji
+    </string>
     <string name="download_hillshade_maps">Warstwy cieniujące</string>
     <string name="download_hillshade_item">Cieniowanie wzniesień</string>
     <string name="av_use_external_camera_descr">Użyj aplikacji systemowej do robienia zdjęć</string>
@@ -1173,9 +1188,10 @@
     <string name="map_widget_gps_info">Dane GPS</string>
     <string name="layer_hillshade">Warstwa cieniująca</string>
     <string name="osmand_play_title_30_chars">Mapy i nawigacja OsmAnd</string>
-	<string name="tip_recent_changes_1_1_4_t">"Zmiany w 1.1.4:
+	<string name="tip_recent_changes_1_1_4_t">Zmiany w 1.1.4:
 \n\t* Zmiany w interfejsie
-\n\t* Naprawa błędów "</string>
+\n\t* Naprawa błędów
+    </string>
     <string name="save_current_track_widget">Zapisz
 \n aktualny ślad GPX</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapy i Nawigacja</string>
@@ -1188,11 +1204,12 @@
     <string name="monitoring_settings_descr">Skonfiguruj opcje zapisywania wycieczek oraz włącz tryb uśpienia</string>
     <string name="osmand_monitoring_plugin_description">Włącz śledzenie i nawigację w trybie uśpienia (zablokowany ekran) poprzez okresowe wybudzanie urządzenia GPS. Wyświetl ustawienia dotyczące nagrywania wycieczek do plików GPX lub usługi sieciowej.</string>
     <string name="monitoring_settings">Usługi śledzenia i tryb uśpienia</string>
-    <string name="tip_recent_changes_1_3_t">"Zmiany w 1.3:
+    <string name="tip_recent_changes_1_3_t">Zmiany w 1.3:
 \n\t* Ponowna implementacja wsparcia dla tabletów i dużych ekranów
 \n\t* Motyw Holo (dostosowywanie)
 \n\t* Dodatkowe ustawienia stabilizacji kompasu
-\n\t* Lewy górny przycisk na ekranie mapy zastępuje przycisk menu "</string>
+\n\t* Lewy górny przycisk na ekranie mapy zastępuje przycisk menu
+    </string>
     <string name="select_address_activity">Wybierz adres</string>
     <string name="local_openstreetmap_act_title">Modyfikacje OSM</string>
     <string name="default_buttons_other_actions">Inne działania</string>
@@ -1240,14 +1257,15 @@
     <string name="intermediate_items_sort_by_distance">Sortuj (door-to-door)</string>
     <string name="intermediate_items_sort_return">Optymalizacja kolejności punktów pośrednich w drodze do miejsca docelowego.</string>
     <string name="search_street_in_neighborhood_cities">Szukaj ulicy w sąsiadujących miastach</string>
-    <string name="tip_recent_changes_1_4_t">"Zmiany w 1.4:
+    <string name="tip_recent_changes_1_4_t">Zmiany w 1.4:
 \n\t* Optymalne porządkowanie odwiedzanych punktów (door-to-door)
 \n\t* Wyszukiwanie ulicy po nazwie (w sąsiedztwie)
 \n\t* Wtyczka trybu planowania (wczytywanie/edycja/zapisywanie ścieżek GPX)
 \n\t* Nowy ekran pobierania (pobieranie w tle)
 \n\t* Wsparcie dla podfolderów plików GPX (organizowanie ścieżek GPX)
 \n\t* Usunięcie plików SRTM
-\n\t* Wsparcie dla notatek OSM "</string>
+\n\t* Wsparcie dla notatek OSM 
+    </string>
     <string name="context_menu_item_destination_point">Ustaw jako punkt docelowy</string>
     <string name="please_select_address">Wybierz miasto lub ulicę</string>
     <string name="destination_point">Punkt docelowy %1$s</string>
@@ -1262,5 +1280,27 @@
 	<string name="av_camera_focus_macro">Makro fokus (zbliżenie)</string>
 	<string name="av_camera_focus_continuous">Aparat stale stara się ustawić ostrość</string>
 	<string name="av_photo_play_sound">Odtwórz dźwięk przy robieniu zdjęć</string>
-	<string name="av_photo_play_sound_descr">Odtwarzanie dźwięku przy robieniu zdjęć</string>
-</resources>
+	<string name="av_photo_play_sound_descr">Wybierz czy odtwarzać dźwięk podczas robienia zdjęć</string>
+<string name="tip_recent_changes_1_5_t">Zmiany w 1.5:
+	\n\t* Ostrzeżenia głosowe na temat ograniczeń prędkości i fotoradarów
+	\n\t* Ikony mapy wyższej rozdzielczości
+	\n\t* Dużo zmian w interfejsie
+	\n\t* Poprawki do wyświetlania odległości, analizatora GPX, obsługi punktów pośrednich, widżetu planowania, wysyłania do OSM, obsługi https
+    </string>
+    <string name="osb_author_or_password_not_specified">Wprowadź nazwę użytkownika OSM i hasło w Ustawieniach</string>
+    <string name="clear_intermediate_points">Wyczyść punkty pośrednie</string>
+    <string name="keep_intermediate_points">Zachowaj punkty pośrednie</string>
+    <string name="new_directions_point_dialog">Masz już ustawione punkty pośrednie.</string>
+    <string name="context_menu_item_directions_to">Trasa z tego miejsca</string>
+    <string name="context_menu_item_directions_from">Trasa do tego miejsca</string>
+    <string name="route_descr_map_location">Mapa: </string>
+    <string name="route_to">Do:</string>
+    <string name="route_via">Przez:</string>
+    <string name="route_from">Z:</string>
+    <string name="speak_warnings_title">Ostrzegaj…</string>
+	<string name="speak_warnings_descr">Konfiguruj ostrzeżenia o ruchu (przymusowe przystanki, progi zwalniające), fotoradarach, ograniczeniach prędkości</string>
+    <string name="speak_speed_limit">Ograniczenia prędkości</string>
+    <string name="speak_cameras">Fotoradary</string>
+	<string name="speak_traffic_warnings">Ostrzeżenia o ruchu</string>
+	<string name="osb_author_dialog_password">Hasło OSM (opcjonalne)</string>
+	</resources>
