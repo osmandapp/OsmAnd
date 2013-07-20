@@ -1339,4 +1339,10 @@
     <string name="route_via">via:</string>
     <string name="route_from">von:</string>
     <string name="osb_author_dialog_password">OSM-Passwort (optional)</string>
-	</resources>
+    <string name="tip_recent_changes_1_5_t">Änderungen in 1.5:
+	\n\t* Sprachansagen für Geschwindigkeitsbegrenzungen und -kameras
+	\n\t* Hochauflösende POI-Symbole
+	\n\t* Viele Bedienungs-Verbesserungen
+	\n\t* Fehlerbehebungen für Entfernungsanzeige, GPX Analyse, Behandlung von Zwischenzielen, Planungs-Widget, OSM-Schnittstelle, https-Kompatibilität
+    </string>
+</resources>
