@@ -62,7 +62,7 @@
   <string name="tip_rotation_switching">Orientamento della mappa</string>
   
   <string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. Ne puoi scaricare una in \'Impostazioni (Dati offline), o passare alle mappe online.</string>
-  <string name="binary_map_download_success">Download completato.\n\t\n\tPer usarle attivare o usa \'Impostazioni\' -&gt; \'Configurazione delle mappe\' -&gt; \'Mappe vettoriali offline\'.</string>
+  <string name="binary_map_download_success">Download completato.\n\t\n\tPer usarle attivare \'Impostazioni\' -&gt; \'Configurazione delle mappe\' -&gt; \'Mappe vettoriali offline\'.</string>
   <string name="tip_day_night_mode">Modo giorno/notte</string>
   
   <string name="tip_osm_improve">Migliora i dati OSM</string>
@@ -129,9 +129,9 @@
   <string name="local_index_mi_rename">Rinomina</string>
   <string name="show_gpx_route">Visualizza sulla mappa</string>
   <string name="poi_filter_nominatim">Nominatim online</string>
-  <string name="search_position_current_location_search">Cerca posizione…</string>
+  <string name="search_position_current_location_search">Ricerca posizione…</string>
   <string name="search_position_current_location_found">Posizione [trovata]</string>
-  <string name="search_position_address">Indirizzi…</string>
+  <string name="search_position_address">Indirizzo…</string>
   <string name="search_position_favorites">Preferiti…</string>
   <string name="search_position_undefined">Non definito</string>
   <string name="search_position_fixed">Fissato</string>
@@ -225,7 +225,7 @@
   <string name="gpx_option_reverse_route">Inverti direzione GPX</string>
   <string name="gpx_option_destination_point">Usa il punto di destinazione attuale</string>
   <string name="gpx_option_from_start_point">Percorri tutta la traccia</string>
-  <string name="switch_to_vector_map_to_see">Mappa vettoriali offline presenti per quest\'area.\n\t\n\tPer usarla \'Menu\'-&gt;\'Definisci vista\'-&gt;\'Fonte Mappa…\'-&gt;\'Mappe vettoriali offline\'.</string>
+  <string name="switch_to_vector_map_to_see">Mappa vettoriali offline presenti per quest\'area.\n\t\n\tPer usarla attivare \'Menu\'-&gt;\'Definisci vista\'-&gt;\'Fonte Mappa…\'-&gt;\'Mappe vettoriali offline\'.</string>
   <string name="choose_audio_stream">Voce guida di uscita</string>
   <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale (dipendente dal sistema)</string>
   <string name="voice_stream_voice_call">Audio chiamate vocali</string>
@@ -387,7 +387,7 @@
   <string name="continuous_rendering_descr">Visualizza un rendering continuo invece di una immagine istantanea</string>
   <string name="rendering_exception">Errore nella visualizzazione dell\'area selezionata</string>
   <string name="rendering_out_of_memory">Memoria insufficiente per visualizzare l\'area selezionata</string>
-  <string name="show_point_options">Utilizza la posizione...</string>
+  <string name="show_point_options">Utilizza la posizione …</string>
   <string name="renderer_load_sucess">Disegno caricato</string>
   <string name="renderer_load_exception">Errore: disegno non caricato</string>
   <string name="renderers">Disegno dei vettori</string>
@@ -567,7 +567,7 @@
   <string name="follow">Segui</string>
   <string name="recalculate_route_to_your_location">Seleziona il mezzo di trasporto:</string>
   <string name="mark_final_location_first">Selezionare una destinazione prima</string>
-  <string name="get_directions">Raggiungi</string>
+  <string name="get_directions">Indicazioni</string>
   <string name="show_gps_status">Visualizza lo stato del gps</string>
   <string name="opening_hours">Orari di apertura</string>
   <string name="opening_changeset">Apertura modifiche…</string>
@@ -1139,7 +1139,7 @@
     <string name="audionotes_plugin_name">Plugin appunti audio</string>
     
 	
-<string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione...\" per assegnare una nota alla posizione specificata</string>
+<string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione ...\" per assegnare una nota alla posizione specificata</string>
     <string name="monitoring_control_stop">ferma</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin Osmand per le curve di livello offline</string>
     <string name="osmand_srtm_long_description_1000_chars">Questo plugin fornisce le linee di livello che possono essere visualizzate nelle mappe offline di OsmAnd. I dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), uno strumento misuratore di terra a bordo, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).</string>
@@ -1267,7 +1267,7 @@
     <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
     <string name="access_mark_final_location_first">Modalità di accesso facilitato: selezionare prima la destinazione</string> 
     <string name="wait_current_task_finished">Prego attendere, il presente lavoro sarà finito</string>
-    <string name="downloading_file_new">In download ...</string>
+    <string name="downloading_file_new">In download …</string>
 	<string name="plugin_distance_point_time">orario</string>
     <string name="plugin_distance_point_hdop">precisione</string>
     <string name="plugin_distance_point_speed">velocità</string>
