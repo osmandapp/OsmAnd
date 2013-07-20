@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
 		\n\t* Вказання напрямку руху по смугам
@@ -1476,4 +1477,11 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="speak_cameras">Попереджати про камери фіксації швидкості</string>
 	<string name="speak_traffic_warnings">Попереджати про перешкоди на шляху</string>
 	<string name="binary_map_download_success">Завантаження закінчено.\n\t\n\tДля використання мап скористайтесь \'Меню\' -&gt; \'Мапа\' -&gt; \'Джерело мапи…\' -&gt; \'Оффлайн векторні мапи\'.</string>
-	</resources>
+	<string name="route_descr_map_location">Мапа: </string>
+    <string name="osb_author_or_password_not_specified">Введіть OSM логін і пароль в налаштуваннях</string>
+    <string name="clear_intermediate_points">Очистити проміжні точки</string>
+    <string name="new_directions_point_dialog">Ви вже задали проміжні точки.</string>
+    <string name="context_menu_item_directions_to">Напрямки до</string>
+    <string name="context_menu_item_directions_from">Напрямки від</string>
+    <string name="route_to">До:</string>
+    </resources>
