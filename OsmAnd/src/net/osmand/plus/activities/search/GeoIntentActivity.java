@@ -201,11 +201,15 @@ public class GeoIntentActivity extends OsmandListActivity {
 	 */
 	private MyService extract(Uri data) {
 		if ("http".equalsIgnoreCase(data.getScheme()) && "maps.google.com".equals(data.getHost())) {
-			String q = data.getQueryParameter("q");
+			String q = data.getQueryParameter("q").split(" ")[0];
 			if (q.indexOf(',') != -1) {
 				int i = q.indexOf(',');
 				String lat = q.substring(0, i);
 				String lon = q.substring(i + 1);
+				if (lat.indexOf(":") != -1) {
+					i = lat.indexOf(":");
+					lat = lat.substring(i + 1);
+				}
 				try {
 					double llat = Double.parseDouble(lat.trim());
 					double llon = Double.parseDouble(lon.trim());
