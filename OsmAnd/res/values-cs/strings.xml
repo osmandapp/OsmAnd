@@ -88,7 +88,7 @@
 \n\t- Další změny
 \n\nSledujte také stránky české podpory osmand.cz "</string>
   <string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
-  <string name="local_openstreetmap_uploading">Odesílám…</string>
+  <string name="local_openstreetmap_uploading">Odesílám …</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Chyb bylo odesláno</string>
   <string name="local_openstreetmap_uploadall">Odeslat všechny</string>
   
@@ -151,7 +151,7 @@
   <string name="osmand_service_descr">Umožní běh aplikace při vypnutém displeji</string>
   <string name="tip_rotation_switching">Natočení mapy</string>
   
-  <string name="binary_map_download_success">Stahování dokončeno.\n\t\n\tNa vektorové mapy můžete přepnout v menu (Mapová data -&gt; Zdroj map-&gt; Vektorové mapy OSM).</string>
+  <string name="binary_map_download_success">Stahování dokončeno.\n\t\n\tNa vektorové mapy můžete přepnout v menu (Mapová data -&gt; Zdroj map -&gt; Vektorové mapy OSM).</string>
   <string name="tip_day_night_mode">Denní/noční režim</string>
   
   <string name="tip_osm_improve">Vylepšování Openstreetmap</string>
@@ -475,7 +475,7 @@
   <string name="continuous_rendering_descr">Při zaškrtnuté volbě se mapa bude vykreslovat postupně</string>
   <string name="rendering_exception">Nastala chyba při vykreslování vybrané oblasti</string>
   <string name="rendering_out_of_memory">Nedostatek paměti pro zobrazení vybrané oblasti</string>
-  <string name="show_point_options">Možnosti bodu...</string>
+  <string name="show_point_options">Možnosti bodu…</string>
   <string name="renderer_load_sucess">Vykreslovač byl úspěšně načten</string>
   <string name="renderer_load_exception">Nastala výjimka: vykreslovač nebyl načten</string>
   <string name="renderers">Vektorový vykreslovač</string>
@@ -1038,12 +1038,13 @@
 </string>
 <string name="tip_day_night_mode_t_v2">"\tVzhled mapy může být u některých vektorových map změněn mezi denním (světlejším) a nočním (tmavším).
 \n\tNoční vzhled je bezpečnější pro jízdu v noci (méně oslňují).
-\n\tZpůsob přepínání vzhledu můžete nastavit v \'Menu\'-&gt;\'Nastavení obrazovky...\'-&gt;\'Denní/noční režim\'
+\n\tZpůsob přepínání vzhledu můžete nastavit v \'Menu\'-&gt;\'Nastavení obrazovky\'-&gt;\'Denní/noční režim\'
 \n\tMožnosti:
 \n\t\'Východ/západ slunce\' - automatické přepínání podle slunce (výchozí)
 \n\t\'Den\' - vždy používá denní režim
 \n\t\'Noc\' - vždy používá noční režim
-\n\t\'Senzor osvětlení\' - vzhled mapy je ovládán senzorem okolního světla na vašem zařízení (pouze pokud je přítomen) "</string>
+\n\t\'Senzor osvětlení\' - vzhled mapy je ovládán senzorem okolního světla na vašem zařízení (pouze pokud je přítomen) "
+	</string>
 <string name="tip_recent_changes_0_8_4_t">"Změny ve verzi 0.8.4 :\n *  Oprava některých chyb
 \n * zámek polohy mapy se neztratí při přerušení
 \n * zapnout službu na pozadí během navigace "</string>
@@ -1079,7 +1080,7 @@
     <string name="native_library_not_running">Aplikace běží v bezpečném režimu (vypněte ho v nastavení).</string>
     <string name="safe_mode_description">Spustit aplikaci v bezpečném režimu (kód pro Android namísto nativního).</string>
     <string name="safe_mode">Bezpečný režim</string>
-    <string name="download_roads_only_item">Pouze silnice</string>
+    <string name="download_roads_only_item">Silniční mapa</string>
     <string name="download_regular_maps">Běžné mapy</string>
     <string name="download_roads_only_maps">Silniční mapy</string>
     <string name="rendering_attr_showRoadMaps_description">Zvolte, kdy zobrazovat silniční mapy:</string>
@@ -1221,7 +1222,7 @@
     <string name="cancel_route">Zrušit trasu</string>
     <string name="clear_destination">Smazat cíl</string>
     <string name="local_indexes_cat_srtm">Vrstevnice</string>
-    <string name="downloading_file_new">"Stahování "</string>
+    <string name="downloading_file_new">Stahuji …</string>
 	<string name="other_location">Ostatní</string>
     <string name="local_osm_changes_backup_successful">Soubor se změnami mapy OSM úspěšně vytvořen %1$s</string>
     <string name="local_osm_changes_backup_failed">Nezdařilo se zálohovat změny mapy OSM</string>
@@ -1251,8 +1252,9 @@
     <string name="search_street_in_neighborhood_cities">Hledat ulice v okolních obcích</string>
     <string name="intermediate_items_sort_return">Průchozí body byly lépe utříděny pro zrychlení cesty do cíle.</string>
     <string name="intermediate_items_sort_by_distance">Utřídit (ode dveří ke dveřím)</string>
-    <string name="tip_recent_changes_1_4_t">"Změny ve verzi 1.4:
-\n\t* Optimální třídění průchozích bodů (obchodní cestující, ode dveří ke dveřím)\n\t* Hledání ulic podle jména (v okolí)\n\t* Modul plánování (nahrání/úprava/uložení tras GPX)\n\t* Nová obrazovka stahování (stahování na pozadí)\n\t* Organizace GPX do adresářů\n\t* Mazání souborů s vrstevnicemi\n\t* Podpora OSM poznámek "</string>
+    <string name="tip_recent_changes_1_4_t">Změny ve verzi 1.4:
+\n\t* Optimální třídění průchozích bodů (obchodní cestující, ode dveří ke dveřím)\n\t* Hledání ulic podle jména (v okolí)\n\t* Modul plánování (nahrání/úprava/uložení tras GPX)\n\t* Nová obrazovka stahování (stahování na pozadí)\n\t* Organizace GPX do adresářů\n\t* Mazání souborů s vrstevnicemi\n\t* Podpora OSM poznámek 
+    </string>
     <string name="tip_recent_changes_1_5_t">Změny ve verzi 1.5:
 	\n\t* Hlasová upozornění na rychlostní omezení a radary
 	\n\t* Mapové ikony s vysokým rozlišením
