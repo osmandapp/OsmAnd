@@ -267,7 +267,7 @@
   <string name="file_can_not_be_renamed">Файл не можна перейменувати.</string>
   <string name="file_with_name_already_exists">Файл з таким ім\'ям вже існує.</string>
   <string name="gpx_navigation">GPX маршрут</string>
-  <string name="poi_query_by_name_matches_categories">Several POI categories found matching the query :</string>
+  <string name="poi_query_by_name_matches_categories">Деякі категорії POI відповідають запиту, можете використовувати їх для створення фільтра:</string>
   <string name="data_to_search_poi_not_available">Локальні дані для пошука POI за іменем не знайдено.</string>
   <string name="poi_filter_by_name">Пошук за назвою</string>
   <string name="old_poi_file_should_be_deleted">Дані POI \'%1$s\' застаріли і можуть бути вилучені.</string>
@@ -325,7 +325,8 @@
   <string name="local_index_mi_delete">Вилучити</string>
   <string name="local_index_mi_reload">Оновити з SD-картки</string>
   <string name="local_index_download">Завантажити</string>
-  <string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
+  <string name="local_index_tile_data">\nМінімальний рівень: %2$d Максимальний рівень: %3$d Завантажуваний: %4$s
+\nЗавантажені рівні: %5$s</string>
   <string name="local_index_poi_data">POI дані</string>
   <string name="local_index_address_data">Адреси</string>
   <string name="local_index_transport_data">Траснпорт</string>
@@ -350,7 +351,7 @@
   <string name="tts_language_not_supported_title">Мова не підтримується</string>
   <string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to go to the Market to look for another TTS engine? Otherwise the preset TTS language will be used.</string>
   <string name="tts_missing_language_data_title">Дані відсутні</string>
-  <string name="tts_missing_language_data">No data for the selected language is installed. Do you want to go to the Market to install?</string>
+  <string name="tts_missing_language_data">Для даної мови відсутні дані TTS. Завантажити дані з Маркету?</string>
   <string name="gpx_option_reverse_route">Виберіть зворотній напрямок</string>
   <string name="gpx_option_destination_point">Використовувати поточний пункт призначення</string>
   <string name="gpx_option_from_start_point">Пройти увесь шлях спочатку</string>
