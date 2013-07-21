@@ -325,7 +325,7 @@
   <string name="local_index_mi_delete">Вилучити</string>
   <string name="local_index_mi_reload">Оновити з SD-картки</string>
   <string name="local_index_download">Завантажити</string>
-  <string name="local_index_tile_data">\nМінімальний рівень: %2$d Максимальний рівень: %3$d Завантажуваний: %4$s
+  <string name="local_index_tile_data">Дані мапи: %1$s \nМінімальний масштаб: %2$d Максимальний масштаб: %3$d Завантажуваний: %4$s
 \nЗавантажені рівні: %5$s</string>
   <string name="local_index_poi_data">POI дані</string>
   <string name="local_index_address_data">Адреси</string>
