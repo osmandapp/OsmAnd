@@ -1041,7 +1041,7 @@
 	<string name="search_POI_level_btn">Sök efter fler</string>
 	<string name="choose_available_region">Välj region från lista</string>
 	<string name="choose_intersected_street">Välj korsande gata</string>
-	<string name="app_mode_default">Bläddra i kartan</string>
+	<string name="app_mode_default">Titta på kartan</string>
 	<string name="app_mode_car">Bil</string>
 	<string name="app_mode_bicycle">Cykel</string>
 	<string name="app_mode_pedestrian">Fotgängare</string>
@@ -1167,7 +1167,7 @@
 	<string name="local_index_gpx_timemoving">\nTid i rörelse: %1$d:%2$02d:%3$02d</string>
 	<string name="plugin_distance_point_hdop">precision</string>
     <string name="tip_recent_changes_1_5_t">Förändringar i 1.5:
-	\n\t* Röstvarningar angående hastighetsbegränsningar och fartkameror
+	\n\t* Röstvarningar vid hastighetsbegränsningar och fartkameror
 	\n\t* Högkvalitativa kartikoner
 	\n\t* Massor av förändringar av gränssnittet
 	\n\t* Buggfixar i avståndsvisning, GPX-analys, behandling av waypoints, planeringswidget, OSM-uppladdning, https-behandling
