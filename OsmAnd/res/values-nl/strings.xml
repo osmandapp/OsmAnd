@@ -1512,4 +1512,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="context_menu_item_directions_from">Aanwijzingen vanaf</string>
     <string name="route_descr_map_location">Kaart: </string>
     <string name="route_to">Naar:</string>
-    </resources>
+    <string name="route_via">Via:</string>
+    <string name="osb_author_dialog_password">OSM wachtwoord (optioneel)</string>
+	</resources>
