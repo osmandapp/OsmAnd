@@ -706,8 +706,8 @@ public class MapActivityActions implements DialogProvider {
 				android.R.layout.simple_spinner_item, 
 				fromActions
 				);
+		fromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		fromSpinner.setAdapter(fromAdapter);
-		fromSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		if(style.routeFromMapPoint && mapView != null) {
 			fromSpinner.setSelection(1);
 		}

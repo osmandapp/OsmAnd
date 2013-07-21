@@ -52,34 +52,7 @@
 	</target>
 
 
-	<!-- Puts the project's resources into the output package file
-         This actually can create multiple resource package in case
-         Some custom apk with specific configuration have been
-         declared in default.properties.
-         -->
-	<target name="-package-resources" depends="-crunch">
-		<!-- only package resources if *not* a library project -->
-		<do-only-if-not-library elseText="Library project: do not package resources...">
-			<aapt executable="${aapt}" command="package" versioncode="${version.code}" versionname="${version.name}" debug="${build.is.packaging.debug}" manifest="${out.manifest.abs.file}" assets="${asset.absolute.dir}" androidjar="${project.target.android.jar}" apkfolder="${out.absolute.dir}" nocrunch="${build.packaging.nocrunch}" resourcefilename="${resource.package.file.name}" resourcefilter="${aapt.resource.filter}" libraryResFolderPathRefid="project.library.res.folder.path" libraryPackagesRefid="project.library.packages" previousBuildType="${build.last.target}" buildType="${build.target}" ignoreAssets="${aapt.ignore.assets}"  >
-				<res path="${out.res.absolute.dir}" />
-				<res path="${resource.absolute.dir}" />
-				<!-- <nocompress /> forces no compression on any files in assets or res/raw -->
-				<!-- <nocompress extension="xml" /> forces no compression on specific file extensions in assets and res/raw -->
-			</aapt>
-		</do-only-if-not-library>
 
-		<!-- osmchange -->
-		<echo>Packaging aditional OsmAnd resources and assets... to ${out.packaged.file} from ${raw.absolute.dir}</echo>
-		<exec executable="${aapt}">
-			<!-- failonerror="true"> -->
-			<arg value="package" />
-			<arg value="-u" />
-			<arg value="-F" />
-			<arg value="${out.absolute.dir}/${resource.package.file.name}" />
-			<arg value="${raw.absolute.dir}" />
-		</exec>
-		<!-- osmchange -->
-	</target>
 
 	<!-- Extra target -->
 	<target name="-pre-build" depends="copy_resources,fix_apostrophe_issues">

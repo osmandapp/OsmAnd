@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1323,8 +1323,8 @@
 	<string name="tip_recent_changes_1_5_t">Cambiamenti nella 1.5:↵
 →\n\t* Avvisi vocali per autovelox e limiti di velocità↵
 →\n\t* Icone mappe ad alta densità↵
-→\n\t* Molti camimenti dell'interfaccia grafica↵
-→\n\t* Correzione di errori nella visualizzazione della distanza, l'analizzatore GPX, utilizzo punti di passaggio, widget di pianificazione, upload OSM, utilizzo https↵
+→\n\t* Molti camimenti dell\'interfaccia grafica↵
+→\n\t* Correzione di errori nella visualizzazione della distanza, l\'analizzatore GPX, utilizzo punti di passaggio, widget di pianificazione, upload OSM, utilizzo https↵
     </string>
     <string name="osb_author_or_password_not_specified">Prego specificare il nome utente OSM e la password nelle Impostazioni</string>
     <string name="clear_intermediate_points">Cancella i punti intermedi</string>
