@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -1498,4 +1498,18 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="speak_cameras">Meld snelheidscamera\'s</string>
 	<string name="speak_traffic_warnings">Meld verkeerswaarschuwingen</string>
 	<string name="route_from">Van:</string>
+    <string name="tip_recent_changes_1_5_t">Wijzigingen in 1.5:
+	\n\t* Gesproken waarschuwingen voor snelheidsbeperkingen en -camera\'s
+	\n\t* Kaart-iconen voor high-density schermen
+	\n\t* Veel interface-wijzigingen
+	\n\t* Bugfixes in afstandsdisplay, GPX analysator, routepuntenverwerking, planning widget, OSM uploading, https afhandeling
+    </string>
+    <string name="osb_author_or_password_not_specified">Specificeer OSM gebruikersnaam en wachtwoord in Instellingen</string>
+    <string name="clear_intermediate_points">Wis routepunten</string>
+    <string name="keep_intermediate_points">Bewaar routepunten</string>
+    <string name="new_directions_point_dialog">Je hebt al routepunten gemaakt.</string>
+    <string name="context_menu_item_directions_to">Aanwijzingen naar</string>
+    <string name="context_menu_item_directions_from">Aanwijzingen vanaf</string>
+    <string name="route_descr_map_location">Kaart: </string>
+    <string name="route_to">Naar:</string>
     </resources>
