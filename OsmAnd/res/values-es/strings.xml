@@ -5,9 +5,9 @@
   <string name="show_lanes">Mostrar carriles</string>
   <string name="avoid_unpaved">Evitar carreteras sin pavimentar</string>
   <string name="avoid_ferries">Evitar transbordadores</string>
-  <string name="avoid_in_routing_title">Evitar…</string>
+  <string name="avoid_in_routing_title">Evitar-…</string>
   <string name="avoid_in_routing_descr">Evita carreteras de peaje, sin pavimentar, transbordadores</string>
-  <string name="show_warnings_title">Mostrar alarmas…</string>
+  <string name="show_warnings_title">Mostrar alarmas-…</string>
   <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, stops, vadenes), radares, y carriles</string>
   <string name="map_widget_fluorescent">Rutas fluorescentes</string>
   <string name="map_widget_show_ruler">Escala</string>
@@ -30,7 +30,7 @@
 \n\t- Disponibilidad de versión actual también para ficheros de índice desactivados - se muestra en la pantalla de Descarga en verde oscuro y azul oscuro
 \n\t- Otros cambios "</string>
   <string name="update_poi_does_not_change_indexes">Los cambios a PDIs dentro de la aplicación no afectan a los archivos de mapa descargados; los cambios se guardan en un archivo local.</string>
-  <string name="local_openstreetmap_uploading">Enviando…</string>
+  <string name="local_openstreetmap_uploading">Enviando-…</string>
   <string name="local_openstreetmap_were_uploaded">{0} PDIs/Fallos enviados</string>
   <string name="local_openstreetmap_uploadall">Enviar todos</string>
   <string name="local_openstreetmap_show">Mostrar en el mapa</string>
@@ -91,7 +91,7 @@
   <string name="tip_rotation_switching">Rotación del mapa</string>
   
   <string name="switch_to_raster_map_to_see">No hay mapa vectorial descargado para esta localización. \n\t\n\tPuedes descargarlo en \'Opciones\' -&gt; \'Descarga de datos\', o pasar a mapas en línea vía \'Opciones\' -&gt; \'Mapas\'.</string>
-  <string name="binary_map_download_success">Descarga correcta.\n\t\n\tPara usarla, activa \'Opciones\' -&gt; \'Configuración de mapas\' -&gt; \'Mapas descargados\'.</string>
+  <string name="binary_map_download_success">Descarga correcta.\n\t\n\tPara usarla, activa \'Menú\' -&gt; \'Definir vista\' -&gt; \'Fuente de mapas…\' -&gt; \'Mapas vectoriales descargados\'.</string>
   <string name="tip_day_night_mode">Modo Día/Noche</string>
   
   <string name="tip_osm_improve">Mejora de los datos OSM</string>
@@ -105,7 +105,7 @@
   
   <string name="use_transparent_map_theme">Tema transparente</string>
   <string name="native_library_not_supported">La biblioteca nativa no está soportada en este dispositivo.</string>
-  <string name="init_native_library">Inicializando biblioteca nativa…</string>
+  <string name="init_native_library">Inicializando biblioteca nativa-…</string>
   <string name="choose_auto_follow_route">Auto-centrar vista de mapa</string>
   <string name="choose_auto_follow_route_descr">Tiempo hasta que la vista del mapa vuelve a sincronizarse con la posición actual</string>
   <string name="auto_follow_route_never">Nunca</string>
@@ -962,7 +962,8 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="map_widget_renderer">Estilo de dibujado</string>
 <string name="tip_rotation_switching_t_v2">"﻿\tPuedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.\n\tLas opciones son:\n\t- \'No girar\': el mapa no girará. El norte está siempre arriba\n\t- \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección\n\t- \'A la brújula\' - el mapa se alinea con la lectura de la brújula del dispositivo "</string>
 <string name="tip_map_switch_t_v2">"\tLa fuente del mapa y las capas mostradas se cambian en la vista del mapa a través de \'Menú\'-&gt; \'Definir vista\'.\n\tEn \'Fuente de mapas...\' puedes elegir usar los mapas vectoriales descargados, fuentes predefinidas de teselas (online) (activa el extra \'Mapas Online\' para ello), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en un PC.\n\tOsmAnd también soporta fuentes personalizadas. "</string>
-<string name="tip_day_night_mode_t_v2">"\tLa apariencia del mapa puede cambiarse para algunos mapas vectoriales entre día (más brillante) y noche (más oscuro).\n\tLos colores del modo noche son más seguros para la conducción nocturna.\n\tPuedes establecer una política para la conmutación día/noche en \'Menú\'-&gt; \'Configurar pantalla…\'-&gt; \'Mapa Día/Noche\'.\n\tLas opciones son:\n\t- \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto)\n\t- \'Día\': utiliza siempre el modo día\n\t- \'Noche\': utiliza siempre el modo noche\n\t- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado) "</string>
+<string name="tip_day_night_mode_t_v2">"\tLa apariencia del mapa puede cambiarse para algunos mapas vectoriales entre día (más brillante) y noche (más oscuro).\n\tLos colores del modo noche son más seguros para la conducción nocturna.\n\tPuedes establecer una política para la conmutación día/noche en \'Menú\'-&gt; \'Configura pantalla…\'-&gt; \'Mapa Día/Noche\'.\n\tLas opciones son:\n\t- \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto)\n\t- \'Día\': utiliza siempre el modo día\n\t- \'Noche\': utiliza siempre el modo noche\n\t- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado) "
+	</string>
 <string name="tip_app_mode_t_v2">"\tOsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.\n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono coche, bicicleta o peatón), o al crear una ruta. "</string>
 <string name="osmand_short_description_80_chars">OsmAnd es una aplicación de navegación de código abierto para mapas con y sin conexión</string>
 <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada) OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión incluyendo indicaciones giro-a-giro mediante voz. Algunas de las características fundamentales: - Completa funcionalidad sin conexión (almacena los mapas de vectores o teselas descargados en una carpeta seleccionable) - Mapas vectoriales compactos disponibles de todo el planeta - Descarga de mapas de país o región directamente desde la app - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, lineas de contorno, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - opción de cambio automático de vista diurna/nocturna - opción de zoom dependiente de la velocidad - opción de alineamiento del mapa opcional según brújula o dirección de movimiento - opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas Limitaciones de la versión gratuita de OsmAnd: - Limite de número de mapas descargados - Sin acceso a los PDIs de Wikipedia descargados OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características o hacer una donación en general en osmand.net. "</string>
@@ -990,7 +991,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="map_widget_intermediate_distance">Punto de ruta</string>
     <string name="ending_point_too_far">Punto final demasiado lejos de la carretera más cercana.</string>
     <string name="btn_add_tag">Añade Etiqueta</string>
-    <string name="btn_advanced_mode">Modo Avanzado…</string>
+    <string name="btn_advanced_mode">Modo Avanzado-…</string>
     <string name="poi_filter_parking">aparcamiento</string>
     <string name="poi_filter_emergency">Emergencia</string>
     <string name="poi_filter_public_transport">Transporte Público</string>
@@ -1053,7 +1054,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     
     
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
-    <string name="audionotes_location_not_defined">La localización no está definida aún para tomar notas de audio</string>
+    <string name="audionotes_location_not_defined">La localización para asociar la nota no está definida aún. \"Usar localización…\" para asignar una nota a la localización indicada</string>
     <string name="monitoring_control_stop">para</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     
@@ -1111,7 +1112,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
     <string name="tip_recent_changes_1_2_t">"Arreglos en 1.2.1:\n\t* Arreglado Geo Intent (Foursquare, c: geo)\n\t* Arreglado el temblor de pantalla durante la navegación\n\t* Otras pequeñas correcciones\nCambios en 1.2:\n\t* Corrección de errores (enrutamiento afinado, búsqueda, grabación de AV, los mensajes de voz, algunas mejoras de visualización)\n\t* Configuración de superposición de sombreado más fácil (requiere extra de Curvas de Nivel)\n\t* Ahora acepta enlaces de localización de maps.google.com\n\t* Nuevo control (Información GPS)\n\t* Filtro de Kalman para brújula\n\t* Soporte para reloj Pebble\n\t* Añadido soporte multiventana para nuevos dispositivos Samsung "</string>
     <string name="prefer_motorways">Prefiero autopistas</string>
-	<string name="prefer_in_routing_title">Prefiero…</string>
+	<string name="prefer_in_routing_title">Prefiero-…</string>
 	<string name="prefer_in_routing_descr">Preferencia por autopistas</string>
     <string name="max_speed_none">ninguna</string>
     <string name="av_def_action_choose">Seleccionar a petición</string>
@@ -1184,7 +1185,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="distance_measurement_clear_route">Borrar todos los puntos</string>
     <string name="distance_measurement_save_gpx">Guardar como GPX</string>
     <string name="distance_measurement_load_gpx">Abrir GPX existente</string>
-    <string name="local_index_gpx_timespan">\nTiempo recorrido: %1$d:%2$02d:%3$02d</string>
+    <string name="local_index_gpx_timespan">\nTiempo total: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nTiempo moviendo: %1$d:%2$02d:%3$02d</string>
 	<string name="av_camera_focus">método de enfoque</string>
 	<string name="av_camera_focus_descr">elige método de enfoque interno</string>
