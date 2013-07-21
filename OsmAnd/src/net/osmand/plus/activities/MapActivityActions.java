@@ -703,10 +703,11 @@ public class MapActivityActions implements DialogProvider {
 		}
 		final Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
 		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(view.getContext(), 
-				android.R.layout.simple_spinner_dropdown_item, 
+				android.R.layout.simple_spinner_item, 
 				fromActions
 				);
 		fromSpinner.setAdapter(fromAdapter);
+		fromSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		if(style.routeFromMapPoint && mapView != null) {
 			fromSpinner.setSelection(1);
 		}
@@ -733,9 +734,10 @@ public class MapActivityActions implements DialogProvider {
 		}
 		final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
 		ArrayAdapter<String> toAdapter = new ArrayAdapter<String>(view.getContext(), 
-				android.R.layout.simple_spinner_dropdown_item, 
+				android.R.layout.simple_spinner_item, 
 				toActions
 				);
+		toAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		toSpinner.setAdapter(toAdapter);
 		return toSpinner;
 	}
