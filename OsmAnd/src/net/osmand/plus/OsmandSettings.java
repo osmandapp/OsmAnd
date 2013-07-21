@@ -1073,6 +1073,9 @@ public class OsmandSettings {
 		if (ip.trim().length() > 0) {
 			list.addAll(Arrays.asList(ip.split("--")));
 		}
+		while(list.size() > sz) {
+			list.remove(list.size() - 1);
+		}
 		while(list.size() < sz) {
 			list.add("");
 		}
