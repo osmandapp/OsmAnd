@@ -439,7 +439,7 @@
   <string name="send_location_email_pattern">Pro zobrazení polohy následujte link %1$s v prohlížeči nebo android intent link %2$s</string>
   <string name="send_location">Poslat polohu</string>
   <string name="context_menu_item_share_location">Sdílet polohu</string>
-  <string name="add_waypoint_dialog_added">Bod \'\'{0}\'\' byl přidán</string>
+  <string name="add_waypoint_dialog_added">Cíl \'\'{0}\'\' byl přidán</string>
   <string name="add_waypoint_dialog_title">Přidat bod na zaznamenávanou GPX trasu</string>
   <string name="context_menu_item_add_waypoint">Přidat bod na GPX trasu</string>
   <string name="use_osmand_routing_service">Navigace OsmAnd &gt;20km</string>
@@ -1022,9 +1022,9 @@
 <string name="poi_filter_sightseeing">Pamětihodnosti</string>
 <string name="snap_to_road">Pohyb po silnicích</string>
 <string name="intermediate_point_too_far">Bod %1$s je příliš daleko od nejbližší cesty.</string>
-<string name="arrived_at_intermediate_point">Dorazili jste do průjezdního bodu</string>
-<string name="context_menu_item_intermediate_point">Přidat bod trasy</string>
-<string name="map_widget_intermediate_distance">Bod trasy</string>
+<string name="arrived_at_intermediate_point">Dorazili jste do mezicíle</string>
+<string name="context_menu_item_intermediate_point">Přidat mezicíl</string>
+<string name="map_widget_intermediate_distance">Mezicíl</string>
 <string name="ending_point_too_far">Cíl je příliš daleko od nejbližší cesty.</string>
 <string name="btn_add_tag">Přidat označení</string>
 <string name="btn_advanced_mode">Pokročilé…</string>
@@ -1048,13 +1048,13 @@
 <string name="tip_recent_changes_0_8_4_t">"Změny ve verzi 0.8.4 :\n *  Oprava některých chyb
 \n * zámek polohy mapy se neztratí při přerušení
 \n * zapnout službu na pozadí během navigace "</string>
-    <string name="context_menu_item_last_intermediate_point">Přídat jako poslední bod trasy</string>
-    <string name="context_menu_item_first_intermediate_point">Nastavit první bod trasy</string>
-    <string name="add_as_last_destination_point">Přidat jako poslední bod trasy</string>
-    <string name="add_as_first_destination_point">Přidat jako první bod trasy</string>
+    <string name="context_menu_item_last_intermediate_point">Přídat jako poslední cíl</string>
+    <string name="context_menu_item_first_intermediate_point">Nastavit jako první cíl</string>
+    <string name="add_as_last_destination_point">Přidat jako poslední cíl</string>
+    <string name="add_as_first_destination_point">Přidat jako první cíl</string>
     <string name="replace_destination_point">Nahradit cílový bod</string>
     <string name="new_destination_point_dialog">Cílový bod je již nastaven.</string>
-    <string name="target_point">Cílový bod %1$s</string>
+    <string name="target_point">Cíl %1$s</string>
     <string name="target_points">Cíle</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd\n\nOsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).\nVeškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
 \n\nVýčet některých hlavních funkcí:\n- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného adresáře)\n- kompaktní offline vektorové mapy celého světa dostupné zdarma\n- stahování národních nebo regionálních map přímo z aplikace\n- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností\n- offline vyhledávání adres a bodů zájmu\n- offline navigace na krátké vzdálenosti (experimentální)\n- režim auto, kolo a pěší s volitelným:\n    - přepínáním denního a nočního zobrazení\n    - automatickým zvětšováním podle rychlosti pohybu\n    - natáčením mapy podle kompasu nebo směru pohybu\n    - naváděním do jízdních pruhů, zobrazením rychlostních limitů\n    - TTS nebo audio hlasovými pokyny
@@ -1063,8 +1063,8 @@
 \n\nOsmAnd+ je placená verze aplikace, jejím zakoupením sponzorujete projekt, vývoj nových funkcí a obdržíte nejnovější aktualizace.\n\nVýčet některých hlavních funkcí:\n- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného adresáře)\n- kompaktní offline vektorové mapy celého světa dostupné zdarma\n- neomezené stahování národních nebo regionálních map přímo z aplikace\n- funkce offline Wikipedie (stažení informací o bodech zájmu z Wikipedie), vynikající pro turisty\n- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností\n- offline vyhledávání adres a bodů zájmu\n- offline navigace na krátké vzdálenosti (experimentální)\n- režim auto, kolo a pěší s volitelným:\n    - přepínáním denního a nočního zobrazení\n    - automatickým zvětšováním podle rychlosti pohybu\n    - natáčením mapy podle kompasu nebo směru pohybu\n    - naváděním do jízdních pruhů, zobrazením rychlostních limitů\n    - TTS nebo audio hlasovými pokyny "</string>
 	<string name="map_widget_monitoring_services">Sledování polohy</string>
 	<string name="no_route">Žádná cesta</string>
-	<string name="delete_target_point">Smazat cílový bod</string>
-	<string name="intermediate_point">Bod trasy %1$s</string>
+	<string name="delete_target_point">Smazat cíl</string>
+	<string name="intermediate_point">Mezicíl %1$s</string>
     <string name="map_widget_show_destination_arrow">Zobrazit směr do cíle</string>
     <string name="enable_plugin_monitoring_services">Zapněte modul \"služba na pozadí\", pro záznam trasy a přímý přenos souřadnic</string>
     <string name="non_optimal_route_calculation">Počítat možná méně výhodnout trasu na dlouhé vzdálenosti</string>
@@ -1250,7 +1250,7 @@
     <string name="context_menu_item_destination_point">Nastavit jako cíl</string>
     <string name="please_select_address">Zvolte nejprve město nebo ulici</string>
     <string name="search_street_in_neighborhood_cities">Hledat ulice v okolních obcích</string>
-    <string name="intermediate_items_sort_return">Průchozí body byly lépe utříděny pro zrychlení cesty do cíle.</string>
+    <string name="intermediate_items_sort_return">Mezicíle byly lépe utříděny pro zrychlení cesty.</string>
     <string name="intermediate_items_sort_by_distance">Utřídit (ode dveří ke dveřím)</string>
     <string name="tip_recent_changes_1_4_t">Změny ve verzi 1.4:
 \n\t* Optimální třídění průchozích bodů (obchodní cestující, ode dveří ke dveřím)\n\t* Hledání ulic podle jména (v okolí)\n\t* Modul plánování (nahrání/úprava/uložení tras GPX)\n\t* Nová obrazovka stahování (stahování na pozadí)\n\t* Organizace GPX do adresářů\n\t* Mazání souborů s vrstevnicemi\n\t* Podpora OSM poznámek 
@@ -1259,11 +1259,11 @@
 	\n\t* Hlasová upozornění na rychlostní omezení a radary
 	\n\t* Mapové ikony s vysokým rozlišením
 	\n\t* Četné změny uživatelského rozhraní
-	\n\t* Oprava chyb v zobrazení vzdálenosti, GPX analyzéru, zpracování bodů trasy, plánovacím modulu, nahrávání do OSM uploading, HTTPS
+	\n\t* Oprava chyb v zobrazení vzdálenosti, GPX analyzéru, práce s mezicíli, plánovacím modulu, nahrávání do OSM uploading, HTTPS
     </string>
     <string name="osb_author_or_password_not_specified">Prosím zadejte v Nastaveních uživatelské jméno a heslo pro vstup do OSM</string>
-    <string name="clear_intermediate_points">Smazat body trasy</string>
-    <string name="keep_intermediate_points">Zachovat body trasy</string>
+    <string name="clear_intermediate_points">Smazat cíle</string>
+    <string name="keep_intermediate_points">Zachovat cíle</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_to">Do:</string>
     <string name="route_via">Přes:</string>
@@ -1285,7 +1285,7 @@
 	<string name="av_camera_focus_continuous">Kamera ostří souvisle</string>
 	<string name="av_photo_play_sound">Přehrát zvuk závěrky</string>
 	<string name="av_photo_play_sound_descr">Zvolte zda při vyfotografování snímku má být přehrán zvuk závěrky</string>
-<string name="new_directions_point_dialog">Body trasy jsou již zvoleny.</string>
+<string name="new_directions_point_dialog">Cíle jsou již zvoleny.</string>
     <string name="context_menu_item_directions_to">Navigovat sem</string>
     <string name="context_menu_item_directions_from">Navigovat odsud</string>
     <string name="local_index_gpx_timemoving">\nČas pohybu: %1$d:%2$02d:%3$02d</string>
