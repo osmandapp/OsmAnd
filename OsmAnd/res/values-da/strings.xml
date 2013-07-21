@@ -1548,11 +1548,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_via">Via:</string>
     <string name="route_from">Fra:</string>
     <string name="osb_author_dialog_password">OSM kodeord (valgfrit)</string>
-	<string name="tip_recent_changes_1_5_t">Ændringer i 1.5:↵
-\n * Stemmeadvarsler om hastighedsbegrænsninger og fotofælder↵
-\n * Kortikoner i højopløsning↵
-\n * Masser af brugergrænseflade ændringer↵
-\n * Fejlrettelser i afstandsvisning, GPX analyse, rutepunkt håndtering, planlægnings modul, overførelse til OSM, https håndtering↵
+	<string name="tip_recent_changes_1_5_t">Ændringer i 1.5:
+\n * Stemmeadvarsler om hastighedsbegrænsninger og fotofælder
+\n * Kortikoner i højopløsning
+\n * Masser af brugergrænseflade ændringer
+\n * Fejlrettelser i afstandsvisning, GPX analyse, rutepunkt håndtering, planlægnings modul, overførelse til OSM, https håndtering
     </string>
     <string name="osb_author_or_password_not_specified">Angiv OSM bruger og adgangskode i \'Indstillinger\'</string>
     <string name="clear_intermediate_points">Slet mellemliggende punkter</string>
