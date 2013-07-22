@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -1273,4 +1274,17 @@
     Zobraziť nastavenia pre sledovanie vašej cesty do GPX súboru alebo pomocou on-line webovej služby.</string>
     <string name="local_indexes_cat_srtm">Dáta s vrstevnicami</string>
     <string name="downloading_file_new">Sťahovanie…</string>
+	<string name="keep_intermediate_points">Zachovať prechodné body</string>
+    <string name="new_directions_point_dialog">Už máte určené prechodné body.</string>
+    <string name="context_menu_item_directions_to">Pokyny sem</string>
+    <string name="context_menu_item_directions_from">Pokyny odtiaľto</string>
+    <string name="route_descr_map_location">Mapa: </string>
+    <string name="route_to">Kam:</string>
+    <string name="route_via">Cez:</string>
+    <string name="route_from">Odkiaľ:</string>
+    <string name="speak_warnings_title">Ohlasovať varovania…</string>
+	<string name="speak_warnings_descr">Konfigurácia dopravných varovaní (vynútené zastavenie, spomaľovače), upozornenie pred radarom, rýchlostné obmedzenia</string>
+    <string name="speak_speed_limit">Ohlásiť obmedzenie rýchlosti</string>
+    <string name="speak_cameras">Ohlásiť radary</string>
+	<string name="speak_traffic_warnings">Ohlásiť dopravné varovania</string>
 	</resources>
