@@ -13,7 +13,7 @@
 
 	<property name="use.dir" value="../OsmAnd-java/src" />
 	<property name="use.absolute.dir" location="${use.dir}" />
-	<property name="raw.absolute.dir" location="raw" />
+	<property name="src.absolute.dir" location="src" />
 	<property name="base.dir" location="." />
 
 
@@ -29,22 +29,22 @@
 				<include name="**/*"/>
 			</fileset>
 		</copy>
-		<copy todir="${use.absolute.dir}/net/osmand/router/">
+		<copy todir="${src.absolute.dir}/net/osmand/router/">
 			<fileset dir="../../resources/routing/" >
 				<include name="*.xml"/>
 			</fileset>
 		</copy>
-		<copy todir="${use.absolute.dir}/net/osmand/render/">
+		<copy todir="${src.absolute.dir}/net/osmand/render/">
 			<fileset dir="../../resources/rendering_styles/" >
 				<include name="*.xml"/>
 			</fileset>
 		</copy>
-		<copy todir="${use.absolute.dir}/net/osmand/osm/">
+		<copy todir="${src.absolute.dir}/net/osmand/osm/">
 			<fileset dir="../../resources/obf_creation/" >
 				<include name="rendering_types.xml"/>
 			</fileset>
 		</copy>
-		<copy todir="${use.absolute.dir}/net/osmand/map/">
+		<copy todir="${src.absolute.dir}/net/osmand/map/">
 			<fileset dir="../../resources/countries-info/" >
 				<include name="countries.reginfo"/>
 			</fileset>
@@ -56,13 +56,6 @@
 
 	<!-- Extra target -->
 	<target name="-pre-build" depends="copy_resources,fix_apostrophe_issues">
-		<delete dir="${raw.absolute.dir}" verbose="${verbose}" />
-		<mkdir dir="${raw.absolute.dir}/classes" />
-		<copy todir="${raw.absolute.dir}">
-			<fileset dir="${use.absolute.dir}">
-				<exclude name="**/*.java" />
-			</fileset>
-		</copy>
 		<if>
 			<condition>
 				<isset property="versionFeatures" />

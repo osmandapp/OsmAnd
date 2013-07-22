@@ -75,6 +75,9 @@ public class RendererRegistry {
 	private RenderingRulesStorage loadRenderer(String name, final Map<String, RenderingRulesStorage> loadedRenderers, 
 			final Map<String, String> renderingConstants) throws IOException,  XmlPullParserException {
 		InputStream is = getInputStream(name);
+		if(is == null) {
+			return null;
+		}
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(is, "UTF-8");
