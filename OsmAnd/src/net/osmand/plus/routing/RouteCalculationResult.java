@@ -841,6 +841,7 @@ public class RouteCalculationResult {
 		public RouteDirectionInfo directionInfo;
 		public int distanceTo;
 		public boolean intermediatePoint;
+		public String pointName;
 		public int imminent;
 		private int directionInfoInd;
 	}
