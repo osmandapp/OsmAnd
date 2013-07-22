@@ -1500,18 +1500,18 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="route_from">Van:</string>
     <string name="tip_recent_changes_1_5_t">Wijzigingen in 1.5:
 	\n\t* Gesproken waarschuwingen voor snelheidsbeperkingen en -camera\'s
-	\n\t* Kaart-iconen voor high-density schermen
-	\n\t* Veel interface-wijzigingen
-	\n\t* Bugfixes in afstandsdisplay, GPX analysator, routepuntenverwerking, planning widget, OSM uploading, https afhandeling
+	\n\t* Kaarticonen voor hogedichtheidschermen
+	\n\t* Veel interfacewijzigingen
+	\n\t* Bugs opgelost in afstandsdisplay, GPX-analysator, routepuntenverwerking, planning widget, OSM-uploaden, HTTPS-afhandeling
     </string>
-    <string name="osb_author_or_password_not_specified">Specificeer OSM gebruikersnaam en wachtwoord in Instellingen</string>
-    <string name="clear_intermediate_points">Wis routepunten</string>
-    <string name="keep_intermediate_points">Bewaar routepunten</string>
-    <string name="new_directions_point_dialog">Je hebt al routepunten gemaakt.</string>
+    <string name="osb_author_or_password_not_specified">Specificeer OSM-gebruikersnaam en -wachtwoord in Instellingen</string>
+    <string name="clear_intermediate_points">Wis tussenpunten</string>
+    <string name="keep_intermediate_points">Bewaar tussenpunten</string>
+    <string name="new_directions_point_dialog">Je hebt al tussenpunten gemaakt.</string>
     <string name="context_menu_item_directions_to">Aanwijzingen naar</string>
     <string name="context_menu_item_directions_from">Aanwijzingen vanaf</string>
     <string name="route_descr_map_location">Kaart: </string>
     <string name="route_to">Naar:</string>
     <string name="route_via">Via:</string>
-    <string name="osb_author_dialog_password">OSM wachtwoord (optioneel)</string>
+    <string name="osb_author_dialog_password">OSM-wachtwoord (optioneel)</string>
 	</resources>
