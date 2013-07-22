@@ -89,9 +89,9 @@ public class DownloadOsmandIndexesHelper {
 			for (String key : mapping.keySet()) {
 				String target = mapping.get(key);
 				if (target.endsWith("-tts/_ttsconfig.p") && target.startsWith("voice/")) {
-					String voice = target.substring("voice/".length(), target.length() - "-tts/_ttsconfig.p".length());
+					String voice = target.substring("voice/".length(), target.length() - "/_ttsconfig.p".length());
 					File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
-					result.add(new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", key, destFile.getPath()));
+					result.add(new AssetIndexItem(voice +ext, "voice", date, dateModified, "0.1", "", key, destFile.getPath()));
 				} else if (target.endsWith("/_config.p") && target.startsWith("voice/")) {
 					String voice = target.substring("voice/".length(), target.length() - "/_config.p".length());
 					IndexItem item = result.getIndexFilesByName(key);
@@ -106,7 +106,7 @@ public class DownloadOsmandIndexesHelper {
 							log.error("Parse exception", es);
 						}
 						item.date = date;
-						item.attachedItem = new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", key, destFile.getPath());
+						item.attachedItem = new AssetIndexItem(voice +extvoice, "voice", date, dateModified, "0.1", "", key, destFile.getPath());
 					}
 				}
 			}
