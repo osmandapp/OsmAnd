@@ -5,11 +5,11 @@ package net.osmand.data;
 public enum AmenityType {
 	// Some of those types are subtypes of Amenity tag 
 
+	EMERGENCY("emergency"), // [TAG] emergency services //$NON-NLS-1$ //$NON-NLS-2$
+	HEALTHCARE("amenity"), // hospitals, doctors, ... //$NON-NLS-1$ //$NON-NLS-2$
+
 	TRANSPORTATION("amenity"), // trffic-stuff, parking, public transportation, ... //$NON-NLS-1$ //$NON-NLS-2$
 	BARRIER("barrier"), // [TAG] barrier + traffic_calming //$NON-NLS-1$ //$NON-NLS-2$
-
-	HEALTHCARE("amenity"), // hospitals, doctors, ... //$NON-NLS-1$ //$NON-NLS-2$
-	EMERGENCY("emergency"), // [TAG] emergency services //$NON-NLS-1$ //$NON-NLS-2$
 
 	TOURISM("tourism"), // [TAG] tourism hotel, sights, museum .. //$NON-NLS-1$ //$NON-NLS-2$ 
 	ENTERTAINMENT("amenity"), // cinema, ... (+! sauna, brothel) //$NON-NLS-1$ //$NON-NLS-2$
