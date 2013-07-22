@@ -9,6 +9,7 @@ import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 
 
 public class VoiceRouter {
@@ -251,7 +252,9 @@ public class VoiceRouter {
 		if (nextInfo == null || nextInfo.directionInfo == null || nextInfo.directionInfo.distance == 0) {
 			// if(currentStatus <= STATUS_UNKNOWN && currentDirection > 0){ This caused this prompt to be suppressed when coming back from a
 			if (repeat || currentStatus <= STATUS_UNKNOWN) {
-				if (playGoAheadToDestination()) {
+				if (playGoAheadToDestination(nextInfo == null ? "" :
+						getSpeakableStreetName(nextInfo.directionInfo),
+						nextInfo == null ? "" : nextInfo.pointName)) {
 					currentStatus = STATUS_TOLD;
 					playGoAheadDist = 0;
 				}
@@ -260,7 +263,7 @@ public class VoiceRouter {
 		}
 		if(nextInfo.intermediatePoint){
 			if (repeat || currentStatus <= STATUS_UNKNOWN) {
-				if (playGoAheadToIntermediate()) {
+				if (playGoAheadToIntermediate(getSpeakableStreetName(nextInfo.directionInfo), nextInfo.pointName)) {
 					currentStatus = STATUS_TOLD;
 					playGoAheadDist = 0;
 				}
@@ -339,7 +342,7 @@ public class VoiceRouter {
 			nextStatusAfter(STATUS_UNKNOWN);
 		} else if (repeat || (statusNotPassed(STATUS_TURN_IN) && dist < playGoAheadDist)) {
 			playGoAheadDist = 0;
-			playGoAhead(dist);
+			playGoAhead(dist, getSpeakableStreetName(next));
 		}
 	}
 
@@ -354,19 +357,19 @@ public class VoiceRouter {
 	}
 
 
-	private boolean playGoAheadToDestination() {
+	private boolean playGoAheadToDestination(String strName, String destName) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			play.goAhead(router.getLeftDistance()).andArriveAtDestination().play();
+			play.goAhead(router.getLeftDistance(), strName).andArriveAtDestination(destName).play();
 			return true;
 		}
 		return false;
 	}
 	
-	private boolean playGoAheadToIntermediate() {
+	private boolean playGoAheadToIntermediate(String strName, String iName) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			play.goAhead(router.getLeftDistanceNextIntermediate()).andArriveAtIntermediatePoint().play();
+			play.goAhead(router.getLeftDistanceNextIntermediate(), strName).andArriveAtIntermediatePoint(iName).play();
 			return true;
 		}
 		return false;
@@ -381,11 +384,23 @@ public class VoiceRouter {
 		return false;
 	}
 
-	private void playGoAhead(int dist) {
+	private void playGoAhead(int dist, String streetName) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			play.goAhead(dist).play();
+			play.goAhead(dist, streetName).play();
 		}
+	}
+	
+	public String getSpeakableStreetName(RouteDirectionInfo i) {
+		if(i == null){
+			return "";
+		}
+		if(!Algorithms.isEmpty(i.getRef())) {
+			return i.getRef();
+		} else if(!Algorithms.isEmpty(i.getStreetName())) {
+			return i.getStreetName();
+		}
+		return "";
 	}
 
 	private void playPrepareTurn(RouteDirectionInfo next, int dist) {
@@ -393,11 +408,11 @@ public class VoiceRouter {
 		if(play != null){
 			String tParam = getTurnType(next.getTurnType());
 			if(tParam != null){
-				play.prepareTurn(tParam, dist).play();
+				play.prepareTurn(tParam, dist, getSpeakableStreetName(next)).play();
 			} else if(next.getTurnType().isRoundAbout()){
-				play.prepareRoundAbout(dist).play();
+				play.prepareRoundAbout(dist, next.getTurnType().getExitOut(), getSpeakableStreetName(next)).play();
 			} else if(next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)){
-				play.prepareMakeUT(dist).play();
+				play.prepareMakeUT(dist, getSpeakableStreetName(next)).play();
 			} 
 		}
 	}
@@ -408,11 +423,11 @@ public class VoiceRouter {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isPlay = true;
 			if (tParam != null) {
-				play.turn(tParam, dist);
+				play.turn(tParam, dist, getSpeakableStreetName(next));
 			} else if (next.getTurnType().isRoundAbout()) {
-				play.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut());
+				play.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(next));
 			} else if (next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)) {
-				play.makeUT(dist);
+				play.makeUT(dist, getSpeakableStreetName(next));
 			} else {
 				isPlay = false;
 			}
@@ -422,14 +437,14 @@ public class VoiceRouter {
 				isPlay = true;
 				if (next.getTurnType().getValue().equals(TurnType.C) && 
 						!TurnType.C.equals(t.getValue())) {
-					play.goAhead(dist);
+					play.goAhead(dist, getSpeakableStreetName(next));
 				}
 				if (TurnType.TL.equals(t.getValue()) || TurnType.TSHL.equals(t.getValue()) || TurnType.TSLL.equals(t.getValue())
 						|| TurnType.TU.equals(t.getValue()) || TurnType.KL.equals(t.getValue())) {
-					play.then().bearLeft();
+					play.then().bearLeft( getSpeakableStreetName(next));
 				} else if (TurnType.TR.equals(t.getValue()) || TurnType.TSHR.equals(t.getValue()) || TurnType.TSLR.equals(t.getValue())
 						|| TurnType.KR.equals(t.getValue())) {
-					play.then().bearRight();
+					play.then().bearRight( getSpeakableStreetName(next));
 				}
 			}
 			if(isPlay){
@@ -444,11 +459,11 @@ public class VoiceRouter {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isplay = true;
 			if(tParam != null){
-				play.turn(tParam);
+				play.turn(tParam, getSpeakableStreetName(next));
 			} else if(next.getTurnType().isRoundAbout()){
-				play.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut());
+				play.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(),  getSpeakableStreetName(next));
 			} else if(next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)){
-				play.makeUT();
+				play.makeUT( getSpeakableStreetName(next));
 				// do not say it
 //				} else if(next.getTurnType().getValue().equals(TurnType.C)){
 //					play.goAhead();
@@ -460,13 +475,13 @@ public class VoiceRouter {
 				String t2Param = getTurnType(nextNext.getTurnType());
 				if (t2Param != null) {
 					if(isplay) { play.then(); }
-					play.turn(t2Param, next.distance);
+					play.turn(t2Param, next.distance, "");
 				} else if (nextNext.getTurnType().isRoundAbout()) {
 					if(isplay) { play.then(); }
-					play.roundAbout(next.distance, nextNext.getTurnType().getTurnAngle(), nextNext.getTurnType().getExitOut());
+					play.roundAbout(next.distance, nextNext.getTurnType().getTurnAngle(), nextNext.getTurnType().getExitOut(), "");
 				} else if (nextNext.getTurnType().getValue().equals(TurnType.TU)) {
 					if(isplay) { play.then(); }
-					play.makeUT(next.distance);
+					play.makeUT(next.distance, "");
 				}
 				isplay = true;
 			}
@@ -512,12 +527,12 @@ public class VoiceRouter {
 				// suppress "route recalculated" prompt for 60sec (this workaround now outdated after more intelligent route recalculation and directional voice prompt suppression)
 				// if (router.getCurrentGPXRoute() == null && (System.currentTimeMillis() - lastTimeRouteRecalcAnnounced > 60000)) {
 				if (router.getCurrentGPXRoute() == null) {
-					play.routeRecalculated(router.getLeftDistance()).play();
+					play.routeRecalculated(router.getLeftDistance(), router.getLeftTime()).play();
 					currentStatus = STATUS_UNKNOWN;
 					// lastTimeRouteRecalcAnnounced = System.currentTimeMillis();
 				}
 			} else {
-				play.newRouteCalculated(router.getLeftDistance()).play();
+				play.newRouteCalculated(router.getLeftDistance(), router.getLeftTime()).play();
 				currentStatus = STATUS_UNKNOWN;
 			}
 		} else if (player == null) {
@@ -528,17 +543,24 @@ public class VoiceRouter {
 		nextRouteDirection = null;
 	}
 
-	public void arrivedDestinationPoint() {
+	public void arrivedDestinationPoint(String name) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			play.arrivedAtDestination().play();
+			play.arrivedAtDestination(name).play();
 		}
 	}
 	
-	public void arrivedIntermediatePoint() {
+	public void arrivedIntermediatePoint(String name) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			play.arrivedAtIntermediatePoint().play();
+			play.arrivedAtIntermediatePoint(name).play();
+		}
+	}
+	
+	public void arrivedWayPoint(String name) {
+		CommandBuilder play = getNewCommandPlayerToPlay();
+		if(play != null){
+			play.arrivedAtWayPoint(name).play();
 		}
 	}
 
@@ -564,11 +586,12 @@ public class VoiceRouter {
 
 		public void play(CommandBuilder newCommand) {
 			int left = voiceRouter.router.getLeftDistance();
+			int time = voiceRouter.router.getLeftTime();
 			if (left > 0) {
 				if (type == ROUTE_CALCULATED) {
-					newCommand.newRouteCalculated(left).play();
+					newCommand.newRouteCalculated(left, time).play();
 				} else if (type == ROUTE_RECALCULATED) {
-					newCommand.routeRecalculated(left).play();
+					newCommand.routeRecalculated(left, time).play();
 				}
 			}
 		}
