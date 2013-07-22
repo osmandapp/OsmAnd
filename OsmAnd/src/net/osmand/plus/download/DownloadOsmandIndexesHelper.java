@@ -2,11 +2,15 @@ package net.osmand.plus.download;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -47,6 +51,23 @@ public class DownloadOsmandIndexesHelper {
 		return result;
 	}
 	
+	private static Map<String, String>  assetMapping(AssetManager assetManager) throws XmlPullParserException, IOException {
+		XmlPullParser xmlParser = XmlPullParserFactory.newInstance().newPullParser(); 
+		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.xml");
+		xmlParser.setInput(isBundledAssetsXml, "UTF-8");
+		Map<String, String> assets = new HashMap<String, String>();
+		int next = 0;
+		while ((next = xmlParser.next()) != XmlPullParser.END_DOCUMENT) {
+			if (next == XmlPullParser.START_TAG && xmlParser.getName().equals("asset")) {
+				final String source = xmlParser.getAttributeValue(null, "source");
+				final String destination = xmlParser.getAttributeValue(null, "destination");
+				assets.put(source, destination);
+			}
+		}
+		isBundledAssetsXml.close();
+		return assets;
+	}
+	
 	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm, 
 			OsmandSettings settings) {
 		String[] list;
@@ -64,14 +85,15 @@ public class DownloadOsmandIndexesHelper {
 			} catch (NameNotFoundException e) {
 				//do nothing...
 			}
-			for (String voice : list) {
-				if (voice.endsWith("tts")) {
+			Map<String, String> mapping = assetMapping(amanager);
+			for (String key : mapping.keySet()) {
+				String target = mapping.get(key);
+				if (target.endsWith("-tts/_ttsconfig.p") && target.startsWith("voice/")) {
+					String voice = target.substring("voice/".length(), target.length() - "-tts/_ttsconfig.p".length());
 					File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
-					String key = voice + ext;
-					String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "ttsconfig.p";
-					result.add(new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", assetName, destFile.getPath()));
-				} else {
-					String key = voice + extvoice;
+					result.add(new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", key, destFile.getPath()));
+				} else if (target.endsWith("/_config.p") && target.startsWith("voice/")) {
+					String voice = target.substring("voice/".length(), target.length() - "/_config.p".length());
 					IndexItem item = result.getIndexFilesByName(key);
 					if (item != null) {
 						File destFile = new File(voicePath, voice + File.separatorChar + "_config.p");
@@ -84,13 +106,14 @@ public class DownloadOsmandIndexesHelper {
 							log.error("Parse exception", es);
 						}
 						item.date = date;
-						String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "config.p";
-						item.attachedItem = new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", assetName, destFile.getPath());
+						item.attachedItem = new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", key, destFile.getPath());
 					}
 				}
 			}
 			result.sort();
 		} catch (IOException e) {
+			log.error("Error while loading tts files from assets", e); //$NON-NLS-1$
+		} catch (XmlPullParserException e) {
 			log.error("Error while loading tts files from assets", e); //$NON-NLS-1$
 		}
 	}
