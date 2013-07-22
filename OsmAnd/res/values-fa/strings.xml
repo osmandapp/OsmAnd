@@ -300,7 +300,7 @@
 	<string name="search_button">جستجو</string>
 	<string name="search_activity">جستجو</string>
 	<string name="searchpoi_activity">انتخاب POI</string>
-	<string name="search_POI_level_btn">بیشتر یافتن</string>
+	<string name="search_POI_level_btn">بیشتر پیدا کن</string>
 	<string name="choose_available_region">انتخاب ناحیه از لیست</string>
 	<string name="app_mode_default">مرور نقشه</string>
 	<string name="app_mode_car">خودرو</string>
@@ -466,7 +466,7 @@
 	<string name="extra_settings">تنظیمات پیشرفته</string>
 	<string name="plugins_screen">افزونه ها</string>
 	<string name="select_plugin_to_activate">بر روی افزونه ها کلیک کنید تا آنها را فعال/غیرفعال کنید. (شاید نیاز به راه اندازی مجدد OsmAnd باشد)</string>
-	<string name="prefs_plugins_descr">افزونه ها تنظیمات پیشرفته و قابلیتهای بیشتری را فعال میکنند</string>
+	<string name="prefs_plugins_descr">افزونه ها، تنظیمات پیشرفته و قابلیتهای بیشتری را فعال میکنند</string>
 	<string name="prefs_plugins">افزونه ها</string>
 	<string name="debugging_and_development">توسعه OsmAnd</string>
 	<string name="send_files_to_osm">فایلهای GPX به OSM ارسال شوند؟</string>
@@ -507,27 +507,27 @@
     <string name="menu_layers">نحوه نمایش</string>
 	<string name="layer_map_appearance">چینش صفحه</string>
 	<string name="map_widget_config">چینش صفحه</string>
-	<string name="map_widget_intermediate_distance">نقطه مسیر</string>
-    <string name="delete_target_point">حذف نقطه مسیر</string>
-	<string name="target_point">نقطه مسیر %1$s</string>
-    <string name="intermediate_point">نقطه مسیر %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">افزودن به عنوان آخرین نقطه مسیر</string>
-    <string name="context_menu_item_first_intermediate_point">افزودن به عنوان اولین نقطه مسیر</string>
-    <string name="add_as_last_destination_point">افزودن به عنوان آخرین نقطه مسیر</string>
-    <string name="add_as_first_destination_point">افزودن به عنوان اولین نقطه مسیر</string>
-    <string name="intermediate_point_too_far">نقطه مسیر %1$s خیلی از نزدیکترین جاده دور است.</string>
-    <string name="arrived_at_intermediate_point">شما به نقطه مسیر خود رسیده اید</string>
-    <string name="context_menu_item_intermediate_point">افزودن به عنوان نقطه مسیر</string>
-    <string name="add_waypoint_dialog_added">نقطه مسیر \'{0}\' افزوده شد</string>
-	<string name="add_waypoint_dialog_title">افزودن نقطه مسیر به GPX ضبط شده</string>
+	<string name="map_widget_intermediate_distance">نقطه بین راهی</string>
+    <string name="delete_target_point">حذف نقطه بین راهی</string>
+	<string name="target_point">نقطه بین راهی %1$s</string>
+    <string name="intermediate_point">نقطه بین راهی %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">افزودن به عنوان آخرین نقطه بین راهی</string>
+    <string name="context_menu_item_first_intermediate_point">افزودن به عنوان اولین نقطه بین راهی</string>
+    <string name="add_as_last_destination_point">افزودن به عنوان آخرین نقطه بین راهی</string>
+    <string name="add_as_first_destination_point">افزودن به عنوان اولین نقطه بین راهی</string>
+    <string name="intermediate_point_too_far">نقطه بین راهی %1$s از نزدیکترین جاده خیلی دور است.</string>
+    <string name="arrived_at_intermediate_point">شما به نقطه بین راهی خود رسیده اید</string>
+    <string name="context_menu_item_intermediate_point">افزودن به عنوان نقطه بین راهی</string>
+    <string name="add_waypoint_dialog_added">نقطه بین راهی \'\'{0}\'\' افزوده شد</string>
+	<string name="add_waypoint_dialog_title">افزودن نقطه بین راهی به مسیر GPX</string>
 	<string name="amenity_type_administrative">اداری</string>
-	<string name="amenity_type_barrier">مانع</string>
+	<string name="amenity_type_barrier">موانع</string>
 	<string name="amenity_type_education">آموزشی</string>
 	<string name="amenity_type_emergency">اورژانس</string>
 	<string name="amenity_type_entertainment">تفریح و سرگرمی</string>
 	<string name="amenity_type_finance">مالی</string>
 	<string name="amenity_type_healthcare">بهداشت و درمان</string>
-	<string name="amenity_type_historic">تاریخی</string>
+	<string name="amenity_type_historic">مکانهای تاریخی</string>
 	<string name="amenity_type_landuse">کاربری اراضی</string>
 	<string name="amenity_type_leisure">اوقات فراغت</string>
 	<string name="amenity_type_manmade">ساخته دست بشر</string>
@@ -537,13 +537,13 @@
 	<string name="amenity_type_other">سایر</string>
 	<string name="amenity_type_shop">فروشگاه</string>
 	<string name="amenity_type_sport">ورزشی</string>
-	<string name="amenity_type_sustenance">تغذیه</string>
+	<string name="amenity_type_sustenance">مواد غذایی</string>
 	<string name="amenity_type_tourism">گردشگری</string>
 	<string name="amenity_type_transportation">حمل و نقل عمومی</string>
 	<string name="poi_filter_closest_poi">نزدیکترین POI</string>
 	<string name="poi_filter_custom_filter">فیلتر سفارشی</string>
 	<string name="poi_filter_namefinder">نام یاب آنلاین</string>
-	<string name="poi_search_desc">جستجوی POI (نقاط مورد علاقه)</string>
+	<string name="poi_search_desc">جستجوی POI (مکانهای مهم)</string>
 	<string name="poi_dialog_comment_default">تغییر POI</string>
 	<string name="default_buttons_commit">اجرا</string>
 	<string name="download_srtm_maps">منحنی های همتراز</string>
@@ -659,7 +659,7 @@
     <string name="av_def_action_choose">انتخاب برحسب تقاضا</string>
     <string name="audionotes_location_not_defined">مکان مربوط به این یادداشت هنوز تعریف نشده است. برای اختصاص یادداشت به یک محل \"استفاده از موقعیت...\" را انتخاب کنید</string>
     <string name="rendering_attr_showRoadMaps_description">انتخاب کنید چه زمانی تنها نقشه راهها نشان داده شود:</string>
-	<string name="target_points">نقطه مسیر</string>
+	<string name="target_points">نقاط بین راهی</string>
     <string name="ending_point_too_far">نقطه پایانی فاصله خیلی زیادی از نزدیکترین جاده دارد.</string>
     <string name="map_widget_vector_attributes">خصوصیات رندر نقشه:</string>
 	<string name="live_monitoring_mode_off">شروع\n ردگیری آنلاین</string>
@@ -729,10 +729,10 @@
 	<string name="offline_edition">ویرایش آفلاین</string>
 	<string name="offline_edition_descr">استفاده همیشگی از ویرایش آفلاین</string>
 	<string name="local_openstreetmap_uploading">درحال آپلود…</string>
-	<string name="local_openstreetmap_were_uploaded">{0} ایراد/POI آپلود شد</string>
+	<string name="local_openstreetmap_were_uploaded">تعداد {0} اشکال/POI آپلود شد</string>
 	<string name="update_poi_does_not_change_indexes">تغییرات POI درون برنامه تاثیری روی فایلهای نقشه دانلود شده ندارد. تغییرات درون فایل محلی ذخیره میشود.</string>
 	<string name="show_current_gpx_title">نمایش مسیر جاری</string>
-	<string name="fav_export_confirmation">فایلی با همین علاقه مندیها قبلا ذخیره شده است. جایگزین میکنید؟</string>
+	<string name="fav_export_confirmation">فایلی با همین علاقه مندیها قبلاً ذخیره شده است. جایگزین میکنید؟</string>
 	<string name="tip_day_night_mode">حالت شب/روز</string>
 	<string name="tip_osm_improve">بهبود داده های OSM</string>
 	<string name="osmand_development_plugin_description">نشان دادن تنظیمات برای توسعه و رفع اشکالاتی مانند شبیه سازی مسیر یا عملکرد رندر.</string>
@@ -782,7 +782,7 @@
 	<string name="pref_vector_map">تنظیمات نقشه بُرداری</string>
 	<string name="layer_poi_label">برچسبهای POI</string>
 	<string name="poi_query_by_name_matches_categories">چندین طبقه بندی POI سازگار با تقاضای شما پیدا شد:</string>
-	<string name="data_to_search_poi_not_available">دادهای محلی برای جستجوی POI وجود ندارد.</string>
+	<string name="data_to_search_poi_not_available">داده های محلی برای جستجوی POI وجود ندارد.</string>
 	<string name="old_poi_file_should_be_deleted">فایل داده های POI \'%1$s\' زائد است و میتوان آنرا حذف کرد.</string>
 	<string name="button_upgrade_osmandplus">ارتقاء به OsmAnd+</string>
 	<string name="search_position_fixed">ثابت شد</string>
@@ -896,11 +896,11 @@
     <string name="index_name_openmaps">نقشه های اتحادیه اروپا</string>
     <string name="download_hillshade_item">سایه تپه</string>
     <string name="download_hillshade_maps">لایه تپه سایه</string>
-    <string name="tip_recent_changes_1_1_2_t">تغییرات نسخه 1.1.2:↵
-→→\n\t* ارتقاء افزونه صوتی/تصویری)↵
-→→\n\t* بازسازی افزونه کنتور جاده ↵
-→→\n\t* بسته سایه تپه برای افزونه کنتور جاده↵
-→→\n\t* رفع مشکل (مسیریابی بهینه)↵
+    <string name="tip_recent_changes_1_1_2_t">تغییرات نسخه 1.1.2:
+		\n\t* ارتقاء افزونه صوتی/تصویری)
+		\n\t* بازسازی افزونه منحنی های همتراز
+		\n\t* بسته سایه تپه برای افزونه منحنی های همتراز
+		\n\t* رفع اشکال (بهینه سازی مسیریابی)
     </string>
     <string name="osmand_srtm_long_description_1000_chars">این افزونه منحنی های همتراز را  فراهم می کند که می تواند در نقشه های آفلاین OsmAnd نمایش داده شود. داده های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) براساس اندازه گیری های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین NASA مییباشد. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (METI)، و سیستم های فضایی ژاپن (J-spacesystems) است.</string>
     <string name="srtm_plugin_description">تسهیل دانلود از خطوط کانتور آنلاین و تپه سایه (تنظیمات -&gt; مدیریت داده ها -&gt; دانلود -&gt; انتخاب نوع نقشه مورد نظر).</string>
@@ -1040,7 +1040,7 @@
 	<string name="layer_gpx_layer">مسیر GPX…</string>
 	<string name="error_reading_gpx">خطا هنگام خواندن داده GPX</string>
 	<string name="vector_data">نقشه های بُرداری آفلاین</string>
-	<string name="osb_bug_name">ایراد</string>
+	<string name="osb_bug_name">اشکال</string>
 	<string name="point_on_map">موقعیت:\n طول %1$.5f\n عرض %2$.5f</string>
 	<string name="downloading_build">درحال دانلود ساخت…</string>
 	<string name="reading_cached_tiles">درحال خواندن مربعهای ذخیره شده…</string>
@@ -1055,7 +1055,7 @@
 	<string name="build_installed">ساخت {0} با موفقیت نصب شد({1}).</string>
 	<string name="km_h">کیلومتر در ساعت</string>
 	<string name="old_map_index_is_not_supported">قالب داده نقشه از رده خارج \'{0}\' پشتیبانی نمیشود</string>
-	<string name="context_menu_item_add_waypoint">اضافه کردن نقطه مسیر GPX</string>
+	<string name="context_menu_item_add_waypoint">اضافه کردن نقطه بین راهی GPX</string>
 	<string name="mile_per_hour">مایل در ساعت</string>
 	<string name="tip_initial">فوت و فن ها</string>
 	<string name="tip_initial_t">\tOsmAnd یک برنامه مسیریابی با ویژگیهای متعدد است.
@@ -1072,7 +1072,7 @@
 	<string name="live_monitoring_interval_descr">تعیین فواصل ضبط آنلاین</string>
 	<string name="live_monitoring_interval">فواصل ضبط آنلاین</string>
 	<string name="tip_recent_changes_1_1_0_t">تغییرات نسخه 1.1.0:
-		n\t* افزونه محاسبه فاصله
+		\n\t* افزونه محاسبه فاصله
 		\n\t* افزونه یادداشت صوتی/تصویری
 		\n\t* افزونه کانتور خطوط
 		\n\t* رفع اشکالات
@@ -1310,7 +1310,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="tip_recent_changes_0_8_0_t">تغییرات نسخه 0.8.0: ↵
 →→\n\t* قابلیت پلاگین * ↵
 →→\n\t - بیشترین عملکرد با ویژگی های گروه بندی می شوند و می توان فعال / غیر فعال در تنظیمات / پلاگین ↵.
-→ → شما می توانید (آنلاین یا کش) نقشه منابع کاشی، تنظیمات ردیابی، و بسیاری دیگر از ویژگی های جدید و قبلا موجود را فعال کنید. ↵
+→ → شما می توانید (آنلاین یا کش) نقشه منابع کاشی، تنظیمات ردیابی، و بسیاری دیگر از ویژگی های جدید و قبلاً موجود را فعال کنید. ↵
 →→\n\t-* جدید نقشه آنلاین پشتیبانی داده ها * ↵
 →→\n\t - نقشه رندر سریع تر و دقیق تر می شود (خط ساحلی و مشکلات منطقه آب گرفتگی به طور عمده ثابت). ↵
 →→\n\t - شما نیاز به دانلود داده ها به طور کامل از جدید آنلاین (داده های قدیمی دیگر پشتیبانی نمی شود) ↵
@@ -1459,7 +1459,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="map_transparency_descr">تغییر شفافیت نقشه پایه</string>
 	<string name="map_transparency">شفافیت نقشه پایه</string>
 	<string name="select_tile_source_to_install">انتخاب نقشه برای نصب و یا بروزرسانی</string>
-	<string name="level_to_switch_vector_raster">حداقل. سطح زوم بردار</string>
+	<string name="level_to_switch_vector_raster">حداقل سطح زوم بُردار</string>
 	<string name="tip_location_sharing_t">\t می تواند محل مکان های جالب در سفر خود را با خانواده یا دوستان به اشتراک بگذارید. ↵
 →→\n\t اشتراک گذاشتن هر مکان شما می خواهید: ↵
 →→\n\t  "منوی زمینه نقشه \'-&gt; \' محل به اشتراک گذاشتن \'منو ↵.
@@ -1487,13 +1487,12 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 →
 	</string>
 	<string name="tip_map_context_menu">چهارچوب منو نقشه</string>
-	<string name="tip_map_context_menu_t">\t منوی زمینه نقشه با فشار دادن و نگه داشتن بر روی نقشه و یا با فشار دادن دکمه توپ مسیر در دسترس است. ↵
-→→\n\t این تولید یک جعبه با مختصات نقطه است. برای باز کردن نقشه بافت محاوره منو، شیر بر روی آن. (یا فشار داده و نگه دارید و بر روی آن را دوباره به پنهان کردن جعبه.) ↵
-→→\n\t منوی زمینه نقشه شامل تمام اقدامات با اشاره به یک نقطه (مکان). ↵
-→
+	<string name="tip_map_context_menu_t">\t منوی نقشه با فشار دادن و نگه داشتن بر روی نقشه و یا با فشار دادن گوی مکان نما در دسترس است.
+		\n\t اینکار یک جعبه با مختصات نقطه تولید میکند. برای باز کردن منو، بر روی آن بزنید. (یا بر روی آن فشار داده و نگه دارید تا دوباره جعبه پنهان شود.)
+		\n\t منوی نقشه شامل تمام عملیات مربوط به یک نقطه (مکان) میشود.
 	</string>
 	<string name="send_location_email_pattern">برای مشاهده لینک توسط مرورگر %1$لینک هدف آندروید %2$s</string>
-	<string name="amenity_type_geocache">جغرافیایی ذخیره سازی</string>
+	<string name="amenity_type_geocache">مکانهای ذخیره شده جغرافیایی</string>
 	<string name="continuous_rendering_descr">نمایش رندرینگ مستمر به جای نمایش تصویر</string>
 	<string name="renderer_load_sucess">رندر با موفقیت بارگزاری شده</string>
 	<string name="renderer_load_exception">اتفاق عجیب: نقشه رندر نمی شود</string>
