@@ -203,13 +203,12 @@ public class TileSourceManager {
 	public static void createMetaInfoFile(File dir, TileSourceTemplate tm, boolean override) throws IOException {
 		File metainfo = new File(dir, ".metainfo"); //$NON-NLS-1$
 		Map<String, String> properties = new LinkedHashMap<String, String>();
-		if (tm instanceof BeanShellTileSourceTemplate) {
-			properties.put("rule", RULE_BEANSHELL);
+		if (tm.getRule() != null && tm.getRule().length() > 0) {
+			properties.put("rule", tm.getRule());
 		}
-		if (tm.getUrlTemplate() == null && !RULE_YANDEX_TRAFFIC.equalsIgnoreCase(tm.getRule())) {
-			return;
+		if(tm.getUrlTemplate() != null) {
+			properties.put("url_template", tm.getUrlTemplate());
 		}
-		properties.put("url_template", tm.getUrlTemplate());
 
 		properties.put("ext", tm.getTileFormat());
 		properties.put("min_zoom", tm.getMinimumZoomSupported() + "");
@@ -221,11 +220,13 @@ public class TileSourceManager {
 		if (tm.isEllipticYTile()) {
 			properties.put("ellipsoid", tm.isEllipticYTile() + "");
 		}
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(metainfo)));
-		for (String key : properties.keySet()) {
-			writer.write("[" + key + "]\n" + properties.get(key) + "\n");
+		if (override || !metainfo.exists()) {
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(metainfo)));
+			for (String key : properties.keySet()) {
+				writer.write("[" + key + "]\n" + properties.get(key) + "\n");
+			}
+			writer.close();
 		}
-		writer.close();
 	}
 	
 	public static boolean isTileSourceMetaInfoExist(File dir){
