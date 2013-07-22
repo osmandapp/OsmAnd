@@ -206,7 +206,7 @@ public class TileSourceManager {
 		if (tm instanceof BeanShellTileSourceTemplate) {
 			properties.put("rule", RULE_BEANSHELL);
 		}
-		if (tm.getUrlTemplate() == null) {
+		if (tm.getUrlTemplate() == null && !RULE_YANDEX_TRAFFIC.equalsIgnoreCase(tm.getRule())) {
 			return;
 		}
 		properties.put("url_template", tm.getUrlTemplate());

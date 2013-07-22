@@ -70,17 +70,18 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 				int end = str.indexOf("\"", start); //$NON-NLS-1$
 				// exception case
 				if (start < 0 || end < 0) {
+					log.info("Timestamp wasn't updated " + str); //$NON-NLS-1$
 					return;
 				}
 				String newTimestamp = str.substring(start, end);
 				lastTimestampUpdated = System.currentTimeMillis();
 				Algorithms.closeStream(in);
 				Algorithms.closeStream(out);
-				log.info("Timestamp updated"); //$NON-NLS-1$
+				log.info("Timestamp updated to " + newTimestamp); //$NON-NLS-1$
 				if (!newTimestamp.equals(mTimestamp)) {
 					mTimestamp = newTimestamp;
 					TileSourceTemplate template = new TileSourceTemplate(YANDEX_PREFFIX + mTimestamp,
-							"http://jgo.maps.yandex.net/tiles?l=trf&x={1}&y={2}&z={0}&tm=" + mTimestamp, ".png", 17, 7, 256, 8, 18000);
+							"http://jgo.maps.yandex.net/1.1/tiles?l=trf,trfe&x={1}&y={2}&z={0}&tm=" + mTimestamp, ".png", 17, 7, 256, 8, 18000);
 					template.setEllipticYTile(true);
 					clearCache();
 					this.layer.setMapForMapTileAdapter(template, this);

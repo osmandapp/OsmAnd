@@ -158,7 +158,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			textView.getBackground().getPadding(padding);
 		}
 		int w = BASE_TEXT_SIZE;
-		int h = (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount());
+		int h = (int) ((textView.getPaint().getTextSize() * 1.3f) * textView.getLineCount());
 		
 		textView.layout(0, -padding.bottom, w, h + padding.top);
 		int minw = closeButton.getDrawable().getMinimumWidth();
