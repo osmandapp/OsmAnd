@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
 	<string name="settings_Button">Nastavitve</string>
@@ -1474,4 +1474,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="route_to">Do:</string>
     <string name="route_via">Prek:</string>
     <string name="route_from">Od:</string>
-    </resources>
+    <string name="osb_author_dialog_password">OSM geslo (neobvezno)</string>
+	</resources>
