@@ -9,6 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="speak_title">Announce &#8230;</string>
+	<string name="speak_descr">Configure to announce street names, traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits</string>
+	<string name="speak_street_name">Announce speed limit</string>
+    <string name="speak_speed_limit">Announce speed limit</string>
+    <string name="speak_cameras">Announce speed cameras</string>
+	<string name="speak_traffic_warnings">Announce traffic warnings</string>
     <string name="tip_recent_changes_1_5_t">Changes in 1.5:
 	\n\t* Voice warnings about speed limits and cameras
 	\n\t* High density map icons
@@ -28,11 +34,6 @@
     <string name="route_to">To:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">From:</string>
-    <string name="speak_warnings_title">Announce alarms&#8230;</string>
-	<string name="speak_warnings_descr">Configure traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits</string>
-    <string name="speak_speed_limit">Announce speed limit</string>
-    <string name="speak_cameras">Announce speed cameras</string>
-	<string name="speak_traffic_warnings">Announce traffic warnings</string>
 	<string name="local_index_gpx_timespan">\nTime span: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nTime moving: %1$d:%2$02d:%3$02d</string>
 	<string name="app_mode_default">Browse map</string>
