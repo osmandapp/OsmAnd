@@ -11,7 +11,7 @@
     -->
     <string name="speak_title">Announce &#8230;</string>
 	<string name="speak_descr">Configure to announce street names, traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits</string>
-	<string name="speak_street_name">Announce speed limit</string>
+	<string name="speak_street_names">Announce street names (TTS)</string>
     <string name="speak_speed_limit">Announce speed limit</string>
     <string name="speak_cameras">Announce speed cameras</string>
 	<string name="speak_traffic_warnings">Announce traffic warnings</string>
