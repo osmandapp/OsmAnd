@@ -91,8 +91,9 @@ public class RoutingConfiguration {
 		}
 		
 		private String getAttribute(VehicleRouter router, String propertyName) {
-			if (router.containsAttribute(propertyName)) {
-				return router.getAttribute(propertyName);
+		    String attr = router.getAttribute(propertyName);
+			if (attr != null) {
+				return attr;
 			}
 			return attributes.get(propertyName);
 		}
