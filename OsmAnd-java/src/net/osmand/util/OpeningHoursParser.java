@@ -468,7 +468,7 @@ public class OpeningHoursParser {
 				// time starts
 				break;
 			}
-			if (ch == 'o' && r.charAt(k+1) == 'f' && r.charAt(k+1) == 'f'){
+			if (r.substring(k, k + 2).equals("off")) {
 				// value "off" is found
 				break;
 			}
@@ -584,18 +584,18 @@ public class OpeningHoursParser {
 				if(i1 == -1) {
 					// if no minutes are given, try complete value as hour
 					startHour = Integer.parseInt(stEnd[0].trim());
-					startMin = 0;
+					startMin  = 0;
 				} else {
 					startHour = Integer.parseInt(stEnd[0].substring(0, i1).trim());
-					startMin = Integer.parseInt(stEnd[0].substring(i1 + 1).trim());
+					startMin  = Integer.parseInt(stEnd[0].substring(i1 + 1).trim());
 				}
 				if(i2 == -1) {
 					// if no minutes are given, try complete value as hour
 					endHour = Integer.parseInt(stEnd[1].trim());
-					endMin = 0;
+					endMin  = 0;
 				} else {
 					endHour = Integer.parseInt(stEnd[1].substring(0, i2).trim());
-					endMin = Integer.parseInt(stEnd[1].substring(i2 + 1).trim());
+					endMin  = Integer.parseInt(stEnd[1].substring(i2 + 1).trim());
 				}
 				st = startHour * 60 + startMin;
 				end = endHour * 60 + endMin;
