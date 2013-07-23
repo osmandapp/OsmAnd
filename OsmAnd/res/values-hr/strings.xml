@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="map_widget_gps_info">GPS informacije</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
     <string name="item_unchecked">neprovjereno</string>

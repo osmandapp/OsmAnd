@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -848,7 +847,7 @@
 	<string name="mark_point">هدف</string>
 	<string name="show_osm_bugs_descr">نشان دادن OpenStreetBugs بر روی نقشه</string>
 	<string name="show_osm_bugs">نشان دادن OpenStreetBugs</string>
-	<string name="speak_warnings_title">اعلام هشدارها…</string>
+	
 	<string name="speak_warnings_descr">پیکربندی هشدارهای ترافیک (توقف اجباری، سرعت گیر)، هشدار دوربین سرعت سنج، محدودیت سرعت</string>
     <string name="speak_speed_limit">اعلام محدودیت سرعت</string>
     <string name="speak_cameras">اعلام دوربین سرعت سنج</string>

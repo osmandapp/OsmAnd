@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -1492,7 +1491,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="av_camera_focus_macro">Macromodus (dichtbij scherpstellen)</string>
 	<string name="av_camera_focus_continuous">Voortdurend blijven scherpstellen</string>
 	<string name="av_photo_play_sound_descr">Kies of er een geluid wordt afgespeeld tijdens het nemen van foto\'s</string>
-<string name="speak_warnings_title">Waarschuw bij…</string>
+
 	<string name="speak_warnings_descr">Gesproken waarschuwingen bij stopsignalen, verkeersdrempels, snelheidscamera\'s, snelheidsbeperkingen instellen</string>
     <string name="speak_speed_limit">Meld snelheidsbeperking</string>
     <string name="speak_cameras">Meld snelheidscamera\'s</string>

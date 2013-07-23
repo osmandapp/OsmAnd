@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
 		\n\t* Вказання напрямку руху по смугам
@@ -1472,7 +1471,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="av_photo_play_sound">Відтворювати звук затвору камери</string>
 	<string name="av_photo_play_sound_descr">Під час фотографування відтворювати звук</string>
 <string name="osmand_net_previously_installed">У вас встановлена попередня версія OsmAnd. Всі локальні дані підтримуються новою версією. Але збережені точки потрібно експортувати з попередньої версії і імпортувати в нову.</string>
-	<string name="speak_warnings_title">Оголошувати попередження…</string>
+	
 	<string name="speak_warnings_descr">Налаштуйте попередження про перешкоди на шляху (примусові зупинки, лежачі поліцейські), про камери фіксації швидкости, обмеження швикодсті</string>
     <string name="speak_speed_limit">Попереджати про обмеження швидкості</string>
     <string name="speak_cameras">Попереджати про камери фіксації швидкості</string>

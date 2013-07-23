@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
@@ -1249,7 +1248,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="av_camera_focus_continuous">Die kamera prbeer heeltyd in fokus bly</string>
 	<string name="av_photo_play_sound">Speel geluid wanneer foto geneem word</string>
 	<string name="av_photo_play_sound_descr">Kies of geluid gespeel sal word wanneer foto geneem word</string>
-<string name="speak_warnings_title">Kondig alarms aan…</string>
+
 	<string name="speak_warnings_descr">Verstel verkeer waarskuwings (geforseerde stoppe, spoedbulte), spoedkamera waarskuwings, spoedbeperkings</string>
     <string name="speak_speed_limit">Kondig spoedbeperking aan</string>
     <string name="speak_cameras">Kondig spoedkameras aan</string>

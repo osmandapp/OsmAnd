@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追踪外掛元件，用位置日誌服務(GPX 記錄，網上追踪查詢)</string>
@@ -741,7 +740,7 @@
 	<string name="layer_map">地圖來源…</string>
 	<string name="menu_layers">定義檢視</string>
 	<string name="context_menu_item_search_poi">查尋興趣點</string>
-	<string name="context_menu_item_show_route">由此顯示導航路線</string>
+	
 	<string name="use_trackball_descr">使用軌跡球移動地圖</string>
 	<string name="use_trackball">使用軌跡球</string>
 	<string name="background_service_wait_int_descr">設定背景定位等待時間</string>
@@ -1517,7 +1516,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="route_to">到：</string>
     <string name="route_via">經過：</string>
     <string name="route_from">從：</string>
-    <string name="speak_warnings_title">預告警示…</string>
+    
 	<string name="speak_warnings_descr">組態交通流量警示（強制停止，減速丘），測速照相警告，速限</string>
     <string name="speak_speed_limit">預告速限</string>
     <string name="speak_cameras">預告測速照相</string>
