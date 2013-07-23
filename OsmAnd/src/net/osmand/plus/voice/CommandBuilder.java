@@ -23,7 +23,6 @@ public class CommandBuilder {
 	protected static final String C_TURN = "turn";  //$NON-NLS-1$
 	protected static final String C_MAKE_UT = "make_ut";  //$NON-NLS-1$
 	protected static final String C_MAKE_UTWP = "make_ut_wp";  //$NON-NLS-1$
-	protected static final String C_PREAMBLE = "preamble";  //$NON-NLS-1$
 	protected static final String C_AND_ARRIVE_DESTINATION = "and_arrive_destination";  //$NON-NLS-1$
 	protected static final String C_REACHED_DESTINATION = "reached_destination";  //$NON-NLS-1$
 	protected static final String C_AND_ARRIVE_INTERMEDIATE = "and_arrive_intermediate";  //$NON-NLS-1$
@@ -50,14 +49,7 @@ public class CommandBuilder {
 	private List<Struct> listStruct = new ArrayList<Struct>();
 	
 	public CommandBuilder(CommandPlayer commandPlayer){
-		this(commandPlayer, true);
-	}
-	
-	public CommandBuilder(CommandPlayer commandPlayer, boolean preamble) {
 		this.commandPlayer = commandPlayer;
-		if (preamble) {
-			addCommand(C_PREAMBLE);
-		}
 	}
 	
 	private void checkState()	{
