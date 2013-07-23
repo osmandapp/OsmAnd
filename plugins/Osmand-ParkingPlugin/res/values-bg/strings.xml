@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_buttons_no">No</string>
-    <string name="default_buttons_yes">Yes</string>
-    <string name="osmand_app_not_found">OsmAnd is not installed</string>
-    <string name="app_name">OsmAnd Parking Plugin</string>
-    <string name="parking_plugin_installed">OsmAnd Parking Plugin is installed and enabled in OsmAnd settings.</string>
+    <string name="default_buttons_no">Не</string>
+    <string name="default_buttons_yes">Да</string>
+    <string name="osmand_app_not_found">Приложението OsmAnd не е инсталирано</string>
+    <string name="app_name">Добавка Parking за OsmAnd</string>
+    <string name="parking_plugin_installed">Добавката Parking е инсталирана и включена в настройките на OsmAnd.</string>
 </resources>
