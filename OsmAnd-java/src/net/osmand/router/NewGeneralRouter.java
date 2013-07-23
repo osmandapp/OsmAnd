@@ -112,8 +112,9 @@ public class NewGeneralRouter extends VehicleRouter {
 
 	public int registerRule(String tag, String value) {
 		String key = tag +"$"+value;
-		if(universalRules.containsKey(key)) {
-			return universalRules.get(key);
+		final Integer i = universalRules.get(key);
+		if(i != null) {
+			return i.intValue();
 		}
 		universalRules.put(key, universalRules.size());
 		return universalRules.size() - 1;
@@ -334,8 +335,8 @@ public class NewGeneralRouter extends VehicleRouter {
 					p = p.substring(1);
 				}
 				boolean val = false;
-				if(defParams.containsKey(p)) {
-					RoutingParameter t = defParams.get(p);
+                final RoutingParameter t = defParams.get(p);
+				if(t != null) {
 					val = t.type == RoutingParameterType.BOOLEAN && t.value != null && ((Boolean)t.value).booleanValue();
 				}
 				if(not && val){

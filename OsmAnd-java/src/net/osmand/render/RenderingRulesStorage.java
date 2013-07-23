@@ -66,8 +66,9 @@ public class RenderingRulesStorage {
 	}
 	
 	public int getDictionaryValue(String val) {
-		if(dictionaryMap.containsKey(val)){
-			return dictionaryMap.get(val);
+	    final Integer i = dictionaryMap.get(val);
+		if (i != null){
+			return i.intValue();
 		}
 		int nextInd = dictionaryMap.size();
 		dictionaryMap.put(val, nextInd);
@@ -102,8 +103,8 @@ public class RenderingRulesStorage {
 			Iterator<Entry<String, RenderingRule>> it = depends.renderingAttributes.entrySet().iterator();
 			while (it.hasNext()) {
 				Entry<String, RenderingRule> e = it.next();
-				if (renderingAttributes.containsKey(e.getKey())) {
-					RenderingRule root = renderingAttributes.get(e.getKey());
+                final RenderingRule root = renderingAttributes.get(e.getKey());
+				if (root != null) {
 					List<RenderingRule> list = e.getValue().getIfElseChildren();
 					for (RenderingRule every : list) {
 						root.addIfElseChildren(every);

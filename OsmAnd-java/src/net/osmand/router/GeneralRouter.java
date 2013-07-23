@@ -228,8 +228,8 @@ public class GeneralRouter extends VehicleRouter {
 		Float value = null;
 		for (int i = 0; i < road.types.length; i++) {
 			RouteTypeRule r = road.region.quickGetEncodingRule(road.types[i]);
-			if(highwaySpeed.containsKey(r.getTag()+"$"+r.getValue())){
-				value = highwaySpeed.get(r.getTag()+"$"+r.getValue());
+            value = highwaySpeed.get(r.getTag()+"$"+r.getValue());
+			if (value != null) {
 				break;
 			}
 		}
@@ -244,8 +244,9 @@ public class GeneralRouter extends VehicleRouter {
 		float priority = 1;
 		for (int i = 0; i < road.types.length; i++) {
 			RouteTypeRule r = road.region.quickGetEncodingRule(road.types[i]);
-			if(highwayPriorities.containsKey(r.getTag()+"$"+r.getValue())){
-				priority *= highwayPriorities.get(r.getTag()+"$"+r.getValue());
+			final Float f = highwayPriorities.get(r.getTag()+"$"+r.getValue());
+			if(f != null){
+				priority *= f.floatValue();
 			}
 		}
 		return priority;

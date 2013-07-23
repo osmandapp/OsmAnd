@@ -515,8 +515,8 @@ public class BinaryRoutePlanner {
 			PriorityQueue<RouteSegment> graphSegments, RouteSegment segment, TLongObjectHashMap<RouteSegment> oppositeSegments,
 			final RouteDataObject road, int segmentEnd, boolean positive, int intervalId, float segmentDist, float obstaclesTime) {
 		long opp = calculateRoutePointId(road, intervalId, !positive);
-		if (oppositeSegments.containsKey(opp)) {
-			RouteSegment opposite = oppositeSegments.get(opp);
+        final RouteSegment opposite = oppositeSegments.get(opp);
+		if (opposite != null) {
 			if (opposite.getSegmentStart() == segmentEnd) {
 				FinalRouteSegment frs = new FinalRouteSegment(road, segment.getSegmentStart());
 				float distStartObstacles = segment.distanceFromStart + calculateTimeWithObstacles(ctx, road, segmentDist , obstaclesTime);

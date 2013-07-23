@@ -45,8 +45,9 @@ public class DataTileManager<T> {
 	}
 	
 	private void putObjects(int tx, int ty, List<T> r){
-		if(objects.containsKey(evTile(tx, ty))){
-			r.addAll(objects.get(evTile(tx, ty)));
+	    final List<T> t = objects.get(evTile(tx, ty));
+		if (t != null) {
+			r.addAll(t);
 		} 
 	}
 	
@@ -174,8 +175,9 @@ public class DataTileManager<T> {
 	}
 
 	private void removeObject(T object, long tile) {
-		if(objects.containsKey(tile)){
-			objects.get(tile).remove(object);
+	    final List<T> t = objects.get(tile);
+		if (t != null) {
+			t.remove(object);
 		}
 	}
 	
