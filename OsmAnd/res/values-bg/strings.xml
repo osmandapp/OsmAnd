@@ -68,8 +68,7 @@
     <string name="distance_measurement_save_gpx">Запиши като GPX</string>
     <string name="distance_measurement_load_gpx">Отвори съществуващ GPX</string>
     <string name="wait_current_task_finished">Моля, почакайте докато свърши текущата задача</string>
-    <string name="use_kalman_filter_compass_descr">Използвай филтър на Kalman за намаляване трептенията на компаса</string>
-    <string name="use_kalman_filter_compass">Използвай филтър на Kalman</string>
+    <string name="use_kalman_filter_compass_descr">Използвай route_descr_from_to_via на Kalman</string>
     <string name="access_mark_final_location_first">Режим на достъпност: Моля, изберете първо крайната цел</string> 
     <string name="use_magnetic_sensor_descr">Използвай магнитния сензор за определяне на компасната посока вместо сензора за ориентиране</string>
     <string name="use_magnetic_sensor">Използвай магнитния сензор</string>
@@ -232,8 +231,7 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Ширина %1$.3f, дължина %2$.3f</string>
     <string name="route_descr_current_location">Текуща позиция</string>
-    
-    <string name="route_descr_from_to_via">От: %1$s\nпрез: %2$s\nдо: %3$s</string>
+
     <string name="no_buildings_found">Няма намерени сгради.</string>
     <string name="incremental_search_city">Търсене на град възходящо</string>
     <string name="search_villages_and_postcodes">Населено място/пощенски код</string>
