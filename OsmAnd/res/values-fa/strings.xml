@@ -1522,15 +1522,14 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	\n\t* راهنمای صوتی در خصوص محدودیتهای سرعت و دوربینها
 	\n\t* آیکونهای نقشه با دقت بالا
 	\n\t* تغییرات زیادی در رابط کاربری
-	\n\t* رفع اشکال نمایش فاصله، تحلیل GPX، کار با نقطه مسیرها، ویجت طرح ریزی سفر، آپلود به OSM، و کار با وبسایتهای ایمن شده https
-    </string>
-    <string name="osb_author_or_password_not_specified">لطفاً نام کاربری و رمز سایت OSM خود را در قسمت تنظیمات وارد کنید</string>
-    <string name="clear_intermediate_points">پاک کردن نقاط بین راهی</string>
-    <string name="keep_intermediate_points">نگه داشتن نقاط بین راهی</string>
-    <string name="new_directions_point_dialog">قبلاً نقاط بین راهی را چیده اید.</string>
-    <string name="context_menu_item_directions_to">به طرف</string>
-    <string name="context_menu_item_directions_from">از طرف</string>
-    <string name="route_descr_map_location">نقشه: </string>
-    <string name="route_to">به:</string>
-    <string name="osb_author_dialog_password">رمز عبور OSM (اختیاری)</string>
-	</resources>
+	\n\t* رفع اشکال نمایش فاصله، تحلیل GPX، کار با نقطه مسیرها، ویجت طرح ریزی سفر، آپلود به OSM، و کار با وبسایتهای ایمن شده https </string>
+        <string name="osb_author_or_password_not_specified">لطفاً نام کاربری و رمز سایت OSM خود را در قسمت تنظیمات وارد کنید</string>
+	<string name="clear_intermediate_points">پاک کردن نقاط بین راهی</string>
+	<string name="keep_intermediate_points">نگه داشتن نقاط بین راهی</string>
+	<string name="new_directions_point_dialog">قبلاً نقاط بین راهی را چیده اید.</string>
+	<string name="context_menu_item_directions_to">به طرف</string>
+	<string name="context_menu_item_directions_from">از طرف</string>
+	<string name="route_descr_map_location">نقشه: </string>
+	<string name="route_to">به:</string>
+	<string name="osb_author_dialog_password">رمز عبور OSM (اختیاری)</string>
+</resources>
