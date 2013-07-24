@@ -170,7 +170,7 @@
 	<string name="left_side_navigation">رانندگی چپ-دست</string>
 	<string name="left_side_navigation_descr">برای کشورهای با رانندگی دست چپ انتخاب کنید</string>
 	<string name="unknown_from_location">نقطه شروع هنوز مشخص نشده است</string>
-	<string name="unknown_location">موقعبت هنوز مشخص نیست</string>
+	<string name="unknown_location">موقعیت هنوز مشخص نیست</string>
 	<string name="modify_transparency">تفییر شفافیت (0-شفاف، 255-کدر)</string>
 	<string name="confirm_interrupt_download">آیا می خواهید دانلود را متوقف کنید؟</string>
 	<string name="local_indexes_cat_map">نقشه های آفلاین (بُرداری)</string>
