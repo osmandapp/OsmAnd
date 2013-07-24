@@ -95,7 +95,7 @@ public class TestVoiceActivity extends SherlockActivity {
 		addButton(ll, "Keep left ' ' then after 400m keep right 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, "").then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 400, "A1"));
 		addButton(ll, "Make a U-turn on 'Riviera'", builder(p).makeUT("Riviera"));
 		addButton(ll, "When possible, make a U-turn", builder(p).makeUTwp());
-		addButton(ll, "Prepare to enter a roundabout and take the 3rd exit onto 'Liberty' after 750m", builder(p).prepareRoundAbout(750, 3, "Liberty"));
+		addButton(ll, "Prepare to enter a roundabout after 750m (and take the 3rd exit onto 'Liberty')", builder(p).prepareRoundAbout(750, 3, "Liberty"));
 		addButton(ll, "After 450m enter the roundabout and take the 1st exit onto 'Market Square'", builder(p).roundAbout(450, 0, 1, "Market Square"));
 		addButton(ll, "Roundabout: Take the 2nd exit onto 'Bridge Avenue'", builder(p).roundAbout(0, 2, "Bridge Avenue"));
 		addButton(ll, "GPS signal lost", builder(p).gpsLocationLost());
