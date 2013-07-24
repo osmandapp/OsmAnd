@@ -1160,7 +1160,7 @@
     <string name="context_menu_item_destination_point">Ange som destination</string>
     
 	<string name="speak_warnings_descr">Konfigurera trafikvarningar (fartbulor etc), varningar för fartkameror, hastighetsbegränsningar</string>
-    <string name="speak_speed_limit">Meddela om hastihetsbegränsningar</string>
+    <string name="speak_speed_limit">Meddela om hastighetsbegränsningar</string>
     <string name="speak_cameras">Meddela om fartkameror</string>
 	<string name="speak_traffic_warnings">Meddela om trafikvarningar</string>
 	<string name="local_index_gpx_timespan">\nTidsspann: %1$d:%2$02d:%3$02d</string>
