@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
-    <string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использование в оффлайн режиме.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использование в оффлайн режиме.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -1199,4 +1199,6 @@
     <string name="speak_cameras">Сообщать о камерах</string>
 	<string name="speak_traffic_warnings">Сообщать о препятствиях</string>
 	
+    <string name="clear_intermediate_points">Удалить промежуточные точки</string>
+    <string name="keep_intermediate_points">Оставить промежуточные точки</string>
     </resources>
