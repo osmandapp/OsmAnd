@@ -3,15 +3,25 @@
  */
 package net.osmand.plus.development;
 
+import java.io.File;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.preference.PreferenceScreen;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -61,24 +71,61 @@ public class TestVoiceActivity extends SherlockActivity {
 		setContentView(gl);
 		getSupportActionBar(). setTitle(R.string.test_voice_prompts);
 		
-		Runnable r = new Runnable(){
-
-			@Override
-			public void run() {
-				CommandPlayer p = app.getRoutingHelper().getVoiceRouter().getPlayer();
-				if (p == null) {
-					AccessibleToast.makeText(TestVoiceActivity.this, "Voice player not initialized", Toast.LENGTH_SHORT).show();
-				} else {
-					addButtons(ll, p);
+		selectVoice(ll);
+	}
+	
+	private Set<String> getVoiceFiles() {
+		// read available voice data
+		File extStorage = ((OsmandApplication) getApplication()).getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		Set<String> setFiles = new LinkedHashSet<String>();
+		if (extStorage.exists()) {
+			for (File f : extStorage.listFiles()) {
+				if (f.isDirectory()) {
+					setFiles.add(f.getName());
 				}
 			}
-			
-		};
-		if (app.getRoutingHelper().getVoiceRouter().getPlayer() != null) {
-			r.run();
-		} else {
-			app.showDialogInitializingCommandPlayer(this, true, r);
 		}
+		return setFiles;
+	}
+	private void selectVoice(final LinearLayout ll) {
+		String[] entries;
+		final String[] entrieValues;
+		Set<String> voiceFiles = getVoiceFiles();
+		entries = new String[voiceFiles.size() ];
+		entrieValues = new String[voiceFiles.size() ];
+		int k = 0;
+		int selected = 0;
+		for (String s : voiceFiles) {
+			entries[k] = s;
+			entrieValues[k] = s;
+			if(s.equals(((OsmandApplication) getApplication()).getSettings().VOICE_PROVIDER)) {
+				selected = k;
+			}
+			k++;
+		}
+		Builder bld = new AlertDialog.Builder(this);
+		bld.setSingleChoiceItems(entrieValues, selected, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				final OsmandApplication app = (OsmandApplication) getApplication();
+				app.getSettings().VOICE_PROVIDER.set(entrieValues[which]);
+				app.showDialogInitializingCommandPlayer(TestVoiceActivity.this, true, new Runnable() {
+					
+					@Override
+					public void run() {
+						CommandPlayer p = app.getRoutingHelper().getVoiceRouter().getPlayer();
+						if (p == null) {
+							AccessibleToast.makeText(TestVoiceActivity.this, "Voice player not initialized", Toast.LENGTH_SHORT).show();
+						} else {
+							addButtons(ll, p);
+						}						
+					}
+				});
+				
+			}
+		});
+		bld.create();
 	}
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
