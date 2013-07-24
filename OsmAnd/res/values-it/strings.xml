@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -1315,7 +1314,7 @@
 	<string name="av_photo_play_sound">Riproduci il suono allo scatto</string>
 	<string name="av_photo_play_sound_descr">Quando scatto una foto riproduci il suono</string>
 <string name="local_index_gpx_timespan">\nTempo trascorso: %1$d:%2$02d:%3$02d</string>
-	<string name="speak_warnings_title">Annuncia allarmi …</string>
+	
 	<string name="speak_warnings_descr">Configura gli avvisi del traffico (fermate forzate, dossi rallentatori) avvisi autovelox, limiti di velocità</string>
     <string name="speak_speed_limit">Annuncia limite di velocità</string>
     <string name="speak_cameras">Annuncia autovelox</string>

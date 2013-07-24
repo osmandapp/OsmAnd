@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -1158,7 +1157,7 @@
     <string name="please_select_address">Välj stad eller gata först</string>
     <string name="destination_point">Destination %1$s</string>
     <string name="context_menu_item_destination_point">Ange som destination</string>
-    <string name="speak_warnings_title">Meddela om larm…</string>
+    
 	<string name="speak_warnings_descr">Konfigurera trafikvarningar (fartbulor etc), varningar för fartkameror, hastighetsbegränsningar</string>
     <string name="speak_speed_limit">Meddela om hastihetsbegränsningar</string>
     <string name="speak_cameras">Meddela om fartkameror</string>

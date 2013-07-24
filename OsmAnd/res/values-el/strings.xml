@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
     <string name="poi_filter_emergency">Επείγοντα</string>
@@ -1277,7 +1276,7 @@
     <string name="route_to">Προς:</string>
     <string name="route_via">Μέσω:</string>
     <string name="route_from">Από:</string>
-    <string name="speak_warnings_title">Εκφώνηση προειδοποιήσεων…</string>
+    
 	<string name="speak_warnings_descr">Διαμόρφωση προειδοποιήσεων κυκλοφορίας (αναγκαστικές στάσεις, σαμαράκια), προειδοποιήσεις καμερών ταχύτητας, ορίων ταχύτητας</string>
     <string name="speak_speed_limit">Εκφώνηση ορίου ταχύτητας</string>
     <string name="speak_cameras">Εκφώνηση καμερών ταχύτητας</string>

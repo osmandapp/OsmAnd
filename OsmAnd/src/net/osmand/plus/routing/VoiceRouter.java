@@ -392,7 +392,7 @@ public class VoiceRouter {
 	}
 	
 	public String getSpeakableStreetName(RouteDirectionInfo i) {
-		if(i == null){
+		if(i == null || !router.getSettings().SPEAK_STREET_NAMES.get()){
 			return "";
 		}
 		if(!Algorithms.isEmpty(i.getRef())) {

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="search_button">Išči</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
 	<string name="settings_Button">Nastavitve</string>
 	<string name="favorites_Button">Priljubljene</string>
@@ -1453,7 +1452,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="av_camera_focus_continuous">Kamera nenehno poskuša ostriti</string>
 	<string name="av_photo_play_sound">Predvajaj zvok pri slikanju</string>
 	<string name="av_photo_play_sound_descr">Izberite ali naj se predvaja zvok ob fotografiranju</string>
-<string name="speak_warnings_title">Napoved alarmov …</string>
+
 	<string name="speak_warnings_descr">Nastavitev za prometna opozorila (prisilna ustavitev, ležeči policaji), opozorila merilnikov hitrosti, omejitve hitrosti</string>
     <string name="speak_speed_limit">Napovej omejitve hitrosti</string>
     <string name="speak_cameras">Napovej hitrostne kamere</string>
@@ -1475,4 +1474,4 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="route_via">Prek:</string>
     <string name="route_from">Od:</string>
     <string name="osb_author_dialog_password">OSM geslo (neobvezno)</string>
-	</resources>
+    </resources>

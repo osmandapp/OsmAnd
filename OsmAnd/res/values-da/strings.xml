@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -1541,7 +1540,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="speak_traffic_warnings">Meddel om trafikadvarsler</string>
 	<string name="speak_cameras">Meddel om fotofælder</string>
 	<string name="speak_speed_limit">Meddel om hastighedsgrænse</string>
-    <string name="speak_warnings_title">Meddel om alarmer…</string>
+    
 	<string name="speak_warnings_descr">Konfigurer trafikadvarsler (tvungne stop, vejbump), advarsler om fotofælder, hastighedsgrænser</string>
     <string name="route_descr_map_location">Kort: </string>
     <string name="route_to">Til:</string>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
 \n\t- Akadálymentesítés 
@@ -1267,7 +1266,7 @@
     <string name="route_to">Ide:</string>
     <string name="route_via">Át:</string>
     <string name="route_from">Innen:</string>
-    <string name="speak_warnings_title">Riasztások bemondása…</string>
+    
 	<string name="speak_warnings_descr">Közlekedési figyelmeztetések (stop, fekvőrendőr), traffipax, sebességhatár</string>
     <string name="speak_speed_limit">Sebességhatár bemondása</string>
     <string name="speak_cameras">Traffipax bemondása</string>
