@@ -381,26 +381,24 @@ public class RoutingContext {
 		long tileId = getRoutingTile(x31, y31, memoryLimit, OPTION_SMART_LOAD);
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 		RouteSegment original = null;
-		if (tileRoutes.containsKey(tileId)) {
-			List<RouteDataObject> routes = tileRoutes.get(tileId);
-			if (routes != null) {
-				for (RouteDataObject ro : routes) {
-					for (int i = 0; i < ro.pointsX.length; i++) {
-						if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
-							long id = calcRouteId(ro, i);
-							if (excludeDuplications.contains(id)) {
-								continue;
-							}
-							excludeDuplications.put(id, ro);
-							RouteSegment segment = new RouteSegment(ro, i);
-							segment.next = original;
-							original = segment;
+        final List<RouteDataObject> routes = tileRoutes.get(tileId);
+		if (routes != null) {
+			for (RouteDataObject ro : routes) {
+				for (int i = 0; i < ro.pointsX.length; i++) {
+					if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
+						long id = calcRouteId(ro, i);
+						if (excludeDuplications.contains(id)) {
+							continue;
 						}
+						excludeDuplications.put(id, ro);
+						RouteSegment segment = new RouteSegment(ro, i);
+						segment.next = original;
+						original = segment;
 					}
 				}
 			}
 		}
-		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
+		final List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
 		if (subregions != null) {
 			for (RoutingSubregionTile rs : subregions) {
 				original = rs.loadRouteSegment(x31, y31, this, excludeDuplications, original);
@@ -623,18 +621,16 @@ public class RoutingContext {
 	
 	private void getAllObjects(long tileId, final List<RouteDataObject> toFillIn) {
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
-		if (tileRoutes.containsKey(tileId)) {
-			List<RouteDataObject> routes = tileRoutes.get(tileId);
-			if (routes != null) {
-				for (RouteDataObject ro : routes) {
-					if (!excludeDuplications.contains(ro.id)) {
-						excludeDuplications.put(ro.id, ro);
-						toFillIn.add(ro);
-					}
+        final List<RouteDataObject> routes = tileRoutes.get(tileId);
+		if (routes != null) {
+			for (RouteDataObject ro : routes) {
+				if (!excludeDuplications.contains(ro.id)) {
+					excludeDuplications.put(ro.id, ro);
+					toFillIn.add(ro);
 				}
 			}
 		}
-		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
+		final List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
 		if (subregions != null) {
 			for (RoutingSubregionTile rs : subregions) {
 				rs.loadAllObjects(toFillIn, this, excludeDuplications);

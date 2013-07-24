@@ -61,8 +61,9 @@ public class RoutingConfiguration {
 				router = defaultRouter;
 			}
 			RoutingConfiguration i = new RoutingConfiguration();
-			if (routers.containsKey(router)) {
-				i.router = routers.get(router);
+			final GeneralRouter gr = routers.get(router);
+			if (gr != null) {
+				i.router = gr;
 				if (specialization != null) {
 					for (String s : specialization) {
 						i.router = i.router.specifyParameter(s);

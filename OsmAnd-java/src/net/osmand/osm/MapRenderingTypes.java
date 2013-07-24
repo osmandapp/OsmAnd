@@ -71,21 +71,19 @@ public class MapRenderingTypes {
 		value.setLength(0);
 		value.append(subType);
 		Map<AmenityType, Map<String, String>> m = getAmenityTypeNameToTagVal();
-		if (m.containsKey(type)) {
-			Map<String, String> map = m.get(type);
-			if (map.containsKey(subType)) {
-				String res = map.get(subType);
-				if (res != null) {
-					int i = res.indexOf(' ');
-					if (i != -1) {
-						tag.setLength(0);
-						tag.append(res.substring(0, i));
-						value.setLength(0);
-						value.append(res.substring(i + 1));
-					} else {
-						tag.setLength(0);
-						tag.append(res);
-					}
+        final Map<String, String> map = m.get(type);
+		if (map != null) {
+            final String res = map.get(subType);
+			if (res != null) {
+				int i = res.indexOf(' ');
+				if (i != -1) {
+					tag.setLength(0);
+					tag.append(res.substring(0, i));
+					value.setLength(0);
+					value.append(res.substring(i + 1));
+				} else {
+					tag.setLength(0);
+					tag.append(res);
 				}
 			}
 		}		
