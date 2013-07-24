@@ -724,7 +724,7 @@
 	<string name="settings_direction_style">نوع جهت گیری</string>
 	<string name="settings_direction_style_descr">انتخاب نوع جهت گیری در هنگام حرکت</string>
 	<string name="auto_announce_on">شروع اعلام خودکار</string>
-	<string name="auto_announce_off">توقف اعلا خودکار</string>
+	<string name="auto_announce_off">توقف اعلام خودکار</string>
 	<string name="use_fluorescent_overlays_descr">برای نمایش مسیرها و جاده ها از رنگهای فلوروسنت استفاده شود</string>
 	<string name="offline_edition">ویرایش آفلاین</string>
 	<string name="offline_edition_descr">استفاده همیشگی از ویرایش آفلاین</string>
@@ -738,7 +738,7 @@
 	<string name="osmand_development_plugin_description">نشان دادن تنظیمات برای توسعه و رفع اشکالاتی مانند شبیه سازی مسیر یا عملکرد رندر.</string>
 	<string name="animate_route_off">توقف شبیه سازی</string>
 	<string name="animate_route">شروع شبیه سازی</string>
-	<string name="where_am_i">موقعیت من؟</string>
+	<string name="where_am_i">موقعیت من</string>
 	<string name="layer_transport">ایستگاههای حمل و نقل عمومی</string>
 	<string name="transport_stops">ایستگاهها</string>
 	<string name="transport_stops_to_pass">ایستگاههای مسیر</string>
