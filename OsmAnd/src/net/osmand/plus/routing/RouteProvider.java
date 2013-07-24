@@ -24,19 +24,19 @@ import javax.xml.parsers.ParserConfigurationException;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd;
@@ -44,6 +44,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
+import net.osmand.util.MapUtils;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -75,9 +76,10 @@ public class RouteProvider {
 	public static class GPXRouteParams {
 		List<Location> points = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions;
+		DataTileManager<WptPt> wpt;
 	
-		public GPXRouteParams(GPXFile file, boolean reverse, OsmandSettings settings){
-			prepareEverything(file, reverse, settings.LEFT_SIDE_NAVIGATION.get());
+		public GPXRouteParams(GPXFile file, boolean reverse, boolean announceWaypoints, OsmandSettings settings){
+			prepareEverything(file, reverse, announceWaypoints, settings.LEFT_SIDE_NAVIGATION.get());
 		}
 		
 		public void setStartPoint(Location startPoint) {
@@ -104,7 +106,7 @@ public class RouteProvider {
 			return null;
 		}
 		
-		private void prepareEverything(GPXFile file, boolean reverse, boolean leftSide){
+		private void prepareEverything(GPXFile file, boolean reverse, boolean announceWaypoints, boolean leftSide){
 			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){
 				directions =  parseCloudmadeRoute(points, file, OSMAND_ROUTER.equals(file.author), leftSide, 10);
 				if(reverse){
@@ -130,6 +132,14 @@ public class RouteProvider {
 				}
 				if (reverse) {
 					Collections.reverse(points);
+				}
+			}
+			wpt = null;
+			if(announceWaypoints && !file.points.isEmpty()) {
+				wpt = new DataTileManager<WptPt>(17);
+				for(WptPt w : file.points ) {
+					wpt.registerObjectXY(MapUtils.get31TileNumberX(w.lon), 
+							MapUtils.get31TileNumberY(w.lat),w) ;
 				}
 			}
 		}		
@@ -223,7 +233,7 @@ public class RouteProvider {
 		}
 		ArrayList<Location> sublist = new ArrayList<Location>(gpxRoute.subList(startI, endI));
 		if(params.directions == null){
-			res = new RouteCalculationResult(sublist, params.directions, pars.start, pars.end, null, null, 
+			res = new RouteCalculationResult(sublist, params.directions, pars.start, pars.end, null, params.wpt, null,  
 					pars.ctx, pars.leftSide, true);
 		} else {
 			List<RouteDirectionInfo> subdirections = new ArrayList<RouteDirectionInfo>();
@@ -239,7 +249,7 @@ public class RouteProvider {
 					subdirections.add(ch);
 				}
 			}
-			res = new RouteCalculationResult(sublist, subdirections, pars.start, pars.end, null, null, 
+			res = new RouteCalculationResult(sublist, subdirections, pars.start, pars.end, null, null, null, 
 					pars.ctx, pars.leftSide, true);
 		}
 		return res;
@@ -310,7 +320,7 @@ public class RouteProvider {
 				
 			}
 		}
-		return new RouteCalculationResult(res, null, params.start, params.end, null, null,
+		return new RouteCalculationResult(res, null, params.start, params.end, null, null, null,
 				params.ctx, params.leftSide, true);
 	}
 	
@@ -472,7 +482,7 @@ public class RouteProvider {
 		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, connection.getInputStream(), false);
 		directions = parseCloudmadeRoute(res, gpxFile, false, params.leftSide, speed);
 
-		return new RouteCalculationResult(res, directions, params.start, params.end, params.intermediates, 
+		return new RouteCalculationResult(res, directions, params.start, params.end, params.intermediates, null,  
 				null, params.ctx, params.leftSide, true);
 	}
 
@@ -651,7 +661,7 @@ public class RouteProvider {
 
 			}
 		}
-		return new RouteCalculationResult(res, null, params.start, params.end, null, null, params.ctx, params.leftSide, true);
+		return new RouteCalculationResult(res, null, params.start, params.end, null, null, null, params.ctx, params.leftSide, true);
 	}
 	
 	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute){

@@ -4,6 +4,7 @@ package net.osmand.plus.routing;
 import net.osmand.Location;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
@@ -198,6 +199,13 @@ public class VoiceRouter {
 				waitAnnouncedOffRoute += 10000;
 			}
 			lastAnnouncedOffRoute = ms;
+		}
+	}
+	
+	public void announceWaypoint(String w) {
+		CommandBuilder p = getNewCommandPlayerToPlay();
+		if(p != null) {
+			p.arrivedAtWayPoint(w).play();
 		}
 	}
 

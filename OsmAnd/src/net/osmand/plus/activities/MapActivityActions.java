@@ -758,9 +758,10 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public boolean processResult(final GPXFile result) {
 				Builder builder = new AlertDialog.Builder(mapActivity);
-				final boolean[] props = new boolean[]{false, false, false};
+				final boolean[] props = new boolean[]{false, false, false, settings.SPEAK_GPX_WPT.get()};
 				builder.setMultiChoiceItems(new String[] { getString(R.string.gpx_option_reverse_route),
-						getString(R.string.gpx_option_destination_point), getString(R.string.gpx_option_from_start_point) }, props,
+						getString(R.string.gpx_option_destination_point), getString(R.string.gpx_option_from_start_point),
+						getString(R.string.announce_gpx_waypoints) }, props,
 						new OnMultiChoiceClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -773,7 +774,9 @@ public class MapActivityActions implements DialogProvider {
 						boolean reverse = props[0];
 						boolean passWholeWay = props[2];
 						boolean useDestination = props[1];
-						GPXRouteParams gpxRoute = new GPXRouteParams(result, reverse, settings);
+						boolean announceGpxWpt = props[3];
+						settings.SPEAK_GPX_WPT.set(announceGpxWpt);
+						GPXRouteParams gpxRoute = new GPXRouteParams(result, reverse, announceGpxWpt, settings);
 						
 						Location loc = getLastKnownLocation();
 						if(passWholeWay && loc != null){

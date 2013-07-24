@@ -123,7 +123,8 @@ public class FailSafeFuntions {
 
 						@Override
 						protected void onPostExecute(GPXFile result) {
-							final GPXRouteParams gpxRoute = result == null ? null : new GPXRouteParams(result, false, settings);
+							final GPXRouteParams gpxRoute = result == null ? null : new GPXRouteParams(result, false,
+									settings.SPEAK_GPX_WPT.get(), settings);
 							LatLon endPoint = pointToNavigate != null ? pointToNavigate : gpxRoute.getLastPoint();
 							net.osmand.Location startPoint = gpxRoute == null ? null : gpxRoute.getStartPointForRoute();
 							if (endPoint == null) {

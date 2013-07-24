@@ -1,14 +1,20 @@
 package net.osmand.plus.routing;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
@@ -23,9 +29,11 @@ public class RouteCalculationResult {
 	private final List<RouteDirectionInfo> directions;
 	private final List<RouteSegmentResult> segments;
 	private final List<AlarmInfo> alarmInfo;
+	private final List<WptPt> waypoints;
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
+	private final int[] waypointIndexes;
 	private final float routingTime;
 	
 
@@ -35,13 +43,15 @@ public class RouteCalculationResult {
 	protected int currentRoute = 0;
 	protected int nextIntermediate = 0;
 	protected int nextAlarmInfo = 0;
+	protected int currentWaypointGPX = 0;
+	protected int lastWaypointGPX = 0;
 
 	public RouteCalculationResult(String errorMessage) {
-		this(null, null, null, null, null, errorMessage, null, false, false);
+		this(null, null, null, null, null, null, errorMessage, null, false, false);
 	}
 
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, Location start, LatLon end, 
-			List<LatLon> intermediates, String errorMessage, ClientContext ctx, boolean leftSide, boolean addMissingTurns) {
+			List<LatLon> intermediates, DataTileManager<WptPt> waypointsTm, String errorMessage, ClientContext ctx, boolean leftSide, boolean addMissingTurns) {
 		this.routingTime = 0;
 		this.errorMessage = errorMessage;
 		this.intermediatePoints = new int[intermediates == null ? 0 : intermediates.size()];
@@ -66,6 +76,8 @@ public class RouteCalculationResult {
 		calculateIntermediateIndexes(ctx, intermediates, localDirections);
 		this.directions = Collections.unmodifiableList(localDirections);
 		updateDirectionsTime();
+		this.waypoints = new ArrayList<WptPt>();
+		this.waypointIndexes = calculateWaypointIndexes(list, waypointsTm, waypoints);
 	}
 	
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,  
@@ -88,7 +100,33 @@ public class RouteCalculationResult {
 		this.directions = Collections.unmodifiableList(computeDirections);
 		updateDirectionsTime();
 		this.alarmInfo = Collections.unmodifiableList(alarms);
-		 
+		this.waypointIndexes = new int[0];
+		this.waypoints = new ArrayList<WptPt>();
+	}
+	
+	public List<WptPt> getWaypointsToAnnounce(Location loc) {
+		if (currentWaypointGPX != lastWaypointGPX && loc != null) {
+			ArrayList<WptPt> points = new ArrayList<WptPt>();
+			Location next = locations.get(currentRoute);
+			float dist = loc.distanceTo(next);
+			while (currentWaypointGPX < lastWaypointGPX) {
+				WptPt w = waypoints.get(currentWaypointGPX);
+				if(MapUtils.getDistance(w.lat, w.lon, next.getLatitude(), next.getLongitude()) > dist + 50) {
+					currentWaypointGPX++;					
+				} else {
+					break;
+				}
+			}
+			while (currentWaypointGPX < lastWaypointGPX) {
+				WptPt w = waypoints.get(currentWaypointGPX);
+				if(MapUtils.getDistance(w.lat, w.lon, loc.getLatitude(), next.getLongitude()) < 60) {
+					currentWaypointGPX++;
+					points.add(w);
+				}
+			}
+			return points;
+		}
+		return Collections.emptyList();
 	}
 	
 	private void calculateIntermediateIndexes(ClientContext ctx, List<LatLon> intermediates, List<RouteDirectionInfo> localDirections) {
@@ -470,6 +508,47 @@ public class RouteCalculationResult {
 			}
 		}
 	}
+	
+	/**
+	 * PREPARATION
+	 * 
+	 */
+	private int[] calculateWaypointIndexes(List<Location> list, DataTileManager<WptPt> waypointsTm, List<WptPt> waypoints) {
+		if(waypointsTm == null || waypointsTm.isEmpty() || list.size() == 0) {
+			return new int[0];
+		}
+		TIntArrayList ls = new TIntArrayList();
+		Location loc = list.get(0);
+		Location ploc = list.get(0);
+		Set<WptPt> added = new HashSet<WptPt>();
+		int prev31x = MapUtils.get31TileNumberX(loc.getLatitude());
+		int prev31y = MapUtils.get31TileNumberY(loc.getLongitude());
+		for(int j = 1; j < list.size(); j++) {
+			loc = list.get(j);
+			int t31x = MapUtils.get31TileNumberX(loc.getLatitude());
+			int t31y = MapUtils.get31TileNumberY(loc.getLongitude());
+			List<WptPt> ws = waypointsTm.getObjects(Math.min(prev31x, t31x) - Math.abs(t31x - prev31x) / 4,
+					Math.min(prev31y, t31y) - Math.abs(t31y - prev31y) / 4,
+					Math.max(prev31x, t31x) + Math.abs(t31x - prev31x) / 4,
+					Math.max(prev31y, t31y) + Math.abs(t31y - prev31y) / 4);
+			for(WptPt w : ws) {
+				if (added.contains(w)) {
+					double ds = MapUtils.getOrthogonalDistance(w.lat, w.lon, ploc.getLatitude(), ploc.getLongitude(), loc.getLatitude(),
+							loc.getLongitude());
+					if (ds < 80) {
+						ls.add(j);
+						waypoints.add(w);
+						added.add(w);
+					}
+				}
+			}
+			
+			prev31x = t31x;
+			prev31y = t31y;
+			ploc = loc;
+		}
+		return ls.toArray();
+	}
 
 	/**
 	 * PREPARATION
@@ -630,6 +709,9 @@ public class RouteCalculationResult {
 		}
 		while (nextAlarmInfo < alarmInfo.size() && alarmInfo.get(nextAlarmInfo).locationIndex < currentRoute) {
 			nextAlarmInfo++;
+		}
+		while(lastWaypointGPX < waypointIndexes.length && waypointIndexes[lastWaypointGPX] <= currentRoute) {
+			lastWaypointGPX++;
 		}
 		while(nextIntermediate < intermediatePoints.length) {
 			RouteDirectionInfo dir = directions.get(intermediatePoints[nextIntermediate]);

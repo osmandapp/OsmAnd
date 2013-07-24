@@ -14,6 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.ClientContext;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -215,6 +216,7 @@ public class RoutingHelper {
 				if (finished) {
 					return null;
 				}
+				announceGpxWaypoints(currentLocation);
 				List<Location> routeNodes = route.getImmutableLocations();
 				int currentRoute = route.currentRoute;
 
@@ -273,6 +275,24 @@ public class RoutingHelper {
 			return locationProjection;
 		} else {
 			return currentLocation;
+		}
+	}
+
+
+	private void announceGpxWaypoints(Location currentLocation) {
+		if (currentLocation != null) {
+			List<WptPt> wpt = route.getWaypointsToAnnounce(currentLocation);
+			if (wpt.size() > 0) {
+				String s = "";
+				for (WptPt w : wpt) {
+					if(!Algorithms.isEmpty(w.name)) {
+						s = w.name +",";
+					}
+				}
+				if(!Algorithms.isEmpty(s)) {
+					voiceRouter.announceWaypoint(s);
+				}
+			}
 		}
 	}
 
