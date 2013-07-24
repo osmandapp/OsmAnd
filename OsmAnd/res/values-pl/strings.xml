@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_select_destination_point">Uzyskiwanie informacji o trasie</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_select_destination_point">Uzyskiwanie informacji o trasie</string>
   <string name="tip_select_destination_point_t">"\tTrasę przejazdu do wybranego punktu możesz zobaczyć bezpośrednio na mapie (menu kontekstowe, następnie \'Trasa\'), podczas wyszukiwania lub po długim naciśnięciu na wpis z listy ulubionych punktów.
 \n\tPunkt docelowy oznaczony jest pomarańczową flagą na mapie. OsmAnd wyświetla odległość i kierunek do niej (pomarańczowy trójkąt). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
@@ -1302,4 +1303,7 @@
     <string name="speak_cameras">Fotoradary</string>
 	<string name="speak_traffic_warnings">Ostrzeżenia o ruchu</string>
 	<string name="osb_author_dialog_password">Hasło OSM (opcjonalne)</string>
-	</resources>
+	<string name="speak_title">Zapowiadaj…</string>
+	<string name="speak_descr">Konfiguruj zapowiadanie nazw ulic, ostrzeżeń o ruchu (przymusowe przystanki, progi zwalniające), fotoradarów, ograniczeń prędkości</string>
+	<string name="speak_street_names">Nazwy ulic (TTS)</string>
+    </resources>
