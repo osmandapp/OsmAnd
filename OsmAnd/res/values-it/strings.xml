@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -1336,4 +1337,7 @@
     <string name="route_via">Per:</string>
     <string name="route_from">Da:</string>
     <string name="osb_author_dialog_password">Password OSM (opzionale)</string>
-	</resources>
+	<string name="speak_title">Annuncia …</string>
+	<string name="speak_descr">Configura per annunciare i nomi delle strade, gli avvertimenti di traffico (soste forzate, dossi), gli avvisi autovelox, i limiti di velocità</string>
+	<string name="speak_street_names">Annuncia i nomi delle strade (TTS)</string>
+    </resources>
