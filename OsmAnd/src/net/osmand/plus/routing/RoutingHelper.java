@@ -228,7 +228,7 @@ public class RoutingHelper {
 						log.info("Recalculate route, because correlation  : " + dist); //$NON-NLS-1$
 						calculateRoute = true;
 					}
-					if(dist > 350 && currentGPXRoute != null) {
+					if(dist > 350) {
 						voiceRouter.announceOffRoute(dist);
 					}
 				}
