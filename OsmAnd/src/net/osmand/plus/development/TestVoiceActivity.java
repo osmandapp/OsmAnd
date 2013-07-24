@@ -122,10 +122,10 @@ public class TestVoiceActivity extends SherlockActivity {
 						}						
 					}
 				});
-				
+				dialog.dismiss();
 			}
 		});
-		bld.create();
+		bld.show();
 	}
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
