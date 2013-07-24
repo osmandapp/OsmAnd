@@ -226,6 +226,9 @@ public class RoutingHelper {
 						log.info("Recalculate route, because correlation  : " + dist); //$NON-NLS-1$
 						calculateRoute = true;
 					}
+					if(dist > 350 && currentGPXRoute != null) {
+						voiceRouter.announceOffRoute(dist);
+					}
 				}
 				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();

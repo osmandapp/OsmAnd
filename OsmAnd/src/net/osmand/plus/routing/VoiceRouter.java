@@ -29,7 +29,9 @@ public class VoiceRouter {
 	private int currentStatus = STATUS_UNKNOWN;
 	private float playGoAheadDist = 0;
 	private long lastAnnouncedSpeedLimit = 0;
+	private long lastAnnouncedOffRoute = 0;
 	private long waitAnnouncedSpeedLimit = 0;
+	private long waitAnnouncedOffRoute = 0;
 	private long lastAnnouncedSpeedCamera = 0;
 	private long lastAnnouncedWarning = 0;
 
@@ -183,6 +185,21 @@ public class VoiceRouter {
 
 	}
 	
+	public void announceOffRoute(double dist) {
+		long ms = System.currentTimeMillis();
+		if(waitAnnouncedOffRoute == 0 || ms - lastAnnouncedOffRoute > waitAnnouncedOffRoute) {
+			CommandBuilder p = getNewCommandPlayerToPlay();
+			if (p != null) {
+				p.offRoute(dist).play();
+			}
+			if(waitAnnouncedOffRoute == 0) {
+				waitAnnouncedOffRoute = 30000;	
+			} else {
+				waitAnnouncedOffRoute += 10000;
+			}
+			lastAnnouncedOffRoute = ms;
+		}
+	}
 
 	public void announceAlarm(AlarmInfo alarm) {
 		if(alarm == null) {
