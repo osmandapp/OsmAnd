@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -1181,4 +1182,7 @@
     <string name="route_to">Till:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">Från:</string>
+    <string name="speak_title">Tala …</string>
+	<string name="speak_descr">Konfigurera för att läsa upp gatunamn, trafikvarningar (t.ex. fartbulor), varningar för fartkameror, hastighetsbegränsningar</string>
+	<string name="speak_street_names">Läs upp gatunamn (TTS)</string>
     </resources>
