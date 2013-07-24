@@ -1352,4 +1352,7 @@
     <string name="av_camera_focus_hiperfocal">Hyperfokaler Fokus</string>
 	<string name="av_camera_focus_edof">Erweiterte Schärfentiefe (EDOF)</string>
 	<string name="av_camera_focus_macro">Makro-Fokusmodus (Nahaufnahme)</string>
-	</resources>
+	<string name="speak_title">Ansagen …</string>
+	<string name="speak_descr">Einstellungen für Ansagen zu Straßennamen, Verkehrswarnungen, Blitzern oder Höchstgeschwindigkeit</string>
+	<string name="speak_street_names">Straßennamen ansagen (TTS)</string>
+    </resources>
