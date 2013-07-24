@@ -1169,7 +1169,7 @@
     <string name="tip_recent_changes_1_5_t">Förändringar i 1.5:
 	\n\t* Röstvarningar vid hastighetsbegränsningar och fartkameror
 	\n\t* Högkvalitativa kartikoner
-	\n\t* Massor av förändringar av gränssnittet
+	\n\t* Många förändringar av gränssnittet
 	\n\t* Buggfixar i avståndsvisning, GPX-analys, behandling av waypoints, planeringswidget, OSM-uppladdning, https-behandling
     </string>
     <string name="osb_author_or_password_not_specified">Ange OSM-användare och -lösenord i inställningarna</string>
@@ -1185,4 +1185,5 @@
     <string name="speak_title">Tala …</string>
 	<string name="speak_descr">Konfigurera för att läsa upp gatunamn, trafikvarningar (t.ex. fartbulor), varningar för fartkameror, hastighetsbegränsningar</string>
 	<string name="speak_street_names">Läs upp gatunamn (TTS)</string>
+    <string name="announce_gpx_waypoints">Meddela om GPX-waypoints</string>
     </resources>
