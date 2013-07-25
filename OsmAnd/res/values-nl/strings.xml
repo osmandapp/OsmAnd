@@ -1519,4 +1519,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="speak_title">Aankondigen…</string>
 	<string name="speak_descr">Aankondigen van straatnamen, verkeerswaarschuwingen (verplicht stoppen, drempels), snelheidscamera\'s of snelheidsbeperkingen</string>
 	<string name="speak_street_names">Straatnamen aankondigen (TTS)</string>
+    <string name="osmodroid_mode_on">OsMoDroid stoppen</string>    
+    <string name="osmodroid_mode_off">OsMoDroid starten</string>
     </resources>
