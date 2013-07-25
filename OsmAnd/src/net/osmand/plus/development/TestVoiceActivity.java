@@ -130,16 +130,16 @@ public class TestVoiceActivity extends SherlockActivity {
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
 		addButton(ll, "New route has been calculated (15350m & 2h30m5sec)", builder(p).newRouteCalculated(15350, 9005));
-		addButton(ll, "After 1050m turn slightly left onto 'Hauptstrasse'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SL, 1050, "Hauptstrasse"));
+		addButton(ll, "Prepare to turn slighlty left after 850m then bear right", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 850, "").then().bearRight(""));
+		addButton(ll, "After 1050m turn sharply left onto 'Hauptstrasse'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 1050, "Hauptstrasse"));
 		addButton(ll, "Turn left onto 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, "Main Street"));
 		addButton(ll, "Prepare to turn right after 320m onto 'Mini'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 320, "Mini"));
-		addButton(ll, "After 370m turn sharply right onto 'F23'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, 370, "F23"));
-		addButton(ll, "Prepare to turn slighlty left after 850m then bear right", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 850, "").then().bearRight(""));
+		addButton(ll, "After 370m turn slightly right onto 'F23'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, "F23"));
 		addButton(ll, "Turn sharply right onto 'Main Street' then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, "Main Street").then().bearLeft(""));
-		addButton(ll, "Prepare to make a U-turn after 400m", builder(p).prepareMakeUT(400, ""));
-		addButton(ll, "After 640m make a U-turn", builder(p).makeUT(640, ""));
 		addButton(ll, "Prepare to keep left ' ' after 370m", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 370, ""));
 		addButton(ll, "Keep left ' ' then after 400m keep right 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, "").then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 400, "A1"));
+		addButton(ll, "Prepare to make a U-turn after 400m", builder(p).prepareMakeUT(400, ""));
+		addButton(ll, "After 640m make a U-turn", builder(p).makeUT(640, ""));
 		addButton(ll, "Make a U-turn on 'Riviera'", builder(p).makeUT("Riviera"));
 		addButton(ll, "When possible, make a U-turn", builder(p).makeUTwp());
 		addButton(ll, "Prepare to enter a roundabout after 750m (and take the 3rd exit onto 'Liberty')", builder(p).prepareRoundAbout(750, 3, "Liberty"));
@@ -149,10 +149,10 @@ public class TestVoiceActivity extends SherlockActivity {
 		addButton(ll, "Route recalculated (23150m & 350sec)", builder(p).routeRecalculated(23150, 350));
 		addButton(ll, "Follow the road for 2350m to ' '", builder(p).goAhead(2350, ""));
 		addButton(ll, "Follow the road for 360m to 'Broadway' and arrive at your waypoint ' '", builder(p).goAhead(360, "Broadway").andArriveAtIntermediatePoint(""));
-		addButton(ll, "Arrive at your intermediate point 'Friend'", builder(p).arrivedAtIntermediatePoint("Friend"));
-		addButton(ll, "Follow the road 'A33' for 800m and arrive at your destination", builder(p).goAhead(800, "A33").andArriveAtDestination(""));
+		addButton(ll, "Follow the road for 800m to 'A33' and arrive at your destination", builder(p).goAhead(800, "A33").andArriveAtDestination(""));
 		addButton(ll, "Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
-		addButton(ll, "Arrive at your waypoint 'GPX point'", builder(p).arrivedAtWayPoint("GPX point"));
+		addButton(ll, "Arrive at your intermediate point 'Friend'", builder(p).arrivedAtIntermediatePoint("Friend"));
+		addButton(ll, "Arrive at your GPX waypoint 'Trailhead'", builder(p).arrivedAtWayPoint("Trailhead"));
 		addButton(ll, "You have been off the route for 1050m", builder(p).offRoute(1050));
 		addButton(ll, "You are exceeding the speed limit", builder(p).speedAlarm());
 		addButton(ll, "Attention, 'bump'", builder(p).attention("bump"));
