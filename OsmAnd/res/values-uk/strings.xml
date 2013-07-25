@@ -170,14 +170,14 @@
   <string name="local_openstreetmap_show">Показати на мапі</string>
   <string name="local_openstreetmap_upload">Завантажити зміни в OSM</string>
   <string name="local_openstreetmap_delete">Вилучити створені</string>
-  <string name="local_openstreetmap_descr_title">Asynchronous OSM Editing:</string>
+  <string name="local_openstreetmap_descr_title">Асинхронне редагування OSM:</string>
   <string name="local_openstreetmap_settings">Локальні POI/Баги</string>
   <string name="local_openstreetmap_settings_descr">Показати і керувати локальними POI/Bugs</string>
   <string name="live_monitoring_descr">Відсилати поточне місцезнаходження на спеціальний web-сервіс</string>
-  <string name="live_monitoring">Online live tracking</string>
-  <string name="live_monitoring_interval_descr">Specify live tracking interval</string>
-  <string name="live_monitoring_interval">Live tracking interval</string>
-  <string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
+  <string name="live_monitoring">Онлайн-моніторинг</string>
+  <string name="live_monitoring_interval_descr">Вкажіть інтервал надсилання даних</string>
+  <string name="live_monitoring_interval">Інтервал надсилання даних</string>
+  <string name="live_monitoring_url_descr">Вкажіть веб-адресу з наступними параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Live tracking web address</string>
   <string name="gpx_monitoring_disabled_warn">Будь ласка, ввімкніть \"Записувати шлях в GPX\" в Нашаштуваннях.</string>
   <string name="show_current_gpx_title">Відображати пройдений шлях</string>
@@ -312,7 +312,7 @@
   <string name="local_index_gpx_info_show">\n\nТривале натискання для перегляду на мапі</string>
   <string name="local_index_gpx_info_speed">\nСередня швидкість: %1$s \nМаксимальна швидкість: %2$s"</string>
   <string name="local_index_gpx_info_elevation">\nСередня висота: %1$s\nМінімальна висота: %2$s\nМаксимальна висота: %3$s\nПідйом вгору: %4$s\nСпуск вниз: %5$s"</string>
-  <string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tF, %5$tR\nEnd time : %6$tF, %6$tR</string>
+  <string name="local_index_gpx_info">Путі: %1$d\nВсього точок: %2$d\nМаршрутних точок: %3$d\nЗагальна відстань: %4$s\nПочаток: %5$tF, %5$tR\nКінець: %6$tF, %6$tR</string>
   <string name="local_index_installed">Редакція</string>
   <string name="local_index_items_backuped">%1$d з %2$d об’єктів успішно деактивовано.</string>
   <string name="local_index_items_deleted">%1$d з %2$d об’єктів успішно вилучено.</string>
@@ -325,8 +325,7 @@
   <string name="local_index_mi_delete">Вилучити</string>
   <string name="local_index_mi_reload">Оновити з SD-картки</string>
   <string name="local_index_download">Завантажити</string>
-  <string name="local_index_tile_data">Дані мапи: %1$s \nМінімальний масштаб: %2$d Максимальний масштаб: %3$d Завантажуваний: %4$s
-\nЗавантажені рівні: %5$s</string>
+  <string name="local_index_tile_data">Дані мапи: %1$s \nМінімальний масштаб: %2$d\nМаксимальний масштаб: %3$d\nЗавантажуваний: %4$s\nЗавантажені рівні: %5$s</string>
   <string name="local_index_poi_data">POI дані</string>
   <string name="local_index_address_data">Адреси</string>
   <string name="local_index_transport_data">Траснпорт</string>
