@@ -18,8 +18,8 @@
 	<string name="speak_traffic_warnings">Announce traffic warnings</string>
     <string name="tip_recent_changes_1_5_t">Changes in 1.5:
 	\n\t* Voice warnings about speed limits and cameras
-	\n\t* High density map icons
 	\n\t* More voice prompt capabilities (street names announced)
+	\n\t* High density map icons
 	\n\t* Lots of UI changes
 	\n\t* Bugfixes in distance display, GPX analyzer, waypoint handling, planning widget, OSM uploading, https handling
     </string>
