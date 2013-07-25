@@ -433,11 +433,12 @@ public class MapActivityActions implements DialogProvider {
 		TargetPointsHelper targets = getTargets();
 		String via = "";
 		List<String> names = targets.getIntermediatePointNames();
+		List<LatLon> points = targets.getIntermediatePoints();
 		if (names.size() == 0) {
 			return via;
 		}
-		for (int i = 0; i < names.size(); i++) {
-			via += "\n - " + getRoutePointDescription(targets.getIntermediatePoints().get(i), names.get(i));
+		for (int i = 0; i < points.size() ; i++) {
+			via += "\n - " + getRoutePointDescription(points.get(i), i >= names.size() ? "" :names.get(i));
 		}
 		return mapActivity.getString(R.string.route_via) + via;
 	}
