@@ -1308,4 +1308,6 @@
 	<string name="speak_descr">Konfiguruj zapowiadanie nazw ulic, ostrzeżeń o ruchu (przymusowe przystanki, progi zwalniające), fotoradarów, ograniczeń prędkości</string>
 	<string name="speak_street_names">Nazwy ulic (TTS)</string>
     <string name="announce_gpx_waypoints">Punkty śladu GPX</string>
+    <string name="osmodroid_mode_on">Zatrzymaj OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Uruchom OsMoDroid</string>
     </resources>
