@@ -147,8 +147,8 @@ public class TestVoiceActivity extends SherlockActivity {
 		addButton(ll, "Roundabout: Take the 2nd exit onto 'Bridge Avenue'", builder(p).roundAbout(0, 2, "Bridge Avenue"));
 		addButton(ll, "GPS signal lost", builder(p).gpsLocationLost());
 		addButton(ll, "Route recalculated (23150m & 350sec)", builder(p).routeRecalculated(23150, 350));
-		addButton(ll, "Follow the road ' ' for 2350m", builder(p).goAhead(2350, ""));
-		addButton(ll, "Follow 'Broadway' for 360m and arrive at waypoint", builder(p).goAhead(360, "Broadway").andArriveAtIntermediatePoint(""));
+		addButton(ll, "Follow the road for 2350m to ' '", builder(p).goAhead(2350, ""));
+		addButton(ll, "Follow the road for 360m to 'Broadway' and arrive at your waypoint ' '", builder(p).goAhead(360, "Broadway").andArriveAtIntermediatePoint(""));
 		addButton(ll, "Arrive at your intermediate point 'Friend'", builder(p).arrivedAtIntermediatePoint("Friend"));
 		addButton(ll, "Follow the road 'A33' for 800m and arrive at your destination", builder(p).goAhead(800, "A33").andArriveAtDestination(""));
 		addButton(ll, "Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
