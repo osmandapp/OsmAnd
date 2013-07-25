@@ -150,8 +150,8 @@
   <string name="index_name_oceania">Oceanië</string>
   <string name="index_name_other">Wereldkaart en topografische kaart</string>
   <string name="index_name_wiki">Wereldwijde Wikipedia</string>
-  <string name="index_name_voice">Stembestanden (opnamen)</string>
-  <string name="index_name_tts_voice">Stembestanden (stemgenerator)</string>
+  <string name="index_name_voice">Stembestanden (opnamen – beperkte functionaliteit)</string>
+  <string name="index_name_tts_voice">Stembestanden (stemgenerator – aangeraden)</string>
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Zelfgedefinieerd</string>
   <string name="fav_export_confirmation">Favorietenbestand bestaat al, wil je dit vervangen?</string>
@@ -1500,6 +1500,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="route_from">Van:</string>
     <string name="tip_recent_changes_1_5_t">Wijzigingen in 1.5:
 	\n\t* Gesproken waarschuwingen voor snelheidsbeperkingen en -camera\'s
+	\n\t* Meer mogelijkheden voor gesproken aanwijzingen (straatnamen)
 	\n\t* Kaarticonen voor hogedichtheidschermen
 	\n\t* Veel interfacewijzigingen
 	\n\t* Bugs opgelost in afstandsdisplay, GPX-analysator, routepuntenverwerking, planning widget, OSM-uploaden, HTTPS-afhandeling
