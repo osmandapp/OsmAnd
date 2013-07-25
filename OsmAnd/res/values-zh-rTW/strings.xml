@@ -361,8 +361,8 @@
 	<string name="index_name_oceania">大洋洲</string>
 	<string name="index_name_other">全球與主題地圖</string>
 	<string name="index_name_wiki">全球維基百科 POI</string>
-	<string name="index_name_voice">語音包 (真人)</string>
-	<string name="index_name_tts_voice">語音包 (TTS)</string>
+	<string name="index_name_voice">語音包 (真人，有限的功能)</string>
+	<string name="index_name_tts_voice">語音包 (TTS合成，提升)</string>
 	<string name="amenity_type_wikiosm">維基百科 (離線)</string>
 	<string name="amenity_type_user_defined">使用者定義</string>
 	<string name="fav_export_confirmation">我的最愛已有上次匯出的檔，要取代它嗎？</string>
@@ -605,7 +605,7 @@
 	<string name="send_location_email_pattern">查看追蹤位置，以網頁瀏覽器連結 %1$s 或用 Andriod intent連結%2$s</string>
 	<string name="send_location">傳送位置</string>
 	<string name="context_menu_item_share_location">分享位置</string>
-	<string name="add_waypoint_dialog_added">中途點\'\'{0}\'\'已成功加入</string>
+	<string name="add_waypoint_dialog_added">GPX 中途點\'\'{0}\'\'已成功加入</string>
 	<string name="add_waypoint_dialog_title">增加中途點到已記錄 GPX 行跡</string>
 	<string name="context_menu_item_add_waypoint">增加 GPX 中途點</string>
 	<string name="amenity_type_administrative">行政機關</string>
@@ -1503,6 +1503,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="av_photo_play_sound_descr">選擇在按下快門拍照時，是否發出音效</string>
 <string name="tip_recent_changes_1_5_t">在1.5.0的變更：
 	\n\t* 車速限制和測速照相的語音警告
+	\n\t* 更多的語音提示能力（街道名稱通報）
 	\n\t* 高密度地圖圖示
 	\n\t* 更改很多的使用者界面
 	\n\t* 距離顯示的錯誤修正，GPX 分析器，中途點的管理，計劃小工具，OSM 上傳，HTTPS 管理
@@ -1519,12 +1520,12 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="route_from">從：</string>
     
 	<string name="speak_warnings_descr">組態交通流量警示（強制停止，減速丘），測速照相警告，速限</string>
-    <string name="speak_speed_limit">預告速限</string>
-    <string name="speak_cameras">預告測速照相</string>
-	<string name="speak_traffic_warnings">預告交通流量警示</string>
+    <string name="speak_speed_limit">通報速限</string>
+    <string name="speak_cameras">通報測速照相</string>
+	<string name="speak_traffic_warnings">通報交通流量警示</string>
 	<string name="osb_author_dialog_password">OSM 密碼 (選項)</string>
-	<string name="announce_gpx_waypoints">預告 GPX 中途點</string>
-    <string name="speak_title">預告…</string>
-	<string name="speak_descr">組態預告街道名稱、交通流量警示（強制停止、減速丘）、測速照相警告、速限</string>
-	<string name="speak_street_names">預告街道名稱 (TTS)</string>
+	<string name="announce_gpx_waypoints">通報 GPX 中途點</string>
+    <string name="speak_title">通報…</string>
+	<string name="speak_descr">組態通報街道名稱、交通流量警示（強制停止、減速丘）、測速照相警告、速限</string>
+	<string name="speak_street_names">通報街道名稱 (TTS)</string>
     </resources>
