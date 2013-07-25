@@ -11,20 +11,21 @@ import java.util.Calendar;
 /**
  * Class used to parse opening hours
  * 
- * the method "parseOpenedHours" will parse an OSM opening_hours string and return
- * an object of the type OpeningHours. That object can be used to check if the OSM feature
- * is open at a certain time. 
+ * the method "parseOpenedHours" will parse an OSM opening_hours string and
+ * return an object of the type OpeningHours. That object can be used to check
+ * if the OSM feature is open at a certain time. 
  */
 public class OpeningHoursParser {
 	private static final String[] daysStr = new String[] {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 	
 	private static final String[] monthsStr = new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 	/**
-	 * default values for sunrise and sunset. Might be computed afterwards, not final
+	 * Default values for sunrise and sunset. Might be computed afterwards, not final.
 	 */
 	private static String sunrise = "07:00", sunset = "21:00";
+
 	/**
-	 * hour of when you would expect a day to be ended.
+	 * Hour of when you would expect a day to be ended.
 	 * This is to be used when no end hour is known (like pubs that open at a certain time, 
 	 * but close at a variable time, depending on the number of clients).
 	 * OsmAnd needs to show a value, so there is some arbitrary default value chosen.
@@ -174,11 +175,13 @@ public class OpeningHoursParser {
 		 * Day number 0 is MONDAY
 		 */
 		private boolean[] days = new boolean[7];
+
 		/**
-		 * represents the list on which month it is open. 
+		 * represents the list on which month it is open.
 		 * Day number 0 is JANUAR.
 		 */
 		private boolean[] months = new boolean[12];
+
 		/**
 		 * lists of equal size representing the start and end times
 		 */
@@ -254,8 +257,8 @@ public class OpeningHoursParser {
 		public boolean containsDay(Calendar cal){
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int d = (i + 5) % 7;
-			if (days[d]) {	
-				return true;	
+			if (days[d]) {
+				return true;
 			}
 			return false;
 		}
@@ -305,7 +308,7 @@ public class OpeningHoursParser {
 			if (p < 0) {
 				p += 7;
 			}
-			int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
+			int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE); // Time in minutes
 			for (i = 0; i < startTimes.length; i++) {
 				int startTime = this.startTimes[i];
 				int endTime = this.endTimes[i];
@@ -451,10 +454,11 @@ public class OpeningHoursParser {
 		int startMonth = -1;
 		int previousMonth = -1;
 		int k = 0;
-		// check 24/7
+
 		BasicOpeningHourRule basic = new BasicOpeningHourRule();
 		boolean[] days = basic.getDays();
 		boolean[] months = basic.getMonths();
+		// check 24/7
 		if("24/7".equals(r)){
 			Arrays.fill(days, true);
 			basic.addTimeRange(0, 24*60);
@@ -468,13 +472,13 @@ public class OpeningHoursParser {
 				// time starts
 				break;
 			}
-			if (r.substring(k, k + 2).equals("off")) {
+			if ((k + 2 < r.length()) && r.substring(k, k + 3).equals("off")) {
 				// value "off" is found
 				break;
 			}
 			if(Character.isWhitespace(ch) || ch == ','){
 				continue;
-			} else if(ch == '-'){
+			} else if (ch == '-') {
 				if(previousDay != -1){
 					startDay = previousDay;
 				} else if (previousMonth != -1) {
@@ -482,7 +486,7 @@ public class OpeningHoursParser {
 				} else {
 					return false;
 				}
-			} else if(k < r.length() - 1){
+			} else if (k < r.length() - 1) {
 				int i = 0;
 				for(String s : daysStr){
 					if(s.charAt(0) == ch && s.charAt(1) == r.charAt(k+1)){
