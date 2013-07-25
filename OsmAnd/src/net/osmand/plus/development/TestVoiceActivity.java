@@ -155,7 +155,7 @@ public class TestVoiceActivity extends SherlockActivity {
 		addButton(ll, "Arrive at your waypoint 'GPX point'", builder(p).arrivedAtWayPoint("GPX point"));
 		addButton(ll, "You have been off the route for 1050m", builder(p).offRoute(1050));
 		addButton(ll, "You are exceeding the speed limit", builder(p).speedAlarm());
-		addButton(ll, "Attention (speed cam, bump...)", builder(p).attention("speed camera"));
+		addButton(ll, "Attention, 'bump'", builder(p).attention("bump"));
 		ll.forceLayout();
 	}
 	
