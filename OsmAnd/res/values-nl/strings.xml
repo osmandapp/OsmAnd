@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -410,7 +411,7 @@
   <string name="send_location_email_pattern">Om de locatie te zien: volg de weblink %1$s of android intent link %2$s</string>
   <string name="send_location">Zend locatie</string>
   <string name="context_menu_item_share_location">Deel locatie</string>
-  <string name="add_waypoint_dialog_added">Routepunt \'\'{0}\'\' succesvol toegevoegd</string>
+  <string name="add_waypoint_dialog_added">GPX-routepunt \'\'{0}\'\' succesvol toegevoegd</string>
   <string name="add_waypoint_dialog_title">Voeg routepunt toe aan de opgenomen GPX-track</string>
   <string name="context_menu_item_add_waypoint">Voeg GPX-routepunt toe</string>
   <string name="amenity_type_administrative">Overheid</string>
@@ -1513,4 +1514,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="route_to">Naar:</string>
     <string name="route_via">Via:</string>
     <string name="osb_author_dialog_password">OSM-wachtwoord (optioneel)</string>
-	</resources>
+	<string name="announce_gpx_waypoints">GPX-routepunten aankondigen</string>
+    <string name="speak_title">Aankondigen…</string>
+	<string name="speak_descr">Aankondigen van straatnamen, verkeerswaarschuwingen (verplicht stoppen, drempels), snelheidscamera\'s of snelheidsbeperkingen</string>
+	<string name="speak_street_names">Straatnamen aankondigen (TTS)</string>
+    </resources>
