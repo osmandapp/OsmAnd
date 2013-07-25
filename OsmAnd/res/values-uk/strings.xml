@@ -27,7 +27,7 @@
   <string name="address_search_desc">Пошук адреси</string>
   <string name="navpoint_search_desc">Пошук за координатами</string>
   <string name="transport_search_desc">Пошук транспорту</string>
-  <string name="favourites_search_desc">Пошук серед улюбленого</string>
+  <string name="favourites_search_desc">Шукати в закладках</string>
   <string name="history_search_desc">Пошук в історії</string>
   <string name="offline_navigation_not_available">Автономна навігація OsmAnd тимчасово не доступна.</string>
   <string name="left_side_navigation">Лівосторонній рух</string>
@@ -54,7 +54,7 @@
   <string name="map_settings_descr">Налаштування відображення карти</string>
   <string name="osmand_rastermaps_plugin_description">Втулок дозволяє використовувати різні джерела онлайн мап, а також підготовлені растрові мапи як базову мапу або підкладку. Мапи можуть бути підготовленими на комп’ютері і повинні бути скопійовані в теку osmand на SD-картку.</string>
   <string name="osmand_background_plugin_description">Налаштування для навігації і запису маршрутів в енергозберігаючому режимі. Втулок працює в фоновому режимі і періодично активує GPS для запису маршруту або відтворення голосових команд.</string>
-  <string name="osmand_accessibility_description">Плагін містить налаштування для додаткових можливостей.</string>
+  <string name="osmand_accessibility_description">Втулок містить налаштування допоміжних можливостей.</string>
   <string name="extra_settings">Розширені налаштування</string>
   <string name="osmand_monitoring_description">Цей втулок дозволяє записувати маршрути в GPX файли або відправляти дані про поточне місцезнаходження до зовнішньої веб службі, яка візуалізує маршрут в реальному часі.</string>
   <string name="osmand_extra_settings_description">Втулок дозволяє налаштовувати відображення мапи з врахуванням параметрів пристрою.</string>
@@ -225,7 +225,12 @@
   <string name="tip_day_night_mode">Денний/нічний режим</string>
   
   <string name="tip_osm_improve">Покращити Openstreetmap</string>
-  <string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks! \n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM Editing\'. \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it. \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem. \n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button. \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
+  <string name="tip_osm_improve_t">\tOsmAnd використовує картографічні дані з Openstreetmap.org (OSM) для перегляду та навігації, і до того ж, може бути використаний для їх покращення. Ви можете легко створювати та завантажувати нові POI чи звіти про помилки в OSM у кілька дотиків!
+		\n\tДля цього вам потрібно спочатку вказати свої реєстраційні дані OSM в \'Налаштуваннях\' -&gt; \'Загальні налаштування\' -&gt; \'Редагування OSM\'.
+		\n\tДля додавання нового об’єкта (POI) скористайтесь командою \'Створити POI\' з контекстного меню мапи. Додайте інформацію про новий об’єкт в діалозі \'Створити POI\' та надішліть її.
+		\n\tПро помилки на мапі можна негайно повідомляти через \'Помилки OSM\' і спільнота OSM матиме змогу їх швидко виправити.
+		\n\tДля додавання звіту про помилку скористайтесь командою \'Помилка в OSM\' з контекстного меню мапи. Додайте докладний опис проблеми та надішліть її натиснувши \'Додати\'.
+		\n\tЗауважте, що для додавання OSM POI та звітування про помилки в OSM, вам потрібне інтернет з’єднання.</string>
   <string name="download_files_not_enough_space">Не вистачає місця на диску для завантаження %1$s MB (вільно: %2$s).</string>
   <string name="download_files_question_space">Вільне місце {2} MB! Завантажити {0} файл(ів) ({1} MB)?</string>
   <string name="tip_select_destination_point">Вибір точки прибуття</string>
@@ -348,7 +353,7 @@
   <string name="installing_new_resources">Розпаковуються нові дані…</string>
   <string name="internet_connection_required_for_online_route">Ви хочете використовувати Інтернет-сервіси, але у вас немає активного інтернет з\'єднання.</string>
   <string name="tts_language_not_supported_title">Мова не підтримується</string>
-  <string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to go to the Market to look for another TTS engine? Otherwise the preset TTS language will be used.</string>
+  <string name="tts_language_not_supported">Вибрана мова не підтримуються встановленими рушієм Android TTS (перетворення тексту в мову). Ви бажаєте пошукати інший рушій TTS? Якщо, ні, буде використовуватись інша встановлена мова рушія TTS.</string>
   <string name="tts_missing_language_data_title">Дані відсутні</string>
   <string name="tts_missing_language_data">Для даної мови відсутні дані TTS. Завантажити дані з Маркету?</string>
   <string name="gpx_option_reverse_route">Виберіть зворотній напрямок</string>
@@ -391,10 +396,10 @@
 		\n\tПотім оберіть спосіб поширення. Це може бути: E-Mail, SMS(текст), чи навіть копіювання координат до буферу обміну.
 	</string>
   <string name="tip_favorites">Збережені точки</string>
-  <string name="tip_favorites_t">\tFrequently used points can be saved as Favorites.
-\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -&gt; \'Favorites\'.
-\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it.
-\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' -&gt;\'Define view\'
+  <string name="tip_favorites_t">\tТочки, що часто використовуються можуть бути додані в Закладки.
+		\n\tДля додавання точки до Закладок, відкрийте контекстне меню мапи, виберіть пункт \'Додати в Закладки\' та додайте назву закладки. Після додання до Закладок, вона буде доступна в меню \'Мапа\' -&gt; \'Закладки\'.
+		\n\tДовге натискання на закладку в меню \'Закладки\' надасть можливість встановити її в якості місця призначення. редагувати її чи вилучити.
+		\n\tДля показу всіх збережених точок на мапі, активуйте шар \'Закладки\' в \'Мапа\' -&gt; \'Джерело мапи…\'.
 	</string>
   <string name="error_doing_search">Помилка автономного пошуку</string>
   <string name="search_offline_geo_error">Неможливо обробити запит \'%s\'</string>
@@ -415,7 +420,9 @@
 		\n\tКонтекстне меню мапи містить пункти відповідно то вказаної точки (місцевості).
 	</string>
   <string name="tip_initial">Поради</string>
-  <string name="tip_initial_t">\tOsmAnd - навігаційна програма з великими можливостями.\n\tСлідуйте за підказками за посиланням в меню</string>
+  <string name="tip_initial_t">\tOsmAnd - навігаційна програма з великими можливостями.
+		\n\tВ якості базового курсу, на головному екрані з’являтимуться деякі поради щодо використання та рекомендації (див. \ '? \').
+	</string>
   <string name="next_button">Наступний</string>
   <string name="previous_button">Попередній</string>
   <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини і швидкості</string>
@@ -432,7 +439,7 @@
   <string name="send_location_email_pattern">Для того, щоб побачити місцерозташування натисніть на посилання %1$s або android посилання %2$s</string>
   <string name="send_location">Надіслати місцезнаходження</string>
   <string name="context_menu_item_share_location">Поділитись місцезнаходженням</string>
-  <string name="add_waypoint_dialog_added">Точка \'\'{0}\'\' успішно додана</string>
+  <string name="add_waypoint_dialog_added">Точка GPX \'\'{0}\'\' успішно додана</string>
   <string name="add_waypoint_dialog_title">Додати точку до записаного треку</string>
   <string name="context_menu_item_add_waypoint">Додати точку до треку</string>
   <string name="amenity_type_administrative">Адміністративні</string>
@@ -551,7 +558,7 @@
   <string name="show_route">Деталі маршруту</string>
   <string name="fav_imported_sucessfully">Точки успішно імпортовано</string>
   <string name="fav_file_to_load_not_found">GPX файл, що містить точки не знайдено в {0}</string>
-  <string name="fav_saved_sucessfully">Улюблені точки збережено в {0}</string>
+  <string name="fav_saved_sucessfully">Закладки збережено в {0}</string>
   <string name="no_fav_to_save">Нема точок для збереження</string>
   <string name="import_fav">Імпортувати</string>
   <string name="export_fav">Експортувати</string>
@@ -564,7 +571,7 @@
   <string name="thanks_yandex_traffic">Дорожня інформація надається завдяки Яндексу.</string>
   <string name="layer_yandex_traffic">Яндекс Пробки</string>
   <string name="layer_route">Маршрут</string>
-  <string name="layer_favorites">Улюблені</string>
+  <string name="layer_favorites">Закладки</string>
   <string name="layer_osm_bugs">OSM помилки</string>
   <string name="layer_transport">Зупинки транспорту</string>
   <string name="layer_poi">POI…</string>
@@ -1456,7 +1463,9 @@ OsmAnd має відкриті сирці і активно розвиваєть
        * Натисніть на масштабну лінійку, щоб побачити більше дій.</string>
     <string name="access_mark_final_location_first">Допоміжні можливості: будь ласка, спочатку оберіть пункт призначення</string> 
     <string name="use_magnetic_sensor_descr">Використовувати магнітометр для визначення сторін світу замість, датчику орієнтації</string>
-    <string name="tip_search_t">"\tВи можете шукати об’єкти роздивляючись мапу, використовуючи пошук за адресою, координатами, чи пошук POI, або обираючи із збережених точок.\n\tВибір пункту «Пошук» в меню, дозволить перейти до завдання того, що ви бажаєте відшукати. У допомогу до всіх підказок, контекстне меню пропонує два варіанти: \'Встановити як пункт призначення\' чи \'Показати на мапі\' "</string>
+    <string name="tip_search_t">\tВи можете шукати об’єкти роздивляючись мапу, використовуючи пошук за адресою, координатами, чи пошук POI, або обираючи із збережених точок.
+		\n\tВибір пункту «Пошук» в меню, дозволить перейти до завдання того, що ви бажаєте відшукати. У допомогу до всіх підказок, контекстне меню пропонує два варіанти: \'Встановити як пункт призначення\' чи \'Показати на мапі\'
+	</string>
 	<string name="destination_point">Пункт призначення %1$s</string>
     <string name="local_index_gpx_timespan">\nПроміжок часу: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nЧас в дорозі: %1$d:%2$02d:%3$02d</string>
@@ -1484,4 +1493,33 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="context_menu_item_directions_to">Напрямки до</string>
     <string name="context_menu_item_directions_from">Напрямки від</string>
     <string name="route_to">До:</string>
-    </resources>
+    <string name="announce_gpx_waypoints">Попереджати про маршрутні точки GPX</string>
+    <string name="speak_title">Попереджати…</string>
+	<string name="speak_descr">Увімкніть оголошення назв вулиць, дорожніх обмежень (примусових зупинок, лежачих поліцейських); повідомленя про камери фіксації швидкості, про обмеження швидкості</string>
+	<string name="speak_street_names">Оголошувати назви вулиць (TTS)</string>
+    <string name="tip_recent_changes_1_5_t">Зміни в 1.5:
+	\n\t* Голосові попередження про обмеження швидкості та камери
+	\n\t* Високоякісні позначки для мапи
+	\n\t* Багато змін інтерфейсу
+	\n\t* Виправлення помилок показу відстані, аналізу GPX, обробки маршрутних точок, віджету планування маршруту, надсилання даних до OSM, роботи з https
+    </string>
+    <string name="keep_intermediate_points">Лишити проміжні точки</string>
+    <string name="route_via">Через:</string>
+    <string name="route_from">З:</string>
+	<string name="tip_recent_changes_0_7_1_t">Зміни в 0.7.1:
+		\n\t- Локальне редагування POI 
+		\n\t- Параметри моніторингу - періодичне надсилання координат до веб-служби (як налаштувати веб-службу моніторингу - читайте в HowTo)
+		\n\t- Показ поточного трек на мапі
+		\n\t- Визначення напрямку руху: повідомлення \'Зробіть розворот\' показується та оголошується, якщо ви рухаєтесь в протилежному напрямку, або пропустили поворот
+		\n\t- Нове голосове повідомлення \'Маршрут перераховано\'
+		\n\t- Візуальна індикація неминучого повороту, в межах 100м стрілка напрямку змінює колір
+		\n\t- Актуальність деактивованих індексних фалів також показується в меню Завантаження, темно-блакитним чи темно-зеленим
+		\n\t- Інші зміни
+	</string>
+	<string name="tip_recent_changes_0_7_0_t">Зміни в 0.7.0:
+		\n\t- Локальні дані з Вікіпедії
+		\n\t- Оновлені мапи
+		\n\t- Інші невеличкі покращення
+	</string>    
+	<string name="osb_author_dialog_password">Пароль OSM (необов’язково)</string>
+	</resources>
