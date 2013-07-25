@@ -828,8 +828,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="index_name_oceania">Oceania</string>
 	<string name="index_name_other">Worldwide and topic maps</string>
 	<string name="index_name_wiki">Worldwide Wikipedia POIs</string>
-	<string name="index_name_voice">Voice packs (recorded)</string>
-	<string name="index_name_tts_voice">Voice packs (TTS)</string>
+	<string name="index_name_voice">Voice packs (recorded, limited features)</string>
+	<string name="index_name_tts_voice">Voice packs (TTS-synthesized, prefer)</string>
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">User defined</string>
 	<string name="fav_export_confirmation">File with previously exported favorites already exists. Do you want to replace it?</string>

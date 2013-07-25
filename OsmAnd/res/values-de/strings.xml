@@ -294,8 +294,8 @@
 	<string name="index_name_oceania">Ozeanien</string>
 	<string name="index_name_other">Weltweite und thematische Karten</string>
 	<string name="index_name_wiki">Weltweite Wikipedia POIs</string>
-	<string name="index_name_voice">Sprachpakete (Aufnahmen)</string>
-	<string name="index_name_tts_voice">Sprachpakete (TTS)</string>
+	<string name="index_name_voice">Sprachpakete (Aufnahmen - begrenzte Funktionalität)</string>
+	<string name="index_name_tts_voice">Sprachpakete (TTS-Synthesizer - flexiblere Ansagen)</string>
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">Benutzerdefiniert</string>
 	<string name="fav_export_confirmation">Eine Datei mit exportierten Favoriten existiert bereits. Überschreiben?</string>
