@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+
+	<string name="osmodroid_mode_on">Stop OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Start OsMoDroid</string>
     <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
     <string name="speak_title">Announce&#8230;</string>
 	<string name="speak_descr">Configure to announce street names, traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits</string>

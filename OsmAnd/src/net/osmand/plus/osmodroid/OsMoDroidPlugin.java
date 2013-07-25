@@ -4,16 +4,23 @@ import java.util.ArrayList;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.MonitoringInfoControl;
+import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
+import net.osmand.plus.views.MonitoringInfoControl.ValueHolder;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
@@ -22,7 +29,7 @@ import android.os.RemoteException;
 import com.OsMoDroid.IRemoteOsMoDroidListener;
 import com.OsMoDroid.IRemoteOsMoDroidService;
 
-public class OsMoDroidPlugin extends OsmandPlugin {
+public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoControlServices  {
 	IRemoteOsMoDroidListener.Stub inter = new IRemoteOsMoDroidListener.Stub() {
 
 		@Override
@@ -198,5 +205,23 @@ public class OsMoDroidPlugin extends OsmandPlugin {
 			app.unbindService(mConnection);
 			mIRemoteService = null;
 		}
+	}
+	
+
+	@Override
+	public void addMonitorActions(final ContextMenuAdapter qa, final MonitoringInfoControl li, final OsmandMapTileView view) {
+		final boolean off = !view.getSettings().SAVE_TRACK_TO_GPX.get();
+		qa.item(off ? R.string.osmodroid_mode_off : R.string.osmodroid_mode_on
+				).icon(  off ? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big).listen(new OnContextMenuClick() {
+
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				if (off) {
+					init(app);
+				} else {
+					shutdown(app);
+				}
+			}
+		}).reg();
 	}
 }
