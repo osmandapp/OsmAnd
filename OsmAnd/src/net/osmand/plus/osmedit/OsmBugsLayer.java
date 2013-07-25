@@ -79,7 +79,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private static final int DIALOG_OPEN_BUG = 300;
 	private static final int DIALOG_COMMENT_BUG = 301;
 	private static final int DIALOG_CLOSE_BUG = 302;
-	private Bundle dialogBundle = new Bundle();
+	private static Bundle dialogBundle = new Bundle();
 	private OsmBugsLocalUtil local;
 	private OsmBugsRemoteUtil remote;
 	
@@ -375,8 +375,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		builder.setTitle(R.string.osb_add_dialog_title);
 		builder.setView(openBug);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		((EditText)view.findViewById(R.id.Password)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
-		((EditText)view.findViewById(R.id.AuthorName)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.get());
+		((EditText)openBug.findViewById(R.id.Password)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
+		((EditText)openBug.findViewById(R.id.AuthorName)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.get());
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

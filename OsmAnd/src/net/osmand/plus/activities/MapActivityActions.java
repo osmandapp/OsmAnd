@@ -100,7 +100,8 @@ public class MapActivityActions implements DialogProvider {
 	private static final int DIALOG_RELOAD_TITLE = 103;
 	private static final int DIALOG_SHARE_LOCATION = 104;
 	private static final int DIALOG_SAVE_DIRECTIONS = 106;
-	private Bundle dialogBundle = new Bundle();
+	// make static
+	private static Bundle dialogBundle = new Bundle();
 	
 	private final MapActivity mapActivity;
 	private OsmandSettings settings;
