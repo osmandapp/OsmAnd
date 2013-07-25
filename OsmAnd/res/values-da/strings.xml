@@ -493,7 +493,7 @@
 	<string name="index_name_other">Verdens- og emnekort</string>
 	<string name="index_name_wiki">Wikipedia interessepunkter på verdensplan</string>
 	<string name="index_name_voice">Stemmepakker (optaget, begrænset funktionalitet)</string>
-	<string name="index_name_tts_voice">Stemmepakker (TTS)</string>
+	<string name="index_name_tts_voice">Stemmepakker (TTS stemmegenerator, anbefalet)</string>
 	<string name="amenity_type_user_defined">Brugerdefineret</string>
 	<string name="fav_export_confirmation">Fil med tidligere eksporterede favoritter eksisterer allerede. Overskriv?</string>
 	<string name="profile_settings">Profilspecifikke indstillinger</string>
@@ -1550,6 +1550,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osb_author_dialog_password">OSM kodeord (valgfrit)</string>
 	<string name="tip_recent_changes_1_5_t">Ændringer i 1.5:
 \n * Stemmeadvarsler om hastighedsbegrænsninger og fotofælder
+\n * Flere stemmeprompt muligheder(gadenavne meddelt)
 \n * Kortikoner i højopløsning
 \n * Masser af brugergrænseflade ændringer
 \n * Fejlrettelser i afstandsvisning, GPX analyse, rutepunkt håndtering, planlægnings modul, overførelse til OSM, https håndtering
