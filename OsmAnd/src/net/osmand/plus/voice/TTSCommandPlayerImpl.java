@@ -59,7 +59,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	}
 
 	private static final String CONFIG_FILE = "_ttsconfig.p";
-	private static final int[] TTS_VOICE_VERSION = new int[] { 100, 101 }; // !! MUST BE SORTED
+	private static final int[] TTS_VOICE_VERSION = new int[] { 102 }; // !! MUST BE SORTED we don't support 
+	// TTS any more 101 because of to much changes
 	private static final Log log = PlatformUtil.getLog(TTSCommandPlayerImpl.class);
 	private TextToSpeech mTts;
 	private Context mTtsContext;
