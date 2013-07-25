@@ -203,7 +203,7 @@
   <string name="send_location_email_pattern">Aby zobaczyć lokację użyj linku w przeglądarce %1$s lub linku do intentu androidowego %2$s</string>
   <string name="send_location">Wyślij lokalizację</string>
   <string name="context_menu_item_share_location">Udostępnij lokalizację</string>
-  <string name="add_waypoint_dialog_added">Punkt pośredni \'\'{0}\'\' został dodany</string>
+  <string name="add_waypoint_dialog_added">Punkt GPX \'\'{0}\'\' został pomyślnie dodany</string>
   <string name="add_waypoint_dialog_title">Dodaj punkt pośredni do śladu GPX</string>
   <string name="context_menu_item_add_waypoint">Dodaj punkt do GPX</string>
   <string name="amenity_type_administrative">Administracyjne</string>
@@ -811,8 +811,8 @@
   <string name="index_name_oceania">Oceania</string>
   <string name="index_name_other">Mapy świata i tematyczne</string>
   <string name="index_name_wiki">Wikipedia dla POI</string>
-  <string name="index_name_voice">Zestawy głosów (nagrane)</string>
-  <string name="index_name_tts_voice">Zestawy głosów (TTS)</string>
+  <string name="index_name_voice">Zestawy głosów (nagrane, ograniczone możliwości)</string>
+  <string name="index_name_tts_voice">Zestawy głosów (TTS, zalecane)</string>
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Własne</string>
   <string name="fav_export_confirmation">Plik z poprzednio wyeksportowanymi ulubionymi już istnieje. Nadpisać go?</string>
@@ -1039,8 +1039,8 @@
 		\n\t\'Dzień\' - zawsze używaj trybu dziennego\n\t\'Noc\' - Zawsze używaj trybu nocnego
 		\n\t\'Czujnik światła\' - wygląd mapy kontrolowany jest przez czujnik światła w Twoim urządzeni (jeśli taki posiadasz)
 	</string>	
-	<string name="tip_map_switch_t_v2">"\tŹródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Zdefiniuj widok\' w widoku mapy.\n\tWskazując \'Źródło mapy\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Online maps\', lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC\n\tOsmAnd wspiera również własne źródła map.
-\n "</string>
+	<string name="tip_map_switch_t_v2">\tŹródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Zdefiniuj widok\' w widoku mapy.\n\tWskazując \'Źródło mapy…\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Mapy online\') lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC\n\tOsmAnd wspiera również własne źródła map.
+	</string>
 	<string name="tip_app_mode_t_v2">"\tOsmAnd wspiera różne (konfigurowalne) profile aplikacji do różnych przypadków użycia.\n\tProfile można zmienić wybierając przycisk w lewym dolnym rogu ekranu (ikonka samochodu, roweru lub pieszego), lub podczas wybierania trasy. "</string>
 	<string name="email">email</string>
 <string name="rendering_attr_roadColors_name">Zestaw kolorów dróg</string>
@@ -1283,6 +1283,7 @@
 	<string name="av_photo_play_sound_descr">Wybierz czy odtwarzać dźwięk podczas robienia zdjęć</string>
 <string name="tip_recent_changes_1_5_t">Zmiany w 1.5:
 	\n\t* Ostrzeżenia głosowe na temat ograniczeń prędkości i fotoradarów
+	\n\t* Większe możliwości podpowiedzi głosowych (zapowiadanie nazw ulic)
 	\n\t* Ikony mapy wyższej rozdzielczości
 	\n\t* Dużo zmian w interfejsie
 	\n\t* Poprawki do wyświetlania odległości, analizatora GPX, obsługi punktów pośrednich, widżetu planowania, wysyłania do OSM, obsługi https
