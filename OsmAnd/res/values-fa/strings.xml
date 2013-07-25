@@ -563,7 +563,7 @@
     <string name="safe_mode_description">اجرای برنامه در حالت Safe mode (از آندروئید که کندتر میباشد به جای کد بومی استفاده میکند).</string>
     <string name="native_library_not_running">برنامه در حالت Safe mode اجرا میشود (از طریق تنظیمات آنرا غیرفعال کنید).</string>
     <string name="background_service_is_enabled_question">OsmAnd حتی در حالت Sleep mode هم اجرا میشود. این حالت را خاموش میکنید؟</string>
-    <string name="close_changeset">بستن بسته تغییر</string>
+    <string name="close_changeset">بستن changeset</string>
 	<string name="zxing_barcode_scanner_not_found">برنامه اسکنر بارکد ZXing نصب نشده است. در مارکت جستجو میکنید؟</string>
 	<string name="rendering_attr_roadColors_description">انتخاب جدول رنگ راهها:</string>
 	<string name="rendering_attr_roadColors_name">جدول رنگ راهها</string>
@@ -660,7 +660,7 @@
     <string name="audionotes_location_not_defined">مکان مربوط به این یادداشت هنوز تعریف نشده است. برای اختصاص یادداشت به یک محل \"استفاده از موقعیت...\" را انتخاب کنید</string>
     <string name="rendering_attr_showRoadMaps_description">انتخاب کنید چه زمانی تنها نقشه راهها نشان داده شود:</string>
 	<string name="target_points">نقاط بین راهی</string>
-    <string name="ending_point_too_far">نقطه پایانی فاصله خیلی زیادی از نزدیکترین جاده دارد.</string>
+    <string name="ending_point_too_far">نقطه پایانی از نزدیکترین جاده خیلی دور است.</string>
     <string name="map_widget_vector_attributes">خصوصیات رندر نقشه:</string>
 	<string name="live_monitoring_mode_off">شروع\n ردگیری آنلاین</string>
 	<string name="live_monitoring_mode_on">توقف\n ردگیری آنلاین</string>
@@ -902,7 +902,7 @@
 		\n\t* بسته سایه تپه برای افزونه منحنی های همتراز
 		\n\t* رفع اشکال (بهینه سازی مسیریابی)
     </string>
-    <string name="osmand_srtm_long_description_1000_chars">این افزونه منحنی های همتراز را  فراهم می کند که می تواند در نقشه های آفلاین OsmAnd نمایش داده شود. داده های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) براساس اندازه گیری های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین NASA مییباشد. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (METI)، و سیستم های فضایی ژاپن (J-spacesystems) است.</string>
+    <string name="osmand_srtm_long_description_1000_chars">این افزونه، منحنی های همتراز را که در نقشه های آفلاین OsmAnd نمایش داده میشوند فراهم میکند. داده های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) در این زمسنه براساس اندازه گیری های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین NASA مییباشند. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (METI)، و سیستم های فضایی ژاپن (J-spacesystems) است.</string>
     <string name="srtm_plugin_description">تسهیل دانلود از خطوط کانتور آنلاین و تپه سایه (تنظیمات -&gt; مدیریت داده ها -&gt; دانلود -&gt; انتخاب نوع نقشه مورد نظر).</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noPolygons_description">محو کردن همه عوارض زمین روی نقشه</string>
