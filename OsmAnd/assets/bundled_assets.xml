@@ -14,6 +14,10 @@
 	<asset source="voice/nl/ttsconfig.p" destination="voice/nl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/pl/ttsconfig.p" destination="voice/pl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ru/ttsconfig.p" destination="voice/ru-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<!-- <asset source="voice/nl-tts-old/ttsconfig.p" destination="voice/nl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> -->
+	<asset source="voice/nl/ttsconfig.p" destination="voice/nl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<!-- <asset source="voice/fr-tts-old/ttsconfig.p" destination="voice/fr-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> -->
+	<asset source="voice/fr/ttsconfig.p" destination="voice/fr-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 
 	<asset source="voice/cs-tts-old/ttsconfig.p" destination="voice/cs-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/el-tts-old/ttsconfig.p" destination="voice/el-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
@@ -38,7 +42,7 @@
 	<!-- <asset source="voice/ru/config.p" destination="voice/ru-m/_config.p" mode="overwriteOnlyIfExists" /> -->
 	<asset source="voice/es/config.p" destination="voice/es/_config.p" mode="overwriteOnlyIfExists" />
 	
-	<!-- TODO name conflict could -->
+	<!-- TODO name conflict could be soon -->
 	<asset source="voice/fr-ov/config.p" destination="voice/fr/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/he-ov/config.p" destination="voice/he/_config.p" mode="overwriteOnlyIfExists" />
 	<!-- Could be deleted later after release -->
