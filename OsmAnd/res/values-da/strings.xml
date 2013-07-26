@@ -1565,4 +1565,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="speak_descr">Konfigurer til meddele gadenavne , trafikadvarsler ( tvungne stop, vejbump ) , fotofældeadvarsler , hastighedsbegrænsninger</string>
 	<string name="speak_street_names">Meddel gadenavne (TTS)</string>
     <string name="announce_gpx_waypoints">Meddel om GPX-rutepunkter</string>
+    <string name="osmodroid_mode_off">Start OsMoDroid</string>
+    <string name="osmodroid_mode_on">Stop OsMoDroid</string>    
     </resources>
