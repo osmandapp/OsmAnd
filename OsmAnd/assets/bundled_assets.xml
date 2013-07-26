@@ -9,16 +9,15 @@
 	<asset source="voice/de/ttsconfig.p" destination="voice/de-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/en/ttsconfig.p" destination="voice/en-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/es/ttsconfig.p" destination="voice/es-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/fr/ttsconfig.p" destination="voice/fr-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/it/ttsconfig.p" destination="voice/it-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/nl/ttsconfig.p" destination="voice/nl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/pl/ttsconfig.p" destination="voice/pl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ru/ttsconfig.p" destination="voice/ru-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<!-- <asset source="voice/nl-tts-old/ttsconfig.p" destination="voice/nl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> -->
-	<asset source="voice/nl/ttsconfig.p" destination="voice/nl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 
 	<asset source="voice/cs-tts-old/ttsconfig.p" destination="voice/cs-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/el-tts-old/ttsconfig.p" destination="voice/el-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/fi-tts-old/ttsconfig.p" destination="voice/fi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
-	<asset source="voice/fr-tts-old/ttsconfig.p" destination="voice/fr-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/hi-tts-old/ttsconfig.p" destination="voice/hi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/hu-tts-old/ttsconfig.p" destination="voice/hu-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/ko-tts-old/ttsconfig.p" destination="voice/ko-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
@@ -48,9 +47,6 @@
 	<asset source="voice/ru2-ov/config.p" destination="voice/ru2/_config.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/ru3-ov/config.p" destination="voice/ru3/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sk-Ruzena-ov/config.p" destination="voice/sk-Ruzena/_config.p" mode="overwriteOnlyIfExists" />
-	 
-	  
-	
 
 	<asset source="sounds/camera_click.ogg" destination="sounds/camera_click.ogg" mode="copyOnlyIfDoesNotExist" />
 </assets>
