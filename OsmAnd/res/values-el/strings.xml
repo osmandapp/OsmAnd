@@ -1308,4 +1308,6 @@
     <string name="osmand_distance_planning_plugin_name">Υπολογιστής απόστασης &amp; Εργαλείο Σχεδιασμού</string>
     <string name="av_camera_focus">Τύπος εστίασης κάμερας</string>
 	<string name="av_camera_focus_descr">Επιλέξτε τον τύπο εστίασης της εσωτερικής κάμερας</string>
-	</resources>
+	<string name="osmodroid_mode_on">Παύση OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Έναρξη OsMoDroid</string>
+    </resources>
