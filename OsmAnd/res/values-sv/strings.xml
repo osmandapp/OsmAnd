@@ -1186,4 +1186,6 @@
 	<string name="speak_descr">Konfigurera för att läsa upp gatunamn, trafikvarningar (t.ex. fartbulor), varningar för fartkameror, hastighetsbegränsningar</string>
 	<string name="speak_street_names">Läs upp gatunamn (TTS)</string>
     <string name="announce_gpx_waypoints">Meddela om GPX-waypoints</string>
+    <string name="osmodroid_mode_on">Stoppa OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Starta OsMoDroid</string>
     </resources>
