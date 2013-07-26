@@ -1522,4 +1522,6 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	\n\t* رفع اشکالات در نمایش مسافت، تحلیل GPX، کار با نقاط بین راهی، ویجت طراحی سفر، آپلود به OSM، وبسایتهای ایمن شده با https
     </string>
     <string name="announce_gpx_waypoints">اعلام نقاط بین راهی GPX</string>
+    <string name="osmodroid_mode_on">توقف OsMoDroid</string>    
+    <string name="osmodroid_mode_off">شروع OsMoDroid</string>
     </resources>
