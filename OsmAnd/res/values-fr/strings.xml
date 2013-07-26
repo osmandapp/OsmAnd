@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors ligne</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors ligne des PI
@@ -1306,4 +1307,5 @@
     <string name="intermediate_items_sort_by_distance">Tri (porte-à-porte)</string>
     <string name="please_select_address">Sélectionner d\'abord une ville ou une rue</string>
     <string name="context_menu_item_destination_point">Définir comme destination</string>
+    <string name="speak_street_names">Annoncer les noms de rues (TTS)</string>
     </resources>
