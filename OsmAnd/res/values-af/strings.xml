@@ -1275,4 +1275,6 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="speak_title">Aankondig…</string>
 	<string name="speak_descr">Verstel aankondig van straatname, verkeerswaarskuwings(geforseerde stoppe, spoed-hobbels), spoedkamera, spoedbeperkings</string>
 	<string name="speak_street_names">Kondig straatname aan(TTS)</string>
+    <string name="osmodroid_mode_on">Staak OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Begin OsMoDroid</string>
     </resources>
