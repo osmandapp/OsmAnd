@@ -221,9 +221,9 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (off) {
-					init(app);
+					Activate(app);
 				} else {
-					shutdown(app);
+					Deactivate(app);
 				}
 			}
 		}).reg();
