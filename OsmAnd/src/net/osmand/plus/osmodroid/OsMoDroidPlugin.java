@@ -214,14 +214,15 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 
 	@Override
 	public void addMonitorActions(final ContextMenuAdapter qa, final MonitoringInfoControl li, final OsmandMapTileView view) {
-		final boolean off = false;
+		boolean o = false;
 		try {
-			off = mIRemoteService.isActive();	
+			o = mIRemoteService.isActive();	
 		}
 		catch(Exception e) {
 					log.error(e.getMessage(), e);
+			
 				}
-		
+		final boolean off = o;
 		qa.item(off ? R.string.osmodroid_mode_off : R.string.osmodroid_mode_on
 				).icon(  off ? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big).listen(new OnContextMenuClick() {
 
