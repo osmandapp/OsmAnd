@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Išči</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
 	<string name="settings_Button">Nastavitve</string>
 	<string name="favorites_Button">Priljubljene</string>
@@ -290,8 +291,8 @@
 	<string name="index_name_oceania">Oceanija</string>
 	<string name="index_name_other">Svetovne in tematske karte</string>
 	<string name="index_name_wiki">Wikipedija svet</string>
-	<string name="index_name_voice">Glasovni paketi (posneti)</string>
-	<string name="index_name_tts_voice">Paketi govorov (TTS)</string>
+	<string name="index_name_voice">Glasovni paketi (posneti, omejeno št. funkcij)</string>
+	<string name="index_name_tts_voice">Paketi govorov (raje TTS-sintetizirani)</string>
 	<string name="amenity_type_wikiosm">Wikipedija (brez povezave)</string>
 	<string name="amenity_type_user_defined">Razno</string>
 	<string name="fav_export_confirmation">Datoteka z izvoženimi priljubljenimi že obstaja. Ali jo želite zamenjati?</string>
@@ -797,7 +798,7 @@
 	\n\tProfile lahko spremenite z gumbom profil v spodnjem levem kotu zaslona zemljevida (ikona avtomobila, kolesa ali pešca) ali med ustvarjanjem poti.
 	</string>
 	<string name="send_location_email_pattern">Za ogled mesta sledite povezavi spletnega brskalnika %1$s ali povezavi namena android %2$s</string>
-	<string name="add_waypoint_dialog_added">Navigacijska točka \"{0}\" je bila uspešno dodana</string>
+	<string name="add_waypoint_dialog_added">GPX točka \'\'{0}\'\' je bila uspešno dodana</string>
 	<string name="add_waypoint_dialog_title">Dodaj navigacijsko točko posneti sledi GPX</string>
 	<string name="context_menu_item_add_waypoint">Dodaj navigacijsko točko sledi GPX</string>
 	<string name="tip_favorites_t">"\tPogosto uporabljene točke si lahko shranite kot Priljubljene.\n\tČe želite shraniti točko kot priljubljeno, pojdite v kontekstni meni zemljevida in izberite \'Dodaj med priljubljene\' in vnesite ime. Po shranjevanju priljubljene točke je ta dostopna preko \'Glavnega zaslona\' -&gt; \'Priljubljene\'.\n\tDolg pritisk na priljubljeni točki v meniju \'Priljubljene\' nam ponudi možnost, da jo določimo kot cilj, uredimo ali brišemo.\n\tZa prikaz vseh priljubljenih točk na zemljevidu, omogočite sloj \'Priljubljene\' v \'Meni\' -&gt; \'Nastavitve prikaza\'. "</string>
@@ -1459,9 +1460,10 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="speak_traffic_warnings">Napovej prometna opozorila</string>
 	<string name="tip_recent_changes_1_5_t">Spremembe v 1.5:
 	\n\t* Glasovna opozorila o omejitvah hitrosti in kamere
+	\n\t* Več možnosti glasovnih pozivov (najavljanje imen ulic)
 	\n\t* Ikone za mape visoke gostote
 	\n\t* Veliko sprememb v uporabniškem vmesniku
-	\n\t* Popravek hroščev pri prikazu razdalj, GPX analizator, upravljanje točk, gradnika za načrtovanje, nalaganje na OSM, pri uporabi https protokola
+	\n\t* Popravek hroščev pri prikazu razdalj, GPX analizatorju, upravljanju točk, gradniku za načrtovanje, nalaganje na OSM, pri uporabi https protokola
     </string>
     <string name="osb_author_or_password_not_specified">Prosimo da v nastavitvah vpišete uporabniško ime in geslo za OSM</string>
     <string name="clear_intermediate_points">Počisti vmesne točke</string>
@@ -1474,4 +1476,10 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="route_via">Prek:</string>
     <string name="route_from">Od:</string>
     <string name="osb_author_dialog_password">OSM geslo (neobvezno)</string>
+    <string name="osmodroid_mode_on">Ustavi OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Zaženi OsMoDroid</string>
+    <string name="announce_gpx_waypoints">Najavljanje GPX točk</string>
+    <string name="speak_title">Najavi …</string>
+	<string name="speak_descr">Nastavitve za najavljanje imena ulic, prometna opozorila (prisilne ustavitve, ležeči policaji), opozorila merilnikov hitrosti, omejitve hitrosti</string>
+	<string name="speak_street_names">Najavljanje imen ulic (TTS)</string>
     </resources>
