@@ -230,9 +230,9 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				try {
 				if (off) {
-					mIRemoteService.Deactivate();
-				} else {
 					mIRemoteService.Activate();
+				} else {
+					mIRemoteService.Deactivate();
 				}
 				} catch(Exception e) {
 					log.error(e.getMessage(), e);
