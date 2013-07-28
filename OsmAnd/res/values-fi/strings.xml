@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="no_route">Ei reittiä</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista välietappi</string>
 	<string name="target_point">Välietappi %1$s</string>
     <string name="intermediate_point">Välietappi %1$s</string>
@@ -300,8 +301,8 @@
 	<string name="update_poi_error_loading">Virhe ladattaessa tietoja palvelimelta</string>
 	<string name="context_menu_item_update_poi">Päivitä KP</string>
 	<string name="context_menu_item_update_map_confirm">Päivitä paikallinen data internetin kautta?</string>
-	<string name="search_history_city">Kaupunki:\n {0}</string>
-	<string name="search_history_street">Katu:\n {0}, {1}</string>
+	<string name="search_history_city">Kaupunki: {0}</string>
+	<string name="search_history_street">Katu: {0}, {1}</string>
 	<string name="search_history_int_streets">Risteys: {0} x {1} in {2}</string>
 	<string name="search_history_building">Rakennus: {0}, {1}, {2}</string>
 	<string name="favorite">Suosikki</string>
@@ -483,7 +484,7 @@
 	<string name="offline_navigation_not_available">OsmAnd offline navigointi ei ole saatavilla tilapäisesti.</string>
 	<string name="left_side_navigation">Vasemman kaistan ajo</string>
 	<string name="left_side_navigation_descr">Valitse maissa joissa on käytössä vasen kaista</string>
-	<string name="download_link_and_local_description">Paina tästä ladataksesi tai päivittääksesi offline dataa.\nPaina mitä tahansa \"tuotetta\" nähdäksesi lisätietoja, paina ja pidä laittaaksesi pois käytöstä tai poistaaksesi. Vapaata muistia laitteessa (%1$s vapaata)</string>
+	<string name="download_link_and_local_description">Paina tästä ladataksesi tai päivittääksesi offline dataa.\nPaina mitä tahansa \"tuotetta\" nähdäksesi lisätietoja, paina ja pidä laittaaksesi pois käytöstä tai poistaaksesi. Vapaata muistia laitteessa (%1$s vapaata):</string>
 	<string name="unknown_location">Sijaintia ei tiedetä vielä</string>
 	<string name="local_indexes_cat_tile">Online ja muut karttasijainnit</string>
 	<string name="map_settings">Kartan asetukset</string>
@@ -547,7 +548,7 @@
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorikartat näkyvät mahdollisesti nopeammin. Ei välttämättä toimi kaikilla laitteilla.</string>
 	<string name="debugging_and_development">OsmAnd kehitys</string>
 	<string name="native_rendering">Natiivi renderöinti</string>
-	<string name="send_files_to_osm">Lähetä GPX-tiedostot OSM:iin</string>
+	<string name="send_files_to_osm">Lähetä GPX-tiedostot OSM:iin?</string>
 	<string name="gpx_visibility_txt">Näkyvyys</string>
 	<string name="accessibility_extensions_descr">Esteettömyys laajennokset vanhoille Android versioille</string>
 	<string name="accessibility_extensions">Esteettömyys laajennokset</string>
@@ -572,7 +573,7 @@
 	<string name="button_upgrade_osmandplus">Päivitä OsmAnd+ ohjelmaan</string>
 	<string name="context_menu_item_search">Etsi läheltä tätä paikkaa</string>
 	<string name="route_successfully_saved_at">Reitti tallennettiin onnistuneesti nimellä \'%1$s\'.</string>
-	<string name="filename_input">"Tiedostonimi : "</string>
+	<string name="filename_input">Tiedostonimi: </string>
 	<string name="file_with_name_already_exist">Tiedosto samalla nimellä on jo olemassa.</string>
 	<string name="show_more_map_detail">Näytä enemmän karttatietoja</string>
 	<string name="favorite_delete_multiple">Olet poistamassa %1$d suoosikkia ja %2$d suosikkiryhmää. Oletko varma?</string>
@@ -628,8 +629,8 @@
     <string name="av_video_format">Videon tallennusformaatti</string>
     <string name="av_use_external_recorder">Käytä ulkoista nauhoitinta</string>
     <string name="av_settings_descr">Muuta ääni- ja videoasetuksia</string>
-    <string name="av_settings">"Ääni/video asetukset "</string>
-    <string name="recording_error">"Tapahtui virhe nauhoituksen aikana "</string>
+    <string name="av_settings">Ääni/video asetukset </string>
+    <string name="recording_error">Tapahtui virhe nauhoituksen aikana </string>
     <string name="recording_camera_not_available">Kamera ei ole saatavilla</string>
     <string name="recording_open_external_player">Avaa ulkoinen soitin</string>
     <string name="recording_delete_confirm">Haluatko poistaa tämän nauhoituksen?</string>
