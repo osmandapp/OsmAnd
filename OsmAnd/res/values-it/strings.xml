@@ -1240,7 +1240,12 @@
     <string name="save_current_track_widget">Salva\n la traccia GPX attuale</string>
 	<string name="street_name">Strada</string>
 	<string name="hno">Numero civico</string>
-    <string name="tip_recent_changes_1_3_t">"Novità nella 1.5:\n\t* Tema Holo (personalizzazione tema) "</string>
+    <string name="tip_recent_changes_1_3_t">Cambiamenti nella 1.5:
+	\n\t* Re-implementato il supporto ai tablet e agli schermi grandi
+	\n\t* Tema Holo (personalizzazione tema)
+	\n\t* impostazioni aggiuntive per la stabilizzazione della bussola
+	\n\t* Il pulsante in alto a sinistra sostituisce il pulsante Menu
+    </string>
     <string name="monitoring_settings">Servizi di registrazione e modalità quiescente</string>
     <string name="monitoring_settings_descr">Configura come registrare viaggi e attivare la modalità quiescente</string>
     <string name="osmand_monitoring_plugin_description">Attivare il monitoraggio e la navigazione nella modalità quiescente (schermo spento) attraverso periodici risvegli del dispositivo GPS. Mostra impostazioni che facilitano la registrazione dei vostri viaggi in file GPX locali o online usando un servizio web.</string>
@@ -1320,11 +1325,12 @@
     <string name="speak_speed_limit">Annuncia limite di velocità</string>
     <string name="speak_cameras">Annuncia autovelox</string>
 	<string name="speak_traffic_warnings">Annuncia avvisi di traffico</string>
-	<string name="tip_recent_changes_1_5_t">Cambiamenti nella 1.5:↵
-→\n\t* Avvisi vocali per autovelox e limiti di velocità↵
-→\n\t* Icone mappe ad alta densità↵
-→\n\t* Molti camimenti dell\'interfaccia grafica↵
-→\n\t* Correzione di errori nella visualizzazione della distanza, l\'analizzatore GPX, utilizzo punti di passaggio, widget di pianificazione, upload OSM, utilizzo https↵
+	<string name="tip_recent_changes_1_5_t">Cambiamenti nella 1.5:
+	\n\t* Avvisi vocali per autovelox e limiti di velocità
+	\n\t* Più capacità di fornire avvisi vocali ( annuncio dei nomi delle strade)
+	\n\t* Icone mappe ad alta densità
+	\n\t* Molti cambiamenti dell\'interfaccia grafica
+	\n\t* Correzione di errori nella visualizzazione della distanza, l\'analizzatore GPX, utilizzo punti di passaggio, widget di pianificazione, upload OSM, utilizzo https
     </string>
     <string name="osb_author_or_password_not_specified">Prego specificare il nome utente OSM e la password nelle Impostazioni</string>
     <string name="clear_intermediate_points">Cancella i punti intermedi</string>
