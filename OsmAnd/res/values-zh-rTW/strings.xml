@@ -32,7 +32,7 @@
     <string name="btn_advanced_mode">進階模式…</string>
     <string name="poi_filter_parking">停車場</string>
     <string name="poi_filter_emergency">緊急救助</string>
-    <string name="poi_filter_public_transport">公共交通</string>
+    <string name="poi_filter_public_transport">大眾運輸</string>
     <string name="poi_filter_entertainment">娛樂</string>
     <string name="poi_filter_accomodation">住宿</string>
     <string name="poi_filter_restaurants">餐廳</string>
@@ -1240,7 +1240,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 自行車和步行
  - 地圖包括步行，徒步旅行，自行車道，非常適合戶外活動
  - 特殊的自行車和行人的路線和顯示模式
- - 可選的公共交通設施 (公共汽車、 電車、火車）包括線路名稱
+ - 可選的大眾運輸工具 (公共汽車、 電車、火車）包括線路名稱
  - 可選的旅程記錄裝置端 GPX 檔案或線上服務
  - 可選的速度和高度顯示
  - 顯示等高線和地形陰影（經由附加的外掛元件）
@@ -1310,7 +1310,7 @@ OsmAnd + 是付費應用程式版本。經由您的購買來支援專案，資�
 自行車和步行
  - 地圖包括步行，徒步旅行，自行車道，非常適合戶外活動
  - 特殊的自行車和行人的路線和顯示模式
- - 可選的公共交通設施 (公共汽車、 電車、火車）包括線路名稱
+ - 可選的大眾運輸工具 (公共汽車、 電車、火車）包括線路名稱
  - 可選擇旅程記錄到裝置端 GPX 檔案或線上服務
  - 可選的速度和高度顯示
  - 顯示等高線和地形陰影（經由附加的外掛元件）
