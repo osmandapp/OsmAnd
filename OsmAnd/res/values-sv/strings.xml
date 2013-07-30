@@ -142,7 +142,8 @@
 <string name="left_side_navigation">Vänstertrafik</string>
 <string name="left_side_navigation_descr">Välj för länder med vänstertrafik</string>
 <string name="download_link_and_local_description">Tryck här för att ladda ner eller uppdatera offline-data.
-\nTryck på en befintligt post för att se detaljer; tryck och håll för att inaktivera eller ta bort en post. Aktuella data på enheten (%1$s ledigt):</string>
+\nTryck på en befintligt post för att se detaljer; tryck och håll för att inaktivera eller ta bort en post.
+Aktuella data på enheten (%1$s ledigt):</string>
 <string name="unknown_from_location">Startpunkten är ännu inte bestämd</string>
 <string name="unknown_location">Positionen är ännu inte känd</string>
 <string name="confirm_interrupt_download">Vill du avbryta nedladdningen?</string>
@@ -1166,9 +1167,9 @@
     <string name="context_menu_item_destination_point">Ange som destination</string>
     
 	<string name="speak_warnings_descr">Konfigurera trafikvarningar (fartbulor etc), varningar för fartkameror, hastighetsbegränsningar</string>
-    <string name="speak_speed_limit">Meddela om hastighetsbegränsningar</string>
-    <string name="speak_cameras">Meddela om fartkameror</string>
-	<string name="speak_traffic_warnings">Meddela om trafikvarningar</string>
+    <string name="speak_speed_limit">Meddela vid hastighetsbegränsningar</string>
+    <string name="speak_cameras">Meddela vid fartkameror</string>
+	<string name="speak_traffic_warnings">Meddela vid trafikvarningar</string>
 	<string name="local_index_gpx_timespan">\nTidsspann: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nTid i rörelse: %1$d:%2$02d:%3$02d</string>
 	<string name="plugin_distance_point_hdop">precision</string>
@@ -1191,7 +1192,7 @@
     <string name="speak_title">Läs upp …</string>
 	<string name="speak_descr">Konfigurera för att läsa upp gatunamn, trafikvarningar (t.ex. fartbulor), varningar för fartkameror, hastighetsbegränsningar</string>
 	<string name="speak_street_names">Läs upp gatunamn (TTS)</string>
-    <string name="announce_gpx_waypoints">Meddela om GPX-waypoints</string>
+    <string name="announce_gpx_waypoints">Meddela vid GPX-waypoints</string>
     <string name="osmodroid_mode_on">Stoppa OsMoDroid</string>    
     <string name="osmodroid_mode_off">Starta OsMoDroid</string>
     </resources>
