@@ -210,7 +210,7 @@ public class Location {
             }
         }
         // TODO leave only for 4.2.1 !!!
-        results[0] = (MapUtils.getDistance(lat1, lon1, lat2, lon2));
+        results[0] = (net.osmand.util.MapUtils.getDistance(lat1, lon1, lat2, lon2));
     }
 
     /**
