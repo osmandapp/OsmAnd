@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="show_warnings_title">Mostra els missatges d'avís…</string>
+<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -40,7 +40,7 @@
 <string name="gpxup_public">Públic</string>
 <string name="gpxup_private">Privat</string>
 <string name="save_route_as_gpx">Desa la ruta en un fitxer GPX</string>
-<string name="layer_map_appearance">Configura l'aparença</string>
+<string name="layer_map_appearance">Configura l\'aparença</string>
 <string name="screen_is_locked">Per desbloquejar la pantalla premeu la icona de bloqueig</string>
 <string name="map_widget_lock_screen">Bloqueja la pantalla</string>
 <string name="map_widget_top_stack">Barra d\'estat:</string>
@@ -157,7 +157,7 @@
 <string name="i_am_here">Sóc aquí</string>
 <string name="accessibility_preferences">Accessibilitat</string>
 <string name="use_fluorescent_overlays_descr">Utilitza colors fluorescents per mostrar traces i rutes</string>
-<string name="local_openstreetmap_uploading">S'està pujant…</string>
+<string name="local_openstreetmap_uploading">S\'està pujant…</string>
 <string name="show_warnings_descr">Mostra límits de velocitat, radars i bandes rugoses</string>
 <string name="osmand_parking_add_event">Afegeix un avís a l\'aplicació Calendari</string>
 <string name="rendering_attr_noPolygons_description">Fes transparents totes les característiques d\'àrees de sòl al mapa</string>
@@ -635,7 +635,7 @@
 <string name="map_overlay_descr">Escolliu el mapa superposat</string>
 <string name="tip_location_sharing">Compartir Ubicacio</string>
 <string name="preferred_locale_descr">Selecciona la llengua a mostrar</string>
-<string name="tip_app_mode_t_v2">\tL'OsmAnd suporta diferents (personalitzables) perfils d\'aplicació per a diferents usos.
+<string name="tip_app_mode_t_v2">\tL\'OsmAnd suporta diferents (personalitzables) perfils d\'aplicació per a diferents usos.
 \n\tPodeu canviar de perfil amb el boto a la cantonada inferior esquerra de la pantalla de mapa(icona de cotxe,bici o vianant), o quan creeu una ruta.
 	</string>
 <string name="foot">peu</string>
@@ -798,13 +798,13 @@
 <string name="tip_rotation_switching_t_v2">"\tPodeu canviar rota el mapa fent clic repetidament en la icona de la brúixola de la pantalla.
 \n\tLes opcions son:
 \n\t«No rotar (el nord es amunt)» - El mapa no rotarà. El nord sempre serà amunt
-\n\t«Cap a la direcció del moviment» - El mapa s'alinearà contínuament cap a la vostra direcció
-\n\t«A la brúixola» - El mapa s'alinearà contínuament amb la brúixola del dispositiu."
+\n\t«Cap a la direcció del moviment» - El mapa s\'alinearà contínuament cap a la vostra direcció
+\n\t«A la brúixola» - El mapa s\'alinearà contínuament amb la brúixola del dispositiu."
 	</string>
 <string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TAV (text a veu) d\'Android instal·lat. Voleu anar al Market per veure altres motors TAV? Altrament s\'usarà la llengua del TAV per defecte.</string>
 <string name="tip_map_switch_t_v2">\tLa font del mapa i les capes mostrades es poden canviar via «Menú» -&gt; «Defineix vista» en la vista del mapa.
 \n\tSota «Font del mapa…» podeu triar entre usar els mapes vectorials, font de tessel·la predeterminades (activades a «Mapes en línia» plugin per això), o mapes creats manualment usant per exemple OsmAndCreator en el vostre PC.
-\n\tL'OsmAnd també suporta fonts personalitzades.
+\n\tL\'OsmAnd també suporta fonts personalitzades.
 	</string>
 <string name="tip_map_context_menu_t">"\tEl menú contextual de mapa esta disponible prement i aguantant en el mapa o prement el boto de la bola de desplaçament.
 \n\tAixò produeix una caixa amb les coordenades del punt.Per obrir el menú de diàleg del mapa,toca\'l.(O prem i aguanta per amagar la caixa un altre cop.)
@@ -931,17 +931,17 @@
 	<string name="poi_remove_success">El PDI s\'ha eliminat correctament</string>
 	<string name="default_buttons_reset">Reinicia</string>
 	<string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
-	<string name="tip_day_night_mode_t_v2">\tL'aspecte dels mapes vectorials pot canviar entre dia (clar) i nit (fosc).
+	<string name="tip_day_night_mode_t_v2">\tL\'aspecte dels mapes vectorials pot canviar entre dia (clar) i nit (fosc).
 \n\tEls colors de nit són més segurs per conduir de nit.
 \n\tPodeu assignar una política per canviar de dia/nit a «Menú» -&gt; «Configura la 		pantalla...» -&gt;«Mapa dia/nit».
 \n\tLes opcions son:
 \n\t«Alba/Ocàs» - mode automàtic, controlat per la posició del sol (predeterminat)
 \n\t«Dia» - sempre usa mode de dia
-\n\t«Nit» - sempre usa mode de nit\n\t«Sensor de llum» - l'aspecte del mapa es controlat pel sensor de llum del dispositiu (només si disposa d'aquest sensor)
-	</string>	
-	<string name="tip_osm_improve_t">\tL'OsmAnd usa mapes basats en dades de l'Openstreetmap.org (OSM) i -a mes de veure i navegar- podeu usar-lo per a millorar la qualitat de les dades. Fàcilment podeu crear i publicar nous PDI o errors de l'OSM amb només uns quants clics!
-\n\tPer a això heu de subministrar la vostra informació de registre de l'OSM a «Preferències» -&gt; «Preferències generals» -&gt; «Edició d\'OSM».
-\n\tPer afegir un nou PDI useu l'opcio «Crea un PDI» en el menú contextual del mapa. Introduïu la informacio sobre el nou PDI al dialeg de «Crea PDI» i finalment publiqueu-lo.
+\n\t«Nit» - sempre usa mode de nit\n\t«Sensor de llum» - l\'aspecte del mapa es controlat pel sensor de llum del dispositiu (només si disposa d'aquest sensor)
+	</string>
+	<string name="tip_osm_improve_t">\tL\'OsmAnd usa mapes basats en dades de l\'Openstreetmap.org (OSM) i -a mes de veure i navegar- podeu usar-lo per a millorar la qualitat de les dades. Fàcilment podeu crear i publicar nous PDI o errors de l\'OSM amb només uns quants clics!
+\n\tPer a això heu de subministrar la vostra informació de registre de l\'OSM a «Preferències» -&gt; «Preferències generals» -&gt; «Edició d\'OSM».
+\n\tPer afegir un nou PDI useu l\'opcio «Crea un PDI» en el menú contextual del mapa. Introduïu la informacio sobre el nou PDI al dialeg de «Crea PDI» i finalment publiqueu-lo.
 \n\tEls errors en els mapes poden ser informats inmediatament via error d\'OSM, i la comunitat d\'OSM llavors podra solucionar l\'error rapidament.
 \n\tPer afegir un error useu l\'opcio «Obre error d\'OSM» en el menu contextual. Llavors entra una descripcio detallada del problema i finalment envia-ho usant el boto d\'Afegir.
 \n\tTingueu en compte que fa falta conexio a Internet per afegir PDI OSM i errors d\'OSM.</string>
@@ -1209,8 +1209,8 @@
 	<string name="osb_add_dialog_error">S\\\'ha produït un error: no s\'\\ha creat l\\\'error</string>
 	<string name="poi_error_poi_not_found">No s\\\'ha trobat el node o la instal·lació no és un node únic</string>
 	<string name="poi_error_io_error_template">S\\\'ha produït un error d\'E/S durant l\\\'acció {0}.</string>
-	<string name="osmodroid_mode_on">Atura l'OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Inicia l'OsMoDroid</string>
+	<string name="osmodroid_mode_on">Atura l\'OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Inicia l\'OsMoDroid</string>
     <string name="announce_gpx_waypoints">Anuncia fites GPX</string>
     <string name="speak_title">Anuncia…</string>
 	<string name="speak_descr">Configureu per anunciar noms de carrer, avisos de trànsit (cues, bandes sonores), avisos de radar, límits de velocitat...</string>
@@ -1225,7 +1225,7 @@
 	\n\t* Molts canvis a la interfície d'usuari
 	\n\t* Correcció d'errors en mostrar distàncies, analitzador de GPX, gestió de fites, planificació, pujada a OSM i gestió https
     </string>
-    <string name="osb_author_or_password_not_specified">Indiqueu l'usuari i la contrasenya de l'OSM a la configuració</string>
+    <string name="osb_author_or_password_not_specified">Indiqueu l\'usuari i la contrasenya de l\'OSM a la configuració</string>
     <string name="clear_intermediate_points">Neteja els punts intermitjos</string>
     <string name="keep_intermediate_points">Conserva els punts intermitjos</string>
     <string name="new_directions_point_dialog">Ja teniu punts intermitjos.</string>
@@ -1244,6 +1244,6 @@
     <string name="av_photo_play_sound">Reprodueix un so en fer una foto</string>
 	<string name="av_camera_focus_hiperfocal">Distància hiperfocal</string>
 	<string name="av_camera_focus_auto">Enfocament automàtic</string>
-	<string name="osb_comment_dialog_error">Error: no s'ha afegit el comentari</string>
-	<string name="osb_author_dialog_password">Contrasenya de l'OSM (opcional)</string>
+	<string name="osb_comment_dialog_error">Error: no s\'ha afegit el comentari</string>
+	<string name="osb_author_dialog_password">Contrasenya de l\'OSM (opcional)</string>
 	</resources>
