@@ -937,7 +937,7 @@
 \n\tLes opcions son:
 \n\t«Alba/Ocàs» - mode automàtic, controlat per la posició del sol (predeterminat)
 \n\t«Dia» - sempre usa mode de dia
-\n\t«Nit» - sempre usa mode de nit\n\t«Sensor de llum» - l\'aspecte del mapa es controlat pel sensor de llum del dispositiu (només si disposa d'aquest sensor)
+\n\t«Nit» - sempre usa mode de nit\n\t«Sensor de llum» - l\'aspecte del mapa es controlat pel sensor de llum del dispositiu (només si disposa d\'aquest sensor)
 	</string>
 	<string name="tip_osm_improve_t">\tL\'OsmAnd usa mapes basats en dades de l\'Openstreetmap.org (OSM) i -a mes de veure i navegar- podeu usar-lo per a millorar la qualitat de les dades. Fàcilment podeu crear i publicar nous PDI o errors de l\'OSM amb només uns quants clics!
 \n\tPer a això heu de subministrar la vostra informació de registre de l\'OSM a «Preferències» -&gt; «Preferències generals» -&gt; «Edició d\'OSM».
@@ -1221,9 +1221,9 @@
     <string name="tip_recent_changes_1_5_t">Canvis a la 1.5:
 	\n\t* Avisos de veu sobre els límits de velocitat i radars
 	\n\t* Més funcions de veu (informació dels noms de carrers)
-	\n\t* Icones al mapa d'alta densitat
-	\n\t* Molts canvis a la interfície d'usuari
-	\n\t* Correcció d'errors en mostrar distàncies, analitzador de GPX, gestió de fites, planificació, pujada a OSM i gestió https
+	\n\t* Icones al mapa d\'alta densitat
+	\n\t* Molts canvis a la interfície d\'usuari
+	\n\t* Correcció d\'errors en mostrar distàncies, analitzador de GPX, gestió de fites, planificació, pujada a OSM i gestió https
     </string>
     <string name="osb_author_or_password_not_specified">Indiqueu l\'usuari i la contrasenya de l\'OSM a la configuració</string>
     <string name="clear_intermediate_points">Neteja els punts intermitjos</string>
