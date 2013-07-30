@@ -209,6 +209,8 @@ public class Location {
                 results[2] = finalBearing;
             }
         }
+        // TODO leave only for 4.2.1 !!!
+        results[0] = (MapUtils.getDistance(lat1, lon1, lat2, lon2));
     }
 
     /**
