@@ -17,7 +17,7 @@
 <string name="map_widget_distance">Destination</string>
 <string name="map_widget_altitude">Höjd</string>
 <string name="map_widget_next_turn">Nästa sväng</string>
-<string name="show_warnings_title">Visa larm…</string>
+<string name="show_warnings_title">Visa larm …</string>
 <string name="show_warnings_descr">Konfigurerar trafikvarningar (hastighetsgränser, stopp, vägbulor), varning för hastighetskameror samt körfältsinformation</string>
 <string name="use_compass_navigation_descr">Använd kompassen när ingen riktning upptäcks på annat sätt</string>
 <string name="use_compass_navigation">Använd kompass</string>
@@ -43,7 +43,7 @@
 <string name="show_lanes">Visa körfält</string>
 <string name="avoid_unpaved">Undvik oasfalterade vägar</string>
 <string name="avoid_ferries">Undvik färjor</string>
-<string name="avoid_in_routing_title">Undvik…</string>
+<string name="avoid_in_routing_title">Undvik …</string>
 <string name="avoid_in_routing_descr">Undvik motorvägar, betalvägar, oasfalterade vägar, färjor</string>
 <string name="map_widget_show_ruler">Linjal</string>
 <string name="map_widget_appearance">Övrigt:</string>
@@ -141,8 +141,8 @@
 <string name="offline_navigation_not_available">OsmAnd offlinenavigering är inte tillgänglig för tillfället.</string>
 <string name="left_side_navigation">Vänstertrafik</string>
 <string name="left_side_navigation_descr">Välj för länder med vänstertrafik</string>
-<string name="download_link_and_local_description">Klicka här för att ladda ner eller uppdatera offline-data.
-\nKlicka på ett befintligt post för att se fler detaljer; tryck och håll för att inaktivera eller ta bort. Aktuella data på enheten (%1$s ledigt):</string>
+<string name="download_link_and_local_description">Tryck här för att ladda ner eller uppdatera offline-data.
+\nTryck på en befintligt post för att se detaljer; tryck och håll för att inaktivera eller ta bort en post. Aktuella data på enheten (%1$s ledigt):</string>
 <string name="unknown_from_location">Startpunkten är ännu inte bestämd</string>
 <string name="unknown_location">Positionen är ännu inte känd</string>
 <string name="confirm_interrupt_download">Vill du avbryta nedladdningen?</string>
@@ -206,7 +206,7 @@
 <string name="osmand_parking_am">fm</string>
 <string name="osmand_parking_position_name">Parkeringspunkt</string>
 <string name="osmand_parking_plugin_description">Denna plugin gör det möjligt att spara platsen där du parkerade bilen.</string>
-<string name="osmand_parking_plugin_name">Parkeringsplats-plugin</string>
+<string name="osmand_parking_plugin_name">Plugin för parkeringsplats</string>
 <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
 <string name="context_menu_item_delete_parking_point">Ta bort P-markering</string>
 <string name="asap">Snarast</string>
@@ -247,7 +247,7 @@
 <string name="osmand_parking_time_no_limit">Ej tidsbegränsad parkering</string>
 <string name="osmand_parking_position_description">Din parkerade bils position. %1$s</string>
 <string name="select_plugin_to_activate">Tryck på en plugin för att aktivera eller inaktivera den (omstart av OsmAnd kan krävas)</string>
-<string name="prefs_plugins_descr">Plugins aktiverar avancerade inställningar samt ytterligare funktionalitet</string>
+<string name="prefs_plugins_descr">Plugins aktiverar avancerade inställningar samt ger ytterligare funktionalitet</string>
 <string name="prefs_plugins">Plugin</string>
 <string name="tip_recent_changes_0_8_0_t">"Förändringar i 0.8.0 : ↵
 \n\t- *Plugin-funktionalitet*↵
@@ -265,7 +265,9 @@
 <string name="test_voice_prompts">Test av röstmeddelanden</string>
 <string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan ladda ner en i Inställningar (Datahantering) eller byta till online-kartor.</string>
 <string name="tip_recent_changes_0_7_2_t">Förändringar i 0.7.2:↵\n→- Inbyggd rendering för alla enheter↵\n→- Offline POI-redigering↵\n→- Tillgänglighet↵\n→- Massor av buggfixar</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar i valfri mapp) - Kompakta offline-vektorkartor för hela världen finns - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för korta sträckor (experimentell) - Bil-, cykel- och fotgängalägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar av denna gratisversion av OsmAnd: - Antal nedladdningar av kartor är begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
+<string name="osmand_long_description_1000_chars">
+		" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar i valfri mapp) - Kompakta offline-vektorkartor för hela världen finns - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för korta sträckor (experimentell) - Bil-, cykel- och fotgängalägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar av denna gratisversion av OsmAnd: - Antal nedladdningar av kartor är begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "
+	</string>
 <string name="native_rendering">Inbyggd rendering</string>
 <string name="default_buttons_support">Support</string>
 <string name="support_new_features">Ge stöd till nya funktioner</string>
@@ -367,13 +369,15 @@
 \n\tAlternativen är:
 \n\t\'Norr uppåt (vrid inte kartan)\'- Kartan roteras inte. Norr är alltid uppåt.\n\t\'I körriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.\n\t\'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt till enhetens kompassläsning.</string>
 <string name="binary_map_download_success">Hämtades utan problem.\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera vy\' -&gt; \'Kartkälla …\' -&gt; \'Offline vektorkartor\'.</string>
-<string name="tip_day_night_mode">Dag-/nattläge</string>
+<string name="tip_day_night_mode">Dag-/Nattläge</string>
 <string name="tip_osm_improve">Förbättrar OSM-data</string>
 <string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (ledigt: %2$s).</string>
 <string name="download_files_question_space">Tillgängligt utrymme nu {2} MB! Ladda ner {0} fil(er) ({1} MB)?</string>
-<string name="tip_select_destination_point">Välj destination</string>
-<string name="tip_select_destination_point_t">"\tDu kan välja en destination direkt i kartan (snabbmenyn, sedan \'Ange som destination\'), i alla sökaktiviteter, eller via lång knapptryckning en post i \'Lista över favoritpunkter\'.\n\tResmålet markeras som en orange skiva på kartan och OsmAnd visar avståndet till den och riktningen till den (orange triangel). "</string>
-<string name="tip_recent_changes_0_6_9_t">Förändringar i 0.6.9: ↵\n→- Förbättrad offlinekartsrendering ↵\n→- Snabb inbyggd offlinerendering - titta i experimentella funktioner (kanske inte fungerar på vissa enheter) ↵\n→- Stora förändringar i utseende och känsla ↵\n→- Höjdinformation ↵\n→- Nya översättningar (vietnamesiska, polska) ↵\n→- Andra små funktioner</string>
+<string name="tip_select_destination_point">Få vägledning</string>
+<string name="tip_select_destination_point_t">"\tDu kan få vägledning till en plats direkt i kartan (snabbmenyn, sedan \'Vägledning\'), i alla sökaktiviteter, eller via långt tryck på en post i \'Lista över favoritpunkter\'.\n\tDestinationen markeras som en orange målflagga på kartan och OsmAnd visar avståndet till den och riktningen till den (orange triangel). "
+	</string>
+<string name="tip_recent_changes_0_6_9_t">Förändringar i 0.6.9: ↵\n\t- Förbättrad rendering av offlinekartor↵\n\t- Snabb inbyggd offlinerendering - titta under experimentella funktioner (kanske inte fungerar på vissa enheter) ↵\n\t- Stora förändringar i utseende och känsla ↵\n\t- Höjdinformation ↵\n→- Nya översättningar (vietnamesiska, polska) ↵\n\t- Andra smärre funktioner
+	</string>
 <string name="use_transparent_map_theme">Genomskinligt tema</string>
 <string name="native_library_not_supported">Inbyggt bibliotek stöds inte på den här enheten.</string>
 <string name="init_native_library">Initierar inbyggt bibliotek…</string>
@@ -640,13 +644,15 @@
 	<string name="context_menu_item_download_map">Ladda ner karta</string>
 	<string name="poi_filter_sightseeing">Sevärdheter</string>
     <string name="index_settings">Offline-data (hämta)</string>
-	<string name="tip_day_night_mode_t_v2">"Kartans utseende kan för vissa vektorkartor ändras mellan dag (ljusare) och natt (mörkare).\nNattfärgerna är säkrare vid mörkerkörning.\nDu kan ange en regel för dag-/nattomkoppling i Meny -&gt; Konfigurera skärm ... -&gt; Dag-/nattkarta.\nAlternativen är:\nSoluppgång/Solnedgång - automatläge, styrs av solens position (standard)\nDag - använd alltid dagläge\nNatt - använd alltid nattläge\nLjussensor - kartans utseende styrs av ljussensorn på enheten (endast om sådan finns) "</string>	
+	<string name="tip_day_night_mode_t_v2">\tKartans utseende kan för vissa vektorkartor ändras mellan dag (ljusare) och natt (mörkare).
+\n\tNattfärgerna är säkrare vid mörkerkörning.\n\tDu kan ange en regel för dag-/nattomkoppling i Meny -&gt; Konfigurera skärm ... -&gt; Dag-/nattkarta.\n\tAlternativen är:\n\tSoluppgång/Solnedgång - automatläge, styrs av solens position (standard)\n\tDag - använd alltid dagläge\n\tNatt - använd alltid nattläge\n\tLjussensor - kartans utseende styrs av ljussensorn på enheten (endast om sådan finns)
+	</string>	
 	<string name="select_max_zoom_preload_area">Välj maximal zoom att förladda</string>
 	<string name="maps_could_not_be_downloaded">Denna karta kunde inte laddas ner</string>
 	<string name="continuous_rendering">Kontinuerlig rendering</string>
 	<string name="continuous_rendering_descr">Visa kontinuerlig rendering istället för bild-direkt</string>
 	<string name="rendering_exception">Ett fel uppstod vid renderingen av valt område</string>
-	<string name="show_point_options">Använd platsen...</string>
+	<string name="show_point_options">Använd platsen …</string>
 	<string name="renderer_load_sucess">Renderaren laddades utan problem</string>
 	<string name="renderer_load_exception">Ett undantagsfel inträffade: renderaren laddades inte</string>
 	<string name="renderers">Vektorrenderare</string>
@@ -1071,7 +1077,7 @@
     <string name="av_control_start">Starta</string>
     <string name="max_speed_none">Ingen</string>
     <string name="prefer_motorways">Föredra motorvägar</string>
-	<string name="prefer_in_routing_title">Föredra…</string>
+	<string name="prefer_in_routing_title">Föredra …</string>
 	<string name="prefer_in_routing_descr">Föredra motorvägar</string>
     <string name="item_checked">markerad</string>
     <string name="item_unchecked">ej markerad</string>
@@ -1123,7 +1129,7 @@
     <string name="local_indexes_cat_srtm">Höjdkurvsdata</string>
     <string name="route_head">Riktning</string>
 	<string name="wait_current_task_finished">Vänta tills aktuell uppgift är slutförd</string>
-    <string name="downloading_file_new">"Laddar ner "</string>
+    <string name="downloading_file_new">Laddar ner …</string>
 	<string name="tip_recent_changes_1_4_t">Ändringar i 1.4:
 \n\t* Sortera waypoints på bästa möjliga sätt för att besöka alla (handelsresande, dörr-till-dörr)
 \n\t* Sök efter gatnamn (i närheten)
@@ -1182,7 +1188,7 @@
     <string name="route_to">Till:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">Från:</string>
-    <string name="speak_title">Tala …</string>
+    <string name="speak_title">Läs upp …</string>
 	<string name="speak_descr">Konfigurera för att läsa upp gatunamn, trafikvarningar (t.ex. fartbulor), varningar för fartkameror, hastighetsbegränsningar</string>
 	<string name="speak_street_names">Läs upp gatunamn (TTS)</string>
     <string name="announce_gpx_waypoints">Meddela om GPX-waypoints</string>
