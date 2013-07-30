@@ -360,8 +360,8 @@
 	<string name="index_name_oceania">Ωκεανία</string>
 	<string name="index_name_other">Παγκόσμιοι και τοπικοί χάρτες</string>
 	<string name="index_name_wiki">ΣΕ Παγκόσμιας Wikipedia</string>
-	<string name="index_name_voice">Πακέτα Γλώσσας (εγγραφή)</string>
-	<string name="index_name_tts_voice">Πακέτα γλώσσας (TTS)</string>
+	<string name="index_name_voice">Πακέτα φωνής (εγγραφή)</string>
+	<string name="index_name_tts_voice">Πακέτα φωνής (TTS)</string>
 	<string name="amenity_type_wikiosm">Wikipedia (εκτός σύνδεσης)</string>
 	<string name="amenity_type_user_defined">Ορισμένο από το χρήστη</string>
 	<string name="fav_export_confirmation">Υπάρχει ήδη αρχείο από προηγούμενη εξαγωγή αγαπημένων. Θέλετε να αντικατασταθεί?</string>
