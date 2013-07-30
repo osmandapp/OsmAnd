@@ -5,6 +5,7 @@
 	<!-- 	alwaysCopyOnFirstInstall - Copies file on first install, always -->
 	<!-- 	alwaysOverwriteOrCopy - Copies or overwrites file unconditionally -->
 	<!-- 	copyOnlyIfDoesNotExist - Copies file only this file is not present on target system -->
+	<asset source="voice/cs/ttsconfig.p" destination="voice/cs-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/da/ttsconfig.p" destination="voice/da-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/de/ttsconfig.p" destination="voice/de-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/en/ttsconfig.p" destination="voice/en-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
@@ -17,7 +18,6 @@
 	<asset source="voice/pt/ttsconfig.p" destination="voice/pt-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ru/ttsconfig.p" destination="voice/ru-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 
-	<asset source="voice/cs-tts-old/ttsconfig.p" destination="voice/cs-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/el-tts-old/ttsconfig.p" destination="voice/el-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/fi-tts-old/ttsconfig.p" destination="voice/fi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/hi-tts-old/ttsconfig.p" destination="voice/hi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
