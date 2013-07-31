@@ -339,7 +339,7 @@ public class BinaryMapIndexReader {
 		int ch2 = readByte();
 		int ch3 = readByte();
 		int ch4 = readByte();
-		return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0));
+		return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + ch4);
 	}
 	
 	

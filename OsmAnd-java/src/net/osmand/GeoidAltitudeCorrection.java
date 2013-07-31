@@ -72,6 +72,6 @@ public class GeoidAltitudeCorrection {
 		rf.read(b);
 		int ch1 = b[0] < 0 ? b[0] + 256 : b[0];
 		int ch2 = b[1] < 0 ? b[1] + 256 : b[1];
-		return (short)((ch1 << 8) + (ch2 << 0));
+		return (short)((ch1 << 8) + ch2);
 	}
 }

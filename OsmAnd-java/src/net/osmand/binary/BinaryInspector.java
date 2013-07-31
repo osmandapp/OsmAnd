@@ -190,7 +190,7 @@ public class BinaryInspector {
 		ous.writeRawByte((v >>> 24) & 0xFF);
 		ous.writeRawByte((v >>> 16) & 0xFF);
 		ous.writeRawByte((v >>>  8) & 0xFF);
-		ous.writeRawByte((v >>>  0) & 0xFF);
+		ous.writeRawByte(v & 0xFF);
 		//written += 4;
 	}
 	
