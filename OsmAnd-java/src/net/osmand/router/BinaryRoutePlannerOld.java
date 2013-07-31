@@ -207,8 +207,7 @@ public class BinaryRoutePlannerOld {
 	}
 	
 	protected static double h(RoutingContext ctx, double distToFinalPoint, RouteSegment next) {
-		double result = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
-		return result; 
+		return distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
 	}
 	
 	private static void println(String logMsg) {
@@ -530,8 +529,7 @@ public class BinaryRoutePlannerOld {
 						// already in queue remove it
 						if (!graphSegments.remove(next)) {
 							// exist in different queue!
-							RouteSegment cpy = new RouteSegment(next.getRoad(), next.getSegmentStart());
-							next = cpy;
+							next = new RouteSegment(next.getRoad(), next.getSegmentStart());
 						}
 					}
 					next.distanceFromStart = distFromStart;

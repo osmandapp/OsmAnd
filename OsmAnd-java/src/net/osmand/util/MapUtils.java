@@ -40,8 +40,7 @@ public class MapUtils {
 	
 	private static double scalarMultiplication(double xA, double yA, double xB, double yB, double xC, double yC) {
 		// Scalar multiplication between (AB, AC)
-		double multiple = (xB - xA) * (xC - xA) + (yB- yA) * (yC -yA);
-		return multiple;
+		return (xB - xA) * (xC - xA) + (yB- yA) * (yC -yA);
 	}
 
 	public static double getOrthogonalDistance(double lat, double lon, double fromLat, double fromLon, double toLat, double toLon) {
@@ -85,8 +84,7 @@ public class MapUtils {
 		//double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		//return R * c * 1000;
 		// simplyfy haversine:
-		double c = 2 * R * 1000 * Math.asin(Math.sqrt(a));
-		return c;
+		return (2 * R * 1000 * Math.asin(Math.sqrt(a)));
 	}
 	
 	
@@ -171,8 +169,7 @@ public class MapUtils {
 			latitude = latitude < 0 ? - 89.9 : 89.9;
 			eval = Math.log( Math.tan(toRadians(latitude)) + 1/Math.cos(toRadians(latitude)) );
 		}
-		double result = (1 - eval / Math.PI) / 2 * getPowZoom(zoom);
-		return  result;
+		return (1 - eval / Math.PI) / 2 * getPowZoom(zoom);
 	}
 	
 	public static double getTileEllipsoidNumberY(float zoom, double latitude){
@@ -238,8 +235,7 @@ public class MapUtils {
 	
 	public static double getLatitudeFromTile(float zoom, double y){
 		int sign = y < 0 ? -1 : 1;
-		double result = Math.atan(sign*Math.sinh(Math.PI * (1 - 2 * y / getPowZoom(zoom)))) * 180d / Math.PI;
-		return result;
+		return Math.atan(sign*Math.sinh(Math.PI * (1 - 2 * y / getPowZoom(zoom)))) * 180d / Math.PI;
 	}
 	
 	
