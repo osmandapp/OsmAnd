@@ -2013,7 +2013,7 @@ public class BinaryMapIndexReader {
 					if(pair == null) {
 						throw new NullPointerException("Type " + types[j] + "was not found");
 					}
-					b.append(pair.toSimpleString()+"("+types[j]+")");
+					b.append(pair.toSimpleString()).append("(").append(types[j]).append(")");
 				}
 				b.append("]");
 				if(obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0){
@@ -2026,7 +2026,7 @@ public class BinaryMapIndexReader {
 						if(pair == null) {
 							throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
 						}
-						b.append(pair.toSimpleString()+"("+obj.getAdditionalTypes()[j]+")");
+						b.append(pair.toSimpleString()).append("(").append(obj.getAdditionalTypes()[j]).append(")");
 						
 					}
 					b.append("]");
@@ -2043,7 +2043,7 @@ public class BinaryMapIndexReader {
 						if(pair == null) {
 							throw new NullPointerException("Type " + keys[j] + "was not found");
 						}
-						b.append(pair.toSimpleString()+"("+keys[j]+")");
+						b.append(pair.toSimpleString()).append("(").append(keys[j]).append(")");
 						b.append(" - ").append(names.get(keys[j]));
 					}
 					b.append("]");
