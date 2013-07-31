@@ -40,6 +40,7 @@ import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.StackWidgetView;
@@ -948,9 +949,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						indexFile(f);
 						if (registerNew) {
 							Recording rec = recordingByFileName.get(f.getName());
-							if (rec != null) {
+							if (rec != null && app.getSettings().SAVE_TRACK_TO_GPX.get()
+									&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 								String name = f.getName();
 								SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
+
 								savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), name);
 								if (app.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
 									app.getFavorites().addFavoritePointToGPXFile(new FavouritePoint(rec.lat, rec.lon, name, ""));

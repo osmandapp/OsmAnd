@@ -236,12 +236,12 @@ public class VoiceRouter {
 			}
 			
 			
-		} else if (alarm.getTime() == AlarmInfo.SPEED_CAMERA) {
+		} else if (alarm.getType() == AlarmInfo.SPEED_CAMERA) {
 			if (router.getSettings().SPEAK_SPEED_CAMERA.get() && ms - lastAnnouncedSpeedCamera > 100 * 1000) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					lastAnnouncedSpeedCamera = ms;
-					p.speedAlarm().play();
+					p.attention(alarm.getType()+"").play();
 				}
 			}
 		} else {
@@ -249,7 +249,7 @@ public class VoiceRouter {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					lastAnnouncedWarning = ms;
-					p.speedAlarm().play();
+					p.attention(alarm.getType()+"").play();
 				}
 			}
 		}

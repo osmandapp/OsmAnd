@@ -109,12 +109,11 @@ public class Location {
         mAccuracy = 0;
     }
 
-
     private static void computeDistanceAndBearing(double lat1, double lon1,
         double lat2, double lon2, float[] results) {
         // Based on http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf
         // using the "Inverse Formula" (section 4)
-
+    	float osmandDist = (float) (net.osmand.util.MapUtils.getDistance(lat1, lon1, lat2, lon2)); 
         int MAXITERS = 20;
         // Convert lat/long to radians
         lat1 *= Math.PI / 180.0;
@@ -209,6 +208,8 @@ public class Location {
                 results[2] = finalBearing;
             }
         }
+        // Should we leave only for 4.2.1? Or keep consistent for all devices?
+        results[0] = osmandDist;
     }
 
     /**

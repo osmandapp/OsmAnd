@@ -197,7 +197,7 @@
   <string name="index_name_oceania">Океанія</string>
   <string name="index_name_other">Мапи світу</string>
   <string name="index_name_wiki">Worldwide Wikipedia</string>
-  <string name="index_name_voice">Голосові дані (запис)</string>
+  <string name="index_name_voice">Голосові дані (запис, обмежений функціонал)</string>
   <string name="index_name_tts_voice">Голосові дані (TTS)</string>
   <string name="amenity_type_wikiosm">Вікіпедія (оффлайн)</string>
   <string name="amenity_type_user_defined">Користувацькі</string>
@@ -1499,9 +1499,10 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="speak_street_names">Оголошувати назви вулиць (TTS)</string>
     <string name="tip_recent_changes_1_5_t">Зміни в 1.5:
 	\n\t* Голосові попередження про обмеження швидкості та камери
+	\n\t* Додано голосові можливості (оголошення назв вулиць)
 	\n\t* Високоякісні позначки для мапи
 	\n\t* Багато змін інтерфейсу
-	\n\t* Виправлення помилок показу відстані, аналізу GPX, обробки маршрутних точок, віджету планування маршруту, надсилання даних до OSM, роботи з https
+        \n\t* Виправлення помилок показу відстані, аналізу GPX, обробки маршрутних точок, віджету планування маршруту, надсилання даних до OSM, роботи з https
     </string>
     <string name="keep_intermediate_points">Лишити проміжні точки</string>
     <string name="route_via">Через:</string>
@@ -1522,4 +1523,6 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		\n\t- Інші невеличкі покращення
 	</string>    
 	<string name="osb_author_dialog_password">Пароль OSM (необов’язково)</string>
-	</resources>
+	<string name="osmodroid_mode_on">Зупинити OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Запустити OsMoDroid</string>
+    </resources>
