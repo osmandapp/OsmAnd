@@ -270,11 +270,7 @@ public class MapUtils {
 //	System.out.println(buildShortOsmUrl(52.30103d, 4.862927d, 18)); // http://osm.org/go/0E4_JiVhs
 //	System.out.println(buildShortOsmUrl(40.59d, -115.213d, 9)); // http://osm.org/go/TelHTB--
 	public static String buildShortOsmUrl(double latitude, double longitude, int zoom){
-		StringBuilder str = new StringBuilder(10);
-		str.append(BASE_SHORT_OSM_URL);
-		str.append(createShortLocString(latitude, longitude, zoom));
-		str.append("?m");
-		return str.toString();
+        return BASE_SHORT_OSM_URL + createShortLocString(latitude, longitude, zoom) + "?m";
 	}
 
 	public static String createShortLocString(double latitude, double longitude, int zoom) {
