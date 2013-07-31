@@ -11,7 +11,6 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin.DistanceCalculatorLayer;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -208,17 +207,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		LatLon latLon = selectObjectsForContextMenu(point);
-		for(OsmandMapLayer l : view.getLayers()){
-			if(l instanceof DistanceCalculatorLayer){
-				if(((DistanceCalculatorLayer) l).getDistanceMeasurementMode() > 0 && !selectedObjects.isEmpty())
-					return false;	//allow long press event to propagate to existing distance calculation layer
-				break;
-			}
-		}
 		String description = getSelectedObjectDescription();
 		setLocation(latLon, description);
 		view.refreshMap();
-		return true;
+		return false;
 	}
 
 	public LatLon selectObjectsForContextMenu(PointF point) {
@@ -345,6 +337,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			});
 			builder.show();
+		}else if(selectedObjects.size() <= 0){
 		} else {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
 			for (OsmandMapLayer layer : view.getLayers()) {
