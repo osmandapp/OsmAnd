@@ -545,7 +545,7 @@ public final class DescriptorProtos {
             .computeStringSizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * getDependencyList().size();
+        size += getDependencyList().size();
       }
       for (com.google.protobuf.DescriptorProtos.DescriptorProto element : getMessageTypeList()) {
         size += com.google.protobuf.CodedOutputStream
