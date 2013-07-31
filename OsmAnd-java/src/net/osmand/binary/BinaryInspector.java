@@ -465,7 +465,7 @@ public class BinaryInspector {
 				int size = index.preloadStreets(c, null);
 				List<Street> streets = new ArrayList<Street>(c.getStreets());
 				print(MessageFormat.format("\t\t''{0}'' [{1,number,#}], {2,number,#} street(s) size {3,number,#} bytes",
-						new Object[]{c.getEnName(), Long.valueOf(c.getId()), Integer.valueOf(streets.size()), Integer.valueOf(size)}));
+						new Object[]{c.getEnName(), c.getId(), Integer.valueOf(streets.size()), Integer.valueOf(size)}));
 				if(!verbose.vstreets)
 		        {
 					println("");
@@ -483,13 +483,13 @@ public class BinaryInspector {
 					final List<Street> intersections = t.getIntersectedStreets();
 				
 					println(MessageFormat.format("\t\t\t''{0}'' [{1,number,#}], {2,number,#} building(s), {3,number,#} intersections(s)",
-							new Object[]{t.getEnName(), Long.valueOf(t.getId()), Integer.valueOf(buildings.size()), Integer.valueOf(intersections.size())}));
+							new Object[]{t.getEnName(), t.getId(), Integer.valueOf(buildings.size()), Integer.valueOf(intersections.size())}));
 					
 					if (buildings != null && !buildings.isEmpty() && verbose.vbuildings) {
 						println("\t\t\t\tBuildings:");
 						for (Building b : buildings) {
 							println(MessageFormat.format("\t\t\t\t{0} [{1,number,#}]",
-									new Object[]{b.getName(true), Long.valueOf(b.getId())}));
+									new Object[]{b.getName(true), b.getId()}));
 						}
 					}
 					
