@@ -113,7 +113,7 @@ public class GeneralRouter extends VehicleRouter {
 				RouteTypeRule r = reg.quickGetEncodingRule(types[i]);
 				Float sp = highwaySpeed.get(r.getTag()+"$"+r.getValue());
 				if(sp != null){
-					if(sp.floatValue() > 0) {
+					if(sp > 0) {
 						accepted = true;
 					}
 					break;

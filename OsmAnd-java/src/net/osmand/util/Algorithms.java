@@ -54,7 +54,7 @@ public class Algorithms {
         int ch4 = in.read();
         if ((ch1 | ch2 | ch3 | ch4) < 0)
             throw new EOFException();
-        return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0));
+        return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + ch4);
     }
 	
 	public static String capitalizeFirstLetterAndLowercase(String s) {
@@ -162,7 +162,7 @@ public class Algorithms {
 		o = o << 8 | (0xff & bytes[offset + 3]);
 		o = o << 8 | (0xff & bytes[offset + 2]);
 		o = o << 8 | (0xff & bytes[offset + 1]);
-		o = o << 8 | (0xff & bytes[offset + 0]);
+		o = o << 8 | (0xff & bytes[offset]);
 		return o;
 	}
 	
@@ -191,7 +191,7 @@ public class Algorithms {
 		int o = (0xff & bytes[offset + 3]) << 24;
 		o |= (0xff & bytes[offset + 2]) << 16;
 		o |= (0xff & bytes[offset + 1]) << 8;
-		o |= (0xff & bytes[offset + 0]);
+		o |= (0xff & bytes[offset]);
 		return o;
 	}
 	
@@ -244,7 +244,7 @@ public class Algorithms {
 	
 	public static int parseSmallIntFromBytes(byte[] bytes, int offset) {
 		int s = (0xff & bytes[offset + 1]) << 8;
-		s |= (0xff & bytes[offset + 0]);
+		s |= (0xff & bytes[offset]);
 		return s;
 	}
 	

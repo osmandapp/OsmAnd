@@ -2,6 +2,7 @@ package net.osmand.binary;
 
 
 import java.io.IOException;
+import java.util.Collections;
 
 import net.osmand.NativeLibrary;
 import net.osmand.bridge.ObfInspector;
@@ -21,9 +22,7 @@ public class BinaryInspectorNative {
 		// test cases show info
 		NativeLibrary.loadAllLibs(null);
 		StringVector vector = new StringVector();
-		for(int i = 0; i < args.length; i++) {
-			vector.add(args[i]);
-		}
+        Collections.addAll(vector, args);
 		ObfInspector.inspector(vector);
 	}
 	
