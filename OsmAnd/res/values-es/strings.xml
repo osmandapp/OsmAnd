@@ -1240,4 +1240,24 @@ OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada) 
     <string name="speak_cameras">Anunciar radares</string>
 	<string name="speak_traffic_warnings">Anunciar avisos de tráfico</string>
 	<string name="osb_author_dialog_password">Contraseña OSM (opcional)</string>
-	</resources>
+	<string name="osmodroid_mode_on">Para OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Inicia OsMoDroid</string>
+    <string name="announce_gpx_waypoints">Anunciar puntos de paso GPX</string>
+    <string name="speak_title">Anunciar…</string>
+	<string name="speak_descr">Configura el anuncio de nombres de calles, avisos de tráfico (stops, badenes), radares, límites de velocidad</string>
+	<string name="speak_street_names">Anunciar nombres de calles (TTS)</string>
+    <string name="tip_recent_changes_1_5_t">Changes in 1.5:
+	\n\t* Avisos de voz sobre límies de velocidad y radares
+	\n\t* Más posibilidades de avisos de voz (anuncio de nombres de calles)
+	\n\t* Iconos de mapa de alta densidad
+	\n\t* Multitud de cambios en la IU
+	\n\t* Arreglo de fallos en visualización de la distacia, analizador de GPX, manejo de puntos de paso, control de planificación, subida a OSM, manejo de https
+    </string>
+    <string name="osb_author_or_password_not_specified">Por favor, indica usuario OSM y clave en Opciones</string>
+    <string name="clear_intermediate_points">Borrar puntos intermedios</string>
+    <string name="keep_intermediate_points">Mantener puntos intermedios</string>
+    <string name="new_directions_point_dialog">Ya has definido puntos intermedios.</string>
+    <string name="context_menu_item_directions_to">Indicaciones a</string>
+    <string name="route_descr_map_location">Mapa: </string>
+    <string name="route_to">Hacia:</string>
+    </resources>
