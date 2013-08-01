@@ -336,7 +336,7 @@ public class NewGeneralRouter extends VehicleRouter {
 				boolean val = false;
 				if(defParams.containsKey(p)) {
 					RoutingParameter t = defParams.get(p);
-					val = t.type == RoutingParameterType.BOOLEAN && t.value != null && ((Boolean)t.value).booleanValue();
+					val = t.type == RoutingParameterType.BOOLEAN && t.value != null && (Boolean) t.value;
 				}
 				if(not && val){
 					parameterValue = false;

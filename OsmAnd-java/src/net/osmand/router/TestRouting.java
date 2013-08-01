@@ -144,8 +144,7 @@ public class TestRouting {
 	public static void info() {
 		println("Run router tests is console utility to test route calculation for osmand. It is also possible to calculate one route from -start to -end.");
 		println("\nUsage for run tests : runTestsSuite [-routingXmlPath=PATH] [-verbose] [-obfDir=PATH] [-start=lat;lon] [-end=lat;lon]  [-testDir=PATH] {individualTestPath}");
-		return;
-	}
+    }
 	
 
 	private static void println(String string) {

@@ -139,9 +139,9 @@ public class RenderingRule {
 	public StringBuilder toString(String indent, StringBuilder bls ) {
 		bls.append("RenderingRule [");
 		for(RenderingRuleProperty p : getProperties()){
-			bls.append(" " + p.getAttrName() + "= ");
+			bls.append(" ").append(p.getAttrName()).append("= ");
 			if(p.isString()){
-				bls.append("\"" + getStringPropertyValue(p.getAttrName()) + "\"");
+				bls.append("\"").append(getStringPropertyValue(p.getAttrName())).append("\"");
 			} else if(p.isFloat()){
 				bls.append(getFloatPropertyValue(p.getAttrName()));
 			} else if(p.isColor()){
@@ -153,7 +153,7 @@ public class RenderingRule {
 		bls.append("]");
 		indent += "   ";
 		for(RenderingRule rc : getIfElseChildren()){
-			bls.append("\n"+indent);			
+			bls.append("\n").append(indent);
 			rc.toString(indent, bls);
 		}
 		

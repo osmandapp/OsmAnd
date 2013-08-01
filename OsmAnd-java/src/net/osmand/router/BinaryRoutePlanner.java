@@ -544,10 +544,7 @@ public class BinaryRoutePlanner {
 		if(speed > ctx.getRouter().getMaxDefaultSpeed()) {
 			speed = ctx.getRouter().getMaxDefaultSpeed();
 		}
-		float distStartObstacles = obstaclesTime  +
-				 distOnRoadToPass / speed;
-		return distStartObstacles;
-		
+		return obstaclesTime + distOnRoadToPass / speed;
 	}
 
 	private long calculateRoutePointId(final RouteDataObject road, int intervalId, boolean positive) {

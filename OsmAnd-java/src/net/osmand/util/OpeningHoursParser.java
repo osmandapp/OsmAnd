@@ -477,8 +477,7 @@ public class OpeningHoursParser {
 				break;
 			}
 			if(Character.isWhitespace(ch) || ch == ','){
-				continue;
-			} else if (ch == '-') {
+            } else if (ch == '-') {
 				if(previousDay != -1){
 					startDay = previousDay;
 				} else if (previousMonth != -1) {
