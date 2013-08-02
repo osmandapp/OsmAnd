@@ -765,7 +765,7 @@
 	<string name="search_poi_filter">篩選</string>
 	<string name="menu_mute_off">語音已開啟</string>
 	<string name="menu_mute_on">語音已關閉</string>
-	<string name="voice_provider_descr">選擇導航語音</string>
+	<string name="voice_provider_descr">選擇導航語音指示 (語言代碼，請參閱 ISO 639-1)</string>
 	<string name="voice_provider">語音導航</string>
 	<string name="voice_data_initializing">初始化語音資料…</string>
 	<string name="voice_data_not_supported">不支援的語音資料版本</string>
