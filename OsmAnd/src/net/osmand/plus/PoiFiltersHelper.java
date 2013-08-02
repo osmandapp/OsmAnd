@@ -130,8 +130,7 @@ public class PoiFiltersHelper {
 			putAll(types, AmenityType.OSMWIKI);
 			putValues(types, AmenityType.OTHER, "place_of_worship", "internet_access_wlan", "internet_access_wired",
 					"internet_access_terminal", "internet_access_public", "internet_access_service",
-					"embassy","emergency_phone","marketplace",
-					"post_office","telephone", "toilets");
+					"embassy", "marketplace", "post_office", "telephone", "toilets", "emergency_phone");
 		} else if(UDF_FUEL.equals(key)){
 			putValues(types, AmenityType.TRANSPORTATION, "fuel");
 		} else if (UDF_PARKING.equals(key)) {
