@@ -415,15 +415,16 @@ public class VoiceRouter {
 	}
 	
 	public String getSpeakableStreetName(RouteDirectionInfo i) {
+		String res = "";
 		if(i == null || !router.getSettings().SPEAK_STREET_NAMES.get()){
-			return "";
+			return res;
 		}
 		if(!Algorithms.isEmpty(i.getRef())) {
-			return i.getRef();
+			res = i.getRef();
 		} else if(!Algorithms.isEmpty(i.getStreetName())) {
-			return i.getStreetName();
+			res = i.getStreetName();
 		}
-		return "";
+		return res.replace('-', ' ');
 	}
 
 	private void playPrepareTurn(RouteDirectionInfo next, int dist) {
