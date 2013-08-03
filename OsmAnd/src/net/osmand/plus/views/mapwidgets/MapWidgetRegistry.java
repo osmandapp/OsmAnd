@@ -58,7 +58,7 @@ public class MapWidgetRegistry {
 		
 		for(ApplicationMode ms : ApplicationMode.values() ) {
 			String mpf = settings.MAP_INFO_CONTROLS.getModeValue(ms);
-			if(mpf.equals("")) {
+			if(mpf.isEmpty()) {
 				visibleElements.put(ms, null);
 			} else {
 				LinkedHashSet<String> set = new LinkedHashSet<String>();
