@@ -74,6 +74,7 @@
     <string name="osmand_distance_planning_plugin_name">Distance calculator &amp; Planning Tool</string>
     <string name="use_distance_measurement_help">* Tap map to mark a new point.\n 
         * Tap existing point to display related information.\n
+        * Press and drag an existing point to change its location.\n
         * Press and hold on a point to view an editing menu.\n
         * Click on measurement widget to see more actions.</string>
     <string name="default_buttons_do_not_show_again">Do not show again</string>

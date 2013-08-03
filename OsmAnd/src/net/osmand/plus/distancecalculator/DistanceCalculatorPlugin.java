@@ -59,6 +59,7 @@ import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.MotionEvent;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -432,9 +433,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 
 		public final int defaultMeasurementPointDisplayRadius = 9;
 		public final int defaultMeasurementPointSelectionRadius = 13;
-		public int selectedSegmentIndex = -1;
-		public int selectedPointIndex = -1;
 		public int selectedPointIndices[] = {-1, -1};
+		private boolean scrollingFlag = false;		//For measurement point dragging
 
 		public DistanceCalculatorLayer() {
 		}
@@ -471,6 +471,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		@Override
 		public boolean onSingleTap(PointF point) {
 			if(distanceMeasurementMode == 1) {
+				String description = "";
 				LatLon l = view.getLatLonFromScreenPoint(point.x, point.y);
 				if(measurementPoints.size() == 0) {
 					measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
@@ -486,13 +487,14 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					calculateDistance();
 					selectedPointIndices[0] = -1;
 					selectedPointIndices[1] = -1;
+					description = distance + "\n" + view.getContext().getString(R.string.point_on_map, 
+							l.getLatitude(), l.getLongitude());
 				}else{
-					selectedPointIndex = selectedPointIndices[1];
-					selectedSegmentIndex = selectedPointIndices[0];
-					calculatePartialDistance(selectedSegmentIndex, selectedPointIndex);	
+					calculatePartialDistance(selectedPointIndices[0], selectedPointIndices[1]);
+					description = distance + "\n" + view.getContext().getString(R.string.point_on_map, 
+							measurementPoints.get(selectedPointIndices[0]).get(selectedPointIndices[1]).lat, 
+							measurementPoints.get(selectedPointIndices[0]).get(selectedPointIndices[1]).lon);
 				}
-				String description = distance + "\n" + view.getContext().getString(R.string.point_on_map, 
-						l.getLatitude(), l.getLongitude());
 				contextMenuLayer.setLocation(l, description);
 				view.refreshMap();
 				updateText();
@@ -509,6 +511,52 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				return false;
 			}
 			return true;
+		}
+		
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			if (distanceMeasurementMode == 0) return false;		//Check if in measurement mode
+			if(scrollingFlag) return true;	//delay activity until scrolling has finished
+			PointF point = new PointF(e1.getX(), e1.getY());
+			if(isMeasurementPointSelected(point, 1.0f)){
+				scrollingFlag = true;	//must remain true until next touch event
+				return true;
+			}
+			return false;
+		}
+		
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			if (distanceMeasurementMode == 0) return false;		//Check if in measurement mode
+			if(scrollingFlag) return true;	//block fling while dragging a point. Note scroll event occurs before fling event
+			return false;
+		}
+		
+		@Override
+		public boolean onTouchEvent(MotionEvent event) {
+			if (distanceMeasurementMode == 0) return false;		//Check if in measurement mode
+
+			if (event.getAction() == MotionEvent.ACTION_DOWN) {	//must clear at start of new event, not end of last event to ensure fling is blocked
+				scrollingFlag = false;
+			}
+			
+			if (event.getAction() == MotionEvent.ACTION_UP) {	//Support for dragging measurement point
+				if(scrollingFlag){
+					if(selectedPointIndices[1] >= 0){	//move selected point to new location
+						WptPt pt = measurementPoints.get(selectedPointIndices[0]).get(selectedPointIndices[1]);
+						pt.lat = view.getLatLonFromScreenPoint(event.getX(),event.getY()).getLatitude();
+						pt.lon = view.getLatLonFromScreenPoint(event.getX(),event.getY()).getLongitude();
+						calculatePartialDistance(selectedPointIndices[0], selectedPointIndices[1]);	
+						String description = distance + "\n" + view.getContext().getString(R.string.point_on_map, 
+								pt.lat, pt.lon);
+						LatLon l = view.getLatLonFromScreenPoint(event.getX(),event.getY());						
+						contextMenuLayer.setLocation(l, description);
+						view.refreshMap();
+						updateText();
+					}
+				}
+			}
+			return false;
 		}
 
 		@Override
@@ -720,9 +768,5 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			}
 			return false;
 		}
-		
-		public int getDistanceMeasurementMode(){
-			return distanceMeasurementMode;
-		}
-	}
+   	}
 }
