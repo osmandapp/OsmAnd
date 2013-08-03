@@ -78,9 +78,7 @@ public class PoiFiltersHelper {
 	
 	private void putValues(Map<AmenityType, LinkedHashSet<String>> types, AmenityType tp,String... vls){
 		LinkedHashSet<String> list = new LinkedHashSet<String>();
-		for(String v: vls){
-			list.add(v);
-		}
+        Collections.addAll(list, vls);
 		types.put(tp, list);
 	}
 	
