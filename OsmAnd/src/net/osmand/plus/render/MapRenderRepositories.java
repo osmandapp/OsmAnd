@@ -986,7 +986,7 @@ public class MapRenderRepositories {
 				coordinates.add(combine2Points(x, y));
 			} else if (is != -1) {
 				int bx = (int) (is >> 32);
-				int by = (int) (is & 0xffffffff);
+				int by = (int) is;
 				coordinates.add(is);
 				is = MapAlgorithms.calculateIntersection(x, y, bx, by, leftX, rightX, bottomY, topY);
 				coordinates.add(is);
