@@ -130,11 +130,11 @@ public class RegionCountry {
 	}
 
 	public int getLon(int i) {
-		return calcAllTiles().get(i * 2);
+		return calcAllTiles().get(i << 1);
 	}
 
 	public int getLat(int i) {
-		return calcAllTiles().get(i * 2 + 1);
+		return calcAllTiles().get((i << 1) + 1);
 	}
 	
 	public void addSubregion(RegionCountry c) {

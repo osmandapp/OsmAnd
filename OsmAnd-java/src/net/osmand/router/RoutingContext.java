@@ -845,7 +845,7 @@ public class RoutingContext {
 		}
 		sz += 8; // id
 		// coordinates
-		sz += (8 + 4 + 4 * o.getPointsLength()) * 4;
+		sz += (8 + 4 + 4 * o.getPointsLength()) << 2;
 		sz += o.types == null ? 4 : (8 + 4 + 4 * o.types.length);
 		sz += o.restrictions == null ? 4 : (8 + 4 + 8 * o.restrictions.length);
 		sz += 4;
@@ -876,7 +876,7 @@ public class RoutingContext {
 
 		public void addObject(RouteDataObject o) {
 			allRoutes++;
-			coordinates += o.getPointsLength() * 2;
+			coordinates += o.getPointsLength() << 1;
 			size += getEstimatedSize(o);
 		}
 

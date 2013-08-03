@@ -100,7 +100,7 @@ public class TurnPathHelper {
 			float nQuadShiftX = (sarrowL - 2 * spartArrowL) - quadShiftX - th;
 			float nQuadShifty = quadShiftY + (sarrowL - 2 * spartArrowL);
 
-			pathForTurn.rMoveTo(-b * 4, 0);
+			pathForTurn.rMoveTo(-b << 2, 0);
 			pathForTurn.rLineTo(0, -h /* + partArrowL */);
 			pathForTurn.rQuadTo(0, -quadShiftY + quadShiftX /*- partArrowL*/, b * quadShiftX, -quadShiftY /*- partArrowL*/);
 			pathForTurn.rLineTo(b * spartArrowL, spartArrowL);

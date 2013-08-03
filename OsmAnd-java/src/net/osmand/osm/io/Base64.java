@@ -38,7 +38,7 @@ public class Base64 {
                 int bits24;
                 int bits6;
 
-                final char[] out = new char[((octetString.length - 1) / 3 + 1) * 4];
+                final char[] out = new char[(((octetString.length - 1) / 3 + 1) << 2)];
 
                 int outIndex = 0;
                 int i = 0;

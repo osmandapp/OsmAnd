@@ -51,7 +51,7 @@ public class GeoidAltitudeCorrection {
 		}
 		int shy = (int) Math.floor((90 - lat) * 4);
 		int shx = (int) Math.floor((lon >= 0 ? lon : lon + 360) * 4);
-		int pointer = ((shy * 1440) + shx) * 2;
+		int pointer = ((shy * 1440) + shx) << 1;
 		short res = 0;
 		if (pointer != cachedPointer) {
 			try {

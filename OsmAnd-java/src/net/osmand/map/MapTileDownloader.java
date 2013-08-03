@@ -188,7 +188,7 @@ public class MapTileDownloader {
 					URLConnection connection = url.openConnection();
 					connection.setRequestProperty("User-Agent", USER_AGENT); //$NON-NLS-1$
 					connection.setConnectTimeout(35000);
-					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
+					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 << 10);
 					FileOutputStream stream = null;
 					try {
 						stream = new FileOutputStream(request.fileToSave);
