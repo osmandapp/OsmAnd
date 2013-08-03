@@ -50,8 +50,7 @@ public abstract class OsmPoint {
 
 	@Override
 	public String toString() {
-		return new StringBuffer("Osm Point ").append(this.getAction()).append(" ")
-			.toString();
+		return "Osm Point " + this.getAction() + " ";
 	}
 
 }

@@ -76,10 +76,6 @@ public class OpenstreetmapPoint extends OsmPoint implements Serializable {
 
 	@Override
 	public String toString() {
-		return new StringBuffer("Openstreetmap Point ").append(this.getAction()).append(" ").append(this.getName())
-			.append(" (").append(this.getId()).append("): [")
-			.append(this.getType()).append("/").append(this.getSubtype())
-			.append(" (").append(this.getLatitude()).append(", ").append(this.getLongitude())
-			.append(")]").toString();
+		return "Openstreetmap Point " + this.getAction() + " " + this.getName() + " (" + this.getId() + "): [" + this.getType() + "/" + this.getSubtype() + " (" + this.getLatitude() + ", " + this.getLongitude() + ")]";
 	}
 }
