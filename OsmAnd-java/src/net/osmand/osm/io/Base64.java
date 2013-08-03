@@ -47,7 +47,7 @@ public class Base64 {
                         // store the octets
                         bits24 = (octetString[i++] & 0xFF) << 16;
                         bits24 |= (octetString[i++] & 0xFF) << 8;
-                        bits24 |= (octetString[i++] & 0xFF) << 0;
+                        bits24 |= (octetString[i++] & 0xFF);
 
                         bits6 = (bits24 & 0x00FC0000) >> 18;
                         out[outIndex++] = alphabet[bits6];

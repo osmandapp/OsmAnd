@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
 \n\t- Offline editace POI
@@ -981,8 +982,8 @@
 <string name="map_widget_show_ruler">Měřítko</string>
 <string name="map_widget_appearance">Ostatní:</string>
 <string name="map_widget_transparent">Průhledné ovládání</string>
-<string name="monitoring_mode_off">Záznam do GPX</string>
-<string name="monitoring_mode_on">Zastavit záznam</string>
+<string name="monitoring_mode_off">Záznam\n do GPX</string>
+<string name="monitoring_mode_on">Zastavit\n GPX záznam</string>
 <string name="email">E-mail</string>
 <string name="live_monitoring_mode_off">Zapnout\n přímý přenos</string>
 <string name="live_monitoring_mode_on">Vypnout\n přímý přenos</string>
@@ -1175,15 +1176,17 @@
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_hillshade_item">Stínování kopců</string>
     <string name="download_hillshade_maps">Stínování kopců</string>
-    <string name="tip_recent_changes_1_1_2_t">"Změny ve verzi 1.1.2:
+    <string name="tip_recent_changes_1_1_2_t">Změny ve verzi 1.1.2:
 \n\t* Vylepšení modulu audio/video (fotografie obsahují EXIF informace)
-\n\t* Opraven modul vrstevnic a změněna jeho struktura\n\t* Balíčky stínování kopců pro modul vrstevnic\n\t* Oprava chyb (neoptimální výpočet trasy) "</string>
+\n\t* Opraven modul vrstevnic a změněna jeho struktura\n\t* Balíčky stínování kopců pro modul vrstevnic\n\t* Oprava chyb (neoptimální výpočet trasy)
+    </string>
     <string name="prefer_in_routing_descr">Upřednostňovat dálnice</string>
     <string name="av_def_action_choose">Vybrat při použití</string>
     <string name="access_arrival_time">Čas příjezdu</string>
-    <string name="tip_recent_changes_1_1_4_t">"Změny ve verzi 1.1.4:
+    <string name="tip_recent_changes_1_1_4_t">Změny ve verzi 1.1.4:
 \n\t* Nový vzhled aplikace
-\n\t* Opravy chyb "</string>
+\n\t* Opravy chyb
+    </string>
     <string name="layer_hillshade">Stínování</string>
     <string name="map_widget_gps_info">Info o GPS</string>
     <string name="map_view">Mapa</string>
@@ -1256,6 +1259,7 @@
     </string>
     <string name="tip_recent_changes_1_5_t">Změny ve verzi 1.5:
 	\n\t* Hlasová upozornění na rychlostní omezení a radary
+	\n\t* Hlášení názvů ulic
 	\n\t* Mapové ikony s vysokým rozlišením
 	\n\t* Četné změny uživatelského rozhraní
 	\n\t* Oprava chyb v zobrazení vzdálenosti, GPX analyzéru, práce s mezicíli, plánovacím modulu, nahrávání do OSM uploading, HTTPS
@@ -1288,4 +1292,10 @@
     <string name="context_menu_item_directions_to">Navigovat sem</string>
     <string name="context_menu_item_directions_from">Navigovat odsud</string>
     <string name="local_index_gpx_timemoving">\nČas pohybu: %1$d:%2$02d:%3$02d</string>
-	</resources>
+	<string name="osmodroid_mode_on">Zastavit OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Sppustit OsMoDroid</string>
+    <string name="announce_gpx_waypoints">Hlásit GPX body</string>
+    <string name="speak_title">Hlásit…</string>
+	<string name="speak_descr">Konfigurace hlášení názvů ulic, dopravních upozornění, radarů, rychlostních omezení</string>
+	<string name="speak_street_names">Hlásit názvy ulic (TTS)</string>
+    </resources>

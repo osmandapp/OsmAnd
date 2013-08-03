@@ -190,7 +190,7 @@ public class BinaryInspector {
 		ous.writeRawByte((v >>> 24) & 0xFF);
 		ous.writeRawByte((v >>> 16) & 0xFF);
 		ous.writeRawByte((v >>>  8) & 0xFF);
-		ous.writeRawByte((v >>>  0) & 0xFF);
+		ous.writeRawByte(v & 0xFF);
 		//written += 4;
 	}
 	
@@ -227,13 +227,13 @@ public class BinaryInspector {
 			String pattern = partsToExtractFrom.get(f);
 			boolean minus = true;
 			for (int i = 0; i < indexes[c].getIndexes().size(); i++) {
-				partsSet[c].add(new Float(i + 1f));
+				partsSet[c].add(i + 1f);
 				BinaryIndexPart part = indexes[c].getIndexes().get(i);
 				if(part instanceof MapIndex){
 					List<MapRoot> roots = ((MapIndex) part).getRoots();
 					int rsize = roots.size(); 
 					for(int j=0; j<rsize; j++){
-						partsSet[c].add(new Float((i+1f)+(j+1)/10f));
+						partsSet[c].add((i + 1f) + (j + 1) / 10f);
 					}
 				}
 			}
@@ -280,7 +280,7 @@ public class BinaryInspector {
 				if (!partSet.contains(Float.valueOf(i + 1f))) {
 					continue;
 				}
-				list.add(new Float(i + 1f));
+				list.add(i + 1f);
 
 				BinaryIndexPart part = index.getIndexes().get(i);
 				String map;
@@ -388,7 +388,7 @@ public class BinaryInspector {
 				}
 				String name = p.getName() == null ? "" : p.getName(); 
 				println(MessageFormat.format("{0} {1} data {3} - {2,number,#} bytes",
-						new Object[]{Integer.valueOf(i), partname, p.getLength(), name}));
+						new Object[]{i, partname, p.getLength(), name}));
 				if(p instanceof TransportIndex){
 					TransportIndex ti = ((TransportIndex) p);
 					int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);
@@ -449,7 +449,7 @@ public class BinaryInspector {
 			int type = cityType[j];
 			final List<City> cities = index.getCities(region, null, type);
 			
-			print(MessageFormat.format("\t{0}, {1,number,#} group(s)", new Object[]{cityType_String[j], Integer.valueOf(cities.size())}));
+			print(MessageFormat.format("\t{0}, {1,number,#} group(s)", new Object[]{cityType_String[j], cities.size()}));
 			if (BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE == type) {
 				if (!verbose.vstreetgroups && !verbose.vcities) {
 					println("");
@@ -465,7 +465,7 @@ public class BinaryInspector {
 				int size = index.preloadStreets(c, null);
 				List<Street> streets = new ArrayList<Street>(c.getStreets());
 				print(MessageFormat.format("\t\t''{0}'' [{1,number,#}], {2,number,#} street(s) size {3,number,#} bytes",
-						new Object[]{c.getEnName(), Long.valueOf(c.getId()), Integer.valueOf(streets.size()), Integer.valueOf(size)}));
+						new Object[]{c.getEnName(), c.getId(), Integer.valueOf(streets.size()), Integer.valueOf(size)}));
 				if(!verbose.vstreets)
 		        {
 					println("");
@@ -483,13 +483,13 @@ public class BinaryInspector {
 					final List<Street> intersections = t.getIntersectedStreets();
 				
 					println(MessageFormat.format("\t\t\t''{0}'' [{1,number,#}], {2,number,#} building(s), {3,number,#} intersections(s)",
-							new Object[]{t.getEnName(), Long.valueOf(t.getId()), Integer.valueOf(buildings.size()), Integer.valueOf(intersections.size())}));
+							new Object[]{t.getEnName(), t.getId(), Integer.valueOf(buildings.size()), Integer.valueOf(intersections.size())}));
 					
 					if (buildings != null && !buildings.isEmpty() && verbose.vbuildings) {
 						println("\t\t\t\tBuildings:");
 						for (Building b : buildings) {
 							println(MessageFormat.format("\t\t\t\t{0} [{1,number,#}]",
-									new Object[]{b.getName(true), Long.valueOf(b.getId())}));
+									new Object[]{b.getName(true), b.getId()}));
 						}
 					}
 					

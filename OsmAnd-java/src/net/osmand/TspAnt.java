@@ -263,7 +263,7 @@ public class TspAnt {
     }
 
     public static String tourToString(int tour[]) {
-        String t = new String();
+        String t = "";
         for (int i : tour)
             t = t + " " + i;
         return t;

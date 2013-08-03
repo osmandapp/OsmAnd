@@ -213,15 +213,9 @@ public class RouteResultPreparation {
 		double startLon = start.getLongitude();
 		double endLat = end.getLatitude();
 		double endLon = end.getLongitude();
-		StringBuilder add = new StringBuilder();
-		add.append("loadedTiles = \"").append(ctx.loadedTiles).append("\" ");
-		add.append("visitedSegments = \"").append(ctx.visitedSegments).append("\" ");
-		add.append("complete_distance = \"").append(completeDistance).append("\" ");
-		add.append("complete_time = \"").append(completeTime).append("\" ");
-		add.append("routing_time = \"").append(ctx.routingTime).append("\" ");
-		println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{4}\" \n"
+        println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{4}\" \n"
 				+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" {5} >", startLat
-				+ "", startLon + "", endLat + "", endLon + "", ctx.config.routerName, add.toString()));
+				+ "", startLon + "", endLat + "", endLon + "", ctx.config.routerName, "loadedTiles = \"" + ctx.loadedTiles + "\" " + "visitedSegments = \"" + ctx.visitedSegments + "\" " + "complete_distance = \"" + completeDistance + "\" " + "complete_time = \"" + completeTime + "\" " + "routing_time = \"" + ctx.routingTime + "\" "));
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();

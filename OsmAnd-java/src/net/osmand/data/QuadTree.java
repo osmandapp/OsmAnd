@@ -18,9 +18,9 @@ public class QuadTree<T> {
 			bounds = new QuadRect(b.left, b.top, b.right, b.bottom);
 			children = new Node[4];
 		}
-	};
+	}
 
-	private float ratio;
+    private float ratio;
 	private int maxDepth;
 	private Node<T> root;
 

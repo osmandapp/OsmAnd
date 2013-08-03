@@ -146,9 +146,7 @@ public class DataTileManager<T> {
 	}
 	
 	private long evTile(int tileX, int tileY){
-		long tx = tileX;
-		long ty = tileY;
-		return ((tx) << zoom) + ty; 
+		return ((tileX) << zoom) + tileY;
 	}
 	
 	
