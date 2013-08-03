@@ -54,7 +54,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	private static final Log log = PlatformUtil.getLog(OsmBugsLayer.class); 
 	private final static int startZoom = 8;
-	private final int SEARCH_LIMIT = 100;
+	private static final int SEARCH_LIMIT = 100;
 	
 	private OsmandMapTileView view;
 	private Handler handlerToLoop;

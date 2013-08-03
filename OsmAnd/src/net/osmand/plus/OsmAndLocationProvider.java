@@ -58,8 +58,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	
 	
-	private final boolean USE_KALMAN_FILTER = true;
-	private final float KALMAN_COEFFICIENT = 0.04f;
+	private static final boolean USE_KALMAN_FILTER = true;
+	private static final float KALMAN_COEFFICIENT = 0.04f;
 	
 	float avgValSin = 0;
 	float avgValCos = 0;

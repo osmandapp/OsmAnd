@@ -21,8 +21,8 @@ import org.apache.commons.logging.Log;
 public class BinaryRoutePlannerOld {
 	
 	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
-	private final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
-	private final int STANDARD_ROAD_IN_QUEUE_OVERHEAD = 900;
+	private static final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
+	private static final int STANDARD_ROAD_IN_QUEUE_OVERHEAD = 900;
 	
 	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlannerOld.class);
 	

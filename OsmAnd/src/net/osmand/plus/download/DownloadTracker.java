@@ -38,8 +38,8 @@ public class DownloadTracker {
 		return (new Random(System.currentTimeMillis()).nextInt(100000000) + 100000000) + "";
 	}
 
-	final String beaconUrl = "http://www.google-analytics.com/__utm.gif";
-	final String analyticsVersion = "4.3"; // Analytics version - AnalyticsVersion
+	static final String beaconUrl = "http://www.google-analytics.com/__utm.gif";
+	static final String analyticsVersion = "4.3"; // Analytics version - AnalyticsVersion
 
 	public void trackEvent(ClientContext a,
 			String category, String action, String label, int value, String trackingAcount) {
