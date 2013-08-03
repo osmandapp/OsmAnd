@@ -96,6 +96,8 @@
 			</condition>
 			<then>
 				<replaceregexp file="AndroidManifest.xml" match='android:versionCode="(.*)"' replace='android:versionCode="${build.version.code}"' byline="true" />
+				<replaceregexp file="AndroidManifest.xml" match='android:debuggable="true"' replace='android:debuggable="false"' byline="true" />
+				
 			</then>
 		</if>
 		<if>
