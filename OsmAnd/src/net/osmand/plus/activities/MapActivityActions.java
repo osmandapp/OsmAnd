@@ -180,8 +180,8 @@ public class MapActivityActions implements DialogProvider {
 			public void onClick(DialogInterface dialog, int which) {
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
 				final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
-				point.setName(editText.getText().toString());
-				point.setCategory(cat.getText().toString());
+				point.setName(editText.getText().toString().trim());
+				point.setCategory(cat.getText().toString().trim());
 				boolean added = helper.addFavourite(point);
 				if (added) {
 					AccessibleToast.makeText(activity, MessageFormat.format(
