@@ -55,7 +55,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	
 		createUI();
     }
-
+	
 	private void createUI() {
 		addPreferencesFromResource(R.xml.navigation_settings);
 		PreferenceScreen screen = getPreferenceScreen();
@@ -96,12 +96,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		speakAlarms = (Preference) screen.findPreference("speak_routing_alarms");
 		speakAlarms.setOnPreferenceClickListener(this);
 		
+		reloadVoiceListPreference(screen);
+		
 		profileDialog();
 	}
-
-
-	
-	
 
 
 	private void reloadVoiceListPreference(PreferenceScreen screen) {
@@ -131,7 +129,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + settings.ROUTER_SERVICE.get() + "]");
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String id = preference.getKey();
@@ -145,7 +142,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				super.onPreferenceChange(preference, newValue);
 				getMyApplication().showDialogInitializingCommandPlayer(this, false);
 			}
-			return false;
+			return true;
 		}
 		boolean changed = super.onPreferenceChange(preference, newValue);
 		
