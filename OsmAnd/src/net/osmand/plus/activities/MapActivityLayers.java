@@ -496,7 +496,7 @@ public class MapActivityLayers {
 			File[] files = dir.listFiles();
 			if (files != null) {
 				for (File f : files) {
-					if (f.getName().endsWith(".gpx")) { //$NON-NLS-1$
+					if (f.getName().toLowerCase().endsWith(".gpx")) { //$NON-NLS-1$
 						list.add(parent + f.getName());
 					} else if (f.isDirectory()) {
 						readGpxDirectory(f, list, parent + f.getName() + "/");
