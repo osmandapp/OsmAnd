@@ -28,8 +28,10 @@ public class TurnPathHelper {
 		int th = 12; // thickness
 		pathForTurn.moveTo(wa / 2, ha - 1);
 		float sarrowL = 22; // side of arrow ?
-		float harrowL = (float) Math.sqrt(2) * sarrowL; // hypotenuse of arrow
-		float spartArrowL = (float) ((sarrowL - th / Math.sqrt(2)) / 2);
+        // Formula: harrowL = (float) Math.sqrt(2) * sarrowL
+		float harrowL = (float) 1.4142135623730951 * sarrowL; // hypotenuse of arrow
+        // Formula: spartArrowL = (float) ((sarrowL - th / Math.sqrt(2)) / 2)
+		float spartArrowL = (float) ((sarrowL - th / 1.4142135623730951) / 2);
 		float hpartArrowL = (float) (harrowL - th) / 2;
 
 		if (TurnType.C.equals(turnType.getValue())) {
@@ -67,7 +69,8 @@ public class TurnPathHelper {
 			float quadShiftX = 14;
 			float quadShiftY = 14;
 			th = 10;
-			spartArrowL = (float) ((sarrowL - th / Math.sqrt(2)) / 2);
+            // Formula: spartArrowL = (float) ((sarrowL - th / Math.sqrt(2)) / 2)
+			spartArrowL = (float) ((sarrowL - th / 1.4142135623730951) / 2);
 			hpartArrowL = (float) (harrowL - th) / 2;
 			int h = 12;
 			int lh = 15;
@@ -96,7 +99,8 @@ public class TurnPathHelper {
 			int b = TurnType.TSLR.equals(turnType.getValue()) ? 1 : -1;
 			int h = 24;
 			int quadShiftY = 22;
-			float quadShiftX = (float) (quadShiftY / (1 + Math.sqrt(2)));
+            // Formula: quadShiftX = (float) (quadShiftY / (1 + Math.sqrt(2)))
+			float quadShiftX = (float) (quadShiftY / (1 + 1.4142135623730951));
 			float nQuadShiftX = (sarrowL - 2 * spartArrowL) - quadShiftX - th;
 			float nQuadShifty = quadShiftY + (sarrowL - 2 * spartArrowL);
 
@@ -114,7 +118,8 @@ public class TurnPathHelper {
 			int h = 28;
 			float quadShiftX = 22;
 			int sh = 10;
-			float quadShiftY = -(float) (quadShiftX / (1 + Math.sqrt(2)));
+            // Formula: quadShiftY = -(float) (quadShiftX / (1 + Math.sqrt(2)))
+			float quadShiftY = -(float) (quadShiftX / (1 + 1.4142135623730951));
 			float nQuadShiftX = -(sarrowL - 2 * spartArrowL) - quadShiftX - th;
 			float nQuadShiftY = -quadShiftY + (sarrowL - 2 * spartArrowL);
 

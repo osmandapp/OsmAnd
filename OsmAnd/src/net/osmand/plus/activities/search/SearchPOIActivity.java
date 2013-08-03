@@ -289,7 +289,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		int h = 15;
 		int w = 4;
 		float sarrowL = 8; // side of arrow
-		float harrowL = (float) Math.sqrt(2) * sarrowL; // hypotenuse of arrow
+        // Formula: harrowL = (float) Math.sqrt(2) * sarrowL
+		float harrowL = (float) 1.4142135623730951 * sarrowL; // hypotenuse of arrow
 		float hpartArrowL = (float) (harrowL - w) / 2;
 		Path path = new Path();
 		path.moveTo(width / 2, height - (height - h) / 3);
