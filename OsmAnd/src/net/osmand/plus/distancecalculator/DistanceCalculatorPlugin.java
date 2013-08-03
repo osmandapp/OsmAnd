@@ -68,6 +68,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.distance";
 	private OsmandApplication app;
 	private DistanceCalculatorLayer distanceCalculatorLayer;
+	private ContextMenuLayer contextMenuLayer;
 	private TextInfoWidget distanceControl;
 	
 	private List<LinkedList<WptPt>> measurementPoints = new ArrayList<LinkedList<WptPt>>();
@@ -111,6 +112,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		activity.getMapView().addLayer(distanceCalculatorLayer, 4.5f);
 		
 		registerWidget(activity);
+		contextMenuLayer = activity.getMapLayers().getContextMenuLayer();
 	}
 	
 	private void registerWidget(MapActivity activity) {
@@ -398,6 +400,23 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		updateText();
 	}
 
+	private void calculatePartialDistance(int lastSegment, int lastIndex) {
+		float dist = 0;
+		if (measurementPoints.size() == 0 && distanceMeasurementMode == 0 ) {
+			distance = null;
+		} else {
+			for (int j = 0; j <= lastSegment; j++) {
+				List<WptPt> ls = measurementPoints.get(j);
+				int maxIndex = ls.size();
+				if(j == lastSegment) maxIndex = lastIndex + 1;	//only measure to selected point
+				for (int i = 1; i < maxIndex; i++) {
+					dist += MapUtils.getDistance(ls.get(i - 1).lat, ls.get(i - 1).lon, ls.get(i).lat, ls.get(i).lon);
+				}
+			}
+			distance = OsmAndFormatter.getFormattedDistance(dist, app);
+		}
+		updateText();
+	}
 
 	public class DistanceCalculatorLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 		private OsmandMapTileView view;
@@ -410,6 +429,12 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 
 		private Paint paint;
 		private Paint paint2;
+
+		public final int defaultMeasurementPointDisplayRadius = 9;
+		public final int defaultMeasurementPointSelectionRadius = 13;
+		public int selectedSegmentIndex = -1;
+		public int selectedPointIndex = -1;
+		public int selectedPointIndices[] = {-1, -1};
 
 		public DistanceCalculatorLayer() {
 		}
@@ -449,12 +474,26 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				LatLon l = view.getLatLonFromScreenPoint(point.x, point.y);
 				if(measurementPoints.size() == 0) {
 					measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
+					selectedPointIndices[0] = -1;
+					selectedPointIndices[1] = -1;
 				}
-				WptPt pt = new WptPt();
-				pt.lat = l.getLatitude();
-				pt.lon = l.getLongitude();
-				measurementPoints.get(measurementPoints.size() - 1).add(pt);
-				calculateDistance();
+				if(!isMeasurementPointSelected(point, 1.0f))
+				{
+					WptPt pt = new WptPt();
+					pt.lat = l.getLatitude();
+					pt.lon = l.getLongitude();
+					measurementPoints.get(measurementPoints.size() - 1).add(pt);
+					calculateDistance();
+					selectedPointIndices[0] = -1;
+					selectedPointIndices[1] = -1;
+				}else{
+					selectedPointIndex = selectedPointIndices[1];
+					selectedSegmentIndex = selectedPointIndices[0];
+					calculatePartialDistance(selectedSegmentIndex, selectedPointIndex);	
+				}
+				String description = distance + "\n" + view.getContext().getString(R.string.point_on_map, 
+						l.getLatitude(), l.getLongitude());
+				contextMenuLayer.setLocation(l, description);
 				view.refreshMap();
 				updateText();
 				return true;
@@ -464,17 +503,12 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		
 		@Override
 		public boolean onLongPressEvent(PointF point) {
-			if (distanceMeasurementMode == 1 && measurementPoints.size() > 0) {
-				LinkedList<WptPt> lt = measurementPoints.get(measurementPoints.size() - 1);
-				if (lt.size() > 0) {
-					lt.removeLast();
-				}
-				calculateDistance();
-				view.refreshMap();
-				updateText();
-				return true;
+				if (distanceMeasurementMode == 1 && measurementPoints.size() > 0) {
+				LatLon l = view.getLatLonFromScreenPoint(point.x, point.y);
+				contextMenuLayer.showContextMenuForSelectedObjects(l);
+				return false;
 			}
-			return false;
+			return true;
 		}
 
 		@Override
@@ -483,32 +517,49 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				path.reset();
 				int marginY = originIcon.getHeight();
 				int marginX = originIcon.getWidth() / 2;
-				for (int i = 0; i < measurementPoints.size(); i++) {
+				int lastSegment = selectedPointIndices[0];
+				int lastPoint = selectedPointIndices[1];
+				int points =0;
+				paint.setStrokeWidth(7 * dm.density);
+				paint.setColor(view.getResources().getColor(R.color.distance_color));
+				if(lastPoint < 0) lastSegment = measurementPoints.size() - 1;	//adjust for partial measurements
+				for (int i = 0; i < measurementPoints.size(); i++) {	//for all gpx segments
 					Iterator<WptPt> it = measurementPoints.get(i).iterator();
-					boolean first = true;
-					while (it.hasNext()) {
+					points = measurementPoints.get(i).size() - 1;
+					for (int j = 0; j <= points; j++){
 						WptPt point = it.next();
 						int locationX = view.getMapXForPoint(point.lon);
 						int locationY = view.getMapYForPoint(point.lat);
-						if (first) {
+						if (j == 0) {
 							path.moveTo(locationX, locationY);
-							first = false;
 						} else {
 							path.lineTo(locationX, locationY);
+						}
+						if(i == lastSegment && j == lastPoint) {
+							canvas.drawPath(path, paint);
+							path.reset();
+							path.moveTo(locationX, locationY);
+							paint.setStrokeWidth(4 * dm.density);
+							paint.setColor(view.getResources().getColor(R.color.color_distance_remainder));
 						}
 					}
 				}
 				canvas.drawPath(path, paint);
+				if(lastPoint < 0){
+					lastSegment = measurementPoints.size() - 1;	//adjust for partial measurements
+					if(measurementPoints.get(lastSegment).size() < 1) lastSegment --;	//allow for start of sub-tracks
+					lastPoint = measurementPoints.get(lastSegment).size() - 1;
+				}
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					Iterator<WptPt> it = measurementPoints.get(i).iterator();
-					boolean first = true;
-					while(it.hasNext()) {
+					points = measurementPoints.get(i).size() - 1;
+					for (int j = 0; j <= points; j++){
 						WptPt pt = it.next();
 						if (view.isPointOnTheRotatedMap(pt.lat, pt.lon)) {
 							int locationX = view.getMapXForPoint(pt.lon);
 							int locationY = view.getMapYForPoint(pt.lat);
 							
-							if(first || !it.hasNext() || pt.desc != null) {
+							if(j == 0 && i == 0 || (i == lastSegment && j == lastPoint)) {
 								canvas.rotate(-view.getRotate(), locationX, locationY);
 								canvas.drawBitmap(distanceMeasurementMode == 1? originIcon : destinationIcon, 
 										locationX - marginX, locationY - marginY, bitmapPaint);
@@ -517,7 +568,6 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 								canvas.drawCircle(locationX, locationY, 10 * dm.density, paint2);
 							}
 						}
-						first = false;
 					}
 				}
 			}
@@ -585,19 +635,23 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				final WptPt p = (WptPt) o;
 				OnContextMenuClick listener = new OnContextMenuClick() {
 					
-					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						if (itemId == R.string.delete_point) {
-							for (int i = 0; i < measurementPoints.size(); i++) {
-								Iterator<WptPt> it = measurementPoints.get(i).iterator();
-								while (it.hasNext()) {
-									if (it.next() == p) {
-										it.remove();
-									}
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					if (itemId == R.string.delete_point) {
+						for (int i = 0; i < measurementPoints.size(); i++) {
+							Iterator<WptPt> it = measurementPoints.get(i).iterator();
+							for(int j = 0; j < measurementPoints.get(i).size(); j++)
+								if (it.next() == p) {
+									it.remove();
+									selectedPointIndices[1] = -1;	//reset the selected point indices
+									selectedPointIndices[0] = -i;
+									contextMenuLayer.setLocation(null, null);	//clear any open info box
 								}
 							}
-							calculateDistance();
 						}
+						calculateDistance();
+						view.refreshMap();
+						updateText();
 					}
 				};
 				adapter.item(R.string.delete_point).icons(R.drawable.ic_action_delete_dark, 
@@ -640,6 +694,35 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			}
 			return null;
 		}
-
+		/**
+		 * Method to determine if a measurement track point exists within the 
+		 * defined selection radius at the screen location tapped.
+		 */
+		public boolean isMeasurementPointSelected(PointF point, float scaleCoefficient){	//test if point on map is a point in measurement set
+			int locationX = 0;
+			int locationY = 0;
+			int size = 0;
+			if(measurementPoints.size() <= 0) return false;
+			for (int j = 0; j < measurementPoints.size(); j++){			
+				size = measurementPoints.get(j).size();
+				if(size > 0){
+					for (int i = 0;i < size; i++){
+						locationX = view.getMapXForPoint(measurementPoints.get(j).get(i).lon);
+						locationY = view.getMapYForPoint(measurementPoints.get(j).get(i).lat);
+						if(Math.abs(locationX - point.x) < defaultMeasurementPointSelectionRadius * scaleCoefficient &&
+								Math.abs(locationY - point.y) < defaultMeasurementPointSelectionRadius * scaleCoefficient){
+							selectedPointIndices[0] = j;	//segment index
+							selectedPointIndices[1] = i;	//point index
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+		}
+		
+		public int getDistanceMeasurementMode(){
+			return distanceMeasurementMode;
+		}
 	}
 }
