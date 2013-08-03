@@ -226,7 +226,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		String id = preference.getKey();
 		super.onPreferenceChange(preference, newValue);
 		if (id.equals(settings.SAFE_MODE.getId())) {
-			if (((Boolean) newValue).booleanValue()) {
+			if ((Boolean) newValue) {
 				loadNativeLibrary();
 			}
 		} else if (preference == applicationDir) {

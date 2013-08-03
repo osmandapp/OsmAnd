@@ -347,7 +347,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 				}
 			}
 
-			return Integer.valueOf(uploaded);
+			return uploaded;
 		}
 
 		@Override
@@ -370,7 +370,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 			listAdapter.notifyDataSetChanged();
 			if (result != null) {
 				AccessibleToast.makeText(LocalOpenstreetmapActivity.this,
-						MessageFormat.format(getString(R.string.local_openstreetmap_were_uploaded), result.intValue()), Toast.LENGTH_LONG)
+						MessageFormat.format(getString(R.string.local_openstreetmap_were_uploaded), result), Toast.LENGTH_LONG)
 						.show();
 			}
 			removeDialog(DIALOG_PROGRESS_UPLOAD);

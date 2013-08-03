@@ -374,7 +374,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private void updateCompassVal() {
 		heading = (float) getAngle(avgValSin, avgValCos);
 		for(OsmAndCompassListener c : compassListeners){
-			c.updateCompassValue(heading.floatValue());
+			c.updateCompassValue(heading);
 		}
 	}
 	

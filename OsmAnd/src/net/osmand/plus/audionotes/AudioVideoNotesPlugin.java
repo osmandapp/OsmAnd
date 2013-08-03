@@ -247,8 +247,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				Constructor c = exClass.getConstructor(new Class[] { String.class });
 				Object exInstance = c.newInstance(file.getAbsolutePath());
 				Method getAttributeInt = exClass.getMethod("getAttributeInt", new Class[] { String.class, Integer.TYPE });
-				Integer it = (Integer) getAttributeInt.invoke(exInstance, "Orientation", new Integer(1));
-				orientation = it.intValue();
+				Integer it = (Integer) getAttributeInt.invoke(exInstance, "Orientation", 1);
+				orientation = it;
 			} catch (Exception e) {
 				e.printStackTrace();
 				log.error(e);
