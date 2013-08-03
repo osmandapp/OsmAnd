@@ -289,7 +289,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		b.append(",").append(rightLongitude); //$NON-NLS-1$
 		b.append(",").append(topLatitude); //$NON-NLS-1$
 		try {
-			log.info("Loading bugs " + b.toString()); //$NON-NLS-1$
+			log.info("Loading bugs " + b); //$NON-NLS-1$
 			URL url = new URL(b.toString());
 			URLConnection connection = url.openConnection();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
