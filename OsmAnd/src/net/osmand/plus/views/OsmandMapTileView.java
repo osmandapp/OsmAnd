@@ -808,7 +808,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			zoomPositionChanged(newZoom);
 			if (application.getInternalAPI().accessibilityEnabled()) {
 				if (newZoom != initialMultiTouchZoom) {
-					showMessage(getContext().getString(R.string.zoomIs) + " " + String.valueOf(newZoom)); //$NON-NLS-1$
+					showMessage(getContext().getString(R.string.zoomIs) + " " + newZoom); //$NON-NLS-1$
 				} else {
 					final LatLon p1 = getLatLonFromScreenPoint(x1, y1);
 					final LatLon p2 = getLatLonFromScreenPoint(x2, y2);
