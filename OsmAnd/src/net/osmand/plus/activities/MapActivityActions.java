@@ -1309,6 +1309,9 @@ public class MapActivityActions implements DialogProvider {
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					if(getMyApplication().getLocationProvider().getLocationSimulation().isRouteAnimating()) {
+						getMyApplication().getLocationProvider().getLocationSimulation().startStopRouteAnimation(mapActivity);
+					}
 					routingHelper.setFinalAndCurrentLocation(null, new ArrayList<LatLon>(), getLastKnownLocation(),
 							routingHelper.getCurrentGPXRoute());
 					settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
