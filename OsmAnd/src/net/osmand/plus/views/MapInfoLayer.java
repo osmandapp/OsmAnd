@@ -2,13 +2,7 @@ package net.osmand.plus.views;
 
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
@@ -377,7 +371,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 						Builder b = new AlertDialog.Builder(view.getContext());
 						//test old descr as title
 						b.setTitle(propertyDescr);
-						int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
+						int i = Collections.singletonList(p.getPossibleValues()).indexOf(pref.get());
 						b.setSingleChoiceItems(p.getPossibleValues(), i, new OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
