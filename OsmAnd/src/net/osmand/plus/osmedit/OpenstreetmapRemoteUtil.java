@@ -265,7 +265,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 					int i = res.indexOf("new_id=\""); //$NON-NLS-1$
 					if (i > 0) {
 						i = i + "new_id=\"".length(); //$NON-NLS-1$
-						int end = res.indexOf("\"", i); //$NON-NLS-1$
+						int end = res.indexOf('\"', i); //$NON-NLS-1$
 						if (end > 0) {
 							newId = Long.parseLong(res.substring(i, end)); // << 1;
 							newN = new Node(n, newId);
