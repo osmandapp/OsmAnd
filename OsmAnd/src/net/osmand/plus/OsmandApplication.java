@@ -583,7 +583,7 @@ public class OsmandApplication extends Application implements ClientContext {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(uiContext, b.toString(), Toast.LENGTH_LONG).show();
+				AccessibleToast.makeText(uiContext, b, Toast.LENGTH_LONG).show();
 			}
 		});
 	}
