@@ -1,29 +1,41 @@
 APP_STL := gnustl_shared
-APP_ABI := all
 APP_CPPFLAGS := -std=c++11 -fexceptions -frtti
-NDK_TOOLCHAIN_VERSION := 4.7
 
-ifdef OSMAND_X86_ONLY
-	APP_ABI := x86
-endif
-ifdef OSMAND_MIPS_ONLY
-	APP_ABI := mips
+ifeq ($(wildcard $(ANDROID_NDK/toolchains/*-4.8)),) 
+    NDK_TOOLCHAIN_VERSION := 4.7
+else 
+    NDK_TOOLCHAIN_VERSION := 4.8
 endif
 
-ifdef OSMAND_ARM_ONLY
-	APP_ABI := armeabi armeabi-v7a
+APP_ABI :=
+ifneq ($(filter x86,$(OSMAND_ARCHITECTURES_SET)),)
+    APP_ABI += x86
+endif
+ifneq ($(filter mips,$(OSMAND_ARCHITECTURES_SET)),)
+    APP_ABI += mips
+endif
+ifneq ($(filter arm,$(OSMAND_ARCHITECTURES_SET)),)
+    APP_ABI += armeabi armeabi-v7a
+    OSMAND_SKIP_NEON_SUPPORT := false
+    OSMAND_FORCE_NEON_SUPPORT := false
 else
-
-ifdef OSMAND_ARMv5_ONLY
-	APP_ABI := armeabi
+    ifneq ($(filter armv7,$(OSMAND_ARCHITECTURES_SET)),)
+        APP_ABI += armeabi-v7a
+        ifeq ($(filter armv7-neon,$(OSMAND_ARCHITECTURES_SET)),)
+            OSMAND_SKIP_NEON_SUPPORT := true
+        endif
+        OSMAND_FORCE_NEON_SUPPORT := false
+    endif
+    ifneq ($(filter armv7-neon,$(OSMAND_ARCHITECTURES_SET)),)
+        APP_ABI += armeabi-v7a
+        OSMAND_SKIP_NEON_SUPPORT := false
+        ifeq ($(filter armv7,$(OSMAND_ARCHITECTURES_SET)),)
+            OSMAND_FORCE_NEON_SUPPORT := true
+        endif
+    endif
 endif
-ifdef OSMAND_ARMv7a_ONLY
-	APP_ABI := armeabi-v7a
-endif
-
-endif
-
+    
 ifndef OSMAND_DEBUG_NATIVE
-	# Force release compilation in release optimizations, even if application is debuggable by manifest
-	APP_OPTIM := release
+    # Force release compilation in release optimizations, even if application is debuggable by manifest
+    APP_OPTIM := release
 endif
