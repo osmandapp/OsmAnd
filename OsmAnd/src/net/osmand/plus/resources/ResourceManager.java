@@ -443,6 +443,8 @@ public class ResourceManager {
 					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
 					
 					context.getPoiFilters().updateFilters(false);
+				} catch (SQLiteException e) {
+					log.error(e.getMessage(), e);
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
 				} catch (XmlPullParserException e) {

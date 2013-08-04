@@ -81,8 +81,8 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 						itemsValues.add(AV_CAMERA_FOCUS_CONTINUOUS);
 					}
 				}
-				entries = items.toArray(entries);
-				intValues = itemsValues.toArray(intValues);
+				entries = items.toArray(new String[items.size()]);
+				intValues = itemsValues.toArray(new Integer[itemsValues.size()]);
 				if (entries.length > 0) {
 					ListPreference camFocus = createListPreference(p.AV_CAMERA_FOCUS_TYPE, entries, intValues, R.string.av_camera_focus,
 							R.string.av_camera_focus_descr);
