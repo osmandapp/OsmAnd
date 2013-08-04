@@ -22,7 +22,7 @@
   <string name="amenity_type_transportation">Transporte</string>
   <string name="indexing_address">Indexando endereço…</string>
   <string name="indexing_map">Indexando mapa…</string>
-  <string name="indexing_poi">Indexando pontos de interesse…</string>
+  <string name="indexing_poi">Indexando POI…</string>
   <string name="indexing_transport">Indexando transporte…</string>
   <string name="input_output_error">Erro de entrada/saída</string>
   <string name="km">km</string>
@@ -37,7 +37,7 @@
   <string name="poi_filter_for_tourists">Para turistas</string>
   <string name="poi_filter_fuel">Combustível</string>
   <string name="poi_filter_namefinder">Pesquisa nome on-line</string>
-  <string name="reading_cached_tiles">Leitura do cache de imagens…</string>
+  <string name="reading_cached_tiles">Lendo cache de imagens…</string>
   <string name="version_index_is_big_for_memory">O índice \'\'{0}\'\' não coube na memória</string>
   <string name="version_index_is_not_supported">A versão do índice \'\'{0}\'\' não é suportada</string>
   <string name="voice_is_not_available_msg">Instrução de voz não disponível. Por favor, vá até configurações e escolha os dados de voz para download.</string>
@@ -72,7 +72,7 @@
   <string name="continuous_rendering_descr">Mostrar processamento contínuo ao invés de imagem inteira de uma vez</string>
   <string name="rendering_exception">Erro ao exibir a área selecionada</string>
   <string name="rendering_out_of_memory">Não há memória suficiente para exibir a área selecionada</string>
-  <string name="show_point_options">Usar localização...</string>
+  <string name="show_point_options">Usar localização-…</string>
   <string name="renderer_load_sucess">O motor de renderização foi carregado com sucesso</string>
   <string name="renderer_load_exception">Erro: O motor de renderização não foi carregado</string>
   <string name="renderers">Renderizadores de vetor</string>
@@ -129,7 +129,7 @@
   <string name="layer_favorites">Favoritos</string>
   <string name="layer_osm_bugs">Bugs OSM</string>
   <string name="layer_transport">Paradas de transportes</string>
-  <string name="layer_poi">Ponto de Interesse…</string>
+  <string name="layer_poi">POI(Ponto de Interesse)…</string>
   <string name="layer_map">Fonte dos mapas…</string>
   <string name="menu_layers">Definir exibição</string>
   <string name="context_menu_item_search_poi">Encontre um Ponto de Interesse</string>
@@ -169,7 +169,7 @@
   
   <string name="sd_unmounted">O cartão SD está inacessível. \n Será impossível ver mapas ou procurar coisas.</string>
   <string name="sd_mounted_ro">O cartão SD está disponivel só para leitura. \nVocê não pode baixar da Internet, só pode visualizar os mapas pré-carregados.</string>
-  <string name="unzipping_file">Descomprimindo arquivo...</string>
+  <string name="unzipping_file">Descomprimindo arquivo…</string>
   <string name="route_tr">Virar à direita e continuar em frente</string>
   <string name="route_tshr">Virar bruscamente à direita e continuar em frente</string>
   <string name="route_tslr">Virar levemente à direita e continuar em frente</string>
@@ -281,7 +281,7 @@
   <string name="go_back_to_osmand">Voltar ao mapa do OsmAnd</string>
   <string name="close">Fechar</string>
   <string name="loading_data">Carregando dados…</string>
-  <string name="reading_indexes">Lendo os índices…</string>
+  <string name="reading_indexes">Lendo dados locais…</string>
   <string name="previous_run_crashed">Uma execução anterior da aplicação foi interrompida inesperadamente. O arquivo de log encontra-se em {0}. Por favor, informe o problema e inclua o arquivo de log.</string>
   <string name="saving_gpx_tracks">Salvando trilhas GPX no cartão SD…</string>
   <string name="finished_task">Concluído</string>
@@ -302,8 +302,8 @@
   <string name="auto_zoom_map_descr">Zoom automático em função da sua velocidade</string>
   <string name="auto_zoom_map">Zoom automático do mapa</string>
   <string name="additional_settings">Outras definições</string>
-  <string name="settings_preset_descr">Escolher ou definir padrões de uso.</string>
-  <string name="settings_preset">Modo da aplicação</string>
+  <string name="settings_preset_descr">Vista do mapa e configurações de navegação são salvos por perfil. Ajuste o seu perfil padrão aqui.</string>
+  <string name="settings_preset">Perfil padrão</string>
   <string name="settings">Configurações</string>
   <string name="save_current_track_descr">Salvar a trilha atual no cartão SD agora</string>
   <string name="save_current_track">Salvar a trilha atual</string>
@@ -361,7 +361,7 @@
   <string name="choose_available_region">Escolher uma região na lista</string>
   <string name="choose_intersected_street">Escolher a rua transversal</string>
   <string name="Closest_Amenities">Locais mais próximos</string>
-  <string name="app_mode_default">Padrão (também define valores padrão)</string>
+  <string name="app_mode_default">Escolha mapa</string>
   <string name="app_mode_car">Carro</string>
   <string name="app_mode_bicycle">Bicicleta</string>
   <string name="app_mode_pedestrian">Pedestre</string>
@@ -594,7 +594,7 @@
   <string name="index_name_oceania">Oceania</string>
   <string name="index_name_other">Mapas globais</string>
   <string name="index_name_wiki">Worldwide Wikipedia</string>
-  <string name="index_name_voice">Pacotes de vozes (gravadas)</string>
+  <string name="index_name_voice">Pacotes de vozes (gravadas, funcionalidades limitadas)</string>
   <string name="index_name_tts_voice">Pacotes de vozes (TTS)</string>
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Definido pelo utilizador</string>
@@ -604,7 +604,7 @@
   <string name="global_app_settings">Configurações globais da aplicação</string>
   <string name="tip_rotation_switching">Orientação do Mapa</string>
   
-  <string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Settings\' -&gt; \'Map configuration\' -&gt; \'Offline vector maps\'.</string>
+  <string name="binary_map_download_success">Download bem sucedido.\n\t\n\tAtive para usar: \'Configurações\' -&gt; \'Configuração do Mapa\' -&gt; \'Mapas Offline\'.</string>
   <string name="tip_day_night_mode">Modo Dia/Noite</string>
   
   <string name="tip_osm_improve">Melhorar dados OSM</string>
@@ -619,7 +619,7 @@
   
   <string name="use_transparent_map_theme">Tema transparente</string>
   <string name="native_library_not_supported">Biblioteca Nativa não é compatível com este dispositivo.</string>
-  <string name="init_native_library">A iniciar biblioteca nativa…</string>
+  <string name="init_native_library">Inicializando biblioteca nativa…</string>
   <string name="choose_auto_follow_route">Auto-centrar visualização do mapa</string>
   <string name="choose_auto_follow_route_descr">Tempo para o mapa ser centrado na posição actual</string>
   <string name="auto_follow_route_never">Nunca</string>
@@ -653,13 +653,13 @@
   <string name="local_index_mi_rename">Mudar o nome</string>
   <string name="show_gpx_route">Mostrar no mapa</string>
   <string name="poi_filter_nominatim">Online Nominatim</string>
-  <string name="search_position_current_location_search">A procurar posição…</string>
+  <string name="search_position_current_location_search">Procurando posição…</string>
   <string name="search_position_current_location_found">Position (Found)</string>
   <string name="search_position_address">Endereço…</string>
   <string name="search_position_favorites">Favoritos…</string>
   <string name="search_position_undefined">Sem definir</string>
   <string name="search_position_fixed">Fixo</string>
-  <string name="search_position_current_location">Posição actual…</string>
+  <string name="search_position_current_location">Posição atual…</string>
   <string name="search_position_map_view">Última vista do mapa</string>
   <string name="select_search_position">Search near :</string>
   <string name="context_menu_item_search">Pesquisar aqui perto</string>
@@ -720,7 +720,7 @@
   <string name="tip_recent_changes">Alterações recentes</string>
   <string name="tip_recent_changes_0_6_6_t">"Recent changes for 0.6.6 : \n\t- Text To Speech engine for voice navigation \n\t- Make map renderer more detailed \n\t- Basemap for whole world packaged with app \n\t- Tweak offline navigation (still experimental) \n\t- GPX navigation options \n\t- UI update and large bug fixing "</string>
   <string name="voice_not_specified">Nenhum</string>
-  <string name="installing_new_resources">A preparar novos dados…</string>
+  <string name="installing_new_resources">Preparando novos dados…</string>
   <string name="internet_connection_required_for_online_route">Para usar o serviço de navegação on-line, precisa de uma ligação à Internet.</string>
   <string name="tts_language_not_supported_title">Linguagem não suportada</string>
   <string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to go to the Market to look for another TTS engine? Otherwise the preset TTS language will be used.</string>
@@ -728,8 +728,8 @@
   <string name="tts_missing_language_data">No data for the selected language is installed. Do you want to go to the Market to install?</string>
   <string name="gpx_option_destination_point">Usar destino actual</string>
   <string name="gpx_option_from_start_point">Percorrer toda a rota</string>
-  <string name="switch_to_vector_map_to_see">Mapa vectorial Offline disponível para esta localização.
-\n\t\n\tPara o usar, active \'Menu\' -&gt; \'Definir Vista\' -&gt; \'Origem de Mapa…\' -&gt; \'Mapas Vectoriais Offline\'.</string>
+  <string name="switch_to_vector_map_to_see">Mapa vetorial Offline disponível para esta localização.
+\n\t\n\tPara usar, ative \'Menu\' -&gt; \'Definir Vista\' -&gt; \'Origem de Mapa…\' -&gt; \'Mapas Vetoriais Offline\'.</string>
   <string name="choose_audio_stream">Saída para orientação por voz</string>
   <string name="choose_audio_stream_descr">Escolha o canal para orientação por voz (dependente do sistema)</string>
   <string name="voice_stream_voice_call">Áudio da chamada de voz</string>
@@ -740,7 +740,7 @@
   <string name="overlay_transparency">Transparência da Sobreposição</string>
   <string name="map_transparency_descr">Modificar transparência do mapa base</string>
   <string name="map_transparency">Transparência do mapa base</string>
-  <string name="layer_underlay">mapa de camada inferior…</string>
+  <string name="layer_underlay">Uapa de camada inferior…</string>
   <string name="map_underlay">Mapa de camada inferior</string>
   <string name="map_underlay_descr">Escolha mapa da camada inferior</string>
   <string name="layer_overlay">Mapa da camada superior…</string>
@@ -813,7 +813,7 @@
   <string name="downloading_build">Downloading build…</string>
   <string name="install_selected_build">Você deseja instalar OsmAnd - {0} de {1} {2} MB ?</string>
   <string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
-  <string name="loading_builds">Loading OsmAnd builds…</string>
+  <string name="loading_builds">Carregando OsmAnd builds…</string>
   <string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
   <string name="contribution_activity">Special activity for contribution version</string>
   <string name="navigate_point_format_D">DDD.DD</string>
@@ -1078,7 +1078,8 @@
     <string name="zxing_barcode_scanner_not_found">Aplicação ZXing Barcode Scanner não está instalada. Procurar no Market?</string>
 	<string name="support_new_features_descr">Faça uma doação para ver novas funcionalidades implementadas nesta aplicação</string>
 	<string name="tip_rotation_switching_t_v2">"\tVocê pode definir se, e como, o mapa será rotacionado clicando repetidamente no ícone da bússola na tela do mapa.\n\tAs opções são:\n\t\'Não girar\' - Mapa ficará fixo sempre com o norte para cima\n\t\'Na direção do movimento\' - Mapa será continuamente alinhado com a sua direção\n\t\'Na direção da bússola\' - Mapa será continuamente alinhado com a leitura da bússola do dispositivo "</string>
-	<string name="tip_day_night_mode_t_v2">"\tA aparência do mapa pode mudar em alguns mapas vetoriais entre os modos Dia (mais claro) e Noite (mais escuro).\n\tCores noturnas são mais seguras para dirigir à noite.\n\tVocê pode definir uma política para a mudança entre os modos Dia/Noite em \'Menu\' -&gt; \'Diversos\' -&gt; \'Modo Dia/Noite\'.\n\n\tAs opções são:\n\t\'Nascer/Pôr-do-Sol\' - modo automático, controlado pela posição do sol (padrão)\n\t\'Dia\' - sempre usar o modo diurno\n\t\'Noite\' - sempre usar o modo noturno\n\t\'Sensor de luz\' - aparência do mapa é controlada por sensor de luz do dispositivo (se equipado) "</string>	
+	<string name="tip_day_night_mode_t_v2">"\tA aparência do mapa pode mudar em alguns mapas vetoriais entre os modos Dia (mais claro) e Noite (mais escuro).\n\tCores noturnas são mais seguras para dirigir à noite.\n\tVocê pode definir uma política para a mudança entre os modos Dia/Noite em \'Menu\' -&gt; \'Diversos\' -&gt; \'Modo Dia/Noite\'.\n\tAs opções são:\n\t\'Nascer/Pôr-do-Sol\' - modo automático, controlado pela posição do sol (padrão)\n\t\'Dia\' - sempre usar o modo diurno\n\t\'Noite\' - sempre usar o modo noturno\n\t\'Sensor de luz\' - aparência do mapa é controlada pelo sensor de luz do dispositivo (se houver) "
+	</string>	
 	<string name="incomplete_locale">incompleto</string>
 	<string name="street_name">Rua</string>
 	<string name="hno">Numero de casa</string>
@@ -1121,4 +1122,42 @@
     <string name="osmand_distance_planning_plugin_name">Calculadora de Distância e Ferramenta de Planeamento</string>
     <string name="osmand_distance_planning_plugin_description">"Criar caminhos (ou usar / modificar arquivos GPX existentes) para medir a distância entre  pontos. Se guardar como GPX, pode ser usado para planear rotas GPX."</string>
     <string name="tip_altitude_offset">Altitude - Corrigir a medição</string>
-	</resources>
+	<string name="driving_region_descr">Selecione região: USA, Europa, UK, Asia e Outros</string>
+	<string name="driving_region">Região</string>
+	<string name="driving_region_japan">Japão</string>
+	<string name="driving_region_us">Estados Unidos</string>
+	<string name="driving_region_europe_asia">Europa &amp; Ásia</string>
+	<string name="driving_region_uk">Reino Unido, Índia, Austrália e Outras</string>
+	<string name="osmodroid_mode_on">Parar OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Iniciar OsMoDroid</string>
+    <string name="announce_gpx_waypoints">Anuncie waypoints GPX</string>
+    <string name="speak_title">Anuncie…</string>
+	<string name="speak_descr">Configure para anunciar nomes das ruas, avisos de tráfego (paradas obrigatórias, lombadas), avisos de radares, limites de velocidade</string>
+	<string name="speak_street_names">Anuncie nome das ruas (TTS)</string>
+    <string name="speak_speed_limit">Anuncie limite de velocidade</string>
+    <string name="speak_cameras">Anuncie radares</string>
+	<string name="speak_traffic_warnings">Anuncie avisos de tráfego</string>
+    <string name="tip_recent_changes_1_5_t">Mudanças na versão 1.5:
+	\n\tAvisos de voz sobre limites de velocidade e câmeras
+	\n\tMais voice prompt capabilites(nome de ruas anunciados)
+	\n\tÍcones de mapas de alta densidade
+	\n\tMuitas mudanças na interface
+	\n\tCorreções no display de distância, analizador GPX, manuseio de waypoints, planejando 	widget, OSM uploading, manuseio em https
+    </string>
+    <string name="osb_author_or_password_not_specified">Favor especificar usuário e senha em Configurações</string>
+    <string name="clear_intermediate_points">Limpar pontos intermediários</string>
+    <string name="keep_intermediate_points">Mantenha pontos intermediários</string>
+    <string name="new_directions_point_dialog">Você já definiu os pontos intermediários.</string>
+    <string name="context_menu_item_directions_to">Direções Para</string>
+    <string name="context_menu_item_directions_from">Direções a partir De</string>
+    <string name="route_descr_map_location">Mapa: </string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="route_to">Para:</string>
+    <string name="route_via">Via:</string>
+    <string name="route_from">A partir:</string>
+	<string name="local_index_gpx_timemoving">\nTempo em movimento: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timespan">\nTime parado: %1$d:%2$02d:%3$02d</string>
+	<string name="destination_point">Destino %1$s</string>
+    <string name="context_menu_item_destination_point">Defina como destino</string>
+    <string name="please_select_address">Selecione cidade ou rua primeiro</string>
+    </resources>
