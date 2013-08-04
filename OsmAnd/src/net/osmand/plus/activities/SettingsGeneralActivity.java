@@ -231,8 +231,9 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				+ settings.APPLICATION_MODE.get().toHumanString(getMyApplication()) + "]");
 		drivingRegionPreference.setTitle(getString(R.string.driving_region) + "  ["
 				+ getString(settings.DRIVING_REGION.get().name) + "]");
-		metricsAndConstantsPreference.setTitle(getString(R.string.unit_of_length) + "  ["
-				+ settings.METRIC_SYSTEM.get().toHumanString(getMyApplication()) + "]");
+		// Too long
+//		metricsAndConstantsPreference.setTitle(getString(R.string.unit_of_length) + "  ["
+//				+ settings.METRIC_SYSTEM.get().toHumanString(getMyApplication()) + "]");
 	}
 
 	@Override
