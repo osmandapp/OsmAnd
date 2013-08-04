@@ -562,10 +562,19 @@ public class OsmandSettings {
 	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new EnumIntPreference<ApplicationMode>(
 			"default_application_mode", ApplicationMode.DEFAULT, ApplicationMode.values()).makeGlobal();
 	
+	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumIntPreference<DrivingRegion>(
+			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()).makeGlobal().cache();
+	
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumIntPreference<MetricsConstants>(
-			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()).makeGlobal().cache();
+			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()){
+		protected MetricsConstants getDefaultValue() {
+			return DRIVING_REGION.get().defMetrics;
+		};
+	}.makeGlobal().cache();
+	
+	
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
@@ -656,8 +665,6 @@ public class OsmandSettings {
 		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.BICYCLE, true);
 	}
 	
-	public final CommonPreference<Boolean> LEFT_SIDE_NAVIGATION = new BooleanPreference("left_side_navigation", false).makeGlobal();
-
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
@@ -1500,5 +1507,32 @@ public class OsmandSettings {
 		}
 		
 	}
+	
+	/**
+	 * Class represents specific for driving region
+	 * Signs, leftHandDriving
+	 */
+	public enum DrivingRegion {
+		
+		EUROPE_ASIA(R.string.driving_region_europe_asia, MetricsConstants.KILOMETERS_AND_METERS, false, false),
+		US_CANADA(R.string.driving_region_us, MetricsConstants.MILES_AND_FOOTS, false, true),
+		UK_AND_OTHERS(R.string.driving_region_uk, MetricsConstants.MILES_AND_FOOTS, true, false),
+		JAPAN(R.string.driving_region_japan, MetricsConstants.KILOMETERS_AND_METERS, true, false)
+		;
+
+		public final boolean leftHandDriving;
+		public final boolean americanSigns;
+		public final MetricsConstants defMetrics;
+		public final int name;
+
+		DrivingRegion(int name, MetricsConstants def, boolean leftHandDriving, boolean americanSigns) {
+			this.name = name;
+			defMetrics = def;
+			this.leftHandDriving = leftHandDriving;
+			this.americanSigns = americanSigns;
+		}
+
+	}
+
 	
 }

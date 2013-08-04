@@ -745,7 +745,7 @@ public class RoutingHelper {
 				params.intermediates = intermediates;
 				params.gpxRoute = gpxRoute;
 				params.previousToRecalculate = previousRoute;
-				params.leftSide = settings.LEFT_SIDE_NAVIGATION.get();
+				params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 				params.preciseRouting = settings.PRECISE_ROUTING_MODE.getModeValue(mode);
 				params.optimal = settings.OPTIMAL_ROUTE_MODE.getModeValue(mode);
 				params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);

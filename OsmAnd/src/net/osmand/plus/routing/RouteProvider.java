@@ -79,7 +79,7 @@ public class RouteProvider {
 		DataTileManager<WptPt> wpt;
 	
 		public GPXRouteParams(GPXFile file, boolean reverse, boolean announceWaypoints, OsmandSettings settings){
-			prepareEverything(file, reverse, announceWaypoints, settings.LEFT_SIDE_NAVIGATION.get());
+			prepareEverything(file, reverse, announceWaypoints, settings.DRIVING_REGION.get().leftHandDriving);
 		}
 		
 		public void setStartPoint(Location startPoint) {

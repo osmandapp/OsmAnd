@@ -62,7 +62,7 @@ public class RouteInfoWidgetsFactory {
 					if (makeUturnWhenPossible) {
 						visible = true;
 						turnImminent = 0;
-						turnType = TurnType.valueOf(TurnType.TU, settings.LEFT_SIDE_NAVIGATION.get());
+						turnType = TurnType.valueOf(TurnType.TU, settings.DRIVING_REGION.get().leftHandDriving);
 						TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 						invalidate();
 					} else {

@@ -10,6 +10,10 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+	<string name="driving_region_japan">Japan</string>
+	<string name="driving_region_us">United States</string>
+	<string name="driving_region_europe_asia">Europe &amp; Asia</string>
+	<string name="driving_region_uk">UK, India, Australia &amp; Others</string>
 	<string name="osmodroid_mode_on">Stop OsMoDroid</string>    
     <string name="osmodroid_mode_off">Start OsMoDroid</string>
     <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
