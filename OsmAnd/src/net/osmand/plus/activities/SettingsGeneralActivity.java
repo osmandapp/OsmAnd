@@ -43,6 +43,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
+	private ListPreference drivingRegionPreference;
+	private ListPreference metricsAndConstantsPreference;
 
 	
 	@Override
@@ -208,7 +210,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		
 		applicationModePreference = (ListPreference) screen.findPreference(settings.APPLICATION_MODE.getId());
 		applicationModePreference.setOnPreferenceChangeListener(this);
-
+		drivingRegionPreference = (ListPreference) screen.findPreference(settings.DRIVING_REGION.getId());
+		metricsAndConstantsPreference = (ListPreference) screen.findPreference(settings.METRIC_SYSTEM.getId());
     }
 
 
@@ -226,6 +229,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
 				+ settings.APPLICATION_MODE.get().toHumanString(getMyApplication()) + "]");
+		drivingRegionPreference.setTitle(getString(R.string.driving_region) + "  ["
+				+ getString(settings.DRIVING_REGION.get().name) + "]");
+		metricsAndConstantsPreference.setTitle(getString(R.string.unit_of_length) + "  ["
+				+ settings.METRIC_SYSTEM.get().toHumanString(getMyApplication()) + "]");
 	}
 
 	@Override
@@ -252,6 +259,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			Intent intent = getIntent();
 			finish();
 			startActivity(intent);
+		} else {
+			updateAllSettings();
 		}
 		return true;
 	}

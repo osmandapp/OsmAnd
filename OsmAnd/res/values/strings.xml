@@ -14,6 +14,7 @@
 	<string name="driving_region">Driving Region</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">United States</string>
+	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europe &amp; Asia</string>
 	<string name="driving_region_uk">UK, India, Australia &amp; Others</string>
 	<string name="osmodroid_mode_on">Stop OsMoDroid</string>    
