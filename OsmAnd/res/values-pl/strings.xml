@@ -1310,4 +1310,8 @@
     <string name="announce_gpx_waypoints">Punkty śladu GPX</string>
     <string name="osmodroid_mode_on">Zatrzymaj OsMoDroid</string>    
     <string name="osmodroid_mode_off">Uruchom OsMoDroid</string>
-    </resources>
+    <string name="driving_region_japan">Japonia</string>
+	<string name="driving_region_us">Stany Zjednoczone</string>
+	<string name="driving_region_europe_asia">Europa i Azja</string>
+	<string name="driving_region_uk">Wielka Brytania, Indie, Australia i inne</string>
+	</resources>
