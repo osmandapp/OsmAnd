@@ -611,7 +611,7 @@
     <string name="recording_is_recorded">صدا/تصویر در حال ضبط میباشد. برای متوقف کردن آن ویجت AV را بزنید.</string>
     <string name="recording_playing">صدایی از ضبط مورد نظر درحال پخش میباشد.\n%1$s</string>
     <string name="recording_delete_confirm">آیا میخواهید این مورد ضبط شده را پاک کنید؟</string>
-    <string name="recording_description">ضبط %1$s%2$ s از %3$s</string>
+    <string name="recording_description">ضبط %1$s%2$s از %3$s</string>
     <string name="osmand_srtm_short_description_80_chars">افزونه OsmAnd برای منحنی های همتراز آفلاین</string>
     <string name="use_magnetic_sensor_descr">استفاده از حسگر مغناطیسی به جای سنسور جهت یابی برای استفاده در قطب نما</string>
     <string name="show_poi_over_map">نشان دادن POI</string>

@@ -259,7 +259,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 		app.showShortToastMessage(resId);
 		updateSettings();
-		mapView.refreshMap();
+		if(mapView != null) {
+			mapView.refreshMap();
+		}
 	}
 
 }
