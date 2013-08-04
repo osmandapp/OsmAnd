@@ -651,7 +651,7 @@ public class RouteInfoWidgetsFactory {
 						String text = null;
 						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
 							text = alarm.getIntValue() +"";
-							if(settings.DRIVING_REGION.get() == DrivingRegion.US_CANADA){
+							if(settings.DRIVING_REGION.get().americanSigns){
 								locimgId = R.drawable.warnings_speed_limit_us;
 								textDy = (int) (-12 * scaleCoefficient);
 							}
