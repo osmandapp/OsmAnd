@@ -1314,4 +1314,6 @@
 	<string name="driving_region_us">Stany Zjednoczone</string>
 	<string name="driving_region_europe_asia">Europa i Azja</string>
 	<string name="driving_region_uk">Wielka Brytania, Indie, Australia i inne</string>
+	<string name="driving_region_descr">Wybierz region, w którym będziesz się poruszał: Stany Zjednoczone, Europa, Wielka Brytania, Azja i inne</string>
+	<string name="driving_region">Region poruszania się</string>
 	</resources>
