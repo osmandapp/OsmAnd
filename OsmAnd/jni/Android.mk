@@ -7,7 +7,6 @@ include $(CLEAR_VARS)
 OSMAND_MAKEFILES := \
     $(call all-makefiles-under,$(ROOT_PATH)/core/externals) \
     $(ROOT_PATH)/core/Android.mk \
-    $(ROOT_PATH)/core/utils/Android.mk \
     $(all-subdir-makefiles) \
     $(ROOT_PATH)/jni/Android.mk
 $(info OsmAnd makefiles: $(OSMAND_MAKEFILES))
