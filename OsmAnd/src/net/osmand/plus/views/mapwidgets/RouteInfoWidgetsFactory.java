@@ -10,6 +10,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -648,16 +649,16 @@ public class RouteInfoWidgetsFactory {
 						String text = null;
 						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
 							text = alarm.getIntValue() +"";
+							if(settings.DRIVING_REGION.get() == DrivingRegion.US_CANADA){
+								locimgId = R.drawable.warnings_speed_limit_us;
+							}
 						} else if(alarm.getType() == AlarmInfo.SPEED_CAMERA) {
-							text = "CAM";
 							locimgId = R.drawable.warnings_speed_camera;
 						} else if(alarm.getType() == AlarmInfo.BORDER_CONTROL) {
 							text = "CLO";
 						} else if(alarm.getType() == AlarmInfo.TOLL_BOOTH) {
 							text = "$";
 						} else if(alarm.getType() == AlarmInfo.TRAFFIC_CALMING) {
-							// temporary omega
-							text = "~^~";
 							locimgId = R.drawable.warnings_speed_bump;
 						} else if(alarm.getType() == AlarmInfo.STOP) {
 							// text = "STOP";
@@ -697,9 +698,11 @@ public class RouteInfoWidgetsFactory {
 					RectF f = new RectF(th / 2, th / 2, getWidth() - th / 2, getHeight() - th / 2);
 					canvas.drawOval(f, content);
 					canvas.drawOval(f, paintCircle);
-					canvas.drawText(text, getWidth() / 2, getHeight() / 2 + ptext.descent() + 3 * scaleCoefficient, ptext);
 				} else {
 					canvas.drawBitmap(img, 0, 0, paintCircle);
+				}
+				if(text.length() > 0) {
+					canvas.drawText(text, getWidth() / 2, getHeight() / 2 + ptext.descent() + 3 * scaleCoefficient, ptext);
 				}
 			}
 
