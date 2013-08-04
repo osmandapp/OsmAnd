@@ -425,7 +425,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		if (location == null) {
 			title = R.string.search_poi_location;
 			enabled = false;
-		} else if (!isNameFinderFilter() && !isSearchByNameFilter()) {
+		} else if (filter != null && !isNameFinderFilter() && !isSearchByNameFilter()) {
 			title = R.string.search_POI_level_btn;
 			enabled = (taskAlreadyFinished || currentSearchTask.getStatus() != Status.RUNNING) && filter.isSearchFurtherAvailable();
 		} else if (filter != null) {
