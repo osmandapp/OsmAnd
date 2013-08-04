@@ -1,9 +1,16 @@
+LOCAL_PATH := $(call my-dir)
+ROOT_PATH := $(LOCAL_PATH)/../../..
+$(info OsmAnd root: $(ROOT_PATH))
+
+include $(CLEAR_VARS)
+
 OSMAND_MAKEFILES := \
-    $(call all-makefiles-under,$(call my-dir)/../../../core/externals) \
-    $(call my-dir)/../../../core/Android.mk \
-    $(call my-dir)/../../../core/utils/Android.mk \
+    $(call all-makefiles-under,$(ROOT_PATH)/core/externals) \
+    $(ROOT_PATH)/core/Android.mk \
+    $(ROOT_PATH)/core/utils/Android.mk \
     $(all-subdir-makefiles) \
-    $(call my-dir)/../../../jni/Android.mk
+    $(ROOT_PATH)/jni/Android.mk
+$(info OsmAnd makefiles: $(OSMAND_MAKEFILES))
 
 # Protect from previous builds
 ifneq ($(TARGET_ARCH_ABI),armeabi-v7a)
