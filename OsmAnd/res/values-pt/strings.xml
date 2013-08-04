@@ -1160,4 +1160,21 @@
 	<string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Defina como destino</string>
     <string name="please_select_address">Selecione cidade ou rua primeiro</string>
+    <string name="tip_recent_changes_1_4_t">Mudanças na versão 1.4:
+	\n\t* Otimize ordenação de waypoints para visitá-los (vendedor itinerante, porta a porta)
+	\n\t* Procure rua por nome (na vizinhança) 
+	\n\t* Planning mode plugin (carregue/edite/salve GPX tracks)
+	\n\t* Nova tela de download (download em background)
+	\n\t* Suporte de GPX subdiretórios (organize suas rotas GPX)
+	\n\t* Apague arquivos SRTM
+	\n\t* Suporte de Notas 
+    </string>
+    <string name="search_street_in_neighborhood_cities">Procure rua nas cidades vizinhas</string>
+    <string name="intermediate_items_sort_return">Waypoints intermediários reordenados para otimizar sua ordem no caminho para o destino.</string>
+    <string name="intermediate_items_sort_by_distance">Ordene(porta a porta)</string>
+    <string name="use_distance_measurement_help">Toque para marcar um pont.\n
+Pressione e segure no mapa para apagar pontos anteriores.\n
+Pressione e segure no ponto para ver e anexar descrição.\n
+Clique no widget de medição para ver mais ações.</string>
+    <string name="default_buttons_do_not_show_again">Não mostrar novamente</string>
     </resources>
