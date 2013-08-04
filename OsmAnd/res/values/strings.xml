@@ -10,6 +10,8 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+	<string name="driving_region_descr">Select Driving Region : US, Europe, UK, Asia and Others</string>
+	<string name="driving_region">Driving Region</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">United States</string>
 	<string name="driving_region_europe_asia">Europe &amp; Asia</string>
