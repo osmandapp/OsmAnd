@@ -62,6 +62,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private List<OpenStreetNote> objects = new ArrayList<OpenStreetNote>();
 	private Paint pointClosedUI;
 	private Paint pointOpenedUI;
+	private Paint pointNotSubmitedUI;
 	
 	private double cTopLatitude;
 	private double cBottomLatitude;
@@ -120,6 +121,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		pointOpenedUI = new Paint();
 		pointOpenedUI.setColor(activity.getResources().getColor(R.color.osmbug_opened));
 		pointOpenedUI.setAntiAlias(true);
+		pointNotSubmitedUI = new Paint();
+		pointNotSubmitedUI.setColor(activity.getResources().getColor(R.color.osmbug_not_submitted));
+		pointNotSubmitedUI.setAntiAlias(true);
 		pointClosedUI = new Paint();
 		pointClosedUI.setColor(activity.getResources().getColor(R.color.osmbug_closed));
 		pointClosedUI.setAntiAlias(true);
@@ -153,7 +157,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			for (OpenStreetNote o : objects) {
 				int x = view.getMapXForPoint(o.getLongitude());
 				int y = view.getMapYForPoint(o.getLatitude());
-				canvas.drawCircle(x, y, getRadiusBug(view.getZoom()), o.isOpened()? pointOpenedUI: pointClosedUI);
+				canvas.drawCircle(x, y, getRadiusBug(view.getZoom()), o.isLocal() ? pointNotSubmitedUI : (o.isOpened() ? pointOpenedUI
+						: pointClosedUI));
 			}
 
 		}
