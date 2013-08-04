@@ -4,12 +4,16 @@ $(info OsmAnd root: $(ROOT_PATH))
 
 include $(CLEAR_VARS)
 
+ifdef BUILD_ONLY_OLD_LIB
+OSMAND_MAKEFILES := $(all-subdir-makefiles) $(call all-makefiles-under,$(call my-dir)/../../../core/targets/android)
+else 
 OSMAND_MAKEFILES := \
     $(call all-makefiles-under,$(ROOT_PATH)/core/externals) \
     $(ROOT_PATH)/core/Android.mk \
     $(all-subdir-makefiles) \
     $(ROOT_PATH)/jni/Android.mk
 $(info OsmAnd makefiles: $(OSMAND_MAKEFILES))
+endif
 
 # Protect from previous builds
 ifneq ($(TARGET_ARCH_ABI),armeabi-v7a)
