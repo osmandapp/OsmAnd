@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -572,7 +573,7 @@
   <string name="live_monitoring">Online live tracking</string>
   <string name="live_monitoring_interval_descr">Specify live tracking interval</string>
   <string name="live_monitoring_interval">Live tracking interval</string>
-  <string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
+  <string name="live_monitoring_url_descr">Especifique o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, data/hora={2}, hdop={3}, altitude={4}, velocidade={5}, bearing={6}</string>
   <string name="live_monitoring_url">Live tracking web address</string>
   <string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings.</string>
   <string name="show_current_gpx_title">Mostrar rota atual</string>
