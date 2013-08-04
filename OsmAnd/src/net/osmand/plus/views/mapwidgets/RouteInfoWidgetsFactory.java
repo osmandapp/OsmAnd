@@ -622,6 +622,7 @@ public class RouteInfoWidgetsFactory {
 		ptext.setTextAlign(Align.CENTER);
 		
 		final BaseMapWidget alarm = new BaseMapWidget(ma) {
+			private int textDy = 0;
 			private String text = "";
 			private Bitmap img = null;
 			private int imgId;
@@ -646,11 +647,13 @@ public class RouteInfoWidgetsFactory {
 					}
 					if(alarm != null) {
 						int locimgId = 0;
+						int textDy = 0;
 						String text = null;
 						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
 							text = alarm.getIntValue() +"";
 							if(settings.DRIVING_REGION.get() == DrivingRegion.US_CANADA){
 								locimgId = R.drawable.warnings_speed_limit_us;
+								textDy = (int) (-12 * scaleCoefficient);
 							}
 						} else if(alarm.getType() == AlarmInfo.SPEED_CAMERA) {
 							locimgId = R.drawable.warnings_speed_camera;
@@ -683,6 +686,7 @@ public class RouteInfoWidgetsFactory {
 							}
 							if(text != null && !text.equals(this.text)) {
 								this.text = text;
+								this.textDy = textDy;
 								invalidate();
 							}
 						}
@@ -702,7 +706,7 @@ public class RouteInfoWidgetsFactory {
 					canvas.drawBitmap(img, 0, 0, paintCircle);
 				}
 				if(text.length() > 0) {
-					canvas.drawText(text, getWidth() / 2, getHeight() / 2 + ptext.descent() + 3 * scaleCoefficient, ptext);
+					canvas.drawText(text, getWidth() / 2 , getHeight() / 2 + ptext.descent() + 3 * scaleCoefficient - textDy, ptext);
 				}
 			}
 
