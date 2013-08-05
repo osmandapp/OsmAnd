@@ -52,9 +52,11 @@ import android.widget.Toast;
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
 	protected final static int LOWEST_ZOOM_TO_ROTATE = 10;
-	private static boolean MEASURE_FPS = true;
+	private boolean MEASURE_FPS = false;
 	private int fpsMeasureCount = 0;
 	private int fpsMeasureMs = 0;
+	private long fpsFirstMeasurement = 0;
+	private float fps;
 
 	protected static final int emptyTileDivisor = 16;
 	
@@ -494,8 +496,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private void refreshMapInternal(boolean updateVectorRendering) {
 		handler.removeMessages(1);
 		long ms = SystemClock.elapsedRealtime();
-		// long time = System.currentTimeMillis();
-
 		boolean useInternet = getSettings().USE_INTERNET_TO_DOWNLOAD_TILES.get();
 		if (useInternet) {
 			if(application != null) {
@@ -521,27 +521,39 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					latlonRect.left = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.left);
 					latlonRect.bottom = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.bottom);
 					latlonRect.right = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.right);
-					if(nightMode){
+					if (nightMode) {
 						canvas.drawARGB(255, 100, 100, 100);
 					} else {
 						canvas.drawARGB(255, 225, 225, 225);
 					}
 					drawOverMap(canvas, latlonRect, tilesRect, new DrawSettings(nightMode, updateVectorRendering));
-//					log.info("Draw with layers " + (System.currentTimeMillis() - time));
 				} finally {
 					holder.unlockCanvasAndPost(canvas);
 				}
 			}
-		}
-		if(MEASURE_FPS) {
-			fpsMeasureMs += SystemClock.elapsedRealtime() - ms;
-			fpsMeasureCount ++;
-			if(fpsMeasureCount > 4) {
-				log.debug("FPS speed " + (1000*fpsMeasureCount/fpsMeasureMs));
-				fpsMeasureCount = 0;
-				fpsMeasureMs = 0;
+			if (MEASURE_FPS) {
+				fpsMeasureMs += SystemClock.elapsedRealtime() - ms;
+				fpsMeasureCount++;
+				if (fpsMeasureCount > 10 || (ms - fpsFirstMeasurement) > 400) {
+					fpsFirstMeasurement = ms;
+					fps = (1000f * fpsMeasureCount / fpsMeasureMs);
+					fpsMeasureCount = 0;
+					fpsMeasureMs = 0;
+				}
 			}
 		}
+	}
+	
+	public boolean isMeasureFPS() {
+		return MEASURE_FPS;
+	}
+	
+	public void setMeasureFPS(boolean measureFPS) {
+		MEASURE_FPS = measureFPS;
+	}
+	
+	public float getFPS(){
+		return fps;
 	}
 	
 	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings drawSettings) {
