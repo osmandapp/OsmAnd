@@ -1350,4 +1350,11 @@
     <string name="announce_gpx_waypoints">Annuncia i punti GPX di passaggio</string>
     <string name="osmodroid_mode_on">Ferma OsMoDroid</string>    
     <string name="osmodroid_mode_off">Avvia OsMoDroid</string>
-    </resources>
+    <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia e Altre</string>
+	<string name="driving_region">Regione di guida</string>
+	<string name="driving_region_japan">Giappone</string>
+	<string name="driving_region_us">Stati Uniti</string>
+	<string name="driving_region_canada">Canada</string>
+	<string name="driving_region_europe_asia">Europa &amp; Asia</string>
+	<string name="driving_region_uk">UK, India, Australia e Altri</string>
+	</resources>
