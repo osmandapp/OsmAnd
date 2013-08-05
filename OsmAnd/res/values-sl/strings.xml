@@ -49,7 +49,7 @@
 	<string name="favourites_context_menu_delete">Briši priljubljeno lokacijo</string>
 	<string name="add_favorite_dialog_favourite_added_template">Priljubljena lokacija \'\'{0}\'\' je bila dodana.</string>
 	<string name="favourites_remove_dialog_msg">Odstrani priljubljeno lokacijo \'%s\'?</string>
-	<string name="favourites_remove_dialog_success">Priljubljena lokacija {0} je bila izbrisana.</string>
+	<string name="favourites_remove_dialog_success">Priljubljena točka {0} je bila izbrisana.</string>
 	<string name="poi_edit_title">Uredi POI</string>
 	<string name="poi_create_title">Ustvari POI</string>
 	<string name="poi_error_poi_not_found">Točke ni mogoče najti ali pa usluga ni samostojna točka</string>
@@ -60,8 +60,8 @@
 	<string name="poi_action_add">Dodajanje</string>
 	<string name="poi_action_change">Popravljanje</string>
 	<string name="poi_action_succeded_template">{0} je bilo uspešno.</string>
-	<string name="poi_error_unexpected_template">{0} NI bilo uspešno (Nepričakovana napaka).</string>
-	<string name="poi_error_io_error_template">{0} NI bilo uspešno (I/O napaka).</string>
+	<string name="poi_error_unexpected_template">Med izvajanjem dejanja {0} prišlo do nepričakovane napake.</string>
+	<string name="poi_error_io_error_template">Prišlo je do I/O napake pri izvajanju dejanja {0}.</string>
 	<string name="poi_error_info_not_loaded">Informacije o točki niso bile naložene</string>
 	<string name="poi_dialog_name">Ime</string>
 	<string name="poi_dialog_opening_hours">Odprto</string>
@@ -638,7 +638,7 @@
 	<string name="osb_comment_dialog_message">Sporočilo</string>
 	<string name="osb_comment_dialog_author">Ime avtorja</string>
 	<string name="osb_add_dialog_success">Napaka uspešno prijavljena</string>
-	<string name="osb_add_dialog_error">Napaka v programu: Napaka ni bila prijavljena</string>
+	<string name="osb_add_dialog_error">Prišlo je do napake: napaka ni bila prijavljena</string>
 	<string name="osb_comment_dialog_add_button">Dodaj komentar</string>
 	<string name="osb_comment_menu_item">Dodaj opis napake</string>
 	<string name="osb_comment_dialog_title">Dodajanje opisa napake</string>
@@ -688,7 +688,7 @@
 	<string name="live_monitoring">Spletno sledenje v živo</string>
 	<string name="live_monitoring_interval_descr">Določi interval sledenja v živo</string>
 	<string name="live_monitoring_interval">Interval sledenja v živo</string>
-	<string name="live_monitoring_url_descr">Navedite spletne naslove z naslednjo sintakso za parametre: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
+	<string name="live_monitoring_url_descr">Navedite spletne naslove z naslednjo sintakso za parametre: geogr. šir.={0}, geogr. dolž.={1}, čas={2}, hdop={3}, višina={4}, hitrost={5}, usmeritev={6}</string>
 	<string name="live_monitoring_url">Spletni naslov za sledenje v živo</string>
 	<string name="gpx_monitoring_disabled_warn">Omogočite nastavitev \'Beleži sled v datoteko GPX\'.</string>
 	<string name="profile_settings">Za profil določene nastavitve</string>
@@ -969,7 +969,7 @@ Pomembnejše lastnosti:
 	\n\tPod \'Vir zemljevida …\' lahko izberete med uporabo prednaloženih vektorskih zemljevidov za delo brez povezave, vnaprej določenih spletnih zemljevidov (za to aktivirajte vtičnik \'Spletni zemljevidi\'), ali ročno ustvarjenih zemljevidov z uporabo npr. OsmAndMapCreator-ja na računalniku.
 	\n\tOsmAnd podpira tudi vire po meri.
 	</string>
-	<string name="fav_saved_sucessfully">Priljubljeni uspešno shranjeni v {0}</string>
+	<string name="fav_saved_sucessfully">Priljubljene točke uspešno shranjene v {0}</string>
 	<string name="opening_hours_not_supported">Oblika delovnega časa ni podprta za urejanje</string>
 	<string name="add_new_rule">Dodajanje novega pravila</string>
 	<string name="transport_Routes">Poti</string>
@@ -1480,6 +1480,14 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmodroid_mode_off">Zaženi OsMoDroid</string>
     <string name="announce_gpx_waypoints">Najavljanje GPX točk</string>
     <string name="speak_title">Najavi …</string>
-	<string name="speak_descr">Nastavitve za najavljanje imena ulic, prometna opozorila (prisilne ustavitve, ležeči policaji), opozorila merilnikov hitrosti, omejitve hitrosti</string>
+	<string name="speak_descr">Nastavitve za najavljanje imena ulic, prometna opozorila (ležeči policaji ipd.), opozorila merilnikov hitrosti, omejitve hitrosti</string>
 	<string name="speak_street_names">Najavljanje imen ulic (TTS)</string>
-    </resources>
+    <string name="map_widget_fps_info">Podatki FPS</string>
+	<string name="driving_region_descr">Izbira področja vožnje: ZDA, Evropa, Velika Britanija, Azija in drugo</string>
+	<string name="driving_region">Področje vožnje</string>
+	<string name="driving_region_japan">Japonska</string>
+	<string name="driving_region_us">Združene države</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="driving_region_europe_asia">Evropa in Azija</string>
+	<string name="driving_region_uk">Velika Britanija, Indija, Avstralija in drugo</string>
+	</resources>
