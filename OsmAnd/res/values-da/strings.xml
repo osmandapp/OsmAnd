@@ -1245,7 +1245,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="search_address_street">Gade</string>
 	<string name="search_address_city">By</string>
 	<string name="search_address_top_text">Vælg adresse</string>
-	<string name="voice_provider_descr">Vælg stemme til navigation</string>
+	<string name="voice_provider_descr">Vælg talevejledning til navigation (sprogkode se ISO 639-1)</string>
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
 	<string name="tip_initial_t">OsmAnd er et navigationsprogram med mange funktioner.
@@ -1567,4 +1567,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="announce_gpx_waypoints">Meddel om GPX-rutepunkter</string>
     <string name="osmodroid_mode_off">Start OsMoDroid</string>
     <string name="osmodroid_mode_on">Stop OsMoDroid</string>    
-    </resources>
+    <string name="driving_region_japan">Japan</string>
+	<string name="driving_region_us">USA</string>
+	<string name="driving_region_canada">Canada</string>
+	<string name="driving_region_europe_asia">Europa &amp; Asien</string>
+	<string name="driving_region_uk">Storbritannien, Indien, Australien m.fl.</string>
+	<string name="driving_region">Kørselregion</string>
+	<string name="driving_region_descr">Vælg kørselregion: USA, Europa, England, Asien m.fl.</string>
+	</resources>
