@@ -1530,4 +1530,11 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="speak_street_names">通報街道名稱 (TTS)</string>
     <string name="osmodroid_mode_on">停止 OsMoDroid</string>    
     <string name="osmodroid_mode_off">啟動 OsMoDroid</string>
-    </resources>
+    <string name="driving_region_descr">選擇駕駛區域：美國、歐洲、英國、亞洲和其他</string>
+	<string name="driving_region_japan">日本</string>
+	<string name="driving_region_us">美國</string>
+	<string name="driving_region_canada">加拿大</string>
+	<string name="driving_region_europe_asia">歐洲和亞洲</string>
+	<string name="driving_region_uk">英國、印度、澳大利亞和其他</string>
+	<string name="driving_region">駕駛區域</string>
+	</resources>
