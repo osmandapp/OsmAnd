@@ -124,13 +124,13 @@ public class MapUtils {
 	
 	public static int get31TileNumberX(double longitude){
 		longitude = checkLongitude(longitude);
-		long l = 1l << 31;
+		long l = 1L << 31;
 		return (int)((longitude + 180d)/360d * l);
 	}
 	public static int get31TileNumberY( double latitude){
 		latitude = checkLatitude(latitude);
 		double eval = Math.log( Math.tan(toRadians(latitude)) + 1/Math.cos(toRadians(latitude)) );
-		long l = 1l << 31;
+		long l = 1L << 31;
 		if(eval > Math.PI){
 			eval = Math.PI;
 		}
@@ -270,8 +270,8 @@ public class MapUtils {
 	}
 
 	public static String createShortLocString(double latitude, double longitude, int zoom) {
-		long lat = (long) (((latitude + 90d)/180d)*(1l << 32));
-		long lon = (long) (((longitude + 180d)/360d)*(1l << 32));
+		long lat = (long) (((latitude + 90d)/180d)*(1L << 32));
+		long lon = (long) (((longitude + 180d)/360d)*(1L << 32));
 		long code = interleaveBits(lon, lat);
 		String str = "";
 	    // add eight to the zoom level, which approximates an accuracy of one pixel in a tile.
@@ -321,8 +321,8 @@ public class MapUtils {
 		x <<= (32 - z);
 		y <<= (32 - z);
 //		int zoom = z - 8 - ((3 + z_offset) % 3);
-		double dlat = (180d * (y) / ((double)(1l << 32))) - 90d;
-		double dlon = (360d * (x)/ ((double)(1l << 32))) - 180d;
+		double dlat = (180d * (y) / ((double)(1L << 32))) - 90d;
+		double dlon = (360d * (x)/ ((double)(1L << 32))) - 180d;
 		return new LatLon(dlat, dlon);
 	}
 	

@@ -121,7 +121,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	
 	public boolean setParkingType(boolean limited) {
 		if (!limited)
-			parkingTime.set(-1l);
+			parkingTime.set(-1L);
 		parkingType.set(limited);
 		return true;
 	}
