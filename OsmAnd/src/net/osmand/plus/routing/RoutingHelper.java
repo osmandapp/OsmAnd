@@ -40,7 +40,7 @@ public class RoutingHelper {
 		public void routeWasCancelled();
 	}
 	
-	private final float POSITION_TOLERANCE = 60;
+	private static final float POSITION_TOLERANCE = 60;
 	
 	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
 

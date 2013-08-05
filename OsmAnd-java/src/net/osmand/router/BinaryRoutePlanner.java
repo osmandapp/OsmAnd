@@ -20,9 +20,9 @@ import org.apache.commons.logging.Log;
 
 public class BinaryRoutePlanner {
 	
-	private final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
-	/*private*/ final int STANDARD_ROAD_IN_QUEUE_OVERHEAD = 220;
-	/*private */final int STANDARD_ROAD_VISITED_OVERHEAD = 150;
+	private static final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
+	/*private*/ static final int STANDARD_ROAD_IN_QUEUE_OVERHEAD = 220;
+	/*private*/ static final int STANDARD_ROAD_VISITED_OVERHEAD = 150;
 	
 	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlanner.class);
 	

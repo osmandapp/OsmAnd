@@ -43,9 +43,9 @@ public class SQLiteTileSource implements ITileSource {
 	private int maxZoom = 17; 
 	private int baseZoom = 17; //Default base zoom
 
-	final int margin = 1;
-	final int tileSize = 256;
-	final int minScaledSize = 8;
+	static final int margin = 1;
+	static final int tileSize = 256;
+	static final int minScaledSize = 8;
 	private ClientContext ctx;
 	
 	public SQLiteTileSource(ClientContext ctx, File f, List<TileSourceTemplate> toFindUrl){
@@ -355,7 +355,7 @@ public class SQLiteTileSource implements ITileSource {
 		db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 	}
 
-	private final int BUF_SIZE = 1024;
+	private static final int BUF_SIZE = 1024;
 	
 	/**
 	 * Makes method synchronized to give a little more time for get methods and 
