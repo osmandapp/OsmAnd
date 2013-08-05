@@ -206,8 +206,8 @@ public class GeoIntentActivity extends OsmandListActivity {
 				int i = q.indexOf(',');
 				String lat = q.substring(0, i);
 				String lon = q.substring(i + 1);
-				if (lat.indexOf(":") != -1) {
-					i = lat.indexOf(":");
+				if (lat.indexOf(':') != -1) {
+					i = lat.indexOf(':');
 					lat = lat.substring(i + 1);
 				}
 				try {

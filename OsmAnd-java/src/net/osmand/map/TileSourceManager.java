@@ -288,7 +288,7 @@ public class TileSourceManager {
 					String fileName = file.getName();
 					if (fileName.endsWith(".tile")) {
 						String substring = fileName.substring(0, fileName.length() - ".tile".length());
-						int extInt = substring.lastIndexOf(".");
+						int extInt = substring.lastIndexOf('.');
 						if (extInt != -1) {
 							return substring.substring(extInt, substring.length());
 						}
