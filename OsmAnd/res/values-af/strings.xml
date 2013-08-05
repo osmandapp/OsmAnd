@@ -222,8 +222,8 @@
   <string name="index_name_oceania">Oseanië</string>
   <string name="index_name_other">Wêreldwye en onderwerp kaarte</string>
   <string name="index_name_wiki">Wêreldwye Wikipedia</string>
-  <string name="index_name_voice">Stem pakkette (opgeneem)</string>
-  <string name="index_name_tts_voice">Stem pakkette (TTS)</string>
+  <string name="index_name_voice">Stem pakkette (opgeneem, beperkte funksies)</string>
+  <string name="index_name_tts_voice">Stem pakkette (TTS-sintese, verkies)</string>
   <string name="amenity_type_wikiosm">Wikipedia (aflyn)</string>
   <string name="amenity_type_user_defined">gebruiker gedefinieerde</string>
   <string name="fav_export_confirmation">Lêer met voorheen uitgevoerde gunstelinge bestaan reeds. Wil jy dit vervang?</string>
@@ -446,7 +446,7 @@
   <string name="send_location_email_pattern">Om die ligging te sien volg die webskakel %1$s of Android opsetskakel %2$s</string>
   <string name="send_location">Deel ligging</string>
   <string name="context_menu_item_share_location">Deel ligging</string>
-  <string name="add_waypoint_dialog_added">Roetebaken \'\'{0}\'\' was suksesvol bygevoeg</string>
+  <string name="add_waypoint_dialog_added">GPX Roetebaken \'\'{0}\'\' was suksesvol bygevoeg</string>
   <string name="add_waypoint_dialog_title">Voeg roetebaken by tot opgeneemde GPX spoor</string>
   <string name="context_menu_item_add_waypoint">Voeg GPX roetebaken by</string>
   <string name="amenity_type_administrative">Administratief</string>
@@ -610,7 +610,7 @@
   <string name="search_poi_filter">Filter</string>
   <string name="menu_mute_off">Klank is aan</string>
   <string name="menu_mute_on">Klank is af</string>
-  <string name="voice_provider_descr">Kies stem begeleiding vir navigasie</string>
+  <string name="voice_provider_descr">Kies stem begeleiding vir navigasie (taalkodes sien ISO 639-1)</string>
   <string name="voice_provider">Stem begeleiding</string>
   <string name="voice_data_initializing">Stem inligting gereedmaak…</string>
   <string name="voice_data_not_supported">Die weergawe van stem inligting word nie ondersteun nie</string>
@@ -1256,7 +1256,8 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="speak_traffic_warnings">Kondig verkeerswaarskuwings aan</string>
 	<string name="tip_recent_changes_1_5_t">Veranderings in 1.5:
 	\n\t* Stem waarskuwings oor spoed beperkings en kameras
-	\n\t* Hoë ditheid kaart simbole
+	\n\t* Hoë digtheid kaart simbole
+	\n\t* Meer stem vermoëns (straat-naam aankondiging)
 	\n\t* Baie UI veranderings
 	\n\t* Bugfixes in afstand vertoon, GPX analiseerder, oorgangspunt hantering, beplanning funksie, OSM oplaai, https hantering
     </string>
@@ -1277,4 +1278,11 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="speak_street_names">Kondig straatname aan(TTS)</string>
     <string name="osmodroid_mode_on">Staak OsMoDroid</string>    
     <string name="osmodroid_mode_off">Begin OsMoDroid</string>
-    </resources>
+    <string name="driving_region_descr">Kies Bestuur Streek: VSA, Europa, VK, Asië en Ander</string>
+	<string name="driving_region">Bestuur Streek</string>
+	<string name="driving_region_japan">Japan</string>
+	<string name="driving_region_us">Verenigde State van Amerika</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="driving_region_europe_asia">Europa &amp; Asië</string>
+	<string name="driving_region_uk">VK, Indië, Australië &amp; Ander</string>
+	</resources>
