@@ -811,8 +811,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			StringBuilder value = new StringBuilder();
 			MapRenderingTypes.getDefault().getAmenityTagValue(amenity.getType(), amenity.getSubType(),
 					tag, value);
-			if(RenderingIcons.containsBigIcon(tag.toString() + "_" + value.toString())) {
-				icon.setImageResource(RenderingIcons.getBigIconResourceId(tag.toString() + "_" + value.toString()));
+			if(RenderingIcons.containsBigIcon(tag + "_" + value)) {
+				icon.setImageResource(RenderingIcons.getBigIconResourceId(tag + "_" + value));
 			} else if(RenderingIcons.containsBigIcon(value.toString())) {
 				icon.setImageResource(RenderingIcons.getBigIconResourceId(value.toString()));
 			} else {

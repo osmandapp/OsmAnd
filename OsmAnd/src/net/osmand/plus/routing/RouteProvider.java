@@ -630,7 +630,7 @@ public class RouteProvider {
 		// TODO if we would get instructions from the service, we could use this language setting
 		// .append("&language=").append(Locale.getDefault().getLanguage());
 
-		log.info("URL route " + request.toString());
+		log.info("URL route " + request);
 		URI uri = URI.create(request.toString());
 		URL url = uri.toURL();
 		URLConnection connection = url.openConnection();
