@@ -941,7 +941,9 @@
 <string name="gps_wakeup_interval">GPS intervalo de despertar: %s</string>
 <string name="int_continuosly">Contínuo</string>
 <string name="email">e-mail</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (Direções OSM automatizados de navegação) O OsmAnd é uma aplicação de navegação livre com acesso a uma ampla variedade de dados OpenStreetMap (OSM) globais. Todos os dados de mapas (mapas vetoriais ou telha) podem ser armazenados no cartão de memória do telefone para uso offline. O OsmAnd também oferece roteamento offline e online, incluindo a funcionalidade de roteamento curva-a-curva com orientação por voz. Algumas das características principais: - Completa funcionalidade offline (guarda os mapas baixados, sejam eles vetoriais ou imagens, em uma pasta selecionável) - Mapas vetoriais compactados para o mundo inteiro disponíveis - Faça o download de mapas de países ou regiões diretamente do aplicativo - Sobreposição de camadas de mapas diversos, como GPX ou trilhas de navegação, Pontos de Interesse, favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável - Pesquisa offline para endereços e locais (POIs) - Encaminhamento offline para distâncias curtas (experimental) - Carro, bicicleta, e os modos de pedestres com: - Opcional vista de dia/noite automático de comutação - Mapa em função da velocidade opcional zoom - Alinhamento mapa opcional de acordo com bússola ou direção do movimento - Orientação pista opcional, display de limite de velocidade, registradas e vozes TTS Limitações desta versão gratuita de OsmAnd: - Número de downloads de mapa limitado - Sem acesso a Wikipedia off-line POIs OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depende ainda contribuições financeiras para financiar o desenvolvimento e testdriving novas funcionalidades. Por favor, considere a compra de OsmAnd, ou ajude a financiar novas funcionalidades específicas ou fazer uma doação no osmand.net."</string>
+<string name="osmand_long_description_1000_chars">
+		" OsmAnd (Direções OSM automatizados de navegação) O OsmAnd é uma aplicação de navegação livre com acesso a uma ampla variedade de dados OpenStreetMap (OSM) globais. Todos os dados de mapas (mapas vetoriais ou telha) podem ser armazenados no cartão de memória do telefone para uso offline. O OsmAnd também oferece roteamento offline e online, incluindo a funcionalidade de roteamento curva-a-curva com orientação por voz. Algumas das características principais: - Completa funcionalidade offline (guarda os mapas baixados, sejam eles vetoriais ou imagens, em uma pasta selecionável) - Mapas vetoriais compactados para o mundo inteiro disponíveis - Faça o download de mapas de países ou regiões diretamente do aplicativo - Sobreposição de camadas de mapas diversos, como GPX ou trilhas de navegação, Pontos de Interesse, favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável - Pesquisa offline para endereços e locais (POIs) - Encaminhamento offline para distâncias curtas (experimental) - Carro, bicicleta, e os modos de pedestres com: - Opcional vista de dia/noite automático de comutação - Mapa em função da velocidade opcional zoom - Alinhamento mapa opcional de acordo com bússola ou direção do movimento - Orientação pista opcional, display de limite de velocidade, registradas e vozes TTS Limitações desta versão gratuita de OsmAnd: - Número de downloads de mapa limitado - Sem acesso a Wikipedia off-line POIs OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depende ainda contribuições financeiras para financiar o desenvolvimento e testdriving novas funcionalidades. Por favor, considere a compra de OsmAnd, ou ajude a financiar novas funcionalidades específicas ou fazer uma doação no osmand.net."
+	</string>
 <string name="rendering_attr_roadColors_description">Selecione um esquema de cores de estrada:</string>
 	<string name="rendering_attr_roadColors_name">Esquema de cores</string>
     <string name="map_widget_show_destination_arrow">Ver direção para o destino</string>
@@ -1178,4 +1180,116 @@ Pressione e segure no ponto para ver e anexar descrição.\n
 Clique no widget de medição para ver mais ações.</string>
     <string name="default_buttons_do_not_show_again">Não mostrar novamente</string>
     <string name="distance_measurement_start_editing">Comece edição</string>
-    </resources>
+    <string name="distance_measurement_finish_editing">Finalize edição</string>
+    <string name="distance_measurement_finish_subtrack">Comece uma nova subrota</string>
+    <string name="distance_measurement_clear_route">Apagar os pontos</string>
+    <string name="distance_measurement_save_gpx">Salve como GPX</string>
+    <string name="distance_measurement_load_gpx">Abrir GPX</string>
+    <string name="wait_current_task_finished">Aguarde até que a tarefa esteja concluída</string>
+    <string name="use_kalman_filter_compass_descr">Use filtro Kalman para evitar aberrações na bússola</string>
+    <string name="use_kalman_filter_compass">Use filtro Kalman</string>
+    <string name="access_mark_final_location_first">Modo de acessibilidade: selecione o destino primeiro</string> 
+    <string name="use_magnetic_sensor_descr">use o sensor magnético para determinar a direção da bússola em vez do sensor de orientação</string>
+    <string name="use_magnetic_sensor">Use sensor magnético</string>
+    <string name="other_location">Outro</string>
+    <string name="local_indexes_cat_srtm">Dados de linhas de contorno</string>
+    <string name="osmodroid_plugin_description">Plugin  OsMoDroid é uma extensão do OsmAnd para aplicaçao OsModroid para online tracking. Mais informações sobre o serviço em http://esya.ru.</string>
+    <string name="tip_altitude_offset_t">\tMaioria dos dispositivos GPS reportam medidas de altitude no sistema de referência elipsoidal WGS84, para o qual a conversão para sistemas usados localmente requerem a correção dependente de posição.
+		\n\tUma melhor aproximação para esses sistmas locais é a referêncai EGM96. OsmAnd agora tamb[em suporta a exibição automática de altitudes no sistema EGM96.
+		\n\tPara obtê-lo, façao o download do arquivo WW15MGH.DAC via Gerenciamento de Dados (original em http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+	</string>
+    <string name="monitoring_control_start">GPX</string>
+    <string name="osmand_play_title_30_chars">Mapas OsmAnd &amp; Navegação</string>
+	<string name="osmand_extended_description_4000_chars">
+OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed).
+
+Algumas das principais funcionalidades:
+
+navegação
+ - Funciona online (rápido) ou offline (sem taxas de dados quando você está viajando)
+ - Turn-by-turn voice guidance (recorded and synthesized voices)
+ - Optional lane guidance, street name display, and estimated time of arrival
+ - Suporta pontos intermedi[arios em seu itinerário
+ - Automatic re-routing whenever you deviate from the route
+ - Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates
+
+Map Viewing
+ - Display your position and orientation on the map
+ - Optionally align the map according to compass or your direction of motion
+ - Save your most important places as Favorites
+ - Display POIs (point of interests) around you
+ - Can display specialized online tile maps
+ - Can display satellite view (from Bing)
+ - Can display different overlays like touring/navigation GPX tracks and additional maps with customizable transparency
+ - Optionally display place names in English, local, or phonetic spelling
+
+Use OpenStreetMap and Wikipedia Data:
+ - High quality information from the best collaborative projects of the world
+ - Global maps from OpenStreetMap, available per country or region
+ - Wikipedia POIs, great for sightseeing (not available in free version)
+ - Unlimited free download, directly from the app (download limit 16 map files in free version)
+ - Always up-to-date maps (updated at least once a month)
+ - Compact offline vector maps
+ - Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only)
+ - Also supports online or cached tile maps
+
+Safety Features
+ - Optional automated day/night view switching
+ - Optional speed limit display, with reminder if you exceed it
+ - Optional speed-dependent map zooming
+ - Share your location so that your friends can find you
+
+Bicycle and Pedestrian Features
+ - The maps include foot, hiking, and bike paths, great for outdoor activities
+ - Special routing and display modes for bike and pedestrian
+ - Optional public transport stops (bus, tram, train) including line names
+ - Optional trip recording to local GPX file or online service
+ - Optional speed and altitude display
+ - Display of contour lines and hill-shading (via additional plugin)
+
+Contribua para OpenStreetMap
+ - Reporte erros nos mapas
+ - Upload GPX tracks to OSM directly from the app
+ - Add POIs and directly upload them to OSM (or later if offline)
+ - Optional trip recording also in background mode (while device is in sleep mode)
+
+OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on osmand.net.
+
+
+Cobertura de mapa e qualidade aproximada:
+ - Western Europe: ****
+ - Eastern Europe: ***
+ - Russia: ***
+ - North America: ***
+ - South America: **
+ - Asia: **
+ - Japan &amp; Korea: ***
+ - Middle East: **
+ - Africa: **
+ - Antarctica: *
+
+Lista de países (basicamente, o mundo todo!):
+Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
+	</string>
+	<string name="osmand_plus_play_title_30_chars">Mapas OsmAnd+ &amp; Navegação</string>
+	<string name="tip_map_switch_t_v2">\tO caminho dos mapas e camadas mostradas são mudados via \'Menu\' -&gt; \'Definir vista\' em vista de mapa.
+\n\tem \'Caminho dos maps…\' você pode escolhe usar os mapas vetoriais offline pré-carregados, predefined (online) tile sources (ative o plugin \'Online and tile maps\' para isso), ou mapas criados manualmente usando, por exemplo OsmAndMapCreator em um PC.
+→→\n\tOsmAnd também suporta fontes customizadas.
+	</string>
+	<string name="tip_app_mode_t_v2">\tOsmAnd suporta diferentes (personalizáveis) perfis de aplicação para diferentes ussos.
+\n\tVocê pode mudar os perfis via botão perfil no canto inferior esquerdo da tela do mapa (ícone do carro, bicicleta ou pedestre) ou quando criando uma rota.
+	</string>
+	<string name="downloading_file_new">Fazendo o download…</string>
+	<string name="osb_author_dialog_password">Password do OSM (opcional)</string>
+	<string name="av_camera_focus">Tipo de foco da câmera</string>
+	<string name="av_camera_focus_descr">Selecione o tipo de foco da câmera interna</string>
+	<string name="av_camera_focus_auto">Auto foco</string>
+	<string name="av_camera_focus_hiperfocal">Foco hiperfocal</string>
+	<string name="av_camera_focus_edof">Profundidade de visão estendida</string>
+	<string name="av_camera_focus_infinity">Foco está definido no infinito</string>
+	<string name="av_camera_focus_macro">Foco Macro (close-up)</string>
+	<string name="av_camera_focus_continuous">A câmera tenta focalizar continuamente</string>
+	<string name="av_photo_play_sound">Emita som ao tirar foto</string>
+	<string name="av_photo_play_sound_descr">Escolha se emitir som quando tirar fotos</string>
+<string name="driving_region_canada">Canadá</string>
+	</resources>
