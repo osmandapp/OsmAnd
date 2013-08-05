@@ -160,7 +160,7 @@ public class PoiFilter {
 				
 				@Override
 				public boolean isCancelled() {
-					return false || (matcher != null && matcher.isCancelled());
+					return (matcher != null && matcher.isCancelled());
 				}
 			};
 		}
