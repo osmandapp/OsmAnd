@@ -37,6 +37,7 @@ import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd;
@@ -46,6 +47,7 @@ import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.util.MapUtils;
 
+import org.json.JSONException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -60,7 +62,7 @@ public class RouteProvider {
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
 	
 	public enum RouteService {
-		OSMAND("OsmAnd (offline)"), YOURS("YOURS"), ORS("OpenRouteService"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		OSMAND("OsmAnd (offline)"), YOURS("YOURS"),  ORS("OpenRouteService"), OSRM("OSRM (only car)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
@@ -178,6 +180,8 @@ public class RouteProvider {
 					res = findYOURSRoute(params);
 				} else if (params.type == RouteService.ORS) {
 					res = findORSRoute(params);
+				} else if (params.type == RouteService.OSRM) {
+					res = findOSRMRoute(params);
 				} else if (params.type == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params);
 				} else {
@@ -192,6 +196,8 @@ public class RouteProvider {
 			} catch (ParserConfigurationException e) {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			} catch (SAXException e) {
+				log.error("Failed to find route ", e); //$NON-NLS-1$
+			} catch (JSONException e) {
 				log.error("Failed to find route ", e); //$NON-NLS-1$
 			}
 		}
@@ -285,6 +291,7 @@ public class RouteProvider {
 		log.info("URL route " + uri);
 		URL url = new URL(uri.toString());
 		URLConnection connection = url.openConnection();
+		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
 		DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = dom.parse(new InputSource(new InputStreamReader(connection.getInputStream())));
 		NodeList list = doc.getElementsByTagName("coordinates"); //$NON-NLS-1$
@@ -479,6 +486,7 @@ public class RouteProvider {
 		log.info("URL route " + uri);
 		URL url = new URL(uri.toString());
 		URLConnection connection = url.openConnection();
+		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
 		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, connection.getInputStream(), false);
 		directions = parseCloudmadeRoute(res, gpxFile, false, params.leftSide, speed);
 
@@ -634,6 +642,7 @@ public class RouteProvider {
 		URI uri = URI.create(request.toString());
 		URL url = uri.toURL();
 		URLConnection connection = url.openConnection();
+		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
 
 		DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = dom.parse(new InputSource(new InputStreamReader(connection.getInputStream())));
@@ -721,5 +730,55 @@ public class RouteProvider {
 		}
 		return gpx;
 	}
+
+
+	private void appendOSRMLoc(StringBuilder uri, LatLon il) {
+		uri.append("&loc=").append(String.valueOf(il.getLatitude()));
+		uri.append(",").append(String.valueOf(il.getLongitude()));
+	}
+	protected RouteCalculationResult findOSRMRoute(RouteCalculationParams params)
+			throws MalformedURLException, IOException, JSONException {
+		// http://router.project-osrm.org/viaroute?loc=52.28,4.83&loc=52.35,4.95&alt=false&output=gpx
+		List<Location> res = new ArrayList<Location>();
+		StringBuilder uri = new StringBuilder();
+		// possibly hide that API key because it is privacy of osmand
+		// A6421860EBB04234AB5EF2D049F2CD8F key is compromised
+		uri.append("http://router.project-osrm.org/viaroute?alt=false"); //$NON-NLS-1$
+		uri.append("&loc=").append(String.valueOf(params.start.getLatitude()));
+		uri.append(",").append(String.valueOf(params.start.getLongitude()));
+		if(params.intermediates != null && params.intermediates.size() > 0) {
+			for(LatLon il : params.intermediates) {
+				appendOSRMLoc(uri, il);
+			}
+		}
+		appendOSRMLoc(uri, params.end);
+		uri.append("&output=gpx"); //$NON-NLS-1$
+		
+		log.info("URL route " + uri);
+		
+		URL url = new URL(uri.toString());
+		URLConnection connection = url.openConnection();
+		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
+		StringBuilder content = new StringBuilder();
+//		BufferedReader rs = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//		String s;
+//		while((s = rs.readLine()) != null) {
+//			content.append(s);
+//		}
+//		JSONObject obj = new JSONObject(content.toString());
+		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, connection.getInputStream(), false);
+		if(gpxFile.routes.isEmpty()) {
+			return new RouteCalculationResult("Route is empty");
+		}
+		for (WptPt pt : gpxFile.routes.get(0).points) {
+			res.add(createLocation(pt));
+		}
+		return new RouteCalculationResult(res, null, params.start, params.end, null, null, null,
+				params.ctx, params.leftSide, true);
+	}
+
+
+
+
 	
 }
