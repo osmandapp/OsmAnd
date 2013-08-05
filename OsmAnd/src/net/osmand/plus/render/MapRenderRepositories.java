@@ -716,7 +716,7 @@ public class MapRenderRepositories {
 		if (uncompletedRings.size() > 0) {
 			unifyIncompletedRings(uncompletedRings, completedRings, leftX, rightX, bottomY, topY, dbId, zoom);
 		}
-		long mask = 0xffffffffl;
+		long mask = 0xffffffffL;
 		// draw uncompleted for debug purpose
 		for (int i = 0; i < uncompletedRings.size(); i++) {
 			TLongList ring = uncompletedRings.get(i);
