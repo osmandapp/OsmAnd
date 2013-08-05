@@ -1,13 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
@@ -63,9 +56,7 @@ public class MapWidgetRegistry {
 			} else {
 				LinkedHashSet<String> set = new LinkedHashSet<String>();
 				visibleElements.put(ms, set);
-				for(String s : mpf.split(";")){
-					set.add(s);
-				}
+                Collections.addAll(set, mpf.split(";"));
 			}
 		}
 		
@@ -371,9 +362,7 @@ public class MapWidgetRegistry {
 		}
 		
 		public MapWidgetRegInfo required(ApplicationMode... modes){
-			for(ApplicationMode ms : modes) {
-				visibleModes.add(ms);
-			}
+            Collections.addAll(visibleModes, modes);
 			return this;
 		}
 		

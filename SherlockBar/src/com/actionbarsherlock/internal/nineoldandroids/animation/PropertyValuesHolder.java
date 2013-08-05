@@ -337,9 +337,7 @@ public class PropertyValuesHolder implements Cloneable {
         int numKeyframes = values.length;
         Keyframe keyframes[] = new Keyframe[Math.max(numKeyframes,2)];
         mValueType = values[0].getType();
-        for (int i = 0; i < numKeyframes; ++i) {
-            keyframes[i] = values[i];
-        }
+        System.arraycopy(values, 0, keyframes, 0, numKeyframes);
         mKeyframeSet = new KeyframeSet(keyframes);
     }
 
