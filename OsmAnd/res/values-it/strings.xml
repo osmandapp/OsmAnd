@@ -1323,7 +1323,7 @@
 <string name="local_index_gpx_timespan">\nTempo trascorso: %1$d:%2$02d:%3$02d</string>
 	
 	<string name="speak_warnings_descr">Configura gli avvisi del traffico (fermate forzate, dossi rallentatori) avvisi autovelox, limiti di velocità</string>
-    <string name="speak_speed_limit">Annuncia limite di velocità</string>
+    <string name="speak_speed_limit">Annuncia limiti di velocità</string>
     <string name="speak_cameras">Annuncia autovelox</string>
 	<string name="speak_traffic_warnings">Annuncia avvisi di traffico</string>
 	<string name="tip_recent_changes_1_5_t">Cambiamenti nella 1.5:
@@ -1357,4 +1357,5 @@
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa &amp; Asia</string>
 	<string name="driving_region_uk">UK, India, Australia e Altri</string>
+	<string name="map_widget_fps_info">Informazioni FPS</string>
 	</resources>
