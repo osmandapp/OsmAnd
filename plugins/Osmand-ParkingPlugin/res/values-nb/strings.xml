@@ -1,3 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
-</resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="default_buttons_yes">Ja</string>
+    <string name="default_buttons_no">Nei</string>
+    </resources>
