@@ -741,7 +741,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	public void openSelectionMode(int stringRes, int darkIcon, int lightIcon, DialogInterface.OnClickListener listener, Boolean backup,
 			LocalIndexType filter) {
 		if (backup != null) {
-			listAdapter.filterCategories(backup.booleanValue());
+			listAdapter.filterCategories(backup);
 		}
 		if (filter != null) {
 			listAdapter.filterCategories(filter);
