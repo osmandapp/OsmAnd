@@ -46,9 +46,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref = new Preference(this);
 		pref.setTitle(R.string.global_app_allocated_memory);
 		
-		long javaAvailMem = (Runtime.getRuntime().totalMemory() -  Runtime.getRuntime().freeMemory())/ (1024*1024l);
-		long javaTotal = Runtime.getRuntime().totalMemory() / (1024*1024l);
-		long dalvikSize = android.os.Debug.getNativeHeapAllocatedSize() / (1024*1024l);
+		long javaAvailMem = (Runtime.getRuntime().totalMemory() -  Runtime.getRuntime().freeMemory())/ (1024 << 10);
+		long javaTotal = Runtime.getRuntime().totalMemory() / (1024 << 10);
+		long dalvikSize = android.os.Debug.getNativeHeapAllocatedSize() / (1024 << 10);
 		pref.setSummary(getString(R.string.global_app_allocated_memory_descr, javaAvailMem, javaTotal, dalvikSize));
 		cat.addPreference(pref);
 		

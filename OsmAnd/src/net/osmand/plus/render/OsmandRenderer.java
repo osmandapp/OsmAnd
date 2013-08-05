@@ -631,7 +631,7 @@ public class OsmandRenderer {
 		// option shadow = 3 with solid border
 		if (rc.shadowRenderingMode == 3 && shadowRadius > 0) {
 			paint.clearShadowLayer();
-			paint.setStrokeWidth(paint.getStrokeWidth() + shadowRadius * 2);
+			paint.setStrokeWidth(paint.getStrokeWidth() + (shadowRadius << 1));
 			ColorFilter cf = new PorterDuffColorFilter(shadowColor, Mode.SRC_IN);
 			paint.setColorFilter(cf);
 //			 paint.setColor(0xffbababa);

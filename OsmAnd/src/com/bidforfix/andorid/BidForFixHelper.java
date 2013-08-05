@@ -162,7 +162,7 @@ public class BidForFixHelper {
 				//we can try some more times...
 			} catch (JSONException e) {
 				//bad json, try in two day again
-				initialized = new Date(System.currentTimeMillis()+DAY*2);
+				initialized = new Date(System.currentTimeMillis()+ (DAY << 1));
 				Log.w("Bad JSON while parsing bidforfix output", e);
 			} finally {
 				if (in != null) {

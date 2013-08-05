@@ -722,8 +722,8 @@ public class MapRenderRepositories {
 			TLongList ring = uncompletedRings.get(i);
 			int[] coordinates = new int[ring.size() * 2];
 			for (int j = 0; j < ring.size(); j++) {
-				coordinates[j * 2] = (int) (ring.get(j) >> 32);
-				coordinates[j * 2 + 1] = (int) (ring.get(j) & mask);
+				coordinates[(j << 1)] = (int) (ring.get(j) >> 32);
+				coordinates[(j << 1) + 1] = (int) (ring.get(j) & mask);
 			}
 			BinaryMapDataObject o = new BinaryMapDataObject(coordinates, new int[] { mapIndex.coastlineBrokenEncodingType }, null, dbId);
 			o.setMapIndex(mapIndex);
@@ -738,8 +738,8 @@ public class MapRenderRepositories {
 			TLongList ring = completedRings.get(i);
 			int[] coordinates = new int[ring.size() * 2];
 			for (int j = 0; j < ring.size(); j++) {
-				coordinates[j * 2] = (int) (ring.get(j) >> 32);
-				coordinates[j * 2 + 1] = (int) (ring.get(j) & mask);
+				coordinates[(j << 1)] = (int) (ring.get(j) >> 32);
+				coordinates[(j << 1) + 1] = (int) (ring.get(j) & mask);
 			}
 			boolean clockwise = MapAlgorithms.isClockwiseWay(ring);
 			clockwiseFound = clockwiseFound || clockwise;

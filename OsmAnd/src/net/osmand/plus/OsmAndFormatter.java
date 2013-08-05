@@ -34,7 +34,7 @@ public class OsmAndFormatter {
 			if (pointer++ % 3 == 2) {
 				generator = generator * 5 / 2;
 			} else {
-				generator *= 2;
+                generator <<= 1;
 			}
 			if(point == mainUnitInMeter && metersInSecondUnit * mainUnitInMeter * 0.9f <= generator ){
 				point = 1 / metersInSecondUnit;
