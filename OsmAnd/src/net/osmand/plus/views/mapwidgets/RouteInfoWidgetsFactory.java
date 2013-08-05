@@ -570,7 +570,7 @@ public class RouteInfoWidgetsFactory {
 						RouteInfoLayer ls = view.getLayerByClass(RouteInfoLayer.class);
 						if (ls != null) {
 							int di = ls.getDirectionInfo();
-							if (di >= 0 && ls.isVisible() & di < routingHelper.getRouteDirections().size()) {
+							if (di >= 0 && ls.isVisible() && di < routingHelper.getRouteDirections().size()) {
 								RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
 								if (next != null) {
 									loclanes = next.getTurnType().getLanes();
