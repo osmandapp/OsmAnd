@@ -621,8 +621,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					runMediaRecorder(mapActivity, mr, f);
 				} catch (Exception e) {
 					logErr(e);
-					return;
-				}
+                }
 			}
 
 			@Override
@@ -654,8 +653,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void logErr(Exception e) {
 		log.error("Error starting recorder ", e);
 		AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
-		return;
-	}
+    }
 
 	protected Camera openCamera() {
 		try {
