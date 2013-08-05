@@ -1535,6 +1535,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="driving_region_us">美國</string>
 	<string name="driving_region_canada">加拿大</string>
 	<string name="driving_region_europe_asia">歐洲和亞洲</string>
-	<string name="driving_region_uk">英國、印度、澳大利亞和其他</string>
+	<string name="driving_region_uk">英國、印度、澳洲和其他</string>
 	<string name="driving_region">駕駛區域</string>
 	</resources>
