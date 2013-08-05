@@ -8,7 +8,7 @@
 	<ImageView android:id="@+id/folder_icon" android:layout_width="37dip"
 		android:paddingLeft="8dp" android:paddingRight="8dp"
 		android:paddingTop="2dp" android:layout_height="fill_parent" />
-	<TextView android:id="@+id/folder_label" android:layout_width="wrap_content" android:layout_weight="1"
+	<TextView android:id="@+id/folder_label" android:layout_width="0dp" android:layout_weight="1"
 		android:layout_height="wrap_content" style="@style/ListText"/>
 	
 	<ImageView android:id="@+id/folder_edit_icon"
