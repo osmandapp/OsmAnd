@@ -66,7 +66,7 @@
     <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
     <string name="intermediate_items_sort_return">Intermediate waypoints resorted to optimize their order on the way to the destination.</string>
     <string name="intermediate_items_sort_by_distance">Sort (door-to-door)</string>
-    <string name="local_osm_changes_backup_successful">OSM change file succesfully generated %1$s</string>
+    <string name="local_osm_changes_backup_successful">OSM change file successfully generated %1$s</string>
     <string name="local_osm_changes_backup_failed">Backup OSM changes failed</string>
     <string name="local_osm_changes_backup">Backup as OSM change</string>
     <string name="delete_point">Delete Point</string>
@@ -76,7 +76,7 @@
     <string name="plugin_distance_point_ele">elevation</string>
     <string name="plugin_distance_point">Point</string>
     <string name="gpx_file_name">GPX file name</string>
-    <string name="gpx_saved_sucessfully">GPX file succesfully saved to {0}</string>
+    <string name="gpx_saved_sucessfully">GPX file successfully saved to {0}</string>
     <string name="osmand_distance_planning_plugin_description">Create paths (or use / modify existing GPX files) to measure the distance between points. Save as GPX, can be used to plan GPX routes.</string>
     <string name="osmand_distance_planning_plugin_name">Distance calculator &amp; Planning Tool</string>
     <string name="use_distance_measurement_help">* Tap to mark a point.\n 
@@ -197,7 +197,7 @@
     <string name="av_use_external_camera">Use camera app</string>
     <string name="av_settings_descr">Configure audio and video settings</string>
     <string name="av_settings">Audio/video settings </string>
-    <string name="recording_error">Error ocurred while recording </string>
+    <string name="recording_error">Error occurred while recording </string>
     <string name="recording_camera_not_available">Camera is not available</string>
     <string name="recording_is_recorded">Audio/video is being recorded. To stop it press the AV widget.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
@@ -1198,8 +1198,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once</string>
 	<string name="rendering_exception">Error occurred while rendering selected area</string>
 	<string name="show_point_options">Use location …</string>
-	<string name="renderer_load_sucess">Renderer sucessfully loaded</string>
-	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
+	<string name="renderer_load_sucess">Renderer successfully loaded</string>
+	<string name="renderer_load_exception">Exception occurred: renderer was not loaded</string>
 	<string name="renderers">Vector renderer</string>
 	<string name="renderers_descr">Choose rendering appearance</string>
 	<string name="poi_context_menu_website">Show POI website</string>
@@ -1232,9 +1232,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="rotate_map_to_bearing_descr">Select map screen alignment</string>
 	<string name="rotate_map_to_bearing">Map orientation</string>
 	<string name="show_route">Route details</string>
-	<string name="fav_imported_sucessfully">Favorites succesfully imported</string>
+	<string name="fav_imported_sucessfully">Favorites successfully imported</string>
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
-	<string name="fav_saved_sucessfully">Favorites succesfully saved to {0}</string>
+	<string name="fav_saved_sucessfully">Favorites successfully saved to {0}</string>
 	<string name="no_fav_to_save">No favorite points to save</string>
 	<string name="import_fav">Import</string>
 	<string name="export_fav">Export</string>
@@ -1355,7 +1355,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
-	<string name="error_io_error">I/O error occured</string>
+	<string name="error_io_error">I/O error occurred</string>
 	<string name="downloading_file_new">Downloading …</string>
 	<string name="downloading">Downloading&#8230;</string>
 	<string name="downloading_list_indexes">Downloading list of available regions&#8230;</string>
@@ -1495,10 +1495,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="favourites_context_menu_edit">Edit favorite</string>
 	<string name="favourites_context_menu_delete">Delete favorite</string>
 	<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
-	<string name="favourites_remove_dialog_success">Favorite point {0} was succesfully deleted.</string>
+	<string name="favourites_remove_dialog_success">Favorite point {0} was successfully deleted.</string>
 	<string name="osb_add_dialog_title">Enter bug text</string>
 	<string name="osb_add_dialog_success">Bug successfully created</string>
-	<string name="osb_add_dialog_error">Exception occured: bug was not created</string>
+	<string name="osb_add_dialog_error">Exception occurred: bug was not created</string>
 	<string name="osb_author_dialog_password">OSM password (optional)</string>
 	<string name="osb_comment_menu_item">Add comment</string>
 	<string name="osb_comment_dialog_message">Message</string>
@@ -1506,12 +1506,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osb_comment_dialog_title">Adding comment to bug</string>
 	<string name="osb_comment_dialog_add_button">Add comment</string>
 	<string name="osb_comment_dialog_success">Comment was successfully added</string>
-	<string name="osb_comment_dialog_error">Exception occured: comment was not added</string>
+	<string name="osb_comment_dialog_error">Exception occurred: comment was not added</string>
 	<string name="osb_close_menu_item">Close bug</string>
 	<string name="osb_close_dialog_title">Closing bug</string>
 	<string name="osb_close_dialog_close_button">Close bug</string>
 	<string name="osb_close_dialog_success">Bug was successfully closed</string>
-	<string name="osb_close_dialog_error">Exception occured: bug was not closed</string>
+	<string name="osb_close_dialog_error">Exception occurred: bug was not closed</string>
 	<string name="poi_edit_title">Edit POI</string>
 	<string name="poi_create_title">Create POI</string>
 	<string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
@@ -1522,8 +1522,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_action_add">add</string>
 	<string name="poi_action_change">change</string>
 	<string name="poi_action_succeded_template">Action {0} completed successfully.</string>
-	<string name="poi_error_unexpected_template">Unexpected error occured while performing action {0}.</string>
-	<string name="poi_error_io_error_template">I/O error occured while performing action {0}.</string>
+	<string name="poi_error_unexpected_template">Unexpected error occurred while performing action {0}.</string>
+	<string name="poi_error_io_error_template">I/O error occurred while performing action {0}.</string>
 	<string name="poi_error_info_not_loaded">Info about node was not loaded</string>
 	<string name="poi_dialog_name">Name</string>
 	<string name="poi_dialog_opening_hours">Open</string>
