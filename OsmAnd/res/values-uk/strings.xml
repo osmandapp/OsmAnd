@@ -234,7 +234,7 @@
   <string name="download_files_not_enough_space">Не вистачає місця на диску для завантаження %1$s MB (вільно: %2$s).</string>
   <string name="download_files_question_space">Вільне місце {2} MB! Завантажити {0} файл(ів) ({1} MB)?</string>
   <string name="tip_select_destination_point">Вибір точки прибуття</string>
-  <string name="tip_select_destination_point_t">\tВи можете обрати пункт призначення на мапі, в результатах пошуку або точку із закладок через пункт \"Йти до\" в контекстному меню.
+  <string name="tip_select_destination_point_t">\tВи можете обрати пункт призначення на мапі, в результатах пошуку або точку із закладок через пункт \"Маршрути\" в контекстному меню.
 		\n\tТочка призначення показується на мапі, як помаранчеве коло, напрямок до неї — помаранчевою стрілкою. Також, в правому верхньому куті показується відстань по прямій лінії до неї.
 	</string>
   <string name="tip_recent_changes_0_6_9_t">Зміни в 0.6.9:
@@ -267,10 +267,18 @@
   <string name="layer_poi_label">POI мітки</string>
   <string name="animate_route_off">Закінчити моделювання</string>
   <string name="animate_route">Почати моделювання</string>
-  <string name="tip_recent_changes_0_6_8_t">"Changes in 0.6.8 : \n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options. \n\t- Implement POI search by name in big areas (countries) \n\t- Fix flickering map screen for tablets (Issue 641) \n\t- Auto-center map view option (Issue 356) \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\' \n\t- POI data included in .obf file (all download indexes after 01/10/11) \n\t- Voice prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "
+  <string name="tip_recent_changes_0_6_8_t">Зміни в 0.6.8:
+		\n\t- Повністю перероблений пошук (POI, Адреси)! Адресний пошук тепер значно швидшій та точний. Створено один загальний інтерфейс Пошуку з різними параметрами.
+		\n\t- Реалізовано пошук POI за назвою для великих ділянок (країн)  
+		\n\t- Виправлено мерехтіння екрану на планшетах (Issue 641)
+		\n\t- Параметр авто-центрування мапи (Issue 356)
+		\n\t- GPX навігацію переміщено в \'Маршрут\', та \'Зберегти маршрут\' до \'Про маршрут\'
+		\n\t- Дані про POI включено до файлу .obf (для всіх мап після 01/10/11) 
+		\n\t- Виправлення помилок в Голосових підказках (GPS-координати, пропуск першої підказки) 
+		\n\t- Деякі покращення
 	</string>
   <string name="file_can_not_be_renamed">Файл не можна перейменувати.</string>
-  <string name="file_with_name_already_exists">Файл з таким ім\'ям вже існує.</string>
+  <string name="file_with_name_already_exists">Файл з таким ім’ям вже існує.</string>
   <string name="gpx_navigation">GPX маршрут</string>
   <string name="poi_query_by_name_matches_categories">Деякі категорії POI відповідають запиту, можете використовувати їх для створення фільтра:</string>
   <string name="data_to_search_poi_not_available">Локальні дані для пошука POI за іменем не знайдено.</string>
@@ -412,7 +420,7 @@
   <string name="tip_app_mode">Профіль</string>
   
   <string name="tip_navigation">Навігація</string>
-  <string name="tip_navigation_t">\tЩоб розпочати навігацію виберіть пункт призначення. Після цього натисніть \"Меню\" → \"Навігація\" на мапі і виберіть тип навігації.</string>
+  <string name="tip_navigation_t">\tЩоб розпочати навігацію виберіть пункт призначення. Після цього натисніть \"Меню\" → \"Маршрут\" на мапі і виберіть тип навігації.</string>
   <string name="tip_search">Пошук</string>
   <string name="tip_map_context_menu">Контекстне меню мапи</string>
   <string name="tip_map_context_menu_t">\tКонтекстне меню мапи доступне, якщо натиснути та утримувати мапу чи натиснути джойстик.
@@ -602,7 +610,7 @@
   <string name="search_poi_filter">Фільтр</string>
   <string name="menu_mute_off">Звук увімкнено</string>
   <string name="menu_mute_on">Звук вимкнено</string>
-  <string name="voice_provider_descr">Виберіть голос для навігації</string>
+  <string name="voice_provider_descr">Виберіть голос для навігації (коди мов за ISO 639-1)</string>
   <string name="voice_provider">Голосові дані</string>
   <string name="voice_data_initializing">Ініціалізуються голосові дані…</string>
   <string name="voice_data_not_supported">Голосові дані не підтримуються поточною версією програми</string>
@@ -691,10 +699,10 @@
   <string name="fav_points_not_exist">Не існує збережених точок</string>
   <string name="update_existing">Замінити</string>
   <string name="only_show">Тільки показати</string>
-  <string name="follow">Йти до</string>
+  <string name="follow">Маршрут</string>
   <string name="recalculate_route_to_your_location">Режим пересування:</string>
   <string name="mark_final_location_first">Вкажіть пункт призначення</string>
-  <string name="get_directions">Напрямки</string>
+  <string name="get_directions">Маршрут</string>
   <string name="show_gps_status">Показати GPS статус</string>
   <string name="opening_hours">Робочі години</string>
   <string name="opening_changeset">Відкриття пакету правок…</string>
@@ -1464,7 +1472,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="access_mark_final_location_first">Допоміжні можливості: будь ласка, спочатку оберіть пункт призначення</string> 
     <string name="use_magnetic_sensor_descr">Використовувати магнітометр для визначення сторін світу замість, датчику орієнтації</string>
     <string name="tip_search_t">\tВи можете шукати об’єкти роздивляючись мапу, використовуючи пошук за адресою, координатами, чи пошук POI, або обираючи із збережених точок.
-		\n\tВибір пункту «Пошук» в меню, дозволить перейти до завдання того, що ви бажаєте відшукати. У допомогу до всіх підказок, контекстне меню пропонує два варіанти: \'Встановити як пункт призначення\' чи \'Показати на мапі\'
+		\n\tВибір пункту «Пошук» в меню, дозволить перейти до завдання того, що ви бажаєте відшукати. У допомогу до всіх підказок, контекстне меню пропонує два варіанти: \'Маршрут\' чи \'Показати на мапі\'
 	</string>
 	<string name="destination_point">Пункт призначення %1$s</string>
     <string name="local_index_gpx_timespan">\nПроміжок часу: %1$d:%2$02d:%3$02d</string>
@@ -1491,7 +1499,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="clear_intermediate_points">Очистити проміжні точки</string>
     <string name="new_directions_point_dialog">Ви вже задали проміжні точки.</string>
     <string name="context_menu_item_directions_to">Напрямки до</string>
-    <string name="context_menu_item_directions_from">Напрямки від</string>
+    <string name="context_menu_item_directions_from">Маршрут від</string>
     <string name="route_to">До:</string>
     <string name="announce_gpx_waypoints">Попереджати про маршрутні точки GPX</string>
     <string name="speak_title">Попереджати…</string>
@@ -1525,4 +1533,31 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="osb_author_dialog_password">Пароль OSM (необов’язково)</string>
 	<string name="osmodroid_mode_on">Зупинити OsMoDroid</string>    
     <string name="osmodroid_mode_off">Запустити OsMoDroid</string>
-    </resources>
+    <string name="driving_region_descr">Виберіть регіон: США, Європа, Англія, Азія та інші</string>
+	<string name="driving_region">Регіон</string>
+	<string name="driving_region_japan">Японія</string>
+	<string name="driving_region_us">США</string>
+	<string name="driving_region_canada">Канада</string>
+	<string name="driving_region_europe_asia">Європа та Азія</string>
+	<string name="driving_region_uk">Англія, Індія, Австралія та інші</string>
+	<string name="tip_recent_changes_0_6_7_t">Зміни в for 0.6.7:
+		\n\t- Менеджер локальних даних (завантаження. вилучення, активація/деактивація даних безпосередньо в OsmAnd)
+		\n\t- Закладки та групи (категоризація, вилучення, керування закладками)
+		\n\t- Огляд GPX в застосунку (перегляд інформації з треку, відстань, середня швидкість, висота, т.д.)
+		\n\t- Навігація GPX (більше параметрів, продовження навгації після збою, підкримка руху по колу)
+		\n\t- Можливість збереження маршруту як треку GPX для локального використання
+		\n\t- Покращено GPX-моніторинг  (відкидання неточного положення та збереження точності/висоти/швидкості)
+		\n\t- Завантаження GPX для використання спільнотою OSM (http://download.osmand.net/gpx/)
+		\n\t- Покращення векторного рендерингу
+		\n\t- Покращення рушія TTS (повідомлення точної відстані, також можна і в милях)
+		\n\t- Виправлення помилок
+	</string>
+	<string name="tip_recent_changes_0_6_6_t">Зміни в версії 0.6.6: 
+		\n\t- Рушій Text To Speech для голосової навігації
+		\n\t- Рендер створює більш детальну мапу
+		\n\t- Базова мапа всього світу постачається разом із застосунком
+		\n\t- Підлаштування оффлайнової навігації (ще експериментально)
+		\n\t- Параметри для GPX навігації
+		\n\t- Оновлення інтерфейсу та велика кількість виправлених помилок
+	</string>
+	</resources>
