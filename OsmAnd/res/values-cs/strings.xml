@@ -1293,9 +1293,14 @@
     <string name="context_menu_item_directions_from">Navigovat odsud</string>
     <string name="local_index_gpx_timemoving">\nČas pohybu: %1$d:%2$02d:%3$02d</string>
 	<string name="osmodroid_mode_on">Zastavit OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Sppustit OsMoDroid</string>
+    <string name="osmodroid_mode_off">Spustit OsMoDroid</string>
     <string name="announce_gpx_waypoints">Hlásit GPX body</string>
     <string name="speak_title">Hlásit…</string>
 	<string name="speak_descr">Konfigurace hlášení názvů ulic, dopravních upozornění, radarů, rychlostních omezení</string>
 	<string name="speak_street_names">Hlásit názvy ulic (TTS)</string>
-    </resources>
+    <string name="driving_region_japan">Japonsko</string>
+	<string name="driving_region_us">Spojené státy</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="driving_region_europe_asia">Evropa a Asie</string>
+	<string name="driving_region_uk">Británie, Indie, Austrálie a ostatní</string>
+	</resources>
