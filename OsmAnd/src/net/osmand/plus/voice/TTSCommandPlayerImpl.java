@@ -31,7 +31,7 @@ import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 
 public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	public final static String PEBBLE_ALERT = "PEBBLE_ALERT";
-	private final class IntentStarter implements
+	private static final class IntentStarter implements
 			DialogInterface.OnClickListener {
 		private final Context ctx;
 		private final String intentAction;
