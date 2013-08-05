@@ -404,7 +404,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 							name = "";
 						}
 						// old way to store the category, in name.
-						if ("".equals(categoryName.trim()) && (c = p.name.lastIndexOf('_')) != -1) {
+						if (categoryName.trim() != null && categoryName.trim().isEmpty() && (c = p.name.lastIndexOf('_')) != -1) {
 							categoryName = p.name.substring(c + 1);
 							name = p.name.substring(0, c);
 						}

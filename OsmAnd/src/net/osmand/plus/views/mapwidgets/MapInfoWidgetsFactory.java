@@ -334,7 +334,7 @@ public class MapInfoWidgetsFactory {
 			}
 			if (!text.equals(getText().toString())) {
 				TextPaint pp = new TextPaint(getPaint());
-				if (!text.equals("")) {
+				if (!text.isEmpty()) {
 					pp.setTextSize(20 * scaleCoefficient);
 					float ts = pp.measureText(text);
 					int wth = getWidth();

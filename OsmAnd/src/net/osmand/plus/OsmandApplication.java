@@ -280,7 +280,7 @@ public class OsmandApplication extends Application implements ClientContext {
 	public void checkPrefferedLocale() {
 		Configuration config = getBaseContext().getResources().getConfiguration();
 		String lang = osmandSettings.PREFERRED_LOCALE.get();
-		if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
+		if (lang != null && !lang.isEmpty() && !config.locale.getLanguage().equals(lang)) {
 			prefferedLocale = new Locale(lang);
 			Locale.setDefault(prefferedLocale);
 			config.locale = prefferedLocale;
