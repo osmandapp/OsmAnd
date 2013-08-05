@@ -34,6 +34,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
@@ -51,6 +52,9 @@ import android.widget.Toast;
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
 	protected final static int LOWEST_ZOOM_TO_ROTATE = 10;
+	private static boolean MEASURE_FPS = true;
+	private int fpsMeasureCount = 0;
+	private int fpsMeasureMs = 0;
 
 	protected static final int emptyTileDivisor = 16;
 	
@@ -489,7 +493,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	private void refreshMapInternal(boolean updateVectorRendering) {
 		handler.removeMessages(1);
-		
+		long ms = SystemClock.elapsedRealtime();
 		// long time = System.currentTimeMillis();
 
 		boolean useInternet = getSettings().USE_INTERNET_TO_DOWNLOAD_TILES.get();
@@ -527,6 +531,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				} finally {
 					holder.unlockCanvasAndPost(canvas);
 				}
+			}
+		}
+		if(MEASURE_FPS) {
+			fpsMeasureMs += SystemClock.elapsedRealtime() - ms;
+			fpsMeasureCount ++;
+			if(fpsMeasureCount > 4) {
+				log.debug("FPS speed " + (1000*fpsMeasureCount/fpsMeasureMs));
+				fpsMeasureCount = 0;
+				fpsMeasureMs = 0;
 			}
 		}
 	}
