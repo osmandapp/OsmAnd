@@ -61,12 +61,12 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 					if(!mv.isMeasureFPS()) {
 						mv.setMeasureFPS(true);
 					}
-					setText(Float.toString(mv.getFPS()), "FPS");
+					setText(Integer.toString((int) mv.getFPS()), "FPS");
 					return true;
 				}
 			};
 			mapInfoLayer.getMapInfoControls().registerSideWidget(fps, 0,
-					R.string.map_widget_fps_info, "fps", false, EnumSet.allOf(ApplicationMode.class),
+					R.string.map_widget_fps_info, "fps", false, EnumSet.noneOf(ApplicationMode.class),
 					EnumSet.noneOf(ApplicationMode.class), 30);
 			mapInfoLayer.recreateControls();
 		}
