@@ -354,7 +354,7 @@ public class MapWidgetRegistry {
 			if(preference != null) {
 				Object value = preference.getModeValue(mode);
 				if(value instanceof Boolean) {
-					return ((Boolean) value).booleanValue();
+					return (Boolean) value;
 				}
 				return true;
 			}
