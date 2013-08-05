@@ -5,8 +5,9 @@ $(info OsmAnd root: $(ROOT_PATH))
 include $(CLEAR_VARS)
 
 ifdef BUILD_ONLY_OLD_LIB
-    OSMAND_MAKEFILES := $(call all-subdir-makefiles) $(call all-makefiles-under,$(ROOT_PATH)/core/targets/android)
-    $(info OsmAnd makefiles: $(OSMAND_MAKEFILES))
+OSMAND_MAKEFILES := $(call all-makefiles-under,$(LOCAL_PATH)/) \
+    $(call all-makefiles-under,$(ROOT_PATH)/core/targets/android)
+$(info OsmAnd makefiles: $(OSMAND_MAKEFILES))
 else 
 OSMAND_MAKEFILES := \
     $(call all-makefiles-under,$(ROOT_PATH)/core/externals) \
