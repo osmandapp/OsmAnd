@@ -52,7 +52,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	protected final static int LOWEST_ZOOM_TO_ROTATE = 10;
 
-	protected final int emptyTileDivisor = 16;
+	protected static final int emptyTileDivisor = 16;
 	
 	public static final float ZOOM_DELTA = 3;
 	public static final float ZOOM_DELTA_1 = 1/3f;

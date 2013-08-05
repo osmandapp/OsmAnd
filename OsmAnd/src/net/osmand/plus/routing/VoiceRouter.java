@@ -14,13 +14,13 @@ import net.osmand.util.Algorithms;
 
 
 public class VoiceRouter {
-	private final int STATUS_UTWP_TOLD = -1;
-	private final int STATUS_UNKNOWN = 0;
-	private final int STATUS_LONG_PREPARE = 1;
-	private final int STATUS_PREPARE = 2;
-	private final int STATUS_TURN_IN = 3;
-	private final int STATUS_TURN = 4;
-	private final int STATUS_TOLD = 5;
+	private static final int STATUS_UTWP_TOLD = -1;
+	private static final int STATUS_UNKNOWN = 0;
+	private static final int STATUS_LONG_PREPARE = 1;
+	private static final int STATUS_PREPARE = 2;
+	private static final int STATUS_TURN_IN = 3;
+	private static final int STATUS_TURN = 4;
+	private static final int STATUS_TOLD = 5;
 	
 	private final RoutingHelper router;
 	private boolean mute = false;

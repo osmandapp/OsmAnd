@@ -18,7 +18,7 @@ import android.widget.Toast;
 public class MapTileLayer extends BaseMapLayer {
 
 	
-	protected final int emptyTileDivisor = 16;
+	protected static final int emptyTileDivisor = 16;
 	public static final int OVERZOOM_IN = 2;
 	
 	private final boolean mainMap;
