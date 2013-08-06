@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
@@ -1356,4 +1356,12 @@
 	<string name="speak_title">Ansagen …</string>
 	<string name="speak_descr">Einstellungen für Ansagen zu Straßennamen, Verkehrswarnungen, Blitzern oder Höchstgeschwindigkeit</string>
 	<string name="speak_street_names">Straßennamen ansagen (TTS)</string>
+    <string name="map_widget_fps_info">FPS-Info</string>
+	<string name="driving_region_descr">Region zum Fahren wählen: USA, Europa, UK, Asien etc.</string>
+	<string name="driving_region_japan">Japan</string>
+	<string name="driving_region_us">USA</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="driving_region_europe_asia">Europa und Asien</string>
+	<string name="driving_region_uk">UK, Indien, Australien u.a.</string>
+	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
     </resources>
