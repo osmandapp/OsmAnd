@@ -837,7 +837,7 @@ public class RouteCalculationResult {
 			while(aInfo < alarmInfo.size()) {
 				AlarmInfo inf = alarmInfo.get(aInfo);
 				int d = dist - listDistance[inf.locationIndex];
-				if(d > 700){
+				if(d > 250){
 					break;
 				}
 				float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
