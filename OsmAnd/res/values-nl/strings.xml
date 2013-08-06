@@ -176,7 +176,7 @@
   <string name="osmand_service_descr">Dit is om OsmAnd te gebruiken als het scherm uit is</string>
   <string name="tip_rotation_switching">kaartrotatie</string>
   
-  <string name="binary_map_download_success">Download succesvol.\n\t\n\tOm te gebruiken, activeer \'Menu\' -&gt; \'Definieer beeld\' -&gt; \'Kaarbron…\' -&gt; \'Offline vectorkaarten\'.</string>
+  <string name="binary_map_download_success">Download succesvol.\n\t\n\tOm te gebruiken, activeer \'Menu\' -&gt; \'Kaartlagen\' -&gt; \'Kaartbron…\' -&gt; \'Offline vectorkaarten\'.</string>
   <string name="tip_day_night_mode">Dag/Nacht modus</string>
   
   <string name="tip_osm_improve">Verbeter openstreetmap gegevens</string>
@@ -326,7 +326,7 @@
   <string name="gpx_option_reverse_route">Keer richting van GPX-route om</string>
   <string name="gpx_option_destination_point">Gebruik huidige bestemming</string>
   <string name="gpx_option_from_start_point">Volg de gehele track</string>
-  <string name="switch_to_vector_map_to_see">Offline vectorkaart aanwezig voor deze locatie. \n\t\n\tOm deze te gebruiken, activeer \'Menu\' -&gt; \'Definieer beeld\' -&gt; \'Kaartbron…\' -&gt; \'Offline vectorkaarten\'.</string>
+  <string name="switch_to_vector_map_to_see">Offline vectorkaart aanwezig voor deze locatie. \n\t\n\tOm deze te gebruiken, activeer \'Menu\' -&gt; \'Kaartlagen\' -&gt; \'Kaartbron…\' -&gt; \'Offline vectorkaarten\'.</string>
   <string name="choose_audio_stream">Stembegeleiding audiokanaal</string>
   <string name="choose_audio_stream_descr">Kies kanaal voor de stembegeleiding (systeemafhankelijk)</string>
   <string name="voice_stream_voice_call">als telefoongesprek</string>
@@ -367,7 +367,7 @@
   <string name="tip_favorites_t">\tVeelgebruikte punten kunnen worden bewaard als favorieten.
 		\n\tOm een punt als favoriet te bewaren, ga naar het kaartcontextmenu, kies de optie \'Voeg toe aan favorieten\' en geef het dan een naam. Daarna is het toegankelijk via \'Hoofdmenu\' -&gt; \'Favorieten\'.
 		\n\tMet een lange druk op een favoriet in het menu \'Favorieten\' kan je deze als bestemming kiezen, bewerken of verwijderen.
-		\n\tJe kan alle favorieten tegelijk op de kaart weergeven door de laag \'Favorieten\' aan te zetten op het kaartscherm (\'Menu\' -&gt; \'Definieer beeld\'.
+		\n\tJe kan alle favorieten tegelijk op de kaart weergeven door de laag \'Favorieten\' aan te zetten op het kaartscherm (\'Menu\' -&gt; \'Kaartlagen\'.
 	</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> kaart classificatie met foto\'s"</string>
   <string name="error_doing_search">Fout bij offline zoeken</string>
@@ -550,7 +550,7 @@
   <string name="layer_transport">OV-haltes</string>
   <string name="layer_poi">Interessepunt…</string>
   <string name="layer_map">Kaartbron…</string>
-  <string name="menu_layers">Definieer beeld</string>
+  <string name="menu_layers">Kaartlagen</string>
   <string name="context_menu_item_search_poi">Zoek interessepunt</string>
   
   <string name="use_trackball_descr">Gebruik trackball om de kaart te verschuiven</string>
@@ -1026,7 +1026,7 @@
 \n\t\'Nacht\' - gebruik altijd de nacht modus↵
 \n\t\'Lichtsensor\' - de kaartweergave wordt bepaald door de lichtsensor van he apparaat (indien aanwezig) "
 	</string>
-<string name="tip_map_switch_t_v2">"\tDe kaartbron en de kaartlagen kunnen vanuit het kaartscherm worden gewijzigd via \'Menu\' -&gt; \'Definieer beeld\'.↵
+<string name="tip_map_switch_t_v2">"\tDe kaartbron en de kaartlagen kunnen vanuit het kaartscherm worden gewijzigd via \'Menu\' -&gt; \'Kaartlagen\'.↵
 \n\tOnder \'Kaartbron…\' kan je kiezen uit gedownloade vectorkaarten, online kaartsegmenten (wan een website, activeer hiervoor de plugin \'Online kaarten\'), of kaarten die je gemaakt hebt met b.v. OsmAndMapCreator op een PC.↵
 \n\tOsmAnd ondersteunt ook zelfgemaakte kaartbronnen. "
 	</string>
