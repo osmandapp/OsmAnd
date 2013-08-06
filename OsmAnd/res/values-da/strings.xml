@@ -1572,6 +1572,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa &amp; Asien</string>
 	<string name="driving_region_uk">Storbritannien, Indien, Australien m.fl.</string>
-	<string name="driving_region">Kørselregion</string>
-	<string name="driving_region_descr">Vælg kørselregion: USA, Europa, England, Asien m.fl.</string>
+	<string name="driving_region">Område</string>
+	<string name="driving_region_descr">Vælg område: USA, Europa, England, Asien m.fl.</string>
+	<string name="map_widget_fps_info">FPS-info</string>
 	</resources>
