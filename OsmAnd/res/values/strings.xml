@@ -864,7 +864,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
 		\n\t\'To compass\' - Map will continuously be aligned with device compass reading
 	</string>
-	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Define View\' -> \'Map source&#8230;\' -> \'Offline vector maps\'.</string>
+	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Map layers\' -> \'Map source&#8230;\' -> \'Offline vector maps\'.</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
 	<string name="tip_day_night_mode_t_v2">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
 		\n\tNight colors are safer for night driving.
@@ -1037,7 +1037,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="gpx_option_reverse_route">Reverse GPX direction</string>
 	<string name="gpx_option_destination_point">Use current destination</string>
 	<string name="gpx_option_from_start_point">Pass along entire track</string>
-	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -> \'Define view\' -> \'Map Source&#8230;\' -> \'Offline vector maps\'.</string>
+	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -> \'Map layers\' -> \'Map Source&#8230;\' -> \'Offline vector maps\'.</string>
 	<string name="choose_audio_stream">Voice guidance output</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
 	<string name="voice_stream_voice_call">Voice call audio</string>
@@ -1071,7 +1071,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_favorites_t">\tFrequently used points can be saved as Favorites.
 		\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Screen\' -> \'Favorites\'.
 		\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it.
-		\n\tTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' under \'Menu\' -> \'Define view\'.
+		\n\tTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' under \'Menu\' -> \'Map layers\'.
 	</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="error_doing_search">Error occurred in offline search</string>
@@ -1082,7 +1082,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="preferred_locale">Display language</string>
 	<string name="incomplete_locale">incomplete</string>
 	<string name="tip_map_switch">Map Source</string>
-	<string name="tip_map_switch_t_v2">\tThe map source and layers displayed are changed via \'Menu\' -> \'Define view\' in map view.
+	<string name="tip_map_switch_t_v2">\tThe map source and layers displayed are changed via \'Menu\' -> \'Map layers\' in map view.
 		\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online and tile maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
 		\n\tOsmAnd also supports custom sources.
 	</string>
@@ -1252,7 +1252,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="layer_transport">Transportation stops</string>
 	<string name="layer_poi">POI&#8230;</string>
 	<string name="layer_map">Map source&#8230;</string>
-	<string name="menu_layers">Define view</string>
+	<string name="menu_layers">Map layers</string>
 	<string name="context_menu_item_search_poi">Search POI</string>
 	<string name="use_trackball_descr">Use trackball to move map</string>
 	<string name="use_trackball">Use trackball</string>
