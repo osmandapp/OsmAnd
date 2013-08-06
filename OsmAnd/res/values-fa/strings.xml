@@ -1524,4 +1524,11 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="announce_gpx_waypoints">اعلام نقاط بین راهی GPX</string>
     <string name="osmodroid_mode_on">توقف OsMoDroid</string>    
     <string name="osmodroid_mode_off">شروع OsMoDroid</string>
-    </resources>
+    <string name="map_widget_fps_info">اطلاعات FPS</string>
+	<string name="driving_region_descr">انتخاب منطقه رانندگی:آمریکا،اروپا،انگلستان،آسیا و سایر مناطق</string>
+	<string name="driving_region_japan">ژاپن</string>
+	<string name="driving_region_us">ایالات متحده آمریکا</string>
+	<string name="driving_region_canada">کانادا</string>
+	<string name="driving_region_europe_asia">اروپا و آسیا</string>
+	<string name="driving_region_uk">انگلستان،هند،استرالیا و سایر کشورها</string>
+	</resources>
