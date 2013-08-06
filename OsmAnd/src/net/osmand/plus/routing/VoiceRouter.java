@@ -424,7 +424,12 @@ public class VoiceRouter {
 		} else if(!Algorithms.isEmpty(i.getStreetName())) {
 			res = i.getStreetName();
 		}
-		return res.replace('-', ' ');
+		// replace characters which may produce unwanted tts sounds:
+		if(res != null) {
+			res = res.replace('-', ' ');
+			res = res.replace(':', ' ');
+		}
+		return res;
 	}
 
 	private void playPrepareTurn(RouteDirectionInfo next, int dist) {
