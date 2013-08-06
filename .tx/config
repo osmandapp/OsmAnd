@@ -1,0 +1,16 @@
+[main]
+host = https://www.transifex.com
+
+[osmand.stringsxml]
+file_filter = OsmAnd/res/values-<lang>/strings.xml
+source_file = OsmAnd/res/values/strings.xml
+source_lang = en
+trans.zh-CN = OsmAnd/res/values-zh-rCN/strings.xml
+trans.zh-TW = OsmAnd/res/values-zh-rTW/strings.xml
+
+[osmand.bidforfixxml]
+file_filter = OsmAnd/res/values-<lang>/bidforfix.xml
+source_file = OsmAnd/res/values/bidforfix.xml
+source_lang = en
+trans.zh-CN = OsmAnd/res/values-zh-rCN/bidforfix.xml
+trans.zh-TW = OsmAnd/res/values-zh-rTW/bidforfix.xml
