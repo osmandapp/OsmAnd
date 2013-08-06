@@ -619,9 +619,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 						mapInfoControls.changeVisibility(mi);
 					}
 					recreateControls();
+					listAdapter.notifyDataSetInvalidated();
 				} else if(position == 0) {
 					mapInfoControls.resetToDefault();
 					recreateControls();
+					listAdapter.notifyDataSetInvalidated();
 				}				
 			}
 		});
