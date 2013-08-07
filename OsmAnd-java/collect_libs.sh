@@ -14,6 +14,7 @@ function copyLibs {
 function compile {
 	"$ROOT_LOC/core/externals/configure.sh"
 	"$ROOT_LOC/core/externals/qtbase-desktop/build.sh"
+	"$ROOT_LOC/tools/map-viewer/externals/freeglut/configure.sh"
 	if [ ! -d "$ROOT_LOC/amd64-linux-gcc-release.makefile" ]; then 
 		"$ROOT_LOC/build/amd64-linux-gcc.sh" release
 	fi
