@@ -1537,5 +1537,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="driving_region_europe_asia">歐洲和亞洲</string>
 	<string name="driving_region_uk">英國、印度、澳洲和其他</string>
 	<string name="driving_region">駕駛區域</string>
-	<string name="map_widget_fps_info">FPS 資訊</string>
+	<string name="map_widget_fps_info">FPS 除錯資訊</string>
 	</resources>
