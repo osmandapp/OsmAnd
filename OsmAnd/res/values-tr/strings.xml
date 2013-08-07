@@ -105,66 +105,67 @@
 \n\t* Bisikletler için bir yol tipi daha eklendi (bisikletyolu)
 \n\t* Hata düzeltmeleri "</string>
 	<string name="local_indexes_cat_av">Ses/Video verisi</string>
-    <string name="stop_routing_confirm">Navigasyonu durdurmak istediğinize emin misiniz?</string>
-    <string name="clear_dest_confirm">Varış yerini iptal etmek istediğinize emin misiniz?</string>
-    <string name="precise_routing_mode">Hassas rota (alfa)</string>
+    <string name="stop_routing_confirm">Navigasyonu durdurmak istediğinizden emin misiniz?</string>
+    <string name="clear_dest_confirm">Varış noktasını temizlemek istediğinizden emin misiniz?</string>
+    <string name="precise_routing_mode">Hassas yönlendirme (alfa)</string>
     <string name="recording_context_menu_show">Göster</string>
-    <string name="recording_photo_description">%2$s fotoğrafdan %1$s cisi</string>
+    <string name="recording_photo_description">%2$s fotoğrafın %1$s cisi</string>
     <string name="av_def_action_picture">Fotoğraf çek</string>
     <string name="recording_context_menu_precord">Fotoğraf çek</string>
-    <string name="dropbox_plugin_description">Dropbox eklentisi, parçaları ve ses/video notlarını dropbox hesabınızla senkronize etmenize olanak verir.</string>
+    <string name="dropbox_plugin_description">Dropbox eklentisi, yol tariflerini ve ses/video notlarını dropbox hesabınızla eşitlemenize olanak verir.</string>
     <string name="dropbox_plugin_name">Dropbox eklentisi</string>
-    <string name="animate_routing_using_gpx">Varolan bir gpx dosyasını kullanmak istiyor musunuz?</string>
-    <string name="intermediate_points_change_order">Sırayı değiştir</string>
-    <string name="srtm_paid_version_msg">Kontur çizgileri eklentisi daha geliştirme aşamasında, desteklemek için lütfen Market mağazasından satın alın.</string>
-    <string name="srtm_paid_version_title">Kontur çizgileri eklentisi</string>
-    <string name="av_def_action_video">Video kaydet</string>
+    <string name="animate_routing_using_gpx">Varolan bir GPX dosyasını kullanmak istiyor musunuz?</string>
+    <string name="intermediate_points_change_order">Sıralamayı değiştir</string>
+    <string name="srtm_paid_version_msg">Programın geliştirilebilmesi için lütfen çevreleme çizgileri eklentisini Mağazadan almayı da düşünün.</string>
+    <string name="srtm_paid_version_title">Çevreleme çizgileri eklentisi</string>
+    <string name="av_def_action_video">Video çek</string>
     <string name="av_def_action_audio">Ses kaydet</string>
     <string name="av_widget_action_descr">Varsayılan eklenti eylemini seçin</string>
     <string name="av_widget_action">Varsayılan eklenti eylemi</string>
     <string name="av_video_format_descr">Video formatını seçin</string>
     <string name="av_video_format">Video formatı</string>
-    <string name="av_use_external_recorder_descr">Video için sistem kaydedicisini kullan</string>
-    <string name="av_use_external_recorder">Harici kaydediciyi kullan</string>
+    <string name="av_use_external_recorder_descr">Video için dahili kaydediciyi kullan</string>
+    <string name="av_use_external_recorder">Dahili kaydediciyi kullan</string>
     <string name="av_settings_descr">Ses ve video ayarlarını yapılandır</string>
-    <string name="av_settings">"Ses/Video ayarları "</string>
-    <string name="recording_error">"Kaydedilirken hata oluştu "</string>
-    <string name="recording_camera_not_available">Kamera kullanılabilir değil.</string>
-    <string name="dist_control_start">Başlat</string>
-    <string name="tip_recent_changes_1_2_t">1.2 deki değişiklikler:</string>
-    <string name="index_name_openmaps">OpenMaps AB</string>
+    <string name="av_settings">Ses/Video ayarları </string>
+    <string name="recording_error">Kaydedilirken hata oluştu </string>
+    <string name="recording_camera_not_available">Kamera kullanılabilir değil</string>
+    <string name="dist_control_start">başlat</string>
+    <string name="index_name_openmaps">AB Açık haritası</string>
     <string name="download_hillshade_item">Tepe gölgelendirme</string>
     <string name="tip_recent_changes_1_1_2_t">1.1.2 değişiklikler:
 \n\t* Ses / video eklentisi geliştirme (EXIF bilgileri ile fotoğrafları)
 \n\t* Kullanılabilirlik (suboptimal yönlendirme) sabit ve Kontur çizgileri eklenti Kontur hatları için
 \n\t* Tepe gölgelendirme paketleri eklentisi
-\n\t* Hata düzeltmeleri yeniden</string>
+\n\t* Hata düzeltmeleri yeniden
+    </string>
     <string name="precise_routing_mode_descr">Hatasız hassas rotaları hesaplamak için hassas yönlendirmeyi etkinleştirin. Bu mesafe çok sınırlıdır ve yerel kitaplık kullanmaz.</string>
-    <string name="av_use_external_camera_descr">Fotoğraf için sistem uygulamasını kullanın</string>
-    <string name="av_use_external_camera">Kamera uygulamasını kullanın</string>
+    <string name="av_use_external_camera_descr">Fotoğraf için dahili uygulamayı kullan</string>
+    <string name="av_use_external_camera">Kamera uygulamasını kullan</string>
     <string name="recording_is_recorded">Ses/Video kayıt ediliyor. Durdurmak için bu AV ikonuna basın.</string>
-    <string name="recording_playing">Belirtilen kayıt arasından bir ses çalınıyor. %1$s</string>
-    <string name="recording_open_external_player">Dış sürücü aç</string>
+    <string name="recording_playing">Belirtilen kayıttan bir ses çalınıyor.\n%1$s</string>
+    <string name="recording_open_external_player">Harici oynatıcı aç</string>
     <string name="recording_delete_confirm">Bu kaydı kaldırmak istiyor musunuz?</string>
-    <string name="tip_recent_changes_1_1_0_t">1.1.0 değişiklikler:
+    <string name="tip_recent_changes_1_1_0_t">1.1.0'daki değişiklikler:
 \n\t* Uzaklık hesap eklentisi
-\n\t* Ses / video notları eklentisi
-\n\t* Kontur çizgileri eklentisi
+\n\t* Ses/video notları eklentisi
+\n\t* Çevreleme çizgileri eklentisi
 \n\t* Hata düzeltmeleri
-\n\t* &amp;#39;Touring görünümü&amp;#39; haritası stil seçeneği başka harita bilgilerini, yeni yol stilleri, daha fazla kontrast ve Alp yürüyüş (SAC skala) GPS yükseklik okuması için seçeneği
-\n\t* EGM96 jeoit ofset düzeltme</string>
+\n\t* Daha fazla harita bilgileri, yeni yol stilleri, daha fazla zıtlık ve Alp doğa yürüyüşü (SAC skala) seçeneği olan tur görünümü harita stil seçeneği 
+\n\t* GPS yükseklik okuması için EGM96 denge düzeltmesi
+    </string>
     <string name="recording_unavailable">kullanılamaz</string>
-    <string name="recording_context_menu_arecord">Bir sesli not al</string>
+    <string name="recording_context_menu_arecord">Sesli bir not al</string>
     <string name="recording_context_menu_vrecord">Bir video notu al</string>
     <string name="layer_recordings">Kayıt katmanı</string>
-    <string name="recording_can_not_be_played">Kayıt çalınamaz</string>
+    <string name="recording_can_not_be_played">Kayıt oynatılamaz</string>
     <string name="recording_context_menu_delete">Kayıt sil</string>
-    <string name="recording_description">Kayıt %1$s %2$s of %3$</string>
+    <string name="recording_description">Kayıt %3$'nın %1$s %2$s</string>
     <string name="recording_default_name">kayıt</string>
     <string name="av_control_stop">durdur</string>
-    <string name="av_control_start">Başlat</string>
+    <string name="av_control_start">başlat</string>
     <string name="map_widget_av_notes">Ses/video notları</string>
-    <string name="osmand_srtm_short_description_80_chars">Çevrimdışı kontur hatları için OsmAnd eklentisi</string>
+    <string name="osmand_srtm_short_description_80_chars">Çevrimdışı çevreleme çizgileri için OsmAnd eklentisi</string>
     <string name="osmand_srtm_long_description_1000_chars">Bu eklenti OsmAnd adlı çevrimdışı haritalar gösterilebilir kontür çizgileri sağlar. Global veri (70 derece kuzey ve 70 derece güney arasındaki) SRTM (Mekik Radar Topografi Misyonu) ve ASTER (Gelişmiş Uzay Termal Yayılma ve Yansıma Radyometre), bir görüntüleme aracı onboard Terra, NASA&amp;#39;nın Earth Gözlem amiral gemisi uydudan ölçümleri esas Sistemi. ASTER NASA arasında bir kooperatif çabadır, Ekonomi, Ticaret ve Sanayi Odası (METI) ve Japonya Uzay Sistemleri (J-spacesystems) Japonya Bakanlığı.</string>
     
     
@@ -172,23 +173,23 @@
     
     <string name="map_widget_distancemeasurement">Mesafe ölçümü</string>
     <string name="audionotes_location_not_defined">Notu ile ilişkilendirmek Yer henüz tanımlanmamıştır. &amp;quot;Konumu kullan ...&amp;quot; Belirtilen yere not atamak</string>
-    <string name="monitoring_control_stop">Durdur</string>
-    <string name="map_widget_audionotes">Ses notları</string>
-    <string name="audionotes_plugin_description">Yolculuk sırasında ses / video notları alın</string>
-    <string name="audionotes_plugin_name">Ses / video notları</string>
-    <string name="index_srtm_parts">Bölümler</string>
-    <string name="index_srtm_ele">Kontur hatları</string>
-    <string name="srtm_plugin_description">Çevrimdışı kontür hatları ve gölge tepeleri (-&amp;gt; Veri Yönetimi -&amp;gt; Download -&amp;gt; seçin istenen harita türünü Ayarlar) indirmeden kolaylaştırır.</string>
-    <string name="srtm_plugin_name">Kontur çizgileri eklentisi</string>
+    <string name="monitoring_control_stop">durdur</string>
+    <string name="map_widget_audionotes">Sesli notlar</string>
+    <string name="audionotes_plugin_description">Yolculuk sırasında ses/video notları alın</string>
+    <string name="audionotes_plugin_name">Ses/video notları</string>
+    <string name="index_srtm_parts">bölümler</string>
+    <string name="index_srtm_ele">Çevreleme çizgileri</string>
+    <string name="srtm_plugin_description">Çevrimdışı çevreleme çizgileri indirmeyi ve tepe gölgelendirmeyi başlat (Ayarlar -&gt; Veri Yönetim -&gt; İndir -&gt; İstenilen harita türünü seç).</string>
+    <string name="srtm_plugin_name">Çevreleme çizgileri eklentisi</string>
     <string name="download_select_map_types">Diğer haritalar</string>
     <string name="download_roads_only_item">Sadece yollar</string>
-    <string name="download_srtm_maps">Kontur çizgileri</string>
+    <string name="download_srtm_maps">Çevreleme çizgileri</string>
     <string name="download_regular_maps">Düzenli haritalar</string>
-    <string name="download_roads_only_maps">Yollar-sadece haritalar</string>
+    <string name="download_roads_only_maps">"Sadece yol" haritaları</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Sınırları gizle</string>
-	<string name="rendering_attr_noAdminboundaries_description">Bölgesel sınırların göstergesine bastır (admin düzeyleri 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid eklenti eski bir sürümünü sahiptir ve güncelleştirilmesi gerekmektedir.</string>
+	<string name="rendering_attr_noAdminboundaries_description">Bölgesel sınırların gösterimini sakla (admin düzeyleri 5-9)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid eklentisi eski bir sürümünü sahip ve güncelleştirilmesi gerekmektedir.</string>
     <string name="osmodroid_plugin_description">OsMoDroid eklenti canlı izleme özellikleri için OsModroid uygulama için, uzatma OsmAnd edilir. Hizmet hakkında bilgi http://esya.ru mevcuttur.</string>
     <string name="osmodroid_plugin_name">OsMoDroid eklentisi</string>
 	<string name="tip_altitude_offset">Rakım Ekranı - Ofset Düzeltme</string>
@@ -249,7 +250,7 @@
 	<string name="map_widget_next_turn_small">Sonraki dönüş(küçük)</string>
 	<string name="map_widget_next_next_turn">İkinci sonraki dönüş</string>
 	<string name="map_widget_mini_route">Mini rota haritası</string>
-	<string name="download_hillshade_maps">Tepe gölgelendirme bindirmeleri</string>
+	<string name="download_hillshade_maps">Tepe gölgelendirme tabakaları</string>
     <string name="email">e-posta</string>
 <string name="osmand_parking_position_description_add_time">Araba park edilmişti:</string>
 	<string name="starting_point_too_far">Başlangıç noktası en yakın yoldan çok uzakta.</string>
@@ -363,7 +364,7 @@
 	<string name="fast_route_mode">En hızlı rota</string>
 	<string name="context_menu_item_download_map">Haritayı indir</string>
 	<string name="maps_could_not_be_downloaded">Bu harita indirilemedi</string>
-	<string name="phone">telefon</string>
+	<string name="phone">Telefon</string>
 	<string name="use_high_res_maps">Yüksek çözünürlüklü ekran</string>
 	<string name="download_files">İndir</string>
 	<string name="transport_search_none">hiçbiri</string>
@@ -552,7 +553,6 @@
 	<string name="online_map_settings_descr">Çevrimiçi veya önbelleğe alınmış çini harita kaynaklarını yapılandırın</string>
 	<string name="map_settings_descr">Harita ekranını yapılandırma</string>
 	<string name="osmand_rastermaps_plugin_description">Altlık olarak veya tamamlayıcı / altlık haritaları gibi online veya önbelleğe kiremit haritalar çeşitli yapılandırmak için ayarları göster. Bu haritalar ayrıca çevrimdışı ve OsmAnd klasöre kopyalanır hazırlanabilir.</string>
-	<string name="osmand_background_plugin_description">Periyodik GPS cihazı uyanma ile izleme ve uyku navigasyon (ekran kapalı) modunu etkinleştirmek için ayarları göster.</string>
 	<string name="osmand_accessibility_description">Özel erişilebilirlik özellikleri için ayarları göster.</string>
 	<string name="osmand_monitoring_description">GPX dosyaları için geziler kaydetmek için veya bir web hizmeti kullanarak parça yaşamayı kolaylaştıran ayarları göster.</string>
 	<string name="osmand_extra_settings_description">Gelişmiş harita yapılandırma (Artış harita detayları gibi) ve bazı aygıt özellikleri için ayarları görüntüleyin.</string>
@@ -728,16 +728,15 @@
 	<string name="layer_poi_label">POI etiketler</string>
 	<string name="save_current_track_widget">Kaydet</string>
 	<string name="map_widget_gps_info">GPS Bilgisi</string>
-    <string name="tip_recent_changes_1_1_4_t">1.1.4 deki değişiklikler</string>
     <string name="access_arrival_time">Varış Zamanı</string>
-    <string name="item_checked">İşaretli</string>
-    <string name="item_unchecked">İşaretsiz</string>
+    <string name="item_checked">işaretli</string>
+    <string name="item_unchecked">işaretsiz</string>
     <string name="map_view">Harita</string>
-    <string name="prefer_motorways">Otoyol Tercihi</string>
-	<string name="prefer_in_routing_title">Tercihler</string>
-	<string name="prefer_in_routing_descr">Otoyol Tercihi</string>
+    <string name="prefer_motorways">Otoyol tercih et</string>
+	<string name="prefer_in_routing_title">Tercih et…</string>
+	<string name="prefer_in_routing_descr">Otoyol tercih et</string>
     <string name="max_speed_none">Yok</string>
-    <string name="av_def_action_choose">İsteğe bağlı seçim</string>
+    <string name="av_def_action_choose">Talep üzerine seç</string>
     <string name="osmand_play_title_30_chars">OsmAnd Haritalar &amp; Nevigasyon</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Haritalar &amp; Navigasyon</string>
 	<string name="gpx_navigation">GPX Rotası</string>
@@ -787,7 +786,7 @@
 	<string name="trace_rendering_descr">Dönüştürme performansını göster</string>
 	<string name="installing_new_resources">Yeni veriler açılıyor…</string>
 	<string name="internet_connection_required_for_online_route">Çevrimiçi navigasyon seçildi ancak İnternet bağlantısı kullanılabilir değil.</string>
-	<string name="layer_hillshade">Tepe gölge katmanı</string>
+	<string name="layer_hillshade">Tepe gölgesi katmanı</string>
     <string name="map_widget_fps_info">FPS hata ayıklama bilgisi</string>
 	<string name="driving_region_descr">Sürüş Bölgesi Seçimi : Amerika, Avrupa, Birleşik Krallık, Asya ve Diğerleri</string>
 	<string name="driving_region">Sürüş Bölgesi</string>
@@ -827,4 +826,40 @@
     <string name="plugin_distance_point_ele">rakım</string>
     <string name="plugin_distance_point">Mevki</string>
     <string name="gpx_file_name">GPX dosya adı</string>
+    <string name="osmand_distance_planning_plugin_name">Mesafe hesaplayıcı ve Planlama aracı</string>
+    <string name="default_buttons_do_not_show_again">Tekrar gösterme</string>
+    <string name="distance_measurement_start_editing">Düzenlemeye başla</string>
+    <string name="distance_measurement_finish_editing">Düzenlemeyi bitir</string>
+    <string name="distance_measurement_finish_subtrack">Yeni bir alt yola başla</string>
+    <string name="distance_measurement_clear_route">Tüm mevkileri temizle</string>
+    <string name="distance_measurement_save_gpx">GPX olarak kaydet</string>
+    <string name="distance_measurement_load_gpx">Varolan GPX'i aç</string>
+    <string name="wait_current_task_finished">Mevcut görev bitene kadar bekleyin lütfen</string>
+    <string name="use_kalman_filter_compass_descr">Pusula sapmalarından korunmak için Kalman filtresi kullan</string>
+    <string name="use_kalman_filter_compass">Kalman filtresi kullan</string>
+    <string name="access_mark_final_location_first">Erişilebilirlik modu : lütfen önce varış noktası seçin</string> 
+    <string name="use_magnetic_sensor_descr">pusula değerini belirlemek için yönlendirme sensörü yerine manyetik sensörü kullan</string>
+    <string name="use_magnetic_sensor">Manyetik sensörü kullan</string>
+    <string name="other_location">Diğer</string>
+    <string name="install_paid">Tam sürüm</string>
+    <string name="cancel_route">Rotayı bırak</string>
+    <string name="cancel_navigation">Navigasyonu durdur</string>
+    <string name="clear_destination">Varış noktasını temizle</string>
+    <string name="download_using_mobile_internet">Şuanda Wifi ağına bağlı değil. Mevcut internet bağlantısı ile indirilsin mi?</string>
+    <string name="street_name">Sokak</string>
+	<string name="hno">Bina numarası</string>
+    <string name="website">İnternet sitesi</string>
+	<string name="monitoring_settings">Kayıt servisleri ve Uyku modu</string>
+    <string name="monitoring_settings_descr">Seyahatlerin nasıl kaydedileceğini ve uyku modunu yapılandırın</string>
+    <string name="osmand_monitoring_plugin_name">Kayıt servisleri ve Uyku modu</string>
+    <string name="contribution_activity">Yükleme versiyonu</string>
+    <string name="choose_osmand_theme_descr">Uygulama teması seç</string>
+    <string name="choose_osmand_theme">Uygulama teması</string>
+    <string name="accessibility_options">Erişilebilirlik ayarları</string>
+    <string name="select_address_activity">Adres seç</string>
+    <string name="favourites_list_activity">Favoriyi seç</string>
+    <string name="local_openstreetmap_act_title">OSM değişiklikleri</string>
+    <string name="default_buttons_other_actions">Diğer komutlar</string>
+    <string name="local_indexes_cat_srtm">Çevreleme çizgileri verisi</string>
+    <string name="announce_gpx_waypoints">GPX yol işaretlerini söyle</string>
     </resources>
