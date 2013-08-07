@@ -14,14 +14,14 @@ function copyLibs {
 function compile {
 	"$ROOT_LOC/core/externals/configure.sh"
 	"$ROOT_LOC/core/externals/qtbase-desktop/build.sh"
-	if [ ! -d "$ROOT_LOC/baked/amd64-linux-gcc-amd64-linux-gcc" ]; then 
-		"$ROOT_LOC/build/amd64-linux-gcc.sh"
+	if [ ! -d "$ROOT_LOC/amd64-linux-gcc-release.makefile" ]; then 
+		"$ROOT_LOC/build/amd64-linux-gcc.sh" release
 	fi
-	(cd "$ROOT_LOC/baked/amd64-linux-gcc-amd64-linux-gcc" && make -j`nproc`)
-	if [ ! -d "$ROOT_LOC/baked/i686-linux-gcc-i686-linux-gcc" ]; then 
-		"$ROOT_LOC/build/i686-linux-gcc.sh"
+	(cd "$ROOT_LOC/baked/amd64-linux-gcc-release.makefile" && make -j`nproc`)
+	if [ ! -d "$ROOT_LOC/baked/i686-linux-gcc-release.makefile" ]; then 
+		"$ROOT_LOC/build/i686-linux-gcc.sh" release
 	fi
-	(cd "$ROOT_LOC/baked/i686-linux-gcc-i686-linux-gcc" && make -j`nproc`)
+	(cd "$ROOT_LOC/baked/i686-linux-gcc-release.makefile" && make -j`nproc`)
 }
 
 compile
