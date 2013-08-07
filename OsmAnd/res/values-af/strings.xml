@@ -377,7 +377,7 @@
   <string name="gpx_option_reverse_route">Keer GPX rigting om</string>
   <string name="gpx_option_destination_point">Gebruik die huidige bestemming</string>
   <string name="gpx_option_from_start_point">Ry oor die hele spoor</string>
-  <string name="switch_to_vector_map_to_see">Aflyn vektor kaart is teenwoordig vir hierdie ligging.\n\t\n\tOm te gebruik aktiveer \'Kieslys\' -&gt; \'Definieer voorkoms\' -&gt; \'Kaartbron...\' -&gt; \'Aflyn vektor kaarte\'.</string>
+  <string name="switch_to_vector_map_to_see">Aflyn vektor kaart is teenwoordig vir hierdie ligging.\n\t\n\tOm te gebruik aktiveer \'Kieslys\' -&gt; \'Kaarte\' -&gt; \'Kaartbron...\' -&gt; \'Aflyn vektor kaarte\'.</string>
   <string name="choose_audio_stream">Stem begeleiding uitset</string>
   <string name="choose_audio_stream_descr">Kies kanaal om stem begeleiding oor te speel (stelsel afhanklik)</string>
   <string name="voice_stream_voice_call">Stem oproep klank</string>
@@ -407,7 +407,7 @@
   <string name="tip_location_sharing_t">\tJy kan kan die ligging van interessante plekke op jou reis met familie of vriende deel.\n\tOm \'n ligging te deel:\n\tGebruik \'Kaart inhoud kieslys\' -&gt; \'Deel ligging\' kieslys.\n\tKies dan \'n manier om jou ligging te deel. Die keuses is: E-pos, SMS (teks), of kopiëer net die koördinate na die knipbord.
 	</string>
   <string name="tip_favorites">Gunsteling punte</string>
-  <string name="tip_favorites_t">\tDikwels gebruikte punte kan geberg word as gunstelinge.\n\tOm `n punt te berg as `n gunsteling, gaan na die kaart inhoud kieslys, Keuse\'Voeg by gunstelinge\' en tik dan \'n naam in daarvoor. Nadat jy \'n gunsteling geberg het,  is dit beskikbaar in \'Hoof Kieslys\' -&gt; \'_gunstelinge\'.\n\tLank druk op \'n gunsteling, in die \'gunstelinge\' kieslys bied keuses om dit as bestemming te stel, te wysig of te skrap.\n\tOm al die gunsteling punte op die kaart te wys, skakel die \'gunstelinge\' vel aan in \'Kaart inhoud kieslys\' -&gt; \'Definieer vertoon\'.
+  <string name="tip_favorites_t">\tDikwels gebruikte punte kan geberg word as gunstelinge.\n\tOm `n punt te berg as `n gunsteling, gaan na die kaart inhoud kieslys, Keuse\'Voeg by gunstelinge\' en tik dan \'n naam in daarvoor. Nadat jy \'n gunsteling geberg het,  is dit beskikbaar in \'Hoof Kieslys\' -&gt; \'_gunstelinge\'.\n\tLank druk op \'n gunsteling, in die \'gunstelinge\' kieslys bied keuses om dit as bestemming te stel, te wysig of te skrap.\n\tOm al die gunsteling punte op die kaart te wys, skakel die \'gunstelinge\' vel aan in \'Kaart inhoud kieslys\' -&gt; \'Kaarte\'.
 	</string>
   <string name="create_poi_link_to_osm_doc">"<u> Aanlyn OSM </u> kaart klassifikasie met prentjies"</string>
   <string name="error_doing_search">Fout het voorgekom tydens aflyn soek</string>
@@ -528,7 +528,7 @@
   <string name="continuous_rendering_descr">Vertoon deurlopende lewering in plaas van beeld-op-een-slag</string>
   <string name="rendering_exception">Fout het voorgekom tydens die lewering van gekose gebied</string>
   <string name="show_point_options">Gebruik ligging…</string>
-  <string name="renderer_load_sucess">verbeelder suksesvol gelaai</string>
+  <string name="renderer_load_sucess">Verbeelder suksesvol gelaai</string>
   <string name="renderer_load_exception">Uitsondering voorgekom: verbeelder is nie gelaai nie</string>
   <string name="renderers">vektor verbeelder</string>
   <string name="renderers_descr">Kies lewering voorkoms</string>
@@ -584,7 +584,7 @@
   <string name="layer_transport">Vervoer stilhouplekke</string>
   <string name="layer_poi">Interessante plek…</string>
   <string name="layer_map">Kaartbron…</string>
-  <string name="menu_layers">Definieer uitsig</string>
+  <string name="menu_layers">Kaarte</string>
   <string name="context_menu_item_search_poi">Soek interessante plek</string>
   
   <string name="use_trackball_descr">Gebruik die trekbal om die kaart te skuif</string>
@@ -863,8 +863,8 @@
   <string name="poi_action_add">byvoeg</string>
   <string name="poi_action_change">verander</string>
   <string name="poi_action_succeded_template">Aksie {0} suksesvol voltooi.</string>
-  <string name="poi_error_unexpected_template">Onverwagse fout het voorgekom, tydens die uitvoering van aksie {0}.</string>
-  <string name="poi_error_io_error_template">I/O fout het voorgekom tydens die uitvoering van aksie {0}.</string>
+  <string name="poi_error_unexpected_template">Onverwagte fout het voorgekom tydens die uitvoering van aksie {0}.</string>
+  <string name="poi_error_io_error_template">I/O fout tydens die uitvoering van aksie {0}.</string>
   <string name="poi_error_info_not_loaded">Inligting oor node is nie gelaai nie</string>
   <string name="poi_dialog_name">Naam</string>
   <string name="poi_dialog_opening_hours">Open</string>
@@ -1006,7 +1006,7 @@
 \n\t\'Nag\' - altyd nag kleure
 \n\t\'Ligsensor\' - Beheer deur toestel se ligsensor (indien beskikbaar) "
 	</string>	
-	<string name="tip_map_switch_t_v2">"→Die kaart bron en lae vertoon word verander in \'Keuselys\' -&gt; \'Definieër voorkoms\' in kaart vertoon. ↵\n→Onder \'Kaart bron…\' kan jy kies tussen die gebruik van voorafgelaaide aflyn vektor kaarte, voorafgedefinieërde (aanlyn) teël bronne (aktiveer die \'aanlyn en teël kaarte\' inlasmodule hiervoor), of kaarte met die hand geskep met bv. OsmAndMapCreator op `n rekenaar. ↵\n→OsmAnd ondersteun ook persoonlike bronne. "
+	<string name="tip_map_switch_t_v2">"→Die kaart bron en lae vertoon word verander in \'Keuselys\' -&gt; \'Kaarte\' in kaart vertoon. ↵\n→Onder \'Kaart bron…\' kan jy kies tussen die gebruik van voorafgelaaide aflyn vektor kaarte, voorafgedefinieërde (aanlyn) teël bronne (aktiveer die \'aanlyn en teël kaarte\' inlasmodule hiervoor), of kaarte met die hand geskep met bv. OsmAndMapCreator op `n rekenaar. ↵\n→OsmAnd ondersteun ook persoonlike bronne. "
 	</string>
 	<string name="tip_app_mode_t_v2">"\tOsmAnd ondersteun verskillende (verstelbare) toepassingsprofiele vir verskillende gebruiksgevalle.
 \n\tJy kan profiele verander deur die profiel knoppie in linker onder hoek van die kaart skerm (simbool kar, fiets, of voetganger), of tydens die bou van `n roete. "</string>
@@ -1208,10 +1208,10 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="plugin_distance_point_ele">hoogte</string>
     <string name="plugin_distance_point">Punt</string>
     <string name="gpx_file_name">GPX lêernaam</string>
-    <string name="gpx_saved_sucessfully">GPX lêer suksesvol geberg na {0}</string>
+    <string name="gpx_saved_sucessfully">GPX lëer suksesvol geberg na {0}</string>
     <string name="osmand_distance_planning_plugin_description">Skep paaie (of gebruik / pas bestaande GPX lêers aan) om die afstand tussen punte te meet. Berg as GPX, kan gebruik word om GPX roetes te beplan.</string>
     <string name="osmand_distance_planning_plugin_name">Afstand rekenaar &amp; beplanning gereedskap</string>
-    <string name="local_osm_changes_backup_successful">OSM veranderingslêer %1$s suskesvol geskep</string>
+    <string name="local_osm_changes_backup_successful">OSM veranderingslëer %1$s suskesvol geskep</string>
     <string name="destination_point">Bestemming %1$s</string>
     <string name="context_menu_item_destination_point">Stel as bestemming</string>
     <string name="please_select_address">Kies eers die stad of straat</string>
