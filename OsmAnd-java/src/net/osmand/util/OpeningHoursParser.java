@@ -1,4 +1,5 @@
 package net.osmand.util;
+/* Has to be commented out in order to run the main function and test the package? */
 
 
 
@@ -272,10 +273,10 @@ public class OpeningHoursParser {
 		public boolean containsPreviousDay(Calendar cal){
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int p = (i + 4) % 7;
-			if (days[p]) {	
-				return true;	
+			if (days[p]) {
+				return true;
 			}
-			return false;			
+			return false;
 		}
 		
 		/**
@@ -337,35 +338,34 @@ public class OpeningHoursParser {
 		@Override
 		public String toRuleString() {
 			StringBuilder b = new StringBuilder(25);
-            { // Month
-                boolean dash = false;
-                boolean first = true;
-                for (int i = 0; i < 12; i++) {
-                    if (months[i]) {
-                        if (i > 0 && months[i - 1] && i < 11 && months[i + 1]) {
-                            if (!dash) {
-                                dash = true;
-                                b.append("-"); //$NON-NLS-1$
-                            }
-                            continue;
-                        }
-                        if (first) {
-                            first = false;
-                        } else if (!dash) {
-                            b.append(", "); //$NON-NLS-1$
-                        }
-                        b.append(monthsStr[i]);
-                        dash = false;
-                    } 
-                }
-                if (b.length() != 0) {
-                    b.append(": ");
-                }
-            }
-			// Day
-			boolean dash = false;
+			// Month
+			boolean dash  = false;
 			boolean first = true;
+			for (int i = 0; i < 12; i++) {
+				if (months[i]) {
+					if (i > 0 && months[i - 1] && i < 11 && months[i + 1]) {
+						if (!dash) {
+							dash = true;
+							b.append("-"); //$NON-NLS-1$
+						}
+						continue;
+					}
+					if (first) {
+						first = false;
+					} else if (!dash) {
+						b.append(", "); //$NON-NLS-1$
+					}
+					b.append(monthsStr[i]);
+					dash = false;
+				}
+			}
+			if (b.length() != 0) {
+				b.append(": ");
+			}
+			// Day
 			boolean open24_7 = true;
+			dash  = false;
+			first = true;
 			for (int i = 0; i < 7; i++) {
 				if (days[i]) {
 					if (i > 0 && days[i - 1] && i < 6 && days[i + 1]) {
@@ -423,16 +423,16 @@ public class OpeningHoursParser {
 		public void addTimeRange(int startTime, int endTime) {
 			int l = startTimes.length;
 			int[] newStartTimes = new int[l + 1];
-			int[] newEndTimes = new int[l + 1];
+			int[] newEndTimes   = new int[l + 1];
 			for (int i = 0; i < l; i++) {
 				newStartTimes[i] = startTimes[i];
-				newEndTimes[i] = endTimes[i];
+				newEndTimes[i]   = endTimes[i];
 			}
 			newStartTimes[l] = startTime;
-			newEndTimes[l] = endTime;
+			newEndTimes[l]   = endTime;
 
 			startTimes = newStartTimes;
-			endTimes = newEndTimes;
+			endTimes   = newEndTimes;
 		}
 		
 	}
@@ -449,14 +449,14 @@ public class OpeningHoursParser {
 		r = r.replaceAll("sunrise", sunrise);
 		// replace the '+' by an arbitrary value
 		r = r.replaceAll("\\+", "-" + endOfDay);
-		int startDay = -1;
-		int previousDay = -1;
-		int startMonth = -1;
+		int startDay      = -1;
+		int previousDay   = -1;
+		int startMonth    = -1;
 		int previousMonth = -1;
-		int k = 0;
+		int k             = 0; // Position in opening_hours string
 
 		BasicOpeningHourRule basic = new BasicOpeningHourRule();
-		boolean[] days = basic.getDays();
+		boolean[] days   = basic.getDays();
 		boolean[] months = basic.getMonths();
 		// check 24/7
 		if("24/7".equals(r)){
@@ -600,8 +600,8 @@ public class OpeningHoursParser {
 					endHour = Integer.parseInt(stEnd[1].substring(0, i2).trim());
 					endMin  = Integer.parseInt(stEnd[1].substring(i2 + 1).trim());
 				}
-				st = startHour * 60 + startMin;
-				end = endHour * 60 + endMin;
+				st  = startHour * 60 + startMin;
+				end = endHour   * 60 + endMin;
 			} catch (NumberFormatException e) {
 				return false;
 			}
@@ -623,15 +623,16 @@ public class OpeningHoursParser {
 	public static OpeningHours parseOpenedHours(String format){
 		// split the OSM string in multiple rules
 		String[] rules = format.split(";"); //$NON-NLS-1$
+		// FIXME: What if the semicolon is inside a quoted string?
 		OpeningHours rs = new OpeningHours();
 		for(String r : rules){
 			r = r.trim();
-			if(r.length() == 0){
+			if (r.length() == 0) {
 				continue;
 			}
 			// check if valid
 			boolean rule = parseRule(r, rs);
-			if(!rule){
+			if (!rule) {
 				return null;
 			}
 		}
@@ -640,50 +641,64 @@ public class OpeningHoursParser {
 	
 	
 	private static void formatTime(int h, int t, StringBuilder b){
-		if(h < 10){
+		if (h < 10) {
 			b.append("0"); //$NON-NLS-1$
-		} 
+		}
 		b.append(h).append(":"); //$NON-NLS-1$
-		if(t < 10){
+		if (t < 10) {
 			b.append("0"); //$NON-NLS-1$
 		}
 		b.append(t);
 	}
 	
 	
+	/**
+	 * test if the calculated opening hours are what you expect
+	 * @param time the time to test in the format "dd.MM.yyyy HH:mm"
+	 * @param hours the OpeningHours object
+	 * @param expected the expected state
+	 */
 	private static void testOpened(String time, OpeningHours hours, boolean expected) throws ParseException {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm").parse(time));
-		System.out.println("Expected " + time+": " + expected +" = " + hours.isOpenedForTime(cal));
+		boolean calculated = hours.isOpenedForTime(cal);
+		System.out.printf("  %sok: Expected %s: %b = %b\n",
+			((calculated != expected) ? "NOT " : ""), time, expected, calculated);
 	}
 	
 	public static void main(String[] args) throws ParseException {
-		
-		
-		//Test basic case
+
+		// Test basic case
 		OpeningHours hours = parseOpenedHours("Mo-Fr 08:30-14:40" ); //$NON-NLS-1$
 		System.out.println(hours);
 		testOpened("09.08.2012 11:00", hours, true);
 		testOpened("09.08.2012 16:00", hours, false);
+
 		// two time and date ranges
 		hours = parseOpenedHours("Mo-We, Fr 08:30-14:40,15:00-19:00"); //$NON-NLS-1$
 		System.out.println(hours);
 		testOpened("08.08.2012 14:00", hours, true);
-		testOpened("10.08.2012 15:00", hours, true);
 		testOpened("08.08.2012 14:50", hours, false);
+		testOpened("10.08.2012 15:00", hours, true);
+
 		// test exception on general schema
 		hours = parseOpenedHours("Mo-Sa 08:30-14:40; Tu 08:00 - 14:00"); //$NON-NLS-1$
 		System.out.println(hours);
 		testOpened("07.08.2012 14:20", hours, false);
+
 		// test off value
 		hours = parseOpenedHours("Mo-Sa 09:00-18:25; Th off"); //$NON-NLS-1$
 		System.out.println(hours);
 		testOpened("08.08.2012 12:00", hours, true);
 		testOpened("09.08.2012 12:00", hours, false);
+
 		//test 24/7
 		hours = parseOpenedHours("24/7"); //$NON-NLS-1$
 		System.out.println(hours);
 		testOpened("08.08.2012 23:59", hours, true);
+		testOpened("08.08.2012 12:23", hours, true);
+		testOpened("08.08.2012 06:23", hours, true);
+
 		// some people seem to use the following syntax:
 		hours = parseOpenedHours("Sa-Su 24/7");
 		System.out.println(hours);
