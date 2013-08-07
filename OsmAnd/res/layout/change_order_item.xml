@@ -8,11 +8,12 @@
     android:layout_marginLeft="5dip"
     android:layout_marginRight="5dip"
     android:weightSum="1" android:background="@color/color_white">
-	<ImageButton android:src="@drawable/av_download" android:id="@+id/down" android:layout_width="wrap_content"
+
+	<ImageButton android:src="@drawable/av_download" android:id="@+id/down" android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"

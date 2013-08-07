@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="local_index_gpx_timespan">\nTime span: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nTime moving: %1$d:%2$02d:%3$02d</string>
-	<string name="app_mode_default">Browse map</string>
-	<string name="settings_preset">Default profile</string>
+<resources><string name="local_index_gpx_timespan">\nДыяпазон часу: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nЧас руху: %1$d:%2$02d:%3$02d</string>
+	<string name="app_mode_default">Мапа</string>
+	<string name="settings_preset">Прадвызначаны</string>
 	<string name="settings_preset_descr">Map view and navigation settings are remembered per use profile. Set your default profile here.</string>
     <string name="destination_point">Destination %1$s</string>
     <string name="context_menu_item_destination_point">Ужыць як прызначэньне</string>
@@ -206,7 +206,7 @@
 	</string>
     <string name="map_widget_max_speed">Абмежаваньне хуткасьці</string>
     <string name="monitoring_control_start">GPX</string>
-    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="route_descr_lat_lon">Ш %1$.3f, Д %2$.3f</string>
     <string name="route_descr_current_location">Гэтае месца</string>
     
     

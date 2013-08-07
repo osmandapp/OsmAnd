@@ -18,6 +18,7 @@ public class RenderingRuleStorageProperties {
 	
 	public static final String TEXT_LENGTH = "textLength";
 	public static final String NAME_TAG = "nameTag";
+	public static final String NAME_TAG2 = "nameTag2";
 	public static final String TEXT_SHIELD = "textShield";
 	public static final String SHADOW_RADIUS = "shadowRadius";
 	public static final String SHADOW_COLOR = "shadowColor";
@@ -76,6 +77,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_ATTR_STRING_VALUE;
 	public RenderingRuleProperty R_TEXT_LENGTH;
 	public RenderingRuleProperty R_NAME_TAG;
+	public RenderingRuleProperty R_NAME_TAG2;
 	public RenderingRuleProperty R_TEXT_SHIELD;
 	public RenderingRuleProperty R_SHADOW_RADIUS;
 	public RenderingRuleProperty R_SHADOW_COLOR;
@@ -159,6 +161,7 @@ public class RenderingRuleStorageProperties {
 		
 		R_TEXT_LENGTH = registerRuleInternal(RenderingRuleProperty.createInputIntProperty(TEXT_LENGTH));
 		R_NAME_TAG = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(NAME_TAG));
+		R_NAME_TAG2 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(NAME_TAG2));
 
 		R_DISABLE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(DISABLE));
 		R_ATTR_INT_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ATTR_INT_VALUE));

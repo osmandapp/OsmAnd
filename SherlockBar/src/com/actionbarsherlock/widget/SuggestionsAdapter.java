@@ -281,7 +281,6 @@ class SuggestionsAdapter extends ResourceCursorAdapter implements OnClickListene
         if (extras != null
                 && extras.getBoolean(SearchManager.CURSOR_EXTRA_KEY_IN_PROGRESS)) {
             // mSearchView.getWindow().getDecorView().post(mStartSpinnerRunnable); // TODO:
-            return;
         }
         // If cursor is null or is done, stop the spinner
         // mSearchView.getWindow().getDecorView().post(mStopSpinnerRunnable); // TODO:

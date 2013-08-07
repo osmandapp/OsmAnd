@@ -1329,7 +1329,7 @@ public final class OsmandOdb {
             .computeStringSizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * getSList().size();
+        size += getSList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1713,13 +1713,13 @@ public final class OsmandOdb {
             .computeStringSizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * getKeyList().size();
+        size += getKeyList().size();
       }
       {
         int dataSize = 0;
         dataSize = 4 * getValList().size();
         size += dataSize;
-        size += 1 * getValList().size();
+        size += getValList().size();
       }
       for (net.osmand.binary.OsmandOdb.IndexedStringTable element : getSubtablesList()) {
         size += com.google.protobuf.CodedOutputStream
@@ -4965,7 +4965,7 @@ public final class OsmandOdb {
             .computeBytesSizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * getPolygonInnerCoordinatesList().size();
+        size += getPolygonInnerCoordinatesList().size();
       }
       if (hasAdditionalTypes()) {
         size += com.google.protobuf.CodedOutputStream
@@ -7393,7 +7393,7 @@ public final class OsmandOdb {
             .computeInt32SizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * getShiftToIndexList().size();
+        size += getShiftToIndexList().size();
       }
       {
         int dataSize = 0;
@@ -7402,7 +7402,7 @@ public final class OsmandOdb {
             .computeInt32SizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * getShiftToCityIndexList().size();
+        size += getShiftToCityIndexList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15798,7 +15798,7 @@ public final class OsmandOdb {
             .computeStringSizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * getSubcategoriesList().size();
+        size += getSubcategoriesList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -16740,7 +16740,7 @@ public final class OsmandOdb {
             .computeUInt32SizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * getCategoriesList().size();
+        size += getCategoriesList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -17651,7 +17651,7 @@ public final class OsmandOdb {
             .computeUInt32SizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * getCategoriesList().size();
+        size += getCategoriesList().size();
       }
       if (hasName()) {
         size += com.google.protobuf.CodedOutputStream
@@ -18265,7 +18265,7 @@ public final class OsmandOdb {
             .computeSInt64SizeNoTag(element);
         }
         size += dataSize;
-        size += 1 * getRouteIdList().size();
+        size += getRouteIdList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;

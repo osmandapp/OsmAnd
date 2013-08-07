@@ -40,6 +40,7 @@ import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.StackWidgetView;
@@ -246,8 +247,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				Constructor c = exClass.getConstructor(new Class[] { String.class });
 				Object exInstance = c.newInstance(file.getAbsolutePath());
 				Method getAttributeInt = exClass.getMethod("getAttributeInt", new Class[] { String.class, Integer.TYPE });
-				Integer it = (Integer) getAttributeInt.invoke(exInstance, "Orientation", new Integer(1));
-				orientation = it.intValue();
+				Integer it = (Integer) getAttributeInt.invoke(exInstance, "Orientation", 1);
+				orientation = it;
 			} catch (Exception e) {
 				e.printStackTrace();
 				log.error(e);
@@ -620,8 +621,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					runMediaRecorder(mapActivity, mr, f);
 				} catch (Exception e) {
 					logErr(e);
-					return;
-				}
+                }
 			}
 
 			@Override
@@ -653,8 +653,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void logErr(Exception e) {
 		log.error("Error starting recorder ", e);
 		AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
-		return;
-	}
+    }
 
 	protected Camera openCamera() {
 		try {
@@ -948,9 +947,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						indexFile(f);
 						if (registerNew) {
 							Recording rec = recordingByFileName.get(f.getName());
-							if (rec != null) {
+							if (rec != null && app.getSettings().SAVE_TRACK_TO_GPX.get()
+									&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 								String name = f.getName();
 								SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
+
 								savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), name);
 								if (app.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
 									app.getFavorites().addFavoritePointToGPXFile(new FavouritePoint(rec.lat, rec.lon, name, ""));

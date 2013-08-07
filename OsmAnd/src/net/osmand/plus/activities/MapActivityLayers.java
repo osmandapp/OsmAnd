@@ -60,6 +60,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -310,7 +312,7 @@ public class MapActivityLayers {
 			layout = R.layout.list_menu_item_native;
 		}
 
-		ListAdapter listAdapter = new ArrayAdapter<String>(
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
 			    activity, layout, R.id.title, adapter.getItemNames()){
 			        @Override
 					public View getView(final int position, View convertView, ViewGroup parent) {
@@ -344,20 +346,30 @@ public class MapActivityLayers {
 			        }
 			    };
 
-	    b.setAdapter(listAdapter, new OnClickListener() {
+	    OnClickListener onClickListener = new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int position) {
-				if(adapter.getSelection(position) >= 0) {
-					listener.onClick(position, !(adapter.getSelection(position) > 0));
-				} else {
-					listener.onClick(position, adapter.getSelection(position) > 0);
-				}
 			}
-		});
+		};
+		b.setAdapter(listAdapter, onClickListener);
+		b.setPositiveButton(R.string.default_buttons_ok, null);
 
 	    final AlertDialog dlg = b.create();
 	    listener.setDialog(dlg); 
 		dlg.setCanceledOnTouchOutside(true);
+		dlg.getListView().setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				if(adapter.getSelection(position) >= 0) {
+					listener.onClick(position, !(adapter.getSelection(position) > 0));
+					adapter.setSelection(position, adapter.getSelection(position) > 0 ? 0 : 1);
+					listAdapter.notifyDataSetInvalidated();
+				} else {
+					listener.onClick(position, adapter.getSelection(position) > 0);
+				}				
+			}
+		});
 		dlg.show();
 	}
 	
@@ -484,7 +496,7 @@ public class MapActivityLayers {
 			File[] files = dir.listFiles();
 			if (files != null) {
 				for (File f : files) {
-					if (f.getName().endsWith(".gpx")) { //$NON-NLS-1$
+					if (f.getName().toLowerCase().endsWith(".gpx")) { //$NON-NLS-1$
 						list.add(parent + f.getName());
 					} else if (f.isDirectory()) {
 						readGpxDirectory(f, list, parent + f.getName() + "/");

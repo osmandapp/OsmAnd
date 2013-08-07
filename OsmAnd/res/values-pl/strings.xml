@@ -377,7 +377,7 @@
   <string name="search_poi_filter">Filtr</string>
   <string name="menu_mute_off">Wyłącz dźwięk</string>
   <string name="menu_mute_on">Włącz dźwięk</string>
-  <string name="voice_provider_descr">Wybierz głos nawigatora</string>
+  <string name="voice_provider_descr">Wybierz głos nawigatora (oznaczenia języków ISO 639-1)</string>
   <string name="voice_provider">Głos nawigatora</string>
   <string name="voice_data_initializing">Inicjowanie danych głosowych…</string>
   <string name="voice_data_not_supported">Niewspierana wersja danych głosowych</string>
@@ -1292,8 +1292,8 @@
     <string name="clear_intermediate_points">Wyczyść punkty pośrednie</string>
     <string name="keep_intermediate_points">Zachowaj punkty pośrednie</string>
     <string name="new_directions_point_dialog">Masz już ustawione punkty pośrednie.</string>
-    <string name="context_menu_item_directions_to">Trasa z tego miejsca</string>
-    <string name="context_menu_item_directions_from">Trasa do tego miejsca</string>
+    <string name="context_menu_item_directions_to">Trasa do tego miejsca</string>
+    <string name="context_menu_item_directions_from">Trasa z tego miejsca</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_to">Do:</string>
     <string name="route_via">Przez:</string>
@@ -1310,4 +1310,12 @@
     <string name="announce_gpx_waypoints">Punkty śladu GPX</string>
     <string name="osmodroid_mode_on">Zatrzymaj OsMoDroid</string>    
     <string name="osmodroid_mode_off">Uruchom OsMoDroid</string>
-    </resources>
+    <string name="driving_region_japan">Japonia</string>
+	<string name="driving_region_us">Stany Zjednoczone</string>
+	<string name="driving_region_europe_asia">Europa i Azja</string>
+	<string name="driving_region_uk">Wielka Brytania, Indie, Australia i inne</string>
+	<string name="driving_region_descr">Wybierz region, w którym będziesz się poruszał: Stany Zjednoczone, Europa, Wielka Brytania, Azja i inne</string>
+	<string name="driving_region">Region poruszania się</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="map_widget_fps_info">Informacje o FPS</string>
+	</resources>

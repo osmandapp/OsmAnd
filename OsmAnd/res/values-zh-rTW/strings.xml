@@ -38,7 +38,7 @@
     <string name="poi_filter_restaurants">餐廳</string>
     <string name="poi_filter_sightseeing">景區</string>
     <string name="poi_filter_car_aid">汽車維修</string>
-	<string name="poi_filter_food_shop">美食店</string>
+	<string name="poi_filter_food_shop">食品店</string>
 	<string name="poi_filter_for_tourists">旅遊點</string>
 	<string name="poi_filter_fuel">加油站</string>
 	<string name="show_warnings_title">顯示警示…</string>
@@ -389,7 +389,7 @@
 		\n\t\'行進方向\' - 地圖會不斷對準您的車頭方向
 		\n\t\'依羅盤\' - 地圖會不斷對準裝置的羅盤指示
 	</string>
-	<string name="binary_map_download_success">下載完成。\n\t\n\t透過 \'選單\' -&gt; \'定義檢視\' -&gt; \'地圖來源…\' -&gt; \'離線向量地圖\'啟動使用。</string>
+	<string name="binary_map_download_success">下載完成。\n\t\n\t透過 \'選單\' -&gt; \'地圖圖層\' -&gt; \'地圖來源…\' -&gt; \'離線向量地圖\'啟動使用。</string>
 	<string name="tip_day_night_mode">日/夜模式</string>
 	<string name="tip_day_night_mode_t_v2">\t部份的向量地圖的地圖顯示可在日間(較亮)與夜間(較暗)之間切換.
 		\n\t夜間顏色是在夜間行駛比較安全。
@@ -523,7 +523,7 @@
 	<string name="gpx_option_reverse_route">反轉 GPX 方向</string>
 	<string name="gpx_option_destination_point">使用目前的目的地</string>
 	<string name="gpx_option_from_start_point">沿著整條行跡往前</string>
-	<string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'定義檢視\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
+	<string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'地圖圖層\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
 	<string name="choose_audio_stream">語音導航輸出</string>
 	<string name="choose_audio_stream_descr">選擇播放語音導航輸出(依靠系統)</string>
 	<string name="voice_stream_voice_call">通話音訊</string>
@@ -557,7 +557,7 @@
 	<string name="tip_favorites_t">\t常用地點可記錄成我的最愛。
 		\n\叫出地圖的快顯功能表，選\'加到我的最愛\'，然後輸入名字即可將某一點位置設為我的最愛。事後可透由\'主畫面\' -&gt;\'我的最愛\'找到它。
 		\n\t選按一個我的最愛會跳出一些選項，可設為目的地、編輯或刪除它。
-		\n\t欲將我的最愛顯示在地圖上，只要在地圖畫面模式下由\'選單\' -&gt;\'定義檢視\'開啟\'我的最愛\'即可。
+		\n\t欲將我的最愛顯示在地圖上，只要在地圖畫面模式下由\'選單\' -&gt;\'地圖圖層\'開啟\'我的最愛\'即可。
 	</string>
 	<string name="error_doing_search">離線查尋發生錯誤</string>
 	<string name="search_offline_geo_error">無法解析地理原意 \'%s\'</string>
@@ -566,7 +566,7 @@
 	<string name="preferred_locale_descr">選擇顯示語言</string>
 	<string name="preferred_locale">顯示語言</string>
 	<string name="tip_map_switch">地圖來源</string>
-	<string name="tip_map_switch_t_v2">\t地圖來源與顯示圖層可透過在地圖畫面下的\'選單\'-&gt;\'定義檢視\'來改變。
+	<string name="tip_map_switch_t_v2">\t地圖來源與顯示圖層可透過在地圖畫面下的\'選單\'-&gt;\'地圖圖層\'來改變。
 		\n\t在\'地圖來源…\'您可以選擇使用預先載入的離線向量圖，預先定義的（線上）圖磚來源(在此啟動\'線上和地圖圖磚\'外掛元件)，或手動建立地圖，例如使用 PC 上的 OsmAndMapCreator。
 		\n\tOsmAnd 也支援自訂來源。
 	</string>
@@ -739,7 +739,7 @@
 	<string name="layer_transport">車站、站牌</string>
 	<string name="layer_poi">興趣點…</string>
 	<string name="layer_map">地圖來源…</string>
-	<string name="menu_layers">定義檢視</string>
+	<string name="menu_layers">地圖圖層</string>
 	<string name="context_menu_item_search_poi">查尋興趣點</string>
 	
 	<string name="use_trackball_descr">使用軌跡球移動地圖</string>
@@ -765,7 +765,7 @@
 	<string name="search_poi_filter">篩選</string>
 	<string name="menu_mute_off">語音已開啟</string>
 	<string name="menu_mute_on">語音已關閉</string>
-	<string name="voice_provider_descr">選擇導航語音</string>
+	<string name="voice_provider_descr">選擇導航語音指示 (語言代碼，請參閱 ISO 639-1)</string>
 	<string name="voice_provider">語音導航</string>
 	<string name="voice_data_initializing">初始化語音資料…</string>
 	<string name="voice_data_not_supported">不支援的語音資料版本</string>
@@ -1530,4 +1530,12 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="speak_street_names">通報街道名稱 (TTS)</string>
     <string name="osmodroid_mode_on">停止 OsMoDroid</string>    
     <string name="osmodroid_mode_off">啟動 OsMoDroid</string>
-    </resources>
+    <string name="driving_region_descr">選擇駕駛區域：美國、歐洲、英國、亞洲和其他</string>
+	<string name="driving_region_japan">日本</string>
+	<string name="driving_region_us">美國</string>
+	<string name="driving_region_canada">加拿大</string>
+	<string name="driving_region_europe_asia">歐洲和亞洲</string>
+	<string name="driving_region_uk">英國、印度、澳洲和其他</string>
+	<string name="driving_region">駕駛區域</string>
+	<string name="map_widget_fps_info">FPS 資訊</string>
+	</resources>

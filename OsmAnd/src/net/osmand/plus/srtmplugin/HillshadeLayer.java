@@ -95,7 +95,7 @@ public class HillshadeLayer extends MapTileLayer {
 						String filename = cursor.getString(0);
 						long lastModified = cursor.getLong(1);
 						Long read = fileModified.get(filename);
-						if(rs.containsKey(filename) && read != null && lastModified == read.longValue()) {
+						if(rs.containsKey(filename) && read != null && lastModified == read) {
 							int left = cursor.getInt(2);
 							int right = cursor.getInt(3);
 							int top = cursor.getInt(4);

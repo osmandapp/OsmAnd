@@ -104,13 +104,23 @@ public class EditingPOIActivity implements DialogProvider {
 		}
 	}
 	
-	public void showEditDialog(Amenity editA){
-		Node n = openstreetmapUtilToLoad.loadNode(editA);
-		if(n != null){
-			showPOIDialog(DIALOG_EDIT_POI, n, editA.getType(), editA.getSubType());
-		} else {
-			AccessibleToast.makeText(ctx, ctx.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
-		}
+	public void showEditDialog(final Amenity editA){
+		new AsyncTask<Void, Void, Node>() {
+
+			@Override
+			protected Node doInBackground(Void... params) {
+				return openstreetmapUtilToLoad.loadNode(editA);
+			}
+			
+			protected void onPostExecute(Node n) {
+				if(n != null){
+					showPOIDialog(DIALOG_EDIT_POI, n, editA.getType(), editA.getSubType());
+				} else {
+					AccessibleToast.makeText(ctx, ctx.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
+				}
+			};
+			
+		}.execute(new Void[0]);
 	}
 	
 	public void showCreateDialog(double latitude, double longitude){

@@ -53,6 +53,10 @@ public class ContextMenuAdapter {
 		return selectedList.get(pos);
 	}
 	
+	public void setSelection(int pos, int s) {
+		selectedList.set(pos, s);
+	}
+	
 	public int getImageId(int pos, boolean light) {
 		if(!light || iconListLight.get(pos) == 0) {
 			return iconList.get(pos);

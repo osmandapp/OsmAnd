@@ -129,7 +129,7 @@ public class TestVoiceActivity extends SherlockActivity {
 	}
 	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
-		addButton(ll, "New route has been calculated (15350m & 2h30m5sec)", builder(p).newRouteCalculated(15350, 9005));
+		addButton(ll, "New route has been calculated (11350m & 2h30m5sec)", builder(p).newRouteCalculated(11350, 9005));
 		addButton(ll, "Route recalculated (23150m & 350sec)", builder(p).routeRecalculated(23150, 350));
 
 		addButton(ll, "Prepare to turn slighlty left after 850m then bear right", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 850, "").then().bearRight(""));

@@ -195,7 +195,7 @@ public class QuickAction extends CustomPopupWindow {
 			} else if (arrowPos > screenWidth/4 && arrowPos < 3 * (screenWidth/4)) {
 				window.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Center : R.style.Animations_PopDownMenu_Center);
 			} else {
-				window.setAnimationStyle((onTop) ? R.style.Animations_PopDownMenu_Right : R.style.Animations_PopDownMenu_Right);
+				window.setAnimationStyle((onTop) ? R.style.Animations_PopUpMenu_Right : R.style.Animations_PopDownMenu_Right);
 			}
 					
 			break;

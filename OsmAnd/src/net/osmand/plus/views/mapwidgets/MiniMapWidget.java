@@ -17,7 +17,7 @@ import android.view.View;
 
 public class MiniMapWidget extends BaseMapWidget {
 	private float scaleCoefficient = MapInfoLayer.scaleCoefficient;
-	private final float scaleMiniRoute = 0.15f;
+	private static final float scaleMiniRoute = 0.15f;
 	private final float width = 96 * scaleCoefficient;
 	private final float height = 96 * scaleCoefficient;
 	private final float centerMiniRouteY = 3 * height / 4;
