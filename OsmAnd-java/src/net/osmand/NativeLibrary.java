@@ -229,6 +229,12 @@ public class NativeLibrary {
 		b &= load("OsmAndJNI", path);
 		return b;
 	}
+	
+	public static boolean loadOldLib(String path) {
+		boolean b = true;
+		b &= load("osmand", path);
+		return b;
+	}
 
 	public static boolean load(String libBaseName, String path) {
 		// look for a pre-installed library
