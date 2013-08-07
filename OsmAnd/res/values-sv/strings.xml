@@ -1196,7 +1196,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="announce_gpx_waypoints">Meddela vid GPX-waypoints</string>
     <string name="osmodroid_mode_on">Stoppa OsMoDroid</string>    
     <string name="osmodroid_mode_off">Starta OsMoDroid</string>
-    <string name="map_widget_fps_info">FPS-info</string>
+    <string name="map_widget_fps_info">FPS-avbuggningsinfo</string>
 	<string name="driving_region_descr">Välj område: USA, Europa, UK, Asien och andra</string>
 	<string name="driving_region">Område</string>
 	<string name="driving_region_japan">Japan</string>
