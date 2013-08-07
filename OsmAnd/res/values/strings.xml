@@ -9,7 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="map_widget_fps_info">FPS info</string>
+	<string name="map_widget_fps_info">FPS debug info</string>
 	<string name="driving_region_descr">Select Driving Region : US, Europe, UK, Asia and Others</string>
 	<string name="driving_region">Driving Region</string>
 	<string name="driving_region_japan">Japan</string>
