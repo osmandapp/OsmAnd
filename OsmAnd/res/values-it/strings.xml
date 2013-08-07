@@ -1159,7 +1159,7 @@
     <string name="av_use_external_recorder">Utilizza il registratore di sistema</string>
     <string name="av_settings_descr">Configura le impostazioni audio e video</string>
     <string name="av_settings">"Impostazioni audio/video "</string>
-    <string name="recording_error">"Errore durante la registrazione "</string>
+    <string name="recording_error">Errore durante la registrazione </string>
     <string name="recording_camera_not_available">La fotocamera non è disponibile</string>
     <string name="recording_is_recorded">L\'audio/video sta per essere registrato. Per fermarlo seleziona il widget AV.</string>
     <string name="recording_playing">L\'audio della registrazione specificata sta per essere riprodotto.\n%1$s</string>
