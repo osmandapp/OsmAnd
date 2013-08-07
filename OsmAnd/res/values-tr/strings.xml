@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
-<string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -788,4 +788,43 @@
 	<string name="installing_new_resources">Yeni veriler açılıyor…</string>
 	<string name="internet_connection_required_for_online_route">Çevrimiçi navigasyon seçildi ancak İnternet bağlantısı kullanılabilir değil.</string>
 	<string name="layer_hillshade">Tepe gölge katmanı</string>
+    <string name="map_widget_fps_info">FPS hata ayıklama bilgisi</string>
+	<string name="driving_region_descr">Sürüş Bölgesi Seçimi : Amerika, Avrupa, Birleşik Krallık, Asya ve Diğerleri</string>
+	<string name="driving_region">Sürüş Bölgesi</string>
+	<string name="driving_region_japan">Japonya</string>
+	<string name="driving_region_us">Amerika</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="driving_region_europe_asia">Avrupa ve Asya</string>
+	<string name="driving_region_uk">Birleşik Krallık, Hindistan, Avustralya ve Diğerleri</string>
+	<string name="osmodroid_mode_on">OsMoDroid'i Durdur</string>    
+    <string name="osmodroid_mode_off">OsMoDroid'i Başlat</string>
+    <string name="speak_title">Duyuru…</string>
+	<string name="speak_descr">Sokak isimleri, trafik uyarıları (mecburi duruşlar, tümsekler), hız kamerası uyarıları, hız sınırları bildirimlerini ayarla</string>
+	<string name="speak_street_names">Sokak isimlerini bildir</string>
+    <string name="speak_speed_limit">Hız sınırlarını bildir</string>
+    <string name="speak_cameras">Hız kameralarını bildir</string>
+	<string name="speak_traffic_warnings">Trafik uyarılarını bildir</string>
+    <string name="osb_author_or_password_not_specified">Lütfen OSM kullanıcı adı ve şifrenizi Ayarlar bölümünde belirtin</string>
+    <string name="context_menu_item_directions_to">Varış yeri</string>
+    <string name="context_menu_item_directions_from">Hareket yeri</string>
+    <string name="route_descr_map_location">Harita: </string>
+    <string name="route_to">Buraya:</string>
+    <string name="route_via">Üzerinden:</string>
+    <string name="route_from">Buradan:</string>
+	<string name="local_index_gpx_timespan">Zaman aralığı:</string>
+	<string name="local_index_gpx_timemoving">Seyahat süresi:</string>
+	<string name="destination_point">Hedef</string>
+    <string name="context_menu_item_destination_point">Hedef olarak belirle</string>
+    <string name="please_select_address">Önce şehir ya da sokak seç</string>
+    <string name="search_street_in_neighborhood_cities">Yakın şehirlerde sokak ara</string>
+    <string name="intermediate_items_sort_by_distance">Sırala (kapıdan kapıya)</string>
+    <string name="local_osm_changes_backup_successful">OSM değişiklik dosyası başarıyla oluşturuldu</string>
+    <string name="local_osm_changes_backup_failed">OSM değişikliklerinin yedeklemesi başarısız</string>
+    <string name="delete_point">Mevkiyi sil</string>
+    <string name="plugin_distance_point_time">süre</string>
+    <string name="plugin_distance_point_hdop">hassaslık</string>
+    <string name="plugin_distance_point_speed">hız</string>
+    <string name="plugin_distance_point_ele">rakım</string>
+    <string name="plugin_distance_point">Mevki</string>
+    <string name="gpx_file_name">GPX dosya adı</string>
     </resources>
