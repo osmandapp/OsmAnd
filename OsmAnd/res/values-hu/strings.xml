@@ -1306,4 +1306,5 @@
 	<string name="speak_descr">Utcanevek, közlekedési figyelmeztetések (megállás, fekvőrendőr), traffipax, sebességhatár bemondásának beállításai</string>
 	<string name="speak_street_names">Utcanevek bemondása (TTS)</string>
     <string name="osb_author_dialog_password">OSM jelszó (opcionális)</string>
+	<string name="map_widget_fps_info">FPS debug infó</string>
 	</resources>
