@@ -1486,7 +1486,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="speak_title">Najavi …</string>
 	<string name="speak_descr">Nastavitve za najavljanje imena ulic, prometna opozorila (ležeči policaji ipd.), opozorila merilnikov hitrosti, omejitve hitrosti</string>
 	<string name="speak_street_names">Najavljanje imen ulic (TTS)</string>
-    <string name="map_widget_fps_info">Podatki FPS</string>
+    <string name="map_widget_fps_info">Podatki razhroščevanja FPS</string>
 	<string name="driving_region_descr">Izbira področja vožnje: ZDA, Evropa, Velika Britanija, Azija in drugo</string>
 	<string name="driving_region">Področje vožnje</string>
 	<string name="driving_region_japan">Japonska</string>
