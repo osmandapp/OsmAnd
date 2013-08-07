@@ -661,11 +661,13 @@ public class OpeningHoursParser {
 	private static void testOpened(String time, OpeningHours hours, boolean expected) throws ParseException {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm").parse(time));
-		boolean isOpen = hours.isOpenedForTime(cal);
-		System.out.println("  " + (isOpen == expected ? "ok" : "not ok") + " - " + "state for " + time+": " + isOpen);
+		boolean calculated = hours.isOpenedForTime(cal);
+		System.out.printf("  %sok: Expected %s: %b = %b\n",
+			((calculated != expected) ? "NOT " : ""), time, expected, calculated);
 	}
 	
 	public static void main(String[] args) throws ParseException {
+
 		// Test basic case
 		OpeningHours hours = parseOpenedHours("Mo-Fr 08:30-14:40" ); //$NON-NLS-1$
 		System.out.println(hours);
