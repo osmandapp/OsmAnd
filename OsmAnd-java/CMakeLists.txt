@@ -1,6 +1,7 @@
 project(OsmAndJNI)
 
 set(target_specific_private_includes "")
+set(target_specific_public_libraries "")
 if(CMAKE_TARGET_OS STREQUAL "windows")
 	set(target_specific_private_includes ${target_specific_private_includes}
 		"$ENV{JAVA_HOME}/include/win32"
@@ -12,6 +13,9 @@ elseif(CMAKE_TARGET_OS STREQUAL "darwin")
 elseif(CMAKE_TARGET_OS STREQUAL "linux")
 	set(target_specific_private_includes ${target_specific_private_includes}
 		"$ENV{JAVA_HOME}/include/linux"
+	)
+	set(target_specific_public_libraries ${target_specific_public_libraries}
+		rt
 	)
 endif()
 
@@ -48,6 +52,7 @@ if(CMAKE_SHARED_LIBS_ALLOWED_ON_TARGET)
 			LINK_PUBLIC
 				OsmAndCore_shared
 				OsmAndCoreUtils_shared
+				${target_specific_public_libraries}
 		)
 	endif()
 endif()
