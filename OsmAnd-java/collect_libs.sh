@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -e
+
 SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT_LOC="$SCRIPT_LOC/../.."
 
