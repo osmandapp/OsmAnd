@@ -13,7 +13,7 @@ OSMAND_MAKEFILES := \
     $(call all-makefiles-under,$(ROOT_PATH)/core/externals) \
     $(ROOT_PATH)/core/Android.mk \
     $(call all-makefiles-under,$(LOCAL_PATH)/) \
-    $(ROOT_PATH)/jni/Android.mk
+    $(ROOT_PATH)/android/OsmAnd-java/Android.mk
 $(info OsmAnd makefiles: $(OSMAND_MAKEFILES))
 endif
 
