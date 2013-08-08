@@ -410,7 +410,7 @@
   <string name="tip_favorites_t">\tDikwels gebruikte punte kan geberg word as gunstelinge.\n\tOm `n punt te berg as `n gunsteling, gaan na die kaart inhoud kieslys, Keuse\'Voeg by gunstelinge\' en tik dan \'n naam in daarvoor. Nadat jy \'n gunsteling geberg het,  is dit beskikbaar in \'Hoof Kieslys\' -&gt; \'_gunstelinge\'.\n\tLank druk op \'n gunsteling, in die \'gunstelinge\' kieslys bied keuses om dit as bestemming te stel, te wysig of te skrap.\n\tOm al die gunsteling punte op die kaart te wys, skakel die \'gunstelinge\' vel aan in \'Kaart inhoud kieslys\' -&gt; \'Kaarte\'.
 	</string>
   <string name="create_poi_link_to_osm_doc">"<u> Aanlyn OSM </u> kaart klassifikasie met prentjies"</string>
-  <string name="error_doing_search">Fout het voorgekom tydens aflyn soek</string>
+  <string name="error_doing_search">Fout tydens aflyn soek</string>
   <string name="search_offline_geo_error">Kon nie die geo opset \'%s\' ontleed nie</string>
   <string name="search_osm_offline">Soek adres met behulp van aflyn kaarte</string>
   <string name="system_locale">Stelsel</string>
@@ -474,7 +474,7 @@
   <string name="indexing_map">Besig om `n kaartindeks te skep…</string>
   <string name="indexing_poi">Besig om `n interessante plek indeks te skep…</string>
   <string name="indexing_transport">Skep vervoer indeks…</string>
-  <string name="input_output_error">I/O fout het voorgekom</string>
+  <string name="input_output_error">Lees/skryf fout het voorgekom</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
@@ -1285,4 +1285,5 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa &amp; Asië</string>
 	<string name="driving_region_uk">VK, Indië, Australië &amp; Ander</string>
+	<string name="map_widget_fps_info">FPS ontfout inligting</string>
 	</resources>
