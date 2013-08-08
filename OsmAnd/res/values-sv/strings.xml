@@ -816,7 +816,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="error_io_error">Ett I/O-fel inträffade</string>
 	
 	<string name="downloading">Laddar ner …</string>
-	<string name="downloading_list_indexes">Laddar ner lista över tillgängliga regioner…</string>
+	<string name="downloading_list_indexes">Hämtar lista med tillgängliga regioner …</string>
 	<string name="list_index_files_was_not_loaded">Listan över regioner hämtades inte från osmand.net.</string>
 	<string name="show_poi_on_map">Visa på kartan</string>
 	<string name="fav_points_edited">Favoritpunkten redigerades</string>
