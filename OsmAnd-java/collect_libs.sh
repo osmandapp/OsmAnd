@@ -27,6 +27,7 @@ function compile {
 	OSMAND_ANDROID_EXTERNAL_DEPENDENCIES=(expat freetype gdal giflib glew glm glsl-optimizer harfbuzz jpeg libpng protobuf qtbase-desktop skia zlib)
 	"$ROOT_LOC/core/externals/configure.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
 	"$ROOT_LOC/core/externals/build.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
+	"$ROOT_LOC/tools/map-viewer/externals/configure.sh"
 	if [ ! -d "$ROOT_LOC/amd64-linux-gcc-release.makefile" ]; then 
 		"$ROOT_LOC/build/amd64-linux-gcc.sh" release
 	fi
