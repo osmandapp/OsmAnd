@@ -14,9 +14,6 @@ elseif(CMAKE_TARGET_OS STREQUAL "linux")
 	set(target_specific_private_includes ${target_specific_private_includes}
 		"$ENV{JAVA_HOME}/include/linux"
 	)
-	set(target_specific_public_libraries ${target_specific_public_libraries}
-		rt
-	)
 endif()
 
 if(CMAKE_SHARED_LIBS_ALLOWED_ON_TARGET)
