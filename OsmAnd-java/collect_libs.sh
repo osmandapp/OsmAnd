@@ -28,6 +28,7 @@ function compile {
 	"$ROOT_LOC/core/externals/configure.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
 	"$ROOT_LOC/core/externals/build.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
 	"$ROOT_LOC/tools/map-viewer/externals/configure.sh"
+	"$ROOT_LOC/android/OsmAnd-java/generate-swig.sh"
 	if [ ! -d "$ROOT_LOC/amd64-linux-gcc-release.makefile" ]; then 
 		"$ROOT_LOC/build/amd64-linux-gcc.sh" release
 	fi
