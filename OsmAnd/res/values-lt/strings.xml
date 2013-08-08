@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
   <string name="osmand_parking_warning_text">Perspėjimas pasiimti automobilį jau buvo įtrauktas į jūsų kalendorių. Perspėjimas ten liks tol, kol jo nepanaikinsite.</string>
@@ -1002,7 +1003,7 @@
 <string name="gps_wakeup_interval">GPS pabudimo intervalas: %s</string>
 <string name="int_continuosly">Tolydžiai</string>
 <string name="email">el. paštas</string>
-<string name="layer_map_appearance">Konfigūruoti ekraną…</string>
+<string name="layer_map_appearance">Konfigūruoti ekraną</string>
 <string name="show_lanes">Rodyti juostas</string>
 <string name="avoid_unpaved">Vengti negrįstų kelių</string>
 <string name="avoid_ferries">Vengti keltų</string>
@@ -1150,7 +1151,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     
     
     <string name="map_widget_distancemeasurement">Atstumo matavimas</string>
-    <string name="audionotes_location_not_defined">Audio užrašams vieta dar nenurodyta</string>
+    <string name="audionotes_location_not_defined">Vieta, kuriai skiriama ši pastaba, nenustatyta. \"Naudoti vietą …\" jei norite priskirti pastabą specifinei vietai</string>
     <string name="map_widget_audionotes">Audio užrašai</string>
     
     <string name="monitoring_control_stop">stabdyti</string>
@@ -1164,7 +1165,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="av_use_external_recorder">Nuadoti kitą įrašymo įrankį</string>
     <string name="av_settings_descr">Konfigūruoti vaizdo ir garso parametrus</string>
     <string name="av_settings">"Garso/vaizdo nustatymai "</string>
-    <string name="recording_error">"Įrašinėjant vaizdą įvyko klaida "</string>
+    <string name="recording_error">Įrašinėjant vaizdą įvyko klaida </string>
     <string name="recording_camera_not_available">Kamera neprieinama</string>
     <string name="recording_is_recorded">Įrašinėjamas garsas/vaizdas. Norėdami sustabdyti paspauskite įrankio mygtuką.</string>
     <string name="recording_playing">Grojamas pasirinktas garso įrašas.\n%1$s</string>
@@ -1313,4 +1314,51 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="please_select_address">Pasirinkit pirmiausia miestą ar gatvę</string>
     <string name="destination_point">Kelionės tikslas %1$s</string>
     <string name="context_menu_item_destination_point">Nustatyti kelionės tikslu</string>
-    </resources>
+    <string name="map_widget_fps_info">Kadrai/s info</string>
+	<string name="driving_region_descr">Pasirinkite vairavimo regioną: JAV, Europa, Didžioji britanija, Azija ir kt.</string>
+	<string name="driving_region">Vairavimo regionas</string>
+	<string name="driving_region_japan">Japonija</string>
+	<string name="driving_region_us">JAV</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="driving_region_europe_asia">Europa ir Azija</string>
+	<string name="driving_region_uk">JK, Indija, Australija ir kt.</string>
+	<string name="osmodroid_mode_on">Išjungti OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Įjungti OsMoDroid</string>
+    <string name="announce_gpx_waypoints">Pranešti apie GPX tarpinius taškus</string>
+    <string name="speak_title">Pranešti…</string>
+	<string name="speak_descr">Nustatyti gatvių pavadinimų, eismo perspėjimų (priverstinius sustojimus, greičio ribotuvus), greičio radarus, greičio apribojimus</string>
+	<string name="speak_street_names">Prenešti gatvių pavadinimus (TTS)</string>
+    <string name="speak_speed_limit">Pranešti greičio apribojimus</string>
+    <string name="speak_cameras">Pranešti apie greičio radarus</string>
+	<string name="speak_traffic_warnings">Pranešti eismo perspėjimus</string>
+    <string name="tip_recent_changes_1_5_t">Pakeitimai 1.5 versijoje:
+	\n\t* Pranešimai balsu apie greičio ribojimus ar radarus
+	\n\t* Daugiau pranešimų balsu (gatvių pavadinimai)
+	\n\t* Didelės raiškos žemėlapio ikonos
+	\n\t* Daug vartotojo sąsajos pakeitimų
+	\n\t* Ištaisytos klaidos atstumo rodyme, GPX analizavime, tarpinių taškų apdorojime, planavimo įrankyje, OSM išsiuntime, https apdorojime
+    </string>
+    <string name="osb_author_or_password_not_specified">Įveskite OSM vartotoją ir slaptažodį Nustatymuose</string>
+    <string name="clear_intermediate_points">Panaikinti tarpinius taškus</string>
+    <string name="keep_intermediate_points">Palikti tarpinius taškus</string>
+    <string name="new_directions_point_dialog">Jūs jau nurodėte tarpinius taškus.</string>
+    <string name="context_menu_item_directions_to">Kelio nuorodos iki</string>
+    <string name="context_menu_item_directions_from">Kelio nuorodos nuo</string>
+    <string name="route_descr_map_location">Žemėlapis: </string>
+    <string name="route_to">Į:</string>
+    <string name="route_via">Per:</string>
+    <string name="route_from">Iš:</string>
+	<string name="local_index_gpx_timespan">\nLaiko periodas: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nJudėjimo laikas: %1$d:%2$02d:%3$02d</string>
+	<string name="osb_author_dialog_password">OSM slaptažodis (neprivaloma)</string>
+	<string name="av_camera_focus">Kameros fokuso tipas</string>
+	<string name="av_camera_focus_descr">Pasirinkite vidinės kameros fokuso tipą</string>
+	<string name="av_camera_focus_auto">Automatinis fokusas</string>
+	<string name="av_camera_focus_hiperfocal">Hyperfocalins fokusas</string>
+	<string name="av_camera_focus_edof">Išplėstinis gylis (EDOF)</string>
+	<string name="av_camera_focus_infinity">Fokusas yra begalinis</string>
+	<string name="av_camera_focus_macro">Makro fokusas</string>
+	<string name="av_camera_focus_continuous">Kamera pastoviai bando sufokusuoti</string>
+	<string name="av_photo_play_sound">Groti garsą darant nuotrauką</string>
+	<string name="av_photo_play_sound_descr">Pasirinkite ar groti garsą, kai fotografuojama</string>
+</resources>
