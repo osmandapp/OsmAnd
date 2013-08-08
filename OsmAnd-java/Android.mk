@@ -1,6 +1,6 @@
-include $(CLEAR_VARS)
-
 LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
 
 ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
     LOCAL_MODULE := OsmAndJNI
