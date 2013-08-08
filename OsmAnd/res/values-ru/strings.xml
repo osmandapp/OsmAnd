@@ -1257,4 +1257,13 @@
     <string name="route_descr_map_location">Карта: </string>
     <string name="osb_author_dialog_password">Пароль OSM (опционально)</string>
 	<string name="local_index_gpx_timemoving">\nВремя в пути: %1$d:%2$02d:%3$02d</string>
+	<string name="driving_region_descr">Выберите регион: США, Европа, Англия, Азия и т.д.</string>
+	<string name="driving_region">Регион</string>
+	<string name="driving_region_japan">Япония</string>
+	<string name="driving_region_us">США</string>
+	<string name="driving_region_europe_asia">Европа и Азия</string>
+	<string name="driving_region_uk">Англия, Индия, Австралия и др.</string>
+	<string name="context_menu_item_directions_to">Маршрут к</string>
+    <string name="context_menu_item_directions_from">Маршрут от</string>
+    <string name="driving_region_canada">Канада</string>
 	</resources>

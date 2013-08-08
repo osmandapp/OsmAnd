@@ -20,7 +20,7 @@
 
         <EditText
             android:id="@+id/SearchText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/hint_search_online"
@@ -39,7 +39,7 @@
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         style="@style/OsmandListView">
     </ListView>

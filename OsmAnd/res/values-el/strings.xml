@@ -387,7 +387,7 @@
 \n\t\'Χωρίς περιστροφή (ο βορράς επάνω)\' - Ο χάρτης δεν θα περιστρέφεται. Ο βορράς θα είναι πάντα επάνω
 \n\t\'Προς την κατεύθυνση κίνησης\' - Ο χάρτης συνεχώς θα συγχρονίζεται με την κατεύθυνσή σας
 \n\t\'Πυξίδα\' - Ο χάρτης συνεχώς θα συγχρονίζεται με την κατεύθυνση της πυξίδας "</string>
-	<string name="binary_map_download_success">Η λήψη ήταν επιτυχής.\n\t\n\tΓια χρήση ενεργοποιήστε \'Μενού\' -&gt; \'Ορισμός εμφάνισης\' -&gt; \'Πηγή χάρτη…\' -&gt; \'Offline διανυσματικοί χάρτες\'.</string>
+	<string name="binary_map_download_success">Η λήψη ήταν επιτυχής.\n\t\n\tΓια χρήση ενεργοποιήστε \'Μενού\' -&gt; \'Επίπεδα χάρτη\' -&gt; \'Πηγή χάρτη…\' -&gt; \'Offline διανυσματικοί χάρτες\'.</string>
 	<string name="tip_day_night_mode">Λειτουργία ημέρας/νύχτας</string>
 	<string name="tip_day_night_mode_t_v2">"\tΗ εμφάνιση μπορεί σε μερικούς διανυσματικούς χάρτες να αλλάξει μεταξύ ημέρας (πιο φωτεινό) και νύχτας (πιο σκοτεινό).
 \n\tΤα νυχτερινά χρώματα είναι πιο ασφαλή για νυχτερινή οδήγηση.
@@ -558,7 +558,7 @@
 	<string name="gpx_option_reverse_route">Αντιστροφή κατεύθυνσης GPX</string>
 	<string name="gpx_option_destination_point">Χρήση τρέχοντος προορισμού</string>
 	<string name="gpx_option_from_start_point">Πέρασμα κατά μήκος ολόκληρου του ίχνους</string>
-	<string name="switch_to_vector_map_to_see">Υπάρχουν διαθέσιμοι offline διανυσματικοί χάρτες για αυτή την τοποθεσία.\n\nΓια χρήση ενεργοποιήστε \'Μενού\' -&gt; \'Ορισμός εμφάνισης\' -&gt; \'Πηγή χάρτη…\' -&gt; \'Offline διανυσματικοί χάρτες\'.</string>
+	<string name="switch_to_vector_map_to_see">Υπάρχουν διαθέσιμοι offline διανυσματικοί χάρτες για αυτή την τοποθεσία.\n\nΓια χρήση ενεργοποιήστε \'Μενού\' -&gt; \'Επίπεδα χάρτη\' -&gt; \'Πηγή χάρτη…\' -&gt; \'Offline διανυσματικοί χάρτες\'.</string>
 	<string name="choose_audio_stream">Έξοδος φωνητικής καθοδήγησης</string>
 	<string name="choose_audio_stream_descr">Επιλέξτε το κανάλι εκτέλεσης της φωνητικής καθοδήγησης (εξαρτώμενο από το σύστημα)</string>
 	<string name="voice_stream_voice_call">Ήχος κλήσης φωνής</string>
@@ -591,7 +591,8 @@
 	<string name="tip_favorites_t">"\tΤα σημεία που χρησιμοποιούνται συχνά μπορούν να αποθηκευτούν ως Αγαπημένα.
 \n\tΓια να αποθηκεύσετε ένα σημείο ως Αγαπημένο πηγαίνετε στο μενού περιβάλλοντος χάρτη, επιλέξτε \'Προσθήκη στα αγαπημένα\' δώστε του κάποιο όνομα. Μετά την αποθήκευση ενός Αγαπημένου, είναι προσβάσιμο μέσω του \'Κύρια Οθόνη\' -&gt; \'Αγαπημένα\'.
 \n\tΠαρατεταμένο πάτημα ενός Αγαπημένου στο μενού \'Αγαπημένα\' παρέχει επιλογές να το ορίσετε ως προορισμό, να το Επεξεργαστείτε ή να το διαγράψετε.
-\n\tΓια να εμφανιστούν όλα τα Αγαπημένα κατευθείαν στο χάρτη, στην οθόνη χάρτη ενεργοποιήστε το επίπεδο \'Αγαπημένα\' στο \'Μενού\' -&gt; \'Ορισμός εμφάνισης\'. "</string>
+\n\tΓια να εμφανιστούν όλα τα Αγαπημένα κατευθείαν στο χάρτη, στην οθόνη χάρτη ενεργοποιήστε το επίπεδο \'Αγαπημένα\' στο \'Μενού\' -&gt; \'Επίπεδα χάρτη\'. "
+	</string>
 	<string name="error_doing_search">Προέκυψε σφάλμα κατά την offline αναζήτηση</string>
 	<string name="search_offline_geo_error">Δεν ήταν δυνατή η ανάλυση της γεωγρ πρόθεσης \'% s\'</string>
 	<string name="search_osm_offline">Αναζήτηση γεωγραφικής τοποθεσίας</string>
@@ -599,7 +600,7 @@
 	<string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης</string>
 	<string name="preferred_locale">Γλώσσα εμφάνισης</string>
 	<string name="tip_map_switch">Πηγή Χάρτη</string>
-	<string name="tip_map_switch_t_v2">"\tΗ πηγή χάρτη και οι στρώσεις που εμφανίζονται αλλάζουν μέσω του \'Μενού\' -&gt; \'Ορισμός Εμφάνισης\' στην όψη χάρτη.
+	<string name="tip_map_switch_t_v2">"\tΗ πηγή χάρτη και οι στρώσεις που εμφανίζονται αλλάζουν μέσω του \'Μενού\' -&gt; \'Επίπεδα χάρτη\' στην όψη χάρτη.
 \n\tΚάτω από το \'Πηγή χάρτη…\' μπορείτε να επιλέξετε τη χρήση των εγκατεστημένων offline διανυσματικών χαρτών, προκαθορισμένων (online) πηγών πλακιδίων (ενεργοποιήστε το πρόσθετο \'Online χάρτες\' για αυτό), ή χάρτες που κατασκευάστηκαν χειροκίνητα χρησιμοποιώντας π.χ. το OsmAndMapCreator σε κάποιο PC.
 \n\tΟ OsmAnd επίσης υποστηρίζει προσαρμόσιμες πηγές. "
 	</string>
@@ -768,7 +769,7 @@
 	<string name="layer_transport">Στάσεις ΜΜΜ</string>
 	<string name="layer_poi">Σημ Ενδ…</string>
 	<string name="layer_map">Πηγή χάρτη…</string>
-	<string name="menu_layers">Ορισμός εμφάνισης</string>
+	<string name="menu_layers">Επίπεδα χάρτη</string>
 	<string name="context_menu_item_search_poi">Αναζήτηση ΣΕ</string>
 	
 	<string name="use_trackball_descr">Χρήση του trackball για μετακίνηση του χάρτη</string>
@@ -794,7 +795,7 @@
 	<string name="search_poi_filter">Φιλτράρισμα</string>
 	<string name="menu_mute_off">Ήχος ανοικτός</string>
 	<string name="menu_mute_on">Ήχος κλειστός</string>
-	<string name="voice_provider_descr">Επιλέξτε φωνητική καθοδήγηση για την πλοήγηση</string>
+	<string name="voice_provider_descr">Επιλέξτε φωνητική καθοδήγηση για την πλοήγηση (κωδικοί γλώσσας, δείτε το ISO 639-1)</string>
 	<string name="voice_provider">Φωνητική καθοδήγηση</string>
 	<string name="voice_data_initializing">Αρχικοποίηση δεδομένων φωνής…</string>
 	<string name="voice_data_not_supported">Μη υποστηριζόμενη έκδοση των δεδομένων φωνής</string>
@@ -1310,4 +1311,9 @@
 	<string name="av_camera_focus_descr">Επιλέξτε τον τύπο εστίασης της εσωτερικής κάμερας</string>
 	<string name="osmodroid_mode_on">Παύση OsMoDroid</string>    
     <string name="osmodroid_mode_off">Έναρξη OsMoDroid</string>
-    </resources>
+    <string name="driving_region_japan">Ιαπωνία</string>
+	<string name="driving_region_us">ΗΠΑ</string>
+	<string name="driving_region_canada">Καναδάς</string>
+	<string name="driving_region_europe_asia">Ευρώπη &amp; Ασία</string>
+	<string name="driving_region_uk">ΗΒ, Ινδία, Αυστραλία, Κύπρος κλπ</string>
+	</resources>

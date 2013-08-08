@@ -1,2 +1,4 @@
 bin
+c-src
 OsmAnd-core.jar
+src/net/osmand/core/jni/*

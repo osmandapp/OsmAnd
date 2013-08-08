@@ -9,6 +9,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -42,6 +43,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
+	private ListPreference drivingRegionPreference;
+	private ListPreference metricsAndConstantsPreference;
 
 	
 	@Override
@@ -116,7 +119,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		screen.addPreference(createCheckBoxPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS, R.string.use_kalman_filter_compass, R.string.use_kalman_filter_compass_descr));
 		
 		registerBooleanPreference(settings.USE_ENGLISH_NAMES, screen);
-		registerBooleanPreference(settings.LEFT_SIDE_NAVIGATION, screen);
 
 		
 		// List preferences
@@ -132,7 +134,14 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				settings.OSMAND_THEME, screen,
 				new String[] { "Dark", "Light", "Dark ActionBar" }, new Integer[] { OsmandSettings.OSMAND_DARK_THEME,
 						OsmandSettings.OSMAND_LIGHT_THEME, OsmandSettings.OSMAND_LIGHT_DARK_ACTIONBAR_THEME });
-		MetricsConstants[] mvls  = new MetricsConstants[] {MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.MILES_AND_FOOTS, MetricsConstants.MILES_AND_YARDS}; //MetricsConstants.values();
+		DrivingRegion[] drs  = DrivingRegion.values();
+		entries = new String[drs.length];
+		for (int i = 0; i < entries.length; i++) {
+			entries[i] = getString(drs[i].name);
+		}
+		registerListPreference(settings.DRIVING_REGION, screen, entries, drs);
+		
+		MetricsConstants[] mvls  = MetricsConstants.values();
 		entries = new String[mvls.length];
 		for(int i=0; i<entries.length; i++){
 			entries[i] = mvls[i].toHumanString(getMyApplication());
@@ -201,7 +210,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		
 		applicationModePreference = (ListPreference) screen.findPreference(settings.APPLICATION_MODE.getId());
 		applicationModePreference.setOnPreferenceChangeListener(this);
-
+		drivingRegionPreference = (ListPreference) screen.findPreference(settings.DRIVING_REGION.getId());
+		metricsAndConstantsPreference = (ListPreference) screen.findPreference(settings.METRIC_SYSTEM.getId());
     }
 
 
@@ -219,6 +229,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
 				+ settings.APPLICATION_MODE.get().toHumanString(getMyApplication()) + "]");
+		drivingRegionPreference.setTitle(getString(R.string.driving_region) + "  ["
+				+ getString(settings.DRIVING_REGION.get().name) + "]");
+		// Too long
+//		metricsAndConstantsPreference.setTitle(getString(R.string.unit_of_length) + "  ["
+//				+ settings.METRIC_SYSTEM.get().toHumanString(getMyApplication()) + "]");
 	}
 
 	@Override
@@ -226,7 +241,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		String id = preference.getKey();
 		super.onPreferenceChange(preference, newValue);
 		if (id.equals(settings.SAFE_MODE.getId())) {
-			if (((Boolean) newValue).booleanValue()) {
+			if ((Boolean) newValue) {
 				loadNativeLibrary();
 			}
 		} else if (preference == applicationDir) {
@@ -245,6 +260,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			Intent intent = getIntent();
 			finish();
 			startActivity(intent);
+		} else {
+			updateAllSettings();
 		}
 		return true;
 	}

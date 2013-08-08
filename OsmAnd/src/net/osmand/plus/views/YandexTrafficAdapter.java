@@ -66,8 +66,8 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 				String str = dataStream.toString();
 				// JSONObject json = new JSONObject(str.replace("YMaps.TrafficLoader.onLoad(\"stat\",", "").replace("});", "}"));
 				int start = str.indexOf("timestamp:"); //$NON-NLS-1$
-				start = str.indexOf("\"", start) + 1; //$NON-NLS-1$
-				int end = str.indexOf("\"", start); //$NON-NLS-1$
+				start = str.indexOf('\"', start) + 1; //$NON-NLS-1$
+				int end = str.indexOf('\"', start); //$NON-NLS-1$
 				// exception case
 				if (start < 0 || end < 0) {
 					log.info("Timestamp wasn't updated " + str); //$NON-NLS-1$

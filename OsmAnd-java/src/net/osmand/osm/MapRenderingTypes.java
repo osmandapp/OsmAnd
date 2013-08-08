@@ -248,7 +248,7 @@ public class MapRenderingTypes {
 			rtype.value = null;
 		}
 		if (poiParentCategory != null) {
-			rtype.poiCategory = AmenityType.valueOf(poiParentCategory.toUpperCase());
+			rtype.poiCategory = AmenityType.fromString(poiParentCategory);
 			rtype.poiSpecified = true;
 		}
 		if (poiParentPrefix != null) {
@@ -305,7 +305,7 @@ public class MapRenderingTypes {
 		String tag = parser.getAttributeValue("","poi_tag");
 		if (tag != null) {
 			AmenityRuleType rtype = new AmenityRuleType();
-			rtype.poiCategory = AmenityType.valueOf(poiParentCategory.toUpperCase());
+			rtype.poiCategory = AmenityType.fromString(poiParentCategory);
 			rtype.poiSpecified = true;
 			rtype.relation = Boolean.parseBoolean(parser.getAttributeValue("", "relation"));
 			rtype.poiPrefix = poiParentPrefix;

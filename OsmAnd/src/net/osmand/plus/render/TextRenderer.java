@@ -15,6 +15,7 @@ import net.osmand.data.QuadTree;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 import net.sf.junidecode.Junidecode;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -303,15 +304,32 @@ public class TextRenderer {
 		}
 	}
 	
-	private void createTextDrawInfo(BinaryMapDataObject o, RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair, float xMid, float yMid,
-			Path path, PointF[] points, String name, String tagName) {
+	private void createTextDrawInfo(final BinaryMapDataObject o, RenderingRuleSearchRequest render, RenderingContext rc, TagValuePair pair, final float xMid, float yMid,
+			Path path, final PointF[] points, String name, String tagName) {
 		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom, o);
 		render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
 		render.setStringFilter(render.ALL.R_NAME_TAG, tagName);
 		if(render.search(RenderingRulesStorage.TEXT_RULES)){
 			if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
-				TextDrawInfo text = new TextDrawInfo(name);
+				final TextDrawInfo text = new TextDrawInfo(name);
 				text.fillProperties(render, xMid, yMid);
+				final String tagName2 = render.getStringPropertyValue(render.ALL.R_NAME_TAG2);
+				if (!Algorithms.isEmpty(tagName2)) {
+					o.getObjectNames().forEachEntry(new TIntObjectProcedure<String>() {
+						@Override
+						public boolean execute(int tagid, String nname) {
+							String tagNameN2 = o.getMapIndex().decodeType(tagid).tag;
+							if (tagName2.equals(tagNameN2)) {
+								if (nname != null && nname.trim().length() > 0) {
+									text.text += " " + nname;
+								}
+								return false;
+							}
+							return true;
+						}
+					});
+
+				}
 				paintText.setTextSize(rc.getDensityValue(text.textSize));
 				Rect bs = new Rect();
 				paintText.getTextBounds(name, 0, name.length(), bs);

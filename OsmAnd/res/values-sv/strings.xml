@@ -1175,7 +1175,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="plugin_distance_point_hdop">precision</string>
     <string name="tip_recent_changes_1_5_t">Förändringar i 1.5:
 	\n\t* Röstvarningar vid hastighetsbegränsningar och fartkameror
-	\n\t* Högkvalitativa kartikoner
+	\n\t* Fler röstprompter (uppläsning av gatunamn)
+	\n\t* Högupplösta kartikoner
 	\n\t* Många förändringar av gränssnittet
 	\n\t* Buggfixar i avståndsvisning, GPX-analys, behandling av waypoints, planeringswidget, OSM-uppladdning, https-behandling
     </string>
@@ -1195,4 +1196,13 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="announce_gpx_waypoints">Meddela vid GPX-waypoints</string>
     <string name="osmodroid_mode_on">Stoppa OsMoDroid</string>    
     <string name="osmodroid_mode_off">Starta OsMoDroid</string>
+    <string name="map_widget_fps_info">FPS-avbuggningsinfo</string>
+	<string name="driving_region_descr">Välj område: USA, Europa, UK, Asien och andra</string>
+	<string name="driving_region">Område</string>
+	<string name="driving_region_japan">Japan</string>
+	<string name="driving_region_us">USA</string>
+	<string name="driving_region_canada">Canada</string>
+	<string name="driving_region_europe_asia">Europa &amp; Asien</string>
+	<string name="driving_region_uk">UK, Indien, Australien &amp; andra</string>
+	<string name="local_osm_changes_backup_successful">Ändrad OSM-fil skapad utan problem %1$s</string>
     </resources>

@@ -1539,4 +1539,12 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="use_kalman_filter_compass">Използване на филтър на Kalman</string>
     <string name="speak_descr">Настройки за гласови напътствия - имена на улици, предупреждения за пътя (стопове, легнали полицаи), предупреждения за камери, ограничения на скоростта</string>
 	<string name="osb_author_dialog_password">Парола за OSM (по желание)</string>
+	<string name="map_widget_fps_info">кадри/сек</string>
+	<string name="driving_region_descr">Изберете район: САЩ, Европа, Великобритания, Азия или друг</string>
+	<string name="driving_region">Район</string>
+	<string name="driving_region_japan">Япония</string>
+	<string name="driving_region_us">САЩ</string>
+	<string name="driving_region_canada">Канада</string>
+	<string name="driving_region_europe_asia">Европа и Азия</string>
+	<string name="driving_region_uk">Великобритания, Индия, Австралия и други</string>
 	</resources>

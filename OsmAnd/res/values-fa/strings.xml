@@ -611,7 +611,7 @@
     <string name="recording_is_recorded">صدا/تصویر در حال ضبط میباشد. برای متوقف کردن آن ویجت AV را بزنید.</string>
     <string name="recording_playing">صدایی از ضبط مورد نظر درحال پخش میباشد.\n%1$s</string>
     <string name="recording_delete_confirm">آیا میخواهید این مورد ضبط شده را پاک کنید؟</string>
-    <string name="recording_description">ضبط %1$s%2$ s از %3$s</string>
+    <string name="recording_description">ضبط %1$s%2$s از %3$s</string>
     <string name="osmand_srtm_short_description_80_chars">افزونه OsmAnd برای منحنی های همتراز آفلاین</string>
     <string name="use_magnetic_sensor_descr">استفاده از حسگر مغناطیسی به جای سنسور جهت یابی برای استفاده در قطب نما</string>
     <string name="show_poi_over_map">نشان دادن POI</string>
@@ -1524,4 +1524,11 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="announce_gpx_waypoints">اعلام نقاط بین راهی GPX</string>
     <string name="osmodroid_mode_on">توقف OsMoDroid</string>    
     <string name="osmodroid_mode_off">شروع OsMoDroid</string>
-    </resources>
+    <string name="map_widget_fps_info">اطلاعات FPS</string>
+	<string name="driving_region_descr">انتخاب منطقه رانندگی:آمریکا،اروپا،انگلستان،آسیا و سایر مناطق</string>
+	<string name="driving_region_japan">ژاپن</string>
+	<string name="driving_region_us">ایالات متحده آمریکا</string>
+	<string name="driving_region_canada">کانادا</string>
+	<string name="driving_region_europe_asia">اروپا و آسیا</string>
+	<string name="driving_region_uk">انگلستان، هند، استرالیا و سایر کشورها</string>
+	</resources>

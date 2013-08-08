@@ -3,12 +3,14 @@ package net.osmand.plus.osmodroid;
 import java.util.ArrayList;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
@@ -55,6 +57,19 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 				}
 			}
 
+		}
+		
+		public void reRouteTo(LatLon loc) {
+			OsmandApplication app = activity.getMyApplication();
+			TargetPointsHelper targets = app.getTargetPointsHelper();
+			// If we are in following mode then just update target point
+			targets.navigateToPoint(loc, true, -1);
+			if(!app.getRoutingHelper().isFollowingMode()) {
+				// If we are not in following mode then request new route to calculate
+				// Use default application mode
+				activity.followRoute(app.getSettings().getApplicationMode(), targets.getPointToNavigate(), targets.getIntermediatePoints(),
+						app.getLastKnownLocation(), null);
+			}
 		}
 
 	};

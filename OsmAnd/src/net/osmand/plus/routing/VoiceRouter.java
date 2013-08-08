@@ -14,13 +14,13 @@ import net.osmand.util.Algorithms;
 
 
 public class VoiceRouter {
-	private final int STATUS_UTWP_TOLD = -1;
-	private final int STATUS_UNKNOWN = 0;
-	private final int STATUS_LONG_PREPARE = 1;
-	private final int STATUS_PREPARE = 2;
-	private final int STATUS_TURN_IN = 3;
-	private final int STATUS_TURN = 4;
-	private final int STATUS_TOLD = 5;
+	private static final int STATUS_UTWP_TOLD = -1;
+	private static final int STATUS_UNKNOWN = 0;
+	private static final int STATUS_LONG_PREPARE = 1;
+	private static final int STATUS_PREPARE = 2;
+	private static final int STATUS_TURN_IN = 3;
+	private static final int STATUS_TURN = 4;
+	private static final int STATUS_TOLD = 5;
 	
 	private final RoutingHelper router;
 	private boolean mute = false;
@@ -205,7 +205,7 @@ public class VoiceRouter {
 	public void announceWaypoint(String w) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if(p != null) {
-			p.arrivedAtWayPoint(w).play();
+			p.arrivedAtWayPoint(getSpeakablePointName(w)).play();
 		}
 	}
 
@@ -277,7 +277,7 @@ public class VoiceRouter {
 			if (repeat || currentStatus <= STATUS_UNKNOWN) {
 				if (playGoAheadToDestination(nextInfo == null ? "" :
 						getSpeakableStreetName(nextInfo.directionInfo),
-						nextInfo == null ? "" : nextInfo.pointName)) {
+						nextInfo == null ? "" : getSpeakablePointName(nextInfo.pointName))) {
 					currentStatus = STATUS_TOLD;
 					playGoAheadDist = 0;
 				}
@@ -286,7 +286,7 @@ public class VoiceRouter {
 		}
 		if(nextInfo.intermediatePoint){
 			if (repeat || currentStatus <= STATUS_UNKNOWN) {
-				if (playGoAheadToIntermediate(getSpeakableStreetName(nextInfo.directionInfo), nextInfo.pointName)) {
+				if (playGoAheadToIntermediate(getSpeakableStreetName(nextInfo.directionInfo), getSpeakablePointName(nextInfo.pointName))) {
 					currentStatus = STATUS_TOLD;
 					playGoAheadDist = 0;
 				}
@@ -383,7 +383,7 @@ public class VoiceRouter {
 	private boolean playGoAheadToDestination(String strName, String destName) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			play.goAhead(router.getLeftDistance(), strName).andArriveAtDestination(destName).play();
+			play.goAhead(router.getLeftDistance(), strName).andArriveAtDestination(getSpeakablePointName(destName)).play();
 			return true;
 		}
 		return false;
@@ -392,7 +392,7 @@ public class VoiceRouter {
 	private boolean playGoAheadToIntermediate(String strName, String iName) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			play.goAhead(router.getLeftDistanceNextIntermediate(), strName).andArriveAtIntermediatePoint(iName).play();
+			play.goAhead(router.getLeftDistanceNextIntermediate(), strName).andArriveAtIntermediatePoint(getSpeakablePointName(iName)).play();
 			return true;
 		}
 		return false;
@@ -413,7 +413,7 @@ public class VoiceRouter {
 			play.goAhead(dist, streetName).play();
 		}
 	}
-	
+
 	public String getSpeakableStreetName(RouteDirectionInfo i) {
 		String res = "";
 		if(i == null || !router.getSettings().SPEAK_STREET_NAMES.get()){
@@ -424,7 +424,21 @@ public class VoiceRouter {
 		} else if(!Algorithms.isEmpty(i.getStreetName())) {
 			res = i.getStreetName();
 		}
-		return res.replace('-', ' ');
+		// replace characters which may produce unwanted tts sounds:
+		if(res != null) {
+			res = res.replace('-', ' ');
+			res = res.replace(':', ' ');
+		}
+		return res;
+	}
+
+	public String getSpeakablePointName(String pn) {
+		// replace characters which may produce unwanted tts sounds:
+		if(pn != null) {
+			pn = pn.replace('-', ' ');
+			pn = pn.replace(':', ' ');
+		}
+		return pn;
 	}
 
 	private void playPrepareTurn(RouteDirectionInfo next, int dist) {
@@ -570,21 +584,21 @@ public class VoiceRouter {
 	public void arrivedDestinationPoint(String name) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			play.arrivedAtDestination(name).play();
+			play.arrivedAtDestination(getSpeakablePointName(name)).play();
 		}
 	}
 	
 	public void arrivedIntermediatePoint(String name) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			play.arrivedAtIntermediatePoint(name).play();
+			play.arrivedAtIntermediatePoint(getSpeakablePointName(name)).play();
 		}
 	}
 	
 	public void arrivedWayPoint(String name) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			play.arrivedAtWayPoint(name).play();
+			play.arrivedAtWayPoint(getSpeakablePointName(name)).play();
 		}
 	}
 

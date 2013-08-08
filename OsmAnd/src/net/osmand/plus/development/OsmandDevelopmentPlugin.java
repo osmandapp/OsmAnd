@@ -1,10 +1,18 @@
 package net.osmand.plus.development;
 
+import java.util.EnumSet;
+
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.audionotes.AudioNotesLayer;
+import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.content.Intent;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -13,6 +21,7 @@ import android.preference.PreferenceScreen;
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.development";
 	private OsmandApplication app;
+	private TextInfoWidget fps;
 	
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		this.app = app;
@@ -35,6 +44,33 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public String getName() {
 		return app.getString(R.string.debugging_and_development);
 	}
+	
+	@Override
+	public void registerLayers(MapActivity activity) {
+		registerWidget(activity);
+	}
+
+	
+	private void registerWidget(MapActivity activity) {
+		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+		final OsmandMapTileView mv = activity.getMapView();
+		if (mapInfoLayer != null) {
+			fps = new TextInfoWidget(activity, 0, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText()) {
+				@Override
+				public boolean updateInfo(DrawSettings drawSettings) {
+					if(!mv.isMeasureFPS()) {
+						mv.setMeasureFPS(true);
+					}
+					setText(Integer.toString((int) mv.getFPS()), "FPS");
+					return true;
+				}
+			};
+			mapInfoLayer.getMapInfoControls().registerSideWidget(fps, 0,
+					R.string.map_widget_fps_info, "fps", false, EnumSet.noneOf(ApplicationMode.class),
+					EnumSet.noneOf(ApplicationMode.class), 30);
+			mapInfoLayer.recreateControls();
+		}
+	}
 
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
@@ -51,7 +87,4 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		screen.addPreference(grp);
 	}
 
-	@Override
-	public void registerLayers(MapActivity activity) {
-	}
 }

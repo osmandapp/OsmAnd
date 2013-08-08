@@ -247,8 +247,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				Constructor c = exClass.getConstructor(new Class[] { String.class });
 				Object exInstance = c.newInstance(file.getAbsolutePath());
 				Method getAttributeInt = exClass.getMethod("getAttributeInt", new Class[] { String.class, Integer.TYPE });
-				Integer it = (Integer) getAttributeInt.invoke(exInstance, "Orientation", new Integer(1));
-				orientation = it.intValue();
+				Integer it = (Integer) getAttributeInt.invoke(exInstance, "Orientation", 1);
+				orientation = it;
 			} catch (Exception e) {
 				e.printStackTrace();
 				log.error(e);
@@ -621,8 +621,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					runMediaRecorder(mapActivity, mr, f);
 				} catch (Exception e) {
 					logErr(e);
-					return;
-				}
+                }
 			}
 
 			@Override
@@ -654,8 +653,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void logErr(Exception e) {
 		log.error("Error starting recorder ", e);
 		AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
-		return;
-	}
+    }
 
 	protected Camera openCamera() {
 		try {

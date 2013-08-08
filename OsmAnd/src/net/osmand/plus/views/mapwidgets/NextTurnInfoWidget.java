@@ -112,7 +112,7 @@ public class NextTurnInfoWidget extends BaseMapWidget {
 			String text = OsmAndFormatter.getFormattedDistance(nextTurnDirection, getClientContext());
 			String subtext = null;
 
-			if (makeUturnWhenPossible == true) {
+			if (makeUturnWhenPossible) {
 				text = getResources().getString(R.string.asap);
 			}
 

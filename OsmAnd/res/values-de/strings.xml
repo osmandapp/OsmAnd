@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
@@ -323,7 +323,7 @@
 \n\t\'Keine Rotation (Norden ist oben)\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
 \n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
 \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt "</string>
-	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Darstellung\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
+	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Kartenebenen\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
 	<string name="tip_day_night_mode_t_v2">"Die Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
 \nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → \'Anzeige konfigurieren\' → \'Tag/Nacht-Modus\' geändert werden.
@@ -491,7 +491,7 @@
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
 	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte ist für diesen Ort vorhanden.
 		\n\t
-		\n\tZur Verwendung aktivieren: \'Menu\' → \'Darstellung\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
+		\n\tZur Verwendung aktivieren: \'Menu\' → \'Kartenebenen\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (Systemabhängig)</string>
 	<string name="voice_stream_voice_call">wie Anrufe</string>
@@ -530,7 +530,7 @@
 \n * Kopieren der Koordinaten in die Zwischenablage (Clipboard)</string>
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">"Sie können jeden beliebigen Ort als Favoriten speichern.\n\nEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar. Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Ziel wählen oder einfach nur auf der Karte anzeigen lassen.
-\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Darstellung\' einen Haken bei \'Favoriten\' setzen. "</string>
+\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen. "</string>
 	<string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> Klassifizierung mit Bildern"</string>
 	<string name="error_doing_search">Fehler in der Offlinesuche aufgetreten</string>
 	<string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: \'%s\'</string>
@@ -539,7 +539,7 @@
 	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
 	<string name="preferred_locale">Anzeigesprache</string>
 	<string name="tip_map_switch">Kartenquelle</string>
-	<string name="tip_map_switch_t_v2">\tDie Kartenquelle und die angezeigten Ebenen können in der Katenansicht über das Menü \'Menü\' -&gt; \'Anzeige konfigurieren\' verändert werden.
+	<string name="tip_map_switch_t_v2">\tDie Kartenquelle und die angezeigten Ebenen können in der Katenansicht über das Menü \'Menü\' -&gt; \'Kartenebenen\' verändert werden.
 		\n\tIm Menü \'Kartenquelle…\' können Sie die Karte wählen: vorher heruntergeladene Offline-Vektor-Karten, vordefinierte Online-Kachel-Karten (aktivieren Sie das Plugin \'Online und Kachel-Karten\') oder manuell am Rechner (z.B. mit OsmAndMapCreator) erstellte Karten.
 		\n\tOsmAnd unterstützt auch benutzerdefinierte Quellen.
 	</string>
@@ -722,7 +722,7 @@
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Kartenquelle…</string>
-	<string name="menu_layers">Darstellung</string>
+	<string name="menu_layers">Kartenebenen</string>
 	<string name="context_menu_item_search_poi">Suche POI</string>
 	
 	<string name="use_trackball_descr">Trackball für Kartenbewegung benutzen</string>
@@ -1356,4 +1356,12 @@
 	<string name="speak_title">Ansagen …</string>
 	<string name="speak_descr">Einstellungen für Ansagen zu Straßennamen, Verkehrswarnungen, Blitzern oder Höchstgeschwindigkeit</string>
 	<string name="speak_street_names">Straßennamen ansagen (TTS)</string>
+    <string name="map_widget_fps_info">FPS-Info</string>
+	<string name="driving_region_descr">Region zum Fahren wählen: USA, Europa, UK, Asien etc.</string>
+	<string name="driving_region_japan">Japan</string>
+	<string name="driving_region_us">USA</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="driving_region_europe_asia">Europa und Asien</string>
+	<string name="driving_region_uk">UK, Indien, Australien u.a.</string>
+	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
     </resources>

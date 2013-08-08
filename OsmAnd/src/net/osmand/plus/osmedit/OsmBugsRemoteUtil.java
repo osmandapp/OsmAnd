@@ -107,11 +107,11 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 						responseBody.append(s);
 					}
 				}
-				log.info("Response : " + responseBody.toString()); //$NON-NLS-1$
+				log.info("Response : " + responseBody); //$NON-NLS-1$
 			}
 			connection.disconnect();
 			if (!ok) {
-				return msg + "\n" + responseBody.toString();
+				return msg + "\n" + responseBody;
 			}
 		} catch (NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used

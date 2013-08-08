@@ -47,52 +47,52 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 			ListPreference defAct = createListPreference(p.AV_DEFAULT_ACTION, entries, intValues, R.string.av_widget_action,
 					R.string.av_widget_action_descr);
 			grp.addPreference(defAct);
-			
-			// camera type settings:
-			grp.addPreference(createCheckBoxPreference(p.AV_EXTERNAL_PHOTO_CAM, R.string.av_use_external_camera,
-					R.string.av_use_external_camera_descr));
-			// focus mode settings:
-			// show in menu only suppoted modes:
 			final Camera cam = openCamera();
-			Parameters parameters = cam.getParameters();
-			List<String> sfm = parameters.getSupportedFocusModes();
-			List<String> items = new ArrayList<String>();
-			List<Integer> itemsValues = new ArrayList<Integer>();
-			// filtering known types for translate and set index:
-			for (int index = 0; index < sfm.size(); index++) {
-				if (sfm.get(index).equals("auto")) {
-					items.add(getString(R.string.av_camera_focus_auto));
-					itemsValues.add(AV_CAMERA_FOCUS_AUTO);
-				} else if (sfm.get(index).equals("fixed")) {
-					items.add(getString(R.string.av_camera_focus_hiperfocal));
-					itemsValues.add(AV_CAMERA_FOCUS_HIPERFOCAL);
-				} else if (sfm.get(index).equals("edof")) {
-					items.add(getString(R.string.av_camera_focus_edof));
-					itemsValues.add(AV_CAMERA_FOCUS_EDOF);
-				} else if (sfm.get(index).equals("infinity")) {
-					items.add(getString(R.string.av_camera_focus_infinity));
-					itemsValues.add(AV_CAMERA_FOCUS_INFINITY);
-				} else if (sfm.get(index).equals("macro")) {
-					items.add(getString(R.string.av_camera_focus_macro));
-					itemsValues.add(AV_CAMERA_FOCUS_MACRO);
-				} else if (sfm.get(index).equals("continuous-picture")) {
-					items.add(getString(R.string.av_camera_focus_continuous));
-					itemsValues.add(AV_CAMERA_FOCUS_CONTINUOUS);
+			if (cam != null) {
+				// camera type settings:
+				grp.addPreference(createCheckBoxPreference(p.AV_EXTERNAL_PHOTO_CAM, R.string.av_use_external_camera,
+						R.string.av_use_external_camera_descr));
+				// focus mode settings:
+				// show in menu only suppoted modes:
+
+				Parameters parameters = cam.getParameters();
+				List<String> sfm = parameters.getSupportedFocusModes();
+				List<String> items = new ArrayList<String>();
+				List<Integer> itemsValues = new ArrayList<Integer>();
+				// filtering known types for translate and set index:
+				for (int index = 0; index < sfm.size(); index++) {
+					if (sfm.get(index).equals("auto")) {
+						items.add(getString(R.string.av_camera_focus_auto));
+						itemsValues.add(AV_CAMERA_FOCUS_AUTO);
+					} else if (sfm.get(index).equals("fixed")) {
+						items.add(getString(R.string.av_camera_focus_hiperfocal));
+						itemsValues.add(AV_CAMERA_FOCUS_HIPERFOCAL);
+					} else if (sfm.get(index).equals("edof")) {
+						items.add(getString(R.string.av_camera_focus_edof));
+						itemsValues.add(AV_CAMERA_FOCUS_EDOF);
+					} else if (sfm.get(index).equals("infinity")) {
+						items.add(getString(R.string.av_camera_focus_infinity));
+						itemsValues.add(AV_CAMERA_FOCUS_INFINITY);
+					} else if (sfm.get(index).equals("macro")) {
+						items.add(getString(R.string.av_camera_focus_macro));
+						itemsValues.add(AV_CAMERA_FOCUS_MACRO);
+					} else if (sfm.get(index).equals("continuous-picture")) {
+						items.add(getString(R.string.av_camera_focus_continuous));
+						itemsValues.add(AV_CAMERA_FOCUS_CONTINUOUS);
+					}
 				}
+				entries = items.toArray(new String[items.size()]);
+				intValues = itemsValues.toArray(new Integer[itemsValues.size()]);
+				if (entries.length > 0) {
+					ListPreference camFocus = createListPreference(p.AV_CAMERA_FOCUS_TYPE, entries, intValues, R.string.av_camera_focus,
+							R.string.av_camera_focus_descr);
+					grp.addPreference(camFocus);
+				}
+				// play sound on success photo:
+				grp.addPreference(createCheckBoxPreference(p.AV_PHOTO_PLAY_SOUND, R.string.av_photo_play_sound,
+						R.string.av_photo_play_sound_descr));
+				cam.release();
 			}
-			entries = items.toArray(entries);
-			intValues = itemsValues.toArray(intValues);
-			if (entries.length > 0) {
-				ListPreference camFocus = createListPreference(p.AV_CAMERA_FOCUS_TYPE, entries, intValues, R.string.av_camera_focus,
-						R.string.av_camera_focus_descr);
-				grp.addPreference(camFocus);
-			}
-			// play sound on success photo:
-			grp.addPreference(createCheckBoxPreference(p.AV_PHOTO_PLAY_SOUND, R.string.av_photo_play_sound,
-					R.string.av_photo_play_sound_descr));
-			cam.release();
-
-
 			// video settings:
 			grp.addPreference(createCheckBoxPreference(p.AV_EXTERNAL_RECORDER, R.string.av_use_external_recorder,
 					R.string.av_use_external_recorder_descr));

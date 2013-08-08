@@ -58,8 +58,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	
 	
-	private final boolean USE_KALMAN_FILTER = true;
-	private final float KALMAN_COEFFICIENT = 0.04f;
+	private static final boolean USE_KALMAN_FILTER = true;
+	private static final float KALMAN_COEFFICIENT = 0.04f;
 	
 	float avgValSin = 0;
 	float avgValCos = 0;
@@ -374,7 +374,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private void updateCompassVal() {
 		heading = (float) getAngle(avgValSin, avgValCos);
 		for(OsmAndCompassListener c : compassListeners){
-			c.updateCompassValue(heading.floatValue());
+			c.updateCompassValue(heading);
 		}
 	}
 	

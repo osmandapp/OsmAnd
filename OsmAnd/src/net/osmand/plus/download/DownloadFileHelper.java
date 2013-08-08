@@ -25,8 +25,8 @@ public class DownloadFileHelper {
 	
 	private final static Log log = PlatformUtil.getLog(DownloadFileHelper.class);
 	private static final int BUFFER_SIZE = 32256;
-	protected final int TRIES_TO_DOWNLOAD = 15;
-	protected final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;
+	protected static final int TRIES_TO_DOWNLOAD = 15;
+	protected static final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;
 	private final ClientContext ctx;
 	private boolean interruptDownloading = false;
 	
