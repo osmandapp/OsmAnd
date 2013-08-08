@@ -18,7 +18,7 @@ endif
 LOCAL_STATIC_LIBRARIES := OsmAndCore$(OSMAND_BINARY_SUFFIX)
 
 ifneq ($(OSMAND_USE_PREBUILT),true)
-    LOCAL_SRC_FILES := src/swig.c
+    LOCAL_SRC_FILES := c-src/swig.c
 
     include $(BUILD_SHARED_LIBRARY)
 else
