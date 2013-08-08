@@ -21,7 +21,7 @@ function copyLibs {
 }
 
 function compile {
-	OSMAND_ANDROID_EXTERNAL_DEPENDENCIES=(expat freetype gdal giflib glm glsl-optimizer harfbuzz jpeg libpng protobuf qtbase-desktop skia)
+	OSMAND_ANDROID_EXTERNAL_DEPENDENCIES=(expat freetype gdal giflib glew glm glsl-optimizer harfbuzz jpeg libpng protobuf qtbase-desktop skia zlib)
 	"$ROOT_LOC/core/externals/configure.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
 	"$ROOT_LOC/core/externals/build.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
 	if [ ! -d "$ROOT_LOC/amd64-linux-gcc-release.makefile" ]; then 
