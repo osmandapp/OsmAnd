@@ -42,6 +42,7 @@ if(CMAKE_SHARED_LIBS_ALLOWED_ON_TARGET)
 			LINK_PUBLIC
 				OsmAndCore_static
 				OsmAndCoreUtils_static
+				${target_specific_public_libraries}
 		)
 	else()
 		add_dependencies(OsmAndJNI
