@@ -1365,4 +1365,5 @@
 	<string name="driving_region_uk">UK, Indien, Australien u.a.</string>
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
     <string name="driving_region">Fahr-Gebiet</string>
-	</resources>
+	<string name="osmodroid_mode_on">Stopp OsMoDroid</string>    
+    </resources>
