@@ -1364,4 +1364,5 @@
 	<string name="driving_region_europe_asia">Europa und Asien</string>
 	<string name="driving_region_uk">UK, Indien, Australien u.a.</string>
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
-    </resources>
+    <string name="driving_region">Fahr-Gebiet</string>
+	</resources>
