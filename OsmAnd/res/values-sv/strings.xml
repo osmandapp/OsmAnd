@@ -1100,7 +1100,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="use_magnetic_sensor">Använd magnetisk sensor (kompass)</string>
     <string name="other_location">Annan</string>
     <string name="files_limit">%1$d filer kvar</string>
-    <string name="available_downloads_left">%1$d filer tillgängliga för nedladdning.</string>
+    <string name="available_downloads_left">Du har %1$d filer kvar att ladda ner.</string>
     <string name="install_paid">Fullversion</string>
     <string name="cancel_route">Avbryt rutten</string>
     <string name="cancel_navigation">Avbryt navigeringen</string>
