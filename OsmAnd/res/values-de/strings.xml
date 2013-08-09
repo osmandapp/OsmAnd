@@ -1194,7 +1194,7 @@
     <string name="av_video_format">Video-Ausgabeformat</string>
     <string name="av_use_external_recorder_descr">Externen System-Recorder für Video-Aufnahmen verwenden</string>
     <string name="av_use_external_recorder">System-Recorder</string>
-    <string name="av_settings_descr">Konfigurieren von Audio-und Video-Einstellungen</string>
+    <string name="av_settings_descr">Konfigurieren von Audio- und Video-Einstellungen</string>
     <string name="recording_camera_not_available">Die Kamera ist nicht verfügbar</string>
     <string name="recording_open_external_player">Externen Player öffnen</string>
     <string name="recording_delete_confirm">Wollen Sie diese Aufnahme entfernen?</string>
@@ -1227,12 +1227,12 @@
     <string name="map_widget_audionotes">Audio-Notiz</string>
     <string name="audionotes_plugin_description">Audio/Video-Notiz unterwegs aufnehmen</string>
     <string name="audionotes_plugin_name">Audio/Video-Notizen</string>
-    <string name="recording_description">Aufnahme %1$s %2$s vom %3$s</string>
+    <string name="recording_description">Aufnahme %1$s %2$s von %3$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Änderungen in 1.1.0:\n\t* Entfernungsmesser-Plugin\n\t* Audio/Video-Notiz-Plugin\n\t* Höhenlinien-Plugin\n\t* Fehlerbeseitigungen\n\t* \'Touren-Ansicht\' der Karte mit mehr Kartendetails, neuer Straßenansicht, mehr Kontrast und alpine Wander-Optionen (SAC-Skalierung)\n\t* EM96 Geoid-Offset-Korrektur für GPS-Höhenwerte "</string>
     <string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. \"Verwende Ort…\" um der Notiz einen bestimmten Ort zuzuweisen</string>
     <string name="osmand_srtm_long_description_1000_chars">Das Plugin beinhaltet Höhenlinien, die in Offline-Karten von OsmAnd angezeigt werden können. Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), welches ein bildgebendes System auf dem Satteliten Terra ist, dem Flagschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems).</string>
     <string name="recording_context_menu_show">Anzeigen</string>
-    <string name="recording_photo_description">Foto %1$s vom %2$s</string>
+    <string name="recording_photo_description">Foto %1$s von %2$s</string>
     <string name="av_def_action_picture">Foto aufnehmen</string>
     <string name="recording_context_menu_precord">Foto aufnehmen</string>
     <string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
@@ -1253,7 +1253,7 @@
     <string name="item_unchecked">nicht ausgewählt</string>
     <string name="map_view">Karte</string>
     <string name="access_arrival_time">Ankunftszeit</string>
-    <string name="map_widget_gps_info">GPS Info</string>
+    <string name="map_widget_gps_info">GPS-Info</string>
     <string name="save_current_track_widget">GPX-Track\n speichern</string>
 	<string name="tip_recent_changes_1_1_4_t">Änderungen in Version 1.1.4\n\t* Benutzeroberfläche neu gestaltet\n\t* weitere Fehlerbehebungen</string>
     <string name="street_name">Straße</string>
@@ -1299,8 +1299,8 @@
     <string name="distance_measurement_clear_route">Alle Punkte löschen</string>
     <string name="intermediate_items_sort_return">Anordnung der Zwischenziele auf der Route zum Ziel wurde optimiert.</string>
     <string name="plugin_distance_point">Punkt</string>
-    <string name="osmand_distance_planning_plugin_description">Erstelle GPX-Routen (oder verwende/modifiziere bereits vorhandene GPX-Routen) um die Entfernung zwischen zwei Orten zu messen.</string>
-    <string name="osmand_distance_planning_plugin_name">Enternungsmesser &amp; Routen-Planer</string>
+    <string name="osmand_distance_planning_plugin_description">Erstelle GPX-Routen (oder verwende/modifiziere bereits vorhandene GPX-Daten) um die Entfernung zwischen zwei Orten zu messen.</string>
+    <string name="osmand_distance_planning_plugin_name">Entfernungsmesser &amp; Routen-Planer</string>
     <string name="default_buttons_do_not_show_again">Nicht erneut anzeigen</string>
     <string name="distance_measurement_save_gpx">Als GPX-Datei speichern</string>
     <string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
@@ -1332,7 +1332,7 @@
     <string name="speak_speed_limit">Höchstgeschwindigkeit ansagen</string>
     <string name="speak_cameras">Blitzer ansagen</string>
 	<string name="speak_traffic_warnings">Verkehrsmeldungen ansagen</string>
-	<string name="osb_author_or_password_not_specified">Bitte OSM-Usernamen und Passwort in den Einstellungen eingeben</string>
+	<string name="osb_author_or_password_not_specified">Bitte OSM-Nutzername und Passwort in den Einstellungen eingeben</string>
     <string name="clear_intermediate_points">Zwischenziele löschen</string>
     <string name="keep_intermediate_points">Zwischenziele behalten</string>
     <string name="new_directions_point_dialog">Es sind bereits Zwischenziele gesetzt.</string>
@@ -1357,7 +1357,7 @@
 	<string name="speak_descr">Einstellungen für Ansagen zu Straßennamen, Verkehrswarnungen, Blitzern oder Höchstgeschwindigkeit</string>
 	<string name="speak_street_names">Straßennamen ansagen (TTS)</string>
     <string name="map_widget_fps_info">FPS-Info</string>
-	<string name="driving_region_descr">Region zum Fahren wählen: USA, Europa, UK, Asien etc.</string>
+	<string name="driving_region_descr">Region zum Fahren wählen: USA, Europa, GB, Asien etc.</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Kanada</string>
@@ -1366,4 +1366,5 @@
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
     <string name="driving_region">Fahr-Gebiet</string>
 	<string name="osmodroid_mode_on">Stopp OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Start OsMoDroid</string>
     </resources>
