@@ -222,8 +222,8 @@
   <string name="index_name_oceania">Oseanië</string>
   <string name="index_name_other">Wêreldwye en onderwerp kaarte</string>
   <string name="index_name_wiki">Wêreldwye Wikipedia</string>
-  <string name="index_name_voice">Stem pakkette (opgeneem)</string>
-  <string name="index_name_tts_voice">Stem pakkette (TTS)</string>
+  <string name="index_name_voice">Stem pakkette (opgeneem, beperkte funksies)</string>
+  <string name="index_name_tts_voice">Stem pakkette (TTS-sintese, verkies)</string>
   <string name="amenity_type_wikiosm">Wikipedia (aflyn)</string>
   <string name="amenity_type_user_defined">gebruiker gedefinieerde</string>
   <string name="fav_export_confirmation">Lêer met voorheen uitgevoerde gunstelinge bestaan reeds. Wil jy dit vervang?</string>
@@ -247,7 +247,7 @@
   <string name="osmand_service_descr">Gebruik om OsmAnd aan te hou terwyl skerm af is</string>
   <string name="tip_rotation_switching">Kaart oriëntasie</string>
   
-  <string name="binary_map_download_success">Aflaai suksesvol.\n\t\n\tOm te gebruik aktiveer \'Keuselys\' -&gt; \'Definieer uitsig\'-&gt; \'Kaart bron\' -&gt; \'aflyn vektor kaarte.</string>
+  <string name="binary_map_download_success">Aflaai suksesvol.\n\t\n\tOm te gebruik aktiveer \'Keuselys\' -&gt; \'Kaarte\'-&gt; \'Kaart bron\' -&gt; \'aflyn vektor kaarte.</string>
   <string name="tip_day_night_mode">Dag/nag gebruikswyse</string>
   
   <string name="tip_osm_improve">Verbetering van OSM inligting</string>
@@ -377,7 +377,7 @@
   <string name="gpx_option_reverse_route">Keer GPX rigting om</string>
   <string name="gpx_option_destination_point">Gebruik die huidige bestemming</string>
   <string name="gpx_option_from_start_point">Ry oor die hele spoor</string>
-  <string name="switch_to_vector_map_to_see">Aflyn vektor kaart is teenwoordig vir hierdie ligging.\n\t\n\tOm te gebruik aktiveer \'Kieslys\' -&gt; \'Definieer voorkoms\' -&gt; \'Kaartbron...\' -&gt; \'Aflyn vektor kaarte\'.</string>
+  <string name="switch_to_vector_map_to_see">Aflyn vektor kaart is teenwoordig vir hierdie ligging.\n\t\n\tOm te gebruik aktiveer \'Kieslys\' -&gt; \'Kaarte\' -&gt; \'Kaartbron...\' -&gt; \'Aflyn vektor kaarte\'.</string>
   <string name="choose_audio_stream">Stem begeleiding uitset</string>
   <string name="choose_audio_stream_descr">Kies kanaal om stem begeleiding oor te speel (stelsel afhanklik)</string>
   <string name="voice_stream_voice_call">Stem oproep klank</string>
@@ -407,10 +407,10 @@
   <string name="tip_location_sharing_t">\tJy kan kan die ligging van interessante plekke op jou reis met familie of vriende deel.\n\tOm \'n ligging te deel:\n\tGebruik \'Kaart inhoud kieslys\' -&gt; \'Deel ligging\' kieslys.\n\tKies dan \'n manier om jou ligging te deel. Die keuses is: E-pos, SMS (teks), of kopiëer net die koördinate na die knipbord.
 	</string>
   <string name="tip_favorites">Gunsteling punte</string>
-  <string name="tip_favorites_t">\tDikwels gebruikte punte kan geberg word as gunstelinge.\n\tOm `n punt te berg as `n gunsteling, gaan na die kaart inhoud kieslys, Keuse\'Voeg by gunstelinge\' en tik dan \'n naam in daarvoor. Nadat jy \'n gunsteling geberg het,  is dit beskikbaar in \'Hoof Kieslys\' -&gt; \'_gunstelinge\'.\n\tLank druk op \'n gunsteling, in die \'gunstelinge\' kieslys bied keuses om dit as bestemming te stel, te wysig of te skrap.\n\tOm al die gunsteling punte op die kaart te wys, skakel die \'gunstelinge\' vel aan in \'Kaart inhoud kieslys\' -&gt; \'Definieer vertoon\'.
+  <string name="tip_favorites_t">\tDikwels gebruikte punte kan geberg word as gunstelinge.\n\tOm `n punt te berg as `n gunsteling, gaan na die kaart inhoud kieslys, Keuse\'Voeg by gunstelinge\' en tik dan \'n naam in daarvoor. Nadat jy \'n gunsteling geberg het,  is dit beskikbaar in \'Hoof Kieslys\' -&gt; \'_gunstelinge\'.\n\tLank druk op \'n gunsteling, in die \'gunstelinge\' kieslys bied keuses om dit as bestemming te stel, te wysig of te skrap.\n\tOm al die gunsteling punte op die kaart te wys, skakel die \'gunstelinge\' vel aan in \'Kaart inhoud kieslys\' -&gt; \'Kaarte\'.
 	</string>
   <string name="create_poi_link_to_osm_doc">"<u> Aanlyn OSM </u> kaart klassifikasie met prentjies"</string>
-  <string name="error_doing_search">Fout het voorgekom tydens aflyn soek</string>
+  <string name="error_doing_search">Fout tydens aflyn soek</string>
   <string name="search_offline_geo_error">Kon nie die geo opset \'%s\' ontleed nie</string>
   <string name="search_osm_offline">Soek adres met behulp van aflyn kaarte</string>
   <string name="system_locale">Stelsel</string>
@@ -446,7 +446,7 @@
   <string name="send_location_email_pattern">Om die ligging te sien volg die webskakel %1$s of Android opsetskakel %2$s</string>
   <string name="send_location">Deel ligging</string>
   <string name="context_menu_item_share_location">Deel ligging</string>
-  <string name="add_waypoint_dialog_added">Roetebaken \'\'{0}\'\' was suksesvol bygevoeg</string>
+  <string name="add_waypoint_dialog_added">GPX Roetebaken \'\'{0}\'\' was suksesvol bygevoeg</string>
   <string name="add_waypoint_dialog_title">Voeg roetebaken by tot opgeneemde GPX spoor</string>
   <string name="context_menu_item_add_waypoint">Voeg GPX roetebaken by</string>
   <string name="amenity_type_administrative">Administratief</string>
@@ -474,7 +474,7 @@
   <string name="indexing_map">Besig om `n kaartindeks te skep…</string>
   <string name="indexing_poi">Besig om `n interessante plek indeks te skep…</string>
   <string name="indexing_transport">Skep vervoer indeks…</string>
-  <string name="input_output_error">I/O fout het voorgekom</string>
+  <string name="input_output_error">Lees/skryf fout het voorgekom</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
@@ -528,7 +528,7 @@
   <string name="continuous_rendering_descr">Vertoon deurlopende lewering in plaas van beeld-op-een-slag</string>
   <string name="rendering_exception">Fout het voorgekom tydens die lewering van gekose gebied</string>
   <string name="show_point_options">Gebruik ligging…</string>
-  <string name="renderer_load_sucess">verbeelder suksesvol gelaai</string>
+  <string name="renderer_load_sucess">Verbeelder suksesvol gelaai</string>
   <string name="renderer_load_exception">Uitsondering voorgekom: verbeelder is nie gelaai nie</string>
   <string name="renderers">vektor verbeelder</string>
   <string name="renderers_descr">Kies lewering voorkoms</string>
@@ -584,7 +584,7 @@
   <string name="layer_transport">Vervoer stilhouplekke</string>
   <string name="layer_poi">Interessante plek…</string>
   <string name="layer_map">Kaartbron…</string>
-  <string name="menu_layers">Definieer uitsig</string>
+  <string name="menu_layers">Kaarte</string>
   <string name="context_menu_item_search_poi">Soek interessante plek</string>
   
   <string name="use_trackball_descr">Gebruik die trekbal om die kaart te skuif</string>
@@ -610,7 +610,7 @@
   <string name="search_poi_filter">Filter</string>
   <string name="menu_mute_off">Klank is aan</string>
   <string name="menu_mute_on">Klank is af</string>
-  <string name="voice_provider_descr">Kies stem begeleiding vir navigasie</string>
+  <string name="voice_provider_descr">Kies stem begeleiding vir navigasie (taalkodes sien ISO 639-1)</string>
   <string name="voice_provider">Stem begeleiding</string>
   <string name="voice_data_initializing">Stem inligting gereedmaak…</string>
   <string name="voice_data_not_supported">Die weergawe van stem inligting word nie ondersteun nie</string>
@@ -863,8 +863,8 @@
   <string name="poi_action_add">byvoeg</string>
   <string name="poi_action_change">verander</string>
   <string name="poi_action_succeded_template">Aksie {0} suksesvol voltooi.</string>
-  <string name="poi_error_unexpected_template">Onverwagse fout het voorgekom, tydens die uitvoering van aksie {0}.</string>
-  <string name="poi_error_io_error_template">I/O fout het voorgekom tydens die uitvoering van aksie {0}.</string>
+  <string name="poi_error_unexpected_template">Onverwagte fout het voorgekom tydens die uitvoering van aksie {0}.</string>
+  <string name="poi_error_io_error_template">I/O fout tydens die uitvoering van aksie {0}.</string>
   <string name="poi_error_info_not_loaded">Inligting oor node is nie gelaai nie</string>
   <string name="poi_dialog_name">Naam</string>
   <string name="poi_dialog_opening_hours">Open</string>
@@ -1006,7 +1006,7 @@
 \n\t\'Nag\' - altyd nag kleure
 \n\t\'Ligsensor\' - Beheer deur toestel se ligsensor (indien beskikbaar) "
 	</string>	
-	<string name="tip_map_switch_t_v2">"→Die kaart bron en lae vertoon word verander in \'Keuselys\' -&gt; \'Definieër voorkoms\' in kaart vertoon. ↵\n→Onder \'Kaart bron…\' kan jy kies tussen die gebruik van voorafgelaaide aflyn vektor kaarte, voorafgedefinieërde (aanlyn) teël bronne (aktiveer die \'aanlyn en teël kaarte\' inlasmodule hiervoor), of kaarte met die hand geskep met bv. OsmAndMapCreator op `n rekenaar. ↵\n→OsmAnd ondersteun ook persoonlike bronne. "
+	<string name="tip_map_switch_t_v2">"→Die kaart bron en lae vertoon word verander in \'Keuselys\' -&gt; \'Kaarte\' in kaart vertoon. ↵\n→Onder \'Kaart bron…\' kan jy kies tussen die gebruik van voorafgelaaide aflyn vektor kaarte, voorafgedefinieërde (aanlyn) teël bronne (aktiveer die \'aanlyn en teël kaarte\' inlasmodule hiervoor), of kaarte met die hand geskep met bv. OsmAndMapCreator op `n rekenaar. ↵\n→OsmAnd ondersteun ook persoonlike bronne. "
 	</string>
 	<string name="tip_app_mode_t_v2">"\tOsmAnd ondersteun verskillende (verstelbare) toepassingsprofiele vir verskillende gebruiksgevalle.
 \n\tJy kan profiele verander deur die profiel knoppie in linker onder hoek van die kaart skerm (simbool kar, fiets, of voetganger), of tydens die bou van `n roete. "</string>
@@ -1208,10 +1208,10 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="plugin_distance_point_ele">hoogte</string>
     <string name="plugin_distance_point">Punt</string>
     <string name="gpx_file_name">GPX lêernaam</string>
-    <string name="gpx_saved_sucessfully">GPX lêer suksesvol geberg na {0}</string>
+    <string name="gpx_saved_sucessfully">GPX lëer suksesvol geberg na {0}</string>
     <string name="osmand_distance_planning_plugin_description">Skep paaie (of gebruik / pas bestaande GPX lêers aan) om die afstand tussen punte te meet. Berg as GPX, kan gebruik word om GPX roetes te beplan.</string>
     <string name="osmand_distance_planning_plugin_name">Afstand rekenaar &amp; beplanning gereedskap</string>
-    <string name="local_osm_changes_backup_successful">OSM veranderingslêer %1$s suskesvol geskep</string>
+    <string name="local_osm_changes_backup_successful">OSM veranderingslëer %1$s suskesvol geskep</string>
     <string name="destination_point">Bestemming %1$s</string>
     <string name="context_menu_item_destination_point">Stel as bestemming</string>
     <string name="please_select_address">Kies eers die stad of straat</string>
@@ -1256,7 +1256,8 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="speak_traffic_warnings">Kondig verkeerswaarskuwings aan</string>
 	<string name="tip_recent_changes_1_5_t">Veranderings in 1.5:
 	\n\t* Stem waarskuwings oor spoed beperkings en kameras
-	\n\t* Hoë ditheid kaart simbole
+	\n\t* Hoë digtheid kaart simbole
+	\n\t* Meer stem vermoëns (straat-naam aankondiging)
 	\n\t* Baie UI veranderings
 	\n\t* Bugfixes in afstand vertoon, GPX analiseerder, oorgangspunt hantering, beplanning funksie, OSM oplaai, https hantering
     </string>
@@ -1277,4 +1278,12 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="speak_street_names">Kondig straatname aan(TTS)</string>
     <string name="osmodroid_mode_on">Staak OsMoDroid</string>    
     <string name="osmodroid_mode_off">Begin OsMoDroid</string>
-    </resources>
+    <string name="driving_region_descr">Kies Bestuur Streek: VSA, Europa, VK, Asië en Ander</string>
+	<string name="driving_region">Bestuur Streek</string>
+	<string name="driving_region_japan">Japan</string>
+	<string name="driving_region_us">Verenigde State van Amerika</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="driving_region_europe_asia">Europa &amp; Asië</string>
+	<string name="driving_region_uk">VK, Indië, Australië &amp; Ander</string>
+	<string name="map_widget_fps_info">FPS ontfout inligting</string>
+	</resources>

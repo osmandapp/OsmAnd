@@ -619,9 +619,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 						mapInfoControls.changeVisibility(mi);
 					}
 					recreateControls();
+					listAdapter.notifyDataSetInvalidated();
 				} else if(position == 0) {
 					mapInfoControls.resetToDefault();
 					recreateControls();
+					listAdapter.notifyDataSetInvalidated();
 				}				
 			}
 		});
@@ -745,7 +747,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return progressBar;
 	}
 
-	private class ConfigLayout extends FrameLayout implements UpdateableWidget {
+	private static class ConfigLayout extends FrameLayout implements UpdateableWidget {
 		private ImageViewWidget config;
 
 		private ConfigLayout(Context c, ImageViewWidget config) {

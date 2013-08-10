@@ -96,7 +96,6 @@ public class SRTMPlugin extends OsmandPlugin {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (itemId == R.string.layer_hillshade) {
-					dialog.dismiss();
 					HILLSHADE.set(!HILLSHADE.get());
 					updateLayers(mapView, mapActivity);
 				}

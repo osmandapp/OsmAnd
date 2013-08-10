@@ -6,8 +6,7 @@
 			<ListPreference android:key="preferred_locale" android:title="@string/preferred_locale" android:summary="@string/preferred_locale_descr"></ListPreference>
 			<CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names"
 				android:key="use_english_names"></CheckBoxPreference>
+			<ListPreference android:key="default_driving_region" android:title="@string/driving_region" android:summary="@string/driving_region_descr"></ListPreference>
 			<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
-			<CheckBoxPreference android:summary="@string/left_side_navigation_descr" android:title="@string/left_side_navigation"
-				android:key="left_side_navigation"></CheckBoxPreference>
 			<ListPreference android:key="osmand_theme" android:title="@string/choose_osmand_theme" android:summary="@string/choose_osmand_theme_descr"></ListPreference>
 </PreferenceScreen>

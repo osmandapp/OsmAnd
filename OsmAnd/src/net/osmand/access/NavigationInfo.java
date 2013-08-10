@@ -87,7 +87,7 @@ public class NavigationInfo {
 				return null;
 			if (style == RelativeDirectionStyle.CLOCKWISE) {
 				String result = NavigationInfo.this.getString(R.string.towards);
-				result += " " + String.valueOf((value != 0) ? value : 12); //$NON-NLS-1$
+				result += " " + ((value != 0) ? value : 12); //$NON-NLS-1$
 				result += " " + NavigationInfo.this.getString(R.string.oclock); //$NON-NLS-1$
 				return result;
 			} else {

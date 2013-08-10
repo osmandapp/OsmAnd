@@ -56,5 +56,6 @@
 
 	<color name="osmbug_opened">#C8FF0000</color> <!-- standard RED -->
 	<color name="osmbug_closed">#C800FF00</color> <!-- standard GREEN -->
+	<color name="osmbug_not_submitted">#C8FFFF00</color> <!-- standard YELLOW -->
 	
 </resources>

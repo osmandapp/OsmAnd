@@ -206,8 +206,8 @@ public class GeoIntentActivity extends OsmandListActivity {
 				int i = q.indexOf(',');
 				String lat = q.substring(0, i);
 				String lon = q.substring(i + 1);
-				if (lat.indexOf(":") != -1) {
-					i = lat.indexOf(":");
+				if (lat.indexOf(':') != -1) {
+					i = lat.indexOf(':');
 					lat = lat.substring(i + 1);
 				}
 				try {
@@ -422,7 +422,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		});
 	}
 	
-	private class Empty implements MyService {
+	private static class Empty implements MyService {
 
 		@Override
 		public Collection<MapObject> execute() {
@@ -431,7 +431,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		
 	}
 	
-	private class GeoPointSearch implements MyService {
+	private static class GeoPointSearch implements MyService {
 		private MapObject point;
 		/**
 		 * geo:latitude,longitude geo:latitude,longitude?z=zoom

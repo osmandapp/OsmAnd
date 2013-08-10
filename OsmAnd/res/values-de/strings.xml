@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
@@ -154,7 +154,7 @@
 		\n\t *Verbesserter Benutzerführung*
 		\n\t - Benutzbarkeit in vielen Punkten verbessert "
 	</string>
-	<string name="osm_editing_plugin_description">Ermöglicht das Erstellen und Bearbeiten von OSM POI Objekten und Fehlermeldungen, sowie das Hochladen von GPX-Dateien (benötigt ein OSM-Benutzerkonto).</string>
+	<string name="osm_editing_plugin_description">Ermöglicht das Erstellen und Bearbeiten von OSM-POI-Objekten und -Fehlermeldungen, sowie das Hochladen von GPX-Dateien (benötigt ein OSM-Benutzerkonto).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden eventuell schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">Spiele Ansagen der aktuell ausgewählten Stimme ab</string>
@@ -174,10 +174,10 @@
 	<string name="gpx_visibility_txt">Sichtbarkeit</string>
 	<string name="gpx_tags_txt">Tags</string>
 	<string name="gpx_description_txt">Beschreibung</string>
-	<string name="validate_gpx_upload_name_pwd">Bitte trage OSM Benutzername und Passwort ein, um GPX-Dateien hochzuladen.</string>
+	<string name="validate_gpx_upload_name_pwd">Bitte tragen Sie Ihren OSM-Benutzernamen und Passwort ein, um GPX-Dateien hochzuladen.</string>
 	<string name="default_buttons_support">Unterstütze OsmAnd</string>
 	<string name="support_new_features">Unterstütze neue Funktionen</string>
-	<string name="support_new_features_descr">Fördere mit einer Spende die Entwicklung neuer Funktionen für die Anwendung</string>
+	<string name="support_new_features_descr">Unterstützen Sie mit einer Spende die Entwicklung neuer Funktionen für die Anwendung</string>
 	
 	<string name="show_ruler_level">Zeige Maßstab an</string>
 	<string name="info_button">Info</string>
@@ -192,8 +192,8 @@
 	<string name="accessibility_off">Aus</string>
 	<string name="accessibility_default">Wie globale Systemeinstellung</string>
 	<string name="backToMenu">Zurück zum Menü</string>
-	<string name="zoomOut">Auszoomen</string>
-	<string name="zoomIn">Einzoomen</string>
+	<string name="zoomOut">Herauszoomen</string>
+	<string name="zoomIn">Hereinzoomen</string>
 	<string name="zoomIs">Zoom ist</string>
 	<string name="north">Nord</string>
 	<string name="north_north_east">Nord-Nord-Ost</string>
@@ -323,7 +323,7 @@
 \n\t\'Keine Rotation (Norden ist oben)\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
 \n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
 \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt "</string>
-	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Darstellung\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
+	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Kartenebenen\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
 	<string name="tip_day_night_mode_t_v2">"Die Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
 \nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → \'Anzeige konfigurieren\' → \'Tag/Nacht-Modus\' geändert werden.
@@ -491,7 +491,7 @@
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
 	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte ist für diesen Ort vorhanden.
 		\n\t
-		\n\tZur Verwendung aktivieren: \'Menu\' → \'Darstellung\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
+		\n\tZur Verwendung aktivieren: \'Menu\' → \'Kartenebenen\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (Systemabhängig)</string>
 	<string name="voice_stream_voice_call">wie Anrufe</string>
@@ -530,7 +530,7 @@
 \n * Kopieren der Koordinaten in die Zwischenablage (Clipboard)</string>
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">"Sie können jeden beliebigen Ort als Favoriten speichern.\n\nEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar. Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Ziel wählen oder einfach nur auf der Karte anzeigen lassen.
-\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Darstellung\' einen Haken bei \'Favoriten\' setzen. "</string>
+\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen. "</string>
 	<string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> Klassifizierung mit Bildern"</string>
 	<string name="error_doing_search">Fehler in der Offlinesuche aufgetreten</string>
 	<string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: \'%s\'</string>
@@ -539,7 +539,7 @@
 	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
 	<string name="preferred_locale">Anzeigesprache</string>
 	<string name="tip_map_switch">Kartenquelle</string>
-	<string name="tip_map_switch_t_v2">\tDie Kartenquelle und die angezeigten Ebenen können in der Katenansicht über das Menü \'Menü\' -&gt; \'Anzeige konfigurieren\' verändert werden.
+	<string name="tip_map_switch_t_v2">\tDie Kartenquelle und die angezeigten Ebenen können in der Katenansicht über das Menü \'Menü\' -&gt; \'Kartenebenen\' verändert werden.
 		\n\tIm Menü \'Kartenquelle…\' können Sie die Karte wählen: vorher heruntergeladene Offline-Vektor-Karten, vordefinierte Online-Kachel-Karten (aktivieren Sie das Plugin \'Online und Kachel-Karten\') oder manuell am Rechner (z.B. mit OsmAndMapCreator) erstellte Karten.
 		\n\tOsmAnd unterstützt auch benutzerdefinierte Quellen.
 	</string>
@@ -722,7 +722,7 @@
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Kartenquelle…</string>
-	<string name="menu_layers">Darstellung</string>
+	<string name="menu_layers">Kartenebenen</string>
 	<string name="context_menu_item_search_poi">Suche POI</string>
 	
 	<string name="use_trackball_descr">Trackball für Kartenbewegung benutzen</string>
@@ -1171,7 +1171,7 @@
     <string name="non_optimal_route_calculation">Berechne eventuell nicht optimale Routen über lange Distanzen</string>
     <string name="gps_not_available">Bitte GPS-Ortung in den Einstellungen aktivieren</string>
     <string name="enable_plugin_monitoring_services">"Standort-Aufzeichnungs-Modul aktivieren, um Aufzeichnungsdienste (GPX-Aufnahme, Online-Tracking) zu verwenden"</string>
-    <string name="zxing_barcode_scanner_not_found">Barcode Scanner Anwendung nicht installiert. Soll in Market gesucht werden?</string>
+    <string name="zxing_barcode_scanner_not_found">Barcode-Scanner-Anwendung nicht installiert. Soll im Play-Store danach gesucht werden?</string>
 	<string name="close_changeset">Änderungssatz schließen</string>
 <string name="incomplete_locale">unfertig</string>
 	<string name="monitoring_control_start">Start</string>
@@ -1180,7 +1180,7 @@
     <string name="osmodroid_plugin_name">OsMoDroid-Plugin</string>
 	<string name="index_srtm_parts">Teile</string>
     <string name="index_srtm_ele">Höhenlinien</string>
-    <string name="srtm_plugin_description">Ermöglicht das Laden von Offline Höhenlinien und Relief-Schattierungen (Einstellungen -&gt; Daten-Management -&gt; Herunterladen -&gt; Kartentyp wählen).</string>
+    <string name="srtm_plugin_description">Ermöglicht das Laden von offline Höhenlinien und Relief-Schattierungen (Einstellungen -&gt; Daten-Management -&gt; Herunterladen -&gt; Kartentyp wählen).</string>
     <string name="srtm_plugin_name">Höhenlinien-Plugin</string>
     <string name="download_select_map_types">Andere Karten</string>
     <string name="download_srtm_maps">Höhenlinien</string>
@@ -1194,7 +1194,7 @@
     <string name="av_video_format">Video-Ausgabeformat</string>
     <string name="av_use_external_recorder_descr">Externen System-Recorder für Video-Aufnahmen verwenden</string>
     <string name="av_use_external_recorder">System-Recorder</string>
-    <string name="av_settings_descr">Konfigurieren von Audio-und Video-Einstellungen</string>
+    <string name="av_settings_descr">Konfigurieren von Audio- und Video-Einstellungen</string>
     <string name="recording_camera_not_available">Die Kamera ist nicht verfügbar</string>
     <string name="recording_open_external_player">Externen Player öffnen</string>
     <string name="recording_delete_confirm">Wollen Sie diese Aufnahme entfernen?</string>
@@ -1227,12 +1227,12 @@
     <string name="map_widget_audionotes">Audio-Notiz</string>
     <string name="audionotes_plugin_description">Audio/Video-Notiz unterwegs aufnehmen</string>
     <string name="audionotes_plugin_name">Audio/Video-Notizen</string>
-    <string name="recording_description">Aufnahme %1$s %2$s vom %3$s</string>
+    <string name="recording_description">Aufnahme %1$s %2$s von %3$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Änderungen in 1.1.0:\n\t* Entfernungsmesser-Plugin\n\t* Audio/Video-Notiz-Plugin\n\t* Höhenlinien-Plugin\n\t* Fehlerbeseitigungen\n\t* \'Touren-Ansicht\' der Karte mit mehr Kartendetails, neuer Straßenansicht, mehr Kontrast und alpine Wander-Optionen (SAC-Skalierung)\n\t* EM96 Geoid-Offset-Korrektur für GPS-Höhenwerte "</string>
     <string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. \"Verwende Ort…\" um der Notiz einen bestimmten Ort zuzuweisen</string>
-    <string name="osmand_srtm_long_description_1000_chars">Das Plugin beinhaltet Höhenlinien, die in Offline-Karten von OsmAnd angezeigt werden können. Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), welches ein bildgebendes System auf dem Satteliten Terra ist, dem Flagschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">Das Plugin beinhaltet Höhenlinien, die in Offline-Karten von OsmAnd angezeigt werden können. Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flagschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems).</string>
     <string name="recording_context_menu_show">Anzeigen</string>
-    <string name="recording_photo_description">Foto %1$s vom %2$s</string>
+    <string name="recording_photo_description">Foto %1$s von %2$s</string>
     <string name="av_def_action_picture">Foto aufnehmen</string>
     <string name="recording_context_menu_precord">Foto aufnehmen</string>
     <string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
@@ -1253,7 +1253,7 @@
     <string name="item_unchecked">nicht ausgewählt</string>
     <string name="map_view">Karte</string>
     <string name="access_arrival_time">Ankunftszeit</string>
-    <string name="map_widget_gps_info">GPS Info</string>
+    <string name="map_widget_gps_info">GPS-Info</string>
     <string name="save_current_track_widget">GPX-Track\n speichern</string>
 	<string name="tip_recent_changes_1_1_4_t">Änderungen in Version 1.1.4\n\t* Benutzeroberfläche neu gestaltet\n\t* weitere Fehlerbehebungen</string>
     <string name="street_name">Straße</string>
@@ -1299,8 +1299,8 @@
     <string name="distance_measurement_clear_route">Alle Punkte löschen</string>
     <string name="intermediate_items_sort_return">Anordnung der Zwischenziele auf der Route zum Ziel wurde optimiert.</string>
     <string name="plugin_distance_point">Punkt</string>
-    <string name="osmand_distance_planning_plugin_description">Erstelle GPX-Routen (oder verwende/modifiziere bereits vorhandene GPX-Routen) um die Entfernung zwischen zwei Orten zu messen.</string>
-    <string name="osmand_distance_planning_plugin_name">Enternungsmesser &amp; Routen-Planer</string>
+    <string name="osmand_distance_planning_plugin_description">Erstelle GPX-Routen (oder verwende/modifiziere bereits vorhandene GPX-Daten) um die Entfernung zwischen zwei Orten zu messen.</string>
+    <string name="osmand_distance_planning_plugin_name">Entfernungsmesser &amp; Routen-Planer</string>
     <string name="default_buttons_do_not_show_again">Nicht erneut anzeigen</string>
     <string name="distance_measurement_save_gpx">Als GPX-Datei speichern</string>
     <string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
@@ -1332,7 +1332,7 @@
     <string name="speak_speed_limit">Höchstgeschwindigkeit ansagen</string>
     <string name="speak_cameras">Blitzer ansagen</string>
 	<string name="speak_traffic_warnings">Verkehrsmeldungen ansagen</string>
-	<string name="osb_author_or_password_not_specified">Bitte OSM-Usernamen und Passwort in den Einstellungen eingeben</string>
+	<string name="osb_author_or_password_not_specified">Bitte OSM-Nutzername und Passwort in den Einstellungen eingeben</string>
     <string name="clear_intermediate_points">Zwischenziele löschen</string>
     <string name="keep_intermediate_points">Zwischenziele behalten</string>
     <string name="new_directions_point_dialog">Es sind bereits Zwischenziele gesetzt.</string>
@@ -1356,4 +1356,15 @@
 	<string name="speak_title">Ansagen …</string>
 	<string name="speak_descr">Einstellungen für Ansagen zu Straßennamen, Verkehrswarnungen, Blitzern oder Höchstgeschwindigkeit</string>
 	<string name="speak_street_names">Straßennamen ansagen (TTS)</string>
+    <string name="map_widget_fps_info">FPS-Info</string>
+	<string name="driving_region_descr">Region zum Fahren wählen: USA, Europa, GB, Asien etc.</string>
+	<string name="driving_region_japan">Japan</string>
+	<string name="driving_region_us">USA</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="driving_region_europe_asia">Europa und Asien</string>
+	<string name="driving_region_uk">UK, Indien, Australien u.a.</string>
+	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
+    <string name="driving_region">Fahr-Gebiet</string>
+	<string name="osmodroid_mode_on">Stopp OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Start OsMoDroid</string>
     </resources>

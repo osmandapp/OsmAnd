@@ -1159,7 +1159,7 @@
     <string name="av_use_external_recorder">Utilizza il registratore di sistema</string>
     <string name="av_settings_descr">Configura le impostazioni audio e video</string>
     <string name="av_settings">"Impostazioni audio/video "</string>
-    <string name="recording_error">"Errore durante la registrazione "</string>
+    <string name="recording_error">Errore durante la registrazione </string>
     <string name="recording_camera_not_available">La fotocamera non è disponibile</string>
     <string name="recording_is_recorded">L\'audio/video sta per essere registrato. Per fermarlo seleziona il widget AV.</string>
     <string name="recording_playing">L\'audio della registrazione specificata sta per essere riprodotto.\n%1$s</string>
@@ -1323,7 +1323,7 @@
 <string name="local_index_gpx_timespan">\nTempo trascorso: %1$d:%2$02d:%3$02d</string>
 	
 	<string name="speak_warnings_descr">Configura gli avvisi del traffico (fermate forzate, dossi rallentatori) avvisi autovelox, limiti di velocità</string>
-    <string name="speak_speed_limit">Annuncia limite di velocità</string>
+    <string name="speak_speed_limit">Annuncia limiti di velocità</string>
     <string name="speak_cameras">Annuncia autovelox</string>
 	<string name="speak_traffic_warnings">Annuncia avvisi di traffico</string>
 	<string name="tip_recent_changes_1_5_t">Cambiamenti nella 1.5:
@@ -1350,4 +1350,12 @@
     <string name="announce_gpx_waypoints">Annuncia i punti GPX di passaggio</string>
     <string name="osmodroid_mode_on">Ferma OsMoDroid</string>    
     <string name="osmodroid_mode_off">Avvia OsMoDroid</string>
-    </resources>
+    <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia e Altre</string>
+	<string name="driving_region">Regione di guida</string>
+	<string name="driving_region_japan">Giappone</string>
+	<string name="driving_region_us">Stati Uniti</string>
+	<string name="driving_region_canada">Canada</string>
+	<string name="driving_region_europe_asia">Europa &amp; Asia</string>
+	<string name="driving_region_uk">UK, India, Australia e Altri</string>
+	<string name="map_widget_fps_info">Informazioni FPS</string>
+	</resources>

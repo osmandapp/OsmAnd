@@ -202,6 +202,10 @@ public class DownloadOsmandIndexesHelper {
 			this.assetName = assetName;
 			this.destFile = destFile;
 		}
+		
+		public long getDateModified() {
+			return dateModified;
+		}
 
 		@Override
 		public boolean isAccepted(){

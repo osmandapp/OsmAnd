@@ -241,7 +241,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				boolean editied = helper.editFavouriteName(point, editText.getText().toString(), cat.getText().toString());
+				boolean editied = helper.editFavouriteName(point, editText.getText().toString().trim(), cat.getText().toString());
 				if (editied) {
 					favouritesAdapter.synchronizeGroups();
 					favouritesAdapter.sort(favoritesComparator);

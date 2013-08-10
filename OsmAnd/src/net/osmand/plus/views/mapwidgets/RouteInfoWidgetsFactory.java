@@ -10,6 +10,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -62,7 +63,7 @@ public class RouteInfoWidgetsFactory {
 					if (makeUturnWhenPossible) {
 						visible = true;
 						turnImminent = 0;
-						turnType = TurnType.valueOf(TurnType.TU, settings.LEFT_SIDE_NAVIGATION.get());
+						turnType = TurnType.valueOf(TurnType.TU, settings.DRIVING_REGION.get().leftHandDriving);
 						TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 						invalidate();
 					} else {
@@ -569,7 +570,7 @@ public class RouteInfoWidgetsFactory {
 						RouteInfoLayer ls = view.getLayerByClass(RouteInfoLayer.class);
 						if (ls != null) {
 							int di = ls.getDirectionInfo();
-							if (di >= 0 && ls.isVisible() & di < routingHelper.getRouteDirections().size()) {
+							if (di >= 0 && ls.isVisible() && di < routingHelper.getRouteDirections().size()) {
 								RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
 								if (next != null) {
 									loclanes = next.getTurnType().getLanes();
@@ -621,6 +622,7 @@ public class RouteInfoWidgetsFactory {
 		ptext.setTextAlign(Align.CENTER);
 		
 		final BaseMapWidget alarm = new BaseMapWidget(ma) {
+			private int textDy = 0;
 			private String text = "";
 			private Bitmap img = null;
 			private int imgId;
@@ -645,19 +647,21 @@ public class RouteInfoWidgetsFactory {
 					}
 					if(alarm != null) {
 						int locimgId = 0;
+						int textDy = 0;
 						String text = null;
 						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
 							text = alarm.getIntValue() +"";
+							if(settings.DRIVING_REGION.get().americanSigns){
+								locimgId = R.drawable.warnings_speed_limit_us;
+								textDy = (int) (-12 * scaleCoefficient);
+							}
 						} else if(alarm.getType() == AlarmInfo.SPEED_CAMERA) {
-							text = "CAM";
 							locimgId = R.drawable.warnings_speed_camera;
 						} else if(alarm.getType() == AlarmInfo.BORDER_CONTROL) {
 							text = "CLO";
 						} else if(alarm.getType() == AlarmInfo.TOLL_BOOTH) {
 							text = "$";
 						} else if(alarm.getType() == AlarmInfo.TRAFFIC_CALMING) {
-							// temporary omega
-							text = "~^~";
 							locimgId = R.drawable.warnings_speed_bump;
 						} else if(alarm.getType() == AlarmInfo.STOP) {
 							// text = "STOP";
@@ -682,6 +686,7 @@ public class RouteInfoWidgetsFactory {
 							}
 							if(text != null && !text.equals(this.text)) {
 								this.text = text;
+								this.textDy = textDy;
 								invalidate();
 							}
 						}
@@ -697,9 +702,11 @@ public class RouteInfoWidgetsFactory {
 					RectF f = new RectF(th / 2, th / 2, getWidth() - th / 2, getHeight() - th / 2);
 					canvas.drawOval(f, content);
 					canvas.drawOval(f, paintCircle);
-					canvas.drawText(text, getWidth() / 2, getHeight() / 2 + ptext.descent() + 3 * scaleCoefficient, ptext);
 				} else {
 					canvas.drawBitmap(img, 0, 0, paintCircle);
+				}
+				if(text.length() > 0) {
+					canvas.drawText(text, getWidth() / 2 , getHeight() / 2 + ptext.descent() + 3 * scaleCoefficient - textDy, ptext);
 				}
 			}
 

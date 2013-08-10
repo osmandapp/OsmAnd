@@ -180,8 +180,8 @@ public class MapActivityActions implements DialogProvider {
 			public void onClick(DialogInterface dialog, int which) {
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
 				final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
-				point.setName(editText.getText().toString());
-				point.setCategory(cat.getText().toString());
+				point.setName(editText.getText().toString().trim());
+				point.setCategory(cat.getText().toString().trim());
 				boolean added = helper.addFavourite(point);
 				if (added) {
 					AccessibleToast.makeText(activity, MessageFormat.format(
@@ -1309,6 +1309,9 @@ public class MapActivityActions implements DialogProvider {
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					if(getMyApplication().getLocationProvider().getLocationSimulation().isRouteAnimating()) {
+						getMyApplication().getLocationProvider().getLocationSimulation().startStopRouteAnimation(mapActivity);
+					}
 					routingHelper.setFinalAndCurrentLocation(null, new ArrayList<LatLon>(), getLastKnownLocation(),
 							routingHelper.getCurrentGPXRoute());
 					settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());

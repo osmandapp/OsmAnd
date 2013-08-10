@@ -505,7 +505,7 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 			
 			int dist = locationToStart == null ? 0 : (int) (MapUtils.getDistance(stop.getStart().getLocation(), locationToStart));
 			String distance =  OsmAndFormatter.getFormattedDistance(dist, (ClientContext) getApplication()) + " "; //$NON-NLS-1$
-			label.setText(distance + labelW.toString(), TextView.BufferType.SPANNABLE);
+			label.setText(distance + labelW, TextView.BufferType.SPANNABLE);
 			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1, 0);
 			return (row);
 		}

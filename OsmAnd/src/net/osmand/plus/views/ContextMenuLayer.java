@@ -44,9 +44,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		public String getObjectName(Object o);
 		
 	}
-	private final String KEY_LAT_LAN = "context_menu_lat_lon";
-	private final String KEY_DESCRIPTION = "context_menu_description";
-	private final String KEY_SELECTED_OBJECTS = "context_menu_selected_objects";
+	private static final String KEY_LAT_LAN = "context_menu_lat_lon";
+	private static final String KEY_DESCRIPTION = "context_menu_description";
+	private static final String KEY_SELECTED_OBJECTS = "context_menu_selected_objects";
 	private LatLon latLon;
 	private String description;
 	private Map<Object, IContextMenuProvider> selectedObjects = new LinkedHashMap<Object, IContextMenuProvider>();

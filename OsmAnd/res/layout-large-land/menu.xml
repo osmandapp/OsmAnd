@@ -12,7 +12,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/AppName" 
 				android:layout_marginLeft="4dp" android:layout_marginTop="8dp" 
 				android:text="@string/app_name" android:textColor="#000000" android:typeface="serif" android:textSize="30sp"/>
-				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"
+				<TextView android:layout_height="wrap_content" android:layout_width="0dp" android:layout_weight="1"
 				android:layout_marginLeft="24dp" android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:text="@string/app_version" android:gravity="right"
 				android:textColor="#000000" android:typeface="serif" android:id="@+id/TextVersion" android:textSize="18sp"/> 
 				<ImageView android:src="@drawable/help_icon" android:id="@+id/HelpButton" android:layout_marginTop="9dp"
@@ -30,7 +30,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 	 			<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_left" 
 	 			android:focusable="true" android:clickable="true"
 	 			android:layout_weight="1" android:layout_height="165dp">
-	 				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
+	 				<TextView android:layout_height="wrap_content" android:layout_width="0dp"
 					android:layout_gravity="center_vertical|left" 
 					android:layout_marginLeft="15dp" android:text="@string/map_Button" android:textColor="#000000"
 					android:typeface="serif" android:layout_weight="1" android:textSize="24sp"/>
@@ -49,7 +49,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					android:layout_gravity="center|left"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>	
-					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
+					<TextView android:layout_height="wrap_content" android:layout_width="0dp"
 					android:layout_gravity="center_vertical|right"
 					android:layout_weight="1"
 					android:layout_marginRight="15dp"
@@ -61,7 +61,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				<LinearLayout android:id="@+id/FavoritesButton" android:background="@drawable/bg_left"
 				android:focusable="true" android:clickable="true" 
 				android:layout_weight="1" android:layout_height="165dp">
-					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
+					<TextView android:layout_height="wrap_content" android:layout_width="0dp"
 					android:layout_marginLeft="15dp" android:layout_gravity="center_vertical|left"
 					android:text="@string/favorites_Button" android:textColor="#000000" android:typeface="serif"
 					android:layout_weight="1" android:textSize="24sp"/>
@@ -80,7 +80,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					android:layout_gravity="center|left"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>		
-					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
+					<TextView android:layout_height="wrap_content" android:layout_width="0dp"
 					android:layout_gravity="center_vertical|right"
 					android:layout_weight="1"
 					android:layout_marginRight="15dp"

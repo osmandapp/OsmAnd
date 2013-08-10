@@ -34,6 +34,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
@@ -51,8 +52,13 @@ import android.widget.Toast;
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
 	protected final static int LOWEST_ZOOM_TO_ROTATE = 10;
+	private boolean MEASURE_FPS = false;
+	private int fpsMeasureCount = 0;
+	private int fpsMeasureMs = 0;
+	private long fpsFirstMeasurement = 0;
+	private float fps;
 
-	protected final int emptyTileDivisor = 16;
+	protected static final int emptyTileDivisor = 16;
 	
 	public static final float ZOOM_DELTA = 3;
 	public static final float ZOOM_DELTA_1 = 1/3f;
@@ -489,9 +495,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	private void refreshMapInternal(boolean updateVectorRendering) {
 		handler.removeMessages(1);
-		
-		// long time = System.currentTimeMillis();
-
+		long ms = SystemClock.elapsedRealtime();
 		boolean useInternet = getSettings().USE_INTERNET_TO_DOWNLOAD_TILES.get();
 		if (useInternet) {
 			if(application != null) {
@@ -517,18 +521,39 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					latlonRect.left = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.left);
 					latlonRect.bottom = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.bottom);
 					latlonRect.right = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.right);
-					if(nightMode){
+					if (nightMode) {
 						canvas.drawARGB(255, 100, 100, 100);
 					} else {
 						canvas.drawARGB(255, 225, 225, 225);
 					}
 					drawOverMap(canvas, latlonRect, tilesRect, new DrawSettings(nightMode, updateVectorRendering));
-//					log.info("Draw with layers " + (System.currentTimeMillis() - time));
 				} finally {
 					holder.unlockCanvasAndPost(canvas);
 				}
 			}
+			if (MEASURE_FPS) {
+				fpsMeasureMs += SystemClock.elapsedRealtime() - ms;
+				fpsMeasureCount++;
+				if (fpsMeasureCount > 10 || (ms - fpsFirstMeasurement) > 400) {
+					fpsFirstMeasurement = ms;
+					fps = (1000f * fpsMeasureCount / fpsMeasureMs);
+					fpsMeasureCount = 0;
+					fpsMeasureMs = 0;
+				}
+			}
 		}
+	}
+	
+	public boolean isMeasureFPS() {
+		return MEASURE_FPS;
+	}
+	
+	public void setMeasureFPS(boolean measureFPS) {
+		MEASURE_FPS = measureFPS;
+	}
+	
+	public float getFPS(){
+		return fps;
 	}
 	
 	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings drawSettings) {
@@ -808,7 +833,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			zoomPositionChanged(newZoom);
 			if (application.getInternalAPI().accessibilityEnabled()) {
 				if (newZoom != initialMultiTouchZoom) {
-					showMessage(getContext().getString(R.string.zoomIs) + " " + String.valueOf(newZoom)); //$NON-NLS-1$
+					showMessage(getContext().getString(R.string.zoomIs) + " " + newZoom); //$NON-NLS-1$
 				} else {
 					final LatLon p1 = getLatLonFromScreenPoint(x1, y1);
 					final LatLon p2 = getLatLonFromScreenPoint(x2, y2);

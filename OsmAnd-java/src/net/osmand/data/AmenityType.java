@@ -43,12 +43,13 @@ public enum AmenityType {
 		this.defaultTag = defaultTag;	
 	}
 	
-	public static AmenityType fromString(String s){
-		try {
-			return AmenityType.valueOf(s.toUpperCase());
-		} catch (IllegalArgumentException e) {
-			return AmenityType.OTHER;
+	public static AmenityType fromString(String s) {
+		for (AmenityType t : values()) {
+			if (t.name().equalsIgnoreCase(s)) {
+				return t;
+			}
 		}
+		return OTHER;
 	}
 	
 	public String getDefaultTag() {

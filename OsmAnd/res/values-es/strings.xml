@@ -1049,7 +1049,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="download_regular_maps">Mapas normales</string>
     <string name="download_roads_only_maps">Mapas sólo de carreteras</string>
     <string name="incomplete_locale">incompleto</string>
-	<string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
+	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="route_descr_current_location">Posición actual</string>
     
     
@@ -1137,7 +1137,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en extra de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del extra de curvas de nivel reestructurada y arreglada\n\t* Paquetes de sombreado para el extra de Curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo) "
     </string>
     <string name="av_use_external_camera_descr">Usa la aplicación del sistema para fotografía</string>
-    <string name="av_use_external_camera">Usar aplicación de la cámara</string>
+    <string name="av_use_external_camera">Usa aplicación de la cámara</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
     <string name="tip_recent_changes_1_2_t">"Arreglos en 1.2.1:\n\t* Arreglado Geo Intent (Foursquare, c: geo)\n\t* Arreglado el temblor de pantalla durante la navegación\n\t* Otras pequeñas correcciones\nCambios en 1.2:\n\t* Corrección de errores (enrutamiento afinado, búsqueda, grabación de AV, los mensajes de voz, algunas mejoras de visualización)\n\t* Configuración de superposición de sombreado más fácil (requiere extra de Curvas de Nivel)\n\t* Ahora acepta enlaces de localización de maps.google.com\n\t* Nuevo control (Información GPS)\n\t* Filtro de Kalman para brújula\n\t* Soporte para reloj Pebble\n\t* Añadido soporte multiventana para nuevos dispositivos Samsung "
 	</string>
@@ -1289,22 +1289,22 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="distance_measurement_load_gpx">Abrir GPX existente</string>
     <string name="local_index_gpx_timespan">\nTiempo total: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nTiempo en movimiento: %1$d:%2$02d:%3$02d</string>
-	<string name="av_camera_focus">método de enfoque</string>
-	<string name="av_camera_focus_descr">Selecciona el método interno de enfoque de la cámara</string>
-	<string name="av_camera_focus_auto">enfoque automático</string>
+	<string name="av_camera_focus">Método de enfoque</string>
+	<string name="av_camera_focus_descr">Selecciona el método de enfoque de la cámara interna</string>
+	<string name="av_camera_focus_auto">Enfoque automático</string>
 	<string name="av_camera_focus_hiperfocal">Enfoque hiperfocal</string>
-	<string name="av_camera_focus_edof">profundidad de campo extendido (EDOF)</string>
-	<string name="av_camera_focus_infinity">enfocado al infinito</string>
-	<string name="av_camera_focus_macro">modo de enfoque macro (close-up)</string>
-	<string name="av_camera_focus_continuous">la camera intenta enfocar continuamente</string>
-	<string name="av_photo_play_sound">reproducir sonido de disparo</string>
+	<string name="av_camera_focus_edof">Profundidad de campo extendido (EDOF)</string>
+	<string name="av_camera_focus_infinity">Enfocado al infinito</string>
+	<string name="av_camera_focus_macro">Modo de enfoque macro (close-up)</string>
+	<string name="av_camera_focus_continuous">La camera intenta enfocar continuamente</string>
+	<string name="av_photo_play_sound">Sonido al hacer fotos</string>
 	<string name="av_photo_play_sound_descr">Elige si reproducir un sonido al hacer fotos</string>
-<string name="context_menu_item_directions_from">Instrucciones desde</string>
+<string name="context_menu_item_directions_from">Indicaciones desde</string>
     <string name="route_via">Vía:</string>
     <string name="route_from">Desde:</string>
     
 	<string name="speak_warnings_descr">Configurar alertas de tráfico (paradas forzosas, reductores de velocidad), radares, límitaciones de velocidad</string>
-    <string name="speak_speed_limit">Anunciar limitación de velocidad</string>
+    <string name="speak_speed_limit">Anunciar límites de velocidad</string>
     <string name="speak_cameras">Anunciar radares</string>
 	<string name="speak_traffic_warnings">Anunciar avisos de tráfico</string>
 	<string name="osb_author_dialog_password">Contraseña OSM (opcional)</string>
@@ -1315,7 +1315,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 	<string name="speak_descr">Configura el anuncio de nombres de calles, avisos de tráfico (stops, badenes), radares, límites de velocidad</string>
 	<string name="speak_street_names">Anunciar nombres de calles (TTS)</string>
     <string name="tip_recent_changes_1_5_t">Changes in 1.5:
-	\n\t* Avisos de voz sobre límies de velocidad y radares
+	\n\t* Avisos de voz sobre límites de velocidad y radares
 	\n\t* Más posibilidades de avisos de voz (anuncio de nombres de calles)
 	\n\t* Iconos de mapa de alta densidad
 	\n\t* Multitud de cambios en la IU

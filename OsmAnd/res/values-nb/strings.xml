@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -50,7 +51,7 @@
 	<string name="map_widget_day_night">Dag/natt-kart</string>
 	<string name="map_widget_vector_attributes">Opptegningsattributter:</string>
 	<string name="map_widget_renderer">Opptegningsstil</string>
-	<string name="layer_map_appearance">Still inn skjerm</string>
+	<string name="layer_map_appearance">Konfigurer skjerm</string>
 	<string name="show_lanes">Vis kjørefelt</string>
 	<string name="avoid_unpaved">Unngå uasfalterte veier</string>
 	<string name="avoid_ferries">Unngå ferger</string>
@@ -204,13 +205,13 @@
 	<string name="index_name_oceania">Oseania</string>
 	<string name="index_name_other">Verdens- og emnekart</string>
 	<string name="index_name_wiki">Verdensomspennende Wikipedia</string>
-	<string name="index_name_voice">Talepakker (opptak)</string>
-	<string name="index_name_tts_voice">Talepakker (TTS)</string>
+	<string name="index_name_voice">Talepakker (opptak, begrenset funksjonalitet)</string>
+	<string name="index_name_tts_voice">Talepakker (TTS kunstig tale, foretrekk)</string>
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">Brukerdefinert</string>
 	<string name="fav_export_confirmation">Fil med tidligere eksporterte favoritter finnes allerede. Vil du erstatte den?</string>
 	<string name="profile_settings">Profilspesifikke innstillinger</string>
-	<string name="settings_preset">Brukerprofil</string>
+	<string name="settings_preset">Standardprofil</string>
 	<string name="settings_preset_descr">Velg en brukerprofil med egendefinert kart og navigeringsinnstillinger.</string>
 	<string name="routing_settings">Navigering</string>
 	<string name="routing_settings_descr">Spesifiser navigeringsalternativer</string>
@@ -230,7 +231,7 @@
 	<string name="tip_day_night_mode">Dag/natt-modus</string>
 	<string name="tip_day_night_mode_t_v2">\tKartutseende kan for noen vektorkart endres mellom dag (lysere) og natt (mørkere).
 		\n\tNattfarger er tryggere for mørkekjøring.
-		\n\tDag/natt-veksling kan velges i \'Meny\' -&gt; \'Still inn skjerm...\' -&gt;\'Dag/natt-kart\'.
+		\n\tDag/natt-veksling kan velges i \'Meny\' -&gt; \'Konfigurer skjerm...\' -&gt;\'Dag/natt-kart\'.
 		\n\tValgene er:
 		\n\t\'Soloppgang/-nedgang\' - automatisk modus, kontrollert av solens posisjon (standard)
 		\n\t\'Dag\' - bruk alltid dagmodus
@@ -300,7 +301,7 @@
 	<string name="local_index_mi_backup">Deaktiver</string>
 	<string name="local_index_mi_delete">Slett</string>
 	<string name="local_index_mi_reload">Last på nytt fra sd-kort</string>
-	<string name="local_index_download">Last ned…</string>
+	<string name="local_index_download">Last ned</string>
 	<string name="local_index_tile_data">Flisdata: %1$s \nMinimum zoom: %2$d\nMaksimum zoom: %3$d\nNedlastbar: %4$s \nZoom nedlastet: %5$s</string>
 	<string name="local_index_poi_data">Interessepunkt-data</string>
 	<string name="local_index_address_data">Adressedata</string>
@@ -463,7 +464,7 @@
 	<string name="hide_poi_filter">Skjul filter</string>
 	<string name="show_poi_filter">Vis filter</string>
 	<string name="search_poi_filter">Filter</string>
-	<string name="voice_provider_descr">Velg taleveiledning for navigering</string>
+	<string name="voice_provider_descr">Velg taleveiledning for navigering (språkkoder se ISO 639-1)</string>
 	<string name="voice_provider">Taleveiledning</string>
 	<string name="search_near_map">Søk i nærheten av siste kartplassering</string>
 	<string name="search_nearby">Søk i nærheten</string>
@@ -482,8 +483,8 @@
 	<string name="hello">Navigeringsprogrammet OsmAnd</string>
 	<string name="context_menu_item_update_poi">Oppdater interessepunkt</string>
 	<string name="context_menu_item_update_map_confirm">Oppdatere lokaldata via internett?</string>
-	<string name="search_history_city">By:\n {0}</string>
-	<string name="search_history_street">Gate:\n {0}, {1}</string>
+	<string name="search_history_city">By: {0}</string>
+	<string name="search_history_street">Gate: {0}, {1}</string>
 	<string name="search_history_int_streets">Veikryss: {0} x {1} i {2}</string>
 	<string name="search_history_building">Bygning: {0}, {1}, {2}</string>
 	<string name="favorite">Favoritt</string>
@@ -569,13 +570,13 @@
 	<string name="search_activity">Søk</string>
 	<string name="searchpoi_activity">Velg interessepunkt</string>
 	<string name="search_POI_level_btn">Finn mer</string>
-	<string name="incremental_search_city">Søk etter by trinnvis. For å finne byer/postnummer, skriv inn de første tre eller flere tegn.</string>
+	<string name="incremental_search_city">Søk etter by trinnvis</string>
 	<string name="incremental_search_street">Søk etter gate trinnvis</string>
 	<string name="incremental_search_building">Søk etter bygning trinnvis</string>
 	<string name="choose_available_region">Velg region fra liste</string>
 	<string name="choose_intersected_street">Velg kryssende gate</string>
 	<string name="Closest_Amenities">Nærmeste fasiliteter</string>
-	<string name="app_mode_default">Standard</string>
+	<string name="app_mode_default">Se på kartet</string>
 	<string name="app_mode_car">Bil</string>
 	<string name="app_mode_bicycle">Sykkel</string>
 	<string name="app_mode_pedestrian">Fotgjenger</string>
@@ -645,4 +646,49 @@
 	<string name="prefer_in_routing_descr">Foretrekk motorveier</string>
     <string name="max_speed_none">ingen</string>
     <string name="choose_osmand_theme_descr">Vel tema for programmet</string>
+    <string name="driving_region_us">USA</string>
+	<string name="driving_region_canada">Canada</string>
+	<string name="driving_region_europe_asia">Europa og Asia</string>
+	<string name="driving_region_uk">England, India, Australia og andre</string>
+	<string name="driving_region_descr">Velg region for bilkjøring: USA, England, Asia, eller andre</string>
+	<string name="driving_region_japan">Japan</string>
+	<string name="driving_region">Region for bilkjøring</string>
+	<string name="osmodroid_mode_on">Stopp OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Start OsMoDroid</string>
+    <string name="announce_gpx_waypoints">Fortell om GPX-rutepunkter</string>
+    <string name="speak_title">Les opp…</string>
+	<string name="speak_descr">Konfigurér til å lese opp gatenavn, trafikkadvarsler (fartsdumper, etc.), fotoradaradvarsler, fartsgrenser</string>
+	<string name="speak_street_names">Les opp gatenavn (TTS)</string>
+    <string name="speak_speed_limit">Informer om fartsgrense</string>
+    <string name="speak_cameras">Informer om Radarkameraer</string>
+	<string name="speak_traffic_warnings">Les opp trafikkmeldinger</string>
+    <string name="tip_recent_changes_1_5_t">Endringer i 1.5:↵
+→\n\t* Stemmevarslinger om fartsgrenser og radarkameraer
+↵
+→\n\t* Flere muligheter for opplesning (gatenavn blir lest opp)
+↵
+→\n\t* Kartikoner i høy oppløsning
+↵
+→\n\t* Flere endringer i brukergrensesnittet
+↵
+→\n\t* Feilrettinger i avstandsvisningen, GPX-analyse, håndtering av rutepunkter, planleggingsmodulen, opplasting til OSM, https håndtering
+    </string>
+    <string name="osb_author_or_password_not_specified">Oppgi OSM brukernavn og passord i Innstillinger</string>
+    <string name="clear_intermediate_points">Slett mellomliggende rutepunkter</string>
+    <string name="keep_intermediate_points">Behold mellomliggende rutepunkter</string>
+    <string name="new_directions_point_dialog">Mellomliggende rutepunkter er allerede angitt.</string>
+    <string name="context_menu_item_directions_to">Kjøreveiledning til</string>
+    <string name="context_menu_item_directions_from">Kjøreveiledning fra</string>
+    <string name="route_descr_map_location">Kart: </string>
+    <string name="route_descr_lat_lon">Hø %1$.3f, Le %2$.3f</string>
+    <string name="route_descr_current_location">Aktuell posisjon</string>
+    <string name="route_to">Til:</string>
+    <string name="route_via">Via:</string>
+    <string name="route_from">Fra:</string>
+	<string name="local_index_gpx_timespan">\nTotal tid: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nTid i bevegelse: %1$d:%2$02d:%3$02d</string>
+	<string name="destination_point">Mål %1$s</string>
+    <string name="context_menu_item_destination_point">Velg som mål</string>
+    <string name="please_select_address">Velg by eller gate først</string>
+    <string name="search_street_in_neighborhood_cities">Søk etter gaten i nabobyer</string>
     </resources>

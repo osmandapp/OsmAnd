@@ -128,8 +128,8 @@
   <string name="tip_rotation_switching">Orientacja mapy</string>
   
   <string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz pobrać nową w Ustawieniach lub przełączyć się na mapy online.</string>
-  <string name="switch_to_vector_map_to_see">Wektorowa mapa offline jest dostępna dla tej lokalizacji. \n\t\n\tMożesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy… -&gt; Wektorowe mapy offline).</string>
-  <string name="binary_map_download_success">Pobieranie zakończone.\n\t\n\tMożesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy… -&gt; Wektorowe mapy offline).</string>
+  <string name="switch_to_vector_map_to_see">Dla tej lokalizacji dostępna jest wektorowa mapa offline. \n\t\n\tAby użyć wybierz 'Menu' -&gt; 'Warstwy mapy' -&gt; 'Źródło mapy…' -&gt; 'Wektorowe mapy offline'.</string>
+  <string name="binary_map_download_success">Pobieranie zakończone.\n\t\n\tAby użyć aktywuj 'Menu' -&gt; 'Warstwy mapy' -&gt; 'Źródło mapy…' -&gt; 'Wektorowe mapy offline'.</string>
   <string name="choose_audio_stream">Wyjście głosu nawigatora</string>
   <string name="choose_audio_stream_descr">Wybierz kanał do odtwarzania głosu nawigatora (zależne od możliwości systemu)</string>
   <string name="voice_stream_voice_call">Kanał głosowy</string>
@@ -165,10 +165,11 @@
   <string name="tip_location_sharing_t">\tMożesz podzielić się swoją pozycją GPS z rodziną lub znajomymi. \n\tAby to zrobić:: \n\tWybierz z menu kontekstowego mapy \'Opcje punktu\' -&gt; \'Udostępnij pozycję GPS\'. \n\tNastępnie wybierz sposób udostępnienia. Do wyboru jest e-mail, SMS lub zwykłe skopiowanie koordynat do schowka.
 </string>
   <string name="tip_favorites">Ulubione punkty</string>
-  <string name="tip_favorites_t">"\tCzęsto używane punkty mogą zostać zapisane jako ulubione.
+  <string name="tip_favorites_t">\tCzęsto używane punkty mogą zostać zapisane jako ulubione.
 \n\tAby zapisać punkt jako ulubiony przejdź do menu kontekstowego, wybierz \'Opcje punktu\' -&gt; \'Dodaj do ulubionych\' i wprowadź jego nazwę. Po zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Ulubione\'.
 \n\tDłuższe naciśnięcie pozycji w \'Ulubionych\' pokaże opcje dotyczące tego punktu.
-\n\tAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Zdefiniuj widok\'. "</string>
+\n\tAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Warstwy mapy\'.
+	</string>
   <string name="error_doing_search">Wystąpił błąd podczas wyszukiwania offline</string>
   <string name="search_offline_geo_error">Nie można zinterpretować \'%s\'</string>
   <string name="search_osm_offline">Wyszukaj adres korzystając z map offline</string>
@@ -292,8 +293,8 @@
   <string name="rendering_exception">Wystąpił błąd podczas rysowania wybranej powierzchni</string>
   <string name="rendering_out_of_memory">Brak wystarczającej ilości pamięci, by wyświetlić wybrany obszar</string>
   <string name="show_point_options">Użyj lokalizacji…</string>
-  <string name="renderer_load_sucess">Render uruchomiony</string>
-  <string name="renderer_load_exception">Wystąpił błąd, render nie został uruchomiony</string>
+  <string name="renderer_load_sucess">Renderer pomyślnie wczytany</string>
+  <string name="renderer_load_exception">Wystąpił błąd: renderer nie został wczytany</string>
   <string name="renderers">Render wektorowy</string>
   <string name="renderers_descr">Wybierz wygląd mapy wektorowej offline</string>
   <string name="poi_context_menu_website">Pokaż stronę WWW tego POI</string>
@@ -331,7 +332,7 @@
   <string name="show_route">Szczegóły trasy</string>
   <string name="fav_imported_sucessfully">Ulubione zostały zaimportowane</string>
   <string name="fav_file_to_load_not_found">Plik GPX zawierający punkty ulubione nie został znaleziony w {0}</string>
-  <string name="fav_saved_sucessfully">Ulubione zostały zapisane {0}</string>
+  <string name="fav_saved_sucessfully">Ulubione zostały zapisane do {0}</string>
   <string name="no_fav_to_save">Brak ulubionych punktów do zapisania</string>
   <string name="import_fav">Import</string>
   <string name="export_fav">Eksport</string>
@@ -349,7 +350,7 @@
   <string name="layer_transport">Przystanki</string>
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Źródło mapy…</string>
-  <string name="menu_layers">Zdefiniuj widok</string>
+  <string name="menu_layers">Warstwy mapy</string>
   <string name="context_menu_item_search_poi">Szukaj POI</string>
   
   <string name="use_trackball_descr">Użyj trackballa do przesuwania mapy</string>
@@ -377,7 +378,7 @@
   <string name="search_poi_filter">Filtr</string>
   <string name="menu_mute_off">Wyłącz dźwięk</string>
   <string name="menu_mute_on">Włącz dźwięk</string>
-  <string name="voice_provider_descr">Wybierz głos nawigatora</string>
+  <string name="voice_provider_descr">Wybierz głos nawigatora (oznaczenia języków ISO 639-1)</string>
   <string name="voice_provider">Głos nawigatora</string>
   <string name="voice_data_initializing">Inicjowanie danych głosowych…</string>
   <string name="voice_data_not_supported">Niewspierana wersja danych głosowych</string>
@@ -617,19 +618,19 @@
   <string name="favourites_remove_dialog_success">Ulubiony punkt {0} został usunięty.</string>
   <string name="osb_add_dialog_title">Wprowadź opis błędu</string>
   <string name="osb_add_dialog_success">Błąd został zgłoszony</string>
-  <string name="osb_add_dialog_error">Wystąpił błąd, zgłoszenie nie zostało utworzone</string>
+  <string name="osb_add_dialog_error">Wystąpił błąd: zgłoszenie nie zostało utworzone</string>
   <string name="osb_comment_menu_item">Dodaj komentarz</string>
   <string name="osb_comment_dialog_message">Wiadomość</string>
   <string name="osb_comment_dialog_author">Nazwa autora</string>
   <string name="osb_comment_dialog_title">Dodaj komentarz do błędu</string>
   <string name="osb_comment_dialog_add_button">Dodaj komentarz</string>
   <string name="osb_comment_dialog_success">Dodano komentarz</string>
-  <string name="osb_comment_dialog_error">Wystąpił błąd, komentarz nie został dodany</string>
+  <string name="osb_comment_dialog_error">Wystąpił błąd: komentarz nie został dodany</string>
   <string name="osb_close_menu_item">Zamknij błąd</string>
   <string name="osb_close_dialog_title">Zamykanie błędu</string>
   <string name="osb_close_dialog_close_button">Zamknij błąd</string>
   <string name="osb_close_dialog_success">Błąd został zamknięty</string>
-  <string name="osb_close_dialog_error">Wystąpił problem, błąd nie został zamknięty</string>
+  <string name="osb_close_dialog_error">Wystąpił problem: błąd nie został zamknięty</string>
   <string name="poi_edit_title">Edytuj POI</string>
   <string name="poi_create_title">Dodaj POI</string>
   <string name="poi_error_poi_not_found">Nie mogę znaleźć węzła albo udogodnienie (amenity) nie jest pojedynczym węzłem</string>
@@ -1039,7 +1040,7 @@
 		\n\t\'Dzień\' - zawsze używaj trybu dziennego\n\t\'Noc\' - Zawsze używaj trybu nocnego
 		\n\t\'Czujnik światła\' - wygląd mapy kontrolowany jest przez czujnik światła w Twoim urządzeni (jeśli taki posiadasz)
 	</string>	
-	<string name="tip_map_switch_t_v2">\tŹródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Zdefiniuj widok\' w widoku mapy.\n\tWskazując \'Źródło mapy…\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Mapy online\') lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC\n\tOsmAnd wspiera również własne źródła map.
+	<string name="tip_map_switch_t_v2">\tŹródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Warstwy mapy\' w widoku mapy.\n\tWskazując \'Źródło mapy…\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Mapy online\') lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC\n\tOsmAnd wspiera również własne źródła map.
 	</string>
 	<string name="tip_app_mode_t_v2">"\tOsmAnd wspiera różne (konfigurowalne) profile aplikacji do różnych przypadków użycia.\n\tProfile można zmienić wybierając przycisk w lewym dolnym rogu ekranu (ikonka samochodu, roweru lub pieszego), lub podczas wybierania trasy. "</string>
 	<string name="email">email</string>
@@ -1310,4 +1311,12 @@
     <string name="announce_gpx_waypoints">Punkty śladu GPX</string>
     <string name="osmodroid_mode_on">Zatrzymaj OsMoDroid</string>    
     <string name="osmodroid_mode_off">Uruchom OsMoDroid</string>
-    </resources>
+    <string name="driving_region_japan">Japonia</string>
+	<string name="driving_region_us">Stany Zjednoczone</string>
+	<string name="driving_region_europe_asia">Europa i Azja</string>
+	<string name="driving_region_uk">Wielka Brytania, Indie, Australia i inne</string>
+	<string name="driving_region_descr">Wybierz region, w którym będziesz się poruszał: Stany Zjednoczone, Europa, Wielka Brytania, Azja i inne</string>
+	<string name="driving_region">Region poruszania się</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="map_widget_fps_info">Informacje debugowania FPS</string>
+	</resources>

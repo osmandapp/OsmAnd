@@ -161,7 +161,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 					b.append("?format=xml&addressdetails=0&accept-language=").append(Locale.getDefault().getLanguage()); //$NON-NLS-1$
 					b.append("&q=").append(URLEncoder.encode(search, "UTF-8")); //$NON-NLS-1$
 					
-					log.info("Searching address at : " + b.toString()); //$NON-NLS-1$
+					log.info("Searching address at : " + b); //$NON-NLS-1$
 					URL url = new URL(b.toString());
 					URLConnection conn = url.openConnection();
 					conn.setDoInput(true);

@@ -40,7 +40,7 @@ public class RoutingHelper {
 		public void routeWasCancelled();
 	}
 	
-	private final float POSITION_TOLERANCE = 60;
+	private static final float POSITION_TOLERANCE = 60;
 	
 	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
 
@@ -386,15 +386,19 @@ public class RoutingHelper {
 		// 2. check if intermediate found
 		if(route.getIntermediatePointsToPass()  > 0 && route.getDistanceToNextIntermediate(lastFixedLocation) < POSITION_TOLERANCE * 2) {
 			showMessage(app.getString(R.string.arrived_at_intermediate_point));
-			TargetPointsHelper targets = app.getInternalAPI().getTargetPointsHelper();
-//			List<String> ns = targets.getIntermediatePointNames(); names are not really suitable for voice
-			voiceRouter.arrivedIntermediatePoint(""); 
 			route.passIntermediatePoint();
+			
+			TargetPointsHelper targets = app.getInternalAPI().getTargetPointsHelper();
+			List<String> ns = targets.getIntermediatePointNames();
 			int toDel = targets.getIntermediatePoints().size() - route.getIntermediatePointsToPass();
+			int currentIndex = toDel - 1; 
+			String name = currentIndex  < 0 || currentIndex  >= ns.size() || ns.get(currentIndex ) == null ? "" : ns.get(currentIndex );
+			voiceRouter.arrivedIntermediatePoint(name);
 			while(toDel > 0) {
 				targets.removeWayPoint(false, 0);
 				toDel--;
 			}
+			
 			while(intermediatePoints != null  && route.getIntermediatePointsToPass() < intermediatePoints.size()) {
 				intermediatePoints.remove(0);
 			}
@@ -404,9 +408,11 @@ public class RoutingHelper {
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
 		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < POSITION_TOLERANCE * 1.5) {
 			showMessage(app.getString(R.string.arrived_at_destination));
-			voiceRouter.arrivedDestinationPoint("");
+			TargetPointsHelper targets = app.getInternalAPI().getTargetPointsHelper();
+			String description = targets.getPointNavigateDescription();
+			voiceRouter.arrivedDestinationPoint(description);
 			clearCurrentRoute(null, null);
-			// TargetPointsHelper targets = app.getInternalAPI().getTargetPointsHelper();
+			 
 			// targets.clearPointToNavigate(false);
 			return true;
 		}
@@ -739,7 +745,7 @@ public class RoutingHelper {
 				params.intermediates = intermediates;
 				params.gpxRoute = gpxRoute;
 				params.previousToRecalculate = previousRoute;
-				params.leftSide = settings.LEFT_SIDE_NAVIGATION.get();
+				params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 				params.preciseRouting = settings.PRECISE_ROUTING_MODE.getModeValue(mode);
 				params.optimal = settings.OPTIMAL_ROUTE_MODE.getModeValue(mode);
 				params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
