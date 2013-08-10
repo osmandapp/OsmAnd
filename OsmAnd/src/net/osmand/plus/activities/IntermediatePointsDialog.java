@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.TspAnt;
@@ -52,6 +53,7 @@ public class IntermediatePointsDialog {
 		}
 		final List<String> names = targets.getIntermediatePointNamesWithTarget();
 		final boolean[] checkedIntermediates = new boolean[intermediates.size()];
+		Arrays.fill(checkedIntermediates, true);
 		final ArrayAdapter<LatLon> listadapter = getListAdapter(app, activity, changeOrder, intermediates, originalPositions, names, checkedIntermediates);
 		ListView lv = new ListView(activity);
 		View contentView = lv;
@@ -211,7 +213,6 @@ public class IntermediatePointsDialog {
 					nm += "\n" + descr;
 				}
 				tv.setText(nm);
-				checkedIntermediates[position] = true;
 				if (changeOrder) {
 					((ImageButton) v.findViewById(R.id.up)).setOnClickListener(new View.OnClickListener(){
 						@Override
