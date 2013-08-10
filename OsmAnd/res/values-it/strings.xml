@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -1355,4 +1356,18 @@
 	<string name="driving_region_europe_asia">Europa &amp; Asia</string>
 	<string name="driving_region_uk">UK, India, Australia e Altri</string>
 	<string name="map_widget_fps_info">Informazioni FPS</string>
+	<string name="local_index_tile_data_zooms">Zoom scaricati: %1$s</string>
+    <string name="local_index_tile_data_expire">Scadenza (minuti): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Scaricabile: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Zoom massimo: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Zoom minimo: %1$s</string>
+    <string name="local_index_tile_data_name">Dati mattonelle: %1$s</string>
+    <string name="edit_tilesource_successfully">Sorgente mattonelle : %1$s è stata salvata con successo</string>
+    <string name="edit_tilesource_maxzoom">Zoom massimo</string>
+    <string name="edit_tilesource_expiration_time">Scadenza (minuti)</string>
+    <string name="edit_tilesource_minzoom">Zoom minimo</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Scegli fra gli esistenti...</string>
+    <string name="edit_tilesource_name">Nome</string>
+    <string name="maps_define_edit">Imposta/Modifica…</string>
 	</resources>
