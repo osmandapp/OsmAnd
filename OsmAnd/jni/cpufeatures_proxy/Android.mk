@@ -1,5 +1,5 @@
 # CPU Features library should not be built for newon
-ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
+#ifneq ($(OSMAND_BUILDING_NEON_LIBRARY),true)
 
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
@@ -19,4 +19,4 @@ endif
 
 $(call import-module,android/cpufeatures)
 	
-endif
+#endif
