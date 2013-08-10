@@ -1370,4 +1370,7 @@
     <string name="edit_tilesource_choose_existing">Scegli fra gli esistenti...</string>
     <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Imposta/Modifica…</string>
-	</resources>
+	<string name="tip_recent_changes_1_6_t">Cambiamenti nella 1.6:↵
+→\n\t* Imposta/modifica delle sorgenti online di mattonelle (impostazione della data di scadenza)↵
+    </string>
+    </resources>
