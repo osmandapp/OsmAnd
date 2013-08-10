@@ -163,7 +163,7 @@
   
   <string name="tip_location_sharing">Udostępnianie pozycji</string>
   <string name="tip_location_sharing_t">\tMożesz podzielić się swoją pozycją GPS z rodziną lub znajomymi. \n\tAby to zrobić:: \n\tWybierz z menu kontekstowego mapy \'Opcje punktu\' -&gt; \'Udostępnij pozycję GPS\'. \n\tNastępnie wybierz sposób udostępnienia. Do wyboru jest e-mail, SMS lub zwykłe skopiowanie koordynat do schowka.
-</string>
+	</string>
   <string name="tip_favorites">Ulubione punkty</string>
   <string name="tip_favorites_t">\tCzęsto używane punkty mogą zostać zapisane jako ulubione.
 \n\tAby zapisać punkt jako ulubiony przejdź do menu kontekstowego, wybierz \'Opcje punktu\' -&gt; \'Dodaj do ulubionych\' i wprowadź jego nazwę. Po zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Ulubione\'.
