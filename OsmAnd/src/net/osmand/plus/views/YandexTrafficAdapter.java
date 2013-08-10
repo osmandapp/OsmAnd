@@ -83,6 +83,7 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 					TileSourceTemplate template = new TileSourceTemplate(YANDEX_PREFFIX + mTimestamp,
 							"http://jgo.maps.yandex.net/1.1/tiles?l=trf,trfe&x={1}&y={2}&z={0}&tm=" + mTimestamp, ".png", 17, 7, 256, 8, 18000);
 					template.setEllipticYTile(true);
+					template.setExpirationTimeMinutes(20);
 					clearCache();
 					this.layer.setMapForMapTileAdapter(template, this);
 				}

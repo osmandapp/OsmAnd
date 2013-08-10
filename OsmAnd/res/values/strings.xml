@@ -9,6 +9,15 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="edit_tilesource_successfully">Tilesource %1$s is successfully saved</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptic mercator</string>
+    <string name="edit_tilesource_maxzoom">Max zoom</string>
+    <string name="edit_tilesource_expiration_time">Expire (minutes)</string>
+    <string name="edit_tilesource_minzoom">Min zoom</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Choose existing...</string>
+    <string name="edit_tilesource_name">Name</string>
+    <string name="maps_define_edit">Define/Edit&#8230;</string>
 	<string name="map_widget_fps_info">FPS debug info</string>
 	<string name="driving_region_descr">Select Driving Region : US, Europe, UK, Asia and Others</string>
 	<string name="driving_region">Driving Region</string>

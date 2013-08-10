@@ -355,7 +355,11 @@ public class ResourceManager {
 			Bitmap bmp = null;
 			if (req.tileSource instanceof SQLiteTileSource) {
 				try {
-				bmp = ((SQLiteTileSource) req.tileSource).getImage(req.xTile, req.yTile, req.zoom);
+					bmp = ((SQLiteTileSource) req.tileSource).getImage(req.xTile, req.yTile, req.zoom);
+//					int ts = req.tileSource.getExpirationTimeMillis();
+//					if(ts != -1 && req.url != null && time - en.lastModified() > ts) {
+//						asyncLoadingThread.requestToDownload(req);
+//					}
 				} catch (OutOfMemoryError e) {
 					log.error("Out of memory error", e); //$NON-NLS-1$
 					clearTiles();
@@ -365,6 +369,10 @@ public class ResourceManager {
 				if (en.exists()) {
 					try {
 						bmp = BitmapFactory.decodeFile(en.getAbsolutePath());
+						int ts = req.tileSource.getExpirationTimeMillis();
+						if(ts != -1 && req.url != null && time - en.lastModified() > ts) {
+							asyncLoadingThread.requestToDownload(req);
+						}
 					} catch (OutOfMemoryError e) {
 						log.error("Out of memory error", e); //$NON-NLS-1$
 						clearTiles();

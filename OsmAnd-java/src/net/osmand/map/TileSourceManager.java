@@ -32,7 +32,7 @@ public class TileSourceManager {
 	public static final String RULE_YANDEX_TRAFFIC = "yandex_traffic";
 	private static final String RULE_WMS = "wms_tile";
 
-	public static class TileSourceTemplate implements ITileSource {
+	public static class TileSourceTemplate implements ITileSource, Cloneable {
 		private int maxZoom;
 		private int minZoom;
 		private String name;
@@ -41,8 +41,11 @@ public class TileSourceManager {
 		protected String ext;
 		private int avgSize;
 		private int bitDensity;
+		// -1 never expires, 
+		private int expirationTimeMillis = -1;
 		private boolean ellipticYTile;
 		private String rule;
+		
 		private boolean isRuleAcceptable = true;
 
 		public TileSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom, int tileSize, int bitDensity,
@@ -55,6 +58,19 @@ public class TileSourceManager {
 			this.ext = ext;
 			this.avgSize = avgSize;
 			this.bitDensity = bitDensity;
+		}
+		
+		public void setMinZoom(int minZoom) {
+			this.minZoom = minZoom;
+		}
+		
+		public void setMaxZoom(int maxZoom) {
+			this.maxZoom = maxZoom;
+		}
+		
+		
+		public void setName(String name) {
+			this.name = name;
 		}
 
 		public void setEllipticYTile(boolean ellipticYTile) {
@@ -89,6 +105,27 @@ public class TileSourceManager {
 		public String getName() {
 			return name;
 		}
+		
+		public void setExpirationTimeMillis(int timeMillis) {
+			this.expirationTimeMillis = timeMillis;
+		}
+		
+		public void setExpirationTimeMinutes(int minutes) {
+			if(minutes < 0) {
+				this.expirationTimeMillis = -1;
+			} else {
+				this.expirationTimeMillis = minutes * 60 * 1000;
+			}
+		}
+		
+		public int getExpirationTimeMinutes() {
+			return expirationTimeMillis;
+		}
+		
+		public int getExpirationTimeMillis() {
+			return expirationTimeMillis;
+		}
+		
 
 		@Override
 		public int getTileSize() {
@@ -100,12 +137,28 @@ public class TileSourceManager {
 			return ext;
 		}
 		
+		public void setTileFormat(String ext) {
+			this.ext = ext;
+		}
+		
+		public void setUrlToLoad(String urlToLoad) {
+			this.urlToLoad = urlToLoad;
+		}
+		
 		public boolean isRuleAcceptable() {
 			return isRuleAcceptable;
 		}
 		
 		public void setRuleAcceptable(boolean isRuleAcceptable) {
 			this.isRuleAcceptable = isRuleAcceptable;
+		}
+		
+		public TileSourceTemplate copy() {
+			try {
+				return (TileSourceTemplate) this.clone();
+			} catch (CloneNotSupportedException e) {
+				return this;
+			}
 		}
 
 		@Override
@@ -126,7 +179,7 @@ public class TileSourceManager {
 			return urlToLoad != null;
 		}
 		
-
+		
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -219,6 +272,9 @@ public class TileSourceManager {
 
 		if (tm.isEllipticYTile()) {
 			properties.put("ellipsoid", tm.isEllipticYTile() + "");
+		}
+		if (tm.getExpirationTimeMinutes() != -1) {
+			properties.put("expirationTimeMinutes", tm.getExpirationTimeMinutes() + "");
 		}
 		if (override || !metainfo.exists()) {
 			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(metainfo)));
@@ -402,6 +458,7 @@ public class TileSourceManager {
 		int maxZoom = parseInt(attributes, "max_zoom", 18);
 		int minZoom = parseInt(attributes, "min_zoom", 5);
 		int tileSize = parseInt(attributes, "tile_size", 256);
+		int expirationTime = parseInt(attributes, "expirationTimeMinutes", -1);
 		String ext = attributes.get("ext") == null ? ".jpg" : attributes.get("ext");
 		int bitDensity = parseInt(attributes, "img_density", 16);
 		int avgTileSize = parseInt(attributes, "avg_img_size", 18000);
@@ -410,6 +467,9 @@ public class TileSourceManager {
 			ellipsoid = true;
 		}
 		TileSourceTemplate templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
+		if(expirationTime > 0) {
+			templ.setExpirationTimeMinutes(expirationTime);
+		}
 		templ.setEllipticYTile(ellipsoid);
 		return templ;
 	}
@@ -426,6 +486,7 @@ public class TileSourceManager {
 		String ext = attributes.get("ext") == null ? ".jpg" : attributes.get("ext");
 		int bitDensity = parseInt(attributes, "img_density", 16);
 		int avgTileSize = parseInt(attributes, "avg_img_size", 18000);
+		int expirationTime = parseInt(attributes, "expirationTimeMinutes", -1);
 		boolean ellipsoid = false;
 		if (Boolean.parseBoolean(attributes.get("ellipsoid"))) {
 			ellipsoid = true;
@@ -433,6 +494,9 @@ public class TileSourceManager {
 		TileSourceTemplate templ;
 		templ = new BeanShellTileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
 		templ.setEllipticYTile(ellipsoid);
+		if(expirationTime > 0) {
+			templ.setExpirationTimeMinutes(expirationTime);
+		}
 		return templ;
 	}
 	

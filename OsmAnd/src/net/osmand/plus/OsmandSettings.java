@@ -920,6 +920,11 @@ public class OsmandSettings {
 	}
 	
 	public Map<String, String> getTileSourceEntries(){
+		return getTileSourceEntries(true);
+		
+    }
+	
+	public Map<String, String> getTileSourceEntries(boolean sqlite){
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		File dir = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		if (dir != null && dir.canRead()) {
@@ -936,11 +941,13 @@ public class OsmandSettings {
 				}
 				
 			});
-			if (files != null) {
+			if (files != null ) {
 				for (File f : files) {
 					if (f.getName().endsWith(IndexConstants.SQLITE_EXT)) {
-						String n = f.getName();
-						map.put(f.getName(), n.substring(0, n.lastIndexOf('.')));
+						if(sqlite) {
+							String n = f.getName();
+							map.put(f.getName(), n.substring(0, n.lastIndexOf('.')));
+						}
 					} else if (f.isDirectory() && !f.getName().equals(IndexConstants.TEMP_SOURCE_TO_LOAD)
 							&& !f.getName().startsWith(".")) {
 						map.put(f.getName(), f.getName());

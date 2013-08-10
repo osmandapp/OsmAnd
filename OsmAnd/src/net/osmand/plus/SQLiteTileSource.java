@@ -409,6 +409,11 @@ public class SQLiteTileSource implements ITileSource {
 		return false;
 	}
 
+	@Override
+	public int getExpirationTimeMillis() {
+		return -1;
+	}
+
 }
 
 
