@@ -1532,4 +1532,14 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="local_index_tile_data_downloadable">Downloadbaar: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maximum zoomniveau: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
-    </resources>
+    <string name="local_index_tile_data_name">Kaartsegmentgegevens: %1$s</string>
+    <string name="edit_tilesource_successfully">Kaartsegmentbron %1$s werd succesvol opgeslagen</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptische Mercator</string>
+    <string name="edit_tilesource_maxzoom">Max zoomniveau</string>
+    <string name="edit_tilesource_expiration_time">Verlopen (minuten)</string>
+    <string name="edit_tilesource_minzoom">Min zoomniveau</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Kies bestaand...</string>
+    <string name="edit_tilesource_name">Naam</string>
+    <string name="maps_define_edit">Definieer/bewerk…</string>
+	</resources>
