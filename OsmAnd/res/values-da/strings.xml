@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -1570,4 +1571,19 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="driving_region">Område</string>
 	<string name="driving_region_descr">Vælg område: USA, Europa, England, Asien m.fl.</string>
 	<string name="map_widget_fps_info">FPS-fejlsøgningssinfo</string>
-	</resources>
+	<string name="local_index_tile_data_expire">Udløber ( minutter): %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maksimal zoomniveau: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptisk mercator</string>
+    <string name="edit_tilesource_maxzoom">Maks zoomniveau</string>
+    <string name="edit_tilesource_expiration_time">Udløber ( minutter)</string>
+    <string name="edit_tilesource_minzoom">Min zoomniveau</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Vælg eksisterende…</string>
+    <string name="edit_tilesource_name">Navn</string>
+    <string name="maps_define_edit">Definer/rediger…</string>
+	<string name="local_index_tile_data_zooms">Zoomniveauer hentet: %1$s</string>
+    <string name="local_index_tile_data_downloadable">Kan hentes: %1$s</string>
+    <string name="local_index_tile_data_name">Delkort data: %1$s</string>
+    <string name="edit_tilesource_successfully">Delkortkilden %1$s er gemt</string>
+    </resources>
