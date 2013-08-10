@@ -492,7 +492,7 @@
   <string name="rendering_exception">Fout opgetreden bij kaartgeneratie van het geselecteerde gebied</string>
   <string name="show_point_options">Gebruik locatie…</string>
   <string name="renderer_load_sucess">Kaartgenerator succesvol geladen</string>
-  <string name="renderer_load_exception">Fout opgetreden: renderer niet geladen</string>
+  <string name="renderer_load_exception">Fout opgetreden: kaartgenerator niet geladen</string>
   <string name="renderers">Vector kaartgenerator</string>
   <string name="renderers_descr">Kies kaartweergavestijl</string>
   <string name="poi_context_menu_website">Toon website</string>
@@ -1460,7 +1460,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="distance_measurement_clear_route">Wis alle punten</string>
     <string name="distance_measurement_save_gpx">Bewaar als GPX-bestand</string>
     <string name="distance_measurement_load_gpx">Open bestaand GPX-bestand</string>
-    <string name="local_osm_changes_backup_successful">OSM-wijzigingsbestand succesvol aangemaakt %1$s</string>
+    <string name="local_osm_changes_backup_successful">OSM-wijzigingenbestand succesvol aangemaakt %1$s</string>
     <string name="local_osm_changes_backup_failed">Backup van OSM-wijzigingen is mislukt</string>
     <string name="local_osm_changes_backup">Backup als OSM-wijziging</string>
     <string name="tip_recent_changes_1_4_t">Wijzigingen in 1.4:
