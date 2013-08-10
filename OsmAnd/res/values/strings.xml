@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="tip_recent_changes_1_6_t">Changes in 1.6:
-	\n\t* Define/edit online tile source (specify expirattion time)
+	\n\t* Define/edit online tile source (specify expiration time)
     </string>
     <string name="local_index_tile_data_zooms">Zooms downloaded: %1$s</string>
     <string name="local_index_tile_data_expire">Expire (minutes): %1$s</string>
