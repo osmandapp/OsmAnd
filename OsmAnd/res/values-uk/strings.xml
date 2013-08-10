@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
 		\n\t* Вказання напрямку руху по смугам
@@ -338,7 +337,7 @@
   <string name="local_index_mi_delete">Вилучити</string>
   <string name="local_index_mi_reload">Оновити з SD-картки</string>
   <string name="local_index_download">Завантажити</string>
-  <string name="local_index_tile_data">Дані мапи: %1$s \nМінімальний масштаб: %2$d\nМаксимальний масштаб: %3$d\nЗавантажуваний: %4$s\nЗавантажені рівні: %5$s</string>
+  
   <string name="local_index_poi_data">POI дані</string>
   <string name="local_index_address_data">Адреси</string>
   <string name="local_index_transport_data">Траснпорт</string>
@@ -1489,7 +1488,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="av_photo_play_sound_descr">Під час фотографування відтворювати звук</string>
 <string name="osmand_net_previously_installed">У вас встановлена попередня версія OsmAnd. Всі локальні дані підтримуються новою версією. Але збережені точки потрібно експортувати з попередньої версії і імпортувати в нову.</string>
 	
-	<string name="speak_warnings_descr">Налаштуйте попередження про перешкоди на шляху (примусові зупинки, лежачі поліцейські), про камери фіксації швидкости, обмеження швикодсті</string>
+	
     <string name="speak_speed_limit">Попереджати про обмеження швидкості</string>
     <string name="speak_cameras">Попереджати про камери фіксації швидкості</string>
 	<string name="speak_traffic_warnings">Попереджати про перешкоди на шляху</string>
@@ -1561,4 +1560,4 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		\n\t- Оновлення інтерфейсу та велика кількість виправлених помилок
 	</string>
 	<string name="map_widget_fps_info">FPS-інфо</string>
-	</resources>
+</resources>

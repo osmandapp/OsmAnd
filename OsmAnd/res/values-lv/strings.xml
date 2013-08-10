@@ -246,7 +246,7 @@
   <string name="local_index_mi_delete">Dzēst</string>
   <string name="local_index_mi_reload">Nolasīt no sd kartes</string>
   <string name="local_index_download">Lejupielādes…</string>
-  <string name="local_index_tile_data">Bilžu dati: %1$s \nMinimālais palielinājums : %2$d\nMaksimālais palielinājums : %3$d\nLejuplādējams : %4$s \nLejuplādēti palielinājumi : %5$s</string>
+  
   <string name="local_index_poi_data">POI dati</string>
   <string name="local_index_address_data">Adresees dati</string>
   <string name="local_index_transport_data">Transporta dati</string>

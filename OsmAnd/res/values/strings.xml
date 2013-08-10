@@ -9,6 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="local_index_tile_data_zooms">Zooms downloaded: %1$s</string>
+    <string name="local_index_tile_data_expire">Expire (minutes): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Downloadable: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maximum zoom: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimum zoom: %1$s</string>
+    <string name="local_index_tile_data_name">Tile data: %1$s</string>
     <string name="edit_tilesource_successfully">Tilesource %1$s is successfully saved</string>
     <string name="edit_tilesource_elliptic_tile">Elliptic mercator</string>
     <string name="edit_tilesource_maxzoom">Max zoom</string>
@@ -1010,7 +1016,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_mi_delete">Delete</string>
 	<string name="local_index_mi_reload">Reload from sdcard</string>
 	<string name="local_index_download">Download</string>
-	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom: %2$d\nMaximum zoom: %3$d\nDownloadable: %4$s \nZooms downloaded: %5$s</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
 	<string name="local_index_transport_data">Transportation data</string>

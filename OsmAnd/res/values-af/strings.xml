@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
@@ -347,7 +346,7 @@
   <string name="local_index_mi_delete">Verwyder</string>
   <string name="local_index_mi_reload">Herlaai van sd kaart</string>
   <string name="local_index_download">Aflaai</string>
-  <string name="local_index_tile_data">Teël inligting: %1$s\nMinimum vergroting: %2$d\nMaksimum vergroting: %3$d\nNuut: %4$s\nVergrotings afgelaai: %5$s</string>
+  
   <string name="local_index_poi_data">Interessante plek inligting</string>
   <string name="local_index_address_data">Adres inligting</string>
   <string name="local_index_transport_data">Vervoer inligting</string>
@@ -1250,7 +1249,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="av_photo_play_sound">Speel geluid wanneer foto geneem word</string>
 	<string name="av_photo_play_sound_descr">Kies of geluid gespeel sal word wanneer foto geneem word</string>
 
-	<string name="speak_warnings_descr">Verstel verkeer waarskuwings (geforseerde stoppe, spoedbulte), spoedkamera waarskuwings, spoedbeperkings</string>
+	
     <string name="speak_speed_limit">Kondig spoedbeperking aan</string>
     <string name="speak_cameras">Kondig spoedkameras aan</string>
 	<string name="speak_traffic_warnings">Kondig verkeerswaarskuwings aan</string>

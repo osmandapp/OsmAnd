@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
 \n\t- Akadálymentesítés 
@@ -243,7 +242,7 @@
   <string name="local_index_mi_delete">Törlés</string>
   <string name="local_index_mi_reload">Újratöltés SD kártyáról</string>
   <string name="local_index_download">Letöltés</string>
-  <string name="local_index_tile_data">Csempe adat: %1$s \nMinimális nagyítás : %2$d\nMaximális nagyítás : %3$d\nLetöltendő : %4$s \nNagyítások letöltve : %5$s</string>
+  
   <string name="local_index_poi_data">POI adat</string>
   <string name="local_index_address_data">Cím adat</string>
   <string name="local_index_transport_data">Közlekedési eszköz adat</string>
@@ -1272,7 +1271,7 @@
     <string name="route_via">Át:</string>
     <string name="route_from">Innen:</string>
     
-	<string name="speak_warnings_descr">Közlekedési figyelmeztetések (stop, fekvőrendőr), traffipax, sebességhatár</string>
+	
     <string name="speak_speed_limit">Sebességhatár bemondása</string>
     <string name="speak_cameras">Traffipax bemondása</string>
 	<string name="speak_traffic_warnings">Közlekedési figyelmeztetések bemondása</string>

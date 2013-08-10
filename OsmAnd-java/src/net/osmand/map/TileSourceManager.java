@@ -119,7 +119,10 @@ public class TileSourceManager {
 		}
 		
 		public int getExpirationTimeMinutes() {
-			return expirationTimeMillis;
+			if(expirationTimeMillis < 0) {
+				return -1;
+			}
+			return expirationTimeMillis / (60  * 1000);
 		}
 		
 		public int getExpirationTimeMillis() {
@@ -274,7 +277,7 @@ public class TileSourceManager {
 			properties.put("ellipsoid", tm.isEllipticYTile() + "");
 		}
 		if (tm.getExpirationTimeMinutes() != -1) {
-			properties.put("expirationTimeMinutes", tm.getExpirationTimeMinutes() + "");
+			properties.put("expiration_time_minutes", tm.getExpirationTimeMinutes() + "");
 		}
 		if (override || !metainfo.exists()) {
 			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(metainfo)));
@@ -458,7 +461,7 @@ public class TileSourceManager {
 		int maxZoom = parseInt(attributes, "max_zoom", 18);
 		int minZoom = parseInt(attributes, "min_zoom", 5);
 		int tileSize = parseInt(attributes, "tile_size", 256);
-		int expirationTime = parseInt(attributes, "expirationTimeMinutes", -1);
+		int expirationTime = parseInt(attributes, "expiration_time_minutes", -1);
 		String ext = attributes.get("ext") == null ? ".jpg" : attributes.get("ext");
 		int bitDensity = parseInt(attributes, "img_density", 16);
 		int avgTileSize = parseInt(attributes, "avg_img_size", 18000);
@@ -467,7 +470,7 @@ public class TileSourceManager {
 			ellipsoid = true;
 		}
 		TileSourceTemplate templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
-		if(expirationTime > 0) {
+		if(expirationTime >= 0) {
 			templ.setExpirationTimeMinutes(expirationTime);
 		}
 		templ.setEllipticYTile(ellipsoid);
@@ -486,7 +489,7 @@ public class TileSourceManager {
 		String ext = attributes.get("ext") == null ? ".jpg" : attributes.get("ext");
 		int bitDensity = parseInt(attributes, "img_density", 16);
 		int avgTileSize = parseInt(attributes, "avg_img_size", 18000);
-		int expirationTime = parseInt(attributes, "expirationTimeMinutes", -1);
+		int expirationTime = parseInt(attributes, "expiration_time_minutes", -1);
 		boolean ellipsoid = false;
 		if (Boolean.parseBoolean(attributes.get("ellipsoid"))) {
 			ellipsoid = true;

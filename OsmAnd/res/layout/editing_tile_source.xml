@@ -24,8 +24,7 @@
 
                 <EditText
                     android:id="@+id/Name"
-                    android:layout_width="250dp"
-        			android:minWidth="250dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
@@ -62,8 +61,7 @@
 
                 <EditText
                     android:id="@+id/URLToLoad"
-                    android:layout_width="250dp"
-        			android:minWidth="250dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:lines="5"
     				android:minLines="2"
@@ -81,8 +79,7 @@
 
                 <EditText
                     android:id="@+id/MinZoom"
-                    android:layout_width="250dp"
-        			android:minWidth="250dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:text="" >
                 </EditText>
@@ -98,8 +95,7 @@
 
                 <EditText
                     android:id="@+id/MaxZoom"
-                    android:layout_width="250dp"
-        			android:minWidth="250dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:text="" >
                 </EditText>
@@ -116,8 +112,7 @@
 
                 <EditText
                     android:id="@+id/ExpirationTime"
-                    android:layout_width="250dp"
-        			android:minWidth="250dp"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:text="" >
                 </EditText>

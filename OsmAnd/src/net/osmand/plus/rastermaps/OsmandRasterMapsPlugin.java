@@ -330,7 +330,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		t.execute(new Void[0]);
 	}
 
-	public static void defineNewEditLayer(final MapActivity activity, final ResultMatcher<TileSourceTemplate> resultMatcher) {
+	public static void defineNewEditLayer(final Activity activity, final ResultMatcher<TileSourceTemplate> resultMatcher) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();
 		final Map<String, String> entriesMap = settings.getTileSourceEntries(false);
@@ -363,7 +363,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				if (position > 0) {
-					File f = activity.getMyApplication().getAppPath(IndexConstants.TILES_INDEX_DIR + templates.get(position));
+					File f = ((OsmandApplication) activity.getApplication()).getAppPath(IndexConstants.TILES_INDEX_DIR + templates.get(position));
 					TileSourceTemplate template = TileSourceManager.createTileSourceTemplate(f);
 					if (template != null) {
 						result[0] = template.copy();

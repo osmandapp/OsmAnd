@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="local_index_gpx_timespan">\nДыяпазон часу: %1$d:%2$02d:%3$02d</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_index_gpx_timespan">\nДыяпазон часу: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nЧас руху: %1$d:%2$02d:%3$02d</string>
 	<string name="app_mode_default">Мапа</string>
 	<string name="settings_preset">Прадвызначаны</string>
@@ -957,7 +956,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_mi_delete">Выдаліць</string>
 	<string name="local_index_mi_reload">Reload from sdcard</string>
 	<string name="local_index_download">Зладаваць</string>
-	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom: %2$d\nMaximum zoom: %3$d\nDownloadable: %4$s \nZooms downloaded: %5$s</string>
+	
 	<string name="local_index_poi_data">Зьвесткі цікавосткаў</string>
 	<string name="local_index_address_data">Address data</string>
 	<string name="local_index_transport_data">Transportation data</string>

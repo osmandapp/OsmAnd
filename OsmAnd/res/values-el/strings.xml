@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
     <string name="poi_filter_emergency">Επείγοντα</string>
@@ -521,9 +520,7 @@
 	<string name="local_index_mi_delete">Διαγραφή</string>
 	<string name="local_index_mi_reload">Επαναφόρτωση από την sdcard</string>
 	<string name="local_index_download">Λήψη</string>
-	<string name="local_index_tile_data">Δεδομένα πλακιδίων: %1$s
-\nΕλάχιστη κλίμακα : %2$d\nΜέγιστη κλίμακα : %3$d\nΜπορούν να ληφθούν : %4$s
-\nΛηφθέντες κλίμακες : %5$s</string>
+	
 	<string name="local_index_poi_data">Δεδομένα ΣΕ</string>
 	<string name="local_index_address_data">Δεδομένα διευθύνσεων</string>
 	<string name="local_index_transport_data">Δεδομένα μεταφορών</string>
@@ -1279,7 +1276,7 @@
     <string name="route_via">Μέσω:</string>
     <string name="route_from">Από:</string>
     
-	<string name="speak_warnings_descr">Διαμόρφωση προειδοποιήσεων κυκλοφορίας (αναγκαστικές στάσεις, σαμαράκια), προειδοποιήσεις καμερών ταχύτητας, ορίων ταχύτητας</string>
+	
     <string name="speak_speed_limit">Εκφώνηση ορίου ταχύτητας</string>
     <string name="speak_cameras">Εκφώνηση καμερών ταχύτητας</string>
 	<string name="speak_traffic_warnings">Εκφώνηση προειδοποιήσεων κυκλοφορίας</string>

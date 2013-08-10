@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использование в оффлайн режиме.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использование в оффлайн режиме.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -270,9 +269,7 @@
   <string name="local_index_mi_delete">Удалить</string>
   <string name="local_index_mi_reload">Перечитать с SD-накопителя</string>
   <string name="local_index_download">Загрузить</string>
-  <string name="local_index_tile_data">Тайловые данные: %1$s
-\nМинимальный уровень: %2$d Максимальный уровень: %3$d Загружаемый: %4$s
-\nУровни загружены: %5$s</string>
+  
   <string name="local_index_poi_data">POI</string>
   <string name="local_index_address_data">Адрес</string>
   <string name="local_index_transport_data">Транспорт</string>

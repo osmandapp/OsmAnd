@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
@@ -458,7 +457,7 @@
 	<string name="local_index_mi_delete">Löschen</string>
 	<string name="local_index_mi_reload">Liste aktualisieren</string>
 	<string name="local_index_download">Herunterladen</string>
-	<string name="local_index_tile_data">Kacheldaten: %1$s \nMinimale Vergrößerung: %2$d\nMaximale Vergrößerung: %3$d\nHerunterladbar: %4$s \nHeruntegeladene Vergrößerungen: %5$s</string>
+	
 	<string name="local_index_poi_data">POI-Daten</string>
 	<string name="local_index_address_data">Adress-Daten</string>
 	<string name="local_index_transport_data">ÖPNV-Daten</string>
@@ -1328,7 +1327,7 @@
 	<string name="av_camera_focus_continuous">Die Kamera kontinuierlich scharf stellen</string>
 	<string name="av_photo_play_sound">Ton bei Auslösung abspielen</string>
 	<string name="av_photo_play_sound_descr">Auswählen, ob beim Aufnehmen eines Fotos ein Ton abgespielt werden soll</string>
-	<string name="speak_warnings_descr">Verkehrs-Warnungen (Stop-Schilder, Bodenwellen), Blitzer, Geschwindigkeitsbegrenzungen konfigurieren</string>
+	
     <string name="speak_speed_limit">Höchstgeschwindigkeit ansagen</string>
     <string name="speak_cameras">Blitzer ansagen</string>
 	<string name="speak_traffic_warnings">Verkehrsmeldungen ansagen</string>

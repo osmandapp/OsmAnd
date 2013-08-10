@@ -290,7 +290,7 @@
   <string name="local_index_mi_delete">წაშლა</string>
   <string name="local_index_mi_reload">განახლება SDCard-დან</string>
   <string name="local_index_download">ჩამოტვირთვა…</string>
-  <string name="local_index_tile_data">ნაწილოვანი მონაცემები: %1$s \nმინიმალური გადიდება : %2$d\nმაქსიმალური გადიდება : %3$d\nგადმოსაწერი : %4$s \nგადმოწერილი : %5$s</string>
+  
   <string name="local_index_poi_data">POI მონაცემები</string>
   <string name="local_index_address_data">მისამართის მონაცემები</string>
   <string name="local_index_transport_data">ტრანსპორტის მონაცემები</string>

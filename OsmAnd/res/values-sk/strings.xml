@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -365,9 +364,7 @@
   <string name="local_index_mi_delete">Vymazať</string>
   <string name="local_index_mi_reload">Znovu načítať z karty SD</string>
   <string name="local_index_download">Stiahnuť</string>
-  <string name="local_index_tile_data">Údaje dlaždíc : %1$s
-\nNajmenší zoom : %2$d\nNajväčší zoom : %3$d\nStiahnuteľné : %4$s
-\nStiahnuté zoomy : %5$s</string>
+  
   <string name="local_index_poi_data">POI údaje</string>
   <string name="local_index_address_data">Adresné údaje</string>
   <string name="local_index_transport_data">Dopravné údaje</string>
@@ -1282,8 +1279,8 @@
     <string name="route_to">Kam:</string>
     <string name="route_via">Cez:</string>
     <string name="route_from">Odkiaľ:</string>
-    <string name="speak_warnings_title">Ohlasovať varovania…</string>
-	<string name="speak_warnings_descr">Konfigurácia dopravných varovaní (vynútené zastavenie, spomaľovače), upozornenie pred radarom, rýchlostné obmedzenia</string>
+    
+	
     <string name="speak_speed_limit">Ohlásiť obmedzenie rýchlosti</string>
     <string name="speak_cameras">Ohlásiť radary</string>
 	<string name="speak_traffic_warnings">Ohlásiť dopravné varovania</string>

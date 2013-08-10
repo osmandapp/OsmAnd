@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -703,7 +702,7 @@
   <string name="local_index_mi_delete">Apagar</string>
   <string name="local_index_mi_reload">Refresh</string>
   <string name="local_index_download">Download</string>
-  <string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
+  
   <string name="local_index_poi_data">Dados POI</string>
   <string name="local_index_address_data">Dados de Endereço</string>
   <string name="local_index_transport_data">Transport data</string>

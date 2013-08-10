@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -302,7 +301,7 @@
 	<string name="local_index_mi_delete">Slett</string>
 	<string name="local_index_mi_reload">Last på nytt fra sd-kort</string>
 	<string name="local_index_download">Last ned</string>
-	<string name="local_index_tile_data">Flisdata: %1$s \nMinimum zoom: %2$d\nMaksimum zoom: %3$d\nNedlastbar: %4$s \nZoom nedlastet: %5$s</string>
+	
 	<string name="local_index_poi_data">Interessepunkt-data</string>
 	<string name="local_index_address_data">Adressedata</string>
 	<string name="local_index_transport_data">Transportdata</string>

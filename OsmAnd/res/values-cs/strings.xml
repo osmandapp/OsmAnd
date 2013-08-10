@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
 \n\t- Offline editace POI
@@ -275,9 +274,7 @@
   <string name="local_index_mi_delete">Smazat</string>
   <string name="local_index_mi_reload">Znovu nahrát z SD karty</string>
   <string name="local_index_download">Stáhnout</string>
-  <string name="local_index_tile_data">Zdroj map. dat: %1$s
-\nMinimální zvětšení : %2$d\nMaximální zvětšení : %3$d\nStahovatelné : %4$s
-\nStažené zvětšení : %5$s</string>
+  
   <string name="local_index_poi_data">Data POI</string>
   <string name="local_index_address_data">Addresy</string>
   <string name="local_index_transport_data">Doprava</string>
@@ -1272,7 +1269,7 @@
     <string name="route_via">Přes:</string>
     <string name="route_from">Z:</string>
     
-	<string name="speak_warnings_descr">Nastavit hlášení dopravních upozornění (nucené zastavení, retardéry), radarů, rychlostních omezení</string>
+	
     <string name="speak_speed_limit">Hlásit rychlostní omezení</string>
     <string name="speak_cameras">Hlásit radary</string>
 	<string name="speak_traffic_warnings">Hlásit dopravní upozornění</string>

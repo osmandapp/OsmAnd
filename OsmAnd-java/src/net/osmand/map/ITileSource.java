@@ -23,4 +23,6 @@ public interface ITileSource {
 	
 	public int getExpirationTimeMillis();
 	
+	public int getExpirationTimeMinutes();
+	
 }

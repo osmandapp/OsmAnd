@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -393,7 +393,7 @@
   <string name="local_index_mi_delete">Ištrinti</string>
   <string name="local_index_mi_reload">Atnaujinti iš SD kortelės</string>
   <string name="local_index_download">Parsiųst</string>
-  <string name="local_index_tile_data">Duomenų: %1$s \nMažiausias dydis : %2$d\nDidžiausias dydis : %3$d\nParsiunčiama : %4$s \nParsiųsti dydžiai : %5$s</string>
+  
   <string name="local_index_poi_data">LV duomenys</string>
   <string name="local_index_address_data">Adresų duomenys</string>
   <string name="local_index_transport_data">Transporto duomenys</string>

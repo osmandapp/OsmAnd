@@ -553,9 +553,7 @@
 	<string name="local_index_mi_delete">Ștergeți</string>
 	<string name="local_index_mi_reload">Reîncărcați de pe cardul SD</string>
 	<string name="local_index_download">Descărcați…</string>
-	<string name="local_index_tile_data">Porțiuni de hartă raster: %1$s
-\nZoom minim: %2$d\nzoom maxim: %3$d\nDescărcabile: %4$s
-\nNiveluri de zoom descărcate: %5$s</string>
+	
 	<string name="local_index_poi_data">Date despre POI</string>
 	<string name="local_index_address_data">Date despre Adrese</string>
 	<string name="local_index_transport_data">Date despre transport</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
@@ -188,7 +187,7 @@
   <string name="local_index_mi_delete">Borrar</string>
   <string name="local_index_mi_reload">Recargar desde la tarjeta SD</string>
   <string name="local_index_download">Descargar</string>
-  <string name="local_index_tile_data">Datos de teselas: %1$s \nZoom mínimo: %2$d\nZoom máximo: %3$d\nDescargable: %4$s \nZooms descargados: %5$s</string>
+  
   <string name="local_index_poi_data">Datos de PDI</string>
   <string name="local_index_address_data">Datos de direcciones</string>
   <string name="local_index_transport_data">Datos de transporte</string>
@@ -1303,7 +1302,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="route_via">Vía:</string>
     <string name="route_from">Desde:</string>
     
-	<string name="speak_warnings_descr">Configurar alertas de tráfico (paradas forzosas, reductores de velocidad), radares, límitaciones de velocidad</string>
+	
     <string name="speak_speed_limit">Anunciar límites de velocidad</string>
     <string name="speak_cameras">Anunciar radares</string>
 	<string name="speak_traffic_warnings">Anunciar avisos de tráfico</string>
