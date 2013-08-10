@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -1526,4 +1527,9 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="driving_region_europe_asia">Europa en Azië</string>
 	<string name="driving_region_uk">GB, India, Australië en andere</string>
 	<string name="map_widget_fps_info">FPS-debuginformatie</string>
-	</resources>
+	<string name="local_index_tile_data_zooms">Zoomniveau\'s gedownload: %1$s</string>
+    <string name="local_index_tile_data_expire">Verlopen (minuten): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Downloadbaar: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maximum zoomniveau: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
+    </resources>
