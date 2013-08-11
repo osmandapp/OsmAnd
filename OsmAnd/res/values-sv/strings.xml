@@ -1207,4 +1207,22 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="about_settings">Om</string>
     <string name="about_settings_descr">Om …</string>
     <string name="tips_and_tricks">Tips</string>
-    </resources>
+    <string name="tip_recent_changes_1_6_t">Förändringar i 1.6:↵
+→\n\t* Definiera/Redigera online-kartbitskälla (specificera utgångstid)↵
+    </string>
+    <string name="local_index_tile_data_zooms">Zoom nedladdade: %1$s</string>
+    <string name="local_index_tile_data_expire">Utgår (minuter): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Nedladdningsbart: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Max-zoom: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Min-zoom: %1$s</string>
+    <string name="local_index_tile_data_name">Kartbitsdata: %1$s</string>
+    <string name="edit_tilesource_successfully">Kartbitskälla %1$s sparades utan problem</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptisk mercator</string>
+    <string name="edit_tilesource_maxzoom">Max. zoom</string>
+    <string name="edit_tilesource_expiration_time">Utgår (minuter)</string>
+    <string name="edit_tilesource_minzoom">Min. zoom</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Välj befintlig …</string>
+    <string name="edit_tilesource_name">Namn</string>
+    <string name="maps_define_edit">Definiera/Redigera …</string>
+	</resources>
