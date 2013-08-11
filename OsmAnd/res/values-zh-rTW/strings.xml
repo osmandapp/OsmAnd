@@ -1556,4 +1556,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="edit_tilesource_choose_existing">選擇現有的...</string>
     <string name="edit_tilesource_name">名稱</string>
     <string name="maps_define_edit">定義/編輯…</string>
-	</resources>
+	<string name="about_version">版本：</string>
+    <string name="about_settings">關於</string>
+    <string name="about_settings_descr">關於 …</string>
+    <string name="tips_and_tricks">提示</string>
+    </resources>
