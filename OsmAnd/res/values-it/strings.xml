@@ -1373,4 +1373,8 @@
 	<string name="tip_recent_changes_1_6_t">Cambiamenti nella 1.6:↵
 →\n\t* Imposta/modifica delle sorgenti online di mattonelle (impostazione della data di scadenza)↵
     </string>
+    <string name="about_version">Versione:</string>
+    <string name="about_settings">Informazioni</string>
+    <string name="about_settings_descr">Informazioni …</string>
+    <string name="tips_and_tricks">Suggerimenti</string>
     </resources>
