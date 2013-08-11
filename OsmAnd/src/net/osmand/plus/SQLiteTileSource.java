@@ -44,6 +44,7 @@ public class SQLiteTileSource implements ITileSource {
 	private int maxZoom = 17; 
 	private int baseZoom = 17; //Default base zoom
 	private boolean inversiveZoom = true; // BigPlanet
+	private boolean timeSupported = false;
 
 	static final int margin = 1;
 	static final int tileSize = 256;
@@ -161,9 +162,9 @@ public class SQLiteTileSource implements ITileSource {
 						}
 					}
 					int tnumbering = list.indexOf("tilenumbering");
-					boolean inversiveInfoZoom = tnumbering != -1 && "BigPlanet".equals(list.get(tnumbering));
+					boolean inversiveInfoZoom = tnumbering != -1 && "BigPlanet".equals(cursor.getString(tnumbering));
 					if(tnumbering != -1) {
-						inversiveZoom = "BigPlanet".equals(list.get(tnumbering));
+						inversiveZoom = "BigPlanet".equalsIgnoreCase(cursor.getString(tnumbering));
 					}
 					int mnz = list.indexOf("minzoom");
 					if(mnz != -1) {
@@ -179,10 +180,18 @@ public class SQLiteTileSource implements ITileSource {
 						baseZoom = 17 - mnz;
 					}
 				}
+				cursor.close();
 				maxZoom = 24; // Cheat to have tiles request even if zoom level not in sqlite
 				// decrease maxZoom if too much scaling would be required
 				while ((tileSize >> (maxZoom - baseZoom)) < minScaledSize)
 					maxZoom--;
+				
+				cursor = db.rawQuery("SELECT * FROM tiles", null);
+				cursor.moveToFirst();
+				List<String> cols = Arrays.asList(cursor.getColumnNames());
+				timeSupported = cols.contains("time");
+				cursor.close();
+				
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 			}
@@ -407,12 +416,18 @@ public class SQLiteTileSource implements ITileSource {
 			buf.put(b, 0, i);
 		}
 
-		net.osmand.plus.api.SQLiteAPI.SQLiteStatement statement = db.compileStatement("INSERT INTO tiles VALUES(?, ?, ?, ?, ?)"); //$NON-NLS-1$
+		
+		String query = timeSupported? "INSERT INTO tiles(x,y,z,s,image,time) VALUES(?, ?, ?, ?, ?, ?)" :
+				"INSERT INTO tiles(x,y,z,s,image) VALUES(?, ?, ?, ?, ?)";
+		net.osmand.plus.api.SQLiteAPI.SQLiteStatement statement = db.compileStatement(query); //$NON-NLS-1$
 		statement.bindLong(1, x);
 		statement.bindLong(2, y);
 		statement.bindLong(3, getFileZoom(zoom));
 		statement.bindLong(4, 0);
 		statement.bindBlob(5, buf.array());
+		if(timeSupported) {
+			statement.bindLong(6, System.currentTimeMillis());
+		}
 		statement.execute();
 		statement.close();
 		is.close();
