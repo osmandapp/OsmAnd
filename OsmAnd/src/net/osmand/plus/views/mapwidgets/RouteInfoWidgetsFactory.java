@@ -125,6 +125,9 @@ public class RouteInfoWidgetsFactory {
 //				nextTurnInfo.nextTurnDirection = 580;
 //				TurnPathHelper.calcTurnPath(nextTurnInfo.pathForTurn, nextTurnInfo.turnType,nextTurnInfo.pathTransform);
 //				showMiniMap = true;
+				if(routingHelper.isRouteCalculated()) {
+					routingHelper.getVoiceRouter().announceCurrentDirection(null);
+				}
 				nextTurnInfo.requestLayout();
 				nextTurnInfo.invalidate();
 			}
