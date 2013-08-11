@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追踪外掛元件，用位置日誌服務(GPX 記錄，網上追踪查詢)</string>
@@ -45,7 +46,7 @@
 	<string name="use_compass_navigation_descr">使用電子羅盤的地圖，正北朝上</string>
 	<string name="use_compass_navigation">使用電子羅盤</string>
 	<string name="avoid_motorway">避開高速公路</string>
-	<string name="auto_zoom_map_descr">依據您的速度(當地圖與目前位置同步時)自動縮放地圖</string>
+	<string name="auto_zoom_map_descr">依據您的速度(當地圖與目前位置同步時)讓地圖自動縮放</string>
 	<string name="auto_zoom_map">自動縮放地圖</string>
 	<string name="snap_to_road_descr">導航過程中對齊道路位置</string>
 	<string name="snap_to_road">對齊道路</string>
@@ -202,7 +203,7 @@
 	<string name="rendering_attr_noPolygons_name">隱藏多角形</string>
 	<string name="rendering_attr_appMode_name">繪製模式</string>
 	<string name="rendering_attr_appMode_description">為地圖最佳化</string>
-	<string name="rendering_attr_contourLines_description">顯示縮放階層 (需要輪廓資料)：</string>
+	<string name="rendering_attr_contourLines_description">顯示縮放比級別(需要輪廓資料)：</string>
 	<string name="rendering_attr_contourLines_name">顯示等高線</string>
 	<string name="rendering_attr_hmRendered_description">增加地圖顯示詳細的資訊量</string>
 	<string name="rendering_attr_hmRendered_name">顯示更多地圖細節</string>
@@ -276,7 +277,7 @@
 	<string name="backToMenu">回主選單</string>
 	<string name="zoomOut">縮小</string>
 	<string name="zoomIn">放大</string>
-	<string name="zoomIs">縮放為</string>
+	<string name="zoomIs">縮放比為</string>
 	<string name="north">北方</string>
 	<string name="north_north_east">北北東</string>
 	<string name="north_east">東北</string>
@@ -544,8 +545,8 @@
 	<string name="select_tile_source_to_install">選擇要安裝或更新的(圖磚)地圖</string>
 	<string name="internet_not_available">因網際網路無法連線，所以無法操作</string>
 	<string name="install_more">安裝更多…</string>
-	<string name="level_to_switch_vector_raster_descr">向量地圖使用最小的縮放階層</string>
-	<string name="level_to_switch_vector_raster">最小向量縮放階層</string>
+	<string name="level_to_switch_vector_raster_descr">向量地圖使用最小的縮放比級別</string>
+	<string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
 	<string name="tip_location_sharing">位置分享</string>
 	<string name="tip_location_sharing_t">\t您可以在旅途中分享有趣的地方和位置給您的家人或朋友。
 		\n\t您要分享任何位置時：
@@ -674,9 +675,9 @@
 	<string name="reload">重整</string>
 	<string name="fast_route_mode">最快路線</string>
 	<string name="fast_route_mode_descr">啟用要計算的最快路線或停用最短路線 </string>
-	<string name="tiles_to_download_estimated_size">下載第{0}層{1}張地圖圖磚({2} MB)</string>
+	<string name="tiles_to_download_estimated_size">下載縮放第{0}級別{1}張地圖圖磚({2} MB)</string>
 	<string name="context_menu_item_download_map">下載地圖</string>
-	<string name="select_max_zoom_preload_area">選擇要預載的最大縮放階</string>
+	<string name="select_max_zoom_preload_area">選擇要預載的最大縮放級別</string>
 	<string name="maps_could_not_be_downloaded">此地圖無法下載</string>
 	<string name="continuous_rendering">連續繪製</string>
 	<string name="continuous_rendering_descr">顯示連續繪製代替立即圖像</string>
@@ -814,7 +815,7 @@
 	<string name="update_poi_error_local">更新裝置端的興趣點列表錯誤</string>
 	<string name="update_poi_error_loading">由伺服器載入資料時發生錯誤</string>
 	<string name="update_poi_no_offline_poi_index">該地區無可用的離線興趣點資料</string>
-	<string name="update_poi_is_not_available_for_zoom">在小比例尺下無法更新興趣點</string>
+	<string name="update_poi_is_not_available_for_zoom">興趣點更新無法用於小縮放級別</string>
 	<string name="context_menu_item_update_poi">更新興趣點</string>
 	<string name="context_menu_item_update_map_confirm">透過網路更新裝置端的資料？</string>
 	<string name="search_history_city">縣市：{0}</string>
@@ -833,8 +834,8 @@
 	<string name="hint_search_online">門號、街道、縣市</string>
 	<string name="search_offline_address">離線查尋</string>
 	<string name="search_online_address">線上查尋</string>
-	<string name="max_level_download_tile">線上最大縮放</string>
-	<string name="max_level_download_tile_descr">選擇線上下載地圖圖磚最大縮放等級</string>
+	<string name="max_level_download_tile">線上最大縮放比</string>
+	<string name="max_level_download_tile_descr">選擇線上下載地圖圖磚最大縮放級別</string>
 	<string name="route_general_information">總距離 %1$s、行駛時間 %2$d 小時 %3$d 分。</string>
 	<string name="router_service_descr">選擇線上或離線的導航服務</string>
 	<string name="router_service">導航服務</string>
@@ -1537,4 +1538,22 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="driving_region_uk">英國、印度、澳洲和其他</string>
 	<string name="driving_region">駕駛區域</string>
 	<string name="map_widget_fps_info">FPS 除錯資訊</string>
+	<string name="tip_recent_changes_1_6_t">在1.6的變更：
+	\n\t* 定義/編輯線上圖磚來源 (指定失效時間)
+    </string>
+    <string name="local_index_tile_data_zooms">縮放已下載：%1$s</string>
+    <string name="local_index_tile_data_expire">有效時間(分鐘)：%1$s</string>
+    <string name="local_index_tile_data_downloadable">可下載：%1$s</string>
+    <string name="local_index_tile_data_maxzoom">最大縮放比：%1$s</string>
+    <string name="local_index_tile_data_minzoom">最小縮放比：%1$s</string>
+    <string name="local_index_tile_data_name">地圖圖磚資料：%1$s</string>
+    <string name="edit_tilesource_successfully">地圖圖磚來源%1$s成功儲存</string>
+    <string name="edit_tilesource_elliptic_tile">橢圓麥卡托投影</string>
+    <string name="edit_tilesource_maxzoom">最大縮放比</string>
+    <string name="edit_tilesource_minzoom">最小縮放比</string>
+    <string name="edit_tilesource_expiration_time">有效時間(分鐘)</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">選擇現有的...</string>
+    <string name="edit_tilesource_name">名稱</string>
+    <string name="maps_define_edit">定義/編輯…</string>
 	</resources>
