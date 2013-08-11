@@ -1545,4 +1545,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="tip_recent_changes_1_6_t">Veranderingen in 1.6:
 	\n\t* Definieer/bewerk online kaartsegmentbron (specificeer verlooptijd)
     </string>
+    <string name="about_version">Versie:</string>
+    <string name="about_settings">Over</string>
+    <string name="about_settings_descr">Over…</string>
+    <string name="tips_and_tricks">Tips</string>
     </resources>
