@@ -1251,6 +1251,17 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}).reg();
 		}
+		optionsMenuHelper.item(R.string.tips_and_tricks).
+				icons(R.drawable.ic_action_ghelp_dark, R.drawable.ic_action_ghelp_light).
+				listen(new OnContextMenuClick() {
+					
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						TipsAndTricksActivity tactivity = new TipsAndTricksActivity(mapActivity);
+						Dialog dlg = tactivity.getDialogToShowTips(false, true);
+						dlg.show();
+					}
+				}).reg();
 		final OsmAndLocationProvider loc = app.getLocationProvider();
 		if (app.getTargetPointsHelper().getPointToNavigate() != null) {
 			

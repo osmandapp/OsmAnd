@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="about_version">Version :</string>
+    <string name="about_settings">About</string>
+    <string name="about_settings_descr">About &#8230;</string>
+    <string name="tips_and_tricks">Tips</string>
     <string name="tip_recent_changes_1_6_t">Changes in 1.6:
 	\n\t* Define/edit online tile source (specify expiration time)
     </string>

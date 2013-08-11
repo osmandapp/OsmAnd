@@ -7,5 +7,4 @@
 	    />
 	
 	<!-- <Preference android:title="@string/support_new_features" android:summary="@string/support_new_features_descr" android:key="bidforfix"/>  -->
-
 </PreferenceScreen>
