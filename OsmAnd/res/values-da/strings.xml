@@ -1589,4 +1589,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="tip_recent_changes_1_6_t">Ændringer i 1.6 :
 \n * Definer/rediger online flise kilde (angiv udløbstid)
     </string>
+    <string name="about_version">Version:</string>
+    <string name="about_settings">Om</string>
+    <string name="about_settings_descr">Om …</string>
+    <string name="tips_and_tricks">Tips</string>
     </resources>
