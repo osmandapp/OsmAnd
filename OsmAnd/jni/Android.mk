@@ -12,7 +12,7 @@ else
 OSMAND_MAKEFILES := \
     $(call all-makefiles-under,$(ROOT_PATH)/core/externals) \
     $(ROOT_PATH)/core/Android.mk \
-    $(call all-makefiles-under,$(LOCAL_PATH)/) \
+    $(LOCAL_PATH)/cpufeatures_proxy/Android.mk \
     $(ROOT_PATH)/android/OsmAnd-java/Android.mk
 $(info OsmAnd makefiles: $(OSMAND_MAKEFILES))
 endif
@@ -35,7 +35,7 @@ include $(OSMAND_MAKEFILES)
 # If we're not asked not to support NEON and not asked to support only NEON ARMv7a, then
 # make additional build
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
-    ifndef OSMAND_SKIP_NEON_SUPPORT
+	ifndef OSMAND_SKIP_NEON_SUPPORT
         ifndef OSMAND_FORCE_NEON_SUPPORT
 
             OSMAND_BUILDING_NEON_LIBRARY := true
