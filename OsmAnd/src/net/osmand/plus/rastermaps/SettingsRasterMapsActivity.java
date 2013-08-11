@@ -137,8 +137,8 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 	private void fillTileSourcesToPreference(ListPreference tileSourcePreference, String value, boolean addNone) {
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
 		int add = addNone ? 1 : 0;
-		String[] entries = new String[entriesMap.size() + 1 + add];
-		String[] values = new String[entriesMap.size() + 1 + add];
+		String[] entries = new String[entriesMap.size() + 2 + add];
+		String[] values = new String[entriesMap.size() + 2 + add];
 		int ki = 0;
 		if (addNone) {
 			entries[ki] = getString(R.string.default_none);
