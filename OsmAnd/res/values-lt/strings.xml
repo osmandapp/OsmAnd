@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -1368,4 +1368,26 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="av_camera_focus_continuous">Kamera pastoviai bando sufokusuoti</string>
 	<string name="av_photo_play_sound">Groti garsą darant nuotrauką</string>
 	<string name="av_photo_play_sound_descr">Pasirinkite ar groti garsą, kai fotografuojama</string>
-</resources>
+<string name="about_version">Versija :</string>
+    <string name="about_settings">Apie</string>
+    <string name="about_settings_descr">Apie …</string>
+    <string name="tips_and_tricks">Patarimai</string>
+    <string name="tip_recent_changes_1_6_t">Pakeitimai 1.6 versijoje:
+	\n\t* Define/edit online tile source (specify expiration time)
+    </string>
+    <string name="local_index_tile_data_zooms">Parsiųsti mąsteliai: %1$s</string>
+    <string name="local_index_tile_data_expire">Nustos galioti (minutės): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Prieinami parsiuntimui: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Didžiausias mąstelis: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Mažiausias mąstelis: %1$s</string>
+    <string name="local_index_tile_data_name">Žemėlapių lakštų duomenys: %1$s</string>
+    <string name="edit_tilesource_successfully">Žemėlapių lakštų šaltinis %1$s sėkmingai išsaugotas</string>
+    <string name="edit_tilesource_elliptic_tile">Eliptinis merkatorius</string>
+    <string name="edit_tilesource_maxzoom">Maksimalus mąstelis</string>
+    <string name="edit_tilesource_expiration_time">Nustos galioti (minutės)</string>
+    <string name="edit_tilesource_minzoom">Mažiausias mąstelis</string>
+    <string name="edit_tilesource_url_to_load">Nuoroda</string>
+    <string name="edit_tilesource_choose_existing">Pasirinkti iš turimų…</string>
+    <string name="edit_tilesource_name">Pavadinimas</string>
+    <string name="maps_define_edit">Nuatatyti/redaguoti…</string>
+	</resources>
