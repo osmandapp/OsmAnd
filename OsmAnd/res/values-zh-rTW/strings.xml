@@ -94,7 +94,7 @@
  - 可選擇車道導引、速限顯示、使用真人語音或 TTS 語音
 	</string>
 	<string name="tip_update_index">離線資料更新</string>
-	<string name="tip_update_index_t">\t有最新的圖資是不可或缺的。OsmAnd提供下載管理器可檢查可更新的離線資料。
+	<string name="tip_update_index_t">\t離線地圖的查看和 POI/位址查尋，有最新的圖資是不可或缺的。OsmAnd提供下載管理器可檢查可更新的離線資料。
 		\n\t檢查圖資更新 \'設定\' -&gt; \'資料管理\' -&gt; \'下載離線資料\'。由網路取得區域列表後，您可以按功能 \'選單\' -&gt; \'過濾已下載\' 過濾出已在您裝置上的資料。
 		\n\t登錄為\'綠色\' - 表示裝置與伺服器是相同的
 		\n\t登錄為\'藍色\' - 表示伺服器有更新的版本
@@ -391,7 +391,7 @@
 	</string>
 	<string name="binary_map_download_success">下載完成。\n\t\n\t透過 \'選單\' -&gt; \'地圖圖層\' -&gt; \'地圖來源…\' -&gt; \'離線向量地圖\'啟動使用。</string>
 	<string name="tip_day_night_mode">日/夜模式</string>
-	<string name="tip_day_night_mode_t_v2">\t部份的向量地圖的地圖顯示可在日間(較亮)與夜間(較暗)之間切換.
+	<string name="tip_day_night_mode_t_v2">\t離線向量地圖的地圖外觀顯示，可在日間(較亮)與夜間(較暗)之間切換。
 		\n\t夜間顏色是在夜間行駛比較安全。
 		\n\t您可在\'選項\' -&gt; \'組態顯示畫面\' -&gt;\'日/夜地圖\'設定日/夜間切換原則。
 		\n\t選擇有：
@@ -401,8 +401,8 @@
 		\n\t\'光線感應器\' - 地圖顯示以裝置上的光線感應器來控制
 	</string>	
 	<string name="tip_osm_improve">改善 OSM 資料</string>
-	<string name="tip_osm_improve_t">\tOsmAnd 使用的地圖是基於 Openstreetmap.org (OSM) 的資料，除了查看地圖和導航外，可利用它來改善 OSM 的資料品質。只要點幾下您可以輕鬆的建立和上傳新的興趣點或回報 OSM 的錯誤！
-		\n\t首先您需在\'設定\' -&gt; \'一般設定\' -&gt; \'OSM 編輯\'提供您登入 OSM 的資料 。
+	<string name="tip_osm_improve_t">\tOsmAnd 使用的地圖是基於 Openstreetmap.org (OSM) 的資料，除了查看地圖和導航外，可以直接用它來改善 OSM 的資料品質。只要點幾下您可以輕鬆的建立和上傳新的興趣點或回報 OSM 的錯誤。
+		\n\t為此，您需要啟動在外掛元件管理下的\'設定\' -&gt; \'外掛元件管理\' 的OSM 編輯，然後在 \'設定\' -&gt; \'OSM 編輯\'提供您登入 OSM 的資料 。
 		\n\t若要新增興趣點，使用地圖快顯功能表中\'建立興趣點\'。然後在\'建立興趣點\'的對話框輸入興趣點相關資訊，最後按確認。
 		\n\t地圖上的錯誤可透過 OSM 錯誤立即回報，OSM 社群即可快速修正該問題。
 		\n\t若要新增 OSM 錯誤回報，使用地圖快顯功能表中\'開啟 OSM 錯誤\'。然後輸入詳細的問題敘述，最後按下 \'新增\'按鈕。
@@ -549,14 +549,14 @@
 	<string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
 	<string name="tip_location_sharing">位置分享</string>
 	<string name="tip_location_sharing_t">\t您可以在旅途中分享有趣的地方和位置給您的家人或朋友。
-		\n\t您要分享任何位置時：
+		\n\t分享任何位置時：
 		\n\t使用 \'地圖快顯功能表\' -&gt; \'分享位置\'選單。
 		\n\t然後選擇分享位置的方式。選項有：電子郵件、SMS(文字)或複製座標到剪貼簿。
 	</string>
 	<string name="tip_favorites">我的最愛點</string>
 	<string name="tip_favorites_t">\t常用地點可記錄成我的最愛。
 		\n\叫出地圖的快顯功能表，選\'加到我的最愛\'，然後輸入名字即可將某一點位置設為我的最愛。事後可透由\'主畫面\' -&gt;\'我的最愛\'找到它。
-		\n\t選按一個我的最愛會跳出一些選項，可設為目的地、編輯或刪除它。
+		\n\t長按一個我的最愛會跳出一些選項，例如導航去那裡、編輯或刪除它。
 		\n\t欲將我的最愛顯示在地圖上，只要在地圖畫面模式下由\'選單\' -&gt;\'地圖圖層\'開啟\'我的最愛\'即可。
 	</string>
 	<string name="error_doing_search">離線查尋發生錯誤</string>
@@ -574,14 +574,14 @@
 	<string name="tip_app_mode_t_v2">\tOsmAnd 在不同的使用情況下，支援不同的使用者設定檔 (可自行訂製) 。
 		\n\t您可透過地圖畫面左下角的設定檔按鈕(汽車、自行車、步行三種圖示)更改使用設定檔 ，或是作路線規劃。
 	</string>
-	<string name="tip_navigation">導航</string>
+	<string name="tip_navigation">取得指示(導航)</string>
 	<string name="tip_navigation_t">\t在開始導航之前您需先設定目的地，之後在地圖畫面下按 \'選單\' -&gt; \'指示\' 再選導航模式。</string>
 	<string name="tip_search">查尋中</string>
-	<string name="tip_search_t">\t您可以在地圖上直接查尋地點，也可透過地址、興趣點、我的最愛等。
+	<string name="tip_search_t">\t您可以在地圖上直接查尋地點，也可在查尋畫面上藉著地址、位置、興趣點、我的最愛等找。
 		\n\t在主畫面上按\'查尋\'進行查尋的動作。在快顯功能表中，所有被點選中的都提供有\'指示\'或\'在地圖上顯示\'選項。
 	</string>
 	<string name="tip_map_context_menu">地圖快顯功能表</string>
-	<string name="tip_map_context_menu_t">\t地圖快顯功能表可在地圖長按叫出來，或是按軌跡球按鈕。
+	<string name="tip_map_context_menu_t">\t地圖快顯功能表(\'使用位置'\)，可在地圖長按叫出來，或是按軌跡球按鈕。
 		\n\t首先會產生一個座標點對話框，然後輕按該對話框，即可開啟地圖快顯功能表。(若長按則可隱藏對話框。)
 		\n\t該地圖快顯功能表，包含了對該地點能作的所有動作。
 	</string>
@@ -651,12 +651,12 @@
 	<string name="application_dir">存儲目錄</string>
 	<string name="application_dir_change_warning">更改存儲目錄不會移動或刪除資料。這個動作須與 OsmAnd 分開操作。要繼續嗎？</string>
 	<string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的最愛內的地點須以舊版程式匯出後再用新版程式匯入。</string>
-	<string name="build_installed">建置 {0} 成功安裝({1})。</string>
-	<string name="downloading_build">下載建置…</string>
+	<string name="build_installed">編譯 {0} 成功安裝({1})。</string>
+	<string name="downloading_build">下載編譯…</string>
 	<string name="install_selected_build">您要安裝 OsmAnd - {0} 由{1} {2} MB ?</string>
 	<string name="loading_builds_failed">檢索 OsmAnd 建置列表失敗</string>
 	<string name="loading_builds">載入 OsmAnd 建置…</string>
-	<string name="select_build_to_install">選擇 OsmAnd 建置安裝</string>
+	<string name="select_build_to_install">選擇 OsmAnd 編譯安裝</string>
 	<string name="contribution_activity">安裝的版本</string>
 	<string name="gps_status_app_not_found">GPS 狀態工具未安裝，到 Play 商場找嗎？</string>
 	<string name="voice_is_not_available_msg">語音導航無法使用。請到設定功能，選取喜歡的語音資料並且下載它。</string>
@@ -1411,8 +1411,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     </string>
     <string name="osmodroid_plugin_description">OsMoDroid 外掛元件為 OsmAnd 的延伸，是 OsModroid 應用程式的線上追蹤功能。在 http://esya.ru 上有相關服務的資訊。</string>
     <string name="tip_altitude_offset_t">\t大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
-		\n\t到這些地方系統有一個更好的近似值參考是 EGM96。現在 OsmAnd 還支援了在 EGM96 系統中的自動顯示高度。
-		\n\t為了做到這一點，只需簡易的由資料管理下載 WW15MGH.DAC 這個檔案 (原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)。
+		\n\t到這些地方系統有一個更好的近似值參考是 EGM96。
+		\n\t在您透過\'設定\' -&gt; \'資料管理\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球高度校正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。
 	</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="tip_recent_changes_1_0_0_t">在1.0.0的變更：
