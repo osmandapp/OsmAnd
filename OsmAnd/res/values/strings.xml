@@ -1117,7 +1117,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\tPressing \'Search\' on the main screen opens the search activities. For all hits a context menu offers the options \'Directions\' or \'Show on map\'.
 	</string>
 	<string name="tip_map_context_menu">Map Context Menu</string>
-	<string name="tip_map_context_menu_t">\tThe map context menu (\'Use location'\) is available by pressing and holding on the map or by pressing the trackball button.
+	<string name="tip_map_context_menu_t">\tThe map context menu (\'Use location\') is available by pressing and holding on the map or by pressing the trackball button.
 		\n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.)
 		\n\tThe map context menu contains all actions referring to a point (location).
 	</string>

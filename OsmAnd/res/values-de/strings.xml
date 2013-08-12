@@ -562,7 +562,7 @@
 \n + \'Auf Karte zeigen\'
 	</string>
 	<string name="tip_map_context_menu">Kontextmenü in der Karte</string>
-	<string name="tip_map_context_menu_t">\tDas Karten-Kontextmenü (\'Verwenden Position'\) wird über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht aufgerufen.
+	<string name="tip_map_context_menu_t">\tDas Karten-Kontextmenü (\'Verwenden Position\') wird über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht aufgerufen.
 		\n\tEs erscheint eine Koordinatenanzeige: Kurzes Drücken darauf öffnet das Kontextmenü, langes Drücken entfernt es wieder.
 		\n\tDas Karten-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.
 	</string>
