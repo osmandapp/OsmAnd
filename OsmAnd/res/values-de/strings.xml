@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
@@ -15,8 +15,8 @@
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
 	<string name="tip_altitude_offset">Höhenangaben - Offset Korrektur</string>
 	<string name="tip_altitude_offset_t">\tDie meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
-		\n\tEine bessere Näherung an lokale Systeme ist das EGM96-System. Osmand unterstützt nun die automatische Anzeige aller Höhenangaben im EGM96-System.
-		\n\tDies erfolgt sobald die Offline-Datei WW15MGH.DAC vorhanden ist, verfügbar via Einstellungen/Daten-Management (das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+		\n\tEine bessere Näherung an lokale Systeme ist das EGM96-System.
+		\n\tOsmand zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korekturdatei unter \'Einstellungen\' -> \'Daten Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
 	<string name="map_widget_max_speed">Tempolimit</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
@@ -324,7 +324,7 @@
 \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt "</string>
 	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Kartenebenen\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
-	<string name="tip_day_night_mode_t_v2">"Die Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
+	<string name="tip_day_night_mode_t_v2">"Die Anzeige der Offline-Vektor-Karten kann zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
 \nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → \'Anzeige konfigurieren\' → \'Tag/Nacht-Modus\' geändert werden.
 \nZur Auswahl stehen:
 \n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung)
@@ -333,16 +333,19 @@
 \n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden) "
 	</string>
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
-	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
-		\n\tDazu müssen Sie zunächst unter \'Einstellungen\' → \'Allgemein\' unter dem Menüpunkt \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
+	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann direkt zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
+		\n\tDazu müssen Sie zunächst unter \'Einstellungen\' → \'Zusatzmodule\' OSM-Berarbeitung aktivieren und dann unter \'Einstellungen\' -> \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
 		\n\tEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! 
 		\n\tGefundene Fehler auf der Karte können direkt gemeldet werden.
 		\n\tOSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im Karten-Kontextmenü.
 		\n\tAchtung: Für alle OSM-Aktivitäten wird eine Internetverbindung benötigt.</string>
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
-	<string name="tip_select_destination_point">Ziel wählen</string>
-	<string name="tip_select_destination_point_t">"\tEin Ziel kann direkt in der Karte über das Kontextmenü → \'Als Ziel wählen\', aus der Such-Funktion heraus oder über die Favoritenliste durch langes Drücken gewählt werden.\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an. "</string>
+	<string name="tip_navigation">Navigation starten</string>
+	<string name="tip_navigation_t">"\tDie Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte und dann das Auswählen des Menüpunktes \'Navigiere zu\', oder über die Funktion \'Navigation\' bei Klick auf ein Ergebnis in einer Suche-Liste oder einen Favoriten.
+		\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an. "
+		\n\tDie Route von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch anschließenden Klick auf den gewünschten Ausgangspunkt und dann Auswahl den Kontext-Menü-Eintrags \'Navigiere von\'.
+	</string>
 	<string name="tip_recent_changes_0_6_9_t">"Änderungen in 0.6.9:
 		\n\t- Verbesserte Offline-Kartenanzeige 
 		\n\t- Schnelles \"Native Rendering\" - siehe Development-Einstellungen (funktioniert evtl. nicht auf jedem Gerät)
@@ -514,7 +517,7 @@
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
 	<string name="install_more">Weitere installieren…</string>
 	<string name="tip_update_index">Aktualisierung der Offline-Daten</string>
-	<string name="tip_update_index_t">\tEs ist ratsam, aktuelle Karten zu verwenden. OsmAnd hat einen Daten-Manager, der Ihnen verfügbare Offline-Karten anzeigt.
+	<string name="tip_update_index_t">\tAktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, und die POI und Adresssuche. OsmAnd hat einen Daten-Manager, der Ihnen verfügbare Offline-Karten anzeigt.
 \n\tAktualisierungen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Hier klicken um Offline-Daten…\'. Nachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie zur Aktualisierung über \'Menü\'→ \'Filter gespeicherte\' nur bereits auf Ihrem Gerät gespeicherte Karten anzeigen lassen.
 \n\tEinträge in \'grün\': Daten aktuell
 \n\tEinträge in \'blau\': Neuere Version zum herunterladen verfügbar
@@ -528,8 +531,10 @@
 \n * SMS
 \n * Kopieren der Koordinaten in die Zwischenablage (Clipboard)</string>
 	<string name="tip_favorites">Favoriten</string>
-	<string name="tip_favorites_t">"Sie können jeden beliebigen Ort als Favoriten speichern.\n\nEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar. Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Ziel wählen oder einfach nur auf der Karte anzeigen lassen.
-\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen. "</string>
+	<string name="tip_favorites_t">"Sie können jeden beliebigen Ort als Favoriten speichern.
+	\n\tEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar. Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
+	\n\tSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen. "
+	</string>
 	<string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> Klassifizierung mit Bildern"</string>
 	<string name="error_doing_search">Fehler in der Offlinesuche aufgetreten</string>
 	<string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: \'%s\'</string>
@@ -545,20 +550,19 @@
 	<string name="tip_app_mode">Nutzerprofile</string>
 	<string name="tip_app_mode_t_v2">"OsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
 \n\nDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route. "</string>
-	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">Vor dem Starten der Navigationsfunktion ist ein Ziel zu wählen. Anschließend kann mittels \'Menü\' → \'Navigation\' das Navigations-Menü gestartet werden. Dort können Sie optional noch den Routing-Typ (Auto, Fahrrad, Fußgänger) ändern und schließlich die Route berechnen lassen.</string>
 	<string name="tip_search">Suchen</string>
 	<string name="tip_search_t">Um einen bestimmten Ort zu finden, bietet Ihnen OsmAnd mehrere Möglichkeiten:
 \n + Eingabe der Adresse
 \n + Angabe der Koordinaten
 \n + als POI
 \n + mittels Ihrer Favoriten
+\n + oder direkt über das Kontext-Menu in der Kartenansicht
 \n\nUnter \'Suche\' im Hauptmenü finden Sie alle genannten Such-Möglichkeiten. Ein Kontextmenü für einen Treffer bietet die Optionen: 
 \n + \'Als Ziel wählen\' und 
 \n + \'Auf Karte zeigen\'
 	</string>
 	<string name="tip_map_context_menu">Kontextmenü in der Karte</string>
-	<string name="tip_map_context_menu_t">\tDas Karten-Kontextmenü wird über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht aufgerufen.
+	<string name="tip_map_context_menu_t">\tDas Karten-Kontextmenü (\'Verwenden Position'\) wird über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht aufgerufen.
 		\n\tEs erscheint eine Koordinatenanzeige: Kurzes Drücken darauf öffnet das Kontextmenü, langes Drücken entfernt es wieder.
 		\n\tDas Karten-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.
 	</string>
