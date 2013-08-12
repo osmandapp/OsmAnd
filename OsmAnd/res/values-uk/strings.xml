@@ -1583,7 +1583,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="edit_tilesource_expiration_time">Термін дії (в хвилинах)</string>
     <string name="edit_tilesource_minzoom">Мін.масштаб</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Виберіть існуючий …</string>
+    <string name="edit_tilesource_choose_existing">Виберіть існуючий…</string>
     <string name="edit_tilesource_name">Назва</string>
     <string name="maps_define_edit">Визначити/змінити…</string>
 	</resources>
