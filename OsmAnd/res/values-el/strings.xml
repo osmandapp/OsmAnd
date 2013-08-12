@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
     <string name="poi_filter_emergency">Επείγοντα</string>
@@ -1313,4 +1314,16 @@
 	<string name="driving_region_canada">Καναδάς</string>
 	<string name="driving_region_europe_asia">Ευρώπη &amp; Ασία</string>
 	<string name="driving_region_uk">ΗΒ, Ινδία, Αυστραλία, Κύπρος κλπ</string>
+	<string name="about_version">Έκδοση :</string>
+    <string name="about_settings">Περί</string>
+    <string name="about_settings_descr">Περί …</string>
+    <string name="tips_and_tricks">Συμβουλές</string>
+    <string name="local_index_tile_data_expire">Λήξη (λεπτά): %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Μέγιστη εστίαση: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Ελάχιστη εστίαση: %1$s</string>
+    <string name="edit_tilesource_maxzoom">Μεγ Εστίαση</string>
+    <string name="edit_tilesource_expiration_time">Λήξη (λεπτά)</string>
+    <string name="edit_tilesource_minzoom">Ελαχ εστίαση</string>
+    <string name="edit_tilesource_name">Όνομα</string>
+    <string name="maps_define_edit">Καθορισμός/Επεξεργασία…</string>
 	</resources>
