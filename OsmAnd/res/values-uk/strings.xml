@@ -225,8 +225,8 @@
   <string name="tip_day_night_mode">Денний/нічний режим</string>
   
   <string name="tip_osm_improve">Покращити Openstreetmap</string>
-  <string name="tip_osm_improve_t">\tOsmAnd використовує картографічні дані з Openstreetmap.org (OSM) для перегляду та навігації, і до того ж, може бути використаний для їх покращення. Ви можете легко створювати та завантажувати нові POI чи звіти про помилки в OSM у кілька дотиків!
-		\n\tДля цього вам потрібно спочатку вказати свої реєстраційні дані OSM в \'Налаштуваннях\' -&gt; \'Загальні налаштування\' -&gt; \'Редагування OSM\'.
+  <string name="tip_osm_improve_t">\tOsmAnd використовує картографічні дані з Openstreetmap.org (OSM), до того ж, він може бути використаний для їх покращення. Ви можете легко створювати та завантажувати нові POI чи звіти про помилки в OSM у кілька дотиків!
+		\n\tДля цього вам потрібно активувати втулок \'Редагування OSM\' в \'Налаштуваннях\'-&gt; \'Втулки\', вказати свій логін та пароль для OSM в \'Налаштуваннях\'-&gt; \'Редагування OSM\'.
 		\n\tДля додавання нового об’єкта (POI) скористайтесь командою \'Створити POI\' з контекстного меню мапи. Додайте інформацію про новий об’єкт в діалозі \'Створити POI\' та надішліть її.
 		\n\tПро помилки на мапі можна негайно повідомляти через \'Помилки OSM\' і спільнота OSM матиме змогу їх швидко виправити.
 		\n\tДля додавання звіту про помилку скористайтесь командою \'Помилка в OSM\' з контекстного меню мапи. Додайте докладний опис проблеми та надішліть її натиснувши \'Додати\'.
@@ -406,7 +406,7 @@
   <string name="tip_favorites">Збережені точки</string>
   <string name="tip_favorites_t">\tТочки, що часто використовуються можуть бути додані в Закладки.
 		\n\tДля додавання точки до Закладок, відкрийте контекстне меню мапи, виберіть пункт \'Додати в Закладки\' та додайте назву закладки. Після додання до Закладок, вона буде доступна в меню \'Мапа\' -&gt; \'Закладки\'.
-		\n\tДовге натискання на закладку в меню \'Закладки\' надасть можливість встановити її в якості місця призначення. редагувати її чи вилучити.
+		\n\tДовге натискання на закладку в меню \'Закладки\' надасть можливість встановити її в якості місця призначення, редагувати її чи вилучити.
 		\n\tДля показу всіх збережених точок на мапі, активуйте шар \'Закладки\' в \'Шари мапи\' -&gt; \'Джерело мапи…\'.
 	</string>
   <string name="error_doing_search">Помилка автономного пошуку</string>
@@ -420,7 +420,10 @@
   <string name="tip_app_mode">Профіль</string>
   
   <string name="tip_navigation">Навігація</string>
-  <string name="tip_navigation_t">\tЩоб розпочати навігацію виберіть пункт призначення. Після цього натисніть \"Меню\" → \"Маршрут\" на мапі і виберіть тип навігації.</string>
+  <string name="tip_navigation_t">\tЩоб отримати маршрут до потрібного місця, ви можете натиснути пальцем та тримати його в потрібному місці на мапі, а потім у виринаючім полі  обрати чи To get directions to a place, either directly long-click on it on the map, then tap its desciptive box and select \'Маршрут до\'), або оберіть \'Маршрути\' після вибору будь-якого елементу в результатах пошуку,чи закладах. 
+		\n\tМісце призначення, буде позначене помаранчевим прапором, а також OsmAnd покаже відстань до нього та напрямок (помаранчевим трикутником).
+		\n\tЩоб показати маршрут до місця призначення з іншого місця. а не з того де ви знаходитесь, вкажіть його на мапі та виберіть \'Маршрут від\'.
+	</string>
   <string name="tip_search">Пошук</string>
   <string name="tip_map_context_menu">Контекстне меню мапи</string>
   <string name="tip_map_context_menu_t">\tКонтекстне меню мапи доступне, якщо натиснути та утримувати мапу чи натиснути джойстик.
@@ -1498,7 +1501,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osb_author_or_password_not_specified">Введіть OSM логін і пароль в налаштуваннях</string>
     <string name="clear_intermediate_points">Очистити проміжні точки</string>
     <string name="new_directions_point_dialog">Ви вже задали проміжні точки.</string>
-    <string name="context_menu_item_directions_to">Напрямки до</string>
+    <string name="context_menu_item_directions_to">Маршрут до</string>
     <string name="context_menu_item_directions_from">Маршрут від</string>
     <string name="route_to">До:</string>
     <string name="announce_gpx_waypoints">Попереджати про маршрутні точки GPX</string>
@@ -1561,4 +1564,26 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		\n\t- Оновлення інтерфейсу та велика кількість виправлених помилок
 	</string>
 	<string name="map_widget_fps_info">FPS-інфо</string>
-</resources>
+<string name="about_version">Версія:</string>
+    <string name="about_settings">Про</string>
+    <string name="about_settings_descr">Про…</string>
+    <string name="tips_and_tricks">Поради</string>
+    <string name="tip_recent_changes_1_6_t">Зміни в 1.6:
+	\n\t* Визначення/редагування онлайн-джерела квадратів мапи (вкажіть термін дії)
+    </string>
+    <string name="local_index_tile_data_zooms">Завантажені масштаби: %1$s</string>
+    <string name="local_index_tile_data_expire">Термін дії (у хвилинах): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Завантажувані: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Максимальний масштаб: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Мінімальний масштаб: %1$s</string>
+    <string name="local_index_tile_data_name">Дата квадрату: %1$s</string>
+    <string name="edit_tilesource_successfully">Джерело квадратів мапи %1$s збережене</string>
+    <string name="edit_tilesource_elliptic_tile">Еліптичний Меркатор</string>
+    <string name="edit_tilesource_maxzoom">Макс.масштаб</string>
+    <string name="edit_tilesource_expiration_time">Термін дії (в хвилинах)</string>
+    <string name="edit_tilesource_minzoom">Мін.масштаб</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Виберіть існуючий …</string>
+    <string name="edit_tilesource_name">Назва</string>
+    <string name="maps_define_edit">Визначити/змінити…</string>
+	</resources>
