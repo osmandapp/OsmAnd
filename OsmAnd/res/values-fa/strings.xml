@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -1524,10 +1525,33 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osmodroid_mode_on">توقف OsMoDroid</string>    
     <string name="osmodroid_mode_off">شروع OsMoDroid</string>
     <string name="map_widget_fps_info">اطلاعات FPS</string>
-	<string name="driving_region_descr">انتخاب منطقه رانندگی:آمریکا،اروپا،انگلستان،آسیا و سایر مناطق</string>
+	<string name="driving_region_descr">انتخاب منطقه رانندگی: آمریکا، اروپا، انگلستان، آسیا و سایر مناطق</string>
 	<string name="driving_region_japan">ژاپن</string>
 	<string name="driving_region_us">ایالات متحده آمریکا</string>
 	<string name="driving_region_canada">کانادا</string>
 	<string name="driving_region_europe_asia">اروپا و آسیا</string>
 	<string name="driving_region_uk">انگلستان، هند، استرالیا و سایر کشورها</string>
-	</resources>
+	<string name="about_version">ویرایش:</string>
+    <string name="about_settings">درباره</string>
+    <string name="about_settings_descr">درباره…</string>
+    <string name="tips_and_tricks">ترفندها</string>
+    <string name="tip_recent_changes_1_6_t">تغییرات نسخه 1.6:
+	\n\t* تعیین/ویرایش منابع کاشی های آنلاین (اختصاص زمان انقضاء)
+    </string>
+    <string name="local_index_tile_data_zooms">زومهای دانلود شده: %1$s</string>
+    <string name="local_index_tile_data_expire">انقضاء(دقیقه): %1$s</string>
+    <string name="local_index_tile_data_downloadable">قابل دانلود: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">حداکثر زوم: %1$s</string>
+    <string name="local_index_tile_data_minzoom">حداقل زوم: %1$s</string>
+    <string name="local_index_tile_data_name">اطلاعات کاشی: %1$s</string>
+    <string name="edit_tilesource_successfully">منبع کاشی %1$s رخیره شد</string>
+    <string name="edit_tilesource_maxzoom">حداکثر زوم</string>
+    <string name="edit_tilesource_expiration_time">انقضاء (دقیقه)</string>
+    <string name="edit_tilesource_minzoom">حداقل زوم</string>
+    <string name="edit_tilesource_choose_existing">انتخاب از…</string>
+    <string name="edit_tilesource_name">نام</string>
+    <string name="maps_define_edit">تعریف/ویرایش…</string>
+	<string name="driving_region">منطقه رانندگی</string>
+	<string name="edit_tilesource_elliptic_tile">Elliptic mercator</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    </resources>
