@@ -1,137 +1,134 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
-    <string name="av_def_action_video">Optag video</string>
-    <string name="av_def_action_audio">Optag audio</string>
-    <string name="av_widget_action_descr">Vælg standard modulhandling</string>
-    <string name="av_widget_action">Standard modulhandling</string>
-    <string name="av_video_format_descr">Vælg videoformat</string>
-    <string name="av_use_external_recorder_descr">Brug systemoptager for video</string>
-    <string name="av_use_external_recorder">Indbygget optager</string>
-    <string name="av_settings_descr">Konfigurer audio- og videoindstillinger</string>
-    <string name="av_settings">Indstillinger for audio og video </string>
-    <string name="recording_error">Fejl opstod under optagelse </string>
-    <string name="recording_camera_not_available">Kameraet er ikke tilgængeligt</string>
-    <string name="recording_is_recorded">Audio/video optages. For at stoppe tryk på AV modulet.</string>
-    <string name="recording_playing">Den valgte optagelsen bliver afspillet.
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>	
+	<string name="route_descr_destination"></string>
+	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
+	<string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+	<string name="av_def_action_video">Optag video</string>
+	<string name="av_def_action_audio">Optag audio</string>
+	<string name="av_widget_action_descr">Vælg standard modulhandling</string>
+	<string name="av_widget_action">Standard modulhandling</string>
+	<string name="av_video_format_descr">Vælg videoformat</string>
+	<string name="av_use_external_recorder_descr">Brug systemoptager for video</string>
+	<string name="av_use_external_recorder">Indbygget optager</string>
+	<string name="av_settings_descr">Konfigurer audio- og videoindstillinger</string>
+	<string name="av_settings">Indstillinger for audio og video </string>
+	<string name="recording_error">Fejl opstod under optagelse </string>
+	<string name="recording_camera_not_available">Kameraet er ikke tilgængeligt</string>
+	<string name="recording_is_recorded">Audio/video optages. For at stoppe tryk på AV modulet.</string>
+	<string name="recording_playing">Den valgte optagelsen bliver afspillet.
 \n%1$s</string>
-    <string name="recording_open_external_player">Åbn ekstern afspiller</string>
-    <string name="recording_delete_confirm">Skal optagelsen slettes?</string>
-    <string name="tip_recent_changes_1_1_0_t">Ændringer i 1.1.0:
+	<string name="recording_open_external_player">Åbn ekstern afspiller</string>
+	<string name="recording_delete_confirm">Skal optagelsen slettes?</string>
+	<string name="tip_recent_changes_1_1_0_t">Ændringer i 1.1.0:
 	\n*Udvidelse beregning af afstand
 	\n*Udvidelse for Audionoter 
 	\n*Udvidelse for højdekurver
 	\n*Fejlrettelser
 	\n*\'Touring view\' kort stil option med flere kort oplysninger, nye veje stilarter, mere kontrast og Alpine vandreture (SAC skala) option
 	\n*EGM96 geoide offset korrektion for GPS højdeaflæsningerne
-    </string>
-    <string name="recording_unavailable">ikke tilgængelig</string>
-    <string name="recording_context_menu_arecord">Optag lydnote</string>
-    <string name="srtm_paid_version_title">Højdekurver</string>
-    <string name="recording_context_menu_vrecord">Optag videonote</string>
-    <string name="layer_recordings">Optagelser</string>
-    <string name="recording_can_not_be_played">Optagelse kan ikke afspilles</string>
-    <string name="recording_context_menu_delete">Slet optagelse</string>
-    <string name="recording_context_menu_play">Afspil</string>
-    <string name="recording_description">Optagelse %1$s %2$s af %3$s</string>
-    <string name="recording_default_name">optagelse</string>
-    <string name="av_control_start">start</string>
-    <string name="map_widget_av_notes">Audio-/videonoter</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
-    <string name="osmand_srtm_long_description_1000_chars">Udvidelsen indeholder højdekurver, der kan vises i OsmAnd\'s offline kort. De globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced rumbårne Thermal Emission og Reflection Radiometer), en billeddannende instrument ombord Terra, flagskib satellit fra NASAs Earth Observering systemet. ASTER er et samarbejde mellem NASA, Japans ministerium for økonomi, handel og industri (METI), og Japan Space Systems (J-spacesystems).</string>
-    
-    
-    
-    
-    <string name="av_control_stop">stop</string>
-    <string name="map_widget_distancemeasurement">Afstandsmåling</string>
-    <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering ...\' for at tildele en note til den angivne placering</string>
-    <string name="monitoring_control_stop">stop</string>
-    <string name="map_widget_audionotes">Audionoter</string>
-    <string name="audionotes_plugin_description">Optag audio-/videonoter under turen</string>
-    <string name="audionotes_plugin_name">Audio-/videonoter</string>
-    <string name="index_srtm_parts">dele</string>
-    <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (Indstillinger -&gt; Datahåndtering -&gt; Hent-&gt; Vælg den ønskede korttype).</string>
-    <string name="srtm_plugin_name">Højdekurver</string>
-    <string name="download_select_map_types">Andre kort</string>
-    <string name="download_roads_only_item">Kun veje</string>
-    <string name="download_srtm_maps">Højdekurver</string>
-    <string name="download_regular_maps">Almindelige kort</string>
-    <string name="download_roads_only_maps">Kort kun med veje</string>
-    
+	</string>
+	<string name="recording_unavailable">ikke tilgængelig</string>
+	<string name="recording_context_menu_arecord">Optag lydnote</string>
+	<string name="srtm_paid_version_title">Højdekurver</string>
+	<string name="recording_context_menu_vrecord">Optag videonote</string>
+	<string name="layer_recordings">Optagelser</string>
+	<string name="recording_can_not_be_played">Optagelse kan ikke afspilles</string>
+	<string name="recording_context_menu_delete">Slet optagelse</string>
+	<string name="recording_context_menu_play">Afspil</string>
+	<string name="recording_description">Optagelse %1$s %2$s af %3$s</string>
+	<string name="recording_default_name">optagelse</string>
+	<string name="av_control_start">start</string>
+	<string name="map_widget_av_notes">Audio-/videonoter</string>
+	<string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
+	<string name="osmand_srtm_long_description_1000_chars">Udvidelsen indeholder højdekurver, der kan vises i OsmAnd\'s offline kort. De globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced rumbårne Thermal Emission og Reflection Radiometer), en billeddannende instrument ombord Terra, flagskib satellit fra NASAs Earth Observering systemet. ASTER er et samarbejde mellem NASA, Japans ministerium for økonomi, handel og industri (METI), og Japan Space Systems (J-spacesystems).</string>
+	<string name="av_control_stop">stop</string>
+	<string name="map_widget_distancemeasurement">Afstandsmåling</string>
+	<string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering ...\' for at tildele en note til den angivne placering</string>
+	<string name="monitoring_control_stop">stop</string>
+	<string name="map_widget_audionotes">Audionoter</string>
+	<string name="audionotes_plugin_description">Optag audio-/videonoter under turen</string>
+	<string name="audionotes_plugin_name">Audio-/videonoter</string>
+	<string name="index_srtm_parts">dele</string>
+	<string name="index_srtm_ele">Højdekurver</string>
+	<string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (Indstillinger -&gt; Datahåndtering -&gt; Hent-&gt; Vælg den ønskede korttype).</string>
+	<string name="srtm_plugin_name">Højdekurver</string>
+	<string name="download_select_map_types">Andre kort</string>
+	<string name="download_roads_only_item">Kun veje</string>
+	<string name="download_srtm_maps">Højdekurver</string>
+	<string name="download_regular_maps">Almindelige kort</string>
+	<string name="download_roads_only_maps">Kort kun med veje</string>
+	
 	<string name="rendering_attr_noAdminboundaries_name">Skjul afgrænsninger</string>
 	<string name="animate_routing_using_gpx">Skal eksisterende GPX-fil bruges?</string>
-    <string name="intermediate_points_change_order">Ændre rækkefølge</string>
-    <string name="av_video_format">Videoformat</string>
-    <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale afgrænsninger (admin niveau 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid udvidelse er en gammel version og skal opdateres.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid udvidelse er en OsmAnd udvidelse til OsModroid app for online sporingsfunktioner. Oplysninger om tjenesten er tilgængelig på http://esya.ru.</string>
-    <string name="tip_altitude_offset">Højdevisning - Offset korrektion</string>
+	<string name="intermediate_points_change_order">Ændre rækkefølge</string>
+	<string name="av_video_format">Videoformat</string>
+	<string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale afgrænsninger (admin niveau 5-9)</string>
+	<string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid udvidelse er en gammel version og skal opdateres.</string>
+	<string name="osmodroid_plugin_description">OsMoDroid udvidelse er en OsmAnd udvidelse til OsModroid app for online sporingsfunktioner. Oplysninger om tjenesten er tilgængelig på http://esya.ru.</string>
+	<string name="tip_altitude_offset">Højdevisning - Offset korrektion</string>
 	<string name="tip_altitude_offset_t">De fleste GPS-enheder gengiver højdemålinger i det ellipsoide-baserede WGS84 referencesystem, hvorfra en konvertering til lokalt anvendte systemer kræver en positions afhængig korrektion.
 \nEn bedre tilnærmelse til disse lokale systemer er EGM96 reference. OsmAnd nu understøtter også den automatiske visning af højder i EGM96 systemet.
 \nFor at opnå dette, hent filen WW15MGH.DAC via Offline Data Manager (oprindelig er på http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
-    <string name="map_widget_max_speed">Fartgrænse</string>
-    <string name="route_descr_current_location">Aktuel position</string>
-    
-    
-    <string name="no_buildings_found">Ingen bygninger fundet.</string>
-    <string name="incremental_search_city">Søg efter by trinvist</string>
-    <string name="search_villages_and_postcodes">Søg landsbyer/postnummer</string>
+	<string name="map_widget_max_speed">Fartgrænse</string>
+	<string name="route_descr_current_location">Aktuel position</string>
+	<string name="no_buildings_found">Ingen bygninger fundet.</string>
+	<string name="incremental_search_city">Søg efter by trinvist</string>
+	<string name="search_villages_and_postcodes">Søg landsbyer/postnummer</string>
 	<string name="dropbox_plugin_description">Dropbox udvidelse gør det muligt at synkronisere spor og audio-/videonoter med en dropbox-konto.</string>
-    <string name="rendering_attr_showRoadMaps_description">Vælg, hvornår der skal vises kort kun med veje:</string>
+	<string name="rendering_attr_showRoadMaps_description">Vælg, hvornår der skal vises kort kun med veje:</string>
 	<string name="rendering_attr_showRoadMaps_name">Kort kun med veje</string>
-    <string name="safe_mode_description">Kør program i fejlsikret tilstand (for langsommere Android i stedet for oprindelige kode).</string>
-    <string name="safe_mode">Fejlsikret tilstand</string>
-    <string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktiver i indstillinger).</string>
-    <string name="background_service_is_enabled_question">Baggrundstjenesten kører stadig. Skal den afbrydes?</string>
-    <string name="tip_recent_changes_1_0_0_t">Ændringer i 1.0.0:
+	<string name="safe_mode_description">Kør program i fejlsikret tilstand (for langsommere Android i stedet for oprindelige kode).</string>
+	<string name="safe_mode">Fejlsikret tilstand</string>
+	<string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktiver i indstillinger).</string>
+	<string name="background_service_is_enabled_question">Baggrundstjenesten kører stadig. Skal den afbrydes?</string>
+	<string name="tip_recent_changes_1_0_0_t">Ændringer i 1.0.0:
 	\n* Forbedret ruteplanlægning: hurtigere, mere præcis, op til 250 km
 	\n* Introducere kort kun med veje
 	\n* Kort mister ikke positionlås efter afbrydelser
 	\n* Aktiver tjeneste i baggrunden under navigation
-    </string>
-    <string name="close_changeset">Luk ændringspost</string>
+	</string>
+	<string name="close_changeset">Luk ændringspost</string>
 	<string name="zxing_barcode_scanner_not_found">Stregkodescanner programmet ZXing er ikke installeret. Søg i Play butik?</string>
 	<string name="rendering_attr_roadColors_description">Vælg et farveskema til veje:</string>
 	<string name="rendering_attr_roadColors_name">Farveskema for veje</string>
-    <string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
-    <string name="enable_plugin_monitoring_services">Aktiver sporingsudvidelse for at bruge positionlogning tjenester (GPX-logning, online sporing)</string>
-    <string name="non_optimal_route_calculation">Beregn en muligvis ikke-optimal rute over lange afstande</string>
+	<string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
+	<string name="enable_plugin_monitoring_services">Aktiver sporingsudvidelse for at bruge positionlogning tjenester (GPX-logning, online sporing)</string>
+	<string name="non_optimal_route_calculation">Beregn en muligvis ikke-optimal rute over lange afstande</string>
 	<string name="gps_not_available">Aktiver GPS i indstillinger</string>
-    <string name="map_widget_monitoring_services">Logningstjenester</string>
+	<string name="map_widget_monitoring_services">Logningstjenester</string>
 	<string name="no_route">Ingen rute</string>
 	<string name="delete_target_point">Fjern rutepunkt</string>
-    <string name="context_menu_item_last_intermediate_point">Tilføj som sidste rutepunkt</string>
-    <string name="context_menu_item_first_intermediate_point">Tilføj som første rutepunkt</string>
-    <string name="add_as_last_destination_point">Tilføj som sidste rutepunkt</string>
-    <string name="add_as_first_destination_point">Tilføj som første rutepunkt</string>
-    <string name="replace_destination_point">Udskift destinationspunktet</string>
-    <string name="new_destination_point_dialog">Destination er allerede sat.</string>
-    <string name="local_indexes_cat_av">Audio-/Videodata</string>
-    <string name="stop_routing_confirm">Stop navigationen?</string>
-    <string name="clear_dest_confirm">Slet destination (og rutepunkter)?</string>
-    <string name="precise_routing_mode_descr">Aktiver nøjagtig ruteplanlægning for at beregne præcise ruter uden fejl. Meget begrænset af afstand og bruger ikke det indbyggede bibliotek.</string>
-    <string name="precise_routing_mode">Nøjagtig ruteplanlægning (alfa)</string>
-    <string name="recording_context_menu_show">Vis</string>
-    <string name="recording_photo_description">Foto %1$s af %2$s</string>
-    <string name="av_def_action_picture">Tag et foto</string>
-    <string name="recording_context_menu_precord">Tag et foto</string>
-    <string name="target_point">Rutepunkt %1$s</string>
-    <string name="intermediate_point_too_far">Rutepunkt %1$s er for langt fra nærmeste vej.</string>
-    <string name="arrived_at_intermediate_point">Ankommet til rutepunktet</string>
-    <string name="context_menu_item_intermediate_point">Tilføj som rutepunkt</string>
-    <string name="ending_point_too_far">Slutpunktet er for langt fra nærmeste vej.</string>
-    <string name="btn_add_tag">Tilføj mærke</string>
-    <string name="btn_advanced_mode">Avanceret tilstand…</string>
-    <string name="poi_filter_parking">Parkering</string>
-    <string name="poi_filter_emergency">Nødsituation</string>
-    <string name="poi_filter_public_transport">Kollektivtrafik</string>
-    <string name="poi_filter_entertainment">Underholdning</string>
-    <string name="poi_filter_accomodation">Overnatning</string>
-    <string name="poi_filter_restaurants">Restaurant</string>
-    <string name="poi_filter_sightseeing">Seværdigheder</string>
-    <string name="poi_filter_car_aid">Bilhjælp</string>
+	<string name="context_menu_item_last_intermediate_point">Tilføj som sidste rutepunkt</string>
+	<string name="context_menu_item_first_intermediate_point">Tilføj som første rutepunkt</string>
+	<string name="add_as_last_destination_point">Tilføj som sidste rutepunkt</string>
+	<string name="add_as_first_destination_point">Tilføj som første rutepunkt</string>
+	<string name="replace_destination_point">Udskift destinationspunktet</string>
+	<string name="new_destination_point_dialog">Destination er allerede sat.</string>
+	<string name="local_indexes_cat_av">Audio-/Videodata</string>
+	<string name="stop_routing_confirm">Stop navigationen?</string>
+	<string name="clear_dest_confirm">Slet destination (og rutepunkter)?</string>
+	<string name="precise_routing_mode_descr">Aktiver nøjagtig ruteplanlægning for at beregne præcise ruter uden fejl. Meget begrænset af afstand og bruger ikke det indbyggede bibliotek.</string>
+	<string name="precise_routing_mode">Nøjagtig ruteplanlægning (alfa)</string>
+	<string name="recording_context_menu_show">Vis</string>
+	<string name="recording_photo_description">Foto %1$s af %2$s</string>
+	<string name="av_def_action_picture">Tag et foto</string>
+	<string name="recording_context_menu_precord">Tag et foto</string>
+	<string name="target_point">Rutepunkt %1$s</string>
+	<string name="intermediate_point_too_far">Rutepunkt %1$s er for langt fra nærmeste vej.</string>
+	<string name="arrived_at_intermediate_point">Ankommet til rutepunktet</string>
+	<string name="context_menu_item_intermediate_point">Tilføj som rutepunkt</string>
+	<string name="ending_point_too_far">Slutpunktet er for langt fra nærmeste vej.</string>
+	<string name="btn_add_tag">Tilføj mærke</string>
+	<string name="btn_advanced_mode">Avanceret tilstand…</string>
+	<string name="poi_filter_parking">Parkering</string>
+	<string name="poi_filter_emergency">Nødsituation</string>
+	<string name="poi_filter_public_transport">Kollektivtrafik</string>
+	<string name="poi_filter_entertainment">Underholdning</string>
+	<string name="poi_filter_accomodation">Overnatning</string>
+	<string name="poi_filter_restaurants">Restaurant</string>
+	<string name="poi_filter_sightseeing">Seværdigheder</string>
+	<string name="poi_filter_car_aid">Bilhjælp</string>
 	<string name="poi_filter_food_shop">Fødevarebutik</string>
 	<string name="poi_filter_for_tourists">For turister</string>
 	<string name="poi_filter_fuel">Brændstof</string>
@@ -143,13 +140,13 @@
 	<string name="auto_zoom_map_descr">Auto-zoom kort efter hastighed (mens kort er synkroniseret med aktuel position)</string>
 	<string name="auto_zoom_map">Automatisk kortzoom</string>
 	<string name="access_arrival_time">Ankomsttid</string>
-    <string name="item_checked">Valgt</string>
-    <string name="item_unchecked">Fravalgt</string>
-    <string name="map_view">Kort</string>
-    <string name="prefer_motorways">Foretræk motorveje</string>
+	<string name="item_checked">Valgt</string>
+	<string name="item_unchecked">Fravalgt</string>
+	<string name="map_view">Kort</string>
+	<string name="prefer_motorways">Foretræk motorveje</string>
 	<string name="prefer_in_routing_title">Foretræk…</string>
 	<string name="prefer_in_routing_descr">Foretræk motorveje</string>
-    <string name="tip_recent_changes_1_2_t">Rettelser i 1.2.1:
+	<string name="tip_recent_changes_1_2_t">Rettelser i 1.2.1:
 	\n* Rettet Geo Intent (Foursquare, c:geo)
 	\n* Rettet at skærmbilledet ryster under navigation
 	\n* Andre smårettelser
@@ -162,18 +159,18 @@
 		\n* Kalman-filter for kompas
 		\n* Pebble-ur support
 	</string>
-    <string name="max_speed_none">Ingen</string>
-    <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="dist_control_start">start</string>
-    <string name="dropbox_plugin_name">Dropbox udvidelse</string>
-    <string name="av_def_action_choose">Vælg ved forespørgsel</string>
-    <string name="av_use_external_camera_descr">Brug systemprogram til foto</string>
-    <string name="av_use_external_camera">Brug kamera</string>
-    <string name="osmodroid_plugin_name">OsMoDroid udvidelse</string>
+	<string name="max_speed_none">Ingen</string>
+	<string name="index_name_openmaps">OpenMaps EU</string>
+	<string name="dist_control_start">start</string>
+	<string name="dropbox_plugin_name">Dropbox udvidelse</string>
+	<string name="av_def_action_choose">Vælg ved forespørgsel</string>
+	<string name="av_use_external_camera_descr">Brug systemprogram til foto</string>
+	<string name="av_use_external_camera">Brug kamera</string>
+	<string name="osmodroid_plugin_name">OsMoDroid udvidelse</string>
 	<string name="monitoring_control_start">GPX</string>
-    <string name="route_descr_lat_lon">Lat %1$.3f, Long %2$.3f</string>
-    <string name="intermediate_point">Rutepunkt %1$s</string>
-    <string name="snap_to_road_descr">Hold position til vejen under navigation</string>
+	<string name="route_descr_lat_lon">Lat %1$.3f, Long %2$.3f</string>
+	<string name="intermediate_point">Rutepunkt %1$s</string>
+	<string name="snap_to_road_descr">Hold position til vejen under navigation</string>
 	<string name="snap_to_road">Fastgør til vejen</string>
 	<string name="osmand_short_description_80_chars">Globale mobilkort &amp; navigation til offline og online OSM kort</string>
 	<string name="osmand_plus_short_description_80_chars">Global mobilkort for visning &amp; navigation til offline og online OSM kort</string>
@@ -181,7 +178,6 @@
 	<string name="filterpoi_activity">Opret interessepunkt-filter</string>
 	<string name="recalculate_route_to_your_location">Transportform:</string>
 	<string name="select_navigation_mode">Vælg transportmetode</string>
-	
 	<string name="day_night_info_description">Solopgang: %1$s
 \nSolnedgang: %2$s</string>
 	<string name="day_night_info">Dag/nat information</string>
@@ -218,25 +214,24 @@
 	<string name="screen_is_locked">Tryk på låseikonet for at låse skærmen op</string>
 	<string name="map_widget_top_text">Gadenavn</string>
 	<string name="map_widget_config">Konfigurer skærm</string>
-	
 	<string name="map_widget_back_to_loc">Hvor er jeg</string>
 	<string name="map_widget_lock_screen">Lås skærm</string>
 	<string name="map_widget_compass">Kompas</string>
 	<string name="map_widget_top_stack">Statuslinje:</string>
 	<string name="download_hillshade_item">Relief skygger</string>
-    <string name="download_hillshade_maps">Relief overlejringer</string>
-    <string name="tip_recent_changes_1_1_2_t">Ændringer i 1.1.2:
+	<string name="download_hillshade_maps">Relief overlejringer</string>
+	<string name="tip_recent_changes_1_1_2_t">Ændringer i 1.1.2:
 	\n* Audio/video udvidelse forbedring (fotos med EXIF information)
 	\n* Rettet brugbarhed og omstruktureret højdekurverudvidelse
 	\n* Relief pakke til højdekurverudvidelse
 	\n* Fejlrettelser (næsten optimal ruteplanlægning)
-    </string>
-    <string name="tip_recent_changes_0_8_4_t">Ændringer i 0.8.4:
+	</string>
+	<string name="tip_recent_changes_0_8_4_t">Ændringer i 0.8.4:
 	\n* Nogle fejlrettelser
 	\n* Kort mister ikke positionslås efter afbrydelser
 	\n* Aktiver dvaletilstand tjeneste under navigation
-    </string>
-    <string name="tip_recent_changes_0_8_3_t">Ændringer i 0.8.3:
+	</string>
+	<string name="tip_recent_changes_0_8_3_t">Ændringer i 0.8.3:
 \n * Rutepunkter
 \n * Forbedret navigation
 \n * Tilføjet en indstilling, der gør det muligt at undgå motorveje og samtidig bygge en rute
@@ -268,7 +263,6 @@
 	<string name="bg_service_screen_lock_toast">Skærmen er låst</string>
 	<string name="bg_service_interval">Indstil opvågningsinterval:</string>
 	<string name="show_cameras">Vis fartkameraer</string>
-	
 	<string name="avoid_toll_roads">Undgå betalingsveje</string>
 	<string name="continue_follow_previous_route_auto">Forrige navigation var ufærdig. Fortsæt den? (%1$s sekunder)</string>
 	<string name="route_updated_loc_found">Ruten beregnes, når position er fundet</string>
@@ -285,7 +279,7 @@
 \n * Aktiver/deaktiver logningsmodul
 	</string>
 	<string name="select_animate_speedup">Vælg hastighed for rutesimulering</string>
-    	<string name="global_app_allocated_memory_descr">Tildelt hukommelse %1$s MB (Android grænse %2$s MB, Dalvik %3$s MB).</string>
+	<string name="global_app_allocated_memory_descr">Tildelt hukommelse %1$s MB (Android grænse %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">Tildelt hukommelse</string>
 	<string name="native_app_allocated_memory_descr">Samlet indbygget hukommelse tildeles af app %1$s MB (Dalvik %2$s MB, andre %3$s MB). \nProportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Total indbygget hukommelse</string>
@@ -294,7 +288,7 @@
 	<string name="shared_location">Delt placering</string>
 	<string name="osmand_parking_event">Hent bilen fra parkering</string>
 	<string name="osmand_parking_warning">Advarsel</string>
-	<string name="osmand_parking_warning_text">Påmindelse om at afhente bil blev tidligere tilføjet til kalender. Den forblive der, indtil den slettes manuelt.</string>    
+	<string name="osmand_parking_warning_text">Påmindelse om at afhente bil blev tidligere tilføjet til kalender. Den forblive der, indtil den slettes manuelt.</string>	
 	<string name="osmand_parking_time_limit_title">Indstil tidsgrænsen for parkering</string>
 	<string name="osmand_parking_delete_confirm">Skal placeringen af den parkerede bil slettes?</string>
 	<string name="osmand_parking_delete">Slet P-plads markør</string>
@@ -322,9 +316,9 @@
 	<string name="route_kl">Hold til venstre og kør</string>
 	<string name="route_kr">Hold til højre og kør</string>
 	<string name="layer_hillshade">Relief overlejringer</string>
-    <string name="target_points">Rutepunkter</string>
-    <string name="map_widget_intermediate_distance">Rutepunkt</string>
-    <string name="osmand_play_title_30_chars">OsmAnd kort &amp; navigation</string>
+	<string name="target_points">Rutepunkter</string>
+	<string name="map_widget_intermediate_distance">Rutepunkt</string>
+	<string name="osmand_play_title_30_chars">OsmAnd kort &amp; navigation</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kort &amp; navigation</string>
 	<string name="show_traffic_warnings">Vis trafikadvarsler</string>
 	<string name="rendering_attr_noPolygons_description">Gør alle overflader på kortet transparent</string>
@@ -351,12 +345,11 @@
 	<string name="unknown_location">Position endnu ikke kendt</string>
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
 	<string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
-	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' -&gt; \'Datahåndtering\'. Bagefter kan man se kort, søge adresser, finde interessepunkter og finde offentlig transport.</string>    
+	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' -&gt; \'Datahåndtering\'. Bagefter kan man se kort, søge adresser, finde interessepunkter og finde offentlig transport.</string>	
 	<string name="basemap_was_selected_to_download">Basiskort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
 	<string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online- og delkort</string>
 	<string name="local_indexes_cat_map">Offlinekort (vektor)</string>
-	
 	<string name="index_settings_descr">Hent kort og håndter offlinedata gemt på enheden</string>
 	<string name="map_online_plugin_is_not_installed">Aktiver onlinekort udvidelse for at vælge andre kortkilder</string>
 	<string name="map_online_data">Online- og delkort</string>
@@ -381,13 +374,13 @@
 	<string name="play_commands_of_currently_selected_voice">Afspil kommandoer fra den valgte stemme</string>
 	<string name="debugging_and_development">OsmAnd udvikling</string>
 	<string name="native_rendering">Indbygget optegning</string>
-	<string name="test_voice_prompts">Test stemmemeddelelser</string>    
+	<string name="test_voice_prompts">Test stemmemeddelelser</string>	
 	<string name="switch_to_raster_map_to_see">Ingen offline vektorkort til stede for denne placering. Hent et kort i \'Indstillinger\' -&gt; \'Datahåndtering\' eller skifte til onlinekort.</string>
 	<string name="send_files_to_osm">Send GPX-filer til OSM?</string>
 	<string name="gpx_visibility_txt">Synlighed</string>
 	<string name="gpx_description_txt">Beskrivelse</string>
 	<string name="validate_gpx_upload_name_pwd">Angiv OSM brugernavn og kodeord til at sende GPX-filer.</string>
-    	<string name="support_new_features">Støt nye funktioner</string>
+	<string name="support_new_features">Støt nye funktioner</string>
 	<string name="support_new_features_descr">Doner for at få nye funktioner i programmet</string>
 	<string name="show_ruler_level">Vis lineal</string>	
 	<string name="back_to_location">Tilbage til placering</string>
@@ -400,7 +393,7 @@
 	<string name="default_buttons_support">Støt</string>
 	<string name="info_button">Information</string>
 	<string name="map_widget_gps_info">GPS-information</string>
-    <string name="gpx_tags_txt">Mærker</string>
+	<string name="gpx_tags_txt">Mærker</string>
 	<string name="accessibility_mode_descr">Slå tilgængeligheds funktionerne til</string>
 	<string name="accessibility_on">Til</string>
 	<string name="accessibility_off">Fra</string>
@@ -802,7 +795,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n - Offline Wikipedia data i artikler
 \n - Opdaterede kort
 \n - Andre små funktioner
-	</string>    
+	</string>	
 	<string name="tip_rotation_switching_t_v2">Orienteringen af kortet kan ændres ved at klikke på kompasnålen.
 \nValgmulighederne er:
 \n \'Roter ikke (nord er op)\' - Kortet roteres ikke. Nord er altid opad
@@ -889,7 +882,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="local_index_mi_delete">Slet</string>
 	<string name="local_index_mi_reload">Genindlæs fra SD-kort</string>
 	<string name="local_index_download">Hent</string>
-	
 	<string name="local_index_address_data">Adressedata</string>
 	<string name="local_index_transport_data">Transportdata</string>
 	<string name="local_index_map_data">Kortdata</string>
@@ -1052,8 +1044,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="tip_recent_changes_1_1_4_t">Ændringer i 1.1.4:
 	\n* Redesign af brugerflade
 	\n* Fejlrettelser
-    </string>
-    <string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Kørselsvejledning\' på kortet og der vælges navigationstype.</string>
+	</string>
+	<string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Kørselsvejledning\' på kortet og der vælges navigationstype.</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
 	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
@@ -1131,7 +1123,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="layer_map">Vælg kortkilde…</string>
 	<string name="menu_layers">Kortlag</string>
 	<string name="context_menu_item_search_poi">Søg interessepunkt</string>
-	
 	<string name="use_trackball_descr">Brug trackball for at flytte kortet</string>
 	<string name="use_trackball">Brug trackball</string>
 	<string name="background_service_wait_int_descr">Indstil maksimal ventetid mellem hver positionssøgning i baggrunden</string>
@@ -1152,7 +1143,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="menu_mute_off">Lyd er slået til</string>
 	<string name="menu_mute_on">Lyd er slået fra</string>
 	<string name="email">e-mail</string>
-<string name="default_buttons_selectall">Vælg alt</string>
+	<string name="default_buttons_selectall">Vælg alt</string>
 	<string name="edit_filter_delete_message">Filter {0} er slettet</string>
 	<string name="edit_filter_create_message">Filter {0} er oprettet</string>
 	<string name="edit_filter_delete_dialog_title">Slet det valgte filter?</string>
@@ -1188,7 +1179,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="gps_provider">GPS</string>
 	<string name="int_min">min.</string>
 	<string name="search_poi_filter">Filter</string>
-	
 	<string name="sd_unmounted">SD-kort er ikke tilgængelig.
 \nKort kan ikke vises.</string>
 	<string name="sd_mounted_ro">SD-kortet er skrivebeskyttet.
@@ -1312,7 +1302,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="address">Adresse</string>
 	<string name="download_index_success">Hentet</string>
 	<string name="error_io_error">Der skete en I/O fejl</string>
-	
 	<string name="downloading">Henter…</string>
 	<string name="downloading_list_indexes">Henter liste over tilgængelige regioner…</string>
 	<string name="list_index_files_was_not_loaded">Listen over regioner blev ikke hentet fra osmand.net.</string>
@@ -1450,66 +1439,66 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
 	<string name="street_name">Gade</string>
 	<string name="select_address_activity">Vælg adresse</string>
-    <string name="favourites_list_activity">Vælg favorit</string>
-    <string name="hno">Husnummer</string>
-    <string name="choose_osmand_theme_descr">Vælg tema</string>
-    <string name="choose_osmand_theme">Tema</string>
-    <string name="accessibility_options">Indstillinger for tilgængelighed</string>
-    <string name="tip_recent_changes_1_3_t">Ændringer i 1.3:
+	<string name="favourites_list_activity">Vælg favorit</string>
+	<string name="hno">Husnummer</string>
+	<string name="choose_osmand_theme_descr">Vælg tema</string>
+	<string name="choose_osmand_theme">Tema</string>
+	<string name="accessibility_options">Indstillinger for tilgængelighed</string>
+	<string name="tip_recent_changes_1_3_t">Ændringer i 1.3:
 	\n* Genimplementere understøttelse af tabletter og store skærme
 	\n* Holo tema (tilpasning)
 	\n* Yderligere indstillinger for stabilisering af kompas
 	\n* Nederste venstre knap på kortskærmen erstatter menuknappen
-    </string>
-    <string name="monitoring_settings">Logningstjenester &amp; dvaletilstand</string>
-    <string name="monitoring_settings_descr">Indstil, hvordan ture optages og dvaletilstand aktiveres</string>
-    <string name="osmand_monitoring_plugin_name">Logningstjenester &amp; dvaletilstand</string>
-    <string name="local_openstreetmap_act_title">OSM modifikationer</string>
-    <string name="default_buttons_other_actions">Flere handlinger</string>
-    <string name="osmand_monitoring_plugin_description">Aktiver sporing og navigation i dvaletilstand (skærm slukket), ved periodisk at tænde GPS-enheden. Vis indstillinger der letter optagelse til lokale GPX filer af dine ture eller online ved hjælp af en webtjeneste.</string>
-    <string name="download_using_mobile_internet">WiFi er i øjeblikket ikke tilsluttet. Skal der fortsættets med den nuværende internet-forbindelse?</string>
-    <string name="cancel_navigation">Stop navigation</string>
-    <string name="cancel_route">Annuller rute</string>
-    <string name="clear_destination">Slet destinationen</string>
-    <string name="install_paid">Fuldversion</string>
-    <string name="other_location">Andre</string>
-    <string name="files_limit">%1$d filer tilbage</string>
-    <string name="available_downloads_left">%1$d filer kan hentes</string>
-    <string name="use_magnetic_sensor">Magnetisk sensor</string>
-    <string name="local_indexes_cat_srtm">Højdekurvedata</string>
-    <string name="use_magnetic_sensor_descr">Brug magnetisksensor i stedet for retningssensor til at bestemme kompasværdi</string>
-    <string name="use_kalman_filter_compass_descr">Brug Kalman-filter for at undgå kompasmisvisning</string>
-    <string name="use_kalman_filter_compass">Kalman filter</string>
-    <string name="access_mark_final_location_first">Tilgængelighedmodus: Vælg destination først</string> 
-    <string name="wait_current_task_finished">Vent - mens aktuel opgave bliver færdig</string>
-    <string name="downloading_file_new">Henter …</string>
+	</string>
+	<string name="monitoring_settings">Logningstjenester &amp; dvaletilstand</string>
+	<string name="monitoring_settings_descr">Indstil, hvordan ture optages og dvaletilstand aktiveres</string>
+	<string name="osmand_monitoring_plugin_name">Logningstjenester &amp; dvaletilstand</string>
+	<string name="local_openstreetmap_act_title">OSM modifikationer</string>
+	<string name="default_buttons_other_actions">Flere handlinger</string>
+	<string name="osmand_monitoring_plugin_description">Aktiver sporing og navigation i dvaletilstand (skærm slukket), ved periodisk at tænde GPS-enheden. Vis indstillinger der letter optagelse til lokale GPX filer af dine ture eller online ved hjælp af en webtjeneste.</string>
+	<string name="download_using_mobile_internet">WiFi er i øjeblikket ikke tilsluttet. Skal der fortsættets med den nuværende internet-forbindelse?</string>
+	<string name="cancel_navigation">Stop navigation</string>
+	<string name="cancel_route">Annuller rute</string>
+	<string name="clear_destination">Slet destinationen</string>
+	<string name="install_paid">Fuldversion</string>
+	<string name="other_location">Andre</string>
+	<string name="files_limit">%1$d filer tilbage</string>
+	<string name="available_downloads_left">%1$d filer kan hentes</string>
+	<string name="use_magnetic_sensor">Magnetisk sensor</string>
+	<string name="local_indexes_cat_srtm">Højdekurvedata</string>
+	<string name="use_magnetic_sensor_descr">Brug magnetisksensor i stedet for retningssensor til at bestemme kompasværdi</string>
+	<string name="use_kalman_filter_compass_descr">Brug Kalman-filter for at undgå kompasmisvisning</string>
+	<string name="use_kalman_filter_compass">Kalman filter</string>
+	<string name="access_mark_final_location_first">Tilgængelighedmodus: Vælg destination først</string> 
+	<string name="wait_current_task_finished">Vent - mens aktuel opgave bliver færdig</string>
+	<string name="downloading_file_new">Henter …</string>
 	<string name="plugin_distance_point_hdop">nøjagtighed</string>
-    <string name="plugin_distance_point_speed">hastighed</string>
-    <string name="plugin_distance_point">Punkt</string>
-    <string name="gpx_file_name">GPX-filnavn</string>
-    <string name="default_buttons_do_not_show_again">Vis ikke igen</string>
-    <string name="distance_measurement_save_gpx">Gem som GPX</string>
-    <string name="distance_measurement_load_gpx">Åben eksisterende GPX</string>
-    <string name="plugin_distance_point_time">tid</string>
-    <string name="gpx_saved_sucessfully">GPX-fil blev gemt som {0}</string>
-    <string name="distance_measurement_start_editing">Start redigering</string>
-    <string name="distance_measurement_finish_editing">Slut redigering</string>
-    <string name="distance_measurement_finish_subtrack">Start et nyt underspor</string>
-    <string name="distance_measurement_clear_route">Slet punkter</string>
-    <string name="plugin_distance_point_ele">højde</string>
-    <string name="osmand_distance_planning_plugin_description">Opret et spor (eller brug eksisterende GPX-filer) til at måle afstanden mellem punkter. Gem som GPX, kan bruges til at planlægge GPX-ruter.</string>
-    <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
-    <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n
+	<string name="plugin_distance_point_speed">hastighed</string>
+	<string name="plugin_distance_point">Punkt</string>
+	<string name="gpx_file_name">GPX-filnavn</string>
+	<string name="default_buttons_do_not_show_again">Vis ikke igen</string>
+	<string name="distance_measurement_save_gpx">Gem som GPX</string>
+	<string name="distance_measurement_load_gpx">Åben eksisterende GPX</string>
+	<string name="plugin_distance_point_time">tid</string>
+	<string name="gpx_saved_sucessfully">GPX-fil blev gemt som {0}</string>
+	<string name="distance_measurement_start_editing">Start redigering</string>
+	<string name="distance_measurement_finish_editing">Slut redigering</string>
+	<string name="distance_measurement_finish_subtrack">Start et nyt underspor</string>
+	<string name="distance_measurement_clear_route">Slet punkter</string>
+	<string name="plugin_distance_point_ele">højde</string>
+	<string name="osmand_distance_planning_plugin_description">Opret et spor (eller brug eksisterende GPX-filer) til at måle afstanden mellem punkter. Gem som GPX, kan bruges til at planlægge GPX-ruter.</string>
+	<string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
+	<string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n
 * Tryk og hold på kortet for at slette tidligere punkt.\n
 * Tryk og hold på punkt for at se og vedhæfte beskrivelse.\n
 * Klik på målemodul for at se flere handlinger.</string>
-    <string name="delete_point">Slet punkt</string>
-    <string name="local_osm_changes_backup_failed">Sikkerhedskopiering af OSM-data ændringer mislykkedes</string>
-    <string name="local_osm_changes_backup_successful">OSM-data ændringsfilen %1$s genereret</string>
-    <string name="local_osm_changes_backup">Sikkerhedskopiering efterhånden som OSM-data ændres</string>
-    <string name="intermediate_items_sort_by_distance">Sorter (fra dør til dør)</string>
-    <string name="search_street_in_neighborhood_cities">Søg efter gade i nabolagets byer</string>
-    <string name="tip_recent_changes_1_4_t">Ændringer i 1.4:
+	<string name="delete_point">Slet punkt</string>
+	<string name="local_osm_changes_backup_failed">Sikkerhedskopiering af OSM-data ændringer mislykkedes</string>
+	<string name="local_osm_changes_backup_successful">OSM-data ændringsfilen %1$s genereret</string>
+	<string name="local_osm_changes_backup">Sikkerhedskopiering efterhånden som OSM-data ændres</string>
+	<string name="intermediate_items_sort_by_distance">Sorter (fra dør til dør)</string>
+	<string name="search_street_in_neighborhood_cities">Søg efter gade i nabolagets byer</string>
+	<string name="tip_recent_changes_1_4_t">Ændringer i 1.4:
 	\n* Sorter rutepunkter på en optimal måde for at besøge alle (repræsentant, fra dør til dør)
 	\n* Søg efter gade ved navn (i nabolaget)
 	\n* Planlægningsudvidelse (indlæs/rediger/gem GPX spor)
@@ -1517,12 +1506,12 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	\n* GPX undermapper (organiser GPX spor)
 	\n* Slet SRTM filer
 	\n* Understøttelse af OSM-Noter 
-    </string>
-    <string name="intermediate_items_sort_return">Mellemliggende rutepunkter gensorteret for optimal rute fra kortposition til destination.</string>
-    <string name="please_select_address">Vælg først en by eller gade</string>
-    <string name="context_menu_item_destination_point">Vælg som destination</string>
-    <string name="destination_point">Destinationen %1$s</string>
-    <string name="local_index_gpx_timespan">\nPeriode: %1$d:%2$02d:%3$02d</string>
+	</string>
+	<string name="intermediate_items_sort_return">Mellemliggende rutepunkter gensorteret for optimal rute fra kortposition til destination.</string>
+	<string name="please_select_address">Vælg først en by eller gade</string>
+	<string name="context_menu_item_destination_point">Vælg som destination</string>
+	<string name="destination_point">Destinationen %1$s</string>
+	<string name="local_index_gpx_timespan">\nPeriode: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nTid i bevægelse: %1$d:%2$02d:%3$02d</string>
 	<string name="av_camera_focus">Kameraets fokustype</string>
 	<string name="av_camera_focus_descr">Vælg fokustype på intern kamera</string>
@@ -1533,37 +1522,35 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="av_camera_focus_edof">Udvidet dybdeskarphed (EDOF)</string>
 	<string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
 	<string name="av_photo_play_sound_descr">Spil lyd når foto tages</string>
-<string name="av_photo_play_sound">Kameralyd</string>
+	<string name="av_photo_play_sound">Kameralyd</string>
 	<string name="speak_traffic_warnings">Meddel om trafikadvarsler</string>
 	<string name="speak_cameras">Meddel om fotofælder</string>
 	<string name="speak_speed_limit">Meddel om hastighedsgrænse</string>
-    
-	
-    <string name="route_descr_map_location">Kort: </string>
-    <string name="route_to">Til:</string>
-    <string name="route_via">Via:</string>
-    <string name="route_from">Fra:</string>
-    <string name="osb_author_dialog_password">OSM kodeord (valgfrit)</string>
+	<string name="route_descr_map_location">Kort: </string>
+	<string name="route_to">Til:</string>
+	<string name="route_via">Via:</string>
+	<string name="route_from">Fra:</string>
+	<string name="osb_author_dialog_password">OSM kodeord (valgfrit)</string>
 	<string name="tip_recent_changes_1_5_t">Ændringer i 1.5:
 \n * Stemmeadvarsler om hastighedsbegrænsninger og fotofælder
 \n * Flere stemmeprompt muligheder(gadenavne meddelt)
 \n * Kortikoner i højopløsning
 \n * Masser af brugergrænseflade ændringer
 \n * Fejlrettelser i afstandsvisning, GPX analyse, rutepunkt håndtering, planlægnings modul, overførelse til OSM, https håndtering
-    </string>
-    <string name="osb_author_or_password_not_specified">Angiv OSM bruger og adgangskode i \'Indstillinger\'</string>
-    <string name="clear_intermediate_points">Slet mellemliggende punkter</string>
-    <string name="keep_intermediate_points">Behold mellemliggende punkter</string>
-    <string name="new_directions_point_dialog">Der er allerede mellemliggende punkter.</string>
-    <string name="context_menu_item_directions_to">Kørselsvejledning til</string>
-    <string name="context_menu_item_directions_from">Kørselsvejledning fra</string>
-    <string name="speak_title">Meddel…</string>
+	</string>
+	<string name="osb_author_or_password_not_specified">Angiv OSM bruger og adgangskode i \'Indstillinger\'</string>
+	<string name="clear_intermediate_points">Slet mellemliggende punkter</string>
+	<string name="keep_intermediate_points">Behold mellemliggende punkter</string>
+	<string name="new_directions_point_dialog">Der er allerede mellemliggende punkter.</string>
+	<string name="context_menu_item_directions_to">Kørselsvejledning til</string>
+	<string name="context_menu_item_directions_from">Kørselsvejledning fra</string>
+	<string name="speak_title">Meddel…</string>
 	<string name="speak_descr">Konfigurer til meddele gadenavne , trafikadvarsler ( tvungne stop, vejbump ) , fotofældeadvarsler , hastighedsbegrænsninger</string>
 	<string name="speak_street_names">Meddel gadenavne (TTS)</string>
-    <string name="announce_gpx_waypoints">Meddel om GPX-rutepunkter</string>
-    <string name="osmodroid_mode_off">Start OsMoDroid</string>
-    <string name="osmodroid_mode_on">Stop OsMoDroid</string>    
-    <string name="driving_region_japan">Japan</string>
+	<string name="announce_gpx_waypoints">Meddel om GPX-rutepunkter</string>
+	<string name="osmodroid_mode_off">Start OsMoDroid</string>
+	<string name="osmodroid_mode_on">Stop OsMoDroid</string>	
+	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa &amp; Asien</string>
@@ -1572,25 +1559,25 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="driving_region_descr">Vælg område: USA, Europa, England, Asien m.fl.</string>
 	<string name="map_widget_fps_info">FPS-fejlsøgningssinfo</string>
 	<string name="local_index_tile_data_expire">Udløber ( minutter): %1$s</string>
-    <string name="local_index_tile_data_maxzoom">Maksimal zoomniveau: %1$s</string>
-    <string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
-    <string name="edit_tilesource_elliptic_tile">Elliptisk mercator</string>
-    <string name="edit_tilesource_maxzoom">Maks zoomniveau</string>
-    <string name="edit_tilesource_expiration_time">Udløber ( minutter)</string>
-    <string name="edit_tilesource_minzoom">Min zoomniveau</string>
-    <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Vælg eksisterende…</string>
-    <string name="edit_tilesource_name">Navn</string>
-    <string name="maps_define_edit">Definer/rediger…</string>
+	<string name="local_index_tile_data_maxzoom">Maksimal zoomniveau: %1$s</string>
+	<string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
+	<string name="edit_tilesource_elliptic_tile">Elliptisk mercator</string>
+	<string name="edit_tilesource_maxzoom">Maks zoomniveau</string>
+	<string name="edit_tilesource_expiration_time">Udløber ( minutter)</string>
+	<string name="edit_tilesource_minzoom">Min zoomniveau</string>
+	<string name="edit_tilesource_url_to_load">URL</string>
+	<string name="edit_tilesource_choose_existing">Vælg eksisterende…</string>
+	<string name="edit_tilesource_name">Navn</string>
+	<string name="maps_define_edit">Definer/rediger…</string>
 	<string name="local_index_tile_data_zooms">Zoomniveauer hentet: %1$s</string>
-    <string name="local_index_tile_data_downloadable">Kan hentes: %1$s</string>
-    <string name="local_index_tile_data_name">Delkort data: %1$s</string>
-    <string name="edit_tilesource_successfully">Delkortkilden %1$s er gemt</string>
-    <string name="tip_recent_changes_1_6_t">Ændringer i 1.6 :
+	<string name="local_index_tile_data_downloadable">Kan hentes: %1$s</string>
+	<string name="local_index_tile_data_name">Delkort data: %1$s</string>
+	<string name="edit_tilesource_successfully">Delkortkilden %1$s er gemt</string>
+	<string name="tip_recent_changes_1_6_t">Ændringer i 1.6 :
 \n * Definer/rediger online flise kilde (angiv udløbstid)
-    </string>
-    <string name="about_version">Version:</string>
-    <string name="about_settings">Om</string>
-    <string name="about_settings_descr">Om …</string>
-    <string name="tips_and_tricks">Tips</string>
-    </resources>
+	</string>
+	<string name="about_version">Version:</string>
+	<string name="about_settings">Om</string>
+	<string name="about_settings_descr">Om …</string>
+	<string name="tips_and_tricks">Tips</string>
+	</resources>
