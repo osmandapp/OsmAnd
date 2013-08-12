@@ -1587,7 +1587,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="local_index_tile_data_name">Delkort data: %1$s</string>
     <string name="edit_tilesource_successfully">Delkortkilden %1$s er gemt</string>
     <string name="tip_recent_changes_1_6_t">Ændringer i 1.6 :
-\n * Definer/rediger online flise kilde (angiv udløbstid)
+\n * Definer/rediger online delkortkilde (angiv udløbstid)
     </string>
     <string name="about_version">Version:</string>
     <string name="about_settings">Om</string>
