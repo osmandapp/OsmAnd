@@ -809,7 +809,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n \'Efter bevægelsesretning\' - Kortet vil hele tiden roteres så retningen er opad
 \n \'Efter kompas\' - Kortet vil hele tiden roteres så det passer med enhedens kompas
 	</string>
-	<string name="tip_day_night_mode_t_v2">Kortets udseende kan for nogle vektorkort skiftes mellem dag (lysere) og nat (mørkere).
+	<string name="tip_day_night_mode_t_v2">Kortets udseende kan for offline vektorkort skiftes mellem dag (lysere) og nat (mørkere).
 \nNatfarver er mere sikre under natkørsel.
 \nIndstil regler for dag/nat skift i \'Menu\' -&gt; \'Konfigurer skærm …\' -&gt;\'Dag/nat kort\'.
 \nValgmulighederne er:
