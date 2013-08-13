@@ -1311,4 +1311,5 @@
     <string name="driving_region_japan">Japon</string>
 	<string name="driving_region_us">Etats-Unis</string>
 	<string name="driving_region_canada">Canada</string>
-	</resources>
+	<string name="speak_speed_limit">Annoncer les limitations de vitesses</string>
+    </resources>
