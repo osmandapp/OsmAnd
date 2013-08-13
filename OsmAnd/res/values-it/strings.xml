@@ -1377,4 +1377,5 @@
     <string name="about_settings">Informazioni</string>
     <string name="about_settings_descr">Informazioni …</string>
     <string name="tips_and_tricks">Suggerimenti</string>
-    </resources>
+    <string name="tip_map_styles">Stili mappa</string>
+	</resources>
