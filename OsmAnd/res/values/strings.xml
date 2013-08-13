@@ -11,9 +11,9 @@
     -->
 	<string name="tip_map_styles">Map Styles</string>
 	<string name="tip_map_styles_t">OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
-		\n\t* Other than the balanced default maps style, you may under \'Menu\' -> \'Configure screen\' -> \'Map Style\' select for example
-		\n\t* The \'Touring view\' style: which contains the most detailed information possible for traveling and touring, including optimization for professional drivers (higher contrast distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbols, etc.
-		\n\t* \'High contrast roads\'C shows roads in very accentuiaated bright colors for bad ambient lighting situations
+		\n\t* Other than the balanced default map style, you may under \'Menu\' -> \'Configure screen\' -> \'Map Style\' select for example
+		\n\t* The \'Touring view\' style: which contains the most detailed information possible for traveling and touring, including optimization for professional drivers (higher contrast distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
+		\n\t* \'High contrast roads\' shows roads in very accentuated bright colors for bright ambient lighting situations
 		\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download)
 	</string>
     <string name="about_version">Version :</string>

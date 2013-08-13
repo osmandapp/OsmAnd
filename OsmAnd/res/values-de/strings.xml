@@ -1,4 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
+	<string name="tip_map_styles">Kartendarstellung</string>
+	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten in verschieden Darstellung für verschiedenen Verwenduingszwecke optimiert dartsellen:
+		\n\tNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' -> \'Anzeige konfigurieren\' -> \'Map Style\' -> \'Kartendarstellung\' zum Beispiel auswählen:
+		\n\t* Den \'Touring view\' Stil: Er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahhradrouten, Wndersymbol-Untertützung, usw.
+		\n\t* \'High contrast roads\' zeigt alle Straßen in sehr deutlichen leuchtenden Farben, nützlich in extrem hellen Umgebungen
+		\n\t* \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahretn und Lifte (in Zusammenarbeit mit der \'World ski\' Offline-Karten)
+	</string>
 	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
