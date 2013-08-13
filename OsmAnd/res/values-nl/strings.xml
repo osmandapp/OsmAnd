@@ -350,7 +350,7 @@
   <string name="tip_update_index">Bijwerken van offline kaarten</string>
   <string name="tip_update_index_t">\tHet is belangrijk dat de kaartgegevens up-to-date zijn voor zoeken op interessepunt/adres en voor offline navigatie. De downloadmanager kan deze offline kaarten (en enkele andere gegevens) downloaden en aangeven of er updates beschikbaar zijn.
 		\n\tOm kaarten te downloaden, ga naar \'Instellingen\' -&gt; \'Offline gegevens\' -&gt; \'Download of update offline gegevens\'.
-		\n\tNadat de regiolijst van het internet is opgehaald, druk op een item om deze te downloaden of te updaten. U kunt de lijst doorzoeken door letters te typen, of gebruik de optie \'Instellingen\' -&gt; \'Toon gedownloade\' om enkel de gegevens te zien die al op je apparaat aanwezig zijn.
+		\n\tNadat de regiolijst van het internet is opgehaald, druk op een item om deze te downloaden of te updaten. U kunt de lijst doorzoeken door letters te typen, of gebruik de optie \'Instellingen\' -&gt; \'Toon gedownloade\' om alleen de gegevens te zien die al op je apparaat aanwezig zijn.
 		\n\tGroen: deze gegevens zijn up-to-date
 		\n\tBlauw: er is een update beschikbaar
 		\n\tSchuingedrukt: gegevens zijn gedeactiveerd</string>
@@ -378,7 +378,7 @@
   
   <string name="tip_app_mode">Gebruiksprofiel</string>
   
-  <string name="tip_navigation">Routebeschrijving (navigatie)</string>
+  <string name="tip_navigation">Aanwijzingen (navigatie)</string>
   <string name="tip_navigation_t">\tVoor het starten van navigatie moet je een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en kies het type navigatie.</string>
   <string name="tip_search">Zoeken</string>
   <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' -&gt; \'Zoek dichtbij hier\'), een adres (met het zoekscherm), een interessepunt (op naam of soort) of een favoriet.
@@ -1030,7 +1030,7 @@
 		\n\tOsmAnd ondersteunt ook zelfgemaakte kaartbronnen.
 	</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd ondersteunt verschillende vervoersprofielen.
-		\n\tJe kan het actieve profiel wijzigen via het profielicoon links onderaan in het kaartscherm (icoon voor auto, fiets of voetganger), of bij het maken van een route (\'transportmodus\').
+		\n\tJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (icoon voor auto, fiets of voetganger), of bij het maken van een route (\'transportmodus\').
 	</string>
 <string name="osmand_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met raster- en vectorkaarten</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met online en offline kaarten</string>
