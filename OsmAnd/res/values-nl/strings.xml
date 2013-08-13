@@ -1549,4 +1549,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="about_settings">Over</string>
     <string name="about_settings_descr">Over…</string>
     <string name="tips_and_tricks">Tips</string>
-    </resources>
+    <string name="tip_map_styles">Kaartstijlen</string>
+	</resources>
