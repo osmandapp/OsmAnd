@@ -1142,7 +1142,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="tip_recent_changes_1_2_t">"Arreglos en 1.2.1:\n\t* Arreglado Geo Intent (Foursquare, c: geo)\n\t* Arreglado el temblor de pantalla durante la navegación\n\t* Otras pequeñas correcciones\nCambios en 1.2:\n\t* Corrección de errores (enrutamiento afinado, búsqueda, grabación de AV, los mensajes de voz, algunas mejoras de visualización)\n\t* Configuración de superposición de sombreado más fácil (requiere extra de Curvas de Nivel)\n\t* Ahora acepta enlaces de localización de maps.google.com\n\t* Nuevo control (Información GPS)\n\t* Filtro de Kalman para brújula\n\t* Soporte para reloj Pebble\n\t* Añadido soporte multiventana para nuevos dispositivos Samsung "
 	</string>
     <string name="prefer_motorways">Prefiero autopistas</string>
-	<string name="prefer_in_routing_title">Prefiero-…</string>
+	<string name="prefer_in_routing_title">Prefiero…</string>
 	<string name="prefer_in_routing_descr">Preferencia por autopistas</string>
     <string name="max_speed_none">ninguna</string>
     <string name="av_def_action_choose">Seleccionar a petición</string>
@@ -1342,4 +1342,13 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 	<string name="driving_region_canada">Canadá</string>
 	<string name="driving_region_europe_asia">Europa y Asia</string>
 	<string name="driving_region_uk">Reino Unido, India, Australia y Otros</string>
-	</resources>
+	<string name="driving_region_descr">Seleccionar Región de Conducción: EEUU, Europa, Reino Unido, Asia y Otras</string>
+	<string name="driving_region">Región de Conducción</string>
+	<string name="edit_tilesource_minzoom">Zoom mín.</string>
+    <string name="edit_tilesource_expiration_time">Expirar (minutos)</string>
+    <string name="edit_tilesource_successfully">Fuente de teselas %1$s ha sido guardada correctamente</string>
+    <string name="local_index_tile_data_name">Datos de teselas: %1$s</string>
+    <string name="local_index_tile_data_expire">Expirar (minutos): %1$s</string>
+    <string name="about_settings">Acerca de</string>
+    <string name="about_settings_descr">Información de la versión, licencias, miembros del proyecto</string>
+    </resources>
