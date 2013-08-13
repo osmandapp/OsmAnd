@@ -1225,4 +1225,11 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="edit_tilesource_choose_existing">Välj befintlig …</string>
     <string name="edit_tilesource_name">Namn</string>
     <string name="maps_define_edit">Definiera/Redigera …</string>
-	</resources>
+	<string name="tip_map_styles">Kartstilar</string>
+	<string name="tip_map_styles_t">OsmAnd stöder visning av offline vektor-kartor i olika stilar för att passa dina behov:
+		\n\t* Om inte standardvisningen duger kan du under \'Meny\' -&gt; \'Konfigurera skärm\' -&gt; \'Kartstil\' till exempel välja
+		\n\t* Stilen \'Touring view\': som innehåller den mest detaljerade informationen för traveling and touring, inklusive optimering för yrkesförare (vägar med hög kontrast), alternativ för vandring i Alperna (SAC-skala), cykelvägar, etc.
+		\n\t* \'Vägar med hög kontrast\' visar vägarna med starkt markerade klara färger för situationer med dålig belysning
+		\n\t* \'Vinter och skidor\' skapar ett (snötäckt) vinterlandskap, och visar skidbackar och -liftar (hämta kartan \'World ski\')
+	</string>
+    </resources>
