@@ -25,11 +25,11 @@ public class TipsAndTricksActivity {
 			{R.string.tip_map_context_menu,R.string.tip_map_context_menu_t},
 			{R.string.tip_rotation_switching,R.string.tip_rotation_switching_t_v2},
 			{R.string.tip_day_night_mode,R.string.tip_day_night_mode_t_v2},
+			{R.string.tip_map_styles,R.string.tip_map_styles_t},
 			{R.string.tip_altitude_offset,R.string.tip_altitude_offset_t},
+			{R.string.tip_map_switch,R.string.tip_map_switch_t_v2},
 			{R.string.tip_location_sharing,R.string.tip_location_sharing_t},
 			{R.string.tip_osm_improve,R.string.tip_osm_improve_t},
-			{R.string.tip_map_switch,R.string.tip_map_switch_t_v2},
-			{R.string.tip_recent_changes,R.string.tip_recent_changes_1_1_0_t},
 			};
 
 	private final Context ctx;
