@@ -152,7 +152,7 @@
   <string name="select_tile_source_to_install">Zaznacz mapy (kafelkowe) do zainstalowania lub zaktualizowania</string>
   <string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
   <string name="install_more">Zainstaluj więcej…</string>
-  <string name="tip_update_index">Aktualizacja danych offline</string>
+  <string name="tip_update_index">Aktualizacja map offline</string>
   <string name="tip_update_index_t">\tPosiadanie aktualnych map to podstawa. OsmAnd zapewnia menedżer danych, który może sprawdzić dostępne aktualizacje.
 \n\tAby sprawdzić aktualizacje przejdź do \'Ustawień\' -&gt; \'Zarządzanie danymi\' -&gt; \'Pobierz\'. Po tym jak zostanie pobrana z Internetu lista regionów, możesz wybrać opcję \'Menu\' -&gt; \'Filtruj pobrane\', aby wybrać uaktualnienia jedynie dla danych znajdujących się już na urządzeniu.\n\tWpisy koloru zielonego oznaczają dane identyczne z tymi na serwerze
 \n\tWpisy koloru niebieskiego oznaczają dostępne aktualizacje
@@ -161,7 +161,7 @@
   <string name="level_to_switch_vector_raster">Min. zoom dla mapy wektorowej</string>
   <string name="tip_day_night_mode">Tryb dzień/noc</string>
   
-  <string name="tip_location_sharing">Udostępnianie pozycji</string>
+  <string name="tip_location_sharing">Udostępnij pozycję</string>
   <string name="tip_location_sharing_t">\tMożesz podzielić się swoją pozycją GPS z rodziną lub znajomymi. \n\tAby to zrobić:: \n\tWybierz z menu kontekstowego mapy \'Opcje punktu\' -&gt; \'Udostępnij pozycję GPS\'. \n\tNastępnie wybierz sposób udostępnienia. Do wyboru jest e-mail, SMS lub zwykłe skopiowanie koordynat do schowka.
 	</string>
   <string name="tip_favorites">Ulubione punkty</string>
@@ -176,18 +176,19 @@
   <string name="system_locale">Systemowy</string>
   <string name="preferred_locale_descr">Wybierz język interfejsu</string>
   <string name="preferred_locale">Język interfejsu</string>
-  <string name="tip_map_switch">Źródło mapy</string>
+  <string name="tip_map_switch">Wybierz źródło mapy</string>
   
   <string name="tip_app_mode">Profil użytkownika</string>
   
-  <string name="tip_navigation">Nawigacja</string>
+  <string name="tip_navigation">Pokaż wskazówki (Nawigacja)</string>
   <string name="tip_navigation_t">\tPrzed rozpoczęciem nawigacji musisz wybrać punkt docelowy. Potem naciśnij\'Menu\' -&gt; \'Nawigacja\' i wybierz rodzaj nawigacji.</string>
   <string name="tip_search">Wyszukiwanie</string>
   <string name="tip_search_t">"\tMożesz wyszukiwać miejsca bezpośrednio na mapie lub poprzez adres, jako POI lub punkt ulubiony.\n\tPrzyciśnięcie przycisku \'Szukaj\' na głównym ekranie otwiera okno wyszukiwania. Dla wszystkich wyników możesz wybrać opcję \'Pokaż na mapie\' oraz \'Trasa\'. "</string>
   <string name="tip_map_context_menu">Menu kontekstowe mapy</string>
   <string name="tip_map_context_menu_t">"\tMenu kontekstowe mapy jest dostępne poprzez przyciśnięcie i przytrzymanie na mapie lub poprzez wciśnięcie przycisku na trackballu.\n\tStworzy to chmurkę zawierającą współrzędne danego punktu. Aby otworzyć menu kontekstowe mapy, przyciśnij go. (Albo przyciśnij i przytrzymaj na nim aby go schować.)\n\tMenu kontekstowe mapy zawiera wszystkie akcje związane z punktem (lokalizacją). "</string>
   <string name="tip_initial">Porady i sztuczki</string>
-  <string name="tip_initial_t">"\tOsmAnd jest rozbudowanym programem do nawigacji satelitarnej posiadającym wiele funkcji.\n\tNiektóre sztuczki i kruczki są wyświetlane na ekranie w menu głównym. "</string>
+  <string name="tip_initial_t">"\tOsmAnd jest rozbudowanym programem do nawigacji satelitarnej posiadającym wiele funkcji.\n\tNiektóre sztuczki i kruczki są wyświetlane na ekranie w menu głównym. "
+	</string>
   <string name="next_button">Następny</string>
   <string name="previous_button">Poprzedni</string>
   <string name="unit_of_length_descr">Zmień jednostki długości i prędkości</string>
@@ -985,7 +986,7 @@
 \n\t* Wyświetlanie dróg oznaczonych jako Cycleway=track
 \n\t* Lepsze wykończenie UI (ikony)
 \n\t* Usunięcie niektórych błędów "</string>
-<string name="day_night_info">Informacja od dniu/nocy</string>
+<string name="day_night_info">Informacja o dniu/nocy</string>
 <string name="map_widget_day_night">Mapa dzień/noc</string>
 <string name="map_widget_vector_attributes">Atrybuty rysowania:</string>
 <string name="show_lanes">Pasy ruchu</string>
@@ -1079,7 +1080,7 @@
     <string name="osmodroid_plugin_description">OsMoDroid jest wtyczką dodającą do OsmAnd funkcje śledzenia online. Informacje na temat usługi dostępne są pod adresem http://esya.ru.</string>
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
     <string name="osmodroid_plugin_name">OsMoDroid</string>
-	<string name="tip_altitude_offset">Wyświetlanie wysokości - korygowanie przesunięcia</string>
+	<string name="tip_altitude_offset">Wysokość: korygowanie przesunięcia</string>
 	<string name="monitoring_control_start">start</string>
     <string name="tip_altitude_offset_t">"\tWiększość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.\n\tLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96. OsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96.\n\tW celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez Zarządzanie danymi (oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="download_srtm_maps">Poziomice</string>
@@ -1128,7 +1129,7 @@
     <string name="recording_description">Nagranie %1$s %2$s w %3$s</string>
     <string name="recording_default_name">nagranie</string>
     <string name="av_control_stop">zatrzymaj</string>
-    <string name="av_control_start">nagrywaj</string>
+    <string name="av_control_start">Nagrywaj</string>
     <string name="map_widget_av_notes">Notatki audio</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     
@@ -1337,4 +1338,74 @@
     <string name="edit_tilesource_choose_existing">Wybierz istniejący...</string>
     <string name="edit_tilesource_name">Nazwa</string>
     <string name="maps_define_edit">Zdefiniuj/Edytuj…</string>
+	<string name="osmand_extended_description_4000_chars">
+OsmAnd (OSM Automated Navigation Directions) to darmowa aplikacja z dostępem do wysokiej jakości darmowych map OpenStreetMap (OSM) o zasięgu światowym. Wszystkie mapy mogą być przechowywane na karcie pamięci urządzenia (urządzeń). Poprzez urządzenie GPS, OsmAnd oferuje wyznaczanie trasy, prezentując trasę graficznie oraz oferując zapowiedzi słowne, dla samochodu, roweru oraz ruchu pieszego. Wszystkie główne funkcje działają zarówno w trybie online, jak i offline (nie wymagają połączenia z Internetem).
+
+Niektóre z głównych cech:
+
+Nawigacja
+- pracuje online (szybko) lub offline (bez generowania kosztów podczas pobytu przebywania poza granicami kraju)
+- Podpowiedzi głosowe krok po kroku (w wersji nagranej lub poprzez syntezę głosu)
+- opcje: asystent pasa ruchu, wyświetlanie nazw ulic oraz przewidywanego czasu przybycia
+- obsługa punktów pośrednich trasy
+- automatyczne przelicznie trasy po zjechaniu z wyznaczonej trasy
+- wyszukiwanie miejsc poprzez podanie: adresu, typu (n.p.: restauracja, hotel, stacja benzynowa, muzeum), lub przez podanie współrzędnych
+
+Przeglądanie Map
+- wyświetla pozycję i orientację na mapie
+- opcjonalnie ustawia mapę zgodnie z kompasem lub zgodnie z kierunkiem ruchu
+- zapisywanie najważniejszych miejsc jako Ulubione
+- wyświetlanie punktów POI (punkty zainteresowania) wokół Ciebie
+- pozwala wyświetlić wyspecjalizowane map internetowe
+- pozwala wyświetlić widok satelitarny (z portalu Bing)
+- pozwala wyświetlić różne warstwy jak turystyczne, ślady z plików GPX i innych map z ustawieniem poziomu przeźroczystości
+- opcjonalne wyświetlanie nazw po angielsku, w jeżyku lokalnym lub w zapisie fonetycznym
+
+Używanie map OpenStreetMap i danych systemu Wikipedia:
+- najwyższej jakości informacje z dobrze współpracujących projektów
+- globalne mapy z OpenStreetMap, dostępne dla danego kraju lub regionu
+- Wikipedia POI, świetna do zwiedzania (nie dostępna w wersji darmowej)
+- nieograniczona ilość pobrań bezpośrednio do aplikacji(limit pobrań w darmowej wersji - 16 map)
+- zawsze aktualne mapy (aktualizowane co najmniej raz w miesiącu)
+- kompaktowe mapy wektorowe offline
+- wybór pomiędzy kompletną mapą a mapą zawierającą tylko drogi (np. pełna mapa Japonii to 700 MB, natomiast mapa zawierająca tylko informacje o drogach 200 MB.)
+- obsługuje również przechowywanie fragmentów pobranych map on-line
+
+Funkcje bezpieczeństwa
+- opcjonalny przełącznik widoku dzień/noc
+- opcjonalne wyświetlanie ograniczeń prędkości z opcją powiadamiania o przekroczeniu prędkości
+- opcjonalne powiększanie map w zależności od prędkości
+- możliwość dzielenia się swoją lokalizacją ze znajomymi
+
+Funkcja dla pieszych i rowerzystów
+- mapy zawierają informacje dla pieszych i rowerzystów
+- specjalne trasy oraz tryby wyświetlania dla pieszych i rowerzystów
+- opcja wyświetlania przystanków transportu publicznego (autobusy, tramwaje, pociągi) łącznie z nazwą linii
+- opcjonalne nagrywanie tras podróży do plików GPX lub w serwisach online
+- opcjonalne wyświetlanie prędkości i wysokości
+- wyświetlanie linii konturów i wypełnień (poprzez dodatkowe wtyczki)
+
+Bezpośredni wkład w OpenStreetMap
+- raportowanie błędów mapy
+- przesyłanie tras w postaci plików GPX do OSM bezpośrednio z aplikacji
+- dodawanie POI i bezpośrednie wysyłanie ich do OSM (lub też późniejsze )
+- opcja nagrywania tras podróży w tle (również gdy urządzenie jest w trybie uśpienia)
+
+OsmAnd jest udostępniane na darmowej licencji open source i jest aktywnie rozwijany. Każdy może przyczynić się do rozwoju aplikacji poprzez zgłaszanie błędów, poprawianiu tłumaczeń, lub dodawania nowych funkcjonalności. Projekt jest w stanie gwałtownego i ciągłego rozwoju i doskonalenia przez w programistów i aktywnych użytkowników. Postęp rozwoju opiera się również na wkładzie finansowym przeznaczonym na rozwój, kodowanie i testowanie nowych funkcjonalności. Kupując OsmAnd+ pomagasz powodujesz że staje się ona bardziej niesamowita! Możliwe jest również finansowanie konkretnych nowych funkcji lub wykonywanie wpłat na ogólny rozwój osmand.net.
+
+Orientacyjny zasięg map i ich jakość:
+- Europa Zachodnia: ****
+- Europa Wschodnia: ***
+- Rosja: ***
+- Ameryka Północna: ***
+- Ameryka Południowa: **
+- Asia: **
+- Japonia i Korea: ***
+- Bliski Wschód: **
+- Afryka: **
+- Antarktyka: *
+
+Lista krajów obsługiwanych (w zasadzie na cały świat!)
+Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Antigua i Barbuda, Antyle Holenderskie, Arabia Saudyjska, Argentyna, Armenia, Aruba, Australia, Austria, Azerbejdżan, Bahamy, Bahrajn, Bangladesz, Barbados, Belgia, Belize, Benin, Bermudy, Bhutan, Białoruś, Boliwia, Bonaire, Bośnia i Hercegowina, Botswana, Brazylia, Brunei, Brytyjskie Wyspy Dziewicze, Bułgaria, Burkina Faso, Burundi, Chile, Chiny, Chorwacja, Curaçao, Cypr, Czad, Czarnogóra, Czechy, Dania, Dominika, Dominikana, Dżibuti, Egipt, Ekwador, Erytrea, Estonia, Etiopia, Fidżi, Filipiny, Finlandia, Francja, Gabon, Gambia, Georgia Południowa, Ghana, Gibraltar, Grecja, Grenada, Grenlandia, Gruzja, Guam, Guernsey, Gujana Francuska, Gujana, Gwadelupa, Gwatemala, Gwinea Bissau, Gwinea Równikowa, Gwinea, Haiti, Hiszpania, Holandia, Honduras, Hong Kong, Indie, Indonezja, Irak, Iran, Irlandia, Islandia, Izrael, Jamajka, Japonia, Jemen, Jersey, Jordania, Kambodża, Kamerun, Kanada, Katar, Kazachstan, Kenia, Kirgistan, Kiribati, Kolumbia, Komory, Kongo, Korea Północna i Korea Południowa, Kostaryka , Kuba, Kuwejt, Laos, Lesotho, Liban, Liberia , Libia, Liechtenstein, Litwa, Luksemburg, Łotwa, Macedonia, Madagaskar, Majotta, Makao, Malawi, Malediwy, Malezja, Mali, Malta, Maroko, Martynika, Mauretania, Mauritius, Meksyk, Mikronezja, Mołdawia, Monako, Mongolia, Montserrat, Mozambik , Myanmar, Namibia, Nauru, Nepal, Niemcy, Niger, Nigeria, Nikaragua, Norwegia, Nowa Kaledonia, Nowa Zelandia, Oman, Pakistan, Palau, Palestyna, Panama, Papua Nowa Gwinea, Paragwaj, Peru, Polinezja Francuska, Polska, Południowy Sudan,  Portugalia, Puerto Rico, Republika Środkowoafrykańska, Republika Vanuatu, Republika Zielonego Przylądka, Rosja, Rumunia, Rwanda, Sahara Zachodnia, Saint Helena, Saint Kitts i Nevis, Saint Lucia, Saint Martin, Saint Vincent i Grenadyny, Saint-Barthélemy, Saint-Pierre i Miquelon, Salwador, Samoa, San Marino, Senegal, Serbia, Seszele, Sierra Leone, Singapur, Słowacja, Słowenia, Somalia, Sri Lanka, Stany Zjednoczone Ameryki (USA), Suazi, Sudan, Surinam, Syria, Szwajcaria, Szwecja, Tadżykistan, Tajlandia , Tajwan, Tanzania, Timor Wschodni, Togo, Tokelau, Tonga, Trynidad i Tobago, Tunezja, Turcja, Turkmenistan, Tuvalu, Uganda, Ukraina, Urugwaj, Uzbekistan, Wallis i Futuna, Watykan, Wenezuela, Węgry, Wielka Brytania (UK), Wietnam, Włochy, Wybrzeże Kości Słoniowej, Wyspa Man, Zambia, Zimbabwe, Zjednoczone Emiraty Arabskie.
+	</string>
 	</resources>
