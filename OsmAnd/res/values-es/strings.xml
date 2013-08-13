@@ -1333,7 +1333,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="local_index_tile_data_downloadable">Descargable: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom máximo: %1$s</string>
     <string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
-    <string name="edit_tilesource_maxzoom">Zoom máx.</string>
+    <string name="edit_tilesource_maxzoom">Zoom máximo</string>
     <string name="edit_tilesource_name">Nombre</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="maps_define_edit">Definir/Editar…</string>
@@ -1344,7 +1344,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 	<string name="driving_region_uk">Reino Unido, India, Australia y Otros</string>
 	<string name="driving_region_descr">Seleccionar Región de Conducción: EEUU, Europa, Reino Unido, Asia y Otras</string>
 	<string name="driving_region">Región de Conducción</string>
-	<string name="edit_tilesource_minzoom">Zoom mín.</string>
+	<string name="edit_tilesource_minzoom">Zoom mínimo</string>
     <string name="edit_tilesource_expiration_time">Expirar (minutos)</string>
     <string name="edit_tilesource_successfully">Fuente de teselas %1$s ha sido guardada correctamente</string>
     <string name="local_index_tile_data_name">Datos de teselas: %1$s</string>
