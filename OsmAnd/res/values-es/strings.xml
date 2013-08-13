@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
@@ -1327,4 +1328,18 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="context_menu_item_directions_to">Indicaciones a</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_to">Hacia:</string>
-    </resources>
+    <string name="about_version">Versión:</string>
+    <string name="tips_and_tricks">Consejos</string>
+    <string name="local_index_tile_data_downloadable">Descargable: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Zoom máximo: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
+    <string name="edit_tilesource_maxzoom">Zoom máx.</string>
+    <string name="edit_tilesource_name">Nombre</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="maps_define_edit">Definir/Editar…</string>
+	<string name="driving_region_japan">Japón</string>
+	<string name="driving_region_us">Estados Unidos</string>
+	<string name="driving_region_canada">Canadá</string>
+	<string name="driving_region_europe_asia">Europa y Asia</string>
+	<string name="driving_region_uk">Reino Unido, India, Australia y Otros</string>
+	</resources>
