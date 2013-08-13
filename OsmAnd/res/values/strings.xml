@@ -11,8 +11,8 @@
     -->
 	<string name="tip_map_styles">Map Styles</string>
 	<string name="tip_map_styles_t">OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
-		\n\nOther than the balanced default map style, you may under \'Menu\' -> \'Configure screen\' -> \'Map Style\' select for example
-		\n\t* The \'Touring view\' style: which contains the most detailed information possible for traveling and touring, including optimization for professional drivers (higher contrast distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
+		\n\nOther than the balanced \'default\' map style, you may under \'Menu\' -> \'Configure screen\' -> \'Map Style\' select for example
+		\n\t* The \'Touring view\' style, which contains the most detailed information possible for traveling and touring, including optimization for professional drivers (higher contrast distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
 		\n\t* \'High contrast roads\' shows roads in very accentuated bright colors for bright ambient lighting situations
 		\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download)
 	</string>
@@ -560,7 +560,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_update_index_t">Up-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a data manager to download these offline maps (and some other data files), and to check for available updates.
 		\n\nTo download maps go to \'Settings\' -> \'Data Management\' -> \'Download offline data\'.
 		\n\nAfter the global region list is retrieved from the internet, click on any entry to download or update a file. You can filter the list by typing some letters, or you may select the option \'Settings\' -> \'Filter downloaded\' to see updates only for the data already on your device.
-		\n\t*Entries in \'green\' indicate data files identical on device and server
+		\n\n\t*Entries in \'green\' indicate data files identical on device and server
 		\n\t*Entries in \'blue\' indicate available updates on server
 		\n\t*Entries in italic font indicate data de-activated on the device
 	</string>
@@ -897,10 +897,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Map layers\' -> \'Map source&#8230;\' -> \'Offline vector maps\'.</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
-	<string name="tip_day_night_mode_t_v2">The map appearance can for offline vector maps be changed between day (brighter) and night (darker).
-		\n\nNight colors are safer for night driving.
+	<string name="tip_day_night_mode_t_v2">The map appearance can for offline vector maps be changed between day (brighter) and night (darker). Night colors are safer and more comfortable for night driving.
 		\n\nYou can set a policy for day/night switching in \'Menu\' -> \'Configure screen\' ->\'Day/night map\'.
-		\n\nChoices are:
+		\n\nThe choices are:
 		\n\t* 'Sunrise/Sunset\': automatic mode, controlled by position of the sun (default)
 		\n\t* 'Day\': always use day mode
 		\n\t* 'Night\': always use night mode
