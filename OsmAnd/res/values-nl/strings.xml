@@ -1547,7 +1547,13 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     </string>
     <string name="about_version">Versie:</string>
     <string name="about_settings">Over</string>
-    <string name="about_settings_descr">Over…</string>
+    <string name="about_settings_descr">Versieinformatie, licenties, projectdeelnemers</string>
     <string name="tips_and_tricks">Tips</string>
     <string name="tip_map_styles">Kaartstijlen</string>
-	</resources>
+	<string name="tip_map_styles_t">OsmAnd kan de offline vectorkaarten in verschillende kaartstijlen weergeven afhankelijk van uw wensen:
+		\n\t* Naast de uitgebalanceerde standaardkaartstijl, kunt u onder \'Menu\' -&gt; \'Configureer scherm\' -&gt; \'Kaartstijl\' bijvoorbeeld de keuze uit:
+		\n\t* De \'Touring view\'-stijl: deze bevat de meest gedetailleerd mogelijke informatie voor reizen en tours, waaronder optimalisatie voor professionele bestuurders (hoger contrast voor herkenbaarheid wegen), opties voor bergtochten (SAC-moeilijkheidsgraad), fietsroutes, wandelsymbolen, etc.
+		\n\t* \'High contrast roads\' toont wegen in uitgesproken heldere kleuren voor situaties met lastig omgevingslicht
+		\n\t* \'Winter and ski\' toont een (met sneeuw bedekt) winterlandschap en toont wereldwijde skihellingen en liften (wanneer gebruikt met de \'World ski\' kaartdownload)
+	</string>
+    </resources>
