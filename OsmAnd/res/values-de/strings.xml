@@ -349,9 +349,9 @@
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
 	<string name="tip_navigation">Navigation starten</string>
-	<string name="tip_navigation_t">"\tDie Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte und dann das Auswählen des Menüpunktes \'Navigiere zu\', oder über die Funktion \'Navigation\' bei Klick auf ein Ergebnis in einer Suche-Liste oder einen Favoriten.
-		\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an. "
-		\n\tDie Route von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch anschließenden Klick auf den gewünschten Ausgangspunkt und dann Auswahl den Kontext-Menü-Eintrags \'Navigiere von\'.
+	<string name="tip_navigation_t">"\tDie Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte und dann das Auswählen des Menüpunktes \'Navigiere zu\', oder über die Funktion \'Navigation\' bei Klick auf ein Ergebnis in einer Such-Liste oder einen Favoriten.
+		\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.
+		\n\tDie Route von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch anschließenden Klick auf den gewünschten Ausgangspunkt und dann Auswahl den Kontext-Menü-Eintrags \'Navigiere von\'."
 	</string>
 	<string name="tip_recent_changes_0_6_9_t">"Änderungen in 0.6.9:
 		\n\t- Verbesserte Offline-Kartenanzeige 
@@ -526,7 +526,7 @@
 	<string name="tip_update_index">Aktualisierung der Offline-Karten</string>
 	<string name="tip_update_index_t">\tAktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und ide Offline-Navigation. OsmAnd hat einen Daten-Manager für das Herunterladen von Offline-Karten (und einigen anderen Offline-Daten), und zur Aktualisierung derselben.
 \n\tDas Herunterladen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Herunterladen…\'.
-\n\tNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Die Liste kann durch eingabe von Zeichen gefiltert werden. Die Option \'Filter Gespeicherte\' zeigt nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
+\n\tNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Die Liste kann durch Eingabe von Zeichen gefiltert werden. Die Option \'Filter Gespeicherte\' zeigt nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
 \n\tEinträge in \'grün\': Daten aktuell
 \n\tEinträge in \'blau\': Neuere Version zum herunterladen verfügbar
 \n\tKursive Darstellung: Auf dem Gerät deaktivierte Karten</string>
@@ -557,22 +557,20 @@
 	</string>
 	<string name="tip_app_mode">Nutzerprofile</string>
 	<string name="tip_app_mode_t_v2">"OsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
-\n\nDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route. "</string>
+\n\tDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route (Transportmittel). "</string>
 	<string name="tip_search">Suchen</string>
-	<string name="tip_search_t">Um einen bestimmten Ort zu finden, bietet Ihnen OsmAnd mehrere Möglichkeiten:
+	<string name="tip_search_t">Um bestimmte Orte zu finden, bietet Ihnen OsmAnd mehrere Möglichkeiten:
 \n + Eingabe der Adresse
 \n + Angabe der Koordinaten
 \n + als POI
 \n + mittels Ihrer Favoriten
-\n + oder direkt über das Kontext-Menu in der Kartenansicht
-\n\nUnter \'Suche\' im Hauptmenü finden Sie alle genannten Such-Möglichkeiten. Ein Kontextmenü für einen Treffer bietet die Optionen: 
-\n + \'Als Ziel wählen\' und 
-\n + \'Auf Karte zeigen\'
+\n + oder direkt über das Kontext-Menu in der Kartenansicht (\'In der Nähe suchen\')
+\n\tUnter \'Suche\' im Hauptmenü finden Sie alle genannten Such-Möglichkeiten. Ein Kontextmenü für jeden Treffer bietet Optionen wie \'Navigation\' oder \'Auf Karte zeigen\'.
 	</string>
 	<string name="tip_map_context_menu">Kontextmenü in der Karte</string>
-	<string name="tip_map_context_menu_t">\tDas Karten-Kontextmenü (\'Verwenden Position\') wird über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht aufgerufen.
+	<string name="tip_map_context_menu_t">"\tDas Karten-Kontextmenü (\'Verwenden Position\') wird über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht aufgerufen.
 		\n\tEs erscheint eine Koordinatenanzeige: Kurzes Drücken darauf öffnet das Kontextmenü, langes Drücken entfernt es wieder.
-		\n\tDas Karten-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.
+		\n\tDas Karten-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt. "
 	</string>
 	<string name="tip_initial">Tipps und Tricks</string>
 	<string name="tip_initial_t">\tOsmAnd ist eine Navigationsanwendung mit vielen Fähigkeiten.
