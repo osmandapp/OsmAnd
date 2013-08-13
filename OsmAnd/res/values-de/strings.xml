@@ -550,7 +550,8 @@
 	<string name="tip_update_index">Aktualisierung der Offline-Karten</string>
 	<string name="tip_update_index_t">Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und ide Offline-Navigation. OsmAnd hat einen Daten-Manager für das Herunterladen von Offline-Karten (und einigen anderen Offline-Daten), und zur Aktualisierung derselben.
 		\n\nDas Herunterladen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Herunterladen…\'.
-		\n\nNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Die Liste kann durch Eingabe von Zeichen gefiltert werden. Die Option \'Filter Gespeicherte\' zeigt nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
+		\n\nNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Bitte beachten Sie die Dateityp-Auswahloption am oberen Ende des Bildschirms, wählen Sie dort die gewünschte Datei-Kategorie (Reguläre Karten, Hühenlinien-Overlay, etc.)
+		\n\nDie Liste kann durch Eingabe von Zeichen gefiltert werden. Die Option \'Filter Gespeicherte\' zeigt nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
 		\n\n\t* Einträge in \'grün\': Daten aktuell
 		\n\t* Einträge in \'blau\': Neuere Version zum herunterladen verfügbar
 		\n\t* Kursive Darstellung: Auf dem Gerät deaktivierte Karten

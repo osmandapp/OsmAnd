@@ -559,7 +559,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_update_index">Updating Offline Maps</string>
 	<string name="tip_update_index_t">Up-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a data manager to download these offline maps (and some other data files), and to check for available updates.
 		\n\nTo download maps go to \'Settings\' → \'Data Management\' → \'Download offline data\'.
-		\n\nAfter the global region list is retrieved from the internet, click on any entry to download or update a file. You can filter the list by typing some letters, or you may select the option \'Settings\' → \'Filter downloaded\' to see updates only for the data already on your device.
+		\n\nAfter the global region list is retrieved from the internet, click on any entry to download or update a file. Please note the file type selector near the top of the screen to select the type of download you want (regular maps, countour line overlays, etc.).
+		\n\nYou can filter the list by typing some letters, or you may select the option \'Settings\' → \'Filter downloaded\' to see updates only for the data already on your device.
 		\n\n\t*Entries in \'green\' indicate data files identical on device and server
 		\n\t*Entries in \'blue\' indicate available updates on server
 		\n\t*Entries in italic font indicate data de-activated on the device
