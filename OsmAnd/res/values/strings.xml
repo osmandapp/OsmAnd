@@ -908,9 +908,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_osm_improve">Improving OSM Data</string>
 	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can directly create and upload new POI or OSM bug reports with just a few clicks.
 		\n\nFor this you need to activate the OSM Editing Plugin under \'Settings\' → \'Plugins\', then provide your OSM login information in \'Settings\' → \'OSM editing\'.
-		\n\nTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialogue and finally commit it.
+		\n\nTo add a new POI use option \'Create POI\' in the \'Use location\' context menu. Proceed with entering the information about the new POI in \'Create POI\' dialogue and finally commit it.
 		\n\nErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
-		\n\nTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
+		\n\nTo add a OSM bug use option \'Open OSM bug\' in the \'Use location\' context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
 		\n\nPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.
 	</string>
 	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
@@ -1094,13 +1094,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
 	<string name="tip_location_sharing">Share a location</string>
 	<string name="tip_location_sharing_t">You can share the location of interesting places on your trip with family or friends as follows:
-		\n\nFor any point selected, via \'Map context menu\' → \'Share location\' menu.
+		\n\nFor any point selected, via \'Use location\' → \'Share location\' menu.
 		\n\nThen chose a way to share your location. The choices are: E-Mail, SMS(text), or just copy the location coordinates to the device clipboard.
 	</string>
 	<string name="tip_favorites">Favorite Points</string>
 	<string name="tip_favorites_t">Frequently used points can be saved as Favorites, as follows:
-		\n\nOn the map context menu for any point, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Screen\' → \'Favorites\'.
-		\n\nLong pressing on a Favorite in the \'Favorites\' menu provides options like to navigate to it, edit or delete it.
+		\n\nIn the \'Use location\' context menu for any point, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Screen\' → \'Favorites\'.
+		\n\nLong-pressing on a Favorite in the \'Favorites\' menu provides options like to navigate to it, edit or delete it.
 		\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' under \'Menu\' → \'Map layers\'.
 	</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
@@ -1121,13 +1121,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\nYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route (\'transport mode\').
 	</string>
 	<string name="tip_search">Searching</string>
-	<string name="tip_search_t">You can search for places directly on the map (\'Map context menu\' → \'Search near\'), or on the dedicated search screen by address, by location, as POI (by type or by name), or as predefined favorite.
+	<string name="tip_search_t">You can search for places directly on the map (\'Use location\' → \'Search near\'), or on the dedicated search screen by address, by location, as POI (by type or by name), or as predefined favorite.
 		\n\nPressing \'Search\' on the main screen opens the search activities. For all hits a context menu offers options like \'Directions\' or \'Show on map\'.
 	</string>
-	<string name="tip_map_context_menu">Map Context Menu</string>
-	<string name="tip_map_context_menu_t">The map context menu (\'Use location\') is available by long-pressing any point on the map, by pressing the trackball button, or by selecting \'Menu\' → \'Use location\' (the slast two ways take the map center as reference).
-		\n\nThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.)
-		\n\nThe map context menu contains all actions referring to a point (location).
+	<string name="tip_map_context_menu">\'Use location\' Context Menu</string>
+	<string name="tip_map_context_menu_t">The \'Use location\' context menu is available by long-pressing any point on the map (the tapping the marker), by pressing the trackball button, or by selecting \'Menu\' → \'Use location\' (the last two ways take the map center as reference).
+		\n\nLong-clicking a location produces a marker box. To open the \'Use location\' context menu, tap on it. (Or press and hold on it to hide the box again.)
+		\n\nThe \'Use location\' context menu contains all actions referring to a point (location).
 	</string>
 	<string name="tip_initial">Tips and Tricks</string>
 	<string name="tip_initial_t">OsmAnd is a navigation application with many features. 

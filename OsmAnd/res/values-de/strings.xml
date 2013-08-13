@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 	<resources>
 	<string name="tip_map_styles">Kartendarstellung</string>
-	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten in verschieden Darstellung für verschiedenen Verwenduingszwecke optimiert dartsellen:
+	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten für verschiedene Verwendungszwecke optimiert dartsellen:
 		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' → \'Anzeige konfigurieren\' → \'Map Style\' → \'Kartendarstellung\' zum Beispiel auswählen:
 		\n\t* Den \'Touring view\' Stil, er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahhradrouten, Wndersymbol-Untertützung, usw.
 		\n\t* \'High contrast roads\' zeigt alle Straßen in betont deutlichen Farben, nützlich in extrem hellen Umgebungen
-		\n\t* \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahretn und Lifte (in Zusammenarbeit mit der \'World ski\' Offline-Karten)
+		\n\t* \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahrten und Lifte (benötigt wird die \'World ski\' Offline-Karte)
 	</string>
 	<string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
@@ -341,26 +341,26 @@
 	<string name="tip_rotation_switching">Kartenrotation</string>
 	<string name="tip_rotation_switching_t_v2">Die Ausrichtung der Karte kann durch klicken auf die Kompassnadel geändert werden.
 		\n\nZur Wahl stehen:
-		\n\t\* 'Keine Rotation (Norden ist oben)\': Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
-		\n\t\* 'Nach Bewegungsrichtung\': Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
-		\n\t\* 'Nach Kompass\': Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
+		\n\t* 'Keine Rotation (Norden ist oben)\': Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
+		\n\t* 'Nach Bewegungsrichtung\': Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
+		\n\t* 'Nach Kompass\': Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
 	</string>
 	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Kartenebenen\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
 	<string name="tip_day_night_mode_t_v2">Die Anzeige der Offline-Vektor-Karten kann zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
 		\n\nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → \'Anzeige konfigurieren\' → \'Tag/Nacht-Modus\' geändert werden.
 		\n\nZur Auswahl stehen:
-		\n\t\* 'Sonnenaufgang/-untergang\': automatischer Modus (Voreinstellung)
-		\n\t\* 'Tag\': permanente Tagesansicht
-		\n\t\* 'Nacht\': permanente Nachtansicht
-		\n\t\* 'Umgebungslicht-Sensor\': automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)
+		\n\t* 'Sonnenaufgang/-untergang\': automatischer Modus (Voreinstellung)
+		\n\t* 'Tag\': permanente Tagesansicht
+		\n\t* 'Nacht\': permanente Nachtansicht
+		\n\t* 'Umgebungslicht-Sensor\': automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)
 	</string>
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
 	<string name="tip_osm_improve_t">OsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann direkt zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
 		\n\nDazu müssen Sie zunächst unter \'Einstellungen\' → \'Zusatzmodule\' OSM-Berarbeitung aktivieren und dann unter \'Einstellungen\' → \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
-		\n\nEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! 
+		\n\nEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im \'Verwende Position\'-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! 
 		\n\nGefundene Fehler auf der Karte können direkt gemeldet werden.
-		\n\nOSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im Karten-Kontextmenü.
+		\n\nOSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im \'Verwende Position\'-Kontextmenü.
 		\n\nAchtung: Für alle OSM-Aktivitäten wird eine Internetverbindung benötigt.
 	</string>
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
@@ -368,7 +368,7 @@
 	<string name="tip_navigation">Navigation starten</string>
 	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte und dann das Auswählen des Menüpunktes \'Navigiere zu\', oder über die Funktion \'Navigation\' bei Klick auf ein Ergebnis in einer Such-Liste oder einen Favoriten.
 		\n\nDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.
-		\n\nDie Route von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch anschließenden Klick auf den gewünschten Ausgangspunkt und dann Auswahl den Kontext-Menü-Eintrags \'Navigiere von\'.
+		\n\nDie Route von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch anschließenden Klick auf den gewünschten Ausgangspunkt und dann Auswahl der \'Verwende Position\'-Kontextmenüoption \'Navigiere von\'.
 	</string>
 	<string name="tip_recent_changes_0_6_9_t">Änderungen in 0.6.9:
 		\n\t- Verbesserte Offline-Kartenanzeige 
@@ -558,15 +558,15 @@
 	<string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
 	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomlevel</string>
 	<string name="tip_location_sharing">Position mitteilen</string>
-	<string name="tip_location_sharing_t">Wollen Sie einen interessanten Ort Freunden oder Familie mitteilen? Mit OsmAnd kann jeder Aufenthaltsort leicht mit Anderen geteilt werden. Dazu einfach im Karten-Kontextmenü die Option \'Position mitteilen\' auswählen.
-		\n\nZur Auswahl stehen mehrere Übertragungswege:
+	<string name="tip_location_sharing_t">Wollen Sie einen interessanten Ort Freunden oder Familie mitteilen? Dazu einfach im \'Verwende Position\'-Kontextmenü die Option \'Position mitteilen\' auswählen.
+		\n\nZur Auswahl stehen die Übertragungswege:
 		\n\t* E-Mail
 		\n\t* SMS
 		\n\t* Kopieren der Koordinaten in die Zwischenablage (Clipboard)
 	</string>
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">Sie können jeden beliebigen Ort als Favoriten speichern.
-		\n\nEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar. Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
+		\n\nEinen Favoriten erstellen Sie im \'Verwende Position\'-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar. Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
 		\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen.
 	</string>
 	<string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> Klassifizierung mit Bildern"</string>
@@ -591,13 +591,13 @@
 		\n\t* Angabe der Koordinaten
 		\n\t* als POI
 		\n\t* mittels Ihrer Favoriten
-		\n\t* oder direkt über das Kontext-Menu in der Kartenansicht (\'In der Nähe suchen\')
+		\n\t* oder direkt über das \'Verwende Position\'-Kontextmenü in der Kartenansicht (\'In der Nähe suchen\')
 		\n\nUnter \'Suche\' im Hauptmenü finden Sie alle genannten Such-Möglichkeiten. Ein Kontextmenü für jeden Treffer bietet Optionen wie \'Navigation\' oder \'Auf Karte zeigen\'.
 	</string>
-	<string name="tip_map_context_menu">Kontextmenü in der Karte</string>
-	<string name="tip_map_context_menu_t">Das Karten-Kontextmenü (\'Verwenden Position\') wird über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht aufgerufen.
-		\n\nEs erscheint eine Koordinatenanzeige: Kurzes Drücken darauf öffnet das Kontextmenü, langes Drücken entfernt es wieder.
-		\n\nDas Karten-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.
+	<string name="tip_map_context_menu">\'Verwende Position\'-Kontextmenü</string>
+	<string name="tip_map_context_menu_t">Das \'Verwende Position\'-Kontextmenü wird über ein langes Drücken auf einen Punkt in der Karte (dann Anklicken des Positionsmarkers), durch das Drücken des Trackball-Knopfes in der Kartenansicht, oder via \'Menü\' → \'Verwende Position\' aufgerufen (die letzten beiden Methoden beziehen sich auf den Kartenmittelpunkt).
+		\n\nLanges Drücken auf eine Position erzeugt einen Positionsmarker: Kurzes Drücken darauf öffnet das \'Verwende Position\'-Kontextmenü, langes Drücken entfernt es wieder.
+		\n\nDas \'Verwende Position\'-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.
 	</string>
 	<string name="tip_initial">Tipps und Tricks</string>
 	<string name="tip_initial_t">OsmAnd ist eine Navigationsanwendung mit vielen Fähigkeiten.
