@@ -1554,4 +1554,5 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="driving_region">منطقه رانندگی</string>
 	<string name="edit_tilesource_elliptic_tile">Elliptic mercator</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    </resources>
+    <string name="tip_map_styles">سبک نقشه</string>
+	</resources>
