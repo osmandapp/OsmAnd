@@ -2,7 +2,7 @@
 	<resources>
 	<string name="tip_map_styles">Kartendarstellung</string>
 	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten in verschieden Darstellung für verschiedenen Verwenduingszwecke optimiert dartsellen:
-		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' -> \'Anzeige konfigurieren\' -> \'Map Style\' -> \'Kartendarstellung\' zum Beispiel auswählen:
+		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' → \'Anzeige konfigurieren\' → \'Map Style\' → \'Kartendarstellung\' zum Beispiel auswählen:
 		\n\t* Den \'Touring view\' Stil, er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahhradrouten, Wndersymbol-Untertützung, usw.
 		\n\t* \'High contrast roads\' zeigt alle Straßen in betont deutlichen Farben, nützlich in extrem hellen Umgebungen
 		\n\t* \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahretn und Lifte (in Zusammenarbeit mit der \'World ski\' Offline-Karten)
@@ -25,7 +25,7 @@
 	<string name="tip_altitude_offset">Höhenangaben - Offset Korrektur</string>
 	<string name="tip_altitude_offset_t">Die meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
 		\n\nEine bessere Näherung an lokale Systeme ist das EGM96-System.
-		\n\nOsmand zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korekturdatei unter \'Einstellungen\' -> \'Daten Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
+		\n\nOsmand zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korekturdatei unter \'Einstellungen\' → \'Daten Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
 	<string name="map_widget_max_speed">Tempolimit</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
@@ -357,7 +357,7 @@
 	</string>
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
 	<string name="tip_osm_improve_t">OsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann direkt zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
-		\n\nDazu müssen Sie zunächst unter \'Einstellungen\' → \'Zusatzmodule\' OSM-Berarbeitung aktivieren und dann unter \'Einstellungen\' -> \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
+		\n\nDazu müssen Sie zunächst unter \'Einstellungen\' → \'Zusatzmodule\' OSM-Berarbeitung aktivieren und dann unter \'Einstellungen\' → \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
 		\n\nEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! 
 		\n\nGefundene Fehler auf der Karte können direkt gemeldet werden.
 		\n\nOSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im Karten-Kontextmenü.
