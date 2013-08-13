@@ -523,9 +523,10 @@
 	<string name="select_tile_source_to_install">Kartenauswahl (Installation oder Aktualisierung)</string>
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
 	<string name="install_more">Weitere installieren…</string>
-	<string name="tip_update_index">Aktualisierung der Offline-Daten</string>
-	<string name="tip_update_index_t">\tAktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, und die POI und Adresssuche. OsmAnd hat einen Daten-Manager, der Ihnen verfügbare Offline-Karten anzeigt.
-\n\tAktualisierungen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Hier klicken um Offline-Daten…\'. Nachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie zur Aktualisierung über \'Menü\'→ \'Filter gespeicherte\' nur bereits auf Ihrem Gerät gespeicherte Karten anzeigen lassen.
+	<string name="tip_update_index">Aktualisierung der Offline-Karten</string>
+	<string name="tip_update_index_t">\tAktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und ide Offline-Navigation. OsmAnd hat einen Daten-Manager für das Herunterladen von Offline-Karten (und einigen anderen Offline-Daten), und zur Aktualisierung derselben.
+\n\tDas Herunterladen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Herunterladen…\'.
+\n\tNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Die Liste kann durch eingabe von Zeichen gefiltert werden. Die Option \'Filter Gespeicherte\' zeigt nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
 \n\tEinträge in \'grün\': Daten aktuell
 \n\tEinträge in \'blau\': Neuere Version zum herunterladen verfügbar
 \n\tKursive Darstellung: Auf dem Gerät deaktivierte Karten</string>
