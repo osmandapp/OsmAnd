@@ -7,7 +7,7 @@
   <string name="avoid_ferries">Evitar transbordadores</string>
   <string name="avoid_in_routing_title">Evitar-…</string>
   <string name="avoid_in_routing_descr">Evita carreteras de peaje, sin pavimentar, transbordadores</string>
-  <string name="show_warnings_title">Mostrar alarmas-…</string>
+  <string name="show_warnings_title">Mostrar alarmas…</string>
   <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, stops, vadenes), radares, y carriles</string>
   <string name="map_widget_fluorescent">Rutas fluorescentes</string>
   <string name="map_widget_show_ruler">Escala</string>
@@ -439,7 +439,7 @@
   <string name="layer_transport">Paradas de transporte</string>
   <string name="layer_poi">PDI…</string>
   <string name="layer_map">Fuente de mapas…</string>
-  <string name="menu_layers">Definir vista</string>
+  <string name="menu_layers">Capas de mapas</string>
   <string name="context_menu_item_search_poi">Buscar PDI</string>
   
   <string name="use_trackball_descr">Usa trackball para mover el mapa</string>
@@ -751,7 +751,7 @@ Para poder usar todas las características de la aplicación necesitas algunos d
   <string name="map_online_data_descr">Usa mapas online (descarga y guarda teselas en la tarjeta SD)</string>
   <string name="online_map_settings">Mapas Online</string>
   <string name="online_map_settings_descr">Configurar fuentes de teselas de mapa online o guardadas</string>
-  <string name="map_settings">- Configuraciones de Mapa</string>
+  <string name="map_settings">Configuraciones de Mapa</string>
   <string name="map_settings_descr">Configurar la pantalla del mapa</string>
   <string name="osmand_rastermaps_plugin_description">Muestra opciones para configurar diversos mapas teselados, online o guardados, como mapa base o como mapa superpuesto / subyacente. Estos mapas también se pueden preparar offline y copiarlos en la carpeta de OsmAnd.</string>
   <string name="osmand_background_plugin_description">Muestra configuraciones para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
@@ -1017,7 +1017,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="map_widget_intermediate_distance">Punto de ruta</string>
     <string name="ending_point_too_far">Punto final demasiado lejos de la carretera más cercana.</string>
     <string name="btn_add_tag">Añade Etiqueta</string>
-    <string name="btn_advanced_mode">Modo Avanzado-…</string>
+    <string name="btn_advanced_mode">Modo Avanzado…</string>
     <string name="poi_filter_parking">aparcamiento</string>
     <string name="poi_filter_emergency">Emergencia</string>
     <string name="poi_filter_public_transport">Transporte Público</string>
@@ -1045,7 +1045,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_library_not_running">La aplicación se está ejecutando en modo seguro (desactívalo en Opciones).</string>
     <string name="rendering_attr_showRoadMaps_description">Selecciona cuándo mostrar mapas sólo de carreteras:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mapas sólo de carreteras</string>
-    <string name="download_roads_only_item">Carreteras</string>
+    <string name="download_roads_only_item">Sólo carreteras</string>
     <string name="download_regular_maps">Mapas normales</string>
     <string name="download_roads_only_maps">Mapas sólo de carreteras</string>
     <string name="incomplete_locale">incompleto</string>
@@ -1060,7 +1060,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 \n\tPara ello, simplemente descarga el archivo WW15MGH.DAC mediante el Gestor de datos (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">Inicio</string>
-    <string name="tip_altitude_offset">Mostrar Altitud - Corrección</string>
+    <string name="tip_altitude_offset">Altitud: Compensación de Correción</string>
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evita mostrar las fronteras regionales (niveles administrativos 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">El extra OsMoDroid tiene una versión antigua y necesita ser actualizado.</string>
