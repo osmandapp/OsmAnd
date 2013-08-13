@@ -1327,9 +1327,9 @@
     <string name="local_index_tile_data_name">Dane kafelkowe: %1$s</string>
     <string name="about_version">Wersja:</string>
     <string name="about_settings">Informacje</string>
-    <string name="about_settings_descr">Informacje o aplikacji…</string>
+    <string name="about_settings_descr">Informacje o wersji, licencje, współtwórcy</string>
     <string name="tips_and_tricks">Porady i wskazówki</string>
-    <string name="tip_map_styles">Style Map</string>
+    <string name="tip_map_styles">Style map</string>
 	<string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_maxzoom">Maksymalne powiększenie</string>
     <string name="edit_tilesource_expiration_time">Wygasa (minuty)</string>
