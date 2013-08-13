@@ -1205,13 +1205,13 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="local_osm_changes_backup_successful">Ändrad OSM-fil skapad utan problem %1$s</string>
     <string name="about_version">Version:</string>
     <string name="about_settings">Om</string>
-    <string name="about_settings_descr">Versionsinformatio, licenser, projektmedlemmar</string>
+    <string name="about_settings_descr">Versionsinformation, licenser, projektmedlemmar</string>
     <string name="tips_and_tricks">Tips</string>
     <string name="tip_recent_changes_1_6_t">Förändringar i 1.6:↵
-→\n\t* Definiera/Redigera online-kartbitskälla (specificera utgångstid)↵
+→\n\t* Definiera/Redigera online-kartbitskälla (ange förfallotid)↵
     </string>
     <string name="local_index_tile_data_zooms">Zoom nedladdade: %1$s</string>
-    <string name="local_index_tile_data_expire">Utgår (minuter): %1$s</string>
+    <string name="local_index_tile_data_expire">Förfallotid (minuter): %1$s</string>
     <string name="local_index_tile_data_downloadable">Nedladdningsbart: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Max-zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Min-zoom: %1$s</string>
@@ -1227,8 +1227,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="maps_define_edit">Definiera/Redigera …</string>
 	<string name="tip_map_styles">Kartstilar</string>
 	<string name="tip_map_styles_t">OsmAnd stöder visning av offline vektor-kartor i olika stilar för att passa dina behov:
-		\n\t* Om inte standardvisningen duger kan du under \'Meny\' -&gt; \'Konfigurera skärm\' -&gt; \'Kartstil\' till exempel välja
-		\n\t* Stilen \'Touring view\': som innehåller den mest detaljerade informationen för traveling and touring, inklusive optimering för yrkesförare (vägar med hög kontrast), alternativ för vandring i Alperna (SAC-skala), cykelvägar, etc.
+		\n\n Om inte standardvisningen duger kan du under \'Meny\' -&gt; \'Konfigurera skärm\' -&gt; \'Kartstil\' till exempel välja
+		\n\t* Stilen \'Turistvy\': som innehåller den mest detaljerade informationen för resenärer och turister, inklusive optimering för yrkesförare (lätt urskiljbara vägar med hög kontrast), alternativ för vandring i Alperna (SAC-skala), cykelvägar, etc.
 		\n\t* \'Vägar med hög kontrast\' visar vägarna med starkt markerade klara färger för situationer med dålig belysning
 		\n\t* \'Vinter och skidor\' skapar ett (snötäckt) vinterlandskap, och visar skidbackar och -liftar (hämta kartan \'World ski\')
 	</string>
