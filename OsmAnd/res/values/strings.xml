@@ -11,10 +11,10 @@
     -->
 	<string name="tip_map_styles">Map Styles</string>
 	<string name="tip_map_styles_t">"OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
-		\n\t* Other than the balanced default map style, you may under \'Menu\' -> \'Configure screen\' -> \'Map Style\' select for example
-		\n\t* The \'Touring view\' style: which contains the most detailed information possible for traveling and touring, including optimization for professional drivers (higher contrast distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
-		\n\t* \'High contrast roads\' shows roads in very accentuated bright colors for bright ambient lighting situations
-		\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download) "
+		\n\t- Other than the balanced default map style, you may under \'Menu\' -> \'Configure screen\' -> \'Map Style\' select for example
+		\n\t- The \'Touring view\' style: which contains the most detailed information possible for traveling and touring, including optimization for professional drivers (higher contrast distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
+		\n\t- \'High contrast roads\' shows roads in very accentuated bright colors for bright ambient lighting situations
+		\n\t- \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download) "
 	</string>
     <string name="about_version">Version :</string>
     <string name="about_settings">About</string>
@@ -891,9 +891,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_rotation_switching">Map Orientation</string>
 	<string name="tip_rotation_switching_t_v2">"You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
 		\n\tThe choices are:
-		\n\t\'Don\'t rotate (north is up)\' - Map will not be rotated. North will be always up
-		\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
-		\n\t\'To compass\' - Map will continuously be aligned with device compass reading"
+		\n\t\- 'Don\'t rotate (north is up)\': Map will not be rotated. North will be always up
+		\n\t\- 'To direction of movement\': Map will continuously be aligned with your heading
+		\n\t\- 'To compass\': Map will continuously be aligned with device compass reading"
 	</string>
 	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Map layers\' -> \'Map source&#8230;\' -> \'Offline vector maps\'.</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
@@ -901,10 +901,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\tNight colors are safer for night driving.
 		\n\tYou can set a policy for day/night switching in \'Menu\' -> \'Configure screen\' ->\'Day/night map\'.
 		\n\tChoices are:
-		\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
-		\n\t\'Day\' - always use day mode
-		\n\t\'Night\' - always use night mode 
-		\n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)"
+		\n\t\- 'Sunrise/Sunset\': automatic mode, controlled by position of the sun (default)
+		\n\t\- 'Day\': always use day mode
+		\n\t\- 'Night\': always use night mode
+		\n\t\- 'Light sensor\': map appearance is controlled by light sensor of your device (only if equipped)"
 	</string>	
 	<string name="tip_osm_improve">Improving OSM Data</string>
 	<string name="tip_osm_improve_t">"OsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can directly create and upload new POI or OSM bug reports with just a few clicks.
