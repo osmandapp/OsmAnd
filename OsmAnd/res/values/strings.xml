@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 	<string name="tip_map_styles">Map Styles</string>
-	<string name="tip_map_styles_t">"OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
+	<string name="tip_map_styles_t">"\tOsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
 		\n\t- Other than the balanced default map style, you may under \'Menu\' -> \'Configure screen\' -> \'Map Style\' select for example
 		\n\t- The \'Touring view\' style: which contains the most detailed information possible for traveling and touring, including optimization for professional drivers (higher contrast distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
 		\n\t- \'High contrast roads\' shows roads in very accentuated bright colors for bright ambient lighting situations
@@ -276,7 +276,7 @@
     <string name="osmodroid_plugin_description">OsMoDroid plugin is OsmAnd extension for OsModroid application for online tracking features. Information about the service is available on http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="tip_altitude_offset">Altitude: Offset Correction</string>
-	<string name="tip_altitude_offset_t">"Most GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
+	<string name="tip_altitude_offset_t">"\tMost GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
 		\n\tA better approximation to these local systems is the EGM96 (geoid) reference.
 		\n\tOsmAnd will display your positions\'s altitudes in the EGM96 system after you download the file \'World Altitide Correction\' (WW15MGH.DAC) via \'Settings\' -> \'Data Management\'. (Original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)"
 	</string>
@@ -557,7 +557,7 @@ List of countries supported (basically world wide!):
 Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
 	</string>
 	<string name="tip_update_index">Updating Offline Maps</string>
-	<string name="tip_update_index_t">"Up-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a data manager to download these offline maps (and some other data files), and to check for available updates.
+	<string name="tip_update_index_t">"\tUp-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a data manager to download these offline maps (and some other data files), and to check for available updates.
 		\n\tTo download maps go to \'Settings\' -> \'Data Management\' -> \'Download offline data\'.
 		\n\tAfter the global region list is retrieved from the internet, click on any entry to download or update a file. You can filter the list by typing some letters, or you may select the option \'Settings\' -> \'Filter downloaded\' to see updates only for the data already on your device.
 		\n\tEntries in \'green\' indicate data files identical on device and server
@@ -889,7 +889,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_service">Sleep mode functionality</string>
 	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
 	<string name="tip_rotation_switching">Map Orientation</string>
-	<string name="tip_rotation_switching_t_v2">"You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
+	<string name="tip_rotation_switching_t_v2">"\tYou can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
 		\n\tThe choices are:
 		\n\t\- 'Don\'t rotate (north is up)\': Map will not be rotated. North will be always up
 		\n\t\- 'To direction of movement\': Map will continuously be aligned with your heading
@@ -897,7 +897,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Map layers\' -> \'Map source&#8230;\' -> \'Offline vector maps\'.</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
-	<string name="tip_day_night_mode_t_v2">"The map appearance can for offline vector maps be changed between day (brighter) and night (darker).
+	<string name="tip_day_night_mode_t_v2">"\tThe map appearance can for offline vector maps be changed between day (brighter) and night (darker).
 		\n\tNight colors are safer for night driving.
 		\n\tYou can set a policy for day/night switching in \'Menu\' -> \'Configure screen\' ->\'Day/night map\'.
 		\n\tChoices are:
@@ -907,7 +907,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t\- 'Light sensor\': map appearance is controlled by light sensor of your device (only if equipped)"
 	</string>	
 	<string name="tip_osm_improve">Improving OSM Data</string>
-	<string name="tip_osm_improve_t">"OsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can directly create and upload new POI or OSM bug reports with just a few clicks.
+	<string name="tip_osm_improve_t">"\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can directly create and upload new POI or OSM bug reports with just a few clicks.
 		\n\tFor this you need to activate the OSM Editing Plugin under \'Settings\' -> \'Plugins\', then provide your OSM login information in \'Settings\' -> \'OSM editing\'.
 		\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialogue and finally commit it.
 		\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
@@ -917,7 +917,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
 	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
 	<string name="tip_navigation">Get Directions (Navigation)</string>
-	<string name="tip_navigation_t">"To get directions to a place, either directly long-click on it on the map, then tap its description marker and select \'Directions to\'), or select \'Directions\' after tapping any entry in a search results list or favorite list. 
+	<string name="tip_navigation_t">"\tTo get directions to a place, either directly long-click on it on the map, then tap its description marker and select \'Directions to\'), or select \'Directions\' after tapping any entry in a search results list or favorite list. 
 		\n\tThe destination is marked as an orange target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
 		\n\tTo show a route to the destination from any point other than your current position, select it on the map and chose \'Directions from\'. "
 	</string> 
@@ -1094,12 +1094,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
 	<string name="tip_location_sharing">Share a location</string>
-	<string name="tip_location_sharing_t">"You can share the location of interesting places on your trip with family or friends as follows:
+	<string name="tip_location_sharing_t">"\tYou can share the location of interesting places on your trip with family or friends as follows:
 		\n\tFor any point selected, via \'Map context menu\' -> \'Share location\' menu.
 		\n\tThen chose a way to share your location. The choices are: E-Mail, SMS(text), or just copy the location coordinates to the device clipboard."
 	</string>
 	<string name="tip_favorites">Favorite Points</string>
-	<string name="tip_favorites_t">"Frequently used points can be saved as Favorites, as follows:
+	<string name="tip_favorites_t">"\tFrequently used points can be saved as Favorites, as follows:
 		\n\tOn the map context menu for any point, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Screen\' -> \'Favorites\'.
 		\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options like to navigate to it, edit or delete it.
 		\n\tTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' under \'Menu\' -> \'Map layers\'."
@@ -1113,25 +1113,25 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="preferred_locale">Display language</string>
 	<string name="incomplete_locale">incomplete</string>
 	<string name="tip_map_switch">Select a Map Source</string>
-	<string name="tip_map_switch_t_v2">"The map source and map layers displayed are changed via \'Menu\' -> \'Map layers\' in map view.
+	<string name="tip_map_switch_t_v2">"\tThe map source and map layers displayed are changed via \'Menu\' -> \'Map layers\' in map view.
 		\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps (default, also needed for offline navigation), or predefined (online or cached offline) tile sources (activate the \'Online maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
 		\n\tOsmAnd also supports custom sources."
 	</string>
 	<string name="tip_app_mode">User Profile</string>
-	<string name="tip_app_mode_t_v2">"OsmAnd supports different (customizable) application profiles for different use cases.
+	<string name="tip_app_mode_t_v2">"\tOsmAnd supports different (customizable) application profiles for different use cases.
 		\n\tYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route (\'transport mode\')."
 	</string>
 	<string name="tip_search">Searching</string>
-	<string name="tip_search_t">"You can search for places directly on the map (\'Map context menu\' -> \'Search near\'), or on the dedicated search screen by address, by location, as POI (by type or by name), or as predefined favorite.
+	<string name="tip_search_t">"\tYou can search for places directly on the map (\'Map context menu\' -> \'Search near\'), or on the dedicated search screen by address, by location, as POI (by type or by name), or as predefined favorite.
 		\n\tPressing \'Search\' on the main screen opens the search activities. For all hits a context menu offers options like \'Directions\' or \'Show on map\'."
 	</string>
 	<string name="tip_map_context_menu">Map Context Menu</string>
-	<string name="tip_map_context_menu_t">"The map context menu (\'Use location\') is available by long-pressing any point on the map, by pressing the trackball button, or by selecting \'Menu\' -> \'Use location\' (the slast two ways take the map center as reference).
+	<string name="tip_map_context_menu_t">"\tThe map context menu (\'Use location\') is available by long-pressing any point on the map, by pressing the trackball button, or by selecting \'Menu\' -> \'Use location\' (the slast two ways take the map center as reference).
 		\n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.)
 		\n\tThe map context menu contains all actions referring to a point (location)."
 	</string>
 	<string name="tip_initial">Tips and Tricks</string>
-	<string name="tip_initial_t">"OsmAnd is a navigation application with many features. 
+	<string name="tip_initial_t">"\tOsmAnd is a navigation application with many features. 
 		\n\tAs a basic introduction, some usage tips and tricks are linked via \'Menu\' -> \'Tips\' from the map screen."
 	</string>
 	<string name="next_button">Next</string>

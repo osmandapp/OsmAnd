@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
 	<string name="tip_map_styles">Kartendarstellung</string>
-	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten in verschieden Darstellung für verschiedenen Verwenduingszwecke optimiert dartsellen:
+	<string name="tip_map_styles_t">"\tOsmAnd kann die Offline-Vektor-Karten in verschieden Darstellung für verschiedenen Verwenduingszwecke optimiert dartsellen:
 		\n\t- Neben der neutralen \'Default\' Darstellung kann man unter \'Menü\' -> \'Anzeige konfigurieren\' -> \'Map Style\' -> \'Kartendarstellung\' zum Beispiel auswählen:
 		\n\t- Den \'Touring view\' Stil: Er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahhradrouten, Wndersymbol-Untertützung, usw.
 		\n\t- \'High contrast roads\' zeigt alle Straßen in sehr deutlichen leuchtenden Farben, nützlich in extrem hellen Umgebungen
-		\n\t- \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahretn und Lifte (in Zusammenarbeit mit der \'World ski\' Offline-Karten)
+		\n\t- \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahretn und Lifte (in Zusammenarbeit mit der \'World ski\' Offline-Karten)"
 	</string>
 	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
@@ -21,7 +21,7 @@
 	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
 	<string name="tip_altitude_offset">Höhenangaben - Offset Korrektur</string>
-	<string name="tip_altitude_offset_t">"Die meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
+	<string name="tip_altitude_offset_t">"\tDie meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
 		\n\tEine bessere Näherung an lokale Systeme ist das EGM96-System.
 		\n\tOsmand zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korekturdatei unter \'Einstellungen\' -> \'Daten Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)"
 	</string>
@@ -325,13 +325,13 @@
 	<string name="osmand_service">Hintergrunddienst</string>
 	<string name="osmand_service_descr">Für Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
 	<string name="tip_rotation_switching">Kartenrotation</string>
-	<string name="tip_rotation_switching_t_v2">"Die Ausrichtung der Karte kann durch klicken auf die Kompassnadel geändert werden.\n\tZur Wahl stehen:
+	<string name="tip_rotation_switching_t_v2">"\tDie Ausrichtung der Karte kann durch klicken auf die Kompassnadel geändert werden.\n\tZur Wahl stehen:
 \n\t\- 'Keine Rotation (Norden ist oben)\': Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
 \n\t\- 'Nach Bewegungsrichtung\': Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
 \n\t\- 'Nach Kompass\': Die Karte wird gemäß Kompass ausgerichtet und nachgeführt "</string>
 	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Kartenebenen\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
-	<string name="tip_day_night_mode_t_v2">"Die Anzeige der Offline-Vektor-Karten kann zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
+	<string name="tip_day_night_mode_t_v2">"\tDie Anzeige der Offline-Vektor-Karten kann zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
 \nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → \'Anzeige konfigurieren\' → \'Tag/Nacht-Modus\' geändert werden.
 \nZur Auswahl stehen:
 \n\t\- 'Sonnenaufgang/-untergang\': automatischer Modus (Voreinstellung)
@@ -340,7 +340,7 @@
 \n\t\- 'Umgebungslicht-Sensor\': automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden) "
 	</string>
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
-	<string name="tip_osm_improve_t">"OsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann direkt zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
+	<string name="tip_osm_improve_t">"\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann direkt zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
 		\n\tDazu müssen Sie zunächst unter \'Einstellungen\' → \'Zusatzmodule\' OSM-Berarbeitung aktivieren und dann unter \'Einstellungen\' -> \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
 		\n\tEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! 
 		\n\tGefundene Fehler auf der Karte können direkt gemeldet werden.
@@ -525,7 +525,7 @@
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
 	<string name="install_more">Weitere installieren…</string>
 	<string name="tip_update_index">Aktualisierung der Offline-Karten</string>
-	<string name="tip_update_index_t">"Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und ide Offline-Navigation. OsmAnd hat einen Daten-Manager für das Herunterladen von Offline-Karten (und einigen anderen Offline-Daten), und zur Aktualisierung derselben.
+	<string name="tip_update_index_t">"\tAktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und ide Offline-Navigation. OsmAnd hat einen Daten-Manager für das Herunterladen von Offline-Karten (und einigen anderen Offline-Daten), und zur Aktualisierung derselben.
 \n\tDas Herunterladen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Herunterladen…\'.
 \n\tNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Die Liste kann durch Eingabe von Zeichen gefiltert werden. Die Option \'Filter Gespeicherte\' zeigt nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
 \n\t- Einträge in \'grün\': Daten aktuell
@@ -535,14 +535,14 @@
 	<string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
 	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomlevel</string>
 	<string name="tip_location_sharing">Position mitteilen</string>
-	<string name="tip_location_sharing_t">"Wollen Sie einen interessanten Ort Freunden oder Familie mitteilen? Mit OsmAnd kann jeder Aufenthaltsort leicht mit Anderen geteilt werden. Dazu einfach im Karten-Kontextmenü die Option \'Position mitteilen\' auswählen.
+	<string name="tip_location_sharing_t">"\tWollen Sie einen interessanten Ort Freunden oder Familie mitteilen? Mit OsmAnd kann jeder Aufenthaltsort leicht mit Anderen geteilt werden. Dazu einfach im Karten-Kontextmenü die Option \'Position mitteilen\' auswählen.
 		\nZur Auswahl stehen mehrere Übertragungswege:
 		\n * E-Mail
 		\n * SMS
 		\n * Kopieren der Koordinaten in die Zwischenablage (Clipboard)"
 	</string>
 	<string name="tip_favorites">Favoriten</string>
-	<string name="tip_favorites_t">"Sie können jeden beliebigen Ort als Favoriten speichern.
+	<string name="tip_favorites_t">"\tSie können jeden beliebigen Ort als Favoriten speichern.
 	\n\tEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar. Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
 	\n\tSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen. "
 	</string>
@@ -554,15 +554,15 @@
 	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
 	<string name="preferred_locale">Anzeigesprache</string>
 	<string name="tip_map_switch">Kartenquelle</string>
-	<string name="tip_map_switch_t_v2">"Die Kartenquelle und die angezeigten Ebenen können in der Katenansicht über das Menü \'Menü\' -&gt; \'Kartenebenen\' verändert werden.
+	<string name="tip_map_switch_t_v2">"\tDie Kartenquelle und die angezeigten Ebenen können in der Katenansicht über das Menü \'Menü\' -&gt; \'Kartenebenen\' verändert werden.
 		\n\tIm Menü \'Kartenquelle…\' können Sie die Karte wählen: vorher heruntergeladene Offline-Vektor-Karten, vordefinierte Online-Kachel-Karten (aktivieren Sie das Plugin \'Online und Kachel-Karten\') oder manuell am Rechner (z.B. mit OsmAndMapCreator) erstellte Karten.
 		\n\tOsmAnd unterstützt auch benutzerdefinierte Quellen."
 	</string>
 	<string name="tip_app_mode">Nutzerprofile</string>
-	<string name="tip_app_mode_t_v2">"OsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
+	<string name="tip_app_mode_t_v2">"\tOsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
 \n\tDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route (Transportmittel). "</string>
 	<string name="tip_search">Suchen</string>
-	<string name="tip_search_t">"Um bestimmte Orte zu finden, bietet Ihnen OsmAnd mehrere Möglichkeiten:
+	<string name="tip_search_t">"\tUm bestimmte Orte zu finden, bietet Ihnen OsmAnd mehrere Möglichkeiten:
 \n - Eingabe der Adresse
 \n - Angabe der Koordinaten
 \n - als POI
