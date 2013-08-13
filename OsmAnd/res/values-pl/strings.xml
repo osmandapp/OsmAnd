@@ -1329,4 +1329,12 @@
     <string name="about_settings">Informacje</string>
     <string name="about_settings_descr">Informacje o aplikacji…</string>
     <string name="tips_and_tricks">Porady i wskazówki</string>
-    </resources>
+    <string name="tip_map_styles">Style Map</string>
+	<string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_maxzoom">Maksymalne powiększenie</string>
+    <string name="edit_tilesource_expiration_time">Wygasa (minuty)</string>
+    <string name="edit_tilesource_minzoom">Minimalne powiększenie</string>
+    <string name="edit_tilesource_choose_existing">Wybierz istniejący...</string>
+    <string name="edit_tilesource_name">Nazwa</string>
+    <string name="maps_define_edit">Zdefiniuj/Edytuj…</string>
+	</resources>
