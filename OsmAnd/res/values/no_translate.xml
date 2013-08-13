@@ -8,6 +8,9 @@
     <string name="ga_debug">true</string>
     <string name="versionFeatures">+play_market +gps_status -parking_plugin -blackberry -free_version -amazon</string>
     <string name="next_tips_and_tricks_not_translate"></string>
-    <string name="about_content"> Data is powered by @c OpenStreetMaps CC-BY-SA\n
-        Here should be text about License, about third party GPL libraries, All rights belong to OsmAnd app.... </string>
+    <string name="about_content">Data is powered by @c OpenStreetMaps CC-BY-SA
+	\n\tTODO: Licenses, list third party GPL libraries, etc.
+	\n\tAll rights belong to OsmAnd app.
+	\n\tTODO: OsmAnd project members.
+    </string>
 </resources>
