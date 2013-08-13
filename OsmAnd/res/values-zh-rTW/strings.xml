@@ -93,12 +93,14 @@
  - 可選擇地圖正北朝上或或行進方向朝上
  - 可選擇車道導引、速限顯示、使用真人語音或 TTS 語音
 	</string>
-	<string name="tip_update_index">離線資料更新</string>
-	<string name="tip_update_index_t">\t離線地圖的查看和 POI/位址查尋，有最新的圖資是不可或缺的。OsmAnd提供下載管理器可檢查可更新的離線資料。
-		\n\t檢查圖資更新 \'設定\' -&gt; \'資料管理\' -&gt; \'下載離線資料\'。由網路取得區域列表後，您可以按功能 \'選單\' -&gt; \'過濾已下載\' 過濾出已在您裝置上的資料。
-		\n\t登錄為\'綠色\' - 表示裝置與伺服器是相同的
-		\n\t登錄為\'藍色\' - 表示伺服器有更新的版本
-		\n\t登錄為斜體字 - 表示未在裝置上使用</string>
+	<string name="tip_update_index">更新離線地圖</string>
+	<string name="tip_update_index_t">離線地圖的查看和 POI/位址查尋，有最新的圖資是不可或缺的。OsmAnd提供下載管理器可檢查可更新的離線資料。
+		\n\n檢查圖資更新 \'設定\' -&gt; \'資料管理\' -&gt; \'下載離線資料\'。
+		\n\n由網路取得區域列表後，您可以按功能 \'選單\' -&gt; \'篩選已下載的\'過濾出已在您裝置上的資料。
+		\n\t*登錄為\'綠色\' - 表示裝置與伺服器是相同的
+		\n\t*登錄為\'藍色\' - 表示伺服器有更新的版本
+		\n\t*登錄為斜體字 - 表示未在裝置上使用
+	</string>
 	<string name="filterpoi_activity">建立興趣點篩選</string>
 	<string name="recalculate_route_to_your_location">交通模式：</string>
 	<string name="select_navigation_mode">選擇交通模式</string>
@@ -309,8 +311,8 @@
 	<string name="no_info">無資訊</string>
 	<string name="direction_style_sidewise">方向方位 (8個方位)</string>
 	<string name="direction_style_clockwise">時鐘方位(12個方位)</string>
-	<string name="settings_direction_style">方位風格</string>
-	<string name="settings_direction_style_descr">選擇風格來表示在行進中的相對方向</string>
+	<string name="settings_direction_style">方位樣式</string>
+	<string name="settings_direction_style_descr">選擇樣式來表示在行進中的相對方向</string>
 	<string name="auto_announce_on">啟動自動通告</string>
 	<string name="auto_announce_off">關閉自動通知</string>
 	<string name="scroll_map_by_gestures_descr">以觸控式螢幕手勢移動地圖</string>
@@ -383,22 +385,22 @@
 	<string name="osmand_service">休眠模式功能</string>
 	<string name="osmand_service_descr">螢幕關閉時執行 OsmAnd</string>
 	<string name="tip_rotation_switching">地圖方向</string>
-	<string name="tip_rotation_switching_t_v2">\t在地圖畫面上您可點選羅盤的圖示，可循環切換地圖旋轉顯示方式。
-		\n\t選項有：
-		\n\t\'不旋轉(正北朝上)\' - 地圖不旋轉，正北方永遠向上
-		\n\t\'行進方向\' - 地圖會不斷對準您的車頭方向
-		\n\t\'依羅盤\' - 地圖會不斷對準裝置的羅盤指示
+	<string name="tip_rotation_switching_t_v2">在地圖畫面上您可點選羅盤的圖示，可循環切換地圖旋轉顯示方式。
+		\n\n選項有：
+		\n\t*'不旋轉(正北朝上)\' - 地圖不旋轉，正北方永遠向上
+		\n\t*'行進方向\' - 地圖會不斷對準您的車頭方向
+		\n\t*'依羅盤\' - 地圖會不斷對準裝置的羅盤指示
 	</string>
 	<string name="binary_map_download_success">下載完成。\n\t\n\t透過 \'選單\' -&gt; \'地圖圖層\' -&gt; \'地圖來源…\' -&gt; \'離線向量地圖\'啟動使用。</string>
 	<string name="tip_day_night_mode">日/夜模式</string>
-	<string name="tip_day_night_mode_t_v2">\t離線向量地圖的地圖外觀顯示，可在日間(較亮)與夜間(較暗)之間切換。
-		\n\t夜間顏色是在夜間行駛比較安全。
-		\n\t您可在\'選項\' -&gt; \'組態顯示畫面\' -&gt;\'日/夜地圖\'設定日/夜間切換原則。
-		\n\t選擇有：
-		\n\t\'日出/日落\' - 自動模式，以位置的日出/日落控制
-		\n\t\'日間\' - 永遠使用日間模式
-		\n\t\'夜間\' - 永遠使用夜間模式
-		\n\t\'光線感應器\' - 地圖顯示以裝置上的光線感應器來控制
+	<string name="tip_day_night_mode_t_v2">離線向量地圖的地圖外觀顯示，可在日間(較亮)與夜間(較暗)之間切換。
+		\n\n夜間顏色是在夜間行駛比較安全。
+		\n\n您可在\'選項\' -&gt; \'組態顯示畫面\' -&gt;\'日/夜地圖\'設定日/夜間切換原則。
+		\n\n選擇有：
+		\n\t*'日出/日落\' - 自動模式，以位置的日出/日落控制
+		\n\t*'日間\' - 永遠使用日間模式
+		\n\t*'夜間\' - 永遠使用夜間模式
+		\n\t*'光線感應器\' - 地圖顯示以裝置上的光線感應器來控制
 	</string>	
 	<string name="tip_osm_improve">改善 OSM 資料</string>
 	<string name="tip_osm_improve_t">\tOsmAnd 使用的地圖是基於 Openstreetmap.org (OSM) 的資料，除了查看地圖和導航外，可以直接用它來改善 OSM 的資料品質。只要點幾下您可以輕鬆的建立和上傳新的興趣點或回報 OSM 的錯誤。
@@ -1176,7 +1178,7 @@
 	<string name="rendering_attr_noAdminboundaries_description">抑制顯示區域界限(管理級別5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid 外掛元件版本過舊並需要進行更新。</string>
     <string name="osmodroid_plugin_name">OsMoDroid 外掛元件</string>
-	<string name="tip_altitude_offset">高度顯示 - 偏移校正</string>
+	<string name="tip_altitude_offset">海拔高度：偏移校正</string>
 	<string name="map_widget_max_speed">速限</string>
     <string name="route_descr_lat_lon">緯度 %1$.3f, 經度 %2$.3f</string>
     <string name="route_descr_current_location">目前位置</string>
@@ -1413,9 +1415,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t* EGM96 geoid offset correction for GPS altitude readings
     </string>
     <string name="osmodroid_plugin_description">OsMoDroid 外掛元件為 OsmAnd 的延伸，是 OsModroid 應用程式的線上追蹤功能。在 http://esya.ru 上有相關服務的資訊。</string>
-    <string name="tip_altitude_offset_t">\t大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
-		\n\t到這些地方系統有一個更好的近似值參考是 EGM96。
-		\n\t在您透過\'設定\' -&gt; \'資料管理\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球高度校正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。
+    <string name="tip_altitude_offset_t">大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
+		\n\n到這些地方系統有一個更好的近似值參考是 EGM96。
+		\n\n在您透過\'設定\' -&gt; \'資料管理\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球高度校正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。
 	</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="tip_recent_changes_1_0_0_t">在1.0.0的變更：
@@ -1561,6 +1563,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="maps_define_edit">定義/編輯…</string>
 	<string name="about_version">版本：</string>
     <string name="about_settings">關於</string>
-    <string name="about_settings_descr">關於 …</string>
+    <string name="about_settings_descr">版本訊息、授權、專案成員</string>
     <string name="tips_and_tricks">提示</string>
-    </resources>
+    <string name="tip_map_styles">地圖樣式</string>
+	</resources>
