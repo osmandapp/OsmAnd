@@ -56,7 +56,7 @@
 		- προαιρετικός αυτόματος προσανατολισμός χάρτη βάσει της πυξίδας ή της κατεύθυνσης κίνησης 
 		- προαιρετική καθοδήγηση με λωρίδες, εμφάνιση ορίου ταχύτητας, μαγνητοφωνημένες και TTS φωνές
 	</string>
-	<string name="tip_update_index">Ενημέρωση των offline Δεδομένων</string>
+	<string name="tip_update_index">Ενημέρωση των offline Χαρτών</string>
 	<string name="tip_update_index_t">\tΤο να έχετε ενημερωμένα δεδομένα χάρτη είναι βασικό. Ο OsmAnd παρέχει έναν διαχειριστή δεδομένων ο οποίος μπορεί να ελέγξει για διαθέσιμες ενημερώσεις offline δεδομένων.
 \n\tΓια έλεγχο ενημερώσεων πηγαίνετε \'Ρυθμίσεις\' -&gt; \'Διαχείριση δεδομένων\' -&gt; \'Λήψη offline δεδομένων\'. Μόλις η λίστα περιοχών ανακτηθεί από το internet, μπορείτε να επιλέξετε \'Menu\' -&gt; \'Φιλτράρισμα ληφθέντων\' για να εμφανιστούν μόνο οι ενημερώσεις για δεδομένα που έχετε ήδη στη συσκευή σας.
 \n\tΚαταχωρίσεις σε \'Πράσινο\' - δείχνουν αρχεία δεδομένων όμοια στη συσκευή και στο διακομιστή
@@ -389,7 +389,7 @@
 \n\t\'Πυξίδα\' - Ο χάρτης συνεχώς θα συγχρονίζεται με την κατεύθυνση της πυξίδας "</string>
 	<string name="binary_map_download_success">Η λήψη ήταν επιτυχής.\n\t\n\tΓια χρήση ενεργοποιήστε \'Μενού\' -&gt; \'Επίπεδα χάρτη\' -&gt; \'Πηγή χάρτη…\' -&gt; \'Offline διανυσματικοί χάρτες\'.</string>
 	<string name="tip_day_night_mode">Λειτουργία ημέρας/νύχτας</string>
-	<string name="tip_day_night_mode_t_v2">"\tΗ εμφάνιση μπορεί σε μερικούς διανυσματικούς χάρτες να αλλάξει μεταξύ ημέρας (πιο φωτεινό) και νύχτας (πιο σκοτεινό).
+	<string name="tip_day_night_mode_t_v2">"\tΗ εμφάνιση μπορεί στους διανυσματικούς χάρτες να αλλάξει μεταξύ ημέρας (πιο φωτεινό) και νύχτας (πιο σκοτεινό).
 \n\tΤα νυχτερινά χρώματα είναι πιο ασφαλή για νυχτερινή οδήγηση.
 \n\tΜπορείτε να ορίσετε μια πολιτική για την εναλλαγή ημέρα/νύχτα στο \'Μενού\' -&gt; \'Ρύθμιση οθόνης …\' -&gt;\'Χάρτης ημέρας/νύχτας\'.
 \n\tΟι επιλογές είναι:
@@ -597,7 +597,7 @@
 	<string name="system_locale">Σύστημα</string>
 	<string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης</string>
 	<string name="preferred_locale">Γλώσσα εμφάνισης</string>
-	<string name="tip_map_switch">Πηγή Χάρτη</string>
+	<string name="tip_map_switch">Επιλογή Πηγής Χάρτη</string>
 	<string name="tip_map_switch_t_v2">"\tΗ πηγή χάρτη και οι στρώσεις που εμφανίζονται αλλάζουν μέσω του \'Μενού\' -&gt; \'Επίπεδα χάρτη\' στην όψη χάρτη.
 \n\tΚάτω από το \'Πηγή χάρτη…\' μπορείτε να επιλέξετε τη χρήση των εγκατεστημένων offline διανυσματικών χαρτών, προκαθορισμένων (online) πηγών πλακιδίων (ενεργοποιήστε το πρόσθετο \'Online χάρτες\' για αυτό), ή χάρτες που κατασκευάστηκαν χειροκίνητα χρησιμοποιώντας π.χ. το OsmAndMapCreator σε κάποιο PC.
 \n\tΟ OsmAnd επίσης υποστηρίζει προσαρμόσιμες πηγές. "
@@ -605,7 +605,7 @@
 	<string name="tip_app_mode">Προφίλ Χρήστη</string>
 	<string name="tip_app_mode_t_v2">"\tΟ OsmAnd υποστηρίζει διαφορετικά (προσαρμόσιμα) προφίλ εφαρμογής για διαφορετικές περιπτώσεις χρήσης.
 \n\tΜπορείτε να αλλάξετε τα προφίλ μέσω του κουμπιού προφίλ στην κάτω αριστερή γωνία της οθόνης χάρτη (εικονίδιο αυτοκίνητο, ποδήλατο, ή πεζός), ή όταν φτιάχνετε κάποιο δρομολόγιο. "</string>
-	<string name="tip_navigation">Πλοήγηση</string>
+	<string name="tip_navigation">Λήψη οδηγιών (Πλοήγηση)</string>
 	<string name="tip_navigation_t">\tΠριν ξεκινήσετε την πλοήγηση θα πρέπει να επιλέξετε έναν προορισμό. Στη συνέχεια πατήστε \'Μενού\' -&gt; \'Οδηγίες\' στο χάρτη και επιλέξτε τον τύπο πλοήγησης.</string>
 	<string name="tip_search">Αναζήτηση</string>
 	<string name="tip_search_t">"\tΜπορείτε να αναζητήσετε τόπους κατευθείαν στο χάρτη, ή με διεύθυνση, με τοποθεσία, ως Σημ Ενδ, ή ως προκαθορισμένο αγαπημένο.
@@ -615,8 +615,9 @@
 \n\tΑυτό παράγει ένα πλαίσιο με τις συντεταγμένες του σημείου. Για να ανοίξετε μενού περιβάλλοντος χάρτη, αγγίξτε πάνω του. (Ή πατήστε παρατεταμένα για να κρύψετε ξανά το πλαίσιο.)
 \n\tΤο μενού περιβάλλοντος χάρτη περιέχει όλες τις ενέργειες που αφορούν το σημείο (τοποθεσία). "</string>
 	<string name="tip_initial">Συμβουλές και Κόλπα</string>
-	<string name="tip_initial_t">"\tΟ OsmAnd είναι μια εφαρμογή πλοήγησης με αρκετά χαρακτηριστικά.
-\n\tΩς μια μικρή εισαγωγή, μερικές συμβουλές και κόλπα είναι συνδεδεμένα στην κύρια οθόνη (Δείτε το εικονίδιο \'?\'). "</string>
+	<string name="tip_initial_t">\tΟ OsmAnd είναι μια εφαρμογή πλοήγησης με αρκετά χαρακτηριστικά.
+		\n\tΩς μια μικρή εισαγωγή, μερικές συμβουλές και κόλπα είναι συνδεδεμένα μέσω του \'Μενού\'-&gt;\'Συμβουλές\' στην οθόνη χάρτη
+	</string>
 	<string name="next_button">Επόμενο</string>
 	<string name="previous_button">Προηγούμενο</string>
 	<string name="unit_of_length_descr">Αλλαγή μονάδων μήκους και ταχύτητας</string>
@@ -1109,11 +1110,12 @@
     <string name="map_widget_max_speed">Όριο ταχύτητας</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="tip_altitude_offset_t">"\tΟι περισσότερες συσκευές GPS εμφανίζουν το υψόμετρο σε σύστημα αναφοράς βασισμένο στο ελλειψοειδές WGS84, από το οποίο η μετατροπή στα συστήματα που χρησιμοποιούνται τοπικά απαιτεί διόρθωση εξαρτούμενη από τη θέση.
-\n\tΜια καλύτερη προσέγγιση σε αυτά τα τοπικά συστήματα είναι το σύστημα αναφοράς EGM96. Ο OsmAnd πλέον υποστηρίζει την αυτόματη εμφάνιση των υψομέτρων στο σύστημα EGM96.
-\n\tΓια να το πετύχετε αυτό, απλά κάντε λήψη του αρχείου WW15MGH.DAC μέσω του διαχειριστή Offline δεδομένων (το αυθεντικό είναι στο http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+\n\tΜια καλύτερη προσέγγιση σε αυτά τα τοπικά συστήματα είναι το σύστημα αναφοράς EGM96 (geoid). Ο OsmAnd πλέον υποστηρίζει την αυτόματη εμφάνιση των υψομέτρων στο σύστημα EGM96.
+\n\tΓια να το πετύχετε αυτό, απλά κάντε λήψη του αρχείου WW15MGH.DAC μέσω του διαχειριστή Offline δεδομένων (το αυθεντικό είναι στο http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "
+	</string>
     <string name="rendering_attr_noAdminboundaries_name">Απόκρυψη διοικητικών ορίων</string>
 	<string name="rendering_attr_noAdminboundaries_description">Περιορισμός εμφάνισης διοικητικών ορίων (επίπεδα 5-9)</string>
-	<string name="tip_altitude_offset">Ένδειξη Υψομέτρου - Διόρθωση Λάθους</string>
+	<string name="tip_altitude_offset">Υψόμετρο: Διόρθωση Λάθους</string>
 	<string name="osmodroid_plugin_name">Πρόσθετο OsMoDroid</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">Το πρόσθετο OsMoDroid είναι μια παλιά έκδοση και πρέπει να ενημερωθεί.</string>
     <string name="osmodroid_plugin_description">Το πρόσθετο OsMoDroid είναι μια επέκταση του OsmAnd για την εφαρμογή OsModroid για δυνατότητα online ιχνηλάτησης. Πληροφορίες σχετικά με την υπηρεσία είναι διαθέσιμες στο http://esya.ru.</string>
@@ -1316,7 +1318,7 @@
 	<string name="driving_region_uk">ΗΒ, Ινδία, Αυστραλία, Κύπρος κλπ</string>
 	<string name="about_version">Έκδοση :</string>
     <string name="about_settings">Περί</string>
-    <string name="about_settings_descr">Περί …</string>
+    <string name="about_settings_descr">Πληροφορίες έκδοσης, άδειες, μέλη έργου</string>
     <string name="tips_and_tricks">Συμβουλές</string>
     <string name="local_index_tile_data_expire">Λήξη (λεπτά): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Μέγιστη εστίαση: %1$s</string>
@@ -1326,4 +1328,5 @@
     <string name="edit_tilesource_minzoom">Ελαχ εστίαση</string>
     <string name="edit_tilesource_name">Όνομα</string>
     <string name="maps_define_edit">Καθορισμός/Επεξεργασία…</string>
+	<string name="tip_map_styles">Στυλ Χάρτη</string>
 	</resources>
