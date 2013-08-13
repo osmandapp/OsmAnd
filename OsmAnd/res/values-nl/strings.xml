@@ -259,7 +259,7 @@
   <string name="show_more_map_detail">Toon meer kaartdetails</string>
   <string name="show_more_map_detail_descr">Toon sommige vectorkaartdetails (wegen enz.) al op lager zoomniveau</string>
   <string name="favourites_delete_multiple_succesful">Favoriet(en) succesvol verwijderd.</string>
-  <string name="favorite_delete_multiple">Je gaat %1$d favorieten en %2$d favorietengroepen verwijderen. Weet je dat zeker?</string>
+  <string name="favorite_delete_multiple">Wil je %1$d favorieten en %2$d groepen verwijderen?</string>
   <string name="favorite_home_category">Basis</string>
   <string name="favorite_friends_category">Vrienden</string>
   <string name="favorite_places_category">Plaatsen</string>
