@@ -96,7 +96,7 @@
 	<string name="tip_update_index">更新離線地圖</string>
 	<string name="tip_update_index_t">離線地圖的查看與 POI/位址查尋，以及離線導航，有最新的圖資是不可或缺的。OsmAnd提供資料管理來下載那些離線圖資（以及其它的一些資料檔案），並且檢查能用的更新。
 		\n\n下載圖資更新由\'設定\' -&gt; \'資料管理\' -&gt; \'下載離線資料\'。
-		\n\n由網路取得區域列表後，點選進入任何一個去下載或更新檔案。請注意檔案類型選擇在畫面上方的附近，選取您想要的類型下載（正常地圖、等高線覆蓋等）。
+		\n\n由網路取得區域列表後，點選進入任何一個去下載或更新檔案。請注意檔案類型選擇在畫面上方的附近，選取您想要的類型下載（正常地圖、地形陰影覆疊等）。
 		\n\n您可以篩選區域清單中輸入一些字母，或者您可以按選項\'設定\' -&gt; \'篩選已下載的\'可看見過濾出已經在您裝置上的更新資料。
 		\n\t*登錄為\'綠色\' - 表示裝置與伺服器是相同的
 		\n\t*登錄為\'藍色\' - 表示伺服器有更新的版本
@@ -240,7 +240,7 @@
 	<string name="online_map_settings_descr">組態線上或暫存的地圖圖磚來源</string>
 	<string name="map_settings">地圖設定</string>
 	<string name="map_settings_descr">設定地圖顯示</string>
-	<string name="osmand_rastermaps_plugin_description">顯示設定去組態多種線上或暫存的地圖圖磚，以作為基本地圖或者覆蓋/襯底的地圖，這些地圖還可以在離線時準備，並複製到 OsmAnd 資料夾中。</string>
+	<string name="osmand_rastermaps_plugin_description">顯示設定去組態多種線上或快取地圖圖磚，以作為基本地圖或者覆蓋/襯底的地圖，這些地圖還可以在離線時準備，並複製到 OsmAnd 資料夾中。</string>
 	<string name="osmand_background_plugin_description">可在休眠(螢幕關閉)模式下，經由定期的喚醒 GPS 進行追蹤與導航。</string>
 	<string name="osmand_accessibility_description">顯示特殊協助工具的設定。</string>
 	<string name="extra_settings">進階設定</string>
@@ -326,7 +326,7 @@
 	<string name="accessibility_preferences_descr">協助工具的相關偏好設定</string>
 	<string name="accessibility_preferences">協助工具</string>
 	<string name="rendering_out_of_memory">無足夠的處理記憶體以顯示選擇的區域</string>
-	<string name="use_fluorescent_overlays">螢光色的覆蓋層</string>
+	<string name="use_fluorescent_overlays">螢光色的覆疊層</string>
 	<string name="use_fluorescent_overlays_descr">使用螢光色顯示行跡與導航路線</string>
 	<string name="offline_edition">離線編輯</string>
 	<string name="offline_edition_descr">永遠使用離線編輯</string>
@@ -552,7 +552,7 @@
 	<string name="level_to_switch_vector_raster_descr">向量地圖使用最小的縮放比級別</string>
 	<string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
 	<string name="tip_location_sharing">分享位置</string>
-	<string name="tip_location_sharing_t">您可以在旅途中分享有趣的地方和位置，透過\'地圖快顯功能表\' -&gt; \'分享位置\'選單，讓您的家人或朋友跟隨。
+	<string name="tip_location_sharing_t">您可以在旅途中分享有趣的地方和位置，透過\'地圖快顯功能表\' -&gt; \'分享位置\'選單，讓您的家人或朋友。
 		\n\n然後選擇分享位置的方式。選項有：電子郵件、SMS(文字)或複製座標到剪貼簿。
 	</string>
 	<string name="tip_favorites">我的最愛點</string>
@@ -1240,7 +1240,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
  - 始終保持最新的地圖（每月至少更新一次）
  - 簡潔細致的離線向量地圖
  - 可在完整地圖資料還是只有公路網之間選擇（例如：全日本有700 MB或200 MB的公路網）
- - 還支援線上或暫存的地圖圖磚
+ - 還支援線上或快取地圖圖磚
 
 安全功能
  - 可選擇自動日/夜檢視切換
@@ -1310,7 +1310,7 @@ OsmAnd + 是付費應用程式版本。經由您的購買來支援專案，資�
  - 始終保持最新的地圖（每月至少更新一次）
  - 簡潔細致的離線向量地圖
  - 可在完整地圖資料還是只有公路網之間選擇（例如：全日本有700 MB或200 MB的公路網）
- - 還支援線上或暫存的地圖圖磚
+ - 還支援線上或快取地圖圖磚
 
 安全功能
  - 可選的自動日/夜檢視切換
