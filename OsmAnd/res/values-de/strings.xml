@@ -566,7 +566,8 @@
 	</string>
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">Sie können jeden beliebigen Ort als Favoriten speichern.
-		\n\nEinen Favoriten erstellen Sie im \'Verwende Position\'-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar. Gespeicherte Favoriten sind leicht zugänglich via \'Menü\' →  \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
+		\n\nEinen Favoriten erstellen Sie im \'Verwende Position\'-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar.
+		\n\nGespeicherte Favoriten sind leicht zugänglich via \'Menü\' →  \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
 		\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen.
 	</string>
 	<string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> Klassifizierung mit Bildern"</string>
@@ -577,7 +578,7 @@
 	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
 	<string name="preferred_locale">Anzeigesprache</string>
 	<string name="tip_map_switch">Kartenquelle</string>
-	<string name="tip_map_switch_t_v2">Die Kartenquelle und die angezeigten Ebenen können in der Kartenansicht über das Menü \'Menü\' -&gt; \'Kartenebenen\' gewählt werden.
+	<string name="tip_map_switch_t_v2">Die Kartenquelle und die angezeigten Ebenen können in der Kartenansicht über \'Menü\' → \'Kartenebenen\' gewählt werden.
 		\n\nIm Menü \'Kartenquelle…\' können Sie die Karte wählen: Vorher heruntergeladene Offline-Vektor-Karten, vordefinierte Online-Kachel-Karten (aktivieren Sie das Plugin \'Online und Kachel-Karten\') oder manuell am Rechner (z.B. mit OsmAndMapCreator) erstellte Karten.
 		\n\nOsmAnd unterstützt auch benutzerdefinierte Quellen.
 	</string>
@@ -586,7 +587,8 @@
 		\n\nDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route (Transportmittel).
 	</string>
 	<string name="tip_search">Suchen</string>
-	<string name="tip_search_t">Um bestimmte Orte zu finden, können Sie entweder auf der Landkarte über das \'Verwende Position\'-Kontextmenü \'In der Nähe suchen\' aufrufen, oder den Suchbildschirm über \'Menü\' → \'Suche\' erreichen. Die Suche bietet folgende Suchmechanismen:
+	<string name="tip_search_t">Um bestimmte Orte zu finden, können Sie entweder auf der Landkarte über das \'Verwende Position\'-Kontextmenü \'In der Nähe suchen\' aufrufen, oder den Suchbildschirm über \'Menü\' → \'Suche\' erreichen.
+		\n\nDie Suche bietet folgende Suchmechanismen:
 		\n\t* Eingabe einer Adresse
 		\n\t* Angabe von Koordinaten
 		\n\t* als POI (via Typ oder nach Name)

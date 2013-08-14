@@ -1100,8 +1100,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="tip_favorites">Favorite Points</string>
 	<string name="tip_favorites_t">Frequently used points can be saved as Favorites, as follows:
-		\n\nIn the \'Use location\' context menu for any point, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Menu\' → \'Favorites\'.
-		\n\nTapping on any entry in the \'Favorites\' list provides options like to navigate to it, edit or delete it.
+		\n\nIn the \'Use location\' context menu for any point, select option \'Add to favorites\' and then enter a name for it.
+		\n\nAfter saving a Favorite, it is accessible via \'Menu\' → \'Favorites\'. Tapping on any entry in the \'Favorites\' list provides options like to navigate to it, edit or delete it.
 		\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' in \'Menu\' → \'Map layers\'.
 	</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
@@ -1123,7 +1123,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="tip_search">Searching</string>
 	<string name="tip_search_t">You can search for places directly on the map via \'Use location\' → \'Search near here\', or by calling the dedicated search screen via \'Menu\' → \'Search\'.
-		\n\nThe search screen provides templates for searching by address, via coordinates, as POI (by type or by name), or via predefined favorites. For all hits a context menu or action bar offers options like \'Directions\' or \'Show on map\', etc.
+		\n\nThe search screen provides templates for searching by address, via coordinates, as POI (by type or by name), or via predefined favorites.
+		\n\nFor all hits a context menu or action bar offers options like \'Directions\' or \'Show on map\', etc.
 	</string>
 	<string name="tip_map_context_menu">\'Use location\' Context Menu</string>
 	<string name="tip_map_context_menu_t">The \'Use location\' context menu contains all actions referring to a point (location).
