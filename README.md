@@ -44,14 +44,16 @@ Functionality
  * Optional speed limit display, with reminder if you exceed it
  * Optional speed-dependent map zooming
  * Share your location so that your friends can find you
- * Bicycle and Pedestrian Features
+
+#### Bicycle and Pedestrian Features
  * The maps include foot, hiking, and bike paths, great for outdoor activities
  * Special routing and display modes for bike and pedestrian
  * Optional public transport stops (bus, tram, train) including line names
  * Optional trip recording to local GPX file or online service
  * Optional speed and altitude display
  * Display of contour lines and hill-shading (via additional plugin)
- * Directly Contribute to OpenStreetMap
+
+#### Directly Contribute to OpenStreetMap
  * Report map bugs
  * Upload GPX tracks to OSM directly from the app
  * Add POIs and directly upload them to OSM (or later if offline)
