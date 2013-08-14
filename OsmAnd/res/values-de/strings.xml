@@ -3,7 +3,7 @@
 	<string name="tip_map_styles">Kartendarstellung</string>
 	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten für verschiedene Verwendungszwecke optimiert dartsellen:
 		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' → \'Anzeige konfigurieren\' → \'Map Style\' → \'Kartendarstellung\' zum Beispiel auswählen:
-		\n\t* Den \'Touring view\' Stil, er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahhradrouten, Wandersymbol-Untertützung, usw.
+		\n\t* Den \'Touring view\' Stil, er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahrradrouten, Wandersymbol-Untertützung, usw.
 		\n\t* \'High contrast roads\' zeigt alle Straßen in betont deutlichen Farben, nützlich in extrem hellen Umgebungen
 		\n\t* \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahrten und Lifte (benötigt wird die \'World ski\' Offline-Karte)
 	</string>
@@ -25,7 +25,7 @@
 	<string name="tip_altitude_offset">Höhenangaben - Offset Korrektur</string>
 	<string name="tip_altitude_offset_t">Die meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
 		\n\nEine bessere Näherung für lokale Systeme ist das EGM96-System.
-		\n\nOsmAnd zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korekturdatei unter \'Einstellungen\' → \'Daten Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
+		\n\nOsmAnd zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korrekturdatei unter \'Einstellungen\' → \'Daten Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
 	<string name="map_widget_max_speed">Tempolimit</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
@@ -360,14 +360,14 @@
 		\n\nDazu müssen Sie zunächst unter \'Einstellungen\' → \'Zusatzmodule\' OSM-Berarbeitung aktivieren und dann unter \'Einstellungen\' → \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
 		\n\nEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im \'Verwende Position\'-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! 
 		\n\nAuch gefundene Fehler auf der Karte können direkt an OSM gemeldet werden. OSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im \'Verwende Position\'-Kontextmenü.
-		\n\nAchtung: Für alle OSM-Aktivitäten wird zum Einsenden eine Internetverbindung benötigt.
+		\n\nOsmAnd untertützt das loakle Vormerken Ihrer Einträge (siehe entsprechende Einstellung), aber zum Einsenden natürlich eine Internetverbindung benötigt.
 	</string>
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
 	<string name="tip_navigation">Navigation starten</string>
-	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte, dann Kurzklick auf den Positionsmarker und das Auswählen des Menüpunktes \'Navigiere zu\', oder über die Funktion \'Navigation\' bei Klick auf ein Ergebnis in einer Such-Liste oder einen Favoriten.
+	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte, (dann Kurzklick auf den Positionsmarker und das Auswählen des Menüpunktes \'Navigiere zu\'), oder über die Funktion \'Navigation\' bei Klick auf ein Ergebnis einer Such-Liste oder einen Favoriten.
 		\n\nDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.
-		\n\nDie Route von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch anschließenden Klick auf den gewünschten Ausgangspunkt und dann Auswahl der \'Verwende Position\'-Kontextmenüoption \'Navigiere von\'.
+		\n\nDie Route von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch abschließenden Klick auf den gewünschten Ausgangspunkt und dann Auswahl der \'Verwende Position\'-Kontextmenüoption \'Navigiere von\'.
 	</string>
 	<string name="tip_recent_changes_0_6_9_t">Änderungen in 0.6.9:
 		\n\t- Verbesserte Offline-Kartenanzeige 
@@ -549,8 +549,8 @@
 	<string name="tip_update_index">Aktualisierung der Offline-Karten</string>
 	<string name="tip_update_index_t">Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und ide Offline-Navigation. OsmAnd hat einen Daten-Manager für das Herunterladen von Offline-Karten (und einigen anderen Offline-Daten), und zur Aktualisierung derselben.
 		\n\nDas Herunterladen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Herunterladen…\'.
-		\n\nNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Bitte beachten Sie die Dateityp-Auswahloption am oberen Ende des Bildschirms, wählen Sie dort die gewünschte Datei-Kategorie (Reguläre Karten, Höhenlinien-Overlay, etc.)
-		\n\nDie Liste kann durch Eingabe von Zeichen gefiltert werden. Die Option \'Filter Gespeicherte\' zeigt nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
+		\n\nNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Bitte beachten Sie die Dateityp-Auswahloption am oberen Ende des Bildschirms, wählen Sie dort die gewünschte Datei-Kategorie (Reguläre Karten, Relief-Overlay, etc.)
+		\n\nDie Regionsliste kann durch Eingabe von Zeichen gefiltert werden. Alternativ zeigt die Option \'Filter Gespeicherte\' zeigt nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
 		\n\n\t* Einträge in \'grün\': Daten aktuell
 		\n\t* Einträge in \'blau\': Neuere Version zum herunterladen verfügbar
 		\n\t* Kursive Darstellung: Auf dem Gerät deaktivierte Karten
@@ -588,7 +588,7 @@
 	</string>
 	<string name="tip_search">Suchen</string>
 	<string name="tip_search_t">Um bestimmte Orte zu finden, können Sie entweder auf der Landkarte über das \'Verwende Position\'-Kontextmenü \'In der Nähe suchen\' aufrufen, oder den Suchbildschirm über \'Menü\' → \'Suche\' erreichen.
-		\n\nDie Suche bietet folgende Suchmechanismen:
+		\n\nEs gibt folgende Suchmechanismen:
 		\n\t* Eingabe einer Adresse
 		\n\t* Angabe von Koordinaten
 		\n\t* als POI (via Typ oder nach Name)
