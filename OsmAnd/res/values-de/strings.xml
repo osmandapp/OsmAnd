@@ -3,7 +3,7 @@
 	<string name="tip_map_styles">Kartendarstellung</string>
 	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten für verschiedene Verwendungszwecke optimiert dartsellen:
 		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' → \'Anzeige konfigurieren\' → \'Map Style\' → \'Kartendarstellung\' zum Beispiel auswählen:
-		\n\t* Den \'Touring view\' Stil, er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahhradrouten, Wndersymbol-Untertützung, usw.
+		\n\t* Den \'Touring view\' Stil, er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahhradrouten, Wandersymbol-Untertützung, usw.
 		\n\t* \'High contrast roads\' zeigt alle Straßen in betont deutlichen Farben, nützlich in extrem hellen Umgebungen
 		\n\t* \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahrten und Lifte (benötigt wird die \'World ski\' Offline-Karte)
 	</string>
@@ -24,8 +24,8 @@
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
 	<string name="tip_altitude_offset">Höhenangaben - Offset Korrektur</string>
 	<string name="tip_altitude_offset_t">Die meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
-		\n\nEine bessere Näherung an lokale Systeme ist das EGM96-System.
-		\n\nOsmand zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korekturdatei unter \'Einstellungen\' → \'Daten Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
+		\n\nEine bessere Näherung für lokale Systeme ist das EGM96-System.
+		\n\nOsmAnd zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korekturdatei unter \'Einstellungen\' → \'Daten Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
 	<string name="map_widget_max_speed">Tempolimit</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
@@ -356,17 +356,16 @@
 		\n\t* 'Umgebungslicht-Sensor\': automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)
 	</string>
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
-	<string name="tip_osm_improve_t">OsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann direkt zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
+	<string name="tip_osm_improve_t">OsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann direkt zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte erstellen.
 		\n\nDazu müssen Sie zunächst unter \'Einstellungen\' → \'Zusatzmodule\' OSM-Berarbeitung aktivieren und dann unter \'Einstellungen\' → \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
 		\n\nEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im \'Verwende Position\'-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! 
-		\n\nGefundene Fehler auf der Karte können direkt gemeldet werden.
-		\n\nOSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im \'Verwende Position\'-Kontextmenü.
-		\n\nAchtung: Für alle OSM-Aktivitäten wird eine Internetverbindung benötigt.
+		\n\nAuch gefundene Fehler auf der Karte können direkt an OSM gemeldet werden. OSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im \'Verwende Position\'-Kontextmenü.
+		\n\nAchtung: Für alle OSM-Aktivitäten wird zum Einsenden eine Internetverbindung benötigt.
 	</string>
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
 	<string name="tip_navigation">Navigation starten</string>
-	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte und dann das Auswählen des Menüpunktes \'Navigiere zu\', oder über die Funktion \'Navigation\' bei Klick auf ein Ergebnis in einer Such-Liste oder einen Favoriten.
+	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte, dann Kurzklick auf den Positionsmarker und das Auswählen des Menüpunktes \'Navigiere zu\', oder über die Funktion \'Navigation\' bei Klick auf ein Ergebnis in einer Such-Liste oder einen Favoriten.
 		\n\nDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.
 		\n\nDie Route von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch anschließenden Klick auf den gewünschten Ausgangspunkt und dann Auswahl der \'Verwende Position\'-Kontextmenüoption \'Navigiere von\'.
 	</string>
@@ -550,7 +549,7 @@
 	<string name="tip_update_index">Aktualisierung der Offline-Karten</string>
 	<string name="tip_update_index_t">Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und ide Offline-Navigation. OsmAnd hat einen Daten-Manager für das Herunterladen von Offline-Karten (und einigen anderen Offline-Daten), und zur Aktualisierung derselben.
 		\n\nDas Herunterladen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Herunterladen…\'.
-		\n\nNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Bitte beachten Sie die Dateityp-Auswahloption am oberen Ende des Bildschirms, wählen Sie dort die gewünschte Datei-Kategorie (Reguläre Karten, Hühenlinien-Overlay, etc.)
+		\n\nNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Bitte beachten Sie die Dateityp-Auswahloption am oberen Ende des Bildschirms, wählen Sie dort die gewünschte Datei-Kategorie (Reguläre Karten, Höhenlinien-Overlay, etc.)
 		\n\nDie Liste kann durch Eingabe von Zeichen gefiltert werden. Die Option \'Filter Gespeicherte\' zeigt nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
 		\n\n\t* Einträge in \'grün\': Daten aktuell
 		\n\t* Einträge in \'blau\': Neuere Version zum herunterladen verfügbar
@@ -567,7 +566,7 @@
 	</string>
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">Sie können jeden beliebigen Ort als Favoriten speichern.
-		\n\nEinen Favoriten erstellen Sie im \'Verwende Position\'-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar. Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
+		\n\nEinen Favoriten erstellen Sie im \'Verwende Position\'-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar. Gespeicherte Favoriten sind leicht zugänglich via \'Menü\' →  \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
 		\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen.
 	</string>
 	<string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> Klassifizierung mit Bildern"</string>
@@ -578,8 +577,8 @@
 	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
 	<string name="preferred_locale">Anzeigesprache</string>
 	<string name="tip_map_switch">Kartenquelle</string>
-	<string name="tip_map_switch_t_v2">Die Kartenquelle und die angezeigten Ebenen können in der Katenansicht über das Menü \'Menü\' -&gt; \'Kartenebenen\' verändert werden.
-		\n\nIm Menü \'Kartenquelle…\' können Sie die Karte wählen: vorher heruntergeladene Offline-Vektor-Karten, vordefinierte Online-Kachel-Karten (aktivieren Sie das Plugin \'Online und Kachel-Karten\') oder manuell am Rechner (z.B. mit OsmAndMapCreator) erstellte Karten.
+	<string name="tip_map_switch_t_v2">Die Kartenquelle und die angezeigten Ebenen können in der Kartenansicht über das Menü \'Menü\' -&gt; \'Kartenebenen\' gewählt werden.
+		\n\nIm Menü \'Kartenquelle…\' können Sie die Karte wählen: Vorher heruntergeladene Offline-Vektor-Karten, vordefinierte Online-Kachel-Karten (aktivieren Sie das Plugin \'Online und Kachel-Karten\') oder manuell am Rechner (z.B. mit OsmAndMapCreator) erstellte Karten.
 		\n\nOsmAnd unterstützt auch benutzerdefinierte Quellen.
 	</string>
 	<string name="tip_app_mode">Nutzerprofile</string>
@@ -587,18 +586,17 @@
 		\n\nDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route (Transportmittel).
 	</string>
 	<string name="tip_search">Suchen</string>
-	<string name="tip_search_t">Um bestimmte Orte zu finden, bietet Ihnen OsmAnd mehrere Möglichkeiten:
-		\n\t* Eingabe der Adresse
-		\n\t* Angabe der Koordinaten
-		\n\t* als POI
+	<string name="tip_search_t">Um bestimmte Orte zu finden, können Sie entweder auf der Landkarte über das \'Verwende Position\'-Kontextmenü \'In der Nähe suchen\' aufrufen, oder den Suchbildschirm über \'Menü\' → \'Suche\' erreichen. Die Suche bietet folgende Suchmechanismen:
+		\n\t* Eingabe einer Adresse
+		\n\t* Angabe von Koordinaten
+		\n\t* als POI (via Typ oder nach Name)
 		\n\t* mittels Ihrer Favoriten
-		\n\t* oder direkt über das \'Verwende Position\'-Kontextmenü in der Kartenansicht (\'In der Nähe suchen\')
-		\n\nUnter \'Suche\' im Hauptmenü finden Sie alle genannten Such-Möglichkeiten. Ein Kontextmenü für jeden Treffer bietet Optionen wie \'Navigation\' oder \'Auf Karte zeigen\'.
+		\n\nEin Kontextmenü für jeden Treffer einer Ergebnisliste bietet Optionen wie \'Navigation\' oder \'Auf Karte zeigen\'.
 	</string>
 	<string name="tip_map_context_menu">\'Verwende Position\'-Kontextmenü</string>
-	<string name="tip_map_context_menu_t">Das \'Verwende Position\'-Kontextmenü wird über ein langes Drücken auf einen Punkt in der Karte (dann Anklicken des Positionsmarkers), durch das Drücken des Trackball-Knopfes in der Kartenansicht, oder via \'Menü\' → \'Verwende Position\' aufgerufen (die letzten beiden Methoden beziehen sich auf den Kartenmittelpunkt).
-		\n\nLanges Drücken auf eine Position erzeugt einen Positionsmarker: Kurzes Drücken darauf öffnet das \'Verwende Position\'-Kontextmenü, langes Drücken entfernt es wieder.
-		\n\nDas \'Verwende Position\'-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.
+	<string name="tip_map_context_menu_t">Das \'Verwende Position\'-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.
+		\n\nEs wird über ein langes Drücken auf einen Punkt in der Karte (dann Anklicken des Positionsmarkers), durch das Drücken des Trackball-Knopfes in der Kartenansicht, oder via \'Menü\' → \'Verwende Position\' aufgerufen (die letzten beiden Methoden beziehen sich auf den Kartenmittelpunkt).
+		\n\nLanges Drücken auf einen Positionsmarker entfernt diesen wieder.
 	</string>
 	<string name="tip_initial">Tipps und Tricks</string>
 	<string name="tip_initial_t">OsmAnd ist eine Navigationsanwendung mit vielen Fähigkeiten.
@@ -1268,7 +1266,7 @@
 		\n\t* \'Touren-Ansicht\' der Karte mit mehr Kartendetails, neuer Straßenansicht, mehr Kontrast und alpine Wander-Optionen (SAC-Skalierung)
 		\n\t* EM96 Geoid-Offset-Korrektur für GPS-Höhenwerte
 	</string>
-	<string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. \"Verwende Ort…\" um der Notiz einen bestimmten Ort zuzuweisen</string>
+	<string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. Benutzen Sie \'Verwende Position…\', um der Notiz einen Ort zuzuweisen</string>
 	<string name="osmand_srtm_long_description_1000_chars">Das Plugin beinhaltet Höhenlinien, die in Offline-Karten von OsmAnd angezeigt werden können. Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flagschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems).</string>
 	<string name="recording_context_menu_show">Anzeigen</string>
 	<string name="recording_photo_description">Foto %1$s von %2$s</string>

@@ -912,8 +912,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can create and upload new POI or OSM bug reports with just a few clicks.
 		\n\nFor this you need to activate the OSM Editing Plugin under \'Settings\' → \'Plugins\', then provide your OSM login information in \'Settings\' → \'OSM editing\'.
 		\n\nTo add a new POI use option \'Create POI\' in the \'Use location\' context menu. Proceed with entering the information about the new POI in \'Create POI\' dialogue and finally commit it.
-		\n\nErrors in maps can immediately be reported via an OSM bug, so the OSM community can then fix this problem.
-		\n\nTo add an OSM bug use option \'Open OSM bug\' in the \'Use location\' context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
+		\n\nAlso errors in maps can immediately be reported via an OSM bug, so the OSM community can then fix this problem. Use the option \'Open OSM bug\' in the \'Use location\' context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
 		\n\nPlease note that Internet connectivity is needed to upload your OSM POI and OSM bug contributions.
 	</string>
 	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
@@ -1123,7 +1122,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\nYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route (\'transport mode\').
 	</string>
 	<string name="tip_search">Searching</string>
-	<string name="tip_search_t">You can search for places directly on the map via \'Use location\' → \'Search near here\', or on the dedicated search screen accessed via \'Menu\' → \'Search\'.
+	<string name="tip_search_t">You can search for places directly on the map via \'Use location\' → \'Search near here\', or by calling the dedicated search screen via \'Menu\' → \'Search\'.
 		\n\nThe search screen provides templates for searching by address, via coordinates, as POI (by type or by name), or via predefined favorites. For all hits a context menu or action bar offers options like \'Directions\' or \'Show on map\', etc.
 	</string>
 	<string name="tip_map_context_menu">\'Use location\' Context Menu</string>
