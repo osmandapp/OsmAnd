@@ -11,9 +11,9 @@
     -->
 	<string name="tip_map_styles">Map Styles</string>
 	<string name="tip_map_styles_t">OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
-		\n\nOther than the balanced \'default\' map style, you may under \'Menu\' → \'Configure screen\' → \'Map Style\' select for example
-		\n\t* The \'Touring view\' style, which contains the most detailed information possible for traveling and touring, including optimization for professional drivers (higher contrast distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
-		\n\t* \'High contrast roads\' shows roads in very accentuated bright colors for bright ambient lighting situations
+		\n\nOther than the balanced \'default\' map style, you may in \'Menu\' → \'Configure screen\' → \'Map Style\' select for example
+		\n\t* The \'Touring view\' style, which contains the most detailed information feasable for traveling and touring, including optimization for professional drivers (higher contrast, distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
+		\n\t* \'High contrast roads\' shows roads in very accentuated colors for bright ambient lighting situations
 		\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download)
 	</string>
     <string name="about_version">Version :</string>
@@ -278,7 +278,7 @@
 	<string name="tip_altitude_offset">Altitude: Offset Correction</string>
 	<string name="tip_altitude_offset_t">Most GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
 		\n\nA better approximation to these local systems is the EGM96 (geoid) reference.
-		\n\nOsmAnd will display your positions\'s altitudes in the EGM96 system after you download the file \'World Altitide Correction\' (WW15MGH.DAC) via \'Settings\' → \'Data Management\'. (Original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
+		\n\nOsmAnd will display your positions\'s altitude in the EGM96 system after you download the file \'World Altitide Correction\' (WW15MGH.DAC) via \'Settings\' → \'Data Management\'. (Original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
     <string name="map_widget_max_speed">Speed limit</string>
     <string name="monitoring_control_start">GPX</string>
@@ -560,7 +560,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_update_index_t">Up-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a data manager to download these offline maps (and some other data files), and to check for available updates.
 		\n\nTo download maps go to \'Settings\' → \'Data Management\' → \'Download offline data\'.
 		\n\nAfter the global region list is retrieved from the internet, click on any entry to download or update a file. Please note the file type selector near the top of the screen to select the type of download you want (regular maps, countour line overlays, etc.).
-		\n\nYou can filter the list by typing some letters, or you may select the option \'Settings\' → \'Filter downloaded\' to see updates only for the data already on your device.
+		\n\nYou can filter the region list by typing some letters, or you may select the option \'Settings\' → \'Filter downloaded\' to see updates only for the data already on your device.
 		\n\n\t*Entries in \'green\' indicate data files identical on device and server
 		\n\t*Entries in \'blue\' indicate available updates on server
 		\n\t*Entries in italic font indicate data de-activated on the device
@@ -894,25 +894,27 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\nThe choices are:
 		\n\t* 'Don\'t rotate (north is up)\': Map will not be rotated. North will be always up
 		\n\t* 'To direction of movement\': Map will continuously be aligned with your heading
-		\n\t* 'To compass\': Map will continuously be aligned with device compass reading
+		\n\t* 'To compass\': Map will continuously be aligned with the device\'s compass reading
 	</string>
-	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' → \'Map layers\' → \'Map source&#8230;\' → \'Offline vector maps\'.</string>
+	<string name="binary_map_download_success">Download successful.
+		\n\t\n\tTo use activate \'Menu\' → \'Map layers\' → \'Map source&#8230;\' → \'Offline vector maps\'.
+	</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
 	<string name="tip_day_night_mode_t_v2">The map appearance can for offline vector maps be changed between day (brighter) and night (darker). Night colors are safer and more comfortable for night driving.
 		\n\nYou can set a policy for day/night switching in \'Menu\' → \'Configure screen\' → \'Day/night map\'.
 		\n\nThe choices are:
-		\n\t* 'Sunrise/Sunset\': automatic mode, controlled by position of the sun (default)
+		\n\t* 'Sunrise/Sunset\': automatic mode, controlled by the position of the sun (default)
 		\n\t* 'Day\': always use day mode
 		\n\t* 'Night\': always use night mode
-		\n\t* 'Light sensor\': map appearance is controlled by light sensor of your device (only if equipped)
+		\n\t* 'Light sensor\': map appearance is controlled by the device\'s light sensor (only if equipped)
 	</string>	
 	<string name="tip_osm_improve">Improving OSM Data</string>
-	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can directly create and upload new POI or OSM bug reports with just a few clicks.
+	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can create and upload new POI or OSM bug reports with just a few clicks.
 		\n\nFor this you need to activate the OSM Editing Plugin under \'Settings\' → \'Plugins\', then provide your OSM login information in \'Settings\' → \'OSM editing\'.
 		\n\nTo add a new POI use option \'Create POI\' in the \'Use location\' context menu. Proceed with entering the information about the new POI in \'Create POI\' dialogue and finally commit it.
-		\n\nErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
-		\n\nTo add a OSM bug use option \'Open OSM bug\' in the \'Use location\' context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
-		\n\nPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.
+		\n\nErrors in maps can immediately be reported via an OSM bug, so the OSM community can then fix this problem.
+		\n\nTo add an OSM bug use option \'Open OSM bug\' in the \'Use location\' context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
+		\n\nPlease note that Internet connectivity is needed to upload your OSM POI and OSM bug contributions.
 	</string>
 	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
 	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
@@ -1094,15 +1096,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
 	<string name="tip_location_sharing">Share a location</string>
-	<string name="tip_location_sharing_t">You can share the location of interesting places on your trip with family or friends as follows:
-		\n\nFor any point selected, via \'Use location\' → \'Share location\' menu.
+	<string name="tip_location_sharing_t">You can share the location of interesting places on your trip with family or friends as follows via the \'Use location\' context menu → \'Share location\'.
 		\n\nThen chose a way to share your location. The choices are: E-Mail, SMS(text), or just copy the location coordinates to the device clipboard.
 	</string>
 	<string name="tip_favorites">Favorite Points</string>
 	<string name="tip_favorites_t">Frequently used points can be saved as Favorites, as follows:
-		\n\nIn the \'Use location\' context menu for any point, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Screen\' → \'Favorites\'.
-		\n\nLong-pressing on a Favorite in the \'Favorites\' menu provides options like to navigate to it, edit or delete it.
-		\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' under \'Menu\' → \'Map layers\'.
+		\n\nIn the \'Use location\' context menu for any point, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Menu\' → \'Favorites\'.
+		\n\nTapping on any entry in the \'Favorites\' list provides options like to navigate to it, edit or delete it.
+		\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' in \'Menu\' → \'Map layers\'.
 	</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="error_doing_search">Error occurred in offline search</string>
@@ -1113,8 +1114,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="preferred_locale">Display language</string>
 	<string name="incomplete_locale">incomplete</string>
 	<string name="tip_map_switch">Select a Map Source</string>
-	<string name="tip_map_switch_t_v2">The map source and map layers displayed are changed via \'Menu\' → \'Map layers\' in map view.
-		\n\nUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps (default, also needed for offline navigation), or predefined (online or cached offline) tile sources (activate the \'Online maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
+	<string name="tip_map_switch_t_v2">The map source and map layers displayed are changed via \'Menu\' → \'Map layers\'.
+		\n\nUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps (default, also needed for offline navigation), or predefined (online or cached offline) tile sources (activate the \'Online maps\' plugin under \'Settings\' → \'Plugins\' for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
 		\n\nOsmAnd also supports custom sources.
 	</string>
 	<string name="tip_app_mode">User Profile</string>
@@ -1122,13 +1123,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\nYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route (\'transport mode\').
 	</string>
 	<string name="tip_search">Searching</string>
-	<string name="tip_search_t">You can search for places directly on the map (\'Use location\' → \'Search near\'), or on the dedicated search screen by address, by location, as POI (by type or by name), or as predefined favorite.
-		\n\nPressing \'Search\' on the main screen opens the search activities. For all hits a context menu offers options like \'Directions\' or \'Show on map\'.
+	<string name="tip_search_t">You can search for places directly on the map via \'Use location\' → \'Search near here\', or on the dedicated search screen accessed via \'Menu\' → \'Search\'.
+		\n\nThe search screen provides templates for searching by address, via coordinates, as POI (by type or by name), or via predefined favorites. For all hits a context menu or action bar offers options like \'Directions\' or \'Show on map\', etc.
 	</string>
 	<string name="tip_map_context_menu">\'Use location\' Context Menu</string>
-	<string name="tip_map_context_menu_t">The \'Use location\' context menu is available by long-pressing any point on the map (the tapping the marker), by pressing the trackball button, or by selecting \'Menu\' → \'Use location\' (the last two ways take the map center as reference).
-		\n\nLong-clicking a location produces a marker box. To open the \'Use location\' context menu, tap on it. (Or press and hold on it to hide the box again.)
-		\n\nThe \'Use location\' context menu contains all actions referring to a point (location).
+	<string name="tip_map_context_menu_t">The \'Use location\' context menu contains all actions referring to a point (location).
+		\n\nIt is available by long-pressing any point on the map (then tapping its marker), or by pressing the trackball button, or by selecting \'Menu\' → \'Use location\' (the last two ways take the map center as reference).
+		\n\nA marker box can be hidden again by long-clicking on it.
 	</string>
 	<string name="tip_initial">Tips and Tricks</string>
 	<string name="tip_initial_t">OsmAnd is a navigation application with many features. 
