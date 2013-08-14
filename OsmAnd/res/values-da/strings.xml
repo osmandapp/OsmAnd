@@ -68,7 +68,8 @@
     <string name="osmodroid_plugin_description">OsMoDroid udvidelse er en OsmAnd udvidelse til OsModroid app for online sporingsfunktioner. Oplysninger om tjenesten er tilgængelig på http://esya.ru.</string>
     <string name="tip_altitude_offset">Højde: Offset korrektion</string>
 	<string name="tip_altitude_offset_t">De fleste GPS-enheder gengiver højdemålinger i det ellipsoide-baserede WGS84 referencesystem, hvorfra en konvertering til lokalt anvendte systemer kræver en positions afhængig korrektion.
-\n\nEn bedre tilnærmelse til disse lokale systemer er EGM96 reference. OsmAnd nu understøtter også den automatiske visning af højder i EGM96 systemet.
+\n\nEn bedre tilnærmelse til disse lokale systemer er EGM96 reference.
+\n\n OsmAnd nu understøtter også den automatiske visning af højder i EGM96 systemet.
 \n\nFor at opnå dette, hent filen WW15MGH.DAC via Offline Data Manager (oprindelig er på http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     <string name="map_widget_max_speed">Fartgrænse</string>
@@ -187,7 +188,7 @@
 	<string name="day_night_info">Dag/nat information</string>
 	<string name="map_widget_day_night">Dag-/natkort</string>
 	<string name="map_widget_vector_attributes">Optegningsattributter:</string>
-	<string name="map_widget_renderer">Kortudseende</string>
+	<string name="map_widget_renderer">Kortformat</string>
 	<string name="live_monitoring_mode_off">Start online 
 \nsporing</string>
 	<string name="live_monitoring_mode_on">Stop online 
@@ -953,10 +954,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="level_to_switch_vector_raster_descr">Minimum zoomniveau for at bruge vektorkort</string>
 	<string name="level_to_switch_vector_raster">Min. vektor zoomniveau</string>
 	<string name="tip_location_sharing">Del placering</string>
-	<string name="tip_location_sharing_t">Del placeringen af interessante steder på rejsen med familie og venner.
-\n For at dele en placering:
-\n Brug \'Menu\' → \'Brug placeringer\' → \'Del placering\'.
-\n Derefter vælges en måde at dele placering på. Valgmulighederne er: E-mail, SMS(tekst) eller bare kopier koordinaterne til udklipsholderen.
+	<string name="tip_location_sharing_t">Del placeringen af interessante steder på rejsen med familie og venner via \'Menu\' → \'Brug placeringer\' → \'Del placering\'.
+\n\n Derefter vælges en måde at dele placering på. Valgmulighederne er: E-mail, SMS(tekst) eller bare kopier koordinaterne til udklipsholderen.
 	</string>
 	<string name="tip_favorites">Favoritsteder</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
@@ -971,7 +970,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="incomplete_locale">ufuldstændig</string>
 	<string name="tip_map_switch">Vælg kortkilde</string>
 	<string name="tip_app_mode">Brug profil</string>
-	<string name="tip_navigation">Navigation</string>
+	<string name="tip_navigation">Kørselsvejlening(Navigering)</string>
 	<string name="tip_search">Søgning</string>
 	<string name="tip_map_context_menu">\'Brug placering\' genvejsmenu</string>
 	<string name="tip_initial">Tips og tricks</string>
@@ -1048,7 +1047,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="daynight">Dag-/nattilstand</string>
 	<string name="download_files_question">Hent {0} filer ({1} MB)?</string>
 	<string name="tip_favorites_t">Ofte brugte steder kan gemmes som favoritter.
-\n\nFor at gemme et sted som favorit gå til genvejsmenu, vælg \'Tilføj til favoritter\' og indtast et navn. Når favoriten er gemt, er den tilgængelig via\'Start skærm\' → \'Favoritter\'.
+\n\nFor at gemme et sted som favorit gå til genvejsmenu, vælg \'Tilføj til favoritter\' og indtast et navn. Når favoritten er gemt, er den tilgængelig via\'Start skærm\' → \'Favoritter\'.
 \n\nLangt tryk på en favorit i \'Favorit\' menuen åbner muligheder for at bruge den som destination, redigere eller slette den.
 \n\nFor at vise alle favoritsteder direkte på kortet, aktiver kortlag \'Favoritter\' under \'Menu\' → \'Kortlag\'.
 	</string>
@@ -1296,6 +1295,13 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	</string>
 	<string name="tip_search_t">Søg efter steder direkte på kortet, efter adresse, efter placering, som interessepunkt eller som foruddefineret favorit.
 \nTryk på \'Søg\' i hovedskærmen åbner søgeaktiviteter. For alle fundne elementer tilbyder genvejsmenuen: \'Kørselsvejledning\' eller \'Vis på kort\'.
+\n\nSøgeskærmen indeholder skabeloner for søgning
+\n * efter adresse
+\n * via koordinater
+\n * som IP (efter type eller navn)
+\n * via din søgeoversigt
+\n * eller via dine foruddefinerede favoritter
+\n\nFor alle rammer en genvejsmenu eller handling bar tilbyder muligheder som \' Kørselsvejledning\' eller \'Vis på kort\' osv.
 	</string>
 	<string name="tip_map_context_menu_t">Kortets genvejsmenu er tilgængelig ved at trykke og holde på kortet eller ved at trykke på trackball knappen.
 \nSå åbnes en boks med koordinater. For at åbne kortets genvejsmenu skal der trykkes på den. (Eller tryk og hold på den for at skjule den igen.)
@@ -1595,4 +1601,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="about_settings">Om</string>
     <string name="about_settings_descr">Versioninformation, licenser, projektmedlemmer</string>
     <string name="tips_and_tricks">Tips</string>
+    <string name="tip_map_styles">Kortformater</string>
+	<string name="tip_map_styles_t">Osmand understøtter visning af offline vektorkort i forskellige kortformatter tilpasset forskellige behov:
+\n\n andre end den afbalancerede \'default\' kort stil, kan du i \'Menu\' → \'skærmen Opsætning\' → \'Kortformat\' vælges for eksempel
+\n * \'Turvisning \' kortformat, indeholder de mest detaljerede oplysninger som muligt til rejser og rejsebrug, herunder optimering for erhvervschauffører (veje der er lette at skelne og med højere kontrast), mulighed for Alpine vandring (SAC-skalaen), cykelruter, symbolsupport for vandreture  mv.
+\n * \'Veje med høj kontrast\' viser veje med meget forstærkede farver til lyse omgivelser
+\n * \'Vinter og ski\' giver en visning af et (snedækket) vinterlandskab og viser globale skiløjper og lifter (hent \'World ski\' kortet)
+	</string>
     </resources>
