@@ -592,6 +592,7 @@
 		\n\t* Eingabe einer Adresse
 		\n\t* Angabe von Koordinaten
 		\n\t* als POI (via Typ oder nach Name)
+		\n\t* über die Such-Historie
 		\n\t* mittels Ihrer Favoriten
 		\n\nEin Kontextmenü für jeden Treffer einer Ergebnisliste bietet Optionen wie \'Navigation\' oder \'Auf Karte zeigen\'.
 	</string>

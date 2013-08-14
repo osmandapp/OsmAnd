@@ -1117,16 +1117,21 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\nUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps (default, also needed for offline navigation), or predefined (online or cached offline) tile sources (activate the \'Online maps\' plugin under \'Settings\' → \'Plugins\' for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
 		\n\nOsmAnd also supports custom sources.
 	</string>
-	<string name="tip_app_mode">User Profile</string>
+	<string name="tip_app_mode">Use Profile</string>
 	<string name="tip_app_mode_t_v2">OsmAnd supports different (customizable) application profiles for different use cases.
 		\n\nYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route (\'transport mode\').
 	</string>
 	<string name="tip_search">Searching</string>
-	<string name="tip_search_t">You can search for places directly on the map via \'Use location\' → \'Search near here\', or by calling the dedicated search screen via \'Menu\' → \'Search\'.
-		\n\nThe search screen provides templates for searching by address, via coordinates, as POI (by type or by name), or via predefined favorites.
+	<string name="tip_search_t">You can search for places directly on the map via \'Use location\' → \'Search near here\', or by calling the search screen via \'Menu\' → \'Search\'.
+		\n\nThe search screen provides templates for searching
+		\n\t* by address
+		\n\t* via coordinates
+		\n\t* as POI (by type or by name)
+		\n\t* via your search history
+		\n\t* or via your predefined favorites.
 		\n\nFor all hits a context menu or action bar offers options like \'Directions\' or \'Show on map\', etc.
 	</string>
-	<string name="tip_map_context_menu">\'Use location\' Context Menu</string>
+	<string name="tip_map_context_menu">The \'Use location\' Context Menu</string>
 	<string name="tip_map_context_menu_t">The \'Use location\' context menu contains all actions referring to a point (location).
 		\n\nIt is available by long-pressing any point on the map (then tapping its marker), or by pressing the trackball button, or by selecting \'Menu\' → \'Use location\' (the last two ways take the map center as reference).
 		\n\nA marker box can be hidden again by long-clicking on it.
