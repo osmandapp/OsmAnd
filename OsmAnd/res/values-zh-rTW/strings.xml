@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -98,9 +98,9 @@
 		\n\n下載圖資更新由\'設定\' -&gt; \'資料管理\' -&gt; \'下載離線資料\'。
 		\n\n由網路取得區域列表後，點選進入任何一個去下載或更新檔案。請注意檔案類型選擇在畫面上方的附近，選取您想要的類型下載（正常地圖、地形陰影覆疊等）。
 		\n\n您可以篩選區域清單中輸入一些字母，或者您可以按選項\'設定\' -&gt; \'篩選已下載的\'可看見過濾出已經在您裝置上的更新資料。
-		\n\t*登錄為\'綠色\' - 表示裝置與伺服器是相同的
-		\n\t*登錄為\'藍色\' - 表示伺服器有更新的版本
-		\n\t*登錄為斜體字 - 表示未在裝置上使用
+		\n\t*登錄為\'綠色\'，表示裝置與伺服器是相同的
+		\n\t*登錄為\'藍色\'，表示伺服器有更新的版本
+		\n\t*登錄為斜體字，表示未在裝置上使用
 	</string>
 	<string name="filterpoi_activity">建立興趣點篩選</string>
 	<string name="recalculate_route_to_your_location">交通模式：</string>
