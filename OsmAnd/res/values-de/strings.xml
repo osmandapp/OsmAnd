@@ -341,19 +341,19 @@
 	<string name="tip_rotation_switching">Kartenrotation</string>
 	<string name="tip_rotation_switching_t_v2">Die Ausrichtung der Karte kann durch klicken auf die Kompassnadel geändert werden.
 		\n\nZur Wahl stehen:
-		\n\t* 'Keine Rotation (Norden ist oben)\': Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
-		\n\t* 'Nach Bewegungsrichtung\': Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
-		\n\t* 'Nach Kompass\': Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
+		\n\t* \'Keine Rotation (Norden ist oben)\': Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
+		\n\t* \'Nach Bewegungsrichtung\': Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
+		\n\t* \'Nach Kompass\': Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
 	</string>
 	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Kartenebenen\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
 	<string name="tip_day_night_mode_t_v2">Die Anzeige der Offline-Vektor-Karten kann zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
 		\n\nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → \'Anzeige konfigurieren\' → \'Tag/Nacht-Modus\' geändert werden.
 		\n\nZur Auswahl stehen:
-		\n\t* 'Sonnenaufgang/-untergang\': automatischer Modus (Voreinstellung)
-		\n\t* 'Tag\': permanente Tagesansicht
-		\n\t* 'Nacht\': permanente Nachtansicht
-		\n\t* 'Umgebungslicht-Sensor\': automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)
+		\n\t* \'Sonnenaufgang/-untergang\': automatischer Modus (Voreinstellung)
+		\n\t* \'Tag\': permanente Tagesansicht
+		\n\t* \'Nacht\': permanente Nachtansicht
+		\n\t* \'Umgebungslicht-Sensor\': automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)
 	</string>
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
 	<string name="tip_osm_improve_t">OsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann direkt zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte erstellen.

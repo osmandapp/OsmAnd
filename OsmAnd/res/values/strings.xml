@@ -892,9 +892,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_rotation_switching">Map Orientation</string>
 	<string name="tip_rotation_switching_t_v2">You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
 		\n\nThe choices are:
-		\n\t* 'Don\'t rotate (north is up)\': Map will not be rotated. North will be always up
-		\n\t* 'To direction of movement\': Map will continuously be aligned with your heading
-		\n\t* 'To compass\': Map will continuously be aligned with the device\'s compass reading
+		\n\t*\'Don\'t rotate (north is up)\': Map will not be rotated. North will be always up
+		\n\t*\'To direction of movement\': Map will continuously be aligned with your heading
+		\n\t* \'To compass\': Map will continuously be aligned with the device\'s compass reading
 	</string>
 	<string name="binary_map_download_success">Download successful.
 		\n\t\n\tTo use activate \'Menu\' → \'Map layers\' → \'Map source&#8230;\' → \'Offline vector maps\'.
@@ -903,10 +903,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_day_night_mode_t_v2">The map appearance can for offline vector maps be changed between day (brighter) and night (darker). Night colors are safer and more comfortable for night driving.
 		\n\nYou can set a policy for day/night switching in \'Menu\' → \'Configure screen\' → \'Day/night map\'.
 		\n\nThe choices are:
-		\n\t* 'Sunrise/Sunset\': automatic mode, controlled by the position of the sun (default)
-		\n\t* 'Day\': always use day mode
-		\n\t* 'Night\': always use night mode
-		\n\t* 'Light sensor\': map appearance is controlled by the device\'s light sensor (only if equipped)
+		\n\t*\'Sunrise/Sunset\': automatic mode, controlled by the position of the sun (default)
+		\n\t*\'Day\': always use day mode
+		\n\t*\'Night\': always use night mode
+		\n\t*\'Light sensor\': map appearance is controlled by the device\'s light sensor (only if equipped)
 	</string>	
 	<string name="tip_osm_improve">Improving OSM Data</string>
 	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can create and upload new POI or OSM bug reports with just a few clicks.
