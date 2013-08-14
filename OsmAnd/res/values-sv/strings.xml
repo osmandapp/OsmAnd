@@ -47,7 +47,7 @@
 <string name="avoid_in_routing_descr">Undvik motorvägar, betalvägar, oasfalterade vägar, färjor</string>
 <string name="map_widget_show_ruler">Linjal</string>
 <string name="map_widget_appearance">Övrigt:</string>
-<string name="map_widget_view_direction">Visningsriktning</string>
+<string name="map_widget_view_direction">Körriktning</string>
 <string name="map_widget_transparent">Genomskinligt skal</string>
 <string name="monitoring_mode_off">Spela in GPX</string>
 <string name="monitoring_mode_on">Stoppa\n GPX-insp.</string>
@@ -265,7 +265,12 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="play_commands_of_currently_selected_voice">Spela upp kommandon med aktuell röst</string>
 <string name="test_voice_prompts">Test av röstmeddelanden</string>
 <string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan ladda ner en i Inställningar (Datahantering) eller byta till online-kartor.</string>
-<string name="tip_recent_changes_0_7_2_t">Förändringar i 0.7.2:↵\n→- Inbyggd rendering för alla enheter↵\n→- Offline POI-redigering↵\n→- Tillgänglighet↵\n→- Massor av buggfixar</string>
+<string name="tip_recent_changes_0_7_2_t">Förändringar i 0.7.2:
+\n\t- Inbyggd rendering för alla enheter
+\n\t- Offline POI-redigering
+\n\t- Tillgänglighet
+\n\t- Massor av buggfixar
+	</string>
 <string name="osmand_long_description_1000_chars">
 		" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar i valfri mapp) - Kompakta offline-vektorkartor för hela världen finns - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för korta sträckor (experimentell) - Bil-, cykel- och fotgängalägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar av denna gratisversion av OsmAnd: - Antal nedladdningar av kartor är begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "
 	</string>
@@ -298,17 +303,18 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="use_fluorescent_overlays_descr">Använd fluorescerande färger för att visa spår och rutter</string>
 <string name="offline_edition">Offline-redigering</string>
 <string name="offline_edition_descr">Använd alltid offline-redigering</string>
-<string name="tip_recent_changes_0_7_1_t">"Förändringar i 0.7.1:
+<string name="tip_recent_changes_0_7_1_t">Förändringar i 0.7.1:
 \n\t- Offline POI-redigering
-\n\t- Live Tracking alternativ - skicka koordinater till webbtjänst regelbundet (läs om hur du konfigurerar din egen webbtjänst HowTo artiklar)
+\n\t- Live Tracking alternativ - skicka koordinater till webbtjänst regelbundet (läs om hur du konfigurerar din egen webbtjänst HowTo-artiklar)
 \n\t- Visa för närvarande in spår på kartan
 \n\t- Riktning upptäckt: \'Gör U-sväng\' anges och meddelas när rubrik i motsatt riktning eller efter saknade en sväng
 \n\t- New röstmeddelande \'Route räknas\'
 \n\t- Optisk indikering av en förestående sväng inom 100m från diretion pil ändrar färg
 \n\t- Aktualitet även om deaktiverade indexfiler nu visas på Download skärm i mörkgrönt och mörkblått
-\n\t- Övriga förändringar "</string>
+\n\t- Övriga förändringar
+	</string>
 <string name="update_poi_does_not_change_indexes">POI-förändringar inom programmet påverkar inte nedladdade kartfiler; förändringar sparas till en lokal fil istället.</string>
-<string name="local_openstreetmap_uploading">Laddar upp…</string>
+<string name="local_openstreetmap_uploading">Laddar upp …</string>
 <string name="local_openstreetmap_were_uploaded">{0} POI/buggar laddades upp</string>
 <string name="local_openstreetmap_uploadall">Ladda upp alla</string>
 <string name="local_openstreetmap_show">Visa på karta</string>
@@ -345,8 +351,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="index_name_oceania">Oceanien</string>
 <string name="index_name_other">Hela världen och ämneskartor</string>
 <string name="index_name_wiki">Wikipedia</string>
-<string name="index_name_voice">Röstpaket (inspelat)</string>
-<string name="index_name_tts_voice">Röstpaket (TTS)</string>
+<string name="index_name_voice">Röstpaket (inspelat, begränsad funktion)</string>
+<string name="index_name_tts_voice">Röstpaket (TTS, rekommenderas)</string>
 <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
 <string name="amenity_type_user_defined">Användardefinierat</string>
 <string name="fav_export_confirmation">En fil med tidigare exporterade favoriter finns redan. Vill du ersätta den?</string>
@@ -366,10 +372,15 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="osmand_service">Vilolägesfunktionalitet</string>
 <string name="osmand_service_descr">Används för att köra OsmAnd medan skärmen är avstängd</string>
 <string name="tip_rotation_switching">Kartorientering</string>
-<string name="tip_rotation_switching_t_v2">\tDu kan växla mellan om och hur kartbilden roteras genom att upprepade gånger klicka på kartskärmens kompassikon.
-\n\tAlternativen är:
-\n\t\'Norr uppåt (vrid inte kartan)\'- Kartan roteras inte. Norr är alltid uppåt.\n\t\'I körriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.\n\t\'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt till enhetens kompassläsning.</string>
-<string name="binary_map_download_success">Hämtades utan problem.\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera vy\' -&gt; \'Kartkälla …\' -&gt; \'Offline vektorkartor\'.</string>
+<string name="tip_rotation_switching_t_v2">Du kan växla mellan om och hur kartbilden roteras genom att upprepade gånger klicka på kartskärmens kompassikon.
+		\n\nAlternativen är:
+		\n\t*'Norr uppåt (vrid inte kartan)\'- Kartan roteras inte. Norr är alltid uppåt.
+		\n\t*'I körriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.
+		\n\t*'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt till enhetens kompassläsning.
+	</string>
+<string name="binary_map_download_success">Hämtades utan problem.
+		\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera vy\' -&gt; \'Kartkälla …\' -&gt; \'Offline vektorkartor\'.
+	</string>
 <string name="tip_day_night_mode">Dag-/Nattläge</string>
 <string name="tip_osm_improve">Förbättrar OSM-data</string>
 <string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (ledigt: %2$s).</string>
@@ -399,8 +410,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="city_type_town">Stad</string>
 <string name="city_type_city">Större stad</string>
 <string name="layer_poi_label">POI-etiketter</string>
-<string name="animate_route_off">Stoppa animeringen</string>
-<string name="animate_route">Starta animeringen</string>
+<string name="animate_route_off">Stoppa simuleringen</string>
+<string name="animate_route">Starta simuleringen</string>
 <string name="file_can_not_be_renamed">Filen kan inte döpas om.</string>
 <string name="file_with_name_already_exists">En fil med det namnet finns redan.</string>
 <string name="gpx_navigation">GPX-rutt</string>
@@ -413,19 +424,19 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="map_version_changed_info">Servern innehåller kartfiler som inte är kompatibla med din nuvarande version av programmet. För att ladda ner och använda dem bör du uppgradera programmet till en nyare version.</string>
 <string name="local_index_mi_rename">Byt namn</string>
 <string name="show_gpx_route">Visa på karta</string>
-<string name="search_position_current_location_search">Söker plats…</string>
+<string name="search_position_current_location_search">Söker plats …</string>
 <string name="search_position_current_location_found">Plats (hittad)</string>
-<string name="search_position_address">Adress…</string>
-<string name="search_position_favorites">Favoriter…</string>
+<string name="search_position_address">Adress …</string>
+<string name="search_position_favorites">Favoriter …</string>
 <string name="search_position_undefined">Odefinierad</string>
 <string name="search_position_fixed">Fast</string>
-<string name="search_position_current_location">Nuvarande position…</string>
+<string name="search_position_current_location">Nuvarande position …</string>
 <string name="search_position_map_view">Senaste kartvyn</string>
 <string name="select_search_position">Sök nära:</string>
 <string name="context_menu_item_search">Sök i närheten</string>
 <string name="save_route_dialog_title">Spara rutt som GPX-spår</string>
 <string name="route_successfully_saved_at">Rutten sparades som \'%1$s\'.</string>
-<string name="filename_input">"Filnamn: "</string>
+<string name="filename_input">Filnamn: </string>
 <string name="file_with_name_already_exist">En fil med samma namn finns redan.</string>
 <string name="default_buttons_save">Spara</string>
 <string name="menu_save_directions">Spara vägbeskrivningar</string>
@@ -446,8 +457,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="basemap_missing">Basvärldskarta (som omfattar hela världen i låg inzoomning) saknas. Hämta gärna World_basemap_x.obf för en komplett miljö.</string>
 <string name="vector_data_missing">Offline-data saknas på SD-kortet. Det kan vara klokt att ladda ner detta för att kunna använda kartor offline.</string>
 <string name="local_index_gpx_info_show">\n\nTryck och håll för alternativ</string>
-<string name="local_index_gpx_info_speed">\nSnitthastighet: %1$s
-\nMaxhastighet: %2$s</string>
+<string name="local_index_gpx_info_speed">\nSnitthastighet: %1$s\nMaxhastighet: %2$s</string>
 <string name="local_index_installed">Utgåva</string>
 <string name="local_index_items_backuped">%1$d av %2$d post(er) har inaktiveras utan problem.</string>
 <string name="local_index_items_deleted">%1$d av %2$d post(er) har tagits bort utan problem.</string>
@@ -499,17 +509,17 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="overlay_transparency">Överläggstransparens</string>
 <string name="map_transparency_descr">Ändra transparens för baskartan</string>
 <string name="map_transparency">Transparens för baskartan</string>
-<string name="layer_underlay">Underläggskarta…</string>
+<string name="layer_underlay">Underläggskarta …</string>
 <string name="map_underlay">Underläggskarta</string>
 <string name="map_underlay_descr">Välj underläggskarta</string>
-<string name="layer_overlay">Överläggskarta…</string>
+<string name="layer_overlay">Överläggskarta …</string>
 <string name="default_none">Inga</string>
 <string name="map_overlay">Överläggskarta</string>
 <string name="map_overlay_descr">Välj överläggskarta</string>
 <string name="tile_source_already_installed">Kartan är redan installerad; inställningarna kommer att uppdateras</string>
 <string name="select_tile_source_to_install">Välj kartor/kartrutor att installera eller uppdatera</string>
 <string name="internet_not_available">Internetanslutning krävs för åtgärden men är inte tillgänglig</string>
-<string name="install_more">Installera fler…</string>
+<string name="install_more">Installera fler …</string>
 <string name="level_to_switch_vector_raster_descr">Minsta zoomnivå för att använda vektorkartor</string>
 <string name="level_to_switch_vector_raster">Minsta vektor-zoomnivå</string>
 <string name="tip_location_sharing">Platsdelning</string>
@@ -582,7 +592,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="poi_filter_for_tourists">För turister</string>
 <string name="poi_filter_fuel">Bränsle</string>
 <string name="poi_filter_namefinder">Online namn-sökare</string>
-<string name="reading_cached_tiles">Läser cachade kartbitar…</string>
+<string name="reading_cached_tiles">Läser cachade kartbitar …</string>
 <string name="version_index_is_big_for_memory">Index \"{0}\" fick inte plats i minnet</string>
 <string name="version_index_is_not_supported">Denna version av indexet \"{0}\" stöds inte</string>
 <string name="use_osmand_routing_service">OsmAnd-navigering &gt;20km</string>
@@ -616,11 +626,11 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="application_dir_change_warning">Ändring av lagringskatalogen flyttar inte eller tar bort data. Detta måste utföras separat och utanför OsmAnd. Fortsätta ändå?</string>
 	<string name="osmand_net_previously_installed">En tidigare OsmAnd-version är installerad. Alla offline-data kommer att stödjas av den nya appen. Men favoritpunkter bör exporteras från den gamla appen och senare importeras i den nya.</string>
 	<string name="build_installed">Bygge {0} installerades korrekt ({1}).</string>
-	<string name="downloading_build">Laddar ner bygge …</string>
+	<string name="downloading_build">Laddar ner kompilering …</string>
 	<string name="install_selected_build">Vill du installera OsmAnd - {0} från {1}{2} MB?</string>
 	<string name="loading_builds_failed">Hämtar en lista över misslyckade OsmAnd-byggen</string>
-	<string name="loading_builds">Laddar OsmAnd-byggen…</string>
-	<string name="select_build_to_install">Välj ett OsmAnd-bygge att installera</string>
+	<string name="loading_builds">Laddar OsmAnd-kompileringar …</string>
+	<string name="select_build_to_install">Välj en OsmAnd-kompilering att installera</string>
 	<string name="contribution_activity">Särskild aktivitet för bidragsversionen</string>
 	<string name="gps_status_app_not_found">Appen GPS-status är inte installerad. Vill du söka på Play Butik?</string>
 	<string name="voice_is_not_available_msg">Röstvägledning är inte tillgänglig. Gå till inställningar, välj önskat röstdatapaket och hämta det.</string>
@@ -677,7 +687,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="no_vector_map_loaded">Vektorkartorna laddades inte</string>
 	<string name="map_route_by_gpx">Navigera med GPX</string>
 	<string name="gpx_files_not_found">GPX-filerna hittades inte i katalogen /tracks</string>
-	<string name="layer_gpx_layer">GPX-spår…</string>
+	<string name="layer_gpx_layer">GPX-spår …</string>
 	<string name="error_reading_gpx">Fel vid läsning av GPX-data</string>
 	<string name="vector_data">Offline vektorkartor</string>
 	<string name="transport_context_menu">Sök transport vid stopp</string>
@@ -708,9 +718,9 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="layer_favorites">Favoriter</string>
 	<string name="layer_osm_bugs">OSM-buggar</string>
 	<string name="layer_transport">Hållplatser</string>
-	<string name="layer_poi">POI…</string>
-	<string name="layer_map">Kartkälla…</string>
-	<string name="menu_layers">Definiera vy</string>
+	<string name="layer_poi">POI …</string>
+	<string name="layer_map">Kartkälla …</string>
+	<string name="menu_layers">Kartlager</string>
 	<string name="context_menu_item_search_poi">Sök POI</string>
 	
 	<string name="use_trackball_descr">Använd styrkulan för att flytta kartan</string>
@@ -737,12 +747,14 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="menu_mute_on">Ljudet är av</string>
 	<string name="voice_provider_descr">Välj röstvägledning för navigering</string>
 	<string name="tip_location_sharing_t">"\tDu kan dela med dig av intressanta platser på din resa med familj eller vänner.\n\tFör att dela med dig av en plats behöver du:\n\tAnvänd \'Kartans snabbmeny\'-&gt;\'Dela plats\'-menyn.\n\tVälj sedan ett sätt att dela med dig av din plats. Alternativen är: e-post, SMS, eller bara kopiera koordinaterna till Urklipp. "</string>
-	<string name="tip_favorites_t">\tPlatser som du använder ofta kan sparas som favoriter.\n\tOm du vill spara en plats som favorit gå till kartans snabbmeny, välj \"Lägg till i favoriter\" och ange sedan ett namn för den. När du har sparat en favorit, är den tillgänglig via \'Huvudfönster\' -&gt; \'Favoriter\'.\n\tLångt tryck på en favorit i menyn \'Favoriter\' innehåller alternativ för att ställa in den som destination, redigera eller ta bort den.\n\tOm du vill visa alla favoritpunkter direkt på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Definiera vy\' på kartskärmen.</string>
+	<string name="tip_favorites_t">\tPlatser som du använder ofta kan sparas som favoriter:
+\n\tOm du vill spara en plats som favorit gå till kartans snabbmeny, välj \"Lägg till i favoriter\" och ange sedan ett namn för den. När du har sparat en favorit, är den tillgänglig via \'Huvudfönster\' -&gt; \'Favoriter\'.\n\tLångt tryck på en favorit i menyn \'Favoriter\' innehåller alternativ för att ställa in den som destination, redigera eller ta bort den.\n\tOm du vill visa alla favoritpunkter direkt på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Definiera vy\' på kartskärmen.
+	</string>
 	<string name="voice_provider">Röstvägledning</string>
 	<string name="voice_data_initializing">Initierar röstdata …</string>
 	<string name="voice_data_not_supported">Version som inte stöds av röstdata</string>
 	<string name="voice_data_corrupted">Specificerade röstdata är skadade</string>
-	<string name="voice_data_unavailable">Valda röstdata  är inte tillgängliga</string>
+	<string name="voice_data_unavailable">Valda röstdata är inte tillgängliga</string>
 	
 	<string name="sd_unmounted">SD-kortet är inte tillgängligt.\nDu kommer inte att kunna se kartor eller hitta saker.</string>
 	<string name="sd_mounted_ro">SD-kortet är skrivskyddat.\nDu kan bara se den förinstallerade kartan och kan inte ladda ner från Internet.</string>
@@ -756,7 +768,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="route_tu">Gör en U-sväng och kör</string>
 	<string name="first_time_continue">Senare</string>
 	<string name="first_time_download">Ladda ner regioner</string>
-	<string name="search_poi_location">Söker efter signal…</string>
+	<string name="search_poi_location">Söker efter signal …</string>
 	<string name="search_near_map">Sök i närheten av förra platsen på kartan</string>
 	<string name="search_nearby">Sök i närheten</string>
 	<string name="map_orientation_default">Samma som enheten</string>
@@ -796,10 +808,10 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="clear_all">Ta bort alla</string>
 	<string name="history">Historik</string>
 	<string name="uploading_data">Laddar upp data …</string>
-	<string name="uploading">Laddar upp…</string>
+	<string name="uploading">Laddar upp …</string>
 	<string name="search_nothing_found">Hittar ingenting</string>
-	<string name="searching">Söker…</string>
-	<string name="searching_address">Söker adress…</string>
+	<string name="searching">Söker …</string>
+	<string name="searching_address">Söker adress …</string>
 	<string name="hint_search_online">Husnummer, gata, stad</string>
 	<string name="search_offline_address">Offline</string>
 	<string name="max_level_download_tile_descr">Välj högsta zoomnivå att ladda ner för online-kartbitar</string>
@@ -829,14 +841,14 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="search_online_address">Internet</string>
 	<string name="update_existing">Ersätt</string>
 	<string name="follow">Följ</string>
-	<string name="mark_final_location_first">Välj först en destination</string>
+	<string name="mark_final_location_first">Välj en destination först</string>
 	<string name="show_gps_status">Visa GPS-status</string>
 	<string name="opening_hours">Öppettider</string>
-	<string name="loading_poi_obj">Laddar POI…</string>
-	<string name="loading_streets_buildings">Laddar gator/byggnader…</string>
-	<string name="loading_postcodes">Laddar postnummer…</string>
-	<string name="loading_streets">Laddar gator…</string>
-	<string name="loading_cities">Laddar städer…</string>
+	<string name="loading_poi_obj">Laddar POI …</string>
+	<string name="loading_streets_buildings">Laddar gator/byggnader …</string>
+	<string name="loading_postcodes">Laddar postnummer …</string>
+	<string name="loading_streets">Laddar gator …</string>
+	<string name="loading_cities">Laddar städer …</string>
 	<string name="poi">POI</string>
 	<string name="arrived_at_destination">Du har anlänt till din destination</string>
 	<string name="close">Stäng</string>
@@ -982,7 +994,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="auth_failed">Åtkomst nekades</string>
 	<string name="failed_op">misslyckades</string>
 	<string name="converting_names">Konverterar inhemska/engelska namn…</string>
-	<string name="loading">Laddar…</string>
+	<string name="loading">Laddar …</string>
 	<string name="error_occurred_saving_gpx">Ett fel uppstod när GPX sparades</string>
 	<string name="error_calculating_route">Fel vid ruttberäkningen</string>
 	<string name="error_calculating_route_occured">Ett fel uppstod vid ruttberäkningen</string>
@@ -991,7 +1003,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="invalid_locations">Koordinaterna är ogiltiga!</string>
 	<string name="go_back_to_osmand">Tillbaka till OsmAnd-kartan</string>
 	<string name="previous_run_crashed">Den senaste körningen av OsmAnd kraschade. Loggen finns i {0}. Rapportera felet och bifoga gärna loggfilen.</string>
-	<string name="saving_gpx_tracks">Sparar GPX-spår till SD-kortet…</string>
+	<string name="saving_gpx_tracks">Sparar GPX-spår till SD-kortet …</string>
 	<string name="finished_task">Slutförd</string>
 	<string name="reload_indexes_descr">Läs om vektorkartor och data från SD-kortet</string>
 	<string name="reload_indexes">Läs om offlinedata</string>
@@ -1093,8 +1105,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="map_widget_gps_info">GPS-info</string>
     <string name="osmand_play_title_30_chars">OsmAnd kartor &amp; navigering</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kartor &amp; navigering</string>
-	<string name="opening_changeset">Öppnar changeset…</string>
-	<string name="closing_changeset">Stänger changeset…</string>
+	<string name="opening_changeset">Öppnar changeset …</string>
+	<string name="closing_changeset">Stänger changeset …</string>
 	<string name="use_magnetic_sensor">Använd magnetisk sensor (kompass)</string>
     <string name="other_location">Annan</string>
     <string name="files_limit">%1$d filer kvar</string>
@@ -1123,7 +1135,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="local_openstreetmap_act_title">OSM-modifieringar</string>
     <string name="default_buttons_other_actions">Andra åtgärder</string>
     <string name="save_current_track_widget">Spara
-\n aktuellt GPX-spår</string>
+    \n aktuellt GPX-spår</string>
 	<string name="tip_recent_changes_1_1_4_t">"Förändringar i 1.1.4: ↵\n→* Nytt gränssnitt↵\n→* Buggfixar  "</string>
     <string name="local_indexes_cat_srtm">Höjdkurvsdata</string>
     <string name="route_head">Riktning</string>
@@ -1150,7 +1162,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="plugin_distance_point">Punkt</string>
     <string name="gpx_file_name">GPX-filnamn</string>
     <string name="gpx_saved_sucessfully">GPX-filen sparades utan problem till {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Skapa vägar (eller andvänd/modifiera befintliga GPX-filer) för att mäta avståndet mellan punkter. Spara som GPX; kan användas för att planera GPX-rutter.</string>
+    <string name="osmand_distance_planning_plugin_description">Skapa vägar (eller använd/modifiera befintliga GPX-filer) för att mäta avståndet mellan punkter. Spara som GPX; kan användas för att planera GPX-rutter.</string>
     <string name="osmand_distance_planning_plugin_name">Avståndskalkylator &amp; planeringsverktyg</string>
     <string name="use_distance_measurement_help">* Peta för att markera en punkt\n* Tryck och håll på kartan för att ta bort en tidigare punkt.\n* Tryck och håll på punkt för att visa den och lägga till en beskrivning.\n* Peta på mät-widgeten för att se fler åtgärder.</string>
     <string name="default_buttons_do_not_show_again">Visa inte nästa gång</string>
