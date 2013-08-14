@@ -561,9 +561,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\nTo download maps go to \'Settings\' → \'Data Management\' → \'Download offline data\'.
 		\n\nAfter the global region list is retrieved from the internet, click on any entry to download or update a file. Please note the file type selector near the top of the screen to select the type of download you want (regular maps, hillshade overlays, etc.).
 		\n\nYou can filter the region list by typing some letters, or you may select the option \'Settings\' → \'Filter downloaded\' to see updates only for the data already on your device.
-		\n\n\t*Entries in \'green\' indicate data files identical on device and server
-		\n\t*Entries in \'blue\' indicate available updates on server
-		\n\t*Entries in italic font indicate data de-activated on the device
+		\n\n\t* Entries in \'green\' indicate data files identical on device and server
+		\n\t* Entries in \'blue\' indicate available updates on server
+		\n\t* Entries in italic font indicate data de-activated on the device
 	</string>
 	<string name="filterpoi_activity">Create POI filter</string>
 	<string name="recalculate_route_to_your_location">Transport mode:</string>
@@ -892,8 +892,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_rotation_switching">Map Orientation</string>
 	<string name="tip_rotation_switching_t_v2">You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
 		\n\nThe choices are:
-		\n\t*\'Don\'t rotate (north is up)\': Map will not be rotated. North will be always up
-		\n\t*\'To direction of movement\': Map will continuously be aligned with your heading
+		\n\t* \'Don\'t rotate (north is up)\': Map will not be rotated. North will be always up
+		\n\t* \'To direction of movement\': Map will continuously be aligned with your heading
 		\n\t* \'To compass\': Map will continuously be aligned with the device\'s compass reading
 	</string>
 	<string name="binary_map_download_success">Download successful.
@@ -903,10 +903,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_day_night_mode_t_v2">The map appearance can for offline vector maps be changed between day (brighter) and night (darker). Night colors are safer and more comfortable for night driving.
 		\n\nYou can set a policy for day/night switching in \'Menu\' → \'Configure screen\' → \'Day/night map\'.
 		\n\nThe choices are:
-		\n\t*\'Sunrise/Sunset\': automatic mode, controlled by the position of the sun (default)
-		\n\t*\'Day\': always use day mode
-		\n\t*\'Night\': always use night mode
-		\n\t*\'Light sensor\': map appearance is controlled by the device\'s light sensor (only if equipped)
+		\n\t* \'Sunrise/Sunset\': automatic mode, controlled by the position of the sun (default)
+		\n\t* \'Day\': always use day mode
+		\n\t* \'Night\': always use night mode
+		\n\t* \'Light sensor\': map appearance is controlled by the device\'s light sensor (only if equipped)
 	</string>	
 	<string name="tip_osm_improve">Improving OSM Data</string>
 	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can create and upload new POI or OSM bug reports with just a few clicks.
@@ -1050,7 +1050,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_text_size">Map font size</string>
 	<string name="trace_rendering">Rendering debug info</string>
 	<string name="trace_rendering_descr">Display rendering performance</string>
-	<string name="tip_recent_changes">Recent changes</string>
+	<string name="tip_recent_changes">Recent Changes</string>
 	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6: 
 		\n\t- Text To Speech engine for voice navigation
 		\n\t- Make map renderer more detailed
@@ -1094,7 +1094,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="install_more">Install more&#8230;</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
-	<string name="tip_location_sharing">Share a location</string>
+	<string name="tip_location_sharing">Share a Location</string>
 	<string name="tip_location_sharing_t">You can share the location of interesting places on your trip with family or friends via the \'Use location\' context menu → \'Share location\'.
 		\n\nThen chose a way to share your location. The choices are: E-Mail, SMS(text), or just copy the location coordinates to the device clipboard.
 	</string>
