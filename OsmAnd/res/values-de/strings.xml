@@ -22,7 +22,7 @@
 	<string name="dist_control_start">Start</string>
 	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
-	<string name="tip_altitude_offset">Höhenangaben - Offset Korrektur</string>
+	<string name="tip_altitude_offset">Höhenangaben (Offset)</string>
 	<string name="tip_altitude_offset_t">Die meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
 		\n\nEine bessere Näherung für lokale Systeme ist das EGM96-System.
 		\n\nOsmAnd zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korrekturdatei unter \'Einstellungen\' → \'Daten Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
@@ -547,7 +547,7 @@
 	<string name="select_tile_source_to_install">Kartenauswahl (Installation oder Aktualisierung)</string>
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
 	<string name="install_more">Weitere installieren…</string>
-	<string name="tip_update_index">Aktualisierung der Offline-Karten</string>
+	<string name="tip_update_index">Offline-Karten</string>
 	<string name="tip_update_index_t">Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und ide Offline-Navigation. OsmAnd hat einen Daten-Manager für das Herunterladen von Offline-Karten (und einigen anderen Offline-Daten), und zur Aktualisierung derselben.
 		\n\nDas Herunterladen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Herunterladen…\'.
 		\n\nNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Bitte beachten Sie die Dateityp-Auswahloption am oberen Ende des Bildschirms, wählen Sie dort die gewünschte Datei-Kategorie (Reguläre Karten, Relief-Overlay, etc.)
@@ -597,7 +597,7 @@
 		\n\t* mittels Ihrer Favoriten
 		\n\nEin Kontextmenü für jeden Treffer einer Ergebnisliste bietet Optionen wie \'Navigation\' oder \'Auf Karte zeigen\'.
 	</string>
-	<string name="tip_map_context_menu">\'Verwende Position\'-Kontextmenü</string>
+	<string name="tip_map_context_menu">\'Verwende Position\'</string>
 	<string name="tip_map_context_menu_t">Das \'Verwende Position\'-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.
 		\n\nEs wird über ein langes Drücken auf einen Punkt in der Karte (dann Anklicken des Positionsmarkers), durch das Drücken des Trackball-Knopfes in der Kartenansicht, oder via \'Menü\' → \'Verwende Position\' aufgerufen (die letzten beiden Methoden beziehen sich auf den Kartenmittelpunkt).
 		\n\nLanges Drücken auf einen Positionsmarker entfernt diesen wieder.
