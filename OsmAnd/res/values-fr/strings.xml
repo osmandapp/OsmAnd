@@ -1319,4 +1319,5 @@
     <string name="local_index_tile_data_expire">Expire (minutes): %1$s</string>
     <string name="local_index_tile_data_downloadable">Téléchargeable: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom maximum: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Zoom minimum: %1$s</string>
     </resources>
