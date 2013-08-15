@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Išči</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
 	<string name="settings_Button">Nastavitve</string>
 	<string name="favorites_Button">Priljubljene</string>
@@ -327,7 +328,7 @@
 	<string name="snap_to_road">Pripni na cesto</string>
 	<string name="osmand_short_description_80_chars">OsmAnd je odprtokodna navigacijska aplikacija z offline in online zemljevidi</string>
 	<string name="osmand_plus_short_description_80_chars">OsmAnd je odprtokodna navigacijska aplikacija z offline in online zemljevidi</string>
-	<string name="tip_update_index">Posodobitev podatkov brez povezave</string>
+	<string name="tip_update_index">Posodobitev map brez povezave</string>
 	<string name="filterpoi_activity">Ustvari POI filter</string>
 	<string name="recalculate_route_to_your_location">Način prevoza:</string>
 	<string name="select_navigation_mode">Izberi način prevoza</string>
@@ -410,7 +411,9 @@
 	<string name="level_to_switch_vector_raster_descr">Najnižja povečava za uporabo vektorskih zemljevidov</string>
 	<string name="level_to_switch_vector_raster">Min. povečava za vektorske zemljevide</string>
 	<string name="tip_location_sharing">Deljenje mesta</string>
-	<string name="tip_location_sharing_t">"\tDelite lahko mesto zanimivih krajev na vašem potovanju z družino ali prijatelji.\n\tZa delitev mesta:\n\tUporabi  \'Kontekstni meni karte\' -&gt; Meni \'Skupna raba mesta\'.\n\tNato izberite način, za deljenje svojega mesta. Izbire so: e-pošta, SMS (besedilo), ali pa samo kopiranje koordinat mesta v odlagališče. "</string>
+	<string name="tip_location_sharing_t">Delite lahko mesto zanimivih krajev na vašem potovanju z družino ali prijatelji z uporabo kontekstnega menija \'Uporaba lokacije\' → \'Delitev lokacije\'.
+		\n\nNato izberite način, za delitev svoje lokacije. Izbire so: e-pošta, SMS (besedilo), ali pa samo kopiranje koordinat mesta v odlagališče.
+	</string>
 	<string name="tip_favorites">Priljubljene lokacije</string>
 	<string name="tip_recent_changes_1_0_0_t">Spremembe v 1.0.0:
 	\n\t* Izboljšano usmerjanje: hitrejše in natančnejše, do 250 km
@@ -566,25 +569,29 @@
     <string name="amenity_type_sustenance">Prehrana</string>
 	<string name="amenity_type_manmade">Zgradbe</string>
 	<string name="send_location_sms_pattern">Mesto: %1$s\n%2$s</string>
-	<string name="tip_initial_t">"\tOsmAnd je navigacijska aplikacija s številnimi funkcijami.\n\tKot osnovna predstavitev so nekateri nasveti in triki povezani na glavnem zaslonu (glejte ikono \"?\"). "</string>
+	<string name="tip_initial_t">OsmAnd je navigacijska aplikacija s številnimi funkcijami.
+		\n\nZa osnovno predstavitev so nekateri nasveti in triki v povezavi \'Meni\' → \'Nasveti\' na zaslonu zemljevida.
+	</string>
 	<string name="next_button">Naprej</string>
 	<string name="previous_button">Nazaj</string>
 	<string name="tip_initial">Nasveti in triki</string>
 	<string name="tip_search">Iskanje</string>
 	<string name="tip_rotation_switching">Usmerjenost zemljevida</string>
 	<string name="rotate_map_to_bearing">Usmerjenost zemljevida</string>
-	<string name="tip_rotation_switching_t_v2">\tZ večkratnim klikom na sliki kompasa lahko določite, kako se obrača zemljevid na zaslonu.
-	\n\tMožnosti so:
-	\n\t\'Brez obračanja (sever je gor)\' - Zemljevid ne bo obračan. Sever bo vedno proti sthu zaslona.
-	\n\t\'V smeri gibanja\' - Zemljevid bo stalno usmerjen z smerjo premikanja.
-	\n\t\'Po kompasu\' - Zemljevid bo stalno usmerjen po kompasu naprave torej poravnan z okolico.
+	<string name="tip_rotation_switching_t_v2">Z večkratnim klikom na sliki kompasa lahko določite, kako se obrača zemljevid na zaslonu.
+	\n\nMožnosti so:
+	\n\t\* 'Brez obračanja (sever je gor)\': Zemljevid ne bo obračan. Sever bo vedno proti sthu zaslona.
+	\n\t\* 'V smeri gibanja\': Zemljevid bo stalno usmerjen z smerjo premikanja.
+	\n\t\* 'Po kompasu\': Zemljevid bo stalno usmerjen po kompasu naprave torej poravnan z okolico.
 	</string>
-	<string name="tip_update_index_t">\tPosodabljanje zemljevidov je pomembno. OsmAnd nudi upravitelja prenosov, ki lahko preveri razpoložljive podatke.
-	\n\tČe želite preveriti posodobitve podatkov, pojdite na \'Nastavitve\' -&gt; \'Offline data\' -&gt; \'Prenos\'. Ko je seznam področij prenešen iz interneta, lahko izberete možnost \'Meni\' -&gt; \'Samo prenešene\', ki omeji posodobitve le na podatke, ki so že na napravi.
-	\n\tRazpoložljivost posodobitev je prikazana z naslednjimi barvami:
-	\n\t\'Zelena\' - datoteke na napravi so usklajene s strežnikom
-	\n\t\'Modra\' - na strežniku so novejši podatki
-	\n\t\'Temno zelena/modra\' - podobno, le da so podatki deaktivirani na napravi</string>
+	<string name="tip_update_index_t">Posodabljanje zemljevidov je pomembno za uporabljanje map, interesnih točk, iskanje naslovov in navigacijo brez povezave. OsmAnd nudi upravitelja prenosov s katerim lahko prenesete take zemljevide (in druge podatkovne datoteke) in preverite razpoložljive podatke.
+		\n\nZa prenos podatkov pojdite na \'Nastavitve\' → \'Upravljnje podatkov\' → \'Podatki za delo brez povezave\'.
+		\n\nPotem ko se seznam držav prenese iz interneta, kliknite na vnos za prenos ali posodobitev datoteke. Upoštevajte izbiro tipa datoteke pri vrhu zaslona, kjer izberete vrsto prenosa, ki ga želite (redni zemljevidi, prosojnica senčenje hribov, itd.).
+		\n\nLahko filtrirate seznam držav z vnosom nekaj črk, ali pa lahko izberete možnost \'Nastavitve\' → \'Filter prenosov\' za ogled posodobitev le za podatke, ki so že na napravi.
+	\n\n\t* \'Zelena\' označuje, da so datoteke na napravi enake kot na strežniku
+	\n\t* \'Modra\' da so na strežniku novejši podatki
+	\n\t* Ležeča pisava pomeni da so podatki na napravi deaktivirani
+	</string>
 	<string name="download_files_question">Prenesi {0} datotek(o) ({1} MB)?</string>
 	<string name="download_files">Prenesi</string>
 	
@@ -648,7 +655,13 @@
 	<string name="osb_close_dialog_close_button">Zapri napako</string>
 	<string name="osb_close_dialog_success">Napaka je bila uspešno zaprta</string>
 	<string name="osb_close_dialog_error">Prišlo je do napake: napaka ni bila zaprta</string>
-	<string name="tip_osm_improve_t">\tOsmAnd uporablja zemljevide, ki temeljijo na Openstreetmap.org (OSM) podatkih. Poleg gledanja zemljevida in navigacije se lahko uporabi tudi za izboljšanje kakovosti podatkov OSM. Preprosto lahko ustvarite in nalagate nove POI ali dodate OSM bug z le nekaj kliki!\n\tZa to morate najprej vnesti svoje podatke za prijavo v OSM. \'Nastavitve\' -&gt; \'Splošne nastavitve\' -&gt; \"OSM urejanje\".\n\tČe želite dodati nov POI uporabite \'Ustvari POI\' v kontekstnem meniju zemljevida. Nadaljujte z vnosom informacij o POI v pogovornem oknu \'Ustvari POI\' in na koncu pošljite podatke.\n\tNapake na zemljevidu je mogoče takoj sporočiti prek storitve OSM bug in OSM skupnost bo lažje in hitreje odpravila to napako.\n\tČe želite dodati OSM Bug uporabite možnost \'Prijavi napako OSM\' v kontekstnem meniju zemljevida. Nato vnesite podroben opis težave in na koncu objavite napako z gumbom \'Dodaj\'.\n\tVedite, da ta urejanja uporabljajo internetno povezavo.</string>
+	<string name="tip_osm_improve_t">OsmAnd uporablja zemljevide, ki temeljijo na Openstreetmap.org (OSM) podatkih in se lahko uporabi tudi za izboljšanje kakovosti podatkov OSM. Preprosto lahko ustvarite in nalagate nove POI ali dodate OSM bug z le nekaj kliki!
+		\n\nZa to morate najprej omogočiti vtičnik \'OSM urejanje\' v \'Nastavitve\' → \'Vtičniki\' in nato morate vnesti svoje podatke za prijavo v OSM v \'Nastavitve\' → \'OSM urejanje\'.
+		\n\nČe želite dodati nov POI uporabite \'Ustvari POI\' v kontekstnem meniju zemljevida. Nadaljujte z vnosom informacij o POI v pogovornem oknu \'Ustvari POI\' in na koncu pošljite podatke.
+		\n\nNapake na zemljevidu je mogoče takoj sporočiti prek storitve OSM bug in OSM skupnost bo lažje in hitreje odpravila to napako.
+		\n\nČe želite dodati OSM Bug uporabite možnost \'Prijavi napako OSM\' v kontekstnem meniju zemljevida. Nato vnesite podroben opis težave in na koncu objavite napako z gumbom \'Dodaj\'.
+		\n\nVedite, da ta urejanja uporabljajo internetno povezavo.
+	</string>
 	<string name="tip_map_context_menu">Kontekstni meni zemljevida</string>
 	<string name="tip_map_context_menu_t">"\tKontekstni meni zemljevida je na voljo z daljšim pritiskom na zemljevidu ali s pritiskom na kolešček.\n\tTo naredi okvir z izpisano koordinato. Če želite odpreti kontekstni meni, pritisnite na okvir. (Ali pa pritisnite in držite da se skrije.)\n\tKontekstni meni zemljevida vsebuje vse akcije, ki se nanašajo na točko (mesto). "</string>
 	<string name="tip_search_t">"\tIščete lahko direktno na zemljevidu ali pa po naslovu, po mestu, kot POI ali priljubljenih mestih.\n\tS pritiskom na \'Iskanje\' v glavnem meniju se odpre iskalno okno. Za vse zadetke iskanja ponuja kontekstni meni 2 možnosti: \'Nastavi kot cilj\' in \'Prikaži na zemljevidu\'. "</string>
@@ -656,7 +669,7 @@
     
     <string name="route_descr_lat_lon">Dol %1$.3f šir %2$.3f</string>
     <string name="route_descr_current_location">Trenutno mesto</string>
-    <string name="first_time_msg">Hvala, ker uporabljate OsmAnd. Za uporabo veliko zmožnosti tega programa, boste potrebovali krajevne podatke, ki jih lahko prejmete preko \'Nastavitve\'-&gt;\'Krajevni podatki\'. Potem boste lahko videli zemljevide, našli naslove, našli točke POI in našli javni prevoz.</string>    
+    <string name="first_time_msg">Hvala, ker uporabljate OsmAnd. Za uporabo veliko zmožnosti tega programa, boste potrebovali krajevne podatke, ki jih lahko prejmete preko \'Nastavitve\' → \'Krajevni podatki\'. Potem boste lahko videli zemljevide, našli naslove, našli točke POI in našli javni prevoz.</string>    
 	<string name="local_indexes_cat_tile">Spletni zemljevidi in ploščice zemljevidov</string>
 	<string name="map_online_data">Spletni zemljevidi in ploščice zemljevidov</string>
 	<string name="default_buttons_reset">Ponastavi</string>
@@ -696,7 +709,9 @@
 	<string name="index_settings">Podatki brez povezave (prenos)</string>
 	<string name="osmand_service">Zmožnost načina spanja</string>
 	<string name="osmand_service_descr">Uporabi za izvajanje OsmAnd, ko je zaslon izklopljen</string>
-	<string name="binary_map_download_success">Prejem je uspešen.\n\t\n\tZa uporabo omogočite \'Meni\'-&gt;\'Sloji zemljevida\'-&gt;\'Vir zemljevidov …\'-&gt;Nepovezani vektorski zemljevidi\'.</string>
+	<string name="binary_map_download_success">Prejem je uspešen.
+		\n\t\n\tZa uporabo omogočite \'Meni\' → \'Sloji zemljevida\' → \'Vir zemljevidov …\' → Nepovezani vektorski zemljevidi\'.
+	</string>
 	<string name="tip_day_night_mode">Način dneva/noči</string>
 	<string name="daynight_mode_auto">Sončni vzhod / zahod</string>
 	<string name="daynight_mode_day">Dnevni</string>
@@ -704,13 +719,13 @@
 	<string name="daynight_mode_sensor">Svetlobno tipalo</string>
 	<string name="daynight">Dnevni / nočni način</string>
 	<string name="daynight_descr">Izberi način preklopa za Dnevni / Nočni način</string>
-	<string name="tip_day_night_mode_t_v2">\tIzgled zemljevida se lahko za vektorske karte menja med dnevnim (svetlejšim) in nočnim (temnejšim) videzom.
-	\n\tNočne barve so varnejše za nočno vožnjo.
-	\n\tPreklop med dnevnim in nočnim načinom lahko nastavljate v \'Meni\' -&gt; \'Nastavitev zaslona …\' -&gt; \'zemljevid dan / noč\'.
-	\n\tMožnosti so:\n\t\'Sončni vzhod / zahod\' - avtomatski način glede na položaj sonca (privzeto)
-	\n\t\'Dnevni\' - vedno se uporablja dnevni način
-	\n\t\'Nočni\' - vedno se uporablja nočni način
-	\n\t\'Svetlobni senzor\' - izgled zemljevida nadzoruje svetlobno tipalo naprave (če je na voljo)
+	<string name="tip_day_night_mode_t_v2">Izgled zemljevida se lahko za vektorske karte menja med dnevnim (svetlejšim) in nočnim (temnejšim) videzom. Nočne barve so varnejše za nočno vožnjo.
+		\n\nPreklop med dnevnim in nočnim načinom lahko nastavljate v \'Meni\' → \'Nastavitev zaslona …\' → \'zemljevid dan/noč\'.
+		\n\nMožnosti so:
+		\n\t\* 'Sončni vzhod/zahod\': avtomatski način glede na položaj sonca (privzeto)
+		\n\t\* 'Dnevni\': vedno se uporablja dnevni način
+		\n\t\* 'Nočni\': vedno se uporablja nočni način
+		\n\t\* 'Svetlobni senzor\': izgled zemljevida nadzoruje svetlobno tipalo naprave (če je na voljo)
 	</string>	
 	<string name="download_files_not_enough_space">Ni dovolj razpoložljivega prostora za prejem %1$s MB(prosto: %2$s).</string>
 	<string name="download_files_question_space">Razpoložljiv prostor je sedaj {2}MB! Ali želite prejeti {0} datotek(o) ({1}MB)?</string>
@@ -768,7 +783,7 @@
 	<string name="gpx_option_reverse_route">Obratna smer GPX</string>
 	<string name="gpx_option_destination_point">Uporabi trenuten cilj</string>
 	<string name="gpx_option_from_start_point">Podaj celotno sled</string>
-	<string name="switch_to_vector_map_to_see">Za to mesto so na voljo nepovezani vektorski zemljevidi.\n\t\n\tZa njihovo uporabi omogočite \'Meni\'-&gt;\'Sloji zemljevida\'-&gt;\'Vir zemljevida …\'-&gt;\'Nepovezani vektorski zemljevidi\'.</string>
+	<string name="switch_to_vector_map_to_see">Za to mesto so na voljo vektorski zemljevidi za uporabo brez povezave.\n\t\n\tZa njihovo uporabi omogočite \'Meni\' → \'Sloji zemljevida\' → \'Vir zemljevida …\' → \'Vektorski zemljevidi za uporabo brez povezave\'.</string>
 	<string name="voice_stream_notification">Obvestilni zvok</string>
 	<string name="voice_stream_music">Zvok predstavnosti/glasbe</string>
 	<string name="warning_tile_layer_not_downloadable">Program ne more prejeti plasti zemljevida %1$s, poskusite jo ponovno namestiti.</string>
@@ -791,10 +806,10 @@
 	<string name="error_doing_search">Med nepovezanim iskanjem je prišlo do napake</string>
 	<string name="search_offline_geo_error">Ni mogoče razčleniti geo namena \'%s\'</string>
 	<string name="search_osm_offline">Iskanje naslovov z uporabo nepovezanih zemljevidov</string>
-	<string name="tip_map_switch">Vir zemljevidov</string>
-	<string name="tip_app_mode">Uporabniški profil</string>
-	<string name="tip_app_mode_t_v2">\tOsmAnd podpira različne (prilagodljive) profile programa za različne primere uporabe.
-	\n\tProfile lahko spremenite z gumbom profil v spodnjem levem kotu zaslona zemljevida (ikona avtomobila, kolesa ali pešca) ali med ustvarjanjem poti.
+	<string name="tip_map_switch">Izbira vira zemljevidov</string>
+	<string name="tip_app_mode">Uporabi profil</string>
+	<string name="tip_app_mode_t_v2">OsmAnd podpira različne (prilagodljive) profile programa za različne primere uporabe.
+		\n\nProfile lahko spremenite z gumbom profil v spodnjem levem kotu zaslona zemljevida (ikona avtomobila, kolesa ali pešca) ali med ustvarjanjem poti (\'način prevoza\').
 	</string>
 	<string name="send_location_email_pattern">Za ogled mesta sledite povezavi spletnega brskalnika %1$s ali povezavi namena android %2$s</string>
 	<string name="add_waypoint_dialog_added">GPX točka \'\'{0}\'\' je bila uspešno dodana</string>
@@ -968,9 +983,9 @@ Pomembnejše lastnosti:
 	<string name="first_time_download">Prenos območij</string>
 	<string name="search_poi_location">Iskanje znaka …</string>
 	<string name="search_near_map">Iskanje v bližini mesta zadnjega zemljevida</string>
-	<string name="tip_map_switch_t_v2">\tVir zemljevida in prikazane plasti lahko spreminjate preko \'Meni\' -&gt; \'Sloji zemljevida\' v pogledu zemljevida.
-		\n\tPod \'Vir zemljevida …\' lahko izberete med uporabo prednaloženih vektorskih zemljevidov za delo brez povezave, vnaprej določenih spletnih zemljevidov (za to aktivirajte vtičnik \'Spletni zemljevidi\'), ali ročno ustvarjenih zemljevidov z uporabo npr. OsmAndMapCreator-ja na računalniku.
-		\n\tOsmAnd podpira tudi vire po meri.
+	<string name="tip_map_switch_t_v2">Vir zemljevida in prikazane plasti lahko spreminjate preko \'Meni\' → \'Sloji zemljevida\'
+		\n\nPod \'Vir zemljevida …\' lahko izberete med uporabo prednaloženih vektorskih zemljevidov za delo brez povezave, vnaprej določenih spletnih zemljevidov (za to aktivirajte vtičnik \'Spletni zemljevidi\'), ali ročno ustvarjenih zemljevidov z uporabo npr. OsmAndMapCreator-ja na računalniku.
+		\n\nOsmAnd podpira tudi vire po meri.
 	</string>
 	<string name="fav_saved_sucessfully">Priljubljene točke uspešno shranjene v {0}</string>
 	<string name="opening_hours_not_supported">Oblika delovnega časa ni podprta za urejanje</string>
@@ -1125,10 +1140,11 @@ Pomembnejše lastnosti:
 \n\t- GPX navigation options
 \n\t- UI update and large bug fixing "</string>
 	<string name="map_widget_max_speed">Dovoljena hitrost</string>
-    <string name="tip_altitude_offset">Prikaz nadmorske višine - popravek zamika</string>
-	<string name="tip_altitude_offset_t">"\tVečina GPS sprejemnikov sporoča meritve nadmorske višine glede na WGS84 referenčni elipsoid, ki za pretvorbo v lokalen sistem zahteva lokalne popravke.
-\n\tBoljši približek tem lokalnim sistemom je referenčni sistem EGM96. OsmAnd sedaj podpira prikaz nadmorske višine tudi v sistemu EGM96.
-\n\tTo dosežete tako, da le prenesete datoteko WW15MGH.DAC prek Upravitelja podatkov (vir je na naslovu http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    <string name="tip_altitude_offset">Popravek zamika nadmorske višine</string>
+	<string name="tip_altitude_offset_t">Večina GPS sprejemnikov sporoča meritve nadmorske višine glede na WGS84 referenčni elipsoid, ki za pretvorbo v lokalen sistem zahteva lokalne popravke.
+		\n\nBoljši približek tem lokalnim sistemom je referenčni sistem EGM96.
+		\n\nOsmAnd podpira prikaz nadmorske višine tudi v sistemu EGM96 tako, da prenesete datoteko \'World Altitide Correction\' (WW15MGH.DAC) prek \'Nastavitve\' → \'Upravitelj podatkov\' (vir je na naslovu http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+	</string>
     <string name="monitoring_control_start">začni</string>
     <string name="rendering_attr_noAdminboundaries_name">Skrij upravne meje</string>
 	<string name="rendering_attr_noAdminboundaries_description">Ne prikazuj upravnih mej nivojev 5-9</string>
@@ -1136,7 +1152,7 @@ Pomembnejše lastnosti:
     <string name="osmodroid_plugin_description">Vtičnik OsMoDroid je OsmAnd razširitev za OsModroid aplikacijo za funkcije živega sledenja. Informacije o storitvi dobite na http://esya.ru.</string>
     <string name="osmodroid_plugin_name">Vtičnik OsMoDroid</string>
 	<string name="index_srtm_ele">Izohipse</string>
-    <string name="srtm_plugin_description">Ta vtičnik omogoča prenos izohips za posamezna področja in uporabo brez povezave (Podatki brez povezave (prenos) -&gt; meni -&gt; Drugi zemljevidi).</string>
+    <string name="srtm_plugin_description">Omogoča prenos izohips in senčenja hribov za uporabo brez povezave (\'Nastavitve\' → \'Upravljanje podatkov\' → \'Prenos\' → Izbira vrste mape).</string>
     <string name="srtm_plugin_name">Vtičnik Izohipse</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
     <string name="recording_context_menu_play">Predvajaj</string>
@@ -1493,4 +1509,33 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Evropa in Azija</string>
 	<string name="driving_region_uk">Velika Britanija, Indija, Avstralija in drugo</string>
-	</resources>
+	<string name="tip_map_styles">Slogi zemljevida</string>
+	<string name="about_version">Različica:</string>
+    <string name="about_settings">Vizitka</string>
+    <string name="about_settings_descr">Informacije o različici, licenci, članih projekta</string>
+    <string name="tips_and_tricks">Nasveti</string>
+    <string name="tip_recent_changes_1_6_t">Spremembe v 1.6:
+	\n\t* Določitev/urejanje vira spletnih ploščic (z navedbo časa izteka)
+    </string>
+    <string name="local_index_tile_data_zooms">Prenesene povečave: %1$s</string>
+    <string name="local_index_tile_data_expire">Potečejo v (minute): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Za prenos: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Največja povečava: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Najmanjša povečava: %1$s</string>
+    <string name="local_index_tile_data_name">Podatki ploščic: %1$s</string>
+    <string name="edit_tilesource_successfully">Izvor ploščic %1$s uspešno shranjen</string>
+    <string name="edit_tilesource_elliptic_tile">Eliptični mercator</string>
+    <string name="edit_tilesource_maxzoom">Največja povečava</string>
+    <string name="edit_tilesource_expiration_time">Poteče (minute)</string>
+    <string name="edit_tilesource_minzoom">Najmanjša povečava</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Izberite obstoječo …</string>
+    <string name="edit_tilesource_name">Ime</string>
+    <string name="maps_define_edit">Določi/Uredi …</string>
+	<string name="tip_map_styles_t">OsmAnd podpira prikazovanje vektorskih zemljevidov za uporabo brez povezave v različnih slogih, tako da ustrezajo vašim potrebam:
+		\n\nRazen \'privzetega\' sloga zemljevida, lahko v \'Meni\' → \'Nastavitve zaslona\' → \'Slog zemljevida\' zberete npr.:
+		\n\t* 
+		\n\t* 
+		\n\t*
+	</string>
+    </resources>
