@@ -1331,4 +1331,9 @@
 	<string name="osmodroid_mode_on">Arrêter OsMoDroid</string>    
     <string name="osmodroid_mode_off">Démarrer OsMoDroid</string>
     <string name="speak_title">Annonce…</string>
-	</resources>
+	<string name="speak_cameras">Annoncer les radars</string>
+	<string name="speak_traffic_warnings">Annonce les alertes de trafic</string>
+    <string name="osb_author_or_password_not_specified">Merci de spécifier votre nom d'utilisateur et mot de passe OSM dans les paramètres</string>
+    <string name="clear_intermediate_points">Effacer les points intermédiaires</string>
+    <string name="keep_intermediate_points">Garder les points intermédiaires</string>
+    </resources>
