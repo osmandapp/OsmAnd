@@ -1324,4 +1324,5 @@
     <string name="edit_tilesource_expiration_time">Expire (minutes)</string>
     <string name="edit_tilesource_minzoom">Zoom min</string>
     <string name="edit_tilesource_url_to_load">Lien</string>
-    </resources>
+    <string name="driving_region_descr">Sélectionnez la région de conduite : Etats-Unis, Europe, Angleterre, Asie et Autres</string>
+	</resources>
