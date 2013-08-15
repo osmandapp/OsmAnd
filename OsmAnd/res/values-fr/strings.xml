@@ -1325,4 +1325,5 @@
     <string name="edit_tilesource_minzoom">Zoom min</string>
     <string name="edit_tilesource_url_to_load">Lien</string>
     <string name="driving_region_descr">Sélectionnez la région de conduite : Etats-Unis, Europe, Angleterre, Asie et Autres</string>
+	<string name="driving_region">Région de conduite</string>
 	</resources>
