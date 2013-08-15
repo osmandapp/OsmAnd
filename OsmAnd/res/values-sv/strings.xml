@@ -1264,7 +1264,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="tip_map_styles">Kartutseende</string>
 	<string name="tip_map_styles_t">OsmAnd stöder visning av offline vektor-kartor i olika stilar för att passa dina behov:
 		\n\n Om inte standardutseendet duger kan du under \'Meny\' -&gt; \'Konfigurera skärm\' -&gt; \'Kartutseende\' till exempel välja
-		\n\t* Utseendet \'Turistvy\': som innehåller den mest detaljerade informationen för resenärer och turister, inklusive optimering för yrkesförare (lätt urskiljbara vägar med hög kontrast), alternativ för vandring i bergen (SAC-skala), cykelvägar, etc.
+		\n\t* \'Turistvy\': som innehåller den mest detaljerade informationen för resenärer och turister, inklusive optimering för yrkesförare (lätt urskiljbara vägar med hög kontrast), alternativ för vandring i bergen (SAC-skala), cykelvägar, etc.
 		\n\t* \'Vägar med hög kontrast\' visar vägarna med starkt markerade färger för situationer med dålig belysning
 		\n\t* \'Vinter och skidor\' skapar ett (snötäckt) vinterlandskap, och visar skidbackar och -liftar (hämta kartan \'World ski\')
 	</string>
