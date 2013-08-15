@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -49,8 +49,8 @@
   <string name="index_name_oceania">Océanie</string>
   <string name="index_name_other">Cartes mondiales et thématiques</string>
   <string name="index_name_wiki">Wikipédia Monde</string>
-  <string name="index_name_voice">Packs voix enregistrées</string>
-  <string name="index_name_tts_voice">Packs voix de synthèse</string>
+  <string name="index_name_voice">Packs voix (enregistrées, fonctions limitées)</string>
+  <string name="index_name_tts_voice">Packs voix de synthèse (synthétisé TTS, à préferer)</string>
   <string name="amenity_type_wikiosm">Wikipédia (hors ligne)</string>
   <string name="amenity_type_user_defined">Défini par l\'utilisateur</string>
   <string name="fav_export_confirmation">Un fichier de favoris précédemment exporté existe déjà. Voulez vous le remplacer ?</string>
@@ -262,7 +262,7 @@
   <string name="select_tile_source_to_install">Sélectioner les cartes à installer ou mettre à jour</string>
   <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>
   <string name="install_more">Installer plus…</string>
-  <string name="tip_update_index">Mise à jour des cartes locales</string>
+  <string name="tip_update_index">Mise à jour des cartes hors-ligne</string>
   <string name="tip_update_index_t">Il est très important d\'avoir des données cartographiques à jour. OsmAnd a un gestionnaire de téléchargements qui permet de vérifier si les cartes locales peuvent être mises à jour.
 \n\tPour vérifier les mises à jour, aller à \'Menu Principal\'-&gt;\'Paramètres\'-&gt;\'Données hors-ligne\'-&gt;\'Télécharger du contenu\'. Sélectionner l\'option \'Filtrer téléchargé\' dans le menu contextuel.
 \nLà, seules les cartes déjà téléchargées sur votre système sont affichées, avec les couleurs ou polices suivantes :
@@ -511,8 +511,7 @@
   <string name="route_head">Allez</string>
   <string name="first_time_continue">Continuer</string>
   <string name="first_time_download">Téléchargement des régions</string>
-  <string name="first_time_msg">Merci d\'avoir choisi OsmAnd.
-\nPour utiliser toutes les fonctionnalités de l\'application, vous devez avoir des index que vous pouvez télécharger (Paramètres -&gt; Données) ou préparer vous-même. Vous pourrez alors rechercher une adresse, un Point d\'Intérêt (PI), un moyen de transport.</string>
+  <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. Pour la plupart des fonctionnalités de l\'application, vous devez avoir des données accéssibles hors-ligne que vous pouvez télécharger (Paramètres -&gt; Données) ou préparer vous-même. Vous pourrez alors rechercher une adresse, un Point d\'Intérêt (PI), un moyen de transport public.</string>
   <string name="search_poi_location">Recherche d\'un signal…</string>
   <string name="search_near_map">Rechercher près du dernier emplacement</string>
   <string name="search_nearby">Rechercher à proximité</string>
@@ -984,7 +983,7 @@
 <string name="avoid_ferries">Éviter les ferries</string>
 <string name="avoid_in_routing_title">Éviter…</string>
 <string name="avoid_in_routing_descr">Éviter routes à péage, non carrossables, ferries</string>
-<string name="show_warnings_title">Afficher les alarmes</string>
+<string name="show_warnings_title">Afficher les alarmes…</string>
 <string name="show_warnings_descr">Afficher les limitations de vitesses, stops, ralentisseurs, radars et information sur les voies.</string>
 <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
 <string name="map_widget_show_ruler">Échelle</string>
@@ -1129,8 +1128,8 @@
     <string name="av_use_external_recorder_descr">Utiliser l\'application système pour les vidéos</string>
     <string name="av_use_external_recorder">Option caméra vidéo</string>
     <string name="av_settings_descr">Configurer les paramètres audio et vidéo</string>
-    <string name="av_settings">Paramètres audio/vidéo</string>
-    <string name="recording_error">"Une erreur s\'est produite lors de l\'enregistrement "</string>
+    <string name="av_settings">Paramètres audio/vidéo </string>
+    <string name="recording_error">Une erreur s\'est produite lors de l\'enregistrement </string>
     <string name="recording_camera_not_available">Caméra non disponible</string>
     <string name="recording_is_recorded">Audio/vidéo en cours d\'enregistrement. Pour l\'arrêter, appuyez sur le bouton Arrêter du gadget.</string>
     <string name="recording_playing">La note audio de l\'enregistrement spécifié est en cours de lecture.\n%1$s</string>
@@ -1286,7 +1285,7 @@
     <string name="plugin_distance_point_speed">vitesse</string>
     <string name="plugin_distance_point_ele">élévation</string>
     <string name="gpx_file_name">nom du fichier GPX</string>
-    <string name="gpx_saved_sucessfully">sauvegarde du fichier GPX à {0} réussi</string>
+    <string name="gpx_saved_sucessfully">Sauvegarde du fichier GPX à {0} réussi</string>
     <string name="osmand_distance_planning_plugin_description">Créer un chemin pour mesurer la distance entre des points, ouvrir un fichier GPX existant pour le modifier et le sauvegarder. Peut être utilisé pour préparer un itinéraire avec un fichier GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Calculatrice de Distance &amp; Outil de Planification</string>
     <string name="default_buttons_do_not_show_again">Ne plus montrer</string>
@@ -1312,4 +1311,6 @@
 	<string name="driving_region_us">Etats-Unis</string>
 	<string name="driving_region_canada">Canada</string>
 	<string name="speak_speed_limit">Annoncer les limitations de vitesses</string>
+    <string name="tip_map_styles">Styles de cartes</string>
+	<string name="about_settings">A propos</string>
     </resources>
