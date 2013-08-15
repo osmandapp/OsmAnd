@@ -388,15 +388,21 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="tip_select_destination_point">Få vägledning</string>
 <string name="tip_select_destination_point_t">"\tDu kan få vägledning till en plats direkt i kartan (snabbmenyn, sedan \'Vägledning\'), i alla sökaktiviteter, eller via långt tryck på en post i \'Lista över favoritpunkter\'.\n\tDestinationen markeras som en orange målflagga på kartan och OsmAnd visar avståndet till den och riktningen till den (orange triangel). "
 	</string>
-<string name="tip_recent_changes_0_6_9_t">Förändringar i 0.6.9: ↵\n\t- Förbättrad rendering av offlinekartor↵\n\t- Snabb inbyggd offlinerendering - titta under experimentella funktioner (kanske inte fungerar på vissa enheter) ↵\n\t- Stora förändringar i utseende och känsla ↵\n\t- Höjdinformation ↵\n→- Nya översättningar (vietnamesiska, polska) ↵\n\t- Andra smärre funktioner
+<string name="tip_recent_changes_0_6_9_t">Förändringar i 0.6.9:
+\n\t- Förbättrad rendering av offlinekartor
+\n\t- Snabb inbyggd offlinerendering - titta under experimentella funktioner (kanske inte fungerar på vissa enheter)
+\n\t- Stora förändringar i utseende och känsla
+\n\t- Höjdinformation
+\n\t- Nya översättningar (vietnamesiska, polska)
+\n\t- Andra smärre funktioner
 	</string>
 <string name="use_transparent_map_theme">Genomskinligt tema</string>
 <string name="native_library_not_supported">Inbyggt bibliotek stöds inte på den här enheten.</string>
-<string name="init_native_library">Initierar inbyggt bibliotek…</string>
+<string name="init_native_library">Initierar inbyggt bibliotek …</string>
 <string name="choose_auto_follow_route">Auto-centrerad kartvy</string>
 <string name="choose_auto_follow_route_descr">Tid tills kartvyn synkroniseras med aktuell position</string>
 <string name="auto_follow_route_never">Aldrig</string>
-<string name="auto_follow_route_navigation">Auto-centrera nav. endast</string>
+<string name="auto_follow_route_navigation">Auto-centrera endast nav.</string>
 <string name="auto_follow_route_navigation_descr">Auto-centrera kartan endast vid navigering.</string>
 <string name="auto_follow_location_enabled">Auto-centrera aktuell kartvy.</string>
 <string name="pref_vector_rendering">Alternativ specifika för vektorrenderaren</string>
@@ -534,8 +540,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="tip_app_mode">Användarprofil</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd stöder olika (anpassningsbara) profiler för olika användningar.\n\tDu kan byta profil via profilknappen i det nedre vänstra hörnet på kartbilden (bil, cykel eller fotgängare), eller när du skapar en rutt.</string>
 <string name="tip_navigation">Navigering</string>
-<string name="tip_navigation_t">För att få vägvisning till en plats antingen peta länge på den direkt på kartan (peta sedan på beskrivningsmarkören och välj \'Vägvisning till\') eller välj \'Vägvisning\' efter att di petat på valfri post i en sökresultatslista eller favoritlista.
-		\n\nDestinationen markeras med en orange flagga på kartan och OsmAnd visar avståndet till den och riktningen till den (en orange triangel).
+<string name="tip_navigation_t">För att få vägvisning till en plats, antingen peta länge på den direkt på kartan (peta sedan på beskrivningsmarkören och välj \'Vägvisning till\') eller \'Vägvisning\' efter att du petat på valfri post i en sökresultatslista eller i favoritlistan.
+		\n\nDestinationen markeras med en orange flagga på kartan och OsmAnd visar avståndet och riktningen till den (en orange triangel).
 		\n\nFör att visa vägen till destinationen från varje annan punkt än din aktuella position, markera den på kartan och peta på \'Vägvisning från\'.
 	</string>
 <string name="tip_search">Söker</string>
@@ -753,11 +759,13 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="menu_mute_off">Ljudet är på</string>
 	<string name="menu_mute_on">Ljudet är av</string>
 	<string name="voice_provider_descr">Välj röst för navigering (se ISO 639-1 för språkkoder)</string>
-	<string name="tip_location_sharing_t">"\tDu kan dela med dig av intressanta platser på din resa med familj eller vänner.\n\tFör att dela med dig av en plats behöver du:\n\tAnvänd \'Kartans snabbmeny\'-&gt;\'Dela plats\'-menyn.\n\tVälj sedan ett sätt att dela med dig av din plats. Alternativen är: e-post, SMS, eller bara kopiera koordinaterna till Urklipp. "</string>
+	<string name="tip_location_sharing_t">Du kan dela med dig av intressanta platser på din resa till familj eller vänner via menyn \'Använd platsen …\' -&gt; \'Dela ut platsen\'.
+		\n\nVälj sedan ett sätt att dela med dig av platsen: e-post, SMS, eller helt enkelt kopiera koordinaterna till Urklipp.
+	</string>
 	<string name="tip_favorites_t">Platser som du använder ofta kan sparas som favoriter:
-	\n\nI kontextmenyn \'Använd platsen\' välj alternativet \'Lägg till i favoriter\' och ange ett namn för den.
-	\n\nNär du sparat en favorit är den tillgänglig via \'Meny\'→\'Favoriter\'. Tryck på någon post i denna lista för att navigera till den, redigera den eller ta bort den.
-	\n\nOm du vill visa alla favoritpunkter direkt på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Kartlager\' på kartskärmen.
+	\n\nI kontextmenyn \'Använd platsen\' välj alternativet \'Lägg till i favoriter\' och ge den ett namn.
+	\n\nEn sparad favorit är tillgänglig via \'Meny\'→\'Favoriter\'. Tryck på någon post i denna lista för att navigera till den, redigera den eller ta bort den.
+	\n\nOm du vill visa alla favoriter på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Kartlager\' på kartskärmen.
 	</string>
 	<string name="voice_provider">Röstvägledning</string>
 	<string name="voice_data_initializing">Initierar röstdata …</string>
