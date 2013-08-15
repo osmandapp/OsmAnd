@@ -98,9 +98,9 @@
 		\n\n下載圖資更新由\'設定\' -&gt; \'資料管理\' -&gt; \'下載離線資料\'。
 		\n\n由網路取得區域列表後，點選進入任何一個去下載或更新檔案。請注意檔案類型選擇在畫面上方的附近，選取您想要的類型下載（正常地圖、地形陰影覆疊等）。
 		\n\n您可以篩選區域清單中輸入一些字母，或者您可以按選項\'設定\' -&gt; \'篩選已下載的\'可看見過濾出已經在您裝置上的更新資料。
-		\n\t*登錄為\'綠色\'，表示裝置與伺服器是相同的
-		\n\t*登錄為\'藍色\'，表示伺服器有更新的版本
-		\n\t*登錄為斜體字，表示未在裝置上使用
+		\n\t* 登錄為\'綠色\'，表示裝置與伺服器是相同的
+		\n\t* 登錄為\'藍色\'，表示伺服器有更新的版本
+		\n\t* 登錄為斜體字，表示未在裝置上使用
 	</string>
 	<string name="filterpoi_activity">建立興趣點篩選</string>
 	<string name="recalculate_route_to_your_location">交通模式：</string>
@@ -388,9 +388,9 @@
 	<string name="tip_rotation_switching">地圖方向</string>
 	<string name="tip_rotation_switching_t_v2">在地圖畫面上您可點選羅盤的圖示，可循環切換地圖旋轉顯示方式。
 		\n\n選項有：
-		\n\t*\'不旋轉(正北朝上)\'：地圖不旋轉，正北方永遠向上
-		\n\t*\'行進方向\'：地圖會不斷對準您的車頭方向
-		\n\t*\'依羅盤\'：地圖會不斷對準裝置的電子羅盤指示
+		\n\t* \'不旋轉(正北朝上)\'：地圖不旋轉，正北方永遠向上
+		\n\t* \'行進方向\'：地圖會不斷對準您的車頭方向
+		\n\t* \'依羅盤\'：地圖會不斷對準裝置的電子羅盤指示
 	</string>
 	<string name="binary_map_download_success">下載完成。
 		\n\t\n\t透過 \'選單\' -&gt; \'地圖圖層\' -&gt; \'地圖來源…\' -&gt; \'離線向量地圖\'啟動使用。
@@ -399,10 +399,10 @@
 	<string name="tip_day_night_mode_t_v2">離線向量地圖的地圖外觀顯示，可在日間(較亮)與夜間(較暗)之間切換。夜間顏色是在夜晚行駛時比較安全。
 		\n\n您可在\'選項\' -&gt; \'組態顯示畫面\' -&gt;\'日/夜地圖\'設定日/夜間切換原則。
 		\n\n選擇有：
-		\n\t*\'日出/日落\'：自動模式，依所處位置的日出/日落控制（預設）
-		\n\t*\'日間\'：永遠使用日間模式
-		\n\t*\'夜間\'：永遠使用夜間模式
-		\n\t*\'光線感應器\'：地圖顯示以裝置上的光線感應器來控制（如果有配備）
+		\n\t* \'日出/日落\'：自動模式，依所處位置的日出/日落控制（預設）
+		\n\t* \'日間\'：永遠使用日間模式
+		\n\t* \'夜間\'：永遠使用夜間模式
+		\n\t* \'光線感應器\'：地圖顯示以裝置上的光線感應器來控制（如果有配備）
 	</string>	
 	<string name="tip_osm_improve">改善 OSM 資料</string>
 	<string name="tip_osm_improve_t">OsmAnd 使用的地圖是基於 Openstreetmap.org (OSM) 的資料，除了查看地圖和導航外，可以直接用它來改善 OSM 的資料品質。只要點幾下您可以輕鬆的建立和上傳新的興趣點或回報 OSM 的錯誤。
@@ -576,7 +576,7 @@
 	<string name="tip_app_mode_t_v2">OsmAnd 在不同的使用情況下，支援不同的使用者設定檔 (可自行訂製) 。
 		\n\n您可透過地圖畫面左下角的設定檔按鈕(汽車、自行車、步行三種圖示)更改使用設定檔 ，或是作路線規劃。
 	</string>
-	<string name="tip_navigation">取得指示(導航)</string>
+	<string name="tip_navigation">導航</string>
 	<string name="tip_navigation_t">為了取得指示到一個地方，可以直接在地圖上長按它，然然後再點選其敘述框\'指示到\'，或著選擇\'指示\'後在查尋結果清單或是我的最愛清單點選進入。
 		\n\n目的地標點以橙色旗標在地圖上，同時 OsmAnd 會顯示達到目的地的距離與它的方位(橙色三角形)。
 		\n\n顯示從非您目前的位置中，選擇任意點到目的地的路線，在地圖上挑選並且選擇\'指示來自\'。
@@ -591,7 +591,7 @@
 		\n\t*或透過您事先定義的我的最愛
 		\n\n在主畫面上按\'查尋\'進行查尋的動作。所有在快顯功能表中或動作列被點選中的，都提供有例如\'指示\'或\'在地圖上顯示\'選項。
 	</string>
-	<string name="tip_map_context_menu">\'使用位置\'快顯功能表</string>
+	<string name="tip_map_context_menu">\'使用位置\'選單</string>
 	<string name="tip_map_context_menu_t">地圖快顯功能表(\'使用位置\')，包含了所有操作的參考點（位置）。
 		\n\n它可長按地圖上的任何一點（然後輕點其標記），或按軌跡球的按鈕，或者選擇由\'選單\' → \'使用位置\'（最後兩種方式以地圖中心作為參考）。
 		\n\n若長按則可以再次隱藏標記對話框。
@@ -1184,7 +1184,7 @@
 	<string name="rendering_attr_noAdminboundaries_description">抑制顯示區域界限(管理級別5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid 外掛元件版本過舊並需要進行更新。</string>
     <string name="osmodroid_plugin_name">OsMoDroid 外掛元件</string>
-	<string name="tip_altitude_offset">海拔高度：偏移校正</string>
+	<string name="tip_altitude_offset">海拔高度偏移校正</string>
 	<string name="map_widget_max_speed">速限</string>
     <string name="route_descr_lat_lon">緯度 %1$.3f, 經度 %2$.3f</string>
     <string name="route_descr_current_location">目前位置</string>
