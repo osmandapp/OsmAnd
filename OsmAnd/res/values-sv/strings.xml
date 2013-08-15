@@ -47,7 +47,7 @@
 <string name="avoid_in_routing_descr">Undvik motorvägar, betalvägar, oasfalterade vägar, färjor</string>
 <string name="map_widget_show_ruler">Linjal</string>
 <string name="map_widget_appearance">Övrigt:</string>
-<string name="map_widget_view_direction">Körriktning</string>
+<string name="map_widget_view_direction">Rörelseriktning</string>
 <string name="map_widget_transparent">Genomskinligt skal</string>
 <string name="monitoring_mode_off">Spela in GPX</string>
 <string name="monitoring_mode_on">Stoppa\n GPX-insp.</string>
@@ -601,7 +601,11 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="use_osmand_routing_service">OsmAnd-navigering &gt;20km</string>
 <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
 <string name="specified_dir_doesnt_exist">Kan inte hitta angiven katalog.</string>
-<string name="tip_recent_changes_0_8_4_t">"Förändringar i 0.8.4 :\n\t*Några buggfixar\n\t*Kartan tappar inte bort positionslås efter avbrott "</string>
+<string name="tip_recent_changes_0_8_4_t">Förändringar i 0.8.4:
+	\n\t* Några buggfixar
+	\n\t* Kartan tappar inte bort positionslås efter avbrott
+	\n\t* Aktivera viloläge under navigering
+    </string>
     <string name="context_menu_item_last_intermediate_point">Lägg till som sista waypoint</string>
     <string name="context_menu_item_first_intermediate_point">Lägg till som första waypoint</string>
     <string name="add_as_last_destination_point">Lägg till som sista waypoint</string>
@@ -750,8 +754,10 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="menu_mute_on">Ljudet är av</string>
 	<string name="voice_provider_descr">Välj röst för navigering (se ISO 639-1 för språkkoder)</string>
 	<string name="tip_location_sharing_t">"\tDu kan dela med dig av intressanta platser på din resa med familj eller vänner.\n\tFör att dela med dig av en plats behöver du:\n\tAnvänd \'Kartans snabbmeny\'-&gt;\'Dela plats\'-menyn.\n\tVälj sedan ett sätt att dela med dig av din plats. Alternativen är: e-post, SMS, eller bara kopiera koordinaterna till Urklipp. "</string>
-	<string name="tip_favorites_t">\tPlatser som du använder ofta kan sparas som favoriter:
-\n\tOm du vill spara en plats som favorit gå till kartans snabbmeny, välj \"Lägg till i favoriter\" och ange sedan ett namn för den. När du har sparat en favorit, är den tillgänglig via \'Huvudfönster\' -&gt; \'Favoriter\'.\n\tLångt tryck på en favorit i menyn \'Favoriter\' innehåller alternativ för att ställa in den som destination, redigera eller ta bort den.\n\tOm du vill visa alla favoritpunkter direkt på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Definiera vy\' på kartskärmen.
+	<string name="tip_favorites_t">Platser som du använder ofta kan sparas som favoriter:
+	\n\nI kontextmenyn \'Använd platsen\' välj alternativet \'Lägg till i favoriter\' och ange ett namn för den.
+	\n\nNär du sparat en favorit är den tillgänglig via \'Meny\'→\'Favoriter\'. Tryck på någon post i denna lista för att navigera till den, redigera den eller ta bort den.
+	\n\nOm du vill visa alla favoritpunkter direkt på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Kartlager\' på kartskärmen.
 	</string>
 	<string name="voice_provider">Röstvägledning</string>
 	<string name="voice_data_initializing">Initierar röstdata …</string>
@@ -804,8 +810,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="update_poi_is_not_available_for_zoom">Det går inte att uppdatera POI för små zoomnivåer</string>
 	<string name="context_menu_item_update_poi">Uppdatera POI</string>
 	<string name="context_menu_item_update_map_confirm">Uppdatera lokala data via Internet?</string>
-	<string name="search_history_city">Stad:\n {0}</string>
-	<string name="search_history_street">Gata:\n {0},{1}</string>
+	<string name="search_history_city">Stad: {0}</string>
+	<string name="search_history_street">Gata: {0},{1}</string>
 	<string name="search_history_building">Byggnad: {0},{1},{2}</string>
 	<string name="favorite">Favorit</string>
 	<string name="clear_all">Ta bort alla</string>
@@ -1079,7 +1085,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="non_optimal_route_calculation">Beräkna kanske icke-optimal rutt över långa avstånd</string>
 	<string name="incremental_search_street">Sök gator stegvis</string>
 	<string name="incremental_search_building">Sök byggnader stegvis</string>
-	<string name="show_view_angle">Visa körriktning</string>
+	<string name="show_view_angle">Visa rörelseriktning</string>
 	<string name="Closest_Amenities">Närmaste bekvämligheter</string>
 	<string name="support_new_features_descr">Skänk lite pengar så att nya funktioner kan läggas till i appen</string>
 	<string name="download_hillshade_item">"Skuggad relief "</string>
@@ -1101,8 +1107,20 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmand_srtm_long_description_1000_chars">Denna plugin erbjuder höjdkurvor som kan visas på OsmAnds offline-kartor. Dessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument på Terra, NASA:s Earth Observing Systems satellit. ASTER är ett samarbete mellan NASA, Japans finansdepartement, Trade and Industry (METI) och Japan Space Systems (J-spacesystems).</string>
     <string name="access_arrival_time">Ankomsttid</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="tip_recent_changes_1_0_0_t">"\t* Förbättrad ruttning: snabbare, mer exakt, upp till 250 km\n\t* Introduktion av kartor med bara vägar\n\t* Kartan tappar inte positionslåsning efter avbrott\n\t* Aktivera bakgrundsläge under navigering "</string>
-    <string name="tip_recent_changes_0_6_6_t">"\t- Text till tal-motor för röstnavigering\n\t- Kartrenderaren mer detaljerad\n\t- Baskarta för hela världen inbyggd i appen\n\t- Finjustering av offline-navigering (fortfarande experimentell)\n\t- Alternativ för GPX-navigering\n\t- Uppdatering av gränssnittet och större buggfixar "</string>
+    <string name="tip_recent_changes_1_0_0_t">Ändringar i 1.0.0:
+	\n\t* Förbättrad ruttning: snabbare, mer exakt, upp till 250 km
+	\n\t* Introduktion av kartor med bara vägar
+	\n\t* Kartan tappar inte positionslåsning efter avbrott
+	\n\t* Aktivera bakgrundsläge under navigering
+    </string>
+    <string name="tip_recent_changes_0_6_6_t">Ändringar för 0.6.6:
+	\n\t- Text till tal-motor för röstnavigering
+	\n\t- Kartrenderaren mer detaljerad
+	\n\t- Baskarta för hela världen inbyggd i appen
+	\n\t- Finjustering av offline-navigering (fortfarande experimentell)
+	\n\t- Alternativ för GPX-navigering
+	\n\t- Uppdatering av gränssnittet och större buggfixar
+	</string>
 	<string name="layer_hillshade">Skuggad relief-lager</string>
     <string name="map_widget_gps_info">GPS-info</string>
     <string name="osmand_play_title_30_chars">OsmAnd kartor &amp; navigering</string>
@@ -1243,11 +1261,11 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="edit_tilesource_choose_existing">Välj befintlig …</string>
     <string name="edit_tilesource_name">Namn</string>
     <string name="maps_define_edit">Definiera/Redigera …</string>
-	<string name="tip_map_styles">Kartstilar</string>
+	<string name="tip_map_styles">Kartutseende</string>
 	<string name="tip_map_styles_t">OsmAnd stöder visning av offline vektor-kartor i olika stilar för att passa dina behov:
-		\n\n Om inte standardvisningen duger kan du under \'Meny\' -&gt; \'Konfigurera skärm\' -&gt; \'Kartstil\' till exempel välja
-		\n\t* Stilen \'Turistvy\': som innehåller den mest detaljerade informationen för resenärer och turister, inklusive optimering för yrkesförare (lätt urskiljbara vägar med hög kontrast), alternativ för vandring i Alperna (SAC-skala), cykelvägar, etc.
-		\n\t* \'Vägar med hög kontrast\' visar vägarna med starkt markerade klara färger för situationer med dålig belysning
+		\n\n Om inte standardutseendet duger kan du under \'Meny\' -&gt; \'Konfigurera skärm\' -&gt; \'Kartutseende\' till exempel välja
+		\n\t* Utseendet \'Turistvy\': som innehåller den mest detaljerade informationen för resenärer och turister, inklusive optimering för yrkesförare (lätt urskiljbara vägar med hög kontrast), alternativ för vandring i bergen (SAC-skala), cykelvägar, etc.
+		\n\t* \'Vägar med hög kontrast\' visar vägarna med starkt markerade färger för situationer med dålig belysning
 		\n\t* \'Vinter och skidor\' skapar ett (snötäckt) vinterlandskap, och visar skidbackar och -liftar (hämta kartan \'World ski\')
 	</string>
     <string name="osmand_monitoring_plugin_description">Gör det möjligt att spåra och navigera i viloläge (skärm av) genom att periodvis väcka upp GPS-enheten.
