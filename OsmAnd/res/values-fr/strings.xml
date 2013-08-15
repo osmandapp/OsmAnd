@@ -1328,4 +1328,5 @@
 	<string name="driving_region">Région de conduite</string>
 	<string name="driving_region_europe_asia">Europe &amp; Asie</string>
 	<string name="driving_region_uk">Angleterre, Inde, Australie &amp; Autres</string>
-	</resources>
+	<string name="osmodroid_mode_on">Arrêter OsMoDroid</string>    
+    </resources>
