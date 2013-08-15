@@ -1314,4 +1314,6 @@
     <string name="tip_map_styles">Styles de cartes</string>
 	<string name="about_settings">A propos</string>
     <string name="about_settings_descr">Note de version, licences, membres du projet</string>
+    <string name="tips_and_tricks">Astuces</string>
+    <string name="local_index_tile_data_zooms">Zooms téléchargés: %1$s</string>
     </resources>
