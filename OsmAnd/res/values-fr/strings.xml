@@ -1320,4 +1320,8 @@
     <string name="local_index_tile_data_downloadable">Téléchargeable: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom maximum: %1$s</string>
     <string name="local_index_tile_data_minzoom">Zoom minimum: %1$s</string>
+    <string name="edit_tilesource_maxzoom">Zoom max</string>
+    <string name="edit_tilesource_expiration_time">Expire (minutes)</string>
+    <string name="edit_tilesource_minzoom">Zoom min</string>
+    <string name="edit_tilesource_url_to_load">Lien</string>
     </resources>
