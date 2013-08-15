@@ -68,7 +68,7 @@
     <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale afgrænsninger (admin niveau 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid udvidelse er en gammel version og skal opdateres.</string>
     <string name="osmodroid_plugin_description">OsMoDroid udvidelse er en OsmAnd udvidelse til OsModroid app for online sporingsfunktioner. Oplysninger om tjenesten er tilgængelig på http://esya.ru.</string>
-    <string name="tip_altitude_offset">Højde: Offset korrektion</string>
+    <string name="tip_altitude_offset">Højdekorrektion</string>
 	<string name="tip_altitude_offset_t">De fleste GPS-enheder gengiver højdemålinger i det ellipsoide-baserede WGS84 referencesystem, hvorfra en konvertering til lokalt anvendte systemer kræver en positions afhængig korrektion.
 \n\nEn bedre tilnærmelse til disse lokale systemer er EGM96 reference.
 \n\n OsmAnd nu understøtter også den automatiske visning af højder i EGM96 systemet.
@@ -775,7 +775,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n\nEfter regions liste er hentet fra internettet, vælg \'Menu\' → \'Filtrer det hentede\' for at angive kun opdateringer til data, der allerede på enheden.
 \n\n * Emner i \'grøn\' indikerer datafiler identiske på enheden og serveren
 \n\n * Emner i \'blå\' angiver tilgængelige opdateringer på serveren
-\n\n *Emner i \'kursiv\' angiver data der er deaktiverede på enheden
+\n\n * Emner i \'kursiv\' angiver data der er deaktiverede på enheden
 	</string>
 	<string name="tip_recent_changes_0_8_0_t">Ændringer i 0.8.0:
 \n - * Udvidelser funktionalitet *
@@ -818,17 +818,17 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="tip_day_night_mode_t_v2">Kortets udseende kan for offline vektorkort skiftes mellem dag (lysere) og nat (mørkere).Natfarver er mere sikre under natkørsel.
 \n\nIndstil regler for dag/nat skift i \'Menu\' → \'Konfigurer skærm …\' → \'Dag/nat kort\'.
 \n\nValgmulighederne er:
-\n * \'Solopgang/solnedgang\': Automatisk tilstand, styret af solens position(standard)
+\n * \'Solopgang/solnedgang\': Automatisk tilstand, styret af solens position (standard)
 \n * \'Dag\': Brug altid dagtilstand
 \n * \'Nat\': Brug altid nattilstand
-\n * \'Lysføler\': Kortvisning styres af lysføleren i enheden (kun hvis den har en)
+\n * \'Lysføler\': Kortvisning styres af lysføleren i enheden (kun hvis der er en)
 	</string>	
 	<string name="tip_osm_improve_t">OsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Man kan nemt oprettet og sende nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk!
 \n\nFørst skal man indtaste sine logind-oplysninger til OSM i \'Indstillinger\' → \'Generelle indstillinger\' → \'OSM redigering\'.
 \n\nFor at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i kortets genvejsmenu. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
 \n\nFejl i kort kan rapporteres med det samme via OSM fejl og OSM netværket kan så løse problemet hurtigere.
 \n\nFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejlregistrering\' i kortet genvejsmenu. Derefter indtastes en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
-\n\nBemærk: at internet forbindelse er nødvendig for at sende OSM interessepunkter og OSM fejlrapporter.
+\n\nOsmAnd understøtter cachelagring af indtastninger offline (se pågældende indstilling), men internetforbindelser er naturligvis nødvendig for at sende OSM IP og OSM fejlrapporter.
 	</string>
 	<string name="tip_select_destination_point_t">En destination kan vælges direkte på kortet (genvejsmenu, og så \'Brug som destination\'), i alle søge aktiviteter eller via et langt tryk på en post i \'Favoritter\'
 \nDestinationen vises som en orange flag på kortet og OsmAnd viser afstanden og retningen til den (orange trekant).
@@ -972,9 +972,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="incomplete_locale">ufuldstændig</string>
 	<string name="tip_map_switch">Vælg kortkilde</string>
 	<string name="tip_app_mode">Brug profil</string>
-	<string name="tip_navigation">Kørselsvejlening(Navigering)</string>
+	<string name="tip_navigation">Navigering</string>
 	<string name="tip_search">Søgning</string>
-	<string name="tip_map_context_menu">\'Brug placering\' genvejsmenu</string>
+	<string name="tip_map_context_menu">\'Brug placering\' menu</string>
 	<string name="tip_initial">Tips og tricks</string>
 	<string name="next_button">Næste</string>
 	<string name="previous_button">Forrige</string>
@@ -1048,16 +1048,21 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="daynight_descr">Vælg regel for dag/nat skift</string>
 	<string name="daynight">Dag-/nattilstand</string>
 	<string name="download_files_question">Hent {0} filer ({1} MB)?</string>
-	<string name="tip_favorites_t">Ofte brugte steder kan gemmes som favoritter.
-\n\nFor at gemme et sted som favorit gå til genvejsmenu, vælg \'Tilføj til favoritter\' og indtast et navn. Når favoritten er gemt, er den tilgængelig via\'Start skærm\' → \'Favoritter\'.
-\n\nLangt tryk på en favorit i \'Favorit\' menuen åbner muligheder for at bruge den som destination, redigere eller slette den.
+	<string name="tip_favorites_t">Steder, som du ofte bruger, kan gemmes som favoritter:
+\n\nI genvejsmenuen \'Brug pladseringer\' vælg \'Tilføj til favoritter\', og indtast et navn.
+\n\nNår favoritten er gemt, er den tilgængelig via \'Menu\' → \'Favoritter\'. Tryk på en favorit i åbner mulighed for at bruge den som destination, redigere eller slette den.
 \n\nFor at vise alle favoritsteder direkte på kortet, aktiver kortlag \'Favoritter\' under \'Menu\' → \'Kortlag\'.
 	</string>
 	<string name="tip_recent_changes_1_1_4_t">Ændringer i 1.1.4:
 	\n* Redesign af brugerflade
 	\n* Fejlrettelser
     </string>
-    <string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Kørselsvejledning\' på kortet og der vælges navigationstype.</string>
+    <string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Kørselsvejledning\' på kortet og der vælges navigationstype.
+
+For at få retninger til et sted, enten direkte lang-klik på den på kortet, (tryk derefter på sin beskrivelse markør, og vælg \'Kørselsvejledning til\'), eller vælg \'Kørselsvejledning\' efter at trykke optagelse på en liste over søgeresultater eller favoritliste.
+\n\nDestinationen er markeret som en orange mål flag markør på kortet og Osmand viser afstanden til det, og retningen til det (orange trekant).
+\n\nHvis vise en rute til destinationen fra ethvert andet punkt end din aktuelle position, herefter vælger det på kortet, og tryk \'Kørselsvejledning fra\'.
+	</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
 	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
@@ -1295,19 +1300,18 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="tip_app_mode_t_v2">OsmAnd understøtter forskellige profiler (kan konfigureres) til forskellige brugstilfælde.
 \n\nSkift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger) eller når en rute oprettes (\'Transportform\').
 	</string>
-	<string name="tip_search_t">Søg efter steder direkte på kortet, efter adresse, efter placering, som interessepunkt eller som foruddefineret favorit.
-\nTryk på \'Søg\' i hovedskærmen åbner søgeaktiviteter. For alle fundne elementer tilbyder genvejsmenuen: \'Kørselsvejledning\' eller \'Vis på kort\'.
+	<string name="tip_search_t">Søg efter steder direkte på kortet via \'Brug placeringer\' → \'Søg i nærheden\ , eller ved at bruge søgeskærmen via \'Menu\' → \'Søg\'. 
 \n\nSøgeskærmen indeholder skabeloner for søgning
 \n * efter adresse
 \n * via koordinater
 \n * som IP (efter type eller navn)
-\n * via din søgeoversigt
-\n * eller via dine foruddefinerede favoritter
-\n\nFor alle rammer en genvejsmenu eller handling bar tilbyder muligheder som \' Kørselsvejledning\' eller \'Vis på kort\' osv.
+\n * via søgehistorik
+\n * eller via foruddefinerede favoritter
+\n\nFor alle fundne resultater tilbyder genvejsmenuen: \'Kørselsvejledning\' eller \'Vis på kort\' etc.
 	</string>
-	<string name="tip_map_context_menu_t">Kortets genvejsmenu er tilgængelig ved at trykke og holde på kortet eller ved at trykke på trackball knappen.
-\nSå åbnes en boks med koordinater. For at åbne kortets genvejsmenu skal der trykkes på den. (Eller tryk og hold på den for at skjule den igen.)
-\nKortets genvejsmenu indeholder alle handlinger der refererer til et punkt (en placering).
+	<string name="tip_map_context_menu_t">\'Brug placering\' menuen indeholder alle handlinger, der henviser til et punkt (placering).
+\n\nDen er tilgængelig ved at trykke og holde på ethvert punkt på kortet (derefter trykkes på markøren), eller ved at trykke på trackball knappen, eller ved at vælge \'Menu\' → \'Brug placering\' (de to sidste metoder bruger kortcenter som reference).
+\n\nEn markør boks kan skjules igen med et langt tryk.
 	</string>
 	<string name="osmand_routing_experimental">OsmAnd offline-navigation er en eksperimentel funktion og den virker ikke for afstande på mere end ca. 20 km.
 \nNavigationstjenesten skiftes midlertidig til online CloudMade.</string>
