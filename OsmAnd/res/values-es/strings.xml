@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -1351,4 +1351,5 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="local_index_tile_data_expire">Expirar (minutos): %1$s</string>
     <string name="about_settings">Acerca de</string>
     <string name="about_settings_descr">Información de la versión, licencias, miembros del proyecto</string>
+    <string name="edit_tilesource_choose_existing">Elegir existente...</string>
     </resources>
