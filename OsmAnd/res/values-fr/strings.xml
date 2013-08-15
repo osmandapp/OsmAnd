@@ -1313,4 +1313,5 @@
 	<string name="speak_speed_limit">Annoncer les limitations de vitesses</string>
     <string name="tip_map_styles">Styles de cartes</string>
 	<string name="about_settings">A propos</string>
+    <string name="about_settings_descr">Note de version, licences, membres du projet</string>
     </resources>
