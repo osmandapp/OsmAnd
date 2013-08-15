@@ -50,7 +50,7 @@ public class BinaryInspector {
 		inspector(args);
 		// test cases show info
 		
-//		inspector(new String[]{"-vaddress", "-vcities", "-vstreets", "-bbox=14.4,50.1,14.5,50.01", "/home/victor/projects/OsmAnd/data/osm-gen/Map.obf"});
+//		inspector(new String[]{"-vaddress", "-vcities", "-vstreets", "-bbox=14.4,50.1,14.5,50.01", "/home/victor/projects/osmand/osm-gen/Monaco.obf"});
 		// test case extract parts
 		// test case 
 	}
