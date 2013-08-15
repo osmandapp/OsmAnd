@@ -374,9 +374,9 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="tip_rotation_switching">Kartorientering</string>
 <string name="tip_rotation_switching_t_v2">Du kan växla mellan om och hur kartbilden roteras genom att upprepade gånger klicka på kartskärmens kompassikon.
 		\n\nAlternativen är:
-		\n\t*\'Norr uppåt (vrid inte kartan)\'- Kartan roteras inte. Norr är alltid uppåt.
-		\n\t*\'I körriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.
-		\n\t*\'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt till enhetens kompassläsning.
+		\n\t*\ 'Norr uppåt (vrid inte kartan)\'- Kartan roteras inte. Norr är alltid uppåt.
+		\n\t*\ 'I rörelseriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.
+		\n\t*\ 'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt till enhetens kompass.
 	</string>
 <string name="binary_map_download_success">Hämtades utan problem.
 		\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera vy\' -&gt; \'Kartkälla …\' -&gt; \'Offline vektorkartor\'.
