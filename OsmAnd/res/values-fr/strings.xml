@@ -1336,4 +1336,9 @@
     <string name="osb_author_or_password_not_specified">Merci de spécifier votre nom d'utilisateur et mot de passe OSM dans les paramètres</string>
     <string name="clear_intermediate_points">Effacer les points intermédiaires</string>
     <string name="keep_intermediate_points">Garder les points intermédiaires</string>
-    </resources>
+    <string name="local_index_tile_data_name">Données de tuile : %1$s</string>
+    <string name="edit_tilesource_successfully">Le fournisseur de tuiles %1$s est correctement sauvegardé.</string>
+    <string name="edit_tilesource_elliptic_tile">Mercator elliptique</string>
+    <string name="edit_tilesource_choose_existing">Choisir un fournisseur de tuiles existant...</string>
+    <string name="maps_define_edit">Définir/Éditer…</string>
+	</resources>
