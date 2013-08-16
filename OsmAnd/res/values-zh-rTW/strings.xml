@@ -515,7 +515,7 @@
 	<string name="map_text_size">地圖字型大小</string>
 	<string name="trace_rendering">繪製除錯資訊</string>
 	<string name="trace_rendering_descr">顯示繪製效能</string>
-	<string name="tip_recent_changes">最近修改</string>
+	<string name="tip_recent_changes">最近的修改</string>
 	<string name="voice_not_use">不要使用</string>
 	<string name="voice_not_specified">無</string>
 	<string name="installing_new_resources">安裝新資料…</string>
