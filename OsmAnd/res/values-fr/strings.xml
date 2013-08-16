@@ -1350,4 +1350,8 @@
     <string name="map_widget_fps_info">info. debug images par seconde</string>
 	<string name="route_to">Vers :</string>
     <string name="route_via">Via :</string>
+    <string name="route_from">De :</string>
+	<string name="local_index_gpx_timespan">\nTemps total : %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nTemps en déplacement : %1$d:%2$02d:%3$02d</string>
+	<string name="destination_point">Destination %1$s</string>
     </resources>
