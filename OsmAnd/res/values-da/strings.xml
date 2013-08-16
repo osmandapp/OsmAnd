@@ -822,11 +822,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n * \'Nat\': Brug altid nattilstand
 \n * \'Lysføler\': Kortvisning styres af lysføleren i enheden (kun hvis der er en)
 	</string>	
-	<string name="tip_osm_improve_t">OsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Man kan nemt oprettet og sende nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk!
-\n\nFørst skal man indtaste sine logind-oplysninger til OSM i \'Indstillinger\' → \'Generelle indstillinger\' → \'OSM redigering\'.
-\n\nFor at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i kortets genvejsmenu. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
-\n\nFejl i kort kan rapporteres med det samme via OSM fejl og OSM netværket kan så løse problemet hurtigere.
-\n\nFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejlregistrering\' i kortet genvejsmenu. Derefter indtastes en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
+	<string name="tip_osm_improve_t">OsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Man kan nemt oprettet og sende nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk.
+\n\nFor dette skal man aktivere \'OSM redigering\' udvidelsen under \'Indstillinger\' → \'Udvidelser\', skal man indtaste sine logind-oplysninger til OSM i \'Indstillinger\' → \' OSM redigering\'. 
+\n\nFor at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i  \'Brug placeringer\' i genvejsmenuen. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
+\n\nFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejlregistrering\' i \'Brug placeringer\' i genvejsmenuen. Indtast derefter en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
 \n\nOsmAnd understøtter cachelagring af indtastninger offline (se pågældende indstilling), men internetforbindelser er naturligvis nødvendig for at sende OSM IP og OSM fejlrapporter.
 	</string>
 	<string name="tip_select_destination_point_t">En destination kan vælges direkte på kortet (genvejsmenu, og så \'Brug som destination\'), i alle søge aktiviteter eller via et langt tryk på en post i \'Favoritter\'
