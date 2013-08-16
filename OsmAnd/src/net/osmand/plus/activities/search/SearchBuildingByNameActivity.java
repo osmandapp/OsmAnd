@@ -112,7 +112,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 			text = hno;
 		}
 		settings.setLastSearchedBuilding(text, loc);
-		quitActivity();
+		quitActivity(null);
 	}
 	
 	

@@ -170,7 +170,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		if (region.getCityById(obj.getId(), obj.getName(region.useEnglishNames())) == null) {
 			region.addCityToPreloadedList((City) obj);
 		}
-		quitActivity();
+		quitActivity(SearchStreetByNameActivity.class);
 	}
 	
 	private final class CityComparator implements Comparator<City> {
@@ -220,9 +220,5 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		}
 	}
 	
-	@Override
-	protected Class<? extends Activity> getNextActivity() {
-		return SearchStreetByNameActivity.class;
-	}
 
 }

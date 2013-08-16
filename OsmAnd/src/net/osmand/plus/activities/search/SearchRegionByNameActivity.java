@@ -53,12 +53,8 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 	@Override
 	public void itemSelected(RegionAddressRepository obj) {
 		((OsmandApplication) getApplication()).getSettings().setLastSearchedRegion(obj.getName(), obj.getEstimatedRegionCenter());
-		quitActivity();
+		quitActivity(SearchCityByNameActivity.class);
 	}
 	
-	@Override
-	protected Class<? extends Activity> getNextActivity() {
-		return SearchCityByNameActivity.class;
-	}
 	
 }
