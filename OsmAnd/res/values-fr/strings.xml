@@ -714,8 +714,8 @@
   <string name="add_favorite_dialog_top_text">Nom du favoris</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoris</string>
   <string name="add_favorite_dialog_favourite_added_template">Le point \'\'{0}\'\' à été ajouté aux favoris.</string>
-  <string name="favourites_context_menu_edit">Modifier favori</string>
-  <string name="favourites_context_menu_delete">Supprimer favori</string>
+  <string name="favourites_context_menu_edit">Éditer le favori</string>
+  <string name="favourites_context_menu_delete">Supprimer le favori</string>
   <string name="favourites_remove_dialog_msg">Voulez-vous vraiment supprimer ce favori \'%s\' ?</string>
   <string name="favourites_remove_dialog_success">Suppression du favori {0} réussi.</string>
   <string name="osb_add_dialog_title">Description du bogue</string>
@@ -1048,7 +1048,7 @@
     <string name="target_points">Étapes</string>
     <string name="intermediate_point_too_far">Étape %1$s trop éloignée de la route la plus proche.</string>
     <string name="arrived_at_intermediate_point">Vous êtes arrivé à votre étape</string>
-    <string name="context_menu_item_intermediate_point">Ajouter un étape</string>
+    <string name="context_menu_item_intermediate_point">Ajouter une étape</string>
     <string name="map_widget_intermediate_distance">Étape</string>
     <string name="ending_point_too_far">Point d\'arrivée trop éloigné de la route la plus proche.</string>
     <string name="btn_add_tag">Ajouter une étiquette</string>
