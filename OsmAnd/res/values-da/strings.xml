@@ -1058,11 +1058,9 @@ At have opdaterede kortdata er afgørende for visning af offlinekort, for IP/adr
 	\n* Redesign af brugerflade
 	\n* Fejlrettelser
     </string>
-    <string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Kørselsvejledning\' på kortet og der vælges navigationstype.
-
-For at få retninger til et sted, enten direkte lang-klik på den på kortet, (tryk derefter på sin beskrivelse markør, og vælg \'Kørselsvejledning til\'), eller vælg \'Kørselsvejledning\' efter at trykke optagelse på en liste over søgeresultater eller favoritliste.
-\n\nDestinationen er markeret som en orange mål flag markør på kortet og Osmand viser afstanden til det, og retningen til det (orange trekant).
-\n\nHvis vise en rute til destinationen fra ethvert andet punkt end din aktuelle position, herefter vælger det på kortet, og tryk \'Kørselsvejledning fra\'.
+    <string name="tip_navigation_t">For at få kørselsvejledning til et sted, enten langt tryk på direkte på kortet, (tryk derefter på beskrivelsemarkøren, og vælg \'Kørselsvejledning til\'), eller vælg \'Kørselsvejledning\' efter at have trykket på et resultat på liste med søgeresultater eller favoritliste.
+\n\nDestinationen er markeret som et orange flag på kortet og Osmand viser afstand og retning til det (orange trekant).
+\n\nFor at få kørselsvejledning til destinationen fra et andet punkt end den aktuelle position, vælges det på kortet, og tryk \'Kørselsvejledning fra\'.
 	</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
