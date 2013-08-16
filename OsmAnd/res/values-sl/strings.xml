@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
 	<string name="settings_Button">Nastavitve</string>
@@ -580,9 +580,9 @@
 	<string name="rotate_map_to_bearing">Usmerjenost zemljevida</string>
 	<string name="tip_rotation_switching_t_v2">Z večkratnim klikom na sliki kompasa lahko določite, kako se obrača zemljevid na zaslonu.
 	\n\nMožnosti so:
-	\n\t\* 'Brez obračanja (sever je gor)\': Zemljevid ne bo obračan. Sever bo vedno proti sthu zaslona.
-	\n\t\* 'V smeri gibanja\': Zemljevid bo stalno usmerjen z smerjo premikanja.
-	\n\t\* 'Po kompasu\': Zemljevid bo stalno usmerjen po kompasu naprave torej poravnan z okolico.
+	\n\t\* \'Brez obračanja (sever je gor)\': Zemljevid ne bo obračan. Sever bo vedno proti sthu zaslona.
+	\n\t\* \'V smeri gibanja\': Zemljevid bo stalno usmerjen z smerjo premikanja.
+	\n\t\* \'Po kompasu\': Zemljevid bo stalno usmerjen po kompasu naprave torej poravnan z okolico.
 	</string>
 	<string name="tip_update_index_t">Posodabljanje zemljevidov je pomembno za uporabljanje map, interesnih točk, iskanje naslovov in navigacijo brez povezave. OsmAnd nudi upravitelja prenosov s katerim lahko prenesete take zemljevide (in druge podatkovne datoteke) in preverite razpoložljive podatke.
 		\n\nZa prenos podatkov pojdite na \'Nastavitve\' → \'Upravljnje podatkov\' → \'Podatki za delo brez povezave\'.
@@ -722,10 +722,10 @@
 	<string name="tip_day_night_mode_t_v2">Izgled zemljevida se lahko za vektorske karte menja med dnevnim (svetlejšim) in nočnim (temnejšim) videzom. Nočne barve so varnejše za nočno vožnjo.
 		\n\nPreklop med dnevnim in nočnim načinom lahko nastavljate v \'Meni\' → \'Nastavitev zaslona …\' → \'zemljevid dan/noč\'.
 		\n\nMožnosti so:
-		\n\t\* 'Sončni vzhod/zahod\': avtomatski način glede na položaj sonca (privzeto)
-		\n\t\* 'Dnevni\': vedno se uporablja dnevni način
-		\n\t\* 'Nočni\': vedno se uporablja nočni način
-		\n\t\* 'Svetlobni senzor\': izgled zemljevida nadzoruje svetlobno tipalo naprave (če je na voljo)
+		\n\t\* \'Sončni vzhod/zahod\': avtomatski način glede na položaj sonca (privzeto)
+		\n\t\* \'Dnevni\': vedno se uporablja dnevni način
+		\n\t\* \'Nočni\': vedno se uporablja nočni način
+		\n\t\* \'Svetlobni senzor\': izgled zemljevida nadzoruje svetlobno tipalo naprave (če je na voljo)
 	</string>	
 	<string name="download_files_not_enough_space">Ni dovolj razpoložljivega prostora za prejem %1$s MB(prosto: %2$s).</string>
 	<string name="download_files_question_space">Razpoložljiv prostor je sedaj {2}MB! Ali želite prejeti {0} datotek(o) ({1}MB)?</string>
