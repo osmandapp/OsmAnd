@@ -1341,4 +1341,9 @@
     <string name="edit_tilesource_elliptic_tile">Mercator elliptique</string>
     <string name="edit_tilesource_choose_existing">Choisir un fournisseur de tuiles existant...</string>
     <string name="maps_define_edit">Définir/Éditer…</string>
-	</resources>
+	<string name="announce_gpx_waypoints">Annoncer les points d'intérêts GPX</string>
+    <string name="speak_descr">Configurer pour annoncer les noms de rue, les alertes (arrêts, ralentisseurs, radars), les limitations de vitesses.</string>
+	<string name="new_directions_point_dialog">Vous avez déjà défini des points intermédiaires.</string>
+    <string name="context_menu_item_directions_to">Directions vers</string>
+    <string name="context_menu_item_directions_from">Directions depuis</string>
+    </resources>
