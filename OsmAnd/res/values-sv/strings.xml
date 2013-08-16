@@ -545,7 +545,14 @@ Aktuella data på enheten (%1$s ledigt):</string>
 		\n\nFör att visa vägen till destinationen från varje annan punkt än din aktuella position, markera den på kartan och peta på \'Vägvisning från\'.
 	</string>
 <string name="tip_search">Söker</string>
-<string name="tip_search_t">"\tDu kan söka efter platser direkt på kartan, efter adress, efter plats, som POI eller som fördefinierad favorit.\n\tTryck på \'Sök\' på huvudskärmen för att öppna sökning. För alla träffar erbjuder en snabbmeny två alternativ: \'Ange som destination\' eller \'Visa på kartan\'. "</string>
+<string name="tip_search_t">Du kan söka efter platser direkt på kartan via \'Använd platsen\' → \'Sök i närheten\', eller genom att använda sökskärmen via \'Meny\' → \'Sök'.
+		\n\nSökskärmen har mallar för sökning
+		\n\t* via koordinater
+		\n\t* som POI (Point of Interest) - efter typ eller efter namn
+		\n\t* via din sökhistorik
+		\n\t* via dina sparade favoriter
+		\n\nFör alla träffar erbjuds alternativ som \'Vägvisning\' eller \'Visa på kartan\' etc.
+	</string>
 <string name="tip_map_context_menu">Snabbmeny för karta</string>
 <string name="tip_initial">Tips och tricks</string>
 <string name="next_button">Nästa</string>
@@ -875,7 +882,13 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="rendering_attr_roadColors_description">Välj färgschema för vägar:</string>
 	<string name="rendering_attr_roadColors_name">Färgschema för vägar</string>
     <string name="no_route">Ingen rutt</string>
-	<string name="tip_update_index_t">\tAtt ha uppdaterade kartdata är viktigt. OsmAnd har en nerladdningshanterare som kan söka efter tillgänglig offlinedata.\n\tFör att söka efter uppdateringar, gå till \'Inställningar\' -&gt; \'Offline-data\' -&gt; \'Ladda ner offline-data\'. Efter att regionslistan hämtats från Internet, välj alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.\n\tFärgerna visar tillgängligheten för uppdateringarna:\n\t\'Grön\' - indikerar att data är identiska på enheten och servern\n\t\'Blå\' - indikerar att det finns uppdateringar på servern\n\t\'Mörkblå/grön\' - data är inaktiverade på enheten</string>
+	<string name="tip_update_index_t">Att ha uppdaterade kartdata är viktigt. OsmAnd har en nerladdningshanterare som kan söka efter tillgängliga offline-data.
+		\n\nFör att hämta kartor, gå till \'Inställningar\' -&gt; \'Datahantering\' -&gt; \'Ladda ner offline-data\'.
+		\n\nEfter att regionslistan hämtats från Internet, välj alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.
+		\n\n\t* 'Grön\' - indikerar att data är identiska på enheten och servern
+		\n\t* 'Blå\' - indikerar att det finns uppdateringar på servern
+		\n\t* Poster i kursiv stil indikerar att data är inaktiverade på enheten
+	</string>
 	<string name="rendering_attr_noAdminboundaries_name">Dölj gränser</string>
 	<string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (adminnivåer 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid-pluginen har en gammal version och behöver uppdateras.</string>
