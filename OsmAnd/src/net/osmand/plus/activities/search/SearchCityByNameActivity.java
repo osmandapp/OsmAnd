@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.MapUtils;
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Message;
 import android.view.Gravity;
@@ -169,7 +170,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		if (region.getCityById(obj.getId(), obj.getName(region.useEnglishNames())) == null) {
 			region.addCityToPreloadedList((City) obj);
 		}
-		finish();
+		quitActivity();
 	}
 	
 	private final class CityComparator implements Comparator<City> {
@@ -217,6 +218,11 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 			}
 			return c1? 1 : -1;
 		}
+	}
+	
+	@Override
+	protected Class<? extends Activity> getNextActivity() {
+		return SearchStreetByNameActivity.class;
 	}
 
 }

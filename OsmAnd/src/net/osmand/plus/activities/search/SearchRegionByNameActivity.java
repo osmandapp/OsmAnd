@@ -9,6 +9,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.RegionAddressRepository;
+import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -52,7 +53,12 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 	@Override
 	public void itemSelected(RegionAddressRepository obj) {
 		((OsmandApplication) getApplication()).getSettings().setLastSearchedRegion(obj.getName(), obj.getEstimatedRegionCenter());
-		finish();
+		quitActivity();
+	}
+	
+	@Override
+	protected Class<? extends Activity> getNextActivity() {
+		return SearchCityByNameActivity.class;
 	}
 	
 }

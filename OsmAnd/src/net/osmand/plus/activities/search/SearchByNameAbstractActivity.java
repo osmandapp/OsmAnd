@@ -22,6 +22,10 @@ import net.osmand.plus.activities.OsmandListActivity;
 
 import org.apache.commons.logging.Log;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -79,6 +83,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		setContentView(R.layout.search_by_name);
 		getSupportActionBar().setTitle(R.string.search_activity);
 		getSupportActionBar().setIcon(R.drawable.tab_search_address_icon);
+		
 
 		initializeTask = getInitializeTask();
 		uiHandler = new UIUpdateHandler();
@@ -440,4 +445,34 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			return row;
 		}
 	}
+	
+	protected void quitActivity() {
+		finish();
+		if(getNextActivity() != null) {
+			Intent intent = new Intent(this, getNextActivity());
+			startActivity(intent);
+		}
+	}
+	
+	
+	protected Class<? extends Activity> getNextActivity() {
+		return null;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == 1) {
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		createMenuItem(menu, 1, R.string.default_buttons_ok, 
+				R.drawable.ic_action_ok_light, R.drawable.ic_action_ok_dark ,
+				MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		return super.onCreateOptionsMenu(menu);
+	}	
 }

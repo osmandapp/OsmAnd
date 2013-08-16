@@ -112,9 +112,9 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 			text = hno;
 		}
 		settings.setLastSearchedBuilding(text, loc);
-		finish();
-		
+		quitActivity();
 	}
+	
 	
 	@Override
 	public boolean filterObject(Building obj, String filter){

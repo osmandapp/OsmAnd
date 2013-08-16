@@ -64,6 +64,6 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	@Override
 	public void itemSelected(Street obj) {
 		settings.setLastSearchedIntersectedStreet(obj.getName(region.useEnglishNames()), obj.getLocation());
-		finish();
+		quitActivity();
 	}
 }
