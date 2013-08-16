@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="search_button">Išči</string>
-	<string name="search_activity">Išči</string>
+<resources><string name="search_button">Iskanje</string>
+	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
 	<string name="favorites_Button">Priljubljene</string>
 	<string name="map_Button">Zemljevid</string>
@@ -136,7 +136,7 @@
 	<string name="navpoint_search_desc">Koordinate</string>
 	<string name="transport_search_desc">Iskanje javnih prevozov</string>
 	<string name="favourites_search_desc">Iskanje priljubljenih</string>
-	<string name="history_search_desc">Zgodovina iskanja</string>
+	<string name="history_search_desc">Iskanje po zgodovini</string>
 	<string name="offline_navigation_not_available">OsmAnd offline navigacija trenutno ni na voljo.</string>
 	<string name="left_side_navigation">Vožnja po levi strani</string>
 	<string name="left_side_navigation_descr">Izberite za države, kjer se vozi po levi strani ceste</string>
@@ -434,12 +434,12 @@
 	<string name="animate_route_off">Prekini animacijo</string>
 	<string name="animate_route">Začni animacijo</string>
 	<string name="poi_filter_by_name">Iskanje po imenu</string>
-	<string name="select_search_position">Iskanje okoli:</string>
+	<string name="select_search_position">Iskanje v bližini:</string>
 	<string name="context_menu_item_search">Išči v bližini</string>
 	<string name="local_index_gpx_info_show">\n\nDolg pritisk za možnosti</string>
 	<string name="search_offline_clear_search">Novo iskanje</string>
 	<string name="poi_filter_custom_filter">Filter po meri</string>
-	<string name="gps_status_app_not_found">Aplikacija GPS Status ni nameščena. Ali jo želite poiskati v trgovini Market?</string>
+	<string name="gps_status_app_not_found">Aplikacija GPS Status ni nameščena. Ali jo želite poiskati v Google Play trgovini?</string>
 	<string name="show_point_options">Uporabi mesto …</string>
 	<string name="menu_layers">Sloji zemljevida</string>
 	<string name="where_am_i">Kje sem?</string>
@@ -597,7 +597,10 @@
 	
 	<string name="downloading">Prenašanje …</string>
 	<string name="installing_new_resources">Odpakiranje novih podatkov …</string>
-	<string name="tip_navigation_t">\tPred začetkom navigacije morate izbrati cilj. Nato izberite \'Meni\' -&gt; \'Navodila\' in izberite tip navigacije.</string>
+	<string name="tip_navigation_t">Da bi dobili navodila za kraj, bodisi neposredno dolgo kliknite nanj na zemljevidu (potem kliknite opis in izberite \'Navodila za\'), ali pa izberite \'Navigacija\' za vsak vnos v seznamu rezultatov iskanja ali seznama priljubljenih.
+		\n\nCilj je na zemljevidu označen z oranžno ciljno zastavico in OsmAnd prikazuje razdaljo in smer do njega (oranžni trikotnik).
+		\n\nČe želite pokazati pot do cilja iz katerekoli druge točke ki ni vaš trenutni položaj, izberite jo na zemljevidu in pritisnite \'Navodila od\'.
+	</string>
 	<string name="rotate_map_compass_opt">Rotacija po kompasu</string>
 	<string name="rotate_map_bearing_opt">Rotacija po smeri gibanja</string>
 	<string name="rotate_map_none_opt">Brez rotacije (sever je gor)</string>
@@ -658,13 +661,23 @@
 	<string name="tip_osm_improve_t">OsmAnd uporablja zemljevide, ki temeljijo na Openstreetmap.org (OSM) podatkih in se lahko uporabi tudi za izboljšanje kakovosti podatkov OSM. Preprosto lahko ustvarite in nalagate nove POI ali dodate OSM bug z le nekaj kliki!
 		\n\nZa to morate najprej omogočiti vtičnik \'OSM urejanje\' v \'Nastavitve\' → \'Vtičniki\' in nato morate vnesti svoje podatke za prijavo v OSM v \'Nastavitve\' → \'OSM urejanje\'.
 		\n\nČe želite dodati nov POI uporabite \'Ustvari POI\' v kontekstnem meniju zemljevida. Nadaljujte z vnosom informacij o POI v pogovornem oknu \'Ustvari POI\' in na koncu pošljite podatke.
-		\n\nNapake na zemljevidu je mogoče takoj sporočiti prek storitve OSM bug in OSM skupnost bo lažje in hitreje odpravila to napako.
-		\n\nČe želite dodati OSM Bug uporabite možnost \'Prijavi napako OSM\' v kontekstnem meniju zemljevida. Nato vnesite podroben opis težave in na koncu objavite napako z gumbom \'Dodaj\'.
-		\n\nVedite, da ta urejanja uporabljajo internetno povezavo.
+		\n\nNapake na zemljevidu je mogoče takoj sporočiti prek storitve OSM bug in OSM skupnost bo lažje in hitreje odpravila to napako. Uporabite možnost \'Prijavi napako OSM\' v kontekstnem meniju zemljevida. Nato vnesite podroben opis težave in na koncu objavite napako z gumbom \'Dodaj\'.
+		\n\nOsmAnd podpira predpomnjenje vpisov brez povezave (glej ustrezno nastavitev), vendar internetna povezava je seveda potrebna, da lahko naložite svoje OSM točke in OSM hrošče.
 	</string>
-	<string name="tip_map_context_menu">Kontekstni meni zemljevida</string>
-	<string name="tip_map_context_menu_t">"\tKontekstni meni zemljevida je na voljo z daljšim pritiskom na zemljevidu ali s pritiskom na kolešček.\n\tTo naredi okvir z izpisano koordinato. Če želite odpreti kontekstni meni, pritisnite na okvir. (Ali pa pritisnite in držite da se skrije.)\n\tKontekstni meni zemljevida vsebuje vse akcije, ki se nanašajo na točko (mesto). "</string>
-	<string name="tip_search_t">"\tIščete lahko direktno na zemljevidu ali pa po naslovu, po mestu, kot POI ali priljubljenih mestih.\n\tS pritiskom na \'Iskanje\' v glavnem meniju se odpre iskalno okno. Za vse zadetke iskanja ponuja kontekstni meni 2 možnosti: \'Nastavi kot cilj\' in \'Prikaži na zemljevidu\'. "</string>
+	<string name="tip_map_context_menu">Meni \'Uporabi lokacijo\'</string>
+	<string name="tip_map_context_menu_t">\'Uporabi lokacijo\' kontekstni meni vsebuje vse ukaze, ki se nanašajo na točko (lokacijo).
+		\n\nTa je na voljo z dolgim pritiskom na katerokoli točko na zemljevidu (nato pritisnite na oznako) ali s pritiskom na gumb kroglico, ali z izbiro \'Meni\' → \'Uporabi lokacijo\' (zadnja dva načina uporabijo center zemljevida kot referenčno točko).
+		\n\nOznako lahko spet skrijete če dolgo kliknete nanjo.
+	</string>
+	<string name="tip_search_t">Mesta lahko iščete neposredno na zemljevidu preko \'Uporabi lokacijo\' → \'Iskanje v bližini\', ali s priklicem okna za iskanje preko \'Meni\' → \'Iskanje\'.
+		\n\nOkno za iskanje ima predloge za iskanje
+		\n\t* po naslovu
+		\n\t* preko koordinat
+		\n\t* kot POI (po vrsti ali po imenu)
+		\n\t* preko zgodovine iskanja
+		\n\t* ali prek vaših prednastavljenih priljubljenih.
+		\n\nKontekstni meni ali akcijska vrstica na vseh zadetkih ponujata možnosti, kot so \'Navigacija\' ali \'Prikaži na zemljevidu\', itd.
+	</string>
 	
     
     <string name="route_descr_lat_lon">Dol %1$.3f šir %2$.3f</string>
@@ -805,7 +818,7 @@
 	<string name="create_poi_link_to_osm_doc">Določitev <u>spletnega OSM</u> s slikami</string>
 	<string name="error_doing_search">Med nepovezanim iskanjem je prišlo do napake</string>
 	<string name="search_offline_geo_error">Ni mogoče razčleniti geo namena \'%s\'</string>
-	<string name="search_osm_offline">Iskanje naslovov z uporabo nepovezanih zemljevidov</string>
+	<string name="search_osm_offline">Iskanje geografske lokacije</string>
 	<string name="tip_map_switch">Izbira vira zemljevidov</string>
 	<string name="tip_app_mode">Uporabi profil</string>
 	<string name="tip_app_mode_t_v2">OsmAnd podpira različne (prilagodljive) profile programa za različne primere uporabe.
@@ -815,10 +828,10 @@
 	<string name="add_waypoint_dialog_added">GPX točka \'\'{0}\'\' je bila uspešno dodana</string>
 	<string name="add_waypoint_dialog_title">Dodaj navigacijsko točko posneti sledi GPX</string>
 	<string name="context_menu_item_add_waypoint">Dodaj navigacijsko točko sledi GPX</string>
-	<string name="tip_favorites_t">\tPogosto uporabljene točke si lahko shranite kot Priljubljene.
-		\n\tČe želite shraniti točko kot priljubljeno, pojdite v kontekstni meni zemljevida in izberite \'Dodaj med priljubljene\' in vnesite ime. Po shranjevanju priljubljene točke je ta dostopna preko \'Glavnega zaslona\' -&gt; \'Priljubljene\'.
-		\n\tDolg pritisk na priljubljeni točki v meniju \'Priljubljene\' nam ponudi možnost, da jo določimo kot cilj, uredimo ali brišemo.
-		\n\tZa prikaz vseh priljubljenih točk na zemljevidu, omogočite sloj \'Priljubljene\' v \'Meni\' -&gt; \'Sloji zemljevida\'.
+	<string name="tip_favorites_t">Pogosto uporabljene točke si lahko shranite kot Priljubljene na naslednji način:
+		\n\nPojdite v \'Uporabi lokacijo\' kontekstni meni katerikoli točke zemljevida in izberite \'Dodaj med priljubljene\' in nato vnesite ime.
+		\n\nPo shranjevanju priljubljene točke je ta dostopna preko \'Meni\' → \'Priljubljene\'. Dolg pritisk na priljubljeni točki v meniju \'Priljubljene\' vam nudi možnost, da jo določite kot cilj, uredite ali izbrišete.
+		\n\nZa prikaz vseh priljubljenih točk direktno na zemljevidu, omogočite sloj \'Priljubljene\' v \'Meni\' → \'Sloji zemljevida\'.
 	</string>
 	<string name="transport">Prevoz</string>
 	<string name="additional_settings">Dodatne nastavitve</string>
@@ -982,9 +995,9 @@ Pomembnejše lastnosti:
 	<string name="first_time_continue">Kasneje</string>
 	<string name="first_time_download">Prenos območij</string>
 	<string name="search_poi_location">Iskanje znaka …</string>
-	<string name="search_near_map">Iskanje v bližini mesta zadnjega zemljevida</string>
-	<string name="tip_map_switch_t_v2">Vir zemljevida in prikazane plasti lahko spreminjate preko \'Meni\' → \'Sloji zemljevida\'
-		\n\nPod \'Vir zemljevida …\' lahko izberete med uporabo prednaloženih vektorskih zemljevidov za delo brez povezave, vnaprej določenih spletnih zemljevidov (za to aktivirajte vtičnik \'Spletni zemljevidi\'), ali ročno ustvarjenih zemljevidov z uporabo npr. OsmAndMapCreator-ja na računalniku.
+	<string name="search_near_map">Iskanje v bližini zadnje lokacije</string>
+	<string name="tip_map_switch_t_v2">Vir zemljevida in prikazane plasti lahko spreminjate preko \'Meni\' → \'Sloji zemljevida\'.
+		\n\nPod \'Vir zemljevida …\' lahko izberete med uporabo prednaloženih vektorskih zemljevidov za delo brez povezave, vnaprej določenih spletnih zemljevidov (za to aktivirajte vtičnik \'Spletni zemljevidi\' v \'Nastavitve\' → \'Upravljalnik vtičnikov\'), ali ročno ustvarjenih zemljevidov z uporabo npr. OsmAndMapCreator-ja na računalniku.
 		\n\nOsmAnd podpira tudi vire po meri.
 	</string>
 	<string name="fav_saved_sucessfully">Priljubljene točke uspešno shranjene v {0}</string>
@@ -1023,8 +1036,8 @@ Pomembnejše lastnosti:
 	<string name="searching_address">Iskanje naslova …</string>
 	<string name="search_osm_nominatim">Iskanje naslova z OSM Nominatim</string>
 	<string name="hint_search_online">Hišna številka, ulica, kraj</string>
-	<string name="search_offline_address">Brez povezave</string>
-	<string name="search_online_address">Internet</string>
+	<string name="search_offline_address">Iskanje brez povezave</string>
+	<string name="search_online_address">Iskanje v povezavi</string>
 	<string name="max_level_download_tile">Maks. povečava za spletne</string>
 	<string name="max_level_download_tile_descr">Izbira najvišje stopnje povečave za prenos spletnih zemljevidov</string>
 	<string name="route_general_information">Skupna razdalja %1$s, čas potovanja %2$d u %3$d m.</string>
@@ -1141,9 +1154,9 @@ Pomembnejše lastnosti:
 \n\t- UI update and large bug fixing "</string>
 	<string name="map_widget_max_speed">Dovoljena hitrost</string>
     <string name="tip_altitude_offset">Popravek zamika nadmorske višine</string>
-	<string name="tip_altitude_offset_t">Večina GPS sprejemnikov sporoča meritve nadmorske višine glede na WGS84 referenčni elipsoid, ki za pretvorbo v lokalen sistem zahteva lokalne popravke.
+	<string name="tip_altitude_offset_t">Večina GPS sprejemnikov sporoča meritve nadmorske višine glede na WGS84 referenčni elipsoid, ki zahteva lokalne popravke za pretvorbo v lokalni sistem.
 		\n\nBoljši približek tem lokalnim sistemom je referenčni sistem EGM96.
-		\n\nOsmAnd podpira prikaz nadmorske višine tudi v sistemu EGM96 tako, da prenesete datoteko \'World Altitide Correction\' (WW15MGH.DAC) prek \'Nastavitve\' → \'Upravitelj podatkov\' (vir je na naslovu http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+		\n\nOsmAnd podpira prikaz nadmorske višine tudi v sistemu EGM96 tako, da prenesete datoteko \'World Altitude Correction\' (WW15MGH.DAC) prek \'Nastavitve\' → \'Upravitelj podatkov\' (vir je na naslovu http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     <string name="monitoring_control_start">začni</string>
     <string name="rendering_attr_noAdminboundaries_name">Skrij upravne meje</string>
