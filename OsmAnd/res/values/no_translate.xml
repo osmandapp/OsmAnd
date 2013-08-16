@@ -11,12 +11,12 @@
     <string name="about_content">Data is powered by @c OpenStreetMaps CC-BY-SA
 	\n\nAll rights belong to OsmAnd app.
 
-	\n\nCopyright (C) 2010-2013 OsmAnd Authors
+	\n\nCopyright (C) 2010-2013 OsmAnd Authors :
 	\n\tVictor Shcherb - all parts of the project, originator
 	\n\tAlexey Pelykh - rendering and core parts
 	\n\tHardy Mueller - main parts of the project, mostly rendering, UI interaction design
 
-	\n\nCredits to all major contributors/developers :
+	\n\nCredits to all major Contributors/Developers :
 	\n\tVictor Shcherb - project lead
 	\n\tAndre Van Atten - project supporter, active forum participant, one of the first users.
 	\n\tDr. Hardy Mueller - map appearance concept and base renderers, international consistency and testing, usability, app scoping, concepts, documentation, wiki, market research.
