@@ -1349,4 +1349,5 @@
     <string name="route_descr_map_location">Carte : </string>
     <string name="map_widget_fps_info">info. debug images par seconde</string>
 	<string name="route_to">Vers :</string>
+    <string name="route_via">Via :</string>
     </resources>
