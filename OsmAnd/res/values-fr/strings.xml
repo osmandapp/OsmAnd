@@ -396,7 +396,7 @@
   <string name="select_all">Sélectionner tout</string>
   <string name="reload">Recharger</string>
   <string name="fast_route_mode">Itinéraire le plus rapide</string>
-  <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide et désactiver pour calculer l\'itinéraire le plus court</string>
+  <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide et désactiver pour calculer le plus court. </string>
   <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} carreaux ({2} Mb )</string>
   <string name="context_menu_item_download_map">Télécharger la carte</string>
   <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
@@ -433,7 +433,7 @@
   <string name="error_reading_gpx">Erreur de lecteur des données GPX</string>
   <string name="vector_data">Cartes vectorielles OSM</string>
   <string name="transport_context_menu">Chercher transport à l\'arrivée</string>
-  <string name="point_on_map">Emplacement:\n Lat %1$.5f Long %2$.5f</string>
+  <string name="point_on_map">Emplacement:\n Lat %1$.5f\n Long %2$.5f</string>
   <string name="osb_bug_name">Bogue</string>
   <string name="poi_context_menu_modify">Modifier PI</string>
   <string name="poi_context_menu_delete">Supprimer PI</string>
@@ -545,7 +545,7 @@
   <string name="update_poi_is_not_available_for_zoom">Mise à jour de PI n\'est pas disponible pour un petit niveau de zoom</string>
   <string name="context_menu_item_update_poi">Points d\'Intérêts</string>
   <string name="context_menu_item_update_map_confirm">Mettre à jour les données locales depuis internet ?</string>
-  <string name="search_history_city">Ville:\n {0}</string>
+  <string name="search_history_city">Ville : {0}</string>
   <string name="search_history_street">Rue:\n {0}, {1}</string>
   <string name="search_history_int_streets">Intersections : {0} x {1} dans {2}</string>
   <string name="search_history_building">Édifice : {0}, {1}, {2}</string>
@@ -763,7 +763,7 @@
   <string name="offline_navigation_not_available">Navigation hors ligne temporairement indisponible.</string>
   <string name="left_side_navigation">Conduite à gauche</string>
   <string name="left_side_navigation_descr">Activer dans les pays où l\'on conduit à gauche</string>
-  <string name="download_link_and_local_description">Télécharger des données hors ligne\nPour plus d\'information, cliquer sur l\'élément. Pour le désactiver ou le supprimer, faire un appui long.\nEspace disponible sur l\'appareil : %1$s</string>
+  <string name="download_link_and_local_description">Télécharger des données hors ligne.\nPour plus d\'information, cliquer sur l\'élément. Pour le désactiver ou le supprimer, faire un appui long.\nEspace disponible sur l\'appareil : %1$s</string>
   <string name="unknown_from_location">Point de départ pas encore déterminé</string>
   <string name="confirm_interrupt_download">Voulez vous interrompre le téléchargement ?</string>
   <string name="basemap_was_selected_to_download">Carte mondiale de base requise pour le bon fonctionnement, sélectionnée pour téléchargement.</string>
@@ -784,7 +784,7 @@
   <string name="osmand_development_plugin_description">Ce greffon permet la gestion de paramètres de développement et de débogage tels que la navigation animée ou l\'affichage des temps de rendu.</string>
   <string name="plugins_screen">Gestionnaire des greffons</string>
   <string name="select_plugin_to_activate">Toucher un greffon pour l\'activer ou le désactiver (Redémarrage d\'OsmAnd peut être nécessaire)</string>
-  <string name="prefs_plugins_descr">Les greffons fournissent des fonctionnalités supplémentaires à l\'application telles que l\'enregistrement des traces, les cartes image, le mode sans affichage, le mode accessibilité et autres.</string>
+  <string name="prefs_plugins_descr">Les greffons fournissent des fonctionnalités supplémentaires à l\'application telles que l\'enregistrement des traces, les cartes image, le mode sans affichage, le mode accessibilité et bien d'autres.</string>
   <string name="prefs_plugins">Gestionnaire de greffons</string>
   <string name="tip_recent_changes_0_8_0_t">Changements en 0.8.0 :
 \n\t- *Fonctionnalité des greffons*\n\t- La majorité des fonctionnalités sont regroupées par familles et peuvent être activées/désactivées dans le Gestionnaire de Greffons. Vous pouvez activer les sources de cartes image (en ligne ou en cache), les paramètres de suivi en ligne et autres nouvelles possibilités.\n\t- *Nouvelles cartes hors ligne*\n\t- Le rendu des cartes devient plus rapide et précis (les côtes et zones d\'eau sont corrigées).\n\t- Vous devez re-télécharger toutes les données de cartes hors-ligne, car les anciennes cartes ne fonctionnent plus.\n\t- *Calcul d\'itinéraire hors-ligne*\n\t- Le calcul d\'itinéraire hors ligne devient beaucoup plus stable\n\t- *Utilisation et ergonomie*\n\t- Améliorée dans de nombreux domaines</string>
@@ -984,7 +984,7 @@
 <string name="avoid_in_routing_title">Éviter…</string>
 <string name="avoid_in_routing_descr">Éviter routes à péage, non carrossables, ferries</string>
 <string name="show_warnings_title">Afficher les alarmes…</string>
-<string name="show_warnings_descr">Afficher les limitations de vitesses, stops, ralentisseurs, radars et information sur les voies.</string>
+<string name="show_warnings_descr">Afficher les avertissements (limitations de vitesses, stops, ralentisseurs, radars) et information sur les voies.</string>
 <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
 <string name="map_widget_show_ruler">Échelle</string>
 <string name="map_widget_appearance">Divers :</string>
@@ -1300,7 +1300,7 @@
     <string name="downloading_file_new">Téléchargement en cours</string>
 	<string name="tip_recent_changes_1_4_t">"e \tChangements dans la version 1.4 : ↵\n→* Placer les points de passage dans un ordre optimal afin de tous les visiter  (Démarcheurs, porte-à-porte) ↵\n→* Recherche des rues par nom (dans le voisinage) ↵\n→* Greffon de planification (charger/modifier/sauvegarder les traces GPX) ↵\n→* Nouvel écran de téléchargement(téléchargement en arrière-plan) ↵\n→* Support des sous-dossiers GPX (organiser vos traces GPX) ↵\n→* Suppression des fichiers SRTM ↵\n→* Support des Notes OSM  "</string>
     <string name="search_street_in_neighborhood_cities">Recherche des rues dans les villes avoisinantes</string>
-    <string name="intermediate_items_sort_return">Optimiser l\'ordre des points de passage de la position courante jusqu\'à la destination</string>
+    <string name="intermediate_items_sort_return">Optimiser l\'ordre des points de passage de la position courante jusqu\'à la destination.</string>
     <string name="intermediate_items_sort_by_distance">Tri (porte-à-porte)</string>
     <string name="please_select_address">Sélectionner d\'abord une ville ou une rue</string>
     <string name="context_menu_item_destination_point">Définir comme destination</string>
@@ -1312,7 +1312,7 @@
 	<string name="driving_region_canada">Canada</string>
 	<string name="speak_speed_limit">Annoncer les limitations de vitesses</string>
     <string name="tip_map_styles">Styles de cartes</string>
-	<string name="about_settings">A propos</string>
+	<string name="about_settings">À propos</string>
     <string name="about_settings_descr">Note de version, licences, membres du projet</string>
     <string name="tips_and_tricks">Astuces</string>
     <string name="local_index_tile_data_zooms">Zooms téléchargés: %1$s</string>
@@ -1324,7 +1324,7 @@
     <string name="edit_tilesource_expiration_time">Expire (minutes)</string>
     <string name="edit_tilesource_minzoom">Zoom min</string>
     <string name="edit_tilesource_url_to_load">Lien</string>
-    <string name="driving_region_descr">Sélectionnez la région de conduite : Etats-Unis, Europe, Angleterre, Asie et Autres</string>
+    <string name="driving_region_descr">Sélectionner la région de conduite : États-Unis, Europe, Angleterre, Asie et autres</string>
 	<string name="driving_region">Région de conduite</string>
 	<string name="driving_region_europe_asia">Europe &amp; Asie</string>
 	<string name="driving_region_uk">Angleterre, Inde, Australie &amp; Autres</string>
@@ -1354,4 +1354,15 @@
 	<string name="local_index_gpx_timespan">\nTemps total : %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nTemps en déplacement : %1$d:%2$02d:%3$02d</string>
 	<string name="destination_point">Destination %1$s</string>
-    </resources>
+    <string name="osb_author_dialog_password">Mot de passe OSM (optionnel)</string>
+	<string name="av_camera_focus">Type de focus</string>
+	<string name="av_camera_focus_descr">Sélectionner le type de focus de l'appareil photo</string>
+	<string name="av_camera_focus_auto">Focus automatique</string>
+	<string name="av_camera_focus_hiperfocal">Focus hyperfocal</string>
+	<string name="av_camera_focus_edof">Profondeur de champ étendu (EDOF)</string>
+	<string name="av_camera_focus_infinity">Le focus est réglé à l'infini</string>
+	<string name="av_camera_focus_macro">Mode focus macro</string>
+	<string name="av_camera_focus_continuous">L'appareil photo essaie continuellement de faire la mise au point</string>
+	<string name="av_photo_play_sound">Jouer un son lors de la prise de photos</string>
+	<string name="av_photo_play_sound_descr">Choisir de jouer un son lors de la prise de photos</string>
+</resources>
