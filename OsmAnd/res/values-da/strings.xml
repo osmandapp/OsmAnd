@@ -1306,7 +1306,7 @@ At have opdaterede kortdata er afgørende for visning af offlinekort, for IP/adr
 \n * som IP (efter type eller navn)
 \n * via søgehistorik
 \n * eller via foruddefinerede favoritter
-\n\nFor alle fundne resultater tilbyder genvejsmenuen: \'Kørselsvejledning\' eller \'Vis på kort\' etc.
+\n\nFor alle fundne resultater tilbyder genvejsmenuen: \'Kørselsvejledning\' eller \'Vis på kort\' osv.
 	</string>
 	<string name="tip_map_context_menu_t">\'Brug placering\' menuen indeholder alle handlinger, der henviser til et punkt (placering).
 \n\nDen er tilgængelig ved at trykke og holde på ethvert punkt på kortet (derefter trykkes på markøren), eller ved at trykke på trackball knappen, eller ved at vælge \'Menu\' → \'Brug placering\' (de to sidste metoder bruger kortcenter som reference).
