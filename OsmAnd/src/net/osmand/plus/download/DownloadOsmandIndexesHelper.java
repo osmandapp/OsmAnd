@@ -6,19 +6,18 @@ import java.io.InputStream;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.Version;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -30,6 +29,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
+import android.text.format.DateFormat;
 
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
@@ -40,7 +40,7 @@ public class DownloadOsmandIndexesHelper {
 		PackageManager pm =ctx.getPackageManager();
 		AssetManager amanager = ctx.getAssets();
 		String versionUrlParam = Version.getVersionAsURLParam(((OsmandApplication) ctx.getApplicationContext()));
-		IndexFileList result = downloadIndexesListFromInternet(versionUrlParam);
+		IndexFileList result = downloadIndexesListFromInternet(ctx, versionUrlParam);
 		if (result == null) {
 			result = new IndexFileList();
 		} else {
@@ -81,7 +81,7 @@ public class DownloadOsmandIndexesHelper {
 			try {
 				ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
 				dateModified =  new File(appInfo.sourceDir).lastModified();
-				date = Algorithms.formatDate(dateModified);
+				date = AndroidUtils.formatDate((Context) settings.getContext(), dateModified);
 			} catch (NameNotFoundException e) {
 				//do nothing...
 			}
@@ -98,7 +98,7 @@ public class DownloadOsmandIndexesHelper {
 					if (item != null) {
 						File destFile = new File(voicePath, voice + File.separatorChar + "_config.p");
 						try {
-							Date d = Algorithms.getDateFormat().parse(item.getDate());
+							Date d = DateFormat.getDateFormat((Context) settings.getContext()).parse(item.getDate());
 							if (d.getTime() > dateModified) {
 								continue;
 							}
@@ -130,7 +130,7 @@ public class DownloadOsmandIndexesHelper {
 		return null;
 	}
 
-	private static IndexFileList downloadIndexesListFromInternet(String versionAsUrl){
+	private static IndexFileList downloadIndexesListFromInternet(Context ctx, String versionAsUrl){
 		try {
 			IndexFileList result = new IndexFileList();
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
@@ -150,7 +150,7 @@ public class DownloadOsmandIndexesHelper {
 							String date = parser.getAttributeValue(null, "date"); //$NON-NLS-1$
 							String description = parser.getAttributeValue(null, "description"); //$NON-NLS-1$
 							String parts = parser.getAttributeValue(null, "parts"); //$NON-NLS-1$
-							date = reparseDate(date);
+							date = reparseDate(ctx, date);
 							IndexItem it = new IndexItem(name, description, date, size, parts);
 							it.setType(tp);
 							result.add(it);
@@ -180,10 +180,10 @@ public class DownloadOsmandIndexesHelper {
 		}
 	}
 
-	private static String reparseDate(String date) {
+	private static String reparseDate(Context ctx, String date) {
 		try {
 			Date d = simpleDateFormat.parse(date);
-			return Algorithms.formatDate(d.getTime());
+			return AndroidUtils.formatDate(ctx, d.getTime());
 		} catch (ParseException e) {
 			return date;
 		}

@@ -89,12 +89,12 @@ public class DownloadIndexesThread {
 	
 	public void updateLoadedFiles() {
 		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
-		DownloadIndexActivity.listWithAlternatives(app.getAppPath(""),
+		DownloadIndexActivity.listWithAlternatives(app, app.getAppPath(""),
 				IndexConstants.EXTRA_EXT, indexActivatedFileNames);
 		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
-		DownloadIndexActivity.listWithAlternatives(app.getAppPath(""),
+		DownloadIndexActivity.listWithAlternatives(app, app.getAppPath(""),
 				IndexConstants.EXTRA_EXT, indexFileNames);
-		DownloadIndexActivity.listWithAlternatives(app.getAppPath(IndexConstants.TILES_INDEX_DIR),
+		DownloadIndexActivity.listWithAlternatives(app,app.getAppPath(IndexConstants.TILES_INDEX_DIR),
 				IndexConstants.SQLITE_EXT, indexFileNames);
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
