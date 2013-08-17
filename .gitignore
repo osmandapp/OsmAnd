@@ -8,3 +8,4 @@ mm_*.png
 mx_*.png
 *.class
 .settings
+.idea
