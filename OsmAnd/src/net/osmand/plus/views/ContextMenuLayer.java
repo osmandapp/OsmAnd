@@ -210,7 +210,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		String description = getSelectedObjectDescription();
 		setLocation(latLon, description);
 		view.refreshMap();
-		return true;
+		return false;
 	}
 
 	public LatLon selectObjectsForContextMenu(PointF point) {
@@ -337,6 +337,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			});
 			builder.show();
+		}else if(selectedObjects.size() <= 0){
 		} else {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
 			for (OsmandMapLayer layer : view.getLayers()) {

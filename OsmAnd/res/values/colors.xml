@@ -8,6 +8,7 @@
     
     <!-- Distance to object suitable for all themes -->
     <color name="color_distance">#FD9822</color>
+    <color name="color_distance_remainder">#808080</color>
     
     <!-- Old dialogs colors -->
     <color name="color_white">#FFFFFF</color>

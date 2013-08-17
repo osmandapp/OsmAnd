@@ -108,9 +108,10 @@
     <string name="gpx_saved_sucessfully">GPX file successfully saved to {0}</string>
     <string name="osmand_distance_planning_plugin_description">Create paths (or use / modify existing GPX files) to measure the distance between points. Save as GPX, can be used to plan GPX routes.</string>
     <string name="osmand_distance_planning_plugin_name">Distance calculator &amp; Planning Tool</string>
-    <string name="use_distance_measurement_help">* Tap to mark a point.\n 
-        * Press and hold on the map to delete previous point.\n
-        * Press and hold on point to view and attach description.\n
+    <string name="use_distance_measurement_help">* Tap map to mark a new point.\n 
+        * Tap existing point to display related information.\n
+        * Press and drag an existing point to change its location.\n
+        * Press and hold on a point to view an editing menu.\n
         * Click on measurement widget to see more actions.</string>
     <string name="default_buttons_do_not_show_again">Do not show again</string>
     <string name="distance_measurement_start_editing">Start editing</string>
