@@ -22,6 +22,7 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 	private ListPreference overlayPreference;
 	private ListPreference underlayPreference;
 	public static final String MORE_VALUE = "MORE_VALUE";
+	public static final String DEFINE_EDIT = "DEFINE_EDIT";
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -136,8 +137,8 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 	private void fillTileSourcesToPreference(ListPreference tileSourcePreference, String value, boolean addNone) {
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
 		int add = addNone ? 1 : 0;
-		String[] entries = new String[entriesMap.size() + 1 + add];
-		String[] values = new String[entriesMap.size() + 1 + add];
+		String[] entries = new String[entriesMap.size() + 2 + add];
+		String[] values = new String[entriesMap.size() + 2 + add];
 		int ki = 0;
 		if (addNone) {
 			entries[ki] = getString(R.string.default_none);
@@ -155,6 +156,9 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 		}
 		entries[ki] = getMyApplication().getString(R.string.install_more);
 		values[ki] = MORE_VALUE;
+		ki++;
+		entries[ki] = getMyApplication().getString(R.string.maps_define_edit);
+		values[ki] = DEFINE_EDIT;
 		fill(tileSourcePreference, entries, values, value);
 	}
 	
@@ -180,6 +184,17 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 								if(object == null){
 									updateTileSourceSummary();
 								}
+								return true;
+							}
+						});
+					} else if(DEFINE_EDIT.equals(newValue)){
+						OsmandRasterMapsPlugin.defineNewEditLayer(SettingsRasterMapsActivity.this, new ResultMatcher<TileSourceTemplate>() {
+							@Override
+							public boolean isCancelled() { return false;}
+
+							@Override
+							public boolean publish(TileSourceTemplate object) {
+								updateTileSourceSummary();
 								return true;
 							}
 						});

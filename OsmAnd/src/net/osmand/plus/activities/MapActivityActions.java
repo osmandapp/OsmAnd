@@ -905,6 +905,8 @@ public class MapActivityActions implements DialogProvider {
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		final OsmandSettings settings = getMyApplication().getSettings();
 		if(targets.getPointToNavigate() != null) {
+			adapter.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_flag_dark,
+					R.drawable.ic_action_flag_light).reg();
 			adapter.item(R.string.context_menu_item_intermediate_point).icons(R.drawable.ic_action_flage_dark,
 					R.drawable.ic_action_flage_light).reg();
 		// For button-less search UI
@@ -974,7 +976,9 @@ public class MapActivityActions implements DialogProvider {
 					}
 					targets.navigateToPoint(new LatLon(latitude, longitude), true, 
 							dest ? -1 : targets.getIntermediatePoints().size(), selected);
-					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
+					if(targets.getIntermediatePoints().size() > 0) {
+						IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
+					}
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
 				} else if (standardId == R.string.context_menu_item_add_favorite) {
@@ -1247,6 +1251,17 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}).reg();
 		}
+		optionsMenuHelper.item(R.string.tips_and_tricks).
+				icons(R.drawable.ic_action_ghelp_dark, R.drawable.ic_action_ghelp_light).
+				listen(new OnContextMenuClick() {
+					
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						TipsAndTricksActivity tactivity = new TipsAndTricksActivity(mapActivity);
+						Dialog dlg = tactivity.getDialogToShowTips(false, true);
+						dlg.show();
+					}
+				}).reg();
 		final OsmAndLocationProvider loc = app.getLocationProvider();
 		if (app.getTargetPointsHelper().getPointToNavigate() != null) {
 			

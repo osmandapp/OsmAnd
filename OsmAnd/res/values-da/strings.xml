@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -51,7 +51,7 @@
     <string name="audionotes_plugin_name">Audio-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (Indstillinger -&gt; Datahåndtering -&gt; Hent-&gt; Vælg den ønskede korttype).</string>
+    <string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (\'Indstillinger\' → \'Datahåndtering\' → \'Hent\' → Vælg den ønskede korttype).</string>
     <string name="srtm_plugin_name">Højdekurver</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
@@ -66,10 +66,11 @@
     <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale afgrænsninger (admin niveau 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid udvidelse er en gammel version og skal opdateres.</string>
     <string name="osmodroid_plugin_description">OsMoDroid udvidelse er en OsmAnd udvidelse til OsModroid app for online sporingsfunktioner. Oplysninger om tjenesten er tilgængelig på http://esya.ru.</string>
-    <string name="tip_altitude_offset">Højdevisning - Offset korrektion</string>
+    <string name="tip_altitude_offset">Højdekorrektion</string>
 	<string name="tip_altitude_offset_t">De fleste GPS-enheder gengiver højdemålinger i det ellipsoide-baserede WGS84 referencesystem, hvorfra en konvertering til lokalt anvendte systemer kræver en positions afhængig korrektion.
-\nEn bedre tilnærmelse til disse lokale systemer er EGM96 reference. OsmAnd nu understøtter også den automatiske visning af højder i EGM96 systemet.
-\nFor at opnå dette, hent filen WW15MGH.DAC via Offline Data Manager (oprindelig er på http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+\n\nEn bedre tilnærmelse til disse lokale systemer er EGM96 reference.
+\n\n OsmAnd understøtter også den automatiske visning af højder i EGM96 systemet, når
+ filen \'World Altitide Correction\' (WW15MGH.DAC) er hentet via \'Instillinger\' → \'Datahåndtering\'. (Original findes på http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     <string name="map_widget_max_speed">Fartgrænse</string>
     <string name="route_descr_current_location">Aktuel position</string>
@@ -177,7 +178,7 @@
 	<string name="snap_to_road">Fastgør til vejen</string>
 	<string name="osmand_short_description_80_chars">Globale mobilkort &amp; navigation til offline og online OSM kort</string>
 	<string name="osmand_plus_short_description_80_chars">Global mobilkort for visning &amp; navigation til offline og online OSM kort</string>
-	<string name="tip_update_index">Opdatering af offlinedata</string>
+	<string name="tip_update_index">Opdatering af offlinekort</string>
 	<string name="filterpoi_activity">Opret interessepunkt-filter</string>
 	<string name="recalculate_route_to_your_location">Transportform:</string>
 	<string name="select_navigation_mode">Vælg transportmetode</string>
@@ -187,7 +188,7 @@
 	<string name="day_night_info">Dag/nat information</string>
 	<string name="map_widget_day_night">Dag-/natkort</string>
 	<string name="map_widget_vector_attributes">Optegningsattributter:</string>
-	<string name="map_widget_renderer">Kortudseende</string>
+	<string name="map_widget_renderer">Kortformat</string>
 	<string name="live_monitoring_mode_off">Start online 
 \nsporing</string>
 	<string name="live_monitoring_mode_on">Stop online 
@@ -351,7 +352,7 @@
 	<string name="unknown_location">Position endnu ikke kendt</string>
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
 	<string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
-	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' -&gt; \'Datahåndtering\'. Bagefter kan man se kort, søge adresser, finde interessepunkter og finde offentlig transport.</string>    
+	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Datahåndtering\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og finde offentlig transport.</string>    
 	<string name="basemap_was_selected_to_download">Basiskort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
 	<string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online- og delkort</string>
@@ -382,7 +383,7 @@
 	<string name="debugging_and_development">OsmAnd udvikling</string>
 	<string name="native_rendering">Indbygget optegning</string>
 	<string name="test_voice_prompts">Test stemmemeddelelser</string>    
-	<string name="switch_to_raster_map_to_see">Ingen offline vektorkort til stede for denne placering. Hent et kort i \'Indstillinger\' -&gt; \'Datahåndtering\' eller skifte til onlinekort.</string>
+	<string name="switch_to_raster_map_to_see">Ingen offline vektorkort til stede for denne placering. Hent et kort i \'Indstillinger\' → \'Datahåndtering\' eller skifte til onlinekort.</string>
 	<string name="send_files_to_osm">Send GPX-filer til OSM?</string>
 	<string name="gpx_visibility_txt">Synlighed</string>
 	<string name="gpx_description_txt">Beskrivelse</string>
@@ -513,7 +514,8 @@
 	<string name="osmand_service_descr">Bruges for at køre OsmAnd mens skærmen er slukket</string>
 	<string name="tip_rotation_switching">Kortretning</string>
 	<string name="binary_map_download_success">Hentning lykkedes.
-\nAktiver under \'Menu\' -&gt; \'Kortlag\' -&gt; \'Vælg kortkilde…\' -&gt; \'Offline vektorkort\'.</string>
+\n\nAktiver under \'Menu\' → \'Kortlag\' → \'Vælg kortkilde…\' → \'Offline vektorkort\'.
+	</string>
 	<string name="tip_day_night_mode">Dag/nat tilstand</string>
 	<string name="navigate_point_format">Format:</string>
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
@@ -766,11 +768,14 @@ Anslået kort dækning og kvalitet:
 Liste over understøttede lande (dybest set world wide!): 
 Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
 	</string>
-	<string name="tip_update_index_t">At have opdaterede kortdata er afgørende. OsmAnd har en datahåndtering, som kan søge efter tilgængelige offline data opdateringer.
-\nFor at søge efter opdateringer gå til \'Indstillinger\' -&gt; \'Datahåndtering\' -&gt; \'Hent offline data\'. Efter regions liste er hentet fra internettet, vælg \'Menu\' -&gt; \'Filtrer det hentede\' for at angive kun opdateringer til data, der allerede på enheden.
-\nEmner i \'grøn\' indikerer datafiler identiske på enheden og serveren
-\nEmner i \'blå\' angiver tilgængelige opdateringer på serveren
-\nEmner i \'kursiv\' angiver data der er deaktiverede på enheden</string>
+	<string name="tip_update_index_t">At have opdaterede kortdata er afgørende for visning af offlinekort, for IP/adresse søgning og til offline navigation. OsmAnd har en datahåndtering, som kan hente offlinekort (og nogle andre datafiler), og søge efter tilgængelige opdateringer.
+\n\nFor at hente kort gå til \'Indstillinger\' → \'Datahåndtering\' → \'Hent offlinedata\'. 
+\n\nEfter at den globale regionsliste er hentet fra internettet, klikkes på en post for at hente eller opdatere en fil. Bemærk filtypen vælgeren nær toppen af skærmen, som kan vælge den type overførsel, som ønskes (almindelige kort, reliefoverlejring, osv.).
+\n\nFor at filtrere regionslisten tastes nogle bogstaver, eller ve d at vælge \'Indstillinger\' → \'Filtrer det hentede\' for at kun at se opdateringer til data, der allerede på enheden.
+\n\n * Emner i \'grøn\' indikerer datafiler identiske på enheden og serveren
+\n * Emner i \'blå\' angiver tilgængelige opdateringer på serveren
+\n * Emner i \'kursiv\' angiver data der er deaktiverede på enheden
+	</string>
 	<string name="tip_recent_changes_0_8_0_t">Ændringer i 0.8.0:
 \n - * Udvidelser funktionalitet *
 \n - De fleste funktioner er grupperet efter funktioner og kan aktiveres/deaktiveres i menuen Indstillinger/Udvidelser. Aktiver (online eller cachede) delkort kilder, sporings indstillinger og mange andre nye og tidligere eksisterende funktioner.
@@ -804,26 +809,25 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n - Andre små funktioner
 	</string>    
 	<string name="tip_rotation_switching_t_v2">Orienteringen af kortet kan ændres ved at klikke på kompasnålen.
-\nValgmulighederne er:
-\n \'Roter ikke (nord er op)\' - Kortet roteres ikke. Nord er altid opad
-\n \'Efter bevægelsesretning\' - Kortet vil hele tiden roteres så retningen er opad
-\n \'Efter kompas\' - Kortet vil hele tiden roteres så det passer med enhedens kompas
+\n\nValgmulighederne er:
+\n * \'Roter ikke (nord er op)\': Kortet roteres ikke. Nord er altid opad
+\n * \'Efter bevægelsesretning\': Kortet vil hele tiden roteres så retningen er opad
+\n * \'Efter kompas\': Kortet vil hele tiden roteres så det passer med enhedens kompas
 	</string>
-	<string name="tip_day_night_mode_t_v2">Kortets udseende kan for nogle vektorkort skiftes mellem dag (lysere) og nat (mørkere).
-\nNatfarver er mere sikre under natkørsel.
-\nIndstil regler for dag/nat skift i \'Menu\' -&gt; \'Konfigurer skærm …\' -&gt;\'Dag/nat kort\'.
-\nValgmulighederne er:
-\n \'Solopgang/solnedgang\' - Automatisk tilstand, styret af solens position(standard)
-\n \'Dag\' - Brug altid dagtilstand
-\n \'Nat\' - Brug altid nattilstand
-\n \'Lysføler\' - Kortvisning styres af lysføleren i enheden (kun hvis den har en)
+	<string name="tip_day_night_mode_t_v2">Kortets udseende kan for offline vektorkort skiftes mellem dag (lysere) og nat (mørkere).Natfarver er mere sikre under natkørsel.
+\n\nIndstil regler for dag/nat skift i \'Menu\' → \'Konfigurer skærm …\' → \'Dag/nat kort\'.
+\n\nValgmulighederne er:
+\n * \'Solopgang/solnedgang\': Automatisk tilstand, styret af solens position (standard)
+\n * \'Dag\': Brug altid dagtilstand
+\n * \'Nat\': Brug altid nattilstand
+\n * \'Lysføler\': Kortvisning styres af lysføleren i enheden (kun hvis der er en)
 	</string>	
-	<string name="tip_osm_improve_t">OsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Man kan nemt oprettet og sende nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk!
-\nFørst skal man indtaste sine logind-oplysninger til OSM i \'Indstillinger\' -&gt; \'Generelle indstillinger\' -&gt; \'OSM redigering\'.
-\nFor at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i kortets genvejsmenu. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
-\nFejl i kort kan rapporteres med det samme via OSM fejl og OSM netværket kan så løse problemet hurtigere.
-\nFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejlregistrering\' i kortet genvejsmenu. Derefter indtastes en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
-\nBemærk: at internet forbindelse er nødvendig for at sende OSM interessepunkter og OSM fejlrapporter.</string>
+	<string name="tip_osm_improve_t">OsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Man kan nemt oprettet og sende nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk.
+\n\nFor dette skal man aktivere \'OSM redigering\' udvidelsen under \'Indstillinger\' → \'Udvidelser\', skal man indtaste sine logind-oplysninger til OSM i \'Indstillinger\' → \' OSM redigering\'. 
+\n\nFor at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i  \'Brug placeringer\' i genvejsmenuen. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
+\n\nFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejlregistrering\' i \'Brug placeringer\' i genvejsmenuen. Indtast derefter en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
+\n\nOsmAnd understøtter cachelagring af indtastninger offline (se pågældende indstilling), men internetforbindelser er naturligvis nødvendig for at sende OSM IP og OSM fejlrapporter.
+	</string>
 	<string name="tip_select_destination_point_t">En destination kan vælges direkte på kortet (genvejsmenu, og så \'Brug som destination\'), i alle søge aktiviteter eller via et langt tryk på en post i \'Favoritter\'
 \nDestinationen vises som en orange flag på kortet og OsmAnd viser afstanden og retningen til den (orange trekant).
 	</string> 
@@ -889,11 +893,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="local_index_mi_delete">Slet</string>
 	<string name="local_index_mi_reload">Genindlæs fra SD-kort</string>
 	<string name="local_index_download">Hent</string>
-	<string name="local_index_tile_data">Delkort data: %1$s
-\nMinimum zoom: %2$d
-\nMaksimum zoom: %3$d
-\nKan hentes: %4$s
-\nZooms hentet: %5$s</string>
+	
 	<string name="local_index_address_data">Adressedata</string>
 	<string name="local_index_transport_data">Transportdata</string>
 	<string name="local_index_map_data">Kortdata</string>
@@ -929,7 +929,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="gpx_option_from_start_point">Passere langs hele sporet</string>
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.
 
-\n\nFor at anvende aktiver \'Menu\' -&gt; \'Kortlag\' -&gt; \'Vælg kortkilde…\' -&gt; \'Offline vektor-kort\'.</string>
+\n\nFor at anvende aktiver \'Menu\' → \'Kortlag\' → \'Vælg kortkilde…\' → \'Offline vektor-kort\'.</string>
 	<string name="choose_audio_stream">Stemmeindstillinger</string>
 	<string name="choose_audio_stream_descr">Vælg audiokanal til at afspille talevejledning (system afhængig)</string>
 	<string name="voice_stream_voice_call">Stemmeopkald lyd</string>
@@ -953,11 +953,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="install_more">Installer flere…</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoomniveau for at bruge vektorkort</string>
 	<string name="level_to_switch_vector_raster">Min. vektor zoomniveau</string>
-	<string name="tip_location_sharing">Placeringsdeling</string>
-	<string name="tip_location_sharing_t">Del placeringen af interessante steder på rejsen med familie og venner.
-\n For at dele en placering:
-\n Brug \'Menu\' -&gt; \'Brug placeringer\' -&gt; \'Del placering\'.
-\n Derefter vælges en måde at dele placering på. Valgmulighederne er: E-mail, SMS(tekst) eller bare kopier koordinaterne til udklipsholderen.
+	<string name="tip_location_sharing">Del placering</string>
+	<string name="tip_location_sharing_t">Del placeringen af interessante steder på rejsen med familie og venner via \'Menu\' → \'Brug placeringer\' → \'Del placering\'.
+\n\n Derefter vælges en måde at dele placering på. Valgmulighederne er: E-mail, SMS(tekst) eller bare kopier koordinaterne til udklipsholderen.
 	</string>
 	<string name="tip_favorites">Favoritsteder</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
@@ -970,11 +968,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="preferred_locale_descr">Vælg sprog</string>
 	<string name="preferred_locale">Sprog</string>
 	<string name="incomplete_locale">ufuldstændig</string>
-	<string name="tip_map_switch">Kortkilde</string>
-	<string name="tip_app_mode">Brugerprofil</string>
-	<string name="tip_navigation">Navigation</string>
+	<string name="tip_map_switch">Vælg kortkilde</string>
+	<string name="tip_app_mode">Brug profil</string>
+	<string name="tip_navigation">Navigering</string>
 	<string name="tip_search">Søgning</string>
-	<string name="tip_map_context_menu">Genvejsmenu for kort</string>
+	<string name="tip_map_context_menu">\'Brug placering\' menu</string>
 	<string name="tip_initial">Tips og tricks</string>
 	<string name="next_button">Næste</string>
 	<string name="previous_button">Forrige</string>
@@ -1048,16 +1046,19 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="daynight_descr">Vælg regel for dag/nat skift</string>
 	<string name="daynight">Dag-/nattilstand</string>
 	<string name="download_files_question">Hent {0} filer ({1} MB)?</string>
-	<string name="tip_favorites_t">Ofte brugte steder kan gemmes som favoritter.
-\nFor at gemme et sted som favorit gå til genvejsmenu, vælg \'Tilføj til favoritter\' og indtast et navn. Når favoriten er gemt, er den tilgængelig via\'Start skær\' -&gt; \'Favoritter\'.
-\nLangt tryk på en favorit i \'Favorit\' menuen åbner muligheder for at bruge den som destination, redigere eller slette den.
-\nFor at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen \'Favoritter\' under \'Menu\' -&gt; \'Kortlag\'.
+	<string name="tip_favorites_t">Steder, som du ofte bruger, kan gemmes som favoritter:
+\n\nI genvejsmenuen \'Brug pladseringer\' vælg \'Tilføj til favoritter\', og indtast et navn.
+\n\nNår favoritten er gemt, er den tilgængelig via \'Menu\' → \'Favoritter\'. Tryk på en favorit i åbner mulighed for at bruge den som destination, redigere eller slette den.
+\n\nFor at vise alle favoritsteder direkte på kortet, aktiver kortlag \'Favoritter\' under \'Menu\' → \'Kortlag\'.
 	</string>
 	<string name="tip_recent_changes_1_1_4_t">Ændringer i 1.1.4:
 	\n* Redesign af brugerflade
 	\n* Fejlrettelser
     </string>
-    <string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Kørselsvejledning\' på kortet og der vælges navigationstype.</string>
+    <string name="tip_navigation_t">For at få kørselsvejledning til et sted, enten langt tryk på direkte på kortet, (tryk derefter på beskrivelsemarkøren, og vælg \'Kørselsvejledning til\'), eller vælg \'Kørselsvejledning\' efter at have trykket på et resultat på liste med søgeresultater eller favoritliste.
+\n\nDestinationen er markeret som et orange flag på kortet og Osmand viser afstand og retning til det (orange trekant).
+\n\nFor at få kørselsvejledning til destinationen fra et andet punkt end den aktuelle position, vælges det på kortet, og tryk \'Kørselsvejledning fra\'.
+	</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
 	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
@@ -1249,7 +1250,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
 	<string name="tip_initial_t">OsmAnd er et navigationsprogram med mange funktioner.
-   \nSom en grundlæggende introduktion, er nogle tip og tricks tilgængelig på hovedskærmen (se \'?\' ikon).
+\n\n Som en grundlæggende introduktion, er nogle tip og tricks tilgængelig via \'Menu\' → \'Tips\' på hovedskærmen.
 	</string>
 	<string name="application_dir_change_warning">Ændring af mappen der gemmes i medfører ikke flytning eller sletning af data. Det skal gøres separat og udenom OsmAnd. Fortsæt alligevel?</string>
 	<string name="osmand_net_previously_installed">En tidligere OsmAnd version er installeret. Alle offline data er understøttet af det nye program, men favoritter bør eksporteres i den gamle version og senere importeres i den nye.</string>
@@ -1288,20 +1289,25 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="search_online_address">Online søgning</string>
 	<string name="max_level_download_tile">Maks. online zoom</string>
 	<string name="max_level_download_tile_descr">Vælg maksimum zoom niveau der hentes for online delkort</string>
-	<string name="tip_map_switch_t_v2">Kortkilden og lag der vises kan ændres via \'Menu\' -&gt; \'Kortlag\' i kort visning.
-\nUnder \'Kortkilde...\' vælges de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
-\nOsmAnd understøtter også brugerdefinerede kilder.
-\n
+	<string name="tip_map_switch_t_v2">Kortkilden og lag der vises kan ændres via \'Menu\' → \'Kortlag\'.
+\n\nUnder \'Kortkilde...\' vælges de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
+\n\nOsmAnd understøtter også brugerdefinerede kilder.
 	</string>
-	<string name="tip_app_mode_t_v2">OsmAnd understøtter forskellige brugerprofiler (kan konfigureres) til forskellige brugstilfælde.
-\nSkift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger ikon) eller når en rute oprettes.
+	<string name="tip_app_mode_t_v2">OsmAnd understøtter forskellige profiler (kan konfigureres) til forskellige brugstilfælde.
+\n\nSkift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger) eller når en rute oprettes (\'Transportform\').
 	</string>
-	<string name="tip_search_t">Søg efter steder direkte på kortet, efter adresse, efter placering, som interessepunkt eller som foruddefineret favorit.
-\nTryk på \'Søg\' i hovedskærmen åbner søgeaktiviteter. For alle fundne elementer tilbyder genvejsmenuen: \'Kørselsvejledning\' eller \'Vis på kort\'.
+	<string name="tip_search_t">Søg efter steder direkte på kortet via \'Brug placeringer\' → \'Søg i nærheden\ , eller ved at bruge søgeskærmen via \'Menu\' → \'Søg\'. 
+\n\nSøgeskærmen indeholder skabeloner for søgning
+\n * efter adresse
+\n * via koordinater
+\n * som IP (efter type eller navn)
+\n * via søgehistorik
+\n * eller via foruddefinerede favoritter
+\n\nFor alle fundne resultater tilbyder genvejsmenuen: \'Kørselsvejledning\' eller \'Vis på kort\' osv.
 	</string>
-	<string name="tip_map_context_menu_t">Kortets genvejsmenu er tilgængelig ved at trykke og holde på kortet eller ved at trykke på trackball knappen.
-\nSå åbnes en boks med koordinater. For at åbne kortets genvejsmenu skal der trykkes på den. (Eller tryk og hold på den for at skjule den igen.)
-\nKortets genvejsmenu indeholder alle handlinger der refererer til et punkt (en placering).
+	<string name="tip_map_context_menu_t">\'Brug placering\' menuen indeholder alle handlinger, der henviser til et punkt (placering).
+\n\nDen er tilgængelig ved at trykke og holde på ethvert punkt på kortet (derefter trykkes på markøren), eller ved at trykke på trackball knappen, eller ved at vælge \'Menu\' → \'Brug placering\' (de to sidste metoder bruger kortcenter som reference).
+\n\nEn markør boks kan skjules igen med et langt tryk.
 	</string>
 	<string name="osmand_routing_experimental">OsmAnd offline-navigation er en eksperimentel funktion og den virker ikke for afstande på mere end ca. 20 km.
 \nNavigationstjenesten skiftes midlertidig til online CloudMade.</string>
@@ -1542,7 +1548,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="speak_cameras">Meddel om fotofælder</string>
 	<string name="speak_speed_limit">Meddel om hastighedsgrænse</string>
     
-	<string name="speak_warnings_descr">Konfigurer trafikadvarsler (tvungne stop, vejbump), advarsler om fotofælder, hastighedsgrænser</string>
+	
     <string name="route_descr_map_location">Kort: </string>
     <string name="route_to">Til:</string>
     <string name="route_via">Via:</string>
@@ -1575,4 +1581,33 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="driving_region">Område</string>
 	<string name="driving_region_descr">Vælg område: USA, Europa, England, Asien m.fl.</string>
 	<string name="map_widget_fps_info">FPS-fejlsøgningssinfo</string>
-	</resources>
+	<string name="local_index_tile_data_expire">Udløber ( minutter): %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maksimal zoomniveau: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptisk mercator</string>
+    <string name="edit_tilesource_maxzoom">Maks zoomniveau</string>
+    <string name="edit_tilesource_expiration_time">Udløber ( minutter)</string>
+    <string name="edit_tilesource_minzoom">Min zoomniveau</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Vælg eksisterende…</string>
+    <string name="edit_tilesource_name">Navn</string>
+    <string name="maps_define_edit">Definer/rediger…</string>
+	<string name="local_index_tile_data_zooms">Zoomniveauer hentet: %1$s</string>
+    <string name="local_index_tile_data_downloadable">Kan hentes: %1$s</string>
+    <string name="local_index_tile_data_name">Delkort data: %1$s</string>
+    <string name="edit_tilesource_successfully">Delkortkilden %1$s er gemt</string>
+    <string name="tip_recent_changes_1_6_t">Ændringer i 1.6 :
+\n * Definer/rediger online delkortkilde (angiv udløbstid)
+    </string>
+    <string name="about_version">Version:</string>
+    <string name="about_settings">Om</string>
+    <string name="about_settings_descr">Versioninformation, licenser, projektmedlemmer</string>
+    <string name="tips_and_tricks">Tips</string>
+    <string name="tip_map_styles">Kortformater</string>
+	<string name="tip_map_styles_t">Osmand understøtter visning af offline vektorkort i forskellige kortformatter tilpasset forskellige behov:
+\n\n Udover standardformattet kan andet end \'standard\' kortformat, vælges i \'Menu\' → \'Konfigurer skærm\' → \'Kortformat\'
+\n * \'Turvisning \' kortformat, indeholder de mest detaljerede oplysninger for rejser og rejsebrug, herunder optimering for erhvervschauffører (veje der er lette at skelne og med højere kontrast), mulighed for Alpine vandring (SAC-skalaen), cykelruter, symbolsupport for vandreture  mv.
+\n * \'Veje med høj kontrast\' viser veje med meget forstærkede farver til lyse omgivelser
+\n * \'Vinter og ski\' giver en visning af et (snedækket) vinterlandskab og viser globale skiløjper og lifter (hent \'World ski\' kortet)
+	</string>
+    </resources>

@@ -628,10 +628,12 @@ public class MapActivityLayers {
 		
 		final String layerOsmVector = "LAYER_OSM_VECTOR";
 		final String layerInstallMore = "LAYER_INSTALL_MORE";
+		final String layerEditInstall = "LAYER_EDIT";
 		
 		entriesMap.put(layerOsmVector, getString(R.string.vector_data));
 		entriesMap.putAll(settings.getTileSourceEntries());
 		entriesMap.put(layerInstallMore, getString(R.string.install_more));
+		entriesMap.put(layerEditInstall, getString(R.string.maps_define_edit));
 		
 		final List<Entry<String, String>> entriesMapList = new ArrayList<Entry<String, String>>(entriesMap.entrySet());
 		
@@ -671,6 +673,23 @@ public class MapActivityLayers {
 				if (layerKey.equals(layerOsmVector)) {
 					settings.MAP_ONLINE_DATA.set(false);
 					updateMapSource(mapView, null);
+				} else if (layerKey.equals(layerEditInstall)) {
+					OsmandRasterMapsPlugin.defineNewEditLayer(activity, new ResultMatcher<TileSourceTemplate>() {
+
+						@Override
+						public boolean publish(TileSourceTemplate object) {
+							settings.MAP_TILE_SOURCES.set(object.getName());
+							settings.MAP_ONLINE_DATA.set(true);
+							updateMapSource(mapView, settings.MAP_TILE_SOURCES);
+							return true;
+						}
+
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
+						
+					});
 				} else if (layerKey.equals(layerInstallMore)) {
 					OsmandRasterMapsPlugin.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
 						TileSourceTemplate template = null;

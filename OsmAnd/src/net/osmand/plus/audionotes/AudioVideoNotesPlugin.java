@@ -15,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -275,19 +276,19 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public String getDescription(Context ctx) {
 			String nm = name == null ? "" : name;
 			if (isPhoto()) {
-				return ctx.getString(R.string.recording_photo_description, nm, Algorithms.formatDateTime(file.lastModified())).trim();
+				return ctx.getString(R.string.recording_photo_description, nm, AndroidUtils.formatTime(ctx, file.lastModified())).trim();
 			}
 			updateInternalDescription();
-			return ctx.getString(R.string.recording_description, nm, getDuration(ctx), Algorithms.formatDateTime(file.lastModified()))
+			return ctx.getString(R.string.recording_description, nm, getDuration(ctx), AndroidUtils.formatTime(ctx, file.lastModified()))
 					.trim();
 		}
 
 		public String getSmallDescription(Context ctx) {
 			String nm = name == null ? "" : name;
 			if (isPhoto()) {
-				return ctx.getString(R.string.recording_photo_description, nm, Algorithms.formatDateTime(file.lastModified())).trim();
+				return ctx.getString(R.string.recording_photo_description, nm, AndroidUtils.formatTime(ctx,file.lastModified())).trim();
 			}
-			return ctx.getString(R.string.recording_description, nm, "", Algorithms.formatDateTime(file.lastModified())).trim();
+			return ctx.getString(R.string.recording_description, nm, "", AndroidUtils.formatTime(ctx, file.lastModified())).trim();
 		}
 
 		private String getDuration(Context ctx) {

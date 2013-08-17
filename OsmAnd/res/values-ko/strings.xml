@@ -291,7 +291,7 @@
 	<string name="local_index_mi_delete">삭제</string>
 	<string name="local_index_mi_reload">재보충</string>
 	<string name="local_index_download">다운로드…</string>
-	<string name="local_index_tile_data">타일 데이터: %1$s \n최소 줌 : %2$d\n최대 줌 : %3$d\n다운로드 : %4$s \n다운로드된 줌 : %5$s</string>
+	
 	<string name="local_index_poi_data">POI 데이터</string>
 	<string name="local_index_address_data">주소 데이터</string>
 	<string name="local_index_transport_data">대중교통 데이터</string>

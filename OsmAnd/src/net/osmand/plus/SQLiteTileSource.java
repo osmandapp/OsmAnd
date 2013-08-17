@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.IndexConstants;
@@ -42,6 +43,8 @@ public class SQLiteTileSource implements ITileSource {
 	private int minZoom = 1;
 	private int maxZoom = 17; 
 	private int baseZoom = 17; //Default base zoom
+	private boolean inversiveZoom = true; // BigPlanet
+	private boolean timeSupported = false;
 
 	static final int margin = 1;
 	static final int tileSize = 256;
@@ -147,25 +150,50 @@ public class SQLiteTileSource implements ITileSource {
 		if((db == null || db.isClosed()) && file.exists() ){
 			db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), false);
 			try {
-				String template = db.compileStatement("SELECT url FROM info").simpleQueryForString(); //$NON-NLS-1$
-				if(!Algorithms.isEmpty(template)){
-					urlTemplate = template;
+				SQLiteCursor cursor = db.rawQuery("SELECT * FROM info", null);
+				if(cursor.moveToFirst()) {
+					String[] columnNames = cursor.getColumnNames();
+					List<String> list = Arrays.asList(columnNames);
+					int url = list.indexOf("url");
+					if(url != -1) {
+						String template = cursor.getString(url);
+						if(!Algorithms.isEmpty(template)){
+							urlTemplate = template;
+						}
+					}
+					int tnumbering = list.indexOf("tilenumbering");
+					boolean inversiveInfoZoom = tnumbering != -1 && "BigPlanet".equals(cursor.getString(tnumbering));
+					if(tnumbering != -1) {
+						inversiveZoom = "BigPlanet".equalsIgnoreCase(cursor.getString(tnumbering));
+					}
+					int mnz = list.indexOf("minzoom");
+					if(mnz != -1) {
+						minZoom = (int) cursor.getInt(mnz);
+					}
+					int mxz = list.indexOf("maxzoom");
+					if(mxz != -1) {
+						baseZoom = (int) cursor.getInt(mxz);
+					}
+					if(inversiveInfoZoom) {
+						mnz = minZoom;
+						minZoom = 17 - baseZoom;
+						baseZoom = 17 - mnz;
+					}
 				}
-			} catch (RuntimeException e) {
-			}
-			try {
-				long z;
-				z = db.compileStatement("SELECT minzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
-				if (z < 17 )
-					baseZoom = 17 - (int)z; // sqlite base zoom, =11 for SRTM hillshade
+				cursor.close();
 				maxZoom = 24; // Cheat to have tiles request even if zoom level not in sqlite
 				// decrease maxZoom if too much scaling would be required
 				while ((tileSize >> (maxZoom - baseZoom)) < minScaledSize)
 					maxZoom--;
-				z = db.compileStatement("SELECT maxzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
-				if (z < 17)
-					minZoom = 17 - (int)z;
+				
+				cursor = db.rawQuery("SELECT * FROM tiles", null);
+				cursor.moveToFirst();
+				List<String> cols = Arrays.asList(cursor.getColumnNames());
+				timeSupported = cols.contains("time");
+				cursor.close();
+				
 			} catch (RuntimeException e) {
+				e.printStackTrace();
 			}
 		}
 		return db;
@@ -178,7 +206,8 @@ public class SQLiteTileSource implements ITileSource {
 		}
 		long time = System.currentTimeMillis();
 		if (exact || zoom <= baseZoom) {
-			SQLiteCursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			int z = getFileZoom(zoom);
+			SQLiteCursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",z+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 			try {
 				boolean e = cursor.moveToFirst();
 				cursor.close();
@@ -193,7 +222,8 @@ public class SQLiteTileSource implements ITileSource {
 			int n = zoom - baseZoom;
 			int base_xtile = x >> n;
 			int base_ytile = y >> n;
-			SQLiteCursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {base_xtile+"", base_ytile+"",(17 - baseZoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			int z = getFileZoom(baseZoom);
+			SQLiteCursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {base_xtile+"", base_ytile+"",z+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 			try {
 				boolean e = cursor.moveToFirst();
 				cursor.close();
@@ -238,7 +268,7 @@ public class SQLiteTileSource implements ITileSource {
 				int dstx, dsty;
 				SQLiteCursor cursor = db.rawQuery(
 						"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?",
-						new String[] {(x + dx) + "", (y + dy) + "", (17 - zoom) + ""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+						new String[] {(x + dx) + "", (y + dy) + "", getFileZoom(zoom) + ""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 				byte[] blob = null;
 				if(cursor.moveToFirst()) {
 					blob = cursor.getBlob(0);
@@ -272,7 +302,8 @@ public class SQLiteTileSource implements ITileSource {
 		}
 		if (zoom <= baseZoom) {
 			// return the normal tile if exists
-			SQLiteCursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			SQLiteCursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
+					new String[] {x+"", y+"", getFileZoom(zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 			byte[] blob = null;
 			if(cursor.moveToFirst()) {
 				blob = cursor.getBlob(0);
@@ -333,18 +364,26 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null || coordinatesZoom > 25 ){
 			return null;
 		}
-		int minZoom = (17 - minZ) + 1; 
-		// 17 - z = zoom, x << (25 - zoom) = 25th x tile = 8 + z,  
-		
-		SQLiteCursor q = db.rawQuery("SELECT max(x << (8+z)), min(x << (8+z)), max(y << (8+z)), min(y << (8+z))" + " from tiles where z < "
-				+ minZoom,
-				new String[0]);
+		SQLiteCursor q ;
+		if (inversiveZoom) {
+			int minZoom = (17 - minZ) + 1;
+			// 17 - z = zoom, x << (25 - zoom) = 25th x tile = 8 + z,
+			q = db.rawQuery("SELECT max(x << (8+z)), min(x << (8+z)), max(y << (8+z)), min(y << (8+z))" +
+					" from tiles where z < "
+					+ minZoom, new String[0]);
+		} else {
+			q = db.rawQuery("SELECT max(x << (25-z)), min(x << (25-z)), max(y << (25-z)), min(y << (25-z))"
+					+ " from tiles where z > " + minZ,
+					new String[0]);
+		}
 		q.moveToFirst();
 		int right = (int) (q.getInt(0) >> (25 - coordinatesZoom));
 		int left = (int) (q.getInt(1) >> (25 - coordinatesZoom));
 		int top = (int) (q.getInt(3) >> (25 - coordinatesZoom));
 		int bottom  = (int) (q.getInt(2) >> (25 - coordinatesZoom));
 		return new QuadRect(left, top, right, bottom);
+		
+		
 	}
 
 	public void deleteImage(int x, int y, int zoom) {
@@ -352,7 +391,7 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null || db.isReadOnly()){
 			return;
 		}
-		db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"", getFileZoom(zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 	}
 
 	private static final int BUF_SIZE = 1024;
@@ -377,16 +416,26 @@ public class SQLiteTileSource implements ITileSource {
 			buf.put(b, 0, i);
 		}
 
-		net.osmand.plus.api.SQLiteAPI.SQLiteStatement statement = db.compileStatement("INSERT INTO tiles VALUES(?, ?, ?, ?, ?)"); //$NON-NLS-1$
+		
+		String query = timeSupported? "INSERT INTO tiles(x,y,z,s,image,time) VALUES(?, ?, ?, ?, ?, ?)" :
+				"INSERT INTO tiles(x,y,z,s,image) VALUES(?, ?, ?, ?, ?)";
+		net.osmand.plus.api.SQLiteAPI.SQLiteStatement statement = db.compileStatement(query); //$NON-NLS-1$
 		statement.bindLong(1, x);
 		statement.bindLong(2, y);
-		statement.bindLong(3, 17 - zoom);
+		statement.bindLong(3, getFileZoom(zoom));
 		statement.bindLong(4, 0);
 		statement.bindBlob(5, buf.array());
+		if(timeSupported) {
+			statement.bindLong(6, System.currentTimeMillis());
+		}
 		statement.execute();
 		statement.close();
 		is.close();
 
+	}
+
+	private int getFileZoom(int zoom) {
+		return inversiveZoom ? 17 - zoom : zoom;
 	}
 	
 	public void closeDB(){
@@ -407,6 +456,16 @@ public class SQLiteTileSource implements ITileSource {
 	@Override
 	public boolean isEllipticYTile() {
 		return false;
+	}
+
+	@Override
+	public int getExpirationTimeMillis() {
+		return -1;
+	}
+
+	@Override
+	public int getExpirationTimeMinutes() {
+		return -1;
 	}
 
 }

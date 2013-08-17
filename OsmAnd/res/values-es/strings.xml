@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -7,7 +7,7 @@
   <string name="avoid_ferries">Evitar transbordadores</string>
   <string name="avoid_in_routing_title">Evitar-…</string>
   <string name="avoid_in_routing_descr">Evita carreteras de peaje, sin pavimentar, transbordadores</string>
-  <string name="show_warnings_title">Mostrar alarmas-…</string>
+  <string name="show_warnings_title">Mostrar alarmas…</string>
   <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, stops, vadenes), radares, y carriles</string>
   <string name="map_widget_fluorescent">Rutas fluorescentes</string>
   <string name="map_widget_show_ruler">Escala</string>
@@ -188,7 +188,7 @@
   <string name="local_index_mi_delete">Borrar</string>
   <string name="local_index_mi_reload">Recargar desde la tarjeta SD</string>
   <string name="local_index_download">Descargar</string>
-  <string name="local_index_tile_data">Datos de teselas: %1$s \nZoom mínimo: %2$d\nZoom máximo: %3$d\nDescargable: %4$s \nZooms descargados: %5$s</string>
+  
   <string name="local_index_poi_data">Datos de PDI</string>
   <string name="local_index_address_data">Datos de direcciones</string>
   <string name="local_index_transport_data">Datos de transporte</string>
@@ -439,7 +439,7 @@
   <string name="layer_transport">Paradas de transporte</string>
   <string name="layer_poi">PDI…</string>
   <string name="layer_map">Fuente de mapas…</string>
-  <string name="menu_layers">Definir vista</string>
+  <string name="menu_layers">Capas de mapas</string>
   <string name="context_menu_item_search_poi">Buscar PDI</string>
   
   <string name="use_trackball_descr">Usa trackball para mover el mapa</string>
@@ -751,7 +751,7 @@ Para poder usar todas las características de la aplicación necesitas algunos d
   <string name="map_online_data_descr">Usa mapas online (descarga y guarda teselas en la tarjeta SD)</string>
   <string name="online_map_settings">Mapas Online</string>
   <string name="online_map_settings_descr">Configurar fuentes de teselas de mapa online o guardadas</string>
-  <string name="map_settings">- Configuraciones de Mapa</string>
+  <string name="map_settings">Configuraciones de Mapa</string>
   <string name="map_settings_descr">Configurar la pantalla del mapa</string>
   <string name="osmand_rastermaps_plugin_description">Muestra opciones para configurar diversos mapas teselados, online o guardados, como mapa base o como mapa superpuesto / subyacente. Estos mapas también se pueden preparar offline y copiarlos en la carpeta de OsmAnd.</string>
   <string name="osmand_background_plugin_description">Muestra configuraciones para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
@@ -1017,7 +1017,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="map_widget_intermediate_distance">Punto de ruta</string>
     <string name="ending_point_too_far">Punto final demasiado lejos de la carretera más cercana.</string>
     <string name="btn_add_tag">Añade Etiqueta</string>
-    <string name="btn_advanced_mode">Modo Avanzado-…</string>
+    <string name="btn_advanced_mode">Modo Avanzado…</string>
     <string name="poi_filter_parking">aparcamiento</string>
     <string name="poi_filter_emergency">Emergencia</string>
     <string name="poi_filter_public_transport">Transporte Público</string>
@@ -1045,7 +1045,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_library_not_running">La aplicación se está ejecutando en modo seguro (desactívalo en Opciones).</string>
     <string name="rendering_attr_showRoadMaps_description">Selecciona cuándo mostrar mapas sólo de carreteras:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mapas sólo de carreteras</string>
-    <string name="download_roads_only_item">Carreteras</string>
+    <string name="download_roads_only_item">Sólo carreteras</string>
     <string name="download_regular_maps">Mapas normales</string>
     <string name="download_roads_only_maps">Mapas sólo de carreteras</string>
     <string name="incomplete_locale">incompleto</string>
@@ -1060,7 +1060,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 \n\tPara ello, simplemente descarga el archivo WW15MGH.DAC mediante el Gestor de datos (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">Inicio</string>
-    <string name="tip_altitude_offset">Mostrar Altitud - Corrección</string>
+    <string name="tip_altitude_offset">Altitud: Compensación de Correción</string>
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evita mostrar las fronteras regionales (niveles administrativos 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">El extra OsMoDroid tiene una versión antigua y necesita ser actualizado.</string>
@@ -1142,7 +1142,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="tip_recent_changes_1_2_t">"Arreglos en 1.2.1:\n\t* Arreglado Geo Intent (Foursquare, c: geo)\n\t* Arreglado el temblor de pantalla durante la navegación\n\t* Otras pequeñas correcciones\nCambios en 1.2:\n\t* Corrección de errores (enrutamiento afinado, búsqueda, grabación de AV, los mensajes de voz, algunas mejoras de visualización)\n\t* Configuración de superposición de sombreado más fácil (requiere extra de Curvas de Nivel)\n\t* Ahora acepta enlaces de localización de maps.google.com\n\t* Nuevo control (Información GPS)\n\t* Filtro de Kalman para brújula\n\t* Soporte para reloj Pebble\n\t* Añadido soporte multiventana para nuevos dispositivos Samsung "
 	</string>
     <string name="prefer_motorways">Prefiero autopistas</string>
-	<string name="prefer_in_routing_title">Prefiero-…</string>
+	<string name="prefer_in_routing_title">Prefiero…</string>
 	<string name="prefer_in_routing_descr">Preferencia por autopistas</string>
     <string name="max_speed_none">ninguna</string>
     <string name="av_def_action_choose">Seleccionar a petición</string>
@@ -1303,7 +1303,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="route_via">Vía:</string>
     <string name="route_from">Desde:</string>
     
-	<string name="speak_warnings_descr">Configurar alertas de tráfico (paradas forzosas, reductores de velocidad), radares, límitaciones de velocidad</string>
+	
     <string name="speak_speed_limit">Anunciar límites de velocidad</string>
     <string name="speak_cameras">Anunciar radares</string>
 	<string name="speak_traffic_warnings">Anunciar avisos de tráfico</string>
@@ -1328,4 +1328,28 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="context_menu_item_directions_to">Indicaciones a</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_to">Hacia:</string>
+    <string name="about_version">Versión:</string>
+    <string name="tips_and_tricks">Consejos</string>
+    <string name="local_index_tile_data_downloadable">Descargable: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Zoom máximo: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Zoom mínimo: %1$s</string>
+    <string name="edit_tilesource_maxzoom">Zoom máximo</string>
+    <string name="edit_tilesource_name">Nombre</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="maps_define_edit">Definir/Editar…</string>
+	<string name="driving_region_japan">Japón</string>
+	<string name="driving_region_us">Estados Unidos</string>
+	<string name="driving_region_canada">Canadá</string>
+	<string name="driving_region_europe_asia">Europa y Asia</string>
+	<string name="driving_region_uk">Reino Unido, India, Australia y Otros</string>
+	<string name="driving_region_descr">Seleccionar Región de Conducción: EEUU, Europa, Reino Unido, Asia y Otras</string>
+	<string name="driving_region">Región de Conducción</string>
+	<string name="edit_tilesource_minzoom">Zoom mínimo</string>
+    <string name="edit_tilesource_expiration_time">Expirar (minutos)</string>
+    <string name="edit_tilesource_successfully">Fuente de teselas %1$s ha sido guardada correctamente</string>
+    <string name="local_index_tile_data_name">Datos de teselas: %1$s</string>
+    <string name="local_index_tile_data_expire">Expirar (minutos): %1$s</string>
+    <string name="about_settings">Acerca de</string>
+    <string name="about_settings_descr">Información de la versión, licencias, miembros del proyecto</string>
+    <string name="edit_tilesource_choose_existing">Elegir existente...</string>
     </resources>

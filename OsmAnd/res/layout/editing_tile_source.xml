@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical" >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            
+            android:stretchColumns="1" >
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_tilesource_name" />
+
+                <EditText
+                    android:id="@+id/Name"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="" >
+
+                    <requestFocus />
+                </EditText>
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent"
+            android:layout_height="wrap_content"> 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_tilesource_choose_existing" >
+                </TextView>
+
+                <Spinner
+                    android:id="@+id/TileSourceSpinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" >
+                </Spinner>
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_tilesource_url_to_load" />
+
+                <EditText
+                    android:id="@+id/URLToLoad"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:lines="5"
+    				android:minLines="2"
+                    android:text="" >
+                </EditText>
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_tilesource_minzoom" />
+
+                <EditText
+                    android:id="@+id/MinZoom"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="" >
+                </EditText>
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_tilesource_maxzoom" />
+
+                <EditText
+                    android:id="@+id/MaxZoom"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="" >
+                </EditText>
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/edit_tilesource_expiration_time" 
+                    />
+
+                <EditText
+                    android:id="@+id/ExpirationTime"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="" >
+                </EditText>
+            </TableRow>
+
+            <TableRow android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/EllipticMercator"
+                    android:layout_width="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_span="2"
+                    android:text="@string/edit_tilesource_elliptic_tile" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</ScrollView>

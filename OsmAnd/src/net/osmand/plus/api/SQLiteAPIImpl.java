@@ -57,6 +57,11 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 				}
 				
 				@Override
+				public String[] getColumnNames() {
+					return c.getColumnNames();
+				}
+				
+				@Override
 				public boolean moveToFirst() {
 					return c.moveToFirst();
 				}

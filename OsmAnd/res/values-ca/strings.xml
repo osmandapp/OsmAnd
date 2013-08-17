@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -387,9 +386,7 @@
 <string name="local_index_gpx_info_show">\n\nPremeu i manteniu per veure les opcions</string>
 <string name="local_index_gpx_info_elevation">\nAltitud mitjana: %1$s\nAltitud mínima: %2$s\nAltitud màxima: %3$s\nAscensió: %4$s\nDescensió: %5$s</string>
 <string name="local_index_no_items_to_do">No hi ha ítems per %1$s</string>
-<string name="local_index_tile_data">Dades de tessel·les: %1$s
-\nNivell de zomm mínim: %2$d\nNivell de zoom màxim: %3$d\nEs pot baixar: %4$s
-\nNivells de zoom baixats: %5$s</string>
+
 <string name="voice_not_use">No l\'utilitzis</string>
 <string name="voice_not_specified">Cap</string>
 <string name="internet_connection_required_for_online_route">S\'ha seleccionat un servei de navegació en línia però no hi ha cap connexió a internet disponible.</string>

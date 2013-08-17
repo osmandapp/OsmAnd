@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_1_5_t">Промени в 1.5:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_1_5_t">Промени в 1.5:
 	\n\t* Гласови предупреждения за пътни ограничения и камери
 	\n\t* HD икони
 	\n\t* Много промени в потребителския интерфейс
@@ -18,7 +17,7 @@
     <string name="route_via">През:</string>
     <string name="route_from">От:</string>
     
-	<string name="speak_warnings_descr">Настройване на предупреждения за трафика (Задължителни стопове, легнали полицаи), камери и ограничения за скорост</string>
+	
     <string name="speak_speed_limit">Обявяване на ограничения за скоростта</string>
     <string name="speak_cameras">Обявяване на камери за скорост</string>
 	<string name="speak_traffic_warnings">Обявяване на предупреждения за трафика</string>
@@ -982,7 +981,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="local_index_mi_delete">Изтриване</string>
 	<string name="local_index_mi_reload">Презареди от SD-картата</string>
 	<string name="local_index_download">Сваляне</string>
-	<string name="local_index_tile_data">Картни плочки: %1$s \nМинимален мащаб: %2$d\nМаксимален мащаб: %3$d\nСвалими: %4$s \nСвалени мащаби: %5$s</string>
+	
 	<string name="local_index_poi_data">Данни за POI</string>
 	<string name="local_index_address_data">Данни за адреси</string>
 	<string name="local_index_transport_data">Данни за транспорт</string>

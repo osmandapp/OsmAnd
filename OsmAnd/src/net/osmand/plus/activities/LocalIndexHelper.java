@@ -22,6 +22,7 @@ import net.osmand.binary.BinaryMapIndexReader.MapRoot;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
+import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.GPXUtilities;
@@ -80,33 +81,31 @@ public class LocalIndexHelper {
 		} else if(info.getType() == LocalIndexType.TTS_VOICE_DATA){
 			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.TILES_DATA){
+			Set<Integer> zooms = new TreeSet<Integer>();
+			ITileSource template ;
 			if(f.isDirectory() && TileSourceManager.isTileSourceMetaInfoExist(f)){
-				TileSourceTemplate template = TileSourceManager.createTileSourceTemplate(new File(info.getPathToData()));
-				Set<Integer> zooms = new TreeSet<Integer>();
+				template = TileSourceManager.createTileSourceTemplate(new File(info.getPathToData()));
 				for(String s : f.list()){
 					try {
 						zooms.add(Integer.parseInt(s));
 					} catch (NumberFormatException e) {
 					}
 				}
-				
-				String descr = app.getString(R.string.local_index_tile_data, 
-					template.getName(), template.getMinimumZoomSupported(), template.getMaximumZoomSupported(),
-					template.getUrlTemplate() != null, zooms.toString());
-				info.setDescription(descr);
 			} else if(f.isFile() && f.getName().endsWith(SQLiteTileSource.EXT)){
-				SQLiteTileSource template = new SQLiteTileSource(app, f, TileSourceManager.getKnownSourceTemplates());
-//				Set<Integer> zooms = new TreeSet<Integer>();
-//				for(int i=1; i<22; i++){
-//					if(template.exists(i)){
-//						zooms.add(i);
-//					}
-//				}
-				String descr = app.getString(R.string.local_index_tile_data, 
-						template.getName(), template.getMinimumZoomSupported(), template.getMaximumZoomSupported(),
-						template.couldBeDownloadedFromInternet(), "");
-				info.setDescription(descr);
+				template = new SQLiteTileSource(app, f, TileSourceManager.getKnownSourceTemplates());
+			} else {
+				return;
 			}
+			String descr = "";
+			descr += app.getString(R.string.local_index_tile_data_name, template.getName());
+			descr += "\n" + app.getString(R.string.local_index_tile_data_minzoom, template.getMinimumZoomSupported());
+			descr += "\n" + app.getString(R.string.local_index_tile_data_maxzoom, template.getMaximumZoomSupported());
+			descr += "\n" + app.getString(R.string.local_index_tile_data_downloadable, template.couldBeDownloadedFromInternet());
+			if(template.getExpirationTimeMinutes() >= 0) {
+				descr += "\n" + app.getString(R.string.local_index_tile_data_expire, template.getExpirationTimeMinutes());
+			}
+			descr += "\n" + app.getString(R.string.local_index_tile_data_zooms, zooms.toString());
+			info.setDescription(descr);
 		} else {
 			OsmandPlugin.onUpdateLocalIndexDescription(info);
 		}

@@ -149,10 +149,6 @@ public class MainMenuActivity extends Activity {
 				public void onClick(View widget) {
 					final Intent mapIntent = new Intent(activity, ContributionVersionActivity.class);
 					activity.startActivityForResult(mapIntent, 0);
-					// test geo activity
-//					String uri = "geo:0,0?q=Amsterdamseweg";
-//					Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
-//					activity.startActivity(intent);
 				}
 			}, 0, content.length(), 0);
 			textVersionView.setText(content);

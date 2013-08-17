@@ -22,7 +22,13 @@ import net.osmand.plus.activities.OsmandListActivity;
 
 import org.apache.commons.logging.Log;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -72,13 +78,20 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	private StyleSpan previousSpan;
 	private static final Log log = PlatformUtil.getLog(SearchByNameAbstractActivity.class);
 	
+	protected void setActionBarSettings() {
+//		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setTitle(R.string.search_activity);
+		getSupportActionBar().setIcon(R.drawable.tab_search_address_icon);
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		setContentView(R.layout.search_by_name);
-		getSupportActionBar().setTitle(R.string.search_activity);
-		getSupportActionBar().setIcon(R.drawable.tab_search_address_icon);
+		
 
 		initializeTask = getInitializeTask();
 		uiHandler = new UIUpdateHandler();
@@ -440,4 +453,30 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			return row;
 		}
 	}
+	
+	protected void quitActivity(Class<? extends Activity> next) {
+		finish();
+		if(next != null) {
+			Intent intent = new Intent(this, next);
+			startActivity(intent);
+		}
+	}
+	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == 1) {
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		createMenuItem(menu, 1, R.string.default_buttons_ok, 
+				R.drawable.ic_action_ok_light, R.drawable.ic_action_ok_dark ,
+				MenuItem.SHOW_AS_ACTION_ALWAYS);
+		return super.onCreateOptionsMenu(menu);
+	}	
 }

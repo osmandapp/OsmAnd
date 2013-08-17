@@ -21,4 +21,8 @@ public interface ITileSource {
 	
 	public boolean couldBeDownloadedFromInternet();
 	
+	public int getExpirationTimeMillis();
+	
+	public int getExpirationTimeMinutes();
+	
 }

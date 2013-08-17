@@ -29,6 +29,8 @@ public interface SQLiteAPI {
 	}
 	
 	public interface SQLiteCursor {
+		
+		String[] getColumnNames();
 
 		boolean moveToFirst();
 		

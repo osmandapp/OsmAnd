@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
@@ -26,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,7 +133,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			AccessibleToast.makeText(
 					this,
 					MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, 
-							Algorithms.formatDate(currentSelectedBuild.date.getTime())), Toast.LENGTH_LONG).show();
+							AndroidUtils.formatDate(getMyApplication(), currentSelectedBuild.date.getTime())), Toast.LENGTH_LONG).show();
 		}
 		getMyApplication().getSettings().CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
 	}
@@ -195,7 +197,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		final OsmAndBuild item = (OsmAndBuild) getListAdapter().getItem(position);
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(MessageFormat.format(getString(R.string.install_selected_build), item.tag, 
-				Algorithms.formatDate(item.date.getTime()), item.size));
+				AndroidUtils.formatDate(getMyApplication(), item.date.getTime()), item.size));
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			
 			@Override
@@ -248,7 +250,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			
 			TextView description = (TextView) row.findViewById(R.id.download_descr);
 			StringBuilder format = new StringBuilder();
-			format.append(Algorithms.formatDate(build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
+			format.append(AndroidUtils.formatDate(getMyApplication(), build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
 			description.setText(format.toString());
 
 			int color = getResources().getColor(R.color.color_unknown);

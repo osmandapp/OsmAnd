@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -187,9 +187,7 @@
   <string name="local_index_mi_delete">Elimina</string>
   <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>
   <string name="local_index_download">Download</string>
-  <string name="local_index_tile_data">Dati anteprime: %1$s
-\nZoom minimo: %2$d\nZoom massimo: %3$d\nScaricabile: %4$s
-\nZoom scaricati: %5$s</string>
+  
   <string name="local_index_poi_data">Dati PDI</string>
   <string name="local_index_address_data">Dati indirizzi</string>
   <string name="local_index_transport_data">Dati trasporti</string>
@@ -1322,7 +1320,7 @@
 	<string name="av_photo_play_sound_descr">Quando scatto una foto riproduci il suono</string>
 <string name="local_index_gpx_timespan">\nTempo trascorso: %1$d:%2$02d:%3$02d</string>
 	
-	<string name="speak_warnings_descr">Configura gli avvisi del traffico (fermate forzate, dossi rallentatori) avvisi autovelox, limiti di velocità</string>
+	
     <string name="speak_speed_limit">Annuncia limiti di velocità</string>
     <string name="speak_cameras">Annuncia autovelox</string>
 	<string name="speak_traffic_warnings">Annuncia avvisi di traffico</string>
@@ -1358,4 +1356,33 @@
 	<string name="driving_region_europe_asia">Europa &amp; Asia</string>
 	<string name="driving_region_uk">UK, India, Australia e Altri</string>
 	<string name="map_widget_fps_info">Informazioni FPS</string>
-	</resources>
+	<string name="local_index_tile_data_zooms">Zoom scaricati: %1$s</string>
+    <string name="local_index_tile_data_expire">Scadenza (minuti): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Scaricabile: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Zoom massimo: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Zoom minimo: %1$s</string>
+    <string name="local_index_tile_data_name">Dati mattonelle: %1$s</string>
+    <string name="edit_tilesource_successfully">Sorgente mattonelle : %1$s è stata salvata con successo</string>
+    <string name="edit_tilesource_maxzoom">Zoom massimo</string>
+    <string name="edit_tilesource_expiration_time">Scadenza (minuti)</string>
+    <string name="edit_tilesource_minzoom">Zoom minimo</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Scegli fra gli esistenti...</string>
+    <string name="edit_tilesource_name">Nome</string>
+    <string name="maps_define_edit">Imposta/Modifica…</string>
+	<string name="tip_recent_changes_1_6_t">Cambiamenti nella 1.6:↵
+→\n\t* Imposta/modifica delle sorgenti online di mattonelle (impostazione della data di scadenza)↵
+    </string>
+    <string name="about_version">Versione:</string>
+    <string name="about_settings">Informazioni</string>
+    <string name="about_settings_descr">Informazioni …</string>
+    <string name="tips_and_tricks">Suggerimenti</string>
+    <string name="tip_map_styles">Stili mappa</string>
+	<string name="tip_map_styles_t">OsmAnd supporta la visualizzazione delle mappe vettoriali in differenti stili per adattrsi alle vostre esigenze:↵
+→→\n\t* Diversi dai  preimpostati bilanciati stili della mappa, li trovi sotto \'Menu\' -&gt; \'Configura schermo\' -&gt; \'Stile Mappa\' scegli per esempio↵
+→→\n\t* The \'Touring view\' stile: contiene le più dettagliate informazioni possibile per viaggiare e per visitare, incluse le ottimizzazioni per i guidatori professionali (strade contrasto maggiormente distinguibile), opzione per l\'escursionismo Alpino (scala SAC), itinerari ciclistici, simboli per escursionismo, etc.↵
+→→\n\t* \'Alto contrasto strade \'C mostra le strade con una luminosità dei colori molto accentuata per le situazioni di cattiva illuminazione↵
+→→\n\t* \'Inverno e sci\' crea una vista del paesaggio invernale (coperto da neve), e visone globale delle piste da sci e degli impianti di risalita (in abbinata con \'World ski\' download mappa)↵
+→
+	</string>
+    </resources>

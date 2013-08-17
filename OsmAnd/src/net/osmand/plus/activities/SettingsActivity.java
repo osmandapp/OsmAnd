@@ -2,14 +2,31 @@ package net.osmand.plus.activities;
 
 
 import java.io.File;
+import java.util.Date;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.rastermaps.SettingsRasterMapsActivity;
+import net.osmand.util.Algorithms;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceClickListener;
+import android.text.SpannableString;
+import android.text.format.DateFormat;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.util.TypedValue;
+import android.view.View;
+import android.widget.TextView;
 
 public class SettingsActivity extends SettingsBaseActivity {
 
@@ -25,6 +42,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 	private Preference localIndexes;
 	private Preference general;
 	private Preference routing;
+	private Preference about;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +70,12 @@ public class SettingsActivity extends SettingsBaseActivity {
 				startActivity(new Intent(this, SettingsNavigationActivity.class));
 			} 
 		}
+		about = new Preference(this);
+		about.setOnPreferenceClickListener(this);
+		about.setSummary(R.string.about_settings_descr);
+		about.setTitle(R.string.about_settings);
+		about.setKey("about");
+		screen.addPreference(about);
     }
 
 	@Override
@@ -88,6 +112,9 @@ public class SettingsActivity extends SettingsBaseActivity {
 		} else if (preference == routing) {
 			startActivity(new Intent(this, SettingsNavigationActivity.class));
 			return true;
+		} else if (preference == about) {
+			showAboutDialog();
+			return true;
 		} else if (preference == plugins) {
 			startActivityForResult(new Intent(this, OsmandIntents.getPluginsActivity()), PLUGINS_SELECTION_REQUEST);
 			return true;
@@ -95,6 +122,42 @@ public class SettingsActivity extends SettingsBaseActivity {
 			super.onPreferenceClick(preference);
 		}
 		return false;
+	}
+
+	private void showAboutDialog() {
+		Builder bld = new AlertDialog.Builder(this);
+		bld.setTitle(R.string.about_settings);
+		TextView tv = new TextView(this);
+		String version = Version.getFullVersion(getMyApplication());
+		String vt = getString(R.string.about_version) +"\t";
+		int st = vt.length();
+		String edition = "";
+		try {
+			PackageManager pm = getPackageManager();
+			ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
+			Date date = new Date(new File(appInfo.sourceDir).lastModified());
+			edition = getString(R.string.local_index_installed) +" :\t" + DateFormat.getDateFormat(getApplicationContext()).format(date);
+		} catch(Exception e) {
+		}
+		SpannableString content = new SpannableString(vt + version +"\n" +
+				edition +"\n\n"+
+				getString(R.string.about_content));
+		content.setSpan(new ClickableSpan() {
+			@Override
+			public void onClick(View widget) {
+				final Intent mapIntent = new Intent(SettingsActivity.this, ContributionVersionActivity.class);
+				startActivityForResult(mapIntent, 0);
+			}
+			
+		}, st, st + version.length(), 0);
+		tv.setText(content);
+		tv.setPadding(5, 0, 5, 5);
+		tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
+		tv.setMovementMethod(LinkMovementMethod.getInstance());
+		bld.setView(tv);
+		bld.setPositiveButton(R.string.default_buttons_ok, null);
+		bld.show();
+		
 	}
 
 }

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
@@ -347,7 +347,7 @@
   <string name="local_index_mi_delete">Verwyder</string>
   <string name="local_index_mi_reload">Herlaai van sd kaart</string>
   <string name="local_index_download">Aflaai</string>
-  <string name="local_index_tile_data">Teël inligting: %1$s\nMinimum vergroting: %2$d\nMaksimum vergroting: %3$d\nNuut: %4$s\nVergrotings afgelaai: %5$s</string>
+  
   <string name="local_index_poi_data">Interessante plek inligting</string>
   <string name="local_index_address_data">Adres inligting</string>
   <string name="local_index_transport_data">Vervoer inligting</string>
@@ -400,7 +400,7 @@
   <string name="internet_not_available">Internet verbinding benodig vir bewerking is nie beskikbaar nie</string>
   <string name="install_more">Installeer meer…</string>
   <string name="tip_update_index">Opgradeer aflyn inligting</string>
-  <string name="tip_update_index_t">\tBesit van die jongste kaart inligting is noodsaaklik. OsmAnd bied `n aflaaibestuurder wat kan kyk virr beskikbare aflyn inligting opgraderings.\n\tOm te kyk vir opgraderings gaan na \'Stellings\' -&gt; \'Aflyn inligting\' -&gt; \'Laai aflyn inligting af\'. Na streek lys van die internet verkry is, kan jy keuse \'Kieslys\' -&gt; \'Filter afgelaai\' kies om te beperk tot inligting reeds op jou selfoon.\n\tDie beskikbaarheid van bywerkings word uitgebeeld deur die volgende kleure:\n\t\'Groen \'- dui inligting-lêers identies op apparaat en internet\n\t\'Blou - dui beskikbare bywerkings op internet</string>
+  <string name="tip_update_index_t">\tDie nuutste kaart inligting is noodsaaklik vir aflyn kaart besigtiging en PVB/adres soek. OsmAnd bied `n aflaaibestuurder wat kan kyk virr beskikbare aflyn inligting opgraderings.\n\tOm te kyk vir opgraderings gaan na \'Stellings\' -&gt; \'Aflyn inligting\' -&gt; \'Laai aflyn inligting af\'. Na streek lys van die internet verkry is, kan jy keuse \'Kieslys\' -&gt; \'Filter afgelaai\' kies om te beperk tot inligting reeds op jou selfoon.\n\tDie beskikbaarheid van bywerkings word uitgebeeld deur die volgende kleure:\n\t\'Groen \'- dui inligting-lêers identies op apparaat en internet\n\t\'Blou - dui beskikbare bywerkings op internet</string>
   <string name="level_to_switch_vector_raster_descr">Minimum vergroting vlak om vektor kaarte te gebruik</string>
   <string name="level_to_switch_vector_raster">Minimum vektor vergroting vlak</string>
   <string name="tip_location_sharing">Ligging deel</string>
@@ -423,7 +423,8 @@
   <string name="tip_navigation">Navigasie</string>
   <string name="tip_navigation_t">\tVoordat \'n navigasie begin moet jy \'n bestemming kies. Druk daarna \'kieslys\' -&gt; \'aanwysings\' op die kaart en kies die navigasie wyse.</string>
   <string name="tip_search">op soek</string>
-  <string name="tip_search_t">"\tJy kan soek vir plekke op die kaart, deur adres, deur Ligging, as interessante plek, of as voorafgedefinieerde gunsteling.\n\tDeur \'Soek\' in die hoofkieslys te druk word die soek aktiwiteite begin. Vir al die resultate bied `n kieslys 2 keuses: \'Stel as bestemming \' of \' Wys op die kaart\'. "</string>
+  <string name="tip_search_t">"\tJy kan soek vir plekke op die kaart of van die soek skerm, deur adres, deur Ligging, as interessante plek, of as voorafgedefinieerde gunsteling.\n\tDeur \'Soek\' in die hoofkieslys te druk word die soek aktiwiteite begin. Vir al die resultate bied `n kieslys 2 keuses: \'Stel as bestemming \' of \' Wys op die kaart\'. "
+	</string>
   <string name="tip_map_context_menu">Kaartinhoud kieslys</string>
   <string name="tip_map_context_menu_t">\tDie kaart inhoud kieslys is beskikbaar deur te druk en te hou op die kaart of deur die trekbal-knoppie te druk.\n\tDit lewer \'n boks met punt koördinate. Om die kaart inhoud kieslys venster oop te maak, tik op dit. (Of druk en hou die boks om dit weer te versteek.)\n\tDie kaart inhoud kieslys bevat alle aksies met verwysing na \'n punt (ligging).
 	</string>
@@ -998,7 +999,7 @@
 	<string name="live_monitoring_mode_on">Stop↵\nlewende spoor-natrek</string>
 	<string name="monitoring_mode_on">Stop↵\nGPX opname.</string>
 	<string name="tip_rotation_switching_t_v2">"→Jy kan stel hoe die kaart draai deur die kompasnaald links bo op die skerm te tik. ↵\n→Die keuses is: ↵\n→\'Moet nie draai nie (noord is bo)\' - Kaart sal nie draai nie. Noord sal altyd bo wees ↵\n→\'Koers\' - Kaart sal heeltyd gerig word in jou koers ↵\n→\'Kompas\' -Kaart sal heeltyd gerig word met die kompas lesing "</string>
-	<string name="tip_day_night_mode_t_v2">"\tDie kaart voorkoms kan vir sommige vektor kaarte verander word tussen dag (helder) en nag (dof).
+	<string name="tip_day_night_mode_t_v2">"\tDie kaart voorkoms kan vir aflyn vektor kaarte verander word tussen dag (helder) en nag (dof).
 \n\tNag kleure is veiliger vir nagbestuur. \t\n\tJy kan `n beleid opstel vir dag/nag oorskakeling in \'Keuselys\' -&gt; \'Verstel skerm\' -&gt;\'Dag/nag kaart\'.
 \n\tKeuses is:
 \n\t\'Sonopkoms/Sonondergang\' - outomaties, beheer deur die posisie van die son (verstek)
@@ -1250,7 +1251,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="av_photo_play_sound">Speel geluid wanneer foto geneem word</string>
 	<string name="av_photo_play_sound_descr">Kies of geluid gespeel sal word wanneer foto geneem word</string>
 
-	<string name="speak_warnings_descr">Verstel verkeer waarskuwings (geforseerde stoppe, spoedbulte), spoedkamera waarskuwings, spoedbeperkings</string>
+	
     <string name="speak_speed_limit">Kondig spoedbeperking aan</string>
     <string name="speak_cameras">Kondig spoedkameras aan</string>
 	<string name="speak_traffic_warnings">Kondig verkeerswaarskuwings aan</string>
@@ -1286,4 +1287,26 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="driving_region_europe_asia">Europa &amp; Asië</string>
 	<string name="driving_region_uk">VK, Indië, Australië &amp; Ander</string>
 	<string name="map_widget_fps_info">FPS ontfout inligting</string>
+	<string name="about_version">Weergawe:</string>
+    <string name="about_settings">Omtrent</string>
+    <string name="about_settings_descr">Omtrent…</string>
+    <string name="tips_and_tricks">Wenke</string>
+    <string name="tip_recent_changes_1_6_t">Veranderings in 1.6:
+	\n\t* Definieer/wysig aanlyn teël bron (spesifiseer verstryktyd)
+    </string>
+    <string name="local_index_tile_data_zooms">Vergrotings afgelaai: %1$s</string>
+    <string name="local_index_tile_data_expire">Verstryk (minute): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Aflaaibaar: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maksimum vergroting: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimum vergroting: %1$s</string>
+    <string name="local_index_tile_data_name">Teël inligting: %1$s</string>
+    <string name="edit_tilesource_successfully">Teëlbron %1$s is suksesvol geberg</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptiese merkator</string>
+    <string name="edit_tilesource_maxzoom">Maks vergroting</string>
+    <string name="edit_tilesource_expiration_time">Verstryk (minute)</string>
+    <string name="edit_tilesource_minzoom">Min vergroting</string>
+    <string name="edit_tilesource_url_to_load">Bronadres (URL)</string>
+    <string name="edit_tilesource_choose_existing">Kies bestaande…</string>
+    <string name="edit_tilesource_name">Naam</string>
+    <string name="maps_define_edit">Definieer/Wysig…</string>
 	</resources>

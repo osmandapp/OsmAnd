@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
@@ -146,7 +146,7 @@
     <string name="recording_playing">Belirtilen kayıttan bir ses çalınıyor.\n%1$s</string>
     <string name="recording_open_external_player">Harici oynatıcı aç</string>
     <string name="recording_delete_confirm">Bu kaydı kaldırmak istiyor musunuz?</string>
-    <string name="tip_recent_changes_1_1_0_t">1.1.0'daki değişiklikler:
+    <string name="tip_recent_changes_1_1_0_t">1.1.0\'daki değişiklikler:
 \n\t* Uzaklık hesap eklentisi
 \n\t* Ses/video notları eklentisi
 \n\t* Çevreleme çizgileri eklentisi
@@ -160,7 +160,7 @@
     <string name="layer_recordings">Kayıt katmanı</string>
     <string name="recording_can_not_be_played">Kayıt oynatılamaz</string>
     <string name="recording_context_menu_delete">Kayıt sil</string>
-    <string name="recording_description">Kayıt %3$'nın %1$s %2$s</string>
+    <string name="recording_description">Kayıt %3$\'nın %1$s %2$s</string>
     <string name="recording_default_name">kayıt</string>
     <string name="av_control_stop">durdur</string>
     <string name="av_control_start">başlat</string>
@@ -795,8 +795,8 @@
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Avrupa ve Asya</string>
 	<string name="driving_region_uk">Birleşik Krallık, Hindistan, Avustralya ve Diğerleri</string>
-	<string name="osmodroid_mode_on">OsMoDroid'i Durdur</string>    
-    <string name="osmodroid_mode_off">OsMoDroid'i Başlat</string>
+	<string name="osmodroid_mode_on">OsMoDroid\'i Durdur</string>    
+    <string name="osmodroid_mode_off">OsMoDroid\'i Başlat</string>
     <string name="speak_title">Duyuru…</string>
 	<string name="speak_descr">Sokak isimleri, trafik uyarıları (mecburi duruşlar, tümsekler), hız kamerası uyarıları, hız sınırları bildirimlerini ayarla</string>
 	<string name="speak_street_names">Sokak isimlerini bildir</string>
@@ -833,7 +833,7 @@
     <string name="distance_measurement_finish_subtrack">Yeni bir alt yola başla</string>
     <string name="distance_measurement_clear_route">Tüm mevkileri temizle</string>
     <string name="distance_measurement_save_gpx">GPX olarak kaydet</string>
-    <string name="distance_measurement_load_gpx">Varolan GPX'i aç</string>
+    <string name="distance_measurement_load_gpx">Varolan GPX\'i aç</string>
     <string name="wait_current_task_finished">Mevcut görev bitene kadar bekleyin lütfen</string>
     <string name="use_kalman_filter_compass_descr">Pusula sapmalarından korunmak için Kalman filtresi kullan</string>
     <string name="use_kalman_filter_compass">Kalman filtresi kullan</string>

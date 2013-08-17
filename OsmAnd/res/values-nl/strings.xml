@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -180,7 +180,7 @@
   <string name="tip_day_night_mode">Dag/Nacht modus</string>
   
   <string name="tip_osm_improve">Verbeter openstreetmap gegevens</string>
-  <string name="tip_osm_improve_t">\tOsmAnd gebruikt kaarten, gebaseerd op Openstreetmap.org (OSM) gegevens en kan -behalve voor kaartweergave en navigatie- gebruikt worden om de kwaliteit van OSM gegevens te verbeteren. Je kan eenvoudig met een paar klikken interessepunten of OSM foutrapporten uploaden! \n\tHiervoor moet je eerst je OSM login informatie opgeven bij \'Instellingen\' -&gt; \'Algemene instellingen\' -&gt; \'OSM bewerken\'. \n\tOm een nieuw interessepunt toe te voegen, gebruik de optie \'Creëer interessepunt\' in het kaartcontextmenu. Vervolg met het ingeven van de informatie over het interessepunt en bevestig de wijziging. \n\tFouten in de kaarten kunnen direct worden gerapporteerd via OSM bug, de OSM groep kan het probleem dan sneller oplossen. \n\Om een fout te rapporteren, gebruik de optie \'Open OSM bug\' in het kaartcontextmenu. Geef daar een gedetailleerde beschrijving van het probleem en stuur het op met de \'Toevoegen\' knop. \n\tEr is een Internetverbinding nodig voor het aanmelden van bugs en interessepunten.</string>
+  <string name="tip_osm_improve_t">\tOsmAnd gebruikt kaarten, gebaseerd op Openstreetmap.org (OSM) gegevens en kan -behalve voor kaartweergave en navigatie- gebruikt worden om de kwaliteit van OSM gegevens te verbeteren. Je kan direct met een paar klikken interessepunten of OSM foutrapporten uploaden! \n\tHiervoor moet je eerst je OSM login informatie opgeven bij \'Instellingen\' -&gt; \'Algemene instellingen\' -&gt; \'OSM bewerken\'. \n\tOm een nieuw interessepunt toe te voegen, gebruik de optie \'Creëer interessepunt\' in het kaartcontextmenu. Vervolg met het ingeven van de informatie over het interessepunt en bevestig de wijziging. \n\tFouten in de kaarten kunnen direct worden gerapporteerd via OSM bug, de OSM groep kan het probleem dan sneller oplossen. \n\Om een fout te rapporteren, gebruik de optie \'Open OSM bug\' in het kaartcontextmenu. Geef daar een gedetailleerde beschrijving van het probleem en stuur het op met de \'Toevoegen\' knop. \n\tEr is een Internetverbinding nodig voor het aanmelden van bugs en interessepunten.</string>
   <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
   <string name="download_files_question_space">Vrije ruimte is nu {2} MB! Download {0} bestand(en) ({1} MB)?</string>
   <string name="tip_select_destination_point">Kies bestemming</string>
@@ -259,7 +259,7 @@
   <string name="show_more_map_detail">Toon meer kaartdetails</string>
   <string name="show_more_map_detail_descr">Toon sommige vectorkaartdetails (wegen enz.) al op lager zoomniveau</string>
   <string name="favourites_delete_multiple_succesful">Favoriet(en) succesvol verwijderd.</string>
-  <string name="favorite_delete_multiple">Je gaat %1$d favorieten en %2$d favorietengroepen verwijderen. Weet je dat zeker?</string>
+  <string name="favorite_delete_multiple">Wil je %1$d favorieten en %2$d groepen verwijderen?</string>
   <string name="favorite_home_category">Basis</string>
   <string name="favorite_friends_category">Vrienden</string>
   <string name="favorite_places_category">Plaatsen</string>
@@ -285,9 +285,7 @@
   <string name="local_index_mi_delete">Verwijder</string>
   <string name="local_index_mi_reload">Verversen van SD-kaart</string>
   <string name="local_index_download">Download</string>
-  <string name="local_index_tile_data">Kaartsegmentgegevens: %1$s
-\nMinimum zoom : %2$d\nMaximum zoom : %3$d\nTe downloaden : %4$s
-\nZooms gedownloaded : %5$s</string>
+  
   <string name="local_index_poi_data">Interessepunt-gegevens</string>
   <string name="local_index_address_data">Adresgegevens</string>
   <string name="local_index_transport_data">OV-gegevens</string>
@@ -349,25 +347,25 @@
   <string name="select_tile_source_to_install">Kies (raster)kaarten om te installeren of te updaten</string>
   <string name="internet_not_available">De benodigde internetverbinding voor deze actie is niet beschikbaar</string>
   <string name="install_more">Installeer meer…</string>
-  <string name="tip_update_index">Bijwerken van offline gegevens</string>
-  <string name="tip_update_index_t">\tHet is belangrijk dat de kaartgegevens up-to-date zijn. De downloadmanager kan aangeven of er updates beschikbaar zijn.
-		\n\tOm te controleren op updates, ga naar \'Instellingen\' -&gt; \'Offline gegevens\' -&gt; \'Download of update offline gegevens\'. Druk op de menuknop en kies \'Toon gedownloade\' om de gegevens te zien die al op je apparaat aanwezig zijn.
+  <string name="tip_update_index">Bijwerken van offline kaarten</string>
+  <string name="tip_update_index_t">\tHet is belangrijk dat de kaartgegevens up-to-date zijn voor zoeken op interessepunt/adres en voor offline navigatie. De downloadmanager kan deze offline kaarten (en enkele andere gegevens) downloaden en aangeven of er updates beschikbaar zijn.
+		\n\tOm kaarten te downloaden, ga naar \'Instellingen\' -&gt; \'Offline gegevens\' -&gt; \'Download of update offline gegevens\'.
+		\n\tNadat de regiolijst van het internet is opgehaald, druk op een item om deze te downloaden of te updaten. U kunt de lijst doorzoeken door letters te typen, of gebruik de optie \'Instellingen\' -&gt; \'Toon gedownloade\' om alleen de gegevens te zien die al op je apparaat aanwezig zijn.
 		\n\tGroen: deze gegevens zijn up-to-date
 		\n\tBlauw: er is een update beschikbaar
-		\n\tSchuingedrukte: gegevens zijn gedeactiveerd</string>
+		\n\tSchuingedrukt: gegevens zijn gedeactiveerd</string>
   <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten inplaats van (raster)kaartsegmenten te gebruiken</string>
   <string name="level_to_switch_vector_raster">Min. vector zoomniveau</string>
   <string name="tip_location_sharing">Locatie delen</string>
-  <string name="tip_location_sharing_t">\tJe kan de locatie van interessepunten op je reis delen met familie of vrienden.
-		\n\tOm een locatie te delen:
-		\n\tGebruik het \'Kaart contextmenu\' -&gt; \'Deel locatie\' menu.
-		\n\tSelecteer dan een manier om je locatie te delen. De opties zijn: e-mail, SMS (tekst), of kopieer de locatiecoördinaten naar het prikbord.
+  <string name="tip_location_sharing_t">\tJe kan als volgt de locatie van interessante punten op je reis delen met familie of vrienden:
+		\n\tMet een geselecteerd punt, gebruik het menu \'Kaart contextmenu\' -&gt; \'Locatie delen\'.
+		\n\tKies dan een manier om je locatie te delen. De opties zijn: e-mail, SMS (tekst), of kopieer de locatiecoördinaten naar het klembord van het apparaat.
 	</string>
   <string name="tip_favorites">Favorieten</string>
-  <string name="tip_favorites_t">\tVeelgebruikte punten kunnen worden bewaard als favorieten.
-		\n\tOm een punt als favoriet te bewaren, ga naar het kaartcontextmenu, kies de optie \'Voeg toe aan favorieten\' en geef het dan een naam. Daarna is het toegankelijk via \'Hoofdmenu\' -&gt; \'Favorieten\'.
+  <string name="tip_favorites_t">\tVeelgebruikte punten kunnen als volgt worden bewaard als favorieten:
+		\n\tIn het kaartcontextmenu van een punt, kies de optie \'Voeg toe aan favorieten\' en geef het dan een naam. Daarna is het toegankelijk via \'Hoofdmenu\' -&gt; \'Favorieten\'.
 		\n\tMet een lange druk op een favoriet in het menu \'Favorieten\' kan je deze als bestemming kiezen, bewerken of verwijderen.
-		\n\tJe kan alle favorieten tegelijk op de kaart weergeven door de laag \'Favorieten\' aan te zetten op het kaartscherm (\'Menu\' -&gt; \'Kaartlagen\'.
+		\n\tJe kan alle favorieten tegelijk op de kaart weergeven door de laag \'Favorieten\' aan te zetten op het kaartscherm in \'Menu\' -&gt; \'Kaartlagen\'.
 	</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> kaart classificatie met foto\'s"</string>
   <string name="error_doing_search">Fout bij offline zoeken</string>
@@ -376,24 +374,24 @@
   <string name="system_locale">Systeem</string>
   <string name="preferred_locale_descr">Kies taal</string>
   <string name="preferred_locale">Taal</string>
-  <string name="tip_map_switch">Kaartbron</string>
+  <string name="tip_map_switch">Kies een kaartbron</string>
   
   <string name="tip_app_mode">Gebruiksprofiel</string>
   
-  <string name="tip_navigation">Navigatie</string>
+  <string name="tip_navigation">Aanwijzingen (navigatie)</string>
   <string name="tip_navigation_t">\tVoor het starten van navigatie moet je een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en kies het type navigatie.</string>
   <string name="tip_search">Zoeken</string>
-  <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een adres, een locatie, een interessepunt of een favoriet.
+  <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' -&gt; \'Zoek dichtbij hier\'), een adres (met het zoekscherm), een interessepunt (op naam of soort) of een favoriet.
 		\n\tDoor in het hoofdmenu op \'Zoeken\' te drukken, worden de zoekacties geopend. Voor elk gevonden resultaat biedt het contextmenu twee opties: \'Aanwijzingen\' of \'Toon op kaart\'.
 	</string>
   <string name="tip_map_context_menu">Contextmenu op de kaart</string>
-  <string name="tip_map_context_menu_t">\tHet kaart-contextmenu is beschikbaar door een lange druk op de kaart of door op de trackballknop te drukken.
-		\n\tDit toont een venster met de puntcoördinaten. Druk erop om het kaart-contextmenu te openen. (Een lange druk verbergt het venster weer.)
-		\n\tHet kaart-contextmenu bevat alle acties met betrekking tot een punt (locatie).
+  <string name="tip_map_context_menu_t">\tHet kaart-contextmenu is beschikbaar door een lange druk op de kaart, door op de trackballknop te drukken, of middels \'Menu\' -&gt; \'Gebruik locatie…\' (de laatste twee gebruiken het midden van de kaart als referentiepunt).
+		\n\tDit toont een venster met de puntcoördinaten. Druk erop om het kaartcontextmenu te openen. (Een lange druk verbergt het venster weer.)
+		\n\tHet kaartcontextmenu bevat alle acties met betrekking tot een punt (locatie).
 	</string>
   <string name="tip_initial">Tips and Trucs</string>
   <string name="tip_initial_t">\tOsmAnd is een navigatieprogramma met vele mogelijkheden.
-		\n\tOp het menuscherm zijn diverse tips te vinden onder het teken \'?\' rechts bovenaan.
+		\n\tIn het kaartscherm zijn diverse tips te vinden onder \'Menu\' -&gt; \'Tips\'.
 	</string>
   <string name="next_button">Volgende</string>
   <string name="previous_button">Vorige</string>
@@ -473,7 +471,7 @@
   <string name="voice_is_not_available_title">Geen stem-begeleiding geselecteerd</string>
   <string name="daynight_mode_day">Dag</string>
   <string name="daynight_mode_night">Nacht</string>
-  <string name="daynight_mode_auto">Schemering</string>
+  <string name="daynight_mode_auto">Zonsopgang/-ondergang</string>
   <string name="daynight_mode_sensor">Lichtsensor</string>
   <string name="daynight_descr">Kies dag/nacht-modus omschakelregel</string>
   <string name="daynight">Dag/nacht modus</string>
@@ -494,7 +492,7 @@
   <string name="rendering_exception">Fout opgetreden bij kaartgeneratie van het geselecteerde gebied</string>
   <string name="show_point_options">Gebruik locatie…</string>
   <string name="renderer_load_sucess">Kaartgenerator succesvol geladen</string>
-  <string name="renderer_load_exception">Fout opgetreden: renderer niet geladen</string>
+  <string name="renderer_load_exception">Fout opgetreden: kaartgenerator niet geladen</string>
   <string name="renderers">Vector kaartgenerator</string>
   <string name="renderers_descr">Kies kaartweergavestijl</string>
   <string name="poi_context_menu_website">Toon website</string>
@@ -1007,31 +1005,33 @@
 <string name="email">email</string>
 <string name="filterpoi_activity">Creëer interessepuntfilter</string>
 <string name="select_navigation_mode">Kies soort vervoer</string>
-<string name="day_night_info_description">Zonsopgang : %1$s \nZonsondergang : %2$s</string>
+<string name="day_night_info_description">Zonsopgang: %1$s \nZonsondergang: %2$s</string>
 <string name="day_night_info">Dag/nacht info</string>
 <string name="map_widget_day_night">Dag/nacht kaart</string>
 <string name="map_widget_vector_attributes">Kaartweergave attributen:</string>
 <string name="map_widget_renderer">Kaartweergave stijl</string>
-<string name="tip_rotation_switching_t_v2">"\tJe kan kiezen hoe de kaartweergave geroteerd wordt door herhaaldelijk te tikken op het kompas-icoon.↵
-\n\tDe keuzen zijn:↵
-\n\t\'Niet roteren (het noorden is boven)\' - De kaart wordt niet geroteerd. Het noorden is altijd boven↵
-\n\t\'In beweegrichting\' - De kaartrotatie wordt permanent aangepast aan de beweegrichting↵
-\n\t\'Volgens kompas\' - De kaartrotatie wordt permanent aangepast aan de kompas-uitlezing van het apparaat "</string>
-<string name="tip_day_night_mode_t_v2">"\tDe kaartpresentatie kan voor sommige vectorkaarten gewisseld worden tussen dag (helderder) en nacht (donkerder).↵
-\n\tNachtkleuren zijn veiliger voor nachtelijke ritten.↵
-\n\tJe kan een voorkeursinstelling kiezen in \'Menu\' -&gt; \'Definieer beeld\' -&gt; \'Configureer scherm…\' -&gt; \'Dag/nacht kaart\'.↵
-\n\tDe keuzen zijn:↵
-\n\t\'Schemering\' - automatiche modus, bepaald door de positie van de zon (standaard)↵
-\n\t\'Dag\' - gebruik altijd de dag modus↵
-\n\t\'Nacht\' - gebruik altijd de nacht modus↵
-\n\t\'Lichtsensor\' - de kaartweergave wordt bepaald door de lichtsensor van he apparaat (indien aanwezig) "
+<string name="tip_rotation_switching_t_v2">\tJe kan kiezen hoe de kaartweergave geroteerd wordt door herhaaldelijk te tikken op het kompas-icoon.
+		\n\tDe keuzen zijn:
+		\n\t\'Niet roteren (het noorden is boven)\' - De kaart wordt niet geroteerd. Het noorden is altijd boven
+		\n\t\'In beweegrichting\' - De kaartrotatie wordt permanent aangepast aan de beweegrichting
+		\n\t\'Volgens kompas\' - De kaartrotatie wordt permanent aangepast aan de kompas-uitlezing van het apparaat
 	</string>
-<string name="tip_map_switch_t_v2">"\tDe kaartbron en de kaartlagen kunnen vanuit het kaartscherm worden gewijzigd via \'Menu\' -&gt; \'Kaartlagen\'.↵
-\n\tOnder \'Kaartbron…\' kan je kiezen uit gedownloade vectorkaarten, online kaartsegmenten (wan een website, activeer hiervoor de plugin \'Online kaarten\'), of kaarten die je gemaakt hebt met b.v. OsmAndMapCreator op een PC.↵
-\n\tOsmAnd ondersteunt ook zelfgemaakte kaartbronnen. "
+<string name="tip_day_night_mode_t_v2">\tDe kaartpresentatie kan voor offline vectorkaarten gewisseld worden tussen dag (helderder) en nacht (donkerder).
+		\n\tNachtkleuren zijn veiliger voor nachtelijke ritten.
+		\n\tJe kan een voorkeursinstelling kiezen in \'Menu\' -&gt; \'Definieer beeld\' -&gt; \'Configureer scherm\' -&gt; \'Dag/nacht kaart\'.
+		\n\tDe keuzen zijn:
+		\n\t\'Zonsopgang/-ondergang\' - automatische modus, bepaald door de positie van de zon (standaard)
+		\n\t\'Dag\' - gebruik altijd de dag modus
+		\n\t\'Nacht\' - gebruik altijd de nacht modus
+		\n\t\'Lichtsensor\' - de kaartweergave wordt bepaald door de lichtsensor van het apparaat (indien aanwezig)
 	</string>
-<string name="tip_app_mode_t_v2">"\tOsmAnd ondersteunt verschillende vervoers-profielen.↵
-\n\tJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (iconen auto, fiets of voetganger), of bij het maken van een route. "</string>
+<string name="tip_map_switch_t_v2">\tDe kaartbron en de kaartlagen kunnen vanuit het kaartscherm worden gewijzigd via \'Menu\' -&gt; \'Kaartlagen\'.
+		\n\tOnder \'Kaartbron…\' kan je kiezen uit gedownloade vectorkaarten (standaard, benodigd voor offline navigatie), gegenereerde (online of opgeslagen) kaartsegmentenbronnen (activeer hiervoor de plugin \'Online kaarten\') of kaarten die je gemaakt hebt met b.v. OsmAndMapCreator op een PC.
+		\n\tOsmAnd ondersteunt ook zelfgemaakte kaartbronnen.
+	</string>
+<string name="tip_app_mode_t_v2">\tOsmAnd ondersteunt verschillende vervoersprofielen.
+		\n\tJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (icoon voor auto, fiets of voetganger), of bij het maken van een route (\'transportmodus\').
+	</string>
 <string name="osmand_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met raster- en vectorkaarten</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met online en offline kaarten</string>
 <string name="osmand_long_description_1000_chars">
@@ -1148,10 +1148,11 @@
     
     
     <string name="map_widget_max_speed">Snelheidslimiet</string>
-    <string name="tip_altitude_offset">Hoogteweergave - Afwijkingscorrectie</string>
-	<string name="tip_altitude_offset_t">"\tDe meeste GPS ontvangers geven hoogtemetingen in het WGS84-systeem. De conversie naar lokale systemen vereist een positie-afhankelijke correctie.
-\n\tEen nauwkeuriger benadering voor deze systemen is het EGM96-systeem. OsmAnd kan de hoogte nu ook weergeven in het EGM96-systeem.
-\n\tHiervoor kan je de World Altitude Correction (WW15MGH.DAC) downloaden via de Offline Data Manager (het origineel staat op http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    <string name="tip_altitude_offset">Hoogte: Afwijkingscorrectie</string>
+	<string name="tip_altitude_offset_t">\tDe meeste GPS ontvangers geven hoogtemetingen in het WGS84-systeem. De conversie naar lokale systemen vereist een positie-afhankelijke correctie.
+		\n\tEen nauwkeuriger benadering voor deze systemen is het EGM96-systeem (geoid). OsmAnd kan de hoogte nu ook weergeven in het EGM96-systeem.
+		\n\tHiervoor kan je de World Altitude Correction (WW15MGH.DAC) downloaden via \'Instellingen\' -&gt; \'Offline gegevens\' (het origineel staat op http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+	</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Verberg grenzen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9)</string>
@@ -1462,7 +1463,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="distance_measurement_clear_route">Wis alle punten</string>
     <string name="distance_measurement_save_gpx">Bewaar als GPX-bestand</string>
     <string name="distance_measurement_load_gpx">Open bestaand GPX-bestand</string>
-    <string name="local_osm_changes_backup_successful">OSM-wijzigingsbestand succesvol aangemaakt %1$s</string>
+    <string name="local_osm_changes_backup_successful">OSM-wijzigingenbestand succesvol aangemaakt %1$s</string>
     <string name="local_osm_changes_backup_failed">Backup van OSM-wijzigingen is mislukt</string>
     <string name="local_osm_changes_backup">Backup als OSM-wijziging</string>
     <string name="tip_recent_changes_1_4_t">Wijzigingen in 1.4:
@@ -1493,7 +1494,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="av_camera_focus_continuous">Voortdurend blijven scherpstellen</string>
 	<string name="av_photo_play_sound_descr">Kies of er een geluid wordt afgespeeld tijdens het nemen van foto\'s</string>
 
-	<string name="speak_warnings_descr">Gesproken waarschuwingen bij stopsignalen, verkeersdrempels, snelheidscamera\'s, snelheidsbeperkingen instellen</string>
+	
     <string name="speak_speed_limit">Meld snelheidsbeperking</string>
     <string name="speak_cameras">Meld snelheidscamera\'s</string>
 	<string name="speak_traffic_warnings">Meld verkeerswaarschuwingen</string>
@@ -1529,4 +1530,33 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="driving_region_europe_asia">Europa en Azië</string>
 	<string name="driving_region_uk">GB, India, Australië en andere</string>
 	<string name="map_widget_fps_info">FPS-debuginformatie</string>
-	</resources>
+	<string name="local_index_tile_data_zooms">Zoomniveau\'s gedownload: %1$s</string>
+    <string name="local_index_tile_data_expire">Verlopen (minuten): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Downloadbaar: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maximum zoomniveau: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
+    <string name="local_index_tile_data_name">Kaartsegmentgegevens: %1$s</string>
+    <string name="edit_tilesource_successfully">Kaartsegmentbron %1$s werd succesvol opgeslagen</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptische Mercator</string>
+    <string name="edit_tilesource_maxzoom">Max zoomniveau</string>
+    <string name="edit_tilesource_expiration_time">Verlopen (minuten)</string>
+    <string name="edit_tilesource_minzoom">Min zoomniveau</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Kies bestaand...</string>
+    <string name="edit_tilesource_name">Naam</string>
+    <string name="maps_define_edit">Definieer/bewerk…</string>
+	<string name="tip_recent_changes_1_6_t">Veranderingen in 1.6:
+	\n\t* Definieer/bewerk online kaartsegmentbron (specificeer verlooptijd)
+    </string>
+    <string name="about_version">Versie:</string>
+    <string name="about_settings">Over</string>
+    <string name="about_settings_descr">Versieinformatie, licenties, projectdeelnemers</string>
+    <string name="tips_and_tricks">Tips</string>
+    <string name="tip_map_styles">Kaartstijlen</string>
+	<string name="tip_map_styles_t">OsmAnd kan de offline vectorkaarten in verschillende kaartstijlen weergeven afhankelijk van je wensen:
+		\n\t* Naast de uitgebalanceerde standaardkaartstijl, kan je onder \'Menu\' -&gt; \'Configureer scherm\' -&gt; \'Kaartstijl\' bijvoorbeeld de keuze uit:
+		\n\t* De \'Touring view\'-stijl: deze bevat de meest gedetailleerde informatie voor reizen en tours, waaronder optimalisatie voor professioneel gebruik(hoger contrast voor herkenbaarheid wegen), opties voor bergtochten (SAC-moeilijkheidsgraad), fietsroutes, wandelsymbolen, etc.
+		\n\t* \'High contrast roads\' toont wegen in uitgesproken heldere kleuren voor situaties met veel omgevingslicht
+		\n\t* \'Winter and ski\' toont een (met sneeuw bedekt) winterlandschap en toont wereldwijd skihellingen en liften (wanneer gebruikt met de \'World ski\' kaartdownload)
+	</string>
+    </resources>
