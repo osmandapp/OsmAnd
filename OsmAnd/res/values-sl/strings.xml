@@ -1242,7 +1242,7 @@ Pomembnejše lastnosti:
 	\n\t* Popravki napak (izračun naj-optimalne poti)
     </string>
     <string name="download_hillshade_item">Senčen teren</string>
-    <string name="download_hillshade_maps">Zemljevid senc terena</string>
+    <string name="download_hillshade_maps">Zemljevidi senc terena</string>
     <string name="tip_recent_changes_1_2_t">"Popravki v 1.2.1:↵\n\t* Popravek za Geo Intent (Foursquare, c:geo)↵\n\t* Popravek za tresenje zaslona med navigacijo↵\n\t* Drugi manjši popravki↵\n↵\nSpremembe v 1.2:
 \n\t* Odpravljene napake (boljše usmerjanje, iskanje, zvočno in video snemanje, glasovna navodila, boljši prikaz)
 \n\t* Enostavnejša nastavitev prikaza senčenja terena (potrebuje vtičnik za izohipse \"Contour Lines plugin\")
