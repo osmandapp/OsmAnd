@@ -22,4 +22,4 @@ if [ -z "$OSMAND_X86_ONLY" ] && [ -z "$OSMAND_ARM_ONLY" ] && [ -z "$OSMAND_ARMv5
 fi
 export BUILD_ONLY_OLD_LIB=1
 "$SCRIPT_LOC/../../core/externals/configure.sh"
-(cd "$SCRIPT_LOC" && "$ANDROID_NDK/ndk-build" -j`nproc`)
+(cd "$SCRIPT_LOC" && "$ANDROID_NDK/ndk-build" -j1)
