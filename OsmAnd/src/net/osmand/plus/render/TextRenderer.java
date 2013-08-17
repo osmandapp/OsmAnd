@@ -242,18 +242,11 @@ public class TextRenderer {
 						if (text.shieldRes != null) {
 							Bitmap ico = RenderingIcons.getIcon(context, text.shieldRes);
 							if (ico != null) {
-								if (rc.getDensityValue(1) != 1) {
-									float left = text.centerX - rc.getDensityValue(ico.getWidth() / 2) - 0.5f;
-									float top = text.centerY - rc.getDensityValue(ico.getHeight() / 2) - rc.getDensityValue(4.5f);
-									Rect rec = new Rect(0, 0, ico.getWidth(), ico.getHeight());
-									cv.drawBitmap(ico, rec,
-											new RectF(left, top, left + rc.getDensityValue(ico.getWidth()), top
-													+ rc.getDensityValue(ico.getHeight())), paintIcon);
-								} else {
-									float left = text.centerX - ico.getWidth() / 2 - 0.5f;
-									float top = text.centerY - ico.getHeight() / 2 - rc.getDensityValue(4.5f);
-									cv.drawBitmap(ico, left, top, paintIcon);
-								}
+								float left = text.centerX - ico.getWidth() / 2
+										- 0.5f;
+								float top = text.centerY - ico.getHeight() / 2
+										- rc.getDensityValue(4.5f);
+								cv.drawBitmap(ico, left, top, paintIcon);
 							}
 						}
 
