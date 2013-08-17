@@ -9,6 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+
+    <string name="measurement_point_menu_show_latlon">Show point lat/lon </string>
+    <string name="measurement_point_menu_insert_point">Insert point before selected point</string>
+    <string name="measurement_point_menu_insert_note">Add/edit note</string>
+    <string name="measurement_track_distance">Total Distance: </string>
+    <string name="measurement_subTrack_distance">Subtrack Distance: </string>
+    <string name="measurement_point_note">Enter/edit note to assign to point</string>
 	<string name="tip_map_styles">Map Styles</string>
 	<string name="tip_map_styles_t">OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
 		\n\nOther than the balanced \'default\' map style, you may in \'Menu\' → \'Configure screen\' → \'Map Style\' select for example
@@ -46,7 +53,7 @@
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europe &amp; Asia</string>
 	<string name="driving_region_uk">UK, India, Australia &amp; Others</string>
-	<string name="osmodroid_mode_on">Stop OsMoDroid</string>    
+    <string name="osmodroid_mode_on">Stop OsMoDroid</string>    
     <string name="osmodroid_mode_off">Start OsMoDroid</string>
     <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
     <string name="speak_title">Announce&#8230;</string>
@@ -98,7 +105,7 @@
     <string name="local_osm_changes_backup_successful">OSM change file successfully generated %1$s</string>
     <string name="local_osm_changes_backup_failed">Backup OSM changes failed</string>
     <string name="local_osm_changes_backup">Backup as OSM change</string>
-    <string name="delete_point">Delete Point</string>
+    <string name="measurement_point_menu_delete_point">Delete point</string>
     <string name="plugin_distance_point_time">time</string>
     <string name="plugin_distance_point_hdop">precision</string>
     <string name="plugin_distance_point_speed">speed</string>

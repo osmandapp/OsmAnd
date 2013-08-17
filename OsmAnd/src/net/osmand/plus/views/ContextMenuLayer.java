@@ -55,9 +55,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private ImageView closeButton;
 	private DisplayMetrics dm;
 	private OsmandMapTileView view;
-	private int BASE_TEXT_SIZE = 170;
-	private int SHADOW_OF_LEG = 5;
-	private int CLOSE_BTN = 8;
+	public int BASE_TEXT_SIZE = 170;
+	public int SHADOW_OF_LEG = 5;
+	public int CLOSE_BTN = 8;
 	
 	private final MapActivity activity;
 	private Drawable boxLeg;
@@ -210,7 +210,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		String description = getSelectedObjectDescription();
 		setLocation(latLon, description);
 		view.refreshMap();
-		return false;
+		return true;
 	}
 
 	public LatLon selectObjectsForContextMenu(PointF point) {
