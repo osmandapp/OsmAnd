@@ -28,7 +28,13 @@ import net.osmand.router.RoutingConfiguration;
 
 public class NativeLibrary {
 
-	public static class RenderingGenerationResult {
+    protected final boolean newLibrary;
+
+    public NativeLibrary(boolean newLibrary) {
+        this.newLibrary = newLibrary;
+    }
+
+    public static class RenderingGenerationResult {
 		public RenderingGenerationResult(ByteBuffer bitmap) {
 			bitmapBuffer = bitmap;
 		}
@@ -84,7 +90,7 @@ public class NativeLibrary {
 	}
 
 	/**
-	 * @param searchResultHandle
+	 * @param
 	 *            - must be null if there is no need to append to previous results returns native handle to results
 	 */
 	public NativeSearchResult searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom,
@@ -106,7 +112,12 @@ public class NativeLibrary {
 	}
 
 	public boolean initMapFile(String filePath) {
-		return initBinaryMapFile(filePath);
+        if(newLibrary) {
+            // TODO
+            return initBinaryMapFile(filePath);
+        } else {
+            return initBinaryMapFile(filePath);
+        }
 	}
 
 	public boolean initCacheMapFile(String filePath) {
@@ -221,13 +232,10 @@ public class NativeLibrary {
 	 */
 
 	private static final Log log = PlatformUtil.getLog(NativeLibrary.class);
-	public static boolean loadAllLibs(String path) {
-		boolean b = true;
-		b &= load("Qt5Core", path);
-		b &= load("OsmAndCore", path);
-		b &= load("OsmAndCoreUtils", path);
-		b &= load("OsmAndJNI", path);
-		return b;
+	
+	
+	public static boolean loadNewLib(String path) {
+		return load("OsmAndJNI", path);
 	}
 	
 	public static boolean loadOldLib(String path) {
@@ -289,4 +297,5 @@ public class NativeLibrary {
 		} // fall through
 		return false;
 	}
+
 }

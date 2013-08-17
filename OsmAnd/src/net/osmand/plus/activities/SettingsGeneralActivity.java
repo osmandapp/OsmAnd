@@ -44,7 +44,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
 	private ListPreference drivingRegionPreference;
-	private ListPreference metricsAndConstantsPreference;
 
 	
 	@Override
@@ -211,7 +210,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		applicationModePreference = (ListPreference) screen.findPreference(settings.APPLICATION_MODE.getId());
 		applicationModePreference.setOnPreferenceChangeListener(this);
 		drivingRegionPreference = (ListPreference) screen.findPreference(settings.DRIVING_REGION.getId());
-		metricsAndConstantsPreference = (ListPreference) screen.findPreference(settings.METRIC_SYSTEM.getId());
     }
 
 
