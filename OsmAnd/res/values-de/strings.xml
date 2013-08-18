@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-	<resources>
-	<string name="tip_map_styles">Kartendarstellung</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_map_styles">Kartendarstellung</string>
 	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten für verschiedene Verwendungszwecke optimiert dartsellen:
 		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' → \'Anzeige konfigurieren\' → \'Map Style\' → \'Kartendarstellung\' zum Beispiel auswählen:
 		\n\t* Den \'Touring view\' Stil, er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahrradrouten, Wandersymbol-Untertützung, usw.
@@ -1425,4 +1424,26 @@
 	<string name="driving_region">Fahr-Gebiet</string>
 	<string name="osmodroid_mode_on">Stopp OsMoDroid</string>
 	<string name="osmodroid_mode_off">Start OsMoDroid</string>
+	<string name="about_version">Version :</string>
+    <string name="about_settings">Über</string>
+    <string name="about_settings_descr">Versions info, Lizenz, Projekt Mitglieder</string>
+    <string name="tips_and_tricks">Tips</string>
+    <string name="tip_recent_changes_1_6_t">Änderungen in 1.6:
+	\n\t* Definiere/Bearbeite Online Titel quelle (spezifiziere Ablaufdatum)
+    </string>
+    <string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
+    <string name="local_index_tile_data_expire">Verfall (Minuten): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Herunterladbar: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maximum Zoom: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimum Zoom: %1$s</string>
+    <string name="local_index_tile_data_name">Kachel Daten: %1$s</string>
+    <string name="edit_tilesource_successfully">Kachelquelle %1$s ist erfolgreich gespeichert</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptischer Merkator</string>
+    <string name="edit_tilesource_maxzoom">Max Zoom</string>
+    <string name="edit_tilesource_expiration_time">Ablauf (Minuten)</string>
+    <string name="edit_tilesource_minzoom">Min Zoom</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Wähle Vorhandene...</string>
+    <string name="edit_tilesource_name">Name</string>
+    <string name="maps_define_edit">Definieren/Bearbeiten…</string>
 	</resources>
