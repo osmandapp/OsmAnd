@@ -1419,7 +1419,7 @@
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa und Asien</string>
-	<string name="driving_region_uk">UK, Indien, Australien u.a.</string>
+	<string name="driving_region_uk">GB, Indien, Australien u.a.</string>
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
 	<string name="driving_region">Fahr-Gebiet</string>
 	<string name="osmodroid_mode_on">Stopp OsMoDroid</string>
