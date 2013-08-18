@@ -1343,7 +1343,7 @@
 	<string name="local_indexes_cat_srtm">Konturlinien-Daten</string>
 	<string name="wait_current_task_finished">Bitte warten Sie, der laufende Task wird beendet</string>
 	<string name="downloading_file_new">Herunterladen…</string>
-	<string name="local_osm_changes_backup_successful">Zwischenspeichern der bearbeiteten OSM-Daten erfolgreich %1$s</string>
+	<string name="local_osm_changes_backup_successful">OSM-Änderungsdatei erfolgreich erzeugt %1$s</string>
 	<string name="local_osm_changes_backup_failed">Fehler beim Zwischenspeichern der bearbeiteten OSM-Daten</string>
 	<string name="local_osm_changes_backup">Als OSM-Daten-Änderung zwischenspeichern</string>
 	<string name="delete_point">Punkt löschen</string>
