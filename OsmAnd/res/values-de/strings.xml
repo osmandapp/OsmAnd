@@ -1422,7 +1422,7 @@
 	<string name="driving_region_uk">GB, Indien, Australien u.a.</string>
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
 	<string name="driving_region">Fahr-Gebiet</string>
-	<string name="osmodroid_mode_on">Stopp OsMoDroid</string>
+	<string name="osmodroid_mode_on">Stoppe OsMoDroid</string>
 	<string name="osmodroid_mode_off">Start OsMoDroid</string>
 	<string name="about_version">Version :</string>
     <string name="about_settings">Über</string>
