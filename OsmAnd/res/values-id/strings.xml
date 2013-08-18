@@ -1,14 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
-  <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
-  <string name="address_search_desc">Mencari alamat</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="address_search_desc">Mencari alamat</string>
   <string name="navpoint_search_desc">Koordinat</string>
   <string name="transport_search_desc">Mencari transportasi</string>
   <string name="favourites_search_desc">Mencari favorit</string>
@@ -69,4 +60,9 @@
     <string name="download_hillshade_maps">Overlay Hillshade</string>
     <string name="dist_control_start">mulai</string>
     <string name="local_indexes_cat_av">Data Audio/Video</string>
+    <string name="about_version">Versi :</string>
+    <string name="about_settings">Tentang</string>
+    <string name="about_settings_descr">Info versi, lisensi, anggota</string>
+    <string name="tips_and_tricks">Tip</string>
+    <string name="local_index_tile_data_downloadable">Dapat di download: %1$s</string>
     </resources>
