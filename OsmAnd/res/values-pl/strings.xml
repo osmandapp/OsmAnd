@@ -113,7 +113,7 @@
   <string name="map_text_size">Rozmiar tekstu</string>
   <string name="trace_rendering">Informacje o rysowaniu</string>
   <string name="trace_rendering_descr">Wyświetlaj informacje o wydajności rysowania mapy</string>
-  <string name="tip_recent_changes">Ostatnie zmiany</string>
+  <string name="tip_recent_changes">Ostatnie Zmiany</string>
   <string name="tip_recent_changes_0_6_6_t">"Zmiany dla 0.6.6: \n\t- wyszukiwanie głosowe w nawigacji za pomocą TTS \n\t- render mapy pokazuje więcej szczegółów \n\t- mapa podstawowa zawarta w aplikacji \n\t- ulepszenie routingu offline (ciągle eksperymentalny) \n\t- opcje routingu dla GPX \n\t- aktualizacja interfejsu i poprawka wielu błędów "</string>
   <string name="voice_not_use">Nie używaj</string>
   <string name="voice_not_specified">Brak</string>
@@ -128,8 +128,10 @@
   <string name="tip_rotation_switching">Orientacja mapy</string>
   
   <string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz pobrać nową w Ustawieniach lub przełączyć się na mapy online.</string>
-  <string name="switch_to_vector_map_to_see">Dla tej lokalizacji dostępna jest wektorowa mapa offline. \n\t\n\tAby użyć wybierz \'Menu\' -&gt; \'Warstwy mapy\' -&gt; \'Źródło mapy…\' -&gt; \'Wektorowe mapy offline\'.</string>
-  <string name="binary_map_download_success">Pobieranie zakończone.\n\t\n\tAby użyć aktywuj \'Menu\' -&gt; \'Warstwy mapy\' -&gt; \'Źródło mapy…\' -&gt; \'Wektorowe mapy offline\'.</string>
+  <string name="switch_to_vector_map_to_see">Dla tej lokalizacji dostępna jest wektorowa mapa offline. \n\t\n\tAby użyć wybierz \'Menu\' → \'Warstwy mapy\' → \'Źródło mapy…\' → \'Wektorowe mapy offline\'.</string>
+  <string name="binary_map_download_success">Pobieranie zakończone.
+		\n\t\n\tAby użyć aktywuj \'Menu\' -&gt; \'Warstwy mapy\' -&gt; \'Źródło mapy…\' -&gt; \'Wektorowe mapy offline\'.
+	</string>
   <string name="choose_audio_stream">Wyjście głosu nawigatora</string>
   <string name="choose_audio_stream_descr">Wybierz kanał do odtwarzania głosu nawigatora (zależne od możliwości systemu)</string>
   <string name="voice_stream_voice_call">Kanał głosowy</string>
@@ -153,22 +155,26 @@
   <string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
   <string name="install_more">Zainstaluj więcej…</string>
   <string name="tip_update_index">Aktualizacja map offline</string>
-  <string name="tip_update_index_t">\tPosiadanie aktualnych map to podstawa. OsmAnd zapewnia menedżer danych, który może sprawdzić dostępne aktualizacje.
-\n\tAby sprawdzić aktualizacje przejdź do \'Ustawień\' -&gt; \'Zarządzanie danymi\' -&gt; \'Pobierz\'. Po tym jak zostanie pobrana z Internetu lista regionów, możesz wybrać opcję \'Menu\' -&gt; \'Filtruj pobrane\', aby wybrać uaktualnienia jedynie dla danych znajdujących się już na urządzeniu.\n\tWpisy koloru zielonego oznaczają dane identyczne z tymi na serwerze
-\n\tWpisy koloru niebieskiego oznaczają dostępne aktualizacje
-\n\tWpisy czcionką pochyloną oznaczają wyłączone dane na urządzeniu</string>
+  <string name="tip_update_index_t">Posiadanie aktualnych map to podstawa dla wyszukiwania adresów POI oraz dla nawigacji offline. OsmAnd zapewnia menedżer danych, który może sprawdzić dostępne aktualizacje (oraz inne pliki) oraz aby pobrać dostępne aktualizacje.
+		\n\nAby sprawdzić aktualizacje przejdź do \'Ustawień\' -&gt; \'Zarządzanie danymi\' -&gt; \'Pobierz\'.
+		\n\nPo tym jak zostanie pobrana z Internetu lista regionów, możesz wybrać opcję \'Menu\' -&gt; \'Filtruj pobrane\', aby wybrać uaktualnienia jedynie dla danych znajdujących się już na urządzeniu.
+		\n\n\t* Wpisy koloru zielonego oznaczają dane identyczne z tymi na serwerze
+		\n\t* Wpisy koloru niebieskiego oznaczają dostępne aktualizacje
+		\n\t* Wpisy czcionką pochyloną oznaczają wyłączone dane na urządzeniu
+	</string>
   <string name="level_to_switch_vector_raster_descr">Minimalne zbliżenie dla map wektorowych</string>
   <string name="level_to_switch_vector_raster">Min. zoom dla mapy wektorowej</string>
   <string name="tip_day_night_mode">Tryb dzień/noc</string>
   
-  <string name="tip_location_sharing">Udostępnij pozycję</string>
-  <string name="tip_location_sharing_t">\tMożesz podzielić się swoją pozycją GPS z rodziną lub znajomymi. \n\tAby to zrobić:: \n\tWybierz z menu kontekstowego mapy \'Opcje punktu\' -&gt; \'Udostępnij pozycję GPS\'. \n\tNastępnie wybierz sposób udostępnienia. Do wyboru jest e-mail, SMS lub zwykłe skopiowanie koordynat do schowka.
+  <string name="tip_location_sharing">Udostępnij Pozycję</string>
+  <string name="tip_location_sharing_t">\tMożesz podzielić się swoją pozycją GPS z rodziną lub znajomymi poprzez \'Użyj lokalizacji...\' → \'Udostępnij lokalizację\'.
+		\n\nWybierz z podziel się lokalizacją a następnie wybierz sposób udostępnienia. Do wyboru jest e-mail, SMS lub zwykłe skopiowanie koordynat do schowka.
 	</string>
   <string name="tip_favorites">Ulubione punkty</string>
-  <string name="tip_favorites_t">\tCzęsto używane punkty mogą zostać zapisane jako ulubione.
-\n\tAby zapisać punkt jako ulubiony przejdź do menu kontekstowego, wybierz \'Opcje punktu\' -&gt; \'Dodaj do ulubionych\' i wprowadź jego nazwę. Po zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Ulubione\'.
-\n\tDłuższe naciśnięcie pozycji w \'Ulubionych\' pokaże opcje dotyczące tego punktu.
-\n\tAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Warstwy mapy\'.
+  <string name="tip_favorites_t">Często używane punkty mogą zostać zapisane jako Ulubione.
+		\n\nAby zapisać punkt jako ulubiony przejdź do menu kontekstowego, wybierz \'Opcje punktu\' -&gt; \'Dodaj do ulubionych\' i wprowadź jego nazwę.
+		\n\nPo zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Ulubione\'. Dłuższe naciśnięcie pozycji w \'Ulubionych\' pokaże opcje dotyczące tego punktu.
+		\n\nAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Warstwy mapy\'.
 	</string>
   <string name="error_doing_search">Wystąpił błąd podczas wyszukiwania offline</string>
   <string name="search_offline_geo_error">Nie można zinterpretować \'%s\'</string>
@@ -178,16 +184,17 @@
   <string name="preferred_locale">Język interfejsu</string>
   <string name="tip_map_switch">Wybierz źródło mapy</string>
   
-  <string name="tip_app_mode">Profil użytkownika</string>
+  <string name="tip_app_mode">Wybierz Profil</string>
   
-  <string name="tip_navigation">Pokaż wskazówki (Nawigacja)</string>
+  <string name="tip_navigation">Nawigacja</string>
   <string name="tip_navigation_t">\tPrzed rozpoczęciem nawigacji musisz wybrać punkt docelowy. Potem naciśnij\'Menu\' -&gt; \'Nawigacja\' i wybierz rodzaj nawigacji.</string>
   <string name="tip_search">Wyszukiwanie</string>
   <string name="tip_search_t">"\tMożesz wyszukiwać miejsca bezpośrednio na mapie lub poprzez adres, jako POI lub punkt ulubiony.\n\tPrzyciśnięcie przycisku \'Szukaj\' na głównym ekranie otwiera okno wyszukiwania. Dla wszystkich wyników możesz wybrać opcję \'Pokaż na mapie\' oraz \'Trasa\'. "</string>
-  <string name="tip_map_context_menu">Menu kontekstowe mapy</string>
+  <string name="tip_map_context_menu">Menu \'Użyj lokalizacji..\'</string>
   <string name="tip_map_context_menu_t">"\tMenu kontekstowe mapy jest dostępne poprzez przyciśnięcie i przytrzymanie na mapie lub poprzez wciśnięcie przycisku na trackballu.\n\tStworzy to chmurkę zawierającą współrzędne danego punktu. Aby otworzyć menu kontekstowe mapy, przyciśnij go. (Albo przyciśnij i przytrzymaj na nim aby go schować.)\n\tMenu kontekstowe mapy zawiera wszystkie akcje związane z punktem (lokalizacją). "</string>
   <string name="tip_initial">Porady i sztuczki</string>
-  <string name="tip_initial_t">"\tOsmAnd jest rozbudowanym programem do nawigacji satelitarnej posiadającym wiele funkcji.\n\tNiektóre sztuczki i kruczki są wyświetlane na ekranie w menu głównym. "
+  <string name="tip_initial_t">OsmAnd jest rozbudowanym programem do nawigacji posiadającym wiele funkcji.
+		\n\nPodstawowe porady i kruczki są wyświetlane po wybraniu \'Menu\' → \'Porady i wskazówki\'
 	</string>
   <string name="next_button">Następny</string>
   <string name="previous_button">Poprzedni</string>
@@ -399,7 +406,7 @@
   <string name="route_head">Prosto</string>
   <string name="first_time_continue">Kontynuuj</string>
   <string name="first_time_download">Pobierz region</string>
-  <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w Zarządzaniu danymi. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i inne obiekty.</string>
+  <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w Ustawienia → Zarządzaniu danymi. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i inne obiekty.</string>
   <string name="search_poi_location">Wyszukiwanie sygnału…</string>
   <string name="search_near_map">Szukaj w pobliżu ostatniej pozycji</string>
   <string name="search_nearby">Szukaj w pobliżu</string>
@@ -822,7 +829,12 @@
   <string name="global_settings">Ustawienia ogólne</string>
   <string name="global_app_settings">Ustawienia globalne aplikacji</string>
   <string name="tip_osm_improve">Poprawa danych OSM</string>
-  <string name="tip_osm_improve_t">\tOsmAnd używa map pochodzących z danych Openstreetmap.org (OSM) i, poza wyświetlaniem map oraz nawigacji, może być używany do poprawienia jakości danych OSM. Możesz, używając jedynie kilku kliknięć, łatwo stworzyć i wysłać nowe POI lub zgłosić błąd w danych OSM.\n\tW tym celu najpierw musisz ustawić swój login oraz hasło OSM w \'Ustawienia\' -&gt; \'Ustawienia globalne\' -&gt; \'Edycja OSM\'\n\tAby dodać nowe POI, użyj opcji \'Utwórz POI\' w menu kontekstowym mapy. Wpisz informacje na temat nowego POI w oknie dialogowym \'Stwórz POI\' i zatwierdź go.\n\tBłędy w mapach mogą być natychmiast zgłoszone jako błąd OSM, dzięki czemu społeczność OSM może szybciej naprawić problem.\n\tAby dodać błąd OSM użyj opcji \'Zgłoś błąd do OSM\' w menu kontekstowym mapy. Następnie wpisz dokładny opis problemu a następnie wyślij go używając przycisku \'Dodaj\'.\n\tAby dodawać POI OSM lub zgłaszać błędy do OSM, wymagane jest połączenie z Internetem.</string>
+  <string name="tip_osm_improve_t">OsmAnd używa map pochodzących z danych Openstreetmap.org (OSM) i poza wyświetlaniem map oraz nawigacji, może być używany do poprawienia jakości danych OSM. Możesz, używając jedynie kilku kliknięć, łatwo stworzyć i wysłać nowe POI lub zgłosić błąd w danych OSM.
+		\n\nW tym celu najpierw musisz ustawić swój login oraz hasło OSM w \'Ustawienia\' -&gt; \'Ustawienia globalne\' -&gt; \'Edycja OSM\'
+		\n\nAby dodać nowe POI, użyj opcji \'Utwórz POI\' w menu kontekstowym mapy. Wpisz informacje na temat nowego POI w oknie dialogowym \'Stwórz POI\' i zatwierdź go.
+		\n\nBłędy w mapach mogą być natychmiast zgłoszone jako błąd OSM, dzięki czemu społeczność OSM może szybciej naprawić problem. Aby dodać błąd OSM użyj opcji \'Zgłoś błąd do OSM\' w menu kontekstowym mapy. Następnie wpisz dokładny opis problemu a następnie wyślij go używając przycisku \'Dodaj\'.
+		\n\nAby dodawać POI OSM lub zgłaszać błędy do OSM, wymagane jest połączenie z Internetem.
+	</string>
   <string name="download_files_not_enough_space">Nie ma wystarczająco miejsca, aby pobrać %1$s MB (dostępne miejsce: %2$s).</string>
   <string name="download_files_question_space">Aktualnie dostępna przestrzeń: {2} MB! Pobrać {0} plik(ów) ({1} MB)?</string>
   <string name="poi_query_by_name_matches_categories">Znaleziono kilka kategorii POI odpowiadających zapytaniu:</string>
@@ -950,11 +962,12 @@
   <string name="show_warnings_title">Pokaż ostrzeżenia…</string>
   <string name="show_warnings_descr">Konfiguruj ostrzeżenia ruchu (ograniczenia prędkości, przymusowe przystanki, progi zwalniające), ostrzeżenia o fotoradarach i informacje o pasach</string>
   <string name="monitoring_mode_off">Zapisuj GPX</string>
-  <string name="tip_rotation_switching_t_v2">"\tMożesz zmieniać sposób obracania mapy przez klikanie na ikonie kompasu.
-\n\tMasz do wyboru:
-\n\t\'Nie obraca (północ jest na górze)\' - Mapa nie będzie obracana. Północ zawsze będzie na górze.
-\n\t\'Względem kierunku ruchu\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem, w którym się poruszasz.
-\n\t\'Względem kompasu\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem wskazywanym przez kompas. "</string>
+  <string name="tip_rotation_switching_t_v2">Możesz zmieniać sposób obracania mapy przez klikanie na ikonie kompasu.
+		\n\nMasz do wyboru:
+		\n\t* \'Nie obraca (północ jest na górze)\' - Mapa nie będzie obracana. Północ zawsze będzie na górze.
+		\n\t* \'Względem kierunku ruchu\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem, w którym się poruszasz.
+		\n\t* \'Względem kompasu\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem wskazywanym przez kompas.
+	</string>
 <string name="osmand_short_description_80_chars">OsmAnd to aplikacja nawigacyjna open source  wspierająca mapy kafelkowe oraz wektorowe</string>
 <string name="osmand_long_description_1000_chars">
 	        OsmAnd (Open Street Maps Android)
@@ -1022,7 +1035,25 @@
     <string name="poi_filter_accomodation">Zakwaterowanie</string>
     <string name="poi_filter_restaurants">Restauracje</string>
     <string name="poi_filter_sightseeing">Zwiedzanie</string>
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (Open Street Maps Android) OsmAnd to aplikacja open source do nawigacji używająca szerokiej gamy otwartych danych mapowych. Wszystkie dane, zarówno map rastrowych jak i wektorowych, mogą być przechowywane na karcie pamięci telefonu do użytku offline. OsmAnd posiada również obsługę wyznaczania tras, zarówno w trybie offline jak i online, oraz funkcje nawigacji głosowej. OsmAnd+ jest aplikacją płatną - kupując ją wspierasz projekt, fundujesz rozwój nowych funkcji, oraz otrzymujesz najnowsze aktualizacje. Niektóre z podstawowych funkcji to: - pełną funkcjonalność offline (konfigurowalny folder, w którym zapisywane są pobierane mapy wektorowe i rastrowe) - dostępne do pobrania skrócone mapy wektorowe całego świata - brak limitu ilości map pobranych bezpośrednio w aplikacji - funkcje Wikipedii offline (pobieranie z Wikipedii informacji o ciekawych miejscach), idealne przy zwiedzaniu - możliwość nakładania wielu warstw map, np. ścieżek GPX lub tras nawigacji, ciekawych miejsc, Ulubionych, linii konturowych, przystanków komunikacji miejskiej z możliwością określenia przezroczystości poszczególnych warstw - wyszukiwanie adresów i miejsc bez konieczności łączenia się z Internetem - obliczanie krótkich tras bez połączenia z Internetem (eksperymentalnie) - tryby samochodowy, rowerowy i pieszy wraz z automatycznym przełączanie widoków dzień/noc - opcjonalne powiększanie mapy w zależności od prędkości poruszania się - opcjonalne dopasowywanie mapy do kompasu lub kierunku poruszania się - opcjonalne wskazywanie pasa jazdy oraz ograniczeń prędkości - głosy zarejestrowane i generowane automatycznie "</string>
+    <string name="osmand_plus_long_description_1000_chars">
+		OsmAnd+ (Open Street Maps Android)
+		OsmAnd to aplikacja open source do nawigacji używająca szerokiej gamy otwartych danych mapowych. Wszystkie dane, zarówno map rastrowych jak i wektorowych, mogą być przechowywane na karcie pamięci telefonu do użytku offline. OsmAnd posiada również obsługę wyznaczania tras, zarówno w trybie offline jak i online, oraz funkcje nawigacji głosowej.
+
+		OsmAnd+ jest aplikacją płatną - kupując ją wspierasz projekt, fundujesz rozwój nowych funkcji, oraz otrzymujesz najnowsze aktualizacje.
+
+		Niektóre z podstawowych funkcji to:
+		- pełną funkcjonalność offline (konfigurowalny folder, w którym zapisywane są pobierane mapy wektorowe i rastrowe)
+		- dostępne do pobrania skrócone mapy wektorowe całego świata
+		- brak limitu ilości map pobranych bezpośrednio w aplikacji
+		- funkcje Wikipedii offline (pobieranie z Wikipedii informacji o ciekawych miejscach), idealne przy zwiedzaniu
+		- możliwość nakładania wielu warstw map, np. ścieżek GPX lub tras nawigacji, ciekawych miejsc, Ulubionych, linii konturowych, przystanków komunikacji miejskiej z możliwością określenia przezroczystości poszczególnych warstw
+		- wyszukiwanie adresów i miejsc bez konieczności łączenia się z Internetem
+		- obliczanie krótkich tras bez połączenia z Internetem (eksperymentalnie)
+		- tryby samochodowy, rowerowy i pieszy wraz z automatycznym przełączanie widoków dzień/noc - opcjonalne powiększanie mapy w zależności od prędkości poruszania się
+		- opcjonalne dopasowywanie mapy do kompasu lub kierunku poruszania się
+		- opcjonalne wskazywanie pasa jazdy oraz ograniczeń prędkości
+		- głosy zarejestrowane i generowane automatycznie
+	</string>
 	<string name="select_navigation_mode">Wybierz tryb poruszania się</string>
 	<string name="live_monitoring_mode_off">Uruchom\nśledzenie online</string>
 	<string name="live_monitoring_mode_on">Zatrzymaj\nśledzenie online</string>
@@ -1034,16 +1065,20 @@
 	<string name="monitoring_mode_on">Zatrzymaj\nrejestrację GPX.</string>
 	<string name="gps_wakeup_interval">Częstość wybudzania GPS: %s</string>
 	<string name="int_continuosly">Ciągły</string>
-	<string name="tip_day_night_mode_t_v2">\tTryb wyświetlania niektórych map wektorowych może być wybierany jako dzienny (jaśniejszy) lub nocny (ciemniejszy).
-		\n\tNocne kolory są bezpieczniejsze podczas jazdy w nocy.
-		\n\tMożesz przełączyć tryb dzienny/nocny wybierając \'Menu\'-&gt;\'Zdefiniuj widok\'-&gt;\'Konfiguruj ekran\'-&gt;\'mapa dzień/noc\'.
-		\n\tMożliwość wyboru:\n\t\'Wschód/Zachód\' - tryb automatyczny, kontrolowany przez pozycję Słońca (domyślny)
-		\n\t\'Dzień\' - zawsze używaj trybu dziennego\n\t\'Noc\' - Zawsze używaj trybu nocnego
-		\n\t\'Czujnik światła\' - wygląd mapy kontrolowany jest przez czujnik światła w Twoim urządzeni (jeśli taki posiadasz)
+	<string name="tip_day_night_mode_t_v2">Tryb wyświetlania niektórych map wektorowych może być wybierany jako dzienny (jaśniejszy) lub nocny (ciemniejszy). Nocne kolory są bezpieczniejsze podczas jazdy w nocy.
+		\n\nMożesz przełączyć tryb dzienny/nocny wybierając \'Menu\'-&gt;\'Zdefiniuj widok\'-&gt;\'Konfiguruj ekran\'-&gt;\'mapa dzień/noc\'.
+		\n\nMożliwość wyboru:
+		\n\t\* 'Wschód/Zachód\' - tryb automatyczny, kontrolowany przez pozycję Słońca (domyślny)
+		\n\t\* 'Dzień\' - zawsze używaj trybu dziennego\n\t\'Noc\' - Zawsze używaj trybu nocnego
+		\n\t\* 'Czujnik światła\' - wygląd mapy kontrolowany jest przez czujnik światła w Twoim urządzeni (jeśli taki posiadasz)
 	</string>	
-	<string name="tip_map_switch_t_v2">\tŹródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Warstwy mapy\' w widoku mapy.\n\tWskazując \'Źródło mapy…\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Mapy online\') lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC\n\tOsmAnd wspiera również własne źródła map.
+	<string name="tip_map_switch_t_v2">Źródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Warstwy mapy\'.
+		\n\nWskazując \'Źródło mapy…\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Mapy online\') lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC.
+		\n\nOsmAnd wspiera również własne źródła map.
 	</string>
-	<string name="tip_app_mode_t_v2">"\tOsmAnd wspiera różne (konfigurowalne) profile aplikacji do różnych przypadków użycia.\n\tProfile można zmienić wybierając przycisk w lewym dolnym rogu ekranu (ikonka samochodu, roweru lub pieszego), lub podczas wybierania trasy. "</string>
+	<string name="tip_app_mode_t_v2">OsmAnd wspiera różne (konfigurowalne) profile aplikacji do różnych przypadków użycia.
+		\n\nProfile można zmienić wybierając przycisk w lewym dolnym rogu ekranu (ikonka samochodu, roweru lub pieszego), lub podczas wybierania trasy.
+	</string>
 	<string name="email">email</string>
 <string name="rendering_attr_roadColors_name">Zestaw kolorów dróg</string>
     <string name="map_widget_show_destination_arrow">Pokaż kierunek do celu</string>
@@ -1080,13 +1115,16 @@
     <string name="osmodroid_plugin_description">OsMoDroid jest wtyczką dodającą do OsmAnd funkcje śledzenia online. Informacje na temat usługi dostępne są pod adresem http://esya.ru.</string>
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
     <string name="osmodroid_plugin_name">OsMoDroid</string>
-	<string name="tip_altitude_offset">Wysokość: korygowanie przesunięcia</string>
+	<string name="tip_altitude_offset">Korygowanie przesunięcia wysokości</string>
 	<string name="monitoring_control_start">start</string>
-    <string name="tip_altitude_offset_t">"\tWiększość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.\n\tLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96. OsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96.\n\tW celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez Zarządzanie danymi (oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    <string name="tip_altitude_offset_t">Większość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.
+		\n\nLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96.
+		\n\nOsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96. W celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez Zarządzanie danymi (oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC .)
+	</string>
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
-    <string name="srtm_plugin_description">Wtyczka ta pozwala na pobranie poziomic (Zarządzanie danymi -&gt; Menu -&gt; Inne mapy) dla określonego regionu i wyświetlenie ich na mapach offline.</string>
+    <string name="srtm_plugin_description">Wtyczka ta pozwala na pobranie poziomic (\'Ustawienia\' → \'Zarządzanie danymi\' -&gt; \'Pobierz\' -&gt; Wskaż określony typ mapy).</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
     
@@ -1284,11 +1322,11 @@
 	<string name="av_photo_play_sound">Odtwórz dźwięk przy robieniu zdjęć</string>
 	<string name="av_photo_play_sound_descr">Wybierz czy odtwarzać dźwięk podczas robienia zdjęć</string>
 <string name="tip_recent_changes_1_5_t">Zmiany w 1.5:
-	\n\t* Ostrzeżenia głosowe na temat ograniczeń prędkości i fotoradarów
+	\n\t* Ostrzeżenia głosowe o ograniczeniach prędkości i fotoradarach
 	\n\t* Większe możliwości podpowiedzi głosowych (zapowiadanie nazw ulic)
 	\n\t* Ikony mapy wyższej rozdzielczości
 	\n\t* Dużo zmian w interfejsie
-	\n\t* Poprawki do wyświetlania odległości, analizatora GPX, obsługi punktów pośrednich, widżetu planowania, wysyłania do OSM, obsługi https
+	\n\t* Poprawki w wyświetlaniu odległości, analizatorze GPX, obsłudze punktów pośrednich, widżecie planowania, wysyłania do OSM, obsłudze https
     </string>
     <string name="osb_author_or_password_not_specified">Wprowadź nazwę użytkownika OSM i hasło w Ustawieniach</string>
     <string name="clear_intermediate_points">Wyczyść punkty pośrednie</string>
