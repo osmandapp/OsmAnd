@@ -1315,7 +1315,7 @@
 	<string name="hno">Hausnummer</string>
 	<string name="tip_recent_changes_1_3_t">Änderungen in 1.3:
 		\n\t * Holo-Theme (Anpassung des Theme)
-	</string>
+    </string>
 	<string name="monitoring_settings">Tracking &amp; Schlaf-Modus</string>
 	<string name="monitoring_settings_descr">Tracking-Einstellungen und Konfiguration des Hintergrundmodus</string>
 	<string name="osmand_monitoring_plugin_description">Aktivieren Sie Tracking und die Navigation im Schlaf-Modus (Bildschirm aus). Das GPS-Gerät wird regelmäßig aktiviert. Zeigt Ihre Einstellungen zum Aufzeichnen Ihrer Wege als lokale GPX-Datei oder online bei einem Web-Service.</string>
@@ -1368,8 +1368,8 @@
 		\n\t* Neues Download-Menu (Herunterladen von Karten im Hintergrund)
 		\n\t* Für gespeicherte GPX-Spuren können nun Unterordner angelegt werden
 		\n\t* SRTM-Dateien (Höhenlinien) können nun auch gelöscht werden
-		\n\t* Nutzung der neuen Notes-Fehlermarker laut osm.org
-	</string>
+		\n\t* Nutzung der neuen Notes-Fehlermarker laut osm.org 
+    </string>
 	<string name="search_street_in_neighborhood_cities">Straßenname in weiteren Orten suchen</string>
 	<string name="intermediate_items_sort_by_distance">Sortieren (Tür-zu-Tür)</string>
 	<string name="use_distance_measurement_help">* Tippen, um einen Punkt zu setzen.\n * Lange auf die Karte tippen, um einen vorigen Punkt zu löschen.\n * Lange auf einen Punkt tippen, um eine Beschreibung zu lesen oder hinzuzufügen.\n * Mehr Aktionen durch Tippen auf das Entfernungsmesser-Widget.</string>
@@ -1405,7 +1405,7 @@
 		\n\t* Hochauflösende POI-Symbole
 		\n\t* Viele Bedienungs-Verbesserungen
 		\n\t* Fehlerbehebungen für Entfernungsanzeige, GPX Analyse, Behandlung von Zwischenzielen, Planungs-Widget, OSM-Schnittstelle, https-Kompatibilität
-	</string>
+    </string>
 <string name="context_menu_item_directions_from">Navigiere von</string>
 	<string name="av_camera_focus_hiperfocal">Hyperfokaler Fokus</string>
 	<string name="av_camera_focus_edof">Erweiterte Schärfentiefe (EDOF)</string>
@@ -1423,7 +1423,7 @@
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
 	<string name="driving_region">Fahr-Gebiet</string>
 	<string name="osmodroid_mode_on">Stoppe OsMoDroid</string>
-	<string name="osmodroid_mode_off">Start OsMoDroid</string>
+	<string name="osmodroid_mode_off">Starte OsMoDroid</string>
 	<string name="about_version">Version :</string>
     <string name="about_settings">Über</string>
     <string name="about_settings_descr">Versions info, Lizenz, Projekt Mitglieder</string>
