@@ -25,9 +25,7 @@ else()
 		COMMAND "${CMAKE_CURRENT_LIST_DIR}/generate-swig.sh"
 		COMMENT "Generating sources...")
 endif()
-add_custom_target(OsmAndJNI_swig
-	DEPENDS "${CMAKE_CURRENT_LIST_DIR}/c-src/swig.cpp"
-)
+add_custom_target(OsmAndJNI_swig)
 set_source_files_properties("${CMAKE_CURRENT_LIST_DIR}/c-src/swig.cpp" PROPERTIES GENERATED TRUE)
 
 if(CMAKE_SHARED_LIBS_ALLOWED_ON_TARGET)
