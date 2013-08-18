@@ -1352,7 +1352,7 @@
 	<string name="plugin_distance_point_speed">Geschwindigkeit</string>
 	<string name="plugin_distance_point_ele">Höhe</string>
 	<string name="gpx_file_name">GPX-Dateiname</string>
-	<string name="gpx_saved_sucessfully">GPX-Datei erfolgreich gespeichert in {0}</string>
+	<string name="gpx_saved_sucessfully">GPX-Datei erfolgreich gespeichert unter {0}</string>
 	<string name="distance_measurement_clear_route">Alle Punkte löschen</string>
 	<string name="intermediate_items_sort_return">Anordnung der Zwischenziele auf der Route zum Ziel wurde optimiert.</string>
 	<string name="plugin_distance_point">Punkt</string>
