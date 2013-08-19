@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -448,7 +449,7 @@
   <string name="offline_navigation_not_available">Navegação OsmAnd offline está temporariamente indisponível.</string>
   <string name="left_side_navigation">Conduzir do lado esquerdo</string>
   <string name="left_side_navigation_descr">Selecione para países com tráfego à esquerda</string>
-  <string name="download_link_and_local_description">Clique aqui para obter ou actualizar dados offline. Clique em qualquer item existente para ver mais detalhes, pressione e segure para desactivar ou apagar. Dados actuais no dispositivo (%1$s livre):</string>
+  <string name="download_link_and_local_description">Clique aqui para obter ou actualizar dados offline.\nClique em qualquer item existente para ver mais detalhes, pressione e segure para desactivar ou apagar. Dados actuais no dispositivo (%1$s livre):</string>
   <string name="unknown_from_location">Precisa definir um Ponto de partida</string>
   <string name="modify_transparency">Modificar a transparência (0 - transparente, 255 - opaco)</string>
   <string name="confirm_interrupt_download">Quer interromper o download de arquivos?</string>
@@ -558,7 +559,7 @@
   <string name="offline_edition">Edição offline</string>
   <string name="offline_edition_descr">Usar sempre edição offline</string>
   <string name="tip_recent_changes_0_7_1_t">"Changes in 0.7.1 : \n\t- Offline POI editing \n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles) \n\t- Show currently recorded track on map \n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn \n\t- New voice prompt \'Route recalculated\' \n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color \n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue \n\t- Other changes "</string>
-  <string name="update_poi_does_not_change_indexes">As alterações são apenas armazenadas na memória local.\nPara serem introduzidas nos mapas tem que ir a \"Editar Offline\" -&gt; \"Enviar\".</string>
+  <string name="update_poi_does_not_change_indexes">As alterações são apenas armazenadas na memória local. Para serem introduzidas nos mapas tem que ir a \"Editar Offline\" -&gt; \"Enviar\".</string>
   <string name="local_openstreetmap_uploading">Enviar…</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs foram enviados</string>
   <string name="local_openstreetmap_uploadall">Enviar todos</string>
@@ -647,8 +648,7 @@
   <string name="old_poi_file_should_be_deleted">O ficheiro POI \'%1$s\' é repetido e pode ser apagado.</string>
   <string name="update_poi_file_not_found">Não foi encontrado (e não pôde ser criado) o arquivo local para guardar as mudanças de POI.</string>
   <string name="button_upgrade_osmandplus">Upgrade para OsmAnd+</string>
-  <string name="map_version_changed_info">O servidor contém mapas incompatíveis com a sua versão actual do Osmand.
-\nPrecisa de actualizar o Osmand para uma versão mais recente.</string>
+  <string name="map_version_changed_info">O servidor contém mapas incompatíveis com a sua versão actual do Osmand. Precisa de actualizar o Osmand para uma versão mais recente.</string>
   <string name="local_index_mi_rename">Mudar o nome</string>
   <string name="show_gpx_route">Mostrar no mapa</string>
   <string name="poi_filter_nominatim">Online Nominatim</string>
@@ -683,8 +683,7 @@
   <string name="favourites_edit_dialog_name">Name</string>
   <string name="favourites_edit_dialog_category">Categoria</string>
   <string name="vector_map_not_needed">Não, obrigado</string>
-  <string name="basemap_missing">Falta o mapa global base (abrange o mundo inteiro com pouco detalhe).
-\nPode fazer download do World_basemap_x.obf para ter um ambiente completo.</string>
+  <string name="basemap_missing">Falta o mapa global base (abrange o mundo inteiro com pouco detalhe). Pode fazer download do World_basemap_x.obf para ter um ambiente completo.</string>
   <string name="vector_data_missing">Faltam os dados de mapas no cartão SD. Precisa de fazer download dos mapas, para os usar offline.</string>
   <string name="local_index_gpx_info_show">\n\nMantenha pressionado para opções</string>
   <string name="local_index_gpx_info_speed">"\nAverage speed : %1$s \nMaximum speed : %2$s"</string>
@@ -798,7 +797,7 @@
   <string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
   <string name="send_location">Enviar localização</string>
   <string name="context_menu_item_share_location">Compartilhar local</string>
-  <string name="add_waypoint_dialog_added">Ponto de passagem \'\'{0}\'\' foi adicionado com sucesso</string>
+  <string name="add_waypoint_dialog_added">Ponto de trilha \'\'{0}\'\' foi adicionado com sucesso</string>
   <string name="add_waypoint_dialog_title">Acrescentar ponto à trilha GPX gravada</string>
   <string name="context_menu_item_add_waypoint">Acrescentar ponto GPX</string>
   <string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
@@ -878,19 +877,25 @@
   <string name="show_cameras">Mostrar radares</string>
   <string name="show_traffic_warnings">Mostrar limites de velocidade</string>
   <string name="avoid_toll_roads">Evitar portagens</string>
-  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string>
+  <string name="tip_recent_changes_0_8_2_t">Alterações em 0.8.2:
+		\n\t* Routiamento melhorado
+		\n\t* Widgets de mapa dinâmicos
+		\n\t* Deficnições de Mapa movidos para o ecrã do mapa 
+		\n\t* Botão de travamento com serviço de registo 
+		\n\t* Corrigidos línguas Arabic, Kannada scripting e RTL 
+	</string>
   <string name="map_widget_top_text">Nome da Rua</string>
   <string name="map_widget_config">Configuração da tela</string>
   
   <string name="map_widget_back_to_loc">Onde estou</string>
   <string name="map_widget_lock_screen">Bloquear tela</string>
-  <string name="map_widget_compass">Compasso</string>
+  <string name="map_widget_compass">Bússola</string>
   <string name="map_widget_top_stack">Barra de Status:</string>
   <string name="map_widget_reset">Resetar para original</string>
   <string name="map_widget_right_stack">Painel Direito:</string>
   <string name="map_widget_left_stack">Painel Esquerdo:</string>
   <string name="map_widget_parking">Estacionamento</string>
-  <string name="map_widget_monitoring">Monitoramento</string>
+  <string name="map_widget_monitoring">Gravação GPX</string>
   <string name="map_widget_speed">Velocidade</string>
   <string name="map_widget_distance">Destino</string>
   <string name="map_widget_altitude">Altitude</string>
@@ -904,8 +909,9 @@
   <string name="bg_service_interval">Definir intervalo para activar:</string>
   <string name="screen_is_locked">Para destravar a tela precione o cadeado</string>
   <string name="bg_service_screen_unlock">Destravar tela</string>
-  <string name="bg_service_sleep_mode_off">Desligar modo oculto</string>
-  <string name="bg_service_sleep_mode_on">Ativar modo oculto</string>
+  <string name="bg_service_sleep_mode_off">Desligar
+ modo oculto</string>
+  <string name="bg_service_sleep_mode_on">Parar\n modo oculto</string>
 <string name="show_warnings_title">Mostrar alarmes…</string>
 <string name="show_warnings_descr">Mostrar os limites de velocidade, câmeras de velocidade, redutores de velocidade, e outros avisos</string>
 <string name="avoid_motorway">Sem auto-estradas</string>
@@ -952,8 +958,8 @@
     <string name="map_widget_monitoring_services">Serviços de registro</string>
 	<string name="no_route">Sem rota</string>
 	<string name="delete_target_point">Remover o waypoint</string>
-	<string name="target_point">Waypoint %1$s</string>
-    <string name="intermediate_point">Waypoint %1$s</string>
+	<string name="target_point">Ponto de trilha %1$s</string>
+    <string name="intermediate_point">Pnto de trilha %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Adicionar como último waypoint</string>
     <string name="context_menu_item_first_intermediate_point">Adicionar como primeiro waypoint</string>
     <string name="add_as_last_destination_point">Adicionar como último ponto de passagem</string>
@@ -970,7 +976,12 @@
     <string name="poi_filter_accomodation">Alojamento</string>
     <string name="poi_filter_restaurants">Restaurantes</string>
     <string name="poi_filter_sightseeing">Turismo</string>
-    <string name="tip_recent_changes_0_8_4_t">"Mudanças no 0.8.4:\n\t* Algumas correções de bugs\n\t* Mapa não perde a posição de bloqueio após interrupções "</string>
+    <string name="tip_recent_changes_0_8_4_t">"Mudanças no 0.8.4:\n\t* 
+	Algumas correções de bugs\n\t*
+	Mapa não perde a posição de bloqueio após interrupções 
+	Possibilidade de activar modo suspensão durante a navegação 
+…"
+    </string>
 	<string name="context_menu_item_intermediate_point">Adicionar como ponto de passagem</string>
     <string name="arrived_at_intermediate_point">Você chegou ao seu ponto de passagem</string>
     <string name="map_widget_intermediate_distance">Ponto de passagem</string>
@@ -1001,13 +1012,14 @@
     <string name="av_video_format">Formato de saída de vídeo</string>
     <string name="av_use_external_recorder">Usar gravador externo</string>
     <string name="av_settings_descr">Configurar definições de áudio e vídeo</string>
-    <string name="av_settings">"Definições de áudio e vídeo "</string>
-    <string name="recording_error">"Ocorreu um erro durante a gravação "</string>
+    <string name="av_settings">"Definições de áudio e vídeo " </string>
+    <string name="recording_error">"Ocorreu um erro durante a gravação…" </string>
     <string name="recording_camera_not_available">Câmera não está disponível</string>
     <string name="recording_is_recorded">Áudio/vídeo está a ser gravado. Para parar pressione o botão de stop no widget.</string>
     <string name="recording_open_external_player">Abrir leitor externo</string>
     <string name="recording_delete_confirm">Quer remover esta gravação?</string>
-    <string name="tip_recent_changes_1_1_0_t">"Mudanças em 1.1.0:\n\t* Plugin calculador de distância\n\t* Plugin de notas áudio / vídeo\n\t* Plugin de Curvas de Nível\n\t* Correções de bugs\n\t* Opção de estilo de mapa \"Touring view\" com mais detalhes, novos estilos de estradas, mais contraste, e opção de caminhadas Alpinas (escala SAC)\n\t* Opção de correção do geóide EGM96, para corrigir as leituras de altitude GPS "</string>
+    <string name="tip_recent_changes_1_1_0_t">"Mudanças em 1.1.0:\n\t* Plugin calculador de distância\n\t* Plugin de notas áudio / vídeo\n\t* Plugin de Curvas de Nível\n\t* Correções de bugs\n\t* Opção de estilo de mapa \"Touring view\" com mais detalhes, novos estilos de estradas, mais contraste, e opção de caminhadas Alpinas (escala SAC)\n\t* Opção de correção do geóide EGM96, para corrigir as leituras de altitude GPS "
+    </string>
     <string name="recording_context_menu_arecord">Fazer uma nota de áudio</string>
     <string name="recording_context_menu_vrecord">Fazer uma nota de vídeo</string>
     <string name="layer_recordings">Camada de gravação</string>
@@ -1039,7 +1051,7 @@
     <string name="av_use_external_recorder_descr">Usar gravador do sistema para vídeo</string>
     <string name="av_use_external_camera_descr">Utilize aplicação do sistema para a foto</string>
     <string name="av_use_external_camera">Use aplicativo da câmera</string>
-    <string name="recording_playing">A tocar o áudio da gravação %1$s</string>
+    <string name="recording_playing">A tocar o áudio da gravação. \n%1$s</string>
     <string name="recording_unavailable">Indisponível</string>
     <string name="recording_description">Gravar %1$s %2$s de %3$s</string>
     <string name="recording_default_name">Gravação</string>
@@ -1059,7 +1071,8 @@
     <string name="audionotes_plugin_name">Notas de Audio/vídeo</string>
     <string name="index_srtm_parts">Partes</string>
     <string name="index_srtm_ele">Curvas de nível</string>
-    <string name="tip_recent_changes_1_1_2_t">Mudanças em 1.1.2:\n\t* melhorias no plug-in de áudio / vídeo (fotos com informações EXIF)\n\t* Usabilidade reparada e reestruturação do plugin de Curvas de Nivel\n\t* Pacotes de Sombras de Colinas para o plugin das Curvas de nível\n\t* Correções de bugs (roteamento suboptimal)</string>
+    <string name="tip_recent_changes_1_1_2_t">Mudanças em 1.1.2:\n\t* melhorias no plug-in de áudio / vídeo (fotos com informações EXIF)\n\t* Usabilidade reparada e reestruturação do plugin de Curvas de Nivel\n\t* Pacotes de Sombras de Colinas para o plugin das Curvas de nível\n\t* Correções de bugs (roteamento suboptimal)
+    </string>
     <string name="recording_photo_description">Foto %1$s de %2$s</string>
     <string name="av_def_action_picture">Capture uma foto</string>
     <string name="osmand_srtm_long_description_1000_chars">Esse plugin disponibiliza curvas de nível que podem ser mostradas nos mapas offline do OsmAnd. Os dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no Terra, o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
@@ -1084,7 +1097,8 @@
 	<string name="incomplete_locale">incompleto</string>
 	<string name="street_name">Rua</string>
 	<string name="hno">Número de casa</string>
-    <string name="tip_recent_changes_1_0_0_t">Mudanças em 1.0.0:\n\t* Melhorado cálculo de rota: mais rápido, mais preciso e até 250 km\n\t* Incluída opção de mapas apenas com estradas\n\t* Mapa não perde posição após interrupções\n\t* Permitido modo de serviço oculto durante a navegação</string>
+    <string name="tip_recent_changes_1_0_0_t">Mudanças em 1.0.0:\n\t* Melhorado cálculo de rota: mais rápido, mais preciso e até 250 km\n\t* Incluída opção de mapas apenas com estradas\n\t* Mapa não perde posição após interrupções\n\t* Permitido modo de serviço oculto durante a navegação
+    </string>
     <string name="monitoring_settings">Serviços de monitoramento e Serviço em segundo plano</string>
     <string name="choose_osmand_theme_descr">Escolha o tema da aplicação</string>
     <string name="choose_osmand_theme">Tema da aplicação</string>
@@ -1096,7 +1110,12 @@
     <string name="layer_hillshade">Camada de Sombras de relevo</string>
     <string name="map_widget_gps_info">Informação de GPS</string>
     <string name="download_using_mobile_internet">A Wifi está desligada. Quer continuar o download com a ligação internet?</string>
-    <string name="tip_recent_changes_1_3_t">Alterações em 1.3:\n\t* Tema Holo (personalização de tema)</string>
+    <string name="tip_recent_changes_1_3_t">Alterações em 1.3:
+    \n\t* Reposto suporte para Tablets e Ecrãs grandes
+    \n\t* Tema Holo (personalização de tema)
+    \n\t* Definições adicionais para estabilização da bússola
+    \n\t* Botão no canto superior esquerdosubstitui o boão Menu
+    </string>
     <string name="monitoring_settings_descr">Cancelar rota</string>
     <string name="clear_destination">Apagar local de destino</string>
     <string name="osmand_monitoring_plugin_description">Habilitar rastreamento e navegação em modo de suspensão (visor desligado), permitindo acordar periodicamente o dispositivo GPS. Mostrar configurações que facilitem gravar as suas viagens para arquivos GPX locais (ou online, usando um serviço de internet).</string>
@@ -1108,7 +1127,10 @@
     <string name="install_paid">Versão completa</string>
     <string name="cancel_route">Descartar rota</string>
     <string name="cancel_navigation">Parar navegação</string>
-    <string name="tip_recent_changes_1_1_4_t">"Mudanças em 1.1.4: ↵\n→* Interface do usuário redesenhada ↵\n→* Correções de erros "</string>
+    <string name="tip_recent_changes_1_1_4_t">"Mudanças em 1.1.4: ↵
+      \n→* Interface do usuário redesenhada ↵
+         \n→* Correções de erros "
+    </string>
     <string name="local_osm_changes_backup_successful">Arquivo de mudança OSM gerou com sucesso %1$s</string>
     <string name="local_osm_changes_backup_failed">Falhou a cópia das mudanças OSM</string>
     <string name="local_osm_changes_backup">Copiar como alteração OSM</string>
@@ -1121,7 +1143,7 @@
     <string name="gpx_file_name">Nome do arquivo GPX</string>
     <string name="gpx_saved_sucessfully">Arquivo GPX guardado com sucesso em {0}</string>
     <string name="osmand_distance_planning_plugin_name">Calculadora de Distância e Ferramenta de Planeamento</string>
-    <string name="osmand_distance_planning_plugin_description">"Criar caminhos (ou usar / modificar arquivos GPX existentes) para medir a distância entre  pontos. Se guardar como GPX, pode ser usado para planear rotas GPX."</string>
+    <string name="osmand_distance_planning_plugin_description">"Criar caminhos (ou usar / modificar arquivos GPX existentes) para medir a distância entre  pontos. Se guardar como GPX, pode usar para planear rotas GPX."</string>
     <string name="tip_altitude_offset">Altitude - Corrigir a medição</string>
 	<string name="driving_region_descr">Selecione região: USA, Europa, UK, Ásia e Outros</string>
 	<string name="driving_region">Região</string>
@@ -1291,4 +1313,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_photo_play_sound">Emita som ao tirar foto</string>
 	<string name="av_photo_play_sound_descr">Escolha se emitir som quando tirar fotos</string>
 <string name="driving_region_canada">Canadá</string>
-	</resources>
+	<string name="tip_map_styles">Estilo de Mapa</string>
+	<string name="about_version">Versão:</string>
+    <string name="about_settings">Sobre</string>
+    <string name="about_settings_descr">Versão, licenças, membros do projecto</string>
+    <string name="tips_and_tricks">Dicas</string>
+    <string name="local_index_tile_data_zooms">Zooms descarregados: %1$s</string>
+    <string name="local_index_tile_data_expire">Expira (minutos): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Descarregado: %1$s</string>
+    </resources>
