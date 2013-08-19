@@ -1585,16 +1585,16 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="local_index_tile_data_maxzoom">Maksimal zoomniveau: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum zoomniveau: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Elliptisk mercator</string>
-    <string name="edit_tilesource_maxzoom">Maks zoomniveau</string>
-    <string name="edit_tilesource_expiration_time">Udløber ( minutter)</string>
-    <string name="edit_tilesource_minzoom">Min zoomniveau</string>
+    <string name="edit_tilesource_maxzoom">Maks. zoomniveau</string>
+    <string name="edit_tilesource_expiration_time">Udløber (minutter)</string>
+    <string name="edit_tilesource_minzoom">Min. zoomniveau</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Vælg eksisterende…</string>
     <string name="edit_tilesource_name">Navn</string>
     <string name="maps_define_edit">Definer/rediger…</string>
 	<string name="local_index_tile_data_zooms">Zoomniveauer hentet: %1$s</string>
     <string name="local_index_tile_data_downloadable">Kan hentes: %1$s</string>
-    <string name="local_index_tile_data_name">Delkort data: %1$s</string>
+    <string name="local_index_tile_data_name">Delkortdata: %1$s</string>
     <string name="edit_tilesource_successfully">Delkortkilden %1$s er gemt</string>
     <string name="tip_recent_changes_1_6_t">Ændringer i 1.6 :
 \n * Definer/rediger online delkortkilde (angiv udløbstid)
