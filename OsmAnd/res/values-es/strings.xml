@@ -70,8 +70,8 @@
   <string name="amenity_type_user_defined">Definido por el usuario</string>
   <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quiere sustituirlo?</string>
   <string name="profile_settings">Opciones específicas por perfil</string>
-  <string name="settings_preset">Perfil de usuario</string>
-  <string name="settings_preset_descr">Selecciona un perfil de uso con ajustes de mapa y navegación personalizados.</string>
+  <string name="settings_preset">Perfil por defecto</string>
+  <string name="settings_preset_descr">Los ajustes de mapa y navegación se personalizan por cada perfil de uso, Fija tu perfil por defecto aquí.</string>
   
   
   <string name="routing_settings">Navegación</string>
@@ -959,7 +959,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="day_night_info">Info día/noche</string>
 <string name="map_widget_day_night">Mapa día/noche</string>
 <string name="map_widget_vector_attributes">Atributos de dibujado:</string>
-<string name="map_widget_renderer">Estilo de dibujado</string>
+<string name="map_widget_renderer">Estilo de mapa</string>
 <string name="tip_rotation_switching_t_v2">"﻿\tPuedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.\n\tLas opciones son:\n\t- \'No girar\': el mapa no girará. El norte está siempre arriba\n\t- \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección\n\t- \'A la brújula\' - el mapa se alinea con la lectura de la brújula del dispositivo "</string>
 <string name="tip_map_switch_t_v2">\tLa fuente del mapa y las capas mostradas se cambian en la vista del mapa a través de \'Menú\'-&gt; \'Definir vista\'.\n\tEn \'Fuente de mapas...\' puedes elegir usar los mapas vectoriales descargados, fuentes predefinidas de teselas (online) (activa el extra \'Mapas Online\' para ello), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en un PC.\n\tOsmAnd también soporta fuentes personalizadas.
 	</string>
@@ -1355,7 +1355,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="tip_map_styles">Estilos de Mapa</string>
 	<string name="tip_map_styles_t">OsmAnd permite visualizar los mapas vectoriales sin conexión en diferentes estilos de mapas para adaptarlos a tus necesidades:
 		\n\n Además del estilo de mapa equilibrado \"Por defecto\", en \'Menú\' → \'Configura pantalla\' → \ 'Estilo de dibujado\' puedes seleccionar por ejemplo
-		\n\t* El estilo \'vista Touring\', que contiene información detallada y adecuada para viajes y giras, incluyendo optimización para profesionales de la conducción (mayor contraste, carreteras distinguibles), opciones para ir de excursión alpina (escala SAC), rutas ciclistas, soporte para símbolos de senderismo, etc.
+		\n\t* El estilo \'Vista de tour\', que contiene información detallada y adecuada para viajes y giras, incluyendo optimización para profesionales de la conducción (mayor contraste, carreteras distinguibles), opciones para ir de excursión alpina (escala SAC), rutas ciclistas, soporte para símbolos de senderismo, etc.
 		\n\t* \'Carreteras de alto contraste\' muestra las carreteras en colores muy acentuados para situaciones con brillante iluminación ambiental
 		\n\t* \'Invierno y esquí\' crea una vista del paisaje del invierno (nevado), y muestra pistas y remontes (en relación con la descarga del mapa \"Mundo de esquí\"
 	</string>
@@ -1364,4 +1364,5 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     </string>
     <string name="local_index_tile_data_zooms">Zooms descargados: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
-    </resources>
+    <string name="map_widget_fps_info">Info depuración de FPS</string>
+	</resources>
