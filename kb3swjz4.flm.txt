@@ -1,0 +1,9 @@
+﻿Merge remote-tracking branch 'origin' into distanceMeasurement_3
+#
+DistanceCalculator fixes:
+1. Delete unused icon files
+2. Change clearing of all points to not turn off editing mode.
+3. Fix problem that occurs when all points in a subtrack are deleted.
+4. Fix inconsistent behaviour for created and loaded tracks when points are dragged to new location.
+5. Fix rubberbanding behaviour at end of a subtrack between other subtracks
+6. Fix exception that occurs after all points are cleared.
