@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
@@ -399,7 +399,7 @@
   <string name="select_tile_source_to_install">Kies (teël) kaarte om te installeer of opgradeer</string>
   <string name="internet_not_available">Internet verbinding benodig vir bewerking is nie beskikbaar nie</string>
   <string name="install_more">Installeer meer…</string>
-  <string name="tip_update_index">Opgradeer aflyn inligting</string>
+  <string name="tip_update_index">Opgradeer aflyn kaarte</string>
   <string name="tip_update_index_t">\tDie nuutste kaart inligting is noodsaaklik vir aflyn kaart besigtiging en PVB/adres soek. OsmAnd bied `n aflaaibestuurder wat kan kyk virr beskikbare aflyn inligting opgraderings.\n\tOm te kyk vir opgraderings gaan na \'Stellings\' -&gt; \'Aflyn inligting\' -&gt; \'Laai aflyn inligting af\'. Na streek lys van die internet verkry is, kan jy keuse \'Kieslys\' -&gt; \'Filter afgelaai\' kies om te beperk tot inligting reeds op jou selfoon.\n\tDie beskikbaarheid van bywerkings word uitgebeeld deur die volgende kleure:\n\t\'Groen \'- dui inligting-lêers identies op apparaat en internet\n\t\'Blou - dui beskikbare bywerkings op internet</string>
   <string name="level_to_switch_vector_raster_descr">Minimum vergroting vlak om vektor kaarte te gebruik</string>
   <string name="level_to_switch_vector_raster">Minimum vektor vergroting vlak</string>
@@ -1129,11 +1129,11 @@
     <string name="safe_mode_description">gebruik die toepassing in beskermde wyse (gebruik stadiger Android in plaas van inheemse kode).</string>
     <string name="safe_mode">Beskermde wyse</string>
     <string name="native_library_not_running">Die toepassing werk in beskermde wyse (skakel dit af in Instellings).</string>
-    <string name="srtm_plugin_description">Vergemoontlik dei aflaai van aflyn kontoerlyne en heuwelsakdus (Instellings-&gt; Inligtingsbestuur -&gt; Aflaai -&gt; Kies verlangde kaart-tipe).</string>
+    <string name="srtm_plugin_description">Vergemoontlik dei aflaai van aflyn kontoerlyne en heuwelsakdus (\'Instellings\'-&gt; \'Inligtingsbestuur\' -&gt; \'Aflaai\' -&gt; Kies verlangde kaart-tipe).</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid inlasmodule is `n ou weergawe en het `n opgradering nodig.</string>
     <string name="osmodroid_plugin_description">OsMoDroid inlasmodule is `n OsmAnd uitbreiding vir die OsModroid toepassing vir aanlyn spoor-natrek funksies. Inligting oor die diens is beskikbaar op http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid inlasmodule</string>
-	<string name="tip_altitude_offset">Hoogte voorstelling - Kompensering</string>
+	<string name="tip_altitude_offset">Hoogte regstelling</string>
     <string name="route_descr_lat_lon">Breedtegraad %1$.3f, lengtegraad %2$.3f</string>
     <string name="route_descr_current_location">Huidige posisie</string>
     
@@ -1289,7 +1289,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="map_widget_fps_info">FPS ontfout inligting</string>
 	<string name="about_version">Weergawe:</string>
     <string name="about_settings">Omtrent</string>
-    <string name="about_settings_descr">Omtrent…</string>
+    <string name="about_settings_descr">Weergawe inligting, lisensie, projeklede</string>
     <string name="tips_and_tricks">Wenke</string>
     <string name="tip_recent_changes_1_6_t">Veranderings in 1.6:
 	\n\t* Definieer/wysig aanlyn teël bron (spesifiseer verstryktyd)
@@ -1309,4 +1309,11 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="edit_tilesource_choose_existing">Kies bestaande…</string>
     <string name="edit_tilesource_name">Naam</string>
     <string name="maps_define_edit">Definieer/Wysig…</string>
-	</resources>
+	<string name="tip_map_styles">Kaartstyle</string>
+	<string name="tip_map_styles_t">OsmAnd ondersteun die vertoon van aflyn vektor kaarte in verskillende style om jou behoeftes te pas:
+		\n\nBehalwe die gebalanseerde \'standaard\' styl, mag jy in \'Keuselys\' → \'Verstel skerm\' → \'Kaartstyle\' ander kies bv
+		\n\t* Die \'Toer vertoon\' styl, wat die meeste  inligting wenslik vir reis en toer toon, insluitende optimalisering vir profesionele bestuurders (hoër kontras, sigbare paaie), keuses vir Alpe stap (SAC skaale), fiets-roetes, stap simbool ondersteuning, ens.
+		\n\t* \'Hoë kontras paaie\' wys paaie in baie helder kleure vir helder omgewingslig situasies.
+		\n\t* \'Winter en ski\' skep \'n (sneeu bedekte) winter landskape aansig, en wys globale ski hellings en hysers (in samewerking met die \'Wêreld ski\' kaart aflaai)
+	</string>
+    </resources>
