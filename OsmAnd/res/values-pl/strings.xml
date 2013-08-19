@@ -156,7 +156,8 @@
   <string name="install_more">Zainstaluj więcej…</string>
   <string name="tip_update_index">Aktualizacja map offline</string>
   <string name="tip_update_index_t">Posiadanie aktualnych map to podstawa dla wyszukiwania adresów POI oraz dla nawigacji offline. OsmAnd zapewnia menedżer danych, który może sprawdzić dostępne aktualizacje (oraz inne pliki) oraz aby pobrać dostępne aktualizacje.
-		\n\nAby sprawdzić aktualizacje przejdź do \'Ustawień\' -&gt; \'Zarządzanie danymi\' -&gt; \'Pobierz\'.
+		\n\nAby pobrać aktualizacje przejdź do \'Ustawienia\' -&gt; \'Zarządzanie danymi\' -&gt; \'Pobierz\'.
+		\n\nPo pobraniu listy wybierz pobierz lub zaktualizuj plik.
 		\n\nPo tym jak zostanie pobrana z Internetu lista regionów, możesz wybrać opcję \'Menu\' -&gt; \'Filtruj pobrane\', aby wybrać uaktualnienia jedynie dla danych znajdujących się już na urządzeniu.
 		\n\n\t* Wpisy koloru zielonego oznaczają dane identyczne z tymi na serwerze
 		\n\t* Wpisy koloru niebieskiego oznaczają dostępne aktualizacje
@@ -187,11 +188,25 @@
   <string name="tip_app_mode">Wybierz Profil</string>
   
   <string name="tip_navigation">Nawigacja</string>
-  <string name="tip_navigation_t">\tPrzed rozpoczęciem nawigacji musisz wybrać punkt docelowy. Potem naciśnij\'Menu\' -&gt; \'Nawigacja\' i wybierz rodzaj nawigacji.</string>
+  <string name="tip_navigation_t">W celu wyznaczenia trasy do miejsca, kliknij na nie na mapie, (a następnie wybierz \'Trasa do tego miejsca\'), lub wybierz \'Nawigacja\' po wybraniu dowolnego wpisu w liście wyników wyszukiwania lub liści Ulubionych.↵
+		\n\nCel oznaczony jest na mapie jako pomarańczowy znacznik flagi i OsmAnd wyświetla odległość do niego oraz kierunek do niego (pomarańczowy trójkąt).
+		\n\nAby pokazać trasę do celu z każdego innego miejsca niż aktualna pozycja zaznacz miejsce i wybierz \'Trasa z tego miejsca \'.
+	</string>
   <string name="tip_search">Wyszukiwanie</string>
-  <string name="tip_search_t">"\tMożesz wyszukiwać miejsca bezpośrednio na mapie lub poprzez adres, jako POI lub punkt ulubiony.\n\tPrzyciśnięcie przycisku \'Szukaj\' na głównym ekranie otwiera okno wyszukiwania. Dla wszystkich wyników możesz wybrać opcję \'Pokaż na mapie\' oraz \'Trasa\'. "</string>
+  <string name="tip_search_t">Możesz wyszukać miejsca bezpośrednio na mapie poprzez \'Użyj lokalizacji...\' → \'Szukaj w pobliżu tutaj\', lub wywołując ekran wyszukiwania poprzez \'Menu\' → \'Szukaj\'.↵
+		\n\nEkran wyszukiwania zapewnia szablony wyszukiwania
+		\n\t* przez podanie adresu
+		\n\t* przez podanie współrzędnych
+		\n\t* wyszukiwanie POI (po typie lub nazwie)
+		\n\t* przez historię wyszukiwania
+		\n\t* przez zdefiniowane Ulubione
+		\n\nDla wszystkich wyników możesz wybrać opcję \'Nawigacja\' lub \'Pokaż na mapie\'.
+	</string>
   <string name="tip_map_context_menu">Menu \'Użyj lokalizacji..\'</string>
-  <string name="tip_map_context_menu_t">"\tMenu kontekstowe mapy jest dostępne poprzez przyciśnięcie i przytrzymanie na mapie lub poprzez wciśnięcie przycisku na trackballu.\n\tStworzy to chmurkę zawierającą współrzędne danego punktu. Aby otworzyć menu kontekstowe mapy, przyciśnij go. (Albo przyciśnij i przytrzymaj na nim aby go schować.)\n\tMenu kontekstowe mapy zawiera wszystkie akcje związane z punktem (lokalizacją). "</string>
+  <string name="tip_map_context_menu_t">\'Użyj lokalizacji...\' zawiera wszystkie opcje odnoszące się do punktu (lokalizacji).
+		\n\nSą one dostępny przez długie naciśnięcie dowolnego punktu na mapie (następnie dotykając jego znacznik), lub przez naciśnięcie przycisku trackball lub wybierając \'Menu\' → \'Użyj lokalizacji...\' (dwa ostatnie sposoby pobierają centrum mapy jako odniesienie).↵
+		\n\nOkno znacznika może być ukryte przez kliknięcie na nim.↵
+	</string>
   <string name="tip_initial">Porady i sztuczki</string>
   <string name="tip_initial_t">OsmAnd jest rozbudowanym programem do nawigacji posiadającym wiele funkcji.
 		\n\nPodstawowe porady i kruczki są wyświetlane po wybraniu \'Menu\' → \'Porady i wskazówki\'
@@ -841,7 +856,8 @@
   <string name="favourites_edit_dialog_name">Nazwa</string>
   <string name="favourites_edit_dialog_category">Kategoria</string>
   <string name="gpx_option_from_start_point">Przejdź wzdłuż całej ścieżki</string>
-  <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
+  <string name="create_poi_link_to_osm_doc">
+<u>Online OSM</u> map classification with images"</string>
   <string name="local_index_routing_data">Dane trasowania</string>
   <string name="navigate_point_format">Format:</string>
   <string name="poi_search_desc">Wyszukaj POI</string>
@@ -1368,7 +1384,7 @@
     <string name="about_settings">Informacje</string>
     <string name="about_settings_descr">Informacje o wersji, licencje, współtwórcy</string>
     <string name="tips_and_tricks">Porady i wskazówki</string>
-    <string name="tip_map_styles">Style map</string>
+    <string name="tip_map_styles">Style Map</string>
 	<string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_maxzoom">Maksymalne powiększenie</string>
     <string name="edit_tilesource_expiration_time">Wygasa (minuty)</string>
