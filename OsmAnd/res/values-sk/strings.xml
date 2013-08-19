@@ -1094,7 +1094,7 @@
     <string name="monitoring_control_start">spustiť</string>
     <string name="rendering_attr_noAdminboundaries_name">Skryť hranice</string>
 	<string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie regionálnej hranice (admin úrovne 5-9)</string>
-	<string name="tip_altitude_offset">Zobrazenie nadmorskej výšky - Korekcia ofsetu</string>
+	<string name="tip_altitude_offset">Korekcia nadmorskej výšky</string>
 	<string name="tip_altitude_offset_t">"\tVäčšina GPS zariadení meria nadmorskú výšku podľa referenčného systému WGS84, z ktorého prepočet na lokálne používaný systém vyžaduje korekcie voči aktuálnej polohe.
 \n\tNa lepšie aproximácie týchto miestnych systémov sa používa referenčný systém EGM96. OsmAnd teraz tiež podporuje automatické zobrazovanie nadmorských výškach v systéme EGM96.
 \n\tZa týmto účelom jednoducho stiahnite súbor WW15MGH.DAC cez Offline Data Manager (pôvodný je v http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
@@ -1174,7 +1174,7 @@
     <string name="support_new_features_descr">Sponzorujte vývoj nových funkcií v aplikácii</string>
 	<string name="max_speed_none">žiadna</string>
     <string name="prefer_motorways">Uprednostniť diaľnice</string>
-	<string name="prefer_in_routing_title">Uprednostniť...</string>
+	<string name="prefer_in_routing_title">Uprednostniť…</string>
 	<string name="prefer_in_routing_descr">Uprednostnenie diaľnic</string>
     <string name="item_checked">označené</string>
     <string name="item_unchecked">neoznačené</string>
@@ -1290,4 +1290,48 @@
     <string name="about_settings">O programe</string>
     <string name="about_settings_descr">Informácie o verzii, licencie, členovia projektu</string>
     <string name="tips_and_tricks">Tipy</string>
-    </resources>
+    <string name="tip_recent_changes_1_6_t">Zmeny vo verzii 1.6:
+	\n\t* Určenie/úprava online zdrojov dlaždíc (určenie doby vypršania)
+    </string>
+    <string name="local_index_tile_data_zooms">Stiahnuté priblíženia: %1$s</string>
+    <string name="local_index_tile_data_downloadable">Stiahnuteľné: %1$s</string>
+    <string name="local_index_tile_data_expire">Vypršanie (v minútach): %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maximálne priblíženie: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimálne priblíženie: %1$s</string>
+    <string name="local_index_tile_data_name">Údaje dlaždíc: %1$s</string>
+    <string name="edit_tilesource_successfully">Zdroj dlaždíc %1$s bol úspešne uložený</string>
+    <string name="edit_tilesource_maxzoom">Maximálne priblíženie</string>
+    <string name="edit_tilesource_expiration_time">Vypršanie (v minútach)</string>
+    <string name="edit_tilesource_minzoom">Minimálne priblíženie</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Zvoliť existujúci...</string>
+    <string name="edit_tilesource_name">Názov</string>
+    <string name="maps_define_edit">Určiť/Upraviť…</string>
+	<string name="map_widget_fps_info">Ladiace info o FPS</string>
+	<string name="driving_region_descr">Výber jazdnej oblasti: US, Európa, UK, Ázia a ostatné</string>
+	<string name="driving_region">Jazdná oblasť</string>
+	<string name="driving_region_japan">Japonsko</string>
+	<string name="driving_region_us">Spojené štáty</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="driving_region_europe_asia">Európa a Ázia</string>
+	<string name="driving_region_uk">UK, India, Austrália a ostatné</string>
+	<string name="osmodroid_mode_on">Zastaviť OsMoDroid</string>    
+    <string name="osmodroid_mode_off">Spustiť OsMoDroid</string>
+    <string name="announce_gpx_waypoints">Ohlasovať GPX waypointy</string>
+    <string name="speak_title">Ohlásiť…</string>
+	<string name="speak_descr">Konfigurácia ohlásení názvov ulíc, dopravných varovaní (vynútené zastavenia, spomaľovače), upozornení na radary, obmedzení rýchlosti</string>
+	<string name="speak_street_names">Ohlásiť názvy ulíc (TTS)</string>
+    <string name="osb_author_or_password_not_specified">Prosím, určte používateľa OSM a heslo v nastaveniach</string>
+    <string name="clear_intermediate_points">Zmazať prechodné body</string>
+    <string name="osb_author_dialog_password">Heslo k OSM (voliteľné)</string>
+	<string name="av_camera_focus">Typ ostrenia fotoaparátu</string>
+	<string name="av_camera_focus_descr">Výber typu ostrenia vstavaného fotoaparátu</string>
+	<string name="av_camera_focus_auto">Automatické ostrenie</string>
+	<string name="av_camera_focus_hiperfocal">Hyperfokálne ostrenie</string>
+	<string name="av_camera_focus_edof">Rozšírená hĺbka poľa (EDOF)</string>
+	<string name="av_camera_focus_infinity">Ostrenie je nastavené na nekonečno</string>
+	<string name="av_camera_focus_macro">Makro (z blízka) režim ostrenia</string>
+	<string name="av_camera_focus_continuous">Fotoaparát sa bude pokúšať ostriť priebežne</string>
+	<string name="av_photo_play_sound">Prehrať zvuk pri zachytení snímky</string>
+	<string name="av_photo_play_sound_descr">Zvoľte, či sa má prehrať zvuk pri zachytení snímky</string>
+</resources>
