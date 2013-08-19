@@ -994,7 +994,7 @@
 \nZápad slunce: %2$s</string>
 <string name="osmand_short_description_80_chars">OsmAnd je open-source navigační program s podporou offline a online map</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd je open-source navigační program s podporou offline a online map</string>
-<string name="filterpoi_activity">Vytvořit filter pro POI</string>
+<string name="filterpoi_activity">Vytvořit filtr pro POI</string>
 <string name="select_navigation_mode">Vyberte způsob dopravy</string>
 <string name="day_night_info">Denní/noční info</string>
 <string name="map_widget_day_night">Denní/noční režim</string>
@@ -1312,4 +1312,5 @@
     <string name="edit_tilesource_choose_existing">Vybrat…</string>
     <string name="edit_tilesource_name">Název</string>
     <string name="tips_and_tricks">Tipy</string>
-    </resources>
+    <string name="tip_map_styles">Styl mapy</string>
+	</resources>
