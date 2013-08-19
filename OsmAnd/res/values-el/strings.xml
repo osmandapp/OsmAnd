@@ -994,7 +994,7 @@
 	<string name="choose_available_region">Επιλογή περιοχής από λίστα</string>
 	<string name="choose_intersected_street">Επιλογή διασταυρούμενης οδού</string>
 	<string name="Closest_Amenities">Πλησιέστερες παροχές</string>
-	<string name="app_mode_default">Εμφάνιση χάρτη</string>
+	<string name="app_mode_default">Προβολή χάρτη</string>
 	<string name="app_mode_car">Αυτοκίνητο</string>
 	<string name="app_mode_bicycle">Ποδήλατο</string>
 	<string name="app_mode_pedestrian">Πεζός</string>
