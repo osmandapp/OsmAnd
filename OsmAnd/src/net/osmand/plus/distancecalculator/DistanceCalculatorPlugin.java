@@ -201,8 +201,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 						selectedPointIndex = 0;
 					}
 				} else if (id == R.string.distance_measurement_clear_route) {
-					distanceMeasurementMode = 0;
 					measurementPoints.clear();
+					selectedSubtrackIndex = - 1;
+					selectedPointIndex = -1;
 					calculateDistance();
 					contextMenuLayer.setLocation(null, null);	//clear any open info box
 				} else if (id == R.string.distance_measurement_save_gpx) {
@@ -662,9 +663,10 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			if (event.getAction() == MotionEvent.ACTION_UP) {	//Support for dragging measurement point
 				if(scrollingFlag){
 					if(selectedPointIndex >= 0){	//move selected point to new location
-						WptPt pt = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex);
+						WptPt pt = new WptPt();
 						pt.lat = view.getLatLonFromScreenPoint(event.getX(),event.getY()).getLatitude();
 						pt.lon = view.getLatLonFromScreenPoint(event.getX(),event.getY()).getLongitude();
+						measurementPoints.get(selectedSubtrackIndex).set(selectedPointIndex, pt);
 						String description = null;						
 						calculatePartialDistance(selectedSubtrackIndex, selectedPointIndex);
 						description = setDescription(true, null);
@@ -690,7 +692,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				int lastPoint = selectedPointIndex;
 				int points =0;
 				boolean showLine = false;
-				if(showDragAnimation && scrollingFlag){
+				if(showDragAnimation && scrollingFlag && measurementPoints.get(0).size() > 0){	//provide rubberbanding if a drag is occurring
 					paint.setStrokeWidth(4 * dm.density);
 					paint.setColor(dragColor);
 					path.reset();
@@ -731,7 +733,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 						if(selectedSubtrackIndex < measurementPoints.size() - 1){
 							subtrackIndex = selectedSubtrackIndex + 1;
 							if(measurementPoints.get(subtrackIndex).size() > 1){	//is there only one point in the subtrack?
-								pointIndex = 1;	//note: start of subtrack is same as end of previous subtrack
+								pointIndex = 0;
 								showLine = true;
 							}else{
 								subtrackIndex = selectedSubtrackIndex;
@@ -968,10 +970,14 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 							for(int j = 0; j < measurementPoints.get(i).size(); j++){
 								if (it.next() == p) {
 									it.remove();
+									if(measurementPoints.get(i).size() == 0){	//check if subtrack is empty
+										measurementPoints.remove(i);	//remove empty subtrack
+									}
 									selectedPointIndex = -1;	//reset the selected point indices
 									selectedSubtrackIndex = -i;
 									setLocation(null, null);	//clear any open info box
 									view.refreshMap();
+									break;
 								}
 							}
 						}
