@@ -1352,4 +1352,16 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="about_settings">Acerca de</string>
     <string name="about_settings_descr">Información de la versión, licencias, miembros del proyecto</string>
     <string name="edit_tilesource_choose_existing">Elegir existente...</string>
+    <string name="tip_map_styles">Estilos de Mapa</string>
+	<string name="tip_map_styles_t">OsmAnd permite visualizar los mapas vectoriales sin conexión en diferentes estilos de mapas para adaptarlos a tus necesidades:
+		\n\n Además del estilo de mapa equilibrado \"Por defecto\", en \'Menú\' → \'Configura pantalla\' → \ 'Estilo de dibujado\' puedes seleccionar por ejemplo
+		\n\t* El estilo \'vista Touring\', que contiene información detallada y adecuada para viajes y giras, incluyendo optimización para profesionales de la conducción (mayor contraste, carreteras distinguibles), opciones para ir de excursión alpina (escala SAC), rutas ciclistas, soporte para símbolos de senderismo, etc.
+		\n\t* \'Carreteras de alto contraste\' muestra las carreteras en colores muy acentuados para situaciones con brillante iluminación ambiental
+		\n\t* \'Invierno y esquí\' crea una vista del paisaje del invierno (nevado), y muestra pistas y remontes (en relación con la descarga del mapa \"Mundo de esquí\"
+	</string>
+    <string name="tip_recent_changes_1_6_t">Cambios en 1.6:
+	\n\t* Definir/editar fuente de baldosas en línea (especificar fecha de caducidad)
+    </string>
+    <string name="local_index_tile_data_zooms">Zooms descargados: %1$s</string>
+    <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
     </resources>
