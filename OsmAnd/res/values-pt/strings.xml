@@ -101,7 +101,7 @@
   <string name="error_reading_gpx">Erro na leitura de dados GPX</string>
   <string name="vector_data">Mapas vetoriais offline</string>
   <string name="transport_context_menu">Procurar transporte na parada</string>
-  <string name="point_on_map">Localização:\n Lat %1$.5f Long %2$.5f</string>
+  <string name="point_on_map">Localização:\n Lat %1$.5f\n Long %2$.5f</string>
   <string name="osb_bug_name">Bug</string>
   <string name="poi_context_menu_modify">Modificar POI</string>
   <string name="poi_context_menu_delete">Apagar POI</string>
@@ -180,7 +180,7 @@
   <string name="route_head">Vá</string>
   <string name="first_time_continue">Continuar</string>
   <string name="first_time_download">Download de regiões</string>
-  <string name="first_time_msg">Obrigado por escolher OsmAnd. \nPara utilizar todos os recursos do aplicativo, você necessidade de alguns dados regionais, que você pode baixar (Configurações -&gt; Dados) ou preparar você mesmo. Depois, Você poderá procurar por um endereço, um Ponto de Interesse (POI), um meio de transporte.</string>
+  <string name="first_time_msg">Obrigado por escolher OsmAnd. Para utilizar todos os recursos do aplicativo, você necessita de alguns dados regionais, que você pode baixar \'Configurações\'-&gt;	…\'Dados\' ou preparar você mesmo. Depois, Você poderá procurar por um endereço, um Ponto de Interesse (POI), ou um meio de transporte público.</string>
   <string name="search_poi_location">Procurando um sinal…</string>
   <string name="search_near_map">Procure perto do último local conhecido</string>
   <string name="search_nearby">Busca nas proximidades</string>
@@ -214,8 +214,8 @@
   <string name="update_poi_is_not_available_for_zoom">Atualização de pontos de interesse não está disponível para níveis de zoom pequenos</string>
   <string name="context_menu_item_update_poi">Atualizar pontos de interesse</string>
   <string name="context_menu_item_update_map_confirm">Atualizar dados do local via Internet?</string>
-  <string name="search_history_city">Cidade:\n {0}</string>
-  <string name="search_history_street">Rua:\n {0}, {1}</string>
+  <string name="search_history_city">Cidade: {0}</string>
+  <string name="search_history_street">Rua: {0}, {1}</string>
   <string name="search_history_int_streets">Interseção : {0} x {1} dans {2}</string>
   <string name="search_history_building">Edifício : {0}, {1}, {2}</string>
   <string name="favorite">Favoritos</string>
@@ -651,7 +651,7 @@
   <string name="map_version_changed_info">O servidor contém mapas incompatíveis com a sua versão actual do Osmand. Precisa de actualizar o Osmand para uma versão mais recente.</string>
   <string name="local_index_mi_rename">Mudar o nome</string>
   <string name="show_gpx_route">Mostrar no mapa</string>
-  <string name="poi_filter_nominatim">Online Nominatim</string>
+  <string name="poi_filter_nominatim">Online Nomeação</string>
   <string name="search_position_current_location_search">Procurando posição…</string>
   <string name="search_position_current_location_found">Position (Found)</string>
   <string name="search_position_address">Endereço…</string>
@@ -763,7 +763,7 @@
   <string name="tip_favorites_t">\tPontos usados ​​frequentemente podem ser guardados como \"Favoritos\".\n\tPara guardar um ponto como Favorito, no menu de contexto do ponto, seleccione \"Adicionar aos Favoritos\" e escolha um nome.\n\tAo escolher um item no menu \"Favoritos\", tem as opções para \"Ver no mapa\", \"Definir como destino\", \"Editar\" ou \"Apagar\".\n\tPara ver todos os pontos favoritos directamente no mapa, escolha \"Menu\" -&gt; \"Definir Exibição\" e active a camada \"Favoritos\"</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
   <string name="error_doing_search">Erro na pesquisa offline</string>
-  <string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
+  <string name="search_offline_geo_error">Não foi possível separar geo intent \'%s\'</string>
   <string name="search_osm_offline">Pesquisa de endereço usando mapas offline</string>
   <string name="system_locale">Sistema</string>
   <string name="preferred_locale_descr">Seleccione linguagem</string>
@@ -794,15 +794,15 @@
   <string name="mile">mi</string>
   <string name="send_location_way_choose_title">Compartilhar localização usando</string>
   <string name="send_location_sms_pattern">Localização: %1$s\n%2$s</string>
-  <string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
+  <string name="send_location_email_pattern">PAra ver localização siga o seguinte link %1$s ou o android intent link %2$s</string>
   <string name="send_location">Enviar localização</string>
   <string name="context_menu_item_share_location">Compartilhar local</string>
   <string name="add_waypoint_dialog_added">Ponto de trilha \'\'{0}\'\' foi adicionado com sucesso</string>
   <string name="add_waypoint_dialog_title">Acrescentar ponto à trilha GPX gravada</string>
   <string name="context_menu_item_add_waypoint">Acrescentar ponto GPX</string>
-  <string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
-  <string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes &gt; 20 km (experimental)</string>
-  <string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
+  <string name="use_osmand_routing_service">OsmAnd navigação &gt;20km</string>
+  <string name="use_osmand_routing_service_descr">Navegação OsmAnd offline aplica-se apenas a rotas &gt; 20 km (experimental)</string>
+  <string name="osmand_routing_experimental">Navegação offline OamAnd é ainda uma função experimental e não funciona em distâncias superiores a cerca de 20 km.\n\nO Serviço Navegação está temporariamente mudado para CloudMade online.</string>
   <string name="specified_dir_doesnt_exist">Não foi possível encontrar diretório especificado.</string>
   <string name="application_dir">Local de Armazenamento</string>
   <string name="application_dir_change_warning">Alterar o diretório de armazenamento não irá mover os dados para a nova pasta ou apagar os dados atuais. Isto deve ser realizado separadamente e fora do OsmAnd. Continuar mesmo assim?</string>
@@ -810,7 +810,7 @@
   <string name="build_installed">Build {0} instalado com sucesso ({1}).</string>
   <string name="downloading_build">Downloading build…</string>
   <string name="install_selected_build">Você deseja instalar OsmAnd - {0} de {1} {2} MB ?</string>
-  <string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
+  <string name="loading_builds_failed">A busca da lista de OsmAnd builds falhou</string>
   <string name="loading_builds">Carregando OsmAnd builds…</string>
   <string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
   <string name="contribution_activity">Special activity for contribution version</string>
@@ -1030,7 +1030,7 @@
     <string name="item_checked">marcado</string>
     <string name="map_view">Mapa</string>
     <string name="prefer_motorways">Preferir auto-estradas</string>
-	<string name="prefer_in_routing_title">Preferir…</string>
+	<string name="prefer_in_routing_title">Preferir-…</string>
 	<string name="prefer_in_routing_descr">Preferir Auto-Estradas</string>
     <string name="tip_recent_changes_1_2_t">Correções em 1.2.1:\n\t* Corrigido o Geo Intent (Foursquare, c:geo)\n\t* Corrigidos os tremeliques de visor durante a navegação\n\t* Outras pequenas correções\n\nAlterações em 1.2:\n\t* Correções de bugs (acertos nas rotas, pesquisa, gravação de AV, comandos de voz, algumas melhorias de exibição)\n\t* Facilitada a configuração de sobreposições de Sombras de Colinas (requer plugin Curvas de Nível)\n\t* Agora aceita links de localização maps.google.com\n\t* filtro de Kalman para a bússola\n\t* Suporte para relógio Pebble\n\t* Novo widget (Informações GPS)\n\t* Adicionado suporte multi-janela para dispositivos Samsung recentes</string>
     <string name="max_speed_none">Nenhum</string>
@@ -1064,7 +1064,7 @@
     
     
     <string name="map_widget_distancemeasurement">Medição da distância</string>
-    <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar localização...\" para atribuir uma nota para o local especificado</string>
+    <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar localização-...\" para atribuir uma nota para o local especificado</string>
     <string name="monitoring_control_stop">Parar</string>
     <string name="map_widget_audionotes">Notas de áudio</string>
     <string name="audionotes_plugin_description">Tomar notas de audio/vídeo durante a viagem</string>
@@ -1153,19 +1153,19 @@
 	<string name="driving_region_uk">Reino Unido, Índia, Austrália e Outras</string>
 	<string name="osmodroid_mode_on">Parar OsMoDroid</string>    
     <string name="osmodroid_mode_off">Iniciar OsMoDroid</string>
-    <string name="announce_gpx_waypoints">Anuncie waypoints GPX</string>
+    <string name="announce_gpx_waypoints">Anuncie pontos de trilha GPX</string>
     <string name="speak_title">Anuncie…</string>
 	<string name="speak_descr">Configure para anunciar nomes das ruas, avisos de tráfego (paradas obrigatórias, lombadas), avisos de radares, limites de velocidade</string>
 	<string name="speak_street_names">Anuncie nome das ruas (TTS)</string>
     <string name="speak_speed_limit">Anuncie limite de velocidade</string>
     <string name="speak_cameras">Anuncie radares</string>
 	<string name="speak_traffic_warnings">Anuncie avisos de tráfego</string>
-    <string name="tip_recent_changes_1_5_t">Mudanças na versão 1.5:
+    <string name="tip_recent_changes_1_5_t">"Mudanças na versão 1.5:
 	\n\tAvisos de voz sobre limites de velocidade e câmeras
 	\n\tMais voice prompt capabilites(nome de ruas anunciados)
 	\n\tÍcones de mapas de alta densidade
 	\n\tMuitas mudanças na interface
-	\n\tCorreções no display de distância, analizador GPX, manuseio de waypoints, planejando 	widget, OSM uploading, manuseio em https
+	\n\tCorreções no display de distância, analizador GPX, manuseio de waypoints, planejando 	widget, OSM uploading, manuseio em https"
     </string>
     <string name="osb_author_or_password_not_specified">Favor especificar usuário e senha em Configurações</string>
     <string name="clear_intermediate_points">Limpar pontos intermediários</string>
@@ -1179,7 +1179,7 @@
     <string name="route_via">Via:</string>
     <string name="route_from">A partir:</string>
 	<string name="local_index_gpx_timemoving">\nTempo em movimento: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timespan">\nTime parado: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timespan">\nTempo decorrido: %1$d:%2$02d:%3$02d</string>
 	<string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Defina como destino</string>
     <string name="please_select_address">Selecione cidade ou rua primeiro</string>
@@ -1321,4 +1321,20 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="local_index_tile_data_zooms">Zooms descarregados: %1$s</string>
     <string name="local_index_tile_data_expire">Expira (minutos): %1$s</string>
     <string name="local_index_tile_data_downloadable">Descarregado: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Zoom máximo: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Zoom Mínimo: %1$s</string>
+    <string name="local_index_tile_data_name">Daods do mosaico: %1$s</string>
+    <string name="edit_tilesource_successfully">A origem dos mosaicos %1$s foi gravado com sucesso</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptico mercator</string>
+    <string name="edit_tilesource_maxzoom">Zoom máximo</string>
+    <string name="edit_tilesource_expiration_time">Expira (minutos)</string>
+    <string name="edit_tilesource_minzoom">Zoom min</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Escolha existente...</string>
+    <string name="edit_tilesource_name">Nome</string>
+    <string name="maps_define_edit">Definir/Editar…</string>
+	<string name="map_widget_fps_info">FPS debug info</string>
+	<string name="tip_recent_changes_1_6_t">alterações em 1.6:
+	\n\t* Definir/editar origem online de mosaicose (specificar tempo limite)
+    </string>
     </resources>
