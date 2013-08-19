@@ -315,14 +315,8 @@ public class OsmandRenderer {
 						// check bit b if it is set
 						if (((ind >> b) & 1) == 0) {
 							alreadyDrawnIcons[i] = ind | (1 << b);
-							if(rc.getDensityValue(1) != 1) {
-								float left = icon.x - rc.getDensityValue(ico.getWidth() / 2);
-								float top = icon.y - rc.getDensityValue(ico.getHeight() / 2);
-								cv.drawBitmap(ico, null, new RectF(left, top, left + rc.getDensityValue(ico.getWidth()), top
-										+ rc.getDensityValue(ico.getHeight())), paintIcon);
-							} else {
-								cv.drawBitmap(ico, icon.x - ico.getWidth() / 2, icon.y - ico.getHeight() / 2, paintIcon);
-							}
+							cv.drawBitmap(ico, icon.x - ico.getWidth() / 2,
+									icon.y - ico.getHeight() / 2, paintIcon);
 						}
 					}
 				}

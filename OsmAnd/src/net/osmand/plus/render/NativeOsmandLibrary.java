@@ -17,14 +17,19 @@ public class NativeOsmandLibrary extends NativeLibrary {
 	
 	private static NativeOsmandLibrary library;
 	private static Boolean isNativeSupported = null;
-	
-	public static NativeOsmandLibrary getLoadedLibrary(){
+
+    public NativeOsmandLibrary(boolean newLibrary) {
+        super(newLibrary);
+    }
+
+    public static NativeOsmandLibrary getLoadedLibrary(){
 		synchronized (NativeOsmandLibrary.class) {
 			return library;
 		}
 	}
 
-	public static NativeOsmandLibrary getLibrary(RenderingRulesStorage storage, ClientContext ctx) {
+
+    public static NativeOsmandLibrary getLibrary(RenderingRulesStorage storage, ClientContext ctx) {
 		if (!isLoaded()) {
 			synchronized (NativeOsmandLibrary.class) {
 				if (!isLoaded()) {
@@ -43,7 +48,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 						try {
 							loadNewCore(libCpuSuffix);
 							log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
-							library = new NativeOsmandLibrary();
+							library = new NativeOsmandLibrary(true);
 							isNativeSupported = true;
 						} catch(Throwable e) {
 							log.error("Failed to load new native library", e); //$NON-NLS-1$
@@ -51,7 +56,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 						if(!isNativeSupported) {
 							loadOldCore(libCpuSuffix);
 							log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
-							library = new NativeOsmandLibrary();
+							library = new NativeOsmandLibrary(false);
 							log.debug("Initializing rendering rules storage..."); //$NON-NLS-1$
 							NativeOsmandLibrary.initRenderingRulesStorage(storage);
 							isNativeSupported = true;
@@ -70,13 +75,13 @@ public class NativeOsmandLibrary extends NativeLibrary {
 	}
 
 	private static void loadNewCore(final String libCpuSuffix) {
-		System.loadLibrary("Qt5Core" + libCpuSuffix);
-		System.loadLibrary("Qt5Network" + libCpuSuffix);
-		System.loadLibrary("Qt5Concurrent" + libCpuSuffix);
-		System.loadLibrary("Qt5Sql" + libCpuSuffix);
-		System.loadLibrary("Qt5Xml" + libCpuSuffix);
-		System.loadLibrary("OsmAndCore" + libCpuSuffix);
-		System.loadLibrary("OsmAndCoreUtils" + libCpuSuffix);
+//		System.loadLibrary("Qt5Core" + libCpuSuffix);
+//		System.loadLibrary("Qt5Network" + libCpuSuffix);
+//		System.loadLibrary("Qt5Concurrent" + libCpuSuffix);
+//		System.loadLibrary("Qt5Sql" + libCpuSuffix);
+//		System.loadLibrary("Qt5Xml" + libCpuSuffix);
+//		System.loadLibrary("OsmAndCore" + libCpuSuffix);
+//		System.loadLibrary("OsmAndCoreUtils" + libCpuSuffix);
 		System.loadLibrary("OsmAndJNI" + libCpuSuffix);
 	}
 	
@@ -103,7 +108,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 	public RenderingGenerationResult generateRendering(RenderingContext rc, NativeSearchResult searchResultHandler,
 			Bitmap bitmap, boolean isTransparent, RenderingRuleSearchRequest render) {
 		if (searchResultHandler == null) {
-			log.error("Error searchresult = null"); //$NON-NLS-1$
+			log.error("Error search result = null"); //$NON-NLS-1$
 			return new RenderingGenerationResult(null);
 		}
 		
