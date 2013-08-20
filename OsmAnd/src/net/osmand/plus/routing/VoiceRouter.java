@@ -428,6 +428,7 @@ public class VoiceRouter {
 		if(res != null) {
 			res = res.replace('-', ' ');
 			res = res.replace(':', ' ');
+			res = res.replace('ﬂ', 'ss'); // this should help non-German tts voices to pronounce German "Straﬂe" (=street)
 		}
 		return res;
 	}
