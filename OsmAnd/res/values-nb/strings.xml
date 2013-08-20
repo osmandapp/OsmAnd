@@ -697,6 +697,12 @@
     <string name="about_settings_descr">Versjonsinformasjon, lisenser, prosjektmedlem</string>
     <string name="tips_and_tricks">Tips</string>
     <string name="local_index_tile_data_downloadable">Nedlastbar: %1$s</string>
-    <string name="local_index_tile_data_maxzoom">Maksimal zoom: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Største zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minste zoom: %1$s</string>
-    </resources>
+    <string name="edit_tilesource_maxzoom">Maks-zoom</string>
+    <string name="edit_tilesource_minzoom">Min-zoom</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Velg eksisterende …</string>
+    <string name="edit_tilesource_name">Navn</string>
+    <string name="maps_define_edit">Definer/rediger …</string>
+	</resources>
