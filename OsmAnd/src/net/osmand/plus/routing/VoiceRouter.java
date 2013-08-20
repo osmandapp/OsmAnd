@@ -426,11 +426,7 @@ public class VoiceRouter {
 		}
 		// replace characters which may produce unwanted tts sounds:
 		if(res != null) {
-			res = res.replace('-', ' ');
-			res = res.replace(':', ' ');
-			res = res.replace("ﬂ", "ss"); // helps non-German tts voices to pronounce German Straﬂe (=street)
-			res = res.replace("\u00df", "ss");
-			res = res.replace("&szlig;", "ss");
+			res = getSpeakablePointName(res)
 		}
 		return res;
 	}
@@ -440,6 +436,7 @@ public class VoiceRouter {
 		if(pn != null) {
 			pn = pn.replace('-', ' ');
 			pn = pn.replace(':', ' ');
+			pn = pn.replace("&szlig;", "ss"); // helps non-German tts voices to pronounce German Straﬂe (=street)
 		}
 		return pn;
 	}
