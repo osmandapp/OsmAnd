@@ -1469,7 +1469,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 		\n\t* \'Zima i narty\' tworzy (pokryte śniegiem) widoki zimowych krajobrazów i pokazuje stoki i wyciągi narciarskie (w związku z mapą z możliwą do pobrania mapą \'World ski\')
 	</string>
     <string name="tip_recent_changes_1_6_t">Zmiany w 1.6:
-	\n\t* Definiowanie/edycja źródła internetowych płytek (określić okres ważności)
+	\n\t* Definiowanie/edycja źródła internetowych płytek (określenie okresu ważności)
     </string>
     <string name="edit_tilesource_successfully">Źródło płytek %1$ zostało zapisane z powodzeniem</string>
     <string name="edit_tilesource_elliptic_tile">Eliptyczna Merkatora</string>
