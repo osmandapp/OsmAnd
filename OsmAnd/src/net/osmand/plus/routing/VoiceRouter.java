@@ -426,7 +426,7 @@ public class VoiceRouter {
 		}
 		// replace characters which may produce unwanted tts sounds:
 		if(res != null) {
-			res = getSpeakablePointName(res)
+			res = getSpeakablePointName(res);
 		}
 		return res;
 	}
