@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -690,4 +691,12 @@
     <string name="context_menu_item_destination_point">Velg som mål</string>
     <string name="please_select_address">Velg by eller gate først</string>
     <string name="search_street_in_neighborhood_cities">Søk etter gaten i nabobyer</string>
+    <string name="tip_map_styles">Kartstiler</string>
+	<string name="about_version">Utgave:</string>
+    <string name="about_settings">Om</string>
+    <string name="about_settings_descr">Versjonsinformasjon, lisenser, prosjektmedlem</string>
+    <string name="tips_and_tricks">Tips</string>
+    <string name="local_index_tile_data_downloadable">Nedlastbar: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maksimal zoom: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minste zoom: %1$s</string>
     </resources>
