@@ -1610,4 +1610,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n * \'Veje med høj kontrast\' viser veje med meget forstærkede farver til lyse omgivelser
 \n * \'Vinter og ski\' giver en visning af et (snedækket) vinterlandskab og viser globale skiløjper og lifter (hent \'World ski\' kortet)
 	</string>
-    </resources>
+    <string name="route_descr_destination">route_descr_destination</string>
+    <string name="create_poi_link_to_osm_doc">create_poi_link_to_osm_doc<u>Online OSM</u> map classification with images</string>
+	</resources>
