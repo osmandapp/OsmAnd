@@ -77,7 +77,7 @@
   <string name="routing_settings">Navegación</string>
   <string name="routing_settings_descr">Especifica opciones de navegación</string>
   <string name="global_settings">Opciones Globales</string>
-  <string name="index_settings">Datos descargados</string>
+  <string name="index_settings">Gestor de Datos</string>
   <string name="index_settings_descr">Descargue, vea detalles y gestione mapas sin conexión</string>
   <string name="general_settings">Opciones Generales</string>
   <string name="general_settings_descr">Configura la presentación y otras opciones globales</string>
@@ -91,11 +91,18 @@
   <string name="tip_rotation_switching">Rotación del mapa</string>
   
   <string name="switch_to_raster_map_to_see">No hay mapa vectorial descargado para esta localización. Puedes descargarlo en \'Opciones\' -&gt; \'Descarga de datos\', o pasar a mapas en línea vía \'Opciones\' -&gt; \'Mapas\'.</string>
-  <string name="binary_map_download_success">Descarga correcta.\n\t\n\tPara usarla, activa \'Menú\' -&gt; \'Definir vista\' -&gt; \'Fuente de mapas…\' -&gt; \'Mapas vectoriales descargados\'.</string>
+  <string name="binary_map_download_success">Descarga correcta.
+		\n\t\n\tPara usarla, activa \'Menú\' -&gt; \'Capas de mapas\' -&gt; \'Fuente de mapas…\' -&gt; \'Mapas vectoriales descargados\'.
+	</string>
   <string name="tip_day_night_mode">Modo Día/Noche</string>
   
   <string name="tip_osm_improve">Mejora de los datos OSM</string>
-  <string name="tip_osm_improve_t">\tOsmAnd usa mapas basados en datos de Openstreetmap.org (OSM) y, además de para ver mapas y navegar, se puede utilizar para mejorar la calidad de los datos OSM. Puedes crear y enviar fácilmente nuevos PDI o informes de fallos de OSM tan sólo con unos pocos clicks. \n\tPara ello necesitas primero proporcionar tu información de conexión OSM en \'Opciones\' -&gt; \'Opciones Generales\' -&gt; \'Edición OSM\'. \n\tPara añadir un nuevo PDI usa la opción \'Crear PDI\' en el menú contextual del mapa. Introduce la información sobre el nuevo PDI en el formulario \'Crear PDI\' y por último envíala. \n\tLos errores en los mapas pueden ser notificados inmediatamente mediante fallos OSM, y la comunidad OSM puede resolver el problema más rápidamente. \n\tPara añadir un fallo OSM usa la opción \'Abrir fallo OSM\' en el menú contextual del mapa. Luego escribe la descripción detallada del problema y por último envíala pulsando el botón \'Añadir\'. \n\tNecesitas conexión a Internet para enviar tus contribuciones a PDIs y fallos OSM.</string>
+  <string name="tip_osm_improve_t">\tOsmAnd usa mapas basados en datos de Openstreetmap.org (OSM) y puede utilizarse directamente para mejorar la calidad de los datos OSM. Puedes crear y enviar fácilmente nuevos PDI o informes de fallos de OSM tan sólo con unos pocos clicks.
+		\n\nPara ello necesitas activar el extra \'Edición de OSM\' en \'Opciones\'→\'Gestor de Extras\', luego proporcionar tu información de conexión OSM en \'Opciones\'→\'Edición de OSM\'.
+		\n\nPara añadir un nuevo PDI usa la opción \'Crear PDI\' en el menú contextual del mapa. Introduce la información sobre el nuevo PDI en el formulario \'Crear PDI\' y por último envíala.
+		\n\nLos errores en los mapas pueden ser notificados inmediatamente mediante fallos OSM, para que la comunidad OSM pueda resolver el problema. Usa la opción \'Abrir fallo OSM\' en el menú contextual de \'Usar localización…\'. Luego escribe la descripción detallada del problema y por último envíala pulsando el botón \'Añadir\'.
+		\n\nOsmAnd puede guardar localmente tus entradas (ver la opción correspondiente), pero necesitas conexión a Internet para enviar tus contribuciones a PDIs y fallos OSM.
+	</string>
   <string name="download_files_not_enough_space">No hay suficente espacio para descargar %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">El espacio disponible ahora es {2} MB. ¿Descargar {0} archivo(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Selección de Destino</string>
@@ -219,7 +226,7 @@
   <string name="gpx_option_reverse_route">Invertir la dirección del GPX</string>
   <string name="gpx_option_destination_point">Usar destino actual</string>
   <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
-  <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta localización. \n\t\n\tPara usarlo active \'Menú\' -&gt; \'Definir vista\' -&gt; \'Fuente del mapa…\' -&gt; \'Mapas vectoriales descargados\'.</string>
+  <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta localización. \n\t\n\tPara usarlo activa \'Menú\'→\'Capas de mapa\'→\'Fuente del mapa…\'→\'Mapas vectoriales descargados\'.</string>
   <string name="choose_audio_stream">Salida de indicaciones de voz</string>
   <string name="choose_audio_stream_descr">Elige el canal para reproducir indicaciones por voz (dependiente del sistema)</string>
   <string name="voice_stream_voice_call">Audio de llamada de voz</string>
@@ -242,24 +249,27 @@
   <string name="select_tile_source_to_install">Seleccione mapas (teselas) a instalar o actualizar</string>
   <string name="internet_not_available">No está disponible la conexión a Internet que se necesita para la operación</string>
   <string name="install_more">Instalar más…</string>
-  <string name="tip_update_index">Actualizar datos descargados</string>
-  <string name="tip_update_index_t">\tEs esencial tener datos de mapa actualizados. OsmAnd proporciona un gestor de descargas que puede comprobar la disponibilidad de actualizaciones de los datos descargados.
-\n\tPara comprobar las actualizaciones ve a \'Opciones\' -&gt; \'Datos descargados\' -&gt; \'Descargar…\'. Tras recuperar de Internet la lista de regiones, puedes seleccionar la opción \'Menú\' -&gt; \'Filtrar descargados\' para buscar actualizaciones sólo para datos que estén ya en tu dispositivo.
-\n\tLa disponibilidad de actualizaciones se indica por los siguientes colores:
-\n\t\'Verde\' - indica archivos idénticos en el dispositivo y en el servidor
-\n\t\'Azul\' - indica actualizaciones disponibles en el servidor</string>
+  <string name="tip_update_index">Actualizar mapas descargados</string>
+  <string name="tip_update_index_t">Es esencial tener datos de mapa actualizados tanto para visualización de mapas, búsqueda de direcciones/PDI y navegación sin conexión.  OsmAnd proporciona un gestor de datos para descargar estos mapas (y otros archivos de datos) y comprobar las actualizaciones disponibles.
+		\n\nPara comprobar las actualizaciones ve a \'Opciones\' -&gt; \'Gestor de Datos\' -&gt; \'Descargar\'.
+		\n\nTras recuperar de Internet la lista de regiones, pulsa en cualquier elemento para descargarlo o actualizarlo. Fíjate en el selector de archivos de la parte superior de la pantalla para elegir el tipo de descarga que quieras (mapas normales, carreteras, etc.).
+		\n\nPuedes filtrar la lista de regiones tecleando algunas letras o puedes seleccionar la opción del menú \'Filtrar descargados\' para buscar actualizaciones sólo para datos que estén ya en tu dispositivo.
+		\n\t* Entradas en \'verde\' indican archivos idénticos en el dispositivo y en el servidor
+		\n\t* Entradas en \'azul\' indican actualizaciones disponibles en el servidor
+		\n\t* Entradas en cursiva indican datos desactivados en el dispositivo
+	</string>
   <string name="level_to_switch_vector_raster_descr">Nivel de zoom mínimo para utilizar dibujo de vectores en vez de teselas de mapa</string>
   <string name="level_to_switch_vector_raster">Mín. zoom vectores</string>
   <string name="tip_location_sharing">Compartir localización</string>
-  <string name="tip_location_sharing_t">"\tPuede compartir la localización de lugares interesantes con su familia y amigos.
-\n\tPara compartir una localización:
-\n\tUse \'Menú contextual del mapa\' -&gt; \'Compartir localización\'.
-\n\tLuego seleccione el modo de compartir la localización. Las opciones son: Correo electrónico, SMS(texto), o copiar las coordenadas de la localización al portapapeles. "</string>
+  <string name="tip_location_sharing_t">Puedes compartir la localización de lugares interesantes con tu familia y amigos mediante el menú contextual \'Usar localización…\'→\'Compartir localización\'.
+		\n\nLuego seleccione el modo de compartir la localización. Las opciones son: Correo electrónico, SMS(texto), o copiar las coordenadas de la localización al portapapeles.
+	</string>
   <string name="tip_favorites">Puntos favoritos</string>
-  <string name="tip_favorites_t">"\tLos puntos usados frecuentemente se pueden guardar como favoritos.
-\n\tPara guardar un punto como favorito, en el menú contextual del mapa, selecciona la opción \'Añadir a favoritos\' y escribe un nombre. Después de guardarlo, es accessible vía \'Menú Principal\' -&gt; \'Favoritos\'.
-\n\tUna pulsación larga sobre un favorito en el menú \'Favoritos\' proporciona opciones para ponerlo como destino, editarlo o borrarlo.
-\n\tPara mostrar todos los puntos favoritos directamente en el mapa, active la capa \'Favoritos\' en \'Menú contextual del mapa\' -&gt;\'Representación\'. "</string>
+  <string name="tip_favorites_t">Los puntos usados frecuentemente se pueden guardar como favoritos. de la siguiente forma:
+		\n\nEn el menú contextual \'Usar localización…\', selecciona la opción \'Añadir a favoritos\' y escribe un nombre.
+		\n\nDespués de guardar un Favorito, es accessible vía \'Menú\'→\'Favoritos\'. Una pulsación sobre un favorito en el menú \'Favoritos\' proporciona opciones para navegar al mismo, editarlo o borrarlo.
+		\n\nPara mostrar todos los puntos favoritos directamente en el mapa, active la capa \'Favoritos\' en \'Menú\'→\'Capas de mapa\'.
+	</string>
   <string name="create_poi_link_to_osm_doc">" <u>OSM en línea</u> clasificación de mapa con imágenes"</string>
   <string name="error_doing_search">Ocurrió un error en la búsqueda</string>
   <string name="search_offline_geo_error">No se pudo analizar el filtro \'%s\'</string>
@@ -267,22 +277,34 @@
   <string name="system_locale">Sistema</string>
   <string name="preferred_locale_descr">Selecciona el idioma de visualización</string>
   <string name="preferred_locale">Idioma de visualización</string>
-  <string name="tip_map_switch">Fuente de mapas</string>
+  <string name="tip_map_switch">Elige una Fuente de mapa</string>
   
-  <string name="tip_app_mode">Perfil de usuario</string>
+  <string name="tip_app_mode">Perfil de uso</string>
   
   <string name="tip_navigation">Navegación</string>
-  <string name="tip_navigation_t">\tAntes de empezar una navegación necesitas seleccionar un destino. Después, pulsa \'Menú\' -&gt; \'Indicaciones\' en el mapa y selecciona el tipo de navegación.</string>
+  <string name="tip_navigation_t">Para recibir indicaciones hasta un lugar, o bien mantén pulsado sobre el mismo en el mapa, luego pulsa sobre su descripción y selecciona \'Indicaciones a\', o bien selecciona \'Indicaciones\' después de pulsar sobre una entrada en una lista de resultados de búsqueda o de favoritos.
+		\n\nEl destino se marca en el mapa como una bandera naranja y OsmAnd muestra la distancia y la dirección al mismo (triángulo naranja).
+		\n\nPara mostrar una ruta al destino desde cualquier punto diferente de la posición actual, selecciónalo posteriormente en el mapa y pulsa \'Indicaciones desde\'.
+	</string>
   <string name="tip_search">Buscando</string>
-  <string name="tip_search_t">"\tPuedes buscar lugares directamente en el mapa, por dirección, por coordenadas, como PDI, o como favorito predefinido.
-\n\tPulsando \'Buscar\' en el menú principal, abre las actividades de búsqueda. Para los puntos encontrados, se ofrece un menú contextual con dos opciones: \'Fijar como destino\' o \'Mostrar en mapa\'. "</string>
-  <string name="tip_map_context_menu">Menú Contextual del Mapa</string>
-  <string name="tip_map_context_menu_t">"\tEl menú contextual del mapa aparece con una pulsación larga en el mapa o pulsando el botón del trackball.
-\n\tEsto muestra una caja con las coordenadas del punto. Para abrir el diálogo del menú contextual del mapa pulsa sobre ella (o pulsación larga sobre la caja para ocultarla).
-\n\tEl menú contextual del mapa contiene todas las acciones relacionadas con el punto (localización). "</string>
+  <string name="tip_search_t">Puedes buscar lugares directamente en el mapa vía \'Usar localización…\'→\'Buscar cerca de aquí\', o mediante la pantalla de búsqueda vía \'Menú\'→\'Buscar\'.
+		\n\nLa pantalla de búsqueda proporciona plantillas para buscar:
+		\n\t* por dirección
+		\n\t* vía coordenadas
+		\n\t* como PDI (por tipo o por nombre)
+		\n\t* vía tu historial de búsquedas
+		\n\t* o en tus favoritos predefinidos.
+		\n\nPara los puntos encontrados, se ofrece un menú contextual o barra de acciones con opciones como \'Indicaciones\' o \'Mostrar en mapa\'.
+	</string>
+  <string name="tip_map_context_menu">Menú \'Usar localización…\'</string>
+  <string name="tip_map_context_menu_t">El menú contextual \'Usar localización…\' contiene todas las acciones relacionadas con el punto (localización).
+		\n\nAparece bien con una pulsación larga en un punto del mapa y luego pulsando sobre su marcador, bien pulsando el botón del trackball, o bien seleccionando \'Menú\'→\'Usar localización…\' (los dos últimos modos toman el cenro del mapa como referencia).
+		\n\nUna caja marcador puede ser ocultada con una pulsación larga sobre ella.
+	</string>
   <string name="tip_initial">Pistas y trucos</string>
-  <string name="tip_initial_t">"\tOsmAnd es una aplicación de navegación con muchas características.
-\n\tComo introducción básica, hay algunas pistas y trucos de uso accesibles desde la pantalla principal. "</string>
+  <string name="tip_initial_t">OsmAnd es una aplicación de navegación con muchas características.
+		\n\nComo introducción básica, hay algunas pistas y trucos de uso accesibles vía \'Menú\'→\'Consejos\' desde la pantalla principal.
+	</string>
   <string name="next_button">Siguiente</string>
   <string name="previous_button">Anterior</string>
   <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
@@ -382,7 +404,7 @@
   <string name="rendering_exception">Ocurrió un error al visualizar el área seleccionada</string>
   <string name="rendering_out_of_memory">No hay suficiente memoria para mostrar el área seleccionada</string>
   <string name="show_point_options">Usar localización…</string>
-  <string name="renderer_load_sucess">Se cargó la visualización</string>
+  <string name="renderer_load_sucess">Visualización cargada</string>
   <string name="renderer_load_exception">Error: No se cargó la visualización</string>
   <string name="renderers">Visualización de vectores</string>
   <string name="renderers_descr">Elige apariencia de visualización de mapas vectoriales</string>
@@ -486,7 +508,7 @@
   <string name="first_time_continue">Después</string>
   <string name="first_time_download">Descargar regiones</string>
   <string name="first_time_msg">Gracias por elegir OsmAnd.
-Para poder usar todas las características de la aplicación necesitas algunos datos regionales, que puedes descargar (Opciones / Datos) o preparar tú mismo. Después, podrás ver mapas, localizar direcciones, buscar PDIs y transporte público.</string>
+Para poder usar muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestor de Datos\'. Después, podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
   <string name="search_near_map">Buscar cerca de la última localización</string>
   <string name="search_nearby">Buscar cercanos</string>
@@ -960,12 +982,27 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="map_widget_day_night">Mapa día/noche</string>
 <string name="map_widget_vector_attributes">Atributos de dibujado:</string>
 <string name="map_widget_renderer">Estilo de mapa</string>
-<string name="tip_rotation_switching_t_v2">"﻿\tPuedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.\n\tLas opciones son:\n\t- \'No girar\': el mapa no girará. El norte está siempre arriba\n\t- \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección\n\t- \'A la brújula\' - el mapa se alinea con la lectura de la brújula del dispositivo "</string>
-<string name="tip_map_switch_t_v2">\tLa fuente del mapa y las capas mostradas se cambian en la vista del mapa a través de \'Menú\'-&gt; \'Definir vista\'.\n\tEn \'Fuente de mapas...\' puedes elegir usar los mapas vectoriales descargados, fuentes predefinidas de teselas (online) (activa el extra \'Mapas Online\' para ello), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en un PC.\n\tOsmAnd también soporta fuentes personalizadas.
+<string name="tip_rotation_switching_t_v2">Puedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.
+		\n\nLas opciones son:
+		\n\t* \'No girar (norte arriba)\': el mapa no girará. El norte está siempre arriba
+		\n\t* \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección
+		\n\t* \'A la brújula\': el mapa se alinea con la lectura de la brújula del dispositivo
 	</string>
-<string name="tip_day_night_mode_t_v2">"\tLa apariencia del mapa puede cambiarse para algunos mapas vectoriales entre día (más brillante) y noche (más oscuro).\n\tLos colores del modo noche son más seguros para la conducción nocturna.\n\tPuedes establecer una política para la conmutación día/noche en \'Menú\'-&gt; \'Configura pantalla\'-&gt; \'Mapa Día/Noche\'.\n\tLas opciones son:\n\t- \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto)\n\t- \'Día\': utiliza siempre el modo día\n\t- \'Noche\': utiliza siempre el modo noche\n\t- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado) "
+<string name="tip_map_switch_t_v2">La fuente del mapa y las capas mostradas se cambian vía \'Menú\'→\'Capas de mapa\'.
+		\n\nEn \'Fuente del mapa…\' puedes elegir usar los mapas vectoriales descargados (por defecto, y también necesarios para navegación sin conexión), fuentes predefinidas de teselas (online o guardados localmente) (para ello activa el extra \'Mapas Online\' bajo \'Opciones\'→\'Gestor de Extras\'), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en un PC.
+		\n\nOsmAnd también soporta fuentes personalizadas.
 	</string>
-<string name="tip_app_mode_t_v2">"\tOsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.\n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono coche, bicicleta o peatón), o al crear una ruta. "</string>
+<string name="tip_day_night_mode_t_v2">La apariencia del mapa puede cambiarse para los mapas vectoriales entre día (más brillante) y noche (más oscuro). Los colores del modo noche son más seguros y cómodos para la conducción nocturna.
+		\n\nPuedes establecer una política para la conmutación día/noche en \'Menú\'→ \'Configura pantalla\'-&gt; \'Mapa día/noche\'.
+		\n\nLas opciones son:
+		\n\t* \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto)
+		\n\t* \'Día\': utiliza siempre el modo día
+		\n\t* \'Noche\': utiliza siempre el modo noche
+		\n\t* \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado)
+	</string>
+<string name="tip_app_mode_t_v2">OsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.
+		\n\nPuedes cambiar de perfil mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono coche, bicicleta o peatón), o al crear una ruta.
+	</string>
 <string name="osmand_short_description_80_chars">OsmAnd es una aplicación de navegación de código abierto para mapas con y sin conexión</string>
 <string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada)
@@ -1055,12 +1092,13 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     
     <string name="no_buildings_found">No se han encontrado edificios.</string>
     <string name="search_villages_and_postcodes">Buscar pueblos/códigos postales</string>
-	<string name="tip_altitude_offset_t">"\tLa mayoría de dispositivos GPS informan de las medidas de altitud en el sistema de referencia WGS84 basado en elipsoide, que requiere de una corrección dependiente de la posición para su conversión a sistemas utilizados localmente.
-\n\tUna mejor aproximación a estos sistemas locales es la referencia EGM96. OsmAnd también soporta ahora la visualización automática de altitud en el sistema EGM96.
-\n\tPara ello, simplemente descarga el archivo WW15MGH.DAC mediante el Gestor de datos (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+	<string name="tip_altitude_offset_t">La mayoría de dispositivos GPS informan de las medidas de altitud en el sistema de referencia WGS84 basado en elipsoide, que requiere de una corrección dependiente de la posición para su conversión a sistemas utilizados localmente.
+		\n\nUna mejor aproximación a estos sistemas locales es la referencia EGM96 (geoide).
+		\n\nOsmAnd mostrará la altitud de tu posición en el sistema EGM96 cuando descargues el archivo \'World Altitide Correction WW15MGH\' mediante \'Opciones\'→\'Gestor de datos\' (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "
+	</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">Inicio</string>
-    <string name="tip_altitude_offset">Altitud: Compensación de Correción</string>
+    <string name="tip_altitude_offset">Corrección de Altitud</string>
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evita mostrar las fronteras regionales (niveles administrativos 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">El extra OsMoDroid tiene una versión antigua y necesita ser actualizado.</string>
@@ -1068,7 +1106,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="osmodroid_plugin_name">Extra OsMoDroid</string>
 	<string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">Este extra permite descargar las curvas de nivel (Datos descargados -&gt; Descargar... -&gt; Menú -&gt; Otros mapas) para la región específica y usarlas con los mapas descargados.</string>
+    <string name="srtm_plugin_description">Permite descargar curvas de nivel y sombreados (Opciones → Gestor de Datos → Descargar y seleccionar el tipo de mapa deseado) para la región específica y usarlas con los mapas descargados.</string>
     <string name="srtm_plugin_name">Extra SRTM</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Mapas SRTM</string>
@@ -1266,7 +1304,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="search_street_in_neighborhood_cities">Buscar la calle en las ciudades vecinas</string>
     <string name="intermediate_items_sort_return">Puntos de ruta intermedios reordenados para optimizar su recorrido en el camino hacia el destino.</string>
     <string name="intermediate_items_sort_by_distance">Ordenar (puerta a puerta)</string>
-    <string name="local_osm_changes_backup_successful">Copia local de cambios OSM generada con éxito %1$s</string>
+    <string name="local_osm_changes_backup_successful">Archivo de cambios OSM generado con éxito %1$s</string>
     <string name="local_osm_changes_backup_failed">Falló la copia local de cambios OSM</string>
     <string name="local_osm_changes_backup">Copiar como cambio OSM</string>
     <string name="delete_point">Borrar punto</string>
@@ -1314,7 +1352,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configura el anuncio de nombres de calles, avisos de tráfico (stops, badenes), radares, límites de velocidad</string>
 	<string name="speak_street_names">Anunciar nombres de calles (TTS)</string>
-    <string name="tip_recent_changes_1_5_t">Changes in 1.5:
+    <string name="tip_recent_changes_1_5_t">Cambios en 1.5:
 	\n\t* Avisos de voz sobre límites de velocidad y radares
 	\n\t* Más posibilidades de avisos de voz (anuncio de nombres de calles)
 	\n\t* Iconos de mapa de alta densidad
@@ -1360,7 +1398,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 		\n\t* \'Invierno y esquí\' crea una vista del paisaje del invierno (nevado), y muestra pistas y remontes (en relación con la descarga del mapa \"Mundo de esquí\"
 	</string>
     <string name="tip_recent_changes_1_6_t">Cambios en 1.6:
-	\n\t* Definir/editar fuente de baldosas en línea (especificar fecha de caducidad)
+	\n\t* Definir/editar fuente de teselas en línea (especificar fecha de caducidad)
     </string>
     <string name="local_index_tile_data_zooms">Zooms descargados: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
