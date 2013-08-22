@@ -23,8 +23,12 @@ file(GLOB_RECURSE core_headers_client "${OSMAND_ROOT}/core/client/*.h*")
 file(GLOB_RECURSE core_sources_client  "${OSMAND_ROOT}/core/client/*.c*")
 file(GLOB core_swig "${OSMAND_ROOT}/core.swig")
 file(GLOB_RECURSE core_swig_subfiles "${OSMAND_ROOT}/swig/*")
+
+set(OsmAndJNI_generated_cpp
+	"${CMAKE_CURRENT_LIST_DIR}/c-src/swig.cpp"
+)
 if(CMAKE_HOST_WIN32 AND NOT CYGWIN)
-	add_custom_command(OUTPUT "${CMAKE_CURRENT_LIST_DIR}/c-src/swig.cpp"
+	add_custom_command(OUTPUT ${OsmAndJNI_generated_cpp}
 		COMMAND bash ARGS --login "${CMAKE_CURRENT_LIST_DIR}/generate-swig.sh"
 		DEPENDS
 			${core_includes}
@@ -34,9 +38,10 @@ if(CMAKE_HOST_WIN32 AND NOT CYGWIN)
 			${core_sources_client}
 			${core_swig}
 			${core_swig_subfiles}
+		WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
 		COMMENT "Generating sources...")
 else()
-	add_custom_command(OUTPUT "${CMAKE_CURRENT_LIST_DIR}/c-src/swig.cpp"
+	add_custom_command(OUTPUT ${OsmAndJNI_generated_cpp}
 		COMMAND "${CMAKE_CURRENT_LIST_DIR}/generate-swig.sh"
 		DEPENDS
 			${core_includes}
@@ -46,18 +51,24 @@ else()
 			${core_sources_client}
 			${core_swig}
 			${core_swig_subfiles}
+		WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
 		COMMENT "Generating sources...")
 endif()
 add_custom_target(OsmAndJNI_generate_swig
 	ALL
-#	DEPENDS
-#		"${CMAKE_CURRENT_LIST_DIR}/c-src/swig.cpp"
+	DEPENDS
+		${OsmAndJNI_generated_cpp}
+	SOURCES
+		${OsmAndJNI_generated_cpp}
 )
-set_source_files_properties("${CMAKE_CURRENT_LIST_DIR}/c-src/swig.cpp" PROPERTIES GENERATED TRUE)
+set_source_files_properties(${OsmAndJNI_generated_cpp}
+	PROPERTIES
+		GENERATED TRUE
+)
 
 if(CMAKE_SHARED_LIBS_ALLOWED_ON_TARGET)
 	add_library(OsmAndJNI SHARED
-		"c-src/swig.cpp"
+		${OsmAndJNI_generated_cpp}
 	)
 	target_compile_definitions(OsmAndJNI
 		PRIVATE
