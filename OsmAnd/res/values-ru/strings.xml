@@ -1274,4 +1274,5 @@
     <string name="driving_region_canada">Канада</string>
 	<string name="tip_map_styles">Стили карты</string>
 	<string name="about_version">Версия:</string>
-    </resources>
+    <string name="local_index_gpx_timespan">\nПромежуток времени: %1$d:%2$02d:%3$02d</string>
+	</resources>
