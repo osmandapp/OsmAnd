@@ -1245,7 +1245,7 @@
     <string name="route_to">К:</string>
     <string name="route_via">Через:</string>
     <string name="route_from">Из:</string>
-	<string name="new_directions_point_dialog">У Вас уже есть промежуточные точки.</string>
+	<string name="new_directions_point_dialog">У Вас уже установлены промежуточные точки.</string>
     <string name="tip_recent_changes_1_5_t">Изменения в 1.5:
 	\n\t* Голосовые предупреждения о превышении скорости и камерах контроля скорости
 	\n\t* Расширены голосовые предупреждения (произношение названий улиц)
