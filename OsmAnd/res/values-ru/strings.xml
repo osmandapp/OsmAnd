@@ -59,9 +59,9 @@
     <string name="osmodroid_plugin_description">OsMoDroid плагин - это расширение для OsmAnd используещее OsModroid приложение для слежения. Информация о сервисе доступна на сайте http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid</string>
 	<string name="tip_altitude_offset">Отображение высоты - коррекция смещения</string>
-	<string name="tip_altitude_offset_t">\tБольшинство GPS устройств отображает высоту относительно эллипсоида WGS84, для определения высоты над уровнем моря необходимо провести коррекцию, которая зависит от местоположения.
-		\n\tДля более точного вычисления высоты используется картографическая проекция EGM96.
-		\n\tOsmAnd будет отображать высоту над уровнем моря в системе координат EGM96 после загрузки файла \'World Altitide Correction\' (WW15MGH.DAC) через менеджер загрузок. (Оригинал - http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+	<string name="tip_altitude_offset_t">Большинство GPS устройств отображает высоту относительно эллипсоида WGS84, для определения высоты над уровнем моря необходимо провести коррекцию, которая зависит от местоположения.
+		\n\nДля более точного вычисления высоты используется картографическая проекция EGM96.
+		\n\nOsmAnd будет отображать высоту над уровнем моря в системе координат EGM96 после загрузки файла \'World Altitide Correction\' (WW15MGH.DAC) через менеджер загрузок. (Оригинал - http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     
     <string name="no_buildings_found">Здания не найдены.</string>
@@ -99,7 +99,7 @@
   <string name="unknown_location">Местоположение ещё не определено</string>
   <string name="modify_transparency">Изменить прозрачность (0 - прозрачный, 255 - непрозрачный)</string>
   <string name="confirm_interrupt_download">Вы хотите прервать загрузку файла?</string>
-  <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из Интернета с помощью пункта меню Настройки -&gt; Данные. После загрузки этих карт Вы сможете осуществлять поиск адреса, POI и остановок общественного транспорта.</string>
+  <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из Интернета с помощью пункта меню Настройки → Данные. После загрузки этих карт Вы сможете осуществлять поиск адреса, POI и остановок общественного транспорта.</string>
   <string name="basemap_was_selected_to_download">Базовая карта необходима для корректной работы приложения и автоматически была выбрана для загрузки.</string>
   <string name="select_index_file_to_download">Ничего не было найдено. Вы можете создать карту самостоятельно (смотрите на osmand.net).</string>
   <string name="local_indexes_cat_tile">Онлайн карты (растровые)</string>
@@ -299,8 +299,10 @@
   <string name="gpx_option_reverse_route">Выбрать обратное направление пути</string>
   <string name="gpx_option_destination_point">Использовать текущую точку назначения</string>
   <string name="gpx_option_from_start_point">Пройти весь путь сначала</string>
-  <string name="switch_to_vector_map_to_see">Для этой позиции доступны локальные векторные карты.\n\t\n\tДля их использования выберите меню \'Слои\' -&gt; \'Источник карты…\' -&gt; \'Векторные карты\'.</string>
-  <string name="binary_map_download_success">Загрузка завершена.\n\t\n\tВы можете переключиться на использование локальных векторных карт через меню Слои -&gt; Источник карты… -&gt; Векторные карты.</string>
+  <string name="switch_to_vector_map_to_see">Для этой позиции доступны локальные векторные карты.\n\t\n\tДля их использования выберите меню \'Слои\' → \'Источник карты…\' → \'Векторные карты\'.</string>
+  <string name="binary_map_download_success">Загрузка завершена.
+		\n\t\n\tВы можете переключиться на использование локальных векторных карт через меню Слои → Источник карты… → Векторные карты.
+	</string>
   <string name="choose_audio_stream">Голосовые инструкции</string>
   <string name="choose_audio_stream_descr">Выберите канал для голосовых инструкций (зависит от системы)</string>
   <string name="voice_stream_voice_call">Поток голосовых звонков</string>
@@ -350,7 +352,9 @@
 		\n\tДействия в этом меню зависят от текущей выбранной точки (центр карты).
 	</string>
   <string name="tip_initial">Советы по использованию</string>
-  <string name="tip_initial_t">"\tOsmAnd - навигационное приложение с большим количеством функций.\n\n\tЧтобы использовать его как можно лучше, следуйте советам по ссылке вверху меню. "</string>
+  <string name="tip_initial_t">OsmAnd - навигационное приложение с большим количеством функций.
+		\n\nЧтобы использовать его как можно лучше, следуйте советам по ссылке вверху меню.
+	</string>
   <string name="next_button">След.</string>
   <string name="previous_button">Пред.</string>
   <string name="unit_of_length_descr">Изменить единицы измерения длины и скорости</string>
