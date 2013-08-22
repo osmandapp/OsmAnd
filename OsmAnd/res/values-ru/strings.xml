@@ -1177,7 +1177,7 @@
     <string name="use_kalman_filter_compass">Использовать фильтр Калмана</string>
     <string name="cancel_navigation">Прекратить навигацию</string>
     <string name="use_magnetic_sensor">Использовать датчик магнитного поля</string>
-    <string name="distance_measurement_save_gpx">Сохранить в GPX</string>
+    <string name="distance_measurement_save_gpx">Сохранить как GPX</string>
     <string name="delete_point">Удалить Точку</string>
     <string name="plugin_distance_point_time">время</string>
     <string name="plugin_distance_point_speed">скорость</string>
