@@ -436,7 +436,7 @@ public class VoiceRouter {
 		if(pn != null) {
 			pn = pn.replace('-', ' ');
 			pn = pn.replace(':', ' ');
-			pn = pn.replace("\u00df", "ss"); // helps non-German tts voices to pronounce German Straﬂe (=street)
+			pn = pn.replace("\u00df", "ss"); // helps non-German tts voices to pronounce German Strasse (=street)
 		}
 		return pn;
 	}
