@@ -475,7 +475,18 @@
   <string name="select_plugin_to_activate">Toque num Plugin para o activar ou desactivar. (Pode ser necessária reiniciar o OsmAnd)</string>
   <string name="prefs_plugins_descr">Plugins activam as configurações avançadas e funcionalidades adicionais</string>
   <string name="prefs_plugins">Plugin Manager</string>
-  <string name="tip_recent_changes_0_8_0_t">"Changes in 0.8.0 : \n\t- Plugin functionality \n\t- New offline map data support \n\t- Improve usability and simplify Profile concept \n\t- Lots of bug fixes "</string>
+  <string name="tip_recent_changes_0_8_0_t">Alterações na 0.8.0: 
+		\n\t * funcionalidade Plugin * 
+		\n\t - A maioria das funcionalidades são agrupadas por características e pode ser ativado / desativado nas configurações / plugins 
+Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de rastreamento, e muitos outros recursos novos e já existentes. 
+		\n\t-* Novo suporte de dados de mapas off-line * 
+		\n\t …- Mapa prestação torna-se mais rápido e mais preciso (litoral e área inundada problemas são corrigidos principalmente). 
+		\n\t	- Você precisa baixar completamente novos dados offline (dados antigos não serão mais suportadas) 
+		\n\t-Offline Routing * 
+		\n\t	- Roteamento offline torna-se mais robusto 
+		\n\t* Usabilidade e experiência UI * 
+		\n\t	- Melhorou em muitas áreas		
+	</string>
   <string name="osm_editing_plugin_description">This plugin facilitates OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Mapas vectoriais são visualizados mais rápido. Podem não funcionar bem em alguns dispositivos.</string>
   
@@ -830,7 +841,15 @@
   <string name="route_kr">Keep right</string>
   <string name="save_route_as_gpx">Salvar rota como GPX</string>
   <string name="asap">Assim que possível</string>
-  <string name="tip_recent_changes_0_8_1_t">"Alterações na versão 0.8.1 : "</string>
+  <string name="tip_recent_changes_0_8_1_t">Alterações na 0.8.1: 
+		\n\t* rotas mais precisas (um pouco mais lento) 
+		\n\t* Inteligente e rápido recalculo de rota 
+		\n\t* Direcção de pistas 
+		\n\t* Informações sobre os limites de velocidade, câmaras de velocidade e lombas
+		\n\t* Melhoria da orientação por voz em rodovias 
+		\n\t* Estacionamento plugin (\ 'Onde está o meu carro estacionado? \') 
+		\n\t* Activar / desactivar a ferramenta de registo
+	</string>
   <string name="gpxup_public">Público</string>
   <string name="gpxup_identifiable">Identificável</string>
   <string name="gpxup_trackable">Rastreável</string>
@@ -1333,7 +1352,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="edit_tilesource_choose_existing">Escolha existente...</string>
     <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Definir/Editar…</string>
-	<string name="map_widget_fps_info">FPS debug info</string>
+	<string name="map_widget_fps_info">FPS info debug</string>
 	<string name="tip_recent_changes_1_6_t">alterações em 1.6:
 	\n\t* Definir/editar origem online de mosaicose (specificar tempo limite)
     </string>
