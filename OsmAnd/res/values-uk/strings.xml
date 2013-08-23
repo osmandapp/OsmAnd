@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
@@ -1508,12 +1508,12 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="speak_title">Попереджати…</string>
 	<string name="speak_descr">Увімкніть оголошення назв вулиць, дорожніх обмежень (примусових зупинок, лежачих поліцейських); повідомленя про камери фіксації швидкості, про обмеження швидкості</string>
 	<string name="speak_street_names">Оголошувати назви вулиць (TTS)</string>
-    <string name="tip_recent_changes_1_5_t">Зміни в 1.5:
+    <string name="tip_recent_changes_1_5_t">"Зміни в 1.5:
 	\n\t* Голосові попередження про обмеження швидкості та камери
 	\n\t* Додано голосові можливості (оголошення назв вулиць)
 	\n\t* Високоякісні позначки для мапи
 	\n\t* Багато змін інтерфейсу
-        \n\t* Виправлення помилок показу відстані, аналізу GPX, обробки маршрутних точок, віджету планування маршруту, надсилання даних до OSM, роботи з https
+        \n\t* Виправлення помилок показу відстані, аналізу GPX, обробки маршрутних точок, віджету планування маршруту, надсилання даних до OSM, роботи з https"
     </string>
     <string name="keep_intermediate_points">Лишити проміжні точки</string>
     <string name="route_via">Через:</string>
@@ -1568,8 +1568,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="about_settings">Про</string>
     <string name="about_settings_descr">Версія, ліцензії, учасники проекту</string>
     <string name="tips_and_tricks">Поради</string>
-    <string name="tip_recent_changes_1_6_t">Зміни в 1.6:
-	\n\t* Визначення/редагування онлайн-джерела квадратів мапи (вкажіть термін дії)
+    <string name="tip_recent_changes_1_6_t">"Зміни в 1.6:
+	\n\t* Визначення/редагування онлайн-джерела квадратів мапи (вкажіть термін дії)"
     </string>
     <string name="local_index_tile_data_zooms">Завантажені масштаби: %1$s</string>
     <string name="local_index_tile_data_expire">Термін дії (у хвилинах): %1$s</string>
