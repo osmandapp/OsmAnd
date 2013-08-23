@@ -246,14 +246,19 @@ public class RouteCalculationResult {
 
 			if(turn != null) {
 				RouteDirectionInfo info = new RouteDirectionInfo(s.getSegmentSpeed(), turn);
-				if(routeInd + 1< list.size()) {
-					RouteSegmentResult next = list.get(routeInd);
-					info.setRef(next.getObject().getRef());
-					info.setStreetName(next.getObject().getName());
-					info.setDestinationName(next.getObject().getDestinationName());
-				}
-				
-				String description = toString(turn, ctx) + " " + RoutingHelper.formatStreetName(info.getStreetName(), 
+                if (routeInd + 1 < list.size()) {
+                    int lind = routeInd;
+                    if(turn.isRoundAbout() && routeInd + 2 < list.size()) {
+                        // take next name for roundabout (not roundabout name)
+                        lind = routeInd + 1;
+                    }
+                    RouteSegmentResult next = list.get(lind);
+                    info.setRef(next.getObject().getRef());
+                    info.setStreetName(next.getObject().getName());
+                    info.setDestinationName(next.getObject().getDestinationName());
+                }
+
+                String description = toString(turn, ctx) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
 						info.getRef(), info.getDestinationName());
 				info.setDescriptionRoute(description);
 				info.routePointOffset = prevLocationSize;
