@@ -1,11 +1,9 @@
 package net.osmand.plus;
 
 
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
+import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.preference.PreferenceScreen;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -17,7 +15,6 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
-import net.osmand.plus.extrasettings.OsmandExtraSettings;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmodroid.OsMoDroidPlugin;
@@ -25,12 +22,11 @@ import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
-
 import org.apache.commons.logging.Log;
 
-import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.preference.PreferenceScreen;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public abstract class OsmandPlugin {
 	
@@ -68,7 +64,7 @@ public abstract class OsmandPlugin {
 		OsmandRasterMapsPlugin rasterMapsPlugin = new OsmandRasterMapsPlugin(app);
 		installedPlugins.add(rasterMapsPlugin);
 		installedPlugins.add(new OsmandMonitoringPlugin(app));
-		installedPlugins.add(new OsmandExtraSettings(app));
+//		installedPlugins.add(new OsmandExtraSettings(app));
 		installedPlugins.add(new AccessibilityPlugin(app));
 		if(!installPlugin(SRTM_PLUGIN_COMPONENT_PAID, SRTMPlugin.ID, app,
 				new SRTMPlugin(app, true))) {
