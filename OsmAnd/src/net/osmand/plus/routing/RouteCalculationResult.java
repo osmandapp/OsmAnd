@@ -246,9 +246,9 @@ public class RouteCalculationResult {
 
 			if(turn != null) {
 				RouteDirectionInfo info = new RouteDirectionInfo(s.getSegmentSpeed(), turn);
-                if (routeInd + 1 < list.size()) {
+                if (routeInd  < list.size()) {
                     int lind = routeInd;
-                    if(turn.isRoundAbout() && routeInd + 2 < list.size()) {
+                    if(turn.isRoundAbout() && routeInd + 1 < list.size()) {
                         // take next name for roundabout (not roundabout name)
                         lind = routeInd + 1;
                     }
