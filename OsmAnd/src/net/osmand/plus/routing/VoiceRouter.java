@@ -9,6 +9,7 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 
@@ -271,7 +272,8 @@ public class VoiceRouter {
 
 		
 		NextDirectionInfo nextInfo = router.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-		// after last turn say:
+        RouteSegmentResult currentSegment = router.getCurrentSegmentResult();
+        // after last turn say:
 		if (nextInfo == null || nextInfo.directionInfo == null || nextInfo.directionInfo.distance == 0) {
 			// if(currentStatus <= STATUS_UNKNOWN && currentDirection > 0){ This caused this prompt to be suppressed when coming back from a
 			if (repeat || currentStatus <= STATUS_UNKNOWN) {

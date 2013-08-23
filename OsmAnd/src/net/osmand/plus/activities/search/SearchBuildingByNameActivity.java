@@ -44,6 +44,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 				if (result == null || result.isEmpty()) {
 					Toast.makeText(SearchBuildingByNameActivity.this, 
 							R.string.no_buildings_found, Toast.LENGTH_LONG).show();
+                    quitActivity(SearchStreet2ByNameActivity.class);
 				}
 			}
 			

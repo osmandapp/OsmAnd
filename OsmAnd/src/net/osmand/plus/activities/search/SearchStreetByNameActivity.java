@@ -216,11 +216,11 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			settings.setLastSearchedCity(obj.getCity().getId(), obj.getCity().getName(), obj.getLocation());
 		}
 		settings.setLastSearchedStreet(obj.getName(region.useEnglishNames()), obj.getLocation());
-		if(obj.getBuildings().size() == 0){
-			quitActivity(null);
-		} else {
+//		if(obj.getBuildings().size() == 0){
+//			quitActivity(null);
+//		} else {
 			quitActivity(SearchBuildingByNameActivity.class);
-		}
+//		}
 		
 	}
 }
