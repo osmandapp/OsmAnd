@@ -27,17 +27,12 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ClientContext;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.*;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd;
@@ -673,7 +668,7 @@ public class RouteProvider {
 		return new RouteCalculationResult(res, null, params.start, params.end, null, null, null, params.ctx, params.leftSide, true);
 	}
 	
-	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute){
+	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, TargetPointsHelper helper, ClientContext ctx){
 		int currentRoute = srcRoute.currentRoute;
 		List<Location> routeNodes = srcRoute.getImmutableLocations();
 		List<RouteDirectionInfo> directionInfo = srcRoute.getDirections();
@@ -728,7 +723,21 @@ public class RouteProvider {
 				route.points.add(pt);
 			}
 		}
-		return gpx;
+        List<LatLon> ps = helper.getIntermediatePointsWithTarget();
+        List<String> psNames = helper.getIntermediatePointNamesWithTarget();
+        for(int k = 0; k < ps.size(); k++) {
+            WptPt pt = new WptPt();
+            pt.lat = ps.get(k).getLatitude();
+            pt.lon = ps.get(k).getLongitude();
+            if(k < psNames.size()) {
+                pt.name = psNames.get(k) +"";
+                pt.name = k == ps.size() - 1? ctx.getString(R.string.destination_point, pt.name ) :
+                        ctx.getString(R.string.target_point, pt.name );
+                pt.desc = pt.name;
+
+            }
+        }
+        return gpx;
 	}
 
 
