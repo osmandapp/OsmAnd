@@ -23,6 +23,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Android 4.1.2 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="com.android.ide.eclipse.adt.DEPENDENCIES" level="application" />
   </component>
 </module>
 
