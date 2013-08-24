@@ -72,6 +72,12 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 			}
 		}
 
+		@Override
+		public void routeTo(float Lat, float Lon) throws RemoteException {
+			reRouteTo(new LatLon(Lat, Lon));
+			
+		}
+
 	};
 
 	@Override
