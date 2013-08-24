@@ -1313,4 +1313,9 @@
     <string name="edit_tilesource_name">Název</string>
     <string name="tips_and_tricks">Tipy</string>
     <string name="tip_map_styles">Styl mapy</string>
+	<string name="local_index_tile_data_downloadable">Ke stažení: %1$s</string>
+    <string name="maps_define_edit">Vytvořit/Upravit…</string>
+	<string name="edit_tilesource_expiration_time">Doba platnosti (min)</string>
+    <string name="driving_region_descr">Vyberte dopravní region: USA, Evropa, Británie, Asie a další</string>
+	<string name="driving_region">Dopravní region</string>
 	</resources>
