@@ -11,15 +11,10 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.*;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.RouteService;
@@ -44,7 +39,7 @@ public class RoutingHelper {
 	
 	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
 
-	private ClientContext app;
+	private OsmandApplication app;
 	
 	private boolean isFollowingMode = false;
 	
@@ -83,7 +78,7 @@ public class RoutingHelper {
 	}
 
 
-	public RoutingHelper(ClientContext context, CommandPlayer player){
+	public RoutingHelper(OsmandApplication context, CommandPlayer player){
 		this.app = context;
 		settings = context.getSettings();
 		voiceRouter = new VoiceRouter(this, player);
@@ -845,7 +840,7 @@ public class RoutingHelper {
 	}
 	
 	public GPXFile generateGPXFileWithRoute(){
-		return provider.createOsmandRouterGPX(route);
+		return provider.createOsmandRouterGPX(route, app);
 	}	
 
 }

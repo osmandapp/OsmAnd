@@ -668,7 +668,8 @@ public class RouteProvider {
 		return new RouteCalculationResult(res, null, params.start, params.end, null, null, null, params.ctx, params.leftSide, true);
 	}
 	
-	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, TargetPointsHelper helper, ClientContext ctx){
+	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, OsmandApplication ctx){
+        TargetPointsHelper helper = ctx.getTargetPointsHelper();
 		int currentRoute = srcRoute.currentRoute;
 		List<Location> routeNodes = srcRoute.getImmutableLocations();
 		List<RouteDirectionInfo> directionInfo = srcRoute.getDirections();
