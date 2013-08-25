@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -374,9 +374,9 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="tip_rotation_switching">Kartorientering</string>
 <string name="tip_rotation_switching_t_v2">Du kan växla mellan om och hur kartbilden roteras genom att upprepade gånger klicka på kartskärmens kompassikon.
 		\n\nAlternativen är:
-		\n\t*\ 'Norr uppåt (vrid inte kartan)\'- Kartan roteras inte. Norr är alltid uppåt.
-		\n\t*\ 'I rörelseriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.
-		\n\t*\ 'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt till enhetens kompass.
+		\n\t*\ \'Norr uppåt (vrid inte kartan)\'- Kartan roteras inte. Norr är alltid uppåt.
+		\n\t*\ \'I rörelseriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.
+		\n\t*\ \'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt till enhetens kompass.
 	</string>
 <string name="binary_map_download_success">Hämtades utan problem.
 		\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera vy\' -&gt; \'Kartkälla …\' -&gt; \'Offline vektorkartor\'.

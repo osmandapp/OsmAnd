@@ -296,28 +296,4 @@ public class Algorithms {
 		return defaultValue;
 	}
 	
-	private static java.text.DateFormat dateFormat;
-	private static java.text.DateFormat dateTimeFormat;
-	public static String formatDate(long t) {
-		return getDateFormat().format(new Date(t));
-	}
-
-	public static DateFormat getDateFormat() {
-		if(dateFormat == null) {
-			dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
-		}
-		return dateFormat;
-	}
-	
-	public static DateFormat getDateTimeFormat() {
-		if (dateTimeFormat == null) {
-			dateTimeFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.getDefault());
-		}
-		return dateTimeFormat;
-	}
-
-	public static String formatDateTime(long t) {
-		return getDateTimeFormat().format(new Date(t));
-	}
-	
 }

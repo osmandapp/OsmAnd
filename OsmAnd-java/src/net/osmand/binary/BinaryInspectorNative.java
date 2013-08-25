@@ -2,9 +2,6 @@ package net.osmand.binary;
 
 
 import java.io.IOException;
-import java.util.Collections;
-
-import net.osmand.NativeLibrary;
 
 public class BinaryInspectorNative {
 	
@@ -18,10 +15,6 @@ public class BinaryInspectorNative {
 		}
 		args = new String[]{"-vmap", "-bbox=11.3,47.1,11.6,47", "/home/victor/projects/OsmAnd/data/osm-gen/Austria_2.obf"};
 		// test cases show info
-		NativeLibrary.loadAllLibs(null);
-//		StringVector vector = new StringVector();
-//        Collections.addAll(vector, args);
-//		ObfInspector.inspector(vector);
 	}
 	
 	public static void printUsage(String warning) {

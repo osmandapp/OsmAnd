@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -427,7 +428,7 @@ public class ResourceManager {
 							conf = new File(f, "_ttsconfig.p");
 						}
 						if (conf.exists()) {
-							indexFileNames.put(f.getName(), Algorithms.formatDate(conf.lastModified())); //$NON-NLS-1$
+							indexFileNames.put(f.getName(), AndroidUtils.formatDate(context, conf.lastModified())); //$NON-NLS-1$
 						}
 					}
 				}
@@ -619,7 +620,7 @@ public class ResourceManager {
 					if (dateCreated == 0) {
 						dateCreated = f.lastModified();
 					}
-					indexFileNames.put(f.getName(), Algorithms.formatDate(dateCreated)); //$NON-NLS-1$
+					indexFileNames.put(f.getName(), AndroidUtils.formatDate(context, dateCreated)); //$NON-NLS-1$
 					for (String rName : index.getRegionNames()) {
 						// skip duplicate names (don't make collision between getName() and name in the map)
 						// it can be dangerous to use one file to different indexes if it is multithreaded
@@ -907,7 +908,7 @@ public class ResourceManager {
 			if (lf != null) {
 				for (File f : lf) {
 					if (f != null && f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-						map.put(f.getName(), Algorithms.formatDate(f.lastModified())); //$NON-NLS-1$		
+						map.put(f.getName(), AndroidUtils.formatDate(context, f.lastModified())); //$NON-NLS-1$		
 					}
 				}
 			}

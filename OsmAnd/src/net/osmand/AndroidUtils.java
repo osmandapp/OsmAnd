@@ -1,7 +1,11 @@
 package net.osmand;
 
+
+import java.util.Date;
+
 import android.content.Context;
 import android.content.res.Configuration;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -32,4 +36,11 @@ public class AndroidUtils {
 		});
 	}
 
+	public static String formatDate(Context ctx, long time) {
+		return DateFormat.getDateFormat(ctx).format(new Date(time));
+	}
+	
+	public static String formatTime(Context ctx, long time) {
+		return DateFormat.getTimeFormat(ctx).format(new Date(time));
+	}
 }

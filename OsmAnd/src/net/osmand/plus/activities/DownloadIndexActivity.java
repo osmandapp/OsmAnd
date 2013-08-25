@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ClientContext;
@@ -28,10 +29,10 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.IndexItemCategory;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -456,24 +457,24 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	private Map<String, String> listAlreadyDownloadedWithAlternatives() {
 		Map<String, String> files = new TreeMap<String, String>();
-		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.BACKUP_INDEX_DIR),IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.MAPS_PATH),IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.MAPS_PATH),IndexConstants.EXTRA_EXT, files);
+		listWithAlternatives(getMyApplication(), getMyApplication().getAppPath(IndexConstants.BACKUP_INDEX_DIR),IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		listWithAlternatives(getMyApplication(), getMyApplication().getAppPath(IndexConstants.MAPS_PATH),IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		listWithAlternatives(getMyApplication(), getMyApplication().getAppPath(IndexConstants.MAPS_PATH),IndexConstants.EXTRA_EXT, files);
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
-			listWithAlternatives(getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR),IndexConstants.BINARY_MAP_INDEX_EXT, files);
+			listWithAlternatives(getMyApplication(), getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR),IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
-		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR),"", files);
+		listWithAlternatives(getMyApplication(), getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR),"", files);
 		return files;
 	}
 	
-	public static Map<String, String> listWithAlternatives(File file, final String ext, 
+	public static Map<String, String> listWithAlternatives(final Context ctx, File file, final String ext, 
 			final Map<String, String> files) {
 		if (file.isDirectory()) {
 			file.list(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String filename) {
 					if (filename.endsWith(ext)) {
-						String date = Algorithms.formatDate(new File(dir, filename).lastModified());
+						String date = AndroidUtils.formatDate(ctx, new File(dir, filename).lastModified());
 						files.put(filename, date);
 						return true;
 					} else {

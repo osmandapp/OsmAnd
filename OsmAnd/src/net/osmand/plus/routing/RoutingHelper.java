@@ -632,7 +632,7 @@ public class RoutingHelper {
 		} else if(name != null && name.length() > 0){
 			if(ref != null && ref.length() > 0) {
 				name = ref + " " + name;
-			}
+			}                                                                                                                 getCurrentSegmentResult
 			return name;
 		} else {
 			if(ref == null) {
@@ -650,7 +650,7 @@ public class RoutingHelper {
 			String dn = n.directionInfo.getDestinationName();
 			return formatStreetName(nm, rf, dn);
 		}
-		RouteSegmentResult rs = route.getCurrentSegmentResult();
+		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
 			String nm = rs.getObject().getName();
 			String rf = rs.getObject().getRef();
@@ -659,8 +659,12 @@ public class RoutingHelper {
 		}
 		return null;
 	}
-	
-	public synchronized NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo previous, NextDirectionInfo to, boolean toSpeak){
+
+    public RouteSegmentResult getCurrentSegmentResult() {
+        return route.getCurrentSegmentResult();
+    }
+
+    public synchronized NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo previous, NextDirectionInfo to, boolean toSpeak){
 		NextDirectionInfo i = route.getNextRouteDirectionInfoAfter(previous, to, toSpeak);
 		if(i != null) {
 			i.imminent =  voiceRouter.calculateImminent(i.distanceTo, null);

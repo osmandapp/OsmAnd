@@ -15,6 +15,10 @@ public abstract class OsmandListActivity extends SherlockListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
+		setActionBarSettings();
+	}
+
+	protected void setActionBarSettings() {
 		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -109,9 +109,9 @@ public class PoiFilter {
 	public String getSearchArea(){
 		double val = distanceToSearchValues[distanceInd];
 		if(val >= 1){
-			return " < " + ((int) val)+ " " + application.getString(R.string.km);  //$NON-NLS-1$//$NON-NLS-2$
+			return " < " + OsmAndFormatter.getFormattedDistance(((int)val * 1000), application);  //$NON-NLS-1$//$NON-NLS-2$
 		} else {
-			return " < 500 " + application.getString(R.string.m);  //$NON-NLS-1$
+			return " < " + OsmAndFormatter.getFormattedDistance(500, application);  //$NON-NLS-1$
 		}
 	}
 	

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -1333,7 +1333,7 @@
     <string name="speak_title">Annonces vocales…</string>
 	<string name="speak_cameras">Annoncer les radars</string>
 	<string name="speak_traffic_warnings">Annonce les alertes de trafic</string>
-    <string name="osb_author_or_password_not_specified">Merci de spécifier votre nom d'utilisateur et mot de passe OSM dans les paramètres</string>
+    <string name="osb_author_or_password_not_specified">Merci de spécifier votre nom d\'utilisateur et mot de passe OSM dans les paramètres</string>
     <string name="clear_intermediate_points">Effacer les points intermédiaires</string>
     <string name="keep_intermediate_points">Garder les points intermédiaires</string>
     <string name="local_index_tile_data_name">Données de tuile : %1$s</string>

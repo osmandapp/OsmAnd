@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ClientContext;
@@ -18,6 +19,9 @@ import net.osmand.plus.Version;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import android.content.Context;
+import android.text.format.DateFormat;
 
 public class IndexItem implements Comparable<IndexItem> {
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
@@ -193,7 +197,7 @@ public class IndexItem implements Comparable<IndexItem> {
 			entry.zipStream = zipStream;
 			entry.unzipFolder = unzipDir;
 			try {
-				Date d = Algorithms.getDateFormat().parse(date);
+				Date d = DateFormat.getDateFormat((Context) ctx).parse(date);
 				entry.dateModified = d.getTime();
 			} catch (ParseException e1) {
 				log.error("ParseException", e1);

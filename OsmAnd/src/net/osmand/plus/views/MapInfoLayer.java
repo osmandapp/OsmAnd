@@ -1,52 +1,11 @@
 package net.osmand.plus.views;
 
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityActions;
-import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.extrasettings.OsmandExtraSettings;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.mapwidgets.BaseMapWidget;
-import net.osmand.plus.views.mapwidgets.ImageViewWidget;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
-import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
-import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.StackWidgetView;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
-import net.osmand.plus.views.mapwidgets.UpdateableWidget;
-import net.osmand.render.RenderingRuleProperty;
-import net.osmand.render.RenderingRulesStorage;
-import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.graphics.Paint.Style;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -54,20 +13,27 @@ import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ListView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.ListAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.mapwidgets.*;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
+import net.osmand.util.Algorithms;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -100,7 +66,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private MonitoringInfoControl monitoringServices;
 
-	private String ADDITIONAL_VECTOR_RENDERING_CATEGORY;
+
 
 	
 
@@ -117,7 +83,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			scaleCoefficient *= 1.5f;
 		}
 		
-		ADDITIONAL_VECTOR_RENDERING_CATEGORY = map.getString(R.string.map_widget_vector_attributes);
 		paintText = new Paint();
 		paintText.setStyle(Style.FILL_AND_STROKE);
 		paintText.setColor(Color.BLACK);
@@ -250,150 +215,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 				"street_name", MapWidgetRegistry.MAIN_CONTROL, all, 100);
 		
 		// Register appearance widgets
-		registerAppearanceWidgets();
+		AppearanceWidgetsFactory.INSTANCE.registerAppearanceWidgets(map, this, mapInfoControls);
 	}
 	
 	
-	private void registerAppearanceWidgets() {
-		final MapWidgetRegInfo vectorRenderer = mapInfoControls.registerAppearanceWidget(R.drawable.widget_rendering_style, R.string.map_widget_renderer,
-				"renderer", view.getSettings().RENDERER);
-		final OsmandApplication app = view.getApplication();
-		vectorRenderer.setStateChangeListener(new Runnable() {
-			@Override
-			public void run() {
-				Builder bld = new AlertDialog.Builder(view.getContext());
-				bld.setTitle(R.string.renderers);
-				Collection<String> rendererNames = app.getRendererRegistry().getRendererNames();
-				final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
-				int i = -1;
-				for(int j = 0; j< items.length; j++) {
-					if(items[j].equals(app.getRendererRegistry().getCurrentSelectedRenderer().getName())) {
-						 i = j;
-						 break;
-					}
-				}
-				bld.setSingleChoiceItems(items, i, new OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						String renderer = items[which];
-						RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
-						if (loaded != null) {
-							view.getSettings().RENDERER.set(renderer);
-							app.getRendererRegistry().setCurrentSelectedRender(loaded);
-							app.getResourceManager().getRenderer().clearCache();
-							view.refreshMap(true);
-						} else {
-							AccessibleToast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
-						}
-						createCustomRenderingProperties(loaded);
-						dialog.dismiss();
-					}
-				});
-				bld.show();
-			}
-		});
-		
-		final MapWidgetRegInfo dayNight = mapInfoControls.registerAppearanceWidget(R.drawable.widget_day_night_mode, R.string.map_widget_day_night,
-				"dayNight", view.getSettings().DAYNIGHT_MODE);
-		dayNight.setStateChangeListener(new Runnable() {
-			@Override
-			public void run() {
-				Builder bld = new AlertDialog.Builder(view.getContext());
-				bld.setTitle(R.string.daynight);
-				final String[] items = new String[OsmandSettings.DayNightMode.values().length];
-				for (int i = 0; i < items.length; i++) {
-					items[i] = OsmandSettings.DayNightMode.values()[i].toHumanString(map.getMyApplication());
-				}
-				int i = view.getSettings().DAYNIGHT_MODE.get().ordinal();
-				bld.setSingleChoiceItems(items,  i, new OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						view.getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.values()[which]);
-						app.getResourceManager().getRenderer().clearCache();
-						view.refreshMap(true);
-						dialog.dismiss();
-					}
-				});
-				bld.show();
-			}
-		});
-		
-		final MapWidgetRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(R.drawable.widget_viewing_direction, R.string.map_widget_view_direction, 
-				"viewDirection", view.getSettings().SHOW_VIEW_ANGLE);
-		displayViewDirections.setStateChangeListener(new Runnable() {
-			@Override
-			public void run() {
-				view.getSettings().SHOW_VIEW_ANGLE.set(!view.getSettings().SHOW_VIEW_ANGLE.get());
-				map.getMapViewTrackingUtilities().updateSettings();
-			}
-		});
-		
-		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-		if(renderer != null) {
-			createCustomRenderingProperties(renderer);
-		}
-	}
-	
-	private void createCustomRenderingProperties(RenderingRulesStorage renderer) {
-		String categoryName = ADDITIONAL_VECTOR_RENDERING_CATEGORY;
-		mapInfoControls.removeApperanceWidgets(categoryName);
-		final OsmandApplication app = view.getApplication();
-		List<RenderingRuleProperty> customRules = renderer.PROPS.getCustomRules();
-		for (final RenderingRuleProperty p : customRules) {
-			String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(), p.getName());
-			//test old descr as title
-			final String propertyDescr = SettingsActivity.getStringPropertyDescription(view.getContext(), p.getAttrName(), p.getName());
-			if(p.isBoolean()) {
-				final CommonPreference<Boolean> pref = view.getApplication().getSettings().getCustomRenderBooleanProperty(p.getAttrName());
-				int icon = 0;
-				try {
-					Field f = R.drawable.class.getField("widget_" + p.getAttrName().toLowerCase());
-					icon = f.getInt(null);
-				} catch(Exception e){
-				}
-				MapWidgetRegInfo w = mapInfoControls.registerAppearanceWidget(icon, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
-				w.setStateChangeListener(new Runnable() {
-					@Override
-					public void run() {
-						pref.set(!pref.get());
-						app.getResourceManager().getRenderer().clearCache();
-						view.refreshMap(true);
-					}
-				});
-				
-			} else {
-				final CommonPreference<String> pref = view.getApplication().getSettings().getCustomRenderProperty(p.getAttrName());
-				int icon = 0;
-				try {
-					Field f = R.drawable.class.getField("widget_" + p.getAttrName().toLowerCase());
-					icon = f.getInt(null);
-				} catch(Exception e){
-				}
-				MapWidgetRegInfo w = mapInfoControls.registerAppearanceWidget(icon, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
-				w.setStateChangeListener(new Runnable() {
-					@Override
-					public void run() {
-						Builder b = new AlertDialog.Builder(view.getContext());
-						//test old descr as title
-						b.setTitle(propertyDescr);
-						int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
-						b.setSingleChoiceItems(p.getPossibleValues(), i, new OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								pref.set(p.getPossibleValues()[which]);
-								app.getResourceManager().getRenderer().clearCache();
-								view.refreshMap(true);
-								dialog.dismiss();
-							}
-						});
-						b.show();
-					}
-				});
-			}
-		}
-	}
-
 
 	public void recreateControls(){
 		rightStack.clearAllViews();
@@ -408,7 +233,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.populateStatusBar(statusBar);
 		updateColorShadowsOfText(null);
 	}
-	
+
 	public void createControls() {
 		// 1. Create view groups and controls
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
@@ -481,9 +306,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			if(ms.getCategory() != null) {
 				s.add(ms.getCategory());
 			}
-		}
-		if(OsmandPlugin.getEnabledPlugin(OsmandExtraSettings.class) == null){
-			s.remove(ADDITIONAL_VECTOR_RENDERING_CATEGORY);
 		}
 		return s;
 	}

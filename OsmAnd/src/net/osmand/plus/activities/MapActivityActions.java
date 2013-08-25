@@ -1142,7 +1142,8 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}).reg();
 		}
-		optionsMenuHelper.item(routingHelper.isRouteCalculated() ? R.string.show_route: R.string.get_directions)
+		if(!routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated()) {
+			optionsMenuHelper.item(routingHelper.isRouteCalculated() ? R.string.show_route: R.string.get_directions)
 				.icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light)
 				.listen(new OnContextMenuClick() {
 					@Override
@@ -1157,6 +1158,7 @@ public class MapActivityActions implements DialogProvider {
 						}						
 					}
 				}).reg();
+		}
 		if (getTargets().getPointToNavigate() != null) {
 			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)
 					.listen(new OnContextMenuClick() {

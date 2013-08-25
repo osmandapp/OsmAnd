@@ -15,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -275,19 +276,19 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public String getDescription(Context ctx) {
 			String nm = name == null ? "" : name;
 			if (isPhoto()) {
-				return ctx.getString(R.string.recording_photo_description, nm, Algorithms.formatDateTime(file.lastModified())).trim();
+				return ctx.getString(R.string.recording_photo_description, nm, AndroidUtils.formatTime(ctx, file.lastModified())).trim();
 			}
 			updateInternalDescription();
-			return ctx.getString(R.string.recording_description, nm, getDuration(ctx), Algorithms.formatDateTime(file.lastModified()))
+			return ctx.getString(R.string.recording_description, nm, getDuration(ctx), AndroidUtils.formatTime(ctx, file.lastModified()))
 					.trim();
 		}
 
 		public String getSmallDescription(Context ctx) {
 			String nm = name == null ? "" : name;
 			if (isPhoto()) {
-				return ctx.getString(R.string.recording_photo_description, nm, Algorithms.formatDateTime(file.lastModified())).trim();
+				return ctx.getString(R.string.recording_photo_description, nm, AndroidUtils.formatTime(ctx,file.lastModified())).trim();
 			}
-			return ctx.getString(R.string.recording_description, nm, "", Algorithms.formatDateTime(file.lastModified())).trim();
+			return ctx.getString(R.string.recording_description, nm, "", AndroidUtils.formatTime(ctx, file.lastModified())).trim();
 		}
 
 		private String getDuration(Context ctx) {
@@ -878,17 +879,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 				stopRecording(mapActivity);
 				SHOW_RECORDINGS.set(true);
-				indexFile(f);
+				indexFile(true, f);
 				mapActivity.getMapView().refreshMap();
 				updateWidgetIcon(recordControl);
 			}
 		});
 	}
 
-	public void indexFile(File f) {
+	public boolean indexSingleFile(File f) {
 		boolean oldFileExist = recordingByFileName.containsKey(f.getName());
 		if (oldFileExist) {
-			return;
+			return false;
 		}
 		Recording r = new Recording(f);
 		String encodeName = f.getName();
@@ -917,6 +918,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		recordings.registerObject(r.lat, r.lon, r);
 		recordingByFileName.put(f.getName(), r);
+        return true;
 	}
 
 	@Override
@@ -942,31 +944,35 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			File[] files = avPath.listFiles();
 			if (files != null) {
 				for (File f : files) {
-					if (f.getName().endsWith(THREEGP_EXTENSION) || f.getName().endsWith(MPEG4_EXTENSION)
-							|| f.getName().endsWith(IMG_EXTENSION)) {
-						indexFile(f);
-						if (registerNew) {
-							Recording rec = recordingByFileName.get(f.getName());
-							if (rec != null && app.getSettings().SAVE_TRACK_TO_GPX.get()
-									&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
-								String name = f.getName();
-								SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-
-								savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), name);
-								if (app.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
-									app.getFavorites().addFavoritePointToGPXFile(new FavouritePoint(rec.lat, rec.lon, name, ""));
-								}
-							}
-						}
-
-					}
-				}
+                    indexFile(registerNew, f);
+                }
 			}
 		}
 		return null;
 	}
 
-	public DataTileManager<Recording> getRecordings() {
+    private void indexFile(boolean registerInGPX, File f) {
+        if (f.getName().endsWith(THREEGP_EXTENSION) || f.getName().endsWith(MPEG4_EXTENSION)
+                || f.getName().endsWith(IMG_EXTENSION)) {
+            boolean newFileIndexed = indexSingleFile(f);
+            if (newFileIndexed && registerInGPX) {
+                Recording rec = recordingByFileName.get(f.getName());
+                if (rec != null && app.getSettings().SAVE_TRACK_TO_GPX.get()
+                        && OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+                    String name = f.getName();
+                    SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
+
+                    savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), name);
+                    if (app.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
+                        app.getFavorites().addFavoritePointToGPXFile(new FavouritePoint(rec.lat, rec.lon, name, ""));
+                    }
+                }
+            }
+
+        }
+    }
+
+    public DataTileManager<Recording> getRecordings() {
 		return recordings;
 	}
 
@@ -1007,7 +1013,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == 205) {
+		if (requestCode == 205 || requestCode == 105) {
 			indexingFiles(null, true, true);
 		}
 	}
@@ -1208,7 +1214,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				FileOutputStream fos = new FileOutputStream(pictureFile);
 				fos.write(data);
 				fos.close();
-				indexingFiles(null, true, true);
+                indexFile(true, pictureFile);
 				dlg.dismiss();
 				// play sound after photo - sound file must be loaded at this time:
 				if (AV_PHOTO_PLAY_SOUND.get()) {
