@@ -9,3 +9,4 @@ mx_*.png
 *.class
 .settings
 .idea
+out/

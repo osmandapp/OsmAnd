@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
@@ -847,7 +847,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
 		\n\t* Direcção de pistas 
 		\n\t* Informações sobre os limites de velocidade, câmaras de velocidade e lombas
 		\n\t* Melhoria da orientação por voz em rodovias 
-		\n\t* Estacionamento plugin (\ 'Onde está o meu carro estacionado? \') 
+		\n\t* Estacionamento plugin (\ \'Onde está o meu carro estacionado? \') 
 		\n\t* Activar / desactivar a ferramenta de registo
 	</string>
   <string name="gpxup_public">Público</string>

@@ -2,7 +2,6 @@
 <module type="JAVA_MODULE" version="4">
   <component name="EclipseModuleManager" forced_jdk="true">
     <varelement var="file://$OSMAND_TRUNK$/OsmAnd-java/src" value="linksrc:use" />
-    <varelement var="file://$OSMAND_TRUNK$/OsmAnd-java/src" kind="linksrc:" value="use" />
     <conelement value="com.android.ide.eclipse.adt.DEPENDENCIES" />
     <src_description expected_position="1">
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
@@ -26,7 +25,6 @@
     </content>
     <orderEntry type="jdk" jdkName="Android 4.1.2 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="com.android.ide.eclipse.adt.DEPENDENCIES" level="application" />
     <orderEntry type="module" module-name="SherlockBar" />
     <orderEntry type="module-library">
       <library>

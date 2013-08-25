@@ -784,7 +784,7 @@
   <string name="osmand_development_plugin_description">Ce greffon permet la gestion de paramètres de développement et de débogage tels que la navigation animée ou l\'affichage des temps de rendu.</string>
   <string name="plugins_screen">Gestionnaire des greffons</string>
   <string name="select_plugin_to_activate">Toucher un greffon pour l\'activer ou le désactiver (Redémarrage d\'OsmAnd peut être nécessaire)</string>
-  <string name="prefs_plugins_descr">Les greffons fournissent des fonctionnalités supplémentaires à l\'application telles que l\'enregistrement des traces, les cartes image, le mode sans affichage, le mode accessibilité et bien d'autres.</string>
+  <string name="prefs_plugins_descr">Les greffons fournissent des fonctionnalités supplémentaires à l\'application telles que l\'enregistrement des traces, les cartes image, le mode sans affichage, le mode accessibilité et bien d\'autres.</string>
   <string name="prefs_plugins">Gestionnaire de greffons</string>
   <string name="tip_recent_changes_0_8_0_t">Changements en 0.8.0 :
 \n\t- *Fonctionnalité des greffons*\n\t- La majorité des fonctionnalités sont regroupées par familles et peuvent être activées/désactivées dans le Gestionnaire de Greffons. Vous pouvez activer les sources de cartes image (en ligne ou en cache), les paramètres de suivi en ligne et autres nouvelles possibilités.\n\t- *Nouvelles cartes hors ligne*\n\t- Le rendu des cartes devient plus rapide et précis (les côtes et zones d\'eau sont corrigées).\n\t- Vous devez re-télécharger toutes les données de cartes hors-ligne, car les anciennes cartes ne fonctionnent plus.\n\t- *Calcul d\'itinéraire hors-ligne*\n\t- Le calcul d\'itinéraire hors ligne devient beaucoup plus stable\n\t- *Utilisation et ergonomie*\n\t- Améliorée dans de nombreux domaines</string>
@@ -1308,7 +1308,7 @@
     <string name="about_version">Version :</string>
     <string name="edit_tilesource_name">Nom</string>
     <string name="driving_region_japan">Japon</string>
-	<string name="driving_region_us">États-Unis d'Amérique</string>
+	<string name="driving_region_us">États-Unis d\'Amérique</string>
 	<string name="driving_region_canada">Canada</string>
 	<string name="speak_speed_limit">Annoncer les limitations de vitesses</string>
     <string name="tip_map_styles">Styles de cartes</string>
@@ -1341,7 +1341,7 @@
     <string name="edit_tilesource_elliptic_tile">Mercator elliptique</string>
     <string name="edit_tilesource_choose_existing">Choisir un fournisseur de tuiles existant...</string>
     <string name="maps_define_edit">Définir/Éditer…</string>
-	<string name="announce_gpx_waypoints">Annoncer les points d'intérêts GPX</string>
+	<string name="announce_gpx_waypoints">Annoncer les points d\'intérêts GPX</string>
     <string name="speak_descr">Configurer pour annoncer les noms de rue, les alertes (arrêts, ralentisseurs, radars), les limitations de vitesses.</string>
 	<string name="new_directions_point_dialog">Vous avez déjà défini des points intermédiaires.</string>
     <string name="context_menu_item_directions_to">Aller vers le point</string>
@@ -1356,13 +1356,13 @@
 	<string name="destination_point">Destination %1$s</string>
     <string name="osb_author_dialog_password">Mot de passe OSM (optionnel)</string>
 	<string name="av_camera_focus">Type de focus</string>
-	<string name="av_camera_focus_descr">Sélectionner le type de focus de l'appareil photo</string>
+	<string name="av_camera_focus_descr">Sélectionner le type de focus de l\'appareil photo</string>
 	<string name="av_camera_focus_auto">Focus automatique</string>
 	<string name="av_camera_focus_hiperfocal">Focus hyperfocal</string>
 	<string name="av_camera_focus_edof">Profondeur de champ étendu (EDOF)</string>
-	<string name="av_camera_focus_infinity">Le focus est réglé à l'infini</string>
+	<string name="av_camera_focus_infinity">Le focus est réglé à l\'infini</string>
 	<string name="av_camera_focus_macro">Mode focus macro</string>
-	<string name="av_camera_focus_continuous">L'appareil photo essaie continuellement de faire la mise au point</string>
+	<string name="av_camera_focus_continuous">L\'appareil photo essaie continuellement de faire la mise au point</string>
 	<string name="av_photo_play_sound">Jouer un son lors de la prise de photos</string>
 	<string name="av_photo_play_sound_descr">Choisir de jouer un son lors de la prise de photos</string>
 </resources>
