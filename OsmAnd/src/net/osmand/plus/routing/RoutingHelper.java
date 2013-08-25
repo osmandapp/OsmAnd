@@ -632,7 +632,7 @@ public class RoutingHelper {
 		} else if(name != null && name.length() > 0){
 			if(ref != null && ref.length() > 0) {
 				name = ref + " " + name;
-			}                                                                                                                 getCurrentSegmentResult
+			}
 			return name;
 		} else {
 			if(ref == null) {
