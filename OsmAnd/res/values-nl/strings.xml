@@ -392,14 +392,14 @@
   <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' -&gt; \'Zoek dichtbij hier\'), een adres (met het zoekscherm), een interessepunt (op naam of soort) of een favoriet.
 		\n\tDoor in het hoofdmenu op \'Zoeken\' te drukken, worden de zoekacties geopend. Voor elk gevonden resultaat biedt het contextmenu twee opties: \'Aanwijzingen\' of \'Toon op kaart\'.
 	</string>
-  <string name="tip_map_context_menu">Contextmenu op de kaart</string>
+  <string name="tip_map_context_menu">Menu \'Gebruik locatie\'</string>
   <string name="tip_map_context_menu_t">\tHet kaart-contextmenu is beschikbaar door een lange druk op de kaart, door op de trackballknop te drukken, of middels \'Menu\' -&gt; \'Gebruik locatie…\' (de laatste twee gebruiken het midden van de kaart als referentiepunt).
 		\n\tDit toont een venster met de puntcoördinaten. Druk erop om het kaartcontextmenu te openen. (Een lange druk verbergt het venster weer.)
 		\n\tHet kaartcontextmenu bevat alle acties met betrekking tot een punt (locatie).
 	</string>
   <string name="tip_initial">Tips and Trucs</string>
-  <string name="tip_initial_t">\tOsmAnd is een navigatieprogramma met vele mogelijkheden.
-		\n\tIn het kaartscherm zijn diverse tips te vinden onder \'Menu\' -&gt; \'Tips\'.
+  <string name="tip_initial_t">OsmAnd is een navigatieprogramma met vele mogelijkheden.
+		\n\nIn het kaartscherm zijn diverse tips te vinden onder \'Menu\' → \'Tips\'.
 	</string>
   <string name="next_button">Volgende</string>
   <string name="previous_button">Vorige</string>
@@ -1032,12 +1032,12 @@
 		\n\t* \'Nacht\' - gebruik altijd de nacht modus
 		\n\t* \'Lichtsensor\' - de kaartweergave wordt bepaald door de lichtsensor van het apparaat (indien aanwezig)
 	</string>
-<string name="tip_map_switch_t_v2">\tDe kaartbron en de kaartlagen kunnen vanuit het kaartscherm worden gewijzigd via \'Menu\' -&gt; \'Kaartlagen\'.
-		\n\tOnder \'Kaartbron…\' kan je kiezen uit gedownloade vectorkaarten (standaard, benodigd voor offline navigatie), gegenereerde (online of opgeslagen) kaartsegmentenbronnen (activeer hiervoor de plugin \'Online kaarten\') of kaarten die je gemaakt hebt met b.v. OsmAndMapCreator op een PC.
-		\n\tOsmAnd ondersteunt ook zelfgemaakte kaartbronnen.
+<string name="tip_map_switch_t_v2">De kaartbron en de kaartlagen kunnen worden gewijzigd via \'Menu\' → \'Kaartlagen\'.
+		\n\nOnder \'Kaartbron…\' kan je kiezen uit gedownloade vectorkaarten (standaard, benodigd voor offline navigatie), gegenereerde (online of opgeslagen) kaartsegmentenbronnen (activeer hiervoor de plugin \'Online kaarten\' under \'Instellingen\' → \'Plugins\') of kaarten die je gemaakt hebt met bv. OsmAndMapCreator op een PC.
+		\n\nOsmAnd ondersteunt ook zelfgemaakte kaartbronnen.
 	</string>
-<string name="tip_app_mode_t_v2">\tOsmAnd ondersteunt verschillende vervoersprofielen.
-		\n\tJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (icoon voor auto, fiets of voetganger), of bij het maken van een route (\'transportmodus\').
+<string name="tip_app_mode_t_v2">OsmAnd ondersteunt verschillende vervoersprofielen.
+		\n\nJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (icoon voor auto, fiets of voetganger), of bij het maken van een route (\'transportmodus\').
 	</string>
 <string name="osmand_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met raster- en vectorkaarten</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met online en offline kaarten</string>
