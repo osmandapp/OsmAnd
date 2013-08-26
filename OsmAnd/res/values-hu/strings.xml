@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
 \n\t- Akadálymentesítés 
@@ -1306,4 +1307,33 @@
 	<string name="speak_street_names">Utcanevek bemondása (TTS)</string>
     <string name="osb_author_dialog_password">OSM jelszó (opcionális)</string>
 	<string name="map_widget_fps_info">FPS debug infó</string>
-	</resources>
+	<string name="tip_map_styles">Térképstílusok</string>
+	<string name="about_version">Verzió:</string>
+    <string name="about_settings">Névjegy</string>
+    <string name="about_settings_descr">Verzióinfó, licencek, csapattagok</string>
+    <string name="tips_and_tricks">Tippek</string>
+    <string name="tip_recent_changes_1_6_t">Az 1.6 kiadás újdonságai:
+	\n\t* Online csempeforrások módosítása/szerkesztése (lejárati idő megadása)
+    </string>
+    <string name="local_index_tile_data_zooms">Letöltött zoomszintek: %1$s</string>
+    <string name="local_index_tile_data_expire">Lejárat (perc): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Letölthető: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maximum zoom: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimum zoom: %1$s</string>
+    <string name="local_index_tile_data_name">Csempeadat: %1$s</string>
+    <string name="edit_tilesource_successfully">%1$s csempeforrás sikeresen elmentve</string>
+    <string name="edit_tilesource_elliptic_tile">Elliptikus Merkátor</string>
+    <string name="edit_tilesource_maxzoom">Max zoom</string>
+    <string name="edit_tilesource_expiration_time">Lejárat (perc)</string>
+    <string name="edit_tilesource_minzoom">Min zoom</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Meglévő kiválasztása…</string>
+    <string name="edit_tilesource_name">Név</string>
+    <string name="maps_define_edit">Megad/Szerkeszt…</string>
+	<string name="tip_map_styles_t">Az OsmAnd támogatja az offline vektoros adatok igény szerinti eltérő megjelenítését:
+		\n\nA kiegyensúlyozott \'default\' stílustól eltérőt a \'menü\' → \'Képernyő beállítása\' → \'Térkép megjelenési stílus\' alatt választhatsz, például
+		\n\t* A \'Touring view\' stílus, ami a lehető legtöbb információt jeleníti meg, utazáshoz, túrázáshoz, professzionális vezetéshez (kontrasztosabb, elkülönülő utak), beállításokat tartalmaz alpesi túrákhoz (SAC besorolás), kerékpáros útvonalakhoz, túrajelzések megjelenítéséhez, stb.
+		\n\t* A \'High contrast roads\' az utakat élénk színekkel jeleníti meg, ami ideális erős környezeti fényben
+		\n\t* A \'Winter and ski\' hó borított téli tájképet készít, és megjeleníti a sípályákat és -lifteket (\'World ski\' térkép letöltése szükséges hozzá)
+	</string>
+    </resources>
