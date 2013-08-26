@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -981,7 +981,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     
     
     <string name="close_changeset">Stäng changeset</string>
-	<string name="map_widget_show_destination_arrow">Visa destinationsriktning</string>
+	<string name="map_widget_show_destination_arrow">Visa rörelseriktning</string>
     <string name="gps_not_available">Aktivera GPS i inställningarna</string>
     <string name="map_widget_monitoring_services">Loggningstjänster</string>
 	<string name="dist_control_start">Starta</string>
