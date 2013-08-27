@@ -9,6 +9,7 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -119,7 +120,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		if(distanceCalculatorLayer != null) {
 			activity.getMapView().removeLayer(distanceCalculatorLayer);
 		}
-		distanceCalculatorLayer = new DistanceCalculatorLayer();
+		distanceCalculatorLayer = new DistanceCalculatorLayer(activity);
 		int contextMenuLayerNumber = 0;
 		for (contextMenuLayerNumber = 0; contextMenuLayerNumber <= activity.getMapView().getLayers().size(); contextMenuLayerNumber++) {
 			if (activity.getMapView().getLayers().get(contextMenuLayerNumber) instanceof ContextMenuLayer) {
@@ -470,8 +471,18 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		public int subtrackRemainderColor = 0;
 		public int dragColor = 0;
 		private PointF movingPoint = null;
+		private final int DEFAULT_TEXT_SIZE = 15;
+		private static final String KEY_DESCRIPTION = "distance_calculator_description";
+		private static final String KEY_SELECTED_SUBTRACK_INDEX = "distance_calculator_selected_subtrack_index";
+		private static final String KEY_SELECTED_POINT_INDEX = "distance_calculator_selected_point_index";
+		public String description = null;
 
-		public DistanceCalculatorLayer(){
+		public DistanceCalculatorLayer(MapActivity activity){
+			if(activity.getLastNonConfigurationInstanceByKey(KEY_SELECTED_SUBTRACK_INDEX) != null) {
+				selectedSubtrackIndex = (Integer) activity.getLastNonConfigurationInstanceByKey(KEY_SELECTED_SUBTRACK_INDEX);
+				description = (String) activity.getLastNonConfigurationInstanceByKey(KEY_DESCRIPTION);
+				selectedPointIndex = (Integer) activity.getLastNonConfigurationInstanceByKey(KEY_SELECTED_POINT_INDEX);
+			}
 		}
 				
 		@Override
@@ -503,7 +514,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			textView = new TextView(view.getContext());
 			LayoutParams lp = new LayoutParams(contextMenuLayer.BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT);
 			textView.setLayoutParams(lp);
-			textView.setTextSize(15);
+			textView.setTextSize(DEFAULT_TEXT_SIZE);
 			textView.setTextColor(Color.argb(255, 0, 0, 0));
 			textView.setMinLines(1);
 			textView.setGravity(Gravity.CENTER_HORIZONTAL);		
@@ -522,11 +533,19 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			
 			measurementPointSelectionRadius = defaultMeasurementPointSelectionRadius;
 			movingPoint = new PointF(0,0);
+			if(selectedSubtrackIndex >= 0){
+				LatLon l = new LatLon(measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lat,
+						measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lon);
+				setLocation(l, description);
+				view.refreshMap();
+				calculateDistance();
+				updateText();				
+			}
 		}
 		
 		@Override
 		public boolean onSingleTap(PointF point) {
-			String description = "";
+			description = "";
 			LatLon l = view.getLatLonFromScreenPoint(point.x, point.y);
 			int textBoxPressed = pressedInTextView(point.x, point.y);
 			if(textBoxPressed == 2){
@@ -667,7 +686,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 						pt.lat = view.getLatLonFromScreenPoint(event.getX(),event.getY()).getLatitude();
 						pt.lon = view.getLatLonFromScreenPoint(event.getX(),event.getY()).getLongitude();
 						measurementPoints.get(selectedSubtrackIndex).set(selectedPointIndex, pt);
-						String description = null;						
+						description = null;
 						calculatePartialDistance(selectedSubtrackIndex, selectedPointIndex);
 						description = setDescription(true, null);
 						LatLon l = view.getLatLonFromScreenPoint(event.getX(),event.getY());						
@@ -896,7 +915,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			layoutText();
 		}
 		
-		private void layoutText() {
+		public void layoutText() {
 			Rect padding = new Rect();
 			if (textView.getLineCount() > 0) {
 				textView.getBackground().getPadding(padding);
@@ -1046,6 +1065,13 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			});
 			b.setNegativeButton(R.string.default_buttons_cancel, null);
 			b.show();
+		}
+		
+		@Override
+		public void onRetainNonConfigurationInstance(Map<String, Object> map) {
+			map.put(KEY_SELECTED_SUBTRACK_INDEX, selectedSubtrackIndex);
+			map.put(KEY_SELECTED_POINT_INDEX, selectedPointIndex);
+			map.put(KEY_DESCRIPTION, description);
 		}
 	}
 }
