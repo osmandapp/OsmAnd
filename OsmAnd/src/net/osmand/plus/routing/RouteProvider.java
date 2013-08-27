@@ -40,6 +40,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.json.JSONException;
@@ -732,8 +733,20 @@ public class RouteProvider {
             pt.lon = ps.get(k).getLongitude();
             if(k < psNames.size()) {
                 pt.name = psNames.get(k) +"";
-                pt.name = k == ps.size() - 1? ctx.getString(R.string.destination_point, pt.name ) :
-                        ctx.getString(R.string.target_point, pt.name );
+                if(k == ps.size() - 1) {
+                    String target = ctx.getString(R.string.destination_point, "" );
+                    if(pt.name.startsWith(target)) {
+                        pt.name = ctx.getString(R.string.destination_point, pt.name );
+                    }
+                } else {
+                    String prefix = (k + 1) +". ";
+                    if(Algorithms.isEmpty(pt.name)) {
+                        pt.name = ctx.getString(R.string.target_point, pt.name );
+                    }
+                    if(pt.name.startsWith(prefix)) {
+                        pt.name = prefix + pt.name;
+                    }
+                }
                 pt.desc = pt.name;
 
             }
