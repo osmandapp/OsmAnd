@@ -547,6 +547,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="tip_search">Söker</string>
 <string name="tip_search_t">Du kan söka efter platser direkt på kartan via \'Använd platsen\' → \'Sök i närheten\', eller genom att använda sökskärmen via \'Meny\' → \'Sök\'.
 		\n\nSökskärmen har mallar för sökning
+		\n\t* via adress
 		\n\t* via koordinater
 		\n\t* som POI (Point of Interest) - efter typ eller efter namn
 		\n\t* via din sökhistorik
@@ -882,11 +883,12 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="rendering_attr_roadColors_description">Välj färgschema för vägar:</string>
 	<string name="rendering_attr_roadColors_name">Färgschema för vägar</string>
     <string name="no_route">Ingen rutt</string>
-	<string name="tip_update_index_t">Att ha uppdaterade kartdata är viktigt. OsmAnd har en nerladdningshanterare som kan söka efter tillgängliga offline-data.
+	<string name="tip_update_index_t">Uppdaterade kartdata är viktigt för att titta på kartor offline, för sökning efter POI/adresser och för navigering offline. OsmAnd har en nerladdningshanterare som kan söka efter tillgängliga offline-data.
 		\n\nFör att hämta kartor, gå till \'Inställningar\' -&gt; \'Datahantering\' -&gt; \'Ladda ner offline-data\'.
-		\n\nEfter att regionslistan hämtats från Internet, välj alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.
-		\n\n\t* \'Grön\' - indikerar att data är identiska på enheten och servern
-		\n\t* \'Blå\' - indikerar att det finns uppdateringar på servern
+		\n\nEfter att regionslistan hämtats från Internet, klicka på valfri post för att ladda ner eller uppdatera en fil. Observera filtypsväljaren längst upp på skärmen för att välja vad du vill ladda ned: vanliga kartor, överlägg, etc.
+		\n\nDu kan filtrera områdeslistan genom att skriva några tecken eller du kan välja alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.
+		\n\n\t* \'Grönt\' indikerar att data är identiska på enheten och servern
+		\n\t* \'Blått\' indikerar att det finns uppdateringar på servern
 		\n\t* Poster i kursiv stil indikerar att data är inaktiverade på enheten
 	</string>
 	<string name="rendering_attr_noAdminboundaries_name">Dölj gränser</string>
@@ -1151,7 +1153,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="use_magnetic_sensor">Använd magnetisk sensor (kompass)</string>
     <string name="other_location">Annan</string>
     <string name="files_limit">%1$d filer kvar</string>
-    <string name="available_downloads_left">Du har %1$d filer kvar att ladda ner.</string>
+    <string name="available_downloads_left">Du har %1$d filer kvar att ladda ner</string>
     <string name="install_paid">Fullversion</string>
     <string name="cancel_route">Avbryt rutten</string>
     <string name="cancel_navigation">Avbryt navigeringen</string>
@@ -1196,7 +1198,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 \n\t* Stöd för OSM-anteckningar 
     </string>
     <string name="search_street_in_neighborhood_cities">Sök gator i grannstäder</string>
-    <string name="intermediate_items_sort_return">Platser ordnade för att bilda en optimal rutt från positionen på kartan till destinationen</string>
+    <string name="intermediate_items_sort_return">Platser ordnade för att bilda en optimal rutt från positionen på kartan till destinationen.</string>
     <string name="intermediate_items_sort_by_distance">Sortera (dörr-till-dörr)</string>
     <string name="local_osm_changes_backup_failed">Säkerhetskopieringen av OSM-ändringar misslyckades</string>
     <string name="local_osm_changes_backup">Säkerhetskopiera som OSM-förändring</string>
