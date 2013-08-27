@@ -5,19 +5,17 @@ import gnu.trove.list.array.TIntArrayList;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
@@ -47,9 +45,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -57,22 +57,34 @@ import android.os.AsyncTask;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.MotionEvent;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.FrameLayout.LayoutParams;
 
 public class DistanceCalculatorPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.distance";
 	private OsmandApplication app;
 	private DistanceCalculatorLayer distanceCalculatorLayer;
+	private ContextMenuLayer contextMenuLayer;
 	private TextInfoWidget distanceControl;
+	private MapActivity mapActivity;
 	
 	private List<LinkedList<WptPt>> measurementPoints = new ArrayList<LinkedList<WptPt>>();
+	public int selectedPointIndex = -1;
+	public int selectedSubtrackIndex = -1;
+	public int insertionPointIndex = -1;
+	public int insertionSubtrackIndex = -1;
+	public int insertionPointIndices[] = {-1, -1};
 	private GPXFile originalGPX;
 	private String distance = null;
+	private String subTrackDistance = null;
 	private DisplayMetrics dm;
 	
 	private int distanceMeasurementMode = 0; 
@@ -103,14 +115,22 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayers(MapActivity activity) {
+		contextMenuLayer = activity.getMapLayers().getContextMenuLayer();
 		// remove old if existing
 		if(distanceCalculatorLayer != null) {
 			activity.getMapView().removeLayer(distanceCalculatorLayer);
 		}
-		distanceCalculatorLayer = new DistanceCalculatorLayer();
-		activity.getMapView().addLayer(distanceCalculatorLayer, 4.5f);
+		distanceCalculatorLayer = new DistanceCalculatorLayer(activity);
+		int contextMenuLayerNumber = 0;
+		for (contextMenuLayerNumber = 0; contextMenuLayerNumber <= activity.getMapView().getLayers().size(); contextMenuLayerNumber++) {
+			if (activity.getMapView().getLayers().get(contextMenuLayerNumber) instanceof ContextMenuLayer) {
+				break;
+			}
+		}
+		activity.getMapView().addLayer(distanceCalculatorLayer, (float)contextMenuLayerNumber + 0.5f);	//place above ContextMenuLayer
 		
 		registerWidget(activity);
+			mapActivity = activity;
 	}
 	
 	private void registerWidget(MapActivity activity) {
@@ -174,11 +194,19 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				} else if (id == R.string.distance_measurement_finish_editing) {
 					distanceMeasurementMode = 0;
 				} else if (id == R.string.distance_measurement_finish_subtrack) {
-					measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
+					if(measurementPoints.size() > 0){
+						WptPt temp = measurementPoints.get(measurementPoints.size() - 1).getLast();	//subtrack starts at end of previous segment
+						measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
+						measurementPoints.get(measurementPoints.size() - 1).add(0, temp);
+						selectedSubtrackIndex = measurementPoints.size() - 1;
+						selectedPointIndex = 0;
+					}
 				} else if (id == R.string.distance_measurement_clear_route) {
-					distanceMeasurementMode = 0;
 					measurementPoints.clear();
+					selectedSubtrackIndex = - 1;
+					selectedPointIndex = -1;
 					calculateDistance();
+					contextMenuLayer.setLocation(null, null);	//clear any open info box
 				} else if (id == R.string.distance_measurement_save_gpx) {
 					saveGpx(activity);
 				} else if (id == R.string.distance_measurement_load_gpx) {
@@ -189,9 +217,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			}
 		});
 		bld.show();
-	}
+	}	
 	
-
 	protected void loadGpx(final MapActivity activity) {
 		activity.getMapLayers().selectGPXFileLayer(true, false, false, new CallbackWithObject<GPXUtilities.GPXFile>() {
 			
@@ -346,10 +373,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				}
 			};
 		};
-		exportTask.execute(new Void[0]);
-		
-		
+		exportTask.execute(new Void[0]);		
 	}
+	
 	private void startEditingHelp(MapActivity ctx) {
 		final CommonPreference<Boolean> pref = app.getSettings().registerBooleanPreference("show_measurement_help_first_time", true);
 		pref.makeGlobal();
@@ -364,10 +390,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				}
 			});
 			builder.setPositiveButton(R.string.default_buttons_ok, null);
-			
 			builder.show();
-		}
-		
+		}	
 	}
 	
 	private TextInfoWidget createDistanceControl(final MapActivity activity, Paint paintText, Paint paintSubText) {
@@ -398,22 +422,69 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		updateText();
 	}
 
+	private void calculatePartialDistance(int lastSegment, int lastIndex) {
+		float dist = 0;
+		float subTrackDist = 0;
+		double delta = 0;
+		if (measurementPoints.size() == 0 && distanceMeasurementMode == 0 ) {
+			distance = null;
+			subTrackDistance = null;
+		} else {
+			for (int j = 0; j <= lastSegment; j++) {
+				List<WptPt> ls = measurementPoints.get(j);
+				int maxIndex = ls.size();
+				if(j == lastSegment) maxIndex = lastIndex + 1;	//only measure to selected point
+				for (int i = 1; i < maxIndex; i++) {
+					delta = MapUtils.getDistance(ls.get(i - 1).lat, ls.get(i - 1).lon, ls.get(i).lat, ls.get(i).lon);
+					dist += delta;
+					if(j == lastSegment) subTrackDist += delta;
+				}
+			}
+			distance = OsmAndFormatter.getFormattedDistance(dist, app);
+			subTrackDistance = OsmAndFormatter.getFormattedDistance(subTrackDist, app);
+		}
+		updateText();
+	}
 
-	public class DistanceCalculatorLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+	public class DistanceCalculatorLayer extends OsmandMapLayer{
 		private OsmandMapTileView view;
 
 		private Bitmap originIcon;
 		private Bitmap destinationIcon;
 		private Paint bitmapPaint;
-
 		private Path path;
-
 		private Paint paint;
 		private Paint paint2;
+		private TextView textView;
+		private ImageView closeButton;
+		private Drawable boxLeg;
 
-		public DistanceCalculatorLayer() {
+		public final int defaultMeasurementPointDisplayRadius = 9;
+		public final int defaultMeasurementPointSelectionRadius = 13;
+		public int measurementPointSelectionRadius = 0;
+		private boolean scrollingFlag = false;		//For measurement point dragging
+		private boolean showDragAnimation = false;		//For measurement point dragging
+		private boolean insertFlag = false;
+		private Rect textPadding;
+		public int distanceColor = 0;
+		public int inactiveSubtrackColor = 0;
+		public int subtrackRemainderColor = 0;
+		public int dragColor = 0;
+		private PointF movingPoint = null;
+		private final int DEFAULT_TEXT_SIZE = 15;
+		private static final String KEY_DESCRIPTION = "distance_calculator_description";
+		private static final String KEY_SELECTED_SUBTRACK_INDEX = "distance_calculator_selected_subtrack_index";
+		private static final String KEY_SELECTED_POINT_INDEX = "distance_calculator_selected_point_index";
+		public String description = null;
+
+		public DistanceCalculatorLayer(MapActivity activity){
+			if(activity.getLastNonConfigurationInstanceByKey(KEY_SELECTED_SUBTRACK_INDEX) != null) {
+				selectedSubtrackIndex = (Integer) activity.getLastNonConfigurationInstanceByKey(KEY_SELECTED_SUBTRACK_INDEX);
+				description = (String) activity.getLastNonConfigurationInstanceByKey(KEY_DESCRIPTION);
+				selectedPointIndex = (Integer) activity.getLastNonConfigurationInstanceByKey(KEY_SELECTED_POINT_INDEX);
+			}
 		}
-
+				
 		@Override
 		public void initLayer(OsmandMapTileView view) {
 			this.view = view;
@@ -426,53 +497,206 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			bitmapPaint.setDither(true);
 			bitmapPaint.setAntiAlias(true);
 			bitmapPaint.setFilterBitmap(true);
-			path = new Path();
-			
-			int distanceColor = view.getResources().getColor(R.color.distance_color);
+			path = new Path();		
+			distanceColor = view.getResources().getColor(R.color.distance_color);
+			dragColor = view.getResources().getColor(R.color.color_distance_drag);
+			inactiveSubtrackColor = view.getResources().getColor(R.color.color_distance_inactive_subtrack);
+			subtrackRemainderColor = view.getResources().getColor(R.color.color_distance_remainder);
 			paint = new Paint();
 			paint.setStyle(Style.STROKE);
 			paint.setStrokeWidth(7 * dm.density);
 			paint.setAntiAlias(true);
 			paint.setStrokeCap(Cap.ROUND);
 			paint.setStrokeJoin(Join.ROUND);
-			paint.setColor(distanceColor);
-			
 			paint2 = new Paint();
 			paint2.setStyle(Style.FILL_AND_STROKE);
 			paint2.setAntiAlias(true);
-			paint2.setColor(distanceColor);
+			textView = new TextView(view.getContext());
+			LayoutParams lp = new LayoutParams(contextMenuLayer.BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT);
+			textView.setLayoutParams(lp);
+			textView.setTextSize(DEFAULT_TEXT_SIZE);
+			textView.setTextColor(Color.argb(255, 0, 0, 0));
+			textView.setMinLines(1);
+			textView.setGravity(Gravity.CENTER_HORIZONTAL);		
+			textView.setClickable(true);			
+			textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
+			textPadding = new Rect();
+			textView.getBackground().getPadding(textPadding);
+			
+			closeButton = new ImageView(view.getContext());
+			lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			closeButton.setLayoutParams(lp);
+			closeButton.setImageDrawable(view.getResources().getDrawable(R.drawable.headliner_close));
+			closeButton.setClickable(true);
+			boxLeg = view.getResources().getDrawable(R.drawable.box_leg);
+			boxLeg.setBounds(0, 0, boxLeg.getMinimumWidth(), boxLeg.getMinimumHeight());
+			
+			measurementPointSelectionRadius = defaultMeasurementPointSelectionRadius;
+			movingPoint = new PointF(0,0);
+			if(selectedSubtrackIndex >= 0){
+				LatLon l = new LatLon(measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lat,
+						measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lon);
+				setLocation(l, description);
+				view.refreshMap();
+				calculateDistance();
+				updateText();				
+			}
 		}
 		
 		@Override
 		public boolean onSingleTap(PointF point) {
-			if(distanceMeasurementMode == 1) {
-				LatLon l = view.getLatLonFromScreenPoint(point.x, point.y);
-				if(measurementPoints.size() == 0) {
-					measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
-				}
-				WptPt pt = new WptPt();
-				pt.lat = l.getLatitude();
-				pt.lon = l.getLongitude();
-				measurementPoints.get(measurementPoints.size() - 1).add(pt);
-				calculateDistance();
+			description = "";
+			LatLon l = view.getLatLonFromScreenPoint(point.x, point.y);
+			int textBoxPressed = pressedInTextView(point.x, point.y);
+			if(textBoxPressed == 2){
+				setLocation(null, null);
 				view.refreshMap();
-				updateText();
+				return true;
+			}else if (textBoxPressed == 1){
+				if(distanceMeasurementMode == 1){
+					createMeasurementPointMenuDialog();
+				}else{
+					isMeasurementPointSelected(point);	//set selected point indices
+					double lat = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lat;
+					double lon = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lon;
+					mapActivity.getMapActions().contextMenuPoint(lat, lon);
+				}
+				return true;										
+			}else{
+				int res = contextMenuLayer.pressedInTextView(point.x, point.y);
+				if(res > 0) return false;	//pass through a click on a text box on the context menu layer
+				if(distanceMeasurementMode == 1) {
+					if(measurementPoints.size() == 0) {
+						measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
+						selectedSubtrackIndex = -1;
+						selectedPointIndex = -1;
+					}
+					if(!isMeasurementPointSelected(point))
+					{
+						WptPt pt = new WptPt();
+						pt.lat = l.getLatitude();
+						pt.lon = l.getLongitude();
+						if(insertFlag){
+							measurementPoints.get(insertionSubtrackIndex).add(insertionPointIndex, pt);
+							selectedSubtrackIndex = insertionSubtrackIndex;
+							selectedPointIndex = insertionPointIndex;
+						}else{
+							measurementPoints.get(measurementPoints.size() - 1).add(pt);
+							selectedSubtrackIndex = measurementPoints.size() - 1;
+							selectedPointIndex = measurementPoints.get(measurementPoints.size() - 1).size() - 1;
+						}				
+						insertFlag = false;
+					}
+				}
+				if(measurementPoints.size() == 0 || !isMeasurementPointSelected(point)) {
+					distance = null;
+					description = null;
+				}else{
+					calculatePartialDistance(selectedSubtrackIndex, selectedPointIndex);
+					description = setDescription(true, null);						
+				}
+			}
+			setLocation(l, description);
+			view.refreshMap();
+			calculateDistance();
+			updateText();
+			return true;
+		}
+
+		public String setDescription(boolean withNote, LatLon latLon){
+			String description = "";
+			if(latLon != null){
+				description = view.getContext().getString(R.string.point_on_map, 
+						latLon.getLatitude(), latLon.getLongitude()) + "\n";
+				
+			}
+			if(selectedSubtrackIndex > 0){
+				description = description + view.getContext().getString(R.string.measurement_track_distance) + distance;
+				if(selectedPointIndex > 0)
+					description = description + "\n" + view.getContext().getString(R.string.measurement_subTrack_distance) + subTrackDistance;
+			}else{
+				description = description + distance;
+			}
+			if(withNote){
+				String note = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).desc;
+				if(note != "" && note != null) description = description + "\nNote: " + note;
+			}
+			return description;
+		}
+		
+		@Override
+		public boolean onLongPressEvent(PointF point) {
+			int textBoxReturnCode = pressedInTextView(point.x, point.y);
+			if(textBoxReturnCode == 1){
+				setLocation(null, null);	//remove textbox
+				view.refreshMap();
+				return true;					
+			}
+			if (measurementPoints.size() < 0) return false;	//pass event through to context menu layer
+			if(isMeasurementPointSelected(point)){
+				if (distanceMeasurementMode == 1){
+					createMeasurementPointMenuDialog();
+				}else{
+					LatLon l = view.getLatLonFromScreenPoint(point.x, point.y);
+					mapActivity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude());					
+				}
 				return true;
 			}
 			return false;
 		}
 		
 		@Override
-		public boolean onLongPressEvent(PointF point) {
-			if (distanceMeasurementMode == 1 && measurementPoints.size() > 0) {
-				LinkedList<WptPt> lt = measurementPoints.get(measurementPoints.size() - 1);
-				if (lt.size() > 0) {
-					lt.removeLast();
-				}
-				calculateDistance();
-				view.refreshMap();
-				updateText();
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			if (distanceMeasurementMode == 0) return false;		//Check if in measurement mode
+			if(scrollingFlag){
+				movingPoint.set(e2.getX(), e2.getY());
+				view.refreshMap();	//drag animation
+				return true;	//delay activity until scrolling has finished
+			}
+			PointF point = new PointF(e1.getX(), e1.getY());
+			if(isMeasurementPointSelected(point)){
+				scrollingFlag = true;	//must remain true until next touch event
+				showDragAnimation = true;
+				movingPoint.set(point);
 				return true;
+			}
+			return false;
+		}
+		
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			if (distanceMeasurementMode == 0) return false;		//Check if in measurement mode
+			if(scrollingFlag) return true;	//block fling while dragging a point. Note scroll event occurs before fling event
+			return false;
+		}
+		
+		@Override
+		public boolean onTouchEvent(MotionEvent event) {
+			if (distanceMeasurementMode == 0) return false;		//Check if in measurement mode
+
+			if (event.getAction() == MotionEvent.ACTION_DOWN) {	//must clear at start of new event, not end of last event to ensure fling is blocked
+				scrollingFlag = false;
+				movingPoint.set(event.getX(), event.getY());
+			}
+			
+			if (event.getAction() == MotionEvent.ACTION_UP) {	//Support for dragging measurement point
+				if(scrollingFlag){
+					if(selectedPointIndex >= 0){	//move selected point to new location
+						WptPt pt = new WptPt();
+						pt.lat = view.getLatLonFromScreenPoint(event.getX(),event.getY()).getLatitude();
+						pt.lon = view.getLatLonFromScreenPoint(event.getX(),event.getY()).getLongitude();
+						measurementPoints.get(selectedSubtrackIndex).set(selectedPointIndex, pt);
+						description = null;
+						calculatePartialDistance(selectedSubtrackIndex, selectedPointIndex);
+						description = setDescription(true, null);
+						LatLon l = view.getLatLonFromScreenPoint(event.getX(),event.getY());						
+						showDragAnimation = false;
+						setLocation(l, description);
+						view.refreshMap();
+						calculateDistance();
+						updateText();
+					}
+				}
 			}
 			return false;
 		}
@@ -483,32 +707,126 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				path.reset();
 				int marginY = originIcon.getHeight();
 				int marginX = originIcon.getWidth() / 2;
-				for (int i = 0; i < measurementPoints.size(); i++) {
+				int lastSegment = selectedSubtrackIndex;
+				int lastPoint = selectedPointIndex;
+				int points =0;
+				boolean showLine = false;
+				if(showDragAnimation && scrollingFlag && measurementPoints.get(0).size() > 0){	//provide rubberbanding if a drag is occurring
+					paint.setStrokeWidth(4 * dm.density);
+					paint.setColor(dragColor);
+					path.reset();
+					int x = 0;
+					int y = 0;
+					int pointIndex = 0;
+					int subtrackIndex = 0;
+					if(selectedPointIndex > 0){
+						pointIndex = selectedPointIndex - 1;
+						subtrackIndex = selectedSubtrackIndex;
+						showLine = true;
+					}else{
+						if(selectedSubtrackIndex > 0){
+							subtrackIndex = selectedSubtrackIndex - 1;
+							pointIndex = measurementPoints.get(subtrackIndex).size() - 1;
+							showLine = true;
+						}else{
+							subtrackIndex = 0;
+							pointIndex = 0;
+						}
+					}
+					x = view.getRotatedMapXForPoint(measurementPoints.get(subtrackIndex).get(pointIndex).lat, 
+							measurementPoints.get(subtrackIndex).get(pointIndex).lon);
+					y = view.getRotatedMapYForPoint(measurementPoints.get(subtrackIndex).get(pointIndex).lat, 
+							measurementPoints.get(subtrackIndex).get(pointIndex).lon);
+					if(!showLine){
+						path.moveTo(movingPoint.x, movingPoint.y);
+					}else{
+						path.moveTo(x, y);
+						path.lineTo(movingPoint.x, movingPoint.y);
+					}
+					showLine = false;
+					if(selectedPointIndex < measurementPoints.get(selectedSubtrackIndex).size() - 1){
+						pointIndex = selectedPointIndex + 1;
+						subtrackIndex = selectedSubtrackIndex;
+						showLine = true;
+					}else{
+						if(selectedSubtrackIndex < measurementPoints.size() - 1){
+							subtrackIndex = selectedSubtrackIndex + 1;
+							if(measurementPoints.get(subtrackIndex).size() > 1){	//is there only one point in the subtrack?
+								pointIndex = 0;
+								showLine = true;
+							}else{
+								subtrackIndex = selectedSubtrackIndex;
+								pointIndex = selectedPointIndex;								
+							}
+						}else{
+							subtrackIndex = selectedSubtrackIndex;
+							pointIndex = selectedPointIndex;
+						}
+					}
+					if(showLine){
+						x = view.getRotatedMapXForPoint(measurementPoints.get(subtrackIndex).get(pointIndex).lat, 
+								measurementPoints.get(subtrackIndex).get(pointIndex).lon);
+						y = view.getRotatedMapYForPoint(measurementPoints.get(subtrackIndex).get(pointIndex).lat, 
+								measurementPoints.get(subtrackIndex).get(pointIndex).lon);						
+						path.lineTo(x, y);
+					}
+					canvas.drawPath(path, paint);
+					path.reset();
+				}
+				if(lastPoint < 0) lastSegment = measurementPoints.size() - 1;	//adjust for partial measurements
+				for (int i = 0; i < measurementPoints.size(); i++) {	//for all gpx subtracks
+					if(i != selectedSubtrackIndex){
+						paint.setStrokeWidth(4 * dm.density);
+						paint.setColor(inactiveSubtrackColor);
+						paint2.setColor(inactiveSubtrackColor);
+					}else{
+						paint.setStrokeWidth(7 * dm.density);
+						paint.setColor(distanceColor);
+						paint2.setColor(distanceColor);
+					}
 					Iterator<WptPt> it = measurementPoints.get(i).iterator();
-					boolean first = true;
-					while (it.hasNext()) {
+					points = measurementPoints.get(i).size() - 1;
+					for (int j = 0; j <= points; j++){
 						WptPt point = it.next();
 						int locationX = view.getMapXForPoint(point.lon);
 						int locationY = view.getMapYForPoint(point.lat);
-						if (first) {
+						if (j == 0 ) {
 							path.moveTo(locationX, locationY);
-							first = false;
 						} else {
 							path.lineTo(locationX, locationY);
 						}
+						if(i == lastSegment && j == lastPoint) {
+							canvas.drawPath(path, paint);
+							path.reset();
+							path.moveTo(locationX, locationY);
+							paint.setStrokeWidth(4 * dm.density);
+							paint.setColor(subtrackRemainderColor);
+						}
 					}
+					canvas.drawPath(path, paint);
+					path.reset();
 				}
-				canvas.drawPath(path, paint);
+				if(lastPoint < 0){
+					lastSegment = measurementPoints.size() - 1;	//adjust for partial measurements
+					if(measurementPoints.get(lastSegment).size() < 1) lastSegment --;	//allow for start of sub-tracks
+					lastPoint = measurementPoints.get(lastSegment).size() - 1;
+				}
 				for (int i = 0; i < measurementPoints.size(); i++) {
+					if(i != selectedSubtrackIndex){
+						paint.setColor(inactiveSubtrackColor);
+						paint2.setColor(inactiveSubtrackColor);
+					}else{
+						paint.setColor(distanceColor);
+						paint2.setColor(distanceColor);
+					}
 					Iterator<WptPt> it = measurementPoints.get(i).iterator();
-					boolean first = true;
-					while(it.hasNext()) {
+					points = measurementPoints.get(i).size() - 1;
+					for (int j = 0; j <= points; j++){
 						WptPt pt = it.next();
 						if (view.isPointOnTheRotatedMap(pt.lat, pt.lon)) {
 							int locationX = view.getMapXForPoint(pt.lon);
 							int locationY = view.getMapYForPoint(pt.lat);
-							
-							if(first || !it.hasNext() || pt.desc != null) {
+							if(( j == 0 || j == points) && (i == selectedSubtrackIndex )) {
 								canvas.rotate(-view.getRotate(), locationX, locationY);
 								canvas.drawBitmap(distanceMeasurementMode == 1? originIcon : destinationIcon, 
 										locationX - marginX, locationY - marginY, bitmapPaint);
@@ -517,9 +835,32 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 								canvas.drawCircle(locationX, locationY, 10 * dm.density, paint2);
 							}
 						}
-						first = false;
 					}
 				}
+				if (textView.getText().length() > 0) {
+					int x = view.getRotatedMapXForPoint(measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lat, 
+							measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lon);
+					int y = view.getRotatedMapYForPoint(measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lat, 
+							measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lon);
+					
+					int tx = x - boxLeg.getMinimumWidth() / 2;
+					int ty = y - boxLeg.getMinimumHeight() + contextMenuLayer.SHADOW_OF_LEG;
+					canvas.translate(tx, ty);
+					boxLeg.draw(canvas);
+					canvas.translate(-tx, -ty);
+				
+					canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom() + textPadding.bottom - textPadding.top);
+					int c = textView.getLineCount();
+					
+					textView.draw(canvas);
+					canvas.translate(textView.getWidth() - closeButton.getWidth(), contextMenuLayer.CLOSE_BTN / 2);
+					closeButton.draw(canvas);
+					if (c == 0) {
+						// special case relayout after on draw method
+						layoutText();
+						view.refreshMap();
+					}
+				}	
 			}
 		}
 
@@ -532,114 +873,205 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			return false;
 		}
 
-		@Override
-		public void collectObjectsFromPoint(PointF point, List<Object> o) {
-			getMPointsFromPoint(point, o);
-		}
-		
-		public void getMPointsFromPoint(PointF point, List<? super WptPt> res) {
-			int r = (int) (14 * dm.density);
-			int rs = (int) (10 * dm.density);
-			int ex = (int) point.x;
-			int ey = (int) point.y;
-			for (int i = 0; i < measurementPoints.size(); i++) {
-				Iterator<WptPt> it = measurementPoints.get(i).iterator();
-				boolean first = true;
-				while (it.hasNext()) {
-					WptPt pt = it.next();
-					int x = view.getRotatedMapXForPoint(pt.lat, pt.lon);
-					int y = view.getRotatedMapYForPoint(pt.lat, pt.lon);
-					if (pt.desc != null || !it.hasNext() || first) {
-						if (calculateBelongsBig(ex, ey, x, y, r)) {
-							res.add(pt);
-						}
-					} else {
-						if (calculateBelongsSmall(ex, ey, x, y, rs)) {
-							res.add(pt);
+		/**
+		 * Method to determine if a measurement track point exists within the 
+		 * defined selection radius at the screen location tapped.
+		 */
+		public boolean isMeasurementPointSelected(PointF point){	//test if point on map is a point in measurement set
+			int locationX = 0;
+			int locationY = 0;
+			int size = 0;
+			if(measurementPoints.size() <= 0) return false;
+			for (int j = 0; j < measurementPoints.size(); j++){			
+				size = measurementPoints.get(j).size();
+				if(size > 0){
+					for (int i = 0;i < size; i++){
+						locationX = view.getMapXForPoint(measurementPoints.get(j).get(i).lon);
+						locationY = view.getMapYForPoint(measurementPoints.get(j).get(i).lat);
+						if(Math.abs(locationX - point.x) < measurementPointSelectionRadius &&
+								Math.abs(locationY - point.y) < measurementPointSelectionRadius){
+							selectedSubtrackIndex = j;	//segment index
+							selectedPointIndex = i;	//point index
+							return true;
 						}
 					}
-					first = false;
 				}
 			}
+			return false;
 		}
 		
-		private boolean calculateBelongsBig(int ex, int ey, int objx, int objy, int radius) {
-			return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
-		}
-		
-		private boolean calculateBelongsSmall(int ex, int ey, int objx, int objy, int radius) {
-			return Math.abs(objx - ex) <= radius && Math.abs(ey - objy) <= radius ;
-		}
-
-		@Override
-		public LatLon getObjectLocation(Object o) {
-			if (o instanceof WptPt) {
-				return new LatLon(((WptPt) o).lat, ((WptPt) o).lon);
+		public void editPointNote(CharSequence s){
+			if(selectedPointIndex >= 0){
+				measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).desc = s.toString();
 			}
-			return null;
 		}
 		
-		@Override
-		public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
-			if(o instanceof WptPt) {
-				final WptPt p = (WptPt) o;
-				OnContextMenuClick listener = new OnContextMenuClick() {
-					
-					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						if (itemId == R.string.delete_point) {
-							for (int i = 0; i < measurementPoints.size(); i++) {
-								Iterator<WptPt> it = measurementPoints.get(i).iterator();
-								while (it.hasNext()) {
-									if (it.next() == p) {
-										it.remove();
+		public void setLocation(LatLon loc, String description){
+			if(loc != null){
+				textView.setText(description);
+			} else {
+				textView.setText(null);
+			}
+			layoutText();
+		}
+		
+		public void layoutText() {
+			Rect padding = new Rect();
+			if (textView.getLineCount() > 0) {
+				textView.getBackground().getPadding(padding);
+			}
+			int w = contextMenuLayer.BASE_TEXT_SIZE;
+			int h = (int) ((textView.getPaint().getTextSize() * 1.3f) * textView.getLineCount());
+			
+			textView.layout(0, -padding.bottom, w, h + padding.top);
+			int minw = closeButton.getDrawable().getMinimumWidth();
+			int minh = closeButton.getDrawable().getMinimumHeight();
+			closeButton.layout(0, 0, minw, minh);
+		}	
+		
+		public int pressedInTextView(float px, float py) {
+			if(selectedPointIndex >= 0){
+				double lat = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lat;
+				double lon = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lon;
+				Rect bs = textView.getBackground().getBounds();
+				Rect closes = closeButton.getDrawable().getBounds();
+				int x = (int) (px - view.getRotatedMapXForPoint(lat, lon));
+				int y = (int) (py - view.getRotatedMapYForPoint(lat, lon));
+				x += bs.width() / 2;
+				y += bs.height() + boxLeg.getMinimumHeight() - contextMenuLayer.SHADOW_OF_LEG;
+				int localSize = contextMenuLayer.CLOSE_BTN * 3 / 2;
+				int dclosex = x - bs.width() + closes.width();
+				int dclosey = y - closes.height() / 2;
+				if(closes.intersects(dclosex - localSize, dclosey - localSize, dclosex + localSize, dclosey + localSize)) {
+					return 2;
+				} else if (bs.contains(x, y)) {
+					return 1;
+				}
+			}
+			return 0;
+	   	}
+
+	    /**
+		 * Menu items to be provided for the menu opened when
+		 * the a measurement point or info box is tapped.
+		 */
+		final int[] pointMenuActions = new int[]{
+				R.string.measurement_point_menu_delete_point,
+				R.string.measurement_point_menu_insert_point,
+				R.string.measurement_point_menu_insert_note,
+				R.string.measurement_point_menu_show_latlon
+		};
+		
+		/**
+		 * Method to open a menu when a measurement point or information text box is long pressed.
+		 */
+		void createMeasurementPointMenuDialog() {
+	        // Menu opened when a measurement point or information text box is tapped	    	
+	    	Builder builder = new AlertDialog.Builder(mapActivity);
+	    	List<String> actions = new ArrayList<String>();
+	    	int actionsToUse = 0;
+	    	actionsToUse =  pointMenuActions.length;	//measurement point selected items;
+	    	for(int j = 0; j < actionsToUse; j++){
+	    		actions.add(mapActivity.getResources().getString(pointMenuActions[j]));
+	    	}		
+	    	builder.setItems(actions.toArray(new String[actions.size()]), new DialogInterface.OnClickListener(){
+	
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					int standardId = 0;
+					final WptPt p = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex);
+					standardId = pointMenuActions[which];
+					if(standardId == R.string.measurement_point_menu_insert_note){
+						addPointNote(mapActivity);
+					}else if(standardId == R.string.measurement_point_menu_delete_point){	//test if current point is to be removed
+						for (int i = 0; i < measurementPoints.size(); i++) {
+							Iterator<WptPt> it = measurementPoints.get(i).iterator();
+							for(int j = 0; j < measurementPoints.get(i).size(); j++){
+								if (it.next() == p) {
+									it.remove();
+									if(measurementPoints.get(i).size() == 0){	//check if subtrack is empty
+										measurementPoints.remove(i);	//remove empty subtrack
 									}
+									selectedPointIndex = -1;	//reset the selected point indices
+									selectedSubtrackIndex = -i;
+									setLocation(null, null);	//clear any open info box
+									view.refreshMap();
+									break;
 								}
 							}
-							calculateDistance();
 						}
+						calculateDistance();
+						view.refreshMap();
+						updateText();
+					}else if(standardId == R.string.measurement_point_menu_insert_point){	//insert extra measurement point?
+						insertFlag = true;
+						insertionSubtrackIndex = selectedSubtrackIndex;
+						insertionPointIndex = selectedPointIndex;
+					}else if(standardId == R.string.measurement_point_menu_show_latlon){	//show lat/lon in info box?
+						double x = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lat;
+						double y = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lon;
+						LatLon pt = new LatLon(x, y);
+						setLocation(pt, setDescription(true, pt));
+						view.refreshMap();
 					}
-				};
-				adapter.item(R.string.delete_point).icons(R.drawable.ic_action_delete_dark, 
-						R.drawable.ic_action_delete_light).listen(listener).reg();
-			}
+				}
+			});
+			builder.show();
 		}
+		
+		protected void addPointNote(final MapActivity activity) {
+			Builder b = new AlertDialog.Builder(activity);
+			LinearLayout ll = new LinearLayout(activity);
+			ll.setOrientation(LinearLayout.VERTICAL);
+			ll.setPadding(5, 5, 5, 5);
+			final TextView tv = new TextView(activity);
+			tv.setText("");
+			tv.setTextColor(Color.RED);
+			ll.addView(tv);
+			final EditText editText = new EditText(activity);
+			if(selectedPointIndex >= 0){
+				editText.setText(measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).desc);
+			}else{
+				editText.setHint(R.string.measurement_point_note);
+			}
+			editText.addTextChangedListener(new TextWatcher() {
+				
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+					editPointNote(s);
+					double x = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lat;
+					double y = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lon;
+					LatLon pt = new LatLon(x, y);
+					setLocation(pt, setDescription(true, null));
+					view.refreshMap();
+				}
+				
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				}
+				
+				@Override
+				public void afterTextChanged(Editable s) {
+				}
+			});
+			ll.addView(editText);
+			b.setView(ll);
+			b.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
 
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).desc = editText.getText().toString();
+				}
+			});
+			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.show();
+		}
+		
 		@Override
-		public String getObjectDescription(Object o) {
-			if(o instanceof WptPt) {
-				String desc = getObjectName(o); 
-				List<String> l = new ArrayList<String>();
-				if(!Double.isNaN(((WptPt) o).ele)) {
-					l.add(app.getString(R.string.plugin_distance_point_ele) + " "+ OsmAndFormatter.getFormattedDistance((float) ((WptPt) o).ele, app)); 
-				}
-				if(!Double.isNaN(((WptPt) o).speed)) {
-					l.add(app.getString(R.string.plugin_distance_point_speed) + " "+ OsmAndFormatter.getFormattedSpeed((float) ((WptPt) o).speed, app)); 
-				}
-				if(!Double.isNaN(((WptPt) o).hdop)) {
-					l.add(app.getString(R.string.plugin_distance_point_hdop) + " "+ OsmAndFormatter.getFormattedDistance((float) ((WptPt) o).hdop, app)); 
-				}
-				if(((WptPt) o).time != 0) {
-					Date date = new Date(((WptPt) o).time);
-					java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(app);
-					java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(app);
-					l.add(app.getString(R.string.plugin_distance_point_time) + " "+ dateFormat.format(date) + " " + timeFormat.format(date)); 
-				}
-				return desc + " " + l;
-			}
-			return null;
+		public void onRetainNonConfigurationInstance(Map<String, Object> map) {
+			map.put(KEY_SELECTED_SUBTRACK_INDEX, selectedSubtrackIndex);
+			map.put(KEY_SELECTED_POINT_INDEX, selectedPointIndex);
+			map.put(KEY_DESCRIPTION, description);
 		}
-
-		@Override
-		public String getObjectName(Object o) {
-			if(o instanceof WptPt) {
-				if(((WptPt) o).desc == null) {
-					return app.getString(R.string.plugin_distance_point); 
-				}
-				return ((WptPt) o).desc;
-			}
-			return null;
-		}
-
 	}
 }
