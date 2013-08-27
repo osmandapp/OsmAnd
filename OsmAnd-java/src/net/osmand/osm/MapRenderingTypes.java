@@ -128,8 +128,10 @@ public class MapRenderingTypes {
 					if (t != null) {
 						if (amenityNameToType.containsKey(t)) {
 							System.err.println("Conflict " + t + " " + amenityNameToType.get(t) + " <> " + e.getKey());
-						}
-						amenityNameToType.put(t, e.getKey());
+						} else {
+                            amenityNameToType.put(t, e.getKey());
+                        }
+
 					}
 				}
 			}
