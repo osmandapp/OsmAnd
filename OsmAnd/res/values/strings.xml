@@ -209,7 +209,7 @@
     <string name="recording_context_menu_precord">Take a photo</string>
     <string name="dropbox_plugin_description">Dropbox plugin allows to synchronize tracks and audio/video notes with your dropbox account.</string>
     <string name="dropbox_plugin_name">Dropbox plugin</string>
-    <string name="animate_routing_using_gpx">Do you want to use existing GPX file?</string>
+    <string name="animate_routing_using_gpx">Do you want to navigate along a pre-recorded GPX route?</string>
     <string name="intermediate_points_change_order">Change order</string>
     <string name="srtm_paid_version_msg">Please consider to buy the Contour lines plugin in the Market to support further development.</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
