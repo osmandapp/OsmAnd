@@ -438,7 +438,7 @@ public class VoiceRouter {
 		if(pn != null) {
 			pn = pn.replace('-', ' ');
 			pn = pn.replace(':', ' ');
-			if (!AbstractPrologCommandPlayer.getLanguage().equals("de")){
+			if (player != null && "de".equals(player.getLanguage())){
 				pn = pn.replace("\u00df", "ss"); // helps non-German tts voices to pronounce German Strasse (=street)
 			}
 		}
