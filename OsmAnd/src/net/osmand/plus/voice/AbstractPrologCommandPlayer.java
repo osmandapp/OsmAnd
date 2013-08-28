@@ -51,10 +51,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	/** Must be sorted array! */
 	private final int[] sortedVoiceVersions;
 	private AudioFocusHelper mAudioFocusHelper;
-    protected String language = "";
-
+	protected String language = "";
 	protected int streamType;
-                   T
 	protected AbstractPrologCommandPlayer(ClientContext ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
 		throws CommandPlayerException 
 	{
