@@ -4,6 +4,8 @@ package net.osmand.plus.activities;
 import java.io.File;
 import java.util.Date;
 
+import android.content.SharedPreferences;
+import android.widget.ScrollView;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -35,6 +37,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 	public static final int SCREEN_NAVIGATION_SETTINGS = 2;
 
 	private static final int PLUGINS_SELECTION_REQUEST = 1;
+    private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
 	
 
 	private Preference bidforfix;
@@ -127,19 +130,24 @@ public class SettingsActivity extends SettingsBaseActivity {
 	private void showAboutDialog() {
 		Builder bld = new AlertDialog.Builder(this);
 		bld.setTitle(R.string.about_settings);
-		TextView tv = new TextView(this);
+        ScrollView sv = new ScrollView(this);
+        TextView tv = new TextView(this);
+        sv.addView(tv);
 		String version = Version.getFullVersion(getMyApplication());
 		String vt = getString(R.string.about_version) +"\t";
 		int st = vt.length();
 		String edition = "";
-		try {
-			PackageManager pm = getPackageManager();
-			ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
-			Date date = new Date(new File(appInfo.sourceDir).lastModified());
-			edition = getString(R.string.local_index_installed) +" :\t" + DateFormat.getDateFormat(getApplicationContext()).format(date);
-		} catch(Exception e) {
-		}
-		SpannableString content = new SpannableString(vt + version +"\n" +
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
+        if (prefs.contains(CONTRIBUTION_VERSION_FLAG)) {
+            try {
+                PackageManager pm = getPackageManager();
+                ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
+                Date date = new Date(new File(appInfo.sourceDir).lastModified());
+                edition = getString(R.string.local_index_installed) + " :\t" + DateFormat.getDateFormat(getApplicationContext()).format(date);
+            } catch (Exception e) {
+            }
+        }
+        SpannableString content = new SpannableString(vt + version +"\n" +
 				edition +"\n\n"+
 				getString(R.string.about_content));
 		content.setSpan(new ClickableSpan() {
@@ -154,7 +162,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 		tv.setPadding(5, 0, 5, 5);
 		tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
 		tv.setMovementMethod(LinkMovementMethod.getInstance());
-		bld.setView(tv);
+		bld.setView(sv);
 		bld.setPositiveButton(R.string.default_buttons_ok, null);
 		bld.show();
 		

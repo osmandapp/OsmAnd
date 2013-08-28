@@ -51,9 +51,10 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	/** Must be sorted array! */
 	private final int[] sortedVoiceVersions;
 	private AudioFocusHelper mAudioFocusHelper;
+    protected String language = "";
 
 	protected int streamType;
-
+                   T
 	protected AbstractPrologCommandPlayer(ClientContext ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
 		throws CommandPlayerException 
 	{
@@ -72,7 +73,17 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 		}
 		this.streamType = ctx.getSettings().AUDIO_STREAM_GUIDANCE.get();  
 		init(voiceProvider, ctx.getSettings(), configFile);
+        final Term langVal = solveSimplePredicate("language");
+        if (langVal instanceof Struct) {
+            language = ((Struct) langVal).getName();
+        }
 	}
+
+    public String getLanguage() {
+        return language;
+    }
+
+
 	
 	public String[] getLibraries(){
 		return new String[] { "alice.tuprolog.lib.BasicLibrary",

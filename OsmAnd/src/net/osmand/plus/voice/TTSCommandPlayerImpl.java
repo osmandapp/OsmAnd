@@ -64,16 +64,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	private static final Log log = PlatformUtil.getLog(TTSCommandPlayerImpl.class);
 	private TextToSpeech mTts;
 	private Context mTtsContext;
-	private String language;
 	private HashMap<String, String> params = new HashMap<String, String>();
 
 	protected TTSCommandPlayerImpl(Activity ctx, String voiceProvider)
 			throws CommandPlayerException {
 		super((OsmandApplication) ctx.getApplicationContext(), voiceProvider, CONFIG_FILE, TTS_VOICE_VERSION);
-		final Term langVal = solveSimplePredicate("language");
-		if (langVal instanceof Struct) {
-			language = ((Struct) langVal).getName();
-		}
 		if (Algorithms.isEmpty(language)) {
 			throw new CommandPlayerException(
 					ctx.getString(R.string.voice_data_corrupted));
