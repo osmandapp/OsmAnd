@@ -17,4 +17,6 @@ public interface CommandPlayer {
 	public abstract List<String> execute(List<Struct> listStruct);
 	
 	public abstract void updateAudioStream(int streamType);
+
+    public String getLanguage();
 }
