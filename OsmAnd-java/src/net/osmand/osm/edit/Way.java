@@ -139,7 +139,14 @@ public class Way extends Entity {
 		}
 		return OsmMapUtils.getWeightCenterForNodes(nodes);
 	}
-	
-	
 
+
+    public void reverseNodes() {
+        if(nodes != null) {
+            Collections.reverse(nodes);
+        }
+        if(nodeIds != null) {
+            nodeIds.reverse();;
+        }
+    }
 }

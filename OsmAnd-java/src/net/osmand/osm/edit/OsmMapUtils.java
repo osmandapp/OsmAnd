@@ -348,4 +348,6 @@ public class OsmMapUtils {
 
 		return Math.abs(area) / 2;
 	}
+
+
 }
