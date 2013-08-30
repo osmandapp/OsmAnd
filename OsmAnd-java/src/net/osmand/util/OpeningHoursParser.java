@@ -461,6 +461,7 @@ public class OpeningHoursParser {
 		// check 24/7
 		if("24/7".equals(r)){
 			Arrays.fill(days, true);
+            Arrays.fill(months, true);
 			basic.addTimeRange(0, 24*60);
 			rs.addRule(basic);
 			return true;
@@ -664,6 +665,9 @@ public class OpeningHoursParser {
 		boolean calculated = hours.isOpenedForTime(cal);
 		System.out.printf("  %sok: Expected %s: %b = %b\n",
 			((calculated != expected) ? "NOT " : ""), time, expected, calculated);
+        if(calculated != expected) {
+            throw new IllegalArgumentException("BUG!!!");
+        }
 	}
 	
 	public static void main(String[] args) throws ParseException {
