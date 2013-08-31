@@ -60,15 +60,21 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 		}
 		
 		public void reRouteTo(LatLon loc) {
-			OsmandApplication app = activity.getMyApplication();
-			TargetPointsHelper targets = app.getTargetPointsHelper();
+			final OsmandApplication app = activity.getMyApplication();
+			final TargetPointsHelper targets = app.getTargetPointsHelper();
 			// If we are in following mode then just update target point
 			targets.navigateToPoint(loc, true, -1);
 			if(!app.getRoutingHelper().isFollowingMode()) {
 				// If we are not in following mode then request new route to calculate
 				// Use default application mode
-				activity.followRoute(app.getSettings().getApplicationMode(), targets.getPointToNavigate(), targets.getIntermediatePoints(),
-						app.getLastKnownLocation(), null);
+				activity.runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						activity.followRoute(app.getSettings().getApplicationMode(), targets.getPointToNavigate(), targets.getIntermediatePoints(),app.getLastKnownLocation(), null);
+						}
+				});
+				
 			}
 		}
 
