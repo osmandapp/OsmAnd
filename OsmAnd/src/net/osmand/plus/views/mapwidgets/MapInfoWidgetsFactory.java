@@ -314,13 +314,13 @@ public class MapInfoWidgetsFactory {
 			String text = null;
 			if (routingHelper != null && routingHelper.isRouteCalculated()) {
 				if (routingHelper.isFollowingMode()) {
-					text = routingHelper.getCurrentName();
+					text = "\u2551 " + routingHelper.getCurrentName();
 				} else {
 					int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
 					if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible() &&
 							di < routingHelper.getRouteDirections().size()) {
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());
+						text = "\u2566 " + RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());
 					}
 				}
 			} else if(map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
