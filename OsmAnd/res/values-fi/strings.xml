@@ -561,7 +561,7 @@
     <string name="offline_edition_descr">Käytä aina offline editointia</string>
 	<string name="free_version_message">Tämä ilmainen OsmAnd versio on rajoitettu %1$s lataukseen ja ei tue offline wikipedia artikkeleita.</string>
 	<string name="index_name_voice">Äänipaketit (nauhoitettu, rajoitetut ominaisuudet)</string>
-	<string name="index_name_tts_voice">Äänipaketit (Teksti Puheeksi)</string>
+	<string name="index_name_tts_voice">Äänipaketit (Syntetisoitu ääni, suositeltu)</string>
 	<string name="settings_preset_descr">Valitse käyttäjäprofiili yksilöllisillä kartta- ja navigaatioasetuksilla.</string>
 	<string name="tip_day_night_mode">Päivä/Yö moodi</string>
 	<string name="use_transparent_map_theme">Läpinäkvä teema</string>
@@ -680,4 +680,24 @@
     <string name="gpx_saved_sucessfully">GPX tiedosto tallennettin onnistuneesti: {0}</string>
     <string name="default_buttons_do_not_show_again">Älä näytä enää uudestaan</string>
     <string name="distance_measurement_start_editing">Aloita muokkaus</string>
-    </resources>
+    <string name="tip_map_styles">Karttatyylit</string>
+	<string name="about_version">Versio:</string>
+    <string name="about_settings">Tietoja</string>
+    <string name="about_settings_descr">Versio tietoja, lisenssit, projektin jäsenet</string>
+    <string name="tips_and_tricks">Vinkkejä</string>
+    <string name="local_index_tile_data_downloadable">Ladattavissa: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Maksimi zoomi: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minimi zoomi: %1$s</string>
+    <string name="edit_tilesource_maxzoom">Maksimi zoomi</string>
+    <string name="edit_tilesource_minzoom">Minimi zoomi</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">Valitse olemassaoleva...</string>
+    <string name="edit_tilesource_name">Nimi</string>
+    <string name="driving_region_descr">Valitse ajoalue: USA, Eurooppa, UK, Aasia ja muut</string>
+	<string name="driving_region">Ajoalue</string>
+	<string name="driving_region_japan">Japani</string>
+	<string name="driving_region_us">Yhdysvallat</string>
+	<string name="driving_region_canada">Kanada</string>
+	<string name="driving_region_europe_asia">Eurooppa &amp; Aasia</string>
+	<string name="driving_region_uk">Iso Britannia, Intia, Australia ja muut</string>
+	</resources>
