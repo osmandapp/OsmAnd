@@ -314,7 +314,7 @@ public class MapInfoWidgetsFactory {
 			String text = null;
 			if (routingHelper != null && routingHelper.isRouteCalculated()) {
 				if (routingHelper.isFollowingMode()) {
-					text = "\u2551 " + routingHelper.getCurrentName();
+					text = routingHelper.getCurrentName();
 				} else {
 					int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
 					if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible() &&
