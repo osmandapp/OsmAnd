@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использование в оффлайн режиме.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
@@ -1275,4 +1275,8 @@
 	<string name="tip_map_styles">Стили карты</string>
 	<string name="about_version">Версия:</string>
     <string name="local_index_gpx_timespan">\nПромежуток времени: %1$d:%2$02d:%3$02d</string>
-	</resources>
+	<string name="local_index_tile_data_expire">Время действия (в минутах): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Загружаемые: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Максимальное увеличение: %1$s</string>
+    <string name="edit_tilesource_successfully">Источник таTilesource %1$s is successfully saved</string>
+    </resources>
