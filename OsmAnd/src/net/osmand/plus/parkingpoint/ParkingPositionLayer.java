@@ -35,8 +35,6 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	 */
 	private static final int radius = 20;
 
-	private LatLon parkingPoint = null;
-
 	private DisplayMetrics dm;
 	
 	private final MapActivity map;
@@ -57,13 +55,12 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	}
 	
 	public LatLon getParkingPoint() {
-		return parkingPoint;
+		return plugin.getParkingPosition();
 	}
 	
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		parkingPoint = plugin.getParkingPosition();
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
@@ -74,13 +71,13 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		bitmapPaint.setFilterBitmap(true);
 		parkingNoLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_no_limit);
 		parkingLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_limit);
-		parkingPoint = plugin.getParkingPosition();
 		timeLimit = plugin.getParkingType();
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
-		if (parkingPoint == null)
+        LatLon parkingPoint = getParkingPoint();
+        if (parkingPoint == null)
 			return;
 		
 		Bitmap parkingIcon;
@@ -89,7 +86,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		} else {
 			parkingIcon = parkingLimitIcon;
 		}
-		double latitude = parkingPoint.getLatitude();
+        double latitude = parkingPoint.getLatitude();
 		double longitude = parkingPoint.getLongitude();
 		if (isLocationVisible(latitude, longitude)) {
 			int marginX = parkingNoLimitIcon.getWidth() / 2;
@@ -108,7 +105,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		if(!parkPos.isEmpty()){
 			StringBuilder res = new StringBuilder();
 			res.append(view.getContext().getString(R.string.osmand_parking_position_description));
-			AccessibleToast.makeText(view.getContext(), getObjectDescription(parkingPoint), Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(view.getContext(), getObjectDescription(getParkingPoint()), Toast.LENGTH_LONG).show();
 			return true;
 		}
 		return false;
@@ -130,7 +127,10 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		return parkingPoint;
+        if(o == getParkingPoint()) {
+            return getParkingPoint();
+        }
+		return null;
 	}
 	
 	@Override
@@ -181,25 +181,19 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		return view.getContext().getString(R.string.osmand_parking_position_name);
 	}
 	
-	public void setParkingPointOnLayer(LatLon point, boolean timeLimit) {
-		this.timeLimit = timeLimit;
-		this.parkingPoint = point;
+	public void refresh() {
 		if (view != null) {
 			view.refreshMap();
 		}
 	}
 	
-	public void removeParkingPoint(){
-		this.parkingPoint = null;
-	}
-
 	/**
 	 * @param latitude
 	 * @param longitude
 	 * @return true if the parking point is located on a visible part of map
 	 */
 	private boolean isLocationVisible(double latitude, double longitude){
-		if(parkingPoint == null || view == null){
+		if(getParkingPoint() == null || view == null){
 			return false;
 		}
 		return view.isPointOnTheRotatedMap(latitude, longitude);
@@ -211,7 +205,8 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	 * but it's also used in method <link>collectObjectsFromPoint(PointF point, List<Object> o)</link>
 	 */
 	private void getParkingFromPoint(PointF point, List<? super LatLon> parkingPosition) {
-		if (parkingPoint != null && view != null) {
+        LatLon parkingPoint = getParkingPoint();
+        if (parkingPoint != null && view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			LatLon position = plugin.getParkingPosition();

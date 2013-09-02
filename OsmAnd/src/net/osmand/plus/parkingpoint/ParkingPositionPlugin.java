@@ -74,7 +74,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
         parkingPosition = constructParkingPosition();
 	}
 	
-	
+
+    public LatLon getParkingPosition() {
+        return parkingPosition;
+    }
 	
 	public LatLon constructParkingPosition() {
 		float lat = parkingLat.get();
@@ -282,7 +285,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			public void onClick(DialogInterface dialog, int which) {
 				showDeleteEventWarning(mapActivity);
 				if(parkingLayer != null) {
-					parkingLayer.removeParkingPoint();
+					parkingLayer.refresh();
 				}
 				clearParkingPosition();
 				mapActivity.getMapView().refreshMap();
@@ -410,7 +413,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		setParkingType(isLimited);
 		setParkingStartTime(Calendar.getInstance().getTimeInMillis());
 		if (parkingLayer != null) {
-			parkingLayer.setParkingPointOnLayer(new LatLon(latitude, longitude), isLimited);
+			parkingLayer.refresh();
 		}
 	}
 	
