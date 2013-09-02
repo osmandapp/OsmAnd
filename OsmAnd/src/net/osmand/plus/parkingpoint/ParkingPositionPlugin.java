@@ -50,7 +50,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public final static String PARKING_TIME = "parking_limit_time"; //$//$NON-NLS-1$
 	public final static String PARKING_START_TIME = "parking_time"; //$//$NON-NLS-1$
 	public final static String PARKING_EVENT_ADDED = "parking_event_added"; //$//$NON-NLS-1$
-	private OsmandApplication app;
+    private LatLon parkingPosition;
+    private OsmandApplication app;
 
 	private ParkingPositionLayer parkingLayer;
 	private BaseMapWidget parkingPlaceControl;
@@ -70,11 +71,12 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingEvent = set.registerBooleanPreference(PARKING_EVENT_ADDED, false).makeGlobal();
 		parkingTime = set.registerLongPreference(PARKING_TIME, -1).makeGlobal();
 		parkingStartTime = set.registerLongPreference(PARKING_START_TIME, -1).makeGlobal();
+        parkingPosition = constructParkingPosition();
 	}
 	
 	
 	
-	public LatLon getParkingPosition() {
+	public LatLon constructParkingPosition() {
 		float lat = parkingLat.get();
 		float lon = parkingLon.get();
 		if (lat == 0 && lon == 0) {
@@ -110,12 +112,14 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingTime.resetToDefault();
 		parkingEvent.resetToDefault();
 		parkingStartTime.resetToDefault();
+        parkingPosition = null;
 		return true;
 	}
 
 	public boolean setParkingPosition(double latitude, double longitude) {
 		parkingLat.set((float)latitude);
 		parkingLon.set((float)longitude);
+        parkingPosition = constructParkingPosition();
 		return true;
 	}
 	
@@ -194,13 +198,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			final double latitude, final double longitude,
 			ContextMenuAdapter adapter, Object selectedObj) {
 		boolean isParkingSelected = false;
-		LatLon parkingPosition = getParkingPosition();
-		if (selectedObj instanceof LatLon && parkingLayer != null && parkingPosition != null) {
-			LatLon point = (LatLon)selectedObj;	
-			if ((point.getLatitude() == parkingPosition.getLatitude()) && (point.getLongitude() == parkingPosition.getLongitude()))
-				isParkingSelected = true;
-		}
-		if (isParkingSelected) {
+		if (selectedObj == parkingPosition && parkingPosition != null) {
 			OnContextMenuClick removeListener = new OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int resId, int pos,
@@ -210,8 +208,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 					}
 				}
 			};
-			if (parkingPosition != null)
-				adapter.item(R.string.context_menu_item_delete_parking_point)
+			adapter.item(R.string.context_menu_item_delete_parking_point)
 				.icons( R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_light).listen(removeListener).position(0).reg();
 		}
 		
@@ -310,33 +307,34 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		setTime.setNegativeButton(R.string.default_buttons_cancel, null);
 		final TextView  textView = (TextView) setTimeParking.findViewById(R.id.parkTime);
 		final TimePicker timePicker = (TimePicker) setTimeParking.findViewById(R.id.parking_time_picker);
-		
+
 		timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
 			private static final int TIME_PICKER_INTERVAL = 5;
 			private boolean mIgnoreEvent = false;
-			private Calendar cal = Calendar.getInstance();
+            private Calendar cal = Calendar.getInstance();
+
 			
 			@Override
 			public void onTimeChanged(TimePicker timePicker, int hourOfDay, int minute) {
-		        if (mIgnoreEvent) {
-		            return;
-		        }
-		        if (minute%TIME_PICKER_INTERVAL != 0) {
-		            int minuteFloor=minute-(minute%TIME_PICKER_INTERVAL);
-		            minute=minuteFloor + (minute == minuteFloor + 1 ? TIME_PICKER_INTERVAL : 0);
-		            if (minute == 60) {
-		                minute = 0;
-		            }
-		            mIgnoreEvent = true;
-		            timePicker.setCurrentMinute(minute);
-		            mIgnoreEvent = false;
-		            long timeInMillis = cal.getTimeInMillis() + hourOfDay*60*60*1000+ minute*60*1000;
-		            textView.setText(mapActivity.getString(R.string.osmand_parking_position_description_add) 
-		            		+ " "+  parkingLayer.getFormattedTime(timeInMillis));
-		        }
+                if (mIgnoreEvent) {
+                    return;
+                }
+                if (minute % TIME_PICKER_INTERVAL != 0) {
+                    int minuteFloor = minute - (minute % TIME_PICKER_INTERVAL);
+                    minute = minuteFloor + (minute == minuteFloor + 1 ? TIME_PICKER_INTERVAL : 0);
+                    if (minute == 60) {
+                        minute = 0;
+                    }
+                    mIgnoreEvent = true;
+                    timePicker.setCurrentMinute(minute);
+                    mIgnoreEvent = false;
+                }
+                long timeInMillis = cal.getTimeInMillis() + hourOfDay * 60 * 60 * 1000 + minute * 60 * 1000;
+                textView.setText(mapActivity.getString(R.string.osmand_parking_position_description_add)
+                        + " " + parkingLayer.getFormattedTime(timeInMillis));
 
-		    }
-		});
+            }
+        });
 		
 		
 		//to set the same 24-hour or 12-hour mode as it is set in the device
@@ -349,11 +347,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			public void onClick(DialogInterface dialog, int which) {
 				choose.dismiss();
 				Calendar cal = Calendar.getInstance();
-				boolean is24HourFormat = DateFormat.is24HourFormat(app);
-				int hour = cal.get(is24HourFormat ? Calendar.HOUR_OF_DAY : Calendar.HOUR);
+				int hour = cal.get(Calendar.HOUR_OF_DAY );
 				int minute = cal.get(Calendar.MINUTE);
-				cal.set(is24HourFormat ? Calendar.HOUR_OF_DAY : Calendar.HOUR, hour + timePicker.getCurrentHour());
-				cal.set(Calendar.MINUTE, minute + timePicker.getCurrentMinute());
+                cal.add(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
+                cal.add(Calendar.MINUTE, timePicker.getCurrentMinute());
 				setParkingTime(cal.getTimeInMillis());
 				CheckBox addCalendarEvent = (CheckBox) setTimeParking.findViewById(R.id.check_event_in_calendar);
 				if (addCalendarEvent.isChecked()) {
@@ -419,19 +416,17 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
-		if (parkingLayer != null) {
-			if (getParkingPosition() != null) {
-				helper.item(R.string.osmand_parking_delete)
-					.icons( R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_light).listen(new OnContextMenuClick() {
-					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						showDeleteDialog(mapActivity);
-					}
+		if (parkingLayer != null && parkingPosition != null) {
+            helper.item(R.string.osmand_parking_delete)
+                    .icons(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_light).listen(new OnContextMenuClick() {
+                @Override
+                public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+                    showDeleteDialog(mapActivity);
+                }
 
-				}).reg();
-			}
-		}
-	}
+            }).reg();
+        }
+    }
 	
 	/**
 	 * @return the control to be added on a MapInfoLayer 
@@ -496,7 +491,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			public void onClick(View v) {
 				OsmandMapTileView view = map.getMapView();
 				AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
-				LatLon parkingPoint = getParkingPosition();
+				LatLon parkingPoint = parkingPosition;
 				if (parkingPoint != null) {
 					float fZoom = view.getFloatZoom() < 15 ? 15 : view.getFloatZoom();
 					thread.startMoving(parkingPoint.getLatitude(), parkingPoint.getLongitude(), fZoom, true);
