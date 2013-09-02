@@ -307,6 +307,27 @@ public class OsmMapUtils {
 		}
 	}
 
+    /**
+     * Get the area in pixels
+     * @param nodes
+     * @return
+     */
+    public static double polygonAreaPixels(List<Node> nodes, int zoom) {
+        double area = 0.;
+        double mult = 1 / MapUtils.getPowZoom(Math.max(31 - (zoom + 8), 0));
+        int j = nodes.size() - 1;
+        for (int i = 0; i < nodes.size(); i++) {
+            Node x = nodes.get(i);
+            Node y = nodes.get(j);
+            if(x != null && y != null) {
+            area += (MapUtils.get31TileNumberX(y.getLongitude()) + (double)MapUtils.get31TileNumberX(x.getLongitude()))*
+                    (MapUtils.get31TileNumberY(y.getLatitude()) - (double)MapUtils.get31TileNumberY(x.getLatitude()));
+            }
+            j = i;
+        }
+        return Math.abs(area) * mult * mult * .5;
+    }
+
 	/**
 	 * Get the area (in m²) of a closed way, represented as a list of nodes
 	 * 
