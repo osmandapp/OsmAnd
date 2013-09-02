@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
@@ -1220,7 +1220,7 @@ Pomembnejše lastnosti:
     <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z opombo, še ni določeno. Uporabite \"Uporabi mesto …\" za dodelitev opombe za določeno mesto</string>
     <string name="srtm_paid_version_msg">Prosimo, razmislite o nakupu vtičnika Izohipse v trgovini Market, da bi tako podprli nadaljnji razvoj.</string>
     <string name="srtm_paid_version_title">Vtičnik Izohipse</string>
-    <string name="animate_routing_using_gpx">Ali želite uporabiti obstoječo GPX datoteko?</string>
+    <string name="animate_routing_using_gpx">Odpreti in slediti posneto GPX pot?</string>
     <string name="intermediate_points_change_order">Spremeni vrstni red</string>
     <string name="dropbox_plugin_description">Vtičnik Dropbox omogoča sinhronizacijo datotek sledi in video/zvočnih posnetkov z vašim dropbox uporabniškim računom.</string>
     <string name="dropbox_plugin_name">Vtičnik Dropbox</string>
