@@ -939,7 +939,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				viewName.setTextColor(defaultColor);
 			} else {
 				//viewName.setTextColor(defaultColor);
-				viewName.setTextColor(#808080);
+				viewName.setTextColor(0xff808080);
 			}
 			if (child.getSize() >= 0) {
 				String size;
