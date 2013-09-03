@@ -999,7 +999,7 @@
     <string name="recording_context_menu_precord">Сфотографувати</string>
     <string name="dropbox_plugin_description">Втулок Dropbox дає можливість синхронізувати треки і відео/аудіо замітки з вашим обліковим записом dropbox.</string>
     <string name="dropbox_plugin_name">Втулок Dropbox</string>
-    <string name="animate_routing_using_gpx">Використовувати існуючий файл GPX для навігації?</string>
+    <string name="animate_routing_using_gpx">Відкрити існуючий файл GPX?</string>
     <string name="intermediate_points_change_order">Змінити порядок</string>
     <string name="srtm_paid_version_msg">Розгляньте будь ласка можливість придбання втулку «Ізолінії висот» на Маркеті, це підтримає його подальшу розробку.</string>
     <string name="srtm_paid_version_title">Втулок Ізолінії висот</string>
