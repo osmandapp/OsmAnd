@@ -943,6 +943,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			} else {
 				viewName.setTextColor(defaultColor);
 				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+				if (child.isBackupedData()) {
+					viewName.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+				{
 			}
 			if (child.getSize() >= 0) {
 				String size;
