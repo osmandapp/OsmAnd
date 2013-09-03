@@ -931,8 +931,10 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			viewName.setText(child.getName());
 			if (child.isNotSupported()) {
 				viewName.setTextColor(warningColor);
+				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else if (child.isCorrupted()) {
 				viewName.setTextColor(corruptedColor);
+				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else if (child.isLoaded()) {
 				// users confused okColor here with "uptodate", so let's leave white (black in dark app theme) as "isLoaded"
 				//viewName.setTextColor(okColor);
@@ -940,6 +942,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				viewName.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
 			} else {
 				viewName.setTextColor(defaultColor);
+				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			}
 			if (child.getSize() >= 0) {
 				String size;
