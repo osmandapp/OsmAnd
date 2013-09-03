@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>    
-<string name="recording_context_menu_show">عرضإظهار</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="recording_context_menu_show">عرضإظهار</string>
     <string name="av_def_action_picture">التقاط صورةالتقاط صورة</string>
     <string name="animate_routing_using_gpx">هل تريد استخدام ملف GPX القائمة؟</string>
     <string name="av_def_action_video">تسجيل الفيديو</string>
@@ -195,4 +195,5 @@
 	<string name="north_west">الشمال الغربي</string>
 	<string name="north_north_west">الشمال والشمال الغربي</string>
 	<string name="front">جبهة</string>
+	<string name="tip_map_styles">خريطة الأنماط</string>
 	</resources>
