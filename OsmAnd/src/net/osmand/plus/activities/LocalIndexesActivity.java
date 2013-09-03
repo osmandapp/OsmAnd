@@ -805,7 +805,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		public LocalIndexesAdapter(Context ctx) {
 			warningColor = ctx.getResources().getColor(R.color.color_warning);
 			okColor = ctx.getResources().getColor(R.color.color_ok);
-			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorSecondary});
+			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 			defaultColor = ta.getColor(0, ctx.getResources().getColor(R.color.color_unknown));
 			ta.recycle();
 			corruptedColor = ctx.getResources().getColor(R.color.color_invalid);
