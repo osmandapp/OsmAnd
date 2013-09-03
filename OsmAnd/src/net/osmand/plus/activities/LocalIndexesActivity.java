@@ -934,7 +934,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			} else if (child.isCorrupted()) {
 				viewName.setTextColor(corruptedColor);
 			} else if (child.isLoaded()) {
-				viewName.setTextColor(okColor);
+				// user confused okColor here with "uptodate", so let's leave white (black in dark app theme as "isLoaded")
+				//viewName.setTextColor(okColor);
 			} else {
 				viewName.setTextColor(defaultColor);
 			}
