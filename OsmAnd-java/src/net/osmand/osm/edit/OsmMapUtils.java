@@ -123,7 +123,17 @@ public class OsmMapUtils {
 		}
 	}
 
-	public static void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, List<Node> result) {
+    public static boolean ccw(Node A, Node B, Node C) {
+        return (C.getLatitude()-A.getLatitude()) * (B.getLongitude()-A.getLongitude()) > (B.getLongitude()-A.getLongitude()) *
+                (C.getLatitude()-A.getLatitude());
+    }
+
+    // Return true if line segments AB and CD intersect
+    public static boolean intersect2Segments(Node A, Node B, Node C, Node D) {
+        return ccw(A, C, D) != ccw(B, C, D) && ccw(A, B, C) != ccw(A, B, D);
+    }
+
+	public static void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, List<Node> result, boolean avoidNooses) {
 		if (zoom > 31) {
 			zoom = 31;
 		}
@@ -165,7 +175,7 @@ public class OsmMapUtils {
 		if (last - first < 1) {
 			return;
 		}
-		simplifyDouglasPeucker(n, zoom, epsilon, l, first, last);
+		simplifyDouglasPeucker(n, zoom, epsilon, l, first, last, avoidNooses);
 		result.add(n.get(first));
 		int lsize = l.size();
 		for (int i = 0; i < lsize; i++) {
@@ -176,7 +186,8 @@ public class OsmMapUtils {
 		}
 	}
 
-	private static void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, List<Integer> ints, int start, int end) {
+	private static void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, List<Integer> ints,
+                                               int start, int end, boolean avoidNooses) {
 		double dmax = -1;
 		int index = -1;
 		for (int i = start + 1; i <= end - 1; i++) {
@@ -189,9 +200,29 @@ public class OsmMapUtils {
 				index = i;
 			}
 		}
-		if (dmax >= epsilon) {
-			simplifyDouglasPeucker(n, zoom, epsilon, ints, start, index);
-			simplifyDouglasPeucker(n, zoom, epsilon, ints, index, end);
+        boolean nooseFound = false;
+        if(avoidNooses) {
+            Node st = n.get(start);
+            Node e = n.get(end);
+            for(int i = 0; i < n.size() - 1; i++) {
+                if(i == start) {
+                    i = end - 1;
+                    continue;
+                }
+                Node np = n.get(i);
+                Node np2 = n.get(i + 1);
+                if(np == null || np2 == null) {
+                    continue;
+                }
+                if (OsmMapUtils.intersect2Segments(st, e, np, np2)) {
+                    nooseFound = true;
+                    break;
+                }
+            }
+        }
+		if (dmax >= epsilon || nooseFound) {
+			simplifyDouglasPeucker(n, zoom, epsilon, ints, start, index, avoidNooses);
+			simplifyDouglasPeucker(n, zoom, epsilon, ints, index, end, avoidNooses);
 		} else {
 			ints.add(end);
 		}

@@ -253,7 +253,14 @@ public class OsmBaseStorage extends DefaultHandler {
 			}
 		}
 		super.endElement(uri, localName, name);
-	}
+    }
+
+    public void registerEntity(Entity entity, EntityInfo info) {
+        entities.put(EntityId.valueOf(entity), entity);
+        if (info != null) {
+            entityInfo.put(EntityId.valueOf(entity), info);
+        }
+    }
 	
 	
 	protected boolean acceptEntityToLoad(EntityId entityId, Entity entity) {
