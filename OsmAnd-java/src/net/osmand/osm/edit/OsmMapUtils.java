@@ -1,13 +1,15 @@
 package net.osmand.osm.edit;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
 
+import net.osmand.IProgress;
 import net.osmand.data.LatLon;
+import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.util.MapUtils;
+import org.xml.sax.SAXException;
 
 public class OsmMapUtils {
 
@@ -124,8 +126,8 @@ public class OsmMapUtils {
 	}
 
     public static boolean ccw(Node A, Node B, Node C) {
-        return (C.getLatitude()-A.getLatitude()) * (B.getLongitude()-A.getLongitude()) > (B.getLongitude()-A.getLongitude()) *
-                (C.getLatitude()-A.getLatitude());
+        return (C.getLatitude()-A.getLatitude()) * (B.getLongitude()-A.getLongitude()) > (B.getLatitude()-A.getLatitude()) *
+                (C.getLongitude()-A.getLongitude());
     }
 
     // Return true if line segments AB and CD intersect
@@ -201,12 +203,12 @@ public class OsmMapUtils {
 			}
 		}
         boolean nooseFound = false;
-        if(avoidNooses) {
+        if(avoidNooses && index >= 0) {
             Node st = n.get(start);
             Node e = n.get(end);
             for(int i = 0; i < n.size() - 1; i++) {
-                if(i == start) {
-                    i = end - 1;
+                if(i == start - 1) {
+                    i = end;
                     continue;
                 }
                 Node np = n.get(i);
@@ -220,7 +222,7 @@ public class OsmMapUtils {
                 }
             }
         }
-		if (dmax >= epsilon || nooseFound) {
+		if (dmax >= epsilon || nooseFound ) {
 			simplifyDouglasPeucker(n, zoom, epsilon, ints, start, index, avoidNooses);
 			simplifyDouglasPeucker(n, zoom, epsilon, ints, index, end, avoidNooses);
 		} else {
