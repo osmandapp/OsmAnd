@@ -202,6 +202,9 @@ public class GeoIntentActivity extends OsmandListActivity {
 	private MyService extract(Uri data) {
 		if ("http".equalsIgnoreCase(data.getScheme()) && "maps.google.com".equals(data.getHost())) {
 			String q = data.getQueryParameter("q").split(" ")[0];
+			if (q.indexOf(',') == -1) {
+        		   q = data.getQueryParameter("daddr").split(" ")[0];
+            		}
 			if (q.indexOf(',') != -1) {
 				int i = q.indexOf(',');
 				String lat = q.substring(0, i);
