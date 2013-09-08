@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="tip_map_styles">Kartendarstellung</string>
 	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten für verschiedene Verwendungszwecke optimiert dartsellen:
 		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' → \'Anzeige konfigurieren\' → \'Map Style\' → \'Kartendarstellung\' zum Beispiel auswählen:
@@ -367,9 +367,9 @@
 	<string name="tip_navigation">Navigation starten</string>
 	<string name="tip_navigation_t">Die Route zu einem Ziel erhält man entweder durch direktes lang-anklicken eines Punktes in der Karte, (dann Kurzklick auf den Positionsmarker und das Auswählen des Menüpunktes \'Navigiere zu\'), oder über die Funktion \'Navigation\' bei Klick auf ein Ergebnis einer Such-Liste oder einen Favoriten.
 		\n\nDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.
-		\n\nSie können einer Route entweder \'Folgen\', was eine Live-Navigation mit Sprachansagen (falls konfiguriert) startet, oder Sie können \'Route nur anzeigen\' wählen, was eine statische Route ohne Anpassungen bei Positionsveränderung erzeugt.
+		\n\nDie Option \'Navigation starten\' beginnt eine Live-Navigation mit Sprachansagen (falls konfiguriert), \'Route nur anzeigen\' zeigt eine statische Route ohne Anpassungen bei Positionsveränderung.
 		\n\nDie Route zu einem gewählten Ziel von einem anderen Punkt als dem gegenwärtigen Standort aus kann angezeigt werden durch Klick auf den gewünschten Ausgangspunkt und dann Auswahl der \'Verwende Position\'-Kontextmenüoption \'Navigiere von\'.
-		\n\nVerwenden Sie \'Navigiere von\' zusammen mit der Option \'Folgen\', wird OsmAnd auf die aktuele Position umschalten sobald sie gefunden ist, dies kann also verwendet werden, um eine Route bereits anzeigen zu lassen bevor GPS die eigene Position gefunden hat. Mit der Option \'Route nur anzeigen\' kann eine (statische) Route jederzeit von jedem beliebigen Standort aus berechnet werden.
+		\n\nVerwenden Sie \'Navigiere von\' zusammen mit der Option \'Navigation starten\', wird OsmAnd auf die aktuelle Position umschalten, sobald sie gefunden ist. Dies kann also verwendet werden, um eine Route bereits anzeigen zu lassen bevor GPS die eigene Position gefunden hat. Mit der Option \'Route nur anzeigen\' hingegen kann man sich eine (statische) Route von jedem beliebigen Standort aus zeigen lassen.
 	</string>
 	<string name="tip_recent_changes_0_6_9_t">Änderungen in 0.6.9:
 		\n\t- Verbesserte Offline-Kartenanzeige 
