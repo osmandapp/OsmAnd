@@ -190,7 +190,9 @@
   <string name="tip_navigation">Nawigacja</string>
   <string name="tip_navigation_t">W celu wyznaczenia trasy do miejsca, kliknij na nie na mapie, (a następnie wybierz \'Trasa do tego miejsca\'), lub wybierz \'Nawigacja\' po wybraniu dowolnego wpisu w liście wyników wyszukiwania lub liści Ulubionych.↵
 		\n\nCel oznaczony jest na mapie jako pomarańczowy znacznik flagi i OsmAnd wyświetla odległość do niego oraz kierunek do niego (pomarańczowy trójkąt).
-		\n\nAby pokazać trasę do celu z każdego innego miejsca niż aktualna pozycja zaznacz miejsce i wybierz \'Trasa z tego miejsca \'.
+		\n\nMożesz wybrać opcję \'Uruchom nawigację\', co oznacza, że OsmAnd będzie poprowadzić Cię, dając instrukcje głosowe (jeśli są włączone), itp. Można też wybrać \'Tylko pokaż'\ w celu wyświetlenia trasy bez możliwości nawigowania.
+		\n\nAby wyświetlić trasę do wybranego celu z każdego innego miejsca niż aktualna pozycja, wybierz punkt początkowy na mapie i Wybierz \'Dojazd z \'.
+		\n\nJeśli wybierzesz \'Dojazd z \' oraz \'Nawiguj\' OsmAnd przełączy się do Twojej aktualnej pozycji, jak tylko zostanie znaleziona, natomiast \'Dojazd z \' w połączeniu z trasy \'Tylko pokaż\' tylko pokazuje trasę bez aktualizacji położenia na trasie.
 	</string>
   <string name="tip_search">Wyszukiwanie</string>
   <string name="tip_search_t">Możesz wyszukać miejsca bezpośrednio na mapie poprzez \'Użyj lokalizacji...\' → \'Szukaj w pobliżu tutaj\', lub wywołując ekran wyszukiwania poprzez \'Menu\' → \'Szukaj\'.↵
