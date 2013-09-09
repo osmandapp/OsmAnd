@@ -491,8 +491,8 @@
   <string name="fav_points_edited">Ulubiony punkt został zmieniony</string>
   <string name="fav_points_not_exist">Brak ulubionych</string>
   <string name="update_existing">Zamień</string>
-  <string name="only_show">Tylko pokaż</string>
-  <string name="follow">Nawiguj</string>
+  <string name="only_show">Pokaż trasę</string>
+  <string name="follow">Rozpocznij nawigację</string>
   <string name="recalculate_route_to_your_location">Środek transportu:</string>
   <string name="mark_final_location_first">Najpierw wybierz cel podróży</string>
   <string name="get_directions">Nawigacja</string>
