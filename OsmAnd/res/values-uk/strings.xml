@@ -704,8 +704,8 @@
   <string name="fav_points_edited">Збережена точка була змінена</string>
   <string name="fav_points_not_exist">Не існує збережених точок</string>
   <string name="update_existing">Замінити</string>
-  <string name="only_show">Тільки показати</string>
-  <string name="follow">Слідувати</string>
+  <string name="only_show">Показати шлях</string>
+  <string name="follow">Стартувати</string>
   <string name="recalculate_route_to_your_location">Режим пересування:</string>
   <string name="mark_final_location_first">Вкажіть пункт призначення</string>
   <string name="get_directions">Маршрут</string>
