@@ -1285,4 +1285,5 @@
     <string name="edit_tilesource_name">Название</string>
     <string name="map_widget_fps_info">Отладочная информация FPS </string>
 	<string name="about_settings">О программе</string>
+    <string name="about_settings_descr">Информация о версии, участниках проекта</string>
     </resources>
