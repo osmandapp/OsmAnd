@@ -1280,4 +1280,5 @@
     <string name="local_index_tile_data_maxzoom">Максимальное увеличение: %1$s</string>
     <string name="edit_tilesource_successfully">Источник таTilesource %1$s is successfully saved</string>
     <string name="edit_tilesource_maxzoom">Максимальное увеличение</string>
+    <string name="edit_tilesource_minzoom">Минимальное увеличение</string>
     </resources>
