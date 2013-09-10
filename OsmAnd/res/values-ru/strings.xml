@@ -1287,4 +1287,5 @@
 	<string name="about_settings">О программе</string>
     <string name="about_settings_descr">Информация о версии, участниках проекта</string>
     <string name="tips_and_tricks">Советы</string>
+    <string name="local_index_tile_data_zooms">Загружено данных по масштабам: %1$s</string>
     </resources>
