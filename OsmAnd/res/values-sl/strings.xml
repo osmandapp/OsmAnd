@@ -559,8 +559,8 @@
 	<string name="local_index_gpx_info_elevation">\nPovprečna višina: %1$s\nNajmanjša višina: %2$s\nNajvečja višina: %3$s\nDvig: %4$s\nSpust: %5$s</string>
 	<string name="phone">Telefon</string>
 	<string name="get_directions">Navigacija</string>
-	<string name="follow">Začni</string>
-	<string name="only_show">Samo prikaži</string>
+	<string name="follow">Začni navigacijo</string>
+	<string name="only_show">Prikaži pot</string>
 	<string name="update_existing">Zamenjaj</string>
 	<string name="send_location">Pošlji mesto</string>
 	<string name="amenity_type_transportation">Prevoz</string>
