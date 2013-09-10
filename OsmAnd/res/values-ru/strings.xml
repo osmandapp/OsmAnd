@@ -1283,4 +1283,5 @@
     <string name="edit_tilesource_minzoom">Минимальное увеличение</string>
     <string name="edit_tilesource_url_to_load">Адрес:</string>
     <string name="edit_tilesource_name">Название</string>
-    </resources>
+    <string name="map_widget_fps_info">Отладочная информация FPS </string>
+	</resources>
