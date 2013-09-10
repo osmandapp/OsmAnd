@@ -1286,4 +1286,5 @@
     <string name="map_widget_fps_info">Отладочная информация FPS </string>
 	<string name="about_settings">О программе</string>
     <string name="about_settings_descr">Информация о версии, участниках проекта</string>
+    <string name="tips_and_tricks">Советы</string>
     </resources>
