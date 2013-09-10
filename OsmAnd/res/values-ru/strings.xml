@@ -1282,4 +1282,5 @@
     <string name="edit_tilesource_maxzoom">Максимальное увеличение</string>
     <string name="edit_tilesource_minzoom">Минимальное увеличение</string>
     <string name="edit_tilesource_url_to_load">Адрес:</string>
+    <string name="edit_tilesource_name">Название</string>
     </resources>
