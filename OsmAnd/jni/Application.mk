@@ -6,9 +6,8 @@ APP_CPPFLAGS := -std=c++11 -fexceptions -frtti
 # else
     # NDK_TOOLCHAIN_VERSION := 4.7
 # endif
-NDK_TOOLCHAIN_VERSION := clang
-LOCAL_CPPFLAGS += -std=c++1y
--std=c++11
+NDK_TOOLCHAIN_VERSION := clang3.3
+
 
 APP_ABI :=
 ifneq ($(filter x86,$(OSMAND_ARCHITECTURES_SET)),)
