@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
@@ -75,7 +75,7 @@
   <string name="unknown_location">Posisie is nog nie bekend nie</string>
   <string name="modify_transparency">Verander deursigtigheid (0 - Deursigtig, 255 - Solied)</string>
   <string name="confirm_interrupt_download">Wil jy die aflaai van die dokument onderbreek?</string>
-  <string name="first_time_msg">Om die belangrikste funksies van hierdie toepassing te gebruik, benodig jy sommige streeksverwante van-lyn-af inligting, wat jy kan aflaai (gebruik Stellings, Aflyn inligting). Daarna sal jy kan soek na adresse, POIs en publieke vervoer.</string>
+  <string name="first_time_msg">Om die belangrikste funksies van hierdie toepassing te gebruik, benodig jy sommige streeksverwante van-lyn-af inligting, wat jy kan aflaai (gebruik \'Stellings\'→\'Aflyn inligting\'). Daarna sal jy kan soek na adresse, POIs en publieke vervoer.</string>
   <string name="basemap_was_selected_to_download">`n Basiskaart is nodig vir die toepassing om behoorlik te werk, en was gemerk om af te laai.</string>
   <string name="select_index_file_to_download">Niks gevind nie. As jy nie jou streek kan vind nie, kan jy dit self maak (besoek http://osmand.net).</string>
   <string name="local_indexes_cat_tile">Internet kaarte (teëls)</string>
@@ -247,7 +247,9 @@
   <string name="osmand_service_descr">Gebruik om OsmAnd aan te hou terwyl skerm af is</string>
   <string name="tip_rotation_switching">Kaart oriëntasie</string>
   
-  <string name="binary_map_download_success">Aflaai suksesvol.\n\t\n\tOm te gebruik aktiveer \'Keuselys\' -&gt; \'Kaarte\'-&gt; \'Kaart bron\' -&gt; \'aflyn vektor kaarte.</string>
+  <string name="binary_map_download_success">Aflaai suksesvol.
+\n\t\n\tOm te gebruik aktiveer \'Keuselys\' -&gt; \'Kaarte\'-&gt; \'Kaart bron\' -&gt; \'aflyn vektor kaarte.
+	</string>
   <string name="tip_day_night_mode">Dag/nag gebruikswyse</string>
   
   <string name="tip_osm_improve">Verbetering van OSM inligting</string>
@@ -400,7 +402,8 @@
   <string name="internet_not_available">Internet verbinding benodig vir bewerking is nie beskikbaar nie</string>
   <string name="install_more">Installeer meer…</string>
   <string name="tip_update_index">Opgradeer aflyn kaarte</string>
-  <string name="tip_update_index_t">\tDie nuutste kaart inligting is noodsaaklik vir aflyn kaart besigtiging en PVB/adres soek. OsmAnd bied `n aflaaibestuurder wat kan kyk virr beskikbare aflyn inligting opgraderings.\n\tOm te kyk vir opgraderings gaan na \'Stellings\' -&gt; \'Aflyn inligting\' -&gt; \'Laai aflyn inligting af\'. Na streek lys van die internet verkry is, kan jy keuse \'Kieslys\' -&gt; \'Filter afgelaai\' kies om te beperk tot inligting reeds op jou selfoon.\n\tDie beskikbaarheid van bywerkings word uitgebeeld deur die volgende kleure:\n\t\'Groen \'- dui inligting-lêers identies op apparaat en internet\n\t\'Blou - dui beskikbare bywerkings op internet</string>
+  <string name="tip_update_index_t">\tDie nuutste kaart inligting is noodsaaklik vir aflyn kaart besigtiging en PVB/adres soek. OsmAnd bied `n aflaaibestuurder wat kan kyk virr beskikbare aflyn inligting opgraderings.\n\tOm te kyk vir opgraderings gaan na \'Stellings\' -&gt; \'Aflyn inligting\' -&gt; \'Laai aflyn inligting af\'. Na streek lys van die internet verkry is, kan jy keuse \'Kieslys\' -&gt; \'Filter afgelaai\' kies om te beperk tot inligting reeds op jou selfoon.\n\tDie beskikbaarheid van bywerkings word uitgebeeld deur die volgende kleure:\n\n\t\'Groen \'- dui inligting-lêers identies op apparaat en internet\n\t\'Blou - dui beskikbare bywerkings op internet
+	</string>
   <string name="level_to_switch_vector_raster_descr">Minimum vergroting vlak om vektor kaarte te gebruik</string>
   <string name="level_to_switch_vector_raster">Minimum vektor vergroting vlak</string>
   <string name="tip_location_sharing">Ligging deel</string>
@@ -998,14 +1001,15 @@
 	<string name="live_monitoring_mode_off">Begin↵\nlewende spoor-natrek</string>
 	<string name="live_monitoring_mode_on">Stop↵\nlewende spoor-natrek</string>
 	<string name="monitoring_mode_on">Stop↵\nGPX opname.</string>
-	<string name="tip_rotation_switching_t_v2">"→Jy kan stel hoe die kaart draai deur die kompasnaald links bo op die skerm te tik. ↵\n→Die keuses is: ↵\n→\'Moet nie draai nie (noord is bo)\' - Kaart sal nie draai nie. Noord sal altyd bo wees ↵\n→\'Koers\' - Kaart sal heeltyd gerig word in jou koers ↵\n→\'Kompas\' -Kaart sal heeltyd gerig word met die kompas lesing "</string>
-	<string name="tip_day_night_mode_t_v2">"\tDie kaart voorkoms kan vir aflyn vektor kaarte verander word tussen dag (helder) en nag (dof).
-\n\tNag kleure is veiliger vir nagbestuur. \t\n\tJy kan `n beleid opstel vir dag/nag oorskakeling in \'Keuselys\' -&gt; \'Verstel skerm\' -&gt;\'Dag/nag kaart\'.
-\n\tKeuses is:
-\n\t\'Sonopkoms/Sonondergang\' - outomaties, beheer deur die posisie van die son (verstek)
-\n\t\'Dag\' - altyd dag kleure
-\n\t\'Nag\' - altyd nag kleure
-\n\t\'Ligsensor\' - Beheer deur toestel se ligsensor (indien beskikbaar) "
+	<string name="tip_rotation_switching_t_v2">"→Jy kan stel hoe die kaart draai deur die kompasnaald links bo op die skerm te tik. ↵\n\n→Die keuses is: ↵\n→\'Moet nie draai nie (noord is bo)\' - Kaart sal nie draai nie. Noord sal altyd bo wees ↵\n→\'Koers\' - Kaart sal heeltyd gerig word in jou koers ↵\n→\'Kompas\' -Kaart sal heeltyd gerig word met die kompas lesing "
+	</string>
+	<string name="tip_day_night_mode_t_v2">"\tDie kaart voorkoms kan vir aflyn vektor kaarte verander word tussen dag (helder) en nag (dof). Nag kleure is veiliger vir nagbestuur. 
+		\n\nJy kan `n beleid opstel vir dag/nag oorskakeling in \'Keuselys\' → \'Verstel skerm\' →\'Dag/nag kaart\'.
+		\n\nKeuses is:
+		\n\t* \'Sonopkoms/Sonondergang\' - outomaties, beheer deur die posisie van die son (verstek)
+		\n\t* \'Dag\' - altyd dag kleure
+		\n\t* \'Nag\' - altyd nag kleure
+		\n\t* \'Ligsensor\' - Beheer deur toestel se ligsensor (indien beskikbaar) "
 	</string>	
 	<string name="tip_map_switch_t_v2">"→Die kaart bron en lae vertoon word verander in \'Keuselys\' -&gt; \'Kaarte\' in kaart vertoon. ↵\n→Onder \'Kaart bron…\' kan jy kies tussen die gebruik van voorafgelaaide aflyn vektor kaarte, voorafgedefinieërde (aanlyn) teël bronne (aktiveer die \'aanlyn en teël kaarte\' inlasmodule hiervoor), of kaarte met die hand geskep met bv. OsmAndMapCreator op `n rekenaar. ↵\n→OsmAnd ondersteun ook persoonlike bronne. "
 	</string>
@@ -1147,7 +1151,8 @@
     </string>
     <string name="support_new_features_descr">Maak donasies om die implementering van nuwe funksies in die toepassing moontlik te maak</string>
 	<string name="incomplete_locale">Onvolledig</string>
-    <string name="tip_altitude_offset_t">"\tMeeste GPS toestelle gee hoogte-metings in die ellipsoide-gebaseerde WGS84 verwysingstelsel, waarvan die omskakeling na plaaslik gebruikte stelsels `n posisie-afhanklike regstelling benodig.\n\t`n Beter benadering na hierdie plaaslike stelsels, is die EGM96 verwysing. OSMAnd ondersteun nou ook die outomatiese aanduiding van hoogtes in die EGM96 stelsel.\n\tOm dit te kan gebruik, laai die lêer WW15MGH.DAC af onder Inligting Bestuur (of by http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    <string name="tip_altitude_offset_t">"\tMeeste GPS toestelle gee hoogte-metings in die ellipsoide-gebaseerde WGS84 verwysingstelsel, waarvan die omskakeling na plaaslik gebruikte stelsels `n posisie-afhanklike regstelling benodig.\n\n\t`n Beter benadering na hierdie plaaslike stelsels, is die EGM96 verwysing. OSMAnd ondersteun nou ook die outomatiese aanduiding van hoogtes in die EGM96 stelsel.\n\n\tOm dit te kan gebruik, laai die lêer WW15MGH.DAC af onder Inligting Bestuur (of by http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "
+	</string>
     <string name="save_current_track_widget">Berg\n huidige GPX spoor</string>
 	<string name="layer_hillshade">Heuwelskadu-vel</string>
     <string name="map_widget_gps_info">GPS inligting</string>
