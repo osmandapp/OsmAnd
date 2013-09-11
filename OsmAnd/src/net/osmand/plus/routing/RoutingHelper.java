@@ -650,7 +650,7 @@ public class RoutingHelper {
 			String nm = rs.getObject().getName();
 			String rf = rs.getObject().getRef();
 			String dn = rs.getObject().getDestinationName();
-			return "\u2551 " + formatStreetName(nm, rf, dn);
+			return "\u21E7 " + formatStreetName(nm, rf, dn);
 		}
 		return null;
 	}

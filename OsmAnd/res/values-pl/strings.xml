@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="tip_select_destination_point">Uzyskiwanie informacji o trasie</string>
   <string name="tip_select_destination_point_t">"\tTrasę przejazdu do wybranego punktu możesz zobaczyć bezpośrednio na mapie (menu kontekstowe, następnie \'Trasa\'), podczas wyszukiwania lub po długim naciśnięciu na wpis z listy ulubionych punktów.
 \n\tPunkt docelowy oznaczony jest pomarańczową flagą na mapie. OsmAnd wyświetla odległość i kierunek do niej (pomarańczowy trójkąt). "</string>
@@ -190,7 +190,7 @@
   <string name="tip_navigation">Nawigacja</string>
   <string name="tip_navigation_t">W celu wyznaczenia trasy do miejsca, kliknij na nie na mapie, (a następnie wybierz \'Trasa do tego miejsca\'), lub wybierz \'Nawigacja\' po wybraniu dowolnego wpisu w liście wyników wyszukiwania lub liści Ulubionych.↵
 		\n\nCel oznaczony jest na mapie jako pomarańczowy znacznik flagi i OsmAnd wyświetla odległość do niego oraz kierunek do niego (pomarańczowy trójkąt).
-		\n\nMożesz wybrać opcję \'Uruchom nawigację\', co oznacza, że OsmAnd będzie poprowadzić Cię, dając instrukcje głosowe (jeśli są włączone), itp. Można też wybrać \'Tylko pokaż'\ w celu wyświetlenia trasy bez możliwości nawigowania.
+		\n\nMożesz wybrać opcję \'Uruchom nawigację\', co oznacza, że OsmAnd będzie poprowadzić Cię, dając instrukcje głosowe (jeśli są włączone), itp. Można też wybrać \'Tylko pokaż\'\ w celu wyświetlenia trasy bez możliwości nawigowania.
 		\n\nAby wyświetlić trasę do wybranego celu z każdego innego miejsca niż aktualna pozycja, wybierz punkt początkowy na mapie i Wybierz \'Dojazd z \'.
 		\n\nJeśli wybierzesz \'Dojazd z \' oraz \'Nawiguj\' OsmAnd przełączy się do Twojej aktualnej pozycji, jak tylko zostanie znaleziona, natomiast \'Dojazd z \' w połączeniu z trasy \'Tylko pokaż\' tylko pokazuje trasę bez aktualizacji położenia na trasie.
 	</string>
