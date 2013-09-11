@@ -7,10 +7,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -28,6 +25,7 @@ import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RouteData;
 import net.osmand.util.MapUtils;
 
+import net.osmand.util.OpeningHoursParser;
 import org.apache.commons.logging.Log;
 
 import com.google.protobuf.CodedInputStream;
@@ -37,6 +35,14 @@ import com.google.protobuf.WireFormat;
 public class BinaryMapRouteReaderAdapter {
 	protected static final Log LOG = PlatformUtil.getLog(BinaryMapRouteReaderAdapter.class);
 	private static final int SHIFT_COORDINATES = 4;
+
+    private static class RouteTypeCondition {
+
+        String condition = "";
+        OpeningHoursParser.OpeningHours hours = null;
+        int intValue;
+        float floatValue;
+    }
 	
 	public static class RouteTypeRule {
 		private final static int ACCESS = 1;
@@ -52,6 +58,7 @@ public class BinaryMapRouteReaderAdapter {
 		private int intValue;
 		private float floatValue;
 		private int type;
+        private List<RouteTypeCondition> conditions = null;
 
 		public RouteTypeRule(String t, String v) {
 			this.t = t.intern();
@@ -80,6 +87,10 @@ public class BinaryMapRouteReaderAdapter {
 		public int getType() {
 			return type;
 		}
+
+        public boolean conditional() {
+            return conditions != null;
+        }
 		
 		public int onewayDirection(){
 			if(type == ONEWAY){
@@ -90,6 +101,15 @@ public class BinaryMapRouteReaderAdapter {
 		
 		public float maxSpeed(){
 			if(type == MAXSPEED){
+                if(conditions != null) {
+                    Calendar i = Calendar.getInstance();
+                    i.setTimeInMillis(System.currentTimeMillis());
+                    for(RouteTypeCondition c : conditions) {
+                        if(c.hours != null && c.hours.isOpenedForTime(i)) {
+                            return c.floatValue;
+                        }
+                    }
+                }
 				return floatValue;
 			}
 			return -1;
@@ -131,25 +151,26 @@ public class BinaryMapRouteReaderAdapter {
 				type = HIGHWAY_TYPE;
 			} else if(t.startsWith("access") && v != null){
 				type = ACCESS;
+            } else if(t.equalsIgnoreCase("maxspeed:conditional") && v != null){
+                conditions = new ArrayList<RouteTypeCondition>();
+                String[] cts = v.split(";");
+                for(String c : cts) {
+                    int ch = c.indexOf('@');
+                    if(ch > 0) {
+                        RouteTypeCondition cond = new RouteTypeCondition();
+                        cond.floatValue = parseMaxSpeed(c.substring(ch));
+                        cond.condition = c.substring(ch + 1).trim();
+                        if(cond.condition.startsWith("(") && cond.condition.endsWith(")")) {
+                            cond.condition = cond.condition.substring(1, cond.condition.length() - 1).trim();
+                        }
+                        cond.hours = OpeningHoursParser.parseOpenedHours(cond.condition);
+                    }
+                }
+                type = MAXSPEED;
 			} else if(t.equalsIgnoreCase("maxspeed") && v != null){
 				type = MAXSPEED;
-				floatValue = -1;
-				if(v.equals("none")) {
-					floatValue = RouteDataObject.NONE_MAX_SPEED;
-				} else {
-					int i = 0;
-					while (i < v.length() && Character.isDigit(v.charAt(i))) {
-						i++;
-					}
-					if (i > 0) {
-						floatValue = Integer.parseInt(v.substring(0, i));
-						floatValue /= 3.6; // km/h -> m/s
-						if (v.contains("mph")) {
-							floatValue *= 1.6;
-						}
-					}
-				}
-			} else if (t.equalsIgnoreCase("lanes") && v != null) {
+				floatValue = parseMaxSpeed(v);
+            } else if (t.equalsIgnoreCase("lanes") && v != null) {
 				intValue = -1;
 				int i = 0;
 				type = LANES;
@@ -162,7 +183,27 @@ public class BinaryMapRouteReaderAdapter {
 			}
 			
 		}
-	}
+
+        private float parseMaxSpeed(String v) {
+            float floatValue = -1;
+            if(v.equals("none")) {
+                floatValue = RouteDataObject.NONE_MAX_SPEED;
+            } else {
+                int i = 0;
+                while (i < v.length() && Character.isDigit(v.charAt(i))) {
+                    i++;
+                }
+                if (i > 0) {
+                    floatValue = Integer.parseInt(v.substring(0, i));
+                    floatValue /= 3.6; // km/h -> m/s
+                    if (v.contains("mph")) {
+                        floatValue *= 1.6;
+                    }
+                }
+            }
+            return floatValue;
+        }
+    }
 	
 	public static class RouteRegion extends BinaryIndexPart {
 		public int regionsRead;
