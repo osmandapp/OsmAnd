@@ -138,9 +138,9 @@ public class RenderingRuleProperty {
 				if(colon != -1) {
 					int c  = 0;
 					if(c > 0) {
-						c += Integer.parseInt(value.substring(0, c));
+						c += Integer.parseInt(value.substring(0, colon));
 					}
-					c += Integer.parseInt(value.substring(c + 1));
+					c += Integer.parseInt(value.substring(colon + 1));
 					return c;
 				}
 				return Integer.parseInt(value);
@@ -172,9 +172,9 @@ public class RenderingRuleProperty {
 				if(colon != -1) {
 					float c = 0;
 					if(c > 0) {
-						c += Float.parseFloat(value.substring(0, c));
+						c += Float.parseFloat(value.substring(0, colon));
 					}
-					c += Float.parseFloat(value.substring(c + 1));
+					c += Float.parseFloat(value.substring(colon + 1));
 					return c;
 				}
 				return Float.parseFloat(value);
