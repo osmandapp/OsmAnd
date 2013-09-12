@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
@@ -28,7 +28,7 @@
     <string name="map_widget_intermediate_distance">Ara nokta</string>
     <string name="ending_point_too_far">Bitiş noktası en yakın yola çok fazla uzaklıkta.</string>
     <string name="btn_add_tag">Etiket Ekle</string>
-    <string name="btn_advanced_mode">Gelişmiş Mod…</string>
+    <string name="btn_advanced_mode">Gelişmiş Kip…</string>
     <string name="poi_filter_parking">Park Etme</string>
     <string name="poi_filter_emergency">Acil Durum</string>
     <string name="poi_filter_public_transport">Toplu Taşıma</string>
@@ -45,7 +45,7 @@
 	<string name="avoid_motorway">Otoyollardan geçme</string>
 	<string name="auto_zoom_map_descr">Hızınıza göre haritayı yakınlaştırma (haritadaki konumunuz güncellenirken)</string>
 	<string name="auto_zoom_map">Otomatik harita yakınlaştırma</string>
-	<string name="tip_update_index">Çevrimdışı Verinin Güncellenmesi</string>
+	<string name="tip_update_index">Çevrimdışı Haritalar Güncelleniyor</string>
 	<string name="filterpoi_activity">POI filtresi yarat</string>
 	<string name="recalculate_route_to_your_location">Ulaşım modu:</string>
 	<string name="select_navigation_mode">Ulaşım modunu seç</string>
@@ -114,7 +114,7 @@
     <string name="recording_context_menu_precord">Fotoğraf çek</string>
     <string name="dropbox_plugin_description">Dropbox eklentisi, yol tariflerini ve ses/video notlarını dropbox hesabınızla eşitlemenize olanak verir.</string>
     <string name="dropbox_plugin_name">Dropbox eklentisi</string>
-    <string name="animate_routing_using_gpx">Varolan bir GPX dosyasını kullanmak istiyor musunuz?</string>
+    <string name="animate_routing_using_gpx">Takip için önceden kaydedilmiş bir GPX rotasını aç?</string>
     <string name="intermediate_points_change_order">Sıralamayı değiştir</string>
     <string name="srtm_paid_version_msg">Programın geliştirilebilmesi için lütfen çevreleme çizgileri eklentisini Mağazadan almayı da düşünün.</string>
     <string name="srtm_paid_version_title">Çevreleme çizgileri eklentisi</string>
@@ -128,7 +128,7 @@
     <string name="av_use_external_recorder">Dahili kaydediciyi kullan</string>
     <string name="av_settings_descr">Ses ve video ayarlarını yapılandır</string>
     <string name="av_settings">Ses/Video ayarları </string>
-    <string name="recording_error">Kaydedilirken hata oluştu </string>
+    <string name="recording_error">Kayıt sırasında hata oluştu </string>
     <string name="recording_camera_not_available">Kamera kullanılabilir değil</string>
     <string name="dist_control_start">başlat</string>
     <string name="index_name_openmaps">AB Açık haritası</string>
@@ -192,7 +192,7 @@
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid eklentisi eski bir sürümünü sahip ve güncelleştirilmesi gerekmektedir.</string>
     <string name="osmodroid_plugin_description">OsMoDroid eklenti canlı izleme özellikleri için OsModroid uygulama için, uzatma OsmAnd edilir. Hizmet hakkında bilgi http://esya.ru mevcuttur.</string>
     <string name="osmodroid_plugin_name">OsMoDroid eklentisi</string>
-	<string name="tip_altitude_offset">Rakım Ekranı - Ofset Düzeltme</string>
+	<string name="tip_altitude_offset">Rakım Düzeltme</string>
 	<string name="tip_altitude_offset_t">\tEn GPS cihazları lokal olarak kullanılan sistemler için bir dönüşüm bir konuma bağımlı düzeltme gerektiren hangi, elipsoid tabanlı WGS84 referans sisteminde yükseklik ölçümleri rapor.
 \n\tBu yerel sistemler için daha iyi bir yaklaşım EGM96 referanstır. OsmAnd şimdi de EGM96 sisteminde yüksekliklerde otomatik olarak görüntülenmesini destekler.
 \n\tBunu başarmak için, basitçe Veri Yönetimi (orijinal http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC altındadır) üzerinden dosya WW15MGH.DAC indirin.</string>
@@ -219,11 +219,13 @@
 	<string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Gezinti Tarifi) OsmAnd küresel OpenStreetMap (OSM) veri çok çeşitli erişimi olan bir açık kaynak navigasyon bir uygulamadır. Tüm harita verisi (vektör veya kiremit harita) çevrimdışı kullanım için telefonun hafıza kartında saklanabilir. OsmAnd zamanda turn-by-turn sesli yönlendirme dahil olmak üzere çevrimiçi ve çevrimdışı yönlendirme işlevselliği sunuyor.Temel özelliklerden bazıları: - Komple çevrimdışı işlevsellik (seçilebilir klasör deposu indirilen vektör veya kiremit harita) - Mevcut tüm dünya için Kompakt çevrimdışı vektör haritaları - doğrudan app ülke veya bölge haritalarını indirin - Mümkünse birkaç harita katmanları Yerleşimi , GPX veya navigasyon parçaları gibi, İlgi Çekici Nokta, sık, kontür çizgileri, toplu taşıma durakları, özelleştirilebilir şeffaflık ek haritalar - adresler ve yerler için Çevrimdışı arama (POI) - kısa mesafelerde (deneysel) için Çevrimdışı yönlendirme - Araba, bisiklet ve OsmAnd bu ücretsiz sürümü isteğe bağlı şerit takibi, hız sınırı göstergesi kaydedilmeli ve TTS sesleri Limitler - isteğe bağlı otomatik gündüz / gece görüntüsüyle anahtarlama - - zoom opsiyonel hız bağımlı haritası - hareket pusula veya yönüne göre opsiyonel harita hizalama: yaya modları ile : - harita indirme sınırlı sayısı - OsmAnd İÇN\'leri çevrimdışı Vikipedi erişim yok aktif olarak geliştirilen ve bizim proje ve ilerlemenin geliştirilmesi ve yeni işlevsellik testdriving fonuna finansal katkılar dayanmaktadır ediliyor. OsmAnd + satın alma, ya da belirli yeni özellikler finansman veya osmand.net üzerinde genel bir bağış yapmayı düşünün lütfen.\n</string>
 	<string name="osmand_plus_short_description_80_chars">OsmAnd çevrimdışı ve çevrimiçi haritalar için açık kaynak kodlu bir navigasyon uygulamasıdır</string>
 	<string name="osmand_plus_long_description_1000_chars">"OsmAnd   (OSM Automated Gezinti Tarifi) OsmAnd   küresel OpenStreetMap (OSM) veri çok çeşitli erişimi olan bir açık kaynak navigasyon bir uygulamadır. Tüm harita verisi (vektör veya kiremit harita) çevrimdışı kullanım için telefonun hafıza kartında saklanabilir. OsmAnd zamanda turn-by-turn sesli yönlendirme dahil olmak üzere çevrimiçi ve çevrimdışı yönlendirme işlevselliği sunuyor. OsmAnd   Eğer, projeyi destekleyen yeni özellikler geliştirme fonu, ve en son güncellemeleri almak onu satın alarak, ücretli uygulama sürümüdür. Temel özelliklerden bazıları: - Komple çevrimdışı işlevsellik (seçilebilir klasör deposu indirilen vektör veya kiremit harita) - Mevcut tüm dünya için Kompakt çevrimdışı vektör haritaları - doğrudan app ülke veya bölge haritaları Sınırsız indirme - Çevrimdışı Vikipedi özelliği (indir İÇN Wikipedia), gezi için büyük - adresleri ve yerleri (POI) için Çevrimdışı arama - GPX veya navigasyon parçaları, İlgi Çekici Nokta, sık, kontür çizgileri, toplu taşıma durakları, özelleştirilebilir şeffaflık ek haritalar gibi olası birçok harita katmanları Yerleşimi, - - İsteğe bağlı otomatik gündüz / gece görüntüsüyle anahtarlama - yakınlaştırma opsiyonel hız bağımlı haritası - hareket pusula veya yönüne göre opsiyonel harita hizalama - İsteğe bağlı şerit takibi, hız: Otomobil, bisiklet ve yaya ile modları - Kısa mesafelerde (deneysel) için Çevrimdışı yönlendirme sınırı göstergesi kaydedilmeli ve TTS sesleri"</string>
-	<string name="tip_update_index_t">Up-to-date harita verisi olması esastır.
-\nOsmAnd çevrimdışı kullanılabilir veri güncellemeleri kontrol edebilir bir veri yöneticisi sağlar.
-\nGüncellemeler &amp;#39;Ayarlar&amp;#39;a gidin kontrol etmek için -&amp;gt;&amp;#39; Veri Yönetimi &amp;#39;-&amp;gt;&amp;#39;
-\nİndir çevrimdışı veri &amp;#39;. Bölge listesi internet alındıktan sonra, seçenek &amp;#39;Menü&amp;#39; seçebilirsiniz -&amp;gt; sadece zaten cihazınızda veri güncellemeleri belirtmek için &amp;#39;Filtre indirilen&amp;#39;. &amp;#39;\nYeşil&amp;#39; in verileri cihaza veri de-aktive işaret italik yazı sunucu verileri kullanılabilir güncelleştirmeleri gösterir &amp;#39;blue&amp;#39;
-\ncihazdan ve sunucudan verileri üzerinde veri dosyalarını aynı işaret</string>
+	<string name="tip_update_index_t">Güncel harita verisi çevrimdışı harita izlemesi, POI (İhtiyaç Noktaları)/adres aramaları ve çevrimdışı navigasyon için gereklidir. OsmAnd bu çevrimdışı haritaları(ve bazı veri dosyalarını) indirmeniz için bir veri yöneticisi sağlar, ve uygun güncellemeleri denetler.
+		\n\nHaritaları indirmek için \'Ayarlar\' → \'Veri Yönetimi\' → \'Çevrimdışı veri indir\' kısmına gidin.
+		\n\nEvrensel bölge dökümü genel ağdan (internetten) alındıktan sonra, bir içeriği indirmek veya güncellemek için tıklayın. Lütfen unutmayın, ekranın üst kısmında bulunan dosya cinsi seçeceği ile indirmek istediğiniz cinsi seçebilirsiniz. (düzenli haritalar, gölgeli kabartmalar, vs.).
+		\n\nBölge dökümünü bir kaç harf girerek süzebilir, veya \'Ayarlar\' → \'İndirilenleri süz\' seçeneğini seçerek sadece cihazınızda halihazırda var olan veriler için güncellemeleri görüntüleyebilirsiniz.
+		\n\n\t* \'Yeşil\' renkteki dökümler verinin cihazda ve sunucuda olduğunu belirtir		\n\t* \'Mavi\' renkteki dökümler sunucu üzerinde güncelleme olduğunu belirtir
+		\n\t* Eğik yazılar verinin cihazda devre dışı olduğunu belirtir…
+	</string>
 	<string name="day_night_info_description">Gün doğumu:%1$s
 \nGün batımı:%2$s</string>
 	<string name="map_widget_vector_attributes">Rendering öznitelikleri:</string>
@@ -292,8 +294,8 @@
 	<string name="index_name_germany">Avrupa - Almanya</string>
 	<string name="index_name_africa">Afrika</string>
 	<string name="index_name_asia">Asya</string>
-	<string name="index_name_voice">Ses paketleri (kaydedilmiş)</string>
-	<string name="index_name_tts_voice">Ses paketleri (TTS)</string>
+	<string name="index_name_voice">Ses paketleri (kaydedilmiş, kısıtlı özellikler)</string>
+	<string name="index_name_tts_voice">Ses paketleri (Yazıdan-Sese sentezli, tercih edilen)</string>
 	<string name="amenity_type_wikiosm">Wikipedia (çevrimdışı)</string>
 	<string name="amenity_type_user_defined">Kullanıcı tanımlı</string>
 	<string name="settings_preset">kullanıcı profili</string>
@@ -311,7 +313,7 @@
 	<string name="show_gpx_route">Haritada göster</string>
 	<string name="search_position_address">Adres…</string>
 	<string name="search_position_favorites">Favoriler…</string>
-	<string name="search_position_current_location">Şu anki konum…</string>
+	<string name="search_position_current_location">Geçerli konum…</string>
 	<string name="file_with_name_already_exist">Aynı isimli dosya zaten var.</string>
 	<string name="default_buttons_save">Kaydet</string>
 	<string name="favorite_home_category">Ev</string>
@@ -327,7 +329,7 @@
 	<string name="search_offline_clear_search">Yeni Arama</string>
 	<string name="map_text_size_descr">Haritadaki yer adları için yazı boyutunu seçin</string>
 	<string name="map_text_size">Harita yazı karakteri boyutu</string>
-	<string name="tip_recent_changes">Son değişiklikler</string>
+	<string name="tip_recent_changes">Son Değişiklikler</string>
 	<string name="voice_not_use">Kullanma</string>
 	<string name="voice_not_specified">Hiçbiri</string>
 	<string name="tts_language_not_supported_title">Dil desteklenmemektedir</string>
@@ -339,9 +341,9 @@
 	<string name="preferred_locale_descr">" Ekran dilini seç"</string>
 	<string name="preferred_locale">Ekran dili</string>
 	<string name="incomplete_locale">Tamamlanmamış</string>
-	<string name="tip_map_switch">Harita Kaynağı</string>
+	<string name="tip_map_switch">Harita Kaynağı seçin</string>
 	<string name="tip_app_mode">Kullanıcı Profili</string>
-	<string name="tip_navigation">Navigasyon</string>
+	<string name="tip_navigation">Gezinti</string>
 	<string name="tip_search">Aranıyor</string>
 	<string name="tip_initial">İpuçları ve püf noktaları</string>
 	<string name="next_button">Sonraki</string>
@@ -374,7 +376,7 @@
 	<string name="vector_data">Çevrimdışı vektör haritaları</string>
 	<string name="osb_bug_name">Hata</string>
 	<string name="poi_context_menu_delete">POI sil</string>
-	<string name="fav_saved_sucessfully">Favoriler başarıyla şuraya kaydedildi: {0}</string>
+	<string name="fav_saved_sucessfully">Favoriler şuraya başarıyla kaydedildi: {0}</string>
 	<string name="no_fav_to_save">Kaydedecek favori noktalar yok</string>
 	<string name="send_report">Rapor gönder</string>
 	<string name="any_poi">Herhangi</string>
@@ -390,7 +392,7 @@
 	<string name="int_min">dk.</string>
 	<string name="menu_mute_off">Ses açık</string>
 	<string name="menu_mute_on">Ses kapalı</string>
-	<string name="unzipping_file">Dosya zipten açılıyor…</string>
+	<string name="unzipping_file">Dosya çıkarılıyor…</string>
 	<string name="route_tr">Sağa dönün ve ilerleyin</string>
 	<string name="route_tshr">Sağa keskince dönün ve ilerleyin</string>
 	<string name="route_tslr">Sağa hafifçe dön ve ilerle</string>
@@ -409,20 +411,20 @@
 	<string name="router_service">Navigasyon servisi</string>
 	<string name="address">Adres</string>
 	<string name="download_index_success">İndirme başarılı</string>
-	<string name="error_io_error">I/O hatası oluştu</string>
+	<string name="error_io_error">G/Ç hatası oluştu</string>
 	
 	<string name="downloading">İndiriliyor…</string>
 	<string name="show_poi_on_map">Haritada göster</string>
-	<string name="loading_poi_obj">POI yükleniyor…</string>
+	<string name="loading_poi_obj">İÇN yükleniyor…</string>
 	<string name="failed_op">başarısız</string>
-	<string name="loading_postcodes">Postakodları yükleniyor…</string>
+	<string name="loading_postcodes">Posta kodları yükleniyor…</string>
 	<string name="loading_cities">Şehirler yükleniyor…</string>
 	<string name="loading">Yükleniyor…</string>
 	<string name="arrived_at_destination">Hedefinize ulaştınız</string>
 	<string name="invalid_locations">Koordinatlar geçersiz!</string>
 	<string name="go_back_to_osmand">OsmAnd haritalara geri dön</string>
 	<string name="close">Kapat</string>
-	<string name="loading_data">Veriler yükleniyor…</string>
+	<string name="loading_data">Veri yükleniyor…</string>
 	<string name="finished_task">Tamamlandı</string>
 	<string name="reload_indexes_descr">Çevrimdışı vektör haritaları ve veri SD karttan tekrar okunuyor</string>
 	<string name="reload_indexes">Çevrimdışı veri tekrar okunuyor</string>
@@ -533,7 +535,7 @@
 	<string name="rendering_attr_hmRendered_description">Gösterilen haritanın detay miktarını artırın</string>
 	<string name="local_index_routing_data">Rota edilen veri</string>
 	<string name="navigate_point_format">Biçim:</string>
-	<string name="poi_search_desc">POI (ilgi noktası) arama</string>
+	<string name="poi_search_desc">İÇN (İhtiyaç Noktası) arama</string>
 	<string name="navpoint_search_desc">Koordinatlar</string>
 	<string name="transport_search_desc">Ulaştırma araması</string>
 	<string name="offline_navigation_not_available">OsmAnd çevrimdışı navigasyon geçici olarak kullanılamıyor.</string>
@@ -542,7 +544,7 @@
 	<string name="download_link_and_local_description">Çevrimdışı veri indirmek ya da güncellemek için buraya tıklayın.
 \nDaha fazla ayrıntı görmek basın ve devre dışı bırakmak veya silmek için tutmak için varolan bir öğeyi tıklatın. Cihazda Mevcut veriler (%1$s ücretsiz):</string>
 	<string name="modify_transparency">"Şeffaflık değiştir(0 -Şeffaf,255-opak) "</string>
-	<string name="first_time_msg">"OsmAnd kullandığınız için teşekkür ederiz. - Bu uygulama birçok özellikler için &amp;#39;Ayarlar&amp;#39;ı üzerinden  &amp;gt; &amp;#39;Veri Yönetimi&amp;#39; indirebilirsiniz. bazı bölgesel çevrimdışı veri gerekir. Ardından, haritalarına adreslerini bulmak, İÇN aramak, ve toplu taşıma bulmak mümkün olacak."</string>    
+	<string name="first_time_msg">OsmAnd kullandığınız için teşekkür ederiz. Bu uygulamanın bir çok özelliği için \'Ayarlar\' →  \'Veri Yönetimi\' kısmından edinebileceğiniz bölgesel çevrimdışı veriye ihtiyacınız var. Daha sonra haritaları görebilir, adres bulabilir, İÇN (İhtiyaç Noktalarına) bakabilir ve toplu taşıma bulabilirsiniz.</string>    
 	<string name="basemap_was_selected_to_download">Baz haritası doğru uygulama çalışması için gereklidir ve indirmek için seçildi.</string>
 	<string name="local_indexes_cat_tile">Çevrimiçi ve çini haritalar</string>
 	
@@ -643,7 +645,7 @@
 \n\t- şimdi de koyu yeşil ve koyu mavi İndir ekranda gösterilen devreden indeks dosyaları Güncelliği
 \n\t- Diğer değişiklikler"</string>
 	<string name="update_poi_does_not_change_indexes">Uygulama içinde POI değişiklikleri indirilen harita dosyaları etkilemez, bunun yerine yerel bir dosyaya kaydedilir.</string>
-	<string name="local_openstreetmap_uploading">Yükleme…</string>
+	<string name="local_openstreetmap_uploading">Yükleniyor …</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI / Hatalar yüklendi</string>
 	<string name="local_openstreetmap_uploadall">tümünü yükle</string>
 	<string name="local_openstreetmap_upload">OSM modifikasyonu yükle</string>
@@ -691,7 +693,8 @@
 \n\t\'(kuzey yukarı) döndürmek etmeyin\' - Harita döndürülmüş olmayacak. Kuzey her zaman olacaktır
 \n\t\'Hareketinin yönü için\'- Haritada sürekli başlığı ile uyumlaştırılması
 \n\t\'pusula için\' - Haritada sürekli cihazı pusula okuma ile uyumlu olacak</string>
-	<string name="binary_map_download_success">İndirme başarılı.\n\t\n\n\tactivate \'Menü\' aktif olarak kullanmak için -&gt; \'Tanımlama Görünümü\' -&gt; \'Harita kaynağı ...\' -&gt; \'Çevrimdışı vektör haritaları\'.</string>
+	<string name="binary_map_download_success">İndirme başarılı.\n\t\n\tKullanmak için \'Menü\' → \'Harita katmanları\' → \'Harita kaynağı…\' → \'Çevirmdışı vektör haritları\' kısmından kullanıma açın.
+	</string>
 	<string name="tip_day_night_mode_t_v2">"\tharita görünümü bazı vektör haritaları için gün (parlak) ve gece (koyu) arasında değiştirilebilir.
 \n\tGece renkleri gece sürüşü için daha güvenlidir.
 \n\t\'Ekran ... yapılandır\' - -&gt; \'Gündüz / Gece haritası\' → \'Menü\' anahtarlama gündüz / gece için bir ilke ayarlayabilirsiniz.
@@ -784,7 +787,7 @@
 	<string name="ttsvoice">TTS Sesleri</string>
 	<string name="trace_rendering">Hata ayıklama bilgisi dönüştürülüyor</string>
 	<string name="trace_rendering_descr">Dönüştürme performansını göster</string>
-	<string name="installing_new_resources">Yeni veriler açılıyor…</string>
+	<string name="installing_new_resources">Yeni veri(ler) açılıyor…</string>
 	<string name="internet_connection_required_for_online_route">Çevrimiçi navigasyon seçildi ancak İnternet bağlantısı kullanılabilir değil.</string>
 	<string name="layer_hillshade">Tepe gölgesi katmanı</string>
     <string name="map_widget_fps_info">FPS hata ayıklama bilgisi</string>
@@ -862,4 +865,58 @@
     <string name="default_buttons_other_actions">Diğer komutlar</string>
     <string name="local_indexes_cat_srtm">Çevreleme çizgileri verisi</string>
     <string name="announce_gpx_waypoints">GPX yol işaretlerini söyle</string>
-    </resources>
+    <string name="about_version">Sürüm :</string>
+    <string name="about_settings">Hakkında</string>
+    <string name="about_settings_descr">Sürüm bilgisi, lisanslar, proje üyeleri</string>
+    <string name="tips_and_tricks">İpuçları</string>
+    <string name="local_index_tile_data_expire">Sona erecek (dakika): %1$s</string>
+    <string name="local_index_tile_data_downloadable">İndirilebilir: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">Azami yakınlaştırma: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Asgari yakınlaştırma: %1$s</string>
+    <string name="edit_tilesource_elliptic_tile">Eliptik izdüşümü</string>
+    <string name="edit_tilesource_expiration_time">Sona erecek (dakika)</string>
+    <string name="edit_tilesource_url_to_load">Adres</string>
+    <string name="edit_tilesource_choose_existing">Mevcut olanı seç...</string>
+    <string name="edit_tilesource_name">İsim</string>
+    <string name="maps_define_edit">Tanımla/Düzenle…</string>
+	<string name="clear_intermediate_points">Ara noktaları temizle</string>
+    <string name="keep_intermediate_points">Ara noktaları sakla</string>
+    <string name="new_directions_point_dialog">Zaten ara noktaları belirlemişsiniz.</string>
+    <string name="intermediate_items_sort_return">Ara yol noktaları varış noktası yolundaki düzeni en uygun hale getirir.</string>
+    <string name="gpx_saved_sucessfully">GPX dosyası {0} yerine başarıyla kaydedildi</string>
+    <string name="use_distance_measurement_help">* Nokta belirlemek için basın.\n 
+        * Önceki noktayı silmek için basılı tutun.\n
+        * Noktayı görüntülemek ve açıklama eklemek için basılı tutun.\n
+        * Daha fazla eylem için ölçüm aracına tıklayın.</string>
+    <string name="files_limit">%1$d dosya kaldı</string>
+    <string name="available_downloads_left">%1$d dosya indirmek için uygun</string>
+    <string name="osmand_background_plugin_description">Uyku (ekran kapalı) kipinde zaman zaman GPS aygıtını uyandırarak takibi ve gezintiyi etkinleştirmek için ayarları göster.</string>
+    <string name="get_directions">Yol Tarifleri</string>
+	<string name="menu_layers">Harita katmanları</string>
+	<string name="show_gps_status">GPS durumunu göster</string>
+	<string name="gps_status_app_not_found">GPS Durum uygulaması yüklenmedi, mağazada arayın?</string>
+	<string name="poi_filter_closest_poi">Yakın İÇN (İhtiyaç Noktaları)</string>
+	<string name="amenity_type_administrative">İdari</string>
+	<string name="amenity_type_barrier">Engel</string>
+	<string name="amenity_type_historic">Tarihi</string>
+	<string name="amenity_type_manmade">İnsan yapımı</string>
+	<string name="amenity_type_military">Askeri</string>
+	<string name="amenity_type_natural">Doğal</string>
+	<string name="amenity_type_office">Büro</string>
+	<string name="amenity_type_shop">Alışveriş</string>
+	<string name="amenity_type_sport">Spor</string>
+	<string name="amenity_type_sustenance">Gıda</string>
+	<string name="amenity_type_tourism">Turizm</string>
+	<string name="search_address_region">Bölge</string>
+	<string name="search_address_city">Şehir</string>
+	<string name="search_address_street">Sokak</string>
+	<string name="search_address_building">Bina</string>
+	<string name="search_address_building_option">Bina</string>
+	<string name="search_address_street_option">Kesişen sokak</string>
+	<string name="navigate_point_top_text">Seçilen biçimde (D - derece, M - dakika, S - saniye) enlem ve boylamı girin</string>
+	<string name="navigate_point_latitude">Enlem</string>
+	<string name="navigate_point_longitude">Boylam</string>
+	<string name="tip_location_sharing">Konum Paylaş</string>
+	<string name="search_near_map">Son harita konumu yakınlarında ara</string>
+	<string name="point_on_map">Konum:\n Enl %1$.5f\n Boy %2$.5f</string>
+	</resources>
