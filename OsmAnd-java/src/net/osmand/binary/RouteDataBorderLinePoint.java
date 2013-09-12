@@ -18,17 +18,22 @@ public class RouteDataBorderLinePoint extends RouteDataObject {
 	public RouteDataBorderLinePoint(RouteRegion region) {
 		super(region);
 	}
-	
+
 	public float getMaximumSpeed(){
 		int sz = types.length;
+		float maxSpeed = 0;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			float maxSpeed = r.maxSpeed();
-			if (maxSpeed > 0) {
-				return maxSpeed;
+			float mx = r.maxSpeed();
+			if (mx > 0) {
+				maxSpeed = mx;
+				// conditional has priority
+				if(r.conditional()) {
+					break;
+				}
 			}
 		}
-		return 0;
+		return maxSpeed ;
 	}
 	
 	public int getOneway() {

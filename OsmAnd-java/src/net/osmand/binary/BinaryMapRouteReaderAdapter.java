@@ -156,15 +156,16 @@ public class BinaryMapRouteReaderAdapter {
                 String[] cts = v.split(";");
                 for(String c : cts) {
                     int ch = c.indexOf('@');
-                    if(ch > 0) {
-                        RouteTypeCondition cond = new RouteTypeCondition();
-                        cond.floatValue = parseMaxSpeed(c.substring(ch));
-                        cond.condition = c.substring(ch + 1).trim();
-                        if(cond.condition.startsWith("(") && cond.condition.endsWith(")")) {
-                            cond.condition = cond.condition.substring(1, cond.condition.length() - 1).trim();
-                        }
-                        cond.hours = OpeningHoursParser.parseOpenedHours(cond.condition);
-                    }
+	                if (ch > 0) {
+		                RouteTypeCondition cond = new RouteTypeCondition();
+		                cond.floatValue = parseMaxSpeed(c.substring(0, ch));
+		                cond.condition = c.substring(ch + 1).trim();
+		                if (cond.condition.startsWith("(") && cond.condition.endsWith(")")) {
+			                cond.condition = cond.condition.substring(1, cond.condition.length() - 1).trim();
+		                }
+		                cond.hours = OpeningHoursParser.parseOpenedHours(cond.condition);
+		                conditions.add(cond);
+	                }
                 }
                 type = MAXSPEED;
 			} else if(t.equalsIgnoreCase("maxspeed") && v != null){
@@ -184,26 +185,26 @@ public class BinaryMapRouteReaderAdapter {
 			
 		}
 
-        private float parseMaxSpeed(String v) {
-            float floatValue = -1;
-            if(v.equals("none")) {
-                floatValue = RouteDataObject.NONE_MAX_SPEED;
-            } else {
-                int i = 0;
-                while (i < v.length() && Character.isDigit(v.charAt(i))) {
-                    i++;
-                }
-                if (i > 0) {
-                    floatValue = Integer.parseInt(v.substring(0, i));
-                    floatValue /= 3.6; // km/h -> m/s
-                    if (v.contains("mph")) {
-                        floatValue *= 1.6;
-                    }
-                }
-            }
-            return floatValue;
-        }
-    }
+		private float parseMaxSpeed(String v) {
+			float floatValue = -1;
+			if (v.equals("none")) {
+				floatValue = RouteDataObject.NONE_MAX_SPEED;
+			} else {
+				int i = 0;
+				while (i < v.length() && Character.isDigit(v.charAt(i))) {
+					i++;
+				}
+				if (i > 0) {
+					floatValue = Integer.parseInt(v.substring(0, i));
+					floatValue /= 3.6; // km/h -> m/s
+					if (v.contains("mph")) {
+						floatValue *= 1.6;
+					}
+				}
+			}
+			return floatValue;
+		}
+	}
 	
 	public static class RouteRegion extends BinaryIndexPart {
 		public int regionsRead;
@@ -225,15 +226,15 @@ public class BinaryMapRouteReaderAdapter {
 		}
 
 		private void initRouteEncodingRule(int id, String tags, String val) {
-			while(routeEncodingRules.size() <= id) {
+			while (routeEncodingRules.size() <= id) {
 				routeEncodingRules.add(null);
 			}
 			routeEncodingRules.set(id, new RouteTypeRule(tags, val));
-			if(tags.equals("name")) {
+			if (tags.equals("name")) {
 				nameTypeRule = id;
-			} else if(tags.equals("ref")) {
+			} else if (tags.equals("ref")) {
 				refTypeRule = id;
-			} else if(tags.equals("destination")) {
+			} else if (tags.equals("destination")) {
 				destinationTypeRule = id;
 			}
 		}
