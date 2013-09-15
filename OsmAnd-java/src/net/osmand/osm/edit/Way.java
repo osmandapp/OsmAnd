@@ -58,6 +58,20 @@ public class Way extends Entity {
 		}
 		return nodeIds.get(nodeIds.size() - 1);
 	}
+
+	public Node getFirstNode(){
+		if(nodes == null || nodes.size() == 0){
+			return null;
+		}
+		return nodes.get(0);
+	}
+
+	public Node getLastNode(){
+		if(nodes == null || nodes.size() == 0){
+			return null;
+		}
+		return nodes.get(nodes.size() - 1);
+	}
 	
 	public void addNode(Node n){
 		if(nodeIds == null){
