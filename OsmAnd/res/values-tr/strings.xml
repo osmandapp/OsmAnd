@@ -1090,4 +1090,25 @@
 	<string name="av_camera_focus_continuous">Kamera devamlı odaklamaya çalışıyor</string>
 	<string name="av_photo_play_sound">Fotoğraf çekiminde ses çal</string>
 	<string name="av_photo_play_sound_descr">Fotoğrafları çekerken çalınacak sesi seçin</string>
-</resources>
+<string name="basemap_missing">Küçük yakınlaştırmalarda tüm dünyayı kaplayan temel dünya haritası eksik. Tam deneyim için lütfen World_basemap_x.obf indirin.</string>
+	<string name="local_index_no_items_to_do">%1$s\'a öğe yok</string>
+	<string name="tts_language_not_supported">Seçtiğiniz dil yüklü olan Android TTS (yazıdan-sese) motoru tarafından desteklenmiyor. Mağazada başka TTS motoruna bakmak ister misiniz? Aksi halde önceden yüklenen TTS dili kullanılacak.</string>
+	<string name="gpx_option_reverse_route">GPX yönünü tersine çevir</string>
+	<string name="switch_to_vector_map_to_see">Bu konum için çevrimdışı vektör haritası. \n\t\n\tKullanmak için \'Menü\' → \'Harita Katmanları\' → \'Harita Kaynağı...\' → \'Çevrimdışı vektör haritalar\'.</string>
+	<string name="choose_audio_stream">Sesli kılavuz çıktısı</string>
+	<string name="choose_audio_stream_descr">Sesli kılavuzu oynatmaya kanal seçin. (sisteme bağımlı)</string>
+	<string name="voice_stream_voice_call">Sesli çağrı sesi</string>
+	<string name="map_transparency_descr">Temel harita saydamlığını değiştirin</string>
+	<string name="map_transparency">Temel harita saydamlığı</string>
+	<string name="default_none">Hiçbiri</string>
+	<string name="map_underlay">Alt katman harita</string>
+	<string name="map_underlay_descr">Alt katman harita seç</string>
+	<string name="layer_overlay">Üst katman harita…</string>
+	<string name="map_overlay">Üst katman harita</string>
+	<string name="map_overlay_descr">Üst katman harita seç</string>
+	<string name="level_to_switch_vector_raster_descr">Vektör haritaların kullanımı için asgari yaklaştırma seviyesi</string>
+	<string name="level_to_switch_vector_raster">Asgari vektör yakınlaştırma seviyesi</string>
+	<string name="tip_location_sharing_t">Ailenizle veya arkadaşlarınızla gezideyken ilginizi çeken mekanların konumunu \'Konumu kullan\' menüsünden → \'Konumu paylaş\' kısmından paylaşabilirsiniz.
+		\n\nKonumunuzun paylaşılacağı yolu seçin. Seçenekleriniz: E-Posta, SMS(metin), ya da sadece konum koordinatlarınızı cihaz panosuna kopyalayın.
+	</string>
+	</resources>
