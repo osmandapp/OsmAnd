@@ -21,6 +21,7 @@ public class OsmandRegions {
 	Integer downloadNameType = null;
 	Integer prefixType = null;
 	Integer suffixType = null;
+	static String FILE_NAME = "/home/victor/projects/osmand/osm-gen/Osmand_regions.obf";
 
 	public OsmandRegions() {
 	}
@@ -77,6 +78,41 @@ public class OsmandRegions {
 		}
 		return result;
 	}
+
+
+	public List<BinaryMapDataObject>  queryNoInit(String fileName, final int tile31x, final int tile31y) throws IOException {
+		final List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>();
+		BinaryMapIndexReader reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"));
+		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(tile31x, tile31x, tile31y, tile31y,
+				5, new BinaryMapIndexReader.SearchFilter() {
+					@Override
+					public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex index) {
+						return true;
+					}
+				}, new ResultMatcher<BinaryMapDataObject>() {
+
+
+					@Override
+					public boolean publish(BinaryMapDataObject object) {
+						if (object.getPointsLength() < 1) {
+							return false;
+						}
+						if (contain(object, tile31x, tile31y)) {
+							result.add(object);
+						}
+						return false;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				}
+		);
+		reader.searchMapIndex(sr);
+		return result;
+	}
+
 
 
 	private void init(String fileName) throws IOException {
@@ -145,27 +181,44 @@ public class OsmandRegions {
 	}
 
 
-	private static void testCountry(OsmandRegions or, double lat, double lon, String test) {
-		List<BinaryMapDataObject> cs = or.getCountries(MapUtils.get31TileNumberX(15.8), MapUtils.get31TileNumberY(23.09));
-		if(cs.size() != 1) {
+	private static void testCountry(OsmandRegions or, double lat, double lon, String... test) throws IOException {
+		//List<BinaryMapDataObject> cs = or.getCountries(MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat));
+		List<BinaryMapDataObject> cs = or.queryNoInit(FILE_NAME, MapUtils.get31TileNumberX(lon), MapUtils.get31TileNumberY(lat));
+		if(cs.size() != test.length) {
 			StringBuilder found = new StringBuilder();
 			for(BinaryMapDataObject b : cs) {
 				found.append(b.getName()).append(' ');
 			}
-			throw new IllegalStateException(" Expected " + test + " - Lat " + lat + " lon " + lon + ", but found : " + found);
+			throw new IllegalStateException(" Expected " + Arrays.toString(test) + " - Lat " + lat + " lon " + lon + ", but found : " + found);
 		}
-		String nm = cs.get(0).getName();
-		if(!test.equals(nm)) {
-			throw new IllegalStateException(" Expected " + test + " but was " + nm);
+
+		for (int i = 0; i < test.length; i++) {
+			String nm = cs.get(i).getName();
+			if (!test[i].equals(nm)) {
+				throw new IllegalStateException(" Expected " + test[i] + " but was " + nm);
+			}
 		}
 	}
 
 
 	public static void main(String[] args) throws IOException {
 		OsmandRegions or = new OsmandRegions();
-		or.init("/home/victor/projects/osmand/osm-gen/Osmand_regions.obf");
+		long t = System.currentTimeMillis();
+//		or.init(FILE_NAME);
+		System.out.println(System.currentTimeMillis() - t);
 
-		testCountry(or, 15.8, 23.09, "chad");
+		//testCountry(or, 15.8, 23.09, "chad");
+		testCountry(or, 52.10, 4.92, "netherlands");
+		testCountry(or, 52.15, 7.50, "nordrhein-westfalen");
+		testCountry(or, 40.0760, 9.2807, "italy");
+		System.out.println(System.currentTimeMillis() - t);
+		testCountry(or, 28.8056, 29.9858, "africa", "egypt" );
+		System.out.println(System.currentTimeMillis() - t);
+		testCountry(or, 35.7521, 139.7887, "japan");
+		System.out.println(System.currentTimeMillis() - t);
+		testCountry(or, 46.5145, 102.2580, "mongolia");
+
+		System.out.println(System.currentTimeMillis() - t);
 
 	}
 }
