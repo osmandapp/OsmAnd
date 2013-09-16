@@ -39,9 +39,10 @@ public class QuadTree<T> {
 		insert(data, new QuadRect(x, y, x, y));
 	}
 
-	public void queryInBox(QuadRect box, List<T> result) {
+	public List<T> queryInBox(QuadRect box, List<T> result) {
 		result.clear();
 		queryNode(box, result, root);
+		return result;
 	}
 
 	private void queryNode(QuadRect box, List<T> result, Node<T> node) {

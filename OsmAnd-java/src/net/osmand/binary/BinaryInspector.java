@@ -49,9 +49,10 @@ public class BinaryInspector {
 	public static void main(String[] args) throws IOException {
 		inspector(args);
 		// test cases show info
-		
-//		inspector(new String[]{"-vaddress", "-vcities", "-vstreets", "-bbox=14.4,50.1,14.5,50.01", "/home/victor/projects/osmand/osm-gen/Monaco.obf"});
-		// test case extract parts
+
+//		inspector(new String[]{"/home/victor/projects/osmand/osm-gen/World_basemap_2.obf"});
+		inspector(new String[]{"-vmap", "-vmapobjects", /*"-vstreets", "-bbox=14.4,50.1,14.5,50.01", */"/home/victor/projects/osmand/osm-gen/Osmand_regions.obf"});
+//		test case extract parts
 		// test case 
 	}
 	
