@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -1223,7 +1223,7 @@
     <string name="recording_camera_not_available">Camera is niet beschikbaar</string>
     <string name="srtm_paid_version_msg">Overweeg om de hoogtelijnen-plugin (\"Contour lines\") te kopen in de Play-store om verdere ontwikkeling te ondersteunen.</string>
     <string name="srtm_paid_version_title">Hoogtelijnen-plugin</string>
-    <string name="animate_routing_using_gpx">Wil je een bestaand GPX-bestand gebruiken?</string>
+    <string name="animate_routing_using_gpx">Wil je een vooraf opgenomen GPX route volgen?</string>
     <string name="intermediate_points_change_order">Volgorde wijzigen</string>
     <string name="dropbox_plugin_description">De Dropbox-plugin kan tracks en audio/video-notities synchroniseren met je Dropbox-account.</string>
     <string name="dropbox_plugin_name">Dropbox-plugin</string>
