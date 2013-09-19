@@ -36,7 +36,7 @@
 	<application android:icon="@drawable/icon" android:label="@string/app_name" 
 		android:debuggable="true" android:name="net.osmand.plus.OsmandApplication"  android:configChanges="locale"
 		android:theme="@style/OsmandDarkTheme"
-		android:backupAgent="net.osmand.plus.OsmandBackupAgent" android:restoreAnyVersion="true">
+		android:backupAgent="net.osmand.plus.OsmandBackupAgent" android:restoreAnyVersion="true" android:largeHeap="true">
 		
 	    <meta-data android:name="com.sec.android.support.multiwindow" android:value="true"/>
 	    <meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W" android:resource="@dimen/app_defaultsize_w" />
