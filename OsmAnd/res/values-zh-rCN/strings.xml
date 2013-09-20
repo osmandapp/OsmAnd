@@ -459,12 +459,12 @@
 	<string name="speak_speed_limit">播报限速</string>
     <string name="speak_cameras">播报测速电子眼</string>
 	<string name="speak_traffic_warnings">播报交通信息</string>
-    <string name="tip_recent_changes_1_5_t">1.5 中的修改：
+    <string name="tip_recent_changes_1_5_t">1.5 中的改动：
 	\n\t* 限速与电子眼的语音警告
 	\n\t* 更强的语音提示能力(播报街道名称)
 	\n\t* 高密度地图图标
-	\n\t* 用户界面(UI)上的大量改变
-	\n\t* 距离显示，GPS分析器，途经点处理，规划窗口部件，OSM上传，https处理等部分的Bug修正
+	\n\t* 用户界面(UI)上的大量修改
+	\n\t* 距离显示，GPX分析器，途经点处理，规划窗口部件，OSM上传，https处理等部分的Bug修正
     </string>
     <string name="osb_author_or_password_not_specified">请在设置中指定OSM用户名和密码</string>
     <string name="context_menu_item_directions_to">设为终点</string>
@@ -945,7 +945,7 @@
 	<string name="edit_filter_delete_message">过滤器 {0} 已被删除</string>
 	<string name="edit_filter_create_message">过滤器 {0} 已创建</string>
 	<string name="av_camera_focus_auto">自动聚焦</string>
-	<string name="clear_intermediate_points">清楚中途点</string>
+	<string name="clear_intermediate_points">清除中途点</string>
     <string name="keep_intermediate_points">保持中途点</string>
     <string name="new_directions_point_dialog">您已经有中途点集了。</string>
     <string name="local_index_gpx_timespan">\n耗时：%1$d:%2$02d:%3$02d</string>
