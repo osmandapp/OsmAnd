@@ -1,7 +1,6 @@
 package net.osmand.plus;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,14 +9,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -29,7 +26,6 @@ import java.util.TimeZone;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.GPXUtilities.GPXFile;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -75,7 +71,7 @@ public class GPXUtilities {
 		public double speed = 0;
 		public double hdop = Double.NaN;
 		
-		public WptPt() {};
+		public WptPt() {}
 
 		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
 			this.lat = lat;
@@ -179,10 +175,11 @@ public class GPXUtilities {
 	
 	
 	public static String writeGpxFile(File fout, GPXFile file, ClientContext ctx) {
-		try {
+        FileOutputStream output = null;
+        try {
 			SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
 			format.setTimeZone(TimeZone.getTimeZone("UTC"));
-			FileOutputStream output = new FileOutputStream(fout);
+		    output = new FileOutputStream(fout);
 			XmlSerializer serializer = ctx.getInternalAPI().newSerializer();
 			serializer.setOutput(output, "UTF-8"); //$NON-NLS-1$
 			serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true); //$NON-NLS-1$
@@ -246,6 +243,15 @@ public class GPXUtilities {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
 			return ctx.getString(R.string.error_occurred_saving_gpx);
 		}
+        finally {
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException ignore) {
+                    //ignore
+                }
+            }
+        }
 		return null;
 	}
 	
@@ -331,8 +337,10 @@ public class GPXUtilities {
 	}
 	
 	public static GPXFile loadGPXFile(ClientContext ctx, File f, boolean convertCloudmadeSource) {
+        FileInputStream fis = null;
 		try {
-			GPXFile file = loadGPXFile(ctx, new FileInputStream(f), convertCloudmadeSource);
+            fis = new FileInputStream(f);
+			GPXFile file = loadGPXFile(ctx, fis, convertCloudmadeSource);
 			file.path = f.getAbsolutePath();
 			return file;
 		} catch (FileNotFoundException e) {
@@ -341,7 +349,13 @@ public class GPXUtilities {
 			log.error("Error reading gpx", e); //$NON-NLS-1$
 			res.warning = ctx.getString(R.string.error_reading_gpx);
 			return res;
-		}
+		} finally {
+            try {
+                if (fis != null) fis.close();
+            } catch (IOException ignore) {
+                //ignore
+            }
+        }
 	}
 	
 	public static GPXFile loadGPXFile(ClientContext ctx, InputStream f, boolean convertCloudmadeSource) {
