@@ -1,12 +1,10 @@
 package net.osmand.router;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.osmand.Collator;
 import net.osmand.PlatformUtil;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.util.Algorithms;
@@ -120,11 +118,21 @@ public class RoutingConfiguration {
 
 	public static RoutingConfiguration.Builder getDefault() {
 		if (DEFAULT == null) {
+            InputStream resourceAsStream = null;
 			try {
-				DEFAULT = parseFromInputStream(RoutingConfiguration.class.getResourceAsStream("routing.xml"));
+                resourceAsStream = RoutingConfiguration.class.getResourceAsStream("routing.xml");
+                DEFAULT = parseFromInputStream(resourceAsStream);
 			} catch (Exception e) {
 				throw new IllegalStateException(e);
-			}
+			} finally {
+                if (resourceAsStream != null) {
+                    try {
+                        resourceAsStream.close();
+                    } catch (IOException ignore) {
+                        //
+                    }
+                }
+            }
 		}
 		return DEFAULT;
 	}
