@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -1318,4 +1318,7 @@
 	<string name="edit_tilesource_expiration_time">Doba platnosti (min)</string>
     <string name="driving_region_descr">Vyberte dopravní region: USA, Evropa, Británie, Asie a další</string>
 	<string name="driving_region">Dopravní region</string>
-	</resources>
+	<string name="local_index_tile_data_expire">Doba platnosti (minut): %1$s</string>
+    <string name="map_widget_fps_info">Snímků za sekundu (ladění)</string>
+	<string name="edit_tilesource_elliptic_tile">Eliptický mercator</string>
+    </resources>
