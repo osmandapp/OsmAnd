@@ -121,7 +121,10 @@ public abstract class Entity {
 	}
 	
 	public String removeTag(String key){
-		return tags.remove(key);
+		if(tags != null) {
+			return tags.remove(key);
+		}
+		return null;
 	}
 	
 	public void removeTags(String[] keys){
