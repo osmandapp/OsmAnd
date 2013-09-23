@@ -152,6 +152,7 @@ public class Way extends Entity {
 		if(nodes != null) {
 			for(Node n : nodes){
 				if(qr == null) {
+					qr = new QuadRect();
 					qr.left = (float) n.getLongitude();
 					qr.right = (float) n.getLongitude();
 					qr.top   = (float) n.getLatitude();
