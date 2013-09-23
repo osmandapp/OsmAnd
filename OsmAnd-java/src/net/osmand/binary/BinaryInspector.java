@@ -52,8 +52,8 @@ public class BinaryInspector {
 		in.inspector(args);
 		// test cases show info
 
-		in.inspector(new String[]{"-vmap", "-vmapobjects", "-zoom=5", "-osm=/home/victor/projects/osmand/temp/zoom_5.osm", "/home/victor/projects/osmand/osm-gen/World_basemap_2.obf"});
-//		inspector(new String[]{"-vmap", "-vmapobjects", /*"-vstreets", "-bbox=14.4,50.1,14.5,50.01", */"/home/victor/projects/osmand/osm-gen/Osmand_regions.obf"});
+//		in.inspector(new String[]{"-vmap", "-vmapobjects", "-zoom=7", "-osm=/home/victor/projects/osmand/temp/zoom_7.osm", "/home/victor/projects/osmand/osm-gen/World_basemap_2.obf"});
+//		in.inspector(new String[]{"-vmap", "-vmapobjects", /*"-vstreets", "-bbox=14.4,50.1,14.5,50.01", */"/home/victor/projects/osmand/osm-gen/Osmand_regions.obf"});
 //		test case extract parts
 		// test case 
 	}
