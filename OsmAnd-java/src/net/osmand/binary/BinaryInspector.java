@@ -1,13 +1,12 @@
 package net.osmand.binary;
 
 
+import gnu.trove.iterator.TLongIterator;
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +17,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
@@ -45,23 +45,42 @@ public class BinaryInspector {
 	
 
 	public static final int BUFFER_SIZE = 1 << 20;
-	
+	private VerboseInfo vInfo;
+
 	public static void main(String[] args) throws IOException {
-		inspector(args);
+		BinaryInspector in = new BinaryInspector();
+		in.inspector(args);
 		// test cases show info
 
-//		inspector(new String[]{"/home/victor/projects/osmand/osm-gen/World_basemap_2.obf"});
-		inspector(new String[]{"-vmap", "-vmapobjects", /*"-vstreets", "-bbox=14.4,50.1,14.5,50.01", */"/home/victor/projects/osmand/osm-gen/Osmand_regions.obf"});
+		in.inspector(new String[]{"-vmap", "-vmapobjects", "-zoom=5", "-osm=/home/victor/projects/osmand/temp/zoom_5.osm", "/home/victor/projects/osmand/osm-gen/World_basemap_2.obf"});
+//		inspector(new String[]{"-vmap", "-vmapobjects", /*"-vstreets", "-bbox=14.4,50.1,14.5,50.01", */"/home/victor/projects/osmand/osm-gen/Osmand_regions.obf"});
 //		test case extract parts
 		// test case 
 	}
-	
-	private static void println(String s) {
-		System.out.println(s);
+
+	private void printToFile(String s) throws IOException {
+		if(vInfo.osmOut != null) {
+			vInfo.osmOut.write(s.getBytes());
+		} else {
+			System.out.println(s);
+		}
 	}
 	
-	private static void print(String s) {
-		System.out.print(s);
+	private void println(String s) {
+		if(vInfo != null && vInfo.osm) {
+			// ignore
+		} else {
+			System.out.println(s);
+		}
+
+	}
+	
+	private void print(String s) {
+		if(vInfo != null && vInfo.osm) {
+			// ignore
+		} else {
+			System.out.print(s);
+		}
 	}
 	
 	protected static class VerboseInfo {
@@ -75,6 +94,8 @@ public class BinaryInspector {
 		boolean vpoi;
 		boolean vmap;
 		boolean vmapObjects;
+		boolean osm;
+		FileOutputStream osmOut = null;
 		double lattop = 85;
 		double latbottom = -85;
 		double lonleft = -180;
@@ -100,7 +121,7 @@ public class BinaryInspector {
 			return vtransport;
 		}
 		
-		public VerboseInfo(String[] params){
+		public VerboseInfo(String[] params) throws FileNotFoundException {
 			for(int i=0;i<params.length;i++){
 				if(params[i].equals("-vaddress")){
 					vaddress = true;
@@ -120,6 +141,11 @@ public class BinaryInspector {
 					vmapObjects = true;
 				} else if(params[i].equals("-vpoi")){
 					vpoi = true;
+				} else if(params[i].startsWith("-osm")){
+					osm = true;
+					if(params[i].startsWith("-osm=")){
+						osmOut = new FileOutputStream(params[i].substring(5));
+					}
 				} else if(params[i].equals("-vtransport")){
 					vtransport = true;
 				} else if(params[i].startsWith("-zoom=")){
@@ -139,9 +165,17 @@ public class BinaryInspector {
 					&& lonleft <= o.getLocation().getLongitude() && lonright >= o.getLocation().getLongitude();
 			
 		}
+
+		public void close() throws IOException {
+			if(osmOut != null) {
+				osmOut.close();;
+				osmOut = null;
+			}
+
+		}
 	}
 
-	public static void inspector(String[] args) throws IOException {
+	public  void inspector(String[] args) throws IOException {
 		if(args == null || args.length == 0){
 			printUsage(null);
 			return;
@@ -177,17 +211,19 @@ public class BinaryInspector {
 				if (args.length < 2) {
 					printUsage("Missing file parameter");
 				} else {
-					VerboseInfo vinfo = new VerboseInfo(args);
-					printFileInformation(args[args.length - 1], vinfo);
+					vInfo = new VerboseInfo(args);
+					printFileInformation(args[args.length - 1]);
+					vInfo.close();
 				}
 			} else {
 				printUsage("Unknown command : " + f);
 			}
 		} else {
-			printFileInformation(f, null);
+			vInfo = null;
+			printFileInformation(f);
 		}
 	}
-	public static final void writeInt(CodedOutputStream ous, int v) throws IOException {
+	public  final void writeInt(CodedOutputStream ous, int v) throws IOException {
 		ous.writeRawByte((v >>> 24) & 0xFF);
 		ous.writeRawByte((v >>> 16) & 0xFF);
 		ous.writeRawByte((v >>>  8) & 0xFF);
@@ -196,7 +232,7 @@ public class BinaryInspector {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<Float> combineParts(File fileToExtract, Map<File, String> partsToExtractFrom) throws IOException {
+	public  List<Float> combineParts(File fileToExtract, Map<File, String> partsToExtractFrom) throws IOException {
 		BinaryMapIndexReader[] indexes = new BinaryMapIndexReader[partsToExtractFrom.size()];
 		RandomAccessFile[] rafs = new RandomAccessFile[partsToExtractFrom.size()];
 		
@@ -326,7 +362,7 @@ public class BinaryInspector {
 	}
 
 
-	private static void copyBinaryPart(CodedOutputStream ous, byte[] BUFFER, RandomAccessFile raf, long fp, int length)
+	private  void copyBinaryPart(CodedOutputStream ous, byte[] BUFFER, RandomAccessFile raf, long fp, int length)
 			throws IOException {
 		raf.seek(fp);
 		int toRead = length;
@@ -344,7 +380,7 @@ public class BinaryInspector {
 	}
 	
 
-	protected static String formatBounds(int left, int right, int top, int bottom){
+	protected  String formatBounds(int left, int right, int top, int bottom){
 		double l = MapUtils.get31LongitudeX(left);
 		double r = MapUtils.get31LongitudeX(right);
 		double t = MapUtils.get31LatitudeY(top);
@@ -352,23 +388,23 @@ public class BinaryInspector {
 		return formatLatBounds(l, r, t, b); 
 	}
 	
-	protected static String formatLatBounds(double l, double r, double t, double b){
+	protected  String formatLatBounds(double l, double r, double t, double b){
 		MessageFormat format = new MessageFormat("(left top - right bottom) : {0,number,#.####}, {1,number,#.####} NE - {2,number,#.####}, {3,number,#.####} NE", new Locale("EN", "US"));
 		return format.format(new Object[]{l, t, r, b}); 
 	}
 	
-	public static void printFileInformation(String fileName,VerboseInfo verbose) throws IOException {
+	public  void printFileInformation(String fileName) throws IOException {
 		File file = new File(fileName);
 		if(!file.exists()){
 			println("Binary OsmAnd index " + fileName + " was not found.");
 			return;
 		}
-		printFileInformation(file,verbose);
+		printFileInformation(file);
 	}
 	
 	
 
-	public static void printFileInformation(File file, VerboseInfo verbose) throws IOException {
+	public  void printFileInformation(File file) throws IOException {
 		RandomAccessFile r = new RandomAccessFile(file.getAbsolutePath(), "r");
 		try {
 			BinaryMapIndexReader index = new BinaryMapIndexReader(r);
@@ -409,18 +445,18 @@ public class BinaryInspector {
 								formatBounds(mi.getLeft(), mi.getRight(), mi.getTop(), mi.getBottom()), 
 								i, j++}));
 					}
-					if((verbose != null && verbose.isVmap())){
-						printMapDetailInfo(verbose, index, m);
+					if((vInfo != null && vInfo.isVmap())){
+						printMapDetailInfo(index, m);
 					}
-				} else if(p instanceof PoiRegion && (verbose != null && verbose.isVpoi())){
-					printPOIDetailInfo(verbose, index, (PoiRegion) p);
+				} else if(p instanceof PoiRegion && (vInfo != null && vInfo.isVpoi())){
+					printPOIDetailInfo(vInfo, index, (PoiRegion) p);
 				} else if (p instanceof AddressRegion) {
 					List<CitiesBlock> cities = ((AddressRegion) p).cities;
 					for (CitiesBlock c : cities) {
 						println("\t" + i + "." + c.type + " Address part size=" + c.length + " bytes");
 					}
-					if (verbose != null && verbose.isVaddress()) {
-						printAddressDetailedInfo(verbose, index, (AddressRegion) p);
+					if (vInfo != null && vInfo.isVaddress()) {
+						printAddressDetailedInfo(vInfo, index, (AddressRegion) p);
 					}
 				}
 				i++;
@@ -434,7 +470,7 @@ public class BinaryInspector {
 		
 	}
 
-	private static void printAddressDetailedInfo(VerboseInfo verbose, BinaryMapIndexReader index, AddressRegion region) throws IOException {
+	private  void printAddressDetailedInfo(VerboseInfo verbose, BinaryMapIndexReader index, AddressRegion region) throws IOException {
 		String[] cityType_String = new String[] {
 	        "Cities/Towns section",
 	        "Villages section",
@@ -508,15 +544,19 @@ public class BinaryInspector {
 	{
 		int value;
 	}
-	private static void printMapDetailInfo(final VerboseInfo verbose, BinaryMapIndexReader index, MapIndex mapIndex) throws IOException {
+	private  void printMapDetailInfo(BinaryMapIndexReader index, MapIndex mapIndex) throws IOException {
 		final StringBuilder b = new StringBuilder();
 		final DamnCounter mapObjectsCounter = new DamnCounter();
+		if(vInfo.osm){
+			printToFile("<?xml version='1.0' encoding='UTF-8'?>\n" +
+					"<osm version='0.5'>\n");
+		}
 		SearchRequest<BinaryMapDataObject> req = BinaryMapIndexReader.buildSearchRequest(
-				MapUtils.get31TileNumberX(verbose.lonleft),
-				MapUtils.get31TileNumberX(verbose.lonright),
-				MapUtils.get31TileNumberY(verbose.lattop),
-				MapUtils.get31TileNumberY(verbose.latbottom),
-				verbose.getZoom(),
+				MapUtils.get31TileNumberX(vInfo.lonleft),
+				MapUtils.get31TileNumberX(vInfo.lonright),
+				MapUtils.get31TileNumberY(vInfo.lattop),
+				MapUtils.get31TileNumberY(vInfo.latbottom),
+				vInfo.getZoom(),
 				new SearchFilter() {
 					@Override
 					public boolean accept(TIntArrayList types, MapIndex index) {
@@ -527,73 +567,20 @@ public class BinaryInspector {
 					@Override
 					public boolean publish(BinaryMapDataObject obj) {
 						mapObjectsCounter.value++;
-						if(verbose.vmapObjects)
+						if(vInfo.vmapObjects)
 						{
 							b.setLength(0);
-							boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
-							if(multipolygon ) {
-								b.append("Multipolygon");
+							if(vInfo.osm) {
+								printOsmMapDetails(obj, b);
+								try {
+									printToFile(b.toString());
+								} catch (IOException e) {
+									throw new RuntimeException(e);
+								}
 							} else {
-								b.append(obj.area? "Area" : (obj.getPointsLength() > 1? "Way" : "Point"));
+								printMapDetails(obj, b);
+								println(b.toString());
 							}
-							int[] types = obj.getTypes();
-							b.append(" types [");
-							for(int j = 0; j<types.length; j++){
-								if(j > 0) {
-									b.append(", ");
-								}
-								TagValuePair pair = obj.getMapIndex().decodeType(types[j]);
-								if(pair == null) {
-									System.err.println("Type " + types[j] + "was not found");
-									continue;
-	//								throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
-								}
-								b.append(pair.toSimpleString()+" ("+types[j]+")");
-							}
-							b.append("]");
-							if(obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0){
-								b.append(" add_types [");
-								for(int j = 0; j<obj.getAdditionalTypes().length; j++){
-									if(j > 0) {
-										b.append(", ");
-									}
-									TagValuePair pair = obj.getMapIndex().decodeType(obj.getAdditionalTypes()[j]);
-									if(pair == null) {
-										System.err.println("Type " + obj.getAdditionalTypes()[j] + "was not found");
-										continue;
-	//									throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
-									}
-									b.append(pair.toSimpleString()+"("+obj.getAdditionalTypes()[j]+")");
-									
-								}
-								b.append("]");
-							}
-							TIntObjectHashMap<String> names = obj.getObjectNames();
-							if(names != null && !names.isEmpty()) {
-								b.append(" Names [");
-								int[] keys = names.keys();
-								for(int j = 0; j<keys.length; j++){
-									if(j > 0) {
-										b.append(", ");
-									}
-									TagValuePair pair = obj.getMapIndex().decodeType(keys[j]);
-									if(pair == null) {
-										throw new NullPointerException("Type " + keys[j] + "was not found");
-									}
-									b.append(pair.toSimpleString()+"("+keys[j]+")");
-									b.append(" - ").append(names.get(keys[j]));
-								}
-								b.append("]");
-							}
-							
-							b.append(" id ").append((obj.getId() >> 1));
-							b.append(" lat/lon : ");
-							for(int i=0; i<obj.getPointsLength(); i++) {
-								float x = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
-								float y = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
-								b.append(x).append(" / ").append(y).append(" , ");
-							}
-							println(b.toString());
 						}
 						return false;
 					}
@@ -603,10 +590,178 @@ public class BinaryInspector {
 					}
 				});
 		index.searchMapIndex(req, mapIndex);
+		if(vInfo.osm){
+			printToFile("</osm >\n");
+		}
 		println("\tTotal map objects: " + mapObjectsCounter.value);
 	}
-	
-	private static void printPOIDetailInfo(VerboseInfo verbose, BinaryMapIndexReader index, PoiRegion p) throws IOException {
+
+	private static void printMapDetails(BinaryMapDataObject obj, StringBuilder b) {
+		boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
+		if(multipolygon ) {
+			b.append("Multipolygon");
+		} else {
+			b.append(obj.area? "Area" : (obj.getPointsLength() > 1? "Way" : "Point"));
+		}
+		int[] types = obj.getTypes();
+		b.append(" types [");
+		for(int j = 0; j<types.length; j++){
+			if(j > 0) {
+				b.append(", ");
+			}
+			TagValuePair pair = obj.getMapIndex().decodeType(types[j]);
+			if(pair == null) {
+				System.err.println("Type " + types[j] + "was not found");
+				continue;
+//								throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
+			}
+			b.append(pair.toSimpleString()+" ("+types[j]+")");
+		}
+		b.append("]");
+		if(obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0){
+			b.append(" add_types [");
+			for(int j = 0; j<obj.getAdditionalTypes().length; j++){
+				if(j > 0) {
+					b.append(", ");
+				}
+				TagValuePair pair = obj.getMapIndex().decodeType(obj.getAdditionalTypes()[j]);
+				if(pair == null) {
+					System.err.println("Type " + obj.getAdditionalTypes()[j] + "was not found");
+					continue;
+//									throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
+				}
+				b.append(pair.toSimpleString()+"("+obj.getAdditionalTypes()[j]+")");
+
+			}
+			b.append("]");
+		}
+		TIntObjectHashMap<String> names = obj.getObjectNames();
+		if(names != null && !names.isEmpty()) {
+			b.append(" Names [");
+			int[] keys = names.keys();
+			for(int j = 0; j<keys.length; j++){
+				if(j > 0) {
+					b.append(", ");
+				}
+				TagValuePair pair = obj.getMapIndex().decodeType(keys[j]);
+				if(pair == null) {
+					throw new NullPointerException("Type " + keys[j] + "was not found");
+				}
+				b.append(pair.toSimpleString()+"("+keys[j]+")");
+				b.append(" - ").append(names.get(keys[j]));
+			}
+			b.append("]");
+		}
+
+		b.append(" id ").append((obj.getId() >> 1));
+		b.append(" lat/lon : ");
+		for(int i=0; i<obj.getPointsLength(); i++) {
+			float x = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
+			float y = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
+			b.append(x).append(" / ").append(y).append(" , ");
+		}
+	}
+
+
+	private static int OSM_ID = 1;
+
+	private  void printOsmMapDetails(BinaryMapDataObject obj, StringBuilder b) {
+		boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
+		boolean point = obj.getPointsLength() == 1;
+		StringBuilder tags = new StringBuilder();
+		int[] types = obj.getTypes();
+		for(int j = 0; j<types.length; j++){
+			TagValuePair pair = obj.getMapIndex().decodeType(types[j]);
+			if(pair == null) {
+				throw new NullPointerException("Type " + types[j] + "was not found");
+			}
+			tags.append("\t<tag k='").append(pair.tag).append("' v='").append(pair.value).append("' />\n");
+		}
+		if(obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0){
+			for(int j = 0; j<obj.getAdditionalTypes().length; j++){
+				TagValuePair pair = obj.getMapIndex().decodeType(obj.getAdditionalTypes()[j]);
+				if(pair == null) {
+					throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
+				}
+				tags.append("\t<tag k='").append(pair.tag).append("' v='").append(pair.value).append("' />\n");
+			}
+		}
+		TIntObjectHashMap<String> names = obj.getObjectNames();
+		if(names != null && !names.isEmpty()) {
+			int[] keys = names.keys();
+			for(int j = 0; j<keys.length; j++){
+				TagValuePair pair = obj.getMapIndex().decodeType(keys[j]);
+				if(pair == null) {
+					throw new NullPointerException("Type " + keys[j] + "was not found");
+				}
+				String name = names.get(keys[j]);
+				name = name.replace("'", "&apos;");
+				tags.append("\t<tag k='").append(pair.tag).append("' v='").append(name).append("' />\n");
+			}
+		}
+
+		tags.append("\t<tag k=\'").append("original_id").append("' v='").append(obj.getId() >> 1).append("'/>\n");
+		if(point) {
+			float lon= (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(0));
+			float lat = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(0));
+			b.append("<node id = '" + OSM_ID++ + "' lat='" +lat+"' lon='"+lon+"' >\n" );
+			b.append(tags);
+			b.append("</node>\n");
+		} else {
+			TLongArrayList innerIds = new TLongArrayList();
+			TLongArrayList ids = new TLongArrayList();
+			for(int i=0; i<obj.getPointsLength(); i++) {
+				float lon = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
+				float lat = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
+				int id = OSM_ID++;
+				b.append("\t<node id = '" + id + "' lat='" +lat+"' lon='"+lon+"' />\n" );
+				ids.add(id);
+			}
+			long outerId = printWay(ids, b, multipolygon ? null : tags);
+			if (multipolygon) {
+				int[][] polygonInnerCoordinates = obj.getPolygonInnerCoordinates();
+				for (int j = 0; j < polygonInnerCoordinates.length; j++) {
+					ids.clear();;
+					for (int i = 0; i < polygonInnerCoordinates[j].length; i += 2) {
+						float lon = (float) MapUtils.get31LongitudeX(polygonInnerCoordinates[j][i]);
+						float lat = (float) MapUtils.get31LatitudeY(polygonInnerCoordinates[j][i + 1]);
+						int id = OSM_ID++;
+						b.append("<node id = '" + id + "' lat='" + lat + "' lon='" + lon + "' />\n");
+						ids.add(id);
+					}
+					innerIds.add(printWay(ids, b, null));
+				}
+				int id = OSM_ID++;
+				b.append("<relation id = '" + id + "'>\n" );
+				b.append(tags);
+				b.append("\t<member type='way' role='outer' ref= '" + outerId + "'/>\n" );
+				TLongIterator it = innerIds.iterator();
+				while(it.hasNext()) {
+					long ref = it.next();
+					b.append("<member type='way' role='inner' ref= '" + ref + "'/>\n" );
+				}
+				b.append("</relation>\n" );
+			}
+		}
+	}
+
+	private  long printWay(TLongArrayList ids, StringBuilder b , StringBuilder tags){
+		int id = OSM_ID++;
+		b.append("<way id = '" + id + "'>\n" );
+		if(tags != null) {
+			b.append(tags);
+		}
+		TLongIterator it = ids.iterator();
+		while(it.hasNext()) {
+			long ref = it.next();
+			b.append("\t<nd ref = '" + ref + "'/>\n" );
+		}
+		b.append("</way>\n" );
+		return id;
+	}
+
+
+	private  void printPOIDetailInfo(VerboseInfo verbose, BinaryMapIndexReader index, PoiRegion p) throws IOException {
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 				MapUtils.get31TileNumberX(verbose.lonleft),
 				MapUtils.get31TileNumberX(verbose.lonright),
@@ -646,13 +801,13 @@ public class BinaryInspector {
 		
 	}
 
-	public static void printUsage(String warning) {
+	public  void printUsage(String warning) {
 		if(warning != null){
 			println(warning);
 		}
 		println("Inspector is console utility for working with binary indexes of OsmAnd.");
 		println("It allows print info about file, extract parts and merge indexes.");
-		println("\nUsage for print info : inspector [-vaddress] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vpoi] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLan] [file]");
+		println("\nUsage for print info : inspector [-vaddress] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vmapobjects] [-osm] [-vpoi] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLan] [file]");
 		println("  Prints information about [file] binary index of OsmAnd.");
 		println("  -v.. more verbouse output (like all cities and their streets or all map objects with tags/values and coordinates)");
 		println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");
