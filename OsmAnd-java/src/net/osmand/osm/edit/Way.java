@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 
 public class Way extends Entity {
 	
@@ -144,6 +145,31 @@ public class Way extends Entity {
 				nodes.add((Node) entities.get(new EntityId(EntityType.NODE,nodeIds.get(i))));
 			}
 		}
+	}
+
+	public QuadRect getLatLonBBox() {
+		QuadRect qr = null;
+		if(nodes != null) {
+			for(Node n : nodes){
+				if(qr == null) {
+					qr.left = (float) n.getLongitude();
+					qr.right = (float) n.getLongitude();
+					qr.top   = (float) n.getLatitude();
+					qr.bottom = (float) n.getLatitude();
+				}
+				if(n.getLongitude() < qr.left) {
+					qr.left = (float) n.getLongitude();
+				} else if(n.getLongitude() > qr.right) {
+					qr.right = (float) n.getLongitude();
+				}
+				if(n.getLatitude() > qr.top) {
+					qr.top = (float) n.getLatitude();
+				} else if(n.getLatitude() < qr.bottom) {
+					qr.bottom = (float) n.getLatitude();
+				}
+			}
+		}
+		return qr;
 	}
 	
 	@Override
