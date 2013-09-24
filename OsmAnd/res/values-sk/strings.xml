@@ -1355,4 +1355,5 @@
 →\n\t* Mnohé zmeny používateľského rozhrania↵
 →\n\t* Oprava chýb v zobrazení vzdialenosti, GPX analyzátoru, práce s medzizastávkami, plánovacom module, nahrávaním na OSM, HTTPS↵
     </string>
-    </resources>
+    <string name="base_world_map">základná mapa sveta</string>
+	</resources>
