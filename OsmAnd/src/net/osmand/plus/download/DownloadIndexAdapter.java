@@ -106,21 +106,41 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				results.values = indexFiles;
 				results.count = indexFiles.size();
 			} else {
-				String[] vars = constraint.toString().split("\\s");
-				for (int i = 0; i < vars.length; i++) {
-					vars[i] = vars[i].trim().toLowerCase();
+				String[] ors =  constraint.toString().split("\\,");
+				List<List<String>> conds = new ArrayList<List<String>>();
+				for(String or : ors) {
+					final ArrayList<String> cond = new ArrayList<String>();
+					for(String term :  or.split("\\s")) {
+						final String t = term.trim().toLowerCase();
+						if(t.length() > 0) {
+							cond.add(t);
+						}
+					}
+					if(cond.size() > 0) {
+						conds.add(cond);
+					}
 				}
 				List<IndexItem> filter = new ArrayList<IndexItem>();
 				ClientContext c = downloadActivity.getMyApplication();
 				for (IndexItem item : indexFiles) {
 					boolean add = true;
-					for (String var : vars) {
-						if (var.length() > 0) {
-							if (!item.getVisibleName(c).toLowerCase().contains(var) 
+					final String visibleName = item.getVisibleName(c).toLowerCase();
+					for(List<String> or : conds) {
+						boolean tadd = true;
+						for (String var : or) {
+							if (!visibleName.contains(var)
 									/*&& !item.getDescription().toLowerCase().contains(var)*/) {
-								add = false;
+								tadd = false;
+								break;
 							}
 						}
+						if(!tadd) {
+							add = false;
+						} else {
+							add = true;
+							break;
+						}
+
 					}
 					if (add) {
 						filter.add(item);

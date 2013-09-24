@@ -269,6 +269,7 @@ public class OsmandRegions {
 		testCountry(or, 28.8056, 29.9858, "africa", "egypt" );
 		testCountry(or, 35.7521, 139.7887, "japan");
 		testCountry(or, 46.5145, 102.2580, "mongolia");
+		testCountry(or, 62.54, 43.36, "arkhangelsk", "northwestern-federal-district");
 
 
 	}

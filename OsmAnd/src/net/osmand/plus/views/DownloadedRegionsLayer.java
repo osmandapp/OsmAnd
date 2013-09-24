@@ -122,63 +122,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				float w = Math.abs(latLonBox.width() / 2);
 				float h = Math.abs(latLonBox.height() / 2);
 				final RectF rf = new RectF(latLonBox.left - w, latLonBox.top + h, latLonBox.right + w, latLonBox.bottom - h);
-				AsyncTask<Object, Object, List<BinaryMapDataObject>> task = new AsyncTask<Object, Object, List<BinaryMapDataObject>>() {
-					@Override
-					protected List<BinaryMapDataObject> doInBackground(Object... params) {
-						if (queriedBBox.contains(rf)) {
-							return null;
-						}
-						if(zoom < ZOOM_TO_SHOW_MAP_NAMES) {
-							basemapExists = rm.getRenderer().basemapExists();
-						}
-						List<BinaryMapDataObject> result = null;
-						int left = MapUtils.get31TileNumberX(rf.left);
-						int right = MapUtils.get31TileNumberX(rf.right);
-						int top = MapUtils.get31TileNumberY(rf.top);
-						int bottom = MapUtils.get31TileNumberY(rf.bottom);
-						final boolean empty = rm.getRenderer().checkIfMapIsEmpty(left, right, top, bottom, zoom);
-						noMapsPresent = empty;
-						if(!empty && zoom >= ZOOM_TO_SHOW_MAP_NAMES) {
-							return Collections.emptyList();
-						}
-						try {
-							result = osmandRegions.queryBbox(left, right, top, bottom);
-						} catch (IOException e) {
-							return result;
-						}
-						Iterator<BinaryMapDataObject> it = result.iterator();
-						while (it.hasNext()) {
-							BinaryMapDataObject o = it.next();
-							if (zoom < ZOOM_TO_SHOW_BORDERS) {
-								//
-							} else {
-								if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
-									it.remove();
-								}
-							}
-						}
-						return result;
-					}
-
-					@Override
-					protected void onPreExecute() {
-						currentTask = this;
-					}
-
-					@Override
-					protected void onPostExecute(List<BinaryMapDataObject> result) {
-						if (result != null) {
-							queriedBBox = rf;
-							objectsToDraw = result;
-							queriedZoom = zoom;
-						}
-						currentTask = null;
-						if (pendingTask != null) {
-							pendingTask.execute();
-							pendingTask = null;
-						}
-					}
-				};
+				AsyncTask<Object, Object, List<BinaryMapDataObject>> task = createNewTask(zoom, rf);
 				if (currentTask == null) {
 					task.execute();
 				} else {
@@ -190,20 +134,25 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				if (zoom >= ZOOM_TO_SHOW_MAP_NAMES) {
 					StringBuilder s = new StringBuilder(view.getResources().getString(R.string.download_files));
 					filter.setLength(0);
+					Set<String> set = new TreeSet<String>();
 					if ((currentObjects != null && currentObjects.size() > 0)) {
 						for (int i = 0; i < currentObjects.size(); i++) {
-							if (i > 0) {
+							final BinaryMapDataObject o = currentObjects.get(i);
+							String name = Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
+							if(!set.add(name)) {
+								continue;
+							}
+							if (set.size() > 1) {
 								s.append(" & ");
+								filter.append(", ");
 							} else {
 								s.append(" ");
 							}
-							final BinaryMapDataObject o = currentObjects.get(i);
-							String string = Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
-							filter.append(string + " ");
+							filter.append(name);
 							if (osmandRegions.getPrefix(o) != null) {
-								string = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getPrefix(o)) + " " + string;
+								name = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getPrefix(o)) + " " + name;
 							}
-							s.append(string);
+							s.append(name);
 						}
 					}
 					downloadBtn.setVisibility(View.VISIBLE);
@@ -216,13 +165,14 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 						downloadBtn.setText(view.getResources().getString(R.string.download_files) + " " +
 								view.getResources().getString(R.string.base_world_map));
 					}
+					path.reset();
 					for (BinaryMapDataObject o : currentObjects) {
 						final String key = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getDownloadName(o)) +
 								IndexConstants.BINARY_MAP_INDEX_EXT;
 						if (!rm.getIndexFileNames().containsKey(key)) {
 							continue;
 						}
-						path.reset();
+
 						double lat = MapUtils.get31LatitudeY(o.getPoint31YTile(0));
 						double lon = MapUtils.get31LongitudeX(o.getPoint31XTile(0));
 						path.moveTo(view.getRotatedMapXForPoint(lat, lon), view.getRotatedMapYForPoint(lat, lon));
@@ -232,12 +182,72 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 							path.lineTo(view.getRotatedMapXForPoint(lat, lon),
 									view.getRotatedMapYForPoint(lat, lon));
 						}
-						canvas.drawPath(path, paint);
 					}
+					canvas.drawPath(path, paint);
 				}
 
 			}
 		}
+	}
+
+	private AsyncTask<Object, Object, List<BinaryMapDataObject>> createNewTask(final int zoom, final RectF rf) {
+		return new AsyncTask<Object, Object, List<BinaryMapDataObject>>() {
+			@Override
+			protected List<BinaryMapDataObject> doInBackground(Object... params) {
+				if (queriedBBox.contains(rf)) {
+					return null;
+				}
+				if (zoom < ZOOM_TO_SHOW_MAP_NAMES) {
+					basemapExists = rm.getRenderer().basemapExists();
+				}
+				List<BinaryMapDataObject> result = null;
+				int left = MapUtils.get31TileNumberX(rf.left);
+				int right = MapUtils.get31TileNumberX(rf.right);
+				int top = MapUtils.get31TileNumberY(rf.top);
+				int bottom = MapUtils.get31TileNumberY(rf.bottom);
+				final boolean empty = rm.getRenderer().checkIfMapIsEmpty(left, right, top, bottom, zoom);
+				noMapsPresent = empty;
+				if (!empty && zoom >= ZOOM_TO_SHOW_MAP_NAMES) {
+					return Collections.emptyList();
+				}
+				try {
+					result = osmandRegions.queryBbox(left, right, top, bottom);
+				} catch (IOException e) {
+					return result;
+				}
+				Iterator<BinaryMapDataObject> it = result.iterator();
+				while (it.hasNext()) {
+					BinaryMapDataObject o = it.next();
+					if (zoom < ZOOM_TO_SHOW_BORDERS) {
+						//
+					} else {
+						if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
+							it.remove();
+						}
+					}
+				}
+				return result;
+			}
+
+			@Override
+			protected void onPreExecute() {
+				currentTask = this;
+			}
+
+			@Override
+			protected void onPostExecute(List<BinaryMapDataObject> result) {
+				if (result != null) {
+					queriedBBox = rf;
+					objectsToDraw = result;
+					queriedZoom = zoom;
+				}
+				currentTask = null;
+				if (pendingTask != null) {
+					pendingTask.execute();
+					pendingTask = null;
+				}
+			}
+		};
 	}
 
 
