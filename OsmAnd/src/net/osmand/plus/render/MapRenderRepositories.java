@@ -22,6 +22,7 @@ import java.util.Set;
 import net.osmand.IProgress;
 import net.osmand.NativeLibrary.NativeSearchResult;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -249,7 +250,7 @@ public class MapRenderRepositories {
 		}
 		
 		NativeSearchResult resultHandler = library.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, renderingReq,
-				checkForDuplicateObjectIds, this, context.getString(R.string.switch_to_raster_map_to_see));
+				checkForDuplicateObjectIds, this, /*context.getString(R.string.switch_to_raster_map_to_see)*/ "");
 		if (checkWhetherInterrupted()) {
 			resultHandler.deleteNativeResult();
 			return false;
@@ -399,12 +400,6 @@ public class MapRenderRepositories {
 					mapIndex.initMapEncodingRule(0, 1, "natural", "coastline");
 					mapIndex.initMapEncodingRule(0, 2, "name", "");
 				}
-				// avoid overflow int errors
-				BinaryMapDataObject o = new BinaryMapDataObject(new int[] { leftX + (rightX - leftX) / 2, topY + (bottomY - topY) / 2 },
-						new int[] { mapIndex.coastlineEncodingType }, null, -1);
-				o.setMapIndex(mapIndex);
-				o.putObjectName(mapIndex.nameEncodingType, context.getString(R.string.switch_to_raster_map_to_see));
-				tempResult.add(o);
 			}
 			if(zoom <= BASEMAP_ZOOM || emptyData) {
 				tempResult.addAll(basemapResult);
@@ -441,6 +436,36 @@ public class MapRenderRepositories {
 		if (box.right > 180) {
 			box.right = 180.0f;
 		}
+	}
+
+
+	public boolean checkIfMapIsEmpty(int leftX, int rightX, int topY, int bottomY, int zoom){
+		final boolean[] empty = new boolean[] {true};
+		SearchRequest<BinaryMapDataObject> searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom,
+				null, new ResultMatcher<BinaryMapDataObject>() {
+			@Override
+			public boolean publish(BinaryMapDataObject object) {
+				empty[0] = false;
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return !empty[0];
+			}
+		});
+		for (BinaryMapIndexReader c : files.values()) {
+			if(!c.isBasemap()) {
+				try {
+					c.searchMapIndex(searchRequest);
+				} catch (IOException e) {
+				}
+				if(!empty[0]) {
+					return false;
+				}
+			}
+		}
+		return empty[0];
 	}
 
 	public synchronized void loadMap(RotatedTileBox tileRect, List<IMapDownloaderCallback> notifyList) {

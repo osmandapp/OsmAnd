@@ -2,6 +2,7 @@
 routing*.xml
 rendering_types.xml
 countries.reginfo
+regions.ocbf
 h_*.png
 g_*.png
 mm_*.png

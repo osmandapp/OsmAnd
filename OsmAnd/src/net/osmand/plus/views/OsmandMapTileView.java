@@ -413,7 +413,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	public int getCenterPointY() {
 		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
-			return 3 * getHeight() / 4;
+			return 4 * getHeight() / 5;
 		}
 		return getHeight() / 2;
 	}

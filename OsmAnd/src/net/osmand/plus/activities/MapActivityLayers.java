@@ -37,20 +37,7 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.ContextMenuLayer;
-import net.osmand.plus.views.FavoritesLayer;
-import net.osmand.plus.views.GPXLayer;
-import net.osmand.plus.views.MapControlsLayer;
-import net.osmand.plus.views.MapInfoLayer;
-import net.osmand.plus.views.MapTileLayer;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.POIMapLayer;
-import net.osmand.plus.views.PointLocationLayer;
-import net.osmand.plus.views.PointNavigationLayer;
-import net.osmand.plus.views.RouteInfoLayer;
-import net.osmand.plus.views.RouteLayer;
-import net.osmand.plus.views.TransportInfoLayer;
-import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.*;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
@@ -94,6 +81,7 @@ public class MapActivityLayers {
 	private ContextMenuLayer contextMenuLayer;
 	private RouteInfoLayer routeInfoLayer;
 	private MapControlsLayer mapControlsLayer;
+	private DownloadedRegionsLayer downloadedRegionsLayer;
 
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
@@ -117,7 +105,10 @@ public class MapActivityLayers {
 		// 0.5 layer
 		mapVectorLayer = new MapVectorLayer(mapTileLayer);
 		mapView.addLayer(mapVectorLayer, 0.5f);
-		
+
+		downloadedRegionsLayer = new DownloadedRegionsLayer();
+		mapView.addLayer(downloadedRegionsLayer, 0.5f);
+
 		// 0.9 gpx layer
 		gpxLayer = new GPXLayer();
 		mapView.addLayer(gpxLayer, 0.9f);

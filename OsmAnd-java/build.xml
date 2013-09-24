@@ -46,6 +46,7 @@
 		<copy todir="${src.absolute.dir}/net/osmand/map/">
 			<fileset dir="../../resources/countries-info/">
 				<include name="countries.reginfo" />
+                <include name="regions.ocbf" />
 			</fileset>
 		</copy>
 	</target>
@@ -92,6 +93,17 @@
 				<include name="**/*.java" />
 			</fileset>
 		</jar>
+		<jar destfile="OsmAnd-core-android.jar" manifest="MANIFEST.MF">
+		      <fileset dir="${bin.absolute.dir}">
+	                <include name="**/*.class" />
+	                <exclude name="**/PlatformUtil*"/>
+	            </fileset>
+	            <fileset dir="${src.absolute.dir}">
+	                <include name="**/*.java" />
+	                <exclude name="**/PlatformUtil*"/>
+	            </fileset>
+	        </jar>
+
 
 		<delete file="MANIFEST.MF" />
 	</target>

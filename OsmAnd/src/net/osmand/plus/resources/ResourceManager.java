@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import android.os.AsyncTask;
 import net.osmand.AndroidUtils;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
@@ -67,6 +68,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+import net.osmand.map.OsmandRegions;
 
 /**
  * Resource manager is responsible to work with all resources 
@@ -123,6 +125,8 @@ public class ResourceManager {
 	protected final Map<String, BinaryMapIndexReader> routingMapFiles = Collections.synchronizedMap(new LinkedHashMap<String, BinaryMapIndexReader>());
 	
 	protected final MapRenderRepositories renderer;
+
+	protected final OsmandRegions regions;
 	
 	protected final MapTileDownloader tileDownloader;
 	
@@ -134,7 +138,7 @@ public class ResourceManager {
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
 		asyncLoadingThread.start();
-		
+
 		tileDownloader = MapTileDownloader.getInstance(Version.getFullVersion(context));
 		
 		resetStoreDirectory();
@@ -145,7 +149,8 @@ public class ResourceManager {
 		// at least 3*9?
 		float tiles = (dm.widthPixels / 256 + 2) * (dm.heightPixels / 256 + 2) * 3;
 		log.info("Tiles to load in memory : " + tiles);
-		maxImgCacheSize = (int) (tiles) ; 
+		maxImgCacheSize = (int) (tiles) ;
+		regions = new OsmandRegions();
 	}
 	
 	public MapTileDownloader getMapTileDownloader() {
@@ -405,6 +410,7 @@ public class ResourceManager {
 		warnings.addAll(checkAssets(progress));
 		initRenderers(progress);
 		geoidAltitudeCorrection = new GeoidAltitudeCorrection(context.getAppPath(null));
+		indexRegionsBoundaries(progress, false);
 		// do it lazy
 		// indexingImageTiles(progress);
 		warnings.addAll(indexingMaps(progress));
@@ -413,7 +419,23 @@ public class ResourceManager {
 		
 		return warnings;
 	}
-	
+
+	private void indexRegionsBoundaries(IProgress progress, boolean overwrite) {
+		try {
+			File file = context.getAppPath("regions.ocbf");
+			if (file != null) {
+				if (!file.exists() || overwrite) {
+					Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"),
+							new FileOutputStream(file));
+				}
+			}
+			regions.prepareFile(file.getAbsolutePath());
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+
+
 	public List<String> indexVoiceFiles(IProgress progress){
 		File file = context.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 		file.mkdirs();
@@ -445,7 +467,8 @@ public class ResourceManager {
 			applicationDataDir.mkdirs();
 			if(applicationDataDir.canWrite()){
 				try {
-					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
+					progress.startTask(context.getString(R.string.installing_new_resources), -1);
+					indexRegionsBoundaries(progress, true);
 					AssetManager assetManager = context.getAssets();
 					boolean isFirstInstall = context.getSettings().PREVIOUS_INSTALLED_VERSION.get().equals("");
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
@@ -937,6 +960,10 @@ public class ResourceManager {
 	
 	public GeoidAltitudeCorrection getGeoidAltitudeCorrection() {
 		return geoidAltitudeCorrection;
+	}
+
+	public OsmandRegions getOsmandRegions() {
+		return regions;
 	}
 	
 	

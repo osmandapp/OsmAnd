@@ -52,7 +52,7 @@ public class BinaryInspector {
 		in.inspector(args);
 		// test cases show info
 
-//		in.inspector(new String[]{"-vmap", "-vmapobjects", "-zoom=7", "-osm=/home/victor/projects/osmand/temp/zoom_7.osm", "/home/victor/projects/osmand/osm-gen/World_basemap_2.obf"});
+		in.inspector(new String[]{"/home/victor/projects/osmand/osm-gen/World_basemap_2z.obf"});
 //		in.inspector(new String[]{"-vmap", "-vmapobjects", /*"-vstreets", "-bbox=14.4,50.1,14.5,50.01", */"/home/victor/projects/osmand/osm-gen/Osmand_regions.obf"});
 //		test case extract parts
 		// test case 
@@ -67,16 +67,16 @@ public class BinaryInspector {
 	}
 	
 	private void println(String s) {
-		if(vInfo != null && vInfo.osm) {
+		if(vInfo != null && vInfo.osm && vInfo.osmOut == null) {
 			// ignore
 		} else {
 			System.out.println(s);
 		}
 
 	}
-	
+
 	private void print(String s) {
-		if(vInfo != null && vInfo.osm) {
+		if(vInfo != null && vInfo.osm && vInfo.osmOut == null) {
 			// ignore
 		} else {
 			System.out.print(s);
@@ -696,6 +696,7 @@ public class BinaryInspector {
 				}
 				String name = names.get(keys[j]);
 				name = name.replace("'", "&apos;");
+				name = name.replace("&", "&amp;");
 				tags.append("\t<tag k='").append(pair.tag).append("' v='").append(name).append("' />\n");
 			}
 		}

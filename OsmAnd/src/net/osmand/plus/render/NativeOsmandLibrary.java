@@ -50,7 +50,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 							log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
 							library = new NativeOsmandLibrary(true);
 							isNativeSupported = true;
-						} catch(Throwable e) {
+						} catch(Error e) {
 							log.error("Failed to load new native library", e); //$NON-NLS-1$
 						}
 						if(!isNativeSupported) {
