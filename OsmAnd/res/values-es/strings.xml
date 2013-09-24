@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -1403,4 +1403,5 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="local_index_tile_data_zooms">Zooms descargados: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
     <string name="map_widget_fps_info">Info depuración de FPS</string>
+	<string name="base_world_map">Mapa base mundial</string>
 	</resources>
