@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -1293,4 +1293,15 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	</string>
     <string name="osmand_monitoring_plugin_description">Gör det möjligt att spåra och navigera i viloläge (skärm av) genom att periodvis väcka upp GPS-enheten.
     Visa inställningar som gör det lätt att spela in dina tripper till lokala GPX-filer eller online med hjälp av en webbtjänst.</string>
-    </resources>
+    <string name="base_world_map">basvärldskarta</string>
+	<string name="av_camera_focus">Typ av kamerafokus</string>
+	<string name="av_camera_focus_descr">Välj typ av intern kamerafokus</string>
+	<string name="av_camera_focus_auto">Autofokus</string>
+	<string name="av_camera_focus_hiperfocal">Hyperfokal fokus</string>
+	<string name="av_camera_focus_edof">Utökat skärpedjup (EDOF)</string>
+	<string name="av_camera_focus_infinity">Fokus på oändligt</string>
+	<string name="av_camera_focus_macro">Makrofokusläge (närbild)</string>
+	<string name="av_camera_focus_continuous">Kameran försöker fokusera hela tiden</string>
+	<string name="av_photo_play_sound">Spela upp ljud vid tagning av foto</string>
+	<string name="av_photo_play_sound_descr">Välj om ett ljud ska spelas upp vid tagning av foton</string>
+</resources>
