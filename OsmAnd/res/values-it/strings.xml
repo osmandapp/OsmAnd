@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1385,4 +1385,5 @@
 →→\n\t* \'Inverno e sci\' crea una vista del paesaggio invernale (coperto da neve), e visone globale delle piste da sci e degli impianti di risalita (in abbinata con \'World ski\' download mappa)↵
 →
 	</string>
-    </resources>
+    <string name="base_world_map">mappa mondiale di base</string>
+	</resources>
