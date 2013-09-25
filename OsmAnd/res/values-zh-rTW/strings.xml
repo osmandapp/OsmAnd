@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -864,7 +864,7 @@
 	<string name="fav_points_edited">我的最愛已被更改</string>
 	<string name="fav_points_not_exist">沒有我的最愛點存在</string>
 	<string name="update_existing">取代</string>
-	<string name="only_show">只顯示</string>
+	<string name="only_show">顯示路線</string>
 	<string name="follow">開始導航</string>
 	<string name="mark_final_location_first">請先設定目的地</string>
 	<string name="get_directions">指示</string>
@@ -1119,7 +1119,7 @@
     <string name="recording_context_menu_precord">拍攝照片</string>
     <string name="dropbox_plugin_description">Dropbox 的外掛元件可以讓行跡和音訊/視訊注解同步到您的 Dropbox 帳戶。</string>
     <string name="dropbox_plugin_name">Dropbox 外掛程式</string>
-    <string name="animate_routing_using_gpx">您想使用現有的 GPX 檔案？</string>
+    <string name="animate_routing_using_gpx">開啟一個預先錄製的 GPX 路線前行？</string>
     <string name="intermediate_points_change_order">變動排列</string>
     <string name="srtm_paid_version_msg">請考慮在商場上購買等高線外掛元件，以支持更進一步的開發。</string>
     <string name="srtm_paid_version_title">等高線外掛元件</string>
@@ -1578,4 +1578,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t*\'高對比道路\'在明亮的環境照明情況下，非常突出的高亮顏色顯示道路
 		\n\t*\'冬季和滑雪\'建立一個（白雪覆蓋）冬季景觀視野，和顯示全球滑雪場和滑雪升降機
 	</string>
-    </resources>
+    <string name="base_world_map">基本的世界地圖</string>
+	</resources>
