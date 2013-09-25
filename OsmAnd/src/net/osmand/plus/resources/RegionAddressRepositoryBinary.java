@@ -67,7 +67,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	@Override
 	public synchronized void preloadBuildings(Street street, ResultMatcher<Building> resultMatcher) {
-		if(street.getBuildings().isEmpty()){
+		if(street.getBuildings().isEmpty() && street.getIntersectedStreets().isEmpty()){
 			try {
 				file.preloadBuildings(street, BinaryMapIndexReader.buildAddressRequest(resultMatcher));
 				street.sortBuildings();

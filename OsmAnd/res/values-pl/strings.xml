@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="tip_select_destination_point">Uzyskiwanie informacji o trasie</string>
   <string name="tip_select_destination_point_t">"\tTrasę przejazdu do wybranego punktu możesz zobaczyć bezpośrednio na mapie (menu kontekstowe, następnie \'Trasa\'), podczas wyszukiwania lub po długim naciśnięciu na wpis z listy ulubionych punktów.
 \n\tPunkt docelowy oznaczony jest pomarańczową flagą na mapie. OsmAnd wyświetla odległość i kierunek do niej (pomarańczowy trójkąt). "</string>
