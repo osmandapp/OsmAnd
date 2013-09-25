@@ -1,3 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources>
+<resources><string name="default_buttons_no">Non</string>
+    <string name="default_buttons_yes">Sí</string>
+    <string name="osmand_app_not_found">OsmAnd nun ta instaláu</string>
+    <string name="app_name">OsmAnd Parking</string>
+    <string name="parking_plugin_installed">El complementu OsmAnd ta instaláu y habilitáu nos axustes d'OsmAnd.</string>
 </resources>
