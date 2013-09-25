@@ -52,7 +52,7 @@ public class BinaryInspector {
 		in.inspector(args);
 		// test cases show info
 
-		in.inspector(new String[]{"/home/victor/projects/osmand/osm-gen/Russia_astrakhan_asia_2.obf"});
+//		in.inspector(new String[]{"/home/victor/projects/osmand/osm-gen/Russia_astrakhan_asia_2.obf"});
 //		in.inspector(new String[]{"-vmap", "-vmapobjects", /*"-vstreets", "-bbox=14.4,50.1,14.5,50.01", */"/home/victor/projects/osmand/osm-gen/Osmand_regions.obf"});
 //		test case extract parts
 		// test case 
