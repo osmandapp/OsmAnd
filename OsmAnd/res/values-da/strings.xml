@@ -60,7 +60,7 @@
     <string name="download_roads_only_maps">Kort kun med veje</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Skjul afgrænsninger</string>
-	<string name="animate_routing_using_gpx">Skal eksisterende GPX-fil bruges?</string>
+	<string name="animate_routing_using_gpx">Åbn en pre -indspillet GPX rute til følge ?</string>
     <string name="intermediate_points_change_order">Ændre rækkefølge</string>
     <string name="av_video_format">Videoformat</string>
     <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale afgrænsninger (admin niveau 5-9)</string>
@@ -1330,8 +1330,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="fav_points_edited">Favoritpunkt blev redigeret</string>
 	<string name="fav_points_not_exist">Der eksisterer ingen favoritpunkter</string>
 	<string name="update_existing">Erstat</string>
-	<string name="only_show">Vis kun</string>
-	<string name="follow">Følg</string>
+	<string name="only_show">Vis rute</string>
+	<string name="follow">Start navigation</string>
 	<string name="mark_final_location_first">Vælg først en destination</string>
 	<string name="get_directions">Kørselsvejledning</string>
 	<string name="show_gps_status">Vis GPS-status</string>
