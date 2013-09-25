@@ -1566,4 +1566,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 		\n\t* \'High contrast roads\' toont wegen in uitgesproken kleuren voor situaties met veel omgevingslicht
 		\n\t* \'Winter and ski\' toont een (met sneeuw bedekt) winterlandschap en toont wereldwijd skihellingen en liften (wanneer gebruikt met de \'World ski\' kaartdownload)
 	</string>
-    </resources>
+    <string name="base_world_map">Standaard wereldkaart</string>
+	</resources>
