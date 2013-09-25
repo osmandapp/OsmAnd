@@ -228,7 +228,7 @@ public class DownloadIndexesThread {
 							boolean result = downloadFile(entry, filesToReindex, forceWifi);
 							success = result || success;
 							if (result) {
-								if (entry.type != DownloadActivityType.SRTM_FILE && entry.type != DownloadActivityType.HILLSHADE_FILE) {
+								if (DownloadActivityType.isCountedInDownloads(entry.type)) {
 									downloads.set(downloads.get() + 1);
 								}
 								if (entry.existingBackupFile != null) {
@@ -263,8 +263,7 @@ public class DownloadIndexesThread {
 
 		private boolean exceedsFreelimit(DownloadEntry entry) {
 			return Version.isFreeVersion(app) &&
-					entry.type != DownloadActivityType.SRTM_FILE && entry.type != DownloadActivityType.HILLSHADE_FILE
-					&& downloads.get() >= DownloadIndexActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+					DownloadActivityType.isCountedInDownloads(entry.type) && downloads.get() >= DownloadIndexActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 		}
 
 		private String reindexFiles(List<File> filesToReindex) {

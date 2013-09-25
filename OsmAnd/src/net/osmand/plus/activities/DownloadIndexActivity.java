@@ -1,34 +1,6 @@
 package net.osmand.plus.activities;
 
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ClientContext;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.base.SuggestExternalDirectoryDialog;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadEntry;
-import net.osmand.plus.download.DownloadIndexAdapter;
-import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.IndexItemCategory;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
@@ -42,22 +14,25 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.SubMenu;
+import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.*;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.base.SuggestExternalDirectoryDialog;
+import net.osmand.plus.download.*;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.text.MessageFormat;
+import java.util.*;
 
 public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
@@ -338,7 +313,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				boolean excessLimit = left < 0;
 				if (left < 0)
 					left = 0;
-				if (getType() != DownloadActivityType.HILLSHADE_FILE || getType() != DownloadActivityType.SRTM_FILE) {
+				if (DownloadActivityType.isCountedInDownloads(getType())) {
 					text += " (" + (excessLimit ? "! " : "") + getString(R.string.files_limit, left).toLowerCase() + ")";
 				}
 			}
@@ -368,7 +343,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				items[i] = getString(R.string.download_regular_maps);
 			} else if (t[i] == DownloadActivityType.ROADS_FILE) {
 				items[i] = getString(R.string.download_roads_only_maps);
-			} else if (t[i] == DownloadActivityType.SRTM_FILE) {
+			} else if (t[i] == DownloadActivityType.SRTM_FILE || t[i] == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				items[i] = getString(R.string.download_srtm_maps);
 			} else if (t[i] == DownloadActivityType.HILLSHADE_FILE) {
 				items[i] = getString(R.string.download_hillshade_maps);
@@ -383,8 +358,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			items = new DownloadActivityType[]{
 					DownloadActivityType.NORMAL_FILE,
 					DownloadActivityType.ROADS_FILE,
-					DownloadActivityType.SRTM_FILE,
-					DownloadActivityType.HILLSHADE_FILE};
+					//DownloadActivityType.SRTM_FILE,
+					DownloadActivityType.HILLSHADE_FILE,
+					DownloadActivityType.SRTM_COUNTRY_FILE};
 		} else {
 			items = new DownloadActivityType[]{
 					DownloadActivityType.NORMAL_FILE,
@@ -495,7 +471,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				if (es.getBasename() != null && es.getBasename().contains("_wiki")) {
 					wiki = true;
 					break;
-				} else if (es.getType() != DownloadActivityType.SRTM_FILE) {
+				} else if (DownloadActivityType.isCountedInDownloads(es.getType())) {
 					total++;
 				}
 			}

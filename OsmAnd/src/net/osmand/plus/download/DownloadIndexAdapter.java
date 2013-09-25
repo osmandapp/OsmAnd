@@ -255,7 +255,8 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				item.setTextColor(defaultColor);
 				item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else {
-				if(e.getType() == DownloadActivityType.SRTM_FILE || e.getType() == DownloadActivityType.HILLSHADE_FILE){
+				if(e.getType() == DownloadActivityType.SRTM_FILE || e.getType() == DownloadActivityType.HILLSHADE_FILE
+						|| e.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
 					item.setTextColor(okColor); // GREEN
 					item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				} else if (e.getDate() != null) {

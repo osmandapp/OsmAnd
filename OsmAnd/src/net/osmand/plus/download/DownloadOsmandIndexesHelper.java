@@ -125,6 +125,8 @@ public class DownloadOsmandIndexesHelper {
 			return DownloadActivityType.NORMAL_FILE;
 		} else if("road_region".equals(tagName) ) {
 			return DownloadActivityType.ROADS_FILE;
+		} else if("srtmcountry".equals(tagName) ) {
+			return DownloadActivityType.SRTM_COUNTRY_FILE;
 		} else if("hillshade".equals(tagName) ) {
 			return DownloadActivityType.HILLSHADE_FILE;
 		}

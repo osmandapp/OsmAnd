@@ -85,13 +85,11 @@
 		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.rastermaps.SettingsRasterMapsActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.extrasettings.SettingsExtraActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.audionotes.SettingsAudioVideoActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.access.SettingsAccessibilityActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		
 		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" ></activity>
-        <activity android:name="net.osmand.plus.activities.NavigatePointActivity"></activity>
         <activity android:name="net.osmand.plus.activities.DownloadIndexActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/local_index_download"></activity>
         <activity android:name="net.osmand.plus.activities.ShowRouteInfoActivity" android:label="@string/show_route"></activity>
         <activity android:name="net.osmand.plus.activities.FavouritesListActivity" android:label="@string/favourites_list_activity"></activity>
@@ -101,11 +99,7 @@
         
         
         <activity android:name="net.osmand.plus.activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>
-        <activity android:name="net.osmand.plus.activities.search.SearchPoiFilterActivity"></activity>
-        <activity android:name="net.osmand.plus.activities.search.SearchAddressOnlineActivity"></activity>
         <activity android:name="net.osmand.plus.activities.search.SearchAddressActivity" android:label="@string/select_address_activity"></activity>
-        <activity android:name="net.osmand.plus.activities.search.SearchTransportActivity"></activity>
-        <activity android:name="net.osmand.plus.activities.search.SearchHistoryActivity"></activity>
         <activity android:name="net.osmand.plus.activities.search.SearchCityByNameActivity"></activity>
         <activity android:name="net.osmand.plus.activities.search.SearchRegionByNameActivity"></activity>
         <activity android:name="net.osmand.plus.activities.search.SearchStreetByNameActivity"></activity>
