@@ -223,7 +223,7 @@ public class BinaryInspector {
 			printFileInformation(f);
 		}
 	}
-	public  final void writeInt(CodedOutputStream ous, int v) throws IOException {
+	public  static final void writeInt(CodedOutputStream ous, int v) throws IOException {
 		ous.writeRawByte((v >>> 24) & 0xFF);
 		ous.writeRawByte((v >>> 16) & 0xFF);
 		ous.writeRawByte((v >>>  8) & 0xFF);
@@ -232,7 +232,7 @@ public class BinaryInspector {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public  List<Float> combineParts(File fileToExtract, Map<File, String> partsToExtractFrom) throws IOException {
+	public  static List<Float> combineParts(File fileToExtract, Map<File, String> partsToExtractFrom) throws IOException {
 		BinaryMapIndexReader[] indexes = new BinaryMapIndexReader[partsToExtractFrom.size()];
 		RandomAccessFile[] rafs = new RandomAccessFile[partsToExtractFrom.size()];
 		
@@ -347,7 +347,7 @@ public class BinaryInspector {
 				}
 				writeInt(ous, part.getLength());
 				copyBinaryPart(ous, BUFFER_TO_READ, raf, part.getFilePointer(), part.getLength());
-				println(MessageFormat.format("{2} part {0} is extracted {1} bytes",
+				System.out.println(MessageFormat.format("{2} part {0} is extracted {1} bytes",
 						new Object[]{part.getName(), part.getLength(), map}));
 				
 			}
@@ -362,7 +362,7 @@ public class BinaryInspector {
 	}
 
 
-	private  void copyBinaryPart(CodedOutputStream ous, byte[] BUFFER, RandomAccessFile raf, long fp, int length)
+	private  static void copyBinaryPart(CodedOutputStream ous, byte[] BUFFER, RandomAccessFile raf, long fp, int length)
 			throws IOException {
 		raf.seek(fp);
 		int toRead = length;
