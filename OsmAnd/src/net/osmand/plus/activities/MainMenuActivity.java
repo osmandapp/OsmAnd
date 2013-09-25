@@ -134,25 +134,25 @@ public class MainMenuActivity extends Activity {
 		rightview = (View) window.findViewById(R.id.SearchButton);
 		rightview.startAnimation(getAnimation(1, 0));
 		
-		String textVersion = Version.getAppVersion(((OsmandApplication) activity.getApplication()));
+		final String textVersion = Version.getAppVersion(((OsmandApplication) activity.getApplication()));
 		final TextView textVersionView = (TextView) window.findViewById(R.id.TextVersion);
 		textVersionView.setText(textVersion);
-		SharedPreferences prefs = activity.getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
-		
+		final SharedPreferences prefs = activity.getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
+		textVersionView.setOnClickListener(new OnClickListener(){
+
+			int i = 0;
+			@Override
+			public void onClick(View v) {
+				if(i++ > 8) {
+					prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
+					enableLink(activity, textVersion, textVersionView);
+				}
+			}
+		});
 		// only one commit should be with contribution version flag
 //		 prefs.edit().putBoolean(CONTRIBUTION_VERSION_FLAG, true).commit();
 		if (prefs.contains(CONTRIBUTION_VERSION_FLAG)) {
-			SpannableString content = new SpannableString(textVersion);
-			content.setSpan(new ClickableSpan() {
-				
-				@Override
-				public void onClick(View widget) {
-					final Intent mapIntent = new Intent(activity, ContributionVersionActivity.class);
-					activity.startActivityForResult(mapIntent, 0);
-				}
-			}, 0, content.length(), 0);
-			textVersionView.setText(content);
-			textVersionView.setMovementMethod(LinkMovementMethod.getInstance());
+			enableLink(activity, textVersion, textVersionView);
 		}
 		View helpButton = window.findViewById(R.id.HelpButton);
 		helpButton.setOnClickListener(new OnClickListener() {
@@ -164,8 +164,21 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 	}
-	
-	
+
+	private static void enableLink(final Activity activity, String textVersion, TextView textVersionView) {
+		SpannableString content = new SpannableString(textVersion);
+		content.setSpan(new ClickableSpan() {
+
+			@Override
+			public void onClick(View widget) {
+				final Intent mapIntent = new Intent(activity, ContributionVersionActivity.class);
+				activity.startActivityForResult(mapIntent, 0);
+			}
+		}, 0, content.length(), 0);
+		textVersionView.setText(content);
+		textVersionView.setMovementMethod(LinkMovementMethod.getInstance());
+	}
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
