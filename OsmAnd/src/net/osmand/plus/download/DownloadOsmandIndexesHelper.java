@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -135,11 +136,11 @@ public class DownloadOsmandIndexesHelper {
 			IndexFileList result = new IndexFileList();
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			try {
-				String strUrl = "http://"+IndexConstants.INDEX_DOWNLOAD_DOMAIN+"/get_indexes?" + versionAsUrl; //$NON-NLS-1$
+				String strUrl = "http://"+IndexConstants.INDEX_DOWNLOAD_DOMAIN+"/get_indexes?gzip&" + versionAsUrl; //$NON-NLS-1$
 				log.info(strUrl);
 				URL url = new URL(strUrl ); 
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
-				parser.setInput(url.openStream(), "UTF-8"); //$NON-NLS-1$
+				parser.setInput(new GZIPInputStream(url.openStream()), "UTF-8"); //$NON-NLS-1$
 				int next;
 				while((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
 					if (next == XmlPullParser.START_TAG) {
