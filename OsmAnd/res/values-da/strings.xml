@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1612,4 +1612,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	</string>
     <string name="route_descr_destination"> </string>
     <string name="create_poi_link_to_osm_doc">&lt;u&gt;Online OSM&lt;/u&gt; kort klassificering med billeder<u>Online OSM</u> map classification with images</string>
+	<string name="base_world_map">basis verdenskortet</string>
 	</resources>
