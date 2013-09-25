@@ -30,6 +30,10 @@ public class OsmandRegions {
 		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"));
 	}
 
+	public boolean containsCountry(String name){
+		return countries.containsKey(name);
+	}
+
 	public String getDownloadName(BinaryMapDataObject o) {
 		if(downloadNameType == null) {
 			return null;
