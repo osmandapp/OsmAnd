@@ -312,7 +312,7 @@
 	<string name="no_info">無資訊</string>
 	<string name="direction_style_sidewise">方向方位 (8個方位)</string>
 	<string name="direction_style_clockwise">時鐘方位(12個方位)</string>
-	<string name="settings_direction_style">方位樣式</string>
+	<string name="settings_direction_style">方向樣式</string>
 	<string name="settings_direction_style_descr">選擇樣式來表示在行進中的相對方向</string>
 	<string name="auto_announce_on">啟動自動告知</string>
 	<string name="auto_announce_off">關閉自動告知</string>
@@ -467,7 +467,7 @@
 	<string name="filename_input">檔名： </string>
 	<string name="file_with_name_already_exist">已有同檔名存在。</string>
 	<string name="default_buttons_save">儲存</string>
-	<string name="menu_save_directions">儲存目錄</string>
+	<string name="menu_save_directions">儲存指引</string>
 	<string name="local_index_upload_gpx_description">上傳 GPX 到 OSM 社群，這些將有助於改善地圖。</string>
 	<string name="local_index_items_uploaded">%2$d 項中的 %1$d 項已上傳成功。</string>
 	<string name="local_index_mi_upload_gpx">傳送到 OSM</string>
@@ -589,7 +589,7 @@
 		\n\t*興趣點（按類型或名稱）
 		\n\t*透過您的查尋履歷
 		\n\t*或透過您事先定義的我的最愛
-		\n\n在主畫面上按\'查尋\'進行查尋的動作。所有在快顯功能表中或動作列被點選中的，都提供有例如\'指示\'或\'在地圖上顯示\'選項。
+		\n\n在主畫面上按\'查尋\'進行查尋的動作。所有在快顯功能表中或動作列被點選中的，都提供有例如\'指引\'或\'在地圖上顯示\'選項。
 	</string>
 	<string name="tip_map_context_menu">\'使用位置\'選單</string>
 	<string name="tip_map_context_menu_t">地圖快顯功能表(\'使用位置\')，包含了所有操作的參考點（位置）。
@@ -613,7 +613,7 @@
 	<string name="mile">哩</string>
 	<string name="send_location_way_choose_title">分享位置方式</string>
 	<string name="send_location_sms_pattern">位置：%1$s\n%2$s</string>
-	<string name="send_location_email_pattern">查看追蹤位置，以網頁瀏覽器連結 %1$s 或用 Andriod intent連結%2$s</string>
+	<string name="send_location_email_pattern">查看追蹤位置，以網頁瀏覽器連結 %1$s 或用 Andriod intent 連結 %2$s</string>
 	<string name="send_location">傳送位置</string>
 	<string name="context_menu_item_share_location">分享位置</string>
 	<string name="add_waypoint_dialog_added">GPX 中途點\'\'{0}\'\'已成功加入</string>
@@ -867,7 +867,7 @@
 	<string name="only_show">顯示路線</string>
 	<string name="follow">開始導航</string>
 	<string name="mark_final_location_first">請先設定目的地</string>
-	<string name="get_directions">指示</string>
+	<string name="get_directions">指引</string>
 	<string name="show_gps_status">顯示 GPS 狀態</string>
 	<string name="opening_hours">營業時間</string>
 	<string name="opening_changeset">修改歷程開啟中…</string>
@@ -1523,8 +1523,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="clear_intermediate_points">清除中間點</string>
     <string name="keep_intermediate_points">保留中間點</string>
     <string name="new_directions_point_dialog">您已經有中間點設置。</string>
-    <string name="context_menu_item_directions_to">指示到</string>
-    <string name="context_menu_item_directions_from">指示來自</string>
+    <string name="context_menu_item_directions_to">指引到</string>
+    <string name="context_menu_item_directions_from">指引來自</string>
     <string name="route_descr_map_location">地圖： </string>
     <string name="route_to">到：</string>
     <string name="route_via">經過：</string>
