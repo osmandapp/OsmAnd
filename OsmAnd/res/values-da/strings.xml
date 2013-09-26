@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -60,7 +60,7 @@
     <string name="download_roads_only_maps">Kort kun med veje</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Skjul afgrænsninger</string>
-	<string name="animate_routing_using_gpx">Åbn en pre -indspillet GPX rute til følge ?</string>
+	<string name="animate_routing_using_gpx">Følg en forud forberedt GPX rute?</string>
     <string name="intermediate_points_change_order">Ændre rækkefølge</string>
     <string name="av_video_format">Videoformat</string>
     <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale afgrænsninger (admin niveau 5-9)</string>
