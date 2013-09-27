@@ -157,7 +157,7 @@ public class MapTileLayer extends BaseMapLayer {
 				int x1 = tileBox.getPixXFromTileXNoRot(leftPlusI);
 				int x2 = tileBox.getPixXFromTileXNoRot(leftPlusI + 1);
 				int y1 = tileBox.getPixYFromTileYNoRot(topPlusJ);
-				int y2 = tileBox.getPixYFromTileYNoRot(topPlusJ);
+				int y2 = tileBox.getPixYFromTileYNoRot(topPlusJ + 1);
 				// TODO elliptic
 				// float y1 = (top + j - tileY) * ftileSize + h;
 				String ordImgTile = mgr.calculateTileId(map, leftPlusI, topPlusJ, nzoom);

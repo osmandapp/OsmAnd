@@ -1,5 +1,8 @@
 package net.osmand.plus.views;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import gnu.trove.list.array.TIntArrayList;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.data.RotatedTileBox;
@@ -30,6 +33,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
@@ -332,6 +338,50 @@ public class MapControlsLayer extends OsmandMapLayer {
 					activity.changeZoom(1);
 				}
 
+			}
+		});
+		zoomInButton.setOnLongClickListener(new View.OnLongClickListener() {
+
+			@Override
+			public boolean onLongClick(View v) {
+				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
+				float scale = view.getZoomScale();
+				int p = (int) Math.round(scale * scale * 100) + 100;
+				final TIntArrayList tlist = new TIntArrayList(new int[] {100, 150, 200, 300, 400});
+				final List<String> values = new ArrayList<String>();
+				int i = -1;
+				for(int k = 0; k <= tlist.size(); k++) {
+					final boolean end = k == tlist.size();
+					if(i == -1) {
+						if ((end || p < tlist.get(k))) {
+							values.add(p + "%");
+							i = k;
+						} else if (p == tlist.get(k)) {
+							i = k;
+						}
+
+					}
+					if(k < tlist.size()) {
+						values.add(tlist.get(k) + "%");
+					}
+				}
+				if(values.size() != tlist.size() ) {
+					tlist.insert(i, p);
+				}
+
+				bld.setTitle(R.string.map_magnifier);
+				bld.setSingleChoiceItems(values.toArray(new String[values.size()]),
+						i, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						float newScale = (float) Math.sqrt((tlist.get(which) - 100f)/ 100f);
+						view.getAnimatedDraggingThread().startZooming(view.getZoom(), newScale, false);
+						dialog.dismiss();
+
+					}
+				});
+				bld.show();
+				return true;
 			}
 		});
 		

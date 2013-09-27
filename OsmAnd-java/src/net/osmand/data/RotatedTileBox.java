@@ -415,7 +415,7 @@ public class RotatedTileBox {
 		final double lat1 = getLatFromPixel(pixX, pixY);
 		final double lon1 = getLonFromPixel(pixX, pixY);
 		final double lat2 = getLatFromPixel(pixX2, pixY2);
-		final double lon2 = getLatFromPixel(pixX2, pixY2);
+		final double lon2 = getLonFromPixel(pixX2, pixY2);
 		return MapUtils.getDistance(lat1,lon1, lat2, lon2);
 	}
 
