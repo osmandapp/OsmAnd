@@ -5,22 +5,25 @@ import java.util.Map;
 import net.osmand.plus.ContextMenuAdapter;
 import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.view.MotionEvent;
+import net.osmand.plus.RotatedTileBox;
 
 public abstract class OsmandMapLayer {
 	
 	
 	public abstract void initLayer(OsmandMapTileView view);
 	
-	public abstract void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings settings);
+	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings);
+
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+	}
 	
 	public abstract void destroyLayer();
 	
 	public void onRetainNonConfigurationInstance(Map<String, Object> map) {}
 	
 	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {}
-	
+
 	public boolean onSingleTap(PointF point) {
 		return false;
 	}
@@ -33,7 +36,7 @@ public abstract class OsmandMapLayer {
 	
 	/**
 	 * This method returns whether canvas should be rotated as 
-	 * map rotated before {@link #onDraw(Canvas)}.
+	 * map rotated before {@link #onDraw(android.graphics.Canvas, net.osmand.plus.RotatedTileBox, net.osmand.plus.views.OsmandMapLayer.DrawSettings)}.
 	 * If the layer draws simply layer over screen (not over map)
 	 * it should return true.
 	 */

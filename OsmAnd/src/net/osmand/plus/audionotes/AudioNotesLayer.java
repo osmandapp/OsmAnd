@@ -10,6 +10,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
+import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -25,7 +26,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -83,10 +83,10 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings settings) {
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (view.getZoom() >= startZoom) {
 			DataTileManager<Recording> recs = plugin.getRecordings();
-			List<Recording> objects = recs.getObjects(latlonRect.top, latlonRect.left, latlonRect.bottom, latlonRect.right);
+			List<Recording> objects = recs.getObjects(tileBox.top, tileBox.left, tileBox.bottom, tileBox.right);
 			for (Recording o : objects) {
 				int x = view.getRotatedMapXForPoint(o.getLatitude(), o.getLongitude());
 				int y = view.getRotatedMapYForPoint(o.getLatitude(), o.getLongitude());

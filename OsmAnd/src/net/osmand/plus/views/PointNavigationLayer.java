@@ -6,6 +6,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
+import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -19,7 +20,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -88,7 +88,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
 		int index = 0;
 		
 		TargetPointsHelper targetPoints = map.getMyApplication().getTargetPointsHelper();

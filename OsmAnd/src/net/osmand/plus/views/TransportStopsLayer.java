@@ -9,6 +9,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
+import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.resources.TransportIndexRepository;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -17,7 +18,6 @@ import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -132,7 +132,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
 		if (view.getZoom() >= startZoom) {
 			objects.clear();
 			view.getApplication().getResourceManager().searchTransportAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), objects);

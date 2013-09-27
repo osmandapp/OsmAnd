@@ -10,14 +10,12 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapExplorer;
-import net.osmand.data.LatLon;
+import net.osmand.data.*;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
+import net.osmand.plus.*;
+import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.util.MapUtils;
@@ -270,20 +268,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	/**
-	 * @return x tile based on (int) zoom
-	 */
-	public float getXTile() {
-		return (float) MapUtils.getTileNumberX(getZoom(), longitude);
-	}
-
-	/**
-	 * @return y tile based on (int) zoom
-	 */
-	public float getYTile() {
-		return (float) MapUtils.getTileNumberY(getZoom(), latitude);
-	}
-	
-	/**
 	 * @return y tile based on (int) zoom
 	 */
 	public float getEllipticYTile() {
@@ -376,22 +360,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	// ////////////////////////////// DRAWING MAP PART /////////////////////////////////////////////
-
-	protected void drawEmptyTile(Canvas cvs, float x, float y, float ftileSize, boolean nightMode) {
-		float tileDiv = (ftileSize / emptyTileDivisor);
-		for (int k1 = 0; k1 < emptyTileDivisor; k1++) {
-			for (int k2 = 0; k2 < emptyTileDivisor; k2++) {
-				float xk = x + tileDiv * k1;
-				float yk = y + tileDiv * k2;
-				if ((k1 + k2) % 2 == 0) {
-					cvs.drawRect(xk, yk, xk + tileDiv, yk + tileDiv, paintGrayFill);
-				} else {
-					cvs.drawRect(xk, yk, xk + tileDiv, yk + tileDiv, nightMode ? paintBlackFill : paintWhiteFill);
-				}
-			}
-		}
-	}
-	
 	public BaseMapLayer getMainLayer() {
 		return mainLayer;
 	}
@@ -408,10 +376,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public int getCenterPointX() {
+		TODO;
 		return getWidth() / 2;
 	}
 
 	public int getCenterPointY() {
+		TODO;
+
 		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
 			return 4 * getHeight() / 5;
 		}
@@ -420,14 +391,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	public void setMapPosition(int type) {
 		this.mapPosition = type;
-	}
-	
-	public double calcLongitude(int pixelFromCenter) {
-		return MapUtils.getLongitudeFromTile(getZoom(), getXTile() + pixelFromCenter /  getTileSize());
-	}
-	
-	public double calcLatitude(int pixelFromCenter) {
-		return MapUtils.getLatitudeFromTile(getZoom(), getXTile() + pixelFromCenter /  getTileSize());
 	}
 	
 	public void calculateLatLonRectangle(Rect pixRect, RectF latLonRect) {
@@ -444,53 +407,18 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		latLonRect.bottom = (float) MapUtils.getLatitudeFromTile(z, tilesRect.bottom);
 		latLonRect.right = (float) MapUtils.getLongitudeFromTile(z, tilesRect.right);
 	}
-	
 
-	public void calculateTileRectangle(Rect pixRect, float cx, float cy, float ctilex, float ctiley, RectF tileRect) {
-		float x1 = calcDiffTileX(pixRect.left - cx, pixRect.top - cy);
-		float x2 = calcDiffTileX(pixRect.left - cx, pixRect.bottom - cy);
-		float x3 = calcDiffTileX(pixRect.right - cx, pixRect.top - cy);
-		float x4 = calcDiffTileX(pixRect.right - cx, pixRect.bottom - cy);
-		float y1 = calcDiffTileY(pixRect.left - cx, pixRect.top - cy);
-		float y2 = calcDiffTileY(pixRect.left - cx, pixRect.bottom - cy);
-		float y3 = calcDiffTileY(pixRect.right - cx, pixRect.top - cy);
-		float y4 = calcDiffTileY(pixRect.right - cx, pixRect.bottom - cy);
-		float l = Math.min(Math.min(x1, x2), Math.min(x3, x4)) + ctilex;
-		float r = Math.max(Math.max(x1, x2), Math.max(x3, x4)) + ctilex;
-		float t = Math.min(Math.min(y1, y2), Math.min(y3, y4)) + ctiley;
-		float b = Math.max(Math.max(y1, y2), Math.max(y3, y4)) + ctiley;
-		tileRect.set(l, t, r, b);
-	}
 
-	public void calculatePixelRectangle(Rect pixelRect, float cx, float cy, float ctilex, float ctiley, RectF tileRect) {
-		float x1 = calcDiffPixelX(tileRect.left - ctilex, tileRect.top - ctiley);
-		float x2 = calcDiffPixelX(tileRect.left - ctilex, tileRect.bottom - ctiley);
-		float x3 = calcDiffPixelX(tileRect.right - ctilex, tileRect.top - ctiley);
-		float x4 = calcDiffPixelX(tileRect.right - ctilex, tileRect.bottom - ctiley);
-		float y1 = calcDiffPixelY(tileRect.left - ctilex, tileRect.top - ctiley);
-		float y2 = calcDiffPixelY(tileRect.left - ctilex, tileRect.bottom - ctiley);
-		float y3 = calcDiffPixelY(tileRect.right - ctilex, tileRect.top - ctiley);
-		float y4 = calcDiffPixelY(tileRect.right - ctilex, tileRect.bottom - ctiley);
-		int l = Math.round(Math.min(Math.min(x1, x2), Math.min(x3, x4)) + cx);
-		int r = Math.round(Math.max(Math.max(x1, x2), Math.max(x3, x4)) + cx);
-		int t = Math.round(Math.min(Math.min(y1, y2), Math.min(y3, y4)) + cy);
-		int b = Math.round(Math.max(Math.max(y1, y2), Math.max(y3, y4)) + cy);
-		pixelRect.set(l, t, r, b);
-	}
-
-	// used only to save space & reuse
-	protected RectF tilesRect = new RectF();
-	protected RectF latlonRect = new RectF();
-	protected Rect boundsRect = new Rect();
-	protected RectF bitmapToDraw = new RectF();
-	protected Rect bitmapToZoom = new Rect();
 	protected OsmandSettings settings = null;
-	
 	public OsmandSettings getSettings(){
 		if(settings == null){
 			settings = getApplication().getSettings();
 		}
 		return settings;
+	}
+
+	private void refreshMapNonLightweightMap() {
+
 	}
 
 	private void refreshMapInternal(boolean updateVectorRendering) {
@@ -506,21 +434,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		SurfaceHolder holder = getHolder();
 		synchronized (holder) {
-			int nzoom = getZoom();
-			float tileX = (float) MapUtils.getTileNumberX(nzoom, longitude);
-			float tileY = (float) MapUtils.getTileNumberY(nzoom, latitude);
-			float w = getCenterPointX();
-			float h = getCenterPointY();
 			Canvas canvas = holder.lockCanvas();
 			if (canvas != null) {
-				boolean nightMode = application.getDaynightHelper().isNightMode();
 				try {
-					boundsRect.set(0, 0, getWidth(), getHeight());
-					calculateTileRectangle(boundsRect, w, h, tileX, tileY, tilesRect);
-					latlonRect.top = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.top);
-					latlonRect.left = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.left);
-					latlonRect.bottom = (float) MapUtils.getLatitudeFromTile(nzoom, tilesRect.bottom);
-					latlonRect.right = (float) MapUtils.getLongitudeFromTile(nzoom, tilesRect.right);
+					updateLatLonBounds();
+					boolean nightMode = application.getDaynightHelper().isNightMode();
 					if (nightMode) {
 						canvas.drawARGB(255, 100, 100, 100);
 					} else {
@@ -543,7 +461,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			}
 		}
 	}
-	
+
 	public boolean isMeasureFPS() {
 		return MEASURE_FPS;
 	}
@@ -556,7 +474,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return fps;
 	}
 	
-	private void drawOverMap(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings drawSettings) {
+	private void drawOverMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings, boolean
+	                         onPrepareImage) {
 		int w = getCenterPointX();
 		int h = getCenterPointY();
 
@@ -571,16 +490,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				if (!layer.drawInScreenPixels()) {
 					canvas.rotate(getRotate(), w, h);
 				}
-				layer.onDraw(canvas, latlonRect, tilesRect, drawSettings);
+				if(onPrepareImage) {
+					layer.onPrepareBufferImage(canvas, tileBox, drawSettings);
+				} else {
+					layer.onDraw(canvas, tileBox, drawSettings);
+				}
 				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
 			}
-			// long time = System.currentTimeMillis();
-			// log.debug("Layer time " + (time - prev) + " " + zOrders.get(layers.get(i)));
-			// prev = time;
 		}
-		if (showMapPosition) {
+		if (showMapPosition && !onPrepareImage) {
 			canvas.drawCircle(w, h, 3 * dm.density, paintCenter);
 			canvas.drawCircle(w, h, 7 * dm.density, paintCenter);
 		}
@@ -623,40 +543,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	// ///////////////////////////////// DRAGGING PART ///////////////////////////////////////
-	public float calcDiffTileY(float dx, float dy) {
-		if(isMapRotateEnabled()){
-			return (-rotateSin * dx + rotateCos * dy) / getTileSize();
-		} else {
-			return dy / getTileSize();
-		}
-		
-	}
 
-	public float calcDiffTileX(float dx, float dy) {
-		if(isMapRotateEnabled()){
-			return (rotateCos * dx + rotateSin * dy) / getTileSize();
-		} else {
-			return dx / getTileSize();
-		}
+	private net.osmand.data.RotatedTileBox getCurrentRotatedTileBox() {
+		return new net.osmand.data.RotatedTileBox(getWidth(), getHeight(), 0.5f,
+				mapPosition == OsmandSettings.BOTTOM_CONSTANT? 0.8f : 0.5f, getLatitude(), getLongitude(),
+				(int) zoom, (getSettings().USE_HIGH_RES_MAPS.get() ? 0 : 0.5f) + (zoom - (int) zoom),rotate);
 	}
-
-	public float calcDiffPixelY(float dTileX, float dTileY) {
-		if(isMapRotateEnabled()){
-			return (rotateSin * dTileX + rotateCos * dTileY) * getTileSize();
-		} else {
-			return dTileY * getTileSize();
-		}
-		
-	}
-
-	public float calcDiffPixelX(float dTileX, float dTileY) {
-		if(isMapRotateEnabled()){
-			return (rotateCos * dTileX - rotateSin * dTileY) * getTileSize();
-		} else {
-			return dTileX * getTileSize();
-		}
-	}
-
 	/**
 	 * These methods do not consider rotating
 	 */
@@ -671,30 +563,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public int getRotatedMapXForPoint(double latitude, double longitude) {
-		int cx = getCenterPointX();
-		double xTile = MapUtils.getTileNumberX(getZoom(), longitude);
-		double yTile = MapUtils.getTileNumberY(getZoom(), latitude);
-		return (int) (calcDiffPixelX((float) (xTile - getXTile()), (float) (yTile - getYTile())) + cx);
+		return getCurrentRotatedTileBox().getPixXFromLatLon(latitude, longitude);
 	}
 
 	public int getRotatedMapYForPoint(double latitude, double longitude) {
-		int cy = getCenterPointY();
-		double xTile = MapUtils.getTileNumberX(getZoom(), longitude);
-		double yTile = MapUtils.getTileNumberY(getZoom(), latitude);
-		return (int) (calcDiffPixelY((float) (xTile - getXTile()), (float) (yTile - getYTile())) + cy);
+		return getCurrentRotatedTileBox().getPixYFromLatLon(latitude, longitude);
 	}
 
 	public boolean isPointOnTheRotatedMap(double latitude, double longitude) {
-		int cx = getCenterPointX();
-		int cy = getCenterPointY();
-		double xTile = MapUtils.getTileNumberX(getZoom(), longitude);
-		double yTile = MapUtils.getTileNumberY(getZoom(), latitude);
-		int newX = (int) (calcDiffPixelX((float) (xTile - getXTile()), (float) (yTile - getYTile())) + cx);
-		int newY = (int) (calcDiffPixelY((float) (xTile - getXTile()), (float) (yTile - getYTile())) + cy);
-		if (newX >= 0 && newX <= getWidth() && newY >= 0 && newY <= getHeight()) {
-			return true;
-		}
-		return false;
+		return getCurrentRotatedTileBox().containsLatLon(latitude, longitude);
 	}
 
 	protected void dragToAnimate(float fromX, float fromY, float toX, float toY, boolean notify) {

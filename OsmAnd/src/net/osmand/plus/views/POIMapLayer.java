@@ -11,11 +11,8 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.*;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.PoiFilter;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
@@ -31,7 +28,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -170,7 +166,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
 		
 		if (view.getZoom() >= startZoom) {
 			objects.clear();

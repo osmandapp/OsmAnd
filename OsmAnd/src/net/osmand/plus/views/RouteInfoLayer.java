@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
+import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -12,7 +13,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -177,7 +177,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 		
 	}
 	

@@ -12,6 +12,11 @@ public class RotatedTileBox {
 	private float zoom;
 	private float rotateCos;
 	private float rotateSin;
+	private QuadRect latLonBounds;
+	private int pixelWidth;
+	private int pixelHeight;
+
+
 
 	public RotatedTileBox(float leftTileX, float topTileY, float tileWidth, float tileHeight, float rotate, int zoom) {
 		set(leftTileX, topTileY, tileWidth, tileHeight, rotate, zoom);
@@ -40,6 +45,26 @@ public class RotatedTileBox {
 		this.topTileY = topTileY;
 		this.zoom = zoom;
 		init();
+		latLonBounds = calculateLatLonBox(new QuadRect());
+	}
+
+
+	public int getPixelWidth() {
+		return pixelWidth;
+	}
+
+	public int getPixelHeight() {
+		return pixelHeight;
+	}
+
+	public void setPixelDimensions(int width, int height) {
+		this.pixelHeight = height;
+		this.pixelWidth = width;
+	}
+
+
+	public QuadRect getLatLonBounds() {
+		return latLonBounds;
 	}
 	
 	public float getRotateCos() {
@@ -102,7 +127,7 @@ public class RotatedTileBox {
 		return true;
 	}
 	
-	public QuadRect calculateLatLonBox(QuadRect rectF) {
+	private QuadRect calculateLatLonBox(QuadRect rectF) {
 		float tx = calcPointTileX(tileWidth, 0);
 		float tx2 = calcPointTileX(tileWidth, tileHeight);
 		float tx3 = calcPointTileX(0, tileHeight);

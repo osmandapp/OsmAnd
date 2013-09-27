@@ -6,6 +6,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.RotatedTileBox;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import android.graphics.Canvas;
@@ -15,7 +16,6 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.RectF;
 
 public class GPXLayer extends OsmandMapLayer {
 	
@@ -71,7 +71,7 @@ public class GPXLayer extends OsmandMapLayer {
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
 		GPXFile gpxFile = view.getApplication().getGpxFileToDisplay();
 		if(gpxFile == null){
 			return;

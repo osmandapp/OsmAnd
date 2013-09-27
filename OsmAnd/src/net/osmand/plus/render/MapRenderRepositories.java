@@ -144,7 +144,6 @@ public class MapRenderRepositories {
 				nativeFiles.remove(file);
 			}
 		}
-		
 		try {
 			c.close();
 		} catch (IOException e) {
@@ -510,7 +509,7 @@ public class MapRenderRepositories {
 			requestedBox = new RotatedTileBox(tileRect);
 
 			// calculate data box
-			QuadRect dataBox = requestedBox.calculateLatLonBox(new QuadRect());
+			QuadRect dataBox = requestedBox.getLatLonBounds();
 			long now = System.currentTimeMillis();
 
 			if (cObjectsBox.left > dataBox.left || cObjectsBox.top > dataBox.top || cObjectsBox.right < dataBox.right

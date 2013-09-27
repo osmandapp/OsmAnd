@@ -2,17 +2,11 @@ package net.osmand.plus.osmodroid;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.*;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -24,11 +18,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.os.RemoteException;
-import android.text.format.DateFormat;
-import android.text.format.Time;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -100,7 +91,7 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
 
 		for (OsMoDroidPoint op : OsMoDroidPointArrayList) {
 			LatLon newLatlon;

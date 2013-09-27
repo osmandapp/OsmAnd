@@ -6,6 +6,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.resources.ResourceManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -109,12 +110,12 @@ public class MapTileLayer extends BaseMapLayer {
 	
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings drawSettings) {
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		if ((map == null && mapTileAdapter == null) || !visible) {
 			return;
 		}
 		if(mapTileAdapter != null){
-			mapTileAdapter.onDraw(canvas, latlonRect, tilesRect, drawSettings.isNightMode());
+			mapTileAdapter.onDraw(canvas, tileBox, tilesRect, drawSettings.isNightMode());
 		}
 		drawTileMap(canvas, tilesRect);
 	}

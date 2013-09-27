@@ -5,6 +5,7 @@ import net.osmand.Location;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
+import net.osmand.plus.RotatedTileBox;
 import net.osmand.util.MapUtils;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -77,7 +78,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
 		// draw
 		boolean nm = nightMode != null && nightMode.isNightMode();
 		if(nm != this.nm) {

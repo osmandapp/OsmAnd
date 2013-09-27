@@ -18,15 +18,12 @@ import android.widget.FrameLayout;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.map.OsmandRegions;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.OsmandIntents;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -111,7 +108,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 	private static int ZOOM_TO_SHOW_MAP_NAMES = 12;
 
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBox, RectF tilesRect, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox latLonBox, DrawSettings nightMode) {
 		final int zoom = view.getZoom();
 		if(downloadBtn.getVisibility() == View.VISIBLE) {
 			downloadBtn.setVisibility(View.GONE);

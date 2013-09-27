@@ -20,10 +20,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
+import net.osmand.plus.RotatedTileBox;
 
 public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 
@@ -75,7 +75,7 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
 		if (view.getZoom() >= startZoom) {
 			// request to load
 			for (FavouritePoint o : favorites.getFavouritePoints()) {
