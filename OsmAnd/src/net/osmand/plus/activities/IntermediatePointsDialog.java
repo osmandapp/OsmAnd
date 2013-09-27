@@ -81,9 +81,9 @@ public class IntermediatePointsDialog {
 				if (activity instanceof MapActivity) {
 					// AnimateDraggingMapThread thread = mapActivity.getMapView().getAnimatedDraggingThread();
 					LatLon pointToNavigate = intermediates.get(position);
-					float fZoom = ((MapActivity) activity).getMapView().getFloatZoom() < 15 ? 15 : ((MapActivity) activity).getMapView().getFloatZoom();
+					int fZoom = ((MapActivity) activity).getMapView().getZoom() < 15 ? 15 : ((MapActivity) activity).getMapView().getZoom();
 					// thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
-					((MapActivity) activity).getMapView().setZoom(fZoom);
+					((MapActivity) activity).getMapView().setIntZoom(fZoom);
 					((MapActivity) activity).getMapView().setLatLon(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
 					listadapter.notifyDataSetInvalidated();
 				}

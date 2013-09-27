@@ -1,25 +1,16 @@
 package net.osmand.plus.render;
 
+import android.graphics.*;
+import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.util.MapUtils;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.graphics.Rect;
-import android.graphics.RectF;
 
 public class MapVectorLayer extends BaseMapLayer {
 
 	private OsmandMapTileView view;
-	private Rect pixRect = new Rect();
-	private RotatedTileBox rotatedTileBox =
-			new RotatedTileBox.RotatedTileBoxBuilder().setPixelDimensions(0, 0).
-					setLocation(0, 0).setZoomAndScale(5, 0).build();
 	private ResourceManager resourceManager;
 	private Paint paintImg;
 	
@@ -48,14 +39,6 @@ public class MapVectorLayer extends BaseMapLayer {
 		paintImg = new Paint();
 		paintImg.setFilterBitmap(true);
 		paintImg.setAlpha(getAlpha());
-	}
-	
-	private void updateRotatedTileBox(){
-		float mult = (float) Math.pow(2, view.getFloatZoom() - view.getZoom());
-		float xL = (view.calcDiffTileX(pixRect.left - view.getCenterPointX(), pixRect.top - view.getCenterPointY()) + view.getXTile());
-		float yT = (view.calcDiffTileY(pixRect.left - view.getCenterPointX(), pixRect.top - view.getCenterPointY()) + view.getYTile()) ;
-		float ts = view.getSourceTileSize(); 
-		rotatedTileBox.set(xL * mult, yT * mult, ((float) pixRect.width()) / ts , ((float) pixRect.height()) / ts, view.getRotate(), view.getFloatZoom());
 	}
 	
 	public boolean isVectorDataVisible() {
@@ -95,20 +78,18 @@ public class MapVectorLayer extends BaseMapLayer {
 			resourceManager.getRenderer().interruptLoadingMap();
 		} else {
 			if (!view.isZooming()) {
-				pixRect.set(0, 0, view.getWidth(), view.getHeight());
-				updateRotatedTileBox();
-				if (resourceManager.updateRenderedMapNeeded(rotatedTileBox, drawSettings)) {
+				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {
 					// pixRect.set(-view.getWidth(), -view.getHeight() / 2, 2 * view.getWidth(), 3 * view.getHeight() / 2);
-					pixRect.set(-view.getWidth() / 3, -view.getHeight() / 4, 4 * view.getWidth() / 3, 5 * view.getHeight() / 4);
-					updateRotatedTileBox();
-					resourceManager.updateRendererMap(rotatedTileBox);
+					final RotatedTileBox copy = tilesRect.copy();
+					copy.increasePixelDimensions(copy.getPixWidth() / 3, copy.getPixHeight() / 4);
+					resourceManager.updateRendererMap(copy);
 				}
 
 			}
 
 			MapRenderRepositories renderer = resourceManager.getRenderer();
-			drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation());
-			drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation());
+			drawRenderedMap(canvas, renderer.getBitmap(), renderer.getBitmapLocation(), tilesRect);
+			drawRenderedMap(canvas, renderer.getPrevBitmap(), renderer.getPrevBmpLocation(), tilesRect);
 		}
 	}
 
@@ -117,30 +98,19 @@ public class MapVectorLayer extends BaseMapLayer {
 		boolean shown = false;
 		if (bmp != null && bmpLoc != null) {
 			float rot = bmpLoc.getRotate();
-			bmpLoc.getLeftTopTilePoint()
-			float mult = (float) MapUtils.getPowZoom(view.getZoom() - bmpLoc.getZoom());
-			float fmult = (float) MapUtils.getPowZoom(view.getFloatZoom() - bmpLoc.getZoom());
-			
-			float tx = view.getXTile() / mult;
-			float ty = view.getYTile() / mult;
-			float dleftX1 = bmpLoc.getLeftTileX() - tx;
-			float dtopY1 = bmpLoc.getTopTileY() - ty;
-			
-			float ts = view.getSourceTileSize() * fmult;
-			
-			float cos = bmpLoc.getRotateCos();
-			float sin = bmpLoc.getRotateSin();
-			float x1 = MapUtils.calcDiffPixelX(sin, cos, dleftX1, dtopY1, ts) + view.getCenterPointX();
-			float y1 = MapUtils.calcDiffPixelY(sin, cos, dleftX1, dtopY1, ts) + view.getCenterPointY();
-			
-			canvas.rotate(-rot, view.getCenterPointX(), view.getCenterPointY());
-			destImage.set(x1, y1, x1 + bmpLoc.getTileWidth() * ts, y1 + 
-					bmpLoc.getTileHeight() * ts);
+			final LatLon lt = bmpLoc.getLeftTopLatLon();
+			final LatLon rb = bmpLoc.getRightBottomLatLon();
+			canvas.rotate(-rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
+			final int x1 = currentViewport.getPixXFromLonNoRot(lt.getLongitude());
+			final int y1 = currentViewport.getPixYFromLatNoRot(lt.getLatitude());
+			final int x2 = currentViewport.getPixXFromLonNoRot(rb.getLongitude());
+			final int y2 = currentViewport.getPixYFromLatNoRot(rb.getLatitude());
+			destImage.set(x1, y1, x2, y2);
 			if(!bmp.isRecycled()){
 				canvas.drawBitmap(bmp, null, destImage, paintImg);
 				shown = true;
 			}
-			canvas.rotate(rot, view.getCenterPointX(), view.getCenterPointY());
+			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 		}
 		return shown;
 	}

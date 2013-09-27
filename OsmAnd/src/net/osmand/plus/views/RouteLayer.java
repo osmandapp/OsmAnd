@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.Location;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
@@ -24,8 +25,6 @@ public class RouteLayer extends OsmandMapLayer {
 	private OsmandMapTileView view;
 	
 	private final RoutingHelper helper;
-	private Rect boundsRect;
-	private RectF latlonRect;
 	private List<Location> points = new ArrayList<Location>();
 	private Paint paint;
 
@@ -42,8 +41,6 @@ public class RouteLayer extends OsmandMapLayer {
 	
 
 	private void initUI() {
-		boundsRect = new Rect(0, 0, view.getWidth(), view.getHeight());
-		latlonRect = new RectF();
 		paint = new Paint();
 		
 		paint.setStyle(Style.STROKE);
@@ -80,47 +77,50 @@ public class RouteLayer extends OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
 		path.reset();
 		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
 			paint.setColor(getColor(nightMode));
-			int w = view.getWidth();
-			int h = view.getHeight();
+			int w = tb.getPixWidth();
+			int h = tb.getPixHeight();
 			Location lastProjection = helper.getLastProjection();
+			final RotatedTileBox cp ;
 			if(lastProjection != null &&
-					view.isPointOnTheRotatedMap(lastProjection.getLatitude(), lastProjection.getLongitude())){
-				boundsRect = new Rect(-w / 2, -h, 3 * w / 2, h);
+					tb.containsLatLon(lastProjection.getLatitude(), lastProjection.getLongitude())){
+				cp = tb.copy();
+				cp.increasePixelDimensions(w /2, h);
 			} else {
-				boundsRect = new Rect(0, 0, w, h);
+				cp = tb;
 			}
-			view.calculateLatLonRectangle(boundsRect, latlonRect);
+
+			final QuadRect latlonRect = cp.getLatLonBounds();
 			double topLatitude = latlonRect.top;
 			double leftLongitude = latlonRect.left;
 			double bottomLatitude = latlonRect.bottom;
 			double rightLongitude = latlonRect.right;
 			double lat = topLatitude - bottomLatitude + 0.1;
 			double lon = rightLongitude - leftLongitude + 0.1;
-			drawLocations(canvas, topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);
+			drawLocations(tb, canvas, topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);
 		}
 	}
 
 
-	private void drawSegment(Canvas canvas) {
+	private void drawSegment(RotatedTileBox tb, Canvas canvas) {
 		if (points.size() > 0) {
-			int px = view.getMapXForPoint(points.get(0).getLongitude());
-			int py = view.getMapYForPoint(points.get(0).getLatitude());
+			int px = tb.getPixXFromLonNoRot(points.get(0).getLongitude());
+			int py = tb.getPixYFromLatNoRot(points.get(0).getLatitude());
 			path.moveTo(px, py);
 			for (int i = 1; i < points.size(); i++) {
 				Location o = points.get(i);
-				int x = view.getMapXForPoint(o.getLongitude());
-				int y = view.getMapYForPoint(o.getLatitude());
+				int x = tb.getPixXFromLonNoRot(o.getLongitude());
+				int y = tb.getPixYFromLatNoRot(o.getLatitude());
 				path.lineTo(x, y);
 			}
 			canvas.drawPath(path, paint);
 		}
 	}
 	
-	public void drawLocations(Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
+	public void drawLocations(RotatedTileBox tb, Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 		points.clear();
 		boolean previousVisible = false;
 		Location lastProjection = helper.getLastProjection();
@@ -148,12 +148,12 @@ public class RouteLayer extends OsmandMapLayer {
 			} else if (previousVisible) {
 				points.add(ls);
 				
-				drawSegment(canvas);
+				drawSegment(tb, canvas);
 				previousVisible = false;
 				points.clear();
 			}
 		}
-		drawSegment(canvas);
+		drawSegment(tb, canvas);
 	}
 	
 	public RoutingHelper getHelper() {

@@ -496,7 +496,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
 				LatLon parkingPoint = parkingPosition;
 				if (parkingPoint != null) {
-					float fZoom = view.getFloatZoom() < 15 ? 15 : view.getFloatZoom();
+					int fZoom = view.getZoom() < 15 ? 15 : view.getZoom();
 					thread.startMoving(parkingPoint.getLatitude(), parkingPoint.getLongitude(), fZoom, true);
 				}
 			}

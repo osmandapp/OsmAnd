@@ -176,7 +176,7 @@ public class MapActivity extends AccessibleActivity  {
 			net.osmand.Location location = app.getLocationProvider().getFirstTimeRunDefaultLocation();
 			if(location != null){
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
-				mapView.setZoom(14);
+				mapView.setIntZoom(14);
 			}
 		}
 		addDialogProvider(mapActions);
@@ -290,7 +290,7 @@ public class MapActivity extends AccessibleActivity  {
 		if (settings != null && settings.isLastKnownMapLocation()) {
 			LatLon l = settings.getLastKnownMapLocation();
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
-			mapView.setZoom(settings.getLastKnownMapZoom());
+			mapView.setIntZoom(settings.getLastKnownMapZoom());
 		}
 
 		settings.MAP_ACTIVITY_ENABLED.set(true);
@@ -362,9 +362,10 @@ public class MapActivity extends AccessibleActivity  {
 		}
 	}
 
-	public void changeZoom(float newZoom){
-		newZoom = Math.round(newZoom * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
+	public void changeZoom(int stp){
+		// delta = Math.round(delta * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
 		boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
+		final int newZoom = mapView.getZoom() + stp;
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
 		if (app.getInternalAPI().accessibilityEnabled())
 			AccessibleToast.makeText(this, getString(R.string.zoomIs) + " " + newZoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
@@ -403,13 +404,13 @@ public class MapActivity extends AccessibleActivity  {
 			// Find more appropriate plugin for it?
 			if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && event.getRepeatCount() == 0) {
 				if (mapView.isZooming()) {
-					changeZoom(mapView.getZoom() + 2);
+					changeZoom(+ 2);
 				} else {
-					changeZoom(mapView.getZoom() + 1);
+					changeZoom(+ 1);
 				}
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && event.getRepeatCount() == 0) {
-				changeZoom(mapView.getZoom() - 1);
+				changeZoom(- 1);
 				return true;
 			}
 		}
@@ -519,9 +520,9 @@ public class MapActivity extends AccessibleActivity  {
 		
 		settings.setLastKnownMapLocation((float) mapView.getLatitude(), (float) mapView.getLongitude());
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
-		if(animatedThread.isAnimating() && animatedThread.getTargetZoom() != 0){
+		if(animatedThread.isAnimating() && animatedThread.getTargetIntZoom() != 0){
 			settings.setMapLocationToShow(animatedThread.getTargetLatitude(), animatedThread.getTargetLongitude(), 
-					(int) animatedThread.getTargetZoom());
+					animatedThread.getTargetIntZoom());
 		}
 		
 		settings.setLastKnownMapZoom(mapView.getZoom());
@@ -573,10 +574,10 @@ public class MapActivity extends AccessibleActivity  {
 		} else if (settings.ZOOM_BY_TRACKBALL.get()) {
 			// Parrot device has only dpad left and right
 			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-				changeZoom(mapView.getZoom() - 1);
+				changeZoom(- 1);
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-				changeZoom(mapView.getZoom() + 1);
+				changeZoom( 1);
 				return true;
 			}
 		} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || 

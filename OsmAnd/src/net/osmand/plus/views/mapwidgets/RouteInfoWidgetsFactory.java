@@ -398,7 +398,7 @@ public class RouteInfoWidgetsFactory {
 			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
 			LatLon pointToNavigate = getPointToNavigate();
 			if (pointToNavigate != null) {
-				float fZoom = view.getFloatZoom() < 15 ? 15 : view.getFloatZoom();
+				int fZoom = view.getZoom() < 15 ? 15 : view.getZoom();
 				thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
 			}
 		}
@@ -487,19 +487,6 @@ public class RouteInfoWidgetsFactory {
 			}
 		};
 		return distanceControl;
-	}
-	
-	public MiniMapWidget createMiniMapControl(final RoutingHelper routingHelper, OsmandMapTileView view) {
-		final MiniMapWidget miniMapControl = new MiniMapWidget(view.getContext(), view) {
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean visible = routingHelper.isFollowingMode();
-				updateVisibility(visible);
-				return super.updateInfo(drawSettings);
-			}
-		};
-		miniMapControl.setVisibility(View.GONE);
-		return miniMapControl;
 	}
 	
 	private static final float miniCoeff = 2f;

@@ -9,6 +9,7 @@ import java.net.URL;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.util.Algorithms;
 
@@ -33,7 +34,7 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, OsmandMapLayer.DrawSettings drawSettings) {
 		updateTimeStamp();
 	}
 	

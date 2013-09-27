@@ -390,7 +390,7 @@ public class MapActivityLayers {
 				WptPt loc = toShow.findPointToShow();
 				if(loc != null){
 					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, 
-							mapView.getFloatZoom(), true);
+							mapView.getZoom(), true);
 				}
 				mapView.refreshMap();
 				return true;

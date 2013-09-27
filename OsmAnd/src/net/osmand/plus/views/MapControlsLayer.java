@@ -327,9 +327,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				if (view.isZooming()) {
-					activity.changeZoom(Math.round(view.getFloatZoom() + 2 * ZOOM_DELTA));
+					activity.changeZoom(2);
 				} else {
-					activity.changeZoom(Math.round(view.getFloatZoom() + 1 * ZOOM_DELTA));
+					activity.changeZoom(1);
 				}
 
 			}
@@ -338,7 +338,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				activity.changeZoom(Math.round(view.getFloatZoom() - 1 * ZOOM_DELTA));
+				activity.changeZoom(- 1);
 			}
 		});
 	}

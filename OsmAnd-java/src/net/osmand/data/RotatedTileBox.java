@@ -10,6 +10,7 @@ public class RotatedTileBox {
 	private float density;
 	private int zoom;
 	private float zoomScale;
+	private float zoomAnimation;
 	private int cx;
 	private int cy;
 	private int pixWidth;
@@ -41,6 +42,7 @@ public class RotatedTileBox {
 		this.lon = r.lon;
 		this.zoom = r.zoom;
 		this.zoomScale = r.zoomScale;
+		this.zoomAnimation = r.zoomAnimation;
 		this.rotate = r.rotate;
 		this.density = r.density;
 		this.cx = r.cx;
@@ -80,7 +82,7 @@ public class RotatedTileBox {
 	}
 
 	public void calculateDerivedFields() {
-		zoomFactor = (float) Math.pow(2, zoomScale) * 256;
+		zoomFactor = (float) Math.pow(2, zoomScale + zoomAnimation) * 256;
 		float rad = (float) Math.toRadians(this.rotate);
 		rotateCos = (float) Math.cos(rad);
 		rotateSin = (float) Math.sin(rad);
@@ -243,8 +245,18 @@ public class RotatedTileBox {
 		return (int) (dTilex * zoomFactor + cx);
 	}
 
+	public int getPixXFromTileXNoRot(double tileX) {
+		float dTilex = (float) tileX - oxTile;
+		return (int) (dTilex * zoomFactor + cx);
+	}
+
 	public int getPixYFromLatNoRot(double latitude) {
 		float dTileY  = (float) MapUtils.getTileNumberY(zoom, latitude) - oyTile;
+		return (int) ((dTileY * zoomFactor) + cy);
+	}
+
+	public int getPixYFromTileYNoRot(double tileY) {
+		float dTileY  = (float) tileY - oyTile;
 		return (int) ((dTileY * zoomFactor) + cy);
 	}
 
@@ -281,6 +293,14 @@ public class RotatedTileBox {
 		calculateDerivedFields();
 	}
 
+	public void increasePixelDimensions(int dwidth, int dheight) {
+		this.pixWidth += 2 * dwidth;
+		this.pixHeight += 2 * dheight;
+		this.cx += dwidth;
+		this.cy += dheight;
+		calculateDerivedFields();
+	}
+
 	public void setPixelDimensions(int width, int height) {
 		setPixelDimensions(width, height, 0.5f, 0.5f);
 	}
@@ -290,6 +310,19 @@ public class RotatedTileBox {
 		this.pixWidth = width;
 		this.cx = (int) (pixWidth * ratiocx);
 		this.cy = (int) (pixHeight * ratiocy);
+		calculateDerivedFields();
+	}
+
+	public boolean isZoomAnimated() {
+		return zoomAnimation != 0;
+	}
+
+	public float getZoomAnimation() {
+		return zoomAnimation;
+	}
+
+	public void setZoomAnimation(float z) {
+		this.zoomAnimation = z;
 		calculateDerivedFields();
 	}
 
@@ -317,6 +350,13 @@ public class RotatedTileBox {
 	public void setZoom(int zoom, float zoomScale) {
 		this.zoom = zoom;
 		this.zoomScale = zoomScale;
+		calculateDerivedFields();
+	}
+
+	public void setZoom(int zoom, float zoomScale, float zoomToAnimate) {
+		this.zoom = zoom;
+		this.zoomScale = zoomScale;
+		this.zoomAnimation = zoomToAnimate;
 		calculateDerivedFields();
 	}
 

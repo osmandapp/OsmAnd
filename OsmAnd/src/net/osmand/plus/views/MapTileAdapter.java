@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import net.osmand.data.RotatedTileBox;
 
 /**
  * This class is designed to represent adapter for specific map sources
@@ -17,7 +18,7 @@ public abstract class MapTileAdapter {
 		this.view = view;
 	}
 	
-	public abstract void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, boolean nightMode);
+	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, OsmandMapLayer.DrawSettings drawSettings);
 	
 	public abstract void onClear(); 
 

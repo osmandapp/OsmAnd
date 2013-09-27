@@ -2,6 +2,7 @@ package net.osmand.plus.base;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
@@ -150,13 +151,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
-	private float defineZoomFromSpeed(float speed) {
+	private float defineZoomFromSpeed(RotatedTileBox tb, float speed) {
 		if (speed < 7f / 3.6) {
 			return 0;
 		}
-		double topLat = mapView.calcLatitude(-mapView.getCenterPointY());
-		double cLat = mapView.calcLatitude(0);
-		double visibleDist = MapUtils.getDistance(cLat, mapView.getLongitude(), topLat, mapView.getLongitude());
+		double visibleDist = tb.getDistance(tb.getCenterPixelX(), 0, tb.getCenterPixelX(), tb.getCenterPixelY());
 		float time = 75f;
 		if (speed < 83f / 3.6) {
 			time = 60f;
@@ -165,8 +164,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		float zoomDelta = (float) (Math.log(visibleDist / distToSee) / Math.log(2.0f));
 		zoomDelta = Math.round(zoomDelta * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
 		// check if 17, 18 is correct?
-		if (zoomDelta + mapView.getFloatZoom() > 18 - OsmandMapTileView.ZOOM_DELTA_1) {
-			return 18 - OsmandMapTileView.ZOOM_DELTA_1 - mapView.getFloatZoom();
+		final float zoomScale = tb.getZoom() + tb.getZoomScale();
+		if (zoomDelta + zoomScale > 18 - OsmandMapTileView.ZOOM_DELTA_1) {
+			return 18 - OsmandMapTileView.ZOOM_DELTA_1 - zoomScale ;
 		}
 		return zoomDelta;
 	}
@@ -174,7 +174,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void autozoom(Location location) {
 		if (location.hasSpeed()) {
 			long now = System.currentTimeMillis();
-			float zdelta = defineZoomFromSpeed(location.getSpeed());
+			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+			float zdelta = defineZoomFromSpeed(tb, location.getSpeed());
 			if (Math.abs(zdelta) >= OsmandMapTileView.ZOOM_DELTA_1) {
 				// prevent ui hysteresis (check time interval for autozoom)
 				if (zdelta >= 2) {
@@ -186,9 +187,12 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				}
 				if (now - lastTimeAutoZooming > 4500) {
 					lastTimeAutoZooming = now;
-					float newZoom = Math.round((mapView.getFloatZoom() + zdelta) * OsmandMapTileView.ZOOM_DELTA)
+					float complexZoom = tb.getZoom() + tb.getZoomScale();
+					float newZoom = Math.round((complexZoom + zdelta) * OsmandMapTileView.ZOOM_DELTA)
 							* OsmandMapTileView.ZOOM_DELTA_1;
-					mapView.setZoom(newZoom);
+					// TODO test round final int tz = Math.round(newZoom);
+					final int tz = (int)newZoom;
+					mapView.setComplexZoom(tz, newZoom - tz);
 					// mapView.getAnimatedDraggingThread().startZooming(mapView.getFloatZoom() + zdelta, false);
 				}
 			}
@@ -203,7 +207,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				if (locationProvider.getLastKnownLocation() != null) {
 					net.osmand.Location lastKnownLocation = locationProvider.getLastKnownLocation();
 					AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
-					float fZoom = mapView.getFloatZoom() < 15 ? 15 : mapView.getFloatZoom();
+					int fZoom = mapView.getZoom() < 15 ? 15 : mapView.getZoom();
 					thread.startMoving(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
 				}
 				mapView.refreshMap();

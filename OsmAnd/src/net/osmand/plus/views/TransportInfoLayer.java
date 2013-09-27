@@ -58,7 +58,7 @@ public class TransportInfoLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox t, DrawSettings nightMode) {
 		if(routeHelper.routeIsCalculated() && visible){
 			List<RouteInfoLocation> list = routeHelper.getRoute();
 			for(RouteInfoLocation l : list){
@@ -86,10 +86,9 @@ public class TransportInfoLayer extends OsmandMapLayer {
 					}
 					if(start){
 						LatLon location = st.getLocation();
-						if (location.getLatitude() >= latLonBounds.bottom && location.getLatitude() <= latLonBounds.top  && location.getLongitude() >= latLonBounds.left 
-								&& location.getLongitude() <= latLonBounds.right ) {
-							int x = view.getRotatedMapXForPoint(location.getLatitude(), location.getLongitude());
-							int y = view.getRotatedMapYForPoint(location.getLatitude(), location.getLongitude());
+						if (t.containsLatLon(location.getLatitude(), location.getLongitude())) {
+							int x = t.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
+							int y = t.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
 							canvas.drawRect(x - getRadius(), y - getRadius(), x + getRadius(), y + getRadius(), toShow);
 						}
 					}
@@ -136,8 +135,8 @@ public class TransportInfoLayer extends OsmandMapLayer {
 					}
 					if (start) {
 						LatLon location = st.getLocation();
-						int x = view.getRotatedMapXForPoint(location.getLatitude(), location.getLongitude());
-						int y = view.getRotatedMapYForPoint(location.getLatitude(), location.getLongitude());
+						int x = tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
+						int y = tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
 						if (Math.abs(x - ex) < getRadius() * 3 /2 && Math.abs(y - ey) < getRadius() * 3 /2) {
 							AccessibleToast.makeText(view.getContext(), st.getName(view.getSettings().USE_ENGLISH_NAMES.get()) + " : " + //$NON-NLS-1$
 									route.getType() + " " + route.getRef() //$NON-NLS-1$

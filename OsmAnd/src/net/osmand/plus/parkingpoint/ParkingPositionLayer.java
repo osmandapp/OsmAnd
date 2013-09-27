@@ -75,7 +75,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
         LatLon parkingPoint = getParkingPoint();
         if (parkingPoint == null)
 			return;
@@ -88,11 +88,11 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		}
         double latitude = parkingPoint.getLatitude();
 		double longitude = parkingPoint.getLongitude();
-		if (isLocationVisible(latitude, longitude)) {
+		if (isLocationVisible(tb, latitude, longitude)) {
 			int marginX = parkingNoLimitIcon.getWidth() / 2;
 			int marginY = parkingNoLimitIcon.getHeight();
-			int locationX = view.getMapXForPoint(longitude);
-			int locationY = view.getMapYForPoint(latitude);
+			int locationX = tb.getPixXFromLonNoRot(longitude);
+			int locationY = tb.getPixYFromLatNoRot(latitude);
 			canvas.rotate(-view.getRotate(), locationX, locationY);
 			canvas.drawBitmap(parkingIcon, locationX - marginX, locationY - marginY, bitmapPaint);
 		}
@@ -101,7 +101,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		List <LatLon> parkPos = new ArrayList<LatLon>();
-		getParkingFromPoint(point, parkPos);
+		getParkingFromPoint(tileBox, point, parkPos);
 		if(!parkPos.isEmpty()){
 			StringBuilder res = new StringBuilder();
 			res.append(view.getContext().getString(R.string.osmand_parking_position_description));
@@ -122,7 +122,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
-		getParkingFromPoint(point, o);
+		getParkingFromPoint(tileBox, point, o);
 	}
 
 	@Override
@@ -192,11 +192,11 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	 * @param longitude
 	 * @return true if the parking point is located on a visible part of map
 	 */
-	private boolean isLocationVisible(double latitude, double longitude){
+	private boolean isLocationVisible(RotatedTileBox tb, double latitude, double longitude){
 		if(getParkingPoint() == null || view == null){
 			return false;
 		}
-		return view.isPointOnTheRotatedMap(latitude, longitude);
+		return tb.containsLatLon(latitude, longitude);
 	}
 	
 	/**
@@ -204,14 +204,14 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	 * @param parkingPosition is in this case not necessarily has to be a list, 
 	 * but it's also used in method <link>collectObjectsFromPoint(PointF point, List<Object> o)</link>
 	 */
-	private void getParkingFromPoint(PointF point, List<? super LatLon> parkingPosition) {
+	private void getParkingFromPoint(RotatedTileBox tb,PointF point, List<? super LatLon> parkingPosition) {
         LatLon parkingPoint = getParkingPoint();
         if (parkingPoint != null && view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			LatLon position = plugin.getParkingPosition();
-			int x = view.getRotatedMapXForPoint(position.getLatitude(), position.getLongitude());
-			int y = view.getRotatedMapYForPoint(position.getLatitude(), position.getLongitude());
+			int x = tb.getPixXFromLatLon(position.getLatitude(), position.getLongitude());
+			int y = tb.getPixYFromLatLon(position.getLatitude(), position.getLongitude());
 			// the width of an image is 40 px, the height is 60 px -> radius = 20,
 			// the position of a parking point relatively to the icon is at the center of the bottom line of the image
 			if (Math.abs(x - ex) <= radius && ((y - ey) <= radius * 2) && ((y - ey) >= -radius)) {

@@ -94,7 +94,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 						if(info.getDescriptionRoute() != null) {
 							contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute());
 						}
-						view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getFloatZoom(), true);
+						view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getZoom(), true);
 					}
 				}
 				view.refreshMap();
@@ -112,7 +112,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 					if(info.getDescriptionRoute() != null){
 						contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute());
 					}
-					view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getFloatZoom(), true);
+					view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getZoom(), true);
 				}
 				view.refreshMap();
 			}

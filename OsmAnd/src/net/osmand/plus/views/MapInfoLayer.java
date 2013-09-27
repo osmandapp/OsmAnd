@@ -17,6 +17,7 @@ import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout.LayoutParams;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
@@ -528,7 +529,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latlonBounds, DrawSettings drawSettings) {
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		updateColorShadowsOfText(drawSettings);
 		// update data on draw
 		rightStack.updateInfo(drawSettings);

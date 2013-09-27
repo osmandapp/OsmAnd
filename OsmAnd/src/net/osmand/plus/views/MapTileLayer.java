@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -28,8 +29,6 @@ public class MapTileLayer extends BaseMapLayer {
 	protected MapTileAdapter mapTileAdapter = null;
 	
 	Paint paintBitmap;
-	protected RectF tilesRect = new RectF();
-	protected RectF latlonRect = new RectF();
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
 	
@@ -116,9 +115,9 @@ public class MapTileLayer extends BaseMapLayer {
 			return;
 		}
 		if(mapTileAdapter != null){
-			mapTileAdapter.onDraw(canvas, tileBox, tilesRect, drawSettings.isNightMode());
+			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
 		}
-		drawTileMap(canvas, tilesRect);
+		drawTileMap(canvas, tileBox);
 	}
 
 	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox) {
@@ -126,21 +125,19 @@ public class MapTileLayer extends BaseMapLayer {
 			return;
 		}
 		ResourceManager mgr = resourceManager;
-		int nzoom = view.getZoom();
-		float tileX = view.getXTile();
-		float tileY = view.getYTile();
-		float w = view.getCenterPointX();
-		float h = view.getCenterPointY();
-		float ftileSize = view.getTileSize();
-		
+		int nzoom = tileBox.getZoom();
+		final QuadRect tilesRect = tileBox.getTileBounds();
+
 		// recalculate for ellipsoid coordinates
-		if (map.isEllipticYTile()) {
+		// TODO elliptic
+//		if (map.isEllipticYTile()) {
 //			return (float) MapUtils.getTileEllipsoidNumberY(getZoom(), currentViewport.get);
-			float ellipticYTile = view.getEllipticYTile();
-			tilesRect.bottom += (ellipticYTile - tileY);
-			tilesRect.top += (ellipticYTile - tileY);
-			tileY = ellipticYTile;
-		}
+//			float ellipticYTile = view.getEllipticYTile();
+//			tilesRect.bottom += (ellipticYTile - tileY);
+//			tilesRect.top += (ellipticYTile - tileY);
+//			tileY = ellipticYTile;
+//		}
+
 
 		int left = (int) FloatMath.floor(tilesRect.left);
 		int top = (int) FloatMath.floor(tilesRect.top);
@@ -157,8 +154,12 @@ public class MapTileLayer extends BaseMapLayer {
 			for (int j = 0; j < height; j++) {
 				int leftPlusI = left + i;
 				int topPlusJ = top + j;
-				float x1 = (left + i - tileX) * ftileSize + w;
-				float y1 = (top + j - tileY) * ftileSize + h;
+				int x1 = tileBox.getPixXFromTileXNoRot(leftPlusI);
+				int x2 = tileBox.getPixXFromTileXNoRot(leftPlusI + 1);
+				int y1 = tileBox.getPixYFromTileYNoRot(topPlusJ);
+				int y2 = tileBox.getPixYFromTileYNoRot(topPlusJ);
+				// TODO elliptic
+				// float y1 = (top + j - tileY) * ftileSize + h;
 				String ordImgTile = mgr.calculateTileId(map, leftPlusI, topPlusJ, nzoom);
 				// asking tile image async
 				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, leftPlusI, topPlusJ, nzoom, false);
@@ -196,13 +197,13 @@ public class MapTileLayer extends BaseMapLayer {
 						int xZoom = ((left + i) % div) * tileSize / div;
 						int yZoom = ((top + j) % div) * tileSize / div;
 						bitmapToZoom.set(xZoom, yZoom, xZoom + tileSize / div, yZoom + tileSize / div);
-						bitmapToDraw.set(x1, y1, x1 + ftileSize, y1 + ftileSize);
+						bitmapToDraw.set(x1, y1, x2 , y2);
 						canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 						oneTileShown = true;
 					}
 				} else {
 					bitmapToZoom.set(0, 0, tileSize, tileSize);
-					bitmapToDraw.set(x1, y1, x1 + ftileSize, y1 + ftileSize);
+					bitmapToDraw.set(x1, y1, x2, y2 );
 					canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 					oneTileShown = true;
 				}

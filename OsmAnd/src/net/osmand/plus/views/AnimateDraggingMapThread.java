@@ -32,7 +32,8 @@ public class AnimateDraggingMapThread {
 	private float targetRotate = 0;
 	private double targetLatitude = 0;
 	private double targetLongitude = 0;
-	private float targetZoom = 0;
+	private int targetIntZoom = 0;
+	private float targetZoomScale = 0;
 	
 	
 	public AnimateDraggingMapThread(OsmandMapTileView tileView){
@@ -106,13 +107,17 @@ public class AnimateDraggingMapThread {
 		currentThread.start();
 		
 	}
+
+	public void startMoving(final double finalLat, final double finalLon, final int endZoom, final boolean notifyListener){
+		startMoving(finalLat, finalLon, endZoom, tileView.getZoomScale(), notifyListener);
+	}
 	
-	public void startMoving(final double finalLat, final double finalLon, final float endZoom, final boolean notifyListener){
+	public void startMoving(final double finalLat, final double finalLon, final int endZoom, final float endZoomScale, final boolean notifyListener){
 		stopAnimatingSync();
 		double startLat = tileView.getLatitude();
 		double startLon = tileView.getLongitude();
 		float rotate = tileView.getRotate();
-		final float startZoom = tileView.getFloatZoom();
+		final float startZoom = tileView.getZoom() + tileView.getZoomScale();
 		int tileSize = tileView.getSourceTileSize();
 		
 		
@@ -133,7 +138,7 @@ public class AnimateDraggingMapThread {
 		skipAnimation = skipAnimation || (Math.abs(moveZoom - startZoom) >= 3 || Math.abs(endZoom - moveZoom) > 3);
 		if (skipAnimation) {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
-			tileView.zoomToAnimate(endZoom, notifyListener);
+			tileView.setZoomAnimate(endZoom, endZoomScale, notifyListener);
 			return;
 		}
 		float rad = (float) Math.toRadians(rotate);
@@ -146,7 +151,7 @@ public class AnimateDraggingMapThread {
 			
 			@Override
 			public void run() {
-				setTargetValues(endZoom, finalLat, finalLon);
+				setTargetValues(endZoom, endZoomScale, finalLat, finalLon);
 				if(moveZoom != startZoom){
 					animatingZoomInThread(startZoom, moveZoom, ZOOM_MOVE_ANIMATION_TIME, notifyListener);
 				}
@@ -159,7 +164,12 @@ public class AnimateDraggingMapThread {
 				}
 				
 				if (!stopped && moveZoom != endZoom) {
-					animatingZoomInThread(moveZoom, endZoom, ZOOM_MOVE_ANIMATION_TIME, notifyListener);
+					animatingZoomInThread(moveZoom, endZoom + endZoomScale, ZOOM_MOVE_ANIMATION_TIME, notifyListener);
+				}
+				if(!stopped){
+					tileView.setZoomAnimate(endZoom, endZoomScale, notifyListener);
+				} else{
+					tileView.setZoomAnimate(endZoom, endZoomScale, notifyListener);
 				}
 				
 				pendingRotateAnimation();
@@ -233,13 +243,13 @@ public class AnimateDraggingMapThread {
 	}
 	
 	
-	public void startZooming(final float zoomEnd, final boolean notifyListener){
+	public void startZooming(final int zoomEnd, final boolean notifyListener){
 		final float animationTime = ZOOM_ANIMATION_TIME;
 		startThreadAnimating(new Runnable(){
 			@Override
 			public void run() {
-				final float zoomStart = tileView.getFloatZoom();
-				setTargetValues(zoomEnd, tileView.getLatitude(), tileView.getLongitude());
+				final float zoomStart = tileView.getZoom() + tileView.getZoomScale();
+				setTargetValues(zoomEnd, tileView.getZoomScale(), tileView.getLatitude(), tileView.getLongitude());
 				animatingZoomInThread(zoomStart, zoomEnd, animationTime, notifyListener);
 				pendingRotateAnimation();
 			}
@@ -287,11 +297,13 @@ public class AnimateDraggingMapThread {
 	}
 	
 	private void clearTargetValues(){
-		targetZoom = 0;
+		targetIntZoom = 0;
+		targetZoomScale = 0;
 	}
 	
-	private void setTargetValues(float zoom, double lat, double lon){
-		targetZoom = zoom;
+	private void setTargetValues(int zoom, float zoomScale, double lat, double lon){
+		targetIntZoom = zoom;
+		targetZoomScale = zoomScale;
 		targetLatitude = lat;
 		targetLongitude = lon;
 	}
@@ -314,10 +326,15 @@ public class AnimateDraggingMapThread {
 		}
 	}
 	
-	public float getTargetZoom() {
-		return targetZoom;
+
+	public int getTargetIntZoom() {
+		return targetIntZoom;
 	}
-	
+
+	public float getTargetZoomScale() {
+		return targetZoomScale;
+	}
+
 	public double getTargetLatitude() {
 		return targetLatitude;
 	}
@@ -327,4 +344,5 @@ public class AnimateDraggingMapThread {
 	}
 	
 }
+
 

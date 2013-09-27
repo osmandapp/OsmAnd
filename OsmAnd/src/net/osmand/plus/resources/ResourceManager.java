@@ -837,8 +837,7 @@ public class ResourceManager {
 	
 	public void updateRendererMap(RotatedTileBox rotatedTileBox){
 		renderer.interruptLoadingMap();
-		asyncLoadingThread.requestToLoadMap(
-				new MapLoadRequest(rotatedTileBox.copy()));
+		asyncLoadingThread.requestToLoadMap(new MapLoadRequest(rotatedTileBox));
 	}
 	
 	public void interruptRendering(){

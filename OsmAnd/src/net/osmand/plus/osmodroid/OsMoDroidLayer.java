@@ -92,7 +92,7 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
 
 		for (OsMoDroidPoint op : OsMoDroidPointArrayList) {
 			LatLon newLatlon;
@@ -121,12 +121,10 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 				prevlongitude = op.prevlatlon.getLongitude();
 			}
 
-			// int locationX = view.getMapXForPoint(longitude);
-			// int locationY = view.getMapYForPoint(latitude);
-			int locationX = view.getRotatedMapXForPoint(latitude, longitude);
-			int locationY = view.getRotatedMapYForPoint(latitude, longitude);
-			int prevlocationX = view.getRotatedMapXForPoint(prevlatitude, prevlongitude);
-			int prevlocationY = view.getRotatedMapYForPoint(prevlatitude, prevlongitude);
+			int locationX = tb.getPixXFromLatLon(latitude, longitude);
+			int locationY = tb.getPixYFromLatLon(latitude, longitude);
+			int prevlocationX = tb.getPixXFromLatLon(prevlatitude, prevlongitude);
+			int prevlocationY = tb.getPixYFromLatLon(prevlatitude, prevlongitude);
 
 			// int y = opIcon.getHeight()/2;
 			// int x = opIcon.getWidth()/2;
@@ -145,7 +143,7 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		}
 	}
 
-	public void getOsMoDroidPointFromPoint(PointF point, List<? super OsMoDroidPoint> om) {
+	public void getOsMoDroidPointFromPoint(RotatedTileBox tb,PointF point, List<? super OsMoDroidPoint> om) {
 		if (myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId) != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
@@ -154,8 +152,8 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 				for (int i = 0; i < myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId).size(); i++) {
 					OsMoDroidPoint n = myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId).get(i);
 					if (!om.contains(n)) {
-						int x = view.getRotatedMapXForPoint(n.latlon.getLatitude(), n.latlon.getLongitude());
-						int y = view.getRotatedMapYForPoint(n.latlon.getLatitude(), n.latlon.getLongitude());
+						int x = tb.getPixXFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
+						int y = tb.getPixYFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
 						if (Math.abs(x - ex) <= opIcon.getWidth() && Math.abs(y - ey) <= opIcon.getHeight()) {
 							om.add(n);
 						}
@@ -187,7 +185,7 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		List<OsMoDroidPoint> om = new ArrayList<OsMoDroidPoint>();
-		getOsMoDroidPointFromPoint(point, om);
+		getOsMoDroidPointFromPoint(tileBox, point, om);
 		if (!om.isEmpty()) {
 			StringBuilder res = new StringBuilder();
 			for (int i = 0; i < om.size(); i++) {
@@ -223,7 +221,7 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
-		getOsMoDroidPointFromPoint(point, o);
+		getOsMoDroidPointFromPoint(tileBox, point, o);
 
 	}
 

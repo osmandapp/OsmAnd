@@ -67,8 +67,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	private List<LinkedList<WptPt>> measurementPoints = new ArrayList<LinkedList<WptPt>>();
 	private GPXFile originalGPX;
 	private String distance = null;
-	private DisplayMetrics dm;
-	
+
 	private int distanceMeasurementMode = 0; 
 
 	public DistanceCalculatorPlugin(OsmandApplication app) {
@@ -215,7 +214,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					OsmandMapTileView mapView = activity.getMapView();
 					if(pt != null){
 						mapView.getAnimatedDraggingThread().startMoving(pt.lat, pt.lon, 
-								mapView.getFloatZoom(), true);
+								mapView.getZoom(), true);
 					}
 				}
 				calculateDistance();
@@ -411,9 +410,6 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		@Override
 		public void initLayer(OsmandMapTileView view) {
 			this.view = view;
-			dm = new DisplayMetrics();
-			WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-			wmgr.getDefaultDisplay().getMetrics(dm);
 			originIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_origin);
 			destinationIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_destination);
 			bitmapPaint = new Paint();
@@ -425,7 +421,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			int distanceColor = view.getResources().getColor(R.color.distance_color);
 			paint = new Paint();
 			paint.setStyle(Style.STROKE);
-			paint.setStrokeWidth(7 * dm.density);
+			paint.setStrokeWidth(7 * view.getDensity());
 			paint.setAntiAlias(true);
 			paint.setStrokeCap(Cap.ROUND);
 			paint.setStrokeJoin(Join.ROUND);
@@ -440,7 +436,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		@Override
 		public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 			if(distanceMeasurementMode == 1) {
-				LatLon l = view.getLatLonFromScreenPoint(point.x, point.y);
+				LatLon l = tileBox.getLatLonFromPixel(point.x, point.y);
 				if(measurementPoints.size() == 0) {
 					measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
 				}
@@ -482,8 +478,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					boolean first = true;
 					while (it.hasNext()) {
 						WptPt point = it.next();
-						int locationX = view.getMapXForPoint(point.lon);
-						int locationY = view.getMapYForPoint(point.lat);
+						int locationX = tileBox.getPixXFromLonNoRot(point.lon);
+						int locationY = tileBox.getPixYFromLatNoRot(point.lat);
 						if (first) {
 							path.moveTo(locationX, locationY);
 							first = false;
@@ -498,9 +494,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					boolean first = true;
 					while(it.hasNext()) {
 						WptPt pt = it.next();
-						if (view.isPointOnTheRotatedMap(pt.lat, pt.lon)) {
-							int locationX = view.getMapXForPoint(pt.lon);
-							int locationY = view.getMapYForPoint(pt.lat);
+						if (tileBox.containsLatLon(pt.lat, pt.lon)) {
+							int locationX = tileBox.getPixXFromLonNoRot(pt.lon);
+							int locationY = tileBox.getPixYFromLatNoRot(pt.lat);
 							
 							if(first || !it.hasNext() || pt.desc != null) {
 								canvas.rotate(-view.getRotate(), locationX, locationY);
@@ -508,7 +504,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 										locationX - marginX, locationY - marginY, bitmapPaint);
 								canvas.rotate(view.getRotate(), locationX, locationY);	
 							} else {
-								canvas.drawCircle(locationX, locationY, 10 * dm.density, paint2);
+								canvas.drawCircle(locationX, locationY, 10 * tileBox.getDensity(), paint2);
 							}
 						}
 						first = false;
@@ -528,12 +524,12 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 
 		@Override
 		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
-			getMPointsFromPoint(point, o);
+			getMPointsFromPoint(tileBox, point, o);
 		}
 		
-		public void getMPointsFromPoint(PointF point, List<? super WptPt> res) {
-			int r = (int) (14 * dm.density);
-			int rs = (int) (10 * dm.density);
+		public void getMPointsFromPoint(RotatedTileBox tb, PointF point, List<? super WptPt> res) {
+			int r = (int) (14 * tb.getDensity());
+			int rs = (int) (10 * tb.getDensity());
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			for (int i = 0; i < measurementPoints.size(); i++) {
@@ -541,8 +537,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				boolean first = true;
 				while (it.hasNext()) {
 					WptPt pt = it.next();
-					int x = view.getRotatedMapXForPoint(pt.lat, pt.lon);
-					int y = view.getRotatedMapYForPoint(pt.lat, pt.lon);
+					int x = tb.getPixXFromLatLon(pt.lat, pt.lon);
+					int y = tb.getPixYFromLatLon(pt.lat, pt.lon);
 					if (pt.desc != null || !it.hasNext() || first) {
 						if (calculateBelongsBig(ex, ey, x, y, r)) {
 							res.add(pt);
