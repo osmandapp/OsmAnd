@@ -5,8 +5,8 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -99,7 +99,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		List <LatLon> parkPos = new ArrayList<LatLon>();
 		getParkingFromPoint(point, parkPos);
 		if(!parkPos.isEmpty()){
@@ -121,7 +121,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, List<Object> o) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		getParkingFromPoint(point, o);
 	}
 

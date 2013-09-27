@@ -4,10 +4,10 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.resources.TransportIndexRepository.RouteInfoLocation;
 import android.content.Context;
@@ -110,7 +110,7 @@ public class TransportInfoLayer extends OsmandMapLayer {
 
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		if (visible && !routeHelper.getRoute().isEmpty()) {

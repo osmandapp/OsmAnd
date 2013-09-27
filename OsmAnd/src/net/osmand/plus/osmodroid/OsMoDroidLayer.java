@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.*;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.activities.MapActivity;
@@ -184,7 +185,7 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		List<OsMoDroidPoint> om = new ArrayList<OsMoDroidPoint>();
 		getOsMoDroidPointFromPoint(point, om);
 		if (!om.isEmpty()) {
@@ -221,7 +222,7 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, List<Object> o) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		getOsMoDroidPointFromPoint(point, o);
 
 	}

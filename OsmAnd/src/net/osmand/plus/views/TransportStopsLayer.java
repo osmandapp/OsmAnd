@@ -5,11 +5,12 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.resources.TransportIndexRepository;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -43,17 +44,18 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		pointAltUI.setAntiAlias(true);
 	}
 	
-	public void getFromPoint(PointF point, List<? super TransportStop> res) {
+	public void getFromPoint(RotatedTileBox tb,PointF point, List<? super TransportStop> res) {
 		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			int radius = getRadiusPoi(view.getZoom()) * 3 / 2;
-			int small = getRadiusPoi(view.getZoom());
+			final int rp = getRadiusPoi(tb);
+			int radius = rp * 3 / 2;
+			int small = rp;
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					TransportStop n = objects.get(i);
-					int x = view.getRotatedMapXForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-					int y = view.getRotatedMapYForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
+					int x = tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
+					int y = tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 						radius = small;
 						res.add(n);
@@ -70,9 +72,9 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	
 	
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		ArrayList<TransportStop> stops = new ArrayList<TransportStop >(); 
-		getFromPoint(point, stops);
+		getFromPoint(tileBox, point, stops);
 		if(!stops.isEmpty()){
 			StringBuilder res = new StringBuilder();
 			int i = 0;
@@ -116,30 +118,35 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		return text.toString();
 	}
 	
-	public int getRadiusPoi(int zoom){
+	public int getRadiusPoi(RotatedTileBox tb){
+		final int zoom = tb.getZoom();
+		int r;
 		if(zoom < startZoom){
-			return 0;
+			r = 0;
 		} else if(zoom <= 15){
-			return 8;
+			r = 8;
 		} else if(zoom == 16){
-			return 10;
+			r = 10;
 		} else if(zoom == 17){
-			return 14;
+			r = 14;
 		} else {
-			return 18;
+			r = 18;
 		}
+		return (int) (r * tb.getDensity());
 	}
 
 	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
-		if (view.getZoom() >= startZoom) {
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+		if (tb.getZoom() >= startZoom) {
 			objects.clear();
-			view.getApplication().getResourceManager().searchTransportAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), objects);
-			int r = 3 * getRadiusPoi(view.getZoom()) / 4;
+			final QuadRect latLonBounds = tb.getLatLonBounds();
+			view.getApplication().getResourceManager().searchTransportAsync(latLonBounds.top, latLonBounds.left,
+					latLonBounds.bottom, latLonBounds.right, tb.getZoom(), objects);
+			int r = 3 * getRadiusPoi(tb) / 4;
 			for (TransportStop o : objects) {
-				int x = view.getMapXForPoint(o.getLocation().getLongitude());
-				int y = view.getMapYForPoint(o.getLocation().getLatitude());
+				int x = tb.getPixXFromLonNoRot(o.getLocation().getLongitude());
+				int y = tb.getPixYFromLatNoRot(o.getLocation().getLatitude());
 				canvas.drawRect(x - r, y - r, x + r, y + r, pointAltUI);
 			}
 
@@ -156,7 +163,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point) {
+	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 
@@ -184,8 +191,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, List<Object> res) {
-		getFromPoint(point, res);
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res) {
+		getFromPoint(tileBox, point, res);
 	}
 
 	@Override

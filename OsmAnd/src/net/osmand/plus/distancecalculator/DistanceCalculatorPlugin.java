@@ -15,6 +15,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.*;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -437,7 +438,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 		
 		@Override
-		public boolean onSingleTap(PointF point) {
+		public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 			if(distanceMeasurementMode == 1) {
 				LatLon l = view.getLatLonFromScreenPoint(point.x, point.y);
 				if(measurementPoints.size() == 0) {
@@ -456,7 +457,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 		
 		@Override
-		public boolean onLongPressEvent(PointF point) {
+		public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 			if (distanceMeasurementMode == 1 && measurementPoints.size() > 0) {
 				LinkedList<WptPt> lt = measurementPoints.get(measurementPoints.size() - 1);
 				if (lt.size() > 0) {
@@ -526,7 +527,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 
 		@Override
-		public void collectObjectsFromPoint(PointF point, List<Object> o) {
+		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 			getMPointsFromPoint(point, o);
 		}
 		

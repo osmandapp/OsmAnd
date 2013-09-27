@@ -1,6 +1,6 @@
 package net.osmand.plus.render;
 
-import net.osmand.plus.RotatedTileBox;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -17,7 +17,9 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	private OsmandMapTileView view;
 	private Rect pixRect = new Rect();
-	private RotatedTileBox rotatedTileBox = new RotatedTileBox(0, 0, 0, 0, 0, 0);
+	private RotatedTileBox rotatedTileBox =
+			new RotatedTileBox.RotatedTileBoxBuilder().setPixelDimensions(0, 0).
+					setLocation(0, 0).setZoomAndScale(5, 0).build();
 	private ResourceManager resourceManager;
 	private Paint paintImg;
 	
@@ -84,7 +86,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings drawSettings) {
+	public void onDraw(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
 		if (!visible) {
 			return;
 		}
@@ -111,10 +113,11 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 
-	private boolean drawRenderedMap(Canvas canvas, Bitmap bmp, RotatedTileBox bmpLoc) {
+	private boolean drawRenderedMap(Canvas canvas, Bitmap bmp, RotatedTileBox bmpLoc, RotatedTileBox currentViewport) {
 		boolean shown = false;
 		if (bmp != null && bmpLoc != null) {
 			float rot = bmpLoc.getRotate();
+			bmpLoc.getLeftTopTilePoint()
 			float mult = (float) MapUtils.getPowZoom(view.getZoom() - bmpLoc.getZoom());
 			float fmult = (float) MapUtils.getPowZoom(view.getFloatZoom() - bmpLoc.getZoom());
 			
@@ -152,12 +155,12 @@ public class MapVectorLayer extends BaseMapLayer {
 	}	
 	
 	@Override
-	public boolean onLongPressEvent(PointF point) {
+	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 }

@@ -7,10 +7,11 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -35,7 +36,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final int startZoom = 10;
 	private MapActivity activity;
 	private AudioVideoNotesPlugin plugin;
-	private DisplayMetrics dm;
 	private Paint pointAltUI;
 	private Paint paintIcon;
 	private Paint point;
@@ -52,9 +52,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		pointAltUI = new Paint();
 		pointAltUI.setColor(0xa0FF3344);
@@ -72,24 +69,25 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		point.setStyle(Style.STROKE);
 	}
 	
-	public int getRadiusPoi(int zoom){
+	public int getRadiusPoi(RotatedTileBox tb){
 		int r = 0;
-		if(zoom < startZoom){
+		if(tb.getZoom()  < startZoom){
 			r = 0;
 		} else {
 			r = 15;
 		}
-		return (int) (r * dm.density);
+		return (int) (r * tb.getDensity());
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if (view.getZoom() >= startZoom) {
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
+		if (tb.getZoom() >= startZoom) {
 			DataTileManager<Recording> recs = plugin.getRecordings();
-			List<Recording> objects = recs.getObjects(tileBox.top, tileBox.left, tileBox.bottom, tileBox.right);
+			final QuadRect tiles = tb.getTileBounds();
+			List<Recording> objects = recs.getObjects(tiles. top, tiles.left, tiles.bottom, tiles.right);
 			for (Recording o : objects) {
-				int x = view.getRotatedMapXForPoint(o.getLatitude(), o.getLongitude());
-				int y = view.getRotatedMapYForPoint(o.getLatitude(), o.getLongitude());
+				int x = tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+				int y = tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 				Bitmap b;
 				if (o.isPhoto()) {
 					b = photo;
@@ -177,18 +175,18 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, List<Object> objects) {
-		getRecordingsFromPoint(point, objects);
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
+		getRecordingsFromPoint(point, tileBox, objects);
 	}
 	
-	public void getRecordingsFromPoint(PointF point, List<? super Recording> am) {
+	public void getRecordingsFromPoint(PointF point, RotatedTileBox tileBox, List<? super Recording> am) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		int compare = getRadiusPoi(view.getZoom());
-		int radius = getRadiusPoi(view.getZoom()) * 3 / 2;
+		int compare = getRadiusPoi(tileBox);
+		int radius = compare * 3 / 2;
 		for (Recording n : plugin.getAllRecordings()) {
-			int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
-			int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
+			int x = tileBox.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
+			int y = tileBox.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
 			if (calculateBelongs(ex, ey, x, y, compare)) {
 				compare = radius;
 				am.add(n);
@@ -201,9 +199,9 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 	
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		ArrayList<Recording> o = new ArrayList<Recording>();
-		getRecordingsFromPoint(point, o);
+		getRecordingsFromPoint(point, tileBox, o);
 		if(o.size() > 0){
 			StringBuilder b = new StringBuilder();
 			for(Recording r : o) {

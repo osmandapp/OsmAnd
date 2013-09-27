@@ -2,11 +2,12 @@ package net.osmand.plus.views;
 
 import java.util.List;
 
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import android.graphics.Canvas;
@@ -71,7 +72,7 @@ public class GPXLayer extends OsmandMapLayer {
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
 		GPXFile gpxFile = view.getApplication().getGpxFileToDisplay();
 		if(gpxFile == null){
 			return;
@@ -79,7 +80,8 @@ public class GPXLayer extends OsmandMapLayer {
 		List<List<WptPt>> points = gpxFile.processedPointsToDisplay;
 		
 		paint.setColor(getColor(nightMode));
-		
+
+		final QuadRect latLonBounds = tb.getLatLonBounds();
 		for (List<WptPt> l : points) {
 			path.rewind();
 			int startIndex = -1;
@@ -87,18 +89,18 @@ public class GPXLayer extends OsmandMapLayer {
 			for (int i = 0; i < l.size(); i++) {
 				WptPt ls = l.get(i);
 				if (startIndex == -1) {
-					if (ls.lat >= latLonBounds.bottom - 0.1 && ls.lat <= latLonBounds.top + 0.1  && ls.lon >= latLonBounds.left - 0.1 
+					if (ls.lat >= latLonBounds.bottom - 0.1 && ls.lat <= latLonBounds.top + 0.1  && ls.lon >= latLonBounds.left - 0.1
 							&& ls.lon <= latLonBounds.right + 0.1) {
 						startIndex = i > 0 ? i - 1 : i;
 					}
 				} else if (!(latLonBounds.left <= ls.lon + 0.1 && ls.lon - 0.1 <= latLonBounds.right
 						&& latLonBounds.bottom <= ls.lat + 0.1 && ls.lat - 0.1 <= latLonBounds.top)) {
-					drawSegment(canvas, l, startIndex, i);
+					drawSegment(canvas, tb, l, startIndex, i);
 					startIndex = -1;
 				}
 			}
 			if (startIndex != -1) {
-				drawSegment(canvas, l, startIndex, l.size() - 1);
+				drawSegment(canvas, tb, l, startIndex, l.size() - 1);
 				continue;
 			}
 		}
@@ -106,14 +108,14 @@ public class GPXLayer extends OsmandMapLayer {
 	}
 
 
-	private void drawSegment(Canvas canvas, List<WptPt> l, int startIndex, int endIndex) {
-		int px = view.getMapXForPoint(l.get(startIndex).lon);
-		int py = view.getMapYForPoint(l.get(startIndex).lat);
+	private void drawSegment(Canvas canvas, RotatedTileBox tb, List<WptPt> l, int startIndex, int endIndex) {
+		int px = tb.getPixXFromLonNoRot(l.get(startIndex).lon);
+		int py = tb.getPixYFromLatNoRot(l.get(startIndex).lat);
 		path.moveTo(px, py);
 		for (int i = startIndex + 1; i <= endIndex; i++) {
 			WptPt p = l.get(i);
-			int x = view.getMapXForPoint(p.lon);
-			int y = view.getMapYForPoint(p.lat);
+			int x = tb.getPixXFromLonNoRot(p.lon);
+			int y = tb.getPixYFromLatNoRot(p.lat);
 			path.lineTo(x, y);
 		}
 		canvas.drawPath(path, paint);
@@ -135,12 +137,12 @@ public class GPXLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point) {
+	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 

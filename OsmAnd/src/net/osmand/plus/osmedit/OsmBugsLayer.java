@@ -13,6 +13,8 @@ import java.util.List;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.*;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.activities.DialogProvider;
@@ -66,8 +68,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private double cRightLongitude;
 	private int czoom;
 	private final MapActivity activity;
-	private DisplayMetrics dm;
-	
+
 	private static final String KEY_AUTHOR = "author";
 	private static final String KEY_MESSAGE = "message";
 	protected static final String KEY_LATITUDE = "latitude";
@@ -98,9 +99,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
 		synchronized (this) {
 			if (handlerToLoop == null) {
 				new Thread("Open street bugs layer") { //$NON-NLS-1$
@@ -146,22 +144,24 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
-		if (view.getZoom() >= startZoom) {
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+		if (tb.getZoom() >= startZoom) {
 			// request to load
-			requestToLoad(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom());
+			final QuadRect latLonBounds = tb.getLatLonBounds();
+			requestToLoad(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, tb.getZoom());
 			for (OpenStreetNote o : objects) {
-				int x = view.getMapXForPoint(o.getLongitude());
-				int y = view.getMapYForPoint(o.getLatitude());
-				canvas.drawCircle(x, y, getRadiusBug(view.getZoom()), o.isLocal() ? pointNotSubmitedUI : (o.isOpened() ? pointOpenedUI
+				int x = tb.getPixXFromLonNoRot(o.getLongitude());
+				int y = tb.getPixYFromLatNoRot(o.getLatitude());
+				canvas.drawCircle(x, y, getRadiusBug(tb), o.isLocal() ? pointNotSubmitedUI : (o.isOpened() ? pointOpenedUI
 						: pointClosedUI));
 			}
 
 		}
 	}
 	
-	public int getRadiusBug(int zoom) {
+	public int getRadiusBug(RotatedTileBox tb) {
 		int z;
+		final int zoom = tb.getZoom();
 		if (zoom < startZoom) {
 			z = 0;
 		} else if (zoom <= 12) {
@@ -175,7 +175,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		} else {
 			z = 16;
 		}
-		return (int) (z * dm.density);
+		return (int) (z * tb.getDensity());
 	}
 	
 	public void requestToLoad(double topLatitude, double leftLongitude, double bottomLatitude,double rightLongitude, final int zoom){
@@ -211,21 +211,22 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 	
 	@Override
-	public boolean onLongPressEvent(PointF point) {
+	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 	
-	public void getBugFromPoint(PointF point, List<? super OpenStreetNote> res){
+	public void getBugFromPoint(RotatedTileBox tb, PointF point, List<? super OpenStreetNote> res){
 		if (objects != null && view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			int radius = getRadiusBug(view.getZoom()) * 3 / 2;
-			int small = getRadiusBug(view.getZoom()) * 3 / 4;
+			final int rad = getRadiusBug(tb);
+			int radius = rad * 3 / 2;
+			int small = rad * 3 / 4;
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					OpenStreetNote n = objects.get(i);
-					int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
-					int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
+					int x = tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
+					int y = tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 						radius = small;
 						res.add(n);
@@ -238,9 +239,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		ArrayList<OpenStreetNote> list = new ArrayList<OpenStreetNote>();
-		getBugFromPoint(point, list);
+		getBugFromPoint(tileBox, point, list);
 		if(!list.isEmpty()){
 			StringBuilder res = new StringBuilder();
 			int i = 0;
@@ -560,8 +561,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, List<Object> res) {
-		getBugFromPoint(point, res);
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res) {
+		getBugFromPoint(tileBox, point, res);
 	}
 
 	@Override

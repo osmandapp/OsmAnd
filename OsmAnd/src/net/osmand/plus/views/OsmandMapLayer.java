@@ -2,11 +2,11 @@ package net.osmand.plus.views;
 
 import java.util.Map;
 
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.view.MotionEvent;
-import net.osmand.plus.RotatedTileBox;
 
 public abstract class OsmandMapLayer {
 	
@@ -24,19 +24,19 @@ public abstract class OsmandMapLayer {
 	
 	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {}
 
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 	
-	public boolean onLongPressEvent(PointF point) {
+	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 	
-	public boolean onTouchEvent(MotionEvent event) { return false;}
+	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) { return false;}
 	
 	/**
 	 * This method returns whether canvas should be rotated as 
-	 * map rotated before {@link #onDraw(android.graphics.Canvas, net.osmand.plus.RotatedTileBox, net.osmand.plus.views.OsmandMapLayer.DrawSettings)}.
+	 * map rotated before {@link #onDraw(android.graphics.Canvas, net.osmand.data.RotatedTileBox, net.osmand.plus.views.OsmandMapLayer.DrawSettings)}.
 	 * If the layer draws simply layer over screen (not over map)
 	 * it should return true.
 	 */

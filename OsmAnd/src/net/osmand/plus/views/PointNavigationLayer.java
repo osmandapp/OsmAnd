@@ -3,10 +3,11 @@ package net.osmand.plus.views;
 import java.util.List;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -32,7 +33,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	private OsmandMapTileView view;
 	private float[] calculations = new float[2];
 	
-	private DisplayMetrics dm;
 	private Bitmap targetPoint;
 	private Bitmap intermediatePoint;
 	private Bitmap arrowToDestination;
@@ -79,57 +79,55 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
 		initUI();
 	}
 
 
 	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
 		int index = 0;
 		
 		TargetPointsHelper targetPoints = map.getMyApplication().getTargetPointsHelper();
 		for (LatLon ip : targetPoints.getIntermediatePoints()) {
 			index ++;
-			if (isLocationVisible(ip)) {
+			if (isLocationVisible(tb, ip)) {
 				int marginX = intermediatePoint.getWidth() / 3;
 				int marginY = intermediatePoint.getHeight();
-				int locationX = view.getMapXForPoint(ip.getLongitude());
-				int locationY = view.getMapYForPoint(ip.getLatitude());
-				canvas.rotate(-view.getRotate(), locationX, locationY);
+				int locationX = tb.getPixXFromLonNoRot(ip.getLongitude());
+				int locationY = tb.getPixYFromLatNoRot(ip.getLatitude());
+				canvas.rotate(-tb.getRotate(), locationX, locationY);
 				canvas.drawBitmap(intermediatePoint, locationX - marginX, locationY - marginY, bitmapPaint);
 				canvas.drawText(index + "", locationX + marginX, locationY - 2 * marginY / 3, textPaint);
-				canvas.rotate(view.getRotate(), locationX, locationY);
+				canvas.rotate(tb.getRotate(), locationX, locationY);
 			}
 		}
 		LatLon pointToNavigate = targetPoints.getPointToNavigate();
-		if (isLocationVisible(pointToNavigate)) {
+		if (isLocationVisible(tb, pointToNavigate)) {
 			int marginX = targetPoint.getWidth() / 3;
 			int marginY = targetPoint.getHeight();
-			int locationX = view.getMapXForPoint(pointToNavigate.getLongitude());
-			int locationY = view.getMapYForPoint(pointToNavigate.getLatitude());
-			canvas.rotate(-view.getRotate(), locationX, locationY);
+			int locationX = tb.getPixXFromLonNoRot(pointToNavigate.getLongitude());
+			int locationY = tb.getPixYFromLatNoRot(pointToNavigate.getLatitude());
+			canvas.rotate(-tb.getRotate(), locationX, locationY);
 			canvas.drawBitmap(targetPoint, locationX - marginX, locationY - marginY, bitmapPaint);
 		} else if (pointToNavigate != null && view.getSettings().SHOW_DESTINATION_ARROW.get()) {
 			net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(),
 					pointToNavigate.getLongitude(), calculations);
 			float bearing = calculations[1] - 90;
-			float radiusBearing = DIST_TO_SHOW * dm.density;
-			canvas.rotate(bearing, view.getCenterPointX(), view.getCenterPointY());
-			canvas.translate(-24 * dm.density + radiusBearing, -22 * dm.density);
-			canvas.drawBitmap(arrowToDestination, view.getCenterPointX(), view.getCenterPointY(), bitmapPaint);
+			float radiusBearing = DIST_TO_SHOW * tb.getDensity();
+			final QuadPoint cp = tb.getCenterPixelPoint();
+			canvas.rotate(bearing, cp.x, cp.y);
+			canvas.translate(-24 * tb.getDensity() + radiusBearing, -22 * tb.getDensity());
+			canvas.drawBitmap(arrowToDestination, cp.x, cp.y, bitmapPaint);
 		}
 		
 	}
 
-	public boolean isLocationVisible(LatLon p){
-		if(p == null || view == null){
+	public boolean isLocationVisible(RotatedTileBox tb, LatLon p){
+		if(p == null || tb == null){
 			return false;
 		}
-		return view.isPointOnTheRotatedMap(p.getLatitude(), p.getLongitude());
+		return tb.containsLatLon(p.getLatitude(), p.getLongitude());
 	}
 	
 	
@@ -144,30 +142,30 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point) {
+	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 	
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, List<Object> o) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();
 		List<LatLon> intermediatePoints = tg.getIntermediatePointsWithTarget();
 		List<String> names = tg.getIntermediatePointNamesWithTarget();
-		int r = getRadiusPoi(view.getZoom());
+		int r = getRadiusPoi(tileBox);
 		for (int i = 0; i < intermediatePoints.size(); i++) {
 			LatLon latLon = intermediatePoints.get(i);
 			boolean target = i == intermediatePoints.size() - 1;
 			if (latLon != null) {
 				int ex = (int) point.x;
 				int ey = (int) point.y;
-				int x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
-				int y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
+				int x = tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+				int y = tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 				if (calculateBelongs(ex, ey, x, y, r)) {
 					TargetPoint tp = new TargetPoint();
 					tp.location = latLon;
@@ -190,8 +188,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius && (objy - ey) <= 2.5 * radius ;
 	}
 	
-	public int getRadiusPoi(int zoom){
+	public int getRadiusPoi(RotatedTileBox tb){
 		int r = 0;
+		final int zoom = tb.getZoom();
 		if(zoom <= 15){
 			r = 10;
 		} else if(zoom == 16){
@@ -201,7 +200,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		} else {
 			r = 18;
 		}
-		return (int) (r * dm.density);
+		return (int) (r * tb.getDensity());
 	}
 
 	@Override

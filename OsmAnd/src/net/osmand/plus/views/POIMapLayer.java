@@ -7,9 +7,7 @@ import java.util.List;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
-import net.osmand.data.LatLon;
+import net.osmand.data.*;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.*;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -50,8 +48,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	
 	private ResourceManager resourceManager;
 	private PoiFilter filter;
-	private DisplayMetrics dm;
-	
+
 	public POIMapLayer(MapActivity activity) {
 	}
 
@@ -64,17 +61,18 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		this.filter = filter;
 	}
 	
-	public void getAmenityFromPoint(PointF point, List<? super Amenity> am){
+	public void getAmenityFromPoint(RotatedTileBox tb, PointF point, List<? super Amenity> am){
 		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			int compare = getRadiusPoi(view.getZoom());
-			int radius = getRadiusPoi(view.getZoom()) * 3 / 2;
+			final int rp = getRadiusPoi(tb);
+			int compare = rp;
+			int radius = rp * 3 / 2;
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					Amenity n = objects.get(i);
-					int x = view.getRotatedMapXForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-					int y = view.getRotatedMapYForPoint(n.getLocation().getLatitude(), n.getLocation().getLongitude());
+					int x = tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
+					int y = tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					if (Math.abs(x - ex) <= compare && Math.abs(y - ey) <= compare) {
 						compare = radius;
 						am.add(n);
@@ -88,9 +86,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		List<Amenity> am = new ArrayList<Amenity>();
-		getAmenityFromPoint(point, am);
+		getAmenityFromPoint(tileBox, point, am);
 		if(!am.isEmpty()){
 			StringBuilder res = new StringBuilder();
 			for (int i = 0; i < MAXIMUM_SHOW_AMENITIES && i < am.size(); i++) {
@@ -126,10 +124,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
-
 		pointAltUI = new Paint();
 		pointAltUI.setColor(view.getApplication().getResources().getColor(R.color.poi_background));
 		pointAltUI.setStyle(Style.FILL);
@@ -137,7 +131,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		paintIcon = new Paint();
 		
 		paintTextIcon = new Paint();
-		paintTextIcon.setTextSize(12 * dm.density);
+		paintTextIcon.setTextSize(12 * view.getDensity());
 		paintTextIcon.setTextAlign(Align.CENTER);
 		paintTextIcon.setAntiAlias(true);
 		
@@ -148,8 +142,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		resourceManager = view.getApplication().getResourceManager();
 	}
 	
-	public int getRadiusPoi(int zoom){
+	public int getRadiusPoi(RotatedTileBox tb){
 		int r = 0;
+		final int zoom = tb.getZoom();
 		if(zoom < startZoom){
 			r = 0;
 		} else if(zoom <= 15){
@@ -161,20 +156,21 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		} else {
 			r = 18;
 		}
-		return (int) (r * dm.density);
+		return (int) (r * tb.getDensity());
 	}
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
-		
-		if (view.getZoom() >= startZoom) {
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+		if (tb.getZoom() >= startZoom) {
 			objects.clear();
-			resourceManager.searchAmenitiesAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, view.getZoom(), filter, objects);
-			int r = getRadiusPoi(view.getZoom());
+			final QuadRect latLonBounds = tb.getLatLonBounds();
+			resourceManager.searchAmenitiesAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom,
+					latLonBounds.right, tb.getZoom(), filter, objects);
+			int r = getRadiusPoi(tb);
 			for (Amenity o : objects) {
-				int x = view.getRotatedMapXForPoint(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				int y = view.getRotatedMapYForPoint(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				int x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				int y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 				canvas.drawCircle(x, y, r, pointAltUI);
 				canvas.drawCircle(x, y, r, point);
 				String id = null;
@@ -197,10 +193,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			if (view.getSettings().SHOW_POI_LABEL.get()) {
 				TIntHashSet set = new TIntHashSet();
 				for (Amenity o : objects) {
-					int x = view.getRotatedMapXForPoint(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-					int y = view.getRotatedMapYForPoint(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-					int tx = view.getMapXForPoint(o.getLocation().getLongitude());
-					int ty = view.getMapYForPoint(o.getLocation().getLatitude());
+					int x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+					int y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+					int tx = tb.getPixXFromLonNoRot(o.getLocation().getLongitude());
+					int ty = tb.getPixYFromLatNoRot(o.getLocation().getLatitude());
 					String name = o.getName(view.getSettings().USE_ENGLISH_NAMES.get());
 					if (name != null && name.length() > 0) {
 						int lines = 0;
@@ -365,8 +361,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, List<Object> objects) {
-		getAmenityFromPoint(point, objects);
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
+		getAmenityFromPoint(tileBox, point, objects);
 	}
 
 	@Override

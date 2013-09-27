@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import android.os.AsyncTask;
 import net.osmand.AndroidUtils;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
@@ -27,10 +26,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.CachedOsmandIndexes;
-import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
-import net.osmand.data.LatLon;
-import net.osmand.data.TransportStop;
+import net.osmand.data.*;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
@@ -40,7 +36,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.Version;
@@ -843,7 +838,7 @@ public class ResourceManager {
 	public void updateRendererMap(RotatedTileBox rotatedTileBox){
 		renderer.interruptLoadingMap();
 		asyncLoadingThread.requestToLoadMap(
-				new MapLoadRequest(new RotatedTileBox(rotatedTileBox)));
+				new MapLoadRequest(rotatedTileBox.copy()));
 	}
 	
 	public void interruptRendering(){

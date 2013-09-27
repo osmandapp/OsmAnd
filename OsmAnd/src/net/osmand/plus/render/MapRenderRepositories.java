@@ -29,14 +29,15 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -528,10 +529,10 @@ public class MapRenderRepositories {
 				boolean loaded;
 				if(nativeLib != null) {
 					cObjects = new LinkedList<BinaryMapDataObject>();
-					loaded = loadVectorDataNative(dataBox, requestedBox.getIntZoom(), renderingReq, nativeLib);
+					loaded = loadVectorDataNative(dataBox, requestedBox.getZoom(), renderingReq, nativeLib);
 				} else {
 					cNativeObjects = null;
-					loaded = loadVectorData(dataBox, requestedBox.getIntZoom(), renderingReq);
+					loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingReq);
 					
 				}
 				if (!loaded || checkWhetherInterrupted()) {
@@ -542,22 +543,23 @@ public class MapRenderRepositories {
 
 			currentRenderingContext = new OsmandRenderer.RenderingContext(context);
 			renderingReq.clearState();
-			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getIntZoom());
+			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
 			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
 				currentRenderingContext.defaultColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_COLOR_VALUE);
 			}
 			renderingReq.clearState();
-			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getIntZoom());
+			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
 			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_SHADOW_RENDERING)) {
 				currentRenderingContext.shadowRenderingMode = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 				currentRenderingContext.shadowRenderingColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_SHADOW_COLOR);
 			}
-			currentRenderingContext.leftX = requestedBox.getLeftTileX();
-			currentRenderingContext.topY = requestedBox.getTopTileY() ;
-			currentRenderingContext.zoom = requestedBox.getIntZoom();
+			final QuadPoint lt = requestedBox.getLeftTopTilePoint();
+			currentRenderingContext.leftX = lt.x;
+			currentRenderingContext.topY = lt.y ;
+			currentRenderingContext.zoom = requestedBox.getZoom();
 			currentRenderingContext.rotate = requestedBox.getRotate();
-			currentRenderingContext.width = (int) (requestedBox.getTileWidth() * OsmandRenderer.TILE_SIZE);
-			currentRenderingContext.height = (int) (requestedBox.getTileHeight() * OsmandRenderer.TILE_SIZE);
+			currentRenderingContext.width = requestedBox.getPixWidth();
+			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.useEnglishNames = prefs.USE_ENGLISH_NAMES.get();
 			currentRenderingContext.setDensityValue(prefs.USE_HIGH_RES_MAPS.get(), 

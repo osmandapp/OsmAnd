@@ -2,11 +2,11 @@ package net.osmand.plus.views;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.MapUtils;
 import android.content.Context;
@@ -109,8 +109,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 		BaseMapLayer mainLayer = view.getMainLayer();
-		boolean zoomInEnabled = mainLayer != null && view.getZoom() < mainLayer.getMaximumShownMapZoom();
-		boolean zoomOutEnabled = mainLayer != null && view.getZoom() > mainLayer.getMinimumShownMapZoom();
+		boolean zoomInEnabled = mainLayer != null && tileBox.getZoom() < mainLayer.getMaximumShownMapZoom();
+		boolean zoomOutEnabled = mainLayer != null && tileBox.getZoom() > mainLayer.getMinimumShownMapZoom();
 		if(zoomInButton.isEnabled() != zoomInEnabled){
 			zoomInButton.setEnabled(zoomInEnabled);
 		}
@@ -138,9 +138,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			rulerTextPaint.setColor(sh == Color.WHITE ? Color.BLACK : 0xffC8C8C8);
 		}
 		if (showZoomLevel || !view.getSettings().SHOW_RULER.get()) {
-			drawZoomLevel(canvas);
+			drawZoomLevel(canvas ,tileBox);
 		} else {
-			drawRuler(canvas);
+			drawRuler(canvas, tileBox);
 		}
 	}
 
@@ -204,9 +204,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 	
 	
-	private void drawZoomLevel(Canvas canvas) {
-		String zoomText = view.getZoom() + "";
-		float frac = view.getFloatZoom() - view.getZoom();
+	private void drawZoomLevel(Canvas canvas, RotatedTileBox tb) {
+		String zoomText = tb.getZoom() + "";
+		float frac = tb.getZoomScale();
 		while(frac > OsmandMapTileView.ZOOM_DELTA_1) {
 			frac -= OsmandMapTileView.ZOOM_DELTA_1;
 			zoomText += "'";
@@ -239,7 +239,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (modeShadow.getBounds().contains((int) point.x, (int) point.y)) {
 			onApplicationModePress();
 			return true;
@@ -419,20 +419,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 	double cacheRulerTileY = 0;
 	float cacheRulerTextLen = 0;	
 	
-	private void drawRuler(Canvas canvas) {
+	private void drawRuler(Canvas canvas, RotatedTileBox tb) {
 		// update cache
 		if (view.isZooming()) {
 			cacheRulerText = null;
-		} else if(view.getFloatZoom() != cacheRulerZoom || 
-				Math.abs(view.getXTile() - cacheRulerTileX) +  Math.abs(view.getYTile() - cacheRulerTileY) > 1){
-			cacheRulerZoom = view.getFloatZoom();
-			cacheRulerTileX = view.getXTile();
-			cacheRulerTileY = view.getYTile();
-			double latitude = view.getLatitude();
-			double leftLon = view.calcLongitude(- view.getWidth() / 2);
-			double rightLon = view.calcLongitude(+ view.getWidth() / 2);
-			double dist = MapUtils.getDistance(latitude, leftLon, latitude, rightLon);
-			double pixDensity = view.getWidth() / dist; 
+		} else if((tb.getZoom() + tb.getZoomScale()) != cacheRulerZoom ||
+				Math.abs(tb.getCenterTileX() - cacheRulerTileX) +  Math.abs(tb.getCenterTileY() - cacheRulerTileY) > 1){
+			cacheRulerZoom = (tb.getZoom() + tb.getZoomScale());
+			cacheRulerTileX = tb.getCenterTileX();
+			cacheRulerTileY = tb.getCenterTileY();
+			final double dist = tb.getDistance(0, tb.getPixHeight() / 2, tb.getPixWidth(), tb.getPixHeight() / 2);
+			double pixDensity = tb.getPixWidth() / dist;
 			
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getApplication());
 			

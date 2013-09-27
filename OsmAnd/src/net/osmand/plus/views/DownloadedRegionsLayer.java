@@ -17,10 +17,11 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.OsmandIntents;
 import net.osmand.plus.resources.ResourceManager;
@@ -45,7 +46,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 
 
 	private List<BinaryMapDataObject> objectsToDraw = new ArrayList<BinaryMapDataObject>();
-	private RectF queriedBBox = new RectF();
+	private QuadRect queriedBBox = new QuadRect();
 	private int queriedZoom = 0;
 	private boolean basemapExists = true;
 	private boolean noMapsPresent = false;
@@ -108,17 +109,18 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 	private static int ZOOM_TO_SHOW_MAP_NAMES = 12;
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBox, DrawSettings nightMode) {
-		final int zoom = view.getZoom();
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+		final int zoom = tb.getZoom();
 		if(downloadBtn.getVisibility() == View.VISIBLE) {
 			downloadBtn.setVisibility(View.GONE);
 		}
 		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && (zoom < ZOOM_TO_SHOW_BORDERS || zoom >= ZOOM_TO_SHOW_MAP_NAMES) &&
 				osmandRegions.isInitialized()) {
+			final QuadRect latLonBox = tb.getLatLonBounds();
 			if (!queriedBBox.contains(latLonBox) || Math.abs(queriedZoom - zoom) > 2) {
 				float w = Math.abs(latLonBox.width() / 2);
 				float h = Math.abs(latLonBox.height() / 2);
-				final RectF rf = new RectF(latLonBox.left - w, latLonBox.top + h, latLonBox.right + w, latLonBox.bottom - h);
+				final QuadRect rf = new QuadRect(latLonBox.left - w, latLonBox.top + h, latLonBox.right + w, latLonBox.bottom - h);
 				AsyncTask<Object, Object, List<BinaryMapDataObject>> task = createNewTask(zoom, rf);
 				if (currentTask == null) {
 					task.execute();
@@ -172,12 +174,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 
 						double lat = MapUtils.get31LatitudeY(o.getPoint31YTile(0));
 						double lon = MapUtils.get31LongitudeX(o.getPoint31XTile(0));
-						path.moveTo(view.getRotatedMapXForPoint(lat, lon), view.getRotatedMapYForPoint(lat, lon));
+						path.moveTo(tb.getPixXFromLonNoRot(lon), tb.getPixYFromLatNoRot(lat));
 						for(int j = 1 ; j < o.getPointsLength(); j++) {
 							lat = MapUtils.get31LatitudeY(o.getPoint31YTile(j));
 							lon = MapUtils.get31LongitudeX(o.getPoint31XTile(j));
-							path.lineTo(view.getRotatedMapXForPoint(lat, lon),
-									view.getRotatedMapYForPoint(lat, lon));
+							path.lineTo(tb.getPixXFromLonNoRot(lon),
+									tb.getPixYFromLatNoRot(lat));
 						}
 					}
 					canvas.drawPath(path, paint);
@@ -187,7 +189,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 		}
 	}
 
-	private AsyncTask<Object, Object, List<BinaryMapDataObject>> createNewTask(final int zoom, final RectF rf) {
+	private AsyncTask<Object, Object, List<BinaryMapDataObject>> createNewTask(final int zoom, final QuadRect rf) {
 		return new AsyncTask<Object, Object, List<BinaryMapDataObject>>() {
 			@Override
 			protected List<BinaryMapDataObject> doInBackground(Object... params) {
@@ -259,12 +261,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point) {
+	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 

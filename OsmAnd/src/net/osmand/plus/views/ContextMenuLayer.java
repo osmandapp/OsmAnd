@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -35,7 +35,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	public interface IContextMenuProvider {
 	
-		public void collectObjectsFromPoint(PointF point, List<Object> o);
+		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o);
 		
 		public LatLon getObjectLocation(Object o);
 		
@@ -53,7 +53,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	private TextView textView;
 	private ImageView closeButton;
-	private DisplayMetrics dm;
 	private OsmandMapTileView view;
 	private int BASE_TEXT_SIZE = 170;
 	private int SHADOW_OF_LEG = 5;
@@ -82,14 +81,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
-		scaleCoefficient  = dm.density;
-		if (Math.min(dm.widthPixels / (dm.density * 160), dm.heightPixels / (dm.density * 160)) > 2.5f) {
-			// large screen
-			scaleCoefficient *= 1.5f;
-		}
+		scaleCoefficient  = view.getDensity();
 		BASE_TEXT_SIZE = (int) (BASE_TEXT_SIZE * scaleCoefficient);
 		SHADOW_OF_LEG = (int) (SHADOW_OF_LEG * scaleCoefficient);
 		CLOSE_BTN = (int) (CLOSE_BTN * scaleCoefficient);
@@ -125,10 +117,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
 		if(latLon != null){
-			int x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
-			int y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
+			int x = box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			int y = box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			
 			int tx = x - boxLeg.getMinimumWidth() / 2;
 			int ty = y - boxLeg.getMinimumHeight() + SHADOW_OF_LEG;
@@ -194,34 +186,35 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point) {
+	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if ((Build.VERSION.SDK_INT < 14) && !view.getSettings().SCROLL_MAP_BY_GESTURES.get()) {
 			if (!selectedObjects.isEmpty())
 				view.showMessage(activity.getMyApplication().getLocationProvider().getNavigationHint(latLon));
 			return true;
 		}
 		
-		if(pressedInTextView(point.x, point.y) > 0){
+		if(pressedInTextView(tileBox, point.x, point.y) > 0){
 			setLocation(null, ""); //$NON-NLS-1$
 			view.refreshMap();
 			return true;
 		}
-		LatLon latLon = selectObjectsForContextMenu(point);
+		LatLon latLon = selectObjectsForContextMenu(tileBox, point);
 		String description = getSelectedObjectDescription();
 		setLocation(latLon, description);
 		view.refreshMap();
 		return true;
 	}
 
-	public LatLon selectObjectsForContextMenu(PointF point) {
-		LatLon pressedLoc = view.getLatLonFromScreenPoint(point.x, point.y);
+	public LatLon selectObjectsForContextMenu(RotatedTileBox tileBox, PointF point) {
+		final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
+		final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
 		selectedObjects.clear();
 		List<Object> s = new ArrayList<Object>();
 		LatLon latLon = null;
 		for(OsmandMapLayer l : view.getLayers()){
 			if(l instanceof ContextMenuLayer.IContextMenuProvider){
 				s.clear();
-				((ContextMenuLayer.IContextMenuProvider) l).collectObjectsFromPoint(point, s);
+				((ContextMenuLayer.IContextMenuProvider) l).collectObjectsFromPoint(point, tileBox, s);
 				for(Object o : s) {
 					selectedObjects.put(o, ((ContextMenuLayer.IContextMenuProvider) l));
 					if(latLon == null) {
@@ -231,7 +224,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 		if(latLon == null) {
-			latLon = pressedLoc;
+			latLon = new LatLon(lat, lon);
 		}
 		return latLon;
 	}
@@ -241,12 +234,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return true;
 	}
 	
-	public int pressedInTextView(float px, float py) {
+	public int pressedInTextView(RotatedTileBox tb, float px, float py) {
 		if (latLon != null) {
 			Rect bs = textView.getBackground().getBounds();
 			Rect closes = closeButton.getDrawable().getBounds();
-			int x = (int) (px - view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude()));
-			int y = (int) (py - view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude()));
+			int x = (int) (px - tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
+			int y = (int) (py - tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
 			x += bs.width() / 2;
 			y += bs.height() + boxLeg.getMinimumHeight() - SHADOW_OF_LEG;
 			int localSize = CLOSE_BTN * 3 / 2;
@@ -295,9 +288,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		boolean nativeMode = (Build.VERSION.SDK_INT >= 14) || view.getSettings().SCROLL_MAP_BY_GESTURES.get();
-		int val = pressedInTextView(point.x, point.y);
+		int val = pressedInTextView(tileBox, point.x, point.y);
 		if (val == 2) {
 			setLocation(null, ""); //$NON-NLS-1$
 			view.refreshMap();
@@ -347,10 +340,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 	
 	@Override
-	public boolean onTouchEvent(MotionEvent event) {
+	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
 		if (latLon != null) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-				int vl = pressedInTextView(event.getX(), event.getY());
+				int vl = pressedInTextView(tileBox, event.getX(), event.getY());
 				if(vl == 1){
 					textView.setPressed(true);
 					view.refreshMap();

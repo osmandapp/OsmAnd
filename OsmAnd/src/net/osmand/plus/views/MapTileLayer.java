@@ -1,12 +1,12 @@
 package net.osmand.plus.views;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.resources.ResourceManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,6 +15,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.FloatMath;
 import android.widget.Toast;
+import net.osmand.util.MapUtils;
 
 public class MapTileLayer extends BaseMapLayer {
 
@@ -120,7 +121,7 @@ public class MapTileLayer extends BaseMapLayer {
 		drawTileMap(canvas, tilesRect);
 	}
 
-	public void drawTileMap(Canvas canvas, RectF tilesRect) {
+	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox) {
 		if(map == null){
 			return;
 		}
@@ -134,6 +135,7 @@ public class MapTileLayer extends BaseMapLayer {
 		
 		// recalculate for ellipsoid coordinates
 		if (map.isEllipticYTile()) {
+//			return (float) MapUtils.getTileEllipsoidNumberY(getZoom(), currentViewport.get);
 			float ellipticYTile = view.getEllipticYTile();
 			tilesRect.bottom += (ellipticYTile - tileY);
 			tilesRect.top += (ellipticYTile - tileY);

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -29,7 +31,6 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
     private OsmandMapTileView mapView;
     private OnGestureListener fallback;
     private Map<Object, IContextMenuProvider> selectedObjects = null;
-    private final DisplayMetrics dm = new DisplayMetrics();
 
 
     // OnGestureListener specified as a second argument
@@ -38,7 +39,6 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
     public MapExplorer(OsmandMapTileView mapView, OnGestureListener fallback) {
         this.mapView = mapView;
         this.fallback = fallback;
-        ((WindowManager)(mapView.getContext().getSystemService(Context.WINDOW_SERVICE))).getDefaultDisplay().getMetrics(dm);
     }
 
 
@@ -52,14 +52,14 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
     // Find touched objects if any and emit accessible toast message
     // with it's brief description.
-    private void describePointedObjects(MotionEvent event) {
+    private void describePointedObjects(RotatedTileBox tb,  MotionEvent event) {
         PointF point = new PointF(event.getX(), event.getY());
         List<Object> ns = new ArrayList<Object>();
         Map<Object, IContextMenuProvider> newSelectedObjects = new LinkedHashMap<Object, ContextMenuLayer.IContextMenuProvider>();
 		for (OsmandMapLayer layer : mapView.getLayers()) {
 			if (layer instanceof IContextMenuProvider) {
 				ns.clear();
-				((IContextMenuProvider) layer).collectObjectsFromPoint(point, ns);
+				((IContextMenuProvider) layer).collectObjectsFromPoint(point, tb , ns);
 				for(Object o : ns) {
 					newSelectedObjects.put(o, (IContextMenuProvider) layer);
 				}
@@ -67,7 +67,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 		}
         if (newSelectedObjects.isEmpty()) {
         	ns.clear();
-            collectObjectsFromPoint(point, ns);
+            collectObjectsFromPoint(point, tb, ns);
             for(Object o : ns) {
 				newSelectedObjects.put(o, this);
 			}
@@ -96,7 +96,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
         if (contextMenuLayer != null)
             contextMenuLayer.setSelections(null);
         selectedObjects = null;
-        describePointedObjects(e);
+        describePointedObjects(mapView.getCurrentRotatedTileBox(), e);
         return false;
     }
 
@@ -117,7 +117,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
         if ((Build.VERSION.SDK_INT >= 14) || mapView.getSettings().SCROLL_MAP_BY_GESTURES.get()) {
             return fallback.onScroll(e1, e2, distanceX, distanceY);
         } else {
-            describePointedObjects(e2);
+            describePointedObjects(mapView.getCurrentRotatedTileBox(), e2);
         }
         return true;
     }
@@ -137,17 +137,19 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
     // IContextMenuProvider interface implementation.
 
     @Override
-    public void collectObjectsFromPoint(PointF point, List<Object> objects) {
-        int radius = (int)(VICINITY_RADIUS * dm.density);
-        int dx = (int)Math.abs(point.x - mapView.getCenterPointX());
-        int dy = (int)Math.abs(point.y - mapView.getCenterPointY());
+    public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
+        int radius = (int)(VICINITY_RADIUS * tileBox.getDensity());
+	    final QuadPoint p = tileBox.getCenterPixelPoint();
+	    int dx = (int)Math.abs(point.x - p.x);
+        int dy = (int)Math.abs(point.y - p.y);
         if ((dx < radius) && (dy < radius))
             objects.add(this);
     }
 
     @Override
     public LatLon getObjectLocation(Object o) {
-        return mapView.getLatLonFromScreenPoint(mapView.getCenterPointX(), mapView.getCenterPointY());
+	    final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+	    return tb.getCenterLatLon();
     }
 
     @Override

@@ -6,6 +6,8 @@ import java.util.List;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
@@ -23,7 +25,6 @@ import android.graphics.PointF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
-import net.osmand.plus.RotatedTileBox;
 
 public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 
@@ -31,7 +32,6 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	
 	private OsmandMapTileView view;
 	private Paint paint;
-	private DisplayMetrics dm;
 	private FavouritesDbHelper favorites;
 	private Bitmap favoriteIcon;
 	
@@ -43,10 +43,6 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
-		
 		paint = new Paint();
 		paint.setAntiAlias(true);
 		paint.setFilterBitmap(true);
@@ -75,14 +71,15 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
-		if (view.getZoom() >= startZoom) {
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+		if (tb.getZoom() >= startZoom) {
 			// request to load
+			final QuadRect latLonBounds = tb.getLatLonBounds();
 			for (FavouritePoint o : favorites.getFavouritePoints()) {
-				if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left 
+				if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left
 						&& o.getLongitude() <= latLonBounds.right ) {
-					int x = view.getRotatedMapXForPoint(o.getLatitude(), o.getLongitude());
-					int y = view.getRotatedMapYForPoint(o.getLatitude(), o.getLongitude());
+					int x = tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+					int y = tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
 							y - favoriteIcon.getHeight(), paint);
 				}
@@ -92,17 +89,17 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	
 	
 	@Override
-	public boolean onLongPressEvent(PointF point) {
+	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
-	
-	public void getFavoriteFromPoint(PointF point, List<? super FavouritePoint> res) {
-		int r = (int) (15* dm.density);
+
+	public void getFavoriteFromPoint(RotatedTileBox tb, PointF point, List<? super FavouritePoint> res) {
+		int r = (int) (15 * tb.getDensity());
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		for (FavouritePoint n : favorites.getFavouritePoints()) {
-			int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
-			int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
+			int x = tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
+			int y = tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
 			if (calculateBelongs(ex, ey, x, y, r)) {
 				res.add(n);
 			}
@@ -110,9 +107,9 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point) {
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		List<FavouritePoint> favs = new ArrayList<FavouritePoint>();
-		getFavoriteFromPoint(point, favs);
+		getFavoriteFromPoint(tileBox, point, favs);
 		if(!favs.isEmpty()){
 			StringBuilder res = new StringBuilder();
 			int i = 0;
@@ -146,8 +143,8 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, List<Object> res) {
-		getFavoriteFromPoint(point, res);
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res) {
+		getFavoriteFromPoint(tileBox, point, res);
 	}
 
 	@Override

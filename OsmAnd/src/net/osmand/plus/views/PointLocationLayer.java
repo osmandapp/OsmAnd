@@ -2,10 +2,10 @@ package net.osmand.plus.views;
 
 
 import net.osmand.Location;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
-import net.osmand.plus.RotatedTileBox;
 import net.osmand.util.MapUtils;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -78,7 +78,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox latLonBounds, DrawSettings nightMode) {
+	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
 		// draw
 		boolean nm = nightMode != null && nightMode.isNightMode();
 		if(nm != this.nm) {
@@ -90,21 +90,19 @@ public class PointLocationLayer extends OsmandMapLayer {
 		if(lastKnownLocation == null || view == null){
 			return;
 		}
-		int locationX = view.getMapXForPoint(lastKnownLocation.getLongitude());
-		int locationY = view.getMapYForPoint(lastKnownLocation.getLatitude());
-		
-		double lonLeft = view.calcLongitude(- view.getWidth() / 2);
-		double lonRight = view.calcLongitude(+ view.getWidth() / 2);
-		double dist = MapUtils.getDistance(view.getLatitude(), lonLeft, view.getLatitude(), lonRight);
-		int radius = (int) (((double) view.getWidth()) / dist * lastKnownLocation.getAccuracy());
+		int locationX = box.getPixXFromLonNoRot(lastKnownLocation.getLongitude());
+		int locationY = box.getPixYFromLatNoRot(lastKnownLocation.getLatitude());
+
+		final double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
+		int radius = (int) (((double) box.getPixWidth()) / dist * lastKnownLocation.getAccuracy());
 		
 		if (radius > RADIUS * dm.density) {
-			int allowedRad = Math.min(view.getWidth() / 2, view.getHeight() / 2);
+			int allowedRad = Math.min(box.getPixWidth() / 2, box.getPixHeight() / 2);
 			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), area);
 			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), aroundArea);
 		}
 		// draw bearing/direction/location
-		if (isLocationVisible(lastKnownLocation)) {
+		if (isLocationVisible(box, lastKnownLocation)) {
 			checkAppMode(view.getSettings().getApplicationMode());
 			boolean isBearing = lastKnownLocation.hasBearing();
 			if (!isBearing) {
@@ -126,11 +124,11 @@ public class PointLocationLayer extends OsmandMapLayer {
 		}
 	}
 
-	public boolean isLocationVisible(Location l){
-		if(l == null || view == null){
+	public boolean isLocationVisible(RotatedTileBox tb, Location l){
+		if(l == null ){
 			return false;
 		}
-		return view.isPointOnTheRotatedMap(l.getLatitude(), l.getLongitude());
+		return tb.containsLatLon(l.getLatitude(), l.getLongitude());
 	}
 	
 

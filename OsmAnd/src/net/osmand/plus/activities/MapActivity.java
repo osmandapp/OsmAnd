@@ -13,6 +13,8 @@ import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.ApplicationMode;
@@ -424,7 +426,9 @@ public class MapActivity extends AccessibleActivity  {
 		if(event.getAction() == MotionEvent.ACTION_MOVE && settings.USE_TRACKBALL_FOR_MOVEMENTS.get()){
 			float x = event.getX();
 			float y = event.getY();
-			LatLon l = mapView.getLatLonFromScreenPoint(mapView.getCenterPointX() + x * 15, mapView.getCenterPointY() + y * 15);
+			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+			final QuadPoint cp = tb.getCenterPixelPoint();
+			final LatLon l = tb.getLatLonFromPixel(cp.x + x * 15, cp.y + y * 15);
 			setMapLocation(l.getLatitude(), l.getLongitude());
 			return true;
 		}
@@ -580,7 +584,9 @@ public class MapActivity extends AccessibleActivity  {
 				keyCode == KeyEvent.KEYCODE_DPAD_UP) {
 			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? - 15 : 0);
 			int dy = keyCode == KeyEvent.KEYCODE_DPAD_DOWN ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_UP ? -15 : 0);
-			LatLon l = mapView.getLatLonFromScreenPoint(mapView.getCenterPointX() + dx, mapView.getCenterPointY() + dy);
+			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+			final QuadPoint cp = tb.getCenterPixelPoint();
+			final LatLon l = tb.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 			setMapLocation(l.getLatitude(), l.getLongitude());
 			return true;
 		} else if(OsmandPlugin.onMapActivityKeyUp(this, keyCode)) {

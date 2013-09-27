@@ -23,6 +23,8 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
@@ -1012,11 +1014,9 @@ public class MapActivityActions implements DialogProvider {
 					AccessibleToast.makeText(mapActivity, R.string.maps_could_not_be_downloaded, Toast.LENGTH_SHORT).show();
 					return;
 				}
-				Rect pixRect = new Rect(0, 0, mapView.getWidth(), mapView.getHeight());
-		    	RectF tilesRect = new RectF();
-		    	mapView.calculateTileRectangle(pixRect, mapView.getCenterPointX(), mapView.getCenterPointY(), 
-		    			mapView.getXTile(), mapView.getYTile(), tilesRect);
-		    	int left = (int) FloatMath.floor(tilesRect.left);
+				final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+				final QuadRect tilesRect = tb.getTileBounds();
+				int left = (int) FloatMath.floor(tilesRect.left);
 				int top = (int) FloatMath.floor(tilesRect.top);
 				int width = (int) (FloatMath.ceil(tilesRect.right) - left);
 				int height = (int) (FloatMath.ceil(tilesRect.bottom) - top);
