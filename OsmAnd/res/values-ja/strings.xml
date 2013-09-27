@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
-     <string name="tip_select_destination_point">目的地点を選択</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_select_destination_point">目的地点を選択</string>
      <string name="tip_select_destination_point_t">
 \tNEW VERSION, PLEASE ADAPT TRANSLATION: \tYou get directions to a place in the map directly (context menu, then \'Directions\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
 		\n\tThe destination is marked as an orange target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
@@ -118,9 +118,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
 そして問題の詳細を記述し、最後に\'追加\'ボタンで投稿します。
 \n\tOSMのPOIとOSMバグ投稿にはインターネット接続が必要ですので
 ご注意ください。</string>
-     <string name="create_poi_link_to_osm_doc"><u>オンラインOSM</u>
-マップ分類、画像つき</string>
- <string name="error_doing_search">オフライン検索でエラーが発生しました</string>
+     <string name="error_doing_search">オフライン検索でエラーが発生しました</string>
  <string name="search_offline_geo_error">次のgeoインテントをパースできません:\'%s\'</string>
      <string name="search_osm_offline">オフラインマップで住所検索</string>
 
@@ -713,4 +711,6 @@ POIの更新は利用できません</string>
 <string name="edit_filter_create_message">フィルタ {0} が作成されました</string>
 <string name="default_buttons_selectall">全て選択</string>
 
-</resources>
+<string name="av_photo_play_sound_descr">シャッター音を選択します</string>
+<string name="base_world_map">基本世界地図</string>
+	</resources>
