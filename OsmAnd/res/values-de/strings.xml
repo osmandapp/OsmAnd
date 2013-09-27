@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="route_is_too_long">Die Route ist möglicherweise zu lang, um vom OsmAnd Offline-Router berechnet zu werden, 
 		Die Offline-Berechnung von Routen ist durchschnittlich zwischen bis zu etwa 200km entfernten Punkten möglich. Bitte fügen Sie einen oder mehrere Wegpunkte ein, um diese Route berechnen zu können.</string>
@@ -40,9 +39,9 @@
 	<string name="route_descr_current_location">Aktueller Standort</string>
 	
 	
-	<string name="no_buildings_found">Kein Gebäude gefunden.</string>
+	<string name="no_buildings_found">Kein Hausnummern / Gebäude gefunden.</string>
 	<string name="incremental_search_city">Suche Stadt inkrementell</string>
-	<string name="search_villages_and_postcodes">Suche Dörfer oder Postleitzahlen</string>
+	<string name="search_villages_and_postcodes">Suche weitere kleine Orte oder Postleitzahlen</string>
 	<string name="rendering_attr_showRoadMaps_description">Anzeige reiner Straßenkarten:</string>
 	<string name="rendering_attr_showRoadMaps_name">Reine Straßenkarten</string>
 	<string name="download_roads_only_item">"Nur Straßen"</string>
@@ -1466,4 +1465,5 @@
     <string name="edit_tilesource_choose_existing">Wähle vorhandene...</string>
     <string name="edit_tilesource_name">Name</string>
     <string name="maps_define_edit">Definieren/Bearbeiten…</string>
+	<string name="base_world_map">Basis-Weltkarte</string>
 	</resources>
