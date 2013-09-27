@@ -1248,7 +1248,7 @@
 	<string name="recording_context_menu_play">Abspielen</string>
 	<string name="recording_default_name">aufnehmen</string>
 	<string name="av_control_stop">AV</string>
-	<string name="dropbox_plugin_description">Das Dropbox-Plugin ermöglicht Ihnen eine Synchronisation von Tracks und Audio/Video-Notizen mit Ihrem Dropbox-Zugang.</string>
+	<string name="dropbox_plugin_description">Das Dropbox-Plugin ermöglicht Ihnen eine Synchronisation von Tracks und Audio/Video-Notizen mit Ihrem Dropbox-Konto.</string>
 	<string name="dropbox_plugin_name">Dropbox-Plugin</string>
 	<string name="animate_routing_using_gpx">Wollen Sie eine vorbereitete GPX-Route laden und ihr folgen?</string>
 	<string name="intermediate_points_change_order">Reihenfolge ändern</string>
