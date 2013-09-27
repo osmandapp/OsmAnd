@@ -1,20 +1,10 @@
 project(OsmAndJNI)
 
+find_package(Java REQUIRED)
+find_package(JNI REQUIRED)
+
 set(target_specific_private_includes "")
 set(target_specific_public_libraries "")
-if(CMAKE_TARGET_OS STREQUAL "windows")
-	set(target_specific_private_includes ${target_specific_private_includes}
-		"$ENV{JAVA_HOME}/include/win32"
-	)
-elseif(CMAKE_TARGET_OS STREQUAL "darwin")
-	set(target_specific_private_includes ${target_specific_private_includes}
-		"$ENV{JAVA_HOME}/include/darwin"
-	)
-elseif(CMAKE_TARGET_OS STREQUAL "linux")
-	set(target_specific_private_includes ${target_specific_private_includes}
-		"$ENV{JAVA_HOME}/include/linux"
-	)
-endif()
 
 file(GLOB_RECURSE core_includes "${OSMAND_ROOT}/core/include/*.h*")
 file(GLOB_RECURSE core_headers "${OSMAND_ROOT}/core/src/*.h*")
@@ -76,7 +66,8 @@ if(CMAKE_SHARED_LIBS_ALLOWED_ON_TARGET)
 	)
 	target_include_directories(OsmAndJNI
 		PRIVATE
-			"$ENV{JAVA_HOME}/include"
+			${JNI_INCLUDE_DIRS}
+			${JAVA_INCLUDE_PATH}
 			${target_specific_private_includes}
 	)
 	add_dependencies(OsmAndJNI
