@@ -1074,7 +1074,7 @@
 	
 	<string name="local_index_routing_data">Routing-Daten</string>
 	<string name="navigate_point_format">Format:</string>
-	<string name="poi_search_desc">POI-(Point of Interest) Suche</string>
+	<string name="poi_search_desc">POI-Suche (Point of Interest)</string>
 	<string name="address_search_desc">Adress-Suche</string>
 	<string name="navpoint_search_desc">Koordinaten</string>
 	<string name="transport_search_desc">ÖPNV-Suche</string>
