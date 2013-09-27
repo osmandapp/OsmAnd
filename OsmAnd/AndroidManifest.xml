@@ -4,7 +4,7 @@
 	<meta-data android:name="com.google.android.backup.api_key"
     android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
 	
-	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="16"/>
+	<uses-sdk android:minSdkVersion="9" android:targetSdkVersion="16"/>
 	
 	<uses-feature android:name="android.hardware.camera" android:required="false" />
 	<uses-feature android:name="android.hardware.microphone" android:required="false"/>

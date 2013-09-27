@@ -1,13 +1,12 @@
 APP_STL := gnustl_shared
 APP_CPPFLAGS := -std=c++11 -fexceptions -frtti
+APP_PLATFORM := android-9
 
 ifeq ($(wildcard $(ANDROID_NDK)/toolchains/*-4.7),)
 	NDK_TOOLCHAIN_VERSION := 4.8
 else
 	NDK_TOOLCHAIN_VERSION := 4.7
 endif
-
-
 
 APP_ABI :=
 ifneq ($(filter x86,$(OSMAND_ARCHITECTURES_SET)),)
