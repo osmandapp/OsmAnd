@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
@@ -1551,4 +1551,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 		\n\t* 
 		\n\t*
 	</string>
-    </resources>
+    <string name="base_world_map">osnovni zemljevid sveta</string>
+	</resources>
