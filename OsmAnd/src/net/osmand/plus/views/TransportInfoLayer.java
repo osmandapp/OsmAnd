@@ -53,8 +53,12 @@ public class TransportInfoLayer extends OsmandMapLayer {
 		this.visible = visible;
 	}
 	
-	public int getRadius(){
-		return (int) (dm.density * 8);
+	public int getRadius(RotatedTileBox tb){
+		final float zoom = tb.getZoom() + tb.getZoomScale();
+		if(zoom <= 16) {
+			return (int) (dm.density * 8);
+		}
+		return (int) (dm.density * 10);
 	}
 
 	@Override
@@ -89,7 +93,7 @@ public class TransportInfoLayer extends OsmandMapLayer {
 						if (t.containsLatLon(location.getLatitude(), location.getLongitude())) {
 							int x = t.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
 							int y = t.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
-							canvas.drawRect(x - getRadius(), y - getRadius(), x + getRadius(), y + getRadius(), toShow);
+							canvas.drawRect(x - getRadius(t), y - getRadius(t), x + getRadius(t), y + getRadius(t), toShow);
 						}
 					}
 				}
@@ -137,7 +141,7 @@ public class TransportInfoLayer extends OsmandMapLayer {
 						LatLon location = st.getLocation();
 						int x = tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
 						int y = tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
-						if (Math.abs(x - ex) < getRadius() * 3 /2 && Math.abs(y - ey) < getRadius() * 3 /2) {
+						if (Math.abs(x - ex) < getRadius(tileBox) * 3 /2 && Math.abs(y - ey) < getRadius(tileBox) * 3 /2) {
 							AccessibleToast.makeText(view.getContext(), st.getName(view.getSettings().USE_ENGLISH_NAMES.get()) + " : " + //$NON-NLS-1$
 									route.getType() + " " + route.getRef() //$NON-NLS-1$
 							, Toast.LENGTH_LONG).show();

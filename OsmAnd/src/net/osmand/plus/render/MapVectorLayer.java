@@ -93,24 +93,25 @@ public class MapVectorLayer extends BaseMapLayer {
 		}
 	}
 
-
 	private boolean drawRenderedMap(Canvas canvas, Bitmap bmp, RotatedTileBox bmpLoc, RotatedTileBox currentViewport) {
 		boolean shown = false;
 		if (bmp != null && bmpLoc != null) {
-			float rot = bmpLoc.getRotate();
+			float rot = - bmpLoc.getRotate();
 			final LatLon lt = bmpLoc.getLeftTopLatLon();
 			final LatLon rb = bmpLoc.getRightBottomLatLon();
-			canvas.rotate(-rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
-			final int x1 = currentViewport.getPixXFromLonNoRot(lt.getLongitude());
-			final int y1 = currentViewport.getPixYFromLatNoRot(lt.getLatitude());
-			final int x2 = currentViewport.getPixXFromLonNoRot(rb.getLongitude());
-			final int y2 = currentViewport.getPixYFromLatNoRot(rb.getLatitude());
+			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
+			final RotatedTileBox calc = currentViewport.copy();
+			calc.setRotate(bmpLoc.getRotate());
+			final int x1 = calc.getPixXFromLatLon(lt.getLatitude(), lt.getLongitude());
+			final int x2 = calc.getPixXFromLatLon(rb.getLatitude(), rb.getLongitude());
+			final int y1 = calc.getPixYFromLatLon(lt.getLatitude(), lt.getLongitude());
+			final int y2 = calc.getPixYFromLatLon(rb.getLatitude(), rb.getLongitude());
 			destImage.set(x1, y1, x2, y2);
 			if(!bmp.isRecycled()){
 				canvas.drawBitmap(bmp, null, destImage, paintImg);
 				shown = true;
 			}
-			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
+			canvas.rotate(-rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 		}
 		return shown;
 	}

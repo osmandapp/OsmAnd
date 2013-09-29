@@ -119,15 +119,15 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	}
 	
 	public int getRadiusPoi(RotatedTileBox tb){
-		final int zoom = tb.getZoom();
+		final float zoom = tb.getZoom() + tb.getZoomScale();
 		int r;
 		if(zoom < startZoom){
 			r = 0;
 		} else if(zoom <= 15){
 			r = 8;
-		} else if(zoom == 16){
+		} else if(zoom <= 16){
 			r = 10;
-		} else if(zoom == 17){
+		} else if(zoom <= 17){
 			r = 14;
 		} else {
 			r = 18;

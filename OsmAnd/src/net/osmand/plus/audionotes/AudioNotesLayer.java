@@ -71,7 +71,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	
 	public int getRadiusPoi(RotatedTileBox tb){
 		int r = 0;
-		if(tb.getZoom()  < startZoom){
+		if(tb.getZoom() + tb.getZoomScale()  < startZoom){
 			r = 0;
 		} else {
 			r = 15;

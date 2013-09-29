@@ -360,8 +360,7 @@ public class MapUtils {
 	 * Calculate rotation diff D, that R (rotate) + D = T (targetRotate)
 	 * D is between -180, 180 
 	 * @param rotate
-	 * @param targetRotate
-	 * @return 
+	 * @return
 	 */
 	public static float unifyRotationTo360(float rotate) {
 		while(rotate < 0){
@@ -389,7 +388,7 @@ public class MapUtils {
 	}
 	
 	/**
-	 * @param diff align difference between 2 angles ]-180, 180] 
+	 * diff align difference between 2 angles ]-180, 180]
 	 * @return 
 	 */
 	public static double degreesDiff(double a1, double a2) {
@@ -427,7 +426,23 @@ public class MapUtils {
 		double multiple = convert31XToMeters(xB, xA) * convert31XToMeters(xC, xA) + convert31YToMeters(yB, yA) * convert31YToMeters(yC, yA);
 		return multiple;
 	}
-	
+
+
+	public static void main(String[] args) {
+		String s = "";
+		// s = "القاهرة"; // cairo
+//		s = "東京"; //tokyo
+//		s = "北京"; // beijing
+//		s = "יְרוּשָׁלַיִם"; // jerusalem
+
+		System.out.println(s);
+		for(int i = 0; i < s.length(); i++ ) {
+			System.out.print(s.charAt(i) + "\n");
+		}
+		for(int i = 0; i < s.length(); i++ ) {
+			System.out.print("\\u0"+Integer.toHexString(s.charAt(i)) + "");
+		}
+	}
 }
 
 

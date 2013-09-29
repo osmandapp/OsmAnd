@@ -161,7 +161,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	
 	public int getRadiusBug(RotatedTileBox tb) {
 		int z;
-		final int zoom = tb.getZoom();
+		final float zoom = tb.getZoom() + tb.getZoomScale();
 		if (zoom < startZoom) {
 			z = 0;
 		} else if (zoom <= 12) {
