@@ -29,6 +29,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -182,7 +183,8 @@ public class MapRenderRepositories {
 		if (drawSettings.isUpdateVectorRendering()) {
 			return true;
 		}
-		if (requestedBox.getZoom() != box.getZoom()) {
+		if (requestedBox.getZoom() != box.getZoom() ||
+				requestedBox.getZoomScale() != box.getZoomScale()) {
 			return true;
 		}
 
@@ -558,11 +560,12 @@ public class MapRenderRepositories {
 			currentRenderingContext.topY = lt.y ;
 			currentRenderingContext.zoom = requestedBox.getZoom();
 			currentRenderingContext.rotate = requestedBox.getRotate();
-			currentRenderingContext.width = requestedBox.getPixWidth();
-			currentRenderingContext.height = requestedBox.getPixHeight();
+			final float mapDensity = (float) Math.pow(2, requestedBox.getZoomScale());
+			currentRenderingContext.width = (int) (requestedBox.getPixWidth() / mapDensity);
+			currentRenderingContext.height = (int) (requestedBox.getPixHeight() / mapDensity);
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.useEnglishNames = prefs.USE_ENGLISH_NAMES.get();
-			currentRenderingContext.setDensityValue(prefs.USE_HIGH_RES_MAPS.get(), 
+			currentRenderingContext.setDensityValue(prefs.USE_HIGH_RES_MAPS.get(),
 					prefs.MAP_TEXT_SIZE.get(), renderer.getDensity());
 			// init rendering context
 			currentRenderingContext.tileDivisor = (float) MapUtils.getPowZoom(31 - requestedBox.getZoom());
@@ -593,8 +596,6 @@ public class MapRenderRepositories {
 			}
 			this.bmp = bmp;
 			this.bmpLocation = tileRect;
-			
-			
 			
 			if(nativeLib != null) {
 				renderer.generateNewBitmapNative(currentRenderingContext, nativeLib, cNativeObjects, bmp, renderingReq, notifyList);

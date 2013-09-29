@@ -231,21 +231,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	// ///////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
-	public int getSourceTileSize() {
-		// TODO
-		int r = 256;
-		if (mainLayer instanceof MapTileLayer) {
-			r = ((MapTileLayer) mainLayer).getSourceTileSize();
-		}
-		// that trigger allows to scale tiles for certain devices
-		// for example for device with density > 1 draw tiles the same size as with density = 1
-		// It makes text bigger but blurry, the settings could be introduced for that
-		if (dm != null && dm.density > 1f && !getSettings().USE_HIGH_RES_MAPS.get()) {
-			return (int) (r * dm.density);
-		}
-		return r;
-	}
-
 	public void setIntZoom(int zoom) {
 		if (mainLayer != null && zoom <= mainLayer.getMaximumShownMapZoom() && zoom >= mainLayer.getMinimumShownMapZoom()) {
 			animatedDraggingThread.stopAnimating();
