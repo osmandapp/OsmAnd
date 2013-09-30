@@ -1058,6 +1058,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="tip_navigation_t">For at få kørselsvejledning til et sted, enten langt tryk på direkte på kortet, (tryk derefter på beskrivelsemarkøren, og vælg \'Kørselsvejledning til\'), eller vælg \'Kørselsvejledning\' efter at have trykket på et resultat på liste med søgeresultater eller favoritliste.
 \n\nDestinationen er markeret som et orange flag på kortet og Osmand viser afstand og retning til det (orange trekant).
 \n\nFor at få kørselsvejledning til destinationen fra et andet punkt end den aktuelle position, vælges det på kortet, og tryk \'Kørselsvejledning fra\'.
+\n\nVælg enten \'Start navigation\', hvilket betyder, at Osmand giver vejledning og talte instruktioner (hvis aktiveret) mv. Eller vælg \'Vis rute\', hvilket resulterer i statisk rute uden vejledning eller justeringer, mens du flytter.
+\n\nBruges \'Kørselsvejledning fra\' sammen med \'Start navigation\', vil Osmand skifte til den faktiske position, så snart den er fundet (dette kan bruges til at  komme hurtigt i gang med rutning  før positionen findes), mens \'Kørselsvejledning fra\' i kombination med \'Vis rute\' kun viser ruten fra ethvert vilkårligt valgt punkt uden efterfølgende opdateringer. ↵
+→
 	</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
