@@ -30,7 +30,7 @@ public class AnimateDraggingMapThread {
 	private volatile Thread currentThread = null;
 	private final OsmandMapTileView tileView;
 	
-	private float targetRotate = 0;
+	private float targetRotate = -720;
 	private double targetLatitude = 0;
 	private double targetLongitude = 0;
 	private int targetIntZoom = 0;
