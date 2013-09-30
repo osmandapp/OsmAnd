@@ -19,11 +19,11 @@ public class RotatedTileBox {
 	// derived
 	// all geometry math is done in tileX, tileY of phisycal given zoom
 	// zoomFactor is conversion factor, from dtileX * zoomFactor = dPixelX
-	private float zoomFactor;
-	private float rotateCos;
-	private float rotateSin;
-	private float oxTile;
-	private float oyTile;
+	private double zoomFactor;
+	private double rotateCos;
+	private double rotateSin;
+	private double oxTile;
+	private double oyTile;
 	private QuadRect tileBounds;
 	private QuadRect latLonBounds;
 	private QuadPoint tileLT;
@@ -82,12 +82,12 @@ public class RotatedTileBox {
 	}
 
 	public void calculateDerivedFields() {
-		zoomFactor = (float) Math.pow(2, zoomScale + zoomAnimation) * 256;
-		float rad = (float) Math.toRadians(this.rotate);
-		rotateCos = (float) Math.cos(rad);
-		rotateSin = (float) Math.sin(rad);
-		oxTile = (float) MapUtils.getTileNumberX(zoom, lon);
-		oyTile = (float) MapUtils.getTileNumberY(zoom, lat);
+		zoomFactor = Math.pow(2, zoomScale + zoomAnimation) * 256;
+		double rad = Math.toRadians(this.rotate);
+		rotateCos = Math.cos(rad);
+		rotateSin = Math.sin(rad);
+		oxTile = MapUtils.getTileNumberX(zoom, lon);
+		oyTile = MapUtils.getTileNumberY(zoom, lat);
 		while(rotate < 0){
 			rotate += 360;
 		}
@@ -137,10 +137,10 @@ public class RotatedTileBox {
 		return oyTile;
 	}
 
-	protected float getTileXFromPixel(float x, float y) {
+	protected double getTileXFromPixel(float x, float y) {
 		float dx = x - cx;
 		float dy = y - cy;
-		float dtilex;
+		double dtilex;
 		if(isMapRotateEnabled()){
 			dtilex = (rotateCos * (float) dx + rotateSin * (float) dy);
 		} else {
@@ -149,10 +149,10 @@ public class RotatedTileBox {
 		return dtilex / zoomFactor + oxTile;
 	}
 
-	protected float getTileYFromPixel(float x, float y) {
+	protected double getTileYFromPixel(float x, float y) {
 		float dx = x - cx;
 		float dy = y - cy;
-		float dtiley;
+		double dtiley;
 		if(isMapRotateEnabled()){
 			dtiley = (-rotateSin * (float) dx + rotateCos * (float) dy);
 		} else {
@@ -167,23 +167,23 @@ public class RotatedTileBox {
 	}
 
 	public void calculateTileRectangle() {
-		float x1 = getTileXFromPixel(0, 0);
-		float x2 = getTileXFromPixel(pixWidth, 0);
-		float x3 = getTileXFromPixel(pixWidth, pixHeight);
-		float x4 = getTileXFromPixel(0, pixHeight);
-		float y1 = getTileYFromPixel(0, 0);
-		float y2 = getTileYFromPixel(pixWidth, 0);
-		float y3 = getTileYFromPixel(pixWidth, pixHeight);
-		float y4 = getTileYFromPixel(0, pixHeight);
-		tileLT = new QuadPoint(x1, y1);
-		tileRT = new QuadPoint(x2, y2);
-		tileRB = new QuadPoint(x3, y3);
-		tileLB = new QuadPoint(x4, y4);
-		float l = Math.min(Math.min(x1, x2), Math.min(x3, x4)) ;
-		float r = Math.max(Math.max(x1, x2), Math.max(x3, x4)) ;
-		float t = Math.min(Math.min(y1, y2), Math.min(y3, y4)) ;
-		float b = Math.max(Math.max(y1, y2), Math.max(y3, y4)) ;
-		tileBounds = new QuadRect(l, t, r, b);
+		double x1 = getTileXFromPixel(0, 0);
+		double x2 = getTileXFromPixel(pixWidth, 0);
+		double x3 = getTileXFromPixel(pixWidth, pixHeight);
+		double x4 = getTileXFromPixel(0, pixHeight);
+		double y1 = getTileYFromPixel(0, 0);
+		double y2 = getTileYFromPixel(pixWidth, 0);
+		double y3 = getTileYFromPixel(pixWidth, pixHeight);
+		double y4 = getTileYFromPixel(0, pixHeight);
+		tileLT = new QuadPoint((float)x1, (float)y1);
+		tileRT = new QuadPoint((float)x2, (float)y2);
+		tileRB = new QuadPoint((float)x3, (float)y3);
+		tileLB = new QuadPoint((float)x4, (float)y4);
+		double l = Math.min(Math.min(x1, x2), Math.min(x3, x4)) ;
+		double r = Math.max(Math.max(x1, x2), Math.max(x3, x4)) ;
+		double t = Math.min(Math.min(y1, y2), Math.min(y3, y4)) ;
+		double b = Math.max(Math.max(y1, y2), Math.max(y3, y4)) ;
+		tileBounds = new QuadRect((float)l, (float)t,(float) r, (float)b);
 		float top = (float) MapUtils.getLatitudeFromTile(zoom, tileBounds.top);
 		float left = (float) MapUtils.getLongitudeFromTile(zoom, tileBounds.left);
 		float bottom = (float) MapUtils.getLatitudeFromTile(zoom, tileBounds.bottom);
@@ -207,16 +207,16 @@ public class RotatedTileBox {
 		return getPixXFromTile(xTile, yTile);
 	}
 
-	protected int getPixXFromTile(float xTile, float yTile) {
-		float rotX;
-		final float dTileX = xTile - oxTile;
-		final float dTileY = yTile - oyTile;
+	protected int getPixXFromTile(double xTile, double yTile) {
+		double rotX;
+		final double dTileX = xTile - oxTile;
+		final double dTileY = yTile - oyTile;
 		if(isMapRotateEnabled()){
 			rotX = (rotateCos * dTileX - rotateSin * dTileY);
 		} else {
 			rotX = dTileX;
 		}
-		float dx = rotX * zoomFactor;
+		double dx = rotX * zoomFactor;
 		return (int) (dx + cx);
 	}
 
@@ -228,35 +228,35 @@ public class RotatedTileBox {
 	}
 
 	protected int getPixYFromTile(float xTile, float yTile) {
-		final float dTileX = xTile - oxTile;
-		final float dTileY = yTile - oyTile;
-		float rotY;
+		final double dTileX = xTile - oxTile;
+		final double dTileY = yTile - oyTile;
+		double rotY;
 		if(isMapRotateEnabled()){
 			rotY = (rotateSin * dTileX + rotateCos * dTileY);
 		} else {
 			rotY = dTileY;
 		}
-		float dy = rotY * zoomFactor;
+		double dy = rotY * zoomFactor;
 		return (int) (dy + cy);
 	}
 
 	public int getPixXFromLonNoRot(double longitude) {
-		float dTilex = (float) MapUtils.getTileNumberX(zoom, longitude) - oxTile;
+		double dTilex = (float) MapUtils.getTileNumberX(zoom, longitude) - oxTile;
 		return (int) (dTilex * zoomFactor + cx);
 	}
 
 	public int getPixXFromTileXNoRot(double tileX) {
-		float dTilex = (float) tileX - oxTile;
+		double dTilex = tileX - oxTile;
 		return (int) (dTilex * zoomFactor + cx);
 	}
 
 	public int getPixYFromLatNoRot(double latitude) {
-		float dTileY  = (float) MapUtils.getTileNumberY(zoom, latitude) - oyTile;
+		double dTileY  = MapUtils.getTileNumberY(zoom, latitude) - oyTile;
 		return (int) ((dTileY * zoomFactor) + cy);
 	}
 
 	public int getPixYFromTileYNoRot(double tileY) {
-		float dTileY  = (float) tileY - oyTile;
+		double dTileY  = tileY - oyTile;
 		return (int) ((dTileY * zoomFactor) + cy);
 	}
 
@@ -269,11 +269,11 @@ public class RotatedTileBox {
 		return latLonBounds;
 	}
 	
-	public float getRotateCos() {
+	public double getRotateCos() {
 		return rotateCos;
 	}
 	
-	public float getRotateSin() {
+	public double getRotateSin() {
 		return rotateSin;
 	}
 

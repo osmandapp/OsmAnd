@@ -20,14 +20,16 @@ public class MultiTouchSupport {
     public static final int ACTION_POINTER_ID_SHIFT = 8;
     public static final int ACTION_POINTER_DOWN     = 5;
     public static final int ACTION_POINTER_UP     = 6;
+	private float angleStarted;
+	private float angleRelative;
 
-    public interface MultiTouchZoomListener {
+	public interface MultiTouchZoomListener {
     	
-    	public void onZoomStarted(float distance, PointF centerPoint);
+    	public void onZoomStarted(PointF centerPoint);
     	
-    	public void onZooming(float distance, float relativeToStart);
+    	public void onZoomingOrRotating(double relativeToStart, float angle);
     	
-    	public void onZoomEnded(float distance, float relativeToStart);
+    	public void onZoomEnded(double relativeToStart, float angleRelative);
     	
     	public void onGestureInit(float x1, float y1, float x2, float y2);
     	
@@ -72,8 +74,8 @@ public class MultiTouchSupport {
     }
     
     private boolean inZoomMode = false;
-    private float zoomStartedDistance = 100;
-    private float previousZoom = 1;
+    private double zoomStartedDistance = 100;
+    private double zoomRelative = 1;
     private PointF centerPoint = new PointF();
     
     public boolean onTouchEvent(MotionEvent event){
@@ -85,7 +87,7 @@ public class MultiTouchSupport {
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
 			if(pointCount < 2){
 				if(inZoomMode){
-					listener.onZoomEnded(zoomStartedDistance * previousZoom, previousZoom);
+					listener.onZoomEnded(zoomRelative, angleRelative);
 				}
 				return false;
 			}
@@ -94,22 +96,32 @@ public class MultiTouchSupport {
 			Float y1 = (Float) getY.invoke(event, 0);
 			Float y2 = (Float) getY.invoke(event, 1);
 			float distance = FloatMath.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-			previousZoom = distance / zoomStartedDistance;
+		    float angle = 0;
+		    boolean angleDefined = false;
+		    if(x1 != x2 || y1 != y2) {
+			    angleDefined = true;
+			    angle = (float) (Math.atan2(y2 - y1, x2 -x1) * 180 / Math.PI);
+		    }
 			if (actionCode == ACTION_POINTER_DOWN) {
 				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
 				listener.onGestureInit(x1, y1, x2, y2);
-				listener.onZoomStarted(distance, centerPoint);
+				listener.onZoomStarted(centerPoint);
 				zoomStartedDistance = distance;
+				angleStarted = angle;
 				inZoomMode = true;
 				return true;
 			} else if(actionCode == ACTION_POINTER_UP){
 				if(inZoomMode){
-					listener.onZoomEnded(distance, previousZoom);
+					listener.onZoomEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
 				}
 				return true;
 			} else if(inZoomMode && actionCode == MotionEvent.ACTION_MOVE){
-				listener.onZooming(distance, previousZoom);
+				if(angleDefined) {
+					angleRelative = angle - angleStarted;
+				}
+				zoomRelative = distance / zoomStartedDistance;
+				listener.onZoomingOrRotating(zoomRelative, angleRelative);
 				return true;
 			}
     	} catch (Exception e) {

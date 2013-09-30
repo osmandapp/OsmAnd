@@ -503,9 +503,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	protected void rotateToAnimate(float rotate) {
 		if (isMapRotateEnabled()) {
 			this.rotate = MapUtils.unifyRotationTo360(rotate);
-			if(isMapRotateEnabled()) {
-				currentViewport.setRotate(this.rotate);
-			}
+			currentViewport.setRotate(this.rotate);
 			refreshMap();
 		}
 	}
@@ -623,13 +621,16 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		private float x2;
 		private float y2;
 		private LatLon initialCenterLatLon;
+		private boolean startRotating = false;
 
 		@Override
-		public void onZoomEnded(float distance, float relativeToStart) {
-			float dz = (float) (Math.log(relativeToStart) / Math.log(2)); //* 1.5);
-			final int rz = Math.round(dz);
-			setIntZoom(rz + initialViewport.getZoom());
-
+		public void onZoomEnded(double relativeToStart, float angleRelative) {
+			float dz = (float) (Math.log(relativeToStart) / Math.log(2)) * 1.5f;
+			setComplexZoom(Math.round(dz) + initialViewport.getZoom(), initialViewport.getZoomScale());
+			if(Math.abs(angleRelative) < 15){
+				angleRelative = 0;
+			}
+			rotateToAnimate(initialViewport.getRotate() + angleRelative);
 			final int newZoom = getZoom();
 			if (application.getInternalAPI().accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
@@ -651,32 +652,52 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 
 		@Override
-		public void onZoomStarted(float distance, PointF centerPoint) {
+		public void onZoomStarted(PointF centerPoint) {
 			initialMultiTouchCenterPoint = centerPoint;
 			initialViewport = getCurrentRotatedTileBox().copy();
 			initialCenterLatLon = initialViewport.getLatLonFromPixel(initialMultiTouchCenterPoint.x,
 					initialMultiTouchCenterPoint.y);
+			startRotating = false;
 		}
 
 		@Override
-		public void onZooming(float distance, float relativeToStart) {
-			float dz = (float) (Math.log(relativeToStart) / Math.log(2)); // * 1.5);
-			if (Math.abs(dz) > 0.05) {
-				changeZoomPosition(dz);
+		public void onZoomingOrRotating(double relativeToStart, float relAngle) {
+			double dz = (Math.log(relativeToStart) / Math.log(2)) * 1.5;
+			if (Math.abs(dz) <= (startRotating ? 0.05 : 0.05)) {
+				// keep only rotating
+				dz = 0;
 			}
+			if(Math.abs(relAngle) < 20 && !startRotating) {
+				relAngle = 0;
+			} else {
+				startRotating = true;
+			}
+			if(dz != 0 || relAngle != 0) {
+				changeZoomPosition((float) dz, relAngle);
+			}
+
 		}
 		
-		private void changeZoomPosition(float dz) {
-			float calcZoom = initialViewport.getZoom() + dz + initialViewport.getZoomScale();
+		private void changeZoomPosition(float dz, float angle) {
 			final QuadPoint cp = initialViewport.getCenterPixelPoint();
 			float dx = cp.x - initialMultiTouchCenterPoint.x ;
 			float dy = cp.y - initialMultiTouchCenterPoint.y ;
 			final RotatedTileBox calc = initialViewport.copy();
 			calc.setLatLonCenter(initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude());
+
+			float calcZoom = initialViewport.getZoom() + dz + initialViewport.getZoomScale();
+			float calcRotate = calc.getRotate() + angle;
+			calc.setRotate(angle);
 			calc.setZoom(initialViewport.getZoom(), dz + initialViewport.getZoomScale());
 			final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 			setLatLon(r.getLatitude(), r.getLongitude());
-			zoomToAnimate(calcZoom, true);
+			if (Math.abs(currentViewport.getZoomAnimation() + currentViewport.getZoom()  + currentViewport.getZoomScale() -
+				calcZoom) > 0.1) {
+				zoomToAnimate(calcZoom, true);
+			}
+			if(currentViewport.getRotate() != calcRotate){
+				rotateToAnimate(calcRotate);
+			}
 		}
 
 	}
