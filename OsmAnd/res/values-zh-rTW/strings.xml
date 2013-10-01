@@ -67,7 +67,7 @@
 		- 可選的自動日夜模式切換
 		- 可選的依據速度自動地圖比例尺縮放
 		- 可選的地圖正北朝上或行進方向朝上
-		- 可選的車道導引、速限顯示、使用真人語音或 TTS 語音
+		- 可選的車道引導、速限顯示、使用真人語音或 TTS 語音
 
 		OsmAnd 免費版限制:
 		- 地圖下載數量
@@ -91,7 +91,7 @@
  - 可選擇自動日/夜模式切換
  - 可選擇取決於速度的地圖縮放
  - 可選擇地圖正北朝上或或行進方向朝上
- - 可選擇車道導引、速限顯示、使用真人語音或 TTS 語音
+ - 可選擇車道引導、速限顯示、使用真人語音或 TTS 語音
 	</string>
 	<string name="tip_update_index">更新離線地圖</string>
 	<string name="tip_update_index_t">離線地圖的查看與 POI/位址查尋，以及離線導航，有最新的圖資是不可或缺的。OsmAnd提供資料管理來下載那些離線圖資（以及其它的一些資料檔案），並且檢查能用的更新。
@@ -778,7 +778,7 @@
 	<string name="search_poi_filter">篩選</string>
 	<string name="menu_mute_off">語音已開啟</string>
 	<string name="menu_mute_on">語音已關閉</string>
-	<string name="voice_provider_descr">選擇導航語音指示 (語言代碼，請參閱 ISO 639-1)</string>
+	<string name="voice_provider_descr">選擇導航語音引導 (語言代碼，請參閱 ISO 639-1)</string>
 	<string name="voice_provider">語音導航</string>
 	<string name="voice_data_initializing">初始化語音資料…</string>
 	<string name="voice_data_not_supported">不支援的語音資料版本</string>
@@ -1219,7 +1219,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 導航
  - 工作在線上(快速)或是離線（當您在國外無需國際漫遊費用）
  - 轉向建議(turn by turn)語音導航（真人語音和合成音）
- - 可選的車道導引、街道名稱顯示和預計抵達時間
+ - 可選的車道引導、街道名稱顯示和預計抵達時間
  - 支援您的行程安排上的中間點
  - 每當您偏離了行駛路線，自動重新改道規劃
  - 查尋地點按照地址，類型（例如：餐廳、飯店、加油站、博物館），或以地圖地理位置坐標查看
@@ -1289,7 +1289,7 @@ OsmAnd + 是付費應用程式版本。經由您的購買來支援專案，資�
 導航
  - 工作在線上(快速)或是離線（當您在國外無需國際漫遊費用）
  - 轉向建議(turn by turn)語音導航（真人語音和合成音）
- - 可選擇車道導引、街道名稱顯示和預計抵達時間
+ - 可選擇車道引導、街道名稱顯示和預計抵達時間
  - 支援您的行程安排上的中間點
  - 每當您偏離了行駛路線，自動重新改道規劃
  - 查尋地點按照地址，類型（例如：餐廳、飯店、加油站、博物館），或以地圖地理位置坐標查看
