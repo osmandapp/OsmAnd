@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -486,9 +486,11 @@
   <string name="tip_app_mode">Naudoti profilį</string>
   
   <string name="tip_navigation">Navigacija</string>
-  <string name="tip_navigation_t">Norėdami gauti nuorodas į pageidaujamą vietą galite ilgai paspaudę žemlėapyje ant pageidaujamos vietos ir ant jos atsiradusiame žymeklyje pasirinkti \'Maršrutas į\', arba pasirinkti \'Nuorodos\' paspaudę ant reikiamo įrašu paieškos rezultatų sąraše. 
-		\n\nKelionės tikslas žymimas oranžine tikslo vėliaveėle and žemėlapio ir OsmAnd rodo atstumą ir kryptį iki jo (oranžinis trikampis).
+  <string name="tip_navigation_t">Norėdami gauti nuorodas į pageidaujamą vietą galite ilgai paspaudę žemlapyje ant pageidaujamos vietos ir ant jos atsiradusiame žymeklyje pasirinkti \'Maršrutas į\', arba pasirinkti \'Nuorodos\' paspaudę ant reikiamo įrašu paieškos rezultatų sąraše. 
+		\n\nKelionės tikslas žymimas oranžine tikslo vėliavėle ant žemėlapio ir OsmAnd rodo atstumą ir kryptį iki jo (oranžinis trikampis).
+		\n\nYou may chose either \'Start navigation\', which means that OsmAnd would live-guide you, give you voice instructions (if enabled), etc. Or you can select \'Display route\', resulting in static route without any live-guideance or adjustments as you move
 		\n\nNorėdami gauti nuorodas iš bet kurios vietos (išskyrus jūsų dabartinę) turite ją pažymėti žemėlapyje ir pasirinkti \'Nuorodos iš\'.
+		\n\nIf you use \'Directions from\' together with \'Start navigation\', OsmAnd will switch to your actual position as soon as it is found (so this can be used to jump-start routing before the position is found), while \'Directions from\' in combination with \'Display route\' just shows you the route from any arbitrary point you had selected without subsequent updates.
 	</string>
   <string name="tip_search">Paieška</string>
   <string name="tip_search_t">Vietų ieškoti galitie tiesiog žemėlapyje per \'Naudoti vietą\' → \'Ieškoti netoliese\', arba atverdami paiesškos langą per \'Meniu\' → \'Ieškoti\'.
@@ -777,8 +779,8 @@
   <string name="fav_points_edited">Įsiminta vieta buvo redaguota</string>
   <string name="fav_points_not_exist">Nėra jokių įsimintų vietų</string>
   <string name="update_existing">Pakeisti</string>
-  <string name="only_show">Tik rodyti</string>
-  <string name="follow">Sekti</string>
+  <string name="only_show">Rodyti maršrutą</string>
+  <string name="follow">Pradėti navigaciją</string>
   <string name="recalculate_route_to_your_location">Pasirinkite transporto rūšį (neprivaloma):</string>
   <string name="mark_final_location_first">Pirmiausia pasirinkite kelionės tikslą</string>
   <string name="get_directions">Kelionės nuorodos</string>
@@ -1585,4 +1587,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* \'Didelio kontrasto keliai\' rodo kelius ryškiomis spalvomis, kad būtų lengviau matyti stipraus išorinio apšvietimo sąlygomis
 		\n\t* \'Žiemos ir slidinėjimo\' rodo (sniego padengtą) žiemos kraštovaizdį vertikaliu režimu, kartu ir pasaulines slidinėjimo trasa ir keltuvus (kartu su parsiųstu \'World ski\' žemėlapiu)
 	</string>
-    </resources>
+    <string name="base_world_map">Bazinis pasaulio žemėlapis</string>
+	</resources>
