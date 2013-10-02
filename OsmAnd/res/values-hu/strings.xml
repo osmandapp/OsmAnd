@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
@@ -143,11 +143,18 @@
   <string name="tip_rotation_switching">Térkép elforgatása</string>
   
   <string name="switch_to_raster_map_to_see">Nincs internet nélkül használható térkép erre a területre. Letölthetsz egyet a Beállításokban (Offilne adatok), vagy átválthatsz online térképekre.</string>
-  <string name="binary_map_download_success">Sikeres letöltés.\n\t\n\tHasználatba vétel: \'Menü\' -&amp;gt; \'Rétegek\' -&amp;gt; \'Térképforrás\' -&amp;gt; \'Vektoros OSM térkép\'.</string>
+  <string name="binary_map_download_success">Sikeres letöltés.
+		\n\t\n\tHasználatba vétel: \'Menü\' → \'Rétegek\' → \'Térképforrás\' → \'Vektoros OSM térkép\'.
+	</string>
   <string name="tip_day_night_mode">Éjjel/nappali mód</string>
   
   <string name="tip_osm_improve">OSM adatok javítása</string>
-  <string name="tip_osm_improve_t">\tAz OsmAnd OpenStreetMap alapú adatokat használ és - a megjelenítés és navigáció mellett - használható az adatok javításához. Egyszerűen lehet pár kattintással új POI-t feltölteni, vagy OSM hibát bejelenteni! \n\tEhhez először meg kell adnod az OSM bejelentkezési adataidat a \'Beállítások\' -&amp;gt; \'Általános beállítások\' -&amp;gt; \'OSM\' alatt. \n\tÚj POI létrehozásához a \'POI készítés\'-t kell választani a menüben. Be kell írni az új POI adatait a \'POI készítés\' adatlapon, majd el kell küldeni. \n\tA térkép hibáit egyből be lehet jelenteni az OpenStreetBugon keresztül, így az OSM közösség gyorsabban tudja javítani. \n\tHibát bejelenteni az \'OSM bug nyitása\' menün keresztül lehet a térkép helyi menüjében. Utána részletesen le kell írni a hibát és elküldeni a \'Hozzáad\' gombbal. \n\tPOI hozzáadáshoz és a hibabejelentéshez internet elérés szükséges.</string>
+  <string name="tip_osm_improve_t">Az OsmAnd OpenStreetMap alapú adatokat használ és - a megjelenítés és navigáció mellett - használható az adatok javításához is. Egyszerűen lehet pár kattintással új POI-t feltölteni, vagy OSM hibát bejelenteni!
+		\n\nEhhez először aktiválnod kell az \'OSM szerkesztés\' bővítményt a \'Beállítások\' → \'Bővítmények\' menüben.
+		\n\nÚj POI létrehozásához tapints hosszan a térképen, majd a helyi menüből válaszd a \'POI készítés\'-t. Adj meg minél több információt az új POI-ról, majd mentsd el.
+		\n\nA térkép hibáit egyből be tudod jelenteni egy OSM hibajelentés nyitásával, amit az OSM közösség gyorsan ki tud javítani. Tapints hosszan a térképen, majd a helyi menüből válaszd az \'OSM hibajelentés\'-t. Írd le részletesen a hibát, majd küldd el.
+		\n\nAz OsmAnd offline is eltárolja a bejegyzéseidet, de a hibajelentések és POI-k feltöltéséhez természetesen internetkapcsolat szükséges.
+	</string>
   <string name="download_files_not_enough_space">Nincs elég hely %1$s MB letöltéséhez (szabad %2$s).</string>
   <string name="download_files_question_space">Szabad hely jelenleg {2} MB! Letöltesz {0} fájlt ({1} MB)?</string>
   <string name="tip_select_destination_point">Beállítás célpontnak</string>
@@ -253,8 +260,8 @@
   <string name="local_indexes_cat_tts">Beszédadat (TTS)</string>
   <string name="local_indexes_cat_voice">Beszédadat (felvett)</string>
   <string name="local_indexes_cat_gpx">GPX-adat</string>
-  <string name="local_indexes_cat_tile">Online térképek (raszteres)</string>
-  <string name="local_indexes_cat_map">Offline térképek (vektoros)</string>
+  <string name="local_indexes_cat_tile">Online térképcsempék</string>
+  <string name="local_indexes_cat_map">Offline térképek</string>
   <string name="local_indexes_cat_poi">POI-adat</string>
   <string name="ttsvoice">TTS felolvasó hang</string>
   <string name="search_offline_clear_search">Új keresés</string>
@@ -262,7 +269,7 @@
   <string name="map_text_size">Szövegméret</string>
   <string name="trace_rendering">Megjelenítési adatok hibakereséshez</string>
   <string name="trace_rendering_descr">Megjelenítési teljesítmény adatainak kijelzése</string>
-  <string name="tip_recent_changes">Legújabb változások</string>
+  <string name="tip_recent_changes">Friss változtatások</string>
   <string name="tip_recent_changes_0_6_6_t">Legújabb változások a 0.6.6 verzióhoz: \n\t- Text To Speech hangnavigációhoz \n\t- Részletesebb térkép megjelenítés \n\t- Alap térkép az egész Földről az alkalmazásban \n\t- Javított kapcsolat nélküli navigáció (még kísérleti) \n\t- GPX navigációs beállítások \n\t- Kezelő felület és egyéb hibajavítások
 	</string>
   <string name="voice_not_use">Letiltva</string>
@@ -276,7 +283,7 @@
   <string name="gpx_option_reverse_route">GPX irány megfordítása</string>
   <string name="gpx_option_destination_point">Használd a jelenlegi célpontot</string>
   <string name="gpx_option_from_start_point">Végig az egész útvonalon</string>
-  <string name="switch_to_vector_map_to_see">Offline vektoros térkép érhető el ezen a helyen.\n\t\n\tAktiválni a \'menü\' -&amp;gt; \'Rétegek\' -&amp;gt; \'Térképforrás\' menüben tudod.</string>
+  <string name="switch_to_vector_map_to_see">Offline vektoros térkép érhető el ezen a helyen.\n\t\n\tAktiválni a \'menü\' → \'Rétegek\' → \'Térképforrás\' menüben tudod.</string>
   <string name="choose_audio_stream">Hangnavigáció kimenete</string>
   <string name="choose_audio_stream_descr">Hangnavigáció csatornájának kiválasztása (rendszer-konfigurációtól függ)</string>
   <string name="voice_stream_voice_call">Telefonhívás hangcsatorna</string>
@@ -304,8 +311,10 @@
   <string name="level_to_switch_vector_raster_descr">Minimális nagyítási szint vektoros megjelenítéshez térképcsempék helyett</string>
   <string name="level_to_switch_vector_raster">Min. vektoros nagyítás</string>
   <string name="tip_location_sharing">Hely megosztása</string>
-  <string name="tip_location_sharing_t">"\tAz utazásod érdekes helyeit megoszthatod barátaiddal, családoddal?.\n\tBármelyik hely megosztásához:\n\tVálaszd kattints hosszan és válaszd a \'Hely megosztása\' menüpontot.
-\n\tEzután válaszd ki a megosztás módját. Lehetséges módok: e-mail, SMS vagy a koordináták másolása a vágólapra. "</string>
+  <string name="tip_location_sharing_t">"\tAz utazásod érdekes helyeit megoszthatod barátaiddal, családoddal. Bármelyik hely megosztásához:
+\n\tKattints hosszan és válaszd a \'Hely megosztása\' menüpontot.
+\n\tEzután válaszd ki a megosztás módját. Lehetséges módok: e-mail, SMS vagy a koordináták másolása a vágólapra. "
+	</string>
   <string name="tip_favorites">Kedvencek</string>
   <string name="tip_favorites_t">"\tA gyakran látogatott helyeket elmentheted Kedvencként.
 \n\tKedvenc pont mentéséhez a térképmenüben a \'Hozzáadás a kedvencekhez\' menüpontot kell választani és a helyet egy megfelelő névvel ellátni. Mentés után a főmenüben a Kedvencekre kattintva találod.
@@ -320,7 +329,7 @@
   <string name="preferred_locale">Preferált nyelv</string>
   <string name="tip_map_switch">Térképforrás kiválasztása</string>
   
-  <string name="tip_app_mode">Működési mód</string>
+  <string name="tip_app_mode">Üzemmód</string>
   
   <string name="tip_navigation">Navigáció</string>
   <string name="tip_navigation_t">Navigáció indításához először ki kell választani egy célpontot. Ezután a térképmenü \'Útirány\' menüjét kell választani és megjelölni a közlekedési módot.</string>
@@ -332,8 +341,9 @@
 \n\tKattintás után megjelenik egy doboz a koordinátákkal, vagy a POI nevével. A térképmenü megnyitásához kattints erre a dobozra (vagy kattints rá hosszan az eltüntetéséhez).
 \n\tA térképmenü tartalmaz minden olyan műveletet, amit azzal a ponttal tenni tudsz. "</string>
   <string name="tip_initial">Tippek és trükkök</string>
-  <string name="tip_initial_t">"\tAz OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
-\n\tA gyorsabb megértés érdekében ajánlott a tippek és trükkök elolvasása, ami a főmenü kérdőjel ikonjára kattintva érhető el. "</string>
+  <string name="tip_initial_t">Az OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
+\n\nEgy gyors bemutatót és hasznos tippeket találsz a térkép képernyő \'menü\' → \'Tippek\' gombjára kattintva.
+	</string>
   <string name="next_button">Következő</string>
   <string name="previous_button">Előző</string>
   <string name="unit_of_length_descr">Hosszúság és sebesség mértékegységének megváltoztatása</string>
@@ -535,7 +545,7 @@
   <string name="route_head">Előre</string>
   <string name="first_time_continue">Tovább</string>
   <string name="first_time_download">Térképadatok letöltése</string>
-  <string name="first_time_msg">Hogy a program minden lehetőségét kihasználhasd, index állományokra lesz szükséged, amiket az internetről tölthetsz le (Beállítások -&amp;gt; Offline adatok), vagy elkészíthetsz magadnak. Ezt követően tudsz majd címre, POI-ra és tömegközlekedési eszközre keresni.</string>
+  <string name="first_time_msg">Hogy a program minden lehetőségét kihasználhasd, index állományokra lesz szükséged, amiket az internetről tölthetsz le (Beállítások → Offline adatok), vagy elkészíthetsz magadnak. Ezt követően tudsz majd címre, POI-ra és tömegközlekedési eszközre keresni.</string>
   <string name="search_poi_location">Jel keresése…</string>
   <string name="search_near_map">Keresés az utolsó térképpozíció közelében</string>
   <string name="search_nearby">Keresés a közelben</string>
@@ -796,7 +806,7 @@
   <string name="basemap_was_selected_to_download">Az alaptérképre szükség van az alkalmazás megfelelő működéséhez, ezért ki lett jelölve letöltésre.</string>
   
   <string name="map_online_plugin_is_not_installed">További térképforrások kiválasztásához engedélyezd az online térképek bővítményt</string>
-  <string name="map_online_data">Online térképek (csempék)</string>
+  <string name="map_online_data">Online térképcsempék</string>
   <string name="map_online_data_descr">Internetes térképek használata (letöltés és tárolás az SD kártyán)</string>
   <string name="online_map_settings">Online térkép</string>
   <string name="online_map_settings_descr">Internetes és tárolt raszteres térképek beállításai</string>
@@ -947,21 +957,23 @@
 <string name="map_widget_day_night">Nappali/éjjeli térképmód</string>
 <string name="map_widget_vector_attributes">Térkép megjelenítési beállítások:</string>
 <string name="map_widget_renderer">Térkép megjelenítési stílus</string>
-<string name="tip_app_mode_t_v2">"\tOsmAnd több különböző (személyre szabható) üzemmódot támogat különböző felhasználásokhoz.
-\n\tA módot útvonaltervezésnél, vagy a térkép bal alsó sarkában lévő ikonnal (autó, bicikli vagy gyalogos) tudod megváltoztatni. "</string>
-<string name="tip_rotation_switching_t_v2">"\tA térkép forgatásának módja megváltoztatható a térkép képernyőn az iránytű ikon megnyomásával.
-\n\tA lehetőségek:
-\n\t\'Nem forog (észak felül)\' - A térkép nem fordul el. Mindig észak van felül
-\n\t\'Haladás irányának megfelelően\' - A térkép a haladási irányba fordul el
-\n\t\'Iránytű\' - A térkép az eszköz iránytűjének megfelelően forog "</string>
+<string name="tip_app_mode_t_v2">OsmAnd több különböző (személyre szabható) üzemmódot támogat különböző felhasználásokhoz.
+\n\nA módot útvonaltervezésnél, vagy a térkép bal alsó sarkában lévő ikonnal (autó, bicikli vagy gyalogos) tudod megváltoztatni.
+	</string>
+<string name="tip_rotation_switching_t_v2">A térkép forgatásának módja megváltoztatható a térkép képernyőn az iránytű ikon megnyomásával.
+\n\nA lehetőségek:
+\n\t* \'Nem forog (észak felül)\' - A térkép nem fordul el. Mindig észak van felül
+\n\t* \'Haladás irányának megfelelően\' - A térkép a haladási irányba fordul el
+\n\t* \'Iránytű\' - A térkép az eszköz iránytűjének megfelelően forog
+	</string>
 <string name="tip_day_night_mode_t_v2">"\tBizonyos vektoros térképek megjelenése különbözhet nappal (világosabb) és éjjel (sötétebb).
-\n\tAz éjszakai színek biztonságosabbak éjjeli vezetéshez.
-\n\tA váltás módját a \'Menü\' -&gt; \'Rétegek\' -&gt; \'Képernyő beállítása\' -&gt; \'Nappali/éjjeli térképmód\' alatt lehet beállítani.
-\n\tLehetőségek:
-\n\t\'Napkelte/Napnyugta\' - automatikus mód, a Nap helyzetének megfelelően (alapértelmezett)
-\n\t\'Nappal\' - mindig a nappali színek használata
-\n\t\'Éjjel\' - mindig az éjjeli színek használata
-\n\t\'Fényérzékelő szenzor\' - a térkép az eszköz fényérzékelője alapján vált a színek között (ha az eszköz tartalmaz ilyent) "
+\n\nAz éjszakai színek biztonságosabbak éjjeli vezetéshez.
+\n\nA váltás módját a \'Menü\' → \'Rétegek\' → \'Képernyő beállítása\' → \'Nappali/éjjeli térképmód\' alatt lehet beállítani.
+\n\nLehetőségek:
+\n\t* \'Napkelte/Napnyugta\' - automatikus mód, a Nap helyzetének megfelelően (alapértelmezett)
+\n\t* \'Nappal\' - mindig a nappali színek használata
+\n\t* \'Éjjel\' - mindig az éjjeli színek használata
+\n\t* \'Fényérzékelő szenzor\' - a térkép az eszköz fényérzékelője alapján vált a színek között (ha az eszköz tartalmaz ilyent) "
 	</string>
 <string name="tip_map_switch_t_v2">"\tA térképforrás és a rétegek kicserélhetők a \'Menü\' -&gt; \'Rétegek\' alatt.
 \n\tA \'Térképforrás…\' alatt kiválasztható az előre letöltött vektoros térkép, előre beállított (online) raszteres forrás (az \'Online térkép\' kiterjesztést be kell kapcsolni hozzá), vagy kézzel gyártott térkép pl. OsmAndMapCreatorral készítve PC-n.
@@ -1339,4 +1351,5 @@
 		\n\t* A \'High contrast roads\' az utakat élénk színekkel jeleníti meg, ami ideális erős környezeti fényben
 		\n\t* A \'Winter and ski\' hó borított téli tájképet készít, és megjeleníti a sípályákat és -lifteket (\'World ski\' térkép letöltése szükséges hozzá)
 	</string>
-    </resources>
+    <string name="base_world_map">alap világtérkép</string>
+	</resources>
