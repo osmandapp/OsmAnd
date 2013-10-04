@@ -807,7 +807,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="live_monitoring_interval">Online tracking interval</string>
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">Online tracking web address</string>
-	<string name="gpx_monitoring_disabled_warn">Калі ласка, дазвольце \'Лагаваньне трэкаў у GPX файл\' у наладах трэкінгу</string>
+	<string name="gpx_monitoring_disabled_warn">Калі ласка, дазвольце \'Лагаваньне трэкаў у GPX файл\' у наладах трэкінгу.</string>
 	<string name="show_current_gpx_title">Паказаць дзейны трэк</string>
 	<string name="tip_recent_changes_0_7_0_t">Зьмены ў 0.7.0: \n\t- Пазасеткавыя зьвесткі вікіпэдыі з артыкуламі \n\t- Абноўленыя мапы \n\t- Іншыя невялікія пашырэньні</string>    
 	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads and does not support offline Wikipedia articles.</string>
@@ -895,8 +895,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="choose_auto_follow_route_descr">Час каб мапа сынхранізавалася з гэтым месцам</string>
 	<string name="auto_follow_route_never">Ніколі</string>
 	<string name="auto_follow_route_navigation">Аўтаматычнае цэнтраваньне толькі падчас навігацыі</string>
-	<string name="auto_follow_route_navigation_descr">Аўтаматычнае цэнтраваньне толькі падчас навігацыі</string>
-	<string name="auto_follow_location_enabled">Аўтаматычнае цэнтраваньне падчас карыстаньня</string>
+	<string name="auto_follow_route_navigation_descr">Аўтаматычнае цэнтраваньне толькі падчас навігацыі.</string>
+	<string name="auto_follow_location_enabled">Аўтаматычнае цэнтраваньне падчас карыстаньня.</string>
 	<string name="pref_vector_rendering">Налады маляваньня вэктарамі</string>
 	<string name="pref_overlay">Overlay / underlay</string>
 	<string name="pref_raster_map">Налады крыніцы мапы</string>
@@ -1190,10 +1190,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="continuous_rendering">Continuous rendering</string>
 	<string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once</string>
 	<string name="rendering_exception">Error occurred while rendering selected area</string>
-	<string name="show_point_options">Гэтае месца ...</string>
 	<string name="renderer_load_sucess">Renderer successfully loaded</string>
 	<string name="renderer_load_exception">Exception occurred: renderer was not loaded</string>
 	<string name="renderers">Маляваньне</string>
+	<string name="show_point_options">Гэтае месца …</string>
 	<string name="renderers_descr">Choose rendering appearance</string>
 	<string name="poi_context_menu_website">Show POI website</string>
 	<string name="poi_context_menu_call">Show POI phone</string>
