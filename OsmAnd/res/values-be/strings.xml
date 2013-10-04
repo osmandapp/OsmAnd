@@ -15,13 +15,6 @@
     <string name="auto_zoom_farthest">To long-range</string>
     <string name="map_magnifier">Map magnifier</string>
     <string name="base_world_map">Асноўная мапа сьвету</string>
-	<string name="tip_map_styles">Стыль мапы</string>
-	<string name="tip_map_styles_t">OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
-		\n\nOther than the balanced \'default\' map style, you may in \'Menu\' → \'Configure screen\' → \'Map Style\' select for example
-		\n\t* The \'Touring view\' style, which contains the most detailed information feasable for traveling and touring, including optimization for professional drivers (higher contrast, distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
-		\n\t* \'High contrast roads\' shows roads in very accentuated colors for bright ambient lighting situations
-		\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download)
-	</string>
     <string name="about_version">Версія:</string>
     <string name="about_settings">Аб праграме</string>
     <string name="about_settings_descr">Версія, ліцэнзіі, удзельнікі праекта</string>
@@ -1543,4 +1536,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_camera_focus_continuous">The camera continuously tries to focus</string>
 	<string name="av_photo_play_sound">Play sound on photo shot</string>
 	<string name="av_photo_play_sound_descr">Choose whether to play a sound when shooting photos</string>
+	<string name="tip_map_styles">Стылі мапы</string>
+	<string name="tip_map_styles_t">OsmAnd падтрымлівае адлюстраваньне лакальных вектарных мап рознымі стылямі ў адпаведнасьці з вашымі патрэбамі:↵
+→→\n\nКаб зьмяніць збалансаваны \'перадвызначаны\' стыль мапы, у \'Меню\' → \'Наладжваньні экрана\' → \'Стылі мапы\' абярыце напрыклад
+		\n\t* \'Турыстичны стыль\', які утрымлівае найбольш падрабязную інфармацыю, прыдатную для падарожжаў і турызму, у тым ліку варыянты для пешых прагулак па гарах (шкала SAC), веласіпедныя маршруты, падтрымку сімвалаў для пешага турызму і інш. А таксама аптымізаваны для прафесійных кіроўцаў (вышэйшая кантраснасьць, адметнейшыя дарогі), 
+		\n\t* \'Высокая кантраснасьць дарог\' показвае дарогі вельмі адметнымі колерамі, каб яны былі заўважныя нават у сонечны дзень ці пры надта яркім асьвятленьні
+		\n\t* \'Зімовы ды гарналыжны\' стварае зімові выгляд (усё пакрыта сьнегам), а таксама показвае асноўныя гарналыжныя спускі і пад`ёмнікі (калі сьцягнута мапа \'World ski\')
+	</string>
 </resources>
