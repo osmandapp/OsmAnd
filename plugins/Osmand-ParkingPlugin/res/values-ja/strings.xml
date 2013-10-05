@@ -2,6 +2,6 @@
 <resources><string name="default_buttons_no">いいえ</string>
     <string name="default_buttons_yes">はい</string>
     <string name="osmand_app_not_found">OsmAndがインストールされていません</string>
-    <string name="app_name">OsmAndパーキング</string>
-    <string name="parking_plugin_installed">OsmAnd パーキング プラグインはインストールされており、設定は有効です。</string>
+    <string name="app_name">OsmAnd駐車場</string>
+    <string name="parking_plugin_installed">OsmAnd駐車場プラグインはインストールされており、設定は有効です。</string>
 </resources>
