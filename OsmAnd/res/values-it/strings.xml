@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -206,7 +206,7 @@
   <string name="map_text_size">Dimensione carattere mappa</string>
   <string name="trace_rendering">Informazioni diagnostiche disegno</string>
   <string name="trace_rendering_descr">Visualizza le performance del disegno</string>
-  <string name="tip_recent_changes">Modifiche recenti</string>
+  <string name="tip_recent_changes">Modifiche Recenti</string>
   <string name="tip_recent_changes_0_6_6_t">"Novità della v. 0.6.6:\n\t- Motore Text To Speech per la navigazione vocale\n\t- Reso più dettagliato il disegno della mappa
 \n\t- Mappa mondiale di base impacchettata con l\'applicazione
 \n\t- Migliorie alla navigazione offline (ancora sperimentale)
@@ -246,7 +246,7 @@
   <string name="select_tile_source_to_install">Seleziona le mappe (mattonella) da installare o aggiornare</string>
   <string name="internet_not_available">La connessione internet è richiesta per questa operazione ma non è disponibile</string>
   <string name="install_more">Installa altro…</string>
-  <string name="tip_update_index">Aggiornamento dati Offline</string>
+  <string name="tip_update_index">Aggiornamento Mappe Offline</string>
   <string name="tip_update_index_t">\tAvere dati aggiornati è essenziale. OsmAnd fornisce un download manager che può controllare la disponibilità di aggiornamenti offline.
 \n\tPer controllare gli aggiornamenti andare su \'Impostazioni\' -&gt; \'Gestione Dati\' -&gt; \'Download dati offline\'. Dopo il download dell\'elenco regioni ti basterà selezionare \'Menu\' -&gt; \'Filtra scaricati\' per indicare aggiornamenti di file già in tuo possesso.
 \n\tLa disponibilità degli aggiornamenti viene indicata dai colori seguenti:
@@ -254,7 +254,7 @@
 \n\t\'Blu\' - indica aggiornamenti disponibile sul server\n\t\'Verde scuro/blu\' - analogamente indica dati disattivati sul dispositivo</string>
   <string name="level_to_switch_vector_raster_descr">Minimo livello di zoom per usare le mappe vettoriali</string>
   <string name="level_to_switch_vector_raster">Min. livello zoom vettoriale</string>
-  <string name="tip_location_sharing">Condivisione posizione</string>
+  <string name="tip_location_sharing">Condividi una Posizione</string>
   <string name="tip_location_sharing_t">"\tPuoi condividere la posizione dei luoghi interessanti dei tuoi viaggi con familiari e amici.
 \n\tPer condividere le posizioni devi:
 \n\tUsare il \'Menu contestuale mappa\' -&gt; menu \'Condividi Posizione\'.
@@ -271,22 +271,23 @@
   <string name="system_locale">Sistema</string>
   <string name="preferred_locale_descr">Seleziona lingua interfaccia</string>
   <string name="preferred_locale">Lingua interfaccia</string>
-  <string name="tip_map_switch">Fonte mappa</string>
+  <string name="tip_map_switch">Scegli una Fonte della Mappa</string>
   
-  <string name="tip_app_mode">Profilo utente</string>
+  <string name="tip_app_mode">Profilo Utente</string>
   
   <string name="tip_navigation">Navigazione</string>
   <string name="tip_navigation_t">\tPrima di iniziare la navigazione devi selezionare una destinazione. Dopo averla selezionata seleziona \'Menu\' -&gt; \'Percorsi\' sulla mappa e seleziona il tipo di navigazione.</string>
   <string name="tip_search">Ricerca</string>
   <string name="tip_search_t">"\tPuoi cercare i luoghi direttamente sulla mappa, per indirizzo, posizione, PDI, o come predefinito preferito.
 \n\tSelezionando \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menù contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'. "</string>
-  <string name="tip_map_context_menu">Menu contestuale mappa</string>
+  <string name="tip_map_context_menu">\'Usa posizione\' Menu</string>
   <string name="tip_map_context_menu_t">"\tIl menu contestuale viene visualizzato selezionando a lungo sulla mappa o selezionando il pulsante trackball.
 \n\tQuesto visualizza un riquadro con le coordinate del punto. Per aprire il menu, fai clic sopra. (O seleziona a lungo per nascondere nuovamente il menù.)
 \n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (posizione). "</string>
   <string name="tip_initial">Consigli e trucchi</string>
-  <string name="tip_initial_t">"\tOsmAnd è una applicazione di navigazione con molte funzioni.
-\n\tPer un\'introduzione base, alcuni consigli d\'uso sono collegati nel menù principale. "</string>
+  <string name="tip_initial_t">OsmAnd è una applicazione di navigazione con molte funzioni.
+	\n\nUn\'introduzione base e alcuni consigli d\'uso sono collegati nel \'Menù\'	\'Suggerimenti\'dallo schermo mappa.
+	</string>
   <string name="next_button">Prossimo</string>
   <string name="previous_button">Precedente</string>
   <string name="unit_of_length_descr">Cambia le unità di misura per lunghezza e velocità</string>
@@ -303,7 +304,7 @@
   <string name="send_location_email_pattern">Per vedere la posizione segui il collegamento web %1$s o il collegamento %2$s</string>
   <string name="send_location">Invia posizione</string>
   <string name="context_menu_item_share_location">Condividi posizione</string>
-  <string name="add_waypoint_dialog_added">Punto intermedio \'\'{0}\'\' aggiunto</string>
+  <string name="add_waypoint_dialog_added">Punto intermedio GPX\'\'{0}\'\' è stato aggiunto</string>
   <string name="add_waypoint_dialog_title">Aggiungi un punto intermedio al percorso GPX registrato</string>
   <string name="context_menu_item_add_waypoint">Aggiungi un punto intermedio GPX</string>
   <string name="amenity_type_administrative">Amministrativo</string>
@@ -443,7 +444,7 @@
   <string name="layer_transport">Fermate trasporto pubblico</string>
   <string name="layer_poi">PDI…</string>
   <string name="layer_map">Sorgente mappa…</string>
-  <string name="menu_layers">Definisci la vista</string>
+  <string name="menu_layers">Strati mappa</string>
   <string name="context_menu_item_search_poi">Cerca PDI</string>
   
   <string name="use_trackball_descr">Utilizza la trackball per muovere la mappa</string>
@@ -469,7 +470,7 @@
   <string name="search_poi_filter">Filtro</string>
   <string name="menu_mute_off">Il suono è attivato</string>
   <string name="menu_mute_on">Audio disattivato</string>
-  <string name="voice_provider_descr">Scegli la voce da utilizzare</string>
+  <string name="voice_provider_descr">Scegli la voce da utilizzare per la navigazione (per i codici delle lingue vedi ISO 639-1)</string>
   <string name="voice_provider">Guida vocale</string>
   <string name="voice_data_initializing">Dati voce in preparazione…</string>
   <string name="voice_data_not_supported">Versione di dati vocali non supportata</string>
@@ -491,7 +492,7 @@
   <string name="route_head">Avanti</string>
   <string name="first_time_continue">Dopo</string>
   <string name="first_time_download">Scarica le regioni</string>
-  <string name="first_time_msg">Grazie per utilizzare OsmAnd. Per utilizzare molte delle caratteristiche dell\'applicazione, hai bisogno dei dati offline locali, che possono essere scaricati da \'Impostazioni\'-&gt;\'Gestione Dati\'. Sarà poi possibile visualizzare mappe, cercare indirizzi, PDI, e trovare trasporti pubblici.</string>
+  <string name="first_time_msg">Grazie di utilizzare OsmAnd. Per molte delle caratteristiche dell\'applicazione, hai bisogno dei dati offline locali, che possono essere scaricati da \'Impostazioni\'-&gt;\'Gestione Dati\'. Sarà poi possibile visualizzare mappe, cercare indirizzi, PDI, e trovare trasporti pubblici.</string>
   <string name="search_poi_location">Ricerca segnale GPS…</string>
   <string name="search_near_map">Ricerca vicino all\'ultima posizione sulla mappa</string>
   <string name="search_nearby">Ricerca vicino</string>
@@ -561,8 +562,8 @@
   <string name="fav_points_edited">Preferito modificato</string>
   <string name="fav_points_not_exist">Non esistono Preferiti</string>
   <string name="update_existing">Sostituisci</string>
-  <string name="only_show">Visualizza solo</string>
-  <string name="follow">Segui</string>
+  <string name="only_show">Mostra percorso</string>
+  <string name="follow">Avvia navigazione</string>
   <string name="recalculate_route_to_your_location">Seleziona il mezzo di trasporto:</string>
   <string name="mark_final_location_first">Selezionare una destinazione prima</string>
   <string name="get_directions">Indicazioni</string>
@@ -703,7 +704,7 @@
   <string name="favourites_remove_dialog_success">Il punto preferito {0} è stato eliminato.</string>
   <string name="osb_add_dialog_title">Inserisci la descrizione dell\'errore</string>
   <string name="osb_add_dialog_success">L\'errore è stato creato</string>
-  <string name="osb_add_dialog_error">Si è verificata un\'eccezione : il bug non è stato creato</string>
+  <string name="osb_add_dialog_error">Si è verificata un\'eccezione: il bug non è stato creato</string>
   <string name="osb_comment_menu_item">Aggiungere commento</string>
   <string name="osb_comment_dialog_message">Messaggio</string>
   <string name="osb_comment_dialog_author">Nome autore</string>
@@ -715,7 +716,7 @@
   <string name="osb_close_dialog_title">Chiusura errore</string>
   <string name="osb_close_dialog_close_button">Chiudi errore</string>
   <string name="osb_close_dialog_success">L\'errore è stato chiuso correttamente</string>
-  <string name="osb_close_dialog_error">Si è verificata un\'eccezione : l\'errore non è stato chiuso</string>
+  <string name="osb_close_dialog_error">Si è verificata un\'eccezione: l\'errore non è stato chiuso</string>
   <string name="poi_edit_title">Modifica PDI</string>
   <string name="poi_create_title">Crea PDI</string>
   <string name="poi_error_poi_not_found">Il nodo non è stato trovato o l\'amenità non è un nodo singolo</string>
@@ -861,8 +862,8 @@
   <string name="index_name_oceania">Oceania</string>
   <string name="index_name_other">Mappe mondiali e di base</string>
   <string name="index_name_wiki">Wikipedia mondiale</string>
-  <string name="index_name_voice">Dati voce (registrati)</string>
-  <string name="index_name_tts_voice">Dati voce (TTS)</string>
+  <string name="index_name_voice">Pacchetti voce(registrati, funzionalità limitate)</string>
+  <string name="index_name_tts_voice">Pacchetti voce (TTS-sintetizzati, preferibile)</string>
   <string name="favourites_edit_dialog_name">Nome</string>
   <string name="favourites_edit_dialog_category">Categoria</string>
   <string name="local_index_routing_data">Dati per la navigazione</string>
@@ -1121,7 +1122,7 @@
     <string name="tip_altitude_offset_t">"\tLa maggior parte dei GPS riportano la misura dell\'altitudine nel sistema di riferimento WGS84 basato su ellissoide, per cui una conversione nei sistemi di riferimento usati localmente richiede una correzione dipendente dalla posizione.\n\tUna migliore approssimazione a questi sistemi di riferimento locali è il EGM96. OsmAnd ora supporta la visualizzazione automatica dell\'altitudine nel sistema EGM96.
 \n\tPer attivarla, scarica il file WW15MGH.DAC tramite la Gestione Dati (il file originale si trova all\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "
 	</string>
-    <string name="tip_altitude_offset">Visualizzazione altitudine - Correzione scostamento</string>
+    <string name="tip_altitude_offset">Correzione altitudine</string>
 	<string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Nascondi i confini</string>
 	<string name="rendering_attr_noAdminboundaries_description">Non visualizzare i confini regionali (livelli amministrativi 5-9)</string>
@@ -1178,7 +1179,7 @@
     <string name="map_widget_av_notes">Note audio</string>
     <string name="srtm_paid_version_msg">Valuta l\'acquisto su Market del plugin per le linee di elevazione per sostenere il futuro sviluppo.</string>
     <string name="srtm_paid_version_title">Plugin linee di livello</string>
-    <string name="animate_routing_using_gpx">Utilizzare un file GPX esistente?</string>
+    <string name="animate_routing_using_gpx">Aprire un percorso GPX pre-registrato da seguire?</string>
     <string name="intermediate_points_change_order">Modifica l\'ordine</string>
     <string name="dropbox_plugin_description">Il plugin Dropbox permette di sincronizzare le tracce e le note video/audio con il tuo account Dropbox.</string>
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
@@ -1317,7 +1318,7 @@
 	<string name="av_camera_focus_macro">Modalità di fuoco macro (particolare)</string>
 	<string name="av_camera_focus_continuous">La fotocamera prova a mettere a fuoco in continuazione</string>
 	<string name="av_photo_play_sound">Riproduci il suono allo scatto</string>
-	<string name="av_photo_play_sound_descr">Quando scatto una foto riproduci il suono</string>
+	<string name="av_photo_play_sound_descr">Scegli se riprodurre un suono quando si scattano le foto</string>
 <string name="local_index_gpx_timespan">\nTempo trascorso: %1$d:%2$02d:%3$02d</string>
 	
 	
@@ -1342,7 +1343,7 @@
     <string name="route_via">Per:</string>
     <string name="route_from">Da:</string>
     <string name="osb_author_dialog_password">Password OSM (opzionale)</string>
-	<string name="speak_title">Annuncia …</string>
+	<string name="speak_title">Annuncia…</string>
 	<string name="speak_descr">Configura per annunciare i nomi delle strade, gli avvertimenti di traffico (soste forzate, dossi), gli avvisi autovelox, i limiti di velocità</string>
 	<string name="speak_street_names">Annuncia i nomi delle strade (TTS)</string>
     <string name="announce_gpx_waypoints">Annuncia i punti GPX di passaggio</string>
@@ -1375,7 +1376,7 @@
     </string>
     <string name="about_version">Versione:</string>
     <string name="about_settings">Informazioni</string>
-    <string name="about_settings_descr">Informazioni …</string>
+    <string name="about_settings_descr">Informazioni versione, licenze, membri del progetto</string>
     <string name="tips_and_tricks">Suggerimenti</string>
     <string name="tip_map_styles">Stili mappa</string>
 	<string name="tip_map_styles_t">OsmAnd supporta la visualizzazione delle mappe vettoriali in differenti stili per adattrsi alle vostre esigenze:↵
@@ -1386,4 +1387,10 @@
 →
 	</string>
     <string name="base_world_map">mappa mondiale di base</string>
-	</resources>
+	<string name="route_distance_close">Vicino</string>
+    <string name="route_distance_far">Lontano</string>
+    <string name="route_distance_farest">Più lontano</string>
+    <string name="route_distance_settings_descr">Configura la distanza della vista della mappa (DA FARE nomi)</string>
+    <string name="route_distance_settings">Distanza visione mappa (DA FARE nomi)</string>
+    <string name="map_magnifier">Ingrandimento mappa</string>
+    </resources>
