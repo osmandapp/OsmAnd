@@ -1616,4 +1616,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_descr_destination"> </string>
     <string name="create_poi_link_to_osm_doc">&lt;u&gt;Online OSM&lt;/u&gt; kort klassificering med billeder<u>Online OSM</u> map classification with images</string>
 	<string name="base_world_map">basis verdenskortet</string>
-	</resources>
+	<string name="route_distance_close">Luk</string>
+    <string name="route_distance_far">Langt</string>
+    <string name="route_distance_farest">Længst</string>
+    <string name="route_distance_settings_descr">Konfigurer kortvisning afstand (TODO navngivning)</string>
+    <string name="route_distance_settings">Kortvisning afstand ( TODO navngivning )</string>
+    <string name="map_magnifier">Kort lup</string>
+    </resources>
