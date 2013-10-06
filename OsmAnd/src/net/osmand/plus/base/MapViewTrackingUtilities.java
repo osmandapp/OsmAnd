@@ -156,17 +156,17 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			return 0;
 		}
 		double visibleDist = tb.getDistance(tb.getCenterPixelX(), 0, tb.getCenterPixelX(), tb.getCenterPixelY());
-		float time = 75f;
+		float time = 75f; // > 83 km/h show 75 seconds 
 		if (speed < 83f / 3.6) {
 			time = 60f;
 		}
+		time /= settings.ROUTE_VIEW_DISTANCE.get().coefficient;
 		double distToSee = speed * time;
 		float zoomDelta = (float) (Math.log(visibleDist / distToSee) / Math.log(2.0f));
-		zoomDelta = Math.round(zoomDelta * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
 		// check if 17, 18 is correct?
 		final float zoomScale = tb.getZoom() + tb.getZoomScale();
-		if (zoomDelta + zoomScale > 18 - OsmandMapTileView.ZOOM_DELTA_1) {
-			return 18 - OsmandMapTileView.ZOOM_DELTA_1 - zoomScale ;
+		if (zoomDelta + zoomScale >= 18 ) {
+			return 18 - zoomScale ;
 		}
 		return zoomDelta;
 	}

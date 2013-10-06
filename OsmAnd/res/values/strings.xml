@@ -9,6 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="route_distance_close">Close</string>
+    <string name="route_distance_far">Far</string>
+    <string name="route_distance_farest">Farest</string>
+    <string name="route_distance_settings_descr">Configure map view distance  (TODO naming)</string>
+    <string name="route_distance_settings">Map view distance (TODO naming)</string>
     <string name="map_magnifier">Map magnifier</string>
     <string name="base_world_map">base world map</string>
 	<string name="tip_map_styles">Map Styles</string>

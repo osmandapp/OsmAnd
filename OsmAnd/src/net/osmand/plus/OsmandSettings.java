@@ -653,12 +653,16 @@ public class OsmandSettings {
 		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.BICYCLE, DayNightMode.AUTO);
 		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, DayNightMode.DAY);
 	}
-		
+	
+	
+	public final OsmandPreference<RouteService> ROUTER_SERVICE = 
+			new EnumIntPreference<RouteService>("router_service", RouteService.OSMAND, 
+					RouteService.values()).makeProfile();	
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<RouteService> ROUTER_SERVICE = 
-		new EnumIntPreference<RouteService>("router_service", RouteService.OSMAND, 
-				RouteService.values()).makeProfile();
+	public final OsmandPreference<RouteViewDistance> ROUTE_VIEW_DISTANCE = 
+		new EnumIntPreference<RouteViewDistance>("router_service", RouteViewDistance.FAREST, 
+				RouteViewDistance.values()).makeProfile().cache();
 	
 	public final CommonPreference<Boolean> SNAP_TO_ROAD = new BooleanPreference("snap_to_road", false).makeProfile().cache();
 	{
@@ -1508,6 +1512,20 @@ public class OsmandSettings {
 			return ttsString;
 		}
 		
+	}
+	
+	public enum RouteViewDistance {
+		FAREST(R.string.route_distance_farest, 1f),
+		FAR(R.string.route_distance_far, 1.4f),
+		CLOSE(R.string.route_distance_close, 2f)
+		;
+		public final float coefficient;
+		public final int name;
+		RouteViewDistance(int name, float coefficient) {
+			this.name = name;
+			this.coefficient = coefficient;
+			
+		}
 	}
 	
 	/**
