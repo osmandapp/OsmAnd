@@ -551,7 +551,7 @@ POIの更新は利用できません</string>
  <string name="auto_zoom_map_descr">移動速度に従ってマップを自動ズーム</string>
  <string name="auto_zoom_map">マップを自動ズーム</string>
  <string name="additional_settings">追加設定</string>
- <string name="settings_preset_descr">利用形態プロファイルを選択または定義</string>
+ <string name="settings_preset_descr">地図の表示とナビゲーションの設定はプロファイルごとに記憶されます。デフォルトのプロファイルを設定してください。</string>
  <string name="settings_preset">アプリケーションモード</string>
  <string name="settings">設定</string>
  <string name="save_current_track_descr">今すぐ現在のトラックをSDに保存</string>
@@ -713,4 +713,5 @@ POIの更新は利用できません</string>
 
 <string name="av_photo_play_sound_descr">シャッター音を選択します</string>
 <string name="base_world_map">基本世界地図</string>
+	<string name="tip_map_styles">マップ形式</string>
 	</resources>
