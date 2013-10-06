@@ -129,20 +129,16 @@ public class MapTileLayer extends BaseMapLayer {
 		final QuadRect tilesRect = tileBox.getTileBounds();
 
 		// recalculate for ellipsoid coordinates
-		// TODO elliptic
-//		if (map.isEllipticYTile()) {
-//			return (float) MapUtils.getTileEllipsoidNumberY(getZoom(), currentViewport.get);
-//			float ellipticYTile = view.getEllipticYTile();
-//			tilesRect.bottom += (ellipticYTile - tileY);
-//			tilesRect.top += (ellipticYTile - tileY);
-//			tileY = ellipticYTile;
-//		}
+		float ellipticTileCorrection  = 0;
+		if (map.isEllipticYTile()) {
+			ellipticTileCorrection = (float) (MapUtils.getTileEllipsoidNumberY(nzoom, tileBox.getLatitude()) - tileBox.getCenterTileY());
+		}
 
 
 		int left = (int) FloatMath.floor(tilesRect.left);
-		int top = (int) FloatMath.floor(tilesRect.top);
+		int top = (int) FloatMath.floor(tilesRect.top + ellipticTileCorrection);
 		int width = (int) FloatMath.ceil(tilesRect.right - left);
-		int height = (int) FloatMath.ceil(tilesRect.bottom - top);
+		int height = (int) FloatMath.ceil(tilesRect.bottom + ellipticTileCorrection - top);
 
 		boolean useInternet = settings.USE_INTERNET_TO_DOWNLOAD_TILES.get()
 					&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
@@ -154,25 +150,27 @@ public class MapTileLayer extends BaseMapLayer {
 			for (int j = 0; j < height; j++) {
 				int leftPlusI = left + i;
 				int topPlusJ = top + j;
+
 				int x1 = tileBox.getPixXFromTileXNoRot(leftPlusI);
 				int x2 = tileBox.getPixXFromTileXNoRot(leftPlusI + 1);
-				int y1 = tileBox.getPixYFromTileYNoRot(topPlusJ);
-				int y2 = tileBox.getPixYFromTileYNoRot(topPlusJ + 1);
-				// TODO elliptic
-				// float y1 = (top + j - tileY) * ftileSize + h;
-				String ordImgTile = mgr.calculateTileId(map, leftPlusI, topPlusJ, nzoom);
+
+				int y1 = tileBox.getPixYFromTileYNoRot(topPlusJ -  ellipticTileCorrection);
+				int y2 = tileBox.getPixYFromTileYNoRot(topPlusJ + 1 -  ellipticTileCorrection);
+				final int tileX = leftPlusI;
+				final int tileY = topPlusJ;
+				String ordImgTile = mgr.calculateTileId(map, tileX, tileY, nzoom);
 				// asking tile image async
-				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, leftPlusI, topPlusJ, nzoom, false);
+				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, tileX, tileY, nzoom, false);
 				Bitmap bmp = null;
 				boolean originalBeLoaded = useInternet && nzoom <= maxLevel;
 				if (imgExist || originalBeLoaded) {
-					bmp = mgr.getTileImageForMapAsync(ordImgTile, map, leftPlusI, topPlusJ, nzoom, useInternet);
+					bmp = mgr.getTileImageForMapAsync(ordImgTile, map, tileX, tileY, nzoom, useInternet);
 				}
 				if (bmp == null) {
 					int div = 2;
 					// asking if there is small version of the map (in cache)
-					String imgTile2 = mgr.calculateTileId(map, leftPlusI / 2, topPlusJ / 2, nzoom - 1);
-					String imgTile4 = mgr.calculateTileId(map, leftPlusI / 4, topPlusJ / 4, nzoom - 2);
+					String imgTile2 = mgr.calculateTileId(map, tileX / 2, tileY / 2, nzoom - 1);
+					String imgTile4 = mgr.calculateTileId(map, tileX / 4, tileY / 4, nzoom - 2);
 					if (originalBeLoaded || imgExist) {
 						bmp = mgr.getTileImageFromCache(imgTile2);
 						div = 2;
@@ -182,13 +180,13 @@ public class MapTileLayer extends BaseMapLayer {
 						}
 					}
 					if (!originalBeLoaded && !imgExist) {
-						if (mgr.tileExistOnFileSystem(imgTile2, map, leftPlusI / 2, topPlusJ / 2, nzoom - 1, false)
+						if (mgr.tileExistOnFileSystem(imgTile2, map, tileX / 2, tileY / 2, nzoom - 1, false)
 								|| (useInternet && nzoom - 1 <= maxLevel)) {
-							bmp = mgr.getTileImageForMapAsync(imgTile2, map, leftPlusI / 2, topPlusJ / 2, nzoom - 1, useInternet);
+							bmp = mgr.getTileImageForMapAsync(imgTile2, map, tileX / 2, tileY / 2, nzoom - 1, useInternet);
 							div = 2;
-						} else if (mgr.tileExistOnFileSystem(imgTile4, map, leftPlusI / 4, topPlusJ / 4, nzoom - 2, false)
+						} else if (mgr.tileExistOnFileSystem(imgTile4, map, tileX / 4, tileY / 4, nzoom - 2, false)
 								|| (useInternet && nzoom - 2 <= maxLevel)) {
-							bmp = mgr.getTileImageForMapAsync(imgTile4, map, leftPlusI / 4, topPlusJ / 4, nzoom - 2, useInternet);
+							bmp = mgr.getTileImageForMapAsync(imgTile4, map, tileX / 4, tileY / 4, nzoom - 2, useInternet);
 							div = 4;
 						}
 					}

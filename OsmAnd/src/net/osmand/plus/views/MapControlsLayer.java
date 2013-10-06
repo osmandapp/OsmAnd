@@ -8,6 +8,7 @@ import net.londatiga.android.QuickAction;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -46,7 +47,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 
 	private OsmandMapTileView view;
-	private DisplayMetrics dm;
 	private final MapActivity activity;
 	private Handler showUIHandler;
 	
@@ -68,7 +68,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private final static double screenRulerPercent = 0.25;
 	
 	private float scaleCoefficient;
-	
+
 	private SeekBar transparencyBar;
 	private LinearLayout transparencyBarLayout;
 	private static CommonPreference<Integer> settingsToTransparency;
@@ -87,14 +87,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
-		dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
-		scaleCoefficient = dm.density;
-		if (Math.min(dm.widthPixels / (dm.density * 160), dm.heightPixels / (dm.density * 160)) > 2.5f) {
-			// large screen
-			scaleCoefficient *= 1.5f;
-		}
+		scaleCoefficient = view.getScaleCoefficient();
 		FrameLayout parent = (FrameLayout) view.getParent();
 		showUIHandler = new Handler();
 		
@@ -340,19 +333,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 			}
 		});
-		zoomInButton.setOnLongClickListener(new View.OnLongClickListener() {
+		final OsmandSettings.OsmandPreference<Float> zoomScale = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY;
+		final View.OnLongClickListener listener = new View.OnLongClickListener() {
 
 			@Override
 			public boolean onLongClick(View v) {
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				float scale = view.getZoomScale();
 				int p = (int) Math.round(scale * scale * 100) + 100;
-				final TIntArrayList tlist = new TIntArrayList(new int[] {100, 150, 200, 300, 400});
+				final TIntArrayList tlist = new TIntArrayList(new int[]{100, 150, 200, 300, 400});
 				final List<String> values = new ArrayList<String>();
 				int i = -1;
-				for(int k = 0; k <= tlist.size(); k++) {
+				for (int k = 0; k <= tlist.size(); k++) {
 					final boolean end = k == tlist.size();
-					if(i == -1) {
+					if (i == -1) {
 						if ((end || p < tlist.get(k))) {
 							values.add(p + "%");
 							i = k;
@@ -361,11 +355,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 						}
 
 					}
-					if(k < tlist.size()) {
+					if (k < tlist.size()) {
 						values.add(tlist.get(k) + "%");
 					}
 				}
-				if(values.size() != tlist.size() ) {
+				if (values.size() != tlist.size()) {
 					tlist.insert(i, p);
 				}
 
@@ -374,8 +368,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 						i, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						float newScale = (float) Math.sqrt((tlist.get(which) - 100f)/ 100f);
-						view.getAnimatedDraggingThread().startZooming(view.getZoom(), newScale, false);
+						float newScale = (float) Math.sqrt((tlist.get(which) - 100f) / 100f);
+						zoomScale.set(newScale - (float) Math.sqrt(Math.max(view.getDensity() - 1, 0)));
+						view.getAnimatedDraggingThread().startZooming(view.getZoom(), view.getSettingsZoomScale(), false);
 						dialog.dismiss();
 
 					}
@@ -383,14 +378,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 				bld.show();
 				return true;
 			}
-		});
-		
+		};
+		zoomInButton.setOnLongClickListener(listener);
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				activity.changeZoom(- 1);
 			}
 		});
+		zoomOutButton.setOnLongClickListener(listener);
 	}
 	
 

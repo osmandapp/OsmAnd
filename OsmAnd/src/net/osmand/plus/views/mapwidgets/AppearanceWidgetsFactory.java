@@ -107,7 +107,7 @@ public class AppearanceWidgetsFactory {
 
         if (EXTRA_SETTINGS) {
             // previous extra settings
-            final OsmandSettings.OsmandPreference<Float> textSizePref = view.getSettings().MAP_TEXT_SIZE;
+            /*final OsmandSettings.OsmandPreference<Float> textSizePref = view.getSettings().MAP_TEXT_SIZE;
             final MapWidgetRegistry.MapWidgetRegInfo textSize = mapInfoControls.registerAppearanceWidget(R.drawable.widget_text_size, R.string.map_text_size,
                     "text_size", textSizePref);
             textSize.setStateChangeListener(new Runnable() {
@@ -132,7 +132,7 @@ public class AppearanceWidgetsFactory {
                     });
                     b.show();
                 }
-            });
+            });*/
 
             final MapWidgetRegistry.MapWidgetRegInfo showRuler = mapInfoControls.registerAppearanceWidget(R.drawable.widget_ruler, R.string.map_widget_show_ruler,
                     "showRuler", view.getSettings().SHOW_RULER);

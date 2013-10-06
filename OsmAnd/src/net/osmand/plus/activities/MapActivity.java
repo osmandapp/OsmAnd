@@ -550,6 +550,7 @@ public class MapActivity extends AccessibleActivity  {
 			mapLayers.getMapInfoLayer().recreateControls();
 		}
 		mapLayers.updateLayers(mapView);
+		mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsZoomScale());
 		app.getDaynightHelper().startSensorIfNeeded(new StateChangedListener<Boolean>() {
 			
 			@Override

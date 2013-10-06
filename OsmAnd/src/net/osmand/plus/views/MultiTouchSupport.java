@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 
 import net.osmand.PlatformUtil;
 
+import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
@@ -118,7 +119,7 @@ public class MultiTouchSupport {
 				return true;
 			} else if(inZoomMode && actionCode == MotionEvent.ACTION_MOVE){
 				if(angleDefined) {
-					angleRelative = angle - angleStarted;
+					angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
 				}
 				zoomRelative = distance / zoomStartedDistance;
 				listener.onZoomingOrRotating(zoomRelative, angleRelative);

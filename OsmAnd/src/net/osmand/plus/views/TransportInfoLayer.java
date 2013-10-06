@@ -25,8 +25,7 @@ public class TransportInfoLayer extends OsmandMapLayer {
 	private Paint paintInt;
 	private Paint paintEnd;
 	private boolean visible = true;
-	private DisplayMetrics dm;
-	
+
 	public TransportInfoLayer(TransportRouteHelper routeHelper){
 		this.routeHelper = routeHelper;
 	}
@@ -34,9 +33,6 @@ public class TransportInfoLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		paintInt = new Paint();
 		paintInt.setColor(view.getResources().getColor(R.color.transport_int));
@@ -56,9 +52,9 @@ public class TransportInfoLayer extends OsmandMapLayer {
 	public int getRadius(RotatedTileBox tb){
 		final float zoom = tb.getZoom() + tb.getZoomScale();
 		if(zoom <= 16) {
-			return (int) (dm.density * 8);
+			return (int) (tb.getDensity() * 8);
 		}
-		return (int) (dm.density * 10);
+		return (int) (tb.getDensity() * 10);
 	}
 
 	@Override

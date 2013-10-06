@@ -128,7 +128,7 @@ public class AnimateDraggingMapThread {
 		float mStX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
 		float mStY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
 		while (Math.abs(mStX) + Math.abs(mStY) > 1200) {
-			rb.setZoom(rb.getZoom() - 1, zoomScale);
+			rb.setZoom(rb.getZoom() - 1);
 			if(rb.getZoom() <= 4){
 				skipAnimation = true;
 			}

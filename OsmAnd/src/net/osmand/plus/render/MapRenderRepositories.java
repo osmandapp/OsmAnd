@@ -565,8 +565,7 @@ public class MapRenderRepositories {
 			currentRenderingContext.height = (int) (requestedBox.getPixHeight() / mapDensity);
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.useEnglishNames = prefs.USE_ENGLISH_NAMES.get();
-			currentRenderingContext.setDensityValue(prefs.USE_HIGH_RES_MAPS.get(),
-					prefs.MAP_TEXT_SIZE.get(), renderer.getDensity());
+			currentRenderingContext.setDensityValue(renderer.getDensity() * prefs.MAP_ZOOM_SCALE_BY_DENSITY.get());
 			// init rendering context
 			currentRenderingContext.tileDivisor = (float) MapUtils.getPowZoom(31 - requestedBox.getZoom());
 			if (checkWhetherInterrupted()) {

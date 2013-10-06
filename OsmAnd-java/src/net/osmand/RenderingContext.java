@@ -49,14 +49,8 @@ public class RenderingContext {
 	
 	private float density = 1;
 	
-	public void setDensityValue(boolean highResMode, float mapTextSize, float density) {
-//		boolean highResMode = false;
-//		float mapTextSize = 1;
-		if (highResMode && density > 1) {
-			this.density =  density * mapTextSize;
-		} else {
-			this.density =  mapTextSize;
-		}
+	public void setDensityValue(float density) {
+		this.density =  density ;
 	}
 
 	public float getDensityValue(float val) {

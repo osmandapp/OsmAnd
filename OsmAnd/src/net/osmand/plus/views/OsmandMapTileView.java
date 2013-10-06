@@ -234,7 +234,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public void setIntZoom(int zoom) {
 		if (mainLayer != null && zoom <= mainLayer.getMaximumShownMapZoom() && zoom >= mainLayer.getMinimumShownMapZoom()) {
 			animatedDraggingThread.stopAnimating();
-			currentViewport.setZoom(zoom, currentViewport.getZoomScale(), 0);
+			currentViewport.setZoomAndAnimation(zoom, 0);
 			currentViewport.setRotate(zoom > LOWEST_ZOOM_TO_ROTATE ? rotate : 0 );
 			refreshMap();
 		}
@@ -293,6 +293,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public int getZoom() {
 		return currentViewport.getZoom();
 	}
+
+	public float getSettingsZoomScale(){
+		return settings.MAP_ZOOM_SCALE_BY_DENSITY.get() + (float)Math.sqrt(Math.max(0, getDensity() - 1));
+	}
 	
 	public float getZoomScale() {
 		return currentViewport.getZoomScale();
@@ -327,7 +331,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		if (mainLayer.getMinimumShownMapZoom() > zoom) {
 			zoom = mainLayer.getMinimumShownMapZoom();
 		}
-		currentViewport.setZoom(zoom, currentViewport.getZoomScale());
+		currentViewport.setZoomAndAnimation(zoom, 0);
 		refreshMap();
 	}
 
@@ -527,8 +531,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	// for internal usage
 	protected void zoomToAnimate(float tzoom, boolean notify) {
 		int zoom = getZoom();
-		float zoomToScale = getZoomScale();
-		float zoomToAnimate = tzoom - zoom - zoomToScale;
+		float zoomToAnimate = tzoom - zoom - getZoomScale();
 		if(zoomToAnimate >= 1) {
 			zoom += (int) zoomToAnimate;
 			zoomToAnimate -= (int) zoomToAnimate;
@@ -538,7 +541,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			zoomToAnimate += 1;
 		}
 		if (mainLayer != null && mainLayer.getMaximumShownMapZoom() >= zoom && mainLayer.getMinimumShownMapZoom() <= zoom) {
-			currentViewport.setZoom(zoom, zoomToScale, zoomToAnimate);
+			currentViewport.setZoomAndAnimation(zoom,  zoomToAnimate);
 			currentViewport.setRotate(zoom > LOWEST_ZOOM_TO_ROTATE ? rotate : 0 );
 			refreshMap();
 			if (notify && locationListener != null) {
@@ -625,9 +628,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public void onZoomEnded(double relativeToStart, float angleRelative) {
+			// 1.5 works better even on dm.density=1 devices
 			float dz = (float) (Math.log(relativeToStart) / Math.log(2)) * 1.5f;
-			setComplexZoom(Math.round(dz) + initialViewport.getZoom(), initialViewport.getZoomScale());
-			if(Math.abs(angleRelative) < 15){
+			setIntZoom(Math.round(dz) + initialViewport.getZoom());
+			if(Math.abs(angleRelative) < 17){
 				angleRelative = 0;
 			}
 			rotateToAnimate(initialViewport.getRotate() + angleRelative);
@@ -667,7 +671,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				// keep only rotating
 				dz = 0;
 			}
-			if(Math.abs(relAngle) < 20 && !startRotating) {
+			if(Math.abs(relAngle) < 17 && !startRotating) {
 				relAngle = 0;
 			} else {
 				startRotating = true;
@@ -688,7 +692,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			float calcZoom = initialViewport.getZoom() + dz + initialViewport.getZoomScale();
 			float calcRotate = calc.getRotate() + angle;
 			calc.setRotate(angle);
-			calc.setZoom(initialViewport.getZoom(), dz + initialViewport.getZoomScale());
+			calc.setZoomAnimation(dz);
 			final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 			setLatLon(r.getLatitude(), r.getLongitude());
 			if (Math.abs(currentViewport.getZoomAnimation() + currentViewport.getZoom()  + currentViewport.getZoomScale() -

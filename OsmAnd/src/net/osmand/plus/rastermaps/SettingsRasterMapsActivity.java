@@ -100,8 +100,6 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 				R.string.modify_transparency, 0, 255);
 		cat.addPreference(sp);
 		
-		cat.addPreference(createCheckBoxPreference(settings.USE_HIGH_RES_MAPS, 
-				R.string.use_high_res_maps, R.string.use_high_res_maps_descr));
     }
 
 

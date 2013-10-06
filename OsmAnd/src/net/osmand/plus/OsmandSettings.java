@@ -612,14 +612,11 @@ public class OsmandSettings {
 		new BooleanAccessibilityPreference("accessibility_extensions", false).makeGlobal();
 		
 	
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> USE_HIGH_RES_MAPS = new BooleanPreference("use_high_res_maps", true).makeGlobal().cache();
-	
 	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference("use_kalman_filter_compass", true).makeGlobal().cache();
 	
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Float> MAP_TEXT_SIZE = new FloatPreference("map_text_size", 1.0f).makeProfile().cache();
+	// public final OsmandPreference<Float> MAP_TEXT_SIZE = new FloatPreference("map_text_size", 1.0f).makeProfile().cache();
+	public final OsmandPreference<Float> MAP_ZOOM_SCALE_BY_DENSITY = new FloatPreference("map_zoom_scale_by_density", 1.0f).makeProfile().cache();
 	
 
 	// this value string is synchronized with settings_pref.xml preference name

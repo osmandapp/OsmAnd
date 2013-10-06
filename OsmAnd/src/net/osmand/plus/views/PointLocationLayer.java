@@ -26,7 +26,6 @@ public class PointLocationLayer extends OsmandMapLayer {
 	private Paint aroundArea;
 	private Paint headingPaint;
 	
-	private DisplayMetrics dm;
 	private OsmandMapTileView view;
 	
 	private ApplicationMode appMode;
@@ -65,9 +64,6 @@ public class PointLocationLayer extends OsmandMapLayer {
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		initUI();
-		dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
 	}
 
 
@@ -96,7 +92,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 		final double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
 		int radius = (int) (((double) box.getPixWidth()) / dist * lastKnownLocation.getAccuracy());
 		
-		if (radius > RADIUS * dm.density) {
+		if (radius > RADIUS * box.getDensity()) {
 			int allowedRad = Math.min(box.getPixWidth() / 2, box.getPixHeight() / 2);
 			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), area);
 			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), aroundArea);

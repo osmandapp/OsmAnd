@@ -32,13 +32,12 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	private View info;
 	public static int directionInfo = -1;
 
-	private DisplayMetrics dm;
 	private final ContextMenuLayer contextMenu;
 	
 	
 	
 	public RouteInfoLayer(RoutingHelper routingHelper, MapActivity activity, ContextMenuLayer contextMenu){
-		createLayout(activity);
+		createLayout(activity, activity.getMapView().getDensity());
 		this.routingHelper = routingHelper;
 		this.contextMenu = contextMenu;
 		routingHelper.addListener(this);
@@ -50,12 +49,11 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 		activity.accessibleContent.add(info);
 	}
 	
-	private void createLayout(MapActivity activity) {
+	private void createLayout(MapActivity activity, float density) {
 		FrameLayout fl = (FrameLayout) activity.getMapView().getParent();
 		LinearLayout ll = new LinearLayout(activity);
 		ll.setOrientation(LinearLayout.HORIZONTAL);
-		DisplayMetrics dm = activity.getResources().getDisplayMetrics();
-		ll.setPadding(0, 0, (int) (dm.density * 15), (int) (dm.density * 50));
+		ll.setPadding(0, 0, (int) (density * 15), (int) (density * 50));
 		fl.addView(ll, new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.BOTTOM | Gravity.CENTER));
 		prev = new ImageButton(activity);
 		prev.setContentDescription(activity.getString(R.string.previous_button));
@@ -63,12 +61,12 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 		ll.addView(prev);
 		info = new ImageButton(activity);
 		info.setContentDescription(activity.getString(R.string.info_button));
-		info.setPadding((int) (dm.density * 8), 0, 0, 0);
+		info.setPadding((int) (density * 8), 0, 0, 0);
 		info.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.ax_2_action_about_light));
 		ll.addView(info);
 		next = new ImageButton(activity);
 		next.setContentDescription(activity.getString(R.string.next_button));
-		next.setPadding((int) (dm.density * 8), 0, 0, 0);
+		next.setPadding((int) (density * 8), 0, 0, 0);
 		next.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.ax_1_navigation_next_item_light));
 		ll.addView(next);
 	}
@@ -76,9 +74,6 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
 	}
 	
 	private void attachListeners() {

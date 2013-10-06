@@ -64,57 +64,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private MonitoringInfoControl monitoringServices;
 
-
-
-	
-
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
 		this.routeLayer = layer;
-		
-		WindowManager mgr = (WindowManager) map.getSystemService(Context.WINDOW_SERVICE);
-		DisplayMetrics dm = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(dm);
-		scaleCoefficient = dm.density;
-		if (Math.min(dm.widthPixels / (dm.density * 160), dm.heightPixels / (dm.density * 160)) > 2.5f) {
-			// large screen
-			scaleCoefficient *= 1.5f;
-		}
-		
-		paintText = new Paint();
-		paintText.setStyle(Style.FILL_AND_STROKE);
-		paintText.setColor(Color.BLACK);
-		paintText.setTextSize(23 * scaleCoefficient);
-		paintText.setAntiAlias(true);
-		paintText.setStrokeWidth(4);
-
-		paintSubText = new Paint();
-		paintSubText.setStyle(Style.FILL_AND_STROKE);
-		paintSubText.setColor(Color.BLACK);
-		paintSubText.setTextSize(15 * scaleCoefficient);
-		paintSubText.setAntiAlias(true);
-		
-		paintSmallText = new Paint();
-		paintSmallText.setStyle(Style.FILL_AND_STROKE);
-		paintSmallText.setColor(Color.BLACK);
-		paintSmallText.setTextSize(19 * scaleCoefficient);
-		paintSmallText.setAntiAlias(true);
-		paintSmallText.setStrokeWidth(4);
-
-		paintSmallSubText = new Paint();
-		paintSmallSubText.setStyle(Style.FILL_AND_STROKE);
-		paintSmallSubText.setColor(Color.BLACK);
-		paintSmallSubText.setTextSize(13 * scaleCoefficient);
-		paintSmallSubText.setAntiAlias(true);
-		
-		paintImg = new Paint();
-		paintImg.setDither(true);
-		paintImg.setFilterBitmap(true);
-		paintImg.setAntiAlias(true);
-		
-
-		mapInfoControls = new MapWidgetRegistry(map.getMyApplication().getSettings());
-		monitoringServices = new MonitoringInfoControl();
 	}
 	
 	
@@ -145,6 +97,42 @@ public class MapInfoLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
+		scaleCoefficient = view.getScaleCoefficient();
+
+		paintText = new Paint();
+		paintText.setStyle(Style.FILL_AND_STROKE);
+		paintText.setColor(Color.BLACK);
+		paintText.setTextSize(23 * scaleCoefficient);
+		paintText.setAntiAlias(true);
+		paintText.setStrokeWidth(4);
+
+		paintSubText = new Paint();
+		paintSubText.setStyle(Style.FILL_AND_STROKE);
+		paintSubText.setColor(Color.BLACK);
+		paintSubText.setTextSize(15 * scaleCoefficient);
+		paintSubText.setAntiAlias(true);
+
+		paintSmallText = new Paint();
+		paintSmallText.setStyle(Style.FILL_AND_STROKE);
+		paintSmallText.setColor(Color.BLACK);
+		paintSmallText.setTextSize(19 * scaleCoefficient);
+		paintSmallText.setAntiAlias(true);
+		paintSmallText.setStrokeWidth(4);
+
+		paintSmallSubText = new Paint();
+		paintSmallSubText.setStyle(Style.FILL_AND_STROKE);
+		paintSmallSubText.setColor(Color.BLACK);
+		paintSmallSubText.setTextSize(13 * scaleCoefficient);
+		paintSmallSubText.setAntiAlias(true);
+
+		paintImg = new Paint();
+		paintImg.setDither(true);
+		paintImg.setFilterBitmap(true);
+		paintImg.setAntiAlias(true);
+
+
+		mapInfoControls = new MapWidgetRegistry(map.getMyApplication().getSettings());
+
 		registerAllControls();
 		createControls();
 	}

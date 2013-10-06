@@ -56,12 +56,14 @@ public class RotatedTileBox {
 		rotateSin = r.rotateSin;
 		oxTile = r.oxTile;
 		oyTile =r.oyTile;
-		tileBounds = new QuadRect(r.tileBounds);
-		latLonBounds = new QuadRect(r.latLonBounds);
-		tileLT = new QuadPoint(r.tileLT);
-		tileRT = new QuadPoint(r.tileRT);
-		tileRB = new QuadPoint(r.tileRB);
-		tileLB = new QuadPoint(r.tileLB);
+		if (r.tileBounds != null) {
+			tileBounds = new QuadRect(r.tileBounds);
+			latLonBounds = new QuadRect(r.latLonBounds);
+			tileLT = new QuadPoint(r.tileLT);
+			tileRT = new QuadPoint(r.tileRT);
+			tileRB = new QuadPoint(r.tileRB);
+			tileLB = new QuadPoint(r.tileLB);
+		}
 	}
 
 	private void init(int pixWidth, int pixHeight, float centerX, float centerY, double lat, double lon,
@@ -94,7 +96,9 @@ public class RotatedTileBox {
 		while(rotate > 360){
 			rotate -= 360;
 		}
-		calculateTileRectangle();
+		tileBounds = null;
+		// lazy
+		// calculateTileRectangle();
 	}
 
 	public double getLatFromPixel(float x, float y) {
@@ -163,6 +167,7 @@ public class RotatedTileBox {
 
 
 	public QuadRect getTileBounds() {
+		checkTileRectangleCalculated();
 		return tileBounds;
 	}
 
@@ -266,6 +271,7 @@ public class RotatedTileBox {
 	}
 
 	public QuadRect getLatLonBounds() {
+		checkTileRectangleCalculated();
 		return latLonBounds;
 	}
 	
@@ -326,6 +332,12 @@ public class RotatedTileBox {
 		calculateDerivedFields();
 	}
 
+	public void setZoomAndAnimation(int zoom, float zoomAnimation) {
+		this.zoomAnimation = zoomAnimation;
+		this.zoom = zoom;
+		calculateDerivedFields();
+	}
+
 	public void setCenterLocation(float ratiocx, float ratiocy) {
 		this.cx = (int) (pixWidth * ratiocx);
 		this.cy = (int) (pixHeight * ratiocy);
@@ -333,16 +345,25 @@ public class RotatedTileBox {
 	}
 
 	public QuadPoint getLeftTopTilePoint() {
+		checkTileRectangleCalculated();
 		return tileLT;
 	}
 
 	public LatLon getLeftTopLatLon() {
+		checkTileRectangleCalculated();
 		return new LatLon(MapUtils.getLatitudeFromTile(zoom, tileLT.y),
 				MapUtils.getLongitudeFromTile(zoom, tileLT.x));
 
 	}
 
+	private void checkTileRectangleCalculated() {
+		if(tileBounds == null){
+			calculateTileRectangle();;
+		}
+	}
+
 	public LatLon getRightBottomLatLon() {
+		checkTileRectangleCalculated();
 		return new LatLon(MapUtils.getLatitudeFromTile(zoom, tileRB.y),
 				MapUtils.getLongitudeFromTile(zoom, tileRB.x));
 	}
@@ -350,6 +371,11 @@ public class RotatedTileBox {
 	public void setZoom(int zoom, float zoomScale) {
 		this.zoom = zoom;
 		this.zoomScale = zoomScale;
+		calculateDerivedFields();
+	}
+
+	public void setZoom(int zoom) {
+		this.zoom = zoom;
 		calculateDerivedFields();
 	}
 
@@ -379,6 +405,8 @@ public class RotatedTileBox {
 
 
 	public boolean containsTileBox(RotatedTileBox box) {
+		checkTileRectangleCalculated();
+		box.checkTileRectangleCalculated();
 		QuadPoint temp = new QuadPoint();
 		if(box.zoom != zoom){
 			throw new UnsupportedOperationException();
