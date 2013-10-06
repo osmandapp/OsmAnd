@@ -10,11 +10,16 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapExplorer;
-import net.osmand.data.*;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.plus.*;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.util.MapUtils;
@@ -45,7 +50,7 @@ import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
-	protected final static int LOWEST_ZOOM_TO_ROTATE = 10;
+	protected final static int LOWEST_ZOOM_TO_ROTATE = 9;
 	private boolean MEASURE_FPS = false;
 	private int fpsMeasureCount = 0;
 	private int fpsMeasureMs = 0;
@@ -347,10 +352,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return settings;
 	}
 
-	private void refreshMapNonLightweightMap() {
-
-	}
-
 	private void refreshMapInternal(boolean updateVectorRendering) {
 		handler.removeMessages(1);
 		long ms = SystemClock.elapsedRealtime();
@@ -625,13 +626,14 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		private float y2;
 		private LatLon initialCenterLatLon;
 		private boolean startRotating = false;
+		private static final float ANGLE_THRESHOLD = 18;
 
 		@Override
-		public void onZoomEnded(double relativeToStart, float angleRelative) {
+		public void onZoomEnded(double 	relativeToStart, float angleRelative) {
 			// 1.5 works better even on dm.density=1 devices
 			float dz = (float) (Math.log(relativeToStart) / Math.log(2)) * 1.5f;
 			setIntZoom(Math.round(dz) + initialViewport.getZoom());
-			if(Math.abs(angleRelative) < 17){
+			if(Math.abs(angleRelative) < ANGLE_THRESHOLD){
 				angleRelative = 0;
 			}
 			rotateToAnimate(initialViewport.getRotate() + angleRelative);
@@ -667,11 +669,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		@Override
 		public void onZoomingOrRotating(double relativeToStart, float relAngle) {
 			double dz = (Math.log(relativeToStart) / Math.log(2)) * 1.5;
-			if (Math.abs(dz) <= (startRotating ? 0.05 : 0.05)) {
+			if (Math.abs(dz) <= 0.1) {
 				// keep only rotating
 				dz = 0;
 			}
-			if(Math.abs(relAngle) < 17 && !startRotating) {
+			if(Math.abs(relAngle) < ANGLE_THRESHOLD && !startRotating) {
 				relAngle = 0;
 			} else {
 				startRotating = true;
@@ -691,17 +693,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 			float calcZoom = initialViewport.getZoom() + dz + initialViewport.getZoomScale();
 			float calcRotate = calc.getRotate() + angle;
-			calc.setRotate(angle);
+			calc.setRotate(calcRotate);
 			calc.setZoomAnimation(dz);
 			final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 			setLatLon(r.getLatitude(), r.getLongitude());
-			if (Math.abs(currentViewport.getZoomAnimation() + currentViewport.getZoom()  + currentViewport.getZoomScale() -
-				calcZoom) > 0.1) {
-				zoomToAnimate(calcZoom, true);
-			}
-			if(currentViewport.getRotate() != calcRotate){
-				rotateToAnimate(calcRotate);
-			}
+			zoomToAnimate(calcZoom, true);
+			rotateToAnimate(calcRotate);
 		}
 
 	}

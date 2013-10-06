@@ -132,6 +132,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 
 		mapInfoControls = new MapWidgetRegistry(map.getMyApplication().getSettings());
+		monitoringServices = new MonitoringInfoControl();
+
 
 		registerAllControls();
 		createControls();

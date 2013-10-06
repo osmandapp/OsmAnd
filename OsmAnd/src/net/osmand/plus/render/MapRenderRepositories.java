@@ -276,151 +276,152 @@ public class MapRenderRepositories {
 
 		long now = System.currentTimeMillis();
 
-		try {
-			System.gc(); // to clear previous objects
-			int count = 0;
-			ArrayList<BinaryMapDataObject> tempResult = new ArrayList<BinaryMapDataObject>();
-			ArrayList<BinaryMapDataObject> basemapResult = new ArrayList<BinaryMapDataObject>();
-			TLongSet ids = new TLongHashSet();
-			List<BinaryMapDataObject> coastLines = new ArrayList<BinaryMapDataObject>();
-			List<BinaryMapDataObject> basemapCoastLines = new ArrayList<BinaryMapDataObject>();
-			int leftX = MapUtils.get31TileNumberX(cLeftLongitude);
-			int rightX = MapUtils.get31TileNumberX(cRightLongitude);
-			int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
-			int topY = MapUtils.get31TileNumberY(cTopLatitude);
-			BinaryMapIndexReader.SearchFilter searchFilter = new BinaryMapIndexReader.SearchFilter() {
+		System.gc(); // to clear previous objects
+		int count = 0;
+		ArrayList<BinaryMapDataObject> tempResult = new ArrayList<BinaryMapDataObject>();
+		ArrayList<BinaryMapDataObject> basemapResult = new ArrayList<BinaryMapDataObject>();
+		TLongSet ids = new TLongHashSet();
+		List<BinaryMapDataObject> coastLines = new ArrayList<BinaryMapDataObject>();
+		List<BinaryMapDataObject> basemapCoastLines = new ArrayList<BinaryMapDataObject>();
+		int leftX = MapUtils.get31TileNumberX(cLeftLongitude);
+		int rightX = MapUtils.get31TileNumberX(cRightLongitude);
+		int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
+		int topY = MapUtils.get31TileNumberY(cTopLatitude);
+		BinaryMapIndexReader.SearchFilter searchFilter = new BinaryMapIndexReader.SearchFilter() {
 
-				@Override
-				public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex root) {
-					for (int j = 0; j < types.size(); j++) {
-						int type = types.get(j);
-						TagValuePair pair = root.decodeType(type);
-						if (pair != null) {
-							// TODO is it fast enough ?
-							for (int i = 1; i <= 3; i++) {
-								renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, zoom);
-								renderingReq.setStringFilter(renderingReq.ALL.R_TAG, pair.tag);
-								renderingReq.setStringFilter(renderingReq.ALL.R_VALUE, pair.value);
-								if (renderingReq.search(i, false)) {
-									return true;
-								}
-							}
+			@Override
+			public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex root) {
+				for (int j = 0; j < types.size(); j++) {
+					int type = types.get(j);
+					TagValuePair pair = root.decodeType(type);
+					if (pair != null) {
+						// TODO is it fast enough ?
+						for (int i = 1; i <= 3; i++) {
+							renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, zoom);
 							renderingReq.setStringFilter(renderingReq.ALL.R_TAG, pair.tag);
 							renderingReq.setStringFilter(renderingReq.ALL.R_VALUE, pair.value);
-							if (renderingReq.search(RenderingRulesStorage.TEXT_RULES, false)) {
+							if (renderingReq.search(i, false)) {
 								return true;
 							}
 						}
+						renderingReq.setStringFilter(renderingReq.ALL.R_TAG, pair.tag);
+						renderingReq.setStringFilter(renderingReq.ALL.R_VALUE, pair.value);
+						if (renderingReq.search(RenderingRulesStorage.TEXT_RULES, false)) {
+							return true;
+						}
 					}
+				}
+				return false;
+			}
+
+		};
+		if (zoom > 16) {
+			searchFilter = null;
+		}
+		boolean ocean = false;
+		boolean land = false;
+		MapIndex mi = null;
+		searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);
+		for (BinaryMapIndexReader c : files.values()) {
+			searchRequest.clearSearchResults();
+			List<BinaryMapDataObject> res;
+			try {
+				res = c.searchMapIndex(searchRequest);
+			} catch (IOException e) {
+				res = new ArrayList<BinaryMapDataObject>();
+				log.debug("Search failed " + c.getRegionNames(), e); //$NON-NLS-1$
+			}
+			for (BinaryMapDataObject r : res) {
+				if (checkForDuplicateObjectIds) {
+					if (ids.contains(r.getId()) && r.getId() > 0) {
+						// do not add object twice
+						continue;
+					}
+					ids.add(r.getId());
+				}
+				count++;
+
+				if (r.containsType(r.getMapIndex().coastlineEncodingType)) {
+					if (c.isBasemap()) {
+						basemapCoastLines.add(r);
+					} else {
+						coastLines.add(r);
+					}
+				} else {
+					// do not mess coastline and other types
+					if (c.isBasemap()) {
+						basemapResult.add(r);
+					} else {
+						tempResult.add(r);
+					}
+				}
+				if (checkWhetherInterrupted()) {
 					return false;
 				}
-
-			};
-			if (zoom > 16) {
-				searchFilter = null;
-			}
-			boolean ocean = false;
-			boolean land = false;
-			MapIndex mi = null;
-			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);
-			for (BinaryMapIndexReader c : files.values()) {
-				searchRequest.clearSearchResults();
-				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
-				for (BinaryMapDataObject r : res) {
-					if (checkForDuplicateObjectIds) {
-						if (ids.contains(r.getId()) && r.getId() > 0) {
-							// do not add object twice
-							continue;
-						}
-						ids.add(r.getId());
-					}
-					count++;
-
-					if (r.containsType(r.getMapIndex().coastlineEncodingType)) {
-						if (c.isBasemap()) {
-							basemapCoastLines.add(r);
-						} else {
-							coastLines.add(r);
-						}
-					} else {
-						// do not mess coastline and other types
-						if (c.isBasemap()) {
-							basemapResult.add(r);
-						} else {
-							tempResult.add(r);
-						}
-					}
-					if (checkWhetherInterrupted()) {
-						return false;
-					}
-				}
-
-				if (searchRequest.isOcean()) {
-					mi = c.getMapIndexes().get(0);
-					ocean = true;
-				}  
-				if (searchRequest.isLand()) {
-					mi = c.getMapIndexes().get(0);
-					land = true;
-				}
 			}
 
-			String coastlineTime = "";
-			boolean addBasemapCoastlines = true;
-			boolean emptyData = zoom > BASEMAP_ZOOM && tempResult.isEmpty() && coastLines.isEmpty();
-			boolean basemapMissing = zoom <= BASEMAP_ZOOM && basemapCoastLines.isEmpty() && mi == null; 
-			boolean detailedLandData = zoom >= 14 && tempResult.size() > 0;
-			if(!coastLines.isEmpty()) {
-				long ms = System.currentTimeMillis();
-				boolean coastlinesWereAdded = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom, 
-						basemapCoastLines.isEmpty(), true, tempResult);
-				addBasemapCoastlines = (!coastlinesWereAdded && !detailedLandData) || zoom <= BASEMAP_ZOOM;
-				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
-			} else {
-				addBasemapCoastlines = !detailedLandData;
+			if (searchRequest.isOcean()) {
+				mi = c.getMapIndexes().get(0);
+				ocean = true;
 			}
-			if(addBasemapCoastlines){
-				long ms = System.currentTimeMillis();
-				boolean coastlinesWereAdded = processCoastlines(basemapCoastLines, leftX, rightX, bottomY, topY, zoom, 
-						true, true, tempResult);
-				addBasemapCoastlines = !coastlinesWereAdded;
-				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
+			if (searchRequest.isLand()) {
+				mi = c.getMapIndexes().get(0);
+				land = true;
 			}
-			if(addBasemapCoastlines && mi != null){
-				BinaryMapDataObject o = new BinaryMapDataObject(new int[] { leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
-						topY }, new int[] { ocean && !land ? mi.coastlineEncodingType : (mi.landEncodingType) }, null, -1);
-				o.setMapIndex(mi);
-				tempResult.add(o);
-			}
-			if(emptyData || basemapMissing){
-				// message
-				MapIndex mapIndex;
-				if(!tempResult.isEmpty()) {
-					mapIndex = tempResult.get(0).getMapIndex();
-				} else {
-					mapIndex = new MapIndex();
-					mapIndex.initMapEncodingRule(0, 1, "natural", "coastline");
-					mapIndex.initMapEncodingRule(0, 2, "name", "");
-				}
-			}
-			if(zoom <= BASEMAP_ZOOM || emptyData) {
-				tempResult.addAll(basemapResult);
-			}
-			
-			
-			if (count > 0) {
-				log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
-						cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
-				log.info(String.format("Searching: %s ms  %s (%s results found)", System.currentTimeMillis() - now, coastlineTime, count)); //$NON-NLS-1$
-			}
-		
-
-			cObjects = tempResult;
-			cObjectsBox = dataBox;
-		} catch (IOException e) {
-			log.debug("Search failed", e); //$NON-NLS-1$
-			return false;
 		}
+
+		String coastlineTime = "";
+		boolean addBasemapCoastlines = true;
+		boolean emptyData = zoom > BASEMAP_ZOOM && tempResult.isEmpty() && coastLines.isEmpty();
+		boolean basemapMissing = zoom <= BASEMAP_ZOOM && basemapCoastLines.isEmpty() && mi == null;
+		boolean detailedLandData = zoom >= 14 && tempResult.size() > 0;
+		if (!coastLines.isEmpty()) {
+			long ms = System.currentTimeMillis();
+			boolean coastlinesWereAdded = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom,
+					basemapCoastLines.isEmpty(), true, tempResult);
+			addBasemapCoastlines = (!coastlinesWereAdded && !detailedLandData) || zoom <= BASEMAP_ZOOM;
+			coastlineTime = "(coastline " + (System.currentTimeMillis() - ms) + " ms )";
+		} else {
+			addBasemapCoastlines = !detailedLandData;
+		}
+		if (addBasemapCoastlines) {
+			long ms = System.currentTimeMillis();
+			boolean coastlinesWereAdded = processCoastlines(basemapCoastLines, leftX, rightX, bottomY, topY, zoom,
+					true, true, tempResult);
+			addBasemapCoastlines = !coastlinesWereAdded;
+			coastlineTime = "(coastline " + (System.currentTimeMillis() - ms) + " ms )";
+		}
+		if (addBasemapCoastlines && mi != null) {
+			BinaryMapDataObject o = new BinaryMapDataObject(new int[]{leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
+					topY}, new int[]{ocean && !land ? mi.coastlineEncodingType : (mi.landEncodingType)}, null, -1);
+			o.setMapIndex(mi);
+			tempResult.add(o);
+		}
+		if (emptyData || basemapMissing) {
+			// message
+			MapIndex mapIndex;
+			if (!tempResult.isEmpty()) {
+				mapIndex = tempResult.get(0).getMapIndex();
+			} else {
+				mapIndex = new MapIndex();
+				mapIndex.initMapEncodingRule(0, 1, "natural", "coastline");
+				mapIndex.initMapEncodingRule(0, 2, "name", "");
+			}
+		}
+		if (zoom <= BASEMAP_ZOOM || emptyData) {
+			tempResult.addAll(basemapResult);
+		}
+
+
+		if (count > 0) {
+			log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
+					cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
+			log.info(String.format("Searching: %s ms  %s (%s results found)", System.currentTimeMillis() - now, coastlineTime, count)); //$NON-NLS-1$
+		}
+
+
+		cObjects = tempResult;
+		cObjectsBox = dataBox;
 
 		return true;
 	}
@@ -565,7 +566,8 @@ public class MapRenderRepositories {
 			currentRenderingContext.height = (int) (requestedBox.getPixHeight() / mapDensity);
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.useEnglishNames = prefs.USE_ENGLISH_NAMES.get();
-			currentRenderingContext.setDensityValue(renderer.getDensity() * prefs.MAP_ZOOM_SCALE_BY_DENSITY.get());
+			currentRenderingContext.setDensityValue(1.5f);
+			//currentRenderingContext.setDensityValue(renderer.getDensity() * prefs.MAP_ZOOM_SCALE_BY_DENSITY.get());
 			// init rendering context
 			currentRenderingContext.tileDivisor = (float) MapUtils.getPowZoom(31 - requestedBox.getZoom());
 			if (checkWhetherInterrupted()) {

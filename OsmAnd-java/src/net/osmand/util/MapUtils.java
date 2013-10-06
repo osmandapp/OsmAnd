@@ -363,10 +363,10 @@ public class MapUtils {
 	 * @return
 	 */
 	public static float unifyRotationTo360(float rotate) {
-		while(rotate < 0){
+		while(rotate < -180){
 			rotate += 360;
 		}
-		while(rotate > 360){
+		while(rotate > +180){
 			rotate -= 360;
 		}
 		return rotate;
