@@ -206,9 +206,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private void drawZoomLevel(Canvas canvas, RotatedTileBox tb) {
 		String zoomText = tb.getZoom() + "";
 		float frac = tb.getZoomScale();
-		while(frac > OsmandMapTileView.ZOOM_DELTA_1) {
-			frac -= OsmandMapTileView.ZOOM_DELTA_1;
+		if (frac != 0) {
 			zoomText += "'";
+			if(frac >= 1){
+				int ifrac = ((int) frac);
+				zoomText += ifrac;
+				if(frac != ifrac) {
+					zoomText += "." + ((int) ((frac - ifrac) * 10f));
+				}
+			}
 		}
 		float length = zoomTextPaint.measureText(zoomText);
 		if (zoomShadow.getBounds().width() == 0) {

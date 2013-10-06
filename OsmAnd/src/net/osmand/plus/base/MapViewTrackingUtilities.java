@@ -164,10 +164,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		double distToSee = speed * time;
 		float zoomDelta = (float) (Math.log(visibleDist / distToSee) / Math.log(2.0f));
 		// check if 17, 18 is correct?
-		final float zoomScale = tb.getZoom() + tb.getZoomScale();
-		if (zoomDelta + zoomScale >= 18 ) {
-			return 18 - zoomScale ;
-		}
 		return zoomDelta;
 	}
 	
@@ -176,21 +172,20 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			long now = System.currentTimeMillis();
 			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 			float zdelta = defineZoomFromSpeed(tb, location.getSpeed());
-			if (Math.abs(zdelta) >= OsmandMapTileView.ZOOM_DELTA_1) {
+			if (Math.abs(zdelta) >= 0.5/*?Math.sqrt(0.5)*/) {
 				// prevent ui hysteresis (check time interval for autozoom)
 				if (zdelta >= 2) {
 					// decrease a bit
-					zdelta -= 3 * OsmandMapTileView.ZOOM_DELTA_1;
+					zdelta -= 1;
 				} else if (zdelta <= -2) {
 					// decrease a bit
-					zdelta += 3 * OsmandMapTileView.ZOOM_DELTA_1;
+					zdelta += 1;
 				}
 				if (now - lastTimeAutoZooming > 4500) {
 					lastTimeAutoZooming = now;
-					float complexZoom = tb.getZoom() + tb.getZoomScale();
-					float newZoom = Math.round((complexZoom + zdelta) * OsmandMapTileView.ZOOM_DELTA)
-							* OsmandMapTileView.ZOOM_DELTA_1;
-					// TODO test round final int tz = Math.round(newZoom);
+					float complexZoom = tb.getZoom() + tb.getZoomScale() + zdelta;
+					// round to 0.5
+					float newZoom = Math.round(complexZoom * 2) * 0.5f;
 					final int tz = (int)newZoom;
 					mapView.setComplexZoom(tz, newZoom - tz);
 					// mapView.getAnimatedDraggingThread().startZooming(mapView.getFloatZoom() + zdelta, false);
