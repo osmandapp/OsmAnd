@@ -406,8 +406,9 @@ public class RotatedTileBox {
 
 	public boolean containsTileBox(RotatedTileBox box) {
 		checkTileRectangleCalculated();
+		// thread safe
+		box = box.copy();
 		box.checkTileRectangleCalculated();
-		QuadPoint temp = new QuadPoint();
 		if(box.zoom != zoom){
 			throw new UnsupportedOperationException();
 		}

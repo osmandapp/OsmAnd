@@ -615,8 +615,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference("use_kalman_filter_compass", true).makeGlobal().cache();
 	
-	// public final OsmandPreference<Float> MAP_TEXT_SIZE = new FloatPreference("map_text_size", 1.0f).makeProfile().cache();
-	public final OsmandPreference<Float> MAP_ZOOM_SCALE_BY_DENSITY = new FloatPreference("map_zoom_scale_by_density", 1.0f).makeProfile().cache();
+	public final OsmandPreference<Float> MAP_ZOOM_SCALE_BY_DENSITY = new FloatPreference("map_zoom_scale_wo_density", 0f).makeProfile().cache();
 	
 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -877,13 +876,7 @@ public class OsmandSettings {
 		File tPath = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		File dir = new File(tPath, tileName);
 		if (!dir.exists()) {
-			TileSourceTemplate ret = checkAmongAvailableTileSources(dir, knownTemplates);
-			if (ret != null) {
-				return ret;
-			}
-			if (ret != null) {
-				return ret;
-			}
+			return checkAmongAvailableTileSources(dir, knownTemplates);
 		} else if (tileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			return ctx.getTodoAPI().newSqliteTileSource(dir, knownTemplates);
 		} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
