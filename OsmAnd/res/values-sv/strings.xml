@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -1304,4 +1304,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="av_camera_focus_continuous">Kameran försöker fokusera hela tiden</string>
 	<string name="av_photo_play_sound">Spela upp ljud vid tagning av foto</string>
 	<string name="av_photo_play_sound_descr">Välj om ett ljud ska spelas upp vid tagning av foton</string>
-</resources>
+<string name="route_distance_far">Långt borta</string>
+    <string name="route_distance_farest">Längst bort</string>
+    <string name="route_distance_close">Nära</string>
+    <string name="map_magnifier">Kartförstoring</string>
+    </resources>
