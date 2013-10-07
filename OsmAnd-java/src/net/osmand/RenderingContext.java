@@ -46,6 +46,7 @@ public class RenderingContext {
 	public int lastRenderedKey = 0;
 
 	// be aware field is using in C++
+	public float screenDensityRatio = 1;
 	public int shadowRenderingMode = ShadowRenderingMode.BLUR_SHADOW.value;
 	public int shadowRenderingColor = 0xff969696;
 	public String renderingDebugInfo;

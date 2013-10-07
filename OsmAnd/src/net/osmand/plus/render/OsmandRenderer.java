@@ -32,6 +32,8 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
@@ -301,7 +303,7 @@ public class OsmandRenderer {
 		int[] alreadyDrawnIcons = new int[iconsW * iconsH / 32];
 		for (IconDrawInfo icon : rc.iconsToDraw) {
 			if (icon.resId != null) {
-				Bitmap ico = RenderingIcons.getSmallPoiIcon(context, icon.resId);
+				Bitmap ico = RenderingIcons.getIcon(context, icon.resId);
 				if (ico != null) {
 					if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
 						int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
@@ -314,8 +316,17 @@ public class OsmandRenderer {
 						// check bit b if it is set
 						if (((ind >> b) & 1) == 0) {
 							alreadyDrawnIcons[i] = ind | (1 << b);
-							cv.drawBitmap(ico, icon.x - ico.getWidth() / 2,
-									icon.y - ico.getHeight() / 2, paintIcon);
+							float left = icon.x - ico.getWidth() / 2 * rc.screenDensityRatio;
+							float top = icon.y - ico.getHeight() / 2 * rc.screenDensityRatio;
+							if(rc.screenDensityRatio != 1f){
+								RectF rf = new RectF(left, top, left + ico.getWidth() * rc.screenDensityRatio , 
+										top + ico.getHeight() * rc.screenDensityRatio);
+								Rect src = new Rect(0, 0, ico.getWidth(), ico
+										.getHeight());
+								cv.drawBitmap(ico, src, rf, paintIcon);
+							} else {
+								cv.drawBitmap(ico, left, top, paintIcon);
+							}
 						}
 					}
 				}
@@ -564,7 +575,6 @@ public class OsmandRenderer {
 				if (shadowColor == 0) {
 					shadowRadius = 0;
 				}
-				System.out.println("Shadow radius " + shadowRadius);
 				p.setShadowLayer(shadowRadius, 0, 0, shadowColor);
 			}
 		}

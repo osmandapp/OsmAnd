@@ -16,8 +16,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 public class RenderingIcons {
 	private static final Log log = PlatformUtil.getLog(RenderingIcons.class);
@@ -26,7 +24,7 @@ public class RenderingIcons {
 	private static Map<String, Integer> smallIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Integer> bigIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Bitmap> iconsBmp = new LinkedHashMap<String, Bitmap>();
-	private static DisplayMetrics dm;
+//	private static DisplayMetrics dm;
 	
 	public static boolean containsIcon(String s){
 		return icons.containsKey(s);
@@ -83,29 +81,11 @@ public class RenderingIcons {
 		return null;
 	}
 	
-	public static Bitmap getSmallPoiIcon(Context ctx, String s) {
-		Integer resId = smallIcons.get(s);
-		if (resId != null) {
-			return BitmapFactory.decodeResource(ctx.getResources(), resId, null);
-		}
-		return null;
-	}
-	
 	public static Bitmap getIcon(Context ctx, String s) {
 		if (!iconsBmp.containsKey(s)) {
 			Integer resId = icons.get(s);
 			if (resId != null) {
-				if (dm == null) {
-					dm = new DisplayMetrics();
-					WindowManager wmgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
-					wmgr.getDefaultDisplay().getMetrics(dm);
-				}
-//				BitmapFactory.Options options = new BitmapFactory.Options();
-//	            options.inScaled = false;
-//	            options.inTargetDensity = dm.densityDpi;
-//				options.inDensity = dm.densityDpi;
 				Bitmap bmp = BitmapFactory.decodeResource(ctx.getResources(), resId, null);
-//				Bitmap bmp = UnscaledBitmapLoader.loadFromResource(ctx.getResources(), resId.intValue(), null, dm);
 				iconsBmp.put(s, bmp);
 			} else {
 				iconsBmp.put(s, null);

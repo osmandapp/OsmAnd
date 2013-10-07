@@ -568,6 +568,7 @@ public class MapRenderRepositories {
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.useEnglishNames = prefs.USE_ENGLISH_NAMES.get();
 			currentRenderingContext.setDensityValue(mapDensity);
+			currentRenderingContext.screenDensityRatio = mapDensity / Math.max(1, requestedBox.getDensity()) ;
 			// init rendering context
 			currentRenderingContext.tileDivisor = tileDivisor;
 			if (checkWhetherInterrupted()) {
