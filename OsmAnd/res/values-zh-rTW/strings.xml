@@ -1581,4 +1581,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t*\'冬季和滑雪\'建立一個（白雪覆蓋）冬季景觀視野，和顯示全球滑雪場和滑雪升降機
 	</string>
     <string name="base_world_map">基本的世界地圖</string>
-	</resources>
+	<string name="route_distance_close">關閉</string>
+    <string name="route_distance_far">遠方</string>
+    <string name="route_distance_settings_descr">組態地圖檢視距離 (TODO naming)</string>
+    <string name="route_distance_settings">地圖檢視距離 (TODO naming)</string>
+    <string name="map_magnifier">地圖放大鏡</string>
+    </resources>
