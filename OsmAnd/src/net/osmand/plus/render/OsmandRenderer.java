@@ -40,7 +40,6 @@ import android.graphics.PathEffect;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Shader.TileMode;
 import android.os.Handler;
@@ -535,7 +534,7 @@ public class OsmandRenderer {
 			p.setColorFilter(null);
 			p.clearShadowLayer();
 			p.setStyle(Style.STROKE);
-			p.setStrokeWidth(req.getFloatPropertyValue(rStrokeW));
+			p.setStrokeWidth(rc.getComplexValue(req, rStrokeW, 0));
 			String cap = req.getStringPropertyValue(rCap);
 			if(!Algorithms.isEmpty(cap)){
 				p.setStrokeCap(Cap.valueOf(cap.toUpperCase()));
@@ -561,11 +560,11 @@ public class OsmandRenderer {
 				if(shadowColor == 0) {
 					shadowColor = rc.shadowRenderingColor;
 				}
-				int shadowLayer = req.getIntPropertyValue(req.ALL.R_SHADOW_RADIUS);
+				int shadowRadius = (int) rc.getComplexValue(req, req.ALL.R_SHADOW_RADIUS, 0);
 				if (shadowColor == 0) {
-					shadowLayer = 0;
+					shadowRadius = 0;
 				}
-				p.setShadowLayer(shadowLayer, 0, 0, shadowColor);
+				p.setShadowLayer(shadowRadius, 0, 0, shadowColor);
 			}
 		}
 		

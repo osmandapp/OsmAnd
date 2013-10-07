@@ -30,7 +30,6 @@ import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
@@ -61,9 +60,7 @@ import android.widget.Toast;
 
 public class MapRenderRepositories {
 
-	// TimeLoadingMap = Rendering (%25) + Searching(%40) + Other 
 	// It is needed to not draw object twice if user have map index that intersects by boundaries
-	// Takes 25% TimeLoadingMap (?) - Long.valueOf - 12, add - 10, contains - 3.
 	public static boolean checkForDuplicateObjectIds = true;
 	
 
@@ -556,20 +553,22 @@ public class MapRenderRepositories {
 				currentRenderingContext.shadowRenderingMode = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 				currentRenderingContext.shadowRenderingColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_SHADOW_COLOR);
 			}
-			final QuadPoint lt = requestedBox.getLeftTopTilePoint();
-			currentRenderingContext.leftX = lt.x;
-			currentRenderingContext.topY = lt.y ;
+			// final QuadPoint lt = requestedBox.getLeftTopTilePoint();
+			LatLon lt = requestedBox.getLeftTopLatLon();
+			final float mapDensity = (float) Math.pow(2, requestedBox.getZoomScale());
+			final float tileDivisor = (float) MapUtils.getPowZoom(31 - requestedBox.getZoom() -
+						requestedBox.getZoomScale());
+			currentRenderingContext.leftX = MapUtils.get31TileNumberX(lt.getLongitude()) / tileDivisor;
+			currentRenderingContext.topY = MapUtils.get31TileNumberY(lt.getLatitude()) / tileDivisor;
 			currentRenderingContext.zoom = requestedBox.getZoom();
 			currentRenderingContext.rotate = requestedBox.getRotate();
-			final float mapDensity = (float) Math.pow(2, requestedBox.getZoomScale());
-			currentRenderingContext.width = (int) (requestedBox.getPixWidth() / mapDensity);
-			currentRenderingContext.height = (int) (requestedBox.getPixHeight() / mapDensity);
+			currentRenderingContext.width = requestedBox.getPixWidth();
+			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
 			currentRenderingContext.useEnglishNames = prefs.USE_ENGLISH_NAMES.get();
-			currentRenderingContext.setDensityValue(1.5f);
-			//currentRenderingContext.setDensityValue(renderer.getDensity() * prefs.MAP_ZOOM_SCALE_BY_DENSITY.get());
+			currentRenderingContext.setDensityValue(mapDensity);
 			// init rendering context
-			currentRenderingContext.tileDivisor = (float) MapUtils.getPowZoom(31 - requestedBox.getZoom());
+			currentRenderingContext.tileDivisor = tileDivisor;
 			if (checkWhetherInterrupted()) {
 				return;
 			}

@@ -175,13 +175,13 @@ public class RenderingRuleStorageProperties {
 		R_SHADOW_LEVEL = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(SHADOW_LEVEL));
 
 		// text properties
-		R_TEXT_WRAP_WIDTH = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_WRAP_WIDTH));
-		R_TEXT_DY = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_DY));
-		R_TEXT_HALO_RADIUS = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_HALO_RADIUS));
-		R_TEXT_SIZE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_SIZE));
+		R_TEXT_WRAP_WIDTH = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_WRAP_WIDTH));
+		R_TEXT_DY = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_DY));
+		R_TEXT_HALO_RADIUS = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_HALO_RADIUS));
+		R_TEXT_SIZE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_SIZE));
 		R_TEXT_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_ORDER));
 		R_ICON_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ICON_ORDER));
-		R_TEXT_MIN_DISTANCE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_MIN_DISTANCE));
+		R_TEXT_MIN_DISTANCE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_MIN_DISTANCE));
 		R_TEXT_SHIELD = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(TEXT_SHIELD));
 		
 
@@ -218,7 +218,7 @@ public class RenderingRuleStorageProperties {
 		R_SHADER = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(SHADER));
 
 		R_SHADOW_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(SHADOW_COLOR));
-		R_SHADOW_RADIUS = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(SHADOW_RADIUS));
+		R_SHADOW_RADIUS = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(SHADOW_RADIUS));
 	}
 
 	public RenderingRuleProperty get(String name) {

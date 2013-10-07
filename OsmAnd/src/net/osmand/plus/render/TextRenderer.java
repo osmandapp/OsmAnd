@@ -59,20 +59,20 @@ public class TextRenderer {
 		String shieldRes = null;
 		int textOrder = 100;
 
-		public void fillProperties(RenderingRuleSearchRequest render, float centerX, float centerY) {
+		public void fillProperties(RenderingContext rc, RenderingRuleSearchRequest render, float centerX, float centerY) {
 			this.centerX = centerX;
-			this.centerY = centerY + render.getIntPropertyValue(render.ALL.R_TEXT_DY, 0);
 			// used only for draw on path where centerY doesn't play role
-			this.vOffset = render.getIntPropertyValue(render.ALL.R_TEXT_DY, 0);
+			this.vOffset = (int) rc.getComplexValue(render, render.ALL.R_TEXT_DY, 0);
+			this.centerY = centerY + this.vOffset;
 			textColor = render.getIntPropertyValue(render.ALL.R_TEXT_COLOR);
 			if (textColor == 0) {
 				textColor = Color.BLACK;
 			}
-			textSize = render.getIntPropertyValue(render.ALL.R_TEXT_SIZE);
-			textShadow = render.getIntPropertyValue(render.ALL.R_TEXT_HALO_RADIUS, 0);
-			textWrap = render.getIntPropertyValue(render.ALL.R_TEXT_WRAP_WIDTH, 0);
+			textSize = rc.getComplexValue(render, render.ALL.R_TEXT_SIZE, 0);
+			textShadow = (int) rc.getComplexValue(render, render.ALL.R_TEXT_HALO_RADIUS, 0);
+			textWrap = (int) rc.getComplexValue(render, render.ALL.R_TEXT_WRAP_WIDTH, 0);
 			bold = render.getIntPropertyValue(render.ALL.R_TEXT_BOLD, 0) > 0;
-			minDistance = render.getIntPropertyValue(render.ALL.R_TEXT_MIN_DISTANCE, 0);
+			minDistance = rc.getComplexValue(render, render.ALL.R_TEXT_MIN_DISTANCE, 0);
 			if (render.isSpecified(render.ALL.R_TEXT_SHIELD)) {
 				shieldRes = render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD);
 			}
@@ -303,9 +303,9 @@ public class TextRenderer {
 		render.setIntFilter(render.ALL.R_TEXT_LENGTH, name.length());
 		render.setStringFilter(render.ALL.R_NAME_TAG, tagName);
 		if(render.search(RenderingRulesStorage.TEXT_RULES)){
-			if(render.getIntPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
+			if(render.getFloatPropertyValue(render.ALL.R_TEXT_SIZE) > 0){
 				final TextDrawInfo text = new TextDrawInfo(name);
-				text.fillProperties(render, xMid, yMid);
+				text.fillProperties(rc, render, xMid, yMid);
 				final String tagName2 = render.getStringPropertyValue(render.ALL.R_NAME_TAG2);
 				if (!Algorithms.isEmpty(tagName2)) {
 					o.getObjectNames().forEachEntry(new TIntObjectProcedure<String>() {

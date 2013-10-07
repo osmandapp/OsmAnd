@@ -8,6 +8,7 @@ import java.util.Set;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.OsmandSettings.RouteViewDistance;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import android.app.AlertDialog;
@@ -27,6 +28,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private Preference showAlarms;
 	private Preference speakAlarms;
 	private ListPreference routerServicePreference;
+	private ListPreference routeViewDistancePreference;
 	public static final String MORE_VALUE = "MORE_VALUE";
 	
 	public SettingsNavigationActivity() {
@@ -82,7 +84,15 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.ROUTER_SERVICE, screen, entries, RouteService.values());
 		
 		routerServicePreference = (ListPreference) screen.findPreference(settings.ROUTER_SERVICE.getId());
-		routerServicePreference.setOnPreferenceChangeListener(this);
+		
+		entries = new String[RouteViewDistance.values().length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = getString(RouteViewDistance.values()[i].name);
+		}
+		registerListPreference(settings.ROUTE_VIEW_DISTANCE, screen, entries, RouteViewDistance.values());
+		
+		routeViewDistancePreference = (ListPreference) screen.findPreference(settings.ROUTE_VIEW_DISTANCE.getId());
+		routeViewDistancePreference.setOnPreferenceChangeListener(this);
 
 		
 		avoidRouting = (Preference) screen.findPreference("avoid_in_routing");

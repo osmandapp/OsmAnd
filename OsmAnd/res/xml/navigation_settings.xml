@@ -12,6 +12,8 @@
 		<Preference android:title="@string/speak_title" android:summary="@string/speak_descr" android:key="speak_routing_alarms"/>
 		<Preference android:title="@string/avoid_in_routing_title" android:summary="@string/avoid_in_routing_descr" android:key="avoid_in_routing"/>
 		<Preference android:title="@string/prefer_in_routing_title" android:summary="@string/prefer_in_routing_descr" android:key="prefer_in_routing"/>
+		<ListPreference android:key="route_view_distance" android:title="@string/route_distance_settings"
+			android:summary="@string/route_distance_settings_descr"></ListPreference>
 		<CheckBoxPreference android:summary="@string/use_compass_navigation_descr" android:title="@string/use_compass_navigation"
 			android:key="use_compass_navigation"></CheckBoxPreference>
 		<CheckBoxPreference android:summary="@string/precise_routing_mode_descr" android:title="@string/precise_routing_mode"

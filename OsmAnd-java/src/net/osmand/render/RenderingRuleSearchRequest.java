@@ -229,6 +229,14 @@ public class RenderingRuleSearchRequest {
 		return fvalues[property.getId()];
 	}
 	
+	public float getFloatPropertyValue(RenderingRuleProperty property, float defVal) {
+		float f = fvalues[property.getId()];
+		if(f == 0) {
+			return defVal;
+		}
+		return f;
+	}
+	
 	public String getColorStringPropertyValue(RenderingRuleProperty property) {
 		return RenderingRuleProperty.colorToString(values[property.getId()]);
 	}

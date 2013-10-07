@@ -654,14 +654,14 @@ public class OsmandSettings {
 		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, DayNightMode.DAY);
 	}
 	
-	
+	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<RouteService> ROUTER_SERVICE = 
 			new EnumIntPreference<RouteService>("router_service", RouteService.OSMAND, 
 					RouteService.values()).makeProfile();	
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<RouteViewDistance> ROUTE_VIEW_DISTANCE = 
-		new EnumIntPreference<RouteViewDistance>("router_service", RouteViewDistance.FAREST, 
+		new EnumIntPreference<RouteViewDistance>("route_view_distance", RouteViewDistance.FAREST, 
 				RouteViewDistance.values()).makeProfile().cache();
 	
 	public final CommonPreference<Boolean> SNAP_TO_ROAD = new BooleanPreference("snap_to_road", false).makeProfile().cache();

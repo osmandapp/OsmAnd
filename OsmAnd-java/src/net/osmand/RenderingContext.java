@@ -1,5 +1,8 @@
 package net.osmand;
 
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRuleSearchRequest;
+
 
 public class RenderingContext {
 	static enum ShadowRenderingMode {
@@ -55,6 +58,10 @@ public class RenderingContext {
 
 	public float getDensityValue(float val) {
 		return val * density;
+	}
+	
+	public float getComplexValue(RenderingRuleSearchRequest req, RenderingRuleProperty prop, float defVal) {
+		return req.getFloatPropertyValue(prop, defVal) * density;
 	}
 	
 	protected byte[] getIconRawData(String data) {

@@ -369,15 +369,14 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 							currentViewport.getCenterPixelY() != cy) {
 						currentViewport.setPixelDimensions(getWidth(), getHeight(), 0.5f, ratioy);
 					}
-					// TODO high res
-					// (getSettings().USE_HIGH_RES_MAPS.get() ? 0 : 0.5f)
 					boolean nightMode = application.getDaynightHelper().isNightMode();
 					if (nightMode) {
 						canvas.drawARGB(255, 100, 100, 100);
 					} else {
 						canvas.drawARGB(255, 225, 225, 225);
 					}
-					drawOverMap(canvas, currentViewport, new DrawSettings(nightMode, updateVectorRendering), false);
+					// make copy to avoid concurrency 
+					drawOverMap(canvas, currentViewport.copy(), new DrawSettings(nightMode, updateVectorRendering), false);
 				} finally {
 					holder.unlockCanvasAndPost(canvas);
 				}

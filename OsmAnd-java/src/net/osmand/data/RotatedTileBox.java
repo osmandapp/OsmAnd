@@ -344,11 +344,6 @@ public class RotatedTileBox {
 		calculateDerivedFields();
 	}
 
-	public QuadPoint getLeftTopTilePoint() {
-		checkTileRectangleCalculated();
-		return tileLT;
-	}
-
 	public LatLon getLeftTopLatLon() {
 		checkTileRectangleCalculated();
 		return new LatLon(MapUtils.getLatitudeFromTile(zoom, tileLT.y),
