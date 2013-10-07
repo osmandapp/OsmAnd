@@ -160,6 +160,18 @@ public class RenderingRuleProperty {
 				log.error("Rendering parse " + e.getMessage());
 			}
 			return -1;
+		} else if(type == FLOAT_TYPE){
+			// parse as complex value
+			try {
+				int colon = value.indexOf(':');
+				if(colon != -1) {
+					return Integer.parseInt(value.substring(colon + 1));
+				}
+				return 0;
+			} catch (NumberFormatException e) {
+				log.error("Rendering parse " + value);
+			}
+			return -1;
 		} else {
 			return -1;
 		}
@@ -170,12 +182,10 @@ public class RenderingRuleProperty {
 			try {
 				int colon = value.indexOf(':');
 				if(colon != -1) {
-					float c = 0;
 					if(colon > 0) {
-						c += Float.parseFloat(value.substring(0, colon));
-					}
-					c += Float.parseFloat(value.substring(colon + 1));
-					return c;
+						return Float.parseFloat(value.substring(0, colon));
+					} 
+					return 0;
 				}
 				return Float.parseFloat(value);
 			} catch (NumberFormatException e) {

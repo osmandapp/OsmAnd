@@ -164,7 +164,7 @@ public class TextRenderer {
 		}
 		if (text.minDistance > 0) {
 			QuadRect boundsSearch = new QuadRect(text.bounds);
-			boundsSearch.inset(-rc.getDensityValue(Math.max(5.0f, text.minDistance)), -rc.getDensityValue(15));
+			boundsSearch.inset(-Math.max(rc.getDensityValue(5.0f), text.minDistance), -rc.getDensityValue(15));
 			boundIntersections.queryInBox(boundsSearch, tempSearch);
 			// drawTestBox(cv, &boundsSearch, text.pathRotate, paintIcon, text.text, NULL/*paintText*/);
 			for (int i = 0; i < tempSearch.size(); i++) {
@@ -216,7 +216,7 @@ public class TextRenderer {
 				}
 
 				// sest text size before finding intersection (it is used there)
-				float textSize = rc.getDensityValue(text.textSize);
+				float textSize = text.textSize;
 				paintText.setTextSize(textSize);
 				paintText.setFakeBoldText(text.bold);
 				paintText.setColor(text.textColor);
@@ -323,7 +323,7 @@ public class TextRenderer {
 					});
 
 				}
-				paintText.setTextSize(rc.getDensityValue(text.textSize));
+				paintText.setTextSize(text.textSize);
 				Rect bs = new Rect();
 				paintText.getTextBounds(name, 0, name.length(), bs);
 				text.bounds = new QuadRect(bs.left, bs.top, bs.right, bs.bottom);

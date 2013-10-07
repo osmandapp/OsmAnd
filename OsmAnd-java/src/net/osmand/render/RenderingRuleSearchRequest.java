@@ -67,6 +67,7 @@ public class RenderingRuleSearchRequest {
 			values[p.getId()] = savedValues[p.getId()];
 		} else {
 			fvalues[p.getId()] = savedFvalues[p.getId()];
+			values[p.getId()] = savedValues[p.getId()];
 		}
 	}
 	
@@ -166,7 +167,6 @@ public class RenderingRuleSearchRequest {
 				}
 			} else if(rp == storage.PROPS.R_DISABLE){
 				// quick disable return even without load output
-				RenderingRuleProperty p = storage.PROPS.R_DISABLE;
 				values[rp.getId()] = rule.getIntProp(i);
 			}
 		}
@@ -180,6 +180,7 @@ public class RenderingRuleSearchRequest {
 				searchResult = true;
 				if (rp.isFloat()) {
 					fvalues[rp.getId()] = rule.getFloatProp(i);
+					values[rp.getId()] = rule.getIntProp(i);
 				} else {
 					values[rp.getId()] = rule.getIntProp(i);
 				}
@@ -202,7 +203,7 @@ public class RenderingRuleSearchRequest {
 	
 	public boolean isSpecified(RenderingRuleProperty property){
 		if(property.isFloat()){
-			return fvalues[property.getId()] != 0;
+			return fvalues[property.getId()] != 0 || values[property.getId()] != -1;
 		} else {
 			int val = values[property.getId()];
 			if(property.isColor()){

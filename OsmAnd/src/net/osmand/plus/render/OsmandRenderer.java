@@ -564,6 +564,7 @@ public class OsmandRenderer {
 				if (shadowColor == 0) {
 					shadowRadius = 0;
 				}
+				System.out.println("Shadow radius " + shadowRadius);
 				p.setShadowLayer(shadowRadius, 0, 0, shadowColor);
 			}
 		}
@@ -713,7 +714,7 @@ public class OsmandRenderer {
 		if (path != null) {
 			if(drawOnlyShadow) {
 				int shadowColor = render.getIntPropertyValue(render.ALL.R_SHADOW_COLOR);
-				int shadowRadius = render.getIntPropertyValue(render.ALL.R_SHADOW_RADIUS);
+				int shadowRadius = (int) rc.getComplexValue(render, render.ALL.R_SHADOW_RADIUS, 0);
 				if(shadowColor == 0) {
 					shadowColor = rc.shadowRenderingColor;
 				}

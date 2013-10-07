@@ -439,7 +439,8 @@ public class MapRenderRepositories {
 	}
 
 
-	public boolean checkIfMapIsEmpty(int leftX, int rightX, int topY, int bottomY, int zoom){
+	// only single thread to read !
+	public synchronized boolean checkIfMapIsEmpty(int leftX, int rightX, int topY, int bottomY, int zoom){
 		final boolean[] empty = new boolean[] {true};
 		SearchRequest<BinaryMapDataObject> searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom,
 				null, new ResultMatcher<BinaryMapDataObject>() {

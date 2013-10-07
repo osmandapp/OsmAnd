@@ -41,6 +41,7 @@ public class RenderingRule {
 						floatProperties = new float[attributes.size()];
 					}
 					floatProperties[i] = property.parseFloatValue(e.getValue());
+					intProperties[i] = property.parseIntValue(e.getValue());
 				} else {
 					intProperties[i] = property.parseIntValue(e.getValue());
 				}
