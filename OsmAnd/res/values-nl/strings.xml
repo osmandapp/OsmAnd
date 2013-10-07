@@ -387,7 +387,8 @@
   <string name="tip_app_mode">Gebruiksprofiel</string>
   
   <string name="tip_navigation">Navigatie</string>
-  <string name="tip_navigation_t">\tVoor het starten van navigatie moet je een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en kies het type navigatie.</string>
+  <string name="tip_navigation_t">\tVoor het starten van navigatie moet je een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en kies het type navigatie.
+	</string>
   <string name="tip_search">Zoeken</string>
   <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' -&gt; \'Zoek dichtbij hier\'), een adres (met het zoekscherm), een interessepunt (op naam of soort) of een favoriet.
 		\n\tDoor in het hoofdmenu op \'Zoeken\' te drukken, worden de zoekacties geopend. Voor elk gevonden resultaat biedt het contextmenu twee opties: \'Aanwijzingen\' of \'Toon op kaart\'.
@@ -1571,6 +1572,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="route_distance_far">Ver</string>
     <string name="route_distance_farest">Verst</string>
     <string name="route_distance_settings_descr">Stel kaartweergaveafstand in</string>
-    <string name="route_distance_settings">Kaarweergaveafstand</string>
+    <string name="route_distance_settings">Kaartweergaveafstand</string>
     <string name="map_magnifier">Kaartvergrootglas</string>
     </resources>
