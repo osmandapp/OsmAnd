@@ -615,7 +615,10 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference("use_kalman_filter_compass", true).makeGlobal().cache();
 	
-	public final OsmandPreference<Float> MAP_ZOOM_SCALE_BY_DENSITY = new FloatPreference("map_zoom_scale_wo_density", 0f).makeProfile().cache();
+	public final CommonPreference<Float> MAP_ZOOM_SCALE_BY_DENSITY = new FloatPreference("map_zoom_scale_wo_density", 0f).makeProfile().cache();
+	{
+		MAP_ZOOM_SCALE_BY_DENSITY.setModeDefaultValue(ApplicationMode.CAR, 0.5f);
+	}
 	
 
 	// this value string is synchronized with settings_pref.xml preference name
