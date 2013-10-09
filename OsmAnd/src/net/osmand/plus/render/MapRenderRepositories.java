@@ -592,7 +592,7 @@ public class MapRenderRepositories {
 				bmp.eraseColor(currentRenderingContext.defaultColor);
 			} else {
 				if(reuse != null){
-					log.error(String.format("Create new image ? %d != %d (w) %d != %d (h) ", currentRenderingContext.width, reuse.getWidth(), currentRenderingContext.height, reuse.getHeight()));
+					log.warn(String.format("Create new image ? %d != %d (w) %d != %d (h) ", currentRenderingContext.width, reuse.getWidth(), currentRenderingContext.height, reuse.getHeight()));
 				}
 				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
 			}
