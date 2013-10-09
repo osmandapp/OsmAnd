@@ -594,7 +594,11 @@ public class MapRenderRepositories {
 				if(reuse != null){
 					log.warn(String.format("Create new image ? %d != %d (w) %d != %d (h) ", currentRenderingContext.width, reuse.getWidth(), currentRenderingContext.height, reuse.getHeight()));
 				}
-				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
+				if(transparent) {
+					bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
+				} else {
+					bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
+				}
 			}
 			this.bmp = bmp;
 			this.bmpLocation = tileRect;

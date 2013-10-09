@@ -27,9 +27,12 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Bitmap.Config;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.os.Handler;
@@ -52,10 +55,26 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	protected final static int LOWEST_ZOOM_TO_ROTATE = 9;
 	private boolean MEASURE_FPS = false;
-	private int fpsMeasureCount = 0;
-	private int fpsMeasureMs = 0;
-	private long fpsFirstMeasurement = 0;
-	private float fps;
+	private FPSMeasurement main = new FPSMeasurement();
+	private FPSMeasurement additional = new FPSMeasurement();
+	private class FPSMeasurement {
+		int fpsMeasureCount = 0;
+		int fpsMeasureMs = 0;
+		long fpsFirstMeasurement = 0;
+		float fps;	
+		
+		void calculateFPS(long start, long end) {
+			fpsMeasureMs += end - start;
+			fpsMeasureCount++;
+			if (fpsMeasureCount > 10 || (start - fpsFirstMeasurement) > 400) {
+				fpsFirstMeasurement = start;
+				fps = (1000f * fpsMeasureCount / fpsMeasureMs);
+				fpsMeasureCount = 0;
+				fpsMeasureMs = 0;
+			}
+		}
+	}
+	
 
 	protected static final int emptyTileDivisor = 16;
 	
@@ -346,19 +365,16 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 		return settings;
 	}
+	
+	private void refreshBaseMapInternal(RotatedTileBox tileBox, DrawSettings drawSettings) {
+//		bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
+		
+	}
 
 	private void refreshMapInternal(boolean updateVectorRendering) {
 		handler.removeMessages(1);
-		long ms = SystemClock.elapsedRealtime();
-		boolean useInternet = getSettings().USE_INTERNET_TO_DOWNLOAD_TILES.get();
-		if (useInternet) {
-			if(application != null) {
-				application.getResourceManager().getMapTileDownloader().refuseAllPreviousRequests();
-			}
-		}
-		
-
 		SurfaceHolder holder = getHolder();
+		long ms = SystemClock.elapsedRealtime();
 		synchronized (holder) {
 			Canvas canvas = holder.lockCanvas();
 			if (canvas != null) {
@@ -369,27 +385,22 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 							currentViewport.getCenterPixelY() != cy) {
 						currentViewport.setPixelDimensions(getWidth(), getHeight(), 0.5f, ratioy);
 					}
+					// make copy to avoid concurrency 
 					boolean nightMode = application.getDaynightHelper().isNightMode();
+					RotatedTileBox viewportToDraw = currentViewport.copy();
+					DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering);
 					if (nightMode) {
 						canvas.drawARGB(255, 100, 100, 100);
 					} else {
 						canvas.drawARGB(255, 225, 225, 225);
 					}
-					// make copy to avoid concurrency 
-					drawOverMap(canvas, currentViewport.copy(), new DrawSettings(nightMode, updateVectorRendering), false);
+					drawOverMap(canvas, viewportToDraw, drawSettings, false);
 				} finally {
 					holder.unlockCanvasAndPost(canvas);
 				}
 			}
 			if (MEASURE_FPS) {
-				fpsMeasureMs += SystemClock.elapsedRealtime() - ms;
-				fpsMeasureCount++;
-				if (fpsMeasureCount > 10 || (ms - fpsFirstMeasurement) > 400) {
-					fpsFirstMeasurement = ms;
-					fps = (1000f * fpsMeasureCount / fpsMeasureMs);
-					fpsMeasureCount = 0;
-					fpsMeasureMs = 0;
-				}
+				main.calculateFPS(ms, SystemClock.elapsedRealtime());
 			}
 		}
 	}
@@ -403,7 +414,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	public float getFPS(){
-		return fps;
+		return main.fps;
+	}
+	public float getSecondaryFPS(){
+		return additional.fps;
 	}
 	
 	private void drawOverMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings, boolean
