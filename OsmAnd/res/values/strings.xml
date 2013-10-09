@@ -28,7 +28,9 @@
     <string name="about_settings_descr">Version info, licenses, project members</string>
     <string name="tips_and_tricks">Tips</string>
     <string name="tip_recent_changes_1_6_t">Changes in 1.6:
-    \n\t* Support completely transparent background 
+    \n\t* Support completely transparent background
+    \n\t* Download and overview regions directly from the map view
+    \n\t* Download SRTM files for specific country  
     \n\t* Completely new world map with major roads, forests and railroads 
     \n\t* Map magnifier (long click on zoom button) - extremely useful for raster maps  
 	\n\t* Define/edit online tile source (specify expiration time)
