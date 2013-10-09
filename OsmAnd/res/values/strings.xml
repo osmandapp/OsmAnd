@@ -28,7 +28,11 @@
     <string name="about_settings_descr">Version info, licenses, project members</string>
     <string name="tips_and_tricks">Tips</string>
     <string name="tip_recent_changes_1_6_t">Changes in 1.6:
+    \n\t* Support completely transparent background 
+    \n\t* Completely new world map with major roads, forests and railroads 
+    \n\t* Map magnifier (long click on zoom button) - extremely useful for raster maps  
 	\n\t* Define/edit online tile source (specify expiration time)
+	\n\t* Bug fixes with routing and rendering
     </string>
     <string name="local_index_tile_data_zooms">Zooms downloaded: %1$s</string>
     <string name="local_index_tile_data_expire">Expire (minutes): %1$s</string>
