@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
@@ -1575,4 +1575,10 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 		\n\t* \'جاده های کنتراست بالا\' جاده ها را در شرایط نور محیطی زیاد به صورت پررنگتر نشان میدهد.
 		\n\t* \'زمستان و اسکی\' نمای نقشه ای به صورت زمستانی (پوشیده از برف) ایجاد میکند و شیبها و ارتفاعات مناسب اسکی (زمانیکه نقشه \'اسکی جهان\' دانلود شده باشد) را نشان میدهد.
 	</string>
+    <string name="route_distance_close">بستن</string>
+    <string name="route_distance_far">دور</string>
+    <string name="route_distance_farest">دورتر</string>
+    <string name="route_distance_settings_descr">تنظیم کردن فاصله نمایش نقشه</string>
+    <string name="route_distance_settings">فاسله نمایش نقشه</string>
+    <string name="map_magnifier">ذره بین نقشه</string>
     </resources>
