@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class TipsAndTricksActivity {
 	private int[][] tipNamesAndDescriptions = new int[][] {
-			{R.string.tip_recent_changes,R.string.tip_recent_changes_1_5_t},
+			{R.string.tip_recent_changes,R.string.tip_recent_changes_1_6_t},
 			{R.string.tip_update_index,R.string.tip_update_index_t},
 			{R.string.tip_navigation,R.string.tip_navigation_t},
 			{R.string.tip_app_mode,R.string.tip_app_mode_t_v2},
