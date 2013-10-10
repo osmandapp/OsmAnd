@@ -1466,4 +1466,5 @@
     <string name="edit_tilesource_name">Name</string>
     <string name="maps_define_edit">Definieren/Bearbeiten…</string>
 	<string name="base_world_map">Basis-Weltkarte</string>
-	</resources>
+	<string name="map_magnifier">Karten-Lupe</string>
+    </resources>
