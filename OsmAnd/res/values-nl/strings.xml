@@ -390,13 +390,20 @@
   <string name="tip_navigation_t">\tVoor het starten van navigatie moet je een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en kies het type navigatie.
 	</string>
   <string name="tip_search">Zoeken</string>
-  <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' -&gt; \'Zoek dichtbij hier\'), een adres (met het zoekscherm), een interessepunt (op naam of soort) of een favoriet.
-		\n\tDoor in het hoofdmenu op \'Zoeken\' te drukken, worden de zoekacties geopend. Voor elk gevonden resultaat biedt het contextmenu twee opties: \'Aanwijzingen\' of \'Toon op kaart\'.
+  <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' → \'Zoek dichtbij hier\'), of met het zoekscherm met \'Menu\' → \'Zoeken\'.
+		\n\nOp het zoekscherm kunt u zoeken:
+		\n\t* op adres
+		\n\t* op coördinaten
+		\n\t* interessepunten (type of op naam)
+		\n\t* uit de zoekgeschiedenis
+		\n\t* in de favorieten
+Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het op de kaart te tonen, etc.
 	</string>
   <string name="tip_map_context_menu">Menu \'Gebruik locatie\'</string>
-  <string name="tip_map_context_menu_t">\tHet kaart-contextmenu is beschikbaar door een lange druk op de kaart, door op de trackballknop te drukken, of middels \'Menu\' -&gt; \'Gebruik locatie…\' (de laatste twee gebruiken het midden van de kaart als referentiepunt).
-		\n\tDit toont een venster met de puntcoördinaten. Druk erop om het kaartcontextmenu te openen. (Een lange druk verbergt het venster weer.)
-		\n\tHet kaartcontextmenu bevat alle acties met betrekking tot een punt (locatie).
+  <string name="tip_map_context_menu_t">\tHet kaart-contextmenu biedt alle acties die te maken hebben met een punt op de kaart.
+		\n\nHet wordt getoond als u op een punt op de kaart drukt en dan op de markering tikt, of door op de trackball-knop te drukken, of via \'Menu\' → \'Gebruik locatie\'.
+		\n\tDe laatste twee manieren gebruiken het midden van de kaart als locatie.
+		\n\tEen markering kan worden gesloten door er lang op te drukken.
 	</string>
   <string name="tip_initial">Tips and Trucs</string>
   <string name="tip_initial_t">OsmAnd is een navigatieprogramma met vele mogelijkheden.
@@ -673,8 +680,8 @@
   <string name="fav_points_edited">Favoriet punt is bewerkt</string>
   <string name="fav_points_not_exist">Er zijn geen favoriete punten</string>
   <string name="update_existing">Vervang</string>
-  <string name="only_show">Alleen tonen</string>
-  <string name="follow">Volg</string>
+  <string name="only_show">Toon route</string>
+  <string name="follow">Start navigatie</string>
   <string name="recalculate_route_to_your_location">Soort vervoer:</string>
   <string name="mark_final_location_first">Kies eerst een bestemming</string>
   <string name="get_directions">Aanwijzingen</string>
@@ -1554,7 +1561,15 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="edit_tilesource_name">Naam</string>
     <string name="maps_define_edit">Definieer/bewerk…</string>
 	<string name="tip_recent_changes_1_6_t">Veranderingen in 1.6:
+	\n\t* Geheel transparante achtergrond mogelijk
+	\n\t* Ondersteuning voor Full HD apparaten
+	\n\t* Download kaarten direct vanaf het kaartscherm
+	\n\t* Download SRTM-bestanden per land
+	\n\t* Geheel nieuwe basiskaart met grote wegen, bossen en spoorlijnen
+	\n\t* Vergrootglas (lang drukken op de zoomknop) - handig voor rasterkaarten
 	\n\t* Definieer/bewerk online kaartsegmentbron (specificeer verlooptijd)
+	\n\t* Adressen sneller in te voeren
+	\n\t* Fouten verholpen in routeberekening en kaartweergave
     </string>
     <string name="about_version">Versie:</string>
     <string name="about_settings">Over</string>
