@@ -1600,7 +1600,15 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="local_index_tile_data_name">Delkortdata: %1$s</string>
     <string name="edit_tilesource_successfully">Delkortkilden %1$s er gemt</string>
     <string name="tip_recent_changes_1_6_t">Ændringer i 1.6 :
+\n * Understøtter helt gennemsigtig baggrund
+\n * understøtte fuld HD-enheder
+\n * Hent og overblik regioner direkte fra kortvisning
+\n * Hent SRTM filer til specifikt land
+\n * Helt ny verdenskortet med større veje, skove og jernbaner
+\n * Kort lup (langt tryk på zoom -knappen) - nyttig for raster kort
 \n * Definer/rediger online delkortkilde (angiv udløbstid)
+\n * Hurtigere adresse indtastning
+\n * Fejlrettelser til ruteplanlægning og optegning
     </string>
     <string name="about_version">Version:</string>
     <string name="about_settings">Om</string>
