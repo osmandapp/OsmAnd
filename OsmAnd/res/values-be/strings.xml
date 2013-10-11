@@ -62,7 +62,6 @@
     <string name="route_descr_map_location">Мапа:</string>
     <string name="route_descr_lat_lon">%1$.3f шыр., %2$.3f даў.</string>
     <string name="route_descr_current_location">Гэтае месца</string>
-    <string name="route_descr_destination"/>
     <string name="route_to">Да:</string>
     <string name="route_via">Праз:</string>
     <string name="route_from">Ад:</string>
@@ -208,7 +207,7 @@
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd\'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Вымярэньне адлегласьці</string>
-    <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \&quot;Use location …\&quot; to assign a note to the specified location</string>
+    <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location …\" to assign a note to the specified location</string>
     <string name="monitoring_control_stop">stop</string>
     <string name="map_widget_audionotes">Audio notes</string>
     <string name="audionotes_plugin_description">Запісваць аўдыё/відэа нататкі падчас вандроўкі.</string>
@@ -631,7 +630,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="rendering_attr_noPolygons_name">Схаваць палігоны</string>
 	<string name="rendering_attr_appMode_name">Рэжым візуалізацыі</string>
 	<string name="rendering_attr_appMode_description">Optimize map for</string>
-	<!-- string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate contour data needed.</string -->
 	<string name="rendering_attr_contourLines_description">Display from zoom level (requires contour data):</string>
 	<string name="rendering_attr_contourLines_name">Паказваць лініі контуру</string>
 	<string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string>
@@ -1055,7 +1053,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\nAfter saving a Favorite, it is accessible via \'Menu\' → \'Favorites\'. Tapping on any entry in the \'Favorites\' list provides options like to navigate to it, edit or delete it.
 		\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' in \'Menu\' → \'Map layers\'.
 	</string>
-	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="error_doing_search">Error occurred in offline search</string>
 	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
 	<string name="search_osm_offline">Search geo location</string>
