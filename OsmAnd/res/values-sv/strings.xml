@@ -1266,8 +1266,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="about_settings">Om</string>
     <string name="about_settings_descr">Versionsinformation, licenser, projektmedlemmar</string>
     <string name="tips_and_tricks">Tips</string>
-    <string name="tip_recent_changes_1_6_t">Förändringar i 1.6:↵
-→\n\t* Definiera/Redigera online-kartbitskälla (ange förfallotid)↵
+    <string name="tip_recent_changes_1_6_t">Förändringar i 1.6:
+	\n\t* Definiera/Redigera online-kartbitskälla (ange förfallotid)
     </string>
     <string name="local_index_tile_data_zooms">Zoom nedladdade: %1$s</string>
     <string name="local_index_tile_data_expire">Förfallotid (minuter): %1$s</string>
