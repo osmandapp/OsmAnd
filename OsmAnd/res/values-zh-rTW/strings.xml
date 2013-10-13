@@ -1552,7 +1552,15 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="driving_region">駕駛區域</string>
 	<string name="map_widget_fps_info">FPS 除錯資訊</string>
 	<string name="tip_recent_changes_1_6_t">在1.6的變更：
-	\n\t* 定義/編輯線上圖磚來源 (指定失效時間)
+    \n\t* 支援完全透明的背景
+    \n\t* 支援 Full HD 裝置
+    \n\t* 直接從地圖檢視下載及概覽地區
+    \n\t* 下載特定國家的 SRTM 檔案  
+    \n\t* 全新的世界地圖與主要道路、森林和鐵路
+    \n\t* 地圖放大鏡 （長按縮放按鈕）- 非常好用的光柵地圖
+    \n\t* 定義/編輯線上圖磚來源 (指定失效時間)
+    \n\t* 更快的地址輸入
+    \n\t* 路線和繪製的錯誤修復
     </string>
     <string name="local_index_tile_data_zooms">縮放已下載：%1$s</string>
     <string name="local_index_tile_data_expire">有效時間(分鐘)：%1$s</string>
@@ -1586,4 +1594,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="route_distance_settings_descr">組態地圖檢視距離 (TODO naming)</string>
     <string name="route_distance_settings">地圖檢視距離 (TODO naming)</string>
     <string name="map_magnifier">地圖放大鏡</string>
+    <string name="route_distance_farest">Farest</string>
     </resources>
