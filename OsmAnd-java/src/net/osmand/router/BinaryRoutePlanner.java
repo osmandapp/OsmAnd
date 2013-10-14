@@ -691,9 +691,9 @@ public class BinaryRoutePlanner {
 					
 					graphSegments.add(next);
 				}
-				if (ctx.visitor != null) {
+//				if (ctx.visitor != null) {
 //					ctx.visitor.visitSegment(next, false);
-				}
+//				}
 			} else if(!sameRoadFutureDirection){
 				// the segment was already visited! We need to follow better route if it exists
 				// that is very strange situation and almost exception (it can happen when we underestimate distnceToEnd)
@@ -708,9 +708,9 @@ public class BinaryRoutePlanner {
 					next.distanceFromStart = distFromStart;
 					next.setParentRoute(segment);
 					next.setParentSegmentEnd(segmentEnd);
-					if (ctx.visitor != null) {
+//					if (ctx.visitor != null) {
 //						ctx.visitor.visitSegment(next, false);
-					}
+//					}
 				}
 			}
 

@@ -54,49 +54,57 @@ public class RoutePlannerFrontEnd {
 		if (dataObjects.isEmpty()) {
 			ctx.loadTileData(px, py, 15, dataObjects);
 		}
-		RouteSegment road = null;
+		// Candidate.
+		RouteDataObject road = null;
+		int candidatex = -1;
+		int candidatey = -1;
+		int candidateIndex = -1;
 		double sdist = 0;
-		int foundProjX = 0;
-		int foundProjY = 0;
-
+		
 		for (RouteDataObject r : dataObjects) {
 			if (r.getPointsLength() > 1) {
 				for (int j = 1; j < r.getPointsLength(); j++) {
-					double mDist = squareRootDist(r.getPoint31XTile(j), r.getPoint31YTile(j), r.getPoint31XTile(j - 1),
-							r.getPoint31YTile(j - 1));
-					int prx = r.getPoint31XTile(j);
-					int pry = r.getPoint31YTile(j);
-					double projection = calculateProjection(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j),
-							r.getPoint31YTile(j), px, py);
+					int p0x = r.getPoint31XTile(j-1);
+					int p0y = r.getPoint31YTile(j-1);
+					int p1x = r.getPoint31XTile(j);
+					int p1y = r.getPoint31YTile(j);
+					double sDist = squareDist(p0x, p0y, p1x, p1y);
+					// Really bad and visible situation for projection point.
+					int prx = -1;
+					int pry = -1;
+					double projection = calculateProjection(p0x, p0y, p1x, p1y, px, py);
 					if (projection < 0) {
-						prx = r.getPoint31XTile(j - 1);
-						pry = r.getPoint31YTile(j - 1);
-					} else if (projection >= mDist * mDist) {
-						prx = r.getPoint31XTile(j);
-						pry = r.getPoint31YTile(j);
+						prx = p0x;
+						pry = p0y;
+					} else if (projection >= sDist) {
+						prx = p1x;
+						pry = p1y;
 					} else {
-						prx = (int) (r.getPoint31XTile(j - 1) + (r.getPoint31XTile(j) - r.getPoint31XTile(j - 1))
-								* (projection / (mDist * mDist)));
-						pry = (int) (r.getPoint31YTile(j - 1) + (r.getPoint31YTile(j) - r.getPoint31YTile(j - 1))
-								* (projection / (mDist * mDist)));
+						double ratio = projection/sDist;
+						prx = (int) (p0x + (p1x - p0x) * ratio);
+						pry = (int) (p0y + (p1y - p0y) * ratio);
 					}
 					double currentsDist = squareDist(prx, pry, px, py);
-					if (road == null || currentsDist < sdist) {
-						RouteDataObject ro = new RouteDataObject(r);
-						road = new RouteSegment(ro, j);
-						ro.insert(j, prx, pry);
+					if (currentsDist < sdist || road == null) {
 						sdist = currentsDist;
-						foundProjX = prx;
-						foundProjY = pry;
+						road = r;
+						candidatex = prx;
+						candidatey = pry;
+						candidateIndex = j;
 					}
 				}
 			}
 		}
+		
+		RouteSegment result = null;
 		if (road != null) {
+			RouteDataObject r = new RouteDataObject(road);
+			r.insert(candidateIndex, candidatex, candidatey);
+			result = new RouteSegment(r, candidateIndex);
 			// re-register the best road because one more point was inserted
-			ctx.registerRouteDataObject(road.getRoad());
+			ctx.registerRouteDataObject(result.getRoad());
 		}
-		return road;
+		return result;
 	}
 	
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates, boolean leftSideNavigation) throws IOException, InterruptedException {
