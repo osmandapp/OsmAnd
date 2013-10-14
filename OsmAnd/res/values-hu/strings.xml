@@ -1328,7 +1328,15 @@
     <string name="about_settings_descr">Verzióinfó, licencek, csapattagok</string>
     <string name="tips_and_tricks">Tippek</string>
     <string name="tip_recent_changes_1_6_t">Az 1.6 kiadás újdonságai:
-	\n\t* Online csempeforrások módosítása/szerkesztése (lejárati idő megadása)
+    \n\t* Teljesen átlátszó térképháttér támogatása
+    \n\t* FullHD eszköztámogatás
+    \n\t* Régiók letöltése és áttekintése közvetlenül a térképnézetből
+    \n\t* SRTM szintvonalfájlok letöltése országonként
+    \n\t* Vadonatúj világtérkép, fontosabb utakkal, erdőkkel, vasutakkal
+    \n\t* Térképnagyító (hosszú kattintás a zoom gombon) - raszteres térképeken nagyon hasznos
+    \n\t* Online csempeforrások módosítása/szerkesztése (lejárati idő megadása)
+    \n\t* Gyorsabb címbevitel
+    \n\t* Útvonaltervezéssel és a megjelenítéssel kapcsolatos hibajavítások
     </string>
     <string name="local_index_tile_data_zooms">Letöltött zoomszintek: %1$s</string>
     <string name="local_index_tile_data_expire">Lejárat (perc): %1$s</string>
@@ -1352,4 +1360,8 @@
 		\n\t* A \'Winter and ski\' hó borított téli tájképet készít, és megjeleníti a sípályákat és -lifteket (\'World ski\' térkép letöltése szükséges hozzá)
 	</string>
     <string name="base_world_map">alap világtérkép</string>
-	</resources>
+	<string name="route_distance_close">Közel</string>
+    <string name="route_distance_far">Távol</string>
+    <string name="route_distance_farest">Legtávolabb</string>
+    <string name="map_magnifier">Térképnagyító</string>
+    </resources>
