@@ -27,7 +27,7 @@ public class BinaryRoutePlanner {
 	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlanner.class);
 	
 	private static final int ROUTE_POINTS = 11;
-	private static final boolean TRACE_ROUTING = false;
+	private static final boolean TRACE_ROUTING = true;
 	
 	
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {

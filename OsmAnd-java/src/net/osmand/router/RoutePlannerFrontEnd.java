@@ -19,7 +19,7 @@ import org.apache.commons.logging.Log;
 public class RoutePlannerFrontEnd {
 	
 	private boolean useOldVersion;
-	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlannerOld.class);
+	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
 
 	public RoutePlannerFrontEnd(boolean useOldVersion) {
 		this.useOldVersion = useOldVersion;
