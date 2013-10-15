@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_select_destination_point">Uzyskiwanie informacji o trasie</string>
   <string name="tip_select_destination_point_t">"\tTrasę przejazdu do wybranego punktu możesz zobaczyć bezpośrednio na mapie (menu kontekstowe, następnie \'Trasa\'), podczas wyszukiwania lub po długim naciśnięciu na wpis z listy ulubionych punktów.
 \n\tPunkt docelowy oznaczony jest pomarańczową flagą na mapie. OsmAnd wyświetla odległość i kierunek do niej (pomarańczowy trójkąt). "</string>
@@ -1548,4 +1548,11 @@ Orientacyjny zasięg map i ich jakość:↵
 Lista krajów obsługiwanych (w zasadzie na cały świat!):↵
 Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Antigua i Barbuda, Antyle Holenderskie, Arabia Saudyjska, Argentyna, Armenia, Aruba, Australia, Austria, Azerbejdżan, Bahamy, Bahrajn, Bangladesz, Barbados, Belgia, Belize, Benin, Bermudy, Bhutan, Białoruś, Boliwia, Bonaire, Bośnia i Hercegowina, Botswana, Brazylia, Brunei, Brytyjskie Wyspy Dziewicze, Bułgaria, Burkina Faso, Burundi, Chile, Chiny, Chorwacja, Curaçao, Cypr, Czad, Czarnogóra, Czechy, Dania, Dominika, Dominikana, Dżibuti, Egipt, Ekwador, Erytrea, Estonia, Etiopia, Fidżi, Filipiny, Finlandia, Francja, Gabon, Gambia, Georgia Południowa, Ghana, Gibraltar, Grecja, Grenada, Grenlandia, Gruzja, Guam, Guernsey, Gujana Francuska, Gujana, Gwadelupa, Gwatemala, Gwinea Bissau, Gwinea Równikowa, Gwinea, Haiti, Hiszpania, Holandia, Honduras, Hong Kong, Indie, Indonezja, Irak, Iran, Irlandia, Islandia, Izrael, Jamajka, Japonia, Jemen, Jersey, Jordania, Kambodża, Kamerun, Kanada, Katar, Kazachstan, Kenia, Kirgistan, Kiribati, Kolumbia, Komory, Kongo, Korea Północna i Korea Południowa, Kostaryka , Kuba, Kuwejt, Laos, Lesotho, Liban, Liberia , Libia, Liechtenstein, Litwa, Luksemburg, Łotwa, Macedonia, Madagaskar, Majotta, Makao, Malawi, Malediwy, Malezja, Mali, Malta, Maroko, Martynika, Mauretania, Mauritius, Meksyk, Mikronezja, Mołdawia, Monako, Mongolia, Montserrat, Mozambik , Myanmar, Namibia, Nauru, Nepal, Niemcy, Niger, Nigeria, Nikaragua, Norwegia, Nowa Kaledonia, Nowa Zelandia, Oman, Pakistan, Palau, Palestyna, Panama, Papua Nowa Gwinea, Paragwaj, Peru, Polinezja Francuska, Polska, Południowy Sudan, Portugalia, Puerto Rico, Republika Środkowoafrykańska, Republika Vanuatu, Republika Zielonego Przylądka, Rosja, Rumunia, Rwanda, Sahara Zachodnia, Saint Helena, Saint Kitts i Nevis, Saint Lucia, Saint Martin, Saint Vincent i Grenadyny, Saint-Barthélemy, Saint-Pierre i Miquelon, Salwador, Samoa, San Marino, Senegal, Serbia, Seszele, Sierra Leone, Singapur, Słowacja, Słowenia, Somalia, Sri Lanka, Stany Zjednoczone Ameryki (USA), Suazi, Sudan, Surinam, Syria, Szwajcaria, Szwecja, Tadżykistan, Tajlandia , Tajwan, Tanzania, Timor Wschodni, Togo, Tokelau, Tonga, Trynidad i Tobago, Tunezja, Turcja, Turkmenistan, Tuvalu, Uganda, Ukraina, Urugwaj, Uzbekistan, Wallis i Futuna, Watykan, Wenezuela, Węgry, Wielka Brytania (UK), Wietnam, Włochy, Wybrzeże Kości Słoniowej, Wyspa Man, Zambia, Zimbabwe, Zjednoczone Emiraty Arabskie.
 	</string>
-	</resources>
+	<string name="route_distance_close">Zamknij</string>
+    <string name="base_world_map">Podstawowa mapa świata</string>
+	<string name="route_distance_farest">Najdalej</string>
+    <string name="route_distance_far">Daleko</string>
+    <string name="route_distance_settings">Odległość widoku mapy (TODO naming)</string>
+    <string name="map_magnifier">Lupa mapy</string>
+    <string name="route_distance_settings_descr">Skonfiguruj odległość widoku mapy (TODO naming)</string>
+    </resources>
