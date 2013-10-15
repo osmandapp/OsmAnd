@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использование в оффлайн режиме.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -618,7 +618,7 @@
   <string name="route_general_information">Общая протяженность = %1$s, время в пути = %2$d ч. %3$d мин.</string>
   <string name="router_service_descr">Выберите сервис для прокладки маршрута</string>
   <string name="router_service">Прокладка маршрута</string>
-  <string name="sd_dir_not_accessible">Директория на SD-носителе не доступна для сохранения</string>
+  <string name="sd_dir_not_accessible">Директория на SD-карте не доступна для сохранения</string>
   <string name="download_question">Вы хотите загрузить {0} - {1} ?</string>
   <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите её обновить ({2}) ?</string>
   <string name="address">Адрес</string>
@@ -1097,7 +1097,7 @@
     <string name="download_srtm_maps">Карты SRTM</string>
     <string name="av_settings">Настройки аудио и видео </string>
     <string name="intermediate_points_change_order">Изменить порядок</string>
-    <string name="animate_routing_using_gpx">Использовать существующий файл GPX?</string>
+    <string name="animate_routing_using_gpx">Открыть файл GPX и следовать?</string>
     <string name="recording_context_menu_show">Отобразить</string>
     <string name="av_def_action_picture">Сделать фото</string>
     <string name="recording_context_menu_precord">Сделать фото</string>
@@ -1278,16 +1278,18 @@
 	<string name="local_index_tile_data_expire">Время действия (в минутах): %1$s</string>
     <string name="local_index_tile_data_downloadable">Загружаемые: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Максимальное увеличение: %1$s</string>
-    <string name="edit_tilesource_successfully">Источник таTilesource %1$s is successfully saved</string>
+    <string name="edit_tilesource_successfully">Источник тайлов %1$s успешно сохранён</string>
     <string name="edit_tilesource_maxzoom">Максимальное увеличение</string>
     <string name="edit_tilesource_minzoom">Минимальное увеличение</string>
-    <string name="edit_tilesource_url_to_load">Адрес:</string>
-    <string name="edit_tilesource_name">Название</string>
-    <string name="map_widget_fps_info">Отладочная информация FPS </string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_name">Имя</string>
+    <string name="map_widget_fps_info">Отладочная информация FPS</string>
 	<string name="about_settings">О программе</string>
     <string name="about_settings_descr">Информация о версии, участниках проекта</string>
     <string name="tips_and_tricks">Советы</string>
     <string name="local_index_tile_data_zooms">Загружено данных по масштабам: %1$s</string>
     <string name="local_index_tile_data_minzoom">Минимальное увеличение: %1$s</string>
     <string name="local_index_tile_data_name">Данные о тайлах: %1$s</string>
+    <string name="base_world_map">Обзорная карта мира</string>
+	<string name="edit_tilesource_expiration_time">Осталось минут:</string>
     </resources>
