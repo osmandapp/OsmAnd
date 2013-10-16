@@ -17,8 +17,6 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.graphics.Rect;
-import android.graphics.RectF;
 
 public class RouteLayer extends OsmandMapLayer {
 	
@@ -77,20 +75,20 @@ public class RouteLayer extends OsmandMapLayer {
 	}
 	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		path.reset();
 		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
-			paint.setColor(getColor(nightMode));
-			int w = tb.getPixWidth();
-			int h = tb.getPixHeight();
+			paint.setColor(getColor(settings));
+			int w = tileBox.getPixWidth();
+			int h = tileBox.getPixHeight();
 			Location lastProjection = helper.getLastProjection();
 			final RotatedTileBox cp ;
 			if(lastProjection != null &&
-					tb.containsLatLon(lastProjection.getLatitude(), lastProjection.getLongitude())){
-				cp = tb.copy();
+					tileBox.containsLatLon(lastProjection.getLatitude(), lastProjection.getLongitude())){
+				cp = tileBox.copy();
 				cp.increasePixelDimensions(w /2, h);
 			} else {
-				cp = tb;
+				cp = tileBox;
 			}
 
 			final QuadRect latlonRect = cp.getLatLonBounds();
@@ -100,9 +98,13 @@ public class RouteLayer extends OsmandMapLayer {
 			double rightLongitude = latlonRect.right;
 			double lat = topLatitude - bottomLatitude + 0.1;
 			double lon = rightLongitude - leftLongitude + 0.1;
-			drawLocations(tb, canvas, topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);
+			drawLocations(tileBox, canvas, topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);
 		}
+	
 	}
+	
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {}
 
 
 	private void drawSegment(RotatedTileBox tb, Canvas canvas) {

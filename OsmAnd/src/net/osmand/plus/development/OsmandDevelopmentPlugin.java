@@ -61,7 +61,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 					if(!mv.isMeasureFPS()) {
 						mv.setMeasureFPS(true);
 					}
-					setText(Integer.toString((int) mv.getFPS()), "FPS");
+					setText("", Integer.toString((int) mv.getFPS()) + "/"
+							+ Integer.toString((int) mv.getSecondaryFPS())
+							+ " FPS");
 					return true;
 				}
 			};

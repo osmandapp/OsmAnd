@@ -27,12 +27,16 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.AttributeSet;
@@ -50,6 +54,8 @@ import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
+	private static final int MAP_REFRESH_MESSAGE = 1;
+	private static final int BASE_REFRESH_MESSAGE = 2;
 	protected final static int LOWEST_ZOOM_TO_ROTATE = 9;
 	private boolean MEASURE_FPS = false;
 	private FPSMeasurement main = new FPSMeasurement();
@@ -89,8 +95,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	protected static final Log log = PlatformUtil.getLog(OsmandMapTileView.class);
+	
 
 	private RotatedTileBox currentViewport;
+	
 	private float rotate; // accumulate
 
 	private int mapPosition;
@@ -115,7 +123,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	// UI Part
 	// handler to refresh map (in ui thread - ui thread is not necessary, but msg queue is required).
-	protected Handler handler = new Handler();
+	protected Handler handler ;
+	private Handler baseHandler;
 
 	private AnimateDraggingMapThread animatedDraggingThread;
 
@@ -131,6 +140,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private DisplayMetrics dm;
 
 	private final OsmandApplication application;
+	
+	protected OsmandSettings settings = null;
+	
+	private Bitmap bufferBitmap;
+	private RotatedTileBox bufferImgLoc;
+	private Bitmap bufferBitmapTmp;
+	
+	private Paint paintImg;
+	
 
 	public OsmandMapTileView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -170,13 +188,21 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		paintCenter.setColor(Color.rgb(60, 60, 60));
 		paintCenter.setStrokeWidth(2);
 		paintCenter.setAntiAlias(true);
+		
+		paintImg = new Paint();
+//		paintImg.setFilterBitmap(true);
+//		paintImg.setDither(true);
 
 		setClickable(true);
 		setLongClickable(true);
 		setFocusable(true);
 
-		getHolder().addCallback(this);
 
+		handler = new Handler();
+		HandlerThread ht = new HandlerThread("RenderingBaseImage");
+		ht.start();
+		baseHandler = new Handler(ht.getLooper());
+		getHolder().addCallback(this);
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
 		gestureDetector = new GestureDetector(getContext(), new MapExplorer(this, new MapTileViewOnGestureListener()));
 		multiTouchSupport = new MultiTouchSupport(getContext(), new MapTileViewMultiTouchZoomListener());
@@ -355,7 +381,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		this.mapPosition = type;
 	}
 	
-	protected OsmandSettings settings = null;
 	public OsmandSettings getSettings(){
 		if(settings == null){
 			settings = getApplication().getSettings();
@@ -363,13 +388,64 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return settings;
 	}
 	
+	private void drawBasemap(Canvas canvas) {
+		if(bufferImgLoc != null) {
+			float rot = - bufferImgLoc.getRotate();
+			final LatLon lt = bufferImgLoc.getLeftTopLatLon();
+			final LatLon rb = bufferImgLoc.getRightBottomLatLon();
+			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
+			final RotatedTileBox calc = currentViewport.copy();
+			calc.setRotate(bufferImgLoc.getRotate());
+			final int x1 = calc.getPixXFromLatLon(lt.getLatitude(), lt.getLongitude());
+			final int x2 = calc.getPixXFromLatLon(rb.getLatitude(), rb.getLongitude());
+			final int y1 = calc.getPixYFromLatLon(lt.getLatitude(), lt.getLongitude());
+			final int y2 = calc.getPixYFromLatLon(rb.getLatitude(), rb.getLongitude());
+			if(!bufferBitmap.isRecycled()){
+				canvas.drawBitmap(bufferBitmap, null, new RectF(x1, y1, x2, y2), paintImg);
+			}
+			canvas.rotate(-rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
+		}
+	}
+	
 	private void refreshBaseMapInternal(RotatedTileBox tileBox, DrawSettings drawSettings) {
-//		bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
-		
+		if(tileBox.getPixHeight() == 0 || tileBox.getPixWidth() == 0){
+			return;
+		}
+		baseHandler.removeMessages(BASE_REFRESH_MESSAGE);
+		if(bufferBitmapTmp == null || tileBox.getPixHeight() != bufferBitmapTmp.getHeight()
+				|| tileBox.getPixWidth() != bufferBitmapTmp.getWidth()) {
+			bufferBitmapTmp = Bitmap.createBitmap(tileBox.getPixWidth(), tileBox.getPixHeight(), Config.RGB_565);
+		}
+		long start = SystemClock.elapsedRealtime();
+		final QuadPoint c = tileBox.getCenterPixelPoint();
+		Canvas canvas = new Canvas(bufferBitmapTmp);
+		fillCanvas(canvas, drawSettings);
+		for (int i = 0; i < layers.size(); i++) {
+			try {
+				OsmandMapLayer layer = layers.get(i);
+				canvas.save();
+				// rotate if needed
+				if (!layer.drawInScreenPixels()) {
+					canvas.rotate(tileBox.getRotate(), c.x, c.y);
+				}
+				layer.onPrepareBufferImage(canvas, tileBox, drawSettings);
+				canvas.restore();
+			} catch (IndexOutOfBoundsException e) {
+				// skip it
+			}
+		}
+		Bitmap t = bufferBitmap;
+		synchronized (this) {
+			bufferImgLoc = tileBox;
+			bufferBitmap = bufferBitmapTmp;
+			bufferBitmapTmp = t;	
+		}
+		long end = SystemClock.elapsedRealtime();
+		additional.calculateFPS(start, end);
 	}
 
-	private void refreshMapInternal(boolean updateVectorRendering) {
-		handler.removeMessages(1);
+	private void refreshMapInternal(DrawSettings drawSettings) {
+		handler.removeMessages(MAP_REFRESH_MESSAGE);
 		SurfaceHolder holder = getHolder();
 		long ms = SystemClock.elapsedRealtime();
 		synchronized (holder) {
@@ -383,15 +459,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 						currentViewport.setPixelDimensions(getWidth(), getHeight(), 0.5f, ratioy);
 					}
 					// make copy to avoid concurrency 
-					boolean nightMode = application.getDaynightHelper().isNightMode();
 					RotatedTileBox viewportToDraw = currentViewport.copy();
-					DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering);
-					if (nightMode) {
-						canvas.drawARGB(255, 100, 100, 100);
-					} else {
-						canvas.drawARGB(255, 225, 225, 225);
-					}
-					drawOverMap(canvas, viewportToDraw, drawSettings, false);
+					fillCanvas(canvas, drawSettings);
+					drawOverMap(canvas, viewportToDraw, drawSettings);
 				} finally {
 					holder.unlockCanvasAndPost(canvas);
 				}
@@ -401,6 +471,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			}
 		}
 	}
+
+	private void fillCanvas(Canvas canvas, DrawSettings drawSettings) {
+		if (drawSettings.isNightMode()) {
+			canvas.drawARGB(255, 100, 100, 100);
+		} else {
+			canvas.drawARGB(255, 225, 225, 225);
+		}
+	}
+
 
 	public boolean isMeasureFPS() {
 		return MEASURE_FPS;
@@ -417,39 +496,61 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return additional.fps;
 	}
 	
-	private void drawOverMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings, boolean
-	                         onPrepareImage) {
+	private void drawOverMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		final QuadPoint c = tileBox.getCenterPixelPoint();
-
-		// long prev = System.currentTimeMillis();
+		synchronized (this) {
+			if (bufferBitmap != null && !bufferBitmap.isRecycled()) {
+				canvas.save();
+				canvas.rotate(tileBox.getRotate(), c.x, c.y);
+				drawBasemap(canvas);
+				canvas.restore();
+			}
+		}
 
 		for (int i = 0; i < layers.size(); i++) {
 			try {
-				
 				OsmandMapLayer layer = layers.get(i);
 				canvas.save();
 				// rotate if needed
 				if (!layer.drawInScreenPixels()) {
 					canvas.rotate(tileBox.getRotate(), c.x, c.y);
 				}
-				if(onPrepareImage) {
-					layer.onPrepareBufferImage(canvas, tileBox, drawSettings);
-				} else {
-					layer.onDraw(canvas, tileBox, drawSettings);
-				}
+				layer.onDraw(canvas, tileBox, drawSettings);
 				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
 			}
 		}
-		if (showMapPosition && !onPrepareImage) {
+		if (showMapPosition) {
 			canvas.drawCircle(c.x, c.y, 3 * dm.density, paintCenter);
 			canvas.drawCircle(c.x, c.y, 7 * dm.density, paintCenter);
 		}
 	}
 
 	public boolean mapIsRefreshing() {
-		return handler.hasMessages(1);
+		return handler.hasMessages(MAP_REFRESH_MESSAGE);
+	}
+	
+	private void refreshBufferImage(final DrawSettings drawSettings) {
+		if (!baseHandler.hasMessages(BASE_REFRESH_MESSAGE) || drawSettings.isUpdateVectorRendering()) {
+			Message msg = Message.obtain(handler, new Runnable() {
+				@Override
+				public void run() {
+					if(bufferBitmap == null) {
+						System.out.println("St " + System.currentTimeMillis());
+					}
+					baseHandler.removeMessages(BASE_REFRESH_MESSAGE);
+					refreshBaseMapInternal(currentViewport.copy(), drawSettings);
+					sendRefreshMapMsg(drawSettings, 0);
+					if(bufferBitmapTmp == null) {
+						System.out.println("End " + System.currentTimeMillis());
+					}
+				}
+			});
+			msg.what = BASE_REFRESH_MESSAGE;
+			// baseHandler.sendMessageDelayed(msg, 0);
+			baseHandler.sendMessage(msg);
+		}
 	}
 
 	// this method could be called in non UI thread
@@ -459,16 +560,27 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	// this method could be called in non UI thread
 	public void refreshMap(final boolean updateVectorRendering) {
-		if (!handler.hasMessages(1) || updateVectorRendering) {
-			handler.removeMessages(1);
+		boolean nightMode = application.getDaynightHelper().isNightMode();
+		DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering);
+		sendRefreshMapMsg(drawSettings, 20);
+		refreshBufferImage(drawSettings);
+	}
+
+	private void sendRefreshMapMsg(final DrawSettings drawSettings, int delay) {
+		if (!handler.hasMessages(MAP_REFRESH_MESSAGE) || drawSettings.isUpdateVectorRendering()) {
 			Message msg = Message.obtain(handler, new Runnable() {
 				@Override
 				public void run() {
-					refreshMapInternal(updateVectorRendering);
+					handler.removeMessages(MAP_REFRESH_MESSAGE);
+					refreshMapInternal(drawSettings);
 				}
 			});
-			msg.what = 1;
-			handler.sendMessageDelayed(msg, 20);
+			msg.what = MAP_REFRESH_MESSAGE;
+			if (delay > 0) {
+				handler.sendMessageDelayed(msg, delay);
+			} else {
+				handler.sendMessage(msg);
+			}
 		}
 	}
 

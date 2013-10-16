@@ -70,18 +70,17 @@ public class GPXLayer extends OsmandMapLayer {
 		return cachedColor;
 	}
 	
-	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		GPXFile gpxFile = view.getApplication().getGpxFileToDisplay();
 		if(gpxFile == null){
 			return;
 		}
 		List<List<WptPt>> points = gpxFile.processedPointsToDisplay;
 		
-		paint.setColor(getColor(nightMode));
+		paint.setColor(getColor(settings));
 
-		final QuadRect latLonBounds = tb.getLatLonBounds();
+		final QuadRect latLonBounds = tileBox.getLatLonBounds();
 		for (List<WptPt> l : points) {
 			path.rewind();
 			int startIndex = -1;
@@ -95,16 +94,19 @@ public class GPXLayer extends OsmandMapLayer {
 					}
 				} else if (!(latLonBounds.left <= ls.lon + 0.1 && ls.lon - 0.1 <= latLonBounds.right
 						&& latLonBounds.bottom <= ls.lat + 0.1 && ls.lat - 0.1 <= latLonBounds.top)) {
-					drawSegment(canvas, tb, l, startIndex, i);
+					drawSegment(canvas, tileBox, l, startIndex, i);
 					startIndex = -1;
 				}
 			}
 			if (startIndex != -1) {
-				drawSegment(canvas, tb, l, startIndex, l.size() - 1);
+				drawSegment(canvas, tileBox, l, startIndex, l.size() - 1);
 				continue;
 			}
 		}
-		
+	}
+	
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
 
 

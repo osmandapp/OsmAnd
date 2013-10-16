@@ -70,6 +70,12 @@ public class MapVectorLayer extends BaseMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tilesRect, DrawSettings drawSettings) {
+		
+	}
+	
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tilesRect,
+			DrawSettings drawSettings) {
 		if (!visible) {
 			return;
 		}

@@ -1,8 +1,7 @@
 package net.osmand.plus.views;
 
-import android.graphics.Canvas;
-import android.graphics.RectF;
 import net.osmand.data.RotatedTileBox;
+import android.graphics.Canvas;
 
 /**
  * This class is designed to represent adapter for specific map sources

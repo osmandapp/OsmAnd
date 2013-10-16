@@ -10,12 +10,9 @@ import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.resources.TransportIndexRepository.RouteInfoLocation;
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 public class TransportInfoLayer extends OsmandMapLayer {
@@ -58,11 +55,14 @@ public class TransportInfoLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox t, DrawSettings nightMode) {
-		if(routeHelper.routeIsCalculated() && visible){
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {}
+	
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (routeHelper.routeIsCalculated() && visible) {
 			List<RouteInfoLocation> list = routeHelper.getRoute();
-			for(RouteInfoLocation l : list){
-				if(l == null){
+			for (RouteInfoLocation l : list) {
+				if (l == null) {
 					// once l is null in list
 					continue;
 				}
@@ -70,30 +70,31 @@ public class TransportInfoLayer extends OsmandMapLayer {
 				boolean start = false;
 				boolean end = false;
 				List<TransportStop> stops = l.getDirection() ? route.getForwardStops() : route.getBackwardStops();
-				for(int i=0; i<stops.size() && !end;  i++){
+				for (int i = 0; i < stops.size() && !end; i++) {
 					Paint toShow = paintInt;
 					TransportStop st = stops.get(i);
-					if(!start){
-						if(st == l.getStart()){
+					if (!start) {
+						if (st == l.getStart()) {
 							start = true;
 							toShow = paintEnd;
 						}
 					} else {
-						if(st == l.getStop()){
+						if (st == l.getStop()) {
 							end = true;
 							toShow = paintEnd;
 						}
 					}
-					if(start){
+					if (start) {
 						LatLon location = st.getLocation();
-						if (t.containsLatLon(location.getLatitude(), location.getLongitude())) {
-							int x = t.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-							int y = t.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
-							canvas.drawRect(x - getRadius(t), y - getRadius(t), x + getRadius(t), y + getRadius(t), toShow);
+						if (tileBox.containsLatLon(location.getLatitude(), location.getLongitude())) {
+							int x = tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
+							int y = tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+							canvas.drawRect(x - getRadius(tileBox), y - getRadius(tileBox), x + getRadius(tileBox), y
+									+ getRadius(tileBox), toShow);
 						}
 					}
 				}
-				
+
 			}
 		}
 	}

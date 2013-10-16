@@ -16,14 +16,20 @@ import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.*;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -34,7 +40,6 @@ import net.osmand.util.MapUtils;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Bitmap;
@@ -50,9 +55,7 @@ import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -467,8 +470,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			return false;
 		}
 
+		
 		@Override
-		public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 			if (measurementPoints.size() > 0) {
 				path.reset();
 				int marginY = originIcon.getHeight();
@@ -511,6 +515,10 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					}
 				}
 			}
+		}
+		@Override
+		public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+			
 		}
 
 		@Override

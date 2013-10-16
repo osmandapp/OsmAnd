@@ -664,7 +664,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<RouteViewDistance> ROUTE_VIEW_DISTANCE = 
-		new EnumIntPreference<RouteViewDistance>("route_view_distance", RouteViewDistance.FAREST, 
+		new EnumIntPreference<RouteViewDistance>("route_view_distance", RouteViewDistance.FARTHEST, 
 				RouteViewDistance.values()).makeProfile().cache();
 	
 	public final CommonPreference<Boolean> SNAP_TO_ROAD = new BooleanPreference("snap_to_road", false).makeProfile().cache();
@@ -1518,7 +1518,7 @@ public class OsmandSettings {
 	}
 	
 	public enum RouteViewDistance {
-		FAREST(R.string.route_distance_farest, 1f),
+		FARTHEST(R.string.route_distance_farthest, 1f),
 		FAR(R.string.route_distance_far, 1.4f),
 		CLOSE(R.string.route_distance_close, 2f)
 		;

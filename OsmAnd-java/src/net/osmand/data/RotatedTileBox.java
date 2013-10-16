@@ -55,8 +55,8 @@ public class RotatedTileBox {
 		rotateCos = r.rotateCos;
 		rotateSin = r.rotateSin;
 		oxTile = r.oxTile;
-		oyTile =r.oyTile;
-		if (r.tileBounds != null) {
+		oyTile = r.oyTile;
+		if (r.tileBounds != null && r.latLonBounds != null) {
 			tileBounds = new QuadRect(r.tileBounds);
 			latLonBounds = new QuadRect(r.latLonBounds);
 			tileLT = new QuadPoint(r.tileLT);
@@ -404,9 +404,6 @@ public class RotatedTileBox {
 		// thread safe
 		box = box.copy();
 		box.checkTileRectangleCalculated();
-		if(box.zoom != zoom){
-			throw new UnsupportedOperationException();
-		}
 		if(!containsTilePoint(box.tileLB)){
 			return false;
 		}

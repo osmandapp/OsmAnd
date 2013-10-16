@@ -138,12 +138,12 @@ public class RenderingRuleProperty {
 				if(colon != -1) {
 					int c  = 0;
 					if(colon > 0) {
-						c += Integer.parseInt(value.substring(0, colon));
+						c += (int) Float.parseFloat(value.substring(0, colon));
 					}
-					c += Integer.parseInt(value.substring(colon + 1));
+					c += (int) Float.parseFloat(value.substring(colon + 1));
 					return c;
 				}
-				return Integer.parseInt(value);
+				return (int) Float.parseFloat(value);
 			} catch (NumberFormatException e) {
 				log.error("Rendering parse " + value);
 			}
@@ -165,7 +165,7 @@ public class RenderingRuleProperty {
 			try {
 				int colon = value.indexOf(':');
 				if(colon != -1) {
-					return Integer.parseInt(value.substring(colon + 1));
+					return (int) Float.parseFloat(value.substring(colon + 1));
 				}
 				return 0;
 			} catch (NumberFormatException e) {

@@ -80,14 +80,18 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
-		if (tb.getZoom() >= startZoom) {
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+	}
+	
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (tileBox.getZoom() >= startZoom) {
 			DataTileManager<Recording> recs = plugin.getRecordings();
-			final QuadRect tiles = tb.getTileBounds();
+			final QuadRect tiles = tileBox.getTileBounds();
 			List<Recording> objects = recs.getObjects(tiles. top, tiles.left, tiles.bottom, tiles.right);
 			for (Recording o : objects) {
-				int x = tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-				int y = tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+				int x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+				int y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 				Bitmap b;
 				if (o.isPhoto()) {
 					b = photo;

@@ -171,7 +171,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			activity.getMapView().removeLayer(parkingLayer);
 		}
 		parkingLayer = new ParkingPositionLayer(activity, this);
-		activity.getMapView().addLayer(parkingLayer, 4.5f);
+		activity.getMapView().addLayer(parkingLayer, 5.5f);
 		registerWidget(activity);
 	}
 

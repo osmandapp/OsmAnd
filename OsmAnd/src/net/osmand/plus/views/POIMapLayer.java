@@ -7,16 +7,22 @@ import java.util.List;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.*;
+import net.osmand.data.Amenity;
+import net.osmand.data.AmenityType;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.plus.*;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.PoiFilter;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -27,8 +33,6 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.net.Uri;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
@@ -159,18 +163,18 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return (int) (r * tb.getDensity());
 	}
 	
-	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		if (tb.getZoom() >= startZoom) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+
+		if (tileBox.getZoom() >= startZoom) {
 			objects.clear();
-			final QuadRect latLonBounds = tb.getLatLonBounds();
+			final QuadRect latLonBounds = tileBox.getLatLonBounds();
 			resourceManager.searchAmenitiesAsync(latLonBounds.top, latLonBounds.left, latLonBounds.bottom,
-					latLonBounds.right, tb.getZoom(), filter, objects);
-			int r = getRadiusPoi(tb);
+					latLonBounds.right, tileBox.getZoom(), filter, objects);
+			int r = getRadiusPoi(tileBox);
 			for (Amenity o : objects) {
-				int x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				int y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				int x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				int y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 				canvas.drawCircle(x, y, r, pointAltUI);
 				canvas.drawCircle(x, y, r, point);
 				String id = null;
@@ -193,10 +197,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			if (view.getSettings().SHOW_POI_LABEL.get()) {
 				TIntHashSet set = new TIntHashSet();
 				for (Amenity o : objects) {
-					int x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-					int y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-					int tx = tb.getPixXFromLonNoRot(o.getLocation().getLongitude());
-					int ty = tb.getPixYFromLatNoRot(o.getLocation().getLatitude());
+					int x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+					int y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+					int tx = tileBox.getPixXFromLonNoRot(o.getLocation().getLongitude());
+					int ty = tileBox.getPixYFromLatNoRot(o.getLocation().getLatitude());
 					String name = o.getName(view.getSettings().USE_ENGLISH_NAMES.get());
 					if (name != null && name.length() > 0) {
 						int lines = 0;
@@ -224,7 +228,12 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				}
 			}
 		}
+	
 	}
+	
+	
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {}
 	
 	private int division(int x, int y, int sx, int sy) {
 		// make numbers positive

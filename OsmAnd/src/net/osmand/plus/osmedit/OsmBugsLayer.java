@@ -15,8 +15,11 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.*;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
@@ -31,7 +34,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -41,10 +43,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.DisplayMetrics;
 import android.util.Xml;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -144,19 +144,22 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		if (tb.getZoom() >= startZoom) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (tileBox.getZoom() >= startZoom) {
 			// request to load
-			final QuadRect latLonBounds = tb.getLatLonBounds();
-			requestToLoad(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, tb.getZoom());
+			final QuadRect latLonBounds = tileBox.getLatLonBounds();
+			requestToLoad(latLonBounds.top, latLonBounds.left, latLonBounds.bottom, latLonBounds.right, tileBox.getZoom());
 			for (OpenStreetNote o : objects) {
-				int x = tb.getPixXFromLonNoRot(o.getLongitude());
-				int y = tb.getPixYFromLatNoRot(o.getLatitude());
-				canvas.drawCircle(x, y, getRadiusBug(tb), o.isLocal() ? pointNotSubmitedUI : (o.isOpened() ? pointOpenedUI
+				int x = tileBox.getPixXFromLonNoRot(o.getLongitude());
+				int y = tileBox.getPixYFromLatNoRot(o.getLatitude());
+				canvas.drawCircle(x, y, getRadiusBug(tileBox), o.isLocal() ? pointNotSubmitedUI : (o.isOpened() ? pointOpenedUI
 						: pointClosedUI));
 			}
-
 		}
+	}
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		
 	}
 	
 	public int getRadiusBug(RotatedTileBox tb) {

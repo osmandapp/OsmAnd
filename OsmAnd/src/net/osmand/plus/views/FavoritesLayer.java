@@ -71,15 +71,19 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	
 	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		if (tb.getZoom() >= startZoom) {
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+	}
+	
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (tileBox.getZoom() >= startZoom) {
 			// request to load
-			final QuadRect latLonBounds = tb.getLatLonBounds();
+			final QuadRect latLonBounds = tileBox.getLatLonBounds();
 			for (FavouritePoint o : favorites.getFavouritePoints()) {
 				if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left
 						&& o.getLongitude() <= latLonBounds.right ) {
-					int x = tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-					int y = tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+					int x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+					int y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
 							y - favoriteIcon.getHeight(), paint);
 				}

@@ -1,11 +1,33 @@
 package net.osmand.plus.views;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import net.osmand.IndexConstants;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.map.OsmandRegions;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.DownloadIndexActivity;
+import net.osmand.plus.activities.OsmandIntents;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
@@ -15,23 +37,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import net.osmand.IndexConstants;
-import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.data.QuadRect;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.map.OsmandRegions;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.DownloadIndexActivity;
-import net.osmand.plus.activities.OsmandIntents;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
-import java.io.IOException;
-import java.util.*;
 
 public class DownloadedRegionsLayer extends OsmandMapLayer {
+
+	private static final int ZOOM_THRESHOLD = 2;
 
 	private OsmandMapTileView view;
 
@@ -39,15 +48,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 
 	private Path path;
 
-	private OsmandSettings settings;
-
 	private OsmandRegions osmandRegions;
 
 
 
 	private List<BinaryMapDataObject> objectsToDraw = new ArrayList<BinaryMapDataObject>();
-	private QuadRect queriedBBox = new QuadRect();
-	private int queriedZoom = 0;
+	private RotatedTileBox queriedBox;
 	private boolean basemapExists = true;
 	private boolean noMapsPresent = false;
 	private TextPaint textPaint;
@@ -60,7 +66,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
-		settings = view.getSettings();
 		rm = view.getApplication().getResourceManager();
 		osmandRegions = rm.getOsmandRegions();
 
@@ -107,106 +112,119 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 	private static int ZOOM_TO_SHOW_BORDERS_ST = 5;
 	private static int ZOOM_TO_SHOW_BORDERS = 7;
 	private static int ZOOM_TO_SHOW_MAP_NAMES = 12;
-
+	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		final int zoom = tb.getZoom();
-		if(downloadBtn.getVisibility() == View.VISIBLE) {
-			downloadBtn.setVisibility(View.GONE);
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		final int zoom = tileBox.getZoom();
+		if(zoom < ZOOM_TO_SHOW_BORDERS_ST) {
+			return;
 		}
-		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && (zoom < ZOOM_TO_SHOW_BORDERS || zoom >= ZOOM_TO_SHOW_MAP_NAMES) &&
-				osmandRegions.isInitialized()) {
-			final QuadRect latLonBox = tb.getLatLonBounds();
-			if (!queriedBBox.contains(latLonBox) || Math.abs(queriedZoom - zoom) > 2) {
-				float w = Math.abs(latLonBox.width() / 2);
-				float h = Math.abs(latLonBox.height() / 2);
-				final QuadRect rf = new QuadRect(latLonBox.left - w, latLonBox.top + h, latLonBox.right + w, latLonBox.bottom - h);
-				AsyncTask<Object, Object, List<BinaryMapDataObject>> task = createNewTask(zoom, rf);
-				if (currentTask == null) {
-					task.execute();
-				} else {
-					pendingTask = task;
+		// draw objects
+		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS && osmandRegions.isInitialized()) {
+			final List<BinaryMapDataObject> currentObjects = objectsToDraw;
+			path.reset();
+			for (BinaryMapDataObject o : currentObjects) {
+				final String key = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getDownloadName(o))
+						+ IndexConstants.BINARY_MAP_INDEX_EXT;
+				if (!rm.getIndexFileNames().containsKey(key)) {
+					continue;
+				}
+
+				double lat = MapUtils.get31LatitudeY(o.getPoint31YTile(0));
+				double lon = MapUtils.get31LongitudeX(o.getPoint31XTile(0));
+				path.moveTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
+				for (int j = 1; j < o.getPointsLength(); j++) {
+					lat = MapUtils.get31LatitudeY(o.getPoint31YTile(j));
+					lon = MapUtils.get31LongitudeX(o.getPoint31XTile(j));
+					path.lineTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
 				}
 			}
-			final List<BinaryMapDataObject> currentObjects = objectsToDraw;
-			if ((currentObjects != null && currentObjects.size() > 0) || noMapsPresent) {
-				if (zoom >= ZOOM_TO_SHOW_MAP_NAMES) {
-					StringBuilder s = new StringBuilder(view.getResources().getString(R.string.download_files));
-					filter.setLength(0);
-					Set<String> set = new TreeSet<String>();
-					if ((currentObjects != null && currentObjects.size() > 0)) {
-						for (int i = 0; i < currentObjects.size(); i++) {
-							final BinaryMapDataObject o = currentObjects.get(i);
-							String name = Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
-							if(!set.add(name)) {
-								continue;
-							}
-							if (set.size() > 1) {
-								s.append(" & ");
-								filter.append(", ");
-							} else {
-								s.append(" ");
-							}
-							filter.append(name);
-							if (osmandRegions.getPrefix(o) != null) {
-								name = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getPrefix(o)) + " " + name;
-							}
-							s.append(name);
-						}
-					}
-					downloadBtn.setVisibility(View.VISIBLE);
-					downloadBtn.setText(s.toString());
-				} else {
-					if(!basemapExists) {
-						filter.setLength(0);
-						filter.append("basemap");
-						downloadBtn.setVisibility(View.VISIBLE);
-						downloadBtn.setText(view.getResources().getString(R.string.download_files) + " " +
-								view.getResources().getString(R.string.base_world_map));
-					}
-					path.reset();
-					for (BinaryMapDataObject o : currentObjects) {
-						final String key = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getDownloadName(o)) +
-								IndexConstants.BINARY_MAP_INDEX_EXT;
-						if (!rm.getIndexFileNames().containsKey(key)) {
+			canvas.drawPath(path, paint);
+		}
+	}
+
+	private RotatedTileBox queryNewData(RotatedTileBox tileBox) {
+		if (queriedBox == null || queriedBox.containsTileBox(tileBox) || Math.abs(queriedBox.getZoom() - tileBox.getZoom()) > ZOOM_THRESHOLD ) {
+			tileBox = tileBox.copy();
+			tileBox.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
+			AsyncTask<Object, Object, List<BinaryMapDataObject>> task = createNewTask(tileBox);
+			if (currentTask == null) {
+				task.execute();
+			} else {
+				pendingTask = task;
+			}
+		}
+		return tileBox;
+	}
+
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
+		final int zoom = tileBox.getZoom();
+		if(view.getMainLayer() instanceof MapTileLayer) {
+			return;
+		}
+		// query from UI thread because of Android AsyncTask bug (Handler init)
+		queryNewData(tileBox);
+		if (downloadBtn.getVisibility() == View.VISIBLE) {
+			downloadBtn.setVisibility(View.GONE);
+		}
+		if (osmandRegions.isInitialized() && queriedBox != null) {
+			if (zoom < ZOOM_TO_SHOW_MAP_NAMES && !basemapExists) {
+				filter.setLength(0);
+				filter.append("basemap");
+				downloadBtn.setVisibility(View.VISIBLE);
+				downloadBtn.setText(view.getResources().getString(R.string.download_files) + " "
+						+ view.getResources().getString(R.string.base_world_map));
+			} else if(zoom >= ZOOM_TO_SHOW_MAP_NAMES && noMapsPresent && Math.abs(queriedBox.getZoom() - zoom) <= ZOOM_THRESHOLD){
+				final List<BinaryMapDataObject> currentObjects = objectsToDraw;
+				StringBuilder s = new StringBuilder(view.getResources().getString(R.string.download_files));
+				filter.setLength(0);
+				Set<String> set = new TreeSet<String>();
+				if ((currentObjects != null && currentObjects.size() > 0)) {
+					for (int i = 0; i < currentObjects.size(); i++) {
+						final BinaryMapDataObject o = currentObjects.get(i);
+						String name = Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
+						if (!set.add(name)) {
 							continue;
 						}
-
-						double lat = MapUtils.get31LatitudeY(o.getPoint31YTile(0));
-						double lon = MapUtils.get31LongitudeX(o.getPoint31XTile(0));
-						path.moveTo(tb.getPixXFromLonNoRot(lon), tb.getPixYFromLatNoRot(lat));
-						for(int j = 1 ; j < o.getPointsLength(); j++) {
-							lat = MapUtils.get31LatitudeY(o.getPoint31YTile(j));
-							lon = MapUtils.get31LongitudeX(o.getPoint31XTile(j));
-							path.lineTo(tb.getPixXFromLonNoRot(lon),
-									tb.getPixYFromLatNoRot(lat));
+						if (set.size() > 1) {
+							s.append(" & ");
+							filter.append(", ");
+						} else {
+							s.append(" ");
 						}
+						filter.append(name);
+						if (osmandRegions.getPrefix(o) != null) {
+							name = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getPrefix(o)) + " "
+									+ name;
+						}
+						s.append(name);
 					}
-					canvas.drawPath(path, paint);
 				}
-
+				downloadBtn.setVisibility(View.VISIBLE);
+				downloadBtn.setText(s.toString());
 			}
 		}
 	}
 
-	private AsyncTask<Object, Object, List<BinaryMapDataObject>> createNewTask(final int zoom, final QuadRect rf) {
+	private AsyncTask<Object, Object, List<BinaryMapDataObject>> createNewTask(final RotatedTileBox tileBox) {
 		return new AsyncTask<Object, Object, List<BinaryMapDataObject>>() {
 			@Override
 			protected List<BinaryMapDataObject> doInBackground(Object... params) {
-				if (queriedBBox.contains(rf)) {
+				if (queriedBox != null && !queriedBox.containsTileBox(tileBox) && Math.abs(queriedBox.getZoom() - tileBox.getZoom()) <= ZOOM_THRESHOLD ) {
 					return null;
 				}
-				if (zoom < ZOOM_TO_SHOW_MAP_NAMES) {
+				if (tileBox.getZoom() < ZOOM_TO_SHOW_MAP_NAMES) {
 					basemapExists = rm.getRenderer().basemapExists();
 				}
 				List<BinaryMapDataObject> result = null;
-				int left = MapUtils.get31TileNumberX(rf.left);
-				int right = MapUtils.get31TileNumberX(rf.right);
-				int top = MapUtils.get31TileNumberY(rf.top);
-				int bottom = MapUtils.get31TileNumberY(rf.bottom);
-				final boolean empty = rm.getRenderer().checkIfMapIsEmpty(left, right, top, bottom, zoom);
+				int left = MapUtils.get31TileNumberX(tileBox.getLeftTopLatLon().getLongitude());
+				int right = MapUtils.get31TileNumberX(tileBox.getRightBottomLatLon().getLongitude());
+				int top = MapUtils.get31TileNumberY(tileBox.getLeftTopLatLon().getLatitude());
+				int bottom = MapUtils.get31TileNumberY(tileBox.getRightBottomLatLon().getLatitude());
+				final boolean empty = rm.getRenderer().checkIfMapIsEmpty(left, right, top, bottom, tileBox.getZoom());
 				noMapsPresent = empty;
-				if (!empty && zoom >= ZOOM_TO_SHOW_MAP_NAMES) {
+				if (!empty && tileBox.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
 					return Collections.emptyList();
 				}
 				try {
@@ -217,7 +235,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				Iterator<BinaryMapDataObject> it = result.iterator();
 				while (it.hasNext()) {
 					BinaryMapDataObject o = it.next();
-					if (zoom < ZOOM_TO_SHOW_BORDERS) {
+					if (tileBox.getZoom() < ZOOM_TO_SHOW_BORDERS) {
 						//
 					} else {
 						if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
@@ -236,9 +254,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 			@Override
 			protected void onPostExecute(List<BinaryMapDataObject> result) {
 				if (result != null) {
-					queriedBBox = rf;
+					queriedBox = tileBox;
 					objectsToDraw = result;
-					queriedZoom = zoom;
 				}
 				currentTask = null;
 				if (pendingTask != null) {

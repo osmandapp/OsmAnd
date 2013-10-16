@@ -108,9 +108,9 @@ public class MapTileLayer extends BaseMapLayer {
 		return mapTileAdapter;
 	}
 	
-
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox,
+			DrawSettings drawSettings) {
 		if ((map == null && mapTileAdapter == null) || !visible) {
 			return;
 		}
@@ -118,6 +118,11 @@ public class MapTileLayer extends BaseMapLayer {
 			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
 		}
 		drawTileMap(canvas, tileBox);
+	}
+
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		
 	}
 
 	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox) {

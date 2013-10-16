@@ -91,8 +91,10 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 
 	}
 
+	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+
 
 		for (OsMoDroidPoint op : OsMoDroidPointArrayList) {
 			LatLon newLatlon;
@@ -121,10 +123,10 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 				prevlongitude = op.prevlatlon.getLongitude();
 			}
 
-			int locationX = tb.getPixXFromLatLon(latitude, longitude);
-			int locationY = tb.getPixYFromLatLon(latitude, longitude);
-			int prevlocationX = tb.getPixXFromLatLon(prevlatitude, prevlongitude);
-			int prevlocationY = tb.getPixYFromLatLon(prevlatitude, prevlongitude);
+			int locationX = tileBox.getPixXFromLatLon(latitude, longitude);
+			int locationY = tileBox.getPixYFromLatLon(latitude, longitude);
+			int prevlocationX = tileBox.getPixXFromLatLon(prevlatitude, prevlongitude);
+			int prevlocationY = tileBox.getPixYFromLatLon(prevlatitude, prevlongitude);
 
 			// int y = opIcon.getHeight()/2;
 			// int x = opIcon.getWidth()/2;
@@ -141,7 +143,10 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 			// op.prevlatlon=op.latlon;
 
 		}
+	
 	}
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {}
 
 	public void getOsMoDroidPointFromPoint(RotatedTileBox tb,PointF point, List<? super OsMoDroidPoint> om) {
 		if (myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId) != null) {

@@ -137,7 +137,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 	
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb,
+			DrawSettings settings) {
 		if (tb.getZoom() >= startZoom) {
 			objects.clear();
 			final QuadRect latLonBounds = tb.getLatLonBounds();
@@ -149,8 +150,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				int y = tb.getPixYFromLatNoRot(o.getLocation().getLatitude());
 				canvas.drawRect(x - r, y - r, x + r, y + r, pointAltUI);
 			}
-
 		}
+	}
+	
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 	}
 
 	@Override
