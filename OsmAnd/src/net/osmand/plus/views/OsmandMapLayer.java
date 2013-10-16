@@ -6,6 +6,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.os.AsyncTask;
 import android.view.MotionEvent;
 
 public abstract class OsmandMapLayer {
@@ -33,6 +34,10 @@ public abstract class OsmandMapLayer {
 	}
 	
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) { return false;}
+	
+	public <Params> void executeTaskInBackground(AsyncTask<Params, ?, ?> task, Params... params){
+		task.execute(params);
+	}
 	
 	/**
 	 * This method returns whether canvas should be rotated as 

@@ -126,7 +126,7 @@ public class HillshadeLayer extends MapTileLayer {
 			}
 			
 		};
-		task.execute();
+		executeTaskInBackground(task);
 	}
 
 	private SQLiteTileSource createTileSource(MapActivity activity) {
@@ -143,11 +143,11 @@ public class HillshadeLayer extends MapTileLayer {
 			
 			List<String> getTileSource(int x, int y, int zoom) {
 				ArrayList<String> ls = new ArrayList<String>();
-				int z = (zoom- ZOOM_BOUNDARY );
-				if(z > 0){
+				int z = (zoom - ZOOM_BOUNDARY);
+				if (z > 0) {
 					indexedResources.queryInBox(new QuadRect(x >> z, y >> z, (x >> z), (y >> z)), ls);
 				} else {
-					indexedResources.queryInBox(new QuadRect(x << -z, y << -z, (x+1)<<-z, (y+1)<<-z), ls);
+					indexedResources.queryInBox(new QuadRect(x << -z, y << -z, (x + 1) << -z, (y + 1) << -z), ls);
 				}
 				return ls;
 			}

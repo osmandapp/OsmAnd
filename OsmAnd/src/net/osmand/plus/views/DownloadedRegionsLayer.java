@@ -149,7 +149,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 			tileBox.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
 			AsyncTask<Object, Object, List<BinaryMapDataObject>> task = createNewTask(tileBox);
 			if (currentTask == null) {
-				task.execute();
+				executeTaskInBackground(task);
 			} else {
 				pendingTask = task;
 			}
@@ -259,7 +259,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				}
 				currentTask = null;
 				if (pendingTask != null) {
-					pendingTask.execute();
+					executeTaskInBackground(pendingTask);
 					pendingTask = null;
 				}
 			}

@@ -396,7 +396,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 	
 	private void createNewBugAsync(final double latitude, final double longitude, final String text) {
-		new AsyncTask<Void, Void, String>() {
+		AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
 			@Override
 			protected String doInBackground(Void... params) {
 				return getOsmbugsUtil(null).createNewBug(latitude, longitude, text);
@@ -414,11 +414,12 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					openBugAlertDialog(latitude, longitude, text);
 				}
 			};
-		}.execute();
+		};
+		executeTaskInBackground(task);
 	}
 	
 	private void addingCommentAsync(final OpenStreetNote bug, final String text) {
-		new AsyncTask<Void, Void, String>() {
+		AsyncTask<Void,Void,String> task = new AsyncTask<Void, Void, String>() {
 			@Override
 			protected String doInBackground(Void... params) {
 				return getOsmbugsUtil(bug).addingComment(bug.getId(), text);
@@ -431,7 +432,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osb_comment_dialog_error) + "\n" + warn, Toast.LENGTH_LONG).show();
 				}
 			};
-		}.execute();
+		};
+		executeTaskInBackground(task);
 	}
 	
 
@@ -504,7 +506,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 	
 	private void closingAsync(final OpenStreetNote bug, final String text) {
-		new AsyncTask<Void, Void, String>() {
+		AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
 			@Override
 			protected String doInBackground(Void... params) {
 				return getOsmbugsUtil(bug).closingBug(bug.getId(), "");
@@ -520,7 +522,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 							Toast.LENGTH_LONG).show();
 				}
 			};
-		}.execute();
+		};
+		executeTaskInBackground(task);
 	}
 	
 	@Override
