@@ -61,6 +61,7 @@ import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.HandlerThread;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import net.osmand.map.OsmandRegions;
@@ -126,6 +127,7 @@ public class ResourceManager {
 	protected final MapTileDownloader tileDownloader;
 	
 	public final AsyncLoadingThread asyncLoadingThread = new AsyncLoadingThread(this);
+	private HandlerThread renderingBufferImageThread;
 	
 	protected boolean internetIsNotAccessible = false;
 	
@@ -133,6 +135,8 @@ public class ResourceManager {
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
 		asyncLoadingThread.start();
+		renderingBufferImageThread = new HandlerThread("RenderingBaseImage");
+		renderingBufferImageThread.start();
 
 		tileDownloader = MapTileDownloader.getInstance(Version.getFullVersion(context));
 		
@@ -150,6 +154,10 @@ public class ResourceManager {
 	
 	public MapTileDownloader getMapTileDownloader() {
 		return tileDownloader;
+	}
+	
+	public HandlerThread getRenderingBufferImageThread() {
+		return renderingBufferImageThread;
 	}
 
 	

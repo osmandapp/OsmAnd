@@ -36,7 +36,6 @@ import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.AttributeSet;
@@ -199,9 +198,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 
 		handler = new Handler();
-		HandlerThread ht = new HandlerThread("RenderingBaseImage");
-		ht.start();
-		baseHandler = new Handler(ht.getLooper());
+		
+		baseHandler = new Handler(application.getResourceManager().getRenderingBufferImageThread().getLooper());
 		getHolder().addCallback(this);
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
 		gestureDetector = new GestureDetector(getContext(), new MapExplorer(this, new MapTileViewOnGestureListener()));
@@ -411,7 +409,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		if(tileBox.getPixHeight() == 0 || tileBox.getPixWidth() == 0){
 			return;
 		}
-		baseHandler.removeMessages(BASE_REFRESH_MESSAGE);
 		if(bufferBitmapTmp == null || tileBox.getPixHeight() != bufferBitmapTmp.getHeight()
 				|| tileBox.getPixWidth() != bufferBitmapTmp.getWidth()) {
 			bufferBitmapTmp = Bitmap.createBitmap(tileBox.getPixWidth(), tileBox.getPixHeight(), Config.RGB_565);
@@ -452,7 +449,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			Canvas canvas = holder.lockCanvas();
 			if (canvas != null) {
 				try {
-					final float ratioy = mapPosition == OsmandSettings.BOTTOM_CONSTANT ? 0.8f : 0.5f;
+					final float ratioy = mapPosition == OsmandSettings.BOTTOM_CONSTANT ? 0.8f : 0.5f;	
 					final int cy = (int) (ratioy * getHeight());
 					if(currentViewport.getPixWidth() != getWidth() || currentViewport.getPixHeight() != getHeight() ||
 							currentViewport.getCenterPixelY() != cy) {
@@ -534,7 +531,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	private void refreshBufferImage(final DrawSettings drawSettings) {
 		if (!baseHandler.hasMessages(BASE_REFRESH_MESSAGE) || drawSettings.isUpdateVectorRendering()) {
-			Message msg = Message.obtain(handler, new Runnable() {
+			Message msg = Message.obtain(baseHandler, new Runnable() {
 				@Override
 				public void run() {
 					baseHandler.removeMessages(BASE_REFRESH_MESSAGE);
@@ -555,10 +552,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	
 	// this method could be called in non UI thread
 	public void refreshMap(final boolean updateVectorRendering) {
-		boolean nightMode = application.getDaynightHelper().isNightMode();
-		DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering);
-		sendRefreshMapMsg(drawSettings, 20);
-		refreshBufferImage(drawSettings);
+		if (isShown()) {
+			boolean nightMode = application.getDaynightHelper().isNightMode();
+			DrawSettings drawSettings = new DrawSettings(nightMode, updateVectorRendering);
+			sendRefreshMapMsg(drawSettings, 20);
+			refreshBufferImage(drawSettings);
+		}
 	}
 
 	private void sendRefreshMapMsg(final DrawSettings drawSettings, int delay) {
