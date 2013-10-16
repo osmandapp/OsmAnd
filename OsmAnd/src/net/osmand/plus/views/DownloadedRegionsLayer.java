@@ -144,7 +144,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 	}
 
 	private RotatedTileBox queryNewData(RotatedTileBox tileBox) {
-		if (queriedBox == null || queriedBox.containsTileBox(tileBox) || Math.abs(queriedBox.getZoom() - tileBox.getZoom()) > ZOOM_THRESHOLD ) {
+		if (queriedBox == null || !queriedBox.containsTileBox(tileBox) || Math.abs(queriedBox.getZoom() - tileBox.getZoom()) > ZOOM_THRESHOLD ) {
 			tileBox = tileBox.copy();
 			tileBox.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
 			AsyncTask<Object, Object, List<BinaryMapDataObject>> task = createNewTask(tileBox);

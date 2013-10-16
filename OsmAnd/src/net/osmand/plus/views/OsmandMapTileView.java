@@ -457,6 +457,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					if(currentViewport.getPixWidth() != getWidth() || currentViewport.getPixHeight() != getHeight() ||
 							currentViewport.getCenterPixelY() != cy) {
 						currentViewport.setPixelDimensions(getWidth(), getHeight(), 0.5f, ratioy);
+						refreshBufferImage(drawSettings);
 					}
 					// make copy to avoid concurrency 
 					RotatedTileBox viewportToDraw = currentViewport.copy();
@@ -536,15 +537,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			Message msg = Message.obtain(handler, new Runnable() {
 				@Override
 				public void run() {
-					if(bufferBitmap == null) {
-						System.out.println("St " + System.currentTimeMillis());
-					}
 					baseHandler.removeMessages(BASE_REFRESH_MESSAGE);
 					refreshBaseMapInternal(currentViewport.copy(), drawSettings);
 					sendRefreshMapMsg(drawSettings, 0);
-					if(bufferBitmapTmp == null) {
-						System.out.println("End " + System.currentTimeMillis());
-					}
 				}
 			});
 			msg.what = BASE_REFRESH_MESSAGE;
