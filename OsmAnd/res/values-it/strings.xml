@@ -1393,4 +1393,5 @@
     <string name="route_distance_settings_descr">Configura la distanza della vista della mappa (DA FARE nomi)</string>
     <string name="route_distance_settings">Distanza visione mappa (DA FARE nomi)</string>
     <string name="map_magnifier">Ingrandimento mappa</string>
+    <string name="route_distance_farthest">Più lontano</string>
     </resources>
