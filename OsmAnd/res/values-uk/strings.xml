@@ -1578,7 +1578,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="about_settings">Про</string>
     <string name="about_settings_descr">Версія, ліцензії, учасники проекту</string>
     <string name="tips_and_tricks">Поради</string>
-    <string name="tip_recent_changes_1_6_t">"Зміни в 1.6:
+    <string name="tip_recent_changes_1_6_t">\n\t* "Зміни в 1.6:
 	\n\t* Визначення/редагування онлайн-джерела квадратів мапи (вкажіть термін дії)"
     </string>
     <string name="local_index_tile_data_zooms">Завантажені масштаби: %1$s</string>
@@ -1604,4 +1604,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		\n\t* \'Зимові та гірськолижні\' відтворює зимовий вигляд (все порито снігом), а також показує основні гірськолижні спуски та підйомники (якщо завантажено мапу \'World ski\')
 	</string>
     <string name="base_world_map">основна мапа світу</string>
-	</resources>
+	<string name="route_distance_close">Далеко</string>
+    <string name="route_distance_far">Близько</string>
+    <string name="map_magnifier">Лупа</string>
+    </resources>
