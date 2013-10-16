@@ -189,14 +189,14 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 		final int zoom = tileBox.getZoom();
+		if (downloadBtn.getVisibility() == View.VISIBLE) {
+			downloadBtn.setVisibility(View.GONE);
+		}
 		if(view.getMainLayer() instanceof MapTileLayer) {
 			return;
 		}
 		// query from UI thread because of Android AsyncTask bug (Handler init)
 		data.queryNewData(tileBox);
-		if (downloadBtn.getVisibility() == View.VISIBLE) {
-			downloadBtn.setVisibility(View.GONE);
-		}
 		RotatedTileBox queriedBox = data.getQueriedBox();
 		if (osmandRegions.isInitialized() && queriedBox != null) {
 			if (zoom < ZOOM_TO_SHOW_MAP_NAMES && !basemapExists) {
