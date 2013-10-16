@@ -1,8 +1,10 @@
 package net.osmand.plus.views;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import gnu.trove.list.array.TIntArrayList;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.data.RotatedTileBox;
@@ -12,8 +14,9 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.util.MapUtils;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PointF;
@@ -22,21 +25,16 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextPaint;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
@@ -346,8 +344,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public boolean onLongClick(View v) {
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				float scale = view.getZoomScale();
-				int p = (int) Math.round(scale * scale * 100) + 100;
-				final TIntArrayList tlist = new TIntArrayList(new int[]{100, 150, 200, 300, 400});
+				int p = (int) ((scale > 0 ? 1 : -1) * Math.round(scale * scale * 100)) + 100;
+				final TIntArrayList tlist = new TIntArrayList(new int[] { 75, 100, 150, 200, 300, 400 });
 				final List<String> values = new ArrayList<String>();
 				int i = -1;
 				for (int k = 0; k <= tlist.size(); k++) {
@@ -370,17 +368,23 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 
 				bld.setTitle(R.string.map_magnifier);
-				bld.setSingleChoiceItems(values.toArray(new String[values.size()]),
-						i, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						float newScale = (float) Math.sqrt((tlist.get(which) - 100f) / 100f);
-						zoomScale.set(newScale - (float) Math.sqrt(Math.max(view.getDensity() - 1, 0)));
-						view.getAnimatedDraggingThread().startZooming(view.getZoom(), view.getSettingsZoomScale(), false);
-						dialog.dismiss();
-
-					}
-				});
+				bld.setSingleChoiceItems(values.toArray(new String[values.size()]), i,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								int p = tlist.get(which);
+								float newScale;
+								if (p >= 100) {
+									newScale = (float) Math.sqrt((tlist.get(which) - 100f) / 100f);
+								} else {
+									newScale = -(float) Math.sqrt((100f - tlist.get(which)) / 100f);
+								}
+								zoomScale.set(newScale - (float) Math.sqrt(Math.max(view.getDensity() - 1, 0)));
+								view.getAnimatedDraggingThread().startZooming(view.getZoom(),
+										view.getSettingsZoomScale(), false);
+								dialog.dismiss();
+							}
+						});
 				bld.show();
 				return true;
 			}
