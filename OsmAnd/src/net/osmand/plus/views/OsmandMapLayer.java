@@ -67,5 +67,90 @@ public abstract class OsmandMapLayer {
 			return nightMode;
 		}
 	}
+	
+	public abstract class MapLayerData<T> {
+		public int ZOOM_THRESHOLD = 1;
+		public RotatedTileBox queriedBox;
+		protected T results;
+		protected Task currentTask;
+		protected Task pendingTask;
+		
+		public RotatedTileBox getQueriedBox() {
+			return queriedBox;
+		}
+		
+		public boolean queriedBoxContains(final RotatedTileBox queriedData, final RotatedTileBox newBox) {
+			return queriedData != null && !queriedData.containsTileBox(newBox) && Math.abs(queriedData.getZoom() - newBox.getZoom()) <= ZOOM_THRESHOLD;
+		}
+		
+		public void queryNewData(RotatedTileBox tileBox) {
+			if (!queriedBoxContains(queriedBox, tileBox) ) {
+				Task ct = currentTask;
+				if(ct == null || !queriedBoxContains(ct.getDataBox(), tileBox)) {
+					RotatedTileBox original = tileBox.copy();
+					RotatedTileBox extended = original.copy();
+					extended.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
+					Task task = new Task(original, extended);
+					if (currentTask == null) {
+						executeTaskInBackground(task);
+					} else {
+						pendingTask = task;
+					}	
+				}
+				
+			}
+		}
+		
+		public boolean isInterrupted() {
+			return pendingTask != null;
+		}
+		
+		protected abstract T calculateResult(RotatedTileBox tileBox);
+		
+		public class Task extends AsyncTask<Object, Object, T> {
+			private RotatedTileBox dataBox;
+			private RotatedTileBox requestedBox;
+			
+			public Task(RotatedTileBox requestedBox, RotatedTileBox dataBox) {
+				this.requestedBox = requestedBox;
+				this.dataBox = dataBox;
+			}
+			
+			public RotatedTileBox getOriginalBox() {
+				return requestedBox;
+			}
+			
+			public RotatedTileBox getDataBox() {
+				return dataBox;
+			}
+			
+			@Override
+			protected T doInBackground(Object... params) {
+				if (queriedBoxContains(queriedBox, dataBox) ) {
+					return null;
+				}
+				return calculateResult(dataBox);
+			}
+
+			@Override
+			protected void onPreExecute() {
+				currentTask = this;
+			}
+
+			@Override
+			protected void onPostExecute(T result) {
+				if (result != null) {
+					queriedBox = dataBox;
+					results = result;
+				}
+				currentTask = null;
+				if (pendingTask != null) {
+					executeTaskInBackground(pendingTask);
+					pendingTask = null;
+				}
+			}
+		}
+		
+	}
 
 }

@@ -1,7 +1,6 @@
 package net.osmand.plus.views;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +27,6 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.os.AsyncTask;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -51,17 +49,15 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 	private OsmandRegions osmandRegions;
 
 
-
-	private List<BinaryMapDataObject> objectsToDraw = new ArrayList<BinaryMapDataObject>();
-	private RotatedTileBox queriedBox;
 	private boolean basemapExists = true;
 	private boolean noMapsPresent = false;
+	
 	private TextPaint textPaint;
-	private AsyncTask<?, ?, ?> currentTask = null;
-	private AsyncTask<?, ?, ?> pendingTask = null;
 	private ResourceManager rm;
 	private Button downloadBtn;
 	private StringBuilder filter = new StringBuilder();
+
+	private MapLayerData<List<BinaryMapDataObject>> data;
 
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
@@ -105,6 +101,18 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 
 
 		path = new Path();
+		
+		data = new MapLayerData<List<BinaryMapDataObject>>() {
+			{
+				ZOOM_THRESHOLD = 2;
+			}
+			
+			@Override
+			protected List<BinaryMapDataObject> calculateResult(RotatedTileBox tileBox) {
+				return queryData(tileBox);
+			}
+
+		};
 
 	}
 
@@ -121,7 +129,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 		}
 		// draw objects
 		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS && osmandRegions.isInitialized()) {
-			final List<BinaryMapDataObject> currentObjects = objectsToDraw;
+			final List<BinaryMapDataObject> currentObjects = data.results;
 			path.reset();
 			for (BinaryMapDataObject o : currentObjects) {
 				final String key = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getDownloadName(o))
@@ -143,18 +151,40 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 		}
 	}
 
-	private RotatedTileBox queryNewData(RotatedTileBox tileBox) {
-		if (queriedBox == null || !queriedBox.containsTileBox(tileBox) || Math.abs(queriedBox.getZoom() - tileBox.getZoom()) > ZOOM_THRESHOLD ) {
-			tileBox = tileBox.copy();
-			tileBox.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
-			AsyncTask<Object, Object, List<BinaryMapDataObject>> task = createNewTask(tileBox);
-			if (currentTask == null) {
-				executeTaskInBackground(task);
+
+	
+	private List<BinaryMapDataObject> queryData(RotatedTileBox tileBox) {
+		if (tileBox.getZoom() < ZOOM_TO_SHOW_MAP_NAMES) {
+			basemapExists = rm.getRenderer().basemapExists();
+		}
+		List<BinaryMapDataObject> result = null;
+		int left = MapUtils.get31TileNumberX(tileBox.getLeftTopLatLon().getLongitude());
+		int right = MapUtils.get31TileNumberX(tileBox.getRightBottomLatLon().getLongitude());
+		int top = MapUtils.get31TileNumberY(tileBox.getLeftTopLatLon().getLatitude());
+		int bottom = MapUtils.get31TileNumberY(tileBox.getRightBottomLatLon().getLatitude());
+		final boolean empty = rm.getRenderer().checkIfMapIsEmpty(left, right, top, bottom, tileBox.getZoom());
+		noMapsPresent = empty;
+		if (!empty && tileBox.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
+			return Collections.emptyList();
+		}
+		try {
+			result = osmandRegions.queryBbox(left, right, top, bottom);
+		} catch (IOException e) {
+			return result;
+		}
+		Iterator<BinaryMapDataObject> it = result.iterator();
+		while (it.hasNext()) {
+			BinaryMapDataObject o = it.next();
+			if (tileBox.getZoom() < ZOOM_TO_SHOW_BORDERS) {
+				//
 			} else {
-				pendingTask = task;
+				if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
+					it.remove();
+				}
 			}
 		}
-		return tileBox;
+		System.out.println("Queried regions " + result.size());
+		return result;
 	}
 
 	@Override
@@ -164,10 +194,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 			return;
 		}
 		// query from UI thread because of Android AsyncTask bug (Handler init)
-		queryNewData(tileBox);
+		data.queryNewData(tileBox);
 		if (downloadBtn.getVisibility() == View.VISIBLE) {
 			downloadBtn.setVisibility(View.GONE);
 		}
+		RotatedTileBox queriedBox = data.getQueriedBox();
 		if (osmandRegions.isInitialized() && queriedBox != null) {
 			if (zoom < ZOOM_TO_SHOW_MAP_NAMES && !basemapExists) {
 				filter.setLength(0);
@@ -176,7 +207,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				downloadBtn.setText(view.getResources().getString(R.string.download_files) + " "
 						+ view.getResources().getString(R.string.base_world_map));
 			} else if(zoom >= ZOOM_TO_SHOW_MAP_NAMES && noMapsPresent && Math.abs(queriedBox.getZoom() - zoom) <= ZOOM_THRESHOLD){
-				final List<BinaryMapDataObject> currentObjects = objectsToDraw;
+				final List<BinaryMapDataObject> currentObjects = data.results;
 				StringBuilder s = new StringBuilder(view.getResources().getString(R.string.download_files));
 				filter.setLength(0);
 				Set<String> set = new TreeSet<String>();
@@ -207,64 +238,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 		}
 	}
 
-	private AsyncTask<Object, Object, List<BinaryMapDataObject>> createNewTask(final RotatedTileBox tileBox) {
-		return new AsyncTask<Object, Object, List<BinaryMapDataObject>>() {
-			@Override
-			protected List<BinaryMapDataObject> doInBackground(Object... params) {
-				if (queriedBox != null && !queriedBox.containsTileBox(tileBox) && Math.abs(queriedBox.getZoom() - tileBox.getZoom()) <= ZOOM_THRESHOLD ) {
-					return null;
-				}
-				if (tileBox.getZoom() < ZOOM_TO_SHOW_MAP_NAMES) {
-					basemapExists = rm.getRenderer().basemapExists();
-				}
-				List<BinaryMapDataObject> result = null;
-				int left = MapUtils.get31TileNumberX(tileBox.getLeftTopLatLon().getLongitude());
-				int right = MapUtils.get31TileNumberX(tileBox.getRightBottomLatLon().getLongitude());
-				int top = MapUtils.get31TileNumberY(tileBox.getLeftTopLatLon().getLatitude());
-				int bottom = MapUtils.get31TileNumberY(tileBox.getRightBottomLatLon().getLatitude());
-				final boolean empty = rm.getRenderer().checkIfMapIsEmpty(left, right, top, bottom, tileBox.getZoom());
-				noMapsPresent = empty;
-				if (!empty && tileBox.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
-					return Collections.emptyList();
-				}
-				try {
-					result = osmandRegions.queryBbox(left, right, top, bottom);
-				} catch (IOException e) {
-					return result;
-				}
-				Iterator<BinaryMapDataObject> it = result.iterator();
-				while (it.hasNext()) {
-					BinaryMapDataObject o = it.next();
-					if (tileBox.getZoom() < ZOOM_TO_SHOW_BORDERS) {
-						//
-					} else {
-						if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
-							it.remove();
-						}
-					}
-				}
-				return result;
-			}
-
-			@Override
-			protected void onPreExecute() {
-				currentTask = this;
-			}
-
-			@Override
-			protected void onPostExecute(List<BinaryMapDataObject> result) {
-				if (result != null) {
-					queriedBox = tileBox;
-					objectsToDraw = result;
-				}
-				currentTask = null;
-				if (pendingTask != null) {
-					executeTaskInBackground(pendingTask);
-					pendingTask = null;
-				}
-			}
-		};
-	}
+	
 
 
 	@Override
