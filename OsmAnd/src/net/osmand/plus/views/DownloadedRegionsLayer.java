@@ -183,7 +183,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				}
 			}
 		}
-		System.out.println("Queried regions " + result.size());
 		return result;
 	}
 

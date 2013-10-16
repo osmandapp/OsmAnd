@@ -79,8 +79,12 @@ public abstract class OsmandMapLayer {
 			return queriedBox;
 		}
 		
+		public T getResults() {
+			return results;
+		}
+		
 		public boolean queriedBoxContains(final RotatedTileBox queriedData, final RotatedTileBox newBox) {
-			return queriedData != null && !queriedData.containsTileBox(newBox) && Math.abs(queriedData.getZoom() - newBox.getZoom()) <= ZOOM_THRESHOLD;
+			return queriedData != null && queriedData.containsTileBox(newBox) && Math.abs(queriedData.getZoom() - newBox.getZoom()) <= ZOOM_THRESHOLD;
 		}
 		
 		public void queryNewData(RotatedTileBox tileBox) {
@@ -149,6 +153,12 @@ public abstract class OsmandMapLayer {
 					pendingTask = null;
 				}
 			}
+		}
+
+		public void clearCache() {
+			results = null;
+			queriedBox = null;
+			
 		}
 		
 	}
