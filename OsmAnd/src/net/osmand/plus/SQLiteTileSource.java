@@ -162,10 +162,21 @@ public class SQLiteTileSource implements ITileSource {
 						}
 					}
 					int tnumbering = list.indexOf("tilenumbering");
-					boolean inversiveInfoZoom = tnumbering != -1 && "BigPlanet".equals(cursor.getString(tnumbering));
 					if(tnumbering != -1) {
 						inversiveZoom = "BigPlanet".equalsIgnoreCase(cursor.getString(tnumbering));
+					} else {
+						inversiveZoom = true;
+						addInfoColumn("tilenumbering", "BigPlanet");
 					}
+					int timecolumn = list.indexOf("timecolumn");
+					if (timecolumn != -1) {
+						timeSupported = "yes".equalsIgnoreCase(cursor.getString(timecolumn));
+					} else {
+						timeSupported = hasTimeColumn();
+						addInfoColumn("timecolumn", timeSupported?"yes" : "no");
+					}
+					//boolean inversiveInfoZoom = tnumbering != -1 && "BigPlanet".equals(cursor.getString(tnumbering));
+					boolean inversiveInfoZoom = inversiveZoom;
 					int mnz = list.indexOf("minzoom");
 					if(mnz != -1) {
 						minZoom = (int) cursor.getInt(mnz);
@@ -186,17 +197,26 @@ public class SQLiteTileSource implements ITileSource {
 				while ((tileSize >> (maxZoom - baseZoom)) < minScaledSize)
 					maxZoom--;
 				
-				cursor = db.rawQuery("SELECT * FROM tiles", null);
-				cursor.moveToFirst();
-				List<String> cols = Arrays.asList(cursor.getColumnNames());
-				timeSupported = cols.contains("time");
-				cursor.close();
-				
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 			}
 		}
 		return db;
+	}
+
+	private void addInfoColumn(String columnName, String value) {
+		db.execSQL("alter table info add column "+columnName+" TEXT");
+		db.execSQL("update info set "+columnName+" = '"+value+"'");
+	}
+
+	private boolean hasTimeColumn() {
+		SQLiteCursor cursor;
+		cursor = db.rawQuery("SELECT * FROM tiles", null);
+		cursor.moveToFirst();
+		List<String> cols = Arrays.asList(cursor.getColumnNames());
+		boolean timeSupported = cols.contains("time");
+		cursor.close();
+		return timeSupported;
 	}
 	
 	public boolean exists(int x, int y, int zoom, boolean exact) {
