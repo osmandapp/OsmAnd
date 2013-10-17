@@ -64,7 +64,6 @@ public abstract class OsmandPlugin {
 		OsmandRasterMapsPlugin rasterMapsPlugin = new OsmandRasterMapsPlugin(app);
 		installedPlugins.add(rasterMapsPlugin);
 		installedPlugins.add(new OsmandMonitoringPlugin(app));
-//		installedPlugins.add(new OsmandExtraSettings(app));
 		installedPlugins.add(new AccessibilityPlugin(app));
 		if(!installPlugin(SRTM_PLUGIN_COMPONENT_PAID, SRTMPlugin.ID, app,
 				new SRTMPlugin(app, true))) {
@@ -278,12 +277,17 @@ public abstract class OsmandPlugin {
 		} catch ( NameNotFoundException e){
 		}
 		
+		
 		if(installed) {
 			installedPlugins.add(plugin);
-			app.getSettings().enablePlugin(plugin.getId(), true);
+			if(!app.getSettings().getPlugins().contains("-"+pluginId)) {
+				app.getSettings().enablePlugin(pluginId, true);
+			}
 			return true;
 		} else {
-			app.getSettings().enablePlugin(pluginId, false);
+			if(app.getSettings().getPlugins().contains(pluginId)) {
+				app.getSettings().enablePlugin(pluginId, false);
+			}
 			return false;
 		}
 	}

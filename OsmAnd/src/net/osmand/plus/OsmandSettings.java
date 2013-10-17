@@ -483,10 +483,23 @@ public class OsmandSettings {
 	///////////// PREFERENCES classes ////////////////
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	private final OsmandPreference<String> ENABLED_PLUGINS = new StringPreference("enabled_plugins", "").makeGlobal();
+	private final OsmandPreference<String> PLUGINS = new StringPreference("enabled_plugins", "").makeGlobal();
 	
 	public Set<String> getEnabledPlugins(){
-		String plugs = ENABLED_PLUGINS.get();
+		String plugs = PLUGINS.get();
+		StringTokenizer toks = new StringTokenizer(plugs, ",");
+		Set<String> res = new LinkedHashSet<String>();
+		while(toks.hasMoreTokens()) {
+			String tok = toks.nextToken();
+			if(!tok.startsWith("-")) {
+				res.add(tok);
+			}
+		}
+		return res;
+	}
+	
+	public Set<String> getPlugins(){
+		String plugs = PLUGINS.get();
 		StringTokenizer toks = new StringTokenizer(plugs, ",");
 		Set<String> res = new LinkedHashSet<String>();
 		while(toks.hasMoreTokens()) {
@@ -496,11 +509,13 @@ public class OsmandSettings {
 	}
 	
 	public void enablePlugin(String pluginId, boolean enable){
-		Set<String> set = getEnabledPlugins();
-		if(enable){
+		Set<String> set = getPlugins();
+		if (enable) {
+			set.remove("-" + pluginId);
 			set.add(pluginId);
 		} else {
 			set.remove(pluginId);
+			set.add("-" + pluginId);
 		}
 		StringBuilder serialization = new StringBuilder();
 		Iterator<String> it = set.iterator();
@@ -510,8 +525,8 @@ public class OsmandSettings {
 				serialization.append(",");
 			}
 		}
-		if(!serialization.toString().equals(ENABLED_PLUGINS.get())) {
-			ENABLED_PLUGINS.set(serialization.toString());
+		if(!serialization.toString().equals(PLUGINS.get())) {
+			PLUGINS.set(serialization.toString());
 		}
 	}
 	
