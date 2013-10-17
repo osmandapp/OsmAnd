@@ -1563,7 +1563,15 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="about_settings_descr">Versijos informacija, licencijos, projekto nariai</string>
     <string name="tips_and_tricks">Patarimai</string>
     <string name="tip_recent_changes_1_6_t">Pakeitimai 1.6 versijoje:
-	\n\t* Nustatyti/redaguoti internetinius žemėlapių lakštų šaltinius (nurodyti galiojimo laiką)
+    \n\t* Visiškai permatomo fono palaikymas
+    \n\t* Aukštos raiškos (Full HD) įrenginių palaikymas
+    \n\t* Regionus peržiūrėti ir parsisiųsti galima tiesiai iš žemėlapio
+    \n\t* SRTM failus galima parsisiųsti specifinei šaliai  
+    \n\t* Visiškai naujas pasaulio žemėlapis su pagrindiniais keliais, miškais ir geležinkeliais 
+    \n\t* Žemėlapio padidinamasis stiklas žemėlapiui (ilgas didinimo mygtuko paspaudimas) - ypač naudingas rastriniams žemėlapiams  
+    \n\t* Galimybė nustatyti/redaguoti internetinius žemėlapių lakštų šaltinius (galima nurodyti galiojmio laiką)
+    \n\t* Greitesnis adreso įvedimas
+    \n\t* Ištaisytos maršruto apskaičiavimo ir vaizdavimo klaidos
     </string>
     <string name="local_index_tile_data_zooms">Parsiųsti mąsteliai: %1$s</string>
     <string name="local_index_tile_data_expire">Nustos galioti (minutės): %1$s</string>
@@ -1588,4 +1596,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* \'Žiemos ir slidinėjimo\' rodo (sniego padengtą) žiemos kraštovaizdį vertikaliu režimu, kartu ir pasaulines slidinėjimo trasa ir keltuvus (kartu su parsiųstu \'World ski\' žemėlapiu)
 	</string>
     <string name="base_world_map">Bazinis pasaulio žemėlapis</string>
-	</resources>
+	<string name="route_distance_close">Arti</string>
+    <string name="route_distance_far">Toli</string>
+    <string name="route_distance_farthest">Toliausiai</string>
+    <string name="map_magnifier">Žemėlapio padidinimo stiklas</string>
+    </resources>
