@@ -1595,4 +1595,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="route_distance_settings">地圖檢視距離 (TODO naming)</string>
     <string name="map_magnifier">地圖放大鏡</string>
     <string name="route_distance_farest">最遠</string>
+    <string name="route_distance_farthest">最遠</string>
     </resources>
