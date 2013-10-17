@@ -166,7 +166,7 @@ public class DownloadTilesDialog {
 						for (int x = x1; x <= x2 && !cancel; x++) {
 							for (int y = y1; y <= y2 && !cancel; y++) {
 								String tileId = rm.calculateTileId(map, x, y, z);
-								if (rm.tileExistOnFileSystem(tileId, map, x, y, z, true)) {
+								if (rm.tileExistOnFileSystem(tileId, map, x, y, z)) {
 									progressDlg.setProgress(progressDlg.getProgress() + 1);
 								} else {
 									rm.getTileImageForMapSync(tileId, map, x, y, z, true);

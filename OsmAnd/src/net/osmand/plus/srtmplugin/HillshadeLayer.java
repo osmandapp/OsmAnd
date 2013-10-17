@@ -153,24 +153,25 @@ public class HillshadeLayer extends MapTileLayer {
 			}
 			
 			@Override
-			public boolean exists(int x, int y, int zoom, boolean exact) {
-				return !getTileSource(x, y, zoom).isEmpty();
-			}
-			
-			@Override
-			public Bitmap getImage(int x, int y, int zoom) {
+			public boolean exists(int x, int y, int zoom) {
 				List<String> ts = getTileSource(x, y, zoom);
 				for (String t : ts) {
 					SQLiteTileSource sqLiteTileSource = resources.get(t);
-					if(sqLiteTileSource.exists(x, y, zoom, false)) {
-						return sqLiteTileSource.getImage(x, y, zoom);
+					if(sqLiteTileSource.exists(x, y, zoom)) {
+						return true;
 					}
 				}
+				return false;
+			}
+			
+			@Override
+			public Bitmap getImage(int x, int y, int zoom, long[] timeHolder) {
+				List<String> ts = getTileSource(x, y, zoom);
 				for (String t : ts) {
 					SQLiteTileSource sqLiteTileSource = resources.get(t);
-					Bitmap img = sqLiteTileSource.getImage(x, y, zoom);
-					if (img != null) {
-						return img;
+					Bitmap bmp = sqLiteTileSource.getImage(x, y, zoom, timeHolder);
+					if(bmp != null) {
+						return sqLiteTileSource.getImage(x, y, zoom, timeHolder);
 					}
 				}
 				return null;
@@ -188,7 +189,7 @@ public class HillshadeLayer extends MapTileLayer {
 			
 			@Override
 			public int getMaximumZoomSupported() {
-				return 19;
+				return 11;
 			}
 			
 			@Override

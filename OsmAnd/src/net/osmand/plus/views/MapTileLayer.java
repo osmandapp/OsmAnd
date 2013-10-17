@@ -9,14 +9,15 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.util.MapUtils;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.FloatMath;
 import android.widget.Toast;
-import net.osmand.util.MapUtils;
 
 public class MapTileLayer extends BaseMapLayer {
 
@@ -161,55 +162,78 @@ public class MapTileLayer extends BaseMapLayer {
 
 				int y1 = tileBox.getPixYFromTileYNoRot(topPlusJ -  ellipticTileCorrection);
 				int y2 = tileBox.getPixYFromTileYNoRot(topPlusJ + 1 -  ellipticTileCorrection);
+				bitmapToDraw.set(x1, y1, x2 , y2);
+				
 				final int tileX = leftPlusI;
 				final int tileY = topPlusJ;
+				Bitmap bmp = null;
 				String ordImgTile = mgr.calculateTileId(map, tileX, tileY, nzoom);
 				// asking tile image async
-				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, tileX, tileY, nzoom, false);
-				Bitmap bmp = null;
-				boolean originalBeLoaded = useInternet && nzoom <= maxLevel;
-				if (imgExist || originalBeLoaded) {
+				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, tileX, tileY, nzoom);
+				boolean originalWillBeLoaded = useInternet && nzoom <= maxLevel;
+				if (imgExist || originalWillBeLoaded) {
 					bmp = mgr.getTileImageForMapAsync(ordImgTile, map, tileX, tileY, nzoom, useInternet);
 				}
 				if (bmp == null) {
-					int div = 2;
+					int div = 1;
+					boolean readFromCache = originalWillBeLoaded || imgExist;
+					boolean loadIfExists = !readFromCache;
 					// asking if there is small version of the map (in cache)
-					String imgTile2 = mgr.calculateTileId(map, tileX / 2, tileY / 2, nzoom - 1);
-					String imgTile4 = mgr.calculateTileId(map, tileX / 4, tileY / 4, nzoom - 2);
-					if (originalBeLoaded || imgExist) {
-						bmp = mgr.getTileImageFromCache(imgTile2);
-						div = 2;
-						if (bmp == null) {
-							bmp = mgr.getTileImageFromCache(imgTile4);
-							div = 4;
+					int allowedScale = Math.min(OVERZOOM_IN + Math.max(0, nzoom - map.getMaximumZoomSupported()), 8);
+					int kzoom = 1;
+					for (; kzoom <= allowedScale; kzoom++) {
+						div *= 2;
+						String imgTileId = mgr.calculateTileId(map, tileX / div, tileY / div, nzoom - kzoom);
+						if (readFromCache) {
+							bmp = mgr.getTileImageFromCache(imgTileId);
+							if (bmp != null) {
+								break;
+							}
+						} else if (loadIfExists) {
+							if (mgr.tileExistOnFileSystem(imgTileId, map, tileX / div, tileY / div, nzoom - kzoom) 
+									|| (useInternet && nzoom - kzoom <= maxLevel)) {
+								bmp = mgr.getTileImageForMapAsync(imgTileId, map, tileX / div, tileY / div, nzoom
+										- kzoom, useInternet);
+								break;
+							}
 						}
-					}
-					if (!originalBeLoaded && !imgExist) {
-						if (mgr.tileExistOnFileSystem(imgTile2, map, tileX / 2, tileY / 2, nzoom - 1, false)
-								|| (useInternet && nzoom - 1 <= maxLevel)) {
-							bmp = mgr.getTileImageForMapAsync(imgTile2, map, tileX / 2, tileY / 2, nzoom - 1, useInternet);
-							div = 2;
-						} else if (mgr.tileExistOnFileSystem(imgTile4, map, tileX / 4, tileY / 4, nzoom - 2, false)
-								|| (useInternet && nzoom - 2 <= maxLevel)) {
-							bmp = mgr.getTileImageForMapAsync(imgTile4, map, tileX / 4, tileY / 4, nzoom - 2, useInternet);
-							div = 4;
-						}
-					}
 
+					}
 					if (bmp != null) {
-						int xZoom = ((left + i) % div) * tileSize / div;
-						int yZoom = ((top + j) % div) * tileSize / div;
-						bitmapToZoom.set(xZoom, yZoom, xZoom + tileSize / div, yZoom + tileSize / div);
-						bitmapToDraw.set(x1, y1, x2 , y2);
-						canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
-						oneTileShown = true;
+						int xZoom = (tileX % div) * tileSize / div;
+						int yZoom = (tileY % div) * tileSize / div;
+						// nice scale
+						boolean useSampling = kzoom > 4;
+						int margin = useSampling ? 1 : 0;
+						bitmapToZoom.set(Math.max(xZoom - margin, 0), 
+								Math.max(yZoom - margin , 0), 
+								Math.min(margin + xZoom + tileSize / div, tileSize), 
+								Math.min(margin + yZoom + tileSize / div, tileSize));
+						if(!useSampling) {
+							canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
+						} else {
+							int scaledSize = tileSize / div;
+							RectF src = new RectF(0.5f, 0.5f,
+									scaledSize + 2 * margin - 0.5f, scaledSize + 2 * margin - 0.5f);
+							RectF dest = new RectF(0, 0, tileSize, tileSize);
+			                Matrix m = new Matrix();
+			                m.setRectToRect(src, dest, Matrix.ScaleToFit.FILL);
+							Bitmap sampled = Bitmap.createBitmap(bmp, bitmapToZoom.left, bitmapToZoom.top, 
+									scaledSize + 2 * margin - 1, scaledSize + 2 * margin - 1, m, true);
+							bitmapToZoom.set(0, 0, tileSize, tileSize);
+							// very expensive that's why put in the cache
+							mgr.putTileInTheCache(ordImgTile, sampled);
+							canvas.drawBitmap(sampled, bitmapToZoom, bitmapToDraw, paintBitmap);
+						}
 					}
 				} else {
 					bitmapToZoom.set(0, 0, tileSize, tileSize);
-					bitmapToDraw.set(x1, y1, x2, y2 );
 					canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
+				}
+				if(bmp != null) {
 					oneTileShown = true;
 				}
+				
 			}
 		}
 		

@@ -21,19 +21,14 @@ import org.apache.commons.logging.Log;
 
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Rect;
-import android.graphics.RectF;
 
 
 public class SQLiteTileSource implements ITileSource {
 
 	
 	public static final String EXT = IndexConstants.SQLITE_EXT;
-	private static final Log log = PlatformUtil.getLog(SQLiteTileSource.class); 
+	private static final Log log = PlatformUtil.getLog(SQLiteTileSource.class);
 	
 	private ITileSource base;
 	private String urlTemplate = null;
@@ -42,14 +37,14 @@ public class SQLiteTileSource implements ITileSource {
 	private final File file;
 	private int minZoom = 1;
 	private int maxZoom = 17; 
-	private int baseZoom = 17; //Default base zoom
 	private boolean inversiveZoom = true; // BigPlanet
 	private boolean timeSupported = false;
+	private int expirationTimeMillis = -1; // never
 
-	static final int margin = 1;
 	static final int tileSize = 256;
-	static final int minScaledSize = 8;
 	private ClientContext ctx;
+	
+	
 	
 	public SQLiteTileSource(ClientContext ctx, File f, List<TileSourceTemplate> toFindUrl){
 		this.ctx = ctx;
@@ -106,7 +101,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public String getUrlToLoad(int x, int y, int zoom) {
-		if (zoom > baseZoom)
+		if (zoom > maxZoom)
 			return null;
 		SQLiteConnection db = getDatabase();
 		if(db == null || db.isReadOnly() || urlTemplate == null){
@@ -175,6 +170,16 @@ public class SQLiteTileSource implements ITileSource {
 						timeSupported = hasTimeColumn();
 						addInfoColumn("timecolumn", timeSupported?"yes" : "no");
 					}
+					int expireminutes = list.indexOf("expireminutes");
+					this.expirationTimeMillis = -1;
+					if(expireminutes != -1) {
+						int minutes = (int) cursor.getInt(expireminutes);
+						if(minutes > 0) {
+							this.expirationTimeMillis = minutes * 60 * 1000;
+						}
+					} else {
+						addInfoColumn("expireminutes", "0");
+					}
 					//boolean inversiveInfoZoom = tnumbering != -1 && "BigPlanet".equals(cursor.getString(tnumbering));
 					boolean inversiveInfoZoom = inversiveZoom;
 					int mnz = list.indexOf("minzoom");
@@ -183,20 +188,15 @@ public class SQLiteTileSource implements ITileSource {
 					}
 					int mxz = list.indexOf("maxzoom");
 					if(mxz != -1) {
-						baseZoom = (int) cursor.getInt(mxz);
+						maxZoom = (int) cursor.getInt(mxz);
 					}
 					if(inversiveInfoZoom) {
 						mnz = minZoom;
-						minZoom = 17 - baseZoom;
-						baseZoom = 17 - mnz;
+						minZoom = 17 - maxZoom;
+						maxZoom = 17 - mnz;
 					}
 				}
 				cursor.close();
-				maxZoom = 24; // Cheat to have tiles request even if zoom level not in sqlite
-				// decrease maxZoom if too much scaling would be required
-				while ((tileSize >> (maxZoom - baseZoom)) < minScaledSize)
-					maxZoom--;
-				
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 			}
@@ -219,40 +219,27 @@ public class SQLiteTileSource implements ITileSource {
 		return timeSupported;
 	}
 	
-	public boolean exists(int x, int y, int zoom, boolean exact) {
+	public boolean exists(int x, int y, int zoom) {
 		SQLiteConnection db = getDatabase();
-		if(db == null){
+		if (db == null) {
 			return false;
 		}
 		long time = System.currentTimeMillis();
-		if (exact || zoom <= baseZoom) {
+		try {
 			int z = getFileZoom(zoom);
-			SQLiteCursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",z+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			SQLiteCursor cursor = db.rawQuery(
+					"SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] { x + "", y + "", z + "" }); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 			try {
 				boolean e = cursor.moveToFirst();
 				cursor.close();
-				if (log.isDebugEnabled()) {
-					log.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				}
+
 				return e;
 			} catch (SQLiteDiskIOException e) {
 				return false;
 			}
-		} else {
-			int n = zoom - baseZoom;
-			int base_xtile = x >> n;
-			int base_ytile = y >> n;
-			int z = getFileZoom(baseZoom);
-			SQLiteCursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {base_xtile+"", base_ytile+"",z+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-			try {
-				boolean e = cursor.moveToFirst();
-				cursor.close();
-				if (log.isDebugEnabled()) {
-					log.debug("Checking parent tile existance x = " + base_xtile + " y = " + base_ytile + " z = " + baseZoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				}
-				return e;
-			} catch (SQLiteDiskIOException e) {
-				return false;
+		} finally {
+			if (log.isDebugEnabled()) {
+				log.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			}
 		}
 	}
@@ -265,113 +252,43 @@ public class SQLiteTileSource implements ITileSource {
 		return db.isDbLockedByOtherThreads();
 	}
 
-	private Bitmap getMetaTile(int x, int y, int zoom, int flags) {
-		// return a (tileSize+2*margin)^2 tile around a given tile
-		// based on its neighbor. This is needed to have a nice bilinear resampling
-		// on tile edges. Margin of 1 is enough for bilinear resampling.
-
+	public Bitmap getImage(int x, int y, int zoom, long[] timeHolder) {
 		SQLiteConnection db = getDatabase();
 		if(db == null){
 			return null;
 		}
-		
-		Bitmap stitchedImage = Bitmap.createBitmap(tileSize + 2 * margin, tileSize + 2 * margin, Config.ARGB_8888);
-		Canvas canvas = new Canvas(stitchedImage);
-
-		for (int dx = -1; dx <= 1; dx++) {
-			for (int dy = -1; dy <= 1; dy++) {
-				if ((flags & (0x400 >> (4 * (dy + 1) + (dx + 1)))) == 0)
-					continue;
-
-
-				int xOff, yOff, w, h;
-				int dstx, dsty;
-				SQLiteCursor cursor = db.rawQuery(
-						"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?",
-						new String[] {(x + dx) + "", (y + dy) + "", getFileZoom(zoom) + ""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		long ts = System.currentTimeMillis();
+		try {
+			if (zoom <= maxZoom) {
+				// return the normal tile if exists
+				String[] params = new String[] { x + "", y + "", getFileZoom(zoom) + "" };
+				boolean queryTime = timeHolder != null && timeHolder.length > 0 && timeSupported;
+				SQLiteCursor cursor = db.rawQuery("SELECT image " +(queryTime?", time":"")+"  FROM tiles WHERE x = ? AND y = ? AND z = ?",
+						params); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 				byte[] blob = null;
-				if(cursor.moveToFirst()) {
+				if (cursor.moveToFirst()) {
 					blob = cursor.getBlob(0);
+					if(queryTime) {
+						timeHolder[0] = cursor.getLong(1);
+					}
 				}
 				cursor.close();
-				if (dx < 0) xOff = tileSize - margin; else xOff = 0;
-				if (dx == 0) w = tileSize; else w = margin;
-				if (dy < 0) yOff = tileSize - margin; else yOff = 0;
-				if (dy == 0) h = tileSize; else h = margin;
-				dstx = dx * tileSize + xOff + margin;
-				dsty = dy * tileSize + yOff + margin;
-				if(blob != null){
-
-					Bitmap Tile =  BitmapFactory.decodeByteArray(blob, 0, blob.length);
-					blob = null;
-					Rect src = new Rect(xOff, yOff, xOff + w, yOff + h);
-					Rect dst = new Rect(dstx, dsty, dstx + w, dsty + h);
-					canvas.drawBitmap(Tile, src, dst, null);
-					Tile.recycle();
+				if (blob != null) {
+					Bitmap bmp = null;
+					bmp = BitmapFactory.decodeByteArray(blob, 0, blob.length);
+					if(bmp == null) {
+						// broken image delete it
+						db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params); 
+					}
+					return bmp;
 				}
 			}
-		}
-		return stitchedImage; // return a tileSize+2*margin size image
-		
-	}
-	
-	public Bitmap getImage(int x, int y, int zoom) {
-		SQLiteConnection db = getDatabase();
-		if(db == null){
 			return null;
-		}
-		if (zoom <= baseZoom) {
-			// return the normal tile if exists
-			SQLiteCursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", 
-					new String[] {x+"", y+"", getFileZoom(zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-			byte[] blob = null;
-			if(cursor.moveToFirst()) {
-				blob = cursor.getBlob(0);
+		} finally {
+			if(log.isDebugEnabled()) {
+				log.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts)
+					+ " ms ");
 			}
-			cursor.close();
-			if(blob != null){
-				return BitmapFactory.decodeByteArray(blob, 0, blob.length);
-			}
-			return null;
-		} else {
-			// return a resampled tile from its last parent
-			int n = zoom - baseZoom;
-			int base_xtile = x >> n;
-			int base_ytile = y >> n;
-
-			int scaledSize= tileSize >> n;
-			int offset_x=  x - (base_xtile << n);
-			int offset_y=  y - (base_ytile << n);
-			int flags = 0x020;
-
-			if (scaledSize < minScaledSize)
-				return null;
-
-			if (offset_x == 0)
-				flags |= 0x444;
-			else if (offset_x == (1 << n) - 1)
-				flags |= 0x111;
-			if (offset_y == 0)
-				flags |= 0x700;
-			else if (offset_y == (1 << n) - 1)
-				flags |= 0x007;
-
-			Bitmap metaTile = getMetaTile(base_xtile, base_ytile, baseZoom, flags);
-
-			if(metaTile != null){
-				// in tile space:
-				int delta_px = scaledSize * offset_x;
-				int delta_py = scaledSize * offset_y;
-				
-				RectF src = new RectF(0.5f, 0.5f,
-						scaledSize + 2 * margin - 0.5f, scaledSize + 2 * margin - 0.5f);
-				RectF dest = new RectF(0, 0, tileSize, tileSize);
-				Matrix m = new Matrix();
-				m.setRectToRect(src, dest, Matrix.ScaleToFit.FILL);
-				return Bitmap.createBitmap(metaTile, delta_px, delta_py,
-						scaledSize + 2*margin-1, scaledSize + 2*margin-1, m, true);
-			}
-			return null;
 		}
 	}
 	 
@@ -425,7 +342,7 @@ public class SQLiteTileSource implements ITileSource {
 		if (db == null || db.isReadOnly()) {
 			return;
 		}
-		if (exists(x, y, zoom, true)) {
+		if (exists(x, y, zoom)) {
 			return;
 		}
 		ByteBuffer buf = ByteBuffer.allocate((int) fileToSave.length());
@@ -437,15 +354,15 @@ public class SQLiteTileSource implements ITileSource {
 		}
 
 		
-		String query = timeSupported? "INSERT INTO tiles(x,y,z,s,image,time) VALUES(?, ?, ?, ?, ?, ?)" :
-				"INSERT INTO tiles(x,y,z,s,image) VALUES(?, ?, ?, ?, ?)";
+		String query = timeSupported ? "INSERT INTO tiles(x,y,z,s,image,time) VALUES(?, ?, ?, ?, ?, ?)"
+				: "INSERT INTO tiles(x,y,z,s,image) VALUES(?, ?, ?, ?, ?)";
 		net.osmand.plus.api.SQLiteAPI.SQLiteStatement statement = db.compileStatement(query); //$NON-NLS-1$
 		statement.bindLong(1, x);
 		statement.bindLong(2, y);
 		statement.bindLong(3, getFileZoom(zoom));
 		statement.bindLong(4, 0);
 		statement.bindBlob(5, buf.array());
-		if(timeSupported) {
+		if (timeSupported) {
 			statement.bindLong(6, System.currentTimeMillis());
 		}
 		statement.execute();
@@ -478,15 +395,17 @@ public class SQLiteTileSource implements ITileSource {
 		return false;
 	}
 
-	@Override
-	public int getExpirationTimeMillis() {
-		return -1;
-	}
-
-	@Override
 	public int getExpirationTimeMinutes() {
-		return -1;
+		if(expirationTimeMillis  < 0) {
+			return -1;
+		}
+		return expirationTimeMillis / (60  * 1000);
 	}
+	
+	public int getExpirationTimeMillis() {
+		return expirationTimeMillis;
+	}
+	
 
 }
 

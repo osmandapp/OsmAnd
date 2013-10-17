@@ -207,6 +207,10 @@ public class ResourceManager {
 		return cacheOfImages.get(file);
 	}
 	
+	public void putTileInTheCache(String file, Bitmap bmp) {
+		cacheOfImages.put(file, bmp);
+	}
+	
 	
 	public Bitmap getTileImageForMapSync(String file, ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
 		return getTileImageForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, true, true);
@@ -236,14 +240,14 @@ public class ResourceManager {
 		
 	}
 	
-	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom, boolean exact){
+	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom){
 		if(!imagesOnFS.containsKey(file)){
 			boolean ex = false;
 			if(map instanceof SQLiteTileSource){
 				if(((SQLiteTileSource) map).isLocked()){
 					return false;
 				}
-				ex = ((SQLiteTileSource) map).exists(x, y, zoom, exact);
+				ex = ((SQLiteTileSource) map).exists(x, y, zoom);
 			} else {
 				if(file == null){
 					file = calculateTileId(map, x, y, zoom);
@@ -256,7 +260,7 @@ public class ResourceManager {
 				imagesOnFS.put(file, null);
 			}
 		}
-		return imagesOnFS.get(file) != null;		
+		return imagesOnFS.get(file) != null || cacheOfImages.get(file) != null;		
 	}
 	
 	public void clearTileImageForMap(String file, ITileSource map, int x, int y, int zoom){
@@ -320,7 +324,7 @@ public class ResourceManager {
 		
 		if (loadFromFs && cacheOfImages.get(tileId) == null && map != null) {
 			boolean locked = map instanceof SQLiteTileSource && ((SQLiteTileSource) map).isLocked();
-			if(!loadFromInternetIfNeeded && !locked && !tileExistOnFileSystem(tileId, map, x, y, zoom, false)){
+			if(!loadFromInternetIfNeeded && !locked && !tileExistOnFileSystem(tileId, map, x, y, zoom)){
 				return null;
 			}
 			String url = loadFromInternetIfNeeded ? map.getUrlToLoad(x, y, zoom) : null;
@@ -364,11 +368,14 @@ public class ResourceManager {
 			Bitmap bmp = null;
 			if (req.tileSource instanceof SQLiteTileSource) {
 				try {
-					bmp = ((SQLiteTileSource) req.tileSource).getImage(req.xTile, req.yTile, req.zoom);
-//					int ts = req.tileSource.getExpirationTimeMillis();
-//					if(ts != -1 && req.url != null && time - en.lastModified() > ts) {
-//						asyncLoadingThread.requestToDownload(req);
-//					}
+					long[] tm = new long[1];
+					bmp = ((SQLiteTileSource) req.tileSource).getImage(req.xTile, req.yTile, req.zoom, tm);
+					if (tm[0] != 0) {
+						int ts = req.tileSource.getExpirationTimeMillis();
+						if (ts != -1 && req.url != null && time - tm[0] > ts) {
+							asyncLoadingThread.requestToDownload(req);
+						}
+					}
 				} catch (OutOfMemoryError e) {
 					log.error("Out of memory error", e); //$NON-NLS-1$
 					clearTiles();
