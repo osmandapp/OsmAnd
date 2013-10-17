@@ -1630,4 +1630,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_distance_settings_descr">Konfigurer kortvisningsafstand</string>
     <string name="route_distance_settings">Kortvisningsafstand</string>
     <string name="map_magnifier">Kort lup</string>
+    <string name="route_distance_farthest">Længst væk</string>
     </resources>
