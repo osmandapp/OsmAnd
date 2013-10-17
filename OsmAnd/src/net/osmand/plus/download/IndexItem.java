@@ -11,13 +11,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 

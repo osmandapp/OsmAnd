@@ -5,9 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.ClientContext;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;

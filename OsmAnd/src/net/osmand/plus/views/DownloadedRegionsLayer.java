@@ -128,8 +128,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 			return;
 		}
 		// draw objects
-		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS && osmandRegions.isInitialized()) {
-			final List<BinaryMapDataObject> currentObjects = data.results;
+		final List<BinaryMapDataObject> currentObjects = data.results;
+		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS && osmandRegions.isInitialized() &&
+				currentObjects != null) {
 			path.reset();
 			for (BinaryMapDataObject o : currentObjects) {
 				final String key = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getDownloadName(o))
@@ -198,6 +199,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 		// query from UI thread because of Android AsyncTask bug (Handler init)
 		data.queryNewData(tileBox);
 		RotatedTileBox queriedBox = data.getQueriedBox();
+		final List<BinaryMapDataObject> currentObjects = data.results;
 		if (osmandRegions.isInitialized() && queriedBox != null) {
 			if (zoom < ZOOM_TO_SHOW_MAP_NAMES && !basemapExists) {
 				filter.setLength(0);
@@ -205,8 +207,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				downloadBtn.setVisibility(View.VISIBLE);
 				downloadBtn.setText(view.getResources().getString(R.string.download_files) + " "
 						+ view.getResources().getString(R.string.base_world_map));
-			} else if(zoom >= ZOOM_TO_SHOW_MAP_NAMES && noMapsPresent && Math.abs(queriedBox.getZoom() - zoom) <= ZOOM_THRESHOLD){
-				final List<BinaryMapDataObject> currentObjects = data.results;
+			} else if(zoom >= ZOOM_TO_SHOW_MAP_NAMES && noMapsPresent && Math.abs(queriedBox.getZoom() - zoom) <= ZOOM_THRESHOLD &&
+					currentObjects != null){
 				StringBuilder s = new StringBuilder(view.getResources().getString(R.string.download_files));
 				filter.setLength(0);
 				Set<String> set = new TreeSet<String>();

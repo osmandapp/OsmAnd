@@ -39,6 +39,12 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 			} else if (lc.contains(".ttsvoice.zip")) {
 				nameId = R.string.index_name_tts_voice;
 				order = 2;
+			} else if (lc.contains("_wiki_")) {
+				if(skipWiki) {
+					continue;
+				}
+				nameId = R.string.index_name_wiki;
+				order = 10;
 			} else if (lc.startsWith("us") || 
 					(lc.contains("united states") && lc.startsWith("north-america")) ) {
 				nameId = R.string.index_name_us;
@@ -77,12 +83,6 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 			} else if (lc.contains("oceania") || lc.contains("australia")) {
 				nameId = R.string.index_name_oceania;
 				order = 70;
-			} else if (lc.contains("_wiki_")) {
-				if(skipWiki) {
-					continue;
-				}
-				nameId = R.string.index_name_wiki;
-				order = 10;
 			}
 
 			String name = ctx.getString(nameId);
