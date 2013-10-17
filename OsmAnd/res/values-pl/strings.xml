@@ -1564,4 +1564,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="route_distance_settings">Odległość widoku mapy (TODO naming)</string>
     <string name="map_magnifier">Lupa mapy</string>
     <string name="route_distance_settings_descr">Skonfiguruj odległość widoku mapy (TODO naming)</string>
+    <string name="route_distance_farthest">Najdalej</string>
     </resources>
