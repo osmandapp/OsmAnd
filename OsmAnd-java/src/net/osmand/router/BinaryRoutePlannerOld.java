@@ -135,9 +135,9 @@ public class BinaryRoutePlannerOld {
 			RouteSegment segment = graphSegments.poll();
 			ctx.visitedSegments++;
 			// for debug purposes
-			if (ctx.visitor != null) {
+//			if (ctx.visitor != null) {
 //				ctx.visitor.visitSegment(segment, true);
-			}
+//			}
 			updateCalculationProgress(ctx, graphDirectSegments, graphReverseSegments);
 			boolean routeFound = false;
 			if (!inverse) {
@@ -539,9 +539,9 @@ public class BinaryRoutePlannerOld {
 					next.setParentSegmentEnd(segmentEnd);
 					graphSegments.add(next);
 				}
-				if (ctx.visitor != null) {
+//				if (ctx.visitor != null) {
 //					ctx.visitor.visitSegment(next, false);
-				}
+//				}
 			} else {
 				// the segment was already visited! We need to follow better route if it exists
 				// that is very strange situation and almost exception (it can happen when we underestimate distnceToEnd)
@@ -554,9 +554,9 @@ public class BinaryRoutePlannerOld {
 					next.distanceFromStart = distFromStart;
 					next.setParentRoute(segment);
 					next.setParentSegmentEnd(segmentEnd);
-					if (ctx.visitor != null) {
+//					if (ctx.visitor != null) {
 //						ctx.visitor.visitSegment(next, next.getSegmentStart(), false);
-					}
+//					}
 				}
 			}
 

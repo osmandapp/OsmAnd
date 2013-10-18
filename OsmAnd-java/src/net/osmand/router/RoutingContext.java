@@ -387,14 +387,15 @@ public class RoutingContext {
 				for (RouteDataObject ro : routes) {
 					for (int i = 0; i < ro.pointsX.length; i++) {
 						if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
+							// At most one point by route.
 							long id = calcRouteId(ro, i);
-							if (excludeDuplications.contains(id)) {
-								continue;
+							if (!excludeDuplications.contains(id)) {
+								excludeDuplications.put(id, ro);
+								RouteSegment segment = new RouteSegment(ro, i);
+								segment.next = original;
+								original = segment;
 							}
-							excludeDuplications.put(id, ro);
-							RouteSegment segment = new RouteSegment(ro, i);
-							segment.next = original;
-							original = segment;
+							break;
 						}
 					}
 				}
@@ -665,7 +666,10 @@ public class RoutingContext {
 	
 	
 	private static long calcRouteId(RouteDataObject o, int ind) {
-		return (o.getId() << 10) + ind;
+		// TODO If that fix is correct simplify calcRouteId calls
+		// Exclusion must not be point by point but complete road.
+		return o.id;
+		//return (o.getId() << 10) + ind;
 	}
 
 
@@ -721,9 +725,9 @@ public class RoutingContext {
 				RouteSegment segment = routes.get(l);
 				while (segment != null) {
 					RouteDataObject ro = segment.road;
-					RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
-					if (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength()) {
-						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
+					long id = calcRouteId(ro, segment.getSegmentStart());
+					if (!excludeDuplications.contains(id)) {
+						excludeDuplications.put(id, ro);
 						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
 						s.next = original;
 						original = s;
@@ -738,21 +742,18 @@ public class RoutingContext {
 			ctx.timeToLoad += (System.nanoTime() - nanoTime);
 			if (res != null) {
 				for (RouteDataObject ro : res) {
-					
-					boolean accept = ro != null;
-					if (ctx != null) {
-						accept = ctx.getRouter().acceptLine(ro);
-					}
-					if (accept) {
+					if (ctx.getRouter().acceptLine(ro)) {
 						for (int i = 0; i < ro.pointsX.length; i++) {
 							if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
-								RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, i));
-								if (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength()) {
+								// At most one point by route.
+								long id = calcRouteId(ro, i);
+								if (!excludeDuplications.contains(id)) {
+									excludeDuplications.put(id, ro);
 									RouteSegment segment = new RouteSegment(ro, i);
 									segment.next = original;
 									original = segment;
-									excludeDuplications.put(calcRouteId(ro, i), ro);
 								}
+								break;
 							}
 						}
 					}
