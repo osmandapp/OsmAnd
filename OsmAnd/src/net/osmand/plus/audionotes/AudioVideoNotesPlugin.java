@@ -275,20 +275,23 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 		public String getDescription(Context ctx) {
 			String nm = name == null ? "" : name;
+			String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
 			if (isPhoto()) {
-				return ctx.getString(R.string.recording_photo_description, nm, AndroidUtils.formatTime(ctx, file.lastModified())).trim();
+				return ctx.getString(R.string.recording_photo_description, nm, time).trim();
 			}
 			updateInternalDescription();
-			return ctx.getString(R.string.recording_description, nm, getDuration(ctx), AndroidUtils.formatTime(ctx, file.lastModified()))
+			return ctx.getString(R.string.recording_description, nm, getDuration(ctx), time)
 					.trim();
 		}
 
 		public String getSmallDescription(Context ctx) {
 			String nm = name == null ? "" : name;
+			
+			String time = AndroidUtils.formatDateTime(ctx,file.lastModified());
 			if (isPhoto()) {
-				return ctx.getString(R.string.recording_photo_description, nm, AndroidUtils.formatTime(ctx,file.lastModified())).trim();
+				return ctx.getString(R.string.recording_photo_description, nm, time).trim();
 			}
-			return ctx.getString(R.string.recording_description, nm, "", AndroidUtils.formatTime(ctx, file.lastModified())).trim();
+			return ctx.getString(R.string.recording_description, nm, "", time).trim();
 		}
 
 		private String getDuration(Context ctx) {
@@ -307,6 +310,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private static void initializeRemoteControlRegistrationMethods() {
 		try {
+			// API 8
 			if (mRegisterMediaButtonEventReceiver == null) {
 				mRegisterMediaButtonEventReceiver = AudioManager.class.getMethod("registerMediaButtonEventReceiver",
 						new Class[] { ComponentName.class });

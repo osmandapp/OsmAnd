@@ -40,6 +40,12 @@ public class AndroidUtils {
 		return DateFormat.getDateFormat(ctx).format(new Date(time));
 	}
 	
+	public static String formatDateTime(Context ctx, long time) {
+		Date d = new Date(time);
+		return DateFormat.getDateFormat(ctx).format(d) +
+				" " + DateFormat.getTimeFormat(ctx).format(d);
+	}
+	
 	public static String formatTime(Context ctx, long time) {
 		return DateFormat.getTimeFormat(ctx).format(new Date(time));
 	}
