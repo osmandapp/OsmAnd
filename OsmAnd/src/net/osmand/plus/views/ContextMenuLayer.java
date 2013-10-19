@@ -165,11 +165,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				description = view.getContext().getString(R.string.point_on_map, 
 						latLon.getLatitude(), latLon.getLongitude());
 			}
-			if(description.indexOf('\n') == -1) {
+			textView.setText(description);
+			if(textView.getLineCount() == 1) {
 				// make 2 line description
 				description +="\n ";
+				textView.setText(description);
 			}
-			textView.setText(description);
 		} else {
 			textView.setText(""); //$NON-NLS-1$
 		}

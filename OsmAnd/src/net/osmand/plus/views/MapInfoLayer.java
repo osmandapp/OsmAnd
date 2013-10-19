@@ -1,37 +1,58 @@
 package net.osmand.plus.views;
 
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.graphics.*;
-import android.graphics.Paint.Style;
-import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.View;
-import android.view.View.MeasureSpec;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.*;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.LinearLayout.LayoutParams;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.*;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityActions;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.mapwidgets.*;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
-import net.osmand.util.Algorithms;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.mapwidgets.AppearanceWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.BaseMapWidget;
+import net.osmand.plus.views.mapwidgets.ImageViewWidget;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
+import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
+import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.StackWidgetView;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.UpdateableWidget;
+import net.osmand.util.Algorithms;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.MeasureSpec;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class MapInfoLayer extends OsmandMapLayer {
 

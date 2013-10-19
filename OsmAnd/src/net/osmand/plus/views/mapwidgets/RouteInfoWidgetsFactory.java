@@ -10,7 +10,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -656,7 +655,7 @@ public class RouteInfoWidgetsFactory {
 						} else if(alarm.getType() == AlarmInfo.STOP) {
 							// text = "STOP";
 						}
-						visible = text != null &&  text.length() > 0;
+						visible = (text != null &&  text.length() > 0) || locimgId != 0;
 						if (visible) {
 							if (alarm.getType() == AlarmInfo.SPEED_CAMERA) {
 								visible = cams;

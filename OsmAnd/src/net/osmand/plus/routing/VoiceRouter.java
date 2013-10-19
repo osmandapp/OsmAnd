@@ -4,7 +4,6 @@ package net.osmand.plus.routing;
 import net.osmand.Location;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
@@ -133,6 +132,9 @@ public class VoiceRouter {
 	}
 	
 	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon){
+		if(currentSpeed <= 0) {
+			currentSpeed = DEFAULT_SPEED;
+		}
 		if(dist < etalon || ((dist / currentSpeed) < (etalon / DEFAULT_SPEED))){
 			return true;
 		}

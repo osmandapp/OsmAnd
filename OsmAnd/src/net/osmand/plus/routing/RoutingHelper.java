@@ -71,8 +71,6 @@ public class RoutingHelper {
 //	private ProgressBar progress;
 //	private Handler progressHandler;
 
-
-
 	public boolean makeUturnWhenPossible() {
 		return makeUturnWhenPossible;
 	}
@@ -637,9 +635,22 @@ public class RoutingHelper {
 		}
 	}
 	
+	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon, double defSpeed){
+		if(dist < etalon || ((dist / currentSpeed) < (etalon / defSpeed))){
+			return true;
+		}
+		return false;
+	}
+	
 	public synchronized String getCurrentName(){
 		NextDirectionInfo n = getNextRouteDirectionInfo(new NextDirectionInfo(), false);
-		if((n.imminent == 0 || n.imminent == 1) && (n.directionInfo != null)) {
+		Location l = lastFixedLocation;
+		float speed = 0;
+		if(l != null && l.hasSpeed()) {
+			speed = l.getSpeed();
+		}
+		if(n.distanceTo > 0  && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() && 
+				voiceRouter.isDistanceLess(speed, n.distanceTo, voiceRouter.PREPARE_DISTANCE * 0.75f)) {
 			String nm = n.directionInfo.getStreetName();
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
