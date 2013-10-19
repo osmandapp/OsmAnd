@@ -748,8 +748,8 @@ public class RouteProvider {
                     }
                 }
                 pt.desc = pt.name;
-
             }
+            gpx.points.add(pt);
         }
         return gpx;
 	}
