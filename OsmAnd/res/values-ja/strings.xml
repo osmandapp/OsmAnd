@@ -552,7 +552,7 @@ POIの更新は利用できません</string>
  <string name="auto_zoom_map">マップを自動ズーム</string>
  <string name="additional_settings">追加設定</string>
  <string name="settings_preset_descr">地図の表示とナビゲーションの設定はプロファイルごとに記憶されます。デフォルトのプロファイルを設定してください。</string>
- <string name="settings_preset">アプリケーションモード</string>
+ <string name="settings_preset">デフォルトプロファイル</string>
  <string name="settings">設定</string>
  <string name="save_current_track_descr">今すぐ現在のトラックをSDに保存</string>
  <string name="save_current_track">現在のトラックを保存</string>
@@ -617,7 +617,7 @@ POIの更新は利用できません</string>
 <string name="choose_available_region">リストから地域を選ぶ</string>
 <string name="choose_intersected_street">交差する通りを選ぶ</string>
 <string name="Closest_Amenities">いちばん近い施設</string>
-<string name="app_mode_default">デフォルト(デフォルト値もセット)</string>
+<string name="app_mode_default">マップを表示</string>
 <string name="app_mode_car">自動車</string>
 <string name="app_mode_bicycle">自転車</string>
 <string name="app_mode_pedestrian">歩行者</string>
@@ -714,4 +714,174 @@ POIの更新は利用できません</string>
 <string name="av_photo_play_sound_descr">シャッター音を選択します</string>
 <string name="base_world_map">基本世界地図</string>
 	<string name="tip_map_styles">マップ形式</string>
-	</resources>
+	<string name="route_distance_close">閉じる</string>
+    <string name="route_distance_far">遠い</string>
+    <string name="route_distance_farthest">最も遠い</string>
+    <string name="route_distance_settings_descr">マップビューの距離を設定（TODO命令）</string>
+    <string name="route_distance_settings">マップビュー距離（TODO命令）</string>
+    <string name="map_magnifier">マップ拡大鏡</string>
+    <string name="tip_map_styles_t">OsmAndはオフラインベクターマップの表示の仕方をあなたの好みに応じて表示することができます。:
+		\n\nバランスの良い \'デフォルト\' マップスタイルの他に、\'メニュー\' → \'スクリーンを設定\' → \'マップスタイル\' から選択できます。例えば、
+		\n\t* \'ツーリングビュー\' スタイルという旅行やツーリング、プロの運転手（より高いコントラストで区別可能な道路）、そしてアルパインハイキングのためのオプション（SACスケール）、自転車ルート、ハイキング用のシンボルマークなどの表示をさせることができます。
+		\n\t* \'高コントラスト道路\' は周囲の明るさによって道路強調表示します。
+		\n\t* \'ウィンターアンドスキー\' は（雪で覆われた）冬の風景の表示を行い、(\'世界のスキー場\' マップのダウンロード) があれば世界中のスキー場やそのスロープ・リフトを表示します。
+	</string>
+    <string name="about_version">バージョン</string>
+    <string name="about_settings">About</string>
+    <string name="about_settings_descr">バージョン情報、ランセンス、プロジェクトメンバー</string>
+    <string name="tips_and_tricks">チップス</string>
+    <string name="tip_recent_changes_1_6_t">1.6での変更点:
+    \n\t* 完全に透明な背景のサポート
+    \n\t* フルHDデバイスのサポート
+    \n\t* マップビューから地域の直接ダウンロードとその概要を確認可能に
+    \n\t* 特定の国のためにSRTMファイルのダウンロードを可能に  
+    \n\t* 主要道路、森林、そして線路の完全に新しい世界地図
+    \n\t* マップ拡大鏡（ズームボタン長押し。ラスター地図利用時に便利）
+    \n\t* オンラインタイルソースを定義/編集（有効期限を指定）
+    \n\t* 住所入力の高速化
+    \n\t* ルーティングとレンダリングのバグの修正
+    </string>
+    <string name="local_index_tile_data_zooms">ズームダウンロード中: %1$s</string>
+    <string name="local_index_tile_data_expire">有効期限 (分): %1$s</string>
+    <string name="local_index_tile_data_downloadable">ダウンロード可能: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">最大ズーム: %1$s</string>
+    <string name="local_index_tile_data_minzoom">最小ズーム: %1$s</string>
+    <string name="local_index_tile_data_name">タイルデータ: %1$s</string>
+    <string name="edit_tilesource_successfully">タイルソース %1$s は正常に保存されました</string>
+    <string name="edit_tilesource_elliptic_tile">楕円メルカトル</string>
+    <string name="edit_tilesource_maxzoom">最大ズーム</string>
+    <string name="edit_tilesource_expiration_time">有効期限（分）</string>
+    <string name="edit_tilesource_minzoom">最小ズーム</string>
+    <string name="edit_tilesource_url_to_load">URL</string>
+    <string name="edit_tilesource_choose_existing">選択して下さい...</string>
+    <string name="edit_tilesource_name">名前</string>
+    <string name="maps_define_edit">定義/編集…</string>
+	<string name="map_widget_fps_info">FPS デバッグ情報</string>
+	<string name="driving_region_descr">運転する地域の選択:米国、ヨーロッパ, イギリス, アジア, その他</string>
+	<string name="driving_region">運転地域</string>
+	<string name="driving_region_japan">日本</string>
+	<string name="driving_region_us">米国</string>
+	<string name="driving_region_canada">カナダ</string>
+	<string name="driving_region_europe_asia">ヨーロッパ &amp; アジア</string>
+	<string name="driving_region_uk">イギリス, インド, オーストラリア &amp; その他</string>
+	<string name="osmodroid_mode_on">OsMoDroidを停止</string>    
+    <string name="osmodroid_mode_off">OsMoDroidを開始</string>
+    <string name="announce_gpx_waypoints">GPX経由点をアナウンス</string>
+    <string name="speak_title">アナウンス…</string>
+	<string name="speak_descr">通りの名称、トラフィックの警告（強制停止、スピードバンプ）、スピードカメラ（オービス）、法定速度のアナウンス設定</string>
+	<string name="speak_street_names">通りの名前をアナウンス（TTS）</string>
+    <string name="speak_speed_limit">法定速度をアナウンス</string>
+    <string name="speak_cameras">スピードカメラ（オービス）をアナウンス</string>
+	<string name="speak_traffic_warnings">トラフィック警告をアナウンス</string>
+    <string name="osb_author_or_password_not_specified">OSMのユーザー名とパスワードを設定して下さい</string>
+    <string name="clear_intermediate_points">中間点をクリア</string>
+    <string name="keep_intermediate_points">中間点を保持</string>
+    <string name="new_directions_point_dialog">中間点はすでに設定されています。</string>
+    <string name="context_menu_item_directions_to">ここへ行く</string>
+    <string name="context_menu_item_directions_from">ここから出発</string>
+    <string name="route_descr_map_location">マップ: </string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="route_descr_current_location">現在位置</string>
+    <string name="route_to">行き先：</string>
+    <string name="route_via">経由：</string>
+    <string name="route_from">出発地：</string>
+	<string name="local_index_gpx_timespan">\n期間： %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\n移動時間： %1$d:%2$02d:%3$02d</string>
+	<string name="destination_point">目的地 %1$s</string>
+    <string name="context_menu_item_destination_point">目的地として設定</string>
+    <string name="please_select_address">最初に都市か通りを選択してください</string>
+    <string name="search_street_in_neighborhood_cities">近くの都市の通りを探す</string>
+    <string name="intermediate_items_sort_return">中間経由点は目的地へのルートの検索時にルートの最適化のためにソートし直されました。</string>
+    <string name="intermediate_items_sort_by_distance">ソート（ドア・ツー・ドア）</string>
+    <string name="local_osm_changes_backup_successful">OSMの変更ファイルが正常に生成されました %1$s</string>
+    <string name="local_osm_changes_backup_failed">OSMの変更のバックアップに失敗しました</string>
+    <string name="local_osm_changes_backup">OSMの変更としてバックアップ</string>
+    <string name="delete_point">地点の削除</string>
+    <string name="plugin_distance_point_time">時間</string>
+    <string name="plugin_distance_point_hdop">精度</string>
+    <string name="plugin_distance_point_speed">速度</string>
+    <string name="plugin_distance_point_ele">標高</string>
+    <string name="plugin_distance_point">地点</string>
+    <string name="gpx_file_name">GPXファイル名</string>
+    <string name="gpx_saved_sucessfully">GPXファイルは正常に {0} に保存されました</string>
+    <string name="osmand_distance_planning_plugin_description">地点と地点の距離を計算するためのパス（あるいは既存のGPXファイルの利用/修正）を作成します。GPXとして保存され、GPXルートの計画に利用できます。</string>
+    <string name="osmand_distance_planning_plugin_name">距離の計算・計画ツール</string>
+    <string name="use_distance_measurement_help">* 地点をマークするにはタップして下さい。\n 
+        * マップ上で長タップすると以前の地点を削除できます。\n
+        * 地点を長タップすると詳細を見ることができます。\n
+        * 測定ウィジェットをタップするとより多くのアクションを行うことができます。</string>
+    <string name="default_buttons_do_not_show_again">これ以降表示しない</string>
+    <string name="distance_measurement_start_editing">編集を開始</string>
+    <string name="distance_measurement_finish_editing">編集を終了</string>
+    <string name="distance_measurement_finish_subtrack">新しいサブトラックを開始</string>
+    <string name="distance_measurement_clear_route">すべての地点をクリア</string>
+    <string name="distance_measurement_save_gpx">GPXとして保存</string>
+    <string name="distance_measurement_load_gpx">GPXを開く</string>
+    <string name="wait_current_task_finished">現在のタスクが終了するまでお待ちください</string>
+    <string name="use_kalman_filter_compass_descr">電子コンパスの誤差を改善するためにカルマンフィルタを使用</string>
+    <string name="use_kalman_filter_compass">カルマンフィルタを使用</string>
+    <string name="access_mark_final_location_first">アクセシビリティモード：最初に目的地を選択して下さい</string> 
+    <string name="use_magnetic_sensor_descr">回転センサーの代わりに磁力センサーの値をコンパスの値として利用する</string>
+    <string name="use_magnetic_sensor">磁力センサーを利用</string>
+    <string name="other_location">その他</string>
+    <string name="files_limit">%1$d ファイルが残っています</string>
+    <string name="available_downloads_left">%1$d のファイルがダウンロード可能です</string>
+    <string name="install_paid">フルバージョン</string>
+    <string name="cancel_route">ルートを却下</string>
+    <string name="cancel_navigation">ナビを停止</string>
+    <string name="clear_destination">目的地を削除</string>
+    <string name="download_using_mobile_internet">現在Wi-Fiに接続されていません。現在のインターネット接続のままでダウンロードを続行しますか？</string>
+    <string name="street_name">通り</string>
+	<string name="hno">家屋番号</string>
+    <string name="monitoring_settings">ロギングサービス &amp; スリープモード</string>
+    <string name="monitoring_settings_descr">旅行の記録とスリープモードの有効化の行い方を設定します</string>
+    <string name="osmand_monitoring_plugin_description">スリープ（画面消灯）モード時のトラッキングとナビをGPSデバイスを定期的にウェイクアップすることで有効化します。
+あなたの旅行のローカルのGPXファイルかオンラインのウェブサービスで記録するかを容易に設定する画面を表示します。</string>
+    <string name="osmand_monitoring_plugin_name">ロギングサービス &amp; スリープモード</string>
+    <string name="osmand_background_plugin_description">スリープ（画面消灯）モード時のトラッキングとナビをGPSデバイスを定期的にウェイクアップすることで有効化するための設定を表示します。</string>
+    <string name="choose_osmand_theme_descr">アプリケーションテーマの選択</string>
+    <string name="choose_osmand_theme">アプリケーションテーマ</string>
+    <string name="accessibility_options">アクセシビリティオプション</string>
+    <string name="select_address_activity">住所を選択</string>
+    <string name="favourites_list_activity">お気に入りを選択</string>
+    <string name="local_openstreetmap_act_title">OSMの修正</string>
+    <string name="default_buttons_other_actions">その他のアクション</string>
+    <string name="save_current_track_widget">保存
+        \n 現在のGPXトラック</string>
+	<string name="layer_hillshade">陰影起伏層</string>
+    <string name="map_widget_gps_info">GPS情報</string>
+    <string name="access_arrival_time">到着時間</string>
+    <string name="item_checked">選択済</string>
+    <string name="item_unchecked">未選択</string>
+    <string name="map_view">マップ</string>
+    <string name="prefer_motorways">高速道路を優先</string>
+	<string name="prefer_in_routing_title">経路検索時の道路種別優先設定…</string>
+	<string name="prefer_in_routing_descr">高速道路を優先</string>
+    <string name="max_speed_none">なし</string>
+    <string name="download_hillshade_item">陰影起伏</string>
+    <string name="download_hillshade_maps">陰影起伏オーバーレイ</string>
+    <string name="dist_control_start">開始</string>
+    
+    <string name="local_indexes_cat_srtm">等高線データ</string>
+    <string name="local_indexes_cat_av">音声/ビデオデータ</string>
+    <string name="stop_routing_confirm">本当にナビを終了しますか？</string>
+    <string name="clear_dest_confirm">本当に目的地（とその経由点）を削除しますか？</string>
+    <string name="precise_routing_mode_descr">グリッチ無しで正確な経路を検索するために、正確なルーティングを有効化します。これは距離によっては非常に利用が制限され、またネイティブライブラリを使用しません。</string>
+    <string name="precise_routing_mode">正確なルーティング（アルファ）</string>
+    <string name="recording_context_menu_show">表示</string>
+    <string name="recording_photo_description">写真 %2$s of %1$s</string>
+    <string name="av_def_action_picture">写真を撮影</string>
+    <string name="recording_context_menu_precord">写真を撮影</string>
+    <string name="dropbox_plugin_description">Dropboxプラグインはあなたのトラックと音声/ビデオノートをあなたのDropboxアカウントと同期することを可能にします。</string>
+    <string name="dropbox_plugin_name">Dropboxプラグイン</string>
+    <string name="animate_routing_using_gpx">以前に記録されたGPXルートを再利用するために開きますか？</string>
+    <string name="intermediate_points_change_order">順序を変更</string>
+    <string name="srtm_paid_version_msg">さらなるアプリケーションの発展のために、どうかGoogle Play上にある等高線プラグインのご購入をご検討下さい。</string>
+    <string name="srtm_paid_version_title">等高線プラグイン</string>
+    <string name="av_def_action_choose">ご要望に応じ選択して下さい</string>
+    <string name="av_def_action_video">ビデオを撮影</string>
+    <string name="av_def_action_audio">音声を録音</string>
+    <string name="av_widget_action_descr">デフォルトウィジェットのアクションを選択</string>
+    <string name="av_widget_action">デフォルトウィジェットアクション</string>
+    <string name="av_video_format_descr">ビデオ出力形式の選択</string>
+    </resources>
