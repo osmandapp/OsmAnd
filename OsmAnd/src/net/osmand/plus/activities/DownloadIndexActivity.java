@@ -1,6 +1,32 @@
 package net.osmand.plus.activities;
 
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.osmand.AndroidUtils;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.base.SuggestExternalDirectoryDialog;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadEntry;
+import net.osmand.plus.download.DownloadIndexAdapter;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.IndexItemCategory;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
@@ -14,25 +40,22 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.SubMenu;
-import net.osmand.AndroidUtils;
-import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.*;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.base.SuggestExternalDirectoryDialog;
-import net.osmand.plus.download.*;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.text.MessageFormat;
-import java.util.*;
 
 public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
@@ -259,7 +282,8 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 	private void filterExisting() {
 		final DownloadIndexAdapter listAdapter = (DownloadIndexAdapter)getExpandableListAdapter();
-		final Map<String, String> listAlreadyDownloaded = listAlreadyDownloadedWithAlternatives();
+		final Map<String, String> listAlreadyDownloaded =  downloadListIndexThread.getDownloadedIndexFileNames();
+		
 		final List<IndexItem> filtered = new ArrayList<IndexItem>();
 		for (IndexItem fileItem : listAdapter.getIndexFiles()) {
 			if(fileItem.isAlreadyDownloaded(listAlreadyDownloaded)){
@@ -430,18 +454,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		return true;
 	}
 	
-	
-	private Map<String, String> listAlreadyDownloadedWithAlternatives() {
-		Map<String, String> files = new TreeMap<String, String>();
-		listWithAlternatives(getMyApplication(), getMyApplication().getAppPath(IndexConstants.BACKUP_INDEX_DIR),IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		listWithAlternatives(getMyApplication(), getMyApplication().getAppPath(IndexConstants.MAPS_PATH),IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		listWithAlternatives(getMyApplication(), getMyApplication().getAppPath(IndexConstants.MAPS_PATH),IndexConstants.EXTRA_EXT, files);
-		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
-			listWithAlternatives(getMyApplication(), getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR),IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		}
-		listWithAlternatives(getMyApplication(), getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR),"", files);
-		return files;
-	}
 	
 	public static Map<String, String> listWithAlternatives(final Context ctx, File file, final String ext, 
 			final Map<String, String> files) {

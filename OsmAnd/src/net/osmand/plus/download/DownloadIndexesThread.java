@@ -99,6 +99,10 @@ public class DownloadIndexesThread {
 		this.indexFileNames = indexFileNames;
 		this.indexActivatedFileNames = indexActivatedFileNames;
 	}
+	
+	public Map<String, String> getDownloadedIndexFileNames() {
+		return indexFileNames;
+	}
 
 	public boolean isDownloadedFromInternet() {
 		return indexFiles != null && indexFiles.isDownloadedFromInternet();
@@ -177,6 +181,7 @@ public class DownloadIndexesThread {
 				uiActivity.updateProgress(false);
 			}
 		}
+		
 		
 
 		@Override
