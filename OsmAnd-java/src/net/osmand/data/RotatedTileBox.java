@@ -189,11 +189,21 @@ public class RotatedTileBox {
 		double t = Math.min(Math.min(y1, y2), Math.min(y3, y4)) ;
 		double b = Math.max(Math.max(y1, y2), Math.max(y3, y4)) ;
 		tileBounds = new QuadRect((float)l, (float)t,(float) r, (float)b);
-		float top = (float) MapUtils.getLatitudeFromTile(zoom, tileBounds.top);
-		float left = (float) MapUtils.getLongitudeFromTile(zoom, tileBounds.left);
-		float bottom = (float) MapUtils.getLatitudeFromTile(zoom, tileBounds.bottom);
-		float right = (float) MapUtils.getLongitudeFromTile(zoom, tileBounds.right);
+		float top = (float) MapUtils.getLatitudeFromTile(zoom, alignTile(tileBounds.top));
+		float left = (float) MapUtils.getLongitudeFromTile(zoom, alignTile(tileBounds.left));
+		float bottom = (float) MapUtils.getLatitudeFromTile(zoom, alignTile(tileBounds.bottom));
+		float right = (float) MapUtils.getLongitudeFromTile(zoom, alignTile(tileBounds.right));
 		latLonBounds = new QuadRect(left, top, right, bottom);
+	}
+	
+	private double alignTile(double tile) {
+		if(tile < 0) {
+			return 0;
+		}
+		if(tile >= MapUtils.getPowZoom(zoom)) {
+			return MapUtils.getPowZoom(zoom) - .000001;
+		}
+		return tile;
 	}
 
 
@@ -209,6 +219,13 @@ public class RotatedTileBox {
 	public int getPixXFromLatLon(double latitude, double longitude) {
 		float xTile = (float) MapUtils.getTileNumberX(zoom, longitude);
 		float yTile = (float) MapUtils.getTileNumberY(zoom, latitude);
+		return getPixXFromTile(xTile, yTile);
+	}
+	
+	public int getPixXFromTile(double tileX, double tileY, float zoom) {
+		double pw = MapUtils.getPowZoom(zoom - this.zoom);
+		float xTile = (float) (tileX / pw);
+		float yTile = (float) (tileY / pw);
 		return getPixXFromTile(xTile, yTile);
 	}
 
@@ -229,6 +246,13 @@ public class RotatedTileBox {
 	public int getPixYFromLatLon(double latitude, double longitude) {
 		float xTile = (float) MapUtils.getTileNumberX(zoom, longitude);
 		float yTile = (float) MapUtils.getTileNumberY(zoom, latitude);
+		return getPixYFromTile(xTile, yTile);
+	}
+	
+	public int getPixYFromTile(double tileX, double tileY, float zoom) {
+		double pw = MapUtils.getPowZoom(zoom - this.zoom);
+		float xTile = (float) (tileX / pw);
+		float yTile = (float) (tileY / pw);
 		return getPixYFromTile(xTile, yTile);
 	}
 
@@ -346,21 +370,34 @@ public class RotatedTileBox {
 
 	public LatLon getLeftTopLatLon() {
 		checkTileRectangleCalculated();
-		return new LatLon(MapUtils.getLatitudeFromTile(zoom, tileLT.y),
-				MapUtils.getLongitudeFromTile(zoom, tileLT.x));
+		return new LatLon(MapUtils.getLatitudeFromTile(zoom, alignTile(tileLT.y)),
+				MapUtils.getLongitudeFromTile(zoom, alignTile(tileLT.x)));
 
 	}
+	
+	public QuadPoint getLeftTopTile(float zoom) {
+		checkTileRectangleCalculated();
+		return new QuadPoint((float) (tileLT.x *  MapUtils.getPowZoom(zoom - this.zoom)),
+				(float) (tileLT.y *  MapUtils.getPowZoom(zoom - this.zoom)));
+	}
+	
+	public QuadPoint getRightBottomTile(float zoom) {
+		checkTileRectangleCalculated();
+		return new QuadPoint((float) (tileRB.x *  MapUtils.getPowZoom(zoom - this.zoom)),
+				(float) (tileRB.y *  MapUtils.getPowZoom(zoom - this.zoom)));
+	}
+	
 
 	private void checkTileRectangleCalculated() {
 		if(tileBounds == null){
-			calculateTileRectangle();;
+			calculateTileRectangle();
 		}
 	}
 
 	public LatLon getRightBottomLatLon() {
 		checkTileRectangleCalculated();
-		return new LatLon(MapUtils.getLatitudeFromTile(zoom, tileRB.y),
-				MapUtils.getLongitudeFromTile(zoom, tileRB.x));
+		return new LatLon(MapUtils.getLatitudeFromTile(zoom, alignTile(tileRB.y)),
+				MapUtils.getLongitudeFromTile(zoom, alignTile(tileRB.x)));
 	}
 
 	public void setZoom(int zoom, float zoomScale) {

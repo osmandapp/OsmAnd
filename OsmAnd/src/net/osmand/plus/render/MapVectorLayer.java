@@ -2,6 +2,7 @@ package net.osmand.plus.render;
 
 import android.graphics.*;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.BaseMapLayer;
@@ -103,15 +104,16 @@ public class MapVectorLayer extends BaseMapLayer {
 		boolean shown = false;
 		if (bmp != null && bmpLoc != null) {
 			float rot = - bmpLoc.getRotate();
-			final LatLon lt = bmpLoc.getLeftTopLatLon();
-			final LatLon rb = bmpLoc.getRightBottomLatLon();
+			int cz = currentViewport.getZoom();
 			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 			final RotatedTileBox calc = currentViewport.copy();
 			calc.setRotate(bmpLoc.getRotate());
-			final int x1 = calc.getPixXFromLatLon(lt.getLatitude(), lt.getLongitude());
-			final int x2 = calc.getPixXFromLatLon(rb.getLatitude(), rb.getLongitude());
-			final int y1 = calc.getPixYFromLatLon(lt.getLatitude(), lt.getLongitude());
-			final int y2 = calc.getPixYFromLatLon(rb.getLatitude(), rb.getLongitude());
+			QuadPoint lt = bmpLoc.getLeftTopTile(cz);
+			QuadPoint rb = bmpLoc.getRightBottomTile(cz);
+			final int x1 = calc.getPixXFromTile(lt.x, lt.y, cz);
+			final int x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
+			final int y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
+			final int y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
 			destImage.set(x1, y1, x2, y2);
 			if(!bmp.isRecycled()){
 				canvas.drawBitmap(bmp, null, destImage, paintImg);

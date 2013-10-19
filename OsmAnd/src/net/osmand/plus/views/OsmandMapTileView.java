@@ -389,15 +389,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private void drawBasemap(Canvas canvas) {
 		if(bufferImgLoc != null) {
 			float rot = - bufferImgLoc.getRotate();
-			final LatLon lt = bufferImgLoc.getLeftTopLatLon();
-			final LatLon rb = bufferImgLoc.getRightBottomLatLon();
 			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 			final RotatedTileBox calc = currentViewport.copy();
 			calc.setRotate(bufferImgLoc.getRotate());
-			final int x1 = calc.getPixXFromLatLon(lt.getLatitude(), lt.getLongitude());
-			final int x2 = calc.getPixXFromLatLon(rb.getLatitude(), rb.getLongitude());
-			final int y1 = calc.getPixYFromLatLon(lt.getLatitude(), lt.getLongitude());
-			final int y2 = calc.getPixYFromLatLon(rb.getLatitude(), rb.getLongitude());
+			
+			int cz = getZoom();
+			QuadPoint lt = bufferImgLoc.getLeftTopTile(cz);
+			QuadPoint rb = bufferImgLoc.getRightBottomTile(cz);
+			final int x1 = calc.getPixXFromTile(lt.x, lt.y, cz);
+			final int x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
+			final int y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
+			final int y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
 			if(!bufferBitmap.isRecycled()){
 				canvas.drawBitmap(bufferBitmap, null, new RectF(x1, y1, x2, y2), paintImg);
 			}

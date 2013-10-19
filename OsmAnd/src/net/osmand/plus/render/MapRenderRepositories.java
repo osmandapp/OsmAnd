@@ -30,6 +30,7 @@ import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
@@ -554,13 +555,15 @@ public class MapRenderRepositories {
 				currentRenderingContext.shadowRenderingMode = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 				currentRenderingContext.shadowRenderingColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_SHADOW_COLOR);
 			}
-			// final QuadPoint lt = requestedBox.getLeftTopTilePoint();
-			LatLon lt = requestedBox.getLeftTopLatLon();
+			final QuadPoint lt = requestedBox.getLeftTopTile(requestedBox.getZoom() +
+					requestedBox.getZoomScale());
+			//LatLon lt = requestedBox.getLeftTopLatLon();
 			final float mapDensity = (float) Math.pow(2, requestedBox.getZoomScale());
 			final float tileDivisor = (float) MapUtils.getPowZoom(31 - requestedBox.getZoom() -
 						requestedBox.getZoomScale());
-			currentRenderingContext.leftX = MapUtils.get31TileNumberX(lt.getLongitude()) / tileDivisor;
-			currentRenderingContext.topY = MapUtils.get31TileNumberY(lt.getLatitude()) / tileDivisor;
+			currentRenderingContext.leftX = lt.x; 
+					//MapUtils.get31TileNumberX(lt.getLongitude()) / tileDivisor;
+			currentRenderingContext.topY = lt.y;//MapUtils.get31TileNumberY(lt.getLatitude()) / tileDivisor;
 			currentRenderingContext.zoom = requestedBox.getZoom();
 			currentRenderingContext.rotate = requestedBox.getRotate();
 			currentRenderingContext.width = requestedBox.getPixWidth();
