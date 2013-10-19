@@ -38,8 +38,8 @@
 メニュー(ビュー定義 -&gt; マップソース… -&gt; オフラインベクターマップ)で
 オフラインベクターマップに切り替えられます。</string>
      <string name="choose_audio_stream">音声案内ストリーム</string>
-     <string name="choose_audio_stream_descr">音声案内を再生するにはチャンネルを
-選んでください(システム構成によります)。</string>
+     <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを
+選んでください(システム構成によります)</string>
      <string name="voice_stream_voice_call">音声呼出ストリーム</string>
      <string name="voice_stream_notification">通知ストリーム</string>
      <string name="voice_stream_music">音楽ストリーム</string>
@@ -165,7 +165,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="si_mi_foots">マイル/フィート</string>
      <string name="si_mi_yard">マイル/ヤード</string>
      <string name="si_km_m">キロ/メーター</string>
-     <string name="yard">yd</string>
+     <string name="yard">ヤード</string>
      <string name="foot">ft</string>
      <string name="mile_per_hour">mph</string>
      <string name="mile">mi</string>
@@ -244,7 +244,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
 されました ({1})。</string>
      <string name="downloading_build">ビルドをダウンロード中…</string>
      <string name="install_selected_build">本当にOsmAndをインストールしますか
- - {0} from {1} {2} MB.</string>
+ - {0} から {1} {2} MB.</string>
      <string name="loading_builds_failed">OsmAndビルドのリスト参照に失敗</string>
      <string name="loading_builds">OsmAnd ビルドをロード中…</string>
      <string name="select_build_to_install">インストールするOsmAndのビルドをひとつ
@@ -283,7 +283,7 @@ MB)をダウンロードしますか?</string>
      <string name="osmand_service_descr">画面オフの間OsmAndを使うためのバックグラウンドサービスを実行</string>
      <string name="fast_route_mode">最速ルート</string>
      <string name="fast_route_mode_descr">有効化して最速ルートを計算するか
-無効化して最短ルートを採用</string>
+無効化して最短ルートを計算します </string>
      <string name="tiles_to_download_estimated_size">ズームレベル {0}で
 {1} 件のタイル({2} MB)をダウンロード</string>
      <string name="context_menu_item_download_map">マップをダウンロード</string>
@@ -492,15 +492,15 @@ POIの更新は利用できません</string>
      <string name="downloading_list_indexes">利用可能な地域のリストをダウンロード中</string>
      <string name="list_index_files_was_not_loaded">地域のリストはosmand.net 
 から参照されていません。</string>
- <string name="select_index_file_to_download">自分の地域が見つからない場合、
-自分で作ることができます。osmand.net を参照</string>
+ <string name="select_index_file_to_download">何も見つかりませんでした。自分の地域が見つからない場合、
+自分で作ることができます。 http://osmand.net を参照してください。</string>
      <string name="show_poi_on_map">マップに表示</string>
      <string name="fav_points_edited">お気に入り地点が編集されました</string>
      <string name="fav_points_not_exist">お気に入り地点はありません</string>
      <string name="update_existing">置換</string>
      <string name="only_show">表示のみ</string>
      <string name="follow">フォロー</string>
-     <string name="recalculate_route_to_your_location">現在地に従ってルートを再計算中</string>
+     <string name="recalculate_route_to_your_location">トランスポートモード：</string>
      <string name="mark_final_location_first">最初に目的地を選んでください</string>
      <string name="get_directions">方向</string>
  <string name="show_gps_status">GPSステータスを表示</string>
@@ -611,7 +611,7 @@ POIの更新は利用できません</string>
 <string name="searchpoi_activity">POIを選択</string>
 <string name="search_POI_level_btn">もっと探す</string>
 <string name="incremental_search_city">市町村内を漸次探す。都市/郵便番号を探すには、
-先頭3文字以上を入力してください。</string>
+先頭3文字以上を入力してください</string>
 <string name="incremental_search_street">都市を漸次探す</string>
 <string name="incremental_search_building">建物を漸次探す</string>
 <string name="choose_available_region">リストから地域を選ぶ</string>
@@ -726,7 +726,7 @@ POIの更新は利用できません</string>
 		\n\t* \'高コントラスト道路\' は周囲の明るさによって道路強調表示します。
 		\n\t* \'ウィンターアンドスキー\' は（雪で覆われた）冬の風景の表示を行い、(\'世界のスキー場\' マップのダウンロード) があれば世界中のスキー場やそのスロープ・リフトを表示します。
 	</string>
-    <string name="about_version">バージョン</string>
+    <string name="about_version">バージョン：</string>
     <string name="about_settings">About</string>
     <string name="about_settings_descr">バージョン情報、ランセンス、プロジェクトメンバー</string>
     <string name="tips_and_tricks">チップス</string>
@@ -884,4 +884,31 @@ POIの更新は利用できません</string>
     <string name="av_widget_action_descr">デフォルトウィジェットのアクションを選択</string>
     <string name="av_widget_action">デフォルトウィジェットアクション</string>
     <string name="av_video_format_descr">ビデオ出力形式の選択</string>
+    <string name="av_video_format">ビデオ出力形式</string>
+    <string name="av_use_external_recorder_descr">ビデオ撮影時にシステムレコーダを使用</string>
+    <string name="av_use_external_recorder">システムレコーダを使用</string>
+    <string name="av_use_external_camera_descr">写真の撮影にシステムアプリケーションを使用</string>
+    <string name="av_use_external_camera">カメラアプリを使用</string>
+    <string name="av_settings_descr">音声とビデオの設定</string>
+    <string name="av_settings">音声/ビデオ設定 </string>
+    <string name="recording_error">記録中にエラーが発生しました </string>
+    <string name="recording_camera_not_available">カメラが利用できません</string>
+    <string name="recording_is_recorded">音声/ビデオは記録中です。停止するにはAVウィジェットをタップして下さい。</string>
+    <string name="recording_playing">指定されたファイルから音声が再生されています。 \n%1$s</string>
+    <string name="recording_open_external_player">外部プレイヤーで開く</string>
+    <string name="recording_delete_confirm">この記録を削除しますか？</string>
+    <string name="recording_unavailable">利用できません</string>
+    <string name="recording_context_menu_arecord">音声ノートをとる</string>
+    <string name="recording_context_menu_vrecord">ビデオノートをとる</string>
+    <string name="layer_recordings">記録レイヤー</string>
+    <string name="recording_can_not_be_played">記録されたファイルは再生できませんでした</string>
+    <string name="recording_context_menu_delete">記録を削除</string>
+    <string name="recording_context_menu_play">再生</string>
+    <string name="recording_description">記録中 %1$s %3$s の %2$s</string>
+    <string name="recording_default_name">記録中</string>
+    <string name="av_control_stop">停止</string>
+    <string name="av_control_start">開始</string>
+    <string name="map_widget_av_notes">音声/ビデオノート</string>
+    <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
+    <string name="map_widget_distancemeasurement">距離の測定</string>
     </resources>
