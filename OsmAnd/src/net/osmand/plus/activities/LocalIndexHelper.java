@@ -24,7 +24,6 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Track;
@@ -328,7 +327,8 @@ public class LocalIndexHelper {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.MAP_DATA, mapFile, backup);
+					boolean srtm = mapFile.getName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT);
+					LocalIndexInfo info = new LocalIndexInfo(srtm ? LocalIndexType.SRTM_DATA :LocalIndexType.MAP_DATA, mapFile, backup);
 					if(loadedMaps.containsKey(mapFile.getName()) && !backup){
 						info.setLoaded(true);
 					}

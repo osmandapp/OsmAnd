@@ -198,7 +198,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				
 			}
 		};
-		if(info.getType() == LocalIndexType.MAP_DATA){
+		if(info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.SRTM_DATA){
 			if(!info.isBackupedData()){
 				adapter.item(R.string.local_index_mi_backup).listen(listener).position( 1).reg();
 			}
@@ -300,6 +300,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			File parent = new File(i.getPathToData()).getParentFile();
 			if(i.getType() == LocalIndexType.GPX_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
+			} else if(i.getType() == LocalIndexType.SRTM_DATA){
+				parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
 			} else if(i.getType() == LocalIndexType.MAP_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.MAPS_PATH);
 			} else if(i.getType() == LocalIndexType.TILES_DATA){
