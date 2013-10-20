@@ -486,11 +486,11 @@
   <string name="tip_app_mode">Naudoti profilį</string>
   
   <string name="tip_navigation">Navigacija</string>
-  <string name="tip_navigation_t">Norėdami gauti nuorodas į pageidaujamą vietą galite ilgai paspaudę žemlapyje ant pageidaujamos vietos ir ant jos atsiradusiame žymeklyje pasirinkti \'Maršrutas į\', arba pasirinkti \'Nuorodos\' paspaudę ant reikiamo įrašu paieškos rezultatų sąraše. 
+  <string name="tip_navigation_t">Norėdami gauti nuorodas į pageidaujamą vietą galite ilgai paspaudę žemėlapyje ant pageidaujamos vietos ir ant jos atsiradusiame žymeklyje pasirinkti \'Maršrutas į\', arba pasirinkti \'Nuorodos\' paspaudę ant reikiamo įrašu paieškos rezultatų sąraše. 
 		\n\nKelionės tikslas žymimas oranžine tikslo vėliavėle ant žemėlapio ir OsmAnd rodo atstumą ir kryptį iki jo (oranžinis trikampis).
-		\n\nYou may chose either \'Start navigation\', which means that OsmAnd would live-guide you, give you voice instructions (if enabled), etc. Or you can select \'Display route\', resulting in static route without any live-guideance or adjustments as you move
+		\n\nGalite pasirinkti \'Pradėti navigaciją\' - OsmAnd jums duos nuorodas, taip pat ir balsu (jei įdiegta) arba galite pasirinkti \'Rodyti maršrutą\' ir matysite savo pasirinktą maršrutą, tačiau be nurodymų ar pataisymų jums judant
 		\n\nNorėdami gauti nuorodas iš bet kurios vietos (išskyrus jūsų dabartinę) turite ją pažymėti žemėlapyje ir pasirinkti \'Nuorodos iš\'.
-		\n\nIf you use \'Directions from\' together with \'Start navigation\', OsmAnd will switch to your actual position as soon as it is found (so this can be used to jump-start routing before the position is found), while \'Directions from\' in combination with \'Display route\' just shows you the route from any arbitrary point you had selected without subsequent updates.
+		\n\nJei pasirinksite \'Nuorodos iš\' kartu su \'Pradėti navigaciją\', OsmAnd persijungs į jūsų esamą poziciją kai tik ją apsakičiuos (taip galima pradėti navigaciją dar prieš įranginiui apskaičiavus jūsų dabartinę poziciją), o \'Nuorodos iš\' kartu su \'Rodyti maršrutą\' tik parodys jūsų maršrutą nuo jūsų pasirinkto taško be tolesnių atnaujinimų.
 	</string>
   <string name="tip_search">Paieška</string>
   <string name="tip_search_t">Vietų ieškoti galitie tiesiog žemėlapyje per \'Naudoti vietą\' → \'Ieškoti netoliese\', arba atverdami paiesškos langą per \'Meniu\' → \'Ieškoti\'.
@@ -1600,4 +1600,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="route_distance_far">Toli</string>
     <string name="route_distance_farthest">Toliausiai</string>
     <string name="map_magnifier">Žemėlapio padidinimo stiklas</string>
+    <string name="route_distance_settings_descr">Konfigūruoti žemėlapio matymo atstumą (TODO naming)</string>
+    <string name="route_distance_settings">Žemėlapio matymo atstumas (TODO naming)</string>
     </resources>
