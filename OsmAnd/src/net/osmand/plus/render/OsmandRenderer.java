@@ -29,11 +29,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
@@ -42,6 +41,8 @@ import android.graphics.PathEffect;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Shader.TileMode;
 import android.os.Handler;
@@ -563,6 +564,9 @@ public class OsmandRenderer {
 		if(ind == 0){
 			String resId = req.getStringPropertyValue(req.ALL.R_SHADER);
 			if(resId != null){
+				if(req.getIntPropertyValue(rColor) == 0) {
+					p.setColor(Color.WHITE); // set color required by skia
+				}
 				p.setShader(getShader(resId));
 			}
 			// do not check shadow color here
