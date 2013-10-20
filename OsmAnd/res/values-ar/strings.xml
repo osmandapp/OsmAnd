@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">عرضإظهار</string>
     <string name="av_def_action_picture">التقاط صورةالتقاط صورة</string>
-    <string name="animate_routing_using_gpx">هل تريد استخدام ملف GPX القائمة؟</string>
+    <string name="animate_routing_using_gpx">افتح مسار GPX مسجل مسبقا لاتباعه؟</string>
     <string name="av_def_action_video">تسجيل الفيديو</string>
     <string name="av_def_action_audio">تسجيل الصوت</string>
     <string name="av_use_external_recorder">استخدام مسجل الخارجية</string>
-    <string name="av_settings">"إعدادات الصوت / الفيديو "</string>
+    <string name="av_settings">إعدادات الصوت / الفيديو </string>
     <string name="recording_camera_not_available">الكاميرا ليست متاحة</string>
     
     <string name="search_villages_and_postcodes">البحث القرى / الرمز البريدي</string>
@@ -30,7 +30,7 @@
     <string name="item_unchecked">لم يتم التحقق منه</string>
     <string name="map_view">خريطة</string>
     <string name="prefer_motorways">تفضل الطرق السريعة</string>
-	<string name="prefer_in_routing_title">فضل...</string>
+	<string name="prefer_in_routing_title">فضّل…</string>
 	<string name="prefer_in_routing_descr">تفضل الطرق السريعة</string>
     <string name="max_speed_none">لا شيء</string>
     <string name="index_name_openmaps">فتح خرائط الاتحاد الأوروبي</string>
@@ -42,7 +42,7 @@
     <string name="recording_context_menu_precord">التقاط صورة</string>
     <string name="dropbox_plugin_name">دروببوإكس البرنامج المساعد</string>
     <string name="av_def_action_choose">حدد بناء على طلبها</string>
-    <string name="recording_error">حدث خطأ أثناء تسجيل..</string>
+    <string name="recording_error">حدث خطأ أثناء التسجيل.. </string>
     <string name="recording_delete_confirm">هل تريد إزالة هذا التسجيل؟</string>
     <string name="recording_unavailable">غير متاح</string>
     <string name="recording_can_not_be_played">لا يمكن أن تؤديه تسجيل</string>
@@ -80,7 +80,7 @@
 	<string name="delete_target_point">إزالة إحداثية</string>
     <string name="new_destination_point_dialog">لديك مجموعة الوجهة النقطة.</string>
     <string name="target_points">نقاط الطريق</string>
-    <string name="btn_advanced_mode">الوضع المتقدم...</string>
+    <string name="btn_advanced_mode">الوضع المتقدم…</string>
     <string name="poi_filter_parking">موقف سيارات</string>
     <string name="poi_filter_emergency">حالة طوارئ</string>
     <string name="poi_filter_public_transport">وسائل النقل العام</string>
@@ -92,15 +92,15 @@
 	<string name="poi_filter_food_shop">متجر المواد الغذائية</string>
 	<string name="poi_filter_for_tourists">للسياح</string>
 	<string name="poi_filter_fuel">وقود</string>
-	<string name="show_warnings_title">تظهر أجهزة الإنذار...</string>
+	<string name="show_warnings_title">إظهار أجهزة الإنذار…</string>
 	<string name="use_compass_navigation">يستخدمون البوصلة</string>
 	<string name="avoid_motorway">تجنب الطرق السريعة</string>
-	<string name="tip_update_index">تحديث البيانات دون اتصال</string>
+	<string name="tip_update_index">تحديث الخرائط المحلية</string>
 	
 	<string name="show_lanes">عرض الممرات</string>
 	<string name="avoid_unpaved">تجنب الطرق غير المعبدة</string>
 	<string name="avoid_ferries">تجنب العبارات</string>
-	<string name="avoid_in_routing_title">تجنب...</string>
+	<string name="avoid_in_routing_title">تجنب…</string>
 	<string name="avoid_in_routing_descr">تجنب الطرق ذات الرسوم، وغير معبد، العبارات</string>
 	<string name="monitoring_mode_off">سجل GPX</string>
 	<string name="monitoring_mode_on">وقف ↵\nGPX تفصيل.</string>
@@ -319,4 +319,63 @@
 	<string name="route_distance_close">أغلق</string>
     <string name="route_distance_far">بعيد</string>
     <string name="route_distance_farthest">الأبعد</string>
+    <string name="route_distance_settings_descr">إعداد مسافة عرض الخريطة</string>
+    <string name="map_magnifier">مكبر الخريطة</string>
+    <string name="base_world_map">خريطة العالم الأساسية</string>
+	<string name="local_index_tile_data_expire">الانتهاء (دقائق):  %1$s</string>
+    <string name="local_index_tile_data_downloadable">قابل للتنزيل: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">أقصى تكبير: %1$s</string>
+    <string name="local_index_tile_data_minzoom">أدنى تكبير: %1$s</string>
+    <string name="maps_define_edit">تعريف/تحرير…</string>
+	<string name="osmodroid_mode_on">أوقف OsMoDroid</string>    
+    <string name="osmodroid_mode_off">شغل OsMoDroid</string>
+    <string name="speak_descr">إعداد لنطق أسماء الشوارع، وتحذيرات المرور (توقيفات الإجبارية، ومطبات السرعة)، و تحذيرات كاميرات السرعة، و السرعة القصوى</string>
+	<string name="speak_street_names">نطق أسماء الشوارع (نطق آلي)</string>
+    <string name="speak_speed_limit">تحذير السرعة القصوى</string>
+    <string name="speak_cameras">تحذير عن كاميرات السرعة</string>
+	<string name="speak_traffic_warnings">إعلان عن تحذيرات المرور</string>
+    <string name="route_descr_map_location">الخريطة: </string>
+    <string name="destination_point">الوجهة %1$s</string>
+    <string name="search_street_in_neighborhood_cities">البحث عن الشارع في المدن المجاورة</string>
+    <string name="intermediate_items_sort_by_distance">فرز (باب لـ باب )</string>
+    <string name="wait_current_task_finished">الرجاء الانتظار حتى انتهاء المهمة الحالية</string>
+    <string name="available_downloads_left">توفر %1$d ملفات للتنزيل</string>
+    <string name="cancel_route">ألغ المسار</string>
+    <string name="monitoring_settings">خدمات التسجيل ووضعية النوم</string>
+    <string name="monitoring_settings_descr">قم بإعداد كيفية تسجيل الرحلات و تمكين وضعية النوم</string>
+    <string name="osmand_monitoring_plugin_name">خدمات التسجيل ووضعية النوم</string>
+    <string name="choose_osmand_theme_descr">اختار سمة التطبيق</string>
+    <string name="choose_osmand_theme">سمة التطبيق</string>
+    <string name="favourites_list_activity">اختار تفضيلة</string>
+    <string name="local_openstreetmap_act_title">تغييرات OSM</string>
+    <string name="save_current_track_widget">احفظ
+        \n مسار GPX الحالي</string>
+	<string name="intermediate_points_change_order">تغيير الفرز</string>
+    <string name="recording_is_recorded">بدأ تسجيل الصوت / الفيديو. لوقفه اضغط على ودجة AV.</string>
+    <string name="recording_open_external_player">افتح مشغل خارجي</string>
+    <string name="recording_context_menu_arecord">خذ ملاحظة صوتية</string>
+    <string name="recording_context_menu_vrecord">خذ ملاحظة فيديو</string>
+    <string name="layer_recordings">طبقة التسجيل</string>
+    <string name="recording_description">تسجيل %1$s %2$s من %3$s</string>
+    <string name="map_widget_av_notes">ملاحظات الصوت/الفيديو</string>
+    <string name="audionotes_plugin_description">تدوين الملاحظات السمعية/البصرية أثناء الرحلة</string>
+    <string name="audionotes_plugin_name">الملاحظات الصوتية / الفيديو</string>
+    <string name="download_roads_only_maps">خرائط الطرق فقط</string>
+    
+	<string name="rendering_attr_noAdminboundaries_description">منع عرض الحدود الإقليمية ( مستويات مشرف 5-9)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">إضافة OsMoDroid لديه نسخة قديمة و بحاجة إلى تحديث.</string>
+    <string name="osmodroid_plugin_name">ملحق OsMoDroid</string>
+	<string name="tip_altitude_offset">تصحيح الارتفاع</string>
+	<string name="monitoring_control_start">GPX</string>
+    <string name="rendering_attr_showRoadMaps_description">تحديد وقت عرض خرائط الطرق فقط:</string>
+	<string name="rendering_attr_showRoadMaps_name">خرائط الطرق فقط</string>
+    <string name="safe_mode_description">تشغيل التطبيق في الوضع الآمن (باستخدام أندرويد البطيء بدلا من التعليمات البرمجية الأصلية) .</string>
+    <string name="native_library_not_running">يعمل  التطبيق في الوضع الآمن ( عطله من إعدادات ).</string>
+    <string name="background_service_is_enabled_question">خدمة وضع السكون لـOsmAnd لا تزال قيد التشغيل. هل تريد إيقافها؟</string>
+    <string name="rendering_attr_roadColors_description">اختر نظام ألوان الطريق:</string>
+	<string name="rendering_attr_roadColors_name">نظام الألوان الطريق</string>
+    <string name="target_point">إحداثية %1$s</string>
+    <string name="intermediate_point">إحداثية %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">أضف كآخر إحداثية</string>
+    <string name="context_menu_item_first_intermediate_point">أضف كأول إحداثية</string>
     </resources>
