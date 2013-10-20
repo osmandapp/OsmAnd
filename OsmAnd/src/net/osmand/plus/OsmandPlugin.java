@@ -67,7 +67,7 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new AccessibilityPlugin(app));
 		if(!installPlugin(SRTM_PLUGIN_COMPONENT_PAID, SRTMPlugin.ID, app,
 				new SRTMPlugin(app, true))) {
-			installPlugin(SRTM_PLUGIN_COMPONENT, SRTMPlugin.ID, app,
+			installPlugin(SRTM_PLUGIN_COMPONENT, SRTMPlugin.FREE_ID, app,
 					new SRTMPlugin(app, false));
 		}
 		installPlugin(PARKING_PLUGIN_COMPONENT, ParkingPositionPlugin.ID, app, new ParkingPositionPlugin(app));

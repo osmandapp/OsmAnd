@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 public class SRTMPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.srtm";
+	public static final String FREE_ID = "osmand.srtm.paid";
 	private OsmandApplication app;
 	private boolean paid;
 	private HillshadeLayer hillshadeLayer;
@@ -22,7 +23,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	
 	@Override
 	public String getId() {
-		return ID;
+		return paid ? ID : FREE_ID;
 	}
 
 	public SRTMPlugin(OsmandApplication app, boolean paid) {
