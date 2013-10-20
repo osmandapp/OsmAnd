@@ -55,7 +55,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.os.StrictMode;
 import android.text.format.DateFormat;
 import android.widget.Toast;
 
@@ -481,20 +480,6 @@ public class OsmandApplication extends Application implements ClientContext {
 
 		Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
 
-	}
-
-	public String exportFavorites(File f) {
-		GPXFile gpx = new GPXFile();
-		for (FavouritePoint p : getFavorites().getFavouritePoints()) {
-			if (p.isStored()) {
-				WptPt pt = new WptPt();
-				pt.lat = p.getLatitude();
-				pt.lon = p.getLongitude();
-				pt.name = p.getName() + "_" + p.getCategory();
-				gpx.points.add(pt);
-			}
-		}
-		return GPXUtilities.writeGpxFile(f, gpx, this);
 	}
 
 	private void startApplicationBackground() {

@@ -10,6 +10,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
@@ -49,7 +50,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	private static final Log log = PlatformUtil.getLog(OsmBugsLayer.class); 
 	private final static int startZoom = 8;
-	private static final int SEARCH_LIMIT = 100;
 	
 	private OsmandMapTileView view;
 	
@@ -329,6 +329,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		((EditText)openBug.findViewById(R.id.Password)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
 		((EditText)openBug.findViewById(R.id.AuthorName)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.get());
+		AndroidUtils.softKeyboardDelayed((EditText)openBug.findViewById(R.id.BugMessage));
 		builder.setPositiveButton(R.string.default_buttons_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -400,6 +401,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		builder.setView(view);
 		((EditText)view.findViewById(R.id.AuthorName)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_NAME.get());
 		((EditText)view.findViewById(R.id.Password)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
+		AndroidUtils.softKeyboardDelayed((EditText)view.findViewById(R.id.BugMessage));
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.osb_comment_dialog_add_button, new DialogInterface.OnClickListener() {
 			@Override
