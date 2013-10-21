@@ -1316,7 +1316,15 @@
     <string name="about_settings_descr">Informácie o verzii, licencie, členovia projektu</string>
     <string name="tips_and_tricks">Tipy</string>
     <string name="tip_recent_changes_1_6_t">Zmeny vo verzii 1.6:
-	\n\t* Určenie/úprava online zdrojov dlaždíc (určenie doby vypršania)
+    \n\t* Podpora zariadení s rozlíšením Full HD
+    \n\t* Podpora priehľadného pozadia mapy
+    \n\t* Zobrazuje stiahnuté mapy a umožňuje stiahnutie chýbajúcich máp priamo zo zobrazenia mapy
+    \n\t* Mapy vrstevníc sú teraz pribalené ku krajinám/regiónom
+    \n\t* Nová základná mapa sveta s hlavnými cestami, železnicami a veľkými oblasťami (napr. lesy)
+    \n\t* Funkcia zväčšovania mapy (podržte tlačidlo priblíženia) - použiteľná pre vektorové aj obrazové mapy
+    \n\t* Určenie/úprava online zdrojov dlaždíc (a určenie doby vypršania)
+    \n\t* Rýchlejšie zadávanie vyhľadávania adries
+    \n\t* Opravy chýb navigovania a vykresľovania
     </string>
     <string name="local_index_tile_data_zooms">Stiahnuté priblíženia: %1$s</string>
     <string name="local_index_tile_data_downloadable">Stiahnuteľné: %1$s</string>
@@ -1367,11 +1375,12 @@
 →\n\t* Mnohé zmeny používateľského rozhrania↵
 →\n\t* Oprava chýb v zobrazení vzdialenosti, GPX analyzátoru, práce s medzizastávkami, plánovacom module, nahrávaním na OSM, HTTPS↵
     </string>
-    <string name="base_world_map">základná mapa sveta</string>
+    <string name="base_world_map">Základná mapa sveta</string>
 	<string name="route_distance_close">Blízko</string>
     <string name="route_distance_far">Ďaleko</string>
     <string name="route_distance_farest">Najďalej</string>
     <string name="route_distance_settings_descr">Nastaviť vzdialenosť zobrazenia mapy</string>
     <string name="route_distance_settings">Vzdialenosť zobrazenia mapy</string>
     <string name="map_magnifier">Zväčšenie mapy</string>
+    <string name="route_distance_farthest">Najvzdialenejší</string>
     </resources>
