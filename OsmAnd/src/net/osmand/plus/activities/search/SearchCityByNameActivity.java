@@ -14,7 +14,6 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.MapUtils;
 import android.os.AsyncTask;

@@ -35,6 +35,7 @@
     \n\t* New world basemap with major roads, railroads, and major areal features like forests 
     \n\t* Map magnifier feature (long click on zoom button) - Useful both for tile and vector maps  
     \n\t* Define/edit custom online tile sources (and specify expiration time)
+    \n\t* Support of time conditional speed limits (Netherlands) 
     \n\t* Faster search address input
     \n\t* Bug fixes with routing and rendering
     </string>
