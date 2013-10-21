@@ -12,11 +12,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GeoidAltitudeCorrection;
@@ -26,10 +25,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.CachedOsmandIndexes;
-import net.osmand.data.*;
+import net.osmand.data.Amenity;
+import net.osmand.data.AmenityType;
+import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
+import net.osmand.map.OsmandRegions;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandApplication;
@@ -64,7 +68,6 @@ import android.graphics.BitmapFactory;
 import android.os.HandlerThread;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-import net.osmand.map.OsmandRegions;
 
 /**
  * Resource manager is responsible to work with all resources 
@@ -114,11 +117,11 @@ public class ResourceManager {
 	
 	protected final List<TransportIndexRepository> transportRepositories = new ArrayList<TransportIndexRepository>();
 	
-	protected final Map<String, String> indexFileNames = Collections.synchronizedMap(new LinkedHashMap<String, String>());
+	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<String, String>();
 	
-	protected final Set<String> basemapFileNames = Collections.synchronizedSet(new LinkedHashSet<String>());
+	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<String, String>();
 	
-	protected final Map<String, BinaryMapIndexReader> routingMapFiles = Collections.synchronizedMap(new LinkedHashMap<String, BinaryMapIndexReader>());
+	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new ConcurrentHashMap<String, BinaryMapIndexReader>();
 	
 	protected final MapRenderRepositories renderer;
 
@@ -647,7 +650,7 @@ public class ResourceManager {
 					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				} else {
 					if (index.isBasemap()) {
-						basemapFileNames.add(f.getName());
+						basemapFileNames.put(f.getName(), f.getName());
 					}
 					long dateCreated = index.getDateCreated();
 					if (dateCreated == 0) {
