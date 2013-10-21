@@ -15,7 +15,7 @@
     <string name="route_distance_settings_descr">Configure map view distance  (TODO naming)</string>
     <string name="route_distance_settings">Map view distance (TODO naming)</string>
     <string name="map_magnifier">Map magnifier</string>
-    <string name="base_world_map">base world map</string>
+    <string name="base_world_map">World basemap</string>
 	<string name="tip_map_styles">Map Styles</string>
 	<string name="tip_map_styles_t">OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
 		\n\nOther than the balanced \'default\' map style, you may in \'Menu\' → \'Configure screen\' → \'Map Style\' select for example
@@ -28,14 +28,14 @@
     <string name="about_settings_descr">Version info, licenses, project members</string>
     <string name="tips_and_tricks">Tips</string>
     <string name="tip_recent_changes_1_6_t">Changes in 1.6:
-    \n\t* Support completely transparent background
-    \n\t* Support Full HD devices
-    \n\t* Download and overview regions directly from the map view
-    \n\t* Download SRTM files for specific country  
-    \n\t* Completely new world map with major roads, forests and railroads 
-    \n\t* Map magnifier (long click on zoom button) - extremely useful for raster maps  
-    \n\t* Define/edit online tile source (specify expiration time)
-    \n\t* Faster address input
+    \n\t* Support of Full HD devices
+    \n\t* Support transparent map background
+    \n\t* Show downloaded maps and facilitate downloading missing maps directly from the map view
+    \n\t* Contour line map files now bundled for countries/regions
+    \n\t* New world basemap with major roads, railroads, and major areal features like forests 
+    \n\t* Map magnifier feature (long click on zoom button) - Useful both for tile and vector maps  
+    \n\t* Define/edit custom online tile sources (and specify expiration time)
+    \n\t* Faster search address input
     \n\t* Bug fixes with routing and rendering
     </string>
     <string name="local_index_tile_data_zooms">Zooms downloaded: %1$s</string>
