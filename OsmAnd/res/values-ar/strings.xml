@@ -394,4 +394,19 @@
     <string name="precise_routing_mode_descr">تمكين التوجيه الدقيق لحساب المسارات بدقة دون أخطاء. إنه محدود جدا من خلال المسافة ولا يستخدم مكتبة أصلية.</string>
     <string name="recording_photo_description">صورة %1$s من %2$s</string>
     <string name="dropbox_plugin_description">ملحق دروب بوكس يسمح بمزامنة مسارات و الملاحظات الصوتية / الفيديو مع حسابك في دروب بوكس.</string>
-    </resources>
+    <string name="av_video_format_descr">حدد تنسيق الفيديو الناتج</string>
+    <string name="av_video_format">تنسيق الفيديو الناتج</string>
+    <string name="av_use_external_recorder_descr">استخدام مسجل نظام للفيديو</string>
+    <string name="av_use_external_camera_descr">استخدام تطبيق النظام للصور</string>
+    <string name="av_use_external_camera">استخدام تطبيق الكاميرا</string>
+    <string name="av_settings_descr">تكوين إعدادات الصوت والفيديو</string>
+    <string name="add_as_last_destination_point">أضف كآخر إحداثية</string>
+    <string name="add_as_first_destination_point">أضف كأول إحداثية</string>
+    <string name="intermediate_point_too_far">الإحداثية %1$s بعيدة جدا من أقرب طريق.</string>
+    <string name="arrived_at_intermediate_point">وصلت في الإحداثية المحددة</string>
+    <string name="context_menu_item_intermediate_point">أضف كإحداثية</string>
+    <string name="map_widget_intermediate_distance">إحداثية</string>
+    <string name="ending_point_too_far">نقطة النهاية بعيدة جدا عن أقرب طريق.</string>
+    <string name="btn_add_tag">أضف وسما</string>
+    <string name="show_warnings_descr">إعداد تحذيرات المرور ( حدود السرعة، و توقف القسري، مطبات صناعية ) ، تحذيرات كاميرا السرعة ، والمعلومات ممرات</string>
+	</resources>
