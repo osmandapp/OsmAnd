@@ -378,4 +378,20 @@
     <string name="intermediate_point">إحداثية %1$s</string>
     <string name="context_menu_item_last_intermediate_point">أضف كآخر إحداثية</string>
     <string name="context_menu_item_first_intermediate_point">أضف كأول إحداثية</string>
+    <string name="route_distance_settings">مساحة عرض الخريطة ((TODO naming)</string>
+    <string name="edit_tilesource_expiration_time">الانتهاء (دقائق)</string>
+    <string name="edit_tilesource_choose_existing">اختر الخروج...</string>
+    <string name="map_widget_fps_info">معلومات تنقيح FPS</string>
+	<string name="settings_preset_descr">إعدادات عرض الخريط والاستكشاف محفوظة لكل ملف استخدام. قم بتعيين ملفك الافتراضي هنا.</string>
+    <string name="intermediate_items_sort_return">أعيد ترتيب نقاط الطرق وسيطة لتحسين ترتيبها في الطريق إلى الوجهة.</string>
+    <string name="local_osm_changes_backup_successful">أنشيء ملف تغيير OSM بنجاح %1$s</string>
+    <string name="local_osm_changes_backup_failed">فشلت عملية النسخ الاحتياطي لتغييرات OSM</string>
+    <string name="local_osm_changes_backup">نسخ الاحتياطي كتغيير OSM</string>
+    <string name="files_limit">%1$d ملف بقى</string>
+    <string name="osmand_monitoring_plugin_description">تمكين التعقب والملاحة في وضعية السكون ( الشاشة مغلقة ) عبر الاستيقاظ بشكل دوري لجهاز GPS.
+          إظهار إعدادات لتسهيل تسجيل الرحلات الخاصة بك إلى ملفات GPX المحلية أو عبر الإنترنت باستخدام خدمة ويب .</string>
+    <string name="osmand_background_plugin_description">يظهر الإعدادات لتمكين تتبع والملاحة في وضعية السكون ( الشاشة مغلقة ) عبر الاستيقاظ بشكل دوري لجهاز GPS.</string>
+    <string name="precise_routing_mode_descr">تمكين التوجيه الدقيق لحساب المسارات بدقة دون أخطاء. إنه محدود جدا من خلال المسافة ولا يستخدم مكتبة أصلية.</string>
+    <string name="recording_photo_description">صورة %1$s من %2$s</string>
+    <string name="dropbox_plugin_description">ملحق دروب بوكس يسمح بمزامنة مسارات و الملاحظات الصوتية / الفيديو مع حسابك في دروب بوكس.</string>
     </resources>
