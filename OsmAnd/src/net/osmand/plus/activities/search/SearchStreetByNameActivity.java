@@ -16,6 +16,7 @@ import net.osmand.data.Street;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -222,5 +223,9 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			quitActivity(SearchBuildingByNameActivity.class);
 //		}
 		
+	}
+	
+	protected AddressInformation getAddressInformation() {
+		return AddressInformation.buildCity(this, settings);
 	}
 }

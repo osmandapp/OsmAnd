@@ -13,6 +13,7 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.Algorithms;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -262,59 +263,96 @@ public class SearchAddressFragment extends SherlockFragment {
 			});
 	}
 	
+	public static class AddressInformation {
+		String historyName = null;
+		String objectName = "";
+		int zoom = 14;
+		
+		public static AddressInformation build2StreetIntersection(Context ctx, OsmandSettings settings){
+			AddressInformation ai = new AddressInformation();
+			String postcode = settings.getLastSearchedPostcode();
+			String city = settings.getLastSearchedCityName();
+			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
+			ai.objectName = settings.getLastSearchedStreet();
+			ai.historyName = MessageFormat.format(ctx. getString(R.string.search_history_int_streets), settings.getLastSearchedStreet(), 
+					settings.getLastSearchedIntersectedStreet(), cityName);
+			ai.zoom = 17;
+			return ai;
+		}
+		
+		public static AddressInformation buildStreet(Context ctx, OsmandSettings settings){
+			AddressInformation ai = new AddressInformation();
+			String postcode = settings.getLastSearchedPostcode();
+			String city = settings.getLastSearchedCityName();
+			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
+			String street = settings.getLastSearchedStreet();
+			ai.objectName = street;
+			ai.historyName = MessageFormat.format(ctx.getString(R.string.search_history_street), street, cityName);
+			ai.zoom = 16;
+			return ai;
+		}
+		
+		
+		public static AddressInformation buildBuilding(Context ctx, OsmandSettings settings){
+			AddressInformation ai = new AddressInformation();
+			String postcode = settings.getLastSearchedPostcode();
+			String city = settings.getLastSearchedCityName();
+			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
+			String street = settings.getLastSearchedStreet();
+			String building = settings.getLastSearchedBuilding();
+			ai.objectName = street + " " + building;
+			ai.historyName = MessageFormat.format(ctx.getString(R.string.search_history_building), building, street,
+					cityName);
+			ai.zoom = 17;
+			return ai;
+		}
+		
+		public static AddressInformation buildCity(Context ctx, OsmandSettings settings){
+			AddressInformation ai = new AddressInformation();
+			String city = settings.getLastSearchedCityName();
+			ai.historyName = MessageFormat.format(ctx.getString(R.string.search_history_city), city);
+			ai.objectName = city;
+			ai.zoom = 14;
+			return ai;
+		}
+	}
+	
 	public void select(int mode) {
 		if (searchPoint == null) {
 			AccessibleToast.makeText(getActivity(), R.string.please_select_address, Toast.LENGTH_SHORT).show();
 			return;
 		}
-		String historyName = null;
-		String objectName = "";
-		int zoom = 14;
+		AddressInformation ai = new AddressInformation();
 		if (!Algorithms.isEmpty(street2) && !Algorithms.isEmpty(street)) {
-			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
-			objectName = street;
-			historyName = MessageFormat.format(getString(R.string.search_history_int_streets), street, street2,
-					cityName);
-			zoom = 17;
+			ai = AddressInformation.build2StreetIntersection(getActivity(), osmandSettings);
 		} else if (!Algorithms.isEmpty(building)) {
-			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
-			objectName = street + " " + building;
-			historyName = MessageFormat.format(getString(R.string.search_history_building), building, street,
-					cityName);
-			zoom = 17;
+			ai = AddressInformation.buildBuilding(getActivity(), osmandSettings);
 		} else if (!Algorithms.isEmpty(street)) {
-			String cityName = postcode != null ? postcode : city;
-			objectName = street;
-			historyName = MessageFormat.format(getString(R.string.search_history_street), street, cityName);
-			zoom = 16;
-		} else if (!Algorithms.isEmpty(city)) {
-			historyName = MessageFormat.format(getString(R.string.search_history_city), city);
-			objectName = city;
-			zoom = 14;
+			ai = AddressInformation.buildStreet(getActivity(), osmandSettings);
+		} else if(!Algorithms.isEmpty(city)) {
+			ai = AddressInformation.buildCity(getActivity(), osmandSettings);
 		}
 		if(mode == ADD_TO_FAVORITE) {
 			Bundle b = new Bundle();
 			Dialog dlg = MapActivityActions.createAddFavouriteDialog(getActivity(), b);
 			dlg.show();
-			MapActivityActions.prepareAddFavouriteDialog(getActivity(), dlg, b, searchPoint.getLatitude(), searchPoint.getLongitude(), objectName);
+			MapActivityActions.prepareAddFavouriteDialog(getActivity(), dlg, b, searchPoint.getLatitude(), searchPoint.getLongitude(), ai.objectName);
 		} else if(mode == SELECT_POINT ){
 			Intent intent = getActivity().getIntent();
-			intent.putExtra(SELECT_ADDRESS_POINT_INTENT_KEY, objectName);
+			intent.putExtra(SELECT_ADDRESS_POINT_INTENT_KEY, ai.objectName);
 			intent.putExtra(SELECT_ADDRESS_POINT_LAT, searchPoint.getLatitude());
 			intent.putExtra(SELECT_ADDRESS_POINT_LON, searchPoint.getLongitude());
 			getActivity().setResult(SELECT_ADDRESS_POINT_RESULT_OK, intent);
 			getActivity().finish();
 		} else {
-			OsmandApplication ctx = (OsmandApplication) getActivity().getApplication();
 			if (mode == NAVIGATE_TO) {
-				MapActivityActions.directionsToDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(),  historyName);
+				MapActivityActions.directionsToDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(),  ai.historyName);
 			} else if (mode == ADD_WAYPOINT) {
-				MapActivityActions.addWaypointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
+				MapActivityActions.addWaypointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), ai.historyName);
 			} else if (mode == SHOW_ON_MAP) {
-				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), zoom, historyName);
+				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), ai.zoom, ai.historyName);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}
-			
 		}
 	}
 	

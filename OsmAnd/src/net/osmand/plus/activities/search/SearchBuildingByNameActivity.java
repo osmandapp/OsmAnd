@@ -10,6 +10,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.Algorithms;
 import android.os.AsyncTask;
@@ -114,6 +115,11 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 		}
 		settings.setLastSearchedBuilding(text, loc);
 		quitActivity(null);
+	}
+	
+	@Override
+	protected AddressInformation getAddressInformation() {
+		return AddressInformation.buildStreet(this, settings);
 	}
 	
 	

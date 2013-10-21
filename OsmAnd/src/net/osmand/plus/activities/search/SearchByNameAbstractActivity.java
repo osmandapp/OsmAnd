@@ -18,17 +18,18 @@ import net.osmand.data.MapObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 
 import org.apache.commons.logging.Log;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -55,6 +56,10 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.TextView.OnEditorActionListener;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
+
 
 public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity {
 
@@ -63,6 +68,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	protected static final int MESSAGE_CLEAR_LIST = 1;
 	protected static final int MESSAGE_ADD_ENTITY = 2;
+	protected static final String SEQUENTIAL_SEARCH = "SEQUENTIAL_SEARCH";
 	
 	protected ProgressBar progress;
 	protected LatLon locationToSearch;
@@ -77,6 +83,12 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	private T endingObject;
 	private StyleSpan previousSpan;
 	private static final Log log = PlatformUtil.getLog(SearchByNameAbstractActivity.class);
+	
+	private static final int NAVIGATE_TO = 3;
+	private static final int ADD_WAYPOINT = 4;
+	private static final int SHOW_ON_MAP = 5;
+	private static final int ADD_TO_FAVORITE = 6;
+	
 	
 	protected void setActionBarSettings() {
 //		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
@@ -199,6 +211,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	
 	private int MAX_VISIBLE_NAME = 18;
+	private boolean sequentialSearch;
 	
 	public String getCurrentFilter() {
 		return currentFilter;
@@ -297,12 +310,14 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	protected void onResume() {
 		super.onResume();
 		Intent intent = getIntent();
+		sequentialSearch = false;
 		if(intent != null){
 			if(intent.hasExtra(SearchActivity.SEARCH_LAT) && intent.hasExtra(SearchActivity.SEARCH_LON)){
 				double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
 				double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
 				locationToSearch = new LatLon(lat, lon); 
 			}
+			sequentialSearch = intent.hasExtra(SEQUENTIAL_SEARCH) && getAddressInformation() != null;
 		}
 		if(locationToSearch == null){
 			locationToSearch = settings.getLastKnownMapLocation();
@@ -458,6 +473,14 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		finish();
 		if(next != null) {
 			Intent intent = new Intent(this, next);
+			if(getIntent() != null){
+				Intent cintent = getIntent();
+				if(cintent.hasExtra(SearchActivity.SEARCH_LAT) && cintent.hasExtra(SearchActivity.SEARCH_LON)){
+					intent.putExtra(SearchActivity.SEARCH_LAT, cintent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0));
+					intent.putExtra(SearchActivity.SEARCH_LON, cintent.getDoubleExtra(SearchActivity.SEARCH_LON, 0));
+					intent.putExtra(SEQUENTIAL_SEARCH, true);
+				}
+			}
 			startActivity(intent);
 		}
 	}
@@ -468,15 +491,104 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		if (item.getItemId() == 1) {
 			finish();
 			return true;
+		} else {
+			select(item.getItemId());
 		}
 		return super.onOptionsItemSelected(item);
 	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		createMenuItem(menu, 1, R.string.default_buttons_ok, 
-				R.drawable.ic_action_ok_light, R.drawable.ic_action_ok_dark ,
-				MenuItem.SHOW_AS_ACTION_ALWAYS);
+		if (sequentialSearch) {
+			boolean light = ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
+			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.get_directions)
+					.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light
+					: R.drawable.ic_action_gdirections_dark);
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					select(NAVIGATE_TO);
+					return true;
+				}
+			});
+			TargetPointsHelper targets = ((OsmandApplication) getApplication()).getTargetPointsHelper();
+			if (targets.getPointToNavigate() != null) {
+				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point)
+						.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark);
+			} else {
+				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point)
+						.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark);
+			}
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					select(ADD_WAYPOINT);
+					return true;
+				}
+			});
+			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
+
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					select(SHOW_ON_MAP);
+					return true;
+				}
+			});
+
+			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite).setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
+
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					select(ADD_TO_FAVORITE);
+					return true;
+				}
+			});
+		} else {
+			createMenuItem(menu, 1, R.string.default_buttons_ok, R.drawable.ic_action_ok_light,
+					R.drawable.ic_action_ok_dark, MenuItem.SHOW_AS_ACTION_ALWAYS);
+		}
 		return super.onCreateOptionsMenu(menu);
+	}
+	
+	protected AddressInformation getAddressInformation() {
+		return null;
+	}
+
+	protected void select(int mode) {
+		LatLon searchPoint = settings.getLastSearchedPoint();
+		AddressInformation ai = getAddressInformation();
+		if (ai != null) {
+			if (mode == ADD_TO_FAVORITE) {
+				Bundle b = new Bundle();
+				Dialog dlg = MapActivityActions.createAddFavouriteDialog(getActivity(), b);
+				dlg.show();
+				MapActivityActions.prepareAddFavouriteDialog(getActivity(), dlg, b, searchPoint.getLatitude(),
+						searchPoint.getLongitude(), ai.objectName);
+			} else if (mode == NAVIGATE_TO) {
+				MapActivityActions.directionsToDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(),
+						searchPoint.getLongitude(), ai.historyName);
+			} else if (mode == ADD_WAYPOINT) {
+				MapActivityActions.addWaypointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(),
+						searchPoint.getLongitude(), ai.historyName);
+			} else if (mode == SHOW_ON_MAP) {
+				settings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), ai.zoom,
+						ai.historyName);
+				MapActivity.launchMapActivityMoveToTop(getActivity());
+			}
+		}
+		
+	}
+
+	private Activity getActivity() {
+		return this;
 	}	
 }

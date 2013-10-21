@@ -8,6 +8,7 @@ import net.osmand.data.MapObject.MapObjectComparator;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 import net.osmand.plus.resources.RegionAddressRepository;
 import android.os.AsyncTask;
 import android.view.View;
@@ -54,7 +55,10 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 		};
 	}
 	
-	
+	@Override
+	protected AddressInformation getAddressInformation() {
+		return AddressInformation.buildStreet(this, settings);
+	}	
 	
 	@Override
 	public String getText(Street obj) {
