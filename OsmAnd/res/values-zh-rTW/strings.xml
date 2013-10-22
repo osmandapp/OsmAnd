@@ -1559,6 +1559,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     \n\t* 全新的世界地圖與主要道路、森林和鐵路
     \n\t* 地圖放大鏡 （長按縮放按鈕）- 非常好用的光柵地圖
     \n\t* 定義/編輯線上圖磚來源 (指定失效時間)
+    \n\t* 支援時間條件速限（荷蘭）
     \n\t* 更快的地址輸入
     \n\t* 路線和繪製的錯誤修復
     </string>
@@ -1588,7 +1589,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t*\'高對比道路\'在明亮的環境照明情況下，非常突出的高亮顏色顯示道路
 		\n\t*\'冬季和滑雪\'建立一個（白雪覆蓋）冬季景觀視野，和顯示全球滑雪場和滑雪升降機
 	</string>
-    <string name="base_world_map">基本的世界地圖</string>
+    <string name="base_world_map">全球的基本地圖</string>
 	<string name="route_distance_close">關閉</string>
     <string name="route_distance_far">遠方</string>
     <string name="route_distance_settings_descr">組態地圖檢視距離 (TODO naming)</string>
