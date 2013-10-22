@@ -1471,16 +1471,16 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 		\n\t* \'Zima i narty\' tworzy (pokryte śniegiem) widoki zimowych krajobrazów i pokazuje stoki i wyciągi narciarskie (w związku z mapą z możliwą do pobrania mapą \'World ski\')
 	</string>
     <string name="tip_recent_changes_1_6_t">Zmiany w 1.6:
-
-\n\t* Wsparcie dla całkowicie przezroczystego tła↵
-\n\t* Wsparcie dla urządzeń Full HD↵
-\n\t* Ściągaj i przeglądaj regiony bezpośrednio w widoku mapy↵
-\n\t* Ściągaj pliki SRTM dla konkretnego kraju↵
-\n\t* Całkowicie nowa mapa świata (główne drogi, lasy, koleje)↵
-\n\t* Powiększenie mapy(długi klik na przycisk zoom) - bardzo przydatne do map rastrowych↵
-\n\t* Definiowanie/edycja źródła internetowych płytek (określenie okresu ważności)↵
-\n\t* Szybsze wpisywanie adresu↵
-\n\t* Poprawki routingu i renderowania↵
+\n\t* Wsparcie dla całkowicie przezroczystego tła
+\n\t* Wsparcie dla urządzeń z rozdzielczością Full HD
+\n\t* Pobieranie i przegląd regionów prosto z mapy
+\n\t* Pobieranie plików SRTM dla określonego kraju
+\n\t* Całkowicie nowa mapa świata z głównymi drogami, torami i lasami
+\n\t* Lupa mapy (długie przyciśnięcie przycisku powiększenia) - przydatne dla map rastrowych
+\n\t* Definiowanie/edycja źródła kafelków map online (ustalanie czasu wygaśnięcia)
+\n\t* Wsparcie dla czasowych ograniczeń prędkości (Holandia)
+\n\t* Szybsze wprowadzanie adresu
+\n\t* Poprawki do błędów nawigacji i rysowania
     </string>
     <string name="edit_tilesource_successfully">Źródło płytek %1$ zostało zapisane z powodzeniem</string>
     <string name="edit_tilesource_elliptic_tile">Eliptyczna Merkatora</string>
