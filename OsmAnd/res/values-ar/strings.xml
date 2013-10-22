@@ -474,7 +474,7 @@
 	<string name="shared_location">موقع مشارك</string>
 	<string name="osmand_parking_event">خذ السيارة من الموقف</string>
 	<string name="osmand_parking_warning_text">لقد أضيف تنبيه لأخذ سيارتك مسبقا إلى تقويمك. سيظل هناك حتى تقوم بحذفه يدويا.</string>    
-	<string name="osmand_parking_time_limit_title">حدد المهلة الزمنية لوقوف السيارات</string>
+	<string name="osmand_parking_time_limit_title">حدد المهلة القصوى لوقوف السيارات</string>
 	<string name="osmand_parking_delete_confirm">هل تريد إزالة موقع وقوف السيارة؟</string>
 	<string name="osmand_parking_delete">حذف علامة وقوف السيارة</string>
 	<string name="osmand_parking_choose_type">اختر نوع مواقف السيارات</string>
@@ -483,4 +483,29 @@
 	<string name="osmand_parking_add_event">إضافة إخطارا إلى تطبيق التقويم</string>
 	<string name="osmand_parking_time_limit">مواقف محدودة زمنيا</string>
 	<string name="osmand_parking_time_no_limit">مواقف غير محدودة زمنيا</string>
+	<string name="av_photo_play_sound_descr">فعّل هذا في حال رغبتك بسماع نغمة التقاط الصّور</string>
+<string name="edit_tilesource_elliptic_tile">نموذج مركتور البيضوي</string>
+    <string name="tip_recent_changes_1_5_t">التّغييرات في الإصدارة 1.5:
+	\n\t* تحذيرات صوتية بخصوص السرعات القصوى و آلات التّصوير
+	\n\t* قدرات صوتية أكبر (كنطق أسماء الشّوارع)
+	\n\t* كثافة كبيرة للرّموز على الخريطة
+	\n\t* تغييرات كبيرة في واجهة المُستخدم
+	\n\t* حلّ العديد من العلل المتعلقة بعرض المسافة و بتحليل GPX و بالتقاط الإحداثيات أو بناء النوافذ وكذلك في رفع OSM والتقاط https
+    </string>
+    <string name="route_descr_lat_lon">خط عرض %1$.3f، طول %2$.3f</string>
+    <string name="local_index_gpx_timespan">\nالفترة الزّمنية: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nزمن التّحرك: %1$d:%2$02d:%3$02d</string>
+	<string name="tip_recent_changes_1_4_t">التّغييرات في الإصدار 1.4:
+	\n\t* طلب الإحداثيات بالطّريقة الأمثل لزيارة (من الباب إلى الباب - نقاط البيع السّفرية)
+	\n\t* البحث عن الشّوارع بالاسم (في الجوار) 
+	\n\t* مٌلحق نمط الرّسم التّخطيطي (تحميل/حذف/حفظ مقطوعات GPX)
+	\n\t* شاشة تحميل جديدة (التّحميل في الخلفية)
+	\n\t* دعم المجلدات الفرعية لـ GPX (كي تنظّم مقطوعاتك من نوع GPX)
+	\n\t* حذف ملفات SRTM
+	\n\t* دعم ملاحظات OSM 
+    </string>
+    <string name="use_kalman_filter_compass_descr">استخدام مُرشّح كالمان لتجنب انحرافات البوصلة</string>
+    <string name="use_kalman_filter_compass">استخدم مُرشّح كالمان</string>
+    <string name="access_mark_final_location_first">نمط الإتاحة: اختر وجهتك أولًا رجاءً</string> 
+    <string name="av_photo_play_sound">شغّل صوتًا عند التقاط صورة</string>
 	</resources>
