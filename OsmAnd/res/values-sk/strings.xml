@@ -486,9 +486,10 @@
   <string name="tip_search_t">"Môžete vyhľadať miesto priamo na mape alebo adresou, umiestnením, ako bod záujmu(POI) alebo vo forme obľúbeného bodu.
 \n\tStlačením \'Hľadať\' na mape sa otvorí vyhľadávanie. Tam máte 2 možnosti : \'Navigovať do\' alebo \'Zobraziť na mape\'. "</string>
   <string name="tip_map_context_menu">Menu \'Použiť umiestnenie\'</string>
-  <string name="tip_map_context_menu_t">"\tKontextové menu mapy je dostupné dlhším držaním na mape alebo stlačením track ball tlačidla.
-\n\tPo kliknutí na zobrazený obdĺžnik so súradnicami sa zobrazí kontextové menu. Pre skrytie obdĺžnika ho dlhšie podržte. Kontextové menu je tiež dostupné pod tlačidlom \'Menu\' na mape.
-\n\tKontextové menu mapy pozostáva z akcií, ktoré používaju umiestnenie ako vstup. "</string>
+  <string name="tip_map_context_menu_t">Kontextové menu mapy obsahuje všetky funkcie pre prácu s bodom (pozíciou).
+		\n\nJe dostupné dlhším podržaním na mape (a potom stlačením zobrazeného obdĺžnika). Alebo stlačením track ball tlačidla alebo zvolením "Menu" → "Použiť umiestnenie…" (posledné 2 spôsoby použijú stred obrazovky ako zvolený bod).
+		\n\nPre skrytie obdĺžnika ho dlhšie podržte.
+	</string>
   <string name="tip_initial">Tipy a triky</string>
   <string name="tip_initial_t">OsmAnd je navigačná aplikácia s rozmanitými funkciami.
 		\n\nNa jej lepšie využitie môžete využiť tipy a triky dostupné z mapy cez "Menu" → "Tipy".
@@ -1074,9 +1075,14 @@
 		\n\t* \'Otáčať v smere pohybu\' - Mapa bude priebežne otáčaná podľa smeru pohybu
 		\n\t* \'Kompas\' - Mapa bude priebežne otáčaná podľa kompasu v zariadení (ak je k dispozícii)
 	</string>
-	<string name="tip_day_night_mode_t_v2">"Vzhľad mapy sa môže u niektorých vektorových máp meniť medzi dňom (svetlejší) a nocou (tmavšie).\nNočné farby sú bezpečnejšie pre jazdu v noci.\nMôžete nastaviť pravidlá pre prepínanie deň / noc v \'Menu\' -&gt; \'Konfigurácia obrazovky…\' -&gt; \'Deň / noc mapy\'.
-\nMožnosti sú:
-\n\'Sunrise / Sunset\' - automatický režim, riadi sa podľa postavenie slnka pre vašu aktuálnu polohu (východzie)\n\'Deň\' - vždy používať denný režim\n\'Noc\' - vždy používať nočný režim\n\'Svetelný senzor\' - režim je riadený svetelným senzorom v zariadení (iba ak je vo výbave) "</string>	
+	<string name="tip_day_night_mode_t_v2">Vzhľad mapy sa môže u vektorových máp meniť medzi dňom (svetlejší) a nocou (tmavšie). Nočné farby sú bezpečnejšie pre jazdu v noci.
+		\n\nMôžete nastaviť pravidlá pre prepínanie deň / noc v "Menu" -&gt; "Konfigurovať obrazovku" → "Denná/nočná mapa".
+		\n\nMožnosti sú:
+		\n\t* "Východ/Západ slnka": automatický režim, riadi sa podľa postavenia slnka pre vašu aktuálnu polohu (východzie)
+		\n\t* "Denný režim": vždy používať denný režim
+		\n\t* "Nočný režim": vždy používať nočný režim
+		\n\t* "Svetelný senzor": režim je riadený svetelným senzorom v zariadení (iba ak je vo výbave)
+	</string>	
 	<string name="tip_map_switch_t_v2">"Zdroj mapy a zobrazené vrstvy sa nastavujú pomocou \'Menu\' -&gt; \'Zobrazeni\' na obrazovke mapy.
 \nPomocou \"Zdroj mapy...\" môžete vybrať predinštalované offline vektorové mapy alebo preddefinované on-line dlaždicové mapy (potreba aktivovať modul \'Online mapy\'), alebo mapy ručne vytvorené pomocou napr. OsmAndMapCreator na PC.
 \nOsmAnd tiež podporuje vlastné zdroje máp. "</string>
@@ -1323,6 +1329,7 @@
     \n\t* Nová základná mapa sveta s hlavnými cestami, železnicami a veľkými oblasťami (napr. lesy)
     \n\t* Funkcia zväčšovania mapy (podržte tlačidlo priblíženia) - použiteľná pre vektorové aj obrazové mapy
     \n\t* Určenie/úprava online zdrojov dlaždíc (a určenie doby vypršania)
+    \n\t* Podpora rýchlostných obmedzení závislých na dennej dobe (Holandsko)
     \n\t* Rýchlejšie zadávanie vyhľadávania adries
     \n\t* Opravy chýb navigovania a vykresľovania
     </string>
