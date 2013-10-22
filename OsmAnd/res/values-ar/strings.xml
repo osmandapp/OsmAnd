@@ -200,7 +200,7 @@
     <string name="about_settings">حول</string>
     <string name="about_settings_descr">معلومات النسخة، والتراخيص، أعضاء المشروع</string>
     <string name="tips_and_tricks">نصائح</string>
-    <string name="edit_tilesource_maxzoom">ماكس التكبير</string>
+    <string name="edit_tilesource_maxzoom">التّكبير الأقصى</string>
     <string name="edit_tilesource_minzoom">دقيقة التكبير</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_name">اسم</string>
@@ -409,4 +409,19 @@
     <string name="ending_point_too_far">نقطة النهاية بعيدة جدا عن أقرب طريق.</string>
     <string name="btn_add_tag">أضف وسما</string>
     <string name="show_warnings_descr">إعداد تحذيرات المرور ( حدود السرعة، و توقف القسري، مطبات صناعية ) ، تحذيرات كاميرا السرعة ، والمعلومات ممرات</string>
-	</resources>
+	<string name="tip_recent_changes_1_6_t">التّغيرات في الإصدار 1.6:
+    \n\t* دعم أجهزة الدّقة العالية الكاملة
+    \n\t* دعم خلفية الخريطة الشّفافة
+    \n\t* عرض الخرائط المُحمّلة و تسهيل تحميل باقي الخرائط مباشرة من الخريطة المعروضة
+    \n\t* تجميع ملفات الخرائط ذات الخط المحيطي الواحد لأجل البلدان و الأقاليم
+    \n\t* تجديد خريطة العالم الأساسية مع تحديد الطرق الرئيسية و السّكك الحديدية و المساحات المخصصة الأخرى كالغابات 
+    \n\t* ميزة تكبير الخريطة (ضغطة كبيرة على زر التّكبير) - مفيدة مع خرائط التّجانب و خرائط النّقل  
+    \n\t* تعريف/تحرير مصادر معلومات التّجانب عبر الشّابكة (مع تحديد فترة الصّلاحية)
+    \n\t* دعم السرعة القصوى الشّرطية (هولندا) 
+    \n\t* تسريع البحث بالعنوان المُدخل
+    \n\t* حل العديد من العلل المتعلّقة بالتّوجيه و التّقديم
+    </string>
+    <string name="local_index_tile_data_zooms">التّكبيرات المُحمّلة: %1$s</string>
+    <string name="local_index_tile_data_name">معلومات التّجانب: %1$s</string>
+    <string name="edit_tilesource_successfully">تم تحميل المصدر التّجانبي %1$sبنجاح</string>
+    </resources>
