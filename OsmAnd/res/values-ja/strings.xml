@@ -911,4 +911,6 @@ POIの更新は利用できません</string>
     <string name="map_widget_av_notes">音声/ビデオノート</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
-    </resources>
+    <string name="map_online_data_descr">オンラインマップを使用(SDカードにダウンロードしたタイルのキャッシュを使用)</string>
+	<string name="confirm_interrupt_download">ダウンロードを中止しますか？</string>
+	</resources>
