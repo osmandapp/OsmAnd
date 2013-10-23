@@ -9,8 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="route_is_too_long">The possible route is too long to be calculated by OsmAnd offline router. 
-        In average routing is possible between points located in 200km radius, please add a waypoint to see the route. </string>
+    <string name="route_is_too_long">The route is possibly too long to be calculated by the OsmAnd offline router. 
+        On average offline routing is possible between points up to 200km apart. Please add one or more intermediate waypoints to calculate the route.</string>
     <string name="auto_zoom_none">No auto zoom</string>
     <string name="auto_zoom_close">To close-up</string>
     <string name="auto_zoom_far">To mid-range</string>
