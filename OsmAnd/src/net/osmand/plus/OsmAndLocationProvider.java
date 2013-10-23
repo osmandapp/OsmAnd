@@ -3,6 +3,7 @@ package net.osmand.plus;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import net.osmand.GeoidAltitudeCorrection;
@@ -113,10 +114,19 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			Log.d(PlatformUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
 		}
 		// try to always ask for network provide : it is faster way to find location
-		try {
-			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
-		} catch (IllegalArgumentException e) {
-			Log.d(PlatformUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
+		
+		List<String> providers = service.getProviders(true);
+		for (String provider : providers) {
+			if (provider == null || provider.equals(LocationManager.GPS_PROVIDER)) {
+				continue;
+			}
+			try {
+				NetworkListener networkListener = new NetworkListener();
+				service.requestLocationUpdates(provider, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
+				networkListeners.add(networkListener);
+			} catch (IllegalArgumentException e) {
+				Log.d(PlatformUtil.TAG, provider + " location provider not available"); //$NON-NLS-1$
+			}
 		}
 	}
 
@@ -425,6 +435,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 		}
 	};
+	private LinkedList<LocationListener> networkListeners = new LinkedList<LocationListener>();
 
 	private boolean useOnlyGPS() {
 		if(app.getRoutingHelper().isFollowingMode()) {
@@ -440,7 +451,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	// Working with location listeners
-	private LocationListener networkListener = new LocationListener() {
+	private class NetworkListener implements LocationListener {
 
 		@Override
 		public void onLocationChanged(Location location) {
@@ -469,7 +480,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 		service.removeGpsStatusListener(gpsStatusListener);
 		service.removeUpdates(gpsListener);
-		service.removeUpdates(networkListener);
+		while(!networkListeners.isEmpty()) {
+			service.removeUpdates(networkListeners.poll());
+		}
 	}
 
 	public void pauseAllUpdates() {
