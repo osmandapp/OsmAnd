@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="tip_map_styles">Kartendarstellung</string>
+<resources>
+	<string name="route_is_too_long">Die Route ist möglicherweise zu lang, um vom OsmAnd Offline-Router berechnet zu werden, 
+		Die Offline-Berechnung von Routen ist durchschnittlich zwischen bis zu etwa 200km entfernten Punkten möglich. Bitte fügen Sie einen oder mehrere Wegpunkte ein, um diese Route berechnen zu können.</string>
+	<string name="auto_zoom_none">Kein Auto-Zoom</string>
+	<string name="auto_zoom_close">Auf Nahbereich</string>
+	<string name="auto_zoom_far">Auf Mittelbereich</string>
+	<string name="auto_zoom_farthest">Auf Fernbereich</string>
+	<string name="map_magnifier">Kartenlupe</string>
+	<string name="base_world_map">Weltweite Basiskarte (basemap)</string>
+	<string name="tip_map_styles">Kartendarstellung</string>
 	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten für verschiedene Verwendungszwecke optimiert dartsellen:
 		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' → \'Anzeige konfigurieren\' → \'Map Style\' → \'Kartendarstellung\' zum Beispiel auswählen:
 		\n\t* Den \'Touring view\' Stil, er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahrradrouten, Wandersymbol-Untertützung, usw.
@@ -1431,7 +1440,16 @@
     <string name="about_settings_descr">Versionsinfo, Lizenz, Projekt Mitglieder</string>
     <string name="tips_and_tricks">Tips</string>
     <string name="tip_recent_changes_1_6_t">Änderungen in 1.6:
+	\n\t* Unterstützung von Full-HD Geräten
+	\n\t* Unterstützung von transparentem Kartenhintergrund
+	\n\t* Anzeige geladener Regionalkarten und Herunterladen fehlender Karten direkt aus der Kartenansicht heraus
+	\n\t* Höhenliniendaten nun als Landes- oder Regionendateien
+	\n\t* Neue Welt-Basiskarte mit weltweit allen größeren Straßen, Eisenbahen und größeren Flächen wie Wäldern 
+	\n\t* Kartenlupenfunktion (langer Klick auf den +/- Knopf) - Hilfreich sowohl für Vektor wie auch Kachelkarten  
 	\n\t* Definiere/Bearbeite Online Kachelquelle (spezifiziere Ablaufdatum)
+	\n\t* Unterstützung von uhrzeitabhängigen Geschwindigkeitsbegrenzungen (Niederlande) 
+	\n\t* Schnellere Eingabe von suichadressen
+	\n\t* Bug fixes bei Navigation und Kartenanzeige
     </string>
     <string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
     <string name="local_index_tile_data_expire">Verfall (Minuten): %1$s</string>
