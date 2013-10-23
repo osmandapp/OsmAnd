@@ -1398,4 +1398,6 @@
 	Generalmente il calcolo del percorso è possibile su distanze di 200 km circa. Per favore aggiungi uno  più punti intermedi per calcolare il percorso.</string>
     <string name="auto_zoom_none">No zoom automatico</string>
     <string name="auto_zoom_close">Al primo piano</string>
+    <string name="auto_zoom_far">Al medio raggio</string>
+    <string name="auto_zoom_farthest">Al lungo raggio</string>
     </resources>
