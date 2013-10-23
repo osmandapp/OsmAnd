@@ -10,12 +10,19 @@ import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.graphics.PointF;
 
 public class RouteLayer extends OsmandMapLayer {
@@ -33,6 +40,10 @@ public class RouteLayer extends OsmandMapLayer {
 	private boolean cachedNightMode;
 	private int cachedColor;
 
+	private Bitmap coloredArrowUp;
+
+	private Paint paintIcon;
+
 	public RouteLayer(RoutingHelper helper){
 		this.helper = helper;
 	}
@@ -47,6 +58,13 @@ public class RouteLayer extends OsmandMapLayer {
 		paint.setStrokeCap(Cap.ROUND);
 		paint.setStrokeJoin(Join.ROUND);
 		path = new Path();
+		
+		paintIcon = new Paint();
+		paintIcon.setFilterBitmap(true);
+		paintIcon.setAntiAlias(true);
+		paintIcon.setColor(Color.BLACK);
+		paintIcon.setStrokeWidth(3);
+		
 	}
 	
 	@Override
@@ -56,9 +74,15 @@ public class RouteLayer extends OsmandMapLayer {
 	}
 
 	
-	private int getColor(DrawSettings nightMode){
+	private int updateColor(DrawSettings nightMode){
 		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		boolean n = nightMode != null && nightMode.isNightMode();
+		if(coloredArrowUp == null) {
+			Bitmap originalArrowUp = BitmapFactory.decodeResource(view.getResources(), R.drawable.h_arrow, null);
+			coloredArrowUp = originalArrowUp;
+//			coloredArrowUp = Bitmap.createScaledBitmap(originalArrowUp, originalArrowUp.getWidth() * 3 / 4,	
+//					originalArrowUp.getHeight() * 3 / 4, true);
+		}
 		if (rrs != cachedRrs || cachedNightMode != n) {
 			cachedRrs = rrs;
 			cachedNightMode = n;
@@ -70,6 +94,20 @@ public class RouteLayer extends OsmandMapLayer {
 					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
 				}
 			}
+			paint.setColor(cachedColor);
+			int r = Color.red(cachedColor);
+			int g = Color.green(cachedColor);
+			int b = Color.blue(cachedColor);
+			ColorMatrix f = new ColorMatrix(new float[]{
+				0, 0, 0, 0, r,
+				0, 0, 0, 0, g,
+				0, 0, 0, 0, b,
+				0, 0, 0, 1, 0
+			});
+			ColorMatrix sat = new ColorMatrix();
+			sat.setSaturation(0.3f);
+			f.postConcat(sat);
+			paintIcon.setColorFilter(new ColorMatrixColorFilter(f));
 		}
 		return cachedColor;
 	}
@@ -78,7 +116,7 @@ public class RouteLayer extends OsmandMapLayer {
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		path.reset();
 		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
-			paint.setColor(getColor(settings));
+			updateColor(settings);
 			int w = tileBox.getPixWidth();
 			int h = tileBox.getPixHeight();
 			Location lastProjection = helper.getLastProjection();
@@ -119,6 +157,30 @@ public class RouteLayer extends OsmandMapLayer {
 				path.lineTo(x, y);
 			}
 			canvas.drawPath(path, paint);
+			drawArrowsOverPath(canvas, path, coloredArrowUp);
+		}
+	}
+
+
+	private void drawArrowsOverPath(Canvas canvas, Path path, Bitmap arrow) {
+		PathMeasure pm = new PathMeasure();
+		pm.setPath(path, false);
+		float pxStep = arrow.getHeight() * 4f;
+		float dist = pxStep;
+		double length = pm.getLength();
+		Matrix matrix = new Matrix();
+		float[] pos = new float[2];
+		float[] tan = new float[2];
+		while(dist < length) {
+			if(pm.getPosTan(dist, pos, tan)) {
+				matrix.reset();
+				matrix.postTranslate(0, - arrow.getHeight() / 2);
+				matrix.postRotate((float) (Math.atan2(tan[1], tan[0]) * 180 / Math.PI) + 90f, 
+						arrow.getWidth() / 2, 0);
+				matrix.postTranslate(pos[0] - arrow.getWidth() / 2, pos[1]);
+				canvas.drawBitmap(arrow, matrix, paintIcon);
+			}
+			dist += pxStep;
 		}
 	}
 	
