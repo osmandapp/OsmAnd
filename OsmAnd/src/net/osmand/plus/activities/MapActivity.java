@@ -366,7 +366,7 @@ public class MapActivity extends AccessibleActivity  {
 	public void changeZoom(int stp){
 		// delta = Math.round(delta * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
 		boolean changeLocation = true;
-		if (settings.AUTO_ZOOM_MAP.get() == settings.AutoZoomMap.NONE) {
+		if (settings.AUTO_ZOOM_MAP.get() == AutoZoomMap.NONE) {
 			changeLocation = false;
 		}
 		final int newZoom = mapView.getZoom() + stp;

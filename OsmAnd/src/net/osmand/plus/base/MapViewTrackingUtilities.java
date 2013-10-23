@@ -80,7 +80,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void updateLocation(Location location) {
 		if (mapView != null) {
 			if (isMapLinkedToLocation() && location != null) {
-				if (settings.AUTO_ZOOM_MAP.get() != settings.AutoZoomMap.NONE) {
+				if (settings.AUTO_ZOOM_MAP.get() != AutoZoomMap.NONE) {
 					autozoom(location);
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
