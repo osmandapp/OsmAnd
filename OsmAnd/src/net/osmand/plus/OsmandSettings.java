@@ -679,7 +679,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<AutoZoomMap> AUTO_ZOOM_MAP =
-		new EnumIntPreference<AutoZoomMap>("auto_zoom_map", AutoZoomMap.NONE,
+		new EnumIntPreference<AutoZoomMap>("auto_zoom_map_new", AutoZoomMap.NONE,
 				AutoZoomMap.values()).makeProfile().cache();
 	{
 		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, AutoZoomMap.FARTHEST);
