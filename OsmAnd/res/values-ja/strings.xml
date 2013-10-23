@@ -499,7 +499,7 @@ POIの更新は利用できません</string>
      <string name="fav_points_not_exist">お気に入り地点はありません</string>
      <string name="update_existing">置換</string>
      <string name="only_show">表示のみ</string>
-     <string name="follow">フォロー</string>
+     <string name="follow">ナビゲーション開始</string>
      <string name="recalculate_route_to_your_location">トランスポートモード：</string>
      <string name="mark_final_location_first">最初に目的地を選んでください</string>
      <string name="get_directions">方向</string>
@@ -913,4 +913,8 @@ POIの更新は利用できません</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
     <string name="map_online_data_descr">オンラインマップを使用(SDカードにダウンロードしたタイルのキャッシュを使用)</string>
 	<string name="confirm_interrupt_download">ダウンロードを中止しますか？</string>
+	<string name="animate_route_off">シミュレーション停止</string>
+	<string name="animate_route">シミュレーション開始</string>
+	<string name="left_side_navigation">左側通行に設定</string>
+	<string name="left_side_navigation_descr">車が道路を左側通行する国は選択してください</string>
 	</resources>
