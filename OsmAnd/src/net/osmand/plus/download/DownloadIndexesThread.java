@@ -375,12 +375,17 @@ public class DownloadIndexesThread {
 				if (indexFiles != null && uiActivity != null) {
 					boolean basemapExists = uiActivity.getMyApplication().getResourceManager().containsBasemap();
 					IndexItem basemap = indexFiles.getBasemap();
-					if (!basemapExists && basemap != null) {
-						List<DownloadEntry> downloadEntry = basemap.createDownloadEntry(uiActivity.getClientContext(),
-								uiActivity.getType(), new ArrayList<DownloadEntry>());
-						uiActivity.getEntriesToDownload().put(basemap, downloadEntry);
-						AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download, Toast.LENGTH_LONG).show();
-						uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+					if (basemap != null ) {
+						String dt = uiActivity.getMyApplication().getResourceManager().getIndexFileNames().get(basemap.getTargetFileName());
+						if (!basemapExists || !Algorithms.objectEquals(dt, basemap.getDate())) {
+							List<DownloadEntry> downloadEntry = basemap
+									.createDownloadEntry(uiActivity.getClientContext(), uiActivity.getType(),
+											new ArrayList<DownloadEntry>());
+							uiActivity.getEntriesToDownload().put(basemap, downloadEntry);
+							AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download,
+									Toast.LENGTH_LONG).show();
+							uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+						}
 					}
 					if (indexFiles.isIncreasedMapVersion()) {
 						showWarnDialog();
