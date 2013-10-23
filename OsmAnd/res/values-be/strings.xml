@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <!--
     	 Disclaimer: 
@@ -9,11 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="route_distance_none">No auto zoom</string>
     <string name="route_distance_close">Зачыніць</string>
-    <string name="route_distance_far">Far</string>
-    <string name="route_distance_farest">Farest</string>
-    <string name="route_distance_settings_descr">Configure map view distance  (TODO naming)</string>
-    <string name="route_distance_settings">Map view distance (TODO naming)</string>
+    <string name="route_distance_far">To mid-range</string>
+    <string name="route_distance_farthest">To long-range</string>
     <string name="map_magnifier">Map magnifier</string>
     <string name="base_world_map">Асноўная мапа сьвету</string>
 	<string name="tip_map_styles">Стыль мапы</string>
