@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
+	<TextView android:id="@+id/ValidateTextView" android:textSize="16sp"  android:visibility="gone"  android:layout_width="fill_parent" android:layout_height="wrap_content" 
+	    	android:text="" android:gravity="center" android:textColor="@color/color_invalid"></TextView>
     <LinearLayout
         android:id="@+id/LinearLayout"
         android:layout_width="fill_parent"

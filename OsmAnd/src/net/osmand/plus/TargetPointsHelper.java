@@ -8,6 +8,7 @@ import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.util.MapUtils;
 
 public class TargetPointsHelper {
 
@@ -16,11 +17,9 @@ public class TargetPointsHelper {
 	private LatLon pointToNavigate = null;
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
-	private ClientContext ctx;
 	private List<StateChangedListener<Void>> listeners = new ArrayList<StateChangedListener<Void>>();
 	
 	public TargetPointsHelper(ClientContext ctx){
-		this.ctx = ctx;
 		this.settings = ctx.getSettings();
 		this.routingHelper = ctx.getRoutingHelper();
 		readFromSettings(settings);
@@ -162,6 +161,23 @@ public class TargetPointsHelper {
 		}
 		readFromSettings(settings);
 		updateRouteAndReferesh(updateRoute);
+	}
+	
+	
+	public boolean hasLongDistancesInBetween(Location current, double dist) {
+		
+		List<LatLon> list = getIntermediatePointsWithTarget();
+		if(!list.isEmpty()) {
+			if(current != null && MapUtils.getDistance(list.get(0), current.getLatitude(), current.getLongitude()) > dist) {
+				return true;
+			}
+			for(int i = 1; i < list.size(); i++) {
+				if(MapUtils.getDistance(list.get(i-1), list.get(i)) > dist) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate){

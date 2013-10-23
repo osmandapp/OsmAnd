@@ -538,6 +538,8 @@ public class MapActivityActions implements DialogProvider {
 		}
 		return view;
 	}
+	
+	
 	public void getDirections(final Location mapView, String name, DirectionDialogStyle style) {
 		final Location current = getLastKnownLocation();
 		Builder builder = new AlertDialog.Builder(mapActivity);
@@ -554,10 +556,15 @@ public class MapActivityActions implements DialogProvider {
 		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
 		buttons[ApplicationMode.PEDESTRIAN.ordinal()].setButtonDrawable(R.drawable.ic_pedestrian);
 		
-		final Spinner fromSpinner = setupFromSpinner(mapView, name,view, style);
+		final Spinner fromSpinner = setupFromSpinner(mapView, name, view, style);
 		final List<LatLon> toList = new ArrayList<LatLon>();
 		final Spinner toSpinner = setupToSpinner(mapView, name,view, toList, style);
 		
+		if(targets.hasLongDistancesInBetween(current != null ? current : mapView, 150000)) {
+			TextView textView = (TextView) view.findViewById(R.id.ValidateTextView);
+			textView.setText(R.string.route_is_too_long);
+			textView.setVisibility(View.VISIBLE);
+		}
 		
 		String via = generateViaDescription();
 		if(via.length() == 0){
