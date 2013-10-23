@@ -22,6 +22,7 @@ import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -364,7 +365,10 @@ public class MapActivity extends AccessibleActivity  {
 
 	public void changeZoom(int stp){
 		// delta = Math.round(delta * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
-		boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
+		boolean changeLocation = true;
+		if (settings.AUTO_ZOOM_MAP.get() == settings.AutoZoomMap.NONE) {
+			changeLocation = false;
+		}
 		final int newZoom = mapView.getZoom() + stp;
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
 		if (app.getInternalAPI().accessibilityEnabled())

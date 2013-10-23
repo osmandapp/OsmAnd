@@ -11,12 +11,10 @@
     -->
     <string name="route_is_too_long">The possible route is too long to be calculated by OsmAnd offline router. 
         In average routing is possible between points located in 200km radius, please add a waypoint to see the route. </string>
-    <string name="route_distance_none">No auto zoom</string>
-    <string name="route_distance_close">To close-up</string>
-    <string name="route_distance_far">To mid-range</string>
-    <string name="route_distance_farthest">To long-range</string>
-    <string name="route_distance_settings_descr">Configure map view distance  (TODO naming)</string>
-    <string name="route_distance_settings">Map view distance (TODO naming)</string>
+    <string name="auto_zoom_none">No auto zoom</string>
+    <string name="auto_zoom_close">To close-up</string>
+    <string name="auto_zoom_far">To mid-range</string>
+    <string name="auto_zoom_farthest">To long-range</string>
     <string name="map_magnifier">Map magnifier</string>
     <string name="base_world_map">World basemap</string>
 	<string name="tip_map_styles">Map Styles</string>

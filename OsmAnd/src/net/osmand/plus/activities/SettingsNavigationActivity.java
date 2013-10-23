@@ -8,7 +8,7 @@ import java.util.Set;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.plus.OsmandSettings.RouteViewDistance;
+import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import android.app.AlertDialog;
@@ -28,7 +28,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private Preference showAlarms;
 	private Preference speakAlarms;
 	private ListPreference routerServicePreference;
-	private ListPreference routeViewDistancePreference;
+	private ListPreference autoZoomMapPreference;
 	public static final String MORE_VALUE = "MORE_VALUE";
 	
 	public SettingsNavigationActivity() {
@@ -63,7 +63,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		PreferenceScreen screen = getPreferenceScreen();
 		settings = getMyApplication().getSettings();
 		
-		registerBooleanPreference(settings.AUTO_ZOOM_MAP, screen);
 		registerBooleanPreference(settings.FAST_ROUTE_MODE, screen);
 		registerBooleanPreference(settings.PRECISE_ROUTING_MODE, screen);
 		registerBooleanPreference(settings.SNAP_TO_ROAD, screen);
@@ -85,14 +84,14 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		
 		routerServicePreference = (ListPreference) screen.findPreference(settings.ROUTER_SERVICE.getId());
 		
-		entries = new String[RouteViewDistance.values().length];
+		entries = new String[AutoZoomMap.values().length];
 		for(int i=0; i<entries.length; i++){
-			entries[i] = getString(RouteViewDistance.values()[i].name);
+			entries[i] = getString(AutoZoomMap.values()[i].name);
 		}
-		registerListPreference(settings.ROUTE_VIEW_DISTANCE, screen, entries, RouteViewDistance.values());
+		registerListPreference(settings.AUTO_ZOOM_MAP, screen, entries, AutoZoomMap.values());
 		
-		routeViewDistancePreference = (ListPreference) screen.findPreference(settings.ROUTE_VIEW_DISTANCE.getId());
-		routeViewDistancePreference.setOnPreferenceChangeListener(this);
+		autoZoomMapPreference = (ListPreference) screen.findPreference(settings.AUTO_ZOOM_MAP.getId());
+		autoZoomMapPreference.setOnPreferenceChangeListener(this);
 
 		
 		avoidRouting = (Preference) screen.findPreference("avoid_in_routing");

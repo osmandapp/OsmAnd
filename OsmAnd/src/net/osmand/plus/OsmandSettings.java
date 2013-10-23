@@ -678,9 +678,15 @@ public class OsmandSettings {
 					RouteService.values()).makeProfile();	
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<RouteViewDistance> ROUTE_VIEW_DISTANCE = 
-		new EnumIntPreference<RouteViewDistance>("route_view_distance", RouteViewDistance.FARTHEST, 
-				RouteViewDistance.values()).makeProfile().cache();
+	public final OsmandPreference<AutoViewMap> AUTO_ZOOM_MAP =
+		new EnumIntPreference<AutoViewMap>("auto_zoom_map", AutoZoomMap.NONE,
+				AutoZoomMap.values());
+	{
+		AUTO_ZOOM_MAP.makeProfile().cache();
+		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, AutoZoomMap.FARTHEST);
+		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, AutoZoomMap.NONE);
+		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, AutoZoomMap.NONE);
+	}
 	
 	public final CommonPreference<Boolean> SNAP_TO_ROAD = new BooleanPreference("snap_to_road", false).makeProfile().cache();
 	{
@@ -769,12 +775,6 @@ public class OsmandSettings {
 		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.CAR, false);
 		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.BICYCLE, true);
 		SHOW_VIEW_ANGLE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
-	}
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> AUTO_ZOOM_MAP = new BooleanPreference("auto_zoom_map", false).makeProfile();
-	{
-		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, true);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -1532,14 +1532,15 @@ public class OsmandSettings {
 		
 	}
 	
-	public enum RouteViewDistance {
-		FARTHEST(R.string.route_distance_farthest, 1f),
-		FAR(R.string.route_distance_far, 1.4f),
-		CLOSE(R.string.route_distance_close, 2f)
+	public enum AutoZoomMap {
+		NONE(R.string.auto_zoom_none, 0f),
+		FARTHEST(R.string.auto_zoom_farthest, 1f),
+		FAR(R.string.auto_zoom_far, 1.4f),
+		CLOSE(R.string.auto_zoom_close, 2f)
 		;
 		public final float coefficient;
 		public final int name;
-		RouteViewDistance(int name, float coefficient) {
+		AutoZoomMap(int name, float coefficient) {
 			this.name = name;
 			this.coefficient = coefficient;
 			

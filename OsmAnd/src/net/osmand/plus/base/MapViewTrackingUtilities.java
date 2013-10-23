@@ -9,6 +9,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -79,7 +80,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void updateLocation(Location location) {
 		if (mapView != null) {
 			if (isMapLinkedToLocation() && location != null) {
-				if (settings.AUTO_ZOOM_MAP.get()) {
+				if (settings.AUTO_ZOOM_MAP.get() != settings.AutoZoomMap.NONE) {
 					autozoom(location);
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
@@ -160,7 +161,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		if (speed < 83f / 3.6) {
 			time = 60f;
 		}
-		time /= settings.ROUTE_VIEW_DISTANCE.get().coefficient;
+		time /= settings.AUTO_ZOOM_MAP.get().coefficient;
 		double distToSee = speed * time;
 		float zoomDelta = (float) (Math.log(visibleDist / distToSee) / Math.log(2.0f));
 		// check if 17, 18 is correct?
