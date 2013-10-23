@@ -157,7 +157,9 @@ public class RouteLayer extends OsmandMapLayer {
 				path.lineTo(x, y);
 			}
 			canvas.drawPath(path, paint);
-			drawArrowsOverPath(canvas, path, coloredArrowUp);
+			if(tb.getZoomAnimation() == 0) {
+				drawArrowsOverPath(canvas, path, coloredArrowUp);
+			}
 		}
 	}
 

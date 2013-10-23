@@ -1,13 +1,16 @@
 package net.osmand.plus.render;
 
-import android.graphics.*;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.graphics.RectF;
 
 public class MapVectorLayer extends BaseMapLayer {
 
@@ -110,10 +113,10 @@ public class MapVectorLayer extends BaseMapLayer {
 			calc.setRotate(bmpLoc.getRotate());
 			QuadPoint lt = bmpLoc.getLeftTopTile(cz);
 			QuadPoint rb = bmpLoc.getRightBottomTile(cz);
-			final int x1 = calc.getPixXFromTile(lt.x, lt.y, cz);
-			final int x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
-			final int y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
-			final int y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
+			final float x1 = calc.getPixXFromTile(lt.x, lt.y, cz);
+			final float x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
+			final float y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
+			final float y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
 			destImage.set(x1, y1, x2, y2);
 			if(!bmp.isRecycled()){
 				canvas.drawBitmap(bmp, null, destImage, paintImg);

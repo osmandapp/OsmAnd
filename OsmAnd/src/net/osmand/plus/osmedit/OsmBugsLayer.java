@@ -181,8 +181,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					OpenStreetNote n = objects.get(i);
-					int x = tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
-					int y = tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
+					int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
+					int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
 						radius = small;
 						res.add(n);

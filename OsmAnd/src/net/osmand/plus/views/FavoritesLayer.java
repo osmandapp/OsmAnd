@@ -82,8 +82,8 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 			for (FavouritePoint o : favorites.getFavouritePoints()) {
 				if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left
 						&& o.getLongitude() <= latLonBounds.right ) {
-					int x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-					int y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+					int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+					int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
 							y - favoriteIcon.getHeight(), paint);
 				}
@@ -102,8 +102,8 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		for (FavouritePoint n : favorites.getFavouritePoints()) {
-			int x = tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
-			int y = tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
+			int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
+			int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
 			if (calculateBelongs(ex, ey, x, y, r)) {
 				res.add(n);
 			}

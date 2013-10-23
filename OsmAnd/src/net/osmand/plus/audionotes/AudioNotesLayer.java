@@ -90,8 +90,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 			final QuadRect latlon = tileBox.getLatLonBounds();
 			List<Recording> objects = recs.getObjects(latlon. top, latlon.left, latlon.bottom, latlon.right);
 			for (Recording o : objects) {
-				int x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-				int y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+				int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+				int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 				Bitmap b;
 				if (o.isPhoto()) {
 					b = photo;
@@ -189,8 +189,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		int compare = getRadiusPoi(tileBox);
 		int radius = compare * 3 / 2;
 		for (Recording n : plugin.getAllRecordings()) {
-			int x = tileBox.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
-			int y = tileBox.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
+			int x = (int) tileBox.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
+			int y = (int) tileBox.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
 			if (calculateBelongs(ex, ey, x, y, compare)) {
 				compare = radius;
 				am.add(n);

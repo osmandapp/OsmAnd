@@ -545,8 +545,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				boolean first = true;
 				while (it.hasNext()) {
 					WptPt pt = it.next();
-					int x = tb.getPixXFromLatLon(pt.lat, pt.lon);
-					int y = tb.getPixYFromLatLon(pt.lat, pt.lon);
+					int x = (int) tb.getPixXFromLatLon(pt.lat, pt.lon);
+					int y = (int) tb.getPixYFromLatLon(pt.lat, pt.lon);
 					if (pt.desc != null || !it.hasNext() || first) {
 						if (calculateBelongsBig(ex, ey, x, y, r)) {
 							res.add(pt);

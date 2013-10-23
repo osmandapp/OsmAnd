@@ -87,8 +87,8 @@ public class TransportInfoLayer extends OsmandMapLayer {
 					if (start) {
 						LatLon location = st.getLocation();
 						if (tileBox.containsLatLon(location.getLatitude(), location.getLongitude())) {
-							int x = tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-							int y = tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+							int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
+							int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
 							canvas.drawRect(x - getRadius(tileBox), y - getRadius(tileBox), x + getRadius(tileBox), y
 									+ getRadius(tileBox), toShow);
 						}
@@ -136,8 +136,8 @@ public class TransportInfoLayer extends OsmandMapLayer {
 					}
 					if (start) {
 						LatLon location = st.getLocation();
-						int x = tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-						int y = tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+						int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
+						int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
 						if (Math.abs(x - ex) < getRadius(tileBox) * 3 /2 && Math.abs(y - ey) < getRadius(tileBox) * 3 /2) {
 							AccessibleToast.makeText(view.getContext(), st.getName(view.getSettings().USE_ENGLISH_NAMES.get()) + " : " + //$NON-NLS-1$
 									route.getType() + " " + route.getRef() //$NON-NLS-1$

@@ -210,8 +210,8 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			LatLon position = plugin.getParkingPosition();
-			int x = tb.getPixXFromLatLon(position.getLatitude(), position.getLongitude());
-			int y = tb.getPixYFromLatLon(position.getLatitude(), position.getLongitude());
+			int x = (int) tb.getPixXFromLatLon(position.getLatitude(), position.getLongitude());
+			int y = (int) tb.getPixYFromLatLon(position.getLatitude(), position.getLongitude());
 			// the width of an image is 40 px, the height is 60 px -> radius = 20,
 			// the position of a parking point relatively to the icon is at the center of the bottom line of the image
 			if (Math.abs(x - ex) <= radius && ((y - ey) <= radius * 2) && ((y - ey) >= -radius)) {

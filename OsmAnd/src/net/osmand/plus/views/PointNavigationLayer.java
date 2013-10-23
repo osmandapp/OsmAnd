@@ -164,8 +164,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			if (latLon != null) {
 				int ex = (int) point.x;
 				int ey = (int) point.y;
-				int x = tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-				int y = tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+				int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+				int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 				if (calculateBelongs(ex, ey, x, y, r)) {
 					TargetPoint tp = new TargetPoint();
 					tp.location = latLon;

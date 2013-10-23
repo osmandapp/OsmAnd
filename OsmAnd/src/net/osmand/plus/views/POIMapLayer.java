@@ -75,8 +75,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					Amenity n = objects.get(i);
-					int x = tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-					int y = tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
+					int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
+					int y = (int) tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					if (Math.abs(x - ex) <= compare && Math.abs(y - ey) <= compare) {
 						compare = radius;
 						am.add(n);
@@ -173,8 +173,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 					latLonBounds.right, tileBox.getZoom(), filter, objects);
 			int r = getRadiusPoi(tileBox);
 			for (Amenity o : objects) {
-				int x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				int y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				int x = (int) tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 				canvas.drawCircle(x, y, r, pointAltUI);
 				canvas.drawCircle(x, y, r, point);
 				String id = null;
@@ -197,8 +197,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			if (view.getSettings().SHOW_POI_LABEL.get()) {
 				TIntHashSet set = new TIntHashSet();
 				for (Amenity o : objects) {
-					int x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-					int y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+					int x = (int) tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+					int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 					int tx = tileBox.getPixXFromLonNoRot(o.getLocation().getLongitude());
 					int ty = tileBox.getPixYFromLatNoRot(o.getLocation().getLatitude());
 					String name = o.getName(view.getSettings().USE_ENGLISH_NAMES.get());

@@ -396,10 +396,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			int cz = getZoom();
 			QuadPoint lt = bufferImgLoc.getLeftTopTile(cz);
 			QuadPoint rb = bufferImgLoc.getRightBottomTile(cz);
-			final int x1 = calc.getPixXFromTile(lt.x, lt.y, cz);
-			final int x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
-			final int y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
-			final int y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
+			final float x1 = calc.getPixXFromTile(lt.x, lt.y, cz);
+			final float x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
+			final float y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
+			final float y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
 			if(!bufferBitmap.isRecycled()){
 				canvas.drawBitmap(bufferBitmap, null, new RectF(x1, y1, x2, y2), paintImg);
 			}
@@ -665,7 +665,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public void moveTo(float dx, float dy) {
-		final RotatedTileBox tb = currentViewport;
 		final QuadPoint cp = currentViewport.getCenterPixelPoint();
 		final LatLon latlon = currentViewport.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 		currentViewport.setLatLonCenter(latlon.getLatitude(), latlon.getLongitude());

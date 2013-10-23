@@ -14,7 +14,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
@@ -23,10 +22,8 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
-import android.view.WindowManager;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -119,8 +116,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
 		if(latLon != null){
-			int x = box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-			int y = box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			
 			int tx = x - boxLeg.getMinimumWidth() / 2;
 			int ty = y - boxLeg.getMinimumHeight() + SHADOW_OF_LEG;

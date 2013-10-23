@@ -123,10 +123,10 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 				prevlongitude = op.prevlatlon.getLongitude();
 			}
 
-			int locationX = tileBox.getPixXFromLatLon(latitude, longitude);
-			int locationY = tileBox.getPixYFromLatLon(latitude, longitude);
-			int prevlocationX = tileBox.getPixXFromLatLon(prevlatitude, prevlongitude);
-			int prevlocationY = tileBox.getPixYFromLatLon(prevlatitude, prevlongitude);
+			int locationX = (int) tileBox.getPixXFromLatLon(latitude, longitude);
+			int locationY = (int) tileBox.getPixYFromLatLon(latitude, longitude);
+			int prevlocationX = (int) tileBox.getPixXFromLatLon(prevlatitude, prevlongitude);
+			int prevlocationY = (int) tileBox.getPixYFromLatLon(prevlatitude, prevlongitude);
 
 			// int y = opIcon.getHeight()/2;
 			// int x = opIcon.getWidth()/2;
@@ -157,8 +157,8 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 				for (int i = 0; i < myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId).size(); i++) {
 					OsMoDroidPoint n = myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId).get(i);
 					if (!om.contains(n)) {
-						int x = tb.getPixXFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
-						int y = tb.getPixYFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
+						int x = (int) tb.getPixXFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
+						int y = (int) tb.getPixYFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
 						if (Math.abs(x - ex) <= opIcon.getWidth() && Math.abs(y - ey) <= opIcon.getHeight()) {
 							om.add(n);
 						}

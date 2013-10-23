@@ -216,20 +216,20 @@ public class RotatedTileBox {
 	}
 
 
-	public int getPixXFromLatLon(double latitude, double longitude) {
+	public float getPixXFromLatLon(double latitude, double longitude) {
 		float xTile = (float) MapUtils.getTileNumberX(zoom, longitude);
 		float yTile = (float) MapUtils.getTileNumberY(zoom, latitude);
 		return getPixXFromTile(xTile, yTile);
 	}
 	
-	public int getPixXFromTile(double tileX, double tileY, float zoom) {
+	public float getPixXFromTile(double tileX, double tileY, float zoom) {
 		double pw = MapUtils.getPowZoom(zoom - this.zoom);
 		float xTile = (float) (tileX / pw);
 		float yTile = (float) (tileY / pw);
 		return getPixXFromTile(xTile, yTile);
 	}
 
-	protected int getPixXFromTile(double xTile, double yTile) {
+	protected float getPixXFromTile(double xTile, double yTile) {
 		double rotX;
 		final double dTileX = xTile - oxTile;
 		final double dTileY = yTile - oyTile;
@@ -239,24 +239,24 @@ public class RotatedTileBox {
 			rotX = dTileX;
 		}
 		double dx = rotX * zoomFactor;
-		return (int) (dx + cx);
+		return (float) (dx + cx);
 	}
 
 
-	public int getPixYFromLatLon(double latitude, double longitude) {
+	public float getPixYFromLatLon(double latitude, double longitude) {
 		float xTile = (float) MapUtils.getTileNumberX(zoom, longitude);
 		float yTile = (float) MapUtils.getTileNumberY(zoom, latitude);
 		return getPixYFromTile(xTile, yTile);
 	}
 	
-	public int getPixYFromTile(double tileX, double tileY, float zoom) {
+	public float getPixYFromTile(double tileX, double tileY, float zoom) {
 		double pw = MapUtils.getPowZoom(zoom - this.zoom);
 		float xTile = (float) (tileX / pw);
 		float yTile = (float) (tileY / pw);
 		return getPixYFromTile(xTile, yTile);
 	}
 
-	protected int getPixYFromTile(float xTile, float yTile) {
+	protected float getPixYFromTile(float xTile, float yTile) {
 		final double dTileX = xTile - oxTile;
 		final double dTileY = yTile - oyTile;
 		double rotY;
@@ -266,7 +266,7 @@ public class RotatedTileBox {
 			rotY = dTileY;
 		}
 		double dy = rotY * zoomFactor;
-		return (int) (dy + cy);
+		return (float) (dy + cy);
 	}
 
 	public int getPixXFromLonNoRot(double longitude) {
