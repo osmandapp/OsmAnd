@@ -554,15 +554,15 @@ public class MapRenderRepositories {
 				currentRenderingContext.shadowRenderingMode = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 				currentRenderingContext.shadowRenderingColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_SHADOW_COLOR);
 			}
-			final QuadPoint lt = requestedBox.getLeftTopTile(requestedBox.getZoom() +
-					requestedBox.getZoomScale());
-			//LatLon lt = requestedBox.getLeftTopLatLon();
+			final QuadPoint lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
+//			LatLon ltn = requestedBox.getLeftTopLatLon();
 			final float mapDensity = (float) Math.pow(2, requestedBox.getZoomScale());
 			final float tileDivisor = (float) MapUtils.getPowZoom(31 - requestedBox.getZoom() -
 						requestedBox.getZoomScale());
-			currentRenderingContext.leftX = lt.x; 
-					//MapUtils.get31TileNumberX(lt.getLongitude()) / tileDivisor;
-			currentRenderingContext.topY = lt.y;//MapUtils.get31TileNumberY(lt.getLatitude()) / tileDivisor;
+			currentRenderingContext.leftX = (float) (lt.x * MapUtils.getPowZoom(requestedBox.getZoomScale()));
+					// MapUtils.get31TileNumberX(ltn.getLongitude()) / tileDivisor;
+			currentRenderingContext.topY = (float) (lt.y * MapUtils.getPowZoom(requestedBox.getZoomScale()));
+					//MapUtils.get31TileNumberY(ltn.getLatitude()) / tileDivisor;
 			currentRenderingContext.zoom = requestedBox.getZoom();
 			currentRenderingContext.rotate = requestedBox.getRotate();
 			currentRenderingContext.width = requestedBox.getPixWidth();

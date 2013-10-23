@@ -14,7 +14,6 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -22,8 +21,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {

@@ -147,6 +147,8 @@ public class RouteLayer extends OsmandMapLayer {
 
 	private void drawSegment(RotatedTileBox tb, Canvas canvas) {
 		if (points.size() > 0) {
+			paint.setStrokeWidth(12 * tb.getDensity());
+			
 			int px = tb.getPixXFromLonNoRot(points.get(0).getLongitude());
 			int py = tb.getPixYFromLatNoRot(points.get(0).getLatitude());
 			path.moveTo(px, py);
