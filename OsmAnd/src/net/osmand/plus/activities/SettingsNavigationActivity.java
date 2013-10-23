@@ -7,8 +7,8 @@ import java.util.Set;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import android.app.AlertDialog;
