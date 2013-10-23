@@ -1607,6 +1607,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n * Helt ny verdenskortet med større veje, skove og jernbaner
 \n * Kort lup (langt tryk på zoom -knappen) - nyttig for raster kort
 \n * Definer/rediger online delkortkilde (angiv udløbstid)
+\n * Understøttelse af tid betingede hastighedgrænser (Nederlandene)
 \n * Hurtigere adresse indtastning
 \n * Fejlrettelser til ruteplanlægning og optegning
     </string>
@@ -1623,7 +1624,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	</string>
     <string name="route_descr_destination"> </string>
     <string name="create_poi_link_to_osm_doc">&lt;u&gt;Online OSM&lt;/u&gt; kort klassificering med billeder<u>Online OSM</u> map classification with images</string>
-	<string name="base_world_map">basis verdenskortet</string>
+	<string name="base_world_map">Verdengrundkort</string>
 	<string name="route_distance_close">Nær</string>
     <string name="route_distance_far">Langt væk</string>
     <string name="route_distance_farest">Længst væk</string>
