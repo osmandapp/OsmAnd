@@ -1394,4 +1394,7 @@
     <string name="route_distance_settings">Distanza visione mappa (DA FARE nomi)</string>
     <string name="map_magnifier">Ingrandimento mappa</string>
     <string name="route_distance_farthest">Più lontano</string>
+    <string name="route_is_too_long">Il percorso potrebbe essere troppo lungo per essere calcolato dal servizio OsmAnd offline.
+	Generalmente il calcolo del percorso è possibile su distanze di 200 km circa. Per favore aggiungi uno  più punti intermedi per calcolare il percorso.</string>
+    <string name="auto_zoom_none">No zoom automatico</string>
     </resources>
