@@ -1597,4 +1597,10 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="map_magnifier">地圖放大鏡</string>
     <string name="route_distance_farest">最遠</string>
     <string name="route_distance_farthest">最遠</string>
+    <string name="auto_zoom_none">無自動變焦</string>
+    <string name="auto_zoom_close">特寫</string>
+    <string name="auto_zoom_far">中等</string>
+    <string name="auto_zoom_farthest">遠程</string>
+    <string name="route_is_too_long">這條路線是可能太長，使得 OsmAnd 離線路線無法計算。
+	在平均離線路線兩點之間，可能相距 200km 以上。請新增一個或多個中途點以計算路線。</string>
     </resources>
