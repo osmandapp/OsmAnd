@@ -1074,7 +1074,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="fast_route_mode_descr">Aktiver for at beregne den hurtigste rute. Deaktiver for at beregne korteste rute </string>
 	<string name="tiles_to_download_estimated_size">Ved zoom {0} hent {1} delkort ({2} MB)</string>
 	<string name="context_menu_item_download_map">Hent kort</string>
-	<string name="select_max_zoom_preload_area">Vælg den maksimale zoom der skal indlæses på forhånd</string>
+	<string name="select_max_zoom_preload_area">Vælg maksimal zoom der skal indlæses på forhånd</string>
 	<string name="maps_could_not_be_downloaded">Kortet kunne ikke hentes</string>
 	<string name="continuous_rendering">Kontinuerlig kortoptegning</string>
 	<string name="continuous_rendering_descr">Vis kontinuerlig optegning i stedet for hele kortet på en gang</string>
@@ -1291,7 +1291,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="hint_search_online">Husnummer, gade, by</string>
 	<string name="search_online_address">Online søgning</string>
 	<string name="max_level_download_tile">Maks. online zoom</string>
-	<string name="max_level_download_tile_descr">Vælg maksimum zoom niveau der hentes for online delkort</string>
+	<string name="max_level_download_tile_descr">Vælg maksimum zoomniveau der hentes for online delkort</string>
 	<string name="tip_map_switch_t_v2">Kortkilden og lag der vises kan ændres via \'Menu\' → \'Kortlag\'.
 \n\nUnder \'Kortkilde...\' vælges de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
 \n\nOsmAnd understøtter også brugerdefinerede kilder.
@@ -1605,9 +1605,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n * Hent og overblik regioner direkte fra kortvisning
 \n * Hent SRTM filer til specifikt land
 \n * Helt ny verdenskortet med større veje, skove og jernbaner
-\n * Kort lup (langt tryk på zoom -knappen) - nyttig for raster kort
+\n * Kort lup (langt tryk på zoomknappen) - nyttig for raster kort
 \n * Definer/rediger online delkortkilde (angiv udløbstid)
-\n * Understøttelse af tid betingede hastighedgrænser (Nederlandene)
+\n * Understøttelse af tidsbetingede hastighedgrænser (Holland)
 \n * Hurtigere adresse indtastning
 \n * Fejlrettelser til ruteplanlægning og optegning
     </string>
@@ -1624,7 +1624,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	</string>
     <string name="route_descr_destination"> </string>
     <string name="create_poi_link_to_osm_doc">&lt;u&gt;Online OSM&lt;/u&gt; kort klassificering med billeder<u>Online OSM</u> map classification with images</string>
-	<string name="base_world_map">Verdengrundkort</string>
+	<string name="base_world_map">Verdensgrundkort</string>
 	<string name="route_distance_close">Nær</string>
     <string name="route_distance_far">Langt væk</string>
     <string name="route_distance_farest">Længst væk</string>
@@ -1632,4 +1632,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_distance_settings">Kortvisningsafstand</string>
     <string name="map_magnifier">Kort lup</string>
     <string name="route_distance_farthest">Længst væk</string>
+    <string name="route_is_too_long">Ruten er muligvis for lang til at blive beregnet af Osmand offline ruteplanlægger.
+ I gennemsnit er offline ruteplanlægning mulig mellem punkter på op til 200 km fra hinanden. Tilføj et eller flere mellemliggende rutepunkter for at beregne ruten .</string>
+    <string name="auto_zoom_none">Ingen autozoom</string>
+    <string name="auto_zoom_far">Til midtenafstande</string>
+    <string name="auto_zoom_farthest">Til langtrækkende</string>
     </resources>
