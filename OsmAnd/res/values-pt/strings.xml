@@ -1467,4 +1467,8 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 → → \ n \ t * \ 'estradas de alto contraste \' mostra estradas em cores muito acentuadas para situações de iluminação ambiente brilhantes ↵
 → → \ n \ t * \ 'Winter e ski \' cria um (coberto de neve) Inverno modo paisagem, e mostra pistas de esqui e teleféricos globais (em conexão com a \ 'World ski \' mapa download) ↵
 	</string>
+    <string name="auto_zoom_none">Sem auto zoom</string>
+    <string name="auto_zoom_close">Aproximar</string>
+    <string name="auto_zoom_far">Visão intermédia</string>
+    <string name="auto_zoom_farthest">Mais abrangente</string>
     </resources>
