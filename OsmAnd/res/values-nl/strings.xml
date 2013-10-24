@@ -387,11 +387,11 @@
   <string name="tip_app_mode">Gebruiksprofiel</string>
   
   <string name="tip_navigation">Navigatie</string>
-  <string name="tip_navigation_t">\tVoor het starten van navigatie moet je een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en kies het type navigatie.
+  <string name="tip_navigation_t">\tVoor het starten van navigatie moet je een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Aanwijzingen\' en kies het type navigatie.
 	</string>
   <string name="tip_search">Zoeken</string>
   <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' → \'Zoek dichtbij hier\'), of met het zoekscherm met \'Menu\' → \'Zoeken\'.
-		\n\nOp het zoekscherm kunt u zoeken:
+		\n\nOp het zoekscherm kan je zoeken:
 		\n\t* op adres
 		\n\t* op coördinaten
 		\n\t* interessepunten (type of op naam)
@@ -401,7 +401,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
 	</string>
   <string name="tip_map_context_menu">Menu \'Gebruik locatie\'</string>
   <string name="tip_map_context_menu_t">\tHet kaart-contextmenu biedt alle acties die te maken hebben met een punt op de kaart.
-		\n\nHet wordt getoond als u op een punt op de kaart drukt en dan op de markering tikt, of door op de trackball-knop te drukken, of via \'Menu\' → \'Gebruik locatie\'.
+		\n\nHet wordt getoond als je (lang) op een punt op de kaart drukt en dan op de markering tikt, of door op de trackball-knop te drukken, of via \'Menu\' → \'Gebruik locatie\'.
 		\n\tDe laatste twee manieren gebruiken het midden van de kaart als locatie.
 		\n\tEen markering kan worden gesloten door er lang op te drukken.
 	</string>
@@ -1568,6 +1568,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	\n\t* Geheel nieuwe basiskaart met grote wegen, bossen en spoorlijnen
 	\n\t* Vergrootglas (lang drukken op de zoomknop) - handig voor rasterkaarten
 	\n\t* Definieer/bewerk online kaartsegmentbron (specificeer verlooptijd)
+	\n\t* Ondersteuning voor tijdafhankelijke snelheidslimieten (Nederland)
 	\n\t* Adressen sneller in te voeren
 	\n\t* Fouten verholpen in routeberekening en kaartweergave
     </string>
@@ -1582,11 +1583,17 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 		\n\t* \'High contrast roads\' toont wegen in uitgesproken kleuren voor situaties met veel omgevingslicht
 		\n\t* \'Winter and ski\' toont een (met sneeuw bedekt) winterlandschap en toont wereldwijd skihellingen en liften (wanneer gebruikt met de \'World ski\' kaartdownload)
 	</string>
-    <string name="base_world_map">Standaard wereldkaart</string>
+    <string name="base_world_map">Basis-wereldkaart</string>
 	<string name="route_distance_close">Dichtbij</string>
     <string name="route_distance_far">Ver</string>
     <string name="route_distance_farest">Verst</string>
     <string name="route_distance_settings_descr">Stel kaartweergaveafstand in</string>
     <string name="route_distance_settings">Kaartweergaveafstand</string>
     <string name="map_magnifier">Kaartvergrootglas</string>
+    <string name="route_is_too_long">De route is mogelijk te lang om te worden berekend door de OsmAnd offline router.
+De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of meer routepunten om de route te berekenen.</string>
+    <string name="auto_zoom_none">geen automatische zoom</string>
+    <string name="auto_zoom_close">Zoom naar close-up</string>
+    <string name="auto_zoom_far">Zoom naar gemiddelde afstand</string>
+    <string name="auto_zoom_farthest">Zoom naar grote afstand</string>
     </resources>
