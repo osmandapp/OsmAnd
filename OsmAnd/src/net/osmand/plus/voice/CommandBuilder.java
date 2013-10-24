@@ -40,6 +40,7 @@ public class CommandBuilder {
 	protected static final String C_ROUTE_RECALC = "route_recalc";  //$NON-NLS-1$
 	protected static final String C_ROUTE_NEW_CALC = "route_new_calc";  //$NON-NLS-1$
 	protected static final String C_LOCATION_LOST = "location_lost";  //$NON-NLS-1$
+	protected static final String C_LOCATION_RECOVERED = "location_recovered";  //$NON-NLS-1$
 	
 	/**
 	 * 
@@ -208,6 +209,10 @@ public class CommandBuilder {
 		return addCommand(C_LOCATION_LOST);
 	}
 	
+	public CommandBuilder gpsLocationRecover() {
+		return addCommand(C_LOCATION_RECOVERED);
+	}
+	
 	public CommandBuilder newRouteCalculated(double dist, int time){
 		return alt(prepareStruct(C_ROUTE_NEW_CALC, dist, time), prepareStruct(C_ROUTE_NEW_CALC, dist));
 	}
@@ -226,6 +231,8 @@ public class CommandBuilder {
 		alreadyExecuted = true;
 		return this.commandPlayer.execute(listStruct);
 	}
+
+	
 
 
 	

@@ -562,6 +562,14 @@ public class VoiceRouter {
 			play.gpsLocationLost().play();
 		}
 	}
+	
+	public void gpsLocationRecover() {
+		CommandBuilder play = getNewCommandPlayerToPlay();
+		if (play != null) {
+			play.gpsLocationRecover().play();
+		}
+		
+	}
 
 	public void newRouteIsCalculated(boolean newRoute) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
@@ -640,6 +648,8 @@ public class VoiceRouter {
 			}
 		}
 	}
+
+	
 
 
 }

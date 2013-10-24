@@ -51,6 +51,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final int NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000;
 
 	private long lastTimeGPSLocationFixed = 0;
+	private boolean gpsSignalLost;
 
 	private boolean sensorRegistered = false;
 	private float[] mGravs = new float[3];
@@ -417,6 +418,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		public void onLocationChanged(Location location) {
 			if (location != null) {
 				lastTimeGPSLocationFixed = location.getTime();
+				if(gpsSignalLost) {
+					gpsSignalLost = false;
+					final RoutingHelper routingHelper = app.getRoutingHelper();
+					if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
+						routingHelper.getVoiceRouter().gpsLocationRecover();
+					}
+				}
 			}
 			if(!locationSimulation.isRouteAnimating()) {
 				setLocation(convertLocation(location, app));
@@ -537,6 +545,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 						// false positive case, still strange how we got here with removeMessages
 						return;
 					}
+					gpsSignalLost = true;
 					if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
 						routingHelper.getVoiceRouter().gpsLocationLost();
 					}
