@@ -1,6 +1,14 @@
 package net.osmand.plus.routing;
 
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
+
+import btools.routingapp.IBRouterService;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -68,6 +76,9 @@ public class RoutingHelper {
 
 	private RouteCalculationProgressCallback progressRoute;
 
+	private IBRouterService brouterService;
+
+
 //	private ProgressBar progress;
 //	private Handler progressHandler;
 
@@ -80,7 +91,24 @@ public class RoutingHelper {
 		this.app = context;
 		settings = context.getSettings();
 		voiceRouter = new VoiceRouter(this, player);
+
+		// try bind to brouter service
+		BRouterServiceConnection conn = new BRouterServiceConnection();
+		Intent i = new Intent();
+		i.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
+		app.bindService(i, conn, Context.BIND_AUTO_CREATE);
 	}
+
+	class BRouterServiceConnection implements ServiceConnection
+	{
+		public void onServiceConnected(ComponentName className, IBinder boundService) {
+			brouterService = IBRouterService.Stub.asInterface((IBinder) boundService);
+		}
+
+		public void onServiceDisconnected(ComponentName className) {
+			brouterService = null;
+		}
+	};
 
 	public boolean isFollowingMode() {
 		return isFollowingMode;
@@ -727,7 +755,7 @@ public class RoutingHelper {
 					msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime()) + ")";
 				}
 				showMessage(msg);
-			} else if (params.type != RouteService.OSMAND && !settings.isInternetConnectionAvailable()) {
+			} else if (params.type != RouteService.OSMAND && params.type != RouteService.BROUTER && !settings.isInternetConnectionAvailable()) {
 					showMessage(app.getString(R.string.error_calculating_route)
 						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route)); //$NON-NLS-1$
 			} else {
@@ -762,6 +790,8 @@ public class RoutingHelper {
 				params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 				params.mode = mode;
 				params.ctx = app;
+        params.brouterService = brouterService;
+
 				if(previousRoute == null && params.type == RouteService.OSMAND) {
 					params.calculationProgress = new RouteCalculationProgress();
 					updateProgress(params.calculationProgress);
