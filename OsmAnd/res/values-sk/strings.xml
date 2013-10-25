@@ -355,7 +355,7 @@
   <string name="favorite_default_category">Iné</string>
   <string name="vector_map_not_needed">Netreba</string>
   <string name="basemap_missing">Chýba základná mapa sveta(World Basemap). Prosím, zvážte jej stiahnutie pre správnu funkčnosť.</string>
-  <string name="vector_data_missing">Na SD karte chýbajú palubné údaje. Prosím, zvážte ich stiahnutie pre použitie máp bez internetu.</string>
+  <string name="vector_data_missing">Na SD karte chýbajú offline údaje. Prosím, zvážte ich stiahnutie pre použitie máp bez internetu.</string>
   <string name="local_index_gpx_info_show">\n\nKliknite a podržte pre možnosti</string>
   <string name="local_index_gpx_info_speed">\nPriemerná rýchlosť : %1$s
 \nMaximálna rýchlosť : %2$s</string>
@@ -370,7 +370,7 @@
   <string name="local_index_action_do">Chcete %1$s %2$s položiek. Ste si istý?</string>
   <string name="local_index_descr_title">Správca offline údajov</string>
   <string name="local_index_mi_restore">Obnoviť</string>
-  <string name="local_index_mi_backup">Zálohovať</string>
+  <string name="local_index_mi_backup">Zálohovať (vypnúť)</string>
   <string name="local_index_mi_delete">Vymazať</string>
   <string name="local_index_mi_reload">Znovu načítať z karty SD</string>
   <string name="local_index_download">Stiahnuť</string>
@@ -1322,16 +1322,16 @@
     <string name="about_settings_descr">Informácie o verzii, licencie, členovia projektu</string>
     <string name="tips_and_tricks">Tipy</string>
     <string name="tip_recent_changes_1_6_t">Zmeny vo verzii 1.6:
-    \n\t* Podpora zariadení s rozlíšením Full HD
-    \n\t* Podpora priehľadného pozadia mapy
-    \n\t* Zobrazuje stiahnuté mapy a umožňuje stiahnutie chýbajúcich máp priamo zo zobrazenia mapy
-    \n\t* Mapy vrstevníc sú teraz pribalené ku krajinám/regiónom
-    \n\t* Nová základná mapa sveta s hlavnými cestami, železnicami a veľkými oblasťami (napr. lesy)
-    \n\t* Funkcia zväčšovania mapy (podržte tlačidlo priblíženia) - použiteľná pre vektorové aj obrazové mapy
-    \n\t* Určenie/úprava online zdrojov dlaždíc (a určenie doby vypršania)
-    \n\t* Podpora rýchlostných obmedzení závislých na dennej dobe (Holandsko)
-    \n\t* Rýchlejšie zadávanie vyhľadávania adries
-    \n\t* Opravy chýb navigovania a vykresľovania
+	\n\t* Podpora zariadení s rozlíšením Full HD
+	\n\t* Podpora priehľadného pozadia mapy
+	\n\t* Zobrazuje stiahnuté mapy a umožňuje stiahnutie chýbajúcich máp priamo zo zobrazenia mapy
+	\n\t* Mapy vrstevníc sú teraz pribalené ku krajinám/regiónom
+	\n\t* Nová základná mapa sveta s hlavnými cestami, železnicami a veľkými oblasťami (napr. lesy)
+	\n\t* Funkcia zväčšovania mapy (podržte tlačidlo priblíženia) - použiteľná pre vektorové aj obrazové mapy
+	\n\t* Určenie/úprava online zdrojov dlaždíc (a určenie doby vypršania)
+	\n\t* Podpora rýchlostných obmedzení závislých na dennej dobe (Holandsko)
+	\n\t* Rýchlejšie zadávanie vyhľadávania adries
+	\n\t* Opravy chýb navigovania a vykresľovania
     </string>
     <string name="local_index_tile_data_zooms">Stiahnuté priblíženia: %1$s</string>
     <string name="local_index_tile_data_downloadable">Stiahnuteľné: %1$s</string>
@@ -1390,4 +1390,10 @@
     <string name="route_distance_settings">Vzdialenosť zobrazenia mapy</string>
     <string name="map_magnifier">Zväčšenie mapy</string>
     <string name="route_distance_farthest">Najvzdialenejší</string>
-    </resources>
+    <string name="route_is_too_long">Trasa je pravdepodobne príliš dlhá pre offline navigačnú službu.
+	Offline navigovanie je funkčné medzi bodmi vzdialenými do 200km. Prosím pridajte ďalšie prechodné body cesty, aby bolo možné trasu vypočítať.</string>
+	<string name="auto_zoom_none">Žiadne automatické približovanie</string>
+	<string name="auto_zoom_close">Veľké priblíženie</string>
+	<string name="auto_zoom_far">Stredné priblíženie</string>
+	<string name="auto_zoom_farthest">Malé priblíženie</string>
+	</resources>
