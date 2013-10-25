@@ -224,7 +224,7 @@
   <string name="gpx_option_destination_point">Usa il punto di destinazione attuale</string>
   <string name="gpx_option_from_start_point">Percorri tutta la traccia</string>
   <string name="switch_to_vector_map_to_see">Mappa vettoriali offline presenti per quest\'area.\n\t\n\tPer usarla attivare \'Menu\'-&gt;\'Definisci vista\'-&gt;\'Fonte Mappa…\'-&gt;\'Mappe vettoriali offline\'.</string>
-  <string name="choose_audio_stream">Voce guida di uscita</string>
+  <string name="choose_audio_stream">Canale d'uscita della voce guida</string>
   <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale (dipendente dal sistema)</string>
   <string name="voice_stream_voice_call">Audio chiamate vocali</string>
   <string name="voice_stream_notification">Notifiche stream</string>
