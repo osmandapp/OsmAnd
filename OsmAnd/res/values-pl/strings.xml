@@ -1565,4 +1565,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="map_magnifier">Lupa mapy</string>
     <string name="route_distance_settings_descr">Skonfiguruj odległość widoku mapy (TODO naming)</string>
     <string name="route_distance_farthest">Najdalej</string>
-    </resources>
+    <string name="route_is_too_long">Trasa jest prawdopodobnie zbyt długa do przeliczenia przez trasowanie offline OsmAnd.
+	Trasowanie offline jest zazwyczaj możliwe pomiędzy punktami odległymi nie więcej niż 200 km. Proszę dodać jeden lub więcej punktów pośrednich.</string>
+	<string name="auto_zoom_none">Brak automatycznego powiększenia</string>
+	<string name="auto_zoom_close">Zbliżenie</string>
+	<string name="auto_zoom_far">Widok pośredni</string>
+	<string name="auto_zoom_farthest">Widok szeroki</string>
+	</resources>
