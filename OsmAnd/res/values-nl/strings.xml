@@ -722,7 +722,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="data_settings">Gegevens</string>
   <string name="map_preferences_descr">Specificeer kaartinstellingen: kaartbron, rotatie, marker positie, scherm-orientation</string>
   <string name="osm_settings">OSM bewerken</string>
-  <string name="auto_zoom_map_descr">Kaart automatisch zoomen naargelang uw snelheid</string>
+  <string name="auto_zoom_map_descr">Kaart automatisch zoomen naargelang je snelheid</string>
   <string name="auto_zoom_map">Kaart automatisch zoomen</string>
   <string name="additional_settings">Extra instellingen</string>
   <string name="settings">Instellingen</string>
@@ -1399,7 +1399,7 @@ Direct bijdragen aan OpenStreetMap
 - Maak interessepunten en stuur ze naar OpenStreetMap (ook later indien offline)
 - Kan reis vastleggen op de achtergrond (toestel in slaapstand)
 
-OsmAnd is open-source en wordt actief ontwikkeld. Iedereen kan meewerken door fouten te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Het project ontwikkelt zich snel en divers door deze interactie met gebruikers en ontwikkelaars. Het project rust op financiële bijdragen voor de ontwikkeling, het programmeren en het testen van nieuwe functies. Door OsmAnd+ te kopen maakt u dit programma nog fantastischer! Je kan ook specifieke functies financieel ondersteunen of een algemene donatie doen op OsmAnd.net.
+OsmAnd is open-source en wordt actief ontwikkeld. Iedereen kan meewerken door fouten te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Het project ontwikkelt zich snel en divers door deze interactie met gebruikers en ontwikkelaars. Het project rust op financiële bijdragen voor de ontwikkeling, het programmeren en het testen van nieuwe functies. Door OsmAnd+ te kopen maak je dit programma nog fantastischer! Je kan ook specifieke functies financieel ondersteunen of een algemene donatie doen op OsmAnd.net.
 
 
 Indicatie van kaartkwaliteit en -compleetheid:
