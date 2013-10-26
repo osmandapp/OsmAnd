@@ -9,6 +9,7 @@ import java.util.List;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.access.NavigationInfo;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -94,14 +95,43 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private Listener gpsStatusListener;
 	private float[] mRotationM =  new float[9];
 	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
-	private OsmandPreference<Boolean> uSE_FILTER_FOR_COMPASS;
+	private OsmandPreference<Boolean> USE_FILTER_FOR_COMPASS;
+	
+	
+	private class SimulationSegment {
+		private List<BinaryMapDataObject> simulateRoads = new ArrayList<BinaryMapDataObject>();
+		private float currentSimulationLength = 0;
+		private long simulationStarted = 0;
+		private float simulationSpeedMS = 0;
+		
+		
+		public void startSimulation(List<BinaryMapDataObject> roads, 
+				Location currentLocation) {
+			simulationStarted = currentLocation.getTime();
+			simulationSpeedMS = currentLocation.getSpeed();
+			double orthDistance = 10000;
+			int currentRoad = 0;
+			int currentSegment = 0;
+			for(int i = 0; i < roads.size(); i++) {
+				BinaryMapDataObject road = roads.get(i);
+				for(int j = 1; j < road.getPointsLength(); j++) {
+					
+				}
+			}
+			
+		}
+		
+		public boolean isSimulatedDataAvailable() {
+			return simulationStarted > 0 && simulationSpeedMS > 0;
+		}
+	}
 	
 	public OsmAndLocationProvider(OsmandApplication app) {
 		this.app = app;
 		navigationInfo = new NavigationInfo(app);
 		settings = app.getSettings();
 		USE_MAGNETIC_FIELD_SENSOR_COMPASS = settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS;
-		uSE_FILTER_FOR_COMPASS = settings.USE_KALMAN_FILTER_FOR_COMPASS;
+		USE_FILTER_FOR_COMPASS = settings.USE_KALMAN_FILTER_FOR_COMPASS;
 		currentPositionHelper = new CurrentPositionHelper(app);
 		locationSimulation = new OsmAndLocationSimulation(app, this);
 	}
@@ -320,7 +350,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				lastValSin = (float) Math.sin(valRad);
 				lastValCos = (float) Math.cos(valRad);
 				// lastHeadingCalcTime = System.currentTimeMillis();
-				boolean filter = uSE_FILTER_FOR_COMPASS.get(); //USE_MAGNETIC_FIELD_SENSOR_COMPASS.get();
+				boolean filter = USE_FILTER_FOR_COMPASS.get(); //USE_MAGNETIC_FIELD_SENSOR_COMPASS.get();
 				if (filter) {
 					filterCompassValue();
 				} else {

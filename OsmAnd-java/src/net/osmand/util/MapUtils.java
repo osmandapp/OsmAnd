@@ -7,6 +7,7 @@ import java.util.List;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.QuadPoint;
 
 
 /**
@@ -421,9 +422,41 @@ public class MapUtils {
 	}
    
 	
+	public static QuadPoint getProjectionPoint31(int px, int py, int st31x, int st31y,int end31x, int end31y) {
+		double mDist = squareRootDist31(end31x, end31y, st31x,
+				st31y);
+		int prx = end31x;
+		int pry = end31y;
+		double projection = calculateProjection31TileMetric(st31x, st31y, end31x,
+				end31y, px, py);
+		if (projection < 0) {
+			prx = st31x;
+			pry = st31y;
+		} else if (projection >= mDist * mDist) {
+			prx = end31x;
+			pry = end31y;
+		} else {
+			prx = (int) (st31x + (end31x - st31x)
+					* (projection / (mDist * mDist)));
+			pry = (int) (st31y + (end31y - st31y)
+					* (projection / (mDist * mDist)));
+		}
+		return new QuadPoint(prx, pry);
+	}
+	
+	
+	public static double squareRootDist31(int x1, int y1, int x2, int y2) {
+		// translate into meters 
+		double dy = MapUtils.convert31YToMeters(y1, y2);
+		double dx = MapUtils.convert31XToMeters(x1, x2);
+		return Math.sqrt(dx * dx + dy * dy);
+//		return measuredDist(x1, y1, x2, y2);
+	}
+	
 	public static double calculateProjection31TileMetric(int xA, int yA, int xB, int yB, int xC, int yC) {
 		// Scalar multiplication between (AB, AC)
-		double multiple = convert31XToMeters(xB, xA) * convert31XToMeters(xC, xA) + convert31YToMeters(yB, yA) * convert31YToMeters(yC, yA);
+		double multiple = MapUtils.convert31XToMeters(xB, xA) * MapUtils.convert31XToMeters(xC, xA) +
+				MapUtils.convert31YToMeters(yB, yA) * MapUtils.convert31YToMeters(yC, yA);
 		return multiple;
 	}
 

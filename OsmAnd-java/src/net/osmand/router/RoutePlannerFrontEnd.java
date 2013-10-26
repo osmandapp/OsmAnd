@@ -11,6 +11,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.util.MapUtils;
 
@@ -25,20 +26,7 @@ public class RoutePlannerFrontEnd {
 		this.useOldVersion = useOldVersion;
 	}
 	
-	private static double squareRootDist(int x1, int y1, int x2, int y2) {
-		// translate into meters 
-		double dy = MapUtils.convert31YToMeters(y1, y2);
-		double dx = MapUtils.convert31XToMeters(x1, x2);
-		return Math.sqrt(dx * dx + dy * dy);
-//		return measuredDist(x1, y1, x2, y2);
-	}
 	
-	private static double calculateProjection(int xA, int yA, int xB, int yB, int xC, int yC) {
-		// Scalar multiplication between (AB, AC)
-		double multiple = MapUtils.convert31XToMeters(xB, xA) * MapUtils.convert31XToMeters(xC, xA) +
-				MapUtils.convert31YToMeters(yB, yA) * MapUtils.convert31YToMeters(yC, yA);
-		return multiple;
-	}
 	private static double squareDist(int x1, int y1, int x2, int y2) {
 		// translate into meters 
 		double dy = MapUtils.convert31YToMeters(y1, y2);
@@ -56,38 +44,18 @@ public class RoutePlannerFrontEnd {
 		}
 		RouteSegment road = null;
 		double sdist = 0;
-		int foundProjX = 0;
-		int foundProjY = 0;
 
 		for (RouteDataObject r : dataObjects) {
 			if (r.getPointsLength() > 1) {
 				for (int j = 1; j < r.getPointsLength(); j++) {
-					double mDist = squareRootDist(r.getPoint31XTile(j), r.getPoint31YTile(j), r.getPoint31XTile(j - 1),
-							r.getPoint31YTile(j - 1));
-					int prx = r.getPoint31XTile(j);
-					int pry = r.getPoint31YTile(j);
-					double projection = calculateProjection(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j),
-							r.getPoint31YTile(j), px, py);
-					if (projection < 0) {
-						prx = r.getPoint31XTile(j - 1);
-						pry = r.getPoint31YTile(j - 1);
-					} else if (projection >= mDist * mDist) {
-						prx = r.getPoint31XTile(j);
-						pry = r.getPoint31YTile(j);
-					} else {
-						prx = (int) (r.getPoint31XTile(j - 1) + (r.getPoint31XTile(j) - r.getPoint31XTile(j - 1))
-								* (projection / (mDist * mDist)));
-						pry = (int) (r.getPoint31YTile(j - 1) + (r.getPoint31YTile(j) - r.getPoint31YTile(j - 1))
-								* (projection / (mDist * mDist)));
-					}
-					double currentsDist = squareDist(prx, pry, px, py);
+					QuadPoint pr = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(j - 1), 
+							r.getPoint31YTile(j - 1), r.getPoint31XTile(j ), r.getPoint31YTile(j ));
+					double currentsDist = squareDist((int) pr.x, (int)pr.y, px, py);
 					if (road == null || currentsDist < sdist) {
 						RouteDataObject ro = new RouteDataObject(r);
 						road = new RouteSegment(ro, j);
-						ro.insert(j, prx, pry);
+						ro.insert(j, (int) pr.x, (int)pr.y);
 						sdist = currentsDist;
-						foundProjX = prx;
-						foundProjY = pry;
 					}
 				}
 			}
@@ -175,7 +143,7 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.distanceFromEnd = 0;
 			ctx.calculationProgress.reverseSegmentQueueSize = 0;
 			ctx.calculationProgress.directSegmentQueueSize = 0;
-			float rd = (float) squareRootDist(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY);
+			float rd = (float) MapUtils.squareRootDist31(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY);
 			float speed = 0.9f * ctx.config.router.getMaxDefaultSpeed();
 			ctx.calculationProgress.totalEstimatedDistance = (float) (rd /  speed); 
 		}
