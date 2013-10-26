@@ -214,7 +214,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	public void clearCache() {
-		data.clearCache();
+		if(data != null) {
+			data.clearCache();
+		}
 	}
 	
 	private static String readText(XmlPullParser parser, String key) throws XmlPullParserException, IOException {
