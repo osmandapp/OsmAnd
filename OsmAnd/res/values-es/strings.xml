@@ -1400,15 +1400,16 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 		\n\t* \'Invierno y esquí\' crea una vista del paisaje del invierno (nevado), y muestra pistas y remontes (en relación con la descarga del mapa \"Mundo de esquí\"
 	</string>
     <string name="tip_recent_changes_1_6_t">Cambios en 1.6:
-    \n\t* Soporte de fondo completamente transparente
-    \n\t* Soporte de dispositivos Full HD
-    \n\t* Descarga de regiones directamente desde el mapa
-    \n\t* Descarga de ficheros SRTM para cada país
-    \n\t* Mapa mundial mejorado con vías principales, bosques y líneas de ferrocarril
-    \n\t* Lupa (pulsación larga en el botón de zoom) - muy útil con mapas no vectoriales
-    \n\t* Permite definir y editar la fuente de teselas en línea (indicando fecha de caducidad)
-    \n\t* Mejorada la búsqueda por dirección
-    \n\t* Solucionados problemas con el cálculo de rutas y la visualización
+	\n\t* Soporte de dispositivos Full HD
+	\n\t* Soporte de fondo transparente
+	\n\t* Descarga de mapas directamente mientras se visualiza
+	\n\t* Mapas de contorno agrupados por país/región
+	\n\t* Mapa mundial mejorado con vías principales, líneas de ferrocarril o bosques
+	\n\t* Lupa (pulsación larga en el botón de zoom)
+	\n\t* Permite definir y editar la fuente de teselas en línea (indicando fecha de caducidad)
+	\n\t* Soporte de diferentes límites de velocidad en diferentes periodos (Paises Bajos)
+	\n\t* Mejorada la búsqueda por dirección
+	\n\t* Solucionados problemas con el cálculo de rutas y la visualización
     </string>
     <string name="local_index_tile_data_zooms">Zooms descargados: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
@@ -1489,4 +1490,6 @@ La lista de países incluídos (¡prácticamente todo el mundo!):
 Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papua Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabue.
 	</string>
 	<string name="map_magnifier">Lupa</string>
-    </resources>
+    <string name="route_is_too_long">La ruta puede ser demasiado larga para ser calculada localmente por OsmAnd.
+	Normalmente es posible calcular localmente rutas hasta 200 km. Puede solucionarlo indicando puntos intermedios en la ruta.</string>
+	</resources>
