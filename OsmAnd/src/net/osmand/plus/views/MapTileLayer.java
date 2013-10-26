@@ -127,6 +127,7 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 
 	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox) {
+		ITileSource map = this.map; 
 		if(map == null){
 			return;
 		}
