@@ -10,6 +10,10 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="access_disable_offroute_recalc">Don\'t change route when you are off the way</string>
+    <string name="access_disable_offroute_recalc_descr">Prevent automatic route recalculation when you are quite far from the right way</string>
+    <string name="access_disable_wrong_direction_recalc">Don\'t change route by wrong direction</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Prevent automatic route recalculation when you are moving in wrong direction</string>
     <string name="access_smart_autoannounce">Smart autoannounce</string>
     <string name="access_smart_autoannounce_descr">Notify only when direction to the target point is changed</string>
     <string name="access_autoannounce_period">Autoannounce period</string>

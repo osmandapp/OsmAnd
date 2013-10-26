@@ -91,6 +91,11 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 		});
 		cat.addPreference(autoannouncePeriodPreference);
 
+		cat.addPreference(createCheckBoxPreference(settings.DISABLE_OFFROUTE_RECALC, R.string.access_disable_offroute_recalc,
+				R.string.access_disable_offroute_recalc_descr));
+		cat.addPreference(createCheckBoxPreference(settings.DISABLE_WRONG_DIRECTION_RECALC, R.string.access_disable_wrong_direction_recalc,
+				R.string.access_disable_wrong_direction_recalc_descr));
+
 		cat.addPreference(createCheckBoxPreference(settings.ZOOM_BY_TRACKBALL, R.string.zoom_by_trackball,
 				R.string.zoom_by_trackball_descr));
 	}

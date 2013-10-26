@@ -2004,4 +2004,8 @@
     <string name="access_smart_autoannounce_descr">Говорить только при изменении направления на целевую точку</string>
     <string name="access_autoannounce_period">Период автооповещений</string>
     <string name="access_autoannounce_period_descr">Минимальное время между оповещениями</string>
+    <string name="access_disable_offroute_recalc">Не менять маршрут при сходе с пути</string>
+    <string name="access_disable_offroute_recalc_descr">Предотвращает автоматический пересчет маршрута при значительном удалении от заданного пути</string>
+    <string name="access_disable_wrong_direction_recalc">Не менять маршрут при неверном направлении движения</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Предотвращает автоматический пересчет маршрута при неверном направлении движения</string>
 </resources>

@@ -315,7 +315,7 @@ public class RoutingHelper {
 				// >100m off current route (sideways)
 				if (currentRoute > 0) {
 					double dist = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
-					if (dist > 1.7 * posTolerance) {
+					if ((!settings.DISABLE_OFFROUTE_RECALC.get()) && (dist > (1.7 * posTolerance))) {
 						log.info("Recalculate route, because correlation  : " + dist); //$NON-NLS-1$
 						calculateRoute = true;
 					}
@@ -329,7 +329,7 @@ public class RoutingHelper {
 				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if (wrongMovementDirection && currentLocation.distanceTo(routeNodes.get(currentRoute)) >  2 * posTolerance) {
+				if ((!settings.DISABLE_WRONG_DIRECTION_RECALC.get()) && wrongMovementDirection && (currentLocation.distanceTo(routeNodes.get(currentRoute)) > (2 * posTolerance))) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					calculateRoute = true;
 				}
