@@ -1366,7 +1366,7 @@
 	<string name="av_photo_play_sound">Jouer un son lors de la prise de photos</string>
 	<string name="av_photo_play_sound_descr">Choisir de jouer un son lors de la prise de photos</string>
 <string name="route_distance_far">Lointain(e)</string>
-    <string name="route_distance_settings_descr">Configurer l'échelle de la carte</string>
+    <string name="route_distance_settings_descr">Configurer l\'échelle de la carte</string>
     <string name="route_distance_settings">Échelle de la carte</string>
     <string name="map_magnifier">Zoom de la carte</string>
     <string name="base_world_map">Carte de base du monde</string>
@@ -1377,15 +1377,15 @@
     \n\t* Téléchargement des fichiers SRTM par pays
     \n\t* Nouvelle carte du monde avec les routes principales, forêts et lignes de chemin de fer
     \n\t* Zoom de carte (appui long sur le bouton zoom) - très utile pour cartes vectorielles  
-    \n\t* Définir/éditer les sources de carte en ligne (et date d'expiration)
-    \n\t* Saisie plus rapide d'une adresse
+    \n\t* Définir/éditer les sources de carte en ligne (et date d\'expiration)
+    \n\t* Saisie plus rapide d\'une adresse
     \n\t* Résolution de bogues concernant le guidage et le rendu de carte
     </string>
     <string name="tip_recent_changes_1_5_t">Changements en 1.5:
 	\n\t* Avertissements vocaux des limitations de vitesse et des radars
 	\n\t* Nouvelles indications vocales (annonce des noms de rues)
 	\n\t* Icônes haute densité
-	\n\t* Des tas de modifications dans l'interface utilisateur
-	\n\t* Résolution de bogues dans l'affichage des distances, analyseur GPX, traitement des points de passage, widget de planning, chargement vers OSM, protocole https
+	\n\t* Des tas de modifications dans l\'interface utilisateur
+	\n\t* Résolution de bogues dans l\'affichage des distances, analyseur GPX, traitement des points de passage, widget de planning, chargement vers OSM, protocole https
     </string>
     </resources>

@@ -1388,7 +1388,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="osmand_plus_extended_description_4000_chars">
 ↵
-OsmAnd ( OSM automatizados direções de navegação ) é um mapa e aplicação de navegação com acesso aos OpenStreetMap ( OSM) de dados livre , em todo o mundo , e de alta qualidade . Todos os dados do mapa podem ser armazenados no cartão de seu dispositivo \ 's de memória para uso offline. Via o seu dispositivo \ 's GPS, OsmAnd oferece roteamento , com orientação ótica e voz , para o carro , bicicleta, e de pedestres. Todas as principais funcionalidades de trabalhar tanto on-line e off-line (sem internet necessário). ↵
+OsmAnd ( OSM automatizados direções de navegação ) é um mapa e aplicação de navegação com acesso aos OpenStreetMap ( OSM) de dados livre , em todo o mundo , e de alta qualidade . Todos os dados do mapa podem ser armazenados no cartão de seu dispositivo \'s de memória para uso offline. Via o seu dispositivo \'s GPS, OsmAnd oferece roteamento , com orientação ótica e voz , para o carro , bicicleta, e de pedestres. Todas as principais funcionalidades de trabalhar tanto on-line e off-line (sem internet necessário). ↵
 ↵
 OsmAnd + é a versão do aplicativo pago. Ao comprá-lo você apoiar o projeto, financiar o desenvolvimento de novas funcionalidades, e receber as últimas atualizações. Você pode testar o aplicativo antes de comprar , instalando a versão gratuita chamada OsmAnd . ↵
 ↵
@@ -1462,10 +1462,10 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 →
 	</string>
 	<string name="tip_map_styles_t">OsmAnd suporta exibindo os mapas offline vetor em diferentes estilos de mapas às suas necessidades para: ↵
-→ → \ n \ NOTHER que o \ "default \" estilo mapa equilibrado, você pode, em \ 'Menu \' → \ 'Configurar tela \' → \ 'Map Style \' escolha por exemplo ↵
-→ → \ n \ t * O \ 'Touring vista \' estilo, que contém as informações mais detalhadas feasable para viagens e turismo, incluindo a optimização dos motoristas profissionais (maior contraste, estradas distintas), as opções para caminhadas Alpine (escala SAC), ciclovias, apoio símbolo caminhadas, etc ↵
-→ → \ n \ t * \ 'estradas de alto contraste \' mostra estradas em cores muito acentuadas para situações de iluminação ambiente brilhantes ↵
-→ → \ n \ t * \ 'Winter e ski \' cria um (coberto de neve) Inverno modo paisagem, e mostra pistas de esqui e teleféricos globais (em conexão com a \ 'World ski \' mapa download) ↵
+→ → \ n \ NOTHER que o \ "default \" estilo mapa equilibrado, você pode, em \'Menu \' → \'Configurar tela \' → \'Map Style \' escolha por exemplo ↵
+→ → \ n \ t * O \'Touring vista \' estilo, que contém as informações mais detalhadas feasable para viagens e turismo, incluindo a optimização dos motoristas profissionais (maior contraste, estradas distintas), as opções para caminhadas Alpine (escala SAC), ciclovias, apoio símbolo caminhadas, etc ↵
+→ → \ n \ t * \'estradas de alto contraste \' mostra estradas em cores muito acentuadas para situações de iluminação ambiente brilhantes ↵
+→ → \ n \ t * \'Winter e ski \' cria um (coberto de neve) Inverno modo paisagem, e mostra pistas de esqui e teleféricos globais (em conexão com a \'World ski \' mapa download) ↵
 	</string>
     <string name="auto_zoom_none">Sem auto zoom</string>
     <string name="auto_zoom_close">Aproximar</string>
