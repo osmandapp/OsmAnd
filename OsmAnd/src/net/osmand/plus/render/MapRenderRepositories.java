@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.IProgress;
 import net.osmand.NativeLibrary.NativeSearchResult;
@@ -68,7 +68,7 @@ public class MapRenderRepositories {
 	private final OsmandApplication context;
 	private final static int BASEMAP_ZOOM = 11;
 	private Handler handler;
-	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
+	private Map<String, BinaryMapIndexReader> files = new ConcurrentHashMap<String, BinaryMapIndexReader>();
 	private Set<String> nativeFiles = new HashSet<String>();
 	private OsmandRenderer renderer;
 	
