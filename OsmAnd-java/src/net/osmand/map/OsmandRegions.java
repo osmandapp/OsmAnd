@@ -23,7 +23,6 @@ public class OsmandRegions {
 	Integer downloadNameType = null;
 	Integer prefixType = null;
 	private Integer suffixType;
-	private String fname;
 
 
 	public void prepareFile(String fileName) throws IOException {
@@ -136,7 +135,9 @@ public class OsmandRegions {
 					}
 				}
 		);
-		reader.searchMapIndex(sr);
+		if(reader != null) {
+			reader.searchMapIndex(sr);
+		}
 		return result;
 	}
 
@@ -167,7 +168,9 @@ public class OsmandRegions {
 					}
 				}
 		);
-		reader.searchMapIndex(sr);
+		if(reader != null) {
+			reader.searchMapIndex(sr);
+		}
 		return result;
 	}
 
@@ -227,7 +230,9 @@ public class OsmandRegions {
 					}
 				}
 		);
-		reader.searchMapIndex(sr);
+		if(reader != null) {
+			reader.searchMapIndex(sr);
+		}
 	}
 
 	private void initTypes(BinaryMapDataObject object) {
