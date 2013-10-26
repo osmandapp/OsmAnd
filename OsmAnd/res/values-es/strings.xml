@@ -1492,4 +1492,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="map_magnifier">Lupa</string>
     <string name="route_is_too_long">La ruta puede ser demasiado larga para ser calculada localmente por OsmAnd.
 	Normalmente es posible calcular localmente rutas hasta 200 km. Puede solucionarlo indicando puntos intermedios en la ruta.</string>
+	<string name="auto_zoom_none">Sin zoom automático</string>
 	</resources>
