@@ -537,6 +537,7 @@
 	<string name="first_time_msg">نشكرك على استخدام OsmAnd.  بالنسبة لكثير من مميزات هذا البرنامج أنت بحاجة إلي بعض البيانات الإقليمية التي يمكنك تحميلها عبر \ "إعدادات \ '→ \' إدارة البيانات \ ' الميزات.  بعد ذلك سوف تكون قادرا على عرض الخرائط، و تحديد عناوين ، والبحث عن النقاط المهمة ، والعثور على وسائل النقل العام .</string>    
 	<string name="basemap_was_selected_to_download">خريطة العالم الأساسية مطلوبة لعمل التطبيق بشكل سليم، وقد حددت للتنزيل.</string>
 	<string name="select_index_file_to_download">لم يتم العثور على شيء. إذا لم تتمكن من إيجاد منطقتك، يمكنك صنعها بنفسك (انظر http://osmand.net ).</string>
-	<string name="auto_zoom_close">منع التكبير/التصغير التلقائي</string>
+	<string name="auto_zoom_close">مشي على القدمين</string>
 	<string name="auto_zoom_none">تعطيل التكبير التلقائي</string>
+	<string name="auto_zoom_far">قم بتوسيط الخريطة هنا</string>
 	</resources>
