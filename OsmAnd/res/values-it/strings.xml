@@ -482,12 +482,12 @@
   <string name="sd_mounted_ro">Scheda SD accessibile in sola lettura.
 \nImpossibile effettuare download da internet e solo le mappe precaricate sono visibili.</string>
   <string name="unzipping_file">File in decompressione…</string>
-  <string name="route_tr">Svolta a destra e continua</string>
-  <string name="route_tshr">Svolta stretto a destra e continua</string>
-  <string name="route_tslr">Svolta leggermente a destra e continua</string>
-  <string name="route_tl">Svolta a sinistra e continua</string>
-  <string name="route_tshl">Svolta stretto a sinistra e continua</string>
-  <string name="route_tsll">Svolta leggermente a sinistra e continua</string>
+  <string name="route_tr">Svolta a destra e prosegui su</string>
+  <string name="route_tshr">Svolta stretto a destra e prosegui su</string>
+  <string name="route_tslr">Svolta leggermente a destra e prosegui su</string>
+  <string name="route_tl">Svolta a sinistra e prosegui su</string>
+  <string name="route_tshl">Svolta stretto a sinistra e prosegui su</string>
+  <string name="route_tsll">Svolta leggermente a sinistra e prosegui su</string>
   <string name="route_tu">Fai inversione a U e continua</string>
   <string name="route_head">Avanti</string>
   <string name="first_time_continue">Dopo</string>
@@ -544,7 +544,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max zoom online</string>
   <string name="max_level_download_tile_descr">Scegli il livello di zoom massimo da scaricare per le mappe online a mattonelle</string>
-  <string name="route_general_information">Distanza totale = %1$s, tempo di viaggio = %2$d h %3$d m.</string>
+  <string name="route_general_information">Distanza totale = %1$s, durata del viaggio = %2$d h %3$d m.</string>
   <string name="router_service_descr">Scegli un servizio online oppure offline di navigazione</string>
   <string name="router_service">Servizio di navigazione</string>
   <string name="sd_dir_not_accessible">Cartella di salvataggio su SD card inaccessibile</string>
