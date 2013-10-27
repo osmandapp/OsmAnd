@@ -92,8 +92,8 @@ public class ResourceManager {
 	// at least 3*9?
 	protected int maxImgCacheSize = 28;
 	
-	protected Map<String, Bitmap> cacheOfImages = new ConcurrentHashMap<String, Bitmap>();
-	protected Map<String, Boolean> imagesOnFS = new ConcurrentHashMap<String, Boolean>() ;
+	protected Map<String, Bitmap> cacheOfImages = new LinkedHashMap<String, Bitmap>();
+	protected Map<String, Boolean> imagesOnFS = new LinkedHashMap<String, Boolean>() ;
 	
 	protected File dirWithTiles ;
 	
@@ -180,37 +180,16 @@ public class ResourceManager {
 	
 	////////////////////////////////////////////// Working with tiles ////////////////////////////////////////////////
 	
-	public void indexingImageTiles(IProgress progress){
-		progress.startTask(context.getString(R.string.reading_cached_tiles), -1); //$NON-NLS-1$
-		imagesOnFS.clear();
-		for(File c : dirWithTiles.listFiles()){
-			indexImageTilesFS("", c); //$NON-NLS-1$
-		}
-	}
-	
-	private void indexImageTilesFS(String prefix, File f){
-		if(f.isDirectory()){
-			for(File c : f.listFiles()){
-				indexImageTilesFS(prefix +f.getName() +"/" , c); //$NON-NLS-1$
-			}
-		} else if(f.getName().endsWith(".tile")){ //$NON-NLS-1$
-			imagesOnFS.put(prefix + f.getName(), Boolean.TRUE);
-		} else if(f.getName().endsWith(".sqlitedb")){ //$NON-NLS-1$
-			// nothing to do here
-		}
-	}
-	
-	
 	public Bitmap getTileImageForMapAsync(String file, ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
 		return getTileImageForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, false, true);
 	}
 	
 	
-	public Bitmap getTileImageFromCache(String file){
+	public synchronized Bitmap getTileImageFromCache(String file){
 		return cacheOfImages.get(file);
 	}
 	
-	public void putTileInTheCache(String file, Bitmap bmp) {
+	public synchronized void putTileInTheCache(String file, Bitmap bmp) {
 		cacheOfImages.put(file, bmp);
 	}
 	
@@ -219,7 +198,7 @@ public class ResourceManager {
 		return getTileImageForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, true, true);
 	}
 	
-	public void tileDownloaded(DownloadRequest request){
+	public synchronized void tileDownloaded(DownloadRequest request){
 		if(request instanceof TileLoadDownloadRequest){
 			TileLoadDownloadRequest req = ((TileLoadDownloadRequest) request);
 			imagesOnFS.put(req.tileId, Boolean.TRUE);
