@@ -26,7 +26,7 @@ public class MapTileDownloader {
 	// Download manager tile settings
 	public static int TILE_DOWNLOAD_THREADS = 4;
 	public static int TILE_DOWNLOAD_SECONDS_TO_WORK = 25;
-	public static final long TIMEOUT_AFTER_EXCEEDING_LIMIT_ERRORS = 20000;
+	public static final long TIMEOUT_AFTER_EXCEEDING_LIMIT_ERRORS = 15000;
 	public static final int TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT = 25;
 	
 	
@@ -203,10 +203,12 @@ public class MapTileDownloader {
 					}
 				} catch (UnknownHostException e) {
 					currentErrors++;
+					timeForErrorCounter = System.currentTimeMillis();
 					request.setError(true);
 					log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage()); //$NON-NLS-1$  //$NON-NLS-2$
 				} catch (IOException e) {
 					currentErrors++;
+					timeForErrorCounter = System.currentTimeMillis();
 					request.setError(true);
 					log.warn("Cannot download tile : " + request.url, e); //$NON-NLS-1$
 				} finally {
