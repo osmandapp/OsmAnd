@@ -537,8 +537,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				@Override
 				public void run() {
 					baseHandler.removeMessages(BASE_REFRESH_MESSAGE);
-					refreshBaseMapInternal(currentViewport.copy(), drawSettings);
-					sendRefreshMapMsg(drawSettings, 0);
+					try {
+						refreshBaseMapInternal(currentViewport.copy(), drawSettings);
+						sendRefreshMapMsg(drawSettings, 0);
+					} catch(Exception e) {
+						log.error(e.getMessage(), e);
+					}
 				}
 			});
 			msg.what = BASE_REFRESH_MESSAGE;

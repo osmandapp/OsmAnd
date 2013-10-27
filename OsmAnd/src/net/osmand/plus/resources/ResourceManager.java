@@ -92,8 +92,8 @@ public class ResourceManager {
 	// at least 3*9?
 	protected int maxImgCacheSize = 28;
 	
-	protected Map<String, Bitmap> cacheOfImages = new LinkedHashMap<String, Bitmap>();
-	protected Map<String, Boolean> imagesOnFS = new LinkedHashMap<String, Boolean>() ;
+	protected Map<String, Bitmap> cacheOfImages = new ConcurrentHashMap<String, Bitmap>();
+	protected Map<String, Boolean> imagesOnFS = new ConcurrentHashMap<String, Boolean>() ;
 	
 	protected File dirWithTiles ;
 	
