@@ -7,7 +7,11 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -24,8 +28,8 @@ import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
 import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RouteData;
 import net.osmand.util.MapUtils;
-
 import net.osmand.util.OpeningHoursParser;
+
 import org.apache.commons.logging.Log;
 
 import com.google.protobuf.CodedInputStream;

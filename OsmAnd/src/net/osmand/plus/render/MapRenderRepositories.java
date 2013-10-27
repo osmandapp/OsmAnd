@@ -29,6 +29,9 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -455,14 +458,36 @@ public class MapRenderRepositories {
 				return !empty[0];
 			}
 		});
+		SearchRequest<RouteDataObject> searchRouteRequest = BinaryMapIndexReader.buildSearchRouteRequest(leftX, rightX, topY, bottomY, 
+				new ResultMatcher<RouteDataObject>() {
+			@Override
+			public boolean publish(RouteDataObject object) {
+				empty[0] = false;
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return !empty[0];
+			}
+		});
 		for (BinaryMapIndexReader c : files.values()) {
-			if(!c.isBasemap()) {
+			if (!c.isBasemap()) {
 				try {
 					c.searchMapIndex(searchRequest);
 				} catch (IOException e) {
 				}
-				if(!empty[0]) {
+				if (!empty[0]) {
 					return false;
+				}
+				for (RouteRegion r : c.getRoutingIndexes()) {
+					try {
+						List<RouteSubregion> regs = c.searchRouteIndexTree(searchRouteRequest, r.getSubregions());
+						if(!regs.isEmpty()) {
+							return false;
+						}
+					} catch (IOException e) {
+					}
 				}
 			}
 		}

@@ -2078,9 +2078,10 @@ public class BinaryMapIndexReader {
 		req.numberOfAcceptedObjects = 0;
 		req.numberOfAcceptedSubtrees = 0;
 		req.numberOfReadSubtrees = 0;
-		if(routeAdapter != null){
+		if (routeAdapter != null) {
 			routeAdapter.initRouteTypesIfNeeded(req, list);
-			return routeAdapter.searchRouteRegionTree(req, list, new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>());
+			return routeAdapter.searchRouteRegionTree(req, list,
+					new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>());
 		}
 		return Collections.emptyList();
 	}
