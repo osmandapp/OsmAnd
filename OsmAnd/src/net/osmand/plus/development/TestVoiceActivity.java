@@ -161,6 +161,7 @@ public class TestVoiceActivity extends SherlockActivity {
 
 		addButton(ll, "Attention, 'bump'", builder(p).attention("bump"));
 		addButton(ll, "GPS signal lost", builder(p).gpsLocationLost());
+		addButton(ll, "GPS signal recovered", builder(p).gpsLocationRecover());
 		addButton(ll, "You have been off the route for 1050m", builder(p).offRoute(1050));
 		addButton(ll, "You are exceeding the speed limit", builder(p).speedAlarm());
 		ll.forceLayout();
