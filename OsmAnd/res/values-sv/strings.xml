@@ -1308,4 +1308,10 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="route_distance_farest">Längst bort</string>
     <string name="route_distance_close">Nära</string>
     <string name="map_magnifier">Kartförstoring</string>
-    </resources>
+    <string name="route_is_too_long">Rutten är möjligtvis för lång för att kunna beräknas av OsmAnd offline-router.
+	I snitt är offline-ruttning möjlig mellan punkter upp till 200 km från varandra. Lägg till en eller flera mellanliggande waypoints för att beräkna rutten.</string>
+	<string name="auto_zoom_none">Ingen auto-zoom</string>
+	<string name="auto_zoom_close">Nära</string>
+	<string name="auto_zoom_far">Medelavstånd</string>
+	<string name="auto_zoom_farthest">Långt avstånd</string>
+	</resources>
