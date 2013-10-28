@@ -1312,7 +1312,7 @@
     <string name="edit_tilesource_choose_existing">Vybrat…</string>
     <string name="edit_tilesource_name">Název</string>
     <string name="tips_and_tricks">Tipy</string>
-    <string name="tip_map_styles">Styl mapy</string>
+    <string name="tip_map_styles">Styly mapy</string>
 	<string name="local_index_tile_data_downloadable">Ke stažení: %1$s</string>
     <string name="maps_define_edit">Vytvořit/Upravit…</string>
 	<string name="edit_tilesource_expiration_time">Doba platnosti (min)</string>
@@ -1321,5 +1321,27 @@
 	<string name="local_index_tile_data_expire">Doba platnosti (minut): %1$s</string>
     <string name="map_widget_fps_info">Snímků za sekundu (ladění)</string>
 	<string name="edit_tilesource_elliptic_tile">Eliptický mercator</string>
-    <string name="base_world_map">základní mapa světa</string>
-	</resources>
+    <string name="base_world_map">Základní mapa světa</string>
+	<string name="map_magnifier">Lupa mapy</string>
+	<string name="auto_zoom_none">Bez automatického přibližování</string>
+	<string name="auto_zoom_farthest">Na velkou vzdálenost</string>
+	<string name="auto_zoom_close">Na malou vzdálenost</string>
+	<string name="auto_zoom_far">Na střední vzdálenost</string>
+	<string name="route_is_too_long">Trasa je pravděpodobně příliš dlouhá pro offline navigační službu.
+	Offline navigace je funkční mezi body vzdálenými do 200km. Prosím přidejte jeden, nebo více přechodných bodů cesty, aby bylo možné trasu vypočítat.</string>
+	<string name="tip_recent_changes_1_6_t">Změny ve verzi 1.6
+	\n\t* Podpora Full HD zařízení.
+	\n\t* Podpora transparentních pozadí map.
+	\n\t* Zobrazení tlačítka na přímé stáhnutí chybějících mapových podkladů přímo z mapového zobrazení.
+	\n\t* Vrstevnice jsou nyní zabaleny do balíků podle zemí nebo regionů.
+	\n\t* Nová základní mapa s hlavními cestami, kolejemi a význačnými plochami jako lesy a podobně.
+	\n\t* Mapová lupa (dlouhý tap na + nebo – lupu) – užitečná pro oba druhy map.
+	\n\t* Uživatelská možnost definic zdrojů online čtverců map (s možností definice časové expirace).
+	\n\t* Podpora rychlostního omezení podle času (Holandsko).
+	\n\t* Rychlejší hledání adres.
+	\n\t* Opravy routování a renderingu.
+    </string>
+    <string name="local_index_tile_data_zooms">Stažené přiblížení: %1$s</string>
+    <string name="local_index_tile_data_name">Data dlaždic: %1$s</string>
+    <string name="edit_tilesource_successfully">Zdroj dlaždic %1$s byl úspešně uložen</string>
+    </resources>
