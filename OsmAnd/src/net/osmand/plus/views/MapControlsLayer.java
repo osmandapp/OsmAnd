@@ -205,7 +205,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		String zoomText = tb.getZoom() + "";
 		float frac = tb.getZoomScale();
 		if (frac != 0) {
-			zoomText += ":";
+			if (frac > 0) {
+				zoomText += "+";
+			}
 			int ifrac = ((int) frac);
 			if (frac >= 1) {
 				zoomText += ifrac;
