@@ -423,12 +423,12 @@ public class MapUtils {
    
 	
 	public static QuadPoint getProjectionPoint31(int px, int py, int st31x, int st31y,int end31x, int end31y) {
-		double mDist = squareRootDist31(end31x, end31y, st31x,
-				st31y);
-		int prx = end31x;
-		int pry = end31y;
 		double projection = calculateProjection31TileMetric(st31x, st31y, end31x,
 				end31y, px, py);
+		double mDist = squareRootDist31(end31x, end31y, st31x,
+				st31y);
+		int pry = end31y;
+		int prx = end31x;
 		if (projection < 0) {
 			prx = st31x;
 			pry = st31y;

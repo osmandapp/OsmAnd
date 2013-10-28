@@ -12,6 +12,7 @@ import net.osmand.access.NavigationInfo;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.MapUtils;
@@ -97,32 +98,90 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 	private OsmandPreference<Boolean> USE_FILTER_FOR_COMPASS;
 	
+	private static double squareDist(int x1, int y1, int x2, int y2) {
+		// translate into meters 
+		double dy = MapUtils.convert31YToMeters(y1, y2);
+		double dx = MapUtils. convert31XToMeters(x1, x2);
+		return dx * dx + dy * dy;
+	}
 	
-	private class SimulationSegment {
+	public class SimulationSegment {
 		private List<BinaryMapDataObject> simulateRoads = new ArrayList<BinaryMapDataObject>();
 		private float currentSimulationLength = 0;
-		private long simulationStarted = 0;
-		private float simulationSpeedMS = 0;
+		private int currentRoad;
+		private int currentSegment;
+		private double currentProjection;
+		private net.osmand.Location startLocation;
+		private List<BinaryMapDataObject> roads;
 		
 		
 		public void startSimulation(List<BinaryMapDataObject> roads, 
-				Location currentLocation) {
-			simulationStarted = currentLocation.getTime();
-			simulationSpeedMS = currentLocation.getSpeed();
-			double orthDistance = 10000;
-			int currentRoad = 0;
-			int currentSegment = 0;
+				net.osmand.Location currentLocation) {
+			roads = roads;
+			startLocation = new net.osmand.Location(currentLocation);
+			long ms = System.currentTimeMillis();
+			if(ms - startLocation.getTime() > 5000 ||
+					ms < startLocation.getTime()) {
+				startLocation.setTime(ms);
+			}
+			currentRoad = -1;
+			int px = MapUtils.get31TileNumberX(currentLocation.getLongitude());
+			int py = MapUtils.get31TileNumberY(currentLocation.getLatitude());
+			double dist = 1000;
 			for(int i = 0; i < roads.size(); i++) {
 				BinaryMapDataObject road = roads.get(i);
 				for(int j = 1; j < road.getPointsLength(); j++) {
-					
+					QuadPoint proj = MapUtils.getProjectionPoint31(px, py, road.getPoint31XTile(j-1), road.getPoint31YTile(j-1), 
+							road.getPoint31XTile(j), road.getPoint31YTile(j));
+					double dd = squareDist((int)proj.x, (int)proj.y, px, py);
+					if (dd < dist) {
+						dist = dd;
+						currentRoad = i;
+						currentSegment = j;
+						currentProjection = MapUtils.calculateProjection31TileMetric(road.getPoint31XTile(j-1), road.getPoint31YTile(j-1), 
+								road.getPoint31XTile(j), road.getPoint31YTile(j), px, py);
+					}
 				}
 			}
+		}
+		
+		private void proceedMeters() {
+			/*for(int i = 0; i < roads.size(); i++) {
+				BinaryMapDataObject road = roads.get(i);
+				for(int j = 1; j < road.getPointsLength(); j++) {
+					QuadPoint proj = MapUtils.getProjectionPoint31(px, py, road.getPoint31XTile(j-1), road.getPoint31YTile(j-1), 
+							road.getPoint31XTile(j), road.getPoint31YTile(j));
+					double dd = squareDist((int)proj.x, (int)proj.y, px, py);
+					if (dd < dist) {
+						dist = dd;
+						currentRoad = i;
+						currentSegment = j;
+						currentProjection = MapUtils.calculateProjection31TileMetric(road.getPoint31XTile(j-1), road.getPoint31YTile(j-1), 
+								road.getPoint31XTile(j), road.getPoint31YTile(j), px, py);
+					}
+				}
+			}*/
+		}
+		
+		/**
+		 * @return null if it is not available of far from boundaries
+		 */
+		public Location getSimulatedLocation() {
+			if(!isSimulatedDataAvailable()) {
+				return null;
+			}
 			
+			Location loc = new Location("OsmAnd");
+			loc.setSpeed(startLocation.getSpeed());
+			loc.setAltitude(startLocation.getAltitude());
+			loc.setTime(System.currentTimeMillis());
+			float meters = (System.currentTimeMillis() - startLocation.getTime()) / startLocation.getSpeed();
+			
+			return loc;
 		}
 		
 		public boolean isSimulatedDataAvailable() {
-			return simulationStarted > 0 && simulationSpeedMS > 0;
+			return startLocation != null && startLocation.getSpeed() > 0 && currentRoad >= 0;
 		}
 	}
 	
