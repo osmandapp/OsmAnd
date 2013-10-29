@@ -605,4 +605,36 @@
 	<string name="av_camera_focus_auto">تركيز تلقائي</string>
 	<string name="av_camera_focus_hiperfocal">التركيز البؤري</string>
 	<string name="av_camera_focus">نوع الكاميرا</string>
+	<string name="use_distance_measurement_help">* انقر لتُعلّم نقطة.\n 
+        * استمر بالضّغط على الخريطة لتحذف النقطة السّابقة.\n
+        * استمر بالضّغط على النّقطة لتظهر أو ترفق وصفًا.\n
+        * انقر على منطقة القياس لترَ مزيدًا من الأنشطة.</string>
+    <string name="layer_hillshade">طبقة ظليلة</string>
+    <string name="tip_recent_changes_1_1_4_t">التّغييرات في 1.1.4:
+        \n\t* إعادة تصميم الواجهة
+		\n\t* إصلاح العديد من العلل
+    </string>
+    <string name="download_hillshade_item">الظل</string>
+    <string name="download_hillshade_maps">تراكب الظّل</string>
+    <string name="tip_recent_changes_1_1_2_t">التّغييرات في 1.1.2:
+		\n\t* تحسينات في ملحق الصّوت و الصّورة (صور مع بيانات EXIF)
+		\n\t* مُلحق يضبط الاستعمال الثّاني و يعيد هيكلة الخطوط المحيطية
+		\n\t* حزم للصور الظليلة من اجل ملحق الخطوط المحيطية
+		\n\t* حلّ العديد من العلل
+    </string>
+    <string name="local_indexes_cat_srtm">بيانات الخطوط المحيطية</string>
+    <string name="srtm_paid_version_msg">فكّر من فضلك في شراء ملحق الخطوط المحيطية من السّوق لدعم مزيد من التّطوير.</string>
+    <string name="srtm_paid_version_title">ملحق الخطوط المحيطية</string>
+    <string name="recording_playing">تم تشغيل صوت من التّسجيل المحدد.\n%1$s</string>
+    <string name="zxing_barcode_scanner_not_found">برنامج ZXing للبحث عن الباركود غيرُ مثبّت. أأبحث في السّوق؟</string>
+	<string name="rendering_attr_contourLines_description">اعرض درجة التّكبير (يتطلب البيانات المحيطية):</string>
+	<string name="tip_recent_changes_0_7_2_t">التّغييرات في 0.7.2:
+		\n\t- التّقديم الأصلي في جميع الأجهزة
+		\n\t- تحرير POI محليًا
+		\n\t- الإتاحة
+		\n\t- حل الكثير من العلل
+	</string>
+	<string name="back_left">الأيسر الخلفي</string>
+	<string name="left">الأيسر</string>
+	<string name="front_left">الأيسر الأمامي</string>
 	</resources>
