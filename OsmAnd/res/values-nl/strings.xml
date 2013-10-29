@@ -1588,4 +1588,6 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="auto_zoom_close">Zoom naar close-up</string>
     <string name="auto_zoom_far">Zoom naar gemiddelde afstand</string>
     <string name="auto_zoom_farthest">Zoom naar grote afstand</string>
-    </resources>
+    <string name="default_and">en</string>
+    <string name="default_or">of</string>
+	</resources>
