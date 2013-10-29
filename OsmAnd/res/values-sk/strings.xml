@@ -1396,4 +1396,6 @@
 	<string name="auto_zoom_close">Veľké priblíženie</string>
 	<string name="auto_zoom_far">Stredné priblíženie</string>
 	<string name="auto_zoom_farthest">Malé priblíženie</string>
+	<string name="default_and">a</string>
+    <string name="default_or">alebo</string>
 	</resources>
