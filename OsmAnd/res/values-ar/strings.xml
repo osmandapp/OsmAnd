@@ -647,4 +647,5 @@
 	<string name="scroll_map_by_gestures">تمرير الخريطة الطبيعي</string>
 	<string name="i_am_here">أنا هنا</string>
 	<string name="index_name_voice">الحزم الصوتية (مسجلة، ميزات محدودة)</string>
+	<string name="index_name_tts_voice">الحزم الصوتية (صوت آلي، مفضلة)</string>
 	</resources>
