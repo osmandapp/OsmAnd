@@ -1630,11 +1630,14 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_distance_farest">Længst væk</string>
     <string name="route_distance_settings_descr">Konfigurer kortvisningsafstand</string>
     <string name="route_distance_settings">Kortvisningsafstand</string>
-    <string name="map_magnifier">Kort lup</string>
+    <string name="map_magnifier">Kortforstørrelse</string>
     <string name="route_distance_farthest">Længst væk</string>
     <string name="route_is_too_long">Ruten er muligvis for lang til at blive beregnet af Osmand offline ruteplanlægger.
  I gennemsnit er offline ruteplanlægning mulig mellem punkter på op til 200 km fra hinanden. Tilføj et eller flere mellemliggende rutepunkter for at beregne ruten .</string>
     <string name="auto_zoom_none">Ingen autozoom</string>
     <string name="auto_zoom_far">Til midtenafstande</string>
-    <string name="auto_zoom_farthest">Til langtrækkende</string>
-    </resources>
+    <string name="auto_zoom_farthest">Langtrækkende</string>
+    <string name="default_and">og</string>
+    <string name="default_or">eller</string>
+	<string name="auto_zoom_close">På tæt hold</string>
+	</resources>
