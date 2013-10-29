@@ -133,9 +133,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				currentObjects != null) {
 			path.reset();
 			for (BinaryMapDataObject o : currentObjects) {
-				final String key = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getDownloadName(o))
+				final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getDownloadName(o))
 						+ IndexConstants.BINARY_MAP_INDEX_EXT;
-				if (!rm.getIndexFileNames().containsKey(key)) {
+				final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(osmandRegions.getDownloadName(o)) + "-roads"
+						+ IndexConstants.BINARY_MAP_INDEX_EXT;
+				if (!rm.getIndexFileNames().containsKey(regionName) && !rm.getIndexFileNames().containsKey(roadsRegionName)) {
 					continue;
 				}
 
@@ -220,7 +222,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 							continue;
 						}
 						if (set.size() > 1) {
-							s.append(" & ");
+							s.append(" ").append(view.getResources().getString(R.string.default_or)).append(" ");
 							filter.append(", ");
 						} else {
 							s.append(" ");

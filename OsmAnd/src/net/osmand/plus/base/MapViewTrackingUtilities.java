@@ -186,9 +186,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					lastTimeAutoZooming = now;
 					float settingsZoomScale = mapView.getSettingsZoomScale();
 					float complexZoom = tb.getZoom() + tb.getZoomScale() + zdelta;
-					// round to 0.5
-					float newZoom = Math.round((complexZoom - settingsZoomScale) * 2) * 0.5f;
-					int nz = (int)newZoom;
+					// round to 0.33
+					float newZoom = Math.round((complexZoom - settingsZoomScale) * 3) / 3f;
+					int nz = (int)Math.round(newZoom);
 					float nzscale = newZoom - nz + settingsZoomScale;
 					mapView.setComplexZoom(nz, nzscale);
 					// mapView.getAnimatedDraggingThread().startZooming(mapView.getFloatZoom() + zdelta, false);

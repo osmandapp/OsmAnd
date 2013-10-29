@@ -17,8 +17,11 @@ import net.osmand.plus.activities.MapActivity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -39,9 +42,7 @@ import android.widget.SeekBar;
 public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int SHOW_ZOOM_LEVEL_MSG_ID = 3;
-	private static final int SHOW_ZOOM_LEVEL_DELAY = 2000;
-	private static final float ZOOM_DELTA = 1;
-//	private static final float ZOOM_DELTA = OsmandMapTileView.ZOOM_DELTA_1; 
+	private static final int SHOW_ZOOM_LEVEL_DELAY = 4000;
 	
 
 	private OsmandMapTileView view;
@@ -57,6 +58,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	private TextPaint zoomTextPaint;
 	private Drawable zoomShadow;
+	private Bitmap mapMagnifier;
+	private Paint bitmapPaint;
 	
 	private Button backToMenuButton;
 	private Drawable modeShadow;
@@ -134,8 +137,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			zoomTextPaint.setColor(sh == Color.WHITE ? Color.BLACK : 0xffC8C8C8);
 			rulerTextPaint.setColor(sh == Color.WHITE ? Color.BLACK : 0xffC8C8C8);
 		}
-		if (showZoomLevel || !view.getSettings().SHOW_RULER.get()) {
-			drawZoomLevel(canvas ,tileBox);
+		boolean drawZoomLevel = showZoomLevel || !view.getSettings().SHOW_RULER.get();
+		if (drawZoomLevel) {
+			drawZoomLevel(canvas, tileBox, view.isZooming());
 		} else {
 			drawRuler(canvas, tileBox);
 		}
@@ -200,33 +204,36 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mQuickAction.show();
 	}
 	
-	
-	private void drawZoomLevel(Canvas canvas, RotatedTileBox tb) {
-		String zoomText = tb.getZoom() + "";
-		float frac = tb.getZoomScale();
-		if (frac != 0) {
-			if (frac > 0) {
-				zoomText += "+";
-			} else {
-				zoomText += "-";
-			}
-			int ifrac = ((int) Math.abs(frac));
-			if (frac >= 1) {
-				zoomText += ifrac;
-			}
-			if (frac != ifrac) {
-				zoomText += "." + ((int) ((Math.abs(frac) - ifrac) * 10f));
-			}
-		}
-		float length = zoomTextPaint.measureText(zoomText);
+
+	private void drawZoomLevel(Canvas canvas, RotatedTileBox tb, boolean drawZoomLevel) {
 		if (zoomShadow.getBounds().width() == 0) {
-			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * scaleCoefficient), zoomInButton.getRight(),
-					zoomInButton.getBottom());
+			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * scaleCoefficient),
+					zoomInButton.getRight(), zoomInButton.getBottom());
 		}
 		zoomShadow.draw(canvas);
-				
-		ShadowText.draw(zoomText, canvas, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
-				zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint, shadowColor);
+		if (drawZoomLevel) {
+			String zoomText = tb.getZoom() + "";
+			float frac = tb.getZoomScale();
+			if (frac != 0) {
+				int ifrac = (int) (frac * 10);
+				boolean pos = ifrac > 0;
+				zoomText += (pos ? "+" : "-");
+				zoomText += Math.abs(ifrac) / 10;
+				if (ifrac % 10 != 0) {
+					zoomText += "." + Math.abs(ifrac) % 10;
+				}
+			}
+			float length = zoomTextPaint.measureText(zoomText);
+
+			ShadowText.draw(zoomText, canvas, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
+					zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint, shadowColor);
+		} else {
+			int size = (int) (16 * scaleCoefficient);
+			int top = (int) (zoomInButton.getTop() - size - 4 * scaleCoefficient);
+			int left = (int) (zoomInButton.getLeft() + (zoomInButton.getWidth() - mapMagnifier.getWidth() - 2 * scaleCoefficient) / 2);
+			// canvas density /2 ? size * 2
+			canvas.drawBitmap(mapMagnifier, null, new Rect(left, top, left + size * 2, top + size * 2), bitmapPaint);
+		}
 	}
 	
 	private void hideZoomLevelInTime(){
@@ -249,6 +256,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (modeShadow.getBounds().contains((int) point.x, (int) point.y)) {
 			onApplicationModePress();
+			return true;
+		}
+		if (showZoomLevel && zoomShadow.getBounds().contains((int) point.x, (int) point.y)) {
+			getOnClickMagnifierListener(view).onLongClick(null);
 			return true;
 		}
 		return false;
@@ -307,7 +318,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomTextPaint.setAntiAlias(true);
 		zoomTextPaint.setFakeBoldText(true);
 		
-		zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background);
+		zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background).mutate();
+		mapMagnifier = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_magnifier);
+		bitmapPaint = new Paint();
+		
 		
 		zoomInButton = new Button(ctx);
 		zoomInButton.setBackgroundResource(R.drawable.map_zoom_in);
@@ -341,11 +355,24 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 			}
 		});
-		final OsmandSettings.OsmandPreference<Float> zoomScale = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY;
+		final View.OnLongClickListener listener = getOnClickMagnifierListener(view);
+		zoomInButton.setOnLongClickListener(listener);
+		zoomOutButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				activity.changeZoom(- 1);
+			}
+		});
+		zoomOutButton.setOnLongClickListener(listener);
+	}
+
+
+	private static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {
 		final View.OnLongClickListener listener = new View.OnLongClickListener() {
 
 			@Override
-			public boolean onLongClick(View v) {
+			public boolean onLongClick(View notUseCouldBeNull) {
+				final OsmandSettings.OsmandPreference<Float> zoomScale = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY;
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				float scale = view.getZoomScale();
 				int p = (int) ((scale > 0 ? 1 : -1) * Math.round(scale * scale * 100)) + 100;
@@ -393,14 +420,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				return true;
 			}
 		};
-		zoomInButton.setOnLongClickListener(listener);
-		zoomOutButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				activity.changeZoom(- 1);
-			}
-		});
-		zoomOutButton.setOnLongClickListener(listener);
+		return listener;
 	}
 	
 
@@ -498,8 +518,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			cacheRulerTextLen = zoomTextPaint.measureText(cacheRulerText.getText());
 			
 			Rect bounds = rulerDrawable.getBounds();
+			Drawable buttonDrawable = view.getResources().getDrawable(R.drawable.map_zoom_in);
 			bounds.right = (int) (view.getWidth() - 7 * scaleCoefficient);
-			bounds.bottom = (int) (view.getHeight() - view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight());
+			bounds.bottom = (int) (view.getHeight() - buttonDrawable.getMinimumHeight());
 			bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
 			bounds.left = bounds.right - cacheRulerDistPix;
 			rulerDrawable.setBounds(bounds);
