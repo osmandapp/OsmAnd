@@ -197,7 +197,7 @@
 	<string name="front">أمام</string>
 	<string name="tip_map_styles">أنماط الخريطة</string>
 	<string name="about_version">الإصدار :</string>
-    <string name="about_settings">عنْ التطبيق</string>
+    <string name="about_settings">عنْ التّطبيق</string>
     <string name="about_settings_descr">معلومات النسخة، والتراخيص، أعضاء المشروع</string>
     <string name="tips_and_tricks">نصائح</string>
     <string name="edit_tilesource_maxzoom">التّكبير الأقصى</string>
@@ -538,7 +538,7 @@
 	<string name="basemap_was_selected_to_download">خريطة العالم الأساسية مطلوبة لعمل التطبيق بشكل سليم، وقد حددت للتنزيل.</string>
 	<string name="select_index_file_to_download">لم يتم العثور على شيء. إذا لم تتمكن من إيجاد منطقتك، يمكنك صنعها بنفسك (انظر http://osmand.net ).</string>
 	<string name="auto_zoom_close">إلى الصورة عن قرب</string>
-	<string name="auto_zoom_none">تعطيل التكبير التلقائي</string>
+	<string name="auto_zoom_none">بدون تكبير تلقائي</string>
 	<string name="auto_zoom_far">قم بتوسيط الخريطة هنا</string>
 	<string name="local_indexes_cat_tile">خرائط متصلة بالإنترنت و مربعية</string>
 	<string name="map_online_plugin_is_not_installed">تمكين ملحق الخرائط على الإنترنت على تحديد مصادر مختلفة للخرائط</string>
@@ -546,7 +546,7 @@
 	<string name="map_online_data_descr">استخدام الخرائط من الإنترنت (تنزيل وحفظ نسخة منها على بطاقة SD)</string>
 	<string name="online_map_settings">خرائط المتصلة بالانترنت</string>
 	<string name="online_map_settings_descr">إعداد مصادر الخرائط المربعية المخبئة والمتصلة</string>
-	<string name="auto_zoom_farthest">مسافة طويلة جدا</string>
+	<string name="auto_zoom_farthest">إلى مدى بعيد</string>
 	<string name="use_magnetic_sensor_descr">استخدم الحساس المغناطيسي لتحديد قيمة البوصلة بدلا من حساس الاتجاهات</string>
     <string name="map_settings">إعدادات الخريطة</string>
 	<string name="map_settings_descr">ضبط عرض الخريطة</string>
@@ -588,10 +588,10 @@
 	<string name="local_openstreetmap_show">عرض على الخريطة</string>
 	<string name="local_openstreetmap_delete">حذف التعديل</string>
 	<string name="show_current_gpx_title">عرض المسار الحالي</string>
-	<string name="back">الخلف</string>
-	<string name="front_right">اليمين الأمامي</string>
-	<string name="right">اليمين</string>
-	<string name="back_right">اليمين الخلفي</string>
+	<string name="back">الخلفي</string>
+	<string name="front_right">الأيمن الأمامي</string>
+	<string name="right">الأيمن</string>
+	<string name="back_right">الأيمن الخلفي</string>
 	<string name="accuracy">الدقة</string>
 	<string name="altitude">الارتفاع</string>
 	<string name="use_short_object_names">استخدام أسماء الكائنات</string>
@@ -637,4 +637,10 @@
 	<string name="back_left">الأيسر الخلفي</string>
 	<string name="left">الأيسر</string>
 	<string name="front_left">الأيسر الأمامي</string>
+	<string name="towards">نحو</string>
+	<string name="no_info">لا معلومات</string>
+	<string name="direction_style_sidewise">جانب واحد (8 قطاعات)</string>
+	<string name="direction_style_clockwise">جانبان (12 قطاع)</string>
+	<string name="settings_direction_style">نمط التّوجه</string>
+	<string name="settings_direction_style_descr">اختر نمط التّعبير عن الاتّجاهات النّسبية أثناء الحركة</string>
 	</resources>
