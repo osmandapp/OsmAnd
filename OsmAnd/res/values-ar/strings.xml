@@ -654,7 +654,7 @@
 	<string name="use_fluorescent_overlays">تراكب فلوري</string>
 	<string name="use_fluorescent_overlays_descr">استخدم الألوان الفلورية لعرض المسارات و الطّرق</string>
 	<string name="local_openstreetmap_upload">ارفع التّعديلات إلى OSM</string>
-	<string name="local_openstreetmap_descr_title">تالّحرير غير المتزامن مع OSM:</string>
+	<string name="local_openstreetmap_descr_title">التّحرير غير المتزامن مع OSM:</string>
 	<string name="local_openstreetmap_settings">العلل أو الـ POI المحفوظة محليًا</string>
 	<string name="local_openstreetmap_settings_descr">أظهر و أدر العلل أو الـ POI الموجودة على قاعدة البيانات المحلية</string>
 	<string name="live_monitoring_descr">إرسال التّتبع إلى خدمة ويب محدّدة</string>
@@ -662,4 +662,5 @@
 	<string name="live_monitoring_interval_descr">حدد فواصل التّتبع باستخدام الشّابكة</string>
 	<string name="live_monitoring_interval">فاصل التّتبع باستخدام الشّابكة</string>
 	<string name="live_monitoring_url">عنوان التّتبع باستخدام الشّابكة</string>
+	<string name="av_camera_focus_edof">وضع التركيز الكلي (عن قرب)</string>
 	</resources>
