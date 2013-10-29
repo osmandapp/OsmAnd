@@ -195,9 +195,9 @@
 	<string name="north_west">الشمال الغربي</string>
 	<string name="north_north_west">الشمال والشمال الغربي</string>
 	<string name="front">أمام</string>
-	<string name="tip_map_styles">خريطة الأنماط</string>
+	<string name="tip_map_styles">أنماط الخريطة</string>
 	<string name="about_version">الإصدار :</string>
-    <string name="about_settings">حول</string>
+    <string name="about_settings">عنْ التطبيق</string>
     <string name="about_settings_descr">معلومات النسخة، والتراخيص، أعضاء المشروع</string>
     <string name="tips_and_tricks">نصائح</string>
     <string name="edit_tilesource_maxzoom">التّكبير الأقصى</string>
@@ -600,4 +600,9 @@
 	<string name="rendering_out_of_memory">ذاكرة تشغيل غير كافية لعرض المنطقة المختارة</string>
 	<string name="offline_edition">التحرير دون اتصال</string>
 	<string name="offline_edition_descr">استخدام التحرير دون اتصال دائماً</string>
+	<string name="av_camera_focus_infinity">تعيين التركيز على اللانهاية</string>
+	<string name="av_camera_focus_macro">وضع التركيز الكلي (عن قرب)</string>
+	<string name="av_camera_focus_auto">تركيز تلقائي</string>
+	<string name="av_camera_focus_hiperfocal">التركيز البؤري</string>
+	<string name="av_camera_focus">نوع الكاميرا</string>
 	</resources>
