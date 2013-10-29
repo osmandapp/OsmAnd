@@ -635,6 +635,11 @@ public class OsmandSettings {
 		MAP_ZOOM_SCALE_BY_DENSITY.setModeDefaultValue(ApplicationMode.CAR, 0.5f);
 	}
 	
+	public float getSettingsZoomScale(float density){
+		// by default scale between [0, 1[ density (because of lots map complains)
+		return MAP_ZOOM_SCALE_BY_DENSITY.get() + (float)Math.min(Math.sqrt(Math.max(0, density - 1)), 1);
+	}
+	
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_POI_OVER_MAP = new BooleanPreference("show_poi_over_map", false).makeGlobal();
