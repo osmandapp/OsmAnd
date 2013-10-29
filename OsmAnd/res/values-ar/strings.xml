@@ -537,7 +537,7 @@
 	<string name="first_time_msg">نشكرك على استخدام OsmAnd.  بالنسبة لكثير من مميزات هذا البرنامج أنت بحاجة إلي بعض البيانات الإقليمية التي يمكنك تحميلها عبر \ "إعدادات \ '→ \' إدارة البيانات \ ' الميزات.  بعد ذلك سوف تكون قادرا على عرض الخرائط، و تحديد عناوين ، والبحث عن النقاط المهمة ، والعثور على وسائل النقل العام .</string>    
 	<string name="basemap_was_selected_to_download">خريطة العالم الأساسية مطلوبة لعمل التطبيق بشكل سليم، وقد حددت للتنزيل.</string>
 	<string name="select_index_file_to_download">لم يتم العثور على شيء. إذا لم تتمكن من إيجاد منطقتك، يمكنك صنعها بنفسك (انظر http://osmand.net ).</string>
-	<string name="auto_zoom_close">مشي على القدمين</string>
+	<string name="auto_zoom_close">إلى الصورة عن قرب</string>
 	<string name="auto_zoom_none">تعطيل التكبير التلقائي</string>
 	<string name="auto_zoom_far">قم بتوسيط الخريطة هنا</string>
 	<string name="local_indexes_cat_tile">خرائط متصلة بالإنترنت و مربعية</string>
@@ -546,7 +546,7 @@
 	<string name="map_online_data_descr">استخدام الخرائط من الإنترنت (تنزيل وحفظ نسخة منها على بطاقة SD)</string>
 	<string name="online_map_settings">خرائط المتصلة بالانترنت</string>
 	<string name="online_map_settings_descr">إعداد مصادر الخرائط المربعية المخبئة والمتصلة</string>
-	<string name="auto_zoom_farthest">نطاق طويل جدا</string>
+	<string name="auto_zoom_farthest">مسافة طويلة جدا</string>
 	<string name="use_magnetic_sensor_descr">استخدم الحساس المغناطيسي لتحديد قيمة البوصلة بدلا من حساس الاتجاهات</string>
     <string name="map_settings">إعدادات الخريطة</string>
 	<string name="map_settings_descr">ضبط عرض الخريطة</string>
@@ -560,4 +560,7 @@
 	<string name="vector_maps_may_display_faster_on_some_devices">عادة تعرض الخرائط الاتجاهية أسرع. ربما لا تعمل جيدا على بعض الأجهزة.</string>
 	<string name="play_commands_of_currently_selected_voice">شغل الأوامر من الصوت المحدد الحالي</string>
 	<string name="switch_to_raster_map_to_see">لا توجد خرائط متجهة محلية لهذا المكان. يمكنك تنزيل أحدها من الإعدادات (إدارة البيانات)، أو الانتقال خرائط الانترنت.</string>
+	<string name="default_and">و</string>
+    <string name="default_or">أو</string>
+	<string name="av_camera_focus_continuous">التركيز المستمر</string>
 	</resources>
