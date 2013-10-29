@@ -648,4 +648,18 @@
 	<string name="i_am_here">أنا هنا</string>
 	<string name="index_name_voice">الحزم الصوتية (مسجلة، ميزات محدودة)</string>
 	<string name="index_name_tts_voice">الحزم الصوتية (صوت آلي، مفضلة)</string>
+	<string name="profile_settings">إعدادات التشكيل الجانبي المحددة</string>
+	<string name="zoom_by_trackball_descr">غيّر نمط تكبير الخريطة بواسطة حركات كرة التّتبع الأفقية</string>
+	<string name="zoom_by_trackball">استخدم كرة التّتبع للتّحكم في التّكبير</string>
+	<string name="use_fluorescent_overlays">تراكب فلوري</string>
+	<string name="use_fluorescent_overlays_descr">استخدم الألوان الفلورية لعرض المسارات و الطّرق</string>
+	<string name="local_openstreetmap_upload">ارفع التّعديلات إلى OSM</string>
+	<string name="local_openstreetmap_descr_title">تالّحرير غير المتزامن مع OSM:</string>
+	<string name="local_openstreetmap_settings">العلل أو الـ POI المحفوظة محليًا</string>
+	<string name="local_openstreetmap_settings_descr">أظهر و أدر العلل أو الـ POI الموجودة على قاعدة البيانات المحلية</string>
+	<string name="live_monitoring_descr">إرسال التّتبع إلى خدمة ويب محدّدة</string>
+	<string name="live_monitoring">التّتبع باستخدام الشّابكة</string>
+	<string name="live_monitoring_interval_descr">حدد فواصل التّتبع باستخدام الشّابكة</string>
+	<string name="live_monitoring_interval">فاصل التّتبع باستخدام الشّابكة</string>
+	<string name="live_monitoring_url">عنوان التّتبع باستخدام الشّابكة</string>
 	</resources>
