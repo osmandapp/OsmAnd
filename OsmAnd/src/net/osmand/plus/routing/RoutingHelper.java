@@ -669,7 +669,11 @@ public class RoutingHelper {
     public RouteSegmentResult getCurrentSegmentResult() {
         return route.getCurrentSegmentResult();
     }
-
+    
+    public List<RouteSegmentResult> getUpcomingTunnel(float distToStart) {
+    	return route.getUpcomingTunnel(distToStart);
+    }
+    
     public synchronized NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo previous, NextDirectionInfo to, boolean toSpeak){
 		NextDirectionInfo i = route.getNextRouteDirectionInfoAfter(previous, to, toSpeak);
 		if(i != null) {

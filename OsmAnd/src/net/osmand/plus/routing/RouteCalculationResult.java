@@ -678,6 +678,45 @@ public class RouteCalculationResult {
 		return null;
 	}
 	
+	public List<RouteSegmentResult> getUpcomingTunnel(float distToStart) {
+		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
+		if(cs < segments.size()) {
+			RouteSegmentResult prev = null;
+			boolean tunnel = false;
+			while(cs < segments.size() && distToStart > 0) {
+				RouteSegmentResult segment = segments.get(cs);
+				if(segment != prev ) {
+					if(segment.getObject().tunnel()){
+						tunnel = true; 
+						break;
+					} else {
+						distToStart -= segment.getDistance();
+						prev = segment;
+					}
+				}
+				cs++;
+			}
+			if(tunnel) {
+				List<RouteSegmentResult> list = new ArrayList<RouteSegmentResult>();
+				while(cs < segments.size()) {
+					RouteSegmentResult segment = segments.get(cs);
+					if(segment != prev ) {
+						if(segment.getObject().tunnel()) {
+							list.add(segment);
+						} else {
+							break;
+						}
+						prev = segment;
+					}
+					cs++;
+				}
+				return list;
+			}
+		}
+		
+		return null;
+	}
+	
 	public float getCurrentMaxSpeed() {
 		RouteSegmentResult res = getCurrentSegmentResult();
 		if(res != null) {

@@ -176,6 +176,20 @@ public class RouteDataObject {
 		return false;
 	}
 	
+	public boolean tunnel(){
+		int sz = types.length;
+		for(int i=0; i<sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if(r.getTag().equals("tunnel") && r.getValue().equals("yes")) {
+				return true;
+			}
+			if(r.getTag().equals("layer") && r.getValue().equals("-1")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public int getOneway() {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {
