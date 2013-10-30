@@ -663,4 +663,11 @@
 	<string name="live_monitoring_interval">فاصل التّتبع باستخدام الشّابكة</string>
 	<string name="live_monitoring_url">عنوان التّتبع باستخدام الشّابكة</string>
 	<string name="av_camera_focus_edof">وضع التركيز الكلي (عن قرب)</string>
+	<string name="edit_filter_create_message">عامل تصفية {0} تم إنشاؤه</string>
+	<string name="default_buttons_selectall">تحديد الكل</string>
+	<string name="edit_filter_delete_message">عامل تصفية {0} تم حذفه</string>
+	<string name="edit_filter_delete_dialog_title">حذف عامل التصفية المحدد؟</string>
+	<string name="oclock">o\'على مدار الساعة</string>
+	<string name="auto_announce_off">إيقاف الإخطار التلقائي</string>
+	<string name="auto_announce_on">تفعيل الأخطار التلقائي</string>
 	</resources>
