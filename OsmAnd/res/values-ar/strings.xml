@@ -670,4 +670,7 @@
 	<string name="oclock">o\'على مدار الساعة</string>
 	<string name="auto_announce_off">إيقاف الإخطار التلقائي</string>
 	<string name="auto_announce_on">تفعيل الأخطار التلقائي</string>
-	</resources>
+	<string name="route_is_too_long">من المحتمل أن هذا المسار طويل جدا بأن يحسب باستخدام راسم OsmAnd المحلي.
+	في المتوسط المسارات المحلية يمكن أن تكون في نطاق 200 كيلو متر. يرجى إضافة نقطة وسطية أو أكثر حتى يحتسب المسار.</string>
+	<string name="audionotes_location_not_defined">لم يعين المكان المرتبط بالملاحظة. استخدم \"استخدم المكان …\" لتعيين ملاحظة لمكان محدد</string>
+    </resources>
