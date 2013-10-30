@@ -529,13 +529,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		public void onLocationChanged(Location location) {
 			if (location != null) {
 				lastTimeGPSLocationFixed = location.getTime();
-				if(gpsSignalLost) {
-					gpsSignalLost = false;
-					final RoutingHelper routingHelper = app.getRoutingHelper();
-					if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
-						routingHelper.getVoiceRouter().gpsLocationRecover();
-					}
-				}
 			}
 			if(!locationSimulation.isRouteAnimating()) {
 				setLocation(convertLocation(location, app));
@@ -677,7 +670,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 						if(tunnel != null) {
 							simulatePosition = new SimulationProvider();
 							simulatePosition.startSimulation(tunnel, location);
-							simulatePosition();
+							simulatePositionImpl();
 						}
 					}
 				}, START_LOCATION_SIMULATION_DELAY);
@@ -690,17 +683,21 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 			@Override
 			public void run() {
-				if(simulatePosition != null){
-					net.osmand.Location loc = simulatePosition.getSimulatedLocation();
-					if(loc != null){
-						setLocation(loc);
-						simulatePosition();
-					}  else {
-						simulatePosition = null;
-					}
-				}
+				simulatePositionImpl();
 			}
 		}, 1000);
+	}
+	
+	private void simulatePositionImpl() {
+		if(simulatePosition != null){
+			net.osmand.Location loc = simulatePosition.getSimulatedLocation();
+			if(loc != null){
+				setLocation(loc);
+				simulatePosition();
+			}  else {
+				simulatePosition = null;
+			}
+		}
 	}
 	
 	
@@ -727,6 +724,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 		if(location != null) {
 			simulatePosition = null;
+			if(gpsSignalLost) {
+				gpsSignalLost = false;
+				final RoutingHelper routingHelper = app.getRoutingHelper();
+				if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
+					routingHelper.getVoiceRouter().gpsLocationRecover();
+				}
+			}
 		}
 		enhanceLocation(location);
 		scheduleCheckIfGpsLost(location);
