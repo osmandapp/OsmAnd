@@ -1568,6 +1568,7 @@ public class BinaryMapIndexReader {
 		Map<String, Map<String, Integer> > encodingRules = new HashMap<String, Map<String, Integer> >();
 		TIntObjectMap<TagValuePair> decodingRules = new TIntObjectHashMap<TagValuePair>();
 		public int nameEncodingType = 0;
+		public int nameEnEncodingType = -1;
 		public int refEncodingType = -1;
 		public int coastlineEncodingType = -1;
 		public int coastlineBrokenEncodingType = -1;
@@ -1624,6 +1625,8 @@ public class BinaryMapIndexReader {
 				onewayReverseAttribute = id;
 			} else if("ref".equals(tag)){
 				refEncodingType = id;
+			} else if("name:en".equals(tag)){
+				nameEnEncodingType = id;
 			} else if("tunnel".equals(tag)){
 				negativeLayers.add(id);
 			} else if("bridge".equals(tag)){

@@ -358,14 +358,24 @@ public class TextRenderer {
 	
 	public void renderText(final BinaryMapDataObject obj, final RenderingRuleSearchRequest render, final RenderingContext rc, 
 			final TagValuePair pair, final float xMid, final float yMid, final Path path, final PointF[] points) {
-		TIntObjectHashMap<String> map = obj.getObjectNames();
+		final TIntObjectHashMap<String> map = obj.getObjectNames();
 		if (map != null) {
 			map.forEachEntry(new TIntObjectProcedure<String>() {
 				@Override
 				public boolean execute(int tag, String name) {
 					if (name != null && name.trim().length() > 0) {
-						createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, name, tag == obj.getMapIndex().nameEncodingType ? ""
-								: obj.getMapIndex().decodeType(tag).tag);
+						boolean isName = tag == obj.getMapIndex().nameEncodingType;
+						String nameTag = isName ? "" : obj.getMapIndex().decodeType(tag).tag;
+						boolean skip = false;
+						if (isName && rc.useEnglishNames && map.containsKey(obj.getMapIndex().nameEnEncodingType)) {
+							skip = true;
+						} 
+						if (tag == obj.getMapIndex().nameEnEncodingType && !rc.useEnglishNames) {
+							skip = true;
+						}
+						if(!skip) {
+							createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, name, nameTag);
+						}
 					}
 					return true;
 				}
