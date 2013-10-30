@@ -28,6 +28,7 @@ import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
@@ -94,6 +95,7 @@ import com.actionbarsherlock.view.Window;
  */
 public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompassListener, OsmAndLocationListener {
 
+	private static final int COMPASS_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 3;
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
@@ -517,14 +519,14 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	@Override
 	public void updateCompassValue(float value) {
 		heading = value;
-		if(!uiHandler.hasMessages(5)){
+		if(!uiHandler.hasMessages(COMPASS_REFRESH_MSG_ID)){
 			Message msg = Message.obtain(uiHandler, new Runnable(){
 				@Override
 				public void run() {
 					amenityAdapter.notifyDataSetChanged();
 				}
 			});
-			msg.what = 5;
+			msg.what = COMPASS_REFRESH_MSG_ID;
 			uiHandler.sendMessageDelayed(msg, 100);
 		}
 	}

@@ -1,6 +1,7 @@
 package net.osmand.plus.base;
 
 import net.osmand.IProgress;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.R;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -77,7 +78,7 @@ public abstract class BasicProgressAsyncTask<Params, Progress, Result> extends A
 					updateProgress(updateOnlyProgress);
 				}
 			});
-			msg.what = 1;
+			msg.what = OsmAndConstants.UI_HANDLER_PROGRESS + 2;
 			uiHandler.sendMessage(msg);
 		}
 	}

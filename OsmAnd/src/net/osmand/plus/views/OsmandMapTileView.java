@@ -16,6 +16,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -53,8 +54,8 @@ import android.widget.Toast;
 
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
-	private static final int MAP_REFRESH_MESSAGE = 1;
-	private static final int BASE_REFRESH_MESSAGE = 2;
+	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
+	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
 	protected final static int LOWEST_ZOOM_TO_ROTATE = 9;
 	private boolean MEASURE_FPS = false;
 	private FPSMeasurement main = new FPSMeasurement();

@@ -9,6 +9,7 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -41,7 +42,7 @@ import android.widget.SeekBar;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
-	private static final int SHOW_ZOOM_LEVEL_MSG_ID = 3;
+	private static final int SHOW_ZOOM_LEVEL_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_CONTROLS + 1;
 	private static final int SHOW_ZOOM_LEVEL_DELAY = 4000;
 	
 

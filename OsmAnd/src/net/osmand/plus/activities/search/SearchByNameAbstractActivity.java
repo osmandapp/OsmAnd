@@ -15,6 +15,7 @@ import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -66,8 +67,8 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	private EditText searchText;
 	private AsyncTask<Object, ?, ?> initializeTask;
 	
-	protected static final int MESSAGE_CLEAR_LIST = 1;
-	protected static final int MESSAGE_ADD_ENTITY = 2;
+	protected static final int MESSAGE_CLEAR_LIST = OsmAndConstants.UI_HANDLER_SEARCH + 2;
+	protected static final int MESSAGE_ADD_ENTITY = OsmAndConstants.UI_HANDLER_SEARCH + 3;
 	protected static final String SEQUENTIAL_SEARCH = "SEQUENTIAL_SEARCH";
 	
 	protected ProgressBar progress;

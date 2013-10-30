@@ -9,7 +9,6 @@ import java.util.List;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.access.NavigationInfo;
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -44,11 +43,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private static final int INTERVAL_TO_CLEAR_SET_LOCATION = 30 * 1000;
-	private static final int LOST_LOCATION_MSG_ID = 53;
-	private static final int START_SIMULATE_LOCATION_MSG_ID = 54;
-	private static final int RUN_SIMULATE_LOCATION_MSG_ID = 55;
+	private static final int LOST_LOCATION_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 1;
+	private static final int START_SIMULATE_LOCATION_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 2;
+	private static final int RUN_SIMULATE_LOCATION_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 3;
 	private static final long LOST_LOCATION_CHECK_DELAY = 18000;
-	private static final long START_LOCATION_SIMULATION_DELAY = 4000;
+	private static final long START_LOCATION_SIMULATION_DELAY = 3000;
 
 	private static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 

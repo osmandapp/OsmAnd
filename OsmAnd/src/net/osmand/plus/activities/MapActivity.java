@@ -19,6 +19,7 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -68,8 +69,8 @@ import android.widget.Toast;
 
 public class MapActivity extends AccessibleActivity  {
 	
-	private static final int SHOW_POSITION_MSG_ID = 7;
-	private static final int LONG_KEYPRESS_MSG_ID = 28;
+	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
+	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
 	
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;

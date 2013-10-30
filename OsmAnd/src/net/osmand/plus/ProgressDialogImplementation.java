@@ -10,8 +10,8 @@ import android.os.Message;
 
 public class ProgressDialogImplementation implements IProgress {
 	
-	private static final int HANDLER_START_TASK = 0;
-	private static final int HADLER_UPDATE_PROGRESS = 1;
+	private static final int HANDLER_START_TASK = OsmAndConstants.UI_HANDLER_PROGRESS + 1;
+	private static final int HADLER_UPDATE_PROGRESS = OsmAndConstants.UI_HANDLER_PROGRESS + 2;
 	private String taskName;
 	private int progress;
 	private int deltaProgress;
