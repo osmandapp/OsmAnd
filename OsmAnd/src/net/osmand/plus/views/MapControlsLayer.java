@@ -45,7 +45,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private static final int SHOW_ZOOM_LEVEL_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_CONTROLS + 1;
 	private static final int SHOW_ZOOM_BUTTON_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_CONTROLS + 2;
 	private static final int SHOW_ZOOM_LEVEL_DELAY = 1000;
-	private static final int SHOW_ZOOM_LEVEL_BUTTON_DELAY = 2500;
+	private static final int SHOW_ZOOM_LEVEL_BUTTON_DELAY = 1500;
 	
 
 	private OsmandMapTileView view;
@@ -274,7 +274,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 
 		});
-		msg.what = SHOW_ZOOM_LEVEL_BUTTON_DELAY;
+		msg.what = SHOW_ZOOM_BUTTON_MSG_ID;
 		showUIHandler.sendMessageDelayed(msg, SHOW_ZOOM_LEVEL_BUTTON_DELAY);
 	}
 
