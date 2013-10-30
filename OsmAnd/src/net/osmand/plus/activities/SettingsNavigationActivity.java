@@ -2,7 +2,9 @@ package net.osmand.plus.activities;
 
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import net.osmand.IndexConstants;
@@ -11,6 +13,8 @@ import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RoutingHelper;
+
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -75,12 +79,26 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			entries[i] = (int) intValues[i] + " " + getString(R.string.int_seconds);
 		}
 		registerListPreference(settings.AUTO_FOLLOW_ROUTE, screen, entries, intValues);
-		
-		entries = new String[RouteService.values().length];
-		for(int i=0; i<entries.length; i++){
-			entries[i] = RouteService.values()[i].getName();
+
+		// hide the brouter-service if not installed
+		RoutingHelper routingHelper = getMyApplication().getRoutingHelper();
+		boolean hasBRouter = routingHelper != null && routingHelper.hasBRouter();
+		int nrouteservices = RouteService.values().length;
+		List<RouteService> routeServices = new ArrayList<RouteService>();
+		for( RouteService routeSrvc : RouteService.values() ) {
+			if ( RouteService.BROUTER == routeSrvc && !hasBRouter ) {
+				continue;
+			}
+			routeServices.add( routeSrvc );
+        }
+
+		entries = new String[routeServices.size()];
+        RouteService[] rsValues = new RouteService[routeServices.size()];
+		for(int i=0; i<routeServices.size(); i++) {
+			entries[i] = routeServices.get(i).getName();
+			rsValues[i] = routeServices.get(i);
 		}
-		registerListPreference(settings.ROUTER_SERVICE, screen, entries, RouteService.values());
+		registerListPreference(settings.ROUTER_SERVICE, screen, entries, rsValues);
 		
 		routerServicePreference = (ListPreference) screen.findPreference(settings.ROUTER_SERVICE.getId());
 		

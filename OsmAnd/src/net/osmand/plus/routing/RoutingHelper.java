@@ -77,7 +77,7 @@ public class RoutingHelper {
 	private RouteCalculationProgressCallback progressRoute;
 
 	private IBRouterService brouterService;
-
+	private boolean hasBRouter; // if bindService gave true
 
 //	private ProgressBar progress;
 //	private Handler progressHandler;
@@ -96,7 +96,7 @@ public class RoutingHelper {
 		BRouterServiceConnection conn = new BRouterServiceConnection();
 		Intent i = new Intent();
 		i.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
-		app.bindService(i, conn, Context.BIND_AUTO_CREATE);
+		hasBRouter = app.bindService(i, conn, Context.BIND_AUTO_CREATE);
 	}
 
 	class BRouterServiceConnection implements ServiceConnection
@@ -109,6 +109,11 @@ public class RoutingHelper {
 			brouterService = null;
 		}
 	};
+
+	public boolean hasBRouter() {
+		return hasBRouter;
+	}
+
 
 	public boolean isFollowingMode() {
 		return isFollowingMode;
