@@ -982,8 +982,8 @@
   <string name="bg_service_sleep_mode_on">Ferma\n modalità sleep</string>
 <string name="filterpoi_activity">Crea un filtro dei PDI</string>
 <string name="select_navigation_mode">Scelta del mezzo di trasporto</string>
-<string name="day_night_info_description">Alba : %1$s
-\nTramonto : %2$s</string>
+<string name="day_night_info_description">Alba: %1$s
+\nTramonto: %2$s</string>
 <string name="day_night_info">Informazioni giorno/notte</string>
 <string name="map_widget_day_night">Mappa giorno/notte</string>
 <string name="map_widget_vector_attributes">Attributi del disegno:</string>
