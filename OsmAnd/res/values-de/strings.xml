@@ -1,5 +1,5 @@
 <resources>
-	<string name="route_is_too_long">Die Route ist möglicherweise zu lang, um vom OsmAnd Offline-Router berechnet zu werden, 
+	<string name="route_is_too_long">Die Route ist möglicherweise zu lang, um vom OsmAnd Offline-Router berechnet zu werden. 
 		Die Offline-Berechnung von Routen ist durchschnittlich zwischen bis zu etwa 200km entfernten Punkten möglich. Bitte fügen Sie einen oder mehrere Wegpunkte ein, um diese Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
@@ -8,8 +8,8 @@
 	<string name="map_magnifier">Kartenlupe</string>
 	<string name="base_world_map">Weltweite Basiskarte (basemap)</string>
 	<string name="tip_map_styles">Kartendarstellung</string>
-	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten für verschiedene Verwendungszwecke optimiert dartsellen:
-		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' → \'Anzeige konfigurieren\' → \'Map Style\' → \'Kartendarstellung\' zum Beispiel auswählen:
+	<string name="tip_map_styles_t">OsmAnd kann die Offline-Vektor-Karten für verschiedene Verwendungszwecke optimiert darstellen:
+		\n\nNeben der neutralen \'Default\' Darstellung kann man unter \'Menü\' → \'Anzeige konfigurieren\' → \'Kartendarstellung\' zum Beispiel auswählen:
 		\n\t* Den \'Touring view\' Stil, er enthält die maximal verfügbare Detailtiefe für Reisende und Tourengänger, inklusive einer Optimierung für Vielfahrer (höherer Kontrast, alle Straßenarten eindeutig unterscheidbar), Optionen für das Alpine Wandern (SAC Skala), Fahrradrouten, Wandersymbol-Untertützung, usw.
 		\n\t* \'High contrast roads\' zeigt alle Straßen in betont deutlichen Farben, nützlich in extrem hellen Umgebungen
 		\n\t* \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahrten und Lifte (benötigt wird die \'World ski\' Offline-Karte)
@@ -32,14 +32,14 @@
 	<string name="tip_altitude_offset">Höhenanzeige (Offset)</string>
 	<string name="tip_altitude_offset_t">Die meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
 		\n\nEine bessere Näherung für lokale Systeme ist das EGM96-System.
-		\n\nOsmAnd zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korrekturdatei unter \'Einstellungen\' → \'Daten Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
+		\n\nOsmAnd zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korrekturdatei unter \'Einstellungen\' → \'Daten-Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
 	<string name="map_widget_max_speed">Tempolimit</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
 	<string name="route_descr_current_location">Aktueller Standort</string>
 	
 	
-	<string name="no_buildings_found">Kein Hausnummern / Gebäude gefunden.</string>
+	<string name="no_buildings_found">Keine Hausnummern / Gebäude gefunden.</string>
 	<string name="incremental_search_city">Suche Stadt inkrementell</string>
 	<string name="search_villages_and_postcodes">Suche weitere kleine Orte oder Postleitzahlen</string>
 	<string name="rendering_attr_showRoadMaps_description">Anzeige reiner Straßenkarten:</string>
@@ -189,7 +189,7 @@
 	<string name="native_rendering">Natives Rendern</string>
 	
 	<string name="test_voice_prompts">Sprachansagen testen</string>
-	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Vektor-Karte via \'Einstellungen\' → \'Daten-Management\' laden.
+	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Vektor-Karte via \'Einstellungen\' → \'Daten-Management\' herunterladen.
 		\n\nAlternativ auf Online-Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).
 	</string>
 	<string name="tip_recent_changes_0_7_2_t">Änderungen in 0.7.2:
@@ -368,7 +368,7 @@
 		\n\nDazu müssen Sie zunächst unter \'Einstellungen\' → \'Zusatzmodule\' OSM-Berarbeitung aktivieren und dann unter \'Einstellungen\' → \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
 		\n\nEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im \'Verwende Position\'-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! 
 		\n\nAuch gefundene Fehler auf der Karte können direkt an OSM gemeldet werden. OSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im \'Verwende Position\'-Kontextmenü.
-		\n\nOsmAnd untertützt das loakle Vormerken Ihrer Einträge (siehe entsprechende Einstellung), aber zum Einsenden natürlich eine Internetverbindung benötigt.
+		\n\nOsmAnd untertützt das lokale Vormerken Ihrer Einträge (siehe entsprechende Einstellung), aber zum Einsenden natürlich eine Internetverbindung benötigt.
 	</string>
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
@@ -389,7 +389,7 @@
 	</string>
 	
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
-	<string name="native_library_not_supported">Native Library wird auf diesem Gerät nicht unterstützt.</string>
+	<string name="native_library_not_supported">Native Bibliothek wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
@@ -475,8 +475,8 @@
 	<string name="favourites_edit_dialog_name">Name</string>
 	<string name="favourites_edit_dialog_category">Kategorie</string>
 	<string name="vector_map_not_needed">Nicht verwendet</string>
-	<string name="basemap_missing">Die offline-Weltkarte für kleine Vergrößerungen ist noch nicht vorhanden. Bitte ggfls. World_basemap_x.obf herunterladen.</string>
-	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggfls. herunterladen, damit Karten offline verwendet werden können.</string>
+	<string name="basemap_missing">Die offline-Weltkarte für kleine Vergrößerungen ist noch nicht vorhanden. Bitte ggf. World_basemap_x.obf herunterladen.</string>
+	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggf. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">"\n\nLang klicken für Optionen"</string>
 	<string name="local_index_gpx_info_speed">"\nDurchschn.geschw.: %1$s \nMax. Geschw.: %2$s"</string>
 	<string name="local_index_gpx_info_elevation">"\nDurchschn.höhe: %1$s\nMinimalhöhe: %2$s\nMaximalhöhe: %3$s\nAufstiege: %4$s\nAbstiege: %5$s"</string>
@@ -562,7 +562,7 @@
 		\n\nNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Bitte beachten Sie die Dateityp-Auswahloption am oberen Ende des Bildschirms, wählen Sie dort die gewünschte Datei-Kategorie (Reguläre Karten, Relief-Overlay, etc.)
 		\n\nDie Regionsliste kann durch Eingabe von Zeichen gefiltert werden. Alternativ zeigt die Option \'Filter Gespeicherte\' zeigt nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
 		\n\n\t* Einträge in \'grün\': Daten aktuell
-		\n\t* Einträge in \'blau\': Neuere Version zum herunterladen verfügbar
+		\n\t* Einträge in \'blau\': Neuere Version zum Herunterladen verfügbar
 		\n\t* Kursive Darstellung: Auf dem Gerät deaktivierte Karten
 	</string>
 	<string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
@@ -1137,7 +1137,7 @@
 	<string name="map_widget_config">Konfiguration</string>
 	
 	<string name="map_widget_back_to_loc">Wo bin ich</string>
-	<string name="map_widget_lock_screen">Bildschimr sperren</string>
+	<string name="map_widget_lock_screen">Bildschirm sperren</string>
 	<string name="map_widget_compass">Kompass</string>
 	<string name="map_widget_top_stack">Statusleiste:</string>
 	<string name="map_widget_reset">Auf Voreinstellung setzen</string>
@@ -1443,12 +1443,12 @@
 	\n\t* Unterstützung von transparentem Kartenhintergrund
 	\n\t* Anzeige geladener Regionalkarten und Herunterladen fehlender Karten direkt aus der Kartenansicht heraus
 	\n\t* Höhenliniendaten nun als Landes- oder Regionendateien
-	\n\t* Neue Welt-Basiskarte mit weltweit allen größeren Straßen, Eisenbahen und größeren Flächen wie Wäldern 
+	\n\t* Neue Welt-Basiskarte mit weltweit allen größeren Straßen, Eisenbahnen und größeren Flächen wie Wäldern 
 	\n\t* Kartenlupenfunktion (langer Klick auf den +/- Knopf) - Hilfreich sowohl für Vektor wie auch Kachelkarten  
 	\n\t* Definiere/Bearbeite Online Kachelquelle (spezifiziere Ablaufdatum)
 	\n\t* Unterstützung von uhrzeitabhängigen Geschwindigkeitsbegrenzungen (Niederlande) 
-	\n\t* Schnellere Eingabe von suichadressen
-	\n\t* Bug fixes bei Navigation und Kartenanzeige
+	\n\t* Schnellere Eingabe von Suchadressen
+	\n\t* Fehlerbehebungen bei Navigation und Kartenanzeige
     </string>
     <string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
     <string name="local_index_tile_data_expire">Verfall (Minuten): %1$s</string>
