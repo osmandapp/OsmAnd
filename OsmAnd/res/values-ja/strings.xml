@@ -917,4 +917,15 @@ POIの更新は利用できません</string>
 	<string name="animate_route">シミュレーション開始</string>
 	<string name="left_side_navigation">左側通行に設定</string>
 	<string name="left_side_navigation_descr">車が道路を左側通行する国は選択してください</string>
-	</resources>
+	<string name="delete_target_point">経由点の削除</string>
+	<string name="target_point">経由点 %1$s</string>
+    <string name="intermediate_point">経由点 %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">最後の経由点として追加</string>
+    <string name="context_menu_item_first_intermediate_point">最初の経由点として追加</string>
+    <string name="add_as_last_destination_point">最後の経由点として追加</string>
+    <string name="add_as_first_destination_point">最初の経由点として追加</string>
+    <string name="intermediate_point_too_far">経由点 %1$s が最寄りの道路から遠すぎる位置にあります</string>
+    <string name="arrived_at_intermediate_point">経由点周辺に到着しました</string>
+    <string name="context_menu_item_intermediate_point">経由点を追加</string>
+    <string name="map_widget_intermediate_distance">経由点</string>
+    </resources>
