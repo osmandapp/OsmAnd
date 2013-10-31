@@ -80,18 +80,15 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		}
 		registerListPreference(settings.AUTO_FOLLOW_ROUTE, screen, entries, intValues);
 
-		// hide the brouter-service if not installed
+		// hide non-selectable routing-services
 		RoutingHelper routingHelper = getMyApplication().getRoutingHelper();
-		boolean hasBRouter = routingHelper != null && routingHelper.hasBRouter();
 		int nrouteservices = RouteService.values().length;
 		List<RouteService> routeServices = new ArrayList<RouteService>();
 		for( RouteService routeSrvc : RouteService.values() ) {
-			if ( RouteService.BROUTER == routeSrvc && !hasBRouter ) {
-				continue;
+			if ( routingHelper == null || routingHelper.isRoutingServiceSelectable( routeSrvc ) ) {
+				routeServices.add( routeSrvc );
 			}
-			routeServices.add( routeSrvc );
         }
-
 		entries = new String[routeServices.size()];
         RouteService[] rsValues = new RouteService[routeServices.size()];
 		for(int i=0; i<routeServices.size(); i++) {

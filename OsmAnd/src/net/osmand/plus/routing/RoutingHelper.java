@@ -1,14 +1,6 @@
 package net.osmand.plus.routing;
 
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
-
-import btools.routingapp.IBRouterService;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +59,7 @@ public class RoutingHelper {
 	private ApplicationMode mode;
 	private OsmandSettings settings;
 	
-	private RouteProvider provider = new RouteProvider();
+	private RouteProvider provider;
 	private VoiceRouter voiceRouter;
 
 	private boolean makeUturnWhenPossible = false;
@@ -75,9 +67,6 @@ public class RoutingHelper {
 	//private long wrongMovementDetected = 0;
 
 	private RouteCalculationProgressCallback progressRoute;
-
-	private IBRouterService brouterService;
-	private boolean hasBRouter; // if bindService gave true
 
 //	private ProgressBar progress;
 //	private Handler progressHandler;
@@ -91,29 +80,12 @@ public class RoutingHelper {
 		this.app = context;
 		settings = context.getSettings();
 		voiceRouter = new VoiceRouter(this, player);
-
-		// try bind to brouter service
-		BRouterServiceConnection conn = new BRouterServiceConnection();
-		Intent i = new Intent();
-		i.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
-		hasBRouter = app.bindService(i, conn, Context.BIND_AUTO_CREATE);
+        provider = new RouteProvider(context);
 	}
 
-	class BRouterServiceConnection implements ServiceConnection
-	{
-		public void onServiceConnected(ComponentName className, IBinder boundService) {
-			brouterService = IBRouterService.Stub.asInterface((IBinder) boundService);
-		}
-
-		public void onServiceDisconnected(ComponentName className) {
-			brouterService = null;
-		}
-	};
-
-	public boolean hasBRouter() {
-		return hasBRouter;
+	public boolean isRoutingServiceSelectable( RouteService service ) {
+		return provider.isRoutingServiceSelectable( service );
 	}
-
 
 	public boolean isFollowingMode() {
 		return isFollowingMode;
@@ -760,7 +732,7 @@ public class RoutingHelper {
 					msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime()) + ")";
 				}
 				showMessage(msg);
-			} else if (params.type != RouteService.OSMAND && params.type != RouteService.BROUTER && !settings.isInternetConnectionAvailable()) {
+			} else if ( provider.isOnlineService( params.type ) && !settings.isInternetConnectionAvailable()) {
 					showMessage(app.getString(R.string.error_calculating_route)
 						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route)); //$NON-NLS-1$
 			} else {
@@ -795,8 +767,6 @@ public class RoutingHelper {
 				params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 				params.mode = mode;
 				params.ctx = app;
-        params.brouterService = brouterService;
-
 				if(previousRoute == null && params.type == RouteService.OSMAND) {
 					params.calculationProgress = new RouteCalculationProgress();
 					updateProgress(params.calculationProgress);

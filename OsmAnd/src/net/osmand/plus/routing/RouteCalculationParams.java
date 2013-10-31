@@ -1,7 +1,5 @@
 package net.osmand.plus.routing;
 
-import btools.routingapp.IBRouterService;
-
 import java.util.List;
 
 import net.osmand.Location;
@@ -28,6 +26,4 @@ public class RouteCalculationParams {
 	public boolean leftSide;
 	public RouteCalculationProgress calculationProgress;
 	public boolean preciseRouting;
-
-	public IBRouterService brouterService;
 }

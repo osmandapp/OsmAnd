@@ -1,6 +1,11 @@
 package net.osmand.plus.routing;
 
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.os.Bundle;
 
 import btools.routingapp.IBRouterService;
@@ -67,6 +72,10 @@ import org.xmlpull.v1.XmlPullParserException;
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
+
+	// brouter service status
+	private IBRouterService brouterService;
+	private boolean hasBRouter; // if bindService gave true
 	
 	public enum RouteService {
 		OSMAND("OsmAnd (offline)"), YOURS("YOURS"),  ORS("OpenRouteService"), OSRM("OSRM (only car)"), BROUTER("BRouter (offline)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
@@ -79,7 +88,32 @@ public class RouteProvider {
 		}
 	}
 	
-	public RouteProvider(){
+	public RouteProvider(OsmandApplication context){
+
+		// try bind to brouter service
+		BRouterServiceConnection conn = new BRouterServiceConnection();
+		Intent i = new Intent();
+		i.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
+		hasBRouter = context.bindService(i, conn, Context.BIND_AUTO_CREATE);
+	}
+
+	// does the given service needs internet?
+	public boolean isOnlineService( RouteService service )
+	{
+		switch( service ) {
+			case OSMAND : return false;
+			case BROUTER : return false;
+			default: return true;
+		}
+	}
+
+	// is the given service valid for selection in the navigation-config menu?
+	public boolean isRoutingServiceSelectable( RouteService service )
+	{
+		switch( service ) {
+			case BROUTER : return hasBRouter;
+			default: return true;
+		}
 	}
 	
 	public static class GPXRouteParams {
@@ -340,6 +374,17 @@ public class RouteProvider {
 				params.ctx, params.leftSide, true);
 	}
 	
+	class BRouterServiceConnection implements ServiceConnection
+	{
+		public void onServiceConnected(ComponentName className, IBinder boundService) {
+			brouterService = IBRouterService.Stub.asInterface((IBinder) boundService);
+		}
+
+		public void onServiceDisconnected(ComponentName className) {
+			brouterService = null;
+		}
+	};
+
 	protected RouteCalculationResult findBROUTERRoute(RouteCalculationParams params) throws MalformedURLException, IOException,
 			ParserConfigurationException, FactoryConfigurationError, SAXException {
 
@@ -364,14 +409,14 @@ public class RouteProvider {
 
 		List<Location> res = new ArrayList<Location>();
 
-		if ( params.brouterService == null )
+		if ( brouterService == null )
 		{
-			return new RouteCalculationResult( "BRouter service is not installed" );
+			return new RouteCalculationResult( "BRouter service is not available" );
 		}
 
 		try
 		{
-			String kmlMessage = params.brouterService.getTrackFromParams(bpars);
+			String kmlMessage = brouterService.getTrackFromParams(bpars);
 			if ( kmlMessage == null ) kmlMessage = "no result from brouter";
 			if ( !kmlMessage.startsWith( "<" ) )
 			{
@@ -383,7 +428,7 @@ public class RouteProvider {
 			NodeList list = doc.getElementsByTagName("coordinates"); //$NON-NLS-1$
 			for(int i=0; i<list.getLength(); i++){
 				Node item = list.item(i);
-  				String str = item.getFirstChild().getNodeValue();
+				String str = item.getFirstChild().getNodeValue();
 				if(str == null){
 					continue;
 				}
@@ -406,7 +451,7 @@ public class RouteProvider {
 					st = next + 1;
 				}
 			}
-		  	if(list.getLength() == 0){
+			if(list.getLength() == 0){
 				if(doc.getChildNodes().getLength() == 1){
 					Node item = doc.getChildNodes().item(0);
 					return new RouteCalculationResult(item.getNodeValue());
