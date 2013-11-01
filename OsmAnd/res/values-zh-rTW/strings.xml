@@ -1603,4 +1603,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="auto_zoom_farthest">遠程</string>
     <string name="route_is_too_long">這條路線是可能太長，使得 OsmAnd 離線路線無法計算。
 	在平均離線路線兩點之間，可能相距 200km 以上。請新增一個或多個中途點以計算路線。</string>
-    </resources>
+    <string name="default_and">與</string>
+    <string name="default_or">或</string>
+	</resources>
