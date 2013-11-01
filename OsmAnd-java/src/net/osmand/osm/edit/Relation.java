@@ -6,8 +6,10 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.osmand.data.LatLon;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 
 public class Relation extends Entity {
 	
@@ -108,10 +110,37 @@ public class Relation extends Entity {
 		}
 	}
 	
+	public boolean isMultiPolygon() {
+		return "multipolygon".equals(getTag(OSMTagKey.TYPE));
+	}	
 
 	@Override
 	public LatLon getLatLon() {
-		return null;
+		if (isMultiPolygon()) {
+			// compute a centre to place the POI on.
+			// -- if we have a specific element dedicated as centre -> we just use that
+			// -- otherwise -> get nodes from all outer ways, and then compute centre
+			Map<Entity, String> members = getMemberEntities();
+			if (members == null) {
+				return null;
+			}
+			List<Node> allOuterNodes = new ArrayList<Node>();
+			for (Entry<Entity, String> entry : members.entrySet()) {
+				if (entry.getValue().equals("centre")) {
+					return entry.getKey().getLatLon();
+				} else {
+					if (entry.getValue().equals("outer")) {
+						Entity en = entry.getKey();
+						if (en instanceof Way) {
+							allOuterNodes.addAll(((Way) en).getNodes());
+						}
+					}
+				}
+			}
+			return OsmMapUtils.getWeightCenterForNodes(allOuterNodes);
+		} else {
+			return null;
+		}
 	}
 
 }
