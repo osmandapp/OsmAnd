@@ -892,14 +892,15 @@
   <string name="route_kr">Tieni la destra e prosegui</string>
   <string name="save_route_as_gpx">Salva il percorso come file GPX</string>
   <string name="asap">ASAP</string>
-  <string name="tip_recent_changes_0_8_1_t">"Novità della v. 0.8.1:
-\n/t* Rotte più precise (un po\' più lento)
-\n/t* Ricalcolo del percorso intelligente e veloce
-\n/t* Direzione in base alle corsie
-\n/t* Informazioni su dossi rallentatori, autovelox e limiti di velocità
-\n/t* Migliorata la voce guida sulle autostrade
-\n/t* Plugin per i parcheggi (\'Dov\'è la mia auto?\')
-\n/t* Abilita/disabilita il widget per i monitoraggio "</string>
+  <string name="tip_recent_changes_0_8_1_t">Cambiamenti nella 0.8.1:
+		\n/t* Rotte più precise (un po\' più lento)
+		\n/t* Ricalcolo del percorso intelligente e veloce
+		\n/t* Direzione in base alle corsie
+		\n/t* Informazioni su dossi rallentatori, autovelox e limiti di velocità
+		\n/t* Migliorata la voce guida sulle autostrade
+		\n/t* Plugin per i parcheggi (\'Dov\'è la mia auto?\')
+		\n/t* Abilita/disabilita il widget per i monitoraggio
+	</string>
   <string name="gpxup_public">Pubblico</string>
   <string name="gpxup_identifiable">Identificabile</string>
   <string name="gpxup_trackable">Tracciabile</string>
@@ -1569,8 +1570,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="about_settings_descr">Informazioni versione, licenze, membri del progetto</string>
     <string name="tips_and_tricks">Suggerimenti</string>
     <string name="tip_map_styles">Stili mappa</string>
-	<string name="tip_map_styles_t">OsmAnd supporta la visualizzazione delle mappe vettoriali in differenti stili per adattrsi alle vostre esigenze:↵
-→→\n\t* Diversi dai  preimpostati bilanciati stili della mappa, li trovi sotto \'Menu\' -&gt; \'Configura schermo\' -&gt; \'Stile Mappa\' scegli per esempio↵
+	<string name="tip_map_styles_t">OsmAnd supporta la visualizzazione delle mappe vettoriali in differenti stili per adattarsi alle vostre esigenze:↵
+→→\n\nDiversi dai  preimpostati bilanciati stili della mappa, li trovi sotto \'Menu\' -&gt; \'Configura schermo\' -&gt; \'Stile Mappa\' scegli per esempio↵
 →→\n\t* The \'Touring view\' stile: contiene le più dettagliate informazioni possibile per viaggiare e per visitare, incluse le ottimizzazioni per i guidatori professionali (strade contrasto maggiormente distinguibile), opzione per l\'escursionismo Alpino (scala SAC), itinerari ciclistici, simboli per escursionismo, etc.↵
 →→\n\t* \'Alto contrasto strade \'C mostra le strade con una luminosità dei colori molto accentuata per le situazioni di cattiva illuminazione↵
 →→\n\t* \'Inverno e sci\' crea una vista del paesaggio invernale (coperto da neve), e visone globale delle piste da sci e degli impianti di risalita (in abbinata con \'World ski\' download mappa)↵
@@ -1589,7 +1590,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="auto_zoom_none">No zoom automatico</string>
     <string name="auto_zoom_close">Al primo piano</string>
     <string name="auto_zoom_far">Al medio raggio</string>
-    <string name="auto_zoom_farthest">Al lungo raggio</string>
+    <string name="auto_zoom_farthest">A lungo raggio</string>
     <string name="default_and">e</string>
     <string name="default_or">o</string>
 	</resources>
