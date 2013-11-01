@@ -1272,7 +1272,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 		final OsmAndLocationProvider loc = app.getLocationProvider();
-		if (app.getTargetPointsHelper().getPointToNavigate() != null) {
+		if (app.getTargetPointsHelper().getPointToNavigate() != null || loc.getLocationSimulation().isRouteAnimating()) {
 			
 			optionsMenuHelper.item(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off
 					: R.string.animate_route).icons(R.drawable.ic_action_play_dark, R.drawable.ic_action_play_light ) 
