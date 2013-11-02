@@ -197,7 +197,7 @@
 	<string name="front">أمام</string>
 	<string name="tip_map_styles">أنماط الخريطة</string>
 	<string name="about_version">الإصدار :</string>
-    <string name="about_settings">عنْ التّطبيق</string>
+    <string name="about_settings">عنْ التطبيق</string>
     <string name="about_settings_descr">معلومات النسخة، والتراخيص، أعضاء المشروع</string>
     <string name="tips_and_tricks">نصائح</string>
     <string name="edit_tilesource_maxzoom">التّكبير الأقصى</string>
@@ -600,7 +600,7 @@
 	<string name="rendering_out_of_memory">ذاكرة تشغيل غير كافية لعرض المنطقة المختارة</string>
 	<string name="offline_edition">التحرير دون اتصال</string>
 	<string name="offline_edition_descr">استخدام التحرير دون اتصال دائماً</string>
-	<string name="av_camera_focus_infinity">تعيين التركيز على اللانهاية</string>
+	<string name="av_camera_focus_infinity">تعيين التركيز إلى أقصى حد</string>
 	<string name="av_camera_focus_macro">وضع التركيز الكلي (عن قرب)</string>
 	<string name="av_camera_focus_auto">تركيز تلقائي</string>
 	<string name="av_camera_focus_hiperfocal">التركيز البؤري</string>
@@ -673,4 +673,5 @@
 	<string name="route_is_too_long">من المحتمل أن هذا المسار طويل جدا بأن يحسب باستخدام راسم OsmAnd المحلي.
 	في المتوسط المسارات المحلية يمكن أن تكون في نطاق 200 كيلو متر. يرجى إضافة نقطة وسطية أو أكثر حتى يحتسب المسار.</string>
 	<string name="audionotes_location_not_defined">لم يعين المكان المرتبط بالملاحظة. استخدم \"استخدم المكان …\" لتعيين ملاحظة لمكان محدد</string>
-    </resources>
+    <string name="use_short_object_names_descr">استخدم أسماء عناصر صغيرة في نمط التّصفح اللمسي</string>
+	</resources>
