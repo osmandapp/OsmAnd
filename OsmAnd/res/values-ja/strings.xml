@@ -10,7 +10,7 @@
 \n\t\'お気に入り\'内で長押しすることで任意のお気に入り地点へナビゲート
 することができます</string>
 
-     <string name="installing_new_resources">新しいデータを解凍中…</string>
+     <string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -34,9 +34,9 @@
      <string name="switch_to_vector_map_to_see">マップを見るには
 メニュー(ビュー定義 -&gt; マップソース… -&gt; オフラインベクターマップ)
 でオフラインベクターマップに切り替えられます。</string>
-     <string name="binary_map_download_success">成功。
-メニュー(ビュー定義 -&gt; マップソース… -&gt; オフラインベクターマップ)で
-オフラインベクターマップに切り替えられます。</string>
+     <string name="binary_map_download_success">ダウンロード完了。
+		\n\t\n\t有効にするには「メニュー」→「ビュー定義」→「マップソース…」→「オフラインベクターマップ」としてください。
+	</string>
      <string name="choose_audio_stream">音声案内ストリーム</string>
      <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを
 選んでください(システム構成によります)</string>
