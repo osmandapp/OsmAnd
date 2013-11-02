@@ -610,7 +610,7 @@ POIの更新は利用できません</string>
 <string name="search_activity">検索</string>
 <string name="searchpoi_activity">POIを選択</string>
 <string name="search_POI_level_btn">もっと探す</string>
-<string name="incremental_search_city">市町村内を漸次探す。都市/郵便番号を探すには、
+<string name="incremental_search_city">市町村内を順次に検索。都市/郵便番号を探すには、
 先頭3文字以上を入力してください</string>
 <string name="incremental_search_street">都市を漸次探す</string>
 <string name="incremental_search_building">建物を漸次探す</string>
@@ -928,4 +928,29 @@ POIの更新は利用できません</string>
     <string name="arrived_at_intermediate_point">経由点周辺に到着しました</string>
     <string name="context_menu_item_intermediate_point">経由点を追加</string>
     <string name="map_widget_intermediate_distance">経由点</string>
+    <string name="monitoring_control_stop">停止</string>
+    <string name="download_roads_only_item">道路のみ</string>
+    <string name="download_roads_only_maps">道路のみの地図</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">境界線を隠す</string>
+	<string name="osmodroid_plugin_old_ver_not_supported">OsMoDroidプラグインは古いバージョンなので、更新する必要があります。</string>
+    <string name="osmodroid_plugin_description">OsMoDroidプラグインはオンライン追跡機能のOsModroidアプリケーションのOsmAnd用に拡張したものです。サービスに関する情報はhttp://esya.ruで参照できます。</string>
+    <string name="osmodroid_plugin_name">OsMoDroidプラグイン</string>
+	<string name="map_widget_max_speed">制限速度</string>
+    <string name="monitoring_control_start">GPX</string>
+    <string name="no_buildings_found">該当する建物は見つかりませんでした。</string>
+    <string name="search_villages_and_postcodes">市町村検索/郵便番号</string>
+	<string name="rendering_attr_showRoadMaps_description">道路のみの地図を表示するときに選択します。</string>
+	<string name="rendering_attr_showRoadMaps_name">道路のみの地図</string>
+    <string name="safe_mode_description">セーフモード(遅いAndroidの代わりにネイティブコード)でアプリケーションを実行します。</string>
+    <string name="safe_mode">セーフモード</string>
+    <string name="native_library_not_running">アプリケーションでは、セーフモードで実行されています。(設定で無効されています)</string>
+    <string name="background_service_is_enabled_question">OsmAndのスリープモードサービス(スリープ状態での実行)がオンになっています。オフにしますか？</string>
+    <string name="zxing_barcode_scanner_not_found">ZXingバーコードスキャナアプリケーションがインストールされていません。マーケットで検索しますか？</string>
+	<string name="rendering_attr_roadColors_description">道路の配色を選択します:</string>
+	<string name="rendering_attr_roadColors_name">道路の配色</string>
+    <string name="map_widget_show_destination_arrow">目的地の方向を表示</string>
+    <string name="enable_plugin_monitoring_services">位置記録サービスを(GPX記録、オンライン追跡)を使用するようにトラッキングプラグインを有効化</string>
+    <string name="non_optimal_route_calculation">長距離向けに非最適化ルートで計算(ルート設定)します。</string>
+	<string name="gps_not_available">設定でGPSを有効にしてください</string>
     </resources>
