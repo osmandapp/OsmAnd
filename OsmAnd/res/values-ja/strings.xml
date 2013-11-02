@@ -65,7 +65,7 @@
 利用できません</string>
      <string name="install_more">インストールを続ける…</string>
 
-     <string name="tip_update_index">オフラインデータの更新</string>
+     <string name="tip_update_index">オフラインマップの更新</string>
      <string name="tip_update_index_t">\t最新のマップデータを持っていることは
 とても重要です。OsmAnd は利用できるオフラインデータの更新をチェックできる
 ダウンロードマネージャを提供しています。
@@ -175,7 +175,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
 次のWebブラウザ用リンク %1$s、もしくはandroidインテントリンク%2$sを参照</string>
      <string name="send_location">位置を送信</string>
      <string name="context_menu_item_share_location">位置をシェア</string>
-     <string name="add_waypoint_dialog_added">ウェイポイント \'\'{0}\'\'
+     <string name="add_waypoint_dialog_added">GPX ウェイポイント \'\'{0}\'\'
 を追加しました</string>
      <string name="add_waypoint_dialog_title">記録されたGPXトラックにウェイポイントを追加</string>
      <string name="context_menu_item_add_waypoint">GPX ウェイポイントを追加</string>
@@ -413,11 +413,7 @@ MB)をダウンロードしますか?</string>
      <string name="route_head">前方</string>
      <string name="first_time_continue">続ける</string>
      <string name="first_time_download">地域をダウンロード</string>
-     <string name="first_time_msg">OsmAndを選んでくれてありがとうございます。
-\nアプリケーションの全ての機能を使うには地域のオフラインデータが必要です、
-、これはダウンロード(設定 -&gt; データ) または自分で準備することができます。
-その後で、あなたは住所で検索したり、POIを検索したり、交通機関を検索したり
-することができます。</string>
+     <string name="first_time_msg">OsmAndを使ってくれてありがとうございます。アプリケーションの全機能を使うには、地域のオフラインデータダウンロード (設定 → データ) が必要です。その後で、地図表示、住所検索、POI 検索、公共交通機関検索ができます。</string>
      <string name="search_poi_location">シグナルを探査中…</string>
      <string name="search_near_map">前回のマップ位置近くを検索</string>
      <string name="search_nearby">近くを検索</string>
@@ -731,15 +727,16 @@ POIの更新は利用できません</string>
     <string name="about_settings_descr">バージョン情報、ランセンス、プロジェクトメンバー</string>
     <string name="tips_and_tricks">チップス</string>
     <string name="tip_recent_changes_1_6_t">1.6での変更点:
-    \n\t* 完全に透明な背景のサポート
-    \n\t* フルHDデバイスのサポート
-    \n\t* マップビューから地域の直接ダウンロードとその概要を確認可能に
-    \n\t* 特定の国のためにSRTMファイルのダウンロードを可能に  
-    \n\t* 主要道路、森林、そして線路の完全に新しい世界地図
-    \n\t* マップ拡大鏡（ズームボタン長押し。ラスター地図利用時に便利）
-    \n\t* オンラインタイルソースを定義/編集（有効期限を指定）
-    \n\t* 住所入力の高速化
-    \n\t* ルーティングとレンダリングのバグの修正
+	\n\t* フルHDデバイスのサポート
+	\n\t* 完全に透明な背景のサポート
+	\n\t* マップビューから地域の直接ダウンロードとその概要を確認可能に
+	\n\t* 特定の国のためにSRTMファイルのダウンロードを可能に
+	\n\t* 主要道路、線路、森林のような主要エリアを収録した新しい基本世界地図
+	\n\t* マップ拡大鏡（ズームボタン長押し。ラスター地図利用時に便利）
+	\n\t* カスタムオンラインタイルソースの定義/編集（有効期限を指定）
+	\n\t* 時間による制限速度変化をサポート（オランダ）
+	\n\t* 住所検索の入力高速化
+	\n\t* ルーティングとレンダリングのバグの修正
     </string>
     <string name="local_index_tile_data_zooms">ズームダウンロード中: %1$s</string>
     <string name="local_index_tile_data_expire">有効期限 (分): %1$s</string>
@@ -780,7 +777,7 @@ POIの更新は利用できません</string>
     <string name="context_menu_item_directions_to">ここへ行く</string>
     <string name="context_menu_item_directions_from">ここから出発</string>
     <string name="route_descr_map_location">マップ: </string>
-    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="route_descr_lat_lon">緯 %1$.3f, 経 %2$.3f</string>
     <string name="route_descr_current_location">現在位置</string>
     <string name="route_to">行き先：</string>
     <string name="route_via">経由：</string>
