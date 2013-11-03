@@ -17,7 +17,7 @@ Functionality
  * Optional lane guidance, street name display, and estimated time of arrival
  * Supports intermediate points on your itinerary
  * Automatic re-routing whenever you deviate from the route
- * Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates
+ * Search for places by address, by type (e.g. restaurant, hotel, gas station, museum), or by geographical coordinates
 
 #### Map Viewing
  * Display your position and orientation on the map
@@ -38,7 +38,7 @@ Functionality
  * Compact offline vector maps
  * Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only)
  * Also supports online or cached tile maps
- 
+
 #### Safety Features
  * Optional automated day/night view switching
  * Optional speed limit display, with reminder if you exceed it
@@ -59,7 +59,7 @@ Functionality
  * Add POIs and directly upload them to OSM (or later if offline)
  * Optional trip recording also in background mode (while device is in sleep mode)
 
-<p>OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on osmand.net. </p>
+<p>OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on http://osmand.net. </p>
 
 
 ####  Approximate map coverage and quality:
