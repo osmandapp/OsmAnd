@@ -12,6 +12,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapExplorer;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
@@ -190,7 +191,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		paintCenter.setAntiAlias(true);
 		
 		paintImg = new Paint();
-//		paintImg.setFilterBitmap(true);
+		paintImg.setFilterBitmap(true);
 //		paintImg.setDither(true);
 
 		setClickable(true);
@@ -395,14 +396,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			calc.setRotate(bufferImgLoc.getRotate());
 			
 			int cz = getZoom();
-			QuadPoint lt = bufferImgLoc.getLeftTopTile(cz);
-			QuadPoint rb = bufferImgLoc.getRightBottomTile(cz);
+			QuadPointDouble lt = bufferImgLoc.getLeftTopTile(cz);
+			QuadPointDouble rb = bufferImgLoc.getRightBottomTile(cz);
 			final float x1 = calc.getPixXFromTile(lt.x, lt.y, cz);
 			final float x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
 			final float y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
 			final float y2 = calc.getPixYFromTile(rb.x, rb.y, cz);
 			if(!bufferBitmap.isRecycled()){
-				canvas.drawBitmap(bufferBitmap, null, new RectF(x1, y1, x2, y2), paintImg);
+				RectF rct = new RectF(x1, y1, x2, y2);
+				canvas.drawBitmap(bufferBitmap, null, rct, paintImg);
 			}
 			canvas.rotate(-rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 		}

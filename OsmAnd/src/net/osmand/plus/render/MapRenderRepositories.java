@@ -32,7 +32,7 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
@@ -579,7 +579,7 @@ public class MapRenderRepositories {
 				currentRenderingContext.shadowRenderingMode = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 				currentRenderingContext.shadowRenderingColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_SHADOW_COLOR);
 			}
-			final QuadPoint lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
+			final QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
 //			LatLon ltn = requestedBox.getLeftTopLatLon();
 			final float mapDensity = (float) Math.pow(2, requestedBox.getZoomScale());
 			final float tileDivisor = (float) MapUtils.getPowZoom(31 - requestedBox.getZoom() -

@@ -26,10 +26,10 @@ public class RotatedTileBox {
 	private double oyTile;
 	private QuadRect tileBounds;
 	private QuadRect latLonBounds;
-	private QuadPoint tileLT;
-	private QuadPoint tileRT;
-	private QuadPoint tileRB;
-	private QuadPoint tileLB;
+	private QuadPointDouble tileLT;
+	private QuadPointDouble tileRT;
+	private QuadPointDouble tileRB;
+	private QuadPointDouble tileLB;
 
 
 	private RotatedTileBox(){
@@ -59,28 +59,11 @@ public class RotatedTileBox {
 		if (r.tileBounds != null && r.latLonBounds != null) {
 			tileBounds = new QuadRect(r.tileBounds);
 			latLonBounds = new QuadRect(r.latLonBounds);
-			tileLT = new QuadPoint(r.tileLT);
-			tileRT = new QuadPoint(r.tileRT);
-			tileRB = new QuadPoint(r.tileRB);
-			tileLB = new QuadPoint(r.tileLB);
+			tileLT = new QuadPointDouble(r.tileLT);
+			tileRT = new QuadPointDouble(r.tileRT);
+			tileRB = new QuadPointDouble(r.tileRB);
+			tileLB = new QuadPointDouble(r.tileLB);
 		}
-	}
-
-	private void init(int pixWidth, int pixHeight, float centerX, float centerY, double lat, double lon,
-	                  int zoom, float zoomScale, float rotate, float density) {
-		this.pixWidth = pixWidth;
-		this.pixHeight = pixHeight;
-		this.lat = lat;
-		this.lon = lon;
-		this.zoom = zoom;
-		this.zoomScale = zoomScale;
-		this.rotate = rotate;
-		this.density = density;
-		cx = (int) (pixWidth * centerX);
-		cy = (int) (pixHeight * centerY);
-		// derived
-		calculateDerivedFields();
-
 	}
 
 	public void calculateDerivedFields() {
@@ -180,10 +163,10 @@ public class RotatedTileBox {
 		double y2 = getTileYFromPixel(pixWidth, 0);
 		double y3 = getTileYFromPixel(pixWidth, pixHeight);
 		double y4 = getTileYFromPixel(0, pixHeight);
-		tileLT = new QuadPoint((float)x1, (float)y1);
-		tileRT = new QuadPoint((float)x2, (float)y2);
-		tileRB = new QuadPoint((float)x3, (float)y3);
-		tileLB = new QuadPoint((float)x4, (float)y4);
+		tileLT = new QuadPointDouble(x1, y1);
+		tileRT = new QuadPointDouble(x2, y2);
+		tileRB = new QuadPointDouble(x3, y3);
+		tileLB = new QuadPointDouble(x4, y4);
 		double l = Math.min(Math.min(x1, x2), Math.min(x3, x4)) ;
 		double r = Math.max(Math.max(x1, x2), Math.max(x3, x4)) ;
 		double t = Math.min(Math.min(y1, y2), Math.min(y3, y4)) ;
@@ -217,15 +200,15 @@ public class RotatedTileBox {
 
 
 	public float getPixXFromLatLon(double latitude, double longitude) {
-		float xTile = (float) MapUtils.getTileNumberX(zoom, longitude);
-		float yTile = (float) MapUtils.getTileNumberY(zoom, latitude);
+		double xTile = MapUtils.getTileNumberX(zoom, longitude);
+		double yTile = MapUtils.getTileNumberY(zoom, latitude);
 		return getPixXFromTile(xTile, yTile);
 	}
 	
 	public float getPixXFromTile(double tileX, double tileY, float zoom) {
 		double pw = MapUtils.getPowZoom(zoom - this.zoom);
-		float xTile = (float) (tileX / pw);
-		float yTile = (float) (tileY / pw);
+		double xTile = tileX / pw;
+		double yTile = tileY / pw;
 		return getPixXFromTile(xTile, yTile);
 	}
 
@@ -244,19 +227,19 @@ public class RotatedTileBox {
 
 
 	public float getPixYFromLatLon(double latitude, double longitude) {
-		float xTile = (float) MapUtils.getTileNumberX(zoom, longitude);
-		float yTile = (float) MapUtils.getTileNumberY(zoom, latitude);
+		double  xTile = MapUtils.getTileNumberX(zoom, longitude);
+		double  yTile = MapUtils.getTileNumberY(zoom, latitude);
 		return getPixYFromTile(xTile, yTile);
 	}
 	
 	public float getPixYFromTile(double tileX, double tileY, float zoom) {
 		double pw = MapUtils.getPowZoom(zoom - this.zoom);
-		float xTile = (float) (tileX / pw);
-		float yTile = (float) (tileY / pw);
+		double  xTile = (tileX / pw);
+		double  yTile = (tileY / pw);
 		return getPixYFromTile(xTile, yTile);
 	}
 
-	protected float getPixYFromTile(float xTile, float yTile) {
+	protected float getPixYFromTile(double  xTile, double  yTile) {
 		final double dTileX = xTile - oxTile;
 		final double dTileY = yTile - oyTile;
 		double rotY;
@@ -375,16 +358,16 @@ public class RotatedTileBox {
 
 	}
 	
-	public QuadPoint getLeftTopTile(float zoom) {
+	public QuadPointDouble getLeftTopTile(float zoom) {
 		checkTileRectangleCalculated();
-		return new QuadPoint((float) (tileLT.x *  MapUtils.getPowZoom(zoom - this.zoom)),
-				(float) (tileLT.y *  MapUtils.getPowZoom(zoom - this.zoom)));
+		return new QuadPointDouble((tileLT.x *  MapUtils.getPowZoom(zoom - this.zoom)),
+				(tileLT.y *  MapUtils.getPowZoom(zoom - this.zoom)));
 	}
 	
-	public QuadPoint getRightBottomTile(float zoom) {
+	public QuadPointDouble getRightBottomTile(float zoom) {
 		checkTileRectangleCalculated();
-		return new QuadPoint((float) (tileRB.x *  MapUtils.getPowZoom(zoom - this.zoom)),
-				(float) (tileRB.y *  MapUtils.getPowZoom(zoom - this.zoom)));
+		return new QuadPointDouble((tileRB.x *  MapUtils.getPowZoom(zoom - this.zoom)),
+				(tileRB.y *  MapUtils.getPowZoom(zoom - this.zoom)));
 	}
 	
 
@@ -457,6 +440,12 @@ public class RotatedTileBox {
 	}
 
 	public boolean containsTilePoint(QuadPoint qp) {
+		double tx = getPixXFromTile(qp.x, qp.y);
+		double ty = getPixYFromTile(qp.x, qp.y);
+		return tx >= 0 && tx <= pixWidth && ty >= 0 && ty <= pixHeight;
+	}
+	
+	public boolean containsTilePoint(QuadPointDouble qp) {
 		double tx = getPixXFromTile(qp.x, qp.y);
 		double ty = getPixYFromTile(qp.x, qp.y);
 		return tx >= 0 && tx <= pixWidth && ty >= 0 && ty <= pixHeight;

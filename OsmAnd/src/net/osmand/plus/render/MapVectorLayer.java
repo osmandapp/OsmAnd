@@ -1,6 +1,6 @@
 package net.osmand.plus.render;
 
-import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.BaseMapLayer;
@@ -111,8 +111,8 @@ public class MapVectorLayer extends BaseMapLayer {
 			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 			final RotatedTileBox calc = currentViewport.copy();
 			calc.setRotate(bmpLoc.getRotate());
-			QuadPoint lt = bmpLoc.getLeftTopTile(cz);
-			QuadPoint rb = bmpLoc.getRightBottomTile(cz);
+			QuadPointDouble lt = bmpLoc.getLeftTopTile(cz);
+			QuadPointDouble rb = bmpLoc.getRightBottomTile(cz);
 			final float x1 = calc.getPixXFromTile(lt.x, lt.y, cz);
 			final float x2 = calc.getPixXFromTile(rb.x, rb.y, cz);
 			final float y1 = calc.getPixYFromTile(lt.x, lt.y, cz);
