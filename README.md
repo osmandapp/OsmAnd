@@ -17,7 +17,7 @@ Functionality
  * Optional lane guidance, street name display, and estimated time of arrival
  * Supports intermediate points on your itinerary
  * Automatic re-routing whenever you deviate from the route
- * Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates
+ * Search for places by address, by type (e.g. restaurant, hotel, gas station, museum), or by geographical coordinates
 
 #### Map Viewing
  * Display your position and orientation on the map
