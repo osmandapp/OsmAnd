@@ -38,7 +38,7 @@ Functionality
  * Compact offline vector maps
  * Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only)
  * Also supports online or cached tile maps
- 
+
 #### Safety Features
  * Optional automated day/night view switching
  * Optional speed limit display, with reminder if you exceed it
