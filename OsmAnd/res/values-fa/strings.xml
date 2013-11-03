@@ -1592,4 +1592,6 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="route_distance_settings">فاسله نمایش نقشه</string>
     <string name="map_magnifier">ذره بین نقشه</string>
     <string name="base_world_map">نقشه پایه جهان</string>
+	<string name="default_and">کپی</string>
+    <string name="default_or">کپی</string>
 	</resources>
