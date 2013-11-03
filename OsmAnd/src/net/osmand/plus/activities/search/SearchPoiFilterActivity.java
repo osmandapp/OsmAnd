@@ -60,7 +60,9 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 		});
 		
 		PoiFiltersHelper poiFilters = getApp().getPoiFilters();
-		List<PoiFilter> filters = new ArrayList<PoiFilter>(poiFilters.getUserDefinedPoiFilters()) ;
+		List<PoiFilter> filters = new ArrayList<PoiFilter>() ;
+		filters.addAll(poiFilters.getTopStandardFilters());
+		filters.addAll(poiFilters.getUserDefinedPoiFilters());
 		filters.addAll(poiFilters.getOsmDefinedPoiFilters());
 		filters.add(poiFilters.getNameFinderPOIFilter());
 		setListAdapter(new AmenityAdapter(filters));

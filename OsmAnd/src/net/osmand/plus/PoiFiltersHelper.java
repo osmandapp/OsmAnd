@@ -19,6 +19,7 @@ public class PoiFiltersHelper {
 	private final ClientContext application;
 	
 	private NameFinderPoiFilter nameFinderPOIFilter;
+	private List<PoiFilter> cacheTopStandardFilters;
 	private List<PoiFilter> cacheUserDefinedFilters;
 	private List<PoiFilter> cacheOsmDefinedFilters;
 	
@@ -47,6 +48,18 @@ public class PoiFiltersHelper {
 	}
 	
 	
+	private PoiFilter findPoiFilter(String filterId, List<PoiFilter>... collections) {
+		for(List<PoiFilter> c : collections) {
+			for(PoiFilter f : c) {
+				if(f.getFilterId().equals(filterId)){
+					return f;
+				}
+			}
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public PoiFilter getFilterById(String filterId){
 		if(filterId == null){
 			return null;
@@ -54,22 +67,7 @@ public class PoiFiltersHelper {
 		if(filterId.equals(NameFinderPoiFilter.FILTER_ID)){
 			return getNameFinderPOIFilter();
 		}
-		if(filterId.startsWith(PoiFilter.USER_PREFIX)){
-			List<PoiFilter> filters = getUserDefinedPoiFilters();
-			for(PoiFilter f : filters){
-				if(f.getFilterId().equals(filterId)){
-					return f;
-				}
-			}
-		} else if(filterId.startsWith(PoiFilter.STD_PREFIX)){
-			List<PoiFilter> filters = getOsmDefinedPoiFilters();
-			for(PoiFilter f : filters){
-				if(f.getFilterId().equals(filterId)){
-					return f;
-				}
-			}
-		}
-		return null;
+		return findPoiFilter(filterId, getUserDefinedPoiFilters(), getTopStandardFilters(), getOsmDefinedPoiFilters());
 	}
 	
 	private void putAll(Map<AmenityType, LinkedHashSet<String>> types, AmenityType tp){
@@ -171,12 +169,6 @@ public class PoiFiltersHelper {
 	public List<PoiFilter> getUserDefinedPoiFilters(){
 		if(cacheUserDefinedFilters == null){
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
-			PoiFilter filter = new PoiFilter(application.getString(R.string.poi_filter_custom_filter), PoiFilter.CUSTOM_FILTER_ID, 
-					new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
-			filter.setStandardFilter(true);
-			cacheUserDefinedFilters.add(filter);
-			filter = new SearchByNameFilter(application);
-			cacheUserDefinedFilters.add(filter);
 			PoiFilterDbHelper helper = openDbHelper();
 			List<PoiFilter> userDefined = helper.getFilters(helper.getReadableDatabase());
 			final Collator instance = Collator.getInstance();
@@ -190,6 +182,21 @@ public class PoiFiltersHelper {
 			helper.close();
 		}
 		return Collections.unmodifiableList(cacheUserDefinedFilters);
+	}
+	
+	public List<PoiFilter> getTopStandardFilters() {
+		if (cacheTopStandardFilters == null) {
+			cacheTopStandardFilters = new ArrayList<PoiFilter>();
+			PoiFilter filter = new PoiFilter(application.getString(R.string.poi_filter_custom_filter),
+					PoiFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
+			filter.setStandardFilter(true);
+			cacheTopStandardFilters.add(filter);
+			cacheTopStandardFilters.add(new PoiFilter(null, application));
+			filter = new SearchByNameFilter(application);
+			filter.setStandardFilter(true);
+			cacheTopStandardFilters.add(filter);
+		}
+		return Collections.unmodifiableList(cacheTopStandardFilters);
 	}
 	
 	public static String getOsmDefinedFilterId(AmenityType t){
@@ -216,7 +223,6 @@ public class PoiFiltersHelper {
 					return instance.compare(object1.getName(), object2.getName());
 				}
 			});
-			cacheOsmDefinedFilters.add(0, new PoiFilter(null, application));
 		}
 		return Collections.unmodifiableList(cacheOsmDefinedFilters);
 	}
@@ -227,7 +233,8 @@ public class PoiFiltersHelper {
 	
 	public boolean removePoiFilter(PoiFilter filter){
 		if(filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID) || 
-				filter.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)){
+				filter.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID) ||
+				filter.getFilterId().startsWith(PoiFilter.STD_PREFIX)){
 			return false;
 		}
 		PoiFilterDbHelper helper = openDbHelper();
@@ -259,7 +266,7 @@ public class PoiFiltersHelper {
 	
 	public boolean editPoiFilter(PoiFilter filter) {
 		if (filter.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID) || 
-				filter.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)) {
+				filter.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID) || filter.getFilterId().startsWith(PoiFilter.STD_PREFIX)) {
 			return false;
 		}
 		PoiFilterDbHelper helper = openDbHelper();

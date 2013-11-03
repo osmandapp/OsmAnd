@@ -544,18 +544,18 @@ public class MapActivityLayers {
 			is.icon(RenderingIcons.getBigIconResourceId("null"));
 		}
 		is.reg();
+		// 2nd custom
+		adapter.item(getString(R.string.poi_filter_custom_filter)).icon(RenderingIcons.getBigIconResourceId("user_defined")).reg();
 		
 		for (PoiFilter f : poiFilters.getUserDefinedPoiFilters()) {
-			if(!f.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)){
-				Item it = adapter.item(f.getName());
-				if(RenderingIcons.containsBigIcon(f.getSimplifiedId())) {
-					it.icon(RenderingIcons.getBigIconResourceId(f.getSimplifiedId()));
-				} else {
-					it.icon(RenderingIcons.getBigIconResourceId("user_defined"));
-				}
-				it.reg();
-				userDefined.add(f);
+			Item it = adapter.item(f.getName());
+			if (RenderingIcons.containsBigIcon(f.getSimplifiedId())) {
+				it.icon(RenderingIcons.getBigIconResourceId(f.getSimplifiedId()));
+			} else {
+				it.icon(RenderingIcons.getBigIconResourceId("user_defined"));
 			}
+			it.reg();
+			userDefined.add(f);
 		}
 		for(AmenityType t : AmenityType.values()){
 			Item it = adapter.item(OsmAndFormatter.toPublicString(t, activity.getMyApplication()));
@@ -577,15 +577,8 @@ public class MapActivityLayers {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				String filterId;
-				if (which == 0) {
-					filterId = PoiFiltersHelper.getOsmDefinedFilterId(null);
-				} else if (which <= userDefined.size()) {
-					filterId = userDefined.get(which - 1).getFilterId();
-				} else {
-					filterId = PoiFiltersHelper.getOsmDefinedFilterId(AmenityType.values()[which - userDefined.size() - 1]);
-				}
-				if(filterId.equals(PoiFilter.CUSTOM_FILTER_ID)){
+				if(which == 1){
+					String filterId = PoiFilter.CUSTOM_FILTER_ID; 
 					getApplication().getSettings().setPoiFilterForMap(filterId);
 					Intent newIntent = new Intent(activity, EditPOIFilterActivity.class);
 					newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, filterId);
@@ -593,9 +586,17 @@ public class MapActivityLayers {
 					newIntent.putExtra(EditPOIFilterActivity.SEARCH_LON, mapView.getLongitude());
 					activity.startActivity(newIntent);
 				} else {
+					String filterId;
+					if (which == 0) {
+						filterId = PoiFiltersHelper.getOsmDefinedFilterId(null);
+					} else if (which <= userDefined.size()) {
+						filterId = userDefined.get(which - 2).getFilterId();
+					} else {
+						filterId = PoiFiltersHelper.getOsmDefinedFilterId(AmenityType.values()[which - userDefined.size() - 2]);
+					}
 					getApplication().getSettings().setPoiFilterForMap(filterId);
 					PoiFilter f = poiFilters.getFilterById(filterId);
-					if(f != null){
+					if (f != null) {
 						f.clearNameFilter();
 					}
 					poiMapLayer.setFilter(f);
