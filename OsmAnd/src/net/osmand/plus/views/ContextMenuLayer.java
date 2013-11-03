@@ -136,6 +136,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					// special case relayout after on draw method
 					layoutText();
 					view.refreshMap();
+				} else if (c == 1) {
+					// make 2 line description
+					String des = textView.getText() + "\n ";
+					textView.setText(des);
+					layoutText();
+					view.refreshMap();
 				}
 			}
 		}
@@ -163,11 +169,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						latLon.getLatitude(), latLon.getLongitude());
 			}
 			textView.setText(description);
-			if(textView.getLineCount() == 1) {
-				// make 2 line description
-				description +="\n ";
-				textView.setText(description);
-			}
 		} else {
 			textView.setText(""); //$NON-NLS-1$
 		}
