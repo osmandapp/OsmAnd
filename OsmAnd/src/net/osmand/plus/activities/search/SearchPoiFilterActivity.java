@@ -38,6 +38,7 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
+	public static final int REQUEST_POI_EDIT = 55;
 	
 	
 	@Override
@@ -59,6 +60,10 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 			}
 		});
 		
+		refreshPoiListAdapter();
+	}
+
+	public void refreshPoiListAdapter() {
 		PoiFiltersHelper poiFilters = getApp().getPoiFilters();
 		List<PoiFilter> filters = new ArrayList<PoiFilter>() ;
 		filters.addAll(poiFilters.getTopStandardFilters());
@@ -95,7 +100,7 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 		// folder selected
 		newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
 		updateIntentToLaunch(newIntent);
-		startActivityForResult(newIntent, 0);
+		startActivityForResult(newIntent, REQUEST_POI_EDIT);
 	}
 
 	@Override

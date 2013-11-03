@@ -171,17 +171,20 @@ public class PoiFiltersHelper {
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
 			PoiFilterDbHelper helper = openDbHelper();
 			List<PoiFilter> userDefined = helper.getFilters(helper.getReadableDatabase());
-			final Collator instance = Collator.getInstance();
-			Collections.sort(userDefined, new Comparator<PoiFilter>() {
-				@Override
-				public int compare(PoiFilter object1, PoiFilter object2) {
-					return instance.compare(object1.getName(), object2.getName());
-				}
-			});
+			sortListOfFiltersByName(userDefined);
 			cacheUserDefinedFilters.addAll(userDefined);
 			helper.close();
 		}
 		return Collections.unmodifiableList(cacheUserDefinedFilters);
+	}
+	private void sortListOfFiltersByName(List<PoiFilter> userDefined) {
+		final Collator instance = Collator.getInstance();
+		Collections.sort(userDefined, new Comparator<PoiFilter>() {
+			@Override
+			public int compare(PoiFilter object1, PoiFilter object2) {
+				return instance.compare(object1.getName(), object2.getName());
+			}
+		});
 	}
 	
 	public List<PoiFilter> getTopStandardFilters() {
@@ -257,6 +260,7 @@ public class PoiFiltersHelper {
 		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false);
 		if(res){
 			cacheUserDefinedFilters.add(filter);
+			sortListOfFiltersByName(cacheUserDefinedFilters);
 		}
 		helper.close();
 		return res;
