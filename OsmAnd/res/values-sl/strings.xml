@@ -1528,7 +1528,17 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="about_settings_descr">Informacije o različici, licenci, članih projekta</string>
     <string name="tips_and_tricks">Nasveti</string>
     <string name="tip_recent_changes_1_6_t">Spremembe v 1.6:
-	\n\t* Določitev/urejanje vira spletnih ploščic (z navedbo časa izteka)
+	\n\t* Podpora naprav Full HD
+	\n\t* Podpora za prozorno ozadje zemljevida
+	\n\t* Prikaz naloženih zemljevidov in boljše nalaganje manjkajočih zemljevidov neposredno iz pogleda na zemljevid
+	\n\t* Zemljevidi izohips zdaj v paketu za države/regije
+	\n\t* Nov osnovni svetovni zemljevid z glavnimi cestami, železnicami in glavnimi površinskimi območji, kot so gozdovi
+	\n\t* Funkcija za povečavo zemljevida (dolgi klik na gumb povečava) - Uporabno tako za ploščice in vektorske zemljevide
+	\n\t* Določitev/urejanje vira spletnih ploščic po meri (in določitev časa izteka)
+	\n\t* Podpora za časovno pogojene omejitve hitrosti (Nizozemska)
+
+	\n\t* Hitrejše nastavljanje iskanja naslova
+	\n\t* Popravki napak pri usmerjanju in prikazovanju zemljevidov
     </string>
     <string name="local_index_tile_data_zooms">Prenesene povečave: %1$s</string>
     <string name="local_index_tile_data_expire">Potečejo v (minute): %1$s</string>
@@ -1551,5 +1561,14 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 		\n\t* 
 		\n\t*
 	</string>
-    <string name="base_world_map">osnovni zemljevid sveta</string>
+    <string name="base_world_map">Osnovni zemljevid sveta</string>
+	<string name="default_and">in</string>
+    <string name="default_or">ali</string>
+	<string name="route_is_too_long">Pot je morda predolga za izračun z OsmAnd računanjem poti brez povezave.
+	Usmerjanje brez povezave je mogoče med točkami, ki so oddaljene povprečno do 200 km.  Prosimo, dodajte eno ali več vmesnih točk za izračun poti.</string>
+	<string name="auto_zoom_none">Ne samodejna povečava</string>
+	<string name="auto_zoom_farthest">Na dolge razdalje</string>
+	<string name="map_magnifier">Povečava zemljevida</string>
+	<string name="auto_zoom_far">Na srednje razdalje</string>
+	<string name="auto_zoom_close">Na kratke razdalje</string>
 	</resources>
