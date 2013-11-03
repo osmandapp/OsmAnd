@@ -60,7 +60,8 @@ public class OsmandRenderer {
 
 	public static final int TILE_SIZE = 256; 
 
-	private Map<String, PathEffect> dashEffect = new LinkedHashMap<String, PathEffect>();
+	private Map<float[], PathEffect> dashEffect = new LinkedHashMap<float[], PathEffect>();
+	private Map<String, float[]> parsedDashEffects = new LinkedHashMap<String, float[]>();
 	private Map<String, Shader> shaders = new LinkedHashMap<String, Shader>();
 
 	private final Context context;
@@ -83,6 +84,8 @@ public class OsmandRenderer {
 	/* package */static class RenderingContext extends net.osmand.RenderingContext {
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
 		List<IconDrawInfo> iconsToDraw = new ArrayList<IconDrawInfo>();
+		Paint[] oneWay ;
+		Paint[] reverseOneWay ;
 		final Context ctx;
 
 		public RenderingContext(Context ctx) {
@@ -121,14 +124,13 @@ public class OsmandRenderer {
 		wmgr.getDefaultDisplay().getMetrics(dm);
 	}
 
-	public PathEffect getDashEffect(String dashes){
+	public PathEffect getDashEffect(RenderingContext rc, float[] cachedValues, float st){
+		float[] dashes = new float[cachedValues.length / 2];
+		for (int i = 0; i < dashes.length; i++) {
+			dashes[i] = rc.getDensityValue(cachedValues[i * 2]) + cachedValues[i * 2 + 1];
+		}
 		if(!dashEffect.containsKey(dashes)){
-			String[] ds = dashes.split("_"); //$NON-NLS-1$
-			float[] f = new float[ds.length];
-			for(int i=0; i<ds.length; i++){
-				f[i] = Float.parseFloat(ds[i]);
-			}
-			dashEffect.put(dashes, new DashPathEffect(f, 0));
+			dashEffect.put(dashes, new DashPathEffect(dashes, st));
 		}
 		return dashEffect.get(dashes);
 	}
@@ -555,7 +557,29 @@ public class OsmandRenderer {
 			}
 			String pathEffect = req.getStringPropertyValue(rPathEff);
 			if (!Algorithms.isEmpty(pathEffect)) {
-				p.setPathEffect(getDashEffect(pathEffect));
+				if(!parsedDashEffects.containsKey(pathEffect)) {
+					String[] vls = pathEffect.split("_");
+					float[] vs = new float[vls.length * 2];
+					for(int i = 0; i < vls.length; i++) {
+						int s = vls[i].indexOf(':');
+						String pre = vls[i];
+						String post = "";
+						if(s != -1) {
+							pre = vls[i].substring(0, i);
+							post = vls[i].substring(i + 1);
+						}
+						if(pre.length() > 0) {
+							vs[i*2 ] = Float.parseFloat(pre);
+						}
+						if(post.length() > 0) {
+							vs[i*2 +1] = Float.parseFloat(post);
+						}
+					}
+					parsedDashEffects.put(pathEffect, vs);
+				}
+				float[] cachedValues = parsedDashEffects.get(pathEffect);
+				
+				p.setPathEffect(getDashEffect(rc, cachedValues, 0));
 			} else {
 				p.setPathEffect(null);
 			}
@@ -756,7 +780,7 @@ public class OsmandRenderer {
 			}
 			
 			if(oneway != 0 && !drawOnlyShadow){
-				Paint[] paints = oneway == -1? getReverseOneWayPaints() :  getOneWayPaints();
+				Paint[] paints = oneway == -1? getReverseOneWayPaints(rc) :  getOneWayPaints(rc);
 				for (int i = 0; i < paints.length; i++) {
 					canvas.drawPath(path, paints[i]);
 				}
@@ -768,8 +792,6 @@ public class OsmandRenderer {
 	}
 
 		
-	private static Paint[] oneWay = null;
-	private static Paint[] reverseOneWay = null;
 	private static Paint oneWayPaint(){
 		Paint oneWay = new Paint();
 		oneWay.setStyle(Style.STROKE);
@@ -778,57 +800,65 @@ public class OsmandRenderer {
 		return oneWay; 
 	}
 	
-	public static Paint[] getReverseOneWayPaints(){
-		if(reverseOneWay == null){
-			PathEffect arrowDashEffect1 = new DashPathEffect(new float[] { 0, 12, 10, 152 }, 0);
-			PathEffect arrowDashEffect2 = new DashPathEffect(new float[] { 0, 13, 9, 152 }, 1);
-			PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 14, 2, 158 }, 1);
-			PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 15, 1, 158 }, 1);
-			reverseOneWay = new Paint[4];
-			reverseOneWay[0] = oneWayPaint();
-			reverseOneWay[0].setStrokeWidth(1);
-			reverseOneWay[0].setPathEffect(arrowDashEffect1);
+	public Paint[] getReverseOneWayPaints(RenderingContext rc){
+		if(rc.reverseOneWay == null){
+			int rmin = (int)rc.getDensityValue(1);
+			if(rmin > 2) {
+				rmin = rmin / 2;
+			}
+			PathEffect arrowDashEffect1 = new DashPathEffect(new float[] { 0, 12, 10 * rmin, 152 }, 0);
+			PathEffect arrowDashEffect2 = new DashPathEffect(new float[] { 0, 12 + rmin, 9 * rmin, 152 }, 1);
+			PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 12 + 2 * rmin, 2 * rmin, 152 + 6 * rmin }, 1);
+			PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 12 + 3 * rmin, 1 * rmin, 152 + 6 * rmin }, 1);
+			rc.reverseOneWay = new Paint[4];
+			rc.reverseOneWay[0] = oneWayPaint();
+			rc.reverseOneWay[0].setStrokeWidth(rmin * 2);
+			rc.reverseOneWay[0].setPathEffect(arrowDashEffect1);
 			
-			reverseOneWay[1] = oneWayPaint();
-			reverseOneWay[1].setStrokeWidth(2);
-			reverseOneWay[1].setPathEffect(arrowDashEffect2);
+			rc.reverseOneWay[1] = oneWayPaint();
+			rc.reverseOneWay[1].setStrokeWidth(rmin);
+			rc.reverseOneWay[1].setPathEffect(arrowDashEffect2);
 
-			reverseOneWay[2] = oneWayPaint();
-			reverseOneWay[2].setStrokeWidth(3);
-			reverseOneWay[2].setPathEffect(arrowDashEffect3);
+			rc.reverseOneWay[2] = oneWayPaint();
+			rc.reverseOneWay[2].setStrokeWidth(rmin * 3);
+			rc.reverseOneWay[2].setPathEffect(arrowDashEffect3);
 			
-			reverseOneWay[3] = oneWayPaint();			
-			reverseOneWay[3].setStrokeWidth(4);
-			reverseOneWay[3].setPathEffect(arrowDashEffect4);
+			rc.reverseOneWay[3] = oneWayPaint();			
+			rc.reverseOneWay[3].setStrokeWidth(rmin * 4);
+			rc.reverseOneWay[3].setPathEffect(arrowDashEffect4);
 			
 		}
-		return oneWay;
+		return rc.reverseOneWay;
 	}
 	
-	public static Paint[] getOneWayPaints(){
-		if(oneWay == null){
-			PathEffect arrowDashEffect1 = new DashPathEffect(new float[] { 0, 12, 10, 152 }, 0);
-			PathEffect arrowDashEffect2 = new DashPathEffect(new float[] { 0, 12, 9, 153 }, 1);
-			PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 18, 2, 154 }, 1);
-			PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 18, 1, 155 }, 1);
-			oneWay = new Paint[4];
-			oneWay[0] = oneWayPaint();
-			oneWay[0].setStrokeWidth(1);
-			oneWay[0].setPathEffect(arrowDashEffect1);
+	public Paint[] getOneWayPaints(RenderingContext rc){
+		if(rc.oneWay == null){
+			float rmin = rc.getDensityValue(1);
+			if(rmin > 1) {
+				rmin = rmin * 2 / 3;
+			}
+			PathEffect arrowDashEffect1 = new DashPathEffect(new float[] { 0, 12, 10 * rmin, 152 }, 0);
+			PathEffect arrowDashEffect2 = new DashPathEffect(new float[] { 0, 12, 9 * rmin, 152 + rmin }, 1);
+			PathEffect arrowDashEffect3 = new DashPathEffect(new float[] { 0, 12 + 6 * rmin, 2 * rmin, 152 + 2 * rmin}, 1);
+			PathEffect arrowDashEffect4 = new DashPathEffect(new float[] { 0, 12 + 6 * rmin, 1 * rmin, 152 + 3 * rmin}, 1);
+			rc.oneWay = new Paint[4];
+			rc.oneWay[0] = oneWayPaint();
+			rc.oneWay[0].setStrokeWidth(rmin);
+			rc.oneWay[0].setPathEffect(arrowDashEffect1);
 			
-			oneWay[1] = oneWayPaint();
-			oneWay[1].setStrokeWidth(2);
-			oneWay[1].setPathEffect(arrowDashEffect2);
+			rc.oneWay[1] = oneWayPaint();
+			rc.oneWay[1].setStrokeWidth(rmin * 2);
+			rc.oneWay[1].setPathEffect(arrowDashEffect2);
 
-			oneWay[2] = oneWayPaint();
-			oneWay[2].setStrokeWidth(3);
-			oneWay[2].setPathEffect(arrowDashEffect3);
+			rc.oneWay[2] = oneWayPaint();
+			rc.oneWay[2].setStrokeWidth(rmin * 3);
+			rc.oneWay[2].setPathEffect(arrowDashEffect3);
 			
-			oneWay[3] = oneWayPaint();			
-			oneWay[3].setStrokeWidth(4);
-			oneWay[3].setPathEffect(arrowDashEffect4);
+			rc.oneWay[3] = oneWayPaint();			
+			rc.oneWay[3].setStrokeWidth(rmin * 4);
+			rc.oneWay[3].setPathEffect(arrowDashEffect4);
 			
 		}
-		return oneWay;
+		return rc.oneWay;
 	}
 }
