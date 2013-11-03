@@ -110,8 +110,10 @@ public class EntityParser {
 		boolean relation = entity instanceof Relation;
 		Collection<String> keySet = entity.getTagKeySet();
 		if (!keySet.isEmpty()) {
+			boolean purerelation = relation && !"multipolygon".equals(entity.getTag("type"));
 			for (String t : keySet) {
-				AmenityType type = renderingTypes.getAmenityType(t, entity.getTag(t), relation);
+				AmenityType type = purerelation? renderingTypes.getAmenityTypeForRelation(t, entity.getTag(t)):
+					renderingTypes.getAmenityType(t, entity.getTag(t)); 
 				if (type != null) {
 					String subtype = renderingTypes.getAmenitySubtype(t, entity.getTag(t));
 					Amenity a = parseAmenity(entity, type, subtype);
