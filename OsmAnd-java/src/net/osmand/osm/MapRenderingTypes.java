@@ -173,7 +173,11 @@ public class MapRenderingTypes {
 		return getAmenityType(tag, val, false);
 	}
 	
-	public AmenityType getAmenityType(String tag, String val, boolean relation){
+	public AmenityType getAmenityTypeForRelation(String tag, String val){
+		return getAmenityType(tag, val, true);
+	}
+	
+	private AmenityType getAmenityType(String tag, String val, boolean relation){
 		// register amenity types
 		Map<String, AmenityRuleType> rules = getAmenityEncodingRuleTypes();
 		AmenityRuleType rt = rules.get(constructRuleKey(tag, val));
