@@ -236,15 +236,6 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 			} else {
 				updateSearchPoint(latLon, getString(R.string.search_position_fixed), true);
 			}
-		} else if (requestCode == SearchPoiFilterActivity.REQUEST_POI_EDIT) {
-			for(WeakReference<Fragment> ref : fragList) {
-		        Fragment f = ref.get();
-		        if(f instanceof SearchPoiFilterActivity) {
-		            if(!f.isDetached()) {
-		            	((SearchPoiFilterActivity) f).refreshPoiListAdapter();
-		            }
-		        }
-		    }
 		}
 	}
 	

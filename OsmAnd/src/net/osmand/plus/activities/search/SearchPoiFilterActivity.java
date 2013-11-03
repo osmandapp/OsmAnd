@@ -102,6 +102,13 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 		updateIntentToLaunch(newIntent);
 		startActivityForResult(newIntent, REQUEST_POI_EDIT);
 	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == REQUEST_POI_EDIT) {
+			refreshPoiListAdapter();
+		}
+	}
 
 	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {

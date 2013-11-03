@@ -267,7 +267,6 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		try {
 			double lat = convert(((TextView) view.findViewById(R.id.LatitudeEdit)).getText().toString());
 			double lon = convert(((TextView) view.findViewById(R.id.LongitudeEdit)).getText().toString());
-			TargetPointsHelper targetPointsHelper = ((OsmandApplication) getActivity().getApplication()).getTargetPointsHelper();
 			if(mode == ADD_TO_FAVORITE) {
 				Bundle b = new Bundle();
 				Dialog dlg = MapActivityActions.createAddFavouriteDialog(getActivity(), b);
