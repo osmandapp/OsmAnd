@@ -1398,4 +1398,12 @@
 	<string name="auto_zoom_farthest">Malé priblíženie</string>
 	<string name="default_and">a</string>
     <string name="default_or">alebo</string>
-	</resources>
+	<string name="remember_choice">Zapamätať moju voľbu</string>
+    <string name="gps_status_eclipsim">Stav GPS</string>
+    <string name="tip_map_styles_t">OsmAnd umožňuje zobrazenie vektorových máp v rôznych štýloch podľa vašich potrieb:
+		\n\nOkrem vyváženého štýlu "default" môžete v "Menu" → "Konfigurovať obrazovku" → "Štýl vykresľovania" vybrať napríklad:
+		\n\t* Štýl "Touring view", ktorý zobrazuje najpodrobnejšie informácie  pre cestovanie , vrátane vylepšení pre profesionálnych vodičov (vyšší kontrast, dobre rozlíšiteľné cesty), voľby pre Alpskú turistiku (stupnicu SAC), cyklotrasy, turistické značky a pod.
+		\n\t* "High contrast roads" zobrazuje cesty vo zvýraznených farbách pre prípad silného okolitého osvetlenia.
+		\n\t* "Winter and ski" vytvorí (zasneženú) zimnú krajinu s lyžiarskymi svahmi a vlekmi (spolu s mapou "World ski")
+	</string>
+    </resources>
