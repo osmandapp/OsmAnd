@@ -1593,4 +1593,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="auto_zoom_farthest">A lungo raggio</string>
     <string name="default_and">e</string>
     <string name="default_or">o</string>
-	</resources>
+	<string name="remember_choice">Ricorda la scelta</string>
+    <string name="gps_status_eclipsim">Stato GPS</string>
+    </resources>
