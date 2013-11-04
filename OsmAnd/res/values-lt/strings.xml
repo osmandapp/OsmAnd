@@ -1602,4 +1602,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="map_magnifier">Žemėlapio padidinimo stiklas</string>
     <string name="route_distance_settings_descr">Konfigūruoti žemėlapio matymo atstumą (TODO naming)</string>
     <string name="route_distance_settings">Žemėlapio matymo atstumas (TODO naming)</string>
-    </resources>
+    <string name="remember_choice">Atsiminti mano pasirinkimą</string>
+    <string name="gps_status_eclipsim">GPS statusas</string>
+    <string name="default_and">ir</string>
+    <string name="default_or">arba</string>
+	</resources>
