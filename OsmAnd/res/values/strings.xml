@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="remember_choice">Remember my choice</string>
+    <string name="gps_status_eclipsim">GPS status</string>
     <string name="default_and">and</string>
     <string name="default_or">or</string>
 	<string name="route_is_too_long">The route is possibly too long to be calculated by the OsmAnd offline router. 

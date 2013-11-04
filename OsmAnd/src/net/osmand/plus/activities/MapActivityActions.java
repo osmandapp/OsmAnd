@@ -1,7 +1,5 @@
 package net.osmand.plus.activities;
 
-
-
 import java.io.File;
 import java.text.Collator;
 import java.text.MessageFormat;
@@ -39,33 +37,26 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.actions.OsmAndDialogs;
+import net.osmand.plus.activities.actions.ShareLocation;
+import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.ClipboardManager;
-import android.text.Html;
 import android.util.FloatMath;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -85,22 +76,17 @@ import android.widget.ToggleButton;
 
 public class MapActivityActions implements DialogProvider {
 	
-	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
-	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2.GPSStatus"; //$NON-NLS-1$
-	private static final String ZXING_BARCODE_SCANNER_COMPONENT = "com.google.zxing.client.android"; //$NON-NLS-1$
-	private static final String ZXING_BARCODE_SCANNER_ACTIVITY = "com.google.zxing.client.android.ENCODE"; //$NON-NLS-1$
-
-	private static final String KEY_LONGITUDE = "longitude";
-	private static final String KEY_LATITUDE = "latitude";
-	private static final String KEY_NAME = "name";
-	private static final String KEY_FAVORITE = "favorite";
-	private static final String KEY_ZOOM = "zoom";
+	public static final String KEY_LONGITUDE = "longitude";
+	public static final String KEY_LATITUDE = "latitude";
+	public static final String KEY_NAME = "name";
+	public static final String KEY_FAVORITE = "favorite";
+	public static final String KEY_ZOOM = "zoom";
 
 	private static final int DIALOG_ADD_FAVORITE = 100;
 	private static final int DIALOG_REPLACE_FAVORITE = 101;
 	private static final int DIALOG_ADD_WAYPOINT = 102;
 	private static final int DIALOG_RELOAD_TITLE = 103;
-	private static final int DIALOG_SHARE_LOCATION = 104;
+	
 	private static final int DIALOG_SAVE_DIRECTIONS = 106;
 	// make static
 	private static Bundle dialogBundle = new Bundle();
@@ -301,115 +287,7 @@ public class MapActivityActions implements DialogProvider {
     	});
     }
     
-    protected void shareLocation(final double latitude, final double longitude, int zoom){
-    	enhance(dialogBundle,latitude,longitude,zoom);
-    	mapActivity.showDialog(DIALOG_SHARE_LOCATION);
-    }
-    
-    private Dialog createShareLocationDialog(final Bundle args) {
-		AlertDialog.Builder builder = new Builder(mapActivity);
-		builder.setTitle(R.string.send_location_way_choose_title);
-		builder.setItems(new String[]{
-				"Email", "SMS", "Clipboard", "geo:", "QR-Code"
-		}, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				final double latitude = args.getDouble(KEY_LATITUDE);
-				final double longitude = args.getDouble(KEY_LONGITUDE);
-				final int zoom = args.getInt(KEY_ZOOM);
-				try {
-					final String shortOsmUrl = MapUtils.buildShortOsmUrl(latitude, longitude, zoom);
-					final String appLink = "http://download.osmand.net/go?lat=" + ((float) latitude) + "&lon=" + ((float) longitude) + "&z=" + zoom;
-					String sms = mapActivity.getString(R.string.send_location_sms_pattern, shortOsmUrl, appLink);
-					if (which == 0) {
-						sendEmail(shortOsmUrl, appLink);
-					} else if (which == 1) {
-						sendSms(sms);
-					} else if (which == 2) {
-						sendToClipboard(sms);
-					} else if (which == 3) {
-						sendGeoActivity(latitude, longitude, zoom);
-					} else if (which == 4) {
-						sendQRCode(latitude, longitude);
-					}
-				} catch (RuntimeException e) {
-					Toast.makeText(mapActivity, R.string.input_output_error, Toast.LENGTH_SHORT).show();
-				}				
-			}
-
-			
-		});
-    	return builder.create();
-    }
-    
-
-	private void sendEmail(final String shortOsmUrl, final String appLink) {
-		String email = mapActivity.getString(R.string.send_location_email_pattern, shortOsmUrl, appLink);
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
-		intent.putExtra(Intent.EXTRA_SUBJECT, "Location"); //$NON-NLS-1$
-		intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(email));
-		intent.setType("text/html");
-		mapActivity.startActivity(Intent.createChooser(intent, getString(R.string.send_location)));
-	}
-
-	private void sendSms(String sms) {
-		Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-		sendIntent.putExtra("sms_body", sms); 
-		sendIntent.setType("vnd.android-dir/mms-sms");
-		mapActivity.startActivity(sendIntent);
-	}
-
-	private void sendToClipboard(String sms) {
-		ClipboardManager clipboard = (ClipboardManager) mapActivity.getSystemService(Activity.CLIPBOARD_SERVICE);
-		clipboard.setText(sms);
-	}
-
-	private void sendGeoActivity(final double latitude, final double longitude, final int zoom) {
-		final String simpleGeo = "geo:"+((float) latitude)+","+((float)longitude) +"?z="+zoom;
-		Uri location = Uri.parse(simpleGeo);
-		Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
-		mapActivity.startActivity(mapIntent);
-	}
-
-	private void sendQRCode(final double latitude, final double longitude) {
-		Bundle bundle = new Bundle();
-		bundle.putFloat("LAT", (float) latitude);
-		bundle.putFloat("LONG", (float) longitude);
-		Intent intent = new Intent();
-		intent.addCategory(Intent.CATEGORY_DEFAULT);
-		intent.setAction(ZXING_BARCODE_SCANNER_ACTIVITY);
-		ResolveInfo resolved = mapActivity.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
-
-		if (resolved != null) {
-			intent.putExtra("ENCODE_TYPE", "LOCATION_TYPE");
-			intent.putExtra("ENCODE_DATA", bundle);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-			mapActivity.startActivity(intent);
-		} else {
-			if (Version.isMarketEnabled(mapActivity.getMyApplication())) {
-				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
-				builder.setMessage(getString(R.string.zxing_barcode_scanner_not_found));
-				builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(mapActivity.getMyApplication()) 
-								+ ZXING_BARCODE_SCANNER_COMPONENT));
-						try {
-							mapActivity.startActivity(intent);
-						} catch (ActivityNotFoundException e) {
-						}
-					}
-				});
-				builder.setNegativeButton(getString(R.string.default_buttons_no), null);
-				builder.show();
-			} else {
-				Toast.makeText(mapActivity, R.string.zxing_barcode_scanner_not_found, Toast.LENGTH_LONG).show();
-			}
-		}
-	}
-    
+        
     protected void aboutRoute() {
     	Intent intent = new Intent(mapActivity, ShowRouteInfoActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -989,7 +867,8 @@ public class MapActivityActions implements DialogProvider {
 						IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 					}
 				} else if (standardId == R.string.context_menu_item_share_location) {
-					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
+					enhance(dialogBundle,latitude,longitude,mapActivity.getMapView().getZoom());
+					new ShareLocation(mapActivity).run();
 				} else if (standardId == R.string.context_menu_item_add_favorite) {
 					addFavouritePoint(latitude, longitude);
 				}
@@ -1055,12 +934,10 @@ public class MapActivityActions implements DialogProvider {
 				return createAddWaypointDialog(args);
 			case DIALOG_RELOAD_TITLE:
 				return createReloadTitleDialog(args);
-			case DIALOG_SHARE_LOCATION:
-				return createShareLocationDialog(args);
 			case DIALOG_SAVE_DIRECTIONS:
 				return createSaveDirections(mapActivity);
 		}
-		return null;
+		return OsmAndDialogs.createDialog(id, mapActivity, args);
 	}
 
 	@Override
@@ -1256,7 +1133,7 @@ public class MapActivityActions implements DialogProvider {
 
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-					startGpsStatusIntent();
+					new StartGPSStatus(mapActivity).run();
 				}
 			}).reg();
 		}
@@ -1359,36 +1236,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 
-	private void startGpsStatusIntent() {
-		Intent intent = new Intent();
-		intent.setComponent(new ComponentName(GPS_STATUS_COMPONENT,
-				GPS_STATUS_ACTIVITY));
-		ResolveInfo resolved = mapActivity.getPackageManager().resolveActivity(intent,
-				PackageManager.MATCH_DEFAULT_ONLY);
-		if (resolved != null) {
-			mapActivity.startActivity(intent);
-		} else {
-			if (Version.isMarketEnabled(getMyApplication())) {
-				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
-				builder.setMessage(getString(R.string.gps_status_app_not_found));
-				builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication()) + GPS_STATUS_COMPONENT));
-						try {
-							mapActivity.startActivity(intent);
-						} catch (ActivityNotFoundException e) {
-						}
-					}
-				});
-				builder.setNegativeButton(getString(R.string.default_buttons_no), null);
-				builder.show();
-			} else {
-				Toast.makeText(mapActivity, R.string.gps_status_app_not_found, Toast.LENGTH_LONG).show();
-			}
-		}
-	}
-
+	
 	private void whereAmIDialog() {
 		final List<String> items = new ArrayList<String>();
 		items.add(getString(R.string.show_location));
