@@ -1573,4 +1573,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="auto_zoom_farthest">Widok szeroki</string>
 	<string name="default_and">i</string>
     <string name="default_or">lub</string>
-	</resources>
+	<string name="remember_choice">Zapamiętaj mój wybór</string>
+    <string name="gps_status_eclipsim">Status GPS</string>
+    </resources>
