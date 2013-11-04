@@ -1640,4 +1640,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="default_and">og</string>
     <string name="default_or">eller</string>
 	<string name="auto_zoom_close">På tæt hold</string>
-	</resources>
+	<string name="remember_choice">Husk valg</string>
+    <string name="gps_status_eclipsim">GPS status</string>
+    </resources>
