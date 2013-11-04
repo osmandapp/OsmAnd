@@ -210,7 +210,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="m">m</string>
      <string name="old_map_index_is_not_supported">重複したマップ
 データ形式 \'\'{0}\'\' はサポートされていません</string>
-     <string name="poi_filter_car_aid">自動車用施設</string>
+     <string name="poi_filter_car_aid">自動車用施設(Car aid)</string>
      <string name="poi_filter_closest_poi">近くのPOI</string>
      <string name="poi_filter_custom_filter">カスタムフィルター</string>
      <string name="poi_filter_food_shop">飲食(Food shop)</string>
@@ -950,4 +950,39 @@ POIの更新は利用できません</string>
     <string name="enable_plugin_monitoring_services">位置記録サービスを(GPX記録、オンライン追跡)を使用するようにトラッキングプラグインを有効化</string>
     <string name="non_optimal_route_calculation">長距離向けに非最適化ルートで計算(ルート設定)します。</string>
 	<string name="gps_not_available">設定でGPSを有効にしてください</string>
-    </resources>
+    <string name="map_widget_monitoring_services">ログ保存サービス</string>
+	<string name="no_route">ルートがありません</string>
+	<string name="replace_destination_point">目的地の入れ替え</string>
+    <string name="new_destination_point_dialog">すでに目的地が設定されています。</string>
+    <string name="target_points">経由点</string>
+    <string name="ending_point_too_far">終点が最寄りの道路より遠すぎます。</string>
+    <string name="btn_add_tag">タグの追加</string>
+    <string name="btn_advanced_mode">拡張モード…</string>
+    <string name="poi_filter_parking">駐車場(Parking)</string>
+    <string name="poi_filter_emergency">救急施設(Emergency)</string>
+    <string name="poi_filter_public_transport">公共交通機関(Public Transport)</string>
+    <string name="poi_filter_entertainment">エンターテインメント(Entertainment)</string>
+    <string name="poi_filter_restaurants">レストラン(Restaurants)</string>
+    <string name="poi_filter_sightseeing">観光(Sightseeing)</string>
+    <string name="poi_filter_accomodation">収容施設(Accommodation)</string>
+    <string name="show_warnings_title">アラームを表示…</string>
+	<string name="show_warnings_descr">交通警告(制限速度、車両止め、強制減速設備)、スピードカメラ警告、車線情報を設定</string>
+	<string name="use_compass_navigation_descr">方向が全く検出できない場合コンパスを使用する。</string>
+	<string name="use_compass_navigation">コンパスを使用する</string>
+	<string name="avoid_motorway">高速道路を使わない</string>
+	<string name="snap_to_road_descr">ナビゲーション中は道路から外れない</string>
+	<string name="snap_to_road">道路に合わせる</string>
+	<string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
+	<string name="osmand_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Maps &amp; Navigation</string>
+	<string name="osmand_plus_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
+	<string name="filterpoi_activity">POIフィルタを作成</string>
+	<string name="select_navigation_mode">トランスポートモードの選択</string>
+	<string name="day_night_info_description">日出: %1$s \日没: %2$s</string>
+	<string name="day_night_info">昼/夜の情報</string>
+	<string name="map_widget_day_night">昼/夜 地図</string>
+	<string name="map_widget_vector_attributes">描画方法の属性:</string>
+	<string name="map_widget_renderer">地図のスタイル</string>
+	<string name="live_monitoring_mode_off">スタート\n オンライン追跡</string>
+	<string name="live_monitoring_mode_on">停止\n オンライン追跡</string>
+	</resources>
