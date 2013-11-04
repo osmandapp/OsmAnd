@@ -143,7 +143,31 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
         setTopSpinner();
 		
 		Log.i("net.osmand", "Start on create " + (System.currentTimeMillis() - t ));
-
+		
+		Intent intent = getIntent();
+		int tabIndex = 0;
+		if (intent != null) {
+			if(intent.hasExtra(TAB_INDEX_EXTRA)){
+				tabIndex = intent.getIntExtra(TAB_INDEX_EXTRA, POI_TAB_INDEX);
+				mTabsAdapter.mTabHost.setCurrentTab(tabIndex);
+			}
+			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
+			if (lat != 0 || lon != 0) {
+				LatLon l = new LatLon(lat, lon);
+				if(!Algorithms.objectEquals(reqSearchPoint, l)){
+					reqSearchPoint = l;
+					updateSearchPoint(reqSearchPoint, getString(R.string.search_position_fixed), true);
+				}
+			}
+		}
+		if(searchPoint == null){
+			LatLon last = settings.getLastKnownMapLocation();
+			if(!Algorithms.objectEquals(reqSearchPoint, last)){
+				reqSearchPoint = last;
+				updateSearchPoint(last, getString(R.string.select_search_position), true);
+			}
+		}
     }
 	
 	@Override
@@ -268,31 +292,6 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Intent intent = getIntent();
-		int tabIndex = 0;
-		if (intent != null) {
-			if(intent.hasExtra(TAB_INDEX_EXTRA)){
-				tabIndex = intent.getIntExtra(TAB_INDEX_EXTRA, POI_TAB_INDEX);
-				mTabsAdapter.mTabHost.setCurrentTab(tabIndex);
-			}
-			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
-			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
-			if (lat != 0 || lon != 0) {
-				LatLon l = new LatLon(lat, lon);
-				if(!Algorithms.objectEquals(reqSearchPoint, l)){
-					reqSearchPoint = l;
-					updateSearchPoint(reqSearchPoint, getString(R.string.search_position_fixed), true);
-				}
-			}
-		}
-		
-		if(searchPoint == null){
-			LatLon last = settings.getLastKnownMapLocation();
-			if(!Algorithms.objectEquals(reqSearchPoint, last)){
-				reqSearchPoint = last;
-				updateSearchPoint(last, getString(R.string.select_search_position), true);
-			}
-		}
 	}
 	
 	@Override

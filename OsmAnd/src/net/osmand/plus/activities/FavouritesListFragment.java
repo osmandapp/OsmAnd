@@ -88,23 +88,25 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 	@Override
 	public void locationUpdate(LatLon l) {
 		location = l;
-		favouritesAdapter.sort(new Comparator<FavouritePoint>() {
-			@Override
-			public int compare(FavouritePoint object1, FavouritePoint object2) {
-				if (location != null) {
-					double d1 = MapUtils.getDistance(location, object1.getLatitude(), object1.getLongitude());
-					double d2 = MapUtils.getDistance(location, object2.getLatitude(), object2.getLongitude());
-					if (d1 == d2) {
-						return 0;
-					} else if (d1 > d2) {
-						return 1;
+		if (favouritesAdapter != null) {
+			favouritesAdapter.sort(new Comparator<FavouritePoint>() {
+				@Override
+				public int compare(FavouritePoint object1, FavouritePoint object2) {
+					if (location != null) {
+						double d1 = MapUtils.getDistance(location, object1.getLatitude(), object1.getLongitude());
+						double d2 = MapUtils.getDistance(location, object2.getLatitude(), object2.getLongitude());
+						if (d1 == d2) {
+							return 0;
+						} else if (d1 > d2) {
+							return 1;
+						}
+						return -1;
+					} else {
+						return favouritesAdapter.getName(object1).compareTo(favouritesAdapter.getName(object2));
 					}
-					return -1;
-				} else {
-					return favouritesAdapter.getName(object1).compareTo(favouritesAdapter.getName(object2));
 				}
-			}
-		});
+			});
+		}
 	}
 	
 	public boolean isSelectFavoriteMode(){

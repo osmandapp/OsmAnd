@@ -38,19 +38,62 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
+	private static final String SELECTION = "SELECTION";
 
 	private static final int NAVIGATE_TO = 1;
 	private static final int ADD_WAYPOINT = 2;
 	private static final int SHOW_ON_MAP = 3;
 	private static final int ADD_TO_FAVORITE = 4;
 
+
 	private View view;
 
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.navigate_point, container, false);
 		setHasOptionsMenu(true);
+		
+		LatLon loc = null;
+		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
+		Intent intent = getSherlockActivity().getIntent();
+		if(intent != null){
+			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
+			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
+			if(lat != 0 || lon != 0){
+				loc = new LatLon(lat, lon);
+			}
+		}
+		if (loc == null && getActivity() instanceof SearchActivity) {
+			loc = ((SearchActivity) getActivity()).getSearchPoint();
+		}
+		if (loc == null) {
+			loc = app.getSettings().getLastKnownMapLocation();
+		}
+		initUI(loc.getLatitude(), loc.getLongitude());
+		if(savedInstanceState != null && savedInstanceState.containsKey(SEARCH_LAT) && savedInstanceState.containsKey(SEARCH_LON)) {
+			String lat = savedInstanceState.getString(SEARCH_LAT, "");
+			String lon = savedInstanceState.getString(SEARCH_LON, "");
+			if(lat.length() > 0 && lon.length() > 0) {
+				((Spinner)view.findViewById(R.id.Format)).setSelection(savedInstanceState.getInt(SELECTION, 0));
+				currentFormat = savedInstanceState.getInt(SELECTION, 0);
+				((TextView)view.findViewById(R.id.LatitudeEdit)).setText(lat);
+				((TextView)view.findViewById(R.id.LongitudeEdit)).setText(lon);
+			}
+		}
 		return view;
 	};
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if(view != null) {
+			final TextView latEdit = ((TextView)view.findViewById(R.id.LatitudeEdit));
+			final TextView lonEdit = ((TextView)view.findViewById(R.id.LongitudeEdit));
+			outState.putString(SEARCH_LAT, latEdit.getText().toString());
+			outState.putString(SEARCH_LON, lonEdit.getText().toString());
+			outState.putInt(SELECTION, ((Spinner)view.findViewById(R.id.Format)).getSelectedItemPosition());
+		}
+	}
+	
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -112,33 +155,27 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	@Override
 	public void onResume() {
 		super.onResume();
-		LatLon loc = null;
-		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-		Intent intent = getSherlockActivity().getIntent();
-		if(intent != null){
-			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
-			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
-			if(lat != 0 || lon != 0){
-				loc = new LatLon(lat, lon);
-			}
-		}
-		if (loc == null && getActivity() instanceof SearchActivity) {
-			loc = ((SearchActivity) getActivity()).getSearchPoint();
-		}
-		if (loc == null) {
-			loc = app.getSettings().getLastKnownMapLocation();
-		}
-		initUI(loc.getLatitude(), loc.getLongitude());
 	}
 	
 	
 	@Override
 	public void locationUpdate(LatLon loc) {
-		if(loc != null){
-			initUI(loc.getLatitude(), loc.getLongitude());
-		} else {
-			initUI(0, 0);
+		if (view != null) {
+			if (loc != null) {
+				updateUI(loc.getLatitude(), loc.getLongitude());
+			} else {
+				updateUI(0, 0);
+			}
 		}
+	}
+	
+	public void updateUI(double latitude, double longitude) {
+		latitude = MapUtils.checkLatitude(latitude);
+		longitude = MapUtils.checkLongitude(longitude);
+		final TextView latEdit = ((TextView)view.findViewById(R.id.LatitudeEdit));
+		final TextView lonEdit = ((TextView)view.findViewById(R.id.LongitudeEdit));
+		latEdit.setText(convert(latitude, currentFormat));
+		lonEdit.setText(convert(longitude, currentFormat));
 	}
 	
 	

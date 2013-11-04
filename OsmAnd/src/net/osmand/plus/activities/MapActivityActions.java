@@ -790,7 +790,6 @@ public class MapActivityActions implements DialogProvider {
 		adapter.item(R.string.context_menu_item_directions_to).icons(
 				R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-		final OsmandSettings settings = getMyApplication().getSettings();
 		if(targets.getPointToNavigate() != null) {
 			adapter.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_flag_dark,
 					R.drawable.ic_action_flag_light).reg();

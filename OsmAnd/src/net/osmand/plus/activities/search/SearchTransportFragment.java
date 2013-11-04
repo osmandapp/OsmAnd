@@ -164,7 +164,9 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 	public void locationUpdate(LatLon l) {
 		if(!Algorithms.objectEquals(l, this.lastKnownMapLocation)){
 			lastKnownMapLocation = l;
-			searchTransport();			
+			if(view != null) { 
+				searchTransport();
+			}
 		}
 	}
 	
