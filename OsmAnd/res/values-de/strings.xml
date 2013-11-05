@@ -1245,7 +1245,7 @@
 	<string name="recording_open_external_player">Externen Player öffnen</string>
 	<string name="recording_delete_confirm">Wollen Sie diese Aufnahme löschen?</string>
 	<string name="recording_unavailable">nicht verfügbar</string>
-	<string name="recording_context_menu_play">Abspielen</string>
+	<string name="recording_context_menu_play">Wiedergabe</string>
 	<string name="recording_default_name">aufnehmen</string>
 	<string name="av_control_stop">AV</string>
 	<string name="dropbox_plugin_description">Das Dropbox-Plugin ermöglicht Ihnen eine Synchronisation von Tracks und Audio/Video-Notizen mit Ihrem Dropbox-Konto.</string>
