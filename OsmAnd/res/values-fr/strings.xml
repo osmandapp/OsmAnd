@@ -1405,4 +1405,6 @@
 		\n\t* \'Winter and ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'World ski\')
 		\n\t* \'Topo-map-assimilation\' est optimisé pour la randonnée et affiche les chemins en fonction de l'échelle SAC, ainsi que les symboles de randonnée.
 	</string>
+    <string name="remember_choice">Mémoriser mon choix</string>
+    <string name="gps_status_eclipsim">GPS Status</string>
     </resources>
