@@ -1,7 +1,10 @@
 package net.osmand.plus.routing;
 
 
+import alice.tuprolog.Struct;
+import alice.tuprolog.Term;
 import net.osmand.Location;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -53,12 +56,13 @@ public class VoiceRouter {
 	
 	protected VoiceCommandPending pendingCommand = null;
 	private RouteDirectionInfo nextRouteDirection;
+	private Term empty;
 
 
 	public VoiceRouter(RoutingHelper router, CommandPlayer player) {
 		this.router = router;
 		this.player = player;
-		updateAppMode();
+		empty = new Struct("");
 	}
 	
 	public void setPlayer(CommandPlayer player) {
@@ -279,8 +283,8 @@ public class VoiceRouter {
 		if (nextInfo == null || nextInfo.directionInfo == null || nextInfo.directionInfo.distance == 0) {
 			// if(currentStatus <= STATUS_UNKNOWN && currentDirection > 0){ This caused this prompt to be suppressed when coming back from a
 			if (repeat || currentStatus <= STATUS_UNKNOWN) {
-				if (playGoAheadToDestination(nextInfo == null ? "" :
-						getSpeakableStreetName(nextInfo.directionInfo),
+				if (playGoAheadToDestination(nextInfo == null ? empty :
+						getSpeakableStreetName(currentSegment, nextInfo.directionInfo),
 						nextInfo == null ? "" : getSpeakablePointName(nextInfo.pointName))) {
 					currentStatus = STATUS_TOLD;
 					playGoAheadDist = 0;
@@ -290,7 +294,8 @@ public class VoiceRouter {
 		}
 		if(nextInfo.intermediatePoint){
 			if (repeat || currentStatus <= STATUS_UNKNOWN) {
-				if (playGoAheadToIntermediate(getSpeakableStreetName(nextInfo.directionInfo), getSpeakablePointName(nextInfo.pointName))) {
+				if (playGoAheadToIntermediate(getSpeakableStreetName(currentSegment,
+						nextInfo.directionInfo), getSpeakablePointName(nextInfo.pointName))) {
 					currentStatus = STATUS_TOLD;
 					playGoAheadDist = 0;
 				}
@@ -333,18 +338,18 @@ public class VoiceRouter {
 		NextDirectionInfo nextNextInfo = router.getNextRouteDirectionInfoAfter(nextInfo, new NextDirectionInfo(), !repeat);
 		if ((repeat || statusNotPassed(STATUS_TURN)) && isDistanceLess(speed, dist, TURN_DISTANCE, TURN_DEFAULT_SPEED)) {
 			if (next.distance < TURN_IN_DISTANCE_END && nextNextInfo != null) {
-				playMakeTurn(next, nextNextInfo.directionInfo);
+				playMakeTurn(currentSegment, next, nextNextInfo.directionInfo);
 			} else {
-				playMakeTurn(next, null);
+				playMakeTurn(currentSegment, next, null);
 			}
 			nextStatusAfter(STATUS_TURN);
 		} else if ((repeat || statusNotPassed(STATUS_TURN_IN)) && isDistanceLess(speed, dist, TURN_IN_DISTANCE)) {
 			if (repeat || dist >= TURN_IN_DISTANCE_END) {
 				if ((isDistanceLess(speed, next.distance, TURN_DISTANCE) || next.distance < TURN_IN_DISTANCE_END) &&
 						nextNextInfo != null) {
-					playMakeTurnIn(next, dist, nextNextInfo.directionInfo);
+					playMakeTurnIn(currentSegment, next, dist, nextNextInfo.directionInfo);
 				} else {
-					playMakeTurnIn(next, dist, null);
+					playMakeTurnIn(currentSegment, next, dist, null);
 				}
 			}
 			nextStatusAfter(STATUS_TURN_IN);
@@ -354,14 +359,14 @@ public class VoiceRouter {
 				if (!repeat && (next.getTurnType().keepLeft() || next.getTurnType().keepRight())){
 					// do not play prepare for keep left/right
 				} else {
-					playPrepareTurn(next, dist);
+					playPrepareTurn(currentSegment, next, dist);
 				}
 			}
 			nextStatusAfter(STATUS_PREPARE);
 			// } else if (statusNotPassed(STATUS_LONG_PREPARE) && isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)){
 		} else if ((repeat || statusNotPassed(STATUS_LONG_PREPARE)) && (dist <= PREPARE_LONG_DISTANCE)) {
 			if (repeat || dist >= PREPARE_LONG_DISTANCE_END) {
-				playPrepareTurn(next, dist);
+				playPrepareTurn(currentSegment, next, dist);
 			}
 			nextStatusAfter(STATUS_LONG_PREPARE);
 		} else if (statusNotPassed(STATUS_UNKNOWN)) {
@@ -369,7 +374,7 @@ public class VoiceRouter {
 			nextStatusAfter(STATUS_UNKNOWN);
 		} else if (repeat || (statusNotPassed(STATUS_TURN_IN) && dist < playGoAheadDist)) {
 			playGoAheadDist = 0;
-			playGoAhead(dist, getSpeakableStreetName(next));
+			playGoAhead(dist, getSpeakableStreetName(currentSegment, next));
 		}
 	}
 
@@ -384,7 +389,7 @@ public class VoiceRouter {
 	}
 
 
-	private boolean playGoAheadToDestination(String strName, String destName) {
+	private boolean playGoAheadToDestination(Term strName, String destName) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
 			play.goAhead(router.getLeftDistance(), strName).andArriveAtDestination(getSpeakablePointName(destName)).play();
@@ -393,7 +398,7 @@ public class VoiceRouter {
 		return false;
 	}
 	
-	private boolean playGoAheadToIntermediate(String strName, String iName) {
+	private boolean playGoAheadToIntermediate(Term strName, String iName) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
 			play.goAhead(router.getLeftDistanceNextIntermediate(), strName).andArriveAtIntermediatePoint(getSpeakablePointName(iName)).play();
@@ -411,28 +416,44 @@ public class VoiceRouter {
 		return false;
 	}
 
-	private void playGoAhead(int dist, String streetName) {
+	private void playGoAhead(int dist, Term streetName) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
 			play.goAhead(dist, streetName).play();
 		}
 	}
 
-	public String getSpeakableStreetName(RouteDirectionInfo i) {
-		String res = "";
+	public Term getSpeakableStreetName(RouteSegmentResult currentSegment, RouteDirectionInfo i) {
 		if(i == null || !router.getSettings().SPEAK_STREET_NAMES.get()){
-			return res;
+			return empty;
 		}
-		if(!Algorithms.isEmpty(i.getRef())) {
-			res = i.getRef();
-		} else if(!Algorithms.isEmpty(i.getStreetName())) {
-			res = i.getStreetName();
+		if (player != null && player.supportsStructuredStreetNames()) {
+			Struct next = new Struct(new Term[] { getTermString(getSpeakablePointName(i.getRef())),
+					getTermString(getSpeakablePointName(i.getStreetName())),
+					getTermString(getSpeakablePointName(i.getDestinationName())) });
+			Term current = empty;
+			if (currentSegment != null) {
+				RouteDataObject obj = currentSegment.getObject();
+				current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef())),
+						getTermString(getSpeakablePointName(obj.getName())),
+						getTermString(getSpeakablePointName(obj.getDestinationName())) });
+			}
+			Struct voice = new Struct("voice", next, current );
+			return voice;
+		} else {
+			Term rf = getTermString(getSpeakablePointName(i.getRef()));
+			if(rf == empty) {
+				rf = getTermString(getSpeakablePointName(i.getStreetName()));
+			}
+			return rf;
 		}
-		// replace characters which may produce unwanted tts sounds:
-		if(res != null) {
-			res = getSpeakablePointName(res);
+	}
+	
+	private Term getTermString(String s) {
+		if(!Algorithms.isEmpty(s)) {
+			return new Struct(s);
 		}
-		return res;
+		return empty;
 	}
 
 	public String getSpeakablePointName(String pn) {
@@ -447,31 +468,31 @@ public class VoiceRouter {
 		return pn;
 	}
 
-	private void playPrepareTurn(RouteDirectionInfo next, int dist) {
+	private void playPrepareTurn(RouteSegmentResult currentSegment, RouteDirectionInfo next, int dist) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
 			String tParam = getTurnType(next.getTurnType());
 			if(tParam != null){
-				play.prepareTurn(tParam, dist, getSpeakableStreetName(next)).play();
+				play.prepareTurn(tParam, dist, getSpeakableStreetName(currentSegment, next)).play();
 			} else if(next.getTurnType().isRoundAbout()){
-				play.prepareRoundAbout(dist, next.getTurnType().getExitOut(), getSpeakableStreetName(next)).play();
+				play.prepareRoundAbout(dist, next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next)).play();
 			} else if(next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)){
-				play.prepareMakeUT(dist, getSpeakableStreetName(next)).play();
+				play.prepareMakeUT(dist, getSpeakableStreetName(currentSegment, next)).play();
 			} 
 		}
 	}
 
-	private void playMakeTurnIn(RouteDirectionInfo next, int dist, RouteDirectionInfo pronounceNextNext) {
+	private void playMakeTurnIn(RouteSegmentResult currentSegment, RouteDirectionInfo next, int dist, RouteDirectionInfo pronounceNextNext) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if (play != null) {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isPlay = true;
 			if (tParam != null) {
-				play.turn(tParam, dist, getSpeakableStreetName(next));
+				play.turn(tParam, dist, getSpeakableStreetName(currentSegment, next));
 			} else if (next.getTurnType().isRoundAbout()) {
-				play.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(next));
+				play.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next));
 			} else if (next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)) {
-				play.makeUT(dist, getSpeakableStreetName(next));
+				play.makeUT(dist, getSpeakableStreetName(currentSegment, next));
 			} else {
 				isPlay = false;
 			}
@@ -481,14 +502,14 @@ public class VoiceRouter {
 				isPlay = true;
 				if (next.getTurnType().getValue().equals(TurnType.C) && 
 						!TurnType.C.equals(t.getValue())) {
-					play.goAhead(dist, getSpeakableStreetName(next));
+					play.goAhead(dist, getSpeakableStreetName(currentSegment, next));
 				}
 				if (TurnType.TL.equals(t.getValue()) || TurnType.TSHL.equals(t.getValue()) || TurnType.TSLL.equals(t.getValue())
 						|| TurnType.TU.equals(t.getValue()) || TurnType.KL.equals(t.getValue())) {
-					play.then().bearLeft( getSpeakableStreetName(next));
+					play.then().bearLeft( getSpeakableStreetName(currentSegment, next));
 				} else if (TurnType.TR.equals(t.getValue()) || TurnType.TSHR.equals(t.getValue()) || TurnType.TSLR.equals(t.getValue())
 						|| TurnType.KR.equals(t.getValue())) {
-					play.then().bearRight( getSpeakableStreetName(next));
+					play.then().bearRight( getSpeakableStreetName(currentSegment, next));
 				}
 			}
 			if(isPlay){
@@ -497,17 +518,17 @@ public class VoiceRouter {
 		}
 	}
 
-	private void playMakeTurn(RouteDirectionInfo next, RouteDirectionInfo nextNext) {
+	private void playMakeTurn(RouteSegmentResult currentSegment, RouteDirectionInfo next, RouteDirectionInfo nextNext) {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
 			String tParam = getTurnType(next.getTurnType());
 			boolean isplay = true;
 			if(tParam != null){
-				play.turn(tParam, getSpeakableStreetName(next));
+				play.turn(tParam, getSpeakableStreetName(currentSegment, next));
 			} else if(next.getTurnType().isRoundAbout()){
-				play.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(),  getSpeakableStreetName(next));
+				play.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(),  getSpeakableStreetName(currentSegment, next));
 			} else if(next.getTurnType().getValue().equals(TurnType.TU) || next.getTurnType().getValue().equals(TurnType.TRU)){
-				play.makeUT( getSpeakableStreetName(next));
+				play.makeUT( getSpeakableStreetName(currentSegment, next));
 				// do not say it
 //				} else if(next.getTurnType().getValue().equals(TurnType.C)){
 //					play.goAhead();
@@ -519,13 +540,13 @@ public class VoiceRouter {
 				String t2Param = getTurnType(nextNext.getTurnType());
 				if (t2Param != null) {
 					if(isplay) { play.then(); }
-					play.turn(t2Param, next.distance, "");
+					play.turn(t2Param, next.distance, empty);
 				} else if (nextNext.getTurnType().isRoundAbout()) {
 					if(isplay) { play.then(); }
-					play.roundAbout(next.distance, nextNext.getTurnType().getTurnAngle(), nextNext.getTurnType().getExitOut(), "");
+					play.roundAbout(next.distance, nextNext.getTurnType().getTurnAngle(), nextNext.getTurnType().getExitOut(), empty);
 				} else if (nextNext.getTurnType().getValue().equals(TurnType.TU)) {
 					if(isplay) { play.then(); }
-					play.makeUT(next.distance, "");
+					play.makeUT(next.distance, empty);
 				}
 				isplay = true;
 			}

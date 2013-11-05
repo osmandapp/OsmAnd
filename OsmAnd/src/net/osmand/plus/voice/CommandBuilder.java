@@ -70,7 +70,9 @@ public class CommandBuilder {
 		Term[] list = new Term[args.length];
 		for (int i = 0; i < args.length; i++) {
 			Object o = args[i];
-			if(o instanceof java.lang.Number){
+			if(o instanceof Term){
+				list[i] = (Term) o;
+			} else if(o instanceof java.lang.Number){
 				if(o instanceof java.lang.Double){
 					list[i] = new alice.tuprolog.Double((Double) o);
 				} else if(o instanceof java.lang.Float){
@@ -104,7 +106,7 @@ public class CommandBuilder {
 	}
 	
 	
-	public CommandBuilder goAhead(double dist, String streetName){
+	public CommandBuilder goAhead(double dist, Term streetName){
 		return alt(prepareStruct(C_GO_AHEAD, dist, streetName), prepareStruct(C_GO_AHEAD, dist));
 	}
 	
@@ -112,7 +114,7 @@ public class CommandBuilder {
 		return addCommand(C_MAKE_UTWP);
 	}
 
-	public CommandBuilder makeUT(String streetName){
+	public CommandBuilder makeUT(Term streetName){
 		return alt(prepareStruct(C_MAKE_UT, streetName), prepareStruct(C_MAKE_UT));
 	}
 	
@@ -130,20 +132,20 @@ public class CommandBuilder {
 	
 	
 	
-	public CommandBuilder makeUT(double dist, String streetName){
+	public CommandBuilder makeUT(double dist, Term streetName){
 		return alt(prepareStruct(C_MAKE_UT, dist, streetName), prepareStruct(C_MAKE_UT, dist));
 	}
 	
-	public CommandBuilder prepareMakeUT(double dist, String streetName){
+	public CommandBuilder prepareMakeUT(double dist, Term streetName){
 		return alt(prepareStruct(C_PREPARE_MAKE_UT, dist, streetName), prepareStruct(C_PREPARE_MAKE_UT, dist));
 	}
 	
 	
-	public CommandBuilder turn(String param, String streetName) {
+	public CommandBuilder turn(String param, Term streetName) {
 		return alt(prepareStruct(C_TURN, param, streetName), prepareStruct(C_TURN, param));
 	}
 	
-	public CommandBuilder turn(String param, double dist, String streetName){
+	public CommandBuilder turn(String param, double dist, Term streetName){
 		return alt(prepareStruct(C_TURN, param, dist, streetName), prepareStruct(C_TURN, param, dist));
 	}
 	
@@ -153,19 +155,19 @@ public class CommandBuilder {
 	 * @param dist
 	 * @return
 	 */
-	public CommandBuilder prepareTurn(String param, double dist, String streetName){
+	public CommandBuilder prepareTurn(String param, double dist, Term streetName){
 		return alt(prepareStruct(C_PREPARE_TURN, param, dist, streetName), prepareStruct(C_PREPARE_TURN, param, dist));
 	}
 	
-	public CommandBuilder prepareRoundAbout(double dist, int exit, String streetName){
+	public CommandBuilder prepareRoundAbout(double dist, int exit, Term streetName){
 		return alt(prepareStruct(C_PREPARE_ROUNDABOUT, dist, exit, streetName), prepareStruct(C_PREPARE_ROUNDABOUT, dist));
 	}
 	
-	public CommandBuilder roundAbout(double dist, double angle, int exit, String streetName){
+	public CommandBuilder roundAbout(double dist, double angle, int exit, Term streetName){
 		return alt(prepareStruct(C_ROUNDABOUT, dist, angle, exit, streetName), prepareStruct(C_ROUNDABOUT, dist, angle, exit));
 	}
 	
-	public CommandBuilder roundAbout(double angle, int exit, String streetName) {
+	public CommandBuilder roundAbout(double angle, int exit, Term streetName) {
 		return alt(prepareStruct(C_ROUNDABOUT, angle, exit, streetName), prepareStruct(C_ROUNDABOUT, angle, exit));
 	}
 	
@@ -193,11 +195,11 @@ public class CommandBuilder {
 		return addCommand(C_AND_ARRIVE_WAYPOINT, name);
 	}
 	
-	public CommandBuilder bearLeft(String streetName){
+	public CommandBuilder bearLeft(Term streetName){
 		return alt(prepareStruct(C_BEAR_LEFT, streetName), prepareStruct(C_BEAR_LEFT));
 	}
 	
-	public CommandBuilder bearRight(String streetName){
+	public CommandBuilder bearRight(Term streetName){
 		return alt(prepareStruct(C_BEAR_RIGHT, streetName), prepareStruct(C_BEAR_RIGHT));
 	}
 	

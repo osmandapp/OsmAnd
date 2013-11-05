@@ -53,6 +53,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	private AudioFocusHelper mAudioFocusHelper;
 	protected String language = "";
 	protected int streamType;
+	private int currentVersion;
+
 	protected AbstractPrologCommandPlayer(ClientContext ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
 		throws CommandPlayerException 
 	{
@@ -133,6 +135,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 				if (!(val instanceof Number) ||  Arrays.binarySearch(sortedVoiceVersions,((Number)val).intValue()) < 0) {
 					throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
 				}
+				currentVersion = ((Number)val).intValue();
 			}
 			if (log.isInfoEnabled()) {
 				log.info("Initializing voice subsystem  " + voiceProvider + " : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$
@@ -188,6 +191,10 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 			log.info("Speak files " + files);
 		}
 		return files;
+	}
+	
+	public int getCurrentVersion() {
+		return currentVersion;
 	}
 	
 	@Override

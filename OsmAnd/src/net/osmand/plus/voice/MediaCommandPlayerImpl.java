@@ -143,5 +143,10 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	public static boolean isMyData(File voiceDir) {
 		return new File(voiceDir, CONFIG_FILE).exists();
 	}
+
+	@Override
+	public boolean supportsStructuredStreetNames() {
+		return false;
+	}
 	
 }

@@ -16,8 +16,6 @@ import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import alice.tuprolog.Struct;
-import alice.tuprolog.Term;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -59,7 +57,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	}
 
 	private static final String CONFIG_FILE = "_ttsconfig.p";
-	private static final int[] TTS_VOICE_VERSION = new int[] { 102 }; // !! MUST BE SORTED we don't support 
+	private static final int[] TTS_VOICE_VERSION = new int[] { 102, 103 }; // !! MUST BE SORTED  
 	// TTS any more 101 because of to much changes
 	private static final Log log = PlatformUtil.getLog(TTSCommandPlayerImpl.class);
 	private TextToSpeech mTts;
@@ -222,6 +220,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	public void updateAudioStream(int streamType) {
 		super.updateAudioStream(streamType);
 		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, streamType+"");		
+	}
+
+	@Override
+	public boolean supportsStructuredStreetNames() {
+		return getCurrentVersion() >= 103;
 	}
 
 }

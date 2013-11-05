@@ -6,17 +6,19 @@ import alice.tuprolog.Struct;
 
 public interface CommandPlayer {
 
-	public abstract String getCurrentVoice();
+	public String getCurrentVoice();
 
-	public abstract CommandBuilder newCommandBuilder();
+	public CommandBuilder newCommandBuilder();
 
-	public abstract void playCommands(CommandBuilder builder);
+	public void playCommands(CommandBuilder builder);
 
-	public abstract void clear();
+	public void clear();
 
-	public abstract List<String> execute(List<Struct> listStruct);
+	public List<String> execute(List<Struct> listStruct);
 	
-	public abstract void updateAudioStream(int streamType);
+	public void updateAudioStream(int streamType);
 
     public String getLanguage();
+    
+    public boolean supportsStructuredStreetNames();
 }

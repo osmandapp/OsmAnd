@@ -10,18 +10,19 @@ import java.util.Set;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.util.Algorithms;
+import alice.tuprolog.Struct;
+import alice.tuprolog.Term;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.preference.PreferenceScreen;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -128,32 +129,67 @@ public class TestVoiceActivity extends SherlockActivity {
 		bld.show();
 	}
 	
+	private Term street(CommandPlayer p, String name) {
+		return street(p, name, "", "", "");
+	}
+	
+	private Term street(CommandPlayer p, String name, String ref) {
+		return street(p, name, ref, "", "");
+	}
+	
+	private Term street(CommandPlayer p, String name, String ref, String dest) {
+		return street(p, name, ref, dest, "");
+	}
+	
+	private Term getTermString(String s) {
+		if(!Algorithms.isEmpty(s)) {
+			return new Struct(s);
+		}
+		return new Struct("");
+	}
+	private Term street(CommandPlayer p, String name, String ref, String destName, String currentName) {
+		if(p.supportsStructuredStreetNames()) {
+			Struct next = new Struct(new Term[] { getTermString(ref),
+					getTermString(name),
+					getTermString(destName) });
+			Term current = new Struct("");
+			if (currentName.length() > 0) {
+				current = new Struct(new Term[] { getTermString(""),
+						getTermString(currentName),
+						getTermString("") });
+			}
+			Struct voice = new Struct("voice", next, current );
+			return voice;
+		}
+		return new Struct(name);
+	}
+	
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
 		addButton(ll, "New route has been calculated (11350m & 2h30m5sec)", builder(p).newRouteCalculated(11350, 9005));
 		addButton(ll, "Route recalculated (23150m & 350sec)", builder(p).routeRecalculated(23150, 350));
 
-		addButton(ll, "Prepare to turn slighlty left after 850m then bear right", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 850, "").then().bearRight(""));
-		addButton(ll, "After 1050m turn sharply left onto 'Hauptstrasse'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 1050, "Hauptstrasse"));
-		addButton(ll, "Turn left onto 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, "Main Street"));
-		addButton(ll, "Prepare to turn right after 320m onto 'Mini'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 320, "Mini"));
-		addButton(ll, "After 370m turn slightly right onto 'F23'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, "F23"));
-		addButton(ll, "Turn sharply right onto 'Main Street' then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, "Main Street").then().bearLeft(""));
+		addButton(ll, "Prepare to turn slighlty left after 850m then bear right", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 850, street(p, "")).then().bearRight(street(p, "")));
+		addButton(ll, "After 1050m turn sharply left onto 'Hauptstrasse'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 1050, street(p, "Hauptstrasse")));
+		addButton(ll, "Turn left onto 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "Main Street")));
+		addButton(ll, "Prepare to turn right after 320m onto 'Mini'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 320, street(p, "Mini")) );
+		addButton(ll, "After 370m turn slightly right onto 'F23' 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Main street", "F23")));
+		addButton(ll, "Turn sharply right onto 'Main Street' then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "Main Street")).then().bearLeft(street(p, "")));
 
-		addButton(ll, "Prepare to keep left ' ' after 370m", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 370, ""));
-		addButton(ll, "Keep left ' ' then after 400m keep right 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, "").then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 400, "A1"));
+		addButton(ll, "Prepare to keep left ' ' after 370m", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 370, street(p, "")));
+		addButton(ll, "Keep left ' ' then after 400m keep right 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 400, street(p,"", "A1")));
 
-		addButton(ll, "Prepare to make a U-turn after 400m", builder(p).prepareMakeUT(400, ""));
-		addButton(ll, "After 640m make a U-turn", builder(p).makeUT(640, ""));
-		addButton(ll, "Make a U-turn on 'Riviera'", builder(p).makeUT("Riviera"));
+		addButton(ll, "Prepare to make a U-turn after 400m", builder(p).prepareMakeUT(400, street(p, "")));
+		addButton(ll, "After 640m make a U-turn", builder(p).makeUT(640, street(p, "")));
+		addButton(ll, "Make a U-turn on 'Riviera'", builder(p).makeUT(street(p, "Riviera")));
 		addButton(ll, "When possible, make a U-turn", builder(p).makeUTwp());
 
-		addButton(ll, "Prepare to enter a roundabout after 750m (and take the 3rd exit onto 'Liberty')", builder(p).prepareRoundAbout(750, 3, "Liberty"));
-		addButton(ll, "After 450m enter the roundabout and take the 1st exit onto 'Market Square'", builder(p).roundAbout(450, 0, 1, "Market Square"));
-		addButton(ll, "Roundabout: Take the 2nd exit onto 'Bridge Avenue'", builder(p).roundAbout(0, 2, "Bridge Avenue"));
+		addButton(ll, "Prepare to enter a roundabout after 750m (and take the 3rd exit onto 'Liberty')", builder(p).prepareRoundAbout(750, 3, street(p,"Liberty")));
+		addButton(ll, "After 450m enter the roundabout and take the 1st exit onto 'Market Square'", builder(p).roundAbout(450, 0, 1, street(p,"", "", "Market Square")));
+		addButton(ll, "Roundabout: Take the 2nd exit onto 'Bridge Avenue'", builder(p).roundAbout(0, 2, street(p, "Bridge Avenue")));
 
-		addButton(ll, "Follow the road for 2350m to ' '", builder(p).goAhead(2350, ""));
-		addButton(ll, "Follow the road for 360m to 'Broadway' and arrive at your waypoint ' '", builder(p).goAhead(360, "Broadway").andArriveAtIntermediatePoint(""));
-		addButton(ll, "Follow the road for 800m to 'A33' and arrive at your destination", builder(p).goAhead(800, "A33").andArriveAtDestination(""));
+		addButton(ll, "Follow the road for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
+		addButton(ll, "Follow the road for 360m to 'Broadway' and arrive at your waypoint ' '", builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint(""));
+		addButton(ll, "Follow the road for 800m to 'A33' and arrive at your destination", builder(p).goAhead(800, street(p,"", "A33")).andArriveAtDestination(""));
 
 		addButton(ll, "Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
 		addButton(ll, "Arrive at your intermediate point 'Friend'", builder(p).arrivedAtIntermediatePoint("Friend"));
