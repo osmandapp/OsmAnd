@@ -458,10 +458,11 @@
 		\n\nPotom vyberte spôsob ako zdieľať Vaše umiestnenie. Na výber je: E-Mail, SMS alebo len skopírovanie súradníc umiestnenia do schránky.
 	</string>
   <string name="tip_favorites">Obľúbené miesta</string>
-  <string name="tip_favorites_t">"Ak Vás unavuje hľadať miesta, ktoré často navštevujete, môžete si tieto miesta jednoducho pridať medzi Obľúbené a potom ich používať iba pár kliknutiami.
-\n\tNa vytvorenie Obľúbeného bodu musíte ísť do Kontextového menu mapy, vybrať možnosť \'Pridať do obľúbených\' a zadať preň vhodné meno. Po uložení potom môžte k nemu jednoducho pristupovať cez \'Hlavné Menu\'-&gt;\'Obľúbené\'.
-\n\tDlhým kliknutím na obľúbený bod v ponuke \'Obľúbené\', sa môžete navigovať k tomuto bodu, upraviť alebo zmazať ho.
-\n\tNa zobrazenie všetkých Obľúbených bodov priamo na mape, môžete zapnúť vrstvu \'Obľúbené\' cez \'Kontextové menu mapy\' -&gt; \'Zobrazenie\'. "</string>
+  <string name="tip_favorites_t">Často používané body si môžete uložiť do Obľúbených miest nasledovne:
+		\n\nV "Kontextovom menu" akéhokoľvek bodu mapy vyberte možnosť "Pridať medzi Obľúbené miesta" a zadajte meno.
+		\n\nPo uložení potom môžete k nemu jednoducho pristupovať cez "Hlavné Menu" → "Obľúbené". Dlhým kliknutím na obľúbený bod v zozname "Obľúbené" môžete k tomuto bodu navigovať, upraviť ho alebo vymazať.
+		\n\nNa zobrazenie všetkých Obľúbených bodov priamo na mape môžete zapnúť vrstvu "Obľúbené miesta" cez "Kontextové menu mapy" -&gt; "Zobrazenie".
+	</string>
   <string name="tip_osm_improve">Vylepšovanie Openstreetmap-u</string>
   <string name="tip_osm_improve_t">OsmAnd používa mapy založené na dátach Openstreetmap.org (OSM) a nie je navrhnutý len pre cestovanie a navigovanie, ale aj pre vylepšovanie a pomoc projektu Openstreetmap. Iba pár kliknutiami môžete jednoducho vytvoriť a nahrať nový bod záujmu (POI) alebo OSM chybu.
 		\n\nNajprv musíte povoliť modul "OSM upravovanie" v "Nastavenia" → "Správca zásuvných modulov". Potom zadať Vaše prihlasovacie údaje v "Nastavenia" → "OSM upravovanie".
@@ -483,8 +484,15 @@
   <string name="tip_navigation">Navigácia</string>
   <string name="tip_navigation_t">Na zapnutie navigácie musíte najskôr vybrať cieľový bod. Potom stlačte \'Menu\'-&gt;\'Pokyny\' na mape a vyberte typ navigovania.</string>
   <string name="tip_search">Vyhľadávanie</string>
-  <string name="tip_search_t">"Môžete vyhľadať miesto priamo na mape alebo adresou, umiestnením, ako bod záujmu(POI) alebo vo forme obľúbeného bodu.
-\n\tStlačením \'Hľadať\' na mape sa otvorí vyhľadávanie. Tam máte 2 možnosti : \'Navigovať do\' alebo \'Zobraziť na mape\'. "</string>
+  <string name="tip_search_t">Môžete vyhľadať miesto priamo na mape pomocou "Kontextové menu mapy" → "Hľadať v okolí" alebo cez "Menu" → "Hľadať".
+		\n\nVyhľadávacia obrazovka obsahuje pomôcky pre hľadanie
+		\n\t* podľa adresy
+		\n\t* podľa súradníc
+		\n\t* bodu záujmu (POI) podľa názvu alebo typu
+		\n\t* z histórie hľadaní
+		\n\t* z obľúbených miest
+		\n\nPre všetky výsledky ponúka kontextové menu alebo panel akcií možnosti ako "Pokyny" alebo "Zobraziť na mape, atď.
+	</string>
   <string name="tip_map_context_menu">Menu \'Použiť umiestnenie\'</string>
   <string name="tip_map_context_menu_t">Kontextové menu mapy obsahuje všetky funkcie pre prácu s bodom (pozíciou).
 		\n\nJe dostupné dlhším podržaním na mape (a potom stlačením zobrazeného obdĺžnika). Alebo stlačením track ball tlačidla alebo zvolením "Menu" → "Použiť umiestnenie…" (posledné 2 spôsoby použijú stred obrazovky ako zvolený bod).
@@ -971,7 +979,7 @@
   <string name="left_side_navigation_descr">Zapnite ak chcete navigovať v krajinách s ľavostrannou premávkou</string>
   <string name="local_index_routing_data">Navigačné údaje</string>
   <string name="navigate_point_format">Formát :</string>
-  <string name="poi_search_desc">Hľadanie POI (Bodu zájmu)</string>
+  <string name="poi_search_desc">Hľadanie POI (Bodu záujmu)</string>
   <string name="address_search_desc">Hľadanie adresy</string>
   <string name="navpoint_search_desc">Súradnice</string>
   <string name="transport_search_desc">Hľadanie hromadnej dopravy</string>
@@ -1056,18 +1064,50 @@
 <string name="osmand_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
 <string name="rendering_attr_contourLines_description">Výber minimálneho priblíženia na zobrazenie na mape, ak sú dostupné. Môže byť vyžadovaný oddelený SRTM súbor:</string>
-  <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automatizované navigačné pokyny) OsmAnd je open source navigačná aplikácia s prístupom k širokej škále globálnych dát OpenStreetMap (OSM). Všetky mapové podklady (vektorové alebo dlaždice máp) môžu byť uložené na karte pamäti telefónu pre offline použitie. OsmAnd tiež ponúka offline a online smerovacie funkcie, vrátane turn-by-turn hlasových pokynov. Niektoré z hlavných funkcií:\n- Kompletné funkcie v režime offline (uloženie stiahnutých vektorových alebo dlaždicových máp vo voliteľnej zložke)
-\n- Kompaktné offline vektorové mapy pre celý svet\n- Stiahnutie máp pre krajinu alebo región priamo z aplikácie
-\n- Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, body záujmu, obľúbené, vrstevnice, dopravné spojenie verejnými dopravnými zastávky, ďalšie mapy s prispôsobiteľnou transparentnosťou\n- Offline vyhľadávanie adries a miest (POI) - Offline smerovania pre krátke vzdialenosti (experimentálne)
-\n- Režimy pre auto, bicykel, a peší režim s:
-\n - voliteľným/automatickým denným / nočným režimom\n - voliteľné približovanie mapz v závislosti na rýchlosti\n - voliteľné otáčanie mapy podľa kompasu alebo smeru pohybu\n - voliteľne navádzanie do jazdných pruhov, zobrazenie obmedzenie rýchlosti, nahrané a TTS hlasy
-\nObmedzenia tejto voľnej verzie OsmAndu:
-\n- Počet stiahnutí máp je obmedzené\n- Žiadny prístup k POI offline Wikipédii\nOsmAnd je aktívne vyvíjaný a náš projekt a jeho ďalší pokrok závisí od finančných príspevkov na financovanie rozvoja a testovanie nových funkcii. Prosím, zvážte nákup OsmAnd+, alebo financovanie konkrétnych nových funkcii (bidforfix) alebo všeobecný dar. Viac na www.osmand.net. "</string>
-	<string name="osmand_plus_long_description_1000_chars">"OsmAnd (OSM Automatizované navigačné pokyny) OsmAnd je open source navigačná aplikácia s prístupom k širokej škále globálnych dát OpenStreetMap (OSM). Všetky mapové podklady (vektorové alebo dlaždice máp) môžu byť uložené na karte pamäti telefónu pre offline použitie. OsmAnd tiež ponúka offline a online smerovacie funkcie, vrátane turn-by-turn hlasových pokynov. Niektoré z hlavných funkcií:\n- Kompletné funkcie v režime offline (uloženie stiahnutých vektorových alebo dlaždicových máp vo voliteľnej zložke)
-\n- Kompaktné offline vektorové mapy pre celý svet\n- Neobmedzené stiahnutie máp pre krajinu alebo región priamo z aplikácie
-\n- Offlinové body záujmu z Wikipedie (Stiahnite si Wikipedia POIs)\n- Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, body záujmu, obľúbené, vrstevnice, dopravné spojenie verejnými dopravnými zastávky, ďalšie mapy s prispôsobiteľnou transparentnosťou\n- Offline vyhľadávanie adries a miest (POI) - Offline smerovania pre krátke vzdialenosti (experimentálne)
-\n- Režimi pre auto, bicykel, a peší režim s:
-\n - voliteľným/automatickým denným / nočným režimom\n - voliteľné približovanie mapy v závislosti na rýchlosti\n - voliteľné otáčanie mapy podľa kompasu alebo smeru pohybu\n - voliteľne navádzanie do jazdných pruhov, zobrazenie obmedzenie rýchlosti, nahrané a TTS hlasy "</string>
+  <string name="osmand_long_description_1000_chars">
+		OsmAnd (OSM Automatizované navigačné pokyny)
+
+		OsmAnd je open source navigačná aplikácia s prístupom k širokej škále globálnych dát OpenStreetMap (OSM). Všetky mapové podklady (vektorové alebo dlaždice máp) môžu byť uložené na karte pamäti telefónu pre offline použitie. OsmAnd tiež ponúka offline a online smerovacie funkcie, vrátane turn-by-turn hlasových pokynov.
+
+		Niektoré z hlavných funkcií:
+		- Kompletné funkcie v režime offline (uloženie stiahnutých vektorových alebo dlaždicových máp vo voliteľnej zložke)
+		- Kompaktné offline vektorové mapy pre celý svet
+		- Stiahnutie máp pre krajinu alebo región priamo z aplikácie
+		- Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, body záujmu, obľúbené, vrstevnice, dopravné spojenie verejnými dopravnými zastávky, ďalšie mapy s prispôsobiteľnou priehľadnosťou
+		- Offline vyhľadávanie adries a miest (POI)
+		- Offline smerovania pre krátke vzdialenosti (experimentálne)
+		- Režimy pre auto, bicykel, a peší režim s:
+		-  voliteľným/automatickým denným / nočným režimom
+		-  voliteľné približovanie mapy v závislosti na rýchlosti
+		-  voliteľné otáčanie mapy podľa kompasu alebo smeru pohybu
+		-  voliteľne navádzanie do jazdných pruhov, zobrazenie obmedzenia rýchlosti, nahrané a TTS hlasy
+
+		Obmedzenia tejto voľnej verzie OsmAndu:
+		- Počet stiahnutí máp je obmedzený
+		- Žiadny prístup k POI offline Wikipédii
+
+		OsmAnd je aktívne vyvíjaný a náš projekt a jeho ďalší pokrok závisí od finančných príspevkov na financovanie rozvoja a testovanie nových funkcii. Prosím, zvážte nákup OsmAnd+, alebo financovanie konkrétnych nových funkcií (bidforfix) alebo všeobecný dar. Viac na www.osmand.net.
+	</string>
+	<string name="osmand_plus_long_description_1000_chars">
+		OsmAnd+ (OSM Automatizované navigačné pokyny)
+
+		OsmAnd+ je open source navigačná aplikácia s prístupom k širokej škále globálnych dát OpenStreetMap (OSM). Všetky mapové podklady (vektorové alebo dlaždice máp) môžu byť uložené na karte pamäti telefónu pre offline použitie. OsmAnd tiež ponúka offline a online smerovacie funkcie, vrátane turn-by-turn hlasových pokynov.
+
+		OsmAnd+ je platená verzia aplikácie. Jej zakúpením podporíte projekt, vývoj nových funkcií a získate najnovšie aktualizácie.
+
+		Niektoré z hlavných funkcií:
+		- Kompletné funkcie v režime offline (uloženie stiahnutých vektorových alebo dlaždicových máp vo voliteľnej zložke)
+		- Kompaktné offline vektorové mapy pre celý svet
+		- Neobmedzené sťahovanie máp pre krajinu alebo región priamo z aplikácie
+		- Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, body záujmu, obľúbené, vrstevnice, dopravné spojenie verejnými dopravnými zastávky, ďalšie mapy s prispôsobiteľnou priehľadnosťou
+		- Offline vyhľadávanie adries a miest (POI)
+		- Offline smerovanie pre krátke vzdialenosti (experimentálne)
+		- Režimy pre auto, bicykel, a peší režim s:
+		-  voliteľným/automatickým denným / nočným režimom
+		-  voliteľné približovanie mapy v závislosti na rýchlosti
+		-  voliteľné otáčanie mapy podľa kompasu alebo smeru pohybu
+		-  voliteľne navádzanie do jazdných pruhov, zobrazenie obmedzenia rýchlosti, nahrané a TTS hlasy
+	</string>
 	<string name="tip_rotation_switching_t_v2">Môžete prepínať, či a ako sa zobrazenie mapy otáča tým, že opakovane kliknete na ikonu kompasu v obrazovke mapy.
 
 		\n\nMožnosti sú:
@@ -1083,9 +1123,10 @@
 		\n\t* "Nočný režim": vždy používať nočný režim
 		\n\t* "Svetelný senzor": režim je riadený svetelným senzorom v zariadení (iba ak je vo výbave)
 	</string>	
-	<string name="tip_map_switch_t_v2">"Zdroj mapy a zobrazené vrstvy sa nastavujú pomocou \'Menu\' -&gt; \'Zobrazeni\' na obrazovke mapy.
-\nPomocou \"Zdroj mapy...\" môžete vybrať predinštalované offline vektorové mapy alebo preddefinované on-line dlaždicové mapy (potreba aktivovať modul \'Online mapy\'), alebo mapy ručne vytvorené pomocou napr. OsmAndMapCreator na PC.
-\nOsmAnd tiež podporuje vlastné zdroje máp. "</string>
+	<string name="tip_map_switch_t_v2">Zdroj mapy a zobrazené vrstvy sa nastavujú pomocou "Menu" → "Zobrazenie".
+		\n\nPomocou "Zdroj mapy..." môžete vybrať predinštalované offline vektorové mapy (potrebné aj pre offline navigáciu) alebo preddefinované on-line dlaždicové mapy (potrebné aktivovať modul "Online mapy" v "Nastavenia" → "Správca zásuvných modulov") alebo mapy ručne vytvorené pomocou napr. OsmAndMapCreator na PC.
+		\n\nOsmAnd tiež podporuje vlastné zdroje máp.
+	</string>
 	<string name="tip_app_mode_t_v2">OsmAnd podporuje rôzne (nastaviteľné) aplikačné profily pre rôzne prípady použitia.
 		\n\nProfily môžete zmeniť pomocou tlačidla profilu v ľavom dolnom rohu obrazovky mapy (ikona auto, bicykel alebo pešia) alebo pri vytváraní navigačnej trasy.
 	</string>
@@ -1207,7 +1248,6 @@
     <string name="item_checked">označené</string>
     <string name="item_unchecked">neoznačené</string>
     <string name="map_view">Mapa</string>
-    <string name="tip_recent_changes_1_2_t">"Zmeny vo verzii 1.2: "</string>
     <string name="av_def_action_choose">Vybrať pri požiadaní</string>
     <string name="access_arrival_time">Čas príchodu</string>
     <string name="precise_routing_mode_descr">Zapni presné vyhľadávanie trasy pre výpočet presnej trasy bez závad. Výpočet je veľmi obmedzený na vzdialenosť a je pomalší.</string>
