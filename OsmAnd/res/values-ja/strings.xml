@@ -966,10 +966,10 @@ POIの更新は利用できません</string>
     <string name="poi_filter_sightseeing">観光(Sightseeing)</string>
     <string name="poi_filter_accomodation">収容施設(Accommodation)</string>
     <string name="show_warnings_title">アラームを表示…</string>
-	<string name="show_warnings_descr">交通警告(制限速度、車両止め、強制減速設備)、スピードカメラ警告、車線情報を設定</string>
+	<string name="show_warnings_descr">トラフィック警告(制限速度、強制停止、スピードバンプ)、スピードカメラ警告、車線情報を設定</string>
 	<string name="use_compass_navigation_descr">方向が全く検出できない場合コンパスを使用する。</string>
 	<string name="use_compass_navigation">コンパスを使用する</string>
-	<string name="avoid_motorway">高速道路を使わない</string>
+	<string name="avoid_motorway">高速道路を使用しない</string>
 	<string name="snap_to_road_descr">ナビゲーション中は道路から外れない</string>
 	<string name="snap_to_road">道路に合わせる</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
@@ -978,7 +978,7 @@ POIの更新は利用できません</string>
 	<string name="osmand_plus_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
 	<string name="filterpoi_activity">POIフィルタを作成</string>
 	<string name="select_navigation_mode">トランスポートモードの選択</string>
-	<string name="day_night_info_description">日出: %1$s \日没: %2$s</string>
+	<string name="day_night_info_description">日の出: %1$s \日の入: %2$s</string>
 	<string name="day_night_info">昼/夜の情報</string>
 	<string name="map_widget_day_night">昼/夜 地図</string>
 	<string name="map_widget_vector_attributes">描画方法の属性:</string>
@@ -987,10 +987,10 @@ POIの更新は利用できません</string>
 	<string name="live_monitoring_mode_on">停止\n オンライン追跡</string>
 	<string name="layer_map_appearance">画面設定</string>
 	<string name="show_lanes">車線を表示</string>
-	<string name="avoid_unpaved">未舗装の道路を利用しない</string>
-	<string name="avoid_ferries">フェリーを利用しない</string>
-	<string name="avoid_in_routing_title">利用しない交通ルート…</string>
-	<string name="avoid_in_routing_descr">有料道路、未舗装、フェリーを利用しない</string>
+	<string name="avoid_unpaved">未舗装の道路を使用しない</string>
+	<string name="avoid_ferries">フェリーを使用しない</string>
+	<string name="avoid_in_routing_title">使用しない道路の指定</string>
+	<string name="avoid_in_routing_descr">有料道路、未舗装道路、フェリーを無視するか設定</string>
 	<string name="map_widget_fluorescent">使用ルートを明滅させる</string>
 	<string name="map_widget_show_ruler">縮尺</string>
 	<string name="map_widget_appearance">その他:</string>
@@ -1028,7 +1028,7 @@ POIの更新は利用できません</string>
 	<string name="bg_service_interval">呼び出し間隔の設定:</string>
 	<string name="show_cameras">スピード監視カメラ(オービス等)の表示</string>
 	<string name="show_traffic_warnings">交通警告の表示</string>
-	<string name="avoid_toll_roads">有料道路を使わない</string>
+	<string name="avoid_toll_roads">有料道路を使用しない</string>
 	<string name="continue_follow_previous_route_auto">前回のナビゲーションがまだ終わっていません。続行しますか？ (%1$s seconds)</string>
 	<string name="route_updated_loc_found">現在位置が見つかるとルートを検索します</string>
 	<string name="osmand_parking_hours">時間</string>
@@ -1076,7 +1076,7 @@ POIの更新は利用できません</string>
 	<string name="rendering_attr_noPolygons_name">ポリゴンを隠す</string>
 	<string name="rendering_attr_appMode_name">描画方法</string>
 	<string name="rendering_attr_appMode_description">地図を最適化</string>
-	<string name="rendering_attr_contourLines_description">ズームレベルから表示(要『等高線データ』):</string>
+	<string name="rendering_attr_contourLines_description">表示ズームレベルの選択(要『等高線データ』):</string>
 	<string name="rendering_attr_contourLines_name">等高線を表示</string>
 	<string name="rendering_attr_hmRendered_description">地図の情報量を増やす</string>
 	<string name="rendering_attr_hmRendered_name">地図の詳細表示</string>
