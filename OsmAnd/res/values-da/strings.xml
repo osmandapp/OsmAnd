@@ -1607,7 +1607,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n * Helt ny verdenskortet med større veje, skove og jernbaner
 \n * Kort lup (langt tryk på zoomknappen) - nyttig for raster kort
 \n * Definer/rediger online delkortkilde (angiv udløbstid)
-\n * Understøttelse af tidsbetingede hastighedgrænser (Holland)
+\n * Understøttelse af tidsbetingede hastighedsgrænser (Holland)
 \n * Hurtigere adresse indtastning
 \n * Fejlrettelser til ruteplanlægning og optegning
     </string>
@@ -1635,11 +1635,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_is_too_long">Ruten er muligvis for lang til at blive beregnet af Osmand offline ruteplanlægger.
  I gennemsnit er offline ruteplanlægning mulig mellem punkter på op til 200 km fra hinanden. Tilføj et eller flere mellemliggende rutepunkter for at beregne ruten .</string>
     <string name="auto_zoom_none">Ingen autozoom</string>
-    <string name="auto_zoom_far">Til midtenafstande</string>
-    <string name="auto_zoom_farthest">Langtrækkende</string>
+    <string name="auto_zoom_far">Middelafstand</string>
+    <string name="auto_zoom_farthest">Lange afstande</string>
     <string name="default_and">og</string>
     <string name="default_or">eller</string>
-	<string name="auto_zoom_close">På tæt hold</string>
+	<string name="auto_zoom_close">Tæt på</string>
 	<string name="remember_choice">Husk valg</string>
     <string name="gps_status_eclipsim">GPS status</string>
     </resources>
