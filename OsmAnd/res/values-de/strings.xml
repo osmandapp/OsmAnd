@@ -1469,4 +1469,5 @@
 	<string name="map_magnifier">Karten-Lupe</string>
     <string name="default_and">und</string>
     <string name="default_or">oder</string>
-	</resources>
+	<string name="gps_status_eclipsim">GPS Status</string>
+    </resources>
