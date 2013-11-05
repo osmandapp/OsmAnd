@@ -1316,4 +1316,6 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="auto_zoom_farthest">Långt avstånd</string>
 	<string name="default_and">och</string>
     <string name="default_or">eller</string>
-	</resources>
+	<string name="remember_choice">Kom ihåg mitt val</string>
+    <string name="gps_status_eclipsim">GPS-status</string>
+    </resources>
