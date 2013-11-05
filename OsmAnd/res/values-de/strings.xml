@@ -1350,7 +1350,7 @@
 	<string name="access_mark_final_location_first">Zugänglichkeitsmodus : Bitte zuerst Ziel auswählen</string> 
 	<string name="use_magnetic_sensor_descr">Magnetsensor statt Lagesensor zur Kompassermittlung verwenden</string>
 	<string name="use_magnetic_sensor">Magnetsensor verwenden</string>
-	<string name="local_indexes_cat_srtm">Konturlinien-Daten</string>
+	<string name="local_indexes_cat_srtm">Höhenlinien-Daten</string>
 	<string name="wait_current_task_finished">Bitte warten Sie, der laufende Task wird beendet</string>
 	<string name="downloading_file_new">Herunterladen…</string>
 	<string name="local_osm_changes_backup_successful">OSM-Änderungsdatei erfolgreich erzeugt %1$s</string>
