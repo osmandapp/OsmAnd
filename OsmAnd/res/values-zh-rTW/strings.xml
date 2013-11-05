@@ -1605,4 +1605,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	在平均離線路線兩點之間，可能相距 200km 以上。請新增一個或多個中途點以計算路線。</string>
     <string name="default_and">與</string>
     <string name="default_or">或</string>
-	</resources>
+	<string name="remember_choice">記住我的選擇</string>
+    <string name="gps_status_eclipsim">GPS 狀態</string>
+    </resources>
