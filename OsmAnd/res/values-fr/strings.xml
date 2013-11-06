@@ -1407,4 +1407,7 @@
 	</string>
     <string name="remember_choice">Mémoriser mon choix</string>
     <string name="gps_status_eclipsim">GPS Status</string>
+    <string name="animate_routing_route_not_calculated">Veuillez d'abord calculer l'itinéraire</string>
+    <string name="animate_routing_route">Simulation avec l'itinéraire calculé </string>
+    <string name="animate_routing_gpx">Simulation avec la trace GPX</string>
     </resources>
