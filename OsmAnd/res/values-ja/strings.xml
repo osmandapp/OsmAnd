@@ -1081,4 +1081,26 @@ POIの更新は利用できません</string>
 	<string name="rendering_attr_hmRendered_description">地図の情報量を増やす</string>
 	<string name="rendering_attr_hmRendered_name">地図の詳細表示</string>
 	<string name="local_index_routing_data">ルートのデータ</string>
+	<string name="navigate_point_format">形式:</string>
+	<string name="poi_search_desc">POI(興味のあるポイント)検索</string>
+	<string name="address_search_desc">住所検索</string>
+	<string name="navpoint_search_desc">座標</string>
+	<string name="transport_search_desc">交通機関検索</string>
+	<string name="favourites_search_desc">お気に入り検索</string>
+	<string name="history_search_desc">検索履歴</string>
+	<string name="offline_navigation_not_available">OsmAndオフラインナビゲーションが一時的に利用できません。</string>
+	<string name="download_link_and_local_description">オフラインデータをダウンロードしたり、更新するにはここをタップしてください。 \n既存データの詳細を参照する場合はタップ、無効または削除するためにはロングタップ(押し続け)して下さい。デバイスの現在のデータ (%1$s free):</string>
+	<string name="unknown_from_location">出発点は、まだ決定されていません</string>
+	<string name="basemap_was_selected_to_download">ベースマップはアプリケーションを機能させるに必須なデータです、よってダウンロードすることが選択されます。</string>
+	<string name="local_indexes_cat_tile">オンラインやタイルマップ</string>
+	<string name="local_indexes_cat_map">オフラインマップ(ベクター形式)</string>
+	<string name="map_online_plugin_is_not_installed">別のマップソースを選択するためにオンライン地図プラグインを有効にする</string>
+	<string name="map_online_data">オンラインやタイルマップ</string>
+	<string name="online_map_settings">オンラインマップ</string>
+	<string name="online_map_settings_descr">オンラインまたはキャッシュされたタイルマップソースを設定</string>
+	<string name="map_settings">マップ設定</string>
+	<string name="map_settings_descr">マップ表示を設定</string>
+	<string name="osmand_accessibility_description">特別なアクセシビリティ機能の設定を表示します。</string>
+	<string name="extra_settings">詳細設定</string>
+	<string name="osmand_monitoring_description">Webサービスを使用して、ローカルGPXファイルまたはオンラインにあなたの旅行を記録するための簡単な設定を表示します。</string>
 	</resources>
