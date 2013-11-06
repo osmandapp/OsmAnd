@@ -1470,4 +1470,6 @@
     <string name="default_and">und</string>
     <string name="default_or">oder</string>
 	<string name="gps_status_eclipsim">GPS Status</string>
+    <string name="remember_choice">Auswahl merken</string>
+    <string name="animate_routing_route_not_calculated">Bitte berechnen Sie zuerst die Route</string>
     </resources>
