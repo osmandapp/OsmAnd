@@ -3,6 +3,27 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:orientation="vertical">
+<RadioGroup  android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/radio_route"
+            android:text="@string/animate_routing_route"
+            android:checked="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1" />
+		<RadioButton
+            android:id="@+id/radio_gpx"
+            android:text="@string/animate_routing_gpx"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1" />
+        
+	</RadioGroup>
+    <LinearLayout  android:layout_width="fill_parent" android:id="@+id/layout_animate_gpx"
+		  android:layout_height="fill_parent" android:orientation="vertical" android:visibility="gone">
+    
   <TextView android:text="@string/select_animate_speedup" android:gravity="left"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"
 			android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp"/>
@@ -19,7 +40,6 @@
   <CheckBox android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/AnnounceGPXWpt"
       android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
       android:text="@string/announce_gpx_waypoints"/>
-  <TextView android:text="@string/animate_routing_using_gpx" android:gravity="left"
-			android:layout_width="fill_parent" android:layout_height="wrap_content"
-			android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginTop="5dp"/>
+  
+  </LinearLayout>
 </LinearLayout>
