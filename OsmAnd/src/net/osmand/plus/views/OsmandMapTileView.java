@@ -745,14 +745,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		private float y2;
 		private LatLon initialCenterLatLon;
 		private boolean startRotating = false;
-		private static final float ANGLE_THRESHOLD = 18;
+		private static final float ANGLE_THRESHOLD = 15;
 
 		@Override
 		public void onZoomEnded(double 	relativeToStart, float angleRelative) {
 			// 1.5 works better even on dm.density=1 devices
 			float dz = (float) (Math.log(relativeToStart) / Math.log(2)) * 1.5f;
 			setIntZoom(Math.round(dz) + initialViewport.getZoom());
-			if(Math.abs(angleRelative) < ANGLE_THRESHOLD){
+			if(Math.abs(angleRelative) < ANGLE_THRESHOLD * relativeToStart || 
+					Math.abs(angleRelative) < ANGLE_THRESHOLD / relativeToStart){
 				angleRelative = 0;
 			}
 			rotateToAnimate(initialViewport.getRotate() + angleRelative);

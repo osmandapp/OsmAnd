@@ -289,9 +289,7 @@ public class VoiceRouter {
 		
 		NextDirectionInfo nextInfo = router.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
         RouteSegmentResult currentSegment = router.getCurrentSegmentResult();
-        // after last turn say:
-        
-		if (nextInfo.directionInfo == null || nextInfo.directionInfo.distance == 0) {
+		if (nextInfo.directionInfo == null) {
 			return;
 		}
 		int dist = nextInfo.distanceTo;

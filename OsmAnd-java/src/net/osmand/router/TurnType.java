@@ -101,6 +101,10 @@ public class TurnType {
 		return value.equals(KR); 
 	}
 	
+	public boolean goAhead() {
+		return value.equals(C); 
+	}
+	
 	public boolean isSkipToSpeak() {
 		return skipToSpeak;
 	}
