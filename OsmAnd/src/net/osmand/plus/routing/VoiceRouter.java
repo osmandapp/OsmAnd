@@ -31,6 +31,7 @@ public class VoiceRouter {
 	
  
 	private int currentStatus = STATUS_UNKNOWN;
+	private boolean playedAndArriveAtTarget = false;
 	private float playGoAheadDist = 0;
 	private long lastAnnouncedSpeedLimit = 0;
 	private long lastAnnouncedOffRoute = 0;
@@ -261,6 +262,15 @@ public class VoiceRouter {
 		}
 	}
 	
+	private boolean isTargetPoint(NextDirectionInfo info) {
+		boolean in = info != null && info.intermediatePoint;
+		boolean target = info == null || info.directionInfo == null
+				|| info.directionInfo.distance == 0;
+		return in || target;
+	}
+	
+	
+	
 	/**
 	 * Updates status of voice guidance 
 	 * @param currentLocation 
@@ -280,26 +290,8 @@ public class VoiceRouter {
 		NextDirectionInfo nextInfo = router.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
         RouteSegmentResult currentSegment = router.getCurrentSegmentResult();
         // after last turn say:
-		if (nextInfo == null || nextInfo.directionInfo == null || nextInfo.directionInfo.distance == 0) {
-			// if(currentStatus <= STATUS_UNKNOWN && currentDirection > 0){ This caused this prompt to be suppressed when coming back from a
-			if (repeat || currentStatus <= STATUS_UNKNOWN) {
-				if (playGoAheadToDestination(nextInfo == null ? empty :
-						getSpeakableStreetName(currentSegment, nextInfo.directionInfo),
-						nextInfo == null ? "" : getSpeakablePointName(nextInfo.pointName))) {
-					currentStatus = STATUS_TOLD;
-					playGoAheadDist = 0;
-				}
-			}
-			return;
-		}
-		if(nextInfo.intermediatePoint){
-			if (repeat || currentStatus <= STATUS_UNKNOWN) {
-				if (playGoAheadToIntermediate(getSpeakableStreetName(currentSegment,
-						nextInfo.directionInfo), getSpeakablePointName(nextInfo.pointName))) {
-					currentStatus = STATUS_TOLD;
-					playGoAheadDist = 0;
-				}
-			}
+        
+		if (nextInfo.directionInfo == null || nextInfo.directionInfo.distance == 0) {
 			return;
 		}
 		int dist = nextInfo.distanceTo;
@@ -309,6 +301,7 @@ public class VoiceRouter {
 		if (next != nextRouteDirection) {
 			nextRouteDirection = next;
 			currentStatus = STATUS_UNKNOWN;
+			playedAndArriveAtTarget = false;
 			playGoAheadDist = 0;
 		}
 
@@ -342,6 +335,9 @@ public class VoiceRouter {
 			} else {
 				playMakeTurn(currentSegment, next, null);
 			}
+			if(next.distance < TURN_IN_DISTANCE && isTargetPoint(nextNextInfo)) {
+				andSpeakArriveAtPoint(nextNextInfo);
+			}
 			nextStatusAfter(STATUS_TURN);
 		} else if ((repeat || statusNotPassed(STATUS_TURN_IN)) && isDistanceLess(speed, dist, TURN_IN_DISTANCE)) {
 			if (repeat || dist >= TURN_IN_DISTANCE_END) {
@@ -351,6 +347,7 @@ public class VoiceRouter {
 				} else {
 					playMakeTurnIn(currentSegment, next, dist, null);
 				}
+				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
 			nextStatusAfter(STATUS_TURN_IN);
 			// } else if (statusNotPassed(STATUS_PREPARE) && isDistanceLess(speed, dist, PREPARE_DISTANCE)) {
@@ -361,12 +358,14 @@ public class VoiceRouter {
 				} else {
 					playPrepareTurn(currentSegment, next, dist);
 				}
+				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
 			nextStatusAfter(STATUS_PREPARE);
 			// } else if (statusNotPassed(STATUS_LONG_PREPARE) && isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)){
 		} else if ((repeat || statusNotPassed(STATUS_LONG_PREPARE)) && (dist <= PREPARE_LONG_DISTANCE)) {
 			if (repeat || dist >= PREPARE_LONG_DISTANCE_END) {
 				playPrepareTurn(currentSegment, next, dist);
+				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
 			nextStatusAfter(STATUS_LONG_PREPARE);
 		} else if (statusNotPassed(STATUS_UNKNOWN)) {
@@ -375,6 +374,18 @@ public class VoiceRouter {
 		} else if (repeat || (statusNotPassed(STATUS_TURN_IN) && dist < playGoAheadDist)) {
 			playGoAheadDist = 0;
 			playGoAhead(dist, getSpeakableStreetName(currentSegment, next));
+		}
+	}
+
+	private void playAndArriveAtDestination(boolean repeat, NextDirectionInfo nextInfo,
+			RouteSegmentResult currentSegment) {
+		RouteDirectionInfo next = nextInfo.directionInfo;
+		if(isTargetPoint(nextInfo) && (!playedAndArriveAtTarget || repeat)) {
+			if(next.getTurnType().goAhead()) {
+				playGoAhead(nextInfo.distanceTo, getSpeakableStreetName(currentSegment, next));
+			}
+			andSpeakArriveAtPoint(nextInfo);
+			playedAndArriveAtTarget = true;
 		}
 	}
 
@@ -388,24 +399,6 @@ public class VoiceRouter {
 		}
 	}
 
-
-	private boolean playGoAheadToDestination(Term strName, String destName) {
-		CommandBuilder play = getNewCommandPlayerToPlay();
-		if(play != null){
-			play.goAhead(router.getLeftDistance(), strName).andArriveAtDestination(getSpeakablePointName(destName)).play();
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean playGoAheadToIntermediate(Term strName, String iName) {
-		CommandBuilder play = getNewCommandPlayerToPlay();
-		if(play != null){
-			play.goAhead(router.getLeftDistanceNextIntermediate(), strName).andArriveAtIntermediatePoint(getSpeakablePointName(iName)).play();
-			return true;
-		}
-		return false;
-	}
 	
 	private boolean playMakeUTwp() {
 		CommandBuilder play = getNewCommandPlayerToPlay();
@@ -514,6 +507,20 @@ public class VoiceRouter {
 			}
 			if(isPlay){
 				play.play();
+			}
+		}
+	}
+	
+	private void andSpeakArriveAtPoint(NextDirectionInfo info) {
+		if (isTargetPoint(info)) {
+			String pointName = info == null ? "" : info.pointName;
+			CommandBuilder play = getNewCommandPlayerToPlay();
+			if (play != null) {
+				if (info != null && info.intermediatePoint) {
+					play.andArriveAtIntermediatePoint(getSpeakablePointName(pointName)).play();
+				} else {
+					play.andArriveAtDestination(getSpeakablePointName(pointName)).play();
+				}
 			}
 		}
 	}

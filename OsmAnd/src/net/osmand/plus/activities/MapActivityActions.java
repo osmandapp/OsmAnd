@@ -857,9 +857,6 @@ public class MapActivityActions implements DialogProvider {
 						standardId == R.string.context_menu_item_destination_point) {
 					boolean dest = standardId == R.string.context_menu_item_destination_point;
 					String selected = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-					if(selected == null){
-						selected = mapActivity.getString(R.string.route_descr_lat_lon, latitude, longitude);
-					}
 					targets.navigateToPoint(new LatLon(latitude, longitude), true, 
 							dest ? -1 : targets.getIntermediatePoints().size(), selected);
 					if(targets.getIntermediatePoints().size() > 0) {
