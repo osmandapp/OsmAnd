@@ -1318,4 +1318,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="default_or">eller</string>
 	<string name="remember_choice">Kom ihåg mitt val</string>
     <string name="gps_status_eclipsim">GPS-status</string>
+    <string name="animate_routing_route_not_calculated">Beräkna rutten först</string>
+    <string name="animate_routing_route">Simulera med en beräknad rutt </string>
+    <string name="animate_routing_gpx">Simulera med GPX-spår</string>
     </resources>
