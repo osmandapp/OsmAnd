@@ -482,7 +482,6 @@
   <string name="tip_app_mode">Použiť profil</string>
   
   <string name="tip_navigation">Navigácia</string>
-  <string name="tip_navigation_t">Na zapnutie navigácie musíte najskôr vybrať cieľový bod. Potom stlačte \'Menu\'-&gt;\'Pokyny\' na mape a vyberte typ navigovania.</string>
   <string name="tip_search">Vyhľadávanie</string>
   <string name="tip_search_t">Môžete vyhľadať miesto priamo na mape pomocou "Kontextové menu mapy" → "Hľadať v okolí" alebo cez "Menu" → "Hľadať".
 		\n\nVyhľadávacia obrazovka obsahuje pomôcky pre hľadanie
@@ -1590,4 +1589,20 @@ Približná kvalita pokrytia:
 Zoznam obsiahnutých krajín (prakticky celý svet!):
 Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, Argentína, Arménsko, Aruba, Austrália, Azerbajdžan, Bahamy, Bahrajn, Bangladéš, Barbados, Belgicko, Belize, Benin, Bermudy, Bhután, Bielorusko, Bolívia, Bonaire, Bosna a Hercegovina, Botswana, Brazília, Britské Panenské Ostrovy, Brunei, Bulharsko, Burkina Faso, Burundi, Curaçao, Cyprus, Čad, Česká Republika, Čierna hora, Čile, Čína, Dánsko, Dominika, Dominikánska Republika, Džibuti, Egypt, Ekvádor, El Salvador, Eritrea, Estónsko, Etiópia, Fiji, Filipíny, Fínsko, Francúzska Guiana, Francúzska Polynézia, Francúzsko, Gabon, Gambia, Ghana, Gibraltar, Grécko, Grenada, Grónsko, Gruzínsko, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Holandské Antily, Holandsko, Honduras, Hong Kong, Chorvátsko, India, Indonézia, Irak, Irán, Írsko, Island, Izrael, Jamajka, Japonsko, Jemen, Jersey, Jordánsko, Južná Afrika, Južný Sudán, Kambodža, Kamerun, Kanada, Kapverdy, Katar, Kazachstan, Keňa, Kiribati, Kolumbia, Komory, Kongo, Kostarika, Kuba, Kuvajt, Kyrgyzsko, Laos, Lesotho, Libanon, Libéria, Líbya, Lichtenštajnsko, Litva, Lotyšsko, Luxembursko, Macao, Macedónsko, Madagaskar, Maďarsko, Malajzia, Malawi, Maledivy, Mali, Malta, Maroko, Martinik, Mauretánia, Maurícius, Mayotte, Mexiko, Mikronézia, Mjanmarsko, Moldavsko, Monako, Mongolsko, Montserrat, Mozambik, Namíbia, Nauru, Nemecko, Nepál, Niger, Nigéria, Nikaragua, Nórsko, Nová Kaledónia, Nový Zéland, Omán, Ostrov Man, Pakistan, Palau, Palestínske územie, Panama, Papua Nová Guinea, Paraguaj, Peru, Pobrežie Slonoviny, Poľsko, Portoriko, Portugalsko, Rakúsko, Rovníková Guinea, Rumunsko, Rusko, Rwanda, Sadská Arábia, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Senegal, Severná a Južná Kórea, Seychely, Sierra Leone, Singapur, Slovensko, Slovinsko, Somálsko, South Georgia, Spojené Arabské Emiráty, Spojené Kráľovstvo (UK), Spojené Štáty Americké (USA), Srbsko, Srí Lanka, Stredoafrická republika, Sudán, Surinam, Swazijsko, Sýria, Španielsko, Švajčiarsko, Švédsko, Tadžikistan, Taiwan, Taliansko, Tanzánia, Thajsko, Togo, Tokelau, Tonga, Trinidad a Tobago, Tunisko, Turecko, Turkmenistan, Tuvalu, Uganda, Ukrajina, Uruguaj, Uzbekistan, Vanuatu, Vatikán, Venezuela, Vietnam, Východný Timor, Wallis a Futuna, Zambia, Západná Sahara
 	</string>
-	</resources>
+	<string name="animate_routing_route_not_calculated">Prosím najprv vypočítajte trasu</string>
+    <string name="animate_routing_route">Simulovať pomocou vypočítanej trasy </string>
+    <string name="animate_routing_gpx">Simulovať pomocou stopy GPX</string>
+    <string name="tip_recent_changes_1_2_t">Opravy v 1.2.1:
+	    \n\t*Opravený Geo Intent (Foursquare, c:geo)
+	    \n\t*Opravené trasenie obrazovky pri navigácii
+	    \n\t*Iné malé opravy
+	    \n\nZmeny v 1.2:
+		\n\t* Opravy chýb (vyladené navigovanie, vyhľadávanie, nahrávanie, hlasové pokyny, vylepšenia zobrazenia)
+		\n\t* Ľahšie nastavenie prekryvu tieňovanými svahmi (vyžaduje plugin Contour lines)
+		\n\t* Linky maps.google.com sú akceptované
+		\n\t* Nový widget (GPS info) 
+		\n\t* Podpora viacerých okien na nových zariadeniach Samsung
+		\n\t* Kalmanov filter pre kompas
+		\n\t* Podpora pre hodinky Pebble
+	</string>
+    </resources>
