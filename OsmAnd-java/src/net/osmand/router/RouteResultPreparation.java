@@ -46,6 +46,12 @@ public class RouteResultPreparation {
 			double speed = ctx.getRouter().defineSpeed(road);
 			if (speed == 0) {
 				speed = ctx.getRouter().getMinDefaultSpeed();
+			} else {
+				if(speed > 15) {
+					// decrease speed proportionally from 15ms=50kmh - 
+					// reference speed 30ms=108kmh - 7kmh
+					speed = speed - ((speed - 15f) / (30f - 15f) * 2f);
+				}
 			}
 			boolean plus = rr.getStartPointIndex() < rr.getEndPointIndex();
 			int next;
