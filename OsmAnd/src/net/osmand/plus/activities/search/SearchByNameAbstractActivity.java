@@ -227,6 +227,20 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		return null;
 	}
 	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString("ENDING_TEXT", endingText);
+		outState.putParcelable("PREVIOUS_SPAN", this.previousSpan);
+	}
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle prevState) {
+		endingText = prevState.getString("ENDING_TEXT", "");
+		previousSpan = prevState.getParcelable("PREVIOUS_SPAN"); 
+		super.onRestoreInstanceState(prevState);
+	}
+	
 	private void querySearch(final String filter) {
 		if (!currentFilter.equals(filter) || !initFilter) {
 			currentFilter = filter;
