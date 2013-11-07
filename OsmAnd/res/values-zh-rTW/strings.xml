@@ -60,7 +60,7 @@
 		- 完整的離線功能(存放下載的向量圖或地圖圖磚)
 		- 提供細致的全球離線向量圖資
 		- 直接從應用程式下載各國或區域圖資
-		- 可疊加不同的多種地圖層於自訂的透明度，如 GPX、興趣點、我的最愛、公共運輸站
+		- 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的最愛、公共運輸站
 		- 離線查尋地址、場所(POI)
 		- 短距離的離線使用路線(實驗性)
 		- 汽車、自行車、步行模式有下列選項：
@@ -84,7 +84,7 @@
  - 完整離線功能 (存放下載的向量圖或地圖圖磚)
  - 全球離線向量圖資
  - 直接由手機下載各國或區域圖資
- - 可疊加不同的多種地圖層於自訂的透明度，如 GPX、興趣點、我的最愛、等高線、公共運輸站
+ - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的最愛、等高線、公共運輸站
  - 離線查尋地址、場所(POI)
  - 離線尋找導航路線
  - 汽車、自行車、步行模式有下列選項：
@@ -327,7 +327,7 @@
 	<string name="accessibility_preferences">協助工具</string>
 	<string name="rendering_out_of_memory">無足夠的處理記憶體以顯示選擇的區域</string>
 	<string name="use_fluorescent_overlays">螢光色的覆疊層</string>
-	<string name="use_fluorescent_overlays_descr">使用螢光色顯示行跡與導航路線</string>
+	<string name="use_fluorescent_overlays_descr">使用螢光色顯示軌跡與導航路線</string>
 	<string name="offline_edition">離線編輯</string>
 	<string name="offline_edition_descr">永遠使用離線編輯</string>
 	<string name="update_poi_does_not_change_indexes">在程式中修改興趣點，不會影響到下載的地圖檔案，修改的資料是另外存在裝置上的內部檔案。</string>
@@ -340,14 +340,14 @@
 	<string name="local_openstreetmap_descr_title">與 OSM 非同步編輯：</string>
 	<string name="local_openstreetmap_settings">裝置端已儲存的 OSM 興趣點/問題</string>
 	<string name="local_openstreetmap_settings_descr">顯示和管理在裝置端資料庫的 OSM 興趣點/問題注解</string>
-	<string name="live_monitoring_descr">傳送行跡到指定的網路服務</string>
+	<string name="live_monitoring_descr">傳送軌跡到指定的網路服務</string>
 	<string name="live_monitoring">線上即時追蹤</string>
 	<string name="live_monitoring_interval_descr">指定線上即時追蹤間隔</string>
 	<string name="live_monitoring_interval">線上即時追蹤間隔</string>
 	<string name="live_monitoring_url_descr">指定位置的參數語法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">線上即時追蹤網路地址</string>
-	<string name="gpx_monitoring_disabled_warn">請啟用\'記錄行跡成 GPX 檔案\'設定。</string>
-	<string name="show_current_gpx_title">顯示目前行跡</string>
+	<string name="gpx_monitoring_disabled_warn">請啟用\'記錄軌跡成 GPX 檔案\'設定。</string>
+	<string name="show_current_gpx_title">顯示目前軌跡</string>
 	<string name="free_version_message">此 OsmAnd 免費版，只能下載 %1$s 個檔，且不支援離線維基百科的文章資料。</string>
 	<string name="free_version_title">免費版</string>
 	<string name="poi_context_menu_showdescription">顯示興趣點敘述</string>
@@ -462,7 +462,7 @@
 	<string name="search_position_map_view">上次瀏覽的地圖</string>
 	<string name="select_search_position">附近查尋：</string>
 	<string name="context_menu_item_search">查尋這附近</string>
-	<string name="save_route_dialog_title">儲存導航路線成 GPX 行跡</string>
+	<string name="save_route_dialog_title">儲存導航路線成 GPX 軌跡</string>
 	<string name="route_successfully_saved_at">導航路線成功存成\'%1$s\'。</string>
 	<string name="filename_input">檔名： </string>
 	<string name="file_with_name_already_exist">已有同檔名存在。</string>
@@ -526,7 +526,7 @@
 	<string name="tts_missing_language_data">您選的語言未安裝，您要到 Play 商場安裝嗎？</string>
 	<string name="gpx_option_reverse_route">反轉 GPX 方向</string>
 	<string name="gpx_option_destination_point">使用目前的目的地</string>
-	<string name="gpx_option_from_start_point">沿著整條行跡往前</string>
+	<string name="gpx_option_from_start_point">沿著整條軌跡往前</string>
 	<string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'地圖圖層\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
 	<string name="choose_audio_stream">語音導航輸出</string>
 	<string name="choose_audio_stream_descr">選擇播放語音導航輸出(依靠系統)</string>
@@ -619,7 +619,7 @@
 	<string name="send_location">傳送位置</string>
 	<string name="context_menu_item_share_location">分享位置</string>
 	<string name="add_waypoint_dialog_added">GPX 中途點\'\'{0}\'\'已成功加入</string>
-	<string name="add_waypoint_dialog_title">增加中途點到已記錄 GPX 行跡</string>
+	<string name="add_waypoint_dialog_title">增加中途點到已記錄 GPX 軌跡</string>
 	<string name="context_menu_item_add_waypoint">增加 GPX 中途點</string>
 	<string name="amenity_type_administrative">行政機關</string>
 	<string name="amenity_type_barrier">路障</string>
@@ -718,7 +718,7 @@
 	<string name="no_vector_map_loaded">向量地圖未載入</string>
 	<string name="map_route_by_gpx">以 GPX 導航</string>
 	<string name="gpx_files_not_found">在/tracks 目錄找不到 GPX</string>
-	<string name="layer_gpx_layer">GPX 行跡…</string>
+	<string name="layer_gpx_layer">GPX 軌跡…</string>
 	<string name="error_reading_gpx">GPX 讀取錯誤</string>
 	<string name="vector_data">離線向量地圖</string>
 	<string name="transport_context_menu">在終點查尋交通運輸</string>
@@ -897,7 +897,7 @@
 	<string name="loading_data">載入資料中…</string>
 	<string name="reading_indexes">讀取裝置端資料中…</string>
 	<string name="previous_run_crashed">上次執行 OsmAnd 失敗！記錄檔為{0}。請回報這問題且附上該記錄檔。</string>
-	<string name="saving_gpx_tracks">儲存 GPX 航跡到 SD 卡中…</string>
+	<string name="saving_gpx_tracks">儲存 GPX 軌跡到 SD 卡中…</string>
 	<string name="finished_task">完成</string>
 	<string name="reload_indexes_descr">重新由 SD 卡讀取離線向量地圖和資料</string>
 	<string name="reload_indexes">重新讀取離線資料</string>
@@ -912,12 +912,12 @@
 	<string name="osm_settings">OSM 編輯</string>
 	<string name="additional_settings">額外設定</string>
 	<string name="settings">設定</string>
-	<string name="save_current_track_descr">現在就將目前的行跡存到 SD 卡</string>
-	<string name="save_current_track">儲存目前的 GPX 行跡</string>
+	<string name="save_current_track_descr">現在就將目前的軌跡存到 SD 卡</string>
+	<string name="save_current_track">儲存目前的 GPX 軌跡</string>
 	<string name="save_track_interval">記錄間隔</string>
-	<string name="save_track_interval_descr">選擇行跡記錄的定位間隔</string>
-	<string name="save_track_to_gpx_descrp">行跡將以每天為群組存放在 track 目錄</string>
-	<string name="save_track_to_gpx">記錄行跡成 GPX 檔案</string>
+	<string name="save_track_interval_descr">選擇軌跡記錄的定位間隔</string>
+	<string name="save_track_to_gpx_descrp">軌跡將以每天為群組存放在 track 目錄</string>
+	<string name="save_track_to_gpx">記錄軌跡成 GPX 檔案</string>
 	<string name="update_tile">更新地圖</string>
 	<string name="reload_tile">重新載入圖磚</string>
 	<string name="mark_point">目的地</string>
@@ -1090,7 +1090,7 @@
     <string name="local_openstreetmap_act_title">OSM 修改</string>
     <string name="default_buttons_other_actions">其它的作用</string>
     <string name="save_current_track_widget">儲存
-        \n現在的 GPX 行跡</string>
+        \n現在的 GPX 軌跡</string>
 	<string name="layer_hillshade">地形陰影圖層</string>
     <string name="map_widget_gps_info">GPS 資訊</string>
     <string name="access_arrival_time">抵達時間</string>
@@ -1119,7 +1119,7 @@
     <string name="recording_photo_description">照片 %1$s 中的 %2$s</string>
     <string name="av_def_action_picture">拍攝照片</string>
     <string name="recording_context_menu_precord">拍攝照片</string>
-    <string name="dropbox_plugin_description">Dropbox 的外掛元件可以讓行跡和音訊/視訊注解同步到您的 Dropbox 帳戶。</string>
+    <string name="dropbox_plugin_description">Dropbox 的外掛元件可以讓軌跡和音訊/視訊注解同步到您的 Dropbox 帳戶。</string>
     <string name="dropbox_plugin_name">Dropbox 外掛程式</string>
     <string name="animate_routing_using_gpx">開啟一個預先錄製的 GPX 路線前行？</string>
     <string name="intermediate_points_change_order">變動排列</string>
@@ -1260,7 +1260,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 
 直接提供給 OpenStreetMap
  - 報告地圖錯誤
- - 直接從該應用程式上傳 GPX 行跡到 OSM
+ - 直接從該應用程式上傳 GPX 軌跡到 OSM
  - 增加興趣點並直接上傳給 OSM（如果離線或在之後上傳）
  - 可選旅途中記錄而且在背景模式（當裝置處於休眠模式下）
 
@@ -1301,7 +1301,7 @@ OsmAnd + 是付費應用程式版本。經由您的購買來支援專案，資�
  - 顯示您周遭的 POI（興趣點）
  - 能顯示專用的線上地圖圖磚
  - 可以顯示衛星視圖（來自 Bing）
- - 可顯示使用自訂不同透明度疊加的多種地圖層如遊覽/導航 GPX 行跡
+ - 可顯示使用自訂不同透明度疊加的多種地圖層如遊覽/導航 GPX 軌跡
  - 可選擇顯示地名於英文、裝置端或拼音拼法
 
 使用 OpenStreetMap 和維基百科的資料：
@@ -1607,4 +1607,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="default_or">或</string>
 	<string name="remember_choice">記住我的選擇</string>
     <string name="gps_status_eclipsim">GPS 狀態</string>
+    <string name="animate_routing_route_not_calculated">請先計算行車路線</string>
+    <string name="animate_routing_route">使用模擬計算行車路線 </string>
+    <string name="animate_routing_gpx">使用 GPX 軌跡模擬</string>
     </resources>
