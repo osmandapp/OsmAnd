@@ -1598,4 +1598,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="animate_routing_route_not_calculated">Per favore, calcolate il percorso prima</string>
     <string name="animate_routing_route">Simula sulla base di un percorso calcolato </string>
     <string name="animate_routing_gpx">Simula usando una traccia GPX</string>
+    <string name="edit_tilesource_elliptic_tile">Mercatore Ellittico</string>
     </resources>
