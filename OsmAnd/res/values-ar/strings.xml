@@ -673,4 +673,9 @@
 	<string name="route_is_too_long">من المحتمل أن الطريق طويلة جدا قد لايتمكن جهاز توجية OsmAnd من حساب المسافة إلا بعد وضع نقطة وصل واحدة أو أكثر ↵ → متوسط طول المسافة المجتسب هو 200 كيلو متر تقريبًا. لذلك يرجى إضافة نقطة وصل أو أكثر على طول الطريق حتى يتمكن الجهاز من حساب طول مسافة الطريق.</string>
 	<string name="audionotes_location_not_defined">لم يعين المكان المرتبط بالملاحظة. استخدم \"استخدم المكان …\" لتعيين ملاحظة لمكان محدد</string>
     <string name="use_short_object_names_descr">استخدم أسماء عناصر صغيرة في نمط التّصفح اللمسي</string>
-	</resources>
+	<string name="animate_routing_route_not_calculated">رجاء، احتسب المسار أولا</string>
+    <string name="animate_routing_route">حاكي باستخدام المسار المحتسب </string>
+    <string name="animate_routing_gpx">حاكي باستخدام مسار GPX</string>
+    <string name="remember_choice">تذكر اختياري</string>
+    <string name="gps_status_eclipsim">حالة GPS</string>
+    </resources>
