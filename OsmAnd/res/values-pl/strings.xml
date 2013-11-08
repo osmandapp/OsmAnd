@@ -1575,4 +1575,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="default_or">lub</string>
 	<string name="remember_choice">Zapamiętaj mój wybór</string>
     <string name="gps_status_eclipsim">GPS Status</string>
+    <string name="animate_routing_route_not_calculated">Najpierw dokonaj przeliczenia trasy</string>
+    <string name="animate_routing_route">Pokaż używając obliczonej trasy </string>
+    <string name="animate_routing_gpx">Pokaż używając śladu GPX</string>
     </resources>
