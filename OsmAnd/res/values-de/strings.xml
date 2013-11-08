@@ -1064,7 +1064,7 @@
 	<string name="edit_filter_delete_message">Der Filter {0} wurde gelöscht</string>
 	<string name="edit_filter_create_message">Der Filter {0} wurde erstellt</string>
 	<string name="default_buttons_selectall">Alles markieren</string>
-	<string name="offline_navigation_not_available">OsmAnd Offline Navigation steht zur Zeit nicht zur Verfügung.</string>
+	<string name="offline_navigation_not_available">OsmAnd offline Navigation steht zur Zeit nicht zur Verfügung.</string>
 	<string name="left_side_navigation">Linksverkehr</string>
 	<string name="left_side_navigation_descr">Auswählen für Länder mit Linksverkehr</string>
 	<string name="download_link_and_local_description">Hier klicken um Offline-Daten herunterzuladen oder zu aktualisieren. \nAnklicken bestehender Einträge liefert Details, drücken und halten ermöglicht deaktivieren, umbenennen oder löschen. Aktuelle Daten auf dem Gerät (%1$s frei):</string>
