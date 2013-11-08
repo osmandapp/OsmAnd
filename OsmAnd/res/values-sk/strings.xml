@@ -202,15 +202,16 @@
   <string name="use_fluorescent_overlays_descr">Použije žiarivejšie farby pre zobrazenie stôp a ciest</string>
   <string name="offline_edition">Offline upravovanie</string>
   <string name="offline_edition_descr">Vždy použiť offline upravovanie</string>
-  <string name="tip_recent_changes_0_7_1_t">"Zmeny vo verzii 0.7.1 :
-\n\t- Offline úpravy POI
-\n\t- Možnosť stopovania naživo - pravidelné odosielanie súradníc do webovej služby (prečítajte si ako nastaviť Vašu webovú službu v článkoch Ako na to)
-\n\t- Zobrazenie aktuálne zaznamenávanej stopy na mape
-\n\t- Detekcia smeru jazdy: \'Otočte sa\' je indikované a oznámené pri smerovaní do opačného smeru alebo minutí odbočenia
-\n\t- Nový hlasový povel \'Cesta prepočítaná\'
-\n\t- Optická inidkácia najbližšieho odbočenia v 100 metroch zmenou farby smerovej šípky
-\n\t- Aktuálne sú tiež deaktivované súbory indexov vyznačené v Sťahovaniach ako tmavo zelené a tmavo modré
-\n\t- Iné zmeny "</string>
+  <string name="tip_recent_changes_0_7_1_t">Zmeny vo verzii 0.7.1:
+		\n\t- Offline úpravy POI
+		\n\t- Možnosť stopovania naživo - pravidelné odosielanie súradníc do webovej služby (prečítajte si ako nastaviť Vašu webovú službu v článkoch "Ako na to")
+		\n\t- Zobrazenie aktuálne zaznamenávanej stopy na mape
+		\n\t- Detekcia smeru jazdy: "Otočte sa" je indikované a oznámené pri smerovaní do opačného smeru alebo minutí odbočenia
+		\n\t- Nový hlasový povel "Cesta prepočítaná"
+		\n\t- Optická indikácia najbližšieho odbočenia v 100 metroch zmenou farby smerovej šípky
+		\n\t- Aktuálnosť aj deaktivovaných súborov indexov vyznačená v Sťahovaniach ako tmavo zelená a tmavo modrá farba
+		\n\t- Iné zmeny
+	</string>
   <string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, zmeny sú uložené namiesto toho v lokálnom súbore.</string>
   <string name="local_openstreetmap_uploading">Nahráva sa …</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/chyby boli nahraté</string>
@@ -228,7 +229,7 @@
   <string name="live_monitoring_interval">Interval stopovania naživo</string>
   <string name="live_monitoring_url_descr">Zadajte webovú adresu stopovania naživo so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Webová adresa stopovania naživo</string>
-  <string name="gpx_monitoring_disabled_warn">Prosím, zapnite \'Logovať stopu do GPX súboru\' v stopovacích nastaveniach.</string>
+  <string name="gpx_monitoring_disabled_warn">Prosím, zapnite "Logovať stopu do GPX súboru" v stopovacích nastaveniach.</string>
   <string name="show_current_gpx_title">Zobraziť aktuálnu stopu</string>
   <string name="tip_recent_changes_0_7_0_t">"Zmeny vo verzii 0.7.0 :
 \n\t- Údaje článkov offline wikipedie
@@ -293,22 +294,23 @@
   <string name="layer_poi_label">POI popisy</string>
   <string name="animate_route_off">Vypnúť animáciu</string>
   <string name="animate_route">Zapnúť animáciu</string>
-  <string name="tip_recent_changes_0_6_8_t">"Zmeny v 0.6.8 :
-\n\t- Kompletne prerobené vyhľadávanie (POI, adresy)! Hľadanie adries je oveľa rýchlejšie a prístupnejšie. Zanecháva jedno hľadanie s mnohými rozdielnymi hľadacími aspektami.
-\n\t- Implementácia vyhľadávania POI podľa názvu vo veľkých oblastiach (krajinách)
-\n\t- Oprava blikania mapovej obrazovky na tabletoch(Issue 641)
-\n\t- Možnosť automatického nasledovania trasy (Issue 356)
-\n\t- GPX navigácia premiestnená do ponuky \'Pokyny\' a \'Uložiť pokyny\' premiestnené do ponuky \'O ceste\'
-\n\t- POI údaje sú v .obf súbore (stiahnuté indexy po 01.10.11)
-\n\t- Opravy hlasových pokynov (o GPS umiestnení a o prvom použití)
-\n\t- Menšie vylepšenia "</string>
+  <string name="tip_recent_changes_0_6_8_t">Zmeny v 0.6.8:
+		\n\t- Kompletne prerobené vyhľadávanie (POI, adresy)! Hľadanie adries je oveľa rýchlejšie a prístupnejšie. Vytvorené jedno vyhľadávacie rozhranie s rôznymi možnosťami.
+		\n\t- Implementácia vyhľadávania POI podľa názvu vo veľkých oblastiach (krajinách)
+		\n\t- Oprava blikania mapovej obrazovky na tabletoch(Issue 641)
+		\n\t- Možnosť automatického nasledovania trasy (Issue 356)
+		\n\t- GPX navigácia premiestnená do ponuky "Pokyny" a "Uložiť pokyny" premiestnené do ponuky "O ceste"
+		\n\t- POI údaje sú v .obf súbore (stiahnuté indexy po 01.10.11)
+		\n\t- Opravy hlasových pokynov (o GPS umiestnení a vynechanie prvého povelu)
+		\n\t- Menšie vylepšenia
+	</string>
   <string name="file_can_not_be_renamed">Súbor nemôže byť premenovaný.</string>
   <string name="file_with_name_already_exists">Súbor s týmto názvom už existuje.</string>
   <string name="gpx_navigation">GPX trasa</string>
   <string name="poi_query_by_name_matches_categories">Boli nájdené nejaké kategórie POI vyhovujúce požiadavke:</string>
   <string name="data_to_search_poi_not_available">Miestne údaje na hľadanie POI nie sú dostupné.</string>
   <string name="poi_filter_by_name">Hľadať podľa názvu</string>
-  <string name="old_poi_file_should_be_deleted">Súbor POI údajov \'%1$s\' je zbytočný a môže byť vymazaný.</string>
+  <string name="old_poi_file_should_be_deleted">Súbor POI údajov "%1$s" je zbytočný a môže byť vymazaný.</string>
   <string name="update_poi_file_not_found">Miestny súbor na udržiavanie POI zmien sa nenašiel a nemôže byť vytvorený.</string>
   <string name="button_upgrade_osmandplus">Aktualizovať OsmAnd+</string>
   <string name="map_version_changed_info">Na serveri sú nekompatibilné mapové súbory s Vašou aktuálnou verziou aplikácie. Na ich stiahnutie a použitie, prosím, aktualizujte aplikáciu na novšiu verziu.</string>
@@ -337,7 +339,7 @@
 \n\t- Vylepšenie TTS jadra (oznamovanie presnej vzdialenosti, povolenie míľ)
 \n\t- Oprava chýb "</string>
   <string name="save_route_dialog_title">Uložiť cestu ako GPX stopu</string>
-  <string name="route_successfully_saved_at">Cesta je úspešne uložená v \'%1$s\'.</string>
+  <string name="route_successfully_saved_at">Cesta je úspešne uložená v "%1$s".</string>
   <string name="filename_input">Názov súboru : </string>
   <string name="file_with_name_already_exist">Súbor s takýmto názvom už existuje.</string>
   <string name="default_buttons_save">Uložiť</string>
@@ -414,9 +416,9 @@
   <string name="gpx_option_from_start_point">Prejsť celú trasu</string>
   <string name="tip_rotation_switching">Otáčanie mapy</string>
   
-  <string name="switch_to_vector_map_to_see">Je dostupná offline vektorová mapa pre túto oblasť.\n\t\n\tNa jej použitie aktivujte \'Ponuka\' → \'Zobrazenie\' → \'Zdroj mapy…\' → \'Vektorové OSM mapy\'.</string>
+  <string name="switch_to_vector_map_to_see">Je dostupná offline vektorová mapa pre túto oblasť.\n\t\n\tNa jej použitie aktivujte "Menu" → "Zobrazenie" → "Zdroj mapy…" → "Vektorové OSM mapy".</string>
   <string name="binary_map_download_success">Sťahovanie úspešné.
-		\n\t\n\tPre použitie aktivujte cez \'Menu\' → \'Zobrazenie\' → \'Zdroj mapy…\' → \'Vektorové OSM mapy\'.
+		\n\t\n\tPre použitie aktivujte cez "Menu" → "Zobrazenie" → "Zdroj mapy…" → "Vektorové OSM mapy".
 	</string>
   <string name="choose_audio_stream">Výstup hlasových pokynov</string>
   <string name="choose_audio_stream_descr">Výber kanálu pre prehrávanie hlasových pokynov (závisí od systémovej konfigurácie)</string>
@@ -445,8 +447,8 @@
 		\n\nPre stiahnutie máp choďte do "Nastavenia" → "Offline údaje" → "Stiahnuť offline údaje".
 		\n\nPo načítaní zoznamu oblastí z internetu, vyberte ktorýkoľvek súbor pre jeho stiahnutie alebo aktualizovanie. Všimnite si tiež výber typu súborov v hornej časti obrazovky, kde je potrebé zvoliť aký typ dát chcete stiahnuť (bežné mapy, tieňované reliéfy, atď.).
 		\n\nZoznam oblastí môžete filtrovať napísaním niekoľkých písmen alebo vyberte možnosť "Zobraziť stiahnuté". Potom uvidíte len aktualizácie pre súbory, ktoré už máte vo svojom zariadení.
-		\n\n\t* \'Zelená\' - indikuje, že súbor je aktuálny (na serveri rovnaký ako v zariadení)
-		\n\t* \'Modrá\' - indikuje, že pre súbor existuje aktualizácia na serveri
+		\n\n\t* "Zelená" - indikuje, že súbor je aktuálny (na serveri rovnaký ako v zariadení)
+		\n\t* "Modrá" - indikuje, že pre súbor existuje aktualizácia na serveri
 		\n\t* Súbory šikmým písmom sú v zariadení deaktivované
 	</string>
   <string name="level_to_switch_vector_raster_descr">Max. úroveň priblíženia použitá pri vektorovom vykresľovaní a nie rastrovom</string>
@@ -461,7 +463,7 @@
   <string name="tip_favorites_t">Často používané body si môžete uložiť do Obľúbených miest nasledovne:
 		\n\nV "Kontextovom menu" akéhokoľvek bodu mapy vyberte možnosť "Pridať medzi Obľúbené miesta" a zadajte meno.
 		\n\nPo uložení potom môžete k nemu jednoducho pristupovať cez "Hlavné Menu" → "Obľúbené". Dlhým kliknutím na obľúbený bod v zozname "Obľúbené" môžete k tomuto bodu navigovať, upraviť ho alebo vymazať.
-		\n\nNa zobrazenie všetkých Obľúbených bodov priamo na mape môžete zapnúť vrstvu "Obľúbené miesta" cez "Kontextové menu mapy" -&gt; "Zobrazenie".
+		\n\nNa zobrazenie všetkých Obľúbených bodov priamo na mape môžete zapnúť vrstvu "Obľúbené miesta" cez "Kontextové menu mapy" → "Zobrazenie".
 	</string>
   <string name="tip_osm_improve">Vylepšovanie Openstreetmap-u</string>
   <string name="tip_osm_improve_t">OsmAnd používa mapy založené na dátach Openstreetmap.org (OSM) a nie je navrhnutý len pre cestovanie a navigovanie, ale aj pre vylepšovanie a pomoc projektu Openstreetmap. Iba pár kliknutiami môžete jednoducho vytvoriť a nahrať nový bod záujmu (POI) alebo OSM chybu.
@@ -472,7 +474,7 @@
 	</string>
   <string name="create_poi_link_to_osm_doc">" "<u>Online OSM</u> mapová klasifikácia s obrázkami"</string>
   <string name="error_doing_search">Prihodila sa chyba pri offline hľadaní</string>
-  <string name="search_offline_geo_error">Nedá sa parsovať geo obsah: \'%s\'</string>
+  <string name="search_offline_geo_error">Nedá sa parsovať geo obsah: "%s"</string>
   <string name="search_osm_offline">Nájsť adresu použitím stiahnutých máp</string>
   <string name="system_locale">Systémový</string>
   <string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk</string>
@@ -492,7 +494,7 @@
 		\n\t* z obľúbených miest
 		\n\nPre všetky výsledky ponúka kontextové menu alebo panel akcií možnosti ako "Pokyny" alebo "Zobraziť na mape, atď.
 	</string>
-  <string name="tip_map_context_menu">Menu \'Použiť umiestnenie\'</string>
+  <string name="tip_map_context_menu">Kontextové menu mapy</string>
   <string name="tip_map_context_menu_t">Kontextové menu mapy obsahuje všetky funkcie pre prácu s bodom (pozíciou).
 		\n\nJe dostupné dlhším podržaním na mape (a potom stlačením zobrazeného obdĺžnika). Alebo stlačením track ball tlačidla alebo zvolením "Menu" → "Použiť umiestnenie…" (posledné 2 spôsoby použijú stred obrazovky ako zvolený bod).
 		\n\nPre skrytie obdĺžnika ho dlhšie podržte.
@@ -517,7 +519,7 @@
   <string name="send_location_email_pattern">Na zobrazenie umiestnenia nasledujte webovský odkaz %1$s alebo odkaz androidovského obsahu %2$s</string>
   <string name="send_location">Poslať umiestnenie</string>
   <string name="context_menu_item_share_location">Zdieľať umiestnenie</string>
-  <string name="add_waypoint_dialog_added">GPX Waypoint \'\'{0}\'\' bol úspešne pridaný</string>
+  <string name="add_waypoint_dialog_added">GPX bod (waypoint) "{0}" bol úspešne pridaný</string>
   <string name="add_waypoint_dialog_title">Pridať waypoint do nahranej GPX stopy</string>
   <string name="context_menu_item_add_waypoint">Pridať GPX waypoint</string>
   <string name="amenity_type_administrative">Administratíva</string>
@@ -549,13 +551,13 @@
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
-  <string name="old_map_index_is_not_supported">Verzia indexu \'\'{0}\'\' nie je podporovaná</string>
+  <string name="old_map_index_is_not_supported">Zastaralý formát mapových údajov "{0}" nie je podporovaný</string>
   <string name="poi_filter_closest_poi">Najbližší bod záujmu</string>
   <string name="poi_filter_custom_filter">Vlastný filter</string>
   <string name="poi_filter_namefinder">Online hľadač mien</string>
   <string name="reading_cached_tiles">Načítavajú sa dlaždice zo zásobníka…</string>
-  <string name="version_index_is_big_for_memory">Index \'\'{0}\'\' sa nezmestil do pamäti</string>
-  <string name="version_index_is_not_supported">Verzia indexu \'\'{0}\'\' nie je podporovaná</string>
+  <string name="version_index_is_big_for_memory">Index "{0}" sa nezmestil do pamäte</string>
+  <string name="version_index_is_not_supported">Verzia indexu "{0}" nie je podporovaná</string>
   <string name="use_osmand_routing_service">OsmAnd offline navigácia &gt;20km</string>
   <string name="use_osmand_routing_service_descr">Použitie offline navigácie na dlhé vzdialenosti (experimentálne) namiesto CloudMade</string>
   <string name="osmand_routing_experimental">OsmAnd offline navigácia je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n\nNavigačná služba je dočasne prepnutá na online CloudMade.</string>
@@ -916,10 +918,10 @@
   <string name="default_buttons_no">Nie</string>
   <string name="add_favorite_dialog_top_text">Zadajte meno obľúbeného bodu</string>
   <string name="add_favorite_dialog_default_favourite_name">Obľúbený bod</string>
-  <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod \'\'{0}\'\' bol úspešne pridaný.</string>
+  <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod "{0}" bol úspešne pridaný.</string>
   <string name="favourites_context_menu_edit">Upraviť obľúbený bod</string>
   <string name="favourites_context_menu_delete">Vymazať obľúbený bod</string>
-  <string name="favourites_remove_dialog_msg">Odstrániť obľúbený bod \'%s\'?</string>
+  <string name="favourites_remove_dialog_msg">Odstrániť obľúbený bod "%s"?</string>
   <string name="favourites_remove_dialog_success">Obľúbený bod {0} bol úspešne zmazaný.</string>
   <string name="osb_add_dialog_title">Zadajte popis k chybe</string>
   <string name="osb_add_dialog_success">Chyba úspešne pridaná</string>
@@ -996,7 +998,15 @@
   <string name="route_kr">Držte sa vpravo</string>
   <string name="save_route_as_gpx">Uložiť cestu ako GPX súbor</string>
   <string name="asap">Ihneď</string>
-  <string name="tip_recent_changes_0_8_1_t">"Zmeny vo verzii 0.8.1 :\n\t* Presnejšia kalkulácia ciest (trochu pomalšia)\n\t* Múdre a rýchlejšie prepočítavanie ciest\n\t* Povely podľa jazdných pruhov\n\t* Informácie o maximálnej povolenej rýchlosti, radaroch a spomaľovačoch\n\t* Vylepšené hlasové navádzanie na diaľniciach\n\t* Parkovací zásuvný modul (\'Kde mám zaparkovaný automobil?\')\n\t* Widget pre zapnutie/vypnutie logovania "</string>
+  <string name="tip_recent_changes_0_8_1_t">Zmeny vo verzii 0.8.1:
+		\n\t* Presnejšia kalkulácia ciest (trochu pomalšia)
+		\n\t* Múdre a rýchlejšie prepočítavanie ciest
+		\n\t* Povely podľa jazdných pruhov
+		\n\t* Informácie o maximálnej povolenej rýchlosti, radaroch a spomaľovačoch
+		\n\t* Vylepšené hlasové navádzanie na diaľniciach
+		\n\t* Parkovací zásuvný modul ("Kde mám zaparkovaný automobil?")
+		\n\t* Widget pre zapnutie/vypnutie logovania (záznamu)
+	</string>
   <string name="gpxup_public">Verejná</string>
   <string name="gpxup_identifiable">Identifikovateľná</string>
   <string name="gpxup_trackable">Stopovateľná</string>
@@ -1110,12 +1120,12 @@
 	<string name="tip_rotation_switching_t_v2">Môžete prepínať, či a ako sa zobrazenie mapy otáča tým, že opakovane kliknete na ikonu kompasu v obrazovke mapy.
 
 		\n\nMožnosti sú:
-		\n\t* \'Neotáčať (sever je hore)\' - Mapa sa nebude otáčať. Sever bude vždy hore
-		\n\t* \'Otáčať v smere pohybu\' - Mapa bude priebežne otáčaná podľa smeru pohybu
-		\n\t* \'Kompas\' - Mapa bude priebežne otáčaná podľa kompasu v zariadení (ak je k dispozícii)
+		\n\t* "Neotáčať (sever je hore)" - Mapa sa nebude otáčať. Sever bude vždy hore
+		\n\t* "Otáčať v smere pohybu" - Mapa bude priebežne otáčaná podľa smeru pohybu
+		\n\t* "Kompas" - Mapa bude priebežne otáčaná podľa kompasu v zariadení (ak je k dispozícii)
 	</string>
 	<string name="tip_day_night_mode_t_v2">Vzhľad mapy sa môže u vektorových máp meniť medzi dňom (svetlejší) a nocou (tmavšie). Nočné farby sú bezpečnejšie pre jazdu v noci.
-		\n\nMôžete nastaviť pravidlá pre prepínanie deň / noc v "Menu" -&gt; "Konfigurovať obrazovku" → "Denná/nočná mapa".
+		\n\nMôžete nastaviť pravidlá pre prepínanie deň / noc v "Menu" → "Konfigurovať obrazovku" → "Denná/nočná mapa".
 		\n\nMožnosti sú:
 		\n\t* "Východ/Západ slnka": automatický režim, riadi sa podľa postavenia slnka pre vašu aktuálnu polohu (východzie)
 		\n\t* "Denný režim": vždy používať denný režim
@@ -1202,18 +1212,18 @@
     <string name="av_control_start">nahrať</string>
     <string name="map_widget_av_notes">Zvukové poznámky</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pre vrstevnice</string>
-    <string name="osmand_srtm_long_description_1000_chars">Tento module poskytuje vrstevnice, ktoré môžu byť zobrazené v OsmAnd\'s offline mapách. Globálne údaje (medzi 70 stupňov sever a juh 70 stupňov) je založený na meraní SRTM (Shuttle Radar Topographz Mission) a ASTER (Advanced Spaceborne tepelné vyžarovanie a reflexie rádiometre), zobrazovanie nástroj na palube Terra, vlajkový satelit NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonským vesmírnych systémov (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">Tento modul poskytuje vrstevnice, ktoré môžu byť zobrazené v OsmAnd offline mapách. Globálne údaje (medzi 70 stupňami severne a 70 stupňami južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems).</string>
     
     
     
     
     <string name="map_widget_distancemeasurement">Meranie vzdialenosti</string>
-    <string name="audionotes_location_not_defined">Umiestnenie spojené s poznámkou, ešte nie je definované. Ak chcete použiť špecifické umiestnenie, použite: \"Použiť umiestnenie...\"</string>
+    <string name="audionotes_location_not_defined">Umiestnenie na spojenie s poznámkou ešte nie je definované. Ak chcete použiť špecifické umiestnenie, použite "Použiť umiestnenie..."</string>
     <string name="monitoring_control_stop">zastaviť</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytváranie zvukových poznámok počas cestovania</string>
     <string name="audionotes_plugin_name">Modul pre audio/video poznámky</string>
-    <string name="srtm_plugin_description">Tento modul umožňuje sťahovanie vrstevníc (údaje v režime Offline údaje -&gt; Stiahnuť -&gt; ďalšie mapy) pre použitie s offline mapami.</string>
+    <string name="srtm_plugin_description">Tento modul umožňuje sťahovanie offline vrstevníc a tieňovaní svahov ("Nastavenia" → "Offline údaje" → vyberte požadovaný typ máp).</string>
     <string name="srtm_plugin_name">Modul vrstevníc</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
     <string name="download_srtm_maps">Údaje vrstevníc</string>
