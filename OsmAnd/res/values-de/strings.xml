@@ -1347,7 +1347,7 @@
 	<string name="cancel_route">Route verwerfen</string>
 	<string name="use_kalman_filter_compass_descr">Kalman-Filter verwenden, um Kompass-Ungenauigkeiten auszublenden</string>
 	<string name="use_kalman_filter_compass">Kalman-Filter verwenden</string>
-	<string name="access_mark_final_location_first">Zugänglichkeitsmodus : Bitte zuerst Ziel auswählen</string> 
+	<string name="access_mark_final_location_first">Eingabehilfen-Modus : Bitte zuerst Ziel auswählen</string> 
 	<string name="use_magnetic_sensor_descr">Magnetsensor statt Lagesensor zur Kompassermittlung verwenden</string>
 	<string name="use_magnetic_sensor">Magnetsensor verwenden</string>
 	<string name="local_indexes_cat_srtm">Höhenlinien-Daten</string>
