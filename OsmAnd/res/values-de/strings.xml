@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="route_is_too_long">Die Route ist möglicherweise zu lang, um vom OsmAnd Offline-Router berechnet zu werden. 
-		Die Offline-Berechnung von Routen ist durchschnittlich zwischen bis zu etwa 200km entfernten Punkten möglich. Bitte fügen Sie einen oder mehrere Wegpunkte ein, um diese Route berechnen zu können.</string>
+<resources><string name="route_is_too_long">Die Route ist möglicherweise zu lang, um vom OsmAnd Offline-Router berechnet zu werden, 
+		Die Offline-Berechnung von Routen ist durchschnittlich zwischen bis zu etwa 200 km entfernten Punkten möglich. Bitte fügen Sie einen oder mehrere Wegpunkte ein, um diese Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -1472,4 +1472,6 @@
 	<string name="gps_status_eclipsim">GPS Status</string>
     <string name="remember_choice">Auswahl merken</string>
     <string name="animate_routing_route_not_calculated">Bitte berechnen Sie zuerst die Route</string>
+    <string name="animate_routing_gpx">Simulation anhand einer GPX-Spur</string>
+    <string name="animate_routing_route">Simulation anhand berechneter Route </string>
     </resources>
