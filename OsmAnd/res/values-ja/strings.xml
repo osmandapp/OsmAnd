@@ -1103,4 +1103,17 @@ POIの更新は利用できません</string>
 	<string name="osmand_accessibility_description">特別なアクセシビリティ機能の設定を表示します。</string>
 	<string name="extra_settings">詳細設定</string>
 	<string name="osmand_monitoring_description">Webサービスを使用して、ローカルGPXファイルまたはオンラインにあなたの旅行を記録するための簡単な設定を表示します。</string>
+	<string name="osmand_extra_settings_description">地図の詳細設定(増加のマップ詳細など)と一部デバイスの設定を表示します。</string>
+	<string name="osmand_development_plugin_description">ルートシミュレーションやレンダリング性能表示のような開発およびデバッグ機能の設定を表示します。</string>
+	<string name="plugins_screen">プラグイン</string>
+	<string name="select_plugin_to_activate">有効または無効にするにはプラグインをタップします。 (OsmAndの再起動が必要な場合があります)</string>
+	<string name="prefs_plugins_descr">プラグインは、高度な設定や追加機能を有効にします</string>
+	<string name="prefs_plugins">プラグイン</string>
+	<string name="vector_maps_may_display_faster_on_some_devices">ベクター形式の地図はすばやく表示されます。一部のデバイスではうまく動作しない場合があります。</string>
+	<string name="play_commands_of_currently_selected_voice">現在選択されている音声のコマンドを再生する</string>
+	<string name="debugging_and_development">OsmAnd開発</string>
+	<string name="native_rendering">ネイティブレンダリング</string>
+	<string name="test_voice_prompts">テスト音声プロンプト</string>    
+	<string name="send_files_to_osm">OSMにGPXファイルを送りますか？</string>
+	<string name="gpx_visibility_txt">確認可能</string>
 	</resources>
