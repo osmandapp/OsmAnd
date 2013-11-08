@@ -1307,7 +1307,7 @@
 		\n\t→* Unterstützung für Pebble-Uhr
 	</string>
 	<string name="prefer_motorways">Autobahnen bevorzugen</string>
-	<string name="prefer_in_routing_title">Bevorzugen…</string>
+	<string name="prefer_in_routing_title">Bevorzugen von…</string>
 	<string name="prefer_in_routing_descr">Autobahnen bevorzugen</string>
 	<string name="max_speed_none">keine</string>
 	<string name="av_def_action_choose">Bei Anfrage auswählen</string>
