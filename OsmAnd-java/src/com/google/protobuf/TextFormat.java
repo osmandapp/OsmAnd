@@ -30,21 +30,20 @@
 
 package com.google.protobuf;
 
+import com.google.protobuf.Descriptors.Descriptor;
+import com.google.protobuf.Descriptors.FieldDescriptor;
+import com.google.protobuf.Descriptors.EnumDescriptor;
+import com.google.protobuf.Descriptors.EnumValueDescriptor;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.nio.CharBuffer;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.google.protobuf.Descriptors.Descriptor;
-import com.google.protobuf.Descriptors.EnumDescriptor;
-import com.google.protobuf.Descriptors.EnumValueDescriptor;
-import com.google.protobuf.Descriptors.FieldDescriptor;
 
 /**
  * Provide ascii text parsing and formatting support for proto2 instances.
@@ -139,8 +138,7 @@ public final class TextFormat {
     }
   }
 
-  @SuppressWarnings("unchecked")
-private static void printField(final FieldDescriptor field,
+  private static void printField(final FieldDescriptor field,
                                 final Object value,
                                 final TextGenerator generator)
                                 throws IOException {
@@ -252,8 +250,7 @@ private static void printField(final FieldDescriptor field,
                                          throws IOException {
     for (final Map.Entry<Integer, UnknownFieldSet.Field> entry :
          unknownFields.asMap().entrySet()) {
-      @SuppressWarnings("unused")
-	final String prefix = entry.getKey().toString() + ": ";
+      final String prefix = entry.getKey().toString() + ": ";
       final UnknownFieldSet.Field field = entry.getValue();
 
       for (final long value : field.getVarintList()) {
@@ -265,14 +262,12 @@ private static void printField(final FieldDescriptor field,
       for (final int value : field.getFixed32List()) {
         generator.print(entry.getKey().toString());
         generator.print(": ");
-        // AVIAN missing dependency
         generator.print(String.format((Locale) null, "0x%08x", value));
         generator.print("\n");
       }
       for (final long value : field.getFixed64List()) {
         generator.print(entry.getKey().toString());
         generator.print(": ");
-        // AVIAN missing dependency
         generator.print(String.format((Locale) null, "0x%016x", value));
         generator.print("\n");
       }
@@ -462,10 +457,6 @@ private static void printField(final FieldDescriptor field,
 
     /** Advance to the next token. */
     public void nextToken() {
-        // AVIAN missing dependency
-//    	if(true){
-//  		  throw new UnsupportedOperationException();
-//  	  }
       previousLine = line;
       previousColumn = column;
 
@@ -504,10 +495,6 @@ private static void printField(final FieldDescriptor field,
      * token.
      */
     private void skipWhitespace() {
-        // AVIAN missing dependency
-//    	if(true){
-//  		  throw new UnsupportedOperationException();
-//  	  }
       matcher.usePattern(WHITESPACE);
       if (matcher.lookingAt()) {
         matcher.region(matcher.end(), matcher.regionEnd());

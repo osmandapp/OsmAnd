@@ -30,12 +30,12 @@
 
 package com.google.protobuf;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map;
-
 import com.google.protobuf.Descriptors.Descriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
+
+import java.io.InputStream;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * An implementation of {@link Message} that can represent arbitrary types,
@@ -139,29 +139,24 @@ public final class DynamicMessage extends AbstractMessage {
   // -----------------------------------------------------------------
   // Implementation of Message interface.
 
-  @Override
-public Descriptor getDescriptorForType() {
+  public Descriptor getDescriptorForType() {
     return type;
   }
 
-  @Override
-public DynamicMessage getDefaultInstanceForType() {
+  public DynamicMessage getDefaultInstanceForType() {
     return getDefaultInstance(type);
   }
 
-  @Override
-public Map<FieldDescriptor, Object> getAllFields() {
+  public Map<FieldDescriptor, Object> getAllFields() {
     return fields.getAllFields();
   }
 
-  @Override
-public boolean hasField(FieldDescriptor field) {
+  public boolean hasField(FieldDescriptor field) {
     verifyContainingType(field);
     return fields.hasField(field);
   }
 
-  @Override
-public Object getField(FieldDescriptor field) {
+  public Object getField(FieldDescriptor field) {
     verifyContainingType(field);
     Object result = fields.getField(field);
     if (result == null) {
@@ -174,20 +169,17 @@ public Object getField(FieldDescriptor field) {
     return result;
   }
 
-  @Override
-public int getRepeatedFieldCount(FieldDescriptor field) {
+  public int getRepeatedFieldCount(FieldDescriptor field) {
     verifyContainingType(field);
     return fields.getRepeatedFieldCount(field);
   }
 
-  @Override
-public Object getRepeatedField(FieldDescriptor field, int index) {
+  public Object getRepeatedField(FieldDescriptor field, int index) {
     verifyContainingType(field);
     return fields.getRepeatedField(field, index);
   }
 
-  @Override
-public UnknownFieldSet getUnknownFields() {
+  public UnknownFieldSet getUnknownFields() {
     return unknownFields;
   }
 
@@ -206,13 +198,11 @@ public UnknownFieldSet getUnknownFields() {
     return fields.isInitialized();
   }
 
-  @Override
-public boolean isInitialized() {
+  public boolean isInitialized() {
     return isInitialized(type, fields);
   }
 
-  @Override
-public void writeTo(CodedOutputStream output) throws IOException {
+  public void writeTo(CodedOutputStream output) throws IOException {
     if (type.getOptions().getMessageSetWireFormat()) {
       fields.writeMessageSetTo(output);
       unknownFields.writeAsMessageSetTo(output);
@@ -222,8 +212,7 @@ public void writeTo(CodedOutputStream output) throws IOException {
     }
   }
 
-  @Override
-public int getSerializedSize() {
+  public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
 
@@ -239,13 +228,11 @@ public int getSerializedSize() {
     return size;
   }
 
-  @Override
-public Builder newBuilderForType() {
+  public Builder newBuilderForType() {
     return new Builder(type);
   }
 
-  @Override
-public Builder toBuilder() {
+  public Builder toBuilder() {
     return newBuilderForType().mergeFrom(this);
   }
 
@@ -277,8 +264,7 @@ public Builder toBuilder() {
     // ---------------------------------------------------------------
     // Implementation of Message.Builder interface.
 
-    @Override
-	public Builder clear() {
+    public Builder clear() {
       if (fields == null) {
         throw new IllegalStateException("Cannot call clear() after build().");
       }
@@ -286,8 +272,7 @@ public Builder toBuilder() {
       return this;
     }
 
-    @Override
-	public Builder mergeFrom(Message other) {
+    public Builder mergeFrom(Message other) {
       if (other instanceof DynamicMessage) {
         // This should be somewhat faster than calling super.mergeFrom().
         DynamicMessage otherDynamicMessage = (DynamicMessage) other;
@@ -303,8 +288,7 @@ public Builder toBuilder() {
       }
     }
 
-    @Override
-	public DynamicMessage build() {
+    public DynamicMessage build() {
       // If fields == null, we'll throw an appropriate exception later.
       if (fields != null && !isInitialized()) {
         throw newUninitializedMessageException(
@@ -327,8 +311,7 @@ public Builder toBuilder() {
       return buildPartial();
     }
 
-    @Override
-	public DynamicMessage buildPartial() {
+    public DynamicMessage buildPartial() {
       if (fields == null) {
         throw new IllegalStateException(
             "build() has already been called on this Builder.");
@@ -341,35 +324,29 @@ public Builder toBuilder() {
       return result;
     }
 
-    @Override
-	public Builder clone() {
+    public Builder clone() {
       Builder result = new Builder(type);
       result.fields.mergeFrom(fields);
       return result;
     }
 
-    @Override
-	public boolean isInitialized() {
+    public boolean isInitialized() {
       return DynamicMessage.isInitialized(type, fields);
     }
 
-    @Override
-	public Descriptor getDescriptorForType() {
+    public Descriptor getDescriptorForType() {
       return type;
     }
 
-    @Override
-	public DynamicMessage getDefaultInstanceForType() {
+    public DynamicMessage getDefaultInstanceForType() {
       return getDefaultInstance(type);
     }
 
-    @Override
-	public Map<FieldDescriptor, Object> getAllFields() {
+    public Map<FieldDescriptor, Object> getAllFields() {
       return fields.getAllFields();
     }
 
-    @Override
-	public Builder newBuilderForField(FieldDescriptor field) {
+    public Builder newBuilderForField(FieldDescriptor field) {
       verifyContainingType(field);
 
       if (field.getJavaType() != FieldDescriptor.JavaType.MESSAGE) {
@@ -380,14 +357,12 @@ public Builder toBuilder() {
       return new Builder(field.getMessageType());
     }
 
-    @Override
-	public boolean hasField(FieldDescriptor field) {
+    public boolean hasField(FieldDescriptor field) {
       verifyContainingType(field);
       return fields.hasField(field);
     }
 
-    @Override
-	public Object getField(FieldDescriptor field) {
+    public Object getField(FieldDescriptor field) {
       verifyContainingType(field);
       Object result = fields.getField(field);
       if (result == null) {
@@ -400,60 +375,51 @@ public Builder toBuilder() {
       return result;
     }
 
-    @Override
-	public Builder setField(FieldDescriptor field, Object value) {
+    public Builder setField(FieldDescriptor field, Object value) {
       verifyContainingType(field);
       fields.setField(field, value);
       return this;
     }
 
-    @Override
-	public Builder clearField(FieldDescriptor field) {
+    public Builder clearField(FieldDescriptor field) {
       verifyContainingType(field);
       fields.clearField(field);
       return this;
     }
 
-    @Override
-	public int getRepeatedFieldCount(FieldDescriptor field) {
+    public int getRepeatedFieldCount(FieldDescriptor field) {
       verifyContainingType(field);
       return fields.getRepeatedFieldCount(field);
     }
 
-    @Override
-	public Object getRepeatedField(FieldDescriptor field, int index) {
+    public Object getRepeatedField(FieldDescriptor field, int index) {
       verifyContainingType(field);
       return fields.getRepeatedField(field, index);
     }
 
-    @Override
-	public Builder setRepeatedField(FieldDescriptor field,
+    public Builder setRepeatedField(FieldDescriptor field,
                                     int index, Object value) {
       verifyContainingType(field);
       fields.setRepeatedField(field, index, value);
       return this;
     }
 
-    @Override
-	public Builder addRepeatedField(FieldDescriptor field, Object value) {
+    public Builder addRepeatedField(FieldDescriptor field, Object value) {
       verifyContainingType(field);
       fields.addRepeatedField(field, value);
       return this;
     }
 
-    @Override
-	public UnknownFieldSet getUnknownFields() {
+    public UnknownFieldSet getUnknownFields() {
       return unknownFields;
     }
 
-    @Override
-	public Builder setUnknownFields(UnknownFieldSet unknownFields) {
+    public Builder setUnknownFields(UnknownFieldSet unknownFields) {
       this.unknownFields = unknownFields;
       return this;
     }
 
-    @Override
-	public Builder mergeUnknownFields(UnknownFieldSet unknownFields) {
+    public Builder mergeUnknownFields(UnknownFieldSet unknownFields) {
       this.unknownFields =
         UnknownFieldSet.newBuilder(this.unknownFields)
                        .mergeFrom(unknownFields)

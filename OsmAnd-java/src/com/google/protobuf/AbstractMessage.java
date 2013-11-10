@@ -30,14 +30,14 @@
 
 package com.google.protobuf;
 
-import java.io.IOException;
+import com.google.protobuf.Descriptors.Descriptor;
+import com.google.protobuf.Descriptors.FieldDescriptor;
+
 import java.io.InputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.google.protobuf.Descriptors.Descriptor;
-import com.google.protobuf.Descriptors.FieldDescriptor;
 
 /**
  * A partial implementation of the {@link Message} interface which implements
@@ -47,8 +47,7 @@ import com.google.protobuf.Descriptors.FieldDescriptor;
  */
 public abstract class AbstractMessage extends AbstractMessageLite
                                       implements Message {
-  @Override
-@SuppressWarnings("unchecked")
+  @SuppressWarnings("unchecked")
   public boolean isInitialized() {
     // Check that all required fields are present.
     for (final FieldDescriptor field : getDescriptorForType().getFields()) {
@@ -86,8 +85,7 @@ public abstract class AbstractMessage extends AbstractMessageLite
     return TextFormat.printToString(this);
   }
 
-  @Override
-public void writeTo(final CodedOutputStream output) throws IOException {
+  public void writeTo(final CodedOutputStream output) throws IOException {
     final boolean isMessageSet =
         getDescriptorForType().getOptions().getMessageSetWireFormat();
 
@@ -114,8 +112,7 @@ public void writeTo(final CodedOutputStream output) throws IOException {
 
   private int memoizedSize = -1;
 
-  @Override
-public int getSerializedSize() {
+  public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) {
       return size;
@@ -190,8 +187,7 @@ public int getSerializedSize() {
     @Override
     public abstract BuilderType clone();
 
-    @Override
-	public BuilderType clear() {
+    public BuilderType clear() {
       for (final Map.Entry<FieldDescriptor, Object> entry :
            getAllFields().entrySet()) {
         clearField(entry.getKey());
@@ -199,8 +195,7 @@ public int getSerializedSize() {
       return (BuilderType) this;
     }
 
-    @Override
-	public BuilderType mergeFrom(final Message other) {
+    public BuilderType mergeFrom(final Message other) {
       if (other.getDescriptorForType() != getDescriptorForType()) {
         throw new IllegalArgumentException(
           "mergeFrom(Message) can only merge messages of the same type.");
@@ -279,6 +274,7 @@ public int getSerializedSize() {
      * @param tag The tag, which should have already been read.
      * @return {@code true} unless the tag is an end-group tag.
      */
+    @SuppressWarnings("unchecked")
     static boolean mergeFieldFrom(
         final CodedInputStream input,
         final UnknownFieldSet.Builder unknownFields,
@@ -537,8 +533,7 @@ public int getSerializedSize() {
       }
     }
 
-    @Override
-	public BuilderType mergeUnknownFields(final UnknownFieldSet unknownFields) {
+    public BuilderType mergeUnknownFields(final UnknownFieldSet unknownFields) {
       setUnknownFields(
         UnknownFieldSet.newBuilder(getUnknownFields())
                        .mergeFrom(unknownFields)
