@@ -5,6 +5,7 @@
 
 	<property name="src.dir" value="src" />
 	<property name="src.absolute.dir" location="${src.dir}" />
+	<property name="protobuf.src" location="protobuf-src" />
 	<property name="bin.dir" value="bin" />
 	<property name="bin.absolute.dir" location="${bin.dir}" />
 	<property name="lib.dir" value="libs" />
@@ -52,6 +53,15 @@
 	</target>
 
 
+	<target name="patch-protobuf">
+	    <copy file="${protobuf.src}/com/google/protobuf/CodedInputStream.java"
+	         tofile="${protobuf.src}/com/google/protobuf/CodedInputStreamRAF.java" overwrite="yes">
+	    </copy>
+	    <!-- 
+	    <copy todir="${src.absolute.dir}">
+			<fileset dir="${protobuf.src}"/>
+		</copy>  -->
+	</target>
 	<target name="compile" depends="-dirs,copy_resources">
 		<copy todir="${bin.absolute.dir}">
 			<fileset dir="${src.absolute.dir}">
