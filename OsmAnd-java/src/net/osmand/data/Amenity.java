@@ -1,15 +1,18 @@
 package net.osmand.data;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 
 public class Amenity extends MapObject {
 
 	private static final long serialVersionUID = 132083949926339552L;
 	private String subType;
 	private AmenityType type;
+	// duplicate for fast access
 	private String openingHours;
-	private String phone;
-	private String description;
-	private String site;
+	private Map<String, String> additionalInfo;
 
 	public Amenity(){
 	}
@@ -31,11 +34,38 @@ public class Amenity extends MapObject {
 	}
 	
 	public String getOpeningHours() {
+//		 getAdditionalInfo("opening_hours");
 		return openingHours;
 	}
 	
 	public void setOpeningHours(String openingHours) {
+		setAdditionalInfo("opening_hours", openingHours);
 		this.openingHours = openingHours;
+	}
+	
+	public String getAdditionalInfo(String key){
+		if(additionalInfo == null) {
+			return null;
+		}
+		return additionalInfo.get(key);
+	}
+	
+	public Map<String, String> getAdditionalInfo() {
+		if(additionalInfo == null) {
+			return Collections.emptyMap();
+		}
+		return additionalInfo;
+	}
+	
+	public void setAdditionalInfo(Map<String, String> additionalInfo) {
+		this.additionalInfo = additionalInfo;
+	}
+	
+	public void setAdditionalInfo(String tag, String value) {
+		if(this.additionalInfo == null){
+			this.additionalInfo = new LinkedHashMap<String, String>();
+		}
+		setAdditionalInfo(tag, value);
 	}
 	
 
@@ -45,27 +75,27 @@ public class Amenity extends MapObject {
 	}
 	
 	public String getSite() {
-		return site;
+		return getAdditionalInfo("website");
 	}
 
 	public void setSite(String site) {
-		this.site = site;
+		setAdditionalInfo("website", site);
 	}
 
 	public String getPhone() {
-		return phone;
+		return getAdditionalInfo("phone");
 	}
 
 	public void setPhone(String phone) {
-		this.phone = phone;
+		setAdditionalInfo("phone", phone);
 	}
 	
 	public String getDescription() {
-		return description;
+		return getAdditionalInfo("description");
 	}
 	
 	public void setDescription(String description) {
-		this.description = description;
+		setAdditionalInfo("description", description);
 	}
 	
 	
