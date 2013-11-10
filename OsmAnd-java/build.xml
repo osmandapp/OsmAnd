@@ -60,6 +60,7 @@
 	    <copy todir="${src.absolute.dir}">
 			<fileset dir="${protobuf.src}"/>
 		</copy> 
+		<patch patchfile="protobuf.patch" dir=".."/>
 	</target>
 	<target name="compile" depends="-dirs,copy_resources">
 		<copy todir="${bin.absolute.dir}">
