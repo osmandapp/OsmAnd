@@ -367,7 +367,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				items[i] = getString(R.string.download_regular_maps);
 			} else if (t[i] == DownloadActivityType.ROADS_FILE) {
 				items[i] = getString(R.string.download_roads_only_maps);
-			} else if (t[i] == DownloadActivityType.SRTM_FILE || t[i] == DownloadActivityType.SRTM_COUNTRY_FILE) {
+			} else if ( t[i] == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				items[i] = getString(R.string.download_srtm_maps);
 			} else if (t[i] == DownloadActivityType.HILLSHADE_FILE) {
 				items[i] = getString(R.string.download_hillshade_maps);
@@ -382,7 +382,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			items = new DownloadActivityType[]{
 					DownloadActivityType.NORMAL_FILE,
 					DownloadActivityType.ROADS_FILE,
-					//DownloadActivityType.SRTM_FILE,
 					DownloadActivityType.HILLSHADE_FILE,
 					DownloadActivityType.SRTM_COUNTRY_FILE};
 		} else {

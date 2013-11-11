@@ -19,7 +19,6 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.RegionCountry;
-import net.osmand.map.RegionRegistry;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -51,7 +50,6 @@ import android.widget.Toast;
 public class DownloadIndexesThread {
 	private DownloadIndexActivity uiActivity = null;
 	private IndexFileList indexFiles = null;
-	private List<SrtmIndexItem> cachedSRTMFiles;
 	private Map<IndexItem, List<DownloadEntry>> entriesToDownload = new ConcurrentHashMap<IndexItem, List<DownloadEntry>>();
 	private Set<DownloadEntry> currentDownloads = new HashSet<DownloadEntry>();
 	private final Context ctx;
@@ -285,11 +283,6 @@ public class DownloadIndexesThread {
 			if (vectorMapsToReindex) {
 				warnings = manager.indexingMaps(this);
 			}
-			if (cachedSRTMFiles != null) {
-				for (SrtmIndexItem i : cachedSRTMFiles) {
-					((SrtmIndexItem) i).updateExistingTiles(app.getResourceManager().getIndexFileNames());
-				}
-			}
 			if (!warnings.isEmpty()) {
 				return warnings.get(0);
 			}
@@ -480,32 +473,6 @@ public class DownloadIndexesThread {
 			
 			public List<IndexItem> getFilteredByType() {
 				final List<IndexItem> filtered = new ArrayList<IndexItem>();
-				if (type == DownloadActivityType.SRTM_FILE) {
-					Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
-					if (cachedSRTMFiles == null) {
-						cachedSRTMFiles = new ArrayList<SrtmIndexItem>();
-						synchronized (cachedSRTMFiles) {
-							List<RegionCountry> countries = RegionRegistry.getRegionRegistry().getCountries();
-							for (RegionCountry rc : countries) {
-								if (rc.getTileSize() > 35 && rc.getSubRegions().size() > 0) {
-									for (RegionCountry ch : rc.getSubRegions()) {
-										cachedSRTMFiles.add(new SrtmIndexItem(ch, indexFileNames));
-									}
-								} else {
-									cachedSRTMFiles.add(new SrtmIndexItem(rc, indexFileNames));
-								}
-							}
-							filtered.addAll(cachedSRTMFiles);
-						}
-					} else {
-						synchronized (cachedSRTMFiles) {
-							for (SrtmIndexItem s : cachedSRTMFiles) {
-								s.updateExistingTiles(indexFileNames);
-								filtered.add(s);
-							}
-						}
-					}
-				}
 				List<IndexItem> cachedIndexFiles = getCachedIndexFiles();
 				if (cachedIndexFiles != null) {
 					for (IndexItem file : cachedIndexFiles) {
@@ -526,7 +493,8 @@ public class DownloadIndexesThread {
 					a.setIndexFiles(filtered, cats);
 					a.notifyDataSetChanged();
 					a.getFilter().filter(uiActivity.getFilterText());
-					if (type == DownloadActivityType.SRTM_FILE && OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) instanceof SRTMPlugin
+					if ((type == DownloadActivityType.SRTM_COUNTRY_FILE || type == DownloadActivityType.HILLSHADE_FILE)
+							&& OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) instanceof SRTMPlugin
 							&& !OsmandPlugin.getEnabledPlugin(SRTMPlugin.class).isPaid()) {
 						Builder msg = new AlertDialog.Builder(uiActivity);
 						msg.setTitle(R.string.srtm_paid_version_title);

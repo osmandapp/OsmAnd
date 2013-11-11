@@ -52,7 +52,7 @@ public class IndexItem implements Comparable<IndexItem> {
 
 	public String getVisibleDescription(ClientContext ctx) {
 		String s = ""; //$NON-NLS-1$
-		if (type == DownloadActivityType.SRTM_FILE || type == DownloadActivityType.SRTM_COUNTRY_FILE) {
+		if (type == DownloadActivityType.SRTM_COUNTRY_FILE) {
 			return ctx.getString(R.string.download_srtm_maps);
 		} else if (type == DownloadActivityType.ROADS_FILE) {
 			return ctx.getString(R.string.download_roads_only_item);
