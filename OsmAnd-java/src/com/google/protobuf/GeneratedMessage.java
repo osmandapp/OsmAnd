@@ -30,19 +30,19 @@
 
 package com.google.protobuf;
 
+import com.google.protobuf.Descriptors.Descriptor;
+import com.google.protobuf.Descriptors.EnumValueDescriptor;
+import com.google.protobuf.Descriptors.FieldDescriptor;
+
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import com.google.protobuf.Descriptors.Descriptor;
-import com.google.protobuf.Descriptors.EnumValueDescriptor;
-import com.google.protobuf.Descriptors.FieldDescriptor;
 
 /**
  * All generated protocol message classes extend this class.  This class
@@ -64,14 +64,12 @@ public abstract class GeneratedMessage extends AbstractMessage {
    */
   protected abstract FieldAccessorTable internalGetFieldAccessorTable();
 
-  @Override
-public Descriptor getDescriptorForType() {
+  public Descriptor getDescriptorForType() {
     return internalGetFieldAccessorTable().descriptor;
   }
 
   /** Internal helper which returns a mutable map. */
-  @SuppressWarnings("unchecked")
-private Map<FieldDescriptor, Object> getAllFieldsMutable() {
+  private Map<FieldDescriptor, Object> getAllFieldsMutable() {
     final TreeMap<FieldDescriptor, Object> result =
       new TreeMap<FieldDescriptor, Object>();
     final Descriptor descriptor = internalGetFieldAccessorTable().descriptor;
@@ -102,8 +100,7 @@ private Map<FieldDescriptor, Object> getAllFieldsMutable() {
       // Check that embedded messages are initialized.
       if (field.getJavaType() == FieldDescriptor.JavaType.MESSAGE) {
         if (field.isRepeated()) {
-        	// Osmand fix (remove annotation)
-          final
+          @SuppressWarnings("unchecked") final
           List<Message> messageList = (List<Message>) getField(field);
           for (final Message element : messageList) {
             if (!element.isInitialized()) {
@@ -121,35 +118,29 @@ private Map<FieldDescriptor, Object> getAllFieldsMutable() {
     return true;
   }
 
-  @Override
-public Map<FieldDescriptor, Object> getAllFields() {
+  public Map<FieldDescriptor, Object> getAllFields() {
     return Collections.unmodifiableMap(getAllFieldsMutable());
   }
 
-  @Override
-public boolean hasField(final FieldDescriptor field) {
+  public boolean hasField(final FieldDescriptor field) {
     return internalGetFieldAccessorTable().getField(field).has(this);
   }
 
-  @Override
-public Object getField(final FieldDescriptor field) {
+  public Object getField(final FieldDescriptor field) {
     return internalGetFieldAccessorTable().getField(field).get(this);
   }
 
-  @Override
-public int getRepeatedFieldCount(final FieldDescriptor field) {
+  public int getRepeatedFieldCount(final FieldDescriptor field) {
     return internalGetFieldAccessorTable().getField(field)
       .getRepeatedCount(this);
   }
 
-  @Override
-public Object getRepeatedField(final FieldDescriptor field, final int index) {
+  public Object getRepeatedField(final FieldDescriptor field, final int index) {
     return internalGetFieldAccessorTable().getField(field)
       .getRepeated(this, index);
   }
 
-  @Override
-public final UnknownFieldSet getUnknownFields() {
+  public final UnknownFieldSet getUnknownFields() {
     return unknownFields;
   }
 
@@ -182,29 +173,24 @@ public final UnknownFieldSet getUnknownFields() {
       return internalGetResult().internalGetFieldAccessorTable();
     }
 
-    @Override
-	public Descriptor getDescriptorForType() {
+    public Descriptor getDescriptorForType() {
       return internalGetFieldAccessorTable().descriptor;
     }
 
-    @Override
-	public Map<FieldDescriptor, Object> getAllFields() {
+    public Map<FieldDescriptor, Object> getAllFields() {
       return internalGetResult().getAllFields();
     }
 
-    @Override
-	public Message.Builder newBuilderForField(
+    public Message.Builder newBuilderForField(
         final FieldDescriptor field) {
       return internalGetFieldAccessorTable().getField(field).newBuilder();
     }
 
-    @Override
-	public boolean hasField(final FieldDescriptor field) {
+    public boolean hasField(final FieldDescriptor field) {
       return internalGetResult().hasField(field);
     }
 
-    @Override
-	public Object getField(final FieldDescriptor field) {
+    public Object getField(final FieldDescriptor field) {
       if (field.isRepeated()) {
         // The underlying list object is still modifiable at this point.
         // Make sure not to expose the modifiable list to the caller.
@@ -215,52 +201,44 @@ public final UnknownFieldSet getUnknownFields() {
       }
     }
 
-    @Override
-	public BuilderType setField(final FieldDescriptor field,
+    public BuilderType setField(final FieldDescriptor field,
                                 final Object value) {
       internalGetFieldAccessorTable().getField(field).set(this, value);
       return (BuilderType) this;
     }
 
-    @Override
-	public BuilderType clearField(final FieldDescriptor field) {
+    public BuilderType clearField(final FieldDescriptor field) {
       internalGetFieldAccessorTable().getField(field).clear(this);
       return (BuilderType) this;
     }
 
-    @Override
-	public int getRepeatedFieldCount(final FieldDescriptor field) {
+    public int getRepeatedFieldCount(final FieldDescriptor field) {
       return internalGetResult().getRepeatedFieldCount(field);
     }
 
-    @Override
-	public Object getRepeatedField(final FieldDescriptor field,
+    public Object getRepeatedField(final FieldDescriptor field,
                                    final int index) {
       return internalGetResult().getRepeatedField(field, index);
     }
 
-    @Override
-	public BuilderType setRepeatedField(final FieldDescriptor field,
+    public BuilderType setRepeatedField(final FieldDescriptor field,
                                         final int index, final Object value) {
       internalGetFieldAccessorTable().getField(field)
         .setRepeated(this, index, value);
       return (BuilderType) this;
     }
 
-    @Override
-	public BuilderType addRepeatedField(final FieldDescriptor field,
+    public BuilderType addRepeatedField(final FieldDescriptor field,
                                         final Object value) {
       internalGetFieldAccessorTable().getField(field).addRepeated(this, value);
       return (BuilderType) this;
     }
 
-    @Override
-	public final UnknownFieldSet getUnknownFields() {
+    public final UnknownFieldSet getUnknownFields() {
       return internalGetResult().unknownFields;
     }
 
-    @Override
-	public final BuilderType setUnknownFields(
+    public final BuilderType setUnknownFields(
         final UnknownFieldSet unknownFields) {
       internalGetResult().unknownFields = unknownFields;
       return (BuilderType) this;
@@ -277,8 +255,7 @@ public final UnknownFieldSet getUnknownFields() {
       return (BuilderType) this;
     }
 
-    @Override
-	public boolean isInitialized() {
+    public boolean isInitialized() {
       return internalGetResult().isInitialized();
     }
 
@@ -361,8 +338,7 @@ public final UnknownFieldSet getUnknownFields() {
 
     /** Get the number of elements in a repeated extension. */
     public final <Type> int getExtensionCount(
-    		// osmand fix >> -> > > 
-        final GeneratedExtension<MessageType, List<Type> > extension) {
+        final GeneratedExtension<MessageType, List<Type>> extension) {
       verifyExtensionContainingType(extension);
       final FieldDescriptor descriptor = extension.getDescriptor();
       return extensions.getRepeatedFieldCount(descriptor);
@@ -393,8 +369,7 @@ public final UnknownFieldSet getUnknownFields() {
     /** Get one element of a repeated extension. */
     @SuppressWarnings("unchecked")
     public final <Type> Type getExtension(
-    		// osmand fix >> -> > >  
-        final GeneratedExtension<MessageType, List<Type> > extension,
+        final GeneratedExtension<MessageType, List<Type>> extension,
         final int index) {
       verifyExtensionContainingType(extension);
       FieldDescriptor descriptor = extension.getDescriptor();
@@ -421,8 +396,8 @@ public final UnknownFieldSet getUnknownFields() {
     protected class ExtensionWriter {
       // Imagine how much simpler this code would be if Java iterators had
       // a way to get the next element without advancing the iterator.
-		// osmand fix >> -> > > 
-      private final Iterator<Map.Entry<FieldDescriptor, Object> > iter =
+
+      private final Iterator<Map.Entry<FieldDescriptor, Object>> iter =
         extensions.iterator();
       private Map.Entry<FieldDescriptor, Object> next;
       private final boolean messageSetWireFormat;
@@ -604,8 +579,7 @@ public final UnknownFieldSet getUnknownFields() {
 
     /** Get the number of elements in a repeated extension. */
     public final <Type> int getExtensionCount(
-    		// osmand fix >> -> > > 
-        final GeneratedExtension<MessageType, List<Type> > extension) {
+        final GeneratedExtension<MessageType, List<Type>> extension) {
       return internalGetResult().getExtensionCount(extension);
     }
 
@@ -617,8 +591,7 @@ public final UnknownFieldSet getUnknownFields() {
 
     /** Get one element of a repeated extension. */
     public final <Type> Type getExtension(
-    		// osmand fix >> -> > > 
-        final GeneratedExtension<MessageType, List<Type> > extension,
+        final GeneratedExtension<MessageType, List<Type>> extension,
         final int index) {
       return internalGetResult().getExtension(extension, index);
     }
@@ -637,8 +610,7 @@ public final UnknownFieldSet getUnknownFields() {
 
     /** Set the value of one element of a repeated extension. */
     public final <Type> BuilderType setExtension(
-    		// osmand fix >> -> > > 
-        final GeneratedExtension<MessageType, List<Type> > extension,
+        final GeneratedExtension<MessageType, List<Type>> extension,
         final int index, final Type value) {
       final ExtendableMessage<MessageType> message = internalGetResult();
       message.verifyExtensionContainingType(extension);
@@ -651,8 +623,7 @@ public final UnknownFieldSet getUnknownFields() {
 
     /** Append a value to a repeated extension. */
     public final <Type> BuilderType addExtension(
-    		// osmand fix >> -> > > 
-        final GeneratedExtension<MessageType, List<Type> > extension,
+        final GeneratedExtension<MessageType, List<Type>> extension,
         final Type value) {
       final ExtendableMessage<MessageType> message = internalGetResult();
       message.verifyExtensionContainingType(extension);
@@ -1091,46 +1062,37 @@ public final UnknownFieldSet getUnknownFields() {
       protected final Method hasMethod;
       protected final Method clearMethod;
 
-      @Override
-	public Object get(final GeneratedMessage message) {
+      public Object get(final GeneratedMessage message) {
         return invokeOrDie(getMethod, message);
       }
-      @Override
-	public void set(final Builder builder, final Object value) {
+      public void set(final Builder builder, final Object value) {
         invokeOrDie(setMethod, builder, value);
       }
-      @Override
-	public Object getRepeated(final GeneratedMessage message,
+      public Object getRepeated(final GeneratedMessage message,
                                 final int index) {
         throw new UnsupportedOperationException(
           "getRepeatedField() called on a singular field.");
       }
-      @Override
-	public void setRepeated(final Builder builder,
+      public void setRepeated(final Builder builder,
                               final int index, final Object value) {
         throw new UnsupportedOperationException(
           "setRepeatedField() called on a singular field.");
       }
-      @Override
-	public void addRepeated(final Builder builder, final Object value) {
+      public void addRepeated(final Builder builder, final Object value) {
         throw new UnsupportedOperationException(
           "addRepeatedField() called on a singular field.");
       }
-      @Override
-	public boolean has(final GeneratedMessage message) {
+      public boolean has(final GeneratedMessage message) {
         return (Boolean) invokeOrDie(hasMethod, message);
       }
-      @Override
-	public int getRepeatedCount(final GeneratedMessage message) {
+      public int getRepeatedCount(final GeneratedMessage message) {
         throw new UnsupportedOperationException(
           "getRepeatedFieldSize() called on a singular field.");
       }
-      @Override
-	public void clear(final Builder builder) {
+      public void clear(final Builder builder) {
         invokeOrDie(clearMethod, builder);
       }
-      @Override
-	public Message.Builder newBuilder() {
+      public Message.Builder newBuilder() {
         throw new UnsupportedOperationException(
           "newBuilderForField() called on a non-Message type.");
       }
@@ -1166,12 +1128,10 @@ public final UnknownFieldSet getUnknownFields() {
       protected final Method getCountMethod;
       protected final Method clearMethod;
 
-      @Override
-	public Object get(final GeneratedMessage message) {
+      public Object get(final GeneratedMessage message) {
         return invokeOrDie(getMethod, message);
       }
-      @Override
-	public void set(final Builder builder, final Object value) {
+      public void set(final Builder builder, final Object value) {
         // Add all the elements individually.  This serves two purposes:
         // 1) Verifies that each element has the correct type.
         // 2) Insures that the caller cannot modify the list later on and
@@ -1181,35 +1141,28 @@ public final UnknownFieldSet getUnknownFields() {
           addRepeated(builder, element);
         }
       }
-      @Override
-	public Object getRepeated(final GeneratedMessage message,
+      public Object getRepeated(final GeneratedMessage message,
                                 final int index) {
         return invokeOrDie(getRepeatedMethod, message, index);
       }
-      @Override
-	public void setRepeated(final Builder builder,
+      public void setRepeated(final Builder builder,
                               final int index, final Object value) {
         invokeOrDie(setRepeatedMethod, builder, index, value);
       }
-      @Override
-	public void addRepeated(final Builder builder, final Object value) {
+      public void addRepeated(final Builder builder, final Object value) {
         invokeOrDie(addRepeatedMethod, builder, value);
       }
-      @Override
-	public boolean has(final GeneratedMessage message) {
+      public boolean has(final GeneratedMessage message) {
         throw new UnsupportedOperationException(
           "hasField() called on a singular field.");
       }
-      @Override
-	public int getRepeatedCount(final GeneratedMessage message) {
+      public int getRepeatedCount(final GeneratedMessage message) {
         return (Integer) invokeOrDie(getCountMethod, message);
       }
-      @Override
-	public void clear(final Builder builder) {
+      public void clear(final Builder builder) {
         invokeOrDie(clearMethod, builder);
       }
-      @Override
-	public Message.Builder newBuilder() {
+      public Message.Builder newBuilder() {
         throw new UnsupportedOperationException(
           "newBuilderForField() called on a non-Message type.");
       }

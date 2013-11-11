@@ -63,8 +63,7 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
     public abstract BuilderType mergeFrom(MessageType message);
 
     // Defined here for return type covariance.
-    @Override
-	public abstract MessageType getDefaultInstanceForType();
+    public abstract MessageType getDefaultInstanceForType();
 
     /**
      * Get the message being built.  We don't just pass this to the
@@ -447,45 +446,37 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
     private final boolean isRepeated;
     private final boolean isPacked;
 
-    @Override
-	public int getNumber() {
+    public int getNumber() {
       return number;
     }
 
-    @Override
-	public WireFormat.FieldType getLiteType() {
+    public WireFormat.FieldType getLiteType() {
       return type;
     }
 
-    @Override
-	public WireFormat.JavaType getLiteJavaType() {
+    public WireFormat.JavaType getLiteJavaType() {
       return type.getJavaType();
     }
 
-    @Override
-	public boolean isRepeated() {
+    public boolean isRepeated() {
       return isRepeated;
     }
 
-    @Override
-	public boolean isPacked() {
+    public boolean isPacked() {
       return isPacked;
     }
 
-    @Override
-	public Internal.EnumLiteMap<?> getEnumType() {
+    public Internal.EnumLiteMap<?> getEnumType() {
       return enumTypeMap;
     }
 
-    @Override
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     public MessageLite.Builder internalMergeFrom(
         MessageLite.Builder to, MessageLite from) {
       return ((Builder) to).mergeFrom((GeneratedMessageLite) from);
     }
 
-    @Override
-	public int compareTo(ExtensionDescriptor other) {
+    public int compareTo(ExtensionDescriptor other) {
       return number - other.number;
     }
   }
@@ -533,8 +524,7 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
     }
 
     /** For use by generated code only. */
-    @SuppressWarnings("unchecked")
-	public void internalInitRepeated(
+    public void internalInitRepeated(
         final ContainingType containingTypeDefaultInstance,
         final MessageLite messageDefaultInstance,
         final Internal.EnumLiteMap<?> enumTypeMap,

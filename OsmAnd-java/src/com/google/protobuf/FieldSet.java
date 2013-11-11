@@ -30,13 +30,13 @@
 
 package com.google.protobuf;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.io.IOException;
 
 /**
  * A class which represents an arbitrary set of fields of some message type.
@@ -210,7 +210,7 @@ final class FieldSet<FieldDescriptorType extends
     if (value == null) {
       return 0;
     } else {
-      return ((List<?>) value).size();
+      return ((List) value).size();
     }
   }
 
@@ -218,8 +218,7 @@ final class FieldSet<FieldDescriptorType extends
    * Useful for implementing
    * {@link Message#getRepeatedField(Descriptors.FieldDescriptor,int)}.
    */
-  @SuppressWarnings("unchecked")
-public Object getRepeatedField(final FieldDescriptorType descriptor,
+  public Object getRepeatedField(final FieldDescriptorType descriptor,
                                  final int index) {
     if (!descriptor.isRepeated()) {
       throw new IllegalArgumentException(
@@ -558,8 +557,7 @@ public Object getRepeatedField(final FieldDescriptorType descriptor,
   }
 
   /** Write a single field. */
-  @SuppressWarnings("unchecked")
-public static void writeField(final FieldDescriptorLite<?> descriptor,
+  public static void writeField(final FieldDescriptorLite<?> descriptor,
                                 final Object value,
                                 final CodedOutputStream output)
                                 throws IOException {
@@ -687,8 +685,7 @@ public static void writeField(final FieldDescriptorLite<?> descriptor,
   /**
    * Compute the number of bytes needed to encode a particular field.
    */
-  @SuppressWarnings("unchecked")
-public static int computeFieldSize(final FieldDescriptorLite<?> descriptor,
+  public static int computeFieldSize(final FieldDescriptorLite<?> descriptor,
                                      final Object value) {
     WireFormat.FieldType type = descriptor.getLiteType();
     int number = descriptor.getNumber();

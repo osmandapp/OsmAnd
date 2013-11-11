@@ -59,8 +59,7 @@ public interface Message extends MessageLite {
   Descriptors.Descriptor getDescriptorForType();
 
   // (From MessageLite, re-declared here only for return type covariance.)
-  @Override
-Message getDefaultInstanceForType();
+  Message getDefaultInstanceForType();
 
   /**
    * Returns a collection of all the fields in this message which are set
@@ -153,10 +152,8 @@ Message getDefaultInstanceForType();
   // Builders
 
   // (From MessageLite, re-declared here only for return type covariance.)
-  @Override
-Builder newBuilderForType();
-  @Override
-Builder toBuilder();
+  Builder newBuilderForType();
+  Builder toBuilder();
 
   /**
    * Abstract interface implemented by Protocol Message builders.
@@ -164,8 +161,7 @@ Builder toBuilder();
   interface Builder extends MessageLite.Builder {
     // (From MessageLite.Builder, re-declared here only for return type
     // covariance.)
-    @Override
-	Builder clear();
+    Builder clear();
 
     /**
      * Merge {@code other} into the message being built.  {@code other} must
@@ -187,16 +183,11 @@ Builder toBuilder();
 
     // (From MessageLite.Builder, re-declared here only for return type
     // covariance.)
-    @Override
-	Message build();
-    @Override
-	Message buildPartial();
-    @Override
-	Builder clone();
-    @Override
-	Builder mergeFrom(CodedInputStream input) throws IOException;
-    @Override
-	Builder mergeFrom(CodedInputStream input,
+    Message build();
+    Message buildPartial();
+    Builder clone();
+    Builder mergeFrom(CodedInputStream input) throws IOException;
+    Builder mergeFrom(CodedInputStream input,
                       ExtensionRegistryLite extensionRegistry)
                       throws IOException;
 
@@ -208,8 +199,7 @@ Builder toBuilder();
 
     // (From MessageLite.Builder, re-declared here only for return type
     // covariance.)
-    @Override
-	Message getDefaultInstanceForType();
+    Message getDefaultInstanceForType();
 
     /**
      * Like {@link Message#getAllFields()}.  The returned map may or may not
@@ -289,36 +279,26 @@ Builder toBuilder();
 
     // (From MessageLite.Builder, re-declared here only for return type
     // covariance.)
-    @Override
-	Builder mergeFrom(ByteString data) throws InvalidProtocolBufferException;
-    @Override
-	Builder mergeFrom(ByteString data,
+    Builder mergeFrom(ByteString data) throws InvalidProtocolBufferException;
+    Builder mergeFrom(ByteString data,
                       ExtensionRegistryLite extensionRegistry)
                       throws InvalidProtocolBufferException;
-    @Override
-	Builder mergeFrom(byte[] data) throws InvalidProtocolBufferException;
-    @Override
-	Builder mergeFrom(byte[] data, int off, int len)
+    Builder mergeFrom(byte[] data) throws InvalidProtocolBufferException;
+    Builder mergeFrom(byte[] data, int off, int len)
                       throws InvalidProtocolBufferException;
-    @Override
-	Builder mergeFrom(byte[] data,
+    Builder mergeFrom(byte[] data,
                       ExtensionRegistryLite extensionRegistry)
                       throws InvalidProtocolBufferException;
-    @Override
-	Builder mergeFrom(byte[] data, int off, int len,
+    Builder mergeFrom(byte[] data, int off, int len,
                       ExtensionRegistryLite extensionRegistry)
                       throws InvalidProtocolBufferException;
-    @Override
-	Builder mergeFrom(InputStream input) throws IOException;
-    @Override
-	Builder mergeFrom(InputStream input,
+    Builder mergeFrom(InputStream input) throws IOException;
+    Builder mergeFrom(InputStream input,
                       ExtensionRegistryLite extensionRegistry)
                       throws IOException;
-    @Override
-	boolean mergeDelimitedFrom(InputStream input)
+    boolean mergeDelimitedFrom(InputStream input)
                                throws IOException;
-    @Override
-	boolean mergeDelimitedFrom(InputStream input,
+    boolean mergeDelimitedFrom(InputStream input,
                                ExtensionRegistryLite extensionRegistry)
                                throws IOException;
   }
