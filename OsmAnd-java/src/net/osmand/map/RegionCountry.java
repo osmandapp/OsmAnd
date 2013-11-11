@@ -5,9 +5,6 @@ import gnu.trove.list.array.TIntArrayList;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.map.OsmandRegionInfo.OsmAndRegion;
-import net.osmand.util.Algorithms;
-
 public class RegionCountry {
 	public String continentName;
 	public int left, right, top, bottom;
@@ -146,45 +143,7 @@ public class RegionCountry {
 		return regions;
 	}
 
-	public static RegionCountry construct(OsmAndRegion reg) {
-		RegionCountry rc = new RegionCountry();
-		if (reg.hasContinentName()) {
-			rc.continentName = reg.getContinentName();
-		}
-		rc.name = reg.getName();
-		int px = 0;
-		int py = 0;
-		for (int i = 0; i < reg.getDegXCount(); i++) {
-			px = reg.getDegX(i) + px;
-			py = reg.getDegY(i) + py;
-			rc.add(px, py);
-		}
-		for (int i = 0; i < reg.getSubregionsCount(); i++) {
-			rc.addSubregion(construct(reg.getSubregions(i)));
-		}
-		return rc;
-	}
 	
-	public OsmAndRegion convert() {
-		OsmAndRegion.Builder reg = OsmAndRegion.newBuilder();
-		// System.out.println(r.name + " " + r.tiles.size() + " ?= " + r.calculateTileSet(new TLongHashSet(), 8).size());
-		int px = 0;
-		int py = 0;
-		for (int i = 0; i < this.getTileSize(); i++) {
-			reg.addDegX(this.getLon(i) - px);
-			reg.addDegY(this.getLat(i) - py);
-			px = this.getLon(i);
-			py = this.getLat(i);
-		}
-		String n = Algorithms.capitalizeFirstLetterAndLowercase(this.name.replace('_', ' '));
-		reg.setName(n);
-		if(this.continentName != null) {
-			reg.setContinentName(Algorithms.capitalizeFirstLetterAndLowercase(this.continentName));
-		}
-		for (RegionCountry c : this.regions) {
-			reg.addSubregions(c.convert());
-		}
-		return reg.build();
-	}
+	
 	
 }
