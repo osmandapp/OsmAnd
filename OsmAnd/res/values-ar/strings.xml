@@ -638,7 +638,7 @@
 	<string name="left">الأيسر</string>
 	<string name="front_left">الأيسر الأمامي</string>
 	<string name="towards">نحو</string>
-	<string name="no_info">لا معلومات</string>
+	<string name="no_info">لا توجد بيانات</string>
 	<string name="direction_style_sidewise">جانب واحد (8 قطاعات)</string>
 	<string name="direction_style_clockwise">جانبان (12 قطاع)</string>
 	<string name="settings_direction_style">نمط التّوجه</string>
