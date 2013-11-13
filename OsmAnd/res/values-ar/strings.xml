@@ -546,7 +546,7 @@
 	<string name="map_online_data_descr">استخدام الخرائط من الإنترنت (تنزيل وحفظ نسخة منها على بطاقة SD)</string>
 	<string name="online_map_settings">خرائط المتصلة بالانترنت</string>
 	<string name="online_map_settings_descr">إعداد مصادر الخرائط المربعية المخبئة والمتصلة</string>
-	<string name="auto_zoom_farthest">إلى مدى بعيد</string>
+	<string name="auto_zoom_farthest">إلى مدى الطويل</string>
 	<string name="use_magnetic_sensor_descr">استخدم الحساس المغناطيسي لتحديد قيمة البوصلة بدلا من حساس الاتجاهات</string>
     <string name="map_settings">إعدادات الخريطة</string>
 	<string name="map_settings_descr">ضبط عرض الخريطة</string>
