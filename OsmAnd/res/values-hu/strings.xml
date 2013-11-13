@@ -1379,10 +1379,17 @@
 		\n\t* A \'High contrast roads\' az utakat élénk színekkel jeleníti meg, ami ideális erős környezeti fényben
 		\n\t* A \'Winter and ski\' hó borított téli tájképet készít, és megjeleníti a sípályákat és -lifteket (\'World ski\' térkép letöltése szükséges hozzá)
 	</string>
-    <string name="base_world_map">alap világtérkép</string>
+    <string name="base_world_map">Föld alaptérkép</string>
 	<string name="route_distance_close">Közel</string>
     <string name="route_distance_far">Távol</string>
     <string name="route_distance_farest">Legtávolabb</string>
     <string name="map_magnifier">Térképnagyító</string>
     <string name="route_distance_farthest">Legtávolabb</string>
-    </resources>
+    <string name="animate_routing_route_not_calculated">Előbb tervezz útvonalat</string>
+    <string name="animate_routing_route">Szimuláció a tervezett útvonalon </string>
+    <string name="animate_routing_gpx">Szimuláció GPX nyomvonalon</string>
+    <string name="remember_choice">Emlékezz a választásomra</string>
+    <string name="gps_status_eclipsim">GPS Státusz</string>
+    <string name="default_and">és</string>
+    <string name="default_or">vagy</string>
+	</resources>
