@@ -82,7 +82,7 @@
   <string name="index_name_africa">अफ्रिका</string>
   <string name="index_name_asia">आशिया</string>
   <string name="index_name_oceania">ओशेनिया</string>
-  <string name="amenity_type_wikiosm">विकिपेडिया (ऑफलाइन)</string>
+  <string name="amenity_type_osmwiki">विकिपेडिया (ऑफलाइन)</string>
   
   <string name="routing_settings">दिशादर्शन</string>
   <string name="routing_settings_descr">दिशादर्शनाचे पर्याय ठरवा</string>
@@ -445,7 +445,7 @@
 	<string name="context_menu_item_search_transport">परिवहन शोधा</string>
 	<string name="deselect_all">काहीच निवडू नका</string>
 	<string name="filter_existing_indexes">डाउनलोड केलेले</string>
-	<string name="amenity_type_manmade">मानव निर्मित</string>
+	<string name="amenity_type_man_made">मानव निर्मित</string>
 	<string name="amenity_type_administrative">प्रशासकीय</string>
 	<string name="amenity_type_barrier">अडथळे</string>
 	<string name="unit_of_length_descr">लांबी आणि वेगाचे माप बदला</string>

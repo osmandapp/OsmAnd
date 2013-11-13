@@ -715,7 +715,7 @@
 	<string name="use_osmand_routing_service">OsmAnd navigacija &gt;20km</string>
 	<string name="poi_filter_closest_poi">Najbliže POI</string>
 	<string name="amenity_type_sustenance">Prehrana</string>
-	<string name="amenity_type_manmade">Građevine</string>
+	<string name="amenity_type_man_made">Građevine</string>
 	<string name="amenity_type_administrative">Upravni</string>
 	<string name="add_waypoint_dialog_added">Navigacijska točka \'\'{0}\'\' je uspješno dodana</string>
 	<string name="add_waypoint_dialog_title">Dodaj navigacijsku točku na snimljeni GPX zapis</string>

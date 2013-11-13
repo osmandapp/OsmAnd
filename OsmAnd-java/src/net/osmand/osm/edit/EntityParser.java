@@ -17,7 +17,7 @@ import net.osmand.util.Algorithms;
 
 public class EntityParser {
 	
-	private static void parseMapObject(MapObject mo, Entity e) {
+	public static void parseMapObject(MapObject mo, Entity e) {
 		mo.setId(e.getId());
 		if(mo instanceof Amenity) {
 			mo.setId((e.getId() << 1) + ((e instanceof Node) ? 0 : 1));
@@ -62,21 +62,28 @@ public class EntityParser {
 		mo.setName(op);
 	}
 	
-	public static void parseAmenity(Amenity am, Entity entity) {
-		parseMapObject(am, entity);
-		
-	}
-
-	public static Amenity parseAmenity(Entity entity, AmenityType type, String subtype) {
+	public static Amenity parseAmenity(Entity entity, AmenityType type, String subtype, MapRenderingTypes types) {
 		Amenity am = new Amenity();
-		parseAmenity(am, entity);
+		parseMapObject(am, entity);
 		am.setType(type);
 		am.setSubType(subtype);
-		am.setOpeningHours(entity.getTag(OSMTagKey.OPENING_HOURS));
-		am.setPhone(entity.getTag(OSMTagKey.PHONE));
-		if (am.getPhone() == null) {
-			am.setPhone(entity.getTag(OSMTagKey.CONTACT_PHONE));
+//		TODO ; // parse additional info am.setAdditionalInfo(tag, value)
+		am.setAdditionalInfo("opening_hours", entity.getTag("opening_hours"));
+		am.setAdditionalInfo("description", entity.getTag("description"));
+		am.setAdditionalInfo("website", getPhone(entity));
+		am.setAdditionalInfo("phone", getWebSiteURL(entity));
+		return am;
+	}
+
+	private static String getPhone(Entity entity) {
+		String phone = entity.getTag(OSMTagKey.PHONE);
+		if(phone == null) {
+			return entity.getTag(OSMTagKey.CONTACT_PHONE);
 		}
+		return phone;
+	}
+
+	private static String getWebSiteURL(Entity entity) {
 		String siteUrl = entity.getTag(OSMTagKey.WIKIPEDIA);
 		if (siteUrl != null) {
 			if (!siteUrl.startsWith("http://")) { //$NON-NLS-1$
@@ -99,9 +106,7 @@ public class EntityParser {
 				siteUrl = "http://" + siteUrl;
 			}
 		}
-		am.setSite(siteUrl);
-		am.setDescription(entity.getTag(OSMTagKey.DESCRIPTION));
-		return am;
+		return siteUrl;
 	}
 	
 	public static List<Amenity> parseAmenities(MapRenderingTypes renderingTypes,
@@ -116,7 +121,7 @@ public class EntityParser {
 					renderingTypes.getAmenityType(t, entity.getTag(t)); 
 				if (type != null) {
 					String subtype = renderingTypes.getAmenitySubtype(t, entity.getTag(t));
-					Amenity a = parseAmenity(entity, type, subtype);
+					Amenity a = parseAmenity(entity, type, subtype, renderingTypes);
 					if(checkAmenitiesToAdd(a, amenitiesList) && !"no".equals(subtype)){
 						amenitiesList.add(a);
 					}

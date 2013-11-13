@@ -394,7 +394,7 @@
 	<string name="index_name_wiki">Wikipedia mondială</string>
 	<string name="index_name_voice">Voci înregistrate</string>
 	<string name="index_name_tts_voice">Voci TTS</string>
-	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">Obiective utilizator</string>
 	<string name="fav_export_confirmation">Există un fișier cu puncte favorite exportate anterior. Doriți să-l înlocuiți?</string>
 	<string name="profile_settings">Setări ale profilurilor</string>
@@ -682,7 +682,7 @@
 	<string name="amenity_type_historic">Obiective istorice</string>
 	<string name="amenity_type_landuse">Parcuri și spații verzi</string>
 	<string name="amenity_type_leisure">Locuri de relaxare</string>
-	<string name="amenity_type_manmade">Construcții tehnice</string>
+	<string name="amenity_type_man_made">Construcții tehnice</string>
 	<string name="amenity_type_military">Obiective militare</string>
 	<string name="amenity_type_natural">Natură</string>
 	<string name="amenity_type_office">Office</string>

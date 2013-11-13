@@ -243,7 +243,7 @@
   <string name="amenity_type_historic">Historia</string>
   <string name="amenity_type_landuse">Obszar</string>
   <string name="amenity_type_leisure">Wypoczynek</string>
-  <string name="amenity_type_manmade">Przemysł</string>
+  <string name="amenity_type_man_made">Przemysł</string>
   <string name="amenity_type_military">Wojsko</string>
   <string name="amenity_type_natural">Natura</string>
   <string name="amenity_type_office">Biura</string>
@@ -839,7 +839,7 @@
   <string name="index_name_wiki">Wikipedia dla POI</string>
   <string name="index_name_voice">Zestawy głosów (nagrane, ograniczone możliwości)</string>
   <string name="index_name_tts_voice">Zestawy głosów (TTS, zalecane)</string>
-  <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+  <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Własne</string>
   <string name="fav_export_confirmation">Plik z poprzednio wyeksportowanymi ulubionymi już istnieje. Nadpisać go?</string>
   <string name="profile_settings">Ustawienia specyficzne dla profilu</string>

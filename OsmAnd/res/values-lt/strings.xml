@@ -240,7 +240,7 @@
   <string name="index_name_wiki">Pasaulinė Wikipedia</string>
   <string name="index_name_voice">Balso paketai (įrašyti, ribotos galimybės)</string>
   <string name="index_name_tts_voice">Balso paketai (TTS-sintetinis balsas, siūloma)</string>
-  <string name="amenity_type_wikiosm">Wikipedia (įrenginyje)</string>
+  <string name="amenity_type_osmwiki">Wikipedia (įrenginyje)</string>
   <string name="amenity_type_user_defined">Nustatyta vartotojo</string>
   <string name="fav_export_confirmation">Failas su anksčiau eksportuotomis išsaugotomis vietomis jau egzistuoja. Ar norite jį pakeisti kitu?</string>
   <string name="profile_settings">Specifiniai profilio nustatymai</string>
@@ -541,7 +541,7 @@
   <string name="amenity_type_historic">Istoriniai</string>
   <string name="amenity_type_landuse">Žemės panaudojimas</string>
   <string name="amenity_type_leisure">Laisvalaikis</string>
-  <string name="amenity_type_manmade">Žmogaus sukurti objektai</string>
+  <string name="amenity_type_man_made">Žmogaus sukurti objektai</string>
   <string name="amenity_type_military">Kariniai</string>
   <string name="amenity_type_natural">Gamtiniai</string>
   <string name="amenity_type_office">Biurai</string>

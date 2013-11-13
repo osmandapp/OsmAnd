@@ -252,7 +252,7 @@
   <string name="index_name_wiki">Celosvetová Wikipedia</string>
   <string name="index_name_voice">Hlasové balíky (nahrávky, obmedzená funkcionalita)</string>
   <string name="index_name_tts_voice">Hlasové balíky (TTS-generované, odporúčané)</string>
-  <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+  <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Užívateľský</string>
   <string name="fav_export_confirmation">Súbor s predošle exportovanými obľúbenými bodmi už existuje. Chcete ho nahradiť?</string>
   <string name="profile_settings">Profilovo špecifické nastavenia</string>
@@ -524,7 +524,7 @@
   <string name="amenity_type_historic">História</string>
   <string name="amenity_type_landuse">Využitie územia</string>
   <string name="amenity_type_leisure">Voľný čas</string>
-  <string name="amenity_type_manmade">Človekom vytvorené</string>
+  <string name="amenity_type_man_made">Človekom vytvorené</string>
   <string name="amenity_type_military">Armáda</string>
   <string name="amenity_type_natural">Príroda</string>
   <string name="amenity_type_office">Kancelárie</string>

@@ -84,7 +84,7 @@ public class PoiFilter {
 	}
 	
 	private void initSearchAll(){
-		for(AmenityType t : AmenityType.values()){
+		for(AmenityType t : AmenityType.getCategories()){
 			acceptedTypes.put(t, null);
 		}
 		distanceToSearchValues = new double[] {0.5, 1, 2, 5, 10, 20, 50, 100};
@@ -200,6 +200,9 @@ public class PoiFilter {
 	}
 	
 	public boolean acceptTypeSubtype(AmenityType t, String subtype){
+		if(!AmenityType.isRegisteredType(t)) {
+			t = AmenityType.OTHER;
+		}
 		if(!acceptedTypes.containsKey(t)){
 			return false;
 		}
@@ -215,7 +218,7 @@ public class PoiFilter {
 	}
 	
 	public boolean areAllTypesAccepted(){
-		if(AmenityType.values().length == acceptedTypes.size()){
+		if(AmenityType.getCategoriesSize() == acceptedTypes.size()){
 			for(AmenityType a : acceptedTypes.keySet()){
 				if(acceptedTypes.get(a) != null){
 					return false;

@@ -557,7 +557,8 @@ public class MapActivityLayers {
 			it.reg();
 			userDefined.add(f);
 		}
-		for(AmenityType t : AmenityType.values()){
+		final AmenityType[] categories = AmenityType.getCategories();
+		for(AmenityType t : categories){
 			Item it = adapter.item(OsmAndFormatter.toPublicString(t, activity.getMyApplication()));
 			if(RenderingIcons.containsBigIcon(t.toString().toLowerCase())) {
 				it.icon(RenderingIcons.getBigIconResourceId(t.toString().toLowerCase()));
@@ -592,7 +593,7 @@ public class MapActivityLayers {
 					} else if (which <= userDefined.size()) {
 						filterId = userDefined.get(which - 2).getFilterId();
 					} else {
-						filterId = PoiFiltersHelper.getOsmDefinedFilterId(AmenityType.values()[which - userDefined.size() - 2]);
+						filterId = PoiFiltersHelper.getOsmDefinedFilterId(categories[which - userDefined.size() - 2]);
 					}
 					getApplication().getSettings().setPoiFilterForMap(filterId);
 					PoiFilter f = poiFilters.getFilterById(filterId);

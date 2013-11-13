@@ -169,7 +169,7 @@
   <string name="index_name_wiki">მსოფლიო ვიკიპედია</string>
   <string name="index_name_voice">ჩაწერილი ხმოვანი პაკეტები</string>
   <string name="index_name_tts_voice">ხმის პაკეტები (TTS)</string>
-  <string name="amenity_type_wikiosm">ვიკიპედია (გათიშული)</string>
+  <string name="amenity_type_osmwiki">ვიკიპედია (გათიშული)</string>
   <string name="amenity_type_user_defined">მომხმარებლის მიერ შექმნილი</string>
   <string name="fav_export_confirmation">რჩეულების ექსპორტირებული ფაილი უკვე არსებობს. გნებავთ თავზე გადაწერა?</string>
   <string name="profile_settings">პროფილის პარამეტრები</string>
@@ -403,7 +403,7 @@
   <string name="amenity_type_historic">ისტორიული</string>
   <string name="amenity_type_landuse">მოხნული მიწები</string>
   <string name="amenity_type_leisure">ცარიელი</string>
-  <string name="amenity_type_manmade">ქმნილება</string>
+  <string name="amenity_type_man_made">ქმნილება</string>
   <string name="amenity_type_military">სამხედრო</string>
   <string name="amenity_type_natural">ნატურალური</string>
   <string name="amenity_type_office">ოფისი</string>

@@ -170,7 +170,7 @@
 	<string name="index_name_oceania">Oseania</string>
 	<string name="index_name_other">Maailmanlaajuiset ja aihekartat</string>
 	<string name="index_name_wiki">Maailmanlaajuinen Wikipedia</string>
-	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">Käyttäjän määrittelemä</string>
 	<string name="profile_settings">Profiilikohtaiset asetukset</string>
 	<string name="settings_preset">Oletusprofiili</string>
@@ -498,7 +498,7 @@
 	<string name="amenity_type_historic">Historia</string>
 	<string name="amenity_type_landuse">Maankäyttö</string>
 	<string name="amenity_type_leisure">Vapaa-aika</string>
-	<string name="amenity_type_manmade">Rakennelma</string>
+	<string name="amenity_type_man_made">Rakennelma</string>
 	<string name="amenity_type_military">Armeijan alue</string>
 	<string name="amenity_type_natural">Luonto</string>
 	<string name="amenity_type_office">Toimisto</string>

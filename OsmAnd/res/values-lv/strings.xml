@@ -125,7 +125,7 @@
   <string name="index_name_wiki">Pasaules vikipēdija</string>
   <string name="index_name_voice">Balss pakas (ieraksti)</string>
   <string name="index_name_tts_voice">Balss pakas (TTS)</string>
-  <string name="amenity_type_wikiosm">Wikipedia (bezsaistes)</string>
+  <string name="amenity_type_osmwiki">Wikipedia (bezsaistes)</string>
   <string name="amenity_type_user_defined">Lietotāja definēts</string>
   <string name="fav_export_confirmation">Eksistē fails ar iepriekš eksportētu izlases sarakstu. Vai vēlaties to pārrakstīt?</string>
   <string name="profile_settings">Ar profilu saistītie uzstādījumi</string>
@@ -368,7 +368,7 @@
   <string name="amenity_type_historic">Vēsturiskās</string>
   <string name="amenity_type_landuse">Lietojums</string>
   <string name="amenity_type_leisure">Atpūta</string>
-  <string name="amenity_type_manmade">Mākslīgs</string>
+  <string name="amenity_type_man_made">Mākslīgs</string>
   <string name="amenity_type_military">Militārs</string>
   <string name="amenity_type_natural">Daba</string>
   <string name="amenity_type_office">Ofiss</string>

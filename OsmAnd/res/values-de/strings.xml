@@ -324,7 +324,7 @@
 	<string name="index_name_wiki">Weltweite Wikipedia POIs</string>
 	<string name="index_name_voice">Sprachpakete (Aufnahmen - begrenzte Funktionalität)</string>
 	<string name="index_name_tts_voice">Sprachpakete (TTS-Synthesizer - flexiblere Ansagen)</string>
-	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">Benutzerdefiniert</string>
 	<string name="fav_export_confirmation">Eine Datei mit exportierten Favoriten existiert bereits. Überschreiben?</string>
 	<string name="profile_settings">Profilspezifische Einstellungen</string>
@@ -645,7 +645,7 @@
 	<string name="amenity_type_historic">Historisches</string>
 	<string name="amenity_type_landuse">Landnutzung</string>
 	<string name="amenity_type_leisure">Freizeit</string>
-	<string name="amenity_type_manmade">von Menschenhand</string>
+	<string name="amenity_type_man_made">von Menschenhand</string>
 	<string name="amenity_type_military">Militär</string>
 	<string name="amenity_type_natural">Natur</string>
 	<string name="amenity_type_office">Büro</string>

@@ -128,7 +128,7 @@
   <string name="index_name_wiki">Celý svět - Wikipedie</string>
   <string name="index_name_voice">Hlasová data (audio)</string>
   <string name="index_name_tts_voice">Hlasová data (TTS)</string>
-  <string name="amenity_type_wikiosm">Wikipedie (offline)</string>
+  <string name="amenity_type_osmwiki">Wikipedie (offline)</string>
   <string name="amenity_type_user_defined">Uživatelsky definované</string>
   <string name="fav_export_confirmation">Soubor se záložkami již existuje. Chcete ho nahradit?</string>
   <string name="profile_settings">Nastavení profilu</string>
@@ -300,7 +300,7 @@
   <string name="amenity_type_historic">Historie</string>
   <string name="amenity_type_landuse">Využité území</string>
   <string name="amenity_type_leisure">Volný čas</string>
-  <string name="amenity_type_manmade">Lidská díla</string>
+  <string name="amenity_type_man_made">Lidská díla</string>
   <string name="amenity_type_military">Armáda</string>
   <string name="amenity_type_natural">Příroda</string>
   <string name="amenity_type_office">Kanceláře</string>

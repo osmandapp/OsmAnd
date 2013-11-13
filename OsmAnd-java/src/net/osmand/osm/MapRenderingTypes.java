@@ -39,6 +39,7 @@ public class MapRenderingTypes {
 	private Map<AmenityType, Map<String, String>> amenityTypeNameToTagVal = null;
 	private Map<String, AmenityType> amenityNameToType = null;
 	private Map<String, AmenityRuleType> amenityTypes = null;
+	private Map<String, AmenityRuleType> amenityPatternTypes = null;
 
 	public MapRenderingTypes(String fileName){
 		this.resourceName = fileName;
@@ -61,6 +62,7 @@ public class MapRenderingTypes {
 	protected void checkIfInitNeeded() {
 		if(amenityTypes == null) {
 			amenityTypes = new LinkedHashMap<String, MapRenderingTypes.AmenityRuleType>();
+			amenityPatternTypes = new LinkedHashMap<String, MapRenderingTypes.AmenityRuleType>();
 			init();
 		}
 	}
@@ -254,7 +256,7 @@ public class MapRenderingTypes {
 			rtype.value = null;
 		}
 		if (poiParentCategory != null) {
-			rtype.poiCategory = AmenityType.fromString(poiParentCategory);
+			rtype.poiCategory = AmenityType.findRegisteredType(poiParentCategory, null);
 			rtype.poiSpecified = true;
 		}
 		if (poiParentPrefix != null) {
@@ -267,13 +269,7 @@ public class MapRenderingTypes {
 			if (poiCategory.length() == 0) {
 				rtype.poiCategory = null;
 			} else {
-				rtype.poiCategory = null;
-				for(AmenityType t : AmenityType.values()) {
-					if(AmenityType.valueToString(t).equals(poiCategory)) {
-						rtype.poiCategory = t;
-						break;
-					}
-				}
+				rtype.poiCategory = AmenityType.getAndRegisterType(poiCategory);
 			}
 		}
 		String poiPrefix = parser.getAttributeValue("", "poi_prefix");
@@ -299,10 +295,14 @@ public class MapRenderingTypes {
 
 	private AmenityRuleType registerAmenityType(String tag, String val, AmenityRuleType rt) {
 		String keyVal = constructRuleKey(tag, val);
-		if (amenityTypes.containsKey(keyVal)) {
+		if (amenityTypes.containsKey(keyVal) || amenityPatternTypes.containsKey(keyVal)) {
 			throw new RuntimeException("Duplicate " + keyVal);
 		} else {
-			amenityTypes.put(keyVal, rt);
+			if(val != null && (tag.equals("*") || val.equals("*"))) {
+				amenityPatternTypes.put(keyVal, rt);
+			} else{
+				amenityTypes.put(keyVal, rt);
+			}
 			return rt;
 		}
 	}
@@ -311,7 +311,7 @@ public class MapRenderingTypes {
 		String tag = parser.getAttributeValue("","poi_tag");
 		if (tag != null) {
 			AmenityRuleType rtype = new AmenityRuleType();
-			rtype.poiCategory = AmenityType.fromString(poiParentCategory);
+			rtype.poiCategory = AmenityType.getAndRegisterType(poiParentCategory);
 			rtype.poiSpecified = true;
 			rtype.relation = Boolean.parseBoolean(parser.getAttributeValue("", "relation"));
 			rtype.poiPrefix = poiParentPrefix;

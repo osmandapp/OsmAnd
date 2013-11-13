@@ -38,11 +38,6 @@ public class Amenity extends MapObject {
 		return openingHours;
 	}
 	
-	public void setOpeningHours(String openingHours) {
-		setAdditionalInfo("opening_hours", openingHours);
-		this.openingHours = openingHours;
-	}
-	
 	public String getAdditionalInfo(String key){
 		if(additionalInfo == null) {
 			return null;
@@ -59,13 +54,18 @@ public class Amenity extends MapObject {
 	
 	public void setAdditionalInfo(Map<String, String> additionalInfo) {
 		this.additionalInfo = additionalInfo;
+		openingHours = additionalInfo.get("opening_hours");
 	}
 	
+
 	public void setAdditionalInfo(String tag, String value) {
 		if(this.additionalInfo == null){
 			this.additionalInfo = new LinkedHashMap<String, String>();
 		}
 		this.additionalInfo.put(tag, value);
+		if("opening_hours".equals(tag)) {
+			this.openingHours = value;
+		}
 	}
 	
 
@@ -96,6 +96,10 @@ public class Amenity extends MapObject {
 	
 	public void setDescription(String description) {
 		setAdditionalInfo("description", description);
+	}
+	
+	public void setOpeningHours(String openingHours) {
+		setAdditionalInfo("opening_hours", openingHours);
 	}
 	
 	

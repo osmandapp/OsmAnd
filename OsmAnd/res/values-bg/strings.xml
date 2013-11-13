@@ -820,7 +820,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="index_name_wiki">Уикипедия POI</string>
 	<string name="index_name_voice">Гласова навигация (записана)</string>
 	<string name="index_name_tts_voice">Гласова навигация (TTS)</string>
-	<string name="amenity_type_wikiosm">Уикипедия (офлайн)</string>
+	<string name="amenity_type_osmwiki">Уикипедия (офлайн)</string>
 	<string name="amenity_type_user_defined">определено от Вас</string>
 	<string name="fav_export_confirmation">Съществува файл с любими места. Искате ли да го заместите?</string>
 	<string name="profile_settings">Специфични настройки на потребителя</string>
@@ -1115,7 +1115,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="amenity_type_historic">Исторически</string>
 	<string name="amenity_type_landuse">Земеползване</string>
 	<string name="amenity_type_leisure">Свободно време</string>
-	<string name="amenity_type_manmade">Изкуствени</string>
+	<string name="amenity_type_man_made">Изкуствени</string>
 	<string name="amenity_type_military">Военни обекти</string>
 	<string name="amenity_type_natural">Природа</string>
 	<string name="amenity_type_office">Офиси</string>

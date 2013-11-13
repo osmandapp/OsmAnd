@@ -4,7 +4,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -130,7 +129,7 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 
 	private void showPOIDialog(int dialogID, Node n, AmenityType type, String subType) {
-		Amenity a = EntityParser.parseAmenity(n, type, subType);
+		Amenity a = EntityParser.parseAmenity(n, type, subType, MapRenderingTypes.getDefault());
 		dialogBundle.putSerializable(KEY_AMENITY, a);
 		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
 		ctx.showDialog(dialogID);
@@ -619,14 +618,15 @@ public class EditingPOIActivity implements DialogProvider {
 			case DIALOG_POI_TYPES: {
 				final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 				Builder builder = new AlertDialog.Builder(ctx);
-				String[] vals = new String[AmenityType.values().length];
+				final AmenityType[] categories = AmenityType.getCategories();
+				String[] vals = new String[categories.length];
 				for(int i=0; i<vals.length; i++){
-					vals[i] = OsmAndFormatter.toPublicString(AmenityType.values()[i], ctx.getMyApplication()); 
+					vals[i] = OsmAndFormatter.toPublicString(categories[i], ctx.getMyApplication()); 
 				}
 				builder.setItems(vals, new Dialog.OnClickListener(){
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						AmenityType aType = AmenityType.values()[which];
+						AmenityType aType = categories[which];
 						if(aType != a.getType()){
 							a.setType(aType);
 							a.setSubType(""); //$NON-NLS-1$

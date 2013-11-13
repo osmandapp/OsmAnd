@@ -37,7 +37,7 @@
   <string name="free_version_message">Questa versione gratuita di OsmAnd è limitata a %1$s download e non supporta gli articoli offline di Wikipedia.</string>
   <string name="free_version_title">Versione gratuita</string>
   <string name="poi_context_menu_showdescription">Visualizza descrizione POI</string>
-  <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+  <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Definito dall\'utente</string>
   <string name="fav_export_confirmation">Esistono file con preferiti già esportati. Vuoi sostituirli?</string>
   <string name="profile_settings">Impostazioni specifiche del profilo</string>
@@ -318,7 +318,7 @@
   <string name="amenity_type_historic">Storia</string>
   <string name="amenity_type_landuse">Uso del terreno</string>
   <string name="amenity_type_leisure">Tempo Libero</string>
-  <string name="amenity_type_manmade">Artificiale</string>
+  <string name="amenity_type_man_made">Artificiale</string>
   <string name="amenity_type_military">Militare</string>
   <string name="amenity_type_natural">Natura</string>
   <string name="amenity_type_office">Ufficio</string>

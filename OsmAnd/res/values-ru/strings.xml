@@ -188,7 +188,7 @@
   <string name="index_name_wiki">Всемирная Википедия</string>
   <string name="index_name_voice">Голосовые данные (запись)</string>
   <string name="index_name_tts_voice">Голосовые данные (TTS)</string>
-  <string name="amenity_type_wikiosm">Википедия (локально)</string>
+  <string name="amenity_type_osmwiki">Википедия (локально)</string>
   <string name="amenity_type_user_defined">Пользовательские</string>
   <string name="fav_export_confirmation">Файл с избранными уже существует. Вы хотите его заменить?</string>
   <string name="profile_settings">Настройка профиля</string>
@@ -385,7 +385,7 @@
   <string name="amenity_type_historic">Историческое</string>
   <string name="amenity_type_landuse">Землепользование</string>
   <string name="amenity_type_leisure">Досуг</string>
-  <string name="amenity_type_manmade">Сооружения</string>
+  <string name="amenity_type_man_made">Сооружения</string>
   <string name="amenity_type_military">Военное</string>
   <string name="amenity_type_natural">Природа</string>
   <string name="amenity_type_office">Офис</string>

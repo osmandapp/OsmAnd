@@ -374,7 +374,7 @@
 	<string name="index_name_wiki">כלל עולמי עם ויקיפדיה</string>
 	<string name="index_name_voice">חבילות קריינות (מוקלטות)</string>
 	<string name="index_name_tts_voice">חבילות קריינות (טקסט לדיבור)</string>
-	<string name="amenity_type_wikiosm">וקיפדיה (בלתי מקוונת)</string>
+	<string name="amenity_type_osmwiki">וקיפדיה (בלתי מקוונת)</string>
 	<string name="amenity_type_user_defined">בהגדרת המשתמש</string>
 	<string name="fav_export_confirmation">קיים קובץ עם מועדפים שיוצאו בעבר. האם ברצונך להחליפו?</string>
 	<string name="profile_settings">הגדרות יעודיות לפרופיל</string>
@@ -644,7 +644,7 @@
 	<string name="amenity_type_historic">היסטורית</string>
 	<string name="amenity_type_landuse">שטח מנוצל</string>
 	<string name="amenity_type_leisure">פנאי</string>
-	<string name="amenity_type_manmade">יצירת אדם</string>
+	<string name="amenity_type_man_made">יצירת אדם</string>
 	<string name="amenity_type_military">צבאית</string>
 	<string name="amenity_type_natural">טבעית</string>
 	<string name="amenity_type_office">משרד</string>

@@ -119,7 +119,7 @@
 	<string name="index_name_voice">음성 팩 (녹음)</string>
 	<string name="index_name_tts_voice">음성 팩 (TTS)</string>
 
-	<string name="amenity_type_wikiosm">위키피디아 (오프라인)</string>
+	<string name="amenity_type_osmwiki">위키피디아 (오프라인)</string>
 	<string name="amenity_type_user_defined">사용자 정의</string>
 	<string name="fav_export_confirmation">이전에 저장한 등록지점들에 대한 파일이 이미 존재합니다. 이 파일을 대체하시겠습니까?</string>
 <!-- this block re-worked for new Preferences structure -->
@@ -439,7 +439,7 @@
 	<string name="amenity_type_historic">유적지</string>
 	<string name="amenity_type_landuse">사유지</string>
 	<string name="amenity_type_leisure">레저</string>
-	<string name="amenity_type_manmade">인공물</string>
+	<string name="amenity_type_man_made">인공물</string>
 	<string name="amenity_type_military">군대</string>
 	<string name="amenity_type_natural">자연경관</string>
 	<string name="amenity_type_office">사무소</string>

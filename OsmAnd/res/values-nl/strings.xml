@@ -152,7 +152,7 @@
   <string name="index_name_wiki">Wereldwijde Wikipedia</string>
   <string name="index_name_voice">Stembestanden (opnamen – beperkte functionaliteit)</string>
   <string name="index_name_tts_voice">Stembestanden (stemgenerator – aangeraden)</string>
-  <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+  <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Zelfgedefinieerd</string>
   <string name="fav_export_confirmation">Favorietenbestand bestaat al, wil je dit vervangen?</string>
   <string name="profile_settings">Profielspecifieke instellingen</string>
@@ -436,7 +436,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="amenity_type_historic">Historisch</string>
   <string name="amenity_type_landuse">Landgebruik</string>
   <string name="amenity_type_leisure">Vrije tijd</string>
-  <string name="amenity_type_manmade">Artificieel</string>
+  <string name="amenity_type_man_made">Artificieel</string>
   <string name="amenity_type_military">Militair</string>
   <string name="amenity_type_natural">Natuur</string>
   <string name="amenity_type_office">Kantoren</string>

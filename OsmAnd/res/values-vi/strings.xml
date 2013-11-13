@@ -218,7 +218,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="amenity_type_historic">Di tích lịch sử</string>
 	<string name="amenity_type_landuse">Sử dụng đất</string>
 	<string name="amenity_type_leisure">Vui chơi</string>
-	<string name="amenity_type_manmade">Man made</string>
+	<string name="amenity_type_man_made">Man made</string>
 	<string name="amenity_type_military">Quân sự</string>
 	<string name="amenity_type_natural">Natural</string>
 	<string name="amenity_type_office">Office</string>

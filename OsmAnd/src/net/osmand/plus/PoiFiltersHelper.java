@@ -216,7 +216,7 @@ public class PoiFiltersHelper {
 	public List<PoiFilter> getOsmDefinedPoiFilters(){
 		if(cacheOsmDefinedFilters == null){
 			cacheOsmDefinedFilters = new ArrayList<PoiFilter>();
-			for(AmenityType t : AmenityType.values()){
+			for(AmenityType t : AmenityType.getCategories()){
 				cacheOsmDefinedFilters.add(new PoiFilter(t, application));
 			}
 			final Collator instance = Collator.getInstance();
@@ -427,7 +427,7 @@ public class PoiFiltersHelper {
 	    					map.put(filterId, new LinkedHashMap<AmenityType, LinkedHashSet<String>>());
 	    				}
 	    				Map<AmenityType, LinkedHashSet<String>> m = map.get(filterId);
-	    				AmenityType a = AmenityType.fromString(query.getString(1));
+	    				AmenityType a = AmenityType.findOrCreateTypeNoReg(query.getString(1));
 	    				String subCategory = query.getString(2);
 	    				if(subCategory == null){
 	    					m.put(a, null);

@@ -207,7 +207,7 @@
 	<string name="index_name_wiki">Verdensomspennende Wikipedia</string>
 	<string name="index_name_voice">Talepakker (opptak, begrenset funksjonalitet)</string>
 	<string name="index_name_tts_voice">Talepakker (TTS kunstig tale, foretrekk)</string>
-	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">Brukerdefinert</string>
 	<string name="fav_export_confirmation">Fil med tidligere eksporterte favoritter finnes allerede. Vil du erstatte den?</string>
 	<string name="profile_settings">Profilspesifikke innstillinger</string>
@@ -375,7 +375,7 @@
 	<string name="amenity_type_historic">Historisk</string>
 	<string name="amenity_type_landuse">Arealbruk</string>
 	<string name="amenity_type_leisure">Fritid</string>
-	<string name="amenity_type_manmade">Menneskelagd</string>
+	<string name="amenity_type_man_made">Menneskelagd</string>
 	<string name="amenity_type_military">Militære</string>
 	<string name="amenity_type_natural">Natur</string>
 	<string name="amenity_type_office">Kontor</string>

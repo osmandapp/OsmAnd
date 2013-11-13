@@ -182,7 +182,7 @@
 <string name="index_name_asia">Àsia</string>
 <string name="index_name_oceania">Oceania</string>
 <string name="index_name_voice">Paquets de veu (enregistrats, funcionalitats limitades)</string>
-<string name="amenity_type_wikiosm">Viquipèdia (fora de línia)</string>
+<string name="amenity_type_osmwiki">Viquipèdia (fora de línia)</string>
 <string name="routing_settings">Navegació</string>
 <string name="routing_settings_descr">Especifiqueu les opcions de navegació</string>
 <string name="global_settings">Paràmetres globals</string>
@@ -404,7 +404,7 @@
 <string name="tip_app_mode">Perfil d\'usuari</string>
 <string name="tip_map_context_menu">Menú contextual del mapa</string>
 <string name="amenity_type_healthcare">Serveis mèdics</string>
-<string name="amenity_type_manmade">Construccions</string>
+<string name="amenity_type_man_made">Construccions</string>
 <string name="amenity_type_office">Oficines</string>
 <string name="m">m</string>
 <string name="reading_cached_tiles">S\'està llegint les tessel·les emmagatzemades...</string>

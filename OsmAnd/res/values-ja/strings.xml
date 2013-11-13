@@ -190,7 +190,7 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="amenity_type_historic">歴史(Historic)</string>
      <string name="amenity_type_landuse">土地利用(Landuse)</string>
      <string name="amenity_type_leisure">レジャー(Leisure)</string>
-     <string name="amenity_type_manmade">人工物(Man made)</string>
+     <string name="amenity_type_man_made">人工物(Man made)</string>
      <string name="amenity_type_military">軍事施設(Military)</string>
      <string name="amenity_type_natural">自然(Natural)</string>
      <string name="amenity_type_office">オフィス(Office)</string>

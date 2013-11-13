@@ -293,7 +293,7 @@
 	<string name="index_name_wiki">Wikipedija svet</string>
 	<string name="index_name_voice">Glasovni paketi (posneti, omejeno št. funkcij)</string>
 	<string name="index_name_tts_voice">Paketi govorov (raje TTS-sintetizirani)</string>
-	<string name="amenity_type_wikiosm">Wikipedija (brez povezave)</string>
+	<string name="amenity_type_osmwiki">Wikipedija (brez povezave)</string>
 	<string name="amenity_type_user_defined">Razno</string>
 	<string name="fav_export_confirmation">Datoteka z izvoženimi priljubljenimi že obstaja. Ali jo želite zamenjati?</string>
 	<string name="routing_settings">Navigacija</string>
@@ -567,7 +567,7 @@
 	<string name="old_map_index_is_not_supported">Podatki zemljevida v stari obliki \'\'{0}\'\' niso podprti</string>
 	<string name="no_buildings_found">Ni bilo najdenih zgradb.</string>
     <string name="amenity_type_sustenance">Prehrana</string>
-	<string name="amenity_type_manmade">Zgradbe</string>
+	<string name="amenity_type_man_made">Zgradbe</string>
 	<string name="send_location_sms_pattern">Mesto: %1$s\n%2$s</string>
 	<string name="tip_initial_t">OsmAnd je navigacijska aplikacija s številnimi funkcijami.
 		\n\nZa osnovno predstavitev so nekateri nasveti in triki v povezavi \'Meni\' → \'Nasveti\' na zaslonu zemljevida.

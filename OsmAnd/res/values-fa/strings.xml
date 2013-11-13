@@ -456,7 +456,7 @@
 	<string name="index_name_other">کل دنیا و نقشه های بالادستی</string>
 	<string name="index_name_voice">بسته های صوتی(ضبط شده، قابلیت محدود)</string>
 	<string name="index_name_tts_voice">بسته های صوتی(TTS، ارجح)</string>
-	<string name="amenity_type_wikiosm">ویکیپدیا (آفلاین)</string>
+	<string name="amenity_type_osmwiki">ویکیپدیا (آفلاین)</string>
 	<string name="routing_settings">مسیریابی</string>
 	<string name="routing_settings_descr">تعیین گزینه های مسیریابی</string>
 	<string name="global_settings">تنظیمات کلی</string>
@@ -530,7 +530,7 @@
 	<string name="amenity_type_historic">مکانهای تاریخی</string>
 	<string name="amenity_type_landuse">کاربری اراضی</string>
 	<string name="amenity_type_leisure">اوقات فراغت</string>
-	<string name="amenity_type_manmade">ساخته دست بشر</string>
+	<string name="amenity_type_man_made">ساخته دست بشر</string>
 	<string name="amenity_type_military">نظامی</string>
 	<string name="amenity_type_natural">منابع طبیعی</string>
 	<string name="amenity_type_office">دفتر کار</string>

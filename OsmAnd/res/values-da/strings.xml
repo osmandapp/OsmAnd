@@ -518,7 +518,7 @@
 	</string>
 	<string name="tip_day_night_mode">Dag/nat tilstand</string>
 	<string name="navigate_point_format">Format:</string>
-	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 	<string name="routing_settings">Navigation</string>
 	<string name="tip_osm_improve">Forbedre OSM data</string>
 	<string name="download_files_not_enough_space">Der er ikke ledig plads nok til at hente %1$s MB (Ledig: %2$s).</string>
@@ -1002,7 +1002,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="amenity_type_healthcare">Sundhed</string>
 	<string name="amenity_type_historic">Historisk</string>
 	<string name="amenity_type_leisure">Fritid</string>
-	<string name="amenity_type_manmade">Menneskeskabt</string>
+	<string name="amenity_type_man_made">Menneskeskabt</string>
 	<string name="amenity_type_military">Militær</string>
 	<string name="amenity_type_natural">Natur</string>
 	<string name="amenity_type_office">Kontor</string>

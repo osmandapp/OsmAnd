@@ -199,7 +199,7 @@
   <string name="index_name_wiki">Worldwide Wikipedia</string>
   <string name="index_name_voice">Голосові дані (запис, обмежений функціонал)</string>
   <string name="index_name_tts_voice">Голосові дані (TTS)</string>
-  <string name="amenity_type_wikiosm">Вікіпедія (оффлайн)</string>
+  <string name="amenity_type_osmwiki">Вікіпедія (оффлайн)</string>
   <string name="amenity_type_user_defined">Користувацькі</string>
   <string name="fav_export_confirmation">Файл з Закладками вже існує. Ви хочете його замінити?</string>
   <string name="profile_settings">Налаштування профілю</string>
@@ -467,7 +467,7 @@
   <string name="amenity_type_historic">Історичні</string>
   <string name="amenity_type_landuse">Землекористування</string>
   <string name="amenity_type_leisure">Дозвілля</string>
-  <string name="amenity_type_manmade">Споруди</string>
+  <string name="amenity_type_man_made">Споруди</string>
   <string name="amenity_type_military">Воєнні</string>
   <string name="amenity_type_natural">Природа</string>
   <string name="amenity_type_office">Офіс</string>

@@ -224,7 +224,7 @@
   <string name="index_name_wiki">Wêreldwye Wikipedia</string>
   <string name="index_name_voice">Stem pakkette (opgeneem, beperkte funksies)</string>
   <string name="index_name_tts_voice">Stem pakkette (TTS-sintese, verkies)</string>
-  <string name="amenity_type_wikiosm">Wikipedia (aflyn)</string>
+  <string name="amenity_type_osmwiki">Wikipedia (aflyn)</string>
   <string name="amenity_type_user_defined">gebruiker gedefinieerde</string>
   <string name="fav_export_confirmation">Lêer met voorheen uitgevoerde gunstelinge bestaan reeds. Wil jy dit vervang?</string>
   <string name="profile_settings">Profiel Besondere Stellings</string>
@@ -464,7 +464,7 @@
   <string name="amenity_type_historic">Histories</string>
   <string name="amenity_type_landuse">Landgebruik</string>
   <string name="amenity_type_leisure">Ontspanning</string>
-  <string name="amenity_type_manmade">Mensgemaakte</string>
+  <string name="amenity_type_man_made">Mensgemaakte</string>
   <string name="amenity_type_military">Militêre</string>
   <string name="amenity_type_natural">Natuurlike</string>
   <string name="amenity_type_office">Kantoor</string>

@@ -196,7 +196,7 @@
 	<string name="index_name_wiki">全球维基百科的POI</string>
 	<string name="index_name_voice">语音包（录制，功能有限）</string>
 	<string name="index_name_tts_voice">语音包（TTS合成，优先选用）</string>
-	<string name="amenity_type_wikiosm">维基百科（离线）</string>
+	<string name="amenity_type_osmwiki">维基百科（离线）</string>
 	<string name="amenity_type_user_defined">用户自定义</string>
 	<string name="settings_preset">用户配置文件</string>
 	<string name="routing_settings">导航</string>
@@ -265,7 +265,7 @@
 	<string name="amenity_type_historic">历史性</string>
 	<string name="amenity_type_landuse">土地利用</string>
 	<string name="amenity_type_leisure">闲暇</string>
-	<string name="amenity_type_manmade">人造</string>
+	<string name="amenity_type_man_made">人造</string>
 	<string name="amenity_type_military">军事</string>
 	<string name="amenity_type_natural">自然</string>
 	<string name="amenity_type_office">办公室</string>

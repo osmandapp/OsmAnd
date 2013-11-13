@@ -353,7 +353,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="index_name_wiki">Wikipedia</string>
 <string name="index_name_voice">Röstpaket (inspelat, begränsad funktion)</string>
 <string name="index_name_tts_voice">Röstpaket (TTS, rekommenderas)</string>
-<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 <string name="amenity_type_user_defined">Användardefinierat</string>
 <string name="fav_export_confirmation">En fil med tidigare exporterade favoriter finns redan. Vill du ersätta den?</string>
 <string name="profile_settings">Profilspecifika inställningar</string>
@@ -583,7 +583,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="amenity_type_historic">Historisk</string>
 <string name="amenity_type_landuse">Markanvändning</string>
 <string name="amenity_type_leisure">Fritid</string>
-<string name="amenity_type_manmade">Konstgjort</string>
+<string name="amenity_type_man_made">Konstgjort</string>
 <string name="amenity_type_military">Militärt</string>
 <string name="amenity_type_natural">Naturligt</string>
 <string name="amenity_type_office">Kontor</string>

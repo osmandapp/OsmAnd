@@ -10,7 +10,7 @@
   <string name="amenity_type_historic">Histórico</string>
   <string name="amenity_type_landuse">Agricultura</string>
   <string name="amenity_type_leisure">Lazer</string>
-  <string name="amenity_type_manmade">Construção Humana</string>
+  <string name="amenity_type_man_made">Construção Humana</string>
   <string name="amenity_type_military">Militar</string>
   <string name="amenity_type_natural">Natureza</string>
   <string name="amenity_type_office">Escritório</string>
@@ -607,7 +607,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="index_name_wiki">Worldwide Wikipedia</string>
   <string name="index_name_voice">Pacotes de vozes (gravadas, funcionalidades limitadas)</string>
   <string name="index_name_tts_voice">Pacotes de vozes (TTS)</string>
-  <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+  <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Definido pelo utilizador</string>
   <string name="fav_export_confirmation">Já existe um arquivo de favoritos exportados anteriormente. Quer substitui-lo?</string>
   <string name="profile_settings">Configurações específicas de Perfil</string>

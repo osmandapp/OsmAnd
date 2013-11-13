@@ -549,7 +549,7 @@
   <string name="index_name_wiki">Mundu osoko Wikipediako POIak</string>
   <string name="index_name_voice">Ahots paketeak (grabatuak, mugatutako ezaugarriak)</string>
   <string name="index_name_tts_voice">Ahots paketeak (TTS bidez sintetizatuak)</string>
-  <string name="amenity_type_wikiosm">Wikipedia (lineaz kanpo)</string>
+  <string name="amenity_type_osmwiki">Wikipedia (lineaz kanpo)</string>
   <string name="amenity_type_user_defined">Erabiltzaileak definituak</string>
   <string name="fav_export_confirmation">Aurretik esportaturiko Gogokoenak dagoeneko existitzen dira. Ordeztu nahi dituzu?</string>
   <string name="profile_settings">Profilaren Ezarpenak</string>
@@ -769,7 +769,7 @@
   <string name="amenity_type_historic">Historikoa</string>
   <string name="amenity_type_landuse">Lur erabilera</string>
   <string name="amenity_type_leisure">Aisialdia</string>
-  <string name="amenity_type_manmade">Gizakiak egina</string>
+  <string name="amenity_type_man_made">Gizakiak egina</string>
   <string name="amenity_type_military">Militarra</string>
   <string name="amenity_type_natural">Naturala</string>
   <string name="amenity_type_office">Bulegoa</string>

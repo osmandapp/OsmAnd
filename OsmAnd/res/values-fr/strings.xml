@@ -51,7 +51,7 @@
   <string name="index_name_wiki">Wikipédia Monde</string>
   <string name="index_name_voice">Packs voix (enregistrées, fonctions limitées)</string>
   <string name="index_name_tts_voice">Packs voix de synthèse (synthétisé TTS, à préferer)</string>
-  <string name="amenity_type_wikiosm">Wikipédia (hors ligne)</string>
+  <string name="amenity_type_osmwiki">Wikipédia (hors ligne)</string>
   <string name="amenity_type_user_defined">Défini par l\'utilisateur</string>
   <string name="fav_export_confirmation">Un fichier de favoris précédemment exporté existe déjà. Voulez vous le remplacer ?</string>
   <string name="profile_settings">Paramètres de profil</string>
@@ -335,9 +335,9 @@
   <string name="amenity_type_geocache">Géocache</string>
   <string name="amenity_type_healthcare">Santé</string>
   <string name="amenity_type_historic">Historique</string>
-  <string name="amenity_type_landuse">Terrain</string>
-  <string name="amenity_type_leisure">Loisir</string>
-  <string name="amenity_type_manmade">Artefact</string>
+  <string name="amenity_type_landuse">Agriculture</string>
+  <string name="amenity_type_leisure">Plaisance</string>
+  <string name="amenity_type_man_made">Artisanat</string>
   <string name="amenity_type_military">Militaire</string>
   <string name="amenity_type_natural">Nature</string>
   <string name="amenity_type_office">Bureau</string>

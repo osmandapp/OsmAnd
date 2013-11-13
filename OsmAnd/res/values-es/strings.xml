@@ -66,7 +66,7 @@
   <string name="index_name_wiki">Wikipedia mundial</string>
   <string name="index_name_voice">Paquetes de voz (grabado, funciones limitadas)</string>
   <string name="index_name_tts_voice">Paquetes de voz (sintetizado, preferido)</string>
-  <string name="amenity_type_wikiosm">Wikipedia (sin conexión)</string>
+  <string name="amenity_type_osmwiki">Wikipedia (sin conexión)</string>
   <string name="amenity_type_user_defined">Definido por el usuario</string>
   <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quiere sustituirlo?</string>
   <string name="profile_settings">Opciones específicas por perfil</string>
@@ -337,7 +337,7 @@
   <string name="amenity_type_historic">Histórico</string>
   <string name="amenity_type_landuse">Uso de Suelo</string>
   <string name="amenity_type_leisure">Placer</string>
-  <string name="amenity_type_manmade">Artificial</string>
+  <string name="amenity_type_man_made">Artificial</string>
   <string name="amenity_type_military">Militar</string>
   <string name="amenity_type_natural">Naturaleza</string>
   <string name="amenity_type_office">Oficinas</string>

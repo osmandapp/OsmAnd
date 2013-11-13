@@ -392,7 +392,7 @@
 	<string name="index_name_wiki">ΣΕ Παγκόσμιας Wikipedia</string>
 	<string name="index_name_voice">Πακέτα φωνής (ηχογραφημένα, περιορισμένες δυνατότητες)</string>
 	<string name="index_name_tts_voice">Πακέτα φωνής (σύνθεση-TTS, προτιμώμενο)</string>
-	<string name="amenity_type_wikiosm">Wikipedia (εκτός σύνδεσης)</string>
+	<string name="amenity_type_osmwiki">Wikipedia (εκτός σύνδεσης)</string>
 	<string name="amenity_type_user_defined">Ορισμένο από το χρήστη</string>
 	<string name="fav_export_confirmation">Υπάρχει ήδη αρχείο από προηγούμενη εξαγωγή αγαπημένων. Θέλετε να αντικατασταθεί?</string>
 	<string name="profile_settings">Ειδικές Ρυθμίσεις Προφίλ</string>
@@ -690,7 +690,7 @@
 	<string name="amenity_type_historic">Ιστορικά</string>
 	<string name="amenity_type_landuse">Χρήσης γης</string>
 	<string name="amenity_type_leisure">Αναψυχή</string>
-	<string name="amenity_type_manmade">Ανθρώπινες κατασκευές</string>
+	<string name="amenity_type_man_made">Ανθρώπινες κατασκευές</string>
 	<string name="amenity_type_military">Στρατιωτικά</string>
 	<string name="amenity_type_natural">Φύση</string>
 	<string name="amenity_type_office">Γραφείο</string>

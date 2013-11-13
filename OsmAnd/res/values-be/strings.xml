@@ -819,7 +819,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="index_name_wiki">Worldwide Wikipedia POIs</string>
 	<string name="index_name_voice">Галасавыя пакункі (запісаныя)</string>
 	<string name="index_name_tts_voice">Галасавыя пакункі (TTS)</string>
-	<string name="amenity_type_wikiosm">Вікіпэдыя (пазасеціўная)</string>
+	<string name="amenity_type_osmwiki">Вікіпэдыя (пазасеціўная)</string>
 	<string name="amenity_type_user_defined">Вызначанае карыстальнікам</string>
 	<string name="fav_export_confirmation">Файл з экспартаванымі ўпадабанымі ўжо існуе. Ці хочаце замяніць яго ?</string>
 	<string name="profile_settings">Налады профіля</string>
@@ -1118,7 +1118,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="amenity_type_historic">Historic</string>
 	<string name="amenity_type_landuse">Landuse</string>
 	<string name="amenity_type_leisure">Leisure</string>
-	<string name="amenity_type_manmade">Man made</string>
+	<string name="amenity_type_man_made">Man made</string>
 	<string name="amenity_type_military">Military</string>
 	<string name="amenity_type_natural">Natural</string>
 	<string name="amenity_type_office">Офіс</string>
