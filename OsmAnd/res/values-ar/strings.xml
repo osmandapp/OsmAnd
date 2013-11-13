@@ -538,7 +538,7 @@
 	<string name="basemap_was_selected_to_download">خريطة العالم الأساسية مطلوبة لعمل التطبيق بشكل سليم، وقد حددت للتنزيل.</string>
 	<string name="select_index_file_to_download">لم يتم العثور على شيء. إذا لم تتمكن من إيجاد منطقتك، يمكنك صنعها بنفسك (انظر http://osmand.net ).</string>
 	<string name="auto_zoom_close">إلى الصورة عن قرب</string>
-	<string name="auto_zoom_none">بدون تكبير تلقائي</string>
+	<string name="auto_zoom_none">تعطيل التكبير التلقائي</string>
 	<string name="auto_zoom_far">قم بتوسيط الخريطة هنا</string>
 	<string name="local_indexes_cat_tile">خرائط متصلة بالإنترنت و مربعية</string>
 	<string name="map_online_plugin_is_not_installed">تمكين ملحق الخرائط على الإنترنت على تحديد مصادر مختلفة للخرائط</string>
