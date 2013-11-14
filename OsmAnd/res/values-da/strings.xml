@@ -1645,4 +1645,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="animate_routing_route_not_calculated">Beregn ruten først</string>
     <string name="animate_routing_route">Simuler med en beregnet rute </string>
     <string name="animate_routing_gpx">Simuler med GPX-spor</string>
+    <string name="osmodroid_refresh">Opdater kanaler</string>
     </resources>
