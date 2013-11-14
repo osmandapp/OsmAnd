@@ -42,5 +42,5 @@ String getObjectDescription(int layerId, int objectId);
 
 String getObjectColor(int layerId, int objectId);
 	
-
+void refreshChannels();
 }

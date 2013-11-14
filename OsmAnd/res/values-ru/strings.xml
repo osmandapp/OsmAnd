@@ -1259,6 +1259,7 @@
 	<string name="announce_gpx_waypoints">Озвучивание маршрутных точек GPX</string>
     <string name="osmodroid_mode_on">Остановить OsMoDroid</string>    
     <string name="osmodroid_mode_off">Запустить OsMoDroid</string>
+    <string name="osmodroid_refresh">Обновить каналы</string>
     <string name="osb_author_or_password_not_specified">Пожалуйста, укажите в настройках пароль и имя пользователя OSM</string>
     <string name="route_descr_map_location">Карта: </string>
     <string name="osb_author_dialog_password">Пароль OSM (опционально)</string>
