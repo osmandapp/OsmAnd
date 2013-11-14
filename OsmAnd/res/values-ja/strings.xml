@@ -1227,4 +1227,11 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
     <string name="rendering_attr_noAdminboundaries_description">地域の境界線表示（管理者レベル 5-9）を隠す</string>
     <string name="tip_altitude_offset">高度補正</string>
 	<string name="close_changeset">チェンジセットを閉じる</string>
+	<string name="local_openstreetmap_settings_descr">ローカルデータベースに記載されているPOIとバグの閲覧と管理</string>
+	<string name="live_monitoring_descr">指定されたWebサービスにトラッキングを送る</string>
+	<string name="live_monitoring">オンライン追跡</string>
+	<string name="live_monitoring_interval_descr">オンライン追跡間隔を指定</string>
+	<string name="live_monitoring_interval">オンライン追跡間隔</string>
+	<string name="live_monitoring_url_descr">パラメータの構文を使用してWebアドレスを指定します:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
+	<string name="live_monitoring_url">オンライン追跡ウェブアドレス</string>
 	</resources>
