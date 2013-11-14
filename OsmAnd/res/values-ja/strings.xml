@@ -279,7 +279,7 @@ MB)をダウンロードしますか?</string>
      
  <string name="index_settings_descr">オフライン用のデータを取得/更新</string>
  <string name="index_settings">オフラインデータ</string>
-     <string name="osmand_service">背景サービス</string>
+     <string name="osmand_service">スリープモード時も機能させる</string>
      <string name="osmand_service_descr">画面オフの間OsmAndを使うためのバックグラウンドサービスを実行</string>
      <string name="fast_route_mode">最速ルート</string>
      <string name="fast_route_mode_descr">有効化して最速ルートを計算するか
@@ -557,10 +557,10 @@ POIの更新は利用できません</string>
  
  <string name="save_track_to_gpx_descrp">トラックは日ごとにグループ化されたトラック用ディレクトリに
  保存されます</string>
- <string name="save_track_to_gpx">トラックをGPXにログ</string>
+ <string name="save_track_to_gpx">追跡ログをGPXに記録</string>
  <string name="update_tile">マップを更新</string>
  <string name="reload_tile">タイルをリロード</string>
- <string name="user_name_descr">あなたのOSM ユーザ名</string>
+ <string name="user_name_descr">あなたのOSM ユーザー名</string>
  <string name="user_name">OSM ユーザ名</string>
  <string name="mark_point">ターゲット</string>
  <string name="show_osm_bugs_descr">OpenStreetBugs をマップに表示</string>
@@ -1234,4 +1234,43 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="live_monitoring_interval">オンライン追跡間隔</string>
 	<string name="live_monitoring_url_descr">パラメータの構文を使用してWebアドレスを指定します:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
 	<string name="live_monitoring_url">オンライン追跡ウェブアドレス</string>
+	<string name="gpx_monitoring_disabled_warn">\'追跡ログをGPXに記録\'を有効にして下さい</string>
+	<string name="show_current_gpx_title">現在のトラックを表示</string>
+	<string name="free_version_message">このOsmAnd 無料バージョンは%1$sのダウンロード数が制限されており、オフラインでWikipediaの記事をサポートしていません。</string>
+	<string name="free_version_title">無料バージョン</string>
+	<string name="poi_context_menu_showdescription">POIの説明文を表示</string>
+	<string name="index_name_north_america">北米</string>
+	<string name="index_name_us">米国</string>
+	<string name="index_name_central_america">中米</string>
+	<string name="index_name_south_america">南米</string>
+	<string name="index_name_europe">ヨーロッパ</string>
+	<string name="index_name_france">ヨーロッパ - フランス</string>
+	<string name="index_name_germany">ヨーロッパ - ドイツ</string>
+	<string name="index_name_russia">ヨーロッパ/アジア - ロシア</string>
+	<string name="index_name_africa">アフリカ</string>
+	<string name="index_name_asia">アジア</string>
+	<string name="index_name_oceania">オセアニア</string>
+	<string name="index_name_other">ワールドワイドとトピックマップ</string>
+	<string name="index_name_wiki">ワールドワイドウィキペディアPOI</string>
+	<string name="index_name_voice">音声パック(記録音声、機能限定)</string>
+	<string name="index_name_tts_voice">音声パック(TTS合成音声、推奨）</string>
+	<string name="amenity_type_wikiosm">ウィキペディア(オフライン)</string>
+	<string name="amenity_type_user_defined">ユーザー定義</string>
+	<string name="fav_export_confirmation">以前にエクスポートしたお気に入りのファイルが存在します。置き換えますか？</string>
+	<string name="profile_settings">プロファイル固有の設定</string>
+	<string name="global_settings">グローバル設定</string>
+	<string name="global_app_settings">グローバル アプリケーション設定</string>
+	<string name="download_files_not_enough_space">ダウンロードするのに十分な空き領域がありません。(必要容量:%1$sMB／空き容量%2$s)</string>
+	<string name="download_files_question_space">現在の空き容量{2}MB! ダウンロード {0} file(s) {1}MB)?</string>
+	<string name="use_transparent_map_theme">透明なテーマ</string>
+	<string name="native_library_not_supported">ネイティブライブラリは、このデバイスでサポートされていません。</string>
+	<string name="init_native_library">ネイティブライブラリを初期化しています…</string>
+	<string name="choose_auto_follow_route">地図の自動中心表示設定</string>
+	<string name="choose_auto_follow_route_descr">地図の位置調整に関する、位置とタイミング設定</string>
+	<string name="auto_follow_route_never">常に使用しない</string>
+	<string name="auto_follow_route_navigation">ナビゲーションのみ</string>
+	<string name="auto_follow_route_navigation_descr">地図の自動中心表示はナビゲーション時のみ</string>
+	<string name="auto_follow_location_enabled">地図の自動中心表示を使用</string>
+	<string name="pref_vector_rendering">ベクターレンダラ固有のオプション</string>
+	<string name="pref_overlay">オーバーレイ/アンダーレイ</string>
 	</resources>
