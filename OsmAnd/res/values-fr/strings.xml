@@ -335,9 +335,9 @@
   <string name="amenity_type_geocache">Géocache</string>
   <string name="amenity_type_healthcare">Santé</string>
   <string name="amenity_type_historic">Historique</string>
-  <string name="amenity_type_landuse">Agriculture</string>
-  <string name="amenity_type_leisure">Plaisance</string>
-  <string name="amenity_type_manmade">Artisanat</string>
+  <string name="amenity_type_landuse">Terrain</string>
+  <string name="amenity_type_leisure">Loisir</string>
+  <string name="amenity_type_manmade">Artefact</string>
   <string name="amenity_type_military">Militaire</string>
   <string name="amenity_type_natural">Nature</string>
   <string name="amenity_type_office">Bureau</string>
