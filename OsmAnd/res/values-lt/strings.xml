@@ -1563,15 +1563,17 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="about_settings_descr">Versijos informacija, licencijos, projekto nariai</string>
     <string name="tips_and_tricks">Patarimai</string>
     <string name="tip_recent_changes_1_6_t">Pakeitimai 1.6 versijoje:
-    \n\t* Visiškai permatomo fono palaikymas
-    \n\t* Aukštos raiškos (Full HD) įrenginių palaikymas
-    \n\t* Regionus peržiūrėti ir parsisiųsti galima tiesiai iš žemėlapio
-    \n\t* SRTM failus galima parsisiųsti specifinei šaliai  
-    \n\t* Visiškai naujas pasaulio žemėlapis su pagrindiniais keliais, miškais ir geležinkeliais 
-    \n\t* Žemėlapio padidinamasis stiklas žemėlapiui (ilgas didinimo mygtuko paspaudimas) - ypač naudingas rastriniams žemėlapiams  
-    \n\t* Galimybė nustatyti/redaguoti internetinius žemėlapių lakštų šaltinius (galima nurodyti galiojmio laiką)
-    \n\t* Greitesnis adreso įvedimas
-    \n\t* Ištaisytos maršruto apskaičiavimo ir vaizdavimo klaidos
+	\n\t* Visiškai permatomo fono palaikymas
+	\n\t* Aukštos raiškos (Full HD) įrenginių palaikymas
+	\n\t* Regionus peržiūrėti ir parsisiųsti galima tiesiai iš žemėlapio
+	\n\t* SRTM failus galima parsisiųsti specifinei šaliai  
+	\n\t* Visiškai naujas pasaulio žemėlapis su pagrindiniais keliais, miškais ir geležinkeliais 
+	\n\t* Žemėlapio padidinamasis stiklas žemėlapiui (ilgas didinimo mygtuko paspaudimas) - ypač naudingas rastriniams žemėlapiams  
+	\n\t* Galimybė nustatyti/redaguoti internetinius žemėlapių lakštų šaltinius (galima nurodyti galiojmio laiką)
+	\n\t* Palaikomi greičio apribojimai pagal dienos laiką (Nyderlandai)
+
+	\n\t* Greitesnis adreso įvedimas
+	\n\t* Ištaisytos maršruto apskaičiavimo ir vaizdavimo klaidos
     </string>
     <string name="local_index_tile_data_zooms">Parsiųsti mąsteliai: %1$s</string>
     <string name="local_index_tile_data_expire">Nustos galioti (minutės): %1$s</string>
@@ -1606,4 +1608,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="gps_status_eclipsim">GPS statusas</string>
     <string name="default_and">ir</string>
     <string name="default_or">arba</string>
-	</resources>
+	<string name="animate_routing_route_not_calculated">Pirmiausia apskaičiuokite maršrutą</string>
+    <string name="animate_routing_route">Simuliuoti naudojant apskaičiuotą maršrutą </string>
+    <string name="animate_routing_gpx">Simuliuoti naudojant GPX maršrutą</string>
+    <string name="route_is_too_long">Maršrutas tikriausiai per ilgas, kad OsmAnd galėtų jį apskaičiuoti nenaudojant interneto. 
+        	Dažniausiai ilgiausias maršrutas, kurį galima apskaičiuoti be interneto pagalbos, būna tarp dviejų taškų nutolusių iki 200km. Pridėkite vieną ar daugiau tarpinių maršruto taškų kad būtų galima apskaičiuoti jūsų maršrutą.</string>
+	<string name="auto_zoom_none">Be automatinio didinimo</string>
+	<string name="auto_zoom_close">Maksimaliai priartinti</string>
+	<string name="auto_zoom_far">Vidutiniškai priartinti</string>
+	<string name="auto_zoom_farthest">Maksimaliai padidinti</string>
+	<string name="osmodroid_refresh">Atnaujinti kanalus</string>
+    </resources>
