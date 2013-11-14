@@ -42,7 +42,7 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 		@Override
 		public void channelsListUpdated() throws RemoteException {
 			if (activity != null && connected) {
-
+				log.debug("update channels");
 				for (OsMoDroidLayer myOsMoDroidLayer : osmoDroidLayerList) {
 					activity.getMapView().removeLayer(myOsMoDroidLayer);
 				}
@@ -261,6 +261,19 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 				} catch(Exception e) {
 					log.error(e.getMessage(), e);
 				}
+			}
+		}).reg();
+		qa.item(R.string.osmodroid_refresh).icons(R.drawable.ic_action_grefresh_dark, R.drawable.ic_action_grefresh_light).listen(new OnContextMenuClick() {
+			
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked,
+					DialogInterface dialog) {
+				try {
+					mIRemoteService.refreshChannels();
+				} catch (RemoteException e) {
+					log.error(e.getMessage(), e);
+				}
+				
 			}
 		}).reg();
 	}
