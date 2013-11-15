@@ -571,7 +571,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="offline_edition_descr">Usar sempre edição offline</string>
   <string name="tip_recent_changes_0_7_1_t">"Changes in 0.7.1 : \n\t- Offline POI editing \n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles) \n\t- Show currently recorded track on map \n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn \n\t- New voice prompt \'Route recalculated\' \n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color \n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue \n\t- Other changes "</string>
   <string name="update_poi_does_not_change_indexes">As alterações são apenas armazenadas na memória local. Para serem introduzidas nos mapas tem que ir a \"Editar Offline\" -&gt; \"Enviar\".</string>
-  <string name="local_openstreetmap_uploading">Enviar…</string>
+  <string name="local_openstreetmap_uploading">A enviar…</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs foram enviados</string>
   <string name="local_openstreetmap_uploadall">Enviar todos</string>
   <string name="local_openstreetmap_show">Mostrar no mapa</string>
@@ -606,8 +606,8 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="index_name_other">Mapas globais</string>
   <string name="index_name_wiki">Worldwide Wikipedia</string>
   <string name="index_name_voice">Pacotes de vozes (gravadas, funcionalidades limitadas)</string>
-  <string name="index_name_tts_voice">Pacotes de vozes (TTS)</string>
-  <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
+  <string name="index_name_tts_voice">Pacotes de vozes (TTS-Sintetizados,preferência)</string>
+  <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Definido pelo utilizador</string>
   <string name="fav_export_confirmation">Já existe um arquivo de favoritos exportados anteriormente. Quer substitui-lo?</string>
   <string name="profile_settings">Configurações específicas de Perfil</string>
@@ -761,7 +761,14 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="internet_not_available">Precisa de ligação à Internet para essa operação</string>
   <string name="install_more">Instalar mais…</string>
   <string name="tip_update_index">Atualização de mapas offline</string>
-  <string name="tip_update_index_t">\tHaving up-to-date map data is essential. OsmAnd provides a download manager which can check for available offline data updates. \n\tTo check for updates go to \'Settings\' -&gt; \'Offline data\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device. \n\tThe availability of updates is depicted by the following colors: \n\t\'Green\' - indicates data files identical on device and server \n\t\'Blue\' - indicates available updates on server</string>
+  <string name="tip_update_index_t">Up-to -date dados de mapa é essencial para a visão do mapa off-line, para POI / endereço de pesquisa , e para a navegação offline. OsmAnd fornece um gerenciador de dados para baixar os mapas off-line ( e alguns outros arquivos de dados) , e para verificar se há atualizações disponíveis. 
+		\n\n download de mapas ir a \ "Configurações \ ' → \' Data Management \ ' \' → Download de dados off-line \ ' . 
+		\n\nDepois a lista região global está recuperado da internet, clique em qualquer entrada para baixar ou atualizar um arquivo . Por favor, note que o seletor de tipo de arquivo na parte superior da tela para selecionar o tipo de download que você quer ( mapas regulares , sobreposições hillshade , etc.) 
+		\n\nVocê pode filtrar a lista região digitando algumas letras , ou você pode selecionar a opção "Configurações \ \ ' → \ ' Filtro baixado \ 'para ver as atualizações somente para os dados já no seu dispositivo. 
+		\n\n\t* Entradas no \ ' verde \' indicam arquivos de dados idênticos em dispositivo eo servidor 
+\n\t* Entradas no \ 'blue \' indicam atualizações disponíveis no servidor 
+\n\t* entradas em itálico indicam dados de- ativado no dispositivo
+	</string>
   <string name="level_to_switch_vector_raster_descr">Nível de zoom mínimo para usar mapas vectoriais</string>
   <string name="level_to_switch_vector_raster">Nível mínimo de zoom para vectorial</string>
   <string name="tip_location_sharing">Partilhar localização</string>
@@ -1111,7 +1118,12 @@ Quer seguir uma trilha GPX ?</string>
     <string name="no_buildings_found">Nenhum edifício encontrado.</string>
     <string name="zxing_barcode_scanner_not_found">Aplicação ZXing Barcode Scanner não está instalada. Procurar no Market?</string>
 	<string name="support_new_features_descr">Faça uma doação para ver novas funcionalidades implementadas nesta aplicação</string>
-	<string name="tip_rotation_switching_t_v2">"\tVocê pode definir se, e como, o mapa será rotacionado clicando repetidamente no ícone da bússola na tela do mapa.\n\tAs opções são:\n\t\'Não girar\' - Mapa ficará fixo sempre com o norte para cima\n\t\'Na direção do movimento\' - Mapa será continuamente alinhado com a sua direção\n\t\'Na direção da bússola\' - Mapa será continuamente alinhado com a leitura da bússola do dispositivo "</string>
+	<string name="tip_rotation_switching_t_v2">Você pode definir se, e como, o mapa será rotacionado clicando repetidamente no ícone da bússola na tela do mapa.
+		\n\t*As opções são:
+		\n\t\'Não girar\' - Mapa ficará fixo sempre com o norte para cima
+		\n\t\'Na direcção do movimento\' - Mapa será continuamente alinhado com a sua direcção
+		\n\t\'Na direcção da bússola\' - Mapa será continuamente alinhado com a leitura da bússola do dispositivo "
+	</string>
 	<string name="tip_day_night_mode_t_v2">"\tA aparência do mapa pode mudar em alguns mapas vetoriais entre os modos Dia (mais claro) e Noite (mais escuro).\n\tCores noturnas são mais seguras para dirigir à noite.\n\tVocê pode definir uma política para a mudança entre os modos Dia/Noite em \'Menu\' -&gt; \'Diversos\' -&gt; \'Modo Dia/Noite\'.\n\tAs opções são:\n\t\'Nascer/Pôr-do-Sol\' - modo automático, controlado pela posição do sol (padrão)\n\t\'Dia\' - sempre usar o modo diurno\n\t\'Noite\' - sempre usar o modo noturno\n\t\'Sensor de luz\' - aparência do mapa é controlada pelo sensor de luz do dispositivo (se houver) "
 	</string>	
 	<string name="incomplete_locale">incompleto</string>
@@ -1354,8 +1366,18 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Definir/Editar…</string>
 	<string name="map_widget_fps_info">FPS info debug</string>
-	<string name="tip_recent_changes_1_6_t">alterações em 1.6:
-	\n\t* Definir/editar origem online de mosaicos (specificar tempo limite)
+	<string name="tip_recent_changes_1_6_t">Alterações em 1.6
+	\n\t* Suporte de aparelhos Full HD
+	\n\t* Suporte transparente mapa de fundo
+	\n\t* Mostrar mapas baixados e facilitar o download de mapas que faltam diretamente da visualização do mapa
+	\n\t* Contour mapa linha arquivos agora vem para países / regiões
+	\n\t* Novo mapa base mundial com as principais estradas, ferrovias e principais características de área, como florestas
+	\n\t* Mapa característica lupa (clique longo no botão de zoom) - Útil tanto para a telha e mapas vetoriais
+	\n\t* Definir / editar fontes de azulejos personalizados on-line (e especificar tempo de expiração)
+	\n\t* Suporte de tempo limite de velocidade condicionais (Holanda)  
+
+	\n\t* Faster busca introduzir o endereço
+	\n\t* Correções de bugs com roteamento e tornando
     </string>
     <string name="route_distance_close">Perto</string>
     <string name="route_distance_far">Longe</string>
@@ -1363,7 +1385,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="route_distance_settings_descr">Configurar Distância de visão do Mapa  (TODO)</string>
     <string name="route_distance_settings">Distância de visão do mapa (TODO)</string>
     <string name="map_magnifier">Lupa do Mapa</string>
-    <string name="base_world_map">mapa base mundial</string>
+    <string name="base_world_map">Mapa base mundial</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		→ → Osmand + ( OSM automatizados direções de navegação ) ↵
 ↵
@@ -1480,4 +1502,5 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="default_or">ou</string>
 	<string name="route_is_too_long">A rota é, possivelmente, demasiado longa para ser calculado pelo router offline OsmAnd. ↵
       → Em média, o encaminhamento off-line é possível apenas entre os pontos de até 200 km de distância. Por favor, adicione um ou mais pontos intermédios ao calcular a rota.↵</string>
-	</resources>
+	<string name="osmodroid_refresh">Actualizar canais</string>
+    </resources>
