@@ -1610,4 +1610,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="animate_routing_route_not_calculated">請先計算行車路線</string>
     <string name="animate_routing_route">使用模擬計算行車路線 </string>
     <string name="animate_routing_gpx">使用 GPX 軌跡模擬</string>
+    <string name="osmodroid_refresh">更新頻道</string>
     </resources>
