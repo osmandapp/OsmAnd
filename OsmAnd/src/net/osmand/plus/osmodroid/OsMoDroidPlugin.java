@@ -1,11 +1,14 @@
 package net.osmand.plus.osmodroid;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -52,6 +55,7 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 					activity.getMapView().addLayer(myOsMoDroidLayer, 4.5f);
 
 				}
+				activity.refreshMap();
 			}
 
 		}
@@ -276,5 +280,21 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 				
 			}
 		}).reg();
+	}
+
+	public ArrayList<GPXFile> getGpxArrayList(int id) {
+		ArrayList<GPXFile> result = new ArrayList<GPXFile>();
+		
+		
+		try {
+			for (int i = 0; i < mIRemoteService.getNumberOfGpx(id); i++) {
+				result.add( GPXUtilities.loadGPXFile(app, new File(mIRemoteService.getGpxFile(id, i)), false));
+			}
+			return result;
+		} catch (RemoteException e) {
+			log.error(e.getMessage(), e);
+		}
+		return result;
+		
 	}
 }
