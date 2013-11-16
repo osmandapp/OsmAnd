@@ -1,10 +1,20 @@
 package net.osmand.plus.routing;
 
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
+import android.os.Bundle;
+
+import btools.routingapp.IBRouterService;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -59,13 +69,16 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 
-
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
+
+	// brouter service status
+	private IBRouterService brouterService;
+	private boolean hasBRouter; // if bindService gave true
 	
 	public enum RouteService {
-		OSMAND("OsmAnd (offline)"), YOURS("YOURS"),  ORS("OpenRouteService"), OSRM("OSRM (only car)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		OSMAND("OsmAnd (offline)"), YOURS("YOURS"),  ORS("OpenRouteService"), OSRM("OSRM (only car)"), BROUTER("BRouter (offline)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
@@ -75,7 +88,32 @@ public class RouteProvider {
 		}
 	}
 	
-	public RouteProvider(){
+	public RouteProvider(OsmandApplication context){
+
+		// try bind to brouter service
+		BRouterServiceConnection conn = new BRouterServiceConnection();
+		Intent i = new Intent();
+		i.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
+		hasBRouter = context.bindService(i, conn, Context.BIND_AUTO_CREATE);
+	}
+
+	// does the given service needs internet?
+	public boolean isOnlineService( RouteService service )
+	{
+		switch( service ) {
+			case OSMAND : return false;
+			case BROUTER : return false;
+			default: return true;
+		}
+	}
+
+	// is the given service valid for selection in the navigation-config menu?
+	public boolean isRoutingServiceSelectable( RouteService service )
+	{
+		switch( service ) {
+			case BROUTER : return hasBRouter;
+			default: return true;
+		}
 	}
 	
 	public static class GPXRouteParams {
@@ -187,6 +225,8 @@ public class RouteProvider {
 					res = findOSRMRoute(params);
 				} else if (params.type == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params);
+				} else if (params.type == RouteService.BROUTER) {
+					res = findBROUTERRoute(params);
 				} else {
 					res = findCloudMadeRoute(params);
 				}
@@ -334,6 +374,97 @@ public class RouteProvider {
 				params.ctx, params.leftSide, true);
 	}
 	
+	class BRouterServiceConnection implements ServiceConnection
+	{
+		public void onServiceConnected(ComponentName className, IBinder boundService) {
+			brouterService = IBRouterService.Stub.asInterface((IBinder) boundService);
+		}
+
+		public void onServiceDisconnected(ComponentName className) {
+			brouterService = null;
+		}
+	};
+
+	protected RouteCalculationResult findBROUTERRoute(RouteCalculationParams params) throws MalformedURLException, IOException,
+			ParserConfigurationException, FactoryConfigurationError, SAXException {
+
+		double[] lats = new double[]{ params.start.getLatitude(), params.end.getLatitude() };
+		double[] lons = new double[]{ params.start.getLongitude(), params.end.getLongitude() };
+
+		String mode;
+		if(ApplicationMode.PEDESTRIAN == params.mode){
+			mode="foot"; //$NON-NLS-1$
+		} else if(ApplicationMode.BICYCLE == params.mode){
+			mode="bicycle"; //$NON-NLS-1$
+		} else {
+			mode="motorcar"; //$NON-NLS-1$
+		}
+
+		Bundle bpars = new Bundle();
+		bpars.putDoubleArray("lats", lats );
+		bpars.putDoubleArray("lons", lons );
+		bpars.putString("fast", params.fast ? "1" : "0" );
+		bpars.putString("v", mode );
+		bpars.putString("trackFormat", "kml" );
+
+		List<Location> res = new ArrayList<Location>();
+
+		if ( brouterService == null )
+		{
+			return new RouteCalculationResult( "BRouter service is not available" );
+		}
+
+		try
+		{
+			String kmlMessage = brouterService.getTrackFromParams(bpars);
+			if ( kmlMessage == null ) kmlMessage = "no result from brouter";
+			if ( !kmlMessage.startsWith( "<" ) )
+			{
+				return new RouteCalculationResult( kmlMessage );
+			}
+
+			DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document doc = dom.parse(new InputSource(new StringReader(kmlMessage)));
+			NodeList list = doc.getElementsByTagName("coordinates"); //$NON-NLS-1$
+			for(int i=0; i<list.getLength(); i++){
+				Node item = list.item(i);
+				String str = item.getFirstChild().getNodeValue();
+				if(str == null){
+					continue;
+				}
+				int st = 0;
+				int next = 0;
+				while((next = str.indexOf('\n', st)) != -1){
+					String coordinate = str.substring(st, next + 1);
+					int s = coordinate.indexOf(',');
+					if (s != -1) {
+						try {
+							double lon = Double.parseDouble(coordinate.substring(0, s));
+							double lat = Double.parseDouble(coordinate.substring(s + 1));
+							Location l = new Location("router"); //$NON-NLS-1$
+							l.setLatitude(lat);
+							l.setLongitude(lon);
+							res.add(l);
+						} catch (NumberFormatException e) {
+						}
+					}
+					st = next + 1;
+				}
+			}
+			if(list.getLength() == 0){
+				if(doc.getChildNodes().getLength() == 1){
+					Node item = doc.getChildNodes().item(0);
+					return new RouteCalculationResult(item.getNodeValue());
+				}
+			}
+		}
+		catch( Exception e ){
+			return new RouteCalculationResult( "Exception calling BRouter: " + e ); //$NON-NLS-1$
+		}
+		return new RouteCalculationResult(res, null, params.start, params.end, null, null, null,
+				params.ctx, params.leftSide, true);
+	}
+
 	protected RouteCalculationResult findVectorMapsRoute(RouteCalculationParams params) throws IOException {
 		BinaryMapIndexReader[] files = params.ctx.getTodoAPI().getRoutingMapFiles();
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(!params.preciseRouting);

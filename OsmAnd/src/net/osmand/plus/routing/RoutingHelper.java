@@ -59,7 +59,7 @@ public class RoutingHelper {
 	private ApplicationMode mode;
 	private OsmandSettings settings;
 	
-	private RouteProvider provider = new RouteProvider();
+	private RouteProvider provider;
 	private VoiceRouter voiceRouter;
 
 	private boolean makeUturnWhenPossible = false;
@@ -80,6 +80,11 @@ public class RoutingHelper {
 		this.app = context;
 		settings = context.getSettings();
 		voiceRouter = new VoiceRouter(this, player);
+        provider = new RouteProvider(context);
+	}
+
+	public boolean isRoutingServiceSelectable( RouteService service ) {
+		return provider.isRoutingServiceSelectable( service );
 	}
 
 	public boolean isFollowingMode() {
@@ -731,7 +736,7 @@ public class RoutingHelper {
 					msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime()) + ")";
 				}
 				showMessage(msg);
-			} else if (params.type != RouteService.OSMAND && !settings.isInternetConnectionAvailable()) {
+			} else if ( provider.isOnlineService( params.type ) && !settings.isInternetConnectionAvailable()) {
 					showMessage(app.getString(R.string.error_calculating_route)
 						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route)); //$NON-NLS-1$
 			} else {
