@@ -1576,4 +1576,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="animate_routing_route_not_calculated">Najprej je treba preračunati pot</string>
     <string name="animate_routing_route">Preizkusi s podatki izračunane poti </string>
     <string name="animate_routing_gpx">Preizkusi z uporabo sledi GPX</string>
+    <string name="osmodroid_refresh">Osvežitev kanalov</string>
     </resources>
