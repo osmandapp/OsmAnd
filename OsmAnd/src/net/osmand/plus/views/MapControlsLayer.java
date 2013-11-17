@@ -13,8 +13,10 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.views.ContextMenuLayer;	// CGM added
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -49,7 +51,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 
 	private OsmandMapTileView view;
-	private final MapActivity activity;
+	public final MapActivity activity;
 	private Handler showUIHandler;
 	
 	private boolean showZoomLevel = false;
@@ -394,7 +396,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 
-	private static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {
+//	private static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {	//CGM change
+	private View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {
 		final View.OnLongClickListener listener = new View.OnLongClickListener() {
 
 			@Override
@@ -441,6 +444,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 								view.getAnimatedDraggingThread().startZooming(view.getZoom(),
 										view.getSettingsZoomScale(), false);
 								dialog.dismiss();
+								activity.getMapLayers().getContextMenuLayer().initLayer(view);	//to support map magnification
+								for (int j = 0; j <= activity.getMapView().getLayers().size(); j++) {
+									if (activity.getMapView().getLayers().get(j) instanceof DistanceCalculatorPlugin.DistanceCalculatorLayer) {
+										activity.getMapView().getLayers().get(j).initLayer(view);	//to support map magnification
+										break;
+									}
+								}
 							}
 						});
 				bld.show();
@@ -448,10 +458,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		};
 		return listener;
+		
 	}
 	
-
-
 
 	/////////////////  Transparency bar /////////////////////////
 	private void initTransparencyBar(final OsmandMapTileView view, FrameLayout parent) {

@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import android.app.AlertDialog;
@@ -51,9 +52,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private TextView textView;
 	private ImageView closeButton;
 	private OsmandMapTileView view;
-	private int BASE_TEXT_SIZE = 170;
-	private int SHADOW_OF_LEG = 5;
-	private int CLOSE_BTN = 8;
+	public int BASE_TEXT_SIZE = 170;
+	private int TEXT_SIZE = 170;
+	public int SHADOW_OF_LEG = 5;
+	public int CLOSE_BTN = 8;
 	
 	private final MapActivity activity;
 	private Drawable boxLeg;
@@ -79,7 +81,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		scaleCoefficient  = view.getDensity();
-		BASE_TEXT_SIZE = (int) (BASE_TEXT_SIZE * scaleCoefficient);
+//		BASE_TEXT_SIZE = (int) (BASE_TEXT_SIZE * scaleCoefficient);
 		SHADOW_OF_LEG = (int) (SHADOW_OF_LEG * scaleCoefficient);
 		CLOSE_BTN = (int) (CLOSE_BTN * scaleCoefficient);
 		
@@ -89,7 +91,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		textView = new TextView(view.getContext());
 		LayoutParams lp = new LayoutParams(BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT);
 		textView.setLayoutParams(lp);
-		textView.setTextSize(15);
+//		textView.setTextSize(15);
+		float factor = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY.get() + 0.25f;
+		if (factor < 1.0f) factor = 1.0f;
+		textView.setTextSize((int)(15 * factor));
+		TEXT_SIZE = (int)(BASE_TEXT_SIZE * factor * scaleCoefficient);
 		textView.setTextColor(Color.argb(255, 0, 0, 0));
 		textView.setMinLines(1);
 //		textView.setMaxLines(15);
@@ -152,7 +158,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (textView.getLineCount() > 0) {
 			textView.getBackground().getPadding(padding);
 		}
-		int w = BASE_TEXT_SIZE;
+		int w = TEXT_SIZE;
 		int h = (int) ((textView.getPaint().getTextSize() * 1.3f) * textView.getLineCount());
 		
 		textView.layout(0, -padding.bottom, w, h + padding.top);
