@@ -396,7 +396,7 @@ MB)をダウンロードしますか?</string>
      <string name="voice_provider">音声案内</string>
      <string name="voice_data_initializing">音声データを初期化中…</string>
      <string name="voice_data_not_supported">サポートしていない音声データのバージョン</string>
-     <string name="voice_data_corrupted">指定した音声データは破損しています</string>
+     <string name="voice_data_corrupted">指定した音声データが破損しているか、音声設定ファイルの記述が間違っています。</string>
      <string name="voice_data_unavailable">選択した音声データは利用できません</string>
      
      <string name="sd_unmounted">SDカードにアクセスできません。\nマップを参照したり何かを探したりすることはできません。</string>
@@ -1273,4 +1273,20 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="auto_follow_location_enabled">地図の自動中心表示を使用</string>
 	<string name="pref_vector_rendering">ベクターレンダラ固有のオプション</string>
 	<string name="pref_overlay">オーバーレイ/アンダーレイ</string>
+	<string name="pref_raster_map">マップソースの設定</string>
+	<string name="pref_vector_map">ベクターマップの設定</string>
+	<string name="delete_confirmation_msg">%1$sを削除しますか？</string>
+	<string name="city_type_suburb">区画</string>
+	<string name="city_type_hamlet">市町村</string>
+	<string name="city_type_village">村</string>
+	<string name="city_type_town">町</string>
+	<string name="city_type_city">市</string>
+	<string name="layer_poi_label">POIラベル</string>
+	<string name="file_can_not_be_renamed">ファイルの名前は変更できません。</string>
+	<string name="file_with_name_already_exists">その名前のファイルが既に存在します。</string>
+	<string name="gpx_navigation">GPXルート</string>
+	<string name="poi_query_by_name_matches_categories">いくつかのPOIカテゴリと、一致するクエリが見つかりました:</string>
+	<string name="data_to_search_poi_not_available">POI検索用ローカルデータが存在しません。</string>
+	<string name="poi_filter_by_name">名前で検索する</string>
+	<string name="old_poi_file_should_be_deleted">POIデータファイル「%1$s」の余剰部分は、削除することができます。</string>
 	</resources>
