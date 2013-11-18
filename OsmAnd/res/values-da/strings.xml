@@ -1616,8 +1616,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="about_settings_descr">Versioninformation, licenser, projektmedlemmer</string>
     <string name="tips_and_tricks">Tips</string>
     <string name="tip_map_styles">Kortformater</string>
-	<string name="tip_map_styles_t">Osmand understøtter visning af offline vektorkort i forskellige kortformatter tilpasset forskellige behov:
-\n\n Udover standardformattet kan andet end \'standard\' kortformat, vælges i \'Menu\' → \'Konfigurer skærm\' → \'Kortformat\'
+	<string name="tip_map_styles_t">Osmand understøtter visning af offline vektorkort i forskellige kortformater tilpasset forskellige behov:
+\n\n Udover standardformatet kan andet end \'standard\' kortformat, vælges i \'Menu\' → \'Konfigurer skærm\' → \'Kortformat\'
 \n * \'Turvisning \' kortformat, indeholder de mest detaljerede oplysninger for rejser og rejsebrug, herunder optimering for erhvervschauffører (veje der er lette at skelne og med højere kontrast), mulighed for Alpine vandring (SAC-skalaen), cykelruter, symbolsupport for vandreture  mv.
 \n * \'Veje med høj kontrast\' viser veje med meget forstærkede farver til lyse omgivelser
 \n * \'Vinter og ski\' giver en visning af et (snedækket) vinterlandskab og viser globale skiløjper og lifter (hent \'World ski\' kortet)
@@ -1644,6 +1644,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="gps_status_eclipsim">GPS status</string>
     <string name="animate_routing_route_not_calculated">Beregn ruten først</string>
     <string name="animate_routing_route">Simuler med en beregnet rute </string>
-    <string name="animate_routing_gpx">Simuler med GPX-spor</string>
+    <string name="animate_routing_gpx">Simuler med et GPX-spor</string>
     <string name="osmodroid_refresh">Opdater kanaler</string>
     </resources>
