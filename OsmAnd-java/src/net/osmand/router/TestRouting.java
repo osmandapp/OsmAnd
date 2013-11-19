@@ -30,6 +30,7 @@ public class TestRouting {
 	public static boolean TEST_BOTH_DIRECTION = false;
 	public static NativeLibrary lib = null;
 	public static boolean oldRouting = false;
+	private static String vehicle = "car";
 	
 	
 	public static Iterator getIterator(Iterable it){
@@ -44,6 +45,7 @@ public class TestRouting {
 		public double endLat = 0;
 		public double endLon = 0;
 		public RoutingConfiguration.Builder configBuilder;
+		public String vehicle = "car";
 		
 		public static Parameters init(String[] args) throws IOException, XmlPullParserException {
 			Parameters p = new Parameters();
@@ -57,6 +59,8 @@ public class TestRouting {
 					RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 				} else if (a.startsWith("-obfDir=")) {
 					obfDirectory = a.substring("-obfDir=".length());
+				} else if (a.startsWith("-vehicle=")) {
+					p.vehicle = a.substring("-vehicle=".length());
 				} else if (a.startsWith("-start=")) {
 					String start = a.substring("-start=".length());
 					String[] pt = start.split(";");
@@ -115,6 +119,7 @@ public class TestRouting {
 //			calculateRoute(params.obfDir.getAbsolutePath(), params.startLat, params.startLon,
 //					params.endLat, params.endLon);
 			BinaryMapIndexReader[] rs = collectFiles(params.obfDir.getAbsolutePath());
+			vehicle = params.vehicle;
 			calculateRoute(params.startLat, params.startLon,
 					params.endLat, params.endLon, rs);
 			calculateRoute(params.startLat, params.startLon,
@@ -139,7 +144,7 @@ public class TestRouting {
 
 	public static void info() {
 		println("Run router tests is console utility to test route calculation for osmand. It is also possible to calculate one route from -start to -end.");
-		println("\nUsage for run tests : runTestsSuite [-routingXmlPath=PATH] [-verbose] [-obfDir=PATH] [-start=lat;lon] [-end=lat;lon]  [-testDir=PATH] {individualTestPath}");
+		println("\nUsage for run tests : runTestsSuite [-routingXmlPath=PATH] [-verbose] [-obfDir=PATH] [-vehicle=VEHICLE_STRING] [-start=lat;lon] [-end=lat;lon]  [-testDir=PATH] {individualTestPath}");
     }
 	
 
@@ -308,7 +313,7 @@ public class TestRouting {
 			throws IOException, InterruptedException {
 		long ts = System.currentTimeMillis();
 		Builder config = RoutingConfiguration.getDefault();
-		RoutingConfiguration rconfig = config.build("car", MEMORY_TEST_LIMIT);
+		RoutingConfiguration rconfig = config.build(vehicle, MEMORY_TEST_LIMIT);
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(oldRouting);
 		RoutingContext ctx = new RoutingContext(rconfig, lib, rs);
 		RouteSegment startSegment = router.findRouteSegment(startLat, startLon, ctx);
@@ -319,6 +324,8 @@ public class TestRouting {
 		if(endSegment == null){
 			throw new IllegalArgumentException("End segment is not found ");
 		}
+		// Clear ctx
+		ctx = new RoutingContext(rconfig, lib, rs);
 		List<RouteSegmentResult> route = router.searchRoute(ctx,
 				new LatLon(startLat, startLon), new LatLon(endLat, endLon), null,  false);
 		System.out.println("Route is " + route.size() + " segments " + (System.currentTimeMillis() - ts) + " ms ");
