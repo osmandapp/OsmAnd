@@ -418,7 +418,7 @@ public class BinaryMapRouteReaderAdapter {
 		TIntArrayList pointsY = new TIntArrayList();
 		TIntArrayList types = new TIntArrayList();
 		List<TIntArrayList> globalpointTypes = new ArrayList<TIntArrayList>();
-		boolean dropped = false;
+		//boolean dropped = false;
 		while (true) {
 			int ts = codedIS.readTag();
 			int tags = WireFormat.getTagFieldNumber(ts);
@@ -437,7 +437,7 @@ public class BinaryMapRouteReaderAdapter {
 					}
 				}
 				
-				if (dropped) System.err.println("of way locally identified as " + o.id + " because has same coordinates than previous point."); //$NON-NLS-1$ //$NON-NLS-2$ 
+				//if (dropped) System.err.println("of way locally identified as " + o.id + " because has same coordinates than previous point."); //$NON-NLS-1$ //$NON-NLS-2$ 
 					
 				return o;
 
@@ -470,8 +470,8 @@ public class BinaryMapRouteReaderAdapter {
 					int deltaY = codedIS.readSInt32();
 					if (deltaX == 0 && deltaY == 0)
 					{
-						System.err.println("Dropping point " + pointsX.size()); //$NON-NLS-1$
-						dropped = true;
+						//System.err.println("Dropping point " + pointsX.size()); //$NON-NLS-1$
+						//dropped = true;
 						continue;
 					}
 					int x = deltaX + px;
