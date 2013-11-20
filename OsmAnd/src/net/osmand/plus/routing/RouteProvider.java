@@ -65,7 +65,7 @@ public class RouteProvider {
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
 	
 	public enum RouteService {
-		OSMAND("OsmAnd (offline)"), YOURS("YOURS"),  ORS("OpenRouteService"), OSRM("OSRM (only car)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		OSMAND("OsmAnd (offline)"), YOURS("YOURS"),  ORS("OpenRouteService (outdated map data)"), OSRM("OSRM (only car)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
