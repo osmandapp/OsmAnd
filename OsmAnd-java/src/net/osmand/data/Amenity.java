@@ -65,7 +65,7 @@ public class Amenity extends MapObject {
 		if(this.additionalInfo == null){
 			this.additionalInfo = new LinkedHashMap<String, String>();
 		}
-		setAdditionalInfo(tag, value);
+		this.additionalInfo.put(tag, value);
 	}
 	
 
