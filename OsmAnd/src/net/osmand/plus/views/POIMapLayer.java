@@ -8,6 +8,7 @@ import java.util.List;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
+import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -321,7 +322,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 					}
 				}
 			};
-			if(a.getDescription() != null){
+			if(OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a).length() > 0){
 				adapter.item(R.string.poi_context_menu_showdescription)
 					.icons(R.drawable.ic_action_note_dark,R.drawable.ic_action_note_light)
 					.listen(listener).reg();
@@ -339,7 +340,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private void showDescriptionDialog(Amenity a) {
 		Builder bs = new AlertDialog.Builder(view.getContext());
 		bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(a, view.getApplication(), view.getSettings().USE_ENGLISH_NAMES.get()));
-		bs.setMessage(a.getDescription());
+		if(a.getType() == AmenityType.OSMWIKI) {
+			bs.setMessage(a.getDescription());
+		} else {
+			bs.setMessage(OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a));
+		}
 		bs.show();
 	}
 	
