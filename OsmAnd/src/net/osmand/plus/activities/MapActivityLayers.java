@@ -590,7 +590,7 @@ public class MapActivityLayers {
 					String filterId;
 					if (which == 0) {
 						filterId = PoiFiltersHelper.getOsmDefinedFilterId(null);
-					} else if (which <= userDefined.size()) {
+					} else if (which <= userDefined.size() + 1) {
 						filterId = userDefined.get(which - 2).getFilterId();
 					} else {
 						filterId = PoiFiltersHelper.getOsmDefinedFilterId(categories[which - userDefined.size() - 2]);
