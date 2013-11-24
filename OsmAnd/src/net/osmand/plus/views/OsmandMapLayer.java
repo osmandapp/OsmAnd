@@ -40,6 +40,22 @@ public abstract class OsmandMapLayer {
 	}
 	
 	/**
+	 * Provide a method for layers to consume scrolling event, stopping map from being dragged
+	 * Any layer should return true to consume event.
+	 */
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY, RotatedTileBox tileBox) {
+		return false;
+	}
+
+	/**
+	 * Provide a method for layers to consume fling event, stopping map from being moved
+	 * Any layer should return true to consume event.
+	 */
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY, RotatedTileBox tileBox) {
+		return false;
+	}
+
+	/**
 	 * This method returns whether canvas should be rotated as 
 	 * map rotated before {@link #onDraw(android.graphics.Canvas, net.osmand.data.RotatedTileBox, net.osmand.plus.views.OsmandMapLayer.DrawSettings)}.
 	 * If the layer draws simply layer over screen (not over map)

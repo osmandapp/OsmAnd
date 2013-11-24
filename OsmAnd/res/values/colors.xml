@@ -8,7 +8,10 @@
 
 	<!-- Distance to object suitable for all themes -->
 	<color name="color_distance">#FD9822</color>
-
+    <color name="color_distance_drag">#FF00FF</color>
+    <color name="color_distance_remainder">#808080</color>
+    <color name="color_distance_inactive_subtrack">#80FFFF</color>
+	
 	<!-- Old dialogs colors -->
 	<color name="color_white">#FFFFFF</color>
 	<color name="color_black">#000000</color>
