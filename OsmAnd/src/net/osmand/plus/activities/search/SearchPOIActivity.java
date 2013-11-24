@@ -555,7 +555,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		ActionItem poiDescription = new ActionItem();
 		poiDescription.setIcon(getResources().getDrawable(R.drawable.ic_action_note_light));
 		poiDescription.setTitle(getString(R.string.poi_context_menu_showdescription));
-		final StringBuilder d = getDescriptionContent(amenity);
+		final String d = getDescriptionContent(amenity);
 		poiDescription.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -600,21 +600,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		
 	}
 	
-	private StringBuilder getDescriptionContent(final Amenity amenity) {
-		StringBuilder d = new StringBuilder();
-		if(amenity.getOpeningHours() != null) {
-			d.append(getString(R.string.opening_hours) + " : ").append(amenity.getOpeningHours()).append("\n");
-		}
-		if(amenity.getPhone() != null) {
-			d.append(getString(R.string.phone) + " : ").append(amenity.getPhone()).append("\n");
-		}
-		if(amenity.getSite() != null) {
-			d.append(getString(R.string.website) + " : ").append(amenity.getSite()).append("\n");
-		}
-		if(amenity.getDescription() != null) {
-			d.append(amenity.getDescription());
-		}
-		return d;
+	private String getDescriptionContent(final Amenity amenity) {
+		return OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity);
 	}
 	
 	
@@ -889,10 +876,10 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		String direction = navigationInfo.getDirectionString(amenity.getLocation(), heading);
 		if (direction != null)
 			attributes.add(direction);
-		if (amenity.getPhone() != null) 
-			attributes.add(getString(R.string.phone) + " " + amenity.getPhone());
-		if (amenity.getOpeningHours() != null)
-			attributes.add(getString(R.string.opening_hours) + " " + amenity.getOpeningHours());
+		String[] as = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity).split("\n");
+		for(String s: as) {
+			attributes.add(s.replace(':', ' '));
+		}
 		attributes.add(getString(R.string.navigate_point_latitude) + " " + Double.toString(amenity.getLocation().getLatitude()));
 		attributes.add(getString(R.string.navigate_point_longitude) + " " + Double.toString(amenity.getLocation().getLongitude()));
 		b.setItems(attributes.toArray(new String[attributes.size()]),

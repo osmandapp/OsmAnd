@@ -8,7 +8,6 @@ import java.util.List;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -111,16 +110,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	private StringBuilder buildPoiInformation(StringBuilder res, Amenity n) {
 		String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getApplication(), view.getSettings().USE_ENGLISH_NAMES.get());
-		res.append(" " + format);
-		if (n.getOpeningHours() != null) {
-			res.append("\n").append(view.getContext().getString(R.string.opening_hours)).append(" : ").append(n.getOpeningHours()); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-		if (n.getPhone() != null) {
-			res.append("\n").append(view.getContext().getString(R.string.phone)).append(" : ").append(n.getPhone()); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-		if (n.getSite() != null && n.getType() != AmenityType.OSMWIKI) {
-			res.append("\n").append(view.getContext().getString(R.string.website)).append(" : ").append(n.getSite()); //$NON-NLS-1$ //$NON-NLS-2$
-		}
+		res.append(" " + format + "\n" + OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), n));
 		return res;
 	}
 	

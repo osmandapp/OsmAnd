@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import java.lang.reflect.Field;
 import java.text.MessageFormat;
+import java.util.Map.Entry;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -126,6 +127,8 @@ public class OsmAndFormatter {
 			return ctx.getString(R.string.city_type_village);
 		case SUBURB:
 			return ctx.getString(R.string.city_type_suburb);
+		default:
+			break;
 		}
 		return "";
 	}
@@ -161,5 +164,27 @@ public class OsmAndFormatter {
 			return type;
 		}
 		return type + " " + n; //$NON-NLS-1$
+	}
+
+	public static String getAmenityDescriptionContent(ClientContext ctx, Amenity amenity) {
+		StringBuilder d = new StringBuilder();
+		for(Entry<String, String>  e : amenity.getAdditionalInfo().entrySet()) {
+			String key = e.getKey();
+			if(Amenity.DESCRIPTION.equals(key)) {
+			} else if(Amenity.OPENING_HOURS.equals(key)) {
+				d.append(ctx.getString(R.string.opening_hours) + " : ");
+			} else if(Amenity.PHONE.equals(key)) {
+				d.append(ctx.getString(R.string.phone) + " : ");
+			} else if(Amenity.WEBSITE.equals(key)) {
+				if(amenity.getType() == AmenityType.OSMWIKI) {
+					continue;
+				}
+				d.append(ctx.getString(R.string.website) + " : ");
+			} else {
+				d.append(e.getKey() + " : ");
+			}
+			d.append(e.getValue()).append('\n');
+		}
+		return d.toString().trim();
 	}
 }

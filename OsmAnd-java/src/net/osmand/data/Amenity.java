@@ -7,6 +7,11 @@ import java.util.Map;
 
 public class Amenity extends MapObject {
 
+	public static final String WEBSITE = "website";
+	public static final String PHONE = "phone";
+	public static final String DESCRIPTION = "description";
+	public static final String OPENING_HOURS = "opening_hours";
+	
 	private static final long serialVersionUID = 132083949926339552L;
 	private String subType;
 	private AmenityType type;
@@ -54,7 +59,7 @@ public class Amenity extends MapObject {
 	
 	public void setAdditionalInfo(Map<String, String> additionalInfo) {
 		this.additionalInfo = additionalInfo;
-		openingHours = additionalInfo.get("opening_hours");
+		openingHours = additionalInfo.get(OPENING_HOURS);
 	}
 	
 
@@ -63,7 +68,7 @@ public class Amenity extends MapObject {
 			this.additionalInfo = new LinkedHashMap<String, String>();
 		}
 		this.additionalInfo.put(tag, value);
-		if("opening_hours".equals(tag)) {
+		if(OPENING_HOURS.equals(tag)) {
 			this.openingHours = value;
 		}
 	}
@@ -75,31 +80,31 @@ public class Amenity extends MapObject {
 	}
 	
 	public String getSite() {
-		return getAdditionalInfo("website");
+		return getAdditionalInfo(WEBSITE);
 	}
 
 	public void setSite(String site) {
-		setAdditionalInfo("website", site);
+		setAdditionalInfo(WEBSITE, site);
 	}
 
 	public String getPhone() {
-		return getAdditionalInfo("phone");
+		return getAdditionalInfo(PHONE);
 	}
 
 	public void setPhone(String phone) {
-		setAdditionalInfo("phone", phone);
+		setAdditionalInfo(PHONE, phone);
 	}
 	
 	public String getDescription() {
-		return getAdditionalInfo("description");
+		return getAdditionalInfo(DESCRIPTION);
 	}
 	
 	public void setDescription(String description) {
-		setAdditionalInfo("description", description);
+		setAdditionalInfo(DESCRIPTION, description);
 	}
 	
 	public void setOpeningHours(String openingHours) {
-		setAdditionalInfo("opening_hours", openingHours);
+		setAdditionalInfo(OPENING_HOURS, openingHours);
 	}
 	
 	
