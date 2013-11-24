@@ -1403,8 +1403,8 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 	\n\t* Soporte de dispositivos Full HD
 	\n\t* Soporte de fondo transparente
 	\n\t* Descarga de mapas directamente mientras se visualiza
-	\n\t* Mapas de contorno agrupados por país/región
-	\n\t* Mapa mundial mejorado con vías principales, líneas de ferrocarril o bosques
+	\n\t* Curvas de nivel agrupados por país/región
+	\n\t* Mapa mundial mejorado con vías principales, líneas de ferrocarril y bosques
 	\n\t* Lupa (pulsación larga en el botón de zoom)
 	\n\t* Permite definir y editar la fuente de teselas en línea (indicando fecha de caducidad)
 	\n\t* Soporte de diferentes límites de velocidad en diferentes periodos (Paises Bajos)
@@ -1490,8 +1490,8 @@ La lista de países incluídos (¡prácticamente todo el mundo!):
 Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papua Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabue.
 	</string>
 	<string name="map_magnifier">Lupa</string>
-    <string name="route_is_too_long">La ruta puede ser demasiado larga para ser calculada localmente por OsmAnd.
-	Normalmente es posible calcular localmente rutas hasta 200 km. Puede solucionarlo indicando puntos intermedios en la ruta.</string>
+    <string name="route_is_too_long">La ruta puede ser demasiado larga para que OsmAnd la calcule localmente.
+	Normalmente se pueden calcular localmente rutas entre puntos separados hasta 200 km. Por favor, añade puntos intermedios para calcular la ruta.</string>
 	<string name="auto_zoom_none">Sin zoom automático</string>
 	<string name="remember_choice">Recordar mi elección</string>
     <string name="gps_status_eclipsim">Estado del GPS</string>
@@ -1500,4 +1500,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="auto_zoom_close">Cercano</string>
 	<string name="auto_zoom_far">Medio</string>
 	<string name="auto_zoom_farthest">Alejado</string>
-	</resources>
+	<string name="animate_routing_route_not_calculated">Por favor, calcula primero la ruta</string>
+    <string name="animate_routing_route">Simula usando la ruta calculada </string>
+    <string name="animate_routing_gpx">Simula usando traza GPX</string>
+    </resources>
