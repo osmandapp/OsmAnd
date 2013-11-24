@@ -169,12 +169,16 @@ public class MapRenderingTypes {
 	}
 	
 	public MapRulType getAmenityRuleType(String tag, String val) {
+		return getRuleType(tag, val, true);
+	}
+	
+	protected MapRulType getRuleType(String tag, String val, boolean poi) {
 		Map<String, MapRulType> types = getEncodingRuleTypes();
 		MapRulType rType = types.get(constructRuleKey(tag, val));
-		if (rType == null || !rType.isPOI()) {
+		if (rType == null || (!rType.isPOI() && poi) || (!rType.isMap() && !poi)) {
 			rType = types.get(constructRuleKey(tag, null));
 		}
-		if(rType == null || !rType.isPOI()) {
+		if(rType == null || (!rType.isPOI() && poi) || (!rType.isMap() && !poi)) {
 			return null;
 		} else if(rType.isAdditional() && rType.tagValuePattern.value == null) {
 			MapRulType parent = rType;
@@ -186,6 +190,8 @@ public class MapRenderingTypes {
 			rType.onlyPoint = parent.onlyPoint;
 			rType.poiSpecified = parent.poiSpecified;
 			rType.poiCategory = parent.poiCategory;
+			rType.poiPrefix = parent.poiPrefix;
+			rType.namePrefix = parent.namePrefix;
 			registerRuleType(rType);
 		}
 		return rType;
@@ -604,6 +610,8 @@ public class MapRenderingTypes {
 		public static MapRulType createText(String tag) {
 			MapRulType rt = new MapRulType();
 			rt.additionalText = true;
+			rt.minzoom = 5;
+			rt.maxzoom = 31;
 			rt.tagValuePattern = new TagValuePattern(tag, null); 
 			return rt;
 		}
@@ -611,6 +619,8 @@ public class MapRenderingTypes {
 		public static MapRulType createAdditional(String tag, String value) {
 			MapRulType rt = new MapRulType();
 			rt.additional = true;
+			rt.minzoom = 5;
+			rt.maxzoom = 31;
 			rt.tagValuePattern = new TagValuePattern(tag, value);
 			return rt;
 		}
