@@ -72,7 +72,9 @@ public class BinaryMapPoiReaderAdapter {
 			}
 			if(subTypes.size() > tl) {
 				PoiSubType st = subTypes.get(tl);
-				if(!st.text && st.possibleValues !=  null && st.possibleValues.size() > sl) {
+				if (st.text) {
+					return st;
+				} else if (st.possibleValues != null && st.possibleValues.size() > sl) {
 					returnValue.append(st.possibleValues.get(sl));
 					return st;
 				}
