@@ -383,7 +383,7 @@ public class MapRenderingTypes {
 		
 
 		if (poiParentCategory != null) {
-			rtype.poiCategory = AmenityType.findRegisteredType(poiParentCategory, null);
+			rtype.poiCategory = AmenityType.getAndRegisterType(poiParentCategory);
 			rtype.poiSpecified = true;
 		}
 		if (poiParentPrefix != null) {

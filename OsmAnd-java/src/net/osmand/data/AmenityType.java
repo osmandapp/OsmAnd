@@ -60,12 +60,14 @@ public class AmenityType {
 		this.ordinal = ordinal;	
 	}
 	
-	public static AmenityType findRegisteredType(String s) {
-		return findRegisteredType(s, OTHER);
-	}
-	
 	public static AmenityType findOrCreateTypeNoReg(String s) {
-		AmenityType type = findRegisteredType(s, null);
+		AmenityType type = null;
+		for (AmenityType t : amenityTypes.values()) {
+			if (t.name.equalsIgnoreCase(s)) {
+				type = t;
+				break;
+			}
+		}
 		if(type == null) {
 			type = new AmenityType(s, s, -1);
 		}
@@ -75,15 +77,6 @@ public class AmenityType {
 	public static boolean isRegisteredType(AmenityType type) {
 		//return amenityTypes.containsKey(type.name);
 		return type.ordinal >= 0;
-	}
-	
-	public static AmenityType findRegisteredType(String s, AmenityType def) {
-		for (AmenityType t : amenityTypes.values()) {
-			if (t.name.equalsIgnoreCase(s)) {
-				return t;
-			}
-		}
-		return def;
 	}
 	
 	public static AmenityType getAndRegisterType(String name) {

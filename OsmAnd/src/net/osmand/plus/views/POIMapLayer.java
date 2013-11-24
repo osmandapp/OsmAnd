@@ -111,7 +111,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	private StringBuilder buildPoiInformation(StringBuilder res, Amenity n) {
 		String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getApplication(), view.getSettings().USE_ENGLISH_NAMES.get());
-		res.append(" " + format + "\n" + OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), n));
+		res.append(" " + format + "\n" + OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), n, true));
 		return res;
 	}
 	
@@ -322,7 +322,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 					}
 				}
 			};
-			if(OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a).length() > 0){
+			if(OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a, false).length() > 0){
 				adapter.item(R.string.poi_context_menu_showdescription)
 					.icons(R.drawable.ic_action_note_dark,R.drawable.ic_action_note_light)
 					.listen(listener).reg();
@@ -343,7 +343,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		if(a.getType() == AmenityType.OSMWIKI) {
 			bs.setMessage(a.getDescription());
 		} else {
-			bs.setMessage(OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a));
+			bs.setMessage(OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a, false));
 		}
 		bs.show();
 	}

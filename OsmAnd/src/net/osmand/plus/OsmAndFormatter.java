@@ -166,11 +166,14 @@ public class OsmAndFormatter {
 		return type + " " + n; //$NON-NLS-1$
 	}
 
-	public static String getAmenityDescriptionContent(ClientContext ctx, Amenity amenity) {
+	public static String getAmenityDescriptionContent(ClientContext ctx, Amenity amenity, boolean shortDescription) {
 		StringBuilder d = new StringBuilder();
 		for(Entry<String, String>  e : amenity.getAdditionalInfo().entrySet()) {
 			String key = e.getKey();
 			if(Amenity.DESCRIPTION.equals(key)) {
+				if(amenity.getType() == AmenityType.OSMWIKI && shortDescription) {
+					continue;
+				}
 			} else if(Amenity.OPENING_HOURS.equals(key)) {
 				d.append(ctx.getString(R.string.opening_hours) + " : ");
 			} else if(Amenity.PHONE.equals(key)) {

@@ -555,12 +555,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		ActionItem poiDescription = new ActionItem();
 		poiDescription.setIcon(getResources().getDrawable(R.drawable.ic_action_note_light));
 		poiDescription.setTitle(getString(R.string.poi_context_menu_showdescription));
-		final String d = getDescriptionContent(amenity);
+		final String d = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false);
 		poiDescription.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// Build text
+				// Build text(amenity)
 				
 				// Find and format links
 				SpannableString spannable = new SpannableString(d);
@@ -598,10 +598,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		qa.show();
 		
 		
-	}
-	
-	private String getDescriptionContent(final Amenity amenity) {
-		return OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity);
 	}
 	
 	
@@ -876,7 +872,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		String direction = navigationInfo.getDirectionString(amenity.getLocation(), heading);
 		if (direction != null)
 			attributes.add(direction);
-		String[] as = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity).split("\n");
+		String[] as = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false).split("\n");
 		for(String s: as) {
 			attributes.add(s.replace(':', ' '));
 		}

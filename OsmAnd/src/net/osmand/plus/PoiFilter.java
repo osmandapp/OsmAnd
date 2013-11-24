@@ -201,7 +201,7 @@ public class PoiFilter {
 	
 	public boolean acceptTypeSubtype(AmenityType t, String subtype){
 		if(!AmenityType.isRegisteredType(t)) {
-			t = AmenityType.OTHER;
+			t = AmenityType.USER_DEFINED;
 		}
 		if(!acceptedTypes.containsKey(t)){
 			return false;
