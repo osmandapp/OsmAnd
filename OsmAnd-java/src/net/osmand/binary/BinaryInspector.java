@@ -31,6 +31,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.data.Amenity;
@@ -54,11 +55,11 @@ public class BinaryInspector {
 		BinaryInspector in = new BinaryInspector();
 		in.inspector(args);
 		// test cases show info
-		/*in.inspector(new String[]{
-				//"-vpoi",
-				"-vmap", "-vmapobjects", 
+		in.inspector(new String[]{
+				"-vpoi",
+				//"-vmap", "-vmapobjects", 
 				//"-vstreets", "-bbox=14.4,50.1,14.5,50.01", 
-				"/home/victor/projects/osmand/osm-gen/Map.obf"});*/
+				"/home/victor/projects/osmand/osm-gen/Map.obf"});
 	}
 
 	private void printToFile(String s) throws IOException {
@@ -777,6 +778,7 @@ public class BinaryInspector {
 					public boolean accept(AmenityType type, String subcategory) {
 						return true;
 					}
+					
 				},
 				new ResultMatcher<Amenity>() {
 					@Override
@@ -800,6 +802,11 @@ public class BinaryInspector {
 			println("\t\t\t" + p.categories.get(i));
 			for(int j = 0; j < p.subcategories.get(i).size(); j++)
 				println("\t\t\t\t" + p.subcategories.get(i).get(j));
+		}
+		println("\t\tSubtypes:");
+		for(int i =0; i< p.subTypes.size(); i++) {
+			PoiSubType st = p.subTypes.get(i);
+			println("\t\t\t" + st.name + " " + (st.text ? "text":(" encoded " + st.possibleValues.size())));
 		}
 		req.poiTypeFilter = null;//TODO: for test only
 		index.searchPoi(p, req);

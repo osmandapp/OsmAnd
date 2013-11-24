@@ -642,6 +642,9 @@ public class MapRenderingTypes {
 			if(catId <= 31) {
 				this.targetPoiId  = (valueId << 6) | (catId << 1) ; 
 			} else {
+				if(catId > (1 << 15)) {
+					throw new IllegalArgumentException("Refer source code");
+				}
 				this.targetPoiId  = (valueId << 16) | (catId << 1) | 1;
 			}
 		}

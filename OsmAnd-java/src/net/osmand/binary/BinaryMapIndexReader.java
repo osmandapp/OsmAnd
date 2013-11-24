@@ -1833,9 +1833,9 @@ public class BinaryMapIndexReader {
 		SearchRequest<Amenity> req = buildSearchPoiRequest(sleft, sright, stop, sbottom, -1, new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(AmenityType type, String subcategory) {
-//					return type == AmenityType.TRANSPORTATION && "fuel".equals(subcategory);
 				return true;
 			}
+
 		}, null);
 		List<Amenity> results = reader.searchPoi(req);
 		for (Amenity a : results) {
