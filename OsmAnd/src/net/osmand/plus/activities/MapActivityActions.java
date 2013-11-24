@@ -42,6 +42,7 @@ import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -352,7 +353,6 @@ public class MapActivityActions implements DialogProvider {
 			ViewGroup parent, final View.OnClickListener onClickListener) {
 		View view = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
-		boolean lc = settings.isLightContentMenu();
 		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
 		if(showDefault) {
 			buttons[ApplicationMode.DEFAULT.ordinal()] = (ToggleButton) view.findViewById(R.id.DefaultButton);
@@ -424,7 +424,7 @@ public class MapActivityActions implements DialogProvider {
 		final TargetPointsHelper targets = getTargets();
 
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
-		boolean lc = mapActivity.getMyApplication().getSettings().isLightContentMenu();
+		boolean osmandRouter = mapActivity.getMyApplication().getSettings().ROUTER_SERVICE.get() == RouteService.OSMAND;
 		final CheckBox nonoptimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
 		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
 		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
@@ -438,7 +438,7 @@ public class MapActivityActions implements DialogProvider {
 		final List<LatLon> toList = new ArrayList<LatLon>();
 		final Spinner toSpinner = setupToSpinner(mapView, name,view, toList, style);
 		
-		if(targets.hasLongDistancesInBetween(current != null ? current : mapView, 150000)) {
+		if(osmandRouter && targets.hasLongDistancesInBetween(current != null ? current : mapView, 150000)) {
 			TextView textView = (TextView) view.findViewById(R.id.ValidateTextView);
 			textView.setText(R.string.route_is_too_long);
 			textView.setVisibility(View.VISIBLE);
