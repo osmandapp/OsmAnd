@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
@@ -20,6 +21,8 @@ import net.osmand.plus.osmedit.OsmPoint.Action;
 
 import org.xmlpull.v1.XmlSerializer;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -47,6 +50,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 	protected static final int MENU_GROUP = 0;
 	private static final int UPLOAD_ID = 1;
 	private static final int BACKUP_ID = 2;
+	private static final int DELETE_ID = 3;
 
 	private LocalOpenstreetmapAdapter listAdapter;
 
@@ -94,6 +98,8 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, BACKUP_ID, R.string.local_osm_changes_backup, R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		createMenuItem(menu, DELETE_ID, R.string.local_osm_changes_delete_all, R.drawable.ic_action_gdiscard_light, R.drawable.ic_action_gdiscard_dark,
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -105,6 +111,29 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 			return true;
 		} else if (item.getItemId() == BACKUP_ID) {
 			new BackupOpenstreetmapPointAsyncTask().execute(dataPoints.toArray(new OsmPoint[0]));
+			return true;
+		} else if (item.getItemId() == DELETE_ID) {
+			Builder b = new AlertDialog.Builder(this);
+			b.setMessage(getString(R.string.local_osm_changes_delete_all_confirm, dataPoints.size()));
+			b.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Iterator<OsmPoint> it = dataPoints.iterator();
+					while(it.hasNext()) {
+						OsmPoint info = it.next();
+						if (info.getGroup() == OsmPoint.Group.POI) {
+							dbpoi.deletePOI((OpenstreetmapPoint) info);
+						} else if (info.getGroup() == OsmPoint.Group.BUG) {
+							dbbug.deleteAllBugModifications((OsmNotesPoint) info);
+						}
+						it.remove();
+						listAdapter.delete(info);
+					}
+					listAdapter.notifyDataSetChanged();
+				}
+			});
+			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.show();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

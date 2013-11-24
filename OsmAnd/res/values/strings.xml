@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="local_osm_changes_delete_all_confirm">You are going to delete %1$d osm changes. Are you sure?</string>
+    <string name="local_osm_changes_delete_all">Delete All</string>
     <string name="animate_routing_route_not_calculated">Please, calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route </string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
