@@ -174,8 +174,19 @@ public class MapRenderingTypes {
 		if (rType == null || !rType.isPOI()) {
 			rType = types.get(constructRuleKey(tag, null));
 		}
-		if(!rType.isPOI()) {
+		if(rType == null || !rType.isPOI()) {
 			return null;
+		} else if(rType.isAdditional() && rType.tagValuePattern.value == null) {
+			MapRulType parent = rType;
+			rType = MapRulType.createAdditional(tag, val);
+			rType.additional = true;
+			rType.applyToTagValue = parent.applyToTagValue;
+			rType.onlyMap = parent.onlyMap;
+			rType.onlyPoi = parent.onlyPoi;
+			rType.onlyPoint = parent.onlyPoint;
+			rType.poiSpecified = parent.poiSpecified;
+			rType.poiCategory = parent.poiCategory;
+			registerRuleType(rType);
 		}
 		return rType;
 	}
@@ -334,12 +345,12 @@ public class MapRenderingTypes {
 			value = null;
 		}
 		MapRulType rtype = MapRulType.createMainEntity(tag, value);
-		boolean onlyMap  = "true".equals(parser.getAttributeValue("", "only_map"));
 		if("true".equals(additional)) {
-			rtype = MapRulType.createMainEntity(tag, value);
+			rtype = MapRulType.createAdditional(tag, value);
 		} else if("text".equals(additional)) {
 			rtype = MapRulType.createText(tag);
 		} 
+		rtype.onlyMap  = "true".equals(parser.getAttributeValue("", "only_map"));
 		String targetTag = parser.getAttributeValue("", "target_tag");
 		String targetValue = parser.getAttributeValue("", "target_value");
 		if (targetTag != null || targetValue != null) {
@@ -360,7 +371,7 @@ public class MapRenderingTypes {
 			rtype.applyToTagValue = new HashSet<TagValuePattern>();
 			rtype.applyToTagValue.add(new TagValuePattern(applyTo, applyValue));
 		}
-		if(!onlyMap) {
+		if(!rtype.onlyMap) {
 			registerRuleType(rtype);
 		}
 		
@@ -617,8 +628,12 @@ public class MapRenderingTypes {
 			return targetPoiId;
 		}
 		
-		public void setTargetPoiId(int targetPoiId) {
-			this.targetPoiId = targetPoiId;
+		public void setTargetPoiId(int catId, int valueId) {
+			if(catId <= 31) {
+				this.targetPoiId  = (valueId << 6) | (catId << 1) ; 
+			} else {
+				this.targetPoiId  = (valueId << 16) | (catId << 1) | 1;
+			}
 		}
 		
 		public int getInternalId() {

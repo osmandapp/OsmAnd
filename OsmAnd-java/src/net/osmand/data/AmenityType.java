@@ -114,5 +114,10 @@ public class AmenityType {
 		return a.getCategoryName();
 	}
 	
+	@Override
+	public String toString() {
+		return valueToString(this);
+	}
+	
 	
 }
