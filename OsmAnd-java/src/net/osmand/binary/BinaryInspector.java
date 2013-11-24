@@ -55,9 +55,28 @@ public class BinaryInspector {
 		in.inspector(args);
 		// test cases show info
 
+		run(in);
+		run(in);
 //		in.inspector(new String[]{"-vmap", "-vmapobjects", /*"-vstreets", "-bbox=14.4,50.1,14.5,50.01", */"/home/victor/projects/osmand/osm-gen/Osmand_regions.obf"});
 //		test case extract parts
 		// test case 
+	}
+	
+
+	private static void run(BinaryInspector in) throws IOException {
+		long ts = System.currentTimeMillis();
+		int tileX = 1051;
+		int tileY = 673;
+		int zoom = 11;
+		float lt = (float) MapUtils.getLatitudeFromTile(zoom, tileY);
+		float lb = (float) MapUtils.getLatitudeFromTile(zoom, tileY + 1);
+		float ll = (float) MapUtils.getLongitudeFromTile(zoom, tileX);
+		float lr = (float) MapUtils.getLongitudeFromTile(zoom, tileX + 1);
+		String bbox = "-bbox="+ll+","+lt+","+lr+","+lb;
+		System.out.println("Tile z="+zoom+" x="+tileX +" y=" + tileY + " " + bbox);
+		in.inspector(new String[]{"-vmap", "-vmapobjects", /*"-vstreets", */ "-zoom="+zoom,
+				bbox, "/home/victor/projects/osmand/osm-gen/World_basemap_2.obf"});
+		System.out.println("Time " + (System.currentTimeMillis() - ts)+" ms");
 	}
 
 	private void printToFile(String s) throws IOException {
@@ -72,7 +91,7 @@ public class BinaryInspector {
 		if(vInfo != null && vInfo.osm && vInfo.osmOut == null) {
 			// ignore
 		} else {
-			System.out.println(s);
+//			System.out.println(s);
 		}
 
 	}
@@ -81,7 +100,7 @@ public class BinaryInspector {
 		if(vInfo != null && vInfo.osm && vInfo.osmOut == null) {
 			// ignore
 		} else {
-			System.out.print(s);
+//			System.out.print(s);
 		}
 	}
 	

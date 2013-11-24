@@ -305,7 +305,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public net.osmand.Location getFirstTimeRunDefaultLocation() {
 		LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
-		List<String> providers = new ArrayList<String>(service.getProviders(true));
+		List<String> ps = service.getProviders(true);
+		if(ps == null) {
+			return null;
+		}
+		List<String> providers = new ArrayList<String>(ps);
 		// note, passive provider is from API_LEVEL 8 but it is a constant, we can check for it.
 		// constant should not be changed in future
 		int passiveFirst = providers.indexOf("passive"); // LocationManager.PASSIVE_PROVIDER

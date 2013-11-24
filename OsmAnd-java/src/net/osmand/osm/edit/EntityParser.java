@@ -67,21 +67,12 @@ public class EntityParser {
 		parseMapObject(am, entity);
 		am.setType(type);
 		am.setSubType(subtype);
-//		TODO ; // parse additional info am.setAdditionalInfo(tag, value)
-		am.setAdditionalInfo("opening_hours", entity.getTag("opening_hours"));
-		am.setAdditionalInfo("description", entity.getTag("description"));
-		am.setAdditionalInfo("website", getPhone(entity));
-		am.setAdditionalInfo("phone", getWebSiteURL(entity));
+		am.setAdditionalInfo(types.getAmenityAdditionalInfo(entity, type, subtype));
+		am.setAdditionalInfo("website", getWebSiteURL(entity));
 		return am;
 	}
 
-	private static String getPhone(Entity entity) {
-		String phone = entity.getTag(OSMTagKey.PHONE);
-		if(phone == null) {
-			return entity.getTag(OSMTagKey.CONTACT_PHONE);
-		}
-		return phone;
-	}
+	
 
 	private static String getWebSiteURL(Entity entity) {
 		String siteUrl = entity.getTag(OSMTagKey.WIKIPEDIA);
