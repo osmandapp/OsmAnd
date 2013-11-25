@@ -340,10 +340,10 @@ public class MapRenderingTypes {
 	}
 
 	protected MapRulType parseTypeFromXML(XmlPullParser parser, String poiParentCategory, String poiParentPrefix) {
-		return parseBaseRuleType(parser, poiParentCategory, poiParentPrefix);
+		return parseBaseRuleType(parser, poiParentCategory, poiParentPrefix, true);
 	}
 
-	private MapRulType parseBaseRuleType(XmlPullParser parser, String poiParentCategory, String poiParentPrefix) {
+	protected MapRulType parseBaseRuleType(XmlPullParser parser, String poiParentCategory, String poiParentPrefix, boolean filterOnlyMap) {
 		String tag = parser.getAttributeValue("", "tag");
 		String value = parser.getAttributeValue("", "value");
 		String additional = parser.getAttributeValue("", "additional");
@@ -357,20 +357,21 @@ public class MapRenderingTypes {
 			rtype = MapRulType.createText(tag);
 		} 
 		rtype.onlyMap  = "true".equals(parser.getAttributeValue("", "only_map"));
+		if(filterOnlyMap && rtype.onlyMap) {
+			return null;
+		}
 		String targetTag = parser.getAttributeValue("", "target_tag");
 		String targetValue = parser.getAttributeValue("", "target_value");
 		if (targetTag != null || targetValue != null) {
 			if (targetTag == null) {
 				targetTag = rtype.getTag();
-			} else {
-				targetTag = tag;
 			}
 			if (targetValue == null) {
 				targetValue = rtype.getValue();
 			}
 			rtype.targetTagValue = types.get(constructRuleKey(targetTag, targetValue));
 			if (rtype.targetTagValue == null) {
-				throw new RuntimeException("Illegal target tag/value " + targetTag + " " + targetValue);
+				throw new RuntimeException("Illegal target tag/value " + targetTag + " " + targetValue + " for " + tag + " / " + value);
 			}
 		}
 		String applyTo = parser.getAttributeValue("", "apply_to");
