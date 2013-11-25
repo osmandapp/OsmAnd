@@ -41,6 +41,10 @@ String getObjectName(int layerId, int objectId);
 String getObjectDescription(int layerId, int objectId);
 
 String getObjectColor(int layerId, int objectId);
+
+int getNumberOfGpx(int layerId);
+
+String getGpxFile (int layerId, int pos);
 	
 void refreshChannels();
 }
