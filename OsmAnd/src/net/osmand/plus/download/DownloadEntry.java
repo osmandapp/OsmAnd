@@ -23,13 +23,15 @@ public class DownloadEntry {
 	
 	public List<String> srtmFilesToDownload;
 	public DownloadEntry attachedEntry;
+	public IndexItem item;
 
-	public DownloadEntry() {
-		// default
+	public DownloadEntry(IndexItem item) {
+		this.item = item;
 	}
 
-	public DownloadEntry(String assetName, String fileName, long dateModified) {
+	public DownloadEntry(IndexItem pr, String assetName, String fileName, long dateModified) {
 		this.dateModified = dateModified;
+		this.item = pr;
 		targetFile = new File(fileName);
 		this.assetName = assetName;
 		isAsset = true;

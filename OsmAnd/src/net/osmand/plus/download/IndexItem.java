@@ -74,6 +74,10 @@ public class IndexItem implements Comparable<IndexItem> {
 		return s + getBasename().replace('_', ' ');
 	}
 
+	public boolean isVoiceItem() {
+		return fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP) || fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP);
+	}
+
 	public String getBasename() {
 		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
@@ -196,7 +200,7 @@ public class IndexItem implements Comparable<IndexItem> {
 		if (parent == null || !parent.exists()) {
 			ctx.showToastMessage(R.string.sd_dir_not_accessible);
 		} else {
-			entry = new DownloadEntry();
+			entry = new DownloadEntry(this);
 			entry.type = type;
 			entry.baseName = getBasename();
 			String url = "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&";

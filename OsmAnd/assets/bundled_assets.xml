@@ -5,6 +5,7 @@
 	<!-- 	alwaysCopyOnFirstInstall - Copies file on first install, always -->
 	<!-- 	alwaysOverwriteOrCopy - Copies or overwrites file unconditionally -->
 	<!-- 	copyOnlyIfDoesNotExist - Copies file only this file is not present on target system -->
+	<asset source="voice/be/ttsconfig.p" destination="voice/be-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/cs/ttsconfig.p" destination="voice/cs-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/da/ttsconfig.p" destination="voice/da-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/de/ttsconfig.p" destination="voice/de-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
@@ -30,14 +31,11 @@
 	<asset source="voice/sw/ttsconfig.p" destination="voice/sw-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/zh/ttsconfig.p" destination="voice/zh-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 
-	<!-- TODO user need to redownload voice en-ov -->
 	<asset source="voice/en/config.p" destination="voice/en/_config.p" mode="overwriteOnlyIfExists" />
-	<!-- <asset source="voice/en/config.p" destination="voice/en-m/_config.p" mode="overwriteOnlyIfExists" /> -->
 	<asset source="voice/ru/config.p" destination="voice/ru/_config.p" mode="overwriteOnlyIfExists" />
-	<!-- <asset source="voice/ru/config.p" destination="voice/ru-m/_config.p" mode="overwriteOnlyIfExists" /> -->
 	<asset source="voice/es/config.p" destination="voice/es/_config.p" mode="overwriteOnlyIfExists" />
 	
-	<!-- TODO name conflict could be soon -->
+	<!-- TODO delete deprecated -->
 	<asset source="voice/fr-ov/config.p" destination="voice/fr/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/he-ov/config.p" destination="voice/he/_config.p" mode="overwriteOnlyIfExists" />
 	<!-- Could be deleted later after release -->
