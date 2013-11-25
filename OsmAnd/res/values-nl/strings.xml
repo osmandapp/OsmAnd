@@ -1596,4 +1596,6 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="animate_routing_route">Simuleer met de berekende route </string>
     <string name="animate_routing_gpx">Simuleer met een GPX spoor</string>
     <string name="osmodroid_refresh">Ververs channels</string>
+    <string name="local_osm_changes_delete_all_confirm">Je gaat %1$d osm wijzigingen verwijderen. Doorgaan?</string>
+    <string name="local_osm_changes_delete_all">Verwijder alle</string>
     </resources>
