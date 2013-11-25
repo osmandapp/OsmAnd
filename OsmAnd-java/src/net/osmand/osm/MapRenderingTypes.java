@@ -362,6 +362,8 @@ public class MapRenderingTypes {
 		if (targetTag != null || targetValue != null) {
 			if (targetTag == null) {
 				targetTag = rtype.getTag();
+			} else {
+				targetTag = tag;
 			}
 			if (targetValue == null) {
 				targetValue = rtype.getValue();
