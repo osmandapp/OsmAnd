@@ -1611,4 +1611,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="animate_routing_route">使用模擬計算行車路線 </string>
     <string name="animate_routing_gpx">使用 GPX 軌跡模擬</string>
     <string name="osmodroid_refresh">更新頻道</string>
+    <string name="local_osm_changes_delete_all_confirm">您要刪除 %1$d osm 的更改。您是否確定？</string>
+    <string name="local_osm_changes_delete_all">全部刪除</string>
     </resources>
