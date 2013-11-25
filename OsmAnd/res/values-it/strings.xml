@@ -224,7 +224,7 @@
   <string name="gpx_option_destination_point">Usa il punto di destinazione attuale</string>
   <string name="gpx_option_from_start_point">Percorri tutta la traccia</string>
   <string name="switch_to_vector_map_to_see">Mappa vettoriali offline presenti per quest\'area.\n\t\n\tPer usarla attivare \'Menu\'-&gt;\'Definisci vista\'-&gt;\'Fonte Mappa…\'-&gt;\'Mappe vettoriali offline\'.</string>
-  <string name="choose_audio_stream">Canale d'uscita della voce guida</string>
+  <string name="choose_audio_stream">Canale d\'uscita della voce guida</string>
   <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale (dipendente dal sistema)</string>
   <string name="voice_stream_voice_call">Audio chiamate vocali</string>
   <string name="voice_stream_notification">Notifiche stream</string>
@@ -251,7 +251,7 @@
 →→\n\nPer scaricare le mappe andare su \'Impostazioni\' -&gt; \'Gestione Dati\' -&gt; \'Download dati offline\'.↵
 →→\n\nDopo il download dell\'elenco regioni ti basterà cliccare su qualsiasi oggetto per scaricare o caricare un file. Prego notare il selettore di tipo di file nella zona superiore dello schermo, per selezionare il tipo di download richiesto (mappe regolari, ombreggiature rilievi, ecc..).
 ↵
-→→\n\nPuoi filtrare la lista delle regioni immettendo alcune lettere, oppure si può scegliere l'opzione \Impostazioni\' → \Filtro scaricati\' per visualizzare gli aggiornamenti solo per le regioni già nel dispositivo.↵
+→→\n\nPuoi filtrare la lista delle regioni immettendo alcune lettere, oppure si può scegliere l\'opzione \Impostazioni\' → \Filtro scaricati\' per visualizzare gli aggiornamenti solo per le regioni già nel dispositivo.↵
 →→\n\n\t* Voci in \'Verde\' indica file identici su server e dispositivo↵
 →→\n\t* Voci in \'Blu\' indica aggiornamenti disponibili sul server↵
 →→\n\t* Voci in corsivo indica dati disattivati sul dispositivo↵
@@ -1560,7 +1560,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 →\n\t* Nuova mappa mondiale di base con strade principali, ferrovie, e maggiori aree come le foreste↵
 →\n\t* Ingrandimento mappa (click lungo sul pulsante zoom) - Utilizzabile sia con mappe vettoriali che a mattonelle↵
 →\n\t* Impostazione/modifica delle sorgenti online personalizzate delle mattonelle (e impostazione della loro scadenza)↵
-→\n\t* Supporto per i limiti di velocità condizionati all'orario (Olanda)
+→\n\t* Supporto per i limiti di velocità condizionati all\'orario (Olanda)
 ↵
 →\n\t* Ricerca indirizzi più veloce↵
 →\n\t* Correzione di errori con navigazione e disegno mappa↵
