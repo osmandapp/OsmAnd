@@ -161,4 +161,18 @@
 	<string name="bg_service_screen_lock">Закључај екран</string>
 	<string name="bg_service_screen_unlock">Откључај екран</string>
 	<string name="bg_service_screen_lock_toast">Екран је закључан</string>
+	<string name="download_type_to_filter">укуцајте за филтрирање</string>
+	<string name="use_high_res_maps">Екран високе резолуције</string>
+	<string name="map_index">мапа</string>
+	<string name="voice">глас</string>
+	<string name="no_vector_map_loaded">Векторске мапе нису учитане</string>
+	<string name="map_route_by_gpx">Навигација помоћу GPX</string>
+	<string name="gpx_files_not_found">GPX датотеке се не налазе у директоријуму</string>
+	<string name="error_reading_gpx">Грешка при читању GPX података</string>
+	<string name="point_on_map">Локација:\n Lat %1$.5f\n Lon %2$.5f</string>
+	<string name="osb_bug_name">Грешка</string>
+	<string name="poi_context_menu_modify">Измена POI</string>
+	<string name="poi_context_menu_delete">Брисање POI</string>
+	<string name="rotate_map_none_opt">Без ротације (север је горе)</string>
+	<string name="rotate_map_to_bearing">Орјентација мапе</string>
 	</resources>
