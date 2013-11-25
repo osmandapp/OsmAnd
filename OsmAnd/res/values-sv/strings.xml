@@ -1321,6 +1321,6 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="animate_routing_route_not_calculated">Beräkna rutten först</string>
     <string name="animate_routing_route">Simulera med en beräknad rutt </string>
     <string name="animate_routing_gpx">Simulera med GPX-spår</string>
-    <string name="local_osm_changes_delete_all_confirm">Då håller på och ta bort %1$d OSM-ändringar. Är du säker?</string>
+    <string name="local_osm_changes_delete_all_confirm">Du håller på och ta bort %1$d OSM-ändringar. Är du säker?</string>
     <string name="local_osm_changes_delete_all">Ta bort alla</string>
     </resources>
