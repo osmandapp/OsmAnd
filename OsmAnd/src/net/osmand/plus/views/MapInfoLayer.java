@@ -13,7 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.activities.actions.NavigateAction;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.mapwidgets.AppearanceWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
@@ -423,7 +423,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		Builder b = new AlertDialog.Builder(map);
 		View confirmDialog = view.inflate(view.getContext(), R.layout.configuration_dialog, null);
 		final ListView lv = (ListView) confirmDialog.findViewById(android.R.id.list);
-		MapActivityActions.prepareAppModeView(map, selected, true, 
+		NavigateAction.prepareAppModeView(map, selected, true, 
 				(ViewGroup) confirmDialog.findViewById(R.id.TopBar), 
 				new View.OnClickListener() {
 			@Override
