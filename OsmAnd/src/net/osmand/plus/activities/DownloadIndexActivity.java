@@ -325,7 +325,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			boolean running = task instanceof DownloadIndexesThread.DownloadIndexesAsyncTask; 
 			((Button) findViewById(R.id.DownloadButton)).setEnabled(!running);
 			String text;
-			int downloads = downloadListIndexThread. getDownloads();
+			int downloads = downloadListIndexThread.getDownloads();
 			if (!running) {
 				text = getString(R.string.download_files) + "  (" + downloads + ")"; //$NON-NLS-1$
 			} else {
@@ -333,6 +333,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			}
 			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 			if (Version.isFreeVersion(getMyApplication())) {
+				int countedDownloads = downloadListIndexThread.getDownloads();
 				int left = MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get() - downloads;
 				boolean excessLimit = left < 0;
 				if (left < 0)
@@ -482,7 +483,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				if (es.getBasename() != null && es.getBasename().contains("_wiki")) {
 					wiki = true;
 					break;
-				} else if (DownloadActivityType.isCountedInDownloads(es.getType())) {
+				} else if (DownloadActivityType.isCountedInDownloads(es)) {
 					total++;
 				}
 			}

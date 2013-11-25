@@ -18,7 +18,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
-import net.osmand.map.RegionCountry;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -230,7 +229,7 @@ public class DownloadIndexesThread {
 							boolean result = downloadFile(entry, filesToReindex, forceWifi);
 							success = result || success;
 							if (result) {
-								if (DownloadActivityType.isCountedInDownloads(entry.type)) {
+								if (DownloadActivityType.isCountedInDownloads(entry.item)) {
 									downloads.set(downloads.get() + 1);
 								}
 								if (entry.existingBackupFile != null) {
@@ -265,7 +264,7 @@ public class DownloadIndexesThread {
 
 		private boolean exceedsFreelimit(DownloadEntry entry) {
 			return Version.isFreeVersion(app) &&
-					DownloadActivityType.isCountedInDownloads(entry.type) && downloads.get() >= DownloadIndexActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+					DownloadActivityType.isCountedInDownloads(entry.item) && downloads.get() >= DownloadIndexActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 		}
 
 		private String reindexFiles(List<File> filesToReindex) {
@@ -578,6 +577,19 @@ public class DownloadIndexesThread {
 		}
 		if(!currentDownloads.isEmpty()) {
 			i++;
+		}
+		return i;
+	}
+	
+	public int getCountedDownloads() {
+		int i = 0;
+		Collection<List<DownloadEntry>> vs = getEntriesToDownload().values();
+		for (List<DownloadEntry> v : vs) {
+			for(DownloadEntry e : v) {
+				if(DownloadActivityType.isCountedInDownloads(e.item)) {
+					i++;
+				}
+			}
 		}
 		return i;
 	}
