@@ -762,10 +762,10 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="install_more">Instalar mais…</string>
   <string name="tip_update_index">Atualização de mapas offline</string>
   <string name="tip_update_index_t">Up-to -date dados de mapa é essencial para a visão do mapa off-line, para POI / endereço de pesquisa , e para a navegação offline. OsmAnd fornece um gerenciador de dados para baixar os mapas off-line ( e alguns outros arquivos de dados) , e para verificar se há atualizações disponíveis. 
-		\n\n download de mapas ir a \ "Configurações \ ' → \' Data Management \ ' \' → Download de dados off-line \ ' . 
+		\n\n download de mapas ir a \'Configurações \' → \' Data Management \' \' → Download de dados off-line \' . 
 		\n\nDepois a lista região global está recuperado da internet, clique em qualquer entrada para baixar ou atualizar um arquivo . Por favor, note que o seletor de tipo de arquivo na parte superior da tela para selecionar o tipo de download que você quer ( mapas regulares , sobreposições hillshade , etc.) 
-		\n\nVocê pode filtrar a lista região digitando algumas letras , ou você pode selecionar a opção "Configurações \ \ ' → \ ' Filtro baixado \ 'para ver as atualizações somente para os dados já no seu dispositivo. 
-		\n\n\t* Entradas no \ ' verde \' indicam arquivos de dados idênticos em dispositivo eo servidor 
+		\n\nVocê pode filtrar a lista região digitando algumas letras , ou você pode selecionar a opção "Configurações \' → \' Filtro baixado \'para ver as atualizações somente para os dados já no seu dispositivo. 
+		\n\n\t* Entradas no \' verde \' indicam arquivos de dados idênticos em dispositivo eo servidor 
 \n\t* Entradas no \ 'blue \' indicam atualizações disponíveis no servidor 
 \n\t* entradas em itálico indicam dados de- ativado no dispositivo
 	</string>

@@ -1378,7 +1378,7 @@
     \n\t* Nouvelle carte du monde avec les routes principales, forêts et lignes de chemin de fer
     \n\t* Zoom de carte (appui long sur le bouton zoom) - très utile pour cartes vectorielles  
     \n\t* Définir/éditer les sources de carte en ligne (et date d\'expiration)
-    \n\t* Gestion des limitations de vitesse conditionnelles (par ex. fonction de l'heure)
+    \n\t* Gestion des limitations de vitesse conditionnelles (par ex. fonction de l\'heure)
     \n\t* Saisie plus rapide d\'une adresse
     \n\t* Résolution de bogues concernant le guidage et le rendu de carte
     </string>
@@ -1391,23 +1391,23 @@
     </string>
     <string name="default_and">et</string>
     <string name="default_or">ou</string>
-	<string name="route_is_too_long">L'itinéraire est probablement trop long pour être calculé localement par OsmAnd.
-	Le calcul en local est possible, en moyenne, pour des itinéraires jusqu'à 200 km. Il est conseillé d'ajouter des étapes intermédiaires pour un meilleur calcul.</string>
+	<string name="route_is_too_long">L\'itinéraire est probablement trop long pour être calculé localement par OsmAnd.
+	Le calcul en local est possible, en moyenne, pour des itinéraires jusqu\'à 200 km. Il est conseillé d\'ajouter des étapes intermédiaires pour un meilleur calcul.</string>
 	<string name="auto_zoom_none">Pas de zoom automatique</string>
-	<string name="auto_zoom_close">Arrêt de l'auto-zoom</string>
+	<string name="auto_zoom_close">Arrêt de l\'auto-zoom</string>
 	<string name="auto_zoom_far">Zoom éloigné</string>
 	<string name="auto_zoom_farthest">Zoom très éloigné</string>
-	<string name="tip_map_styles_t">OsmAnd supporte l'affichage des cartes vectorielles hors ligne dans différents styles de carte en fonction de vos besoins:
+	<string name="tip_map_styles_t">OsmAnd supporte l\'affichage des cartes vectorielles hors ligne dans différents styles de carte en fonction de vos besoins:
 		\n\nEn plus du style de carte \'default\', vous pouvez dans \'Menu\' → \'Configuration\' → \'Styles de rendu\' sélectionner par exemple
 		\n\t* le style \'Touring view\', qui contient les informations les plus détaillées pour le voyage et le tourisme, incluant des optimisations pour les conducteurs professionnels (contraste élevé, les diverses routes sont distinguables).
 		\n\t* \'High contrast roads\' affiche les routes avec des couleurs très accentuées pour les situations de forte luminosité.
-		\n\t* \'Cycle-map\' est optimisé pour l'affichage des routes pour cyclistes.
+		\n\t* \'Cycle-map\' est optimisé pour l\'affichage des routes pour cyclistes.
 		\n\t* \'Winter and ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'World ski\')
-		\n\t* \'Topo-map-assimilation\' est optimisé pour la randonnée et affiche les chemins en fonction de l'échelle SAC, ainsi que les symboles de randonnée.
+		\n\t* \'Topo-map-assimilation\' est optimisé pour la randonnée et affiche les chemins en fonction de l\'échelle SAC, ainsi que les symboles de randonnée.
 	</string>
     <string name="remember_choice">Mémoriser mon choix</string>
     <string name="gps_status_eclipsim">GPS Status</string>
-    <string name="animate_routing_route_not_calculated">Veuillez d'abord calculer l'itinéraire</string>
-    <string name="animate_routing_route">Simulation avec l'itinéraire calculé </string>
+    <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer l\'itinéraire</string>
+    <string name="animate_routing_route">Simulation avec l\'itinéraire calculé </string>
     <string name="animate_routing_gpx">Simulation avec la trace GPX</string>
     </resources>
