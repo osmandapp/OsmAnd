@@ -28,7 +28,8 @@ import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.MapActivityActions.DirectionDialogStyle;
+import net.osmand.plus.activities.actions.NavigateAction;
+import net.osmand.plus.activities.actions.NavigateAction.DirectionDialogStyle;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -308,7 +309,7 @@ public class MapActivity extends AccessibleActivity  {
 			Location loc = new Location("map");
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
-			mapActions.getDirections(loc, null, DirectionDialogStyle.create());
+			new NavigateAction(this).getDirections(loc, null, DirectionDialogStyle.create());
 		}
 		if(mapLabelToShow != null && latLonToShow != null){
 			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
