@@ -9,12 +9,10 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.AndroidUtils;
-import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.access.AccessibleAlertBuilder;
@@ -24,7 +22,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
@@ -37,12 +34,12 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.actions.NavigateAction;
+import net.osmand.plus.activities.actions.NavigateAction.DirectionDialogStyle;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
-import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -52,7 +49,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -61,19 +57,13 @@ import android.os.Bundle;
 import android.util.FloatMath;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class MapActivityActions implements DialogProvider {
 	
@@ -294,343 +284,7 @@ public class MapActivityActions implements DialogProvider {
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		mapActivity.startActivity(intent);
     }
-    
-    
-    public String getRoutePointDescription(double lat, double lon) {
-    	return mapActivity.getString(R.string.route_descr_lat_lon, lat, lon);
-    }
-    
-    public String getRoutePointDescription(LatLon l, String d) {
-    	if(d != null && d.length() > 0) {
-    		return d.replace(':', ' ');
-    	}
-    	if(l != null) {
-    		return mapActivity.getString(R.string.route_descr_lat_lon, l.getLatitude(), l.getLongitude());
-    	}
-    	return "";
-    } 
-    
-	public String generateViaDescription() {
-		TargetPointsHelper targets = getTargets();
-		String via = "";
-		List<String> names = targets.getIntermediatePointNames();
-		List<LatLon> points = targets.getIntermediatePoints();
-		if (names.size() == 0) {
-			return via;
-		}
-		for (int i = 0; i < points.size() ; i++) {
-			via += "\n - " + getRoutePointDescription(points.get(i), i >= names.size() ? "" :names.get(i));
-		}
-		return mapActivity.getString(R.string.route_via) + via;
-	}
 	
-	public static class DirectionDialogStyle {
-		public boolean gpxRouteEnabled;
-		public boolean routeToMapPoint;
-		public boolean routeFromMapPoint;
-
-		public static DirectionDialogStyle create() {
-			return new DirectionDialogStyle();
-		}
-		public DirectionDialogStyle gpxRouteEnabled() {
-			gpxRouteEnabled = true;
-			return this;
-		}
-		
-		public DirectionDialogStyle routeToMapPoint() {
-			routeToMapPoint = true;
-			return this;
-		}
-		
-		public DirectionDialogStyle routeFromMapPoint() {
-			routeFromMapPoint = true;
-			return this;
-		}
-	}
-    
-    
-	public static View prepareAppModeView(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
-			ViewGroup parent, final View.OnClickListener onClickListener) {
-		View view = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
-		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
-		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
-		if(showDefault) {
-			buttons[ApplicationMode.DEFAULT.ordinal()] = (ToggleButton) view.findViewById(R.id.DefaultButton);
-			buttons[ApplicationMode.DEFAULT.ordinal()].setButtonDrawable(R.drawable.ic_browse_map );
-		} else {
-			view.findViewById(R.id.DefaultButton).setVisibility(View.GONE);
-		}
-		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
-		buttons[ApplicationMode.CAR.ordinal()].setButtonDrawable(R.drawable.ic_car );
-		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
-		buttons[ApplicationMode.BICYCLE.ordinal()].setButtonDrawable(R.drawable.ic_bicycle);
-		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
-		buttons[ApplicationMode.PEDESTRIAN.ordinal()].setButtonDrawable(R.drawable.ic_pedestrian);
-		
-		ApplicationMode appMode = settings.getApplicationMode();
-		for (int i = 0; i < buttons.length; i++) {
-			if (buttons[i] != null) {
-				final int ind = i;
-				ToggleButton b = buttons[i];
-				final ApplicationMode buttonAppMode = ApplicationMode.values()[i];
-				b.setChecked(appMode == buttonAppMode);
-				if(appMode == buttonAppMode) {
-					selected.add(appMode);
-				}
-				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						if (isChecked) {
-							selected.clear();
-							for (int j = 0; j < buttons.length; j++) {
-								if (buttons[j] != null) {
-									if(ind == j) {
-										selected.add(ApplicationMode.values()[j]);
-									}
-									if (buttons[j].isChecked() != (ind == j)) {
-										buttons[j].setChecked(ind == j);
-									}
-								}
-							}
-						} else {
-							// revert state
-							boolean revert = true;
-							for (int j = 0; j < buttons.length; j++) {
-								if (buttons[j] != null) {
-									if (buttons[j].isChecked()) {
-										revert = false;
-										break;
-									}
-								}
-							}
-							if (revert) {
-								buttons[ind].setChecked(true);
-							}
-						}
-						if(onClickListener != null) {
-							onClickListener.onClick(null);
-						}
-					}
-				});
-			}
-		}
-		return view;
-	}
-	
-	
-	public void getDirections(final Location mapView, String name, DirectionDialogStyle style) {
-		final Location current = getLastKnownLocation();
-		Builder builder = new AlertDialog.Builder(mapActivity);
-		final TargetPointsHelper targets = getTargets();
-
-		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
-		boolean osmandRouter = mapActivity.getMyApplication().getSettings().ROUTER_SERVICE.get() == RouteService.OSMAND;
-		final CheckBox nonoptimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
-		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
-		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
-		buttons[ApplicationMode.CAR.ordinal()].setButtonDrawable(R.drawable.ic_car );
-		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
-		buttons[ApplicationMode.BICYCLE.ordinal()].setButtonDrawable(R.drawable.ic_bicycle);
-		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
-		buttons[ApplicationMode.PEDESTRIAN.ordinal()].setButtonDrawable(R.drawable.ic_pedestrian);
-		
-		final Spinner fromSpinner = setupFromSpinner(mapView, name, view, style);
-		final List<LatLon> toList = new ArrayList<LatLon>();
-		final Spinner toSpinner = setupToSpinner(mapView, name,view, toList, style);
-		
-		if(osmandRouter && targets.hasLongDistancesInBetween(current != null ? current : mapView, 150000)) {
-			TextView textView = (TextView) view.findViewById(R.id.ValidateTextView);
-			textView.setText(R.string.route_is_too_long);
-			textView.setVisibility(View.VISIBLE);
-		}
-		
-		String via = generateViaDescription();
-		if(via.length() == 0){
-			((TextView) view.findViewById(R.id.ViaView)).setVisibility(View.GONE);
-		} else {
-			((TextView) view.findViewById(R.id.ViaView)).setVisibility(View.VISIBLE);
-			((TextView) view.findViewById(R.id.ViaView)).setText(via);
-		}
-		
-		ApplicationMode appMode = settings.getApplicationMode();
-		if(appMode == ApplicationMode.DEFAULT) {
-			appMode = ApplicationMode.CAR;
-		}
-		for (int i = 0; i < buttons.length; i++) {
-			if (buttons[i] != null) {
-				final int ind = i;
-				ToggleButton b = buttons[i];
-				final ApplicationMode buttonAppMode = ApplicationMode.values()[i];
-				b.setChecked(appMode == buttonAppMode);
-				if(b.isChecked()) {
-					nonoptimal.setChecked(!settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
-				}
-				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						if (isChecked) {
-							nonoptimal.setChecked(!settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
-							for (int j = 0; j < buttons.length; j++) {
-								if (buttons[j] != null) {
-									if (buttons[j].isChecked() != (ind == j)) {
-										buttons[j].setChecked(ind == j);
-									}
-								}
-							}
-						} else {
-							// revert state
-							boolean revert = true;
-							for (int j = 0; j < buttons.length; j++) {
-								if (buttons[j] != null) {
-									if (buttons[j].isChecked()) {
-										revert = false;
-										break;
-									}
-								}
-							}
-							if (revert) {
-								buttons[ind].setChecked(true);
-							}
-						}
-					}
-				});
-			}
-		}
-
-		DialogInterface.OnClickListener onlyShowCall = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				LatLon tos = toList.get(toSpinner.getSelectedItemPosition());
-				if ( tos != null && tos != targets.getPointToNavigate()) {
-					targets.navigateToPoint(tos, false, -1);
-				}
-				if (!targets.checkPointToNavigate(getMyApplication())) {
-					return;
-				}
-				Location from = fromSpinner.getSelectedItemPosition() == 0 ? current : mapView;
-				if (from == null) {
-					from = getLastKnownLocation();
-				}
-				if (from == null) {
-					AccessibleToast.makeText(mapActivity, R.string.unknown_from_location, Toast.LENGTH_LONG).show();
-					return;
-				}
-
-				ApplicationMode mode = getAppMode(buttons, settings);
-				routingHelper.setAppMode(mode);
-				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, !nonoptimal.isChecked());
-				settings.FOLLOW_THE_ROUTE.set(false);
-				settings.FOLLOW_THE_GPX_ROUTE.set(null);
-				routingHelper.setFollowingMode(false);
-				routingHelper.setFinalAndCurrentLocation(targets.getPointToNavigate(), targets.getIntermediatePoints(), from, null);
-			}
-		};
-
-		DialogInterface.OnClickListener followCall = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				LatLon tos = toList.get(toSpinner.getSelectedItemPosition());
-				if ( tos != null && tos != targets.getPointToNavigate()) {
-					targets.navigateToPoint(tos, false, -1);
-				}
-				if (!targets.checkPointToNavigate(getMyApplication())) {
-					return;
-				}
-				boolean msg = true;
-				Location lastKnownLocation = getLastKnownLocation();
-				Location from = fromSpinner.getSelectedItemPosition() == 0 ? current : mapView;
-				if(from == null) {
-					from = lastKnownLocation;
-				}
-				if (OsmAndLocationProvider.isPointAccurateForRouting(lastKnownLocation)) {
-					from = lastKnownLocation;
-					msg = false;
-				}
-				if (msg) {
-					AccessibleToast.makeText(mapActivity, R.string.route_updated_loc_found, Toast.LENGTH_LONG).show();
-				}
-				ApplicationMode mode = getAppMode(buttons, settings);
-				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, !nonoptimal.isChecked());
-				dialog.dismiss();
-				mapActivity.followRoute(mode, targets.getPointToNavigate(), targets.getIntermediatePoints(), 
-						from, null);
-			}
-		};
-
-		DialogInterface.OnClickListener useGpxNavigation = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				LatLon tos = toList.get(toSpinner.getSelectedItemPosition());
-				if ( tos != null && tos != targets.getPointToNavigate()) {
-					targets.navigateToPoint(tos, false, -1);
-				}
-				ApplicationMode mode = getAppMode(buttons, settings);
-				navigateUsingGPX(mode);
-			}
-		};
-
-		builder.setView(view);
-		builder.setTitle(R.string.get_directions);
-		builder.setPositiveButton(R.string.follow, followCall);
-		builder.setNeutralButton(R.string.only_show, onlyShowCall);
-		if (style.gpxRouteEnabled) {
-			builder.setNegativeButton(R.string.gpx_navigation, useGpxNavigation);
-		} else {
-			builder.setNegativeButton(R.string.no_route, null);
-		}
-		builder.show();
-	}
-
-	private Spinner setupFromSpinner(final Location mapView, String name, View view, DirectionDialogStyle style) {
-		String currentLocation = mapActivity.getString(R.string.route_descr_current_location);
-		ArrayList<String> fromActions = new ArrayList<String>();
-		fromActions.add(currentLocation);
-		if(mapView != null) {
-			String oname = name != null ? name : getRoutePointDescription(mapView.getLatitude(),mapView.getLongitude());
-			String mapLocation = mapActivity.getString(R.string.route_descr_map_location) + " " + oname;
-			fromActions.add(mapLocation);
-		}
-		final Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
-		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(view.getContext(), 
-				android.R.layout.simple_spinner_item, 
-				fromActions
-				);
-		fromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		fromSpinner.setAdapter(fromAdapter);
-		if(style.routeFromMapPoint && mapView != null) {
-			fromSpinner.setSelection(1);
-		}
-		return fromSpinner;
-	}
-	
-	private Spinner setupToSpinner(final Location mapView, String name, View view, List<LatLon> locs, DirectionDialogStyle style) {
-		final TargetPointsHelper targets = getTargets();
-		ArrayList<String> toActions = new ArrayList<String>();
-		if (targets.getPointToNavigate() != null) {
-			toActions.add(mapActivity.getString(R.string.route_descr_destination) + " "
-					+ getRoutePointDescription(targets.getPointToNavigate(), targets.getPointNavigateDescription()));
-			locs.add(targets.getPointToNavigate());
-		}
-		if(mapView != null) {
-			String oname = name != null ? name : getRoutePointDescription(mapView.getLatitude(),mapView.getLongitude());
-			String mapLocation = mapActivity.getString(R.string.route_descr_map_location) + " " + oname;
-			toActions.add(mapLocation);
-			locs.add(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
-		}
-		if(style.routeToMapPoint) {
-			Collections.reverse(locs);
-			Collections.reverse(toActions);
-		}
-		final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
-		ArrayAdapter<String> toAdapter = new ArrayAdapter<String>(view.getContext(), 
-				android.R.layout.simple_spinner_item, 
-				toActions
-				);
-		toAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		toSpinner.setAdapter(toAdapter);
-		return toSpinner;
-	}
-    
     protected Location getLastKnownLocation() {
 		return getMyApplication().getLocationProvider().getLastKnownLocation();
 	}
@@ -638,78 +292,7 @@ public class MapActivityActions implements DialogProvider {
 	protected OsmandApplication getMyApplication() {
 		return mapActivity.getMyApplication();
 	}
-
-    public void navigateUsingGPX(final ApplicationMode appMode) {
-		final LatLon endForRouting = mapActivity.getPointToNavigate();
-		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
-		mapLayers.selectGPXFileLayer(false, false, false, new CallbackWithObject<GPXFile>() {
-			
-			@Override
-			public boolean processResult(final GPXFile result) {
-				Builder builder = new AlertDialog.Builder(mapActivity);
-				final boolean[] props = new boolean[]{false, false, false, settings.SPEAK_GPX_WPT.get()};
-				builder.setMultiChoiceItems(new String[] { getString(R.string.gpx_option_reverse_route),
-						getString(R.string.gpx_option_destination_point), getString(R.string.gpx_option_from_start_point),
-						getString(R.string.announce_gpx_waypoints) }, props,
-						new OnMultiChoiceClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-								props[which] = isChecked;
-							}
-						});
-				builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						boolean reverse = props[0];
-						boolean passWholeWay = props[2];
-						boolean useDestination = props[1];
-						boolean announceGpxWpt = props[3];
-						settings.SPEAK_GPX_WPT.set(announceGpxWpt);
-						GPXRouteParams gpxRoute = new GPXRouteParams(result, reverse, announceGpxWpt, settings);
-						
-						Location loc = getLastKnownLocation();
-						if(passWholeWay && loc != null){
-							gpxRoute.setStartPoint(loc);
-						}
-						
-						Location startForRouting = getLastKnownLocation();
-						if(startForRouting == null){
-							startForRouting = gpxRoute.getStartPointForRoute();
-						}
-						
-						LatLon endPoint = endForRouting;
-						if(endPoint == null || !useDestination){
-							LatLon point = gpxRoute.getLastPoint();
-							if(point != null){
-								endPoint = point;
-							}
-							if(endPoint != null) {
-								getTargets().navigateToPoint(point, false, -1);
-							}
-						}
-						if(endPoint != null){
-							mapActivity.followRoute(appMode, endPoint,
-									new ArrayList<LatLon>(), startForRouting, gpxRoute);
-							settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
-						}
-					}
-				});
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
-				builder.show();
-				return true;
-			}
-		});
-	}
     
-    private ApplicationMode getAppMode(ToggleButton[] buttons, OsmandSettings settings){
-    	for(int i=0; i<buttons.length; i++){
-    		if(buttons[i] != null && buttons[i].isChecked() && i < ApplicationMode.values().length){
-    			return ApplicationMode.values()[i];
-    		}
-    	}
-    	return settings.getApplicationMode();
-    }
-
 	public void saveDirections() {
 		mapActivity.showDialog(DIALOG_SAVE_DIRECTIONS);
 	}
@@ -840,7 +423,8 @@ public class MapActivityActions implements DialogProvider {
 						loc.setLatitude(latitude);
 						loc.setLongitude(longitude);
 						String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-						getDirections(loc, name, DirectionDialogStyle.create().gpxRouteEnabled().routeToMapPoint());
+						new NavigateAction(mapActivity).
+							getDirections(loc, name, DirectionDialogStyle.create().gpxRouteEnabled().routeToMapPoint());
 					} else {
 						String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
 						targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, name);
@@ -851,7 +435,8 @@ public class MapActivityActions implements DialogProvider {
 						loc.setLatitude(latitude);
 						loc.setLongitude(longitude);
 						String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-						getDirections(loc, name, DirectionDialogStyle.create().gpxRouteEnabled().routeFromMapPoint());
+						new NavigateAction(mapActivity).
+							getDirections(loc, name, DirectionDialogStyle.create().gpxRouteEnabled().routeFromMapPoint());
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point || 
 						standardId == R.string.context_menu_item_destination_point) {
@@ -1034,7 +619,9 @@ public class MapActivityActions implements DialogProvider {
 							Location loc = new Location("map");
 							loc.setLatitude(mapView.getLatitude());
 							loc.setLongitude(mapView.getLongitude());
-							getDirections(loc, null, DirectionDialogStyle.create().gpxRouteEnabled());
+							
+							new NavigateAction(mapActivity).getDirections(loc, null, 
+									DirectionDialogStyle.create().gpxRouteEnabled());
 						}						
 					}
 				}).reg();
