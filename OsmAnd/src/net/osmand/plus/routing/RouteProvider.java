@@ -241,9 +241,9 @@ public class RouteProvider {
 			}
 		}
 		ArrayList<Location> sublist = new ArrayList<Location>(gpxRoute.subList(startI, endI));
+		pars.intermediates = null;
 		if(params.directions == null){
-			res = new RouteCalculationResult(sublist, params.directions, pars.start, pars.end, null, params.wpt, null,  
-					pars.ctx, pars.leftSide, true);
+			res = new RouteCalculationResult(sublist, null, pars, params.wpt);
 		} else {
 			List<RouteDirectionInfo> subdirections = new ArrayList<RouteDirectionInfo>();
 			for (RouteDirectionInfo info : params.directions) {
@@ -258,8 +258,7 @@ public class RouteProvider {
 					subdirections.add(ch);
 				}
 			}
-			res = new RouteCalculationResult(sublist, subdirections, pars.start, pars.end, null, null, null, 
-					pars.ctx, pars.leftSide, true);
+			res = new RouteCalculationResult(sublist, subdirections, pars, params.wpt);
 		}
 		return res;
 	}
@@ -330,8 +329,8 @@ public class RouteProvider {
 				
 			}
 		}
-		return new RouteCalculationResult(res, null, params.start, params.end, null, null, null,
-				params.ctx, params.leftSide, true);
+		params.intermediates = null;
+		return new RouteCalculationResult(res, null, params, null);
 	}
 	
 	protected RouteCalculationResult findVectorMapsRoute(RouteCalculationParams params) throws IOException {
@@ -493,8 +492,7 @@ public class RouteProvider {
 		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, connection.getInputStream(), false);
 		directions = parseCloudmadeRoute(res, gpxFile, false, params.leftSide, speed);
 
-		return new RouteCalculationResult(res, directions, params.start, params.end, params.intermediates, null,  
-				null, params.ctx, params.leftSide, true);
+		return new RouteCalculationResult(res, directions, params, null);
 	}
 
 	private static List<RouteDirectionInfo> parseCloudmadeRoute(List<Location> res, GPXFile gpxFile, boolean osmandRouter,
@@ -673,7 +671,8 @@ public class RouteProvider {
 
 			}
 		}
-		return new RouteCalculationResult(res, null, params.start, params.end, null, null, null, params.ctx, params.leftSide, true);
+		params.intermediates = null;
+		return new RouteCalculationResult(res, null, params, null);
 	}
 	
 	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, OsmandApplication ctx){
@@ -789,7 +788,7 @@ public class RouteProvider {
 		URL url = new URL(uri.toString());
 		URLConnection connection = url.openConnection();
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
-		StringBuilder content = new StringBuilder();
+//		StringBuilder content = new StringBuilder();
 //		BufferedReader rs = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 //		String s;
 //		while((s = rs.readLine()) != null) {
@@ -803,8 +802,8 @@ public class RouteProvider {
 		for (WptPt pt : gpxFile.routes.get(0).points) {
 			res.add(createLocation(pt));
 		}
-		return new RouteCalculationResult(res, null, params.start, params.end, null, null, null,
-				params.ctx, params.leftSide, true);
+		params.intermediates = null;
+		return new RouteCalculationResult(res, null, params, null);
 	}
 
 
