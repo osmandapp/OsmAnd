@@ -7,6 +7,7 @@ import java.text.MessageFormat;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.util.MapUtils;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
@@ -250,6 +251,24 @@ public class RouteDataObject {
 		// So it should be fix in both places
 		return directionRoute(startPoint, plus, 5);
 	}
+	
+	public double distance(int startPoint, int endPoint) {
+		if(startPoint > endPoint) {
+			int k = endPoint;
+			endPoint = startPoint;
+			startPoint = k;
+		}
+		double d = 0;
+		for(int k = startPoint; k < endPoint && k < getPointsLength() -1; k++) {
+			int x = getPoint31XTile(k);
+			int y = getPoint31YTile(k);
+			int kx = getPoint31XTile(k + 1);
+			int ky = getPoint31YTile(k + 1);
+			d += simplifyDistance(kx, ky, x, y);
+			
+		}
+		return d;
+	}
 
 	// Gives route direction of EAST degrees from NORTH ]-PI, PI]
 	public double directionRoute(int startPoint, boolean plus, float dist) {
@@ -274,9 +293,13 @@ public class RouteDataObject {
 			px = getPoint31XTile(nx);
 			py = getPoint31YTile(nx);
 			// translate into meters
-			total += Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
+			total += simplifyDistance(x, y, px, py);
 		} while (total < dist);
 		return -Math.atan2( x - px, y - py );
+	}
+
+	private double simplifyDistance(int x, int y, int px, int py) {
+		return Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
 	}
 	
 	@Override
