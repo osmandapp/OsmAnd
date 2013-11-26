@@ -8,7 +8,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.app.Dialog;
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.text.util.Linkify;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
@@ -20,6 +23,7 @@ public class TipsAndTricksActivity {
 			{R.string.tip_update_index,R.string.tip_update_index_t},
 			{R.string.tip_navigation,R.string.tip_navigation_t},
 			{R.string.tip_app_mode,R.string.tip_app_mode_t_v2},
+			{R.string.tip_faq,R.string.tip_faq_t},
 			{R.string.tip_search,R.string.tip_search_t},
 			{R.string.tip_favorites,R.string.tip_favorites_t},
 			{R.string.tip_map_context_menu,R.string.tip_map_context_menu_t},
@@ -58,8 +62,9 @@ public class TipsAndTricksActivity {
 	public int getNextRandomTipToShow() {
 		int l = getNumberOfTips();
 		if (l != 0) {
-			int mod = (int) (System.currentTimeMillis() % l);
-			return getNextTipToShow(mod);
+			// no random
+			// int mod = (int) (System.currentTimeMillis() % l);
+			return getNextTipToShow(0);
 		}
 		return -1;
 	}
@@ -98,18 +103,24 @@ public class TipsAndTricksActivity {
 		return ctx.getString(tipNamesAndDescriptions[ind][0]);
 	}
 	
-	public String getTipDescription(int ind){
-		return ctx.getString(tipNamesAndDescriptions[ind][1]);
+	public CharSequence getTipDescription(int ind){
+		String descr = ctx.getString(tipNamesAndDescriptions[ind][1]);
+		SpannableString spannable = new SpannableString(descr);
+		Linkify.addLinks(spannable, Linkify.ALL);
+		return spannable;
 	}
 	
 	public Dialog getDialogToShowTips(boolean showFirst, boolean random){
 		
 		final Dialog dlg = new Dialog(ctx);
 		dlg.setContentView(R.layout.tips_and_tricks);
-		dlg.getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+		dlg.getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		final TextView tipDescription = (TextView) dlg.findViewById(R.id.TipDescription);
-		if (!((OsmandApplication)ctx.getApplicationContext()).getInternalAPI().accessibilityExtensions())
-			tipDescription.setMovementMethod(ScrollingMovementMethod.getInstance());
+		if (!((OsmandApplication)ctx.getApplicationContext()).getInternalAPI().accessibilityExtensions()) {
+//			tipDescription.setMovementMethod(ScrollingMovementMethod.getInstance());
+			tipDescription.setMovementMethod(LinkMovementMethod.getInstance());
+		}
+		tipDescription.setLinksClickable(true);
 		int nextInd = 0;
 		final TIntArrayList toShow = new TIntArrayList();
 		final int[] historyInd = new int[1];
