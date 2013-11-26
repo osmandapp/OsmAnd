@@ -98,7 +98,11 @@ public class TextRenderer {
 		return paintText;
 	}
 
-	private float sqr(float a) {
+	private double sqr(double a) {
+		return a * a;
+	}
+	
+	private float fsqr(float a) {
 		return a * a;
 	}
 
@@ -106,7 +110,7 @@ public class TextRenderer {
 		if (Math.abs(tRot) < Math.PI / 15 && Math.abs(sRot) < Math.PI / 15) {
 			return QuadRect.intersects(tRect, sRect);
 		}
-		float dist = FloatMath.sqrt(sqr(tRect.centerX() - sRect.centerX()) + sqr(tRect.centerY() - sRect.centerY()));
+		double dist = Math.sqrt(sqr(tRect.centerX() - sRect.centerX()) + sqr(tRect.centerY() - sRect.centerY()));
 		if (dist < 3) {
 			return true;
 		}
@@ -115,8 +119,8 @@ public class TextRenderer {
 		if (Math.abs(Math.cos(tRot - sRot)) < 0.3) {
 			// rotate one rectangle to 90 degrees
 			tRot += Math.PI / 2;
-			float l = tRect.centerX() - tRect.height() / 2;
-			float t = tRect.centerY() - tRect.width() / 2;
+			double l = tRect.centerX() - tRect.height() / 2;
+			double t = tRect.centerY() - tRect.width() / 2;
 			tRect = new QuadRect(l, t, l + tRect.height(), t + tRect.width());
 		}
 
@@ -126,8 +130,8 @@ public class TextRenderer {
 			// (calculate offset for t center suppose we rotate around s center)
 			float diff = (float) (-Math.atan2(tRect.centerX() - sRect.centerX(), tRect.centerY() - sRect.centerY()) + Math.PI / 2);
 			diff -= sRot;
-			float left = sRect.centerX() + dist * FloatMath.cos(diff) - tRect.width() / 2;
-			float top = sRect.centerY() - dist * FloatMath.sin(diff) - tRect.height() / 2;
+			double left = sRect.centerX() + dist * FloatMath.cos(diff) - tRect.width() / 2;
+			double top = sRect.centerY() - dist * FloatMath.sin(diff) - tRect.height() / 2;
 			QuadRect nRect = new QuadRect(left, top, left + tRect.width(), top + tRect.height());
 			return QuadRect.intersects(nRect, sRect);
 		}
@@ -405,7 +409,7 @@ public class TextRenderer {
 		float roadLength = 0;
 		boolean prevInside = false;
 		float visibleRoadLength = 0;
-		float textw = p.bounds.width();
+		float textw = (float) p.bounds.width();
 		int last = 0;
 		int startVisible = 0;
 		float[] distances = new float[points.length - 1];
@@ -415,8 +419,8 @@ public class TextRenderer {
 			boolean inside = points[i].x >= 0 && points[i].x <= rc.width &&
 					points[i].x >= 0 && points[i].y <= rc.height;
 			if (i > 0) {
-				float d = FloatMath.sqrt(sqr(points[i].x - points[i - 1].x) + 
-						sqr(points[i].y - points[i - 1].y));
+				float d = FloatMath.sqrt(fsqr(points[i].x - points[i - 1].x) + 
+						fsqr(points[i].y - points[i - 1].y));
 				distances[i-1]= d;
 				roadLength += d;
 				if(inside) {

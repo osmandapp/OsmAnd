@@ -1,12 +1,12 @@
 package net.osmand.data;
 
 public class QuadRect {
-	public float left;
-	public float right;
-	public float top;
-	public float bottom;
+	public double left;
+	public double right;
+	public double top;
+	public double bottom;
 
-	public QuadRect(float left, float top, float right, float bottom) {
+	public QuadRect(double left, double top, double right, double bottom) {
 		this.left = left;
 		this.right = right;
 		this.top = top;
@@ -20,15 +20,15 @@ public class QuadRect {
 	public QuadRect() {
 	}
 
-	public float width() {
+	public double width() {
 		return right - left;
 	}
 
-	public float height() {
+	public double height() {
 		return bottom - top;
 	}
 
-	public boolean contains(float left, float top, float right, float bottom) {
+	public boolean contains(double left, double top, double right, double bottom) {
 		return this.left < this.right && this.top < this.bottom && this.left <= left && this.top <= top && this.right >= right
 				&& this.bottom >= bottom;
 	}
@@ -41,15 +41,15 @@ public class QuadRect {
 		return a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
 	}
 
-	public float centerX() {
+	public double centerX() {
 		return (left + right) / 2;
 	}
 
-	public float centerY() {
+	public double centerY() {
 		return (top + bottom) / 2;
 	}
 
-	public void offset(float dx, float dy) {
+	public void offset(double dx, double dy) {
 		left += dx;
 		top += dy;
 		right += dx;
@@ -57,7 +57,7 @@ public class QuadRect {
 
 	}
 
-	public void inset(float dx, float dy) {
+	public void inset(double dx, double  dy) {
 		left += dx;
 		top += dy;
 		right -= dx;

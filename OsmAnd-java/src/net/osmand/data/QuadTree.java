@@ -86,13 +86,13 @@ public class QuadTree<T> {
 	void splitBox(QuadRect node_extent, QuadRect[] n) {
 		// coord2d c=node_extent.center();
 
-		float width = node_extent.width();
-		float height = node_extent.height();
+		double width = node_extent.width();
+		double height = node_extent.height();
 
-		float lox = node_extent.left;
-		float loy = node_extent.top;
-		float hix = node_extent.right;
-		float hiy = node_extent.bottom;
+		double lox = node_extent.left;
+		double loy = node_extent.top;
+		double hix = node_extent.right;
+		double hiy = node_extent.bottom;
 
 		n[0] = new QuadRect(lox, loy, lox + width * ratio, loy + height * ratio);
 		n[1] = new QuadRect(hix - width * ratio, loy, hix, loy + height * ratio);

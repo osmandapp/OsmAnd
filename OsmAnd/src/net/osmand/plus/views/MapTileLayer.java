@@ -16,7 +16,6 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.util.FloatMath;
 import android.widget.Toast;
 
 public class MapTileLayer extends BaseMapLayer {
@@ -142,10 +141,10 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 
 
-		int left = (int) FloatMath.floor(tilesRect.left);
-		int top = (int) FloatMath.floor(tilesRect.top + ellipticTileCorrection);
-		int width = (int) FloatMath.ceil(tilesRect.right - left);
-		int height = (int) FloatMath.ceil(tilesRect.bottom + ellipticTileCorrection - top);
+		int left = (int) Math.floor(tilesRect.left);
+		int top = (int) Math.floor(tilesRect.top + ellipticTileCorrection);
+		int width = (int) Math.ceil(tilesRect.right - left);
+		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
 
 		boolean useInternet = settings.USE_INTERNET_TO_DOWNLOAD_TILES.get()
 					&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
