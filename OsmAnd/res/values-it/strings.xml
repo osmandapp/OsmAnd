@@ -1601,4 +1601,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="edit_tilesource_elliptic_tile">Mercatore Ellittico</string>
     <string name="local_osm_changes_delete_all_confirm">Stai per cancellare %1$d modifiche. Sicuro?</string>
     <string name="local_osm_changes_delete_all">Cancella tutto</string>
+    <string name="tip_faq_t">Visitate https://code.google.com/p/osmand/wiki/FAQ per vedere le domande più frequenti.</string>
+    <string name="tip_faq">Domande più frequenti</string>
+    <string name="osmodroid_refresh">Aggiorna i canali</string>
     </resources>
