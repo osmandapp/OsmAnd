@@ -1410,4 +1410,9 @@
     <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer l\'itinéraire</string>
     <string name="animate_routing_route">Simulation avec l\'itinéraire calculé </string>
     <string name="animate_routing_gpx">Simulation avec la trace GPX</string>
+    <string name="tip_faq_t">Merci de visiter https://code.google.com/p/osmand/wiki/FAQ pour la Foire Aux Questions.</string>
+    <string name="tip_faq">Foire Aux Questions</string>
+    <string name="local_osm_changes_delete_all_confirm">Vous allez supprimer %1$d modifications OSM. Êtes-vous sûr ?</string>
+    <string name="local_osm_changes_delete_all">Effacer tout</string>
+    <string name="osmodroid_refresh">Rafraîchir les canaux</string>
     </resources>
