@@ -646,14 +646,17 @@ public class RouteInfoWidgetsFactory {
 							}
 						} else if(alarm.getType() == AlarmInfo.SPEED_CAMERA) {
 							locimgId = R.drawable.warnings_speed_camera;
+							text = "";
 						} else if(alarm.getType() == AlarmInfo.BORDER_CONTROL) {
 							text = "CLO";
 						} else if(alarm.getType() == AlarmInfo.TOLL_BOOTH) {
 							text = "$";
 						} else if(alarm.getType() == AlarmInfo.TRAFFIC_CALMING) {
 							locimgId = R.drawable.warnings_speed_bump;
+							text = "";
 						} else if(alarm.getType() == AlarmInfo.STOP) {
 							// text = "STOP";
+							text = "";
 						}
 						visible = (text != null &&  text.length() > 0) || locimgId != 0;
 						if (visible) {
