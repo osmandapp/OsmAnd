@@ -99,6 +99,10 @@ public class RouteSegmentResult {
 		return (float) (object.directionRoute(point, plus) / Math.PI * 180);
 	}
 	
+	public float getDistance(int point, boolean plus) {
+		return (float) (plus? object.distance(point, endPointIndex): object.distance(startPointIndex, point));
+	}
+	
 	public float getBearingEnd() {
 		return (float) (MapUtils.alignAngleDifference(object.directionRoute(endPointIndex, startPointIndex > endPointIndex) - Math.PI) / Math.PI * 180);
 	}
