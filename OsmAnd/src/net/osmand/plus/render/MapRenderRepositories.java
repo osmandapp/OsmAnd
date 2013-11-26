@@ -586,11 +586,11 @@ public class MapRenderRepositories {
 			final QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
 //			LatLon ltn = requestedBox.getLeftTopLatLon();
 			final float mapDensity = (float) Math.pow(2, requestedBox.getZoomScale());
-			final float tileDivisor = (float) MapUtils.getPowZoom(31 - requestedBox.getZoom() -
+			final double tileDivisor = MapUtils.getPowZoom(31 - requestedBox.getZoom() -
 						requestedBox.getZoomScale());
-			currentRenderingContext.leftX = (float) (lt.x * MapUtils.getPowZoom(requestedBox.getZoomScale()));
+			currentRenderingContext.leftX = lt.x * MapUtils.getPowZoom(requestedBox.getZoomScale());
 					// MapUtils.get31TileNumberX(ltn.getLongitude()) / tileDivisor;
-			currentRenderingContext.topY = (float) (lt.y * MapUtils.getPowZoom(requestedBox.getZoomScale()));
+			currentRenderingContext.topY = lt.y * MapUtils.getPowZoom(requestedBox.getZoomScale());
 					//MapUtils.get31TileNumberY(ltn.getLatitude()) / tileDivisor;
 			currentRenderingContext.zoom = requestedBox.getZoom();
 			currentRenderingContext.rotate = requestedBox.getRotate();

@@ -415,10 +415,10 @@ public class OsmandRenderer {
 
 	private PointF calcPoint(int xt, int yt, RenderingContext rc){
 		rc.pointCount ++;
-		float tx = xt / rc.tileDivisor;
-		float ty = yt / rc.tileDivisor;
-		float dTileX = tx - rc.leftX;
-		float dTileY = ty - rc.topY;
+		double tx = xt / rc.tileDivisor;
+		double ty = yt / rc.tileDivisor;
+		float dTileX = (float) (tx - rc.leftX);
+		float dTileY = (float) (ty - rc.topY);
 		float x = rc.cosRotateTileSize * dTileX - rc.sinRotateTileSize * dTileY;
 		float y = rc.sinRotateTileSize * dTileX + rc.cosRotateTileSize * dTileY;
 		rc.tempPoint.set(x, y);
