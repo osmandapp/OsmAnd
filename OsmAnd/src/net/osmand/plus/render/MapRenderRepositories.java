@@ -476,6 +476,7 @@ public class MapRenderRepositories {
 				try {
 					c.searchMapIndex(searchRequest);
 				} catch (IOException e) {
+					// lots of FalsePositive cases
 					return false;
 				}
 				if (!empty[0]) {
@@ -488,6 +489,7 @@ public class MapRenderRepositories {
 							return false;
 						}
 					} catch (IOException e) {
+						// lots of FalsePositive cases
 						return false;
 					}
 				}
