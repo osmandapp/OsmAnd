@@ -151,15 +151,15 @@
   <string name="osmand_service_descr">Umožní běh aplikace při vypnutém displeji</string>
   <string name="tip_rotation_switching">Natočení mapy</string>
   
-  <string name="binary_map_download_success">Stahování dokončeno.\n\t\n\tNa vektorové mapy můžete přepnout v menu (Mapová data -&gt; Zdroj map -&gt; Vektorové mapy OSM).</string>
+  <string name="binary_map_download_success">"Stahování dokončeno.\n\t\n\tNa vektorové mapy můžete přepnout v menu (Mapová data -&gt; Zdroj map -&gt; Vektorové mapy OSM). "</string>
   <string name="tip_day_night_mode">Denní/noční režim</string>
   
   <string name="tip_osm_improve">Vylepšování Openstreetmap</string>
-  <string name="tip_osm_improve_t">\t OsmAnd využívá mapy založené na datech Openstreetmap.org (OSM). Program krom navigace umožňuje také přispívání k projektu Openstreetmap. Několika kliknutími tak můžete snadno vytvářet nové body zájmu (POI) nebo hlášení o chybách OSM.\n\t Pro začátek je pouze potřeba zadat přihlašovací informace v \'Nastavení\'-&gt;\'Obecné\'-&gt;\'OSM editace\'.
+  <string name="tip_osm_improve_t">"OsmAnd využívá mapy založené na datech Openstreetmap.org (OSM). Program krom navigace umožňuje také přispívání k projektu Openstreetmap. Několika kliknutími tak můžete snadno vytvářet nové body zájmu (POI) nebo hlášení o chybách OSM.\n\t Pro začátek je pouze potřeba zadat přihlašovací informace v \'Nastavení\'-&gt;\'Obecné\'-&gt;\'OSM editace\'.
 \n\t Nové POI zadáte volbou \'Vytvořit POI\' v kontextovém menu mapy. Pak můžete zadat informace o novém POI a stisknutím tlačítka ho odeslat.
 \n\t Pokud v mapě najdete chybu, můžete ji nahlásit a přispět tak k jejímu rychlejšímu opravení.
 \n\t OSM chybu nahlásíte pomocí volby \'Otevřít chybu OSM\' v kontextovém menu mapy. Tím se otevře dialog, kde můžete zadat detailní popis problému. Chybu odešlete tlačítkem \'Přidat\'.
-\n\t Pro zmíněné funkce je nutné internetové připojení.</string>
+\n\t Pro zmíněné funkce je nutné internetové připojení. "</string>
   <string name="download_files_not_enough_space">Nedostatek místa pro stažení %1$s MB dat (volné: %2$s).</string>
   <string name="download_files_question_space">Volné místo: {2} MB. Stáhnout {0} soubor(y) ({1} MB)?</string>
   
@@ -406,7 +406,7 @@
   <string name="tip_app_mode">Režim aplikace</string>
   
   <string name="tip_navigation">Navigace</string>
-  <string name="tip_navigation_t">\t Pro zapnutí navigace musíte nejprve vybrat cílový bod. Poté vyberte \'Menu\'-&gt;\'Navigace\' na mapě a vyberte typ navigování.</string>
+  <string name="tip_navigation_t">"Pro zapnutí navigace musíte nejprve vybrat cílový bod. Poté vyberte \'Menu\'-&gt;\'Navigace\' na mapě a vyberte typ navigování. "</string>
   <string name="tip_search">Vyhledávání</string>
   <string name="tip_search_t">\tMůžete vyhledat místo přímo na mapě, podle adresy, umístění, jako bod zájmu (POI), nebo v seznamu oblíbených.
 \n\t Vyhledávání se otevře stisknutím \'Hledat\'. Nalezené místo pak můžete nechat zobrazit na mapě, nebo ho použít jako cílový bod.
