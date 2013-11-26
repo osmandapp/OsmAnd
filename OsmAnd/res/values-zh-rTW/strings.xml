@@ -1613,4 +1613,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmodroid_refresh">更新頻道</string>
     <string name="local_osm_changes_delete_all_confirm">您要刪除 %1$d osm 的更改。您是否確定？</string>
     <string name="local_osm_changes_delete_all">全部刪除</string>
+    <string name="tip_faq_t">請造訪隨後的網址，以查看經常被問到的問題 https://code.google.com/p/osmand/wiki/FAQ。</string>
+    <string name="tip_faq">常見問題</string>
     </resources>
