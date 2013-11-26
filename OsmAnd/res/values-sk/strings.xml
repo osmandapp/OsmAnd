@@ -1624,4 +1624,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="local_osm_changes_delete_all_confirm">Chystáte sa odstrániť %1$d osm zmien. Ste si istý?</string>
     <string name="local_osm_changes_delete_all">Odstrániť všetky</string>
     <string name="osmodroid_refresh">Obnoviť kanály</string>
+    <string name="tip_faq_t">Pozrite si https://code.google.com/p/osmand/wiki/FAQ s často kladenými otázkami.</string>
+    <string name="tip_faq">Často kladené otázky</string>
     </resources>
