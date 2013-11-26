@@ -1598,4 +1598,6 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="osmodroid_refresh">Ververs channels</string>
     <string name="local_osm_changes_delete_all_confirm">Je gaat %1$d osm wijzigingen verwijderen. Doorgaan?</string>
     <string name="local_osm_changes_delete_all">Verwijder alle</string>
+    <string name="tip_faq_t">Raadpleeg https://code.google.com/p/osmand/wiki/FAQ voor vaak gestelde vragen.</string>
+    <string name="tip_faq">Vaak gestelde vragen</string>
     </resources>
