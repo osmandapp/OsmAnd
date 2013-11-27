@@ -213,7 +213,7 @@ public class MapRenderingTypes {
 		for (String tag : tagKeySet) {
 			String val = e.getTag(tag);
 			MapRulType rType = getAmenityRuleType(tag, val);
-			if (rType != null) {
+			if (rType != null && val != null) {
 				if(rType == nameEnRuleType && Algorithms.objectEquals(val, e.getTag(OSMTagKey.NAME))) {
 					continue;
 				}
