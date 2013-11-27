@@ -31,9 +31,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -285,6 +286,9 @@ public class NavigateAction {
 		HorizontalScrollView scroll = new HorizontalScrollView(ctx);
 		
 		topLayout.addView(scroll);
+		LinearLayout ll = new LinearLayout(ctx);
+		ll.setOrientation(LinearLayout.HORIZONTAL);
+		scroll.addView(ll);
 		
 		int k = 0;
 		int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, ctx.getResources().getDisplayMetrics());
@@ -296,10 +300,9 @@ public class NavigateAction {
 			tb.setTextOff("");
 			tb.setContentDescription(ma.toHumanString(ctx));
 			tb.setButtonDrawable(ma.getIconId());
-			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(metrics, metrics);
+			LayoutParams lp = new LinearLayout.LayoutParams(metrics, metrics);
 			lp.setMargins(left, 0, 0, 0);
-			scroll.addView(tb, lp);
-			
+			ll.addView(tb, lp);
 		}
 		return buttons;
 	}
