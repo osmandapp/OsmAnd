@@ -182,7 +182,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			icons[k] = modes[k].getSmallIcon(false);
 			values[k] = modes[k].getStringResource();
 		}
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < modes.length; i++) {
 			final ActionItem action = new ActionItem();
 			action.setTitle(view.getResources().getString(values[i]));
 			action.setIcon(view.getResources().getDrawable(icons[i]));

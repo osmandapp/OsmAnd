@@ -10,6 +10,7 @@ import android.content.Context;
 
 
 public class ApplicationMode {
+	private static List<ApplicationMode> values = new ArrayList<ApplicationMode>();
 	/*
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
 	 */
@@ -17,12 +18,14 @@ public class ApplicationMode {
 	public static final ApplicationMode CAR = reg(R.string.app_mode_car, R.drawable.ic_car, "car", null); 
 	public static final ApplicationMode BICYCLE = reg(R.string.app_mode_bicycle, R.drawable.ic_bicycle, "bicycle", null); 
 	public static final ApplicationMode PEDESTRIAN = reg(R.string.app_mode_pedestrian, R.drawable.ic_pedestrian, "pedestrian", null);
+	public static final ApplicationMode AIRCRAFT = reg(R.string.app_mode_aircraft, R.drawable.ic_browse_map, "aircraft", null);
+	public static final ApplicationMode BOAT = reg(R.string.app_mode_boat, R.drawable.ic_browse_map, "boat", null);
 	
 	
-	private static List<ApplicationMode> values = new ArrayList<ApplicationMode>();
-
 	private static ApplicationMode reg(int key, int iconId, String stringKey, ApplicationMode parent) {
-		return new ApplicationMode(key, iconId, stringKey, parent);
+		ApplicationMode mode = new ApplicationMode(key, iconId, stringKey, parent);
+		values.add(mode);
+		return mode;
 	}
 	private final int key;
 	private final ApplicationMode parent;
@@ -74,6 +77,10 @@ public class ApplicationMode {
 		} else {
 			return nightMode? R.drawable.app_mode_globus_dark : R.drawable.app_mode_globus_light;
 		}
+	}
+	
+	public boolean hasFastSpeed(){
+		return getDefaultSpeed() > 10;
 	}
 	
 	public int getResourceBearing() {
@@ -131,6 +138,30 @@ public class ApplicationMode {
 			}
 		}
 		return def;
+	}
+
+	public float getDefaultSpeed() {
+		float speed = 1.5f; 
+		if(this == ApplicationMode.CAR){
+			speed = 15.3f;
+		} else if(this == ApplicationMode.BICYCLE || this == ApplicationMode.BOAT){
+			speed = 5.5f;
+		} else if(this == ApplicationMode.AIRCRAFT){
+			speed = 40f;
+		}
+		return speed;
+	}
+	
+	public int getMinDistanceForTurn() {
+		int minDistanceForTurn = 5;
+		if(this == ApplicationMode.CAR){
+			minDistanceForTurn = 35;
+		} else if(this == ApplicationMode.AIRCRAFT){
+			minDistanceForTurn = 100;
+		} else if(this == ApplicationMode.BICYCLE || this == ApplicationMode.BOAT){
+			minDistanceForTurn = 12;
+		}
+		return minDistanceForTurn;
 	}
 
 }

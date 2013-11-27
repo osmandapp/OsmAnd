@@ -10,18 +10,19 @@ import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.util.TypedValue;
@@ -122,26 +123,14 @@ public class NavigateAction {
 		final Location current = getLastKnownLocation();
 		Builder builder = new AlertDialog.Builder(mapActivity);
 		final TargetPointsHelper targets = app.getTargetPointsHelper();
-		final List<ApplicationMode> values = new ArrayList<ApplicationMode>();
-		values.add(ApplicationMode.CAR);
-		values.add(ApplicationMode.BICYCLE);
-		values.add(ApplicationMode.PEDESTRIAN);
-		
-
-//        <ToggleButton
-//            android:id="@+id/CarButton"
-//            android:layout_width="64dp"
-//            android:layout_height="64dp"
-//            android:layout_gravity="center"
-//            android:layout_marginLeft="10dp"
-//            android:contentDescription="@string/app_mode_car"
-//            android:textOff=""
-//            android:textOn="" />
+		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(app));
+		values.remove(ApplicationMode.DEFAULT);
 		
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
 		boolean osmandRouter = mapActivity.getMyApplication().getSettings().ROUTER_SERVICE.get() == RouteService.OSMAND;
 		final CheckBox nonoptimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
-		final ToggleButton[] buttons = createToggles(values, view);
+		LinearLayout topLayout = (LinearLayout) view.findViewById(R.id.LinearLayout);
+		final ToggleButton[] buttons = createToggles(values, topLayout, mapActivity);
 		
 		final Spinner fromSpinner = setupFromSpinner(mapView, name, view, style);
 		final List<LatLon> toList = new ArrayList<LatLon>();
@@ -290,18 +279,18 @@ public class NavigateAction {
 		builder.show();
 	}
 
-	private static ToggleButton[] createToggles(final List<ApplicationMode> values, View view) {
+	private static ToggleButton[] createToggles(final List<ApplicationMode> values, LinearLayout topLayout, Context ctx) {
 		final ToggleButton[] buttons = new ToggleButton[values.size()];
-		LinearLayout topLayout = (LinearLayout) view.findViewById(R.id.LinearLayout);
+		
 		int k = 0;
-		int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, view.getResources().getDisplayMetrics());
-		int metrics = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, view.getResources().getDisplayMetrics());
+		int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, ctx.getResources().getDisplayMetrics());
+		int metrics = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, ctx.getResources().getDisplayMetrics());
 		for(ApplicationMode ma : values) {
-			ToggleButton tb = new ToggleButton(topLayout.getContext());
+			ToggleButton tb = new ToggleButton(ctx);
 			buttons[k++] = tb;
 			tb.setTextOn("");
 			tb.setTextOff("");
-			tb.setContentDescription(ma.toHumanString(view.getContext()));
+			tb.setContentDescription(ma.toHumanString(ctx));
 			tb.setButtonDrawable(ma.getIconId());
 			LayoutParams lp = new LinearLayout.LayoutParams(metrics, metrics);
 			lp.setMargins(left, 0, 0, 0);
@@ -368,14 +357,11 @@ public class NavigateAction {
 			ViewGroup parent, final View.OnClickListener onClickListener) {
 		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
-		final List<ApplicationMode> values = new ArrayList<ApplicationMode>();
-		if(showDefault) {
-			values.add(ApplicationMode.DEFAULT);
+		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values((OsmandApplication) a.getApplication()));
+		if(!showDefault) {
+			values.remove(ApplicationMode.DEFAULT);
 		}
-		values.add(ApplicationMode.CAR);
-		values.add(ApplicationMode.BICYCLE);
-		values.add(ApplicationMode.PEDESTRIAN);
-		final ToggleButton[] buttons = createToggles(values, ll); 
+		final ToggleButton[] buttons = createToggles(values, ll, a); 
 		ApplicationMode appMode = settings.getApplicationMode();
 		for (int i = 0; i < buttons.length; i++) {
 			if (buttons[i] != null) {

@@ -299,16 +299,8 @@ public class RouteCalculationResult {
 			return;
 		}
 		// speed m/s
-		float speed = 1.5f;
-		int minDistanceForTurn = 5;
-		if(mode == ApplicationMode.CAR){
-			speed = 15.3f;
-			minDistanceForTurn = 35;
-		} else if(mode == ApplicationMode.BICYCLE){
-			speed = 5.5f;
-			minDistanceForTurn = 12;
-		}
-
+		float speed = mode.getDefaultSpeed(); 
+		int minDistanceForTurn = mode.getMinDistanceForTurn();
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
 		
 		int[] listDistance = new int[locations.size()];

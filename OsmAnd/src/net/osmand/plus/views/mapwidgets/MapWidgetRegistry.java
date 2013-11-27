@@ -106,7 +106,7 @@ public class MapWidgetRegistry {
 	public MapWidgetRegInfo registerTopWidget(View m, int drawable, int messageId, String key, int left,
 			Set<ApplicationMode> appDefaultModes, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.defaultModes = new TreeSet<ApplicationMode>(appDefaultModes);
+		ii.defaultModes = new LinkedHashSet<ApplicationMode>(appDefaultModes);
 		ii.defaultCollapsible = null;
 		ii.key = key;
 		ii.visibleModes = ApplicationMode.noneOf(); 
@@ -141,8 +141,8 @@ public class MapWidgetRegistry {
 	public void registerSideWidget(BaseMapWidget m, int drawable, int messageId, String key, boolean left,
 			Set<ApplicationMode> appDefaultModes, Set<ApplicationMode> defaultCollapsible, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.defaultModes = new TreeSet<ApplicationMode>(appDefaultModes);
-		ii.defaultCollapsible = new TreeSet<ApplicationMode>(defaultCollapsible);
+		ii.defaultModes = new LinkedHashSet<ApplicationMode>(appDefaultModes);
+		ii.defaultCollapsible = new LinkedHashSet<ApplicationMode>(defaultCollapsible);
 		ii.key = key;
 		ii.visibleModes = ApplicationMode.noneOf(); 
 		ii.visibleCollapsible = ApplicationMode.noneOf();
