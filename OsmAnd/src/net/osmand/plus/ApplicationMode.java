@@ -14,7 +14,7 @@ public class ApplicationMode {
 	/*
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
 	 */
-	public static final ApplicationMode DEFAULT = create(R.string.app_mode_default, "default").speed(1.5f, 5).
+	public static final ApplicationMode DEFAULT = create(R.string.app_mode_default, "default").speed(1.5f, 5).defLocation().
 			icon(R.drawable.ic_browse_map, R.drawable.app_mode_globus_light, R.drawable.app_mode_globus_dark).reg();
 	
 	public static final ApplicationMode CAR = create(R.string.app_mode_car, "car").speed(15.3f, 35).carLocation().
@@ -32,10 +32,11 @@ public class ApplicationMode {
 	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
 			icon(R.drawable.ic_sail_boat, R.drawable.ic_action_sail_boat_light, R.drawable.ic_action_sail_boat_dark).reg();
 	
-	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).
+	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
 			icon(R.drawable.ic_trekking, R.drawable.ic_action_trekking_light, R.drawable.ic_action_trekking_dark).reg();
 	
-	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).carLocation().
+	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
+			carLocation().parent(CAR).
 			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_light, R.drawable.ic_action_motorcycle_dark).reg();
 	
 	
@@ -62,13 +63,18 @@ public class ApplicationMode {
 			return this;
 		}
 		
+		public ApplicationModeBuilder parent(ApplicationMode parent){
+			applicationMode.parent = parent;
+			return this;
+		}
+		
 		public ApplicationModeBuilder bicycleLocation(){
 			applicationMode.bearingIcon = R.drawable.bicycle_bearing;
 			applicationMode.locationIcon = R.drawable.bicycle_location;
 			return this;
 		}
 		
-		public ApplicationModeBuilder manLocation(){
+		public ApplicationModeBuilder defLocation(){
 			applicationMode.bearingIcon = R.drawable.pedestrian_bearing;
 			applicationMode.locationIcon = R.drawable.pedestrian_location;
 			return this;
@@ -129,6 +135,30 @@ public class ApplicationMode {
 		return values;
 	}
 	
+	public static Set<ApplicationMode> allOf() {
+		return new HashSet<ApplicationMode>(values);
+	}
+	
+	public static Set<ApplicationMode> noneOf() {
+		return new HashSet<ApplicationMode>();
+	}
+	
+	public static Set<ApplicationMode> of(ApplicationMode... modes ) {
+		HashSet<ApplicationMode> ts = new HashSet<ApplicationMode>();
+		Collections.addAll(ts, modes);
+		return ts;
+	}
+	
+	public static List<ApplicationMode> getModesDerivedFrom(ApplicationMode am) {
+		List<ApplicationMode> list = new ArrayList<ApplicationMode>();
+		for(ApplicationMode a : values) {
+			if(a == am || a.getParent() == am) {
+				list.add(a);
+			}
+		}
+		return list;
+	}
+	
 	public ApplicationMode getParent() {
 		return parent;
 	}
@@ -163,20 +193,6 @@ public class ApplicationMode {
 
 	public String toHumanString(Context ctx) {
 		return ctx.getString(key);
-	}
-
-	public static Set<ApplicationMode> allOf() {
-		return new HashSet<ApplicationMode>(values);
-	}
-	
-	public static Set<ApplicationMode> noneOf() {
-		return new HashSet<ApplicationMode>();
-	}
-
-	public static Set<ApplicationMode> of(ApplicationMode... modes ) {
-		HashSet<ApplicationMode> ts = new HashSet<ApplicationMode>();
-		Collections.addAll(ts, modes);
-		return ts;
 	}
 	
 	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
