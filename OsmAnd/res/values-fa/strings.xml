@@ -615,7 +615,7 @@
     <string name="srtm_paid_version_title">افزونه منحنی های همتراز</string>
     <string name="av_widget_action_descr">انتخاب عملکرد پیشفرض ویجت</string>
     <string name="recording_is_recorded">صدا/تصویر در حال ضبط میباشد. برای متوقف کردن آن ای وی ویجت را بزنید.</string>
-    <string name="recording_playing">صدایی از ضبط مورد نظر درحال پخش میباشد.</string>
+    <string name="recording_playing">صدایی از ضبط مورد نظر درحال پخش میباشد.\n%1$s</string>
     <string name="recording_delete_confirm">آیا میخواهید این مورد ضبط شده را پاک کنید؟</string>
     <string name="recording_description">ضبط 1 2 از 3</string>
     <string name="osmand_srtm_short_description_80_chars">افزونه اسمند برای منحنی های همتراز آفلاین</string>
@@ -661,8 +661,8 @@
 	<string name="context_menu_item_download_map">دانلود نقشه</string>
 	<string name="select_max_zoom_preload_area">انتخاب حداکثر میزان بزرگنمایی برای پیش فرض</string>
 	<string name="show_point_options">استفاده از مکان به عنوان…</string>
-	<string name="local_index_gpx_timespan">محدوده زمانی</string>
-	<string name="local_index_gpx_timemoving">زمان سفر:</string>
+	<string name="local_index_gpx_timespan">\nمحدوده زمانی: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nزمان سفر: %1$d:%2$02d:%3$02d</string>
 	<string name="settings_preset">پروفایل پیش فرض</string>
 	<string name="settings_preset_descr">نمای نقشه و تنظیمات مسیریابی برای هر پروفایل ذخیره میشود. پروفایل پیش فرض خود را اینجا تنظیم کنید.</string>
     <string name="osmand_background_plugin_description">نشان دادن تنظیمات سرویسهای واقعه نگاری و حالت خواب بوسیله روشن کردن مرتب دستگاه جی پی اس.</string>
@@ -1611,4 +1611,5 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="local_osm_changes_delete_all_confirm">شما در حال حذف %1$d osm تغییرات. مطمئن هستید?</string>
     <string name="tip_faq">پرسش های متداول</string>
     <string name="tip_faq_t">https://code.google.com/p/osmand/wiki/FAQ برای مشاهده پرسش های متداول لطفا به آدرس اینترنتی روبرو مراجعه نمایید.</string>
+    <string name="route_descr_destination">  </string>
     </resources>
