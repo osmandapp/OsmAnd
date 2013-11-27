@@ -6,7 +6,6 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -115,8 +114,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			distanceControl = createDistanceControl(activity, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
 			mapInfoLayer.getMapInfoControls().registerSideWidget(distanceControl,
 					R.drawable.widget_distance, R.string.map_widget_distancemeasurement, "distance.measurement", false,
-					EnumSet.of(ApplicationMode.DEFAULT, ApplicationMode.PEDESTRIAN),
-					EnumSet.noneOf(ApplicationMode.class), 21);
+					ApplicationMode.of(ApplicationMode.DEFAULT, ApplicationMode.PEDESTRIAN),
+					ApplicationMode.noneOf(), 21);
 			mapInfoLayer.recreateControls();
 			updateText();
 		}

@@ -234,7 +234,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		
 		if (profileSettings) {
 			modes.clear();
-			for (ApplicationMode a : ApplicationMode.values()) {
+			for (ApplicationMode a : ApplicationMode.values(settings)) {
 				if (a != ApplicationMode.DEFAULT) {
 					modes.add(a);
 				}

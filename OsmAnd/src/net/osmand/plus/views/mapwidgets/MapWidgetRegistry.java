@@ -49,7 +49,7 @@ public class MapWidgetRegistry {
 	public MapWidgetRegistry(OsmandSettings settings) {
 		this.settings = settings;
 		
-		for(ApplicationMode ms : ApplicationMode.values() ) {
+		for(ApplicationMode ms : ApplicationMode.values(settings) ) {
 			String mpf = settings.MAP_INFO_CONTROLS.getModeValue(ms);
 			if(mpf.equals("")) {
 				visibleElements.put(ms, null);
@@ -65,11 +65,11 @@ public class MapWidgetRegistry {
 	public MapWidgetRegInfo registerAppearanceWidget(int drawable, int messageId, String key, 
 			OsmandPreference<?> pref) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.defaultModes = EnumSet.noneOf(ApplicationMode.class);
+		ii.defaultModes = ApplicationMode.noneOf();
 		ii.defaultCollapsible = null;
 		ii.key = key;
 		ii.preference = pref;
-		ii.visibleModes = EnumSet.noneOf(ApplicationMode.class); 
+		ii.visibleModes = ApplicationMode.noneOf(); 
 		ii.visibleCollapsible = null;
 		ii.drawable = drawable;
 		ii.messageId = messageId;
@@ -89,12 +89,12 @@ public class MapWidgetRegistry {
 	public MapWidgetRegInfo registerAppearanceWidget(int drawable, String message, String key, 
 			CommonPreference<?> pref, String subcategory) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.defaultModes = EnumSet.noneOf(ApplicationMode.class);
+		ii.defaultModes = ApplicationMode.noneOf();
 		ii.defaultCollapsible = null;
 		ii.key = key;
 		ii.category = subcategory;
 		ii.preference = pref;
-		ii.visibleModes = EnumSet.noneOf(ApplicationMode.class); 
+		ii.visibleModes = ApplicationMode.noneOf(); 
 		ii.visibleCollapsible = null;
 		ii.drawable = drawable;
 		ii.messageId = message.hashCode();
@@ -104,14 +104,14 @@ public class MapWidgetRegistry {
 	}
 	
 	public MapWidgetRegInfo registerTopWidget(View m, int drawable, int messageId, String key, int left,
-			EnumSet<ApplicationMode> appDefaultModes, int priorityOrder) {
+			Set<ApplicationMode> appDefaultModes, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.defaultModes = appDefaultModes.clone();
+		ii.defaultModes = new TreeSet<ApplicationMode>(appDefaultModes);
 		ii.defaultCollapsible = null;
 		ii.key = key;
-		ii.visibleModes = EnumSet.noneOf(ApplicationMode.class); 
+		ii.visibleModes = ApplicationMode.noneOf(); 
 		ii.visibleCollapsible = null;
-		for(ApplicationMode ms : ApplicationMode.values() ) {
+		for(ApplicationMode ms : ApplicationMode.values(settings) ) {
 			boolean def = appDefaultModes.contains(ms);
 			Set<String> set = visibleElements.get(ms);
 			if (set != null) {
@@ -139,14 +139,14 @@ public class MapWidgetRegistry {
 	
 	
 	public void registerSideWidget(BaseMapWidget m, int drawable, int messageId, String key, boolean left,
-			EnumSet<ApplicationMode> appDefaultModes, EnumSet<ApplicationMode> defaultCollapsible, int priorityOrder) {
+			Set<ApplicationMode> appDefaultModes, Set<ApplicationMode> defaultCollapsible, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.defaultModes = appDefaultModes.clone();
-		ii.defaultCollapsible = defaultCollapsible.clone();
+		ii.defaultModes = new TreeSet<ApplicationMode>(appDefaultModes);
+		ii.defaultCollapsible = new TreeSet<ApplicationMode>(defaultCollapsible);
 		ii.key = key;
-		ii.visibleModes = EnumSet.noneOf(ApplicationMode.class); 
-		ii.visibleCollapsible = EnumSet.noneOf(ApplicationMode.class);
-		for(ApplicationMode ms : ApplicationMode.values() ) {
+		ii.visibleModes = ApplicationMode.noneOf(); 
+		ii.visibleCollapsible = ApplicationMode.noneOf();
+		for(ApplicationMode ms : ApplicationMode.values(settings) ) {
 			boolean collapse = defaultCollapsible.contains(ms);;
 			boolean def = appDefaultModes.contains(ms);
 			Set<String> set = visibleElements.get(ms);
@@ -326,10 +326,10 @@ public class MapWidgetRegistry {
 		private String key;
 		private int position;
 		private String category;
-		private EnumSet<ApplicationMode> defaultModes;
-		private EnumSet<ApplicationMode> defaultCollapsible;
-		private EnumSet<ApplicationMode> visibleModes;
-		private EnumSet<ApplicationMode> visibleCollapsible;
+		private Set<ApplicationMode> defaultModes;
+		private Set<ApplicationMode> defaultCollapsible;
+		private Set<ApplicationMode> visibleModes;
+		private Set<ApplicationMode> visibleCollapsible;
 		private OsmandPreference<?> preference = null;
 		private Runnable stateChangeListener = null;
 		public int priorityOrder;

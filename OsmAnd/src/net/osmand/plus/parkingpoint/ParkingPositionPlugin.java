@@ -191,7 +191,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
 			mapInfoLayer.getMapInfoControls().registerSideWidget(parkingPlaceControl,
 					R.drawable.widget_parking, R.string.map_widget_parking, "parking", false,
-					EnumSet.allOf(ApplicationMode.class), EnumSet.noneOf(ApplicationMode.class), 8);
+					ApplicationMode.allOf(), ApplicationMode.noneOf(), 8);
 			mapInfoLayer.recreateControls();
 		}
 	}

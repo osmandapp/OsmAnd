@@ -71,7 +71,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		
 		layer.getMapInfoControls().registerSideWidget(monitoringControl,
 				R.drawable.monitoring_rec_big, R.string.map_widget_monitoring, "monitoring", false,
-				EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN), EnumSet.noneOf(ApplicationMode.class), 18);
+				ApplicationMode.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN), ApplicationMode.noneOf(), 18);
 		layer.recreateControls();
 	}
 

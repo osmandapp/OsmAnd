@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import java.util.List;
+
 import android.app.backup.BackupAgentHelper;
 import android.app.backup.FileBackupHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
@@ -11,10 +13,11 @@ public class OsmandBackupAgent extends BackupAgentHelper {
 
 	@Override
 	public void onCreate() {
-		String[] prefs = new String[ApplicationMode.values().length + 1];
+		List<ApplicationMode> all = ApplicationMode.allPossibleValues((OsmandApplication) getApplicationContext());
+		String[] prefs = new String[all.size() + 1];
 		prefs[0] = OsmandSettings.getSharedPreferencesName(null);
 		int i = 1;
-		for (ApplicationMode m : ApplicationMode.values()) {
+		for (ApplicationMode m : all) {
 			prefs[i++] = OsmandSettings.getSharedPreferencesName(m);
 		}
 
