@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="app_mode_hiking">Hiking</string>
+    <string name="app_mode_motorcycle">Motorcycle</string>
     <string name="app_mode_boat">Boat</string>
     <string name="app_mode_aircraft">Aircraft</string>
     <string name="tip_faq_t">Please visit https://code.google.com/p/osmand/wiki/FAQ to see frequently asked questions.</string>

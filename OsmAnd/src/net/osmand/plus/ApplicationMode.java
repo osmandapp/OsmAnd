@@ -14,30 +14,96 @@ public class ApplicationMode {
 	/*
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
 	 */
-	public static final ApplicationMode DEFAULT = reg(R.string.app_mode_default, R.drawable.ic_browse_map, "default", null);
-	public static final ApplicationMode CAR = reg(R.string.app_mode_car, R.drawable.ic_car, "car", null); 
-	public static final ApplicationMode BICYCLE = reg(R.string.app_mode_bicycle, R.drawable.ic_bicycle, "bicycle", null); 
-	public static final ApplicationMode PEDESTRIAN = reg(R.string.app_mode_pedestrian, R.drawable.ic_pedestrian, "pedestrian", null);
-	public static final ApplicationMode AIRCRAFT = reg(R.string.app_mode_aircraft, R.drawable.ic_aircraft, "aircraft", null);
-	public static final ApplicationMode BOAT = reg(R.string.app_mode_boat, R.drawable.ic_sail_boat, "boat", null);
+	public static final ApplicationMode DEFAULT = create(R.string.app_mode_default, "default").speed(1.5f, 5).
+			icon(R.drawable.ic_browse_map, R.drawable.app_mode_globus_light, R.drawable.app_mode_globus_dark).reg();
+	
+	public static final ApplicationMode CAR = create(R.string.app_mode_car, "car").speed(15.3f, 35).carLocation().
+			icon(R.drawable.ic_car, R.drawable.ic_action_car_light, R.drawable.ic_action_car_dark).reg();
+	
+	public static final ApplicationMode BICYCLE = create(R.string.app_mode_bicycle, "bicycle").speed(5.5f, 15).bicycleLocation().
+			icon(R.drawable.ic_bicycle, R.drawable.ic_action_bicycle_light, R.drawable.ic_action_bicycle_dark).reg();
+	
+	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).
+			icon(R.drawable.ic_pedestrian, R.drawable.ic_action_pedestrian_light, R.drawable.ic_action_parking_dark).reg();
+	
+	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
+			icon(R.drawable.ic_aircraft, R.drawable.ic_action_aircraft_light, R.drawable.ic_action_aircraft_dark).reg();
+	
+	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
+			icon(R.drawable.ic_sail_boat, R.drawable.ic_action_sail_boat_light, R.drawable.ic_action_sail_boat_dark).reg();
+	
+	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).
+			icon(R.drawable.ic_trekking, R.drawable.ic_action_trekking_light, R.drawable.ic_action_trekking_dark).reg();
+	
+	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).carLocation().
+			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_light, R.drawable.ic_action_motorcycle_dark).reg();
 	
 	
-	private static ApplicationMode reg(int key, int iconId, String stringKey, ApplicationMode parent) {
-		ApplicationMode mode = new ApplicationMode(key, iconId, stringKey, parent);
-		values.add(mode);
-		return mode;
-	}
-	private final int key;
-	private final ApplicationMode parent;
-	private String stringKey;
-	private int iconId;
+	private static class ApplicationModeBuilder {
+		
+	
+		private ApplicationMode applicationMode;
 
-	private ApplicationMode(int key, int iconId, String stringKey, ApplicationMode parent) {
+		public ApplicationMode reg() {
+			values.add(applicationMode);
+			return applicationMode;
+		}
+		
+		public ApplicationModeBuilder icon(int bigIcon, int smallIconLight, int smallIconDark) {
+			applicationMode.iconId = bigIcon;
+			applicationMode.smallIconLight = smallIconLight;
+			applicationMode.smallIconDark = smallIconDark;
+			return this;
+		}
+		
+		public ApplicationModeBuilder carLocation(){
+			applicationMode.bearingIcon = R.drawable.car_bearing;
+			applicationMode.locationIcon = R.drawable.car_location;
+			return this;
+		}
+		
+		public ApplicationModeBuilder bicycleLocation(){
+			applicationMode.bearingIcon = R.drawable.bicycle_bearing;
+			applicationMode.locationIcon = R.drawable.bicycle_location;
+			return this;
+		}
+		
+		public ApplicationModeBuilder manLocation(){
+			applicationMode.bearingIcon = R.drawable.pedestrian_bearing;
+			applicationMode.locationIcon = R.drawable.pedestrian_location;
+			return this;
+		}
+		
+		public ApplicationModeBuilder speed(float defSpeed, int distForTurn) {
+			applicationMode.defaultSpeed = defSpeed;
+			applicationMode.minDistanceForTurn = distForTurn;
+			return this;
+		}
+	}
+	
+	private static ApplicationModeBuilder create(int key, String stringKey) {
+		ApplicationModeBuilder builder = new ApplicationModeBuilder();
+		builder.applicationMode = new ApplicationMode(key, stringKey);
+		return builder;
+	}
+	
+	
+	
+	private final int key;
+	private final String stringKey;
+	
+	private ApplicationMode parent;
+	private int iconId = R.drawable.ic_browse_map;
+	private int smallIconDark = R.drawable.app_mode_globus_dark ;
+	private int smallIconLight = R.drawable.app_mode_globus_light ;
+	private float defaultSpeed = 10f;
+	private int minDistanceForTurn = 50;
+	private int bearingIcon = R.drawable.pedestrian_bearing;
+	private int locationIcon = R.drawable.pedestrian_location;
+
+	private ApplicationMode(int key, String stringKey) {
 		this.key = key;
-		this.iconId = iconId;
 		this.stringKey = stringKey;
-		this.stringKey = stringKey;
-		this.parent = parent;
 	}
 	
 	public static List<ApplicationMode> getAplicationModes(ClientContext ctx) {
@@ -68,19 +134,7 @@ public class ApplicationMode {
 	}
 	
 	public int getSmallIcon(boolean nightMode) {
-		if(this == ApplicationMode.CAR){
-			return nightMode? R.drawable.ic_action_car_dark : R.drawable.ic_action_car_light;
-		} else if(this == ApplicationMode.BICYCLE){
-			return nightMode? R.drawable.ic_action_bicycle_dark : R.drawable.ic_action_bicycle_light;
-		} else if(this == ApplicationMode.PEDESTRIAN){
-			return nightMode? R.drawable.ic_action_pedestrian_dark : R.drawable.ic_action_pedestrian_light;
-		} else if(this == ApplicationMode.BOAT){
-			return nightMode? R.drawable.ic_action_sail_boat_dark : R.drawable.ic_action_sail_boat_light;
-		} else if(this == ApplicationMode.AIRCRAFT){
-			return nightMode? R.drawable.ic_action_aircraft_dark : R.drawable.ic_action_aircraft_light;
-		} else {
-			return nightMode? R.drawable.app_mode_globus_dark : R.drawable.app_mode_globus_light;
-		}
+		return nightMode? smallIconDark : smallIconLight;
 	}
 	
 	public boolean hasFastSpeed(){
@@ -88,21 +142,11 @@ public class ApplicationMode {
 	}
 	
 	public int getResourceBearing() {
-		if (this == ApplicationMode.CAR) {
-			return R.drawable.car_bearing;
-		} else if (this == ApplicationMode.BICYCLE) {
-			return R.drawable.bicycle_bearing;
-		}		
-		return R.drawable.pedestrian_bearing;
+		return bearingIcon;
 	}
 	
 	public int getResourceLocation() {
-		if (this == ApplicationMode.CAR) {
-			return R.drawable.car_location;
-		} else if (this == ApplicationMode.BICYCLE) {
-			return R.drawable.bicycle_location;
-		}		
-		return R.drawable.pedestrian_location;
+		return locationIcon;
 	}
 	
 	public String getStringKey() {
@@ -143,29 +187,15 @@ public class ApplicationMode {
 		}
 		return def;
 	}
-
+	
 	public float getDefaultSpeed() {
-		float speed = 1.5f; 
-		if(this == ApplicationMode.CAR){
-			speed = 15.3f;
-		} else if(this == ApplicationMode.BICYCLE || this == ApplicationMode.BOAT){
-			speed = 5.5f;
-		} else if(this == ApplicationMode.AIRCRAFT){
-			speed = 40f;
-		}
-		return speed;
+		return defaultSpeed;
 	}
 	
 	public int getMinDistanceForTurn() {
-		int minDistanceForTurn = 5;
-		if(this == ApplicationMode.CAR){
-			minDistanceForTurn = 35;
-		} else if(this == ApplicationMode.AIRCRAFT){
-			minDistanceForTurn = 100;
-		} else if(this == ApplicationMode.BICYCLE || this == ApplicationMode.BOAT){
-			minDistanceForTurn = 12;
-		}
 		return minDistanceForTurn;
 	}
+
+	
 
 }
