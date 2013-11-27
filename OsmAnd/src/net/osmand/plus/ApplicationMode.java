@@ -18,8 +18,8 @@ public class ApplicationMode {
 	public static final ApplicationMode CAR = reg(R.string.app_mode_car, R.drawable.ic_car, "car", null); 
 	public static final ApplicationMode BICYCLE = reg(R.string.app_mode_bicycle, R.drawable.ic_bicycle, "bicycle", null); 
 	public static final ApplicationMode PEDESTRIAN = reg(R.string.app_mode_pedestrian, R.drawable.ic_pedestrian, "pedestrian", null);
-	public static final ApplicationMode AIRCRAFT = reg(R.string.app_mode_aircraft, R.drawable.ic_browse_map, "aircraft", null);
-	public static final ApplicationMode BOAT = reg(R.string.app_mode_boat, R.drawable.ic_browse_map, "boat", null);
+	public static final ApplicationMode AIRCRAFT = reg(R.string.app_mode_aircraft, R.drawable.ic_aircraft, "aircraft", null);
+	public static final ApplicationMode BOAT = reg(R.string.app_mode_boat, R.drawable.ic_sail_boat, "boat", null);
 	
 	
 	private static ApplicationMode reg(int key, int iconId, String stringKey, ApplicationMode parent) {
@@ -74,6 +74,10 @@ public class ApplicationMode {
 			return nightMode? R.drawable.ic_action_bicycle_dark : R.drawable.ic_action_bicycle_light;
 		} else if(this == ApplicationMode.PEDESTRIAN){
 			return nightMode? R.drawable.ic_action_pedestrian_dark : R.drawable.ic_action_pedestrian_light;
+		} else if(this == ApplicationMode.BOAT){
+			return nightMode? R.drawable.ic_action_sail_boat_dark : R.drawable.ic_action_sail_boat_light;
+		} else if(this == ApplicationMode.AIRCRAFT){
+			return nightMode? R.drawable.ic_action_aircraft_dark : R.drawable.ic_action_aircraft_light;
 		} else {
 			return nightMode? R.drawable.app_mode_globus_dark : R.drawable.app_mode_globus_light;
 		}
