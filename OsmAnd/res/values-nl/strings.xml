@@ -1600,4 +1600,8 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="local_osm_changes_delete_all">Verwijder alle</string>
     <string name="tip_faq_t">Raadpleeg https://code.google.com/p/osmand/wiki/FAQ voor vaak gestelde vragen.</string>
     <string name="tip_faq">Vaak gestelde vragen</string>
+    <string name="app_mode_hiking">Wandelsport</string>
+    <string name="app_mode_motorcycle">Motorfiets</string>
+    <string name="app_mode_boat">Boot</string>
+    <string name="app_mode_aircraft">Vliegtuig</string>
     </resources>
