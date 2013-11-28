@@ -85,7 +85,7 @@
 \n\tPour ajouter un nouveau PI, utiliser l\'option \'Créer un point d\'intérêt\' dans le menu contextuel de la carte. Saisir les informations dans la boite de dialogue \'Créer un point d\'intérêt\' avant d\'enregistrer.
 \n\tLes erreurs de cartographie peuvent être signalées immédiatement via les bogues OSM, permettant à la communauté OSM de corriger plus rapidement le problème.
 \n\tPour créer un bogue OSM utiliser l\'option \'Ouvrir un bogue OSM\' dans le menu contextuel de la carte. Saisir une description détaillée du problème et le poster avec le bouton \'Ajouter\'.
-\n\tNotez que la connexion internet est nécessaire pour les contributions de PI et de bogues OSM.</string>
+\n\tOSMAnd supporte la mise en cache de vos entrées en mode déconnecté (voir le paramètre respectif), mais La connexion internet est bien sûr nécessaire pour l'envoi des contributions de PI et de bogues OSM.</string>
   <string name="download_files_not_enough_space">Il n\'y a pas assez de place pour télécharger %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">Espace actuellement disponible: {2} MB ! Télécharger {0} fichier(s) ({1} MB) ?</string>
   <string name="tip_select_destination_point">Sélectionner le point de destination</string>
@@ -1371,19 +1371,19 @@
     <string name="map_magnifier">Zoom de la carte</string>
     <string name="base_world_map">Carte de base du monde</string>
 	<string name="tip_recent_changes_1_6_t">Changements en 1.6:
-    \n\t* Support complet du fond transparent
     \n\t* Compatible avec les appareils Full HD
+    \n\t* Support complet du fond transparent
     \n\t* Téléchargement et aperçu des régions directement depuis le mode carte
-    \n\t* Téléchargement des fichiers SRTM par pays
+    \n\t* Fichiers de courbes de niveau groupés par pays/régions
     \n\t* Nouvelle carte du monde avec les routes principales, forêts et lignes de chemin de fer
-    \n\t* Zoom de carte (appui long sur le bouton zoom) - très utile pour cartes vectorielles  
+    \n\t* Zoom de carte (appui long sur le bouton zoom) - très utile pour cartes vectorielles ou à base de tuiles 
     \n\t* Définir/éditer les sources de carte en ligne (et date d\'expiration)
-    \n\t* Gestion des limitations de vitesse conditionnelles (par ex. fonction de l\'heure)
+    \n\t* Support des limitations de vitesse variables (Pays Bas)
     \n\t* Saisie plus rapide d\'une adresse
     \n\t* Résolution de bogues concernant le guidage et le rendu de carte
     </string>
     <string name="tip_recent_changes_1_5_t">Changements en 1.5:
-	\n\t* Avertissements vocaux des limitations de vitesse et des radars
+	\n\t* Alertes vocales des limitations de vitesse et des radars
 	\n\t* Nouvelles indications vocales (annonce des noms de rues)
 	\n\t* Icônes haute densité
 	\n\t* Des tas de modifications dans l\'interface utilisateur
@@ -1415,4 +1415,8 @@
     <string name="local_osm_changes_delete_all_confirm">Vous allez supprimer %1$d modifications OSM. Êtes-vous sûr ?</string>
     <string name="local_osm_changes_delete_all">Effacer tout</string>
     <string name="osmodroid_refresh">Rafraîchir les canaux</string>
+    <string name="app_mode_hiking">Rando</string>
+    <string name="app_mode_motorcycle">Moto</string>
+    <string name="app_mode_boat">Bateau</string>
+    <string name="app_mode_aircraft">Avion</string>
     </resources>
