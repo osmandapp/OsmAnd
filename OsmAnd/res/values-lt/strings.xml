@@ -1028,7 +1028,7 @@
 <string name="show_warnings_title">Rodyti įspėjimus…</string>
 <string name="show_warnings_descr">Rodyti greičio ribojimus, matuoklius, greičio ribojimo gūbrelius ir kitus perspėjimus</string>
 <string name="map_widget_fluorescent">Fluorescenciniai maršrutai</string>
-<string name="map_widget_appearance">Įvairūs:</string>
+<string name="map_widget_appearance">Likę elementai:</string>
 <string name="map_widget_view_direction">Žiūrėjimo kryptis</string>
 <string name="map_widget_transparent">Permatomas apvalkalas</string>
 <string name="monitoring_mode_off">Įrašyti GPX</string>
@@ -1618,4 +1618,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="auto_zoom_far">Vidutiniškai priartinti</string>
 	<string name="auto_zoom_farthest">Maksimaliai padidinti</string>
 	<string name="osmodroid_refresh">Atnaujinti kanalus</string>
+    <string name="map_widget_map_rendering">Žemėlapio atvaizdavimas:</string>
+    <string name="app_mode_hiking">Žygiai</string>
+    <string name="app_mode_motorcycle">Motociklas</string>
+    <string name="app_mode_boat">Valtis</string>
+    <string name="app_mode_aircraft">Lėktuvas</string>
+    <string name="tip_faq_t">Apsilankę https://code.google.com/p/osmand/wiki/FAQ rasite atsakymus į dažnai užduodamus klausimus.</string>
+    <string name="tip_faq">Dažnai užduodami klausimai</string>
+    <string name="local_osm_changes_delete_all_confirm">Jūs ištrinsite %1$d osm pakeitimus. Ar tikrai norite?</string>
+    <string name="local_osm_changes_delete_all">Viską ištrinti</string>
     </resources>
