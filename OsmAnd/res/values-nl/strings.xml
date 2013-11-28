@@ -1604,4 +1604,5 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="app_mode_motorcycle">Motorfiets</string>
     <string name="app_mode_boat">Boot</string>
     <string name="app_mode_aircraft">Vliegtuig</string>
+    <string name="map_widget_map_rendering">Kaartstijl:</string>
     </resources>
