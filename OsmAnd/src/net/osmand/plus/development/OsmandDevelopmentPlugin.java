@@ -68,8 +68,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				}
 			};
 			mapInfoLayer.getMapInfoControls().registerSideWidget(fps, 0,
-					R.string.map_widget_fps_info, "fps", false, EnumSet.noneOf(ApplicationMode.class),
-					EnumSet.noneOf(ApplicationMode.class), 30);
+					R.string.map_widget_fps_info, "fps", false, ApplicationMode.noneOf(),
+					ApplicationMode.noneOf(), 30);
 			mapInfoLayer.recreateControls();
 		}
 	}

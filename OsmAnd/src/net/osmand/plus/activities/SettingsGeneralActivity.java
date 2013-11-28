@@ -169,11 +169,12 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 		
 		
-		entries = new String[ApplicationMode.values().length];
+		ApplicationMode[] appModes = ApplicationMode.values(settings).toArray(new ApplicationMode[0]);
+		entries = new String[appModes.length];
 		for(int i=0; i<entries.length; i++){
-			entries[i] = ApplicationMode.values()[i].toHumanString(getMyApplication());
+			entries[i] = appModes[i].toHumanString(getMyApplication());
 		}
-		registerListPreference(settings.APPLICATION_MODE, screen, entries, ApplicationMode.values());
+		registerListPreference(settings.APPLICATION_MODE, screen, entries, appModes);
 		
 		if (!Version.isBlackberry((ClientContext) getApplication())) {
 			PreferenceScreen cat = getPreferenceScreen();

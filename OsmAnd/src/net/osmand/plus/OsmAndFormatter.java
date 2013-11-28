@@ -97,7 +97,8 @@ public class OsmAndFormatter {
 		ApplicationMode am = settings.getApplicationMode();
 		float kmh = metersperseconds * 3.6f;
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-			if (kmh >= 10 || (am == ApplicationMode.CAR)) {
+			if (kmh >= 10 || am.hasFastSpeed()) {
+				// case of car
 				return ((int) Math.round(kmh)) + " " + ctx.getString(R.string.km_h);
 			}
 			int kmh10 = (int) (kmh * 10f);

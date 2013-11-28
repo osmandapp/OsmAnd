@@ -6,16 +6,12 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
-import net.osmand.util.MapUtils;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 public class PointLocationLayer extends OsmandMapLayer {
 	protected final static int RADIUS = 7;
@@ -135,16 +131,8 @@ public class PointLocationLayer extends OsmandMapLayer {
 	public void checkAppMode(ApplicationMode appMode) {
 		if (appMode != this.appMode) {
 			this.appMode = appMode;
-			if (appMode == ApplicationMode.CAR) {
-				bearingIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.car_bearing);
-				locationIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.car_location);
-			} else if (appMode == ApplicationMode.BICYCLE) {
-				bearingIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.bicycle_bearing);
-				locationIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.bicycle_location);
-			} else {
-				bearingIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.pedestrian_bearing);
-				locationIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.pedestrian_location);
-			}
+			bearingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getResourceBearing());
+			locationIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getResourceLocation());
 		}
 		
 	}

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -468,8 +467,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
 			mapInfoLayer.getMapInfoControls().registerSideWidget(recordControl, R.drawable.widget_icon_av_inactive,
-					R.string.map_widget_av_notes, "audionotes", false, EnumSet.allOf(ApplicationMode.class),
-					EnumSet.noneOf(ApplicationMode.class), 22);
+					R.string.map_widget_av_notes, "audionotes", false, ApplicationMode.allOf(),
+					ApplicationMode.noneOf(), 22);
 			mapInfoLayer.recreateControls();
 		}
 	}

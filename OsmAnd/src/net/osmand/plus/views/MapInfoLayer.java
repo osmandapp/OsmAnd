@@ -3,7 +3,6 @@ package net.osmand.plus.views;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -171,10 +170,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		alarmControl = ric.createAlarmInfoControl(app, map);
 		// register right stack
-		EnumSet<ApplicationMode> all = EnumSet.allOf(ApplicationMode.class);
-		EnumSet<ApplicationMode> carBicycleDefault = EnumSet.of(ApplicationMode.CAR, ApplicationMode.DEFAULT, ApplicationMode.BICYCLE);
-		EnumSet<ApplicationMode> exceptCar = EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT);
-		EnumSet<ApplicationMode> none = EnumSet.noneOf(ApplicationMode.class);
+		Set<ApplicationMode> all = ApplicationMode.allOf();
+		Set<ApplicationMode> carBicycleDefault = ApplicationMode.of(ApplicationMode.CAR, ApplicationMode.DEFAULT, ApplicationMode.BICYCLE);
+		Set<ApplicationMode> exceptCar = ApplicationMode.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT);
+		Set<ApplicationMode> none = ApplicationMode.noneOf();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(), paintText,
 				paintSubText, false);
@@ -182,7 +181,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
 		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
-				EnumSet.of(ApplicationMode.PEDESTRIAN), none, 10);
+				ApplicationMode.of(ApplicationMode.PEDESTRIAN), none, 10);
 		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
 		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, carBicycleDefault, none, 15);
@@ -265,26 +264,26 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// we want that status bar lays over map stack controls
 		topMargin -= topRectPadding.top;
 
-		FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT,
+		FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.RIGHT);
 		flp.rightMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = topMargin;
 		rightStack.setLayoutParams(flp);
 		
 		
-		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT,
+		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL | Gravity.TOP);
 		flp.topMargin = (int) (topMargin  + scaleCoefficient * 8);
 		lanesControl.setLayoutParams(flp);
 		
 		
-		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT,
+		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT);
 		flp.leftMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = topMargin;
 		leftStack.setLayoutParams(flp);
 
-		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT,
+		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
 				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.TOP);
 		flp.leftMargin = STATUS_BAR_MARGIN_X;
 		flp.rightMargin = STATUS_BAR_MARGIN_X;

@@ -121,7 +121,7 @@ public class OsmandSettings {
 		if(mode == null){
 			return SHARED_PREFERENCES_NAME;
 		} else {
-			return SHARED_PREFERENCES_NAME + "." + mode.name().toLowerCase();
+			return SHARED_PREFERENCES_NAME + "." + mode.getStringKey().toLowerCase();
 		}
 	}
 	
@@ -158,7 +158,7 @@ public class OsmandSettings {
 		@Override
 		public boolean set(ApplicationMode val) {
 			ApplicationMode oldMode = currentMode;
-			boolean changed = settingsAPI.edit(globalPreferences).putString(getId(), val.name()).commit();
+			boolean changed = settingsAPI.edit(globalPreferences).putString(getId(), val.getStringKey()).commit();
 			if(changed){
 				currentMode = val;
 				profilePreferences = getProfilePreferences(currentMode);
@@ -183,12 +183,8 @@ public class OsmandSettings {
 	}
 	
 	protected ApplicationMode readApplicationMode() {
-		String s = settingsAPI.getString(globalPreferences, APPLICATION_MODE.getId(), ApplicationMode.DEFAULT.name());
-		try {
-			return ApplicationMode.valueOf(s);
-		} catch (IllegalArgumentException e) {
-			return ApplicationMode.DEFAULT;
-		}
+		String s = settingsAPI.getString(globalPreferences, APPLICATION_MODE.getId(), ApplicationMode.DEFAULT.getStringKey());
+		return ApplicationMode.valueOfStringKey(s, ApplicationMode.DEFAULT);
 	}
 
 
@@ -574,8 +570,19 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES = new BooleanPreference("use_internet_to_download_tiles", true).makeGlobal().cache();
 	
-	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new EnumIntPreference<ApplicationMode>(
-			"default_application_mode", ApplicationMode.DEFAULT, ApplicationMode.values()).makeGlobal();
+	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>("default_application_mode", ApplicationMode.DEFAULT) {
+
+		@Override
+		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
+			return ApplicationMode.valueOfStringKey(key, defaultValue);
+		}
+		
+		@Override
+		protected boolean setValue(Object prefs, ApplicationMode val) {
+			return settingsAPI.edit( prefs).putString(getId(), val.getStringKey()).commit();
+		}
+	}; 
 	
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumIntPreference<DrivingRegion>(
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {

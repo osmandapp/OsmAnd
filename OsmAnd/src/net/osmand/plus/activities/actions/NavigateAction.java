@@ -10,25 +10,30 @@ import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -119,17 +124,14 @@ public class NavigateAction {
 		final Location current = getLastKnownLocation();
 		Builder builder = new AlertDialog.Builder(mapActivity);
 		final TargetPointsHelper targets = app.getTargetPointsHelper();
-
+		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(app.getSettings()));
+		values.remove(ApplicationMode.DEFAULT);
+		
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
 		boolean osmandRouter = mapActivity.getMyApplication().getSettings().ROUTER_SERVICE.get() == RouteService.OSMAND;
 		final CheckBox nonoptimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
-		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
-		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
-		buttons[ApplicationMode.CAR.ordinal()].setButtonDrawable(R.drawable.ic_car );
-		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
-		buttons[ApplicationMode.BICYCLE.ordinal()].setButtonDrawable(R.drawable.ic_bicycle);
-		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
-		buttons[ApplicationMode.PEDESTRIAN.ordinal()].setButtonDrawable(R.drawable.ic_pedestrian);
+		LinearLayout topLayout = (LinearLayout) view.findViewById(R.id.LinearLayout);
+		final ToggleButton[] buttons = createToggles(values, topLayout, mapActivity);
 		
 		final Spinner fromSpinner = setupFromSpinner(mapView, name, view, style);
 		final List<LatLon> toList = new ArrayList<LatLon>();
@@ -157,7 +159,7 @@ public class NavigateAction {
 			if (buttons[i] != null) {
 				final int ind = i;
 				ToggleButton b = buttons[i];
-				final ApplicationMode buttonAppMode = ApplicationMode.values()[i];
+				final ApplicationMode buttonAppMode = values.get(i);
 				b.setChecked(appMode == buttonAppMode);
 				if(b.isChecked()) {
 					nonoptimal.setChecked(!settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
@@ -213,7 +215,7 @@ public class NavigateAction {
 					return;
 				}
 
-				ApplicationMode mode = getAppMode(buttons, settings);
+				ApplicationMode mode = getAppMode(buttons, settings, values);
 				app.getRoutingHelper().setAppMode(mode);
 				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, !nonoptimal.isChecked());
 				settings.FOLLOW_THE_ROUTE.set(false);
@@ -246,7 +248,7 @@ public class NavigateAction {
 				if (msg) {
 					AccessibleToast.makeText(mapActivity, R.string.route_updated_loc_found, Toast.LENGTH_LONG).show();
 				}
-				ApplicationMode mode = getAppMode(buttons, settings);
+				ApplicationMode mode = getAppMode(buttons, settings, values);
 				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, !nonoptimal.isChecked());
 				dialog.dismiss();
 				mapActivity.followRoute(mode, targets.getPointToNavigate(), targets.getIntermediatePoints(), 
@@ -261,7 +263,7 @@ public class NavigateAction {
 				if ( tos != null && tos != targets.getPointToNavigate()) {
 					targets.navigateToPoint(tos, false, -1);
 				}
-				ApplicationMode mode = getAppMode(buttons, settings);
+				ApplicationMode mode = getAppMode(buttons, settings, values);
 				navigateUsingGPX(mode);
 			}
 		};
@@ -276,6 +278,32 @@ public class NavigateAction {
 			builder.setNegativeButton(R.string.no_route, null);
 		}
 		builder.show();
+	}
+
+	private static ToggleButton[] createToggles(final List<ApplicationMode> values, LinearLayout topLayout, Context ctx) {
+		final ToggleButton[] buttons = new ToggleButton[values.size()];
+		HorizontalScrollView scroll = new HorizontalScrollView(ctx);
+		
+		topLayout.addView(scroll);
+		LinearLayout ll = new LinearLayout(ctx);
+		ll.setOrientation(LinearLayout.HORIZONTAL);
+		scroll.addView(ll);
+		
+		int k = 0;
+		int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, ctx.getResources().getDisplayMetrics());
+		int metrics = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 64, ctx.getResources().getDisplayMetrics());
+		for(ApplicationMode ma : values) {
+			ToggleButton tb = new ToggleButton(ctx);
+			buttons[k++] = tb;
+			tb.setTextOn("");
+			tb.setTextOff("");
+			tb.setContentDescription(ma.toHumanString(ctx));
+			tb.setButtonDrawable(ma.getIconId());
+			LayoutParams lp = new LinearLayout.LayoutParams(metrics, metrics);
+			lp.setMargins(left, 0, 0, 0);
+			ll.addView(tb, lp);
+		}
+		return buttons;
 	}
 	
     public String getRoutePointDescription(double lat, double lon) {
@@ -333,28 +361,19 @@ public class NavigateAction {
     
 	public static View prepareAppModeView(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
 			ViewGroup parent, final View.OnClickListener onClickListener) {
-		View view = a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
+		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
-		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
-		if(showDefault) {
-			buttons[ApplicationMode.DEFAULT.ordinal()] = (ToggleButton) view.findViewById(R.id.DefaultButton);
-			buttons[ApplicationMode.DEFAULT.ordinal()].setButtonDrawable(R.drawable.ic_browse_map );
-		} else {
-			view.findViewById(R.id.DefaultButton).setVisibility(View.GONE);
+		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
+		if(!showDefault) {
+			values.remove(ApplicationMode.DEFAULT);
 		}
-		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
-		buttons[ApplicationMode.CAR.ordinal()].setButtonDrawable(R.drawable.ic_car );
-		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
-		buttons[ApplicationMode.BICYCLE.ordinal()].setButtonDrawable(R.drawable.ic_bicycle);
-		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
-		buttons[ApplicationMode.PEDESTRIAN.ordinal()].setButtonDrawable(R.drawable.ic_pedestrian);
-		
+		final ToggleButton[] buttons = createToggles(values, ll, a); 
 		ApplicationMode appMode = settings.getApplicationMode();
 		for (int i = 0; i < buttons.length; i++) {
 			if (buttons[i] != null) {
 				final int ind = i;
 				ToggleButton b = buttons[i];
-				final ApplicationMode buttonAppMode = ApplicationMode.values()[i];
+				final ApplicationMode buttonAppMode = values.get(i);
 				b.setChecked(appMode == buttonAppMode);
 				if(appMode == buttonAppMode) {
 					selected.add(appMode);
@@ -367,7 +386,7 @@ public class NavigateAction {
 							for (int j = 0; j < buttons.length; j++) {
 								if (buttons[j] != null) {
 									if(ind == j) {
-										selected.add(ApplicationMode.values()[j]);
+										selected.add(values.get(j));
 									}
 									if (buttons[j].isChecked() != (ind == j)) {
 										buttons[j].setChecked(ind == j);
@@ -396,7 +415,7 @@ public class NavigateAction {
 				});
 			}
 		}
-		return view;
+		return ll;
 	}
 	
 	private Spinner setupFromSpinner(final Location mapView, String name, View view, DirectionDialogStyle style) {
@@ -463,12 +482,12 @@ public class NavigateAction {
 		return mapActivity.getString(resId);
 	}
 	
-	private ApplicationMode getAppMode(ToggleButton[] buttons, OsmandSettings settings){
-    	for(int i=0; i<buttons.length; i++){
-    		if(buttons[i] != null && buttons[i].isChecked() && i < ApplicationMode.values().length){
-    			return ApplicationMode.values()[i];
-    		}
-    	}
+	private ApplicationMode getAppMode(ToggleButton[] buttons, OsmandSettings settings, List<ApplicationMode> modes){
+		for (int i = 0; i < buttons.length; i++) {
+			if (buttons[i] != null && buttons[i].isChecked() && i < modes.size()) {
+				return modes.get(i);
+			}
+		}
     	return settings.getApplicationMode();
     }
 	
