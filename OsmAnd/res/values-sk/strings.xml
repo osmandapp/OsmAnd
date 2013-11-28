@@ -1626,4 +1626,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmodroid_refresh">Obnoviť kanály</string>
     <string name="tip_faq_t">Pozrite si https://code.google.com/p/osmand/wiki/FAQ s často kladenými otázkami.</string>
     <string name="tip_faq">Často kladené otázky</string>
+    <string name="app_mode_hiking">Turistika</string>
+    <string name="app_mode_motorcycle">Motocykel</string>
+    <string name="app_mode_boat">Loď</string>
+    <string name="app_mode_aircraft">Lietadlo</string>
     </resources>
