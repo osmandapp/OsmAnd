@@ -1604,4 +1604,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="tip_faq_t">Visitate https://code.google.com/p/osmand/wiki/FAQ per vedere le domande più frequenti.</string>
     <string name="tip_faq">Domande più frequenti</string>
     <string name="osmodroid_refresh">Aggiorna i canali</string>
+    <string name="app_mode_hiking">Escursionismo</string>
+    <string name="app_mode_motorcycle">Motociletta</string>
+    <string name="app_mode_boat">Barca</string>
+    <string name="app_mode_aircraft">Aereo</string>
     </resources>
