@@ -1325,4 +1325,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="local_osm_changes_delete_all">Ta bort alla</string>
     <string name="tip_faq_t">Besök gärna https://code.google.com/p/osmand/wiki/FAQ för att se Frågor och svar.</string>
     <string name="tip_faq">Frågor och svar</string>
+    <string name="app_mode_hiking">Vandring</string>
+    <string name="app_mode_motorcycle">Motorcykel</string>
+    <string name="app_mode_boat">Båt</string>
+    <string name="app_mode_aircraft">Flyg</string>
     </resources>
