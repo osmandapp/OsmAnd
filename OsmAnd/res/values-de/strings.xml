@@ -1474,4 +1474,12 @@
     <string name="animate_routing_route_not_calculated">Bitte berechnen Sie zuerst die Route</string>
     <string name="animate_routing_gpx">Simulation anhand einer GPX-Spur</string>
     <string name="animate_routing_route">Simulation anhand berechneter Route </string>
+    <string name="app_mode_hiking">Wandern</string>
+    <string name="app_mode_motorcycle">Motorrad</string>
+    <string name="app_mode_boat">Boot</string>
+    <string name="app_mode_aircraft">Flugzeug</string>
+    <string name="tip_faq_t">Auf http://code.google.com/p/osmand/wiki/FAQ finden sich häufige Fragen und Antworten.</string>
+    <string name="tip_faq">Häufige Fragen (FAQ)</string>
+    <string name="local_osm_changes_delete_all_confirm">Es sollen %1$d Änderungen von OSM-Daten gelöscht werden. Fortfahren?</string>
+    <string name="local_osm_changes_delete_all">Alles löschen</string>
     </resources>
