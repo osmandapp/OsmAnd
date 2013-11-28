@@ -22,7 +22,7 @@
      いません。マーケットに行ってインストールしますか？</string>
 
      <string name="gpx_option_reverse_route">GPX ルートを反転</string>
-     <string name="gpx_option_destination_point">現在の目的地点を使用</string>
+     <string name="gpx_option_destination_point">現在の目的地を使用</string>
      <string name="gpx_option_from_start_point">トラック全体をパス</string>
      <string name="tip_rotation_switching">マップ回転</string>
      
@@ -40,7 +40,7 @@
      <string name="choose_audio_stream">音声案内ストリーム</string>
      <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを
 選んでください(システム構成によります)</string>
-     <string name="voice_stream_voice_call">音声呼出ストリーム</string>
+     <string name="voice_stream_voice_call">音声呼出ストリーム(通話音)</string>
      <string name="voice_stream_notification">通知ストリーム</string>
      <string name="voice_stream_music">音楽ストリーム</string>
      <string name="warning_tile_layer_not_downloadable">アプリケーションは
@@ -257,7 +257,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
      <string name="voice_is_not_available_msg">音声案内は利用できません。
 設定で適切な音声データパッケージを選んでダウンロードしてください。</string>
      <string name="voice_is_not_available_title">音声案内が選択されていません</string>
-     <string name="trace_rendering_descr">このフラグを選択してレンダリング効率をチェック</string>
+     <string name="trace_rendering_descr">レンダリング能力を表示</string>
  <string name="trace_rendering">レンダリング速度を表示</string>
      <string name="daynight_mode_day">日中</string>
      <string name="daynight_mode_night">夜間</string>
@@ -1330,4 +1330,33 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="local_index_gpx_info_show">\n\nオプションのために長押しして下さい</string>
 	<string name="local_index_gpx_info_speed">\n平均速度: %1$s \n最大速度: %2$s</string>
 	<string name="local_index_gpx_info_elevation">\n平均高度: %1$s\n最低高度: %2$s\n最高高度: %3$s\n上り: %4$s\n下り: %5$s</string>
+	<string name="local_index_gpx_info">サブトラック: %1$d\nトータルポイント: %2$d\n経由点: %3$d\n総距離: %4$s\n出発時間: %5$tF, %5$tR\n到着時間: %6$tF, %6$tR</string>
+	<string name="local_index_installed">エディション</string>
+	<string name="local_index_items_backuped">%2$d個の項目のうち、%1$d個のアイテムを無効化しました。</string>
+	<string name="local_index_items_deleted">%2$d個の項目のうち、%1$d個のアイテムを削除しました。</string>
+	<string name="local_index_items_restored">%2$d個の項目のうち、%1$d個のアイテムを有効化しました。</string>
+	<string name="local_index_no_items_to_do">%1$sにアイテムはありません</string>
+	<string name="local_index_action_do">%2$s個のアイテムを%1$sしようとしています、続行しますか？</string>
+	<string name="local_index_descr_title">オフラインデータ</string>
+	<string name="local_index_mi_restore">有効化</string>
+	<string name="local_index_mi_backup">無効化</string>
+	<string name="local_index_mi_delete">削除</string>
+	<string name="local_index_mi_reload">SDカードから再読み込み</string>
+	<string name="local_index_download">ダウンロード</string>
+	<string name="local_index_poi_data">POIデータ</string>
+	<string name="local_index_address_data">住所データ</string>
+	<string name="local_index_transport_data">交通データ</string>
+	<string name="local_index_map_data">地図データ</string>
+	<string name="local_indexes_cat_backup">無効化されました</string>
+	<string name="local_indexes_cat_tts">音声データ(TTS形式)</string>
+	<string name="local_indexes_cat_voice">音声データ(録音形式)</string>
+	<string name="local_indexes_cat_gpx">GPXデータ</string>
+	<string name="local_indexes_cat_poi">POIデータ</string>
+	<string name="ttsvoice">TTS形式音声</string>
+	<string name="search_offline_clear_search">新規検索</string>
+	<string name="map_text_size_descr">地図上名称のテキストサイズを選択する</string>
+	<string name="map_text_size">地図フォントサイズ</string>
+	<string name="tip_recent_changes">最近の更新</string>
+	<string name="voice_not_specified">使用しない</string>
+	<string name="incomplete_locale">不完全</string>
 	</resources>
