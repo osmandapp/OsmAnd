@@ -99,7 +99,7 @@ public class AppearanceWidgetsFactory {
 
         }
 
-        final MapWidgetRegistry.MapWidgetRegInfo vectorRenderer = mapInfoControls.registerAppearanceWidget(R.drawable.widget_rendering_style, R.string.map_widget_renderer,
+        final MapWidgetRegistry.MapWidgetRegInfo vectorRenderer = mapInfoControls.registerAppearanceWidget(R.drawable.widget_rendering_style, map.getString(R.string.map_widget_renderer),
                 "renderer", view.getSettings().RENDERER, map.getString(R.string.map_widget_map_rendering));
         final OsmandApplication app = view.getApplication();
         vectorRenderer.setStateChangeListener(new Runnable() {
@@ -140,7 +140,7 @@ public class AppearanceWidgetsFactory {
             }
         });
 
-        final MapWidgetRegistry.MapWidgetRegInfo dayNight = mapInfoControls.registerAppearanceWidget(R.drawable.widget_day_night_mode, R.string.map_widget_day_night,
+        final MapWidgetRegistry.MapWidgetRegInfo dayNight = mapInfoControls.registerAppearanceWidget(R.drawable.widget_day_night_mode, map.getString(R.string.map_widget_day_night),
                 "dayNight", view.getSettings().DAYNIGHT_MODE, map.getString(R.string.map_widget_map_rendering));
         dayNight.setStateChangeListener(new Runnable() {
             @Override
