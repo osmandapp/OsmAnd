@@ -1503,4 +1503,13 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="animate_routing_route_not_calculated">Por favor, calcula primero la ruta</string>
     <string name="animate_routing_route">Simula usando la ruta calculada </string>
     <string name="animate_routing_gpx">Simula usando traza GPX</string>
+    <string name="app_mode_hiking">Senderismo</string>
+    <string name="app_mode_motorcycle">Moto</string>
+    <string name="app_mode_boat">Barco</string>
+    <string name="app_mode_aircraft">Avión</string>
+    <string name="tip_faq_t">Visite https://code.google.com/p/osmand/wiki/FAQ para ver las preguntas más frequentes.</string>
+    <string name="tip_faq">Preguntas más frequentes</string>
+    <string name="local_osm_changes_delete_all_confirm">Vas a borrar %1$d cambios osm, ¿Quieres continuar?</string>
+    <string name="local_osm_changes_delete_all">Borrar todo</string>
+    <string name="osmodroid_refresh">Renueva los canales</string>
     </resources>
