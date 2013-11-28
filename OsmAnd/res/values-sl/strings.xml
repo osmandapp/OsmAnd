@@ -352,7 +352,7 @@
 \n\t* Popravljeni jeziki arabščina, Kannada skripte in RTL jeziki "</string>
 	<string name="map_widget_fluorescent">Fluorescentne poti</string>
 	<string name="map_widget_show_ruler">Merilo</string>
-	<string name="map_widget_appearance">Razno:</string>
+	<string name="map_widget_appearance">Preostali elementi:</string>
 	<string name="map_widget_view_direction">Smer gledanja</string>
 	<string name="map_widget_transparent">Prosojna koža</string>
 	<string name="use_transparent_map_theme">Prosojna tema</string>
@@ -1577,4 +1577,13 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="animate_routing_route">Preizkusi s podatki izračunane poti </string>
     <string name="animate_routing_gpx">Preizkusi z uporabo sledi GPX</string>
     <string name="osmodroid_refresh">Osvežitev kanalov</string>
+    <string name="app_mode_hiking">Pohodništvo</string>
+    <string name="app_mode_motorcycle">Motorno kolo</string>
+    <string name="app_mode_boat">Čoln</string>
+    <string name="app_mode_aircraft">Letalo</string>
+    <string name="tip_faq_t">Obiščite https://code.google.com/p/osmand/wiki/FAQ za ogled pogosto zastavljenih vprašanj.</string>
+    <string name="tip_faq">Pogosto zastavljena vprašanja</string>
+    <string name="local_osm_changes_delete_all_confirm">Izbrisali boste %1$d osm sprememb. Ali ste prepričani?</string>
+    <string name="local_osm_changes_delete_all">Izbriši vse</string>
+    <string name="map_widget_map_rendering">Upodabljanje zemljevida:</string>
     </resources>
