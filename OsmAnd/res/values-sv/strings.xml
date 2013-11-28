@@ -46,7 +46,7 @@
 <string name="avoid_in_routing_title">Undvik …</string>
 <string name="avoid_in_routing_descr">Undvik motorvägar, betalvägar, oasfalterade vägar, färjor</string>
 <string name="map_widget_show_ruler">Linjal</string>
-<string name="map_widget_appearance">Övrigt:</string>
+<string name="map_widget_appearance">Kvarvarande element:</string>
 <string name="map_widget_view_direction">Rörelseriktning</string>
 <string name="map_widget_transparent">Genomskinligt skal</string>
 <string name="monitoring_mode_off">Spela in GPX</string>
@@ -1329,4 +1329,5 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="app_mode_motorcycle">Motorcykel</string>
     <string name="app_mode_boat">Båt</string>
     <string name="app_mode_aircraft">Flyg</string>
+    <string name="map_widget_map_rendering">Kartrendering:</string>
     </resources>
