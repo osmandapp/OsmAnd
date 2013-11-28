@@ -124,7 +124,7 @@ public class NavigateAction {
 		final Location current = getLastKnownLocation();
 		Builder builder = new AlertDialog.Builder(mapActivity);
 		final TargetPointsHelper targets = app.getTargetPointsHelper();
-		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(app));
+		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(app.getSettings()));
 		values.remove(ApplicationMode.DEFAULT);
 		
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
@@ -363,7 +363,7 @@ public class NavigateAction {
 			ViewGroup parent, final View.OnClickListener onClickListener) {
 		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
-		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values((OsmandApplication) a.getApplication()));
+		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
 		if(!showDefault) {
 			values.remove(ApplicationMode.DEFAULT);
 		}

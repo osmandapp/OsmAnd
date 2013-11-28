@@ -26,18 +26,18 @@ public class ApplicationMode {
 	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).
 			icon(R.drawable.ic_pedestrian, R.drawable.ic_action_pedestrian_light, R.drawable.ic_action_parking_dark).reg();
 	
-	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
-			icon(R.drawable.ic_aircraft, R.drawable.ic_action_aircraft_light, R.drawable.ic_action_aircraft_dark).reg();
-	
-	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
-			icon(R.drawable.ic_sail_boat, R.drawable.ic_action_sail_boat_light, R.drawable.ic_action_sail_boat_dark).reg();
-	
-	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
-			icon(R.drawable.ic_trekking, R.drawable.ic_action_trekking_light, R.drawable.ic_action_trekking_dark).reg();
-	
-	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
-			carLocation().parent(CAR).
-			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_light, R.drawable.ic_action_motorcycle_dark).reg();
+//	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
+//			icon(R.drawable.ic_aircraft, R.drawable.ic_action_aircraft_light, R.drawable.ic_action_aircraft_dark).reg();
+//	
+//	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
+//			icon(R.drawable.ic_sail_boat, R.drawable.ic_action_sail_boat_light, R.drawable.ic_action_sail_boat_dark).reg();
+//	
+//	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
+//			icon(R.drawable.ic_trekking, R.drawable.ic_action_trekking_light, R.drawable.ic_action_trekking_dark).reg();
+//	
+//	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
+//			carLocation().parent(CAR).
+//			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_light, R.drawable.ic_action_motorcycle_dark).reg();
 	
 	
 	private static class ApplicationModeBuilder {
@@ -112,38 +112,27 @@ public class ApplicationMode {
 		this.stringKey = stringKey;
 	}
 	
-	public static List<ApplicationMode> getAplicationModes(ClientContext ctx) {
-		// TODO
-		OsmandSettings sets = ctx.getSettings();
-		return values;
-	}
-	
-	public static List<ApplicationMode> values(ClientContext ctx) {
-		// TODO
-		OsmandSettings sets = ctx.getSettings();
-		return values;
-	}
-	
 	public static List<ApplicationMode> values(OsmandSettings settings) {
 		// TODO
 		return values;
 	}
 	
 	public static List<ApplicationMode> allPossibleValues(ClientContext ctx) {
-		// TODO
-		OsmandSettings sets = ctx.getSettings();
 		return values;
 	}
 	
 	public static Set<ApplicationMode> allOf() {
+		// TODO 
 		return new HashSet<ApplicationMode>(values);
 	}
 	
 	public static Set<ApplicationMode> noneOf() {
+		// TODO 
 		return new HashSet<ApplicationMode>();
 	}
 	
 	public static Set<ApplicationMode> of(ApplicationMode... modes ) {
+		// TODO 
 		HashSet<ApplicationMode> ts = new HashSet<ApplicationMode>();
 		Collections.addAll(ts, modes);
 		return ts;
