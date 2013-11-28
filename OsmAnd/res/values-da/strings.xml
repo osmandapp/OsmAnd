@@ -1650,4 +1650,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="local_osm_changes_delete_all_confirm">Vil du slette %1$d OSM ændringer. Bekræft?</string>
     <string name="tip_faq_t">Besøg https://code.google.com/p/osmand/wiki/FAQ for at se ofte stillede spørgsmål.</string>
     <string name="tip_faq">Ofte stillede spørgsmål</string>
+    <string name="app_mode_hiking">Vandring</string>
+    <string name="app_mode_motorcycle">Motorcykel</string>
+    <string name="app_mode_boat">Båd</string>
+    <string name="app_mode_aircraft">Fly</string>
     </resources>
