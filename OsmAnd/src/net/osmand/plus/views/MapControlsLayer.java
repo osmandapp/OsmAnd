@@ -13,8 +13,10 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.views.ContextMenuLayer;	// CGM added
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -49,7 +51,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 
 	private OsmandMapTileView view;
-	private final MapActivity activity;
+	public final MapActivity activity;
 	private Handler showUIHandler;
 	
 	private boolean showZoomLevel = false;
@@ -213,33 +215,43 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void drawZoomLevel(Canvas canvas, RotatedTileBox tb, boolean drawZoomLevel) {
 		if (zoomShadow.getBounds().width() == 0) {
-			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * scaleCoefficient),
+			zoomShadow.setBounds(zoomOutButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * scaleCoefficient),
 					zoomInButton.getRight(), zoomInButton.getBottom());
 		}
 		zoomShadow.draw(canvas);
 		if (drawZoomLevel) {
 			String zoomText = tb.getZoom() + "";
 			float frac = tb.getZoomScale();
-			if (frac != 0) {
-				int ifrac = (int) (frac * 10);
-				boolean pos = ifrac > 0;
-				zoomText += (pos ? "+" : "-");
-				zoomText += Math.abs(ifrac) / 10;
-				if (ifrac % 10 != 0) {
-					zoomText += "." + Math.abs(ifrac) % 10;
-				}
-			}
+			zoomText += ";   " + fractionToPercent(frac);
 			float length = zoomTextPaint.measureText(zoomText);
 
-			ShadowText.draw(zoomText, canvas, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
+			ShadowText.draw(zoomText, canvas, (zoomOutButton.getLeft() + zoomInButton.getRight() - length - 2) / 2,
 					zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint, shadowColor);
 		} else {
 			int size = (int) (16 * scaleCoefficient);
 			int top = (int) (zoomInButton.getTop() - size - 4 * scaleCoefficient);
-			int left = (int) (zoomInButton.getLeft() + (zoomInButton.getWidth() - mapMagnifier.getWidth() - 2 * scaleCoefficient) / 2);
+			int left = (int) (zoomOutButton.getLeft() + (zoomInButton.getWidth() - mapMagnifier.getWidth() - 2 * scaleCoefficient) / 2);
 			// canvas density /2 ? size * 2
 			canvas.drawBitmap(mapMagnifier, null, new Rect(left, top, left + size * 2, top + size * 2), bitmapPaint);
 		}
+	}
+	
+	public String fractionToPercent(float fract){
+		String percent = null;
+		if(fract < -0.10){
+			percent = "75%";
+		}else if(fract  >+ -0.1 && fract < 0.2){
+			percent = "100%";
+		}else if(fract  >+ 0.5 && fract < 0.8){
+			percent = "150%";
+		}else if(fract  >+ 0.9 && fract < 1.1){
+			percent = "200%";
+		}else if(fract  >+ 1.3 && fract < 1.6){
+			percent = "300%";
+		}else {
+			percent = "400%";
+		}
+		return percent;
 	}
 	
 	private void hideZoomLevelInTime(){
@@ -363,7 +375,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomOutButton.setBackgroundResource(R.drawable.map_zoom_out);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
-		
 		params.setMargins(0, 0, minimumWidth , 0);
 		zoomOutButton.setContentDescription(ctx.getString(R.string.zoomOut));
 		parent.addView(zoomOutButton, params);
@@ -392,9 +403,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 		zoomOutButton.setOnLongClickListener(listener);
 	}
+	
+//Added for Magnifier Button plugin support. Can be removed if long click does not open 
+// magnification setting dialog. This can be assigned to separate magnification buttons.
+	public Button getzoomInButton(){	
+		return zoomInButton;
+	}
+	
+	public Button getzoomOutButton(){
+		return zoomOutButton;
+	}
 
-
-	private static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {
+//	private static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {	//CGM change
+	public View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {
 		final View.OnLongClickListener listener = new View.OnLongClickListener() {
 
 			@Override
@@ -441,6 +462,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 								view.getAnimatedDraggingThread().startZooming(view.getZoom(),
 										view.getSettingsZoomScale(), false);
 								dialog.dismiss();
+								activity.getMapLayers().getContextMenuLayer().initLayer(view);	//to support map magnification
+								for (int j = 0; j <= activity.getMapView().getLayers().size(); j++) {
+									if (activity.getMapView().getLayers().get(j) instanceof DistanceCalculatorPlugin.DistanceCalculatorLayer) {
+										activity.getMapView().getLayers().get(j).initLayer(view);	//to support map magnification
+										break;
+									}
+								}
 							}
 						});
 				bld.show();
@@ -448,10 +476,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		};
 		return listener;
+		
 	}
 	
-
-
 
 	/////////////////  Transparency bar /////////////////////////
 	private void initTransparencyBar(final OsmandMapTileView view, FrameLayout parent) {

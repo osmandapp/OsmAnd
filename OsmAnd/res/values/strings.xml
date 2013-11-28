@@ -8,7 +8,9 @@
          If you are making/correcting English translations make sure:
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
+    -->   
+    <string name="map_zoom_level">Map zoom level</string>
+    <string name="map_widget_zoom_factors">Map zoom and magnification</string>
     <string name="tip_faq_t">Please visit https://code.google.com/p/osmand/wiki/FAQ to see frequently asked questions.</string>
     <string name="tip_faq">Frequently Asked Questions</string>
     <string name="local_osm_changes_delete_all_confirm">You are going to delete %1$d osm changes. Are you sure?</string>
@@ -28,7 +30,18 @@
 	<string name="auto_zoom_farthest">To long-range</string>
 	<string name="map_magnifier">Map magnifier</string>
 	<string name="base_world_map">World basemap</string>
-	<string name="tip_map_styles">Map Styles</string>
+    <string name="display_zoom_plugin_description">Enable display zooming independent of map detail level.</string>
+    <string name="display_zoom_plugin_name">Display Zoom Plugin</string>
+    <string name="measurement_point_menu_show_latlon">Show point lat/lon </string>
+    <string name="measurement_point_menu_insert_point">Insert point before selected point</string>
+    <string name="measurement_point_menu_insert_note">Add/edit note</string>
+    <string name="measurement_point_menu_edit_point_selection_radius">Change the radius of the point selection area</string>
+    <string name="measurement_track_distance">Total Distance: </string>
+    <string name="measurement_subTrack_distance">Subtrack Distance: </string>
+    <string name="measurement_point_note">Enter/edit note to assign to point</string>
+    <string name="plan_selection_size_prompt">Select the desired radius (in pixels) of the point selection area</string>
+    <string name="plan_selection_size_warning">Radius of the point selection area set to </string>
+    <string name="tip_map_styles">Map Styles</string>
 	<string name="tip_map_styles_t">OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
 		\n\nOther than the balanced \'default\' map style, you may in \'Menu\' → \'Configure screen\' → \'Map Style\' select for example
 		\n\t* The \'Touring view\' style, which contains the most detailed information feasable for traveling and touring, including optimization for professional drivers (higher contrast, distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
@@ -138,8 +151,9 @@
     <string name="osmand_distance_planning_plugin_description">Create paths (or use / modify existing GPX files) to measure the distance between points. Save as GPX, can be used to plan GPX routes.</string>
     <string name="osmand_distance_planning_plugin_name">Distance calculator &amp; Planning Tool</string>
     <string name="use_distance_measurement_help">* Tap to mark a point.\n 
-        * Press and hold on the map to delete previous point.\n
-        * Press and hold on point to view and attach description.\n
+        * Tap a point to show point details and notes.\n
+        * Long press a point or tap its information text box to show an options menu (attach note, insert point, etc.).\n
+        * Press and drag a point to change its location.\n
         * Click on measurement widget to see more actions.</string>
     <string name="default_buttons_do_not_show_again">Do not show again</string>
     <string name="distance_measurement_start_editing">Start editing</string>
