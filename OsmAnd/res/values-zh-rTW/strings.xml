@@ -123,7 +123,7 @@
 	<string name="avoid_in_routing_descr">避開收費道路、顛頗路面、渡輪</string>
 	<string name="map_widget_fluorescent">螢光導航路線</string>
 	<string name="map_widget_show_ruler">比例尺</string>
-	<string name="map_widget_appearance">雜項：</string>
+	<string name="map_widget_appearance">其餘的元件：</string>
 	<string name="map_widget_view_direction">目視方向</string>
 	<string name="map_widget_transparent">透明面版</string>
 	<string name="monitoring_mode_off">記錄 GPX</string>
@@ -1619,4 +1619,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="app_mode_motorcycle">機車</string>
     <string name="app_mode_boat">船</string>
     <string name="app_mode_aircraft">飛航</string>
+    <string name="map_widget_map_rendering">地圖繪製：</string>
     </resources>
