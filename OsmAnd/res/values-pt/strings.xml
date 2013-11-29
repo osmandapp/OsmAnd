@@ -466,7 +466,7 @@
   <string name="map_settings_descr">Configure a exibição do mapa</string>
   <string name="osmand_rastermaps_plugin_description">This plugin facilitates using a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
   <string name="osmand_background_plugin_description">This plugin allows tracking or navigation in sleep (screen off) mode by periodically waking up the GPS device.</string>
-  <string name="osmand_accessibility_description">This plugin configures special accessibility features.</string>
+  <string name="osmand_accessibility_description">Mostrar configurações de características especiais de acessibilidade.</string>
   <string name="extra_settings">Configurações avançadas</string>
   <string name="osmand_monitoring_description">This plugin facilitates recording your trips to GPX files or live tracking using a web service.</string>
   <string name="osmand_extra_settings_description">This plugin provides advanced map configuration and some device-specific settings.</string>
@@ -577,12 +577,12 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="local_openstreetmap_show">Mostrar no mapa</string>
   <string name="local_openstreetmap_upload">Enviar a modificação OSM</string>
   <string name="local_openstreetmap_delete">Apagar modificação</string>
-  <string name="local_openstreetmap_descr_title">Asynchronous OSM Editing:</string>
+  <string name="local_openstreetmap_descr_title">Edição assincrona de OSM:</string>
   <string name="local_openstreetmap_settings">POI/Bugs armazenados na memória local</string>
   <string name="local_openstreetmap_settings_descr">Mostrar e gerir Pontos de Interesse e Erros guardados na memória local</string>
   <string name="live_monitoring_descr">Enviar rota para um serviço na Internet</string>
   <string name="live_monitoring">Online live tracking</string>
-  <string name="live_monitoring_interval_descr">Specify live tracking interval</string>
+  <string name="live_monitoring_interval_descr">Especificar intervalo de monitoramento ao vivo</string>
   <string name="live_monitoring_interval">Live tracking interval</string>
   <string name="live_monitoring_url_descr">Especifique o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, data/hora={2}, hdop={3}, altitude={4}, velocidade={5}, bearing={6}</string>
   <string name="live_monitoring_url">Live tracking web address</string>
@@ -1247,9 +1247,9 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="other_location">Outro</string>
     <string name="local_indexes_cat_srtm">Dados de linhas de contorno</string>
     <string name="osmodroid_plugin_description">Plugin  OsMoDroid é uma extensão do OsmAnd para aplicação OsModroid para online tracking. Mais informações sobre o serviço em http://esya.ru.</string>
-    <string name="tip_altitude_offset_t">Maioria dos dispositivos GPS reportam medidas de altitude no sistema de referência elipsoidal WGS84, para o qual a conversão para sistemas usados localmente requerem a correção dependente de posição.
-		\n\tUma melhor aproximação para esses sistmas locais é a referêncai EGM96. OsmAnd agora tamb[em suporta a exibição automática de altitudes no sistema EGM96.
-		\n\tPara obtê-lo, façao o download do arquivo WW15MGH.DAC via Gerenciamento de Dados (original em http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+    <string name="tip_altitude_offset_t">A Maioria dos dispositivos GPS reportam medidas de altitude no sistema de referência elipsoidal WGS84, para o qual a conversão para sistemas usados localmente requerem a correção dependente de posição.
+		\n\tUma melhor aproximação para esses sistmas locais é a referência EGM96. OsmAnd agora também suporta a exibição automática de altitudes no sistema EGM96.
+		\n\tPara obtê-lo, faça o download do arquivo WW15MGH.DAC via Gerenciamento de Dados (original em http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="osmand_play_title_30_chars">Mapas OsmAnd &amp; Navegação</string>
@@ -1483,7 +1483,7 @@ Lista dos países apoiado (basicamente todo o mundo !) : ↵
 Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbuda, Argentina , Armênia , Aruba, Austrália, Áustria, Azerbaijão , Bahamas , Bahrein, Bangladesh , Barbados, Belarus , Bélgica , Belize, Benin , Bermudas , Butão, Bolívia, Bonaire, Bósnia e Herzegovina , Botswana, Brasil , Ilhas Virgens Britânicas , Brunei, Bulgária , Burkina Faso , Burundi, Camboja , Camarões , Canadá , Cabo Verde, República Centro Africano , Chade, Chile , China, Colombia , Comoros , Congo , Costa Rica , Costa do Marfim , Croácia , Cuba, Curaçao, Chipre, República Checa , Dinamarca , Djibuti, Dominica, República Dominicana, Equador , Egito, El Salvador, Guiné Equatorial , Eritréia, Estônia , Etiópia , Fiji, Finlândia, França, Guiana Francesa, Polinésia , Gabão, Gâmbia, Geórgia , Alemanha , Gana, Gibraltar , Grécia, Greenland , Grenada , Guadalupe , Guam , Guatemala, Guernsey , Guiné , Guiné-Bissau , Guiana , Haiti, Vaticano , Honduras , Hong Kong, Hungria, Islândia, Índia , Indonésia , Irã, Iraque , Irlanda, Ilha de Man , Israel, Itália , Jamaica, Japão , Jersey , Jordânia, Cazaquistão , Quênia , Kiribati , Coréia do Norte e Coréia do Sul , Kuwait, Quirguistão , Laos, Letônia , Líbano , Lesoto, Libéria , Líbia, Liechtenstein , Lituânia, Luxemburgo , Macau, Macedónia , Madagáscar, Malawi , Malásia, Maldivas , Mali, Malta , Martinica, Mauritânia, Maurícias , Mayotte , México, Micronésia, Moldávia , Mônaco , Mongólia , Montenegro, Montserrat, Marrocos, Moçambique , Myanmar, Namíbia , Nauru , Nepal, Holanda , Antilhas Holandesas , Nova Caledônia , Nova Zelândia, Nicarágua , Níger, Nigéria , Noruega , Omã, Paquistão , Palau, Território da Palestina , Panamá , Papua Nova Guiné, Paraguai , Peru, Filipinas, Polônia , Portugal , Porto Rico , Qatar, Romênia, Rússia, Ruanda, Saint Barthelemy , Santa Helena , São Cristóvão e Nevis , Santa Lúcia, Saint Martin, Saint Pierre e Miquelon , São Vicente e Granadinas, Samoa , San Marino , Arábia Saudita, Senegal , Sérvia , Seychelles, Serra Leoa, Cingapura , Eslováquia, Eslovênia , Somália, África do Sul, Geórgia do Sul , Sudão do Sul, Espanha , Sri Lanka , Sudão, Suriname , Suazilândia , Suécia, Suíça , Síria, Taiwan , Tajiquistão, Tanzânia, Tailândia , Timor -Leste , Togo, Tokelau , Tonga , Trinidad e Tobago , Tunísia, Turquia , Turcomenistão, Tuvalu , Uganda, Ucrânia , Emirados Árabes Unidos , Reino Unido (UK) , Estados Unidos da América (EUA), Uruguai , Uzbequistão , Vanuatu , Venezuela, Vietnam , Wallis e Futuna , Saara Ocidental , Yemen , Zâmbia, Zimbabwe. ↵
 →
 	</string>
-	<string name="tip_map_styles_t">OsmAnd suporta exibindo os mapas offline vetor em diferentes estilos de mapas às suas necessidades para: ↵
+	<string name="tip_map_styles_t">OsmAnd permite exibir mapas vetoriais, sem necessitar de conexão com a internet, em diferentes estilos dependendo das suas necessidades: ↵
 → → \ n \ NOTHER que o \ "default \" estilo mapa equilibrado, você pode, em \'Menu \' → \'Configurar tela \' → \'Map Style \' escolha por exemplo ↵
 → → \ n \ t * O \'Touring vista \' estilo, que contém as informações mais detalhadas feasable para viagens e turismo, incluindo a optimização dos motoristas profissionais (maior contraste, estradas distintas), as opções para caminhadas Alpine (escala SAC), ciclovias, apoio símbolo caminhadas, etc ↵
 → → \ n \ t * \'estradas de alto contraste \' mostra estradas em cores muito acentuadas para situações de iluminação ambiente brilhantes ↵
@@ -1500,7 +1500,17 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="gps_status_eclipsim">Status GPS</string>
     <string name="default_and">e</string>
     <string name="default_or">ou</string>
-	<string name="route_is_too_long">A rota é, possivelmente, demasiado longa para ser calculado pelo router offline OsmAnd. ↵
-      → Em média, o encaminhamento off-line é possível apenas entre os pontos de até 200 km de distância. Por favor, adicione um ou mais pontos intermédios ao calcular a rota.↵</string>
+	<string name="route_is_too_long">A rota é, possivelmente, muito longa para ser calculada pelo roteamento off-line do OsmAnd. ↵
+      → Em média, o encaminhamento off-line é possível apenas entre os pontos de até 200km de distância. Por favor, adicione um ou mais pontos intermediários ao calcular a rota.↵</string>
 	<string name="osmodroid_refresh">Actualizar canais</string>
-    </resources>
+    <string name="map_widget_map_rendering">Renderização do Mapa:</string>
+    <string name="app_mode_hiking">Caminhadas</string>
+    <string name="app_mode_motorcycle">Motocicleta</string>
+    <string name="app_mode_boat">Barco</string>
+    <string name="app_mode_aircraft">Aeronave</string>
+    <string name="tip_faq_t">Por favor, visite https://code.google.com/p/osmand/wiki/FAQ ver as perguntas mais frequentes.</string>
+    <string name="tip_faq">Perguntas Frequentes</string>
+    <string name="local_osm_changes_delete_all_confirm">Você vai apagar %1$d mudanças no arquivo osm. Você tem certeza?</string>
+    <string name="local_osm_changes_delete_all">Deletar Tudo</string>
+    <string name="amenity_type_osmwiki">Wikipedia (off-line)</string>
+	</resources>
