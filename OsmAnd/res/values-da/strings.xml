@@ -203,7 +203,7 @@
 	<string name="avoid_in_routing_descr">Undgå betalingsveje, grusveje, færger</string>
 	<string name="map_widget_fluorescent">Fluorescerende ruter</string>
 	<string name="map_widget_show_ruler">Lineal</string>
-	<string name="map_widget_appearance">Diverse:</string>
+	<string name="map_widget_appearance">Resterende elementer:</string>
 	<string name="map_widget_view_direction">Synsretning</string>
 	<string name="map_widget_transparent">Gennemsigtig layout</string>
 	<string name="monitoring_mode_off">Optag 
@@ -1654,4 +1654,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="app_mode_motorcycle">Motorcykel</string>
     <string name="app_mode_boat">Båd</string>
     <string name="app_mode_aircraft">Fly</string>
+    <string name="map_widget_map_rendering">Kort optegning:</string>
     </resources>
