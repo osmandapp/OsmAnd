@@ -739,4 +739,8 @@
 	</string>
 	<string name="native_app_allocated_memory_descr">المساحة المحجوزة من الذّاكرة الأصلية %1$s MB (Dalvik %2$s MB, other %3$s MB).
 		الذّاكرة النّسبية %4$s MB (الأقصى لأندرويد %5$s MB, Dalvik %6$s MB).</string>
-	</resources>
+	<string name="app_mode_hiking">المشي لمسافات طويلة</string>
+    <string name="app_mode_motorcycle">دراجة نارية</string>
+    <string name="app_mode_boat">زورق</string>
+    <string name="app_mode_aircraft">الطائرات</string>
+    </resources>
