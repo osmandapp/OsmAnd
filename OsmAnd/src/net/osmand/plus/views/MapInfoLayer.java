@@ -423,7 +423,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		View confirmDialog = view.inflate(view.getContext(), R.layout.configuration_dialog, null);
 		final ListView lv = (ListView) confirmDialog.findViewById(android.R.id.list);
 		NavigateAction.prepareAppModeView(map, selected, true, 
-				(ViewGroup) confirmDialog.findViewById(R.id.TopBar), 
+				(ViewGroup) confirmDialog.findViewById(R.id.TopBar), false, 
 				new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

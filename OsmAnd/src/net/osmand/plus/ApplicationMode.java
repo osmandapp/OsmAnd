@@ -6,11 +6,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.osmand.StateChangedListener;
+
 import android.content.Context;
 
 
 public class ApplicationMode {
 	private static List<ApplicationMode> values = new ArrayList<ApplicationMode>();
+	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<ApplicationMode>();
+	private static boolean listenerRegistered = false;
 	/*
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
 	 */
@@ -26,18 +30,18 @@ public class ApplicationMode {
 	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).
 			icon(R.drawable.ic_pedestrian, R.drawable.ic_action_pedestrian_light, R.drawable.ic_action_parking_dark).reg();
 	
-//	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
-//			icon(R.drawable.ic_aircraft, R.drawable.ic_action_aircraft_light, R.drawable.ic_action_aircraft_dark).reg();
-//	
-//	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
-//			icon(R.drawable.ic_sail_boat, R.drawable.ic_action_sail_boat_light, R.drawable.ic_action_sail_boat_dark).reg();
-//	
-//	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
-//			icon(R.drawable.ic_trekking, R.drawable.ic_action_trekking_light, R.drawable.ic_action_trekking_dark).reg();
-//	
-//	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
-//			carLocation().parent(CAR).
-//			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_light, R.drawable.ic_action_motorcycle_dark).reg();
+	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
+			icon(R.drawable.ic_aircraft, R.drawable.ic_action_aircraft_light, R.drawable.ic_action_aircraft_dark).reg();
+	
+	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
+			icon(R.drawable.ic_sail_boat, R.drawable.ic_action_sail_boat_light, R.drawable.ic_action_sail_boat_dark).reg();
+	
+	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
+			icon(R.drawable.ic_trekking, R.drawable.ic_action_trekking_light, R.drawable.ic_action_trekking_dark).reg();
+	
+	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
+			carLocation().parent(CAR).
+			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_light, R.drawable.ic_action_motorcycle_dark).reg();
 	
 	
 	private static class ApplicationModeBuilder {
@@ -113,11 +117,28 @@ public class ApplicationMode {
 	}
 	
 	public static List<ApplicationMode> values(OsmandSettings settings) {
-		// TODO
-		return values;
+		if (cachedFilteredValues.isEmpty()) {
+			if (!listenerRegistered) {
+				settings.AVAILABLE_APP_MODES.addListener(new StateChangedListener<String>() {
+					@Override
+					public void stateChanged(String change) {
+						cachedFilteredValues = new ArrayList<ApplicationMode>();
+					}
+				});
+				listenerRegistered = true;
+			}
+			String available = settings.AVAILABLE_APP_MODES.get();
+			cachedFilteredValues = new ArrayList<ApplicationMode>();
+			for (ApplicationMode v : values) {
+				if (available.indexOf(v.getStringKey() + ",") != -1 || v == DEFAULT) {
+					cachedFilteredValues.add(v);
+				}
+			}
+		}
+		return cachedFilteredValues;
 	}
 	
-	public static List<ApplicationMode> allPossibleValues(ClientContext ctx) {
+	public static List<ApplicationMode> allPossibleValues(OsmandSettings settings) {
 		return values;
 	}
 	

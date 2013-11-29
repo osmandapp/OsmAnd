@@ -570,6 +570,8 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES = new BooleanPreference("use_internet_to_download_tiles", true).makeGlobal().cache();
 	
+	public final OsmandPreference<String> AVAILABLE_APP_MODES =  new StringPreference("available_application_modes", "car,bicycle,pedestrian,").makeGlobal().cache();
+	
 	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>("default_application_mode", ApplicationMode.DEFAULT) {
 
 		@Override

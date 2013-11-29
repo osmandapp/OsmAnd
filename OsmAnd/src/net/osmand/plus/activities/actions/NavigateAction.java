@@ -360,52 +360,63 @@ public class NavigateAction {
     
     
 	public static View prepareAppModeView(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
-			ViewGroup parent, final View.OnClickListener onClickListener) {
-		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
+			ViewGroup parent, final boolean singleSelection, final View.OnClickListener onClickListener) {
 		OsmandSettings settings = ((OsmandApplication) a.getApplication()).getSettings();
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(settings));
 		if(!showDefault) {
 			values.remove(ApplicationMode.DEFAULT);
 		}
+		selected.add(settings.getApplicationMode());
+		return prepareAppModeView(a, values, selected, parent, singleSelection, onClickListener);
+		
+	}
+	
+	public static View prepareAppModeView(Activity a, final List<ApplicationMode> values , final Set<ApplicationMode> selected, 
+			ViewGroup parent, final boolean singleSelection, final View.OnClickListener onClickListener) {
+		LinearLayout ll = (LinearLayout) a.getLayoutInflater().inflate(R.layout.mode_toggles, parent);
 		final ToggleButton[] buttons = createToggles(values, ll, a); 
-		ApplicationMode appMode = settings.getApplicationMode();
 		for (int i = 0; i < buttons.length; i++) {
 			if (buttons[i] != null) {
 				final int ind = i;
 				ToggleButton b = buttons[i];
 				final ApplicationMode buttonAppMode = values.get(i);
-				b.setChecked(appMode == buttonAppMode);
-				if(appMode == buttonAppMode) {
-					selected.add(appMode);
-				}
+				b.setChecked(selected.contains(buttonAppMode));
 				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						if (isChecked) {
-							selected.clear();
-							for (int j = 0; j < buttons.length; j++) {
-								if (buttons[j] != null) {
-									if(ind == j) {
-										selected.add(values.get(j));
+						if (!singleSelection) {
+							if (isChecked) {
+								selected.clear();
+								for (int j = 0; j < buttons.length; j++) {
+									if (buttons[j] != null) {
+										if (ind == j) {
+											selected.add(values.get(j));
+										}
+										if (buttons[j].isChecked() != (ind == j)) {
+											buttons[j].setChecked(ind == j);
+										}
 									}
-									if (buttons[j].isChecked() != (ind == j)) {
-										buttons[j].setChecked(ind == j);
+								}
+							} else {
+								// revert state
+								boolean revert = true;
+								for (int j = 0; j < buttons.length; j++) {
+									if (buttons[j] != null) {
+										if (buttons[j].isChecked()) {
+											revert = false;
+											break;
+										}
 									}
+								}
+								if (revert) {
+									buttons[ind].setChecked(true);
 								}
 							}
 						} else {
-							// revert state
-							boolean revert = true;
-							for (int j = 0; j < buttons.length; j++) {
-								if (buttons[j] != null) {
-									if (buttons[j].isChecked()) {
-										revert = false;
-										break;
-									}
-								}
-							}
-							if (revert) {
-								buttons[ind].setChecked(true);
+							if (isChecked) {
+								selected.add(buttonAppMode);
+							} else {
+								selected.remove(buttonAppMode);
 							}
 						}
 						if(onClickListener != null) {
@@ -482,7 +493,7 @@ public class NavigateAction {
 		return mapActivity.getString(resId);
 	}
 	
-	private ApplicationMode getAppMode(ToggleButton[] buttons, OsmandSettings settings, List<ApplicationMode> modes){
+	private static ApplicationMode getAppMode(ToggleButton[] buttons, OsmandSettings settings, List<ApplicationMode> modes){
 		for (int i = 0; i < buttons.length; i++) {
 			if (buttons[i] != null && buttons[i].isChecked() && i < modes.size()) {
 				return modes.get(i);
