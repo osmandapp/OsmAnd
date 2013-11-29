@@ -135,7 +135,8 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="tip_navigation">ナビゲーション</string>
      <string name="tip_navigation_t">\tナビゲーション(経路案内)を始める前に
 目的地点をまず選ぶ必要があります。その後でマップ上の
-\'メニュー\' -&gt; \'方向\' を押してナビゲーションタイプを選んでください。</string>
+\'メニュー\' -&gt; \'案内開始\' を押してナビゲーションタイプを選んでください。
+	</string>
 
      <string name="tip_search">検索</string>
      <string name="tip_search_t">\t場所をマップ上で直接、住所で、位置で、POIとして、
@@ -498,7 +499,7 @@ POIの更新は利用できません</string>
      <string name="follow">ナビゲーション開始</string>
      <string name="recalculate_route_to_your_location">トランスポートモード：</string>
      <string name="mark_final_location_first">最初に目的地を選んでください</string>
-     <string name="get_directions">方向</string>
+     <string name="get_directions">案内開始</string>
  <string name="show_gps_status">GPSステータスを表示</string>
      <string name="opening_hours">営業時間</string>
      <string name="opening_changeset">変更セットを開いています…</string>
