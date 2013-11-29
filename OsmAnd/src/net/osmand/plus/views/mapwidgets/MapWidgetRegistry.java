@@ -42,7 +42,7 @@ public class MapWidgetRegistry {
 			return cmp;
 		}
 	});
-	private Map<ApplicationMode, Set<String>> visibleElements = new LinkedHashMap<ApplicationMode, Set<String>>();
+	private Map<ApplicationMode, Set<String>> visibleElementsFromSettings = new LinkedHashMap<ApplicationMode, Set<String>>();
 	private final OsmandSettings settings;
 			
 	
@@ -52,10 +52,10 @@ public class MapWidgetRegistry {
 		for(ApplicationMode ms : ApplicationMode.values(settings) ) {
 			String mpf = settings.MAP_INFO_CONTROLS.getModeValue(ms);
 			if(mpf.equals("")) {
-				visibleElements.put(ms, null);
+				visibleElementsFromSettings.put(ms, null);
 			} else {
 				LinkedHashSet<String> set = new LinkedHashSet<String>();
-				visibleElements.put(ms, set);
+				visibleElementsFromSettings.put(ms, set);
                 Collections.addAll(set, mpf.split(";"));
 			}
 		}
@@ -65,11 +65,9 @@ public class MapWidgetRegistry {
 	public MapWidgetRegInfo registerAppearanceWidget(int drawable, int messageId, String key, 
 			OsmandPreference<?> pref) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.defaultModes = ApplicationMode.noneOf();
-		ii.defaultCollapsible = null;
 		ii.key = key;
 		ii.preference = pref;
-		ii.visibleModes = ApplicationMode.noneOf(); 
+		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
 		ii.visibleCollapsible = null;
 		ii.drawable = drawable;
 		ii.messageId = messageId;
@@ -89,12 +87,10 @@ public class MapWidgetRegistry {
 	public MapWidgetRegInfo registerAppearanceWidget(int drawable, String message, String key, 
 			CommonPreference<?> pref, String subcategory) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.defaultModes = ApplicationMode.noneOf();
-		ii.defaultCollapsible = null;
 		ii.key = key;
 		ii.category = subcategory;
 		ii.preference = pref;
-		ii.visibleModes = ApplicationMode.noneOf(); 
+		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
 		ii.visibleCollapsible = null;
 		ii.drawable = drawable;
 		ii.messageId = message.hashCode();
@@ -103,17 +99,14 @@ public class MapWidgetRegistry {
 		return ii;
 	}
 	
-	public MapWidgetRegInfo registerTopWidget(View m, int drawable, int messageId, String key, int left,
-			Set<ApplicationMode> appDefaultModes, int priorityOrder) {
+	public MapWidgetRegInfo registerTopWidget(View m, int drawable, int messageId, String key, int left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.defaultModes = new LinkedHashSet<ApplicationMode>(appDefaultModes);
-		ii.defaultCollapsible = null;
 		ii.key = key;
-		ii.visibleModes = ApplicationMode.noneOf(); 
+		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
 		ii.visibleCollapsible = null;
 		for(ApplicationMode ms : ApplicationMode.values(settings) ) {
-			boolean def = appDefaultModes.contains(ms);
-			Set<String> set = visibleElements.get(ms);
+			boolean def = ms.isWidgetVisible(key);
+			Set<String> set = visibleElementsFromSettings.get(ms);
 			if (set != null) {
 				if (set.contains(key)) {
 					def = true;
@@ -138,18 +131,15 @@ public class MapWidgetRegistry {
 	
 	
 	
-	public void registerSideWidget(BaseMapWidget m, int drawable, int messageId, String key, boolean left,
-			Set<ApplicationMode> appDefaultModes, Set<ApplicationMode> defaultCollapsible, int priorityOrder) {
+	public void registerSideWidget(BaseMapWidget m, int drawable, int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
-		ii.defaultModes = new LinkedHashSet<ApplicationMode>(appDefaultModes);
-		ii.defaultCollapsible = new LinkedHashSet<ApplicationMode>(defaultCollapsible);
 		ii.key = key;
-		ii.visibleModes = ApplicationMode.noneOf(); 
-		ii.visibleCollapsible = ApplicationMode.noneOf();
+		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
+		ii.visibleCollapsible = new LinkedHashSet<ApplicationMode>();
 		for(ApplicationMode ms : ApplicationMode.values(settings) ) {
-			boolean collapse = defaultCollapsible.contains(ms);;
-			boolean def = appDefaultModes.contains(ms);
-			Set<String> set = visibleElements.get(ms);
+			boolean collapse = ms.isWidgetCollapsible(key);
+			boolean def = ms.isWidgetVisible(key);
+			Set<String> set = visibleElementsFromSettings.get(ms);
 			if(set != null) {
 				if (set.contains(key)) {
 					def = true;
@@ -202,17 +192,17 @@ public class MapWidgetRegistry {
 			boolean visible = m.visible(mode);
 			boolean collapseEnabled = m.collapseEnabled(mode);
 			boolean collapse = m.visibleCollapsed(mode);
-			if (this.visibleElements.get(mode) == null) {
+			if (this.visibleElementsFromSettings.get(mode) == null) {
 				LinkedHashSet<String> set = new LinkedHashSet<String>();
 				restoreModes(set, left, mode);
 				restoreModes(set, right, mode);
 				restoreModes(set, top, mode);
-				this.visibleElements.put(mode, set);
+				this.visibleElementsFromSettings.put(mode, set);
 			}
 			// clear everything
-			this.visibleElements.get(mode).remove(m.key);
-			this.visibleElements.get(mode).remove("+" + m.key);
-			this.visibleElements.get(mode).remove("-" + m.key);
+			this.visibleElementsFromSettings.get(mode).remove(m.key);
+			this.visibleElementsFromSettings.get(mode).remove("+" + m.key);
+			this.visibleElementsFromSettings.get(mode).remove("-" + m.key);
 			m.visibleModes.remove(mode);
 			if (m.visibleCollapsible != null) {
 				m.visibleCollapsible.remove(mode);
@@ -220,16 +210,16 @@ public class MapWidgetRegistry {
 			if (visible || collapse) {
 				if (collapseEnabled && !collapse) {
 					m.visibleCollapsible.add(mode);
-					this.visibleElements.get(mode).add("+" + m.key);
+					this.visibleElementsFromSettings.get(mode).add("+" + m.key);
 				} else {
-					this.visibleElements.get(mode).add("-" + m.key);
+					this.visibleElementsFromSettings.get(mode).add("-" + m.key);
 				}
 			} else {
 				m.visibleModes.add(mode);
-				this.visibleElements.get(mode).add("" + m.key);
+				this.visibleElementsFromSettings.get(mode).add("" + m.key);
 			}
 			StringBuilder bs = new StringBuilder();
-			for (String ks : this.visibleElements.get(mode)) {
+			for (String ks : this.visibleElementsFromSettings.get(mode)) {
 				bs.append(ks).append(";");
 			}
 			settings.MAP_INFO_CONTROLS.set(bs.toString());
@@ -290,11 +280,12 @@ public class MapWidgetRegistry {
 					ri.visibleCollapsible.remove(mode);
 				}
 				ri.visibleModes.remove(mode);
-				if (ri.defaultCollapsible != null && ri.defaultCollapsible.contains(mode)) {
-					ri.visibleCollapsible.add(mode);
-				}
-				if (ri.defaultModes.contains(mode)) {
-					ri.visibleModes.add(mode);
+				if (mode.isWidgetVisible(ri.key)) {
+					if (mode.isWidgetCollapsible(ri.key)) {
+						ri.visibleCollapsible.add(mode);
+					} else {
+						ri.visibleModes.add(mode);
+					}
 				}
 			}
 		}
@@ -306,7 +297,7 @@ public class MapWidgetRegistry {
 		resetDefault(appMode, right);
 		resetDefault(appMode, top);
 		resetDefault(appMode, appearanceWidgets);
-		this.visibleElements.put(appMode, null);
+		this.visibleElementsFromSettings.put(appMode, null);
 		settings.MAP_INFO_CONTROLS.set("");
 	}
 	
@@ -326,8 +317,6 @@ public class MapWidgetRegistry {
 		private String key;
 		private int position;
 		private String category;
-		private Set<ApplicationMode> defaultModes;
-		private Set<ApplicationMode> defaultCollapsible;
 		private Set<ApplicationMode> visibleModes;
 		private Set<ApplicationMode> visibleCollapsible;
 		private OsmandPreference<?> preference = null;

@@ -3,15 +3,17 @@ package net.osmand.plus;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import net.osmand.StateChangedListener;
-
 import android.content.Context;
 
 
 public class ApplicationMode {
+	private static Map<String, Set<ApplicationMode>> widgets = new LinkedHashMap<String, Set<ApplicationMode>>(); 
 	private static List<ApplicationMode> values = new ArrayList<ApplicationMode>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<ApplicationMode>();
 	private static boolean listenerRegistered = false;
@@ -42,6 +44,39 @@ public class ApplicationMode {
 	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
 			carLocation().parent(CAR).
 			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_light, R.drawable.ic_action_motorcycle_dark).reg();
+	
+	static {
+		ApplicationMode[] exceptPedestrian = new ApplicationMode[] { DEFAULT, CAR, BICYCLE, BOAT, AIRCRAFT };
+		ApplicationMode[] exceptAirBoat = new ApplicationMode[] { DEFAULT, CAR, BICYCLE};
+		ApplicationMode[] exceptCarBoatAir = new ApplicationMode[] { DEFAULT, BICYCLE, PEDESTRIAN };
+		ApplicationMode[] pedestrian = new ApplicationMode[] { PEDESTRIAN };
+		
+		ApplicationMode[] all = null;
+		ApplicationMode[] none = new ApplicationMode[] {};
+		
+		// left
+		regWidget("next_turn", exceptPedestrian);
+		regWidget("next_turn_small", pedestrian);
+		regWidget("next_next_turn", exceptPedestrian);
+		
+		// right		
+		regWidget("intermediate_distance", all);
+		regWidget("distance", all);
+		regWidget("time", all);
+		regWidget("speed", exceptPedestrian);
+		regWidget("max_speed", exceptAirBoat);
+		regWidget("gps_info", exceptCarBoatAir);
+		regWidget("altitude", exceptCarBoatAir);
+		
+		// top
+		regWidget("compass", all);
+		regWidget("config", all);
+		regWidget("street_name", exceptAirBoat);
+		regWidget("back_to_location", all);
+		regWidget("monitoring_services", exceptCarBoatAir);
+		regWidget("bgService", none);
+		regWidget("layers", none);
+	}
 	
 	
 	private static class ApplicationModeBuilder {
@@ -142,22 +177,38 @@ public class ApplicationMode {
 		return values;
 	}
 	
-	public static Set<ApplicationMode> allOf() {
-		// TODO 
-		return new HashSet<ApplicationMode>(values);
+	
+	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
+	public static Set<ApplicationMode> regWidget(String widgetId, ApplicationMode... am) {
+		HashSet<ApplicationMode> set = new HashSet<ApplicationMode>();
+		if(am == null) {
+			set.addAll(values); 
+		} else {
+			Collections.addAll(set, am);
+		}
+		for(ApplicationMode m : values) {
+			// add derived modes
+			if(set.contains(m.getParent())) {
+				set.add(m);
+			}
+		}
+		widgets.put(widgetId, set);
+		return set;
 	}
 	
-	public static Set<ApplicationMode> noneOf() {
-		// TODO 
-		return new HashSet<ApplicationMode>();
+	public boolean isWidgetCollapsible(String key) {
+		return false;
 	}
 	
-	public static Set<ApplicationMode> of(ApplicationMode... modes ) {
-		// TODO 
-		HashSet<ApplicationMode> ts = new HashSet<ApplicationMode>();
-		Collections.addAll(ts, modes);
-		return ts;
+	public boolean isWidgetVisible(String key) {
+		Set<ApplicationMode> set = widgets.get(key);
+		if(set == null) {
+			return false;
+		}
+		return set.contains(this);
 	}
+	
+	
 	
 	public static List<ApplicationMode> getModesDerivedFrom(ApplicationMode am) {
 		List<ApplicationMode> list = new ArrayList<ApplicationMode>();
@@ -221,6 +272,8 @@ public class ApplicationMode {
 	public int getMinDistanceForTurn() {
 		return minDistanceForTurn;
 	}
+
+	
 
 	
 

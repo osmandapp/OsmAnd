@@ -170,57 +170,54 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		alarmControl = ric.createAlarmInfoControl(app, map);
 		// register right stack
-		Set<ApplicationMode> all = ApplicationMode.allOf();
-		Set<ApplicationMode> carBicycleDefault = ApplicationMode.of(ApplicationMode.CAR, ApplicationMode.DEFAULT, ApplicationMode.BICYCLE);
-		Set<ApplicationMode> exceptCar = ApplicationMode.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT);
-		Set<ApplicationMode> none = ApplicationMode.noneOf();
+		
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(), paintText,
 				paintSubText, false);
-		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, carBicycleDefault, none, 5);
+		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, 5);
 		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
 		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
-				ApplicationMode.of(ApplicationMode.PEDESTRIAN), none, 10);
+				10);
 		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
-		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, carBicycleDefault, none, 15);
+		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, 15);
 		//MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
 		//mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
 		// right stack
 		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, all, none, 3);
+		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, 3);
 		TextInfoWidget dist = ric.createDistanceControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, all, none, 5);
+		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, 5);
 		TextInfoWidget time = ric.createTimeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time",false, all, none,  10);
+		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time",false, 10);
 		TextInfoWidget speed = ric.createSpeedControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, carBicycleDefault, none,  15);
+		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, 15);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, exceptCar, none,  17);
+		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, 17);
 		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false, carBicycleDefault, none,  18);
+		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false,  18);
 		TextInfoWidget alt = mic.createAltitudeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, exceptCar, none, 20);
+		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, 20);
 
 		// Top widgets
 		ImageViewWidget compassView = mic.createCompassView(map);
-		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, all, 5);
+		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, 5);
 		View config = createConfiguration();
-		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, all, 10).required(ApplicationMode.DEFAULT);
+		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, 10).required(ApplicationMode.DEFAULT);
 		mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.widget_monitoring, R.string.map_widget_monitoring_services,
-				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, exceptCar, 12);
+				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, 12);
 		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen, R.string.bg_service_screen_lock, "bgService", 
-				MapWidgetRegistry.LEFT_CONTROL, none, 15);
+				MapWidgetRegistry.LEFT_CONTROL,  15);
 		backToLocation = mic.createBackToLocation(map);
-		mapInfoControls.registerTopWidget(backToLocation, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, all, 5);
+		mapInfoControls.registerTopWidget(backToLocation, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
 		
 		View globus = createLayer();
-		mapInfoControls.registerTopWidget(globus, R.drawable.widget_layer, R.string.menu_layers, "progress", MapWidgetRegistry.RIGHT_CONTROL, none, 15);
+		mapInfoControls.registerTopWidget(globus, R.drawable.widget_layer, R.string.menu_layers, "layers", MapWidgetRegistry.RIGHT_CONTROL, 15);
 		
 		topText = mic.createStreetView(app, map, paintText);
 		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text,
-				"street_name", MapWidgetRegistry.MAIN_CONTROL, all, 100);
+				"street_name", MapWidgetRegistry.MAIN_CONTROL, 100);
 		
 		// Register appearance widgets
 		AppearanceWidgetsFactory.INSTANCE.registerAppearanceWidgets(map, this, mapInfoControls);
@@ -330,7 +327,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		final OsmandSettings settings = view.getSettings();
 		
 		final ArrayList<Object> list = new ArrayList<Object>();
-		String appMode = settings.getApplicationMode().toHumanString(view.getApplication());
 		list.add(map.getString(R.string.map_widget_reset));
 		list.add(map.getString(R.string.map_widget_top_stack));
 		list.addAll(mapInfoControls.getTop());

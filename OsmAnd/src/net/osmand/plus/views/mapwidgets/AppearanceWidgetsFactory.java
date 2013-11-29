@@ -24,6 +24,7 @@ public class AppearanceWidgetsFactory {
     public static AppearanceWidgetsFactory INSTANCE = new AppearanceWidgetsFactory();
     private String ADDITIONAL_VECTOR_RENDERING_CATEGORY;
     public static boolean EXTRA_SETTINGS = true;
+    public static boolean POSITION_ON_THE_MAP = false;
 
 
     public void registerAppearanceWidgets(final MapActivity map, final MapInfoLayer mapInfoLayer,
@@ -42,8 +43,6 @@ public class AppearanceWidgetsFactory {
         });
 
         if (EXTRA_SETTINGS) {
-            // previous extra settings
-
             final MapWidgetRegistry.MapWidgetRegInfo showRuler = mapInfoControls.registerAppearanceWidget(R.drawable.widget_ruler, R.string.map_widget_show_ruler,
                     "showRuler", view.getSettings().SHOW_RULER);
             showRuler.setStateChangeListener(new Runnable() {
@@ -74,28 +73,32 @@ public class AppearanceWidgetsFactory {
                 }
             });
 
-//            final OsmandSettings.OsmandPreference<Integer> posPref = view.getSettings().POSITION_ON_MAP;
-//            final MapWidgetRegistry.MapWidgetRegInfo posMap = mapInfoControls.registerAppearanceWidget(R.drawable.widget_position_marker, R.string.position_on_map,
-//                    "position_on_map", textSizePref);
-//            posMap.setStateChangeListener(new Runnable() {
-//                @Override
-//                public void run() {
-//                    String[]  entries = new String[] {map.getString(R.string.position_on_map_center), map.getString(R.string.position_on_map_bottom) };
-//                    final Integer[] vals = new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT };
-//                    AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
-//                    int i = Arrays.binarySearch(vals, posPref.get());
-//                    b.setSingleChoiceItems(entries, i, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            posPref.set(vals[which]);
-//                            map.updateApplicationModeSettings();
-//                            view.refreshMap(true);
-//                            dialog.dismiss();
-//                        }
-//                    });
-//                    b.show();
-//                }
-//            });
+			if (POSITION_ON_THE_MAP) {
+				final OsmandSettings.OsmandPreference<Integer> posPref = view.getSettings().POSITION_ON_MAP;
+				final MapWidgetRegistry.MapWidgetRegInfo posMap = mapInfoControls.registerAppearanceWidget(
+						R.drawable.widget_position_marker, R.string.position_on_map, "position_on_map", posPref);
+				posMap.setStateChangeListener(new Runnable() {
+					@Override
+					public void run() {
+						String[] entries = new String[] { map.getString(R.string.position_on_map_center),
+								map.getString(R.string.position_on_map_bottom) };
+						final Integer[] vals = new Integer[] { OsmandSettings.CENTER_CONSTANT,
+								OsmandSettings.BOTTOM_CONSTANT };
+						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+						int i = Arrays.binarySearch(vals, posPref.get());
+						b.setSingleChoiceItems(entries, i, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								posPref.set(vals[which]);
+								map.updateApplicationModeSettings();
+								view.refreshMap(true);
+								dialog.dismiss();
+							}
+						});
+						b.show();
+					}
+				});
+			}
 
         }
 
@@ -164,34 +167,6 @@ public class AppearanceWidgetsFactory {
                 bld.show();
             }
         });
-
-            /*final OsmandSettings.OsmandPreference<Float> textSizePref = view.getSettings().MAP_TEXT_SIZE;
-            final MapWidgetRegistry.MapWidgetRegInfo textSize = mapInfoControls.registerAppearanceWidget(R.drawable.widget_text_size, R.string.map_text_size,
-                    "text_size", textSizePref, map.getString(R.string.map_widget_map_rendering));
-            textSize.setStateChangeListener(new Runnable() {
-                @Override
-                public void run() {
-                    final Float[] floatValues = new Float[] {0.6f, 0.8f, 1.0f, 1.2f, 1.5f, 1.75f, 2f};
-                    String[] entries = new String[floatValues.length];
-                    for (int i = 0; i < floatValues.length; i++) {
-                        entries[i] = (int) (floatValues[i] * 100) +" %";
-                    }
-                    AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
-                    b.setTitle(R.string.map_text_size);
-                    int i = Arrays.binarySearch(floatValues, textSizePref.get());
-                    b.setSingleChoiceItems(entries, i, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            textSizePref.set(floatValues[which]);
-                            app.getResourceManager().getRenderer().clearCache();
-                            view.refreshMap(true);
-                            dialog.dismiss();
-                        }
-                    });
-                    b.show();
-                }
-            });*/
-
         RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
         if(renderer != null && EXTRA_SETTINGS) {
             createCustomRenderingProperties(renderer, map, mapInfoLayer, mapInfoControls);

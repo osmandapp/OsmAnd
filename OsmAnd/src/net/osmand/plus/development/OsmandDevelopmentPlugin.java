@@ -25,6 +25,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		this.app = app;
+		//ApplicationMode.regWidget("fps", new ApplicationMode[0]);
 	}
 	
 	@Override
@@ -68,8 +69,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				}
 			};
 			mapInfoLayer.getMapInfoControls().registerSideWidget(fps, 0,
-					R.string.map_widget_fps_info, "fps", false, ApplicationMode.noneOf(),
-					ApplicationMode.noneOf(), 30);
+					R.string.map_widget_fps_info, "fps", false, 30);
 			mapInfoLayer.recreateControls();
 		}
 	}
