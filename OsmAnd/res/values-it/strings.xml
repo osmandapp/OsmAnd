@@ -1608,4 +1608,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="app_mode_motorcycle">Motociletta</string>
     <string name="app_mode_boat">Barca</string>
     <string name="app_mode_aircraft">Aereo</string>
+    <string name="map_widget_map_rendering">Stile della mappa:</string>
     </resources>
