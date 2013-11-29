@@ -256,6 +256,10 @@ public class ApplicationMode {
 		return ctx.getString(key);
 	}
 	
+	public String toHumanStringCtx(ClientContext ctx) {
+		return ctx.getString(key);
+	}
+	
 	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
 		for(ApplicationMode p : values) {
 			if(p.getStringKey().equals(key)) {
@@ -273,6 +277,10 @@ public class ApplicationMode {
 		return minDistanceForTurn;
 	}
 
+	
+	public boolean isDerivedRoutingFrom(ApplicationMode mode) {
+		return this == mode || getParent() == mode;
+	}
 	
 
 	
