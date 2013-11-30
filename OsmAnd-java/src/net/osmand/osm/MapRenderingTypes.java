@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -132,8 +133,90 @@ public class MapRenderingTypes {
 		return amenityTypeNameToTagVal;
 	}
 	
+	public Iterator<Map<String, String>> splitTagsIntoDifferentObjects(final Map<String, String> tags) {
+		// check open sea maps tags
+		boolean seamark = false;
+		for(String s : tags.keySet()) {
+			if(s.startsWith("seamark:")) {
+				seamark = true;
+				break;
+			}
+		}
+		if(!seamark) {
+			return oneIterator(tags);
+		} else
+			return splitOpenSeaMapsTags(tags);
+		
+		
+	}
+
+	private <T> Iterator<T> oneIterator(final T obj) {
+		return new Iterator<T>() {
+			boolean hasNext = true;
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+			
+			@Override
+			public T next() {
+				hasNext = false;
+				return obj;
+			}
+			
+			@Override
+			public boolean hasNext() {
+				return hasNext;
+			}
+		};
+	}
+
+	private Iterator<Map<String, String>> splitOpenSeaMapsTags(final Map<String, String> tags) {
+		Map<String, Map<String, String>> groupByOpenSeamaps = new HashMap<String, Map<String, String>>();
+		Map<String, String> common = new HashMap<String, String>();
+		String ATTACHED_KEY = "seamark:attached";
+		String type = "";
+		for (String s : tags.keySet()) {
+			String value = tags.get(s);
+			if (s.equals("seamark:type")) {
+				type = value;
+				common.put(ATTACHED_KEY, openSeaType(value));
+			} else if (s.startsWith("seamark:")) {
+				String stype = s.substring("seamark:".length());
+				int ind = stype.indexOf(':');
+				if (ind == -1) {
+					common.put(s, value);
+				} else {
+					String group = openSeaType(stype.substring(0, ind));
+					String add = stype.substring(ind + 1);
+					if (!groupByOpenSeamaps.containsKey(group)) {
+						groupByOpenSeamaps.put(group, new HashMap<String, String>());
+					}
+					groupByOpenSeamaps.get(group).put("seamark:" + add, value);
+				}
+			} else {
+				common.put(s, value);
+			}
+		}
+		for (Entry<String, Map<String, String>> g : groupByOpenSeamaps.entrySet()) {
+			g.getValue().putAll(common);
+			g.getValue().put("seamark:" + g.getKey(), g.getKey());
+			if (openSeaType(type).equals(g.getKey())) {
+				g.getValue().remove(ATTACHED_KEY);
+				g.getValue().put("seamark:" + g.getKey(), type);
+			}
+		}
+		return groupByOpenSeamaps.values().iterator();
+	}	
 	
 	
+	private String openSeaType(String value) {
+		if(value.equals("light_major") || value.equals("light_minor")) {
+			return "light";
+		}
+		return value;
+	}
+
 	public Map<String, AmenityType> getAmenityNameToType(){
 		if(amenityNameToType == null){
 			amenityNameToType = new LinkedHashMap<String, AmenityType>();
@@ -729,5 +812,7 @@ public class MapRenderingTypes {
 		
 		
 	}
+
+	
 }
 
