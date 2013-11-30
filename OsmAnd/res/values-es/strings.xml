@@ -1512,4 +1512,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="local_osm_changes_delete_all_confirm">Vas a borrar %1$d cambios osm, ¿Quieres continuar?</string>
     <string name="local_osm_changes_delete_all">Borrar todo</string>
     <string name="osmodroid_refresh">Renueva los canales</string>
+    <string name="amenity_type_seamark">boya / baliza</string>
     </resources>
