@@ -1654,7 +1654,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="app_mode_motorcycle">Motorcykel</string>
     <string name="app_mode_boat">Båd</string>
     <string name="app_mode_aircraft">Fly</string>
-    <string name="map_widget_map_rendering">Kort optegning:</string>
+    <string name="map_widget_map_rendering">Kortoptegning:</string>
     <string name="app_modes_choose_descr">Vælg tilgængelige programtyper i programmet</string>
     <string name="app_modes_choose">Programtyper</string>
 	</resources>
