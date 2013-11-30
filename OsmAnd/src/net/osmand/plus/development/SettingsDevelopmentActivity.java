@@ -2,10 +2,17 @@ package net.osmand.plus.development;
 
 
 import java.text.SimpleDateFormat;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.activities.actions.NavigateAction;
 import net.osmand.util.SunriseSunset;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
@@ -14,10 +21,12 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+import android.view.View;
 
 public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
 	
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,6 +47,19 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				startActivity(new Intent(SettingsDevelopmentActivity.this, TestVoiceActivity.class));
+				return true;
+			}
+		});
+		cat.addPreference(pref);
+		
+		pref = new Preference(this);
+		pref.setTitle(R.string.app_modes_choose);
+		pref.setSummary(R.string.app_modes_choose_descr);
+		pref.setKey("available_application_modes");
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				availableProfileDialog();
 				return true;
 			}
 		});
@@ -78,6 +100,32 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 					"null"));
 		}
 		cat.addPreference(pref);	
+	}
+	
+	protected void availableProfileDialog() {
+		Builder b = new AlertDialog.Builder(this);
+		final List<ApplicationMode> modes = ApplicationMode.allPossibleValues(settings);
+		modes.remove(ApplicationMode.DEFAULT);
+		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(ApplicationMode.values(settings));
+		selected.remove(ApplicationMode.DEFAULT);
+		View v = NavigateAction.prepareAppModeView(this, modes, selected, null, false, 
+				new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey()+",");
+						for(ApplicationMode mode :  modes) {
+							if(selected.contains(mode)) {
+								vls.append(mode.getStringKey()+",");
+							}
+						}
+						settings.AVAILABLE_APP_MODES.set(vls.toString());
+					}
+				});
+		b.setTitle(R.string.profile_settings);
+		b.setPositiveButton(R.string.default_buttons_ok, null);
+		b.setView(v);
+		b.show();
 	}
 
 

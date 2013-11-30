@@ -282,12 +282,14 @@ public class RouteProvider {
 		uri.append("&flon=").append(params.start.getLongitude()); //$NON-NLS-1$
 		uri.append("&tlat=").append(params.end.getLatitude()); //$NON-NLS-1$
 		uri.append("&tlon=").append(params.end.getLongitude()); //$NON-NLS-1$
-		if(ApplicationMode.PEDESTRIAN == params.mode){
-			uri.append("&v=foot") ; //$NON-NLS-1$
-		} else if(ApplicationMode.BICYCLE == params.mode){
+		if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			uri.append("&v=bicycle") ; //$NON-NLS-1$
-		} else {
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
+			uri.append("&v=foot") ; //$NON-NLS-1$
+		} else if(params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)){
 			uri.append("&v=motorcar"); //$NON-NLS-1$
+		} else {
+			return applicationModeNotSupported(params);
 		}
 		uri.append("&fast=").append(params.fast ? "1" : "0").append("&layer=mapnik"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		log.info("URL route " + uri);
@@ -349,12 +351,14 @@ public class RouteProvider {
 			config = RoutingConfiguration.getDefault();
 		}
 		GeneralRouterProfile p ;
-		if (params.mode == ApplicationMode.BICYCLE) {
+		if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			p = GeneralRouterProfile.BICYCLE;
-		} else if (params.mode == ApplicationMode.PEDESTRIAN) {
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			p = GeneralRouterProfile.PEDESTRIAN;
-		} else {
+		} else if(params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)){
 			p = GeneralRouterProfile.CAR;
+		} else {
+			return applicationModeNotSupported(params);
 		}
 		// order matters
 		List<String> specs = new ArrayList<String>();
@@ -417,10 +421,10 @@ public class RouteProvider {
 					return new RouteCalculationResult("Route can not be found from end point (" +ctx.calculationProgress.distanceFromEnd/1000f+" km)");
 				}
 				if(ctx.calculationProgress.isCancelled) {
-					return new RouteCalculationResult("Route calculation was interrupted");
+					return interrupted();
 				}
 				// something really strange better to see that message on the scren
-				return new RouteCalculationResult("Empty result");
+				return emptyResult();
 			} else {
 				RouteCalculationResult res = new RouteCalculationResult(result, params.start, params.end, 
 						params.intermediates, params.ctx, params.leftSide, ctx.routingTime);
@@ -429,7 +433,7 @@ public class RouteProvider {
 		} catch (RuntimeException e) {
 			return new RouteCalculationResult(e.getMessage() );
 		} catch (InterruptedException e) {
-			return new RouteCalculationResult("Route calculation was interrupted");
+			return interrupted();
 		} catch (OutOfMemoryError e) {
 //			ActivityManager activityManager = (ActivityManager)app.getSystemService(Context.ACTIVITY_SERVICE);
 //			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
@@ -440,6 +444,21 @@ public class RouteProvider {
 			String s = " (" + avl + " MB available of " + max  + ") ";
 			return new RouteCalculationResult("Not enough process memory "+ s);
 		}
+	}
+
+
+
+
+	private RouteCalculationResult applicationModeNotSupported(RouteCalculationParams params) {
+		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanStringCtx(params.ctx)+ "'is not supported.");
+	}
+
+	private RouteCalculationResult interrupted() {
+		return new RouteCalculationResult("Route calculation was interrupted");
+	}
+
+	private RouteCalculationResult emptyResult() {
+		return new RouteCalculationResult("Empty result");
 	}
 	
 	
@@ -470,27 +489,27 @@ public class RouteProvider {
 		uri.append(params.end.getLatitude() + "").append(","); //$NON-NLS-1$//$NON-NLS-2$
 		uri.append(params.end.getLongitude() + "").append("/"); //$NON-NLS-1$ //$NON-NLS-2$
 
-		float speed = 1.5f;
-		if (ApplicationMode.PEDESTRIAN == params.mode) {
+		if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			uri.append("foot.gpx"); //$NON-NLS-1$
-		} else if (ApplicationMode.BICYCLE == params.mode) {
-			speed = 4.2f;
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			uri.append("bicycle.gpx"); //$NON-NLS-1$
-		} else {
-			speed = 15.3f;
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			if (params.fast) {
 				uri.append("car.gpx"); //$NON-NLS-1$
 			} else {
 				uri.append("car/shortest.gpx"); //$NON-NLS-1$
 			}
+		} else {
+			return applicationModeNotSupported(params);
 		}
+		
 		uri.append("?lang=").append(Locale.getDefault().getLanguage()); //$NON-NLS-1$
 		log.info("URL route " + uri);
 		URL url = new URL(uri.toString());
 		URLConnection connection = url.openConnection();
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
 		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, connection.getInputStream(), false);
-		directions = parseCloudmadeRoute(res, gpxFile, false, params.leftSide, speed);
+		directions = parseCloudmadeRoute(res, gpxFile, false, params.leftSide, params.mode.getDefaultSpeed());
 
 		return new RouteCalculationResult(res, directions, params, null);
 	}
@@ -616,9 +635,9 @@ public class RouteProvider {
 		List<Location> res = new ArrayList<Location>();
 
 		String rpref = "Fastest";
-		if (ApplicationMode.PEDESTRIAN == params.mode) {
+		if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			rpref = "Pedestrian";
-		} else if (ApplicationMode.BICYCLE == params.mode) {
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			rpref = "Bicycle";
 			// } else if (ApplicationMode.LOWTRAFFIC == mode) {
 			// rpref = "BicycleSafety";
@@ -628,8 +647,12 @@ public class RouteProvider {
 			// rpref = "BicycleRoute";
 			// } else if (ApplicationMode.MTBIKE == mode) {
 			// rpref = "BicycleMTB";
-		} else if (!params.fast) {
-			rpref = "Shortest";
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+			if (!params.fast) {
+				rpref = "Shortest";
+			}
+		} else {
+			return applicationModeNotSupported(params);
 		}
 
 		StringBuilder request = new StringBuilder();

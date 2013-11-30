@@ -1,14 +1,10 @@
 package net.osmand.plus.development;
 
-import java.util.EnumSet;
-
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.audionotes.AudioNotesLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -25,6 +21,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		this.app = app;
+		//ApplicationMode.regWidget("fps", new ApplicationMode[0]);
 	}
 	
 	@Override
@@ -68,8 +65,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 				}
 			};
 			mapInfoLayer.getMapInfoControls().registerSideWidget(fps, 0,
-					R.string.map_widget_fps_info, "fps", false, ApplicationMode.noneOf(),
-					ApplicationMode.noneOf(), 30);
+					R.string.map_widget_fps_info, "fps", false, 30);
 			mapInfoLayer.recreateControls();
 		}
 	}

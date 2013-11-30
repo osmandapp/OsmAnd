@@ -27,12 +27,14 @@ public class CurrentPositionHelper {
 	private void initCtx(ClientContext app) {
 		am = app.getSettings().getApplicationMode();
 		GeneralRouterProfile p ;
-		if (am == ApplicationMode.BICYCLE) {
+		if (am.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			p = GeneralRouterProfile.BICYCLE;
-		} else if (am == ApplicationMode.PEDESTRIAN) {
+		} else if (am.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			p = GeneralRouterProfile.PEDESTRIAN;
-		} else {
+		} else if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			p = GeneralRouterProfile.CAR;
+		} else {
+			return;
 		}
 		RoutingConfiguration cfg = RoutingConfiguration.getDefault().build(p.name().toLowerCase(), 10);
 		ctx = new RoutingContext(cfg, null, app.getTodoAPI().getRoutingMapFiles());
@@ -43,6 +45,9 @@ public class CurrentPositionHelper {
 		try {
 			if(ctx == null || am != app.getSettings().getApplicationMode()) {
 				initCtx(app);
+				if(ctx == null) {
+					return null;
+				}
 			}
 			RouteSegment sg = rp.findRouteSegment(loc.getLatitude(), loc.getLongitude(), ctx);
 			if(sg == null) {

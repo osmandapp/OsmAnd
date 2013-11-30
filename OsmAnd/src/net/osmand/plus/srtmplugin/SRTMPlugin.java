@@ -32,7 +32,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		OsmandSettings settings = app.getSettings();
 		CommonPreference<String> pref = settings.getCustomRenderProperty("contourLines");
 		if(pref.get().equals("")) {
-			for(ApplicationMode m : ApplicationMode.allPossibleValues(app)) {
+			for(ApplicationMode m : ApplicationMode.allPossibleValues(settings)) {
 				if(pref.getModeValue(m).equals("")) {
 					pref.setModeValue(m, "13");
 				}

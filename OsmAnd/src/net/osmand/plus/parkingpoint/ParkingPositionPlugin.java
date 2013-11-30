@@ -65,6 +65,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public ParkingPositionPlugin(OsmandApplication app) {
 		this.app = app;
 		OsmandSettings set = app.getSettings();
+		ApplicationMode. regWidget("parking", (ApplicationMode[]) null);
 		parkingLat = set.registerFloatPreference(PARKING_POINT_LAT, 0f).makeGlobal();
 		parkingLon = set.registerFloatPreference(PARKING_POINT_LON, 0f).makeGlobal();
 		parkingType = set.registerBooleanPreference(PARKING_TYPE, false).makeGlobal();
@@ -190,8 +191,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null) {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
 			mapInfoLayer.getMapInfoControls().registerSideWidget(parkingPlaceControl,
-					R.drawable.widget_parking, R.string.map_widget_parking, "parking", false,
-					ApplicationMode.allOf(), ApplicationMode.noneOf(), 8);
+					R.drawable.widget_parking, R.string.map_widget_parking, "parking", false, 8);
 			mapInfoLayer.recreateControls();
 		}
 	}

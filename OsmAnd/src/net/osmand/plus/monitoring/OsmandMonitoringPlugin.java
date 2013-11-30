@@ -1,7 +1,5 @@
 package net.osmand.plus.monitoring;
 
-import java.util.EnumSet;
-
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -41,6 +39,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {
 		this.app = app;
+		ApplicationMode.regWidget("monitoring", ApplicationMode.DEFAULT, ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN);
 	}
 
 	@Override
@@ -70,8 +69,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		monitoringControl = createMonitoringControl(activity, layer.getPaintText(), layer.getPaintSubText());
 		
 		layer.getMapInfoControls().registerSideWidget(monitoringControl,
-				R.drawable.monitoring_rec_big, R.string.map_widget_monitoring, "monitoring", false,
-				ApplicationMode.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN), ApplicationMode.noneOf(), 18);
+				R.drawable.monitoring_rec_big, R.string.map_widget_monitoring, "monitoring", false, 18);
 		layer.recreateControls();
 	}
 

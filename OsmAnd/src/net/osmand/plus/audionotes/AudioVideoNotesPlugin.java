@@ -334,6 +334,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public AudioVideoNotesPlugin(OsmandApplication app) {
 		this.app = app;
 		OsmandSettings settings = app.getSettings();
+		ApplicationMode.regWidget("audionotes", (ApplicationMode[])null);
 		AV_EXTERNAL_RECORDER = settings.registerBooleanPreference("av_external_recorder", false).makeGlobal();
 		AV_EXTERNAL_PHOTO_CAM = settings.registerBooleanPreference("av_external_cam", true).makeGlobal();
 		AV_VIDEO_FORMAT = settings.registerIntPreference("av_video_format", VIDEO_OUTPUT_MP4).makeGlobal();
@@ -467,8 +468,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
 			mapInfoLayer.getMapInfoControls().registerSideWidget(recordControl, R.drawable.widget_icon_av_inactive,
-					R.string.map_widget_av_notes, "audionotes", false, ApplicationMode.allOf(),
-					ApplicationMode.noneOf(), 22);
+					R.string.map_widget_av_notes, "audionotes", false, 22);
 			mapInfoLayer.recreateControls();
 		}
 	}

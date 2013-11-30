@@ -3,14 +3,20 @@ package net.osmand.plus;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import net.osmand.StateChangedListener;
 import android.content.Context;
 
 
 public class ApplicationMode {
+	private static Map<String, Set<ApplicationMode>> widgets = new LinkedHashMap<String, Set<ApplicationMode>>(); 
 	private static List<ApplicationMode> values = new ArrayList<ApplicationMode>();
+	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<ApplicationMode>();
+	private static boolean listenerRegistered = false;
 	/*
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
 	 */
@@ -26,18 +32,51 @@ public class ApplicationMode {
 	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).
 			icon(R.drawable.ic_pedestrian, R.drawable.ic_action_pedestrian_light, R.drawable.ic_action_parking_dark).reg();
 	
-//	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
-//			icon(R.drawable.ic_aircraft, R.drawable.ic_action_aircraft_light, R.drawable.ic_action_aircraft_dark).reg();
-//	
-//	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
-//			icon(R.drawable.ic_sail_boat, R.drawable.ic_action_sail_boat_light, R.drawable.ic_action_sail_boat_dark).reg();
-//	
-//	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
-//			icon(R.drawable.ic_trekking, R.drawable.ic_action_trekking_light, R.drawable.ic_action_trekking_dark).reg();
-//	
-//	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
-//			carLocation().parent(CAR).
-//			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_light, R.drawable.ic_action_motorcycle_dark).reg();
+	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
+			icon(R.drawable.ic_aircraft, R.drawable.ic_action_aircraft_light, R.drawable.ic_action_aircraft_dark).reg();
+	
+	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
+			icon(R.drawable.ic_sail_boat, R.drawable.ic_action_sail_boat_light, R.drawable.ic_action_sail_boat_dark).reg();
+	
+	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
+			icon(R.drawable.ic_trekking, R.drawable.ic_action_trekking_light, R.drawable.ic_action_trekking_dark).reg();
+	
+	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
+			carLocation().parent(CAR).
+			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_light, R.drawable.ic_action_motorcycle_dark).reg();
+	
+	static {
+		ApplicationMode[] exceptPedestrian = new ApplicationMode[] { DEFAULT, CAR, BICYCLE, BOAT, AIRCRAFT };
+		ApplicationMode[] exceptAirBoat = new ApplicationMode[] { DEFAULT, CAR, BICYCLE};
+		ApplicationMode[] exceptCarBoatAir = new ApplicationMode[] { DEFAULT, BICYCLE, PEDESTRIAN };
+		ApplicationMode[] pedestrian = new ApplicationMode[] { PEDESTRIAN };
+		
+		ApplicationMode[] all = null;
+		ApplicationMode[] none = new ApplicationMode[] {};
+		
+		// left
+		regWidget("next_turn", exceptPedestrian);
+		regWidget("next_turn_small", pedestrian);
+		regWidget("next_next_turn", exceptPedestrian);
+		
+		// right		
+		regWidget("intermediate_distance", all);
+		regWidget("distance", all);
+		regWidget("time", all);
+		regWidget("speed", exceptPedestrian);
+		regWidget("max_speed", exceptAirBoat);
+		regWidget("gps_info", exceptCarBoatAir);
+		regWidget("altitude", exceptCarBoatAir);
+		
+		// top
+		regWidget("compass", all);
+		regWidget("config", all);
+		regWidget("street_name", exceptAirBoat);
+		regWidget("back_to_location", all);
+		regWidget("monitoring_services", exceptCarBoatAir);
+		regWidget("bgService", none);
+		regWidget("layers", none);
+	}
 	
 	
 	private static class ApplicationModeBuilder {
@@ -113,30 +152,63 @@ public class ApplicationMode {
 	}
 	
 	public static List<ApplicationMode> values(OsmandSettings settings) {
-		// TODO
+		if (cachedFilteredValues.isEmpty()) {
+			if (!listenerRegistered) {
+				settings.AVAILABLE_APP_MODES.addListener(new StateChangedListener<String>() {
+					@Override
+					public void stateChanged(String change) {
+						cachedFilteredValues = new ArrayList<ApplicationMode>();
+					}
+				});
+				listenerRegistered = true;
+			}
+			String available = settings.AVAILABLE_APP_MODES.get();
+			cachedFilteredValues = new ArrayList<ApplicationMode>();
+			for (ApplicationMode v : values) {
+				if (available.indexOf(v.getStringKey() + ",") != -1 || v == DEFAULT) {
+					cachedFilteredValues.add(v);
+				}
+			}
+		}
+		return cachedFilteredValues;
+	}
+	
+	public static List<ApplicationMode> allPossibleValues(OsmandSettings settings) {
 		return values;
 	}
 	
-	public static List<ApplicationMode> allPossibleValues(ClientContext ctx) {
-		return values;
+	
+	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
+	public static Set<ApplicationMode> regWidget(String widgetId, ApplicationMode... am) {
+		HashSet<ApplicationMode> set = new HashSet<ApplicationMode>();
+		if(am == null) {
+			set.addAll(values); 
+		} else {
+			Collections.addAll(set, am);
+		}
+		for(ApplicationMode m : values) {
+			// add derived modes
+			if(set.contains(m.getParent())) {
+				set.add(m);
+			}
+		}
+		widgets.put(widgetId, set);
+		return set;
 	}
 	
-	public static Set<ApplicationMode> allOf() {
-		// TODO 
-		return new HashSet<ApplicationMode>(values);
+	public boolean isWidgetCollapsible(String key) {
+		return false;
 	}
 	
-	public static Set<ApplicationMode> noneOf() {
-		// TODO 
-		return new HashSet<ApplicationMode>();
+	public boolean isWidgetVisible(String key) {
+		Set<ApplicationMode> set = widgets.get(key);
+		if(set == null) {
+			return false;
+		}
+		return set.contains(this);
 	}
 	
-	public static Set<ApplicationMode> of(ApplicationMode... modes ) {
-		// TODO 
-		HashSet<ApplicationMode> ts = new HashSet<ApplicationMode>();
-		Collections.addAll(ts, modes);
-		return ts;
-	}
+	
 	
 	public static List<ApplicationMode> getModesDerivedFrom(ApplicationMode am) {
 		List<ApplicationMode> list = new ArrayList<ApplicationMode>();
@@ -184,6 +256,10 @@ public class ApplicationMode {
 		return ctx.getString(key);
 	}
 	
+	public String toHumanStringCtx(ClientContext ctx) {
+		return ctx.getString(key);
+	}
+	
 	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
 		for(ApplicationMode p : values) {
 			if(p.getStringKey().equals(key)) {
@@ -200,6 +276,12 @@ public class ApplicationMode {
 	public int getMinDistanceForTurn() {
 		return minDistanceForTurn;
 	}
+
+	
+	public boolean isDerivedRoutingFrom(ApplicationMode mode) {
+		return this == mode || getParent() == mode;
+	}
+	
 
 	
 
