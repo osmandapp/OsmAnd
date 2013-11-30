@@ -113,7 +113,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
 					@Override
 					public void onClick(View v) {
-						StringBuilder vls = new StringBuilder();
+						StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey()+",");
 						for(ApplicationMode mode :  modes) {
 							if(selected.contains(mode)) {
 								vls.append(mode.getStringKey()+",");

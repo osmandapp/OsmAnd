@@ -384,7 +384,7 @@ public class NavigateAction {
 				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						if (!singleSelection) {
+						if (singleSelection) {
 							if (isChecked) {
 								selected.clear();
 								for (int j = 0; j < buttons.length; j++) {
