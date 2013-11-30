@@ -2,4 +2,6 @@
 <resources><string name="default_buttons_no">ليس</string>
     <string name="default_buttons_yes">نعم</string>
     <string name="osmand_app_not_found">لم يتم تثبيت OsmAnd</string>
-    </resources>
+    <string name="app_name">وقوف السيارات</string>
+    <string name="parking_plugin_installed">يتم تثبيت البرنامج المساعد OsmAnd وقوف السيارات وتمكينها في إعدادات OsmAnd</string>
+</resources>
