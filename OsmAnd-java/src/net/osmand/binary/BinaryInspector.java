@@ -58,8 +58,9 @@ public class BinaryInspector {
 		/*in.inspector(new String[]{
 				"-vpoi",
 				//"-vmap", "-vmapobjects", 
-				//"-vstreets", "-bbox=14.4,50.1,14.5,50.01", 
-				"/home/victor/projects/osmand/osm-gen/Map.obf"});*/
+				//"-vstreets", 
+				"-bbox=4,55,7,50", 
+				"/home/victor/projects/osmand/osm-gen/World_sea_map.obf"});*/
 	}
 
 	private void printToFile(String s) throws IOException {
@@ -808,8 +809,8 @@ public class BinaryInspector {
 			PoiSubType st = p.subTypes.get(i);
 			println("\t\t\t" + st.name + " " + (st.text ? "text":(" encoded " + st.possibleValues.size())));
 		}
-		req.poiTypeFilter = null;//TODO: for test only
-//		index.searchPoi(p, req);
+		req.poiTypeFilter = null;//for test only
+		index.searchPoi(p, req);
 		
 	}
 

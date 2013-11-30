@@ -144,10 +144,9 @@ public class MapRenderingTypes {
 		}
 		if(!seamark) {
 			return oneIterator(tags);
-		} else
+		} else {
 			return splitOpenSeaMapsTags(tags);
-		
-		
+		}
 	}
 
 	private <T> Iterator<T> oneIterator(final T obj) {
@@ -200,10 +199,10 @@ public class MapRenderingTypes {
 		}
 		for (Entry<String, Map<String, String>> g : groupByOpenSeamaps.entrySet()) {
 			g.getValue().putAll(common);
-			g.getValue().put("seamark:" + g.getKey(), g.getKey());
+			g.getValue().put("seamark", g.getKey());
 			if (openSeaType(type).equals(g.getKey())) {
 				g.getValue().remove(ATTACHED_KEY);
-				g.getValue().put("seamark:" + g.getKey(), type);
+				g.getValue().put("seamark", type);
 			}
 		}
 		return groupByOpenSeamaps.values().iterator();
@@ -358,14 +357,14 @@ public class MapRenderingTypes {
 		Map<String, MapRulType> rules = getEncodingRuleTypes();
 		MapRulType rt = rules.get(constructRuleKey(tag, val));
 		if(rt != null && rt.isPOISpecified()) {
-			if(relation && !rt.relation) {
+			if((relation && !rt.relation) || rt.isAdditionalOrText()) {
 				return null;
 			}
 			return rt.poiCategory;
 		}
 		rt = rules.get(constructRuleKey(tag, null));
 		if(rt != null && rt.isPOISpecified()) {
-			if(relation && !rt.relation) {
+			if((relation && !rt.relation) || rt.isAdditionalOrText()) {
 				return null;
 			}
 			return rt.poiCategory;

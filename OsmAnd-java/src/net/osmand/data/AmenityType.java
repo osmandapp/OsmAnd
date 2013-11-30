@@ -38,6 +38,7 @@ public class AmenityType {
 	public static AmenityType ADMINISTRATIVE = reg("administrative", "administrative"); // [TAG] administrative //$NON-NLS-1$ //$NON-NLS-2$
 	public static AmenityType EDUCATION = reg("education", "amenity"); // school, ... //$NON-NLS-1$ //$NON-NLS-2$
 	public static AmenityType MAN_MADE = reg("man_made", "man_made"); // [TAG] man_made and others //$NON-NLS-1$ //$NON-NLS-2$
+	public static AmenityType SEAMARK = reg("seamark", "seamark"); // [TAG] seamark //$NON-NLS-1$ //$NON-NLS-2$
 	public static AmenityType SUSTENANCE = reg("sustenance", "amenity"); // restaurant, cafe, ... //$NON-NLS-1$ //$NON-NLS-2$
 
 	public static AmenityType SHOP = reg("shop", "shop"); // [TAG] amenity convenience  = reg("", product); clothes,... //$NON-NLS-1$ //$NON-NLS-2$
