@@ -56,7 +56,7 @@
   <string name="show_warnings_descr">Zobrazenie rýchlostných obmedzení, radarov a spomaľovačov</string>
   <string name="map_widget_fluorescent">Fluorescentné trasy</string>
   <string name="map_widget_show_ruler">Pravítko</string>
-  <string name="map_widget_appearance">Rozličné:</string>
+  <string name="map_widget_appearance">Ostatné elementy:</string>
   <string name="map_widget_view_direction">Zorné pole</string>
   <string name="map_widget_transparent">Priehľadná téma</string>
   <string name="gps_wakeup_interval">Interval prebúdzania GPS: %s</string>
@@ -1630,4 +1630,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="app_mode_motorcycle">Motocykel</string>
     <string name="app_mode_boat">Loď</string>
     <string name="app_mode_aircraft">Lietadlo</string>
+    <string name="app_modes_choose">Režimy aplikácie</string>
+	<string name="map_widget_map_rendering">Vykresľovanie mapy:</string>
+    <string name="app_modes_choose_descr">Zvoľte dostupné režimy v aplikácii</string>
     </resources>
