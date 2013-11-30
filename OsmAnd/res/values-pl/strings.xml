@@ -1588,4 +1588,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="app_mode_boat">Łódź</string>
     <string name="app_mode_aircraft">Samolot</string>
     <string name="map_widget_map_rendering">Rysowanie mapy:</string>
+    <string name="app_modes_choose">Tryby aplikacji</string>
+	<string name="app_modes_choose_descr">Wybierz dostępne tryby aplikacji</string>
     </resources>
