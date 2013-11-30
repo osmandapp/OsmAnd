@@ -289,14 +289,13 @@ public class MapRenderingTypes {
 		return nameEnRuleType;
 	}
 	
-	public Map<String, String> getAmenityAdditionalInfo(Entity e, AmenityType type, String subtype) {
+	public Map<String, String> getAmenityAdditionalInfo(Map<String, String> tags, AmenityType type, String subtype) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		Collection<String> tagKeySet = e.getTagKeySet();
-		for (String tag : tagKeySet) {
-			String val = e.getTag(tag);
+		for (String tag : tags.keySet()) {
+			String val = tags.get(tag);
 			MapRulType rType = getAmenityRuleType(tag, val);
 			if (rType != null && val.length()  > 0) {
-				if(rType == nameEnRuleType && Algorithms.objectEquals(val, e.getTag(OSMTagKey.NAME))) {
+				if(rType == nameEnRuleType && Algorithms.objectEquals(val, tags.get(OSMTagKey.NAME))) {
 					continue;
 				}
 				if(rType.targetTagValue != null) {
@@ -308,7 +307,7 @@ public class MapRenderingTypes {
 						Iterator<TagValuePattern> it = rType.applyToTagValue.iterator();
 						while(!applied && it.hasNext()) {
 							TagValuePattern nv = it.next();
-							applied = nv.isApplicable(e);
+							applied = nv.isApplicable(tags);
 						}
 					}
 					if (applied) {
@@ -599,11 +598,11 @@ public class MapRenderingTypes {
 			}
 		}
 		
-		public boolean isApplicable(Entity e ){
+		public boolean isApplicable(Map<String, String> e ){
 			if(value == null) {
-				return e.getTag(tag) != null;
+				return e.get(tag) != null;
 			}
-			return value.equals(e.getTag(tag));
+			return value.equals(e.get(tag));
 		}
 		
 		@Override
