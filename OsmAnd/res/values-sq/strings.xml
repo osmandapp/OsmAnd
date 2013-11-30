@@ -14,4 +14,5 @@
     <string name="gps_status_eclipsim">Statusi i GPS-it</string>
     <string name="default_and">dhe</string>
     <string name="default_or">ose</string>
+	<string name="auto_zoom_none">Nuk ka afrim automatik</string>
 	</resources>
