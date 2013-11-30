@@ -1419,4 +1419,7 @@
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Bateau</string>
     <string name="app_mode_aircraft">Avion</string>
+    <string name="app_modes_choose_descr">Choisir les modes d'application disponibles</string>
+    <string name="app_modes_choose">Modes d'application</string>
+	<string name="map_widget_map_rendering">Rendu de carte:</string>
     </resources>
