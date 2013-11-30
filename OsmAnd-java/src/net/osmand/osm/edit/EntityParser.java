@@ -1,7 +1,8 @@
 package net.osmand.osm.edit;
 
-import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -102,19 +103,23 @@ public class EntityParser {
 	
 	public static List<Amenity> parseAmenities(MapRenderingTypes renderingTypes,
 			Entity entity, List<Amenity> amenitiesList){
+		amenitiesList.clear();
 		// it could be collection of amenities
 		boolean relation = entity instanceof Relation;
-		Collection<String> keySet = entity.getTagKeySet();
-		if (!keySet.isEmpty()) {
-			boolean purerelation = relation && !"multipolygon".equals(entity.getTag("type"));
-			for (String t : keySet) {
-				AmenityType type = purerelation? renderingTypes.getAmenityTypeForRelation(t, entity.getTag(t)):
-					renderingTypes.getAmenityType(t, entity.getTag(t)); 
-				if (type != null) {
-					String subtype = renderingTypes.getAmenitySubtype(t, entity.getTag(t));
-					Amenity a = parseAmenity(entity, type, subtype, renderingTypes);
-					if(checkAmenitiesToAdd(a, amenitiesList) && !"no".equals(subtype)){
-						amenitiesList.add(a);
+		Iterator<Map<String, String>> it = renderingTypes.splitTagsIntoDifferentObjects(entity.getTags());
+		while (it.hasNext()) {
+			Map<String, String> tags = it.next();
+			if (!tags.isEmpty()) {
+				boolean purerelation = relation && !"multipolygon".equals(tags.get("type"));
+				for (Map.Entry<String, String> e : tags.entrySet()) {
+					AmenityType type = purerelation ? renderingTypes.getAmenityTypeForRelation(e.getKey(), e.getValue())
+							: renderingTypes.getAmenityType(e.getKey(), e.getValue());
+					if (type != null) {
+						String subtype = renderingTypes.getAmenitySubtype(e.getKey(), e.getValue());
+						Amenity a = parseAmenity(entity, type, subtype, renderingTypes);
+						if (checkAmenitiesToAdd(a, amenitiesList) && !"no".equals(subtype)) {
+							amenitiesList.add(a);
+						}
 					}
 				}
 			}

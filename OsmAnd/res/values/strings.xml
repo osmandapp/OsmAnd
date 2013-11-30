@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="amenity_type_seamark">Seamark</string>
     <string name="app_modes_choose_descr">Choose available application modes in application</string>
     <string name="app_modes_choose">Application Modes</string>
 	<string name="map_widget_appearance">Remaining elements:</string>
