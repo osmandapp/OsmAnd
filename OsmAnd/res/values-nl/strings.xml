@@ -1607,4 +1607,5 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="map_widget_map_rendering">Kaartstijl:</string>
     <string name="app_modes_choose_descr">Kies op welke manieren Osmand kan worden gebruikt</string>
     <string name="app_modes_choose">Soorten toepassing</string>
-	</resources>
+	<string name="amenity_type_seamark">boei / baken</string>
+    </resources>
