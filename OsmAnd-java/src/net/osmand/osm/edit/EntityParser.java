@@ -63,12 +63,16 @@ public class EntityParser {
 		mo.setName(op);
 	}
 	
-	public static Amenity parseAmenity(Entity entity, AmenityType type, String subtype, MapRenderingTypes types) {
+	public static Amenity parseAmenity(Entity entity, AmenityType type, String subtype, Map<String, String> tagValues,
+			MapRenderingTypes types) {
 		Amenity am = new Amenity();
 		parseMapObject(am, entity);
+		if(tagValues == null) {
+			tagValues = entity.getTags();
+		}
 		am.setType(type);
 		am.setSubType(subtype);
-		am.setAdditionalInfo(types.getAmenityAdditionalInfo(entity, type, subtype));
+		am.setAdditionalInfo(types.getAmenityAdditionalInfo(tagValues, type, subtype));
 		am.setAdditionalInfo("website", getWebSiteURL(entity));
 		return am;
 	}
@@ -116,7 +120,7 @@ public class EntityParser {
 							: renderingTypes.getAmenityType(e.getKey(), e.getValue());
 					if (type != null) {
 						String subtype = renderingTypes.getAmenitySubtype(e.getKey(), e.getValue());
-						Amenity a = parseAmenity(entity, type, subtype, renderingTypes);
+						Amenity a = parseAmenity(entity, type, subtype, tags, renderingTypes);
 						if (checkAmenitiesToAdd(a, amenitiesList) && !"no".equals(subtype)) {
 							amenitiesList.add(a);
 						}
