@@ -1609,4 +1609,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="app_mode_boat">Barca</string>
     <string name="app_mode_aircraft">Aereo</string>
     <string name="map_widget_map_rendering">Stile della mappa:</string>
-    </resources>
+    <string name="app_modes_choose_descr">Scegli fra le modalità disponibili in applicazione</string>
+    <string name="app_modes_choose">Modalità applicazione</string>
+	</resources>
