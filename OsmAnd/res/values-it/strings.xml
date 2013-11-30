@@ -667,7 +667,7 @@
   <string name="incremental_search_street">Ricerca strada in modo incrementale</string>
   <string name="incremental_search_building">Ricerca civico in modo incrementale</string>
   <string name="choose_available_region">Scegli il paese dall\'elenco</string>
-  <string name="choose_intersected_street">Sceglie incrocio</string>
+  <string name="choose_intersected_street">Scegli incrocio</string>
   <string name="Closest_Amenities">Amenità più vicine</string>
   <string name="app_mode_default">Predefinito</string>
   <string name="app_mode_car">Auto</string>
@@ -878,7 +878,7 @@
   <string name="navpoint_search_desc">Coordinate</string>
   <string name="transport_search_desc">Ricerca dei trasporti pubblici</string>
   <string name="favourites_search_desc">Ricerca dei preferiti</string>
-  <string name="history_search_desc">Cronologia di ricerca</string>
+  <string name="history_search_desc">Cronologia ricerche</string>
   <string name="rendering_attr_noPolygons_description">Rende trasparenti tutte le aree rappresentanti caratteristiche</string>
   <string name="rendering_attr_noPolygons_name">No poligoni</string>
   <string name="rendering_attr_appMode_name">Modalità di disegno</string>
