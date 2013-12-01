@@ -127,8 +127,8 @@ public class NavigateAction {
 		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(app.getSettings()));
 		values.remove(ApplicationMode.DEFAULT);
 		
-		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
-		boolean osmandRouter = mapActivity.getMyApplication().getSettings().ROUTER_SERVICE.get() == RouteService.OSMAND;
+		final View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
+		
 		final CheckBox nonoptimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
 		LinearLayout topLayout = (LinearLayout) view.findViewById(R.id.LinearLayout);
 		final ToggleButton[] buttons = createToggles(values, topLayout, mapActivity);
@@ -137,11 +137,7 @@ public class NavigateAction {
 		final List<LatLon> toList = new ArrayList<LatLon>();
 		final Spinner toSpinner = setupToSpinner(mapView, name,view, toList, style);
 		
-		if(osmandRouter && targets.hasLongDistancesInBetween(current != null ? current : mapView, 150000)) {
-			TextView textView = (TextView) view.findViewById(R.id.ValidateTextView);
-			textView.setText(R.string.route_is_too_long);
-			textView.setVisibility(View.VISIBLE);
-		}
+		
 		
 		String via = generateViaDescription();
 		if(via.length() == 0){
@@ -155,6 +151,7 @@ public class NavigateAction {
 		if(appMode == ApplicationMode.DEFAULT) {
 			appMode = ApplicationMode.CAR;
 		}
+		updateTooLongDistance(current != null ? current : mapView, targets, view, appMode);
 		for (int i = 0; i < buttons.length; i++) {
 			if (buttons[i] != null) {
 				final int ind = i;
@@ -169,6 +166,7 @@ public class NavigateAction {
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						if (isChecked) {
 							nonoptimal.setChecked(!settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
+							updateTooLongDistance(current != null ? current : mapView, targets, view, buttonAppMode);
 							for (int j = 0; j < buttons.length; j++) {
 								if (buttons[j] != null) {
 									if (buttons[j].isChecked() != (ind == j)) {
@@ -278,6 +276,17 @@ public class NavigateAction {
 			builder.setNegativeButton(R.string.no_route, null);
 		}
 		builder.show();
+	}
+
+	private void updateTooLongDistance(final Location start, final TargetPointsHelper targets, View view, ApplicationMode appMode) {
+		boolean osmandRouter = mapActivity.getMyApplication().getSettings().ROUTER_SERVICE.getModeValue(appMode)== RouteService.OSMAND;
+		TextView textView = (TextView) view.findViewById(R.id.ValidateTextView);
+		if(osmandRouter && targets.hasLongDistancesInBetween(start, 150000)) {
+			textView.setText(R.string.route_is_too_long);
+			textView.setVisibility(View.VISIBLE);
+		} else{
+			textView.setVisibility(View.GONE);
+		}
 	}
 
 	private static ToggleButton[] createToggles(final List<ApplicationMode> values, LinearLayout topLayout, Context ctx) {
