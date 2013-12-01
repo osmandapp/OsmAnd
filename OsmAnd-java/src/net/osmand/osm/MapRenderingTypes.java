@@ -12,13 +12,12 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.AmenityType;
-import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
@@ -133,8 +132,17 @@ public class MapRenderingTypes {
 		return amenityTypeNameToTagVal;
 	}
 	
-	public Iterator<Map<String, String>> splitTagsIntoDifferentObjects(final Map<String, String> tags) {
+	public Collection<Map<String, String>> splitTagsIntoDifferentObjects(final Map<String, String> tags) {
 		// check open sea maps tags
+		boolean split = splitIsNeeded(tags);
+		if(!split) {
+			return Collections.singleton(tags);
+		} else {
+			return splitOpenSeaMapsTags(tags);
+		}
+	}
+
+	protected boolean splitIsNeeded(final Map<String, String> tags) {
 		boolean seamark = false;
 		for(String s : tags.keySet()) {
 			if(s.startsWith("seamark:")) {
@@ -142,35 +150,10 @@ public class MapRenderingTypes {
 				break;
 			}
 		}
-		if(!seamark) {
-			return oneIterator(tags);
-		} else {
-			return splitOpenSeaMapsTags(tags);
-		}
+		return seamark;
 	}
 
-	private <T> Iterator<T> oneIterator(final T obj) {
-		return new Iterator<T>() {
-			boolean hasNext = true;
-			@Override
-			public void remove() {
-				throw new UnsupportedOperationException();
-			}
-			
-			@Override
-			public T next() {
-				hasNext = false;
-				return obj;
-			}
-			
-			@Override
-			public boolean hasNext() {
-				return hasNext;
-			}
-		};
-	}
-
-	private Iterator<Map<String, String>> splitOpenSeaMapsTags(final Map<String, String> tags) {
+	private Collection<Map<String, String>> splitOpenSeaMapsTags(final Map<String, String> tags) {
 		Map<String, Map<String, String>> groupByOpenSeamaps = new HashMap<String, Map<String, String>>();
 		Map<String, String> common = new HashMap<String, String>();
 		String ATTACHED_KEY = "seamark:attached";
@@ -197,15 +180,19 @@ public class MapRenderingTypes {
 				common.put(s, value);
 			}
 		}
+		List<Map<String, String>> res = new ArrayList<Map<String,String>>();
 		for (Entry<String, Map<String, String>> g : groupByOpenSeamaps.entrySet()) {
 			g.getValue().putAll(common);
 			g.getValue().put("seamark", g.getKey());
 			if (openSeaType(type).equals(g.getKey())) {
 				g.getValue().remove(ATTACHED_KEY);
 				g.getValue().put("seamark", type);
+				res.add(0, g.getValue());
+			} else {
+				res.add(g.getValue());
 			}
 		}
-		return groupByOpenSeamaps.values().iterator();
+		return res;
 	}	
 	
 	
