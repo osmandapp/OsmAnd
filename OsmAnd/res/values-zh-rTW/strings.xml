@@ -1622,4 +1622,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="map_widget_map_rendering">地圖繪製：</string>
     <string name="app_modes_choose_descr">在應用程式中選取現有的應用模式</string>
     <string name="app_modes_choose">應用模式</string>
-	</resources>
+	<string name="amenity_type_seamark">航線標識</string>
+    </resources>
