@@ -377,7 +377,7 @@
   <string name="daynight">Modalità giorno/notte</string>
   <string name="download_files_question">Scarico {0} file(s) ({1} MB)?</string>
   <string name="items_were_selected">{0} oggetto(i) selezionati</string>
-  <string name="filter_existing_indexes">Filtro scaricato</string>
+  <string name="filter_existing_indexes">Scaricato</string>
   <string name="deselect_all">Deseleziona tutto</string>
   <string name="select_all">Seleziona tutto</string>
   <string name="reload">Ricarica</string>
