@@ -56,11 +56,11 @@ public class BinaryInspector {
 		in.inspector(args);
 		// test cases show info
 		/*in.inspector(new String[]{
-				"-vpoi",
-				//"-vmap", "-vmapobjects", 
+				//"-vpoi",
+				"-vmap", "-vmapobjects", 
 				//"-vstreets", 
 				"-bbox=4,55,7,50", 
-				"/home/victor/projects/osmand/osm-gen/World_sea_map.obf"});*/
+				"/home/victor/projects/osmand/osm-gen/World_seamarks_2.obf"});*/
 	}
 
 	private void printToFile(String s) throws IOException {

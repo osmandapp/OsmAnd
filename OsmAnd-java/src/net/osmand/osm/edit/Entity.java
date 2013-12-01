@@ -142,6 +142,10 @@ public abstract class Entity {
 		return tags.put(key, value);
 	}
 	
+	public void replaceTags(Map<String, String> toPut){
+		tags = new LinkedHashMap<String, String>(toPut);
+	}
+	
 	public String getTag(OSMTagKey key){
 		return getTag(key.getValue());
 	}

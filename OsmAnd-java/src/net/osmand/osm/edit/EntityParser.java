@@ -1,6 +1,6 @@
 package net.osmand.osm.edit;
 
-import java.util.Iterator;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -110,9 +110,8 @@ public class EntityParser {
 		amenitiesList.clear();
 		// it could be collection of amenities
 		boolean relation = entity instanceof Relation;
-		Iterator<Map<String, String>> it = renderingTypes.splitTagsIntoDifferentObjects(entity.getTags());
-		while (it.hasNext()) {
-			Map<String, String> tags = it.next();
+		Collection<Map<String, String>> it = renderingTypes.splitTagsIntoDifferentObjects(entity.getTags());
+		for(Map<String, String> tags : it) {
 			if (!tags.isEmpty()) {
 				boolean purerelation = relation && !"multipolygon".equals(tags.get("type"));
 				for (Map.Entry<String, String> e : tags.entrySet()) {
