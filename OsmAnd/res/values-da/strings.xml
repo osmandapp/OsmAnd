@@ -1657,4 +1657,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="map_widget_map_rendering">Kortoptegning:</string>
     <string name="app_modes_choose_descr">Vælg tilgængelige programtyper i programmet</string>
     <string name="app_modes_choose">Programtyper</string>
-	</resources>
+	<string name="amenity_type_seamark">Sømærke</string>
+    </resources>
