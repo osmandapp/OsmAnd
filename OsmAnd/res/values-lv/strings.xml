@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu menedžeris</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="plugins_screen">Spraudņu menedžeris</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams ir nepieciešams OsmAnd restarts.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus uzstādījumus, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>
   <string name="prefs_plugins">Spraudņi</string>
@@ -990,4 +991,6 @@
 	<string name="zxing_barcode_scanner_not_found">Nav instalēta ZXing Barcode Scanner aplikācija. Meklēt Market?</string>
 	<string name="rendering_attr_roadColors_description">Izvēlēties ceļu krāsu shēmu:</string>
 	<string name="rendering_attr_roadColors_name">Ceļu krāsu shēma</string>
+    <string name="map_widget_map_rendering">Kartes attēlošana</string>
+    <string name="app_mode_motorcycle">Motocikls</string>
     </resources>
