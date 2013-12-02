@@ -1513,4 +1513,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="local_osm_changes_delete_all_confirm">Você vai apagar %1$d mudanças no arquivo osm. Você tem certeza?</string>
     <string name="local_osm_changes_delete_all">Deletar Tudo</string>
     <string name="amenity_type_osmwiki">Wikipedia (off-line)</string>
+	<string name="amenity_type_seamark">Marca Mar</string>
+    <string name="app_modes_choose_descr">Escolha o modo disponível dentro da aplicação</string>
+    <string name="app_modes_choose">Modo da aplicação</string>
 	</resources>
