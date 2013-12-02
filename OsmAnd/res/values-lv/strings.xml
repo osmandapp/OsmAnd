@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="plugins_screen">Spraudņu menedžeris</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams ir nepieciešams OsmAnd restarts.)</string>
-  <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus uzstādījumus, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>
+  <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus uzstādījumus, tādus kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas</string>
   <string name="prefs_plugins">Spraudņi</string>
   <string name="tip_recent_changes_0_8_0_t">"Izmaiņas 0.8.0 : \n\t- *Spraudņu funkcionalitāte*\n\t- Funkcionalitāte ir sadalīta grupās un var tikt iespējota/atspējota ar Spraudņu menedžeri. Jūs variet iespējot (tiešsaistes vai kešotu) bilžu karti, sekošanas uzstādījumus, un daudz citas iespējas kuras bija pieejamas iepriekš. \n\t- *Jauns bezsaistes kartes atbalsts*\n\t- Kartes renderēšana ir ātrāka un precīzāka (pamatā izlabotas krasta līnijas un laukuma applūšanas problēmas). \n\t- Jums jāveic pilnīgi jaunu kartes datu lejuplāde (vecie dati vairs netiek atbalstīti)\n\t- *Bezsaistes maršrutēšana*\n\t- Bezsaistes maršrutēšana ir daudz stabilāka\n\t- *Lietojamība un UI*\n\t- Veikti uzlabojumi vairākos logos\n\t- Daudz kļūdu labojumu "</string>
   <string name="osm_editing_plugin_description">Rādīt uzstādījumus OSM kvalitātes uzlabošanai. Tas ļauj savākt/modificēt OSM POI objektus, atvērt/komentēt OSM kļūdas un nosūtīt ierakstīto GPX (nepieciešama OSM reģistrācija).</string>
@@ -246,7 +246,7 @@
   <string name="local_index_mi_backup">Deaktivizēt</string>
   <string name="local_index_mi_delete">Dzēst</string>
   <string name="local_index_mi_reload">Nolasīt no sd kartes</string>
-  <string name="local_index_download">Lejupielādes…</string>
+  <string name="local_index_download">Lejupielādēt</string>
   
   <string name="local_index_poi_data">POI dati</string>
   <string name="local_index_address_data">Adresees dati</string>
@@ -346,10 +346,10 @@
   <string name="si_mi_foots">Jūdzes/pēdas</string>
   <string name="si_mi_yard">Jūdzes/jardi</string>
   <string name="si_km_m">Kilometri/metri</string>
-  <string name="yard">yd</string>
-  <string name="foot">ft</string>
+  <string name="yard">Pagalms</string>
+  <string name="foot">Pēdas</string>
   <string name="mile_per_hour">mph</string>
-  <string name="mile">mi</string>
+  <string name="mile">jūdze</string>
   <string name="send_location_way_choose_title">Koplietot atrašanās vietu ar</string>
   <string name="send_location_sms_pattern">Vieta: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Lai redzētu atrašanās vietu sekojiet web pārlūka saitei %1$s vai android domātai saitei %2$s</string>
@@ -364,7 +364,7 @@
   <string name="amenity_type_emergency">Avārijas</string>
   <string name="amenity_type_entertainment">Kultūra</string>
   <string name="amenity_type_finance">Finanses</string>
-  <string name="amenity_type_geocache">Geocache</string>
+  <string name="amenity_type_geocache">Ģeokešings</string>
   <string name="amenity_type_healthcare">Medicīniskā palīdzība</string>
   <string name="amenity_type_historic">Vēsturiskās</string>
   <string name="amenity_type_landuse">Lietojums</string>
@@ -508,7 +508,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sekundes</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Uzstādiet pamošanās intervālu strādājot fonā </string>
+  <string name="background_service_int_descr">Uzstādiet pamošanās intervālu strādājot fonā</string>
   <string name="background_service_int">Pamošanās intervāls</string>
   <string name="background_service_provider_descr">Izvēlaties pozīcijas sniedzēju kamēr darbojas fona režīmā</string>
   <string name="background_service_provider">"Pozīcijas sniedzējs"</string>
@@ -574,8 +574,8 @@
   <string name="update_poi_is_not_available_for_zoom">POI atjaunināšana nav pieejama lieliem tuvinājumiem</string>
   <string name="context_menu_item_update_poi">Atjaunināt POI</string>
   <string name="context_menu_item_update_map_confirm">Atjaunināt datus caur internetu?</string>
-  <string name="search_history_city">Pilsēta:\n {0}</string>
-  <string name="search_history_street">Iela:\n {0}, {1}</string>
+  <string name="search_history_city">Pilsēta: {0}</string>
+  <string name="search_history_street">Iela: {0}, {1}</string>
   <string name="search_history_int_streets">Krustojums: {0} x {1} in {2}</string>
   <string name="search_history_building">Ēka: {0}, {1}, {2}</string>
   <string name="favorite">Izlase</string>
@@ -849,7 +849,7 @@
   <string name="osmand_parking_event">Paņemt auto stāvvietā</string>
   <string name="osmand_parking_warning">Brīdinājums</string>
   <string name="osmand_parking_warning_text">Jūsu kalendāram tika pievienota norāde par jūsu auto saņemšanu stāvvietā. Tā paliks līdz jūs to izdzēsīsiet no kalendāra.</string>
-  <string name="osmand_parking_time_limit_title">Uzstādīt noparokšanas laika limitu</string>
+  <string name="osmand_parking_time_limit_title">Uzstādīt noparkošanas laika limitu</string>
   <string name="osmand_parking_delete_confirm">Vai vēlaties noņemt noparkota auto lokāciju?</string>
   <string name="osmand_parking_delete">Nodzēst parkošanās marķeri</string>
   <string name="osmand_parking_choose_type">Izvēlēties parokšanās tipu</string>
@@ -870,9 +870,9 @@
   <string name="starting_point_too_far">Starta punkts atrodas pārāk tālu no tuvākā ceļa.</string>
   <string name="shared_location">Koplietota atrašanās</string>
   <string name="update_downlod_list">Pārlasīt sarakstu</string>
-  <string name="global_app_allocated_memory_descr">Izmantotās atmiņas apjoms %1$s MB (Android lmits %2$s MB, dalvik %3$s MB).</string>
+  <string name="global_app_allocated_memory_descr">Izmantotās atmiņas apjoms %1$s MB (Android limits %2$s MB, dalvik %3$s MB).</string>
   <string name="global_app_allocated_memory">Izmantotā atmiņa</string>
-  <string name="native_app_allocated_memory_descr">Kopā aplikācijai izdalītais atmiņas apjums %1$s MB (dalvik %2$s MB, pārējam %3$s MB). Proporcionāli atmiņa %4$s MB (Android limits %5$s MB, dalvik %6$s MB).</string>
+  <string name="native_app_allocated_memory_descr">Kopā aplikācijai izdalītais atmiņas apjoms %1$s MB (dalvik %2$s MB, pārējais %3$s MB). Proporcionāli atmiņa %4$s MB (Android limits %5$s MB, dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Kopā ierīces atmiņa</string>
   <string name="select_animate_speedup">Izvēlēties norādījumu animācijas akselerāciju</string>
   <string name="osmand_parking_hours">Stundas</string>
@@ -916,8 +916,8 @@
   <string name="bg_service_interval">Uzstādīt pamošanās intervālu:</string>
   <string name="screen_is_locked">Lai atslēgtu ekrānu nospiežat atslēgas ikonu</string>
   <string name="bg_service_screen_unlock">Atslēgt ekrānu</string>
-  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+  <string name="bg_service_sleep_mode_off">Ieslēgt\n miega režīmu</string>
+  <string name="bg_service_sleep_mode_on">Izslēgt\n miega režīmu</string>
 <string name="live_monitoring_mode_off">Sākt\n tiešsaistes sekošanu</string>
 <string name="live_monitoring_mode_on">Pārtraukt\n tiešsaistes sekošanu</string>
 <string name="layer_map_appearance">Konfigurācijas ekrāns</string>
@@ -1008,13 +1008,13 @@
 	<string name="auto_zoom_close">Tuvu</string>
 	<string name="auto_zoom_far">Vidēji</string>
 	<string name="auto_zoom_farthest">Tālu</string>
-	<string name="map_magnifier">Kartes palielinātājs</string>
+	<string name="map_magnifier">Kartes tālummaiņa</string>
 	<string name="base_world_map">Pasaules karte</string>
 	<string name="tip_map_styles">Kartes veidi</string>
 	<string name="about_version">Versija:</string>
     <string name="about_settings">Par</string>
     <string name="about_settings_descr">Versijas informācija, licenzes, projektā piedalījušies cilvēki</string>
-    <string name="local_index_tile_data_zooms">Palielinājuma dati ielādēti: %1$s</string>
+    <string name="local_index_tile_data_zooms">Tālummaiņas dati ielādēti: %1$s</string>
     <string name="local_index_tile_data_downloadable">Lejupielādējamais: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maksimālais palielinājums: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimālais pietuvinājums: %1$s</string>
@@ -1132,11 +1132,11 @@
     <string name="recording_photo_description">Bilde %1$s no %2$s</string>
     <string name="av_def_action_picture">Nofotografēt</string>
     <string name="recording_context_menu_precord">Nofotografēt</string>
-    <string name="dropbox_plugin_description">Dropbox papildinājums ļauj sinhronizēt maršrutu un audio/video piezīmes ar jūsu dropbox kontu.</string>
-    <string name="dropbox_plugin_name">Dropbox papildinājums</string>
+    <string name="dropbox_plugin_description">Dropbox spraudnis ļauj sinhronizēt maršrutu un audio/video piezīmes ar dropbox kontu.</string>
+    <string name="dropbox_plugin_name">Dropbox spraudnis</string>
     <string name="intermediate_points_change_order">Mainīt kārtību</string>
-    <string name="srtm_paid_version_msg">Lūdzu apsveriet iespēju nopirkt Kontūrlīniju (Contour Lines) papildinājumu, lai atbalstītu tā tālāko attīstību.</string>
-    <string name="srtm_paid_version_title">Kontūrlīniju papildinājums</string>
+    <string name="srtm_paid_version_msg">Lūdzu apsveriet iespēju nopirkt Contour Lines spraudni, lai atbalstītu tā tālāko attīstību.</string>
+    <string name="srtm_paid_version_title">Kontūrlīniju spraudnis</string>
     <string name="av_def_action_choose">Atlasīt pēc pieprasījuma</string>
     <string name="av_def_action_video">Ierakstīt video</string>
     <string name="av_def_action_audio">Ierakstīt audio</string>
@@ -1168,7 +1168,7 @@
     <string name="av_control_stop">Apturēt</string>
     <string name="av_control_start">Sākt</string>
     <string name="map_widget_av_notes">Audio/video piezīmes</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd papildinājums bezsaistes kontūrlīnijām</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd spraudnis bezsaistes kontūrlīnijām</string>
     <string name="map_widget_distancemeasurement">Distances mērīšana</string>
     <string name="audionotes_location_not_defined">Nav definēta atrašanās vieta, ko saistīt ar piezīmēm. \"Lietot atrašanās vietu...\" lai saistītu piezīmi ar atrašanās vietu</string>
     <string name="monitoring_control_stop">Apturēt</string>
@@ -1177,7 +1177,7 @@
     <string name="audionotes_plugin_name">Audio/video piezīmes</string>
     <string name="index_srtm_parts">daļas</string>
     <string name="index_srtm_ele">Kontūrlīnijas</string>
-    <string name="srtm_plugin_name">Kontūrlīniju papildinājums</string>
+    <string name="srtm_plugin_name">Kontūrlīniju spraudnis</string>
     <string name="download_select_map_types">Pārējās kartes</string>
     <string name="download_roads_only_item">Tikai ceļi</string>
     <string name="download_srtm_maps">Kontūrlīnijas</string>
@@ -1186,11 +1186,11 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">Paslēpt robežas</string>
 	<string name="rendering_attr_noAdminboundaries_description">Noņemt reģionālo robežu attēlošanu (admin līmeņi 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid papildinājums ir novecojusi versija, ko ir nepieciešams atjaunot.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid papildinājums ir OsmAnd paplašinājums OsMoDroid programmai tiešsaistes sekošanas iespējām. Informācija par pakalpojumu ir pieejama http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid papildinājums</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid spraudnis ir novecojis un to ir nepieciešams atjaunot.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid spraudnis ir OsmAnd paplašinājums OsMoDroid aplikācijai tiešsaistes sekošanai. Informācija par šo pakalpojumu ir pieejama http://esya.ru.</string>
+    <string name="osmodroid_plugin_name">OsMoDroid spraudnis</string>
 	<string name="tip_altitude_offset">Augstuma korekcija</string>
-	<string name="map_widget_max_speed">Ātruma ierobežojums</string>
+	<string name="map_widget_max_speed">Ātruma limits</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nav atrastas ēkas.</string>
     <string name="search_villages_and_postcodes">Meklēt apdzīvotas vietas/pasta indeksus</string>
@@ -1198,7 +1198,14 @@
 	<string name="rendering_attr_showRoadMaps_name">Ceļu sazarojuma kartes</string>
     <string name="safe_mode_description">Palaist programmu avārijas režīmā (lietojot lēnāku Android iebūvētā koda vietā).</string>
     <string name="safe_mode">Drošais režīms</string>
-    <string name="native_library_not_running">Programma darbojas drošajā (avārijas) režīmā (atspējot uzstādījumos).</string>
+    <string name="native_library_not_running">Programma darbojas drošajā režīmā (atspējot uzstādījumos).</string>
     <string name="background_service_is_enabled_question">OsmAnd miega režīma serviss ir aktīvs. Vai vēlaties to izslēgt?</string>
     <string name="app_modes_choose">Programmas režīmi</string>
+	<string name="tips_and_tricks">Ieteikumi un padomi</string>
+    <string name="access_mark_final_location_first">Pieejamības režīms: vispirms lūdzu izvēlieties galamērķi</string> 
+    <string name="app_modes_choose_descr">Izvēlēties pieejamos aplikācijas režīmus</string>
+    <string name="app_mode_hiking">Iet kājām</string>
+    <string name="app_mode_boat">Ūdens transports</string>
+    <string name="local_osm_changes_delete_all_confirm">Tiks izdzēsti  %1$d osm labojumi. Vai tiešām to vēlaties?</string>
+    <string name="auto_zoom_none">Nav automātiskās tālummaiņas</string>
 	</resources>
