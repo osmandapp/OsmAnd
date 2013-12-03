@@ -20,7 +20,7 @@ import org.apache.commons.logging.Log;
 public class RoutePlannerFrontEnd {
 	
 	private boolean useOldVersion;
-	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlannerOld.class);
+	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
 
 	public RoutePlannerFrontEnd(boolean useOldVersion) {
 		this.useOldVersion = useOldVersion;
@@ -42,29 +42,49 @@ public class RoutePlannerFrontEnd {
 		if (dataObjects.isEmpty()) {
 			ctx.loadTileData(px, py, 15, dataObjects);
 		}
-		RouteSegment road = null;
+		// Candidate
+		RouteDataObject road = null;
+		int index = -1;
+		int candidateX = -1;
+		int candidateY = -1;
 		double sdist = 0;
 
 		for (RouteDataObject r : dataObjects) {
 			if (r.getPointsLength() > 1) {
 				for (int j = 1; j < r.getPointsLength(); j++) {
-					QuadPoint pr = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(j - 1), 
-							r.getPoint31YTile(j - 1), r.getPoint31XTile(j ), r.getPoint31YTile(j ));
-					double currentsDist = squareDist((int) pr.x, (int)pr.y, px, py);
+					QuadPoint pr = MapUtils.getProjectionPoint31(px, py, r.getPoint31XTile(j-1), 
+							r.getPoint31YTile(j-1), r.getPoint31XTile(j), r.getPoint31YTile(j));
+					double currentsDist = squareDist((int)pr.x, (int)pr.y, px, py);
 					if (road == null || currentsDist < sdist) {
-						RouteDataObject ro = new RouteDataObject(r);
-						road = new RouteSegment(ro, j);
-						ro.insert(j, (int) pr.x, (int)pr.y);
+						// New candidate
+						road = r;
+						index = j;
+						candidateX = (int)pr.x;
+						candidateY = (int)pr.y;
 						sdist = currentsDist;
 					}
 				}
 			}
 		}
 		if (road != null) {
+			if ((candidateX == road.pointsX[index-1]) && (candidateY == road.pointsY[index-1]))
+			{
+				// Projection has same coordinates. None new.
+				return new RouteSegment(road, index-1);
+			}
+			if ((candidateX == road.pointsX[index]) && (candidateY == road.pointsY[index]))
+			{
+				// Projection has same coordinates. None new.
+				return new RouteSegment(road, index);
+			}
+			// Add projection to a new version of the road.
+			RouteDataObject proj = new RouteDataObject(road);
+			proj.insert(index, candidateX, candidateY);
 			// re-register the best road because one more point was inserted
-			ctx.registerRouteDataObject(road.getRoad());
+			ctx.registerRouteDataObject(proj);
+			return new RouteSegment(proj, index);
 		}
-		return road;
+		return null;
 	}
 	
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates, boolean leftSideNavigation) throws IOException, InterruptedException {
