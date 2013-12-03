@@ -938,7 +938,8 @@
 <string name="gps_wakeup_interval">GPS pamošanās intervāls: %s</string>
 <string name="email">e-pasts</string>
 <string name="tip_recent_changes_0_8_4_t">"Izmaiņas 0.8.4: "</string>
-    <string name="tip_recent_changes_0_8_3_t">Izmaiņas versijā 0.8.3 :\n\t* Starppunkti\n\t* Uzlabota navigācija\n\t* Iespēja izlaist ātrgaitas ceļus\n\t* Cycleway=track attēlošana\n\t* labāk pabeigta saskarne (ikonas)\n\t* daudz kļūdu labojumu</string>
+    <string name="tip_recent_changes_0_8_3_t">Izmaiņas versijā 0.8.3 :\n\t* Ceļapunkti\n\t* Uzlabota navigācija\n\t* Iespēja izlaist automaģistrāles\n\t* Cycleway=track attēlošana\n\t* labāk pabeigta saskarne (ikonas)\n\t* daudz kļūdu labojumu
+	</string>
     
     <string name="context_menu_item_last_intermediate_point">Uzstādīt pēdējo mērķa punktu</string>
     <string name="context_menu_item_first_intermediate_point">Uzstādīt pirmo mērķa punktu</string>
@@ -947,7 +948,7 @@
     <string name="replace_destination_point">Aizvietot galamērķi</string>
     <string name="new_destination_point_dialog">Jūs jau esat uzstādījuši galamērķi.</string>
     <string name="target_point">Galamērķis %1$s</string>
-    <string name="target_points">Mērķi</string>
+    <string name="target_points">Ceļapunkti</string>
     <string name="intermediate_point_too_far">Starppunkts %1$s ir pārāk tālu no tuvākā ceļa.</string>
     <string name="arrived_at_intermediate_point">Jūs esiet nokļuvis starppunktā</string>
     <string name="context_menu_item_intermediate_point">Pievienot starppunktu</string>
@@ -962,7 +963,7 @@
     <string name="poi_filter_accomodation">Izmitināšana</string>
     <string name="poi_filter_restaurants">Restorāni</string>
     <string name="poi_filter_sightseeing">Apskates vietas</string>
-    <string name="avoid_motorway">Izvairīties no ātrgaitas ceļiem</string>
+    <string name="avoid_motorway">Izvairīties no automaģistrālēm</string>
 	<string name="snap_to_road_descr">Navigācijas laikā tuvināt pozīciju ceļam</string>
 	<string name="snap_to_road">Tuvināt ceļam</string>
 	<string name="osmand_short_description_80_chars">OsmAnd ir atvērtā koda navigācijas aplikācija bezsaistes un tiešsaistes kartēm</string>
@@ -1003,8 +1004,8 @@
     <string name="gps_status_eclipsim">GPS statuss</string>
     <string name="default_and">un</string>
     <string name="default_or">vai</string>
-	<string name="route_is_too_long">Iespējams maršruts ir pārāk garš, lai tiktu aprēķināts ar OsmAnd bezsaistes plānotāju.
-	Vispārēji bezsaistes plānošana ir iespējama attālumā līdz 200km starp punktiem. Lūdzu pievienojiet vienu vai vairākas ceļa norādes, lai aprēķinātu maršrutu.</string>
+	<string name="route_is_too_long">Maršruts ir par garu, lai tiktu aprēķināts ar OsmAnd bezsaistes plānotāju.
+	Bezsaistes plānošana ir iespējama attālumā līdz 200km starp ceļapunktiem. Lūdzu pievienojiet vienu vai vairākus ceļapunktus, lai aprēķinātu maršrutu.</string>
 	<string name="auto_zoom_close">Tuvināti</string>
 	<string name="auto_zoom_far">Vidēji tuvu</string>
 	<string name="auto_zoom_farthest">Attālināti</string>
@@ -1036,17 +1037,17 @@
 	<string name="osmodroid_mode_on">Apturēt OsMoDroid</string>    
     <string name="osmodroid_mode_off">Palaist OsMoDroid</string>
     <string name="osmodroid_refresh">Atjaunot kanālus</string>
-    <string name="announce_gpx_waypoints">Izrunāt GPX norādes</string>
+    <string name="announce_gpx_waypoints">Izrunāt GPX ceļapunktus</string>
     <string name="speak_title">Izrunāt…</string>
 	<string name="speak_descr">Konfigurēt, lai izrunātu ielu nosaukumus, satiksmes brīdinājumus (apstāšanās, guļošie policisti), brīdinājumus par foto radariem, ātruma ierobežojumus</string>
 	<string name="speak_street_names">Izrunāt ielu nosaukumus (TTS)</string>
     <string name="speak_speed_limit">Ziņot par ātruma ierobežojumiem</string>
     <string name="speak_cameras">Ziņot par foto radariem</string>
 	<string name="speak_traffic_warnings">Ziņot par satiksmes brīdinājumiem</string>
-    <string name="osb_author_or_password_not_specified">Lūdzu uzstādījumos norādīt OSM lietotāja vārdu un paroli</string>
-    <string name="clear_intermediate_points">Noņemt starpposmus</string>
-    <string name="keep_intermediate_points">Paturēt starpposmus</string>
-    <string name="new_directions_point_dialog">Jums jau ir uzlikti starpposmi.</string>
+    <string name="osb_author_or_password_not_specified">Lūdzu norādiet uzstādījumos OSM lietotāja vārdu un paroli</string>
+    <string name="clear_intermediate_points">Noņemt ceļapunktus</string>
+    <string name="keep_intermediate_points">Paturēt ceļapunktus</string>
+    <string name="new_directions_point_dialog">Ceļapunkti jau ir uzstādīti.</string>
     <string name="context_menu_item_directions_to">Norādes uz</string>
     <string name="context_menu_item_directions_from">Norādes no</string>
     <string name="route_descr_map_location">Karte: </string>
@@ -1059,7 +1060,7 @@
     <string name="context_menu_item_destination_point">Atzīmēt kā galamērķi</string>
     <string name="please_select_address">Vispirms atzīmēt pilsētu vai ielu</string>
     <string name="search_street_in_neighborhood_cities">Meklēt ielu nosaukumus blakus pilsētās</string>
-    <string name="intermediate_items_sort_return">Ir pārkārtoti starpposmi, lai optimizētu to kārtību līdz galamērķim.</string>
+    <string name="intermediate_items_sort_return">Ceļapunkti tika pārkārtoti, lai optimizētu maršrutu līdz galamērķim.</string>
     <string name="intermediate_items_sort_by_distance">Kārtot (pēc attāluma)</string>
     <string name="local_osm_changes_backup_successful">OSM izmaiņu fails veiksmīgi izveidots %1$s</string>
     <string name="local_osm_changes_backup_failed">OSM izmaiņu fails netika izveidots</string>
@@ -1114,9 +1115,9 @@
     <string name="item_checked">Iespējots</string>
     <string name="item_unchecked">Atspējots</string>
     <string name="map_view">Karte</string>
-    <string name="prefer_motorways">Dot priekšroku lielceļiem</string>
+    <string name="prefer_motorways">Priekšroka automaģistrālēm</string>
 	<string name="prefer_in_routing_title">Dot priekšroku…</string>
-	<string name="prefer_in_routing_descr">Dot priekšroku lielceļiem</string>
+	<string name="prefer_in_routing_descr">Priekšroka automaģistrālēm</string>
     <string name="max_speed_none">Nav</string>
     <string name="download_hillshade_item">Kalnu reljefs</string>
     <string name="download_hillshade_maps">Kalnu reljefa slāņi</string>
@@ -1125,7 +1126,7 @@
     <string name="local_indexes_cat_srtm">Kontūrlīniju dati</string>
     <string name="local_indexes_cat_av">Audio/video dati</string>
     <string name="stop_routing_confirm">Vai vēlaties apturēt navigāciju?</string>
-    <string name="clear_dest_confirm">Vai vēlaties noņemt galamērķi (un starpposmus)?</string>
+    <string name="clear_dest_confirm">Vai vēlaties noņemt galamērķi?</string>
     <string name="precise_routing_mode_descr">Iespējot precīzāku maršrutēšanu bez kļūdīšanās. Tā ir ierobežota pēc attāluma un neizmanto iebūvēto bibliotēku.</string>
     <string name="precise_routing_mode">Precīzāka maršrutēšana (alfa)</string>
     <string name="recording_context_menu_show">Parādīt</string>
@@ -1225,4 +1226,29 @@
 	<string name="av_camera_focus_continuous">Nepārtraukts fokuss</string>
 	<string name="av_photo_play_sound">Iespējot skaņu fotografēšanas laikā</string>
 	<string name="av_photo_play_sound_descr">Izvēlēties vai atskaņot skaņu, kad tiek nospiests slēdzis fotografējot</string>
-</resources>
+<string name="amenity_type_seamark">Boja</string>
+    <string name="app_mode_aircraft">Aviācija</string>
+    <string name="tip_map_styles_t">OsmAnd atbalsta dažāda veida bezsaistes vektorkartes:…
+		\n\nPapildus pamata mapes stilam, jūs variet uzlikt, piemēram
+		\n\t* \''Tūrisma skats\' stilu, kas satur vairāk detalizētu informāciju par ceļošanu un tūrismu.…
+		\n\t* \'Kontrastains ceļš\' parāda ceļus izceltās krāsās, kas atvieglina kartes pārlūkošanu saulainā laikā.…
+		\n\t* \'Ziema un slēpošana\' iezīmē karti ziemas krāsās un izceļ ar slēpošanu saistītajos apvidos zemes reljefu (ar lejupielādētu \'World ski\' karti)…
+	</string>
+    <string name="local_index_tile_data_expire">Derīgums (minūtēs): %1$s</string>
+    <string name="local_index_tile_data_name">Attēlu dati: %1$s</string>
+    <string name="edit_tilesource_successfully">Attēlu avots %1$s ir saglabāts</string>
+    <string name="edit_tilesource_elliptic_tile">Eliptisks merkators</string>
+    <string name="local_index_gpx_timespan">\nLaika sprīdis: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nBrauciena laiks: %1$d:%2$02d:%3$02d</string>
+	<string name="delete_point">Noņemt punktu</string>
+    <string name="plugin_distance_point">Punkts</string>
+    <string name="use_distance_measurement_help">…* Nospiediet, lai atzīmētu punktu.\n…
+……… * Nospiediet uz kartes un paturiet, lai noņemtu iepriekšējo punktu.\n…
+……… * Nospiediet uz punkta un paturiet, lai pievienotu un lasītu aprakstu.\n…
+……… * Nospiediet uz mērlineāla, lai izvēlētos citas darbības.</string>
+    <string name="osmand_srtm_long_description_1000_chars">Šis spraudnis iespējo kontūrlīnijas, kas var tikt atttēlotas OsmAnd\'a bezsaistes kartēs. Globālie dati (starp 70" Z un 70" D) ir bāzēti uz SRTM (Shuttle Radar Topography Mission) un ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mērījumiem, attēlveidošanas rīks uz Terra\'s, vadošais NASA\'s Zemes Novērošanas Sistēmas satelīts. ASTER ir kopējs veikums ar NASA, Japānas Ekonomikas Ministriju, Trade and Industry (METI) un Japānas Izplatījuma Sistēmām (J-spacesystems).</string>
+    <string name="tip_altitude_offset_t">Pārsvarā visas GPS ierīces augstuma mērījumus pārraida elipsoīdu bāzētā WGS84 atsauces sistēmā, kur ir nepieciešana no atrašanas vietas atkarīga korekcija, lai noteiktu augstumu virs jūras līmeņa lokālajās ierīcēs.…
+		\n\nPrecīzākai augstuma noteikšanai tiek izmantota EGM96(geoid) atsauce.…
+		\n\nOsmAnd attēlos augstumu virs jūras līmeņa pēc EGM96 sistēmas pēc tam, kad jūs būsiet lejupielādējuši \'World Altitide Correction\' (WW15MGH.DAC) failu caur karšu lejupielādes izvēlni aplikācijā. (Oriģināls ir pieejams http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)…
+	</string>
+    </resources>
