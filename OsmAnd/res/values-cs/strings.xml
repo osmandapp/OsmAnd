@@ -1351,4 +1351,18 @@
 	<string name="animate_routing_route_not_calculated">Nejprve prosím vypočítejte trasu</string>
     <string name="animate_routing_route">Simulovat pomocí vypočítané trasy </string>
     <string name="animate_routing_gpx">Simulovat pomocí GPX trasy</string>
+    <string name="local_osm_changes_delete_all">Odstranit vše</string>
+    <string name="local_osm_changes_delete_all_confirm">Chystáte se odstranit %1$d změn OSM. Jste si jistý?</string>
+    <string name="tip_faq">Často kladené otázky</string>
+    <string name="tip_faq_t">Prosím navštivte
+https://code.google.com/p/osmand/wiki/FAQ
+s často kladenými otázkami.</string>
+    <string name="app_mode_hiking">Turistika</string>
+    <string name="app_mode_motorcycle">Motocykl</string>
+    <string name="app_mode_boat">Loď</string>
+    <string name="app_mode_aircraft">Letadlo</string>
+    <string name="map_widget_map_rendering">Vykreslování mapy:</string>
+    <string name="app_modes_choose_descr">Vyberte v aplikaci dostupné profily</string>
+    <string name="app_modes_choose">Profily aplikace</string>
+	<string name="amenity_type_seamark">Mořská značka</string>
     </resources>
