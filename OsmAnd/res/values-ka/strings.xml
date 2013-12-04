@@ -1,14 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
-  <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
-  <string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
   <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
   <string name="left_side_navigation_descr">აირჩიეთ მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის</string>
   <string name="download_link_and_local_description">დააწკაპუნეთ გათიშული რეჟიმის მონაცემების ჩამოტვირთვა/ატვირთვისათვის.\nდააწკაპუნეთ არსებულ მონაცემს მეტი დეტალების მისაღებას. დააჭირეთ და გეჭიროთ მისი დეაქტივაციის ან წაშლისათვის. \nმიმდინარე მონაცემები მოწყობილობაზე (თავისუფალია %1$s):</string>
@@ -197,7 +188,6 @@
   
   <string name="tip_osm_improve">OSM-ს მონაცემების გაუმჯობესება</string>
   <string name="tip_osm_improve_t">\tOsmAnd იყენებს რუკებს, რომლებიც ეყრდნობა Openstreetmap.org (OSM)-ის მონაცემებს და ასევე ანახლებს მათ. თქვენ ადვილად შეგიძლიათ შექმნათ POI-ები და ატვირთოთ ისინი. ასევე შესაძლებელია OSM-ის ხოჭოების შესახებ შეტყობინებების შექმნა მხოლოდ რამოდენიმე წკაპით!\n\tამისათვის საჭიროა შეიყვანოთ OSM-ის მომხმარებლის სახელი და პაროლი. \'პარამეტრები\' -&gt; \'მთავარი პარამეტრები\' -&gt; \'OSM-ის გამართვა\'. \n\tახალი POI-ის შესაქმნელად აირჩიეთ ფუნქცია \'POI-ის შექმნა\' კონტექსტურ მენიუში. ინფორმაციის შეყვანის შემდეგ დააჭირეთ \'ახალი POI-ის შექმნა\'.\n\tრუკის შეცდომები შეგიძლიათ მომენტალურად შეატყობინოთ OSM-ს. ეს დაეხმარება მათ ამ შეცდომების ჩასწორებაში.\n\tOSM-ის ხოჭოს დასამატებლად აირჩიეთ \'OSM-ის ხოჭოს რეპორტის გახსნა\' კონტექსტური მენიუდან. მონაცემების შეყვანის შემდეგ დააჭირეთ დამატების ღილაკს.\n\tშენიშვნა: OSM POI-ის დასამატებლად და ხოჭოების რეპორტის გასახსნელად საჭიროა ინტერნეტ-შეერთება.</string>
-  <!-- end of string changes for new Preferences structure -->
   <string name="download_files_not_enough_space">არასაკმარისი ადგილი %1$s მბ-ის გადმოსაწერად (თავისუფალია: %2$s).</string>
   <string name="download_files_question_space">თავისუფალი ადგილი {2} მბ! გადმოვწერო {0} ფაილი ზომით ({1} მბ)?</string>
   <string name="tip_select_destination_point">აირჩიეთ საბოლოო წერტილი</string>
@@ -743,7 +733,7 @@
   <string name="choose_available_region">აირჩიეთ რაიონი სიიდან</string>
   <string name="choose_intersected_street">აირჩიეთ მკვეთი ქუჩა</string>
   <string name="Closest_Amenities">უახლოესი დასახლებული პუნქტები</string>
-  <string name="app_mode_default">ნაგულისხმევი</string>
+  <string name="app_mode_default">რუკის დათვალიერება</string>
   <string name="app_mode_car">მანქანა</string>
   <string name="app_mode_bicycle">ველოსიპედი</string>
   <string name="app_mode_pedestrian">ფეხით მოსიარულე</string>
@@ -935,7 +925,7 @@
 <string name="show_warnings_descr">სიჩქარის ლიმიტის, კამერებისა და საცობების ჩვენება</string>
 <string name="map_widget_fluorescent">მანათობელი გზები</string>
 <string name="map_widget_show_ruler">სახაზავის ჩვენება</string>
-<string name="map_widget_appearance">სხვადასხვა:</string>
+<string name="map_widget_appearance">დარჩენილი ელემენტები:</string>
 <string name="map_widget_view_direction">ხედვის მიმართულება</string>
 <string name="map_widget_transparent">გამჭირვალე ხედი</string>
 <string name="monitoring_mode_off">GPX-ის ჩაწერის გამორთვა</string>
@@ -1081,4 +1071,81 @@
     <string name="osmand_plus_short_description_80_chars">OsmAnd წარმოადგენს აპლიკაციას ღია კოდით გათიშული და მიმდინარე რუკებით ნავიგაციისათვის</string>
 	<string name="select_navigation_mode">აირჩიეთ ტრანსპორტის ტიპი</string>
 	<string name="incomplete_locale">დაუსრულებელი</string>
-	</resources>
+	<string name="app_modes_choose_descr">აირჩიეთ აპლიკაციის რეჟიმები</string>
+    <string name="app_modes_choose">აპლიკაციის პროფილები</string>
+	<string name="map_widget_map_rendering">რუკის რენდერი:</string>
+    <string name="app_mode_hiking">ფეხით მოგზაურობა</string>
+    <string name="app_mode_motorcycle">მოტოციკლი</string>
+    <string name="app_mode_boat">გემი</string>
+    <string name="app_mode_aircraft">თვითმფრინავი</string>
+    <string name="tip_faq_t">ხშირად დასმული კითხვების სანახავად გთხოვთ მოინახულოთ https://code.google.com/p/osmand/wiki/FAQ .</string>
+    <string name="tip_faq">ხშირად დასმული კითხვები</string>
+    <string name="local_osm_changes_delete_all_confirm">თქვენ შლით osm ცვლილებას %1$d. დარწმუნებული ბრძანდებით?</string>
+    <string name="local_osm_changes_delete_all">ყველას წაშლა</string>
+    <string name="animate_routing_route_not_calculated">გთხოვთ ჯერ გადაითვალოთ გზა</string>
+    <string name="animate_routing_route">სიმულაცია გამოთვლილი გზის გამოყენებით </string>
+    <string name="animate_routing_gpx">სიმულაცია GPX მიყოლით</string>
+    <string name="remember_choice">ჩემი არჩევნის დამახსოვრება</string>
+    <string name="gps_status_eclipsim">GPS-ის სტატუსი</string>
+    <string name="default_and">და</string>
+    <string name="default_or">ან</string>
+	<string name="route_is_too_long">შესაძლებელია გზა მეტისმეტად გრძელია OsmAnd გათიშული მთვლელისათვის.
+	გათიშული გზის შესაძლო მაქსიმალური სიგრძეა 200კმ. გთხოვთ ჩაამატოთ შუალედური წერტილები.</string>
+	<string name="auto_zoom_none">ავტომატური გადიდების გათიშვა</string>
+	<string name="auto_zoom_close">გასადიდებლად</string>
+	<string name="auto_zoom_far">საშუალო დისტანციამდე</string>
+	<string name="auto_zoom_farthest">დიდ მანძილზე</string>
+	<string name="map_magnifier">რუკის გამადიდებელი</string>
+	<string name="base_world_map">დედამიწის ბაზისური რუკა</string>
+	<string name="tip_map_styles">რუკის სტილები</string>
+	<string name="about_version">ვერსია:</string>
+    <string name="about_settings">შესახებ</string>
+    <string name="about_settings_descr">ინფორმაცია ვერსიის, ლიცენზიების და პროექტის წევრების შესახებ</string>
+    <string name="tips_and_tricks">კარნახი</string>
+    <string name="local_index_tile_data_zooms">ჩამოტვირთულია გადიდებები: %1$s</string>
+    <string name="local_index_tile_data_expire">დროის გასვლა (წთ): %1$s</string>
+    <string name="local_index_tile_data_downloadable">გადმოტვირთვადი: %1$s</string>
+    <string name="local_index_tile_data_maxzoom">მაქსიმალური გადიდებადობა: %1$s</string>
+    <string name="local_index_tile_data_minzoom">მინიმალური გადიდებადობა: %1$s</string>
+    <string name="local_index_tile_data_name">ინდექსი: %1$s</string>
+    <string name="edit_tilesource_successfully">ინდექსის წყარო %1$s წარმატებით იქნა შენახული</string>
+    <string name="amenity_type_seamark">ზღვის დონიდან</string>
+    <string name="edit_tilesource_maxzoom">მაქს. გადიდება</string>
+    <string name="edit_tilesource_expiration_time">დროის გასვლა (წთ)</string>
+    <string name="edit_tilesource_minzoom">მინ. გადიდება</string>
+    <string name="edit_tilesource_url_to_load">ბმული</string>
+    <string name="edit_tilesource_choose_existing">აირჩიეთ არსებული...</string>
+    <string name="edit_tilesource_name">სახელი</string>
+    <string name="maps_define_edit">აღწერა/ჩასწორება…</string>
+	<string name="map_widget_fps_info">FPS გარჩევის ინფორმაცია</string>
+	<string name="driving_region_descr">აირჩიეთ გზის რეგიონი: აშშ, ევროპა, UK, აზია და სხვა</string>
+	<string name="driving_region">გზის რეგიონი</string>
+	<string name="driving_region_japan">იაპონია</string>
+	<string name="driving_region_us">აშშ</string>
+	<string name="driving_region_canada">კანადა</string>
+	<string name="driving_region_europe_asia">ევროპა &amp; აზია</string>
+	<string name="driving_region_uk">UK, ინდოეთია, ავსტრალია &amp; სხვანი</string>
+	<string name="osmodroid_mode_on">OsMoDroid-ის გაჩერება</string>    
+    <string name="osmodroid_mode_off">OsMoDroid-ის ჩართვა</string>
+    <string name="osmodroid_refresh">არხების განახლება</string>
+    <string name="announce_gpx_waypoints">GPX წერტილების გაცხადება</string>
+    <string name="speak_title">გაცხადება…</string>
+	<string name="speak_descr">გაცხადებებში ქუჩის სახელების, სიჩქარის შეზღუდვის (იძულებითი გაჩერებების, სიჩქარის კონტროლის), ჩქაროსნული კამერების, სიჩქარის ლიმიტების მითითების ჩასწორება</string>
+	<string name="speak_street_names">ქუჩის სახელების გაცხადება</string>
+    <string name="speak_speed_limit">სიჩქარის ლიმიტის გაცხადება</string>
+    <string name="speak_cameras">ჩქაროსნული კამერების გაცხადება</string>
+	<string name="speak_traffic_warnings">ტრაფიკის შეტყობინებების გაცხადება</string>
+    <string name="osb_author_or_password_not_specified">გთხოვთ პარამეტრებში მიუთითოთ OSM-ის მომხმარებელი და პაროლი</string>
+    <string name="clear_intermediate_points">შუალედური წერტილების გასუფთავება</string>
+    <string name="keep_intermediate_points">შუალედური წერტილების დატოვება</string>
+    <string name="new_directions_point_dialog">თქვენ უკვე დააყენეთ შუალედური წერტილები.</string>
+    <string name="context_menu_item_directions_to">მიმართულება</string>
+    <string name="context_menu_item_directions_from">მიმართულება</string>
+    <string name="route_descr_map_location">რუკა: </string>
+    <string name="route_to">სადამდე:</string>
+    <string name="route_via">გავლით:</string>
+    <string name="route_from">საიდან:</string>
+	<string name="local_index_gpx_timespan">\nდაახლ. დრო: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nმოძრაობის დრო: %1$d:%2$02d:%3$02d</string>
+	<string name="destination_point">დანიშნულების წერტილი %1$s</string>
+    </resources>
