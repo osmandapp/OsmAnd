@@ -219,8 +219,8 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="poi_filter_fuel">燃料(Fuel)</string>
      <string name="poi_filter_namefinder">オンラインNameFinder</string>
      <string name="reading_cached_tiles">キャッシュ済タイル読み込み中…</string>
-     <string name="version_index_is_big_for_memory">The index
-\'\'{0}\'\' did not fit into memory</string>
+     <string name="version_index_is_big_for_memory">索引
+\'\'{0}\'\' はメモリ内に格納できませんでした</string>
      <string name="version_index_is_not_supported">索引 \'\'{0}\'\' のバージョンは
 サポートされていません</string>
 
@@ -321,8 +321,7 @@ MB)をダウンロードしますか?</string>
      <string name="no_vector_map_loaded">ベクターマップはロードされませんでした</string>
 
      <string name="map_route_by_gpx">GPXを使ったルート</string>
-     <string name="gpx_files_not_found">GPXファイルが/tracks directory
-にありません</string>
+     <string name="gpx_files_not_found">GPXファイルがtracksフォルダにありません</string>
      <string name="layer_gpx_layer">GPXトラック…</string>
      <string name="error_reading_gpx">GPXデータ読み込みエラー</string>
 
@@ -527,7 +526,7 @@ POIの更新は利用できません</string>
      <string name="loading_data">データをロード中…</string>
      <string name="reading_indexes">索引を読み込み中…</string>
      <string name="previous_run_crashed">前回のアプリケーション実行はクラッシュしました。
-ログファイルは{0}にあります。ログファイルを添付して問題をレポートしてください。</string>
+ログファイルは{0}にあります。ログファイルを添付して問題を報告してください。</string>
      <string name="saving_gpx_tracks">GPXトラックをSDに保存中…</string>
      <string name="finished_task">終了</string>
  <string name="reload_indexes_descr">オフラインベクターマップと索引をSDカードからリロード</string>
@@ -1360,4 +1359,36 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="tip_recent_changes">最近の更新</string>
 	<string name="voice_not_specified">使用しない</string>
 	<string name="incomplete_locale">不完全</string>
-	</resources>
+	<string name="tip_app_mode_t_v2">OsmAndは移動手段ごとに異なるプロファイル(カスタマイズ可能)を使用できます。
+検索		\n\nプロファイルの切替には、地図画面の左下隅にあるプロファイルボタン(車、自転車、歩行者のアイコン)をタッチするか、ルート作成時に(トランスポートモード)選択できます。
+	</string>
+	<string name="downloading_file_new">ダウンロード中…</string>
+	<string name="osb_author_dialog_password">OSMパスワード(オプション)</string>
+	<string name="email">Eメール</string>
+	<string name="av_camera_focus">カメラフォーカスタイプ</string>
+	<string name="av_camera_focus_descr">内部カメラのフォーカスタイプを選択します</string>
+	<string name="av_camera_focus_auto">オートフォーカス</string>
+	<string name="av_camera_focus_hiperfocal">過焦点フォーカス</string>
+	<string name="av_camera_focus_edof">拡張被写界深度(EDOF)</string>
+	<string name="av_camera_focus_continuous">カメラは、継続的にフォーカスします</string>
+	<string name="amenity_type_seamark">満潮線</string>
+    <string name="app_modes_choose_descr">アプリケーション表示用のプロファイルを選択してください</string>
+    <string name="app_modes_choose">アプリケーションプロファイル</string>
+	<string name="map_widget_map_rendering">マップ描画:</string>
+    <string name="app_mode_hiking">ハイキング</string>
+    <string name="app_mode_motorcycle">バイク</string>
+    <string name="app_mode_boat">ボート</string>
+    <string name="app_mode_aircraft">航空機</string>
+    <string name="tip_faq_t">https://code.google.com/p/osmand/wiki/FAQ のよくある質問をご覧ください。</string>
+    <string name="tip_faq">よくある質問(FAQ)</string>
+    <string name="local_osm_changes_delete_all_confirm">%1$d個のOSMの変更を削除しようとしています。よろしいですか？</string>
+    <string name="local_osm_changes_delete_all">すべて削除</string>
+    <string name="osmodroid_refresh">チャンネルを更新</string>
+    <string name="tip_recent_changes_1_5_t">1.5での変更点：
+	\n\t* 制限速度とスピードカメラについての音声警告
+	\n\t* より多くの音声案内機能(通りの名前)
+	\n\t* 高密度マップアイコン
+	\n\t* ユーザーインターフェースの各所変更
+	\n\t* 距離表示、GPXアナライザ、経由点の処理、計画のウィジェット、OSMのアップロード、https処理のバグ修正
+    </string>
+    </resources>
