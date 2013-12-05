@@ -1589,6 +1589,6 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="local_osm_changes_delete_all">Izbriši vse</string>
     <string name="map_widget_map_rendering">Upodabljanje zemljevida:</string>
     <string name="amenity_type_seamark">Pomorski znak</string>
-    <string name="app_modes_choose_descr">Izberite razpoložljive načine aplikacije v aplikaciji</string>
-    <string name="app_modes_choose">Načini aplikacije</string>
+    <string name="app_modes_choose_descr">Izberite uporabne profile, ki so vidni v aplikaciji</string>
+    <string name="app_modes_choose">Profili aplikacije</string>
 	</resources>
