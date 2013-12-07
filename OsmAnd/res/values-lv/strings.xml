@@ -278,7 +278,7 @@
   <string name="local_indexes_cat_poi">POI dati</string>
   <string name="ttsvoice">TTS balss</string>
   <string name="search_offline_clear_search">Jauna meklēšana</string>
-  <string name="map_text_size_descr">Izvēlaties teksta izmēru kartes nosaukumiem</string>
+  <string name="map_text_size_descr">Izvēlēties fonta lielumu teksta attēlošanai uz kartes</string>
   <string name="map_text_size">Teksta izmērs</string>
   <string name="trace_rendering">Renderēšanas atkļūdošanas info</string>
   <string name="trace_rendering_descr">Rādīt renderēšanas veiktspēju</string>
@@ -289,19 +289,19 @@
   <string name="installing_new_resources">Atpako jaunos datus…</string>
   <string name="internet_connection_required_for_online_route">Izvēlēts tiešaistes navigācijas serviss, bet nav pieejams interneta savienojums.</string>
   <string name="tts_language_not_supported_title">Valoda netiek atbalstīta</string>
-  <string name="tts_language_not_supported">Izvēlētā valoda nav atbalstīta instalētajā Android TTS (teksta izrunāšana) dzinējā. Vēlaties aplūkot citas iespējas TTS dzinējam? Pretējā gadījumā tiks lietota uzstādītā TTS valoda.</string>
+  <string name="tts_language_not_supported">Izvēlētā valoda nav atbalstīta instalētajā ierīces Android TTS (teksta izrunāšana) dzinējā. Vai vēlaties meklēt citu TTS dzinēju? Pretējā gadījumā tiks lietota iepriekš uzstādītā TTS valoda.</string>
   <string name="tts_missing_language_data_title">Iztrūkst dati</string>
-  <string name="tts_missing_language_data">Norādītajai valodai dati nav instalēti. Vai vēlaties pārlūkot \"Market\" lai instalētu?</string>
+  <string name="tts_missing_language_data">Šai valodai nav pieejami valodas dati. Vai vēlaties atvērt Market, lai instalētu?</string>
   <string name="gpx_option_reverse_route">Pretējais GPX virziens</string>
-  <string name="gpx_option_destination_point">Lietot tekošo galamērķi</string>
-  <string name="gpx_option_from_start_point">Doties līdzi visam ceļam</string>
+  <string name="gpx_option_destination_point">Lietot patreizējo galamērķi</string>
+  <string name="gpx_option_from_start_point">Sekot no brauciena sākuma</string>
   <string name="switch_to_vector_map_to_see">Šai vietai ir pieejama bezsaistes vektoru karte. \n\t\n\tLai to lietotu, aktivizējiet \'Izvēlne\' -&gt; \'Definēt skatu\' -&gt; \'Kartes avots…\' -&gt; \'Bezsaistes vektoru kartes\'.</string>
   <string name="choose_audio_stream">Balss vadības izvads</string>
-  <string name="choose_audio_stream_descr">Izvēlaties kanālu caur kuru atskaņot balss vadību (sistēmas-atkarīgi)</string>
-  <string name="voice_stream_voice_call">Balss zvana audio</string>
+  <string name="choose_audio_stream_descr">Izvēlieties kanālu, caur kuru atskaņot balss vadību</string>
+  <string name="voice_stream_voice_call">Tālruņa skaļrunis</string>
   <string name="voice_stream_notification">Notifikācijas audio</string>
-  <string name="voice_stream_music">Mēdiju/mūzikas audio</string>
-  <string name="warning_tile_layer_not_downloadable">Aplikācija nevar lejuplādēt kartes slāni %1$s, lūdzu mēģiniet to pārinstalēt.</string>
+  <string name="voice_stream_music">Multimēdiju audio</string>
+  <string name="warning_tile_layer_not_downloadable">Aplikācija nevar lejupielādēt kartes slāni %1$s, lūdzu mēģiniet to pārinstalēt.</string>
   <string name="overlay_transparency_descr">Modificēt pārklāja caurspīdīgumu</string>
   <string name="overlay_transparency">Pārklāja caurspīdīgums</string>
   <string name="map_transparency_descr">Modificēt bāzes kartes caurspīdīgumu</string>
@@ -327,7 +327,7 @@
 \n\tLai koplietotu atrašanās vietu:
 \n\tUse \'Kartes konteksta izvēlne\' -&gt; \'Koplietot atrašanās vietu\' izvēlne.
 \n\tTad izvēlaties veidu kā koplietot jūsu atrašanās vietu. Izvēle ir starp: E-pasts, SMS(teksts), vai vienkārši koordināšu kopēšana starpliktuvē.</string>
-  <string name="tip_favorites">Punktu izlase</string>
+  <string name="tip_favorites">Vietu izlase</string>
   <string name="tip_favorites_t">\tBiežāk lietotos punktus var saglabāt izlasē.
 \n\tLai saglabātu punktu izlasē, ejiet uz kartes konteksta izvēlni, izvēlaties opciju \'Pievienot izlasei\' un tad ievadiet nosaukumu. Pēc saglabāšanas izlasē, tas ir pieejams caur \'Galvenā izvēlne\' -&gt; \'Izlase\'.
 \n\tPieturot piespiestu izlases punktu izvēlnē \'Izlase\' parādās izvēlne lai norādītu punktu kā galapunktu, labotu vai dzēstu to.
@@ -335,10 +335,10 @@
   <string name="create_poi_link_to_osm_doc">_<u>Tiešsaistes OSM</u> kartes klasifikācija ar attēliem"</string>
   <string name="error_doing_search">Notika kļūda bezsaistes meklēšanā</string>
   <string name="search_offline_geo_error">Nevaru nopārsēt geo nolūku \'%s\'</string>
-  <string name="search_osm_offline">Meklēt adresi lietojot bezsaistes kartes</string>
+  <string name="search_osm_offline">Meklēt adresi bezsaistes kartēs</string>
   <string name="system_locale">Sistēma</string>
-  <string name="preferred_locale_descr">Izvēlēties attēlošanas valodu</string>
-  <string name="preferred_locale">Attēlošanas valoda</string>
+  <string name="preferred_locale_descr">Izvēlieties displeja valodu</string>
+  <string name="preferred_locale">Interfeisa valoda</string>
   <string name="tip_map_switch">Kartes Avots</string>
   
   <string name="tip_app_mode">Lietotāja profils</string>
@@ -346,35 +346,35 @@
   <string name="tip_navigation">Navigācijas izvēlne</string>
   <string name="tip_navigation_t">\tPirms sākt navigāciju, jums jāizvēlas galapunkts, tad nospiediet \'Izvēlne\' -&gt; \'Navigācija\' uz kartes un izvēlieties navigācijas veidu.
 	</string>
-  <string name="tip_search">Meklēju</string>
+  <string name="tip_search">Meklē</string>
   <string name="tip_search_t">\tJūs variet meklēt vietas tieši kartē, pēc adreses, atrašanās vietas, kā POI, vai arī kā iepriekš definētu izlases punktu.
 \n\tNospiežot galvenajā izvēlnē \'Meklēt\' atver meklēšanas logu. Katram atrastajam ierakstam tiek piedāvātas divas iespējas: \'Izvēlēties kā galamērķi\' vai \'Rādīt kartē\'.</string>
   <string name="tip_map_context_menu">Kartes konteksta izvēlne</string>
   <string name="tip_map_context_menu_t">\tKartes konteksta izvēlne ir pieejama nospiežot un turot nospiestu kartes punktu.
 \n\tPēc darbības kartē parādās iezīme ar koordinātēm. Lai atvērtu kartes konteksta izvēlnes dialogu piespiežat uz tām. (Vai arī pieturiet nospiestu lai koordināšu ieraksts pazustu.)
 \n\tKartes konteksta izvēlne satur visas darbības kuras saistītas ar punktu (atrašanās vietu).</string>
-  <string name="tip_initial">Padomi un triki</string>
+  <string name="tip_initial">Padomi un ieteikumi</string>
   <string name="tip_initial_t">"\tOsmAnd ir navigācijas aplikācija ar daudz iespējām.
 \n\tIevadam, daži lietošanas padomi ir piesaistīti galvenajai ekrāna izvēlnei. "</string>
   <string name="next_button">Tālāk</string>
   <string name="previous_button">Atpakaļ</string>
-  <string name="unit_of_length_descr">Izmainīt garuma un ātruma vienības</string>
+  <string name="unit_of_length_descr">Mainīt ātruma un garuma mērvienības</string>
   <string name="unit_of_length">Mērvienība</string>
   <string name="si_mi_foots">Jūdzes/pēdas</string>
   <string name="si_mi_yard">Jūdzes/jardi</string>
   <string name="si_km_m">Kilometri/metri</string>
-  <string name="yard">Pagalms</string>
+  <string name="yard">Jards</string>
   <string name="foot">Pēdas</string>
-  <string name="mile_per_hour">ml/h</string>
+  <string name="mile_per_hour">mil/h</string>
   <string name="mile">jūdze</string>
   <string name="send_location_way_choose_title">Koplietot atrašanās vietu ar</string>
   <string name="send_location_sms_pattern">Vieta: %1$s\n%2$s</string>
-  <string name="send_location_email_pattern">Lai redzētu atrašanās vietu sekojiet web pārlūka saitei %1$s vai android domātai saitei %2$s</string>
+  <string name="send_location_email_pattern">Lai redzētu atrašanās vietu, sekojiet web pārlūka saitei %1$s vai android domātai saitei %2$s</string>
   <string name="send_location">Sūtīt atrašanās vietu</string>
   <string name="context_menu_item_share_location">Koplietot atrašanos</string>
   <string name="add_waypoint_dialog_added">GPX ceļapunkts \'\'{0}\'\' tika veiksmīgi pievienots</string>
-  <string name="add_waypoint_dialog_title">Pievienot galamērķi GPX ceļa ierakstam</string>
-  <string name="context_menu_item_add_waypoint">Pievienot GPX galapunktu</string>
+  <string name="add_waypoint_dialog_title">Pievienot ceļapunktu GPX ceļa ierakstam</string>
+  <string name="context_menu_item_add_waypoint">Pievienot GPX ceļapunktu</string>
   <string name="amenity_type_administrative">Administratīvie</string>
   <string name="amenity_type_barrier">Barjera</string>
   <string name="amenity_type_education">Izglītība</string>
