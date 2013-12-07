@@ -1330,4 +1330,6 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="app_mode_boat">Båt</string>
     <string name="app_mode_aircraft">Flyg</string>
     <string name="map_widget_map_rendering">Kartrendering:</string>
-    </resources>
+    <string name="amenity_type_seamark">Sjömärke</string>
+    <string name="app_modes_choose">Applikationsprofiler</string>
+	</resources>
