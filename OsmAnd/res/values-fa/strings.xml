@@ -1617,4 +1617,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="app_mode_motorcycle">موتور سیکلت</string>
     <string name="app_mode_boat">قایق</string>
     <string name="app_mode_aircraft">هواپیما</string>
+    <string name="amenity_type_seamark">علامت دریا</string>
+    <string name="app_modes_choose_descr">مشاهده پروفایل انتخاب شده</string>
+    <string name="app_modes_choose">پروفایل برنامه</string>
+	<string name="map_widget_map_rendering">رندرینگ نقشه:</string>
     </resources>
