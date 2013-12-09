@@ -744,7 +744,7 @@
     <string name="app_mode_boat">قارب</string>
     <string name="app_mode_aircraft">الطائرات</string>
     <string name="app_modes_choose_descr">اختيار أوضاع التطبيق المتوفرة في التطبيق</string>
-    <string name="app_modes_choose">طرق التطبيق</string>
+    <string name="app_modes_choose">ملامح التطبيق</string>
 	<string name="tip_faq">اسئلةواجوبة</string>
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
     <string name="tip_faq_t">يرجى زيارة https://code.google.com/p/osmand/wiki/FAQ لرؤية الأسئلة المتداولة</string>
@@ -1087,7 +1087,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="auto_follow_route_never">ابدا</string>
 	<string name="auto_follow_route_navigation">مركز صناعة السيارات الوحيد</string>
 	<string name="auto_follow_route_navigation_descr">خريطة صناعة السيارات في مركز عرض فقط أثناء التنقل</string>
-	<string name="auto_follow_location_enabled">خريطةصناعة السيارات فى مركز العرض فى الاستخدام</string>
+	<string name="auto_follow_location_enabled">توسيط عرض الخريطة الحالية تلقائيا</string>
 	<string name="pref_vector_rendering">خيارات محددةناقلات العارض</string>
 	<string name="pref_overlay">غطاء/بطانة</string>
 	<string name="pref_raster_map">اعداداتمصدر الخريطة</string>
@@ -1242,4 +1242,118 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="map_overlay_descr">اختيار خريطة التراكب</string>
 	<string name="poi_dialog_other_tags_message">يتم الاحتفاظ بكافة العلامات الاخري</string>
 	<string name="amenity_type_seamark">سيمارك</string>
-    </resources>
+    <string name="poi_dialog_comment_default">متغير POI</string>
+	<string name="tile_source_already_installed">يتم تثبيت خريطة بالفعل، سيتم تحديث إعدادات</string>
+	<string name="select_tile_source_to_install">حدد (البلاط) خرائط لتثبيت أو تحديث</string>
+	<string name="internet_not_available">اتصال إنترنت المطلوبة للتشغيل غير متوفر</string>
+	<string name="install_more">تثبيت اكثر</string>
+	<string name="level_to_switch_vector_raster_descr">مستوى التكبير الحد الأدنى لاستخدام الخرائط ناقلات</string>
+	<string name="level_to_switch_vector_raster">دقيقة. مستوى التكبير ناقلات</string>
+	<string name="tip_location_sharing">مشاركة الموقع</string>
+	<string name="tip_location_sharing_t">يمكنك مشاركة موقع أماكن مثيرة للاهتمام في رحلتك مع العائلة أو الأصدقاء من خلال \ 'استخدام موقع \' السياق القائمة → \ 'شارك موقع \'. ↵
+→ → \ ن اختار \ nThen وسيلة لمشاركة موقعك. والخيارات هي: البريد الإلكتروني، والرسائل القصيرة (النص)، أو مجرد نسخ إحداثيات الموقع إلى الحافظة الجهاز ↵.
+→
+	</string>
+	<string name="tip_favorites">النقاط المفضلة</string>
+	<string name="tip_favorites_t">يمكن حفظ نقاط استخداما كما المفضلة، على النحو التالي: ↵
+→ → \ ن \ n في \ 'استخدام موقع \' قائمة السياق عن أي نقطة، حدد الخيار \ 'أضف إلى المفضلة \ "ومن ثم إدخال اسم لذلك. ↵
+→ → \ ن \ n بعد إنقاذ المفضلة، فإنه يمكن الوصول إليها عبر \ 'القائمة \' → \ 'المفضلة \'. يوفر التنصت على أي إدخال في \ 'المفضلة \' قائمة الخيارات ترغب في التنقل إليها، وتحريرها أو حذفها. ↵
+→ → \ ن العرض \ n لجميع النقاط المفضلة مباشرة على الخريطة، على الشاشة خريطة تمكين طبقة \ 'المفضلة \' في \ 'القائمة \' → \ 'طبقات الخريطة \'. ↵
+→
+	</string>
+	<string name="poi_error_info_not_loaded">كان معلومات حول عقدة لا تحميل</string>
+	<string name="poi_error_io_error_template">وقعت I / O خطأ أثناء ممارسة العمل {0}.</string>
+	<string name="error_doing_search">حدث خطا اثناء البحث</string>
+	<string name="search_offline_geo_error">لا يمكن تحليل نوايا الجغرافية \ '٪ ق \'</string>
+	<string name="search_osm_offline">موقع البحث الجغرافي</string>
+	<string name="system_locale">نظام</string>
+	<string name="preferred_locale_descr">اختر لغة العرض</string>
+	<string name="preferred_locale">لغة العرض</string>
+	<string name="incomplete_locale">ناقص</string>
+	<string name="tip_map_switch">تحديد خريطة المصدر</string>
+	<string name="tip_map_switch_t_v2">يتم تغيير طبقات الخريطة مصدر وخريطة طريق عرض \ 'القائمة \' → \ 'خريطة طبقات \'. ↵
+→ → \ ن \ nUnder \ 'مصدر الخريطة ... \' يمكنك اختيار استخدام خرائط محملة مسبقا ناقلات حاليا (افتراضيا، هناك حاجة أيضا للملاحة حاليا)، أو محددة مسبقا (الانترنت أو غير متصل مؤقتا) مصادر البلاط (تفعيل \ 'على الانترنت 'البرنامج المساعد تحت \' خرائط \ 'إعدادات \' → \ 'الإضافات \ لهذا)، أو خرائط إنشاؤها يدويا باستخدام مثل OsmAndMapCreator على جهاز كمبيوتر. ↵
+→ → \ ن \ nOsmAnd كما يدعم مصادر العرف. ↵
+→
+	</string>
+	<string name="tip_app_mode">استخدام شخصي</string>
+	<string name="tip_app_mode_t_v2">OsmAnd يدعم مختلفة (تخصيص) لمحات عن تطبيق حالات الاستخدام المختلفة. ↵
+→ → \ ن \ n يمكنك تغيير ملامح عن طريق الزر الجانبي في الزاوية السفلى اليسرى من الشاشة الخريطة (رمز سيارة، دراجة، أو مشاة)، أو عند إنشاء الطريق (\ 'وضع النقل \'). ↵
+→
+	</string>
+	<string name="tip_search">البحث</string>
+	<string name="tip_search_t">يمكنك البحث عن الأماكن على الخريطة مباشرة عبر \ 'استخدام موقع \' → \ 'البحث بالقرب من هنا \'، أو عن طريق استدعاء شاشة البحث عن طريق \ → \ 'البحث \' 'القائمة \' ↵.
+يوفر → → \ ن \ n وشاشة البحث للبحث عن قوالب ↵
+→ → \ ن \ ر * حسب العنوان ↵
+→ → \ ن \ ر * عن طريق الإحداثيات ↵
+→ → \ ن \ ر * كما POI (حسب نوع أو بالاسم) ↵
+→ → \ ن \ ر * عبر التاريخ بحثك ↵
+→ → \ ن \ ر * أو عن طريق محددة سلفا المفضلة لديك. ↵
+→ → \ ن \ n للجميع يضرب قائمة السياق أو العمل يقدم شريط الخيارات مثل \ 'الاتجاهات \' أو \ 'عرض على الخريطة \'، الخ ↵
+→
+	</string>
+	<string name="tip_map_context_menu">\ القائمة 'استخدام موقع \'</string>
+	<string name="tip_map_context_menu_t">و\ 'استخدام موقع \' قائمة السياق يحتوي على جميع الإجراءات مشيرا إلى نقطة (الموقع). ↵
+→ → \ ن \ n ومتاح من خلال أي نقطة على الخريطة (ثم التنصت علامة لها) الضغط لفترة طويلة، أو عن طريق الضغط على زر التتبع، أو عن طريق اختيار \ 'القائمة \' → \ 'استخدام موقع \' (الأخيرين طرق اتخاذ مركز الخريطة كمرجع). ↵
+→ → \ ن \ NA مربع علامة يمكن أن تكون مخفية مرة أخرى عن طريق النقر طويلة على ذلك. ↵
+→
+	</string>
+	<string name="tip_initial">نصائح والحيل</string>
+	<string name="tip_initial_t">OsmAnd هو تطبيق الملاحة مع العديد من الميزات. ↵
+→ → \ ن \ غر مقدمة أساسية، ترتبط بعض النصائح والحيل عبر استخدام \ 'القائمة \' → \ 'نصائح \' من شاشة الخريطة. ↵
+→
+	</string>
+	<string name="next_button">التالي</string>
+	<string name="previous_button">سابق</string>
+	<string name="unit_of_length_descr">تغير الوحدات من الطول والسرعة</string>
+	<string name="unit_of_length">وحدة القياس</string>
+	<string name="si_mi_foots">ميل/قدم</string>
+	<string name="si_mi_yard">ميل/ متر</string>
+	<string name="si_km_m">كيلومتر / متر</string>
+	<string name="yard">ساحة</string>
+	<string name="foot">قدم</string>
+	<string name="mile_per_hour">ميل ساعة</string>
+	<string name="mile">ميل</string>
+	<string name="send_location_way_choose_title">حصة الموقع باستخدام</string>
+	<string name="send_location_sms_pattern">المكان</string>
+	<string name="send_location_email_pattern">لرؤية الموقع اتبع الرابط متصفح الويب٪ 1 $ S أو الروبوت الرابط نية٪ 2 $ S</string>
+	<string name="send_location">ارسال الموقع</string>
+	<string name="context_menu_item_share_location">مشاركة الموقع</string>
+	<string name="add_waypoint_dialog_added">GPX إحداثية \ '\' {0} \ '\' تمت إضافة بنجاح</string>
+	<string name="add_waypoint_dialog_title">إضافة إحداثية لتسجيل مسار GPX</string>
+	<string name="context_menu_item_add_waypoint">إضافة GPX إحداثية</string>
+	<string name="amenity_type_administrative">اداري</string>
+	<string name="amenity_type_barrier">حاجز</string>
+	<string name="amenity_type_education">تعليم</string>
+	<string name="amenity_type_emergency">حالةطوارئ</string>
+	<string name="amenity_type_entertainment">تسلية</string>
+	<string name="amenity_type_finance">تمويل</string>
+	<string name="amenity_type_healthcare">الرعاية الصحية</string>
+	<string name="amenity_type_historic">تاريخي</string>
+	<string name="amenity_type_landuse">استخدام الاراضي</string>
+	<string name="amenity_type_leisure">وقت الفراغ</string>
+	<string name="amenity_type_man_made">من صنع الانسان</string>
+	<string name="amenity_type_military">عسكري</string>
+	<string name="amenity_type_natural">طبيعي</string>
+	<string name="amenity_type_office">مكتب</string>
+	<string name="amenity_type_other">اخري</string>
+	<string name="amenity_type_shop">متجر</string>
+	<string name="amenity_type_sport">رياضة</string>
+	<string name="amenity_type_sustenance">رزق</string>
+	<string name="amenity_type_tourism">سياحة</string>
+	<string name="indexing_address">عنوان الفهرسة</string>
+	<string name="indexing_map">خريطة الفهرسة</string>
+	<string name="indexing_poi">فهرسة POI…</string>
+	<string name="indexing_transport">النقل الفهرسة…</string>
+	<string name="input_output_error">حدث خطا</string>
+	<string name="km">كيلومتر</string>
+	<string name="km_h">كيلومتر /h</string>
+	<string name="m">متر</string>
+	<string name="old_map_index_is_not_supported">انتقدت خريطة تنسيق البيانات \ '\' {0} \ '\' غير معتمد</string>
+	<string name="poi_filter_closest_poi">اقرب POI</string>
+	<string name="poi_filter_custom_filter">تصفيةمخصصة</string>
+	<string name="poi_filter_namefinder">اسم الباحث على الانتر نت</string>
+	<string name="reading_cached_tiles">قرائة البلاط مئقتا …</string>
+	<string name="version_index_is_big_for_memory">لا تناسب الزاكرة</string>
+	<string name="version_index_is_not_supported">اصدار المنتج غير مدعوم</string>
+	</resources>
