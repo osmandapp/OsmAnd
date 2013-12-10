@@ -1605,7 +1605,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="app_mode_boat">Boot</string>
     <string name="app_mode_aircraft">Vliegtuig</string>
     <string name="map_widget_map_rendering">Kaartstijl:</string>
-    <string name="app_modes_choose_descr">Kies op welke manieren Osmand kan worden gebruikt</string>
-    <string name="app_modes_choose">Soorten toepassing</string>
+    <string name="app_modes_choose_descr">Kies de profielen, die je in Osmand wilt gebruiken</string>
+    <string name="app_modes_choose">Toepassingsprofielen</string>
 	<string name="amenity_type_seamark">boei / baken</string>
     </resources>
