@@ -34,7 +34,7 @@
     <string name="recording_context_menu_play">Afspil</string>
     <string name="recording_description">Optagelse %1$s %2$s af %3$s</string>
     <string name="recording_default_name">optagelse</string>
-    <string name="av_control_start">start</string>
+    <string name="av_control_start">Start AV</string>
     <string name="map_widget_av_notes">Audio-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
     <string name="osmand_srtm_long_description_1000_chars">Udvidelsen indeholder højdekurver, der kan vises i OsmAnd\'s offline kort. De globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced rumbårne Thermal Emission og Reflection Radiometer), en billeddannende instrument ombord Terra, flagskib satellit fra NASAs Earth Observering systemet. ASTER er et samarbejde mellem NASA, Japans ministerium for økonomi, handel og industri (METI), og Japan Space Systems (J-spacesystems).</string>
@@ -165,7 +165,7 @@
 	</string>
     <string name="max_speed_none">Ingen</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="dist_control_start">start</string>
+    <string name="dist_control_start">Start</string>
     <string name="dropbox_plugin_name">Dropbox udvidelse</string>
     <string name="av_def_action_choose">Vælg ved forespørgsel</string>
     <string name="av_use_external_camera_descr">Brug systemprogram til foto</string>
@@ -1058,8 +1058,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="tip_navigation_t">For at få kørselsvejledning til et sted, enten langt tryk på direkte på kortet, (tryk derefter på beskrivelsemarkøren, og vælg \'Kørselsvejledning til\'), eller vælg \'Kørselsvejledning\' efter at have trykket på et resultat på liste med søgeresultater eller favoritliste.
 \n\nDestinationen er markeret som et orange flag på kortet og Osmand viser afstand og retning til det (orange trekant).
 \n\nFor at få kørselsvejledning til destinationen fra et andet punkt end den aktuelle position, vælges det på kortet, og tryk \'Kørselsvejledning fra\'.
-\n\nVælg enten \'Start navigation\', hvilket betyder, at Osmand giver vejledning og talte instruktioner (hvis aktiveret) mv. Eller vælg \'Vis rute\', hvilket resulterer i statisk rute uden vejledning eller justeringer, mens du flytter.
-\n\nBruges \'Kørselsvejledning fra\' sammen med \'Start navigation\', vil Osmand skifte til den faktiske position, så snart den er fundet (dette kan bruges til at  komme hurtigt i gang med rutning  før positionen findes), mens \'Kørselsvejledning fra\' i kombination med \'Vis rute\' kun viser ruten fra ethvert vilkårligt valgt punkt uden efterfølgende opdateringer. ↵
+\n\nVælg enten \'Begynd navigation\', hvilket betyder, at Osmand giver vejledning og talte instruktioner (hvis aktiveret) mv. Eller vælg \'Vis rute\', hvilket resulterer i statisk rute uden vejledning eller justeringer, mens du flytter.
+\n\nBruges \'Kørselsvejledning fra\' sammen med \'Begynd navigation\', vil Osmand skifte til den faktiske position, så snart den er fundet (dette kan bruges til at  komme hurtigt i gang med rutning  før positionen findes), mens \'Kørselsvejledning fra\' i kombination med \'Vis rute\' kun viser ruten fra ethvert vilkårligt valgt punkt uden efterfølgende opdateringer. ↵
 →
 	</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
@@ -1334,7 +1334,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="fav_points_not_exist">Der eksisterer ingen favoritpunkter</string>
 	<string name="update_existing">Erstat</string>
 	<string name="only_show">Vis rute</string>
-	<string name="follow">Start navigation</string>
+	<string name="follow">Begynd navigation</string>
 	<string name="mark_final_location_first">Vælg først en destination</string>
 	<string name="get_directions">Kørselsvejledning</string>
 	<string name="show_gps_status">Vis GPS-status</string>
@@ -1505,9 +1505,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="distance_measurement_load_gpx">Åben eksisterende GPX</string>
     <string name="plugin_distance_point_time">tid</string>
     <string name="gpx_saved_sucessfully">GPX-fil blev gemt som {0}</string>
-    <string name="distance_measurement_start_editing">Start redigering</string>
+    <string name="distance_measurement_start_editing">Begynd redigering</string>
     <string name="distance_measurement_finish_editing">Slut redigering</string>
-    <string name="distance_measurement_finish_subtrack">Start et nyt underspor</string>
+    <string name="distance_measurement_finish_subtrack">Begynd et nyt underspor</string>
     <string name="distance_measurement_clear_route">Slet punkter</string>
     <string name="plugin_distance_point_ele">højde</string>
     <string name="osmand_distance_planning_plugin_description">Opret et spor (eller brug eksisterende GPX-filer) til at måle afstanden mellem punkter. Gem som GPX, kan bruges til at planlægge GPX-ruter.</string>
