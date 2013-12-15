@@ -1612,4 +1612,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="app_modes_choose_descr">Scegli fra le modalità disponibili in applicazione</string>
     <string name="app_modes_choose">Modalità applicazione</string>
 	<string name="amenity_type_seamark">Meda</string>
+    <string name="osmodroid_seek">Cerca oggetto</string>
     </resources>
