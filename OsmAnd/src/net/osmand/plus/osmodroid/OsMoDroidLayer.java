@@ -27,6 +27,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
@@ -49,7 +50,7 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	 * magic number so far
 	 */
 	private static final int radius = 10;
-
+	OsMoDroidPoint seekOsMoDroidPoint;
 	OsMoDroidPlugin myOsMoDroidPlugin;
 
 	private DisplayMetrics dm;
@@ -59,8 +60,9 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 
 	private Paint textPaint;
 
-	ArrayList<OsMoDroidPoint> OsMoDroidPointArrayList;
-	ArrayList<GPXFile> gpxArrayList;
+	ArrayList<OsMoDroidPoint> osMoDroidPointArrayList;
+	ArrayList<OsMoDroidPoint> osMoDroidFixedPointArrayList;
+	ArrayList<ColoredGPX> gpxArrayList = new ArrayList<ColoredGPX>() ;
 	int layerId;
 	String layerName;
 	String layerDescription;
@@ -120,17 +122,25 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		textPaint.setTypeface(Typeface.DEFAULT_BOLD);
 		textPaint.setTextAlign(Paint.Align.CENTER);
 		opIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.bicycle_location);
-		OsMoDroidPointArrayList = myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId);
-		gpxArrayList = myOsMoDroidPlugin.getGpxArrayList(layerId);
+		osMoDroidPointArrayList = myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId);
+		osMoDroidFixedPointArrayList = myOsMoDroidPlugin.getOsMoDroidFixedPointArrayList(layerId);
+		myOsMoDroidPlugin.getGpxArrayList(layerId);
 		initUI();
 	}
-
+	
+	public void inGPXFilelist(ArrayList<ColoredGPX> in){
+		gpxArrayList=in;
+		map.refreshMap();
+	}
 	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 
-
-		for (OsMoDroidPoint op : OsMoDroidPointArrayList) {
+		
+		for (OsMoDroidPoint op : osMoDroidPointArrayList) {
+			if(seekOsMoDroidPoint!=null&&seekOsMoDroidPoint.equals(op)){
+				map.setMapLocation(op.latlon.getLatitude(), op.latlon.getLongitude());
+			}
 			LatLon newLatlon;
 			try {
 
@@ -178,11 +188,23 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 			
 		}
 		
-		for (GPXFile gpxFile : gpxArrayList){
-			gpxFile.proccessPoints();
-			List<List<WptPt>> points = gpxFile.processedPointsToDisplay;
+		for (OsMoDroidPoint point : osMoDroidFixedPointArrayList ){
+			double latitude = point.latlon.getLatitude();
+			double longitude = point.latlon.getLongitude();
+			int locationX = (int) tileBox.getPixXFromLatLon(latitude, longitude);
+			int locationY = (int) tileBox.getPixYFromLatLon(latitude, longitude);
+			textPaint.setColor(Color.parseColor("#013220"));
+			canvas.drawText(point.name, locationX, locationY - radius, textPaint);
+			textPaint.setColor(Color.parseColor("#" + point.color));
+			textPaint.setShadowLayer(radius, 0, 0, Color.GRAY);
+			canvas.drawRect(new Rect(locationX-radius, locationY-radius, locationX+radius, locationY+radius), textPaint);
+		}
+		
+		for (ColoredGPX cg : gpxArrayList){
+			cg.gpxFile.proccessPoints();
+			List<List<WptPt>> points = cg.gpxFile.processedPointsToDisplay;
 			
-			paint.setColor(getColor(settings));
+			paint.setColor(cg.color);
 
 			final QuadRect latLonBounds = tileBox.getLatLonBounds();
 			for (List<WptPt> l : points) {
@@ -211,36 +233,17 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	
 	}
 	private void drawSegment(Canvas canvas, RotatedTileBox tb, List<WptPt> l, int startIndex, int endIndex) {
-		int px = tb.getPixXFromLonNoRot(l.get(startIndex).lon);
-		int py = tb.getPixYFromLatNoRot(l.get(startIndex).lat);
+		int px = (int) tb.getPixXFromLatLon(l.get(startIndex).lat, l.get(startIndex).lon);
+		int py = (int) tb.getPixYFromLatLon(l.get(startIndex).lat, l.get(startIndex).lon);
 		path.moveTo(px, py);
 		for (int i = startIndex + 1; i <= endIndex; i++) {
 			WptPt p = l.get(i);
-			int x = tb.getPixXFromLonNoRot(p.lon);
-			int y = tb.getPixYFromLatNoRot(p.lat);
+			int x = (int) tb.getPixXFromLatLon(p.lat,p.lon);
+			int y = (int) tb.getPixYFromLatLon(p.lat,p.lon);
 			path.lineTo(x, y);
 		}
 		canvas.drawPath(path, paint);
 	}
-	
-	private int getColor(DrawSettings nightMode){
-		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
-		boolean n = nightMode != null && nightMode.isNightMode();
-		if (rrs != cachedRrs || cachedNightMode != n) {
-			cachedRrs = rrs;
-			cachedNightMode = n;
-			cachedColor = view.getResources().getColor(R.color.gpx_track);
-			if (cachedRrs != null) {
-				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, cachedNightMode);
-				if (req.searchRenderingAttribute("gpxColor")) {
-					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
-				}
-			}
-		}
-		return cachedColor;
-	}
-	
 	
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {}
@@ -266,6 +269,26 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 				// synchronized block
 			}
 		}
+		if (myOsMoDroidPlugin.getOsMoDroidFixedPointArrayList(layerId) != null) {
+			int ex = (int) point.x;
+			int ey = (int) point.y;
+
+			try {
+				for (int i = 0; i < myOsMoDroidPlugin.getOsMoDroidFixedPointArrayList(layerId).size(); i++) {
+					OsMoDroidPoint n = myOsMoDroidPlugin.getOsMoDroidFixedPointArrayList(layerId).get(i);
+					if (!om.contains(n)) {
+						int x = (int) tb.getPixXFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
+						int y = (int) tb.getPixYFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
+						if (Math.abs(x - ex) <= opIcon.getWidth() && Math.abs(y - ey) <= opIcon.getHeight()) {
+							om.add(n);
+						}
+					}
+				}
+			} catch (IndexOutOfBoundsException e) {
+				// that's really rare case, but is much efficient than introduce
+				// synchronized block
+			}
+		}
 	}
 
 	@Override
@@ -275,11 +298,28 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					
 					map.getMyApplication().getTargetPointsHelper().navigateToPoint(a.latlon, true, -1);
 				}
 			};
-
+			OnContextMenuClick seeklistener = new ContextMenuAdapter.OnContextMenuClick() {
+				
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					if(seekOsMoDroidPoint!=null&&a.equals(seekOsMoDroidPoint))
+						{
+							seekOsMoDroidPoint=null;
+							isChecked=false;
+						} else 
+							{
+								seekOsMoDroidPoint=a;
+								isChecked=true;
+							}	
+				}
+			};
+			
 			adapter.item(map.getString(R.string.get_directions)).listen(listener).reg();
+			adapter.item(map.getString(R.string.osmodroid_seek)).listen(seeklistener).reg();
 
 		}
 	}
