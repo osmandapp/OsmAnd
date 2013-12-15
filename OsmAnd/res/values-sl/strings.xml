@@ -1591,4 +1591,5 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="amenity_type_seamark">Pomorski znak</string>
     <string name="app_modes_choose_descr">Izberite uporabne profile, ki so vidni v aplikaciji</string>
     <string name="app_modes_choose">Profili aplikacije</string>
-	</resources>
+	<string name="osmodroid_seek">Poiskati predmet</string>
+    </resources>
