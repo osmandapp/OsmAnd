@@ -6,18 +6,18 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.AmenityType;
-import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
@@ -132,8 +132,77 @@ public class MapRenderingTypes {
 		return amenityTypeNameToTagVal;
 	}
 	
+	public Collection<Map<String, String>> splitTagsIntoDifferentObjects(final Map<String, String> tags) {
+		// check open sea maps tags
+		boolean split = splitIsNeeded(tags);
+		if(!split) {
+			return Collections.singleton(tags);
+		} else {
+			return splitOpenSeaMapsTags(tags);
+		}
+	}
+
+	protected boolean splitIsNeeded(final Map<String, String> tags) {
+		boolean seamark = false;
+		for(String s : tags.keySet()) {
+			if(s.startsWith("seamark:")) {
+				seamark = true;
+				break;
+			}
+		}
+		return seamark;
+	}
+
+	private Collection<Map<String, String>> splitOpenSeaMapsTags(final Map<String, String> tags) {
+		Map<String, Map<String, String>> groupByOpenSeamaps = new HashMap<String, Map<String, String>>();
+		Map<String, String> common = new HashMap<String, String>();
+		String ATTACHED_KEY = "seamark:attached";
+		String type = "";
+		for (String s : tags.keySet()) {
+			String value = tags.get(s);
+			if (s.equals("seamark:type")) {
+				type = value;
+				common.put(ATTACHED_KEY, openSeaType(value));
+			} else if (s.startsWith("seamark:")) {
+				String stype = s.substring("seamark:".length());
+				int ind = stype.indexOf(':');
+				if (ind == -1) {
+					common.put(s, value);
+				} else {
+					String group = openSeaType(stype.substring(0, ind));
+					String add = stype.substring(ind + 1);
+					if (!groupByOpenSeamaps.containsKey(group)) {
+						groupByOpenSeamaps.put(group, new HashMap<String, String>());
+					}
+					groupByOpenSeamaps.get(group).put("seamark:" + add, value);
+				}
+			} else {
+				common.put(s, value);
+			}
+		}
+		List<Map<String, String>> res = new ArrayList<Map<String,String>>();
+		for (Entry<String, Map<String, String>> g : groupByOpenSeamaps.entrySet()) {
+			g.getValue().putAll(common);
+			g.getValue().put("seamark", g.getKey());
+			if (openSeaType(type).equals(g.getKey())) {
+				g.getValue().remove(ATTACHED_KEY);
+				g.getValue().put("seamark", type);
+				res.add(0, g.getValue());
+			} else {
+				res.add(g.getValue());
+			}
+		}
+		return res;
+	}	
 	
 	
+	private String openSeaType(String value) {
+		if(value.equals("light_major") || value.equals("light_minor")) {
+			return "light";
+		}
+		return value;
+	}
+
 	public Map<String, AmenityType> getAmenityNameToType(){
 		if(amenityNameToType == null){
 			amenityNameToType = new LinkedHashMap<String, AmenityType>();
@@ -207,14 +276,13 @@ public class MapRenderingTypes {
 		return nameEnRuleType;
 	}
 	
-	public Map<String, String> getAmenityAdditionalInfo(Entity e, AmenityType type, String subtype) {
+	public Map<String, String> getAmenityAdditionalInfo(Map<String, String> tags, AmenityType type, String subtype) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		Collection<String> tagKeySet = e.getTagKeySet();
-		for (String tag : tagKeySet) {
-			String val = e.getTag(tag);
+		for (String tag : tags.keySet()) {
+			String val = tags.get(tag);
 			MapRulType rType = getAmenityRuleType(tag, val);
 			if (rType != null && val.length()  > 0) {
-				if(rType == nameEnRuleType && Algorithms.objectEquals(val, e.getTag(OSMTagKey.NAME))) {
+				if(rType == nameEnRuleType && Algorithms.objectEquals(val, tags.get(OSMTagKey.NAME))) {
 					continue;
 				}
 				if(rType.targetTagValue != null) {
@@ -226,7 +294,7 @@ public class MapRenderingTypes {
 						Iterator<TagValuePattern> it = rType.applyToTagValue.iterator();
 						while(!applied && it.hasNext()) {
 							TagValuePattern nv = it.next();
-							applied = nv.isApplicable(e);
+							applied = nv.isApplicable(tags);
 						}
 					}
 					if (applied) {
@@ -275,14 +343,14 @@ public class MapRenderingTypes {
 		Map<String, MapRulType> rules = getEncodingRuleTypes();
 		MapRulType rt = rules.get(constructRuleKey(tag, val));
 		if(rt != null && rt.isPOISpecified()) {
-			if(relation && !rt.relation) {
+			if((relation && !rt.relation) || rt.isAdditionalOrText()) {
 				return null;
 			}
 			return rt.poiCategory;
 		}
 		rt = rules.get(constructRuleKey(tag, null));
 		if(rt != null && rt.isPOISpecified()) {
-			if(relation && !rt.relation) {
+			if((relation && !rt.relation) || rt.isAdditionalOrText()) {
 				return null;
 			}
 			return rt.poiCategory;
@@ -517,11 +585,11 @@ public class MapRenderingTypes {
 			}
 		}
 		
-		public boolean isApplicable(Entity e ){
+		public boolean isApplicable(Map<String, String> e ){
 			if(value == null) {
-				return e.getTag(tag) != null;
+				return e.get(tag) != null;
 			}
-			return value.equals(e.getTag(tag));
+			return value.equals(e.get(tag));
 		}
 		
 		@Override
@@ -729,5 +797,7 @@ public class MapRenderingTypes {
 		
 		
 	}
+
+	
 }
 

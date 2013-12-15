@@ -30,7 +30,7 @@ public class ApplicationMode {
 			icon(R.drawable.ic_bicycle, R.drawable.ic_action_bicycle_light, R.drawable.ic_action_bicycle_dark).reg();
 	
 	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).
-			icon(R.drawable.ic_pedestrian, R.drawable.ic_action_pedestrian_light, R.drawable.ic_action_parking_dark).reg();
+			icon(R.drawable.ic_pedestrian, R.drawable.ic_action_pedestrian_light, R.drawable.ic_action_pedestrian_dark).reg();
 	
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
 			icon(R.drawable.ic_aircraft, R.drawable.ic_action_aircraft_light, R.drawable.ic_action_aircraft_dark).reg();
