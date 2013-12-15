@@ -45,6 +45,22 @@ String getObjectColor(int layerId, int objectId);
 int getNumberOfGpx(int layerId);
 
 String getGpxFile (int layerId, int pos);
+
+int getGpxColor (int layerId, int pos);
+
+int getNumberOfPoints(int layerId);
+
+int getPointId(int layerId, int pos);
+
+float getPointLat(int  layerId, int pointId);
+
+float getPointLon(int  layerId, int pointId);
+
+String getPointName(int  layerId, int pointId);
+
+String getPointDescription(int  layerId, int pointId);
+
+String getPointColor(int  layerId, int pointId);
 	
 void refreshChannels();
 }

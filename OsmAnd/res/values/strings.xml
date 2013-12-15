@@ -86,6 +86,8 @@
 	<string name="osmodroid_mode_on">Stop OsMoDroid</string>    
     <string name="osmodroid_mode_off">Start OsMoDroid</string>
     <string name="osmodroid_refresh">Refresh channels</string>
+    <string name="osmodroid_seek">Seek object</string>
+    <string name="osmodroid_unseek">Unseek object</string>
     <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
     <string name="speak_title">Announce&#8230;</string>
 	<string name="speak_descr">Configure to announce street names, traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits</string>
