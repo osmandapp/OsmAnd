@@ -2,6 +2,7 @@ package net.osmand.plus.osmodroid;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -14,6 +15,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -25,6 +27,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.os.RemoteException;
 
@@ -107,6 +110,7 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 	private OsMoDroidLayer osmoDroidLayer;
 	protected boolean connected = false;
 	ArrayList<OsMoDroidLayer> osmoDroidLayerList = new ArrayList<OsMoDroidLayer>();
+	private AsyncTask<Void, Void, ArrayList<ColoredGPX>> task;
 
 	public ArrayList<OsMoDroidPoint> getOsMoDroidPointArrayList(int id) {
 		ArrayList<OsMoDroidPoint> result = new ArrayList<OsMoDroidPoint>();
@@ -117,6 +121,25 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 						mIRemoteService.getObjectId(id, i)), mIRemoteService.getObjectDescription(id, mIRemoteService.getObjectId(id, i)),
 						mIRemoteService.getObjectId(id, i), id, mIRemoteService.getObjectSpeed(id, mIRemoteService.getObjectId(id, i)),
 						mIRemoteService.getObjectColor(id, mIRemoteService.getObjectId(id, i))));
+			}
+		} catch (RemoteException e) {
+
+			log.error(e.getMessage(), e);
+		}
+
+		return result;
+
+	}
+	
+	public ArrayList<OsMoDroidPoint> getOsMoDroidFixedPointArrayList(int id) {
+		ArrayList<OsMoDroidPoint> result = new ArrayList<OsMoDroidPoint>();
+		try {
+			for (int i = 0; i < mIRemoteService.getNumberOfPoints(id); i++) {
+				result.add(new OsMoDroidPoint(mIRemoteService.getPointLat(id, mIRemoteService.getPointId(id, i)), mIRemoteService
+						.getPointLon(id, mIRemoteService.getPointId(id, i)), mIRemoteService.getPointName(id,
+						mIRemoteService.getPointId(id, i)), mIRemoteService.getPointDescription(id, mIRemoteService.getPointId(id, i)),
+						mIRemoteService.getPointId(id, i), id, null,
+						mIRemoteService.getPointColor(id, mIRemoteService.getPointId(id, i))));
 			}
 		} catch (RemoteException e) {
 
@@ -280,21 +303,64 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 				
 			}
 		}).reg();
+qa.item(R.string.osmodroid_unseek).icons(R.drawable.abs__ic_commit_search_api_holo_dark, R.drawable.abs__ic_commit_search_api_holo_light).listen(new OnContextMenuClick() {
+			
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked,
+					DialogInterface dialog) {
+				for (OsMoDroidLayer l: osmoDroidLayerList){
+					l.seekOsMoDroidPoint=null;
+				}
+				
+			}
+		}).reg();
 	}
 
-	public ArrayList<GPXFile> getGpxArrayList(int id) {
-		ArrayList<GPXFile> result = new ArrayList<GPXFile>();
-		
-		
-		try {
-			for (int i = 0; i < mIRemoteService.getNumberOfGpx(id); i++) {
-				result.add( GPXUtilities.loadGPXFile(app, new File(mIRemoteService.getGpxFile(id, i)), false));
-			}
-			return result;
-		} catch (RemoteException e) {
-			log.error(e.getMessage(), e);
+	public void getGpxArrayList(final int id) {
+		final ArrayList<ColoredGPX> result = new ArrayList<ColoredGPX>();
+		if(task!=null){
+			task.cancel(true);
 		}
-		return result;
+		 task = new AsyncTask<Void, Void, ArrayList<ColoredGPX>>() {
+			@Override
+			protected ArrayList<ColoredGPX> doInBackground(Void... params) {
+				ArrayList<ColoredGPX> temp = new ArrayList<ColoredGPX>();
+				try {
+					for (int i = 0; i < mIRemoteService.getNumberOfGpx(id); i++) {
+						ColoredGPX cg = new ColoredGPX();
+						cg.gpxFile =  GPXUtilities.loadGPXFile(app, new File(mIRemoteService.getGpxFile(id, i)), false);
+						cg.color = mIRemoteService.getGpxColor(id, i); 
+						temp.add(cg);
+					}
+					return temp;
+				} catch (RemoteException e) {
+					log.error(e.getMessage(), e);
+				}
+				return temp;					
+				}
+
+			@Override
+			protected void onPostExecute(ArrayList<ColoredGPX> backgroundresult) {
+				if(backgroundresult!=null){
+					try {
+						for (OsMoDroidLayer l : osmoDroidLayerList){
+							if (l.layerId==id){
+								l.inGPXFilelist(backgroundresult);
+							}
+						}
+					} catch (ConcurrentModificationException e) {
+						log.error(e.getMessage(), e);
+					}
+					
+					
+					
+				}
+			}
+		};
+		task.execute();
+		
+		
+		
 		
 	}
 }
