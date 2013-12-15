@@ -1297,4 +1297,148 @@
 		\n\nOsmAnd attēlos augstumu virs jūras līmeņa pēc EGM96 sistēmas pēc tam, kad jūs būsiet lejupielādējuši \'World Altitide Correction\' (WW15MGH.DAC) failu caur karšu lejupielādes izvēlni aplikācijā. (Oriģināls ir pieejams http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)…
 	</string>
     <string name="osb_author_dialog_password">OSM parole (optionāla)</string>
+	<string name="osmand_extended_description_4000_chars">
+OsmAnd (OSM Automated Navigation Directions) ir kartes un navigācijas aplikācija ar brīvi pieejamām, vispasaules, augstas kvalitātes OpenStreetMap (OSM) kartēm. Visus karšu datus iespējams saglabāt jūsu ierīces atmiņas kartē offline (bez interneta pieslēguma) lietošanai. Ar jūsu ierīces GPS uztvērēja palīdzibu, OsmAnd piedāvā maršrutēšanu ar vizuālo un balss vadību automašīnai, velobraucējiem un gājējiem. Visas galvenās funkcijas darbojas ar vai bez interneta pieslēguma.
+
+Dažas no galvenajām iespējām:
+
+Navigācija:
+
+- Darbojas tiešsaistē (ātri) vai bezsaistē (nevajag izmantot viesabonēšanu, esot ārzemēs)
+- Pagrieziens-pēc-pagrieziena balss vadība (ierakstītas vai sintizētas balsis)
+- Optionāli ceļa joslu vadība, ielas nosaukumu rādīšana un aprēķinātais laiks galapunkta sasniegšanai
+- Ceļapunktu ievietošana maršrutā
+- Automātiski pārrēķina ceļu pēc novirzīšanās no maršruta
+-Meklē vietas pēc adreses, veida (benzīntanki, kafejnīcas, viesnīcas, muzeji u.t.t.) vai pēc koordinātām
+
+Kartes skats:
+- Rāda jūsu pozīciju un virzienu uz kartes
+- Optionāli pieskaņo karti kompasam vai kustības virzienā
+- Saglabājiet izlasē izvēlētās vietas uz kartes
+- Rāda POIs (point of interests) jums apkārt
+- Iespējams attēlot tiešsaistes bilžu kartes
+- Iespējams attēlot satelīta skatu (no Bing)
+- Iespējams attēlot vairākus kartes slāņus kā piemēram, tūrisma/navigācijas GPX ceļus un papildus kartes ar regulējamu caurspīdīgumu
+- Optionāli rāda vietu nosaukumus angliski, vietējā valodā vai fonētiski izrunātus
+
+OpenStreetMap un wikipedia vietnes:
+- Augstas kvalitātes informācija no labākajiem visas pasaules kopīgi veidotajiem projektiem
+- OpenStreetMap kartes pieejamas pēc valsts vai reģiona
+Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
+- Vikipēdijas POIs, vietu apskatei (nav pieejama bezmaksas versijā)
+- Neierobežota lejupielāde no aplikācijas par brīvu (bezmaksas versijai ierobežojums 16 kartes)
+- Vienmēr jaunākās kartes (atjauninājumi vismaz reizi mēnesī)
+- Kompaktas bezsaistes vektora kartes
+- Pilnās kartes vai tikai ceļu sazarojums (piemēram visa Japāna 700MB vai tikai ceļi 200MB)
+- Tiešsaistes kartes vai saglabātas bilžu kartes
+
+Droša braukšana:
+- Pēc izvēles automātisks dienas/nakts režīms
+- Pēc izvēles ātruma limita rādīšana ar brīdinājumu pārsniedzot ātrumu
+- Pēc izvēles no ātruma atkarīga kartes mērogošana
+- Dalīties ar atrašanās vietu, lai jūsu draugi var jūs atrast
+
+Velobraucēji un kājāmgājēji:
+- Kartes veidi ietver pastaigas, velobraucēju un slēpošanas celiņus, ideāli visa veida aktivitātēm
+- Maršrutēsana un kartes attēlošana īpaši vielobraucējiem un kājāmgājējiem
+- Pēc izvēles publiskā transporta pieturas vietas, ieskaitot nosaukumus
+- Pēc izvēles ceļojuma ierakstīšana gpx failā vai caur internetu
+- Pēc izvēles ātruma un augstuma attēlošana
+- Kontūrlīniju un kalnu reljefa attēlošana (ar papildus spraudni)
+
+Tieša saziņa ar OpenStreetMap:
+- Ziņošana par kartes nepilnībām
+- GPX ceļu nosūtīšana OSM vietnei caur aplikāciju
+- Jaunu POI izveidošana un nosūtīšana OSM
+- Pēc izvēles ceļojuma ierakstīšana fonā (kamēr ierīce ir miega režīmā)
+
+OsmAnd ir atvērtā koda aplikācija un nepārtraukti tiek attīstīta. Ikviens var piedalīties, ziņojot par kļūdām, uzlabojot valodu tulkojumus vai kodējot jaunas iespējas. Projekts nepārtraukti tiek uzlabots, tiešā veidā aktīvi sadarbojoties lietotājiem ar izstrādātājiem. Tāpat projekts ir atkarīgs no finansēm, kas nepieciešamas aplikācijas izstrādei, kodēšanai un jaunu funkciju testēšanai. Noperkot OsmAnd+ jūs palīdzēsiet aplikācijai kļūt pilnvērtīgākai! Jūs varat arī finansiāli atbalstot atsevišķas jaunas iespējas vai veikt ziedojumu kopīgajam projektam osmand.net interneta vietnē.
+
+Aptuvenais kartes pārklājums un kvalitāte:
+- Rietumeiropa: ****
+- Austrumeiropa: ***
+- Krievija: ***
+- Ziemeļamerika: ***
+- Dienvidamerika: **
+- Āzija: **
+- Japāna &amp; Koreja: ***
+- Tuvie Austrumi: **
+- Āfrika **
+- Antarktīda: *
+
+Valstu saraksts, kuras tiek atbalstītas (gandrīz visa pasaule!):
+Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
+	</string>
+	<string name="osmand_plus_extended_description_4000_chars">
+OsmAnd (OSM Automated Navigation Directions) ir kartes un navigācijas aplikācija ar brīvi pieejamām, vispasaules, augstas kvalitātes OpenStreetMap (OSM) kartēm. Visus karšu datus iespējams saglabāt jūsu ierīces atmiņas kartē offline (bez interneta pieslēguma) lietošanai. Ar jūsu ierīces GPS uztvērēja palīdzibu, OsmAnd piedāvā maršrutēšanu ar vizuālo un balss vadību automašīnai, velobraucējiem un gājējiem. Visas galvenās funkcijas darbojas ar vai bez interneta pieslēguma.
+
+Dažas no galvenajām iespējām:
+
+Navigācija:
+
+- Darbojas tiešsaistē (ātri) vai bezsaistē (nevajag izmantot viesabonēšanu, esot ārzemēs)
+- Pagrieziens-pēc-pagrieziena balss vadība (ierakstītas vai sintizētas balsis)
+- Optionāli ceļa joslu vadība, ielas nosaukumu rādīšana un aprēķinātais laiks galapunkta sasniegšanai
+- Ceļapunktu ievietošana maršrutā
+- Automātiski pārrēķina ceļu pēc novirzīšanās no maršruta
+-Meklē vietas pēc adreses, veida (benzīntanki, kafejnīcas, viesnīcas, muzeji u.t.t.) vai pēc koordinātām
+
+Kartes skats:
+- Rāda jūsu pozīciju un virzienu uz kartes
+- Optionāli pieskaņo karti kompasam vai kustības virzienā
+- Saglabājiet izlasē izvēlētās vietas uz kartes
+- Rāda POIs (point of interests) jums apkārt
+- Iespējams attēlot tiešsaistes bilžu kartes
+- Iespējams attēlot satelīta skatu (no Bing)
+- Iespējams attēlot vairākus kartes slāņus kā piemēram, tūrisma/navigācijas GPX ceļus un papildus kartes ar regulējamu caurspīdīgumu
+- Optionāli rāda vietu nosaukumus angliski, vietējā valodā vai fonētiski izrunātus
+
+OpenStreetMap un wikipedia vietnes:
+- Augstas kvalitātes informācija no labākajiem visas pasaules kopīgi veidotajiem projektiem
+- OpenStreetMap kartes pieejamas pēc valsts vai reģiona
+Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
+- Vikipēdijas POIs, vietu apskatei (nav pieejama bezmaksas versijā)
+- Neierobežota lejupielāde no aplikācijas par brīvu (bezmaksas versijai ierobežojums 16 kartes)
+- Vienmēr jaunākās kartes (atjauninājumi vismaz reizi mēnesī)
+- Kompaktas bezsaistes vektora kartes
+- Pilnās kartes vai tikai ceļu sazarojums (piemēram visa Japāna 700MB vai tikai ceļi 200MB)
+- Tiešsaistes kartes vai saglabātas bilžu kartes
+
+Droša braukšana:
+- Pēc izvēles automātisks dienas/nakts režīms
+- Pēc izvēles ātruma limita rādīšana ar brīdinājumu pārsniedzot ātrumu
+- Pēc izvēles no ātruma atkarīga kartes mērogošana
+- Dalīties ar atrašanās vietu, lai jūsu draugi var jūs atrast
+
+Velobraucēji un kājāmgājēji:
+- Kartes veidi ietver pastaigas, velobraucēju un slēpošanas celiņus, ideāli visa veida aktivitātēm
+- Maršrutēsana un kartes attēlošana īpaši vielobraucējiem un kājāmgājējiem
+- Pēc izvēles publiskā transporta pieturas vietas, ieskaitot nosaukumus
+- Pēc izvēles ceļojuma ierakstīšana gpx failā vai caur internetu
+- Pēc izvēles ātruma un augstuma attēlošana
+- Kontūrlīniju un kalnu reljefa attēlošana (ar papildus spraudni)
+
+Tieša saziņa ar OpenStreetMap:
+- Ziņošana par kartes nepilnībām
+- GPX ceļu nosūtīšana OSM vietnei caur aplikāciju
+- Jaunu POI izveidošana un nosūtīšana OSM
+- Pēc izvēles ceļojuma ierakstīšana fonā (kamēr ierīce ir miega režīmā)
+
+OsmAnd ir atvērtā koda aplikācija un nepārtraukti tiek attīstīta. Ikviens var piedalīties, ziņojot par kļūdām, uzlabojot valodu tulkojumus vai kodējot jaunas iespējas. Projekts nepārtraukti tiek uzlabots, tiešā veidā aktīvi sadarbojoties lietotājiem ar izstrādātājiem. Tāpat projekts ir atkarīgs no finansēm, kas nepieciešamas aplikācijas izstrādei, kodēšanai un jaunu funkciju testēšanai. Noperkot OsmAnd+ jūs palīdzēsiet aplikācijai kļūt pilnvērtīgākai! Jūs varat arī finansiāli atbalstot atsevišķas jaunas iespējas vai veikt ziedojumu kopīgajam projektam osmand.net interneta vietnē.
+
+Aptuvenais kartes pārklājums un kvalitāte:
+- Rietumeiropa: ****
+- Austrumeiropa: ***
+- Krievija: ***
+- Ziemeļamerika: ***
+- Dienvidamerika: **
+- Āzija: **
+- Japāna &amp; Koreja: ***
+- Tuvie Austrumi: **
+- Āfrika **
+- Antarktīda: *
+
+Valstu saraksts, kuras tiek atbalstītas (gandrīz visa pasaule!):
+Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
+	</string>
 	</resources>
