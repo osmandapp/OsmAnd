@@ -987,7 +987,7 @@
 <string name="show_warnings_descr">Afficher les avertissements (limitations de vitesses, stops, ralentisseurs, radars) et information sur les voies.</string>
 <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
 <string name="map_widget_show_ruler">Échelle</string>
-<string name="map_widget_appearance">Divers :</string>
+<string name="map_widget_appearance">Éléments restants:</string>
 <string name="map_widget_view_direction">Affichage direction</string>
 <string name="map_widget_transparent">Couche transparente</string>
 <string name="monitoring_mode_off">Enregistrer GPX</string>
@@ -1419,8 +1419,10 @@
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Bateau</string>
     <string name="app_mode_aircraft">Avion</string>
-    <string name="app_modes_choose_descr">Choisir les modes d'application disponibles</string>
-    <string name="app_modes_choose">Modes d'application</string>
+    <string name="app_modes_choose_descr">Choisir les profils à afficher dans l'application</string>
+    <string name="app_modes_choose">Profils d'application</string>
 	<string name="map_widget_map_rendering">Rendu de carte:</string>
     <string name="amenity_type_seamark">Balise marine</string>
+    <string name="osmodroid_seek">Chercher objet</string>
+    <string name="osmodroid_unseek">Ne plus chercher objet</string>
     </resources>
