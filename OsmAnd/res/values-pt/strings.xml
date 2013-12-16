@@ -1494,14 +1494,14 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="auto_zoom_far">Visão intermédia</string>
     <string name="auto_zoom_farthest">Mais abrangente</string>
     <string name="animate_routing_route_not_calculated">Por favor calcule a rota primeiro</string>
-    <string name="animate_routing_route">Simulação usando rota calculada </string>
+    <string name="animate_routing_route">Simular usando rota calculada </string>
     <string name="animate_routing_gpx">Simular usando caminho GPX</string>
     <string name="remember_choice">Lembrar a minha escolha</string>
     <string name="gps_status_eclipsim">Status GPS</string>
     <string name="default_and">e</string>
     <string name="default_or">ou</string>
-	<string name="route_is_too_long">A rota é, possivelmente, muito longa para ser calculada pelo roteamento off-line do OsmAnd. ↵
-      → Em média, o encaminhamento off-line é possível apenas entre os pontos de até 200km de distância. Por favor, adicione um ou mais pontos intermediários ao calcular a rota.↵</string>
+	<string name="route_is_too_long">A rota é, possivelmente, demasiado longa para ser calculado pelo router offline OsmAnd. ↵
+         → Em média, o encaminhamento off-line é possível apenas entre os pontos de até 200 km de distância. Por favor, adicione um ou mais pontos intermédios ao calcular a rota.</string>
 	<string name="osmodroid_refresh">Actualizar canais</string>
     <string name="map_widget_map_rendering">Renderização do Mapa:</string>
     <string name="app_mode_hiking">Caminhadas</string>
@@ -1516,4 +1516,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="amenity_type_seamark">Marca Mar</string>
     <string name="app_modes_choose_descr">Escolha o modo disponível dentro da aplicação</string>
     <string name="app_modes_choose">Modo da aplicação</string>
-	</resources>
+	<string name="osmodroid_seek">Procurar objecto</string>
+    <string name="osmodroid_unseek">Não procurar objecto</string>
+    <string name="route_descr_destination"> </string>
+    </resources>
