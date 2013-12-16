@@ -1623,4 +1623,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="app_modes_choose_descr">在應用程式中選取現有的設定檔</string>
     <string name="app_modes_choose">應用設定檔</string>
 	<string name="amenity_type_seamark">航線標識</string>
+    <string name="osmodroid_seek">探索目標</string>
+    <string name="osmodroid_unseek">取消探索目標</string>
     </resources>
