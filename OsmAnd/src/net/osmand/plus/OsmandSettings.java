@@ -640,9 +640,9 @@ public class OsmandSettings {
 		return MAP_ZOOM_SCALE_BY_DENSITY.get() + (float)Math.min(Math.sqrt(Math.max(0, density - 1)), 1);
 	}
 	
-	public final CommonPreference<Integer> MAP_POINT_SELECTION_RADIUS = new IntPreference("map_point_selection_radius", 13).makeProfile().cache();
+	public final CommonPreference<Integer> MAP_POINT_SELECTION_RADIUS = new IntPreference("map_point_selection_radius", 17).makeProfile().cache();
 	{
-		MAP_POINT_SELECTION_RADIUS.setModeDefaultValue(ApplicationMode.CAR, 13);
+		MAP_POINT_SELECTION_RADIUS.setModeDefaultValue(ApplicationMode.CAR, 17);
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name

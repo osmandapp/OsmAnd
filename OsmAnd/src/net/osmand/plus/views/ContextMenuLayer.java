@@ -53,7 +53,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private ImageView closeButton;
 	private OsmandMapTileView view;
 	public int BASE_TEXT_SIZE = 170;
-	private int TEXT_SIZE = 170;
+	private int DEFAULT_TEXT_SIZE = 15;
+	private int TEXTBOX_SIZE = 170;
 	public int SHADOW_OF_LEG = 5;
 	public int CLOSE_BTN = 8;
 	
@@ -81,43 +82,43 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		scaleCoefficient  = view.getDensity();
-//		BASE_TEXT_SIZE = (int) (BASE_TEXT_SIZE * scaleCoefficient);
+		textView = new TextView(view.getContext());
+		LayoutParams lp = new LayoutParams(BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT);
+		textView.setLayoutParams(lp);
+		float factor = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY.get() + 0.25f;
+		if (factor < 1.0f) factor = 1.0f;
+		TEXTBOX_SIZE = (int)(BASE_TEXT_SIZE * factor * scaleCoefficient);
+		textView.setTextColor(Color.argb(255, 0, 0, 0));
+		textView.setMinLines(1);
+		textView.setGravity(Gravity.CENTER_HORIZONTAL);		
+		textView.setClickable(true);	
+		textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
+		textPadding = new Rect();
+		textView.setTextSize((int)(DEFAULT_TEXT_SIZE * factor * scaleCoefficient));
+		textView.getBackground().getPadding(textPadding);
+		closeButton = new ImageView(view.getContext());
+		lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		closeButton.setLayoutParams(lp);
+		closeButton.setImageDrawable(view.getResources().getDrawable(R.drawable.headliner_close));
+		closeButton.setClickable(true);	
 		SHADOW_OF_LEG = (int) (SHADOW_OF_LEG * scaleCoefficient);
 		CLOSE_BTN = (int) (CLOSE_BTN * scaleCoefficient);
 		
 		boxLeg = view.getResources().getDrawable(R.drawable.box_leg);
 		boxLeg.setBounds(0, 0, boxLeg.getMinimumWidth(), boxLeg.getMinimumHeight());
 		
-		textView = new TextView(view.getContext());
-		LayoutParams lp = new LayoutParams(BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT);
-		textView.setLayoutParams(lp);
-//		textView.setTextSize(15);
-		float factor = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY.get() + 0.25f;
-		if (factor < 1.0f) factor = 1.0f;
-		textView.setTextSize((int)(15 * factor));
-		TEXT_SIZE = (int)(BASE_TEXT_SIZE * factor * scaleCoefficient);
-		textView.setTextColor(Color.argb(255, 0, 0, 0));
-		textView.setMinLines(1);
-//		textView.setMaxLines(15);
-		textView.setGravity(Gravity.CENTER_HORIZONTAL);
-		
-		textView.setClickable(true);
-		
-		textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
-		textPadding = new Rect();
-		textView.getBackground().getPadding(textPadding);
-//		textView.setPadding(0, 0, CLOSE_BTN + 3, 0);
-		
-		closeButton = new ImageView(view.getContext());
-		lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		closeButton.setLayoutParams(lp);
-		closeButton.setImageDrawable(view.getResources().getDrawable(R.drawable.headliner_close));
-		closeButton.setClickable(true);
 		if(latLon != null){
 			setLocation(latLon, description);
-		}
-		
+		}		
 	}
+	
+	public void updateTextSize(){
+		float factor = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY.get() + 0.25f;
+		if (factor < 1.0f) factor = 1.0f;
+		TEXTBOX_SIZE = (int)(BASE_TEXT_SIZE * factor * view.getDensity());
+		textView.setTextSize((int)(DEFAULT_TEXT_SIZE * factor));
+		layoutText();
+	}	
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
@@ -158,7 +159,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (textView.getLineCount() > 0) {
 			textView.getBackground().getPadding(padding);
 		}
-		int w = TEXT_SIZE;
+		int w = TEXTBOX_SIZE;
 		int h = (int) ((textView.getPaint().getTextSize() * 1.3f) * textView.getLineCount());
 		
 		textView.layout(0, -padding.bottom, w, h + padding.top);
@@ -395,5 +396,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		map.put(KEY_SELECTED_OBJECTS, selectedObjects);
 		map.put(KEY_DESCRIPTION, textView.getText().toString());
 	}
-
+	
+	public TextView getTextView (){
+		return textView;
+	}
 }

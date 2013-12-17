@@ -8,7 +8,17 @@
          If you are making/correcting English translations make sure:
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
+    -->   
+	<string name="notes_list_title">Select a note to display location on map.</string>
+	<string name="measurement_point_no_notes_warning">There are no notes to show.</string>
+    <string name="measurement_point_menu_show_notes">Show/hide all points with notes</string>
+    <string name="measurement_point_menu_list_notes">List all notes</string>
+    <string name="map_zoom_level">Map zoom level</string>
+    <string name="map_widget_zoom_factors">Map zoom and magnification</string>
+    <string name="tip_faq_t">Please visit https://code.google.com/p/osmand/wiki/FAQ to see frequently asked questions.</string>
+    <string name="tip_faq">Frequently Asked Questions</string>
+    <string name="local_osm_changes_delete_all_confirm">You are going to delete %1$d osm changes. Are you sure?</string>
+    <string name="local_osm_changes_delete_all">Delete All</string>
     <string name="animate_routing_route_not_calculated">Please, calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route </string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
@@ -30,8 +40,8 @@
     <string name="measurement_point_menu_insert_point">Insert point before selected point</string>
     <string name="measurement_point_menu_insert_note">Add/edit note</string>
     <string name="measurement_point_menu_edit_point_selection_radius">Change the radius of the point selection area</string>
-    <string name="measurement_track_distance">Total Distance: </string>
-    <string name="measurement_subTrack_distance">Subtrack Distance: </string>
+    <string name="measurement_track_distance">Track Length: </string>
+    <string name="measurement_subTrack_distance">Subtrack Length: </string>
     <string name="measurement_point_note">Enter/edit note to assign to point</string>
     <string name="plan_selection_size_prompt">Select the desired radius (in pixels) of the point selection area</string>
     <string name="plan_selection_size_warning">Radius of the point selection area set to </string>
@@ -908,7 +918,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="index_name_wiki">Worldwide Wikipedia POIs</string>
 	<string name="index_name_voice">Voice packs (recorded, limited features)</string>
 	<string name="index_name_tts_voice">Voice packs (TTS-synthesized, prefer)</string>
-	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">User defined</string>
 	<string name="fav_export_confirmation">File with previously exported favorites already exists. Do you want to replace it?</string>
 	<string name="profile_settings">Profile Specific Settings</string>
@@ -1208,7 +1218,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="amenity_type_historic">Historic</string>
 	<string name="amenity_type_landuse">Landuse</string>
 	<string name="amenity_type_leisure">Leisure</string>
-	<string name="amenity_type_manmade">Man made</string>
+	<string name="amenity_type_man_made">Man made</string>
 	<string name="amenity_type_military">Military</string>
 	<string name="amenity_type_natural">Natural</string>
 	<string name="amenity_type_office">Office</string>

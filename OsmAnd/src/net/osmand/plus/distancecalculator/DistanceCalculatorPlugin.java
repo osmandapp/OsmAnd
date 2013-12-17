@@ -58,7 +58,6 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.MotionEvent;
-import android.view.GestureDetector;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -75,6 +74,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	private ContextMenuLayer contextMenuLayer;
 	private TextInfoWidget distanceControl;
 	private MapActivity mapActivity;
+	private DistanceCalculatorPlugin distanceCalculatorPlugin;
 	
 	private List<LinkedList<WptPt>> measurementPoints = new ArrayList<LinkedList<WptPt>>();
 	public int selectedPointIndex = -1;
@@ -93,9 +93,11 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
     private String warning = null;
 
 	private int distanceMeasurementMode = 0; 
+	private boolean displayNotesFlag = false;
 
 	public DistanceCalculatorPlugin(OsmandApplication app) {
 		this.app = app;
+		distanceCalculatorPlugin = this;
 	}
 	
 	@Override
@@ -121,7 +123,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayers(MapActivity activity) {
 		contextMenuLayer = activity.getMapLayers().getContextMenuLayer();
-		// remove old if existing
+		// remove any existing layer
 		if(distanceCalculatorLayer != null) {
 			activity.getMapView().removeLayer(distanceCalculatorLayer);
 		}
@@ -183,6 +185,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			list.add(R.string.distance_measurement_finish_subtrack);
 			list.add(R.string.distance_measurement_clear_route);
 			list.add(R.string.distance_measurement_save_gpx);
+			list.add(R.string.measurement_point_menu_list_notes);
+			list.add(R.string.measurement_point_menu_show_notes);
 		}
 		list.add(R.string.distance_measurement_load_gpx);
 		String[] items = new String[list.size()];
@@ -202,24 +206,33 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				} else if (id == R.string.distance_measurement_finish_subtrack) {
 					if(measurementPoints.size() > 0){
 						WptPt temp = measurementPoints.get(measurementPoints.size() - 1).getLast();	//subtrack starts at end of previous segment
-					measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
-					measurementPoints.get(measurementPoints.size() - 1).add(0, temp);
-					selectedSubtrackIndex = measurementPoints.size() - 1;
-					selectedPointIndex = 0;
-				}
+						measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
+						measurementPoints.get(measurementPoints.size() - 1).add(0, temp);
+						selectedSubtrackIndex = measurementPoints.size() - 1;
+						selectedPointIndex = 0;
+					}
 				} else if (id == R.string.distance_measurement_clear_route) {
 					measurementPoints.clear();
 					selectedSubtrackIndex = - 1;
 					selectedPointIndex = -1;
 					calculateDistance();
 					contextMenuLayer.setLocation(null, null);	//clear any open info box
+					distanceCalculatorLayer.setLocation(null, null);	//clear any open info box
+					activity.getMapView().refreshMap();
 				} else if (id == R.string.distance_measurement_save_gpx) {
 					saveGpx(activity);
 				} else if (id == R.string.distance_measurement_load_gpx) {
 					loadGpx(activity);
+				} else if (id == R.string.measurement_point_menu_list_notes) {
+					dialog.dismiss();
+					showNotesListDialog(activity);
+				} else if (id == R.string.measurement_point_menu_show_notes) {
+					displayNotesFlag = (displayNotesFlag ? false:true);
+					activity.getMapView().refreshMap();
+				}else{
+					activity.getMapView().refreshMap();
+					updateText();
 				}
-				activity.getMapView().refreshMap();
-				updateText();
 			}
 		});
 		bld.show();
@@ -341,7 +354,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				} else {
 					gpx = new GPXFile(); 
 				}
-				for(int i = 0; i<measurementPoints.size(); i++) {
+				for(int i = 0; i < measurementPoints.size(); i++) {
 					LinkedList<WptPt> lt = measurementPoints.get(i);
 					if(lt.size() == 1) {
 						gpx.points.add(lt.getFirst());
@@ -388,11 +401,11 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		exportTask.execute(new Void[0]);
 	}
 	
-	private void startEditingHelp(MapActivity ctx) {
+	private void startEditingHelp(MapActivity mapActivity) {
 		final CommonPreference<Boolean> pref = app.getSettings().registerBooleanPreference("show_measurement_help_first_time", true);
 		pref.makeGlobal();
 		if(pref.get()) {
-			Builder builder = new AlertDialog.Builder(ctx);
+			Builder builder = new AlertDialog.Builder(mapActivity);
 			builder.setMessage(R.string.use_distance_measurement_help);
 			builder.setNegativeButton(R.string.default_buttons_do_not_show_again, new OnClickListener() {
 				
@@ -406,12 +419,12 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 	}
 	
-	private TextInfoWidget createDistanceControl(final MapActivity activity, Paint paintText, Paint paintSubText) {
+	private TextInfoWidget createDistanceControl( MapActivity activity, Paint paintText, Paint paintSubText) {
 		final TextInfoWidget distanceControl = new TextInfoWidget(activity, 0, paintText, paintSubText);
 		distanceControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showDialog(activity);
+				showDialog(mapActivity);
 			}
 		});
 		distanceControl.setImageDrawable(app.getResources().getDrawable(R.drawable.widget_distance));
@@ -458,10 +471,66 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		updateText();
 	}
 
+	public void showNotesListDialog(MapActivity activity){
+		final List<WptPt> notePoints = new ArrayList<WptPt>();
+		final List<String> entries = new ArrayList<String>();
+		final List<Integer> pointIndex = new ArrayList<Integer>();
+		final List<Integer> subtrackIndex = new ArrayList<Integer>();
+		if(measurementPoints.size() > 0) {
+			int points = measurementPoints.size();
+			//find points that have notes and add info to list
+			for (int i = 0; i < points;i++){
+				Iterator<WptPt> it = measurementPoints.get(i).iterator();
+				for (int j = 0; j < measurementPoints.get(i).size(); j++){
+					WptPt pt = it.next();
+					if (pt.desc != null){
+						notePoints.add(pt);
+						pointIndex.add(j);
+						subtrackIndex.add(i);
+						entries.add(pt.desc);
+					}
+				}
+			}
+			
+			if(notePoints.size() > 0) {
+			    final AlertDialog.Builder bld1 = new AlertDialog.Builder(activity); // change to new AlertDialog.Builder(this)?
+			    bld1.setTitle(R.string.notes_list_title);
+			    bld1.setNegativeButton(R.string.default_buttons_cancel, new DialogInterface.OnClickListener(){
+			    	
+				@Override
+					public void onClick(DialogInterface dlg, int which) {
+					dlg.dismiss();
+					}
+				});
+
+			    bld1.setItems(entries.toArray(new String[entries.size()]), new DialogInterface.OnClickListener(){
+		    		
+				@Override
+					public void onClick(DialogInterface dlg, int which) {
+						dlg.dismiss();
+						final double lat = notePoints.get(which).lat;
+						final double lon = notePoints.get(which).lon;
+						mapActivity.getMapView().getAnimatedDraggingThread().startMoving(lat, lon,
+								mapActivity.getMapView().getCurrentRotatedTileBox().getZoom(), true);
+						selectedPointIndex = pointIndex.get(which);
+						selectedSubtrackIndex = subtrackIndex.get(which);
+						calculatePartialDistance(selectedSubtrackIndex, selectedPointIndex);
+						distanceCalculatorLayer.setLocation(new LatLon(lat,lon), distanceCalculatorLayer.setDescription(true, null));
+						mapActivity.getMapView().refreshMap();
+					}
+				});
+			    bld1.show();
+			}else{
+				AccessibleToast.makeText(mapActivity,
+						mapActivity.getMapView().getResources().getString(R.string.measurement_point_no_notes_warning), Toast.LENGTH_LONG).show();
+			}			
+		}
+	}
+
 	public DistanceCalculatorLayer getDistanceCalculatorLayer(){
 		return distanceCalculatorLayer;
 	}
-
+	
 	public class DistanceCalculatorLayer extends OsmandMapLayer{
 		private OsmandMapTileView view;
 		private Bitmap originIcon;
@@ -474,9 +543,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		private ImageView closeButton;
 		private Drawable boxLeg;
 
-		public final int defaultMeasurementPointDisplayRadius = 13;
-		public final int maxMeasurementPointSelectionRadius = 21;
-		public final int minMeasurementPointSelectionRadius = 5;
+		public final int defaultMeasurementPointDisplayRadius = 17;
+		public final int maxMeasurementPointSelectionRadius = 29;
+		public final int minMeasurementPointSelectionRadius = 7;
 		private boolean scrollingFlag = false;		//For measurement point dragging
 		private boolean showDragAnimation = false;		//For measurement point dragging
 		private boolean insertFlag = false;
@@ -484,10 +553,11 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		public int distanceColor = 0;
 		public int inactiveSubtrackColor = 0;
 		public int subtrackRemainderColor = 0;
+		public int noteHighlightColor = 0;
 		public int dragColor = 0;
 		private PointF movingPoint = null;
-		private final int DEFAULT_TEXT_SIZE = 14;
-		private int TEXT_SIZE = 1;
+		private final int DEFAULT_TEXT_SIZE = 15;
+		private int TEXTBOX_SIZE = 1;
 		private static final String KEY_DESCRIPTION = "distance_calculator_description";
 		private static final String KEY_SELECTED_SUBTRACK_INDEX = "distance_calculator_selected_subtrack_index";
 		private static final String KEY_SELECTED_POINT_INDEX = "distance_calculator_selected_point_index";
@@ -516,6 +586,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			dragColor = view.getResources().getColor(R.color.color_distance_drag);
 			inactiveSubtrackColor = view.getResources().getColor(R.color.color_distance_inactive_subtrack);
 			subtrackRemainderColor = view.getResources().getColor(R.color.color_distance_remainder);
+			noteHighlightColor = view.getResources().getColor(R.color.color_note_highlight);
 			paint = new Paint();
 			paint.setStyle(Style.STROKE);
 			paint.setStrokeWidth(7 * view.getDensity());
@@ -530,9 +601,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			textView.setLayoutParams(lp);
 			float factor = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY.get() + 0.25f;
 			if (factor < 1.0f) factor = 1.0f;
-			textView.setTextSize((int)(DEFAULT_TEXT_SIZE * factor));
-			TEXT_SIZE = (int)(contextMenuLayer.BASE_TEXT_SIZE * factor * view.getDensity());
-			int w = (int)(contextMenuLayer.BASE_TEXT_SIZE * factor * view.getDensity());
+			TEXTBOX_SIZE = (int)(contextMenuLayer.BASE_TEXT_SIZE * factor * view.getDensity());
 			textView.setTextColor(Color.argb(255, 0, 0, 0));
 			textView.setMinLines(1);
 			textView.setGravity(Gravity.CENTER_HORIZONTAL);		
@@ -540,12 +609,12 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 			textPadding = new Rect();
 			textView.getBackground().getPadding(textPadding);
-			
+			textView.setTextSize((int)(DEFAULT_TEXT_SIZE * factor));
 			closeButton = new ImageView(view.getContext());
 			lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			closeButton.setLayoutParams(lp);
 			closeButton.setImageDrawable(view.getResources().getDrawable(R.drawable.headliner_close));
-			closeButton.setClickable(true);
+			closeButton.setClickable(true);			
 			boxLeg = view.getResources().getDrawable(R.drawable.box_leg);
 			boxLeg.setBounds(0, 0, boxLeg.getMinimumWidth(), boxLeg.getMinimumHeight());
 			
@@ -560,6 +629,17 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			}
 		}
 		
+		public void updateTextSize(){
+			float factor = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY.get() + 0.25f;
+			if (factor < 1.0f) factor = 1.0f;
+			TEXTBOX_SIZE = (int)(contextMenuLayer.BASE_TEXT_SIZE * factor * view.getDensity());
+			textView.setTextSize((int)(DEFAULT_TEXT_SIZE * factor));
+			layoutText();
+			if(contextMenuLayer != null){
+				contextMenuLayer.updateTextSize();
+			}
+		}
+		
 		@Override
 		public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 			description = "";
@@ -571,7 +651,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				return true;
 			}else if (textBoxPressed == 1){
 				if(distanceMeasurementMode == 1){
-					createMeasurementPointMenuDialog();
+					createMeasurementPointMenuDialog(mapActivity);
 				}else{
 					isMeasurementPointSelected(point, tileBox);	//set selected point indices
 					double lat = measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).lat;
@@ -624,8 +704,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			String description = "";
 			if(latLon != null){
 				description = view.getContext().getString(R.string.point_on_map, 
-						latLon.getLatitude(), latLon.getLongitude()) + "\n";
-				
+						latLon.getLatitude(), latLon.getLongitude()) + "\n";				
 			}
 			if(selectedSubtrackIndex > 0){
 				description = description + view.getContext().getString(R.string.measurement_track_distance) + distance;
@@ -652,7 +731,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			if (measurementPoints.size() < 0) return false;	//pass event through to context menu layer
 			if(isMeasurementPointSelected(point, tileBox)){
 				if (distanceMeasurementMode == 1){
-					createMeasurementPointMenuDialog();
+					createMeasurementPointMenuDialog(mapActivity);
 				}else{
 					LatLon l = tileBox.getLatLonFromPixel(point.x, point.y);
 					mapActivity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude());					
@@ -727,8 +806,10 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				int lastPoint = selectedPointIndex;
 				int points =0;
 				boolean showLine = false;
-				if(showDragAnimation && scrollingFlag && measurementPoints.get(0).size() > 0){	//provide rubberbanding if a drag is occurring
-					paint.setStrokeWidth(4 * view.getDensity());
+				float factor = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY.get() + 0.3f;
+				if(factor < 1) factor = 1;
+				if(showDragAnimation && scrollingFlag && measurementPoints.get(0).size() > 0){	//provide rubber-banding if a drag is occurring
+					paint.setStrokeWidth(4 * view.getDensity() * factor);
 					paint.setColor(dragColor);
 					path.reset();
 					int x = 0;
@@ -788,11 +869,11 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				if(lastPoint < 0) lastSegment = measurementPoints.size() - 1;	//adjust for partial measurements
 				for (int i = 0; i < measurementPoints.size(); i++) {	//for all gpx subtracks
 					if(i != selectedSubtrackIndex){
-						paint.setStrokeWidth(4 * view.getDensity());
+						paint.setStrokeWidth(4 * view.getDensity() * factor);
 						paint.setColor(inactiveSubtrackColor);
 						paint2.setColor(inactiveSubtrackColor);
 					}else{
-						paint.setStrokeWidth(7 * view.getDensity());
+						paint.setStrokeWidth(7 * view.getDensity() * factor);
 						paint.setColor(distanceColor);
 						paint2.setColor(distanceColor);
 					}
@@ -811,7 +892,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 							canvas.drawPath(path, paint);
 							path.reset();
 							path.moveTo(locationX, locationY);
-							paint.setStrokeWidth(4 * view.getDensity());
+							paint.setStrokeWidth(4 * view.getDensity() * factor);
 							paint.setColor(subtrackRemainderColor);
 					}
 				}
@@ -833,19 +914,34 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				}
 					Iterator<WptPt> it = measurementPoints.get(i).iterator();
 					points = measurementPoints.get(i).size() - 1;
+					int temp = 0;
+					boolean highlightNote = false;
 					for (int j = 0; j <= points; j++){
+						temp = paint2.getColor();
 						WptPt pt = it.next();
 						if (tileBox.containsLatLon(pt.lat, pt.lon)) {
+							highlightNote = displayNotesFlag && measurementPoints.get(i).get(j).desc != null;
 							int locationX = tileBox.getPixXFromLonNoRot(pt.lon);
 							int locationY = tileBox.getPixYFromLatNoRot(pt.lat);						
+							if(highlightNote){
+								paint2.setColor(noteHighlightColor);
+							}
 							if(( j == 0 || j == points) && (i == selectedSubtrackIndex )) {
 										canvas.rotate(-view.getRotate(), locationX, locationY);
-								canvas.drawBitmap(distanceMeasurementMode == 1? originIcon : destinationIcon, 
-										locationX - marginX, locationY - marginY, bitmapPaint);
+								if(highlightNote){
+									paint2.setColor(noteHighlightColor);
+									canvas.drawCircle(locationX, locationY, 10 * tileBox.getDensity() * factor, paint2);
+								}
+								if( j == 0){
+									canvas.drawBitmap(originIcon, locationX - marginX, locationY - marginY, bitmapPaint);
+								}else{
+									canvas.drawBitmap(destinationIcon, locationX - marginX, locationY - marginY, bitmapPaint);									
+								}
 								canvas.rotate(view.getRotate(), locationX, locationY);	
 							} else {
-								canvas.drawCircle(locationX, locationY, 10 * tileBox.getDensity(), paint2);
+								canvas.drawCircle(locationX, locationY, 10 * tileBox.getDensity() * factor, paint2);
 							}
+							paint2.setColor(temp);
 						}
 					}
 				}
@@ -937,7 +1033,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			if (textView.getLineCount() > 0) {
 				textView.getBackground().getPadding(padding);
 			}
-			int w = TEXT_SIZE;
+			int w = TEXTBOX_SIZE;
 			int h = (int) ((textView.getPaint().getTextSize() * 1.3f) * textView.getLineCount());
 			
 			textView.layout(0, -padding.bottom, w, h + padding.top);
@@ -976,6 +1072,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				R.string.delete_point,
 				R.string.measurement_point_menu_insert_point,
 				R.string.measurement_point_menu_insert_note,
+				R.string.measurement_point_menu_show_notes,
+				R.string.measurement_point_menu_list_notes,
 				R.string.measurement_point_menu_show_latlon,
 				R.string.measurement_point_menu_edit_point_selection_radius
 		};
@@ -983,9 +1081,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		/**
 		 * Method to open a menu when a measurement point or information text box is long pressed.
 		 */
-		void createMeasurementPointMenuDialog() {
+		void createMeasurementPointMenuDialog( MapActivity activity) {
 	        // Menu opened when a measurement point or information text box is tapped	    	
-	    	Builder builder = new AlertDialog.Builder(mapActivity);
+	    	final Builder builder = new AlertDialog.Builder(mapActivity);
 	    	List<String> actions = new ArrayList<String>();
 	    	int actionsToUse = 0;
 	    	actionsToUse =  pointMenuActions.length;	//measurement point selected items;
@@ -993,7 +1091,6 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	    		actions.add(mapActivity.getResources().getString(pointMenuActions[j]));
 	    	}		
 	    	builder.setItems(actions.toArray(new String[actions.size()]), new DialogInterface.OnClickListener(){
-	
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					int standardId = 0;
@@ -1033,6 +1130,15 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 						view.refreshMap();
 					}else if(standardId == R.string.measurement_point_menu_edit_point_selection_radius){	//change measurement point selection area size
 						editPointSelectionRadius();
+					} else if (standardId == R.string.measurement_point_menu_show_notes) {
+						displayNotesFlag = (displayNotesFlag ? false:true);
+						view.refreshMap();
+					} else if (standardId == R.string.measurement_point_menu_list_notes) {
+						dialog.dismiss();
+						distanceCalculatorPlugin.showNotesListDialog(mapActivity);
+					} else if (standardId == R.string.measurement_point_menu_show_notes) {
+						displayNotesFlag = (displayNotesFlag ? false:true);
+						mapActivity.getMapView().refreshMap();
 					}
 				}
 			});
@@ -1100,16 +1206,16 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		    builder.show(); 
 	    }
 
-	    protected void addPointNote(final MapActivity activity) {
-			Builder b = new AlertDialog.Builder(activity);
-			LinearLayout ll = new LinearLayout(activity);
+	    protected void addPointNote(final MapActivity mapActivity) {
+			Builder b = new AlertDialog.Builder(mapActivity);
+			LinearLayout ll = new LinearLayout(mapActivity);
 			ll.setOrientation(LinearLayout.VERTICAL);
 			ll.setPadding(5, 5, 5, 5);
-			final TextView tv = new TextView(activity);
+			final TextView tv = new TextView(mapActivity);
 			tv.setText("");
 			tv.setTextColor(Color.RED);
 			ll.addView(tv);
-			final EditText editText = new EditText(activity);
+			final EditText editText = new EditText(mapActivity);
 			if(selectedPointIndex >= 0){
 				editText.setText(measurementPoints.get(selectedSubtrackIndex).get(selectedPointIndex).desc);
 			}else{
