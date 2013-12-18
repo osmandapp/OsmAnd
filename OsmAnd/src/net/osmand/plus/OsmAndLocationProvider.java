@@ -47,7 +47,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final int START_SIMULATE_LOCATION_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 2;
 	private static final int RUN_SIMULATE_LOCATION_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 3;
 	private static final long LOST_LOCATION_CHECK_DELAY = 18000;
-	private static final long START_LOCATION_SIMULATION_DELAY = 3000;
+	private static final long START_LOCATION_SIMULATION_DELAY = 2000;
 
 	private static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 
@@ -683,7 +683,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			public void run() {
 				simulatePositionImpl();
 			}
-		}, 1000);
+		}, 600);
 	}
 	
 	private void simulatePositionImpl() {

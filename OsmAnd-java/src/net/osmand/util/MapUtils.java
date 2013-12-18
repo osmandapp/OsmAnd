@@ -466,21 +466,6 @@ public class MapUtils {
 	}
 
 
-	public static void main(String[] args) {
-		String s = "";
-		// s = "القاهرة"; // cairo
-//		s = "東京"; //tokyo
-//		s = "北京"; // beijing
-//		s = "יְרוּשָׁלַיִם"; // jerusalem
-
-		System.out.println(s);
-		for(int i = 0; i < s.length(); i++ ) {
-			System.out.print(s.charAt(i) + "\n");
-		}
-		for(int i = 0; i < s.length(); i++ ) {
-			System.out.print("\\u0"+Integer.toHexString(s.charAt(i)) + "");
-		}
-	}
 }
 
 
