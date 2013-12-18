@@ -102,12 +102,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 	private OsmandPreference<Boolean> USE_FILTER_FOR_COMPASS;
 	
-	private static double squareDist(int x1, int y1, int x2, int y2) {
-		// translate into meters 
-		double dy = MapUtils.convert31YToMeters(y1, y2);
-		double dx = MapUtils. convert31XToMeters(x1, x2);
-		return dx * dx + dy * dy;
-	}
 	
 	public class SimulationProvider {
 		private int currentRoad;
@@ -137,7 +131,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					RouteDataObject obj = road.getObject();
 					QuadPoint proj = MapUtils.getProjectionPoint31(px, py, obj.getPoint31XTile(j-1), obj.getPoint31YTile(j-1), 
 							obj.getPoint31XTile(j), obj.getPoint31YTile(j));
-					double dd = squareDist((int)proj.x, (int)proj.y, px, py);
+					double dd = MapUtils.squareRootDist31((int)proj.x, (int)proj.y, px, py);
 					if (dd < dist) {
 						dist = dd;
 						currentRoad = i;
@@ -166,7 +160,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 						st31x = (int) currentPoint.x;
 						st31y = (int) currentPoint.y;
 					}
-					double dd = MapUtils.squareRootDist31(st31x, st31y, end31x, end31y);
+					double dd = MapUtils.measuredDist31(st31x, st31y, end31x, end31y);
 					if(meters > dd && !last){
 						meters -= dd;
 					} else {
