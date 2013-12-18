@@ -188,7 +188,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			loc.setSpeed(startLocation.getSpeed());
 			loc.setAltitude(startLocation.getAltitude());
 			loc.setTime(System.currentTimeMillis());
-			float meters = (System.currentTimeMillis() - startLocation.getTime()) / startLocation.getSpeed();
+			float meters = (System.currentTimeMillis() - startLocation.getTime()) / (1000 * startLocation.getSpeed());
 			float proc = proceedMeters(meters, loc);
 			if(proc < 0 || proc >= 100){
 				return null;
