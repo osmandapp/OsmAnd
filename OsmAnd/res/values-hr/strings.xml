@@ -24,8 +24,8 @@
     <string name="av_def_action_audio">Snimanje zvuka</string>
     <string name="av_use_external_camera">Koristite aplikaciju kamere</string>
     <string name="av_settings_descr">Postavke zvuka i videa</string>
-    <string name="av_settings">"Postavke zvuka/videa "</string>
-    <string name="recording_error">"Dogodila se greška tijekom snimanja "</string>
+    <string name="av_settings">Postavke zvuka/videa </string>
+    <string name="recording_error">Dogodila se greška tijekom snimanja </string>
     <string name="recording_camera_not_available">Kamera nije dostupna</string>
     <string name="recording_is_recorded">Zvuk ili video se snima. Za zaustavljanje pritisnite widget.</string>
     <string name="recording_delete_confirm">Želite li izbrisati ovaj zapis?</string>
@@ -91,7 +91,7 @@
 	<string name="no_route">Nema rute</string>
     <string name="poi_filter_parking">Parkiralište</string>
     <string name="btn_add_tag">Dodaj oznaku</string>
-    <string name="btn_advanced_mode">Napredni način rada...</string>
+    <string name="btn_advanced_mode">Napredni način rada…</string>
     <string name="poi_filter_emergency">Prva pomoć</string>
     <string name="poi_filter_public_transport">Javni prijevoz</string>
     <string name="poi_filter_entertainment">Zabava</string>
@@ -319,7 +319,7 @@
 	<string name="search_tabs_location">Lokacija</string>
 	<string name="navigate_point_latitude">Širina</string>
 	<string name="navigate_point_longitude">Dužina</string>
-	<string name="app_mode_default">Zadano</string>
+	<string name="app_mode_default">Karta</string>
 	<string name="app_mode_car">Auto</string>
 	<string name="app_mode_bicycle">Bicikl</string>
 	<string name="app_mode_pedestrian">Pješak</string>
@@ -482,7 +482,7 @@
 	<string name="map_index">Karta</string>
 	<string name="show_point_options">Koristite lokaciju...</string>
 	<string name="fast_route_mode">Najbrži put</string>
-	<string name="fast_route_mode_descr">Označite za izračun najbrže rute ili odznačite za najkraću rutu…</string>
+	<string name="fast_route_mode_descr">Označite za izračun najbrže rute ili od značite za najkraću rutu </string>
 	<string name="reload">Osvježi</string>
 	<string name="select_all">Označi sve</string>
 	<string name="deselect_all">Odznači sve</string>
@@ -589,19 +589,21 @@
     <string name="srtm_paid_version_title">Dodatak Slojnice</string>
     <string name="recording_playing">Trenutno se reproducira zvuk od određenog snimanja.\n%1$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Promjene u 1.1.0:
-\n\t* Dodatak za mjerenje udaljenosti
-\n\t* Dodatak za zvučne/video zapise\n\t* Dodatak za Slojnice
-\n\t* Ispravljene greške
-\n\t* \'Obilazak\' stil karte sa više detalja, novi izgled ceste, više kontrasta, i planinsko hodanje (SAC skala) option
-\n\t* EGM96 geoid offset correction for GPS altitude readings "</string>
+		\n\t* Dodatak za mjerenje udaljenosti
+		\n\t* Dodatak za zvučne/video zapise\n\t* Dodatak za Slojnice
+		\n\t* Ispravljene greške
+		\n\t* \'Obilazak\' stil karte sa više detalja, novi izgled ceste, više kontrasta, i planinsko hodanje (SAC skala) option
+		\n\t* EGM96 geoid offset correction for GPS altitude readings "
+    </string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd dodatak za offline slojnice</string>
     <string name="srtm_plugin_name">Dodatak za Slojnice</string>
     <string name="osmodroid_plugin_name">OsMoDroid dodatak</string>
 	<string name="tip_recent_changes_1_0_0_t">"Promjene u 1.0.0:
-\n\t* Poboljšana navigacija: brža i preciznija, do 250 km
-\n\t* Mogućnost prikaza samo cestovne karte
-\n\t* Map does not lose position lock after interruptions
-\n\t* Enable sleep mode service during navigation "</string>
+	\n\t* Poboljšana navigacija: brža i preciznija, do 250 km
+	\n\t* Mogućnost prikaza samo cestovne karte
+	\n\t* Map does not lose position lock after interruptions
+	\n\t* Enable sleep mode service during navigation "
+    </string>
     <string name="tip_recent_changes_0_8_3_t">Promjene u 0.8.3:
 \n\t* Među točke\n\t* Poboljšanja navigacija\n\t* Dodana opcija s kojom se omogućuje izbjegavanje autocesta prilikom odabira rute\n\t* Dodane biciklističke staze\n\t* Ispravljene pogreške</string>
 	<string name="delete_target_point">Uklonite ciljnu točku</string>
@@ -784,7 +786,7 @@
 	<string name="file_with_name_already_exist">Datoteka sa istim imenom već postoji.</string>
 	<string name="save_route_dialog_title">Spremi rutu kao GPX trag</string>
 	<string name="route_successfully_saved_at">Ruta je uspješno spremljena kao \'%1$s\'.</string>
-	<string name="filename_input">"Naziv datoteke: "</string>
+	<string name="filename_input">Naziv datoteke: </string>
 	<string name="context_menu_item_search">Traži u blizini ovog mjesta</string>
 	<string name="search_position_undefined">Nedefinirano</string>
 	<string name="search_position_fixed">Definirano</string>
@@ -878,10 +880,16 @@
     <string name="arrived_at_intermediate_point">Stigli ste na međutočku</string>
     <string name="context_menu_item_intermediate_point">Dodaj kao međutočku</string>
     <string name="map_widget_intermediate_distance">Međutočka</string>
-    <string name="tip_recent_changes_1_1_4_t">Promjene u 1.1.4:\n\t* Redizajn korisničkog sučelja
-\n\t* Ispravljeni bugovi</string>
+    <string name="tip_recent_changes_1_1_4_t">Promjene u 1.1.4:
+	\n\t* Redizajn korisničkog sučelja
+		\n\t* Ispravljeni bugovi
+    </string>
     <string name="tip_recent_changes_1_1_2_t">Promjene u inačici 1.1.2:
-\n\t* Audio/video plugin enhancement (photos with EXIF information)\n\t* Usability fixed and restructured Contour lines plugin\n\t* Hillshade packages for Contour lines plugin\n\t* Ispravljeni bugovi</string>
+		\n\t* Audio/video plugin enhancement (photos with EXIF information)
+		\n\t* Usability fixed and restructured Contour lines plugin
+		\n\t* Hillshade packages for Contour lines plugin
+		\n\t* Ispravljeni bugovi
+    </string>
     <string name="tip_recent_changes_0_8_2_t">"Promjene u inačici 0.8.2:
 \n\t* Poboljšana navigacija
 \n\t* Dynamic map widgets
@@ -979,4 +987,26 @@
     <string name="route_from">Od:</string>
 	<string name="local_index_gpx_timespan">\nVrijeme trajanja: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nVrijeme u pokretu: %1$d:%2$02d:%3$02d</string>
-	</resources>
+	<string name="please_select_address">Odaberite prvo grad ili ulicu</string>
+    <string name="app_modes_choose">Profili aplikacije</string>
+	<string name="app_modes_choose_descr">Odaberite profil koji će se koristiti u aplikaciji</string>
+    <string name="local_osm_changes_delete_all_confirm">Izbrisati ćete %1$d osm promjene. Jeste li sigurni?</string>
+    <string name="route_is_too_long">Ruta je možda preduga da se izračuna pomoću OsmAnd offline usmjeravanja. 
+        	U prosjeku offline usmjeravanje moguće je između točaka do 200 km. Molimo dodajte jednu ili više među točaka za izračun rute.</string>
+	<string name="tip_recent_changes_1_6_t">Changes in 1.6:
+	\n\t* Podrška za Full HD uređaje
+	\n\t* Podrška za transparentnu pozadinu karte
+	\n\t* Prikaz preuzetih karta i olakšano preuzimanje karata koje nedostaju izravno iz prikaza karte
+	\n\t* Contour line map files now bundled for countries/regions
+	\n\t* Nova karta svijeta sa prikazom glavnih cesta, pruga i šuma
+	\n\t* Map magnifier feature (long click on zoom button) - Useful both for tile and vector maps  
+	\n\t* Define/edit custom online tile sources (and specify expiration time)
+	\n\t* Support of time conditional speed limits (Netherlands)
+	\n\t* Brže pretraživanje adresa
+	\n\t* Ispravljene greške
+    </string>
+    <string name="local_index_tile_data_expire">Expire za (minutes): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Preuzimanje: %1$s</string>
+    <string name="edit_tilesource_expiration_time">Istječe za (minuta)</string>
+    <string name="speak_street_names">Najavi imena ulica (TTS)</string>
+    </resources>
