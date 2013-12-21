@@ -136,6 +136,36 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 
+		for (ColoredGPX cg : gpxArrayList){
+			cg.gpxFile.proccessPoints();
+			List<List<WptPt>> points = cg.gpxFile.processedPointsToDisplay;
+			
+			paint.setColor(cg.color);
+
+			final QuadRect latLonBounds = tileBox.getLatLonBounds();
+			for (List<WptPt> l : points) {
+				path.rewind();
+				int startIndex = -1;
+
+				for (int i = 0; i < l.size(); i++) {
+					WptPt ls = l.get(i);
+					if (startIndex == -1) {
+						if (ls.lat >= latLonBounds.bottom - 0.1 && ls.lat <= latLonBounds.top + 0.1  && ls.lon >= latLonBounds.left - 0.1
+								&& ls.lon <= latLonBounds.right + 0.1) {
+							startIndex = i > 0 ? i - 1 : i;
+						}
+					} else if (!(latLonBounds.left <= ls.lon + 0.1 && ls.lon - 0.1 <= latLonBounds.right
+							&& latLonBounds.bottom <= ls.lat + 0.1 && ls.lat - 0.1 <= latLonBounds.top)) {
+						drawSegment(canvas, tileBox, l, startIndex, i);
+						startIndex = -1;
+					}
+				}
+				if (startIndex != -1) {
+					drawSegment(canvas, tileBox, l, startIndex, l.size() - 1);
+					continue;
+				}
+			}
+		}
 		
 		for (OsMoDroidPoint op : osMoDroidPointArrayList) {
 			if(seekOsMoDroidPoint!=null&&seekOsMoDroidPoint.equals(op)){
@@ -200,36 +230,7 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 			canvas.drawRect(new Rect(locationX-radius, locationY-radius, locationX+radius, locationY+radius), textPaint);
 		}
 		
-		for (ColoredGPX cg : gpxArrayList){
-			cg.gpxFile.proccessPoints();
-			List<List<WptPt>> points = cg.gpxFile.processedPointsToDisplay;
-			
-			paint.setColor(cg.color);
 
-			final QuadRect latLonBounds = tileBox.getLatLonBounds();
-			for (List<WptPt> l : points) {
-				path.rewind();
-				int startIndex = -1;
-
-				for (int i = 0; i < l.size(); i++) {
-					WptPt ls = l.get(i);
-					if (startIndex == -1) {
-						if (ls.lat >= latLonBounds.bottom - 0.1 && ls.lat <= latLonBounds.top + 0.1  && ls.lon >= latLonBounds.left - 0.1
-								&& ls.lon <= latLonBounds.right + 0.1) {
-							startIndex = i > 0 ? i - 1 : i;
-						}
-					} else if (!(latLonBounds.left <= ls.lon + 0.1 && ls.lon - 0.1 <= latLonBounds.right
-							&& latLonBounds.bottom <= ls.lat + 0.1 && ls.lat - 0.1 <= latLonBounds.top)) {
-						drawSegment(canvas, tileBox, l, startIndex, i);
-						startIndex = -1;
-					}
-				}
-				if (startIndex != -1) {
-					drawSegment(canvas, tileBox, l, startIndex, l.size() - 1);
-					continue;
-				}
-			}
-		}
 	
 	}
 	private void drawSegment(Canvas canvas, RotatedTileBox tb, List<WptPt> l, int startIndex, int endIndex) {
