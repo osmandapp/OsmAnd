@@ -1009,4 +1009,21 @@
     <string name="local_index_tile_data_downloadable">Preuzimanje: %1$s</string>
     <string name="edit_tilesource_expiration_time">Istječe za (minuta)</string>
     <string name="speak_street_names">Najavi imena ulica (TTS)</string>
+    <string name="osb_author_or_password_not_specified">Molimo vas da u postavkama navedete OSM korisničko ime i lozinku</string>
+    <string name="search_street_in_neighborhood_cities">Traži ulicu u susjedstvu</string>
+    <string name="intermediate_items_sort_by_distance">Poredaj (od vrata do vrata)</string>
+    <string name="local_osm_changes_backup_successful">Datoteka OSM izmjena je uspješno generirana %1$s</string>
+    <string name="local_osm_changes_backup_failed">Sigurnosna kopija OSM izmjena nije uspjela</string>
+    <string name="local_osm_changes_backup">Sigurnosna kopija kao OSM izmjena</string>
+    <string name="gpx_file_name">Naziv GPX datoteke</string>
+    <string name="osmand_distance_planning_plugin_name">Kalkulator udaljenosti i alat za planiranje</string>
+    <string name="use_distance_measurement_help">* Dodirnite za obilježavanje točke.\n 
+        * Pritisnite i držite na karti za brisanje prethodne točke.\n
+        * Pritisnite i držite na točki za pregled i priložite opis.\n
+        * Kliknite na widget da biste vidjeli više radnji.</string>
+    <string name="distance_measurement_start_editing">Započnite uređivanje</string>
+    <string name="distance_measurement_finish_editing">Završi uređivanje</string>
+    <string name="distance_measurement_clear_route">Obriši sve točke</string>
+    <string name="monitoring_settings">Bilježenje položaja i stanje mirovanja</string>
+    <string name="osmand_monitoring_plugin_name">Bilježenje položaja i stanje mirovanja</string>
     </resources>
