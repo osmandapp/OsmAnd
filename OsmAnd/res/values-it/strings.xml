@@ -1517,7 +1517,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="clear_intermediate_points">Cancella i punti intermedi</string>
     <string name="keep_intermediate_points">Mantieni i punti intermedi</string>
     <string name="new_directions_point_dialog">Hai già punti intermedi impostati.</string>
-    <string name="context_menu_item_directions_to">Indicazioni Per</string>
+    <string name="context_menu_item_directions_to">Indicazioni per</string>
     <string name="context_menu_item_directions_from">Indicazioni Da</string>
     <string name="route_descr_map_location">Mappa: </string>
     <string name="route_to">A:</string>
