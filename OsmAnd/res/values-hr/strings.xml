@@ -1026,4 +1026,8 @@
     <string name="distance_measurement_clear_route">Obriši sve točke</string>
     <string name="monitoring_settings">Bilježenje položaja i stanje mirovanja</string>
     <string name="osmand_monitoring_plugin_name">Bilježenje položaja i stanje mirovanja</string>
-    </resources>
+    <string name="map_widget_mini_route">Mini karta rute</string>
+	<string name="select_animate_speedup">Odaberite brzinu simulacije rute</string>
+    	<string name="basemap_was_selected_to_download">Osnovna karta svijeta je potrebna za pravilno funkcioniranje aplikacije te je odabrana za preuzimanje.</string>
+	<string name="select_index_file_to_download">Ništa nije pronađeno. Ako nemožete pronaći svoju regiju, možete to učiniti sami (vidi http://osmand.net).</string>
+	</resources>
