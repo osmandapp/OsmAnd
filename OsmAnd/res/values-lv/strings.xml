@@ -15,7 +15,7 @@
 	\n\t* Veikti uzlabojumi vairākās vietās		
 	</string>
   <string name="osm_editing_plugin_description">Rādīt uzstādījumus OSM uzlabošanai. Tas ļauj savākt/modificēt OSM POI objektus, atvērt/komentēt OSM kļūdas un nosūtīt ierakstīto GPX (nepieciešama OSM reģistrācija).</string>
-  <string name="vector_maps_may_display_faster_on_some_devices">Vektoru kartes tiks attēlotas ātrāk, bet var nestrādāt uz visām ierīcēm</string>
+  <string name="vector_maps_may_display_faster_on_some_devices">Vektoru kartes tiks attēlotas ātrāk, bet var nestrādāt uz visām ierīcēm.</string>
   
   <string name="play_commands_of_currently_selected_voice">Atskaņot komandas izvēlētajai balsij</string>
   <string name="debugging_and_development">OsmAnd izstrāde</string>
@@ -186,7 +186,7 @@
   <string name="auto_follow_route_never">Nekad</string>
   <string name="auto_follow_route_navigation">Autocentrēt pārvietojoties maršrutā</string>
   <string name="auto_follow_route_navigation_descr">Autocentrēt karti tikai navigācijas laikā.</string>
-  <string name="auto_follow_location_enabled">Autocentrēt kartes skatīšanās režīmā</string>
+  <string name="auto_follow_location_enabled">Autocentrēt karti uz atrašanās vietu.</string>
   <string name="pref_vector_rendering">Vektoru renderētāja opcijas</string>
   <string name="pref_overlay">Pārklājs / paklājs</string>
   <string name="pref_raster_map">Kartes avota uzstādījumi</string>
@@ -344,14 +344,19 @@
   <string name="tip_app_mode">Lietotāja profils</string>
   
   <string name="tip_navigation">Navigācijas izvēlne</string>
-  <string name="tip_navigation_t">\tPirms sākt navigāciju, jums jāizvēlas galapunkts, tad nospiediet \'Izvēlne\' -&gt; \'Navigācija\' uz kartes un izvēlieties navigācijas veidu.
+  <string name="tip_navigation_t">Pirms sākt navigāciju, jums jāizvēlas galapunkts, tad nospiediet \'Izvēlne\' -&gt; \'Navigācija\' uz kartes un izvēlieties navigācijas veidu.
+		\n\nGalapunkts ir atzīmēts uz kartes kā oranžs punkts un OsmAnd rāda attālumu līdz tam and norādes.
+		\n\nJūs varat izvēlēties "sākt navigāciju", kas dos jums balss instrukcijas vai "rādīt maršrutu" bez vadības.
+		\n\nLai parādītu maršrutu no jebkura punkta uz jūsu pašreizējo atrašanās vietu, iezīmejiet punktu uz kartes un izvēlieties "norādes uz...".
+		\n\nJa lietosiet "norādes uz..." kopā ar "sākt navigāciju", OsmAnd pārslēgsies uz jūsu pašreizējo ātrašanās vietu, tiklīdz tā būs noteikta, kamēr "norādes uz..." kopā ar "rādīt maršrutu" tikai parādīs maršrutu no jebkura punkta, jūs esat izvēlējies, bez automātiskas kartes atjauinošanās.
 	</string>
   <string name="tip_search">Meklē</string>
   <string name="tip_search_t">\tJūs variet meklēt vietas tieši kartē, pēc adreses, atrašanās vietas, kā POI, vai arī kā iepriekš definētu izlases punktu.
 \n\tNospiežot galvenajā izvēlnē \'Meklēt\' atver meklēšanas logu. Katram atrastajam ierakstam tiek piedāvātas divas iespējas: \'Izvēlēties kā galamērķi\' vai \'Rādīt kartē\'.</string>
   <string name="tip_map_context_menu">\'Lietot vietu\' izvēlne</string>
-  <string name="tip_map_context_menu_t">\'Lietot vietu\' izvēlne ir pieejama, turot nospiestu punktu uz kartes. Pēc darbības kartē parādīsies logs ar koordinātēm. Nospiediet, lai atvērtu izvēlni. (Lai aizvērtu logu, nospiediet un pagaidiet, kamēr logs pazūd).
- Šī izvēlne satur visas darbības, kuras ir saistītas ar konkrēto vietu uz kartes.
+  <string name="tip_map_context_menu_t">\'Lietot vietu\' izvēlne ir pieejama, turot nospiestu punktu uz kartes.
+		\n\nPēc darbības kartē parādīsies logs ar koordinātēm. Nospiediet, lai atvērtu izvēlni. (Lai aizvērtu logu, nospiediet un pagaidiet, kamēr logs pazūd.
+		\n\nŠī izvēlne satur visas darbības, kuras ir saistītas ar konkrēto vietu uz kartes.
 	</string>
   <string name="tip_initial">Padomi un ieteikumi</string>
   <string name="tip_initial_t">"\tOsmAnd ir navigācijas aplikācija ar daudz iespējām.
@@ -531,7 +536,7 @@
   <string name="background_service_provider">Vietas noteicējs</string>
   <string name="background_router_service_descr">Darbina OsmAnd fonā, lai sekotu jūsu atrašanās vietai, kamēr ekrāns ir izslēgts</string>
   <string name="background_router_service">Darbināt fonā</string>
-  <string name="off_router_service_no_gps_available">Maršruta uzturēšanai fona režīmā nepieciešams gps</string>
+  <string name="off_router_service_no_gps_available">Maršruta sekošanai fonā ir nepieciešams ieslēgt gps.</string>
   <string name="hide_poi_filter">Nerādīt filtru</string>
   <string name="show_poi_filter">Rādīt filtru</string>
   <string name="search_poi_filter">Filtrs</string>
@@ -621,7 +626,7 @@
   
   <string name="downloading">Lejupielādē…</string>
   <string name="downloading_list_indexes">Lejupielādē reģionu sarakstu…</string>
-  <string name="list_index_files_was_not_loaded">Nevarēja saņemt reģionu sarakstu no osmand.net</string>
+  <string name="list_index_files_was_not_loaded">Netika saņemts reģionu saraksts no osmand.net.</string>
   <string name="select_index_file_to_download">Nekas netika atrasts. Ja jūs nevarat atrast sava reģiona datus, jūs tos varat sagatavot paši (skatīt http://osmand.net).</string>
   <string name="show_poi_on_map">Rādīt kartē</string>
   <string name="fav_points_edited">Izlases punkts tika izlabots</string>
@@ -829,8 +834,8 @@
   <string name="osmand_accessibility_description">Rādīt uzstādījumus īpašām pieejamības iespējām.</string>
   <string name="extra_settings">Paplašinātie uzstādījumi</string>
   <string name="osmand_monitoring_description">Rādīt uzstādījumus, lai ierakstītu jūsu braucienu GPX failā vai veiktu tiešasaistes sekošanu, izmantojot web servisu.</string>
-  <string name="osmand_extra_settings_description">Rādīt uzstādījumus paplašinātai kartes konfigurācijai (kā piemēram, kartes detalizācijas palielināšana) un dažus ar ierīci saistītos</string>
-  <string name="osmand_development_plugin_description">Rādīt izstrādes un atkļūdošanas uzstādījumus kā piemēram, animētā navigācija vai renderēšanas izpildījuma attēlošana</string>
+  <string name="osmand_extra_settings_description">Rādīt uzstādījumus paplašinātai kartes konfigurācijai (kā piemēram, kartes detalizācijas palielināšana) un dažus ar ierīci saistītos.</string>
+  <string name="osmand_development_plugin_description">Rādīt izstrādes un atkļūdošanas uzstādījumus, kā piemēram, animētā navigācija vai renderēšanas izpildījuma attēlošana.</string>
   <string name="local_index_routing_data">Maršrutēšanas dati</string>
   <string name="navigate_point_format">Formāts :</string>
   <string name="poi_search_desc">POI - Interešu punktu meklēšana</string>
@@ -1031,7 +1036,9 @@
 	<string name="intermediate_point">Pietura %1$s</string>
     <string name="tip_rotation_switching_t_v2">"\tJūs variet pārslēgt kartes attēlojuma rotēšanu klikšķinot uz ekrāna kompasa ikonas.\n\tJūs variet izvēlēties:\n\t\'Negrozīt karti (ziemeļi augšā)\' - Karte netiks grozīta. Ziemeļi vienmēr būs augšā\n\t\'Kustības virzienā\' - Karte tiks pagriezta jūsu kustības virzienā\n\t\'Atbilstoši kompasam\' - Karte tiks pagriezta atbilstoši kompasa rādījumam "</string>
 	<string name="tip_day_night_mode_t_v2">"\tDažām vektoru kartēm izskats var tikt mainīts starp dienas (gaišākām) un nakts (tumšākām).\n\tNakts krāsas ir drošākas braukšanai naktī.\n\tJūs variet uzstādīt nakts/dienas pārslēgšanas režīmu ar \'Izvēlne\'-&gt;\'Konfigurēt ekrānu...\'-&gt;\'Dienas/nakts karte\'.\n\tJūs variet izvēlēties:\n\t\'Saulriets/Ausma\' - automātiskais režīms atbilstoši saules pozīcijai (noklusēti)\n\t\'Diena\' - vienmēr pielietot dienas režīmu\n\t\'Nakts\' - vienmēr pielietot nakts režīmu\n\t\'Gaismas sensors\' - kartes izskats tiks mainīts atbilstoši jūsu iekārtas gaismas sensoram (tikai ja tāds eksistē) "</string>	
-	<string name="tip_map_switch_t_v2">"\tKartes avots un slāņi tiek attēloti kartes skatā ar \'Menu\' -&gt; \'Definēt skatu\'.\n\tZem \'Kartes avots...\' jūs varat izvēlēties lejupielādētās vektoru kartes, predefinētas tiešsaistes karšu bilžu avotus (aktivizējas ar \'Bezsaistes kartes\' spraudni) vai kartes, kuras ir izveidotas ar OsmAndMapCreator uz jūsu datora.\n\tOsmAnd atbalsta arī citus karšu avotus. "
+	<string name="tip_map_switch_t_v2">tKartes avots un slāņi tiek attēloti kartes skatā ar \'Menu\' -&gt; \'Definēt skatu\'.
+		\n\nZem \'Kartes avots...\' jūs varat izvēlēties lejupielādētās vektoru kartes, predefinētas tiešsaistes karšu bilžu avotus (aktivizējas ar \'Bezsaistes kartes\' spraudni) vai kartes, kuras ir izveidotas ar OsmAndMapCreator uz jūsu datora.
+		\n\nOsmAnd atbalsta arī citus karšu avotus.
 	</string>
 	<string name="close_changeset">Aizvērt izmaiņu kopu</string>
 	<string name="zxing_barcode_scanner_not_found">Nav instalēta ZXing Barcode Scanner aplikācija. Meklēt Market?</string>
@@ -1441,4 +1448,6 @@ Aptuvenais kartes pārklājums un kvalitāte:
 Valstu saraksts, kuras tiek atbalstītas (gandrīz visa pasaule!):
 Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
 	</string>
-	</resources>
+	<string name="osmodroid_seek">Meklēt objektu</string>
+    <string name="osmodroid_unseek">Nemeklēt objektu</string>
+    </resources>
