@@ -37,7 +37,6 @@
                     android:layout_marginLeft="3dp"
                     android:text="@string/route_from"
                     android:textSize="18sp" >
-                    android:textColor="@color/color_white"
                 </TextView>
 
                 <Spinner
@@ -57,7 +56,7 @@
                 android:layout_marginLeft="3dp"
                 android:gravity="left"
                 android:textSize="18sp" />
-                android:textColor="@color/color_white"
+                
             
              <LinearLayout
                 android:layout_width="fill_parent"
@@ -69,7 +68,7 @@
                     android:layout_marginLeft="3dp"
                     android:text="@string/route_to"
                     android:textSize="18sp" >
-                    android:textColor="@color/color_white"
+                    
                 </TextView>
 
                 <Spinner
@@ -87,7 +86,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/non_optimal_route_calculation" />
-                android:textColor="@color/color_white"
         </LinearLayout>
     </ScrollView>
 
