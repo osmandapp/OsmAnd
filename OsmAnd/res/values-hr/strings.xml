@@ -102,7 +102,7 @@
 	<string name="poi_filter_food_shop">Trgovina hranom</string>
 	<string name="poi_filter_for_tourists">Za turiste</string>
 	<string name="poi_filter_fuel">Benzinska postaja</string>
-	<string name="show_warnings_title">Prikaži upozorenja...</string>
+	<string name="show_warnings_title">Prikaži upozorenja-…</string>
 	<string name="use_compass_navigation">Koristi kompas</string>
 	<string name="avoid_motorway">Izbjegavaj autoceste</string>
 	<string name="show_warnings_descr">Konfiguracija prometnih upozorenja (ograničenja brzine, prisilno zaustavljanje, ležeći policajci), kontrola brzine i informacije</string>
@@ -123,7 +123,7 @@
 	<string name="show_lanes">Prikaži staze</string>
 	<string name="avoid_unpaved">Izbjegavaj neasfaltirane ceste</string>
 	<string name="avoid_ferries">Izbjegavaj trajekte</string>
-	<string name="avoid_in_routing_title">Izbjegavati...</string>
+	<string name="avoid_in_routing_title">Izbjegavati…</string>
 	<string name="avoid_in_routing_descr">Izbjegavaj ceste s naplatom cestarine, neasfaltirane ceste, trajekte</string>
 	<string name="map_widget_view_direction">Smjer kretanja</string>
 	<string name="map_widget_appearance">Ostali elementi:</string>
@@ -217,7 +217,7 @@
 	<string name="west_north_west">zapad-sjeverozapad</string>
 	<string name="north_west">sjeverozapad</string>
 	<string name="north_north_west">sjever-sjeverozapad</string>
-	<string name="tip_altitude_offset">Prikaži nadmorsku visinu - Korekcija Offseta</string>
+	<string name="tip_altitude_offset">Korekcija nadmorske visine</string>
 	<string name="replace_destination_point">Promjenite odredište</string>
     <string name="new_destination_point_dialog">Već ste postavili odrediše.</string>
     <string name="ending_point_too_far">Krajnja točka je predaleko od najbliže ceste.</string>
@@ -238,7 +238,7 @@
 	<string name="favourites_search_desc">Pretraži favorite</string>
 	<string name="transport_search_desc">Potraži prijevoz</string>
 	<string name="unknown_from_location">Polazna točka još nije određena</string>
-	<string name="unknown_location">Pozicija još nije poznata</string>
+	<string name="unknown_location">Položaj nije poznat</string>
 	<string name="select_plugin_to_activate">Dodirnite \"dodatak\", za uključivanje ili isključivanje. (Može zahtijevati ponovno pokretanje.)</string>
 	<string name="gpx_visibility_txt">Vidljivost</string>
 	<string name="gpx_tags_txt">Oznake</string>
@@ -253,7 +253,7 @@
 	<string name="right">Desno</string>
 	<string name="front_left">Ispred lijevo</string>
 	<string name="oclock">sati</string>
-	<string name="altitude">visina</string>
+	<string name="altitude">Visina</string>
 	<string name="accuracy">Preciznost</string>
 	<string name="left">lijevo</string>
 	<string name="back_right">Natrag desno</string>
@@ -569,7 +569,7 @@
 	<string name="gpx_option_reverse_route">Okreni smjer GPX</string>
 	<string name="voice_not_use">Ne koristi</string>
 	<string name="voice_not_specified">Bez</string>
-	<string name="installing_new_resources">Raspakiravam nove podatke...</string>
+	<string name="installing_new_resources">Raspakiravam nove podatke-…</string>
 	<string name="vector_map_not_needed">Ne, hvala</string>
 	<string name="favorite_home_category">Doma</string>
 	<string name="favorite_friends_category">Prijatelji</string>
@@ -761,7 +761,7 @@
 	<string name="local_index_poi_data">POI podaci</string>
 	<string name="local_index_address_data">Podaci o adresama</string>
 	<string name="local_index_transport_data">Podaci javnoga prijevoza</string>
-	<string name="local_index_download">Preuzimanje...</string>
+	<string name="local_index_download">Preuzimanje</string>
 	
 	<string name="local_index_mi_backup">Isključi</string>
 	<string name="local_index_mi_restore">Uključi</string>
@@ -777,7 +777,7 @@
 	<string name="local_index_mi_upload_gpx">Pošalji na OSM</string>
 	<string name="show_more_map_detail">Prikaži više pojedinosti na karti</string>
 	<string name="show_more_map_detail_descr">Pokaži neke pojedinosti vektorske karte (ceste i sl.) na manjem zoom-u</string>
-	<string name="favourites_delete_multiple_succesful">Točke favorita su uspješno izbrisane</string>
+	<string name="favourites_delete_multiple_succesful">Točke favorita su uspješno izbrisane.</string>
 	<string name="favorite_delete_multiple">Izbrisati čete %1$d lokacije u %2$d grupi. Jeste li sigurni?</string>
 	<string name="default_buttons_save">Spremi</string>
 	<string name="menu_save_directions">Spremi upute</string>
@@ -790,13 +790,13 @@
 	<string name="context_menu_item_search">Traži u blizini ovog mjesta</string>
 	<string name="search_position_undefined">Nedefinirano</string>
 	<string name="search_position_fixed">Definirano</string>
-	<string name="search_position_current_location">Trenutna pozicija...</string>
+	<string name="search_position_current_location">Trenutna pozicija-…</string>
 	<string name="search_position_map_view">Posljednje gledano na karti</string>
 	<string name="select_search_position">Traži u blizini:</string>
-	<string name="search_position_current_location_search">Tražim poziciju...</string>
+	<string name="search_position_current_location_search">Tražim poziciju-…</string>
 	<string name="search_position_current_location_found">Pozicija je pronađena</string>
-	<string name="search_position_address">Adresa...</string>
-	<string name="search_position_favorites">Favoriti...</string>
+	<string name="search_position_address">Adresa-…</string>
+	<string name="search_position_favorites">Favoriti-…</string>
 	<string name="button_upgrade_osmandplus">Nadogradi na OsmAnd+</string>
 	<string name="local_index_mi_rename">Preimenuj</string>
 	<string name="show_gpx_route">Prikaži na karti</string>
@@ -817,7 +817,7 @@
 	<string name="layer_poi_label">POI oznake</string>
 	<string name="delete_confirmation_msg">Brisanje %1$s?</string>
 	<string name="auto_follow_route_navigation_descr">Automatski centriraj prikaz karte samo tijekom navigacije.</string>
-	<string name="auto_follow_location_enabled">Automatsko centriranje karte je uključeno</string>
+	<string name="auto_follow_location_enabled">Automatsko centriranje karte je uključeno.</string>
 	<string name="auto_follow_route_navigation">Automatsko centriranje samo tijekom navigacije</string>
 	<string name="auto_follow_route_never">Nikad</string>
 	<string name="choose_auto_follow_route">Automatsko centriranje karte</string>
@@ -1030,4 +1030,17 @@
 	<string name="select_animate_speedup">Odaberite brzinu simulacije rute</string>
     	<string name="basemap_was_selected_to_download">Osnovna karta svijeta je potrebna za pravilno funkcioniranje aplikacije te je odabrana za preuzimanje.</string>
 	<string name="select_index_file_to_download">Ništa nije pronađeno. Ako nemožete pronaći svoju regiju, možete to učiniti sami (vidi http://osmand.net).</string>
+	<string name="map_widget_fluorescent">Fluorescentne rute</string>
+	<string name="navigate_point_format">Format:</string>
+	<string name="confirm_interrupt_download">Želite li prekinuti preuzimanja?</string>
+	<string name="test_voice_prompts">Test glasovnih uputa</string>    
+	<string name="switch_to_raster_map_to_see">Nema offline karte za ovu lokaciju. Možete je preuzeti u postavkama (Upravljanje Podacima), ili koristite online karte.</string>
+	<string name="direction_style_sidewise">Bočno (8 sektora)</string>
+	<string name="direction_style_clockwise">Smjeru kazaljke na satu (12 sektora)</string>
+	<string name="local_openstreetmap_uploading">Prijenos …</string>
+	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
+	<string name="init_native_library">Inicijalizacija…</string>
+	<string name="pref_raster_map">Postavke izvora karte</string>
+	<string name="pref_vector_map">Postavke vektorske karte</string>
+	<string name="basemap_missing">Osnovna karta svijeta (koja pokriva cijeli svijet u malom zumu) nedostaje. Molimo razmislite o preuzimanju World_basemap_x.obf.</string>
 	</resources>
