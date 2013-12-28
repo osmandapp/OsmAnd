@@ -561,7 +561,7 @@
   <string name="hint_search_online">Numéro de la maison, rue, ville</string>
   <string name="search_offline_address">Hors ligne</string>
   <string name="search_online_address">Internet</string>
-  <string name="max_level_download_tile">Niveau de zoom max.</string>
+  <string name="max_level_download_tile">Niveau de zoom maximum</string>
   <string name="max_level_download_tile_descr">Choisir un niveau de zoom maximum pour le téléchargement</string>
   <string name="route_general_information">Distance totale = %1$s, temps de déplacement = %2$d h %3$d m.</string>
   <string name="router_service_descr">Choisir le service de navigation</string>
@@ -1181,7 +1181,8 @@
     <string name="index_name_openmaps">OpenMaps.eu</string>
     <string name="tip_recent_changes_1_2_t">"Corrections en 1.2 :
 \n     * Correction Geo Intent (Foursquare, c:geo)\n     * Correction tremblements écran pendant la navigation\n     * Corrections mineures\nChangements en 1.2 :
-\n     * Corrections de bogues (navigation, recherche, enregistrement vidéo, instructions vocales, améliorations d\\\'affichage)\n     * Configuration plus facile de la couche d\\\'ombrage de relief (nécessite le greffon des courbes de niveau)\n     * Accepte les liens de positions de maps.google.com\n     * Nouveau widget (GPS info)\n     * Ajout support multi-fenêtre pour les appareils Samsung récents\n     * Filtre Kalman pour la boussole\n     * Support des montres Pebble"</string>
+\n     * Corrections de bogues (navigation, recherche, enregistrement vidéo, instructions vocales, améliorations d\\\'affichage)\n     * Configuration plus facile de la couche d\\\'ombrage de relief (nécessite le greffon des courbes de niveau)\n     * Accepte les liens de positions de maps.google.com\n     * Nouveau widget (GPS info)\n     * Ajout support multi-fenêtre pour les appareils Samsung récents\n     * Filtre Kalman pour la boussole\n     * Support des montres Pebble"
+	</string>
     <string name="max_speed_none">Aucun(e)</string>
     <string name="prefer_motorways">Autoroutes de préférence</string>
 	<string name="prefer_in_routing_title">Privilégier…</string>
@@ -1200,12 +1201,14 @@
 \n\t* Configuration simplifiée des ombres du relief (nécessite le greffon des lignes isométriques)
 \n\t* Accepte les liens de position de maps.google.com
 \n\t* Ajout du support multi-fenêtres pour les appareils Samsung
-\n\t* Filtre de Kalman pour la boussole\n\t* Support des montres Pebble "</string>
+\n\t* Filtre de Kalman pour la boussole\n\t* Support des montres Pebble "
+    </string>
     <string name="save_current_track_widget">Sauvegarder
 \n la trace GPX actuelle</string>
 	<string name="street_name">Rue</string>
 	<string name="hno">Numéro de maison</string>
-    <string name="tip_recent_changes_1_3_t">"Changements en 1.5:\n\t* Thème Holo (personnalisation de thème) "</string>
+    <string name="tip_recent_changes_1_3_t">"Changements en 1.5:\n\t* Thème Holo (personnalisation de thème) "
+    </string>
     <string name="monitoring_settings">Services de surveillance et service d\' arrière plan</string>
     <string name="monitoring_settings_descr">Configurer l\'enregistrement des parcours et le service d\'arrière plan</string>
     <string name="osmand_monitoring_plugin_description">Activer le suivi et la navigation en arrière plan (écran éteint) en réveillant périodiquement le dispositif GPS. Afficher les paramètres facilitant l\' enregistrement de vos parcours vers des fichiers GPX locaux ou en ligne via un service Web.</string>
@@ -1421,7 +1424,7 @@
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Bateau</string>
     <string name="app_mode_aircraft">Avion</string>
-    <string name="app_modes_choose_descr">Choisir les profils à afficher dans l'application</string>
+    <string name="app_modes_choose_descr">Choisir les profils d\'utilisation à afficher dans l'application</string>
     <string name="app_modes_choose">Profils d'application</string>
 	<string name="map_widget_map_rendering">Rendu de carte :</string>
     <string name="amenity_type_seamark">Balise marine</string>
