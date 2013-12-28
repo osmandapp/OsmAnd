@@ -677,7 +677,7 @@
   <string name="search_activity">Rechercher</string>
   <string name="searchpoi_activity">Choisir PI</string>
   <string name="search_POI_level_btn">Trouver plus</string>
-  <string name="incremental_search_city">Recherche progressive de ville.</string>
+  <string name="incremental_search_city">Recherche progressive de ville</string>
   <string name="incremental_search_street">Recherche progressive des rues</string>
   <string name="incremental_search_building">Recherche progressive des édifices</string>
   <string name="choose_available_region">Choisir une région dans la liste</string>
@@ -987,7 +987,7 @@
 <string name="show_warnings_descr">Afficher les avertissements (limitations de vitesses, stops, ralentisseurs, radars) et information sur les voies.</string>
 <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
 <string name="map_widget_show_ruler">Échelle</string>
-<string name="map_widget_appearance">Éléments restants:</string>
+<string name="map_widget_appearance">Éléments restants :</string>
 <string name="map_widget_view_direction">Affichage direction</string>
 <string name="map_widget_transparent">Couche transparente</string>
 <string name="monitoring_mode_off">Enregistrer GPX</string>
@@ -1298,7 +1298,9 @@
     <string name="distance_measurement_finish_subtrack">Commencer une nouvelle sous-trace</string>
     <string name="distance_measurement_clear_route">Effacer tous les points</string>
     <string name="downloading_file_new">Téléchargement en cours</string>
-	<string name="tip_recent_changes_1_4_t">"e \tChangements dans la version 1.4 : ↵\n→* Placer les points de passage dans un ordre optimal afin de tous les visiter  (Démarcheurs, porte-à-porte) ↵\n→* Recherche des rues par nom (dans le voisinage) ↵\n→* Greffon de planification (charger/modifier/sauvegarder les traces GPX) ↵\n→* Nouvel écran de téléchargement(téléchargement en arrière-plan) ↵\n→* Support des sous-dossiers GPX (organiser vos traces GPX) ↵\n→* Suppression des fichiers SRTM ↵\n→* Support des Notes OSM  "</string>
+	<string name="tip_recent_changes_1_4_t">"e \tChangements dans la version 1.4 : ↵\n→* Placer les points de passage dans un ordre optimal afin de tous les visiter  (Démarcheurs, porte-à-porte) ↵\n→* Recherche des rues par nom (dans le voisinage) ↵\n→* Greffon de planification (charger/modifier/sauvegarder les traces GPX) ↵\n→* Nouvel écran de téléchargement(téléchargement en arrière-plan) ↵\n→* Support des sous-dossiers GPX (organiser vos traces GPX) ↵\n→* Suppression des fichiers SRTM ↵\n→* Support des Notes OSM  
+" 
+    </string>
     <string name="search_street_in_neighborhood_cities">Recherche des rues dans les villes avoisinantes</string>
     <string name="intermediate_items_sort_return">Optimiser l\'ordre des points de passage de la position courante jusqu\'à la destination.</string>
     <string name="intermediate_items_sort_by_distance">Tri (porte-à-porte)</string>
@@ -1421,7 +1423,7 @@
     <string name="app_mode_aircraft">Avion</string>
     <string name="app_modes_choose_descr">Choisir les profils à afficher dans l'application</string>
     <string name="app_modes_choose">Profils d'application</string>
-	<string name="map_widget_map_rendering">Rendu de carte:</string>
+	<string name="map_widget_map_rendering">Rendu de carte :</string>
     <string name="amenity_type_seamark">Balise marine</string>
     <string name="osmodroid_seek">Chercher objet</string>
     <string name="osmodroid_unseek">Ne plus chercher objet</string>
