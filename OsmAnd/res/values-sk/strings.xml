@@ -1630,8 +1630,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="app_mode_motorcycle">Motocykel</string>
     <string name="app_mode_boat">Loď</string>
     <string name="app_mode_aircraft">Lietadlo</string>
-    <string name="app_modes_choose">Režimy aplikácie</string>
+    <string name="app_modes_choose">Profily aplikácie</string>
 	<string name="map_widget_map_rendering">Vykresľovanie mapy:</string>
-    <string name="app_modes_choose_descr">Zvoľte dostupné režimy v aplikácii</string>
+    <string name="app_modes_choose_descr">Zvoľte profily použitia viditeľné v aplikácii</string>
     <string name="amenity_type_seamark">Morská značka</string>
     </resources>
