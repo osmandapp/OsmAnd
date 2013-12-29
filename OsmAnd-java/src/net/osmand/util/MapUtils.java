@@ -447,6 +447,10 @@ public class MapUtils {
 //		return measuredDist(x1, y1, x2, y2);
 	}
 	
+	public static double measuredDist31(int x1, int y1, int x2, int y2) {
+		return getDistance(MapUtils.get31LatitudeY(y1), MapUtils.get31LongitudeX(x1), MapUtils.get31LatitudeY(y2), MapUtils.get31LongitudeX(x2));
+	}
+	
 	public static double squareDist31TileMetric(int x1, int y1, int x2, int y2) {
 		// translate into meters 
 		double dy = convert31YToMeters(y1, y2);
@@ -462,21 +466,6 @@ public class MapUtils {
 	}
 
 
-	public static void main(String[] args) {
-		String s = "";
-		// s = "القاهرة"; // cairo
-//		s = "東京"; //tokyo
-//		s = "北京"; // beijing
-//		s = "יְרוּשָׁלַיִם"; // jerusalem
-
-		System.out.println(s);
-		for(int i = 0; i < s.length(); i++ ) {
-			System.out.print(s.charAt(i) + "\n");
-		}
-		for(int i = 0; i < s.length(); i++ ) {
-			System.out.print("\\u0"+Integer.toHexString(s.charAt(i)) + "");
-		}
-	}
 }
 
 

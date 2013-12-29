@@ -636,7 +636,8 @@ public class OsmandSettings {
 		new BooleanAccessibilityPreference("accessibility_extensions", false).makeGlobal();
 		
 	
-	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", true).makeGlobal().cache();
+	// magnetic field doesn'torkmost of the time on some phones
+	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference("use_kalman_filter_compass", true).makeGlobal().cache();
 	
 	public final CommonPreference<Float> MAP_ZOOM_SCALE_BY_DENSITY = new FloatPreference("map_zoom_scale_wo_density", 0f).makeProfile().cache();
