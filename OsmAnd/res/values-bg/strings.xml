@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_1_5_t">Промени в 1.5:
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_1_5_t">Промени в 1.5:
 	\n\t* Гласови предупреждения за пътни ограничения и камери
 	\n\t* HD икони
 	\n\t* Много промени в потребителския интерфейс
@@ -1546,4 +1547,22 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="driving_region_canada">Канада</string>
 	<string name="driving_region_europe_asia">Европа и Азия</string>
 	<string name="driving_region_uk">Великобритания, Индия, Австралия и други</string>
-	</resources>
+	<string name="amenity_type_seamark">Навигационен ориентир</string>
+    <string name="app_modes_choose_descr">Изберете видимите профили</string>
+    <string name="app_modes_choose">Профили в приложението</string>
+	<string name="map_widget_map_rendering">Изчертаване:</string>
+    <string name="app_mode_hiking">Ходене</string>
+    <string name="app_mode_motorcycle">Мотор</string>
+    <string name="app_mode_boat">Лодка</string>
+    <string name="app_mode_aircraft">Самолет</string>
+    <string name="tip_faq_t">Посетете https://code.google.com/p/osmand/wiki/FAQ за ЧЗВ.</string>
+    <string name="tip_faq">Често Задавани Въпроси</string>
+    <string name="default_and">и</string>
+    <string name="default_or">или</string>
+	<string name="route_is_too_long">Маршрутът е доста дълъг за изчисляване.
+	За сега е възможно добро изчисляване на маршрут между точки, отдалечени на не повече от 200 км. Добавете междинни точки при по-дълги дистанции.</string>
+	<string name="base_world_map">Базова карта на света</string>
+	<string name="about_version">Версия:</string>
+    <string name="about_settings">За програмата</string>
+    <string name="about_settings_descr">Версия, лицензи и разработчици</string>
+    </resources>
