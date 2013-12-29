@@ -363,16 +363,16 @@
 	<string name="use_online_routing_descr">Koristi internet za izračun rute</string>
 	<string name="use_online_routing">Koristi online navigaciju</string>
 	<string name="download_indexes_descr">Preuzimanje ili ažurirajte podatke s interneta za offline korištenje</string>
-	<string name="saving_gpx_tracks">Spremanje GPX staza na memorijsku karticu...</string>
+	<string name="saving_gpx_tracks">Spremanje GPX staza na memorijsku karticu…</string>
 	<string name="finished_task">Gotovo</string>
 	<string name="search_address_building_option">Zgrada</string>
 	<string name="map_preferences_descr">Odredite postavke karte: izvor karte, rotacija, položaj markera, orijentacija zaslona</string>
 	<string name="osm_settings">OSM uređivanje</string>
 	<string name="data_settings_descr">Odredite jezik, preuzmite ili ponovno učitajte podatke</string>
-	<string name="loading_data">Učitavanje podataka...</string>
+	<string name="loading_data">Učitavanje podataka…</string>
 	<string name="go_back_to_osmand">Vrati se na OsmAnd kartu</string>
 	<string name="close">Zatvori</string>
-	<string name="invalid_locations">Koordinate su nevažeće</string>
+	<string name="invalid_locations">Koordinate su nevažeće!</string>
 	<string name="previous_run_crashed">Prilikom prošlog pokretanja OsmAnd se srušio. Datoteka dnevnika se nalazi na {0}. Molimo prijavite problem i priložite datoteku dnevnika.</string>
 	<string name="error_calculating_route_occured">Došlo je do pogreške pri izračunavanju rute</string>
 	<string name="empty_route_calculated">Pogreška: Izračunata ruta je prazna</string>					
@@ -380,15 +380,15 @@
 	<string name="error_occurred_saving_gpx">Dogodila se greška pri spremanju GPX datoteke</string>
 	<string name="new_route_calculated_dist">Nova ruta je izračunata, udaljenost</string>
 	<string name="arrived_at_destination">Stigli ste na odredište</string>
-	<string name="loading">Učitavanje...</string>
-	<string name="loading_postcodes">Učitavanje poštanskih brojeva...</string>
-	<string name="loading_streets">Učitavanje ulica...</string>
-	<string name="loading_cities">Učitavanje gradova...</string>
-	<string name="loading_streets_buildings">Učitavanje ulica/zgrada...</string>
-	<string name="loading_poi_obj">Učitavanje POI...</string>
+	<string name="loading">Učitavanje…</string>
+	<string name="loading_postcodes">Učitavanje poštanskih brojeva…</string>
+	<string name="loading_streets">Učitavanje ulica…</string>
+	<string name="loading_cities">Učitavanje gradova…</string>
+	<string name="loading_streets_buildings">Učitavanje ulica/zgrada…</string>
+	<string name="loading_poi_obj">Učitavanje POI…</string>
 	<string name="auth_failed">Autorizacija nije uspjela</string>
 	<string name="failed_op">nije uspjela</string>
-	<string name="converting_names">Pretvaranje izvornih/engleskih imena...</string>
+	<string name="converting_names">Pretvaranje izvornih/engleskih imena…</string>
 	<string name="show_gps_status">Prikaži Status GPS-a</string>
 	<string name="opening_hours">Radno vrijeme</string>
 	<string name="follow">Sljedi</string>
@@ -398,25 +398,25 @@
 	<string name="only_show">Samo prikaži</string>
 	<string name="show_poi_on_map">Prikaži na karti</string>
 	
-	<string name="downloading">Preuzimanje...</string>
-	<string name="downloading_list_indexes">Preuzimam popis dostupnih regija...</string>
+	<string name="downloading">Preuzimanje…</string>
+	<string name="downloading_list_indexes">Preuzimam popis dostupnih regija…</string>
 	<string name="list_index_files_was_not_loaded">Popis regija nije preuzet sa osmand.net.</string>
 	<string name="error_io_error">Došlo je do I/O pogreške</string>
 	<string name="address">Adresa</string>
 	<string name="download_index_success">Preuzimanje uspješno završeno</string>
 	<string name="download_question">Preuzmi {0} - {1} ?</string>
 	<string name="download_question_exist">Offline podaci za {0} već postoje ({1}). Želite li ih ažurirali ({2})?</string>
-	<string name="search_offline_address">Offline</string>
+	<string name="search_offline_address">Traži offline</string>
 	<string name="route_general_information">Ukupna udaljenost %1$s, vrijeme putovanja %2$d i %3$d m.</string>
 	<string name="search_nothing_found">Nije pronađeno ništa</string>
-	<string name="searching">Tražim...</string>
-	<string name="searching_address">Tražim adresu...</string>
+	<string name="searching">Tražim…</string>
+	<string name="searching_address">Tražim adresu…</string>
 	<string name="hint_search_online">Kućni broj, ulica, grad</string>
 	<string name="clear_all">Izbriši sve</string>
 	<string name="history">Povijest</string>
 	<string name="favorite">Favoriti</string>
-	<string name="search_history_city">Grad:\n {0}</string>
-	<string name="search_history_street">Ulica:\n {0}, {1}</string>
+	<string name="search_history_city">Grad: {0}</string>
+	<string name="search_history_street">Ulica: {0}, {1}</string>
 	<string name="search_history_int_streets">Raskrižje: {0} x {1} in {2}</string>
 	<string name="search_history_building">Zgrada: {0}, {1}, {2}</string>
 	<string name="context_menu_item_update_map_confirm">Ažuriranje lokalnih podataka putem interneta?</string>
@@ -428,7 +428,7 @@
 	<string name="search_nearby">Traži u blizini</string>
 	<string name="first_time_continue">Kasnije</string>
 	<string name="first_time_download">Preuzmite regije</string>
-	<string name="search_poi_location">Tražim signal...</string>
+	<string name="search_poi_location">Tražim signal…</string>
 	<string name="map_orientation_portrait">Portret</string>
 	<string name="map_orientation_landscape">Pejzažno</string>
 	<string name="map_orientation_default">Po postavkama uređaja</string>
@@ -442,22 +442,22 @@
 	
 	<string name="menu_mute_off">Zvuk je uključen</string>
 	<string name="menu_mute_on">Zvuk je isključen</string>
-	<string name="voice_provider_descr">Odaberite glasovno navođenje za navigaciju</string>
+	<string name="voice_provider_descr">Odaberite glasovno navođenje za navigaciju (kodovi jezika vidi ISO 639-1)</string>
 	<string name="voice_provider">Glasovno navođenje</string>
 	<string name="voice_data_not_supported">Nepodržana verzija glasovnih podataka</string>
 	<string name="voice_data_corrupted">Određeni glasovni podaci su oštećeni</string>
 	<string name="voice_data_unavailable">Odabrani glasovni podaci nisu dostupni</string>
-	<string name="background_router_service">Pokrenite stanju mirovanja.</string>
+	<string name="background_router_service">Pokrenite stanju mirovanja</string>
 	<string name="hide_poi_filter">Sakrij filter</string>
 	<string name="show_poi_filter">Prikaži filter</string>
 	<string name="search_poi_filter">Filtar</string>
 	<string name="where_am_i">Gdje sam?</string>
 	<string name="int_seconds">sekundi</string>
-	<string name="layer_map">Izvor karte...</string>
+	<string name="layer_map">Izvor karte-…</string>
 	<string name="menu_layers">Odredite prikaz</string>
 	<string name="context_menu_item_search_poi">Traži POI</string>
 	<string name="layer_transport">Postaje javnog prijevoza</string>
-	<string name="layer_poi">POI...</string>
+	<string name="layer_poi">POI…</string>
 	
 	<string name="layer_transport_route">Putovi javnoga prijevoza</string>
 	<string name="layer_route">Ruta</string>
@@ -480,7 +480,7 @@
 	<string name="voice">Glas</string>
 	<string name="no_vector_map_loaded">Vektorske karte nisu učitane</string>
 	<string name="map_index">Karta</string>
-	<string name="show_point_options">Koristite lokaciju...</string>
+	<string name="show_point_options">Koristite lokaciju …</string>
 	<string name="fast_route_mode">Najbrži put</string>
 	<string name="fast_route_mode_descr">Označite za izračun najbrže rute ili od značite za najkraću rutu </string>
 	<string name="reload">Osvježi</string>
@@ -494,13 +494,13 @@
 	<string name="gps_status_app_not_found">GPS Status aplikacija nije instalirana. Potraži na Market?</string>
 	<string name="voice_is_not_available_msg">Glasovno navođenje nije dostupno. Molimo otiđite na postavke i odaberite željeni paket glasovnih podataka, ili ga preuzmite sa interneta.</string>
 	<string name="voice_is_not_available_title">Glasovno navođenje nije odabrano</string>
-	<string name="downloading_build">Preuzimam nadogradnju...</string>
+	<string name="downloading_build">Preuzimam nadogradnju-…</string>
 	<string name="build_installed">Nadogradnja{0} je uspješno instalirana ({1}).</string>
 	<string name="install_selected_build">Želite li instalirati OsmAnd - {0} iz {1} {2} MB ?</string>
 	<string name="sd_unmounted">Memorijska kartica nije dostupna.\nNećete biti u mogućnosti vidjeti karte ili pronaći stvari.</string>
 	<string name="sd_mounted_ro">SD kartica je samo za čitanje.
 \nMožete vidjeti samo učitanu kartu i ne možete ju preuzeti s Interneta.</string>
-	<string name="voice_data_initializing">Pokretanje glasovnih podataka...</string>
+	<string name="voice_data_initializing">Pokretanje glasovnih podataka…</string>
 	<string name="network_provider">Mreža</string>
 	<string name="fav_saved_sucessfully">Favoriti uspješno spremljeni u {0}</string>
 	<string name="no_fav_to_save">Nema favorita za spremanje</string>
@@ -515,13 +515,13 @@
 	<string name="maps_could_not_be_downloaded">Ova karta se ne može preuzeti</string>
 	<string name="daynight">Dnevni/noćni način rada</string>
 	<string name="daynight_descr">Odaberite pravilo za izmjenu između dnevnog i noćnog načina rada</string>
-	<string name="use_osmand_routing_service_descr">Koristite OsmAnd offline navigaciju. Primjenjujte samo na rutama manjim od 20 km (eksperimentalno)!</string>
+	<string name="use_osmand_routing_service_descr">Koristite OsmAnd offline navigaciju samo na rutama manjim od 20 km (eksperimentalno)</string>
 	<string name="poi_filter_custom_filter">Prilagođeni filtar</string>
-	<string name="indexing_map">Indeksiranje karte...</string>
-	<string name="indexing_poi">Indeksiranje POI...</string>
-	<string name="indexing_transport">Indeksiranje prijevoza...</string>
+	<string name="indexing_map">Indeksiranje karte…</string>
+	<string name="indexing_poi">Indeksiranje POI…</string>
+	<string name="indexing_transport">Indeksiranje prijevoza…</string>
 	<string name="input_output_error">I/O pogreška</string>
-	<string name="indexing_address">Indeksiranje adresa...</string>
+	<string name="indexing_address">Indeksiranje adresa…</string>
 	<string name="amenity_type_barrier">Barijera</string>
 	<string name="amenity_type_education">Obrazovanje</string>
 	<string name="amenity_type_emergency">Hitna pomoć</string>
@@ -549,18 +549,18 @@
 	<string name="unit_of_length_descr">Promjenite jedinice duljine i brzine</string>
 	<string name="next_button">Sljedeće</string>
 	<string name="previous_button">Prethodno</string>
-	<string name="tip_map_switch">Izvor karte</string>
+	<string name="tip_map_switch">Izaberite izvor karte</string>
 	<string name="preferred_locale_descr">Odaberite jezik prikaza</string>
 	<string name="preferred_locale">Prikaz jezika</string>
 	<string name="incomplete_locale">nepotpuno</string>
 	<string name="tip_navigation">Navigacija</string>
-	<string name="tip_app_mode">Korisnički profil</string>
+	<string name="tip_app_mode">Koristi profil</string>
 	<string name="tip_search">Pretraživanje</string>
 	<string name="tip_initial">Savjeti i trikovi</string>
-	<string name="tip_map_context_menu">Kontekstni Meni karte</string>
+	<string name="tip_map_context_menu">\'Koristite lokaciju\' Izbornik</string>
 	<string name="system_locale">Sistem</string>
 	<string name="tip_location_sharing">Podijeli lokaciju</string>
-	<string name="install_more">Instaliraj više...</string>
+	<string name="install_more">Instaliraj više…</string>
 	<string name="tile_source_already_installed">Karta je već instalirana, postavke će biti ažurirane</string>
 	<string name="overlay_transparency_descr">Izmjeni sloj transparentnosti</string>
 	<string name="tts_language_not_supported_title">Jezik nije podržan</string>
@@ -706,23 +706,23 @@
 	<string name="filter_existing_indexes">Filtriraj preuzeto</string>
 	<string name="download_files_question">Preuzmi {0} datoteku(e) ({1} MB)?</string>
 	<string name="loading_builds_failed">Preuzimamje popisa OsmAnd nadogradnji nije uspjelo</string>
-	<string name="loading_builds">Učitavanje OsmAnd nadogradnji...</string>
+	<string name="loading_builds">Učitavanje OsmAnd nadogradnji-…</string>
 	<string name="select_build_to_install">Odaberite jednu od OsmAnd nadogradnji za instalaciju</string>
 	<string name="contribution_activity">Instalirajte verziju</string>
 	<string name="application_dir">Mapa za pohranu</string>
 	<string name="osmand_net_previously_installed">Instalirana je prethodna inačica OsmAnd aplikacije. Svi offline podaci će biti podržani od strane nove inačice aplikacije. Ali Favorite treba izvesti iz stare aplikacije i kasnije uvesti u novu.</string>
 	<string name="application_dir_change_warning">Promjena mape za pohranu neće premjestiti ili izbrisati podatke. To mora biti izvedeno zasebno i izvan OsmAnd-a. Nastavi svejedno?</string>
 	<string name="specified_dir_doesnt_exist">Ne mogu pronaći određenu mapu.</string>
-	<string name="osmand_routing_experimental">OsmAnd offline navigacija je eksperimentalna značajka i ne radi na udaljenosti većoj od oko 20 km.\nNavigacija je privremeno prebačena na online CloudMade.</string>
-	<string name="poi_filter_namefinder">Online Pronalazač Imena</string>
+	<string name="osmand_routing_experimental">OsmAnd offline navigacija je eksperimentalna značajka i ne radi na udaljenosti većoj od oko 20 km.\n\nNavigacija je privremeno prebačena na online CloudMade.</string>
+	<string name="poi_filter_namefinder">Online NameFinder</string>
 	<string name="use_osmand_routing_service">OsmAnd navigacija &gt;20km</string>
 	<string name="poi_filter_closest_poi">Najbliže POI</string>
 	<string name="amenity_type_sustenance">Prehrana</string>
 	<string name="amenity_type_man_made">Građevine</string>
 	<string name="amenity_type_administrative">Upravni</string>
-	<string name="add_waypoint_dialog_added">Navigacijska točka \'\'{0}\'\' je uspješno dodana</string>
-	<string name="add_waypoint_dialog_title">Dodaj navigacijsku točku na snimljeni GPX zapis</string>
-	<string name="context_menu_item_add_waypoint">Dodaj GPX navigacijsku točku</string>
+	<string name="add_waypoint_dialog_added">GPX međutočka \'\'{0}\'\' je uspješno dodana</string>
+	<string name="add_waypoint_dialog_title">Dodaj međutočku na zabilježeni GPX zapis</string>
+	<string name="context_menu_item_add_waypoint">Dodaj GPX međutočku</string>
 	<string name="search_osm_offline">Traži adresu pomoću offline karte</string>
 	<string name="error_doing_search">Dogodila se pogreška u offline traženju</string>
 	<string name="tip_favorites">Točke favorita</string>
@@ -734,7 +734,7 @@
 	<string name="map_overlay">Karta sloja</string>
 	<string name="default_none">Bez</string>
 	<string name="layer_overlay">Karta sloja...</string>
-	<string name="layer_underlay">Temeljna karta...</string>
+	<string name="layer_underlay">Temeljna karta…</string>
 	<string name="map_underlay">Temeljna karta</string>
 	<string name="map_underlay_descr">Odaberite temeljnu kartu</string>
 	<string name="choose_audio_stream">Izlaz za glasovno navođenje</string>
@@ -1043,4 +1043,32 @@
 	<string name="pref_raster_map">Postavke izvora karte</string>
 	<string name="pref_vector_map">Postavke vektorske karte</string>
 	<string name="basemap_missing">Osnovna karta svijeta (koja pokriva cijeli svijet u malom zumu) nedostaje. Molimo razmislite o preuzimanju World_basemap_x.obf.</string>
+	<string name="tip_location_sharing_t">Možete podijeliti lokaciju zanimljivih mjesta sa vaših putovanje s obitelji ili prijateljima putem \'Koristite lokaciju\' kontekstni izbornik → \'Podijeli lokaciju\'.
+		\n\nZatim odaberite način da podijelite svoju lokaciju. Opcije su: E-mail, SMS (tekst), ili samo kopirajte koordinate položaja u međumemoriju uređaja.
+	</string>
+	<string name="yard">yd</string>
+	<string name="foot">ft</string>
+	<string name="mile_per_hour">mph</string>
+	<string name="mile">mi</string>
+	<string name="tip_search_t">Možete tražiti mjesta izravno na karti putem \'Koristite lokaciju\' → \'Traži u blizini\', ili putem \'Izbornik\' → \'Traži\'.
+		\n\nZaslon za pretraživanje nudi predloške za pretraživanje
+		\n\t* po adresi
+		\n\t* putem koordinata
+		\n\t* kao POI (po vrsti ili po imenu)
+		\n\t* putem vaše povijesti pretraživanja
+		\n\t* ili putem vaših predefiniranih favorita.
+		\n\nFor all hits a context menu or action bar offers options like \'Directions\' or \'Show on map\', etc.
+	</string>
+	<string name="amenity_type_geocache">Geocache</string>
+	<string name="amenity_type_sport">Sport</string>
+	<string name="km">km</string>
+	<string name="km_h">km/h</string>
+	<string name="m">m</string>
+	<string name="old_map_index_is_not_supported">Zastarjeli oblik podataka karte \'\'{0}\'\' nije podržan</string>
+	<string name="unzipping_file">Otpakiranje datoteke…</string>
+	<string name="search_offline_geo_error">Nije moguće analizirati geo namjeru \'%s\'</string>
+	<string name="search_online_address">Traži online</string>
+	<string name="downloading_file_new">Preuzimanje …</string>
+	<string name="osm_settings_descr">Navedite Openstreetmap.org (OSM) postavke potrebne za OSM prijavu</string>
+	<string name="osb_author_dialog_password">OSM zaporka (opcija)</string>
 	</resources>
