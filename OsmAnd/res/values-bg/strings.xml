@@ -1620,4 +1620,5 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="osmodroid_refresh">Обновяване на каналите</string>
     <string name="osmodroid_seek">Следене на обект</string>
     <string name="osmodroid_unseek">Прекратяване на следенето</string>
-    </resources>
+    <string name="maps_define_edit">Въвеждане/редактиране…</string>
+	</resources>
