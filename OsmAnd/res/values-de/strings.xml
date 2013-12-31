@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_is_too_long">Die Route ist möglicherweise zu lang, um vom OsmAnd Offline-Router berechnet zu werden, 
 		Die Offline-Berechnung von Routen ist durchschnittlich zwischen bis zu etwa 200 km entfernten Punkten möglich. Bitte fügen Sie einen oder mehrere Wegpunkte ein, um diese Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
@@ -1483,4 +1483,7 @@
     <string name="tip_faq">Häufige Fragen (FAQ)</string>
     <string name="local_osm_changes_delete_all_confirm">Es sollen %1$d Änderungen von OSM-Daten gelöscht werden. Fortfahren?</string>
     <string name="local_osm_changes_delete_all">Alles löschen</string>
-    </resources>
+    <string name="amenity_type_seamark">Schiffahrtsobjekte</string>
+    <string name="app_modes_choose_descr">Wähle sichtbare Nutzerprofile der Anwendung</string>
+    <string name="app_modes_choose">Anwendungsprofile</string>
+	</resources>
