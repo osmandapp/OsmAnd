@@ -1503,7 +1503,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="route_is_too_long">A rota é, possivelmente, demasiado longa para ser calculado pelo router offline OsmAnd. ↵
          → Em média, o encaminhamento off-line é possível apenas entre os pontos de até 200 km de distância. Por favor, adicione um ou mais pontos intermédios ao calcular a rota.</string>
 	<string name="osmodroid_refresh">Actualizar canais</string>
-    <string name="map_widget_map_rendering">Renderização do Mapa:</string>
+    <string name="map_widget_map_rendering">Renderização do mapa:</string>
     <string name="app_mode_hiking">Caminhadas</string>
     <string name="app_mode_motorcycle">Motocicleta</string>
     <string name="app_mode_boat">Barco</string>
@@ -1513,7 +1513,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="local_osm_changes_delete_all_confirm">Você vai apagar %1$d mudanças no arquivo osm. Você tem certeza?</string>
     <string name="local_osm_changes_delete_all">Deletar Tudo</string>
     <string name="amenity_type_osmwiki">Wikipedia (off-line)</string>
-	<string name="amenity_type_seamark">Marca Mar</string>
+	<string name="amenity_type_seamark">Marca Marítima</string>
     <string name="app_modes_choose_descr">Escolha o modo disponível dentro da aplicação</string>
     <string name="app_modes_choose">Modo da aplicação</string>
 	<string name="osmodroid_seek">Procurar objecto</string>
