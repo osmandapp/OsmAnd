@@ -149,7 +149,7 @@
 	<string name="rendering_attr_contourLines_name">Höhenlinien anzeigen</string>
 	<string name="rendering_attr_hmRendered_description">Erhöht den dargestellten Detailgrad der Karte</string>
 	<string name="rendering_attr_hmRendered_name">Mehr Details in Karte</string>
-	<string name="map_online_plugin_is_not_installed">Aktivieren Sie das Online-Karten-Plugin, um andere Kartenquellen nutzen zu können.</string>
+	<string name="map_online_plugin_is_not_installed">Aktivieren Sie das Online-Karten-Plugin, um andere Kartenquellen nutzen zu können</string>
 	<string name="map_online_data">Online- und Kachel-Karten</string>
 	<string name="map_online_data_descr">Online-Karten verwenden (lädt Kacheln aus dem Internet und speichert diese auf der SD-Karte)</string>
 	<string name="online_map_settings">Online-Karten</string>
@@ -392,7 +392,7 @@
 	<string name="auto_follow_route_never">Nie</string>
 	<string name="auto_follow_route_navigation">Nachführung nur bei aktiver Navigation</string>
 	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation.</string>
-	<string name="auto_follow_location_enabled">Kartennachführung aktiv</string>
+	<string name="auto_follow_location_enabled">Kartennachführung aktiv.</string>
 	<string name="pref_vector_rendering">Vektor Renderer spezif. Optionen</string>
 	<string name="pref_overlay">Overlay / Underlay</string>
 	<string name="pref_raster_map">Einstellungen Kartenquelle</string>
@@ -793,7 +793,7 @@
 	<string name="voice_provider_descr">Sprachpaket für Navigation auswählen (Sprachcodes siehe ISO 639-1)</string>
 	<string name="voice_provider">Sprachansagen</string>
 	<string name="voice_data_initializing">Sprachansagen werden initialisiert…</string>
-	<string name="voice_data_not_supported">Sprachpaket-Version wird nicht unterstützt.</string>
+	<string name="voice_data_not_supported">Sprachpaket-Version wird nicht unterstützt</string>
 	<string name="voice_data_corrupted">Sprachpaket ist defekt</string>
 	<string name="voice_data_unavailable">Das aktuelle Sprachpaket ist nicht verfügbar</string>
 	
@@ -1431,7 +1431,7 @@
 	<string name="about_version">Version :</string>
     <string name="about_settings">Über</string>
     <string name="about_settings_descr">Versionsinfo, Lizenz, Projekt Mitglieder</string>
-    <string name="tips_and_tricks">Tips</string>
+    <string name="tips_and_tricks">Tipps</string>
     <string name="tip_recent_changes_1_6_t">Änderungen in 1.6:
 	\n\t* Unterstützung von Full-HD Geräten
 	\n\t* Unterstützung von transparentem Kartenhintergrund
