@@ -27,7 +27,7 @@ if [[ "$(uname -a)" =~ Darwin ]]; then
 	fi
 fi
 
-OSMAND_ANDROID_EXTERNAL_DEPENDENCIES=(expat freetype gdal giflib glm glsl-optimizer harfbuzz jpeg libpng protobuf qtbase-android skia)
+OSMAND_ANDROID_EXTERNAL_DEPENDENCIES=(expat freetype gdal giflib glm glsl-optimizer harfbuzz jpeg libpng protobuf qtbase-android skia boost-android)
 "$SCRIPT_LOC/../../core/externals/configure.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
 "$SCRIPT_LOC/../../core/externals/build.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
 "$SCRIPT_LOC/../OsmAnd-java/generate-swig.sh"
