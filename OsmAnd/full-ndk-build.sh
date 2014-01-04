@@ -14,6 +14,8 @@ SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if [ -z "$OSMAND_ARCHITECTURES_SET" ]; then
 	OSMAND_ARCHITECTURES_SET=(x86 mips arm armv5 armv7 armv7-neon)
 	export OSMAND_ARCHITECTURES_SET
+	echo Setting OSMAND_ARCHITECTURES_SET to default set of architectures
+	echo WARNING: exporting a bash ARRAY to environment, this might not work depending on your bash version. See BUGS section of "bash(1)" for details.
 fi
 
 if [[ "$(uname -a)" =~ Linux ]]; then
@@ -31,4 +33,4 @@ OSMAND_ANDROID_EXTERNAL_DEPENDENCIES=(expat freetype gdal giflib glm glsl-optimi
 "$SCRIPT_LOC/../../core/externals/configure.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
 "$SCRIPT_LOC/../../core/externals/build.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
 "$SCRIPT_LOC/../OsmAnd-java/generate-swig.sh"
-(cd "$SCRIPT_LOC" && "$ANDROID_NDK/ndk-build" -j$OSMAND_BUILD_CPU_CORES_NUM)
+(cd "$SCRIPT_LOC" && "$ANDROID_NDK/ndk-build" -j$OSMAND_BUILD_CPU_CORES_NUM "$@")
