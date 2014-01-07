@@ -1071,4 +1071,11 @@
 	<string name="downloading_file_new">Preuzimanje …</string>
 	<string name="osm_settings_descr">Navedite Openstreetmap.org (OSM) postavke potrebne za OSM prijavu</string>
 	<string name="osb_author_dialog_password">OSM zaporka (opcija)</string>
+	<string name="av_camera_focus">Tip fokusa fotoaparat</string>
+	<string name="av_camera_focus_auto">Autofokus</string>
+	<string name="av_camera_focus_continuous">Fotoaparat kontinuirano pokušava fokusirati</string>
+	<string name="av_camera_focus_infinity">Fokus je postavljen na beskonačno</string>
+	<string name="poi_error_unexpected_template">Došlo je do neočekivane pogreške tijekom izvođenja radnje {0}.</string>
+	<string name="poi_error_io_error_template">Dogodila se I/O pogreška tijekom izvođenja radnje {0}.</string>
+	<string name="poi_error_info_not_loaded">Info o točki koja nije učitana</string>
 	</resources>
