@@ -116,6 +116,8 @@ public class BinaryRoutePlanner {
 			graphSegments = graphDirectSegments;
 		}
 		ctx.loadBorderPoints();
+		/*RoutingContext baseCtx = new RoutingContext(ctx);
+		baseCtx.newRoutingPoints();*/
 		
 		FinalRouteSegment finalSegment = null;
 		while (!graphSegments.isEmpty()) {

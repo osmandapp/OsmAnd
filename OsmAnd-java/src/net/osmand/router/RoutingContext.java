@@ -278,6 +278,16 @@ public class RoutingContext {
 		return ind;
 	}
 	
+	public void newRoutingPoints() {
+		int middleX = startX / 2 + targetX / 2;
+		int middleY = startY / 2 + targetY;
+		List<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>();
+		loadTileData(middleX, middleY, 17, dataObjects);
+		
+		
+		System.out.println("Size of data objects " + dataObjects.size());
+	}
+	
 	public void loadBorderPoints() throws IOException {
 		Iterator<Entry<RouteRegion, BinaryMapIndexReader>> it = reverseMap.entrySet().iterator();
 		int sleft = Math.min(startX, targetX);
@@ -354,7 +364,7 @@ public class RoutingContext {
 						}
 					}
 					if (minDist > 0) {
-//						System.out.println("Border line " + i + " exp="+res + " min="+ minDist);
+						System.out.println("Border line " + i + " exp="+res + " min="+ minDist);
 						res = (float) minDist;
 					}
 				}

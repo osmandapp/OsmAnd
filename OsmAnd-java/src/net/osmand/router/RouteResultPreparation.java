@@ -231,8 +231,12 @@ public class RouteResultPreparation {
 		double endLat = end.getLatitude();
 		double endLon = end.getLongitude();
         println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{4}\" \n"
-				+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" {5} >", startLat
-				+ "", startLon + "", endLat + "", endLon + "", ctx.config.routerName, "loadedTiles = \"" + ctx.loadedTiles + "\" " + "visitedSegments = \"" + ctx.visitedSegments + "\" " + "complete_distance = \"" + completeDistance + "\" " + "complete_time = \"" + completeTime + "\" " + "routing_time = \"" + ctx.routingTime + "\" "));
+				+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" {5} >", 
+				startLat + "", startLon + "", endLat + "", endLon + "", ctx.config.routerName, 
+				"loadedTiles = \"" + ctx.loadedTiles + "\" " + "visitedSegments = \"" + ctx.visitedSegments + "\" " +
+				"complete_distance = \"" + completeDistance + "\" " + "complete_time = \"" + completeTime + "\" " +
+				"routing_time = \"" + ctx.routingTime + "\" "));
+        double length = MapUtils.getDistance(start, end);
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();
@@ -267,6 +271,49 @@ public class RouteResultPreparation {
 			}
 		}
 		println("</test>");
+		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+			for (int d = 10; d <= 40; d += 10) {
+				System.out.println("---- " + d);
+				newRoutingAnalyzeDiff(start, end, result, length, d);
+			}
+		}
+	}
+
+	private void newRoutingAnalyzeDiff(LatLon start, LatLon end, List<RouteSegmentResult> result, double length, int d) {
+		for(int k = 0; k < result.size() - d; k++){
+			RouteSegmentResult res1 = result.get(k);
+			RouteSegmentResult res2 = result.get(k + d);
+			float realdist = 0;
+			for (int t = k; t < k + d + 1; t++) {
+				realdist += result.get(t).getDistance();
+			}
+			{
+				RouteDataObject obj1 = res1.getObject();
+				RouteDataObject obj2 = res2.getObject();
+				int si = res1.getStartPointIndex();
+				LatLon segStart = new LatLon(MapUtils.get31LatitudeY(obj1.getPoint31YTile(si)),
+						MapUtils.get31LongitudeX(obj1.getPoint31XTile(si)));
+				int ei = res2.getEndPointIndex();
+				LatLon segEnd = new LatLon(MapUtils.get31LatitudeY(obj2.getPoint31YTile(ei)),
+						MapUtils.get31LongitudeX(obj2.getPoint31XTile(ei)));
+				float maxSpeed = obj1.getMaximumSpeed();
+				if (maxSpeed > 0) {
+					double st = MapUtils.getDistance(start, segStart);
+					double en = MapUtils.getDistance(segEnd, end);
+					double segmentdist = MapUtils.getDistance(segStart, segEnd);
+					double f = length - st - en;
+					if (f > 0) {
+						double ratio = realdist/ f;
+						double speed_cut = maxSpeed / ratio * 3.6;
+						if (speed_cut > 60) {
+							System.out.println(" F " + segmentdist +" - " + realdist + " " + segStart + ".."+segEnd);
+							System.out.println("Ref ! " + k + ":" + (k + d) + " " + obj1.getRef() + "-" + obj2.getRef()
+									+ " DIFF " + (int) f + " / " + speed_cut);
+						}
+					}
+				}
+			}
+		}
 	}
 
 
@@ -352,6 +399,7 @@ public class RouteResultPreparation {
 			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(), rr.getBearingBegin());
 			if(noAttachedRoads){
 				// TODO VICTOR : look at the comment inside direction route
+				// ? avoid small zigzags is covered at (search for "zigzags") 
 //				double begin = rr.getObject().directionRoute(rr.getStartPointIndex(), rr.getStartPointIndex() < 
 //						rr.getEndPointIndex(), 25);
 //				mpi = MapUtils.degreesDiff(prev.getBearingEnd(), begin);
