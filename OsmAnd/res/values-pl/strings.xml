@@ -1589,8 +1589,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="app_mode_aircraft">Samolot</string>
     <string name="map_widget_map_rendering">Rysowanie mapy:</string>
     <string name="app_modes_choose">Profile aplikacji</string>
-	<string name="app_modes_choose_descr">Wybierz profile użytkownika widoczne w aplikacji</string>
-    <string name="amenity_type_seamark">Znak na wodzie</string>
+	<string name="app_modes_choose_descr">Wybierz używane profile widoczne w aplikacji</string>
+    <string name="amenity_type_seamark">Żeglugowy znak orientacyjny</string>
     <string name="osmodroid_seek">Szukaj obiektu</string>
     <string name="osmodroid_unseek">Przestań szukać obiektu</string>
     </resources>
