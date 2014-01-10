@@ -839,8 +839,8 @@
 	<string name="hello">Navigationsanwendung OsmAnd</string>
 	<string name="update_poi_success">POI-Daten wurden erfolgreich aktualisiert ({0} wurden geladen)</string>
 	<string name="update_poi_error_local">Fehler beim aktualisieren der Offline-Daten</string>
-	<string name="update_poi_error_loading">Fehler beim Herunterladen der Daten vom Server.</string>
-	<string name="update_poi_no_offline_poi_index">Für dieses Gebiet sind keine POI gespeichert.</string>
+	<string name="update_poi_error_loading">Fehler beim Herunterladen der Daten vom Server</string>
+	<string name="update_poi_no_offline_poi_index">Für dieses Gebiet sind keine POI gespeichert</string>
 	<string name="update_poi_is_not_available_for_zoom">Aktualisierung von POI ist für kleine Zoomeinstellungen nicht verfügbar</string>
 	<string name="context_menu_item_update_poi">POI aktualisieren</string>
 	<string name="context_menu_item_update_map_confirm">Wollen Sie die Daten via Internet aktualisieren?</string>
@@ -870,7 +870,7 @@
 	<string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Wollen Sie die überschreiben ({2})?</string>
 	<string name="address">Adresse</string>
 	<string name="download_index_success">Daten erfolgreich heruntergeladen</string>
-	<string name="error_io_error">I/O Fehler aufgetreten.</string>
+	<string name="error_io_error">I/O Fehler aufgetreten</string>
 	
 	<string name="downloading">Herunterladen…</string>
 	<string name="downloading_list_indexes">Die Liste der verfügbaren Regionen wird geladen…</string>
