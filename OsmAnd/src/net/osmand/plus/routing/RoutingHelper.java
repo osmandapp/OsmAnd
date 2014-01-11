@@ -731,7 +731,7 @@ public class RoutingHelper {
 					msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime()) + ")";
 				}
 				showMessage(msg);
-			} else if (params.type != RouteService.OSMAND && !settings.isInternetConnectionAvailable()) {
+			} else if (params.type.isOnline() && !settings.isInternetConnectionAvailable()) {
 					showMessage(app.getString(R.string.error_calculating_route)
 						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route)); //$NON-NLS-1$
 			} else {

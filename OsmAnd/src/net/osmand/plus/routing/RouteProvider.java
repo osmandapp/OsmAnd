@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -59,19 +60,59 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 
+import btools.routingapp.IBRouterService;
+
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.IBinder;
+
 
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
 	
 	public enum RouteService {
-		OSMAND("OsmAnd (offline)"), YOURS("YOURS"),  ORS("OpenRouteService (outdated map data)"), OSRM("OSRM (only car)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			OSMAND("OsmAnd (offline)"), YOURS("YOURS"), 
+			ORS("OpenRouteService (outdated map data)"), OSRM("OSRM (only car)"),
+			BROUTER("BRouter (offline)"); 
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
 		}
 		public String getName() {
 			return name;
+		}
+		
+		public boolean isOnline(){
+			return this != OSMAND && this != BROUTER;
+		}
+		
+		boolean isAvailable(Context ctx) {
+			if (this == BROUTER) {
+				try {
+					BRouterServiceConnection c = BRouterServiceConnection.connect(ctx);
+					if(c != null) {
+						c.disconnect(ctx);
+						return true;
+					}
+				} catch (Exception e) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		public static RouteService[] getAvailableRouters(Context ctx){
+			List<RouteService> list = new ArrayList<RouteProvider.RouteService>();
+			for(RouteService r : values()) {
+				if(r.isAvailable(ctx)) {
+					list.add(r);
+				}
+			}
+			return list.toArray(new RouteService[list.size()]);
 		}
 	}
 	
@@ -187,6 +228,8 @@ public class RouteProvider {
 					res = findOSRMRoute(params);
 				} else if (params.type == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params);
+				} else if (params.type == RouteService.BROUTER) {
+					res = findBROUTERRoute(params);
 				} else {
 					res = findCloudMadeRoute(params);
 				}
@@ -830,7 +873,114 @@ public class RouteProvider {
 	}
 
 
+	static class BRouterServiceConnection implements ServiceConnection {
+		IBRouterService brouterService;
 
+		public void onServiceConnected(ComponentName className, IBinder boundService) {
+			brouterService = IBRouterService.Stub.asInterface((IBinder) boundService);
+		}
 
+		public void onServiceDisconnected(ComponentName className) {
+			brouterService = null;
+		}
+		
+		public void disconnect(Context ctx){
+			ctx.unbindService(this);
+		}
+		
+		public static BRouterServiceConnection connect(Context ctx){
+			BRouterServiceConnection conn = new BRouterServiceConnection();
+			Intent intent = new Intent();
+			intent.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
+			boolean hasBRouter = ctx.bindService(intent, conn, Context.BIND_AUTO_CREATE);
+			if(!hasBRouter){
+				conn = null;
+			}
+			return conn;
+		}
+	};
+	 
+	protected RouteCalculationResult findBROUTERRoute(RouteCalculationParams params) throws MalformedURLException,
+			IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
+		double[] lats = new double[] { params.start.getLatitude(), params.end.getLatitude() };
+		double[] lons = new double[] { params.start.getLongitude(), params.end.getLongitude() };
+		String mode;
+		if (ApplicationMode.PEDESTRIAN == params.mode) {
+			mode = "foot"; //$NON-NLS-1$
+		} else if (ApplicationMode.BICYCLE == params.mode) {
+			mode = "bicycle"; //$NON-NLS-1$
+		} else {
+			mode = "motorcar"; //$NON-NLS-1$
+		}
+		Bundle bpars = new Bundle();
+		bpars.putDoubleArray("lats", lats);
+		bpars.putDoubleArray("lons", lons);
+		bpars.putString("fast", params.fast ? "1" : "0");
+		bpars.putString("v", mode);
+		bpars.putString("trackFormat", "kml");
+
+		OsmandApplication ctx = (OsmandApplication) params.ctx;
+		List<Location> res = new ArrayList<Location>();
+		
+
+		BRouterServiceConnection conn = BRouterServiceConnection.connect(ctx);
+		if (conn == null) {
+			return new RouteCalculationResult("BRouter service is not available");
+		}
+		long begin = System.currentTimeMillis();
+		try {
+			while((System.currentTimeMillis() - begin) < 15000 && conn.brouterService == null) {
+				Thread.sleep(500);
+			}
+			if(conn.brouterService == null){
+				return new RouteCalculationResult("BRouter service is not available");
+			}
+			String kmlMessage = conn.brouterService.getTrackFromParams(bpars);
+			if (kmlMessage == null)
+				kmlMessage = "no result from brouter";
+			if (!kmlMessage.startsWith("<")) {
+				return new RouteCalculationResult(kmlMessage);
+			}
+
+			DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document doc = dom.parse(new InputSource(new StringReader(kmlMessage)));
+			NodeList list = doc.getElementsByTagName("coordinates"); //$NON-NLS-1$
+			for (int i = 0; i < list.getLength(); i++) {
+				Node item = list.item(i);
+				String str = item.getFirstChild().getNodeValue();
+				if (str == null) {
+					continue;
+				}
+				int st = 0;
+				int next = 0;
+				while ((next = str.indexOf('\n', st)) != -1) {
+					String coordinate = str.substring(st, next + 1);
+					int s = coordinate.indexOf(',');
+					if (s != -1) {
+						try {
+							double lon = Double.parseDouble(coordinate.substring(0, s));
+							double lat = Double.parseDouble(coordinate.substring(s + 1));
+							Location l = new Location("router"); //$NON-NLS-1$
+							l.setLatitude(lat);
+							l.setLongitude(lon);
+							res.add(l);
+						} catch (NumberFormatException e) {
+						}
+					}
+					st = next + 1;
+				}
+			}
+			if (list.getLength() == 0) {
+				if (doc.getChildNodes().getLength() == 1) {
+					Node item = doc.getChildNodes().item(0);
+					return new RouteCalculationResult(item.getNodeValue());
+				}
+			}
+			conn.disconnect((Context) params.ctx);
+		} catch (Exception e) {
+			return new RouteCalculationResult("Exception calling BRouter: " + e); //$NON-NLS-1$
+		}
+		return new RouteCalculationResult(res, null, params, null);
+	}
 	
 }

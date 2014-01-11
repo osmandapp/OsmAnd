@@ -279,7 +279,7 @@ public class NavigateAction {
 	}
 
 	private void updateTooLongDistance(final Location start, final TargetPointsHelper targets, View view, ApplicationMode appMode) {
-		boolean osmandRouter = mapActivity.getMyApplication().getSettings().ROUTER_SERVICE.getModeValue(appMode)== RouteService.OSMAND;
+		boolean osmandRouter = mapActivity.getMyApplication().getSettings().ROUTER_SERVICE.getModeValue(appMode) == RouteService.OSMAND;
 		TextView textView = (TextView) view.findViewById(R.id.ValidateTextView);
 		if(osmandRouter && targets.hasLongDistancesInBetween(start, 150000)) {
 			textView.setText(R.string.route_is_too_long);

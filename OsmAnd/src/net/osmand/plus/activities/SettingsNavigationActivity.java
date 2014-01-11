@@ -76,11 +76,12 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		}
 		registerListPreference(settings.AUTO_FOLLOW_ROUTE, screen, entries, intValues);
 		
-		entries = new String[RouteService.values().length];
+		RouteService[] vls = RouteService.getAvailableRouters(this);
+		entries = new String[vls.length];
 		for(int i=0; i<entries.length; i++){
-			entries[i] = RouteService.values()[i].getName();
+			entries[i] = vls[i].getName();
 		}
-		registerListPreference(settings.ROUTER_SERVICE, screen, entries, RouteService.values());
+		registerListPreference(settings.ROUTER_SERVICE, screen, entries, vls);
 		
 		routerServicePreference = (ListPreference) screen.findPreference(settings.ROUTER_SERVICE.getId());
 		
