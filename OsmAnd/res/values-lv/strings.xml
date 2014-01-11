@@ -1262,7 +1262,7 @@
     <string name="local_osm_changes_delete_all_confirm">Tiks izdzēsti  %1$d osm labojumi. Vai tiešām to vēlaties?</string>
     <string name="auto_zoom_none">Nav automātiskais mērogs</string>
 	<string name="index_name_openmaps">OpenMaps Eiropa</string>
-    <string name="srtm_plugin_description">Lai lejupielādētu bezsaistes kontūrlīnijas un kalnu reljefu ('Uzstādījumi\' 	\'Bezsaistes dati\' 	 \'Lejupielādēt vai atjaunināt bezsaistes datus\' 	 atlasīt izvēlētās mapes).</string>
+    <string name="srtm_plugin_description">Lai lejupielādētu bezsaistes kontūrlīnijas un kalnu reljefu (\'Uzstādījumi\' 	\'Bezsaistes dati\' 	 \'Lejupielādēt vai atjaunināt bezsaistes datus\' 	 atlasīt izvēlētās mapes).</string>
     <string name="osmand_play_title_30_chars">OsmAnd kartes &amp; navigācija</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kartes &amp; navigācija</string>
 	<string name="support_new_features_descr">Lūdzu atbalstiet programmu ar ziedojumiem, lai palīdzētu to uzlabot un attīstīt</string>
@@ -1282,7 +1282,7 @@
     <string name="app_mode_aircraft">Aviācija</string>
     <string name="tip_map_styles_t">OsmAnd atbalsta dažāda veida bezsaistes vektorkartes:…
 		\n\nPapildus pamata mapes stilam, jūs variet uzlikt, piemēram
-		\n\t* \''Tūrisma skats\' stilu, kas satur vairāk detalizētu informāciju par ceļošanu un tūrismu.…
+		\n\t* \'Tūrisma skats\' stilu, kas satur vairāk detalizētu informāciju par ceļošanu un tūrismu.…
 		\n\t* \'Kontrastains ceļš\' parāda ceļus izceltās krāsās, kas atvieglina kartes pārlūkošanu saulainā laikā.…
 		\n\t* \'Ziema un slēpošana\' iezīmē karti ziemas krāsās un izceļ ar slēpošanu saistītajos apvidos zemes reljefu (ar lejupielādētu \'World ski\' karti)…
 	</string>

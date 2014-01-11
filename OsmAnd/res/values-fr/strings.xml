@@ -85,7 +85,7 @@
 \n\tPour ajouter un nouveau PI, utiliser l\'option \'Créer un point d\'intérêt\' dans le menu contextuel de la carte. Saisir les informations dans la boite de dialogue \'Créer un point d\'intérêt\' avant d\'enregistrer.
 \n\tLes erreurs de cartographie peuvent être signalées immédiatement via les bogues OSM, permettant à la communauté OSM de corriger plus rapidement le problème.
 \n\tPour créer un bogue OSM utiliser l\'option \'Ouvrir un bogue OSM\' dans le menu contextuel de la carte. Saisir une description détaillée du problème et le poster avec le bouton \'Ajouter\'.
-\n\tOSMAnd supporte la mise en cache de vos entrées en mode déconnecté (voir le paramètre respectif), mais La connexion internet est bien sûr nécessaire pour l'envoi des contributions de PI et de bogues OSM.</string>
+\n\tOSMAnd supporte la mise en cache de vos entrées en mode déconnecté (voir le paramètre respectif), mais La connexion internet est bien sûr nécessaire pour l\'envoi des contributions de PI et de bogues OSM.</string>
   <string name="download_files_not_enough_space">Il n\'y a pas assez de place pour télécharger %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">Espace actuellement disponible: {2} MB ! Télécharger {0} fichier(s) ({1} MB) ?</string>
   <string name="tip_select_destination_point">Sélectionner le point de destination</string>
@@ -1424,8 +1424,8 @@
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Bateau</string>
     <string name="app_mode_aircraft">Avion</string>
-    <string name="app_modes_choose_descr">Choisir les profils d\'utilisation à afficher dans l'application</string>
-    <string name="app_modes_choose">Profils d'application</string>
+    <string name="app_modes_choose_descr">Choisir les profils d\'utilisation à afficher dans l\'application</string>
+    <string name="app_modes_choose">Profils d\'application</string>
 	<string name="map_widget_map_rendering">Rendu de carte :</string>
     <string name="amenity_type_seamark">Balise marine</string>
     <string name="osmodroid_seek">Chercher objet</string>
