@@ -569,7 +569,7 @@
 	<string name="gpx_option_reverse_route">Okreni smjer GPX</string>
 	<string name="voice_not_use">Ne koristi</string>
 	<string name="voice_not_specified">Bez</string>
-	<string name="installing_new_resources">Raspakiravam nove podatke-…</string>
+	<string name="installing_new_resources">Raspakiravam nove podatke…</string>
 	<string name="vector_map_not_needed">Ne, hvala</string>
 	<string name="favorite_home_category">Doma</string>
 	<string name="favorite_friends_category">Prijatelji</string>
@@ -1078,4 +1078,6 @@
 	<string name="poi_error_unexpected_template">Došlo je do neočekivane pogreške tijekom izvođenja radnje {0}.</string>
 	<string name="poi_error_io_error_template">Dogodila se I/O pogreška tijekom izvođenja radnje {0}.</string>
 	<string name="poi_error_info_not_loaded">Info o točki koja nije učitana</string>
-	</resources>
+	<string name="layer_hillshade">Reljefni sloj</string>
+    <string name="download_hillshade_item">Reljef</string>
+    </resources>
