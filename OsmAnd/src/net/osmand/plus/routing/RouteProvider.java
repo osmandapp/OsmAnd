@@ -60,14 +60,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 
-import btools.routingapp.IBRouterService;
-
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
+import btools.routingapp.IBRouterService;
 
 
 public class RouteProvider {
@@ -90,22 +84,14 @@ public class RouteProvider {
 			return this != OSMAND && this != BROUTER;
 		}
 		
-		boolean isAvailable(Context ctx) {
+		boolean isAvailable(OsmandApplication ctx) {
 			if (this == BROUTER) {
-				try {
-					BRouterServiceConnection c = BRouterServiceConnection.connect(ctx);
-					if(c != null) {
-						c.disconnect(ctx);
-						return true;
-					}
-				} catch (Exception e) {
-					return false;
-				}
+				return ctx.getBRouterService() != null;
 			}
 			return true;
 		}
 		
-		public static RouteService[] getAvailableRouters(Context ctx){
+		public static RouteService[] getAvailableRouters(OsmandApplication ctx){
 			List<RouteService> list = new ArrayList<RouteProvider.RouteService>();
 			for(RouteService r : values()) {
 				if(r.isAvailable(ctx)) {
@@ -873,33 +859,6 @@ public class RouteProvider {
 	}
 
 
-	static class BRouterServiceConnection implements ServiceConnection {
-		IBRouterService brouterService;
-
-		public void onServiceConnected(ComponentName className, IBinder boundService) {
-			brouterService = IBRouterService.Stub.asInterface((IBinder) boundService);
-		}
-
-		public void onServiceDisconnected(ComponentName className) {
-			brouterService = null;
-		}
-		
-		public void disconnect(Context ctx){
-			ctx.unbindService(this);
-		}
-		
-		public static BRouterServiceConnection connect(Context ctx){
-			BRouterServiceConnection conn = new BRouterServiceConnection();
-			Intent intent = new Intent();
-			intent.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
-			boolean hasBRouter = ctx.bindService(intent, conn, Context.BIND_AUTO_CREATE);
-			if(!hasBRouter){
-				conn = null;
-			}
-			return conn;
-		}
-	};
-	 
 	protected RouteCalculationResult findBROUTERRoute(RouteCalculationParams params) throws MalformedURLException,
 			IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
 		double[] lats = new double[] { params.start.getLatitude(), params.end.getLatitude() };
@@ -923,19 +882,12 @@ public class RouteProvider {
 		List<Location> res = new ArrayList<Location>();
 		
 
-		BRouterServiceConnection conn = BRouterServiceConnection.connect(ctx);
-		if (conn == null) {
+		IBRouterService brouterService = ctx.getBRouterService();
+		if (brouterService == null) {
 			return new RouteCalculationResult("BRouter service is not available");
 		}
-		long begin = System.currentTimeMillis();
 		try {
-			while((System.currentTimeMillis() - begin) < 15000 && conn.brouterService == null) {
-				Thread.sleep(500);
-			}
-			if(conn.brouterService == null){
-				return new RouteCalculationResult("BRouter service is not available");
-			}
-			String kmlMessage = conn.brouterService.getTrackFromParams(bpars);
+			String kmlMessage = brouterService.getTrackFromParams(bpars);
 			if (kmlMessage == null)
 				kmlMessage = "no result from brouter";
 			if (!kmlMessage.startsWith("<")) {
@@ -976,7 +928,6 @@ public class RouteProvider {
 					return new RouteCalculationResult(item.getNodeValue());
 				}
 			}
-			conn.disconnect((Context) params.ctx);
 		} catch (Exception e) {
 			return new RouteCalculationResult("Exception calling BRouter: " + e); //$NON-NLS-1$
 		}

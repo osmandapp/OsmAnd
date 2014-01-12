@@ -57,6 +57,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.format.DateFormat;
 import android.widget.Toast;
+import btools.routingapp.BRouterServiceConnection;
+import btools.routingapp.IBRouterService;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
@@ -99,6 +101,7 @@ public class OsmandApplication extends Application implements ClientContext {
 	InternalToDoAPI internalToDoAPI;
 	InternalOsmAndAPI internalOsmAndAPI;
 	SQLiteAPI sqliteAPI;
+	BRouterServiceConnection bRouterServiceConnection;
 
 	@Override
 	public void onCreate() {
@@ -119,6 +122,12 @@ public class OsmandApplication extends Application implements ClientContext {
 		internalToDoAPI = new net.osmand.plus.api.InternalToDoAPIImpl(this);
 		internalOsmAndAPI = new net.osmand.plus.api.InternalOsmAndAPIImpl(this);
 		sqliteAPI = new SQLiteAPIImpl(this);
+		
+		try {
+			bRouterServiceConnection = BRouterServiceConnection.connect(this);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 
 		// settings used everywhere so they need to be created first
 		osmandSettings = createOsmandSettingsInstance();
@@ -735,6 +744,13 @@ public class OsmandApplication extends Application implements ClientContext {
 				ab.setBackgroundDrawable(bg);
 			}
 		}
+	}
+	
+	public IBRouterService getBRouterService() {
+		if(bRouterServiceConnection == null) {
+			return null;
+		}
+		return bRouterServiceConnection.getBrouterService();
 	}
 	
 	public void setLanguage(Context context) {

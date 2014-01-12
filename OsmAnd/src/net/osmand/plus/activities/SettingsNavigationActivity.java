@@ -76,7 +76,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		}
 		registerListPreference(settings.AUTO_FOLLOW_ROUTE, screen, entries, intValues);
 		
-		RouteService[] vls = RouteService.getAvailableRouters(this);
+		RouteService[] vls = RouteService.getAvailableRouters(getMyApplication());
 		entries = new String[vls.length];
 		for(int i=0; i<entries.length; i++){
 			entries[i] = vls[i].getName();
