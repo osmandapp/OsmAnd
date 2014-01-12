@@ -1628,6 +1628,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="local_osm_changes_delete_all_confirm">Jūs ištrinsite %1$d osm pakeitimus. Ar tikrai norite?</string>
     <string name="local_osm_changes_delete_all">Viską ištrinti</string>
     <string name="amenity_type_seamark">Jūros navigacijos ženklas</string>
-    <string name="app_modes_choose_descr">Pasirinkite programos veikimo režimą</string>
-    <string name="app_modes_choose">Programos režimai</string>
-	</resources>
+    <string name="app_modes_choose_descr">Pasirinkite programos veikimo profilius, kurie bus naudojami programoje</string>
+    <string name="app_modes_choose">Programos profiliai</string>
+	<string name="osmodroid_seek">Ieškoti objekto</string>
+    <string name="osmodroid_unseek">Nebeieškoti objekto</string>
+    </resources>
