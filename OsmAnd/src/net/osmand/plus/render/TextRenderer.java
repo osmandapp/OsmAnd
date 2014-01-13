@@ -58,6 +58,7 @@ public class TextRenderer {
 		boolean bold = false;
 		String shieldRes = null;
 		int textOrder = 100;
+		int textShadowColor = Color.WHITE;
 
 		public void fillProperties(RenderingContext rc, RenderingRuleSearchRequest render, float centerX, float centerY) {
 			this.centerX = centerX;
@@ -70,6 +71,10 @@ public class TextRenderer {
 			}
 			textSize = rc.getComplexValue(render, render.ALL.R_TEXT_SIZE, 0);
 			textShadow = (int) rc.getComplexValue(render, render.ALL.R_TEXT_HALO_RADIUS, 0);
+			textShadowColor = render.getIntPropertyValue(render.ALL.R_TEXT_HALO_COLOR);
+			if(textShadowColor == 0) {
+				textShadowColor = Color.WHITE;
+			}
 			textWrap = (int) rc.getComplexValue(render, render.ALL.R_TEXT_WRAP_WIDTH, 0);
 			bold = render.getIntPropertyValue(render.ALL.R_TEXT_BOLD, 0) > 0;
 			minDistance = rc.getComplexValue(render, render.ALL.R_TEXT_MIN_DISTANCE, 0);
@@ -183,11 +188,12 @@ public class TextRenderer {
 		return false;
 	}
 
-	private void drawTextOnCanvas(Canvas cv, String text, float centerX, float centerY, Paint paint, float textShadow) {
+	private void drawTextOnCanvas(Canvas cv, String text, float centerX, float centerY, Paint paint, int shadowColor,
+			float textShadow) {
 		if (textShadow > 0) {
 			int c = paintText.getColor();
 			paintText.setStyle(Style.STROKE);
-			paintText.setColor(Color.WHITE);
+			paintText.setColor(shadowColor);
 			paintText.setStrokeWidth(2 + textShadow);
 			cv.drawText(text, centerX, centerY, paint);
 			// reset
@@ -232,7 +238,7 @@ public class TextRenderer {
 				if (!intersects) {
 					if (text.drawOnPath != null) {
 						if (text.textShadow > 0) {
-							paintText.setColor(Color.WHITE);
+							paintText.setColor(text.textShadowColor);
 							paintText.setStyle(Style.STROKE);
 							paintText.setStrokeWidth(2 + text.textShadow);
 							cv.drawTextOnPath(text.text, text.drawOnPath, 0, text.vOffset, paintText);
@@ -292,12 +298,12 @@ public class TextRenderer {
 					pos++;
 				}
 				if (lastSpace == -1 || pos == end) {
-					drawTextOnCanvas(cv, text.text.substring(start, pos), text.centerX, text.centerY + line * (textSize + 2), paintText,
-							text.textShadow);
+					drawTextOnCanvas(cv, text.text.substring(start, pos), text.centerX, text.centerY + line * (textSize + 2), 
+							paintText, text.textShadowColor, text.textShadow);
 					start = pos;
 				} else {
 					drawTextOnCanvas(cv, text.text.substring(start, lastSpace), text.centerX, text.centerY + line * (textSize + 2),
-							paintText, text.textShadow);
+							paintText, text.textShadowColor, text.textShadow);
 					start = lastSpace + 1;
 					limit += (start - pos) - 1;
 				}
@@ -305,7 +311,7 @@ public class TextRenderer {
 
 			}
 		} else {
-			drawTextOnCanvas(cv, text.text, text.centerX, text.centerY, paintText, text.textShadow);
+			drawTextOnCanvas(cv, text.text, text.centerX, text.centerY, paintText, text.textShadowColor, text.textShadow);
 		}
 	}
 	

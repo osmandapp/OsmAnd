@@ -65,6 +65,7 @@ public class RenderingRuleStorageProperties {
 	public static final String TEXT_SIZE = "textSize";
 	public static final String TEXT_COLOR = "textColor";
 	public static final String TEXT_HALO_RADIUS = "textHaloRadius";
+	public static final String TEXT_HALO_COLOR = "textHaloColor";
 	public static final String TEXT_WRAP_WIDTH = "textWrapWidth";
 	public static final String SHADOW_LEVEL = "shadowLevel";
 
@@ -125,6 +126,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TEXT_SIZE;
 	public RenderingRuleProperty R_TEXT_COLOR;
 	public RenderingRuleProperty R_TEXT_HALO_RADIUS;
+	public RenderingRuleProperty R_TEXT_HALO_COLOR;
 	public RenderingRuleProperty R_TEXT_WRAP_WIDTH;
 
 	final Map<String, RenderingRuleProperty> properties;
@@ -178,6 +180,7 @@ public class RenderingRuleStorageProperties {
 		R_TEXT_WRAP_WIDTH = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_WRAP_WIDTH));
 		R_TEXT_DY = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_DY));
 		R_TEXT_HALO_RADIUS = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_HALO_RADIUS));
+		R_TEXT_HALO_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(TEXT_HALO_COLOR));
 		R_TEXT_SIZE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_SIZE));
 		R_TEXT_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_ORDER));
 		R_ICON_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ICON_ORDER));
