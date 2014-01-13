@@ -20,7 +20,7 @@
   <string name="int_continuosly">Continue</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
   
-  <string name="play_commands_of_currently_selected_voice">Luister naar de commando\\\'s van de gekozen stem</string>
+  <string name="play_commands_of_currently_selected_voice">Luister naar de commando\'s van de gekozen stem</string>
   <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
   <string name="native_rendering">Interne kaartgeneratie</string>
   
