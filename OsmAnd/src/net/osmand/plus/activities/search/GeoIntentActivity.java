@@ -232,9 +232,13 @@ public class GeoIntentActivity extends OsmandListActivity {
 				showErrorMessage("");
 			} else {
 				int latIndex = geo.indexOf(',');
-				int lonIndex = geo.indexOf('?');
-				lonIndex = lonIndex > 0 ? lonIndex : geo.length();
 				if (latIndex > 0) {
+					int lonIndex = geo.indexOf(',', latIndex + 1);
+					int altIndex = geo.indexOf(';', latIndex + 1);
+					int paramIndex = geo.indexOf('?', latIndex + 1);
+					paramIndex = paramIndex > 0 ? paramIndex : geo.length();
+					altIndex = altIndex > 0 && altIndex < paramIndex ? altIndex : paramIndex;
+					lonIndex = lonIndex > 0 && lonIndex < altIndex ? lonIndex : altIndex;
 					try {
 						double lat = Double.parseDouble(geo.substring(0, latIndex).trim());
 						double lon = Double.parseDouble(geo.substring(latIndex + 1, lonIndex).trim());
