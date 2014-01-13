@@ -236,7 +236,6 @@ public class RouteResultPreparation {
 				"loadedTiles = \"" + ctx.loadedTiles + "\" " + "visitedSegments = \"" + ctx.visitedSegments + "\" " +
 				"complete_distance = \"" + completeDistance + "\" " + "complete_time = \"" + completeTime + "\" " +
 				"routing_time = \"" + ctx.routingTime + "\" "));
-        double length = MapUtils.getDistance(start, end);
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();
@@ -272,14 +271,43 @@ public class RouteResultPreparation {
 		}
 		println("</test>");
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
-			for (int d = 10; d <= 40; d += 10) {
+			for (int d = 5; d <= 15; d += 5) {
 				System.out.println("---- " + d);
-				newRoutingAnalyzeDiff(start, end, result, length, d);
+				newRoutingAnalyzeDiff(ctx, start, end, result,  d);
 			}
 		}
 	}
 
-	private void newRoutingAnalyzeDiff(LatLon start, LatLon end, List<RouteSegmentResult> result, double length, int d) {
+	private void newRoutingAnalyzeDiff(RoutingContext ctx, LatLon start, LatLon end, List<RouteSegmentResult> result, int d) {
+		for(int k = 0; k < result.size() - d; k+=d){
+			RouteSegmentResult res1 = result.get(k);
+			RouteSegmentResult res2 = result.get(k + d);
+			float realdist = 0;
+			float tm = 0;
+			for (int t = k; t < k + d + 1; t++) {
+				realdist += result.get(t).getDistance();
+				tm += result.get(t).getDistance() / (ctx.getRouter().defineSpeed(result.get(t).getObject()) * 3.6f );
+			}
+			{
+				RouteDataObject obj1 = res1.getObject();
+				RouteDataObject obj2 = res2.getObject();
+				int si = res1.getStartPointIndex();
+				int ei = res2.getEndPointIndex();
+				LatLon segStart = MapUtils.getProjection(MapUtils.get31LatitudeY(obj1.getPoint31YTile(si)), MapUtils.get31LongitudeX(obj1.getPoint31XTile(si)),
+						start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
+				LatLon segEnd = MapUtils.getProjection(MapUtils.get31LatitudeY(obj2.getPoint31YTile(ei)), MapUtils.get31LongitudeX(obj2.getPoint31XTile(ei)),
+						start.getLatitude(), start.getLongitude(), end.getLatitude(), end.getLongitude());
+				float maxSpeed = ctx.getRouter().defineSpeed(obj1) * 3.6f;
+				int cspeed = (int) (MapUtils.getDistance(segStart, segEnd) / tm);
+				int percentSt =  (int) (100 * MapUtils.getDistance(start, segStart) / MapUtils.getDistance(start, end));
+				int percentEnd =  (int) (100 * MapUtils.getDistance(start, segEnd) / MapUtils.getDistance(start, end));
+				System.out.println("Road " + (k + 1) + " cspeed=" + cspeed + " segm="+percentSt+"%-"+percentEnd+ "% speed="+((int)maxSpeed) + " dist=" + ((int)realdist));
+				if (maxSpeed > 0) {}
+			}
+		}
+	}
+	
+	private void newRoutingAnalyzeDiff2(LatLon start, LatLon end, List<RouteSegmentResult> result, double length, int d) {
 		for(int k = 0; k < result.size() - d; k++){
 			RouteSegmentResult res1 = result.get(k);
 			RouteSegmentResult res2 = result.get(k + d);
@@ -303,10 +331,10 @@ public class RouteResultPreparation {
 					double segmentdist = MapUtils.getDistance(segStart, segEnd);
 					double f = length - st - en;
 					if (f > 0) {
-						double ratio = realdist/ f;
+						double ratio = realdist / f;
 						double speed_cut = maxSpeed / ratio * 3.6;
 						if (speed_cut > 60) {
-							System.out.println(" F " + segmentdist +" - " + realdist + " " + segStart + ".."+segEnd);
+							System.out.println(" F " + segmentdist + " - " + realdist + " " + segStart + ".." + segEnd);
 							System.out.println("Ref ! " + k + ":" + (k + d) + " " + obj1.getRef() + "-" + obj2.getRef()
 									+ " DIFF " + (int) f + " / " + speed_cut);
 						}
