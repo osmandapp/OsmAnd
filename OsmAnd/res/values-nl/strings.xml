@@ -953,8 +953,8 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="osmand_parking_time_no_limit">parkeren zonder tijdslimiet</string>
   <string name="osmand_parking_position_description">De positie van je geparkeerde auto. %1$s</string>
   <string name="osmand_parking_position_description_add">De auto ophalen om:</string>
-  <string name="osmand_parking_pm">\\\'s-middags</string>
-  <string name="osmand_parking_am">\\\'s-ochtends</string>
+  <string name="osmand_parking_pm">\'s-middags</string>
+  <string name="osmand_parking_am">\'s-ochtends</string>
   <string name="osmand_parking_position_name">Parkeerplek</string>
   <string name="osmand_parking_plugin_description">Met deze plugin kan je onthouden waar je auto geparkeerd staat.</string>
   <string name="osmand_parking_plugin_name">Parkeerpositie</string>
