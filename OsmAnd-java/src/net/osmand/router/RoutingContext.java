@@ -419,7 +419,7 @@ public class RoutingContext {
 		return original;
 	}
 	
-	private void loadSubregionTile(final RoutingSubregionTile ts, boolean loadObjectsInMemory) {
+	public void loadSubregionTile(final RoutingSubregionTile ts, boolean loadObjectsInMemory) {
 		boolean wasUnloaded = ts.isUnloaded();
 		int ucount = ts.getUnloadCont();
 		if (nativeLib == null) {
@@ -465,9 +465,12 @@ public class RoutingContext {
 		final int zoomToLoad = 31 - config.ZOOM_TO_LOAD_TILES;
 		int tileX = x31 >> zoomToLoad;
 		int tileY = y31 >> zoomToLoad;
-		
-		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(tileX << zoomToLoad,
-				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, null);
+		return loadTileHeaders(zoomToLoad, tileX, tileY);
+	}
+
+	public List<RoutingSubregionTile> loadTileHeaders(final int zoomToLoadM31, int tileX, int tileY) {
+		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(tileX << zoomToLoadM31,
+				(tileX + 1) << zoomToLoadM31, tileY << zoomToLoadM31, (tileY + 1) << zoomToLoadM31, null);
 		List<RoutingSubregionTile> collection = null;
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
 			// NOTE: load headers same as we do in non-native (it is not native optimized)
@@ -693,7 +696,11 @@ public class RoutingContext {
 			this.subregion = subregion;
 		}
 		
-		private void loadAllObjects(final List<RouteDataObject> toFillIn, RoutingContext ctx, TLongObjectHashMap<RouteDataObject> excludeDuplications) {
+		public TLongObjectMap<RouteSegment> getRoutes() {
+			return routes;
+		}
+		
+		public void loadAllObjects(final List<RouteDataObject> toFillIn, RoutingContext ctx, TLongObjectHashMap<RouteDataObject> excludeDuplications) {
 			if(routes != null) {
 				Iterator<RouteSegment> it = routes.valueCollection().iterator();
 				while(it.hasNext()){

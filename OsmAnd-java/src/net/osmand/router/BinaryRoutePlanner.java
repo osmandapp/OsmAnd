@@ -14,6 +14,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataBorderLinePoint;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.router.RoutingContext.RoutingSubregionTile;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -81,6 +82,8 @@ public class BinaryRoutePlanner {
 			}
 			
 		}
+		
+		newSearchRoute(ctx, start, end);
 
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new NonHeuristicSegmentsComparator();
@@ -196,6 +199,61 @@ public class BinaryRoutePlanner {
 	}
 
 
+	private void newSearchRoute(RoutingContext ctx, RouteSegment start, RouteSegment end) {
+		int sx31 = start.getRoad().getPoint31XTile(start.getSegmentStart());
+		int sy31 = start.getRoad().getPoint31YTile(start.getSegmentStart());
+		int ex31 = end.getRoad().getPoint31XTile(end.getSegmentStart());
+		int ey31 = end.getRoad().getPoint31YTile(end.getSegmentStart());
+		int zoom = 11;
+		int sz = 31 - zoom;
+		int sx = sx31 >> sz;
+		int ex = ex31 >> sz;
+		int sy = sy31 >> sz;
+		int ey = ey31 >> sz;
+		
+		int h = Math.abs(sy - ey);
+		int w = Math.abs(sx - ex);
+		int dh = (h + w)/ 6;
+		int dw = (h + w)/ 6;
+		System.out.println("Bbox : (" + sx +", " + sy +" - " +ex +", " + ey+ ")  - " + 
+				(w + dw * 2) + " x " + (h + dh * 2));
+		System.out.println("Load tiles " + ((w + dw * 2)*(h + dh * 2)));
+		int total = 0;
+		for(int x = -dw; x <= w + dw; x ++) {
+			for(int y = -dh; y <= h + dh; y++) {
+				int tileX = Math.min(sx, ex) + x;
+				int tileY = Math.min(sy, ey) + y;
+				float lat = (float) MapUtils.getLatitudeFromTile(zoom, tileY);
+				float lon = (float) MapUtils.getLongitudeFromTile(zoom, tileX);
+				if((x == -dw && y == -dh)) {
+					System.out.println("LeftTop : " + lat + ", " + lon);
+				}
+				if((x == w + dw && y == h + dh)){
+					System.out.println("RightBottom : " + lat + ", " + lon);
+				}
+				List<RoutingSubregionTile> ts = ctx.loadTileHeaders(sz, tileX, tileY);
+				if(ts != null) {
+					total += ts.size();
+				}
+			}
+		}
+		System.out.println("Total loaded " + total + " "+ ctx.subregionTiles.size());
+		List<RouteDataObject> ls = new ArrayList<RouteDataObject>();
+		TLongObjectHashMap<RouteDataObject> dup = new TLongObjectHashMap<RouteDataObject>();
+		long time = System.currentTimeMillis();
+		for(RoutingSubregionTile st : ctx.subregionTiles) {
+			ctx.loadSubregionTile(st, true);
+			st.loadAllObjects(ls, ctx, dup);
+		}
+		System.out.println("Total obj to check " + ls.size());
+		System.out.println("Time " + ctx.timeToLoadHeaders / 1e6 + " " + (System.currentTimeMillis() - time));
+		
+		
+//		ctx.loadTileHeaders(zoom, tileX, tileY)
+		
+	}
+
+
 	private void printMemoryConsumption( String string) {
 		long h1 = RoutingContext.runGCUsedMemory();
 		float mb = (1 << 20);
@@ -212,7 +270,7 @@ public class BinaryRoutePlanner {
 				ctx.calculationProgress.distanceFromBegin =
 						Math.max(graphDirectSegments.peek().distanceFromStart, ctx.calculationProgress.distanceFromBegin);
 			}
-			if(graphDirectSegments.size() > 0) {
+			if(graphReverseSegments.size() > 0) {
 				ctx.calculationProgress.distanceFromEnd = 
 						Math.max(graphReverseSegments.peek().distanceFromStart, ctx.calculationProgress.distanceFromBegin);
 			}
@@ -328,6 +386,7 @@ public class BinaryRoutePlanner {
 		}
 		
 		double result = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
+//		result *= 0.8;
 		return (float) result; 
 	}
 	

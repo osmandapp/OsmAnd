@@ -13,6 +13,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.RoutingContext.RoutingSubregionTile;
 import net.osmand.util.MapUtils;
 
 public class RouteResultPreparation {
@@ -279,6 +280,26 @@ public class RouteResultPreparation {
 	}
 
 	private void newRoutingAnalyzeDiff(RoutingContext ctx, LatLon start, LatLon end, List<RouteSegmentResult> result, int d) {
+		System.out.println();
+		System.out.println("------------");
+		long id = -2;
+		long[] ids = ctx.indexedSubregions.keys();
+		for(long idt : ids) {
+			long x = idt >> 16;
+			long y = idt - (x<<16);
+//			double l = MapUtils.get31LongitudeX((int) (x<<15));
+//			double t = MapUtils.get31LatitudeY((int) (y<< 15));
+//			double r = MapUtils.get31LongitudeX((int) ((x+1)<<15));
+//			double b = MapUtils.get31LatitudeY((int) ((y+1)<<15));
+//			System.out.println("<node id=\""+(id--)+"\" lat=\""+t+"\" lon=\""+l+"\" />");
+//			System.out.println("<node id=\""+(id--)+"\" lat=\""+b+"\" lon=\""+r+"\" />");
+//			System.out.println("<way id=\""+(id--) +"\" >");
+//			System.out.println("<nd ref=\"" + (id +3)+"\" />");
+//			System.out.println("<nd ref=\"" + (id +2)+"\" />");
+//			System.out.println("<tag k=\"man_made\" v=\"cutline\"/>");
+//			System.out.println("</way>");
+//			System.out.println();
+		}
 		for(int k = 0; k < result.size() - d; k+=d){
 			RouteSegmentResult res1 = result.get(k);
 			RouteSegmentResult res2 = result.get(k + d);
