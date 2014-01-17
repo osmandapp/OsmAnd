@@ -149,6 +149,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 								}
 								break;
 							case TextToSpeech.LANG_AVAILABLE:
+							case TextToSpeech.LANG_COUNTRY_AVAILABLE:
+							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
 								mTts.setLanguage(new Locale(language));
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
