@@ -238,7 +238,7 @@
   <string name="search_position_current_location">Huidige positie…</string>
   <string name="search_position_map_view">Laatste kaartweergave</string>
   <string name="select_search_position">Zoek in de buurt van:</string>
-  <string name="context_menu_item_search">Zoek dichtbij hier</string>
+  <string name="context_menu_item_search">Zoek hier dichtbij</string>
   <string name="tip_recent_changes_0_6_7_t">Recent wijzigingen for 0.6.7:
 		\n\t- Offline gegevensmanager (download, verwijder, activeer / deactiveer offline gegevens direct vanuit OsmAnd)
 		\n\t- Favoriete punten en groepen (categoriseer, verwijder, beheer favorieten)
@@ -384,10 +384,12 @@
   <string name="tip_app_mode">Gebruiksprofiel</string>
   
   <string name="tip_navigation">Navigatie</string>
-  <string name="tip_navigation_t">\tVoor het starten van navigatie moet je een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Aanwijzingen\' en kies het type navigatie.
+  <string name="tip_navigation_t">Voor het starten van navigatie moet je een bestemming kiezen. Doe dit door een locatie vast te houden (klik daarna op de omschrijving en selecteer \'Als bestemming instellen\'), of door te kiezen voor \'Aanwijzingen\' bij een zoekopdracht of favorietenlijst.
+		\n\nDe bestemming is gemarkeerd als een oranje vlag op de kaart en OsmAnd toont de afstand en de route erheen (oranje driehoeken)
+		…
 	</string>
   <string name="tip_search">Zoeken</string>
-  <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' → \'Zoek dichtbij hier\'), of met het zoekscherm met \'Menu\' → \'Zoeken\'.
+  <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een locatie (\'Kaartcontextmenu\' → \'Zoek hier dichtbij\'), of met het zoekscherm met \'Menu\' → \'Zoeken\'.
 		\n\nOp het zoekscherm kan je zoeken:
 		\n\t* op adres
 		\n\t* op coördinaten
@@ -458,7 +460,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="poi_filter_car_aid">Auto hulp</string>
   <string name="poi_filter_closest_poi">Interessepunten dichtbij</string>
   <string name="poi_filter_custom_filter">Eigen filter</string>
-  <string name="poi_filter_food_shop">Eten en drinken</string>
+  <string name="poi_filter_food_shop">Eten en drinken (winkel)</string>
   <string name="poi_filter_for_tourists">Voor toeristen</string>
   <string name="poi_filter_fuel">Brandstof</string>
   <string name="poi_filter_namefinder">Online Namenzoeker</string>
@@ -468,9 +470,9 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="use_osmand_routing_service">OsmAnd routing &gt;20km</string>
   <string name="use_osmand_routing_service_descr">Gebruik OsmAnd offline routing voor lange afstanden (&gt; 20 km, experimenteel)</string>
   <string name="osmand_routing_experimental">OsmAnd offline routing is een experimentele functie en werkt niet voor afstanden van meer dan ongeveer 20 km.\n\nRouting service is tijdelijk omgeschakeld naar online CloudMade.</string>
-  <string name="specified_dir_doesnt_exist">Kan de opgegeven directory niet vinden.</string>
-  <string name="application_dir">Opslagdirectory</string>
-  <string name="application_dir_change_warning">Wijziging van de opslagdirectory verplaatst of verwijdert de gegevens niet. Dit moet je afzonderlijk en buiten OsmAnd doen. Toch doorgaan?</string>
+  <string name="specified_dir_doesnt_exist">Kan de opgegeven map niet vinden.</string>
+  <string name="application_dir">Opslagmap</string>
+  <string name="application_dir_change_warning">Wijziging van de opslagmap verplaatst of verwijdert de gegevens niet. Dit moet je afzonderlijk en buiten OsmAnd doen. Toch doorgaan?</string>
   <string name="osmand_net_previously_installed">Een oudere OsmAnd versie is al geïnstalleerd. Alle offline gegevens blijven werken in het nieuwe programma, maar Favorieten moeten worden geëxporteerd in de oude versie en dan worden geïmporteerd met de nieuwe.</string>
   <string name="build_installed">Versie {0} succesvol geïnstalleerd ({1}).</string>
   <string name="downloading_build">Downloaden versie…</string>
@@ -662,7 +664,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="route_general_information">Totale afstand %1$s, reistijd %2$d u %3$d m.</string>
   <string name="router_service_descr">Kies een online of offline routeberekening</string>
   <string name="router_service">Routeberekening</string>
-  <string name="sd_dir_not_accessible">Opslagdirectory op SD kaart niet toegankelijk</string>
+  <string name="sd_dir_not_accessible">Opslagmap op SD kaart niet toegankelijk</string>
   <string name="download_question">Download {0} - {1} ?</string>
   <string name="download_question_exist">Offline gegevens voor {0} bestaan al ({1}). Wil je deze bijwerken ({2})?</string>
   <string name="address">Adres</string>
@@ -957,7 +959,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="osmand_parking_am">\'s-ochtends</string>
   <string name="osmand_parking_position_name">Parkeerplek</string>
   <string name="osmand_parking_plugin_description">Met deze plugin kan je onthouden waar je auto geparkeerd staat.</string>
-  <string name="osmand_parking_plugin_name">Parkeerpositie</string>
+  <string name="osmand_parking_plugin_name">Parkeerpositie plugin</string>
   <string name="context_menu_item_add_parking_point">Markeer als parkeerpositie</string>
   <string name="context_menu_item_delete_parking_point">Verwijder de parkeerpositie</string>
   <string name="starting_point_too_far">Startpunt te ver van de dichtstbijzijnde weg.</string>
@@ -1608,4 +1610,6 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="app_modes_choose_descr">Kies de profielen, die je in Osmand wilt gebruiken</string>
     <string name="app_modes_choose">Toepassingsprofielen</string>
 	<string name="amenity_type_seamark">boei / baken</string>
+    <string name="osmodroid_seek">Zoek object</string>
+    <string name="osmodroid_unseek">Stop het zoeken naar object</string>
     </resources>
