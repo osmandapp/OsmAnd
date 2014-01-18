@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
 	<string name="map_widget_monitoring_services">Loggingstjenester</string>
 	<string name="no_route">Ingen rute</string>
-	<string name="delete_target_point">Fjern målpunkt</string>
-	<string name="target_point">Målpunkt %1$s</string>
+	<string name="delete_target_point">Fjern rutepunkt</string>
+	<string name="target_point">Rutepunkt %1$s</string>
     <string name="intermediate_point">Rutepunkt %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Sett siste målpunkt</string>
-    <string name="context_menu_item_first_intermediate_point">Sett første målpunkt</string>
+    <string name="context_menu_item_last_intermediate_point">Sett som siste rutepunkt</string>
+    <string name="context_menu_item_first_intermediate_point">Sett som første rutepunkt</string>
     <string name="add_as_last_destination_point">Legg til som siste rutepunkt</string>
     <string name="add_as_first_destination_point">Legg til som første rutepunkt</string>
     <string name="replace_destination_point">Erstatt reisemålpunkt</string>
     <string name="new_destination_point_dialog">Du har allerede satt reisemålpunkt.</string>
-    <string name="target_points">Mål</string>
+    <string name="target_points">Rutepunkter</string>
     <string name="intermediate_point_too_far">Rutepunkt %1$s for langt fra nærmeste vei.</string>
     <string name="arrived_at_intermediate_point">Du har kommet til ditt rutepunkt</string>
-    <string name="context_menu_item_intermediate_point">Legg til rutepunkt</string>
+    <string name="context_menu_item_intermediate_point">Legg til som rutepunkt</string>
     <string name="map_widget_intermediate_distance">Rutepunkt</string>
     <string name="ending_point_too_far">Sluttpunkt for langt fra nærmeste vei.</string>
     <string name="btn_add_tag">Legg til merke</string>
@@ -34,7 +34,7 @@
 	<string name="poi_filter_for_tourists">For turister</string>
 	<string name="poi_filter_fuel">Drivstoff</string>
 	<string name="show_warnings_title">Vis alarmer…</string>
-	<string name="show_warnings_descr">Vis fartsgrenser, fotobokser, fartsdumper og andre advarsler</string>
+	<string name="show_warnings_descr">Still inn trafikkadvarsler (fartsgrenser, tvungne stopp, fartsdumper), fotoboksadvarsler og kjørefeltinformasjon</string>
 	<string name="use_compass_navigation_descr">Bruk kompass hvis det ikke er mulig med annen retningsfastsettelse</string>
 	<string name="use_compass_navigation">Bruk kompass</string>
 	<string name="avoid_motorway">Unngå motorveier</string>
@@ -645,25 +645,25 @@
 	<string name="prefer_in_routing_title">Foretrekk …</string>
 	<string name="prefer_in_routing_descr">Foretrekk motorveier</string>
     <string name="max_speed_none">ingen</string>
-    <string name="choose_osmand_theme_descr">Vel tema for programmet</string>
+    <string name="choose_osmand_theme_descr">Velg programtema</string>
     <string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa og Asia</string>
 	<string name="driving_region_uk">England, India, Australia og andre</string>
-	<string name="driving_region_descr">Velg region for bilkjøring: USA, England, Asia, eller andre</string>
+	<string name="driving_region_descr">Velg region for bilkjøring: USA, Europa, Storbritannia, Asia og andre</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region">Region for bilkjøring</string>
 	<string name="osmodroid_mode_on">Stopp OsMoDroid</string>    
     <string name="osmodroid_mode_off">Start OsMoDroid</string>
     <string name="announce_gpx_waypoints">Fortell om GPX-rutepunkter</string>
     <string name="speak_title">Les opp…</string>
-	<string name="speak_descr">Konfigurér til å lese opp gatenavn, trafikkadvarsler (fartsdumper, etc.), fotoradaradvarsler, fartsgrenser</string>
+	<string name="speak_descr">Still inn for å lese opp gatenavn, trafikkadvarsler (f.eks. fartsdumper), fotoboksadvarsler, fartsgrenser</string>
 	<string name="speak_street_names">Les opp gatenavn (TTS)</string>
     <string name="speak_speed_limit">Informer om fartsgrense</string>
-    <string name="speak_cameras">Informer om Radarkameraer</string>
+    <string name="speak_cameras">Informer om fotobokser</string>
 	<string name="speak_traffic_warnings">Les opp trafikkmeldinger</string>
     <string name="tip_recent_changes_1_5_t">Endringer i 1.5:↵
-→\n\t* Stemmevarslinger om fartsgrenser og radarkameraer
+→\n\t* Stemmevarslinger om fartsgrenser og fotobokser
 ↵
 →\n\t* Flere muligheter for opplesning (gatenavn blir lest opp)
 ↵
@@ -671,7 +671,7 @@
 ↵
 →\n\t* Flere endringer i brukergrensesnittet
 ↵
-→\n\t* Feilrettinger i avstandsvisningen, GPX-analyse, håndtering av rutepunkter, planleggingsmodulen, opplasting til OSM, https håndtering
+→\n\t* Feilrettinger i avstandsvisningen, GPX-analyse, håndtering av rutepunkter, planleggingsmodulen, opplasting til OSM, https-håndtering
     </string>
     <string name="osb_author_or_password_not_specified">Oppgi OSM brukernavn og passord i Innstillinger</string>
     <string name="clear_intermediate_points">Slett mellomliggende rutepunkter</string>
@@ -680,7 +680,7 @@
     <string name="context_menu_item_directions_to">Kjøreveiledning til</string>
     <string name="context_menu_item_directions_from">Kjøreveiledning fra</string>
     <string name="route_descr_map_location">Kart: </string>
-    <string name="route_descr_lat_lon">Hø %1$.3f, Le %2$.3f</string>
+    <string name="route_descr_lat_lon">Br %1$.3f, Le %2$.3f</string>
     <string name="route_descr_current_location">Aktuell posisjon</string>
     <string name="route_to">Til:</string>
     <string name="route_via">Via:</string>
@@ -698,11 +698,37 @@
     <string name="tips_and_tricks">Tips</string>
     <string name="local_index_tile_data_downloadable">Nedlastbar: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Største zoom: %1$s</string>
-    <string name="local_index_tile_data_minzoom">Minste zoom: %1$s</string>
+    <string name="local_index_tile_data_minzoom">Minste zoomnivå: %1$s</string>
     <string name="edit_tilesource_maxzoom">Maks-zoom</string>
     <string name="edit_tilesource_minzoom">Min-zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Velg eksisterende …</string>
     <string name="edit_tilesource_name">Navn</string>
     <string name="maps_define_edit">Definer/rediger …</string>
+	<string name="route_is_too_long">Ruten er muligens for lang til å bli beregnet med OsmAnd offline ruteberegner.
+	Beregning er vanligvis mulig mellom punkter opp til 200km fra hverandre. Vennligst legg til ett eller fler mellomliggende punkter for å beregne ruten.</string>
+	<string name="auto_zoom_none">Ingen autozoom</string>
+	<string name="auto_zoom_close">Nært hold</string>
+	<string name="auto_zoom_far">Middels hold</string>
+	<string name="auto_zoom_farthest">Langt hold</string>
+	<string name="map_magnifier">Kartforstørrelse</string>
+	<string name="base_world_map">Grunnkart verden</string>
+	<string name="amenity_type_seamark">Sjømerke</string>
+    <string name="app_modes_choose">Programprofiler</string>
+	<string name="map_widget_map_rendering">Kartopptegning:</string>
+    <string name="app_mode_hiking">Vandring</string>
+    <string name="app_mode_motorcycle">Motorsykkel</string>
+    <string name="app_mode_boat">Båt</string>
+    <string name="app_mode_aircraft">Fly</string>
+    <string name="tip_faq_t">Ofte stilte spørsmål finnes på https://code.google.com/p/osmand/wiki/FAQ</string>
+    <string name="tip_faq">Ofte stilte spørsmål</string>
+    <string name="local_osm_changes_delete_all_confirm">Er du sikker på at du vil slette %1$d OSM endringer?</string>
+    <string name="local_osm_changes_delete_all">Slett alle</string>
+    <string name="animate_routing_route_not_calculated">Beregn ruten først</string>
+    <string name="animate_routing_route">Simuler med den beregnede ruten </string>
+    <string name="animate_routing_gpx">Simuler med et GPX-spor</string>
+    <string name="remember_choice">Husk mitt valg</string>
+    <string name="gps_status_eclipsim">GPS-status</string>
+    <string name="default_and">og</string>
+    <string name="default_or">eller</string>
 	</resources>
