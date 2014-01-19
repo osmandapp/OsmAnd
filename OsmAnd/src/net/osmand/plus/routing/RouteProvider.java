@@ -44,6 +44,7 @@ import net.osmand.plus.Version;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
@@ -423,7 +424,9 @@ public class RouteProvider {
 			// native use
 			cf.attributes.put("heuristicCoefficient", cf.heuristicCoefficient+"");
 		}
-		RoutingContext ctx = new RoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files);
+		RoutingContext ctx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files,
+				params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) ?
+				RouteCalculationMode.COMPLEX : RouteCalculationMode.NORMAL);
 		ctx.calculationProgress = params.calculationProgress;
 		if(params.previousToRecalculate != null) {
 			ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
@@ -435,7 +438,8 @@ public class RouteProvider {
 			inters  = new ArrayList<LatLon>(params.intermediates);
 		}
 		try {
-			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en, inters, params.leftSide);
+			ctx.leftSideNavigation = params.leftSide;
+			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en, inters);
 			if(result == null || result.isEmpty()) {
 				if(ctx.calculationProgress.segmentNotFound == 0) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.starting_point_too_far));

@@ -32,6 +32,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
+import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ public class RoutingContext {
 	public static boolean USE_BORDER_LINES = false;
 	// Final context variables
 	public final RoutingConfiguration config;
-	private final boolean useBaseMap;
+	public final RouteCalculationMode calculationMode;
 	public final NativeLibrary nativeLib;
 	public final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
@@ -64,8 +65,9 @@ public class RoutingContext {
 	public int targetY;
 	
 	public RouteCalculationProgress calculationProgress;
+	public boolean leftSideNavigation;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
-	public BaseRouteResult baseRouteResult;
+	public PrecalculatedRouteDirection precalculatedRouteDirection;
 
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();
@@ -112,11 +114,11 @@ public class RoutingContext {
 
 
 	
-	
 	public RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
 		this.map.putAll(cp.map);
-		this.useBaseMap = cp.useBaseMap;
+		this.calculationMode = cp.calculationMode;
+		this.leftSideNavigation = cp.leftSideNavigation;
 		this.reverseMap.putAll(cp.reverseMap);
 		this.nativeLib = cp.nativeLib;
 		// copy local data and clear caches
@@ -138,16 +140,16 @@ public class RoutingContext {
 	}
 	
 	public RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map) {
-		this(config, nativeLibrary, map, false);
+		this(config, nativeLibrary, map, null);
 	}
 	
-	public RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, boolean useBasemap) {
-		this.useBaseMap = useBasemap;
+	public RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, RouteCalculationMode calcMode) {
+		this.calculationMode = calcMode;
 		for (BinaryMapIndexReader mr : map) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
 			List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
 			for (RouteRegion r : rr) {
-				List<RouteSubregion> subregs = useBaseMap ? r.getBaseSubregions() :
+				List<RouteSubregion> subregs = calcMode == RouteCalculationMode.BASE ? r.getBaseSubregions() :
 					r.getSubregions();
 				for (RouteSubregion rs : subregs) {
 					subregions.add(new RouteSubregion(rs));
@@ -916,6 +918,10 @@ public class RoutingContext {
 			}
 			return borderLine < o.borderLine? -1 : 1;
 		}
+	}
+
+	public BinaryMapIndexReader[] getMaps() {
+		return map.keySet().toArray(new BinaryMapIndexReader[map.size()]);
 	}
 
 

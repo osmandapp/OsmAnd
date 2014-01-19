@@ -29,7 +29,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
@@ -129,7 +128,6 @@ public class NavigateAction {
 		
 		final View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
 		
-		final CheckBox nonoptimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
 		LinearLayout topLayout = (LinearLayout) view.findViewById(R.id.LinearLayout);
 		final ToggleButton[] buttons = createToggles(values, topLayout, mapActivity);
 		
@@ -159,13 +157,13 @@ public class NavigateAction {
 				final ApplicationMode buttonAppMode = values.get(i);
 				b.setChecked(appMode == buttonAppMode);
 				if(b.isChecked()) {
-					nonoptimal.setChecked(!settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
+					// update application mode controls
 				}
 				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						if (isChecked) {
-							nonoptimal.setChecked(!settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
+							// update application mode controls
 							updateTooLongDistance(current != null ? current : mapView, targets, view, buttonAppMode);
 							for (int j = 0; j < buttons.length; j++) {
 								if (buttons[j] != null) {
@@ -215,7 +213,7 @@ public class NavigateAction {
 
 				ApplicationMode mode = getAppMode(buttons, settings, values);
 				app.getRoutingHelper().setAppMode(mode);
-				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, !nonoptimal.isChecked());
+				// save application mode controls
 				settings.FOLLOW_THE_ROUTE.set(false);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				app.getRoutingHelper().setFollowingMode(false);
@@ -247,7 +245,7 @@ public class NavigateAction {
 					AccessibleToast.makeText(mapActivity, R.string.route_updated_loc_found, Toast.LENGTH_LONG).show();
 				}
 				ApplicationMode mode = getAppMode(buttons, settings, values);
-				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, !nonoptimal.isChecked());
+				// save application mode controls (optimal)
 				dialog.dismiss();
 				mapActivity.followRoute(mode, targets.getPointToNavigate(), targets.getIntermediatePoints(), 
 						from, null);

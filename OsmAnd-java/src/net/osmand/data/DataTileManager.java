@@ -74,11 +74,15 @@ public class DataTileManager<T> {
 	}
 	
 	public List<T> getObjects(int leftX31, int topY31, int rightX31, int bottomY31) {
+		List<T> result = new ArrayList<T>();
+		return getObjects(leftX31, topY31, rightX31, bottomY31, result);
+	}
+	
+	public List<T> getObjects(int leftX31, int topY31, int rightX31, int bottomY31, List<T> result ) {
 		int tileXUp = leftX31 >> (31 - zoom);
 		int tileYUp = topY31 >> (31 - zoom);
 		int tileXDown = (rightX31 >> (31 - zoom)) + 1;
 		int tileYDown = (bottomY31 >> (31 - zoom)) + 1;
-		List<T> result = new ArrayList<T>();
 		for (int i = tileXUp; i <= tileXDown; i++) {
 			for (int j = tileYUp; j <= tileYDown; j++) {
 				putObjects(i, j, result);

@@ -80,12 +80,7 @@
                     android:textSize="18sp" >
                 </Spinner>
             </LinearLayout>
-
-            <CheckBox
-                android:id="@+id/OptimalCheckox"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/non_optimal_route_calculation" />
+            
         </LinearLayout>
     </ScrollView>
 

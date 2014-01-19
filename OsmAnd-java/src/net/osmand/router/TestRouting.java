@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.NativeLibrary;
@@ -32,10 +31,6 @@ public class TestRouting {
 	public static boolean oldRouting = false;
 	private static String vehicle = "car";
 	
-	
-	public static Iterator getIterator(Iterable it){
-		return it.iterator();
-	}
 	
 	public static class Parameters {
 		public File obfDir;
@@ -209,7 +204,7 @@ public class TestRouting {
 		}
 		RoutingConfiguration rconfig = config.build(vehicle, MEMORY_TEST_LIMIT);
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(oldRouting);
-		RoutingContext ctx = new RoutingContext(rconfig, 
+		RoutingContext ctx = router.buildRoutingContext(rconfig, 
 				lib, rs);
 		String skip = parser.getAttributeValue("", "skip_comment");
 		if (skip != null && skip.length() > 0) {
@@ -224,7 +219,7 @@ public class TestRouting {
 		double endLon = Double.parseDouble(parser.getAttributeValue("", "target_lon"));
 		LatLon start = new LatLon(startLat, startLon);
 		LatLon end = new LatLon(endLat, endLon);
-		List<RouteSegmentResult> route = router.searchRoute(ctx, start, end, null, false);
+		List<RouteSegmentResult> route = router.searchRoute(ctx, start, end, null);
 		final float calcRoutingTime = ctx.routingTime;
 		float completeTime = 0;
 		float completeDistance = 0;
@@ -272,9 +267,8 @@ public class TestRouting {
 
 	private static void runTestSpecialTest(NativeLibrary lib, BinaryMapIndexReader[] rs, RoutingConfiguration rconfig, RoutePlannerFrontEnd router,
 			LatLon start, LatLon end, final float calcRoutingTime, String msg) throws IOException, InterruptedException {
-		RoutingContext ctx;
-		ctx = new RoutingContext(rconfig, lib, rs);
-		router.searchRoute(ctx, start, end, null, false);
+		RoutingContext ctx = router.buildRoutingContext(rconfig, lib, rs);
+		router.searchRoute(ctx, start, end, null);
 		FinalRouteSegment frs = ctx.finalRouteSegment;
 		if(frs == null || !equalPercent(calcRoutingTime, frs.distanceFromStart, 0.5f)){
 			throw new IllegalArgumentException(MessageFormat.format(msg, calcRoutingTime+"",frs == null?"0":frs.distanceFromStart+""));
@@ -315,7 +309,7 @@ public class TestRouting {
 		Builder config = RoutingConfiguration.getDefault();
 		RoutingConfiguration rconfig = config.build(vehicle, MEMORY_TEST_LIMIT);
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(oldRouting);
-		RoutingContext ctx = new RoutingContext(rconfig, lib, rs);
+		RoutingContext ctx = router.buildRoutingContext(rconfig, lib, rs);
 		RouteSegment startSegment = router.findRouteSegment(startLat, startLon, ctx);
 		RouteSegment endSegment = router.findRouteSegment(endLat, endLon, ctx);
 		if(startSegment == null){
@@ -325,9 +319,9 @@ public class TestRouting {
 			throw new IllegalArgumentException("End segment is not found ");
 		}
 		// Clear ctx
-		ctx = new RoutingContext(rconfig, lib, rs);
+		ctx = router.buildRoutingContext(rconfig, lib, rs);
 		List<RouteSegmentResult> route = router.searchRoute(ctx,
-				new LatLon(startLat, startLon), new LatLon(endLat, endLon), null,  false);
+				new LatLon(startLat, startLon), new LatLon(endLat, endLon), null);
 		System.out.println("Route is " + route.size() + " segments " + (System.currentTimeMillis() - ts) + " ms ");
 	}
 
