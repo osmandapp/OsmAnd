@@ -1,11 +1,6 @@
 package net.osmand.util;
 
 import gnu.trove.list.TLongList;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import net.osmand.data.LatLon;
 
 public class MapAlgorithms {

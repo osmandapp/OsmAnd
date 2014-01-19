@@ -17,11 +17,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.IdTable;
-import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox;
-import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine;
-import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine.Builder;
-import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint;
-import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
@@ -44,7 +39,6 @@ public class BinaryMapRouteReaderAdapter {
 
         String condition = "";
         OpeningHoursParser.OpeningHours hours = null;
-        int intValue;
         float floatValue;
     }
 	
@@ -789,9 +783,6 @@ public class BinaryMapRouteReaderAdapter {
 		}
 		return toLoad;
 	}
-	
-	
-	
 	
 
 	public List<RouteSubregion> loadInteresectedPoints(SearchRequest<RouteDataObject> req, List<RouteSubregion> list, 
