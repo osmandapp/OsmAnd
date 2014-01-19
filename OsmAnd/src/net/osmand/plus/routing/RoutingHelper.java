@@ -761,7 +761,6 @@ public class RoutingHelper {
 				params.previousToRecalculate = previousRoute;
 				params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 				params.preciseRouting = settings.PRECISE_ROUTING_MODE.getModeValue(mode);
-				params.optimal = settings.OPTIMAL_ROUTE_MODE.getModeValue(mode);
 				params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
 				params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 				params.mode = mode;

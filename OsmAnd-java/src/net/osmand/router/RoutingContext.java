@@ -4,13 +4,11 @@ package net.osmand.router;
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.map.TLongObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -19,21 +17,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.osmand.PlatformUtil;
 import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.NativeRouteSearchResult;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
-import net.osmand.binary.RouteDataBorderLinePoint;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -47,7 +43,6 @@ public class RoutingContext {
 	public static final int OPTION_NO_LOAD = 0;
 	public static final int OPTION_SMART_LOAD = 1;
 	public static final int OPTION_IN_MEMORY_LOAD = 2;
-	public static boolean USE_BORDER_LINES = false;
 	// Final context variables
 	public final RoutingConfiguration config;
 	public final RouteCalculationMode calculationMode;
@@ -72,11 +67,6 @@ public class RoutingContext {
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();
 	TLongObjectHashMap<List<RouteDataObject>> tileRoutes = new TLongObjectHashMap<List<RouteDataObject>>();
-	
-	RouteDataBorderLine[] borderLines = new RouteDataBorderLine[0];
-	int[] borderLineCoordinates = new int[0];
-	int leftBorderBoundary;
-	int rightBorderBoundary;
 	
 	// Needs to be a sorted array list . Another option to use hashmap but it will be more memory expensive
 	List<RoutingSubregionTile> subregionTiles = new ArrayList<RoutingSubregionTile>();
@@ -290,105 +280,8 @@ public class RoutingContext {
 		System.out.println("Size of data objects " + dataObjects.size());
 	}
 	
-	public void loadBorderPoints() throws IOException {
-		Iterator<Entry<RouteRegion, BinaryMapIndexReader>> it = reverseMap.entrySet().iterator();
-		int sleft = Math.min(startX, targetX);
-		int sright= Math.max(startX, targetX);
-		int stop = Math.min(startY, targetY);
-		int sbottom= Math.max(startY, targetY);
-		// one tile of 12th zoom around (?)
-		int zoomAround = 10;
-		int distAround = 1 << (31 - zoomAround);
-		leftBorderBoundary = sleft - distAround;
-		rightBorderBoundary = sright + distAround;
-		SearchRequest<RouteDataBorderLinePoint> req = BinaryMapIndexReader.buildSearchRouteBorderRequest(sleft, sright, stop, sbottom);
-		while(it.hasNext()) {
-			Entry<RouteRegion, BinaryMapIndexReader> entry = it.next();
-			entry.getValue().searchBorderPoints(req, entry.getKey());
-		}
-		TIntObjectHashMap<RouteDataBorderLine> lines = new TIntObjectHashMap<RoutingContext.RouteDataBorderLine>();
-		for(RouteDataBorderLinePoint p : req.getSearchResults()) {
-			if(config.router.acceptLine(p) && p.x > leftBorderBoundary && p.x < rightBorderBoundary) {
-				if(!lines.containsKey(p.y)) {
-					RouteDataBorderLine line = new RouteDataBorderLine(p.y);
-					lines.put(p.y, line);
-					RouteDataBorderLinePoint lft = new RouteDataBorderLinePoint(p.region);
-					lft.y = p.y;
-					lft.id = Long.MIN_VALUE;
-					lft.x = leftBorderBoundary;
-					line.borderPoints.add(lft);
-					RouteDataBorderLinePoint rht = new RouteDataBorderLinePoint(p.region);
-					rht.y = p.y;
-					rht.id = Long.MIN_VALUE;
-					rht.x = rightBorderBoundary;
-					line.borderPoints.add(rht);
-				}
-				lines.get(p.y).borderPoints.add(p);
-			}
-		}
-		borderLines =  lines.values(new RouteDataBorderLine[lines.size()]);
-		Arrays.sort(borderLines);
-		borderLineCoordinates = new int[borderLines.length];
-		for(int i=0; i<borderLineCoordinates.length; i++) {
-			borderLineCoordinates[i] = borderLines[i].borderLine;
-			// FIXME borders approach
-			// not less then 14th zoom
-			if(i > 0 && borderLineCoordinates[i - 1] >> 17 == borderLineCoordinates[i] >> 17) {
-				throw new IllegalStateException();
-			}
-			System.out.println("Line " + (borderLineCoordinates[i] >> 17) +
-					" points " + borderLines[i].borderPoints.size() /* + " " +borderLines[i].borderPoints*/);
-		}
-		
-		updateDistanceForBorderPoints(startX, startY, true);
-		updateDistanceForBorderPoints(targetX, targetY, false);
-		
-	}
-
-	protected void updateDistanceForBorderPoints(int sX, int sy, boolean distanceToStart) {
-		boolean plus = borderLines.length > 0 && sy < borderLines[0].borderLine;
-		if(borderLines.length > 0 && !plus && sy< borderLines[borderLines.length - 1].borderLine){
-			throw new IllegalStateException();
-		}
-		// calculate min distance to start
-		for(int i=0; i<borderLines.length; i++) {
-			int ind = plus ? i : borderLines.length - i - 1;
-			for(RouteDataBorderLinePoint ps : borderLines[ind].borderPoints){
-				float res = (float) Math.sqrt(MapUtils.squareDist31TileMetric(sX, sy, ps.x, ps.y)) ; 
-				if(i > 0){
-					int prevInd = plus ? i - 1 : borderLines.length - i;
-					double minDist = 0;
-					for(RouteDataBorderLinePoint prevs : borderLines[prevInd].borderPoints){
-						double d = Math.sqrt(MapUtils.squareDist31TileMetric(prevs.x, prevs.y, ps.x, ps.y)) + 
-								(distanceToStart? prevs.distanceToStartPoint :  prevs.distanceToEndPoint);
-						if(minDist == 0 || d < minDist) {
-							minDist = d;
-						}
-					}
-					if (minDist > 0) {
-						System.out.println("Border line " + i + " exp="+res + " min="+ minDist);
-						res = (float) minDist;
-					}
-				}
-				if(distanceToStart){
-					ps.distanceToStartPoint = res;
-				} else {
-					ps.distanceToEndPoint = res;
-				}
-			}
-			
-		}
-	}
-
-	// returns from 0 to borderLineCoordinates.length inclusive
-	public int searchBorderLineIndex(int y) {
-		int k = Arrays.binarySearch(borderLineCoordinates, y);
-		if( k < 0) {
-			k = -(k + 1);
-		}
-		return k;
-	}
 	
+
 	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit) {
 		long tileId = getRoutingTile(x31, y31, memoryLimit, OPTION_SMART_LOAD);
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
@@ -902,24 +795,6 @@ public class RoutingContext {
 		
 	}
 	
-	protected static class RouteDataBorderLine implements Comparable<RouteDataBorderLine>{
-		final List<RouteDataBorderLinePoint> borderPoints = new ArrayList<RouteDataBorderLinePoint>();
-		final int borderLine;
-		
-		public RouteDataBorderLine(int borderLine) {
-			this.borderLine = borderLine;
-		}
-
-
-		@Override
-		public int compareTo(RouteDataBorderLine o) {
-			if(o.borderLine == borderLine) {
-				return 0;
-			}
-			return borderLine < o.borderLine? -1 : 1;
-		}
-	}
-
 	public BinaryMapIndexReader[] getMaps() {
 		return map.keySet().toArray(new BinaryMapIndexReader[map.size()]);
 	}

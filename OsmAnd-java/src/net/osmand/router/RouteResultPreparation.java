@@ -13,6 +13,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.util.MapUtils;
 
 public class RouteResultPreparation {
@@ -166,7 +167,7 @@ public class RouteResultPreparation {
 				RouteSegmentResult res = new RouteSegmentResult(segment.road, parentSegmentStart, segment.getSegmentStart());
 				parentSegmentStart = segment.getParentSegmentEnd();
 				segment = segment.getParentRoute();
-				addRouteSegmentToResult(result, res, false);
+				addRouteSegmentToResult(ctx, result, res, false);
 			}
 			// reverse it just to attach good direction roads
 			Collections.reverse(result);
@@ -179,7 +180,7 @@ public class RouteResultPreparation {
 				parentSegmentEnd = segment.getParentSegmentEnd();
 				segment = segment.getParentRoute();
 				// happens in smart recalculation
-				addRouteSegmentToResult(result, res, true);
+				addRouteSegmentToResult(ctx, result, res, true);
 			}
 			Collections.reverse(result);
 
@@ -187,11 +188,11 @@ public class RouteResultPreparation {
 		return result;
 	}
 	
-	private void addRouteSegmentToResult(List<RouteSegmentResult> result, RouteSegmentResult res, boolean reverse) {
+	private void addRouteSegmentToResult(RoutingContext ctx, List<RouteSegmentResult> result, RouteSegmentResult res, boolean reverse) {
 		if (res.getStartPointIndex() != res.getEndPointIndex()) {
 			if (result.size() > 0) {
 				RouteSegmentResult last = result.get(result.size() - 1);
-				if (last.getObject().id == res.getObject().id) {
+				if (last.getObject().id == res.getObject().id && ctx.calculationMode != RouteCalculationMode.BASE) {
 					if (combineTwoSegmentResult(res, last, reverse)) {
 						return;
 					}

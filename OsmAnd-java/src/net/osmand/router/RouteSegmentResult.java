@@ -168,6 +168,10 @@ public class RouteSegmentResult {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	@Override
+	public String toString() {
+		return object.toString() + " : " + startPointIndex + "-" + endPointIndex;
+	}
 	
 }

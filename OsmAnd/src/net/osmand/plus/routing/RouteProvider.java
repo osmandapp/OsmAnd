@@ -419,14 +419,10 @@ public class RouteProvider {
 		RoutingConfiguration cf = config.build(p.name().toLowerCase(), params.start.hasBearing() ? 
 				params.start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, specialization);
-		if(!params.optimal){
-			cf.heuristicCoefficient *= 1.5;
-			// native use
-			cf.attributes.put("heuristicCoefficient", cf.heuristicCoefficient+"");
-		}
 		RoutingContext ctx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files,
-				params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) ?
-				RouteCalculationMode.COMPLEX : RouteCalculationMode.NORMAL);
+				// TODO introduce
+				/*params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) ?
+				RouteCalculationMode.COMPLEX : */RouteCalculationMode.NORMAL);
 		ctx.calculationProgress = params.calculationProgress;
 		if(params.previousToRecalculate != null) {
 			ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();

@@ -90,10 +90,12 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress = new RouteCalculationProgress();
 		}
 		boolean intermediatesEmpty = intermediates == null || intermediates.isEmpty();
-		// TODO complex, progress, native, empty route, intermediates...
+		// TODO native, empty route, intermediates...
+		// + intermediates, + progress, +complex, 
 		PrecalculatedRouteDirection routeDirection = null;
-		if(ctx.calculationMode == RouteCalculationMode.COMPLEX && intermediatesEmpty) {
+		if(ctx.calculationMode == RouteCalculationMode.COMPLEX) {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
+			nctx.calculationProgress = ctx.calculationProgress ;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
 			routeDirection = PrecalculatedRouteDirection.build(ls, 
 					5000, ctx.getRouter().getMaxDefaultSpeed() / 2);

@@ -22,7 +22,6 @@ public class RouteCalculationParams {
 	public GPXRouteParams gpxRoute;
 	public RouteCalculationResult previousToRecalculate;
 	public boolean fast;
-	public boolean optimal;
 	public boolean leftSide;
 	public RouteCalculationProgress calculationProgress;
 	public boolean preciseRouting;

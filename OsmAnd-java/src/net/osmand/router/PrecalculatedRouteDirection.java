@@ -17,8 +17,8 @@ public class PrecalculatedRouteDirection {
 	private float avgSpeed;
 	private float[] tms;
 	private static final int SHIFT = (1 << (31 - 18));
-	private static final int[] SHIFTS = new int[]{(1 << (31 - 17)), (1 << (31 - 15)), (1 << (31 - 13)), (1 << (31 - 12)), 
-		(1 << (31 - 11))};
+	private static final int[] SHIFTS = new int[]{1 << (31 - 17), 1 << (31 - 15), 1 << (31 - 13), 1 << (31 - 12), 
+		1 << (31 - 11), 1 << (31 - 9)};
 	
 	private List<Integer> cachedS = new ArrayList<Integer>();
 	private float[] ct1 = new float[2];
@@ -38,6 +38,7 @@ public class PrecalculatedRouteDirection {
 		for (int i = s1; i <= s2; i++) {
 			pointsX.add(parent.pointsX.get(i));
 			pointsY.add(parent.pointsY.get(i));
+			indexedPoints.registerObjectXY(parent.pointsX.get(i), parent.pointsY.get(i), pointsX.size() - 1);
 			tms[i - s1] = parent.tms[i] - parent.tms[s2];
 		}
 	}
@@ -143,7 +144,7 @@ public class PrecalculatedRouteDirection {
 	
 	public PrecalculatedRouteDirection adopt(RoutingContext ctx) {
 		int ind1 = getIndex(ctx.startX, ctx.startY, ct1);
-		int ind2 = getIndex(ctx.startX, ctx.startY, ct2);
+		int ind2 = getIndex(ctx.targetX, ctx.targetY, ct2);
 		if (ind1 < ind2) {
 			PrecalculatedRouteDirection routeDirection = new PrecalculatedRouteDirection(this, ind1, ind2);
 			routeDirection.preRegisterPoint(ctx.startX, ctx.startY);
