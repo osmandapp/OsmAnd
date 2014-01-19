@@ -14,7 +14,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataBorderLinePoint;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.router.RoutingContext.RoutingSubregionTile;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -82,12 +81,6 @@ public class BinaryRoutePlanner {
 			}
 			
 		}
-		if(ctx.precalculatedRouteDirection != null) {
-			ctx.precalculatedRouteDirection.prereg(ctx.startX, ctx.startY);
-			ctx.precalculatedRouteDirection.prereg(ctx.targetX, ctx.targetY);
-		}
-		
-		//newSearchRoute(ctx, start, end);
 
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new NonHeuristicSegmentsComparator();

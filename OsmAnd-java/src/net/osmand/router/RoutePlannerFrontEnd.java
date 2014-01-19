@@ -91,10 +91,11 @@ public class RoutePlannerFrontEnd {
 		}
 		boolean intermediatesEmpty = intermediates == null || intermediates.isEmpty();
 		// TODO complex, progress, native, empty route, intermediates...
+		PrecalculatedRouteDirection routeDirection = null;
 		if(ctx.calculationMode == RouteCalculationMode.COMPLEX && intermediatesEmpty) {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
-			ctx.precalculatedRouteDirection = PrecalculatedRouteDirection.build(ls, 
+			routeDirection = PrecalculatedRouteDirection.build(ls, 
 					5000, ctx.getRouter().getMaxDefaultSpeed() / 2);
 		}
 		// remove fast recalculation
@@ -103,6 +104,9 @@ public class RoutePlannerFrontEnd {
 			ctx.startY = MapUtils.get31TileNumberY(start.getLatitude());
 			ctx.targetX = MapUtils.get31TileNumberX(end.getLongitude());
 			ctx.targetY = MapUtils.get31TileNumberY(end.getLatitude());
+			if(routeDirection != null) {
+				ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
+			}
 			List<RouteSegmentResult> res = runNativeRouting(ctx);
 			if(res != null) {
 				new RouteResultPreparation().printResults(ctx, start, end, res);
@@ -124,7 +128,7 @@ public class RoutePlannerFrontEnd {
 		if(!addSegment(end, ctx, indexNotFound++, points)){
 			return null;
 		}
-		List<RouteSegmentResult> res = searchRoute(ctx, points);
+		List<RouteSegmentResult> res = searchRoute(ctx, points, routeDirection);
 		if(res != null) {
 			new RouteResultPreparation().printResults(ctx, start, end, res);
 		}
@@ -144,11 +148,15 @@ public class RoutePlannerFrontEnd {
 		
 	}
 	
-	private List<RouteSegmentResult> searchRouteInternalPrepare(final RoutingContext ctx, RouteSegment start, RouteSegment end) throws IOException, InterruptedException {
+	private List<RouteSegmentResult> searchRouteInternalPrepare(final RoutingContext ctx, RouteSegment start, RouteSegment end, 
+			PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
 		ctx.targetX = end.road.getPoint31XTile(end.getSegmentStart());
 		ctx.targetY = end.road.getPoint31YTile(end.getSegmentStart());
 		ctx.startX = start.road.getPoint31XTile(start.getSegmentStart());
 		ctx.startY = start.road.getPoint31YTile(start.getSegmentStart());
+		if(routeDirection != null) {
+			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
+		}
 		if (ctx.nativeLib != null && useOldVersion) {
 			return runNativeRouting(ctx);
 		} else {
@@ -190,7 +198,8 @@ public class RoutePlannerFrontEnd {
 	}
 	
 
-	private List<RouteSegmentResult> searchRoute(final RoutingContext ctx, List<RouteSegment> points) throws IOException, InterruptedException {
+	private List<RouteSegmentResult> searchRoute(final RoutingContext ctx, List<RouteSegment> points, PrecalculatedRouteDirection routeDirection) 
+			throws IOException, InterruptedException {
 		if(points.size() > 2) {
 			ArrayList<RouteSegmentResult> firstPartRecalculatedRoute = null;
 			ArrayList<RouteSegmentResult> restPartRecalculatedRoute = null;
@@ -222,7 +231,7 @@ public class RoutePlannerFrontEnd {
 				}
 				local.visitor = ctx.visitor;
 				local.calculationProgress = ctx.calculationProgress;
-				List<RouteSegmentResult> res = searchRouteInternalPrepare(local, points.get(i), points.get(i + 1));
+				List<RouteSegmentResult> res = searchRouteInternalPrepare(local, points.get(i), points.get(i + 1), routeDirection);
 
 				results.addAll(res);
 				ctx.distinctLoadedTiles += local.distinctLoadedTiles;
@@ -244,17 +253,18 @@ public class RoutePlannerFrontEnd {
 			ctx.unloadAllData();
 			return results;
 		}
-		return searchRoute(ctx, points.get(0), points.get(1));
+		return searchRoute(ctx, points.get(0), points.get(1), routeDirection);
 	}
 	
 	@SuppressWarnings("static-access")
-	private List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end) throws IOException, InterruptedException {
+	private List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, PrecalculatedRouteDirection routeDirection) 
+			throws IOException, InterruptedException {
 		if(ctx.SHOW_GC_SIZE){
 			long h1 = ctx.runGCUsedMemory();
 			float mb = (1 << 20);
 			log.warn("Used before routing " + h1 / mb+ " actual");
 		}
-		List<RouteSegmentResult> result = searchRouteInternalPrepare(ctx, start, end);
+		List<RouteSegmentResult> result = searchRouteInternalPrepare(ctx, start, end, routeDirection);
 		if (RoutingContext.SHOW_GC_SIZE) {
 			int sz = ctx.global.size;
 			log.warn("Subregion size " + ctx.subregionTiles.size() + " " + " tiles " + ctx.indexedSubregions.size());

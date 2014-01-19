@@ -15,7 +15,6 @@ public class PrecalculatedRouteDirection {
 	private TIntArrayList pointsX = new TIntArrayList();
 	private TIntArrayList pointsY = new TIntArrayList();
 	private float avgSpeed;
-	private float[] tmsReverse;
 	private float[] tms;
 	private static final int SHIFT = (1 << (31 - 18));
 	private static final int[] SHIFTS = new int[]{(1 << (31 - 17)), (1 << (31 - 15)), (1 << (31 - 13)), (1 << (31 - 12)), 
@@ -26,12 +25,21 @@ public class PrecalculatedRouteDirection {
 	private float[] ct2 = new float[2];
 	
 	private Map<Long, Integer> prereg = new TreeMap<Long, Integer>();
-	
 	private DataTileManager<Integer> indexedPoints = new DataTileManager<Integer>(17);
 	
 	private PrecalculatedRouteDirection(List<RouteSegmentResult> ls, float avgSpeed) {
 		this.avgSpeed = avgSpeed;
 		init(ls);
+	}
+	
+	private PrecalculatedRouteDirection(PrecalculatedRouteDirection parent, int s1, int s2) {
+		this.avgSpeed = parent.avgSpeed;
+		tms = new float[s2 - s1 + 1];
+		for (int i = s1; i <= s2; i++) {
+			pointsX.add(parent.pointsX.get(i));
+			pointsY.add(parent.pointsY.get(i));
+			tms[i - s1] = parent.tms[i] - parent.tms[s2];
+		}
 	}
 	
 	public static PrecalculatedRouteDirection build(List<RouteSegmentResult> ls, float cutoffDistance, float avgSpeed){
@@ -82,14 +90,10 @@ public class PrecalculatedRouteDirection {
 			}
 		}
 		tms = new float[times.size()];
-		tmsReverse = new float[times.size()];
-		float totInc = 0;
 		float totDec = totaltm;
 		for(int i = 0; i < times.size(); i++) {
-			totInc += times.get(i);
 			totDec -= times.get(i);
 			tms[i] = totDec;
-			tmsReverse[i] = totInc;
 		}
 		
 	}
@@ -136,8 +140,20 @@ public class PrecalculatedRouteDirection {
 		ct[1] = (float) (ds / avgSpeed);
 		return ind;
 	}
+	
+	public PrecalculatedRouteDirection adopt(RoutingContext ctx) {
+		int ind1 = getIndex(ctx.startX, ctx.startY, ct1);
+		int ind2 = getIndex(ctx.startX, ctx.startY, ct2);
+		if (ind1 < ind2) {
+			PrecalculatedRouteDirection routeDirection = new PrecalculatedRouteDirection(this, ind1, ind2);
+			routeDirection.preRegisterPoint(ctx.startX, ctx.startY);
+			routeDirection.preRegisterPoint(ctx.targetX, ctx.targetY);
+			return routeDirection;
+		}
+		return null;
+	}
 
-	public void prereg(int x31, int y31) {
+	private void preRegisterPoint(int x31, int y31) {
 		int ind = getIndex(x31, y31, ct1);
 		long l = ((long) x31) << 32l + ((long)y31);
 		if(ind == -1){
@@ -145,5 +161,7 @@ public class PrecalculatedRouteDirection {
 		}
 		prereg.put(l, ind);
 	}
+
+	
 
 }
