@@ -55,12 +55,16 @@ public class BinaryInspector {
 		BinaryInspector in = new BinaryInspector();
 		in.inspector(args);
 		// test cases show info
-		in.inspector(new String[]{
+		if(args.length == 1 && "test".equals(args[0])) {
+			in.inspector(new String[]{
 				//"-vpoi",
-				"-vmap", "-vmapobjects", 
+				// "-vmap", "-vmapobjects", 
 				//"-vstreets", 
 				//"-bbox=4,55,7,50", 
 				"/home/victor/projects/osmand/osm-gen/Map.obf"});
+		} else {
+			in.inspector(args);
+		}
 	}
 
 	private void printToFile(String s) throws IOException {
