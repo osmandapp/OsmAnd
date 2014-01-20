@@ -98,7 +98,7 @@ public class RoutePlannerFrontEnd {
 			nctx.calculationProgress = ctx.calculationProgress ;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
 			routeDirection = PrecalculatedRouteDirection.build(ls, 
-					5000, ctx.getRouter().getMaxDefaultSpeed() / 2);
+					5000, ctx.getRouter().getMaxDefaultSpeed() );
 		}
 		// remove fast recalculation
 		if(intermediatesEmpty && useOldVersion && ctx.nativeLib != null) {
