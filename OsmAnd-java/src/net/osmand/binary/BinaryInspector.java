@@ -53,7 +53,6 @@ public class BinaryInspector {
 
 	public static void main(String[] args) throws IOException {
 		BinaryInspector in = new BinaryInspector();
-		in.inspector(args);
 		// test cases show info
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
