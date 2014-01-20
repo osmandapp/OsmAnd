@@ -90,7 +90,7 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress = new RouteCalculationProgress();
 		}
 		boolean intermediatesEmpty = intermediates == null || intermediates.isEmpty();
-		// TODO native, empty route, intermediates...
+		// TODO native, empty route...
 		// + intermediates, + progress, +complex, 
 		PrecalculatedRouteDirection routeDirection = null;
 		if(ctx.calculationMode == RouteCalculationMode.COMPLEX) {

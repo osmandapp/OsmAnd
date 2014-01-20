@@ -1,15 +1,13 @@
 package net.osmand.osm.edit;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-import net.osmand.IProgress;
 import net.osmand.data.LatLon;
-import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.util.MapUtils;
-import org.xml.sax.SAXException;
 
 public class OsmMapUtils {
 
@@ -135,11 +133,11 @@ public class OsmMapUtils {
         return ccw(A, C, D) != ccw(B, C, D) && ccw(A, B, C) != ccw(A, B, D);
     }
 
-	public static void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, List<Node> result, boolean avoidNooses) {
+	public static boolean[] simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, List<Node> result, boolean avoidNooses) {
 		if (zoom > 31) {
 			zoom = 31;
 		}
-		ArrayList<Integer> l = new ArrayList<Integer>();
+		boolean[] kept = new boolean[n.size()];
 		int first = 0;
 		int nsize = n.size();
 		while (first < nsize) {
@@ -156,7 +154,7 @@ public class OsmMapUtils {
 			last--;
 		}
 		if (last - first < 1) {
-			return;
+			return kept;
 		}
 		// check for possible cycle
 		boolean checkCycle = true;
@@ -175,20 +173,23 @@ public class OsmMapUtils {
 			}
 		}
 		if (last - first < 1) {
-			return;
+			return kept;
 		}
-		simplifyDouglasPeucker(n, zoom, epsilon, l, first, last, avoidNooses);
+		simplifyDouglasPeucker(n, zoom, epsilon, kept, first, last, avoidNooses);
 		result.add(n.get(first));
-		int lsize = l.size();
-		for (int i = 0; i < lsize; i++) {
-			result.add(n.get(l.get(i)));
+		for (int i = 0; i < kept.length; i++) {
+			if(kept[i]) {
+				result.add(n.get(i));
+			}
 		}
 		if (cycle) {
 			result.add(n.get(first));
+			kept[first] = true;
 		}
+		return kept;
 	}
 
-	private static void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, List<Integer> ints,
+	private static void simplifyDouglasPeucker(List<Node> n, int zoom, int epsilon, boolean[] kept,
                                                int start, int end, boolean avoidNooses) {
 		double dmax = -1;
 		int index = -1;
@@ -223,10 +224,10 @@ public class OsmMapUtils {
             }
         }
 		if (dmax >= epsilon || nooseFound ) {
-			simplifyDouglasPeucker(n, zoom, epsilon, ints, start, index, avoidNooses);
-			simplifyDouglasPeucker(n, zoom, epsilon, ints, index, end, avoidNooses);
+			simplifyDouglasPeucker(n, zoom, epsilon, kept, start, index, avoidNooses);
+			simplifyDouglasPeucker(n, zoom, epsilon, kept, index, end, avoidNooses);
 		} else {
-			ints.add(end);
+			kept[end] = true;
 		}
 	}
 
