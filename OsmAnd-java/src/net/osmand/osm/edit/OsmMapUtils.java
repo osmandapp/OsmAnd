@@ -184,8 +184,9 @@ public class OsmMapUtils {
 		}
 		if (cycle) {
 			result.add(n.get(first));
-			kept[first] = true;
 		}
+		kept[first] = true;
+		
 		return kept;
 	}
 

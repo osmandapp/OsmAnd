@@ -421,8 +421,8 @@ public class RouteProvider {
 				memoryLimit, specialization);
 		RoutingContext ctx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files,
 				// TODO introduce
-				/*params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) ?
-				RouteCalculationMode.COMPLEX : */RouteCalculationMode.NORMAL);
+				params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) ?
+				RouteCalculationMode.COMPLEX : RouteCalculationMode.NORMAL);
 		ctx.calculationProgress = params.calculationProgress;
 		if(params.previousToRecalculate != null) {
 			ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
