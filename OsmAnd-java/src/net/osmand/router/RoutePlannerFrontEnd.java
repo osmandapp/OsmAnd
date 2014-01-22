@@ -92,6 +92,7 @@ public class RoutePlannerFrontEnd {
 		boolean intermediatesEmpty = intermediates == null || intermediates.isEmpty();
 		// TODO native, empty route...
 		// + intermediates, + progress, +complex, 
+		// TODO remove fast recalculation
 		PrecalculatedRouteDirection routeDirection = null;
 		if(ctx.calculationMode == RouteCalculationMode.COMPLEX) {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
@@ -100,8 +101,7 @@ public class RoutePlannerFrontEnd {
 			routeDirection = PrecalculatedRouteDirection.build(ls, 
 					5000, ctx.getRouter().getMaxDefaultSpeed() );
 		}
-		// remove fast recalculation
-		if(intermediatesEmpty && useOldVersion && ctx.nativeLib != null) {
+		if(intermediatesEmpty && ctx.nativeLib != null) {
 			ctx.startX = MapUtils.get31TileNumberX(start.getLongitude());
 			ctx.startY = MapUtils.get31TileNumberY(start.getLatitude());
 			ctx.targetX = MapUtils.get31TileNumberX(end.getLongitude());
@@ -159,7 +159,7 @@ public class RoutePlannerFrontEnd {
 		if(routeDirection != null) {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 		}
-		if (ctx.nativeLib != null && useOldVersion) {
+		if (ctx.nativeLib != null) {
 			return runNativeRouting(ctx);
 		} else {
 			refreshProgressDistance(ctx);
@@ -191,7 +191,7 @@ public class RoutePlannerFrontEnd {
 		refreshProgressDistance(ctx);
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new BinaryMapRouteReaderAdapter.RouteRegion[ctx.reverseMap.size()]);
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY,
-				ctx.config, regions, ctx.calculationProgress);
+				ctx.config, regions, ctx.calculationProgress, ctx.precalculatedRouteDirection, ctx.calculationMode == RouteCalculationMode.BASE);
 		ArrayList<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));
 		ctx.routingTime = ctx.calculationProgress.routingCalculatedTime;
 		ctx.visitedSegments = ctx.calculationProgress.visitedSegments;

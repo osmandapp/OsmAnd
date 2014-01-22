@@ -14,7 +14,7 @@ public class PrecalculatedRouteDirection {
 	
 	private TIntArrayList pointsX = new TIntArrayList();
 	private TIntArrayList pointsY = new TIntArrayList();
-	private float avgSpeed;
+	private float speed;
 	private float[] tms;
 	private static final int SHIFT = (1 << (31 - 18));
 	private static final int[] SHIFTS = new int[]{1 << (31 - 17), 1 << (31 - 15), 1 << (31 - 13), 1 << (31 - 12), 
@@ -28,12 +28,12 @@ public class PrecalculatedRouteDirection {
 	private DataTileManager<Integer> indexedPoints = new DataTileManager<Integer>(17);
 	
 	private PrecalculatedRouteDirection(List<RouteSegmentResult> ls, float avgSpeed) {
-		this.avgSpeed = avgSpeed;
+		this.speed = avgSpeed;
 		init(ls);
 	}
 	
 	private PrecalculatedRouteDirection(PrecalculatedRouteDirection parent, int s1, int s2) {
-		this.avgSpeed = parent.avgSpeed;
+		this.speed = parent.speed;
 		tms = new float[s2 - s1 + 1];
 		for (int i = s1; i <= s2; i++) {
 			pointsX.add(parent.pointsX.get(i));
@@ -138,7 +138,7 @@ public class PrecalculatedRouteDirection {
 		}
 		double ds = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX.get(ind), pointsY.get(ind));
 		ct[0] = tms[ind];
-		ct[1] = (float) (ds / avgSpeed);
+		ct[1] = (float) (ds / speed);
 		return ind;
 	}
 	

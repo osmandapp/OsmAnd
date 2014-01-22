@@ -22,6 +22,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
@@ -129,7 +130,8 @@ public class NativeLibrary {
 	}
 
 	public RouteSegmentResult[] runNativeRouting(int sx31, int sy31, int ex31, int ey31, RoutingConfiguration config,
-			RouteRegion[] regions, RouteCalculationProgress progress) {
+			RouteRegion[] regions, RouteCalculationProgress progress, PrecalculatedRouteDirection precalculatedRouteDirection, 
+			boolean basemap) {
 		TIntArrayList state = new TIntArrayList();
 		List<String> keys = new ArrayList<String>();
 		List<String> values = new ArrayList<String>();
@@ -145,7 +147,7 @@ public class NativeLibrary {
 
 		return nativeRouting(new int[] { sx31, sy31, ex31, ey31 }, state.toArray(), keys.toArray(new String[keys.size()]),
 				values.toArray(new String[values.size()]), config.initialDirection == null ? -360 : config.initialDirection.floatValue(),
-				regions, progress);
+				regions, progress, precalculatedRouteDirection, basemap);
 	}
 
 	public <T> void fillObjects(TIntArrayList state, List<String> keys, List<String> values, int s, Map<String, T> map) {
@@ -175,7 +177,7 @@ public class NativeLibrary {
 	protected static native RouteDataObject[] getRouteDataObjects(RouteRegion reg, long rs, int x31, int y31);
 
 	protected static native RouteSegmentResult[] nativeRouting(int[] coordinates, int[] state, String[] keyConfig, String[] valueConfig,
-			float initDirection, RouteRegion[] regions, RouteCalculationProgress progress);
+			float initDirection, RouteRegion[] regions, RouteCalculationProgress progress, PrecalculatedRouteDirection precalculatedRouteDirection, boolean basemap);
 
 	protected static native void deleteSearchResult(long searchResultHandle);
 
