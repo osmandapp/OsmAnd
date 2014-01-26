@@ -76,7 +76,7 @@
 	</target>
 
 	<target name="native-libs-jar" depends="compile">
-		<exec command="bash collect_libs.sh" failonerror="true">
+		<exec command="bash ./collect_libs.sh" failonerror="true">
 		</exec>
 		<antcall target="jar" />
 	</target>
