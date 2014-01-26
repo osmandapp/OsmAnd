@@ -1114,7 +1114,7 @@
     <string name="stop_routing_confirm">您確定您要停止導航嗎？</string>
     <string name="clear_dest_confirm">您確定您想要清除您的目的地點(含中途點)？</string>
     <string name="precise_routing_mode">精確的路線 (alpha)</string>
-    <string name="precise_routing_mode_descr">啟用精確的路線，去計算無差錯的準確路線。在長距離和不使用原生函式庫這是非常有限的。</string>
+    <string name="precise_routing_mode_descr">允許去計算精確的路線而無差錯。仍然有距離限制並且緩慢。</string>
     <string name="recording_context_menu_show">顯示</string>
     <string name="recording_photo_description">照片 %1$s 中的 %2$s</string>
     <string name="av_def_action_picture">拍攝照片</string>
