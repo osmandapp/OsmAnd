@@ -4,11 +4,12 @@ import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.DataTileManager;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
+import net.osmand.util.MapUtils;
 
 public class PrecalculatedRouteDirection {
 	
@@ -16,16 +17,17 @@ public class PrecalculatedRouteDirection {
 	private TIntArrayList pointsY = new TIntArrayList();
 	private float speed;
 	private float[] tms;
-	private static final int SHIFT = (1 << (31 - 18));
-	private static final int[] SHIFTS = new int[]{1 << (31 - 17), 1 << (31 - 15), 1 << (31 - 13), 1 << (31 - 12), 
-		1 << (31 - 11), 1 << (31 - 9)};
+	private static final int SHIFT = (1 << (31 - 17));
+	private static final int[] SHIFTS = new int[]{1 << (31 - 15), 1 << (31 - 13), 1 << (31 - 12), 
+		1 << (31 - 11), 1 << (31 - 7)};
 	
 	private List<Integer> cachedS = new ArrayList<Integer>();
-	private float[] ct1 = new float[2];
-	private float[] ct2 = new float[2];
 	
-	private Map<Long, Integer> prereg = new TreeMap<Long, Integer>();
-	private DataTileManager<Integer> indexedPoints = new DataTileManager<Integer>(17);
+	private long startPoint = 0;
+	private long endPoint = 0;
+//	private DataTileManager<Integer> indexedPoints = new DataTileManager<Integer>(17);
+	QuadTree<Integer> quadTree = new QuadTree<Integer>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+			8, 0.55f); 
 	
 	private PrecalculatedRouteDirection(List<RouteSegmentResult> ls, float avgSpeed) {
 		this.speed = avgSpeed;
@@ -38,7 +40,8 @@ public class PrecalculatedRouteDirection {
 		for (int i = s1; i <= s2; i++) {
 			pointsX.add(parent.pointsX.get(i));
 			pointsY.add(parent.pointsY.get(i));
-			indexedPoints.registerObjectXY(parent.pointsX.get(i), parent.pointsY.get(i), pointsX.size() - 1);
+//			indexedPoints.registerObjectXY(parent.pointsX.get(i), parent.pointsY.get(i), pointsX.size() - 1);
+			quadTree.insert(pointsX.size() - 1, parent.pointsX.get(i), parent.pointsY.get(i));
 			tms[i - s1] = parent.tms[i] - parent.tms[s2];
 		}
 	}
@@ -52,10 +55,10 @@ public class PrecalculatedRouteDirection {
 				break;
 			}
 		}
-		int endi = ls.size() - 1;
+		int endi = ls.size();
 		d = cutoffDistance;
-		for (; endi >= 0; endi--) {
-			d -= ls.get(endi).getDistance();
+		for (; endi > 0; endi--) {
+			d -= ls.get(endi - 1).getDistance();
 			if (d < 0) {
 				break;
 			}
@@ -74,17 +77,22 @@ public class PrecalculatedRouteDirection {
 			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
 			int i = s.getStartPointIndex();
 			RouteDataObject obj = s.getObject();
-			float spd = s.getSegmentSpeed();
+			float routeSpd = s.getDistance()/ s.getRoutingTime() ;
 			while (true) {
 				int iprev = i;
 				i = plus? i + 1 : i -1;
-				float tm = (float) (BinaryRoutePlanner.squareRootDist(obj.getPoint31XTile(iprev), obj.getPoint31YTile(iprev), 
-						obj.getPoint31XTile(i), obj.getPoint31YTile(i)) / spd);
+				// MapUtils.measuredDist31 vs BinaryRoutePlanner.squareRootDist
+				// use measuredDist31 because we use precise s.getDistance() to calculate routeSpd
+				float dist = (float) MapUtils.measuredDist31(obj.getPoint31XTile(iprev), obj.getPoint31YTile(iprev), 
+						obj.getPoint31XTile(i), obj.getPoint31YTile(i));
+				float tm = dist / routeSpd;
 				pointsX.add(obj.getPoint31XTile(i));
 				pointsY.add(obj.getPoint31YTile(i));
 				times.add(tm);
-				indexedPoints.registerObjectXY(obj.getPoint31XTile(i), obj.getPoint31YTile(i), pointsX.size() - 1);
+				quadTree.insert(pointsX.size() - 1, obj.getPoint31XTile(i), obj.getPoint31YTile(i));
+				// indexedPoints.registerObjectXY();
 				totaltm += tm;
+				
 				if (i == s.getEndPointIndex()) {
 					break;
 				}
@@ -100,68 +108,111 @@ public class PrecalculatedRouteDirection {
 	}
 
 	public float timeEstimate(int sx31, int sy31, int ex31, int ey31) {
-		getIndex(sx31, sy31, ct1);
-		getIndex(ex31, ey31, ct2);
-		return Math.abs(ct1[0] - ct2[0]) + ct1[1] + ct2[1];
+		long l1 = calc(sx31, sy31);
+		long l2 = calc(ex31, ey31);
+		int x31;
+		int y31;
+		boolean start;
+		if(l1 == startPoint || l1 == endPoint) {
+			start = l1 == startPoint;
+			x31 = ex31;
+			y31 = ey31;
+		} else if(l2 == startPoint || l2 == endPoint) {
+			start = l2 == startPoint;
+			x31 = sx31;
+			y31 = sy31;
+		} else {
+			throw new UnsupportedOperationException();
+		}
+		int ind = getIndex(x31, y31);
+		if(ind == -1) {
+			return -1;
+		}
+		if((ind == 0 && start) || 
+				(ind == pointsX.size() - 1 && !start)) {
+			return -1;
+		}
+		float distToPoint = getDeviationDistance(x31, y31, ind);
+		float deviationPenalty = distToPoint / speed;
+		if(start) {
+			return (tms[0] - tms[ind]) +  deviationPenalty;
+		} else {
+			return tms[ind] + deviationPenalty;
+		}
+	}
+	
+	public float getDeviationDistance(int x31, int y31) {
+		int ind = getIndex(x31, y31);
+		if(ind == -1) {
+			return 0;
+		}
+		return getDeviationDistance(x31, y31, ind);
 	}
 
-	private int getIndex(int x31, int y31, float[] ct) {
-		long l = ((long) x31) << 32l + ((long)y31);
-		Integer lt = prereg.get(l);
-		int ind = 0;
-		if(lt != null) {
-			ind = lt;
-		} else {
-			cachedS.clear();
-			indexedPoints.getObjects(x31 - SHIFT, y31 - SHIFT, x31 + SHIFT, y31 + SHIFT, cachedS);
-			if (cachedS.size() == 0) {
-				for (int k = 0; k < SHIFTS.length; k++) {
-					indexedPoints.getObjects(x31 - SHIFTS[k], y31 - SHIFTS[k], x31 + SHIFTS[k], y31 + SHIFTS[k],
-							cachedS);
-					if (cachedS.size() != 0) {
-						break;
-					}
-				}
-				if (cachedS.size() == 0) {
-					throw new IllegalStateException();
+	public float getDeviationDistance(int x31, int y31, int ind) {
+		float distToPoint = 0; //BinaryRoutePlanner.squareRootDist(x31, y31, pointsX.get(ind), pointsY.get(ind));
+		if(ind < pointsX.size() - 1 && ind != 0) {
+			double nx = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX.get(ind + 1), pointsY.get(ind + 1));
+			double pr = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX.get(ind - 1), pointsY.get(ind - 1));
+			int nind =  nx > pr ? ind -1 : ind +1;
+			QuadPoint proj = MapUtils.getProjectionPoint31(x31, y31, pointsX.get(ind), pointsY.get(ind), pointsX.get(nind), pointsX.get(nind));
+			distToPoint = (float) BinaryRoutePlanner.squareRootDist(x31, y31, (int)proj.x, (int)proj.y) ;
+		}
+		return distToPoint;
+	}
+
+	public int getIndex(int x31, int y31) {
+		int ind = -1;
+		cachedS.clear();
+//		indexedPoints.getObjects(x31 - SHIFT, y31 - SHIFT, x31 + SHIFT, y31 + SHIFT, cachedS);
+		quadTree.queryInBox(new QuadRect(x31 - SHIFT, y31 - SHIFT, x31 + SHIFT, y31 + SHIFT), cachedS);
+		if (cachedS.size() == 0) {
+			for (int k = 0; k < SHIFTS.length; k++) {
+				quadTree.queryInBox(new QuadRect(x31 - SHIFTS[k], y31 - SHIFTS[k], x31 + SHIFTS[k], y31 + SHIFTS[k]), cachedS);
+//				indexedPoints.getObjects(x31 - SHIFTS[k], y31 - SHIFTS[k], x31 + SHIFTS[k], y31 + SHIFTS[k],cachedS);
+				if (cachedS.size() != 0) {
+					break;
 				}
 			}
-			double minDist = 0;
-			for (int i = 0; i < cachedS.size(); i++) {
-				Integer n = cachedS.get(i);
-				double ds = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX.get(n), pointsY.get(n));
-				if (ds < minDist || i == 0) {
-					ind = n;
-					minDist = ds;
-				}
+			if (cachedS.size() == 0) {
+				return -1;
 			}
 		}
-		double ds = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX.get(ind), pointsY.get(ind));
-		ct[0] = tms[ind];
-		ct[1] = (float) (ds / speed);
+		double minDist = 0;
+		for (int i = 0; i < cachedS.size(); i++) {
+			Integer n = cachedS.get(i);
+			double ds = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX.get(n), pointsY.get(n));
+			if (ds < minDist || i == 0) {
+				ind = n;
+				minDist = ds;
+			}
+		}
 		return ind;
+	}
+
+	private long calc(int x31, int y31) {
+		return ((long) x31) << 32l + ((long)y31);
 	}
 	
 	public PrecalculatedRouteDirection adopt(RoutingContext ctx) {
-		int ind1 = getIndex(ctx.startX, ctx.startY, ct1);
-		int ind2 = getIndex(ctx.targetX, ctx.targetY, ct2);
-		if (ind1 < ind2) {
-			PrecalculatedRouteDirection routeDirection = new PrecalculatedRouteDirection(this, ind1, ind2);
-			routeDirection.preRegisterPoint(ctx.startX, ctx.startY);
-			routeDirection.preRegisterPoint(ctx.targetX, ctx.targetY);
-			return routeDirection;
+		int ind1 = getIndex(ctx.startX, ctx.startY);
+		int ind2 = getIndex(ctx.targetX, ctx.targetY);
+		if(ind1 == -1) {
+			throw new IllegalArgumentException();
 		}
-		return null;
+		if(ind2 == -1) {
+			throw new IllegalArgumentException();
+		}
+		PrecalculatedRouteDirection routeDirection = new PrecalculatedRouteDirection(this, ind1, ind2);
+		routeDirection.startPoint = calc(ctx.startX, ctx.startY);
+//		routeDirection.startX31 = ctx.startX;
+//		routeDirection.startY31 = ctx.startY;
+		routeDirection.endPoint = calc(ctx.targetX, ctx.targetX);
+//		routeDirection.endX31 = ctx.targetX;
+//		routeDirection.endY31 = ctx.targetY;
+		return routeDirection;
 	}
 
-	private void preRegisterPoint(int x31, int y31) {
-		int ind = getIndex(x31, y31, ct1);
-		long l = ((long) x31) << 32l + ((long)y31);
-		if(ind == -1){
-			throw new IllegalStateException();
-		}
-		prereg.put(l, ind);
-	}
 
 	
 

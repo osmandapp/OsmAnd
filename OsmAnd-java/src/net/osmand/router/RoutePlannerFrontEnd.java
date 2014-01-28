@@ -92,14 +92,13 @@ public class RoutePlannerFrontEnd {
 		boolean intermediatesEmpty = intermediates == null || intermediates.isEmpty();
 		// TODO native, empty route...
 		// + intermediates, + progress, +complex, 
-		// TODO remove fast recalculation
 		PrecalculatedRouteDirection routeDirection = null;
 		if(ctx.calculationMode == RouteCalculationMode.COMPLEX) {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress ;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
 			routeDirection = PrecalculatedRouteDirection.build(ls, 
-					5000, ctx.getRouter().getMaxDefaultSpeed() );
+					ctx.config.DEVIATION_RADIUS, ctx.getRouter().getMaxDefaultSpeed() );
 		}
 		if(intermediatesEmpty && ctx.nativeLib != null) {
 			ctx.startX = MapUtils.get31TileNumberX(start.getLongitude());

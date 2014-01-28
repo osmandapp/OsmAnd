@@ -163,8 +163,10 @@ public class RouteResultPreparation {
 			// Get results from opposite direction roads
 			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment : finalSegment.opposite.getParentRoute();
 			int parentSegmentStart = finalSegment.reverseWaySearch ? finalSegment.opposite.getSegmentStart() : finalSegment.opposite.getParentSegmentEnd();
+			float parentRoutingTime = -1;
 			while (segment != null) {
 				RouteSegmentResult res = new RouteSegmentResult(segment.road, parentSegmentStart, segment.getSegmentStart());
+				parentRoutingTime = calcRoutingTime(parentRoutingTime, finalSegment, segment, res);
 				parentSegmentStart = segment.getParentSegmentEnd();
 				segment = segment.getParentRoute();
 				addRouteSegmentToResult(ctx, result, res, false);
@@ -174,18 +176,38 @@ public class RouteResultPreparation {
 
 			segment = finalSegment.reverseWaySearch ? finalSegment.opposite.getParentRoute() : finalSegment;
 			int parentSegmentEnd = finalSegment.reverseWaySearch ? finalSegment.opposite.getParentSegmentEnd() : finalSegment.opposite.getSegmentStart();
-			
+			parentRoutingTime = -1;
 			while (segment != null) {
 				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentStart(), parentSegmentEnd);
+				parentRoutingTime = calcRoutingTime(parentRoutingTime, finalSegment, segment, res);
 				parentSegmentEnd = segment.getParentSegmentEnd();
 				segment = segment.getParentRoute();
 				// happens in smart recalculation
 				addRouteSegmentToResult(ctx, result, res, true);
 			}
 			Collections.reverse(result);
-
+			// checkTotalRoutingTime(result);
 		}
 		return result;
+	}
+
+	protected void checkTotalRoutingTime(List<RouteSegmentResult> result) {
+		float totalRoutingTime = 0;
+		for(RouteSegmentResult r : result) {
+			totalRoutingTime += r.getRoutingTime();
+		}
+		println("Total routing time ! " + totalRoutingTime);
+	}
+
+	private float calcRoutingTime(float parentRoutingTime, RouteSegment finalSegment, RouteSegment segment,
+			RouteSegmentResult res) {
+		if(segment != finalSegment) {
+			if(parentRoutingTime != -1) {
+				res.setRoutingTime(parentRoutingTime - segment.distanceFromStart);
+			}
+			parentRoutingTime = segment.distanceFromStart;
+		}
+		return parentRoutingTime;
 	}
 	
 	private void addRouteSegmentToResult(RoutingContext ctx, List<RouteSegmentResult> result, RouteSegmentResult res, boolean reverse) {
@@ -209,9 +231,11 @@ public class RouteResultPreparation {
 		if (rd == ld) {
 			if (toAdd.getStartPointIndex() == previous.getEndPointIndex() && !reverse) {
 				previous.setEndPointIndex(toAdd.getEndPointIndex());
+				previous.setRoutingTime(previous.getRoutingTime() + toAdd.getRoutingTime());
 				return true;
 			} else if (toAdd.getEndPointIndex() == previous.getStartPointIndex() && reverse) {
 				previous.setStartPointIndex(toAdd.getStartPointIndex());
+				previous.setRoutingTime(previous.getRoutingTime() + toAdd.getRoutingTime());
 				return true;
 			}
 		}
@@ -249,6 +273,7 @@ public class RouteResultPreparation {
 				}
 				StringBuilder additional = new StringBuilder();
 				additional.append("time = \"").append(res.getSegmentTime()).append("\" ");
+				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
 				additional.append("name = \"").append(name).append("\" ");
 //				float ms = res.getSegmentSpeed();
 				float ms = res.getObject().getMaximumSpeed();

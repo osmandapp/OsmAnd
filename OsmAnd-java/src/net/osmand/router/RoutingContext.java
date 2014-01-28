@@ -43,6 +43,9 @@ public class RoutingContext {
 	public static final int OPTION_NO_LOAD = 0;
 	public static final int OPTION_SMART_LOAD = 1;
 	public static final int OPTION_IN_MEMORY_LOAD = 2;
+
+
+	
 	// Final context variables
 	public final RoutingConfiguration config;
 	public final RouteCalculationMode calculationMode;
@@ -51,13 +54,13 @@ public class RoutingContext {
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
 	
 	// 1. Initial variables
-	public long firstRoadId = 0;
-	public int firstRoadDirection = 0;
-	
 	public int startX;
 	public int startY;
 	public int targetX;
 	public int targetY;
+	// deprecated
+	public long firstRoadId;
+	public int firstRoadDirection;
 	
 	public RouteCalculationProgress calculationProgress;
 	public boolean leftSideNavigation;
@@ -82,6 +85,7 @@ public class RoutingContext {
 	public int memoryOverhead = 0;
 	
 	
+	long timeNanoToCalcDeviation = 0;
 	long timeToLoad = 0;
 	long timeToLoadHeaders = 0;
 	long timeToFindInitialSegments = 0;
@@ -101,6 +105,10 @@ public class RoutingContext {
 
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
+
+
+
+
 
 
 	

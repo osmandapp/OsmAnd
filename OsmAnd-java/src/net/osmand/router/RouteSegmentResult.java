@@ -17,6 +17,7 @@ public class RouteSegmentResult {
 	private List<RouteSegmentResult>[] attachedRoutes;
 	private RouteSegmentResult[][] preAttachedRoutes;
 	private float segmentTime;
+	private float routingTime;
 	private float speed;
 	private float distance;
 	private String description = "";
@@ -109,6 +110,14 @@ public class RouteSegmentResult {
 	
 	public void setSegmentTime(float segmentTime) {
 		this.segmentTime = segmentTime;
+	}
+	
+	public void setRoutingTime(float routingTime) {
+		this.routingTime = routingTime;
+	}
+	
+	public float getRoutingTime() {
+		return routingTime;
 	}
 	
 	public LatLon getStartPoint() {
