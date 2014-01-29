@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista välietappi</string>
 	<string name="target_point">Välietappi %1$s</string>
@@ -700,4 +700,6 @@
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Eurooppa &amp; Aasia</string>
 	<string name="driving_region_uk">Iso Britannia, Intia, Australia ja muut</string>
-	</resources>
+	<string name="amenity_type_seamark">Merimerkki</string>
+    <string name="app_modes_choose_descr">Valitse näkyvät profiilit</string>
+    </resources>
