@@ -15,7 +15,7 @@ import org.xmlpull.v1.XmlPullParserException;
 public class RoutingConfiguration {
 	
 	public static final int DEFAULT_MEMORY_LIMIT = 30;
-	public final float DEVIATION_RADIUS = 15000;
+	public final float DEVIATION_RADIUS = 5000;
 	public Map<String, String> attributes = new LinkedHashMap<String, String>();
 
 	// 1. parameters of routing and different tweaks

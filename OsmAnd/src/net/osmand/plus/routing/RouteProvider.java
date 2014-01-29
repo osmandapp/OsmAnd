@@ -367,7 +367,7 @@ public class RouteProvider {
 	
 	protected RouteCalculationResult findVectorMapsRoute(RouteCalculationParams params) throws IOException {
 		BinaryMapIndexReader[] files = params.ctx.getTodoAPI().getRoutingMapFiles();
-		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(!params.preciseRouting);
+		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(false);
 		OsmandSettings settings = params.ctx.getSettings();
 		File routingXml = params.ctx.getAppPath(IndexConstants.ROUTING_XML_FILE);
 		RoutingConfiguration.Builder config ;

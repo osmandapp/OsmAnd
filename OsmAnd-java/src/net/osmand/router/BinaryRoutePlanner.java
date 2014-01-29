@@ -4,9 +4,12 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Random;
 
 import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
@@ -134,7 +137,7 @@ public class BinaryRoutePlanner {
 				throw new IllegalArgumentException("Route is not found from selected start point.");
 			}
 			if (ctx.planRouteIn2Directions()) {
-				forwardSearch = !(nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) > 0);
+				forwardSearch = (nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) < 0);
 				if (graphDirectSegments.size() * 1.3 > graphReverseSegments.size()) {
 					forwardSearch = false;
 				} else if (graphDirectSegments.size() < 1.3 * graphReverseSegments.size()) {
@@ -285,14 +288,11 @@ public class BinaryRoutePlanner {
 		if (graphDirectSegments != null && graphReverseSegments != null) {
 			printInfo("Priority queues sizes : " + graphDirectSegments.size() + "/" + graphReverseSegments.size());
 		}
-		printInfo("Already visited " + alreadyVisited);
-		alreadyVisited = 0;
 		if (visitedDirectSegments != null && visitedOppositeSegments != null) {
 			printInfo("Visited interval sizes: " + visitedDirectSegments.size() + "/" + visitedOppositeSegments.size());
 		}
 		
 	}
-	private static int alreadyVisited = 0;
 	
 	
 	@SuppressWarnings("unused")
@@ -306,7 +306,6 @@ public class BinaryRoutePlanner {
 		}
 		boolean directionAllowed = initDirectionAllowed;
 		if(!directionAllowed) {
-			alreadyVisited ++;
 			if(TRACE_ROUTING) {
 				println("  >> Already visited");
 			}
@@ -729,14 +728,6 @@ public class BinaryRoutePlanner {
 				}
 			}
 			return rs;
-		}
-		
-		public int getSegmentIntervalInd() {
-			boolean positive = directionAssgn >= 0;
-			if(!positive) {
-				return segStart - 1;
-			}
-			return segStart;
 		}
 		
 		public byte getDirectionAssigned(){

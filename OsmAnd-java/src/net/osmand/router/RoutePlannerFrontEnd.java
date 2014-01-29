@@ -90,10 +90,16 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress = new RouteCalculationProgress();
 		}
 		boolean intermediatesEmpty = intermediates == null || intermediates.isEmpty();
-		// TODO native, empty route...
-		// + intermediates, + progress, +complex, 
 		PrecalculatedRouteDirection routeDirection = null;
-		if(ctx.calculationMode == RouteCalculationMode.COMPLEX) {
+		double maxDistance = MapUtils.getDistance(start, end);
+		if(!intermediatesEmpty) {
+			LatLon b = start;
+			for(LatLon l : intermediates) {
+				maxDistance = Math.max(MapUtils.getDistance(b, l), maxDistance);
+				b = l;
+			}
+		}
+		if(ctx.calculationMode == RouteCalculationMode.COMPLEX && maxDistance > Math.max(ctx.config.DEVIATION_RADIUS * 4, 30000)) {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress ;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
