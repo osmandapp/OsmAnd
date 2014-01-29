@@ -957,7 +957,7 @@
 <string name="show_warnings_descr">Sebességhatárok, traffipaxok és fekvőrendőrök jelzése</string>
 <string name="map_widget_fluorescent">Élénk színek</string>
 <string name="map_widget_show_ruler">Lépték</string>
-<string name="map_widget_appearance">Megjelenés:</string>
+<string name="map_widget_appearance">További elemek:</string>
 <string name="map_widget_view_direction">Látómező</string>
 <string name="map_widget_transparent">Átlátszó téma</string>
 <string name="monitoring_mode_off">GPX felv.</string>
@@ -1183,7 +1183,7 @@
     <string name="local_indexes_cat_av">Hang- és videofelvétel</string>
     <string name="stop_routing_confirm">Biztosan megállítod a navigációt?</string>
     <string name="clear_dest_confirm">Biztosan törlöd a célpontot?</string>
-    <string name="precise_routing_mode_descr">Pontos útvonaltervező engedélyezése hibamentes, pontos útvonalak tervezéséhez. Jelenleg lassú, kis távolságokra működik és nem használja a natív könyvárat.</string>
+    <string name="precise_routing_mode_descr">Pontos útvonaltervező engedélyezése hibamentes, pontos útvonalak tervezéséhez. Jelenleg lassú, kis távolságokra működik.</string>
     <string name="precise_routing_mode">Pontos útvonaltervezés (kísérleti)</string>
     <string name="recording_context_menu_show">Mutat</string>
     <string name="recording_photo_description">Fénykép %1$s készült: %2$s</string>
@@ -1354,7 +1354,8 @@
     \n\t* SRTM szintvonalfájlok letöltése országonként
     \n\t* Vadonatúj világtérkép, fontosabb utakkal, erdőkkel, vasutakkal
     \n\t* Térképnagyító (hosszú kattintás a zoom gombon) - raszteres térképeken nagyon hasznos
-    \n\t* Online csempeforrások módosítása/szerkesztése (lejárati idő megadása)
+    \n\t* Online csempeforrások módosítása/szerkesztése (lejárati idő megadása)↵
+    \n\t* Feltételes idejű sebességkorlátozások (Hollandia)
     \n\t* Gyorsabb címbevitel
     \n\t* Útvonaltervezéssel és a megjelenítéssel kapcsolatos hibajavítások
     </string>
@@ -1392,4 +1393,25 @@
     <string name="gps_status_eclipsim">GPS Státusz</string>
     <string name="default_and">és</string>
     <string name="default_or">vagy</string>
-	</resources>
+	<string name="amenity_type_seamark">Hajózási jelzés</string>
+    <string name="app_modes_choose_descr">Milyen felhasználási módok jelenjenek meg az alkalmazásban</string>
+    <string name="app_modes_choose">Felhasználási módok</string>
+	<string name="map_widget_map_rendering">Térkép megjelenítés:</string>
+    <string name="app_mode_hiking">Gyalogtúra</string>
+    <string name="app_mode_motorcycle">Motorkerékpár</string>
+    <string name="app_mode_boat">Hajó</string>
+    <string name="app_mode_aircraft">Repülő</string>
+    <string name="tip_faq_t">Kérlek nézd meg a gyakran feltett kérdéseket: https://code.google.com/p/osmand/wiki/FAQ</string>
+    <string name="tip_faq">Gyakran Ismétlődő Kérdések (FAQ)</string>
+    <string name="local_osm_changes_delete_all_confirm">%1$d osm változtatás törlésére készülsz. Biztos vagy benne?</string>
+    <string name="local_osm_changes_delete_all">Összes törlése</string>
+    <string name="route_is_too_long">Az útvonal feltehetőleg túl hosszú az OsmAnd offline tervezője számára.
+        	Általában legfeljebb 200 km-re levő pontok közt lehet útvonalat tervezni. Kérlek adj hozzá köztes útpontokat.</string>
+	<string name="auto_zoom_none">Nincs auto zoom</string>
+	<string name="auto_zoom_close">Közelre</string>
+	<string name="auto_zoom_far">Közepes távolságra</string>
+	<string name="auto_zoom_farthest">Nagy távolságra</string>
+	<string name="osmodroid_refresh">Csatornák frissítése</string>
+    <string name="osmodroid_seek">Objektum keresése</string>
+    <string name="osmodroid_unseek">Objektumkeresés befejezése</string>
+    </resources>
