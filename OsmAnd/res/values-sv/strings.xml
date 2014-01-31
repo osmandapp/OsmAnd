@@ -1303,7 +1303,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="av_camera_focus_macro">Makrofokusläge (närbild)</string>
 	<string name="av_camera_focus_continuous">Kameran försöker fokusera hela tiden</string>
 	<string name="av_photo_play_sound">Spela upp ljud vid tagning av foto</string>
-	<string name="av_photo_play_sound_descr">Välj om ett ljud ska spelas upp vid tagning av foton</string>
+	<string name="av_photo_play_sound_descr">Välj om ett ljud ska spelas upp vid fotografering</string>
 <string name="route_distance_far">Långt borta</string>
     <string name="route_distance_farest">Längst bort</string>
     <string name="route_distance_close">Nära</string>
@@ -1332,4 +1332,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="map_widget_map_rendering">Kartrendering:</string>
     <string name="amenity_type_seamark">Sjömärke</string>
     <string name="app_modes_choose">Applikationsprofiler</string>
+	<string name="osmodroid_refresh">Läs om kanaler</string>
+    <string name="osmodroid_seek">Sök objekt</string>
+    <string name="osb_author_dialog_password">OSM-lösenord (frivilligt)</string>
 	</resources>
