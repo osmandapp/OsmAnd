@@ -161,8 +161,10 @@ public class RouteResultPreparation {
 			ctx.routingTime = finalSegment.distanceFromStart;
 			println("Routing calculated time distance " + finalSegment.distanceFromStart);
 			// Get results from opposite direction roads
-			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment : finalSegment.opposite.getParentRoute();
-			int parentSegmentStart = finalSegment.reverseWaySearch ? finalSegment.opposite.getSegmentStart() : finalSegment.opposite.getParentSegmentEnd();
+			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment : 
+				finalSegment.opposite.getParentRoute();
+			int parentSegmentStart = finalSegment.reverseWaySearch ? finalSegment.opposite.getSegmentStart() : 
+				finalSegment.opposite.getParentSegmentEnd();
 			float parentRoutingTime = -1;
 			while (segment != null) {
 				RouteSegmentResult res = new RouteSegmentResult(segment.road, parentSegmentStart, segment.getSegmentStart());

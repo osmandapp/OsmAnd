@@ -13,8 +13,8 @@ import net.osmand.util.MapUtils;
 
 public class PrecalculatedRouteDirection {
 	
-	private TIntArrayList pointsX = new TIntArrayList();
-	private TIntArrayList pointsY = new TIntArrayList();
+	private int[] pointsX;
+	private int[] pointsY;
 	private float speed;
 	private float[] tms;
 	private static final int SHIFT = (1 << (31 - 17));
@@ -37,11 +37,13 @@ public class PrecalculatedRouteDirection {
 	private PrecalculatedRouteDirection(PrecalculatedRouteDirection parent, int s1, int s2) {
 		this.speed = parent.speed;
 		tms = new float[s2 - s1 + 1];
+		pointsX = new int[s2 - s1 + 1];
+		pointsY = new int[s2 - s1 + 1];
 		for (int i = s1; i <= s2; i++) {
-			pointsX.add(parent.pointsX.get(i));
-			pointsY.add(parent.pointsY.get(i));
+			pointsX[i - s1] = parent.pointsX[i];
+			pointsY[i - s1] = parent.pointsY[i];
 //			indexedPoints.registerObjectXY(parent.pointsX.get(i), parent.pointsY.get(i), pointsX.size() - 1);
-			quadTree.insert(pointsX.size() - 1, parent.pointsX.get(i), parent.pointsY.get(i));
+			quadTree.insert(pointsX.length - 1, parent.pointsX[i], parent.pointsY[i]);
 			tms[i - s1] = parent.tms[i] - parent.tms[s2];
 		}
 	}
@@ -73,6 +75,8 @@ public class PrecalculatedRouteDirection {
 	private void init(List<RouteSegmentResult> ls) {
 		float totaltm = 0;
 		List<Float> times = new ArrayList<Float>();
+		TIntArrayList px = new TIntArrayList();
+		TIntArrayList py = new TIntArrayList();
 		for (RouteSegmentResult s : ls) {
 			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
 			int i = s.getStartPointIndex();
@@ -86,10 +90,10 @@ public class PrecalculatedRouteDirection {
 				float dist = (float) MapUtils.measuredDist31(obj.getPoint31XTile(iprev), obj.getPoint31YTile(iprev), 
 						obj.getPoint31XTile(i), obj.getPoint31YTile(i));
 				float tm = dist / routeSpd;
-				pointsX.add(obj.getPoint31XTile(i));
-				pointsY.add(obj.getPoint31YTile(i));
+				px.add(obj.getPoint31XTile(i));
+				py.add(obj.getPoint31YTile(i));
 				times.add(tm);
-				quadTree.insert(pointsX.size() - 1, obj.getPoint31XTile(i), obj.getPoint31YTile(i));
+				quadTree.insert(px.size() - 1, obj.getPoint31XTile(i), obj.getPoint31YTile(i));
 				// indexedPoints.registerObjectXY();
 				totaltm += tm;
 				
@@ -98,6 +102,8 @@ public class PrecalculatedRouteDirection {
 				}
 			}
 		}
+		pointsX = px.toArray();
+		pointsY = py.toArray();
 		tms = new float[times.size()];
 		float totDec = totaltm;
 		for(int i = 0; i < times.size(); i++) {
@@ -129,7 +135,7 @@ public class PrecalculatedRouteDirection {
 			return -1;
 		}
 		if((ind == 0 && start) || 
-				(ind == pointsX.size() - 1 && !start)) {
+				(ind == pointsX.length - 1 && !start)) {
 			return -1;
 		}
 		float distToPoint = getDeviationDistance(x31, y31, ind);
@@ -151,11 +157,11 @@ public class PrecalculatedRouteDirection {
 
 	public float getDeviationDistance(int x31, int y31, int ind) {
 		float distToPoint = 0; //BinaryRoutePlanner.squareRootDist(x31, y31, pointsX.get(ind), pointsY.get(ind));
-		if(ind < pointsX.size() - 1 && ind != 0) {
-			double nx = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX.get(ind + 1), pointsY.get(ind + 1));
-			double pr = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX.get(ind - 1), pointsY.get(ind - 1));
+		if(ind < pointsX.length - 1 && ind != 0) {
+			double nx = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX[ind + 1], pointsY[ind + 1]);
+			double pr = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX[ind - 1], pointsY[ind - 1]);
 			int nind =  nx > pr ? ind -1 : ind +1;
-			QuadPoint proj = MapUtils.getProjectionPoint31(x31, y31, pointsX.get(ind), pointsY.get(ind), pointsX.get(nind), pointsX.get(nind));
+			QuadPoint proj = MapUtils.getProjectionPoint31(x31, y31, pointsX[ind], pointsY[ind], pointsX[nind], pointsX[nind]);
 			distToPoint = (float) BinaryRoutePlanner.squareRootDist(x31, y31, (int)proj.x, (int)proj.y) ;
 		}
 		return distToPoint;
@@ -181,7 +187,7 @@ public class PrecalculatedRouteDirection {
 		double minDist = 0;
 		for (int i = 0; i < cachedS.size(); i++) {
 			Integer n = cachedS.get(i);
-			double ds = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX.get(n), pointsY.get(n));
+			double ds = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX[n], pointsY[n]);
 			if (ds < minDist || i == 0) {
 				ind = n;
 				minDist = ds;
