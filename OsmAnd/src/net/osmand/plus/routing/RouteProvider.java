@@ -420,7 +420,6 @@ public class RouteProvider {
 				params.start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, specialization);
 		RoutingContext ctx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files,
-				// TODO introduce
 				params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) ?
 				RouteCalculationMode.COMPLEX : RouteCalculationMode.NORMAL);
 		ctx.calculationProgress = params.calculationProgress;

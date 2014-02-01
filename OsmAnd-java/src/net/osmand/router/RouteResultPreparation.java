@@ -18,7 +18,7 @@ import net.osmand.util.MapUtils;
 
 public class RouteResultPreparation {
 
-	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
+	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
 	private static final float TURN_DEGREE_MIN = 45;
 	/**
 	 * Helper method to prepare final result 

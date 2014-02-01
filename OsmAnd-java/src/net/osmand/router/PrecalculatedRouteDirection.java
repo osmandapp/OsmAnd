@@ -40,11 +40,12 @@ public class PrecalculatedRouteDirection {
 		pointsX = new int[s2 - s1 + 1];
 		pointsY = new int[s2 - s1 + 1];
 		for (int i = s1; i <= s2; i++) {
-			pointsX[i - s1] = parent.pointsX[i];
-			pointsY[i - s1] = parent.pointsY[i];
+			int shiftInd = i - s1;
+			pointsX[shiftInd] = parent.pointsX[i];
+			pointsY[shiftInd] = parent.pointsY[i];
 //			indexedPoints.registerObjectXY(parent.pointsX.get(i), parent.pointsY.get(i), pointsX.size() - 1);
-			quadTree.insert(pointsX.length - 1, parent.pointsX[i], parent.pointsY[i]);
-			tms[i - s1] = parent.tms[i] - parent.tms[s2];
+			quadTree.insert(shiftInd, parent.pointsX[i], parent.pointsY[i]);
+			tms[shiftInd] = parent.tms[i] - parent.tms[s2];
 		}
 	}
 	
