@@ -8,9 +8,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import net.osmand.PlatformUtil;
 
@@ -26,6 +23,23 @@ public class Algorithms {
 	
 	public static boolean isEmpty(String s){
 		return s == null || s.length() == 0;
+	}
+	
+	public static int findFirstNumberEndIndex(String value) {
+		int i = 0;
+		boolean valid = false;
+		if (value.length() > 0 && value.charAt(0) == '-') {
+			i++;
+		}
+		while (i < value.length() && (Character.isDigit(value.charAt(i)) || value.charAt(i) == '.')) {
+			i++;
+			valid = true;
+		}
+		if (valid) {
+			return i;
+		} else {
+			return -1;
+		}
 	}
 	
 	/**

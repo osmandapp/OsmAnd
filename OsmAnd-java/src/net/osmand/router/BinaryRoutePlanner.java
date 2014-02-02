@@ -223,12 +223,16 @@ public class BinaryRoutePlanner {
 			ctx.calculationProgress.reverseSegmentQueueSize = graphReverseSegments.size();
 			ctx.calculationProgress.directSegmentQueueSize = graphDirectSegments.size();
 			if(graphDirectSegments.size() > 0) {
-				ctx.calculationProgress.distanceFromBegin =
-						Math.max(graphDirectSegments.peek().distanceFromStart, ctx.calculationProgress.distanceFromBegin);
+				RouteSegment peek = graphDirectSegments.peek();
+				ctx.calculationProgress.distanceFromBegin = Math.max(peek.distanceFromStart, 
+						ctx.calculationProgress.distanceFromBegin);
+				ctx.calculationProgress.directDistance = peek.distanceFromStart + peek.distanceToEnd;
 			}
 			if(graphReverseSegments.size() > 0) {
-				ctx.calculationProgress.distanceFromEnd = 
-						Math.max(graphReverseSegments.peek().distanceFromStart, ctx.calculationProgress.distanceFromEnd);
+				RouteSegment peek = graphReverseSegments.peek();
+				ctx.calculationProgress.distanceFromEnd = Math.max(peek.distanceFromStart + peek.distanceToEnd,
+							ctx.calculationProgress.distanceFromEnd);
+				ctx.calculationProgress.reverseDistance = peek.distanceFromStart + peek.distanceToEnd;
 			}
 		}
 	}
@@ -439,7 +443,7 @@ public class BinaryRoutePlanner {
 
 	private float calculateTimeWithObstacles(RoutingContext ctx, RouteDataObject road, float distOnRoadToPass, float obstaclesTime) {
 		float priority = ctx.getRouter().defineSpeedPriority(road);
-		float speed = (ctx.getRouter().defineSpeed(road) * priority);
+		float speed = (ctx.getRouter().defineRoutingSpeed(road) * priority);
 		if (speed == 0) {
 			speed = (ctx.getRouter().getMinDefaultSpeed() * priority);
 		}

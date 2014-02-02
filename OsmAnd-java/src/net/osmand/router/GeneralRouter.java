@@ -1,19 +1,27 @@
 package net.osmand.router;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
+import java.util.Set;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-public class GeneralRouter extends VehicleRouter {
+public class GeneralRouter implements VehicleRouter {
+	
+	private static final float CAR_SHORTEST_DEFAULT_SPEED = 45/3.6f;
 	public static final String USE_SHORTEST_WAY = "short_way";
 	public static final String AVOID_FERRIES = "avoid_ferries";
 	public static final String AVOID_TOLL = "avoid_toll";
@@ -21,71 +29,109 @@ public class GeneralRouter extends VehicleRouter {
 	public static final String AVOID_UNPAVED = "avoid_unpaved";
 	public static final String PREFER_MOTORWAYS = "prefer_motorway";
 	
-	public Map<String, Float> highwaySpeed ;
-	public Map<String, Float> highwayPriorities ;
-	public Map<String, Float> avoid ;
-	public Map<String, Float> obstacles;
-	public Map<String, Float> routingObstacles;
-	public Map<String, String> attributes;
+	private final RouteAttributeContext[] objectAttributes;
+	public final Map<String, String> attributes;
+	private final Map<String, RoutingParameter> parameters; 
+	private final Map<String, Integer> universalRules;
+	private final List<String> universalRulesById;
+	private final Map<String, BitSet> tagRuleMask;
+	private final ArrayList<Object> ruleToValue;
+	private boolean shortestRoute;
 	
+	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
-	private GeneralRouterProfile profile;
-
 	// cached values
 	private boolean restrictionsAware = true;
 	private float leftTurn;
 	private float roundaboutTurn;
 	private float rightTurn;
-	private boolean onewayAware = true;
-	private boolean followSpeedLimitations = true;
 	private float minDefaultSpeed = 10;
 	private float maxDefaultSpeed = 10;
-
+	
+	
+	public enum RouteDataObjectAttribute {
+		ROAD_SPEED("speed"),
+		ROAD_PRIORITIES("priority"),
+		ACCESS("access"),
+		OBSTACLES("obstacle_time"),
+		ROUTING_OBSTACLES("obstacle"),
+		ONEWAY("oneway");
+		public final String nm; 
+		RouteDataObjectAttribute(String name) {
+			nm = name;
+		}
+		
+		public static RouteDataObjectAttribute getValueOf(String s){
+			for(RouteDataObjectAttribute a : RouteDataObjectAttribute.values()){
+				if(a.nm.equals(s)){
+					return a;
+				}
+			}
+			return null;
+		}
+	}
+	
 	public enum GeneralRouterProfile {
 		CAR,
 		PEDESTRIAN,
 		BICYCLE
 	}
+
+	
+	public enum RoutingParameterType {
+		NUMERIC,
+		BOOLEAN,
+		SYMBOLIC
+	}
 	
 	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
-		this.attributes = new LinkedHashMap<String, String>(attributes);
-		this.profile = profile;
-		highwaySpeed = new LinkedHashMap<String, Float>();
-		highwayPriorities = new LinkedHashMap<String, Float>();
-		avoid = new LinkedHashMap<String, Float>();
-		obstacles = new LinkedHashMap<String, Float>();
-		routingObstacles = new LinkedHashMap<String, Float>();
+		this.attributes = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();
 		while(e.hasNext()){
 			Entry<String, String> next = e.next();
 			addAttribute(next.getKey(), next.getValue());
 		}
+		objectAttributes = new RouteAttributeContext[RouteDataObjectAttribute.values().length];
+		for (int i = 0; i < objectAttributes.length; i++) {
+			objectAttributes[i] = new RouteAttributeContext();
+		}
+		universalRules = new LinkedHashMap<String, Integer>();
+		universalRulesById = new ArrayList<String>();
+		tagRuleMask = new LinkedHashMap<String, BitSet>();
+		ruleToValue = new ArrayList<Object>();
+		parameters = new LinkedHashMap<String, GeneralRouter.RoutingParameter>();
 	}
 
-	public GeneralRouter(GeneralRouter pr, Map<String, String> attributes) {
-		this.highwaySpeed = new LinkedHashMap<String, Float>(pr.highwaySpeed);
-		this.highwayPriorities = new LinkedHashMap<String, Float>(pr.highwayPriorities);
-		this.avoid = new LinkedHashMap<String, Float>(pr.avoid);
-		this.obstacles = new LinkedHashMap<String, Float>(pr.obstacles);
-		this.routingObstacles = new LinkedHashMap<String, Float>(pr.routingObstacles);
+	public GeneralRouter(GeneralRouter parent, Map<String, String> params) {
 		this.attributes = new LinkedHashMap<String, String>();
-		this.profile = pr.profile;
-		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();
-		while(e.hasNext()){
+		Iterator<Entry<String, String>> e = parent.attributes.entrySet().iterator();
+		while (e.hasNext()) {
 			Entry<String, String> next = e.next();
 			addAttribute(next.getKey(), next.getValue());
 		}
+		// do not copy, keep linked
+		universalRules = parent.universalRules;
+		universalRulesById = parent.universalRulesById;
+		tagRuleMask = parent.tagRuleMask;
+		ruleToValue = parent.ruleToValue;
+		parameters = parent.parameters;
 		
+		objectAttributes = new RouteAttributeContext[RouteDataObjectAttribute.values().length];
+		for (int i = 0; i < objectAttributes.length; i++) {
+			objectAttributes[i] = new RouteAttributeContext(parent.objectAttributes[i], params);
+		}
+		shortestRoute = params.containsKey(USE_SHORTEST_WAY) && parseSilentBoolean(params.get(USE_SHORTEST_WAY), false);
+		if(shortestRoute) {
+			maxDefaultSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxDefaultSpeed);
+		}
+
 	}
-	
+
+
 	public void addAttribute(String k, String v) {
 		attributes.put(k, v);
 		if(k.equals("restrictionsAware")) {
 			restrictionsAware = parseSilentBoolean(v, restrictionsAware);
-		} else if(k.equals("onewayAware")) {
-			onewayAware = parseSilentBoolean(v, onewayAware);
-		} else if(k.equals("followSpeedLimitations")) {
-			followSpeedLimitations = parseSilentBoolean(v, followSpeedLimitations);
 		} else if(k.equals("leftTurn")) {
 			leftTurn = parseSilentFloat(v, leftTurn);
 		} else if(k.equals("rightTurn")) {
@@ -98,43 +144,102 @@ public class GeneralRouter extends VehicleRouter {
 			maxDefaultSpeed = parseSilentFloat(v, maxDefaultSpeed * 3.6f) / 3.6f;
 		}
 	}
+	
+	public RouteAttributeContext getObjContext(RouteDataObjectAttribute a) {
+		return objectAttributes[a.ordinal()];
+	}
+	
+
+	public void registerBooleanParameter(String id, String name, String description) {
+		RoutingParameter rp = new RoutingParameter();
+		rp.name = name;
+		rp.description = description;
+		rp.id = id;
+		rp.type = RoutingParameterType.BOOLEAN;
+		parameters.put(rp.id, rp);
+		
+	}
+
+	public void registerNumericParameter(String id, String name, String description, Double[] vls, String[] vlsDescriptions) {
+		RoutingParameter rp = new RoutingParameter();
+		rp.name = name;
+		rp.description = description;
+		rp.id = id;
+		rp.possibleValues = vls;
+		rp.possibleValueDescriptions = vlsDescriptions;
+		rp.type = RoutingParameterType.NUMERIC;
+		parameters.put(rp.id, rp);		
+	}
 
 	@Override
 	public boolean acceptLine(RouteDataObject way) {
-		int[] types = way.getTypes();
-		RouteRegion reg = way.region;
-		return acceptLine(types, reg);
+		int res = getObjContext(RouteDataObjectAttribute.ACCESS).evaluateInt(way, 0);
+		return res >= 0;
 	}
 	
-	public boolean acceptLine(int[] types, RouteRegion reg) {
-		if(!highwaySpeed.containsKey(RouteDataObject.getHighway(types, reg))) {
-			boolean accepted = false;
-			for (int i = 0; i < types.length; i++) {
-				RouteTypeRule r = reg.quickGetEncodingRule(types[i]);
-				Float sp = highwaySpeed.get(r.getTag()+"$"+r.getValue());
-				if(sp != null){
-					if(sp > 0) {
-						accepted = true;
-					}
-					break;
-				}
-			}
-			if(!accepted) {
-				return false;
-			}
+	private int registerTagValueAttribute(String tag, String value) {
+		String key = tag +"$"+value;
+		if(universalRules.containsKey(key)) {
+			return universalRules.get(key);
 		}
-		
-		
-		for(int i=0; i<types.length; i++) {
-			RouteTypeRule r = reg.quickGetEncodingRule(types[i]);
-			String k = r.getTag() + "$" + r.getValue();
-			if(avoid.containsKey(k)) {
-				return false;
-			}
+		int id = universalRules.size();
+		universalRulesById.add(key);
+		universalRules.put(key, id);
+		if(!tagRuleMask.containsKey(tag)) {
+			tagRuleMask.put(tag, new BitSet());
 		}
-		return true;
+		tagRuleMask.get(tag).set(id);
+		return id;
 	}
 	
+	
+	private Object parseValue(String value, String type) {
+		float vl = -1;
+		value = value.trim();
+		if("speed".equals(type)) {
+			vl = RouteDataObject.parseSpeed(value, vl);
+		} else if("weight".equals(type)) {
+			vl = RouteDataObject.parseWeightInTon(value, vl);
+		} else if("length".equals(type)) {
+			vl = RouteDataObject.parseLength(value, vl);
+		} else {
+			int i = Algorithms.findFirstNumberEndIndex(value);
+			if (i > 0) {
+				// could be negative
+				return Float.parseFloat(value.substring(0, i));
+			}
+		}
+		if(vl == -1) {
+			return null;
+		}
+		return vl;
+	}
+	
+	private Object parseValueFromTag(int id, String type) {
+		while (ruleToValue.size() <= id) {
+			ruleToValue.add(null);
+		}
+		Object res = ruleToValue.get(id);
+		if (res == null) {
+			String v = universalRulesById.get(id);
+			String value = v.substring(v.indexOf('$') + 1);
+			res = parseValue(value, type);
+			if (res == null) {
+				res = "";
+			}
+			ruleToValue.set(id, res);
+		}
+		if ("".equals(res)) {
+			return null;
+		}
+		return res;
+	}
+	
+	@Override
+	public VehicleRouter build(Map<String, String> params) {
+		return new GeneralRouter(this, params);
+	}
+
 	@Override
 	public boolean restrictionsAware() {
 		return restrictionsAware;
@@ -143,21 +248,8 @@ public class GeneralRouter extends VehicleRouter {
 	@Override
 	public float defineObstacle(RouteDataObject road, int point) {
 		int[] pointTypes = road.getPointTypes(point);
-		if(pointTypes == null) {
-			return 0;
-		}
-		RouteRegion reg = road.region;
-		int sz = pointTypes.length;
-		for(int i=0; i<sz; i++) {
-			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes[i]);
-			Float v = obstacles.get(r.getTag() + "$" + r.getValue());
-			if(v != null ){
-				return v;
-			}
-			v = obstacles.get(r.getTag() + "$");
-			if(v != null ){
-				return v;
-			}
+		if(pointTypes != null) {
+			return getObjContext(RouteDataObjectAttribute.OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
 		}
 		return 0;
 	}
@@ -165,90 +257,30 @@ public class GeneralRouter extends VehicleRouter {
 	@Override
 	public float defineRoutingObstacle(RouteDataObject road, int point) {
 		int[] pointTypes = road.getPointTypes(point);
-		if(pointTypes == null) {
-			return 0;
-		}
-		RouteRegion reg = road.region;
-		int sz = pointTypes.length;
-		for(int i=0; i<sz; i++) {
-			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes[i]);
-			Float v = routingObstacles.get(r.getTag() + "$" + r.getValue());
-			if(v != null ){
-				return v;
-			}
-			v = routingObstacles.get(r.getTag() + "$");
-			if(v != null ){
-				return v;
-			}
+		if(pointTypes != null){
+			return getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
 		}
 		return 0;
 	}
 	
-	public boolean isOnewayAware() {
-		return onewayAware;
-	}
-	
 	@Override
 	public int isOneWay(RouteDataObject road) {
-		if (!isOnewayAware()) {
-			return 0;
-		}
-		return road.getOneway();
-	}
-
-	
-	
-	public boolean isFollowSpeedLimitations(){
-		return followSpeedLimitations;
-	}
-	
-	private static boolean parseSilentBoolean(String t, boolean v) {
-		if (t == null || t.length() == 0) {
-			return v;
-		}
-		return Boolean.parseBoolean(t);
-	}
-
-	private static float parseSilentFloat(String t, float v) {
-		if (t == null || t.length() == 0) {
-			return v;
-		}
-		return Float.parseFloat(t);
+		return getObjContext(RouteDataObjectAttribute.ONEWAY).evaluateInt(road, 0);
 	}
 
 	@Override
-	public float defineSpeed(RouteDataObject road) {
-		if (isFollowSpeedLimitations()) {
-			float m = road.getMaximumSpeed();
-			if(m > 0) {
-				return m;
-			}
-		}
-		
-		Float value = null;
-		for (int i = 0; i < road.types.length; i++) {
-			RouteTypeRule r = road.region.quickGetEncodingRule(road.types[i]);
-			if(highwaySpeed.containsKey(r.getTag()+"$"+r.getValue())){
-				value = highwaySpeed.get(r.getTag()+"$"+r.getValue());
-				break;
-			}
-		}
-		if (value == null) {
-			return getMinDefaultSpeed();
-		}
-		return value / 3.6f;
+	public float defineRoutingSpeed(RouteDataObject road) {
+		return Math.min(defineVehicleSpeed(road), maxDefaultSpeed);
+	}
+	
+	@Override
+	public float defineVehicleSpeed(RouteDataObject road) {
+		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getMinDefaultSpeed() * 3.6f) / 3.6f;
 	}
 
 	@Override
 	public float defineSpeedPriority(RouteDataObject road) {
-		float priority = 1;
-		for (int i = 0; i < road.types.length; i++) {
-			RouteTypeRule r = road.region.quickGetEncodingRule(road.types[i]);
-			if(highwayPriorities.containsKey(r.getTag()+"$"+r.getValue())){
-				priority *= highwayPriorities.get(r.getTag()+"$"+r.getValue());
-			}
-		}
-		return priority;
+		return getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
 	}
 
 	@Override
@@ -258,7 +290,7 @@ public class GeneralRouter extends VehicleRouter {
 
 	@Override
 	public float getMaxDefaultSpeed() {
-		return maxDefaultSpeed ;
+		return maxDefaultSpeed;
 	}
 
 	
@@ -304,36 +336,7 @@ public class GeneralRouter extends VehicleRouter {
 		return 0;
 	}
 	
-	private <T> void specialize(String specializationTag, Map<String, T> m){
-		ArrayList<String> ks = new ArrayList<String>(m.keySet());
-		for(String s : ks){
-			if(s.startsWith(specializationTag +":")) {
-				String tagName = s.substring((specializationTag +":").length());
-				m.put(tagName, m.get(s));
-			}
-		}
-	}
 
-	@Override
-	public GeneralRouter specifyParameter(String specializationTag) {
-		Map<String, String> attrs = new LinkedHashMap<String, String>(attributes);
-		for(String s : attributes.keySet()){
-			if(s.startsWith(specializationTag +":")) {
-				String tagName = s.substring((specializationTag +":").length());
-				attrs.put(tagName, attributes.get(s));
-			}
-		}
-		GeneralRouter gr = new GeneralRouter(this, attrs);
-		gr.specialize(specializationTag, gr.highwayPriorities);
-		gr.specialize(specializationTag, gr.highwaySpeed);
-		gr.specialize(specializationTag, gr.avoid);
-		gr.specialize(specializationTag, gr.obstacles);
-		gr.specialize(specializationTag, gr.routingObstacles);
-		gr.specialize(specializationTag, gr.attributes);
-		
-		return gr;
-	}
-	
 	@Override
 	public boolean containsAttribute(String attribute) {
 		return attributes.containsKey(attribute);
@@ -344,6 +347,431 @@ public class GeneralRouter extends VehicleRouter {
 		return attributes.get(attribute);
 	}
 	
+	private static boolean parseSilentBoolean(String t, boolean v) {
+		if (t == null || t.length() == 0) {
+			return v;
+		}
+		return Boolean.parseBoolean(t);
+	}
 
+	private static float parseSilentFloat(String t, float v) {
+		if (t == null || t.length() == 0) {
+			return v;
+		}
+		return Float.parseFloat(t);
+	}
+	
+	
+	
+	public static class RoutingParameter {
+		private String id;
+		private String name;
+		private String description;
+		private RoutingParameterType type;
+		private Object[] possibleValues;
+		private String[] possibleValueDescriptions;
+		
+		public String getId() {
+			return id;
+		}
+		
+		public String getName() {
+			return name;
+		}
+		public String getDescription() {
+			return description;
+		}
+		public RoutingParameterType getType() {
+			return type;
+		}
+		public String[] getPossibleValueDescriptions() {
+			return possibleValueDescriptions;
+		}
+		
+		public Object[] getPossibleValues() {
+			return possibleValues;
+		}
+	}
+	
+	
+	private class ParameterContext {
+		private Map<String, String> vars;
+	}
+	
+	public class RouteAttributeContext {
+		List<RouteAttributeEvalRule> rules = new ArrayList<RouteAttributeEvalRule>();
+		ParameterContext paramContext = null;
+		
+		public RouteAttributeContext(){
+		}
+		public RouteAttributeContext(RouteAttributeContext original, Map<String, String> params){
+			if (params != null) {
+				paramContext = new ParameterContext();
+				paramContext.vars = params;
+			}
+			for(RouteAttributeEvalRule rt : original.rules){
+				if(checkParameter(rt)){
+					rules.add(rt);
+				}
+			}
+		}
+		
+		private Object evaluate(RouteDataObject ro) {
+			return evaluate(convert(ro.region, ro.types));
+		}
+
+		public void printRules(PrintStream out) {
+			for(RouteAttributeEvalRule r : rules) {
+				r.printRule(out);
+			}
+		}
+
+		public RouteAttributeEvalRule registerNewRule(String selectValue, String selectType) {
+			RouteAttributeEvalRule ev = new RouteAttributeEvalRule();
+			ev.registerSelectValue(selectValue, selectType);
+			rules.add(ev);	
+			return ev;
+		}
+		
+		public RouteAttributeEvalRule getLastRule() {
+			return rules.get(rules.size() - 1);
+		}
+
+		private Object evaluate(BitSet types) {
+			for (int k = 0; k < rules.size(); k++) {
+				RouteAttributeEvalRule r = rules.get(k);
+				Object o = r.eval(types, paramContext);
+				if (o != null) {
+					return o;
+				}
+			}
+			return null;
+		}
+
+		private boolean checkParameter(RouteAttributeEvalRule r) {
+			if (paramContext != null && r.parameters.size() > 0) {
+				for (String p : r.parameters) {
+					boolean not = false;
+					if (p.startsWith("-")) {
+						not = true;
+						p = p.substring(1);
+					}
+					boolean val = paramContext.vars.containsKey(p);
+					if (not && val) {
+						return false;
+					} else if (!not && !val) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+		
+		public int evaluateInt(RouteDataObject ro, int defValue) {
+			Object o = evaluate(ro);
+			if(!(o instanceof Number)) {
+				return defValue;
+			}
+			return ((Number)o).intValue();
+		}
+		
+		public int evaluateInt(RouteRegion region, int[] types, int defValue) {
+			Object o = evaluate(convert(region, types));
+			if(!(o instanceof Number)){
+				return defValue;
+			}
+			return ((Number)o).intValue();
+		}
+		
+		public float evaluateFloat(RouteDataObject ro, float defValue) {
+			Object o = evaluate(ro);
+			if(!(o instanceof Number)) {
+				return defValue;
+			}
+			return ((Number)o).floatValue();
+		}
+		
+		public float evaluateFloat(RouteRegion region, int[] types, float defValue) {
+			Object o = evaluate(convert(region, types));
+			if(!(o instanceof Number)) {
+				return defValue;
+			}
+			return ((Number)o).floatValue();
+		}
+		
+		private BitSet convert(RouteRegion reg, int[] types) {
+			BitSet b = new BitSet(universalRules.size());
+			Map<Integer, Integer> map = regionConvert.get(reg);
+			if(map == null){
+				map = new HashMap<Integer, Integer>();
+				regionConvert.put(reg, map);
+			}
+			for(int k = 0; k < types.length; k++) {
+				Integer nid = map.get(types[k]);
+				if(nid == null){
+					RouteTypeRule r = reg.quickGetEncodingRule(types[k]);
+					nid = registerTagValueAttribute(r.getTag(), r.getValue());
+					map.put(types[k], nid);
+				}
+				b.set(nid);
+			}
+			return b;
+		}
+	}
+
+	public class RouteAttributeExpression {
+		public static final int LESS_EXPRESSION = 1;
+		public static final int GREAT_EXPRESSION = 2;
+		
+		public RouteAttributeExpression(String[] vs, String valueType, int expressionId) {
+			this.expressionType = expressionId;
+			this.values = vs;
+			if (vs.length < 2) {
+				throw new IllegalStateException("Expression should have at least 2 arguments");
+			}
+			this.cacheValues = new Number[vs.length];
+			this.valueType = valueType;
+			for (int i = 0; i < vs.length; i++) {
+				if(!vs[i].startsWith("$") && !vs[i].startsWith(":")) {
+					Object o = parseValue(vs[i], valueType);
+					if (o instanceof Number) {
+						cacheValues[i] = (Number) o;
+					}
+				}
+			}
+		}
+		
+		private String[] values;
+		private int expressionType;
+		private String valueType;
+		private Number[] cacheValues;
+		
+		public boolean matches(BitSet types, ParameterContext paramContext) {
+			double f1 = calculateExprValue(0, types, paramContext);
+			double f2 = calculateExprValue(1, types, paramContext);
+			if(Double.isNaN(f1) ||Double.isNaN(f2)) {
+				return false;
+			}
+			if (expressionType == LESS_EXPRESSION) {
+				return f1 <= f2;
+			} else if (expressionType == GREAT_EXPRESSION) {
+				return f1 >= f2;
+			}
+			return false;
+		}
+
+		private double calculateExprValue(int id, BitSet types, ParameterContext paramContext) {
+			String value = values[id];
+			Number cacheValue = cacheValues[id];
+			if(cacheValue != null) {
+				return cacheValue.doubleValue();
+			}
+			Object o = null;
+			if (value instanceof String && value.toString().startsWith("$")) {
+				BitSet mask = tagRuleMask.get(value.toString().substring(1));
+				if (mask != null && mask.intersects(types)) {
+					BitSet findBit = new BitSet(mask.size());
+					findBit.or(mask);
+					findBit.and(types);
+					int v = findBit.nextSetBit(0);
+					o = parseValueFromTag(v, valueType);
+				}
+			} else if (value instanceof String && value.toString().startsWith(":")) {
+				String p = ((String) value).substring(1);
+				if (paramContext != null && paramContext.vars.containsKey(p)) {
+					o = parseValue(paramContext.vars.get(p), value);
+				}
+			}
+			
+			if(o instanceof Number) {
+				return ((Number)o).doubleValue();
+			}
+			return Double.NaN;
+		}
+		
+	}
+	
+
+	public class RouteAttributeEvalRule {
+		protected List<String> parameters = new ArrayList<String>() ;
+		protected Object selectValue = null;
+		protected String selectType = null;
+		protected BitSet filterTypes = new BitSet();
+		protected BitSet filterNotTypes = new BitSet();
+		protected BitSet evalFilterTypes = new BitSet();
+		
+		protected Set<String> onlyTags = new LinkedHashSet<String>();
+		protected Set<String> onlyNotTags = new LinkedHashSet<String>();
+		protected List<RouteAttributeExpression> expressions = new ArrayList<RouteAttributeExpression>();
+		
+		public void registerSelectValue(String value, String type) {
+			if(value.startsWith(":") || value.startsWith("$")) {
+				selectValue = value;
+			} else {
+				selectValue = parseValue(value, type);
+				if(selectValue == null) {
+					System.err.println("Routing.xml select value '" + value+"' was not registered");
+				}
+			}
+		}
+		
+		public void printRule(PrintStream out) {
+			out.print(" Select " + selectValue + " if ");
+			for(int k = 0; k < filterTypes.size(); k++) {
+				if(filterTypes.get(k)) {
+					String key = universalRulesById.get(k);
+					out.print(key + " ");
+				}
+			}
+			if(filterNotTypes.size() > 0) {
+				out.print(" ifnot ");
+			}
+			for(int k = 0; k < filterNotTypes.size(); k++) {
+				if(filterNotTypes.get(k)) {
+					String key = universalRulesById.get(k);
+					out.print(key + " ");
+				}
+			}
+			for(int k = 0; k < parameters.size(); k++) {
+				out.print(" param="+parameters.get(k));
+			}
+			if(onlyTags.size() > 0) {
+				out.print(" match tag = " + onlyTags);
+			}
+			if(onlyNotTags.size() > 0) {
+				out.print(" not match tag = " + onlyNotTags);
+			}
+			out.println();
+		}
+
+		public void registerAndTagValueCondition(String tag, String value, boolean not) {
+			if(value == null) { 
+				if (not) {
+					onlyNotTags.add(tag);
+				} else {
+					onlyTags.add(tag);
+				}
+			} else {
+				int vtype = registerTagValueAttribute(tag, value);
+				if(not) {
+					filterNotTypes.set(vtype);
+				} else {
+					filterTypes.set(vtype);
+				}
+			}
+		}
+		
+		public void registerLessCondition(String value1, String value2, String valueType) {
+			expressions.add(new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
+					RouteAttributeExpression.LESS_EXPRESSION));
+		}
+		
+		public void registerGreatCondition(String value1, String value2, String valueType) {
+			expressions.add(new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
+					RouteAttributeExpression.GREAT_EXPRESSION));
+		}
+		
+		public void registerAndParamCondition(String param, boolean not) {
+			param = not ? "-" + param : param;
+			parameters.add(param);
+		}
+
+		public Object eval(BitSet types, ParameterContext paramContext) {
+			if (matches(types, paramContext)) {
+				return calcSelectValue(types, paramContext);
+			}
+			return null;
+		}
+		
+
+		protected Object calcSelectValue(BitSet types, ParameterContext paramContext) {
+			if (selectValue instanceof String && selectValue.toString().startsWith("$")) {
+				BitSet mask = tagRuleMask.get(selectValue.toString().substring(1));
+				if (mask != null && mask.intersects(types)) {
+					BitSet findBit = new BitSet(mask.size());
+					findBit.or(mask);
+					findBit.and(types);
+					int value = findBit.nextSetBit(0);
+					return parseValueFromTag(value, selectType);
+				}
+			} else if (selectValue instanceof String && selectValue.toString().startsWith(":")) {
+				String p = ((String) selectValue).substring(1);
+				if (paramContext != null && paramContext.vars.containsKey(p)) {
+					selectValue = parseValue(paramContext.vars.get(p), selectType);
+				} else {
+					return null;
+				}
+			}
+			return selectValue;
+		}
+
+		public boolean matches(BitSet types, ParameterContext paramContext) {
+			if(!checkAllTypesShouldBePresent(types)) {
+				return false;
+			}
+			if(!checkAllTypesShouldNotBePresent(types)) {
+				return false;
+			}
+			if(!checkFreeTags(types)) {
+				return false;
+			}
+			if(!checkNotFreeTags(types)) {
+				return false;
+			}
+			if(!checkExpressions(types, paramContext)) {
+				return false;
+			}
+			return true;
+		}
+
+		private boolean checkExpressions(BitSet types, ParameterContext paramContext) {
+			for(RouteAttributeExpression e : expressions){
+				if(!e.matches(types, paramContext)) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		private boolean checkFreeTags(BitSet types) {
+			for (String ts : onlyTags) {
+				BitSet b = tagRuleMask.get(ts);
+				if (b == null || !b.intersects(types)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		private boolean checkNotFreeTags(BitSet types) {
+			for (String ts : onlyNotTags) {
+				BitSet b = tagRuleMask.get(ts);
+				if (b != null && b.intersects(types)) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		private boolean checkAllTypesShouldNotBePresent(BitSet types) {
+			if(filterNotTypes.intersects(types)) {
+				return false;
+			}
+			return true;
+		}
+
+		private boolean checkAllTypesShouldBePresent(BitSet types) {
+			// Bitset method subset is missing "filterTypes.isSubset(types)"    
+			// reset previous evaluation
+			evalFilterTypes.or(filterTypes);
+			// evaluate bit intersection and check if filterTypes contained as set in types
+			evalFilterTypes.and(types);
+			if(!evalFilterTypes.equals(filterTypes)) {
+				return false;
+			}
+			return true;
+		}
+		
+	}
 }
 

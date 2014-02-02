@@ -378,7 +378,7 @@ public class BinaryRoutePlannerOld {
 				// g(x) - calculate distance to that point and calculate time
 				
 				float priority = ctx.getRouter().defineSpeedPriority(road);
-				float speed = ctx.getRouter().defineSpeed(road) * priority;
+				float speed = ctx.getRouter().defineRoutingSpeed(road) * priority;
 				if (speed == 0) {
 					speed = ctx.getRouter().getMinDefaultSpeed() * priority;
 				}

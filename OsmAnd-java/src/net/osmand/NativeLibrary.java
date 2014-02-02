@@ -136,11 +136,12 @@ public class NativeLibrary {
 		List<String> keys = new ArrayList<String>();
 		List<String> values = new ArrayList<String>();
 		GeneralRouter r = (GeneralRouter) config.router;
-		fillObjects(state, keys, values, 0, r.highwaySpeed);
-		fillObjects(state, keys, values, 1, r.highwayPriorities);
-		fillObjects(state, keys, values, 2, r.avoid);
-		fillObjects(state, keys, values, 3, r.obstacles);
-		fillObjects(state, keys, values, 4, r.routingObstacles);
+		// TODO
+//		fillObjects(state, keys, values, 0, r.highwaySpeed);
+//		fillObjects(state, keys, values, 1, r.highwayPriorities);
+//		fillObjects(state, keys, values, 2, r.avoid);
+//		fillObjects(state, keys, values, 3, r.obstacles);
+//		fillObjects(state, keys, values, 4, r.routingObstacles);
 		LinkedHashMap<String, String> attrs = new LinkedHashMap<String, String>(config.attributes);
 		attrs.putAll(r.attributes);
 		fillObjects(state, keys, values, 5, attrs);

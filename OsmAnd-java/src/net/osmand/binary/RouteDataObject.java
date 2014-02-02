@@ -7,7 +7,7 @@ import java.text.MessageFormat;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
-import net.osmand.util.MapUtils;
+import net.osmand.util.Algorithms;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
@@ -158,6 +158,51 @@ public class RouteDataObject {
             }
 		}
 		return maxSpeed ;
+	}
+	
+	
+	public static float parseSpeed(String v, float def) {
+		if(v.equals("none")) {
+			return RouteDataObject.NONE_MAX_SPEED;
+		} else {
+			int i = Algorithms.findFirstNumberEndIndex(v);
+			if (i > 0) {
+				float f = Float.parseFloat(v.substring(0, i));
+				f /= 3.6; // km/h -> m/s
+				if (v.contains("mph")) {
+					f *= 1.6;
+				}
+				return f;
+			}
+		}
+		return def;
+	}
+	
+	public static float parseLength(String v, float def) {
+		// 14"10' not supported
+		int i = Algorithms.findFirstNumberEndIndex(v);
+		if (i > 0) {
+			float f = Float.parseFloat(v.substring(0, i));
+			if (v.contains("\"") || v.contains("ft")) {
+				// foot to meters
+				f *= 0.3048;
+			}
+			return f;
+		}
+		return def;
+	}
+	
+	public static float parseWeightInTon(String v, float def) {
+		int i = Algorithms.findFirstNumberEndIndex(v);
+		if (i > 0) {
+			float f = Float.parseFloat(v.substring(0, i));
+			if (v.contains("\"") || v.contains("lbs")) {
+				// lbs -> kg -> ton
+				f = (f * 0.4535f) / 1000f;
+			}
+			return f;
+		}
+		return def;
 	}
 	
 	public boolean loop(){

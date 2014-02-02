@@ -44,7 +44,7 @@ public class RouteResultPreparation {
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
 			double distOnRoadToPass = 0;
-			double speed = ctx.getRouter().defineSpeed(road);
+			double speed = ctx.getRouter().defineVehicleSpeed(road);
 			if (speed == 0) {
 				speed = ctx.getRouter().getMinDefaultSpeed();
 			} else {

@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Stack;
 
 import net.osmand.PlatformUtil;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.osmand.router.GeneralRouter.RouteAttributeContext;
+import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -45,7 +48,7 @@ public class RoutingConfiguration {
 	public static class Builder {
 		// Design time storage
 		private String defaultRouter = "";
-		private Map<String, GeneralRouter> routers = new LinkedHashMap<String, GeneralRouter>();
+		private Map<String, VehicleRouter> routers = new LinkedHashMap<String, VehicleRouter>();
 		private Map<String, String> attributes = new LinkedHashMap<String, String>();
 
 		public RoutingConfiguration build(String router, int memoryLimitMB) {
@@ -63,9 +66,11 @@ public class RoutingConfiguration {
 			if (routers.containsKey(router)) {
 				i.router = routers.get(router);
 				if (specialization != null) {
+					Map<String, String> params = new LinkedHashMap<String, String>();
 					for (String s : specialization) {
-						i.router = i.router.specifyParameter(s);
+						params.put(s, "true");
 					}
+					i.router = i.router.build(params);
 				}
 				i.routerName = router;
 			}
@@ -90,9 +95,8 @@ public class RoutingConfiguration {
 		}
 		
 		private String getAttribute(VehicleRouter router, String propertyName) {
-		    String attr = router.getAttribute(propertyName);
-			if (attr != null) {
-				return attr;
+			if (router.containsAttribute(propertyName)) {
+				return router.getAttribute(propertyName);
 			}
 			return attributes.get(propertyName);
 		}
@@ -119,21 +123,11 @@ public class RoutingConfiguration {
 
 	public static RoutingConfiguration.Builder getDefault() {
 		if (DEFAULT == null) {
-            InputStream resourceAsStream = null;
 			try {
-                resourceAsStream = RoutingConfiguration.class.getResourceAsStream("routing.xml");
-                DEFAULT = parseFromInputStream(resourceAsStream);
+				DEFAULT = parseFromInputStream(RoutingConfiguration.class.getResourceAsStream("routing.xml"));
 			} catch (Exception e) {
 				throw new IllegalStateException(e);
-			} finally {
-                if (resourceAsStream != null) {
-                    try {
-                        resourceAsStream.close();
-                    } catch (IOException ignore) {
-                        //
-                    }
-                }
-            }
+			}
 		}
 		return DEFAULT;
 	}
@@ -142,10 +136,10 @@ public class RoutingConfiguration {
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
 		final RoutingConfiguration.Builder config = new RoutingConfiguration.Builder();
 		GeneralRouter currentRouter = null;
-		String previousKey = null;
-		String previousTag = null;
-		int tok;
+		RouteDataObjectAttribute currentAttribute = null;
+		Stack<RoutingRule> rulesStck = new Stack<RoutingConfiguration.RoutingRule>();
 		parser.setInput(is, "UTF-8");
+		int tok;
 		while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 			if (tok == XmlPullParser.START_TAG) {
 				String name = parser.getName();
@@ -155,80 +149,111 @@ public class RoutingConfiguration {
 					currentRouter = parseRoutingProfile(parser, config);
 				} else if ("attribute".equals(name)) {
 					parseAttribute(parser, config, currentRouter);
-					previousKey = parser.getAttributeValue("", "name");
-					previousTag = name;
-				} else if ("specialization".equals(name)) {
-					parseSpecialization(parser, currentRouter, previousKey, previousTag);
+				} else if ("parameter".equals(name)) {
+					parseRoutingParameter(parser, currentRouter);
+				} else if ("point".equals(name) || "way".equals(name)) {
+					String attribute = parser.getAttributeValue("", "attribute");
+					currentAttribute = RouteDataObjectAttribute.getValueOf(attribute);
 				} else {
-					previousKey = parser.getAttributeValue("", "tag") + "$" + parser.getAttributeValue("", "value");
-					previousTag = name;
-					if (parseCurrentRule(parser, currentRouter, previousKey, name)) {
-
-					} else {
-
-					}
+					parseRoutingRule(parser, currentRouter, currentAttribute, rulesStck);
+				}
+			} else if (tok == XmlPullParser.END_TAG) {
+				String pname = parser.getName();
+				if (checkTag(pname)) {
+					rulesStck.pop();
 				}
 			}
 		}
 		return config;
 	}
 
-	private static boolean parseCurrentRule(XmlPullParser parser, GeneralRouter currentRouter, String key, String name) {
-		if ("road".equals(name)) {
-			currentRouter.highwayPriorities.put(key, parseSilentFloat(parser.getAttributeValue("", "priority"), 1));
-			currentRouter.highwaySpeed.put(key, parseSilentFloat(parser.getAttributeValue("", "speed"), 10));
-			return true;
-		} else if ("obstacle".equals(name)) {
-			float penalty = parseSilentFloat(parser.getAttributeValue("", "penalty"), 0);
-			currentRouter.obstacles.put(key, penalty);
-			float routingPenalty = parseSilentFloat(parser.getAttributeValue("", "routingPenalty"), penalty);
-			currentRouter.routingObstacles.put(key, routingPenalty);
-			return true;
-		} else if ("avoid".equals(name)) {
-			float priority = parseSilentFloat(parser.getAttributeValue("", "decreasedPriority"), 0);
-			if (priority == 0) {
-				currentRouter.avoid.put(key, priority);
-			} else {
-				currentRouter.highwayPriorities.put(key, priority);
+	private static void parseRoutingParameter(XmlPullParser parser, GeneralRouter currentRouter) {
+		String description = parser.getAttributeValue("", "description");
+		String name = parser.getAttributeValue("", "name");
+		String id = parser.getAttributeValue("", "id");
+		String type = parser.getAttributeValue("", "type");
+		if(type.equalsIgnoreCase("boolean")) {
+			currentRouter.registerBooleanParameter(id, name, description);
+		} else if(type.equalsIgnoreCase("numeric")) {
+			String values = parser.getAttributeValue("", "values");
+			String valueDescriptions = parser.getAttributeValue("", "valueDescriptions");
+			String[] strValues = values.split(",");
+			Double[] vls = new Double[strValues.length];
+			for(int i =0; i< vls.length; i++) {
+				vls[i] =Double.parseDouble(strValues[i].trim());
 			}
-			return true;
+			currentRouter.registerNumericParameter(id, name, description, vls , 
+					valueDescriptions.split(","));
 		} else {
-			return false;
+			throw new UnsupportedOperationException("Unsupported routing parameter type - " + type);
+		}
+	}
+	
+	private static class RoutingRule {
+		String tagName;
+		String t;
+		String v;
+		String param;
+		String value1;
+		String value2;
+		String type;
+	}
+
+	private static void parseRoutingRule(XmlPullParser parser, GeneralRouter currentRouter, RouteDataObjectAttribute attr,
+			Stack<RoutingRule> stack) {
+		String pname = parser.getName();
+		if (checkTag(pname)) {
+			if(attr == null){
+				throw new NullPointerException("Select tag filter outside road attribute < " + pname + " > : "+parser.getLineNumber());
+			}
+			RoutingRule rr = new RoutingRule();
+			rr.tagName = pname;
+			rr.t = parser.getAttributeValue("", "t");
+			rr.v = parser.getAttributeValue("", "v");
+			rr.param = parser.getAttributeValue("", "param");
+			rr.value1 = parser.getAttributeValue("", "value1");
+			rr.value2 = parser.getAttributeValue("", "value2");
+			rr.type = parser.getAttributeValue("", "type");
+			
+			RouteAttributeContext ctx = currentRouter.getObjContext(attr);
+			if("select".equals(rr.tagName)) {
+				String val = parser.getAttributeValue("", "value");
+				String type = parser.getAttributeValue("", "type");
+				ctx.registerNewRule(val, type);
+				addSubclause(rr, ctx);
+				for (int i = 0; i < stack.size(); i++) {
+					addSubclause(stack.get(i), ctx);
+				}
+			} else if(stack.size() > 0 && stack.peek().tagName.equals("select")) {
+				addSubclause(rr, ctx);
+			}
+			stack.push(rr);
 		}
 	}
 
-	private static void parseSpecialization(XmlPullParser parser, GeneralRouter currentRouter, String previousKey, String previousTag) {
-		String in = parser.getAttributeValue("","input");
-		if (previousKey != null) {
-			String k = in + ":" + previousKey;
-			if (parser.getAttributeValue("","penalty") != null) {
-				float penalty = parseSilentFloat(parser.getAttributeValue("","penalty"), 0);
-				currentRouter.obstacles.put(k, penalty);
-				float routingPenalty = parseSilentFloat(parser.getAttributeValue("","routingPenalty"), penalty );
-				currentRouter.routingObstacles.put(k, routingPenalty);
-			}
-			if (parser.getAttributeValue("","priority") != null) {
-				currentRouter.highwayPriorities.put(k, parseSilentFloat(parser.getAttributeValue("","priority"), 0));
-			}
-			if (parser.getAttributeValue("","speed") != null) {
-				currentRouter.highwaySpeed.put(k, parseSilentFloat(parser.getAttributeValue("","speed"), 0));
-			}
-			if ("attribute".equals(previousTag)) {
-				currentRouter.attributes.put(k, parser.getAttributeValue("","value"));
-			}
-			if ("avoid".equals(previousTag)) {
-				float priority = parseSilentFloat(parser.getAttributeValue("","decreasedPriority"), 0);
-				if (priority == 0) {
-					currentRouter.avoid.put(k, priority);
-				} else {
-					currentRouter.highwayPriorities.put(k, priority);
-				}
-			}
+	private static boolean checkTag(String pname) {
+		return "select".equals(pname) || "if".equals(pname) || "ifnot".equals(pname)
+				|| "ge".equals(pname) || "le".equals(pname);
+	}
+
+	private static void addSubclause(RoutingRule rr, RouteAttributeContext ctx) {
+		boolean not = "ifnot".equals(rr.tagName);
+		if(!Algorithms.isEmpty(rr.param)) {
+			ctx.getLastRule().registerAndParamCondition(rr.param, not);
+		}
+		if (!Algorithms.isEmpty(rr.t)) {
+			ctx.getLastRule().registerAndTagValueCondition(rr.t, Algorithms.isEmpty(rr.v) ? null : rr.v, not);
+		}
+		if (rr.tagName.equals("ge")) {
+			ctx.getLastRule().registerGreatCondition(rr.value1, rr.value2, rr.type);
+		} else if (rr.tagName.equals("le")) {
+			ctx.getLastRule().registerLessCondition(rr.value1, rr.value2, rr.type);
 		}
 	}
+
+	
 
 	private static GeneralRouter parseRoutingProfile(XmlPullParser parser, final RoutingConfiguration.Builder config) {
-		GeneralRouter currentRouter;
 		String currentSelectedRouter = parser.getAttributeValue("", "name");
 		Map<String, String> attrs = new LinkedHashMap<String, String>();
 		for(int i=0; i< parser.getAttributeCount(); i++) {
@@ -236,7 +261,7 @@ public class RoutingConfiguration {
 		}
 		GeneralRouterProfile c = Algorithms.parseEnumValue(GeneralRouterProfile.values(), 
 				parser.getAttributeValue("", "baseProfile"), GeneralRouterProfile.CAR);
-		currentRouter = new GeneralRouter(c, attrs);
+		GeneralRouter currentRouter = new GeneralRouter(c, attrs);
 		config.routers.put(currentSelectedRouter, currentRouter);
 		return currentRouter;
 	}
