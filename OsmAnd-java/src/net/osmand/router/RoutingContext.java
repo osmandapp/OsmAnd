@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -366,7 +367,12 @@ public class RoutingContext {
 	
 	public void checkOldRoutingFiles(BinaryMapIndexReader key) {
 		if(calculationMode == RouteCalculationMode.BASE && key.getDateCreated() < 1390431600000l) { // new SimpleDateFormat("dd-MM-yyyy").parse("23-01-2014").getTime()
- 			throw new RuntimeException("Update map '"+key.getRegionNames()+ "' !");
+			System.out.println(key.getDateCreated() + " " + new Date(key.getDateCreated()));
+			String map = "";
+			for (RouteRegion r : key.getRoutingIndexes()) {
+				map = r.getName();
+			}
+ 			throw new RuntimeException("Update map '"+map+ "' !");
 		}		
 	}
 	

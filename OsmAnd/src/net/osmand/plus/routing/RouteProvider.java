@@ -366,7 +366,7 @@ public class RouteProvider {
 		return new RouteCalculationResult(res, null, params, null);
 	}
 	
-	protected RouteCalculationResult findVectorMapsRoute(RouteCalculationParams params) throws IOException {
+	protected RouteCalculationResult findVectorMapsRoute(final RouteCalculationParams params) throws IOException {
 		BinaryMapIndexReader[] files = params.ctx.getTodoAPI().getRoutingMapFiles();
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(false);
 		OsmandSettings settings = params.ctx.getSettings();
@@ -446,8 +446,13 @@ public class RouteProvider {
 					result = router.searchRoute(complexCtx, st, en, inters);
 					// discard ctx and replace with calculated
 					ctx = complexCtx;
-				} catch(RuntimeException e) {
-					params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());
+				} catch(final RuntimeException e) {
+					params.ctx.runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());							
+						}
+					});
 					result = router.searchRoute(ctx, st, en, inters);
 				}
 			} else {

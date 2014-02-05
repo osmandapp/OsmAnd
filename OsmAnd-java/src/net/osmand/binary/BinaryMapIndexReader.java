@@ -107,6 +107,7 @@ public class BinaryMapIndexReader {
 		codedIS = CodedInputStream.newInstance(raf);
 		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		version = referenceToSameFile.version;
+		dateCreated = referenceToSameFile.dateCreated;
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
