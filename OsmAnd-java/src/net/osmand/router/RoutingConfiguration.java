@@ -34,7 +34,8 @@ public class RoutingConfiguration {
 	public int planRoadDirection = 0;
 
 	// 1.3 Router specific coefficients and restrictions
-	public VehicleRouter router = new GeneralRouter(GeneralRouterProfile.CAR, new LinkedHashMap<String, String>());
+	// use GeneralRouter and not interface to simplify native access !
+	public GeneralRouter router = new GeneralRouter(GeneralRouterProfile.CAR, new LinkedHashMap<String, String>());
 	public String routerName = "";
 	
 	// 1.4 Used to calculate route in movement
@@ -48,7 +49,7 @@ public class RoutingConfiguration {
 	public static class Builder {
 		// Design time storage
 		private String defaultRouter = "";
-		private Map<String, VehicleRouter> routers = new LinkedHashMap<String, VehicleRouter>();
+		private Map<String, GeneralRouter> routers = new LinkedHashMap<String, GeneralRouter>();
 		private Map<String, String> attributes = new LinkedHashMap<String, String>();
 
 		public RoutingConfiguration build(String router, int memoryLimitMB) {
@@ -233,7 +234,7 @@ public class RoutingConfiguration {
 
 	private static boolean checkTag(String pname) {
 		return "select".equals(pname) || "if".equals(pname) || "ifnot".equals(pname)
-				|| "ge".equals(pname) || "le".equals(pname);
+				|| "gt".equals(pname) || "le".equals(pname);
 	}
 
 	private static void addSubclause(RoutingRule rr, RouteAttributeContext ctx) {
@@ -244,7 +245,7 @@ public class RoutingConfiguration {
 		if (!Algorithms.isEmpty(rr.t)) {
 			ctx.getLastRule().registerAndTagValueCondition(rr.t, Algorithms.isEmpty(rr.v) ? null : rr.v, not);
 		}
-		if (rr.tagName.equals("ge")) {
+		if (rr.tagName.equals("gt")) {
 			ctx.getLastRule().registerGreatCondition(rr.value1, rr.value2, rr.type);
 		} else if (rr.tagName.equals("le")) {
 			ctx.getLastRule().registerLessCondition(rr.value1, rr.value2, rr.type);

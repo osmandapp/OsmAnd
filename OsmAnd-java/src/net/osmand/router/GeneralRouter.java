@@ -236,7 +236,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
-	public VehicleRouter build(Map<String, String> params) {
+	public GeneralRouter build(Map<String, String> params) {
 		return new GeneralRouter(this, params);
 	}
 
@@ -309,17 +309,20 @@ public class GeneralRouter implements VehicleRouter {
 		int[] pt = prev.getRoad().getPointTypes(prevSegmentEnd);
 		if(pt != null) {
 			RouteRegion reg = prev.getRoad().region;
-			for(int i=0; i<pt.length; i++) {
+			for (int i = 0; i < pt.length; i++) {
 				RouteTypeRule r = reg.quickGetEncodingRule(pt[i]);
-				if("highway".equals(r.getTag()) && "traffic_signals".equals(r.getValue())) {
-					// traffic signals don't add turn info 
+				if ("highway".equals(r.getTag()) && "traffic_signals".equals(r.getValue())) {
+					// traffic signals don't add turn info
 					return 0;
 				}
 			}
 		}
-		double rt = getRoundaboutTurn();
-		if(rt > 0 && !prev.getRoad().roundabout() && segment.getRoad().roundabout()) {
-			return rt;
+		
+		if(segment.getRoad().roundabout() && !prev.getRoad().roundabout()) {
+			double rt = getRoundaboutTurn();
+			if(rt > 0) {
+				return rt;
+			}
 		}
 		if (getLeftTurn() > 0 || getRightTurn() > 0) {
 			double a1 = segment.getRoad().directionRoute(segment.getSegmentStart(), segment.getSegmentStart() < segmentEnd);
@@ -414,6 +417,24 @@ public class GeneralRouter implements VehicleRouter {
 					rules.add(rt);
 				}
 			}
+		}
+		
+		public RouteAttributeEvalRule[] getRules() {
+			return rules.toArray(new RouteAttributeEvalRule[rules.size()]);
+		}
+		
+		public String[] getParamKeys() {
+			if(paramContext == null) {
+				return new String[0];
+			}
+			return paramContext.vars.keySet().toArray(new String[paramContext.vars.size()]);
+		}
+		
+		public String[] getParamValues() {
+			if(paramContext == null) {
+				return new String[0];
+			}
+			return paramContext.vars.values().toArray(new String[paramContext.vars.size()]);
 		}
 		
 		private Object evaluate(RouteDataObject ro) {
@@ -540,10 +561,11 @@ public class GeneralRouter implements VehicleRouter {
 				}
 			}
 		}
-		
+		// definition
 		private String[] values;
 		private int expressionType;
 		private String valueType;
+		// numbers		
 		private Number[] cacheValues;
 		
 		public boolean matches(BitSet types, ParameterContext paramContext) {
@@ -579,7 +601,7 @@ public class GeneralRouter implements VehicleRouter {
 			} else if (value instanceof String && value.toString().startsWith(":")) {
 				String p = ((String) value).substring(1);
 				if (paramContext != null && paramContext.vars.containsKey(p)) {
-					o = parseValue(paramContext.vars.get(p), value);
+					o = parseValue(paramContext.vars.get(p), valueType);
 				}
 			}
 			
@@ -594,6 +616,11 @@ public class GeneralRouter implements VehicleRouter {
 
 	public class RouteAttributeEvalRule {
 		protected List<String> parameters = new ArrayList<String>() ;
+		protected List<String> tagValueCondDefTag = new ArrayList<String>();
+		protected List<String> tagValueCondDefValue = new ArrayList<String>();
+		protected List<Boolean> tagValueCondDefNot = new ArrayList<Boolean>();
+		
+		protected String selectValueDef = null;
 		protected Object selectValue = null;
 		protected String selectType = null;
 		protected BitSet filterTypes = new BitSet();
@@ -604,7 +631,34 @@ public class GeneralRouter implements VehicleRouter {
 		protected Set<String> onlyNotTags = new LinkedHashSet<String>();
 		protected List<RouteAttributeExpression> expressions = new ArrayList<RouteAttributeExpression>();
 		
+		
+		public RouteAttributeExpression[] getExpressions() {
+			return expressions.toArray(new RouteAttributeExpression[expressions.size()]);
+		}
+		
+		public String[] getParameters() {
+			return parameters.toArray(new String[parameters.size()]);
+		}
+		
+		public String[] getTagValueCondDefTag() {
+			return tagValueCondDefTag.toArray(new String[tagValueCondDefTag.size()]);
+		}
+		
+		public String[] getTagValueCondDefValue() {
+			return tagValueCondDefValue.toArray(new String[tagValueCondDefValue.size()]);
+		}
+		
+		public boolean[] getTagValueCondDefNot() {
+			boolean[] r = new boolean[tagValueCondDefNot.size()];
+			for (int i = 0; i < r.length; i++) {
+				r[i] = tagValueCondDefNot.get(i).booleanValue();
+			}
+			return r;
+		}
+		
 		public void registerSelectValue(String value, String type) {
+			selectType = type;
+			selectValueDef = value;
 			if(value.startsWith(":") || value.startsWith("$")) {
 				selectValue = value;
 			} else {
@@ -616,7 +670,7 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		
 		public void printRule(PrintStream out) {
-			out.print(" Select " + selectValue + " if ");
+			out.print(" Select " + selectValue  + " if ");
 			for(int k = 0; k < filterTypes.size(); k++) {
 				if(filterTypes.get(k)) {
 					String key = universalRulesById.get(k);
@@ -641,10 +695,16 @@ public class GeneralRouter implements VehicleRouter {
 			if(onlyNotTags.size() > 0) {
 				out.print(" not match tag = " + onlyNotTags);
 			}
+			if(expressions.size() > 0) {
+				out.println(" subexpressions " + expressions.size());
+			}
 			out.println();
 		}
 
 		public void registerAndTagValueCondition(String tag, String value, boolean not) {
+			tagValueCondDefTag.add(tag);
+			tagValueCondDefValue.add(value);
+			tagValueCondDefNot.add(not);
 			if(value == null) { 
 				if (not) {
 					onlyNotTags.add(tag);
@@ -763,6 +823,7 @@ public class GeneralRouter implements VehicleRouter {
 		private boolean checkAllTypesShouldBePresent(BitSet types) {
 			// Bitset method subset is missing "filterTypes.isSubset(types)"    
 			// reset previous evaluation
+			// evalFilterTypes.clear(); // not needed same as or()
 			evalFilterTypes.or(filterTypes);
 			// evaluate bit intersection and check if filterTypes contained as set in types
 			evalFilterTypes.and(types);
@@ -770,6 +831,15 @@ public class GeneralRouter implements VehicleRouter {
 				return false;
 			}
 			return true;
+		}
+		
+	}
+
+
+	public void printRules(PrintStream out) {
+		for(int i = 0; i < RouteDataObjectAttribute.values().length ; i++) {
+			out.println(RouteDataObjectAttribute.values()[i]);
+			objectAttributes[i].printRules(out);
 		}
 		
 	}

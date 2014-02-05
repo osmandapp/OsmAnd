@@ -1,31 +1,22 @@
 package net.osmand;
 
-import gnu.trove.list.array.TIntArrayList;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.logging.Log;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.GeneralRouter;
 import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
+
+import org.apache.commons.logging.Log;
 
 public class NativeLibrary {
 
@@ -132,34 +123,11 @@ public class NativeLibrary {
 	public RouteSegmentResult[] runNativeRouting(int sx31, int sy31, int ex31, int ey31, RoutingConfiguration config,
 			RouteRegion[] regions, RouteCalculationProgress progress, PrecalculatedRouteDirection precalculatedRouteDirection, 
 			boolean basemap) {
-		TIntArrayList state = new TIntArrayList();
-		List<String> keys = new ArrayList<String>();
-		List<String> values = new ArrayList<String>();
-		GeneralRouter r = (GeneralRouter) config.router;
-		// TODO
-//		fillObjects(state, keys, values, 0, r.highwaySpeed);
-//		fillObjects(state, keys, values, 1, r.highwayPriorities);
-//		fillObjects(state, keys, values, 2, r.avoid);
-//		fillObjects(state, keys, values, 3, r.obstacles);
-//		fillObjects(state, keys, values, 4, r.routingObstacles);
-		LinkedHashMap<String, String> attrs = new LinkedHashMap<String, String>(config.attributes);
-		attrs.putAll(r.attributes);
-		fillObjects(state, keys, values, 5, attrs);
-
-		return nativeRouting(new int[] { sx31, sy31, ex31, ey31 }, state.toArray(), keys.toArray(new String[keys.size()]),
-				values.toArray(new String[values.size()]), config.initialDirection == null ? -360 : config.initialDirection.floatValue(),
+//		config.router.printRules(System.out);
+		return nativeRouting(new int[] { sx31, sy31, ex31, ey31 }, config, config.initialDirection == null ? -360 : config.initialDirection.floatValue(),
 				regions, progress, precalculatedRouteDirection, basemap);
 	}
 
-	public <T> void fillObjects(TIntArrayList state, List<String> keys, List<String> values, int s, Map<String, T> map) {
-		Iterator<Entry<String, T>> it = map.entrySet().iterator();
-		while (it.hasNext()) {
-			Entry<String, T> n = it.next();
-			state.add(s);
-			keys.add(n.getKey());
-			values.add(n.getValue() + "");
-		}
-	}
 
 	public NativeRouteSearchResult loadRouteRegion(RouteSubregion sub, boolean loadObjects) {
 		NativeRouteSearchResult lr = loadRoutingData(sub.routeReg, sub.routeReg.getName(), sub.routeReg.getFilePointer(), sub, loadObjects);
@@ -177,7 +145,7 @@ public class NativeLibrary {
 
 	protected static native RouteDataObject[] getRouteDataObjects(RouteRegion reg, long rs, int x31, int y31);
 
-	protected static native RouteSegmentResult[] nativeRouting(int[] coordinates, int[] state, String[] keyConfig, String[] valueConfig,
+	protected static native RouteSegmentResult[] nativeRouting(int[] coordinates, RoutingConfiguration r,
 			float initDirection, RouteRegion[] regions, RouteCalculationProgress progress, PrecalculatedRouteDirection precalculatedRouteDirection, boolean basemap);
 
 	protected static native void deleteSearchResult(long searchResultHandle);

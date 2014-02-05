@@ -184,7 +184,7 @@ public class RoutingContext {
 		this.visitor = visitor;
 	}
 
-	public void setRouter(VehicleRouter router) {
+	public void setRouter(GeneralRouter router) {
 		config.router = router;
 	}
 	
