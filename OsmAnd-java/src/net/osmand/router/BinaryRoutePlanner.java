@@ -4,12 +4,9 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Random;
 
 import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
@@ -35,6 +32,7 @@ public class BinaryRoutePlanner {
 	
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
 		// translate into meters 
+		
 		double dy = MapUtils.convert31YToMeters(y1, y2);
 		double dx = MapUtils.convert31XToMeters(x1, x2);
 		return Math.sqrt(dx * dx + dy * dy);
@@ -321,6 +319,8 @@ public class BinaryRoutePlanner {
 		float segmentDist = 0;
 		// +/- diff from middle point
 		short segmentPoint = segment.getSegmentStart();
+		boolean[] processFurther = new boolean[1];
+		RouteSegment previous = segment;
 		boolean dir = segment.isPositive();
 		while (directionAllowed) {
 			// mark previous interval as visited and move to next intersection
@@ -336,7 +336,7 @@ public class BinaryRoutePlanner {
 			}
 			// store <segment> in order to not have unique <segment, direction> in visitedSegments 
 			visitedSegments.put(calculateRoutePointId(segment.getRoad(), segment.isPositive() ? segmentPoint - 1 : segmentPoint, 
-					segment.isPositive()), segment);
+					segment.isPositive()), previous != null ? previous : segment);
 			final int x = road.getPoint31XTile(segmentPoint);
 			final int y = road.getPoint31YTile(segmentPoint);
 			final int prevx = road.getPoint31XTile(prevInd);
@@ -378,9 +378,9 @@ public class BinaryRoutePlanner {
 			float distStartObstacles = segment.distanceFromStart + calculateTimeWithObstacles(ctx, road, segmentDist , obstaclesTime);
 			
 			// We don't check if there are outgoing connections
-			boolean processFurther = processIntersections(ctx, graphSegments, visitedSegments, distStartObstacles,
-					segment, segmentPoint, roadNext, reverseWaySearch, doNotAddIntersections);
-			if (!processFurther) {
+			previous = processIntersections(ctx, graphSegments, visitedSegments, distStartObstacles,
+					segment, segmentPoint, roadNext, reverseWaySearch, doNotAddIntersections, processFurther);
+			if (!processFurther[0]) {
 				directionAllowed = false;
 				continue;
 			}
@@ -552,11 +552,13 @@ public class BinaryRoutePlanner {
 	
 
 
-	private boolean processIntersections(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
+	private RouteSegment processIntersections(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments,  float  distFromStart, RouteSegment segment,
-			short segmentPoint, RouteSegment inputNext, boolean reverseWaySearch, boolean doNotAddIntersections) {
+			short segmentPoint, RouteSegment inputNext, boolean reverseWaySearch, boolean doNotAddIntersections, 
+			boolean[] processFurther) {
 		boolean thereAreRestrictions ;
-		boolean processFurther = true;
+		RouteSegment itself = null;
+		processFurther[0] = true;
 		Iterator<RouteSegment> nextIterator = null;
 		if(inputNext != null && inputNext.getRoad().getId() == segment.getRoad().getId() && inputNext.next == null) {
 			thereAreRestrictions = false;
@@ -583,7 +585,7 @@ public class BinaryRoutePlanner {
 			if (next.getSegmentStart() == segmentPoint && next.getRoad().getId() == segment.getRoad().id) {
 				// find segment itself  
 				// (and process it as other with small exception that we don't add to graph segments and process immediately)
-				RouteSegment itself = next.initRouteSegment(segment.isPositive());
+				itself = next.initRouteSegment(segment.isPositive());
 				if(itself == null) {
 					// do nothing
 				} else if (itself.getParentRoute() == null
@@ -596,7 +598,7 @@ public class BinaryRoutePlanner {
 				} else {
 					// we already processed that segment earlier or it is in graph segments
 					// and we had better results (so we shouldn't process)
-					processFurther = false;
+					processFurther[0] = false;
 				}
 			} else if(!doNotAddIntersections) {
 				RouteSegment nextPos = next.initRouteSegment(true);
@@ -615,7 +617,7 @@ public class BinaryRoutePlanner {
 				hasNext = nextIterator.hasNext();
 			}
 		}
-		return processFurther;
+		return itself;
 	}
 
 

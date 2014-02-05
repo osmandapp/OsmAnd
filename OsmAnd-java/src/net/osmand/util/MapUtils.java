@@ -405,12 +405,12 @@ public class MapUtils {
 	}	
 
 	
-	public static double convert31YToMeters(float y1, float y2) {
+	public static double convert31YToMeters(double y1, double y2) {
 		// translate into meters 
 		return (y1 - y2) * 0.01863d;
 	}
 	
-	public static double convert31XToMeters(float x1, float x2) {
+	public static double convert31XToMeters(double x1, double x2) {
 		// translate into meters 
 		return (x1 - x2) * 0.011d;
 	}
