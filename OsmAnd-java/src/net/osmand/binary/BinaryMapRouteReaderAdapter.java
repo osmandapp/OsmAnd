@@ -188,11 +188,6 @@ public class BinaryMapRouteReaderAdapter {
 	
 	public static class RouteRegion extends BinaryIndexPart {
 		public int regionsRead;
-		public int borderBoxPointer = 0;
-		public int baseBorderBoxPointer = 0;
-		public int borderBoxLength = 0;
-		public int baseBorderBoxLength = 0;
-		
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 		List<RouteSubregion> basesubregions = new ArrayList<RouteSubregion>();
 		List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
@@ -257,6 +252,15 @@ public class BinaryMapRouteReaderAdapter {
 				l = Math.max(l, MapUtils.get31LatitudeY(s.top));
 			}
 			return l;
+		}
+
+		public boolean contains(int x31, int y31) {
+			for(RouteSubregion s : subregions) {
+				if(s.left <= x31 && s.right >= x31 && s.top <= y31 && s.bottom >= y31) {
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 	
@@ -358,20 +362,6 @@ public class BinaryMapRouteReaderAdapter {
 				}
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				codedIS.popLimit(oldLimit);
-				break;
-			}
-			case OsmandOdb.OsmAndRoutingIndex.BASEBORDERBOX_FIELD_NUMBER: 
-			case OsmandOdb.OsmAndRoutingIndex.BORDERBOX_FIELD_NUMBER: {
-				int length = readInt();
-				int filePointer = codedIS.getTotalBytesRead();
-				if(tag == OsmandOdb.OsmAndRoutingIndex.BORDERBOX_FIELD_NUMBER) {
-					region.borderBoxLength = length;
-					region.borderBoxPointer = filePointer;
-				} else {
-					region.baseBorderBoxLength = length;
-					region.baseBorderBoxPointer = filePointer;
-				}
-				codedIS.skipRawBytes(length);
 				break;
 			}
 			case OsmandOdb.OsmAndRoutingIndex.BLOCKS_FIELD_NUMBER : {

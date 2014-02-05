@@ -723,11 +723,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true).makeProfile();
 	// temporarily for new version
-	public final CommonPreference<Boolean> PRECISE_ROUTING_MODE = new BooleanPreference("precise_routing_mode", false).makeProfile();
-	public final CommonPreference<Boolean> OPTIMAL_ROUTE_MODE = new BooleanPreference("optimal_route_mode", true).makeProfile();
-	{
-		OPTIMAL_ROUTE_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
-	}
+	public final CommonPreference<Boolean> DISABLE_COMPLEX_ROUTING = new BooleanPreference("disable_complex_routing", false).makeGlobal();
 	
 	public final OsmandPreference<Boolean> SHOW_TRAFFIC_WARNINGS = new BooleanPreference("show_traffic_warnings", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SHOW_CAMERAS = new BooleanPreference("show_cameras", true).makeProfile().cache();

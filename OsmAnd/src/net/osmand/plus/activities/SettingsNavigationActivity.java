@@ -64,7 +64,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		settings = getMyApplication().getSettings();
 		
 		registerBooleanPreference(settings.FAST_ROUTE_MODE, screen);
-		registerBooleanPreference(settings.PRECISE_ROUTING_MODE, screen);
 		registerBooleanPreference(settings.SNAP_TO_ROAD, screen);
 		registerBooleanPreference(settings.USE_COMPASS_IN_NAVIGATION, screen);
 		

@@ -195,6 +195,8 @@ public class RoutePlannerFrontEnd {
 	private List<RouteSegmentResult> runNativeRouting(final RoutingContext ctx) throws IOException {
 		refreshProgressDistance(ctx);
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new BinaryMapRouteReaderAdapter.RouteRegion[ctx.reverseMap.size()]);
+		ctx.checkOldRoutingFiles(ctx.startX, ctx.startY);
+		ctx.checkOldRoutingFiles(ctx.targetX, ctx.targetY);
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY,
 				ctx.config, regions, ctx.calculationProgress, ctx.precalculatedRouteDirection, ctx.calculationMode == RouteCalculationMode.BASE);
 		ArrayList<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));

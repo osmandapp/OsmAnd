@@ -13,6 +13,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -390,26 +391,24 @@ public class RouteProvider {
 		} else {
 			return applicationModeNotSupported(params);
 		}
-		// order matters
-		List<String> specs = new ArrayList<String>();
+		Map<String, String> paramsR = new LinkedHashMap<String, String>();
 		if (!settings.FAST_ROUTE_MODE.getModeValue(params.mode)) {
-			specs.add(GeneralRouter.USE_SHORTEST_WAY);
+			paramsR.put(GeneralRouter.USE_SHORTEST_WAY, "true");
 		}
 		if(settings.AVOID_FERRIES.getModeValue(params.mode)){
-			specs.add(GeneralRouter.AVOID_FERRIES);
+			paramsR.put(GeneralRouter.AVOID_FERRIES, "true");
 		}
 		if(settings.AVOID_TOLL_ROADS.getModeValue(params.mode)){
-			specs.add(GeneralRouter.AVOID_TOLL);
+			paramsR.put(GeneralRouter.AVOID_TOLL, "true");
 		}
 		if(settings.AVOID_MOTORWAY.getModeValue(params.mode)){
-			specs.add(GeneralRouter.AVOID_MOTORWAY);
+			paramsR.put(GeneralRouter.AVOID_MOTORWAY, "true");
 		} else if(settings.PREFER_MOTORWAYS.getModeValue(params.mode)){
-			specs.add(GeneralRouter.PREFER_MOTORWAYS);
+			paramsR.put(GeneralRouter.PREFER_MOTORWAYS, "true");
 		}
 		if(settings.AVOID_UNPAVED_ROADS.getModeValue(params.mode)){
-			specs.add(GeneralRouter.AVOID_UNPAVED);
+			paramsR.put(GeneralRouter.AVOID_UNPAVED, "true");
 		}
-		String[] specialization = specs.toArray(new String[specs.size()]);
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();
 		// make visible
@@ -418,13 +417,21 @@ public class RouteProvider {
 		
 		RoutingConfiguration cf = config.build(p.name().toLowerCase(), params.start.hasBearing() ? 
 				params.start.getBearing() / 180d * Math.PI : null, 
-				memoryLimit, specialization);
-		RoutingContext ctx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files,
-				params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) ?
-				RouteCalculationMode.COMPLEX : RouteCalculationMode.NORMAL);
+				memoryLimit, paramsR);
+		boolean complex = params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) && !settings.DISABLE_COMPLEX_ROUTING.get();
+		RoutingContext ctx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files, 
+				RouteCalculationMode.NORMAL);
+		RoutingContext complexCtx = null;
+		if(complex) {
+			complexCtx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files,
+				RouteCalculationMode.COMPLEX);
+			complexCtx.calculationProgress = params.calculationProgress;
+		}
+		ctx.leftSideNavigation = params.leftSide;
 		ctx.calculationProgress = params.calculationProgress;
 		if(params.previousToRecalculate != null) {
-			ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
+			 // not used any more
+			// ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
 		}
 		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
 		LatLon en = new LatLon(params.end.getLatitude(), params.end.getLongitude());
@@ -433,8 +440,20 @@ public class RouteProvider {
 			inters  = new ArrayList<LatLon>(params.intermediates);
 		}
 		try {
-			ctx.leftSideNavigation = params.leftSide;
-			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en, inters);
+			List<RouteSegmentResult> result ;
+			if(complexCtx != null) {
+				try {
+					result = router.searchRoute(complexCtx, st, en, inters);
+					// discard ctx and replace with calculated
+					ctx = complexCtx;
+				} catch(RuntimeException e) {
+					params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());
+					result = router.searchRoute(ctx, st, en, inters);
+				}
+			} else {
+				result = router.searchRoute(ctx, st, en, inters);
+			}
+			
 			if(result == null || result.isEmpty()) {
 				if(ctx.calculationProgress.segmentNotFound == 0) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.starting_point_too_far));

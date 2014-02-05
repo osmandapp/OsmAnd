@@ -9,6 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="tip_recent_changes_1_7_t">Changes in 1.7:
+        * Completely updated routing (fast and precise)
+        * Active simulation in tunnels 
+    </string>
+    <string name="complex_route_calculation_failed">Fast route calculation failed (%s), fallback to slow calculation.</string>
+    <string name="disable_complex_routing_descr">Disable 2-phase routing for car navigation</string>
+    <string name="disable_complex_routing">Disable complex routing</string>
     <string name="amenity_type_seamark">Seamark</string>
     <string name="app_modes_choose_descr">Choose use profiles visible in application</string>
     <string name="app_modes_choose">Application Profiles</string>

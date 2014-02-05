@@ -102,16 +102,9 @@ public class RoutingContext {
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 
-
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
 
-
-
-
-
-
-	
 	public RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
 		this.map.putAll(cp.map);
@@ -370,6 +363,24 @@ public class RoutingContext {
 		int tileY = y31 >> zoomToLoad;
 		return loadTileHeaders(zoomToLoad, tileX, tileY);
 	}
+	
+	public void checkOldRoutingFiles(BinaryMapIndexReader key) {
+		if(calculationMode == RouteCalculationMode.BASE && key.getDateCreated() < 1390431600000l) { // new SimpleDateFormat("dd-MM-yyyy").parse("23-01-2014").getTime()
+ 			throw new RuntimeException("Update map '"+key.getRegionNames()+ "' !");
+		}		
+	}
+	
+	public void checkOldRoutingFiles(int x31, int y31) {
+		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
+			BinaryMapIndexReader reader = r.getKey();
+			for(RouteRegion reg : reader.getRoutingIndexes()) {
+				if(reg.contains(x31, y31)) {
+					checkOldRoutingFiles(reader);
+					break;
+				}
+			}
+		}
+	}
 
 	public List<RoutingSubregionTile> loadTileHeaders(final int zoomToLoadM31, int tileX, int tileY) {
 		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(tileX << zoomToLoadM31,
@@ -382,6 +393,9 @@ public class RoutingContext {
 					long now = System.nanoTime();
 					// int rg = r.getValue().get(0).routeReg.regionsRead;
 					List<RouteSubregion> subregs = r.getKey().searchRouteIndexTree(request, r.getValue());
+					if(subregs.size() > 0) {
+						checkOldRoutingFiles(r.getKey());
+					}
 					for (RouteSubregion sr : subregs) {
 						int ind = searchSubregionTile(sr);
 						RoutingSubregionTile found;

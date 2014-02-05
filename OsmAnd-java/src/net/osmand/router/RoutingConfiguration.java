@@ -53,24 +53,20 @@ public class RoutingConfiguration {
 		private Map<String, String> attributes = new LinkedHashMap<String, String>();
 
 		public RoutingConfiguration build(String router, int memoryLimitMB) {
-			return build(router, null, memoryLimitMB, new String[0]);
+			return build(router, null, memoryLimitMB, null);
 		}
 		
-		public RoutingConfiguration build(String router, int memoryLimitMB, String[] specialization) {
-			return build(router, null, memoryLimitMB, specialization);
+		public RoutingConfiguration build(String router, int memoryLimitMB, Map<String, String> params) {
+			return build(router, null, memoryLimitMB, params);
 		}
-		public RoutingConfiguration build(String router, Double direction, int memoryLimitMB, String[] specialization) {
+		public RoutingConfiguration build(String router, Double direction, int memoryLimitMB, Map<String, String> params) {
 			if (!routers.containsKey(router)) {
 				router = defaultRouter;
 			}
 			RoutingConfiguration i = new RoutingConfiguration();
 			if (routers.containsKey(router)) {
 				i.router = routers.get(router);
-				if (specialization != null) {
-					Map<String, String> params = new LinkedHashMap<String, String>();
-					for (String s : specialization) {
-						params.put(s, "true");
-					}
+				if (params != null) {
 					i.router = i.router.build(params);
 				}
 				i.routerName = router;
