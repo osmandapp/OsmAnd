@@ -1634,4 +1634,11 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="map_widget_map_rendering">Vykresľovanie mapy:</string>
     <string name="app_modes_choose_descr">Zvoľte profily použitia viditeľné v aplikácii</string>
     <string name="amenity_type_seamark">Morská značka</string>
+    <string name="tip_recent_changes_1_7_t">Zmeny v 1.7:
+        * Úplne prepracovaná navigácia (routing) (rýchla a presná)
+        * Aktívna simulácia v tuneloch 
+    </string>
+    <string name="complex_route_calculation_failed">Rýchly prepočet trasy zlyhal (%s), použije sa pomalý výpočet.</string>
+    <string name="disable_complex_routing_descr">Vypnúť dvojfázovú navigáciu pre režim auta</string>
+    <string name="disable_complex_routing">Vypnúť komplexnú navigáciu</string>
     </resources>
