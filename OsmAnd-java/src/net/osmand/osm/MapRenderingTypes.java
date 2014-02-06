@@ -261,7 +261,7 @@ public class MapRenderingTypes {
 			rType.poiCategory = parent.poiCategory;
 			rType.poiPrefix = parent.poiPrefix;
 			rType.namePrefix = parent.namePrefix;
-			registerRuleType(rType);
+			rType = registerRuleType(rType);
 		}
 		return rType;
 	}
@@ -449,7 +449,7 @@ public class MapRenderingTypes {
 			rtype.applyToTagValue.add(new TagValuePattern(applyTo, applyValue));
 		}
 		if(!rtype.onlyMap) {
-			registerRuleType(rtype);
+			rtype = registerRuleType(rtype);
 		}
 		
 
@@ -512,16 +512,23 @@ public class MapRenderingTypes {
 			MapRulType mapRulType = types.get(keyVal);
 			if(mapRulType.isAdditional() || mapRulType.isText() ) {
 				rt.id = mapRulType.id;
+				
 				if(rt.applyToTagValue != null ){
 					if(mapRulType.applyToTagValue == null) {
 						rt.applyToTagValue = null;
 					} else {
 						rt.applyToTagValue.addAll(mapRulType.applyToTagValue);
+						mapRulType.applyToTagValue.add(rt.tagValuePattern);
 					}
+				}
+				if(rt.isMain()) {
+					mapRulType.main = true;
+					mapRulType.minzoom = Math.max(rt.minzoom, mapRulType.minzoom);
+					mapRulType.maxzoom = Math.min(rt.maxzoom, mapRulType.maxzoom);
 				}
 //				types.put(keyVal, rt);
 //				typeList.set(rt.id, rt);
-				return rt;
+				return mapRulType;
 			} else {
 				throw new RuntimeException("Duplicate " + keyVal);
 			}
@@ -629,6 +636,7 @@ public class MapRenderingTypes {
 		protected TagValuePattern tagValuePattern;
 		protected boolean additional;
 		protected boolean additionalText;
+		protected boolean main;
 		protected Set<TagValuePattern> applyToTagValue = null;
 		
 		protected String poiPrefix;
@@ -675,6 +683,7 @@ public class MapRenderingTypes {
 		public static MapRulType createMainEntity(String tag, String value) {
 			MapRulType rt = new MapRulType();
 			rt.tagValuePattern = new TagValuePattern(tag, value);
+			rt.main = true;
 			return rt;
 		}
 		
@@ -746,6 +755,10 @@ public class MapRenderingTypes {
 		
 		public boolean isAdditionalOrText() {
 			return additional || additionalText;
+		}
+		
+		public boolean isMain() {
+			return main;
 		}
 		
 		public boolean isText() {
