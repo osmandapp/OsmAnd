@@ -1593,4 +1593,11 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="amenity_type_seamark">Żeglugowy znak orientacyjny</string>
     <string name="osmodroid_seek">Szukaj obiektu</string>
     <string name="osmodroid_unseek">Przestań szukać obiektu</string>
+    <string name="speech_rate_descr">Określ szybkość wymowy dla TTS</string>
+    <string name="speech_rate">Szybkość mowy</string>
+    <string name="tip_recent_changes_1_7_t">Zmiany w wersji 1.7:
+	* Całkowicie zmienione wytyczanie tras (szybko i dokładnie)
+	* Możliwość symulacji trasy w tunelach 
+    </string>
+    <string name="disable_complex_routing_descr">Wyłącz 2-fazowe obliczanie trasy dla nawigacji samochodowej</string>
     </resources>
