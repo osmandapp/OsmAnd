@@ -54,7 +54,6 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.FloatMath;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -577,7 +576,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						if (getMyApplication().getInternalAPI().accessibilityEnabled()) {
+						if (getMyApplication().accessibilityEnabled()) {
 							whereAmIDialog();
 						} else {
 							mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
