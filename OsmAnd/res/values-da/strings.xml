@@ -1663,10 +1663,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="speech_rate_descr">Angiv talehastighed for TTS</string>
     <string name="speech_rate">Talehastighed</string>
     <string name="tip_recent_changes_1_7_t">Ændringer i 1.7 :
-         * Helt opdateret routing (hurtig og præcis)
+         * Helt opdateret ruteplanlægning (hurtig og præcis)
          * Aktiv simulering i tunneller 
     </string>
-    <string name="complex_route_calculation_failed">Hurtig ruteberegning mislykkedes (%s), at gå tilbage til langsom beregning.</string>
-    <string name="disable_complex_routing_descr">Deaktivere 2-faset routing til bilnavigation</string>
-    <string name="disable_complex_routing">Deaktiver komplekse routing</string>
+    <string name="complex_route_calculation_failed">Hurtig ruteberegning mislykkedes (%s), går tilbage til langsom beregning.</string>
+    <string name="disable_complex_routing_descr">Deaktiver 2-faset ruteplanlægning til bilnavigation</string>
+    <string name="disable_complex_routing">Deaktiver kompleks ruteplanlægning</string>
     </resources>
