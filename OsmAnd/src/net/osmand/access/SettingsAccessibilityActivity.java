@@ -77,7 +77,7 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 		for(int i = 0; i < sprNames.length; i++) {
 			sprNames[i] = (int)(sprValues[i] * 100) + " %";
 		}
-		cat.addPreference(createListPreference(settings.SPEECH_RATE, sprNames, sprValues, R.string.speech_rate, R.string.speech_rate_descr););
+		cat.addPreference(createListPreference(settings.SPEECH_RATE, sprNames, sprValues, R.string.speech_rate, R.string.speech_rate_descr));
 		if (Build.VERSION.SDK_INT < 14) { // Build.VERSION_CODES.ICE_CREAM_SANDWICH
 			cat.addPreference(createCheckBoxPreference(settings.SCROLL_MAP_BY_GESTURES, R.string.scroll_map_by_gestures,
 					R.string.scroll_map_by_gestures_descr));
