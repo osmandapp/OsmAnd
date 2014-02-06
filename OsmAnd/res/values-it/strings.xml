@@ -1605,11 +1605,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="tip_faq">Domande più frequenti</string>
     <string name="osmodroid_refresh">Aggiorna i canali</string>
     <string name="app_mode_hiking">Escursionismo</string>
-    <string name="app_mode_motorcycle">Motociletta</string>
+    <string name="app_mode_motorcycle">Motocicletta</string>
     <string name="app_mode_boat">Barca</string>
     <string name="app_mode_aircraft">Aereo</string>
     <string name="map_widget_map_rendering">Stile della mappa:</string>
-    <string name="app_modes_choose_descr">Scegli fra le modalità disponibili in applicazione</string>
+    <string name="app_modes_choose_descr">Scegli fra le modalità d'uso disponibili nell'applicazione</string>
     <string name="app_modes_choose">Modalità applicazione</string>
 	<string name="amenity_type_seamark">Meda</string>
     <string name="osmodroid_seek">Cerca oggetto</string>
@@ -1618,7 +1618,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
         * Simulazione attiva nei tunnel 
     </string>
     <string name="complex_route_calculation_failed">Calcolo veloce del percorso fallito (%s), rinvio al calcolo lento.</string>
-    <string name="disable_complex_routing_descr">Disabilta il calcolo del percorso per in due fasi per l'uso in automobile</string>
+    <string name="disable_complex_routing_descr">Disabilita il calcolo del percorso in due fasi per l'uso in automobile</string>
     <string name="disable_complex_routing">Disabilita il calcolo complesso del percorso</string>
     <string name="speech_rate_descr">Imposta la velocità della sintesi vocale (TTS)</string>
     <string name="speech_rate">Velocità di lettura</string>
