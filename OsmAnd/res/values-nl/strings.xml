@@ -1024,7 +1024,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
 <string name="day_night_info">Dag/nacht info</string>
 <string name="map_widget_day_night">Dag/nacht kaart</string>
 <string name="map_widget_vector_attributes">Kaartweergave attributen:</string>
-<string name="map_widget_renderer">Kaartweergave stijl</string>
+<string name="map_widget_renderer">Kaartstijl</string>
 <string name="tip_rotation_switching_t_v2">Je kan kiezen hoe de kaartweergave geroteerd wordt door herhaaldelijk te tikken op het kompas-icoon.
 		\n\nDe keuzen zijn:
 		\n\t* \'Niet roteren (het noorden is boven)\' - De kaart wordt niet geroteerd. Het noorden is altijd boven
