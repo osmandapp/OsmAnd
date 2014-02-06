@@ -36,7 +36,7 @@ public class ExplorableTextView extends TextView {
 
     
     private boolean accessibilityExtensions() {
-    	return ((OsmandApplication) getContext().getApplicationContext()).getInternalAPI().accessibilityExtensions();
+    	return ((OsmandApplication) getContext().getApplicationContext()).accessibilityExtensions();
     }
 
     // Overridden callback methods to provide accessible exploration means.

@@ -373,7 +373,7 @@ public class MapActivity extends AccessibleActivity  {
 		}
 		final int newZoom = mapView.getZoom() + stp;
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
-		if (app.getInternalAPI().accessibilityEnabled())
+		if (app.accessibilityEnabled())
 			AccessibleToast.makeText(this, getString(R.string.zoomIs) + " " + newZoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 		showAndHideMapPosition();
 	}
@@ -381,7 +381,7 @@ public class MapActivity extends AccessibleActivity  {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER && 
-				app.getInternalAPI().accessibilityEnabled()) {
+				app.accessibilityEnabled()) {
 			if (!uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
 				Message msg = Message.obtain(uiHandler, new Runnable() {
 					@Override
@@ -571,7 +571,7 @@ public class MapActivity extends AccessibleActivity  {
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-			if (!app.getInternalAPI().accessibilityEnabled()) {
+			if (!app.accessibilityEnabled()) {
 				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			} else if (uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
 				uiHandler.removeMessages(LONG_KEYPRESS_MSG_ID);

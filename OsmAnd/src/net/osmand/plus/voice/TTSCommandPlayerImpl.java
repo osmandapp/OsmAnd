@@ -72,6 +72,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					ctx.getString(R.string.voice_data_corrupted));
 		}
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		if(app.accessibilityEnabled()) {
+			cSpeechRate = app.getSettings().SPEECH_RATE.get();
+		}
 		initializeEngine(app, ctx);
 		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_STREAM_GUIDANCE.get().toString());
 	}
@@ -86,6 +89,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	 * optimize use of requesting and abandoning audio focus.
 	 */
 	private int ttsRequests;
+	private float cSpeechRate = 1;
 	
 	// Called from the calculating route thread.
 	@Override
@@ -128,6 +132,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 		if (mTts == null) {
 			mTtsContext = ctx;
+			final float speechRate = cSpeechRate; 
 			mTts = new TextToSpeech(ctx, new OnInitListener() {
 				@Override
 				public void onInit(int status) {
@@ -152,6 +157,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 							case TextToSpeech.LANG_COUNTRY_AVAILABLE:
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
 								mTts.setLanguage(new Locale(language));
+								if(speechRate != 1) {
+									mTts.setSpeechRate(speechRate); 
+								}
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
 								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do

@@ -359,14 +359,14 @@ public class OsmandSettings {
 		
 		@Override
 		protected Boolean getValue(Object prefs, Boolean defaultValue) {
-			return ctx.getInternalAPI().accessibilityEnabled() ?
+			return ctx.accessibilityEnabled() ?
 				super.getValue(prefs, defaultValue) :
 				defaultValue;
 		}
 
 		@Override
 		protected boolean setValue(Object prefs, Boolean val) {
-			return ctx.getInternalAPI().accessibilityEnabled() ?
+			return ctx.accessibilityEnabled() ?
 				super.setValue(prefs, val) :
 				false;
 		}
@@ -614,6 +614,10 @@ public class OsmandSettings {
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<AccessibilityMode> ACCESSIBILITY_MODE = new EnumIntPreference<AccessibilityMode>(
 			"accessibility_mode", AccessibilityMode.DEFAULT, AccessibilityMode.values()).makeGlobal().cache();
+	
+	// this value string is synchronized with settings_pref.xml preference name
+	public final OsmandPreference<Float> SPEECH_RATE =
+		new FloatPreference("speech_rate", 1f).makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =

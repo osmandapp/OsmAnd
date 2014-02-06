@@ -233,7 +233,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		return application.getInternalAPI().accessibilityEnabled() ? false : super.onKeyDown(keyCode, event);
+		return application.accessibilityEnabled() ? false : super.onKeyDown(keyCode, event);
 	}
 
 	public synchronized void addLayer(OsmandMapLayer layer, float zOrder) {
@@ -758,7 +758,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			}
 			rotateToAnimate(initialViewport.getRotate() + angleRelative);
 			final int newZoom = getZoom();
-			if (application.getInternalAPI().accessibilityEnabled()) {
+			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
 					showMessage(getContext().getString(R.string.zoomIs) + " " + newZoom); //$NON-NLS-1$
 				} else {

@@ -19,7 +19,7 @@ public class MapAccessibilityActions implements AccessibilityActionsProvider {
 
     @Override
     public boolean onClick(PointF point, RotatedTileBox tileBox) {
-        if ((Build.VERSION.SDK_INT >= 14) && activity.getMyApplication().getInternalAPI().accessibilityEnabled()) {
+        if ((Build.VERSION.SDK_INT >= 14) && activity.getMyApplication().accessibilityEnabled()) {
         	// not sure if it is very clear why should I mark destination first when I tap on the object
         	return activity.getMyApplication().getLocationProvider().emitNavigationHint();
         }
@@ -28,7 +28,7 @@ public class MapAccessibilityActions implements AccessibilityActionsProvider {
 
     @Override
     public boolean onLongClick(PointF point, RotatedTileBox tileBox) {
-        if ((Build.VERSION.SDK_INT >= 14) && activity.getMyApplication().getInternalAPI().accessibilityEnabled()) {
+        if ((Build.VERSION.SDK_INT >= 14) && activity.getMyApplication().accessibilityEnabled()) {
             final OsmandMapTileView mapView = activity.getMapView();
 	        final double lat = tileBox.getLatFromPixel((int)point.x, (int) point.y);
 	        final double lon = tileBox.getLonFromPixel((int)point.x, (int) point.y);

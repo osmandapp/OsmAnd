@@ -6,26 +6,21 @@ import java.util.List;
 
 import net.osmand.NativeLibrary;
 import net.osmand.ResultMatcher;
-import net.osmand.access.AccessibilityPlugin;
 import net.osmand.data.Amenity;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.render.NativeOsmandLibrary;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlSerializer;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.util.Xml;
-import android.view.accessibility.AccessibilityManager;
 
 public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 
@@ -61,23 +56,6 @@ public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 		return NativeOsmandLibrary.getLoadedLibrary();
 	}
 	
-	public boolean accessibilityExtensions() {
-		return (Build.VERSION.SDK_INT < 14) ? app.getSettings().ACCESSIBILITY_EXTENSIONS.get() : false;
-	}
-
-	@Override
-	public boolean accessibilityEnabled() {
-		final AccessibilityMode mode = app.getSettings().ACCESSIBILITY_MODE.get();
-		if(OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
-			return false;
-		}
-		if (mode == AccessibilityMode.ON) {
-			return true;
-		} else if (mode == AccessibilityMode.OFF) {
-			return false;
-		}
-		return ((AccessibilityManager) app.getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
-	}
 
 	@Override
 	public List<Amenity> searchAmenities(PoiFilter filter, double topLatitude, double leftLongitude, double bottomLatitude,

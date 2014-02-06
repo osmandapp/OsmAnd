@@ -366,8 +366,8 @@ public class RoutingContext {
 	}
 	
 	public void checkOldRoutingFiles(BinaryMapIndexReader key) {
-		if(calculationMode == RouteCalculationMode.BASE && key.getDateCreated() < 1390431600000l) { // new SimpleDateFormat("dd-MM-yyyy").parse("23-01-2014").getTime()
-			System.out.println(key.getDateCreated() + " " + new Date(key.getDateCreated()));
+		if(calculationMode == RouteCalculationMode.BASE && key.getDateCreated() < 1390172400000l) { // new SimpleDateFormat("dd-MM-yyyy").parse("20-01-2014").getTime()
+			System.err.println("Old routing file : " + key.getDateCreated() + " " + new Date(key.getDateCreated()));
 			String map = "";
 			for (RouteRegion r : key.getRoutingIndexes()) {
 				map = r.getName();

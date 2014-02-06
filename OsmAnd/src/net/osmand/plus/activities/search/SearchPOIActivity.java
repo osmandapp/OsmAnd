@@ -583,7 +583,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		if(d.toString().trim().length() > 0) { 
 			qa.addActionItem(poiDescription);
 		}
-		if (((OsmandApplication)getApplication()).getInternalAPI().accessibilityEnabled()) {
+		if (((OsmandApplication)getApplication()).accessibilityEnabled()) {
 			ActionItem showDetails = new ActionItem();
 			showDetails.setTitle(getString(R.string.show_details));
 			showDetails.setOnClickListener(new OnClickListener() {

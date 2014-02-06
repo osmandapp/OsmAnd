@@ -14,10 +14,12 @@ import java.util.Locale;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.LiveMonitoringHelper;
 import net.osmand.plus.activities.OsmandIntents;
@@ -56,6 +58,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.text.format.DateFormat;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
@@ -766,4 +769,20 @@ public class OsmandApplication extends Application implements ClientContext {
 		}
 	}
 	
+	public boolean accessibilityExtensions() {
+		return (Build.VERSION.SDK_INT < 14) ? getSettings().ACCESSIBILITY_EXTENSIONS.get() : false;
+	}
+	
+	public boolean accessibilityEnabled() {
+		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.get();
+		if(OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
+			return false;
+		}
+		if (mode == AccessibilityMode.ON) {
+			return true;
+		} else if (mode == AccessibilityMode.OFF) {
+			return false;
+		}
+		return ((AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
+	}
 }

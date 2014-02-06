@@ -29,9 +29,6 @@ public interface InternalOsmAndAPI {
 	
 	public NativeLibrary getNativeLibrary();
 
-	public boolean accessibilityEnabled();
-	
-	public boolean accessibilityExtensions();
 	
 	public List<Amenity> searchAmenities(PoiFilter filter,
 			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,

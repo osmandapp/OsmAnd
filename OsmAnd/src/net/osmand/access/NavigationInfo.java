@@ -6,7 +6,6 @@ import java.util.List;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -124,7 +123,7 @@ public class NavigationInfo {
 			R.string.north_west, 
 			R.string.north_north_west };
 
-	private final ClientContext context;
+	private final OsmandApplication context;
 	private final OsmandSettings settings;
 	private Location currentLocation;
 	private RelativeDirection lastDirection;
@@ -228,7 +227,7 @@ public class NavigationInfo {
 
 	public synchronized void setLocation(Location location) {
 		currentLocation = location;
-		if (autoAnnounce && context.getInternalAPI().accessibilityEnabled()) {
+		if (autoAnnounce && context.accessibilityEnabled()) {
 			final LatLon point = app.getTargetPointsHelper().getPointToNavigate();
 			if (point != null) {
 				if ((currentLocation != null) && currentLocation.hasBearing()) {
