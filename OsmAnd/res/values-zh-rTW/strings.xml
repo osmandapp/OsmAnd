@@ -1625,4 +1625,13 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="amenity_type_seamark">航線標識</string>
     <string name="osmodroid_seek">探索目標</string>
     <string name="osmodroid_unseek">取消探索目標</string>
+    <string name="speech_rate_descr">為 TTS 語音指定語速</string>
+    <string name="speech_rate">語速</string>
+    <string name="tip_recent_changes_1_7_t">在 1.7 的變更：
+        * 完全更新的路線（快速而精確）
+        * 在隧道有效的模擬 
+    </string>
+    <string name="complex_route_calculation_failed">快速路徑演算失敗 (%s), ，退回到慢速演算。</string>
+    <string name="disable_complex_routing_descr">於汽車導航時停用兩階段路線</string>
+    <string name="disable_complex_routing">停用複雜的路線</string>
     </resources>
