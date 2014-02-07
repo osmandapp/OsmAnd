@@ -1600,4 +1600,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	* Możliwość symulacji trasy w tunelach 
     </string>
     <string name="disable_complex_routing_descr">Wyłącz 2-fazowe obliczanie trasy dla nawigacji samochodowej</string>
+    <string name="complex_route_calculation_failed">Błąd szybkiego obliczania trasy (%s), przełączam na tryb wolny.</string>
+    <string name="disable_complex_routing">Wyłącz złożone trasowanie</string>
     </resources>
