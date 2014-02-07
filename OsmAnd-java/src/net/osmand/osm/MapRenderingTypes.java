@@ -523,8 +523,12 @@ public class MapRenderingTypes {
 				}
 				if(rt.isMain()) {
 					mapRulType.main = true;
-					mapRulType.minzoom = Math.max(rt.minzoom, mapRulType.minzoom);
-					mapRulType.maxzoom = Math.min(rt.maxzoom, mapRulType.maxzoom);
+					if(rt.minzoom != 0) {
+						mapRulType.minzoom = Math.max(rt.minzoom, mapRulType.minzoom);
+					}
+					if(rt.maxzoom != 0) {
+						mapRulType.maxzoom = Math.min(rt.maxzoom, mapRulType.maxzoom);
+					}
 				}
 //				types.put(keyVal, rt);
 //				typeList.set(rt.id, rt);

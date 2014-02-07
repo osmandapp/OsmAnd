@@ -15,7 +15,8 @@ public class PrecalculatedRouteDirection {
 	
 	private int[] pointsX;
 	private int[] pointsY;
-	private float speed;
+	private float minSpeed;
+	private float maxSpeed;
 	private float[] tms;
 	private static final int SHIFT = (1 << (31 - 17));
 	private static final int[] SHIFTS = new int[]{1 << (31 - 15), 1 << (31 - 13), 1 << (31 - 12), 
@@ -27,15 +28,23 @@ public class PrecalculatedRouteDirection {
 	private long endPoint = 0;
 //	private DataTileManager<Integer> indexedPoints = new DataTileManager<Integer>(17);
 	QuadTree<Integer> quadTree = new QuadTree<Integer>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
-			8, 0.55f); 
+			8, 0.55f);
+	private float startFinishTime;
+	private float endFinishTime; 
 	
-	private PrecalculatedRouteDirection(List<RouteSegmentResult> ls, float avgSpeed) {
-		this.speed = avgSpeed;
+	public PrecalculatedRouteDirection(TIntArrayList px, TIntArrayList py, List<Float> speedSegments, float maxSpeed) {
+		this.maxSpeed = maxSpeed;
+		init(px, py, speedSegments);
+	}
+	
+	private PrecalculatedRouteDirection(List<RouteSegmentResult> ls, float maxSpeed) {
+		this.maxSpeed = maxSpeed;
 		init(ls);
 	}
 	
 	private PrecalculatedRouteDirection(PrecalculatedRouteDirection parent, int s1, int s2) {
-		this.speed = parent.speed;
+		this.minSpeed = parent.minSpeed;
+		this.maxSpeed = parent.maxSpeed;
 		tms = new float[s2 - s1 + 1];
 		pointsX = new int[s2 - s1 + 1];
 		pointsY = new int[s2 - s1 + 1];
@@ -49,7 +58,7 @@ public class PrecalculatedRouteDirection {
 		}
 	}
 	
-	public static PrecalculatedRouteDirection build(List<RouteSegmentResult> ls, float cutoffDistance, float avgSpeed){
+	public static PrecalculatedRouteDirection build(List<RouteSegmentResult> ls, float cutoffDistance, float maxSpeed){
 		int begi = 0;
 		float d = cutoffDistance;
 		for (; begi < ls.size(); begi++) {
@@ -67,41 +76,48 @@ public class PrecalculatedRouteDirection {
 			}
 		}
 		if(begi < endi) {
-			return new PrecalculatedRouteDirection(ls.subList(begi, endi), avgSpeed);
+			return new PrecalculatedRouteDirection(ls.subList(begi, endi), maxSpeed);
 		}
 		return null;
 	}
 	
 
 	private void init(List<RouteSegmentResult> ls) {
-		float totaltm = 0;
-		List<Float> times = new ArrayList<Float>();
 		TIntArrayList px = new TIntArrayList();
 		TIntArrayList py = new TIntArrayList();
+		List<Float> speedSegments = new ArrayList<Float>();
 		for (RouteSegmentResult s : ls) {
 			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
 			int i = s.getStartPointIndex();
 			RouteDataObject obj = s.getObject();
-			float routeSpd = s.getDistance()/ s.getRoutingTime() ;
+			float routeSpd = (s.getRoutingTime() == 0 || s.getDistance() == 0) ? maxSpeed : 
+				(s.getDistance() / s.getRoutingTime());
 			while (true) {
-				int iprev = i;
 				i = plus? i + 1 : i -1;
-				// MapUtils.measuredDist31 vs BinaryRoutePlanner.squareRootDist
-				// use measuredDist31 because we use precise s.getDistance() to calculate routeSpd
-				float dist = (float) MapUtils.measuredDist31(obj.getPoint31XTile(iprev), obj.getPoint31YTile(iprev), 
-						obj.getPoint31XTile(i), obj.getPoint31YTile(i));
-				float tm = dist / routeSpd;
 				px.add(obj.getPoint31XTile(i));
 				py.add(obj.getPoint31YTile(i));
-				times.add(tm);
-				quadTree.insert(px.size() - 1, obj.getPoint31XTile(i), obj.getPoint31YTile(i));
-				// indexedPoints.registerObjectXY();
-				totaltm += tm;
-				
+				speedSegments.add(routeSpd);
 				if (i == s.getEndPointIndex()) {
 					break;
 				}
 			}
+		}
+		init(px, py, speedSegments);
+	}
+
+	private void init(TIntArrayList px, TIntArrayList py, List<Float> speedSegments) {
+		float totaltm = 0;
+		List<Float> times = new ArrayList<Float>();
+		for (int i = 0; i < px.size(); i++) {
+			// MapUtils.measuredDist31 vs BinaryRoutePlanner.squareRootDist
+			// use measuredDist31 because we use precise s.getDistance() to calculate routeSpd
+			int ip = i == 0 ? 0 : i - 1;
+			float dist = (float) MapUtils.measuredDist31(px.get(ip), py.get(ip), px.get(i), py.get(i));
+			float tm = dist / speedSegments.get(i);// routeSpd;
+			times.add(tm);
+			quadTree.insert(i, px.get(i), py.get(i));
+			// indexedPoints.registerObjectXY();
+			totaltm += tm;
 		}
 		pointsX = px.toArray();
 		pointsY = py.toArray();
@@ -111,7 +127,6 @@ public class PrecalculatedRouteDirection {
 			totDec -= times.get(i);
 			tms[i] = totDec;
 		}
-		
 	}
 
 	public float timeEstimate(int sx31, int sy31, int ex31, int ey31) {
@@ -140,11 +155,12 @@ public class PrecalculatedRouteDirection {
 			return -1;
 		}
 		float distToPoint = getDeviationDistance(x31, y31, ind);
-		float deviationPenalty = distToPoint / speed;
+		float deviationPenalty = distToPoint / minSpeed;
+		float finishTime = (start? startFinishTime : endFinishTime);
 		if(start) {
-			return (tms[0] - tms[ind]) +  deviationPenalty;
+			return (tms[0] - tms[ind]) +  deviationPenalty + finishTime;
 		} else {
-			return tms[ind] + deviationPenalty;
+			return tms[ind] + deviationPenalty + finishTime;
 		}
 	}
 	
@@ -204,6 +220,8 @@ public class PrecalculatedRouteDirection {
 	public PrecalculatedRouteDirection adopt(RoutingContext ctx) {
 		int ind1 = getIndex(ctx.startX, ctx.startY);
 		int ind2 = getIndex(ctx.targetX, ctx.targetY);
+		minSpeed = ctx.getRouter().getMinDefaultSpeed();
+		maxSpeed = ctx.getRouter().getMaxDefaultSpeed();
 		if(ind1 == -1) {
 			throw new IllegalArgumentException();
 		}
@@ -212,9 +230,12 @@ public class PrecalculatedRouteDirection {
 		}
 		PrecalculatedRouteDirection routeDirection = new PrecalculatedRouteDirection(this, ind1, ind2);
 		routeDirection.startPoint = calc(ctx.startX, ctx.startY);
+		routeDirection.startFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind1], pointsY[ind1], ctx.startX, ctx.startY) / maxSpeed;
 //		routeDirection.startX31 = ctx.startX;
 //		routeDirection.startY31 = ctx.startY;
 		routeDirection.endPoint = calc(ctx.targetX, ctx.targetX);
+		routeDirection.endFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind2], pointsY[ind2], ctx.targetX, ctx.targetY) / maxSpeed;
+		
 //		routeDirection.endX31 = ctx.targetX;
 //		routeDirection.endY31 = ctx.targetY;
 		return routeDirection;

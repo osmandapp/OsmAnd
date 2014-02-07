@@ -220,13 +220,13 @@ public class BinaryRoutePlanner {
 		if(ctx.calculationProgress != null) {
 			ctx.calculationProgress.reverseSegmentQueueSize = graphReverseSegments.size();
 			ctx.calculationProgress.directSegmentQueueSize = graphDirectSegments.size();
-			if(graphDirectSegments.size() > 0) {
+			if(graphDirectSegments.size() > 0 && ctx.getPlanRoadDirection() >= 0) {
 				RouteSegment peek = graphDirectSegments.peek();
 				ctx.calculationProgress.distanceFromBegin = Math.max(peek.distanceFromStart, 
 						ctx.calculationProgress.distanceFromBegin);
 				ctx.calculationProgress.directDistance = peek.distanceFromStart + peek.distanceToEnd;
 			}
-			if(graphReverseSegments.size() > 0) {
+			if(graphReverseSegments.size() > 0 && ctx.getPlanRoadDirection() <= 0) {
 				RouteSegment peek = graphReverseSegments.peek();
 				ctx.calculationProgress.distanceFromEnd = Math.max(peek.distanceFromStart + peek.distanceToEnd,
 							ctx.calculationProgress.distanceFromEnd);
