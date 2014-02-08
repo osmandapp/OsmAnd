@@ -1588,7 +1588,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="route_is_too_long">Il percorso potrebbe essere troppo lungo per essere calcolato dal servizio OsmAnd offline.
 	Generalmente il calcolo del percorso è possibile su distanze di 200 km circa. Per favore aggiungi uno o più punti intermedi per calcolare il percorso.</string>
     <string name="auto_zoom_none">No zoom automatico</string>
-    <string name="auto_zoom_close">Al primo piano</string>
+    <string name="auto_zoom_close">A corto raggio</string>
     <string name="auto_zoom_far">Al medio raggio</string>
     <string name="auto_zoom_farthest">A lungo raggio</string>
     <string name="default_and">e</string>
