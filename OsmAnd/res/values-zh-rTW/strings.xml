@@ -1631,7 +1631,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
         * 完全更新的路線（快速而精確）
         * 在隧道有效的模擬 
     </string>
-    <string name="complex_route_calculation_failed">快速路徑演算失敗 (%s), ，退回到慢速演算。</string>
-    <string name="disable_complex_routing_descr">於汽車導航時停用兩階段路線</string>
+    <string name="complex_route_calculation_failed">快速路徑演算失敗 (%s)，退回到慢速演算。</string>
+    <string name="disable_complex_routing_descr">汽車導航時，停用兩階段路線</string>
     <string name="disable_complex_routing">停用複雜的路線</string>
     </resources>
