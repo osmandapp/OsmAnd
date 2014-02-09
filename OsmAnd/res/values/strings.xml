@@ -12,8 +12,8 @@
     <string name="speech_rate_descr">Specify speech rate for TTS</string>
     <string name="speech_rate">Speech Rate</string>
     <string name="tip_recent_changes_1_7_t">Changes in 1.7:
-        * Completely updated routing (fast and precise)
-        * Active simulation in tunnels 
+	\n\t* Completely updated routing (fast and precise)
+	\n\t* Active simulation in tunnels
     </string>
     <string name="complex_route_calculation_failed">Fast route calculation failed (%s), fallback to slow calculation.</string>
     <string name="disable_complex_routing_descr">Disable 2-phase routing for car navigation</string>
