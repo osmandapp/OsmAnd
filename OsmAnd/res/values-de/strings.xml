@@ -1,6 +1,6 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="route_is_too_long">Die Route ist möglicherweise zu lang, um vom OsmAnd Offline-Router berechnet zu werden, 
-		Die Offline-Berechnung von Routen ist durchschnittlich zwischen bis zu etwa 200 km entfernten Punkten möglich. Bitte fügen Sie einen oder mehrere Wegpunkte ein, um diese Route berechnen zu können.</string>
+<resources>
+	<string name="route_is_too_long">Der OsmAnd Offline-Router braucht evtl. sehr lang (oder findet gar kein Ergebnis) für mehr als 200km voneinander entfernte Punkte. Um die Performanz zu verbessern, fügen Sie evtl. einen oder mehrere Wegpunkte in die Route ein.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
