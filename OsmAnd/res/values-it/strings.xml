@@ -1614,8 +1614,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="amenity_type_seamark">Meda</string>
     <string name="osmodroid_seek">Cerca oggetto</string>
     <string name="tip_recent_changes_1_7_t">Cambiamenti nella 1.7:
-        * Calcolo del percorso completamente aggiornato (preciso e veloce)
-        * Simulazione attiva nei tunnel 
+	* Calcolo del percorso completamente aggiornato (preciso e veloce)
+	* Simulazione attiva nei tunnel
     </string>
     <string name="complex_route_calculation_failed">Calcolo veloce del percorso fallito (%s), rinvio al calcolo lento.</string>
     <string name="disable_complex_routing_descr">Disabilita il calcolo del percorso in due fasi per l'uso in automobile</string>
