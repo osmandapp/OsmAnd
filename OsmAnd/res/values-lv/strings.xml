@@ -1450,4 +1450,16 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="osmodroid_seek">Meklēt objektu</string>
     <string name="osmodroid_unseek">Nemeklēt objektu</string>
-    </resources>
+    <string name="speech_rate_descr">Iestatīt TTS runas ātrumu</string>
+    <string name="speech_rate">Runas ātrums</string>
+    <string name="tip_recent_changes_1_7_t">Izmaiņas 1.7:
+	\n\t* Pilnībā atjaunota maršrutēšana (ātrums un precizitāte)
+	\n\t* Aktīvā simulācija tunelī
+    </string>
+    <string name="complex_route_calculation_failed">Maršruta ātrā aprēķināšana neizdevās (%s), notiks lenā aprēķināšana.</string>
+    <string name="disable_complex_routing_descr">Atspējot kompleksu (divpakāpju) maršrutēsanu</string>
+    <string name="disable_complex_routing">Atspējot kompleksu maršrutēšanu</string>
+    <string name="tip_app_mode_t_v2">OsmAnd atbalsta vairākus pielāgojamus profilus dažādiem mērķiem.
+		\n\nJūs varat mainīt profilus gan ar speciālas ikonas palīdzību, kas atrodas uz kartes kreisā augšējā stūrī (mašīna, velosipēds vai kājāmgājējs), gan veidojot jaunu maršrutu (\'transporta režīms\').
+	</string>
+	</resources>
