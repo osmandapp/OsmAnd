@@ -1669,4 +1669,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="complex_route_calculation_failed">Hurtig ruteberegning mislykkedes (%s), går tilbage til langsom beregning.</string>
     <string name="disable_complex_routing_descr">Deaktiver 2-faset ruteplanlægning til bilnavigation</string>
     <string name="disable_complex_routing">Deaktiver kompleks ruteplanlægning</string>
+    <string name="guidance_preferences_descr">Navigationsindstillinger</string>
+    <string name="routing_preferences_descr">Rureplanlægnings-instillinger</string>
     </resources>
