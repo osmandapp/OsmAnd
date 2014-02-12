@@ -1565,8 +1565,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="map_magnifier">Lupa mapy</string>
     <string name="route_distance_settings_descr">Skonfiguruj odległość widoku mapy (TODO naming)</string>
     <string name="route_distance_farthest">Najdalej</string>
-    <string name="route_is_too_long">Trasa jest prawdopodobnie zbyt długa do przeliczenia przez trasowanie offline OsmAnd.
-	Trasowanie offline jest zazwyczaj możliwe pomiędzy punktami odległymi nie więcej niż 200 km. Proszę dodać jeden lub więcej punktów pośrednich.</string>
+    <string name="route_is_too_long">Obliczanie trasy offline może zająć dłuższą chwilę (lub czasami nie działać) dla punktów, które dzieli więcej niż 200km. Możesz spróbować dodać punkty pośrednie w celu zwiększenia wydajności.</string>
 	<string name="auto_zoom_none">Brak automatycznego powiększenia</string>
 	<string name="auto_zoom_close">Zbliżenie</string>
 	<string name="auto_zoom_far">Widok pośredni</string>
@@ -1596,10 +1595,12 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="speech_rate_descr">Określ szybkość wymowy dla TTS</string>
     <string name="speech_rate">Szybkość mowy</string>
     <string name="tip_recent_changes_1_7_t">Zmiany w wersji 1.7:
-	* Całkowicie zmienione wytyczanie tras (szybko i dokładnie)
-	* Możliwość symulacji trasy w tunelach 
+	\n\t* Całkowicie zmienione wytyczanie tras (szybkie i dokładne)
+	\n\t* Możliwość symulacji trasy w tunelach
     </string>
     <string name="disable_complex_routing_descr">Wyłącz 2-fazowe obliczanie trasy dla nawigacji samochodowej</string>
     <string name="complex_route_calculation_failed">Błąd szybkiego obliczania trasy (%s), przełączam na tryb wolny.</string>
     <string name="disable_complex_routing">Wyłącz złożone trasowanie</string>
+    <string name="guidance_preferences_descr">Ustawienia nawigacji</string>
+    <string name="routing_preferences_descr">Ustawienia obliczania trasy</string>
     </resources>
