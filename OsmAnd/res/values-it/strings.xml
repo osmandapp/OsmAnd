@@ -1622,4 +1622,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="disable_complex_routing">Disabilita il calcolo complesso del percorso</string>
     <string name="speech_rate_descr">Imposta la velocità della sintesi vocale (TTS)</string>
     <string name="speech_rate">Velocità di lettura</string>
+    <string name="guidance_preferences_descr">Preferenze di navigazione</string>
+    <string name="routing_preferences_descr">Preferenze di calcolo della rotta</string>
     </resources>
