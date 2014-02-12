@@ -1338,10 +1338,12 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="speech_rate_descr">Ange talhastighet för TTS</string>
     <string name="speech_rate">Talhastighet</string>
     <string name="tip_recent_changes_1_7_t">Ändringar i 1.7:
-        * Ruttning helt uppdaterad (snabb och precis)
-        * Aktiv simulering i tunnlar 
+ →\n\t* Helt uppdaterad ruttning(snabb och precis)
+ →\n\t* Aktiv simulering i tunnlar
     </string>
     <string name="complex_route_calculation_failed">Snabbkalkylering av rutt misslyckades (%s), går tillbaka till långsam kalkylering.</string>
     <string name="disable_complex_routing_descr">Inaktivera 2-fasruttning för bilnavigering</string>
     <string name="disable_complex_routing">Inaktivera komplex ruttning</string>
+    <string name="guidance_preferences_descr">Navigationsinställningar</string>
+    <string name="routing_preferences_descr">Ruttningsinställningar</string>
     </resources>
