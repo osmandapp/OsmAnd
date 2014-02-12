@@ -1589,7 +1589,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	Generalmente il calcolo del percorso è possibile su distanze di 200 km circa. Per favore aggiungi uno o più punti intermedi per calcolare il percorso.</string>
     <string name="auto_zoom_none">No zoom automatico</string>
     <string name="auto_zoom_close">A corto raggio</string>
-    <string name="auto_zoom_far">Al medio raggio</string>
+    <string name="auto_zoom_far">A medio raggio</string>
     <string name="auto_zoom_farthest">A lungo raggio</string>
     <string name="default_and">e</string>
     <string name="default_or">o</string>
