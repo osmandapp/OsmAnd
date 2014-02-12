@@ -16,6 +16,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.routing.AlarmInfo;
+import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -638,29 +639,29 @@ public class RouteInfoWidgetsFactory {
 						int locimgId = 0;
 						int textDy = 0;
 						String text = null;
-						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
+						if(alarm.getType() == AlarmInfoType.SPEED_LIMIT) {
 							text = alarm.getIntValue() +"";
 							if(settings.DRIVING_REGION.get().americanSigns){
 								locimgId = R.drawable.warnings_speed_limit_us;
 								textDy = (int) (-12 * scaleCoefficient);
 							}
-						} else if(alarm.getType() == AlarmInfo.SPEED_CAMERA) {
+						} else if(alarm.getType() == AlarmInfoType.SPEED_CAMERA) {
 							locimgId = R.drawable.warnings_speed_camera;
 							text = "";
-						} else if(alarm.getType() == AlarmInfo.BORDER_CONTROL) {
+						} else if(alarm.getType() == AlarmInfoType.BORDER_CONTROL) {
 							text = "CLO";
-						} else if(alarm.getType() == AlarmInfo.TOLL_BOOTH) {
+						} else if(alarm.getType() == AlarmInfoType.TOLL_BOOTH) {
 							text = "$";
-						} else if(alarm.getType() == AlarmInfo.TRAFFIC_CALMING) {
+						} else if(alarm.getType() == AlarmInfoType.TRAFFIC_CALMING) {
 							locimgId = R.drawable.warnings_speed_bump;
 							text = "";
-						} else if(alarm.getType() == AlarmInfo.STOP) {
+						} else if(alarm.getType() == AlarmInfoType.STOP) {
 							// text = "STOP";
 							text = "";
 						}
 						visible = (text != null &&  text.length() > 0) || locimgId != 0;
 						if (visible) {
-							if (alarm.getType() == AlarmInfo.SPEED_CAMERA) {
+							if (alarm.getType() == AlarmInfoType.SPEED_CAMERA) {
 								visible = cams;
 							} else {
 								visible = trafficWarnings;

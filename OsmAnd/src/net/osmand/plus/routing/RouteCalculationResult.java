@@ -18,6 +18,7 @@ import net.osmand.plus.ClientContext;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.MapUtils;
@@ -888,7 +889,7 @@ public class RouteCalculationResult {
 				}
 				float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
 				int vl = inf.updateDistanceAndGetPriority(time, d);
-				if(vl < value && (showCameras || inf.getType() != AlarmInfo.SPEED_CAMERA)){
+				if(vl < value && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)){
 					mostImportant = inf;
 					value = vl;
 				}

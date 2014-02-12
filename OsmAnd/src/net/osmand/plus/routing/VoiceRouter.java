@@ -1,12 +1,11 @@
 package net.osmand.plus.routing;
 
 
-import alice.tuprolog.Struct;
-import alice.tuprolog.Term;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
+import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
@@ -14,6 +13,8 @@ import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
+import alice.tuprolog.Struct;
+import alice.tuprolog.Term;
 
 
 public class VoiceRouter {
@@ -232,7 +233,7 @@ public class VoiceRouter {
 			return;
 		}
 		long ms = System.currentTimeMillis();
-		if (alarm.getType() == AlarmInfo.SPEED_LIMIT) {
+		if (alarm.getType() == AlarmInfoType.SPEED_LIMIT) {
 
 			if (waitAnnouncedSpeedLimit == 0) {
 				// wait 10 seconds before announcement
@@ -253,7 +254,7 @@ public class VoiceRouter {
 				}
 			}
 
-		} else if (alarm.getType() == AlarmInfo.SPEED_CAMERA) {
+		} else if (alarm.getType() == AlarmInfoType.SPEED_CAMERA) {
 			if (router.getSettings().SPEAK_SPEED_CAMERA.get() && ms - lastAnnouncedSpeedCamera > 100 * 1000) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
