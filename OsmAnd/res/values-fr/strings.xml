@@ -1439,4 +1439,6 @@
     <string name="complex_route_calculation_failed">Échec du calcul rapide de route (%s), essai avec la méthode lente..</string>
     <string name="disable_complex_routing_descr">Désactiver le routage en 2 phases pour la navigation en voiture</string>
     <string name="disable_complex_routing">Désactiver le routage complexe</string>
+    <string name="guidance_preferences_descr">Préférence de navigation</string>
+    <string name="routing_preferences_descr">Préférences du routage</string>
     </resources>
