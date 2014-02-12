@@ -1611,8 +1611,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="animate_routing_route_not_calculated">Pirmiausia apskaičiuokite maršrutą</string>
     <string name="animate_routing_route">Simuliuoti naudojant apskaičiuotą maršrutą </string>
     <string name="animate_routing_gpx">Simuliuoti naudojant GPX maršrutą</string>
-    <string name="route_is_too_long">Maršrutas tikriausiai per ilgas, kad OsmAnd galėtų jį apskaičiuoti nenaudojant interneto. 
-        	Dažniausiai ilgiausias maršrutas, kurį galima apskaičiuoti be interneto pagalbos, būna tarp dviejų taškų nutolusių iki 200km. Pridėkite vieną ar daugiau tarpinių maršruto taškų kad būtų galima apskaičiuoti jūsų maršrutą.</string>
+    <string name="route_is_too_long">OsmAnd maršruto skaičiavimas be interneto pagalbos gali labai ilgai trukti (kartais gali net neveikti) jei atstumas tarp taškų yra daugiau nei 200km. Jums gali tekti įtraukti tarpinius kelionės maršrutus, kad skaičiavimas būtų lengvesnis.</string>
 	<string name="auto_zoom_none">Be automatinio didinimo</string>
 	<string name="auto_zoom_close">Maksimaliai priartinti</string>
 	<string name="auto_zoom_far">Vidutiniškai priartinti</string>
@@ -1635,10 +1634,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="speech_rate_descr">Nurodyti TTS kalbėjomo greitį</string>
     <string name="speech_rate">Kalbėjimo greitis</string>
     <string name="tip_recent_changes_1_7_t">Pakeitimai 1.7 versijoje:
-        * Visiškai atnaujintas maršruto skaičiavimas (greitas ir tikslus)
-        * Aktyvinamas simuliavimas tuneliuose 
+	\n\t* Visiškai atnaujintas maršruto skaičiavimas (greitas ir tikslus)
+	\n\t* Judėjimo simuliacija tuneliuose
     </string>
     <string name="complex_route_calculation_failed">Greitas maršruto apskaičiavimas nepavyko (%s), vykdomas lėtasis skaičiavimas.</string>
     <string name="disable_complex_routing_descr">Išjungti dviejų etapų maršruto skaičiavimą važiavimui automobiliu</string>
     <string name="disable_complex_routing">Išjungti sudėtingą maršruto skaičiavimą</string>
+    <string name="guidance_preferences_descr">Navigacijos nustatymai</string>
+    <string name="routing_preferences_descr">Maršruto skaičiavimo nustatymai</string>
     </resources>
