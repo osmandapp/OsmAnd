@@ -1256,7 +1256,7 @@
     <string name="app_mode_aircraft">Avió</string>
     <string name="tip_faq_t">Visiteu https://code.google.com/p/osmand/wiki/FAQ per llegir les preguntes més freqüents.</string>
     <string name="tip_faq">Preguntes més freqüents</string>
-    <string name="local_osm_changes_delete_all_confirm">Ara suprimireu %1$d canvis de l'OSM. N\'esteu segur?</string>
+    <string name="local_osm_changes_delete_all_confirm">Ara suprimireu %1$d canvis de l\'OSM. N\'esteu segur?</string>
     <string name="local_osm_changes_delete_all">Suprimeix-ho tot</string>
     <string name="animate_routing_route_not_calculated">Calcula primer la ruta</string>
     <string name="animate_routing_route">Simulació amb la ruta calculada </string>
@@ -1266,9 +1266,9 @@
     <string name="default_and">i</string>
     <string name="default_or">o</string>
 	<string name="auto_zoom_none">Sense escalat automàtic</string>
-	<string name="auto_zoom_close">Apropa't</string>
+	<string name="auto_zoom_close">Apropa\'t</string>
 	<string name="auto_zoom_far">Mig</string>
-	<string name="auto_zoom_farthest">Allunya't</string>
+	<string name="auto_zoom_farthest">Allunya\'t</string>
 	<string name="map_magnifier">Escalat del mapa</string>
 	<string name="base_world_map">Mapa mundial</string>
 	<string name="tip_map_styles">Estils del mapa</string>

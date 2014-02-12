@@ -316,7 +316,7 @@ public class RoutingContext {
 		return original;
 	}
 	
-	public void loadSubregionTile(final RoutingSubregionTile ts, boolean loadObjectsInMemory) {
+	public void loadSubregionTile(final RoutingSubregionTile ts, boolean loadObjectsInMemory, List<RouteDataObject> toLoad) {
 		boolean wasUnloaded = ts.isUnloaded();
 		int ucount = ts.getUnloadCont();
 		if (nativeLib == null) {
@@ -326,9 +326,13 @@ public class RoutingContext {
 				ts.setLoadedNonNative();
 				List<RouteDataObject> res = reader.loadRouteIndexData(ts.subregion);
 //				System.out.println(ts.subregion.shiftToData + " " + res);
-				for(RouteDataObject ro : res){
-					if(ro != null && config.router.acceptLine(ro)) {
-						ts.add(ro);
+				if(toLoad != null) {
+					toLoad.addAll(res);
+				} else {
+					for(RouteDataObject ro : res){
+						if(ro != null && config.router.acceptLine(ro)) {
+							ts.add(ro);
+						}
 					}
 				}
 			} catch (IOException e) {
@@ -336,6 +340,7 @@ public class RoutingContext {
 			}
 
 			timeToLoad += (System.nanoTime() - now);
+			
 		} else {
 			long now = System.nanoTime();
 			NativeRouteSearchResult ns = nativeLib.loadRouteRegion(ts.subregion, loadObjectsInMemory);
@@ -386,6 +391,17 @@ public class RoutingContext {
 				}
 			}
 		}
+	}
+	
+	public List<RoutingSubregionTile> loadAllSubregionTiles(BinaryMapIndexReader reader, RouteSubregion reg) throws IOException {
+		List<RoutingSubregionTile> list = new ArrayList<RoutingContext.RoutingSubregionTile>();
+		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(0,
+				Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
+		List<RouteSubregion> subregs = reader.searchRouteIndexTree(request, Collections.singletonList(reg));
+		for(RouteSubregion s : subregs) {
+			list.add(new RoutingSubregionTile(s));
+		}
+		return list;
 	}
 
 	public List<RoutingSubregionTile> loadTileHeaders(final int zoomToLoadM31, int tileX, int tileY) {
@@ -494,7 +510,7 @@ public class RoutingContext {
 			if (subregions != null) {
 				for (RoutingSubregionTile ts : subregions) {
 					if (!ts.isLoaded()) {
-						loadSubregionTile(ts, loadOptions == OPTION_IN_MEMORY_LOAD);
+						loadSubregionTile(ts, loadOptions == OPTION_IN_MEMORY_LOAD, null);
 					}
 				}
 			}

@@ -1430,8 +1430,8 @@
     <string name="amenity_type_seamark">Balise marine</string>
     <string name="osmodroid_seek">Chercher objet</string>
     <string name="osmodroid_unseek">Ne plus chercher objet</string>
-    <string name="speech_rate_descr">Préciser la vitesse d'élocution du TTS</string>
-    <string name="speech_rate">Vitesse d'Élocution</string>
+    <string name="speech_rate_descr">Préciser la vitesse d\'élocution du TTS</string>
+    <string name="speech_rate">Vitesse d\'Élocution</string>
     <string name="tip_recent_changes_1_7_t">Nouveautés de la version 1.7:
         * Mise-à-jour complète du système de routage (rapide et précis)
         * Simulation activée dans les tunnels 
