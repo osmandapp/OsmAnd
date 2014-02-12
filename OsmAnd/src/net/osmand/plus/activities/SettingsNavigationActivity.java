@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
 public class SettingsNavigationActivity extends SettingsBaseActivity {
@@ -64,6 +65,13 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		settings = getMyApplication().getSettings();
 		
 		registerBooleanPreference(settings.FAST_ROUTE_MODE, screen);
+		PreferenceCategory cat = (PreferenceCategory) screen.findPreference("routing_preferences");
+		avoidRouting = (Preference) screen.findPreference("avoid_in_routing");
+		avoidRouting.setOnPreferenceClickListener(this);
+		// routing_preferences
+		preferRouting = (Preference) screen.findPreference("prefer_in_routing");
+		preferRouting.setOnPreferenceClickListener(this);
+		
 		registerBooleanPreference(settings.SNAP_TO_ROAD, screen);
 		registerBooleanPreference(settings.USE_COMPASS_IN_NAVIGATION, screen);
 		
@@ -93,11 +101,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		autoZoomMapPreference = (ListPreference) screen.findPreference(settings.AUTO_ZOOM_MAP.getId());
 		autoZoomMapPreference.setOnPreferenceChangeListener(this);
 
-		
-		avoidRouting = (Preference) screen.findPreference("avoid_in_routing");
-		avoidRouting.setOnPreferenceClickListener(this);
-		preferRouting = (Preference) screen.findPreference("prefer_in_routing");
-		preferRouting.setOnPreferenceClickListener(this);
 		
 		showAlarms = (Preference) screen.findPreference("show_routing_alarms");
 		showAlarms.setOnPreferenceClickListener(this);
