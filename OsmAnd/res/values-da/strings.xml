@@ -1632,8 +1632,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_distance_settings">Kortvisningsafstand</string>
     <string name="map_magnifier">Kortforstørrelse</string>
     <string name="route_distance_farthest">Længst væk</string>
-    <string name="route_is_too_long">Ruten er muligvis for lang til at blive beregnet af Osmand offline ruteplanlægger.
- I gennemsnit er offline ruteplanlægning mulig mellem punkter på op til 200 km fra hinanden. Tilføj et eller flere mellemliggende rutepunkter for at beregne ruten .</string>
+    <string name="route_is_too_long">Osmand offline ruteplanlægning kan tage meget lang tid (eller nogle gange ikke virker) for punkter mere end 200 km fra hinanden. Man kan tilføje mellemliggende rutepunkter for bedre ydelse.</string>
     <string name="auto_zoom_none">Ingen autozoom</string>
     <string name="auto_zoom_far">Middelafstand</string>
     <string name="auto_zoom_farthest">Lange afstande</string>
@@ -1663,12 +1662,12 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="speech_rate_descr">Angiv talehastighed for TTS</string>
     <string name="speech_rate">Talehastighed</string>
     <string name="tip_recent_changes_1_7_t">Ændringer i 1.7 :
-         * Helt opdateret ruteplanlægning (hurtig og præcis)
-         * Aktiv simulering i tunneller 
+	\n\t* Helt opdateret ruteplanlægning (hurtig og præcis)
+	\n\t* Aktiv simulering i tunneller
     </string>
     <string name="complex_route_calculation_failed">Hurtig ruteberegning mislykkedes (%s), går tilbage til langsom beregning.</string>
     <string name="disable_complex_routing_descr">Deaktiver 2-faset ruteplanlægning til bilnavigation</string>
     <string name="disable_complex_routing">Deaktiver kompleks ruteplanlægning</string>
-    <string name="guidance_preferences_descr">Navigationsindstillinger</string>
-    <string name="routing_preferences_descr">Rureplanlægnings-instillinger</string>
+    <string name="guidance_preferences_descr">Indstillinger for navigation</string>
+    <string name="routing_preferences_descr">Indstillinger for ruteplanlægning</string>
     </resources>
