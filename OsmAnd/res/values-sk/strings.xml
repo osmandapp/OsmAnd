@@ -1644,4 +1644,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="speech_rate">Rýchlosť reči</string>
     <string name="osmodroid_seek">Sledovať objekt</string>
     <string name="osmodroid_unseek">Nesledovať objekt</string>
+    <string name="guidance_preferences_descr">Nastavenia navigácie</string>
+    <string name="routing_preferences_descr">Nastavenia určovania trasy</string>
     </resources>
