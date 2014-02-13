@@ -1517,4 +1517,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="map_widget_map_rendering">Renderizado de mapa:</string>
     <string name="app_modes_choose_descr">Elegir perfiles de uso visibles en la aplicación</string>
     <string name="osmodroid_seek">Busca objeto</string>
+    <string name="guidance_preferences_descr">Preferències de navegació</string>
+    <string name="routing_preferences_descr">Preferències de càlcul de ruta</string>
+    <string name="speech_rate_descr">Velocitat de la parla sintetitzada</string>
+    <string name="speech_rate">Velocitat de parla</string>
     </resources>
