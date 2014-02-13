@@ -834,11 +834,11 @@
 <string name="poi_filter_emergency">Emergències</string>
 <string name="poi_filter_restaurants">Restaurants</string>
 <string name="osm_editing_plugin_description">Mostra la configuració necessària per la retroalimentació d\'OSM com ara recollir/modificar els PDI d\'OSM, obrir/comentar els errors d\'OSM i contribuir amb fitxers GPX enregistrats (calen les credencials d\'OSM).</string>
-<string name="tip_rotation_switching_t_v2">Podeu canviar rota el mapa fent clic repetidament en la icona de la brúixola de la pantalla.
+<string name="tip_rotation_switching_t_v2">Podeu canviar com gira el mapa tocant repetidament la icona de la brúixola de la pantalla.
 		\n\nLes opcions son:
-		\n\t«No rotar (el nord es amunt)» - El mapa no rotarà. El nord sempre serà amunt
-		\n\t«Cap a la direcció del moviment» - El mapa s\'alinearà contínuament cap a la vostra direcció
-		\n\t«A la brúixola» - El mapa s\'alinearà contínuament amb la brúixola del dispositiu.
+		\n\t\'No girar (el nord es amunt)\' - El mapa no girarà, el nord sempre serà a dalt.
+		\n\t\'En la direcció del moviment\' - El mapa s\'alinearà contínuament en la direcció que avanceu.
+		\n\t\'Amb la brúixola\' - El mapa s\'alinearà contínuament amb la brúixola del dispositiu.
 	</string>
 <string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TAV (text a veu) d\'Android instal·lat. Voleu anar al Market per veure altres motors TAV? Altrament s\'usarà la llengua del TAV per defecte.</string>
 <string name="tip_map_switch_t_v2">\tLa font del mapa i les capes mostrades es poden canviar via «Menú» -&gt; «Defineix vista» en la vista del mapa.
@@ -1365,14 +1365,14 @@
     <string name="osmodroid_unseek">No cerquis més l\'objecte</string>
     <string name="guidance_preferences_descr">Preferències de navegació</string>
     <string name="routing_preferences_descr">Preferències de càlcul de la ruta</string>
-    <string name="speech_rate_descr">Velocitat de la veu sintetitzada</string>
+    <string name="speech_rate_descr">Triï la velocitat de síntesi de veu</string>
     <string name="speech_rate">Velocitat de lectura</string>
     <string name="tip_recent_changes_1_7_t">Canvis a la versió 1.7:
 	\n\t* Càlcul perfeccionat de la ruta, més ràpid i precís
 	\n\t* Simulació activa als túnels
     </string>
     <string name="complex_route_calculation_failed">Fracàs del càlcul ràpid de ruta (%s), retorn al mètode lent.</string>
-    <string name="disable_complex_routing_descr">Desactiva el càlcul de dues fases de rutes amb cotxe</string>
+    <string name="disable_complex_routing_descr">Desactiva el càlcul de ruta en 2 fases per cotxe</string>
     <string name="disable_complex_routing">Desactiva el càlcul complex de la ruta</string>
     <string name="route_is_too_long">Ruta massa llarga. El càlcul fora de línia entre punts separats per més de 200 Km pot ser molt lent o aturar-se del tot. Per resoldre-ho, heu d'afegir fites intermèdies.</string>
 	<string name="edit_tilesource_successfully">El proveïdor de mosaics %1$s és ben desat</string>
