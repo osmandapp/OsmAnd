@@ -124,7 +124,6 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		opIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.bicycle_location);
 		osMoDroidPointArrayList = myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId);
 		osMoDroidFixedPointArrayList = myOsMoDroidPlugin.getOsMoDroidFixedPointArrayList(layerId);
-		myOsMoDroidPlugin.getGpxArrayList(layerId);
 		initUI();
 	}
 	
@@ -250,13 +249,13 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {}
 
 	public void getOsMoDroidPointFromPoint(RotatedTileBox tb,PointF point, List<? super OsMoDroidPoint> om) {
-		if (myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId) != null) {
+		if (osMoDroidPointArrayList != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 
 			try {
-				for (int i = 0; i < myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId).size(); i++) {
-					OsMoDroidPoint n = myOsMoDroidPlugin.getOsMoDroidPointArrayList(layerId).get(i);
+				for (int i = 0; i < osMoDroidPointArrayList.size(); i++) {
+					OsMoDroidPoint n = osMoDroidPointArrayList.get(i);
 					if (!om.contains(n)) {
 						int x = (int) tb.getPixXFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
 						int y = (int) tb.getPixYFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
@@ -270,13 +269,13 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 				// synchronized block
 			}
 		}
-		if (myOsMoDroidPlugin.getOsMoDroidFixedPointArrayList(layerId) != null) {
+		if (osMoDroidFixedPointArrayList != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 
 			try {
-				for (int i = 0; i < myOsMoDroidPlugin.getOsMoDroidFixedPointArrayList(layerId).size(); i++) {
-					OsMoDroidPoint n = myOsMoDroidPlugin.getOsMoDroidFixedPointArrayList(layerId).get(i);
+				for (int i = 0; i <osMoDroidFixedPointArrayList.size(); i++) {
+					OsMoDroidPoint n =osMoDroidFixedPointArrayList.get(i);
 					if (!om.contains(n)) {
 						int x = (int) tb.getPixXFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
 						int y = (int) tb.getPixYFromLatLon(n.latlon.getLatitude(), n.latlon.getLongitude());
