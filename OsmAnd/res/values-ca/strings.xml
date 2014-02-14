@@ -543,8 +543,8 @@
 <string name="km_h">km/h</string>
 <string name="downloading">S\'està baixant...</string>
 <string name="closing_changeset">S\'està tancant el conjunt de canvis...</string>
-<string name="loading_cities">Carregant ciutats…</string>
-<string name="loading">Carregant…</string>
+<string name="loading_cities">S'estan carregant les ciutats…</string>
+<string name="loading">S'està carregant…</string>
 <string name="daynight_mode_day">Dia</string>
 <string name="daynight_mode_night">Nit</string>
 <string name="daynight_mode_auto">Alba/capvespre</string>
@@ -1365,7 +1365,7 @@
     <string name="osmodroid_unseek">No cerquis més l\'objecte</string>
     <string name="guidance_preferences_descr">Preferències de navegació</string>
     <string name="routing_preferences_descr">Preferències de càlcul de la ruta</string>
-    <string name="speech_rate_descr">Triï la velocitat de síntesi de veu</string>
+    <string name="speech_rate_descr">Especifiqueu la velocitat de síntesi de veu</string>
     <string name="speech_rate">Velocitat de lectura</string>
     <string name="tip_recent_changes_1_7_t">Canvis a la versió 1.7:
 	\n\t* Càlcul perfeccionat de la ruta, més ràpid i precís
