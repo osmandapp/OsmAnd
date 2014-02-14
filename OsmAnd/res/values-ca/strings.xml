@@ -1377,7 +1377,7 @@
     <string name="route_is_too_long">Ruta massa llarga. El càlcul fora de línia entre punts separats per més de 200 Km pot ser molt lent o aturar-se del tot. Per resoldre-ho, heu d'afegir fites intermèdies.</string>
 	<string name="edit_tilesource_successfully">El proveïdor de mosaics %1$s és ben desat</string>
     <string name="edit_tilesource_choose_existing">Tria un proveïdor…</string>
-    <string name="map_widget_fps_info">info depuració FPS</string>
+    <string name="map_widget_fps_info">Info depuració FPS</string>
 	<string name="intermediate_items_sort_return">Les fites intermèdies han estat re-ordenades per optimitzar la ruta.</string>
-    <string name="osmand_distance_planning_plugin_description">Creant itineraris i usant o modificant fitxers GPX existents podreu mesurar la distància entre punts. Si després els deseu, també podran usar-se per preparar més itineraris GPX.</string>
+    <string name="osmand_distance_planning_plugin_description">Creant itineraris i usant o modificant fitxers GPX existents podreu mesurar la distància entre punts. Si després els deseu, podreu usar-los per preparar més itineraris GPX.</string>
     </resources>
