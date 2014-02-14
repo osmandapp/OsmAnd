@@ -1232,7 +1232,7 @@ Pomembnejše lastnosti:
     <string name="recording_context_menu_precord">Posnami fotografijo</string>
     <string name="stop_routing_confirm">Ali ste prepričani, da želite prekiniti navigacijo?</string>
     <string name="clear_dest_confirm">Ali ste prepričani, da želite izbrisati cilj?</string>
-    <string name="precise_routing_mode_descr">Omogočite natančno usmerjanje za izračun natančnih poti brez spodrsljajev. To je zelo omejeno z razdaljo in ne uporablja domače knjižnice.</string>
+    <string name="precise_routing_mode_descr">Omogočite za izračun natančnih poti brez spodrsljajev. Še vedno počasno in zelo omejeno glede na razdaljo.</string>
     <string name="precise_routing_mode">Natančno usmerjanje (alfa)</string>
     <string name="local_indexes_cat_av">Podatki zvoka/videa</string>
     <string name="dist_control_start">Začni</string>
@@ -1566,8 +1566,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="base_world_map">Osnovni zemljevid sveta</string>
 	<string name="default_and">in</string>
     <string name="default_or">ali</string>
-	<string name="route_is_too_long">Pot je morda predolga za izračun z OsmAnd računanjem poti brez povezave.
-	Usmerjanje brez povezave je mogoče med točkami, ki so oddaljene povprečno do 200 km.  Prosimo, dodajte eno ali več vmesnih točk za izračun poti.</string>
+	<string name="route_is_too_long">OsmAnd usmerjanje brez povezave lahko traja zelo dolgo (ali včasih ne deluje) za točke, ki so med sabo oddaljene več kot 200 km. Za boljše delovanje boste morda želeli dodati kakšno vmesno točko na poti.</string>
 	<string name="auto_zoom_none">Ne samodejna povečava</string>
 	<string name="auto_zoom_farthest">Na dolge razdalje</string>
 	<string name="map_magnifier">Povečava zemljevida</string>
@@ -1592,4 +1591,16 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="app_modes_choose_descr">Izberite uporabne profile, ki so vidni v aplikaciji</string>
     <string name="app_modes_choose">Profili aplikacije</string>
 	<string name="osmodroid_seek">Poiskati predmet</string>
+    <string name="guidance_preferences_descr">Nastavitve navigacije</string>
+    <string name="disable_complex_routing_descr">Onemogoči 2-fazno usmerjanje za avtomobilsko navigacijo</string>
+    <string name="routing_preferences_descr">Nastavitve usmerjanja</string>
+    <string name="tip_recent_changes_1_7_t">Spremembe v 1.7:
+	\n\t* Popolnoma posodobljeno usmerjanje (hitro in natančno)
+	\n\t* Aktivna simulacija v predorih
+    </string>
+    <string name="speech_rate_descr">Določitev hitrosti govora za TTS</string>
+    <string name="speech_rate">Hitrost govora</string>
+    <string name="complex_route_calculation_failed">Hitri izračun poti ni uspel (%s), preklopljeno na počasni izračun.</string>
+    <string name="disable_complex_routing">Onemogoči zapleteno usmerjanje</string>
+    <string name="osmodroid_unseek">Odzbrati predmet</string>
     </resources>
