@@ -1607,7 +1607,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="app_mode_boat">Boot</string>
     <string name="app_mode_aircraft">Vliegtuig</string>
     <string name="map_widget_map_rendering">Kaartweergave:</string>
-    <string name="app_modes_choose_descr">Kies de profielen, die je in Osmand wilt gebruiken</string>
+    <string name="app_modes_choose_descr">Kies de profielen die je in Osmand wilt gebruiken</string>
     <string name="app_modes_choose">Toepassingsprofielen</string>
 	<string name="amenity_type_seamark">boei / baken</string>
     <string name="osmodroid_seek">Zoek object</string>
@@ -1620,7 +1620,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="disable_complex_routing_descr">2-fase routeberekening voor auto uitschakelen</string>
     <string name="disable_complex_routing">Complexe routeberekening uitschakelen</string>
     <string name="speech_rate_descr">Specificeer de snelheid van de stem-instructies</string>
-    <string name="speech_rate">Snelheid van de stem-instructies</string>
+    <string name="speech_rate">Spraaksnelheid</string>
     <string name="guidance_preferences_descr">Navigatievoorkeuren</string>
     <string name="routing_preferences_descr">Routeberekening voorkeuren</string>
     </resources>
