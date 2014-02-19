@@ -468,7 +468,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="local_index_items_backuped">%1$d av %2$d post(er) har inaktiveras utan problem.</string>
 <string name="local_index_items_deleted">%1$d av %2$d post(er) har tagits bort utan problem.</string>
 <string name="local_index_items_restored">%1$d av %2$d post(er) har aktiverats utan problem.</string>
-<string name="local_index_no_items_to_do">Inga poster till %1$s</string>
+<string name="local_index_no_items_to_do">Inga poster att %1$s</string>
 <string name="local_index_action_do">Du håller på att %1$s %2$s post(er). Fortsätta?</string>
 <string name="local_index_mi_restore">Aktivera</string>
 <string name="local_index_mi_backup">Inaktivera</string>
