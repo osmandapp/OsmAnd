@@ -1634,7 +1634,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="app_modes_choose_descr">Zvoľte profily použitia viditeľné v aplikácii</string>
     <string name="amenity_type_seamark">Morská značka</string>
     <string name="tip_recent_changes_1_7_t">Zmeny v 1.7:
-	\n\t* Úplne prepracovaná navigácia (routing) (rýchla a presná)
+	\n\t* Úplne prepracovaný výpočet trasy (rýchly a presný)
 	\n\t* Aktívna simulácia v tuneloch
     </string>
     <string name="complex_route_calculation_failed">Rýchly prepočet trasy zlyhal (%s), použije sa pomalý výpočet.</string>
