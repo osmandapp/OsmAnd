@@ -156,10 +156,7 @@ public class RoutePlannerFrontEnd {
 	
 	private List<RouteSegmentResult> searchRouteInternalPrepare(final RoutingContext ctx, RouteSegment start, RouteSegment end, 
 			PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
-		ctx.targetX = end.road.getPoint31XTile(end.getSegmentStart());
-		ctx.targetY = end.road.getPoint31YTile(end.getSegmentStart());
-		ctx.startX = start.road.getPoint31XTile(start.getSegmentStart());
-		ctx.startY = start.road.getPoint31YTile(start.getSegmentStart());
+		ctx.initStartAndTargetPoints(start, end);
 		if(routeDirection != null) {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 		}
@@ -177,6 +174,7 @@ public class RoutePlannerFrontEnd {
 			return new RouteResultPreparation().prepareResult(ctx, ctx.finalRouteSegment);
 		}
 	}
+
 
 	private void refreshProgressDistance(RoutingContext ctx) {
 		if(ctx.calculationProgress != null) {

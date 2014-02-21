@@ -57,10 +57,13 @@ public class BinaryInspector {
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
 				//"-vpoi",
-				// "-vmap", "-vmapobjects", 
-				//"-vstreets", 
+				//"-vmap", "-vmapobjects", 
+				//"-vaddress", "-vcities", "-vstreets", "-vstreetgroups","-vbuildings", 
+				//"-zoom=16",
 				//"-bbox=4,55,7,50", 
-				"/home/victor/projects/osmand/osm-gen/Map.obf"});
+				//"/home/victor/osmand/Test.obf"
+				//"/home/victor/projects/osmand/osm-gen/Map.obf"
+					});
 		} else {
 			in.inspector(args);
 		}
