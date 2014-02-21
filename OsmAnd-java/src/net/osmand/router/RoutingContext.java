@@ -78,7 +78,7 @@ public class RoutingContext {
 	// 3. Warm object caches
 	ArrayList<RouteSegment> segmentsToVisitPrescripted = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
 	ArrayList<RouteSegment> segmentsToVisitNotForbidden = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
-
+	
 	
 	// 5. debug information (package accessor)
 	public TileStatistics global = new TileStatistics();
@@ -106,7 +106,10 @@ public class RoutingContext {
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
 
-	public RoutingContext(RoutingContext cp) {
+
+	
+
+	RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
 		this.map.putAll(cp.map);
 		this.calculationMode = cp.calculationMode;
@@ -131,11 +134,7 @@ public class RoutingContext {
 		}
 	}
 	
-	public RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map) {
-		this(config, nativeLibrary, map, null);
-	}
-	
-	public RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, RouteCalculationMode calcMode) {
+	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, RouteCalculationMode calcMode) {
 		this.calculationMode = calcMode;
 		for (BinaryMapIndexReader mr : map) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
@@ -205,6 +204,13 @@ public class RoutingContext {
 	public int roadPriorityComparator(double o1DistanceFromStart, double o1DistanceToEnd, double o2DistanceFromStart, double o2DistanceToEnd) {
 		return BinaryRoutePlanner.roadPriorityComparator(o1DistanceFromStart, o1DistanceToEnd, o2DistanceFromStart, o2DistanceToEnd,
 				config.heuristicCoefficient);
+	}
+	
+	public void initStartAndTargetPoints(RouteSegment start, RouteSegment end) {
+		targetX = end.road.getPoint31XTile(end.getSegmentStart());
+		targetY = end.road.getPoint31YTile(end.getSegmentStart());
+		startX = start.road.getPoint31XTile(start.getSegmentStart());
+		startY = start.road.getPoint31YTile(start.getSegmentStart());		
 	}
 	
 	public void registerRouteDataObject(RouteDataObject o ) {
@@ -459,8 +465,9 @@ public class RoutingContext {
 			}
 		}
 		TLongIterator it = ts.iterator();
+		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 		while(it.hasNext()){
-			getAllObjects(it.next(), toFillIn);
+			getAllObjects(it.next(), toFillIn, excludeDuplications);
 		}
 		timeToFindInitialSegments += (System.nanoTime() - now);
 	}
@@ -573,8 +580,7 @@ public class RoutingContext {
 		}
 	}
 	
-	private void getAllObjects(long tileId, final List<RouteDataObject> toFillIn) {
-		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
+	private void getAllObjects(long tileId, final List<RouteDataObject> toFillIn, TLongObjectHashMap<RouteDataObject> excludeDuplications) {
 		if (tileRoutes.containsKey(tileId)) {
 			List<RouteDataObject> routes = tileRoutes.get(tileId);
 			if (routes != null) {
@@ -842,6 +848,8 @@ public class RoutingContext {
 	public BinaryMapIndexReader[] getMaps() {
 		return map.keySet().toArray(new BinaryMapIndexReader[map.size()]);
 	}
+
+	
 
 
 }
