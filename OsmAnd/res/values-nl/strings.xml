@@ -1619,7 +1619,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="complex_route_calculation_failed">Snelle routeberekening mislukt (%s), terug naar langzame berekening.</string>
     <string name="disable_complex_routing_descr">2-fase routeberekening voor auto uitschakelen</string>
     <string name="disable_complex_routing">Complexe routeberekening uitschakelen</string>
-    <string name="speech_rate_descr">Specificeer de snelheid van de stem-instructies</string>
+    <string name="speech_rate_descr">Stel de snelheid van de stem in</string>
     <string name="speech_rate">Spraaksnelheid</string>
     <string name="guidance_preferences_descr">Navigatievoorkeuren</string>
     <string name="routing_preferences_descr">Routeberekening-voorkeuren</string>
