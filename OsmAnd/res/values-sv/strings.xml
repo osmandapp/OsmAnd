@@ -1337,9 +1337,9 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osb_author_dialog_password">OSM-lösenord (frivilligt)</string>
 	<string name="speech_rate_descr">Ange talhastighet för TTS</string>
     <string name="speech_rate">Talhastighet</string>
-    <string name="tip_recent_changes_1_7_t">Ändringar i 1.7:
- →\n\t* Helt uppdaterad ruttning(snabb och precis)
- →\n\t* Aktiv simulering i tunnlar
+    <string name="tip_recent_changes_1_7_t">Changes in 1.7:
+	\n\t* Helt uppdaterad ruttning(snabb och precis)
+	\n\t* Aktiv simulering i tunnlar
     </string>
     <string name="complex_route_calculation_failed">Snabbkalkylering av rutt misslyckades (%s), går tillbaka till långsam kalkylering.</string>
     <string name="disable_complex_routing_descr">Inaktivera 2-fasruttning för bilnavigering</string>
