@@ -63,6 +63,7 @@ if(CMAKE_SHARED_LIBS_ALLOWED_ON_TARGET)
 	target_compile_definitions(OsmAndJNI
 		PRIVATE
 			-DOSMAND_JNI_EXPORTS
+			-DOSMAND_SWIG
 	)
 	target_include_directories(OsmAndJNI
 		PRIVATE
