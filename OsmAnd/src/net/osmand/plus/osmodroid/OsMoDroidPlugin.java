@@ -110,7 +110,7 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 	private OsMoDroidLayer osmoDroidLayer;
 	protected boolean connected = false;
 	ArrayList<OsMoDroidLayer> osmoDroidLayerList = new ArrayList<OsMoDroidLayer>();
-	private AsyncTask<Void, Void, ArrayList<ColoredGPX>> task;
+	private AsyncTask<Void, Void, Void> task;
 
 	public ArrayList<OsMoDroidPoint> getOsMoDroidPointArrayList(int id) {
 		ArrayList<OsMoDroidPoint> result = new ArrayList<OsMoDroidPoint>();
@@ -214,6 +214,7 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 
 			log.error(e.getMessage(), e);
 		}
+		 getGpxArrayList(); 
 	}
 
 	@Override
@@ -316,51 +317,35 @@ qa.item(R.string.osmodroid_unseek).icons(R.drawable.abs__ic_commit_search_api_ho
 		}).reg();
 	}
 
-	public void getGpxArrayList(final int id) {
-		final ArrayList<ColoredGPX> result = new ArrayList<ColoredGPX>();
+	public void getGpxArrayList() {
 		if(task!=null){
 			task.cancel(true);
 		}
-		 task = new AsyncTask<Void, Void, ArrayList<ColoredGPX>>() {
-			@Override
-			protected ArrayList<ColoredGPX> doInBackground(Void... params) {
+		 task = new AsyncTask<Void, Void, Void>() {
+		@Override
+			protected Void doInBackground(Void... params) {
+				for (OsMoDroidLayer l : osmoDroidLayerList){
 				ArrayList<ColoredGPX> temp = new ArrayList<ColoredGPX>();
 				try {
-					for (int i = 0; i < mIRemoteService.getNumberOfGpx(id); i++) {
+					for (int i = 0; i < mIRemoteService.getNumberOfGpx(l.layerId); i++) {
 						ColoredGPX cg = new ColoredGPX();
-						cg.gpxFile =  GPXUtilities.loadGPXFile(app, new File(mIRemoteService.getGpxFile(id, i)), false);
-						cg.color = mIRemoteService.getGpxColor(id, i); 
+						cg.gpxFile =  GPXUtilities.loadGPXFile(app, new File(mIRemoteService.getGpxFile(l.layerId, i)), false);
+						cg.color = mIRemoteService.getGpxColor(l.layerId, i); 
 						temp.add(cg);
 					}
-					return temp;
+					l.inGPXFilelist(temp);
 				} catch (RemoteException e) {
 					log.error(e.getMessage(), e);
 				}
-				return temp;					
+				 catch (ConcurrentModificationException e) {
+					log.error(e.getMessage(), e);
 				}
-
-			@Override
-			protected void onPostExecute(ArrayList<ColoredGPX> backgroundresult) {
-				if(backgroundresult!=null){
-					try {
-						for (OsMoDroidLayer l : osmoDroidLayerList){
-							if (l.layerId==id){
-								l.inGPXFilelist(backgroundresult);
-							}
-						}
-					} catch (ConcurrentModificationException e) {
-						log.error(e.getMessage(), e);
-					}
-					
-					
-					
-				}
+				
+			}
+				return null;
+		
 			}
 		};
 		task.execute();
-		
-		
-		
-		
 	}
 }

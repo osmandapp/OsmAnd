@@ -37,7 +37,7 @@ public class CurrentPositionHelper {
 			return;
 		}
 		RoutingConfiguration cfg = RoutingConfiguration.getDefault().build(p.name().toLowerCase(), 10);
-		ctx = new RoutingContext(cfg, null, app.getTodoAPI().getRoutingMapFiles());
+		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, app.getTodoAPI().getRoutingMapFiles());
 	}
 	
 	private RouteDataObject runUpdateInThread(Location loc) {
