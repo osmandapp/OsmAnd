@@ -262,10 +262,9 @@
   <string name="level_to_switch_vector_raster_descr">Minimo livello di zoom per usare le mappe vettoriali</string>
   <string name="level_to_switch_vector_raster">Min. livello zoom vettoriale</string>
   <string name="tip_location_sharing">Condividi una Posizione</string>
-  <string name="tip_location_sharing_t">"\tPuoi condividere la posizione dei luoghi interessanti dei tuoi viaggi con familiari e amici.
-\n\tPer condividere le posizioni devi:
-\n\tUsare il \'Menu contestuale mappa\' -&gt; menu \'Condividi Posizione\'.
-\n\tQuindi seleziona un modo per condividere la tua posizione. Le scelte sono: E-Mail, SMS(testo), o semplicemente copia le coordinate sugli appunti. "</string>
+  <string name="tip_location_sharing_t">\tPuoi condividere la posizione di luoghi interessanti dei tuoi viaggi con familiari e amici, attraverso il Menu contestuale \'Utilizza la posizione…\' -&gt; menu \'Condividi posizione\'.
+		\n\nScegli poi un modo per condividere la tua posizione. Le opzioni sono: E-Mail, SMS o semplicemente copia le coordinate sugli appunti.
+	</string>
   <string name="tip_favorites">Punti Preferiti</string>
   <string name="tip_favorites_t">"\tI punti usati di frequente possono essere salvati come Preferiti.
 \n\tPer salvare un punto come Preferito vai nel menu contestuale, seleziona \'Aggiungi ai preferiti\' e inserisci il nome desiderato. Dopo il salvataggio sarà accessibile nel \'Menu Principale\' -&gt; \'Preferiti\'.
