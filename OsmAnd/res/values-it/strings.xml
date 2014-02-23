@@ -152,7 +152,7 @@
 \n\t- Correzione di errori vari "</string>
   <string name="save_route_dialog_title">Salva il percorso in formato GPX</string>
   <string name="route_successfully_saved_at">Percorso salvato come \'%1$s\'.</string>
-  <string name="filename_input">"Nome file: "</string>
+  <string name="filename_input">Nome file: </string>
   <string name="file_with_name_already_exist">Esiste già un file con lo stesso nome.</string>
   <string name="default_buttons_save">Salva</string>
   <string name="menu_save_directions">Salva direzioni</string>
@@ -286,9 +286,10 @@
   <string name="tip_search_t">"\tPuoi cercare i luoghi direttamente sulla mappa, per indirizzo, posizione, PDI, o come predefinito preferito.
 \n\tSelezionando \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menù contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'. "</string>
   <string name="tip_map_context_menu">\'Usa posizione\' Menu</string>
-  <string name="tip_map_context_menu_t">"\tIl menu contestuale viene visualizzato selezionando a lungo sulla mappa o selezionando il pulsante trackball.
+  <string name="tip_map_context_menu_t">\tIl menu contestuale viene visualizzato selezionando a lungo sulla mappa o selezionando il pulsante trackball.
 \n\tQuesto visualizza un riquadro con le coordinate del punto. Per aprire il menu, fai clic sopra. (O seleziona a lungo per nascondere nuovamente il menù.)
-\n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (posizione). "</string>
+\n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (posizione).
+	</string>
   <string name="tip_initial">Consigli e trucchi</string>
   <string name="tip_initial_t">OsmAnd è una applicazione di navigazione con molte funzioni.
 	\n\nUn\'introduzione base e alcuni consigli d\'uso sono collegati nel \'Menù\'	\'Suggerimenti\'dallo schermo mappa.
@@ -382,7 +383,7 @@
   <string name="select_all">Seleziona tutto</string>
   <string name="reload">Ricarica</string>
   <string name="fast_route_mode">Percorso più veloce</string>
-  <string name="fast_route_mode_descr">"Abilita per calcolare il percorso più veloce o disabilita per il percorso più corto "</string>
+  <string name="fast_route_mode_descr">Abilita per calcolare il percorso più veloce o disabilita per il percorso più corto </string>
   <string name="tiles_to_download_estimated_size">Per lo zoom {0} scarica {1} tasselli ({2} MB)</string>
   <string name="context_menu_item_download_map">Download mappa</string>
   <string name="select_max_zoom_preload_area">Seleziona lo zoom massimo da precaricare</string>
@@ -1623,5 +1624,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="speech_rate_descr">Imposta la velocità della sintesi vocale (TTS)</string>
     <string name="speech_rate">Velocità di lettura</string>
     <string name="guidance_preferences_descr">Preferenze di navigazione</string>
-    <string name="routing_preferences_descr">Preferenze di calcolo della rotta</string>
+    <string name="routing_preferences_descr">Preferenze di calcolo del percorso</string>
     </resources>
