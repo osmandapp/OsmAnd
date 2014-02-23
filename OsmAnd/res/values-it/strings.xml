@@ -1228,7 +1228,7 @@
     <string name="recording_photo_description">Foto %1$s a %2$s</string>
     <string name="stop_routing_confirm">Sei sicuro di voler fermare la navigazione?</string>
     <string name="clear_dest_confirm">Sei sicuro di voler eliminare la tua destinazione (e i punti intermedi)?</string>
-    <string name="precise_routing_mode_descr">Abilita il routing di precisione per calcolare percorsi precisi senza intoppi. E\' molto limitato in distanza e non utilizza la libreria nativa.</string>
+    <string name="precise_routing_mode_descr">Abilita per calcolare percorsi precisi senza intoppi. È lento e limitato in distanza.</string>
     <string name="precise_routing_mode">Calcolo della rotta preciso (alfa)</string>
     <string name="local_indexes_cat_av">Dati audio/video</string>
     <string name="dist_control_start">avvia</string>
