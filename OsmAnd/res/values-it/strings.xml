@@ -753,7 +753,7 @@
   <string name="offline_navigation_not_available">La navigazione offline di OsmAnd è temporaneamente non disponibile.</string>
   <string name="left_side_navigation">Guida a sinistra</string>
   <string name="left_side_navigation_descr">Abilita nei paesi in cui si guida tenendo la sinistra</string>
-  <string name="download_link_and_local_description">Scarica o aggiorna i dati offline.\nPer vedere maggiori dettagli clicca sull\'elemento, per disabilitare o eliminare i dati offline tieni premuto.
+  <string name="download_link_and_local_description">Clicca qui per scaricare o aggiornare i dati offline.\nPer vedere maggiori dettagli clicca sull\'elemento, per disabilitare o eliminare i dati offline tienilo premuto.
 \nDati attualmente sul dispositivo (%1$s liberi):</string>
   <string name="unknown_from_location">La posizione di partenza non è ancora stata determinata</string>
   <string name="confirm_interrupt_download">Vuoi interrompere il download dei file?</string>
