@@ -223,7 +223,7 @@
   <string name="gpx_option_reverse_route">Inverti direzione GPX</string>
   <string name="gpx_option_destination_point">Usa il punto di destinazione attuale</string>
   <string name="gpx_option_from_start_point">Percorri tutta la traccia</string>
-  <string name="switch_to_vector_map_to_see">Mappa vettoriali offline presenti per quest\'area.\n\t\n\tPer usarla attivare \'Menu\'-&gt;\'Definisci vista\'-&gt;\'Fonte Mappa…\'-&gt;\'Mappe vettoriali offline\'.</string>
+  <string name="switch_to_vector_map_to_see">Mappa vettoriale offline presente per quest\'area.\n\t\n\tPer usarla attivare \'Menu\'→\'Definisci vista\'→\'Fonte Mappa…\'→\'Mappe vettoriali offline\'.</string>
   <string name="choose_audio_stream">Canale d\'uscita della voce guida</string>
   <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale (dipendente dal sistema)</string>
   <string name="voice_stream_voice_call">Audio chiamate vocali</string>
@@ -414,12 +414,12 @@
   <string name="voice">Voce</string>
   <string name="no_vector_map_loaded">Mappe vettoriali non sono state caricate</string>
   <string name="map_route_by_gpx">Percorso tramite GPX</string>
-  <string name="gpx_files_not_found">File GPX non trovato nella cartella /tracks</string>
+  <string name="gpx_files_not_found">File GPX non trovati nella cartella /tracks</string>
   <string name="layer_gpx_layer">Percorso GPX…</string>
   <string name="error_reading_gpx">Errore lettura dati GPX</string>
   <string name="vector_data">Mappe vettoriali offline</string>
   <string name="transport_context_menu">Cerca un trasporto pubblico alla fermata</string>
-  <string name="point_on_map">Posizione:\n Lat %1$.5f Lon %2$.5f</string>
+  <string name="point_on_map">Posizione:\n Lat %1$.5f\nLon %2$.5f</string>
   <string name="osb_bug_name">Errore</string>
   <string name="poi_context_menu_modify">Modifica PDI</string>
   <string name="poi_context_menu_delete">Elimina PDI</string>
@@ -532,7 +532,7 @@
   <string name="context_menu_item_update_poi">Aggiorna PDI</string>
   <string name="context_menu_item_update_map_confirm">Aggiornare i dati locali via Internet?</string>
   <string name="search_history_city">Città:\n {0}</string>
-  <string name="search_history_street">Strada:\n {0}, {1}</string>
+  <string name="search_history_street">Strada: {0}, {1}</string>
   <string name="search_history_int_streets">Incrocio: {0} x {1} in {2}</string>
   <string name="search_history_building">Edifici: {0}, {1}, {2}</string>
   <string name="favorite">Preferito</string>
@@ -1130,10 +1130,10 @@
     <string name="native_library_not_running">L\'applicazione è in esecuzione in modalità sicura (disabilitala nelle Impostazioni).</string>
     <string name="background_service_is_enabled_question">Il servizio OsmAnd modalità quiescente è ancora in esecuzione. Si desidera arrestarlo?</string>
     <string name="tip_recent_changes_1_0_0_t">Cambiamenti nella v. 1.0.0:↵
-→Migliorata la navigazione: più veloce e precisa, fino a 250 km↵
-→Aggiunte le mappe solo-strade↵
-→La mappa non perde il posizionamento dopo le interruzioni↵
-→Abilitazione del servizio in background durante la navigazione↵
+	\n\t* Migliorata la navigazione: più veloce e precisa, fino a 250 km↵
+	\n\t* Aggiunte le mappe solo-strade↵
+	\n\t* La mappa non perde il posizionamento dopo le interruzioni↵
+	\n\t* Abilitazione del servizio in background durante la navigazione↵
     </string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="route_descr_current_location">Posizione corrente</string>
@@ -1164,7 +1164,7 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isocline</string>
     <string name="srtm_plugin_name">Plugin linee isocline</string>
-    <string name="srtm_plugin_description">Questo plugin facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni-&gt; Gestione Dati -&gt; Scarica -&gt; Seleziona il tipo di mappa desiderato).</string>
+    <string name="srtm_plugin_description">Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni → Gestione Dati → Scarica → Seleziona il tipo di mappa desiderato).</string>
     <string name="index_srtm_ele">Linee di livello</string>
     <string name="audionotes_plugin_description">Prendi note audio/video durante il viaggio</string>
     <string name="audionotes_plugin_name">Plugin appunti audio</string>
@@ -1614,8 +1614,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="amenity_type_seamark">Meda</string>
     <string name="osmodroid_seek">Cerca oggetto</string>
     <string name="tip_recent_changes_1_7_t">Cambiamenti nella 1.7:
-	* Calcolo del percorso completamente aggiornato (preciso e veloce)
-	* Simulazione attiva nei tunnel
+	\n\t* Calcolo del percorso aggiornato completamente (preciso e veloce)
+	\n\t* Simulazione attiva nei tunnel
     </string>
     <string name="complex_route_calculation_failed">Calcolo veloce del percorso fallito (%s), rinvio al calcolo lento.</string>
     <string name="disable_complex_routing_descr">Disabilita il calcolo del percorso in due fasi per l\'uso in automobile</string>
