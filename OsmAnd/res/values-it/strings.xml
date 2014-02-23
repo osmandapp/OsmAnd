@@ -266,10 +266,11 @@
 		\n\nScegli poi un modo per condividere la tua posizione. Le opzioni sono: E-Mail, SMS o semplicemente copia le coordinate sugli appunti.
 	</string>
   <string name="tip_favorites">Punti Preferiti</string>
-  <string name="tip_favorites_t">"\tI punti usati di frequente possono essere salvati come Preferiti.
-\n\tPer salvare un punto come Preferito vai nel menu contestuale, seleziona \'Aggiungi ai preferiti\' e inserisci il nome desiderato. Dopo il salvataggio sarà accessibile nel \'Menu Principale\' -&gt; \'Preferiti\'.
-\n\tSelezionando a lungo su un Preferito nel menu \'Preferiti\' appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.
-\n\tPer visualizzare tutti i punti Preferiti direttamente sulla mappa, attiva nella schermata della mappa il livello \'Preferiti\' dal \'Menu\' -&gt;\'Definisci vista\'. "</string>
+  <string name="tip_favorites_t">I punti usati di frequente possono essere salvati come Preferiti:
+		\n\nPer salvare un punto come Preferito vai nel menu contestuale \'Utilizza la posizione…\' → \'Aggiungi ai preferiti\' e inserisci il nome desiderato.
+		\n\nDopo il salvataggio, il punto preferito sarà accessibile nel menù \'Preferiti\'. Tenendo premuto a lungo su un Preferito nel menu \'Preferiti\', appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.
+		\n\nPer visualizzare tutti i punti preferiti direttamente sulla mappa, nella schermata della mappa attiva il livello \'Preferiti\' dal menù contestuale \'Strati mappa\'. "
+	</string>
   <string name="create_poi_link_to_osm_doc">Classificazione mappa <u>OSM Online</u> con immagini</string>
   <string name="error_doing_search">Errore nella ricerca offline</string>
   <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'</string>
