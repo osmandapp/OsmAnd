@@ -306,7 +306,7 @@
   <string name="yard">iarde</string>
   <string name="foot">piede</string>
   <string name="mile_per_hour">mph</string>
-  <string name="mile">mi</string>
+  <string name="mile">miglio</string>
   <string name="send_location_way_choose_title">Condividi la posizione usando</string>
   <string name="send_location_sms_pattern">Posizione: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Per vedere la posizione segui il collegamento web %1$s o il collegamento %2$s</string>
@@ -380,7 +380,7 @@
   <string name="daynight">Modalità giorno/notte</string>
   <string name="download_files_question">Scarico {0} file(s) ({1} MB)?</string>
   <string name="items_were_selected">{0} oggetto(i) selezionati</string>
-  <string name="filter_existing_indexes">Scaricato</string>
+  <string name="filter_existing_indexes">Scaricati</string>
   <string name="deselect_all">Deseleziona tutto</string>
   <string name="select_all">Seleziona tutto</string>
   <string name="reload">Ricarica</string>
