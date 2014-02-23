@@ -68,12 +68,12 @@
   <string name="tip_day_night_mode">Modo giorno/notte</string>
   
   <string name="tip_osm_improve">Migliora i dati OSM</string>
-  <string name="tip_osm_improve_t">\tOsmAnd usa mappe basate sui dati di Openstreetmap.org (OSM) e -oltre a visualizzare e navigare le mappe- può essere usato per migliorare la qualità dei dati OSM. Puoi creare e caricare facilmente nuovi PDI o segnalazioni di errori con solo un paio di clic!
-\n\tPer questo devi prima fornire le credenziali d\'accesso ad OSM in \'Impostazioni\' -&gt; \'Impostazioni generali\' -&gt; \'Editing OSM\'.
-\n\tPer aggiungere un nuovo PDI usa l\'opzione \'Crea un PDI\' nel menù contestuale. Procedi inserendo le informazioni relative al nuovo PDI nella finestra \'Crea PDI\' e infine invialo.
-\n\tGli errori sulle mappe possono essere immediatamente segnalati tramite un bug OSM, e la comunità OSM può correggere velocemente il problema.
-\n\tPer aggiungere un bug OSM usa l\'opzione \'Apri un bug OSM\' nel menù contestuale. Inserisci una descrizione dettagliata del problema e infine inviala con il bottone \'Aggiungi\'.
-\n\tE\' necessaria la connessione ad Internet per contribuire a PDI ed errori.</string>
+  <string name="tip_osm_improve_t">\tOsmAnd usa mappe basate sui dati di Openstreetmap.org (OSM) e -oltre a visualizzare e navigare le mappe- può essere usato per migliorare la qualità dei dati OSM. Puoi creare e caricare facilmente nuovi PDI o segnalazioni di errori con pochi clic.
+		\n\nPer questo devi prima attivare il plugin \'Modifiche OSM\' in \'Impostazioni\' → \'Gestore plugin\' e fornire le credenziali d\'accesso ad OSM in \'Impostazioni\' → \'Modifiche OSM\'.
+		\n\nPer aggiungere un nuovo PDI usa l\'opzione \'Crea PDI\' nel menù contestuale. Procedi inserendo le informazioni relative al nuovo PDI nella finestra \'Crea PDI\' e infine invialo.
+		\n\nAnche gli errori sulle mappe possono essere immediatamente segnalati tramite un bug OSM, e la comunità OSM può correggere velocemente il problema. Per aggiungere un bug OSM usa l\'opzione \'Segnala unerrore OSM\' nel menù contestuale, inserisci una descrizione dettagliata del problema e infine inviala con il bottone \'Aggiungi\'.
+		\n\nOsmAnd archivierà offline i le tue segnalazioni (vedi le impostazioni corrispondenti), ma è ovviamente necessaria la connessione ad Internet per caricare i tuoi contributi a PDI ed errori.
+	</string>
   <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
   <string name="download_files_question_space">Lo spazio disponibile è di {2} MB! Scaricare {0} file(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Seleziona \'Punto destinazione\'</string>
