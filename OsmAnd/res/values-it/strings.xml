@@ -304,7 +304,7 @@
   <string name="si_mi_yard">Miglia/iarde</string>
   <string name="si_km_m">Chilometri/metri</string>
   <string name="yard">iarde</string>
-  <string name="foot">ft</string>
+  <string name="foot">piede</string>
   <string name="mile_per_hour">mph</string>
   <string name="mile">mi</string>
   <string name="send_location_way_choose_title">Condividi la posizione usando</string>
