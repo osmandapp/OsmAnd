@@ -1137,7 +1137,7 @@
 	\n\t* Abilitazione del servizio in background durante la navigazione↵
     </string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
-    <string name="route_descr_current_location">Posizione corrente</string>
+    <string name="route_descr_current_location">Posizione attuale</string>
     
     
     <string name="no_buildings_found">Nessun edificio trovato.</string>
