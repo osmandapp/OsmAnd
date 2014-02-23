@@ -1504,7 +1504,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 <string name="local_index_gpx_timespan">\nTempo trascorso: %1$d:%2$02d:%3$02d</string>
 	
 	
-    <string name="speak_speed_limit">Annuncia limite di velocità</string>
+    <string name="speak_speed_limit">Annuncia limiti di velocità</string>
     <string name="speak_cameras">Annuncia autovelox</string>
 	<string name="speak_traffic_warnings">Annuncia avvisi di traffico</string>
 	<string name="tip_recent_changes_1_5_t">Cambiamenti nella 1.5:
@@ -1586,8 +1586,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="route_distance_settings">Distanza visione mappa (DA FARE nomi)</string>
     <string name="map_magnifier">Ingrandimento mappa</string>
     <string name="route_distance_farthest">Più lontano</string>
-    <string name="route_is_too_long">Il percorso potrebbe essere troppo lungo per essere calcolato dal servizio OsmAnd offline.
-	Generalmente il calcolo del percorso è possibile su distanze di 200 km circa. Per favore aggiungi uno o più punti intermedi per calcolare il percorso.</string>
+    <string name="route_is_too_long">Il calcolo del percorso offline di OsmAnd potrebbe richiedere molto tempo (o talvolta non funzionare) su distanze più lunghe di 200 km.
+Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestazioni.</string>
     <string name="auto_zoom_none">No zoom automatico</string>
     <string name="auto_zoom_close">A corto raggio</string>
     <string name="auto_zoom_far">A medio raggio</string>
