@@ -534,7 +534,7 @@
   <string name="update_poi_is_not_available_for_zoom">L\'aggiornamento dei PDI non è disponibile per livelli di zoom bassi</string>
   <string name="context_menu_item_update_poi">Aggiorna PDI</string>
   <string name="context_menu_item_update_map_confirm">Aggiornare i dati locali via Internet?</string>
-  <string name="search_history_city">Città:\n {0}</string>
+  <string name="search_history_city">Città: {0}</string>
   <string name="search_history_street">Strada: {0}, {1}</string>
   <string name="search_history_int_streets">Incrocio: {0} x {1} in {2}</string>
   <string name="search_history_building">Edifici: {0}, {1}, {2}</string>
