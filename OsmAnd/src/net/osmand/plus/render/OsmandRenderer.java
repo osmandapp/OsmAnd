@@ -300,7 +300,7 @@ public class OsmandRenderer {
 				return object1.iconOrder - object2.iconOrder;
 			}
 		});
-		int skewConstant = (int) rc.getDensityValue(24);
+		int skewConstant = (int) rc.getDensityValue(32);
 		int iconsW = rc.width / skewConstant;
 		int iconsH = rc.height / skewConstant;
 		int[] alreadyDrawnIcons = new int[iconsW * iconsH / 32];
