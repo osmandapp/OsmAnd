@@ -233,10 +233,10 @@ public class RouteInfoWidgetsFactory {
 			public boolean updateInfo(DrawSettings drawSettings) {
 				int time = 0;
 				if (routingHelper != null && routingHelper.isRouteCalculated()) {
-					boolean followingMode = routingHelper.isFollowingMode();
+					//boolean followingMode = routingHelper.isFollowingMode();
 					time = routingHelper.getLeftTime();
 					if (time != 0) {
-						if (followingMode && showArrival.get()) {
+						if (/*followingMode && */showArrival.get()) {
 							long toFindTime = time * 1000 + System.currentTimeMillis();
 							if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
 								cachedLeftTime = toFindTime;
