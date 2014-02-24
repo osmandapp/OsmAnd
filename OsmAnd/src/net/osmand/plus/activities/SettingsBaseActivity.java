@@ -311,6 +311,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 					@Override
 					public void onClick(View v) {
 						if(selected.size() > 0) {
+							// test
 							setSelectedAppMode(selected.iterator().next());
 						}
 						if(profileDialog != null && profileDialog.isShowing()) {
