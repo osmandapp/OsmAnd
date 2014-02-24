@@ -174,7 +174,7 @@ public class ApplicationMode {
 	}
 	
 	public static List<ApplicationMode> allPossibleValues(OsmandSettings settings) {
-		return values;
+		return new ArrayList<ApplicationMode>(values);
 	}
 	
 	
