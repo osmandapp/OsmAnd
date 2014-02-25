@@ -15,13 +15,13 @@ import java.util.List;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex.OsmAndPoiNameIndexData;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.utils.PlatformUtil;
 import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;

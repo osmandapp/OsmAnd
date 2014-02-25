@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 import net.osmand.Collator;
-import net.osmand.PlatformUtil;
+import net.osmand.utils.PlatformUtil;
 
 
 public abstract class MapObject implements Comparable<MapObject>, Serializable {

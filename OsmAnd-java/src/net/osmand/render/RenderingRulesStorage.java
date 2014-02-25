@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
 
-import net.osmand.PlatformUtil;
+import net.osmand.utils.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;

@@ -9,12 +9,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.util.MapUtils;
+import net.osmand.utils.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 

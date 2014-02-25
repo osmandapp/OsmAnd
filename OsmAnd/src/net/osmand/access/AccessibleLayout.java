@@ -1,6 +1,6 @@
 package net.osmand.access;
 
-import net.osmand.plus.OsmandApplication;
+import net.osmand.OsmandApplication;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.SystemClock;

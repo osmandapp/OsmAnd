@@ -1,5 +1,7 @@
 package net.osmand;
 
+import net.osmand.utils.PlatformUtil;
+
 
 
 /**

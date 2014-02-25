@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.NativeLibrary;
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.RoutingConfiguration.Builder;
+import net.osmand.utils.PlatformUtil;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

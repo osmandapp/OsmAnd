@@ -19,33 +19,33 @@
 
 	<target name="copy_resources">
 		<copy todir="assets">
-			<fileset dir="../../resources/" >
+			<fileset dir="../../osmand-resources/" >
 				<include name="specialphrases/**"/>
 				<include name="voice/**/*.p"/>
 			</fileset>
 		</copy>
 		<copy todir="res/">
-			<fileset dir="../../resources/rendering_styles/style-icons/"  >
+			<fileset dir="../../osmand-resources/rendering_styles/style-icons/"  >
 				<include name="**/*"/>
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/router/">
-			<fileset dir="../../resources/routing/" >
+			<fileset dir="../../osmand-resources/routing/" >
 				<include name="*.xml"/>
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/render/">
-			<fileset dir="../../resources/rendering_styles/" >
+			<fileset dir="../../osmand-resources/rendering_styles/" >
 				<include name="*.xml"/>
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/osm/">
-			<fileset dir="../../resources/obf_creation/" >
+			<fileset dir="../../osmand-resources/obf_creation/" >
 				<include name="rendering_types.xml"/>
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/map/">
-			<fileset dir="../../resources/countries-info/" >
+			<fileset dir="../../osmand-resources/countries-info/" >
                 <include name="regions.ocbf"/>
 			</fileset>
 		</copy>

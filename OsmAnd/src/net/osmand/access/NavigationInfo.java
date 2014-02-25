@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.Location;
+import net.osmand.OsmAndFormatter;
+import net.osmand.OsmandApplication;
+import net.osmand.OsmandSettings;
 import net.osmand.data.LatLon;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.access.RelativeDirectionStyle;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;

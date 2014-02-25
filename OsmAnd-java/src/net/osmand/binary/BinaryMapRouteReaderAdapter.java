@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.IdTable;
@@ -24,6 +23,7 @@ import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RouteData;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
+import net.osmand.utils.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 

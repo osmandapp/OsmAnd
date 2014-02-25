@@ -1,10 +1,10 @@
 package net.osmand.access;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
+import net.osmand.OsmandApplication;
+import net.osmand.OsmandPlugin;
+import net.osmand.activities.MapActivity;
+import net.osmand.activities.SettingsActivity;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import android.content.Intent;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;

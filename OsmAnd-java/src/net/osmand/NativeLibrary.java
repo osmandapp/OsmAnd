@@ -15,6 +15,7 @@ import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.utils.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 

@@ -1,5 +1,7 @@
 package net.osmand;
 
+import net.osmand.utils.PlatformUtil;
+
 import org.apache.commons.logging.Log;
 
 import com.ibm.icu.text.ArabicShaping;

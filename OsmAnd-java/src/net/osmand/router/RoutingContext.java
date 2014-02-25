@@ -20,7 +20,6 @@ import java.util.Map.Entry;
 
 import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.NativeRouteSearchResult;
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapRouteReaderAdapter;
@@ -31,6 +30,7 @@ import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.utils.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 

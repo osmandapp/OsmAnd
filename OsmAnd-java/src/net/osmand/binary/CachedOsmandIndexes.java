@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
@@ -27,6 +26,7 @@ import net.osmand.binary.OsmandIndex.RoutingPart;
 import net.osmand.binary.OsmandIndex.RoutingSubregion;
 import net.osmand.binary.OsmandIndex.TransportPart;
 import net.osmand.util.MapUtils;
+import net.osmand.utils.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 
