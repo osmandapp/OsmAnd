@@ -1622,4 +1622,16 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="app_modes_choose">پروفایل برنامه</string>
 	<string name="map_widget_map_rendering">رندرینگ نقشه:</string>
     <string name="osmodroid_seek">جستجوی شی</string>
+    <string name="routing_preferences_descr">اولویت مسیر یابی</string>
+    <string name="speech_rate_descr">تعین کردن سخنگو برای TTS</string>
+    <string name="speech_rate">قرار دادن سخنگو</string>
+    <string name="guidance_preferences_descr">اولویت راهبری</string>
+    <string name="disable_complex_routing_descr">غیر فعال کردن 2 حالت مسیر یابی برای ناوبری خودرو</string>
+    <string name="disable_complex_routing">غیر فعال کردن تمام مسیر یابی ها</string>
+    <string name="tip_recent_changes_1_7_t">تغیر دادن به 1.7:
+	به روز رسانی تمامی مسیر یابی ها
+	فعال سازی شبیه سازی در مسیرهای عبوری
+    </string>
+    <string name="complex_route_calculation_failed">محاسبه سریترین مسیر ناموفق بود (%S) برای محاسبه آهسته به عقب برگردید</string>
+    <string name="osmodroid_unseek">نادیده گرفتن اشیاء</string>
     </resources>
