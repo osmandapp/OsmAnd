@@ -20,7 +20,6 @@ import java.util.Map.Entry;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
@@ -44,6 +43,7 @@ import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.utils.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 

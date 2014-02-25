@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+import net.osmand.utils.PlatformUtil;
+
 import org.apache.commons.logging.Log;
 
 public class GeoidAltitudeCorrection {

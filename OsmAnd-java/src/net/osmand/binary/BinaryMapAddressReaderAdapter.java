@@ -8,7 +8,6 @@ import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.AddressNameIndexDataAtom;
@@ -23,6 +22,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.util.MapUtils;
+import net.osmand.utils.PlatformUtil;
 import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;

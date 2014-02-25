@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
+import net.osmand.utils.PlatformUtil;
 
 public class City extends MapObject {
 	public enum CityType {

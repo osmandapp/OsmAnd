@@ -1,142 +1,297 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="net.osmand.plus" android:installLocation="auto" android:versionName="@string/app_version" android:versionCode="170">
-	<meta-data android:name="com.google.android.backup.api_key"
-    android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
-	
-	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="16"/>
-	
-	<uses-feature android:name="android.hardware.camera" android:required="false" />
-	<uses-feature android:name="android.hardware.microphone" android:required="false"/>
- 	<uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
- 	<uses-feature android:name="android.hardware.wifi" android:required="false"/>
- 	<uses-feature android:name="android.hardware.location" android:required="false"/>
- 	<uses-feature android:name="android.hardware.location.network" android:required="false"/>
- 	<uses-feature android:name="android.hardware.location.gps" android:required="false"/>
- 	
- 	<uses-feature android:name="android.hardware.sensor.light" android:required="false"/>
- 	<uses-feature android:name="android.hardware.sensor.compass" android:required="false"/>
- 	<uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false"/>
- 	<uses-feature android:name="android.hardware.sensor.gyroscope" android:required="false"/>
- 	<uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
- 	
+    package="net.osmand.plus"
+    android:installLocation="auto"
+    android:versionCode="170"
+    android:versionName="@string/app_version" >
 
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-	<uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE"></uses-permission>
-	<uses-permission android:name="android.permission.STORAGE" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
-	<uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
-	<uses-permission android:name="android.permission.CAMERA"></uses-permission>
-	<uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
-	<supports-screens  android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
-	    android:xlargeScreens="true" android:anyDensity="true" />
-	<!-- android:theme="@style/OsmandLightDarkActionBarTheme" -->
-	<application android:icon="@drawable/icon" android:label="@string/app_name" 
-		android:debuggable="true" android:name="net.osmand.plus.OsmandApplication"  android:configChanges="locale"
-		android:theme="@style/OsmandDarkTheme"
-		android:backupAgent="net.osmand.plus.OsmandBackupAgent" android:restoreAnyVersion="true" android:largeHeap="true">
-		
-	    <meta-data android:name="com.sec.android.support.multiwindow" android:value="true"/>
-	    <meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W" android:resource="@dimen/app_defaultsize_w" android:value=""/>
-  		<meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H" android:resource="@dimen/app_defaultsize_h" android:value=""/>
-  		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:resource="@dimen/app_minimumsize_w" android:value=""/>
-  		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:resource="@dimen/app_minimumsize_h" android:value=""/>
-  		<meta-data android:name="com.sec.minimode.icon.portrait.normal" android:resource="@drawable/icon" android:value=""/>
-  		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@drawable/icon" android:value=""/>
-  		
-  		
-		<activity android:name="net.osmand.plus.activities.MainMenuActivity"
-			android:label="@string/app_name">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-				<category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity android:name="net.osmand.plus.activities.MapActivity" android:label="@string/app_name" android:screenOrientation="unspecified"
-			android:launchMode="singleTop">
-			<intent-filter>
-    			<data android:scheme="http" android:host="download.osmand.net" path="go"/>
-    			<action android:name="android.intent.action.VIEW" />
-    			<category android:name="android.intent.category.DEFAULT"/>
-				<category android:name="android.intent.category.BROWSABLE"/>
-				<category android:name="android.intent.category.APP_MAPS" />
-				<category android:name="android.intent.category.CAR_MODE" />
-				<category android:name="android.intent.category.CAR_DOCK" />
-				<category android:name="android.intent.category.DESK_DOCK" />
-			</intent-filter>
-			<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
-		    <intent-filter>
+    <meta-data
+        android:name="com.google.android.backup.api_key"
+        android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
+
+    <uses-sdk
+        android:minSdkVersion="7"
+        android:targetSdkVersion="16" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.wifi"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.network"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.sensor.light"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.sensor.compass"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.sensor.gyroscope"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WAKE_LOCK" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CAMERA" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" >
+    </uses-permission>
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+    <!-- android:theme="@style/OsmandLightDarkActionBarTheme" -->
+    <application
+        android:name="net.osmand.OsmandApplication"
+        android:backupAgent="net.osmand.OsmandBackupAgent"
+        android:configChanges="locale"
+        android:debuggable="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:restoreAnyVersion="true"
+        android:theme="@style/OsmandDarkTheme" >
+        <meta-data
+            android:name="com.sec.android.support.multiwindow"
+            android:value="true" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W"
+            android:resource="@dimen/app_defaultsize_w"
+            android:value="" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H"
+            android:resource="@dimen/app_defaultsize_h"
+            android:value="" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W"
+            android:resource="@dimen/app_minimumsize_w"
+            android:value="" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H"
+            android:resource="@dimen/app_minimumsize_h"
+            android:value="" />
+        <meta-data
+            android:name="com.sec.minimode.icon.portrait.normal"
+            android:resource="@drawable/icon"
+            android:value="" />
+        <meta-data
+            android:name="com.sec.minimode.icon.landscape.normal"
+            android:resource="@drawable/icon"
+            android:value="" />
+
+        <activity
+            android:name="net.osmand.activities.MainMenuActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="net.osmand.activities.MapActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="unspecified" >
+            <intent-filter>
+                <data
+                    android:host="download.osmand.net"
+                    android:path="go"
+                    android:scheme="http" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.APP_MAPS" />
+                <category android:name="android.intent.category.CAR_MODE" />
+                <category android:name="android.intent.category.CAR_DOCK" />
+                <category android:name="android.intent.category.DESK_DOCK" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="net.osmand.audionotes.MediaRemoteControlReceiver" >
+            <intent-filter>
                 <action android:name="android.intent.action.CAMERA_BUTTON" />
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
-		 </receiver>
-		</activity>
-		<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
-		    <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
+        </receiver>
+
+        <activity
+            android:name="net.osmand.activities.SettingsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/settings_activity" >
+        </activity>
+        <activity
+            android:name="net.osmand.activities.SettingsGeneralActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="net.osmand.activities.SettingsNavigationActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="net.osmand.plus.rastermaps.SettingsRasterMapsActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="net.osmand.plus.development.SettingsDevelopmentActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="net.osmand.plus.audionotes.SettingsAudioVideoActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="net.osmand.access.SettingsAccessibilityActivity"
+            android:configChanges="keyboardHidden|orientation" >
+        </activity>
+        <activity
+            android:name="net.osmand.activities.search.SearchActivity"
+            android:label="@string/search_activity" >
+        </activity>
+        <activity
+            android:name="net.osmand.activities.DownloadIndexActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/local_index_download" >
+        </activity>
+        <activity
+            android:name="net.osmand.activities.ShowRouteInfoActivity"
+            android:label="@string/show_route" >
+        </activity>
+        <activity
+            android:name="net.osmand.activities.FavouritesListActivity"
+            android:label="@string/favourites_list_activity" >
+        </activity>
+        <activity android:name="net.osmand.activities.FavouritesActivity" >
+        </activity>
+        <activity android:name="net.osmand.activities.PluginsActivity" >
+        </activity>
+        <activity
+            android:name="net.osmand.activities.ContributionVersionActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/contribution_activity" >
+        </activity>
+        <activity
+            android:name="net.osmand.plus.activities.search.SearchPOIActivity"
+            android:label="@string/searchpoi_activity" >
+        </activity>
+        <activity
+            android:name="net.osmand.activities.search.SearchAddressActivity"
+            android:label="@string/select_address_activity" >
+        </activity>
+        <activity android:name="net.osmand.plus.activities.search.SearchCityByNameActivity" >
+        </activity>
+        <activity android:name="net.osmand.activities.search.SearchRegionByNameActivity" >
+        </activity>
+        <activity android:name="net.osmand.activities.search.SearchStreetByNameActivity" >
+        </activity>
+        <activity android:name="net.osmand.activities.search.SearchStreet2ByNameActivity" >
+        </activity>
+        <activity android:name="net.osmand.activities.search.SearchBuildingByNameActivity" >
+        </activity>
+        <activity android:name="net.osmand.activities.EditPOIFilterActivity" >
+        </activity>
+        <activity android:name="net.osmand.plus.activities.search.GeoIntentActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" >
+                </action>
+
+                <category android:name="android.intent.category.DEFAULT" >
+                </category>
+
+                <data android:scheme="geo" >
+                </data>
             </intent-filter>
-		 </receiver>
-		<activity android:name="net.osmand.plus.activities.SettingsActivity" android:label="@string/settings_activity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.activities.SettingsGeneralActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.rastermaps.SettingsRasterMapsActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.audionotes.SettingsAudioVideoActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.access.SettingsAccessibilityActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		
-		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" ></activity>
-        <activity android:name="net.osmand.plus.activities.DownloadIndexActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/local_index_download"></activity>
-        <activity android:name="net.osmand.plus.activities.ShowRouteInfoActivity" android:label="@string/show_route"></activity>
-        <activity android:name="net.osmand.plus.activities.FavouritesListActivity" android:label="@string/favourites_list_activity"></activity>
-        <activity android:name="net.osmand.plus.activities.FavouritesActivity"></activity>
-        <activity android:name="net.osmand.plus.activities.PluginsActivity"></activity>
-        <activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity"></activity>
-        
-        
-        <activity android:name="net.osmand.plus.activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>
-        <activity android:name="net.osmand.plus.activities.search.SearchAddressActivity" android:label="@string/select_address_activity"></activity>
-        <activity android:name="net.osmand.plus.activities.search.SearchCityByNameActivity"></activity>
-        <activity android:name="net.osmand.plus.activities.search.SearchRegionByNameActivity"></activity>
-        <activity android:name="net.osmand.plus.activities.search.SearchStreetByNameActivity"></activity>
-        <activity android:name="net.osmand.plus.activities.search.SearchStreet2ByNameActivity"></activity>
-        <activity android:name="net.osmand.plus.activities.search.SearchBuildingByNameActivity"></activity>
-		<activity android:name="net.osmand.plus.activities.EditPOIFilterActivity"></activity>
-		<activity android:name="net.osmand.plus.activities.search.GeoIntentActivity">
-		    <intent-filter><action android:name="android.intent.action.VIEW"></action>
-			<category android:name="android.intent.category.DEFAULT"></category>
-			<data android:scheme="geo"></data>
-			</intent-filter>
-			<intent-filter>
-    			<data android:scheme="http" android:host="maps.google.com" />
-    			<action android:name="android.intent.action.VIEW" />
-    			<category android:name="android.intent.category.DEFAULT"/>
-				<category android:name="android.intent.category.BROWSABLE"/>
-			</intent-filter>
-			<!-- requires read permission -->
-			<!-- 
+            <intent-filter>
+                <data
+                    android:host="maps.google.com"
+                    android:scheme="http" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <!-- requires read permission -->
+            <!--
 			<intent-filter android:label="OsmAnd">
 			<action android:name="android.intent.action.VIEW" />
     			<category android:name="android.intent.category.DEFAULT" />
 				<data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
-			</intent-filter>
-			 -->
-		</activity>
-		<activity android:name="net.osmand.plus.development.TestVoiceActivity"></activity>
-		<activity android:name="net.osmand.plus.activities.LocalIndexesActivity" android:label="@string/local_index_descr_title"></activity>
-		<activity android:name="net.osmand.plus.osmedit.LocalOpenstreetmapActivity" android:label="@string/local_openstreetmap_act_title"></activity>
-		
-		<service android:process="net.osmand.plus" android:label="@string/process_navigation_service" android:name="net.osmand.plus.NavigationService">
-			<intent-filter><action android:name="net.osmand.plus.NavigationService"></action></intent-filter>
-		</service>
-		<receiver android:name="net.osmand.plus.OnNavigationServiceAlarmReceiver"/>
-    	<activity android:name="net.osmand.plus.activities.OsmandBidForFixActivity"></activity>
-		
+			</intent-filter>
+            -->
+        </activity>
+        <activity android:name="net.osmand.plus.development.TestVoiceActivity" >
+        </activity>
+        <activity
+            android:name="net.osmand.activities.LocalIndexesActivity"
+            android:label="@string/local_index_descr_title" >
+        </activity>
+        <activity
+            android:name="net.osmand.plus.osmedit.LocalOpenstreetmapActivity"
+            android:label="@string/local_openstreetmap_act_title" >
+        </activity>
 
-</application>
-</manifest> 
+        <service
+            android:name="net.osmand.plus.NavigationService"
+            android:label="@string/process_navigation_service"
+            android:process="net.osmand.plus" >
+            <intent-filter>
+                <action android:name="net.osmand.plus.NavigationService" >
+                </action>
+            </intent-filter>
+        </service>
+
+        <receiver android:name="net.osmand.OnNavigationServiceAlarmReceiver" />
+
+        <activity android:name="net.osmand.plus.activities.OsmandBidForFixActivity" >
+        </activity>
+    </application>
+
+</manifest>

@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:keepScreenOn="true" android:clipChildren="false">
-<net.osmand.plus.views.OsmandMapTileView android:id="@+id/MapView" android:layout_width="fill_parent" android:layout_height="fill_parent" android:contentDescription="@string/map_view"/>
+<net.osmand.views.OsmandMapTileView android:id="@+id/MapView" android:layout_width="fill_parent" android:layout_height="fill_parent" android:contentDescription="@string/map_view"/>
 
 
 </FrameLayout>

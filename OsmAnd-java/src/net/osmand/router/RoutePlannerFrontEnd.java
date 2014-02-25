@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.NativeLibrary;
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -16,6 +15,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.util.MapUtils;
+import net.osmand.utils.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 

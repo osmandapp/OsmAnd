@@ -1,8 +1,8 @@
 package net.osmand.render;
 
 
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.utils.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 

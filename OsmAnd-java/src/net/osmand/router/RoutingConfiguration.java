@@ -6,11 +6,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Stack;
 
-import net.osmand.PlatformUtil;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RouteAttributeContext;
 import net.osmand.router.GeneralRouter.RouteDataObjectAttribute;
 import net.osmand.util.Algorithms;
+import net.osmand.utils.PlatformUtil;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

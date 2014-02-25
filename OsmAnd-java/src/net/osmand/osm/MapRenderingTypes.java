@@ -16,10 +16,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
-import net.osmand.PlatformUtil;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
+import net.osmand.utils.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
