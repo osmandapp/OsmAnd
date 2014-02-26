@@ -2,21 +2,30 @@ package net.osmand.plus.activities;
 
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.router.GeneralRouter.RoutingParameterType;
+import net.osmand.router.RoutingConfiguration;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
@@ -31,6 +40,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private ListPreference routerServicePreference;
 	private ListPreference autoZoomMapPreference;
 	public static final String MORE_VALUE = "MORE_VALUE";
+	
+	private List<RoutingParameter> avoidParameters = new ArrayList<RoutingParameter>();
+	private List<RoutingParameter> preferParameters = new ArrayList<RoutingParameter>();
 	
 	public SettingsNavigationActivity() {
 		super(true);
@@ -63,34 +75,28 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		addPreferencesFromResource(R.xml.navigation_settings);
 		PreferenceScreen screen = getPreferenceScreen();
 		settings = getMyApplication().getSettings();
+		routerServicePreference = (ListPreference) screen.findPreference(settings.ROUTER_SERVICE.getId());
 		
-		registerBooleanPreference(settings.FAST_ROUTE_MODE, screen);
-		PreferenceCategory cat = (PreferenceCategory) screen.findPreference("routing_preferences");
-		avoidRouting = (Preference) screen.findPreference("avoid_in_routing");
-		avoidRouting.setOnPreferenceClickListener(this);
-		// routing_preferences
-		preferRouting = (Preference) screen.findPreference("prefer_in_routing");
-		preferRouting.setOnPreferenceClickListener(this);
+		RouteService[] vls = RouteService.getAvailableRouters(getMyApplication());
+		String[] entries = new String[vls.length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = vls[i].getName();
+		}
+		registerListPreference(settings.ROUTER_SERVICE, screen, entries, vls);
+		
 		
 		registerBooleanPreference(settings.SNAP_TO_ROAD, screen);
 		registerBooleanPreference(settings.USE_COMPASS_IN_NAVIGATION, screen);
 		
 		Integer[] intValues = new Integer[] { 0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
-		String[] entries = new String[intValues.length];
+		entries = new String[intValues.length];
 		entries[0] = getString(R.string.auto_follow_route_never);
 		for (int i = 1; i < intValues.length; i++) {
 			entries[i] = (int) intValues[i] + " " + getString(R.string.int_seconds);
 		}
 		registerListPreference(settings.AUTO_FOLLOW_ROUTE, screen, entries, intValues);
 		
-		RouteService[] vls = RouteService.getAvailableRouters(getMyApplication());
-		entries = new String[vls.length];
-		for(int i=0; i<entries.length; i++){
-			entries[i] = vls[i].getName();
-		}
-		registerListPreference(settings.ROUTER_SERVICE, screen, entries, vls);
 		
-		routerServicePreference = (ListPreference) screen.findPreference(settings.ROUTER_SERVICE.getId());
 		
 		entries = new String[AutoZoomMap.values().length];
 		for(int i=0; i<entries.length; i++){
@@ -108,9 +114,87 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		speakAlarms = (Preference) screen.findPreference("speak_routing_alarms");
 		speakAlarms.setOnPreferenceClickListener(this);
 		
-		reloadVoiceListPreference(screen);
-		
 		profileDialog();
+	}
+	
+	
+
+
+	private void prepareRoutingPrefs(PreferenceScreen screen) {
+		PreferenceCategory cat = (PreferenceCategory) screen.findPreference("routing_preferences");
+		cat.removeAll();
+		CheckBoxPreference fastRoute = createCheckBoxPreference(settings.FAST_ROUTE_MODE, R.string.fast_route_mode, R.string.fast_route_mode_descr);
+		if(settings.ROUTER_SERVICE.get() != RouteService.OSMAND) {
+			cat.addPreference(fastRoute);
+		} else {
+			ApplicationMode am = settings.getApplicationMode();
+			GeneralRouter router = getRouter(am);
+			clearParameters();
+			if (router != null) {
+				Map<String, RoutingParameter> parameters = router.getParameters();
+				if(parameters.containsKey("short_way")) {
+					cat.addPreference(fastRoute);
+				}
+				List<RoutingParameter> others = new ArrayList<GeneralRouter.RoutingParameter>();
+				for(Map.Entry<String, RoutingParameter> e : parameters.entrySet()) {
+					String param = e.getKey();
+					if(param.startsWith("avoid_")) {
+						avoidParameters.add(e.getValue());
+					} else if(param.startsWith("prefer_")) {
+						preferParameters.add(e.getValue());
+					} else if(!param.equals("short_way")) {
+						others.add(e.getValue());
+					}
+				}
+				if (avoidParameters.size() > 0) {
+					avoidRouting = new Preference(this);
+					avoidRouting.setTitle(R.string.avoid_in_routing_title);
+					avoidRouting.setSummary(R.string.avoid_in_routing_descr);
+					avoidRouting.setOnPreferenceClickListener(this);
+					cat.addPreference(avoidRouting);
+				}
+				if (preferParameters.size() > 0) {
+					preferRouting = new Preference(this);
+					preferRouting.setTitle(R.string.prefer_in_routing_title);
+					preferRouting.setSummary(R.string.prefer_in_routing_descr);
+					preferRouting.setOnPreferenceClickListener(this);
+					cat.addPreference(preferRouting);
+				}
+				for(RoutingParameter p : others) {
+					Preference basePref;
+					if(p.getType() == RoutingParameterType.BOOLEAN) {
+						basePref = createCheckBoxPreference(settings.getCustomRoutingBooleanProperty(p.getId()));
+					} else {
+						Object[] vls = p.getPossibleValues();
+						String[] svlss = new String[vls.length];
+						int i = 0;
+						for(Object o : vls) {
+							svlss[i++] = o.toString();
+						}
+						basePref = createListPreference(settings.getCustomRoutingProperty(p.getId()), 
+								p.getPossibleValueDescriptions(), svlss);
+					}
+					basePref.setTitle(SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName()));
+					basePref.setSummary(SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getDescription()));
+					cat.addPreference(basePref);
+				}
+			}
+		}
+	}
+
+
+	private void clearParameters() {
+		preferParameters.clear();
+		avoidParameters.clear();
+	}
+
+
+	public static GeneralRouter getRouter(ApplicationMode am) {
+		GeneralRouter router = RoutingConfiguration.getDefault().getRouter(am.getStringKey());
+		if(router == null && am.getParent() != null) {
+			router = RoutingConfiguration.getDefault().getRouter(am.getParent().getStringKey());
+		}
+		return router;
 	}
 
 
@@ -137,6 +221,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 	public void updateAllSettings() {
 		reloadVoiceListPreference(getPreferenceScreen());
+		prepareRoutingPrefs(getPreferenceScreen());
 		super.updateAllSettings();
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + settings.ROUTER_SERVICE.get() + "]");
 	}
@@ -156,11 +241,11 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			}
 			return true;
 		}
-		boolean changed = super.onPreferenceChange(preference, newValue);
-		
+		super.onPreferenceChange(preference, newValue);
 		if (id.equals(settings.ROUTER_SERVICE.getId())) {
 			routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  ["
 					+ settings.ROUTER_SERVICE.get() + "]");
+			prepareRoutingPrefs(getPreferenceScreen());
 		}
 		return true;
 	}
@@ -169,15 +254,16 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference == avoidRouting) {
-			showBooleanSettings(new String[] { getString(R.string.avoid_toll_roads), getString(R.string.avoid_ferries),
-					getString(R.string.avoid_unpaved), getString(R.string.avoid_motorway)
-					}, new OsmandPreference[] { settings.AVOID_TOLL_ROADS,
-					settings.AVOID_FERRIES, settings.AVOID_UNPAVED_ROADS, settings.AVOID_MOTORWAY });
-			return true;
-		} else if (preference == preferRouting) {
-			showBooleanSettings(new String[] { getString(R.string.prefer_motorways)}, 
-					new OsmandPreference[] { settings.PREFER_MOTORWAYS});
+		if (preference == avoidRouting || preference == preferRouting) {
+			List<RoutingParameter> prms = preference == avoidRouting ? avoidParameters : preferParameters; 
+			String[] vals = new String[prms.size()];
+			OsmandPreference[] bls = new OsmandPreference[prms.size()];
+			for(int i = 0; i < prms.size(); i++) {
+				RoutingParameter p =  prms.get(i);
+				vals[i] = SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName());
+				bls[i] = settings.getCustomRoutingBooleanProperty(p.getId());
+			}
+			showBooleanSettings(vals, bls);
 			return true;
 		} else if (preference == showAlarms) {
 			showBooleanSettings(new String[] { getString(R.string.show_traffic_warnings), getString(R.string.show_cameras), 

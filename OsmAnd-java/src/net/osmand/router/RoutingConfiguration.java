@@ -98,6 +98,15 @@ public class RoutingConfiguration {
 			return attributes.get(propertyName);
 		}
 		
+		
+		public String getDefaultRouter() {
+			return defaultRouter;
+		}
+		
+		public GeneralRouter getRouter(String applicationMode) {
+			return routers.get(applicationMode);
+			
+		}
 	}
 
 	private static int parseSilentInt(String t, int v) {
@@ -128,7 +137,7 @@ public class RoutingConfiguration {
 		}
 		return DEFAULT;
 	}
-
+	
 	public static RoutingConfiguration.Builder parseFromInputStream(InputStream is) throws IOException, XmlPullParserException {
 		XmlPullParser parser = PlatformUtil.newXMLPullParser();
 		final RoutingConfiguration.Builder config = new RoutingConfiguration.Builder();

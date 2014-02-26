@@ -1394,10 +1394,30 @@ public class OsmandSettings {
 	
 	Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<Boolean>>();
 	public CommonPreference<Boolean> getCustomRenderBooleanProperty(String attrName){
-		if(!customRendersProps.containsKey(attrName)){
+		if(!customBooleanRendersProps.containsKey(attrName)){
 			customBooleanRendersProps.put(attrName, new BooleanPreference("nrenderer_"+attrName, false).makeProfile());
 		}
 		return customBooleanRendersProps.get(attrName);
+	}
+	
+	Map<String, CommonPreference<String>> customRoutingProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<String>>();
+	public CommonPreference<String> getCustomRoutingProperty(String attrName){
+		if(!customRoutingProps.containsKey(attrName)){
+			customRoutingProps.put(attrName, new StringPreference("prouting_"+attrName, "").makeProfile());
+		}
+		return customRoutingProps.get(attrName);
+	}
+	{
+//		CommonPreference<String> pref = getCustomRoutingProperty("appMode");
+//		pref.setModeDefaultValue(ApplicationMode.CAR, "car");
+	}
+	
+	Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<Boolean>>();
+	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(String attrName){
+		if(!customBooleanRoutingProps.containsKey(attrName)){
+			customBooleanRoutingProps.put(attrName, new BooleanPreference("prouting_"+attrName, false).makeProfile());
+		}
+		return customBooleanRoutingProps.get(attrName);
 	}
 	
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false).makeGlobal();
