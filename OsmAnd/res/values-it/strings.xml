@@ -476,7 +476,7 @@
   <string name="hide_poi_filter">Nascondi il filtro</string>
   <string name="show_poi_filter">Visualizza il filtro</string>
   <string name="search_poi_filter">Filtro</string>
-  <string name="menu_mute_off">Il suono è attivato</string>
+  <string name="menu_mute_off">L'audio è attivato</string>
   <string name="menu_mute_on">Audio disattivato</string>
   <string name="voice_provider_descr">Scegli la voce da utilizzare per la navigazione (per i codici delle lingue vedi ISO 639-1)</string>
   <string name="voice_provider">Guida vocale</string>
@@ -1614,7 +1614,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="app_mode_motorcycle">Motocicletta</string>
     <string name="app_mode_boat">Barca</string>
     <string name="app_mode_aircraft">Aereo</string>
-    <string name="map_widget_map_rendering">Stile della mappa:</string>
+    <string name="map_widget_map_rendering">Disegno della mappa:</string>
     <string name="app_modes_choose_descr">Scegli fra le modalità d\'uso disponibili nell\'applicazione</string>
     <string name="app_modes_choose">Modalità applicazione</string>
 	<string name="amenity_type_seamark">Meda</string>
