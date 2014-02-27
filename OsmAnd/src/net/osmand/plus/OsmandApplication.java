@@ -514,13 +514,13 @@ public class OsmandApplication extends Application implements ClientContext {
 					}
 				}
 			}
+			
 			warnings.addAll(manager.reloadIndexes(startDialog));
 			player = null;
 			if (savingTrackHelper.hasDataToSave()) {
 				startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
 				warnings.addAll(savingTrackHelper.saveDataToGpx());
 			}
-
 			// restore backuped favorites to normal file
 			final File appDir = getAppPath(null);
 			File save = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
@@ -531,6 +531,7 @@ public class OsmandApplication extends Application implements ClientContext {
 				}
 				bak.renameTo(save);
 			}
+			
 		} finally {
 			synchronized (OsmandApplication.this) {
 				final ProgressDialog toDismiss;

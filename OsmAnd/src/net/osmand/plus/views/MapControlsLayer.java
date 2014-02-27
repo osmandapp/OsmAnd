@@ -13,8 +13,10 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.views.ContextMenuLayer;	// CGM added
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -49,7 +51,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 
 	private OsmandMapTileView view;
-	private final MapActivity activity;
+	public final MapActivity activity;
 	private Handler showUIHandler;
 	
 	private boolean showZoomLevel = false;
@@ -160,7 +162,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if(appMode != cacheApplicationMode){
 			modeShadow.setBounds(backToMenuButton.getLeft() + (int) (2 * scaleCoefficient), backToMenuButton.getTop() - (int) (24 * scaleCoefficient),
 					backToMenuButton.getRight() - (int) (4 * scaleCoefficient), backToMenuButton.getBottom());
-			cacheAppModeIcon = view.getResources().getDrawable(appMode.getSmallIcon(nightMode));
+			if(appMode == ApplicationMode.CAR){
+			//	cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.car_small_white : R.drawable.car_small);
+				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.ic_action_car_dark : R.drawable.ic_action_car_light);
+			} else if(appMode == ApplicationMode.BICYCLE){
+//				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.bicycle_small_white : R.drawable.bicycle_small);
+				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.ic_action_bicycle_dark : R.drawable.ic_action_bicycle_light);
+			} else if(appMode == ApplicationMode.PEDESTRIAN){
+//				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.pedestrian_small_white : R.drawable.pedestrian_small);
+				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.ic_action_pedestrian_dark : R.drawable.ic_action_pedestrian_light);
+			} else {
+//				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.default_small_white : R.drawable.default_small);
+				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.app_mode_globus_dark : R.drawable.app_mode_globus_light);
+			}
 			int l = modeShadow.getBounds().left + (modeShadow.getBounds().width() - cacheAppModeIcon.getMinimumWidth()) / 2;
 			int t = (int) (modeShadow.getBounds().top + 2 * scaleCoefficient);
 			cacheAppModeIcon.setBounds(l, t, l + cacheAppModeIcon.getMinimumWidth(), t + cacheAppModeIcon.getMinimumHeight());	
@@ -174,15 +188,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	private void onApplicationModePress() {
 		final QuickAction mQuickAction = new QuickAction(backToMenuButton);
-		List<ApplicationMode> vls = ApplicationMode.values(activity.getMyApplication().getSettings());
-		final ApplicationMode[] modes = vls.toArray(new ApplicationMode[vls.size()]);
-		int[] icons = new int[vls.size()];
-		int[] values = new int[vls.size()];
-		for(int k = 0; k < modes.length; k++) {
-			icons[k] = modes[k].getSmallIcon(false);
-			values[k] = modes[k].getStringResource();
-		}
-		for (int i = 0; i < modes.length; i++) {
+		//int[] icons = new int[] { R.drawable.default_small, R.drawable.car_small, R.drawable.bicycle_small, R.drawable.pedestrian_small };
+		int[] icons = new int[] { R.drawable.ic_action_globus_light, R.drawable.ic_action_car_light, R.drawable.ic_action_bicycle_light, R.drawable.ic_action_pedestrian_light };
+		int[] values = new int[] { R.string.app_mode_default, R.string.app_mode_car, R.string.app_mode_bicycle,
+				R.string.app_mode_pedestrian };
+		final ApplicationMode[] modes = new ApplicationMode[] { ApplicationMode.DEFAULT, ApplicationMode.CAR, ApplicationMode.BICYCLE,
+				ApplicationMode.PEDESTRIAN };
+		for (int i = 0; i < 4; i++) {
 			final ActionItem action = new ActionItem();
 			action.setTitle(view.getResources().getString(values[i]));
 			action.setIcon(view.getResources().getDrawable(icons[i]));
@@ -203,33 +215,43 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void drawZoomLevel(Canvas canvas, RotatedTileBox tb, boolean drawZoomLevel) {
 		if (zoomShadow.getBounds().width() == 0) {
-			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * scaleCoefficient),
+			zoomShadow.setBounds(zoomOutButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * scaleCoefficient),
 					zoomInButton.getRight(), zoomInButton.getBottom());
 		}
 		zoomShadow.draw(canvas);
 		if (drawZoomLevel) {
 			String zoomText = tb.getZoom() + "";
 			float frac = tb.getZoomScale();
-			if (frac != 0) {
-				int ifrac = (int) (frac * 10);
-				boolean pos = ifrac > 0;
-				zoomText += (pos ? "+" : "-");
-				zoomText += Math.abs(ifrac) / 10;
-				if (ifrac % 10 != 0) {
-					zoomText += "." + Math.abs(ifrac) % 10;
-				}
-			}
+			zoomText += ";   " + fractionToPercent(frac);
 			float length = zoomTextPaint.measureText(zoomText);
 
-			ShadowText.draw(zoomText, canvas, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
+			ShadowText.draw(zoomText, canvas, (zoomOutButton.getLeft() + zoomInButton.getRight() - length - 2) / 2,
 					zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint, shadowColor);
 		} else {
 			int size = (int) (16 * scaleCoefficient);
 			int top = (int) (zoomInButton.getTop() - size - 4 * scaleCoefficient);
-			int left = (int) (zoomInButton.getLeft() + (zoomInButton.getWidth() - mapMagnifier.getWidth() - 2 * scaleCoefficient) / 2);
+			int left = (int) (zoomOutButton.getLeft() + (zoomInButton.getWidth() - mapMagnifier.getWidth() - 2 * scaleCoefficient) / 2);
 			// canvas density /2 ? size * 2
 			canvas.drawBitmap(mapMagnifier, null, new Rect(left, top, left + size * 2, top + size * 2), bitmapPaint);
 		}
+	}
+	
+	public String fractionToPercent(float fract){
+		String percent = null;
+		if(fract < -0.10){
+			percent = "75%";
+		}else if(fract  >+ -0.1 && fract < 0.2){
+			percent = "100%";
+		}else if(fract  >+ 0.5 && fract < 0.8){
+			percent = "150%";
+		}else if(fract  >+ 0.9 && fract < 1.1){
+			percent = "200%";
+		}else if(fract  >+ 1.3 && fract < 1.6){
+			percent = "300%";
+		}else {
+			percent = "400%";
+		}
+		return percent;
 	}
 	
 	private void hideZoomLevelInTime(){
@@ -353,7 +375,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomOutButton.setBackgroundResource(R.drawable.map_zoom_out);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.RIGHT);
-		
 		params.setMargins(0, 0, minimumWidth , 0);
 		zoomOutButton.setContentDescription(ctx.getString(R.string.zoomOut));
 		parent.addView(zoomOutButton, params);
@@ -382,9 +403,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 		zoomOutButton.setOnLongClickListener(listener);
 	}
+	
+//Added for Magnifier Button plugin support. Can be removed if long click does not open 
+// magnification setting dialog. This can be assigned to separate magnification buttons.
+	public Button getzoomInButton(){	
+		return zoomInButton;
+	}
+	
+	public Button getzoomOutButton(){
+		return zoomOutButton;
+	}
 
-
-	private static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {
+//	private static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {	//CGM change
+	public View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {
 		final View.OnLongClickListener listener = new View.OnLongClickListener() {
 
 			@Override
@@ -431,6 +462,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 								view.getAnimatedDraggingThread().startZooming(view.getZoom(),
 										view.getSettingsZoomScale(), false);
 								dialog.dismiss();
+								activity.getMapLayers().getContextMenuLayer().initLayer(view);	//to support map magnification
+								for (int j = 0; j <= activity.getMapView().getLayers().size(); j++) {
+									if (activity.getMapView().getLayers().get(j) instanceof DistanceCalculatorPlugin.DistanceCalculatorLayer) {
+										activity.getMapView().getLayers().get(j).initLayer(view);	//to support map magnification
+										break;
+									}
+								}
 							}
 						});
 				bld.show();
@@ -438,10 +476,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		};
 		return listener;
+		
 	}
 	
-
-
 
 	/////////////////  Transparency bar /////////////////////////
 	private void initTransparencyBar(final OsmandMapTileView view, FrameLayout parent) {
