@@ -72,12 +72,13 @@ public class EditingPOIActivity implements DialogProvider {
 //	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
 
 	/* dialog stuff */
-	private static final int DIALOG_CREATE_POI = 200;
-	private static final int DIALOG_EDIT_POI = 201;
-	protected static final int DIALOG_SUB_CATEGORIES = 202;
-	protected static final int DIALOG_POI_TYPES = 203;
-	private static final int DIALOG_DELETE_POI = 204;
-	private static final int DIALOG_OPENING_HOURS = 205;
+	public static final int DIALOG_PLUGIN = 600;
+	private static final int DIALOG_CREATE_POI = DIALOG_PLUGIN + 0;
+	private static final int DIALOG_EDIT_POI = DIALOG_PLUGIN + 1;
+	protected static final int DIALOG_SUB_CATEGORIES = DIALOG_PLUGIN + 2; 
+	protected static final int DIALOG_POI_TYPES = DIALOG_PLUGIN + 3;
+	private static final int DIALOG_DELETE_POI = DIALOG_PLUGIN + 4;
+	private static final int DIALOG_OPENING_HOURS = DIALOG_PLUGIN + 5;
 
 	private static final String KEY_AMENITY_NODE = "amenity_node";
 	private static final String KEY_AMENITY = "amenity";
