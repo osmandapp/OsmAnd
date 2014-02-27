@@ -21,6 +21,7 @@ if(CMAKE_HOST_WIN32 AND NOT CYGWIN)
 	add_custom_command(OUTPUT ${OsmAndJNI_generated_cpp}
 		COMMAND bash ARGS --login "${CMAKE_CURRENT_LIST_DIR}/generate-swig.sh"
 		DEPENDS
+			"${CMAKE_CURRENT_LIST_DIR}/generate-swig.sh"
 			${core_includes}
 			${core_headers}
 			${core_sources}
@@ -34,6 +35,7 @@ else()
 	add_custom_command(OUTPUT ${OsmAndJNI_generated_cpp}
 		COMMAND "${CMAKE_CURRENT_LIST_DIR}/generate-swig.sh"
 		DEPENDS
+			"${CMAKE_CURRENT_LIST_DIR}/generate-swig.sh"
 			${core_includes}
 			${core_headers}
 			${core_sources}
@@ -44,17 +46,6 @@ else()
 		WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
 		COMMENT "Generating sources...")
 endif()
-add_custom_target(OsmAndJNI_generate_swig
-	ALL
-	DEPENDS
-		${OsmAndJNI_generated_cpp}
-	SOURCES
-		${OsmAndJNI_generated_cpp}
-)
-set_source_files_properties(${OsmAndJNI_generated_cpp}
-	PROPERTIES
-		GENERATED TRUE
-)
 
 if(CMAKE_SHARED_LIBS_ALLOWED_ON_TARGET)
 	add_library(OsmAndJNI SHARED
@@ -70,9 +61,6 @@ if(CMAKE_SHARED_LIBS_ALLOWED_ON_TARGET)
 			${JNI_INCLUDE_DIRS}
 			${JAVA_INCLUDE_PATH}
 			${target_specific_private_includes}
-	)
-	add_dependencies(OsmAndJNI
-		OsmAndJNI_generate_swig
 	)
 
 	if(CMAKE_STATIC_LIBS_ALLOWED_ON_TARGET)
