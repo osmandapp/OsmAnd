@@ -39,11 +39,15 @@ import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteSegmentResult;
@@ -391,23 +395,28 @@ public class RouteProvider {
 		} else {
 			return applicationModeNotSupported(params);
 		}
+		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(params.mode);
+		if(generalRouter == null) {
+			return applicationModeNotSupported(params);
+		}
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
-		if (!settings.FAST_ROUTE_MODE.getModeValue(params.mode)) {
-			paramsR.put(GeneralRouter.USE_SHORTEST_WAY, "true");
-		}
-		if(settings.AVOID_FERRIES.getModeValue(params.mode)){
-			paramsR.put(GeneralRouter.AVOID_FERRIES, "true");
-		}
-		if(settings.AVOID_TOLL_ROADS.getModeValue(params.mode)){
-			paramsR.put(GeneralRouter.AVOID_TOLL, "true");
-		}
-		if(settings.AVOID_MOTORWAY.getModeValue(params.mode)){
-			paramsR.put(GeneralRouter.AVOID_MOTORWAY, "true");
-		} else if(settings.PREFER_MOTORWAYS.getModeValue(params.mode)){
-			paramsR.put(GeneralRouter.PREFER_MOTORWAYS, "true");
-		}
-		if(settings.AVOID_UNPAVED_ROADS.getModeValue(params.mode)){
-			paramsR.put(GeneralRouter.AVOID_UNPAVED, "true");
+		for(Map.Entry<String, RoutingParameter> e : generalRouter.getParameters().entrySet()){
+			String key = e.getKey();
+			RoutingParameter pr = e.getValue();
+			String vl;
+			if(key.equals(GeneralRouter.USE_SHORTEST_WAY)) {
+				Boolean bool = settings.FAST_ROUTE_MODE.getModeValue(params.mode);
+				vl = bool ? "true" : null;
+			} else if(pr.getType() == RoutingParameterType.BOOLEAN) {
+				CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(key);
+				Boolean bool = pref.getModeValue(params.mode);
+				vl = bool ? "true" : null;
+			} else {
+				vl = settings.getCustomRoutingProperty(key).getModeValue(params.mode);
+			}
+			if(vl != null && vl.length() > 0) {
+				paramsR.put(key, vl);
+			}
 		}
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();
@@ -956,5 +965,7 @@ public class RouteProvider {
 		}
 		return new RouteCalculationResult(res, null, params, null);
 	}
+	
+
 	
 }

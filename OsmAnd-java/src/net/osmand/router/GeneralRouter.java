@@ -101,7 +101,7 @@ public class GeneralRouter implements VehicleRouter {
 		ruleToValue = new ArrayList<Object>();
 		parameters = new LinkedHashMap<String, GeneralRouter.RoutingParameter>();
 	}
-
+	
 	public GeneralRouter(GeneralRouter parent, Map<String, String> params) {
 		this.attributes = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = parent.attributes.entrySet().iterator();
@@ -127,6 +127,9 @@ public class GeneralRouter implements VehicleRouter {
 
 	}
 
+	public Map<String, RoutingParameter> getParameters() {
+		return parameters;
+	}
 
 	public void addAttribute(String k, String v) {
 		attributes.put(k, v);

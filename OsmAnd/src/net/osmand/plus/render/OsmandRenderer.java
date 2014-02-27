@@ -16,6 +16,8 @@ import net.osmand.NativeLibrary.NativeSearchResult;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.render.TextRenderer.TextDrawInfo;
 import net.osmand.render.RenderingRuleProperty;
@@ -300,36 +302,39 @@ public class OsmandRenderer {
 				return object1.iconOrder - object2.iconOrder;
 			}
 		});
-		int skewConstant = (int) rc.getDensityValue(32);
-		int iconsW = rc.width / skewConstant;
-		int iconsH = rc.height / skewConstant;
-		int[] alreadyDrawnIcons = new int[iconsW * iconsH / 32];
+		QuadRect bounds = new QuadRect(0, 0, rc.width, rc.height);
+		bounds.inset(-bounds.width()/4, -bounds.height()/4);
+		QuadTree<RectF> boundIntersections = new QuadTree<RectF>(bounds, 4, 0.6f);
+		List<RectF> result = new ArrayList<RectF>();
+		
 		for (IconDrawInfo icon : rc.iconsToDraw) {
 			if (icon.resId != null) {
 				Bitmap ico = RenderingIcons.getIcon(context, icon.resId);
 				if (ico != null) {
 					if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
-						int z = (((int) icon.x / skewConstant) + ((int) icon.y / skewConstant) * iconsW);
-						int i = z / 32;
-						if (i >= alreadyDrawnIcons.length) {
-							continue;
+						float left = icon.x - ico.getWidth() / 2 * rc.screenDensityRatio;
+						float top = icon.y - ico.getHeight() / 2 * rc.screenDensityRatio;
+						float right = left + ico.getWidth() * rc.screenDensityRatio;
+						float bottom = top + ico.getHeight() * rc.screenDensityRatio;
+						RectF rf = new RectF(left, top, right , bottom);
+						boundIntersections.queryInBox(new QuadRect(left, top, right, bottom), result);
+						boolean intersects = false;
+						for(RectF r : result) {
+							if(r.intersect(rf)) {
+								intersects = true;
+								break;
+							}
 						}
-						int ind = alreadyDrawnIcons[i];
-						int b = z % 32;
-						// check bit b if it is set
-						if (((ind >> b) & 1) == 0) {
-							alreadyDrawnIcons[i] = ind | (1 << b);
-							float left = icon.x - ico.getWidth() / 2 * rc.screenDensityRatio;
-							float top = icon.y - ico.getHeight() / 2 * rc.screenDensityRatio;
+						if (!intersects) {
 							if(rc.screenDensityRatio != 1f){
-								RectF rf = new RectF(left, top, left + ico.getWidth() * rc.screenDensityRatio , 
-										top + ico.getHeight() * rc.screenDensityRatio);
 								Rect src = new Rect(0, 0, ico.getWidth(), ico
 										.getHeight());
 								cv.drawBitmap(ico, src, rf, paintIcon);
 							} else {
 								cv.drawBitmap(ico, left, top, paintIcon);
 							}
+							rf.inset(-rf.width()/4, -rf.height()/4);
+							boundIntersections.insert(rf, new QuadRect(rf.left, rf.top, rf.right, rf.bottom));
 						}
 					}
 				}
