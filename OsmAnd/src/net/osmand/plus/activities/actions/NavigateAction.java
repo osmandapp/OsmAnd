@@ -373,7 +373,9 @@ public class NavigateAction {
 		if(!showDefault) {
 			values.remove(ApplicationMode.DEFAULT);
 		}
-		selected.add(settings.getApplicationMode());
+		if (showDefault || settings.getApplicationMode() != ApplicationMode.DEFAULT) {
+			selected.add(settings.getApplicationMode());
+		}
 		return prepareAppModeView(a, values, selected, parent, singleSelection, onClickListener);
 		
 	}

@@ -82,12 +82,47 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		booleanPreferences.put(b.getId(), b);
 		return p;
 	}
+	
+	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b) {
+		CheckBoxPreference p = new CheckBoxPreference(this);
+		p.setKey(b.getId());
+		p.setOnPreferenceChangeListener(this);
+		screenPreferences.put(b.getId(), p);
+		booleanPreferences.put(b.getId(), b);
+		return p;
+	}
 
 	public void registerSeekBarPreference(OsmandPreference<Integer> b, PreferenceScreen screen) {
 		SeekBarPreference p = (SeekBarPreference) screen.findPreference(b.getId());
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
 		seekBarPreferences.put(b.getId(), b);
+	}
+	
+	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {
+		try {
+			Field f = R.string.class.getField("routing_attr_" + propertyName + "_name");
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return ctx.getString(in);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return defValue;
+	}
+	
+	public static String getRoutingStringPropertyDescription(Context ctx, String propertyName, String defValue) {
+		try {
+			Field f = R.string.class.getField("routing_attr_" + propertyName + "_description");
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return ctx.getString(in);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return defValue;
 	}
 
 	public static String getStringPropertyName(Context ctx, String propertyName, String defValue) {
@@ -140,6 +175,13 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		p.setKey(b.getId());
 		p.setDialogTitle(title);
 		p.setSummary(summary);
+		prepareListPreference(b, names, values, p);
+		return p;
+	}
+	
+	public <T> ListPreference createListPreference(OsmandPreference<T> b, String[] names, T[] values) {
+		ListPreference p = new ListPreference(this);
+		p.setKey(b.getId());
 		prepareListPreference(b, names, values, p);
 		return p;
 	}
@@ -311,6 +353,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 					@Override
 					public void onClick(View v) {
 						if(selected.size() > 0) {
+							// test
 							setSelectedAppMode(selected.iterator().next());
 						}
 						if(profileDialog != null && profileDialog.isShowing()) {

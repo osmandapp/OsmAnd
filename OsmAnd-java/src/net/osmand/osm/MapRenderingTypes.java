@@ -520,6 +520,8 @@ public class MapRenderingTypes {
 						rt.applyToTagValue.addAll(mapRulType.applyToTagValue);
 						mapRulType.applyToTagValue.add(rt.tagValuePattern);
 					}
+				} else {
+					mapRulType.applyToTagValue = null;
 				}
 				if(rt.isMain()) {
 					mapRulType.main = true;
