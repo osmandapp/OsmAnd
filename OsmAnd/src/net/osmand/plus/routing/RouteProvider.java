@@ -435,6 +435,7 @@ public class RouteProvider {
 			complexCtx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files,
 				RouteCalculationMode.COMPLEX);
 			complexCtx.calculationProgress = params.calculationProgress;
+			complexCtx.leftSideNavigation = params.leftSide;
 		}
 		ctx.leftSideNavigation = params.leftSide;
 		ctx.calculationProgress = params.calculationProgress;
