@@ -754,7 +754,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			setIntZoom(Math.round(dz) + initialViewport.getZoom());
 			if(Math.abs(angleRelative) < ANGLE_THRESHOLD * relativeToStart || 
 					Math.abs(angleRelative) < ANGLE_THRESHOLD / relativeToStart){
-				angleRelative = 0;
+						angleRelative = 0;
 			}
 			rotateToAnimate(initialViewport.getRotate() + angleRelative);
 			final int newZoom = getZoom();
@@ -831,6 +831,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			//Provide layers opportunity to move without dragging map
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onFling(e1, e2, velocityX, velocityY,  getCurrentRotatedTileBox())) {
+					return true;
+				}
+			}
+			
 			animatedDraggingThread.startDragging(velocityX, velocityY, 
 						e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
 			return true;
@@ -860,6 +867,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			//Provide layers opportunity to scroll without dragging map
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onScroll(e1, e2, distanceX, distanceY,  getCurrentRotatedTileBox())) {
+					return true;
+				}
+			}
+			
 			dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
 			return true;
 		}

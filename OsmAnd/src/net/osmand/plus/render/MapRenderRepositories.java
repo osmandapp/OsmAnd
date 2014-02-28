@@ -557,14 +557,15 @@ public class MapRenderRepositories {
 				}
 				validateLatLonBox(dataBox);
 				boolean loaded;
+//CGM//
 				if(nativeLib != null) {
 					cObjects = new LinkedList<BinaryMapDataObject>();
 					loaded = loadVectorDataNative(dataBox, requestedBox.getZoom(), renderingReq, nativeLib);
 				} else {
 					cNativeObjects = null;
 					loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingReq);
-					
-				}
+					}					
+//CGM//	
 				if (!loaded || checkWhetherInterrupted()) {
 					return;
 				}
