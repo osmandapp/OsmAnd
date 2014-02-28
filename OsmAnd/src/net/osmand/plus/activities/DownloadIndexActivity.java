@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
-import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
@@ -39,6 +39,7 @@ import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -458,11 +459,13 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	public static Map<String, String> listWithAlternatives(final Context ctx, File file, final String ext, 
 			final Map<String, String> files) {
 		if (file.isDirectory()) {
+			final java.text.DateFormat format = DateFormat.getDateFormat(ctx);
+			format.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
 			file.list(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String filename) {
 					if (filename.endsWith(ext)) {
-						String date = AndroidUtils.formatDate(ctx, new File(dir, filename).lastModified());
+						String date = format.format(new File(dir, filename).lastModified());
 						files.put(filename, date);
 						return true;
 					} else {

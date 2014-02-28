@@ -1,8 +1,10 @@
 package net.osmand.plus.activities;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.TreeSet;
 
 import net.osmand.IndexConstants;
@@ -41,32 +44,28 @@ import net.osmand.util.MapUtils;
 import android.content.Context;
 import android.os.Build;
 
-import com.ibm.icu.text.DateFormat;
 
 public class LocalIndexHelper {
 		
 	private final OsmandApplication app;
 	
 
-	private DateFormat dateFormat;
 
 	public LocalIndexHelper(OsmandApplication app){
 		this.app = app;
 	}
 	
-	public String formatDate(long t) {
-		if(dateFormat == null) {
-			dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
-		}
-		return dateFormat.format(new Date(t));
-	}
 	
 	public String getInstalledDate(File f){
-		return getInstalledDate(f.lastModified());
+		return getInstalledDate(f.lastModified(), null);
 	}
 	
-	public String getInstalledDate(long t){
-		return app.getString(R.string.local_index_installed) + " : " + formatDate(t);
+	public String getInstalledDate(long t, TimeZone timeZone){
+		DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
+		if(timeZone != null) {
+			dateFormat.setTimeZone(timeZone);
+		}
+		return app.getString(R.string.local_index_installed) + " : " + dateFormat.format(new Date(t));
 	}
 	
 	public void updateDescription(LocalIndexInfo info){
@@ -441,7 +440,7 @@ public class LocalIndexHelper {
 						append(mi.getName()).append("\n");
 				}
 			}
-			builder.append(getInstalledDate(reader.getDateCreated()));
+			builder.append(getInstalledDate(reader.getDateCreated(), null));
 			info.setDescription(builder.toString());
 			reader.close();
 		} catch (IOException e) {

@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -66,6 +67,7 @@ import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.HandlerThread;
+import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -433,6 +435,8 @@ public class ResourceManager {
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		if (file.exists() && file.canRead()) {
+			final java.text.DateFormat format = DateFormat.getDateFormat(context);
+			format.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
 			File[] lf = file.listFiles();
 			if (lf != null) {
 				for (File f : lf) {
@@ -442,7 +446,7 @@ public class ResourceManager {
 							conf = new File(f, "_ttsconfig.p");
 						}
 						if (conf.exists()) {
-							indexFileNames.put(f.getName(), AndroidUtils.formatDate(context, conf.lastModified())); //$NON-NLS-1$
+							indexFileNames.put(f.getName(), format.format(conf.lastModified())); //$NON-NLS-1$
 						}
 					}
 				}
@@ -610,6 +614,8 @@ public class ResourceManager {
 				log.error(e.getMessage(), e);
 			}
 		}
+		final java.text.DateFormat format = DateFormat.getDateFormat(context);
+		format.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
 		for (File f : files) {
 			progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
 			try {
@@ -635,7 +641,7 @@ public class ResourceManager {
 					if (dateCreated == 0) {
 						dateCreated = f.lastModified();
 					}
-					indexFileNames.put(f.getName(), AndroidUtils.formatDate(context, dateCreated)); //$NON-NLS-1$
+					indexFileNames.put(f.getName(), format.format(dateCreated)); //$NON-NLS-1$
 					for (String rName : index.getRegionNames()) {
 						// skip duplicate names (don't make collision between getName() and name in the map)
 						// it can be dangerous to use one file to different indexes if it is multithreaded
