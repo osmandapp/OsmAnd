@@ -1541,6 +1541,10 @@ public class BinaryMapIndexReader {
 			return top;
 		}
 		
+		public int getZoom() {
+			return zoom;
+		}
+		
 		public void clearSearchResults(){
 			// recreate whole list to allow GC collect old data 
 			searchResults = new ArrayList<T>();
@@ -1596,6 +1600,10 @@ public class BinaryMapIndexReader {
 				landEncodingType = free++;
 				initMapEncodingRule(0, landEncodingType, "natural", "land");
 			}
+		}
+		
+		public boolean isRegisteredRule(int id) {
+			return decodingRules.containsKey(id);
 		}
 		
 		public void initMapEncodingRule(int type, int id, String tag, String val) {
@@ -2070,7 +2078,7 @@ public class BinaryMapIndexReader {
 	}
 	
 	
-	public List<RouteSubregion> searchRouteIndexTree(SearchRequest<RouteDataObject> req, List<RouteSubregion> list) throws IOException {
+	public List<RouteSubregion> searchRouteIndexTree(SearchRequest<?> req, List<RouteSubregion> list) throws IOException {
 		req.numberOfVisitedObjects = 0;
 		req.numberOfAcceptedObjects = 0;
 		req.numberOfAcceptedSubtrees = 0;

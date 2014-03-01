@@ -33,6 +33,7 @@ public class BinaryMapDataObject {
 		this.coordinates = coordinates;
 	}
 	
+	
 	public String getName(){
 		if(objectNames == null){
 			return "";
