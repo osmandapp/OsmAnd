@@ -18,6 +18,7 @@ public class RenderingContext {
 		}
 	}
 
+	public int renderedState = 0;
 	// FIELDS OF THAT CLASS ARE USED IN C++
 	public boolean interrupted = false;
 	public boolean nightMode = false;
