@@ -1603,4 +1603,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="disable_complex_routing">Wyłącz złożone trasowanie</string>
     <string name="guidance_preferences_descr">Ustawienia nawigacji</string>
     <string name="routing_preferences_descr">Ustawienia obliczania trasy</string>
+    <string name="app_mode_truck">Ciężarówka</string>
     </resources>
