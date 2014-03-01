@@ -1642,4 +1642,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="disable_complex_routing">Išjungti sudėtingą maršruto skaičiavimą</string>
     <string name="guidance_preferences_descr">Navigacijos nustatymai</string>
     <string name="routing_preferences_descr">Maršruto skaičiavimo nustatymai</string>
+    <string name="app_mode_truck">Sunkvežimis</string>
     </resources>
