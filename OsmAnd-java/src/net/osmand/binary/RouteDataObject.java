@@ -61,6 +61,10 @@ public class RouteDataObject {
 		return null;
 	}
 	
+	public TIntObjectHashMap<String> getNames() {
+		return names;
+	}
+	
 	public String getRef(){
 		if(names != null ) {
 			return names.get(region.refTypeRule);

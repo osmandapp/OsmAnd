@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
@@ -295,9 +296,28 @@ public class RouteResultPreparation {
 				additional.append("description = \"").append(res.getDescription()).append("\" ");
 				println(MessageFormat.format("\t<segment id=\"{0}\" start=\"{1}\" end=\"{2}\" {3}/>", (res.getObject().getId()) + "",
 						res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
+				printAdditionalPointInfo(res);
 			}
 		}
 		println("</test>");
+	}
+
+	private void printAdditionalPointInfo(RouteSegmentResult res) {
+		boolean plus = res.getStartPointIndex() < res.getEndPointIndex();
+		for(int k = res.getStartPointIndex(); k != res.getEndPointIndex(); ) {
+			int[] tp = res.getObject().getPointTypes(k);
+			if(tp != null) {
+				for(int t = 0; t < tp.length; t++) {
+					RouteTypeRule rr = res.getObject().region.quickGetEncodingRule(tp[t]);
+					println("\t<point tag=\""+rr.getTag()+"\"" + " value=\""+rr.getValue()+"\"/>");
+				}
+			}
+			if(plus) {
+				k++;
+			} else {
+				k--;
+			}
+		}
 	}
 
 
