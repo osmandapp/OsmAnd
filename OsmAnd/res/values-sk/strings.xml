@@ -1646,4 +1646,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmodroid_unseek">Nesledovať objekt</string>
     <string name="guidance_preferences_descr">Nastavenia navigácie</string>
     <string name="routing_preferences_descr">Nastavenia určovania trasy</string>
+    <string name="app_mode_truck">Kamión</string>
     </resources>
