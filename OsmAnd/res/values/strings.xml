@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="application_dir_change_warning2">OsmAnd could try to move the data to new destination. Do you want it?</string>
+    <string name="copying_osmand_one_file_descr">Copying file (%s) to new destination...</string>
+    <string name="copying_osmand_files_descr">Copying OsmAnd files to new destination (%s)</string>
+    <string name="copying_osmand_files">Copying OsmAnd files</string>
     <string name="calculate_osmand_route_gpx">Calculate OsmAnd offline route</string>
     <string name="app_mode_truck">Truck</string>
     <string name="guidance_preferences_descr">Navigation preferences</string>
@@ -1252,7 +1256,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
-	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
+	
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build&#8230;</string>

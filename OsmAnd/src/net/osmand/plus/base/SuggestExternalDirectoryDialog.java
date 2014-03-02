@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Locale;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
@@ -17,7 +18,7 @@ public class SuggestExternalDirectoryDialog {
 	
 	
 	public static boolean showDialog(Activity a, final DialogInterface.OnClickListener otherListener,
-			final Runnable reloadListener){
+			final CallbackWithObject<String> selector){
 		final boolean showOther = otherListener != null;
 		final OsmandApplication app = (OsmandApplication) a.getApplication();
 		Builder bld = new AlertDialog.Builder(a);
@@ -46,10 +47,11 @@ public class SuggestExternalDirectoryDialog {
 						otherListener.onClick(dialog, which);
 					} else {
 						dialog.dismiss();
-						app.getSettings().setExternalStorageDirectory(extMounts[which]);
-						app.getResourceManager().resetStoreDirectory();
-						if(reloadListener != null) {
-							reloadListener.run();
+						if(selector != null) {
+							selector.processResult(extMounts[which]);	
+						} else {
+							app.getSettings().setExternalStorageDirectory(extMounts[which]);
+							app.getResourceManager().resetStoreDirectory();
 						}
 					}
 				}

@@ -2,23 +2,32 @@ package net.osmand.plus.activities;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
+import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
+import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -101,12 +110,12 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 							dialog.dismiss();
 							showOtherDialog();
 						}
-					}, new Runnable() {
+					}, new CallbackWithObject<String>() {
+						
 						@Override
-						public void run() {
-							Toast.makeText(SettingsGeneralActivity.this, getString(R.string.application_dir_change_warning), 
-									Toast.LENGTH_LONG).show();
-							reloadIndexes();
+						public boolean processResult(String result) {
+							warnAboutChangingStorage(result);
+							return true;
 						}
 					});
 					return false;
@@ -264,6 +273,97 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		}
 		return true;
 	}
+	
+	public static class MoveFilesToDifferentDirectory extends AsyncTask<Void, Void, Boolean> {
+
+		private File to;
+		private Context ctx;
+		private File from;
+		private ProgressDialogImplementation progress;
+		private Runnable runOnSuccess;
+
+		public MoveFilesToDifferentDirectory(Context ctx, File from, File to) {
+			this.ctx = ctx;
+			this.from = from;
+			this.to = to;
+		}
+		
+		public void setRunOnSuccess(Runnable runOnSuccess) {
+			this.runOnSuccess = runOnSuccess;
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			progress = ProgressDialogImplementation.createProgressDialog(
+					ctx, ctx.getString(R.string.copying_osmand_files),
+					ctx.getString(R.string.copying_osmand_files_descr, to.getPath()),
+					ProgressDialog.STYLE_HORIZONTAL);
+		}
+		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if(result != null && result.booleanValue() && runOnSuccess != null) {
+				runOnSuccess.run();
+			}
+			if(progress.getDialog().isShowing()) {
+				progress.getDialog().dismiss();
+			}
+		}
+		
+		private void movingFiles(File f, File t, int depth) throws IOException {
+			if(depth <= 2) {
+				progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), -1);
+			}
+			if(t.exists()) {
+				Algorithms.removeAllFiles(t);
+			}
+			if (f.isFile()) {
+				boolean rnm = false;
+				try {
+					rnm = f.renameTo(t);
+				} catch(RuntimeException e) {
+				}
+				if (!rnm) {
+					FileInputStream fin = new FileInputStream(f);
+					FileOutputStream fout = new FileOutputStream(t);
+					try {
+						Algorithms.streamCopy(fin, fout);
+					} finally {
+						fin.close();
+						fout.close();
+					}
+					f.delete();
+				}
+			} else if (f.isDirectory()) {
+				t.mkdirs();
+				File[] lf = f.listFiles();
+				if (lf != null) {
+					for (int i = 0; i < lf.length; i++) {
+						if (lf[i] != null) {
+							movingFiles(lf[i], new File(t, lf[i].getName()), depth + 1);
+						}
+					}
+				}
+				f.delete();
+			}
+			if(depth <= 2) {
+				progress.finishTask();
+			}
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			to.mkdirs();
+			try {
+				movingFiles(from, to, 0);
+			} catch (IOException e) {
+				Toast.makeText(ctx, R.string.input_output_error, Toast.LENGTH_LONG);
+				return false;
+			}
+			return true;
+		}
+		
+	}
 
 	private void warnAboutChangingStorage(final String newValue) {
 		final String newDir = newValue != null ? newValue.trim() : newValue;
@@ -273,21 +373,41 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			AccessibleToast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show();
 			return;
 		}
-
 		Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(R.string.application_dir_change_warning));
+		builder.setMessage(getString(R.string.application_dir_change_warning2));
 		builder.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// edit the preference
-				settings.setExternalStorageDirectory(newDir);
-				getMyApplication().getResourceManager().resetStoreDirectory();
-				reloadIndexes();
-				updateApplicationDirTextAndSummary();
+				MoveFilesToDifferentDirectory task =
+						new MoveFilesToDifferentDirectory(SettingsGeneralActivity.this, 
+						new File(settings.getExternalStorageDirectory(), IndexConstants.APP_DIR), new File(newDir,
+								IndexConstants.APP_DIR));
+				task.setRunOnSuccess(new Runnable() {
+					@Override
+					public void run() {
+						updateSettingsToNewDir(newDir);						
+					}
+				});
+				task.execute();
+			}
+		});
+		builder.setNeutralButton(R.string.default_buttons_no, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				updateSettingsToNewDir(newDir);								
 			}
 		});
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.show();
+	}
+	
+	private void updateSettingsToNewDir(final String newDir) {
+		// edit the preference
+		settings.setExternalStorageDirectory(newDir);
+		getMyApplication().getResourceManager().resetStoreDirectory();
+		reloadIndexes();
+		updateApplicationDirTextAndSummary();
 	}
 
 	public void reloadIndexes() {
