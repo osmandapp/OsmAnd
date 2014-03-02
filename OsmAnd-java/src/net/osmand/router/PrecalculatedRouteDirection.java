@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
@@ -38,6 +39,11 @@ public class PrecalculatedRouteDirection {
 	}
 	
 	private PrecalculatedRouteDirection(List<RouteSegmentResult> ls, float maxSpeed) {
+		this.maxSpeed = maxSpeed;
+		init(ls);
+	}
+	
+	private PrecalculatedRouteDirection(LatLon[] ls, float maxSpeed) {
 		this.maxSpeed = maxSpeed;
 		init(ls);
 	}
@@ -81,6 +87,10 @@ public class PrecalculatedRouteDirection {
 		return null;
 	}
 	
+	public static PrecalculatedRouteDirection build(LatLon[] ls, float maxSpeed){
+		return new PrecalculatedRouteDirection(ls, maxSpeed);
+	}
+	
 
 	private void init(List<RouteSegmentResult> ls) {
 		TIntArrayList px = new TIntArrayList();
@@ -101,6 +111,19 @@ public class PrecalculatedRouteDirection {
 					break;
 				}
 			}
+		}
+		init(px, py, speedSegments);
+	}
+	
+	private void init(LatLon[] ls) {
+		TIntArrayList px = new TIntArrayList();
+		TIntArrayList py = new TIntArrayList();
+		List<Float> speedSegments = new ArrayList<Float>();
+		for (LatLon s : ls) {
+			float routeSpd = maxSpeed; // (s.getDistance() / s.getRoutingTime())
+			px.add(MapUtils.get31TileNumberX(s.getLongitude()));
+			py.add(MapUtils.get31TileNumberY(s.getLatitude()));
+			speedSegments.add(routeSpd);
 		}
 		init(px, py, speedSegments);
 	}
