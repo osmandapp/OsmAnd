@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -218,7 +219,9 @@ public class IndexItem implements Comparable<IndexItem> {
 			entry.zipStream = zipStream;
 			entry.unzipFolder = unzipDir;
 			try {
-				Date d = DateFormat.getDateFormat((Context) ctx).parse(date);
+				final java.text.DateFormat format = DateFormat.getDateFormat((Context) ctx);
+				format.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
+				Date d = format.parse(date);
 				entry.dateModified = d.getTime();
 			} catch (ParseException e1) {
 				log.error("ParseException", e1);
