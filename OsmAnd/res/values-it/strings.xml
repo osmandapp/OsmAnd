@@ -1631,4 +1631,12 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="guidance_preferences_descr">Preferenze di navigazione</string>
     <string name="routing_preferences_descr">Preferenze di calcolo del percorso</string>
     <string name="app_mode_truck">Camion</string>
+    <string name="android_19_location_disabled">Dalla versione di KitKat non più è possibile scaricare e aggiornare le mappe nel precedente indirizzo di memorizzazione (%s). Volete cambiare nella disetinazine consentita e copiare tutti i file lì?
+        \n Nota: i file precedenti non verranno modificati. 
+        \n Nota: non sarà possibile condividere i files fra le versioni OsmAnd and OsmAnd+. </string>
+    <string name="application_dir_change_warning2">OsmAnd può provare a spostare i dati nella nuova destinazione. Volete farlo?</string>
+    <string name="copying_osmand_one_file_descr">Copia del file (%s) nella nuova destinazione...</string>
+    <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)</string>
+    <string name="copying_osmand_files">Copia OsmAnd files</string>
+    <string name="calculate_osmand_route_gpx">Calcola percorso OsmAnd offline</string>
     </resources>
