@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
@@ -18,6 +19,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.SettingsGeneralActivity.MoveFilesToDifferentDirectory;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.download.DownloadActivityType;
@@ -36,6 +38,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask.Status;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -162,7 +165,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		DownloadIndexAdapter adapter = new DownloadIndexAdapter(this, list);
 		setListAdapter(adapter);
 		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
-			boolean showedDialog = SuggestExternalDirectoryDialog.showDialog(this, null, null);
+			boolean showedDialog = false;
+			if(Build.VERSION.SDK_INT < 19) {
+				SuggestExternalDirectoryDialog.showDialog(this, null, null);
+			}
 			if(!showedDialog) {
 				showDialogOfFreeDownloadsIfNeeded();
 			}
@@ -182,7 +188,36 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				return true;
 			}
 		});
-        
+        if(Build.VERSION.SDK_INT >= 19) {
+        	if(!settings.getExternalStorageDirectory().equals(settings.getDefaultExternalStorageLocation())) {
+        		AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
+        		ab.setMessage(getString(R.string.android_19_location_disabled, settings.getExternalStorageDirectory()));
+        		ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						copyFilesForAndroid19();		
+					}
+				});
+        		ab.setNegativeButton(R.string.default_buttons_cancel, null);
+        	}
+        }
+	}
+	
+	private void copyFilesForAndroid19() {
+		File newLoc = new File(settings.getDefaultExternalStorageLocation());
+		MoveFilesToDifferentDirectory task = 
+				new MoveFilesToDifferentDirectory(DownloadIndexActivity.this, settings.getExternalStorageDirectory(), newLoc) {
+			protected Boolean doInBackground(Void[] params) {
+				Boolean result = super.doInBackground(params);
+				if(result) {
+					settings.setExternalStorageDirectory(settings.getDefaultExternalStorageLocation());
+					getMyApplication().getResourceManager().resetStoreDirectory();
+					getMyApplication().getResourceManager().reloadIndexes(progress)	;
+				}
+				return result;
+			};
+		};
+		task.execute();
 	}
 	
 	@Override

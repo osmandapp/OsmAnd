@@ -279,7 +279,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		private File to;
 		private Context ctx;
 		private File from;
-		private ProgressDialogImplementation progress;
+		protected ProgressDialogImplementation progress;
 		private Runnable runOnSuccess;
 
 		public MoveFilesToDifferentDirectory(Context ctx, File from, File to) {
