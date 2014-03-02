@@ -1604,4 +1604,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="guidance_preferences_descr">Ustawienia nawigacji</string>
     <string name="routing_preferences_descr">Ustawienia obliczania trasy</string>
     <string name="app_mode_truck">Ciężarówka</string>
+    <string name="copying_osmand_one_file_descr">Kopiowanie pliku (%s) do nowej lokalizacji...</string>
+    <string name="copying_osmand_files_descr">Kopiowanie plików OsmAnd do nowej lokalizacji (%s)</string>
+    <string name="copying_osmand_files">Kopiowanie plików OsmAnd</string>
+    <string name="application_dir_change_warning2">OsmAnd może spróbować przenieść dane do nowej lokalizacji. Czy chcesz tego?</string>
     </resources>
