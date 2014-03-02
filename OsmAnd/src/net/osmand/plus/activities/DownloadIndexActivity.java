@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
+import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ClientContext;
@@ -92,6 +93,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private TextView progressPercent;
 	private ImageView cancel;
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -166,7 +168,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		setListAdapter(adapter);
 		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
 			boolean showedDialog = false;
-			if(Build.VERSION.SDK_INT < 19) {
+			if(Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
 				SuggestExternalDirectoryDialog.showDialog(this, null, null);
 			}
 			if(!showedDialog) {
@@ -188,8 +190,8 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				return true;
 			}
 		});
-        if(Build.VERSION.SDK_INT >= 19) {
-        	if(!settings.getExternalStorageDirectory().equals(settings.getDefaultExternalStorageLocation())) {
+        if(Build.VERSION.SDK_INT >= OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
+        	if(!settings.getExternalStorageDirectory().getAbsolutePath().equals(settings.getDefaultExternalStorageLocation())) {
         		AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
         		ab.setMessage(getString(R.string.android_19_location_disabled, settings.getExternalStorageDirectory()));
         		ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
@@ -199,18 +201,21 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					}
 				});
         		ab.setNegativeButton(R.string.default_buttons_cancel, null);
+        		ab.show();
         	}
         }
 	}
 	
 	private void copyFilesForAndroid19() {
-		File newLoc = new File(settings.getDefaultExternalStorageLocation());
+		final String newLoc = settings.getDefaultExternalStorageLocation();
 		MoveFilesToDifferentDirectory task = 
-				new MoveFilesToDifferentDirectory(DownloadIndexActivity.this, settings.getExternalStorageDirectory(), newLoc) {
+				new MoveFilesToDifferentDirectory(DownloadIndexActivity.this, 
+						new File(settings.getExternalStorageDirectory(), IndexConstants.APP_DIR), 
+						new File(newLoc, IndexConstants.APP_DIR)) {
 			protected Boolean doInBackground(Void[] params) {
 				Boolean result = super.doInBackground(params);
 				if(result) {
-					settings.setExternalStorageDirectory(settings.getDefaultExternalStorageLocation());
+					settings.setExternalStorageDirectory(newLoc);
 					getMyApplication().getResourceManager().resetStoreDirectory();
 					getMyApplication().getResourceManager().reloadIndexes(progress)	;
 				}

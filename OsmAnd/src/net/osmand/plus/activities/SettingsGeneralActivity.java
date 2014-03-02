@@ -314,10 +314,21 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			if(depth <= 2) {
 				progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), -1);
 			}
-			if(t.exists()) {
-				Algorithms.removeAllFiles(t);
-			}
-			if (f.isFile()) {
+			if (f.isDirectory()) {
+				t.mkdirs();
+				File[] lf = f.listFiles();
+				if (lf != null) {
+					for (int i = 0; i < lf.length; i++) {
+						if (lf[i] != null) {
+							movingFiles(lf[i], new File(t, lf[i].getName()), depth + 1);
+						}
+					}
+				}
+				f.delete();
+			} else if (f.isFile()) {
+				if(t.exists()) {
+					Algorithms.removeAllFiles(t);
+				}
 				boolean rnm = false;
 				try {
 					rnm = f.renameTo(t);
@@ -334,17 +345,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 					}
 					f.delete();
 				}
-			} else if (f.isDirectory()) {
-				t.mkdirs();
-				File[] lf = f.listFiles();
-				if (lf != null) {
-					for (int i = 0; i < lf.length; i++) {
-						if (lf[i] != null) {
-							movingFiles(lf[i], new File(t, lf[i].getName()), depth + 1);
-						}
-					}
-				}
-				f.delete();
 			}
 			if(depth <= 2) {
 				progress.finishTask();
