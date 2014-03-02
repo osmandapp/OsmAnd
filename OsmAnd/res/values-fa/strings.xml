@@ -1633,4 +1633,5 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     </string>
     <string name="complex_route_calculation_failed">محاسبه سریعترین مسیر ناموفق بود (%s), برای محاسبه آهسته به عقب برگردید.</string>
     <string name="osmodroid_unseek">نادیده گرفتن اشیاء</string>
+    <string name="app_mode_truck">کامیون</string>
     </resources>
