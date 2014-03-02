@@ -1608,4 +1608,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="copying_osmand_files_descr">Kopiowanie plików OsmAnd do nowej lokalizacji (%s)</string>
     <string name="copying_osmand_files">Kopiowanie plików OsmAnd</string>
     <string name="application_dir_change_warning2">OsmAnd może spróbować przenieść dane do nowej lokalizacji. Czy chcesz tego?</string>
+    <string name="android_19_location_disabled">Od wersji KitKat nie można pobierać ani aktualizować map w poprzedniej lokalizacji (%s). Czy chcesz ją zmienić na lokalizację dozwoloną i skopiować do niej wszystkie pliki?
+        \n Uwaga : stare pliki zostaną nienaruszone.
+        \n Uwaga : nie będzie możliwe wspołdzielenie tych samych plików pomiędzy OsmAnd i OsmAnd+. </string>
     </resources>
