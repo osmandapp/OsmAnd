@@ -1300,7 +1300,7 @@
     <string name="route_via">Via:</string>
     <string name="route_from">Des de:</string>
 	<string name="local_index_gpx_timespan">\nTemps total: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nTemps deplaçament: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nTemps desplaçament: %1$d:%2$02d:%3$02d</string>
 	<string name="destination_point">Destinació %1$s</string>
     <string name="local_osm_changes_backup_failed">La còpia dels canvis OSM ha fallat</string>
     <string name="local_osm_changes_backup">Fes una còpia com a canvi OSM</string>
@@ -1389,4 +1389,10 @@
     <string name="copying_osmand_files">Copiant fitxers de l\' OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Calcula la ruta OsmAnd sense connexió</string>
     <string name="app_mode_truck">Camió</string>
+    <string name="tip_map_styles_t">OsmAnd pot representar els mapes vectorials en diferents estils per tal d\'adaptar-se millor al que necessiteu:
+		\n\nA més de l\'estil normal d\'ús general, podeu configurar a \'Menu\' → \'Configura l'aparença\' → \'Estil de renderització\' i seleccionar p.ex.
+		\n\t* L\'estil \'Turisme\', que visualitza els detalls més rellevants per viatjar i fer turisme, optimitzat per conductors professionals (carreteres més distingibles, amb contrast millorat), rutes ciclistes, suport al senderisme (escala SAC i marcat de camins).
+		\n\t* \'Carreteres molt contrastades\' mostra les carreteres en colors molt vius per quan hi ha molta llum ambiental.
+		\n\t* \'Hivern i esquí\' crea una visió d'hivern nevat, i mostra les pistes i remuntadors globals (precisa baixar-se el mapa \'World ski\')
+	</string>
     </resources>
