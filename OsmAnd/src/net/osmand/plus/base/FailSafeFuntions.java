@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParams.GPXRouteParamsBuilder;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -123,14 +124,26 @@ public class FailSafeFuntions {
 
 						@Override
 						protected void onPostExecute(GPXFile result) {
-							final GPXRouteParams gpxRoute = result == null ? null : new GPXRouteParams(result, false,
-									settings.SPEAK_GPX_WPT.get(), settings);
+							final GPXRouteParams gpxRoute;
+							if (result != null) {
+								GPXRouteParamsBuilder builder = GPXRouteParamsBuilder.newBuilder(result, settings);
+								if (settings.SPEAK_GPX_WPT.get()) {
+									builder.announceWaypoints();
+								}
+								if(settings.CALC_GPX_ROUTE.get()) {
+									builder.calculateOsmAndRoute();
+								}
+								gpxRoute = builder.build();
+							} else {
+								gpxRoute = null;
+							}
 							LatLon endPoint = pointToNavigate != null ? pointToNavigate : gpxRoute.getLastPoint();
 							net.osmand.Location startPoint = gpxRoute == null ? null : gpxRoute.getStartPointForRoute();
 							if (endPoint == null) {
 								notRestoreRoutingMode(ma, app);
 							} else {
-								ma.followRoute(settings.getApplicationMode(), endPoint, targetPoints.getIntermediatePoints(), startPoint, gpxRoute);
+								ma.followRoute(settings.getApplicationMode(), endPoint,
+										targetPoints.getIntermediatePoints(), startPoint, gpxRoute);
 							}
 						}
 					};

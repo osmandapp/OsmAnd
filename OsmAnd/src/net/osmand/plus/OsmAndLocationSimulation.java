@@ -8,8 +8,8 @@ import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -72,8 +72,11 @@ public class OsmAndLocationSimulation {
 								new CallbackWithObject<GPXUtilities.GPXFile>() {
 									@Override
 									public boolean processResult(GPXUtilities.GPXFile result) {
-										GPXRouteParams prms = new RouteProvider.GPXRouteParams(result, false, ch
-												.isChecked(), app.getSettings());
+										GPXRouteParamsBuilder builder = GPXRouteParams.GPXRouteParamsBuilder.newBuilder(result, app.getSettings());
+										if(ch.isChecked()){
+											builder.announceWaypoints();
+										}
+										GPXRouteParams prms = builder.build();
 										startAnimationThread(app.getRoutingHelper(), ma, prms.getPoints(), true,
 												speedup.getProgress() + 1);
 										return true;

@@ -739,6 +739,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SPEAK_SPEED_LIMIT = new BooleanPreference("speak_speed_limit", true).makeProfile().cache();
 	
 	public final OsmandPreference<Boolean> SPEAK_GPX_WPT = new BooleanPreference("speak_gpx_wpt", true).makeGlobal().cache();
+	public final OsmandPreference<Boolean> CALC_GPX_ROUTE = new BooleanPreference("calc_gpx_route", false).makeGlobal().cache();
 	
 	
 
