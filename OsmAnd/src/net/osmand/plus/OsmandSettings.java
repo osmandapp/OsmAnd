@@ -993,8 +993,19 @@ public class OsmandSettings {
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 	
 	public File getExternalStorageDirectory() {
-		return new File(settingsAPI.getString(globalPreferences,EXTERNAL_STORAGE_DIR, 
-				ctx.getExternalServiceAPI().getExternalStorageDirectory()));
+		String defaultLocation = getDefaultExternalStorageLocation();
+		return new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
+				defaultLocation));
+	}
+	
+	public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
+
+	public String getDefaultExternalStorageLocation() {
+		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
+		if(Build.VERSION.SDK_INT >= VERSION_DEFAULTLOCATION_CHANGED) {
+			defaultLocation += "/Android/data/" + ctx.getPackageName();
+		}
+		return defaultLocation;
 	}
 	
 	public boolean setExternalStorageDirectory(String externalStorageDir) {
