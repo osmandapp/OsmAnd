@@ -1670,4 +1670,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="disable_complex_routing">Deaktiver kompleks ruteplanlægning</string>
     <string name="guidance_preferences_descr">Indstillinger for navigation</string>
     <string name="routing_preferences_descr">Indstillinger for ruteplanlægning</string>
+    <string name="app_mode_truck">Lastbil</string>
+    <string name="calculate_osmand_route_gpx">Beregn Osmand offline rute</string>
     </resources>
