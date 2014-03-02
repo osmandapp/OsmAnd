@@ -301,7 +301,13 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
 				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
-//				Node entity = (Node) st.getRegisteredEntities().get(id);
+				Node entity = (Node) st.getRegisteredEntities().get(id);
+				// merge non existing tags
+				for(String rtag : entity.getTagKeySet()) {
+					if(!n.getTagKeySet().contains(rtag)) {
+						n.putTag(rtag, entity.getTag(rtag));
+					}
+				}
 				entityInfo = st.getRegisteredEntityInfo().get(id);
 				return entityInfo;
 			}
