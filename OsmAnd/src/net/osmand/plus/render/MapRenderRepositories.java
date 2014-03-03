@@ -71,7 +71,7 @@ public class MapRenderRepositories {
 	
 	private final static Log log = PlatformUtil.getLog(MapRenderRepositories.class);
 	private final OsmandApplication context;
-	private final static int BASEMAP_ZOOM = 11;
+	private final static int zoomOnlyForBasemaps = 11;
 	static int zoomForBaseRouteRendering  = 14;
 	private Handler handler;
 	private Map<String, BinaryMapIndexReader> files = new ConcurrentHashMap<String, BinaryMapIndexReader>();
@@ -376,7 +376,7 @@ public class MapRenderRepositories {
 		if (checkWhetherInterrupted()) {
 			return false;
 		}
-		if (renderRouteDataFile >= 0 && zoom >= BASEMAP_ZOOM ) {
+		if (renderRouteDataFile >= 0 && zoom >= zoomOnlyForBasemaps ) {
 			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, null);
 			for (BinaryMapIndexReader c : files.values()) {
 				// false positive case when we have 2 sep maps Country-roads & Country
@@ -389,14 +389,14 @@ public class MapRenderRepositories {
 
 		String coastlineTime = "";
 		boolean addBasemapCoastlines = true;
-		boolean emptyData = zoom > BASEMAP_ZOOM && tempResult.isEmpty() && coastLines.isEmpty();
-		boolean basemapMissing = zoom <= BASEMAP_ZOOM && basemapCoastLines.isEmpty() && mi == null;
+		boolean emptyData = zoom > zoomOnlyForBasemaps && tempResult.isEmpty() && coastLines.isEmpty();
+		boolean basemapMissing = zoom <= zoomOnlyForBasemaps && basemapCoastLines.isEmpty() && mi == null;
 		boolean detailedLandData = zoom >= zoomForBaseRouteRendering && tempResult.size() > 0  && renderRouteDataFile < 0;
 		if (!coastLines.isEmpty()) {
 			long ms = System.currentTimeMillis();
 			boolean coastlinesWereAdded = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom,
 					basemapCoastLines.isEmpty(), true, tempResult);
-			addBasemapCoastlines = (!coastlinesWereAdded && !detailedLandData) || zoom <= BASEMAP_ZOOM;
+			addBasemapCoastlines = (!coastlinesWereAdded && !detailedLandData) || zoom <= zoomOnlyForBasemaps;
 			coastlineTime = "(coastline " + (System.currentTimeMillis() - ms) + " ms )";
 		} else {
 			addBasemapCoastlines = !detailedLandData;
@@ -425,7 +425,7 @@ public class MapRenderRepositories {
 				mapIndex.initMapEncodingRule(0, 2, "name", "");
 			}
 		}
-		if (zoom <= BASEMAP_ZOOM || emptyData) {
+		if (zoom <= zoomOnlyForBasemaps || emptyData) {
 			tempResult.addAll(basemapResult);
 		}
 
