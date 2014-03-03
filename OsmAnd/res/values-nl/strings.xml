@@ -1627,8 +1627,8 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 \t\n Let op: oude bestanden blijven bestaan.
 \t\n Let op: het is niet meer mogelijk bestanden te delen tussen OsmAnd en Osmand+. </string>
     <string name="application_dir_change_warning2">OsmAnd kan proberen de bestanden naar de nieuwe bestemming te verplaatsen. Wil je dat?</string>
-    <string name="copying_osmand_one_file_descr">Bestand (%s) wordt gekopieerd naar de nieuwe directory...</string>
+    <string name="copying_osmand_one_file_descr">Bestand (%s) wordt gekopieerd naar de nieuwe locatie...</string>
     <string name="copying_osmand_files_descr">OsmAnd-bestanden worden naar de nieuwe locatie gekopieerd (%s)</string>
     <string name="copying_osmand_files">Kopieer OsmAnd-bestanden</string>
-    <string name="calculate_osmand_route_gpx">Bereken route met OsmAnd</string>
+    <string name="calculate_osmand_route_gpx">Bereken de route offline met OsmAnd</string>
     </resources>
