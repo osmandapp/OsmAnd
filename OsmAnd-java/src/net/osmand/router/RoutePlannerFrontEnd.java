@@ -122,7 +122,7 @@ public class RoutePlannerFrontEnd {
 			if(res != null) {
 				new RouteResultPreparation().printResults(ctx, start, end, res);
 			}
-			return res;
+			return res;	
 		}
 		int indexNotFound = 0;
 		List<RouteSegment> points = new ArrayList<BinaryRoutePlanner.RouteSegment>();

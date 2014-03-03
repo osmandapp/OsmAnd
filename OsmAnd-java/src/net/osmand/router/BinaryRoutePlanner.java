@@ -384,9 +384,9 @@ public class BinaryRoutePlanner {
 			float distStartObstacles = segment.distanceFromStart + calculateTimeWithObstacles(ctx, road, segmentDist , obstaclesTime);
 			if(ctx.precalculatedRouteDirection != null && ctx.precalculatedRouteDirection.isFollowNext()) {
 				// reset to f
-				distStartObstacles = 0;
+//				distStartObstacles = 0;
 				// more precise but slower
-				//distStartObstacles = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMinDefaultSpeed();
+				distStartObstacles = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxDefaultSpeed();
 			}
 			
 			// We don't check if there are outgoing connections
