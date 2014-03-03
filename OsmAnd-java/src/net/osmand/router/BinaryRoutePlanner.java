@@ -371,15 +371,23 @@ public class BinaryRoutePlanner {
 //				long nt = System.nanoTime();
 //				float devDistance = ctx.precalculatedRouteDirection.getDeviationDistance(x, y);
 //				// 1. linear method
-//				// segmentDist = segmentDist * (1 + ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.config.DEVIATION_RADIUS);
+//				 segmentDist = segmentDist * (1 + devDistance / ctx.config.DEVIATION_RADIUS);
 //				// 2. exponential method
 //				segmentDist = segmentDist * (float) Math.pow(1.5, devDistance / 500);
+				// 3. next by method
+//				segmentDist = devDistance ;
 //				ctx.timeNanoToCalcDeviation += (System.nanoTime() - nt);
 			}
 			// could be expensive calculation
 			// 3. get intersected ways
 			final RouteSegment roadNext = ctx.loadRouteSegment(x, y, ctx.config.memoryLimitation - ctx.memoryOverhead);
 			float distStartObstacles = segment.distanceFromStart + calculateTimeWithObstacles(ctx, road, segmentDist , obstaclesTime);
+			if(ctx.precalculatedRouteDirection != null && ctx.precalculatedRouteDirection.isFollowNext()) {
+				// reset to f
+//				distStartObstacles = 0;
+				// more precise but slower
+				distStartObstacles = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxDefaultSpeed();
+			}
 			
 			// We don't check if there are outgoing connections
 			previous = processIntersections(ctx, graphSegments, visitedSegments, distStartObstacles,
@@ -557,7 +565,7 @@ public class BinaryRoutePlanner {
 
 
 	private RouteSegment processIntersections(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
-			TLongObjectHashMap<RouteSegment> visitedSegments,  float  distFromStart, RouteSegment segment,
+			TLongObjectHashMap<RouteSegment> visitedSegments,  float distFromStart, RouteSegment segment,
 			short segmentPoint, RouteSegment inputNext, boolean reverseWaySearch, boolean doNotAddIntersections, 
 			boolean[] processFurther) {
 		boolean thereAreRestrictions ;

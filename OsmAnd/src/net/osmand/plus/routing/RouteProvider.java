@@ -451,7 +451,8 @@ public class RouteProvider {
 				latLon[k] = new LatLon(sublist.get(k).getLatitude(), sublist.get(k).getLongitude());
 			}
 			precalculated = PrecalculatedRouteDirection.build(latLon, generalRouter.getMaxDefaultSpeed());
-			cf.planRoadDirection = 1;
+			precalculated.setFollowNext(true);
+			//cf.planRoadDirection = 1;
 		}
 		// BUILD context
 		RoutingContext ctx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files, 
@@ -466,9 +467,6 @@ public class RouteProvider {
 			complexCtx.calculationProgress = params.calculationProgress;
 			complexCtx.leftSideNavigation = params.leftSide;
 		}
-		if(precalculated != null) {
-			ctx.precalculatedRouteDirection = precalculated.adopt(ctx);
-		}
 		ctx.leftSideNavigation = params.leftSide;
 		ctx.calculationProgress = params.calculationProgress;
 		if(params.previousToRecalculate != null) {
@@ -481,7 +479,7 @@ public class RouteProvider {
 		if (params.intermediates != null) {
 			inters  = new ArrayList<LatLon>(params.intermediates);
 		}
-		return calcOfflineRouteImpl(params, router, ctx, complexCtx, st, en, inters);
+		return calcOfflineRouteImpl(params, router, ctx, complexCtx, st, en, inters, precalculated);
 	}
 
 
@@ -547,12 +545,12 @@ public class RouteProvider {
 
 	private RouteCalculationResult calcOfflineRouteImpl(final RouteCalculationParams params,
 			RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
-			List<LatLon> inters) throws IOException {
+			List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
 		try {
 			List<RouteSegmentResult> result ;
 			if(complexCtx != null) {
 				try {
-					result = router.searchRoute(complexCtx, st, en, inters);
+					result = router.searchRoute(complexCtx, st, en, inters, precalculated);
 					// discard ctx and replace with calculated
 					ctx = complexCtx;
 				} catch(final RuntimeException e) {

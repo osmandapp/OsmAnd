@@ -19,6 +19,7 @@ public class PrecalculatedRouteDirection {
 	private float minSpeed;
 	private float maxSpeed;
 	private float[] tms;
+	private boolean followNext;
 	private static final int SHIFT = (1 << (31 - 17));
 	private static final int[] SHIFTS = new int[]{1 << (31 - 15), 1 << (31 - 13), 1 << (31 - 12), 
 		1 << (31 - 11), 1 << (31 - 7)};
@@ -240,6 +241,15 @@ public class PrecalculatedRouteDirection {
 		return ((long) x31) << 32l + ((long)y31);
 	}
 	
+	public void setFollowNext(boolean followNext) {
+		this.followNext = followNext;
+	}
+	
+	public boolean isFollowNext() {
+		return followNext;
+	}
+	
+	
 	public PrecalculatedRouteDirection adopt(RoutingContext ctx) {
 		int ind1 = getIndex(ctx.startX, ctx.startY);
 		int ind2 = getIndex(ctx.targetX, ctx.targetY);
@@ -258,6 +268,7 @@ public class PrecalculatedRouteDirection {
 //		routeDirection.startY31 = ctx.startY;
 		routeDirection.endPoint = calc(ctx.targetX, ctx.targetX);
 		routeDirection.endFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind2], pointsY[ind2], ctx.targetX, ctx.targetY) / maxSpeed;
+		routeDirection.followNext = followNext;
 		
 //		routeDirection.endX31 = ctx.targetX;
 //		routeDirection.endY31 = ctx.targetY;
