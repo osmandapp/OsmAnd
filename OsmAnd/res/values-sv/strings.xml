@@ -1346,4 +1346,13 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="disable_complex_routing">Inaktivera komplex ruttning</string>
     <string name="guidance_preferences_descr">Navigationsinställningar</string>
     <string name="routing_preferences_descr">Ruttningsinställningar</string>
+    <string name="android_19_location_disabled">Efter KitKat går det inte att hämta och uppdatera kartor i den tidigare lagringsplatsen (%s). Vill du byta till en tillåten plats och kopiera alla filer dit?
+     \n OBS: gamla filer berörs inte.
+     \n OBS: det kommer inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+. </string>
+    <string name="application_dir_change_warning2">OsmAnd kan försöka att flytta datan till den nya platsen. Vill du detta?</string>
+    <string name="copying_osmand_one_file_descr">Kopierar filen (%s) till ny plats...</string>
+    <string name="copying_osmand_files_descr">Kopierar OsmAnd-filer till ny plats (%s)</string>
+    <string name="copying_osmand_files">Kopierar OsmAnd-filer</string>
+    <string name="calculate_osmand_route_gpx">Beräkna OsmAnd offline-rutt</string>
+    <string name="app_mode_truck">Lastbil</string>
     </resources>
