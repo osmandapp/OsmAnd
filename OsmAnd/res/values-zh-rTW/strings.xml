@@ -687,7 +687,7 @@
 	<string name="select_all">全選</string>
 	<string name="reload">重整</string>
 	<string name="fast_route_mode">最快路線</string>
-	<string name="fast_route_mode_descr">啟用要計算的最快路線或停用最短路線 </string>
+	<string name="fast_route_mode_descr">啟用以計算最快路線或停用為最短路線 </string>
 	<string name="tiles_to_download_estimated_size">下載縮放第{0}級別{1}張地圖圖磚({2} MB)</string>
 	<string name="context_menu_item_download_map">下載地圖</string>
 	<string name="select_max_zoom_preload_area">選擇要預載的最大縮放級別</string>
@@ -903,7 +903,7 @@
 	<string name="reload_indexes">重新讀取離線資料</string>
 	<string name="download_indexes_descr">透過網路下載或更新離線資料</string>
 	<string name="download_indexes">下載離線資料</string>
-	<string name="use_online_routing_descr">使用網路計算路線</string>
+	<string name="use_online_routing_descr">使用網際網路計算路線</string>
 	<string name="use_online_routing">使用線上導航</string>
 	<string name="osm_settings_descr">向 OSM 提出意見，需指定 Openstreetmap.org (OSM) 設定</string>
 	<string name="data_settings_descr">指定語言，下載/重載資料</string>
@@ -1601,7 +1601,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="auto_zoom_close">特寫</string>
     <string name="auto_zoom_far">中等</string>
     <string name="auto_zoom_farthest">遠程</string>
-    <string name="route_is_too_long">兩點間距離超過 200 公里以外，OsmAnd 離線路線可能要花很長的時間(或有時無動作)。為有更好的效能，您可能需要增加中途點。</string>
+    <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 離線路線可能要花很長的時間(或有時無動作)。為有更好的效能，您可能需要增加中途點。</string>
     <string name="default_and">與</string>
     <string name="default_or">或</string>
 	<string name="remember_choice">記住我的選擇</string>
@@ -1636,4 +1636,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="guidance_preferences_descr">導航偏好</string>
     <string name="routing_preferences_descr">路線偏好</string>
     <string name="app_mode_truck">卡車</string>
+    <string name="application_dir_change_warning2">OsmAnd 可以試著將資料移到新的目的地。您想要移動嗎？</string>
+    <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地...</string>
+    <string name="copying_osmand_files_descr">複製 OsmAnd 檔案到新的目的地 (%s)</string>
+    <string name="copying_osmand_files">複製 OsmAnd 的檔案</string>
+    <string name="calculate_osmand_route_gpx">計算 OsmAnd 離線路線</string>
     </resources>
