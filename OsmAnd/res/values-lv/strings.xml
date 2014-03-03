@@ -1253,10 +1253,10 @@
     <string name="safe_mode">Drošais režīms</string>
     <string name="native_library_not_running">Programma darbojas drošajā režīmā (atspējot uzstādījumos).</string>
     <string name="background_service_is_enabled_question">OsmAnd miega režīma serviss ir aktīvs. Vai vēlaties to izslēgt?</string>
-    <string name="app_modes_choose">Aplikācijas režīmi</string>
+    <string name="app_modes_choose">Lietotāja režīmi</string>
 	<string name="tips_and_tricks">Padomi</string>
     <string name="access_mark_final_location_first">Pieejamības režīms: vispirms lūdzu izvēlieties galamērķi</string> 
-    <string name="app_modes_choose_descr">Izvēlēties pieejamos aplikācijas režīmus</string>
+    <string name="app_modes_choose_descr">Izvēlētos lietotāja režīmus varēs lietot aplikācijā</string>
     <string name="app_mode_hiking">Iet kājām</string>
     <string name="app_mode_boat">Ūdens transports</string>
     <string name="local_osm_changes_delete_all_confirm">Tiks izdzēsti  %1$d osm labojumi. Vai tiešām to vēlaties?</string>
@@ -1278,7 +1278,7 @@
 	<string name="av_camera_focus_continuous">Nepārtraukts fokuss</string>
 	<string name="av_photo_play_sound">Atskaņot skaņu fotografējot</string>
 	<string name="av_photo_play_sound_descr">Izvēlieties vai atskaņot skaņu, nospiežot fotografēšanas pogu</string>
-<string name="amenity_type_seamark">Boja</string>
+<string name="amenity_type_seamark">Bojas</string>
     <string name="app_mode_aircraft">Aviācija</string>
     <string name="tip_map_styles_t">OsmAnd atbalsta dažāda veida bezsaistes vektorkartes:…
 		\n\nPapildus pamata mapes stilam, jūs variet uzlikt, piemēram
@@ -1450,16 +1450,27 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="osmodroid_seek">Meklēt objektu</string>
     <string name="osmodroid_unseek">Nemeklēt objektu</string>
-    <string name="speech_rate_descr">Iestatīt TTS runas ātrumu</string>
-    <string name="speech_rate">Runas ātrums</string>
+    <string name="speech_rate_descr">TTS (runas robots) vārdu teikšanas ātrums</string>
+    <string name="speech_rate">Vārdu ātrums</string>
     <string name="tip_recent_changes_1_7_t">Izmaiņas 1.7:
 	\n\t* Pilnībā atjaunota maršrutēšana (ātrums un precizitāte)
-	\n\t* Aktīvā simulācija tunelī
+	\n\t* Aktīvā simulācija tuneļos
     </string>
     <string name="complex_route_calculation_failed">Maršruta ātrā aprēķināšana neizdevās (%s), notiks lenā aprēķināšana.</string>
-    <string name="disable_complex_routing_descr">Atspējot kompleksu (divpakāpju) maršrutēsanu</string>
-    <string name="disable_complex_routing">Atspējot kompleksu maršrutēšanu</string>
+    <string name="disable_complex_routing_descr">Izslēgt kompleksu (divfāžu) maršrutēsanu</string>
+    <string name="disable_complex_routing">Izslēgt kompleksu maršrutēšanu</string>
     <string name="tip_app_mode_t_v2">OsmAnd atbalsta vairākus pielāgojamus profilus dažādiem mērķiem.
 		\n\nJūs varat mainīt profilus gan ar speciālas ikonas palīdzību, kas atrodas uz kartes kreisā augšējā stūrī (mašīna, velosipēds vai kājāmgājējs), gan veidojot jaunu maršrutu (\'transporta režīms\').
 	</string>
-	</resources>
+	<string name="android_19_location_disabled">Kopš KitKat jauninājuma vecajā glabātuvē (%s) nav iespējama mapju lejupielāde. Vai vēlaties mainīt glabātuves vietu un pārkopēt visus failus?
+…………\n Piezīme: vecie faili netiks aiztikti.
+…………\n Piezīme: nebūs iespējams koplietot failus starp OsmAnd un OsmAnd+. </string>
+    <string name="application_dir_change_warning2">OsmAnd iespējams, varētu pārvietot failus uz jauno vietu. Vai to vēlaties?</string>
+    <string name="copying_osmand_one_file_descr">Kopē (%s) failu uz jauno vietu.</string>
+    <string name="copying_osmand_files_descr">Kopē OsmAnd failus uz jauno vietu (%s)</string>
+    <string name="copying_osmand_files">Kopē OsmAnd failus</string>
+    <string name="calculate_osmand_route_gpx">Aprēķināt OsmAnd bezsaistes maršrutu</string>
+    <string name="app_mode_truck">Kravas mašīna</string>
+    <string name="guidance_preferences_descr">Navigācijas uzstādījumi</string>
+    <string name="routing_preferences_descr">Maršruta uzstādījumi</string>
+    </resources>
