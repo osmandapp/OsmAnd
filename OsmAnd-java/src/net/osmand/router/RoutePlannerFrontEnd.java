@@ -84,13 +84,17 @@ public class RoutePlannerFrontEnd {
 	}
 	
 	
-	
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates) throws IOException, InterruptedException {
+		return searchRoute(ctx, start, end, intermediates, null);
+	}
+			
+	
+	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates, 
+			PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
 		if(ctx.calculationProgress == null) {
 			ctx.calculationProgress = new RouteCalculationProgress();
 		}
 		boolean intermediatesEmpty = intermediates == null || intermediates.isEmpty();
-		PrecalculatedRouteDirection routeDirection = null;
 		double maxDistance = MapUtils.getDistance(start, end);
 		if(!intermediatesEmpty) {
 			LatLon b = start;
@@ -99,7 +103,8 @@ public class RoutePlannerFrontEnd {
 				b = l;
 			}
 		}
-		if(ctx.calculationMode == RouteCalculationMode.COMPLEX && maxDistance > Math.max(ctx.config.DEVIATION_RADIUS * 4, 30000)) {
+		if(ctx.calculationMode == RouteCalculationMode.COMPLEX && routeDirection == null
+				&& maxDistance > Math.max(ctx.config.DEVIATION_RADIUS * 4, 30000)) {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress ;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
