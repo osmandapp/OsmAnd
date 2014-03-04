@@ -1641,4 +1641,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="copying_osmand_files_descr">複製 OsmAnd 檔案到新的目的地 (%s)</string>
     <string name="copying_osmand_files">複製 OsmAnd 的檔案</string>
     <string name="calculate_osmand_route_gpx">計算 OsmAnd 離線路線</string>
+    <string name="android_19_location_disabled">由於 KitKat 版本，您無法下載和更新地圖於之前的存儲位置 (%s)。您是否想改變以允許複製所有檔案到那裡？
+        \n注意：舊的檔案將保持不變。
+        \n注意：它將不可能在 OsmAnd 和 OsmAnd + 兩者之間共用檔案。 </string>
     </resources>
