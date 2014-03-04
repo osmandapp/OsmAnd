@@ -1441,4 +1441,13 @@
     <string name="disable_complex_routing">Désactiver le routage complexe</string>
     <string name="guidance_preferences_descr">Préférence de navigation</string>
     <string name="routing_preferences_descr">Préférences du routage</string>
+    <string name="android_19_location_disabled">Depuis Android KitKat (4.4), vous ne pouvez plus télécharger et mettre à jour la carte dans l'ancien emplacement de sauvegarde. Voulez-vous changer pour en autoriser un nouveau et y copier l'ensemble des fichiers ?
+        \n Note : Les anciens fichiers ne seront pas touchés
+        \n Note : Il ne sera pas possible de partager des fichiers entre OSMAnd et OSMAnd+. </string>
+    <string name="application_dir_change_warning2">OsmAnd peut essayer de déplacer les données vers la nouvelle destinaion. Voulez-vous essayer ?</string>
+    <string name="copying_osmand_one_file_descr">Copie des fichiers (%s) vers la nouvelle destination...</string>
+    <string name="copying_osmand_files_descr">Copie des fichiers OsmAnd vers la nouvelle destination (%s)</string>
+    <string name="copying_osmand_files">Copie des fichiers OsmAnd</string>
+    <string name="calculate_osmand_route_gpx">Calcul de la route OsmAnd hors-connexion</string>
+    <string name="app_mode_truck">Camion</string>
     </resources>
