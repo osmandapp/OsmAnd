@@ -1,9 +1,11 @@
 package net.osmand.plus.render;
 
 
+import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.TLongList;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -20,18 +22,19 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.IProgress;
+import net.osmand.ResultMatcher;
 import net.osmand.NativeLibrary.NativeSearchResult;
 import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -66,10 +69,10 @@ public class MapRenderRepositories {
 	// It is needed to not draw object twice if user have map index that intersects by boundaries
 	public static boolean checkForDuplicateObjectIds = true;
 	
-
 	private final static Log log = PlatformUtil.getLog(MapRenderRepositories.class);
 	private final OsmandApplication context;
-	private final static int BASEMAP_ZOOM = 11;
+	private final static int zoomOnlyForBasemaps = 11;
+	static int zoomForBaseRouteRendering  = 14;
 	private Handler handler;
 	private Map<String, BinaryMapIndexReader> files = new ConcurrentHashMap<String, BinaryMapIndexReader>();
 	private Set<String> nativeFiles = new HashSet<String>();
@@ -91,6 +94,8 @@ public class MapRenderRepositories {
 	private RotatedTileBox prevBmpLocation = null;
 	// already rendered bitmap
 	private Bitmap prevBmp;
+	// to track necessity of map download (1 (if basemap) + 2 (if normal map) 
+	private int previousRenderedState;
 
 	// location of rendered bitmap
 	private RotatedTileBox bmpLocation = null;
@@ -98,6 +103,7 @@ public class MapRenderRepositories {
 	private Bitmap bmp;
 	// Field used in C++
 	private boolean interrupted = false;
+	private int renderedState = 0; 	// (1 (if basemap) + 2 (if normal map)
 	private RenderingContext currentRenderingContext;
 	private SearchRequest<BinaryMapDataObject> searchRequest;
 	private OsmandSettings prefs;
@@ -252,7 +258,7 @@ public class MapRenderRepositories {
 		}
 		
 		NativeSearchResult resultHandler = library.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, renderingReq,
-				checkForDuplicateObjectIds, this, /*context.getString(R.string.switch_to_raster_map_to_see)*/ "");
+				checkForDuplicateObjectIds, this, "");
 		if (checkWhetherInterrupted()) {
 			resultHandler.deleteNativeResult();
 			return false;
@@ -267,6 +273,77 @@ public class MapRenderRepositories {
 		log.info(String.format("Native search: %s ms ", System.currentTimeMillis() - now)); //$NON-NLS-1$
 		return true;
 	}
+	
+	private void readRouteDataAsMapObjects(SearchRequest<BinaryMapDataObject> sr, BinaryMapIndexReader c, 
+			final ArrayList<BinaryMapDataObject> tempResult, final TLongSet ids) {
+		final boolean basemap = c.isBasemap();
+		try {
+			for (RouteRegion reg : c.getRoutingIndexes()) {
+				List<RouteSubregion> parent = sr.getZoom() < 15 ? reg.getBaseSubregions() : reg.getSubregions();
+				List<RouteSubregion> searchRouteIndexTree = c.searchRouteIndexTree(sr, parent);
+				final MapIndex nmi = new MapIndex();
+				c.loadRouteIndexData(searchRouteIndexTree, new ResultMatcher<RouteDataObject>() {
+
+					@Override
+					public boolean publish(RouteDataObject r) {
+						if (basemap) {
+							renderedState |= 1;
+						} else {
+							renderedState |= 2;
+						}
+						if (checkForDuplicateObjectIds && !basemap) {
+							if (ids.contains(r.getId()) && r.getId() > 0) {
+								// do not add object twice
+								return false;
+							}
+							ids.add(r.getId());
+						}
+						int[] coordinantes = new int[r.getPointsLength() * 2];
+						int[] roTypes = r.getTypes();
+						for(int k = 0; k < roTypes.length; k++) {
+							int type = roTypes[k];
+							registerMissingType(nmi, r, type);
+						}
+						for(int k = 0; k < coordinantes.length/2; k++ ) {
+							coordinantes[2 * k] = r.getPoint31XTile(k);
+							coordinantes[2 * k + 1] = r.getPoint31YTile(k);
+						}
+						BinaryMapDataObject mo = new BinaryMapDataObject(coordinantes, roTypes, new int[0][], r.getId());
+						TIntObjectHashMap<String> names = r.getNames();
+						if(names != null) {
+							TIntObjectIterator<String> it = names.iterator();
+							while(it.hasNext()) {
+								it.advance();
+								registerMissingType(nmi, r, it.key());
+								mo.putObjectName(it.key(), it.value());
+							}
+						}
+						mo.setMapIndex(nmi);
+						tempResult.add(mo);
+						return false;
+					}
+
+					private void registerMissingType(final MapIndex nmi, RouteDataObject r, int type) {
+						if (!nmi.isRegisteredRule(type)) {
+							RouteTypeRule rr = r.region.quickGetEncodingRule(type);
+							String tag = rr.getTag();
+							int additional = ("highway".equals(tag) || "route".equals(tag) || "railway".equals(tag)
+									|| "aeroway".equals(tag) || "aerialway".equals(tag)) ? 0 : 1;
+							nmi.initMapEncodingRule(additional, type, rr.getTag(), rr.getValue());
+						}
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return !interrupted;
+					}
+				});
+			}
+		} catch (IOException e) {
+			log.debug("Search failed " + c.getRegionNames(), e); //$NON-NLS-1$
+		}
+	}
+
 
 	private boolean loadVectorData(QuadRect dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq) {
 		double cBottomLatitude = dataBox.bottom;
@@ -277,18 +354,102 @@ public class MapRenderRepositories {
 		long now = System.currentTimeMillis();
 
 		System.gc(); // to clear previous objects
-		int count = 0;
 		ArrayList<BinaryMapDataObject> tempResult = new ArrayList<BinaryMapDataObject>();
 		ArrayList<BinaryMapDataObject> basemapResult = new ArrayList<BinaryMapDataObject>();
-		TLongSet ids = new TLongHashSet();
+		
+		int[] count = new int[]{0};
+		boolean[] ocean = new boolean[]{false};
+		boolean[] land = new boolean[]{false};
 		List<BinaryMapDataObject> coastLines = new ArrayList<BinaryMapDataObject>();
 		List<BinaryMapDataObject> basemapCoastLines = new ArrayList<BinaryMapDataObject>();
 		int leftX = MapUtils.get31TileNumberX(cLeftLongitude);
 		int rightX = MapUtils.get31TileNumberX(cRightLongitude);
 		int bottomY = MapUtils.get31TileNumberY(cBottomLatitude);
 		int topY = MapUtils.get31TileNumberY(cTopLatitude);
-		BinaryMapIndexReader.SearchFilter searchFilter = new BinaryMapIndexReader.SearchFilter() {
+		TLongSet ids = new TLongHashSet();
+		MapIndex mi = readMapObjectsForRendering(zoom, renderingReq, tempResult, basemapResult, ids, count, ocean,
+				land, coastLines, basemapCoastLines, leftX, rightX, bottomY, topY);
+		int renderRouteDataFile = 0;
+		if (renderingReq.searchRenderingAttribute("showRoadMapsAttribute")) {
+			renderRouteDataFile = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
+		}
+		if (checkWhetherInterrupted()) {
+			return false;
+		}
+		if (renderRouteDataFile >= 0 && zoom >= zoomOnlyForBasemaps ) {
+			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, null);
+			for (BinaryMapIndexReader c : files.values()) {
+				// false positive case when we have 2 sep maps Country-roads & Country
+				if(c.getMapIndexes().size() == 0 || renderRouteDataFile == 1) {
+					readRouteDataAsMapObjects(searchRequest, c, tempResult, ids);
+				}
+			}
+			log.info(String.format("Route objects %s", tempResult.size() +""));
+		}
 
+		String coastlineTime = "";
+		boolean addBasemapCoastlines = true;
+		boolean emptyData = zoom > zoomOnlyForBasemaps && tempResult.isEmpty() && coastLines.isEmpty();
+		boolean basemapMissing = zoom <= zoomOnlyForBasemaps && basemapCoastLines.isEmpty() && mi == null;
+		boolean detailedLandData = zoom >= zoomForBaseRouteRendering && tempResult.size() > 0  && renderRouteDataFile < 0;
+		if (!coastLines.isEmpty()) {
+			long ms = System.currentTimeMillis();
+			boolean coastlinesWereAdded = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom,
+					basemapCoastLines.isEmpty(), true, tempResult);
+			addBasemapCoastlines = (!coastlinesWereAdded && !detailedLandData) || zoom <= zoomOnlyForBasemaps;
+			coastlineTime = "(coastline " + (System.currentTimeMillis() - ms) + " ms )";
+		} else {
+			addBasemapCoastlines = !detailedLandData;
+		}
+		if (addBasemapCoastlines) {
+			long ms = System.currentTimeMillis();
+			boolean coastlinesWereAdded = processCoastlines(basemapCoastLines, leftX, rightX, bottomY, topY, zoom,
+					true, true, tempResult);
+			addBasemapCoastlines = !coastlinesWereAdded;
+			coastlineTime = "(coastline " + (System.currentTimeMillis() - ms) + " ms )";
+		}
+		if (addBasemapCoastlines && mi != null) {
+			BinaryMapDataObject o = new BinaryMapDataObject(new int[]{leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
+					topY}, new int[]{ocean[0] && !land[0] ? mi.coastlineEncodingType : (mi.landEncodingType)}, null, -1);
+			o.setMapIndex(mi);
+			tempResult.add(o);
+		}
+		if (emptyData || basemapMissing) {
+			// message
+			MapIndex mapIndex;
+			if (!tempResult.isEmpty()) {
+				mapIndex = tempResult.get(0).getMapIndex();
+			} else {
+				mapIndex = new MapIndex();
+				mapIndex.initMapEncodingRule(0, 1, "natural", "coastline");
+				mapIndex.initMapEncodingRule(0, 2, "name", "");
+			}
+		}
+		if (zoom <= zoomOnlyForBasemaps || emptyData) {
+			tempResult.addAll(basemapResult);
+		}
+
+
+		if (count[0] > 0) {
+			log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
+					cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
+			log.info(String.format("Searching: %s ms  %s (%s results found)", System.currentTimeMillis() - now, coastlineTime, count[0])); //$NON-NLS-1$
+		}
+
+
+		cObjects = tempResult;
+		cObjectsBox = dataBox;
+
+		return true;
+	}
+
+	
+
+	private MapIndex readMapObjectsForRendering(final int zoom, final RenderingRuleSearchRequest renderingReq,
+			ArrayList<BinaryMapDataObject> tempResult, ArrayList<BinaryMapDataObject> basemapResult, 
+			TLongSet ids, int[] count, boolean[] ocean, boolean[] land, List<BinaryMapDataObject> coastLines,
+			List<BinaryMapDataObject> basemapCoastLines, int leftX, int rightX, int bottomY, int topY) {
+		BinaryMapIndexReader.SearchFilter searchFilter = new BinaryMapIndexReader.SearchFilter() {
 			@Override
 			public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex root) {
 				for (int j = 0; j < types.size(); j++) {
@@ -318,11 +479,10 @@ public class MapRenderRepositories {
 		if (zoom > 16) {
 			searchFilter = null;
 		}
-		boolean ocean = false;
-		boolean land = false;
 		MapIndex mi = null;
 		searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);
 		for (BinaryMapIndexReader c : files.values()) {
+			boolean basemap = c.isBasemap();
 			searchRequest.clearSearchResults();
 			List<BinaryMapDataObject> res;
 			try {
@@ -331,99 +491,52 @@ public class MapRenderRepositories {
 				res = new ArrayList<BinaryMapDataObject>();
 				log.debug("Search failed " + c.getRegionNames(), e); //$NON-NLS-1$
 			}
+			if(res.size() > 0) {
+				if(basemap) {
+					renderedState |= 1;
+				} else {
+					renderedState |= 2;
+				}
+			}
 			for (BinaryMapDataObject r : res) {
-				if (checkForDuplicateObjectIds) {
+				if (checkForDuplicateObjectIds && !basemap) {
 					if (ids.contains(r.getId()) && r.getId() > 0) {
 						// do not add object twice
 						continue;
 					}
 					ids.add(r.getId());
 				}
-				count++;
+				count[0]++;
 
 				if (r.containsType(r.getMapIndex().coastlineEncodingType)) {
-					if (c.isBasemap()) {
+					if (basemap) {
 						basemapCoastLines.add(r);
 					} else {
 						coastLines.add(r);
 					}
 				} else {
 					// do not mess coastline and other types
-					if (c.isBasemap()) {
+					if (basemap) {
 						basemapResult.add(r);
 					} else {
 						tempResult.add(r);
 					}
 				}
 				if (checkWhetherInterrupted()) {
-					return false;
+					return null;
 				}
 			}
 
 			if (searchRequest.isOcean()) {
 				mi = c.getMapIndexes().get(0);
-				ocean = true;
+				ocean[0] = true;
 			}
 			if (searchRequest.isLand()) {
 				mi = c.getMapIndexes().get(0);
-				land = true;
+				land[0] = true;
 			}
 		}
-
-		String coastlineTime = "";
-		boolean addBasemapCoastlines = true;
-		boolean emptyData = zoom > BASEMAP_ZOOM && tempResult.isEmpty() && coastLines.isEmpty();
-		boolean basemapMissing = zoom <= BASEMAP_ZOOM && basemapCoastLines.isEmpty() && mi == null;
-		boolean detailedLandData = zoom >= 14 && tempResult.size() > 0;
-		if (!coastLines.isEmpty()) {
-			long ms = System.currentTimeMillis();
-			boolean coastlinesWereAdded = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom,
-					basemapCoastLines.isEmpty(), true, tempResult);
-			addBasemapCoastlines = (!coastlinesWereAdded && !detailedLandData) || zoom <= BASEMAP_ZOOM;
-			coastlineTime = "(coastline " + (System.currentTimeMillis() - ms) + " ms )";
-		} else {
-			addBasemapCoastlines = !detailedLandData;
-		}
-		if (addBasemapCoastlines) {
-			long ms = System.currentTimeMillis();
-			boolean coastlinesWereAdded = processCoastlines(basemapCoastLines, leftX, rightX, bottomY, topY, zoom,
-					true, true, tempResult);
-			addBasemapCoastlines = !coastlinesWereAdded;
-			coastlineTime = "(coastline " + (System.currentTimeMillis() - ms) + " ms )";
-		}
-		if (addBasemapCoastlines && mi != null) {
-			BinaryMapDataObject o = new BinaryMapDataObject(new int[]{leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
-					topY}, new int[]{ocean && !land ? mi.coastlineEncodingType : (mi.landEncodingType)}, null, -1);
-			o.setMapIndex(mi);
-			tempResult.add(o);
-		}
-		if (emptyData || basemapMissing) {
-			// message
-			MapIndex mapIndex;
-			if (!tempResult.isEmpty()) {
-				mapIndex = tempResult.get(0).getMapIndex();
-			} else {
-				mapIndex = new MapIndex();
-				mapIndex.initMapEncodingRule(0, 1, "natural", "coastline");
-				mapIndex.initMapEncodingRule(0, 2, "name", "");
-			}
-		}
-		if (zoom <= BASEMAP_ZOOM || emptyData) {
-			tempResult.addAll(basemapResult);
-		}
-
-
-		if (count > 0) {
-			log.info(String.format("BLat=%s, TLat=%s, LLong=%s, RLong=%s, zoom=%s", //$NON-NLS-1$
-					cBottomLatitude, cTopLatitude, cLeftLongitude, cRightLongitude, zoom));
-			log.info(String.format("Searching: %s ms  %s (%s results found)", System.currentTimeMillis() - now, coastlineTime, count)); //$NON-NLS-1$
-		}
-
-
-		cObjects = tempResult;
-		cObjectsBox = dataBox;
-
-		return true;
+		return mi;
 	}
 
 	private void validateLatLonBox(QuadRect box) {
@@ -441,61 +554,14 @@ public class MapRenderRepositories {
 		}
 	}
 
+	
 
-	// only single thread to read !
-	public synchronized boolean checkIfMapIsEmpty(int leftX, int rightX, int topY, int bottomY, int zoom){
-		final boolean[] empty = new boolean[] {true};
-		SearchRequest<BinaryMapDataObject> searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom,
-				null, new ResultMatcher<BinaryMapDataObject>() {
-			@Override
-			public boolean publish(BinaryMapDataObject object) {
-				empty[0] = false;
-				return false;
-			}
-
-			@Override
-			public boolean isCancelled() {
-				return !empty[0];
-			}
-		});
-		SearchRequest<RouteDataObject> searchRouteRequest = BinaryMapIndexReader.buildSearchRouteRequest(leftX, rightX, topY, bottomY, 
-				new ResultMatcher<RouteDataObject>() {
-			@Override
-			public boolean publish(RouteDataObject object) {
-				empty[0] = false;
-				return false;
-			}
-
-			@Override
-			public boolean isCancelled() {
-				return !empty[0];
-			}
-		});
-		for (BinaryMapIndexReader c : files.values()) {
-			if (!c.isBasemap()) {
-				try {
-					c.searchMapIndex(searchRequest);
-				} catch (IOException e) {
-					// lots of FalsePositive cases
-					return false;
-				}
-				if (!empty[0]) {
-					return false;
-				}
-				for (RouteRegion r : c.getRoutingIndexes()) {
-					try {
-						List<RouteSubregion> regs = c.searchRouteIndexTree(searchRouteRequest, r.getSubregions());
-						if(!regs.isEmpty()) {
-							return false;
-						}
-					} catch (IOException e) {
-						// lots of FalsePositive cases
-						return false;
-					}
-				}
-			}
+	public boolean isLastMapRenderedEmpty(boolean checkBaseMap){
+		if(checkBaseMap) {
+			return prevBmp != null && previousRenderedState == 0;
+		} else {
+			return prevBmp != null && previousRenderedState == 1;
 		}
-		return empty[0];
 	}
 
 	public synchronized void loadMap(RotatedTileBox tileRect, List<IMapDownloaderCallback> notifyList) {
@@ -538,11 +604,11 @@ public class MapRenderRepositories {
 
 			// prevent editing
 			requestedBox = new RotatedTileBox(tileRect);
+			
 
 			// calculate data box
 			QuadRect dataBox = requestedBox.getLatLonBounds();
 			long now = System.currentTimeMillis();
-
 			if (cObjectsBox.left > dataBox.left || cObjectsBox.top > dataBox.top || cObjectsBox.right < dataBox.right
 					|| cObjectsBox.bottom < dataBox.bottom || (nativeLib != null) == (cNativeObjects == null)) {
 				// increase data box in order for rotate
@@ -556,6 +622,7 @@ public class MapRenderRepositories {
 					dataBox.bottom -= hi;
 				}
 				validateLatLonBox(dataBox);
+				renderedState = 0;
 				boolean loaded;
 				if(nativeLib != null) {
 					cObjects = new LinkedList<BinaryMapDataObject>();
@@ -618,6 +685,7 @@ public class MapRenderRepositories {
 			Bitmap reuse = prevBmp;
 			this.prevBmp = this.bmp;
 			this.prevBmpLocation = this.bmpLocation;
+			this.previousRenderedState = renderedState;
 			if (reuse != null && reuse.getWidth() == currentRenderingContext.width && reuse.getHeight() == currentRenderingContext.height) {
 				bmp = reuse;
 				bmp.eraseColor(currentRenderingContext.defaultColor);
@@ -726,6 +794,7 @@ public class MapRenderRepositories {
 		cObjectsBox = new QuadRect();
 
 		requestedBox = prevBmpLocation = null;
+		previousRenderedState = 0;
 		// Do not clear main bitmap to not cause a screen refresh
 //		prevBmp = null;
 //		bmp = null;

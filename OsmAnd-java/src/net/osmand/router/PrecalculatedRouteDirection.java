@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
@@ -18,6 +19,7 @@ public class PrecalculatedRouteDirection {
 	private float minSpeed;
 	private float maxSpeed;
 	private float[] tms;
+	private boolean followNext;
 	private static final int SHIFT = (1 << (31 - 17));
 	private static final int[] SHIFTS = new int[]{1 << (31 - 15), 1 << (31 - 13), 1 << (31 - 12), 
 		1 << (31 - 11), 1 << (31 - 7)};
@@ -38,6 +40,11 @@ public class PrecalculatedRouteDirection {
 	}
 	
 	private PrecalculatedRouteDirection(List<RouteSegmentResult> ls, float maxSpeed) {
+		this.maxSpeed = maxSpeed;
+		init(ls);
+	}
+	
+	private PrecalculatedRouteDirection(LatLon[] ls, float maxSpeed) {
 		this.maxSpeed = maxSpeed;
 		init(ls);
 	}
@@ -81,6 +88,10 @@ public class PrecalculatedRouteDirection {
 		return null;
 	}
 	
+	public static PrecalculatedRouteDirection build(LatLon[] ls, float maxSpeed){
+		return new PrecalculatedRouteDirection(ls, maxSpeed);
+	}
+	
 
 	private void init(List<RouteSegmentResult> ls) {
 		TIntArrayList px = new TIntArrayList();
@@ -101,6 +112,19 @@ public class PrecalculatedRouteDirection {
 					break;
 				}
 			}
+		}
+		init(px, py, speedSegments);
+	}
+	
+	private void init(LatLon[] ls) {
+		TIntArrayList px = new TIntArrayList();
+		TIntArrayList py = new TIntArrayList();
+		List<Float> speedSegments = new ArrayList<Float>();
+		for (LatLon s : ls) {
+			float routeSpd = maxSpeed; // (s.getDistance() / s.getRoutingTime())
+			px.add(MapUtils.get31TileNumberX(s.getLongitude()));
+			py.add(MapUtils.get31TileNumberY(s.getLatitude()));
+			speedSegments.add(routeSpd);
 		}
 		init(px, py, speedSegments);
 	}
@@ -217,6 +241,15 @@ public class PrecalculatedRouteDirection {
 		return ((long) x31) << 32l + ((long)y31);
 	}
 	
+	public void setFollowNext(boolean followNext) {
+		this.followNext = followNext;
+	}
+	
+	public boolean isFollowNext() {
+		return followNext;
+	}
+	
+	
 	public PrecalculatedRouteDirection adopt(RoutingContext ctx) {
 		int ind1 = getIndex(ctx.startX, ctx.startY);
 		int ind2 = getIndex(ctx.targetX, ctx.targetY);
@@ -235,6 +268,7 @@ public class PrecalculatedRouteDirection {
 //		routeDirection.startY31 = ctx.startY;
 		routeDirection.endPoint = calc(ctx.targetX, ctx.targetX);
 		routeDirection.endFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind2], pointsY[ind2], ctx.targetX, ctx.targetY) / maxSpeed;
+		routeDirection.followNext = followNext;
 		
 //		routeDirection.endX31 = ctx.targetX;
 //		routeDirection.endY31 = ctx.targetY;

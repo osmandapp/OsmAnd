@@ -19,6 +19,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParams.GPXRouteParamsBuilder;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -66,10 +67,11 @@ public class NavigateAction {
 	public boolean navigateUsingGPX(final ApplicationMode appMode, final LatLon endForRouting,
 			final GPXFile result) {
 		Builder builder = new AlertDialog.Builder(mapActivity);
-		final boolean[] props = new boolean[]{false, false, false, settings.SPEAK_GPX_WPT.get()};
+		final boolean[] props = new boolean[]{false, false, false, settings.SPEAK_GPX_WPT.get(), settings.CALC_GPX_ROUTE.get()};
 		builder.setMultiChoiceItems(new String[] { getString(R.string.gpx_option_reverse_route),
 				getString(R.string.gpx_option_destination_point), getString(R.string.gpx_option_from_start_point),
-				getString(R.string.announce_gpx_waypoints) }, props,
+				getString(R.string.announce_gpx_waypoints),
+				getString(R.string.calculate_osmand_route_gpx)}, props,
 				new OnMultiChoiceClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -83,9 +85,20 @@ public class NavigateAction {
 				boolean passWholeWay = props[2];
 				boolean useDestination = props[1];
 				boolean announceGpxWpt = props[3];
+				boolean calculateOsmAndRoute = props[4];
 				settings.SPEAK_GPX_WPT.set(announceGpxWpt);
-				GPXRouteParams gpxRoute = new GPXRouteParams(result, reverse, announceGpxWpt, settings);
-				
+				settings.CALC_GPX_ROUTE.set(calculateOsmAndRoute);
+				GPXRouteParamsBuilder bld = GPXRouteParamsBuilder.newBuilder(result, settings);
+				if(reverse) {
+					bld.reverse();
+				}
+				if(announceGpxWpt) {
+					bld.announceWaypoints();
+				}
+				if(calculateOsmAndRoute) {
+					bld.calculateOsmAndRoute();
+				}
+				GPXRouteParams gpxRoute = bld.build();
 				Location loc = getLastKnownLocation();
 				if(passWholeWay && loc != null){
 					gpxRoute.setStartPoint(loc);

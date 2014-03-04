@@ -651,7 +651,7 @@ public class OsmandSettings {
 	
 	public float getSettingsZoomScale(float density){
 		// by default scale between [0, 1[ density (because of lots map complains)
-		return MAP_ZOOM_SCALE_BY_DENSITY.get() + (float)Math.min(Math.sqrt(Math.max(0, density - 1)), 1);
+		return MAP_ZOOM_SCALE_BY_DENSITY.get() + (float)Math.sqrt(Math.max(0, density - 1));
 	}
 	
 
@@ -739,6 +739,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SPEAK_SPEED_LIMIT = new BooleanPreference("speak_speed_limit", true).makeProfile().cache();
 	
 	public final OsmandPreference<Boolean> SPEAK_GPX_WPT = new BooleanPreference("speak_gpx_wpt", true).makeGlobal().cache();
+	public final OsmandPreference<Boolean> CALC_GPX_ROUTE = new BooleanPreference("calc_gpx_route", false).makeGlobal().cache();
 	
 	
 
@@ -992,8 +993,22 @@ public class OsmandSettings {
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 	
 	public File getExternalStorageDirectory() {
-		return new File(settingsAPI.getString(globalPreferences,EXTERNAL_STORAGE_DIR, 
-				ctx.getExternalServiceAPI().getExternalStorageDirectory()));
+		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
+		if(Build.VERSION.SDK_INT >= VERSION_DEFAULTLOCATION_CHANGED && !new File(defaultLocation, IndexConstants.APP_DIR).exists()) {
+			defaultLocation += "/Android/data/" + ctx.getPackageName();
+		}
+		return new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
+				defaultLocation));
+	}
+	
+	public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
+
+	public String getDefaultExternalStorageLocation() {
+		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
+		if(Build.VERSION.SDK_INT >= VERSION_DEFAULTLOCATION_CHANGED) {
+			defaultLocation += "/Android/data/" + ctx.getPackageName();
+		}
+		return defaultLocation;
 	}
 	
 	public boolean setExternalStorageDirectory(String externalStorageDir) {

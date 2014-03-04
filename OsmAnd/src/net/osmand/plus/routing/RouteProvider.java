@@ -3,6 +3,7 @@ package net.osmand.plus.routing;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -48,6 +49,7 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
+import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteSegmentResult;
@@ -115,9 +117,9 @@ public class RouteProvider {
 		List<Location> points = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions;
 		DataTileManager<WptPt> wpt;
+		boolean calculateOsmAndRoute = false;
 	
-		public GPXRouteParams(GPXFile file, boolean reverse, boolean announceWaypoints, OsmandSettings settings){
-			prepareEverything(file, reverse, announceWaypoints, settings.DRIVING_REGION.get().leftHandDriving);
+		private GPXRouteParams(){
 		}
 		
 		public void setStartPoint(Location startPoint) {
@@ -142,6 +144,45 @@ public class RouteProvider {
 				return point;
 			}
 			return null;
+		}
+		
+		public static class GPXRouteParamsBuilder {
+			
+			private GPXRouteParams obj = new GPXRouteParams();
+			private GPXFile file;
+			private boolean leftHandDriving;
+			private boolean reverse;
+			private boolean announceWaypoints;
+			private GPXRouteParamsBuilder(GPXFile f, OsmandSettings settings) {
+				this.file = f;
+				leftHandDriving = settings.DRIVING_REGION.get().leftHandDriving;
+//				obj = new GPXRouteParams(file, reverse, announceWaypoints, settings)
+				// TODO Auto-generated constructor stub
+			}
+			
+			public GPXRouteParamsBuilder reverse() {
+				this.reverse = true;
+				return this;
+			}
+			
+			public GPXRouteParamsBuilder announceWaypoints() {
+				this.announceWaypoints = true;
+				return this;
+			}
+			
+			public GPXRouteParamsBuilder calculateOsmAndRoute() {
+				obj.calculateOsmAndRoute = true;
+				return this;
+			}
+
+			public static GPXRouteParamsBuilder newBuilder(GPXFile f, OsmandSettings settings) {
+				return new GPXRouteParamsBuilder(f, settings);
+			}
+			
+			public GPXRouteParams build(){
+				obj.prepareEverything(file, reverse, announceWaypoints, leftHandDriving);
+				return obj;
+			}
 		}
 		
 		private void prepareEverything(GPXFile file, boolean reverse, boolean announceWaypoints, boolean leftSide){
@@ -210,7 +251,10 @@ public class RouteProvider {
 			}
 			try {
 				RouteCalculationResult res;
-				if(params.gpxRoute != null && !params.gpxRoute.points.isEmpty()){
+				boolean calcGPXRoute = params.gpxRoute != null && !params.gpxRoute.points.isEmpty();
+				if (params.type == RouteService.OSMAND || (calcGPXRoute && params.gpxRoute.calculateOsmAndRoute)) {
+					res = findVectorMapsRoute(params, calcGPXRoute);
+				} else if(calcGPXRoute){
 					res = calculateGpxRoute(params);
 				} else if (params.type == RouteService.YOURS) {
 					res = findYOURSRoute(params);
@@ -218,8 +262,6 @@ public class RouteProvider {
 					res = findORSRoute(params);
 				} else if (params.type == RouteService.OSRM) {
 					res = findOSRMRoute(params);
-				} else if (params.type == RouteService.OSMAND) {
-					res = findVectorMapsRoute(params);
 				} else if (params.type == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else {
@@ -246,45 +288,20 @@ public class RouteProvider {
 	private RouteCalculationResult calculateGpxRoute(RouteCalculationParams pars) {
 		RouteCalculationResult res;
 		// get the closest point to start and to end
-		float minDist = Integer.MAX_VALUE;
-		int startI = 0;
 		GPXRouteParams params = pars.gpxRoute;
 		List<Location> gpxRoute = params.points;
-		int endI = gpxRoute.size(); 
-		if (pars.start != null) {
-			for (int i = 0; i < gpxRoute.size(); i++) {
-				float d = gpxRoute.get(i).distanceTo(pars.start);
-				if (d < minDist) {
-					startI = i;
-					minDist = d;
-				}
-			}
-		} else {
-			pars.start = gpxRoute.get(0);
-		}
-		Location l = new Location("temp"); //$NON-NLS-1$
-		l.setLatitude(pars.end.getLatitude());
-		l.setLongitude(pars.end.getLongitude());
-		minDist = Integer.MAX_VALUE;
-		// get in reverse order taking into account ways with cycle
-		for (int i = gpxRoute.size() - 1; i >= startI; i--) {
-			float d = gpxRoute.get(i).distanceTo(l);
-			if (d < minDist) {
-				endI = i + 1;
-				// slightly modify to allow last point to be added
-				minDist = d - 40;
-			}
-		}
-		ArrayList<Location> sublist = new ArrayList<Location>(gpxRoute.subList(startI, endI));
+		int[] startI = new int[]{0};
+		int[] endI = new int[]{gpxRoute.size()}; 
+		ArrayList<Location> sublist = findGpxLocations(pars, startI, endI);
 		pars.intermediates = null;
 		if(params.directions == null){
 			res = new RouteCalculationResult(sublist, null, pars, params.wpt);
 		} else {
 			List<RouteDirectionInfo> subdirections = new ArrayList<RouteDirectionInfo>();
 			for (RouteDirectionInfo info : params.directions) {
-				if(info.routePointOffset >= startI && info.routePointOffset < endI){
+				if(info.routePointOffset >= startI[0] && info.routePointOffset < endI[0]){
 					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
-					ch.routePointOffset = info.routePointOffset - startI;
+					ch.routePointOffset = info.routePointOffset - startI[0];
 					ch.setDescriptionRoute(info.getDescriptionRoute());
 					
 					// recalculate
@@ -296,6 +313,49 @@ public class RouteProvider {
 			res = new RouteCalculationResult(sublist, subdirections, pars, params.wpt);
 		}
 		return res;
+	}
+
+
+
+
+	private ArrayList<Location> findGpxLocations(RouteCalculationParams pars, int[] startI, int[] endI) {
+		GPXRouteParams params = pars.gpxRoute;
+		List<Location> gpxRoute = params.points;
+		float minDist = Integer.MAX_VALUE;
+		int start = 0;
+		int end = gpxRoute.size();
+		if (pars.start != null) {
+			for (int i = 0; i < gpxRoute.size(); i++) {
+				float d = gpxRoute.get(i).distanceTo(pars.start);
+				if (d < minDist) {
+					start = i;
+					minDist = d;
+				}
+			}
+		} else {
+			pars.start = gpxRoute.get(0);
+		}
+		Location l = new Location("temp"); //$NON-NLS-1$
+		l.setLatitude(pars.end.getLatitude());
+		l.setLongitude(pars.end.getLongitude());
+		minDist = Integer.MAX_VALUE;
+		// get in reverse order taking into account ways with cycle
+		for (int i = gpxRoute.size() - 1; i >= start; i--) {
+			float d = gpxRoute.get(i).distanceTo(l);
+			if (d < minDist) {
+				end = i + 1;
+				// slightly modify to allow last point to be added
+				minDist = d - 40;
+			}
+		}
+		ArrayList<Location> sublist = new ArrayList<Location>(gpxRoute.subList(start, end));
+		if(startI != null) {
+			startI[0] = start;
+		}
+		if(endI != null) {
+			endI[0] = end;
+		}
+		return sublist;
 	}
 	
 	protected String getString(ClientContext ctx, int resId){
@@ -370,10 +430,63 @@ public class RouteProvider {
 		return new RouteCalculationResult(res, null, params, null);
 	}
 	
-	protected RouteCalculationResult findVectorMapsRoute(final RouteCalculationParams params) throws IOException {
+	protected RouteCalculationResult findVectorMapsRoute(final RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
 		BinaryMapIndexReader[] files = params.ctx.getTodoAPI().getRoutingMapFiles();
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(false);
 		OsmandSettings settings = params.ctx.getSettings();
+		
+		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(params.mode);
+		if(generalRouter == null) {
+			return applicationModeNotSupported(params);
+		}
+		RoutingConfiguration cf = initOsmAndRoutingConfig(params, settings, generalRouter);
+		if(cf == null){
+			return applicationModeNotSupported(params);
+		}
+		PrecalculatedRouteDirection precalculated = null;
+		if(calcGPXRoute) {
+			ArrayList<Location> sublist = findGpxLocations(params, null, null);
+			LatLon[] latLon = new LatLon[sublist.size()];
+			for(int k = 0; k < latLon.length; k ++) {
+				latLon[k] = new LatLon(sublist.get(k).getLatitude(), sublist.get(k).getLongitude());
+			}
+			precalculated = PrecalculatedRouteDirection.build(latLon, generalRouter.getMaxDefaultSpeed());
+			precalculated.setFollowNext(true);
+			//cf.planRoadDirection = 1;
+		}
+		// BUILD context
+		RoutingContext ctx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files, 
+				RouteCalculationMode.NORMAL);
+		
+		RoutingContext complexCtx = null;
+		boolean complex = params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) && !settings.DISABLE_COMPLEX_ROUTING.get()
+				&& precalculated == null;
+		if(complex) {
+			complexCtx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files,
+				RouteCalculationMode.COMPLEX);
+			complexCtx.calculationProgress = params.calculationProgress;
+			complexCtx.leftSideNavigation = params.leftSide;
+		}
+		ctx.leftSideNavigation = params.leftSide;
+		ctx.calculationProgress = params.calculationProgress;
+		if(params.previousToRecalculate != null) {
+			 // not used any more
+			// ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
+		}
+		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
+		LatLon en = new LatLon(params.end.getLatitude(), params.end.getLongitude());
+		List<LatLon> inters  = new ArrayList<LatLon>();
+		if (params.intermediates != null) {
+			inters  = new ArrayList<LatLon>(params.intermediates);
+		}
+		return calcOfflineRouteImpl(params, router, ctx, complexCtx, st, en, inters, precalculated);
+	}
+
+
+
+
+	private RoutingConfiguration initOsmAndRoutingConfig(final RouteCalculationParams params, OsmandSettings settings,
+			GeneralRouter generalRouter) throws IOException, FileNotFoundException {
 		File routingXml = params.ctx.getAppPath(IndexConstants.ROUTING_XML_FILE);
 		RoutingConfiguration.Builder config ;
 		if (routingXml.exists() && routingXml.canRead()) {
@@ -393,12 +506,9 @@ public class RouteProvider {
 		} else if(params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)){
 			p = GeneralRouterProfile.CAR;
 		} else {
-			return applicationModeNotSupported(params);
+			return null;
 		}
-		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(params.mode);
-		if(generalRouter == null) {
-			return applicationModeNotSupported(params);
-		}
+		
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
 		for(Map.Entry<String, RoutingParameter> e : generalRouter.getParameters().entrySet()){
 			String key = e.getKey();
@@ -427,32 +537,20 @@ public class RouteProvider {
 		RoutingConfiguration cf = config.build(p.name().toLowerCase(), params.start.hasBearing() ? 
 				params.start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, paramsR);
-		boolean complex = params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) && !settings.DISABLE_COMPLEX_ROUTING.get();
-		RoutingContext ctx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files, 
-				RouteCalculationMode.NORMAL);
-		RoutingContext complexCtx = null;
-		if(complex) {
-			complexCtx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files,
-				RouteCalculationMode.COMPLEX);
-			complexCtx.calculationProgress = params.calculationProgress;
-		}
-		ctx.leftSideNavigation = params.leftSide;
-		ctx.calculationProgress = params.calculationProgress;
-		if(params.previousToRecalculate != null) {
-			 // not used any more
-			// ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
-		}
-		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
-		LatLon en = new LatLon(params.end.getLatitude(), params.end.getLongitude());
-		List<LatLon> inters  = new ArrayList<LatLon>();
-		if (params.intermediates != null) {
-			inters  = new ArrayList<LatLon>(params.intermediates);
-		}
+		return cf;
+	}
+
+
+
+
+	private RouteCalculationResult calcOfflineRouteImpl(final RouteCalculationParams params,
+			RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
+			List<LatLon> inters, PrecalculatedRouteDirection precalculated) throws IOException {
 		try {
 			List<RouteSegmentResult> result ;
 			if(complexCtx != null) {
 				try {
-					result = router.searchRoute(complexCtx, st, en, inters);
+					result = router.searchRoute(complexCtx, st, en, inters, precalculated);
 					// discard ctx and replace with calculated
 					ctx = complexCtx;
 				} catch(final RuntimeException e) {

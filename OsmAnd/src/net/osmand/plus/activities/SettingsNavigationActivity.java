@@ -233,7 +233,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			if (MORE_VALUE.equals(newValue)) {
 				// listPref.set(oldValue); // revert the change..
 				final Intent intent = new Intent(this, DownloadIndexActivity.class);
-				intent.putExtra(DownloadIndexActivity.FILTER_KEY, "voice");
+				intent.putExtra(DownloadIndexActivity.FILTER_KEY, getString(R.string.voice));
 				startActivity(intent);
 			} else {
 				super.onPreferenceChange(preference, newValue);
