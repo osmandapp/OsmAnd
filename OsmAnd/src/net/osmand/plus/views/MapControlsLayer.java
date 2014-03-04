@@ -393,7 +393,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				float scale = view.getZoomScale();
 				int p = (int) ((scale > 0 ? 1 : -1) * Math.round(scale * scale * 100)) + 100;
-				final TIntArrayList tlist = new TIntArrayList(new int[] { 75, 100, 150, 200, 300, 400 });
+				final TIntArrayList tlist = new TIntArrayList(new int[] { 75, 100, 150, 200, 300, 400, 500 });
 				final List<String> values = new ArrayList<String>();
 				int i = -1;
 				for (int k = 0; k <= tlist.size(); k++) {
