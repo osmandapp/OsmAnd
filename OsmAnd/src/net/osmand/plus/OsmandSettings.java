@@ -651,7 +651,7 @@ public class OsmandSettings {
 	
 	public float getSettingsZoomScale(float density){
 		// by default scale between [0, 1[ density (because of lots map complains)
-		return MAP_ZOOM_SCALE_BY_DENSITY.get() + (float)Math.min(Math.sqrt(Math.max(0, density - 1)), 1);
+		return MAP_ZOOM_SCALE_BY_DENSITY.get() + (float)Math.sqrt(Math.max(0, density - 1));
 	}
 	
 
@@ -993,7 +993,10 @@ public class OsmandSettings {
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 	
 	public File getExternalStorageDirectory() {
-		String defaultLocation = getDefaultExternalStorageLocation();
+		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
+		if(Build.VERSION.SDK_INT >= VERSION_DEFAULTLOCATION_CHANGED && !new File(defaultLocation, IndexConstants.APP_DIR).exists()) {
+			defaultLocation += "/Android/data/" + ctx.getPackageName();
+		}
 		return new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
 				defaultLocation));
 	}
