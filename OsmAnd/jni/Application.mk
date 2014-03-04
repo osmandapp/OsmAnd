@@ -7,8 +7,6 @@ else
 	NDK_TOOLCHAIN_VERSION := 4.7
 endif
 
-
-
 APP_ABI :=
 ifneq ($(filter x86,$(OSMAND_ARCHITECTURES_SET)),)
     APP_ABI += x86
