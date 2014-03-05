@@ -1530,4 +1530,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="disable_complex_routing_descr">Deshabilitar la navegación de 2 fase para la navegación del coche</string>
     <string name="disable_complex_routing">Deshabilitar navegación compleja</string>
     <string name="calculate_osmand_route_gpx">Calcular ruta offline OsmAnd</string>
+    <string name="tip_recent_changes_1_7_t">Cambios en 1.7:
+	\n\t* Completamente actualizado la navegación (rápida y exacta)
+	\n\t* Simulación activa en túneles
+    </string>
     </resources>
