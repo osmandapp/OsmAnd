@@ -1529,4 +1529,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="complex_route_calculation_failed">Falló el cálculo de la ruta rápida (%s), regresando a cálculo lento.</string>
     <string name="disable_complex_routing_descr">Deshabilitar la navegación de 2 fase para la navegación del coche</string>
     <string name="disable_complex_routing">Deshabilitar navegación compleja</string>
+    <string name="calculate_osmand_route_gpx">Calcular ruta offline OsmAnd</string>
     </resources>
