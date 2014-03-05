@@ -1167,7 +1167,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="recording_context_menu_precord">Hacer una foto</string>
     <string name="stop_routing_confirm">¿Seguro que quieres parar la navegación?</string>
     <string name="clear_dest_confirm">¿Seguro que quieres borrar tu punto de destino?</string>
-    <string name="precise_routing_mode_descr">Activa el enrutamiento preciso para calcular rutas precisas sin fallos. Está muy limitado por la distancia y no utiliza la biblioteca nativa.</string>
+    <string name="precise_routing_mode_descr">Activa el enrutamiento preciso para calcular rutas precisas sin fallos. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
     <string name="local_indexes_cat_av">Datos de Audio/Vídeo</string>
     <string name="dist_control_start">Inicio</string>
@@ -1528,4 +1528,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="app_mode_truck">Camión</string>
     <string name="complex_route_calculation_failed">Falló el cálculo de la ruta rápida (%s), regresando a cálculo lento.</string>
     <string name="disable_complex_routing_descr">Deshabilitar la navegación de 2 fase para la navegación del coche</string>
+    <string name="disable_complex_routing">Deshabilitar navegación compleja</string>
     </resources>
