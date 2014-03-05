@@ -1521,4 +1521,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="routing_preferences_descr">Preferències de càlcul de ruta</string>
     <string name="speech_rate_descr">Velocitat de la parla sintetitzada</string>
     <string name="speech_rate">Velocitat de parla</string>
+    <string name="application_dir_change_warning2">OsmAnd podría intentar mover los datos al nuevo destino. ¿Lo quieres hacer?</string>
     </resources>
