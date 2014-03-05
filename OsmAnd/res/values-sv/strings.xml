@@ -27,7 +27,7 @@
 <string name="tip_recent_changes_0_8_3_t">"Förändringar i 0.8.3:\n\t* Waypoints\n\t* Förbättrad vägvisning\n\t* Inställning för att undvika motorvägar när man bygger en rutt\n\t* Lagt till ytterligare en typ av väg för cyklar till kartan (Cycleway=track)\n\t* Buggfixar "</string>
 <string name="snap_to_road_descr">Fäst positionen på vägen under navigering</string>
 <string name="snap_to_road">Fäst på vägen</string>
-<string name="tip_update_index">Uppdatering av offlinedata</string>
+<string name="tip_update_index">Uppdatering av offline-kartor</string>
 <string name="filterpoi_activity">Skapa POI-filter</string>
 <string name="recalculate_route_to_your_location">Transportsätt:</string>
 <string name="select_navigation_mode">Välj transportsätt</string>
@@ -887,9 +887,9 @@ Aktuella data på enheten (%1$s ledigt):</string>
 		\n\nFör att hämta kartor, gå till \'Inställningar\' -&gt; \'Datahantering\' -&gt; \'Ladda ner offline-data\'.
 		\n\nEfter att regionslistan hämtats från Internet, klicka på valfri post för att ladda ner eller uppdatera en fil. Observera filtypsväljaren längst upp på skärmen för att välja vad du vill ladda ned: vanliga kartor, överlägg, etc.
 		\n\nDu kan filtrera områdeslistan genom att skriva några tecken eller du kan välja alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.
-		\n\n\t* \'Grönt\' indikerar att data är identiska på enheten och servern
-		\n\t* \'Blått\' indikerar att det finns uppdateringar på servern
-		\n\t* Poster i kursiv stil indikerar att data är inaktiverade på enheten
+		\n\n\t* \'Grönt\' innebär att data är identiska på enheten och servern
+		\n\t* \'Blått\' innebär att det finns uppdateringar på servern
+		\n\t* Poster i kursiv stil innebär att data är inaktiverade på enheten
 	</string>
 	<string name="rendering_attr_noAdminboundaries_name">Dölj gränser</string>
 	<string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (adminnivåer 5-9)</string>
@@ -1346,12 +1346,12 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="disable_complex_routing">Inaktivera komplex ruttning</string>
     <string name="guidance_preferences_descr">Navigationsinställningar</string>
     <string name="routing_preferences_descr">Ruttningsinställningar</string>
-    <string name="android_19_location_disabled">Efter KitKat går det inte att hämta och uppdatera kartor på den tidigare lagringsplatsen (%s). Vill du byta till en tillåten plats och kopiera alla filer dit?
-     \n OBS: gamla filer berörs inte.
-     \n OBS: det kommer inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+. </string>
+    <string name="android_19_location_disabled">Efter KitKat går det inte att hämta och uppdatera kartor på den tidigare lagringsplatsen (%s). Vill du byta till en tillåten plats och flytta alla filer dit?
+     \n OBS: Gamla filer berörs inte.
+     \n OBS: Det kommer inte att vara möjligt att dela filer mellan OsmAnd och OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd kan försöka att flytta data till den nya platsen. Vill du detta?</string>
-    <string name="copying_osmand_one_file_descr">Kopierar filen (%s) till ny plats...</string>
-    <string name="copying_osmand_files_descr">Kopierar OsmAnd-filer till ny plats (%s)</string>
+    <string name="copying_osmand_one_file_descr">Flyttar filen (%s) till ny plats...</string>
+    <string name="copying_osmand_files_descr">Flyttar OsmAnd-filer till ny plats (%s)</string>
     <string name="copying_osmand_files">Kopierar OsmAnd-filer</string>
     <string name="calculate_osmand_route_gpx">Beräkna OsmAnd offline-rutt</string>
     <string name="app_mode_truck">Lastbil</string>
