@@ -7,12 +7,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.TspAnt;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.access.AccessibleAlertBuilder;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;

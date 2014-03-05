@@ -1,4 +1,4 @@
-package net.osmand.access;
+package net.osmand.plus.access;
 
 
 import java.util.ArrayList;
@@ -10,7 +10,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.access.RelativeDirectionStyle;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;

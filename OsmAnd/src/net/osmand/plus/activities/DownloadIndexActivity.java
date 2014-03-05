@@ -12,14 +12,14 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.access.AccessibleAlertBuilder;
+import net.osmand.plus.access.AccessibleToast;
 import net.osmand.plus.activities.SettingsGeneralActivity.MoveFilesToDifferentDirectory;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;

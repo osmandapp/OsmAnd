@@ -10,7 +10,6 @@ import java.util.Locale;
 
 import net.londatiga.android.QuickAction;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
@@ -18,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.access.AccessibleToast;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.util.Algorithms;

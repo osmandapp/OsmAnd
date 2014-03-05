@@ -1,4 +1,4 @@
-package net.osmand.access;
+package net.osmand.plus.access;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;

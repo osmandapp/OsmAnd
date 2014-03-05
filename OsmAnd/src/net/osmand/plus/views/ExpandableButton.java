@@ -1,4 +1,4 @@
-package net.osmand.view;
+package net.osmand.plus.views;
 
 import net.osmand.plus.R;
 import android.content.Context;

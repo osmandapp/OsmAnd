@@ -3,8 +3,6 @@ package net.osmand.plus.audionotes;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -12,6 +10,8 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
+import net.osmand.plus.access.AccessibleAlertBuilder;
+import net.osmand.plus.access.AccessibleToast;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;

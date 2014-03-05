@@ -2,7 +2,7 @@
 <LinearLayout android:layout_width="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="fill_parent" android:orientation="vertical" >
 
-	<net.osmand.access.ExplorableTextView android:text="" android:id="@+id/TipDescription" android:layout_marginLeft="4dp" android:scrollbars="vertical"
+	<net.osmand.plus.access.ExplorableTextView android:text="" android:id="@+id/TipDescription" android:layout_marginLeft="4dp" android:scrollbars="vertical"
 		android:layout_width="fill_parent" android:layout_height="0dp" android:layout_marginRight="4dp" android:layout_weight="1"
 		style="@style/ListText" android:gravity="fill_horizontal"
 		/>

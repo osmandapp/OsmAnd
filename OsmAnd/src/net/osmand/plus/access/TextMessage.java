@@ -1,4 +1,4 @@
-package net.osmand.access;
+package net.osmand.plus.access;
 
 import net.osmand.plus.R;
 import android.content.Context;

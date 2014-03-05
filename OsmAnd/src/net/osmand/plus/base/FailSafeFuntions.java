@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import org.apache.commons.logging.Log;
 
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -14,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.access.AccessibleAlertBuilder;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams.GPXRouteParamsBuilder;

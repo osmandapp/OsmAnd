@@ -10,7 +10,7 @@
         android:gravity="center_horizontal"
         android:orientation="vertical" >
 
-        <net.osmand.view.ExpandableLinearLayout
+        <net.osmand.plus.views.ExpandableLinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -33,12 +33,11 @@
 
                     <Button
                         android:id="@+id/CountryButton"
-                        android:text="@string/ChooseCountry" 
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end"
-    					android:layout_width="150dp"
-    					/>
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
+                        android:text="@string/ChooseCountry" />
 
                     <ImageButton
                         android:id="@+id/ResetCountry"
@@ -60,12 +59,11 @@
 
                     <Button
                         android:id="@+id/CityButton"
-                        android:text="@string/choose_city"
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end" 
-    					android:layout_width="150dp"
-                        />
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
+                        android:text="@string/choose_city" />
 
                     <ImageButton
                         android:id="@+id/ResetCity"
@@ -87,12 +85,11 @@
 
                     <Button
                         android:id="@+id/StreetButton"
-                        android:text="@string/choose_street"
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end"
-    					android:layout_width="150dp"
-                         />
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
+                        android:text="@string/choose_street" />
 
                     <ImageButton
                         android:id="@+id/ResetStreet"
@@ -114,12 +111,11 @@
 
                     <Button
                         android:id="@+id/BuildingButton"
-                        android:text="@string/choose_building"
-                        android:scrollHorizontally="true" 
-    					android:lines="1"
-    					android:ellipsize="end"
-    					android:layout_width="150dp"
-    					 />
+                        android:layout_width="150dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:scrollHorizontally="true"
+                        android:text="@string/choose_building" />
 
                     <ImageButton
                         android:id="@+id/ResetBuilding"
@@ -154,7 +150,7 @@
                     android:text="@string/search_address_street_option" >
                 </RadioButton>
             </RadioGroup>
-        </net.osmand.view.ExpandableLinearLayout>
+        </net.osmand.plus.views.ExpandableLinearLayout>
     </LinearLayout>
 
 </ScrollView>

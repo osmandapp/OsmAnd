@@ -1,4 +1,4 @@
-package net.osmand.access;
+package net.osmand.plus.access;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

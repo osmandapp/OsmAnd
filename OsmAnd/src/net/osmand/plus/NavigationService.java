@@ -5,7 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
+import net.osmand.plus.access.AccessibleToast;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
