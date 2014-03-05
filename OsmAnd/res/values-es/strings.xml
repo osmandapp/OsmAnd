@@ -1526,4 +1526,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="copying_osmand_files_descr">Copiando archivos al nuevo destino (%s)</string>
     <string name="copying_osmand_files">Copiando archivos OsmAnd</string>
     <string name="app_mode_truck">Camión</string>
+    <string name="complex_route_calculation_failed">Falló el cálculo de la ruta rápida (%s), regresando a cálculo lento.</string>
     </resources>
