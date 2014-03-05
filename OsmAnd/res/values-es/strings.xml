@@ -1525,4 +1525,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="copying_osmand_one_file_descr">Copiando archivo (%s) al nuevo destino...</string>
     <string name="copying_osmand_files_descr">Copiando archivos al nuevo destino (%s)</string>
     <string name="copying_osmand_files">Copiando archivos OsmAnd</string>
+    <string name="app_mode_truck">Camión</string>
     </resources>
