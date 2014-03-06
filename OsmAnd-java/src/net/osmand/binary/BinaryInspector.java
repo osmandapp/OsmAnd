@@ -61,7 +61,7 @@ public class BinaryInspector {
 //				"-vaddress", "-vcities", "-vstreets", "-vstreetgroups","-vbuildings", 
 				//"-zoom=16",
 				//"-bbox=4,55,7,50", 
-//				"/home/victor/projects/osmand/osm-gen/Test.obf"
+				//"/home/victor/projects/osmand/osm-gen/Map.obf"
 					});
 		} else {
 			in.inspector(args);
@@ -413,13 +413,16 @@ public class BinaryInspector {
 	}
 	
 	
-
-	public  void printFileInformation(File file) throws IOException {
+	public void printFileInformation(File file) throws IOException {
 		RandomAccessFile r = new RandomAccessFile(file.getAbsolutePath(), "r");
+		printFileInformation(r, file.getName());
+	}
+
+	public  void printFileInformation(RandomAccessFile r, String filename) throws IOException {
 		try {
 			BinaryMapIndexReader index = new BinaryMapIndexReader(r);
 			int i = 1;
-			println("Binary index " + file.getName() + " version = " + index.getVersion());
+			println("Binary index " + filename + " version = " + index.getVersion());
 			for(BinaryIndexPart p : index.getIndexes()){
 				String partname = "";
 				if(p instanceof MapIndex ){
@@ -474,7 +477,7 @@ public class BinaryInspector {
 			
 			
 		} catch (IOException e) {
-			System.err.println("File is not valid index : " + file.getAbsolutePath());
+			System.err.println("File doesn't have valid structure : " + filename + " " + e.getMessage() );
 			throw e;
 		}
 		
