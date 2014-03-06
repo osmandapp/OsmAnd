@@ -25,6 +25,8 @@
     <string name="tip_recent_changes_1_7_t">Changes in 1.7:
 	\n\t* Completely updated routing (fast and precise)
 	\n\t* Active simulation in tunnels
+	\n\t* Lots of small UX improvements &amp; usability fixes
+	\n\t* Speech rate accessibility setting
     </string>
     <string name="complex_route_calculation_failed">Fast route calculation failed (%s), fallback to slow calculation.</string>
     <string name="disable_complex_routing_descr">Disable 2-phase routing for car navigation</string>

@@ -784,6 +784,14 @@ public class BinaryRoutePlanner {
 			return segStart;
 		}
 		
+		public float getDistanceFromStart() {
+			return distanceFromStart;
+		}
+		
+		public void setDistanceFromStart(float distanceFromStart) {
+			this.distanceFromStart = distanceFromStart;
+		}
+		
 		public RouteDataObject getRoad() {
 			return road;
 		}
