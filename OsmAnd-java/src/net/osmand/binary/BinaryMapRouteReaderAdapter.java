@@ -67,7 +67,12 @@ public class BinaryMapRouteReaderAdapter {
 				v = "no";
 			}
 			this.v = v == null? null : v.intern();
-			analyze();
+			try {
+				analyze();
+			} catch(RuntimeException e) {
+				System.err.println("Error analyzing tag/value = " + t + "/" +v);
+				throw e;
+			}
 		}
 		
 		public String getTag() {
