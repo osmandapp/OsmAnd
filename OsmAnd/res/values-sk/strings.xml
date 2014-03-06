@@ -1636,6 +1636,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="tip_recent_changes_1_7_t">Zmeny v 1.7:
 	\n\t* Úplne prepracovaný výpočet trasy (rýchly a presný)
 	\n\t* Aktívna simulácia v tuneloch
+	\n\t* Mnoho malých vylepšení rozhrania a použiteľnosti
+	\n\t* Nastavenia rýchlosti reči
     </string>
     <string name="complex_route_calculation_failed">Rýchly prepočet trasy zlyhal (%s), použije sa pomalý výpočet.</string>
     <string name="disable_complex_routing_descr">Vypnúť dvojfázovú navigáciu pre režim auta</string>
