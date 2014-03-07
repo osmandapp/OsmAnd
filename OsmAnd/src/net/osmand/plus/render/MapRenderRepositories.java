@@ -376,6 +376,7 @@ public class MapRenderRepositories {
 		if (checkWhetherInterrupted()) {
 			return false;
 		}
+		boolean objectsFromMapSectionRead = tempResult.size() > 0;
 		if (renderRouteDataFile >= 0 && zoom >= zoomOnlyForBasemaps ) {
 			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, null);
 			for (BinaryMapIndexReader c : files.values()) {
@@ -391,7 +392,7 @@ public class MapRenderRepositories {
 		boolean addBasemapCoastlines = true;
 		boolean emptyData = zoom > zoomOnlyForBasemaps && tempResult.isEmpty() && coastLines.isEmpty();
 		boolean basemapMissing = zoom <= zoomOnlyForBasemaps && basemapCoastLines.isEmpty() && mi == null;
-		boolean detailedLandData = zoom >= zoomForBaseRouteRendering && tempResult.size() > 0  && renderRouteDataFile < 0;
+		boolean detailedLandData = zoom >= zoomForBaseRouteRendering && tempResult.size() > 0  && objectsFromMapSectionRead;
 		if (!coastLines.isEmpty()) {
 			long ms = System.currentTimeMillis();
 			boolean coastlinesWereAdded = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom,
@@ -649,6 +650,9 @@ public class MapRenderRepositories {
 			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_SHADOW_RENDERING)) {
 				currentRenderingContext.shadowRenderingMode = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 				currentRenderingContext.shadowRenderingColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_SHADOW_COLOR);
+			}
+			if(renderingReq.searchRenderingAttribute("polygonMinSizeToDisplay")) {
+				currentRenderingContext.polygonMinSizeToDisplay = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 			}
 			final QuadPointDouble lt = requestedBox.getLeftTopTile(requestedBox.getZoom());
 //			LatLon ltn = requestedBox.getLeftTopLatLon();
