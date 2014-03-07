@@ -1001,7 +1001,7 @@ public class OsmandSettings {
 				defaultLocation));
 	}
 	
-	public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
+	public static final int VERSION_DEFAULTLOCATION_CHANGED = Integer.MAX_VALUE;
 
 	public String getDefaultExternalStorageLocation() {
 		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
