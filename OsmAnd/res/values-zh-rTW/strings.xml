@@ -1629,6 +1629,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="tip_recent_changes_1_7_t">在 1.7 的變更：
 	\n\t* 完全更新的路線（快速而精確）
 	\n\t* 在隧道有效的模擬
+    	\n\t* 有很多小的 UX 改進和有效性的修復
+   	\n\t* 可親的語音速率設定
     </string>
     <string name="complex_route_calculation_failed">快速路徑演算失敗 (%s)，退回到慢速演算。</string>
     <string name="disable_complex_routing_descr">汽車導航時，停用兩階段路線</string>
