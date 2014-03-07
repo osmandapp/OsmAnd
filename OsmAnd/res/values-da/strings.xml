@@ -1661,9 +1661,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmodroid_unseek">Stop søgning efter objekt</string>
     <string name="speech_rate_descr">Angiv talehastighed for TTS</string>
     <string name="speech_rate">Talehastighed</string>
-    <string name="tip_recent_changes_1_7_t">Ændringer i 1.7 :
+    <string name="tip_recent_changes_1_7_t">Ændringer i 1.7:
 	\n\t* Helt opdateret ruteplanlægning (hurtig og præcis)
 	\n\t* Aktiv simulering i tunneller
+	\n\t* Masser af små UX forbedringer &amp; brugbarhedsrettelse 
+	\n\t* Talehastighed indstilling
     </string>
     <string name="complex_route_calculation_failed">Hurtig ruteberegning mislykkedes (%s), går tilbage til langsom beregning.</string>
     <string name="disable_complex_routing_descr">Deaktiver 2-faset ruteplanlægning til bilnavigation</string>
@@ -1672,4 +1674,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="routing_preferences_descr">Indstillinger for ruteplanlægning</string>
     <string name="app_mode_truck">Lastbil</string>
     <string name="calculate_osmand_route_gpx">Beregn Osmand offline rute</string>
+    <string name="application_dir_change_warning2">Osmand kan forsøge at flytte data til ny destination . Vil du det?</string>
+    <string name="copying_osmand_one_file_descr">Kopierer fil (% s) til ny destination...</string>
+    <string name="copying_osmand_files_descr">Kopierer Osmand filer til ny destination (%s)</string>
+    <string name="copying_osmand_files">Kopierer Osmand filer</string>
+    <string name="android_19_location_disabled">Da KitKat -versionen kan du \ 't downloade og opdatere kortet i forrige lagerplacering (% s) .  Ønsker du at skifte til tilladt én og kopiere alle filer der?
+         \n Bemærk: gamle filer vil forblive urørt.
+         \n Bemærk : det vil ikke være muligt at dele filer mellem Osmand og Osmand + . </string>
     </resources>
