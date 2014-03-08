@@ -1450,4 +1450,18 @@
     <string name="copying_osmand_files">Copie des fichiers OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Calcul de la route OsmAnd hors-connexion</string>
     <string name="app_mode_truck">Camion</string>
+    <string name="routing_attr_prefer_motorway_name">Favoriser les autoroutes</string>
+	<string name="routing_attr_prefer_motorway_description">Favoriser les autoroutes</string>
+	<string name="routing_attr_short_way_name">Chemin court</string>
+	<string name="routing_attr_short_way_description">Utiliser le chemin le plus court</string>
+	<string name="routing_attr_avoid_toll_name">Éviter les péages</string>
+	<string name="routing_attr_avoid_toll_description">Éviter les péages</string>
+	<string name="routing_attr_avoid_unpaved_name">Éviter les routes non revêtues</string>
+	<string name="routing_attr_avoid_unpaved_description">Éviter les routes non revêtues</string>
+	<string name="routing_attr_avoid_ferries_name">Éviter les ferries</string>
+	<string name="routing_attr_avoid_ferries_description">Éviter les ferries</string>
+	<string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
+	<string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
+	<string name="routing_attr_weight_name">Poids</string>
+	<string name="routing_attr_weight_description">Spécifier la limite de poids</string>
     </resources>
