@@ -1681,4 +1681,18 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="android_19_location_disabled">Efter KitKat versionen kan man ikke hente og opdatere kort i tidligere lagerplacering (%s). Ønsker du at skifte til en tilladt placering og kopiere alle filer dertil?
          \n Bemærk: gamle filer forbliver urørt.
          \n Bemærk: det vil ikke være muligt at dele filer mellem Osmand og Osmand+. </string>
-    </resources>
+    <string name="routing_attr_prefer_motorway_name">Foretræk motorveje</string>
+	<string name="routing_attr_prefer_motorway_description">Foretræk motorveje</string>
+	<string name="routing_attr_avoid_toll_name">Undgå betalingsveje</string>
+	<string name="routing_attr_avoid_toll_description">Undgå betalingsveje</string>
+	<string name="routing_attr_avoid_unpaved_name">Undgå grusveje</string>
+	<string name="routing_attr_avoid_unpaved_description">Undgå grusveje</string>
+	<string name="routing_attr_avoid_ferries_name">Undgå færger</string>
+	<string name="routing_attr_avoid_ferries_description">Undgå færger</string>
+	<string name="routing_attr_avoid_motorway_name">Undgå motorveje</string>
+	<string name="routing_attr_avoid_motorway_description">Undgå motorveje</string>
+	<string name="routing_attr_weight_name">Vægt</string>
+	<string name="routing_attr_weight_description">Angiv vægtbegrænsning</string>
+    <string name="routing_attr_short_way_name">Kort vej</string>
+	<string name="routing_attr_short_way_description">Brug kort vej</string>
+	</resources>
