@@ -1636,6 +1636,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="tip_recent_changes_1_7_t">Pakeitimai 1.7 versijoje:
 	\n\t* Visiškai atnaujintas maršruto skaičiavimas (greitas ir tikslus)
 	\n\t* Judėjimo simuliacija tuneliuose
+	\n\t* Daug smulkių vartotojo sąsajos ir funkcionalumo ištaisymų
+	\n\t* Kalbėjimo greičio nustatymas
     </string>
     <string name="complex_route_calculation_failed">Greitas maršruto apskaičiavimas nepavyko (%s), vykdomas lėtasis skaičiavimas.</string>
     <string name="disable_complex_routing_descr">Išjungti dviejų etapų maršruto skaičiavimą važiavimui automobiliu</string>
@@ -1644,4 +1646,25 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="routing_preferences_descr">Maršruto skaičiavimo nustatymai</string>
     <string name="app_mode_truck">Sunkvežimis</string>
     <string name="calculate_osmand_route_gpx">Apskaičiuoti maršrutą nenaudojant interneto</string>
+    <string name="routing_attr_prefer_motorway_name">Teikti pirmenybę greitkeliams</string>
+	<string name="routing_attr_prefer_motorway_description">Teikti pirmenybę greitkeliams</string>
+	<string name="routing_attr_short_way_name">Trumpiausias maršrutas</string>
+	<string name="routing_attr_short_way_description">Naudoti trumpiausią maršrutą</string>
+	<string name="routing_attr_avoid_toll_name">Vengti mokamų kelių</string>
+	<string name="routing_attr_avoid_toll_description">Vengti mokamų kelių</string>
+	<string name="routing_attr_avoid_unpaved_name">Vengti neasfaltuotų kelių</string>
+	<string name="routing_attr_avoid_unpaved_description">Vengti neasfaltuotų kelių</string>
+	<string name="routing_attr_avoid_ferries_name">Vengti keltų</string>
+	<string name="routing_attr_avoid_ferries_description">Vengti keltų</string>
+	<string name="routing_attr_avoid_motorway_name">Vengti greitkelių</string>
+	<string name="routing_attr_avoid_motorway_description">Vengti greitkelių</string>
+	<string name="routing_attr_weight_name">Svoris</string>
+	<string name="routing_attr_weight_description">Įvesti svorio apribojimą</string>
+    <string name="android_19_location_disabled">Pradedant KitKat versija jūs nebegalėsite parsisųsti ir atnaujinti žemėlapių ankstesnėse saugojimo vietose (%s). Ar norite pakeisti saugyklos vietą ir į ją nukopijuoto visus failus?
+        \n Pastaba : Seni failai išliks kur buvę. 
+        \n Pastaba : dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima. </string>
+    <string name="application_dir_change_warning2">OsmAnd gali pabandyti perkelti duomenis į naują saugyklą. Ar atlikti tai?</string>
+    <string name="copying_osmand_one_file_descr">Kopijuojami failai (%/s) į naują saugojimo vietą...</string>
+    <string name="copying_osmand_files_descr">OsmAnd failai kopijuojami į naują vietą (%/s)</string>
+    <string name="copying_osmand_files">Kopijuojami OsmAnd failai</string>
     </resources>
