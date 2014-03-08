@@ -1355,4 +1355,18 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="copying_osmand_files">Kopierar OsmAnd-filer</string>
     <string name="calculate_osmand_route_gpx">Beräkna OsmAnd offline-rutt</string>
     <string name="app_mode_truck">Lastbil</string>
-    </resources>
+    <string name="routing_attr_prefer_motorway_name">Föredra motorvägar</string>
+	<string name="routing_attr_prefer_motorway_description">Föredra motorvägar</string>
+	<string name="routing_attr_avoid_toll_name">Undvik betalvägar</string>
+	<string name="routing_attr_avoid_toll_description">Undvik betalvägar</string>
+	<string name="routing_attr_avoid_unpaved_name">Undvik oasfalterade vägar</string>
+	<string name="routing_attr_avoid_unpaved_description">Undvik oasfalterade vägar</string>
+	<string name="routing_attr_avoid_ferries_name">Undvik färjor</string>
+	<string name="routing_attr_avoid_ferries_description">Undvik färjor</string>
+	<string name="routing_attr_avoid_motorway_name">Undvik motorvägar</string>
+	<string name="routing_attr_avoid_motorway_description">Undvik motorvägar</string>
+	<string name="routing_attr_weight_name">Vikt</string>
+	<string name="routing_attr_weight_description">Ange viktbegränsning</string>
+    <string name="routing_attr_short_way_name">Kort väg</string>
+	<string name="routing_attr_short_way_description">Använd kort väg</string>
+	</resources>
