@@ -170,6 +170,7 @@ public class RoutingConfiguration {
 				}
 			}
 		}
+		is.close();
 		return config;
 	}
 

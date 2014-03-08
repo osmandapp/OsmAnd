@@ -27,7 +27,8 @@ public class MapTileDownloader {
 	public static int TILE_DOWNLOAD_THREADS = 4;
 	public static int TILE_DOWNLOAD_SECONDS_TO_WORK = 25;
 	public static final long TIMEOUT_AFTER_EXCEEDING_LIMIT_ERRORS = 15000;
-	public static final int TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT = 25;
+	public static final int TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT = 50;
+	private static final int CONNECTION_TIMEOUT = 10000;
 	
 	
 	private static MapTileDownloader downloader = null;
@@ -187,7 +188,8 @@ public class MapTileDownloader {
 					URL url = new URL(request.url);
 					URLConnection connection = url.openConnection();
 					connection.setRequestProperty("User-Agent", USER_AGENT); //$NON-NLS-1$
-					connection.setConnectTimeout(35000);
+					connection.setConnectTimeout(CONNECTION_TIMEOUT);
+					connection.setReadTimeout(CONNECTION_TIMEOUT);
 					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 					FileOutputStream stream = null;
 					try {

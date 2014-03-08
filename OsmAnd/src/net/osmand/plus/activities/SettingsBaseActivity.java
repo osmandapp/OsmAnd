@@ -282,30 +282,6 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 				}
 			}
 			getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-			// getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-			// ActionBar.TabListener tl = new ActionBar.TabListener() {
-			//
-			// @Override
-			// public void onTabSelected(Tab tab, android.support.v4.app.FragmentTransaction ft) {
-			// osmandSettings.APPLICATION_MODE.set(modes.get(tab.getPosition()));
-			// createUI();
-			// updateAllSettings();
-			//
-			// }
-			//
-			// @Override
-			// public void onTabUnselected(Tab tab, android.support.v4.app.FragmentTransaction ft) {
-			// }
-			//
-			// @Override
-			// public void onTabReselected(Tab tab, android.support.v4.app.FragmentTransaction ft) {
-			// }
-			//
-			// };
-			// for (ApplicationMode a : modes) {
-			// Tab t = getSupportActionBar().newTab().setText(a.toHumanString(getMyApplication())).setTabListener(tl);
-			// getSupportActionBar().addTab(t);
-			// }
 			List<String> s = new ArrayList<String>();
 			for (ApplicationMode a : modes) {
 				s.add(a.toHumanString(getMyApplication()));
@@ -348,7 +324,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 	protected void profileDialog() {
 		Builder b = new AlertDialog.Builder(this);
 		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-		View v = NavigateAction.prepareAppModeView(this, selected, false, null, false,
+		View v = NavigateAction.prepareAppModeView(this, selected, false, null, true,
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
