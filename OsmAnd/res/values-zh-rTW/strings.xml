@@ -1646,4 +1646,17 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="android_19_location_disabled">由於 KitKat 版本，您無法下載和更新地圖於之前的存儲位置 (%s)。您是否想改變以允許複製所有檔案到那裡？
         \n注意：舊的檔案將保持不變。
         \n注意：它將不可能在 OsmAnd 和 OsmAnd + 兩者之間共用檔案。 </string>
-    </resources>
+    <string name="routing_attr_prefer_motorway_name">較偏好高速公路</string>
+	<string name="routing_attr_prefer_motorway_description">較偏好高速公路</string>
+	<string name="routing_attr_short_way_name">較短的路</string>
+	<string name="routing_attr_short_way_description">使用較短的路</string>
+	<string name="routing_attr_avoid_toll_name">避開收費道路</string>
+	<string name="routing_attr_avoid_toll_description">避開收費道路</string>
+	<string name="routing_attr_avoid_unpaved_name">避開未鋪路面</string>
+	<string name="routing_attr_avoid_unpaved_description">避開未鋪路面</string>
+	<string name="routing_attr_avoid_ferries_name">避開渡船</string>
+	<string name="routing_attr_avoid_ferries_description">避開渡船</string>
+	<string name="routing_attr_avoid_motorway_name">避開高速公路</string>
+	<string name="routing_attr_avoid_motorway_description">避開高速公路</string>
+	<string name="routing_attr_weight_name">重量</string>
+	</resources>
