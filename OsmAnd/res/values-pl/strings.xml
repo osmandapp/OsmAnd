@@ -1617,12 +1617,12 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_short_way_description">Używaj krótkiej drogi</string>
 	<string name="routing_attr_avoid_toll_name">Unikaj płatnych dróg</string>
 	<string name="routing_attr_avoid_toll_description">Unikaj płatnych dróg</string>
-	<string name="routing_attr_avoid_unpaved_name">Unikaj nieutwardzonych dróg</string>
+	<string name="routing_attr_avoid_unpaved_name">Unikaj nieutwardzone drogi</string>
 	<string name="routing_attr_avoid_unpaved_description">Unikaj nieutwardzonych dróg</string>
 	<string name="routing_attr_avoid_ferries_name">Unikaj przepraw promowych</string>
 	<string name="routing_attr_avoid_ferries_description">Unikaj przepraw promowych</string>
 	<string name="routing_attr_avoid_motorway_name">Unikaj autostrad</string>
 	<string name="routing_attr_avoid_motorway_description">Unikaj autostrad</string>
 	<string name="routing_attr_weight_name">Waga</string>
-	<string name="routing_attr_weight_description">Wprowadź limit wagowy</string>
+	<string name="routing_attr_weight_description">Określ ograniczenie masy</string>
     </resources>
