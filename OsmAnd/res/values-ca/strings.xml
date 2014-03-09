@@ -432,7 +432,7 @@
 		- Limitació en el nombre de mapes baixats
 		- No té accés als PDIs fora de línia de Viquipèdia
 		
-		L\'OsmAnd està en desenvolupament actiu i el nostre projecte i el seu futur progrés depèn de les donacions per ajudar al desenvolupament i proves de noves funcions. Si us plau, considereu la possibilitat de comprar l\'OsmAnd+ o bé fer una donació per impulsar una nova característica, o fer una donació de manera general a la pàgina osmand.net.
+		L\'OsmAnd està en desenvolupament actiu i el nostre projecte i el seu futur progrés depenen de les donacions per ajudar al desenvolupament i proves de noves funcions. Si us plau, considereu la possibilitat de comprar l\'OsmAnd+ o bé fer una donació per impulsar una nova característica, o fer una donació de manera general a la pàgina osmand.net.
 	</string>
 <string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)
@@ -1367,9 +1367,11 @@
     <string name="routing_preferences_descr">Preferències de càlcul de la ruta</string>
     <string name="speech_rate_descr">Especifiqueu la velocitat de síntesi de veu</string>
     <string name="speech_rate">Velocitat de lectura</string>
-    <string name="tip_recent_changes_1_7_t">Canvis a la versió 1.7:
-	\n\t* Càlcul perfeccionat de la ruta, més ràpid i precís
-	\n\t* Simulació activa als túnels
+    <string name="tip_recent_changes_1_7_t">Canvis a la versió 1.7:↵
+→\n\t* Càlcul perfeccionat de la ruta, més ràpid i precís↵
+→\n\t* Simulació activa als túnels↵
+→\n\t* Nombroses millores en la interacció amb l'usuari↵
+→\n\t* Accés a l'ajust de velocitat de la síntesi de veu↵
     </string>
     <string name="complex_route_calculation_failed">Fracàs del càlcul ràpid de ruta (%s), retorn al mètode lent.</string>
     <string name="disable_complex_routing_descr">Desactiva el càlcul de ruta en 2 fases per cotxe</string>
@@ -1395,4 +1397,29 @@
 		\n\t* \'Carreteres molt contrastades\' mostra les carreteres en colors molt vius per quan hi ha molta llum ambiental.
 		\n\t* \'Hivern i esquí\' crea una visió d'hivern nevat, i mostra les pistes i remuntadors globals (precisa baixar-se el mapa \'World ski\')
 	</string>
-    </resources>
+    <string name="routing_attr_prefer_motorway_name">Preferència per autopistes</string>
+	<string name="routing_attr_prefer_motorway_description">Preferència per autopista</string>
+	<string name="routing_attr_short_way_name">Camí curt</string>
+	<string name="routing_attr_short_way_description">Usa el camí més curt</string>
+	<string name="routing_attr_avoid_toll_name">Evita peatges</string>
+	<string name="routing_attr_avoid_toll_description">Evitar els peatges</string>
+	<string name="routing_attr_avoid_unpaved_name">Evita camins sense pavimentar</string>
+	<string name="routing_attr_avoid_unpaved_description">Evita camins sense pavimentar</string>
+	<string name="routing_attr_avoid_ferries_name">Evita transbordadors</string>
+	<string name="routing_attr_avoid_ferries_description">Evita transbordadors</string>
+	<string name="routing_attr_avoid_motorway_name">Evita autopistes</string>
+	<string name="routing_attr_avoid_motorway_description">Evita autopistes</string>
+	<string name="routing_attr_weight_name">Pes</string>
+	<string name="routing_attr_weight_description">Especifica el límit de pes</string>
+    <string name="background_service_int_descr">Trieu cada quan voleu que s\'actualitzi la posició en el mode en segon pla</string>
+	<string name="av_photo_play_sound_descr">Trieu si voleu sentir un so en fer una foto</string>
+<string name="av_camera_focus_continuous">La camera està tractant d\'enfocar</string>
+	<string name="av_camera_focus_macro">Mode macro (per a enfocar de prop)</string>
+	<string name="av_camera_focus_infinity">Focus regulat a l\'infinit</string>
+	<string name="av_camera_focus_edof">Profunditat de camp estesa</string>
+	<string name="av_camera_focus_descr">Trieu el tipus d\'enfocament de la càmera</string>
+	<string name="av_camera_focus">Tipus d\'enfocament</string>
+	<string name="poi_error_unexpected_template">Ha ocorregut un error inesperat fent l\'acció {0}.</string>
+	<string name="osb_close_dialog_error">Excepció: No s\'ha tancat l\'error</string>
+	<string name="map_tile_source_descr">Trieu l\'origen de les tessel·les, en línia o de la memòria cau</string>
+	</resources>
