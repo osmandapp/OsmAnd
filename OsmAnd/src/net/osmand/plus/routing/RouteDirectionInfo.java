@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.router.TurnType;
 
 public class RouteDirectionInfo {
@@ -32,7 +34,11 @@ public class RouteDirectionInfo {
 		this.turnType = turnType;
 	}
 	
-	public String getDescriptionRoute() {
+	public String getDescriptionRoute(ClientContext ctx) {
+		return descriptionRoute + " " + OsmAndFormatter.getFormattedDistance(distance, ctx);
+	}
+	
+	public String getDescriptionRoutePart() {
 		return descriptionRoute;
 	}
 

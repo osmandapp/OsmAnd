@@ -3,20 +3,18 @@ package net.osmand.plus.views;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ClientContext;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageButton;
@@ -41,7 +39,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 		this.routingHelper = routingHelper;
 		this.contextMenu = contextMenu;
 		routingHelper.addListener(this);
-		attachListeners();
+		attachListeners(activity.getMyApplication());
 		updateVisibility();
 
 		activity.accessibleContent.add(prev);
@@ -76,7 +74,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 		this.view = view;
 	}
 	
-	private void attachListeners() {
+	private void attachListeners(final ClientContext ctx) {
 		prev.setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -86,9 +84,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 					if(routingHelper.getRouteDirections().size() > directionInfo){
 						RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 						net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
-						if(info.getDescriptionRoute() != null) {
-							contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute());
-						}
+						contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute(ctx));
 						view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getZoom(), true);
 					}
 				}
@@ -104,9 +100,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 					directionInfo++;
 					RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 					net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
-					if(info.getDescriptionRoute() != null){
-						contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute());
-					}
+					contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute(ctx));
 					view.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), view.getZoom(), true);
 				}
 				view.refreshMap();

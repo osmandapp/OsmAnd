@@ -89,7 +89,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			RouteInfoLayer.directionInfo = position - 1;
 			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 			settings.setMapLocationToShow(loc.getLatitude(),loc.getLongitude(),
-					Math.max(13, settings.getLastKnownMapZoom()), null, item.getDescriptionRoute() + " " + getTimeDescription(item), null);
+					Math.max(13, settings.getLastKnownMapZoom()), null, item.getDescriptionRoute(((OsmandApplication) getApplication())) + " " + getTimeDescription(item), null);
 			MapActivity.launchMapActivityMoveToTop(this);
 		}
 	}
@@ -128,7 +128,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			
 			
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, getMyApplication()));
-			label.setText(model.getDescriptionRoute());
+			label.setText(model.getDescriptionRoute(((OsmandApplication) getApplication())));
 			String timeText = getTimeDescription(model);
 			timeLabel.setText(timeText);
 			return row;

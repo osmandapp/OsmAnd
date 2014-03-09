@@ -302,7 +302,7 @@ public class RouteProvider {
 				if(info.routePointOffset >= startI[0] && info.routePointOffset < endI[0]){
 					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
 					ch.routePointOffset = info.routePointOffset - startI[0];
-					ch.setDescriptionRoute(info.getDescriptionRoute());
+					ch.setDescriptionRoute(info.getDescriptionRoutePart());
 					
 					// recalculate
 					ch.distance = 0;
@@ -898,7 +898,7 @@ public class RouteProvider {
 				WptPt pt = new WptPt();
 				pt.lat = loc.getLatitude();
 				pt.lon = loc.getLongitude();
-				pt.desc = dirInfo.getDescriptionRoute();
+				pt.desc = dirInfo.getDescriptionRoute(ctx);
 				Map<String, String> extensions = pt.getExtensionsToWrite();
 				extensions.put("time", dirInfo.getExpectedTime() + "");
 				String turnType = dirInfo.getTurnType().getValue();

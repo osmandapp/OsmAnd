@@ -16,11 +16,11 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class RouteCalculationResult {
@@ -36,6 +36,8 @@ public class RouteCalculationResult {
 	private final int[] waypointIndexes;
 	private final float routingTime;
 	
+	protected int cacheCurrentTextDirectionInfo = -1;
+	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
@@ -278,7 +280,6 @@ public class RouteCalculationResult {
 				if(directions.size() > 0 && prevDirectionTime > 0 && prevDirectionDistance > 0) {
 					RouteDirectionInfo prev = directions.get(directions.size() - 1);
 					prev.setAverageSpeed(prevDirectionDistance / prevDirectionTime);
-					prev.setDescriptionRoute(prev.getDescriptionRoute() + " " + OsmAndFormatter.getFormattedDistance(prevDirectionDistance, ctx));
 					prevDirectionDistance = 0;
 					prevDirectionTime = 0;
 				}
@@ -290,7 +291,6 @@ public class RouteCalculationResult {
 		if(directions.size() > 0 && prevDirectionTime > 0 && prevDirectionDistance > 0) {
 			RouteDirectionInfo prev = directions.get(directions.size() - 1);
 			prev.setAverageSpeed(prevDirectionDistance / prevDirectionTime);
-			prev.setDescriptionRoute(prev.getDescriptionRoute() + " " + OsmAndFormatter.getFormattedDistance(prevDirectionDistance, ctx));
 		}
 		return segmentsToPopulate;
 	}
@@ -392,8 +392,6 @@ public class RouteCalculationResult {
 				
 				// calculate for previousRoute 
 				previousInfo.distance = listDistance[previousLocation]- listDistance[i];
-				previousInfo.setDescriptionRoute(previousInfo.getDescriptionRoute()
-						+ " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx)); //$NON-NLS-1$
 				type.setTurnAngle(360 - delta);
 				previousInfo = new RouteDirectionInfo(speed, type);
 				previousInfo.setDescriptionRoute(description);
@@ -407,9 +405,6 @@ public class RouteCalculationResult {
 		} 
 			
 		previousInfo.distance = listDistance[previousLocation];
-		previousInfo.setDescriptionRoute(previousInfo.getDescriptionRoute()
-				+ " " + OsmAndFormatter.getFormattedDistance(previousInfo.distance, ctx)); //$NON-NLS-1$
-		
 		if (originalDirections.isEmpty()) {
 			originalDirections.addAll(computeDirections);
 		} else {
@@ -850,13 +845,32 @@ public class RouteCalculationResult {
 	}
 	
 	public List<RouteDirectionInfo> getRouteDirections() {
-		if(currentDirectionInfo < directions.size()){
-			if(currentDirectionInfo == 0){
-				return directions;
+		if(currentDirectionInfo < directions.size() - 1){
+			if(cacheCurrentTextDirectionInfo != currentDirectionInfo) {
+				cacheCurrentTextDirectionInfo = currentDirectionInfo;
+				List<RouteDirectionInfo> list = currentDirectionInfo == 0 ? directions : 
+					directions.subList(currentDirectionInfo + 1, directions.size());
+				cacheAgreggatedDirections = new ArrayList<RouteDirectionInfo>();
+				RouteDirectionInfo p = null;
+				for(RouteDirectionInfo i : list) {
+					if(p == null || !i.getTurnType().isSkipToSpeak() || 
+							(!Algorithms.objectEquals(p.getRef(), i.getRef()) && 
+									!Algorithms.objectEquals(p.getStreetName(), i.getStreetName()))) {
+						p = new RouteDirectionInfo(i.getAverageSpeed(), i.getTurnType());
+						p.routePointOffset = i.routePointOffset;
+						p.setDestinationName(i.getDestinationName());
+						p.setRef(i.getRef());
+						p.setStreetName(i.getStreetName());
+						p.setDescriptionRoute(i.getDescriptionRoutePart());
+						cacheAgreggatedDirections.add(p);
+					}
+					float time = i.getExpectedTime() + p.getExpectedTime();
+					p.distance += i.distance;
+					p.setAverageSpeed(p.distance / time);
+					p.afterLeftTime = i.afterLeftTime;
+				}
 			}
-			if(currentDirectionInfo < directions.size() - 1){
-				return directions.subList(currentDirectionInfo + 1, directions.size());
-			}
+			return cacheAgreggatedDirections;
 		}
 		return Collections.emptyList();
 	}
