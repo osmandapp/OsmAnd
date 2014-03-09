@@ -1462,15 +1462,29 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="tip_app_mode_t_v2">OsmAnd atbalsta vairākus pielāgojamus profilus dažādiem mērķiem.
 		\n\nJūs varat mainīt profilus gan ar speciālas ikonas palīdzību, kas atrodas uz kartes kreisā augšējā stūrī (mašīna, velosipēds vai kājāmgājējs), gan veidojot jaunu maršrutu (\'transporta režīms\').
 	</string>
-	<string name="android_19_location_disabled">Kopš KitKat jauninājuma vecajā glabātuvē (%s) nav iespējama mapju lejupielāde. Vai vēlaties mainīt glabātuves vietu un pārkopēt visus failus?
+	<string name="android_19_location_disabled">Pēc KitKat jauninājuma vecā karšu krātuve (%s) vairs nav pieejama. Vai vēlaties to nomainīt uz pieejamu vietu un pārkopēt visus failus?
 …………\n Piezīme: vecie faili netiks aiztikti.
 …………\n Piezīme: nebūs iespējams koplietot failus starp OsmAnd un OsmAnd+. </string>
-    <string name="application_dir_change_warning2">OsmAnd iespējams, varētu pārvietot failus uz jauno vietu. Vai to vēlaties?</string>
-    <string name="copying_osmand_one_file_descr">Kopē (%s) failu uz jauno vietu.</string>
+    <string name="application_dir_change_warning2">OsmAnd var mēģināt pārsūtīt failus uz jauno vietu. Vai vēlaties to darīt?</string>
+    <string name="copying_osmand_one_file_descr">Kopē (%s) failu uz jauno vietu...</string>
     <string name="copying_osmand_files_descr">Kopē OsmAnd failus uz jauno vietu (%s)</string>
     <string name="copying_osmand_files">Kopē OsmAnd failus</string>
     <string name="calculate_osmand_route_gpx">Aprēķināt OsmAnd bezsaistes maršrutu</string>
     <string name="app_mode_truck">Kravas mašīna</string>
     <string name="guidance_preferences_descr">Navigācijas uzstādījumi</string>
     <string name="routing_preferences_descr">Maršruta uzstādījumi</string>
+    <string name="routing_attr_prefer_motorway_name">Izvēlēties automaģistrāles</string>
+	<string name="routing_attr_prefer_motorway_description">Maršruta plānošanā vispirms tiks dota priekšroka automaģistrālēm jeb ātrgaitas šosejām</string>
+	<string name="routing_attr_short_way_name">Īsākais maršruts</string>
+	<string name="routing_attr_short_way_description">Īsākais maršruts līdz galamēŗkim</string>
+	<string name="routing_attr_avoid_toll_name">Izvairīties no maksas ceļiem</string>
+	<string name="routing_attr_avoid_toll_description">Jāmaksā nodeva par ceļa lietošanu</string>
+	<string name="routing_attr_avoid_unpaved_name">Izvairīties no neasfaltētiem ceļiem</string>
+	<string name="routing_attr_avoid_unpaved_description">Izvairīties no neapstrādātiem ceļiem bez seguma</string>
+	<string name="routing_attr_avoid_ferries_name">Izvairīties no prāmjiem</string>
+	<string name="routing_attr_avoid_ferries_description">Ivairīties no prāmjiem, pārceltuvēm pār upēm</string>
+	<string name="routing_attr_avoid_motorway_name">Izvairīties no automaģistrālēm</string>
+	<string name="routing_attr_avoid_motorway_description">Izvairīties no automaģistrālēm jeb ātrgaitas šosejām</string>
+	<string name="routing_attr_weight_name">Svars</string>
+	<string name="routing_attr_weight_description">Norādīt svara ierobežojumu</string>
     </resources>
