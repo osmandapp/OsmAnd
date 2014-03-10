@@ -18,7 +18,6 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.util.MapUtils;
 
 public class ShareLocation extends OsmAndAction {

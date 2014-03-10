@@ -8,7 +8,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.TransportRouteHelper;
+import net.osmand.plus.helpers.TransportRouteHelper;
 import net.osmand.plus.resources.TransportIndexRepository.RouteInfoLocation;
 import android.graphics.Canvas;
 import android.graphics.Paint;

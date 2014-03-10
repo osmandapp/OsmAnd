@@ -13,10 +13,10 @@ import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.plus.dialogs.ProgressDialogImplementation;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 
 import org.xmlpull.v1.XmlSerializer;

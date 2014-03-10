@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.fragments.FavouritesListFragment;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;

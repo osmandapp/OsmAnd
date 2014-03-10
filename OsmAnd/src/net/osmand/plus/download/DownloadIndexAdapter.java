@@ -8,7 +8,7 @@ import java.util.Map;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.adapters.OsmandBaseExpandableListAdapter;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;

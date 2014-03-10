@@ -11,7 +11,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.SearchHistoryHelper;
 import net.osmand.plus.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.activities.actions.MapActivityActions;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.util.MapUtils;
 import android.content.Intent;
