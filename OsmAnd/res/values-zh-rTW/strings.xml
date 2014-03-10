@@ -1654,9 +1654,10 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="routing_attr_avoid_toll_description">避開收費道路</string>
 	<string name="routing_attr_avoid_unpaved_name">避開未鋪路面</string>
 	<string name="routing_attr_avoid_unpaved_description">避開未鋪路面</string>
-	<string name="routing_attr_avoid_ferries_name">避開渡船</string>
-	<string name="routing_attr_avoid_ferries_description">避開渡船</string>
+	<string name="routing_attr_avoid_ferries_name">避開渡輪</string>
+	<string name="routing_attr_avoid_ferries_description">避開渡輪</string>
 	<string name="routing_attr_avoid_motorway_name">避開高速公路</string>
 	<string name="routing_attr_avoid_motorway_description">避開高速公路</string>
 	<string name="routing_attr_weight_name">重量</string>
-	</resources>
+	<string name="routing_attr_weight_description">指定重量限制</string>
+    </resources>
