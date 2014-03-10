@@ -1644,4 +1644,18 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="copying_osmand_files_descr">در حال کپی فایل های Osmand به مقصد جدید (%s)</string>
     <string name="copying_osmand_files">فایل های Osmand کپی شد</string>
     <string name="calculate_osmand_route_gpx">محاسبه مسیر Osmand به صورت آفلاین</string>
+    <string name="routing_attr_prefer_motorway_name">انتخاب مسیر موتور سیکلت</string>
+	<string name="routing_attr_prefer_motorway_description">انتخاب مسیر موتور سیکلت</string>
+	<string name="routing_attr_short_way_name">مسیر کوتاه</string>
+	<string name="routing_attr_short_way_description">برو به کوتاهترین مسیر</string>
+	<string name="routing_attr_avoid_toll_name">اجتناب کردن از راه های عوارضی</string>
+	<string name="routing_attr_avoid_toll_description">اجتناب کردن از راه های عوارضی</string>
+	<string name="routing_attr_avoid_unpaved_name">اجتناب کردن از راه های بدون آسفالت</string>
+	<string name="routing_attr_avoid_unpaved_description">اجتناب کردن از راه های بدون آسفالت</string>
+	<string name="routing_attr_avoid_ferries_name">اجتناب کردن از گذرگاه ها</string>
+	<string name="routing_attr_avoid_ferries_description">اجتناب کردن از گذرگاه ها</string>
+	<string name="routing_attr_avoid_motorway_name">اجتناب کردن از مسیر های موتور سیکلت</string>
+	<string name="routing_attr_avoid_motorway_description">اجتناب کردن از مسیر های موتور سیکلت</string>
+	<string name="routing_attr_weight_name">سنگین</string>
+	<string name="routing_attr_weight_description">تعیین کردن محدود سازی سنگین</string>
     </resources>
