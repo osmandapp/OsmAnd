@@ -1657,4 +1657,18 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="android_19_location_disabled">Od verzie KitKat nie je možné sťahovať a aktualizovať mapy v pôvodnom úložisku (%s). Chcete ho zmeniť na vhodné nové a skopírovať tam všetky súbory?
 	\n Poznámka : pôvodné súbory zostanú nedotknuté. 
 	\n Poznámka : nebude možné zdieľať súbory medzi OsmAnd a OsmAnd+. </string>
+    <string name="routing_attr_prefer_motorway_name">Uprednostniť diaľnice</string>
+	<string name="routing_attr_prefer_motorway_description">Uprednostniť diaľnice</string>
+	<string name="routing_attr_short_way_name">Krátka cesta</string>
+	<string name="routing_attr_short_way_description">Použiť krátku cestu</string>
+	<string name="routing_attr_avoid_toll_name">Vyhnúť sa spoplatneným cestám</string>
+	<string name="routing_attr_avoid_toll_description">Vyhnúť sa spoplatneným cestám</string>
+	<string name="routing_attr_avoid_unpaved_name">Vyhnúť sa nespevneným cestám</string>
+	<string name="routing_attr_avoid_unpaved_description">Vyhnúť sa nespevneným cestám</string>
+	<string name="routing_attr_avoid_ferries_name">Vyhnúť sa trajektom</string>
+	<string name="routing_attr_avoid_ferries_description">Vyhnúť sa trajektom</string>
+	<string name="routing_attr_avoid_motorway_name">Vyhnúť sa diaľniciam</string>
+	<string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam</string>
+	<string name="routing_attr_weight_name">Hmotnosť</string>
+	<string name="routing_attr_weight_description">Zadajte obmedzenie hmotnosti</string>
     </resources>
