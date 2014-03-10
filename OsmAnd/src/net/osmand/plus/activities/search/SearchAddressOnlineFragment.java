@@ -18,7 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.activities.actions.MapActivityActions;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;

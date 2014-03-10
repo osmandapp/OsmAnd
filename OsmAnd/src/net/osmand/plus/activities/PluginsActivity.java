@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.OsmandPlugin;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

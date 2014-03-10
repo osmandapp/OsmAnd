@@ -4,9 +4,9 @@ import java.io.File;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexesActivity;
 import net.osmand.plus.activities.LocalIndexesActivity.UploadVisibility;
+import net.osmand.plus.model.LocalIndexInfo;
 import android.os.AsyncTask;
 import android.widget.Toast;
 

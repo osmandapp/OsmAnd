@@ -4,7 +4,7 @@
 	<meta-data android:name="com.google.android.backup.api_key"
     android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
 	
-	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="16"/>
+	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="19"/>
 	
 	<uses-feature android:name="android.hardware.camera" android:required="false" />
 	<uses-feature android:name="android.hardware.microphone" android:required="false"/>
@@ -68,14 +68,14 @@
 				<category android:name="android.intent.category.CAR_DOCK" />
 				<category android:name="android.intent.category.DESK_DOCK" />
 			</intent-filter>
-			<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
+			<receiver android:name="net.osmand.plus.plugins.audionotes.MediaRemoteControlReceiver">
 		    <intent-filter>
                 <action android:name="android.intent.action.CAMERA_BUTTON" />
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
 		 </receiver>
 		</activity>
-		<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
+		<receiver android:name="net.osmand.plus.plugins.audionotes.MediaRemoteControlReceiver">
 		    <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
@@ -83,11 +83,11 @@
 		<activity android:name="net.osmand.plus.activities.SettingsActivity" android:label="@string/settings_activity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.activities.SettingsGeneralActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.rastermaps.SettingsRasterMapsActivity" android:configChanges="keyboardHidden|orientation"></activity>
+		<activity android:name="net.osmand.plus.activities.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation"></activity>
+		<activity android:name="net.osmand.plus.activities.SettingsRasterMapsActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.audionotes.SettingsAudioVideoActivity" android:configChanges="keyboardHidden|orientation"></activity>
+		<activity android:name="net.osmand.plus.plugins.audionotes.SettingsAudioVideoActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.access.SettingsAccessibilityActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		
 		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" ></activity>
@@ -134,7 +134,7 @@
 		<service android:process="net.osmand.plus" android:label="@string/process_navigation_service" android:name="net.osmand.plus.NavigationService">
 			<intent-filter><action android:name="net.osmand.plus.NavigationService"></action></intent-filter>
 		</service>
-		<receiver android:name="net.osmand.plus.OnNavigationServiceAlarmReceiver"/>
+		<receiver android:name="net.osmand.plus.receivers.OnNavigationServiceAlarmReceiver"/>
     	<activity android:name="net.osmand.plus.activities.OsmandBidForFixActivity"></activity>
 		
 

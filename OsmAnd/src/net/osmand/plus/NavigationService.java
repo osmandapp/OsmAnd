@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
+import net.osmand.plus.receivers.OnNavigationServiceAlarmReceiver;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -86,7 +87,7 @@ public class NavigationService extends Service implements LocationListener {
 		return binder;
 	}
 	
-	protected synchronized static PowerManager.WakeLock getLock(Context context) {
+	public synchronized static PowerManager.WakeLock getLock(Context context) {
 		if (lockStatic == null) {
 			PowerManager mgr = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 			lockStatic = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "OsmandServiceLock");
@@ -94,7 +95,7 @@ public class NavigationService extends Service implements LocationListener {
 		return lockStatic;
 	}
 
-	protected Handler getHandler() {
+	public Handler getHandler() {
 		return handler;
 	}
 	
