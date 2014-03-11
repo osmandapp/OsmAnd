@@ -1536,7 +1536,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="guidance_preferences_descr">Preferencias de navegación</string>
     <string name="routing_preferences_descr">Preferencias para el cálculo de ruta</string>
     <string name="speech_rate_descr">Especifica la velocidad en el habla sintetizada (TTS)</string>
-    <string name="speech_rate">Velocitat de parla</string>
+    <string name="speech_rate">Velocidad del habla sintetizada (TTS)</string>
     <string name="application_dir_change_warning2">OsmAnd podría intentar mover los datos al nuevo destino. ¿Lo quieres hacer?</string>
     <string name="copying_osmand_one_file_descr">Copiando archivo (%s) al nuevo destino...</string>
     <string name="copying_osmand_files_descr">Copiando archivos al nuevo destino (%s)</string>
