@@ -45,6 +45,10 @@ public class ApplicationMode {
 			carLocation().parent(CAR).
 			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_light, R.drawable.ic_action_motorcycle_dark).reg();
 	
+	public static final ApplicationMode TRUCK = create(R.string.app_mode_truck, "truck").speed(15.3f, 40).
+			carLocation().parent(CAR).
+			icon(R.drawable.ic_truck, R.drawable.ic_action_truck_light, R.drawable.ic_action_truck_dark).reg();
+	
 	static {
 		ApplicationMode[] exceptPedestrian = new ApplicationMode[] { DEFAULT, CAR, BICYCLE, BOAT, AIRCRAFT };
 		ApplicationMode[] exceptAirBoat = new ApplicationMode[] { DEFAULT, CAR, BICYCLE};

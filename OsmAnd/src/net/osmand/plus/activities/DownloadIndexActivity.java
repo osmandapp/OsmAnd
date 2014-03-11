@@ -9,8 +9,10 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
-import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
@@ -18,6 +20,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.SettingsGeneralActivity.MoveFilesToDifferentDirectory;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.download.DownloadActivityType;
@@ -36,9 +39,11 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask.Status;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -87,6 +92,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private TextView progressMessage;
 	private TextView progressPercent;
 	private ImageView cancel;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +167,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		DownloadIndexAdapter adapter = new DownloadIndexAdapter(this, list);
 		setListAdapter(adapter);
 		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
-			boolean showedDialog = SuggestExternalDirectoryDialog.showDialog(this, null, null);
+			boolean showedDialog = false;
+			if(Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
+				SuggestExternalDirectoryDialog.showDialog(this, null, null);
+			}
 			if(!showedDialog) {
 				showDialogOfFreeDownloadsIfNeeded();
 			}
@@ -181,7 +190,39 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				return true;
 			}
 		});
-        
+        if(Build.VERSION.SDK_INT >= OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
+        	if(!settings.getExternalStorageDirectory().getAbsolutePath().equals(settings.getDefaultExternalStorageLocation())) {
+        		AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
+        		ab.setMessage(getString(R.string.android_19_location_disabled, settings.getExternalStorageDirectory()));
+        		ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						copyFilesForAndroid19();		
+					}
+				});
+        		ab.setNegativeButton(R.string.default_buttons_cancel, null);
+        		ab.show();
+        	}
+        }
+	}
+	
+	private void copyFilesForAndroid19() {
+		final String newLoc = settings.getDefaultExternalStorageLocation();
+		MoveFilesToDifferentDirectory task = 
+				new MoveFilesToDifferentDirectory(DownloadIndexActivity.this, 
+						new File(settings.getExternalStorageDirectory(), IndexConstants.APP_DIR), 
+						new File(newLoc, IndexConstants.APP_DIR)) {
+			protected Boolean doInBackground(Void[] params) {
+				Boolean result = super.doInBackground(params);
+				if(result) {
+					settings.setExternalStorageDirectory(newLoc);
+					getMyApplication().getResourceManager().resetStoreDirectory();
+					getMyApplication().getResourceManager().reloadIndexes(progress)	;
+				}
+				return result;
+			};
+		};
+		task.execute();
 	}
 	
 	@Override
@@ -458,11 +499,13 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	public static Map<String, String> listWithAlternatives(final Context ctx, File file, final String ext, 
 			final Map<String, String> files) {
 		if (file.isDirectory()) {
+			final java.text.DateFormat format = DateFormat.getDateFormat(ctx);
+			format.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
 			file.list(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String filename) {
 					if (filename.endsWith(ext)) {
-						String date = AndroidUtils.formatDate(ctx, new File(dir, filename).lastModified());
+						String date = format.format(new File(dir, filename).lastModified());
 						files.put(filename, date);
 						return true;
 					} else {

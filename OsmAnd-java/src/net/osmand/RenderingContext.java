@@ -18,6 +18,7 @@ public class RenderingContext {
 		}
 	}
 
+	public int renderedState = 0;
 	// FIELDS OF THAT CLASS ARE USED IN C++
 	public boolean interrupted = false;
 	public boolean nightMode = false;
@@ -50,6 +51,7 @@ public class RenderingContext {
 	public int shadowRenderingMode = ShadowRenderingMode.BLUR_SHADOW.value;
 	public int shadowRenderingColor = 0xff969696;
 	public String renderingDebugInfo;
+	public double polygonMinSizeToDisplay;
 	
 	private float density = 1;
 	

@@ -24,6 +24,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -61,6 +62,7 @@ public class OsmandRenderer {
 	private Paint paintIcon;
 
 	public static final int TILE_SIZE = 256; 
+	private static final int MAX_V = 75;
 
 	private Map<float[], PathEffect> dashEffect = new LinkedHashMap<float[], PathEffect>();
 	private Map<String, float[]> parsedDashEffects = new LinkedHashMap<String, float[]>();
@@ -72,6 +74,12 @@ public class OsmandRenderer {
 
 	private TextRenderer textRenderer;
 
+	public class MapDataObjectPrimitive {
+		BinaryMapDataObject obj;
+		int typeInd;
+		double order;
+		int objectType;
+	};
 
 	private static class IconDrawInfo {
 		float x = 0;
@@ -103,6 +111,7 @@ public class OsmandRenderer {
 		int shadowLevelMax = 0;
 
 		boolean ended = false;
+
 		
 		@Override
 		protected byte[] getIconRawData(String data) {
@@ -197,6 +206,32 @@ public class OsmandRenderer {
 		}
 	}
 	
+	void drawObject(RenderingContext rc,  Canvas cv, RenderingRuleSearchRequest req,
+			List<MapDataObjectPrimitive> array, int objOrder) {
+			//double polygonLimit = 100;
+			//float orderToSwitch = 0;
+			double minPolygonSize = 1. / rc.polygonMinSizeToDisplay;
+			for (int i = 0; i < array.size(); i++) {
+				rc.allObjects++;
+				BinaryMapDataObject mObj = array.get(i).obj;
+				TagValuePair pair = mObj.getMapIndex().decodeType(mObj.getTypes()[array.get(i).typeInd]);
+				if (objOrder == 0) {
+					if (array.get(i).order > minPolygonSize + ((int) array.get(i).order)) {
+						continue;
+					}
+					// polygon
+					drawPolygon(mObj, req, cv, rc, pair);
+				} else if (objOrder == 1 || objOrder == 2) {
+					drawPolyline(mObj, req, cv, rc, pair, mObj.getSimpleLayer(), objOrder == 1);
+				} else if (objOrder == 3) {
+					drawPoint(mObj, req, cv, rc, pair, array.get(i).typeInd == 0);
+				}
+				if (i % 25 == 0 && rc.interrupted) {
+					return;
+				}
+			}
+		}
+	
 	public void generateNewBitmap(RenderingContext rc, List<BinaryMapDataObject> objects, Bitmap bmp, 
 				RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList) {
 		long now = System.currentTimeMillis();
@@ -210,57 +245,25 @@ public class OsmandRenderer {
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			
 			// put in order map
-			TIntObjectHashMap<TIntArrayList> orderMap = sortObjectsByProperOrder(rc, objects, render);
+			List<MapDataObjectPrimitive>  pointsArray = new ArrayList<OsmandRenderer.MapDataObjectPrimitive>();
+			List<MapDataObjectPrimitive> polygonsArray = new ArrayList<OsmandRenderer.MapDataObjectPrimitive>();
+			List<MapDataObjectPrimitive>  linesArray = new ArrayList<OsmandRenderer.MapDataObjectPrimitive>();
+			sortObjectsByProperOrder(rc, objects, render, pointsArray, polygonsArray, linesArray);
 
-			int objCount = 0;
+			rc.lastRenderedKey = 0;
 
-			int[] keys = orderMap.keys();
-			Arrays.sort(keys);
-
-			boolean shadowDrawn = false;
-
-			for (int k = 0; k < keys.length; k++) {
-				if (!shadowDrawn && (keys[k]>>2) >= rc.shadowLevelMin && (keys[k]>>2) <= rc.shadowLevelMax && rc.shadowRenderingMode > 1) {
-					for (int ki = k; ki < keys.length; ki++) {
-						if ((keys[ki]>>2) > rc.shadowLevelMax || rc.interrupted) {
-							break;
-						}
-						TIntArrayList list = orderMap.get(keys[ki]);
-						for (int j = 0; j < list.size(); j++) {
-							int i = list.get(j);
-							int ind = i >> 8;
-							int l = i & 0xff;
-							BinaryMapDataObject obj = objects.get(ind);
-
-							// show text only for main type
-							drawObj(obj, render, cv, rc, l, l == 0, true, (keys[ki] & 3));
-							objCount++;
-						}
-					}
-					shadowDrawn = true;
-				}
-				if (rc.interrupted) {
-					return;
-				}
-
-				TIntArrayList list = orderMap.get(keys[k]);
-				for (int j = 0; j < list.size(); j++) {
-					int i = list.get(j);
-					int ind = i >> 8;
-					int l = i & 0xff;
-					BinaryMapDataObject obj = objects.get(ind);
-
-					// show text only for main type
-					drawObj(obj, render, cv, rc, l, l == 0, false, (keys[k] & 3));
-					objCount++;
-				}
-				rc.lastRenderedKey = (keys[k] >> 2);
-				if (objCount > 25) {
-					notifyListeners(notifyList);
-					objCount = 0;
-				}
-
+			drawObject(rc, cv, render, polygonsArray, 0);
+			rc.lastRenderedKey = 5;
+			if (rc.shadowRenderingMode > 1) {
+				drawObject(rc, cv, render, linesArray, 1);
 			}
+			rc.lastRenderedKey = 40;
+			drawObject(rc, cv, render, linesArray, 2);
+			rc.lastRenderedKey = 60;
+
+			drawObject(rc, cv, render, pointsArray, 3);
+			rc.lastRenderedKey = 125;
+
 
 			long beforeIconTextTime = System.currentTimeMillis() - now;
 			notifyListeners(notifyList);
@@ -344,22 +347,53 @@ public class OsmandRenderer {
 			}
 		}
 	}
+	
+	Comparator<MapDataObjectPrimitive> sortByOrder() {
+		return new Comparator<MapDataObjectPrimitive>() {
 
-	private TIntObjectHashMap<TIntArrayList> sortObjectsByProperOrder(RenderingContext rc, List<BinaryMapDataObject> objects,
-			RenderingRuleSearchRequest render) {
+			@Override
+			public int compare(MapDataObjectPrimitive i, MapDataObjectPrimitive j) {
+				if (i.order == j.order) {
+					if (i.typeInd == j.typeInd) {
+						if(i.obj.getPointsLength() == j.obj.getPointsLength()) {
+							return 0;
+						}
+						return i.obj.getPointsLength() < j.obj.getPointsLength() ? -1 : 1;
+					}
+					return i.typeInd < j.typeInd ? -1 : 1;
+				}
+				return (i.order < j.order ? -1 : 1);
+			}
+
+		};
+	}
+	
+	Comparator<MapDataObjectPrimitive> sortPolygonsOrder() {
+		return new Comparator<MapDataObjectPrimitive>() {
+
+			@Override
+			public int compare(MapDataObjectPrimitive i, MapDataObjectPrimitive j) {
+				if (i.order == j.order)
+					return i.typeInd < j.typeInd ? -1 : 1;
+				return (i.order > j.order) ? -1 : 1;
+			}
+		};
+	}
+
+	private void sortObjectsByProperOrder(RenderingContext rc, List<BinaryMapDataObject> objects,
+			RenderingRuleSearchRequest render, 
+			List<MapDataObjectPrimitive>  pointsArray, List<MapDataObjectPrimitive> polygonsArray,
+			List<MapDataObjectPrimitive>  linesResArray) {
 		int sz = objects.size();
-		TIntObjectHashMap<TIntArrayList> orderMap = new TIntObjectHashMap<TIntArrayList>();
+		List<MapDataObjectPrimitive> linesArray = new ArrayList<OsmandRenderer.MapDataObjectPrimitive>();
 		if (render != null) {
 			render.clearState();
 
+			float mult = (float) (1. / MapUtils.getPowZoom(Math.max(31 - (rc.zoom + 8), 0)));
 			for (int i = 0; i < sz; i++) {
 				BinaryMapDataObject o = objects.get(i);
-				int sh = i << 8;
-
 				for (int j = 0; j < o.getTypes().length; j++) {
-					// put(orderMap, BinaryMapDataObject.getOrder(o.getTypes()[j]), sh + j, init);
 					int wholeType = o.getTypes()[j];
-
 					int layer = 0;
 					if (o.getPointsLength() > 1) {
 						layer = o.getSimpleLayer();
@@ -374,10 +408,24 @@ public class OsmandRenderer {
 						if (render.search(RenderingRulesStorage.ORDER_RULES)) {
 							int objectType = render.getIntPropertyValue(render.ALL.R_OBJECT_TYPE);
 							int order = render.getIntPropertyValue(render.ALL.R_ORDER);
-							put(orderMap, (order << 2) | objectType, sh + j);
+							MapDataObjectPrimitive mapObj = new MapDataObjectPrimitive();
+							mapObj.objectType = objectType;
+							mapObj.order = order;
+							mapObj.typeInd = j;
+							mapObj.obj = o;
 							if(objectType == 3) {
-								// add icon point all the time
-								put(orderMap,(128 << 2)|1, sh + j);
+								MapDataObjectPrimitive pointObj = mapObj;
+								pointObj.objectType = 1;
+								double area = polygonArea(mapObj, mult);
+								if(area > MAX_V) { 
+									mapObj.order = mapObj.order + (1. / area);
+									polygonsArray.add(mapObj);
+									pointsArray.add(pointObj); // TODO fix duplicate text? verify if it is needed for icon
+								}
+							} else if(objectType == 1) {
+								pointsArray.add(mapObj);
+							} else {
+								linesArray.add(mapObj);
 							}
 							if (render.isSpecified(render.ALL.R_SHADOW_LEVEL)) {
 								rc.shadowLevelMin = Math.min(rc.shadowLevelMin, order);
@@ -390,12 +438,74 @@ public class OsmandRenderer {
 				}
 
 				if (rc.interrupted) {
-					return orderMap;
+					return;
 				}
 			}
 		}
-		return orderMap;
+		Collections.sort(polygonsArray, sortByOrder());
+		Collections.sort(pointsArray, sortByOrder());
+		Collections.sort(linesArray, sortByOrder());
+		filterLinesByDensity(rc, linesResArray, linesArray);
 	}
+	
+	void filterLinesByDensity(RenderingContext rc, List<MapDataObjectPrimitive>  linesResArray,
+			List<MapDataObjectPrimitive> linesArray) {
+//		int roadsLimit = rc->roadsDensityLimitPerTile;
+//		int densityZ = rc->roadDensityZoomTile;
+//		if(densityZ == 0 || roadsLimit == 0) {
+//			linesResArray = linesArray;
+//			return;
+//		}
+//		linesResArray.reserve(linesArray.size());
+//		UNORDERED(map)<int64_t, pair<int, int> > densityMap;
+//		for (int i = linesArray.size() - 1; i >= 0; i--) {
+//			bool accept = true;
+//			int o = linesArray[i].order;
+//			MapDataObject* line = linesArray[i].obj;
+//			tag_value& ts = line->types[linesArray[i].typeInd];
+//			if (ts.first == "highway") {
+//				accept = false;
+//				int64_t prev = 0;
+//				for (uint k = 0; k < line->points.size(); k++) {
+//					int dz = rc->getZoom() + densityZ;
+//					int64_t x = (line->points[k].first) >> (31 - dz);
+//					int64_t y = (line->points[k].second) >> (31 - dz);
+//					int64_t tl = (x << dz) + y;
+//					if (prev != tl) {
+//						prev = tl;
+//						pair<int, int>& p = densityMap[tl];
+//						if (p.first < roadsLimit/* && p.second > o */) {
+//							accept = true;
+//							p.first++;
+//							p.second = o;
+//							densityMap[tl] = p;
+//						}
+//					}
+//				}
+//			}
+//			if(accept) {
+//				linesResArray.push_back(linesArray[i]);
+//			}
+//		}
+//		reverse(linesResArray.begin(), linesResArray.end());
+		// TODO
+		linesResArray.addAll(linesArray);
+	}
+
+	private double polygonArea(MapDataObjectPrimitive mapObj, float mult) {
+		double area = 0.;
+		int j = mapObj.obj.getPointsLength() - 1;
+		for (int i = 0; i < mapObj.obj.getPointsLength(); i++) {
+			int px = mapObj.obj.getPoint31XTile(i);
+			int py = mapObj.obj.getPoint31YTile(i);
+			int sx = mapObj.obj.getPoint31XTile(j);
+			int sy = mapObj.obj.getPoint31YTile(j);
+			area += (sx + ((float) px)) * (sy - ((float) py));
+			j = i;
+		}
+		return Math.abs(area) * mult * mult * .5;
+	}
+
 	private void notifyListeners(List<IMapDownloaderCallback> notifyList) {
 		if (notifyList != null) {
 			for (IMapDownloaderCallback c : notifyList) {
@@ -403,20 +513,6 @@ public class OsmandRenderer {
 			}
 		}
 	}
-
-	protected void drawObj(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, int l,
-			boolean renderText, boolean drawOnlyShadow, int type) {
-		rc.allObjects++;
-		TagValuePair pair = obj.getMapIndex().decodeType(obj.getTypes()[l]);
-		if (type == RenderingRulesStorage.POINT_RULES && !drawOnlyShadow) {
-			drawPoint(obj, render, canvas, rc, pair, renderText);
-		} else if (type == RenderingRulesStorage.LINE_RULES) {
-			drawPolyline(obj, render, canvas, rc, pair, obj.getSimpleLayer(), drawOnlyShadow);
-		} else if (type == RenderingRulesStorage.POLYGON_RULES && !drawOnlyShadow) {
-			drawPolygon(obj, render, canvas, rc, pair);
-		}
-	}
-
 
 	private PointF calcPoint(int xt, int yt, RenderingContext rc){
 		rc.pointCount ++;

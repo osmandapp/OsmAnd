@@ -15,6 +15,7 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -58,7 +59,12 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.text.format.DateFormat;
+import android.util.TypedValue;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 import android.widget.Toast;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
@@ -357,11 +363,32 @@ public class OsmandApplication extends Application implements ClientContext {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
-				Builder builder = new AlertDialog.Builder(uiContext);
+				Builder builder = new AccessibleAlertBuilder(uiContext);
+				LinearLayout ll = new LinearLayout(uiContext);
+				ll.setOrientation(LinearLayout.VERTICAL);
+				final TextView tv = new TextView(uiContext);
+				tv.setPadding(7, 3, 7, 0);
+				tv.setText(R.string.voice_is_not_available_msg);
+				tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 19);
+				ll.addView(tv);
+				
+				final CheckBox cb = new CheckBox(uiContext);
+				cb.setText(R.string.remember_choice);
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+				lp.setMargins(7, 10, 7, 0);
+				cb.setLayoutParams(lp);
+				ll.addView(cb);
+				
 				builder.setCancelable(true);
-				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setNegativeButton(R.string.default_buttons_cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if(cb.isChecked()) {
+							osmandSettings.VOICE_PROVIDER.set(OsmandSettings.VOICE_PROVIDER_NOT_USE);
+						}
+					}
+				});
 				builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
-
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(uiContext, SettingsActivity.class);
@@ -369,8 +396,11 @@ public class OsmandApplication extends Application implements ClientContext {
 						uiContext.startActivity(intent);
 					}
 				});
+				
+				
 				builder.setTitle(R.string.voice_is_not_available_title);
-				builder.setMessage(R.string.voice_is_not_available_msg);
+				builder.setView(ll);
+				//builder.setMessage(R.string.voice_is_not_available_msg);
 				builder.show();
 			}
 
@@ -514,13 +544,13 @@ public class OsmandApplication extends Application implements ClientContext {
 					}
 				}
 			}
-			
 			warnings.addAll(manager.reloadIndexes(startDialog));
 			player = null;
 			if (savingTrackHelper.hasDataToSave()) {
 				startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
 				warnings.addAll(savingTrackHelper.saveDataToGpx());
 			}
+
 			// restore backuped favorites to normal file
 			final File appDir = getAppPath(null);
 			File save = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
@@ -531,7 +561,6 @@ public class OsmandApplication extends Application implements ClientContext {
 				}
 				bak.renameTo(save);
 			}
-			
 		} finally {
 			synchronized (OsmandApplication.this) {
 				final ProgressDialog toDismiss;

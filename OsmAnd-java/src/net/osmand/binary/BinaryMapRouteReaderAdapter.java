@@ -67,7 +67,12 @@ public class BinaryMapRouteReaderAdapter {
 				v = "no";
 			}
 			this.v = v == null? null : v.intern();
-			analyze();
+			try {
+				analyze();
+			} catch(RuntimeException e) {
+				System.err.println("Error analyzing tag/value = " + t + "/" +v);
+				throw e;
+			}
 		}
 		
 		public String getTag() {
@@ -674,7 +679,7 @@ public class BinaryMapRouteReaderAdapter {
 		}
 	}
 	
-	public void initRouteTypesIfNeeded(SearchRequest<RouteDataObject> req, List<RouteSubregion> list) throws IOException {
+	public void initRouteTypesIfNeeded(SearchRequest<?> req, List<RouteSubregion> list) throws IOException {
 		for (RouteSubregion rs : list) {
 			if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
 				initRouteRegion(rs.routeReg);
@@ -736,7 +741,7 @@ public class BinaryMapRouteReaderAdapter {
 		}
 	}
 
-	public List<RouteSubregion> searchRouteRegionTree(SearchRequest<RouteDataObject> req, List<RouteSubregion> list, 
+	public List<RouteSubregion> searchRouteRegionTree(SearchRequest<?> req, List<RouteSubregion> list, 
 			List<RouteSubregion> toLoad) throws IOException {
 		for (RouteSubregion rs : list) {
 			if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {

@@ -98,7 +98,7 @@ public class BinaryRoutePlanner {
 					graphReverseSegments.size()) * STANDARD_ROAD_IN_QUEUE_OVERHEAD;
 			
 			if(TRACE_ROUTING){
-				printRoad(">", segment);
+				printRoad(">", segment, !forwardSearch);
 			}
 			if(segment instanceof FinalRouteSegment) {
 				if(RoutingContext.SHOW_GC_SIZE){
@@ -136,9 +136,9 @@ public class BinaryRoutePlanner {
 			}
 			if (ctx.planRouteIn2Directions()) {
 				forwardSearch = (nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) < 0);
-				if (graphDirectSegments.size() * 1.3 > graphReverseSegments.size()) {
+				if (graphDirectSegments.size() * 2 > graphReverseSegments.size()) {
 					forwardSearch = false;
-				} else if (graphDirectSegments.size() < 1.3 * graphReverseSegments.size()) {
+				} else if (graphDirectSegments.size() < 2 * graphReverseSegments.size()) {
 					forwardSearch = true;
 				}
 			} else {
@@ -236,14 +236,18 @@ public class BinaryRoutePlanner {
 	}
 
 
-	private void printRoad(String prefix, RouteSegment segment) {
+	private void printRoad(String prefix, RouteSegment segment, Boolean reverseWaySearch) {
 		String pr;
 		if(segment.parentRoute != null){
 			pr = " pend="+segment.parentSegmentEnd +" parent=" + segment.parentRoute.road;
 		} else {
 			pr = "";
 		}
-		println(prefix  +"" + segment.road + " dir="+segment.getDirectionAssigned()+" ind=" + segment.getSegmentStart() + 
+		String p = "";
+		if(reverseWaySearch != null) {
+			p = (reverseWaySearch?"B" : "F");
+		}
+		println(p+prefix  +"" + segment.road + " dir="+segment.getDirectionAssigned()+" ind=" + segment.getSegmentStart() + 
 				" ds=" + ((float)segment.distanceFromStart) + " es="+((float)segment.distanceToEnd) + pr);
 	}
 
@@ -304,7 +308,7 @@ public class BinaryRoutePlanner {
 		final RouteDataObject road = segment.road;
 		boolean initDirectionAllowed = checkIfInitialMovementAllowedOnSegment(ctx, reverseWaySearch, visitedSegments, segment, road);
 		if(TEST_SPECIFIC && road.getId() == TEST_ID ) {
-			printRoad(" ! " + +segment.distanceFromStart + " ", segment);
+			printRoad(" ! " + +segment.distanceFromStart + " ", segment, reverseWaySearch);
 		}
 		boolean directionAllowed = initDirectionAllowed;
 		if(!directionAllowed) {
@@ -367,15 +371,23 @@ public class BinaryRoutePlanner {
 //				long nt = System.nanoTime();
 //				float devDistance = ctx.precalculatedRouteDirection.getDeviationDistance(x, y);
 //				// 1. linear method
-//				// segmentDist = segmentDist * (1 + ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.config.DEVIATION_RADIUS);
+//				 segmentDist = segmentDist * (1 + devDistance / ctx.config.DEVIATION_RADIUS);
 //				// 2. exponential method
 //				segmentDist = segmentDist * (float) Math.pow(1.5, devDistance / 500);
+				// 3. next by method
+//				segmentDist = devDistance ;
 //				ctx.timeNanoToCalcDeviation += (System.nanoTime() - nt);
 			}
 			// could be expensive calculation
 			// 3. get intersected ways
 			final RouteSegment roadNext = ctx.loadRouteSegment(x, y, ctx.config.memoryLimitation - ctx.memoryOverhead);
 			float distStartObstacles = segment.distanceFromStart + calculateTimeWithObstacles(ctx, road, segmentDist , obstaclesTime);
+			if(ctx.precalculatedRouteDirection != null && ctx.precalculatedRouteDirection.isFollowNext()) {
+				// reset to f
+//				distStartObstacles = 0;
+				// more precise but slower
+				distStartObstacles = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxDefaultSpeed();
+			}
 			
 			// We don't check if there are outgoing connections
 			previous = processIntersections(ctx, graphSegments, visitedSegments, distStartObstacles,
@@ -433,7 +445,7 @@ public class BinaryRoutePlanner {
 			frs.opposite = opposite;
 			graphSegments.add(frs);
 			if(TRACE_ROUTING){
-				printRoad("  >> Final segment : ", frs);
+				printRoad("  >> Final segment : ", frs, reverseWaySearch);
 			}
 			return true;
 		}
@@ -553,7 +565,7 @@ public class BinaryRoutePlanner {
 
 
 	private RouteSegment processIntersections(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
-			TLongObjectHashMap<RouteSegment> visitedSegments,  float  distFromStart, RouteSegment segment,
+			TLongObjectHashMap<RouteSegment> visitedSegments,  float distFromStart, RouteSegment segment,
 			short segmentPoint, RouteSegment inputNext, boolean reverseWaySearch, boolean doNotAddIntersections, 
 			boolean[] processFurther) {
 		boolean thereAreRestrictions ;
@@ -634,7 +646,7 @@ public class BinaryRoutePlanner {
 				printRoad(" !? distFromStart=" + +distFromStart + " from " + segment.getRoad().getId() + 
 						" dir=" + segment.getDirectionAssigned() + 
 						" distToEnd=" + distanceToEnd +
-						" segmentPoint="+ segmentPoint + " -- ", next);
+						" segmentPoint="+ segmentPoint + " -- ", next, true);
 			}
 			if (!visitedSegments.containsKey(calculateRoutePointId(next, next.isPositive()))) {
 				if (next.getParentRoute() == null
@@ -643,7 +655,7 @@ public class BinaryRoutePlanner {
 					next.distanceFromStart = distFromStart;
 					next.distanceToEnd = distanceToEnd;
 					if (TRACE_ROUTING) {
-						printRoad("  >>", next);
+						printRoad("  >>", next, null);
 					}
 					// put additional information to recover whole route after
 					next.setParentRoute(segment);
@@ -770,6 +782,14 @@ public class BinaryRoutePlanner {
 		
 		public short getSegmentStart() {
 			return segStart;
+		}
+		
+		public float getDistanceFromStart() {
+			return distanceFromStart;
+		}
+		
+		public void setDistanceFromStart(float distanceFromStart) {
+			this.distanceFromStart = distanceFromStart;
 		}
 		
 		public RouteDataObject getRoad() {

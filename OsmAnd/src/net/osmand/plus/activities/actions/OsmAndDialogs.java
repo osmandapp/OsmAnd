@@ -39,4 +39,9 @@ public class OsmAndDialogs {
 	public static final int DIALOG_SHARE_LOCATION = 204;
 	public static final int DIALOG_SAVE_DIRECTIONS = 206;
 	public static final int DIALOG_START_GPS = 207;
+	
+	
+	public static int getPluginDialogId(int pluginId, int dialogId) {
+		return (pluginId + 3) * 100 + dialogId;
+	}
 }

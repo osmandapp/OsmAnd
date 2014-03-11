@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.zip.GZIPInputStream;
 
 import net.osmand.AndroidUtils;
@@ -182,7 +183,7 @@ public class DownloadOsmandIndexesHelper {
 		}
 	}
 
-	private static String reparseDate(Context ctx, String date) {
+	protected static String reparseDate(Context ctx, String date) {
 		try {
 			Date d = simpleDateFormat.parse(date);
 			return AndroidUtils.formatDate(ctx, d.getTime());

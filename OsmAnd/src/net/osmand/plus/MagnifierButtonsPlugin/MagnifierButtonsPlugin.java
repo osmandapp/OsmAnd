@@ -156,7 +156,6 @@ public class MagnifierButtonsPlugin extends OsmandPlugin{
 					distanceCalculatorLayer.updateTextSize();
 				}
 				view.refreshMap(true);
-				updateZoomScaleTextbox(false);
 			}
 		});		
 		displayZoomOutButton.setOnClickListener(new View.OnClickListener() {
@@ -167,7 +166,6 @@ public class MagnifierButtonsPlugin extends OsmandPlugin{
 					distanceCalculatorLayer.updateTextSize();
 				}
 				view.refreshMap(true);
-				updateZoomScaleTextbox(false);
 			}
 		});	
 		
@@ -183,7 +181,7 @@ public class MagnifierButtonsPlugin extends OsmandPlugin{
 		mapControlsLayer.getzoomOutButton().setId(ZOOM_OUT_BUTTON_ID);
 
 		displayZoomInfo = new TextView(view.getContext());
-		LayoutParams lp = new LayoutParams(80, 200);
+		LayoutParams lp = new LayoutParams(90, 200);
 		displayZoomInfo.setLayoutParams(lp);
 		displayZoomInfo.setTextColor(Color.BLACK);
 		displayZoomInfo.setTextSize(22f);

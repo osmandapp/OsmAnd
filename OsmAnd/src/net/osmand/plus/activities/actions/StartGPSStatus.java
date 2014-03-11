@@ -33,7 +33,8 @@ public class StartGPSStatus extends OsmAndAction {
 	public enum GpsStatusApps {
 		GPS_STATUS("GPS Status & Toolbox", "com.eclipsim.gpsstatus2", "com.eclipsim.gpsstatus2.GPSStatus"),
 		GPS_TEST("GPS Test", "com.chartcross.gpstest", ""),
-		INVIU_GPS("inViu GPS-details ", "de.enaikoon.android.inviu.gpsdetails", "");
+		INVIU_GPS("inViu GPS-details ", "de.enaikoon.android.inviu.gpsdetails", ""),
+		SAT_STAT("SatStat (F-droid)", "com.vonglasow.michael.satstat", "");
 		
 		public final String stringRes;
 		public final String activity;

@@ -32,5 +32,4 @@ fi
 OSMAND_ANDROID_EXTERNAL_DEPENDENCIES=(expat freetype gdal giflib glm glsl-optimizer jpeg libpng protobuf qtbase-android skia icu4c boost-android)
 "$SCRIPT_LOC/../../core/externals/configure.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
 "$SCRIPT_LOC/../../core/externals/build.sh" ${OSMAND_ANDROID_EXTERNAL_DEPENDENCIES[*]}
-"$SCRIPT_LOC/../OsmAnd-java/generate-swig.sh"
 (cd "$SCRIPT_LOC" && "$ANDROID_NDK/ndk-build" -j$OSMAND_BUILD_CPU_CORES_NUM "$@")
