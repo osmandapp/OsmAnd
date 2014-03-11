@@ -1534,4 +1534,18 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	\n\t* Completamente actualizado la navegación (rápida y exacta)
 	\n\t* Simulación activa en túneles
     </string>
+    <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
+	<string name="routing_attr_prefer_motorway_description">Prefiere autopistas en el ruteo</string>
+	<string name="routing_attr_short_way_name">Camino corto</string>
+	<string name="routing_attr_short_way_description">Usa el camino corto</string>
+	<string name="routing_attr_avoid_toll_name">Evitar peajes</string>
+	<string name="routing_attr_avoid_toll_description">Evita los peajes</string>
+	<string name="routing_attr_avoid_unpaved_name">Evitar carreteras no pavimentadas</string>
+	<string name="routing_attr_avoid_unpaved_description">Evita las carreteras no pavimentadas</string>
+	<string name="routing_attr_avoid_ferries_name">Evitar transbordadores</string>
+	<string name="routing_attr_avoid_ferries_description">Evita usar transbordadores</string>
+	<string name="routing_attr_avoid_motorway_name">Evitar autopistas</string>
+	<string name="routing_attr_avoid_motorway_description">Evita autopistas</string>
+	<string name="routing_attr_weight_name">Peso</string>
+	<string name="routing_attr_weight_description">Indica limitación de peso</string>
     </resources>
