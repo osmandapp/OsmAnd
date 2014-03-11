@@ -882,7 +882,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="rendering_attr_appMode_name">Modo de dibujo</string>
   <string name="rendering_attr_appMode_description">Optimización de mapa para cada Perfil de Usuario</string>
   <string name="rendering_attr_contourLines_description">Muestra a partir del nivel de zoom (necesita un fichero SRTM):</string>
-  <string name="rendering_attr_contourLines_name">Mostrar líneas de contorno</string>
+  <string name="rendering_attr_contourLines_name">Mostrar curvas de nivel</string>
   <string name="rendering_attr_hmRendered_description">Aumentar el detalle que se muestra del mapa</string>
   <string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string>
   <string name="route_roundabout">Rotonda : coja la %1$d salida y continúe</string>
@@ -1014,7 +1014,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	- Completa funcionalidad sin conexión (almacena los mapas de vectores o teselas descargados en una carpeta seleccionable) 
 	- Mapas vectoriales compactos disponibles de todo el planeta 
 	- Descarga de mapas de país o región directamente desde la app 
-	- Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, lineas de contorno, paradas de transporte público, mapas adicionales con transparencia personalizable 
+	- Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
 	- Búsqueda sin conexión de direcciones y lugares (PDI) 
 	- Rutas sin conexión para distancias cortas (experimental) 
 	- Modos de coche, bicicleta, y peatón con: 
@@ -1024,14 +1024,31 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	- opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas 
 
 	Limitaciones de la versión gratuita de OsmAnd: 
-	- Limite de número de mapas descargados 
-	- Sin acceso a los PDIs de Wikipedia descargados 
+	- Límite de número de mapas descargados 
+	- Sin acceso a los PDIs descargados de Wikipedia 
 
 	OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características o hacer una donación en general en osmand.net.
 	</string>
 <string name="osmand_plus_short_description_80_chars">Visor de mapas y navegador móvil global para mapas de OSM con y sin conexión</string>
 <string name="osmand_plus_long_description_1000_chars">
-		OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características, y recibe las últimas actualizaciones. Algunas de las características fundamentales: - Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en una carpeta seleccionable) - Mapas de vectores compactos disponibles de todo el planeta - Descarga de mapa de país o región directamente desde la app - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, lineas de contorno, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - Cambio automático opcional de vista diurna/nocturna - Zoom opcional dependiente de la velocidad - Alineamiento del mapa opcional según brújula o dirección de movimiento
+		OsmAnd+ (OSM Automated Navigation Directions)
+
+		OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz.
+
+		OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características, y recibe las últimas actualizaciones.
+
+		Algunas de las características fundamentales:
+		 - Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en una carpeta seleccionable)
+		 - Mapas de vectores compactos disponibles de todo el planeta
+		 - Descarga de mapa de país o región directamente desde la aplicación
+		 - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
+		 - Búsqueda sin conexión de direcciones y lugares (PDI)
+		 - Rutas sin conexión para distancias cortas (experimental)
+		 - Modos de coche, bicicleta, y peatón con:
+			 - Cambio automático opcional de vista diurna/nocturna
+			 - Zoom opcional dependiente de la velocidad
+			 - Alineamiento del mapa opcional según brújula o dirección de movimiento
+			 - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales
 	</string>
 <string name="avoid_motorway">Evitar autopistas</string>
 <string name="tip_recent_changes_0_8_3_t">"﻿Cambios en 0.8.3 :
@@ -1490,8 +1507,7 @@ La lista de países incluídos (¡prácticamente todo el mundo!):
 Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papua Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabue.
 	</string>
 	<string name="map_magnifier">Lupa</string>
-    <string name="route_is_too_long">La ruta puede ser demasiado larga para que OsmAnd la calcule localmente.
-	Normalmente se pueden calcular localmente rutas entre puntos separados hasta 200 km. Por favor, añade puntos intermedios para calcular la ruta.</string>
+    <string name="route_is_too_long">El cálculo de ruta por OsmAnd puede tardar mucho (o a veces no funcionar) para puntos separados más de 200 km. Tal vez quieras añadir puntos de ruta intermedios para un mejor rendimiento.</string>
 	<string name="auto_zoom_none">Sin zoom automático</string>
 	<string name="remember_choice">Recordar mi elección</string>
     <string name="gps_status_eclipsim">Estado del GPS</string>
@@ -1512,27 +1528,29 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="local_osm_changes_delete_all_confirm">Vas a borrar %1$d cambios osm. ¿Quieres continuar?</string>
     <string name="local_osm_changes_delete_all">Borrar todo</string>
     <string name="osmodroid_refresh">Renueva los canales</string>
-    <string name="amenity_type_seamark">boya / baliza</string>
+    <string name="amenity_type_seamark">Boya / baliza</string>
     <string name="app_modes_choose">Perfiles de aplicación</string>
 	<string name="map_widget_map_rendering">Renderizado de mapa:</string>
-    <string name="app_modes_choose_descr">Elegir perfiles de uso visibles en la aplicación</string>
+    <string name="app_modes_choose_descr">Elige perfiles de uso visibles en la aplicación</string>
     <string name="osmodroid_seek">Busca objeto</string>
-    <string name="guidance_preferences_descr">Preferències de navegació</string>
-    <string name="routing_preferences_descr">Preferències de càlcul de ruta</string>
-    <string name="speech_rate_descr">Velocitat de la parla sintetitzada</string>
+    <string name="guidance_preferences_descr">Preferencias de navegación</string>
+    <string name="routing_preferences_descr">Preferencias para el cálculo de ruta</string>
+    <string name="speech_rate_descr">Especifica la velocidad en el habla sintetizada (TTS)</string>
     <string name="speech_rate">Velocitat de parla</string>
     <string name="application_dir_change_warning2">OsmAnd podría intentar mover los datos al nuevo destino. ¿Lo quieres hacer?</string>
     <string name="copying_osmand_one_file_descr">Copiando archivo (%s) al nuevo destino...</string>
     <string name="copying_osmand_files_descr">Copiando archivos al nuevo destino (%s)</string>
     <string name="copying_osmand_files">Copiando archivos OsmAnd</string>
     <string name="app_mode_truck">Camión</string>
-    <string name="complex_route_calculation_failed">Falló el cálculo de la ruta rápida (%s), regresando a cálculo lento.</string>
-    <string name="disable_complex_routing_descr">Deshabilitar la navegación de 2 fase para la navegación del coche</string>
-    <string name="disable_complex_routing">Deshabilitar navegación compleja</string>
+    <string name="complex_route_calculation_failed">Falló el cálculo rápido de la ruta (%s), regresando a cálculo lento.</string>
+    <string name="disable_complex_routing_descr">Deshabilita el cálculo de ruta en dos fases para la navegación con coche</string>
+    <string name="disable_complex_routing">Deshabilitar ruteo complejo</string>
     <string name="calculate_osmand_route_gpx">Calcular ruta offline OsmAnd</string>
     <string name="tip_recent_changes_1_7_t">Cambios en 1.7:
-	\n\t* Completamente actualizado la navegación (rápida y exacta)
+	\n\t* Cálculo de ruta completamente actualizado (rápido y preciso)
 	\n\t* Simulación activa en túneles
+ 	\n\t* Muchas mejoras en la interfaz y en usabilidad
+	\n\t* Velocidad de habla configurable
     </string>
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
 	<string name="routing_attr_prefer_motorway_description">Prefiere autopistas en el ruteo</string>
@@ -1548,4 +1566,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="routing_attr_avoid_motorway_description">Evita autopistas</string>
 	<string name="routing_attr_weight_name">Peso</string>
 	<string name="routing_attr_weight_description">Indica limitación de peso</string>
+    <string name="android_19_location_disabled">Desde la versión Android KitKat (4.4), no puedes descargar ni actualizar el mapa en el anterior lugar de almacenamiento (%s). ¿Quieres cambiar para permitir una nueva y copiar todos los archivos allí?
+        \n Nota : los antiguos archivos permanecerán intactos. 
+        \n Nota : no será posible compartir archivos entre OsmAnd y OsmAnd+. </string>
     </resources>
