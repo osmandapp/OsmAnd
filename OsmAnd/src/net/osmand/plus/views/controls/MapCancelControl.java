@@ -29,7 +29,7 @@ public class MapCancelControl extends MapControls {
 		cancelButton.setBackgroundResource(R.drawable.map_btn_cancel);
 		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.LEFT);
-		params.leftMargin = ctx.getResources().getDrawable(R.drawable.map_btn_cancel).getMinimumWidth();
+		params.leftMargin = ctx.getResources().getDrawable(R.drawable.map_btn_hmenu).getMinimumWidth();
 		parent.addView(cancelButton, params);
 		cancelButton.setEnabled(true);
 		

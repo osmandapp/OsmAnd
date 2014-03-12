@@ -21,12 +21,13 @@ public class SmallMapMenuControls extends MapControls {
 		super(mapActivity, showUIHandler, scaleCoefficient);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void showControls(FrameLayout parent) {
 		Context ctx = mapActivity;
 		backToMenuButton = new Button(ctx);
 		backToMenuButton.setContentDescription(ctx.getString(R.string.backToMenu));
-		backToMenuButton.setBackgroundResource(R.drawable.map_btn_hmenu);
+		backToMenuButton.setBackgroundDrawable(ctx.getResources().getDrawable(R.drawable.map_btn_hmenu));
 		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.BOTTOM | Gravity.LEFT);
 		parent.addView(backToMenuButton, params);
