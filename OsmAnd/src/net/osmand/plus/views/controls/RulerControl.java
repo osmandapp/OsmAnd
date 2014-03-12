@@ -29,11 +29,10 @@ public class RulerControl extends MapControls {
 		public RulerControl(MapZoomControls zoomControls, MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 			super(mapActivity, showUIHandler, scaleCoefficient);
 			this.zoomControls = zoomControls;
-		}
-		
-		@Override
-		public int getWidth() {
-			return 0;
+			rulerTextPaint = new TextPaint();
+			rulerTextPaint.setTextSize(20 * scaleCoefficient);
+			rulerTextPaint.setAntiAlias(true);
+			rulerDrawable = mapActivity.getResources().getDrawable(R.drawable.ruler);
 		}
 		
 		@Override
@@ -41,17 +40,13 @@ public class RulerControl extends MapControls {
 		}
 		
 		@Override
-		public void setShadowColor(int textColor, int shadowColor) {
-			super.setShadowColor(textColor, shadowColor);
+		public void updateTextColor(int textColor, int shadowColor) {
+			super.updateTextColor(textColor, shadowColor);
 			rulerTextPaint.setColor(textColor);
 		}
 
 		@Override
 		protected void showControls(FrameLayout layout) {
-			rulerTextPaint = new TextPaint();
-			rulerTextPaint.setTextSize(20 * scaleCoefficient);
-			rulerTextPaint.setAntiAlias(true);
-			rulerDrawable = mapActivity.getResources().getDrawable(R.drawable.ruler);
 		}
 
 		@Override
@@ -78,19 +73,19 @@ public class RulerControl extends MapControls {
 				cacheRulerTextLen = rulerTextPaint.measureText(cacheRulerText.getText());
 				Rect bounds = rulerDrawable.getBounds();
 				bounds.right = (int) (view.getWidth() - 7 * scaleCoefficient);
-				bounds.bottom = (int) (view.getHeight() - (!zoomControls.isVisible() ? 0 : zoomControls.getHeight()));
-				bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
 				bounds.left = bounds.right - cacheRulerDistPix;
 				rulerDrawable.setBounds(bounds);
+				rulerDrawable.invalidateSelf();
 			} 
 			
-
 			if (cacheRulerText != null) {
 				Rect bounds = rulerDrawable.getBounds();
 				int bottom = (int) (view.getHeight() - (!zoomControls.isVisible() ? 0 : zoomControls.getHeight()));
 				if(bounds.bottom != bottom) {
 					bounds.bottom = bottom;
+					bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
 					rulerDrawable.setBounds(bounds);
+					rulerDrawable.invalidateSelf();
 				}
 				rulerDrawable.draw(canvas);
 				cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,

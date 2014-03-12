@@ -45,6 +45,10 @@ public class MapZoomControls extends MapControls {
 	public MapZoomControls(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		super(mapActivity, showUIHandler, scaleCoefficient);
 		view = mapActivity.getMapView();
+		zoomTextPaint = new TextPaint();
+		zoomTextPaint.setTextSize(18 * scaleCoefficient);
+		zoomTextPaint.setAntiAlias(true);
+		zoomTextPaint.setFakeBoldText(true);
 	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
@@ -105,15 +109,9 @@ public class MapZoomControls extends MapControls {
 
 	@Override
 	public void initControls(FrameLayout parent) {
-		zoomTextPaint = new TextPaint();
-		zoomTextPaint.setTextSize(18 * scaleCoefficient);
-		zoomTextPaint.setAntiAlias(true);
-		zoomTextPaint.setFakeBoldText(true);
-
 		zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background).mutate();
 		mapMagnifier = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_magnifier);
 		bitmapPaint = new Paint();
-
 	}
 
 	@Override
@@ -218,8 +216,8 @@ public class MapZoomControls extends MapControls {
 	}
 
 	@Override
-	public void setShadowColor(int textColor, int shadowColor) {
-		super.setShadowColor(textColor, shadowColor);
+	public void updateTextColor(int textColor, int shadowColor) {
+		super.updateTextColor(textColor, shadowColor);
 		zoomTextPaint.setColor(textColor);
 	}
 
@@ -232,10 +230,5 @@ public class MapZoomControls extends MapControls {
 		return buttonDrawable.getMinimumHeight();
 	}
 	
-	@Override
-	public int getWidth() {
-		Drawable buttonDrawable = view.getResources().getDrawable(R.drawable.map_zoom_in);
-		return buttonDrawable.getMinimumWidth() + buttonDrawable.getMinimumWidth();
-	}
 
 }

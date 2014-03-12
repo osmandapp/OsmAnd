@@ -24,7 +24,7 @@ public abstract class MapControls {
 		this.scaleCoefficient = scaleCoefficient;
 	}
 
-	public void setShadowColor(int textColor, int shadowColor) {
+	public void updateTextColor(int textColor, int shadowColor) {
 		this.shadowColor = shadowColor;
 	}
 
@@ -78,8 +78,6 @@ public abstract class MapControls {
 	
 	protected void initControls(FrameLayout layout) {
 	}
-
-	public abstract int getWidth();
 
 	protected abstract void hideControls(FrameLayout layout);
 	

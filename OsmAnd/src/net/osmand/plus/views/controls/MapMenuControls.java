@@ -66,12 +66,6 @@ public class MapMenuControls extends MapControls {
 	}
 
 	@Override
-	public int getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public void hideControls(FrameLayout layout) {
 		layout.removeView(backToMenuButton);
 		mapActivity.accessibleContent.remove(backToMenuButton);
