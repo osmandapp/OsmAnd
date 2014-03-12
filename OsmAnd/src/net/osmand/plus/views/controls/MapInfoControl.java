@@ -11,28 +11,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-public class MapCancelControl extends MapControls {
-	private Button cancelButton;
+public class MapInfoControl extends MapControls {
+	private Button infoButton;
 	
 	
-	public MapCancelControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
+	public MapInfoControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		super(mapActivity, showUIHandler, scaleCoefficient);
 	}
 	
 	@Override
 	public void showControls(FrameLayout parent) {
-		cancelButton = addButton(parent, R.string.cancel_navigation, R.drawable.map_btn_cancel);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
+		infoButton = addButton(parent, R.string.info_button, R.drawable.map_btn_info);
+		infoButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.getMapActions().stopNavigationWithoutConfirm();
+				// TODO
 			}
 		});
 	}
 
 	@Override
 	public void hideControls(FrameLayout layout) {
-		removeButton(layout, cancelButton);
+		removeButton(layout, infoButton);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class MapCancelControl extends MapControls {
 	
 	public int getWidth() {
 		if (width == 0) {
-			Drawable buttonDrawable = mapActivity.getResources().getDrawable(R.drawable.map_btn_cancel);
+			Drawable buttonDrawable = mapActivity.getResources().getDrawable(R.drawable.map_btn_info);
 			width = buttonDrawable.getMinimumWidth();
 		}
 		return width ;

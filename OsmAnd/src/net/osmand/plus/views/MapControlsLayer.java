@@ -4,9 +4,12 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.controls.MapAppModeControl;
 import net.osmand.plus.views.controls.MapCancelControl;
 import net.osmand.plus.views.controls.MapControls;
+import net.osmand.plus.views.controls.MapInfoControl;
 import net.osmand.plus.views.controls.MapMenuControls;
+import net.osmand.plus.views.controls.MapNavigateControl;
 import net.osmand.plus.views.controls.MapZoomControls;
 import net.osmand.plus.views.controls.RulerControl;
 import net.osmand.plus.views.controls.SmallMapMenuControls;
@@ -32,18 +35,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	private MapZoomControls zoomControls;
 	private MapMenuControls mapMenuControls;
+	private RulerControl rulerControl;
+	
 	private SmallMapMenuControls mapSmallMenuControls;
 	private MapCancelControl mapCancelNavigationControl;
-	private RulerControl rulerControl;
+	private MapInfoControl mapInfoNavigationControl;
+	private MapNavigateControl mapNavigationControl;
+	private MapAppModeControl mapAppModeControl;
 	
 	private float scaleCoefficient;
 
 	private SeekBar transparencyBar;
 	private LinearLayout transparencyBarLayout;
 	private static CommonPreference<Integer> settingsToTransparency;
-	
-	
-	
 
 	public MapControlsLayer(MapActivity activity){
 		this.mapActivity = activity;
@@ -59,16 +63,39 @@ public class MapControlsLayer extends OsmandMapLayer {
 		scaleCoefficient = view.getScaleCoefficient();
 		FrameLayout parent = (FrameLayout) view.getParent();
 		Handler showUIHandler = new Handler();
-		zoomControls = init(new MapZoomControls(mapActivity, showUIHandler, scaleCoefficient), parent);
-		mapMenuControls = init(new MapMenuControls(mapActivity, showUIHandler, scaleCoefficient), parent);
-		mapSmallMenuControls = init(new SmallMapMenuControls(mapActivity, showUIHandler, scaleCoefficient), parent);
-		mapCancelNavigationControl = init(new MapCancelControl(mapActivity, showUIHandler, scaleCoefficient), parent);
-		rulerControl = init(new RulerControl(zoomControls, mapActivity, showUIHandler, scaleCoefficient), parent);
+		int rightGravity = Gravity.RIGHT | Gravity.BOTTOM;
+		int leftGravity = Gravity.LEFT | Gravity.BOTTOM;
+		
+		// default buttons
+		zoomControls = init(new MapZoomControls(mapActivity, showUIHandler, scaleCoefficient), parent,
+				rightGravity);
+		mapMenuControls = init(new MapMenuControls(mapActivity, showUIHandler, scaleCoefficient), parent, 
+				leftGravity);
+		// calculate route buttons
+		mapSmallMenuControls = init(new SmallMapMenuControls(mapActivity, showUIHandler, scaleCoefficient), parent,
+				leftGravity);
+		mapCancelNavigationControl = init(new MapCancelControl(mapActivity, showUIHandler, scaleCoefficient), parent,
+				leftGravity);
+		mapInfoNavigationControl = init(new MapInfoControl(mapActivity, showUIHandler, scaleCoefficient), parent,
+				leftGravity);
+		mapNavigationControl = init(new MapNavigateControl(mapActivity, showUIHandler, scaleCoefficient), parent,
+				rightGravity);
+		mapAppModeControl = init(new MapAppModeControl(mapActivity, showUIHandler, scaleCoefficient), parent,
+				rightGravity);
+		
+		rulerControl = init(new RulerControl(zoomControls, mapActivity, showUIHandler, scaleCoefficient), parent, 
+				rightGravity);
+		mapCancelNavigationControl.setMargin(mapSmallMenuControls.getWidth());
+		mapInfoNavigationControl.setMargin(mapSmallMenuControls.getWidth() + mapCancelNavigationControl.getWidth());
+		mapAppModeControl.setMargin(mapNavigationControl.getWidth());
+		
 		initTransparencyBar(view, parent);
 	}
 
-	private <T extends MapControls> T init(T c, FrameLayout parent) {
+
+	private <T extends MapControls> T init(T c, FrameLayout parent, int gravity) {
 		c.init(parent);
+		c.setGravity(gravity);
 		return c;
 	}
 
@@ -85,17 +112,22 @@ public class MapControlsLayer extends OsmandMapLayer {
 			shadowColor = shadw;
 			updatextColor(textColor, shadw, rulerControl, zoomControls, mapMenuControls);
 		}
+		// default buttons
+		boolean showDefaultButtons = false; //!mapActivity.getRoutingHelper().isRouteCalculated() &&	!mapActivity.getRoutingHelper().isFollowingMode();
+		checkVisibilityAndDraw(showDefaultButtons, zoomControls, canvas, tileBox, nightMode);
+		checkVisibilityAndDraw(showDefaultButtons, mapMenuControls, canvas, tileBox, nightMode);
 		
-		boolean showZooms = false; //!mapActivity.getRoutingHelper().isRouteCalculated() &&	!mapActivity.getRoutingHelper().isFollowingMode();
-		checkVisibilityAndDraw(showZooms, zoomControls, canvas, tileBox, nightMode);
+		// route calculation buttons
+		boolean showRouteCalculationControls = !mapMenuControls.isVisible();
+		checkVisibilityAndDraw(showRouteCalculationControls, mapSmallMenuControls, canvas, tileBox, nightMode);
+		checkVisibilityAndDraw(showRouteCalculationControls, mapCancelNavigationControl, canvas, tileBox, nightMode);
+		checkVisibilityAndDraw(showRouteCalculationControls, mapInfoNavigationControl, canvas, tileBox, nightMode);
+		checkVisibilityAndDraw(showRouteCalculationControls, mapAppModeControl, canvas, tileBox, nightMode);
+		checkVisibilityAndDraw(showRouteCalculationControls, mapNavigationControl, canvas, tileBox, nightMode);
 		
-		boolean showMenu = false;// !mapActivity.getRoutingHelper().isFollowingMode();
-		checkVisibilityAndDraw(showMenu, mapMenuControls, canvas, tileBox, nightMode);
-		boolean showSmallMenu = !mapMenuControls.isVisible();
-		checkVisibilityAndDraw(showSmallMenu, mapSmallMenuControls, canvas, tileBox, nightMode);
-		checkVisibilityAndDraw(showSmallMenu, mapCancelNavigationControl, canvas, tileBox, nightMode);
-		
-		// the last one to check zoom controls visibility
+		// the last one to check other controls visibility
+		int vmargin = mapNavigationControl.isVisible() || zoomControls.isVisible() ? zoomControls.getHeight() : 0;
+		rulerControl.setVerticalMargin(vmargin);
 		checkVisibilityAndDraw(true, rulerControl, canvas, tileBox, nightMode);
 	}
 	

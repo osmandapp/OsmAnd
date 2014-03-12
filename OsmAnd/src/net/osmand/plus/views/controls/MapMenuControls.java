@@ -8,17 +8,14 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import android.content.Context;
+import net.osmand.plus.views.OsmandMapTileView;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
@@ -34,19 +31,8 @@ public class MapMenuControls extends MapControls {
 	}
 	
 	private void initBackToMenuButton(final OsmandMapTileView view, FrameLayout parent) {
-		android.widget.FrameLayout.LayoutParams params;
-		Context ctx = view.getContext();
-		backToMenuButton = new Button(ctx);
-		backToMenuButton.setContentDescription(ctx.getString(R.string.backToMenu));
-		backToMenuButton.setBackgroundResource(R.drawable.map_btn_menu);
-		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
-					Gravity.BOTTOM | Gravity.LEFT);
-		parent.addView(backToMenuButton, params);
-		backToMenuButton.setEnabled(true);
-		
+		backToMenuButton = addButton(parent, R.string.backToMenu, R.drawable.map_btn_menu);
 		modeShadow = view.getResources().getDrawable(R.drawable.zoom_background);
-		
-		
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -56,8 +42,6 @@ public class MapMenuControls extends MapControls {
 				mapActivity.getMapActions().openOptionsMenuAsList();
 			}
 		});
-		
-		mapActivity.accessibleContent.add(backToMenuButton);
 	}
 
 	@Override
@@ -67,8 +51,7 @@ public class MapMenuControls extends MapControls {
 
 	@Override
 	public void hideControls(FrameLayout layout) {
-		layout.removeView(backToMenuButton);
-		mapActivity.accessibleContent.remove(backToMenuButton);
+		removeButton(layout, backToMenuButton);
 	}
 
 	@Override

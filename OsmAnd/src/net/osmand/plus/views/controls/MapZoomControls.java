@@ -1,14 +1,21 @@
 package net.osmand.plus.views.controls;
 
+import gnu.trove.list.array.TIntArrayList;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.ShadowText;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -19,9 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextPaint;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
@@ -53,7 +58,7 @@ public class MapZoomControls extends MapControls {
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (isShowZoomLevel() && zoomShadow.getBounds().contains((int) point.x, (int) point.y)) {
-			MapMagnifier.getOnClickMagnifierListener(view).onLongClick(null);
+			getOnClickMagnifierListener(view).onLongClick(null);
 			return true;
 		}
 		return false;
@@ -63,28 +68,8 @@ public class MapZoomControls extends MapControls {
 	@Override
 	protected void showControls(FrameLayout parent) {
 		int minimumWidth = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumWidth();
-		Context ctx = view.getContext();
-		zoomInButton = new Button(ctx);
-		zoomInButton.setBackgroundResource(R.drawable.map_zoom_in);
-		android.widget.FrameLayout.LayoutParams params = 
-				new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.BOTTOM
-				| Gravity.RIGHT);
-		params.setMargins(0, 0, 0, 0);
-		zoomInButton.setContentDescription(ctx.getString(R.string.zoomIn));
-		parent.addView(zoomInButton, params);
-
-		zoomOutButton = new Button(ctx);
-		zoomOutButton.setBackgroundResource(R.drawable.map_zoom_out);
-		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.BOTTOM
-				| Gravity.RIGHT);
-
-		params.setMargins(0, 0, minimumWidth, 0);
-		zoomOutButton.setContentDescription(ctx.getString(R.string.zoomOut));
-		parent.addView(zoomOutButton, params);
-
-		mapActivity.accessibleContent.add(zoomInButton);
-		mapActivity.accessibleContent.add(zoomOutButton);
-
+		zoomInButton = addButton(parent, R.string.zoomIn, R.drawable.map_zoom_in);
+		zoomOutButton = addButton(parent, R.string.zoomOut, R.drawable.map_zoom_out, minimumWidth);
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -96,7 +81,7 @@ public class MapZoomControls extends MapControls {
 
 			}
 		});
-		final View.OnLongClickListener listener = MapMagnifier.getOnClickMagnifierListener(view);
+		final View.OnLongClickListener listener = getOnClickMagnifierListener(view);
 		zoomInButton.setOnLongClickListener(listener);
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -116,10 +101,8 @@ public class MapZoomControls extends MapControls {
 
 	@Override
 	public void hideControls(FrameLayout layout) {
-		mapActivity.accessibleContent.remove(zoomInButton);
-		mapActivity.accessibleContent.remove(zoomOutButton);
-		layout.removeView(zoomInButton);
-		layout.removeView(zoomOutButton);
+		removeButton(layout, zoomInButton);
+		removeButton(layout, zoomOutButton);
 	}
 
 	private void drawZoomLevel(Canvas canvas, RotatedTileBox tb, boolean drawZoomLevel) {
@@ -226,9 +209,68 @@ public class MapZoomControls extends MapControls {
 	}
 
 	public int getHeight() {
-		Drawable buttonDrawable = view.getResources().getDrawable(R.drawable.map_zoom_in);
-		return buttonDrawable.getMinimumHeight();
+		if (height == 0) {
+			Drawable buttonDrawable = view.getResources().getDrawable(R.drawable.map_zoom_in);
+			height = buttonDrawable.getMinimumHeight();
+		}
+		return height;
 	}
+
 	
+	public static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {
+		final View.OnLongClickListener listener = new View.OnLongClickListener() {
+
+			@Override
+			public boolean onLongClick(View notUseCouldBeNull) {
+				final OsmandSettings.OsmandPreference<Float> zoomScale = view.getSettings().MAP_ZOOM_SCALE_BY_DENSITY;
+				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
+				float scale = view.getZoomScale();
+				int p = (int) ((scale > 0 ? 1 : -1) * Math.round(scale * scale * 100)) + 100;
+				final TIntArrayList tlist = new TIntArrayList(new int[] { 75, 100, 150, 200, 300, 400, 500 });
+				final List<String> values = new ArrayList<String>();
+				int i = -1;
+				for (int k = 0; k <= tlist.size(); k++) {
+					final boolean end = k == tlist.size();
+					if (i == -1) {
+						if ((end || p < tlist.get(k))) {
+							values.add(p + "%");
+							i = k;
+						} else if (p == tlist.get(k)) {
+							i = k;
+						}
+
+					}
+					if (k < tlist.size()) {
+						values.add(tlist.get(k) + "%");
+					}
+				}
+				if (values.size() != tlist.size()) {
+					tlist.insert(i, p);
+				}
+
+				bld.setTitle(R.string.map_magnifier);
+				bld.setSingleChoiceItems(values.toArray(new String[values.size()]), i,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								int p = tlist.get(which);
+								float newScale;
+								if (p >= 100) {
+									newScale = (float) Math.sqrt((tlist.get(which) - 100f) / 100f);
+								} else {
+									newScale = -(float) Math.sqrt((100f - tlist.get(which)) / 100f);
+								}
+								zoomScale.set(newScale - (float) Math.sqrt(Math.max(view.getDensity() - 1, 0)));
+								view.getAnimatedDraggingThread().startZooming(view.getZoom(),
+										view.getSettingsZoomScale(), false);
+								dialog.dismiss();
+							}
+						});
+				bld.show();
+				return true;
+			}
+		};
+		return listener;
+	}
 
 }

@@ -80,7 +80,7 @@ public class RulerControl extends MapControls {
 			
 			if (cacheRulerText != null) {
 				Rect bounds = rulerDrawable.getBounds();
-				int bottom = (int) (view.getHeight() - (!zoomControls.isVisible() ? 0 : zoomControls.getHeight()));
+				int bottom = (int) (view.getHeight() - vmargin);
 				if(bounds.bottom != bottom) {
 					bounds.bottom = bottom;
 					bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
