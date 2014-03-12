@@ -1,6 +1,5 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
-	<string name="route_is_too_long">Der OsmAnd Offline-Router braucht evtl. sehr lang (oder findet gar kein Ergebnis) für mehr als 200km voneinander entfernte Punkte. Um die Performanz zu verbessern, fügen Sie evtl. einen oder mehrere Wegpunkte in die Route ein.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="route_is_too_long">Der OsmAnd Offline-Router braucht evtl. sehr lang (oder findet gar kein Ergebnis) für mehr als 200km voneinander entfernte Punkte. Um die Performanz zu verbessern, fügen Sie evtl. einen oder mehrere Wegpunkte in die Route ein.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -1486,4 +1485,31 @@
     <string name="amenity_type_seamark">Schiffartsobjekte</string>
     <string name="app_modes_choose_descr">Wähle sichtbare Nutzerprofile der Anwendung</string>
     <string name="app_modes_choose">Anwendungsprofile</string>
-	</resources>
+	<string name="routing_attr_prefer_motorway_name">Autobahnen bevorzugen</string>
+	<string name="routing_attr_prefer_motorway_description">Autobahnen bevorzugen</string>
+	<string name="routing_attr_short_way_name">Kurze Strecke</string>
+	<string name="routing_attr_short_way_description">Benutze kurze Strecke</string>
+	<string name="routing_attr_avoid_toll_name">Mautstraßen vermeiden</string>
+	<string name="routing_attr_avoid_toll_description">Mautstraßen vermeiden</string>
+	<string name="routing_attr_avoid_unpaved_name">unbefestigte Wege meiden</string>
+	<string name="routing_attr_avoid_unpaved_description">unbefestigte Wege meiden</string>
+	<string name="routing_attr_avoid_ferries_name">Fähren vermeiden</string>
+	<string name="routing_attr_avoid_ferries_description">Fähren vermeiden</string>
+	<string name="routing_attr_avoid_motorway_name">Autobahnen vermeiden</string>
+	<string name="routing_attr_avoid_motorway_description">Autobahnen vermeiden</string>
+	<string name="routing_attr_weight_name">Gesamtgewicht</string>
+	<string name="routing_attr_weight_description">Angabe für Gewichtsbeschränkung</string>
+    <string name="android_19_location_disabled">Seit der Android-Version 4.4 (KitKat) können neue Karten-Downloads nicht mehr an dem Speicherort  früherer Android-Versionen gespeichert werden (%s). Soll der zulässige Speicherort gewählt werden und alle notwendigen Dateien dorthin kopiert werden?
+        \n Hinweis: ursprüngliche Dateien bleiben hiervon unberührt. 
+        \n Hinweis: Dateien an einem Speicherort können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden. </string>
+    <string name="application_dir_change_warning2">Osmand kann versuchen, die Dateien an den neuen Speicherort zu kopieren. Fortfahren?</string>
+    <string name="copying_osmand_one_file_descr">Kopieren der Datei (%s) an den neuen Speicherort...</string>
+    <string name="copying_osmand_files_descr">Kopieren der Osmand-Dateien zum neuen Speicherort (%s)</string>
+    <string name="copying_osmand_files">Kopiere Osmand-Dateien</string>
+    <string name="calculate_osmand_route_gpx">Berechne Osmand-Offline-Route</string>
+    <string name="app_mode_truck">LKW</string>
+    <string name="guidance_preferences_descr">Navigations-Einstellungen</string>
+    <string name="routing_preferences_descr">Einstellungen für Routenberechnung</string>
+    <string name="speech_rate_descr">Geschwindigkeit der Text-Sprache-Ausgabe</string>
+    <string name="speech_rate">Sprachgeschwindigkeit</string>
+    </resources>
