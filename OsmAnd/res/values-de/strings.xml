@@ -1512,4 +1512,11 @@
     <string name="routing_preferences_descr">Einstellungen für Routenberechnung</string>
     <string name="speech_rate_descr">Geschwindigkeit der Text-Sprache-Ausgabe</string>
     <string name="speech_rate">Sprachgeschwindigkeit</string>
+    <string name="tip_recent_changes_1_7_t">Änderungen in 1.7:
+	\n\t* Komplett überarbeitete Routing-Funktion (schnell und präzise)
+	\n\t* Bewegungssimulation in Tunneln
+	\n\t* zahlreiche Verbesserungen der Benutzer-Oberfläche
+	\n\t* Einstellung für die Geschwindigkeit der Text-zu-Sprache-Ausgabe (TTS)
+    </string>
+    <string name="complex_route_calculation_failed">Schnelle Routenberechnung fehlgeschlagen (%s), kehre zur langsamen Berechnung zurück.</string>
     </resources>
