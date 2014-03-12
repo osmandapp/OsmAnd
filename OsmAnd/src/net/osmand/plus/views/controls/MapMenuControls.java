@@ -73,6 +73,7 @@ public class MapMenuControls extends MapControls {
 
 	@Override
 	public void hideControls(FrameLayout layout) {
+		layout.removeView(backToMenuButton);
 		mapActivity.accessibleContent.remove(backToMenuButton);
 	}
 

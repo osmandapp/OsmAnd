@@ -5,6 +5,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.controls.MapControls;
 import net.osmand.plus.views.controls.MapMenuControls;
 import net.osmand.plus.views.controls.MapZoomControls;
 import android.graphics.Canvas;
@@ -26,14 +27,13 @@ import android.widget.SeekBar;
 public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int HOVER_COLOR = 0xffC8C8C8;
-
+	private static final int TIMEOUT_TO_SHOW_BUTTONS = 5000;
 	private final MapActivity mapActivity;
-	
-	private int shadowColor = Color.WHITE;
+	private int shadowColor;
 	
 	private MapZoomControls zoomControls;
 	private MapMenuControls mapMenuControls;
-	
+	private RulerControl rulerControl;
 	
 	private float scaleCoefficient;
 
@@ -41,15 +41,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private LinearLayout transparencyBarLayout;
 	private static CommonPreference<Integer> settingsToTransparency;
 	
-	private Drawable rulerDrawable;
-	private TextPaint rulerTextPaint;
-	private final static double screenRulerPercent = 0.25;
+	
 	
 
 	public MapControlsLayer(MapActivity activity){
 		this.mapActivity = activity;
 	}
-	
 	
 	@Override
 	public boolean drawInScreenPixels() {
@@ -65,10 +62,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomControls.init(parent);
 		mapMenuControls = new MapMenuControls(mapActivity, showUIHandler, scaleCoefficient);
 		mapMenuControls.init(parent);
-		mapMenuControls.show(parent);
-		initRuler(view, parent);
+		rulerControl = new RulerControl(zoomControls, mapActivity, showUIHandler, scaleCoefficient);
+		rulerControl.init(parent);
 		initTransparencyBar(view, parent);
-		
 	}
 
 	@Override
@@ -84,34 +80,47 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if(shadowColor != sh) {
 			shadowColor = sh;
 			int textColor = sh == Color.WHITE ? Color.BLACK : HOVER_COLOR;
-			rulerTextPaint.setColor(textColor);
+			rulerControl.setShadowColor(textColor, sh);
 			zoomControls.setShadowColor(textColor, sh);
 			mapMenuControls.setShadowColor(textColor, sh);
 		}
-		boolean showZooms = !mapActivity.getRoutingHelper().isRouteCalculated();
-		if(showZooms != zoomControls.isVisible()){
-			if(showZooms) {
-				zoomControls.show((FrameLayout) mapActivity.getMapView().getParent());
-			} else {
-				zoomControls.hide((FrameLayout) mapActivity.getMapView().getParent());
-			}
-		}
-		if(showZooms) {
-			zoomControls.onDraw(canvas, tileBox, nightMode);
-		}
 		
-		mapMenuControls.onDraw(canvas, tileBox, nightMode);
-		drawRuler(canvas, tileBox, nightMode);
+		boolean showZooms = false; //!mapActivity.getRoutingHelper().isRouteCalculated() &&	!mapActivity.getRoutingHelper().isFollowingMode();
+		checkVisibilityAndDraw(showZooms, zoomControls, canvas, tileBox, nightMode);
+		
+		boolean showMenu = false;// !mapActivity.getRoutingHelper().isFollowingMode();
+		checkVisibilityAndDraw(showMenu, mapMenuControls, canvas, tileBox, nightMode);
+		
+		checkVisibilityAndDraw(true, rulerControl, canvas, tileBox, nightMode);
 	}
 	
+	private void checkVisibilityAndDraw(boolean visibility, MapControls controls, Canvas canvas,
+			RotatedTileBox tileBox, DrawSettings nightMode) {
+		if(visibility != controls.isVisible()){
+			if(visibility) {
+				controls.show((FrameLayout) mapActivity.getMapView().getParent());
+			} else {
+				controls.hide((FrameLayout) mapActivity.getMapView().getParent());
+			}
+		}
+		if(controls.isVisible()) {
+			controls.onDraw(canvas, tileBox, nightMode);
+		}		
+	}
+
+
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		if(mapMenuControls.onSingleTap(point, tileBox)) {
+		zoomControls.showWithDelay((FrameLayout) mapActivity.getMapView().getParent(), TIMEOUT_TO_SHOW_BUTTONS);
+		mapMenuControls.showWithDelay((FrameLayout) mapActivity.getMapView().getParent(), TIMEOUT_TO_SHOW_BUTTONS);
+		if(mapMenuControls.isVisible() && mapMenuControls.onSingleTap(point, tileBox)) {
 			return true;
 		}
-		if(zoomControls.isVisible() && zoomControls.onSingleTap(point, tileBox)) {
-			return true;
-		}
+		if(zoomControls.isVisible() ) {
+			if(zoomControls.onSingleTap(point, tileBox)) {
+				return true;
+			}
+		} 
 		return false;
 	}
 
@@ -183,54 +192,89 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	/////////////////////// Ruler ///////////////////
 	// cache values for ruler
-	ShadowText cacheRulerText = null;
-	float cacheRulerZoom = 0;
-	double cacheRulerTileX = 0;
-	double cacheRulerTileY = 0;
-	float cacheRulerTextLen = 0;	
 	
+	public static class RulerControl extends MapControls {
 
-	private void initRuler(OsmandMapTileView view, FrameLayout parent) {
-		rulerTextPaint = new TextPaint();
-		rulerTextPaint.setTextSize(20 * scaleCoefficient);
-		rulerTextPaint.setAntiAlias(true);
-		rulerDrawable = view.getResources().getDrawable(R.drawable.ruler);
-	}
-	
-	private void drawRuler(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		if( (zoomControls.isVisible() && zoomControls.isShowZoomLevel()) || !mapActivity.getMyApplication().getSettings().SHOW_RULER.get()){
-			return;
+		ShadowText cacheRulerText = null;
+		float cacheRulerZoom = 0;
+		double cacheRulerTileX = 0;
+		double cacheRulerTileY = 0;
+		float cacheRulerTextLen = 0;
+		MapZoomControls zoomControls;
+		Drawable rulerDrawable;
+		TextPaint rulerTextPaint;
+		final static double screenRulerPercent = 0.25;
+		
+		public RulerControl(MapZoomControls zoomControls, MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
+			super(mapActivity, showUIHandler, scaleCoefficient);
+			this.zoomControls = zoomControls;
 		}
-		OsmandMapTileView view = mapActivity.getMapView();
-		// update cache
-		if (view.isZooming()) {
-			cacheRulerText = null;
-		} else if((tb.getZoom() + tb.getZoomScale()) != cacheRulerZoom ||
-				Math.abs(tb.getCenterTileX() - cacheRulerTileX) +  Math.abs(tb.getCenterTileY() - cacheRulerTileY) > 1){
-			cacheRulerZoom = (tb.getZoom() + tb.getZoomScale());
-			cacheRulerTileX = tb.getCenterTileX();
-			cacheRulerTileY = tb.getCenterTileY();
-			final double dist = tb.getDistance(0, tb.getPixHeight() / 2, tb.getPixWidth(), tb.getPixHeight() / 2);
-			double pixDensity = tb.getPixWidth() / dist;
+		
+		@Override
+		public int getWidth() {
+			return 0;
+		}
+		
+		@Override
+		protected void hideControls(FrameLayout layout) {
+		}
+		
+		@Override
+		public void setShadowColor(int textColor, int shadowColor) {
+			super.setShadowColor(textColor, shadowColor);
+			rulerTextPaint.setColor(textColor);
+		}
+
+		@Override
+		protected void showControls(FrameLayout layout) {
+			rulerTextPaint = new TextPaint();
+			rulerTextPaint.setTextSize(20 * scaleCoefficient);
+			rulerTextPaint.setAntiAlias(true);
+			rulerDrawable = mapActivity.getResources().getDrawable(R.drawable.ruler);
+		}
+
+		@Override
+		public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
+			if( (zoomControls.isVisible() && zoomControls.isShowZoomLevel()) || !mapActivity.getMyApplication().getSettings().SHOW_RULER.get()){
+				return;
+			}
+			OsmandMapTileView view = mapActivity.getMapView();
+			// update cache
+			if (view.isZooming()) {
+				cacheRulerText = null;
+			} else if((tb.getZoom() + tb.getZoomScale()) != cacheRulerZoom ||
+					Math.abs(tb.getCenterTileX() - cacheRulerTileX) +  Math.abs(tb.getCenterTileY() - cacheRulerTileY) > 1){
+				cacheRulerZoom = (tb.getZoom() + tb.getZoomScale());
+				cacheRulerTileX = tb.getCenterTileX();
+				cacheRulerTileY = tb.getCenterTileY();
+				final double dist = tb.getDistance(0, tb.getPixHeight() / 2, tb.getPixWidth(), tb.getPixHeight() / 2);
+				double pixDensity = tb.getPixWidth() / dist;
+				
+				double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getApplication());
+				
+				int cacheRulerDistPix = (int) (pixDensity * roundedDist);
+				cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication()));
+				cacheRulerTextLen = rulerTextPaint.measureText(cacheRulerText.getText());
+				Rect bounds = rulerDrawable.getBounds();
+				bounds.right = (int) (view.getWidth() - 7 * scaleCoefficient);
+				bounds.bottom = (int) (view.getHeight() - (!zoomControls.isVisible() ? 0 : zoomControls.getHeight()));
+				bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
+				bounds.left = bounds.right - cacheRulerDistPix;
+				rulerDrawable.setBounds(bounds);
+			} 
 			
-			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getApplication());
-			
-			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
-			cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication()));
-			cacheRulerTextLen = rulerTextPaint.measureText(cacheRulerText.getText());
-			
-			Rect bounds = rulerDrawable.getBounds();
-			bounds.right = (int) (view.getWidth() - 7 * scaleCoefficient);
-			bounds.bottom = (int) (view.getHeight() - (!zoomControls.isVisible() ? 0 : zoomControls.getHeight()));
-			bounds.top = bounds.bottom - rulerDrawable.getMinimumHeight();
-			bounds.left = bounds.right - cacheRulerDistPix;
-			rulerDrawable.setBounds(bounds);
-		} 
-		if (cacheRulerText != null) {
-			rulerDrawable.draw(canvas);
-			Rect bounds = rulerDrawable.getBounds();
-			cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
-					rulerTextPaint, shadowColor);
+
+			if (cacheRulerText != null) {
+				Rect bounds = rulerDrawable.getBounds();
+				int bottom = (int) (view.getHeight() - (!zoomControls.isVisible() ? 0 : zoomControls.getHeight()));
+				if(bounds.bottom != bottom) {
+					bounds.bottom = bottom;
+					rulerDrawable.setBounds(bounds);
+				}
+				rulerDrawable.draw(canvas);
+				cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
+						rulerTextPaint, shadowColor);
+			}
 		}
 	}
 

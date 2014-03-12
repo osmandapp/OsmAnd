@@ -117,14 +117,11 @@ public class MapZoomControls extends MapControls {
 	}
 
 	@Override
-	public int getWidth() {
-		return 0; // TODO
-	}
-
-	@Override
 	public void hideControls(FrameLayout layout) {
 		mapActivity.accessibleContent.remove(zoomInButton);
 		mapActivity.accessibleContent.remove(zoomOutButton);
+		layout.removeView(zoomInButton);
+		layout.removeView(zoomOutButton);
 	}
 
 	private void drawZoomLevel(Canvas canvas, RotatedTileBox tb, boolean drawZoomLevel) {
@@ -233,6 +230,12 @@ public class MapZoomControls extends MapControls {
 	public int getHeight() {
 		Drawable buttonDrawable = view.getResources().getDrawable(R.drawable.map_zoom_in);
 		return buttonDrawable.getMinimumHeight();
+	}
+	
+	@Override
+	public int getWidth() {
+		Drawable buttonDrawable = view.getResources().getDrawable(R.drawable.map_zoom_in);
+		return buttonDrawable.getMinimumWidth() + buttonDrawable.getMinimumWidth();
 	}
 
 }

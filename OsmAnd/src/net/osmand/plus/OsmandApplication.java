@@ -28,7 +28,6 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.ExternalServiceAPI;
 import net.osmand.plus.api.InternalOsmAndAPI;
-import net.osmand.plus.api.InternalToDoAPI;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
@@ -107,7 +106,6 @@ public class OsmandApplication extends Application implements ClientContext {
 	
 	SettingsAPI settingsAPI;
 	ExternalServiceAPI externalServiceAPI;
-	InternalToDoAPI internalToDoAPI;
 	InternalOsmAndAPI internalOsmAndAPI;
 	SQLiteAPI sqliteAPI;
 	BRouterServiceConnection bRouterServiceConnection;
@@ -128,7 +126,6 @@ public class OsmandApplication extends Application implements ClientContext {
 		 
 		settingsAPI = new net.osmand.plus.api.SettingsAPIImpl(this);
 		externalServiceAPI = new net.osmand.plus.api.ExternalServiceAPIImpl(this);
-		internalToDoAPI = new net.osmand.plus.api.InternalToDoAPIImpl(this);
 		internalOsmAndAPI = new net.osmand.plus.api.InternalOsmAndAPIImpl(this);
 		sqliteAPI = new SQLiteAPIImpl(this);
 		
@@ -694,11 +691,6 @@ public class OsmandApplication extends Application implements ClientContext {
 	@Override
 	public ExternalServiceAPI getExternalServiceAPI() {
 		return externalServiceAPI;
-	}
-
-	@Override
-	public InternalToDoAPI getTodoAPI() {
-		return internalToDoAPI;
 	}
 
 	@Override

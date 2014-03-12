@@ -5,7 +5,6 @@ import java.io.File;
 import net.osmand.Location;
 import net.osmand.plus.api.ExternalServiceAPI;
 import net.osmand.plus.api.InternalOsmAndAPI;
-import net.osmand.plus.api.InternalToDoAPI;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.render.RendererRegistry;
@@ -34,8 +33,6 @@ public interface ClientContext {
 	public SettingsAPI getSettingsAPI();
 	
 	public ExternalServiceAPI getExternalServiceAPI();
-	
-	public InternalToDoAPI getTodoAPI();
 	
 	public InternalOsmAndAPI getInternalAPI();
 	

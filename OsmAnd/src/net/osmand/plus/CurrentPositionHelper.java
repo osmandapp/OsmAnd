@@ -17,14 +17,14 @@ public class CurrentPositionHelper {
 	private Location lastAskedLocation = null;
 	private Thread calculatingThread = null;
 	private RoutingContext ctx;
-	private ClientContext app;
+	private OsmandApplication app;
 	private ApplicationMode am;
 
-	public CurrentPositionHelper(ClientContext app) {
+	public CurrentPositionHelper(OsmandApplication app) {
 		this.app = app;
 	}
 
-	private void initCtx(ClientContext app) {
+	private void initCtx(OsmandApplication app) {
 		am = app.getSettings().getApplicationMode();
 		GeneralRouterProfile p ;
 		if (am.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
@@ -37,7 +37,7 @@ public class CurrentPositionHelper {
 			return;
 		}
 		RoutingConfiguration cfg = RoutingConfiguration.getDefault().build(p.name().toLowerCase(), 10);
-		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, app.getTodoAPI().getRoutingMapFiles());
+		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, app.getResourceManager().getRoutingMapFiles());
 	}
 	
 	private RouteDataObject runUpdateInThread(Location loc) {

@@ -916,7 +916,7 @@ public class OsmandSettings {
 		if (!dir.exists()) {
 			return checkAmongAvailableTileSources(dir, knownTemplates);
 		} else if (tileName.endsWith(IndexConstants.SQLITE_EXT)) {
-			return ctx.getTodoAPI().newSqliteTileSource(dir, knownTemplates);
+			return new SQLiteTileSource(ctx, dir, knownTemplates);
 		} else if (dir.isDirectory() && !dir.getName().startsWith(".")) {
 			TileSourceTemplate t = TileSourceManager.createTileSourceTemplate(dir);
 			if (warnWhenSelected && !t.isRuleAcceptable()) {
