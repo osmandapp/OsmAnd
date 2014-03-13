@@ -15,8 +15,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.RouteInfoLayer;
 import net.osmand.plus.views.TurnPathHelper;
+import net.osmand.plus.views.controls.MapRouteInfoControl;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -86,7 +86,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 		RouteDirectionInfo item = ((RouteInfoAdapter)getListAdapter()).getItem(position - 1);
 		Location loc = helper.getLocationFromRouteDirection(item);
 		if(loc != null){
-			RouteInfoLayer.directionInfo = position - 1;
+			MapRouteInfoControl.directionInfo = position - 1;
 			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 			settings.setMapLocationToShow(loc.getLatitude(),loc.getLongitude(),
 					Math.max(13, settings.getLastKnownMapZoom()), null, item.getDescriptionRoute(((OsmandApplication) getApplication())) + " " + getTimeDescription(item), null);

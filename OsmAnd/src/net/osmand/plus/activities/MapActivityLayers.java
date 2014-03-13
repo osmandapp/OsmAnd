@@ -37,7 +37,20 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.*;
+import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.FavoritesLayer;
+import net.osmand.plus.views.GPXLayer;
+import net.osmand.plus.views.MapControlsLayer;
+import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.POIMapLayer;
+import net.osmand.plus.views.PointLocationLayer;
+import net.osmand.plus.views.PointNavigationLayer;
+import net.osmand.plus.views.RouteLayer;
+import net.osmand.plus.views.TransportInfoLayer;
+import net.osmand.plus.views.TransportStopsLayer;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
@@ -79,7 +92,6 @@ public class MapActivityLayers {
 	private PointNavigationLayer navigationLayer;
 	private MapInfoLayer mapInfoLayer;
 	private ContextMenuLayer contextMenuLayer;
-	private RouteInfoLayer routeInfoLayer;
 	private MapControlsLayer mapControlsLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
 
@@ -139,9 +151,6 @@ public class MapActivityLayers {
 		// 9. map info layer
 		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
 		mapView.addLayer(mapInfoLayer, 9);
-		// 10. route info layer
-		routeInfoLayer = new RouteInfoLayer(routingHelper, activity, contextMenuLayer);
-		mapView.addLayer(routeInfoLayer, 10);
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);
@@ -752,10 +761,6 @@ public class MapActivityLayers {
 	
 	public MapControlsLayer getMapControlsLayer() {
 		return mapControlsLayer;
-	}
-	
-	public RouteInfoLayer getRouteInfoLayer() {
-		return routeInfoLayer;
 	}
 	
 	

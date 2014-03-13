@@ -122,7 +122,7 @@ public class TestVoiceActivity extends SherlockActivity {
 							addButtons(ll, p);
 						}						
 					}
-				});
+				}, true);
 				dialog.dismiss();
 			}
 		});

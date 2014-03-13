@@ -1,8 +1,11 @@
 package net.osmand.plus.views.controls;
 
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -25,7 +28,17 @@ public class MapNavigateControl extends MapControls {
 		navigateButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO
+				OsmandApplication app = mapActivity.getMyApplication();
+				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+				RoutingHelper routingHelper = app.getRoutingHelper();
+				app.getSettings().FOLLOW_THE_ROUTE.set(true);
+				GPXRouteParams gpxRoute = null; // TODO gpx route
+				if(gpxRoute == null) {
+					app.getSettings().FOLLOW_THE_GPX_ROUTE.set(null);
+				}
+				routingHelper.setFollowingMode(true);
+				routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+				app.initVoiceCommandPlayer(mapActivity);
 			}
 		});
 	}

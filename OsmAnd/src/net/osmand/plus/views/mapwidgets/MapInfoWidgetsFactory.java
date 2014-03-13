@@ -14,6 +14,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.ShadowText;
+import net.osmand.plus.views.controls.MapRouteInfoControl;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -316,8 +317,8 @@ public class MapInfoWidgetsFactory {
 				if (routingHelper.isFollowingMode()) {
 					text = routingHelper.getCurrentName();
 				} else {
-					int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
-					if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible() &&
+					int di = MapRouteInfoControl.getDirectionInfo();
+					if (di >= 0 && MapRouteInfoControl.isControlVisible() &&
 							di < routingHelper.getRouteDirections().size()) {
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
 						text = "\u2566 " + RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());

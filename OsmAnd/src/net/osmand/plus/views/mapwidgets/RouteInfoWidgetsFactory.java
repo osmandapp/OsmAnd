@@ -23,8 +23,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.RouteInfoLayer;
 import net.osmand.plus.views.TurnPathHelper;
+import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import android.content.Context;
@@ -557,14 +557,12 @@ public class RouteInfoWidgetsFactory {
 							}
 						}
 					} else {
-						RouteInfoLayer ls = view.getLayerByClass(RouteInfoLayer.class);
-						if (ls != null) {
-							int di = ls.getDirectionInfo();
-							if (di >= 0 && ls.isVisible() && di < routingHelper.getRouteDirections().size()) {
-								RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-								if (next != null) {
-									loclanes = next.getTurnType().getLanes();
-								}
+						int di = MapRouteInfoControl.getDirectionInfo();
+						if (di >= 0 && MapRouteInfoControl.isControlVisible()
+								&& di < routingHelper.getRouteDirections().size()) {
+							RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
+							if (next != null) {
+								loclanes = next.getTurnType().getLanes();
 							}
 						}
 					}
