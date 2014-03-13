@@ -1348,4 +1348,5 @@
     <string name="speech_rate">Скорость произношения</string>
     <string name="app_modes_choose_descr">Укажите профили, видимые в программе</string>
     <string name="app_modes_choose">Профили программы</string>
-	</resources>
+	<string name="edit_tilesource_choose_existing">Выберите существующий ...</string>
+    </resources>
