@@ -1316,4 +1316,36 @@
 	<string name="auto_zoom_close">К крупному плану</string>
 	<string name="auto_zoom_far">К среднему плану</string>
 	<string name="auto_zoom_farthest">К дальнему плану</string>
+	<string name="routing_attr_avoid_motorway_description">Избегать автомагистралей</string>
+	<string name="routing_attr_avoid_motorway_name">Избегать автомагистралей</string>
+	<string name="routing_attr_prefer_motorway_name">Предпочитать автомагистрали</string>
+	<string name="routing_attr_prefer_motorway_description">Предпочитать автомагистрали</string>
+	<string name="routing_attr_short_way_name">Короткий путь</string>
+	<string name="routing_attr_short_way_description">Использовать короткий путь</string>
+	<string name="routing_attr_avoid_toll_name">Избегать платных дорог</string>
+	<string name="routing_attr_avoid_toll_description">Избегать платных дорог</string>
+	<string name="routing_attr_avoid_unpaved_name">Избегать грунтовые дороги</string>
+	<string name="routing_attr_avoid_unpaved_description">Избегать грунтовые дороги</string>
+	<string name="routing_attr_avoid_ferries_name">Избегать паромов</string>
+	<string name="routing_attr_avoid_ferries_description">Избегать паромов</string>
+	<string name="routing_attr_weight_name">Вес</string>
+	<string name="routing_attr_weight_description">Уточнить ограничение веса</string>
+    <string name="tip_recent_changes_1_7_t">Изменения в 1.7:
+	\n\t* Полностью обновлённая маршрутизация (быстрая и точная)
+	\n\t* Активное моделирование в тоннелях
+	\n\t* Множество мелких улучшений интерфейса и правок удобства пользования
+	\n\t* Установки скорости речи
+    </string>
+    <string name="map_widget_map_rendering">Предоставление карты:</string>
+    <string name="amenity_type_seamark">Навигационный знак</string>
+    <string name="disable_complex_routing">Отключить сложную маршрутизацию</string>
+    <string name="speech_rate_descr">Указать скорость произношения для TTS</string>
+    <string name="guidance_preferences_descr">Установки навигации</string>
+    <string name="routing_preferences_descr">Установки маршрутизации</string>
+    <string name="app_mode_truck">Грузовик</string>
+    <string name="calculate_osmand_route_gpx">Рассчитать оффлайновый маршрут OsmAnd</string>
+    <string name="copying_osmand_files">Копирование файлов OsmAnd</string>
+    <string name="speech_rate">Скорость произношения</string>
+    <string name="app_modes_choose_descr">Укажите профили, видимые в программе</string>
+    <string name="app_modes_choose">Профили программы</string>
 	</resources>
