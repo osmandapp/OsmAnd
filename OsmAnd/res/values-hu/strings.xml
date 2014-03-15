@@ -1405,8 +1405,7 @@
     <string name="tip_faq">Gyakran Ismétlődő Kérdések (FAQ)</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d osm változtatás törlésére készülsz. Biztos vagy benne?</string>
     <string name="local_osm_changes_delete_all">Összes törlése</string>
-    <string name="route_is_too_long">Az útvonal feltehetőleg túl hosszú az OsmAnd offline tervezője számára.
-        	Általában legfeljebb 200 km-re levő pontok közt lehet útvonalat tervezni. Kérlek adj hozzá köztes útpontokat.</string>
+    <string name="route_is_too_long">Az OsmAnd offline tervezője számára rendkívül sokáig tarthat (vagy néha nem is működik) 200 km-nél távolabb lévő pontok között útvonalat tervezni. Kérlek adj hozzá köztes útpontokat.</string>
 	<string name="auto_zoom_none">Nincs auto zoom</string>
 	<string name="auto_zoom_close">Közelre</string>
 	<string name="auto_zoom_far">Közepes távolságra</string>
