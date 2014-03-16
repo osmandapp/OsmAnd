@@ -9,7 +9,7 @@ import java.util.Set;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.actions.NavigateAction;
+import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.util.SunriseSunset;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -110,7 +110,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		modes.remove(ApplicationMode.DEFAULT);
 		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(ApplicationMode.values(settings));
 		selected.remove(ApplicationMode.DEFAULT);
-		View v = NavigateAction.prepareAppModeView(this, modes, selected, null, false, 
+		View v = AppModeDialog.prepareAppModeView(this, modes, selected, null, false, 
 				new View.OnClickListener() {
 
 					@Override

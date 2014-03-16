@@ -15,7 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.actions.NavigateAction;
+import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.views.SeekBarPreference;
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -324,7 +324,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 	protected void profileDialog() {
 		Builder b = new AlertDialog.Builder(this);
 		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-		View v = NavigateAction.prepareAppModeView(this, selected, false, null, true,
+		View v = AppModeDialog.prepareAppModeView(this, selected, false, null, true,
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {

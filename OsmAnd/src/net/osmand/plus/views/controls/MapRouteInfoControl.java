@@ -1,12 +1,18 @@
 package net.osmand.plus.views.controls;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
-import net.osmand.plus.activities.actions.NavigateAction;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
@@ -25,10 +31,12 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MapRouteInfoControl extends MapControls implements IRouteInformationListener {
 	private Button infoButton;
@@ -38,9 +46,6 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	private final ContextMenuLayer contextMenu;
 	private final RoutingHelper routingHelper;
 	private OsmandMapTileView mapView;
-	private ImageButton next;
-	private ImageButton prev;
-	private ImageButton info;
 	private Dialog dialog;
 	
 	
@@ -55,7 +60,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	
 	@Override
 	public void showControls(FrameLayout parent) {
-		infoButton = addButton(parent, R.string.info_button, R.drawable.map_btn_signpost);
+		infoButton = addButton(parent, R.string.route_info, R.drawable.map_btn_signpost);
 		controlVisible = true;
 		infoButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -82,20 +87,17 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	
 	private Dialog showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-        LinearLayout lmain = new LinearLayout(mapActivity);
-		lmain.setOrientation(LinearLayout.VERTICAL);
+		View lmain = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
 		boolean addButtons = routingHelper.isRouteCalculated();
 		if(addButtons) {
-			LinearLayout buttons = createButtonsLayout(scaleCoefficient);
-			lmain.addView(buttons);
-		}
-		View lv = new NavigateAction(mapActivity).createDialogView();
-		lv.setId(R.id.MainLayout);
-		lmain.addView(lv);
-		if(addButtons) {
 			attachListeners(lmain);
+			updateInfo(lmain);
+		} else {
+			lmain.findViewById(R.id.RouteInfoControls).setVisibility(View.GONE);
+			lmain.findViewById(R.id.SimulateRoute).setVisibility(View.GONE);
 		}
         builder.setView(lmain);
+//        builder.setTitle(R.string.route_info);
         
         Dialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
@@ -111,6 +113,19 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
         return dialog;
 	}
 	
+	private void updateInfo(View view) {
+		String via = generateViaDescription();
+		if(via.length() == 0){
+			((TextView) view.findViewById(R.id.ViaView)).setVisibility(View.GONE);
+		} else {
+			((TextView) view.findViewById(R.id.ViaView)).setVisibility(View.VISIBLE);
+			((TextView) view.findViewById(R.id.ViaView)).setText(via);
+		}
+		final Spinner fromSpinner = setupFromSpinner(null, null, view);
+		final Spinner toSpinner = setupToSpinner(null, null ,view);
+		
+	}
+
 	public static int getDirectionInfo() {
 		return directionInfo;
 	}
@@ -137,35 +152,24 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		return width ;
 	}
 	
-	private LinearLayout createButtonsLayout(float density) {
-		LinearLayout ll = new LinearLayout(mapActivity);
-		ll.setGravity(Gravity.CENTER);
-		ll.setOrientation(LinearLayout.HORIZONTAL);
-		ll.setPadding((int) (density * 10), (int) (density * 5), (int) (density * 10), (int) (density * 5));
-		prev = new ImageButton(mapActivity);
-		prev.setContentDescription(mapActivity.getString(R.string.previous_button));
-		prev.setImageResource(R.drawable.ax_1_navigation_previous_item_light);
-		prev.setAdjustViewBounds(true);
-		prev.setBackgroundResource(R.drawable.map_btn_plain);
-		ll.addView(prev);
-		info = new ImageButton(mapActivity);
-		info.setContentDescription(mapActivity.getString(R.string.info_button));
-		info.setBackgroundResource(R.drawable.map_btn_plain);
-		info.setAdjustViewBounds(true);
-		info.setImageResource(R.drawable.ax_2_action_about_light);
-		ll.addView(info);
-		next = new ImageButton(mapActivity);
-		next.setContentDescription(mapActivity.getString(R.string.next_button));
-		next.setBackgroundResource(R.drawable.map_btn_plain);
-		next.setAdjustViewBounds(true);
-		next.setImageResource(R.drawable.ax_1_navigation_next_item_light);
-		ll.addView(next);
-		return ll;
-	}
-
 	
 	private void attachListeners(final View mainView) {
 		final OsmandApplication ctx = mapActivity.getMyApplication();
+		final Button simulateRoute = (Button) mainView.findViewById(R.id.SimulateRoute);
+		final OsmAndLocationProvider loc = ctx.getLocationProvider();
+		simulateRoute.setText(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route);
+		simulateRoute.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mainView.findViewById(R.id.RouteTargets).setVisibility(View.GONE);
+				mainView.findViewById(R.id.RouteInfoControls).setVisibility(View.GONE);
+				simulateRoute.setText(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route : R.string.animate_route_off);
+				loc.getLocationSimulation().startStopRouteAnimation(mapActivity);
+				
+			}
+		});
+		ImageButton prev = (ImageButton) mainView.findViewById(R.id.Prev);
 		prev.setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -173,7 +177,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				if(routingHelper.getRouteDirections() != null && directionInfo > 0){
 					directionInfo--;
 					if(routingHelper.getRouteDirections().size() > directionInfo){
-						mainView.findViewById(R.id.MainLayout).setVisibility(View.GONE);
+						mainView.findViewById(R.id.RouteTargets).setVisibility(View.GONE);
+						simulateRoute.setVisibility(View.GONE);
 						RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 						net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
 						contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute(ctx));
@@ -184,11 +189,13 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			}
 			
 		});
+		ImageButton next = (ImageButton) mainView.findViewById(R.id.Next);
 		next.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
 				if(routingHelper.getRouteDirections() != null && directionInfo < routingHelper.getRouteDirections().size() - 1){
-					mainView.findViewById(R.id.MainLayout).setVisibility(View.GONE);
+					mainView.findViewById(R.id.RouteTargets).setVisibility(View.GONE);
+					simulateRoute.setVisibility(View.GONE);
 					directionInfo++;
 					RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 					net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
@@ -199,6 +206,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			}
 			
 		});
+		ImageButton info = (ImageButton) mainView.findViewById(R.id.Info);
 		info.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -218,6 +226,83 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	public void newRouteIsCalculated(boolean newRoute) {
 		directionInfo = -1;
 		mapView.refreshMap();
+	}
+	
+	public String generateViaDescription() {
+		TargetPointsHelper targets = getTargets();
+		String via = "";
+		List<String> names = targets.getIntermediatePointNames();
+		List<LatLon> points = targets.getIntermediatePoints();
+		if (names.size() == 0) {
+			return via;
+		}
+		for (int i = 0; i < points.size() ; i++) {
+			via += "\n - " + getRoutePointDescription(points.get(i), i >= names.size() ? "" :names.get(i));
+		}
+		return mapActivity.getString(R.string.route_via) + via;
+	}
+	
+	public String getRoutePointDescription(double lat, double lon) {
+    	return mapActivity.getString(R.string.route_descr_lat_lon, lat, lon);
+    }
+    
+    public String getRoutePointDescription(LatLon l, String d) {
+    	if(d != null && d.length() > 0) {
+    		return d.replace(':', ' ');
+    	}
+    	if(l != null) {
+    		return mapActivity.getString(R.string.route_descr_lat_lon, l.getLatitude(), l.getLongitude());
+    	}
+    	return "";
+    }
+    
+    private Spinner setupFromSpinner(final Location start, String name, View view) {
+		String currentLocation = mapActivity.getString(R.string.route_descr_current_location);
+		ArrayList<String> fromActions = new ArrayList<String>();
+		fromActions.add(currentLocation);
+		if (start != null) {
+			String oname = name != null ? name
+					: getRoutePointDescription(start.getLatitude(), start.getLongitude());
+			String mapLocation = mapActivity.getString(R.string.route_descr_map_location) + " " + oname;
+			fromActions.add(mapLocation);
+		}
+		final Spinner fromSpinner = ((Spinner) view.findViewById(R.id.FromSpinner));
+		ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(view.getContext(), 
+				android.R.layout.simple_spinner_item, 
+				fromActions
+				);
+		fromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		fromSpinner.setAdapter(fromAdapter);
+		if(start == null) {
+			fromSpinner.setSelection(1);
+		}
+		return fromSpinner;
+	}
+    
+    private Spinner setupToSpinner(final Location to, String name, View view) {
+		final TargetPointsHelper targets = getTargets();
+		ArrayList<String> toActions = new ArrayList<String>();
+		if (targets.getPointToNavigate() != null) {
+			toActions.add(mapActivity.getString(R.string.route_descr_destination) + " "
+					+ getRoutePointDescription(targets.getPointToNavigate(), targets.getPointNavigateDescription()));
+		}
+		if(to != null) {
+			String oname = name != null ? name : getRoutePointDescription(to.getLatitude(),to.getLongitude());
+			String mapLocation = mapActivity.getString(R.string.route_descr_map_location) + " " + oname;
+			toActions.add(mapLocation);
+		}
+		final Spinner toSpinner = ((Spinner) view.findViewById(R.id.ToSpinner));
+		ArrayAdapter<String> toAdapter = new ArrayAdapter<String>(view.getContext(), 
+				android.R.layout.simple_spinner_item, 
+				toActions
+				);
+		toAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		toSpinner.setAdapter(toAdapter);
+		return toSpinner;
+	}
+
+	private TargetPointsHelper getTargets() {
+		return mapActivity.getMyApplication().getTargetPointsHelper();
 	}
 
 	@Override

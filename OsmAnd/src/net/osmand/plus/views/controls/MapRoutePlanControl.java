@@ -11,32 +11,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-public class MapCancelControl extends MapControls {
-	private Button cancelButton;
+public class MapRoutePlanControl extends MapControls {
+	private Button routePlanButton;
 	
 	
-	public MapCancelControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
+	public MapRoutePlanControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		super(mapActivity, showUIHandler, scaleCoefficient);
 	}
 	
 	@Override
 	public void showControls(FrameLayout parent) {
-		cancelButton = addButton(parent, R.string.cancel_navigation, R.drawable.map_btn_cancel);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
+		routePlanButton = addButton(parent, R.string.info_button, R.drawable.map_btn_info);
+		routePlanButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(mapActivity.getRoutingHelper().isFollowingMode()) {
-					mapActivity.getMapActions().stopNavigationActionConfirm(mapActivity.getMapView());
-				} else {
-					mapActivity.getMapActions().stopNavigationWithoutConfirm();
-				}
+				mapActivity.getRoutingHelper().setRoutePlanningMode(true);
+				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+				mapActivity.refreshMap();
 			}
 		});
 	}
 
 	@Override
 	public void hideControls(FrameLayout layout) {
-		removeButton(layout, cancelButton);
+		removeButton(layout, routePlanButton);
 	}
 
 	@Override
@@ -45,7 +43,7 @@ public class MapCancelControl extends MapControls {
 	
 	public int getWidth() {
 		if (width == 0) {
-			Drawable buttonDrawable = mapActivity.getResources().getDrawable(R.drawable.map_btn_cancel);
+			Drawable buttonDrawable = mapActivity.getResources().getDrawable(R.drawable.map_btn_info);
 			width = buttonDrawable.getMinimumWidth();
 		}
 		return width ;

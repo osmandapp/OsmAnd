@@ -50,34 +50,33 @@ public class ApplicationMode {
 			icon(R.drawable.ic_truck, R.drawable.ic_action_truck_light, R.drawable.ic_action_truck_dark).reg();
 	
 	static {
-		ApplicationMode[] exceptPedestrian = new ApplicationMode[] { DEFAULT, CAR, BICYCLE, BOAT, AIRCRAFT };
+		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[] { CAR, BICYCLE, BOAT, AIRCRAFT };
 		ApplicationMode[] exceptAirBoat = new ApplicationMode[] { DEFAULT, CAR, BICYCLE};
-		ApplicationMode[] exceptCarBoatAir = new ApplicationMode[] { DEFAULT, BICYCLE, PEDESTRIAN };
 		ApplicationMode[] pedestrian = new ApplicationMode[] { PEDESTRIAN };
 		
 		ApplicationMode[] all = null;
 		ApplicationMode[] none = new ApplicationMode[] {};
 		
 		// left
-		regWidget("next_turn", exceptPedestrian);
+		regWidget("next_turn", exceptPedestrianAndDefault);
 		regWidget("next_turn_small", pedestrian);
-		regWidget("next_next_turn", exceptPedestrian);
+		regWidget("next_next_turn", exceptPedestrianAndDefault);
 		
 		// right		
 		regWidget("intermediate_distance", all);
 		regWidget("distance", all);
 		regWidget("time", all);
-		regWidget("speed", exceptPedestrian);
-		regWidget("max_speed", exceptAirBoat);
-		regWidget("gps_info", exceptCarBoatAir);
-		regWidget("altitude", exceptCarBoatAir);
+		regWidget("speed", exceptPedestrianAndDefault);
+		regWidget("max_speed", CAR);
+		regWidget("gps_info", DEFAULT);
+		regWidget("altitude", BICYCLE);
 		
 		// top
 		regWidget("compass", all);
 		regWidget("config", all);
 		regWidget("street_name", exceptAirBoat);
 		regWidget("back_to_location", all);
-		regWidget("monitoring_services", exceptCarBoatAir);
+		regWidget("monitoring_services", none);
 		regWidget("bgService", none);
 		regWidget("layers", none);
 	}

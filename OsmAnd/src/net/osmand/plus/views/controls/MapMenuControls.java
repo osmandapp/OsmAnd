@@ -116,6 +116,14 @@ public class MapMenuControls extends MapControls {
 		mQuickAction.setAnimStyle(QuickAction.ANIM_AUTO);
 		mQuickAction.show();
 	}
+
+	public int getWidth() {
+		if (width == 0) {
+			Drawable buttonDrawable = mapActivity.getResources().getDrawable(R.drawable.map_btn_menu);
+			width = buttonDrawable.getMinimumWidth();
+		}
+		return width ;
+	}
 	
 
 

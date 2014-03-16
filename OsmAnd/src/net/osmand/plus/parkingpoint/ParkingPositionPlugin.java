@@ -2,7 +2,6 @@ package net.osmand.plus.parkingpoint;
 
 
 import java.util.Calendar;
-import java.util.EnumSet;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
@@ -27,8 +26,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.location.Location;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -200,7 +197,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public void registerMapContextMenuActions(final MapActivity mapActivity,
 			final double latitude, final double longitude,
 			ContextMenuAdapter adapter, Object selectedObj) {
-		boolean isParkingSelected = false;
 		if (selectedObj == parkingPosition && parkingPosition != null) {
 			OnContextMenuClick removeListener = new OnContextMenuClick() {
 				@Override
@@ -350,8 +346,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			public void onClick(DialogInterface dialog, int which) {
 				choose.dismiss();
 				Calendar cal = Calendar.getInstance();
-				int hour = cal.get(Calendar.HOUR_OF_DAY );
-				int minute = cal.get(Calendar.MINUTE);
+				//int hour = cal.get(Calendar.HOUR_OF_DAY );
+				//int minute = cal.get(Calendar.MINUTE);
                 cal.add(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
                 cal.add(Calendar.MINUTE, timePicker.getCurrentMinute());
 				setParkingTime(cal.getTimeInMillis());

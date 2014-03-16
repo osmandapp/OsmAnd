@@ -4,7 +4,9 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.controls.MapAppModeControl;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.controls.MapRoutePlanControl;
+import net.osmand.plus.views.controls.MapRoutePreferencesControl;
 import net.osmand.plus.views.controls.MapCancelControl;
 import net.osmand.plus.views.controls.MapControls;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
@@ -31,7 +33,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private static final int NIGHT_COLOR = 0xffC8C8C8;
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 5000;
 	private final MapActivity mapActivity;
-	private int shadowColor;
+	private int shadowColor = -1;
 	
 	private MapZoomControls zoomControls;
 	private MapMenuControls mapMenuControls;
@@ -41,7 +43,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private MapCancelControl mapCancelNavigationControl;
 	private MapRouteInfoControl mapInfoNavigationControl;
 	private MapNavigateControl mapNavigationControl;
-	private MapAppModeControl mapAppModeControl;
+	private MapRoutePlanControl mapRoutePlanControl;
+	private MapRoutePreferencesControl mapAppModeControl;
 	
 	private float scaleCoefficient;
 
@@ -71,6 +74,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 				rightGravity);
 		mapMenuControls = init(new MapMenuControls(mapActivity, showUIHandler, scaleCoefficient), parent, 
 				leftGravity);
+		mapRoutePlanControl = init(new MapRoutePlanControl(mapActivity, showUIHandler, scaleCoefficient), parent,
+				leftGravity);
 		// calculate route buttons
 		mapSmallMenuControls = init(new SmallMapMenuControls(mapActivity, showUIHandler, scaleCoefficient), parent,
 				leftGravity);
@@ -81,11 +86,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 				leftGravity);
 		mapNavigationControl = init(new MapNavigateControl(mapActivity, showUIHandler, scaleCoefficient), parent,
 				rightGravity);
-		mapAppModeControl = init(new MapAppModeControl(mapActivity, showUIHandler, scaleCoefficient), parent,
+		mapAppModeControl = init(new MapRoutePreferencesControl(mapActivity, showUIHandler, scaleCoefficient), parent,
 				rightGravity);
 		
 		rulerControl = init(new RulerControl(zoomControls, mapActivity, showUIHandler, scaleCoefficient), parent, 
 				rightGravity);
+		mapRoutePlanControl.setMargin(mapMenuControls.getWidth());
 		mapCancelNavigationControl.setMargin(mapSmallMenuControls.getWidth());
 		mapInfoNavigationControl.setMargin(mapSmallMenuControls.getWidth() + mapCancelNavigationControl.getWidth());
 		mapAppModeControl.setMargin(mapNavigationControl.getWidth());
@@ -114,13 +120,28 @@ public class MapControlsLayer extends OsmandMapLayer {
 			updatextColor(textColor, shadw, rulerControl, zoomControls, mapMenuControls);
 		}
 		// default buttons
-		boolean route = mapActivity.getRoutingHelper().isRouteCalculated() || mapActivity.getRoutingHelper().isRouteBeingCalculated(); 
-		boolean showDefaultButtons = !route &&	!mapActivity.getRoutingHelper().isFollowingMode();
+		boolean routePlanningMode = false;
+		RoutingHelper rh = mapActivity.getRoutingHelper();
+		if(rh.isRoutePlanningMode() ) {
+			routePlanningMode = true;
+		} else if((rh.isRouteCalculated() || rh.isRouteBeingCalculated()) && 
+				!rh.isFollowingMode()){
+			routePlanningMode = true;
+		}
+		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
+		boolean showDefaultButtons = !routeFollowingMode && !routePlanningMode;
+		if(routePlanningMode) {
+			forceHideView(zoomControls);
+			forceHideView(mapMenuControls);
+			forceHideView(mapRoutePlanControl);
+		}
 		checkVisibilityAndDraw(showDefaultButtons, zoomControls, canvas, tileBox, nightMode);
 		checkVisibilityAndDraw(showDefaultButtons, mapMenuControls, canvas, tileBox, nightMode);
+		// show only on touch
+		checkVisibilityAndDraw(false, mapRoutePlanControl, canvas, tileBox, nightMode);
 		
 		// route calculation buttons
-		boolean showRouteCalculationControls = route &&	!mapActivity.getRoutingHelper().isFollowingMode();
+		boolean showRouteCalculationControls = routePlanningMode;
 		checkVisibilityAndDraw(showRouteCalculationControls, mapSmallMenuControls, canvas, tileBox, nightMode);
 		checkVisibilityAndDraw(showRouteCalculationControls, mapCancelNavigationControl, canvas, tileBox, nightMode);
 		checkVisibilityAndDraw(showRouteCalculationControls, mapInfoNavigationControl, canvas, tileBox, nightMode);
@@ -152,14 +173,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 			controls.onDraw(canvas, tileBox, nightMode);
 		}		
 	}
+	
+	private void forceHideView(MapControls controls) {
+		if (controls.isVisible()) {
+			controls.forceHide((FrameLayout) mapActivity.getMapView().getParent());
+		}
+	}
 
 
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		boolean route = mapActivity.getRoutingHelper().isRouteCalculated() || mapActivity.getRoutingHelper().isRouteBeingCalculated();
-		if(route && mapActivity.getRoutingHelper().isFollowingMode()) {
+		if(!mapActivity.getRoutingHelper().isRoutePlanningMode() && mapActivity.getRoutingHelper().isFollowingMode()) {
 			zoomControls.showWithDelay((FrameLayout) mapActivity.getMapView().getParent(), TIMEOUT_TO_SHOW_BUTTONS);
 			mapMenuControls.showWithDelay((FrameLayout) mapActivity.getMapView().getParent(), TIMEOUT_TO_SHOW_BUTTONS);
+			mapRoutePlanControl.showWithDelay((FrameLayout) mapActivity.getMapView().getParent(), TIMEOUT_TO_SHOW_BUTTONS);
 		}
 		if(mapMenuControls.isVisible() && mapMenuControls.onSingleTap(point, tileBox)) {
 			return true;

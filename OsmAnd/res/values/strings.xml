@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="route_preferences">Route preferences</string>
+    <string name="route_info">Route information</string>
     <string name="routing_attr_prefer_motorway_name">Prefer motorways</string>
 	<string name="routing_attr_prefer_motorway_description">Prefer motorways</string>
 	<string name="routing_attr_short_way_name">Short way</string>
@@ -24,7 +26,7 @@
 	<string name="routing_attr_weight_name">Weight</string>
 	<string name="routing_attr_weight_description">Specify weight limitation</string>
     <string name="android_19_location_disabled">Since KitKat version you can\'t download and update map in previous storage location (%s). Do you want to change to allowed one and copy all files there?
-        \n Note : old files will stay untouched. 
+        \n Note : old files will stay untouched.  
         \n Note : it will not be possible to share files between OsmAnd and OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd could try to move the data to new destination. Do you want it?</string>
     <string name="copying_osmand_one_file_descr">Copying file (%s) to new destination...</string>

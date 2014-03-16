@@ -3,13 +3,43 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
-    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center_horizontal"
-        android:id="@+id/TopBar"/>
+
+    <LinearLayout
+        android:id="@+id/TopBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp" 
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="@string/gpx_navigation"
+            android:textSize="18sp" >
+        </TextView>
+
+        <Spinner
+            android:id="@+id/GPXRouteSpinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textSize="18sp" >
+        </Spinner>
+    </LinearLayout>
+
     <ListView
         android:id="@android:id/list"
         style="@style/OsmandListView"
+        android:layout_marginTop="5dp"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
     </ListView>
-    	
+
 </LinearLayout>

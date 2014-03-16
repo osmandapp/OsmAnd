@@ -29,16 +29,23 @@ public class MapNavigateControl extends MapControls {
 			@Override
 			public void onClick(View v) {
 				OsmandApplication app = mapActivity.getMyApplication();
-				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 				RoutingHelper routingHelper = app.getRoutingHelper();
-				app.getSettings().FOLLOW_THE_ROUTE.set(true);
-				GPXRouteParams gpxRoute = null; // TODO gpx route
-				if(gpxRoute == null) {
-					app.getSettings().FOLLOW_THE_GPX_ROUTE.set(null);
+				if(routingHelper.isFollowingMode()) {
+					routingHelper.setRoutePlanningMode(false);
+					mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+				} else {
+					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+					app.getSettings().FOLLOW_THE_ROUTE.set(true);
+					GPXRouteParams gpxRoute = null; // TODO gpx route
+					if (gpxRoute == null) {
+						app.getSettings().FOLLOW_THE_GPX_ROUTE.set(null);
+					}
+					routingHelper.setFollowingMode(true);
+					routingHelper.setRoutePlanningMode(false);
+					mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+					routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+					app.initVoiceCommandPlayer(mapActivity);
 				}
-				routingHelper.setFollowingMode(true);
-				routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
-				app.initVoiceCommandPlayer(mapActivity);
 			}
 		});
 	}

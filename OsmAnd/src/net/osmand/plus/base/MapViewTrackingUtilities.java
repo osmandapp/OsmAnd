@@ -4,10 +4,10 @@ import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
@@ -31,8 +31,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	// by default turn off causing unexpected movements due to network establishing
 	private boolean isMapLinkedToLocation = false;
 	private boolean followingMode;
-
-	
+	private boolean routePlanningMode;
 	
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
@@ -67,7 +66,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	@Override
 	public void updateCompassValue(float val) {
 		if (mapView != null) {
-			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS) {
+			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS && !routePlanningMode) {
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1) {
 					mapView.setRotate(-val);
 				}
@@ -124,19 +123,33 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				
 			}
 			followingMode = routingHelper.isFollowingMode();
+			if(routePlanningMode != routingHelper.isRoutePlanningMode()) {
+				switchToRoutePlanningMode();
+			}
 			
 			// When location is changed we need to refresh map in order to show movement!
 			mapView.refreshMap();
 		}
-		
 	}
 	
+	
+	
+	public void switchToRoutePlanningMode() {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		routePlanningMode = routingHelper.isRoutePlanningMode();
+		updateSettings();
+		if(!routePlanningMode && followingMode) {
+			backToLocationImpl();
+		}
+		
+	}
+
 	public void updateSettings(){
 		if (mapView != null) {
-			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS) {
+			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS || routePlanningMode) {
 				mapView.setRotate(0);
 			}
-			mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING ? OsmandSettings.BOTTOM_CONSTANT
+			mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING && !routePlanningMode ? OsmandSettings.BOTTOM_CONSTANT
 					: OsmandSettings.CENTER_CONSTANT);
 		}
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);
@@ -146,7 +159,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		boolean currentShowingAngle = settings.SHOW_VIEW_ANGLE.get();
 		int currentMapRotation = settings.ROTATE_MAP.get();
 		boolean registerCompassListener = overruleRegister || (currentShowingAngle && location != null)
-				|| currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS;
+				|| (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS && !routePlanningMode);
 		// show point view only if gps enabled
 		if(sensorRegistered != registerCompassListener) {
 			app.getLocationProvider().registerOrUnregisterCompassListener(registerCompassListener);
@@ -236,7 +249,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		if(!isMapLinkedToLocation){
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			if(autoFollow > 0 && app.getRoutingHelper().isFollowingMode()){
+			if(autoFollow > 0 && app.getRoutingHelper().isFollowingMode() && !routePlanningMode){
 				backToLocationWithDelay(autoFollow);
 			}
 		}

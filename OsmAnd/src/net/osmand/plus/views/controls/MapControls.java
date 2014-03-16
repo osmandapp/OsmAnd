@@ -123,10 +123,12 @@ public abstract class MapControls {
 			public void run() {
 				long ctime = System.currentTimeMillis();
 				if(MapControls.this.delayTime <= ctime) {
-					MapControls.this.delayTime = 0;
-					visible = false;
-					hideControls(layout);
-					mapActivity.getMapView().refreshMap();
+					if (MapControls.this.delayTime != 0) {
+						MapControls.this.delayTime = 0;
+						visible = false;
+						hideControls(layout);
+						mapActivity.getMapView().refreshMap();
+					}
 				} else {
 					runWithDelay(layout, MapControls.this.delayTime - ctime);
 				}
@@ -139,6 +141,13 @@ public abstract class MapControls {
 			visible = false;
 			hideControls(layout);
 		}
+	}
+	
+	public final void forceHide(FrameLayout layout) {
+		delayTime = 0;
+		visible = false;
+		hideControls(layout);
+		mapActivity.getMapView().refreshMap();
 	}
 	
 	public boolean isVisible() {

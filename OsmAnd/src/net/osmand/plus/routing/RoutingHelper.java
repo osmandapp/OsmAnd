@@ -49,6 +49,8 @@ public class RoutingHelper {
 	
 	private boolean isFollowingMode = false;
 	
+	private boolean isRoutePlanningMode = false;
+	
 	private GPXRouteParams currentGPXRoute = null;
 
 	private RouteCalculationResult route = new RouteCalculationResult("");
@@ -103,6 +105,14 @@ public class RoutingHelper {
 				app.getInternalAPI().stopNavigationService();
 			}
 		}
+	}
+	
+	public boolean isRoutePlanningMode() {
+		return isRoutePlanningMode;
+	}
+	
+	public void setRoutePlanningMode(boolean isRoutePlanningMode) {
+		this.isRoutePlanningMode = isRoutePlanningMode;
 	}
 
 	

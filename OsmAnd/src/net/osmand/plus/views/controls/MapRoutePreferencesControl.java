@@ -1,17 +1,26 @@
 package net.osmand.plus.views.controls;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.NavigateAction;
+import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.activities.SettingsNavigationActivity;
+import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.router.GeneralRouter.RoutingParameterType;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.graphics.Canvas;
@@ -21,25 +30,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
-public class MapAppModeControl extends MapControls {
+public class MapRoutePreferencesControl extends MapControls {
 	private ImageButton settingsAppModeButton;
 	private OsmandSettings settings;
 	private int cachedId;
 	private Dialog dialog;
 	
 	
-	public MapAppModeControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
+	public MapRoutePreferencesControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		super(mapActivity, showUIHandler, scaleCoefficient);
 		settings = mapActivity.getMyApplication().getSettings();
 	}
 	
 	@Override
 	public void showControls(FrameLayout parent) {
-		settingsAppModeButton = addImageButton(parent, R.string.routing_preferences_descr, R.drawable.map_btn_plain);
+		settingsAppModeButton = addImageButton(parent, R.string.route_preferences, R.drawable.map_btn_plain);
 		cachedId = 0;
 		settingsAppModeButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -69,6 +83,7 @@ public class MapAppModeControl extends MapControls {
         AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);        
         View ll = createLayout();
         builder.setView(ll);
+        //builder.setTitle(R.string.route_preferences);
         Dialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(true);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -83,25 +98,73 @@ public class MapAppModeControl extends MapControls {
         return dialog;
 	}
 
+	
+	private List<RoutingParameter> getRoutingParameters(ApplicationMode am) {
+		List<RoutingParameter> list = new ArrayList<RoutingParameter>();
+		GeneralRouter rm = SettingsNavigationActivity.getRouter(am);
+		if(rm == null) {
+			return list;
+		}
+		for (RoutingParameter r : rm.getParameters().values()) {
+			if (r.getType() == RoutingParameterType.BOOLEAN) {
+				list.add(r);
+			}
+		}
+		return list;
+	}
 	private View createLayout() {
 		View settingsDlg = View.inflate(mapActivity, R.layout.plan_route_settings, null);
+		Context ctx = mapActivity;
 		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		ApplicationMode am = settings.APPLICATION_MODE.get();
 		final ListView lv = (ListView) settingsDlg.findViewById(android.R.id.list);
 		final Set<ApplicationMode> selected = new HashSet<ApplicationMode>();
 		selected.add(am);
-		NavigateAction.prepareAppModeView(mapActivity, selected, false, 
+		
+		
+		final ArrayAdapter<RoutingParameter> listAdapter = new ArrayAdapter<RoutingParameter>(ctx, 
+				R.layout.layers_list_activity_item, R.id.title, getRoutingParameters(am)) {
+			@Override
+			public View getView(final int position, View convertView, ViewGroup parent) {
+				View v = mapActivity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
+				final TextView tv = (TextView) v.findViewById(R.id.title);
+				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
+				RoutingParameter rp = getItem(position);
+				tv.setText(SettingsBaseActivity.getRoutingStringPropertyName(mapActivity, rp.getId(), rp.getName()));
+				tv.setPadding((int) (5 * scaleCoefficient), 0, 0, 0);
+				final CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(rp.getId());
+				ch.setChecked(property.get());
+				ch.setVisibility(View.VISIBLE);
+				ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						property.set(isChecked);
+						mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+					}
+				});
+				return v;
+			}
+		};
+		
+		AppModeDialog.prepareAppModeView(mapActivity, selected, false, 
 				(ViewGroup) settingsDlg.findViewById(R.id.TopBar), true, 
 				new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if(selected.size() > 0) {
-					settings.APPLICATION_MODE.set(selected.iterator().next());
+					ApplicationMode next = selected.iterator().next();
+					settings.APPLICATION_MODE.set(next);
 					mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
-					//listAdapter.notifyDataSetChanged();
+					listAdapter.setNotifyOnChange(false);
+					listAdapter.clear();
+					for(RoutingParameter r : getRoutingParameters(next)) {
+						listAdapter.add(r);
+					}
+					listAdapter.notifyDataSetChanged();
 				}
 			}
 		});
+		lv.setAdapter(listAdapter);
 		return settingsDlg;
 	}
 
@@ -114,7 +177,7 @@ public class MapAppModeControl extends MapControls {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		int id = settings.getApplicationMode().getSmallIcon(settingsAppModeButton.isPressed() || dialog != null);
+		int id = settings.getApplicationMode().getSmallIcon(false); // settingsAppModeButton.isPressed() || dialog != null
 		if(cachedId != id && settingsAppModeButton.getLeft() > 0) {
 			cachedId = id;
 			settingsAppModeButton.setImageResource(id);
