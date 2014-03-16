@@ -1109,4 +1109,20 @@
 	<string name="tip_location_sharing_t">Ailenizle veya arkadaşlarınızla gezideyken ilginizi çeken mekanların konumunu \'Konumu kullan\' menüsünden → \'Konumu paylaş\' kısmından paylaşabilirsiniz.
 		\n\nKonumunuzun paylaşılacağı yolu seçin. Seçenekleriniz: E-Posta, SMS(metin), ya da sadece konum koordinatlarınızı cihaz panosuna kopyalayın.
 	</string>
-	</resources>
+	<string name="routing_attr_prefer_motorway_name">Motosiklet rota</string>
+	<string name="routing_attr_prefer_motorway_description">Motosiklet rota</string>
+	<string name="routing_attr_short_way_name">Kısa yol</string>
+	<string name="routing_attr_avoid_toll_name">Ücretli yolları kaçının</string>
+	<string name="routing_attr_avoid_toll_description">Ücretli yolları kaçının</string>
+	<string name="routing_attr_avoid_unpaved_name">Asfalt olmayan yollar kaçınmak</string>
+	<string name="routing_attr_avoid_unpaved_description">Asfalt olmayan yollar kaçınmak</string>
+	<string name="routing_attr_avoid_ferries_name">Geçişleri kaçınmak</string>
+	<string name="routing_attr_avoid_ferries_description">Geçişleri kaçınmak</string>
+	<string name="routing_attr_avoid_motorway_name">Road motosiklet kaçınmak</string>
+	<string name="routing_attr_avoid_motorway_description">Road motosiklet kaçınmak</string>
+	<string name="routing_attr_weight_name">ağır</string>
+	<string name="routing_attr_weight_description">Ağırsınırı belirlemek</string>
+    <string name="copying_osmand_files">Osmand dosya kopyalandı</string>
+    <string name="calculate_osmand_route_gpx">Çevrimdışı yol hesaplama Osmand</string>
+    <string name="app_mode_truck">kamyon</string>
+    </resources>
