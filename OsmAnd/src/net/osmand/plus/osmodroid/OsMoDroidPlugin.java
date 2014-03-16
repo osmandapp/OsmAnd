@@ -76,7 +76,7 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 					@Override
 					public void run() {
 						activity.followRoute(app.getSettings().getApplicationMode(), targets.getPointToNavigate(), targets.getIntermediatePoints(),app.getLastKnownLocation(), null);
-						}
+					}
 				});
 				
 			}

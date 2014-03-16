@@ -276,7 +276,7 @@ public class RoutingHelper {
 		}
 
 		if (calculateRoute) {
-			recalculateRouteInBackground(currentLocation, finalLocation, intermediatePoints, currentGPXRoute, route.isCalculated() ? route
+			recalculateRouteInBackground(false, currentLocation, finalLocation, intermediatePoints, currentGPXRoute, route.isCalculated() ? route
 					: null);
 		}
 		double projectDist = mode.hasFastSpeed() ? posTolerance : posTolerance / 2;
@@ -762,16 +762,16 @@ public class RoutingHelper {
 	}
 	
 	public void recalculateRouteDueToSettingsChange() {
-		recalculateRouteInBackground(lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, null);
+		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, null);
 	}
 	
-	private void recalculateRouteInBackground(final Location start, final LatLon end, final List<LatLon> intermediates, final GPXRouteParams gpxRoute, final RouteCalculationResult previousRoute){
+	private void recalculateRouteInBackground(boolean force, final Location start, final LatLon end, final List<LatLon> intermediates, final GPXRouteParams gpxRoute, final RouteCalculationResult previousRoute){
 		if (start == null || end == null) {
 			return;
 		}
 		if(currentRunningJob == null){
 			// do not evaluate very often
-			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
+			if (force || System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
 				RouteCalculationParams params = new RouteCalculationParams();
 				params.start = start;
 				params.end = end;

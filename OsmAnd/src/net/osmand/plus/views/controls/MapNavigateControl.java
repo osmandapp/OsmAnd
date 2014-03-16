@@ -16,14 +16,16 @@ import android.widget.FrameLayout;
 
 public class MapNavigateControl extends MapControls {
 	private Button navigateButton;
+	private MapRouteInfoControl ri;
 	
 	
-	public MapNavigateControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
+	public MapNavigateControl(MapRouteInfoControl ri,  MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		super(mapActivity, showUIHandler, scaleCoefficient);
+		this.ri = ri;
 	}
 	
 	@Override
-	public void showControls(FrameLayout parent) {
+	public void showControls(final FrameLayout parent) {
 		navigateButton = addButton(parent, R.string.get_directions, R.drawable.map_btn_navigate);
 		navigateButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -34,17 +36,22 @@ public class MapNavigateControl extends MapControls {
 					routingHelper.setRoutePlanningMode(false);
 					mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 				} else {
-					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-					app.getSettings().FOLLOW_THE_ROUTE.set(true);
-					GPXRouteParams gpxRoute = null; // TODO gpx route
-					if (gpxRoute == null) {
-						app.getSettings().FOLLOW_THE_GPX_ROUTE.set(null);
+					OsmandApplication ctx = mapActivity.getMyApplication();
+					if(!ctx.getTargetPointsHelper().checkPointToNavigate()) {
+						ri.showDialog();
+					} else {
+						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+						app.getSettings().FOLLOW_THE_ROUTE.set(true);
+						GPXRouteParams gpxRoute = null; // TODO gpx route
+						if (gpxRoute == null) {
+							app.getSettings().FOLLOW_THE_GPX_ROUTE.set(null);
+						}
+						routingHelper.setFollowingMode(true);
+						routingHelper.setRoutePlanningMode(false);
+						mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+						routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+						app.initVoiceCommandPlayer(mapActivity);
 					}
-					routingHelper.setFollowingMode(true);
-					routingHelper.setRoutePlanningMode(false);
-					mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-					routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
-					app.initVoiceCommandPlayer(mapActivity);
 				}
 			}
 		});

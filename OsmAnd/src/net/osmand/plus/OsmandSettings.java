@@ -1112,6 +1112,9 @@ public class OsmandSettings {
 	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
+	public final static String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
+	public final static String START_POINT_LON = "start_point_lon"; //$NON-NLS-1$
+	public final static String START_POINT_DESCRIPTION = "start_point_description"; //$NON-NLS-1$
 	public final static String INTERMEDIATE_POINTS = "intermediate_points"; //$NON-NLS-1$
 	public final static String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description"; //$NON-NLS-1$
 
@@ -1124,8 +1127,22 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 	
+	
+	public LatLon getPointToStart() {
+		float lat = settingsAPI.getFloat(globalPreferences,START_POINT_LAT, 0);
+		float lon = settingsAPI.getFloat(globalPreferences,START_POINT_LON, 0);
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+	
+	public String getStartPointDescription() {
+		return settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION, "");
+	}
+	
 	public String getPointNavigateDescription() {
-		return settingsAPI.getString(globalPreferences,POINT_NAVIGATE_DESCRIPTION, "");
+		return settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION, "");
 	}
 	
 	
@@ -1218,6 +1235,11 @@ public class OsmandSettings {
 				remove(POINT_NAVIGATE_DESCRIPTION).commit();
 	}
 	
+	public boolean clearPointToStart() {
+		return settingsAPI.edit(globalPreferences).remove(START_POINT_LAT).remove(START_POINT_LON).
+				remove(START_POINT_DESCRIPTION).commit();
+	}
+	
 	public boolean setPointToNavigate(double latitude, double longitude, String historyDescription) {
 		boolean add = settingsAPI.edit(globalPreferences).putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
 		settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_DESCRIPTION, historyDescription).commit();
@@ -1228,6 +1250,16 @@ public class OsmandSettings {
 		}
 		return add;
 	}
+	
+	public boolean setPointToStart(double latitude, double longitude, String description) {
+		boolean add = settingsAPI.edit(globalPreferences).putFloat(START_POINT_LAT, (float) latitude).putFloat(START_POINT_LON, (float) longitude).commit();
+		if (description == null) {
+			description = "";
+		}
+		settingsAPI.edit(globalPreferences).putString(START_POINT_DESCRIPTION, description).commit();
+		return add;
+	}
+	
 	public boolean navigateDialog() {
 		return settingsAPI.edit(globalPreferences).putString(POINT_NAVIGATE_ROUTE, "true").commit();
 	}

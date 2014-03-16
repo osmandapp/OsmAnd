@@ -382,7 +382,7 @@ public class MapActivityActions implements DialogProvider {
 			adapter.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_flag_dark,
 					R.drawable.ic_action_flag_light).reg();
 		}
-		if(!mapActivity.getRoutingHelper().isFollowingMode()) {
+		if(!mapActivity.getRoutingHelper().isFollowingMode() || mapActivity.getRoutingHelper().isRoutePlanningMode()) {
 			adapter.item(R.string.context_menu_item_directions_from).icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
 		}
 		adapter.item(R.string.context_menu_item_search).icons(R.drawable.ic_action_search_dark, 
@@ -421,12 +421,10 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_directions_to) {
 					String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
 					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, name);
-					enterRoutePlanningMode( null);
+					enterRoutePlanningMode(null, null);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
-					Location loc = new Location("map");
-					loc.setLatitude(latitude);
-					loc.setLongitude(longitude);
-					enterRoutePlanningMode(loc);
+					String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+					enterRoutePlanningMode(new LatLon(latitude, longitude), name);
 				} else if (standardId == R.string.context_menu_item_intermediate_point || 
 						standardId == R.string.context_menu_item_destination_point) {
 					boolean dest = standardId == R.string.context_menu_item_destination_point;
@@ -447,7 +445,7 @@ public class MapActivityActions implements DialogProvider {
 		builder.create().show();
 	}
 	
-	public void enterRoutePlanningMode(Location from) {
+	public void enterRoutePlanningMode(LatLon from, String fromName) {
 		ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
 		if(mode == ApplicationMode.DEFAULT) {
 			mode = ApplicationMode.CAR;
@@ -461,11 +459,10 @@ public class MapActivityActions implements DialogProvider {
 		settings.FOLLOW_THE_GPX_ROUTE.set(null);
 		app.getRoutingHelper().setFollowingMode(false);
 		app.getRoutingHelper().setRoutePlanningMode(true);
-		app.getRoutingHelper().setFinalAndCurrentLocation(targets.getPointToNavigate(), targets.getIntermediatePoints(), from, null);
+		targets.setStartPoint(from, false, fromName);
+		targets.updateRoutingHelper();
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		mapActivity.getMapView().refreshMap(true);
-		String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-		// TODO use as point name
 	}
 	
 	public void contextMenuPoint(final double latitude, final double longitude){
@@ -623,11 +620,11 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-							enterRoutePlanningMode(null);
+							enterRoutePlanningMode(null, null);
 						}
 				}).reg();
 		}
-		if (getTargets().getPointToNavigate() != null) {
+		if (getTargets().getPointToNavigate() != null && !routingHelper.isRoutePlanningMode()) {
 			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)
 					.listen(new OnContextMenuClick() {
 						@Override

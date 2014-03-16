@@ -15,11 +15,14 @@ public class TargetPointsHelper {
 	private List<LatLon> intermediatePoints = new ArrayList<LatLon>(); 
 	private List<String> intermediatePointNames = new ArrayList<String>();
 	private LatLon pointToNavigate = null;
+	private LatLon pointToStart = null;
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 	private List<StateChangedListener<Void>> listeners = new ArrayList<StateChangedListener<Void>>();
+	private OsmandApplication ctx;
 	
-	public TargetPointsHelper(ClientContext ctx){
+	public TargetPointsHelper(OsmandApplication ctx){
+		this.ctx = ctx;
 		this.settings = ctx.getSettings();
 		this.routingHelper = ctx.getRoutingHelper();
 		readFromSettings(settings);
@@ -27,6 +30,7 @@ public class TargetPointsHelper {
 
 	private void readFromSettings(OsmandSettings settings) {
 		pointToNavigate = settings.getPointToNavigate();
+		pointToStart = settings.getPointToStart();
 		intermediatePoints.clear();
 		intermediatePointNames.clear();
 		intermediatePoints.addAll(settings.getIntermediatePoints());
@@ -36,6 +40,15 @@ public class TargetPointsHelper {
 	public LatLon getPointToNavigate() {
 		return pointToNavigate;
 	}
+	
+	public LatLon getPointToStart() {
+		return pointToStart;
+	}
+	
+	public String getStartPointDescription(){
+		return settings.getStartPointDescription();
+	}
+	
 	
 	public String getPointNavigateDescription(){
 		return settings.getPointNavigateDescription();
@@ -80,7 +93,9 @@ public class TargetPointsHelper {
 	public void removeAllWayPoints(boolean updateRoute){
 		settings.clearIntermediatePoints();
 		settings.clearPointToNavigate();
+		settings.clearPointToStart();
 		pointToNavigate = null;
+		pointToStart = null;
 		intermediatePoints.clear();
 		intermediatePointNames.clear();
 		readFromSettings(settings);
@@ -119,12 +134,35 @@ public class TargetPointsHelper {
 
 	private void updateRouteAndReferesh(boolean updateRoute) {
 		if(updateRoute && ( routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
-				routingHelper.isFollowingMode())) {
-			Location lastKnownLocation = routingHelper.getLastProjection();
-			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-					settings.getIntermediatePoints(), lastKnownLocation, routingHelper.getCurrentGPXRoute());
+				routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode())) {
+			updateRoutingHelper();
 		}
 		updateListeners();
+	}
+
+	public void updateRoutingHelper() {
+		LatLon start = settings.getPointToStart();
+		if(routingHelper.isFollowingMode() || start == null) {
+			Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
+			//Location lastKnownLocation = routingHelper.getLastProjection();
+			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
+				settings.getIntermediatePoints(), lastKnownLocation, routingHelper.getCurrentGPXRoute());
+		} else {
+			Location loc = wrap(start);
+			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
+					settings.getIntermediatePoints(), loc, routingHelper.getCurrentGPXRoute());
+		}
+	}
+	
+
+	private Location wrap(LatLon l) {
+		if(l == null) {
+			return null;
+		}
+		Location loc = new Location("map");
+		loc.setLatitude(l.getLatitude());
+		loc.setLongitude(l.getLongitude());
+		return loc;
 	}
 	
 	public void addListener(StateChangedListener<Void> l) {
@@ -143,6 +181,12 @@ public class TargetPointsHelper {
 		settings.clearIntermediatePoints();
 		intermediatePoints.clear();
 		intermediatePointNames.clear();
+		readFromSettings(settings);
+		updateRouteAndReferesh(updateRoute);
+	}
+	
+	public void clearStartPoint(boolean updateRoute) {
+		settings.clearPointToStart();
 		readFromSettings(settings);
 		updateRouteAndReferesh(updateRoute);
 	}
@@ -200,13 +244,35 @@ public class TargetPointsHelper {
 		updateRouteAndReferesh(updateRoute);
 	}
 	
-	public boolean checkPointToNavigate(ClientContext ctx ){
+	public void setStartPoint(LatLon startPoint, boolean updateRoute, String name) {
+		if(startPoint != null) {
+			settings.setPointToStart(startPoint.getLatitude(), startPoint.getLongitude(), name);
+		} else {
+			settings.clearPointToStart();
+		}
+		readFromSettings(settings);
+		updateRouteAndReferesh(updateRoute);
+	}
+	
+	public boolean checkPointToNavigate(){
     	if(pointToNavigate == null){
     		ctx.showToastMessage(R.string.mark_final_location_first);
 			return false;
 		}
     	return true;
     }
+	
+	public boolean checkPointToNavigateShort(){
+    	if(pointToNavigate == null){
+    		ctx.showShortToastMessage(R.string.mark_final_location_first);
+			return false;
+		}
+    	return true;
+    }
+
+	public Location getPointToStartLocation() {
+		return wrap(getPointToStart());
+	}
 	
 	
 }

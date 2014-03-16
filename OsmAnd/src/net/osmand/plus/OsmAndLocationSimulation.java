@@ -38,6 +38,19 @@ public class OsmAndLocationSimulation {
 	public boolean isRouteAnimating() {
 		return routeAnimation != null;
 	}
+	
+	public void startStopRouteAnimationRoute(final MapActivity ma) {
+		if (!isRouteAnimating()) {
+			List<Location> currentRoute = app.getRoutingHelper().getCurrentRoute();
+			if (currentRoute.isEmpty()) {
+				AccessibleToast.makeText(app, R.string.animate_routing_route_not_calculated, Toast.LENGTH_LONG).show();
+			} else {
+				startAnimationThread(app.getRoutingHelper(), ma, new ArrayList<Location>(currentRoute), false, 1);
+			}
+		} else {
+			stop();
+		}
+	}
 
 	public void startStopRouteAnimation(final MapActivity ma) {
 		if (!isRouteAnimating()) {

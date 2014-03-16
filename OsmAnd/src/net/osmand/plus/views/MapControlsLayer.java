@@ -84,7 +84,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapInfoNavigationControl = init(new MapRouteInfoControl(mapActivity.getMapLayers().getContextMenuLayer(),
 				mapActivity, showUIHandler, scaleCoefficient), parent,
 				leftGravity);
-		mapNavigationControl = init(new MapNavigateControl(mapActivity, showUIHandler, scaleCoefficient), parent,
+		mapNavigationControl = init(new MapNavigateControl(mapInfoNavigationControl, mapActivity, showUIHandler, scaleCoefficient), parent,
 				rightGravity);
 		mapAppModeControl = init(new MapRoutePreferencesControl(mapActivity, showUIHandler, scaleCoefficient), parent,
 				rightGravity);

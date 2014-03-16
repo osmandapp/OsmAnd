@@ -9,7 +9,6 @@ import java.util.List;
 import net.londatiga.android.QuickAction;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -42,17 +41,18 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 	public static final int SELECT_FAVORITE_POINT_RESULT_OK = 1;
 	
 	private FavouritesAdapter favouritesAdapter;
-	private LatLon location;
 
 	private boolean selectFavoriteMode;
 	private OsmandSettings settings;
+	private LatLon location;
 	
 	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		settings = ((OsmandApplication) getApplication()).getSettings();
-		favouritesAdapter = new FavouritesAdapter(((OsmandApplication) getApplication()).getFavorites().getFavouritePoints());
+		OsmandApplication app = (OsmandApplication) getApplication();
+		favouritesAdapter = new FavouritesAdapter(activity, app.getFavorites().getFavouritePoints());
 		setListAdapter(favouritesAdapter);
 	}
 
@@ -70,7 +70,7 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 				double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
 				double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
 				if (lat != 0 || lon != 0) {
-					location = new LatLon(lat, lon);
+					favouritesAdapter.location = new LatLon(lat, lon);
 				}
 			}
 		}
@@ -89,23 +89,7 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 	public void locationUpdate(LatLon l) {
 		location = l;
 		if (favouritesAdapter != null) {
-			favouritesAdapter.sort(new Comparator<FavouritePoint>() {
-				@Override
-				public int compare(FavouritePoint object1, FavouritePoint object2) {
-					if (location != null) {
-						double d1 = MapUtils.getDistance(location, object1.getLatitude(), object1.getLongitude());
-						double d2 = MapUtils.getDistance(location, object2.getLatitude(), object2.getLongitude());
-						if (d1 == d2) {
-							return 0;
-						} else if (d1 > d2) {
-							return 1;
-						}
-						return -1;
-					} else {
-						return favouritesAdapter.getName(object1).compareTo(favouritesAdapter.getName(object2));
-					}
-				}
-			});
+			favouritesAdapter.updateLocation(l);
 		}
 	}
 	
@@ -140,11 +124,40 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 		}
 	}
 
-	class FavouritesAdapter extends ArrayAdapter<FavouritePoint> {
+	public static class FavouritesAdapter extends ArrayAdapter<FavouritePoint> {
+		private Activity activity;
+		private LatLon location;
+		private OsmandApplication app;
 		
+		public LatLon getLocation() {
+			return location;
+		}
+		
+		public void updateLocation(LatLon l) {
+			location = l;
+			sort(new Comparator<FavouritePoint>() {
+				@Override
+				public int compare(FavouritePoint object1, FavouritePoint object2) {
+					if (location != null) {
+						double d1 = MapUtils.getDistance(location, object1.getLatitude(), object1.getLongitude());
+						double d2 = MapUtils.getDistance(location, object2.getLatitude(), object2.getLongitude());
+						if (d1 == d2) {
+							return 0;
+						} else if (d1 > d2) {
+							return 1;
+						}
+						return -1;
+					} else {
+						return getName(object1).compareTo(getName(object2));
+					}
+				}
+			});			
+		}
 
-		public FavouritesAdapter(List<FavouritePoint> list) {
-			super(getActivity(), R.layout.favourites_list_item, list);
+		public FavouritesAdapter(Activity activity, List<FavouritePoint> list) {
+			super(activity, R.layout.favourites_list_item, list);
+			this.activity = activity;
+			this.app = ((OsmandApplication) activity.getApplication());
 		}
 		
 		public String getName(FavouritePoint model){
@@ -155,7 +168,7 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
-				LayoutInflater inflater = getActivity().getLayoutInflater();
+				LayoutInflater inflater = activity.getLayoutInflater();
 				row = inflater.inflate(R.layout.favourites_list_item, parent, false);
 			}
 
@@ -171,11 +184,11 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), location.getLatitude(), location
 						.getLongitude()));
-				distance = OsmAndFormatter.getFormattedDistance(dist, (ClientContext) getApplication()) + "  " ;
+				distance = OsmAndFormatter.getFormattedDistance(dist, app) + "  " ;
 			}
 			
 			label.setText(distance + getName(model), BufferType.SPANNABLE);
-			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(activity.getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 			row.findViewById(R.id.favourite_icon).setVisibility(View.VISIBLE);
 			ch.setVisibility(View.GONE);

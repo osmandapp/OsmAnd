@@ -281,9 +281,7 @@ public class MapActivity extends AccessibleActivity  {
 				!Algorithms.objectEquals(targets.getPointToNavigate(), routingHelper.getFinalLocation() )||
 				!Algorithms.objectEquals(targets.getIntermediatePoints(), routingHelper.getIntermediatePoints())
 				)) {
-			routingHelper.setFinalAndCurrentLocation(targets.getPointToNavigate(),
-					targets.getIntermediatePoints(),
-					app.getLocationProvider().getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
+			targets.updateRoutingHelper();
 		}
 		app.getLocationProvider().resumeAllUpdates();
 
@@ -306,7 +304,7 @@ public class MapActivity extends AccessibleActivity  {
 			Location loc = new Location("map");
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
-			getMapActions().enterRoutePlanningMode(null);
+			getMapActions().enterRoutePlanningMode(null, null);
 		}
 		if(mapLabelToShow != null && latLonToShow != null){
 			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
@@ -496,6 +494,7 @@ public class MapActivity extends AccessibleActivity  {
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 		}
 		routingHelper.setFollowingMode(true);
+		
 		routingHelper.setFinalAndCurrentLocation(finalLocation, intermediatePoints, currentLocation, gpxRoute);
 		app.initVoiceCommandPlayer(MapActivity.this);
 	}

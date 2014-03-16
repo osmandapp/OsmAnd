@@ -15,13 +15,22 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp" 
+        android:layout_marginRight="5dp">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/RouteTargets" >
+  			<TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/map_config_white"
+                    android:drawablePadding="3dp"
+                    android:text="@string/target_points"
+                    android:id="@+id/Targets"
+                    android:textSize="24sp" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -40,7 +49,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
 					android:textSize="18sp" >
                 </Spinner>
             </LinearLayout>
@@ -76,17 +84,12 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp" 
                     android:textSize="18sp" >
                 </Spinner>
             </LinearLayout>
-         <ImageView
-    		android:layout_gravity="center_horizontal"
-    		android:paddingTop="10px"
-    		android:paddingBottom="5px"
-    		android:layout_height="wrap_content"
-    		android:layout_width="fill_parent"
-    		android:src="@android:drawable/divider_horizontal_bright" />   
+         <View android:layout_width="fill_parent"
+			   android:layout_height="2dip"
+               android:background="#FFC8C8C8" />   
         </LinearLayout>
          
     </ScrollView>

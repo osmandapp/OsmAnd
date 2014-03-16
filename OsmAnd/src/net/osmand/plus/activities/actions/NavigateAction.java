@@ -207,7 +207,7 @@ public class NavigateAction {
 				if ( tos != null && tos != targets.getPointToNavigate()) {
 					targets.navigateToPoint(tos, false, -1);
 				}
-				if (!targets.checkPointToNavigate(app)) {
+				if (!targets.checkPointToNavigate()) {
 					return;
 				}
 				Location from = fromSpinner.getSelectedItemPosition() == 0 ? current : mapView;
@@ -236,7 +236,7 @@ public class NavigateAction {
 				if ( tos != null && tos != targets.getPointToNavigate()) {
 					targets.navigateToPoint(tos, false, -1);
 				}
-				if (!targets.checkPointToNavigate(app)) {
+				if (!targets.checkPointToNavigate()) {
 					return;
 				}
 				boolean msg = true;
