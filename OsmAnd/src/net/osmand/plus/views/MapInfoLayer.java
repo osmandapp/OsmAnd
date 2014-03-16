@@ -416,7 +416,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		};
 		Builder b = new AlertDialog.Builder(map);
-		View confirmDialog = view.inflate(view.getContext(), R.layout.configuration_dialog, null);
+		View confirmDialog = View.inflate(view.getContext(), R.layout.configuration_dialog, null);
 		final ListView lv = (ListView) confirmDialog.findViewById(android.R.id.list);
 		NavigateAction.prepareAppModeView(map, selected, true, 
 				(ViewGroup) confirmDialog.findViewById(R.id.TopBar), true, 

@@ -454,7 +454,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			Canvas canvas = holder.lockCanvas();
 			if (canvas != null) {
 				try {
-					final float ratioy = mapPosition == OsmandSettings.BOTTOM_CONSTANT ? 0.8f : 0.5f;	
+					final float ratioy = mapPosition == OsmandSettings.BOTTOM_CONSTANT ? 0.9f : 0.5f;	
 					final int cy = (int) (ratioy * getHeight());
 					if(currentViewport.getPixWidth() != getWidth() || currentViewport.getPixHeight() != getHeight() ||
 							currentViewport.getCenterPixelY() != cy) {

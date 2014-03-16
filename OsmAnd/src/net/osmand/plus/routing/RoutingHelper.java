@@ -749,7 +749,10 @@ public class RoutingHelper {
 			}
 			lastTimeEvaluatedRoute = System.currentTimeMillis();
 		}
-		
+	}
+	
+	public void recalculateRouteDueToSettingsChange() {
+		recalculateRouteInBackground(lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, null);
 	}
 	
 	private void recalculateRouteInBackground(final Location start, final LatLon end, final List<LatLon> intermediates, final GPXRouteParams gpxRoute, final RouteCalculationResult previousRoute){

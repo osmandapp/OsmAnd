@@ -43,6 +43,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	static final int tileSize = 256;
 	private ClientContext ctx;
+	private boolean onlyReadonlyAvailable = false;
 	
 	
 	
@@ -143,7 +144,13 @@ public class SQLiteTileSource implements ITileSource {
 	
 	protected SQLiteConnection getDatabase(){
 		if((db == null || db.isClosed()) && file.exists() ){
-			db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), false);
+			try {
+				onlyReadonlyAvailable = false;
+				db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), false);
+			} catch(RuntimeException e) {
+				onlyReadonlyAvailable = true;
+				db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), true);
+			}
 			try {
 				SQLiteCursor cursor = db.rawQuery("SELECT * FROM info", null);
 				if(cursor.moveToFirst()) {
@@ -205,8 +212,10 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	private void addInfoColumn(String columnName, String value) {
-		db.execSQL("alter table info add column "+columnName+" TEXT");
-		db.execSQL("update info set "+columnName+" = '"+value+"'");
+		if(!onlyReadonlyAvailable) {
+			db.execSQL("alter table info add column "+columnName+" TEXT");
+			db.execSQL("update info set "+columnName+" = '"+value+"'");
+		}
 	}
 
 	private boolean hasTimeColumn() {
@@ -339,7 +348,7 @@ public class SQLiteTileSource implements ITileSource {
 	 */
 	public synchronized void insertImage(int x, int y, int zoom, File fileToSave) throws IOException {
 		SQLiteConnection db = getDatabase();
-		if (db == null || db.isReadOnly()) {
+		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
 			return;
 		}
 		if (exists(x, y, zoom)) {
@@ -384,7 +393,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public boolean couldBeDownloadedFromInternet() {
-		if(getDatabase() == null || getDatabase().isReadOnly()){
+		if(getDatabase() == null || getDatabase().isReadOnly() || onlyReadonlyAvailable){
 			return false;
 		}
 		return urlTemplate != null;

@@ -2,25 +2,31 @@ package net.osmand.plus.views.controls;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
+import net.osmand.plus.activities.actions.NavigateAction;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -32,9 +38,10 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	private final ContextMenuLayer contextMenu;
 	private final RoutingHelper routingHelper;
 	private OsmandMapTileView mapView;
-	private View next;
-	private View prev;
-	private View info;
+	private ImageButton next;
+	private ImageButton prev;
+	private ImageButton info;
+	private Dialog dialog;
 	
 	
 	public MapRouteInfoControl(ContextMenuLayer contextMenu, 
@@ -43,18 +50,65 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		this.contextMenu = contextMenu;
 		routingHelper = mapActivity.getRoutingHelper();
 		mapView = mapActivity.getMapView();
+		routingHelper.addListener(this);
 	}
 	
 	@Override
 	public void showControls(FrameLayout parent) {
-		infoButton = addButton(parent, R.string.info_button, R.drawable.map_btn_info);
+		infoButton = addButton(parent, R.string.info_button, R.drawable.map_btn_signpost);
 		controlVisible = true;
 		infoButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO
+				if(dialog != null) {
+					dialog.hide();
+					dialog = null;
+					infoButton.setBackgroundResource(R.drawable.map_btn_signpost);
+				} else {
+					dialog = showDialog();
+					dialog.show();
+					infoButton.setBackgroundResource(R.drawable.map_btn_signpost_p);
+					dialog.setOnDismissListener(new OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dlg) {
+							infoButton.setBackgroundResource(R.drawable.map_btn_signpost);
+							dialog = null;
+						}
+					});
+				}
 			}
 		});
+	}
+	
+	private Dialog showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+        LinearLayout lmain = new LinearLayout(mapActivity);
+		lmain.setOrientation(LinearLayout.VERTICAL);
+		boolean addButtons = routingHelper.isRouteCalculated();
+		if(addButtons) {
+			LinearLayout buttons = createButtonsLayout(scaleCoefficient);
+			lmain.addView(buttons);
+		}
+		View lv = new NavigateAction(mapActivity).createDialogView();
+		lv.setId(R.id.MainLayout);
+		lmain.addView(lv);
+		if(addButtons) {
+			attachListeners(lmain);
+		}
+        builder.setView(lmain);
+        
+        Dialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(true);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.gravity = Gravity.BOTTOM;
+        lp.y = (int) (infoButton.getBottom() - infoButton.getTop() + scaleCoefficient * 5); 
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setAttributes(lp);
+        return dialog;
 	}
 	
 	public static int getDirectionInfo() {
@@ -83,43 +137,35 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		return width ;
 	}
 	
-//	public RouteInfoLayer(RoutingHelper routingHelper, MapActivity activity, ContextMenuLayer contextMenu){
-//		createLayout(activity, activity.getMapView().getDensity());
-//		this.routingHelper = routingHelper;
-//		this.contextMenu = contextMenu;
-//		routingHelper.addListener(this);
-//		attachListeners(activity.getMyApplication());
-//		updateVisibility();
-//
-//		activity.accessibleContent.add(prev);
-//		activity.accessibleContent.add(next);
-//		activity.accessibleContent.add(info);
-//	}
-	
-	private void createLayout(MapActivity activity, float density) {
-		FrameLayout fl = (FrameLayout) activity.getMapView().getParent();
-		LinearLayout ll = new LinearLayout(activity);
+	private LinearLayout createButtonsLayout(float density) {
+		LinearLayout ll = new LinearLayout(mapActivity);
+		ll.setGravity(Gravity.CENTER);
 		ll.setOrientation(LinearLayout.HORIZONTAL);
-		ll.setPadding(0, 0, (int) (density * 15), (int) (density * 50));
-		fl.addView(ll, new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.BOTTOM | Gravity.CENTER));
-		prev = new ImageButton(activity);
-		prev.setContentDescription(activity.getString(R.string.previous_button));
-		prev.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.ax_1_navigation_previous_item_light));
+		ll.setPadding((int) (density * 10), (int) (density * 5), (int) (density * 10), (int) (density * 5));
+		prev = new ImageButton(mapActivity);
+		prev.setContentDescription(mapActivity.getString(R.string.previous_button));
+		prev.setImageResource(R.drawable.ax_1_navigation_previous_item_light);
+		prev.setAdjustViewBounds(true);
+		prev.setBackgroundResource(R.drawable.map_btn_plain);
 		ll.addView(prev);
-		info = new ImageButton(activity);
-		info.setContentDescription(activity.getString(R.string.info_button));
-		info.setPadding((int) (density * 8), 0, 0, 0);
-		info.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.ax_2_action_about_light));
+		info = new ImageButton(mapActivity);
+		info.setContentDescription(mapActivity.getString(R.string.info_button));
+		info.setBackgroundResource(R.drawable.map_btn_plain);
+		info.setAdjustViewBounds(true);
+		info.setImageResource(R.drawable.ax_2_action_about_light);
 		ll.addView(info);
-		next = new ImageButton(activity);
-		next.setContentDescription(activity.getString(R.string.next_button));
-		next.setPadding((int) (density * 8), 0, 0, 0);
-		next.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.ax_1_navigation_next_item_light));
+		next = new ImageButton(mapActivity);
+		next.setContentDescription(mapActivity.getString(R.string.next_button));
+		next.setBackgroundResource(R.drawable.map_btn_plain);
+		next.setAdjustViewBounds(true);
+		next.setImageResource(R.drawable.ax_1_navigation_next_item_light);
 		ll.addView(next);
+		return ll;
 	}
 
 	
-	private void attachListeners(final ClientContext ctx) {
+	private void attachListeners(final View mainView) {
+		final OsmandApplication ctx = mapActivity.getMyApplication();
 		prev.setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -127,6 +173,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				if(routingHelper.getRouteDirections() != null && directionInfo > 0){
 					directionInfo--;
 					if(routingHelper.getRouteDirections().size() > directionInfo){
+						mainView.findViewById(R.id.MainLayout).setVisibility(View.GONE);
 						RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 						net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
 						contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute(ctx));
@@ -138,10 +185,10 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			
 		});
 		next.setOnClickListener(new View.OnClickListener(){
-
 			@Override
 			public void onClick(View v) {
 				if(routingHelper.getRouteDirections() != null && directionInfo < routingHelper.getRouteDirections().size() - 1){
+					mainView.findViewById(R.id.MainLayout).setVisibility(View.GONE);
 					directionInfo++;
 					RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 					net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
@@ -162,30 +209,24 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		});
 	}
 
-	public boolean isVisible(){
+	public boolean isVisibleButtons(){
 		return routingHelper.isRouteCalculated() && !routingHelper.isFollowingMode();
 	}
 	
-	private void updateVisibility(){
-		int vis = isVisible() ? View.VISIBLE : View.INVISIBLE; 
-		prev.setVisibility(vis);
-		next.setVisibility(vis);
-		info.setVisibility(vis);
-	}
-
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute) {
 		directionInfo = -1;
-		updateVisibility();
 		mapView.refreshMap();
 	}
 
 	@Override
 	public void routeWasCancelled() {
 		directionInfo = -1;
-		updateVisibility();
+		if(dialog != null) {
+			dialog.hide();
+			dialog = null;
+		}
 	}
-
-
+	
 }

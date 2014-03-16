@@ -22,6 +22,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
@@ -382,7 +383,9 @@ public class MapActivityActions implements DialogProvider {
 			adapter.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_flag_dark,
 					R.drawable.ic_action_flag_light).reg();
 		}
-		adapter.item(R.string.context_menu_item_directions_from).icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
+		if(!mapActivity.getRoutingHelper().isFollowingMode()) {
+			adapter.item(R.string.context_menu_item_directions_from).icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
+		}
 		adapter.item(R.string.context_menu_item_search).icons(R.drawable.ic_action_search_dark, 
 				R.drawable.ic_action_search_light).reg();
 		adapter.item(R.string.context_menu_item_share_location).icons(
@@ -433,9 +436,20 @@ public class MapActivityActions implements DialogProvider {
 						Location loc = new Location("map");
 						loc.setLatitude(latitude);
 						loc.setLongitude(longitude);
+						ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
+						if(mode == ApplicationMode.DEFAULT) {
+							mode = ApplicationMode.CAR;
+						}
+						OsmandApplication app = mapActivity.getMyApplication();
+						app.getSettings().APPLICATION_MODE.set(mode);
+						app.getRoutingHelper().setAppMode(mode);
+						// save application mode controls
+						settings.FOLLOW_THE_ROUTE.set(false);
+						settings.FOLLOW_THE_GPX_ROUTE.set(null);
+						app.getRoutingHelper().setFollowingMode(false);
+						app.getRoutingHelper().setFinalAndCurrentLocation(targets.getPointToNavigate(), targets.getIntermediatePoints(), loc, null);
 						String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-						new NavigateAction(mapActivity).
-							getDirections(loc, name, DirectionDialogStyle.create().gpxRouteEnabled().routeFromMapPoint());
+						// TODO use as point name
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point || 
 						standardId == R.string.context_menu_item_destination_point) {

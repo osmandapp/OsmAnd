@@ -39,28 +39,18 @@ public class NativeOsmandLibrary extends NativeLibrary {
 						System.loadLibrary("gnustl_shared");
 						log.debug("Loading native cpufeatures_proxy..."); //$NON-NLS-1$
 						System.loadLibrary("cpufeatures_proxy");
-						if(android.os.Build.VERSION.SDK_INT >= 8) {
+						if (android.os.Build.VERSION.SDK_INT >= 8) {
 							log.debug("Loading jnigraphics, since Android >= 2.2 ..."); //$NON-NLS-1$
 							System.loadLibrary("jnigraphics");
 						}
 						final String libCpuSuffix = cpuHasNeonSupport() ? "_neon" : "";
 						log.debug("Loading native libraries..."); //$NON-NLS-1$
-						try {
-							loadNewCore(libCpuSuffix);
-							log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
-							library = new NativeOsmandLibrary(true);
-							isNativeSupported = true;
-						} catch(Error e) {
-							log.error("Failed to load new native library", e); //$NON-NLS-1$
-						}
-						if(!isNativeSupported) {
-							loadOldCore(libCpuSuffix);
-							log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
-							library = new NativeOsmandLibrary(false);
-							log.debug("Initializing rendering rules storage..."); //$NON-NLS-1$
-							NativeOsmandLibrary.initRenderingRulesStorage(storage);
-							isNativeSupported = true;
-						}
+						loadOldCore(libCpuSuffix);
+						log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
+						library = new NativeOsmandLibrary(false);
+						log.debug("Initializing rendering rules storage..."); //$NON-NLS-1$
+						NativeOsmandLibrary.initRenderingRulesStorage(storage);
+						isNativeSupported = true;
 					} catch (Throwable e) {
 						log.error("Failed to load native library", e); //$NON-NLS-1$
 					}
@@ -74,17 +64,6 @@ public class NativeOsmandLibrary extends NativeLibrary {
 		System.loadLibrary("osmand" + libCpuSuffix);
 	}
 
-	private static void loadNewCore(final String libCpuSuffix) {
-//		System.loadLibrary("Qt5Core" + libCpuSuffix);
-//		System.loadLibrary("Qt5Network" + libCpuSuffix);
-//		System.loadLibrary("Qt5Concurrent" + libCpuSuffix);
-//		System.loadLibrary("Qt5Sql" + libCpuSuffix);
-//		System.loadLibrary("Qt5Xml" + libCpuSuffix);
-//		System.loadLibrary("OsmAndCore" + libCpuSuffix);
-//		System.loadLibrary("OsmAndCoreUtils" + libCpuSuffix);
-		System.loadLibrary("OsmAndJNI" + libCpuSuffix);
-	}
-	
 	public static boolean isSupported()
 	{
 		return isNativeSupported != null && isNativeSupported;

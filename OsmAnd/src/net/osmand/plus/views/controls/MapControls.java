@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 
 
 public abstract class MapControls {
@@ -47,6 +48,13 @@ public abstract class MapControls {
 		this.vmargin = vmargin;
 	}
 	
+	protected ImageButton addImageButton(FrameLayout parent, int stringId, int resourceId) {
+		Context ctx = mapActivity;
+		ImageButton  button = new ImageButton(ctx);
+		applyAttributes(ctx, parent, button, stringId, resourceId, 0);
+		return button;
+	}
+	
 	protected Button addButton(FrameLayout parent, int stringId, int resourceId) {
 		return addButton(parent, stringId, resourceId, 0);
 	}
@@ -54,6 +62,13 @@ public abstract class MapControls {
 	protected Button addButton(FrameLayout parent, int stringId, int resourceId, int extraMargin) {
 		Context ctx = mapActivity;
 		Button button = new Button(ctx);
+		applyAttributes(ctx, parent, button, stringId, resourceId, extraMargin);
+		return button;
+	}
+
+
+	private void applyAttributes(Context ctx, FrameLayout parent, View button, int stringId, int resourceId,
+			int extraMargin) {
 		button.setContentDescription(ctx.getString(stringId));
 		button.setBackgroundResource(resourceId);
 		Drawable d = ctx.getResources().getDrawable(resourceId);
@@ -72,7 +87,6 @@ public abstract class MapControls {
 		parent.addView(button, params);
 		button.setEnabled(true);
 		mapActivity.accessibleContent.add(button);
-		return button;
 	}
 	
 	protected void removeButton(FrameLayout layout, View b) {

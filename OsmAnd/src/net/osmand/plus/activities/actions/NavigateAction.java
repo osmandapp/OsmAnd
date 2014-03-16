@@ -20,6 +20,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -132,6 +133,27 @@ public class NavigateAction {
 		return true;
 	}
 	
+	
+	public View createDialogView() {
+		final View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
+		OsmandMapTileView mapView = mapActivity.getMapView();
+		Location loc = new Location("map");
+		loc.setLatitude(mapView.getLatitude());
+		loc.setLongitude(mapView.getLongitude());
+		String name = null;
+		DirectionDialogStyle style = DirectionDialogStyle.create();
+		final Spinner fromSpinner = setupFromSpinner(loc, name, view, style);
+		final List<LatLon> toList = new ArrayList<LatLon>();
+		final Spinner toSpinner = setupToSpinner(loc, name, view, toList, style);
+		String via = generateViaDescription();
+		if(via.length() == 0){
+			((TextView) view.findViewById(R.id.ViaView)).setVisibility(View.GONE);
+		} else {
+			((TextView) view.findViewById(R.id.ViaView)).setVisibility(View.VISIBLE);
+			((TextView) view.findViewById(R.id.ViaView)).setText(via);
+		}
+		return view;
+	}
 	public void getDirections(final Location mapView, String name, DirectionDialogStyle style) {
 		final Location current = getLastKnownLocation();
 		Builder builder = new AlertDialog.Builder(mapActivity);
