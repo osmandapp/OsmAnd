@@ -112,7 +112,7 @@ public class FailSafeFuntions {
 						protected GPXFile doInBackground(String... params) {
 							if (gpxPath != null) {
 								// Reverse also should be stored ?
-								GPXFile f = GPXUtilities.loadGPXFile(app, new File(gpxPath), false);
+								GPXFile f = GPXUtilities.loadGPXFile(app, new File(gpxPath));
 								if (f.warning != null) {
 									return null;
 								}

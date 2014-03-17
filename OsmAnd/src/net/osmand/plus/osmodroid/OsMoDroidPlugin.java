@@ -329,7 +329,7 @@ qa.item(R.string.osmodroid_unseek).icons(R.drawable.abs__ic_commit_search_api_ho
 				try {
 					for (int i = 0; i < mIRemoteService.getNumberOfGpx(l.layerId); i++) {
 						ColoredGPX cg = new ColoredGPX();
-						cg.gpxFile =  GPXUtilities.loadGPXFile(app, new File(mIRemoteService.getGpxFile(l.layerId, i)), false);
+						cg.gpxFile =  GPXUtilities.loadGPXFile(app, new File(mIRemoteService.getGpxFile(l.layerId, i)));
 						cg.color = mIRemoteService.getGpxColor(l.layerId, i); 
 						temp.add(cg);
 					}

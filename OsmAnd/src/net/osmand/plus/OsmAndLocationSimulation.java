@@ -8,6 +8,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
@@ -81,7 +82,7 @@ public class OsmAndLocationSimulation {
 				public void onClick(DialogInterface dialog, int which) {
 					boolean gpxNavigation = radioGPX.isChecked();
 					if (gpxNavigation) {
-						ma.getMapLayers().selectGPXFileLayer(true, false, false,
+						GpxUiHelper.selectGPXFile(ma, false, false,
 								new CallbackWithObject<GPXUtilities.GPXFile>() {
 									@Override
 									public boolean processResult(GPXUtilities.GPXFile result) {

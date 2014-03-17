@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
@@ -48,7 +49,7 @@ public class NavigateAction {
 	
 	public void navigateUsingGPX(final ApplicationMode appMode) {
     	final LatLon endForRouting = mapActivity.getPointToNavigate();
-    	mapActivity.getMapLayers().selectGPXFileLayer(false, false, false, new CallbackWithObject<GPXFile>() {
+    	GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXFile>() {
 			
 			@Override
 			public boolean processResult(final GPXFile result) {

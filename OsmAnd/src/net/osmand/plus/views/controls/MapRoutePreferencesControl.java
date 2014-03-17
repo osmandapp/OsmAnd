@@ -34,9 +34,11 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MapRoutePreferencesControl extends MapControls {
@@ -44,7 +46,7 @@ public class MapRoutePreferencesControl extends MapControls {
 	private OsmandSettings settings;
 	private int cachedId;
 	private Dialog dialog;
-	
+	private String selectedGPXFile = null;
 	
 	public MapRoutePreferencesControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		super(mapActivity, showUIHandler, scaleCoefficient);
@@ -121,6 +123,8 @@ public class MapRoutePreferencesControl extends MapControls {
 		final Set<ApplicationMode> selected = new HashSet<ApplicationMode>();
 		selected.add(am);
 		
+		setupSpinner(settingsDlg);
+		
 		
 		final ArrayAdapter<RoutingParameter> listAdapter = new ArrayAdapter<RoutingParameter>(ctx, 
 				R.layout.layers_list_activity_item, R.id.title, getRoutingParameters(am)) {
@@ -166,6 +170,55 @@ public class MapRoutePreferencesControl extends MapControls {
 		});
 		lv.setAdapter(listAdapter);
 		return settingsDlg;
+	}
+
+	private void setupSpinner(View settingsDlg) {
+		final Spinner gpxSpinner = (Spinner) settingsDlg.findViewById(R.id.GPXRouteSpinner);
+		updateSpinnerItems(gpxSpinner);
+		gpxSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				if(position == 0) {
+					selectedGPXFile = null;
+				} else if(position == 1) {
+					openGPXFileSelection(gpxSpinner);
+				} else if(position == 2) {
+					// nothing to change 
+				}				
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+	}
+
+	protected void openGPXFileSelection(Spinner gpxSpinner) {
+		// TODO Auto-generated method stub
+		updateSpinnerItems(gpxSpinner);
+	}
+
+	private void updateSpinnerItems(Spinner gpxSpinner) {
+		ArrayList<String> gpxActions = new ArrayList<String>();
+		gpxActions.add(mapActivity.getString(R.string.default_none));
+		gpxActions.add(mapActivity.getString(R.string.select_gpx));
+		if(selectedGPXFile != null) {
+			gpxActions.add(selectedGPXFile);
+		}
+		
+		ArrayAdapter<String> gpxAdapter = new ArrayAdapter<String>(mapActivity, 
+				android.R.layout.simple_spinner_item, 
+				gpxActions
+				);
+		gpxAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		gpxSpinner.setAdapter(gpxAdapter);
+		if(selectedGPXFile != null) {
+			gpxSpinner.setSelection(2);
+		} else {
+			gpxSpinner.setSelection(0);
+		}
 	}
 
 	@Override

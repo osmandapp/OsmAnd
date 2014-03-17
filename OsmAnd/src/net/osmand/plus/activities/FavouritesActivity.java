@@ -389,7 +389,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 							existedPoints.add(fp.getName() + "_" + fp.getCategory());
 						}
 					}
-					GPXFile res = GPXUtilities.loadGPXFile(getMyApplication(), tosave, false);
+					GPXFile res = GPXUtilities.loadGPXFile(getMyApplication(), tosave);
 					if (res.warning != null) {
 						return res.warning;
 					}

@@ -30,6 +30,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -187,7 +188,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	
 
 	protected void loadGpx(final MapActivity activity) {
-		activity.getMapLayers().selectGPXFileLayer(true, false, false, new CallbackWithObject<GPXUtilities.GPXFile>() {
+		GpxUiHelper.selectGPXFile(activity, false, false, new CallbackWithObject<GPXUtilities.GPXFile>() {
 			
 			@Override
 			public boolean processResult(GPXFile result) {

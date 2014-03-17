@@ -332,11 +332,11 @@ public class GPXUtilities {
 		return text;
 	}
 
-	public static GPXFile loadGPXFile(ClientContext ctx, File f, boolean convertCloudmadeSource) {
+	public static GPXFile loadGPXFile(ClientContext ctx, File f) {
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(f);
-			GPXFile file = loadGPXFile(ctx, fis, convertCloudmadeSource);
+			GPXFile file = loadGPXFile(ctx, fis);
 			file.path = f.getAbsolutePath();
 			return file;
 		} catch (FileNotFoundException e) {
@@ -355,7 +355,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static GPXFile loadGPXFile(ClientContext ctx, InputStream f, boolean convertCloudmadeSource) {
+	public static GPXFile loadGPXFile(ClientContext ctx, InputStream f) {
 		GPXFile res = new GPXFile();
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -498,17 +498,17 @@ public class GPXUtilities {
 					}
 				}
 			}
-			if (convertCloudmadeSource && res.isCloudmadeRouteFile()) {
-				Track tk = new Track();
-				res.tracks.add(tk);
-				TrkSegment segment = new TrkSegment();
-				tk.segments.add(segment);
-
-				for (WptPt wp : res.points) {
-					segment.points.add(wp);
-				}
-				res.points.clear();
-			}
+//			if (convertCloudmadeSource && res.isCloudmadeRouteFile()) {
+//				Track tk = new Track();
+//				res.tracks.add(tk);
+//				TrkSegment segment = new TrkSegment();
+//				tk.segments.add(segment);
+//
+//				for (WptPt wp : res.points) {
+//					segment.points.add(wp);
+//				}
+//				res.points.clear();
+//			}
 		} catch (RuntimeException e) {
 			log.error("Error reading gpx", e); //$NON-NLS-1$
 			res.warning = ctx.getString(R.string.error_reading_gpx) + " " + e.getMessage();

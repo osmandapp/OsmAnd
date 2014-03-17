@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -187,7 +186,7 @@ public class RouteProvider {
 		
 		private void prepareEverything(GPXFile file, boolean reverse, boolean announceWaypoints, boolean leftSide){
 			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){
-				directions =  parseCloudmadeRoute(points, file, OSMAND_ROUTER.equals(file.author), leftSide, 10);
+				directions =  parseOsmAndGPXRoute(points, file, OSMAND_ROUTER.equals(file.author), leftSide, 10);
 				if(reverse){
 					// clear directions all turns should be recalculated
 					directions = null;
@@ -265,7 +264,7 @@ public class RouteProvider {
 				} else if (params.type == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else {
-					res = findCloudMadeRoute(params);
+					res  = new RouteCalculationResult("Selected route service is not available");
 				}
 				if(log.isInfoEnabled() ){
 					log.info("Finding route contained " + res.getImmutableLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -621,59 +620,8 @@ public class RouteProvider {
 	}
 	
 	
-	protected RouteCalculationResult findCloudMadeRoute(RouteCalculationParams params)
-			throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
-		List<Location> res = new ArrayList<Location>();
-		List<RouteDirectionInfo> directions = null;
-		StringBuilder uri = new StringBuilder();
-		// possibly hide that API key because it is privacy of osmand
-		// A6421860EBB04234AB5EF2D049F2CD8F key is compromised
-		uri.append("http://routes.cloudmade.com/A6421860EBB04234AB5EF2D049F2CD8F/api/0.3/"); //$NON-NLS-1$
-		uri.append(params.start.getLatitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
-		uri.append(params.start.getLongitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
-		if(params.intermediates != null && params.intermediates.size() > 0) {
-			uri.append("[");
-			boolean first = true;
-			for(LatLon il : params.intermediates) {
-				if(!first){
-					uri.append(",");
-				} else {
-					first = false;
-				}
-				uri.append(il.getLatitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
-				uri.append(il.getLongitude() + ""); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			uri.append("],");
-		}
-		uri.append(params.end.getLatitude() + "").append(","); //$NON-NLS-1$//$NON-NLS-2$
-		uri.append(params.end.getLongitude() + "").append("/"); //$NON-NLS-1$ //$NON-NLS-2$
 
-		if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
-			uri.append("foot.gpx"); //$NON-NLS-1$
-		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
-			uri.append("bicycle.gpx"); //$NON-NLS-1$
-		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
-			if (params.fast) {
-				uri.append("car.gpx"); //$NON-NLS-1$
-			} else {
-				uri.append("car/shortest.gpx"); //$NON-NLS-1$
-			}
-		} else {
-			return applicationModeNotSupported(params);
-		}
-		
-		uri.append("?lang=").append(Locale.getDefault().getLanguage()); //$NON-NLS-1$
-		log.info("URL route " + uri);
-		URL url = new URL(uri.toString());
-		URLConnection connection = url.openConnection();
-		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
-		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, connection.getInputStream(), false);
-		directions = parseCloudmadeRoute(res, gpxFile, false, params.leftSide, params.mode.getDefaultSpeed());
-
-		return new RouteCalculationResult(res, directions, params, null);
-	}
-
-	private static List<RouteDirectionInfo> parseCloudmadeRoute(List<Location> res, GPXFile gpxFile, boolean osmandRouter,
+	private static List<RouteDirectionInfo> parseOsmAndGPXRoute(List<Location> res, GPXFile gpxFile, boolean osmandRouter,
 			boolean leftSide, float defSpeed) {
 		List<RouteDirectionInfo> directions = null;
 		if (!osmandRouter) {
@@ -977,7 +925,7 @@ public class RouteProvider {
 //			content.append(s);
 //		}
 //		JSONObject obj = new JSONObject(content.toString());
-		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, connection.getInputStream(), false);
+		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, connection.getInputStream());
 		if(gpxFile.routes.isEmpty()) {
 			return new RouteCalculationResult("Route is empty");
 		}
