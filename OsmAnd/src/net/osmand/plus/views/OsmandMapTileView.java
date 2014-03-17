@@ -56,6 +56,7 @@ import android.widget.Toast;
 public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCallback, Callback {
 
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
+	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
 	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
 	protected final static int LOWEST_ZOOM_TO_ROTATE = 9;
 	private boolean MEASURE_FPS = false;
@@ -447,7 +448,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	private void refreshMapInternal(DrawSettings drawSettings) {
-		handler.removeMessages(MAP_REFRESH_MESSAGE);
 		SurfaceHolder holder = getHolder();
 		long ms = SystemClock.elapsedRealtime();
 		synchronized (holder) {
@@ -530,10 +530,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 	}
 
-	public boolean mapIsRefreshing() {
-		return handler.hasMessages(MAP_REFRESH_MESSAGE);
-	}
-	
 	private void refreshBufferImage(final DrawSettings drawSettings) {
 		if (!baseHandler.hasMessages(BASE_REFRESH_MESSAGE) || drawSettings.isUpdateVectorRendering()) {
 			Message msg = Message.obtain(baseHandler, new Runnable() {
@@ -541,14 +537,21 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				public void run() {
 					baseHandler.removeMessages(BASE_REFRESH_MESSAGE);
 					try {
-						refreshBaseMapInternal(currentViewport.copy(), drawSettings);
-						sendRefreshMapMsg(drawSettings, 0);
+						DrawSettings param = drawSettings;
+						if (handler.hasMessages(MAP_FORCE_REFRESH_MESSAGE)) {
+							if (!param.isUpdateVectorRendering()) {
+								param = new DrawSettings(drawSettings.isNightMode(), true);
+							}
+							handler.removeMessages(MAP_FORCE_REFRESH_MESSAGE);
+						}
+						refreshBaseMapInternal(currentViewport.copy(), param);
+						sendRefreshMapMsg(param, 0);
 					} catch(Exception e) {
 						log.error(e.getMessage(), e);
 					}
 				}
 			});
-			msg.what = BASE_REFRESH_MESSAGE;
+			msg.what = drawSettings.isUpdateVectorRendering() ? MAP_FORCE_REFRESH_MESSAGE : BASE_REFRESH_MESSAGE;
 			// baseHandler.sendMessageDelayed(msg, 0);
 			baseHandler.sendMessage(msg);
 		}
@@ -574,8 +577,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			Message msg = Message.obtain(handler, new Runnable() {
 				@Override
 				public void run() {
+					DrawSettings param = drawSettings;
 					handler.removeMessages(MAP_REFRESH_MESSAGE);
-					refreshMapInternal(drawSettings);
+					
+					refreshMapInternal(param);
 				}
 			});
 			msg.what = MAP_REFRESH_MESSAGE;

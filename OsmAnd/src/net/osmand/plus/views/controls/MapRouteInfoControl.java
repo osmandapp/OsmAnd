@@ -27,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.Gravity;
@@ -52,6 +53,8 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	private OsmandMapTileView mapView;
 	private Dialog dialog;
 	private AlertDialog favoritesDialog;
+	private boolean selectFromMapTouch; 
+	private boolean selectFromMapForTarget;
 	
 	
 	public MapRouteInfoControl(ContextMenuLayer contextMenu, 
@@ -61,6 +64,22 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		routingHelper = mapActivity.getRoutingHelper();
 		mapView = mapActivity.getMapView();
 		routingHelper.addListener(this);
+	}
+	
+	@Override
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+		if(selectFromMapTouch) {
+			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
+			selectFromMapTouch = false;
+			if(selectFromMapForTarget) {
+				getTargets().navigateToPoint(latlon, true, -1);
+			} else {
+				getTargets().setStartPoint(latlon, true, null);
+			}
+			contextMenu.setLocation(latlon, null);
+			return true;
+		}
+		return super.onSingleTap(point, tileBox);
 	}
 	
 	@Override
@@ -76,10 +95,10 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 					showDialog();
 				}
 			}
-
-			
-			
 		});
+		if(getTargets().getPointToNavigate() == null) {
+			showDialog();
+		}
 	}
 	
 	private Dialog createDialog() {
@@ -167,8 +186,9 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	}
 
 	protected void selectOnScreen(View parentView, boolean target) {
-		// TODO Auto-generated method stub
-		
+		selectFromMapTouch = true;
+		selectFromMapForTarget =  target;
+		hideDialog();
 	}
 
 	protected void selectFavorite(final View parentView, final boolean target) {
@@ -189,7 +209,6 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 				} else {
 					getTargets().setStartPoint(point, true, name);
 				}
-				getTargets().updateRoutingHelper();
 				favoritesDialog.dismiss();
 			}
 		});
@@ -311,7 +330,6 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	@Override
 	public void newRouteIsCalculated(boolean newRoute) {
 		directionInfo = -1;
-		mapView.refreshMap();
 	}
 	
 	public String generateViaDescription() {
@@ -403,9 +421,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 	@Override
 	public void routeWasCancelled() {
 		directionInfo = -1;
-		if(dialog != null) {
-			hideDialog();
-		}
+		// do not hide dialog (needed for use case entering Planning mode without destination)
 	}
 	
 	

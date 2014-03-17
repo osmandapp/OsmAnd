@@ -63,6 +63,7 @@ public abstract class OsmandMapLayer {
 		public boolean isUpdateVectorRendering() {
 			return updateVectorRendering;
 		}
+		
 		public boolean isNightMode() {
 			return nightMode;
 		}

@@ -369,8 +369,10 @@ public class MapActivityActions implements DialogProvider {
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;
 
-		adapter.item(R.string.context_menu_item_directions_to).icons(
-				R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
+		if(!mapActivity.getRoutingHelper().isRoutePlanningMode()) {
+			adapter.item(R.string.context_menu_item_directions_to).icons(
+					R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
+		}
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		if(targets.getPointToNavigate() != null) {
 			adapter.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_flag_dark,

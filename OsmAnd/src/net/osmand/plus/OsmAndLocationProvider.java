@@ -748,6 +748,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				// Update routing position and get location for sticking mode
 				updatedLocation = routingHelper.setCurrentLocation(location, settings.SNAP_TO_ROAD.get());
 			}
+		} else if(routingHelper.isRoutePlanningMode() && settings.getPointToStart() == null) {
+			routingHelper.setCurrentLocation(location, false);
 		}
 		this.location = updatedLocation;
 		

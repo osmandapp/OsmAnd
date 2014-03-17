@@ -1,5 +1,8 @@
 package net.osmand.plus.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
@@ -45,6 +48,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private MapNavigateControl mapNavigationControl;
 	private MapRoutePlanControl mapRoutePlanControl;
 	private MapRoutePreferencesControl mapAppModeControl;
+	private List<MapControls> allControls = new ArrayList<MapControls>();
 	
 	private float scaleCoefficient;
 
@@ -103,6 +107,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private <T extends MapControls> T init(T c, FrameLayout parent, int gravity) {
 		c.init(parent);
 		c.setGravity(gravity);
+		allControls.add(c);
 		return c;
 	}
 
@@ -188,14 +193,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 			mapMenuControls.showWithDelay((FrameLayout) mapActivity.getMapView().getParent(), TIMEOUT_TO_SHOW_BUTTONS);
 			mapRoutePlanControl.showWithDelay((FrameLayout) mapActivity.getMapView().getParent(), TIMEOUT_TO_SHOW_BUTTONS);
 		}
-		if(mapMenuControls.isVisible() && mapMenuControls.onSingleTap(point, tileBox)) {
-			return true;
-		}
-		if(zoomControls.isVisible() ) {
-			if(zoomControls.onSingleTap(point, tileBox)) {
+		for(MapControls m : allControls) {
+			if(m.isVisible() && m.onSingleTap(point, tileBox)){
 				return true;
 			}
-		} 
+		}
 		return false;
 	}
 

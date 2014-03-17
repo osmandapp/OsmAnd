@@ -37,15 +37,15 @@ public class MapNavigateControl extends MapControls {
 					mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 				} else {
 					OsmandApplication ctx = mapActivity.getMyApplication();
-					if(!ctx.getTargetPointsHelper().checkPointToNavigate()) {
+					if(!ctx.getTargetPointsHelper().checkPointToNavigateShort()) {
 						ri.showDialog();
 					} else {
 						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-						app.getSettings().FOLLOW_THE_ROUTE.set(true);
 						GPXRouteParams gpxRoute = null; // TODO gpx route
 						if (gpxRoute == null) {
 							app.getSettings().FOLLOW_THE_GPX_ROUTE.set(null);
 						}
+						app.getSettings().FOLLOW_THE_ROUTE.set(true);
 						routingHelper.setFollowingMode(true);
 						routingHelper.setRoutePlanningMode(false);
 						mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
