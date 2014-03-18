@@ -1,12 +1,16 @@
 package net.osmand.plus.views.controls;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
@@ -14,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -30,11 +35,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -46,7 +51,7 @@ public class MapRoutePreferencesControl extends MapControls {
 	private OsmandSettings settings;
 	private int cachedId;
 	private Dialog dialog;
-	private String selectedGPXFile = null;
+	private GPXFile selectedGPXFile = null;
 	
 	public MapRoutePreferencesControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		super(mapActivity, showUIHandler, scaleCoefficient);
@@ -195,9 +200,16 @@ public class MapRoutePreferencesControl extends MapControls {
 		});
 	}
 
-	protected void openGPXFileSelection(Spinner gpxSpinner) {
-		// TODO Auto-generated method stub
-		updateSpinnerItems(gpxSpinner);
+	protected void openGPXFileSelection(final Spinner gpxSpinner) {
+		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXUtilities.GPXFile>() {
+			
+			@Override
+			public boolean processResult(GPXFile result) {
+				selectedGPXFile = result;
+				updateSpinnerItems(gpxSpinner);
+				return true;
+			}
+		});
 	}
 
 	private void updateSpinnerItems(Spinner gpxSpinner) {
@@ -205,7 +217,7 @@ public class MapRoutePreferencesControl extends MapControls {
 		gpxActions.add(mapActivity.getString(R.string.default_none));
 		gpxActions.add(mapActivity.getString(R.string.select_gpx));
 		if(selectedGPXFile != null) {
-			gpxActions.add(selectedGPXFile);
+			gpxActions.add(new File(selectedGPXFile.path).getName());
 		}
 		
 		ArrayAdapter<String> gpxAdapter = new ArrayAdapter<String>(mapActivity, 

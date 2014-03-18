@@ -49,6 +49,10 @@ public class ContextMenuAdapter {
 		return itemNames.get(pos);
 	}
 	
+	public void setItemName(int pos, String str) {
+		itemNames.set(pos, str);
+	}
+	
 	public int getSelection(int pos) {
 		return selectedList.get(pos);
 	}

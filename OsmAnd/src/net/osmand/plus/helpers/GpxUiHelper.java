@@ -10,19 +10,34 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ClientContext;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.os.Build;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GpxUiHelper {
@@ -165,61 +180,151 @@ public class GpxUiHelper {
 			AccessibleToast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
 		if(!list.isEmpty() || showCurrentGpx){
-			Builder builder = new AlertDialog.Builder(activity);
+			
+			final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 			if(showCurrentGpx){
 				list.add(0, activity.getString(R.string.show_current_gpx_title));
 			}
-			String[] items = list.toArray(new String[list.size()]);
-			if (multipleChoice) {
-				final boolean[] selected = new boolean[items.length];
-				builder.setMultiChoiceItems(items, selected, new DialogInterface.OnMultiChoiceClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-						selected[which] = isChecked;
-					}
-				});
-				builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						GPXFile currentGPX = null;
-						if (showCurrentGpx && selected[0]) {
-							currentGPX = new GPXFile();
-							currentGPX.showCurrentTrack = true;
-						}
-						List<String> s = new ArrayList<String>();
-						for (int i = (showCurrentGpx ? 1 : 0); i < selected.length; i++) {
-							if (selected[i]) {
-								s.add(list.get(i));
-							}
-						}
-						loadGPXFileInDifferentThread(activity, callbackWithObject, dir, currentGPX,
-								s.toArray(new String[s.size()]));
-					}
-				});
-			} else {
-				builder.setItems(items, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						if (showCurrentGpx && which == 0) {
-							callbackWithObject.processResult(null);
-						} else {
-							loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, list.get(which));
-						}
-					}
-				});
+			for(String s : list) {
+				if (s.endsWith(".gpx")) {
+					s = s.substring(0, s.length() - ".gpx".length());
+				}
+				s = s.replace('_', ' ');
+				adapter.item(s).selected(multipleChoice ? 0 : -1)
+						.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).reg();
 			}
+			createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, list, adapter);
+		}
+	}
+	
+	private static void setDescripionInDialog(final ArrayAdapter<?> adapter, final ContextMenuAdapter cmAdapter, Activity activity,
+			final File dir, String filename, final int position) {
+		final Application app = activity.getApplication();
+		final File f = new File(dir, filename);
+		loadGPXFileInDifferentThread(activity, new CallbackWithObject<GPXUtilities.GPXFile>() {
 			
-			AlertDialog dlg = builder.show();
-			try {
-				dlg.getListView().setFastScrollEnabled(true);
-			} catch(Exception e) {
-				// java.lang.ClassCastException: com.android.internal.widget.RoundCornerListAdapter
-				// Unknown reason but on some devices fail
+			@Override
+			public boolean processResult(GPXFile result) {
+				cmAdapter.setItemName(position, getDescription((OsmandApplication) app, result, f));
+				adapter.notifyDataSetInvalidated();
+				return true;
 			}
+		}, dir, null, filename);
+	}
+
+	private static void createDialog(final Activity activity, final boolean showCurrentGpx,
+			final boolean multipleChoice, final CallbackWithObject<GPXFile> callbackWithObject,
+			final List<String> list, final ContextMenuAdapter adapter) {
+		final OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		Builder b = new AlertDialog.Builder(activity);
+		// final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
+		final boolean light = app.getSettings().isLightContentMenu();
+		final int layout;
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+			layout = R.layout.list_menu_item;
+		} else {
+			layout = R.layout.list_menu_item_native;
+		}
+
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout, R.id.title,
+				adapter.getItemNames()) {
+			@Override
+			public View getView(final int position, View convertView, ViewGroup parent) {
+				// User super class to create the View
+				View v = activity.getLayoutInflater().inflate(layout, null);
+				ImageView icon = (ImageView) v.findViewById(R.id.icon);
+				icon.setImageResource(adapter.getImageId(position, light));
+				final ArrayAdapter<String> arrayAdapter = this;
+				icon.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (showCurrentGpx && position == 0) {
+							return;
+						}
+						setDescripionInDialog(arrayAdapter, adapter, activity, dir, list.get(position), position);
+					}
+
+				});
+				icon.setVisibility(View.VISIBLE);
+				TextView tv = (TextView) v.findViewById(R.id.title);
+				tv.setText(adapter.getItemName(position));
+				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+				// Put the image on the TextView
+				// if(adapter.getImageId(position, light) != 0) {
+				// tv.setCompoundDrawablesWithIntrinsicBounds(adapter.getImageId(position, light), 0, 0, 0);
+				// }
+				// tv.setCompoundDrawablePadding(padding);
+				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
+				if (adapter.getSelection(position) == -1) {
+					ch.setVisibility(View.INVISIBLE);
+				} else {
+					ch.setOnCheckedChangeListener(null);
+					ch.setChecked(adapter.getSelection(position) > 0);
+					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						}
+					});
+				}
+				return v;
+			}
+		};
+
+		OnClickListener onClickListener = new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int position) {
+			}
+		};
+		b.setAdapter(listAdapter, onClickListener);
+		if (multipleChoice) {
+			b.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					GPXFile currentGPX = null;
+					if (showCurrentGpx && adapter.getSelection(0) > 0) {
+						currentGPX = new GPXFile();
+						currentGPX.showCurrentTrack = true;
+					}
+					List<String> s = new ArrayList<String>();
+					for (int i = (showCurrentGpx ? 1 : 0); i < adapter.length(); i++) {
+						if (adapter.getSelection(i) > 0) {
+							s.add(list.get(i));
+						}
+					}
+					loadGPXFileInDifferentThread(activity, callbackWithObject, dir, currentGPX,
+							s.toArray(new String[s.size()]));
+				}
+			});
+		}
+
+		final AlertDialog dlg = b.create();
+		dlg.setCanceledOnTouchOutside(true);
+		dlg.getListView().setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				if (multipleChoice) {
+					adapter.setSelection(position, adapter.getSelection(position) > 0 ? 0 : 1);
+					listAdapter.notifyDataSetInvalidated();
+				} else {
+					dlg.dismiss();
+					if (showCurrentGpx && position == 0) {
+						callbackWithObject.processResult(null);
+					} else {
+						loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, list.get(position));
+					}
+				}
+			}
+		});
+		dlg.show();
+		try {
+			dlg.getListView().setFastScrollEnabled(true);
+		} catch (Exception e) {
+			// java.lang.ClassCastException: com.android.internal.widget.RoundCornerListAdapter
+			// Unknown reason but on some devices fail
 		}
 	}
 	
