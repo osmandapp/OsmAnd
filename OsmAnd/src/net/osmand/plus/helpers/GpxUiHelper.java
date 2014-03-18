@@ -205,7 +205,7 @@ public class GpxUiHelper {
 			
 			@Override
 			public boolean processResult(GPXFile result) {
-				cmAdapter.setItemName(position, getDescription((OsmandApplication) app, result, f));
+				cmAdapter.setItemName(position, cmAdapter.getItemName(position) + "\n" + getDescription((OsmandApplication) app, result, f));
 				adapter.notifyDataSetInvalidated();
 				return true;
 			}
@@ -242,11 +242,21 @@ public class GpxUiHelper {
 						if (showCurrentGpx && position == 0) {
 							return;
 						}
-						setDescripionInDialog(arrayAdapter, adapter, activity, dir, list.get(position), position);
+						int nline = adapter.getItemName(position).indexOf('\n');
+						if(nline == -1) {
+							setDescripionInDialog(arrayAdapter, adapter, activity, dir, list.get(position), position);
+						} else {
+							adapter.setItemName(position, adapter.getItemName(position).substring(0, nline));
+							arrayAdapter.notifyDataSetInvalidated();
+						}
 					}
 
 				});
-				icon.setVisibility(View.VISIBLE);
+				if(showCurrentGpx && position == 0) {
+					icon.setVisibility(View.INVISIBLE);
+				} else {
+					icon.setVisibility(View.VISIBLE);
+				}
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				tv.setText(adapter.getItemName(position));
 				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -265,6 +275,7 @@ public class GpxUiHelper {
 					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							adapter.setSelection(position, isChecked ? 1 : 0);
 						}
 					});
 				}
@@ -283,7 +294,6 @@ public class GpxUiHelper {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
 					GPXFile currentGPX = null;
 					if (showCurrentGpx && adapter.getSelection(0) > 0) {
 						currentGPX = new GPXFile();
@@ -295,6 +305,7 @@ public class GpxUiHelper {
 							s.add(list.get(i));
 						}
 					}
+					dialog.dismiss();
 					loadGPXFileInDifferentThread(activity, callbackWithObject, dir, currentGPX,
 							s.toArray(new String[s.size()]));
 				}
