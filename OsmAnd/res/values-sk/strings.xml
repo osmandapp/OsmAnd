@@ -61,7 +61,7 @@
   <string name="gps_wakeup_interval">Interval prebúdzania GPS: %s</string>
   <string name="int_continuosly">Priebežne</string>
   <string name="monitoring_mode_off">Zaznamenať GPX</string>
-  <string name="monitoring_mode_on">Zastaviť\n GPX záznam.</string>
+  <string name="monitoring_mode_on">Zastaviť\n GPX záznam</string>
   <string name="bg_service_sleep_mode_off">Zapnúť\n režim spánku</string>
   <string name="bg_service_sleep_mode_on">Vypnúť\n režim spánku</string>  
   <string name="map_widget_top_text">Názov ulice</string>
