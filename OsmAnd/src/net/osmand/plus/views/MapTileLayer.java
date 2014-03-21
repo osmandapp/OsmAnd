@@ -1,6 +1,5 @@
 package net.osmand.plus.views;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
@@ -8,6 +7,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.access.AccessibleToast;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.MapUtils;
 import android.graphics.Bitmap;

@@ -1,8 +1,8 @@
 package net.osmand.plus.activities.actions;
 
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.access.AccessibleAlertBuilder;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;

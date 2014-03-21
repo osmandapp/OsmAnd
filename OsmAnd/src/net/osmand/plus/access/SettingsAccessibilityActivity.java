@@ -1,9 +1,7 @@
-package net.osmand.access;
+package net.osmand.plus.access;
 
 
 import net.osmand.plus.R;
-import net.osmand.plus.access.AccessibilityMode;
-import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import android.os.Build;
 import android.os.Bundle;

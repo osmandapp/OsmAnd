@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
-import net.osmand.access.AccessibleToast;
+import net.osmand.plus.access.AccessibleToast;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams.GPXRouteParamsBuilder;

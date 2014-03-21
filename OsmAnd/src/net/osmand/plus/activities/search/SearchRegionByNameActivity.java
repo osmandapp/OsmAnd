@@ -4,10 +4,10 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.access.AccessibleToast;
 import net.osmand.plus.resources.RegionAddressRepository;
 import android.app.Activity;
 import android.os.Bundle;

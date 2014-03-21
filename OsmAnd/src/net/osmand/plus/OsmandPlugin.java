@@ -6,7 +6,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.preference.PreferenceScreen;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibilityPlugin;
+import net.osmand.plus.access.AccessibilityPlugin;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexesActivity;
 import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
@@ -22,6 +22,7 @@ import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
+
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;

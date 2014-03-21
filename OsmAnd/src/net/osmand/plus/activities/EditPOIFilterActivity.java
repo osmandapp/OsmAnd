@@ -11,7 +11,6 @@ import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
@@ -21,6 +20,7 @@ import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.SpecialPhrases;
+import net.osmand.plus.access.AccessibleToast;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchPOIActivity;
 import android.app.AlertDialog;

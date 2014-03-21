@@ -3,7 +3,6 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -11,6 +10,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
+import net.osmand.plus.access.AccessibleToast;
 import net.osmand.plus.resources.TransportIndexRepository;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;

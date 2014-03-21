@@ -13,8 +13,8 @@ import java.util.Date;
 import java.util.List;
 
 import net.osmand.AndroidUtils;
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
+import net.osmand.plus.access.AccessibleToast;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
