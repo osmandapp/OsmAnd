@@ -208,6 +208,7 @@ public class RouteProvider {
 			GPXFile file = builder.file;
 			boolean reverse = builder.reverse; 
 			boolean announceWaypoints = builder.announceWaypoints;
+			calculateOsmAndRoute = builder.calculateOsmAndRoute;
 			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){
 				directions =  parseOsmAndGPXRoute(points, file, OSMAND_ROUTER.equals(file.author), builder.leftSide, 10);
 				if(reverse){
@@ -276,10 +277,10 @@ public class RouteProvider {
 			try {
 				RouteCalculationResult res;
 				boolean calcGPXRoute = params.gpxRoute != null && !params.gpxRoute.points.isEmpty();
-				if (params.type == RouteService.OSMAND || (calcGPXRoute && params.gpxRoute.calculateOsmAndRoute)) {
-					res = findVectorMapsRoute(params, calcGPXRoute);
-				} else if(calcGPXRoute){
+				if(calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute){
 					res = calculateGpxRoute(params);
+				} else if (params.type == RouteService.OSMAND) {
+					res = findVectorMapsRoute(params, calcGPXRoute);
 				} else if (params.type == RouteService.YOURS) {
 					res = findYOURSRoute(params);
 				} else if (params.type == RouteService.ORS) {
