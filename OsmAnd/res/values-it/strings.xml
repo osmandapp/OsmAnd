@@ -1648,4 +1648,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="routing_attr_avoid_motorway_description">Evita le autostrade</string>
 	<string name="routing_attr_weight_name">Massa</string>
 	<string name="routing_attr_weight_description">Specifica il limite di massa</string>
+    <string name="select_gpx">Scegli GPX …</string>
+    <string name="route_descr_select_destination">Scegli la destinazione</string>
+    <string name="route_descr_select_on_map">Scegli sulla mappa …</string>
+    <string name="route_descr_favorite">Preferito …</string>
+    <string name="route_preferences">Preferenze del percorso</string>
+    <string name="route_info">Informazioni sul percorso</string>
     </resources>
