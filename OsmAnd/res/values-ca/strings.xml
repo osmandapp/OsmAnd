@@ -413,12 +413,12 @@
 <string name="application_dir">Directori d\'emmagatzematge</string>
 <string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
-		L\'OsmAnd és una aplicació de navegació de codi obert amb accés a una gran varietat de dades de la col·lecció oberta de mapes OpenStreetMap. Totes les dades, incloent mapes vectorials i de mosaic, poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes tant en línia com fora de línia, incloent a més l'orientació per veu.
+		L\'OsmAnd és una aplicació de navegació de codi obert amb accés a una gran varietat de dades de la col·lecció oberta de mapes OpenStreetMap. Totes les dades, incloent mapes vectorials i de mosaic, poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes tant en línia com fora de línia, incloent a més l\'orientació per veu.
 
 		Algunes de les característiques centrals són:
 		- Funcionalitat completa fora de línia (desa en carpetes els mapes baixats, vectorials i mosaics)
 		- Mapes de vectors compactes de tot el món per usar fora de línia
-		- Baixada il·limitada de mapes nacionals o regionals directament des de l'aplicació
+		- Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació
 		- Diverses capes de mapes alhora, com traces GPX o de navegació, PDIs, favorits, etc. amb nivell d\'opacitat personalitzada
 		- Cerca fora de línia d\'adreces i llocs
 		- Càlcul de rutes fora de línia per distàncies curtes (experimental)
@@ -428,7 +428,7 @@
 		- Alineació automàtica del mapa segons la brúixola o la direcció del moviment, opcional
 		- Indicació de carril, velocitat màxima permesa, veus enregistrades i/o sintetitzades
 
-		- Limitacions d'aquesta versió gratuïta de OsmAnd:
+		- Limitacions d\'aquesta versió gratuïta de OsmAnd:
 		- Limitació en el nombre de mapes baixats
 		- No té accés als PDIs fora de línia de Viquipèdia
 		
@@ -436,12 +436,12 @@
 	</string>
 <string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)
-		L\'OsmAnd és una aplicació de navegació de codi obert amb accés a una gran varietat de dades de la col·lecció oberta de mapes OpenStreetMap. Totes les dades, incloent mapes de tessel·les i de vectors, poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes tant en línia com fora de línia, incloent a més l'orientació per veu.
+		L\'OsmAnd és una aplicació de navegació de codi obert amb accés a una gran varietat de dades de la col·lecció oberta de mapes OpenStreetMap. Totes les dades, incloent mapes de tessel·les i de vectors, poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes tant en línia com fora de línia, incloent a més l\'orientació per veu.
 		L\'OsmAnd+ és la versió de pagament. Comprant-la estareu donant suport al projecte, ajudareu al desenvolupament de noves funcions i rebreu les darreres actualitzacions.
 		Algunes de les característiques centrals són:
 		- Funcionalitat completa fora de línia (desa en carpetes els mapes baixats, vectorials i mosaics)
 		- Mapes de vectors compactes de tot el món per usar fora de línia
-		- Baixada il·limitada de mapes nacionals o regionals directament des de l'aplicació 
+		- Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació 
 		- Disponibilitat fora de línia dels PDI baixats prèviament de Viquipèdia, és genial per fer turisme
 		- Diverses capes de mapes alhora, com traces GPX o de navegació, PDIs, favorits, etc. amb nivell d\'opacitat personalitzada
 		- Cerca fora de línia d\'adreces i llocs
@@ -543,8 +543,8 @@
 <string name="km_h">km/h</string>
 <string name="downloading">S\'està baixant...</string>
 <string name="closing_changeset">S\'està tancant el conjunt de canvis...</string>
-<string name="loading_cities">S'estan carregant les ciutats…</string>
-<string name="loading">S'està carregant…</string>
+<string name="loading_cities">S\'estan carregant les ciutats…</string>
+<string name="loading">S\'està carregant…</string>
 <string name="daynight_mode_day">Dia</string>
 <string name="daynight_mode_night">Nit</string>
 <string name="daynight_mode_auto">Alba/capvespre</string>
@@ -869,8 +869,8 @@
 	<string name="renderers">Renderització dels vectors</string>
 	<string name="context_menu_item_open_bug">Obre un error d\'OSM</string>
 	<string name="tip_recent_changes_0_8_4_t">Canvis a la versió 0.8.4:
-	\n\t* Correcció d'alguns errors
-	\n\t* El mapa no perd la posició després d'interrupcions
+	\n\t* Correcció d\'alguns errors
+	\n\t* El mapa no perd la posició després d\'interrupcions
 	\n\t* Permet activar el mode en segon pla durant la navegació
     </string>
     <string name="btn_add_tag">Afegeix una etiqueta</string>
@@ -1064,7 +1064,7 @@
 		\n\t* Connector de corbes de nivell
 		\n\t* Correccions d\'errors
 		\n\t* Opció \'Vista turística\'amb més detalls al mapa, nous estils de carretera, més contrast, i l\'opció per senderisme indicant el grau de dificultat SAC
-		\n\t* Correcció d'altitud GPS basada en EGM96
+		\n\t* Correcció d\'altitud GPS basada en EGM96
     </string>
     <string name="av_control_start">engega</string>
     <string name="osmand_srtm_short_description_80_chars">Connector de l\'OsmAnd per a corbes de nivell fora de línia</string>
@@ -1370,13 +1370,13 @@
     <string name="tip_recent_changes_1_7_t">Canvis a la versió 1.7:↵
 →\n\t* Càlcul perfeccionat de la ruta, més ràpid i precís↵
 →\n\t* Simulació activa als túnels↵
-→\n\t* Nombroses millores en la interacció amb l'usuari↵
-→\n\t* Accés a l'ajust de velocitat de la síntesi de veu↵
+→\n\t* Nombroses millores en la interacció amb l\'usuari↵
+→\n\t* Accés a l\'ajust de velocitat de la síntesi de veu↵
     </string>
     <string name="complex_route_calculation_failed">Fracàs del càlcul ràpid de ruta (%s), retorn al mètode lent.</string>
     <string name="disable_complex_routing_descr">Desactiva el càlcul de ruta en 2 fases per cotxe</string>
     <string name="disable_complex_routing">Desactiva el càlcul complex de la ruta</string>
-    <string name="route_is_too_long">Ruta massa llarga. El càlcul fora de línia entre punts separats per més de 200 Km pot ser molt lent o aturar-se del tot. Per resoldre-ho, heu d'afegir fites intermèdies.</string>
+    <string name="route_is_too_long">Ruta massa llarga. El càlcul fora de línia entre punts separats per més de 200 Km pot ser molt lent o aturar-se del tot. Per resoldre-ho, heu d\'afegir fites intermèdies.</string>
 	<string name="edit_tilesource_successfully">El proveïdor de mosaics %1$s és ben desat</string>
     <string name="edit_tilesource_choose_existing">Tria un proveïdor…</string>
     <string name="map_widget_fps_info">Info depuració FPS</string>
@@ -1392,10 +1392,10 @@
     <string name="calculate_osmand_route_gpx">Calcula la ruta OsmAnd sense connexió</string>
     <string name="app_mode_truck">Camió</string>
     <string name="tip_map_styles_t">OsmAnd pot representar els mapes vectorials en diferents estils per tal d\'adaptar-se millor al que necessiteu:
-		\n\nA més de l\'estil normal d\'ús general, podeu configurar a \'Menu\' → \'Configura l'aparença\' → \'Estil de renderització\' i seleccionar p.ex.
+		\n\nA més de l\'estil normal d\'ús general, podeu configurar a \'Menu\' → \'Configura l\'aparença\' → \'Estil de renderització\' i seleccionar p.ex.
 		\n\t* L\'estil \'Turisme\', que visualitza els detalls més rellevants per viatjar i fer turisme, optimitzat per conductors professionals (carreteres més distingibles, amb contrast millorat), rutes ciclistes, suport al senderisme (escala SAC i marcat de camins).
 		\n\t* \'Carreteres molt contrastades\' mostra les carreteres en colors molt vius per quan hi ha molta llum ambiental.
-		\n\t* \'Hivern i esquí\' crea una visió d'hivern nevat, i mostra les pistes i remuntadors globals (precisa baixar-se el mapa \'World ski\')
+		\n\t* \'Hivern i esquí\' crea una visió d\'hivern nevat, i mostra les pistes i remuntadors globals (precisa baixar-se el mapa \'World ski\')
 	</string>
     <string name="routing_attr_prefer_motorway_name">Preferència per autopistes</string>
 	<string name="routing_attr_prefer_motorway_description">Preferència per autopista</string>
@@ -1425,20 +1425,20 @@
 	<string name="previous_run_crashed">La darrera execució d\'OsmAnd s\'ha estavellat. El fitxer log és a {0}. Si us plau informeu del problema i adjunteu el fitxer log.</string>
 	<string name="transport_stop_to_go_out">Trieu aturada per sortir</string>
 	<string name="route_head">Endavant</string>
-	<string name="off_router_service_no_gps_available">El servei de navegació en segon pla necessita tenir un sistema d'ubicació activat.</string>
-	<string name="background_service_provider_descr">Trieu el sistema d'ubicació pel servei de navegació en segon pla</string>
+	<string name="off_router_service_no_gps_available">El servei de navegació en segon pla necessita tenir un sistema d\'ubicació activat.</string>
+	<string name="background_service_provider_descr">Trieu el sistema d\'ubicació pel servei de navegació en segon pla</string>
 	<string name="osmand_monitoring_plugin_description">Permet fer el seguiment i la navegació en segon pla (amb la pantalla apagada) activant periòdicament el GPS.
-        Mostra  els paràmetres que faciliten l'enregistrament d'excursions en fitxers GPX locals, o en línia usant un servei web.</string>
+        Mostra  els paràmetres que faciliten l\'enregistrament d\'excursions en fitxers GPX locals, o en línia usant un servei web.</string>
     <string name="tip_recent_changes_1_6_t">Canvis a la 1.6:
 	\n\t* Suport a dispositius Full HD 
 	\n\t* Suport de fons transparent
 	\n\t* Mostra els mapes descarregats i permet descarregar els pendents en mode visualització
- 	\n\t* Arxius de mapes de línies de contorn s'agrupen segons país/regió
-	\n\t* Nou mapa base mundial amb les principals rutes, vies fèrries i dades d'àrees com boscos 
-	\n\t* Opció de lupa (pulsació llarga al butó de zoom) - Disponible tant als mapes d'imatge com vectorials  
+ 	\n\t* Arxius de mapes de línies de contorn s\'agrupen segons país/regió
+	\n\t* Nou mapa base mundial amb les principals rutes, vies fèrries i dades d\'àrees com boscos 
+	\n\t* Opció de lupa (pulsació llarga al butó de zoom) - Disponible tant als mapes d\'imatge com vectorials  
 	\n\t* Definició/Modificació en línia de mostres a mida (amb indicació de data de caducitat)
-	\n\t* Suport als límits de velocitat variables segons l'hora (Països Baixos)
-	\n\t* Entrada ràpida en la recerca d'adreça
+	\n\t* Suport als límits de velocitat variables segons l\'hora (Països Baixos)
+	\n\t* Entrada ràpida en la recerca d\'adreça
 	\n\t* Errors corregits de càlcul de rutes i visualització
     </string>
     </resources>

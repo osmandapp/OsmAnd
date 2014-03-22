@@ -476,7 +476,7 @@
   <string name="hide_poi_filter">Nascondi il filtro</string>
   <string name="show_poi_filter">Visualizza il filtro</string>
   <string name="search_poi_filter">Filtro</string>
-  <string name="menu_mute_off">L'audio è attivato</string>
+  <string name="menu_mute_off">L\'audio è attivato</string>
   <string name="menu_mute_on">Audio disattivato</string>
   <string name="voice_provider_descr">Scegli la voce da utilizzare per la navigazione (per i codici delle lingue vedi ISO 639-1)</string>
   <string name="voice_provider">Guida vocale</string>
