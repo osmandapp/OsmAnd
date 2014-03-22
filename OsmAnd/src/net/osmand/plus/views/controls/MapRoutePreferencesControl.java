@@ -190,7 +190,7 @@ public class MapRoutePreferencesControl extends MapControls {
 			list.add(new GPXLocalRoutingParameter(R.string.calculate_osmand_route_gpx, 
 					getString(R.string.calculate_osmand_route_gpx), rparams.isCalculateOsmAndRoute()));
 		}
-		if(rm == null || !settings.CALC_GPX_ROUTE.get()) {
+		if(rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute())) {
 			return list;
 		}
 		for (RoutingParameter r : rm.getParameters().values()) {
@@ -282,6 +282,7 @@ public class MapRoutePreferencesControl extends MapControls {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				if(position == 0) {
 					mapActivity.getRoutingHelper().setGpxParams(null);
+					updateParameters();
 				} else if(position == 1) {
 					openGPXFileSelection(gpxSpinner);
 				} else if(position == 2) {
