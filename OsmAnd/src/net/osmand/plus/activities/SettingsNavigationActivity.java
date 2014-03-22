@@ -18,7 +18,6 @@ import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
-import net.osmand.router.RoutingConfiguration;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -128,7 +127,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			cat.addPreference(fastRoute);
 		} else {
 			ApplicationMode am = settings.getApplicationMode();
-			GeneralRouter router = getRouter(am);
+			GeneralRouter router = getRouter(getMyApplication().getDefaultRoutingConfig(), am);
 			clearParameters();
 			if (router != null) {
 				Map<String, RoutingParameter> parameters = router.getParameters();
@@ -189,10 +188,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	}
 
 
-	public static GeneralRouter getRouter(ApplicationMode am) {
-		GeneralRouter router = RoutingConfiguration.getDefault().getRouter(am.getStringKey());
+	public static GeneralRouter getRouter(net.osmand.router.RoutingConfiguration.Builder builder, ApplicationMode am) {
+		GeneralRouter router = builder.getRouter(am.getStringKey());
 		if(router == null && am.getParent() != null) {
-			router = RoutingConfiguration.getDefault().getRouter(am.getParent().getStringKey());
+			router = builder.getRouter(am.getParent().getStringKey());
 		}
 		return router;
 	}

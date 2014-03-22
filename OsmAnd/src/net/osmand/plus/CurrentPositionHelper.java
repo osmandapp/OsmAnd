@@ -36,7 +36,7 @@ public class CurrentPositionHelper {
 		} else {
 			return;
 		}
-		RoutingConfiguration cfg = RoutingConfiguration.getDefault().build(p.name().toLowerCase(), 10);
+		RoutingConfiguration cfg = app.getDefaultRoutingConfig().build(p.name().toLowerCase(), 10);
 		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, app.getResourceManager().getRoutingMapFiles());
 	}
 	

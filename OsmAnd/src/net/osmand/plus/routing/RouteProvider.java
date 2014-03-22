@@ -1,8 +1,6 @@
 package net.osmand.plus.routing;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,7 +21,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 
-import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -53,6 +50,7 @@ import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -65,7 +63,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xmlpull.v1.XmlPullParserException;
 
 import android.os.Bundle;
 import btools.routingapp.IBRouterService;
@@ -462,11 +459,12 @@ public class RouteProvider {
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(false);
 		OsmandSettings settings = params.ctx.getSettings();
 		
-		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(params.mode);
+		RoutingConfiguration.Builder config = params.ctx.getDefaultRoutingConfig();
+		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(config, params.mode);
 		if(generalRouter == null) {
 			return applicationModeNotSupported(params);
 		}
-		RoutingConfiguration cf = initOsmAndRoutingConfig(params, settings, generalRouter);
+		RoutingConfiguration cf = initOsmAndRoutingConfig(config, params, settings, generalRouter);
 		if(cf == null){
 			return applicationModeNotSupported(params);
 		}
@@ -512,19 +510,8 @@ public class RouteProvider {
 
 
 
-	private RoutingConfiguration initOsmAndRoutingConfig(final RouteCalculationParams params, OsmandSettings settings,
+	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, final RouteCalculationParams params, OsmandSettings settings,
 			GeneralRouter generalRouter) throws IOException, FileNotFoundException {
-		File routingXml = params.ctx.getAppPath(IndexConstants.ROUTING_XML_FILE);
-		RoutingConfiguration.Builder config ;
-		if (routingXml.exists() && routingXml.canRead()) {
-			try {
-				config = RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXml));
-			} catch (XmlPullParserException e) {
-				throw new IllegalStateException(e);
-			}
-		} else {
-			config = RoutingConfiguration.getDefault();
-		}
 		GeneralRouterProfile p ;
 		if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			p = GeneralRouterProfile.BICYCLE;

@@ -3,6 +3,7 @@ package net.osmand.plus;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -39,7 +40,11 @@ import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -100,6 +105,7 @@ public class OsmandApplication extends Application implements ClientContext {
 	private SavingTrackHelper savingTrackHelper;
 	private LiveMonitoringHelper liveMonitoringHelper;
 	private TargetPointsHelper targetPointsHelper;
+	private RoutingConfiguration.Builder defaultRoutingConfig;
 
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
@@ -793,6 +799,24 @@ public class OsmandApplication extends Application implements ClientContext {
 				context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
 			}
 		}
+	}
+	
+	public RoutingConfiguration.Builder getDefaultRoutingConfig() {
+		if (defaultRoutingConfig == null) {
+			File routingXml = getAppPath(IndexConstants.ROUTING_XML_FILE);
+			if (routingXml.exists() && routingXml.canRead()) {
+				try {
+					defaultRoutingConfig = RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXml));
+				} catch (XmlPullParserException e) {
+					throw new IllegalStateException(e);
+				} catch (IOException e) {
+					throw new IllegalStateException(e);
+				}
+			} else {
+				defaultRoutingConfig = RoutingConfiguration.getDefault();
+			}
+		}
+		return defaultRoutingConfig;
 	}
 	
 	public boolean accessibilityExtensions() {

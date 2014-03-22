@@ -175,7 +175,7 @@ public class MapRoutePreferencesControl extends MapControls {
 	
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode am) {
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
-		GeneralRouter rm = SettingsNavigationActivity.getRouter(am);
+		GeneralRouter rm = SettingsNavigationActivity.getRouter(mapActivity.getMyApplication().getDefaultRoutingConfig(), am);
 		GPXRouteParamsBuilder rparams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
 		if(rparams != null) {
 			list.add(new GPXLocalRoutingParameter(R.string.gpx_option_reverse_route, 
