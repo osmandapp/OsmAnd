@@ -2,7 +2,6 @@ package net.osmand.plus.routing;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import net.osmand.Location;
@@ -22,7 +21,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RouteCalculationProgress;
@@ -51,7 +50,7 @@ public class RoutingHelper {
 	
 	private boolean isRoutePlanningMode = false;
 	
-	private GPXRouteParams currentGPXRoute = null;
+	private GPXRouteParamsBuilder currentGPXRoute = null;
 
 	private RouteCalculationResult route = new RouteCalculationResult("");
 	
@@ -117,9 +116,11 @@ public class RoutingHelper {
 
 	
 	
-	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation, GPXRouteParams gpxRoute){
+	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation, 
+			GPXRouteParamsBuilder gpxRoute){
 		clearCurrentRoute(finalLocation, intermediatePoints);
-		currentGPXRoute = gpxRoute;
+		
+		setGpxParams(gpxRoute);
 		// to update route
 		setCurrentLocation(currentLocation, false);
 		
@@ -151,13 +152,18 @@ public class RoutingHelper {
 		}
 	}
 	
-	public GPXRouteParams getCurrentGPXRoute() {
+	public GPXRouteParamsBuilder getCurrentGPXRoute() {
 		return currentGPXRoute;
 	}
 	
-	public List<Location> getCurrentRoute() {
-		return currentGPXRoute == null || currentGPXRoute.points.isEmpty() ? route.getImmutableLocations() : Collections
-				.unmodifiableList(currentGPXRoute.points);
+
+
+	public void setGpxParams(GPXRouteParamsBuilder params) {
+		currentGPXRoute = params;
+	}	
+	
+	public List<Location> getCurrentCalculatedRoute() {
+		return route.getImmutableLocations();
 	}
 	
 	public void setAppMode(ApplicationMode mode){
@@ -765,7 +771,8 @@ public class RoutingHelper {
 		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, null);
 	}
 	
-	private void recalculateRouteInBackground(boolean force, final Location start, final LatLon end, final List<LatLon> intermediates, final GPXRouteParams gpxRoute, final RouteCalculationResult previousRoute){
+	private void recalculateRouteInBackground(boolean force, final Location start, final LatLon end, final List<LatLon> intermediates,
+			final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute){
 		if (start == null || end == null) {
 			return;
 		}
@@ -776,7 +783,7 @@ public class RoutingHelper {
 				params.start = start;
 				params.end = end;
 				params.intermediates = intermediates;
-				params.gpxRoute = gpxRoute;
+				params.gpxRoute = gpxRoute == null? null : gpxRoute.build(start, settings);
 				params.previousToRecalculate = previousRoute;
 				params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 				params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
@@ -873,6 +880,7 @@ public class RoutingHelper {
 	
 	public GPXFile generateGPXFileWithRoute(){
 		return provider.createOsmandRouterGPX(route, app);
-	}	
+	}
+
 
 }

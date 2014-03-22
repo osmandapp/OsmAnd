@@ -112,18 +112,80 @@ public class RouteProvider {
 	public RouteProvider(){
 	}
 	
+	public static class GPXRouteParamsBuilder {
+		boolean calculateOsmAndRoute = false;
+		// parameters
+		private final GPXFile file;
+		private boolean announceWaypoints;
+		private boolean reverse;
+		private boolean leftSide;
+		private boolean passWholeRoute;
+		
+		public GPXRouteParamsBuilder(GPXFile file, OsmandSettings settings){
+			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
+			this.file = file;
+		}
+
+		public boolean isAnnounceWaypoints() {
+			return announceWaypoints;
+		}
+		
+		public boolean isReverse() {
+			return reverse;
+		}
+		
+		public boolean isCalculateOsmAndRoute() {
+			return calculateOsmAndRoute;
+		}
+		
+		public void setCalculateOsmAndRoute(boolean calculateOsmAndRoute) {
+			this.calculateOsmAndRoute = calculateOsmAndRoute;
+		}
+		
+		public void setPassWholeRoute(boolean passWholeRoute){
+			this.passWholeRoute = passWholeRoute;
+		}
+		
+		public boolean isPassWholeRoute() {
+			return passWholeRoute;
+		}
+		
+		public GPXRouteParams build(Location start, OsmandSettings settings) {
+			GPXRouteParams res = new GPXRouteParams();
+			res.prepareGPXFile(this);
+			if(passWholeRoute && start != null){
+				res.points.add(0, start);
+			}
+			return res;
+		}
+		
+
+		public void setAnnounceWaypoints(boolean announceWaypoints) {
+			this.announceWaypoints = announceWaypoints;
+			
+		}
+		
+		public void setReverse(boolean reverse) {
+			this.reverse = reverse;
+		}
+		
+		public GPXFile getFile() {
+			return file;
+		}
+		
+		public List<Location> getPoints() {
+			GPXRouteParams copy = new GPXRouteParams();
+			copy.prepareGPXFile(this);
+			return copy.getPoints();
+		}
+		
+	}
+	
 	public static class GPXRouteParams {
 		List<Location> points = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions;
 		DataTileManager<WptPt> wpt;
-		boolean calculateOsmAndRoute = false;
-	
-		private GPXRouteParams(){
-		}
-		
-		public void setStartPoint(Location startPoint) {
-			points.add(0, startPoint);
-		}
+		boolean calculateOsmAndRoute;
 		
 		public List<Location> getPoints() {
 			return points;
@@ -145,48 +207,12 @@ public class RouteProvider {
 			return null;
 		}
 		
-		public static class GPXRouteParamsBuilder {
-			
-			private GPXRouteParams obj = new GPXRouteParams();
-			private GPXFile file;
-			private boolean leftHandDriving;
-			private boolean reverse;
-			private boolean announceWaypoints;
-			private GPXRouteParamsBuilder(GPXFile f, OsmandSettings settings) {
-				this.file = f;
-				leftHandDriving = settings.DRIVING_REGION.get().leftHandDriving;
-//				obj = new GPXRouteParams(file, reverse, announceWaypoints, settings)
-				// TODO Auto-generated constructor stub
-			}
-			
-			public GPXRouteParamsBuilder reverse() {
-				this.reverse = true;
-				return this;
-			}
-			
-			public GPXRouteParamsBuilder announceWaypoints() {
-				this.announceWaypoints = true;
-				return this;
-			}
-			
-			public GPXRouteParamsBuilder calculateOsmAndRoute() {
-				obj.calculateOsmAndRoute = true;
-				return this;
-			}
-
-			public static GPXRouteParamsBuilder newBuilder(GPXFile f, OsmandSettings settings) {
-				return new GPXRouteParamsBuilder(f, settings);
-			}
-			
-			public GPXRouteParams build(){
-				obj.prepareEverything(file, reverse, announceWaypoints, leftHandDriving);
-				return obj;
-			}
-		}
-		
-		private void prepareEverything(GPXFile file, boolean reverse, boolean announceWaypoints, boolean leftSide){
+		public GPXRouteParams prepareGPXFile(GPXRouteParamsBuilder builder){
+			GPXFile file = builder.file;
+			boolean reverse = builder.reverse; 
+			boolean announceWaypoints = builder.announceWaypoints;
 			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){
-				directions =  parseOsmAndGPXRoute(points, file, OSMAND_ROUTER.equals(file.author), leftSide, 10);
+				directions =  parseOsmAndGPXRoute(points, file, OSMAND_ROUTER.equals(file.author), builder.leftSide, 10);
 				if(reverse){
 					// clear directions all turns should be recalculated
 					directions = null;
@@ -220,7 +246,9 @@ public class RouteProvider {
 							MapUtils.get31TileNumberY(w.lat),w) ;
 				}
 			}
-		}		
+			return this;
+		}
+
 	}
 	
 	private static Location createLocation(WptPt pt){

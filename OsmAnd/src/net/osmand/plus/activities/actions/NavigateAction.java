@@ -17,8 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -83,35 +82,32 @@ public class NavigateAction {
 				boolean calculateOsmAndRoute = props[4];
 				settings.SPEAK_GPX_WPT.set(announceGpxWpt);
 				settings.CALC_GPX_ROUTE.set(calculateOsmAndRoute);
-				GPXRouteParamsBuilder bld = GPXRouteParamsBuilder.newBuilder(result, settings);
+				GPXRouteParamsBuilder gpxRoute = new GPXRouteParamsBuilder(result, settings);
 				if(reverse) {
-					bld.reverse();
+					gpxRoute.setReverse(true);
 				}
 				if(announceGpxWpt) {
-					bld.announceWaypoints();
+					gpxRoute.setAnnounceWaypoints(true);
 				}
 				if(calculateOsmAndRoute) {
-					bld.calculateOsmAndRoute();
+					gpxRoute.setCalculateOsmAndRoute(true);
 				}
-				GPXRouteParams gpxRoute = bld.build();
-				Location loc = getLastKnownLocation();
-				if(passWholeWay && loc != null){
-					gpxRoute.setStartPoint(loc);
+				if(passWholeWay) {
+					gpxRoute.setPassWholeRoute(true);
 				}
-				
 				Location startForRouting = getLastKnownLocation();
 				if(startForRouting == null){
-					startForRouting = gpxRoute.getStartPointForRoute();
+					startForRouting = null;//gpxRoute.getStartPointForRoute();
 				}
 				
 				LatLon endPoint = endForRouting;
 				if(endPoint == null || !useDestination){
-					LatLon point = gpxRoute.getLastPoint();
-					if(point != null){
-						endPoint = point;
-					}
+//					LatLon point = gpxRoute.getLastPoint();
+//					if(point != null){
+//						endPoint = point;
+//					}
 					if(endPoint != null) {
-						app.getTargetPointsHelper().navigateToPoint(point, false, -1);
+						app.getTargetPointsHelper().navigateToPoint(endPoint, false, -1);
 					}
 				}
 				if(endPoint != null){

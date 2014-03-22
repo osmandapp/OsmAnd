@@ -3,8 +3,6 @@ package net.osmand.plus.base;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
@@ -15,8 +13,10 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+
+import org.apache.commons.logging.Log;
+
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -124,26 +124,24 @@ public class FailSafeFuntions {
 
 						@Override
 						protected void onPostExecute(GPXFile result) {
-							final GPXRouteParams gpxRoute;
+							final GPXRouteParamsBuilder gpxRoute;
 							if (result != null) {
-								GPXRouteParamsBuilder builder = GPXRouteParamsBuilder.newBuilder(result, settings);
+								gpxRoute = new GPXRouteParamsBuilder(result, settings);
 								if (settings.SPEAK_GPX_WPT.get()) {
-									builder.announceWaypoints();
+									gpxRoute.setAnnounceWaypoints(true);
 								}
 								if(settings.CALC_GPX_ROUTE.get()) {
-									builder.calculateOsmAndRoute();
+									gpxRoute.setCalculateOsmAndRoute(true);
 								}
-								gpxRoute = builder.build();
 							} else {
 								gpxRoute = null;
 							}
-							LatLon endPoint = pointToNavigate != null ? pointToNavigate : gpxRoute.getLastPoint();
-							net.osmand.Location startPoint = gpxRoute == null ? null : gpxRoute.getStartPointForRoute();
+							LatLon endPoint = pointToNavigate;
 							if (endPoint == null) {
 								notRestoreRoutingMode(ma, app);
 							} else {
 								ma.followRoute(settings.getApplicationMode(), endPoint,
-										targetPoints.getIntermediatePoints(), startPoint, gpxRoute);
+										targetPoints.getIntermediatePoints(), null, gpxRoute);
 							}
 						}
 					};

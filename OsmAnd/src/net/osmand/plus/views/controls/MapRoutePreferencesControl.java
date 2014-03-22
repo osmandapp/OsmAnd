@@ -19,6 +19,7 @@ import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -51,11 +52,58 @@ public class MapRoutePreferencesControl extends MapControls {
 	private OsmandSettings settings;
 	private int cachedId;
 	private Dialog dialog;
-	private GPXFile selectedGPXFile = null;
+	private ArrayAdapter<LocalRoutingParameter> listAdapter;
 	
 	public MapRoutePreferencesControl(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		super(mapActivity, showUIHandler, scaleCoefficient);
 		settings = mapActivity.getMyApplication().getSettings();
+	}
+	
+	private static class LocalRoutingParameter {
+		
+		public RoutingParameter routingParameter;
+
+		public String getText(MapActivity mapActivity) {
+			return SettingsBaseActivity.getRoutingStringPropertyName(mapActivity, routingParameter.getId(), routingParameter.getName());
+		}
+
+		public boolean isSelected(OsmandSettings settings) {
+			final CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(routingParameter.getId());
+			return property.get();
+		}
+
+		public void setSelected(OsmandSettings settings, boolean isChecked) {
+			final CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(routingParameter.getId());
+			property.set(isChecked);			
+		}
+		
+	}
+	
+	private static class GPXLocalRoutingParameter extends LocalRoutingParameter {
+		public String text;
+		public boolean selected;
+		public int id;
+		
+		public GPXLocalRoutingParameter(int id, String text, boolean selected) {
+			this.text = text;
+			this.selected = selected;
+			this.id = id;
+		}
+		
+		@Override
+		public String getText(MapActivity mapActivity) {
+			return text;
+		}
+		
+		@Override
+		public boolean isSelected(OsmandSettings settings) {
+			return selected;
+		}
+		
+		@Override
+		public void setSelected(OsmandSettings settings, boolean isChecked) {
+			selected = isChecked;
+		}
 	}
 	
 	@Override
@@ -104,21 +152,57 @@ public class MapRoutePreferencesControl extends MapControls {
         dialog.getWindow().setAttributes(lp);
         return dialog;
 	}
+	
+	
+	private void updateGpxRoutingParameter(GPXLocalRoutingParameter gpxParam) {
+		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		if (rp != null) {
+			boolean selected = gpxParam.isSelected(settings);
+			if (gpxParam.id == R.string.gpx_option_reverse_route) {
+				rp.setReverse(selected);
+			} else if (gpxParam.id == R.string.gpx_option_from_start_point) {
+				rp.setPassWholeRoute(selected);
+			} else if (gpxParam.id == R.string.announce_gpx_waypoints) {
+				settings.SPEAK_GPX_WPT.set(selected);
+				rp.setAnnounceWaypoints(selected);
+			} else if (gpxParam.id == R.string.calculate_osmand_route_gpx) {
+				settings.CALC_GPX_ROUTE.set(selected);
+				rp.setCalculateOsmAndRoute(selected);
+			}
+		}
+	}
 
 	
-	private List<RoutingParameter> getRoutingParameters(ApplicationMode am) {
-		List<RoutingParameter> list = new ArrayList<RoutingParameter>();
+	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode am) {
+		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
 		GeneralRouter rm = SettingsNavigationActivity.getRouter(am);
-		if(rm == null) {
+		GPXRouteParamsBuilder rparams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		if(rparams != null) {
+			list.add(new GPXLocalRoutingParameter(R.string.gpx_option_reverse_route, 
+					getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
+			list.add(new GPXLocalRoutingParameter(R.string.gpx_option_from_start_point, 
+					getString(R.string.gpx_option_from_start_point), rparams.isPassWholeRoute()));
+			list.add(new GPXLocalRoutingParameter(R.string.announce_gpx_waypoints, 
+					getString(R.string.announce_gpx_waypoints), rparams.isAnnounceWaypoints()));
+			list.add(new GPXLocalRoutingParameter(R.string.calculate_osmand_route_gpx, 
+					getString(R.string.calculate_osmand_route_gpx), rparams.isCalculateOsmAndRoute()));
+		}
+		if(rm == null || !settings.CALC_GPX_ROUTE.get()) {
 			return list;
 		}
 		for (RoutingParameter r : rm.getParameters().values()) {
 			if (r.getType() == RoutingParameterType.BOOLEAN) {
-				list.add(r);
+				LocalRoutingParameter rp = new LocalRoutingParameter();
+				rp.routingParameter = r;
+				list.add(rp);
 			}
 		}
 		return list;
 	}
+	private String getString(int id) {
+		return mapActivity.getString(id);
+	}
+
 	private View createLayout() {
 		View settingsDlg = View.inflate(mapActivity, R.layout.plan_route_settings, null);
 		Context ctx = mapActivity;
@@ -131,23 +215,25 @@ public class MapRoutePreferencesControl extends MapControls {
 		setupSpinner(settingsDlg);
 		
 		
-		final ArrayAdapter<RoutingParameter> listAdapter = new ArrayAdapter<RoutingParameter>(ctx, 
+		listAdapter = new ArrayAdapter<LocalRoutingParameter>(ctx, 
 				R.layout.layers_list_activity_item, R.id.title, getRoutingParameters(am)) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				View v = mapActivity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
 				final TextView tv = (TextView) v.findViewById(R.id.title);
 				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-				RoutingParameter rp = getItem(position);
-				tv.setText(SettingsBaseActivity.getRoutingStringPropertyName(mapActivity, rp.getId(), rp.getName()));
+				final LocalRoutingParameter rp = getItem(position);
+				tv.setText(rp.getText(mapActivity));
 				tv.setPadding((int) (5 * scaleCoefficient), 0, 0, 0);
-				final CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(rp.getId());
-				ch.setChecked(property.get());
+				ch.setChecked(rp.isSelected(settings));
 				ch.setVisibility(View.VISIBLE);
 				ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						property.set(isChecked);
+						rp.setSelected(settings, isChecked);
+						if(rp instanceof GPXLocalRoutingParameter) {
+							updateGpxRoutingParameter((GPXLocalRoutingParameter) rp);
+						}
 						mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 					}
 				});
@@ -164,17 +250,24 @@ public class MapRoutePreferencesControl extends MapControls {
 					ApplicationMode next = selected.iterator().next();
 					settings.APPLICATION_MODE.set(next);
 					mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
-					listAdapter.setNotifyOnChange(false);
-					listAdapter.clear();
-					for(RoutingParameter r : getRoutingParameters(next)) {
-						listAdapter.add(r);
-					}
-					listAdapter.notifyDataSetChanged();
+					updateParameters();
 				}
 			}
+
+			
 		});
 		lv.setAdapter(listAdapter);
 		return settingsDlg;
+	}
+	
+	private void updateParameters() {
+		ApplicationMode am = settings.APPLICATION_MODE.get();
+		listAdapter.setNotifyOnChange(false);
+		listAdapter.clear();
+		for(LocalRoutingParameter r : getRoutingParameters(am)) {
+			listAdapter.add(r);
+		}
+		listAdapter.notifyDataSetChanged();
 	}
 
 	private void setupSpinner(View settingsDlg) {
@@ -185,7 +278,7 @@ public class MapRoutePreferencesControl extends MapControls {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				if(position == 0) {
-					selectedGPXFile = null;
+					mapActivity.getRoutingHelper().setGpxParams(null);
 				} else if(position == 1) {
 					openGPXFileSelection(gpxSpinner);
 				} else if(position == 2) {
@@ -205,8 +298,12 @@ public class MapRoutePreferencesControl extends MapControls {
 			
 			@Override
 			public boolean processResult(GPXFile result) {
-				selectedGPXFile = result;
+				GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, mapActivity.getMyApplication().getSettings());
+				params.setAnnounceWaypoints(settings.SPEAK_GPX_WPT.get());
+				params.setCalculateOsmAndRoute(settings.CALC_GPX_ROUTE.get());
+				mapActivity.getRoutingHelper().setGpxParams(params);
 				updateSpinnerItems(gpxSpinner);
+				updateParameters();
 				return true;
 			}
 		});
@@ -216,8 +313,9 @@ public class MapRoutePreferencesControl extends MapControls {
 		ArrayList<String> gpxActions = new ArrayList<String>();
 		gpxActions.add(mapActivity.getString(R.string.default_none));
 		gpxActions.add(mapActivity.getString(R.string.select_gpx));
-		if(selectedGPXFile != null) {
-			gpxActions.add(new File(selectedGPXFile.path).getName());
+		GPXRouteParamsBuilder rp = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		if(rp != null) {
+			gpxActions.add(new File(rp.getFile().path).getName());
 		}
 		
 		ArrayAdapter<String> gpxAdapter = new ArrayAdapter<String>(mapActivity, 
@@ -226,7 +324,7 @@ public class MapRoutePreferencesControl extends MapControls {
 				);
 		gpxAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		gpxSpinner.setAdapter(gpxAdapter);
-		if(selectedGPXFile != null) {
+		if(rp != null) {
 			gpxSpinner.setSelection(2);
 		} else {
 			gpxSpinner.setSelection(0);

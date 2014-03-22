@@ -9,8 +9,7 @@ import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -40,18 +39,18 @@ public class OsmAndLocationSimulation {
 		return routeAnimation != null;
 	}
 	
-	public void startStopRouteAnimationRoute(final MapActivity ma) {
-		if (!isRouteAnimating()) {
-			List<Location> currentRoute = app.getRoutingHelper().getCurrentRoute();
-			if (currentRoute.isEmpty()) {
-				AccessibleToast.makeText(app, R.string.animate_routing_route_not_calculated, Toast.LENGTH_LONG).show();
-			} else {
-				startAnimationThread(app.getRoutingHelper(), ma, new ArrayList<Location>(currentRoute), false, 1);
-			}
-		} else {
-			stop();
-		}
-	}
+//	public void startStopRouteAnimationRoute(final MapActivity ma) {
+//		if (!isRouteAnimating()) {
+//			List<Location> currentRoute = app.getRoutingHelper().getCurrentRoute();
+//			if (currentRoute.isEmpty()) {
+//				AccessibleToast.makeText(app, R.string.animate_routing_route_not_calculated, Toast.LENGTH_LONG).show();
+//			} else {
+//				startAnimationThread(app.getRoutingHelper(), ma, new ArrayList<Location>(currentRoute), false, 1);
+//			}
+//		} else {
+//			stop();
+//		}
+//	}
 
 	public void startStopRouteAnimation(final MapActivity ma) {
 		if (!isRouteAnimating()) {
@@ -86,18 +85,17 @@ public class OsmAndLocationSimulation {
 								new CallbackWithObject<GPXUtilities.GPXFile>() {
 									@Override
 									public boolean processResult(GPXUtilities.GPXFile result) {
-										GPXRouteParamsBuilder builder = GPXRouteParams.GPXRouteParamsBuilder.newBuilder(result, app.getSettings());
+										GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result, app.getSettings());
 										if(ch.isChecked()){
-											builder.announceWaypoints();
+											builder.setAnnounceWaypoints(true);
 										}
-										GPXRouteParams prms = builder.build();
-										startAnimationThread(app.getRoutingHelper(), ma, prms.getPoints(), true,
+										startAnimationThread(app.getRoutingHelper(), ma, builder.getPoints(), true,
 												speedup.getProgress() + 1);
 										return true;
 									}
 								});
 					} else {
-						List<Location> currentRoute = app.getRoutingHelper().getCurrentRoute();
+						List<Location> currentRoute = app.getRoutingHelper().getCurrentCalculatedRoute();
 						if(currentRoute.isEmpty()) {
 							AccessibleToast.makeText(app, R.string.animate_routing_route_not_calculated, Toast.LENGTH_LONG).show();
 						} else {
