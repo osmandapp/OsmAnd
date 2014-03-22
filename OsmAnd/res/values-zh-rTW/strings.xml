@@ -1572,7 +1572,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="edit_tilesource_minzoom">最小縮放比</string>
     <string name="edit_tilesource_expiration_time">有效時間(分鐘)</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">選擇現有的...</string>
+    <string name="edit_tilesource_choose_existing">選擇現有的…</string>
     <string name="edit_tilesource_name">名稱</string>
     <string name="maps_define_edit">定義/編輯…</string>
 	<string name="about_version">版本：</string>
@@ -1635,7 +1635,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="copying_osmand_files_descr">複製 OsmAnd 檔案到新的目的地 (%s)</string>
     <string name="copying_osmand_files">複製 OsmAnd 的檔案</string>
     <string name="calculate_osmand_route_gpx">計算 OsmAnd 離線路線</string>
-    <string name="android_19_location_disabled">由於 KitKat 版本，您無法下載和更新地圖於之前的存儲位置 (%s)。您是否想改變以允許複製所有檔案到那裡？
+    <string name="android_19_location_disabled">由於 KitKat 版本，您無法下載和更新地圖於之前的存儲位置 (%s)。您是否想變更以允許複製所有檔案到那裡？
         \n注意：舊的檔案將保持不變。
         \n注意：它將不可能在 OsmAnd 和 OsmAnd + 兩者之間共用檔案。 </string>
     <string name="routing_attr_prefer_motorway_name">較偏好高速公路</string>
@@ -1652,4 +1652,10 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="routing_attr_avoid_motorway_description">避開高速公路</string>
 	<string name="routing_attr_weight_name">重量</string>
 	<string name="routing_attr_weight_description">指定重量限制</string>
+    <string name="select_gpx">選擇 GPX …</string>
+    <string name="route_descr_select_destination">選擇目的地</string>
+    <string name="route_descr_select_on_map">在地圖上選取 …</string>
+    <string name="route_descr_favorite">我的最愛 …</string>
+    <string name="route_preferences">優先路線</string>
+    <string name="route_info">路線資訊</string>
     </resources>
