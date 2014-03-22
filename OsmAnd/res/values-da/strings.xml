@@ -1687,9 +1687,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="routing_attr_weight_description">Angiv vægtbegrænsning</string>
     <string name="routing_attr_short_way_name">Kort rute</string>
 	<string name="routing_attr_short_way_description">Anvend kort rute</string>
-	<string name="route_info">Ruteoplysninger</string>
+	<string name="route_info">Ruteinformation</string>
     <string name="select_gpx">Vælg GPX …</string>
-    <string name="route_preferences">Rutepræferencer</string>
+    <string name="route_preferences">Ruteindstillinger</string>
     <string name="route_descr_select_destination">Vælg destination</string>
     <string name="route_descr_select_on_map">Vælg på kort…</string>
     <string name="route_descr_favorite">Favorit …</string>
