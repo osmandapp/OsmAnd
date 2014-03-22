@@ -1439,4 +1439,30 @@
 	\n\t* Entrada ràpida en la recerca d\'adreça
 	\n\t* Errors corregits de càlcul de rutes i visualització
     </string>
+    <string name="select_gpx">Selecciona traça GPX …</string>
+    <string name="route_descr_select_destination">Selecciona Destí</string>
+    <string name="route_descr_select_on_map">Selecciona al mapa …</string>
+    <string name="route_descr_favorite">Favorita …</string>
+    <string name="route_preferences">Preferències de ruta</string>
+    <string name="route_info">Informació de ruta</string>
+    <string name="tip_recent_changes_1_3_t">Canvis a la 1.3:
+        \n\t* Reimplementació de suport per Tablets i pantalles grans
+        \n\t* Tema Holo  (personalització)
+        \n\t* Ajustos addicionals per a l\'estabilització de la brúixola 
+        \n\t* Botó superior esquerra a la pantalla del mapa substitueix el botó Menú
+    </string>
+    <string name="tip_recent_changes_1_2_t">Correccions a la 1.2.1:
+	    \n\t*Millora intent Geo (Foursquare, c:geo)
+	    \n\t*Resolt tremolor de la pantalla durant la navegació
+	    \n\t*Altres correccions menors
+	    \n\nCanvis a la 1.2:
+		\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
+		\n\t* Configuració més fàcil de relleus 3D (requereix connector Contour Lines)
+		\n\t* Accepta enllaços a localitzacions definits amb maps.google.com
+		\n\t* Nou widget (GPS info) 
+		\n\t* Afegit suport multi finestra per dispositius Samsung recents
+		\n\t* Filtre Kalman per la bruíxola
+		\n\t* Suport rellotges Pebble
+	</string>
+    <string name="osmand_srtm_long_description_1000_chars">Aquest connector proporciona corbes de nivell que es poden veure als mapes locals de OsmAnd. Les dades globals (entre 70 graus nort i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració  entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
     </resources>
