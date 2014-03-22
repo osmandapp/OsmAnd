@@ -889,10 +889,15 @@
     <string name="poi_filter_accomodation">Allotjament</string>
     <string name="poi_filter_sightseeing">Vistes panoràmiques</string>
     <string name="poi_filter_car_aid">Assistència a vehicles</string>
-	<string name="tip_update_index_t">\tÉs essencial que actualitzeu les dades del mapa. L\'OsmAnd conta amb un gestor de baixades que pot comprovar si hi ha actualitzacions de dades fora de línia disponibles.\n\tPer comprovar si hi ha actualitzacions aneu a «Configuració» -&gt; «Dades fora de línia» -&gt; «Baixa dades fora de línia». Rebreu un llistat de regions d\'internet i podeu seleccionar l\'opció «Menú» -&gt; «Filtre de baixades» perquè us indiqui només les actualitzacions disponibles per les dades del vostre dispositiu.
-\n\tLa disponibilitat de les actualitzacions es representen amb els següents colors:
-\n\t«Verd» - Indica que les dades al dispositiu i al servidor són idèntiques\n\t«Blau» - Indica que hi ha actualitzacions disponibles al servidor
-\n\t«Blau/verd fosc» - Indica (a més del significat del blau i el verd) que les dades estan desactivades al dispositiu</string>
+	<string name="tip_update_index_t">És essencial tenir actualitzats els mapes locals per poder visualitzar-los, fer recerca d\'adreces/punts d\'interès i navegació quan no hi ha connexió. L\'OsmAnd conta amb un gestor de dades per baixar aquests mapes (i altres arxius de dades) i comprovar si hi ha actualitzacions disponibles.
+		\n\nPer baixar mapes aneu a \'Configuració\' → \'Gestió de dades\' → \'Baixar dades locals\'. 
+		\n\nRebreu un llistat de regions d\'internet i podeu seleccionar per descarregar o actualitzar un arxiu. Fixeu-vos el selector de tipus d\'arxiu de la part superior de la pantalla per descarregar el que voleu (mapes normals, amb relleu, etc.).  
+		\n\nPodeu filtrar les opcions disponibles introduint les primeres lletres o podeu seleccionar l\'opció
+\'Configuració\ → \'Filtrar baixades\' per veure només les actualitzacions disponibles per les dades que ja teniu al vostre dispositiu.
+		\n\n\t Color \'verd\' indica que les dades ja són actualitzades
+		\n\t Color \'Blau\' indica que hi ha actualitzacions disponibles al servidor
+		\n\t Tipus de lletra cursiva indica que les dades estan desactivades al dispositiu
+	</string>
 	
 	
 	<string name="create_poi_link_to_osm_doc">LLegenda del mapa <u>OSM en línia</u> amb imatges</string><string name="osmand_routing_experimental">La navegació fora de línia de l\'OsmAnd és una característica experimental i no funciona per distàncies superiors als 20Km.\n\nEl servei de navegació s\'ha desviat temporalment cap a CloudMade en línia.</string>
@@ -1371,11 +1376,11 @@
     <string name="disable_complex_routing">Desactiva el càlcul complex de la ruta</string>
     <string name="route_is_too_long">Ruta massa llarga. El càlcul fora de línia entre punts separats per més de 200 Km pot ser molt lent o aturar-se del tot. Per resoldre-ho, heu d\'afegir fites intermèdies.</string>
 	<string name="edit_tilesource_successfully">El proveïdor de mosaics %1$s és ben desat</string>
-    <string name="edit_tilesource_choose_existing">Tria un proveïdor…</string>
+    <string name="edit_tilesource_choose_existing">Tria existent…</string>
     <string name="map_widget_fps_info">Info depuració FPS</string>
 	<string name="intermediate_items_sort_return">Les fites intermèdies han estat re-ordenades per optimitzar la ruta.</string>
     <string name="osmand_distance_planning_plugin_description">Creant itineraris i usant o modificant fitxers GPX existents podreu mesurar la distància entre punts. Si després els deseu, podreu usar-los per preparar més itineraris GPX.</string>
-    <string name="android_19_location_disabled">Des de la versió KitKat no es pot desar l\'actualització d\'un mapa al mateix espai de memòria que l\'anterior (%s). Voleu canviar la destinació a l\'espai permès i copiar-hi totes les dades?
+    <string name="android_19_location_disabled">Des de la versió KitKat no es pot descarregar un mapa actualitzat i guardar-lo on hi ha l\'anterior (%s). Voleu canviar la destinació a un lloc nou i copiar-hi totes les dades?
         \n Nota : les dades antigues quedaran intactes. 
         \n Nota : no serà possible compartir dades entre l\' OsmAnd i l\' OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd pot provar de traslladar les dades a la nova destinació. Voleu fer-ho?</string>
