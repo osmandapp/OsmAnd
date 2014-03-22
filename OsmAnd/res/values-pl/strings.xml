@@ -1389,7 +1389,7 @@
     <string name="edit_tilesource_maxzoom">Maksymalne powiększenie</string>
     <string name="edit_tilesource_expiration_time">Wygasa (minuty)</string>
     <string name="edit_tilesource_minzoom">Minimalne powiększenie</string>
-    <string name="edit_tilesource_choose_existing">Wybierz istniejący...</string>
+    <string name="edit_tilesource_choose_existing">Wybierz istniejący-…</string>
     <string name="edit_tilesource_name">Nazwa</string>
     <string name="maps_define_edit">Zdefiniuj/Edytuj…</string>
 	<string name="osmand_extended_description_4000_chars">
@@ -1592,7 +1592,12 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmodroid_unseek">Przestań szukać obiektu</string>
     <string name="speech_rate_descr">Określ szybkość wymowy dla TTS</string>
     <string name="speech_rate">Szybkość mowy</string>
-    
+    <string name="tip_recent_changes_1_7_t">Zmiany w wersji 1.7:
+	\n\t* Całkowicie zmienione wytyczanie tras (szybkie i dokładne)
+	\n\t* Możliwość symulacji trasy w tunelach
+	\n\t* Kilka mniejszych usprawnień i poprawek w obsłudze
+	\n\t* Możliwość ustawienia szybkości czytania
+    </string>
     <string name="disable_complex_routing_descr">Wyłącz 2-fazowe obliczanie trasy dla nawigacji samochodowej</string>
     <string name="complex_route_calculation_failed">Błąd szybkiego obliczania trasy (%s), przełączam na tryb wolny.</string>
     <string name="disable_complex_routing">Wyłącz złożone trasowanie</string>
@@ -1620,4 +1625,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_avoid_motorway_description">Unikaj autostrad</string>
 	<string name="routing_attr_weight_name">Waga</string>
 	<string name="routing_attr_weight_description">Określ ograniczenie masy</string>
+    <string name="select_gpx">Wybierz GPX …</string>
+    <string name="route_descr_select_destination">Wybierz cel podróży</string>
+    <string name="route_descr_select_on_map">Wybierz na mapie …</string>
+    <string name="route_descr_favorite">Ulubione …</string>
+    <string name="route_preferences">Ustawienia trasy</string>
+    <string name="route_info">Informacje o trasie</string>
     </resources>
