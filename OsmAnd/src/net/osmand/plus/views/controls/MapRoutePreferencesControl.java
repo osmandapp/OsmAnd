@@ -171,6 +171,7 @@ public class MapRoutePreferencesControl extends MapControls {
 			} else if (gpxParam.id == R.string.calculate_osmand_route_gpx) {
 				settings.CALC_GPX_ROUTE.set(selected);
 				rp.setCalculateOsmAndRoute(selected);
+				updateParameters();
 			}
 		}
 	}
@@ -282,6 +283,7 @@ public class MapRoutePreferencesControl extends MapControls {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				if(position == 0) {
 					mapActivity.getRoutingHelper().setGpxParams(null);
+					mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 					updateParameters();
 				} else if(position == 1) {
 					openGPXFileSelection(gpxSpinner);
@@ -306,12 +308,18 @@ public class MapRoutePreferencesControl extends MapControls {
 				params.setAnnounceWaypoints(settings.SPEAK_GPX_WPT.get());
 				params.setCalculateOsmAndRoute(settings.CALC_GPX_ROUTE.get());
 				List<Location> ps = params.getPoints();
-				mapActivity.getRoutingHelper().setGpxParams(params);
+				
 				if(!ps.isEmpty()) {
 					Location loc = ps.get(ps.size() -1);
-					TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();
-					tg.navigateToPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), true, -1);
+					TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();	
+					tg.navigateToPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, -1);
+					if(tg.getPointToStart() == null) {
+						loc = ps.get(0);
+						tg.setStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, null);
+					}
 				}
+				mapActivity.getRoutingHelper().setGpxParams(params);
+				mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 				updateSpinnerItems(gpxSpinner);
 				updateParameters();
 				return true;
