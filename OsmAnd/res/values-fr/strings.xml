@@ -1459,7 +1459,10 @@
 	<string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
 	<string name="routing_attr_weight_name">Poids</string>
 	<string name="routing_attr_weight_description">Spécifier la limite de poids</string>
-	<string name="route_descr_select_destination">Définir la destination</string>
-    <string name="route_descr_select_on_map">Définir sur la carte &#8230;</string>
-    <string name="route_descr_favorite">Favori &#8230;</string>
+    <string name="select_gpx">Sélectionner GPX …</string>
+    <string name="route_descr_select_destination">Sélectionner la destination</string>
+    <string name="route_descr_select_on_map">Sélectionner sur la carte …</string>
+    <string name="route_descr_favorite">Favorite …</string>
+    <string name="route_preferences">Préférences de routage</string>
+    <string name="route_info">Information itinéraire</string>
     </resources>
