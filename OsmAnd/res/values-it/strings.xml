@@ -283,8 +283,9 @@
   <string name="tip_navigation">Navigazione</string>
   <string name="tip_navigation_t">\tPrima di iniziare la navigazione devi selezionare una destinazione. Dopo averla selezionata seleziona \'Menu\' -&gt; \'Percorsi\' sulla mappa e seleziona il tipo di navigazione.</string>
   <string name="tip_search">Ricerca</string>
-  <string name="tip_search_t">"\tPuoi cercare i luoghi direttamente sulla mappa, per indirizzo, posizione, PDI, o come predefinito preferito.
-\n\tSelezionando \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menù contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'. "</string>
+  <string name="tip_search_t">\tPuoi cercare i luoghi direttamente sulla mappa, per indirizzo, posizione, PDI, o come predefinito preferito.
+\n\tSelezionando \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menù contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'.
+	</string>
   <string name="tip_map_context_menu">\'Usa posizione\' Menu</string>
   <string name="tip_map_context_menu_t">\tIl menu contestuale viene visualizzato selezionando a lungo sulla mappa o selezionando il pulsante trackball.
 \n\tQuesto visualizza un riquadro con le coordinate del punto. Per aprire il menu, fai clic sopra. (O seleziona a lungo per nascondere nuovamente il menù.)
@@ -1553,7 +1554,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="edit_tilesource_expiration_time">Scadenza (minuti)</string>
     <string name="edit_tilesource_minzoom">Zoom minimo</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Scegli fra gli esistenti...</string>
+    <string name="edit_tilesource_choose_existing">Scegli fra gli esistenti…</string>
     <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Imposta/Modifica…</string>
 	<string name="tip_recent_changes_1_6_t">Cambiamenti nella 1.6:↵
