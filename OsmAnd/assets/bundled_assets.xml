@@ -15,7 +15,8 @@
 	<asset source="voice/fi/ttsconfig.p" destination="voice/fi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/fr/ttsconfig.p" destination="voice/fr-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/hi/ttsconfig.p" destination="voice/hi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/hu/ttsconfig.p" destination="voice/hu-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
+	<asset source="voice/hu/ttsconfig.p" destination="voice/hu-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/hr/ttsconfig.p" destination="voice/hr-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/it/ttsconfig.p" destination="voice/it-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/ja/ttsconfig.p" destination="voice/ja-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ko/ttsconfig.p" destination="voice/ko-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
@@ -32,8 +33,12 @@
 	<asset source="voice/zh/ttsconfig.p" destination="voice/zh-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 
 	<asset source="voice/en/config.p" destination="voice/en/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/ru/config.p" destination="voice/ru/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/es/config.p" destination="voice/es/_config.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/de/config.p" destination="voice/de/_config.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/it/config.p" destination="voice/it/_config.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/pt/config.p" destination="voice/pt/_config.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/ru/config.p" destination="voice/ru/_config.p" mode="overwriteOnlyIfExists" />
+	
 	
 	<!-- TODO delete deprecated -->
 	<asset source="voice/fr-ov/config.p" destination="voice/fr/_config.p" mode="overwriteOnlyIfExists" />
