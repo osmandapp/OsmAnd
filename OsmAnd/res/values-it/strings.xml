@@ -1071,7 +1071,7 @@ Dati attualmente sul dispositivo (%1$s liberi):</string>
 \n\t- Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)
 \n\t- Mappe vettoriali offline compatte per tutto il mondo intero a disposizione
 \n\t- Scarica le mappe delle nazioni o delle regioni direttamente dal programma
-\n\t- WIkipedia Offline Wikipedia (scarica i PDI Wikipedia), ottimo per la visualizzazione
+\n\t- Wikipedia Offline Wikipedia (scarica i PDI Wikipedia), ottimo per la visualizzazione
 \n\t- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile
 \n\t- Ricerca offline per indirizzi e luoghi (PDI)
 \n\t- Calcolo del percorso per brevi distanze (sperimentale)
@@ -1616,10 +1616,15 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="app_mode_aircraft">Aereo</string>
     <string name="map_widget_map_rendering">Disegno della mappa:</string>
     <string name="app_modes_choose_descr">Scegli fra le modalità d\'uso disponibili nell\'applicazione</string>
-    <string name="app_modes_choose">Modalità applicazione</string>
+    <string name="app_modes_choose">Profili applicazione</string>
 	<string name="amenity_type_seamark">Meda</string>
     <string name="osmodroid_seek">Cerca oggetto</string>
-    
+    <string name="tip_recent_changes_1_7_t">Cambiamenti nella 1.7:
+	\n\t* Calcolo del percorso aggiornato completamente (preciso e veloce)
+	\n\t* Simulazione attiva nei tunnel
+	\n\t* Molti piccoli aggiornamenti e di interfaccia utente e usabilità
+	\n\t* Impostazione della velocità di lettura
+    </string>
     <string name="complex_route_calculation_failed">Calcolo veloce del percorso fallita (%s), rinvio al calcolo lento.</string>
     <string name="disable_complex_routing_descr">Disabilita il calcolo del percorso in due fasi per l\'uso in automobile</string>
     <string name="disable_complex_routing">Disabilita il calcolo complesso del percorso</string>
