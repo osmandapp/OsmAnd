@@ -269,7 +269,7 @@
 		\n\nDopo il salvataggio, il punto preferito sarà accessibile nel menù \'Preferiti\'. Tenendo premuto a lungo su un Preferito nel menu \'Preferiti\', appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.
 		\n\nPer visualizzare tutti i punti preferiti direttamente sulla mappa, nella schermata della mappa attiva il livello \'Preferiti\' dal menù contestuale \'Strati mappa\'. "
 	</string>
-  <string name="create_poi_link_to_osm_doc">Classificazione mappa <u>OSM Online</u> con immagini</string>
+  <string name="create_poi_link_to_osm_doc">  <u>OSM Online</u> con immagini</string>
   <string name="error_doing_search">Errore nella ricerca offline</string>
   <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'</string>
   <string name="search_osm_offline">Ricerca indirizzo usando le mappe offline</string>
