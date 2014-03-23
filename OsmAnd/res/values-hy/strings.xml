@@ -62,7 +62,7 @@
     <string name="plugin_distance_point_ele">բարձրություն</string>
     <string name="plugin_distance_point">Կետ</string>
     <string name="gpx_file_name">GPX ֆայլի անունը</string>
-    <string name="gpx_saved_sucessfully">GPX ֆայլը հաջողությամբ պահվել է {0}</string>
+    <string name="gpx_saved_sucessfully">{0} GPX ֆայլը հաջողությամբ պահվել է</string>
     <string name="default_buttons_do_not_show_again">Կրկին ցույց չտալ</string>
     <string name="distance_measurement_start_editing">Սկսել խմբագրելը</string>
     <string name="distance_measurement_finish_editing">Ավարտել խմբագրելը</string>
@@ -79,7 +79,10 @@
 	<string name="edit_filter_delete_menu_item">Ջնջել</string>
 	<string name="poi_action_change">փոփոխություն</string>
 	<string name="poi_action_add">ավելացում</string>
-	<string name="use_distance_measurement_help">* Դիպչեք կետը նշելու համար↵\n* Սեխմեք և պահեք քարտեզի վրա նախորց կետը ջնջելու համար↵\n* Սեխմեք և պահեք կետը բացատրությունը տեսնելու և ավելացնելու համար↵\n* Սեխմեք չափման վիդջետի վրա այլ հնարավորությունների համար</string>
+	<string name="use_distance_measurement_help">* Դիպչեք կետը նշելու համար\n
+        * Սեխմեք և պահեք քարտեզի վրա նախորց կետը ջնջելու համար\n
+        * Սեխմեք և պահեք կետը բացատրությունը տեսնելու և ավելացնելու համար\n
+        * Սեխմեք չափման վիդջետի վրա այլ հնարավորությունների համար։</string>
     <string name="monitoring_settings_descr">Կարգավորել ճանապարհորդությունների գրանցումը և քնած ռեժիմը</string>
     <string name="choose_osmand_theme">Ծրագրի դիզայնի թեման</string>
     <string name="accessibility_options">Հատուկ հնարավորությունների կարգավորումներ</string>
@@ -120,4 +123,27 @@
 	<string name="about_version">Տարբերակ :</string>
     <string name="tips_and_tricks">Խորհուրդներ</string>
     <string name="local_index_tile_data_downloadable">Բեռնվող: %1$s</string>
+    <string name="select_gpx">Ընտրել GPX …</string>
+    <string name="route_descr_select_destination">Ընտրել Նպատակակետը</string>
+    <string name="route_descr_select_on_map">Ընտրել քարտեզի վրա …</string>
+    <string name="route_descr_favorite">Նախընտրելի …</string>
+    <string name="routing_attr_short_way_name">Կարճ ճանապարհ</string>
+	<string name="routing_attr_short_way_description">Օգտագործել կարճ ճանապարհը</string>
+	<string name="routing_attr_avoid_toll_name">Խուսափել վճարովի ճանապարհները</string>
+	<string name="please_select_address">Առաջինը ընտրեք քաղաք կամ փողոց</string>
+    <string name="context_menu_item_destination_point">Սահմանել որպես նպատակակետ</string>
+    <string name="route_preferences">ուղու նախապատվություններ</string>
+    <string name="route_info">Ուղու տեղեկատվություն</string>
+    <string name="routing_attr_prefer_motorway_name">Նախընտրելի ավտոճանապարհ</string>
+	<string name="routing_attr_prefer_motorway_description">Նախընտրելի ավտոճանապարհ</string>
+	<string name="routing_attr_avoid_toll_description">Խուսափել վճարովի ճանապարհները</string>
+	<string name="routing_attr_avoid_unpaved_name">Խուսափել հողածածկ ճանապարհները</string>
+	<string name="routing_attr_avoid_unpaved_description">Խուսափել հողածածկ ճանապարհները</string>
+	<string name="routing_attr_avoid_ferries_name">Խուսափել լաստանավերը</string>
+	<string name="routing_attr_avoid_ferries_description">Խուսափել լաստանավերը</string>
+	<string name="routing_attr_avoid_motorway_name">Խուսափել ավտոճանապարհները</string>
+	<string name="routing_attr_avoid_motorway_description">Խուսափել ավտոճանապարհները</string>
+	<string name="routing_attr_weight_name">Կշիռ</string>
+	<string name="routing_attr_weight_description">Կշռի սահմանափակման նշում</string>
+    <string name="osmand_distance_planning_plugin_description">Ստեղծել ուղիներ (կամ օգտագործել/փոփոխել առկա GPX ֆայլերը) կետեռի միջև հեռավորության չափման համար։ Պահպանել որպես GPX, որը կարող է օգտագործվել GPX ուղիների պլանավորման համար։</string>
     </resources>
