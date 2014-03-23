@@ -1655,4 +1655,10 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="routing_attr_avoid_motorway_description">اجتناب کردن از مسیر های موتور سیکلت</string>
 	<string name="routing_attr_weight_name">سنگین</string>
 	<string name="routing_attr_weight_description">تعیین کردن محدود سازی سنگین</string>
+    <string name="select_gpx">انتخاب جی پی ایکس …</string>
+    <string name="route_descr_select_destination">انتخاب مقصد</string>
+    <string name="route_descr_select_on_map">انتخاب روی نقشه …</string>
+    <string name="route_descr_favorite">علاقه مندی ها …</string>
+    <string name="route_preferences">تنظیمات مسیر</string>
+    <string name="route_info">اطلاعات مسیر</string>
     </resources>
