@@ -1634,7 +1634,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="application_dir_change_warning2">OsmAnd può provare a spostare i dati nella nuova destinazione. Volete farlo?</string>
     <string name="copying_osmand_one_file_descr">Copia del file (%s) nella nuova destinazione...</string>
     <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)</string>
-    <string name="copying_osmand_files">Copia OsmAnd files</string>
+    <string name="copying_osmand_files">Copia dei file di OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Calcola percorso OsmAnd offline</string>
     <string name="routing_attr_prefer_motorway_name">Preferisci le autostrade</string>
 	<string name="routing_attr_prefer_motorway_description">Preferisci le autostrade</string>
