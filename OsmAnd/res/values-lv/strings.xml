@@ -1468,8 +1468,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="app_mode_truck">Kravas mašīna</string>
     <string name="guidance_preferences_descr">Navigācijas uzstādījumi</string>
     <string name="routing_preferences_descr">Maršruta uzstādījumi</string>
-    <string name="routing_attr_prefer_motorway_name">Izvēlēties automaģistrāles</string>
-	<string name="routing_attr_prefer_motorway_description">Maršruta plānošanā vispirms tiks dota priekšroka automaģistrālēm jeb ātrgaitas šosejām</string>
+    <string name="routing_attr_prefer_motorway_name">Priekšroka automaģistrālēm</string>
+	<string name="routing_attr_prefer_motorway_description">Maršruta plānošanā vispirms tiks dota priekšroka automaģistrālēm (ātrgaitas šosejām)</string>
 	<string name="routing_attr_short_way_name">Īsākais maršruts</string>
 	<string name="routing_attr_short_way_description">Īsākais maršruts līdz galamēŗkim</string>
 	<string name="routing_attr_avoid_toll_name">Izvairīties no maksas ceļiem</string>
@@ -1482,4 +1482,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="routing_attr_avoid_motorway_description">Izvairīties no automaģistrālēm jeb ātrgaitas šosejām</string>
 	<string name="routing_attr_weight_name">Svars</string>
 	<string name="routing_attr_weight_description">Norādīt svara ierobežojumu</string>
+    <string name="select_gpx">Atzīmēt GPX…</string>
+    <string name="route_descr_select_destination">Atlasīt galamērķi</string>
+    <string name="route_descr_select_on_map">Atzīmēt no kartes…</string>
+    <string name="route_preferences">Maršruta uzstādījumi</string>
+    <string name="route_info">Maršruta dati</string>
     </resources>
