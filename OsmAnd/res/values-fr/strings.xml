@@ -67,7 +67,7 @@
   <string name="general_settings">Général</string>
   <string name="general_settings_descr">Configurer divers paramètres d\'ordre général</string>
   <string name="global_app_settings">Paramètres globaux de l\'application</string>
-  <string name="user_name">Votre login OSM</string>
+  <string name="user_name">Votre identifiant OSM</string>
   <string name="user_name_descr">Nécessaire pour les contributions openstreetmap.org</string>
   <string name="user_password">Votre mot de passe OSM</string>
   <string name="user_password_descr">Nécessaire pour les contributions openstreetmap.org</string>
@@ -93,7 +93,7 @@
 \n\tLa destination est marquée d\'un disque orange sur la carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange)."</string>
   <string name="tip_recent_changes_0_6_9_t">Changements en 0.6.9 :
 \n\t- Amélioration du rendu des cartes hors ligne
-\n\t- Rendu hors ligne acceléré - voir dans les options expérimentales (ne marche pas sur tous les appareils)
+\n\t- Rendu hors-ligne acceléré - voir dans les options expérimentales (ne marche pas sur tous les appareils)
 \n\t- Changements cosmétiques
 \n\t- Infos d\'altitude
 \n\t- Nouvelles traductions (Vietnamien, Polonais)
@@ -113,10 +113,10 @@
   <string name="pref_raster_map">Options source de cartes</string>
   <string name="pref_vector_map">Options cartographie vectorielle</string>
   <string name="delete_confirmation_msg">Supprimer %1$s ?</string>
-  <string name="city_type_suburb">Banlieue</string>
+  <string name="city_type_suburb">Quartier</string>
   <string name="city_type_hamlet">Hameau</string>
   <string name="city_type_village">Village</string>
-  <string name="city_type_town">Commune</string>
+  <string name="city_type_town">Ville</string>
   <string name="city_type_city">Ville</string>
   <string name="layer_poi_label">Étiquettes PI</string>
   <string name="animate_route_off">Arrêt animation</string>
@@ -274,7 +274,7 @@
   <string name="tip_location_sharing_t">Vous notez un point d\'intérêt pendant votre voyage que vous voulez partager avec des amis ou de la famille ?
 \nOsmAnd vous permet de facilement partager un lieu.
 \n\tVous pouvez aller dans \'Menu contextuel de la carte\'-&gt;\'Partager un lieu\'.
-\nLà sélectionner le moyen de partager. Les choix sont : e-mail, SMS ou copier vers le presse-papier.
+\nLà sélectionner le moyen de partager. Les choix sont : courriel, SMS ou copier vers le presse-papier.
 </string>
   <string name="tip_favorites">Lieux favoris</string>
   <string name="tip_favorites_t">"Les points utilisés fréquemment peuvent être enregistrés en tant que favoris.
@@ -296,11 +296,11 @@
   <string name="tip_navigation_t">Pour activer la navigation il faut d\'abord sélectionner une destination. Puis aller dans \'Menu\'-&gt;\'Directions\' et sélectionner le mode de déplacement.</string>
   <string name="tip_search">Actions de recherche</string>
   <string name="tip_search_t">Vous pouvez rechercher un lieu directement depuis la carte ou par l\'adresse, l\'emplacement, le point d\'interêt ou un favori prédéfini.
-\n\tAppuyer sur \'Rechercher\' sur la carte ouvre le dialogue de recherche. Il y a 2 options : \'Naviguer vers\' ou \'Afficher sur la carte\'.
+\n\tAppuyer sur \'Rechercher\' sur la carte ouvre le dialogue de recherche. Il y a deux options : \'Naviguer vers\' ou \'Afficher sur la carte\'.
 </string>
   <string name="tip_map_context_menu">Menu contextuel de la carte</string>
-  <string name="tip_map_context_menu_t">\tLe menu contextuel de la carte est disponible par un tap long sur la carte ou le bouton trackball.
-\n\tAprès avoir touché la carte, une bulle apparaît avec les coordonnées du point, tapez court pour ouvrir le menu contextuel, ou long pour faire disparaître la bulle. Le menu contextuel est également disponible depuis le bouton \'Menu\'.
+  <string name="tip_map_context_menu_t">\tLe menu contextuel de la carte est disponible par un appui long sur la carte ou le bouton trackball.
+\n\tAprès avoir touché la carte, une bulle apparaît avec les coordonnées du point : un appui court ouvre le menu contextuel, un appui long fait disparaître la bulle. Le menu contextuel est également disponible depuis le bouton \'Menu\'.
 \n\tLe menu contextuel de la carte regroupe les actions possible autour de ce point.
 </string>
   <string name="tip_initial">Conseils et astuces</string>
@@ -335,7 +335,7 @@
   <string name="amenity_type_geocache">Géocache</string>
   <string name="amenity_type_healthcare">Santé</string>
   <string name="amenity_type_historic">Historique</string>
-  <string name="amenity_type_landuse">Uitilisation du sol</string>
+  <string name="amenity_type_landuse">Utilisation du sol</string>
   <string name="amenity_type_leisure">Loisir</string>
   <string name="amenity_type_man_made">Infrastructure</string>
   <string name="amenity_type_military">Militaire</string>
@@ -389,7 +389,7 @@
   <string name="daynight_mode_sensor">Détection de la luminosité</string>
   <string name="daynight_descr">Définir les paramètres de changement jour/nuit</string>
   <string name="daynight">Mode jour/nuit</string>
-  <string name="download_files_question">Voulez vous télécharger {0} fichier(s) ({1} MB) ?</string>
+  <string name="download_files_question">Voulez-vous télécharger {0} fichier(s) ({1} MB) ?</string>
   <string name="items_were_selected">{0} objet(s) sont sélectionnés</string>
   <string name="filter_existing_indexes">Filtre téléchargé</string>
   <string name="deselect_all">Désélectionner tout</string>
@@ -420,7 +420,7 @@
   <string name="unknown_location">Position inconnue actuellement</string>
   <string name="download_files">Télécharger</string>
   <string name="context_menu_item_search_transport">Chercher transport</string>
-  <string name="transport_searching_transport">Recherche transport (sans destination) :</string>
+  <string name="transport_searching_transport">Recherche de transport (sans destination) :</string>
   <string name="transport_searching_route">Recherche de transport ({0} pour destination) :</string>
   <string name="transport_search_none">aucun</string>
   <string name="transport_search_again">Rechercher les transports une nouvelle fois</string>
@@ -433,7 +433,7 @@
   <string name="error_reading_gpx">Erreur de lecteur des données GPX</string>
   <string name="vector_data">Cartes vectorielles OSM</string>
   <string name="transport_context_menu">Chercher transport à l\'arrivée</string>
-  <string name="point_on_map">Emplacement:\n Lat %1$.5f\n Long %2$.5f</string>
+  <string name="point_on_map">Emplacement :\n Lat %1$.5f\n Long %2$.5f</string>
   <string name="osb_bug_name">Bogue</string>
   <string name="poi_context_menu_modify">Modifier PI</string>
   <string name="poi_context_menu_delete">Supprimer PI</string>
@@ -454,7 +454,7 @@
   <string name="none_region_found">Aucune région trouvée sur la carte SD. Essayez d\'en télécharger une d\'internet.</string>
   <string name="poi_namefinder_query_empty">Paramètres de recherche pour trouver le PI</string>
   <string name="any_poi">Tout</string>
-  <string name="layer_transport_route">Routes de Transport</string>
+  <string name="layer_transport_route">Routes de transport</string>
   <string name="thanks_yandex_traffic">Merci à Yandex de fournir des informations sur le trafic.</string>
   <string name="layer_yandex_traffic">Trafic Yandex</string>
   <string name="layer_route">Route</string>
@@ -485,7 +485,7 @@
   <string name="background_router_service">Service de positionnement</string>
   <string name="off_router_service_no_gps_available">Le service d\'arrière plan requiert l\'activation de la géolocalisation.</string>
   <string name="hide_poi_filter">Masquer le filtre</string>
-  <string name="show_poi_filter">Afficher filtre</string>
+  <string name="show_poi_filter">Afficher le filtre</string>
   <string name="search_poi_filter">Filtre</string>
   <string name="menu_mute_off">Son activé</string>
   <string name="menu_mute_on">Son désactivé</string>
@@ -525,8 +525,8 @@
   <string name="transport_Routes">Routes</string>
   <string name="transport_Stop">Arrêt</string>
   <string name="transport_stops">arrêts</string>
-  <string name="transport_search_after">Chercher la route d\'après</string>
-  <string name="transport_search_before">Chercher la route d\'avant</string>
+  <string name="transport_search_after">Chercher la route suivante</string>
+  <string name="transport_search_before">Chercher la route précédente</string>
   <string name="transport_finish_search">Terminer la recherche</string>
   <string name="transport_stop_to_go_out">Sélectionnez arrêt pour sortir</string>
   <string name="transport_to_go_after">à faire après</string>
@@ -575,10 +575,10 @@
   
   <string name="downloading">Téléchargement en cours…</string>
   <string name="downloading_list_indexes">Téléchargement de la liste des régions disponibles…</string>
-  <string name="list_index_files_was_not_loaded">Les fichiers d\'index ne sont pas de osmand.net.</string>
+  <string name="list_index_files_was_not_loaded">Les fichiers d\'index ne sont pas d\'osmand.net.</string>
   <string name="select_index_file_to_download">Si vous ne pouvez trouver votre région, vous pouvez la créer vous-même (voir sur osmand.net).</string>
   <string name="show_poi_on_map">Voir sur la carte</string>
-  <string name="fav_points_edited">Le favoris a été modifié</string>
+  <string name="fav_points_edited">Le favori a été modifié</string>
   <string name="fav_points_not_exist">Il n\'existe aucun favori</string>
   <string name="update_existing">Changer</string>
   <string name="only_show">Afficher seulement</string>
@@ -760,12 +760,12 @@
   <string name="edit_filter_delete_message">Le filtre {0} a été effacé</string>
   <string name="edit_filter_create_message">Le filtre {0} a été créé</string>
   <string name="default_buttons_selectall">Tout sélectionner</string>
-  <string name="offline_navigation_not_available">Navigation hors ligne temporairement indisponible.</string>
+  <string name="offline_navigation_not_available">Navigation hors-ligne temporairement indisponible.</string>
   <string name="left_side_navigation">Conduite à gauche</string>
   <string name="left_side_navigation_descr">Activer dans les pays où l\'on conduit à gauche</string>
-  <string name="download_link_and_local_description">Télécharger des données hors ligne.\nPour plus d\'information, cliquer sur l\'élément. Pour le désactiver ou le supprimer, faire un appui long.\nEspace disponible sur l\'appareil : %1$s</string>
+  <string name="download_link_and_local_description">Télécharger des données hors-ligne.\nPour plus d\'information, cliquer sur l\'élément. Pour le désactiver ou le supprimer, faire un appui long.\nEspace disponible sur l\'appareil : %1$s</string>
   <string name="unknown_from_location">Point de départ pas encore déterminé</string>
-  <string name="confirm_interrupt_download">Voulez vous interrompre le téléchargement ?</string>
+  <string name="confirm_interrupt_download">Voulez-vous interrompre le téléchargement ?</string>
   <string name="basemap_was_selected_to_download">Carte mondiale de base requise pour le bon fonctionnement, sélectionnée pour téléchargement.</string>
   
   <string name="map_online_plugin_is_not_installed">Activer le greffon des cartes en ligne pour sélectionner différentes sources de cartes</string>
@@ -858,7 +858,7 @@
   <string name="auto_announce_on">Démarrer annonces automatiques</string>
   <string name="auto_announce_off">Arrêter annonces automatiques</string>
   <string name="scroll_map_by_gestures_descr">Faire défiler la carte par gestes sur l\'écran</string>
-  <string name="scroll_map_by_gestures">Glisser naturel de la carte</string>
+  <string name="scroll_map_by_gestures">Défilement naturel de la carte</string>
   <string name="i_am_here">Je suis ici</string>
   <string name="zoom_by_trackball_descr">Changer le niveau de zoom par mouvements horizontaux du trackball</string>
   <string name="zoom_by_trackball">Utiliser le trackball pour le contrôle du zoom</string>
@@ -875,7 +875,7 @@
   <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
   <string name="local_index_routing_data">Données de navigation</string>
   <string name="navigate_point_format">Format :</string>
-  <string name="poi_search_desc">Recherche dans points d\'intérêt (PI)</string>
+  <string name="poi_search_desc">Recherche de points d\'intérêt (PI)</string>
   <string name="address_search_desc">Recherche par adresse</string>
   <string name="navpoint_search_desc">Coordonnées</string>
   <string name="transport_search_desc">Recherche dans les transports</string>
@@ -902,9 +902,9 @@
   <string name="gpxup_private">Privé</string>
   <string name="osmand_parking_event">Récupérer votre véhicule du parking</string>
   <string name="osmand_parking_warning">Avertissement</string>
-  <string name="osmand_parking_warning_text">Une notification pour récupérer votre véhicule a été ajouté dans votre agenda. Elle y restera jusqu\'à ce que vous le supprimiez manuellement.</string>
+  <string name="osmand_parking_warning_text">Une notification pour récupérer votre véhicule a été ajoutée dans votre agenda. Elle y restera jusqu\'à ce que vous le supprimiez manuellement.</string>
   <string name="osmand_parking_time_limit_title">Donner un temps limite de stationnement</string>
-  <string name="osmand_parking_delete_confirm">Voulez vous supprimer l\'emplacement de stationnement du véhicule ?</string>
+  <string name="osmand_parking_delete_confirm">Voulez-vous supprimer l\'emplacement de stationnement du véhicule ?</string>
   <string name="osmand_parking_delete">Supprimer un emplacement de stationnement</string>
   <string name="osmand_parking_choose_type">Choisir le type de stationnement</string>
   <string name="osmand_parking_lim_text">Temps limité</string>
@@ -965,10 +965,10 @@
   <string name="map_widget_distance">Destination</string>
   <string name="map_widget_altitude">Altitude</string>
   <string name="map_widget_time">Temps de trajet</string>
-  <string name="map_widget_next_turn">Prochain tournant</string>
-  <string name="map_widget_next_turn_small">Prochain tournant (petit)</string>
-  <string name="map_widget_next_next_turn">Deuxième prochain tournant</string>
-  <string name="map_widget_mini_route">Mini carte de l\'itinéraire</string>
+  <string name="map_widget_next_turn">Prochaine bifurcation</string>
+  <string name="map_widget_next_turn_small">Prochaine bifurcation (petit)</string>
+  <string name="map_widget_next_next_turn">Deuxième prochaine bifurcation</string>
+  <string name="map_widget_mini_route">Mini-carte de l\'itinéraire</string>
   <string name="bg_service_screen_lock">Verrouillage/déverrouillage de l\'écran</string>
   <string name="bg_service_screen_unlock">Déverrouiller écran</string>
   <string name="bg_service_sleep_mode_off">Activer\nmode veille</string>
@@ -1065,7 +1065,7 @@
 	<string name="delete_target_point">Enlever l\'étape</string>
 	<string name="intermediate_point">Étape %1$s</string>
     <string name="gps_not_available">Veuillez activer le GPS dans les paramètres</string>
-    <string name="map_widget_show_destination_arrow">Monter la direction de la destination</string>
+    <string name="map_widget_show_destination_arrow">Montrer la direction de la destination</string>
     <string name="enable_plugin_monitoring_services">Activer les greffons de suivi (tracking, live tracking) pour utiliser les services de surveillance</string>
     <string name="non_optimal_route_calculation">Calculer un itinéraire éventuellement non optimal pour les longs trajets</string>
     <string name="rendering_attr_roadColors_description">Sélectionner un thème de couleurs pour les routes :</string>
@@ -1101,7 +1101,7 @@
     <string name="osmodroid_plugin_description">Le greffon OsMoDroid est une extension OsmAnd pour l\'application OsMoDroid qui permet la création de traces. Pour plus d\'information à propos du service, consulter le site http://esya.ru.</string>
     <string name="osmodroid_plugin_name">Greffon OsMoDroid</string>
 	<string name="index_srtm_ele">Courbes de niveau</string>
-    <string name="srtm_plugin_description">Ce greffon permet de télécharger les courbes de niveaux (Téléchargement de cartes -&gt; Menu -&gt; Autres cartes) pour une région spécifique et de les utiliser avec les cartes hors-lignes.</string>
+    <string name="srtm_plugin_description">Ce greffon permet de télécharger les courbes de niveaux (Téléchargement de cartes -&gt; Menu -&gt; Autres cartes) pour une région spécifique et de les utiliser avec les cartes hors-ligne.</string>
     <string name="srtm_plugin_name">Greffon des courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
@@ -1115,7 +1115,7 @@
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
-    <string name="osmand_srtm_long_description_1000_chars">Ce greffon fournit des courbes de niveau qui peuvent être affichées sur les cartes hors ligne de OsmAnd. Les données globales (entre 70 degrés nord et 70 degrés sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI), et \"Japan Space Systems\" (J-Spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">Ce greffon fournit des courbes de niveau qui peuvent être affichées sur les cartes hors-ligne d\'OsmAnd. Les données globales (entre 70 degrés nord et 70 degrés sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI), et \"Japan Space Systems\" (J-Spacesystems).</string>
     
     
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
@@ -1209,10 +1209,10 @@
 	<string name="hno">Numéro de maison</string>
     <string name="tip_recent_changes_1_3_t">"Changements en 1.5:\n\t* Thème Holo (personnalisation de thème) "
     </string>
-    <string name="monitoring_settings">Services de surveillance et service d\' arrière plan</string>
+    <string name="monitoring_settings">Services de surveillance et service d\'arrière-plan</string>
     <string name="monitoring_settings_descr">Configurer l\'enregistrement des parcours et le service d\'arrière plan</string>
-    <string name="osmand_monitoring_plugin_description">Activer le suivi et la navigation en arrière plan (écran éteint) en réveillant périodiquement le dispositif GPS. Afficher les paramètres facilitant l\' enregistrement de vos parcours vers des fichiers GPX locaux ou en ligne via un service Web.</string>
-    <string name="osmand_monitoring_plugin_name">Services de surveillance et service d\' arrière plan</string>
+    <string name="osmand_monitoring_plugin_description">Activer le suivi et la navigation en arrière-plan (écran éteint) en réveillant périodiquement le dispositif GPS. Afficher les paramètres facilitant l\' enregistrement de vos parcours vers des fichiers GPX locaux ou en ligne via un service Web.</string>
+    <string name="osmand_monitoring_plugin_name">Services de surveillance et service d\'arrière-plan</string>
     <string name="choose_osmand_theme_descr">Choisir le thème de l\'application</string>
     <string name="choose_osmand_theme">Thème de l\'appli</string>
     <string name="accessibility_options">Options d\'accessibilité</string>
@@ -1239,12 +1239,12 @@
 \n
 \n\nUtilise les données OpenStreetMap et Wikipedia:
 \n\t- Information de haute qualité issue des meilleurs projets collaboratifs mondiaux
-\n\t- Cartes globales d\' OpenStreetMap, disponibles par pays ou par région
-\n\t- Points d\'intérêt Wikipedia, super pour le tourisme (non disponible dans la version gratuite)
+\n\t- Cartes globales d\'OpenStreetMap, disponibles par pays ou par région
+\n\t- Points d\'intérêt Wikipedia, idéal pour le tourisme (non disponible dans la version gratuite)
 \n\t- Téléchargements gratuits et illimités, directement depuis l\'appli (téléchargement limité à 16 fichiers carte dans la version gratuite)
 \n\t- Cartes toujours actualisées (mise à jour au moins une fois par mois)
 \n\t- Cartes vectorielles compactes
-\n\t- Choix entre la carte complète ou uniquement le réseau routier (Ex: Carte complète du Japon, 700 MB ou 200 MB pour le réseau routier uniquement)
+\n\t- Choix entre la carte complète ou uniquement le réseau routier (ex : Carte complète du Japon, 700 MB ou 200 MB pour le réseau routier uniquement)
 \n\t- Supporte également les cartes en ligne et la mise en cache des tuiles
 \n\nDispositifs de sécurité optionnels\n\t- Permutation automatique jour/nuit
 \n\t- Affichage des limitations de vitesse avec affichage de l\'excès de vitesse\n\t- Zoom automatique en fonction de la vitesse de déplacement
@@ -1259,7 +1259,7 @@
 \n\nContributeurs OpenStreetMap (OSM)
 \n\t- Rapport des bogues de la carte OSM
 \n\t- Transfert des traces GPX vers OSM directement depuis l\'application
-\n\n\t- Ajout des points d\'intérêt et transfert direct vers OSM (ou en différé si mode hors ligne)
+\n\n\t- Ajout des points d\'intérêt et transfert direct vers OSM (ou en différé si mode hors-ligne)
 \n\t- Enregistrement optionnel du parcours en arrière plan (quand l\'écran de l\'appareil est éteint)
 \n\nOsmAnd un logiciel libre dont le développement est très actif.
 \n\nChacun peut contribuer à l\'application en rapportant les bogues, en améliorant les traductions ou en programmant de nouvelles fonctionnalités.\n\nLe projet est en état permanent d\'amélioration grâce à toutes ces formes de développement et d\'interaction avec l\'utilisateur. Les progrès du projet reposent également sur les contributions financières pour assurer le développement, la programmation et le test de nouvelles fonctionnalités.\n\nEn achetant OsmAnd+ vous contribuez au devenir d\'une application encore plus géniale. Il est aussi possible de supporter financièrement des nouvelles fonctionnalités spécifiques ou de simplement faire un don sur osmand.net.\n\nCouverture géographique et qualité:
@@ -1277,7 +1277,7 @@
     <string name="local_indexes_cat_srtm">Données des courbes de niveau</string>
     <string name="use_kalman_filter_compass_descr">Utiliser un filtre de Kalman pour éviter les interférences de la boussole</string>
     <string name="use_kalman_filter_compass">Utiliser un filtre de Kalman</string>
-    <string name="access_mark_final_location_first">Mode accessibilité: veuillez d\'abord saisir la destination</string> 
+    <string name="access_mark_final_location_first">Mode accessibilité : veuillez d\'abord saisir la destination</string> 
     <string name="distance_measurement_start_editing">Commencer à modifier</string>
     <string name="distance_measurement_finish_editing">Finir de modifier</string>
     <string name="distance_measurement_save_gpx">Sauvegarder comme GPX</string>
@@ -1286,7 +1286,7 @@
     <string name="plugin_distance_point_time">temps</string>
     <string name="plugin_distance_point_hdop">précision</string>
     <string name="plugin_distance_point_speed">vitesse</string>
-    <string name="plugin_distance_point_ele">élévation</string>
+    <string name="plugin_distance_point_ele">altitude</string>
     <string name="gpx_file_name">nom du fichier GPX</string>
     <string name="gpx_saved_sucessfully">Sauvegarde du fichier GPX à {0} réussi</string>
     <string name="osmand_distance_planning_plugin_description">Créer un chemin pour mesurer la distance entre des points, ouvrir un fichier GPX existant pour le modifier et le sauvegarder. Peut être utilisé pour préparer un itinéraire avec un fichier GPX.</string>
@@ -1402,9 +1402,9 @@
 	<string name="auto_zoom_close">Arrêt de l\'auto-zoom</string>
 	<string name="auto_zoom_far">Zoom éloigné</string>
 	<string name="auto_zoom_farthest">Zoom très éloigné</string>
-	<string name="tip_map_styles_t">OsmAnd supporte l\'affichage des cartes vectorielles hors ligne dans différents styles de carte en fonction de vos besoins:
+	<string name="tip_map_styles_t">OsmAnd supporte l\'affichage des cartes vectorielles hors-ligne dans différents styles de carte en fonction de vos besoins:
 		\n\nEn plus du style de carte \'default\', vous pouvez dans \'Menu\' → \'Configuration\' → \'Styles de rendu\' sélectionner par exemple
-		\n\t* le style \'Touring view\', qui contient les informations les plus détaillées pour le voyage et le tourisme, incluant des optimisations pour les conducteurs professionnels (contraste élevé, les diverses routes sont distinguables).
+		\n\t* le style \'Touring view\', qui fournit les informations les plus détaillées pour le voyage et le tourisme, incluant des optimisations pour les conducteurs professionnels (contraste élevé, les diverses routes sont distinguables).
 		\n\t* \'High contrast roads\' affiche les routes avec des couleurs très accentuées pour les situations de forte luminosité.
 		\n\t* \'Cycle-map\' est optimisé pour l\'affichage des routes pour cyclistes.
 		\n\t* \'Winter and ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'World ski\')
