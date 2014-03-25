@@ -1394,4 +1394,10 @@
     <string name="disable_complex_routing_descr">Отключение 2-фазной маршрутизации для автомобильной навигации</string>
     <string name="complex_route_calculation_failed">Быстрое вычисление маршрута неудалось (%s), отмените для возврата к медленному вычислению.</string>
     <string name="map_magnifier">Масштаб</string>
-	</resources>
+	<string name="select_gpx">Выберите GPX…</string>
+    <string name="route_descr_select_destination">Выберите пункт назначения</string>
+    <string name="route_descr_select_on_map">Выберите на карте…</string>
+    <string name="route_descr_favorite">Избранные…</string>
+    <string name="route_preferences">Предпочтения маршрута</string>
+    <string name="route_info">Маршрутная информация</string>
+    </resources>
