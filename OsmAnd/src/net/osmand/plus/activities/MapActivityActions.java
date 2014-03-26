@@ -460,6 +460,7 @@ public class MapActivityActions implements DialogProvider {
 		// save application mode controls
 		settings.FOLLOW_THE_ROUTE.set(false);
 		settings.FOLLOW_THE_GPX_ROUTE.set(null);
+		app.getRoutingHelper().setGpxParams(null);
 		app.getRoutingHelper().setFollowingMode(false);
 		app.getRoutingHelper().setRoutePlanningMode(true);
 		targets.setStartPoint(from, false, fromName);

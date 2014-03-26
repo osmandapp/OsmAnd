@@ -318,6 +318,7 @@ public class MapRoutePreferencesControl extends MapControls {
 						loc = ps.get(0);
 						tg.setStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, null);
 					}
+					tg.updateRoutingHelper();
 				}
 				mapActivity.getRoutingHelper().setGpxParams(params);
 				settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
