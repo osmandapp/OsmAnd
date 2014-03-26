@@ -427,6 +427,13 @@ public class RoutingHelper {
 			String description = targets.getPointNavigateDescription();
 			voiceRouter.arrivedDestinationPoint(description);
 			clearCurrentRoute(null, null);
+			setRoutePlanningMode(false);
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
+				}
+			});
 			 
 			// targets.clearPointToNavigate(false);
 			return true;

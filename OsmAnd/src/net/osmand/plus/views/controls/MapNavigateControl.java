@@ -4,7 +4,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.graphics.Canvas;
@@ -41,10 +40,6 @@ public class MapNavigateControl extends MapControls {
 						ri.showDialog();
 					} else {
 						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-						GPXRouteParams gpxRoute = null; // TODO gpx route
-						if (gpxRoute == null) {
-							app.getSettings().FOLLOW_THE_GPX_ROUTE.set(null);
-						}
 						app.getSettings().FOLLOW_THE_ROUTE.set(true);
 						routingHelper.setFollowingMode(true);
 						routingHelper.setRoutePlanningMode(false);

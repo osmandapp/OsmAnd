@@ -16,6 +16,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -111,6 +112,15 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		} else {
 			lmain.findViewById(R.id.RouteInfoControls).setVisibility(View.GONE);
 			lmain.findViewById(R.id.SimulateRoute).setVisibility(View.GONE);
+			TextView textView = (TextView) lmain.findViewById(R.id.ValidateTextView);
+			TargetPointsHelper targets = getTargets();
+			boolean osmandRouter = mapActivity.getMyApplication().getSettings().ROUTER_SERVICE.get() == RouteService.OSMAND;
+			if(osmandRouter && targets.hasLongDistancesInBetween(routingHelper.getLastProjection(), 15000)) {
+				textView.setText(R.string.route_is_too_long);
+				textView.setVisibility(View.VISIBLE);
+			} else{
+				textView.setVisibility(View.GONE);
+			}
 		}
         builder.setView(lmain);
         

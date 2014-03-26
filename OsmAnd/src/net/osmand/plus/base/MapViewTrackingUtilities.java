@@ -112,21 +112,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
 			}
 			RoutingHelper routingHelper = app.getRoutingHelper();
-			// we arrived at destination finished
-			if (!routingHelper.isFollowingMode() && followingMode) {
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
-					}
-				});
-				
-			}
 			followingMode = routingHelper.isFollowingMode();
 			if(routePlanningMode != routingHelper.isRoutePlanningMode()) {
 				switchToRoutePlanningMode();
 			}
-			
 			// When location is changed we need to refresh map in order to show movement!
 			mapView.refreshMap();
 		}

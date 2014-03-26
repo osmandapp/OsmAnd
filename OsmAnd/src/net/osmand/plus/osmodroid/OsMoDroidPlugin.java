@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -73,7 +74,7 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 					
 					@Override
 					public void run() {
-						activity.followRoute(app.getSettings().getApplicationMode(), targets.getPointToNavigate(), targets.getIntermediatePoints(),app.getLastKnownLocation(), null);
+						FailSafeFuntions.enterRoutingMode(activity, null);
 					}
 				});
 				

@@ -142,7 +142,7 @@ public class TargetPointsHelper {
 
 	public void updateRoutingHelper() {
 		LatLon start = settings.getPointToStart();
-		if(routingHelper.isFollowingMode() || start == null) {
+		if((routingHelper.isFollowingMode() && routingHelper.getLastProjection() != null) || start == null) {
 			Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
 			//Location lastKnownLocation = routingHelper.getLastProjection();
 			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
@@ -209,7 +209,6 @@ public class TargetPointsHelper {
 	
 	
 	public boolean hasLongDistancesInBetween(Location current, double dist) {
-		
 		List<LatLon> list = getIntermediatePointsWithTarget();
 		if(!list.isEmpty()) {
 			if(current != null && MapUtils.getDistance(list.get(0), current.getLatitude(), current.getLongitude()) > dist) {

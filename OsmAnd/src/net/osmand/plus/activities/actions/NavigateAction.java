@@ -17,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import android.app.AlertDialog;
@@ -111,7 +112,7 @@ public class NavigateAction {
 					}
 				}
 				if(endPoint != null){
-					mapActivity.followRoute(appMode, endPoint,
+					followRoute(appMode, endPoint,
 							new ArrayList<LatLon>(), startForRouting, gpxRoute);
 					settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
 				}
@@ -252,7 +253,7 @@ public class NavigateAction {
 				ApplicationMode mode = getAppMode(buttons, settings, values);
 				// save application mode controls (optimal)
 				dialog.dismiss();
-				mapActivity.followRoute(mode, targets.getPointToNavigate(), targets.getIntermediatePoints(), 
+				followRoute(mode, targets.getPointToNavigate(), targets.getIntermediatePoints(), 
 						from, null);
 			}
 		};
@@ -421,5 +422,19 @@ public class NavigateAction {
     	return settings.getApplicationMode();
     }
 	
-	
+
+	public void followRoute(ApplicationMode appMode, LatLon finalLocation, List<LatLon> intermediatePoints, net.osmand.Location currentLocation, 
+			GPXRouteParamsBuilder gpxRoute){
+		mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		settings.APPLICATION_MODE.set(appMode);
+		settings.FOLLOW_THE_ROUTE.set(true);
+		if(gpxRoute == null) {
+			settings.FOLLOW_THE_GPX_ROUTE.set(null);
+		}
+		routingHelper.setFollowingMode(true);
+		
+		routingHelper.setFinalAndCurrentLocation(finalLocation, intermediatePoints, currentLocation, gpxRoute);
+		app.initVoiceCommandPlayer(mapActivity);
+	}
 }

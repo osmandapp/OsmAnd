@@ -283,6 +283,7 @@ public class MapRoutePreferencesControl extends MapControls {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				if(position == 0) {
 					mapActivity.getRoutingHelper().setGpxParams(null);
+					settings.FOLLOW_THE_GPX_ROUTE.set(null);
 					mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 					updateParameters();
 				} else if(position == 1) {
@@ -319,6 +320,7 @@ public class MapRoutePreferencesControl extends MapControls {
 					}
 				}
 				mapActivity.getRoutingHelper().setGpxParams(params);
+				settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
 				mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 				updateSpinnerItems(gpxSpinner);
 				updateParameters();

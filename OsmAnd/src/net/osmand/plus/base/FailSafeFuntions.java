@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 
 import org.apache.commons.logging.Log;
@@ -140,10 +141,11 @@ public class FailSafeFuntions {
 							if (endPoint == null) {
 								notRestoreRoutingMode(ma, app);
 							} else {
-								ma.followRoute(settings.getApplicationMode(), endPoint,
-										targetPoints.getIntermediatePoints(), null, gpxRoute);
+								enterRoutingMode(ma, gpxRoute);
 							}
 						}
+
+						
 					};
 					task.execute(gpxPath);
 
@@ -152,6 +154,22 @@ public class FailSafeFuntions {
 			encapsulate.run();
 		}
 
+	}
+	
+	public static void enterRoutingMode(MapActivity ma, 
+			GPXRouteParamsBuilder gpxRoute) {
+		OsmandApplication app = ma.getMyApplication();
+		ma.getMapViewTrackingUtilities().backToLocationImpl();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		if(gpxRoute == null) {
+			app.getSettings().FOLLOW_THE_GPX_ROUTE.set(null);
+		}
+		routingHelper.setGpxParams(gpxRoute);
+		app.getTargetPointsHelper().setStartPoint(null, false, null);
+		app.getSettings().FOLLOW_THE_ROUTE.set(true);
+		routingHelper.setFollowingMode(true);
+		app.getTargetPointsHelper().updateRoutingHelper();
+		app.initVoiceCommandPlayer(ma);
 	}
 	
 	private static void notRestoreRoutingMode(MapActivity ma, OsmandApplication app){
