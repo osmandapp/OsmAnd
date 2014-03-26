@@ -550,6 +550,10 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		switch (id) {
 			case DIALOG_OPEN_BUG: 
 				prepareOpenBugDialog(dialog, args);
+				break;
+			case DIALOG_COMMENT_BUG: 
+				((EditText)dialog.findViewById(R.id.BugMessage)).setText("");
+				break;
 		}
 	}
 	
