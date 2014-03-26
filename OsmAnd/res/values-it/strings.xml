@@ -1661,4 +1661,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="route_descr_favorite">Preferito …</string>
     <string name="route_preferences">Preferenze di percorso</string>
     <string name="route_info">Informazioni sul percorso</string>
+    <string name="keep_and_add_destination_point">Aggiungi come destinazione</string>
     </resources>
