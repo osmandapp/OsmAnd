@@ -8,6 +8,7 @@ import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.util.MapUtils;
 
 public class TargetPointsHelper {
@@ -208,7 +209,12 @@ public class TargetPointsHelper {
 	}
 	
 	
-	public boolean hasLongDistancesInBetween(Location current, double dist) {
+	public boolean hasTooLongDistanceToNavigate() {
+		if(settings.ROUTER_SERVICE.get() != RouteService.OSMAND) {
+			return false;
+		}
+		Location current = routingHelper.getLastProjection();
+		double dist = 300000;
 		List<LatLon> list = getIntermediatePointsWithTarget();
 		if(!list.isEmpty()) {
 			if(current != null && MapUtils.getDistance(list.get(0), current.getLatitude(), current.getLongitude()) > dist) {

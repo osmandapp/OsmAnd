@@ -17,9 +17,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
-import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RoutingHelper;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -283,9 +282,8 @@ public class NavigateAction {
 	}
 
 	private void updateTooLongDistance(final Location start, final TargetPointsHelper targets, View view, ApplicationMode appMode) {
-		boolean osmandRouter = mapActivity.getMyApplication().getSettings().ROUTER_SERVICE.getModeValue(appMode) == RouteService.OSMAND;
 		TextView textView = (TextView) view.findViewById(R.id.ValidateTextView);
-		if(osmandRouter && targets.hasLongDistancesInBetween(start, 150000)) {
+		if(targets.hasTooLongDistanceToNavigate()) {
 			textView.setText(R.string.route_is_too_long);
 			textView.setVisibility(View.VISIBLE);
 		} else{

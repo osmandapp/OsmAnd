@@ -114,8 +114,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 			lmain.findViewById(R.id.SimulateRoute).setVisibility(View.GONE);
 			TextView textView = (TextView) lmain.findViewById(R.id.ValidateTextView);
 			TargetPointsHelper targets = getTargets();
-			boolean osmandRouter = mapActivity.getMyApplication().getSettings().ROUTER_SERVICE.get() == RouteService.OSMAND;
-			if(osmandRouter && targets.hasLongDistancesInBetween(routingHelper.getLastProjection(), 15000)) {
+			if(targets.hasTooLongDistanceToNavigate()) {
 				textView.setText(R.string.route_is_too_long);
 				textView.setVisibility(View.VISIBLE);
 			} else{

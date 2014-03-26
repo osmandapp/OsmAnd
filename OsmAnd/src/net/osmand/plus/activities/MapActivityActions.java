@@ -41,6 +41,7 @@ import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -465,6 +466,9 @@ public class MapActivityActions implements DialogProvider {
 		targets.updateRoutingHelper();
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		mapActivity.getMapView().refreshMap(true);
+		if(targets.hasTooLongDistanceToNavigate()) {
+			app.showToastMessage(R.string.route_is_too_long);
+		}
 	}
 	
 	public void contextMenuPoint(final double latitude, final double longitude){
