@@ -104,7 +104,7 @@ public class RoutePlannerFrontEnd {
 			}
 		}
 		if(ctx.calculationMode == RouteCalculationMode.COMPLEX && routeDirection == null
-				&& maxDistance > Math.max(ctx.config.DEVIATION_RADIUS * 4, 30000)) {
+				&& maxDistance > ctx.config.DEVIATION_RADIUS * 6) {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress ;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);

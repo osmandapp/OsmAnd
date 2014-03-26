@@ -11,6 +11,7 @@ import java.util.List;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -118,7 +119,11 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 				config = new FileInputStream(new File(voiceDir, configFile)); //$NON-NLS-1$
 				// }
 				MetricsConstants mc = settings.METRIC_SYSTEM.get();
-				prologSystem.addTheory(new Theory("appMode('"+settings.getApplicationMode().toString().toLowerCase()+"')."));
+				ApplicationMode m = settings.getApplicationMode();
+				if(m.getParent() != null) {
+					m = m.getParent();
+				}
+				prologSystem.addTheory(new Theory("appMode('"+m.getStringKey().toLowerCase()+"')."));
 				prologSystem.addTheory(new Theory("measure('"+mc.toTTSString()+"')."));
 				prologSystem.addTheory(new Theory(config));
 			} catch (InvalidTheoryException e) {
