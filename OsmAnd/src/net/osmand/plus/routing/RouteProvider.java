@@ -208,7 +208,7 @@ public class RouteProvider {
 			GPXFile file = builder.file;
 			boolean reverse = builder.reverse; 
 			boolean announceWaypoints = builder.announceWaypoints;
-			calculateOsmAndRoute = builder.calculateOsmAndRoute;
+			calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
 			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){
 				directions =  parseOsmAndGPXRoute(points, file, OSMAND_ROUTER.equals(file.author), builder.leftSide, 10);
 				if(reverse){

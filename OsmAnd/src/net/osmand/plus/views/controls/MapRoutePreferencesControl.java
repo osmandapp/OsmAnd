@@ -188,8 +188,9 @@ public class MapRoutePreferencesControl extends MapControls {
 					getString(R.string.gpx_option_from_start_point), rparams.isPassWholeRoute()));
 			list.add(new GPXLocalRoutingParameter(R.string.announce_gpx_waypoints, 
 					getString(R.string.announce_gpx_waypoints), rparams.isAnnounceWaypoints()));
-			list.add(new GPXLocalRoutingParameter(R.string.calculate_osmand_route_gpx, 
-					getString(R.string.calculate_osmand_route_gpx), rparams.isCalculateOsmAndRoute()));
+			// Temporary disabled
+			// list.add(new GPXLocalRoutingParameter(R.string.calculate_osmand_route_gpx, 
+			//		getString(R.string.calculate_osmand_route_gpx), rparams.isCalculateOsmAndRoute()));
 		}
 		if(rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute())) {
 			return list;
