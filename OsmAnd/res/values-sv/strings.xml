@@ -1370,4 +1370,5 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="route_descr_favorite">Favorit …</string>
     <string name="route_preferences">Ruttinställningar</string>
     <string name="route_info">Ruttinformation</string>
+    <string name="keep_and_add_destination_point">Lägg till som destinationspunkt</string>
     </resources>
