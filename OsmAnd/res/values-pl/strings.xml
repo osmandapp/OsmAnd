@@ -1632,4 +1632,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="route_preferences">Ustawienia trasy</string>
     <string name="route_info">Informacje o trasie</string>
     <string name="calculate_osmand_route_gpx">Przelicz trasę offline w OsmAnd</string>
+    <string name="keep_and_add_destination_point">Dodaj jako cel podróży</string>
     </resources>
