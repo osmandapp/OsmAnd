@@ -291,17 +291,19 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				List<LatLon> list = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
 				for(LatLon l : list) {
 					left = Math.min(left, l.getLongitude());
-					right = Math.max(left, l.getLongitude());
+					right = Math.max(right, l.getLongitude());
 					top = Math.max(top, l.getLatitude());
 					bottom = Math.min(bottom, l.getLatitude());
 				}
 				RotatedTileBox tb = new RotatedTileBox(rt);
 				tb.setPixelDimensions(2 * tb.getPixWidth() / 3, 2 * tb.getPixHeight() / 3);
-				tb.setLatLonCenter(bottom / 2 + top / 2, left / 2 + right / 2);
+				double clat = bottom / 2 + top / 2;
+				double clon = left / 2 + right / 2;
+				tb.setLatLonCenter(clat, clon);
 				while(tb.getZoom() >= 7 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
 					tb.setZoom(tb.getZoom() - 1);
 				}
-				mapView.getAnimatedDraggingThread().startMoving(tb.getLatitude(), tb.getLongitude(), tb.getZoom(),
+				mapView.getAnimatedDraggingThread().startMoving(clat, clon, tb.getZoom(),
 						true);
 			}
 		}
