@@ -230,7 +230,14 @@ public class TargetPointsHelper {
 	
 	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate, String historyName){
 		if(point != null){
-			if(intermediate < 0) {
+			if(intermediate < 0 || intermediate > intermediatePoints.size()) {
+				if(intermediate > intermediatePoints.size()) {
+					LatLon pn = getPointToNavigate();
+					if(pn != null) {
+						settings.insertIntermediatePoint(pn.getLatitude(), pn.getLongitude(), getPointNavigateDescription(), 
+								intermediatePoints.size());
+					}
+				}
 				settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), historyName);
 			} else {
 				settings.insertIntermediatePoint(point.getLatitude(), point.getLongitude(), historyName, 

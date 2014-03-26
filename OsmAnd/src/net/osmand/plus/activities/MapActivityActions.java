@@ -369,7 +369,7 @@ public class MapActivityActions implements DialogProvider {
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;
 
-		if(!mapActivity.getRoutingHelper().isRoutePlanningMode()) {
+		if(!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
 			adapter.item(R.string.context_menu_item_directions_to).icons(
 					R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
 		}
@@ -384,7 +384,7 @@ public class MapActivityActions implements DialogProvider {
 			adapter.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_flag_dark,
 					R.drawable.ic_action_flag_light).reg();
 		}
-		if(!mapActivity.getRoutingHelper().isFollowingMode() || mapActivity.getRoutingHelper().isRoutePlanningMode()) {
+		if(!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
 			adapter.item(R.string.context_menu_item_directions_from).icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
 		}
 		adapter.item(R.string.context_menu_item_search).icons(R.drawable.ic_action_search_dark, 
@@ -626,7 +626,7 @@ public class MapActivityActions implements DialogProvider {
 						}
 				}).reg();
 		}
-		if (getTargets().getPointToNavigate() != null && !routingHelper.isRoutePlanningMode()) {
+		if (getTargets().getPointToNavigate() != null) {
 			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark, R.drawable.ic_action_flage_light)
 					.listen(new OnContextMenuClick() {
 						@Override
@@ -965,16 +965,20 @@ public class MapActivityActions implements DialogProvider {
 			builder.setTitle(R.string.new_destination_point_dialog);
 			builder.setItems(
 					new String[] { act.getString(R.string.replace_destination_point),
+							act.getString(R.string.keep_and_add_destination_point),
 							act.getString(R.string.add_as_first_destination_point), act.getString(R.string.add_as_last_destination_point) },
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							if (which == 0) {
 								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, -1, name);
+							} else if (which == 1) {
+								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, 
+										targetPointsHelper.getIntermediatePoints().size() + 1, name);
 							} else if (which == 2) {
-								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, targetPointsHelper.getIntermediatePoints().size(), name);
-							} else {
 								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, 0, name);
+							} else {
+								targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, targetPointsHelper.getIntermediatePoints().size(), name);
 							}
 							MapActivity.launchMapActivityMoveToTop(act);
 						}

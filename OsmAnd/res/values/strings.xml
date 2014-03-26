@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="keep_and_add_destination_point">Add as destination point</string>
     <string name="select_gpx">Select GPX &#8230;</string>
     <string name="route_descr_select_destination">Select Destination</string>
     <string name="route_descr_select_on_map">Select on map &#8230;</string>
@@ -406,6 +407,7 @@
     <string name="context_menu_item_first_intermediate_point">Add as first waypoint</string>
     <string name="add_as_last_destination_point">Add as last waypoint</string>
     <string name="add_as_first_destination_point">Add as first waypoint</string>
+
     <string name="replace_destination_point">Replace destination point</string>
     <string name="new_destination_point_dialog">You already have destination point set.</string>
     <string name="target_points">Waypoints</string>
