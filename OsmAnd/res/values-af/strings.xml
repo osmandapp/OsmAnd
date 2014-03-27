@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
@@ -1318,4 +1319,32 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 		\n\t* \'Hoë kontras paaie\' wys paaie in baie helder kleure vir helder omgewingslig situasies.
 		\n\t* \'Winter en ski\' skep \'n (sneeu bedekte) winter landskape aansig, en wys globale ski hellings en hysers (in samewerking met die \'Wêreld ski\' kaart aflaai)
 	</string>
-    </resources>
+    <string name="keep_and_add_destination_point">Voeg by as bestemmingspunt</string>
+    <string name="select_gpx">Kies GPX …</string>
+    <string name="route_descr_select_destination">Kies bestemming</string>
+    <string name="route_descr_select_on_map">Kies op kaart …</string>
+    <string name="route_descr_favorite">Gunsteling …</string>
+    <string name="route_preferences">Roete voorkeure</string>
+    <string name="route_info">Roete inligting</string>
+    <string name="routing_attr_prefer_motorway_name">Verkies snelweg</string>
+	<string name="routing_attr_prefer_motorway_description">Verkies snelweg</string>
+	<string name="routing_attr_avoid_toll_name">Vermy tolpaaie</string>
+	<string name="routing_attr_avoid_toll_description">Vermy tolpaaie</string>
+	<string name="routing_attr_avoid_unpaved_name">Vermy grondpad</string>
+	<string name="routing_attr_avoid_unpaved_description">Vermy grondpad</string>
+	<string name="routing_attr_avoid_ferries_name">Vermy veerboot</string>
+	<string name="routing_attr_avoid_ferries_description">Vermy veerboot</string>
+	<string name="routing_attr_avoid_motorway_name">Vermy snelweg</string>
+	<string name="routing_attr_avoid_motorway_description">Vermy snelweg</string>
+	<string name="routing_attr_weight_name">Gewig</string>
+	<string name="routing_attr_weight_description">Spesifiseer gewigsbeperking</string>
+    <string name="app_mode_truck">Vragmotor</string>
+    <string name="routing_preferences_descr">Roete voorkeure</string>
+    <string name="speech_rate">Spraaktempo</string>
+    <string name="speech_rate_descr">Stel spraaktempo vir TTS</string>
+    <string name="amenity_type_seamark">Seemerk</string>
+    <string name="app_mode_hiking">Stap</string>
+    <string name="app_mode_motorcycle">Motorfiets</string>
+    <string name="app_mode_boat">Boot</string>
+    <string name="app_mode_aircraft">Vliegtuig</string>
+</resources>
