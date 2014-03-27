@@ -1693,4 +1693,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_descr_select_destination">Vælg destination</string>
     <string name="route_descr_select_on_map">Vælg på kort…</string>
     <string name="route_descr_favorite">Favorit …</string>
+    <string name="keep_and_add_destination_point">Tilføj som destinationspunkt</string>
     </resources>
