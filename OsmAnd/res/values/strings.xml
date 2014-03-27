@@ -43,8 +43,12 @@
     <string name="routing_preferences_descr">Routing preferences</string>
     <string name="speech_rate_descr">Specify speech rate for TTS</string>
     <string name="speech_rate">Speech Rate</string>
-    <string name="tip_recent_changes_1_7_t">Changes in 1.7:
+    <string name="tip_recent_changes_1_7_1_t">Changes in 1.7:
 	\n\t* Completely updated routing (fast and precise)
+    \n\t* New screen with Route Planning (more intuitive and more powerful)
+    \n\t** NOTE GPX route is available under Route Settings buttton
+    \n\t* Auto hide buttons in navigation mode
+    \n\t* Calculate offline route to the first point of GPX route (\'pass the whole track\' option)
 	\n\t* Active simulation in tunnels
 	\n\t* Lots of small UX improvements &amp; usability fixes
 	\n\t* Speech rate accessibility setting

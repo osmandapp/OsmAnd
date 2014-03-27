@@ -10,7 +10,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
-import android.text.method.ScrollingMovementMethod;
 import android.text.util.Linkify;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 
 public class TipsAndTricksActivity {
 	private int[][] tipNamesAndDescriptions = new int[][] {
-			{R.string.tip_recent_changes,R.string.tip_recent_changes_1_7_t},
+			{R.string.tip_recent_changes,R.string.tip_recent_changes_1_7_1_t},
 			{R.string.tip_update_index,R.string.tip_update_index_t},
 			{R.string.tip_navigation,R.string.tip_navigation_t},
 			{R.string.tip_app_mode,R.string.tip_app_mode_t_v2},
