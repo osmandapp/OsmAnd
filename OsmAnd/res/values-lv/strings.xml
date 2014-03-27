@@ -1487,4 +1487,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="route_descr_select_on_map">Atzīmēt no kartes…</string>
     <string name="route_preferences">Maršruta uzstādījumi</string>
     <string name="route_info">Maršruta dati</string>
+    <string name="keep_and_add_destination_point">Pievienot kā galamērķi</string>
+    <string name="route_descr_favorite">Izlase…</string>
     </resources>
