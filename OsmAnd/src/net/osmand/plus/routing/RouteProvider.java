@@ -150,9 +150,9 @@ public class RouteProvider {
 		public GPXRouteParams build(Location start, OsmandSettings settings) {
 			GPXRouteParams res = new GPXRouteParams();
 			res.prepareGPXFile(this);
-			if(passWholeRoute && start != null){
-				res.points.add(0, start);
-			}
+//			if(passWholeRoute && start != null){
+//				res.points.add(0, start);
+//			}
 			return res;
 		}
 		
@@ -183,6 +183,7 @@ public class RouteProvider {
 		List<RouteDirectionInfo> directions;
 		DataTileManager<WptPt> wpt;
 		boolean calculateOsmAndRoute;
+		boolean passWholeRoute;
 		
 		public List<Location> getPoints() {
 			return points;
@@ -207,6 +208,7 @@ public class RouteProvider {
 		public GPXRouteParams prepareGPXFile(GPXRouteParamsBuilder builder){
 			GPXFile file = builder.file;
 			boolean reverse = builder.reverse; 
+			passWholeRoute = builder.passWholeRoute;
 			boolean announceWaypoints = builder.announceWaypoints;
 			calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
 			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){
@@ -310,17 +312,47 @@ public class RouteProvider {
 	}
 
 
-	private RouteCalculationResult calculateGpxRoute(RouteCalculationParams pars) {
+	private RouteCalculationResult calculateGpxRoute(RouteCalculationParams rParams) {
+		if(rParams.start != null && rParams.gpxRoute.passWholeRoute) {
+			Location startOfGpx = rParams.gpxRoute.getStartPointForRoute();
+			if (startOfGpx != null && rParams.start.distanceTo(startOfGpx) > 60) {
+				RouteCalculationParams newParams = new RouteCalculationParams();
+				newParams.start = rParams.start;
+				newParams.end = new LatLon(startOfGpx.getLatitude(), startOfGpx.getLongitude());
+				newParams.ctx = rParams.ctx;
+				newParams.calculationProgress = rParams.calculationProgress;
+				newParams.mode = rParams.mode;
+				newParams.type = RouteService.OSMAND;
+				newParams.leftSide = rParams.leftSide;
+				RouteCalculationResult newRes = null;
+				try {
+					newRes = findVectorMapsRoute(newParams, false);
+				} catch (IOException e) {
+				}
+				if(newRes == null || !newRes.isCalculated()) {
+					rParams.gpxRoute.points.add(rParams.start);
+				} else {
+					List<Location> loct = newRes.getImmutableLocations();
+					List<RouteDirectionInfo> dt = newRes.getDirections();
+					List<RouteDirectionInfo> gpxRouteDirections = rParams.gpxRoute.directions;
+					rParams.gpxRoute.points.addAll(0, loct);
+					gpxRouteDirections.addAll(0, dt);
+					for(int i = dt.size() ; i < gpxRouteDirections.size(); i++ ) {
+						gpxRouteDirections.get(i).routePointOffset += loct.size();
+					}
+				}
+			}
+		}
 		RouteCalculationResult res;
 		// get the closest point to start and to end
-		GPXRouteParams params = pars.gpxRoute;
+		GPXRouteParams params = rParams.gpxRoute;
 		List<Location> gpxRoute = params.points;
 		int[] startI = new int[]{0};
 		int[] endI = new int[]{gpxRoute.size()}; 
-		ArrayList<Location> sublist = findGpxLocations(pars, startI, endI);
-		pars.intermediates = null;
+		ArrayList<Location> sublist = findGpxLocations(rParams, startI, endI);
+		rParams.intermediates = null;
 		if(params.directions == null){
-			res = new RouteCalculationResult(sublist, null, pars, params.wpt);
+			res = new RouteCalculationResult(sublist, null, rParams, params.wpt);
 		} else {
 			List<RouteDirectionInfo> subdirections = new ArrayList<RouteDirectionInfo>();
 			for (RouteDirectionInfo info : params.directions) {
@@ -335,7 +367,7 @@ public class RouteProvider {
 					subdirections.add(ch);
 				}
 			}
-			res = new RouteCalculationResult(sublist, subdirections, pars, params.wpt);
+			res = new RouteCalculationResult(sublist, subdirections, rParams, params.wpt);
 		}
 		return res;
 	}
