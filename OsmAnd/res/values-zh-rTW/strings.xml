@@ -1658,4 +1658,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="route_descr_favorite">我的最愛 …</string>
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
+    <string name="keep_and_add_destination_point">加為目的地點</string>
     </resources>
