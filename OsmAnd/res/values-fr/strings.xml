@@ -59,7 +59,7 @@
   
   
   <string name="routing_settings">Navigation</string>
-  <string name="routing_settings_descr">Configurer les options de la navigation</string>
+  <string name="routing_settings_descr">Configurer les options de navigation</string>
   <string name="global_settings">Paramètres globaux</string>
   <string name="index_settings">Données hors ligne</string>
   <string name="index_settings_descr">Obtenir ou mettre à jour les données pour l\'utilisation hors-ligne</string>
@@ -79,12 +79,12 @@
   <string name="tip_day_night_mode">Mode jour/nuit</string>
   
   <string name="tip_osm_improve">Améliorer les données OSM</string>
-  <string name="tip_osm_improve_t">\tOsmAnd utilise des cartes issues des données OpenStreetMap.org (OSM) - en plus de la visualisation des cartes et du calcul d\'itinéraires- peut également être utilisé pour améliorer la qualité des données OSM. Vous pouvez facilement créer et télécharger des nouveaux points d\'intérêt (PI) ou rapports de bogues cartographiques en quelques clics!
+  <string name="tip_osm_improve_t">\tOsmAnd utilise des cartes issues des données OpenStreetMap.org (OSM). En plus de la visualisation des cartes et du calcul d\'itinéraires, Osmand peut également être utilisé pour améliorer la qualité des données OSM. Vous pouvez facilement créer et télécharger des nouveaux points d\'intérêt (PI) ou des rapports de bogues cartographiques en quelques clics !
 \n\tPour cela il faudra d\'abord fournir vos paramètres de connexion OSM dans \'Paramètres\' -&gt; \'Général\' -&gt; \'Édition OSM\'.
 \n\tPour ajouter un nouveau PI, utiliser l\'option \'Créer un point d\'intérêt\' dans le menu contextuel de la carte. Saisir les informations dans la boite de dialogue \'Créer un point d\'intérêt\' avant d\'enregistrer.
 \n\tLes erreurs de cartographie peuvent être signalées immédiatement via les bogues OSM, permettant à la communauté OSM de corriger plus rapidement le problème.
 \n\tPour créer un bogue OSM utiliser l\'option \'Ouvrir un bogue OSM\' dans le menu contextuel de la carte. Saisir une description détaillée du problème et le poster avec le bouton \'Ajouter\'.
-\n\tOSMAnd supporte la mise en cache de vos entrées en mode déconnecté (voir le paramètre respectif), mais La connexion internet est bien sûr nécessaire pour l\'envoi des contributions de PI et de bogues OSM.</string>
+\n\tOSMAnd supporte la mise en cache de vos entrées en mode déconnecté (voir le paramètre correspondant), mais una connexion internet est bien sûr nécessaire pour l\'envoi des contributions de PI et de bogues OSM.</string>
   <string name="download_files_not_enough_space">Il n\'y a pas assez de place pour télécharger %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">Espace actuellement disponible: {2} MB ! Télécharger {0} fichier(s) ({1} MB) ?</string>
   
@@ -116,7 +116,7 @@
   <string name="city_type_village">Village</string>
   <string name="city_type_town">Ville</string>
   <string name="city_type_city">Ville</string>
-  <string name="layer_poi_label">Étiquettes PI</string>
+  <string name="layer_poi_label">Étiquette des points d\'intérêt</string>
   <string name="animate_route_off">Arrêt animation</string>
   <string name="animate_route">Démarrage animation</string>
   <string name="tip_recent_changes_0_6_8_t">Changements en 0.6.8 :
@@ -272,12 +272,12 @@
   <string name="tip_location_sharing_t">Vous notez un point d\'intérêt pendant votre voyage que vous voulez partager avec des amis ou de la famille ?
 \nOsmAnd vous permet de facilement partager un lieu.
 \n\tVous pouvez aller dans \'Menu contextuel de la carte\'-&gt;\'Partager un lieu\'.
-\nLà sélectionner le moyen de partager. Les choix sont : courriel, SMS ou copier vers le presse-papier.
+\nSélectionnez alors le mode de partage parmi : courriel, SMS, ou copie vers le presse-papier.
 </string>
   <string name="tip_favorites">Lieux favoris</string>
   <string name="tip_favorites_t">"Les points utilisés fréquemment peuvent être enregistrés en tant que favoris.
 \n\tPour créer un lieu Favori, aller dans le Menu contextuel de la carte, sélectionner l\'option \'Ajouter aux favoris\' et saisir un nom adapté. Après enregistrement, ce lieu est facilement accessible par le menu \'Menu principal\'-&gt;\'Favoris\'.
-\n\tUn long clic sur un favoris dans le menu \'Favoris\' permet de le modifier, le supprimer ou de créer un itinéraire pour s\'y rendre.
+\n\tUn appui long sur un favori dans le menu \'Favoris\' permet de le modifier, le supprimer ou de créer un itinéraire pour s\'y rendre.
 \n\tPour afficher tous les favoris sur la carte, activer le calque affichant tous les favoris directement sur la carte dans \'Menu contextuel de la carte\'-&gt;\'Couches\'. "</string>
   <string name="create_poi_link_to_osm_doc"> <u>OSM en ligne</u> classification des cartes en images</string>
   <string name="error_doing_search">Une erreur est survenue lors de la recherche hors-ligne</string>
@@ -354,10 +354,10 @@
   <string name="km_h">km/h</string>
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
-  <string name="poi_filter_car_aid">Aide voiture</string>
+  <string name="poi_filter_car_aid">Pour automobilistes</string>
   <string name="poi_filter_closest_poi">PI le plus proche</string>
   <string name="poi_filter_custom_filter">Filtre personnalisé</string>
-  <string name="poi_filter_food_shop">Épicerie</string>
+  <string name="poi_filter_food_shop">Alimentation</string>
   <string name="poi_filter_for_tourists">Pour touristes</string>
   <string name="poi_filter_fuel">Carburant</string>
   <string name="poi_filter_namefinder">Recherche de PI en ligne</string>
@@ -459,7 +459,7 @@
   <string name="layer_favorites">Favoris</string>
   <string name="layer_osm_bugs">Bogues OSM</string>
   <string name="layer_transport">Arrêts de transport</string>
-  <string name="layer_poi">Point d\'Intérêt…</string>
+  <string name="layer_poi">Points d\'intérêt…</string>
   <string name="layer_map">Source de la carte…</string>
   <string name="menu_layers">Couches</string>
   <string name="context_menu_item_search_poi">Chercher un Point d\'Intérêt</string>
@@ -632,7 +632,7 @@
   <string name="save_current_track">Enregistrer la trace GPX</string>
   <string name="save_track_interval_descr">Choisir l\'intervalle d\'enregistrement de la trace</string>
   <string name="save_track_interval">Intervalle d\'enregistrement</string>
-  <string name="save_track_to_gpx_descrp">Les trajets seront enregistrés et groupés par jour dans le répertoire de trajets</string>
+  <string name="save_track_to_gpx_descrp">Les traces seront enregistrées et groupées par jour dans le répertoire des traces</string>
   <string name="save_track_to_gpx">Enregistrer la trace dans un fichier GPX</string>
   <string name="update_tile">Mettre à jour la carte</string>
   <string name="reload_tile">Recharger carreau</string>
@@ -782,7 +782,7 @@
   <string name="osmand_development_plugin_description">Ce greffon permet la gestion de paramètres de développement et de débogage tels que la navigation animée ou l\'affichage des temps de rendu.</string>
   <string name="plugins_screen">Gestionnaire des greffons</string>
   <string name="select_plugin_to_activate">Toucher un greffon pour l\'activer ou le désactiver (Redémarrage d\'OsmAnd peut être nécessaire)</string>
-  <string name="prefs_plugins_descr">Les greffons fournissent des fonctionnalités supplémentaires à l\'application telles que l\'enregistrement des traces, les cartes image, le mode sans affichage, le mode accessibilité et bien d\'autres.</string>
+  <string name="prefs_plugins_descr">Les greffons fournissent à l\'application des fonctionnalités supplémentaires, telles que l\'enregistrement des traces, l\'utilisation de cartes en ligne, le fonctionnement en arrière-plan, le mode accessibilité et bien d\'autres.</string>
   <string name="prefs_plugins">Gestionnaire de greffons</string>
   <string name="tip_recent_changes_0_8_0_t">Changements en 0.8.0 :
 \n\t- *Fonctionnalité des greffons*\n\t- La majorité des fonctionnalités sont regroupées par familles et peuvent être activées/désactivées dans le Gestionnaire de Greffons. Vous pouvez activer les sources de cartes image (en ligne ou en cache), les paramètres de suivi en ligne et autres nouvelles possibilités.\n\t- *Nouvelles cartes hors ligne*\n\t- Le rendu des cartes devient plus rapide et précis (les côtes et zones d\'eau sont corrigées).\n\t- Vous devez re-télécharger toutes les données de cartes hors-ligne, car les anciennes cartes ne fonctionnent plus.\n\t- *Calcul d\'itinéraire hors-ligne*\n\t- Le calcul d\'itinéraire hors ligne devient beaucoup plus stable\n\t- *Utilisation et ergonomie*\n\t- Améliorée dans de nombreux domaines</string>
@@ -954,11 +954,11 @@
   <string name="map_widget_lock_screen">Verrouiller l\'écran</string>
   <string name="map_widget_compass">Boussole</string>
   <string name="map_widget_top_stack">Barre d\'état :</string>
-  <string name="map_widget_reset">Mettre à zéro</string>
+  <string name="map_widget_reset">Réinitialiser</string>
   <string name="map_widget_right_stack">Côté droit :</string>
   <string name="map_widget_left_stack">Côté gauche :</string>
   <string name="map_widget_parking">Parking</string>
-  <string name="map_widget_monitoring">Surveillance</string>
+  <string name="map_widget_monitoring">Suivi</string>
   <string name="map_widget_speed">Vitesse</string>
   <string name="map_widget_distance">Destination</string>
   <string name="map_widget_altitude">Altitude</string>
@@ -985,7 +985,7 @@
 <string name="show_warnings_descr">Afficher les avertissements (limitations de vitesses, stops, ralentisseurs, radars) et information sur les voies.</string>
 <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
 <string name="map_widget_show_ruler">Échelle</string>
-<string name="map_widget_appearance">Éléments restants :</string>
+<string name="map_widget_appearance">Autres éléments :</string>
 <string name="map_widget_view_direction">Affichage direction</string>
 <string name="map_widget_transparent">Couche transparente</string>
 <string name="monitoring_mode_off">Enregistrer GPX</string>
@@ -1001,12 +1001,12 @@
 <string name="filterpoi_activity">Créer un filtre des PI</string>
 <string name="map_widget_renderer">Styles de rendu</string>
 <string name="int_continuosly">En continu</string>
-<string name="tip_rotation_switching_t_v2">\tVous pouvez basculer la façon dont l\'affichage de la carte peut être tournée en tapant sur l\'icône de la boussole
+<string name="tip_rotation_switching_t_v2">\tVous pouvez modifier l'orientation de la carte par un appui court sur l\'icône de la boussole
 \n\tLes choix sont :
-\n\t\'Ne pas tourner (Nord vers le haut)\' - La carte ne changera pas d\'orientation, le Nord sera toujours vers le haut
+\n\t\'Ne pas tourner (nord vers le haut)\' - La carte ne changera pas d\'orientation, le nord sera toujours vers le haut
 \n\t\'Direction du déplacement\' - La carte est continuellement alignée dans la direction du déplacement
 \n\t\'Boussole\' - La carte est continuellement alignée sur la valeur de la boussole</string>
-<string name="tip_day_night_mode_t_v2">"\tLe style de la carte peut, pour certaines cartes vectorielles, être modifié pour le jour(plus clair) et nuit (plus sombre)
+<string name="tip_day_night_mode_t_v2">"\tLe style de la carte peut, pour certaines cartes vectorielles, être modifié selon qu'il fait jour (plus clair) ou nuit (plus sombre)
 \n\tLes couleurs de nuit sont plus sûres pour la conduite nocturne
 \n\tVous pouvez configurer la politique de bascule jour/nuit dans \'Navigation\'-&gt;\'Mode jour/nuit\'
 \n\tLes choix sont:
@@ -1032,7 +1032,7 @@
 \n\tOsmAnd supporte également des sources personnalisées.
 </string>
 <string name="tip_app_mode_t_v2">\tOsmAnd supporte différents profils personnalisables pour les différents cas usages.
-\n\tVous pouvez changer les profils via the bouton de profil dans l\'angle inférieur gauche de la carte (icône voiture, vélo, ou piéton), ou lors de la création d\'un itinéaire.
+\n\tVous pouvez changer les profils via le bouton de profil dans l\'angle inférieur gauche de la carte (icône voiture, vélo, ou piéton), ou lors de la création d\'un itinéaire.
 </string>
 <string name="avoid_motorway">Éviter les autoroutes</string>
 <string name="tip_recent_changes_0_8_4_t">Changements en 0.8.4 :\n\t* Quelques corrections de bugs\n\t* La carte ne perd plus la position après des interruptions\n\t* Activer le service d\'arrière-plan pendant la navigation</string>
@@ -1055,16 +1055,16 @@
     <string name="poi_filter_emergency">Urgences</string>
     <string name="poi_filter_public_transport">Transports publics</string>
     <string name="poi_filter_entertainment">Divertissements</string>
-    <string name="poi_filter_restaurants">Restaurants</string>
+    <string name="poi_filter_restaurants">Restauration</string>
     <string name="poi_filter_sightseeing">Tourisme</string>
     <string name="poi_filter_accomodation">Hébergement</string>
-    <string name="map_widget_monitoring_services">Services de surveillance</string>
+    <string name="map_widget_monitoring_services">Services de suivi</string>
 	<string name="no_route">Pas de route</string>
 	<string name="delete_target_point">Enlever l\'étape</string>
 	<string name="intermediate_point">Étape %1$s</string>
     <string name="gps_not_available">Veuillez activer le GPS dans les paramètres</string>
     <string name="map_widget_show_destination_arrow">Montrer la direction de la destination</string>
-    <string name="enable_plugin_monitoring_services">Activer les greffons de suivi (tracking, live tracking) pour utiliser les services de surveillance</string>
+    <string name="enable_plugin_monitoring_services">Activez le greffon de suivi pour utiliser les services d\'enregistrement des parcours</string>
     <string name="non_optimal_route_calculation">Calculer un itinéraire éventuellement non optimal pour les longs trajets</string>
     <string name="rendering_attr_roadColors_description">Sélectionner un thème de couleurs pour les routes :</string>
 	<string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
@@ -1208,9 +1208,9 @@
     <string name="tip_recent_changes_1_3_t">"Changements en 1.5:\n\t* Thème Holo (personnalisation de thème) "
     </string>
     <string name="monitoring_settings">Services de surveillance et service d\'arrière-plan</string>
-    <string name="monitoring_settings_descr">Configurer l\'enregistrement des parcours et le service d\'arrière plan</string>
-    <string name="osmand_monitoring_plugin_description">Activer le suivi et la navigation en arrière-plan (écran éteint) en réveillant périodiquement le dispositif GPS. Afficher les paramètres facilitant l\' enregistrement de vos parcours vers des fichiers GPX locaux ou en ligne via un service Web.</string>
-    <string name="osmand_monitoring_plugin_name">Services de surveillance et service d\'arrière-plan</string>
+    <string name="monitoring_settings_descr">Configurer l\'enregistrement des parcours et le service d\'arrière-plan</string>
+    <string name="osmand_monitoring_plugin_description">Ce greffon permet d\'activer le suivi et la navigation en arrière-plan (écran éteint) en réveillant périodiquement le dispositif GPS. Affiche les paramètres facilitant l\'enregistrement de vos parcours vers des fichiers GPX locaux, ou en ligne via un service Web.</string>
+    <string name="osmand_monitoring_plugin_name">Services de suivi et service d\'arrière-plan</string>
     <string name="choose_osmand_theme_descr">Choisir le thème de l\'application</string>
     <string name="choose_osmand_theme">Thème de l\'appli</string>
     <string name="accessibility_options">Options d\'accessibilité</string>
@@ -1400,8 +1400,8 @@
 	<string name="auto_zoom_close">Arrêt de l\'auto-zoom</string>
 	<string name="auto_zoom_far">Zoom éloigné</string>
 	<string name="auto_zoom_farthest">Zoom très éloigné</string>
-	<string name="tip_map_styles_t">OsmAnd supporte l\'affichage des cartes vectorielles hors-ligne dans différents styles de carte en fonction de vos besoins:
-		\n\nEn plus du style de carte \'default\', vous pouvez dans \'Menu\' → \'Configuration\' → \'Styles de rendu\' sélectionner par exemple
+	<string name="tip_map_styles_t">OsmAnd supporte l\'affichage des cartes vectorielles hors-ligne dans différents styles de carte en fonction de vos besoins :
+		\n\nÀ la place du style de carte \'default\', vous pouvez dans \'Menu\' → \'Configuration\' → \'Styles de rendu\' sélectionner par exemple :
 		\n\t* le style \'Touring view\', qui fournit les informations les plus détaillées pour le voyage et le tourisme, incluant des optimisations pour les conducteurs professionnels (contraste élevé, les diverses routes sont distinguables).
 		\n\t* \'High contrast roads\' affiche les routes avec des couleurs très accentuées pour les situations de forte luminosité.
 		\n\t* \'Cycle-map\' est optimisé pour l\'affichage des routes pour cyclistes.
