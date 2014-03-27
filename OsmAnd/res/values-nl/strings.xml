@@ -1647,4 +1647,5 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="route_descr_favorite">Favoriet…</string>
     <string name="route_preferences">Route-voorkeuren</string>
     <string name="route_info">Route-informatie</string>
+    <string name="keep_and_add_destination_point">Zet als bestemming</string>
     </resources>
