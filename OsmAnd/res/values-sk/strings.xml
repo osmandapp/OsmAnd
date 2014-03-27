@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -261,9 +260,8 @@
   <string name="global_app_settings">Globálne nastavenia aplikácie</string>
   <string name="download_files_not_enough_space">Nie je dostatok voľného miesta pre stiahnutie %1$s MB (voľné: %2$s).</string>
   <string name="download_files_question_space">Aktuálne je voľných {2} MB! Stiahnuť {0} súbor(y/ov) ({1} MB)?</string>
-  <string name="tip_select_destination_point">Výber cieľového bodu</string>
-  <string name="tip_select_destination_point_t">"Cieľ môžete určiť priamo na mape (kontextové menu, potom \'Určiť ako cieľ\'), vo všetkých hľadacích aktivitách, alebo dlhým kliknutím vo Vašom \'Zozname obľúbených bodov\'.
-\nCieľ je označený ako oranžový krúžok na mape a OsmAnd zobrazí vzdialenosť a smer k nemu (oranžový trojuholník). "</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">"Zmeny vo verzii 0.6.9 :
 \n\t- Vylepšené offline vykresľovanie mapy
 \n\t- Rýchle natívne offline vykresľovanie - viď experimentálne funkcie (nemusí fungovať na všetkých zariadeniach)
@@ -563,7 +561,7 @@
   <string name="osmand_routing_experimental">OsmAnd offline navigácia je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n\nNavigačná služba je dočasne prepnutá na online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Nedá sa nájsť určený adresár.</string>
   <string name="application_dir">Úložiskový adresár</string>
-  <string name="application_dir_change_warning">Zmena úložiskového adresára nepresunie alebo nezmaže dát. Musíte to urobiť sami! Robíte to na vlastné riziko! Napriek tomu pokračovať?</string>
+  
   <string name="osmand_net_previously_installed">Máte nainštalovanú predošlú verziu OsmAndu. Všetky stiahnuté dáta budú podporované novou aplikáciou. Obľúbené body môžu byť exportované v starej aplikácii a potom importované.</string>
   <string name="build_installed">Zostava {0} úspešne nainštalovaná ({1}).</string>
   <string name="downloading_build">Sťahuje sa zostava…</string>
@@ -1227,7 +1225,7 @@
     <string name="srtm_plugin_name">Modul vrstevníc</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
     <string name="download_srtm_maps">Údaje vrstevníc</string>
-    <string name="animate_routing_using_gpx">Otvoriť existujúci súbor GPX s trasou pre nasledovanie?</string>
+    
     <string name="intermediate_points_change_order">Zmeniť poradie</string>
     <string name="srtm_paid_version_msg">Prosím, zvážte zakúpenie zásuvného modulu pre vrstevnice z obchodu, aby ste podporili ďalší vývoj.</string>
     <string name="srtm_paid_version_title">Zásuvný modul pre vrstevnice</string>
@@ -1432,13 +1430,13 @@
 →\n\t* Oprava chýb v zobrazení vzdialenosti, GPX analyzátoru, práce s medzizastávkami, plánovacom module, nahrávaním na OSM, HTTPS↵
     </string>
     <string name="base_world_map">Základná mapa sveta</string>
-	<string name="route_distance_close">Blízko</string>
-    <string name="route_distance_far">Ďaleko</string>
-    <string name="route_distance_farest">Najďalej</string>
-    <string name="route_distance_settings_descr">Nastaviť vzdialenosť zobrazenia mapy</string>
-    <string name="route_distance_settings">Vzdialenosť zobrazenia mapy</string>
+	
+    
+    
+    
+    
     <string name="map_magnifier">Zväčšenie mapy</string>
-    <string name="route_distance_farthest">Najvzdialenejší</string>
+    
     <string name="route_is_too_long">Offline výpočet trasy môže trvať dlho (alebo nefungovať vôbec) pre body vzdialené viac než 200km. Pre lepší výkon môžete pridať prechodné body cesty.</string>
 	<string name="auto_zoom_none">Žiadne automatické približovanie</string>
 	<string name="auto_zoom_close">Veľké priblíženie</string>
@@ -1633,12 +1631,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="map_widget_map_rendering">Vykresľovanie mapy:</string>
     <string name="app_modes_choose_descr">Zvoľte profily použitia viditeľné v aplikácii</string>
     <string name="amenity_type_seamark">Morská značka</string>
-    <string name="tip_recent_changes_1_7_t">Zmeny v 1.7:
-	\n\t* Úplne prepracovaný výpočet trasy (rýchly a presný)
-	\n\t* Aktívna simulácia v tuneloch
-	\n\t* Mnoho malých vylepšení rozhrania a použiteľnosti
-	\n\t* Nastavenia rýchlosti reči
-    </string>
+    
     <string name="complex_route_calculation_failed">Rýchly prepočet trasy zlyhal (%s), použije sa pomalý výpočet.</string>
     <string name="disable_complex_routing_descr">Vypnúť dvojfázovú navigáciu pre režim auta</string>
     <string name="disable_complex_routing">Vypnúť komplexnú navigáciu</string>

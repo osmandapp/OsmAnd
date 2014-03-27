@@ -1,7 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_select_destination_point">Uzyskiwanie informacji o trasie</string>
-  <string name="tip_select_destination_point_t">"\tTrasę przejazdu do wybranego punktu możesz zobaczyć bezpośrednio na mapie (menu kontekstowe, następnie \'Trasa\'), podczas wyszukiwania lub po długim naciśnięciu na wpis z listy ulubionych punktów.
-\n\tPunkt docelowy oznaczony jest pomarańczową flagą na mapie. OsmAnd wyświetla odległość i kierunek do niej (pomarańczowy trójkąt). "</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+  
   <string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
@@ -277,7 +275,7 @@
   <string name="osmand_routing_experimental">Nawigacja offline w OsmAnd jest funkcją eksperymentalną i nie działa dla odległości większych niż 20 km.\n\nUsługa nawigacji została tymczasowo przełączona na CloudMade (online).</string>
   <string name="specified_dir_doesnt_exist">Nie mogę odnaleźć wskazanego katalogu.</string>
   <string name="application_dir">Katalog danych</string>
-  <string name="application_dir_change_warning">Zmiana katalogu danych nie przeniesie ani nie usunie znajdujących się w nim plików. Musisz zrobić do ręcznie poza OsmAnd. Kontynuować mimo to?</string>
+  
   <string name="osmand_net_previously_installed">Poprzednia wersja OsmAnd jest zainstalowana. Wszystkie dane offline są obsługiwane przez nową wersję aplikacji ale punkty ulubione powinny być wyeksportowane w starej wersji aplikacji i zaimportowane w nowej.</string>
   <string name="build_installed">Kompilacja {0} zainstalowana pomyślnie ({1}).</string>
   <string name="downloading_build">Pobieranie kompilacji…</string>
@@ -1193,7 +1191,7 @@
     <string name="map_widget_distancemeasurement">Pomiar odległości</string>
     <string name="dropbox_plugin_description">Wtyczka Dropbox umożliwia synchronizację ścieżek i notatek audio/wideo z twoim kontem Dropbox.</string>
     <string name="dropbox_plugin_name">Wtyczka Dropbox</string>
-    <string name="animate_routing_using_gpx">Czy otworzyć nagraną trasę GPX do nawigacji?</string>
+    
     <string name="intermediate_points_change_order">Zmień kolejność</string>
     <string name="srtm_paid_version_msg">Rozważ zakup wtyczki dodającej poziomice w Market, aby wspomóc dalszy rozwój.</string>
     <string name="srtm_paid_version_title">Wtyczka poziomic</string>
@@ -1557,14 +1555,14 @@ Orientacyjny zasięg map i ich jakość:↵
 Lista krajów obsługiwanych (w zasadzie na cały świat!):↵
 Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Antigua i Barbuda, Antyle Holenderskie, Arabia Saudyjska, Argentyna, Armenia, Aruba, Australia, Austria, Azerbejdżan, Bahamy, Bahrajn, Bangladesz, Barbados, Belgia, Belize, Benin, Bermudy, Bhutan, Białoruś, Boliwia, Bonaire, Bośnia i Hercegowina, Botswana, Brazylia, Brunei, Brytyjskie Wyspy Dziewicze, Bułgaria, Burkina Faso, Burundi, Chile, Chiny, Chorwacja, Curaçao, Cypr, Czad, Czarnogóra, Czechy, Dania, Dominika, Dominikana, Dżibuti, Egipt, Ekwador, Erytrea, Estonia, Etiopia, Fidżi, Filipiny, Finlandia, Francja, Gabon, Gambia, Georgia Południowa, Ghana, Gibraltar, Grecja, Grenada, Grenlandia, Gruzja, Guam, Guernsey, Gujana Francuska, Gujana, Gwadelupa, Gwatemala, Gwinea Bissau, Gwinea Równikowa, Gwinea, Haiti, Hiszpania, Holandia, Honduras, Hong Kong, Indie, Indonezja, Irak, Iran, Irlandia, Islandia, Izrael, Jamajka, Japonia, Jemen, Jersey, Jordania, Kambodża, Kamerun, Kanada, Katar, Kazachstan, Kenia, Kirgistan, Kiribati, Kolumbia, Komory, Kongo, Korea Północna i Korea Południowa, Kostaryka , Kuba, Kuwejt, Laos, Lesotho, Liban, Liberia , Libia, Liechtenstein, Litwa, Luksemburg, Łotwa, Macedonia, Madagaskar, Majotta, Makao, Malawi, Malediwy, Malezja, Mali, Malta, Maroko, Martynika, Mauretania, Mauritius, Meksyk, Mikronezja, Mołdawia, Monako, Mongolia, Montserrat, Mozambik , Myanmar, Namibia, Nauru, Nepal, Niemcy, Niger, Nigeria, Nikaragua, Norwegia, Nowa Kaledonia, Nowa Zelandia, Oman, Pakistan, Palau, Palestyna, Panama, Papua Nowa Gwinea, Paragwaj, Peru, Polinezja Francuska, Polska, Południowy Sudan, Portugalia, Puerto Rico, Republika Środkowoafrykańska, Republika Vanuatu, Republika Zielonego Przylądka, Rosja, Rumunia, Rwanda, Sahara Zachodnia, Saint Helena, Saint Kitts i Nevis, Saint Lucia, Saint Martin, Saint Vincent i Grenadyny, Saint-Barthélemy, Saint-Pierre i Miquelon, Salwador, Samoa, San Marino, Senegal, Serbia, Seszele, Sierra Leone, Singapur, Słowacja, Słowenia, Somalia, Sri Lanka, Stany Zjednoczone Ameryki (USA), Suazi, Sudan, Surinam, Syria, Szwajcaria, Szwecja, Tadżykistan, Tajlandia , Tajwan, Tanzania, Timor Wschodni, Togo, Tokelau, Tonga, Trynidad i Tobago, Tunezja, Turcja, Turkmenistan, Tuvalu, Uganda, Ukraina, Urugwaj, Uzbekistan, Wallis i Futuna, Watykan, Wenezuela, Węgry, Wielka Brytania (UK), Wietnam, Włochy, Wybrzeże Kości Słoniowej, Wyspa Man, Zambia, Zimbabwe, Zjednoczone Emiraty Arabskie.
 	</string>
-	<string name="route_distance_close">Blisko</string>
+	
     <string name="base_world_map">Mapa podstawowa</string>
-	<string name="route_distance_farest">Najdalej</string>
-    <string name="route_distance_far">Daleko</string>
-    <string name="route_distance_settings">Odległość widoku mapy (TODO naming)</string>
+	
+    
+    
     <string name="map_magnifier">Lupa mapy</string>
-    <string name="route_distance_settings_descr">Skonfiguruj odległość widoku mapy (TODO naming)</string>
-    <string name="route_distance_farthest">Najdalej</string>
+    
+    
     <string name="route_is_too_long">Obliczanie trasy offline może zająć dłuższą chwilę (lub czasami nie działać) dla punktów, które dzieli więcej niż 200km. Możesz spróbować dodać punkty pośrednie w celu zwiększenia wydajności.</string>
 	<string name="auto_zoom_none">Brak automatycznego powiększenia</string>
 	<string name="auto_zoom_close">Zbliżenie</string>
@@ -1594,10 +1592,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmodroid_unseek">Przestań szukać obiektu</string>
     <string name="speech_rate_descr">Określ szybkość wymowy dla TTS</string>
     <string name="speech_rate">Szybkość mowy</string>
-    <string name="tip_recent_changes_1_7_t">Zmiany w wersji 1.7:
-	\n\t* Całkowicie zmienione wytyczanie tras (szybkie i dokładne)
-	\n\t* Możliwość symulacji trasy w tunelach
-    </string>
+    
     <string name="disable_complex_routing_descr">Wyłącz 2-fazowe obliczanie trasy dla nawigacji samochodowej</string>
     <string name="complex_route_calculation_failed">Błąd szybkiego obliczania trasy (%s), przełączam na tryb wolny.</string>
     <string name="disable_complex_routing">Wyłącz złożone trasowanie</string>

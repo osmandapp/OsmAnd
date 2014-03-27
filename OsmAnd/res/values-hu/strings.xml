@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
 \n\t- Akadálymentesítés 
@@ -157,9 +156,8 @@
 	</string>
   <string name="download_files_not_enough_space">Nincs elég hely %1$s MB letöltéséhez (szabad %2$s).</string>
   <string name="download_files_question_space">Szabad hely jelenleg {2} MB! Letöltesz {0} fájlt ({1} MB)?</string>
-  <string name="tip_select_destination_point">Beállítás célpontnak</string>
-  <string name="tip_select_destination_point_t">"\tA célpontot kiválaszthatod közvetlenül a térképről (helyi menü, \'Beállítás célpontnak\'), kereséssel, vagy a \'Kedvencek\' közül hosszú kattintással.
-\n\tA célpontot a térképen narancssárga pötty jelzi. Az ettől való távolságot a jobb felső sarokban láthatod, irányát pedig egy narancssárga nyíl mutatja. "</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">A 0.6.9-es verzió változásai: \n\t- Javított vektoros térkép megjelenítés \n\t- Gyors natív vektoros térkép-megjelenítés - kísérleti állapotban van (egyes eszközökön nem működik) \n\t- Erőteljesen megváltoztatott kinézet \n\t- Magasság információ kijelzése \n\t- Új fordítások (vietnami, lengyel) \n\t- További kisebb fejlesztések
 	</string>
   
@@ -430,7 +428,7 @@
   <string name="osmand_routing_experimental">Az OsmAnd offline útvonaltervezője kísérleti funkció és nem működik 20 kilométernél nagyobb távolságban.\n\nÁtmenetileg átállítva online Cluodmade-re.</string>
   <string name="specified_dir_doesnt_exist">Nem található a megadott könyvtár.</string>
   <string name="application_dir">Tárolási könyvtár</string>
-  <string name="application_dir_change_warning">A tárolási könyvtár megváltoztatása nem helyezi át vagy törli az adatokat, ezt kézzel kell megtenni, nem az OsmAndban. Biztosan folytatod?</string>
+  
   <string name="build_installed">OsmAnd verzió {0} sikeresen telepítve ({1}).</string>
   <string name="downloading_build">Összeállítás letöltése…</string>
   <string name="install_selected_build">Telepíted az OsmAnd alkalmazást - {0} innen: {1} {2} MB?</string>
@@ -1176,7 +1174,7 @@
     <string name="recording_description">Felvétel %1$s %2$s dátum: %3$s</string>
     <string name="srtm_paid_version_msg">Kérlek fontold meg a Szintvonal bővítmény megvásárlását a Play Store-ban, ezzel támogatva a további fejlesztéseket.</string>
     <string name="srtm_paid_version_title">Szintvonal bővítmény</string>
-    <string name="animate_routing_using_gpx">Követéshez megnyitsz egy előre felvett GPX fájlt?</string>
+    
     <string name="intermediate_points_change_order">Más sorrend</string>
     <string name="dropbox_plugin_description">A Dropbox bővítmény lehetővé teszi a rögzített útvonalak és hang/videojegyzetek szinkronizálását a Dropbox fiókoddal.</string>
     <string name="dropbox_plugin_name">Dropbox bővítmény</string>
@@ -1381,11 +1379,11 @@
 		\n\t* A \'Winter and ski\' hó borított téli tájképet készít, és megjeleníti a sípályákat és -lifteket (\'World ski\' térkép letöltése szükséges hozzá)
 	</string>
     <string name="base_world_map">Föld alaptérkép</string>
-	<string name="route_distance_close">Közel</string>
-    <string name="route_distance_far">Távol</string>
-    <string name="route_distance_farest">Legtávolabb</string>
+	
+    
+    
     <string name="map_magnifier">Térképnagyító</string>
-    <string name="route_distance_farthest">Legtávolabb</string>
+    
     <string name="animate_routing_route_not_calculated">Előbb tervezz útvonalat</string>
     <string name="animate_routing_route">Szimuláció a tervezett útvonalon </string>
     <string name="animate_routing_gpx">Szimuláció GPX nyomvonalon</string>

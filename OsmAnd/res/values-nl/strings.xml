@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -471,7 +470,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="osmand_routing_experimental">OsmAnd offline routing is een experimentele functie en werkt niet voor afstanden van meer dan ongeveer 20 km.\n\nRouting service is tijdelijk omgeschakeld naar online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Kan de opgegeven map niet vinden.</string>
   <string name="application_dir">Opslagmap</string>
-  <string name="application_dir_change_warning">Wijziging van de opslagmap verplaatst of verwijdert de gegevens niet. Dit moet je afzonderlijk en buiten OsmAnd doen. Toch doorgaan?</string>
+  
   <string name="osmand_net_previously_installed">Een oudere OsmAnd versie is al geïnstalleerd. Alle offline gegevens blijven werken in het nieuwe programma, maar Favorieten moeten worden geëxporteerd in de oude versie en dan worden geïmporteerd met de nieuwe.</string>
   <string name="build_installed">Versie {0} succesvol geïnstalleerd ({1}).</string>
   <string name="downloading_build">Downloaden versie…</string>
@@ -1229,7 +1228,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
     <string name="recording_camera_not_available">Camera is niet beschikbaar</string>
     <string name="srtm_paid_version_msg">Overweeg om de hoogtelijnen-plugin (\"Contour lines\") te kopen in de Play-store om verdere ontwikkeling te ondersteunen.</string>
     <string name="srtm_paid_version_title">Hoogtelijnen-plugin</string>
-    <string name="animate_routing_using_gpx">Wil je een vooraf opgenomen GPX route volgen?</string>
+    
     <string name="intermediate_points_change_order">Volgorde wijzigen</string>
     <string name="dropbox_plugin_description">De Dropbox-plugin kan tracks en audio/video-notities synchroniseren met je Dropbox-account.</string>
     <string name="dropbox_plugin_name">Dropbox-plugin</string>
@@ -1611,10 +1610,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	<string name="amenity_type_seamark">boei / baken</string>
     <string name="osmodroid_seek">Zoek object</string>
     <string name="osmodroid_unseek">Stop het zoeken naar object</string>
-    <string name="tip_recent_changes_1_7_t">Wijzigingen in 1.7:
-\n\t* Volledig vernieuwde routeberekening (snel en nauwkeurig)
-\n\t* Actieve simulatie in tunnels
-    </string>
+    
     <string name="complex_route_calculation_failed">Snelle routeberekening mislukt (%s), terug naar langzame berekening.</string>
     <string name="disable_complex_routing_descr">2-traps routeberekening voor auto uitschakelen</string>
     <string name="disable_complex_routing">Complexe routeberekening uitschakelen</string>

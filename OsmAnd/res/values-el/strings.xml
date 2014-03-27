@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
     <string name="poi_filter_emergency">Επείγοντα</string>
@@ -439,9 +438,8 @@
 	</string>
 	<string name="download_files_not_enough_space">Δεν υπάρχει αρκετός ελεύθερος χώρος για να κάνετε λήψη %1$s MB (ελεύθερα: %2$s).</string>
 	<string name="download_files_question_space">Ελεύθερος χώρος τώρα {2} MB! Λήψη {0} αρχείο(ων) ({1} MB)?</string>
-	<string name="tip_select_destination_point">Επιλέξτε Προορισμό</string>
-	<string name="tip_select_destination_point_t">"\tΜπορείτε να επιλέξετε ένα προορισμό απευθείας στο χάρτη (μενού περιβάλλοντος, και \'Ορισμός ως προορισμός\'), σε όλες τις λειτουργίες αναζήτησης, ή μέσω παρατεταμένου πατήματος μιας καταχώρησης στην \'Λίστα Αγαπημένων Σημείων\'.
-\n\tΟ προορισμός είναι σημειωμένος ως πορτοκαλί δίσκος πάνω στο χάρτη και ο OsmAnd εμφανίζει την απόσταση και την κατεύθυνση προς αυτόν (πορτοκαλί τρίγωνο). "</string> 
+	
+	 
 	<string name="tip_recent_changes_0_6_9_t">"Αλλαγές στην 0.6.9 :
 \n\t- Improved offline map rendering
 \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
@@ -720,7 +718,7 @@
 	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Δεν μπορώ να βρω τον καθορισμένο κατάλογο.</string>
 	<string name="application_dir">Κατάλογος αποθήκευσης</string>
-	<string name="application_dir_change_warning">Αλλάζοντας τον κατάλογο αποθήκευσης δεν θα μετακινηθούν ούτε θα διαγραφούν τα δεδομένα. Αυτό πρέπει να γίνει ξεχωριστά και εκτός του OsmAnd. Συνέχεια?</string>
+	
 	<string name="osmand_net_previously_installed">Μια προηγούμενη έκδοση OsmAnd είναι εγκατεστημένη. Όλα τα offline δεδομένα θα υποστηρίζονται από τη νέα εφαρμογή. Αλλά τα Αγαπημένα σημεία θα πρέπει να εξαχθούν από την παλιά εφαρμογή και στη συνέχεια να εισαχθούν στη νέα.</string>
 	<string name="build_installed">Το Build {0} εγκαταστάθηκε επιτυχώς ({1}).</string>
 	<string name="downloading_build">Λήψη build…</string>
@@ -1217,7 +1215,7 @@
     <string name="av_settings_descr">Διαμόρφωση ρυθμίσεων ήχου και video</string>
     <string name="dropbox_plugin_description">Το πρόσθετο dropbox επιτρέπει τον συγχρονισμό ιχνών και σημειώσεων εικόνας/ήχου με τον dropbox λογαριασμό σας.</string>
     <string name="dropbox_plugin_name">Πρόσθετο dropbox</string>
-    <string name="animate_routing_using_gpx">Θέλετε να χρησιμοποιήσετε υπάρχον αρχείο GPX;</string>
+    
     <string name="intermediate_points_change_order">Αλλαγή σειράς</string>
     <string name="srtm_paid_version_msg">Παρακαλώ σκεφτείτε την αγορά του πρόσθετου ισοϋψών γραμμών από το Market για να υποστηρίξετε την περαιτέρω ανάπτυξη.</string>
     <string name="srtm_paid_version_title">Πρόσθετο ισοϋψών γραμμών</string>

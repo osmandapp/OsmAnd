@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <!--
     	 Disclaimer: 
          If you are going to translate strings, please make sure: 
@@ -161,7 +160,7 @@
     <string name="recording_context_menu_precord">Сфатаграфаваць</string>
     <string name="dropbox_plugin_description">Убудова Dropbox дазваляе сынхранізаваць трэкі і аўдыё/відэа натакi з вашым рахункам Dropbox.</string>
     <string name="dropbox_plugin_name">Убудова Dropbox</string>
-    <string name="animate_routing_using_gpx">Адчыніць ранейзапісаны GPX маршрут для навiгацыi?</string>
+    
     <string name="intermediate_points_change_order">Зьмяніць парадак</string>
     <string name="srtm_paid_version_msg">Please consider to buy the Contour lines plugin in the Market to support further development.</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
@@ -1148,7 +1147,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Каталёг захоўваньня</string>
-	<string name="application_dir_change_warning">Зьмена каталёгу захоўваньня ня будзе перамяшчаць ці выдаляць зьвесткі. Гэта павінна быць зроблена асобна й не ў OsmAnd. Працягнуць ?</string>
+	
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build…</string>

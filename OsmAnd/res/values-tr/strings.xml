@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -114,7 +113,7 @@
     <string name="recording_context_menu_precord">Fotoğraf çek</string>
     <string name="dropbox_plugin_description">Dropbox eklentisi, yol tariflerini ve ses/video notlarını dropbox hesabınızla eşitlemenize olanak verir.</string>
     <string name="dropbox_plugin_name">Dropbox eklentisi</string>
-    <string name="animate_routing_using_gpx">Takip için önceden kaydedilmiş bir GPX rotasını aç?</string>
+    
     <string name="intermediate_points_change_order">Sıralamayı değiştir</string>
     <string name="srtm_paid_version_msg">Programın geliştirilebilmesi için lütfen çevreleme çizgileri eklentisini Mağazadan almayı da düşünün.</string>
     <string name="srtm_paid_version_title">Çevreleme çizgileri eklentisi</string>
@@ -302,7 +301,7 @@
 	<string name="user_password">OSM şifreniz</string>
 	<string name="tip_day_night_mode">Gündüz/Gece modu</string>
 	<string name="download_files_not_enough_space">İndirme için yeterli yer yok: %1$s MB (free: %2$s).</string>
-	<string name="tip_select_destination_point">Gidilecek yeri seçin</string>
+	
 	<string name="auto_follow_route_never">Asla</string>
 	<string name="animate_route_off">Animasyonu durdur</string>
 	<string name="animate_route">Animasyonu başlat</string>
@@ -705,8 +704,7 @@
 	<string name="tip_osm_improve_t">\tOsmAnd harita görüntüleme ve navigasyon-can OSM veri kalitesini iyileştirmek için kullanılır ve üstelik-Openstreetmap.org (OSM) verilerine dayanarak haritaları kullanır. Kolayca sadece birkaç tıklama ile yeni POI veya OSM hata raporları oluşturabilir ve yükleyebilirsiniz!\n\tBunun için önce \'Ayarlar\' daki OSM giriş bilgilerinizi vermeniz gerekir -&gt; \'Genel ayarlar\' -&gt; \'OSM düzenleme\'.\n\tharitası bağlam menüsünde \'POI Oluştur\' yeni POI kullanım seçeneği eklemek için. \'Oluştur POI\' iletişim kutusunda yeni bir POI hakkında bilgiler girerek devam edin ve sonunda taahhüt.\n\tHaritalarda hataları hemen sonra daha hızlı bu sorunu çözebilirsiniz OSM hata ve OSM topluluğu ile rapor edilebilir.
 \n\tHarita bağlam menüsünde bir OSM hata kullanım seçeneği \'Aç OSM hata\' eklemek için. Sonra sorunun ayrıntılı bir açıklama girin ve nihayet \'Ekle\' düğmesini kullanarak gönderebilirsiniz.\n\tInternet bağlantısı OSM POI ve ve OSM hata katılım için gerekli olduğunu lütfen unutmayınız.</string>
 	<string name="download_files_question_space">Boş alan artık {2} MB! İndirme {0} dosya (lar) ({1} MB)?</string>
-	<string name="tip_select_destination_point_t">\tTüm arama faaliyetlerinde, ya da uzun da \'Favori Puan Listesi\' bir giriş presleme yoluyla, doğrudan harita (bağlam menüsünü, ardından \'Hedef olarak ayarla\') bir hedef seçebilirsiniz.
-\n\tHedef harita üzerinde turuncu bir disk olarak işaretlenir ve OsmAnd o ve o (turuncu üçgen) ile yönüne mesafeyi görüntüler.</string> 
+	 
 	<string name="tip_recent_changes_0_6_9_t">0.6.9 deki değişiklikler:
 \n\t- Geliştirilmiş çevrimdışı harita oluşturma\n\t- Hızlı Yerli offline render - (bazı cihazlar çalışmayabilir) deneysel özellikler bakmak\n\t- Massive görünüm ve his değişikliği\n\t- Rakım bilgileri
 \n\t- Yeni çeviriler (Vienamese, Lehçe)\n\t- Diğer küçük özellikler</string>

@@ -164,9 +164,8 @@
 	<string name="download_files_question_space">빈 공간이 이제  {2} MB 입니다! {0} 개의 파일 ({1} MB) 을 다운로드하시겠습니까?</string>
 	
 	
-	<string name="tip_select_destination_point">목적지 선택</string>
-	<string name="tip_select_destination_point_t">\t여러분은 맵(컨텍스트 메뉴-&gt;\'목적지로 설정\'), 모든 검색 액티비티, 또는 \'등록지점 목록\'에서 항목을 길게 눌러 직접  목적지를 선택할 수 있습니다. 
-\n\t목적지는 맵 상에서 오렌지 원으로 표시되고 OsmAnd 는 거기까지의 거리와 방향 (오렌지 삼각형)을 나타냅니다.</string> 
+	
+	 
 
 	<string name="tip_recent_changes_0_6_9_t">0.6.9 버전에 대한 변경 사항들 :
 \n\t- 개선된 오프라인 맵 렌더링
@@ -474,7 +473,7 @@
 	<string name="osmand_routing_experimental">OsmAnd 오프라인 경로는 실험적인 기능이며  20 km 이상의 거리에서는 동작하지 않습니다.\n\n경로 서비스는 일시적으로 온라인 CloudMade로 변경합니다.</string>
 	<string name="specified_dir_doesnt_exist">지정한 디렉토리를 찾을 수 없습니다.</string>
 	<string name="application_dir">저장 디렉토리</string>
-	<string name="application_dir_change_warning">저장 디렉토리 변경은 데이터를 이동하거나 삭제하지 않습니다. 이것은 OsmAnd 와는 별도로 실행되어야 합니다. 계속할까요?</string>
+	
 
 	<string name="osmand_net_previously_installed">이전  OsmAnd 버전이 설치되어 있습니다. 모든 오프라인 데이터는  새로운 프로그램에서 지원합니다. 하지만 등록지점은 예전 앱에서 확인하여 나중에 새로 추가하여야 합니다..</string>
 	<string name="build_installed">빌드 {0} 가 성공적으로 설치되었습니다 ({1}).</string>

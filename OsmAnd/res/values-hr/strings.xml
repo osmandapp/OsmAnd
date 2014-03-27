@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="map_widget_gps_info">GPS informacije</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
     <string name="item_unchecked">neprovjereno</string>
@@ -18,7 +17,7 @@
     <string name="recording_context_menu_precord">Fotografiraj</string>
     <string name="dropbox_plugin_description">Dropbox dodatak omogućuje sinkronizaciju staza i audio/video zapisa s vašim računom.</string>
     <string name="dropbox_plugin_name">Dodatak Dropbox</string>
-    <string name="animate_routing_using_gpx">Želite li koristiti postojeću GPX datoteku?</string>
+    
     <string name="intermediate_points_change_order">Promjeni redoslijed</string>
     <string name="av_def_action_video">Snimanje videa</string>
     <string name="av_def_action_audio">Snimanje zvuka</string>
@@ -711,7 +710,7 @@
 	<string name="contribution_activity">Instalirajte verziju</string>
 	<string name="application_dir">Mapa za pohranu</string>
 	<string name="osmand_net_previously_installed">Instalirana je prethodna inačica OsmAnd aplikacije. Svi offline podaci će biti podržani od strane nove inačice aplikacije. Ali Favorite treba izvesti iz stare aplikacije i kasnije uvesti u novu.</string>
-	<string name="application_dir_change_warning">Promjena mape za pohranu neće premjestiti ili izbrisati podatke. To mora biti izvedeno zasebno i izvan OsmAnd-a. Nastavi svejedno?</string>
+	
 	<string name="specified_dir_doesnt_exist">Ne mogu pronaći određenu mapu.</string>
 	<string name="osmand_routing_experimental">OsmAnd offline navigacija je eksperimentalna značajka i ne radi na udaljenosti većoj od oko 20 km.\n\nNavigacija je privremeno prebačena na online CloudMade.</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
@@ -825,7 +824,7 @@
 	<string name="use_transparent_map_theme">Prozirna tema</string>
 	<string name="download_files_not_enough_space">Nema dovoljno slobodnog prostora za preuzimanje %1$s MB (slobodno je:%2$s).</string>
 	<string name="download_files_question_space">Slobodan prostor je sada {2} MB! Želite li preuzrti {0} datoteku(e) ({1} MB)?</string>
-	<string name="tip_select_destination_point">Odaberite odredište</string>
+	
 	<string name="tip_osm_improve">Poboljšanje OSM podataka</string>
 	<string name="tip_day_night_mode">Dnevni/noćni način rada</string>
 	<string name="tip_rotation_switching">Orijentacija karte</string>

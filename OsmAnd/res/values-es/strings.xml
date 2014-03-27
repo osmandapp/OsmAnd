@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
@@ -105,9 +104,8 @@
 	</string>
   <string name="download_files_not_enough_space">No hay suficente espacio para descargar %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">El espacio disponible ahora es {2} MB. ¿Descargar {0} archivo(s) ({1} MB)?</string>
-  <string name="tip_select_destination_point">Selección de Destino</string>
-  <string name="tip_select_destination_point_t">"\tPuedes escoger el destino directamente en el mapa (menú contextual y luego \'Fijar como destino\'), en las búsquedas, o mediante una pulsación larga en tu \'Lista de Puntos Favoritos\'.
-\n\tEl destino está marcado en el mapa como un disco naranja y OsmAnd muestra la distancia al mismo y la dirección a seguir (triángulo naranja). "</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">"Cambios en 0.6.9 : \n\t- Mejorado el dibujado de mapas sin conexión \n\t- Dibujado nativo rápido - mira en las funcionalidades experimentales (puede no funcionar en algunos dispositivos) \n\t- Numerosos cambios en el estilo visual \n\t- Información de altitud \n\t- Nuevas traducciones (Vietnamita, Polaco) \n\t- Otras pequeñas funcionalidades "</string>
   
   <string name="use_transparent_map_theme">Tema transparente</string>
@@ -371,7 +369,7 @@
   <string name="osmand_routing_experimental">La navegación sin conexión OsmAnd es una característica experimental y no funciona para distancias de más de unos 20 km.\n\nEl servicio de navegación se cambia temporalmente al servicio con conexión CloudMade.</string>
   <string name="specified_dir_doesnt_exist">No puedo encontrar el directorio especificado.</string>
   <string name="application_dir">Directorio de almacenamiento</string>
-  <string name="application_dir_change_warning">Cambiar el directorio de almacenamiento no moverá ni borrará los datos. Esto debe realizarse aparte y fuera de OsmAnd. ¿Continuar de todas formas?</string>
+  
   <string name="osmand_net_previously_installed">Una versión anterior de OsmAnd está instalada. Todos los datos descargados están soportados por la nueva aplicación. Pero los Favoritos deben exportarse desde la aplicación antigua y después importarse en la nueva.</string>
   <string name="build_installed">Compilación {0} correctamente instalada ({1}).</string>
   <string name="downloading_build">Descargando compilación…</string>
@@ -1176,7 +1174,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="srtm_paid_version_title">Extra de curvas de nivel</string>
     <string name="dropbox_plugin_description">El extra de Dropbox permite sincronizar trazas y notas de audio/vídeo con tu cuenta de dropbox.</string>
     <string name="dropbox_plugin_name">Extra de Dropbox</string>
-    <string name="animate_routing_using_gpx">¿Quieres usar un archivo GPX existente?</string>
+    
     <string name="intermediate_points_change_order">Cambiar orden</string>
     <string name="recording_context_menu_show">Mostrar</string>
     <string name="recording_photo_description">Foto %1$s de %2$s</string>
@@ -1546,12 +1544,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="disable_complex_routing_descr">Deshabilita el cálculo de ruta en dos fases para la navegación con coche</string>
     <string name="disable_complex_routing">Deshabilitar ruteo complejo</string>
     <string name="calculate_osmand_route_gpx">Calcular ruta offline OsmAnd</string>
-    <string name="tip_recent_changes_1_7_t">Cambios en 1.7:
-	\n\t* Cálculo de ruta completamente actualizado (rápido y preciso)
-	\n\t* Simulación activa en túneles
- 	\n\t* Muchas mejoras en la interfaz y en usabilidad
-	\n\t* Velocidad de habla configurable
-    </string>
+    
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
 	<string name="routing_attr_prefer_motorway_description">Prefiere autopistas en el ruteo</string>
 	<string name="routing_attr_short_way_name">Camino corto</string>

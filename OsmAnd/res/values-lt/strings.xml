@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
   <string name="osmand_parking_warning_text">Perspėjimas pasiimti automobilį jau buvo įtrauktas į jūsų kalendorių. Perspėjimas ten liks tol, kol jo nepanaikinsite.</string>
@@ -277,9 +276,8 @@
 	</string>
   <string name="download_files_not_enough_space">Neužtenka vietos parsiųsti %1$s MB (laisva: %2$s).</string>
   <string name="download_files_question_space">Dabar laisvos vietos yra {2} MB! Parsiųsti {0} failą(-us) ({1} MB)?</string>
-  <string name="tip_select_destination_point">Kelionės tikslo pasirinkimas</string>
-  <string name="tip_select_destination_point_t">"\tKelionės tikslą jūs galite pasirinkti tiesiog žemėlapyje (kontekstiniame meniu pasirinkite \'Nustatyti kelionės tikslu\'), visose paieškose arba ilgai paspaudus įrašą esantį \'Išsaugotos vietos\' sąraše.
-\n\tKelionės tikslas žemėlapyje būna pažymėtas oranžiniu disku ir OsmAnd rodo kryptį ir atstumą iki jo (oranžinis trikampis). "</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">Pakeitimai 0.6.9 versijoje :
 		\n\t- Patobulintas parsiųstų žemėlapių atvaizdavimas
 		\n\t- Greitas aparatinis parsiųstų žemėlapių vaizdavimas - ieškokite eksperimentinėse savybėse (dalyje įrenginių gali neveikti)
@@ -575,7 +573,7 @@
   <string name="osmand_routing_experimental">OsmAnd navigacija be interneto yra eksperimentinė funkcija ir ji neveikia didesniems nei 20km atstumams.\n\nLaikinai naudojama CloudMade navigacijos paslauga.</string>
   <string name="specified_dir_doesnt_exist">Neina rasti nurodyto segtuvo.</string>
   <string name="application_dir">Segtuvas duomenų talpinimui</string>
-  <string name="application_dir_change_warning">Talpyklos segtuvą pakeitus kitu duomenys perkelti ar ištrinti nebus. Tai turi būti padaryti už OsmAnd funkcionalumo ribų. Tęsti vis tiek?</string>
+  
   <string name="osmand_net_previously_installed">Šiuo metu yra įdiegta senesnė OsmAnd versija. Visi parsiųsti ir išsaugoti duomenys bus palaikomi ir naujos versijos. Išsaugotas vietas iš senosios versijos reikia eksportuoti, o įdiegus naują - importuoti pačiam naudotojui.</string>
   <string name="build_installed">Versija {0} sėkmingai įdiegta ({1}).</string>
   <string name="downloading_build">Parsisiunčiama versija…</string>
@@ -1243,7 +1241,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="srtm_paid_version_title">Kontūrinių linijų įskiepis</string>
     <string name="dropbox_plugin_description">Dropbox įskeipis leidžia sinchronizuoti išsaugotus kelionių maršrutus ir video/audio užrašus su jūsų Dropbox sąskaita.</string>
     <string name="dropbox_plugin_name">Dropbox įskiepis</string>
-    <string name="animate_routing_using_gpx">Ar norite sekti GPX faile įrašytą maršrutą?</string>
+    
     <string name="intermediate_points_change_order">Pakeisti tvarką</string>
     <string name="recording_context_menu_show">Rodyti</string>
     <string name="recording_photo_description">Nuotrauka %1$s %2$s</string>
@@ -1598,12 +1596,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* \'Žiemos ir slidinėjimo\' rodo (sniego padengtą) žiemos kraštovaizdį vertikaliu režimu, kartu ir pasaulines slidinėjimo trasa ir keltuvus (kartu su parsiųstu \'World ski\' žemėlapiu)
 	</string>
     <string name="base_world_map">Bazinis pasaulio žemėlapis</string>
-	<string name="route_distance_close">Arti</string>
-    <string name="route_distance_far">Toli</string>
-    <string name="route_distance_farthest">Toliausiai</string>
+	
+    
+    
     <string name="map_magnifier">Žemėlapio padidinimo stiklas</string>
-    <string name="route_distance_settings_descr">Konfigūruoti žemėlapio matymo atstumą (TODO naming)</string>
-    <string name="route_distance_settings">Žemėlapio matymo atstumas (TODO naming)</string>
+    
+    
     <string name="remember_choice">Atsiminti mano pasirinkimą</string>
     <string name="gps_status_eclipsim">GPS statusas</string>
     <string name="default_and">ir</string>
@@ -1633,12 +1631,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmodroid_unseek">Nebeieškoti objekto</string>
     <string name="speech_rate_descr">Nurodyti TTS kalbėjomo greitį</string>
     <string name="speech_rate">Kalbėjimo greitis</string>
-    <string name="tip_recent_changes_1_7_t">Pakeitimai 1.7 versijoje:
-	\n\t* Visiškai atnaujintas maršruto skaičiavimas (greitas ir tikslus)
-	\n\t* Judėjimo simuliacija tuneliuose
-	\n\t* Daug smulkių vartotojo sąsajos ir funkcionalumo ištaisymų
-	\n\t* Kalbėjimo greičio nustatymas
-    </string>
+    
     <string name="complex_route_calculation_failed">Greitas maršruto apskaičiavimas nepavyko (%s), vykdomas lėtasis skaičiavimas.</string>
     <string name="disable_complex_routing_descr">Išjungti dviejų etapų maršruto skaičiavimą važiavimui automobiliu</string>
     <string name="disable_complex_routing">Išjungti sudėtingą maršruto skaičiavimą</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -385,9 +384,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="tip_osm_improve">Förbättrar OSM-data</string>
 <string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (ledigt: %2$s).</string>
 <string name="download_files_question_space">Tillgängligt utrymme nu {2} MB! Ladda ner {0} fil(er) ({1} MB)?</string>
-<string name="tip_select_destination_point">Få vägledning</string>
-<string name="tip_select_destination_point_t">"\tDu kan få vägledning till en plats direkt i kartan (snabbmenyn, sedan \'Vägledning\'), i alla sökaktiviteter, eller via långt tryck på en post i \'Lista över favoritpunkter\'.\n\tDestinationen markeras som en orange målflagga på kartan och OsmAnd visar avståndet till den och riktningen till den (orange triangel). "
-	</string>
+
+
 <string name="tip_recent_changes_0_6_9_t">Förändringar i 0.6.9:
 \n\t- Förbättrad rendering av offlinekartor
 \n\t- Snabb inbyggd offlinerendering - titta under experimentella funktioner (kanske inte fungerar på vissa enheter)
@@ -644,7 +642,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="tip_map_context_menu_t">\tSnabbmenyn för kartor finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulans knapp.\n\tDå visas en ruta med koordinaterna. För att öppna dialogrutan, trycker du på den. (Eller tryck och håll på den för att dölja rutan igen.)\n\tSnabbmenyn för kartor innehåller alla åtgärder som hänför sig till en punkt (plats).</string>
 	<string name="tip_initial_t">"\tOsmAnd är en navigeringsapp med många funktioner.\n\tSom en introduktion finns ett antal tips och tricks länkade på huvudskärmen (se \'?\'-ikonen). "</string>
 	<string name="application_dir">Lagringskatalog</string>
-	<string name="application_dir_change_warning">Ändring av lagringskatalogen flyttar inte eller tar bort data. Detta måste utföras separat och utanför OsmAnd. Fortsätta ändå?</string>
+	
 	<string name="osmand_net_previously_installed">En tidigare OsmAnd-version är installerad. Alla offline-data kommer att stödjas av den nya appen. Men favoritpunkter bör exporteras från den gamla appen och senare importeras i den nya.</string>
 	<string name="build_installed">Bygge {0} installerades korrekt ({1}).</string>
 	<string name="downloading_build">Laddar ner kompilering …</string>
@@ -994,7 +992,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="recording_photo_description">Foto %1$s av %2$s</string>
     <string name="recording_context_menu_precord">Ta ett foto</string>
     <string name="dropbox_plugin_name">Dropbox-plugin</string>
-    <string name="animate_routing_using_gpx">Vill du använda en befintlig GPX-fil?</string>
+    
     <string name="intermediate_points_change_order">Ändra ordning</string>
     <string name="srtm_paid_version_title">Plugin för höjdkurvor</string>
     <string name="av_def_action_video">Spela in video</string>
@@ -1304,9 +1302,9 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="av_camera_focus_continuous">Kameran försöker fokusera hela tiden</string>
 	<string name="av_photo_play_sound">Spela upp ljud vid tagning av foto</string>
 	<string name="av_photo_play_sound_descr">Välj om ett ljud ska spelas upp vid fotografering</string>
-<string name="route_distance_far">Långt borta</string>
-    <string name="route_distance_farest">Längst bort</string>
-    <string name="route_distance_close">Nära</string>
+
+    
+    
     <string name="map_magnifier">Kartförstoring</string>
     <string name="route_is_too_long">Rutten är möjligen för lång för att kunna beräknas av OsmAnd offline-router.
 	I snitt är offline-ruttning möjlig mellan punkter upp till 200 km från varandra. Lägg till en eller flera mellanliggande waypoints för att beräkna rutten.</string>
@@ -1337,10 +1335,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osb_author_dialog_password">OSM-lösenord (frivilligt)</string>
 	<string name="speech_rate_descr">Ange talhastighet för TTS</string>
     <string name="speech_rate">Talhastighet</string>
-    <string name="tip_recent_changes_1_7_t">Changes in 1.7:
-	\n\t* Helt uppdaterad ruttning(snabb och precis)
-	\n\t* Aktiv simulering i tunnlar
-    </string>
+    
     <string name="complex_route_calculation_failed">Snabbkalkylering av rutt misslyckades (%s), går tillbaka till långsam kalkylering.</string>
     <string name="disable_complex_routing_descr">Inaktivera 2-fasruttning för bilnavigering</string>
     <string name="disable_complex_routing">Inaktivera komplex ruttning</string>

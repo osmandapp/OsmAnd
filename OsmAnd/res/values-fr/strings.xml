@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="offline_edition">Modifications hors ligne</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors ligne des PI
@@ -88,9 +87,8 @@
 \n\tOSMAnd supporte la mise en cache de vos entrées en mode déconnecté (voir le paramètre respectif), mais La connexion internet est bien sûr nécessaire pour l\'envoi des contributions de PI et de bogues OSM.</string>
   <string name="download_files_not_enough_space">Il n\'y a pas assez de place pour télécharger %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">Espace actuellement disponible: {2} MB ! Télécharger {0} fichier(s) ({1} MB) ?</string>
-  <string name="tip_select_destination_point">Sélectionner le point de destination</string>
-  <string name="tip_select_destination_point_t">" \tVous pouvez sélectionner une destination directement dans la carte (menu contextuel, puis \'Marquer comme destination\'), dans toutes les recherches, ou via un appui long sur un de vos favoris dans la \'Liste des favoris\'.
-\n\tLa destination est marquée d\'un disque orange sur la carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange)."</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">Changements en 0.6.9 :
 \n\t- Amélioration du rendu des cartes hors ligne
 \n\t- Rendu hors-ligne acceléré - voir dans les options expérimentales (ne marche pas sur tous les appareils)
@@ -371,7 +369,7 @@
   <string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.\n\nLe service utilise alors automatiquement le service en-ligne CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Le répertoire spécifié est introuvable.</string>
   <string name="application_dir">Répertoire de stockage</string>
-  <string name="application_dir_change_warning">Le changement du répertoire de stockage ne déplacera pas vos données. Vous devrez alors le faire vous même ! Faites-le à vos risques et périls ! Continuer quand même ?</string>
+  
   <string name="osmand_net_previously_installed">Vous avez la version antérieure d\'OsmAnd d\'installée. Les données hors-ligne ne sont utilisées que par la nouvelle application. Les favoris doivent être exportés de l\'ancienne application et réimportés.</string>
   <string name="build_installed">Version {0} installée avec succès ({1}).</string>
   <string name="downloading_build">Téléchargement de l\'application…</string>
@@ -1156,7 +1154,7 @@
     <string name="av_control_start">Enreg.</string>
     <string name="srtm_paid_version_msg">Veuillez acheter le greffon \"Courbes de niveau\" sur Market pour soutenir le développement futur.</string>
     <string name="srtm_paid_version_title">Greffon \"Courbes de niveau\"</string>
-    <string name="animate_routing_using_gpx">Voulez-vous utiliser le fichier GPX existant ?</string>
+    
     <string name="intermediate_points_change_order">Changer l\'ordre</string>
     <string name="dropbox_plugin_name">Greffon Dropbox</string>
     <string name="dropbox_plugin_description">Le greffon Dropbox permet de synchroniser des pistes et des notes audio / vidéo avec votre compte Dropbox.</string>
@@ -1370,9 +1368,9 @@
 	<string name="av_camera_focus_continuous">L\'appareil photo essaie continuellement de faire la mise au point</string>
 	<string name="av_photo_play_sound">Jouer un son lors de la prise de photos</string>
 	<string name="av_photo_play_sound_descr">Choisir de jouer un son lors de la prise de photos</string>
-<string name="route_distance_far">Lointain(e)</string>
-    <string name="route_distance_settings_descr">Configurer l\'échelle de la carte</string>
-    <string name="route_distance_settings">Échelle de la carte</string>
+
+    
+    
     <string name="map_magnifier">Zoom de la carte</string>
     <string name="base_world_map">Carte de base du monde</string>
 	<string name="tip_recent_changes_1_6_t">Changements en 1.6:
@@ -1432,10 +1430,7 @@
     <string name="osmodroid_unseek">Ne plus chercher objet</string>
     <string name="speech_rate_descr">Préciser la vitesse d\'élocution du TTS</string>
     <string name="speech_rate">Vitesse d\'Élocution</string>
-    <string name="tip_recent_changes_1_7_t">Nouveautés de la version 1.7:
-        * Mise-à-jour complète du système de routage (rapide et précis)
-        * Simulation activée dans les tunnels 
-    </string>
+    
     <string name="complex_route_calculation_failed">Échec du calcul rapide de route (%s), essai avec la méthode lente..</string>
     <string name="disable_complex_routing_descr">Désactiver le routage en 2 phases pour la navigation en voiture</string>
     <string name="disable_complex_routing">Désactiver le routage complexe</string>

@@ -93,7 +93,7 @@
   <string name="tip_day_night_mode">दिवस/रात्र पर्याय</string>
   <string name="download_files_not_enough_space">%1$s एमबी डाउनलोड करण्यसाठी पुरेशी जागा शिल्लक नाही (शिल्लक जागा: %2$s).</string>
   <string name="download_files_question_space">शिल्लक जागा आता {2} एमबी! {0} फाइल डाउनलोड करायच्या का ({1} एमबी)?</string>
-  <string name="tip_select_destination_point">इच्छित स्थळ निवडा</string>
+  
   <string name="auto_follow_route_never">कधीच नाही</string>
   <string name="pref_vector_map">वेक्टर नकाशाचे पर्याय</string>
   <string name="delete_confirmation_msg">%1$s काढून टाकायचे का?</string>

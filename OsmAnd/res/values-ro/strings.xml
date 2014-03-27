@@ -438,10 +438,8 @@
 \n\tPentru contribuții la OSM este necesară conexiunea la internet.</string>
 	<string name="download_files_not_enough_space">Nu există spațiu suficient pentru descărcarea a %1$s MB (liber: %2$s).</string>
 	<string name="download_files_question_space">Spațiul liber este de {2} MB! Descărcați {0} fișier(e) ({1} MB)?</string>
-	<string name="tip_select_destination_point">Selectați destinația</string>
-	<string name="tip_select_destination_point_t">\tPuteți selecta o destinație fie direct pe hartă (meniu hartă, apoi \'Setează ca destinație\'), fie dintre rezultatele căutărilor, fie prin apăsarea prelungă a unui element din \'Lista de puncte favorite\'. 
-		\n\tDestinația este marcată cu un disc roșu pe hartă iar OsmAnd afișează distanță pană la el și direcția către el (săgeata roșie).
-	</string> 
+	
+	 
 	<string name="tip_recent_changes_0_6_9_t">"Modificări în versiunea 0.6.9 :
 \n\t- Randare îmbunătățită a hărților offline
 \n\t- Randare nativă offline îmbunătățită - vedeți la funcționalități experimentale (posibil să nu funcționeze pe anumite dispozitive)
@@ -712,7 +710,7 @@
 	<string name="osmand_routing_experimental">Navigarea OsmAnd offline este experimentală și nu funcționează pe distanțe mai mari de circa 20 km.\n\nServiciul de navigare este momentan comutat pe CloudMade online.</string>
 	<string name="specified_dir_doesnt_exist">Nu pot găsi directorul specificat.</string>
 	<string name="application_dir">Directorul pentru stocare</string>
-	<string name="application_dir_change_warning">Schimbarea adresei directorului de stocare nu va efectua și mutarea datelor. Acest lucru trebuie făcut în afara aplicației OsmAnd. Continuați?</string>
+	
 	<string name="osmand_net_previously_installed">Este deja instalată o versiune anterioară a aplicației OsmAnd. Toate datele offline sunt suportate de noua variantă însă punctele favorite ar trebui exportate în cadrul versiunii vechi și ulterior importante în noua versiune.</string>
 	<string name="build_installed">Versiunea {0} instalată cu succes ({1}).</string>
 	<string name="downloading_build">Se descarcă noua versiune…</string>
@@ -1175,6 +1173,6 @@
     <string name="recording_camera_not_available">Camera video nu este disponibilă</string>
     <string name="dropbox_plugin_description">Plugin-ul Dropbox permite sincronizarea track-urilor și fișierelor audio/video cu contul dvs. de la dropbox.com.</string>
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
-    <string name="animate_routing_using_gpx">Doriți să folosiți fișierul GPX existent?</string>
+    
     <string name="intermediate_points_change_order">Schimbare ordine</string>
     </resources>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
@@ -256,10 +255,8 @@
   <string name="tip_osm_improve_t">\tOsmAnd gebruik kaarte gebaseer op Openstreetmap.org (OSM) inligting en behalwe vir besigtiging en navigasie, kan dit ook gebruik word om die kwaliteit van OSM inligting te verbeter. Jy kan nuwe interessante plekke skep of OSM foutverslae oplaai met net \'n paar klieke!\n\tHiervoor moet jy eers jou OSM login inligting in \'Stellings\' -&gt; \'Algemene verstellings\' -&gt; \'OSM Redigering\' voorsien.\n\tOm \'n nuwe interessante plek by te voeg gebruik keuse \'skep interessante plek\' in die kaart konteks kieslys. Tik die inligting oor die nuwe interessante plek in \'Skep interessante plek\' se dialoog in en stuur dit dan in.\n\tFoute in kaarte kan onmiddellik aangemeld word via OSM fout, en die OSM gemeenskap kan dan vinniger hierdie probleem oplos.\n\tOm `n OSM fout by te voeg gebruik keuse \'Open OSM fout\' in die kaart konteks kieslys. Tik dan die beskrywing van die probleem en pos dit met die \'Voeg by\' knoppie.\n\tLet daarop dat `n internet verbinding nodig is vir die OSM interessante plek en OSM fout bydraes.</string>
   <string name="download_files_not_enough_space">Daar is nie genoeg spasie om %1$s MB af te laai nie(beskikbaar:%2$s).</string>
   <string name="download_files_question_space">Beskibare geheue nou {2} MB! Laai {0} lêer(s) ({1} MB) af ?</string>
-  <string name="tip_select_destination_point">Kies bestemming</string>
-  <string name="tip_select_destination_point_t">"\tJy kan \'n bestemming direk op die kaart kies (kaartinhoud-kieslys, dan \'as bestemming\'), in al die soek aktiwiteite, of deur \'n inskrywing in jou \'Lys van gunsteling punte\' lank te druk.\n\tDie bestemming is gemerk as \'n oranje skyf op die kaart en OsmAnd toon die afstand en die rigting daarna aan (oranje driehoek). 
-	"
-	</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">"Veranderinge in 0.6.9:\n\t-Verbeterde aflyn kaart lewering\n\t-Vinnige inheemse aflyn lewering - kyk in eksperimentele eienskappe (mag dalk op sommige toestelle nie werk nie)\n\t-Massiewe voorkoms en gevoel veranderinge\n\t-Hoogte inligting\n\t-nuwe vertalings (Vienamese, Pools)\n\t-ander klein funksies "</string>
   
   <string name="use_transparent_map_theme">Deursigtige tema</string>
@@ -498,7 +495,7 @@
   <string name="osmand_routing_experimental">OsmAnd aflyn navigasie diens is \'n eksperimentele funksie en dit werk nie vir afstande van meer as ongeveer 20 km nie.\n\nNavigasie diens is tydelik oorgeskakel na aanlyn CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Kan nie daardie adres vind nie.</string>
   <string name="application_dir">Bergingsadres</string>
-  <string name="application_dir_change_warning">Verandering van die bergingsadres sal nie die inligting beweeg of verwyder nie. Dit moet afsonderlik en buite OsmAnd gedoen word. Nogtans voortgaan?</string>
+  
   <string name="osmand_net_previously_installed">\'n Vorige OsmAnd weergawe is geïnstalleer. Alle aflyn inligting sal ondersteun word deur die nuwe toepassing. Maar Gunsteling punte moet uitgevoer word van die ou toepassing en later ingevoer word deur die nuwe een.</string>
   <string name="build_installed">\'Build\' {0} suksesvol geïnstalleer ({1}).</string>
   <string name="downloading_build">Besig om weergawe af te laai…</string>
@@ -1072,7 +1069,7 @@
     <string name="av_use_external_recorder">Gebruik stelsel opnemer</string>
     <string name="av_use_external_camera_descr">Gebruik stelsel toepassing vir foto</string>
     <string name="av_use_external_camera">Gebruik kamera toepassing</string>
-    <string name="animate_routing_using_gpx">Wil jy bestaande GPX lêer gebruik?</string>
+    
     <string name="av_settings_descr">Maak oudio en video verstellings</string>
     <string name="av_settings">"Oudio/video verstellings 
 " </string>

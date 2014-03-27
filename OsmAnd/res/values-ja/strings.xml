@@ -1,14 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_select_destination_point">目的地点を選択</string>
-     <string name="tip_select_destination_point_t">
-\tNEW VERSION, PLEASE ADAPT TRANSLATION: \tYou get directions to a place in the map directly (context menu, then \'Directions\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-		\n\tThe destination is marked as an orange target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
-
-\n\t目的地点をマップ
-(コンテキストメニューから \'ナビゲート先\')で直接、あるいは全ての検索画面で
-選択することができます。
-\n\t\'お気に入り\'内で長押しすることで任意のお気に入り地点へナビゲート
-することができます</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+     
 
      <string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
@@ -232,9 +223,7 @@ OsmAndを使用(実験版)</string>
 \n\n経路案内サービスはオンラインのCloudMadeに自動的に切り替わります。</string>
      <string name="specified_dir_doesnt_exist">指定されたディレクトリが見つかりません。</string>
      <string name="application_dir">記憶領域のディレクトリ</string>
-     <string name="application_dir_change_warning">領域のディレクトリ変更は
-データを移動したり削除したりしません。別に、OsmAndの外で行う必要があります。
-構わず続行しますか？</string>
+     
 
      <string name="osmand_net_previously_installed">以前の
 OsmAnd バージョンがインストールされています。全てのオフラインデータは
@@ -709,11 +698,11 @@ POIの更新は利用できません</string>
 <string name="av_photo_play_sound_descr">シャッター音を選択します</string>
 <string name="base_world_map">基本世界地図</string>
 	<string name="tip_map_styles">マップ形式</string>
-	<string name="route_distance_close">閉じる</string>
-    <string name="route_distance_far">遠い</string>
-    <string name="route_distance_farthest">最も遠い</string>
-    <string name="route_distance_settings_descr">マップビューの距離を設定（TODO命令）</string>
-    <string name="route_distance_settings">マップビュー距離（TODO命令）</string>
+	
+    
+    
+    
+    
     <string name="map_magnifier">マップ拡大鏡</string>
     <string name="tip_map_styles_t">OsmAndはオフラインベクターマップの表示の仕方をあなたの好みに応じて表示することができます。:
 		\n\nバランスの良い \'デフォルト\' マップスタイルの他に、\'メニュー\' → \'画面設定\' → \'マップスタイル\' から選択できます。例えば、
@@ -870,7 +859,7 @@ POIの更新は利用できません</string>
     <string name="recording_context_menu_precord">写真を撮影</string>
     <string name="dropbox_plugin_description">Dropboxプラグインはあなたのトラックと音声/ビデオノートをあなたのDropboxアカウントと同期することを可能にします。</string>
     <string name="dropbox_plugin_name">Dropboxプラグイン</string>
-    <string name="animate_routing_using_gpx">以前に記録されたGPXルートを再利用するために開きますか？</string>
+    
     <string name="intermediate_points_change_order">順序を変更</string>
     <string name="srtm_paid_version_msg">さらなるアプリケーションの発展のために、どうかGoogle Play上にある等高線プラグインのご購入をご検討下さい。</string>
     <string name="srtm_paid_version_title">等高線プラグイン</string>
@@ -1253,7 +1242,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="index_name_wiki">ワールドワイドウィキペディアPOI</string>
 	<string name="index_name_voice">音声パック(記録音声、機能限定)</string>
 	<string name="index_name_tts_voice">音声パック(TTS合成音声、推奨）</string>
-	<string name="amenity_type_wikiosm">ウィキペディア(オフライン)</string>
+	
 	<string name="amenity_type_user_defined">ユーザー定義</string>
 	<string name="fav_export_confirmation">以前にエクスポートしたお気に入りのファイルが存在します。置き換えますか？</string>
 	<string name="profile_settings">プロファイル固有の設定</string>

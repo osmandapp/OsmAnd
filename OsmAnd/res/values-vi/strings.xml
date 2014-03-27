@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><!-- Language: Vietnamese; Language code: vi
 Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
-	<string name="tip_select_destination_point">Chọn điểm đến</string>
+	
 	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
 	<string name="auto_follow_route_never">Không bao giờ</string>
 	<string name="auto_follow_route_navigation">Tự động bám theo trên bản đồ</string>
@@ -251,7 +251,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	nó không thể chạy được với khoảng cách trên 20km.\n\nDịch vụ tìm được sẽ tự động chuyển sang dùng CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Không tìm thấy thư mục.</string>
 	<string name="application_dir">Thư mục lưu trữ</string>
-	<string name="application_dir_change_warning">Việc thay đổi thư mục lưu trữ sẽ không di dời hay xóa dữ liệu. Thao tác này phải được tiến hành ngoài ứng dụng OsmAnd</string>
+	
 
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>

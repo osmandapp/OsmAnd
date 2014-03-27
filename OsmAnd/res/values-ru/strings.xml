@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -203,8 +202,8 @@
   <string name="global_app_settings">Общие настройки приложения</string>
   <string name="download_files_not_enough_space">Недостаточно места на диске для загрузки %1$s MB (свободно: %2$s).</string>
   <string name="download_files_question_space">Свободное место {2} MB! Загрузить {0} файл(ов) ({1} MB)?</string>
-  <string name="tip_select_destination_point">Выбор точки назначения</string>
-  <string name="tip_select_destination_point_t">"\tВы можете выбрать точку назначения на карте, в результатах поиска или списке избранного через пункт \'Идти к\' в контекстном меню.\n\n\tТочка назначения отображается на карте как оранжевый круг, направление к ней отображается оранжевой стрелкой. Так-же, в правом верхнем углу отображается расстояние по прямой до неё. "</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">"Изменения в 0.6.9:\n\n\t- Более детальная отрисовка векторных карт\n\n\t- Быстрая аппаратная отрисовка карт(экспериментальные настройки)\n\n\t- Существенные изменения внешнего вида\n\n\t- Информация о высоте\n\n\t- Исправления ошибок и мелкие улучшения "</string>
   
   <string name="use_transparent_map_theme">Прозрачная тема</string>
@@ -425,7 +424,7 @@
   <string name="osmand_routing_experimental">Автономная навигация OsmAnd является экспериментальной и не работает на расстояния более 20 километров.\n\nВ этом случае для прокладывания маршрута используется online-сервис CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Невозможно найти указанную директорию.</string>
   <string name="application_dir">Директория приложения</string>
-  <string name="application_dir_change_warning">Изменение директории не переносит файлы автоматически. Вы должны это сделать самостоятельно. Продолжить?</string>
+  
   <string name="osmand_net_previously_installed">У вас имеется предыдущая версия OsmAnd. Все локальные данные поддерживаются новой версией. Однако избранные точки нужно выгрузить из предыдущей версии приложения и загрузить в новую.</string>
   <string name="build_installed">Сборка {0} успешно установлена ({1}).</string>
   <string name="downloading_build">Загружается сборка…</string>
@@ -1116,7 +1115,7 @@
     <string name="download_srtm_maps">Карты SRTM</string>
     <string name="av_settings">Настройки аудио и видео </string>
     <string name="intermediate_points_change_order">Изменить порядок</string>
-    <string name="animate_routing_using_gpx">Открыть файл GPX и следовать?</string>
+    
     <string name="recording_context_menu_show">Отобразить</string>
     <string name="av_def_action_picture">Сделать фото</string>
     <string name="recording_context_menu_precord">Сделать фото</string>
@@ -1348,12 +1347,7 @@
 	<string name="routing_attr_avoid_ferries_description">Избегать паромов</string>
 	<string name="routing_attr_weight_name">Вес</string>
 	<string name="routing_attr_weight_description">Уточнить ограничение веса</string>
-    <string name="tip_recent_changes_1_7_t">Изменения в 1.7:
-	\n\t* Полностью обновлённая маршрутизация (быстрая и точная)
-	\n\t* Активное моделирование в тоннелях
-	\n\t* Множество мелких улучшений интерфейса и правок удобства пользования
-	\n\t* Установки скорости речи
-    </string>
+    
     <string name="map_widget_map_rendering">Отображение карты:</string>
     <string name="amenity_type_seamark">Навигационный знак</string>
     <string name="disable_complex_routing">Отключить сложную маршрутизацию</string>

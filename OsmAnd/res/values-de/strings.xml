@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="route_is_too_long">Der OsmAnd Offline-Router braucht evtl. sehr lang (oder findet gar kein Ergebnis) für mehr als 200km voneinander entfernte Punkte. Um die Performanz zu verbessern, fügen Sie evtl. einen oder mehrere Wegpunkte in die Route ein.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_is_too_long">Der OsmAnd Offline-Router braucht evtl. sehr lang (oder findet gar kein Ergebnis) für mehr als 200km voneinander entfernte Punkte. Um die Performanz zu verbessern, fügen Sie evtl. einen oder mehrere Wegpunkte in die Route ein.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -678,7 +677,7 @@
 	<string name="osmand_routing_experimental">OsmAnd Offline-Navigation ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Navigationsdienst wird temporär online CloudMade verwendet.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
 	<string name="application_dir">Verzeichnis</string>
-	<string name="application_dir_change_warning">Das Wechseln des Verzeichnis verschiebt oder löscht keine Daten. Dies muss separat außerhalb von OsmAnd durchgeführt werden. Dennoch fortfahren?</string>
+	
 	<string name="osmand_net_previously_installed">Eine Vorversion von OsmAnd ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
 	<string name="build_installed">Build {0} erfolgreich installiert ({1}).</string>
 	<string name="downloading_build">Lade Build…</string>
@@ -1250,7 +1249,7 @@
 	<string name="av_control_stop">AV</string>
 	<string name="dropbox_plugin_description">Das Dropbox-Plugin ermöglicht Ihnen eine Synchronisation von Tracks und Audio/Video-Notizen mit Ihrem Dropbox-Konto.</string>
 	<string name="dropbox_plugin_name">Dropbox-Plugin</string>
-	<string name="animate_routing_using_gpx">Wollen Sie eine vorbereitete GPX-Route laden und ihr folgen?</string>
+	
 	<string name="intermediate_points_change_order">Reihenfolge ändern</string>
 	<string name="srtm_paid_version_msg">Bitte überlegen Sie, ob Sie durch den Kauf des Höhenlinien-Plugins im Play-Store die weitere Entwicklung unterstützen wollen.</string>
 	<string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
@@ -1512,12 +1511,7 @@
     <string name="routing_preferences_descr">Einstellungen für Routenberechnung</string>
     <string name="speech_rate_descr">Geschwindigkeit der Text-Sprache-Ausgabe</string>
     <string name="speech_rate">Sprachgeschwindigkeit</string>
-    <string name="tip_recent_changes_1_7_t">Änderungen in 1.7:
-	\n\t* Komplett überarbeitete Routing-Funktion (schnell und präzise)
-	\n\t* Bewegungssimulation in Tunneln
-	\n\t* zahlreiche Verbesserungen der Benutzer-Oberfläche
-	\n\t* Einstellung für die Geschwindigkeit der Text-zu-Sprache-Ausgabe (TTS)
-    </string>
+    
     <string name="complex_route_calculation_failed">Schnelle Routenberechnung fehlgeschlagen (%s), kehre zur langsamen Berechnung zurück.</string>
     <string name="disable_complex_routing_descr">Zwei-Phasen-Routing für Auto-Navigation deaktivieren</string>
     <string name="disable_complex_routing">Komplexes Routing deaktivieren</string>

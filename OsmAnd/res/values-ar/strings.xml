@@ -1,7 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="recording_context_menu_show">عرضإظهار</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">عرضإظهار</string>
     <string name="av_def_action_picture">التقاط صورةالتقاط صورة</string>
-    <string name="animate_routing_using_gpx">افتح مسار GPX مسجل مسبقا لاتباعه؟</string>
+    
     <string name="av_def_action_video">تسجيل الفيديو</string>
     <string name="av_def_action_audio">تسجيل الصوت</string>
     <string name="av_use_external_recorder">استخدام مسجل الخارجية</string>
@@ -316,10 +315,10 @@
 	<string name="app_settings">إعدادات التطبيق</string>
 	<string name="save_current_track">حفظ المسار الحالي GPX</string>
 	<string name="settings">إعدادات</string>
-	<string name="route_distance_close">أغلق</string>
-    <string name="route_distance_far">بعيد</string>
-    <string name="route_distance_farthest">الأبعد</string>
-    <string name="route_distance_settings_descr">إعداد مسافة عرض الخريطة</string>
+	
+    
+    
+    
     <string name="map_magnifier">مكبر الخريطة</string>
     <string name="base_world_map">خريطة العالم الأساسية</string>
 	<string name="local_index_tile_data_expire">الانتهاء (دقائق):  %1$s</string>
@@ -378,7 +377,7 @@
     <string name="intermediate_point">إحداثية %1$s</string>
     <string name="context_menu_item_last_intermediate_point">أضف كآخر إحداثية</string>
     <string name="context_menu_item_first_intermediate_point">أضف كأول إحداثية</string>
-    <string name="route_distance_settings">مساحة عرض الخريطة ((TODO naming)</string>
+    
     <string name="edit_tilesource_expiration_time">الانتهاء (دقائق)</string>
     <string name="edit_tilesource_choose_existing">اختر الخروج...</string>
     <string name="map_widget_fps_info">معلومات تنقيح FPS</string>
@@ -575,7 +574,7 @@
 	<string name="index_name_africa">أفريقيا</string>
 	<string name="index_name_asia">آسيا</string>
 	<string name="index_name_oceania">أوقيانوسيا</string>
-	<string name="amenity_type_wikiosm">ويكيبيديا (دون اتصال)</string>
+	
 	<string name="routing_settings">الملاحة</string>
 	<string name="routing_settings_descr">تحديد الخيارات للإبحار</string>
 	<string name="index_settings">إدارة البيانات</string>

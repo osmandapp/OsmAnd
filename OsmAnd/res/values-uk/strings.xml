@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
 		\n\t* Вказання напрямку руху по смугам
@@ -233,10 +232,8 @@
 	</string>
   <string name="download_files_not_enough_space">Не вистачає місця на диску для завантаження %1$s MB (вільно: %2$s).</string>
   <string name="download_files_question_space">Вільне місце {2} MB! Завантажити {0} файл(ів) ({1} MB)?</string>
-  <string name="tip_select_destination_point">Вибір точки прибуття</string>
-  <string name="tip_select_destination_point_t">\tВи можете обрати пункт призначення на мапі, в результатах пошуку або точку із закладок через пункт \"Маршрути\" в контекстному меню.
-		\n\tТочка призначення показується на мапі, як помаранчеве коло, напрямок до неї — помаранчевою стрілкою. Також, в правому верхньому куті показується відстань по прямій лінії до неї.
-	</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">Зміни в 0.6.9:
 		\n\t- Покращений рендеринг оффлайн мап
 		\n\t- Швидкий апаратний рендеринг мап (експериментальні налаштування - може працювати не на всіх пристроях)
@@ -501,7 +498,7 @@
   <string name="osmand_routing_experimental">OsmAnd оффлайн навігація є експериментальною і не працює на відстанях &gt; 20 км\n\nВ цьому випадку для прокладання маршруту використовуйте онлайн сервіс CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Неможливо знайти вказану папку.</string>
   <string name="application_dir">Папка програми</string>
-  <string name="application_dir_change_warning">Зміна папки не переносить файли автоматично. Ви повинні це зробити самостійно. Продовжити?</string>
+  
   <string name="build_installed">Збірка {0} успішно встановлена ({1}).</string>
   <string name="downloading_build">Завантажується збірка…</string>
   <string name="install_selected_build">Ви впевнені, що хочете встановити OsmAnd - {0} від {1} {2} MB?</string>
@@ -1001,7 +998,7 @@
     <string name="recording_context_menu_precord">Сфотографувати</string>
     <string name="dropbox_plugin_description">Втулок Dropbox дає можливість синхронізувати треки і відео/аудіо замітки з вашим обліковим записом dropbox.</string>
     <string name="dropbox_plugin_name">Втулок Dropbox</string>
-    <string name="animate_routing_using_gpx">Відкрити існуючий файл GPX?</string>
+    
     <string name="intermediate_points_change_order">Змінити порядок</string>
     <string name="srtm_paid_version_msg">Розгляньте будь ласка можливість придбання втулку «Ізолінії висот» на Маркеті, це підтримає його подальшу розробку.</string>
     <string name="srtm_paid_version_title">Втулок Ізолінії висот</string>
@@ -1604,7 +1601,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		\n\t* \'Зимові та гірськолижні\' відтворює зимовий вигляд (все порито снігом), а також показує основні гірськолижні спуски та підйомники (якщо завантажено мапу \'World ski\')
 	</string>
     <string name="base_world_map">основна мапа світу</string>
-	<string name="route_distance_close">Далеко</string>
-    <string name="route_distance_far">Близько</string>
+	
+    
     <string name="map_magnifier">Лупа</string>
     </resources>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -60,7 +59,7 @@
     <string name="download_roads_only_maps">Kort kun med veje</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Skjul afgrænsninger</string>
-	<string name="animate_routing_using_gpx">Følg en forud forberedt GPX rute?</string>
+	
     <string name="intermediate_points_change_order">Ændre rækkefølge</string>
     <string name="av_video_format">Videoformat</string>
     <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale afgrænsninger (admin niveau 5-9)</string>
@@ -523,7 +522,7 @@
 	<string name="tip_osm_improve">Forbedre OSM data</string>
 	<string name="download_files_not_enough_space">Der er ikke ledig plads nok til at hente %1$s MB (Ledig: %2$s).</string>
 	<string name="download_files_question_space">Ledig plads: {2} MB! Hent {0} filer ({1} MB)?</string>
-	<string name="tip_select_destination_point">Kørselsvejledning</string>
+	
 	<string name="use_transparent_map_theme">Gennemsigtigt tema</string>
 	<string name="native_library_not_supported">Indbygget bibliotek er ikke understøttet på enheden.</string>
 	<string name="init_native_library">Initialisere indbygget bibliotek…</string>
@@ -828,9 +827,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n\nFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejlregistrering\' i \'Brug placeringer\' i genvejsmenuen. Indtast derefter en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
 \n\nOsmAnd understøtter cachelagring af indtastninger offline (se pågældende indstilling), men internetforbindelser er naturligvis nødvendig for at sende OSM IP og OSM fejlrapporter.
 	</string>
-	<string name="tip_select_destination_point_t">En destination kan vælges direkte på kortet (genvejsmenu, og så \'Brug som destination\'), i alle søge aktiviteter eller via et langt tryk på en post i \'Favoritter\'
-\nDestinationen vises som en orange flag på kortet og OsmAnd viser afstanden og retningen til den (orange trekant).
-	</string> 
+	 
 	<string name="tip_recent_changes_0_6_9_t">Ændringer i 0.6.9:
 \n - Forbedret offline kortoptegning
 \n - Hurtig indbygget offline optegning - Find det under eksperimentelle funktioner (virker muligvis ikke på alle enheder)
@@ -1255,7 +1252,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="tip_initial_t">OsmAnd er et navigationsprogram med mange funktioner.
 \n\n Som en grundlæggende introduktion, er nogle tip og tricks tilgængelig via \'Menu\' → \'Tips\' på hovedskærmen.
 	</string>
-	<string name="application_dir_change_warning">Ændring af mappen der gemmes i medfører ikke flytning eller sletning af data. Det skal gøres separat og udenom OsmAnd. Fortsæt alligevel?</string>
+	
 	<string name="osmand_net_previously_installed">En tidligere OsmAnd version er installeret. Alle offline data er understøttet af det nye program, men favoritter bør eksporteres i den gamle version og senere importeres i den nye.</string>
 	<string name="voice_provider">Talevejledning</string>
 	<string name="voice_data_initializing">Initialisere taledata…</string>
@@ -1625,13 +1622,13 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_descr_destination"> </string>
     <string name="create_poi_link_to_osm_doc">&lt;u&gt;Online OSM&lt;/u&gt; kort klassificering med billeder<u>Online OSM</u> map classification with images</string>
 	<string name="base_world_map">Verdensgrundkort</string>
-	<string name="route_distance_close">Nær</string>
-    <string name="route_distance_far">Langt væk</string>
-    <string name="route_distance_farest">Længst væk</string>
-    <string name="route_distance_settings_descr">Konfigurer kortvisningsafstand</string>
-    <string name="route_distance_settings">Kortvisningsafstand</string>
+	
+    
+    
+    
+    
     <string name="map_magnifier">Kortforstørrelse</string>
-    <string name="route_distance_farthest">Længst væk</string>
+    
     <string name="route_is_too_long">OsmAnd offline ruteplanlægning kan tage meget lang tid (eller nogle gange ikke virker) for punkter mere end 200 km fra hinanden. Man kan tilføje mellemliggende rutepunkter for bedre ydelse.</string>
     <string name="auto_zoom_none">Ingen autozoom</string>
     <string name="auto_zoom_far">Middelafstand</string>
@@ -1661,12 +1658,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmodroid_unseek">Stop søgning efter objekt</string>
     <string name="speech_rate_descr">Angiv talehastighed for TTS</string>
     <string name="speech_rate">Talehastighed</string>
-    <string name="tip_recent_changes_1_7_t">Ændringer i 1.7:
-	\n\t* Helt opdateret ruteplanlægning (hurtig og præcis)
-	\n\t* Aktiv simulering i tunneller
-	\n\t* Masser af små UX forbedringer &amp; brugbarhedsrettelse 
-	\n\t* Talehastighed indstilling
-    </string>
+    
     <string name="complex_route_calculation_failed">Hurtig ruteberegning mislykkedes (%s), går tilbage til langsom beregning.</string>
     <string name="disable_complex_routing_descr">Deaktiver 2-faset ruteplanlægning til bilnavigation</string>
     <string name="disable_complex_routing">Deaktiver kompleks ruteplanlægning</string>

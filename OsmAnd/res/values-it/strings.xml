@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -76,9 +75,8 @@
 	</string>
   <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
   <string name="download_files_question_space">Lo spazio disponibile è di {2} MB! Scaricare {0} file(s) ({1} MB)?</string>
-  <string name="tip_select_destination_point">Seleziona \'Punto destinazione\'</string>
-  <string name="tip_select_destination_point_t">"\tPuoi selezionare una destinazione direttamente sulla mappa (menu contestuale, poi \'Imposta come destinazione\'), in qualsiasi ricerca, o selezionando a lungo una voce in \'Elenco punti preferiti\'.
-\n\tLa destinazione è segnata con un disco arancione sulla mappa e OsmAnd ne Visualizza la distanza e la direzione (triangolo arancione). "</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">"Novità della v. 0.6.9:
 \n\t- Migliorato il disegno delle mappe offline
 \n\t- Disegno veloce nativo delle mappe offline - vedi nelle funzionalità sperimentali (potrebbe non funzionare su alcuni dispositivi)
@@ -360,7 +358,7 @@
   <string name="osmand_routing_experimental">Il routing offline di OsmAnd è sperimentale e non funziona per distanze superiori ai 20 km.\n\nIl servizio routing viene fornito temporaneamente tramite CloudMade online.</string>
   <string name="specified_dir_doesnt_exist">Impossibile trovare la cartella specificata.</string>
   <string name="application_dir">Cartella deposito</string>
-  <string name="application_dir_change_warning">Il cambiamento della cartella non sposterà nè eliminerà i dati. Dovrà essere fatto manualmente al di fuori di OsmAnd. Continuare comunque?</string>
+  
   <string name="osmand_net_previously_installed">C\'è installata una versione precedente di OsmAnd. Tutti i dati verranno supportati dalla nuova applicazione. I Preferiti devono essere esportati dalla vecchia applicazione e importati manualmente nella nuova.</string>
   <string name="build_installed">Build {0} installata correttamente({1}).</string>
   <string name="downloading_build">Download della versione…</string>
@@ -1223,7 +1221,7 @@ Dati attualmente sul dispositivo (%1$s liberi):</string>
     <string name="map_widget_av_notes">Note audio</string>
     <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto sul Market del plugin per le linee isocline per sostenere il futuro sviluppo.</string>
     <string name="srtm_paid_version_title">Plugin linee isocline</string>
-    <string name="animate_routing_using_gpx">Aprire un percorso GPX pre-registrato da seguire?</string>
+    
     <string name="intermediate_points_change_order">Modifica l\'ordine</string>
     <string name="dropbox_plugin_description">Il plugin Dropbox permette di sincronizzare le tracce e le note video/audio con il tuo account Dropbox.</string>
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
@@ -1584,13 +1582,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 →
 	</string>
     <string name="base_world_map">Mappa mondiale di base</string>
-	<string name="route_distance_close">Vicino</string>
-    <string name="route_distance_far">Lontano</string>
-    <string name="route_distance_farest">Più lontano</string>
-    <string name="route_distance_settings_descr">Configura la distanza della vista della mappa (DA FARE nomi)</string>
-    <string name="route_distance_settings">Distanza visione mappa (DA FARE nomi)</string>
+	
+    
+    
+    
+    
     <string name="map_magnifier">Ingrandimento mappa</string>
-    <string name="route_distance_farthest">Più lontano</string>
+    
     <string name="route_is_too_long">Il calcolo del percorso offline di OsmAnd potrebbe richiedere molto tempo (o talvolta non funzionare) su distanze più lunghe di 200 km.
 Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestazioni.</string>
     <string name="auto_zoom_none">No zoom automatico</string>
@@ -1619,10 +1617,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="app_modes_choose">Modalità applicazione</string>
 	<string name="amenity_type_seamark">Meda</string>
     <string name="osmodroid_seek">Cerca oggetto</string>
-    <string name="tip_recent_changes_1_7_t">Cambiamenti nella 1.7:
-	\n\t* Calcolo del percorso aggiornato completamente (preciso e veloce)
-	\n\t* Simulazione attiva nei tunnel
-    </string>
+    
     <string name="complex_route_calculation_failed">Calcolo veloce del percorso fallita (%s), rinvio al calcolo lento.</string>
     <string name="disable_complex_routing_descr">Disabilita il calcolo del percorso in due fasi per l\'uso in automobile</string>
     <string name="disable_complex_routing">Disabilita il calcolo complesso del percorso</string>

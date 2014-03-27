@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
   <!--Disclaimer: 
          If you are going to translate strings, please make sure: 
          1. There is no duplicate strings by name
@@ -50,7 +49,7 @@
   <string name="route_descr_map_location">Mapa: </string>
   <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
   <string name="route_descr_current_location">Oraingo kokapena</string>
-  <string name="route_descr_destination"></string>
+  <string name="route_descr_destination"/>
   <string name="route_to">Nora:</string>
   <string name="route_via">Pasatuz:</string>
   <string name="route_from">Nondik:</string>
@@ -149,7 +148,7 @@
   <string name="recording_context_menu_precord">Argazkia atera</string>
   <string name="dropbox_plugin_description">Dropbox pluginak zure dropboxeko kontuarekin ibilbideak eta audio/bideo oharrak sinkronizatzea ahalbideratzen du.</string>
   <string name="dropbox_plugin_name">Dropbox plugina</string>
-  <string name="animate_routing_using_gpx">Existitzen den GPX fitxategi bat erabili nahi duzu?</string>
+  
   <string name="intermediate_points_change_order">Ordena aldatu</string>
   <string name="srtm_paid_version_msg">Mesedez, gehiago garatu ahal izateko kontsideratu Sestra-kurben plugina Marketean erostea.</string>
   <string name="srtm_paid_version_title">Sestra-kurben plugina</string>
@@ -575,8 +574,8 @@
   <string name="tip_osm_improve_t">⇥OsmAnd Openstreetmap.org-eko (OSM) mapetan oinarritzen da eta OSM-ko datuen kalitatea hobetzeko erabili daiteke. POI berriak sortu eta igo ditzakezu erraz edo OSMren akatsak jakinarazi ditzakezu bakarrik klik batez!⏎\n⇥⇥⏎\n⇥Honetarako, \'Ezarpenak\' -&gt; \'Ezarpen orokorrak\' -&gt; \'OSM edizioa\'-n OSM-ren saioa hasteko informazioa eman behar duzu.⏎\n⇥⇥⏎\n⇥POI berri bat gehitzeko, maparen menuan \'POIa sortu\' aukeratu. POI berriaren informazioa bete eta azkenik bidali.⏎\n⇥⇥⏎\n⇥Mapetako akatsak berehala jakinarazi daitezke \'OSM akats jakinarazpenak\'-en bitartez, eta OSM komunitateak azkar konpondu dezake arazoa.⏎\n⇥⇥⏎\n⇥OSM akats bat gehitzeko aukeratu \'Ireki OSM akats jakinarazpena\' maparen menuan. Ondoren, sartu arazoaren deskribapen zehatza eta azkenik bidali \'Gehitu\' botoia sakatuz.⏎\n⇥⇥⏎\n⇥Mesedez kontuan hartu Interneterako sarbidea beharrezkoa dela OSM POI eta OSM akats jakinarazpenak egiteko.</string>
   <string name="download_files_not_enough_space">Ez dago leku nahikorik %1$s MB deskargatzeko (%2$s libre).</string>
   <string name="download_files_question_space">{2} MB libre! Deskargatu {0} fitxategi ({1} MB)?</string>
-  <string name="tip_select_destination_point">Norabideak Lortu</string>
-  <string name="tip_select_destination_point_t">⇥Helbideak zuzenean mapan lortzen dituzu (maparen menuan \'Helbideak\' sakatuta), bilaketa guztietan, edo sarreretan luze sakatzen \'Puntu gogokoenen listan\'.⏎\n⇥⇥⏎\n⇥Helmuga helburu ikono laranjarekin nabarmendua dago mapan eta OsmAndek hara iristeko distantzia eta norabidea bistaratzen du (triangelu laranja).⏎\n⇥</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">0.6.9 bertsioan aldaketak:⏎\n⇥⇥⏎\n⇥- Lineaz kanpoko mapen errenderizazioa hobetua⏎\n⇥⇥⏎\n⇥- Lineaz kanpoko errenderizazio Natibo Azkarra - ezaugarri esperimentaletan begiratu (gailu batzuetan ez du funtzionatzen)⏎\n⇥⇥⏎\n⇥- Itxura aldaketa handiak⏎\n⇥⇥⏎\n⇥- Altuera informazioa⏎\n⇥⇥⏎\n⇥- Itzulpen berriak (Vietnamera, Poloniera)⏎\n⇥⇥⏎\n⇥- Beste ezaugarri txiki batzuk⏎</string>
   <string name="use_transparent_map_theme">Itsura-gai gardena</string>
   <string name="native_library_not_supported">Gailu honek ez du liburutegi natiboa jasaten</string>
@@ -799,7 +798,7 @@
   <string name="osmand_routing_experimental">OsmAnden lineaz kanpoko nabigazioa ezaugarri esperimentala da eta ez du 20 km baina gehiagoko distantziekin lan egiten.⏎\n⏎\nNabigazio zerbitzuak oraingoz sarean dagoen CloudMade zerbitzua erabiltzen du.</string>
   <string name="specified_dir_doesnt_exist">Ezin izan da eskatutako direktorioa aurkitu.</string>
   <string name="application_dir">Gordetze direktorioa</string>
-  <string name="application_dir_change_warning">Biltegiratze direktorioa aldatzeak ez du daturik mugitu edo ezabatzen. Hau OsmAndetik kanpo egin behar den gauza da. Jarraitu nahi al duzu hala ere?</string>
+  
   <string name="osmand_net_previously_installed">OsmAnden bertsio zaharrago bat dago instalatuta. Aplikazio berriak lineaz kanpoko datu guztiak erabili ditzake. Hala ere, Puntu Gogokoenak aplikazio zaharrean esportatu eta berrian inportatuak izan beharko lirateke.</string>
   <string name="build_installed">{0} eraikitzea ongi instalatuta ({1}).</string>
   <string name="downloading_build">Eraikitzeko deskargatzen...</string>

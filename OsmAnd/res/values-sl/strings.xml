@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="search_button">Iskanje</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
 	<string name="favorites_Button">Priljubljene</string>
@@ -502,7 +501,7 @@
     <string name="native_library_not_running">Aplikacija teče v varnem načinu (onemogočite v nastavitvah).</string>
     <string name="application_dir">Mapa za shranjevanje</string>
 	<string name="specified_dir_doesnt_exist">Ne najdem določene mape.</string>
-	<string name="application_dir_change_warning">Zamenjava mape ta shranjevanje ne bo premaknila niti brisala podatke. To je treba opraviti ročno izven programa OsmAnd. Ali zamenjam mapo?</string>
+	
 	<string name="choose_auto_follow_route">Avtomatsko centriranje zemljevida</string>
 	<string name="choose_auto_follow_route_descr">Čas za avtomatsko centriranje zemljevida s trenutnim položajem</string>
 	<string name="auto_follow_route_never">Nikoli</string>
@@ -744,8 +743,8 @@
 	</string>	
 	<string name="download_files_not_enough_space">Ni dovolj razpoložljivega prostora za prejem %1$s MB(prosto: %2$s).</string>
 	<string name="download_files_question_space">Razpoložljiv prostor je sedaj {2}MB! Ali želite prejeti {0} datotek(o) ({1}MB)?</string>
-	<string name="tip_select_destination_point">Izberi cilj</string>
-	<string name="tip_select_destination_point_t">"\tCilj lahko izberete neposredno v zemljevidu (meni vsebina nato \'Nastavi kot cilj\'), v vseh dejavnostih iskanja ali z dolgim pritiskom na vnos na vašem \'Seznamu priljubljenih točk\'.\n\tCilj je označen kot oranžen disk na zemljevidu. OsmAnd prikaže razdaljo in smer do cilja (oranžen trikotnik). "</string> 
+	
+	 
 	<string name="native_library_not_supported">Nativna knjižnica ni podprta na tej napravi.</string>
 	<string name="init_native_library">Inizializiranje izvirne knjižnice …</string>
 	<string name="auto_follow_route_navigation">Samodejno centriraj le med navigacijo</string>
@@ -1222,7 +1221,7 @@ Pomembnejše lastnosti:
     <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z opombo, še ni določeno. Uporabite \"Uporabi mesto …\" za dodelitev opombe za določeno mesto</string>
     <string name="srtm_paid_version_msg">Prosimo, razmislite o nakupu vtičnika Izohipse v trgovini Market, da bi tako podprli nadaljnji razvoj.</string>
     <string name="srtm_paid_version_title">Vtičnik Izohipse</string>
-    <string name="animate_routing_using_gpx">Odpreti in slediti posneto GPX pot?</string>
+    
     <string name="intermediate_points_change_order">Spremeni vrstni red</string>
     <string name="dropbox_plugin_description">Vtičnik Dropbox omogoča sinhronizacijo datotek sledi in video/zvočnih posnetkov z vašim dropbox uporabniškim računom.</string>
     <string name="dropbox_plugin_name">Vtičnik Dropbox</string>
@@ -1594,10 +1593,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="guidance_preferences_descr">Nastavitve navigacije</string>
     <string name="disable_complex_routing_descr">Onemogoči 2-fazno usmerjanje za avtomobilsko navigacijo</string>
     <string name="routing_preferences_descr">Nastavitve usmerjanja</string>
-    <string name="tip_recent_changes_1_7_t">Spremembe v 1.7:
-	\n\t* Popolnoma posodobljeno usmerjanje (hitro in natančno)
-	\n\t* Aktivna simulacija v predorih
-    </string>
+    
     <string name="speech_rate_descr">Določitev hitrosti govora za TTS</string>
     <string name="speech_rate">Hitrost govora</string>
     <string name="complex_route_calculation_failed">Hitri izračun poti ni uspel (%s), preklopljeno na počasni izračun.</string>

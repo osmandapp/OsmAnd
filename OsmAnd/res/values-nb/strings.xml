@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -238,10 +237,8 @@
 		\n\t\'Natt\' - bruk alltid nattmodus 
 		\n\t\'Lyssensor\' - kartutseende styres av lyssensoren på enheten (kun hvis utstyrt med)
 	</string>	
-	<string name="tip_select_destination_point">Velg reisemål</string>
-	<string name="tip_select_destination_point_t">\tDu kan velge et reisemål direkte på kartet (lokalmeny, deretter \'Sett som reisemål\'), i alle søkeaktiviteter eller via lang-trykking på en oppføring i din \'Favorittpunktliste\'. 
-		\n\tReisemålet er merket som en orange disk på kartet og OsmAnd viser avstanden til det og retningen til det (orange trekant).
-	</string> 
+	
+	 
 	<string name="choose_auto_follow_route">Auto-sentrer kartvisning</string>
 	<string name="choose_auto_follow_route_descr">Tid til kartvisning synkroniseres med gjeldende posisjon</string>
 	<string name="auto_follow_route_never">Aldri</string>

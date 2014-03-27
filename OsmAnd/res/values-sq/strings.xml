@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="map_widget_appearance">Elementet e mbetura:</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="map_widget_appearance">Elementet e mbetura:</string>
 	<string name="map_widget_map_rendering">Pasqyrim i hartes:</string>
     <string name="app_mode_hiking">Ecje me kemb</string>
     <string name="app_mode_motorcycle">Motoçikletë</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="no_route">Ei reittiä</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista välietappi</string>
 	<string name="target_point">Välietappi %1$s</string>
     <string name="intermediate_point">Välietappi %1$s</string>
@@ -188,7 +187,7 @@
 	<string name="tip_rotation_switching">Kartan orientaatio</string>
 	<string name="download_files_not_enough_space">Ei ole tarpeeksi tilaa jotta voitaisiin ladata %1$s MB (vapaana: %2$s).</string>
 	<string name="download_files_question_space">Vapaata tilaa on {2} MB! Lataa {0} tiedosto(a) ({1} MB)?</string>
-	<string name="tip_select_destination_point">Valitse määränpää</string>
+	
 	<string name="auto_follow_route_never">Ei koskaan</string>
 	<string name="delete_confirmation_msg">Poista %1$s?</string>
 	<string name="city_type_suburb">Lähiö</string>
@@ -658,12 +657,12 @@
 	<string name="prefer_in_routing_title">Suosi…</string>
 	<string name="prefer_in_routing_descr">Suosi moottoriteitä</string>
     <string name="tip_recent_changes_1_2_t">"Muutokset versiossa 1.2: "</string>
-    <string name="animate_routing_using_gpx">Haluatko käyttää olemassa olevaa GPX tiedostoa?</string>
+    
     <string name="intermediate_points_change_order">Vaihda järjestystä</string>
     <string name="recording_unavailable">ei saatavilla</string>
     <string name="recording_context_menu_play">Toista</string>
     <string name="recording_description">Nauhoitus %1$s %2$s / %3$s</string>
-    <string name="application_dir_change_warning">Tallennushakemiston muuttaminen ei poista tai siirrä tiedostoja. Tämä pitää suorittaa manuaalisesti OsmAnd ohjelman ulkopuolella. Jatketaanko siitä huolimatta?</string>
+    
 	<string name="destination_point">Kohde %1$s</string>
     <string name="context_menu_item_destination_point">Valitse määränpääksi</string>
     <string name="please_select_address">Valitse kaupunki tai katu ensin</string>

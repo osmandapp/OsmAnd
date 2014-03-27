@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追踪外掛元件，用位置日誌服務(GPX 記錄，網上追踪查詢)</string>
@@ -413,10 +412,8 @@
 	</string>
 	<string name="download_files_not_enough_space">空間不足以下載 %1$s MB (空間剩餘：%2$s)。</string>
 	<string name="download_files_question_space">目前可用空間剩下 {2} MB！ 要下載 {0} 個檔 ({1} MB)？</string>
-	<string name="tip_select_destination_point">取得指示</string>
-	<string name="tip_select_destination_point_t">\t您可以直接在地圖上選定目的地(在快顯功能表上選 \'指示\')，這用於所有的查尋動作或者是長按進入\'我的最愛地點列表\'。
-		\n\t目的地標點以橘色旗標在地圖上，同時 OsmAnd 會顯示達到目的地的距離與它的方位 (以橘色三角形指示)。
-	</string> 
+	
+	 
 	<string name="use_transparent_map_theme">透明主題</string>
 	<string name="native_library_not_supported">該裝置不支援原生函式庫。</string>
 	<string name="init_native_library">初始化原生函式庫…</string>
@@ -662,7 +659,7 @@
 	<string name="osmand_routing_experimental">OsmAndd 離線導航是個實驗性的功能，它不能運作超過 20 公里的距離。\n\n導航服務暫時切為線上的 CloudMade。</string>
 	<string name="specified_dir_doesnt_exist">指定的目錄不存在。</string>
 	<string name="application_dir">存儲目錄</string>
-	<string name="application_dir_change_warning">更改存儲目錄不會移動或刪除資料。這個動作須與 OsmAnd 分開操作。要繼續嗎？</string>
+	
 	<string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的最愛內的地點須以舊版程式匯出後再用新版程式匯入。</string>
 	<string name="build_installed">編譯 {0} 成功安裝({1})。</string>
 	<string name="downloading_build">下載編譯…</string>
@@ -1121,7 +1118,7 @@
     <string name="recording_context_menu_precord">拍攝照片</string>
     <string name="dropbox_plugin_description">Dropbox 的外掛元件可以讓軌跡和音訊/視訊注解同步到您的 Dropbox 帳戶。</string>
     <string name="dropbox_plugin_name">Dropbox 外掛程式</string>
-    <string name="animate_routing_using_gpx">開啟一個預先錄製的 GPX 路線前行？</string>
+    
     <string name="intermediate_points_change_order">變動排列</string>
     <string name="srtm_paid_version_msg">請考慮在商場上購買等高線外掛元件，以支持更進一步的開發。</string>
     <string name="srtm_paid_version_title">等高線外掛元件</string>
@@ -1590,13 +1587,13 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t*\'冬季和滑雪\'建立一個（白雪覆蓋）冬季景觀視野，和顯示全球滑雪場和滑雪升降機
 	</string>
     <string name="base_world_map">全球的基本地圖</string>
-	<string name="route_distance_close">關閉</string>
-    <string name="route_distance_far">遠方</string>
-    <string name="route_distance_settings_descr">組態地圖檢視距離 (TODO naming)</string>
-    <string name="route_distance_settings">地圖檢視距離 (TODO naming)</string>
+	
+    
+    
+    
     <string name="map_magnifier">地圖放大鏡</string>
-    <string name="route_distance_farest">最遠</string>
-    <string name="route_distance_farthest">最遠</string>
+    
+    
     <string name="auto_zoom_none">無自動變焦</string>
     <string name="auto_zoom_close">特寫</string>
     <string name="auto_zoom_far">中等</string>
@@ -1626,12 +1623,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmodroid_unseek">取消探索目標</string>
     <string name="speech_rate_descr">為 TTS 語音指定語速</string>
     <string name="speech_rate">語速</string>
-    <string name="tip_recent_changes_1_7_t">在 1.7 的變更：
-	\n\t* 完全更新的路線（快速而精確）
-	\n\t* 在隧道有效的模擬
-	\n\t* 有很多小的 UX 改進和有效性的修復
-	\n\t* 可親的語音速率設定
-    </string>
+    
     <string name="complex_route_calculation_failed">快速路徑演算失敗 (%s)，退回到慢速演算。</string>
     <string name="disable_complex_routing_descr">汽車導航時，停用兩階段路線</string>
     <string name="disable_complex_routing">停用複雜的路線</string>

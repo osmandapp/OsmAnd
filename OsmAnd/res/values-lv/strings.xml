@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams OsmAnd vajadzēs restartēt.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus funkcijas un uzstādījumus kā piemēram sekošana, enerģijas taupīšana, pieejamība un daudzas citas</string>
   <string name="prefs_plugins">Spraudņi</string>
@@ -173,9 +172,8 @@
 	</string>
   <string name="download_files_not_enough_space">Nepietiek brīvās vietas, lai lejupielādētu %1$s MB (brīvi: %2$s).</string>
   <string name="download_files_question_space">Patreiz ir brīvi {2} MB! Lejupielādēt {0} failu(s) ({1} MB)?</string>
-  <string name="tip_select_destination_point">Izvelēties galamērķi</string>
-  <string name="tip_select_destination_point_t">\tJūs variet izvēlēties galamērķi tieši kartē (konteksta izvēlne, tad \'Uzstādīt kā galamērķi\'), visās meklēšanas darbībās, vai arī pieturot piespiestu ierakstu jūsu \'Jūsu favorītu punktu sarakstā\'.
-\n\tGalamērķis tiks iezīmēts kā oranžš riņķis kartē un OsmAnd attēlos attālumu līdz tam un virzienu uz to (ar oranžu trijstūri).</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">"Izmaiņas versijā 0.6.9 : \n\t- Uzlabota kartes renderēšana \n\t- Ātra bezsaistes renderēšana - meklējiet eksperimentālās iespējas (var nestrādāt dažās iekārtās) \n\t- Pamatīgas izskata izmaiņas \n\t- Augstuma informācija \n\t- Jauni tulkojumi (Vjetnamiešu, Poļu) \n\t- Citi nelieli papildinājumi "</string>
   
   <string name="use_transparent_map_theme">Caurspīdīgā tēma</string>
@@ -425,7 +423,7 @@
   <string name="osmand_routing_experimental">OsmAnd bezsaistes navigācija ir eksperimentāla funkcija un tā nestrādā attālumiem, kas ir lielāki par 20 km.\n\nNavigācijas serviss pagaidām ir pārslēgts uz tiešsaistes CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Nevar atrast norādīto direktoriju.</string>
   <string name="application_dir">Glabātuves direktorija</string>
-  <string name="application_dir_change_warning">Glabātuves direktorijas maiņa nepārvietos un nedzēsīs datus. Tas jādara atsevišķi ārpus OsmAnd. Vai turpināt?</string>
+  
   <string name="osmand_net_previously_installed">Ir atrasta vecāka OsmAnd versija. Bezsaistes dati ir atbalstīti jaunajā versijā,  bet izlasi vajadzēs eksportēt no vecās versijas, pēc tam importēt jaunajā versijā.</string>
   <string name="build_installed">Versija {0} ir veiksmīgi uzinstalēta ({1}).</string>
   <string name="downloading_build">Lejupielādē versiju…</string>
@@ -1452,10 +1450,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmodroid_unseek">Nemeklēt objektu</string>
     <string name="speech_rate_descr">TTS (runas robots) vārdu teikšanas ātrums</string>
     <string name="speech_rate">Vārdu ātrums</string>
-    <string name="tip_recent_changes_1_7_t">Izmaiņas 1.7:
-	\n\t* Pilnībā atjaunota maršrutēšana (ātrums un precizitāte)
-	\n\t* Aktīvā simulācija tuneļos
-    </string>
+    
     <string name="complex_route_calculation_failed">Maršruta ātrā aprēķināšana neizdevās (%s), notiks lenā aprēķināšana.</string>
     <string name="disable_complex_routing_descr">Izslēgt kompleksu (divfāžu) maršrutēsanu</string>
     <string name="disable_complex_routing">Izslēgt kompleksu maršrutēšanu</string>

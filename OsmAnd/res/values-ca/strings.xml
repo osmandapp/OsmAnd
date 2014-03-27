@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -528,7 +527,7 @@
 <string name="use_short_object_names_descr">Utilitza el nom curt dels objectes en el mode d\'exploració tàctil</string>
 <string name="amenity_type_user_defined">Usuari definit</string>
 <string name="tip_osm_improve">Millora de les dades d\'OSM</string>
-<string name="tip_select_destination_point">Selecciona la destinació</string>
+
 <string name="choose_auto_follow_route">Visualització del mapa centrada automàticament</string>
 <string name="auto_follow_route_navigation">Només centra automàticament en la navegació</string>
 <string name="auto_follow_route_navigation_descr">Visualització del mapa centrada automàticament només quan es navega.</string>
@@ -666,8 +665,7 @@
 <string name="warning_tile_layer_not_downloadable">L\'aplicació no pot descarregar la capa del mapa %1$s, si us plau prova a reinstal·lar-lo.</string>
 <string name="layer_overlay">Mapa sobreposat…</string>
 <string name="map_overlay">Mapa superposat</string>
-<string name="tip_select_destination_point_t">"\tPodeu seleccionar la destinació directament al mapa (menú contextual ,llavors «Marca com a destinació»), en totes les activitats de cerca o per mitja d\'una pressió llarga en una entrada de la teva «Llista de punts preferits».
-\n\tLa destinació es marca com un disc taronja al mapa d\'OsmAnd i es mostra la distància fins a ella (triangle taronja). "</string>
+
 <string name="choose_auto_follow_route_descr">Temps fins que la vista es sincronitzi amb la posició actual</string>
 <string name="map_underlay">Mapa de fons</string>
 <string name="map_underlay_descr">Escolliu el mapa de fons</string>
@@ -1020,7 +1018,7 @@
     <string name="map_widget_av_notes">Notes d\'àudio</string>
     <string name="dropbox_plugin_name">Connector del Dropbox</string>
     <string name="dropbox_plugin_description">El connector de Dropbox et permet sincronitzar traçes i notes d\'audio i video amb el teu compte de dropbox.</string>
-    <string name="animate_routing_using_gpx">Voleu usar un fitxer GPX existent?</string>
+    
     <string name="av_widget_action_descr">Seleccioneu l\'acció per defecte del giny</string>
     <string name="av_widget_action">Acció per defecte del giny</string>
     <string name="recording_open_external_player">Obre un reproductor extern</string>
@@ -1149,7 +1147,7 @@
 \n\tFent pressió llarga a un preferit al menú «Preferit» proporciona opcions per establir-ho com a destinació, editar-lo o suprimir-lo.
 \n\tPer mostrar tots els punts preferits directament al mapa, a la pantalla mapa, activeu la capa «Preferits» que es troba a «Menú» -&gt; «Defineix visualització». "</string>
 	<string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
-	<string name="application_dir_change_warning">Canviar el directori d\'emmagatzematge no mourà ni suprimirà les dades. Això s\'ha de realitzar de forma separada fora de l\'OsmAnd. Voleu continuar igualment?</string>
+	
 	<string name="loading_builds_failed">L\'obtenció del llistat de construccions disponibles de l\'OsmAnd ha fallat</string>
 	<string name="contribution_activity">Activitat especial per la versió dels col·laboradors</string>
 	<string name="transport_context_menu">Cerca transport a la parada</string>
@@ -1367,12 +1365,7 @@
     <string name="routing_preferences_descr">Preferències de càlcul de la ruta</string>
     <string name="speech_rate_descr">Especifiqueu la velocitat de síntesi de veu</string>
     <string name="speech_rate">Velocitat de lectura</string>
-    <string name="tip_recent_changes_1_7_t">Canvis a la versió 1.7:↵
-→\n\t* Càlcul perfeccionat de la ruta, més ràpid i precís↵
-→\n\t* Simulació activa als túnels↵
-→\n\t* Nombroses millores en la interacció amb l\'usuari↵
-→\n\t* Accés a l\'ajust de velocitat de la síntesi de veu↵
-    </string>
+    
     <string name="complex_route_calculation_failed">Fracàs del càlcul ràpid de ruta (%s), retorn al mètode lent.</string>
     <string name="disable_complex_routing_descr">Desactiva el càlcul de ruta en 2 fases per cotxe</string>
     <string name="disable_complex_routing">Desactiva el càlcul complex de la ruta</string>

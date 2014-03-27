@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="email">電子郵件</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="email">電子郵件</string>
 <string name="poi_dialog_name">名稱</string>
 	<string name="poi_dialog_opening_hours">打開</string>
 	<string name="poi_dialog_comment">評論</string>
@@ -60,7 +59,7 @@
     <string name="recording_context_menu_show">显示</string>
     <string name="av_def_action_picture">拍摄照片</string>
     <string name="recording_context_menu_precord">拍摄照片</string>
-    <string name="animate_routing_using_gpx">是否打开已记录的 GPX 路线并跟随？</string>
+    
     <string name="intermediate_points_change_order">变更顺序</string>
     <string name="av_use_external_camera">使用相机的应用程序</string>
     <string name="av_control_start">开始</string>
@@ -210,7 +209,7 @@
 	<string name="osmand_service_descr">使用屏幕关闭时运行OsmAnd</string>
 	<string name="tip_rotation_switching">地图方位</string>
 	<string name="tip_osm_improve">改善OSM数据</string>
-	<string name="tip_select_destination_point">选择目的地</string>
+	
 	<string name="auto_follow_route_never">从来没有</string>
 	<string name="city_type_suburb">市郊</string>
 	<string name="city_type_hamlet">村庄</string>
@@ -757,7 +756,7 @@
 	<string name="use_osmand_routing_service">OsmAnd 导航 &gt;20km</string>
 	<string name="specified_dir_doesnt_exist">无法找到指定的目录。</string>
 	<string name="application_dir">存储目录</string>
-	<string name="application_dir_change_warning">修改存储目录不会自动移动或删除数据。数据的移动或删除必须在 OsmAnd 之外单独进行。是否继续？</string>
+	
 	<string name="gps_status_app_not_found">GPS 状态应用未安装。是否转到应用市场中搜索？</string>
 	<string name="voice_is_not_available_msg">语音引导不可用。请到设置中选择想要的语音数据包并下载。</string>
 	<string name="voice_is_not_available_title">未选择引导语音</string>

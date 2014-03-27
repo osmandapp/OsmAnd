@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
 \n\t- Offline editace POI
@@ -162,9 +161,8 @@
 \n\t Pro zmíněné funkce je nutné internetové připojení.</string>
   <string name="download_files_not_enough_space">Nedostatek místa pro stažení %1$s MB dat (volné: %2$s).</string>
   <string name="download_files_question_space">Volné místo: {2} MB. Stáhnout {0} soubor(y) ({1} MB)?</string>
-  <string name="tip_select_destination_point">Výbrat cíl</string>
-  <string name="tip_select_destination_point_t">"\tCílový bod můžete vybrat přímo v mapě (kontextové menu, pak vybrat \'Nastavit jako cíl\'), v každém módu vyhledávání nebo dlouhým stiskem položky ve vašem \'Seznamu oblíbených míst\'.
-\n\tCíl je označen oranžovou tečkou na mapě. OsmAnd zobrazuje vzdálenost a směr do cíle (oranžová šipka). "</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">"Změny ve verzi 0.6.9 :
 \n\t- Vylepšené vykreslování offline map
 \n\t- Zrychlené vykreslování offline map pomocí Android native library - najdete v \"experimental features\" (na některých zařízeních nemusí fungovat)
@@ -445,7 +443,7 @@
   <string name="osmand_routing_experimental">Offline navigace je experimentální a funguje jen pro vzdálenosti do 20 km.\n\nNavigační služba je dočasně přepnuta na online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
   <string name="application_dir">Adresář pro data</string>
-  <string name="application_dir_change_warning">Změna adresáře pro data žádná data nemaže ani nepřesouvá - to musíte provést Vy. Pokračovat?</string>
+  
   <string name="gps_status_app_not_found">Aplikace pro zobrazení stavu GPS naní instalovaná. Hledat na Marketu?</string>
   <string name="voice_is_not_available_msg">Hlasové navádění není dostupné. V nastaveních vyberte požadovaná hlasová data nebo je stáhněte.</string>
   <string name="voice_is_not_available_title">Žádná hlasová data nejsou zvolena</string>
@@ -1147,7 +1145,7 @@
     
     <string name="av_control_start">start</string>
     <string name="dropbox_plugin_name">Modul Dropbox</string>
-    <string name="animate_routing_using_gpx">Chcete použít stávající soubor GPX?</string>
+    
     <string name="intermediate_points_change_order">Změnit pořadí</string>
     <string name="srtm_paid_version_msg">Prosím zvažte zakoupení modulu Vrstevnice v Market pro podporu dalšího vývoje.</string>
     <string name="srtm_paid_version_title">Modul Vrstevnice</string>

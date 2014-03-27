@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -607,7 +606,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="index_name_wiki">Worldwide Wikipedia</string>
   <string name="index_name_voice">Pacotes de vozes (gravadas, funcionalidades limitadas)</string>
   <string name="index_name_tts_voice">Pacotes de vozes (TTS-Sintetizados,preferência)</string>
-  <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+  
   <string name="amenity_type_user_defined">Definido pelo utilizador</string>
   <string name="fav_export_confirmation">Já existe um arquivo de favoritos exportados anteriormente. Quer substitui-lo?</string>
   <string name="profile_settings">Configurações específicas de Perfil</string>
@@ -622,9 +621,8 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks! \n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM Editing\'. \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it. \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem. \n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button. \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
   <string name="download_files_not_enough_space">Espaço livre insuficiente, precisa de %1$s MB (só tem: %2$s disponíveis).</string>
   <string name="download_files_question_space">Agora tem {2} MB de espaço livre! Quer fazer o download de {0} arquivo(s) ({1} MB)?</string>
-  <string name="tip_select_destination_point">Escolha o destino</string>
-  <string name="tip_select_destination_point_t">"\tVocê pode selecionar um destino diretamente no mapa (menu de contexto -&gt; \\\"Definir como destino\\\"), em qualquer atividade de pesquisa, ou pressionando longamente uma entrada na \\\"Lista de Favoritos\\\".
-\n\tO destino aparece marcado no mapa como um círculo laranja com uma bandeira de xadrez, sendo exibida a distância a que se encontra o ponto e sua direção (triângulo laranja). "</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">"Mudanças em 0.6.9:\n\t- Melhoria da renderização de mapa off-line\n\t- Rápidas prestações da renderização Nativa off-line - ver em recursos experimentais (pode não funcionar em alguns dispositivos)\n\t- Mudanças maciças na aparência e interação
 \n\t- Informação de Altitude\n\t- Novas traduções (Vienamita, Polaco)\n\t- Outras pequenas características "</string>
   
@@ -823,7 +821,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="osmand_routing_experimental">Navegação offline OamAnd é ainda uma função experimental e não funciona em distâncias superiores a cerca de 20 km.\n\nO Serviço Navegação está temporariamente mudado para CloudMade online.</string>
   <string name="specified_dir_doesnt_exist">Não foi possível encontrar diretório especificado.</string>
   <string name="application_dir">Local de Armazenamento</string>
-  <string name="application_dir_change_warning">Alterar o diretório de armazenamento não irá mover os dados para a nova pasta ou apagar os dados atuais. Isto deve ser realizado separadamente e fora do OsmAnd. Continuar mesmo assim?</string>
+  
   <string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
   <string name="build_installed">Build {0} instalado com sucesso ({1}).</string>
   <string name="downloading_build">Downloading build…</string>
@@ -1030,8 +1028,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     
     <string name="search_villages_and_postcodes">Pesquisa por CEP</string>
 	<string name="dropbox_plugin_description">O plugin Dropbox permite sincronizar trilhos e notas de vídeo/audio com a sua conta Dropbox.</string>
-    <string name="animate_routing_using_gpx">Open a pre-recorded GPX route to follow?
-Quer seguir uma trilha GPX ?</string>
+    
     <string name="av_def_action_video">Gravar vídeo</string>
     <string name="av_def_action_audio">Gravar audio</string>
     <string name="av_widget_action_descr">Escolha a acção widget padrão</string>
@@ -1379,11 +1376,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	\n\t* Faster busca introduzir o endereço
 	\n\t* Correções de bugs com roteamento e tornando
     </string>
-    <string name="route_distance_close">Perto</string>
-    <string name="route_distance_far">Longe</string>
-    <string name="route_distance_farthest">Mais longe</string>
-    <string name="route_distance_settings_descr">Configurar Distância de visão do Mapa  (TODO)</string>
-    <string name="route_distance_settings">Distância de visão do mapa (TODO)</string>
+    
+    
+    
+    
+    
     <string name="map_magnifier">Lupa do Mapa</string>
     <string name="base_world_map">Mapa base mundial</string>
 	<string name="osmand_plus_long_description_1000_chars">
