@@ -1435,4 +1435,23 @@
     <string name="android_19_location_disabled">Az Android 4.4 KitKat verzió óta nem lehet térképet letölteni és frissíteni a korábbi helyre (%s). Szeretnéd az összes fájlt egy engedélyezett helyre másolni?
         \n Megjegyzés : a régi fájlok érintetlenül maradnak.
         \n Megjegyzés : nem lehetséges az OsmAnd és OsmAnd+ között fájlokat megosztani. </string>
+    <string name="application_dir_change_warning2">Az OsmAnd megpróbálja az adatokat új helyre másolni. Szeretnéd?</string>
+    <string name="copying_osmand_one_file_descr">%s fájl másolás új helyre…</string>
+    <string name="copying_osmand_files_descr">OsmAnd fájlok másolása új helyre (%s)</string>
+    <string name="copying_osmand_files">OsmAnd fájlok másolása</string>
+    <string name="calculate_osmand_route_gpx">OsmAnd offline útvonal tervezése</string>
+    <string name="app_mode_truck">Teherautó</string>
+    <string name="guidance_preferences_descr">Navigációs beállítások</string>
+    <string name="routing_preferences_descr">Útvonaltervezési beállítások</string>
+    <string name="speech_rate_descr">TTS beszédsebesség</string>
+    <string name="speech_rate">Beszédsebesség</string>
+    <string name="tip_recent_changes_1_7_t">Az 1.7 kiadás újdonságai:
+	\n\t* Teljesen újraírt útvonaltervező (gyorsabb és pontosabb)
+	\n\t* Aktív szimuláció alagutakban
+	\n\t* Felhasználói élmény fokozása, felület javítások
+	\n\t* Állítható TTS beszédsebesség
+    </string>
+    <string name="complex_route_calculation_failed">Gyors útvonaltervezés sikertelen (%s), visszaállás a lassú tervezésre.</string>
+    <string name="disable_complex_routing_descr">Kétfázisú autós útvonaltervezés letiltása</string>
+    <string name="disable_complex_routing">Komplex tervezés letiltása</string>
     </resources>
