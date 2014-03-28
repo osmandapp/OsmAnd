@@ -206,7 +206,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
         		if(currentDirectoryNotWritable) {
         			final String newLoc = settings.getMatchingExternalFilesDir(currentStorage);
         			
-        			if(newLoc != null) {
+        			if(newLoc != null && newLoc.length() != 0) {
         				AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
         				ab.setMessage(getString(R.string.android_19_location_disabled, settings.getExternalStorageDirectory()));
         				ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
