@@ -1095,7 +1095,7 @@ public class OsmandSettings {
 
 		String[] writableSecondaryStorages = getWritableSecondaryStorages();
 
-		List<String> writableStorageDirectory = new ArrayList<String>();
+		List<String> writableSecondaryStorageDirectory = new ArrayList<String>();
 
 		try {
 			boolean primaryExternalStorageFound = false;
@@ -1116,14 +1116,14 @@ public class OsmandSettings {
 						for (int j = 0; j < writableSecondaryStorages.length; j++) {
 							if (externalFilesDirs[i].getAbsolutePath().startsWith(writableSecondaryStorages[j])) {
 								// no special location required
-								writableStorageDirectory.add(writableSecondaryStorages[j]);
+								writableSecondaryStorageDirectory.add(writableSecondaryStorages[j]);
 								specialPathRequired = false;
 								break;
 							}
 						}
 							if(specialPathRequired == true){
 								// special location required
-								writableStorageDirectory.add(externalFilesDirs[i].getAbsolutePath());
+								writableSecondaryStorageDirectory.add(externalFilesDirs[i].getAbsolutePath());
 							}
 						}
 				}
@@ -1133,8 +1133,8 @@ public class OsmandSettings {
 			return new String[0];
 		}
 
-		String[] returnArray = new String[writableStorageDirectory.size()];
-		writableStorageDirectory.toArray(returnArray);
+		String[] returnArray = new String[writableSecondaryStorageDirectory.size()];
+		writableSecondaryStorageDirectory.toArray(returnArray);
 
 		return returnArray;
 	}
