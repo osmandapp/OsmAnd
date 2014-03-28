@@ -20,7 +20,7 @@ public class SmallMapMenuControls extends MapControls {
 	
 	@Override
 	public void showControls(FrameLayout parent) {
-		backToMenuButton = addButton(parent, R.string.backToMenu, R.drawable.map_btn_hmenu);
+		backToMenuButton = addButton(parent, R.string.backToMenu, R.drawable.map_btn_menu);
 		mapActivity.accessibleContent.add(backToMenuButton);
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -41,7 +41,7 @@ public class SmallMapMenuControls extends MapControls {
 
 	public int getWidth() {
 		if (width == 0) {
-			Drawable buttonDrawable = mapActivity.getResources().getDrawable(R.drawable.map_btn_hmenu);
+			Drawable buttonDrawable = mapActivity.getResources().getDrawable(R.drawable.map_btn_menu);
 			width = buttonDrawable.getMinimumWidth();
 		}
 		return width ;
