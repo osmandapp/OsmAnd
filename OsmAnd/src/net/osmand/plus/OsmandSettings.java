@@ -1048,7 +1048,7 @@ public class OsmandSettings {
 	}
 
 	private static String[] getWritableSecondaryStorages() {
-		List<String> writableSecondaryStorageDirectory = new ArrayList<String>();
+		List<String> writableSecondaryStorage = new ArrayList<String>();
 
 		String[] secondaryStorage = getSecondaryStorages();
 
@@ -1056,12 +1056,12 @@ public class OsmandSettings {
 
 			File testFile = new File(secondaryStorage[i]);
 			if (isWritable(testFile)) {
-				writableSecondaryStorageDirectory.add(secondaryStorage[i]);
+				writableSecondaryStorage.add(secondaryStorage[i]);
 			}
 		}
 
-		String[] returnArray = new String[writableSecondaryStorageDirectory.size()];
-		writableSecondaryStorageDirectory.toArray(returnArray);
+		String[] returnArray = new String[writableSecondaryStorage.size()];
+		writableSecondaryStorage.toArray(returnArray);
 
 		return returnArray;
 	}
