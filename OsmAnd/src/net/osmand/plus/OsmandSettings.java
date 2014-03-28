@@ -1038,7 +1038,7 @@ public class OsmandSettings {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			return new String[0];
 		}
 
 		String[] returnArray = new String[storageDirectory.size()];
