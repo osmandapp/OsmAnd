@@ -192,36 +192,34 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
         		
         		String[] writableDirs = settings.getWritableSecondaryStorageDirectorys();
         		
-        		for(int i = 0; i < writableDirs.length; i++)
-        		{
-        			if(currentStorage.startsWith(writableDirs[i]))
-        			{
+        		for(int i = 0; i < writableDirs.length; i++) {
+        			if(currentStorage.startsWith(writableDirs[i])) {
         				currentDirectoryNotWritable = false;
         			}
         		}
         		
-        		if(currentDirectoryNotWritable)
-        		{
+        		if(currentDirectoryNotWritable) {
         			//really not writable?
         			currentDirectoryNotWritable = !settings.isWritable(new File (settings.getExternalStorageDirectory().getAbsolutePath()));
         		}
         		
-        		if(currentDirectoryNotWritable)
-        		{
+        		if(currentDirectoryNotWritable) {
         			final String newLoc = settings.getMatchingExternalFilesDir(currentStorage);
         			
-        		AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
-        		ab.setMessage(getString(R.string.android_19_location_disabled, settings.getExternalStorageDirectory()));
-        		ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						copyFilesForAndroid19(newLoc);
-					}
-				});
-        		ab.setNegativeButton(R.string.default_buttons_cancel, null);
-        		ab.show();
+        			if(newLoc) {
+        				AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
+        				ab.setMessage(getString(R.string.android_19_location_disabled, settings.getExternalStorageDirectory()));
+        				ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							copyFilesForAndroid19(newLoc);
+						}
+					});
+        				ab.setNegativeButton(R.string.default_buttons_cancel, null);
+        				ab.show();
+        			}
+        		}
         	}
-        }
 	}
 	}
 	
