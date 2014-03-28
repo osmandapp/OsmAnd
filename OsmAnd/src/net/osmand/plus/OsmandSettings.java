@@ -1068,6 +1068,7 @@ public class OsmandSettings {
 	
 	@TargetApi(19)
 	public String getMatchingExternalFilesDir(String dir) {
+		try{
 		File[] externalFilesDirs = ctx.getExternalFilesDirs(null);
 		String[] secondaryStorages = getSecondaryStorages();
 
@@ -1075,14 +1076,21 @@ public class OsmandSettings {
 			for (int j = 0; j < secondaryStorages.length; j++) {
 				if (dir.startsWith(secondaryStorages[j])) {
 					for (int k = 0; k < externalFilesDirs.length; k++) {
-						if (externalFilesDirs[k].getAbsolutePath().startsWith(secondaryStorages[j])) {
-							return externalFilesDirs[k].getAbsolutePath();
+						if (externalFilesDirs[k] != null && secondaryStorages[j] != null) {
+							if (externalFilesDirs[k].getAbsolutePath().startsWith(secondaryStorages[j])) {
+								return externalFilesDirs[k].getAbsolutePath();
+							}
 						}
 					}
 				}
 			}
 		}
 		return null;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	@TargetApi(19)
