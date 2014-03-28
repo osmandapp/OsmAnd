@@ -1411,4 +1411,28 @@
 	<string name="osmodroid_refresh">Csatornák frissítése</string>
     <string name="osmodroid_seek">Objektum keresése</string>
     <string name="osmodroid_unseek">Objektumkeresés befejezése</string>
+    <string name="keep_and_add_destination_point">Hozzáadás a célpontokhoz</string>
+    <string name="select_gpx">GPX kiválasztása…</string>
+    <string name="route_descr_select_destination">Válassz célpontot!</string>
+    <string name="route_descr_select_on_map">Kiválasztás a térképen…</string>
+    <string name="route_descr_favorite">Kedvencek…</string>
+    <string name="route_preferences">Útvonal beállítások</string>
+    <string name="route_info">Útvonal információ</string>
+    <string name="routing_attr_prefer_motorway_name">Autópályák preferálása</string>
+	<string name="routing_attr_prefer_motorway_description">Autópályák preferálása</string>
+	<string name="routing_attr_short_way_name">Rövidebb útvonal</string>
+	<string name="routing_attr_short_way_description">Rövidebb útvonal tervezése</string>
+	<string name="routing_attr_avoid_toll_name">Fizetős utak elkerülése</string>
+	<string name="routing_attr_avoid_toll_description">Fizetős utak elkerülése</string>
+	<string name="routing_attr_avoid_unpaved_name">Burkolatlan utak elkerülése</string>
+	<string name="routing_attr_avoid_unpaved_description">Burkolatlan utak elkerülése</string>
+	<string name="routing_attr_avoid_ferries_name">Kompok elkerülése</string>
+	<string name="routing_attr_avoid_ferries_description">Kompok elkerülése</string>
+	<string name="routing_attr_avoid_motorway_name">Autópályák elkerülése</string>
+	<string name="routing_attr_avoid_motorway_description">Autópályák elkerülése</string>
+	<string name="routing_attr_weight_name">Súly</string>
+	<string name="routing_attr_weight_description">Súlykorlátozás megadása</string>
+    <string name="android_19_location_disabled">Az Android 4.4 KitKat verzió óta nem lehet térképet letölteni és frissíteni a korábbi helyre (%s). Szeretnéd az összes fájlt egy engedélyezett helyre másolni?
+        \n Megjegyzés : a régi fájlok érintetlenül maradnak.
+        \n Megjegyzés : nem lehetséges az OsmAnd és OsmAnd+ között fájlokat megosztani. </string>
     </resources>
