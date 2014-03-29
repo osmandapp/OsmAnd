@@ -272,25 +272,19 @@ public class MapRoutePreferencesControl extends MapControls {
 		listAdapter.notifyDataSetChanged();
 	}
 
-	private boolean updateSpinner = false;
 	private void setupSpinner(View settingsDlg) {
 		final Spinner gpxSpinner = (Spinner) settingsDlg.findViewById(R.id.GPXRouteSpinner);
-		try {
-			updateSpinner = true;
-			updateSpinnerItems(gpxSpinner);
-		} finally {
-			updateSpinner = false;
-		}
+		updateSpinnerItems(gpxSpinner);
 		gpxSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				if(updateSpinner) {
-					return;
-				} else if(position == 0) {
-					mapActivity.getRoutingHelper().setGpxParams(null);
-					settings.FOLLOW_THE_GPX_ROUTE.set(null);
-					mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+				if(position == 0) {
+					if(mapActivity.getRoutingHelper().getCurrentGPXRoute() != null) {
+						mapActivity.getRoutingHelper().setGpxParams(null);
+						settings.FOLLOW_THE_GPX_ROUTE.set(null);
+						mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+					}
 					updateParameters();
 				} else if(position == 1) {
 					openGPXFileSelection(gpxSpinner);
