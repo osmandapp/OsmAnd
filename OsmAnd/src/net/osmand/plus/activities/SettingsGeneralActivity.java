@@ -305,6 +305,12 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			if(result != null && result.booleanValue() && runOnSuccess != null) {
 				runOnSuccess.run();
 			}
+			
+			if(result == false)
+			{
+				Toast.makeText(ctx, R.string.input_output_error, Toast.LENGTH_LONG).show();
+			}
+			
 			if(progress.getDialog().isShowing()) {
 				progress.getDialog().dismiss();
 			}
@@ -357,7 +363,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			try {
 				movingFiles(from, to, 0);
 			} catch (IOException e) {
-				Toast.makeText(ctx, R.string.input_output_error, Toast.LENGTH_LONG);
+//				Toast.makeText(ctx, R.string.input_output_error, Toast.LENGTH_LONG);
 				return false;
 			}
 			return true;
@@ -368,6 +374,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	private void warnAboutChangingStorage(final String newValue) {
 		final String newDir = newValue != null ? newValue.trim() : newValue;
 		File path = new File(newDir);
+
+		if (!settings.getExternalStorageDirectory().getAbsolutePath().equals(path.getAbsolutePath())) {
 		path.mkdirs();
 		if (!path.canRead() || !path.exists()) {
 			AccessibleToast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show();
@@ -400,6 +408,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		});
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.show();
+		}
 	}
 	
 	private void updateSettingsToNewDir(final String newDir) {

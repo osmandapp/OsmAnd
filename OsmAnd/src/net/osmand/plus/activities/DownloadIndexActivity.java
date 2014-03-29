@@ -78,14 +78,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
 	 
 	
-    private TextWatcher textWatcher ;
+	private TextWatcher textWatcher;
 	private EditText filterText;
 	private OsmandSettings settings;
 	private ArrayAdapter<String> spinnerAdapter;
-
-	
-
-
 	private View progressView;
 	private ProgressBar indeterminateProgressBar;
 	private ProgressBar determinateProgressBar;
@@ -167,10 +163,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		DownloadIndexAdapter adapter = new DownloadIndexAdapter(this, list);
 		setListAdapter(adapter);
 		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
-			boolean showedDialog = false;
-			if(Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
-				SuggestExternalDirectoryDialog.showDialog(this, null, null);
-			}
+			boolean showedDialog = SuggestExternalDirectoryDialog.showDialog(this, null, null);
 			if(!showedDialog) {
 				showDialogOfFreeDownloadsIfNeeded();
 			}
@@ -191,23 +184,46 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			}
 		});
         if(Build.VERSION.SDK_INT >= OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
-        	if(!settings.getExternalStorageDirectory().getAbsolutePath().equals(settings.getDefaultExternalStorageLocation())) {
-        		AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
-        		ab.setMessage(getString(R.string.android_19_location_disabled, settings.getExternalStorageDirectory()));
-        		ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						copyFilesForAndroid19();		
-					}
-				});
-        		ab.setNegativeButton(R.string.default_buttons_cancel, null);
-        		ab.show();
+        	final String currentStorage = settings.getExternalStorageDirectory().getAbsolutePath();
+        	
+        	if(!currentStorage.startsWith(getClientContext().getExternalServiceAPI().getExternalStorageDirectory())) {
+        		//secondary storage
+        		boolean currentDirectoryNotWritable = true;
+        		
+        		String[] writableDirs = settings.getWritableSecondaryStorageDirectorys();
+        		
+        		for(int i = 0; i < writableDirs.length; i++) {
+        			if(currentStorage.startsWith(writableDirs[i])) {
+        				currentDirectoryNotWritable = false;
+        			}
+        		}
+        		
+        		if(currentDirectoryNotWritable) {
+        			//really not writable?
+        			currentDirectoryNotWritable = !settings.isWritable(new File (settings.getExternalStorageDirectory().getAbsolutePath()));
+        		}
+        		
+        		if(currentDirectoryNotWritable) {
+        			final String newLoc = settings.getMatchingExternalFilesDir(currentStorage);
+        			
+        			if(newLoc != null && newLoc.length() != 0) {
+        				AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
+        				ab.setMessage(getString(R.string.android_19_location_disabled, settings.getExternalStorageDirectory()));
+        				ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							copyFilesForAndroid19(newLoc);
+						}
+					});
+        				ab.setNegativeButton(R.string.default_buttons_cancel, null);
+        				ab.show();
+        			}
+        		}
         	}
-        }
+	}
 	}
 	
-	private void copyFilesForAndroid19() {
-		final String newLoc = settings.getDefaultExternalStorageLocation();
+	private void copyFilesForAndroid19(final String newLoc) {
 		MoveFilesToDifferentDirectory task = 
 				new MoveFilesToDifferentDirectory(DownloadIndexActivity.this, 
 						new File(settings.getExternalStorageDirectory(), IndexConstants.APP_DIR), 
