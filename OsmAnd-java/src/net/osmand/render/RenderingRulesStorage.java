@@ -429,8 +429,8 @@ public class RenderingRulesStorage {
 	public void printDebug(int state, PrintStream out){
 		for(int key : tagValueGlobalRules[state].keys()) {
 			RenderingRule rr = tagValueGlobalRules[state].get(key);
-			out.print("\n\n"+getTagString(key) + " : " + getValueString(key));
-			printRenderingRule("", rr, out);
+			out.print("\n\n"+getTagString(key) + " : " + getValueString(key) + "\n  ");
+			printRenderingRule(" ", rr, out);
 		}
 	}
 	
@@ -450,7 +450,7 @@ public class RenderingRulesStorage {
 			}
 		};
 		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("default.render.xml"), resolver);
-//		storage.printDebug(TEXT_RULES, System.out);
+		storage.printDebug(TEXT_RULES, System.out);
 //		long tm = System.nanoTime();
 //		int count = 100000;
 //		for (int i = 0; i < count; i++) {

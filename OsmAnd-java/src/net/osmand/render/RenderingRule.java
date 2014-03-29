@@ -152,10 +152,17 @@ public class RenderingRule {
 			} 
 		}
 		bls.append("]");
-		indent += "   ";
+		
+		for(RenderingRule rc : getIfChildren()){
+			String cindent = indent + "  [] ";
+			bls.append("\n").append(cindent);
+			rc.toString(indent + "    ", bls);
+		}
+		
 		for(RenderingRule rc : getIfElseChildren()){
-			bls.append("\n").append(indent);
-			rc.toString(indent, bls);
+			String cindent = indent + "  +  ";
+			bls.append("\n").append(cindent);
+			rc.toString(indent + "    ", bls);
 		}
 		
 		return bls;

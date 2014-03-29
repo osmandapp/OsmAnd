@@ -40,9 +40,8 @@ import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
-import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -450,23 +449,29 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	public void setGPXRouteParams(GPXFile result) {
-		GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, mapActivity.getMyApplication().getSettings());
-		params.setAnnounceWaypoints(settings.SPEAK_GPX_WPT.get());
-		params.setCalculateOsmAndRoute(settings.CALC_GPX_ROUTE.get());
-		List<Location> ps = params.getPoints();
-		
-		if(!ps.isEmpty()) {
-			Location loc = ps.get(ps.size() -1);
-			TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();	
-			tg.navigateToPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, -1);
-			if(tg.getPointToStart() == null) {
-				loc = ps.get(0);
-				tg.setStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, null);
+		if(result == null) {
+			mapActivity.getRoutingHelper().setGpxParams(null);
+			settings.FOLLOW_THE_GPX_ROUTE.set(null);	
+		} else {
+			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, mapActivity.getMyApplication()
+					.getSettings());
+			params.setAnnounceWaypoints(settings.SPEAK_GPX_WPT.get());
+			params.setCalculateOsmAndRoute(settings.CALC_GPX_ROUTE.get());
+			List<Location> ps = params.getPoints();
+			mapActivity.getRoutingHelper().setGpxParams(params);
+			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
+			if (!ps.isEmpty()) {
+				Location loc = ps.get(ps.size() - 1);
+				TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();
+				tg.navigateToPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, -1);
+				if (tg.getPointToStart() == null) {
+					loc = ps.get(0);
+					tg.setStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, null);
+				}
+				tg.updateRoutingHelper();
 			}
-			tg.updateRoutingHelper();
+			
 		}
-		mapActivity.getRoutingHelper().setGpxParams(params);
-		settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
 	}
 	
 	public void enterRoutePlanningMode(final LatLon from, final String fromName) {
@@ -477,23 +482,22 @@ public class MapActivityActions implements DialogProvider {
 			bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					setGPXRouteParams(gpxFile);
-					enterRoutePlanningModeImpl(from, fromName);
+					enterRoutePlanningModeImpl(gpxFile, from, fromName);
 				}
 			});
-			bld.setPositiveButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+			bld.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					enterRoutePlanningModeImpl(from, fromName);
+					enterRoutePlanningModeImpl(null, from, fromName);
 				}
 			});
 			bld.show();
 		} else {
-			enterRoutePlanningModeImpl(from, fromName);
+			enterRoutePlanningModeImpl(null, from, fromName);
 		}
 	}
 	
-	private void enterRoutePlanningModeImpl(LatLon from, String fromName) {
+	private void enterRoutePlanningModeImpl(GPXFile gpxFile, LatLon from, String fromName) {
 		ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
 		if(mode == ApplicationMode.DEFAULT) {
 			mode = ApplicationMode.CAR;
@@ -505,11 +509,13 @@ public class MapActivityActions implements DialogProvider {
 		app.getRoutingHelper().setAppMode(mode);
 		// save application mode controls
 		settings.FOLLOW_THE_ROUTE.set(false);
-		settings.FOLLOW_THE_GPX_ROUTE.set(null);
-		app.getRoutingHelper().setGpxParams(null);
 		app.getRoutingHelper().setFollowingMode(false);
 		app.getRoutingHelper().setRoutePlanningMode(true);
+		// reset start point
 		targets.setStartPoint(from, false, fromName);
+		// then calculate gpx
+		setGPXRouteParams(gpxFile);
+		
 		targets.updateRoutingHelper();
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		mapActivity.getMapView().refreshMap(true);
