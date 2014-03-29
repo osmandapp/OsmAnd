@@ -302,8 +302,12 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		
 		@Override
 		protected void onPostExecute(Boolean result) {
-			if(result != null && result.booleanValue() && runOnSuccess != null) {
-				runOnSuccess.run();
+			if (result != null) {
+				if (result.booleanValue() && runOnSuccess != null) {
+					runOnSuccess.run();
+				} else if (!result.booleanValue()) {
+					Toast.makeText(ctx, R.string.input_output_error, Toast.LENGTH_LONG).show();
+				}
 			}
 			if(progress.getDialog().isShowing()) {
 				progress.getDialog().dismiss();
@@ -357,7 +361,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			try {
 				movingFiles(from, to, 0);
 			} catch (IOException e) {
-				Toast.makeText(ctx, R.string.input_output_error, Toast.LENGTH_LONG);
 				return false;
 			}
 			return true;
