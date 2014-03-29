@@ -273,7 +273,6 @@ public class GeoIntentActivity extends OsmandListActivity {
 		}
 		
 		public MapObject checkGeoPoint() {
-			// TODO Auto-generated method stub
 			double lat = Double.NaN;
 			double lon = Double.NaN;
 			for(String e : elements) {

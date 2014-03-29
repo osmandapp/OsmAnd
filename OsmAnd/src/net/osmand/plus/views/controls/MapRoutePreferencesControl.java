@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.Location;
-import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
@@ -16,7 +14,6 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
@@ -306,23 +303,7 @@ public class MapRoutePreferencesControl extends MapControls {
 			
 			@Override
 			public boolean processResult(GPXFile result) {
-				GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, mapActivity.getMyApplication().getSettings());
-				params.setAnnounceWaypoints(settings.SPEAK_GPX_WPT.get());
-				params.setCalculateOsmAndRoute(settings.CALC_GPX_ROUTE.get());
-				List<Location> ps = params.getPoints();
-				
-				if(!ps.isEmpty()) {
-					Location loc = ps.get(ps.size() -1);
-					TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();	
-					tg.navigateToPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, -1);
-					if(tg.getPointToStart() == null) {
-						loc = ps.get(0);
-						tg.setStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, null);
-					}
-					tg.updateRoutingHelper();
-				}
-				mapActivity.getRoutingHelper().setGpxParams(params);
-				settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
+				mapActivity.getMapActions().setGPXRouteParams(result);
 				mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 				updateSpinnerItems(gpxSpinner);
 				updateParameters();

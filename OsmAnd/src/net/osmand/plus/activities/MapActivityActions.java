@@ -41,6 +41,7 @@ import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -448,11 +449,56 @@ public class MapActivityActions implements DialogProvider {
 		builder.create().show();
 	}
 	
-	public void enterRoutePlanningMode(LatLon from, String fromName) {
+	public void setGPXRouteParams(GPXFile result) {
+		GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, mapActivity.getMyApplication().getSettings());
+		params.setAnnounceWaypoints(settings.SPEAK_GPX_WPT.get());
+		params.setCalculateOsmAndRoute(settings.CALC_GPX_ROUTE.get());
+		List<Location> ps = params.getPoints();
+		
+		if(!ps.isEmpty()) {
+			Location loc = ps.get(ps.size() -1);
+			TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();	
+			tg.navigateToPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, -1);
+			if(tg.getPointToStart() == null) {
+				loc = ps.get(0);
+				tg.setStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, null);
+			}
+			tg.updateRoutingHelper();
+		}
+		mapActivity.getRoutingHelper().setGpxParams(params);
+		settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
+	}
+	
+	public void enterRoutePlanningMode(final LatLon from, final String fromName) {
+		final GPXFile gpxFile = mapActivity.getMyApplication().getGpxFileToDisplay();
+		if(gpxFile != null) {
+			Builder bld = new AlertDialog.Builder(mapActivity);
+			bld.setMessage(R.string.use_displayed_track_for_navigation);
+			bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					setGPXRouteParams(gpxFile);
+					enterRoutePlanningModeImpl(from, fromName);
+				}
+			});
+			bld.setPositiveButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					enterRoutePlanningModeImpl(from, fromName);
+				}
+			});
+			bld.show();
+		} else {
+			enterRoutePlanningModeImpl(from, fromName);
+		}
+	}
+	
+	private void enterRoutePlanningModeImpl(LatLon from, String fromName) {
 		ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
 		if(mode == ApplicationMode.DEFAULT) {
 			mode = ApplicationMode.CAR;
 		}
+		
 		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		app.getSettings().APPLICATION_MODE.set(mode);
