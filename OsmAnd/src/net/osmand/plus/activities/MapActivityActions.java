@@ -513,10 +513,12 @@ public class MapActivityActions implements DialogProvider {
 		app.getRoutingHelper().setRoutePlanningMode(true);
 		// reset start point
 		targets.setStartPoint(from, false, fromName);
-		// then calculate gpx
+		// then set gpx
 		setGPXRouteParams(gpxFile);
+		if(from != null) {
+			targets.updateRoutingHelper();
+		}
 		
-		targets.updateRoutingHelper();
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		mapActivity.getMapView().refreshMap(true);
 		if(targets.hasTooLongDistanceToNavigate()) {

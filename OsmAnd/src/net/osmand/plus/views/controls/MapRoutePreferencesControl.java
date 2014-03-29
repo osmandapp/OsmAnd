@@ -274,6 +274,7 @@ public class MapRoutePreferencesControl extends MapControls {
 
 	private void setupSpinner(View settingsDlg) {
 		final Spinner gpxSpinner = (Spinner) settingsDlg.findViewById(R.id.GPXRouteSpinner);
+		gpxSpinner.setOnItemSelectedListener(null);
 		updateSpinnerItems(gpxSpinner);
 		gpxSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
