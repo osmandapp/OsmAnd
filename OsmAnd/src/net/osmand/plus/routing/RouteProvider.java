@@ -336,9 +336,11 @@ public class RouteProvider {
 					List<RouteDirectionInfo> dt = newRes.getDirections();
 					List<RouteDirectionInfo> gpxRouteDirections = rParams.gpxRoute.directions;
 					rParams.gpxRoute.points.addAll(0, loct);
-					gpxRouteDirections.addAll(0, dt);
-					for(int i = dt.size() ; i < gpxRouteDirections.size(); i++ ) {
-						gpxRouteDirections.get(i).routePointOffset += loct.size();
+					if (gpxRouteDirections != null) {
+						gpxRouteDirections.addAll(0, dt);
+						for (int i = dt.size(); i < gpxRouteDirections.size(); i++) {
+							gpxRouteDirections.get(i).routePointOffset += loct.size();
+						}
 					}
 				}
 			}

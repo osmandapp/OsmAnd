@@ -282,7 +282,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	@Override
 	public void newRouteIsCalculated(boolean newRoute) {
 		RoutingHelper rh = app.getRoutingHelper();
-		if(newRoute && rh.isRoutePlanningMode()) {
+		if(newRoute && rh.isRoutePlanningMode() && mapView != null) {
 			RotatedTileBox rt = mapView.getCurrentRotatedTileBox();
 			Location lt = rh.getLastProjection();
 			if(lt != null) {
