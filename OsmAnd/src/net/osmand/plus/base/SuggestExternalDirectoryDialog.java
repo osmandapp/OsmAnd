@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
 import android.app.Activity;
@@ -13,6 +14,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.os.Build;
 
 public class SuggestExternalDirectoryDialog {
 	
@@ -22,7 +24,23 @@ public class SuggestExternalDirectoryDialog {
 		final boolean showOther = otherListener != null;
 		final OsmandApplication app = (OsmandApplication) a.getApplication();
 		Builder bld = new AlertDialog.Builder(a);
-		HashSet<String> externalMounts = getExternalMounts();
+		HashSet<String> externalMounts = new HashSet<String>();
+		if(Build.VERSION.SDK_INT < OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
+			externalMounts = getExternalMounts();
+		}
+		else
+		{
+			try {
+				String[] path = OsmandSettings.getWritableSecondaryStorageDirectorys();
+				
+				for(int i = 0; i < path.length; i++)
+				{
+					externalMounts.add(path[i]);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		String apath = app.getSettings().getExternalStorageDirectory().getAbsolutePath();
 		externalMounts.add(app.getExternalServiceAPI().getExternalStorageDirectory());
 		externalMounts.add(apath);

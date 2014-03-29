@@ -28,7 +28,10 @@ import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
+
+import android.annotation.TargetApi;
 import android.os.Build;
+import android.text.TextUtils;
 
 public class OsmandSettings {
 	
@@ -85,7 +88,7 @@ public class OsmandSettings {
 	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings"; //$NON-NLS-1$
 	
 	/// Settings variables
-	private final OsmandApplication ctx;
+	private static OsmandApplication ctx;
 	private SettingsAPI settingsAPI;
 	private Object globalPreferences;
 	private Object defaultProfilePreferences;
@@ -990,32 +993,158 @@ public class OsmandSettings {
 			map.put(l.getName(), l.getName());
 		}
 		return map;
-		
     }
 
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 	
 	public File getExternalStorageDirectory() {
-		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
-		if(Build.VERSION.SDK_INT >= VERSION_DEFAULTLOCATION_CHANGED && !new File(defaultLocation, IndexConstants.APP_DIR).exists()) {
-			defaultLocation += "/Android/data/" + ctx.getPackageName();
-		}
 		return new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
-				defaultLocation));
-	}
-	
-	public static final int VERSION_DEFAULTLOCATION_CHANGED = Integer.MAX_VALUE;
-
-	public String getDefaultExternalStorageLocation() {
-		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
-		if(Build.VERSION.SDK_INT >= VERSION_DEFAULTLOCATION_CHANGED) {
-			defaultLocation += "/Android/data/" + ctx.getPackageName();
-		}
-		return defaultLocation;
+				ctx.getExternalServiceAPI().getExternalStorageDirectory()));
 	}
 	
 	public boolean setExternalStorageDirectory(String externalStorageDir) {
 		return settingsAPI.edit(globalPreferences).putString(EXTERNAL_STORAGE_DIR, externalStorageDir).commit();
+	}
+	
+	public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
+	
+	public static boolean isWritable(File dirToTest) {
+		boolean isWriteable = false;
+
+		try {
+			File writeTestFile = File.createTempFile("osmand_", ".tmp", dirToTest);
+			isWriteable = true;
+			writeTestFile.delete();
+		} catch (IOException e) {
+			isWriteable = false;
+//			e.printStackTrace();
+		}
+
+		return isWriteable;
+	}
+
+	private static String[] getSecondaryStorages() {
+		String rawSecondaryStorage = null;
+
+		List<String> storageDirectory = new ArrayList<String>();
+
+		try {
+			rawSecondaryStorage = System.getenv("SECONDARY_STORAGE");
+
+			if (!TextUtils.isEmpty(rawSecondaryStorage)) {
+				for (String secondaryPath : rawSecondaryStorage.split(":")) {
+					storageDirectory.add(secondaryPath);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new String[0];
+		}
+
+		String[] returnArray = new String[storageDirectory.size()];
+		storageDirectory.toArray(returnArray);
+
+		return returnArray;
+	}
+
+	private static String[] getWritableSecondaryStorages() {
+		List<String> writableSecondaryStorage = new ArrayList<String>();
+
+		String[] secondaryStorage = getSecondaryStorages();
+
+		for (int i = 0; i < secondaryStorage.length; i++) {
+
+			File testFile = new File(secondaryStorage[i]);
+			if (isWritable(testFile)) {
+				writableSecondaryStorage.add(secondaryStorage[i]);
+			}
+		}
+
+		String[] returnArray = new String[writableSecondaryStorage.size()];
+		writableSecondaryStorage.toArray(returnArray);
+
+		return returnArray;
+	}
+	
+	@TargetApi(19)
+	public String getMatchingExternalFilesDir(String dir) {
+		try{
+		File[] externalFilesDirs = ctx.getExternalFilesDirs(null);
+		String[] secondaryStorages = getSecondaryStorages();
+
+		for (int i = 0; i < externalFilesDirs.length; i++) {
+			for (int j = 0; j < secondaryStorages.length; j++) {
+				if (dir.startsWith(secondaryStorages[j])) {
+					for (int k = 0; k < externalFilesDirs.length; k++) {
+						if (externalFilesDirs[k] != null && secondaryStorages[j] != null) {
+							if (externalFilesDirs[k].getAbsolutePath().startsWith(secondaryStorages[j])) {
+								return externalFilesDirs[k].getAbsolutePath();
+							}
+						}
+					}
+				}
+			}
+		}
+		return null;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@TargetApi(19)
+	public static String[] getWritableSecondaryStorageDirectorys() {
+		// primary external storage directory
+		String primaryExternalStorageDirectory = ctx.getExternalServiceAPI().getExternalStorageDirectory();
+
+		// also creates directories, if they don't exist until now
+		File[] externalFilesDirs = ctx.getExternalFilesDirs(null);
+
+		String[] writableSecondaryStorages = getWritableSecondaryStorages();
+
+		List<String> writableSecondaryStorageDirectory = new ArrayList<String>();
+
+		try {
+			boolean primaryExternalStorageFound = false;
+			for (int i = 0; i < externalFilesDirs.length; i++) {
+				if (externalFilesDirs[i] != null) {
+					if (externalFilesDirs[i].getAbsolutePath().startsWith(
+							primaryExternalStorageDirectory)
+							&& !primaryExternalStorageFound) {
+						// exclude primary external storage
+						// no special location is required
+						primaryExternalStorageFound = true;
+					} else {
+						// secondary storage
+						// check if special location is required
+						
+						boolean specialPathRequired = true;
+						
+						for (int j = 0; j < writableSecondaryStorages.length; j++) {
+							if (externalFilesDirs[i].getAbsolutePath().startsWith(writableSecondaryStorages[j])) {
+								// no special location required
+								writableSecondaryStorageDirectory.add(writableSecondaryStorages[j]);
+								specialPathRequired = false;
+								break;
+							}
+						}
+							if(specialPathRequired == true){
+								// special location required
+								writableSecondaryStorageDirectory.add(externalFilesDirs[i].getAbsolutePath());
+							}
+						}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new String[0];
+		}
+
+		String[] returnArray = new String[writableSecondaryStorageDirectory.size()];
+		writableSecondaryStorageDirectory.toArray(returnArray);
+
+		return returnArray;
 	}
 	
 	// This value is a key for saving last known location shown on the map
