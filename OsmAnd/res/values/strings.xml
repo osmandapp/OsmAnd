@@ -45,7 +45,8 @@
     <string name="speech_rate_descr">Specify speech rate for TTS</string>
     <string name="speech_rate">Speech Rate</string>
     <string name="tip_recent_changes_1_7_1_t">Changes in 1.7:
-	\n\t* Completely updated routing (fast and precise)
+    \n\t* IMPORTANT maps should be newer than February 2014.
+	\n\t* Completely updated routing (fast and precise) - 
     \n\t* New screen with Route Planning (more intuitive and more powerful)
     \n\t** NOTE GPX route is available under Route Settings buttton
     \n\t* Auto hide buttons in navigation mode
