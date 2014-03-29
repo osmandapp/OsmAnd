@@ -555,7 +555,11 @@ public class OsmandApplication extends Application implements ClientContext {
 			player = null;
 			if (savingTrackHelper.hasDataToSave()) {
 				startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
-				warnings.addAll(savingTrackHelper.saveDataToGpx());
+				try {
+					warnings.addAll(savingTrackHelper.saveDataToGpx());
+				} catch (RuntimeException e) {
+					warnings.add(e.getMessage());
+				}
 			}
 
 			// restore backuped favorites to normal file
@@ -568,6 +572,8 @@ public class OsmandApplication extends Application implements ClientContext {
 				}
 				bak.renameTo(save);
 			}
+		} catch (RuntimeException e) {
+			warnings.add(e.getMessage());
 		} finally {
 			synchronized (OsmandApplication.this) {
 				final ProgressDialog toDismiss;
