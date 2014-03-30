@@ -572,7 +572,7 @@ public class OsmandSettings {
 	
 	public final OsmandPreference<String> AVAILABLE_APP_MODES =  new StringPreference("available_application_modes", "car,bicycle,pedestrian,").makeGlobal().cache();
 	
-	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>("default_application_mode", ApplicationMode.DEFAULT) {
+	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>("default_application_mode_string", ApplicationMode.DEFAULT) {
 		{
 			makeGlobal();
 		}
