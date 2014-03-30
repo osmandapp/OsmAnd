@@ -204,7 +204,8 @@ public class RoutingHelper {
 	}
 	
 	public void updateLocation(Location currentLocation) {
-		if(isFollowingMode() || (settings.getPointToStart() == null && isRoutePlanningMode)) {
+		if(isFollowingMode() || (settings.getPointToStart() == null && isRoutePlanningMode) ||
+				app.getLocationProvider().getLocationSimulation().isRouteAnimating()) {
 			setCurrentLocation(currentLocation, false);
 		}
 	}
