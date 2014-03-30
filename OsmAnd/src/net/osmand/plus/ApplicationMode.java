@@ -176,7 +176,7 @@ public class ApplicationMode {
 		return cachedFilteredValues;
 	}
 	
-	public static List<ApplicationMode> allPossibleValues(OsmandSettings settings) {
+	public static List<ApplicationMode> allPossibleValues() {
 		return new ArrayList<ApplicationMode>(values);
 	}
 	

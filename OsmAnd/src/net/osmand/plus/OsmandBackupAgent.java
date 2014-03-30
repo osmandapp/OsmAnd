@@ -13,8 +13,8 @@ public class OsmandBackupAgent extends BackupAgentHelper {
 
 	@Override
 	public void onCreate() {
-		OsmandApplication app = (OsmandApplication) getApplicationContext();
-		List<ApplicationMode> all = ApplicationMode.allPossibleValues(app.getSettings());
+		// can't cast to OsmAnd Application
+		List<ApplicationMode> all = ApplicationMode.allPossibleValues();
 		String[] prefs = new String[all.size() + 1];
 		prefs[0] = OsmandSettings.getSharedPreferencesName(null);
 		int i = 1;

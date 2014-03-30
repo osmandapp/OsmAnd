@@ -106,7 +106,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 	
 	protected void availableProfileDialog() {
 		Builder b = new AlertDialog.Builder(this);
-		final List<ApplicationMode> modes = ApplicationMode.allPossibleValues(settings);
+		final List<ApplicationMode> modes = ApplicationMode.allPossibleValues();
 		modes.remove(ApplicationMode.DEFAULT);
 		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(ApplicationMode.values(settings));
 		selected.remove(ApplicationMode.DEFAULT);
