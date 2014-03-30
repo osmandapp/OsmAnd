@@ -750,6 +750,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			}
 		} else if(routingHelper.isRoutePlanningMode() && settings.getPointToStart() == null) {
 			routingHelper.setCurrentLocation(location, false);
+		} else if(getLocationSimulation().isRouteAnimating()) {
+			routingHelper.setCurrentLocation(location, false);
 		}
 		this.location = updatedLocation;
 		
