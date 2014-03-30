@@ -306,6 +306,7 @@ public class MapRoutePreferencesControl extends MapControls {
 			@Override
 			public boolean processResult(GPXFile result) {
 				mapActivity.getMapActions().setGPXRouteParams(result);
+				mapActivity.getMyApplication().getTargetPointsHelper().updateRoutingHelper();
 				updateSpinnerItems(gpxSpinner);
 				updateParameters();
 				mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();

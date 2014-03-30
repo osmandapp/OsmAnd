@@ -143,9 +143,8 @@ public class TargetPointsHelper {
 
 	public void updateRoutingHelper() {
 		LatLon start = settings.getPointToStart();
-		if((routingHelper.isFollowingMode() && routingHelper.getLastProjection() != null) || start == null) {
-			Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
-			//Location lastKnownLocation = routingHelper.getLastProjection();
+		Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
+		if((routingHelper.isFollowingMode() && lastKnownLocation != null) || start == null) {
 			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
 				settings.getIntermediatePoints(), lastKnownLocation, routingHelper.getCurrentGPXRoute());
 		} else {

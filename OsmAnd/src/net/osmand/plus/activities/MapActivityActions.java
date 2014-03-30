@@ -468,9 +468,7 @@ public class MapActivityActions implements DialogProvider {
 					loc = ps.get(0);
 					tg.setStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, null);
 				}
-				tg.updateRoutingHelper();
 			}
-			
 		}
 	}
 	
@@ -515,9 +513,8 @@ public class MapActivityActions implements DialogProvider {
 		targets.setStartPoint(from, false, fromName);
 		// then set gpx
 		setGPXRouteParams(gpxFile);
-		if(from != null) {
-			targets.updateRoutingHelper();
-		}
+		// then update start and destination point  
+		targets.updateRoutingHelper();
 		
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		mapActivity.getMapView().refreshMap(true);

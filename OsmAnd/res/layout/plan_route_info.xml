@@ -4,15 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    
-   <!--  <LinearLayout
-        android:id="@+id/TopBar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal" 
-        android:orientation="horizontal" />  -->
-    
-    
 
     <ScrollView
         android:layout_width="fill_parent"
