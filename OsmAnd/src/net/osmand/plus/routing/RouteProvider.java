@@ -117,6 +117,7 @@ public class RouteProvider {
 		private boolean reverse;
 		private boolean leftSide;
 		private boolean passWholeRoute;
+		public boolean calculateOsmAndRouteParts;
 		
 		public GPXRouteParamsBuilder(GPXFile file, OsmandSettings settings){
 			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
@@ -129,6 +130,14 @@ public class RouteProvider {
 		
 		public boolean isReverse() {
 			return reverse;
+		}
+		
+		public boolean isCalculateOsmAndRouteParts() {
+			return calculateOsmAndRouteParts;
+		}
+		
+		public void setCalculateOsmAndRouteParts(boolean calculateOsmAndRouteParts) {
+			this.calculateOsmAndRouteParts = calculateOsmAndRouteParts;
 		}
 		
 		public boolean isCalculateOsmAndRoute() {
@@ -184,6 +193,7 @@ public class RouteProvider {
 		DataTileManager<WptPt> wpt;
 		boolean calculateOsmAndRoute;
 		boolean passWholeRoute;
+		boolean calculateOsmAndRouteParts;
 		
 		public List<Location> getPoints() {
 			return points;
@@ -209,6 +219,7 @@ public class RouteProvider {
 			GPXFile file = builder.file;
 			boolean reverse = builder.reverse; 
 			passWholeRoute = builder.passWholeRoute;
+			calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
 			boolean announceWaypoints = builder.announceWaypoints;
 			calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
 			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){
@@ -316,19 +327,8 @@ public class RouteProvider {
 		if(rParams.start != null && rParams.gpxRoute.passWholeRoute) {
 			Location startOfGpx = rParams.gpxRoute.getStartPointForRoute();
 			if (startOfGpx != null && rParams.start.distanceTo(startOfGpx) > 60) {
-				RouteCalculationParams newParams = new RouteCalculationParams();
-				newParams.start = rParams.start;
-				newParams.end = new LatLon(startOfGpx.getLatitude(), startOfGpx.getLongitude());
-				newParams.ctx = rParams.ctx;
-				newParams.calculationProgress = rParams.calculationProgress;
-				newParams.mode = rParams.mode;
-				newParams.type = RouteService.OSMAND;
-				newParams.leftSide = rParams.leftSide;
-				RouteCalculationResult newRes = null;
-				try {
-					newRes = findVectorMapsRoute(newParams, false);
-				} catch (IOException e) {
-				}
+				LatLon end = new LatLon(startOfGpx.getLatitude(), startOfGpx.getLongitude());
+				RouteCalculationResult newRes = findOfflineRouteSegment(rParams, rParams.start, end);
 				if(newRes == null || !newRes.isCalculated()) {
 					rParams.gpxRoute.points.add(rParams.start);
 				} else {
@@ -372,6 +372,27 @@ public class RouteProvider {
 			res = new RouteCalculationResult(sublist, subdirections, rParams, params.wpt);
 		}
 		return res;
+	}
+
+
+
+
+	private RouteCalculationResult findOfflineRouteSegment(RouteCalculationParams rParams, Location start, 
+			LatLon end) {
+		RouteCalculationParams newParams = new RouteCalculationParams();
+		newParams.start = start;
+		newParams.end = end;
+		newParams.ctx = rParams.ctx;
+		newParams.calculationProgress = rParams.calculationProgress;
+		newParams.mode = rParams.mode;
+		newParams.type = RouteService.OSMAND;
+		newParams.leftSide = rParams.leftSide;
+		RouteCalculationResult newRes = null;
+		try {
+			newRes = findVectorMapsRoute(newParams, false);
+		} catch (IOException e) {
+		}
+		return newRes;
 	}
 
 

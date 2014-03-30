@@ -131,6 +131,9 @@ public class FailSafeFuntions {
 								if (settings.SPEAK_GPX_WPT.get()) {
 									gpxRoute.setAnnounceWaypoints(true);
 								}
+								if (settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
+									gpxRoute.setCalculateOsmAndRouteParts(true);
+								}
 								if(settings.CALC_GPX_ROUTE.get()) {
 									gpxRoute.setCalculateOsmAndRoute(true);
 								}

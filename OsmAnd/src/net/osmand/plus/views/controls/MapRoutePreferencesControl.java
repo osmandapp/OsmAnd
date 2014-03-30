@@ -160,6 +160,9 @@ public class MapRoutePreferencesControl extends MapControls {
 			boolean selected = gpxParam.isSelected(settings);
 			if (gpxParam.id == R.string.gpx_option_reverse_route) {
 				rp.setReverse(selected);
+			} else if (gpxParam.id == R.string.gpx_option_calculate_first_last_segment) {
+				rp.setCalculateOsmAndRouteParts(selected);
+				settings.GPX_ROUTE_CALC_OSMAND_PARTS.set(selected);
 			} else if (gpxParam.id == R.string.gpx_option_from_start_point) {
 				rp.setPassWholeRoute(selected);
 			} else if (gpxParam.id == R.string.announce_gpx_waypoints) {
@@ -183,6 +186,8 @@ public class MapRoutePreferencesControl extends MapControls {
 					getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
 			list.add(new GPXLocalRoutingParameter(R.string.gpx_option_from_start_point, 
 					getString(R.string.gpx_option_from_start_point), rparams.isPassWholeRoute()));
+			list.add(new GPXLocalRoutingParameter(R.string.gpx_option_calculate_first_last_segment, 
+					getString(R.string.gpx_option_calculate_first_last_segment), rparams.isCalculateOsmAndRouteParts()));
 			list.add(new GPXLocalRoutingParameter(R.string.announce_gpx_waypoints, 
 					getString(R.string.announce_gpx_waypoints), rparams.isAnnounceWaypoints()));
 			// Temporary disabled
