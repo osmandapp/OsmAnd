@@ -126,6 +126,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 				prologSystem.addTheory(new Theory("appMode('"+m.getStringKey().toLowerCase()+"')."));
 				prologSystem.addTheory(new Theory("measure('"+mc.toTTSString()+"')."));
 				prologSystem.addTheory(new Theory(config));
+				config.close();
 			} catch (InvalidTheoryException e) {
 				log.error("Loading voice config exception " + voiceProvider, e); //$NON-NLS-1$
 				wrong = true;
