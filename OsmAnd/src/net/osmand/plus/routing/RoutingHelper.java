@@ -231,7 +231,6 @@ public class RoutingHelper {
 				if (finished) {
 					return null;
 				}
-				announceGpxWaypoints(currentLocation);
 				List<Location> routeNodes = route.getImmutableLocations();
 				int currentRoute = route.currentRoute;
 
@@ -257,11 +256,15 @@ public class RoutingHelper {
 				// 4. Identify if UTurn is needed
 				boolean uTurnIsNeeded = identifyUTurnIsNeeded(currentLocation, posTolerance);
 				// 5. Update Voice router
-				boolean inRecalc = calculateRoute || isRouteBeingCalculated();
-				if (!inRecalc && !uTurnIsNeeded && !wrongMovementDirection) {
-					voiceRouter.updateStatus(currentLocation, false);
-				} else if (uTurnIsNeeded) {
-					voiceRouter.makeUTStatus();
+				if (isFollowingMode) {
+					// don't update in route planing mode
+					announceGpxWaypoints(currentLocation);
+					boolean inRecalc = calculateRoute || isRouteBeingCalculated();
+					if (!inRecalc && !uTurnIsNeeded && !wrongMovementDirection) {
+						voiceRouter.updateStatus(currentLocation, false);
+					} else if (uTurnIsNeeded) {
+						voiceRouter.makeUTStatus();
+					}
 				}
 				
 				// calculate projection of current location
@@ -534,7 +537,9 @@ public class RoutingHelper {
 			// trigger voice prompt only if new route is in forward direction
 			// If route is in wrong direction after one more setLocation it will be recalculated
 			if (!wrongMovementDirection || newRoute) {
-				voiceRouter.newRouteIsCalculated(newRoute);
+				if(isFollowingMode) {
+					voiceRouter.newRouteIsCalculated(newRoute);
+				}
 			}
 		} 
 
@@ -889,5 +894,11 @@ public class RoutingHelper {
 		return provider.createOsmandRouterGPX(route, app);
 	}
 
+
+	public void notifyIfRouteIsCalculated() {
+		if(route.isCalculated()) {
+			voiceRouter.newRouteIsCalculated(true)	;
+		}
+	}
 
 }

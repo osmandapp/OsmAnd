@@ -416,8 +416,8 @@ public class OsmandApplication extends Application implements ClientContext {
 	}
 
 	private void initVoiceDataInDifferentThread(final Activity uiContext, final String voiceProvider, final Runnable run, boolean showDialog) {
-		final ProgressDialog dlg = showDialog ? null : ProgressDialog.show(uiContext, getString(R.string.loading_data),
-				getString(R.string.voice_data_initializing));
+		final ProgressDialog dlg = showDialog ? ProgressDialog.show(uiContext, getString(R.string.loading_data),
+				getString(R.string.voice_data_initializing)) : null;
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

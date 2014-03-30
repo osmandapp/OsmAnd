@@ -434,5 +434,6 @@ public class NavigateAction {
 		
 		routingHelper.setFinalAndCurrentLocation(finalLocation, intermediatePoints, currentLocation, gpxRoute);
 		app.initVoiceCommandPlayer(mapActivity);
+		
 	}
 }

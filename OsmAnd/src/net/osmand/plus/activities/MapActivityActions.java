@@ -500,8 +500,8 @@ public class MapActivityActions implements DialogProvider {
 		if(mode == ApplicationMode.DEFAULT) {
 			mode = ApplicationMode.CAR;
 		}
-		
 		OsmandApplication app = mapActivity.getMyApplication();
+		app.initVoiceCommandPlayer(mapActivity);
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		app.getSettings().APPLICATION_MODE.set(mode);
 		app.getRoutingHelper().setAppMode(mode);

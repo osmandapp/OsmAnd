@@ -46,6 +46,7 @@ public class MapNavigateControl extends MapControls {
 						mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 						routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 						app.initVoiceCommandPlayer(mapActivity);
+						app.getRoutingHelper().notifyIfRouteIsCalculated();
 					}
 				}
 			}
