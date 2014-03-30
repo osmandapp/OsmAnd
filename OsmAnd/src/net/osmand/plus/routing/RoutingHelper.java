@@ -412,7 +412,9 @@ public class RoutingHelper {
 			int toDel = targets.getIntermediatePoints().size() - route.getIntermediatePointsToPass();
 			int currentIndex = toDel - 1; 
 			String name = currentIndex  < 0 || currentIndex  >= ns.size() || ns.get(currentIndex ) == null ? "" : ns.get(currentIndex );
-			voiceRouter.arrivedIntermediatePoint(name);
+			if(isFollowingMode) {
+				voiceRouter.arrivedIntermediatePoint(name);
+			}
 			while(toDel > 0) {
 				targets.removeWayPoint(false, 0);
 				toDel--;
@@ -429,7 +431,9 @@ public class RoutingHelper {
 			showMessage(app.getString(R.string.arrived_at_destination));
 			TargetPointsHelper targets = app.getInternalAPI().getTargetPointsHelper();
 			String description = targets.getPointNavigateDescription();
-			voiceRouter.arrivedDestinationPoint(description);
+			if(isFollowingMode) {
+				voiceRouter.arrivedDestinationPoint(description);
+			}
 			clearCurrentRoute(null, null);
 			setRoutePlanningMode(false);
 			app.runInUIThread(new Runnable() {
