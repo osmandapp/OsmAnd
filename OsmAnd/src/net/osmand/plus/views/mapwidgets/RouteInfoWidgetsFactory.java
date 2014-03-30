@@ -49,7 +49,7 @@ public class RouteInfoWidgetsFactory {
 		this.scaleCoefficient = scaleCoefficient;
 	}
 	
-	public NextTurnInfoWidget createNextInfoControl(final RoutingHelper routingHelper, Context ctx,
+	public NextTurnInfoWidget createNextInfoControl(final RoutingHelper routingHelper, final OsmandApplication ctx,
 			final OsmandSettings settings, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
 		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
@@ -58,7 +58,8 @@ public class RouteInfoWidgetsFactory {
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean visible = false;
-				if (routingHelper != null && routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
+				boolean followingMode = routingHelper.isFollowingMode() || ctx.getLocationProvider().getLocationSimulation().isRouteAnimating();
+				if (routingHelper != null && routingHelper.isRouteCalculated() && followingMode) {
 					makeUturnWhenPossible = routingHelper.makeUturnWhenPossible() ;
 					if (makeUturnWhenPossible) {
 						visible = true;
@@ -137,15 +138,15 @@ public class RouteInfoWidgetsFactory {
 		return nextTurnInfo;
 	}
 	
-	public NextTurnInfoWidget createNextNextInfoControl(final RoutingHelper routingHelper, Context ctx,
+	public NextTurnInfoWidget createNextNextInfoControl(final RoutingHelper routingHelper, final OsmandApplication ctx,
 			final OsmandSettings settings, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
 		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean visible = false;
-				if (routingHelper != null && routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()
-						) {
+				boolean followingMode = routingHelper.isFollowingMode() || ctx.getLocationProvider().getLocationSimulation().isRouteAnimating();
+				if (routingHelper != null && routingHelper.isRouteCalculated() && followingMode) {
 					boolean uturnWhenPossible = routingHelper.makeUturnWhenPossible() ;
 					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
 					if (!uturnWhenPossible) {
