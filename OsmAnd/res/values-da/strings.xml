@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -1694,4 +1695,16 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_descr_select_on_map">Vælg på kort…</string>
     <string name="route_descr_favorite">Favorit …</string>
     <string name="keep_and_add_destination_point">Tilføj som destinationspunkt</string>
+    <string name="tip_recent_changes_1_7_1_t">Ændringer i 1.7:
+	\n\t* VIGTIGT kort skal være nyere end februar 2014
+	\n\t* Helt opdateret ruteplanlægning (hurtig og præcis)-
+	\n\t* Ny skærm med ruteplanlægning (mere intuitiv og mere magtfuld)
+	\n\t** OBS GPX rute er tilgængelig under Ruteindstillinger buttton
+	\n\t* Auto skjuleknapperne under navigationen
+	\n\t* Beregn offline rute til det første punkt i GPX rute (\'passere hele track\' option)
+	\n\t* Aktiv simulering i tunneller
+	\n\t* Masser af små UX forbedringer &amp; brugbarhedsrettelse 
+	\n\t* Talehastighed indstilling
+    </string>
+    <string name="use_displayed_track_for_navigation">Brug viste spor til navigation?</string>
     </resources>
