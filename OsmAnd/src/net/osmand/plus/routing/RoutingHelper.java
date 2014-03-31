@@ -116,14 +116,11 @@ public class RoutingHelper {
 
 	
 	
-	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation, 
-			GPXRouteParamsBuilder gpxRoute){
+	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation){
+		RouteCalculationResult previousRoute = route;
 		clearCurrentRoute(finalLocation, intermediatePoints);
-		
-		setGpxParams(gpxRoute);
 		// to update route
-		setCurrentLocation(currentLocation, false);
-		
+		setCurrentLocation(currentLocation, false, previousRoute);
 	}
 	
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation, List<LatLon> newIntermediatePoints) {
@@ -210,8 +207,11 @@ public class RoutingHelper {
 		}
 	}
 	
+	public Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation) {
+		return setCurrentLocation(currentLocation, returnUpdatedLocation, route);
+	}
 	
-	public Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation ) {
+	private Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation, RouteCalculationResult previousRoute) {
 		Location locationProjection = currentLocation;
 		if (finalLocation == null || currentLocation == null) {
 			makeUturnWhenPossible = false;
@@ -286,8 +286,8 @@ public class RoutingHelper {
 		}
 
 		if (calculateRoute) {
-			recalculateRouteInBackground(false, currentLocation, finalLocation, intermediatePoints, currentGPXRoute, route.isCalculated() ? route
-					: null);
+			recalculateRouteInBackground(false, currentLocation, finalLocation, intermediatePoints, currentGPXRoute, 
+					previousRoute.isCalculated() ? previousRoute : null);
 		}
 		double projectDist = mode.hasFastSpeed() ? posTolerance : posTolerance / 2;
 		if(returnUpdatedLocation && locationProjection != null && currentLocation.distanceTo(locationProjection) < projectDist) {

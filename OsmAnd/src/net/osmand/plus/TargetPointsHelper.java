@@ -146,11 +146,11 @@ public class TargetPointsHelper {
 		Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
 		if((routingHelper.isFollowingMode() && lastKnownLocation != null) || start == null) {
 			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-				settings.getIntermediatePoints(), lastKnownLocation, routingHelper.getCurrentGPXRoute());
+				settings.getIntermediatePoints(), lastKnownLocation);
 		} else {
 			Location loc = wrap(start);
 			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-					settings.getIntermediatePoints(), loc, routingHelper.getCurrentGPXRoute());
+					settings.getIntermediatePoints(), loc);
 		}
 	}
 	

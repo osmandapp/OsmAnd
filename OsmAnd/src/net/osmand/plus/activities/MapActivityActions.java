@@ -834,8 +834,7 @@ public class MapActivityActions implements DialogProvider {
 		if(getMyApplication().getLocationProvider().getLocationSimulation().isRouteAnimating()) {
 			getMyApplication().getLocationProvider().getLocationSimulation().startStopRouteAnimation(mapActivity);
 		}
-		routingHelper.setFinalAndCurrentLocation(null, new ArrayList<LatLon>(), getLastKnownLocation(),
-				routingHelper.getCurrentGPXRoute());
+		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
 		routingHelper.setRoutePlanningMode(false);
 		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 		mapActivity.updateApplicationModeSettings();
