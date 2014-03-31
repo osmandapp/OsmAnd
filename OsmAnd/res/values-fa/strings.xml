@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات اسمند ناموفق بود</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات اسمند ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -1661,4 +1662,17 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="route_descr_favorite">علاقه مندی ها …</string>
     <string name="route_preferences">تنظیمات مسیر</string>
     <string name="route_info">اطلاعات مسیر</string>
+    <string name="use_displayed_track_for_navigation">آیا شما می خواهید از مسیر های نمایش داده شده برای ناوبری استفاده کنید ؟</string>
+    <string name="keep_and_add_destination_point">افزودن به مقصد</string>
+    <string name="tip_recent_changes_1_7_1_t">تغییرات در 1.7:↵
+    \n\t*  نقشه های مهم باید جدیدتر از فوریه 2014 باشد.↵
+→\n\t* به طور کامل به روز رسانی مسیر یابی (سریع و دقیق) - ↵
+    \n\t* صفحه نمایش جدید با برنامه ریزی مسیر (بصری بیشتر و قوی تر)↵
+    \n\t** NOTE GPX route is available under Route Settings buttton↵
+    \n\t* Auto hide buttons in navigation mode↵
+    \n\t* Calculate offline route to the first point of GPX route (\'pass the whole track\' option)↵
+→\n\t* Active simulation in tunnels↵
+→\n\t* Lots of small UX improvements &amp; usability fixes↵
+→\n\t* Speech rate accessibility setting↵
+    </string>
     </resources>
