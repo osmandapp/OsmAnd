@@ -1,14 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
-    <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
-	<string name="background_service_is_enabled_question">Serviciul încă rulează în background. Doriți să-l opriți?</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="background_service_is_enabled_question">Serviciul încă rulează în background. Doriți să-l opriți?</string>
     <string name="tip_recent_changes_1_0_0_t">"Modificări în versiunea 1.0.0 :
 \n\t* Rutare îmbunătățită, mai rapidă și mai exactă (până la 250 km)
 \n\t* Posibilitate afișare hartă exclusiv pentru drumuri
@@ -204,7 +195,6 @@
 	<string name="rendering_attr_noPolygons_name">Fără poligoane</string>
 	<string name="rendering_attr_appMode_name">Mod de randare</string>
 	<string name="rendering_attr_appMode_description">Optimizează harta pentru</string>
-	<!-- string name="rendering_attr_contourLines_description">Selectați nivelul de zoom minim pentru a fi arătat pe hartă dacă e disponibil. Ar putea fi nevoie de un fișier SRTM separat.</string -->
 	<string name="rendering_attr_contourLines_description">Afișează începând de la nivelul de zoom (necesită fișier SRTM):</string>
 	<string name="rendering_attr_contourLines_name">Afișează liniile de contur</string>
 	<string name="rendering_attr_hmRendered_description">Crește nivelul de detalii ale hărții</string>
@@ -1175,4 +1165,14 @@
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
     
     <string name="intermediate_points_change_order">Schimbare ordine</string>
-    </resources>
+    <string name="select_gpx">Selectează GPX …</string>
+    <string name="route_descr_select_destination">Selectează destinație</string>
+    <string name="route_preferences">Preferințe rută</string>
+    <string name="route_info">Informații rută</string>
+    <string name="routing_attr_avoid_toll_name">Evită drumurile cu taxă</string>
+	<string name="routing_attr_avoid_toll_description">Evită drumurile cu taxă</string>
+	<string name="routing_attr_avoid_unpaved_name">Evită drumurile neasfaltate</string>
+	<string name="routing_attr_avoid_unpaved_description">Evită drumurile neasfaltate</string>
+	<string name="routing_attr_avoid_ferries_name">Evită feriboturile</string>
+	<string name="routing_attr_avoid_ferries_description">Evită feriboturile</string>
+	</resources>
