@@ -654,16 +654,16 @@ public class RouteCalculationResult {
 	
 	//////////////////// MUST BE ALL SYNCHRONIZED ??? //////////////////////
 	
-	public List<Location> getImmutableLocations() {
+	public List<Location> getImmutableAllLocations() {
 		return locations;
 	}
 	
-	public List<RouteDirectionInfo> getDirections() {
+	public List<RouteDirectionInfo> getImmutableAllDirections() {
 		return directions;
 	}
 	
 	
-	public List<Location> getNextLocations() {
+	public List<Location> getRouteLocations() {
 		if(currentRoute < locations.size()) {
 			return locations.subList(currentRoute, locations.size());
 		}
@@ -843,6 +843,8 @@ public class RouteCalculationResult {
 		next.directionInfo = null;
 		return null;
 	}
+	
+	
 	
 	public List<RouteDirectionInfo> getRouteDirections() {
 		if(currentDirectionInfo < directions.size() - 1){

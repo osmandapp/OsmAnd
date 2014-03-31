@@ -199,7 +199,7 @@ public class RouteLayer extends OsmandMapLayer {
 				previousVisible = true;
 			}
 		}
-		List<Location> routeNodes = helper.getRoute().getNextLocations();
+		List<Location> routeNodes = helper.getRoute().getRouteLocations();
 		for (int i = 0; i < routeNodes.size(); i++) {
 			Location ls = routeNodes.get(i);
 			if (leftLongitude <= ls.getLongitude() && ls.getLongitude() <= rightLongitude && bottomLatitude <= ls.getLatitude()

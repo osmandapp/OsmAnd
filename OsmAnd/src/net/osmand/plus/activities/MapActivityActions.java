@@ -455,6 +455,7 @@ public class MapActivityActions implements DialogProvider {
 		} else {
 			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, mapActivity.getMyApplication()
 					.getSettings());
+			params.setCalculateOsmAndRouteParts(settings.ROUTE_CALC_OSMAND_PARTS.get());
 			params.setAnnounceWaypoints(settings.SPEAK_GPX_WPT.get());
 			params.setCalculateOsmAndRoute(settings.CALC_GPX_ROUTE.get());
 			List<Location> ps = params.getPoints();

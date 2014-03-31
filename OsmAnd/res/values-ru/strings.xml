@@ -313,7 +313,7 @@
   <string name="tts_missing_language_data">Для данного языка отсутствуют данные TTS. Хотите загрузить их из Маркета?</string>
   <string name="gpx_option_reverse_route">Выбрать обратное направление пути</string>
   <string name="gpx_option_destination_point">Использовать текущую точку назначения</string>
-  <string name="gpx_option_from_start_point">Пройти весь путь сначала</string>
+  <string name="gpx_option_from_start_point">Пройти весь путь</string>
   <string name="switch_to_vector_map_to_see">Для этой позиции доступны локальные векторные карты.\n\t\n\tДля их использования выберите меню \'Слои\' → \'Источник карты…\' → \'Векторные карты\'.</string>
   <string name="binary_map_download_success">Загрузка завершена.
 		\n\t\n\tВы можете переключиться на использование локальных векторных карт через меню Слои → Источник карты… → Векторные карты.
