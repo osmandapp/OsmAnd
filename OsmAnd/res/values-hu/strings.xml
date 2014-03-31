@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
 \n\t- Akadálymentesítés 
@@ -1454,4 +1455,16 @@
     <string name="complex_route_calculation_failed">Gyors útvonaltervezés sikertelen (%s), visszaállás a lassú tervezésre.</string>
     <string name="disable_complex_routing_descr">Kétfázisú autós útvonaltervezés letiltása</string>
     <string name="disable_complex_routing">Komplex tervezés letiltása</string>
+    <string name="use_displayed_track_for_navigation">Szeretnéd a megjelenített útvonalat navigálásra használni?</string>
+    <string name="tip_recent_changes_1_7_1_t">Az 1.7 kiadás újdonságai:
+    \n\t* FONTOS: 2014. február utáni offline térképek szükségesek!
+    \n\t* Teljesen friss útvonaltervező (gyorsabb és pontosabb)
+    \n\t* Új, jobban használható útvonaltervező képernyő
+    \n\t** megjegyzés: a GPX útvonal elérhető az útvonalbeállítások gomb alatt
+    \n\t* Gombok automatikus elrejtése navigációs módban
+    \n\t* Offline útvonal tervezése a GPX útvonal első pontjához (\'teljes útvonal átadása\' opció)
+	\n\t* Aktív szimuláció alagutakban
+	\n\t* Sok apró javítás a felhasználói felületen
+	\n\t* Állítható beszédsebesség
+    </string>
     </resources>
