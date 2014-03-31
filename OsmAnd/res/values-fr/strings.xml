@@ -27,7 +27,7 @@
   <string name="live_monitoring_url_descr">Précisez l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
   <string name="gpx_monitoring_disabled_warn">Veuillez activer \'Enregistrer l\'itinéraire en GPX\' en paramètre de suivi.</string>
-  <string name="show_current_gpx_title">Afficher le trajet en cours</string>
+  <string name="show_current_gpx_title">Afficher la trace en cours</string>
   <string name="tip_recent_changes_0_7_0_t">Changements en 0.7.0 :
 \n\t- Données Wikipedia hors ligne avec articles
 \n\t- Cartes mises à jour
@@ -236,7 +236,7 @@
   <string name="tts_missing_language_data">Les données pour la langue sélectionnée ne sont pas installées. Voulez-vous les obtenir sur le Market ?</string>
   <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
   <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
-  <string name="gpx_option_from_start_point">Suivre le chemin depuis le début</string>
+  <string name="gpx_option_from_start_point">Suivre la trace depuis le début</string>
   <string name="switch_to_vector_map_to_see">Vous pouvez basculer sur les cartes vectorielles locales en utilisant le menu (Couches -&gt; Source de la carte… -&gt; Cartes vectorielles OSM) pour voir la carte.</string>
   <string name="choose_audio_stream">Sélectionner le flux audio</string>
   <string name="choose_audio_stream_descr">Sélectionner le canal pour le guidage vocal (dépend de la configuration système)</string>
@@ -253,7 +253,7 @@
   <string name="map_underlay">Fond de carte</string>
   <string name="map_underlay_descr">Choisir un fond de carte</string>
   <string name="layer_overlay">Sur-couche de la carte…</string>
-  <string name="default_none">Aucune</string>
+  <string name="default_none">Aucun</string>
   <string name="map_overlay">Sur-couche de la carte</string>
   <string name="map_overlay_descr">Choisir la carte en sur-couche</string>
   <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
@@ -292,14 +292,20 @@
   
   <string name="tip_navigation">Navigation</string>
   <string name="tip_navigation_t">Pour activer la navigation il faut d\'abord définir une destination. Puis aller dans \'Menu\'-&gt;\'Directions\' et sélectionner le mode de déplacement.</string>
-  <string name="tip_search">Actions de recherche</string>
-  <string name="tip_search_t">Vous pouvez rechercher un lieu directement depuis la carte ou par l\'adresse, l\'emplacement, le point d\'interêt ou un favori prédéfini.
-\n\tAppuyer sur \'Rechercher\' sur la carte ouvre le dialogue de recherche. Il y a deux options : \'Naviguer vers\' ou \'Afficher sur la carte\'.
+  <string name="tip_search">Recherche</string>
+  <string name="tip_search_t">Vous pouvez rechercher un lieu via l\'option \'Rechercher autour du point\' dans le menu contextuel de la carte, ou via \'Menu\' → \'Rechercher\'.
+  	\n\nVous pouvez alors rechercher :
+  	\n\t* un point d\'intérêt (par type ou par nom)
+	\n\t* une adresse
+	\n\t* des coordonnées
+	\n\t* un favori prédéfini
+	\n\t* dans l\'historique des recherches
+	\n\nDans chacun des cas, il vous sera proposé un choix entre \'Navigation\' (vers le point) ou \'Voir sur la carte\', etc.
 </string>
   <string name="tip_map_context_menu">Menu contextuel de la carte</string>
   <string name="tip_map_context_menu_t">\tLe menu contextuel de la carte est disponible par un appui long sur la carte ou le bouton trackball.
-\n\tAprès avoir touché la carte, une bulle apparaît avec les coordonnées du point : un appui court ouvre le menu contextuel, un appui long fait disparaître la bulle. Le menu contextuel est également disponible depuis le bouton \'Menu\'.
-\n\tLe menu contextuel de la carte regroupe les actions possible autour de ce point.
+\n\tUne bulle apparaît alors avec les coordonnées du point : un appui court dessus ouvre le menu contextuel, un appui long fait disparaître la bulle. Le menu contextuel est également disponible depuis le bouton \'Menu\'.
+\n\tLe menu contextuel de la carte regroupe les actions possibles autour de ce point.
 </string>
   <string name="tip_initial">Conseils et astuces</string>
   <string name="tip_initial_t">\tOsmAnd est une application de navigation avec beaucoup de fonctionnalités.
@@ -1027,12 +1033,12 @@
 <string name="snap_to_road">Coller à la route</string>
 <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors ligne. OsmAnd permet également le routage en ligne et hors ligne avec des instructions vocales pas à pas. Fonctionnalités principales : - Fonctionne complètement hors ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable) - Cartes hors lignes compactes disponibles pour le monde entier - Téléchargement des cartes pour un pays ou une région directement depuis l\'application - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveau, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors ligne d\'adresses et de lieux (PI) - Navigation hors ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) Limitations de la version gratuite de OsmAnd : - Nombre de téléchargement de cartes limité - Pas d\'accès aux PI Wikipédia hors ligne. OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique, ou un donation sur osmand.net. "</string>
 <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors ligne. OsmAnd permet également le routage en ligne et hors ligne avec des instructions vocales pas à pas. OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour. Fonctionnalités principales : - Fonctionne complètement hors ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable) - Cartes hors lignes compactes disponibles pour le monde entier - Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application - Points d\'intérêt (PI) Wikipédia hors ligne, parfait pour le tourisme - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des courbes de niveau, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors ligne d\'adresses et de lieux (PI) - Navigation hors ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) - Affichage des limitations de vitesse, voix enregistrées et voix de synthèse"</string>
-<string name="tip_map_switch_t_v2">\tLes sources des cartes et des couches affichées sont modifiables via \'Menu\' -&gt; \'Couches\'.
-\n\tDans \'Source de la carte…\' vous pouvez choisir entre les cartes vectorielles préchargées, des tuiles en ligne prédéfinies (activer le greffon \'Cartes en ligne\' pour cela), ou des cartes créées manuellement sur un PC grâce à OsmAndMapCreator.
+<string name="tip_map_switch_t_v2">\tLa source des cartes et des couches affichées est modifiable via \'Menu\' -&gt; \'Couches\'.
+\n\tDans \'Source de la carte…\' vous pouvez choisir entre les cartes vectorielles préchargées (choix par défaut, nécessaires pour la navigation hors-ligne), ou des sources prédéfinies de tuiles de carte en ligne ou en cache (activer le greffon \'Cartes en ligne\' pour cela), ou des cartes créées manuellement sur un PC grâce à OsmAndMapCreator.
 \n\tOsmAnd supporte également des sources personnalisées.
 </string>
-<string name="tip_app_mode_t_v2">\tOsmAnd supporte différents profils personnalisables pour les différents cas usages.
-\n\tVous pouvez changer les profils via le bouton de profil dans l\'angle inférieur gauche de la carte (icône voiture, vélo, ou piéton), ou lors de la création d\'un itinéaire.
+<string name="tip_app_mode_t_v2">\tOsmAnd propose des profils (personnalisables) adaptés aux différents usages.
+\n\tVous pouvez changer de profil via le bouton dédié dans l\'angle inférieur gauche de la carte (icône voiture, vélo, ou piéton), ou lors de la création d\'un itinéraire.
 </string>
 <string name="avoid_motorway">Éviter les autoroutes</string>
 <string name="tip_recent_changes_0_8_4_t">Changements en 0.8.4 :\n\t* Quelques corrections de bugs\n\t* La carte ne perd plus la position après des interruptions\n\t* Activer le service d\'arrière-plan pendant la navigation</string>
@@ -1344,7 +1350,7 @@
     <string name="edit_tilesource_elliptic_tile">Mercator elliptique</string>
     <string name="edit_tilesource_choose_existing">Choisir un fournisseur de tuiles existant...</string>
     <string name="maps_define_edit">Définir/Éditer…</string>
-	<string name="announce_gpx_waypoints">Annoncer les points d\'intérêts GPX</string>
+	<string name="announce_gpx_waypoints">Annoncer les points de cheminement GPX</string>
     <string name="speak_descr">Annoncer les noms de rue, les avertissements (stops, ralentisseurs, radars), les limitations de vitesse</string>
 	<string name="new_directions_point_dialog">Vous avez déjà défini des points intermédiaires.</string>
     <string name="context_menu_item_directions_to">Aller vers le point</string>
@@ -1434,11 +1440,11 @@
     <string name="complex_route_calculation_failed">Échec du calcul rapide de route (%s), essai avec la méthode lente..</string>
     <string name="disable_complex_routing_descr">Désactiver le routage en 2 phases pour la navigation en voiture</string>
     <string name="disable_complex_routing">Désactiver le routage complexe</string>
-    <string name="guidance_preferences_descr">Préférence de navigation</string>
-    <string name="routing_preferences_descr">Préférences du routage</string>
+    <string name="guidance_preferences_descr">Préférences de navigation</string>
+    <string name="routing_preferences_descr">Préférences de navigation</string>
     <string name="android_19_location_disabled">Depuis Android KitKat (4.4), vous ne pouvez plus télécharger et mettre à jour la carte dans l\'ancien emplacement de sauvegarde. Voulez-vous changer pour en autoriser un nouveau et y copier l\'ensemble des fichiers ?
         \n Note : Les anciens fichiers ne seront pas touchés
-        \n Note : Il ne sera pas possible de partager des fichiers entre OSMAnd et OSMAnd+. </string>
+        \n Note : Il ne sera pas possible de partager des fichiers entre OsmAnd et OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd peut essayer de déplacer les données vers la nouvelle destinaion. Voulez-vous essayer ?</string>
     <string name="copying_osmand_one_file_descr">Copie des fichiers (%s) vers la nouvelle destination...</string>
     <string name="copying_osmand_files_descr">Copie des fichiers OsmAnd vers la nouvelle destination (%s)</string>
@@ -1451,8 +1457,8 @@
 	<string name="routing_attr_short_way_description">Utiliser l\'itinéraire le plus court</string>
 	<string name="routing_attr_avoid_toll_name">Éviter les péages</string>
 	<string name="routing_attr_avoid_toll_description">Éviter les péages</string>
-	<string name="routing_attr_avoid_unpaved_name">Éviter les routes non revêtues</string>
-	<string name="routing_attr_avoid_unpaved_description">Éviter les routes non revêtues</string>
+	<string name="routing_attr_avoid_unpaved_name">Éviter les voies non revêtues</string>
+	<string name="routing_attr_avoid_unpaved_description">Éviter les voies non revêtues</string>
 	<string name="routing_attr_avoid_ferries_name">Éviter les ferries</string>
 	<string name="routing_attr_avoid_ferries_description">Éviter les ferries</string>
 	<string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
@@ -1460,10 +1466,22 @@
 	<string name="routing_attr_weight_name">Poids</string>
 	<string name="routing_attr_weight_description">Spécifier la limite de poids</string>
     <string name="select_gpx">Sélectionner GPX …</string>
-    <string name="route_descr_select_destination">Sélectionner la destination</string>
-    <string name="route_descr_select_on_map">Sélectionner sur la carte …</string>
-    <string name="route_descr_favorite">Favorite …</string>
-    <string name="route_preferences">Préférences de routage</string>
-    <string name="route_info">Information itinéraire</string>
+    <string name="route_descr_select_destination">Définir la destination</string>
+    <string name="route_descr_select_on_map">Définir sur la carte …</string>
+    <string name="route_descr_favorite">Favori …</string>
+    <string name="route_preferences">Préférences d\'itinéraire</string>
+    <string name="route_info">Informations sur l\'itinéraire</string>
     <string name="keep_and_add_destination_point">Ajouter comme destination</string>
+    <string name="use_displayed_track_for_navigation">Voulez-vous suivre la trace affichée à l\'écran ?</string>
+    <string name="tip_recent_changes_1_7_1_t">Changes in 1.7:
+    \n\t* IMPORTANT : Les cartes doivent être postérieures à février 2014.
+\n\t* Navigation entièrement mise à jour (rapide et précise).
+    \n\t* New screen with Route Planning (more intuitive and more powerful)
+    \n\t** Les itinéraires GPX sont disponibles via le bouton Paramètres d\'itinéraire
+    \n\t* Boutons se masquant automatiquement durant la navigation
+    \n\t* Calculate offline route to the first point of GPX route (\'pass the whole track\' option)
+\n\t* Simulation active dans les tunnels
+\n\t* Nombreuses petites améliorations de l\'expérience utilisateur et de l\'utilisabilité
+\n\t* Speech rate accessibility setting
+    </string>
     </resources>
