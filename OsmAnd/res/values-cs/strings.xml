@@ -949,7 +949,7 @@
   <string name="map_widget_lock_screen">Uzamknout obrazovku</string>
   <string name="map_widget_compass">Kompas</string>
   <string name="map_widget_top_stack">Stavový řádek:</string>
-  <string name="map_widget_reset">Nastavit výchozí</string>
+  <string name="map_widget_reset">Obnovit výchozí hodnoty</string>
   <string name="map_widget_right_stack">Pravý sloupec:</string>
   <string name="map_widget_left_stack">Levý sloupec:</string>
   <string name="map_widget_parking">Parkování</string>
