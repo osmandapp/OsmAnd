@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -1392,7 +1393,7 @@
 	\n\t* Исправления ошибок маршрутизации и отрисовки;
     </string>
     <string name="disable_complex_routing_descr">Отключение 2-фазной маршрутизации для автомобильной навигации</string>
-    <string name="complex_route_calculation_failed">Быстрое вычисление маршрута неудалось (%s), отмените для возврата к медленному вычислению.</string>
+    <string name="complex_route_calculation_failed">Быстрое вычисление маршрута не удалось (%s), отмените для возврата к медленному вычислению.</string>
     <string name="map_magnifier">Масштаб</string>
 	<string name="select_gpx">Выберите GPX…</string>
     <string name="route_descr_select_destination">Выберите пункт назначения</string>
@@ -1401,4 +1402,16 @@
     <string name="route_preferences">Предпочтения маршрута</string>
     <string name="route_info">Маршрутная информация</string>
     <string name="keep_and_add_destination_point">Добавить как пункт назначения</string>
+    <string name="use_displayed_track_for_navigation">Хотите использовать показанный путь для навигации?</string>
+    <string name="tip_recent_changes_1_7_1_t">Изменения в 1.7:
+ \n\t* ВАЖНО: карты должны быть новее февраля 2014.
+	\n\t* Полностью изменена маршрутизация (быстрее и точнее) - 
+ \n\t* Новый экран с планированием маршрута (более интуитивный и продуктивный)
+ \n\t** Примечание: GPX route is available under Route Settings buttton
+ \n\t* Кнопка автоскрытия в навигационном режиме
+ \n\t* Вычисление оффлайнового маршрута к первой точке маршрута GPX (опция \'пройти весь путь\')
+	\n\t* Активная симуляция в тоннелях
+	\n\t* Множество мелких улучшений интерфейса
+	\n\t* Настройки скорости речи
+    </string>
     </resources>
