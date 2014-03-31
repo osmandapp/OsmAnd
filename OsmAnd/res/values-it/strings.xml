@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -1662,4 +1663,16 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="route_preferences">Preferenze di percorso</string>
     <string name="route_info">Informazioni sul percorso</string>
     <string name="keep_and_add_destination_point">Aggiungi come destinazione</string>
+    <string name="use_displayed_track_for_navigation">Vuoi usare la traccia visualizzata per la navigazione?</string>
+    <string name="tip_recent_changes_1_7_1_t">Novità nella 1.7:↵
+    \n\t* IMPORTANTE le mappe dovrebbero essere successive al febbraio 2014.↵
+→\n\t* Completamente aggiornato il calcolo della rotta (veloce e preciso) - ↵
+    \n\t* Nuovo schermata con Pianificazione itinerario (più intuitivo e potente)↵
+    \n\t** NOTA la navigazione del percorso GPX è disponibile dal pulsante Impostazioni Percorso↵
+    \n\t* Scomparsa automatica dei pulsanti nella modalità navigazione ↵
+    \n\t* Calcolo del percorso offline verso il primo punto della traccia GPX (opzione \'percorri tutta la traccia\')↵
+→\n\t* Simulazione attiva nei tunnel↵
+→\n\t* Molte piccole migliorie dell'interfaccia utente &amp; correzioni usabilità↵
+→\n\t* Impostazioni della velocità della vocalizzazione↵
+    </string>
     </resources>
