@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
 \n\t- Offline editace POI
@@ -1363,4 +1364,56 @@ s často kladenými otázkami.</string>
     <string name="app_modes_choose_descr">Vyberte v aplikaci dostupné profily</string>
     <string name="app_modes_choose">Profily aplikace</string>
 	<string name="amenity_type_seamark">Mořská značka</string>
+    <string name="keep_and_add_destination_point">Přidat jako cílový bod</string>
+    <string name="select_gpx">Vybrat GPX …</string>
+    <string name="use_displayed_track_for_navigation">Chcete použít zobrazenou trasu pro navigaci?</string>
+    <string name="route_descr_select_destination">Vybrat cíl</string>
+    <string name="route_descr_select_on_map">Vybrat na mapě …</string>
+    <string name="route_descr_favorite">Oblíbené …</string>
+    <string name="route_preferences">Předvolby trasy</string>
+    <string name="route_info">Infornace o trase</string>
+    <string name="routing_attr_prefer_motorway_name">Upřednostnit dálnice</string>
+	<string name="routing_attr_prefer_motorway_description">Upřednostnit dálnice</string>
+	<string name="routing_attr_short_way_name">Krátká cesta</string>
+	<string name="routing_attr_short_way_description">Použít krátkou cestu</string>
+	<string name="routing_attr_avoid_toll_name">Vyhnout se zpoplatněným cestám</string>
+	<string name="routing_attr_avoid_toll_description">Vyhnout se zpoplatněným cestám</string>
+	<string name="routing_attr_avoid_unpaved_name">Vyhnout se nezpevněným cestám</string>
+	<string name="routing_attr_avoid_unpaved_description">Vyhnout se nezpevněným cestám</string>
+	<string name="routing_attr_avoid_ferries_name">Vyhnout se trajektům</string>
+	<string name="routing_attr_avoid_ferries_description">Vyhnout se trajektům</string>
+	<string name="routing_attr_avoid_motorway_name">Vyhnout se dálnicím</string>
+	<string name="routing_attr_avoid_motorway_description">Vyhnout se dálnicím</string>
+	<string name="routing_attr_weight_name">Hmotnost</string>
+	<string name="routing_attr_weight_description">Zadejte omezení hmotnosti</string>
+    <string name="android_19_location_disabled">Od verze KitKat není možné stahovat a aktualizovat mapy v předchozím úložišti (%s). Chcete ho změnit na vhodné nové a zkopírovat do něj všechny soubory.
+        \n Poznámka : původní soubory zůstanou nedotčeny.  
+        \n Poznámka : nebude možné sdílet soubory mezi OsmAnd a OsmAnd+. </string>
+    <string name="application_dir_change_warning2">OsmAnd může zkusit přesunout data do nového cíle. Souhlasíte?</string>
+    <string name="copying_osmand_one_file_descr">Kopírování souboru (%s) do nového umístění...</string>
+    <string name="copying_osmand_files_descr">Kopírování souborů OsmAnd do nového umístění (%s)</string>
+    <string name="copying_osmand_files">Kopírování souborů OsmAnd</string>
+    <string name="calculate_osmand_route_gpx">Vypočítat OsmAnd offline trasu</string>
+    <string name="app_mode_truck">Kamion</string>
+    <string name="guidance_preferences_descr">Nastavení navigace</string>
+    <string name="routing_preferences_descr">Nastavení určování trasy</string>
+    <string name="speech_rate_descr">Zadejte rychlost řeči TTS</string>
+    <string name="speech_rate">Rychlost řeči</string>
+    <string name="tip_recent_changes_1_7_1_t">Změny verze 1.7:
+    \n\t* DůLEŽITÉ mapy by měly být novější než z února 2014.
+	\n\t* Kompletně aktualizováno určování trasy (rychlejší a přesnější) - 
+    \n\t* Nová obrazovka plánování trasy (výkonnější a více intuitivní)
+    \n\t** POZNÁMKA GPX trasy jsou k dispozici pod tlačítkem nastavení trasy
+    \n\t* Automatické skrytí tlačítek při navigaci
+    \n\t* Výpočet cesty k prvnímu bodu GPX trasy v režimu offline (Volba \'Projet celou trasu\')
+	\n\t* Aktivní simulace v tunelech
+	\n\t* Mnoho malých vylepšení uživatelského vzhledu a opravy použitelnosti
+	\n\t* Nastavení rychlosti řeči
+    </string>
+    <string name="complex_route_calculation_failed">Rychlý přepočet trasy selhal (%s), návrat k pomalému výpočtu.</string>
+    <string name="disable_complex_routing_descr">Vypnout dvojfázovou navigaci pro profil auta</string>
+    <string name="disable_complex_routing">Vypnout komplexní navigaci</string>
+    <string name="osmodroid_refresh">Obnovit kanály</string>
+    <string name="osmodroid_seek">Sledovat objekt</string>
+    <string name="osmodroid_unseek">Nesledovat objekt</string>
     </resources>
