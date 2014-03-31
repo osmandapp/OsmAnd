@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -411,7 +412,7 @@
   <string name="tts_missing_language_data">Nie sú nainštalované údaje pre zvolený jazyk. Chcete ich inštalovať z Marketu?</string>
   <string name="gpx_option_reverse_route">Obrátiť GPX smerovanie</string>
   <string name="gpx_option_destination_point">Použiť aktuálny cieľový bod</string>
-  <string name="gpx_option_from_start_point">Prejsť celú trasu</string>
+  <string name="gpx_option_from_start_point">Prejsť pozdĺž celej trasy</string>
   <string name="tip_rotation_switching">Otáčanie mapy</string>
   
   <string name="switch_to_vector_map_to_see">Je dostupná offline vektorová mapa pre túto oblasť.\n\t\n\tNa jej použitie aktivujte "Menu" → "Zobrazenie" → "Zdroj mapy…" → "Vektorové OSM mapy".</string>
@@ -1671,4 +1672,16 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="route_preferences">Predvoľby trasy</string>
     <string name="route_info">Informácie trasy</string>
     <string name="keep_and_add_destination_point">Pridať ako cieľový bod</string>
+    <string name="use_displayed_track_for_navigation">Chcete použiť zobrazenú trasu pre navigáciu?</string>
+    <string name="tip_recent_changes_1_7_1_t">Zmeny v 1.7:
+ \n\t* DÔLEŽITÉ - mapy by mali byť novšie ako z februára 2014.
+ 	\n\t* Úplne prepracovaný výpočet trasy (rýchly a presný)
+ \n\t* Nová obrazovka plánovania trasy (intuitívnejšia a viac možností)
+ \n\t* POZNÁMKA - GPX trasy sú k dispozícii pod tlačidlom Nastavenia trasy
+ \n\t* Automatické skrytie tlačidiel v režime navigácie
+ \n\t* Výpočet trasy k prvému bodu GPX trasy v režime offline (voľba "Prejsť celú trasu")
+ 	\n\t* Aktívna simulácia v tuneloch
+ 	\n\t* Mnoho malých vylepšení rozhrania a použiteľnosti
+ 	\n\t* Nastavenia rýchlosti reči
+    </string>
     </resources>
