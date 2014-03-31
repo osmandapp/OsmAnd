@@ -343,15 +343,14 @@ public class RouteProvider {
 					routeParams.start, routeParams.end, startI, endI);
 		}
 		List<RouteDirectionInfo> gpxDirections = new ArrayList<RouteDirectionInfo>();
-		if(gpxParams.directions != null) {
-			gpxDirections.addAll(gpxParams.directions);
-		}
-		for (RouteDirectionInfo info : gpxDirections) {
-			if(info.routePointOffset >= startI[0] && info.routePointOffset < endI[0]){
-				RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
-				ch.routePointOffset = info.routePointOffset - startI[0];
-				ch.setDescriptionRoute(info.getDescriptionRoutePart());
-				gpxDirections.add(ch);
+		if (gpxParams.directions != null) {
+			for (RouteDirectionInfo info : gpxParams.directions) {
+				if (info.routePointOffset >= startI[0] && info.routePointOffset < endI[0]) {
+					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
+					ch.routePointOffset = info.routePointOffset - startI[0];
+					ch.setDescriptionRoute(info.getDescriptionRoutePart());
+					gpxDirections.add(ch);
+				}
 			}
 		}
 		boolean calculateOsmAndRouteParts = gpxParams.calculateOsmAndRouteParts;

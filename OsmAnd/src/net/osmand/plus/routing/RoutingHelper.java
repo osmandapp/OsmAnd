@@ -750,6 +750,19 @@ public class RoutingHelper {
 				currentRunningJob = null;
 				return;
 			}
+			final boolean onlineSourceWithoutInternet = !res.isCalculated() && params.type.isOnline() && !settings.isInternetConnectionAvailable();
+			if (onlineSourceWithoutInternet && settings.ROUTE_CALC_OSMAND_PARTS.get()) {
+				if (params.previousToRecalculate != null && params.previousToRecalculate.isCalculated()) {
+					RouteCalculationResult rcr = params.previousToRecalculate;
+					List<Location> locs = rcr.getRouteLocations();
+					List<RouteDirectionInfo> routeDirections = rcr.getRouteDirections();
+					try {
+						provider.insertInitialSegment(params, locs, routeDirections, true);
+					} catch (RuntimeException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 			
 			synchronized (RoutingHelper.this) {
 				if (res.isCalculated()) {
@@ -768,24 +781,9 @@ public class RoutingHelper {
 					msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime()) + ")";
 				}
 				showMessage(msg);
-			} else if (params.type.isOnline() && !settings.isInternetConnectionAvailable()) {
-				boolean showMsg = true;
-				if (settings.ROUTE_CALC_OSMAND_PARTS.get() && params.previousToRecalculate != null
-						&& params.previousToRecalculate.isCalculated()) {
-					RouteCalculationResult rcr = params.previousToRecalculate;
-					List<Location> locs = rcr.getRouteLocations();
-					List<RouteDirectionInfo> routeDirections = rcr.getRouteDirections();
-					try {
-						provider.insertInitialSegment(params, locs, routeDirections, true);
-						showMsg = false;
-					} catch(RuntimeException e) {
-						e.printStackTrace();
-					}
-				}
-				if (showMsg) {
-					showMessage(app.getString(R.string.error_calculating_route)
-							+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route)); //$NON-NLS-1$
-				}
+			} else if (onlineSourceWithoutInternet) {
+				showMessage(app.getString(R.string.error_calculating_route)
+						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route)); //$NON-NLS-1$
 			} else {
 				if (res.getErrorMessage() != null) {
 					showMessage(app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage()); //$NON-NLS-1$
@@ -798,7 +796,7 @@ public class RoutingHelper {
 	}
 	
 	public void recalculateRouteDueToSettingsChange() {
-		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, null);
+		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route);
 	}
 	
 	private void recalculateRouteInBackground(boolean force, final Location start, final LatLon end, final List<LatLon> intermediates,
