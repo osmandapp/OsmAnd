@@ -20,6 +20,7 @@ import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -162,7 +163,7 @@ public class MapRoutePreferencesControl extends MapControls {
 				rp.setReverse(selected);
 			} else if (gpxParam.id == R.string.gpx_option_calculate_first_last_segment) {
 				rp.setCalculateOsmAndRouteParts(selected);
-				settings.GPX_ROUTE_CALC_OSMAND_PARTS.set(selected);
+				settings.ROUTE_CALC_OSMAND_PARTS.set(selected);
 			} else if (gpxParam.id == R.string.gpx_option_from_start_point) {
 				rp.setPassWholeRoute(selected);
 			} else if (gpxParam.id == R.string.announce_gpx_waypoints) {
@@ -172,6 +173,8 @@ public class MapRoutePreferencesControl extends MapControls {
 				settings.CALC_GPX_ROUTE.set(selected);
 				rp.setCalculateOsmAndRoute(selected);
 				updateParameters();
+			} else if (gpxParam.id == R.string.calculate_osmand_route_without_internet) {
+				settings.ROUTE_CALC_OSMAND_PARTS.set(selected);
 			}
 		}
 	}
@@ -179,8 +182,13 @@ public class MapRoutePreferencesControl extends MapControls {
 	
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode am) {
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
-		GeneralRouter rm = SettingsNavigationActivity.getRouter(mapActivity.getMyApplication().getDefaultRoutingConfig(), am);
 		GPXRouteParamsBuilder rparams = mapActivity.getRoutingHelper().getCurrentGPXRoute();
+		boolean osmandRouter = settings.ROUTER_SERVICE.get() != RouteService.OSMAND ;
+		if(!osmandRouter) {
+			list.add(new GPXLocalRoutingParameter(R.string.calculate_osmand_route_without_internet, 
+					getString(R.string.calculate_osmand_route_without_internet), settings.ROUTE_CALC_OSMAND_PARTS.get()));
+			return list;
+		}
 		if(rparams != null) {
 			list.add(new GPXLocalRoutingParameter(R.string.gpx_option_reverse_route, 
 					getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
@@ -194,6 +202,7 @@ public class MapRoutePreferencesControl extends MapControls {
 			// list.add(new GPXLocalRoutingParameter(R.string.calculate_osmand_route_gpx, 
 			//		getString(R.string.calculate_osmand_route_gpx), rparams.isCalculateOsmAndRoute()));
 		}
+		GeneralRouter rm = SettingsNavigationActivity.getRouter(mapActivity.getMyApplication().getDefaultRoutingConfig(), am);
 		if(rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute())) {
 			return list;
 		}

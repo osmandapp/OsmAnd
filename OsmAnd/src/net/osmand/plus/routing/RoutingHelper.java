@@ -163,7 +163,7 @@ public class RoutingHelper {
 	}	
 	
 	public List<Location> getCurrentCalculatedRoute() {
-		return route.getImmutableLocations();
+		return route.getImmutableAllLocations();
 	}
 	
 	public void setAppMode(ApplicationMode mode){
@@ -232,7 +232,7 @@ public class RoutingHelper {
 				if (finished) {
 					return null;
 				}
-				List<Location> routeNodes = route.getImmutableLocations();
+				List<Location> routeNodes = route.getImmutableAllLocations();
 				int currentRoute = route.currentRoute;
 
 				// 2. Analyze if we need to recalculate route
@@ -344,7 +344,7 @@ public class RoutingHelper {
 	}
 
 	private boolean updateCurrentRouteStatus(Location currentLocation, float posTolerance) {
-		List<Location> routeNodes = route.getImmutableLocations();
+		List<Location> routeNodes = route.getImmutableAllLocations();
 		int currentRoute = route.currentRoute;
 		// 1. Try to proceed to next point using orthogonal distance (finding minimum orthogonal dist)
 		while (currentRoute + 1 < routeNodes.size()) {
@@ -522,7 +522,7 @@ public class RoutingHelper {
 			}
 			// try remove false route-recalculated prompts by checking direction to second route node
 			boolean wrongMovementDirection  = false;
-			List<Location> routeNodes = res.getImmutableLocations();
+			List<Location> routeNodes = res.getImmutableAllLocations();
 			if (routeNodes != null && !routeNodes.isEmpty()) {
 				int newCurrentRoute = lookAheadFindMinOrthogonalDistance(start, routeNodes, res.currentRoute, 15);
 				if (newCurrentRoute + 1 < routeNodes.size()) {
@@ -769,8 +769,23 @@ public class RoutingHelper {
 				}
 				showMessage(msg);
 			} else if (params.type.isOnline() && !settings.isInternetConnectionAvailable()) {
+				boolean showMsg = true;
+				if (settings.ROUTE_CALC_OSMAND_PARTS.get() && params.previousToRecalculate != null
+						&& params.previousToRecalculate.isCalculated()) {
+					RouteCalculationResult rcr = params.previousToRecalculate;
+					List<Location> locs = rcr.getRouteLocations();
+					List<RouteDirectionInfo> routeDirections = rcr.getRouteDirections();
+					try {
+						provider.insertInitialSegment(params, locs, routeDirections, true);
+						showMsg = false;
+					} catch(RuntimeException e) {
+						e.printStackTrace();
+					}
+				}
+				if (showMsg) {
 					showMessage(app.getString(R.string.error_calculating_route)
-						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route)); //$NON-NLS-1$
+							+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route)); //$NON-NLS-1$
+				}
 			} else {
 				if (res.getErrorMessage() != null) {
 					showMessage(app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage()); //$NON-NLS-1$

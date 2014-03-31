@@ -301,19 +301,19 @@ public class RouteProvider {
 					res = calculateGpxRoute(params);
 				} else if (params.type == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params, calcGPXRoute);
+				} else if (params.type == RouteService.BROUTER) {
+					res = findBROUTERRoute(params);
 				} else if (params.type == RouteService.YOURS) {
 					res = findYOURSRoute(params);
 				} else if (params.type == RouteService.ORS) {
 					res = findORSRoute(params);
 				} else if (params.type == RouteService.OSRM) {
 					res = findOSRMRoute(params);
-				} else if (params.type == RouteService.BROUTER) {
-					res = findBROUTERRoute(params);
 				} else {
-					res  = new RouteCalculationResult("Selected route service is not available");
+					res = new RouteCalculationResult("Selected route service is not available");
 				}
 				if(log.isInfoEnabled() ){
-					log.info("Finding route contained " + res.getImmutableLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					log.info("Finding route contained " + res.getImmutableAllLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 				return res; 
 			} catch (IOException e) {
@@ -384,8 +384,8 @@ public class RouteProvider {
 				List<Location> loct;
 				List<RouteDirectionInfo> dt;
 				if (newRes != null && newRes.isCalculated()) {
-					loct = newRes.getImmutableLocations();
-					dt = newRes.getDirections();
+					loct = newRes.getImmutableAllLocations();
+					dt = newRes.getImmutableAllDirections();
 				} else {
 					loct = new ArrayList<Location>();
 					Location l = new Location("");
@@ -403,7 +403,7 @@ public class RouteProvider {
 		}
 	}
 
-	private void insertInitialSegment(RouteCalculationParams routeParams, List<Location> points,
+	public void insertInitialSegment(RouteCalculationParams routeParams, List<Location> points,
 			List<RouteDirectionInfo> directions, boolean calculateOsmAndRouteParts) {
 		Location realStart = routeParams.start;
 		if (realStart != null && points.size() > 0 && realStart.distanceTo(points.get(0)) > 60) {
@@ -416,8 +416,8 @@ public class RouteProvider {
 			List<Location> loct;
 			List<RouteDirectionInfo> dt;
 			if (newRes != null && newRes.isCalculated()) {
-				loct = newRes.getImmutableLocations();
-				dt = newRes.getDirections();
+				loct = newRes.getImmutableAllLocations();
+				dt = newRes.getImmutableAllDirections();
 			} else {
 				loct = new ArrayList<Location>();
 				loct.add(realStart);
@@ -929,8 +929,8 @@ public class RouteProvider {
 	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, OsmandApplication ctx){
         TargetPointsHelper helper = ctx.getTargetPointsHelper();
 		int currentRoute = srcRoute.currentRoute;
-		List<Location> routeNodes = srcRoute.getImmutableLocations();
-		List<RouteDirectionInfo> directionInfo = srcRoute.getDirections();
+		List<Location> routeNodes = srcRoute.getImmutableAllLocations();
+		List<RouteDirectionInfo> directionInfo = srcRoute.getImmutableAllDirections();
 		int currentDirectionInfo = srcRoute.currentDirectionInfo;
 		
 		GPXFile gpx = new GPXFile();
