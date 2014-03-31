@@ -753,14 +753,7 @@ public class RoutingHelper {
 			final boolean onlineSourceWithoutInternet = !res.isCalculated() && params.type.isOnline() && !settings.isInternetConnectionAvailable();
 			if (onlineSourceWithoutInternet && settings.ROUTE_CALC_OSMAND_PARTS.get()) {
 				if (params.previousToRecalculate != null && params.previousToRecalculate.isCalculated()) {
-					RouteCalculationResult rcr = params.previousToRecalculate;
-					List<Location> locs = rcr.getRouteLocations();
-					List<RouteDirectionInfo> routeDirections = rcr.getRouteDirections();
-					try {
-						provider.insertInitialSegment(params, locs, routeDirections, true);
-					} catch (RuntimeException e) {
-						e.printStackTrace();
-					}
+					res = provider.recalculatePartOfflineRoute(res, params);
 				}
 			}
 			

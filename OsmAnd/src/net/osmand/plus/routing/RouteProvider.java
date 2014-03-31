@@ -3,6 +3,7 @@ package net.osmand.plus.routing;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
@@ -329,6 +330,22 @@ public class RouteProvider {
 		return new RouteCalculationResult(null);
 	}
 
+	
+	public RouteCalculationResult recalculatePartOfflineRoute(RouteCalculationResult res, RouteCalculationParams params) {
+		RouteCalculationResult rcr = params.previousToRecalculate;
+		List<Location> locs = new ArrayList<Location>(rcr.getRouteLocations());
+		try {
+			int[] startI = new int[]{0};
+			int[] endI = new int[]{locs.size()}; 
+			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
+			List<RouteDirectionInfo> directions = calcDirections(startI, endI, rcr.getRouteDirections());
+			insertInitialSegment(params, locs, directions, true);
+			res = new RouteCalculationResult(locs, directions, params, null);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 	private RouteCalculationResult calculateGpxRoute(RouteCalculationParams routeParams) {
 		// get the closest point to start and to end
@@ -342,17 +359,8 @@ public class RouteProvider {
 			gpxRoute = findStartAndEndLocationsFromRoute(gpxParams.points,
 					routeParams.start, routeParams.end, startI, endI);
 		}
-		List<RouteDirectionInfo> gpxDirections = new ArrayList<RouteDirectionInfo>();
-		if (gpxParams.directions != null) {
-			for (RouteDirectionInfo info : gpxParams.directions) {
-				if (info.routePointOffset >= startI[0] && info.routePointOffset < endI[0]) {
-					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
-					ch.routePointOffset = info.routePointOffset - startI[0];
-					ch.setDescriptionRoute(info.getDescriptionRoutePart());
-					gpxDirections.add(ch);
-				}
-			}
-		}
+		final List<RouteDirectionInfo> inputDirections = gpxParams.directions;
+		List<RouteDirectionInfo> gpxDirections = calcDirections(startI, endI, inputDirections);
 		boolean calculateOsmAndRouteParts = gpxParams.calculateOsmAndRouteParts;
 		insertInitialSegment(routeParams, gpxRoute, gpxDirections, calculateOsmAndRouteParts);
 		insertFinalSegment(routeParams, gpxRoute, gpxDirections, calculateOsmAndRouteParts);
@@ -364,6 +372,25 @@ public class RouteProvider {
 		}
 		RouteCalculationResult res = new RouteCalculationResult(gpxRoute, gpxDirections, routeParams, gpxParams.wpt);
 		return res;
+	}
+
+
+
+
+	private List<RouteDirectionInfo> calcDirections(int[] startI, int[] endI,
+			final List<RouteDirectionInfo> inputDirections) {
+		List<RouteDirectionInfo> directions = new ArrayList<RouteDirectionInfo>();
+		if (inputDirections != null) {
+			for (RouteDirectionInfo info : inputDirections) {
+				if (info.routePointOffset >= startI[0] && info.routePointOffset < endI[0]) {
+					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
+					ch.routePointOffset = info.routePointOffset - startI[0];
+					ch.setDescriptionRoute(info.getDescriptionRoutePart());
+					directions.add(ch);
+				}
+			}
+		}
+		return directions;
 	}
 
 
@@ -1045,7 +1072,12 @@ public class RouteProvider {
 //			content.append(s);
 //		}
 //		JSONObject obj = new JSONObject(content.toString());
-		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, connection.getInputStream());
+		final InputStream inputStream = connection.getInputStream();
+		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, inputStream);
+		try {
+			inputStream.close();
+		} catch(IOException e){
+		}
 		if(gpxFile.routes.isEmpty()) {
 			return new RouteCalculationResult("Route is empty");
 		}
