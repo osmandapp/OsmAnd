@@ -1347,4 +1347,21 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="app_mode_motorcycle">Motorfiets</string>
     <string name="app_mode_boat">Boot</string>
     <string name="app_mode_aircraft">Vliegtuig</string>
-</resources>
+<string name="use_displayed_track_for_navigation">Wil jy die aangetoonde spoor gebruik vir navigasie?</string>
+    <string name="calculate_osmand_route_gpx">Bereken OsmAnd aflyn roete</string>
+    <string name="guidance_preferences_descr">Navigasie voorkeure</string>
+    <string name="complex_route_calculation_failed">Vinnige roete berekening onsuksesvol(%s), terug na stadige berekening.</string>
+    <string name="disable_complex_routing_descr">Skakel 2-fase roetebepaling vir motor navigasie af</string>
+    <string name="disable_complex_routing">Skakel komplekse roete-bep[aling af</string>
+    <string name="local_osm_changes_delete_all_confirm">Jy gaan %1$d osm veranderings uitwis. Is jy seker?</string>
+    <string name="local_osm_changes_delete_all">Wis alles uit</string>
+    <string name="animate_routing_route_not_calculated">Bereken asseblief eers die roete</string>
+    <string name="animate_routing_route">Simuleer die berekende roete </string>
+    <string name="tip_faq">Gereëlde Vrae</string>
+    <string name="remember_choice">Onthou my keuse</string>
+    <string name="gps_status_eclipsim">GPS status</string>
+    <string name="default_and">en</string>
+    <string name="default_or">of</string>
+	<string name="osmodroid_refresh">Verfris kanale</string>
+    <string name="osmodroid_seek">Soek objek</string>
+    </resources>
