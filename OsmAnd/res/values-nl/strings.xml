@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -1648,4 +1649,16 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="route_preferences">Route-voorkeuren</string>
     <string name="route_info">Route-informatie</string>
     <string name="keep_and_add_destination_point">Toevoegen als bestemming</string>
+    <string name="use_displayed_track_for_navigation">Wil je de getoonde route gebruiken voor navigatie?</string>
+    <string name="tip_recent_changes_1_7_1_t">Wijzigingen in 1.7:
+    \n\t* BELANGRIJK: kaarten moeten nieuwer zijn dan februari 2014.
+	\n\t* Volledig nieuwe routeberekening (snel en nauwkeurig) - 
+    \n\t* Nieuw scherm met route planning (meer intuïtief and krachtiger)
+    \n\t** TIP: GPX route is nu beschikbaar via de route-instellingen knop
+    \n\t* Automatisch verbergende knoppen in de navigatie modus
+    \n\t* Bereken offline route naar het eerste punt van een GPX route (\'volg de gehele track\' optie)
+	\n\t* Actieve simulatie in tunnels
+	\n\t* Veel kleine verbeteringen in de interface &amp; bruikbaarheid
+	\n\t* Spraaksnelheid voorkeur
+    </string>
     </resources>
