@@ -696,7 +696,7 @@ public class MapRenderingTypes {
 		public static MapRulType createText(String tag) {
 			MapRulType rt = new MapRulType();
 			rt.additionalText = true;
-			rt.minzoom = 5;
+			rt.minzoom = 2;
 			rt.maxzoom = 31;
 			rt.tagValuePattern = new TagValuePattern(tag, null); 
 			return rt;
@@ -705,7 +705,7 @@ public class MapRenderingTypes {
 		public static MapRulType createAdditional(String tag, String value) {
 			MapRulType rt = new MapRulType();
 			rt.additional = true;
-			rt.minzoom = 5;
+			rt.minzoom = 2;
 			rt.maxzoom = 31;
 			rt.tagValuePattern = new TagValuePattern(tag, value);
 			return rt;
