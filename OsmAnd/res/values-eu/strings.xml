@@ -1193,28 +1193,28 @@
 	<string name="routing_attr_avoid_motorway_description">Autopistak sahiestu</string>
 	<string name="routing_attr_weight_name">Pisua</string>
 	<string name="routing_attr_weight_description">Zehaztu pisu muga</string>
-    <string name="android_19_location_disabled">Desde la versión KitKat no puede descargar y actualizar mapas en la localización de almacenamiento anterior (%s). ¿Desea cambiar a una permitida y copiar todos los ficheros?
-        \n Nota : los ficheros antiguos permanecerán sin tocar.  
-        \n Nota : no será posible compartir ficheros entre OsmAnd and OsmAnd+. </string>
-    <string name="application_dir_change_warning2">OsmAnd puede intentar mover los datos al nuevo destino. ¿Quiere eso?</string>
-    <string name="copying_osmand_one_file_descr">Copiando el fichero (%s) al nuevo destino...</string>
-    <string name="copying_osmand_files_descr">Copiando los ficheros de OsmAnd al nuevo destino (%s)</string>
-    <string name="copying_osmand_files">Copiando archivos de OsmAnd</string>
-    <string name="app_mode_truck">Camión</string>
-    <string name="guidance_preferences_descr">Preferencias de navegación</string>
-    <string name="routing_preferences_descr">Preferencias de ruta</string>
-    <string name="speech_rate_descr">Especificar velocidad de voz TTS</string>
-    <string name="speech_rate">Velocidad de Voz</string>
-    <string name="tip_recent_changes_1_7_1_t">Cambios en 1.7:
-    \n\t* IMPORTANTE los mapas deben ser más nuevos que Febrero de 2014.
-	\n\t* Enrutado completamente actualizado (rapido y preciso) - 
-    \n\t* Nueva pantalla con Planificación de Ruta (más intuitiva y más potente)
-    \n\t** NOTA La ruta GPX está disponible en el botón Opciones de Ruta
-    \n\t* Auto ocultar botones en modo navegación
-    \n\t* Calcular la ruta offline al primer punto de la ruta GPX (opción \'pasar toda la ruta\')
-	\n\t* Simulación activa en tuneles
-	\n\t* Muchas pequeñas mejoras en la UX (Experiencia de Usuario) y arreglos de usabilidad
-	\n\t* Opción de accesibilidad a la velocidad de voz
+    <string name="android_19_location_disabled">KitKat bertsioa geroztik ezin da deskargatu eta eguneratu mapak aurreko biltegiratze kokapenan (%s). Fitxategi guztiak kopiatu nahi dituzu baimendutako kokapenera?
+        \n Oharra : fitxategi zaharrak ukitu gabe jarraituko dute.  
+        \n Oharra : OsmAnd eta OsmAnd+ artean ezingo dira fitxategiak partekatu. </string>
+    <string name="application_dir_change_warning2">OsmAnd datuak kokapen berrira mugitzen saia daiteke. Nahi al duzu?</string>
+    <string name="copying_osmand_one_file_descr">Fitxategia kopiatzen (%s) kokapen berrira...</string>
+    <string name="copying_osmand_files_descr">OsmAnd fitxategiak kopiatzen kokapen berrira (%s)</string>
+    <string name="copying_osmand_files">OsmAnd fitxategiak kopiatzen</string>
+    <string name="app_mode_truck">Kamioia</string>
+    <string name="guidance_preferences_descr">Nabigazio lehentasunak</string>
+    <string name="routing_preferences_descr">Ibilbide lehentasunak</string>
+    <string name="speech_rate_descr">TTS ahotsaren abiadura zehaztu</string>
+    <string name="speech_rate">Ahots abiadura</string>
+    <string name="tip_recent_changes_1_7_1_t">Aldaketak 1.7:
+    \n\t* GARRANTZITSUA Mapak 2014ko otsailak baino berriagoak izan behar dira.
+	\n\t* bideraketa guztiz eguneratua (azkarra eta zehatza) - 
+    \n\t* Ibilbide Plangintza pantaila berria (intuitiboagoa eta ahaltsuagoa)
+    \n\t** OHARRA GPX ibilbidea eskuragarri dago Ibilbide Aukerak botoian
+    \n\t* Nabigazio botoiak auto ezkutatzeko modua
+    \n\t* Offline GPX Ibilbidearen lehen punturaino bidea kalkulatu (Aukera \'ibilbide osoa pasa\')
+	\n\t* Simulazio aktiboa tuneletan
+	\n\t* UX-ean (erabiltzaile esperientzia) hobekuntza txiki asko eta erabilgarritasunean konponketak
+	\n\t* Aukera ahots abiadura aukerak
     </string>
     <string name="routing_attr_short_way_name">Ibilbide laburra</string>
 	<string name="routing_attr_short_way_description">Ibilbide laburra erabili</string>
