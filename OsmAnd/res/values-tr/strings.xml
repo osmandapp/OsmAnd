@@ -1183,7 +1183,7 @@
     <string name="app_mode_motorcycle">Motosikletler</string>
     <string name="app_mode_boat">tekne</string>
     <string name="app_mode_aircraft">düzlem</string>
-    <string name="tip_faq_t">https://code.google.com/p/osmand/wiki/FAQ Sık sorulan soruları görmek için , karşılaşabileceğinizURL'ye bakın .</string>
+    <string name="tip_faq_t">https://code.google.com/p/osmand/wiki/FAQ Sık sorulan soruları görmek için , karşılaşabileceğinizURL\'ye bakın .</string>
     <string name="tip_faq">SSS</string>
     <string name="local_osm_changes_delete_all_confirm">Siz % 1 $ d osm değişiklikleri kaldırmak üzeresiniz .Emin misin ?</string>
     <string name="local_osm_changes_delete_all">Tümünü kaldır</string>
