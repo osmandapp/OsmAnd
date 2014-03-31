@@ -1,12 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
-  <!--Disclaimer: 
-         If you are going to translate strings, please make sure: 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting English translations make sure:
-         3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy-->
-  <string name="tip_recent_changes_1_6_t">1.6 bertsioan aldaketak:⏎\n⇥⏎\n⇥* Sareko tesela iturburuak definitu/editatu (iraungitze data zehaztu)⏎</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_1_6_t">1.6 bertsioan aldaketak:⏎\n⇥⏎\n⇥* Sareko tesela iturburuak definitu/editatu (iraungitze data zehaztu)⏎</string>
   <string name="local_index_tile_data_zooms">Deskargatutako zoomak: %1$s</string>
   <string name="local_index_tile_data_expire">Iraungitze epea (minutuak): %1$s</string>
   <string name="local_index_tile_data_downloadable">Deskargagarria: %1$s</string>
@@ -49,7 +42,6 @@
   <string name="route_descr_map_location">Mapa: </string>
   <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
   <string name="route_descr_current_location">Oraingo kokapena</string>
-  <string name="route_descr_destination"/>
   <string name="route_to">Nora:</string>
   <string name="route_via">Pasatuz:</string>
   <string name="route_from">Nondik:</string>
@@ -384,7 +376,6 @@
   <string name="rendering_attr_noPolygons_name">Poligonoak ezkutatu</string>
   <string name="rendering_attr_appMode_name">Errenderizazio modua</string>
   <string name="rendering_attr_appMode_description">Mapa optimizatu</string>
-  <!--string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate contour data needed.</string-->
   <string name="rendering_attr_contourLines_description">Zoom mailetatik erakutsi (erliebe datuak beharrezkoak ditu):</string>
   <string name="rendering_attr_contourLines_name">Erakutsi sestra-kurbak</string>
   <string name="rendering_attr_hmRendered_description">Mapa xehetasun gehiago erakutsi</string>
@@ -718,7 +709,6 @@
   <string name="tip_location_sharing_t">⇥Zure ibilaldian leku interesgarrien kokapena partekatu dezakezu zure lagun eta familiarekin.⏎\n⇥⇥⏎\n⇥Nahi duzun kokapena partekatzeko:⏎\n⇥⇥⏎\n⇥Erabili \'Maparen menua\' -&gt; \'Partekatu kokapena\' menua.⏎\n⇥⇥⏎\n⇥Ondoren, aukeratu zure kokapena partekatzeko modua. Aukerak hauek dira: E-Mail, SMS(testua), edo kopiatu zure kokapenaren koordenadak arbelean..⏎\n⇥</string>
   <string name="tip_favorites">Puntu Gogokoenak</string>
   <string name="tip_favorites_t">⇥Maiz erabiltzen diren puntuak Gogokoenetan gorde daitezke.⏎\n⇥⇥⏎\n⇥Puntu bat Gogokoen bezala gordetzeko, joan maparen menura, aukeratu \'Gogokoenetara gehitu\' aukera eta ezarri izen bat. Gogokoen bat gorde ondoren, \'Pantaila Nagusia\' -&gt; \'Gogokoenak\' bidez aurkitu dezakezu.⏎\n⇥⇥⏎\n⇥\'Gogokoenak\' menuan agertzen den gogokoen batean sakatuta mantenduz, menuak helmuga bezala ezarri, editatu edo ezabatzeko aukera ematen du.⏎\n⇥⇥⏎\n⇥Gogokoen puntu guztiak mapan azaltzeko, \'Gogokoenak\' geruza aktibatu \'Menua\' -&gt; \'Mapa geruzak\' aukeran.⏎\n⇥</string>
-  <string name="create_poi_link_to_osm_doc"><u>Sareko OSM</u>ren mapa klasifikazioa irudiekin</string>
   <string name="error_doing_search">Lineaz kanpoko bilaketan errore bat gertatu da</string>
   <string name="search_offline_geo_error">Ezin izan da \'%s\' geo asmoa pasa</string>
   <string name="search_osm_offline">Bilatu geo kokapena</string>
@@ -1183,4 +1173,49 @@
   <string name="av_camera_focus_continuous">Kamara etengabe ari da enfokatzen saiatzen</string>
   <string name="av_photo_play_sound">Argazkia ateratzean erreproduzitu soinua </string>
   <string name="av_photo_play_sound_descr">Aukeratu ea argazkiak ateratzean soinua erreproduzitu edo ez</string>
-</resources>
+<string name="use_displayed_track_for_navigation">Bistaratutako pista erabili nahi duzu nabigatzeko?</string>
+    <string name="keep_and_add_destination_point">Helmuga puntua bezala gehitu</string>
+    <string name="select_gpx">Aukeratu GPX …</string>
+    <string name="route_descr_select_destination">Aukeratu Helmuga</string>
+    <string name="route_descr_select_on_map">Aukeratu mapan …</string>
+    <string name="route_descr_favorite">Gogokoena …</string>
+    <string name="route_preferences">Ibilbide lehentasunak</string>
+    <string name="route_info">Ibilbide informazioa</string>
+    <string name="routing_attr_prefer_motorway_name">Autopistak nahiago</string>
+	<string name="routing_attr_prefer_motorway_description">Autopistak nahiago</string>
+	<string name="routing_attr_avoid_toll_name">Bidesariak saihestu</string>
+	<string name="routing_attr_avoid_toll_description">Bidesariak saihestu</string>
+	<string name="routing_attr_avoid_unpaved_name">Asfaltatu gabeko bideak saihestu</string>
+	<string name="routing_attr_avoid_unpaved_description">Asfaltatu gabeko bideak saihestu</string>
+	<string name="routing_attr_avoid_ferries_name">Ferryak sahiestu</string>
+	<string name="routing_attr_avoid_ferries_description">Ferryak sahiestu</string>
+	<string name="routing_attr_avoid_motorway_name">Autopistak sahiestu</string>
+	<string name="routing_attr_avoid_motorway_description">Autopistak sahiestu</string>
+	<string name="routing_attr_weight_name">Pisua</string>
+	<string name="routing_attr_weight_description">Zehaztu pisu muga</string>
+    <string name="android_19_location_disabled">Desde la versión KitKat no puede descargar y actualizar mapas en la localización de almacenamiento anterior (%s). ¿Desea cambiar a una permitida y copiar todos los ficheros?
+        \n Nota : los ficheros antiguos permanecerán sin tocar.  
+        \n Nota : no será posible compartir ficheros entre OsmAnd and OsmAnd+. </string>
+    <string name="application_dir_change_warning2">OsmAnd puede intentar mover los datos al nuevo destino. ¿Quiere eso?</string>
+    <string name="copying_osmand_one_file_descr">Copiando el fichero (%s) al nuevo destino...</string>
+    <string name="copying_osmand_files_descr">Copiando los ficheros de OsmAnd al nuevo destino (%s)</string>
+    <string name="copying_osmand_files">Copiando archivos de OsmAnd</string>
+    <string name="app_mode_truck">Camión</string>
+    <string name="guidance_preferences_descr">Preferencias de navegación</string>
+    <string name="routing_preferences_descr">Preferencias de ruta</string>
+    <string name="speech_rate_descr">Especificar velocidad de voz TTS</string>
+    <string name="speech_rate">Velocidad de Voz</string>
+    <string name="tip_recent_changes_1_7_1_t">Cambios en 1.7:
+    \n\t* IMPORTANTE los mapas deben ser más nuevos que Febrero de 2014.
+	\n\t* Enrutado completamente actualizado (rapido y preciso) - 
+    \n\t* Nueva pantalla con Planificación de Ruta (más intuitiva y más potente)
+    \n\t** NOTA La ruta GPX está disponible en el botón Opciones de Ruta
+    \n\t* Auto ocultar botones en modo navegación
+    \n\t* Calcular la ruta offline al primer punto de la ruta GPX (opción \'pasar toda la ruta\')
+	\n\t* Simulación activa en tuneles
+	\n\t* Muchas pequeñas mejoras en la UX (Experiencia de Usuario) y arreglos de usabilidad
+	\n\t* Opción de accesibilidad a la velocidad de voz
+    </string>
+    <string name="routing_attr_short_way_name">Ibilbide laburra</string>
+	<string name="routing_attr_short_way_description">Ibilbide laburra erabili</string>
+	</resources>
