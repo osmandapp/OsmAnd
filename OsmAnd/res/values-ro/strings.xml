@@ -1315,4 +1315,26 @@
     <string name="recording_photo_description">Poza %1$s din %2$s</string>
     <string name="av_def_action_picture">Faceți o poză</string>
     <string name="recording_context_menu_precord">Faceți o poză</string>
-    </resources>
+    <string name="use_displayed_track_for_navigation">Doriți să utilizați traseul afișat pentru navigare?</string>
+    <string name="keep_and_add_destination_point">Adaugă ca și punct destinație</string>
+    <string name="route_descr_select_on_map">Selectează pe hartă …</string>
+    <string name="route_descr_favorite">Favorite …</string>
+    <string name="routing_attr_prefer_motorway_name">Preferă autostrăzi</string>
+	<string name="routing_attr_prefer_motorway_description">Preferă autostrăzi</string>
+	<string name="routing_attr_short_way_name">Drum scurt</string>
+	<string name="tip_recent_changes_1_7_1_t">Modificări în 1.7:
+    \n\t* IMPORTANT harțile trebuie să fie mai noi de Februarie 2014.
+	\n\t* Rutare actualizată (rapid și precis) - 
+    \n\t* Ecran nou cu planificare rută (mai intuitiv și mai puternic)
+    \n\t** NOTĂ Ruta GPX este disponibilă prin intermediul butonului Setări rute
+    \n\t* Ascunderea automată a butoanelor în modul de navigare
+    \n\t* Calcularea rutei offline până la primul punct al rutei GPX (opțiunea \'pass the whole track\')
+	\n\t* Simulare activă în tuneluri
+	\n\t* Multe mici îmbunătățiri în UX și remedieri uzabilitate
+	\n\t* Setare accesibilitate pentru rata de vorbire
+    </string>
+    <string name="disable_complex_routing_descr">Dezactivează rutarea în 2 faze pentru navigarea auto</string>
+    <string name="disable_complex_routing">Dezactivează rutarea complexă</string>
+    <string name="amenity_type_seamark">Baliză</string>
+    <string name="route_is_too_long">Rutarea offline OsmAnd poate dura foarte mult timp (sau uneri nu funcționează) pentru puncte la distanța mai mare de 200km. Este posibil să doriți să adăugați puncte intermediare pentru o performanță mai bună.</string>
+	</resources>
