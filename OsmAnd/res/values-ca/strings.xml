@@ -1466,6 +1466,8 @@
 		\n\t* Suport rellotges Pebble
 	</string>
     <string name="osmand_srtm_long_description_1000_chars">Aquest connector proporciona corbes de nivell que es poden veure als mapes locals de OsmAnd. Les dades globals (entre 70 graus nort i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració  entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
-    <string name="keep_and_add_destination_point">Afegir com lloc de destí</string>
-    <string name="calculate_osmand_route_without_internet">Calcular segment de ruta sense internet</string>
+    <string name="keep_and_add_destination_point">Afegir com punt de destinació</string>
+    <string name="calculate_osmand_route_without_internet">Calcular segment de ruta OsmAnd sense internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcular ruta OsmAnd pel primer i pel darrer segment de la ruta</string>
+    <string name="use_displayed_track_for_navigation">Vols seguir el camí visualitzat per la navegació?</string>
     </resources>
