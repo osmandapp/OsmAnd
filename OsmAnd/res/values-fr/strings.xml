@@ -261,7 +261,7 @@
   <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>
   <string name="install_more">Installer plus…</string>
   <string name="tip_update_index">Mise à jour des cartes hors-ligne</string>
-  <string name="tip_update_index_t">Il est très important d\'avoir des données cartographiques à jour, pour la visualisation des cartes hors-ligne, pour la recherche de points d\'intérêt ou d'adresses, et pour la navigation hors-ligne. OsmAnd fournit un gestionnaire de données qui permet de télécharger ces cartes hors-ligne (et d\'autres données), et de vérifier si des mises à jour sont disponibles.
+  <string name="tip_update_index_t">Il est très important d\'avoir des données cartographiques à jour, pour la visualisation des cartes hors-ligne, pour la recherche de points d\'intérêt ou d\'adresses, et pour la navigation hors-ligne. OsmAnd fournit un gestionnaire de données qui permet de télécharger ces cartes hors-ligne (et d\'autres données), et de vérifier si des mises à jour sont disponibles.
 	\n\nPour télécharger ou vérifier les mises à jour, allez à \'Menu Principal\' → \'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\'.
 	\n\nUne fois la liste des régions établie à partir d\'internet, sélectionnez le fichier à télécharger ou mettre à jour. Un menu en haut de l\'écran vous permet de sélectionner le type de données recherché (cartes standards, courbes de niveau, etc.).
 	\n\nL\'option \'Cartes téléchargées\' dans le menu contextuel à droite de l\'écran permet de n\'afficher que les cartes déjà téléchargées sur votre système, avec les couleurs ou polices suivantes :
@@ -1484,7 +1484,7 @@
     \n\t* Nouvel écran d\'élaboration de l\'itinéraire (plus intuitif et plus puissant)
     \n\t** Possibilité d\'utiliser les itinéraires GPX via le bouton Paramètres d\'itinéraire
     \n\t* Boutons se masquant automatiquement durant la navigation
-    \n\t* Calcul d'un itinéraire hors-ligne jusqu\'au début de l\'itinéraire GPX (option \'Suivre la trace depuis le début\')
+    \n\t* Calcul d\'un itinéraire hors-ligne jusqu\'au début de l\'itinéraire GPX (option \'Suivre la trace depuis le début\')
 \n\t* Simulation active dans les tunnels
 \n\t* Nombreuses petites améliorations de l\'expérience utilisateur et de l\'utilisabilité
 \n\t* Paramétrage de la vitesse d\'élocution
