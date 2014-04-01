@@ -1680,4 +1680,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	\n\t* Daug smulkių vartotojo sąsajos patobulinimų ir pataisymų
 	\n\t* Kalbėjimo greičio nustatymas
     </string>
+    <string name="calculate_osmand_route_without_internet">Apskaičiuoti OsmAnd maršruto segmentą nenaudojant interneto</string>
+    <string name="gpx_option_calculate_first_last_segment">Apskaičiuoti OsmAnd maršrutą pirmam ir paskutiniam maršruto segmentams</string>
     </resources>
