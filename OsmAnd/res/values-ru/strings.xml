@@ -1394,7 +1394,7 @@
     <string name="default_and">и</string>
     <string name="default_or">или</string>
 	<string name="remember_choice">Запомнить мой выбор</string>
-    <string name="route_is_too_long">Оффлайновая маршрутизация OsmAnd может занять очень много времени (а иногда и не работать) для точек на расстоянии больше чем 200 км. Можете требовать добавить промежуточную точку для лучшей производительности.</string>
+    <string name="route_is_too_long">Возможно, потребуется очень много времени для локального (оффлайн) расчёта маршрута более 200 км. Для расчёта, пожалуйста, добавьте одну или более промежуточных точек на маршруте.</string>
 	<string name="app_mode_aircraft">Самолёт</string>
     <string name="app_mode_boat">Лодка</string>
     <string name="app_mode_hiking">Пеший туризм</string>
