@@ -261,11 +261,14 @@
   <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>
   <string name="install_more">Installer plus…</string>
   <string name="tip_update_index">Mise à jour des cartes hors-ligne</string>
-  <string name="tip_update_index_t">Il est très important d\'avoir des données cartographiques à jour. OsmAnd a un gestionnaire de téléchargements qui permet de vérifier si les cartes locales peuvent être mises à jour.
-\n\tPour vérifier les mises à jour, aller à \'Menu Principal\'-&gt;\'Paramètres\'-&gt;\'Données hors-ligne\'-&gt;\'Télécharger du contenu\'. Sélectionner l\'option \'Filtrer téléchargé\' dans le menu contextuel.
-\nLà, seules les cartes déjà téléchargées sur votre système sont affichées, avec les couleurs ou polices suivantes :
-\n\t\'Vert\' - pour les cartes à jour avec le serveur
-\n\t\'Bleu\' - pour les cartes qui peuvent être mises à jour depuis le serveur\n\t\'Italique\' - pour les cartes désactivées sur l\'appareil</string>
+  <string name="tip_update_index_t">Il est très important d\'avoir des données cartographiques à jour, pour la visualisation des cartes hors-ligne, pour la recherche de points d\'intérêt ou d'adresses, et pour la navigation hors-ligne. OsmAnd fournit un gestionnaire de données qui permet de télécharger ces cartes hors-ligne (et d\'autres données), et de vérifier si des mises à jour sont disponibles.
+	\n\nPour télécharger ou vérifier les mises à jour, allez à \'Menu Principal\' → \'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\'.
+	\n\nUne fois la liste des régions établie à partir d\'internet, sélectionnez le fichier à télécharger ou mettre à jour. Un menu en haut de l\'écran vous permet de sélectionner le type de données recherché (cartes standards, courbes de niveau, etc.).
+	\n\nL\'option \'Cartes téléchargées\' dans le menu contextuel à droite de l\'écran permet de n\'afficher que les cartes déjà téléchargées sur votre système, avec les couleurs ou polices suivantes :
+	\n\n\'Vert\' - pour les cartes à jour avec le serveur
+	\n\n\'Bleu\' - pour les cartes qui peuvent être mises à jour depuis le serveur
+	\n\t\'Italique\' - pour les cartes désactivées sur l\'appareil
+	</string>
   <string name="level_to_switch_vector_raster_descr">Niveau de zoom maximum pour l\'utilisation des cartes vectorielles au lieu des tuiles de carte</string>
   <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel</string>
   <string name="tip_location_sharing">Partage d\'emplacement</string>
@@ -276,7 +279,7 @@
 </string>
   <string name="tip_favorites">Lieux favoris</string>
   <string name="tip_favorites_t">"Les points utilisés fréquemment peuvent être enregistrés en tant que favoris.
-\n\tPour créer un lieu Favori, aller dans le Menu contextuel de la carte, sélectionner l\'option \'Ajouter aux favoris\' et saisir un nom adapté. Après enregistrement, ce lieu est facilement accessible par le menu \'Menu principal\'-&gt;\'Favoris\'.
+\n\tPour créer un lieu Favori, aller dans le menu contextuel de la carte, sélectionner l\'option \'Ajouter aux favoris\' et saisir un nom adapté. Après enregistrement, ce lieu est facilement accessible par le menu \'Menu principal\'-&gt;\'Favoris\'.
 \n\tUn appui long sur un favori dans le menu \'Favoris\' permet de le modifier, le supprimer ou de créer un itinéraire pour s\'y rendre.
 \n\tPour afficher tous les favoris sur la carte, activer le calque affichant tous les favoris directement sur la carte dans \'Menu contextuel de la carte\'-&gt;\'Couches\'. "</string>
   <string name="create_poi_link_to_osm_doc"> <u>OSM en ligne</u> classification des cartes en images</string>
@@ -291,7 +294,9 @@
   <string name="tip_app_mode">Mode de fonctionnement</string>
   
   <string name="tip_navigation">Navigation</string>
-  <string name="tip_navigation_t">Pour activer la navigation il faut d\'abord définir une destination. Puis aller dans \'Menu\'-&gt;\'Directions\' et sélectionner le mode de déplacement.</string>
+  <string name="tip_navigation_t">La navigation vers un point peut être lancée soit directement par un appui long à son emplacement sur la carte (un appui court sur la bulle apparue ouvre alors le menu contextuel avec le choix \'Aller vers le point\'), soit en choisissant \'Navigation\' après un appui court sur un favori ou un résultat de recherche.
+  	\n\nLa destination est alors indiquée par un point orange et un drapeau à damier. OsmAnd affiche la distance qui vous en sépare, et sa direction (par une flèche orange).
+  </string>
   <string name="tip_search">Recherche</string>
   <string name="tip_search_t">Vous pouvez rechercher un lieu via l\'option \'Rechercher autour du point\' dans le menu contextuel de la carte, ou via \'Menu\' → \'Rechercher\'.
   	\n\nVous pouvez alors rechercher :
@@ -781,7 +786,7 @@
   <string name="map_settings_descr">Configurer l\'affichage des cartes</string>
   <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'utiliser une grande gamme de cartes au format image en ligne, ou conservée en cache comme carte de base ou comme sur- ou sous-couche de carte. Les cartes peuvent également être préparées hors ligne et copiées dans le dossier OsmAnd.</string>
   <string name="osmand_background_plugin_description">Ce greffon permet d\'utiliser l\'enregistrement des traces et la navigation en mode économie (écran éteint) en réveillant périodiquement le GPS pour enregistrer une position ou jouer une instruction vocale.</string>
-  <string name="osmand_accessibility_description">Ce greffon configure les fonctionnalités d\'accessibilité.</string>
+  <string name="osmand_accessibility_description">Ce greffon permet de configurer les fonctionnalités d\'accessibilité.</string>
   <string name="extra_settings">Paramètres avancés</string>
   <string name="osmand_monitoring_description">Ce greffon permet l\'enregistrement de vos itinéraires en fichiers GPX et le suivi en direct utilisant un service web.</string>
   <string name="osmand_extra_settings_description">Ce greffon permet de gérer des paramètres de configuration avancés et propres à certains appareils.</string>
@@ -818,7 +823,7 @@
   <string name="accessibility_extensions_descr">Extensions d\'accessibilité pour les anciennes versions Android</string>
   <string name="accessibility_extensions">Extensions d\'accessibilité</string>
   <string name="accessibility_mode">Mode accessibilité</string>
-  <string name="accessibility_mode_descr">Activer les fonctionnalité d\'accessibilité</string>
+  <string name="accessibility_mode_descr">Activer les fonctionnalités d\'accessibilité</string>
   <string name="accessibility_on">Oui</string>
   <string name="accessibility_off">Non</string>
   <string name="accessibility_default">Selon les paramètres globaux</string>
@@ -868,7 +873,7 @@
   <string name="zoom_by_trackball">Utiliser le trackball pour le contrôle du zoom</string>
   <string name="use_short_object_names_descr">Utiliser les noms d\'objets courts</string>
   <string name="use_short_object_names">Utiliser les noms d\'objets</string>
-  <string name="accessibility_preferences_descr">Préférences liées à l\'accessibilité</string>
+  <string name="accessibility_preferences_descr">Configurer les paramètres liés à l\'accessibilité</string>
   <string name="accessibility_preferences">Accessibilité</string>
   <string name="use_fluorescent_overlays">Sur-couche fluorescente</string>
   <string name="use_fluorescent_overlays_descr">Utiliser les couleurs fluorescente pour les pistes et routes</string>
@@ -1435,7 +1440,7 @@
     <string name="osmodroid_seek">Chercher objet</string>
     <string name="osmodroid_unseek">Ne plus chercher objet</string>
     <string name="speech_rate_descr">Préciser la vitesse d\'élocution du TTS</string>
-    <string name="speech_rate">Vitesse d\'Élocution</string>
+    <string name="speech_rate">Vitesse d\'élocution</string>
     
     <string name="complex_route_calculation_failed">Échec du calcul rapide de route (%s), essai avec la méthode lente..</string>
     <string name="disable_complex_routing_descr">Désactiver le routage en 2 phases pour la navigation en voiture</string>
@@ -1473,15 +1478,17 @@
     <string name="route_info">Informations sur l\'itinéraire</string>
     <string name="keep_and_add_destination_point">Ajouter comme destination</string>
     <string name="use_displayed_track_for_navigation">Voulez-vous suivre la trace affichée à l\'écran ?</string>
-    <string name="tip_recent_changes_1_7_1_t">Changes in 1.7:
+    <string name="tip_recent_changes_1_7_1_t">Changements en version 1.7 :
     \n\t* IMPORTANT : Les cartes doivent être postérieures à février 2014.
 \n\t* Navigation entièrement mise à jour (rapide et précise).
-    \n\t* New screen with Route Planning (more intuitive and more powerful)
-    \n\t** Les itinéraires GPX sont disponibles via le bouton Paramètres d\'itinéraire
+    \n\t* Nouvel écran d\'élaboration de l\'itinéraire (plus intuitif et plus puissant)
+    \n\t** Possibilité d\'utiliser les itinéraires GPX via le bouton Paramètres d\'itinéraire
     \n\t* Boutons se masquant automatiquement durant la navigation
-    \n\t* Calculate offline route to the first point of GPX route (\'pass the whole track\' option)
+    \n\t* Calcul d'un itinéraire hors-ligne jusqu\'au début de l\'itinéraire GPX (option \'Suivre la trace depuis le début\')
 \n\t* Simulation active dans les tunnels
 \n\t* Nombreuses petites améliorations de l\'expérience utilisateur et de l\'utilisabilité
-\n\t* Speech rate accessibility setting
+\n\t* Paramétrage de la vitesse d\'élocution
     </string>
+    <string name="gpx_option_calculate_first_last_segment">Calculer un itinéraire OsmAnd pour le début et la fin de l\'itinéraire</string>
+    <string name="calculate_osmand_route_without_internet">Calculer un itinéraire OsmAnd hors-ligne</string>
     </resources>

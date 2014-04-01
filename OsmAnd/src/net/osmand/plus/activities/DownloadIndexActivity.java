@@ -190,24 +190,42 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				return true;
 			}
 		});
-        if(Build.VERSION.SDK_INT >= OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
-        	if(!settings.getExternalStorageDirectory().getAbsolutePath().equals(settings.getDefaultExternalStorageLocation())) {
-        		AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
-        		ab.setMessage(getString(R.string.android_19_location_disabled, settings.getExternalStorageDirectory()));
-        		ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						copyFilesForAndroid19();		
+		if (Build.VERSION.SDK_INT >= OsmandSettings.VERSION_DEFAULTLOCATION_CHANGED) {
+			final String currentStorage = settings.getExternalStorageDirectory().getAbsolutePath();
+			String primaryStorage = settings.getDefaultExternalStorageLocation();
+			if (!currentStorage.startsWith(primaryStorage)) {
+				// secondary storage
+				boolean currentDirectoryNotWritable = true;
+				for (String writeableDirectory : settings.getWritableSecondaryStorageDirectorys()) {
+					if (currentStorage.startsWith(writeableDirectory)) {
+						currentDirectoryNotWritable = false;
+						break;
 					}
-				});
-        		ab.setNegativeButton(R.string.default_buttons_cancel, null);
-        		ab.show();
-        	}
-        }
+				}
+				if (currentDirectoryNotWritable) {
+					currentDirectoryNotWritable = !OsmandSettings.isWritable(settings.getExternalStorageDirectory());
+				}
+				if (currentDirectoryNotWritable) {
+					final String newLoc = settings.getMatchingExternalFilesDir(currentStorage);
+					if (newLoc != null && newLoc.length() != 0) {
+						AccessibleAlertBuilder ab = new AccessibleAlertBuilder(this);
+						ab.setMessage(getString(R.string.android_19_location_disabled,
+								settings.getExternalStorageDirectory()));
+						ab.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								copyFilesForAndroid19(newLoc);
+							}
+						});
+						ab.setNegativeButton(R.string.default_buttons_cancel, null);
+						ab.show();
+					}
+				}
+			}
+		}
 	}
 	
-	private void copyFilesForAndroid19() {
-		final String newLoc = settings.getDefaultExternalStorageLocation();
+	private void copyFilesForAndroid19(final String newLoc) {
 		MoveFilesToDifferentDirectory task = 
 				new MoveFilesToDifferentDirectory(DownloadIndexActivity.this, 
 						new File(settings.getExternalStorageDirectory(), IndexConstants.APP_DIR), 
