@@ -998,21 +998,113 @@ public class OsmandSettings {
 	
 	public File getExternalStorageDirectory() {
 		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
-		if(Build.VERSION.SDK_INT >= VERSION_DEFAULTLOCATION_CHANGED && !new File(defaultLocation, IndexConstants.APP_DIR).exists()) {
-			defaultLocation += "/Android/data/" + ctx.getPackageName();
-		}
 		return new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
 				defaultLocation));
 	}
 	
-	public static final int VERSION_DEFAULTLOCATION_CHANGED = Integer.MAX_VALUE;
+	public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
 
 	public String getDefaultExternalStorageLocation() {
 		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
-		if(Build.VERSION.SDK_INT >= VERSION_DEFAULTLOCATION_CHANGED) {
-			defaultLocation += "/Android/data/" + ctx.getPackageName();
-		}
 		return defaultLocation;
+	}
+	
+	private static List<String> getWritableSecondaryStorages() {
+	 	List<String> writableSecondaryStorage = new ArrayList<String>();
+		try {
+			String rawSecondaryStorage = System.getenv("SECONDARY_STORAGE");
+			if (rawSecondaryStorage != null && rawSecondaryStorage.trim().length() > 0) {
+				for (String secondaryPath : rawSecondaryStorage.split(":")) {
+					File testFile = new File(secondaryPath);
+					if (isWritable(testFile)) {
+						writableSecondaryStorage.add(secondaryPath);
+					}
+				}
+			}
+		} catch (RuntimeException e) {
+ 			e.printStackTrace();
+ 		}
+		return writableSecondaryStorage;
+	}
+	
+	public String getMatchingExternalFilesDir(String dir) {
+		// only API 19 !!
+		try {
+			File[] externalFilesDirs = ctx.getExternalFilesDirs(null);
+			String rawSecondaryStorage = System.getenv("SECONDARY_STORAGE");
+			if (rawSecondaryStorage != null && rawSecondaryStorage.trim().length() > 0 && externalFilesDirs != null) {
+				for (String secondaryPath : rawSecondaryStorage.split(":")) {
+					if (dir.startsWith(secondaryPath)) {
+						for (File externFileDir : externalFilesDirs) {
+							if (externFileDir != null && externFileDir.getAbsolutePath().startsWith(secondaryPath)) {
+								return externFileDir.getAbsolutePath();
+							}
+						}
+					}
+				}
+			}
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public List<String> getWritableSecondaryStorageDirectorys() {
+		// only API 19 !!
+		// primary external storage directory
+		String primaryExternalStorageDirectory = getDefaultExternalStorageLocation();
+		// also creates directories, if they don't exist until now
+		File[] externalFilesDirs = ctx.getExternalFilesDirs(null);
+		List<String> writableSecondaryStorages = getWritableSecondaryStorages();
+		List<String> writableSecondaryStorageDirectory = new ArrayList<String>();
+		try {
+			boolean primaryExternalStorageFound = false;
+			if(externalFilesDirs != null) {
+				for (File externFileDir : externalFilesDirs) {
+					if (externFileDir != null) {
+						final String externalFilePath = externFileDir.getAbsolutePath();
+						if (externalFilePath.startsWith(primaryExternalStorageDirectory) && !primaryExternalStorageFound) {
+							// exclude primary external storage
+							// no special location is required
+							primaryExternalStorageFound = true;
+						} else {
+							// secondary storage
+							// check if special location is required
+							boolean specialPathRequired = true;
+							for (String writableSecondaryStorage : writableSecondaryStorages) {
+								if (externalFilePath.startsWith(writableSecondaryStorage)) {
+									// no special location required
+									writableSecondaryStorageDirectory.add(writableSecondaryStorage);
+									specialPathRequired = false;
+									break;
+								}
+							}
+							if (specialPathRequired == true) {
+								// special location required
+								writableSecondaryStorageDirectory.add(externalFilePath);
+							}
+						}
+					}
+				}	
+			}
+			
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
+		return writableSecondaryStorageDirectory;
+	}
+	
+	public static boolean isWritable(File dirToTest) {
+		boolean isWriteable = false;
+		try {
+			File writeTestFile = File.createTempFile("osmand_", ".tmp", dirToTest);
+			isWriteable = writeTestFile.exists();
+			writeTestFile.delete();
+		} catch (IOException e) {
+			isWriteable = false;
+		}
+		return isWriteable;
 	}
 	
 	public boolean setExternalStorageDirectory(String externalStorageDir) {
