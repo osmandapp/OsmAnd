@@ -1333,7 +1333,7 @@
     
 	<string name="speak_speed_limit">Сообщать о превышении скорости</string>
     <string name="speak_cameras">Сообщать о камерах</string>
-	<string name="speak_traffic_warnings">Сообщать о препятствиях</string>
+	<string name="speak_traffic_warnings">Сообщать о дорожных событиях</string>
 	
     <string name="clear_intermediate_points">Очистить промежуточные точки</string>
     <string name="keep_intermediate_points">Оставить промежуточные точки</string>
