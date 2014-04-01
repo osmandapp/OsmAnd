@@ -1517,9 +1517,17 @@
     <string name="disable_complex_routing_descr">Zwei-Phasen-Routing für Auto-Navigation deaktivieren</string>
     <string name="disable_complex_routing">Komplexes Routing deaktivieren</string>
     <string name="route_descr_select_on_map">Auf Karte auswählen…</string>
-    <string name="route_descr_favorite">Favoriten…</string>
-    <string name="route_preferences">Routen Präferenzen</string>
-    <string name="route_info">Routen Informationen</string>
+    <string name="route_descr_favorite">Favorit…</string>
+    <string name="route_preferences">Routen-Präferenzen</string>
+    <string name="route_info">Routen-Informationen</string>
     <string name="osmodroid_refresh">Kanäle aktualisieren</string>
     <string name="osmodroid_seek">Objekt suchen</string>
-    </resources>
+
+    <string name="calculate_osmand_route_without_internet">Osmand Routensegment ohne Internet berechnen</string>
+    <string name="gpx_option_calculate_first_last_segment">Ergänze das erste und letze Segment via OsmAnd navigation</string>
+    <string name="use_displayed_track_for_navigation">Möchten Sie die angezeigte GPX-Datei zur Navigation verwenden?</string>
+    <string name="keep_and_add_destination_point">Als Ziel hinzufügen</string>
+    <string name="select_gpx">GPX-Datei wählen &#8230;</string>
+    <string name="route_descr_select_destination">Ziel wählen</string>
+
+</resources>
