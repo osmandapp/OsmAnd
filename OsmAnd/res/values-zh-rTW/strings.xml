@@ -21,7 +21,7 @@
     <string name="add_as_last_destination_point">增為最後一個中途點</string>
     <string name="add_as_first_destination_point">增為第一個中途點</string>
     <string name="replace_destination_point">替換目的地點</string>
-    <string name="new_destination_point_dialog">您已經有設過目的地點。</string>
+    <string name="new_destination_point_dialog">您已經有設定了目的地點。</string>
     <string name="target_points">中途點</string>
     <string name="intermediate_point_too_far">中途點 %1$ 離最近的道路太遠。</string>
     <string name="arrived_at_intermediate_point">您已經來到您的中途點</string>
@@ -1661,4 +1661,17 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="route_info">路線資訊</string>
     <string name="keep_and_add_destination_point">加為目的地點</string>
     <string name="use_displayed_track_for_navigation">您是否要將顯示軌跡使用於導航？</string>
+    <string name="calculate_osmand_route_without_internet">計算的 OsmAnd 路段沒有網際網路</string>
+    <string name="gpx_option_calculate_first_last_segment">計算最初和最後路段的 OsmAnd 路線</string>
+    <string name="tip_recent_changes_1_7_1_t">在1.7的變更：
+    \n\t* 重要，地圖應該會比 2014 年 2 月新。
+	\n\t* 完全更新的路線（快速和精確）-↵ 
+    \n\t* 新的螢幕與路線規劃（更直觀和更強大） 
+    \n\t** 注意，在路線設定按鈕之下可用 GPX 路線
+    \n\t* 在導航模式下自動隱藏按鈕
+    \n\t* 計算離線路線到 GPX 路線的第一點（\'經過全程軌跡\'選項）
+	\n\t* 在隧道主動的模擬 
+	\n\t* 有很多小的 UX 改進和適用性修復
+	\n\t* 語音速率協助工具設定
+    </string>
     </resources>
