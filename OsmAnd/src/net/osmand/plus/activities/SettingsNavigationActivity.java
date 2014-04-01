@@ -174,7 +174,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 								p.getPossibleValueDescriptions(), svlss);
 					}
 					basePref.setTitle(SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName()));
-					basePref.setSummary(SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getDescription()));
+					basePref.setSummary(SettingsBaseActivity.getRoutingStringPropertyDescription(this, p.getId(), p.getDescription()));
 					cat.addPreference(basePref);
 				}
 			}
