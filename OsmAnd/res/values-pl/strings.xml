@@ -1612,8 +1612,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
         \n Uwaga : nie będzie możliwe współdzielenie tych samych plików pomiędzy OsmAnd i OsmAnd+. </string>
     <string name="routing_attr_prefer_motorway_name">Preferuj autostrady</string>
 	<string name="routing_attr_prefer_motorway_description">Preferuj autostrady</string>
-	<string name="routing_attr_short_way_name">Krótka droga</string>
-	<string name="routing_attr_short_way_description">Używaj krótkiej drogi</string>
+	<string name="routing_attr_short_way_name">Najkrótsza droga</string>
+	<string name="routing_attr_short_way_description">Używaj najkrótszej drogi</string>
 	<string name="routing_attr_avoid_toll_name">Unikaj płatnych dróg</string>
 	<string name="routing_attr_avoid_toll_description">Unikaj płatnych dróg</string>
 	<string name="routing_attr_avoid_unpaved_name">Unikaj nieutwardzone drogi</string>
