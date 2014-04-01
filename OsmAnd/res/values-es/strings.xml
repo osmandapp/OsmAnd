@@ -1582,4 +1582,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 →\n\t* Muchas pequeñas mejoras en la UX (Experiencia de Usuario) y arreglos de usabilidad↵
 →\n\t* Opción de accesibilidad a la velocidad de voz↵
     </string>
+    <string name="calculate_osmand_route_without_internet">Calcular segmento de ruta OsmAnd sin internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcular ruta OsmAnd para primer y último segmento de ruta</string>
+    <string name="osmodroid_unseek">Objetos no buscados</string>
     </resources>
