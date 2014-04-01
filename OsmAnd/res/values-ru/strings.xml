@@ -1268,7 +1268,7 @@
     <string name="av_def_action_choose">Выберите по запросу</string>
     <string name="osmand_play_title_30_chars">OsmAnd карты и навигация</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ карты и навигация</string>
-	<string name="use_kalman_filter_compass_descr">Использовать фильтр Калмана для данных GPS</string>
+	<string name="use_kalman_filter_compass_descr">Использовать фильтр Калмана для избежания отклонений компаса</string>
     <string name="use_kalman_filter_compass">Использовать фильтр Калмана</string>
     <string name="cancel_navigation">Прекратить навигацию</string>
     <string name="use_magnetic_sensor">Использовать датчик магнитного поля</string>
