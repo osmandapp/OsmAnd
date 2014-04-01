@@ -1661,4 +1661,6 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	\n\t* Veel kleine verbeteringen in de interface &amp; bruikbaarheid
 	\n\t* Spraaksnelheid voorkeur
     </string>
+    <string name="calculate_osmand_route_without_internet">Bereken een OsmAnd routesegment zonder internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Bereken een OsmAnd route voor het eerste en laatste routesegment</string>
     </resources>
