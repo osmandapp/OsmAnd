@@ -418,7 +418,7 @@
     <string name="add_as_first_destination_point">Add as first waypoint</string>
 
     <string name="replace_destination_point">Replace destination point</string>
-    <string name="new_destination_point_dialog">You already have destination point set.</string>
+    <string name="new_destination_point_dialog">You already have the destination point set.</string>
     <string name="target_points">Waypoints</string>
     <string name="intermediate_point_too_far">Waypoint %1$s too far from nearest road.</string>
     <string name="arrived_at_intermediate_point">You have arrived at your waypoint</string>
