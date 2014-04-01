@@ -1368,7 +1368,7 @@
 	<string name="driving_region_europe_asia">Европа и Азия</string>
 	<string name="driving_region_uk">Англия, Индия, Австралия и др.</string>
 	<string name="context_menu_item_directions_to">Маршрут к</string>
-    <string name="context_menu_item_directions_from">Маршрут от</string>
+    <string name="context_menu_item_directions_from">Пункт отправления</string>
     <string name="driving_region_canada">Канада</string>
 	<string name="tip_map_styles">Стили карты</string>
 	<string name="about_version">Версия:</string>
