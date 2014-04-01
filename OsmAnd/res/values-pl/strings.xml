@@ -1644,4 +1644,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	\n\t* Wiele małych usprawnień i poprawek interfejsu użytkownika
 	\n\t* Dostępne ustawienie prędkości wymowy
     </string>
+    <string name="calculate_osmand_route_without_internet">Przelicz segment trasy OsmAnd offline</string>
+    <string name="gpx_option_calculate_first_last_segment">Przelicz trasę według OsmAnd dla pierwszego i ostatniego segmentu trasy</string>
     </resources>
