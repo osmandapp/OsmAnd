@@ -1497,8 +1497,8 @@
 	<string name="routing_attr_avoid_ferries_description">Fähren vermeiden</string>
 	<string name="routing_attr_avoid_motorway_name">Autobahnen vermeiden</string>
 	<string name="routing_attr_avoid_motorway_description">Autobahnen vermeiden</string>
-	<string name="routing_attr_weight_name">Gesamtgewicht</string>
-	<string name="routing_attr_weight_description">Angabe für Gewichtsbeschränkung</string>
+	<string name="routing_attr_weight_name">Maximalgewicht</string>
+	<string name="routing_attr_weight_description">Angabe einer Fahrzeugs-Gewichtsbeschränkung</string>
     <string name="android_19_location_disabled">Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Nun einen zulässigen Speicherort wählen und alle notwendigen Dateien dorthin kopieren?
         \n Hinweis: Ursprüngliche Dateien bleiben hiervon unberührt. 
         \n Hinweis: Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden. </string>
