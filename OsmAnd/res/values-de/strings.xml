@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_is_too_long">Der OsmAnd Offline-Router braucht evtl. sehr lang (oder findet gar kein Ergebnis) für mehr als 200km voneinander entfernte Punkte. Um die Performanz zu verbessern, fügen Sie evtl. einen oder mehrere Wegpunkte in die Route ein.</string>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_is_too_long">Der OsmAnd Offline-Router braucht evtl. sehr lang (oder findet gar kein Ergebnis) für mehr als 200km voneinander entfernte Punkte. Um die Performanz zu verbessern, fügen Sie evtl. einen oder mehrere Wegpunkte in die Route ein.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -1487,12 +1487,12 @@
     <string name="app_modes_choose">Anwendungsprofile</string>
 	<string name="routing_attr_prefer_motorway_name">Autobahnen bevorzugen</string>
 	<string name="routing_attr_prefer_motorway_description">Autobahnen bevorzugen</string>
-	<string name="routing_attr_short_way_name">Kurze Strecke</string>
-	<string name="routing_attr_short_way_description">Benutze kurze Strecke</string>
+	<string name="routing_attr_short_way_name">Kürzeste Strecke</string>
+	<string name="routing_attr_short_way_description">Benutze kürzeste Strecke</string>
 	<string name="routing_attr_avoid_toll_name">Mautstraßen vermeiden</string>
 	<string name="routing_attr_avoid_toll_description">Mautstraßen vermeiden</string>
-	<string name="routing_attr_avoid_unpaved_name">unbefestigte Wege meiden</string>
-	<string name="routing_attr_avoid_unpaved_description">unbefestigte Wege meiden</string>
+	<string name="routing_attr_avoid_unpaved_name">Unbefestigte Wege meiden</string>
+	<string name="routing_attr_avoid_unpaved_description">Unbefestigte Wege meiden</string>
 	<string name="routing_attr_avoid_ferries_name">Fähren vermeiden</string>
 	<string name="routing_attr_avoid_ferries_description">Fähren vermeiden</string>
 	<string name="routing_attr_avoid_motorway_name">Autobahnen vermeiden</string>
