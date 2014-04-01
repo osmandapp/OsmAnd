@@ -108,7 +108,7 @@
     <string name="add_as_last_destination_point">Tilføj som sidste rutepunkt</string>
     <string name="add_as_first_destination_point">Tilføj som første rutepunkt</string>
     <string name="replace_destination_point">Udskift destinationspunktet</string>
-    <string name="new_destination_point_dialog">Destination er allerede sat.</string>
+    <string name="new_destination_point_dialog">Destinationen er allerede sat.</string>
     <string name="local_indexes_cat_av">Audio-/Videodata</string>
     <string name="stop_routing_confirm">Stop navigationen?</string>
     <string name="clear_dest_confirm">Slet destination (og rutepunkter)?</string>
@@ -1686,8 +1686,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="routing_attr_avoid_motorway_description">Undgå motorveje</string>
 	<string name="routing_attr_weight_name">Vægt</string>
 	<string name="routing_attr_weight_description">Angiv vægtbegrænsning</string>
-    <string name="routing_attr_short_way_name">Kort rute</string>
-	<string name="routing_attr_short_way_description">Anvend kort rute</string>
+    <string name="routing_attr_short_way_name">Korteste rute</string>
+	<string name="routing_attr_short_way_description">Anvend korteste rute</string>
 	<string name="route_info">Ruteinformation</string>
     <string name="select_gpx">Vælg GPX …</string>
     <string name="route_preferences">Ruteindstillinger</string>
@@ -1707,4 +1707,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	\n\t* Talehastighed indstilling
     </string>
     <string name="use_displayed_track_for_navigation">Brug viste spor til navigation?</string>
+    <string name="calculate_osmand_route_without_internet">Beregn OsmAnd rutesegment uden internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd rute for første og sidste rutesegment</string>
     </resources>
