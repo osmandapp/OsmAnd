@@ -32,8 +32,8 @@
 	<string name="routing_attr_avoid_ferries_description">Avoid ferries</string>
 	<string name="routing_attr_avoid_motorway_name">Avoid motorways</string>
 	<string name="routing_attr_avoid_motorway_description">Avoid motorways</string>
-	<string name="routing_attr_weight_name">Weight</string>
-	<string name="routing_attr_weight_description">Specify weight limitation</string>
+	<string name="routing_attr_weight_name">Maximum weight</string>
+	<string name="routing_attr_weight_description">Specify vehicle weight limitation</string>
     <string name="android_19_location_disabled">Since KitKat version you can\'t download and update map in previous storage location (%s). Do you want to change to allowed one and copy all files there?
         \n Note : old files will stay untouched.  
         \n Note : it will not be possible to share files between OsmAnd and OsmAnd+. </string>
