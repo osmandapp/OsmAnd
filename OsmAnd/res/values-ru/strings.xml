@@ -1389,7 +1389,7 @@
     <string name="local_index_tile_data_minzoom">Минимальное увеличение: %1$s</string>
     <string name="local_index_tile_data_name">Данные о тайлах: %1$s</string>
     <string name="base_world_map">Обзорная карта мира</string>
-	<string name="edit_tilesource_expiration_time">Осталось минут:</string>
+	<string name="edit_tilesource_expiration_time">Время действия (в минутах)</string>
     <string name="gps_status_eclipsim">Статус GPS</string>
     <string name="default_and">и</string>
     <string name="default_or">или</string>
