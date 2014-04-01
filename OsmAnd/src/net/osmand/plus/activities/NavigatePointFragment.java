@@ -70,9 +70,9 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		}
 		initUI(loc.getLatitude(), loc.getLongitude());
 		if(savedInstanceState != null && savedInstanceState.containsKey(SEARCH_LAT) && savedInstanceState.containsKey(SEARCH_LON)) {
-			String lat = savedInstanceState.getString(SEARCH_LAT, "");
-			String lon = savedInstanceState.getString(SEARCH_LON, "");
-			if(lat.length() > 0 && lon.length() > 0) {
+			String lat = savedInstanceState.getString(SEARCH_LAT);
+			String lon = savedInstanceState.getString(SEARCH_LON);
+			if(lat != null && lon != null && lat.length() > 0 && lon.length() > 0) {
 				((Spinner)view.findViewById(R.id.Format)).setSelection(savedInstanceState.getInt(SELECTION, 0));
 				currentFormat = savedInstanceState.getInt(SELECTION, 0);
 				((TextView)view.findViewById(R.id.LatitudeEdit)).setText(lat);
