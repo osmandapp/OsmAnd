@@ -1684,8 +1684,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="routing_attr_avoid_ferries_description">Undgå færger</string>
 	<string name="routing_attr_avoid_motorway_name">Undgå motorveje</string>
 	<string name="routing_attr_avoid_motorway_description">Undgå motorveje</string>
-	<string name="routing_attr_weight_name">Vægt</string>
-	<string name="routing_attr_weight_description">Angiv vægtbegrænsning</string>
+	<string name="routing_attr_weight_name">Maksimal vægt</string>
+	<string name="routing_attr_weight_description">Angiv køretøjets vægt begrænsning</string>
     <string name="routing_attr_short_way_name">Korteste rute</string>
 	<string name="routing_attr_short_way_description">Anvend korteste rute</string>
 	<string name="route_info">Ruteinformation</string>
@@ -1699,7 +1699,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	\n\t* VIGTIGT kort skal være nyere end februar 2014.
 	\n\t* Helt ny opdateret ruteplanlægning (hurtig og præcis)-
 	\n\t* Ny skærm med ruteplanlægning (mere intuitiv og kraftfuld)
-	\n\t** OBS GPX-rute er tilgængelig under knap for ruteindstillinger
+	\n\t** OBS: GPX-rute er tilgængelig under knap for ruteindstillinger
 	\n\t* Skjul knapperne automatisk under navigationen
 	\n\t* Beregn offline rute til det første punkt i GPX-rute (\'passer hele sporet\' indstilling)
 	\n\t* Aktiv simulering i tunneller
