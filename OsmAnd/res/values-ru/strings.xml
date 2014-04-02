@@ -1422,7 +1422,7 @@
 	<string name="routing_attr_avoid_unpaved_description">Избегать грунтовые дороги</string>
 	<string name="routing_attr_avoid_ferries_name">Избегать паромов</string>
 	<string name="routing_attr_avoid_ferries_description">Избегать паромов</string>
-	<string name="routing_attr_weight_name">Вес</string>
+	<string name="routing_attr_weight_name">Максимальный вес</string>
 	<string name="routing_attr_weight_description">Уточнить ограничение веса</string>
     
     <string name="map_widget_map_rendering">Отображение карты:</string>
