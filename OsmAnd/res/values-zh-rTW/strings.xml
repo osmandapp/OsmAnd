@@ -1651,8 +1651,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="routing_attr_avoid_ferries_description">避開渡輪</string>
 	<string name="routing_attr_avoid_motorway_name">避開高速公路</string>
 	<string name="routing_attr_avoid_motorway_description">避開高速公路</string>
-	<string name="routing_attr_weight_name">重量</string>
-	<string name="routing_attr_weight_description">指定重量限制</string>
+	<string name="routing_attr_weight_name">最大重量</string>
+	<string name="routing_attr_weight_description">指定車輛重量限制</string>
     <string name="select_gpx">選擇 GPX …</string>
     <string name="route_descr_select_destination">選擇目的地</string>
     <string name="route_descr_select_on_map">在地圖上選取 …</string>
@@ -1671,7 +1671,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     \n\t* 在導航模式下自動隱藏按鈕
     \n\t* 計算離線路線到 GPX 路線的第一點（\'經過全程軌跡\'選項）
 	\n\t* 在隧道主動的模擬 
-	\n\t* 有很多小的 UX 改進和適用性修復
+	\n\t* 有很多小的 UX (使用者體驗)改進和適用性修復
 	\n\t* 語音速率協助工具設定
     </string>
     </resources>
