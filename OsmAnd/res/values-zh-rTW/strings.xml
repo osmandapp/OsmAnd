@@ -1664,9 +1664,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="calculate_osmand_route_without_internet">計算的 OsmAnd 路段沒有網際網路</string>
     <string name="gpx_option_calculate_first_last_segment">計算最初和最後路段的 OsmAnd 路線</string>
     <string name="tip_recent_changes_1_7_1_t">在1.7的變更：
-    \n\t* 重要，地圖應該會比 2014 年 2 月新。
-	\n\t* 完全更新的路線（快速和精確）-↵ 
-    \n\t* 新的螢幕與路線規劃（更直觀和更強大） 
+    \n\t* 重要，地圖應該會比 2014 年 2 月更新。
+	\n\t* 完全修改的路線（快速和精確）-↵ 
+    \n\t* 新的螢幕畫面與路線規劃（更直觀和更強大） 
     \n\t** 注意，在路線設定按鈕之下可用 GPX 路線
     \n\t* 在導航模式下自動隱藏按鈕
     \n\t* 計算離線路線到 GPX 路線的第一點（\'經過全程軌跡\'選項）
