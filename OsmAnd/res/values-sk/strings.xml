@@ -1663,8 +1663,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="routing_attr_avoid_ferries_description">Vyhnúť sa trajektom</string>
 	<string name="routing_attr_avoid_motorway_name">Vyhnúť sa diaľniciam</string>
 	<string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam</string>
-	<string name="routing_attr_weight_name">Hmotnosť</string>
-	<string name="routing_attr_weight_description">Zadajte obmedzenie hmotnosti</string>
+	<string name="routing_attr_weight_name">Maximálna hmotnosť</string>
+	<string name="routing_attr_weight_description">Zadajte obmedzenie hmotnosti vozidla</string>
     <string name="select_gpx">Vybrať GPX …</string>
     <string name="route_descr_select_destination">Vybrať cieľ</string>
     <string name="route_descr_select_on_map">Vybrať na mape …</string>
@@ -1684,6 +1684,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
  	\n\t* Mnoho malých vylepšení rozhrania a použiteľnosti
  	\n\t* Nastavenia rýchlosti reči
     </string>
-    <string name="calculate_osmand_route_without_internet">Vypočítať úsek trasy bez pripojenia na Internet</string>
-    <string name="gpx_option_calculate_first_last_segment">Vypočítať trasu pre prvý a posledný úsek</string>
+    <string name="calculate_osmand_route_without_internet">Vypočítať OsmAnd trasu úseku bez pripojenia na Internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Vypočítať OsmAnd trasu pre prvý a posledný úsek</string>
     </resources>
