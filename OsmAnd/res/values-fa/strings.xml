@@ -1644,8 +1644,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="calculate_osmand_route_gpx">محاسبه مسیر Osmand به صورت آفلاین</string>
     <string name="routing_attr_prefer_motorway_name">انتخاب مسیر موتور سیکلت</string>
 	<string name="routing_attr_prefer_motorway_description">انتخاب مسیر موتور سیکلت</string>
-	<string name="routing_attr_short_way_name">مسیر کوتاه</string>
-	<string name="routing_attr_short_way_description">برو به کوتاهترین مسیر</string>
+	<string name="routing_attr_short_way_name">کوتاه ترین مسیر</string>
+	<string name="routing_attr_short_way_description">مسیریابی از کوتاه ترین مسیر</string>
 	<string name="routing_attr_avoid_toll_name">اجتناب کردن از راه های عوارضی</string>
 	<string name="routing_attr_avoid_toll_description">اجتناب کردن از راه های عوارضی</string>
 	<string name="routing_attr_avoid_unpaved_name">اجتناب کردن از راه های بدون آسفالت</string>
@@ -1654,8 +1654,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="routing_attr_avoid_ferries_description">اجتناب کردن از گذرگاه ها</string>
 	<string name="routing_attr_avoid_motorway_name">اجتناب کردن از مسیر های موتور سیکلت</string>
 	<string name="routing_attr_avoid_motorway_description">اجتناب کردن از مسیر های موتور سیکلت</string>
-	<string name="routing_attr_weight_name">سنگین</string>
-	<string name="routing_attr_weight_description">تعیین کردن محدود سازی سنگین</string>
+	<string name="routing_attr_weight_name">حداکثر وزن</string>
+	<string name="routing_attr_weight_description">تعیین محدودیت وزن خودرو</string>
     <string name="select_gpx">انتخاب جی پی ایکس …</string>
     <string name="route_descr_select_destination">انتخاب مقصد</string>
     <string name="route_descr_select_on_map">انتخاب روی نقشه …</string>
@@ -1675,4 +1675,6 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 →\n\t* Lots of small UX improvements &amp; usability fixes↵
 →\n\t* Speech rate accessibility setting↵
     </string>
+    <string name="calculate_osmand_route_without_internet">محاسبه مسیر اسمند بدون کمک از اینترنت</string>
+    <string name="gpx_option_calculate_first_last_segment">محاسبه اسمند برای مبدا و مقصد مسیر</string>
     </resources>
