@@ -1637,39 +1637,39 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="android_19_location_disabled">بعد از ورژن اندروید کیت کت شما نمیتوانید دانلود و آپلود نقشه بر روی مکان ذخیره شده قبلی داشته باشید (%s). اگر شما خواستید برای تغیر به یکبار مجاز و کپی تمام فایل ها در اینجا?↵
         \n نکته : فایل های قدیمی باید دست نخورده باقی بماند. ↵
         \n نکته بعدی : باید آن فایل ها به اشتراک گذاشته شود بعد از OsmAnd و OsmAnd+. </string>
-    <string name="application_dir_change_warning2">Osmand می تواند دوباره تلاش کند برای رفتن به داده های جدید مقصد. آیا شما می توانید بپذیرید؟</string>
+    <string name="application_dir_change_warning2">اسمند می تواند دوباره تلاش کند برای رفتن به داده های جدید مقصد. آیا شما می توانید بپذیرید؟</string>
     <string name="copying_osmand_one_file_descr">در حال کپی فایل (s%) به مقصد جدید...</string>
-    <string name="copying_osmand_files_descr">در حال کپی فایل های Osmand به مقصد جدید (%s)</string>
-    <string name="copying_osmand_files">فایل های Osmand کپی شد</string>
-    <string name="calculate_osmand_route_gpx">محاسبه مسیر Osmand به صورت آفلاین</string>
-    <string name="routing_attr_prefer_motorway_name">انتخاب مسیر موتور سیکلت</string>
-	<string name="routing_attr_prefer_motorway_description">انتخاب مسیر موتور سیکلت</string>
+    <string name="copying_osmand_files_descr">در حال کپی فایل های اسمند به مقصد جدید (%s)</string>
+    <string name="copying_osmand_files">فایل های اسمند کپی شد</string>
+    <string name="calculate_osmand_route_gpx">محاسبه مسیر اسمند به صورت آفلاین</string>
+    <string name="routing_attr_prefer_motorway_name">استفاده از مسیر موتور سیکلت</string>
+	<string name="routing_attr_prefer_motorway_description">استفاده از مسیر موتور سیکلت</string>
 	<string name="routing_attr_short_way_name">کوتاه ترین مسیر</string>
 	<string name="routing_attr_short_way_description">مسیریابی از کوتاه ترین مسیر</string>
-	<string name="routing_attr_avoid_toll_name">اجتناب کردن از راه های عوارضی</string>
-	<string name="routing_attr_avoid_toll_description">اجتناب کردن از راه های عوارضی</string>
-	<string name="routing_attr_avoid_unpaved_name">اجتناب کردن از راه های بدون آسفالت</string>
-	<string name="routing_attr_avoid_unpaved_description">اجتناب کردن از راه های بدون آسفالت</string>
-	<string name="routing_attr_avoid_ferries_name">اجتناب کردن از گذرگاه ها</string>
-	<string name="routing_attr_avoid_ferries_description">اجتناب کردن از گذرگاه ها</string>
-	<string name="routing_attr_avoid_motorway_name">اجتناب کردن از مسیر های موتور سیکلت</string>
-	<string name="routing_attr_avoid_motorway_description">اجتناب کردن از مسیر های موتور سیکلت</string>
+	<string name="routing_attr_avoid_toll_name">اجتناب از مسیرهای دارای عوارضی</string>
+	<string name="routing_attr_avoid_toll_description">اجتناب از مسیرهای دارای عوارضی</string>
+	<string name="routing_attr_avoid_unpaved_name">اجتناب از مسیرهای بدون آسفالت</string>
+	<string name="routing_attr_avoid_unpaved_description">اجتناب از مسیرهای بدون آسفالت</string>
+	<string name="routing_attr_avoid_ferries_name">اجتناب از گذرگاه آبی</string>
+	<string name="routing_attr_avoid_ferries_description">اجتناب از گذرگاه آبی</string>
+	<string name="routing_attr_avoid_motorway_name">اجتناب از مسیر های موتور سیکلت</string>
+	<string name="routing_attr_avoid_motorway_description">اجتناب از مسیر های موتور سیکلت</string>
 	<string name="routing_attr_weight_name">حداکثر وزن</string>
 	<string name="routing_attr_weight_description">تعیین محدودیت وزن خودرو</string>
-    <string name="select_gpx">انتخاب جی پی ایکس …</string>
+    <string name="select_gpx">انتخاب فایل جی پی ایکس …</string>
     <string name="route_descr_select_destination">انتخاب مقصد</string>
     <string name="route_descr_select_on_map">انتخاب روی نقشه …</string>
     <string name="route_descr_favorite">علاقه مندی ها …</string>
     <string name="route_preferences">تنظیمات مسیر</string>
     <string name="route_info">اطلاعات مسیر</string>
-    <string name="use_displayed_track_for_navigation">آیا شما می خواهید از مسیر های نمایش داده شده برای ناوبری استفاده کنید ؟</string>
-    <string name="keep_and_add_destination_point">افزودن به مقصد</string>
+    <string name="use_displayed_track_for_navigation">آیا شما می خواهید از مسیر نمایش داده شده برای مسیریابی استفاده کنید ؟</string>
+    <string name="keep_and_add_destination_point">افزودن به عنوان مقصد</string>
     <string name="tip_recent_changes_1_7_1_t">تغییرات در 1.7:↵
     \n\t*  نقشه های مهم باید جدیدتر از فوریه 2014 باشد.↵
 →\n\t* به طور کامل به روز رسانی مسیر یابی (سریع و دقیق) - ↵
     \n\t* صفحه نمایش جدید با برنامه ریزی مسیر (بصری بیشتر و قوی تر)↵
-    \n\t** NOTE GPX route is available under Route Settings buttton↵
-    \n\t* Auto hide buttons in navigation mode↵
+    \n\t** نکته: فایل های جی پی ایکس از طریق دکمه گزینه ها قابل دستیابی می باشند.↵
+    \n\t* دکمه ها در حالت مسیریابی به صورت خودکار مخفی میشوند.↵
     \n\t* Calculate offline route to the first point of GPX route (\'pass the whole track\' option)↵
 →\n\t* Active simulation in tunnels↵
 →\n\t* Lots of small UX improvements &amp; usability fixes↵
