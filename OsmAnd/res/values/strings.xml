@@ -346,7 +346,7 @@
     <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd\'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Distance measurement</string>
     <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location …\" to assign a note to the specified location</string>
-    <string name="monitoring_control_stop">stop</string>
+    <string name="monitoring_control_stop">Stop</string>
     <string name="map_widget_audionotes">Audio notes</string>
     <string name="audionotes_plugin_description">Take audio/video notes during the trip</string>
     <string name="audionotes_plugin_name">Audio/video notes</string>
