@@ -196,7 +196,7 @@ public class AudioVideoNoteRecordingMenu {
 		if (plugin.getCurrentRecording() != null) {
 			TextView timeText = (TextView) view.findViewById(R.id.timeText);
 			int duration = (int) ((System.currentTimeMillis() - startTime) / 1000);
-			timeText.setText(Algorithms.formatDuration(duration));
+			timeText.setText(Algorithms.formatDuration(duration, getMapActivity().getMyApplication().accessibilityEnabled()));
 		}
 	}
 

@@ -86,7 +86,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		StringBuilder s = new StringBuilder();
 		if(service.isConnected()) {
 			int seconds = (int) ((System.currentTimeMillis() - service.getConnectionTime()) / 1000);
-			s.append(getString(R.string.osmo_conn_successfull, Algorithms.formatDuration(seconds))).append("\n");
+			s.append(getString(R.string.osmo_conn_successfull, Algorithms.formatDuration(seconds, getMyApplication().accessibilityEnabled()))).append("\n");
 			SessionInfo si = service.getCurrentSessionInfo();
 			if(si == null) {
 				s.append(getString(R.string.osmo_auth_pending)).append("\n");
