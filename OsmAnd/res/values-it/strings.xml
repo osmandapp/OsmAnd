@@ -1672,9 +1672,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     \n\t* Scomparsa automatica dei pulsanti nella modalità navigazione ↵
     \n\t* Calcolo del percorso offline verso il primo punto della traccia GPX (opzione \'percorri tutta la traccia\')↵
 →\n\t* Simulazione attiva nei tunnel↵
-→\n\t* Molte piccole migliorie dell'interfaccia utente &amp; correzioni usabilità↵
+→\n\t* Molte piccole migliorie dell\'interfaccia utente &amp; correzioni usabilità↵
 →\n\t* Impostazioni della velocità della vocalizzazione↵
     </string>
-    <string name="calculate_osmand_route_without_internet">Calcola un percorso con OsmAnd senza l'utilizzo di internet</string>
-    <string name="gpx_option_calculate_first_last_segment">Calcola una percorso OsmAnd per il primo e l'ultimo tratto del percorso</string>
+    <string name="calculate_osmand_route_without_internet">Calcola un percorso con OsmAnd senza l\'utilizzo di internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcola una percorso OsmAnd per il primo e l\'ultimo tratto del percorso</string>
     </resources>

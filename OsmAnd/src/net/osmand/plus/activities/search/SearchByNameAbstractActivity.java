@@ -236,7 +236,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	@Override
 	protected void onRestoreInstanceState(Bundle prevState) {
-		endingText = prevState.getString("ENDING_TEXT", "");
+		endingText = prevState.getString("ENDING_TEXT");
+		if(endingText == null) {
+			endingText = "";
+		}
 		previousSpan = prevState.getParcelable("PREVIOUS_SPAN"); 
 		super.onRestoreInstanceState(prevState);
 	}
