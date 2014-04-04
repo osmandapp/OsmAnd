@@ -35,8 +35,8 @@
 	<string name="routing_attr_weight_name">Maximum weight</string>
 	<string name="routing_attr_weight_description">Specify vehicle weight limitation</string>
     <string name="android_19_location_disabled">Since KitKat version you can\'t download and update map in previous storage location (%s). Do you want to change to allowed one and copy all files there?
-        \n Note : old files will stay untouched.  
-        \n Note : it will not be possible to share files between OsmAnd and OsmAnd+. </string>
+        \n Note: old files will stay untouched.  
+        \n Note: it will not be possible to share files between OsmAnd and OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd could try to move the data to new destination. Do you want it?</string>
     <string name="copying_osmand_one_file_descr">Copying file (%s) to new destination...</string>
     <string name="copying_osmand_files_descr">Copying OsmAnd files to new destination (%s)</string>
@@ -95,7 +95,7 @@
 		\n\t* \'High contrast roads\' shows roads in very accentuated colors for bright ambient lighting situations
 		\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download)
 	</string>
-    <string name="about_version">Version :</string>
+    <string name="about_version">Version:</string>
     <string name="about_settings">About</string>
     <string name="about_settings_descr">Version info, licenses, project members</string>
     <string name="tips_and_tricks">Tips</string>
@@ -127,7 +127,7 @@
     <string name="edit_tilesource_name">Name</string>
     <string name="maps_define_edit">Define/Edit&#8230;</string>
 	<string name="map_widget_fps_info">FPS debug info</string>
-	<string name="driving_region_descr">Select Driving Region : US, Europe, UK, Asia and Others</string>
+	<string name="driving_region_descr">Select Driving Region: US, Europe, UK, Asia and Others</string>
 	<string name="driving_region">Driving Region</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">United States</string>
@@ -197,7 +197,7 @@
     <string name="plugin_distance_point">Point</string>
     <string name="gpx_file_name">GPX file name</string>
     <string name="gpx_saved_sucessfully">GPX file successfully saved to {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Create paths (or use / modify existing GPX files) to measure the distance between points. Save as GPX, can be used to plan GPX routes.</string>
+    <string name="osmand_distance_planning_plugin_description">Create paths (or use/modify existing GPX files) to measure the distance between points. Save as GPX, can be used to plan GPX routes.</string>
     <string name="osmand_distance_planning_plugin_name">Distance calculator &amp; Planning Tool</string>
     <string name="use_distance_measurement_help">* Tap to mark a point.\n 
         * Press and hold on the map to delete previous point.\n
@@ -213,7 +213,7 @@
     <string name="wait_current_task_finished">Please wait until current task is finished</string>
     <string name="use_kalman_filter_compass_descr">Use Kalman filter to avoid compass aberrations</string>
     <string name="use_kalman_filter_compass">Use Kalman filter</string>
-    <string name="access_mark_final_location_first">Accessibility mode : please select destination first</string> 
+    <string name="access_mark_final_location_first">Accessibility mode: please select destination first</string> 
     <string name="use_magnetic_sensor_descr">Use magnetic sensor to determine compass value instead of orientation sensor</string>
     <string name="use_magnetic_sensor">Use magnetic sensor</string>
     <string name="other_location">Other</string>
@@ -802,7 +802,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
 	<string name="map_settings">Map Settings</string>
 	<string name="map_settings_descr">Configure the map display</string>
-	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
+	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay/underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
 	
 	<string name="osmand_accessibility_description">Show settings for special accessibility features.</string>
 	<string name="extra_settings">Advanced settings</string>
@@ -825,7 +825,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t  *Usability and UI experience*
 		\n\t	- Improved in many areas		
 	</string>
-	<string name="osm_editing_plugin_description">Show settings needed for OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
+	<string name="osm_editing_plugin_description">Show settings needed for OSM feedback like collecting/modifying OSM POI objects, opening/commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
 	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
 	<string name="debugging_and_development">OsmAnd development</string>
@@ -1014,7 +1014,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\nTo display a route to the selected destination from any point other than your current position, select the start point on the map and tap \'Directions from\'.
 		\n\nIf you use \'Directions from\' together with \'Start navigation\', OsmAnd will switch to your actual position as soon as it is found (so this can be used to jump-start routing before the position is found), while \'Directions from\' in combination with \'Display route\' just shows you the route from any arbitrary point you had selected without subsequent updates.
 	</string>
-	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
+	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9:
 		\n\t- Improved offline map rendering
 		\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
 		\n\t- Massive look and feel changes
@@ -1032,7 +1032,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="auto_follow_route_navigation_descr">Auto-center map view only while navigating.</string>
 	<string name="auto_follow_location_enabled">Auto-center map view in use.</string>
 	<string name="pref_vector_rendering">Vector renderer specific options</string>
-	<string name="pref_overlay">Overlay / underlay</string>
+	<string name="pref_overlay">Overlay/underlay</string>
 	<string name="pref_raster_map">Map source settings</string>
 	<string name="pref_vector_map">Vector map settings</string>
 	<string name="delete_confirmation_msg">Delete %1$s?</string>
@@ -1078,7 +1078,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="select_search_position">Search near:</string>
 	<string name="context_menu_item_search">Search near here</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7:
-		\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
+		\n\t- Offline data manager (download, delete, activate/deactivate offline data directly in OsmAnd)
 		\n\t- Favorite points and groups (categorize, delete, manage favorites)
 		\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
 		\n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
@@ -1296,7 +1296,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build&#8230;</string>
-	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>
+	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB?</string>
 	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
 	<string name="loading_builds">Loading OsmAnd builds&#8230;</string>
 	<string name="select_build_to_install">Select an OsmAnd build to install</string>
@@ -1478,8 +1478,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="router_service_descr">Choose an online or offline navigation service</string>
 	<string name="router_service">Navigation service</string>
 	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
-	<string name="download_question">Download {0} - {1} ?</string>
-	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
+	<string name="download_question">Download {0} - {1}?</string>
+	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2})?</string>
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
 	<string name="error_io_error">I/O error occurred</string>
