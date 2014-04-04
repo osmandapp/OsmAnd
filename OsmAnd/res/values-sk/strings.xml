@@ -291,8 +291,8 @@
   <string name="city_type_town">Mesto</string>
   <string name="city_type_city">Veľkomesto</string>
   <string name="layer_poi_label">POI popisy</string>
-  <string name="animate_route_off">Vypnúť animáciu</string>
-  <string name="animate_route">Zapnúť animáciu</string>
+  <string name="animate_route_off">Vypnúť simuláciu</string>
+  <string name="animate_route">Začať simuláciu</string>
   <string name="tip_recent_changes_0_6_8_t">Zmeny v 0.6.8:
 		\n\t- Kompletne prerobené vyhľadávanie (POI, adresy)! Hľadanie adries je oveľa rýchlejšie a prístupnejšie. Vytvorené jedno vyhľadávacie rozhranie s rôznymi možnosťami.
 		\n\t- Implementácia vyhľadávania POI podľa názvu vo veľkých oblastiach (krajinách)
@@ -628,7 +628,7 @@
   <string name="layer_gpx_layer">GPX záznam…</string>
   <string name="error_reading_gpx">Chyba pri načítavaní GPX údajov</string>
   <string name="vector_data">Vektorové OSM mapy</string>
-  <string name="transport_context_menu">Hľadať prepravu po zastavení</string>
+  <string name="transport_context_menu">Hľadať prepravu na zastávke</string>
   <string name="point_on_map">Pozícia:\n Zem. šírka %1$.5f\n Zem. dĺžka %2$.5f</string>
   <string name="osb_bug_name">Chyba</string>
   <string name="poi_context_menu_modify">Upraviť bod záujmu (POI)</string>
@@ -718,9 +718,9 @@
   <string name="map_screen_orientation_descr">Výber orientácie obrazovky</string>
   <string name="opening_hours_not_supported">Formát otváracích hodín nie je podporovaný na úpravu</string>
   <string name="add_new_rule">Pridať nové pravidlo</string>
-  <string name="transport_Routes">Cesty</string>
+  <string name="transport_Routes">Linky</string>
   <string name="transport_Stop">Zastávka</string>
-  <string name="transport_stops">Zastávky</string>
+  <string name="transport_stops">zastávky</string>
   <string name="transport_search_after">Nasledovná trasa</string>
   <string name="transport_search_before">Prednostná trasa</string>
   <string name="transport_finish_search">Dokončiť hľadanie</string>
@@ -729,10 +729,10 @@
   <string name="transport_to_go_before">nasledovná vzdialenosť</string>
   <string name="transport_stops_to_pass">zastávky na prejdenie</string>
   <string name="transport_route_distance">Vzdialenosť trasy</string>
-  <string name="transport">Doprava</string>
+  <string name="transport">Hromadná doprava</string>
   <string name="default_buttons_ok">OK</string>
-  <string name="show_transport_over_map_description">Zobrazenie zástaviek verejnej dopravy na mape</string>
-  <string name="show_transport_over_map">Zobraziť zastávky dopravy</string>
+  <string name="show_transport_over_map_description">Zobrazenie zastávok verejnej dopravy na mape</string>
+  <string name="show_transport_over_map">Zobraziť zastávky hrom.dopravy</string>
   <string name="hello">Navigačná aplikácia OsmAnd</string>
   <string name="update_poi_success">Údaje POI boli úspešne aktualizované ({0} bolo načítaných)</string>
   <string name="update_poi_error_local">Chyba počas aktualizácii lokálnych indexov</string>
@@ -1207,8 +1207,8 @@
     <string name="recording_context_menu_play">Prehrať</string>
     <string name="recording_description">Záznam %1$s %2$s v %3$s</string>
     <string name="recording_default_name">nahrávka</string>
-    <string name="av_control_stop">zastaviť</string>
-    <string name="av_control_start">nahrať</string>
+    <string name="av_control_stop">Zastaviť</string>
+    <string name="av_control_start">Nahrať</string>
     <string name="map_widget_av_notes">Zvukové poznámky</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pre vrstevnice</string>
     <string name="osmand_srtm_long_description_1000_chars">Tento modul poskytuje vrstevnice, ktoré môžu byť zobrazené v OsmAnd offline mapách. Globálne údaje (medzi 70 stupňami severne a 70 stupňami južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems).</string>
@@ -1218,7 +1218,7 @@
     
     <string name="map_widget_distancemeasurement">Meranie vzdialenosti</string>
     <string name="audionotes_location_not_defined">Umiestnenie na spojenie s poznámkou ešte nie je definované. Ak chcete použiť špecifické umiestnenie, použite "Použiť umiestnenie..."</string>
-    <string name="monitoring_control_stop">zastaviť</string>
+    <string name="monitoring_control_stop">Zastaviť</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytváranie zvukových poznámok počas cestovania</string>
     <string name="audionotes_plugin_name">Modul pre audio/video poznámky</string>
