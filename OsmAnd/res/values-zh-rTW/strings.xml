@@ -485,7 +485,7 @@
 	<string name="local_index_gpx_info_show">\n\n按壓不放會出現選項</string>
 	<string name="local_index_gpx_info_speed">\n平均速度： %1$s \n最大速度：%2$s</string>
 	<string name="local_index_gpx_info_elevation">\n平均高度：%1$s\n最低高度：%2$s\n最高高度：%3$s\n上坡：%4$s\n下坡：%5$s</string>
-	<string name="local_index_gpx_info">子行跡：%1$d\n總點數：%2$d\n中途點：%3$d\n總距離：%4$s\n出發時間：%5$tF,  %5$tR\n終止時間：%6$tF,  %6$tR</string>
+	<string name="local_index_gpx_info">子軌跡：%1$d\n總點數：%2$d\n中途點：%3$d\n總距離：%4$s\n出發時間：%5$tF,  %5$tR\n終止時間：%6$tF,  %6$tR</string>
 	<string name="local_index_installed">版本</string>
 	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已解除成功。</string>
 	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已刪除成功。</string>
@@ -1060,7 +1060,7 @@
     <string name="default_buttons_do_not_show_again">不要再顯示</string>
     <string name="distance_measurement_start_editing">開始編輯</string>
     <string name="distance_measurement_finish_editing">結束編輯</string>
-    <string name="distance_measurement_finish_subtrack">開始一個新的子行跡</string>
+    <string name="distance_measurement_finish_subtrack">開始一個新的子軌跡</string>
     <string name="distance_measurement_save_gpx">另存為 GPX</string>
     <string name="distance_measurement_load_gpx">開啟現有的 GPX</string>
     <string name="wait_current_task_finished">請等待目前的作業結束</string>
@@ -1133,9 +1133,9 @@
     <string name="tip_recent_changes_1_4_t">在1.4的變更：
 	\n\t* 排列中途點以最佳的方式去全部查訪(巡回的推銷員，送貨到門)
 	\n\t* 按名稱查尋街道(在附近一帶)
-	\n\t* 規劃模式外掛元件(載入/編輯/儲存 GPX 行跡)
+	\n\t* 規劃模式外掛元件(載入/編輯/儲存 GPX 軌跡)
 	\n\t* 新的下載螢幕畫面(在背景下載)
-	\n\t* 支援 GPX 子檔案夾(組成您的 GPX 行跡)
+	\n\t* 支援 GPX 子檔案夾(組成您的 GPX 軌跡)
 	\n\t* 刪除 SRTM 檔案
 	\n\t* 支援 OSM 注解 
     </string>
@@ -1229,7 +1229,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
  - 顯示您周遭的POI（興趣點）
  - 能顯示專用的線上地圖圖磚
  - 可以顯示衛星視圖（來自 Bing)
- - 可顯示使用自訂不同透明度疊加的多種地圖層如遊覽/導航 GPX 行跡
+ - 可顯示使用自訂不同透明度疊加的多種地圖層如遊覽/導航 GPX 軌跡
  - 可選擇顯示地名於英文、裝置端或拼音拼法
 
 使用 OpenStreetMap 和維基百科的資料：
@@ -1328,7 +1328,7 @@ OsmAnd + 是付費應用程式版本。經由您的購買來支援專案，資�
 
 直接提供給 OpenStreetMap
  - 報告地圖錯誤
- - 直接從該應用程式上傳 GPX 行跡到 OSM
+ - 直接從該應用程式上傳 GPX 軌跡到 OSM
  - 增加興趣點並直接上傳給 OSM （如果離線或在之後上傳）
  - 可選旅途中記錄而且在背景模式（當裝置處於休眠模式下）
 
