@@ -780,7 +780,17 @@ Dati attualmente sul dispositivo (%1$s liberi):</string>
   <string name="select_plugin_to_activate">Seleziona un plugin per attivarlo o disattivarlo. (potrebbe essere richiesto il riavvio di OsmAnd.)</string>
   <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate</string>
   <string name="prefs_plugins">Gestore plugin</string>
-  <string name="tip_recent_changes_0_8_0_t">"Novità della v. 0.8.0:\n\t- *Funzionalità a plugin*\n\t- Molte delle funzionalità sono raggruppate per caratteristiche e possono essere abilitate/disabilitate nel Plugin Manager. Si possono abilitare sorgenti di mappe a tasselli (online o in cache), impostazioni per il tracking e molte altre funzionalità nuove o preesistenti.\n\t- *Nuovo supporto alle mappe offline*\n\t- Devi scaricare dati offline completamente nuovi (i vecchi non saranno più supportati)\n\t- *Calcolo dei percorsi offline*\n\t- Il calcolo dei percorsi offline diventa più solido\n\t- *Miglioramento usabilità e UI*\n\t- Miglioramenti in svariate aree "</string>
+  <string name="tip_recent_changes_0_8_0_t">"Novità della v. 0.8.0:
+		\n\t- *Funzionalità a plugin*\n\t- Molte delle funzionalità sono raggruppate per caratteristiche e possono essere abilitate/disabilitate nel Plugin Manager.
+		Si possono abilitare sorgenti di mappe a tasselli (online o in cache), impostazioni per il tracking e molte altre funzionalità nuove o preesistenti.
+		\n\t- *Nuovo supporto alle mappe offline*
+		\n\t- Il rendering delle mappe è ora più veloce e preciso (la gran parte delle linee costiere e le zone allagate sono state sistemate).
+		\n\t- Devi scaricare dati offline completamente nuovi (i vecchi non saranno più supportati)
+		\n\t- *Calcolo dei percorsi offline*
+		\n\t	- Il calcolo dei percorsi offline diventa più solido
+		\n\t- *Miglioramento usabilità e UI*
+		\n\t	- Miglioramenti in svariate aree		
+	</string>
   <string name="osm_editing_plugin_description">Visualizza le impostazioni necessarie per contributi a OSM come la raccolta/modifica dei PDI di OSM, aprire/commentare errori di OSM e inviare file GPX registrati (richiede le credenziali di OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
   
