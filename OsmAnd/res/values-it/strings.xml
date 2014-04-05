@@ -1617,7 +1617,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="app_mode_aircraft">Aereo</string>
     <string name="map_widget_map_rendering">Disegno della mappa:</string>
     <string name="app_modes_choose_descr">Scegli fra le modalità d\'uso disponibili nell\'applicazione</string>
-    <string name="app_modes_choose">Profili applicazione</string>
+    <string name="app_modes_choose">Modalità applicazione</string>
 	<string name="amenity_type_seamark">Meda</string>
     <string name="osmodroid_seek">Cerca oggetto</string>
     <string name="tip_recent_changes_1_7_t">Cambiamenti nella 1.7:
