@@ -289,9 +289,9 @@
 \n\tSelezionando \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menù contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'.
 	</string>
   <string name="tip_map_context_menu">\'Usa posizione\' Menu</string>
-  <string name="tip_map_context_menu_t">\tIl menu contestuale viene visualizzato selezionando a lungo sulla mappa o selezionando il pulsante trackball.
-\n\tQuesto visualizza un riquadro con le coordinate del punto. Per aprire il menu, fai clic sopra. (O seleziona a lungo per nascondere nuovamente il menù.)
-\n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (posizione).
+  <string name="tip_map_context_menu_t">Il menu contestuale \'Utilizza la posizione…\' mostra tutte le azioni possibili per un punto (posizione).
+		\n\nViene visualizzato selezionando a lungo sulla mappa, premendo il pulsante trackball o selezionando \'Menù\' → \'Utilizza la posizione…\' (gli ultimi due modi prendono il centro della mappa come riferimento).
+		\n\nIl riquadro del marker può essere nescosto nuovamente cliccandolo a lungo.
 	</string>
   <string name="tip_initial">Consigli e trucchi</string>
   <string name="tip_initial_t">OsmAnd è una applicazione di navigazione con molte funzioni.
