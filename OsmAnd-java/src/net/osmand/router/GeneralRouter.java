@@ -21,7 +21,7 @@ import net.osmand.util.MapUtils;
 
 public class GeneralRouter implements VehicleRouter {
 	
-	private static final float CAR_SHORTEST_DEFAULT_SPEED = 45/3.6f;
+	private static final float CAR_SHORTEST_DEFAULT_SPEED = 55/3.6f;
 	public static final String USE_SHORTEST_WAY = "short_way";
 	public static final String AVOID_FERRIES = "avoid_ferries";
 	public static final String AVOID_TOLL = "avoid_toll";
@@ -45,7 +45,9 @@ public class GeneralRouter implements VehicleRouter {
 	private float leftTurn;
 	private float roundaboutTurn;
 	private float rightTurn;
+	// speed in m/s
 	private float minDefaultSpeed = 10;
+	// speed in m/s
 	private float maxDefaultSpeed = 10;
 	
 	
@@ -278,7 +280,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
-		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getMinDefaultSpeed() * 3.6f) / 3.6f;
+		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getMinDefaultSpeed());
 	}
 
 	@Override
