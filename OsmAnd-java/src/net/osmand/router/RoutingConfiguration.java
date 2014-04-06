@@ -143,6 +143,7 @@ public class RoutingConfiguration {
 		final RoutingConfiguration.Builder config = new RoutingConfiguration.Builder();
 		GeneralRouter currentRouter = null;
 		RouteDataObjectAttribute currentAttribute = null;
+		String preType = null;
 		Stack<RoutingRule> rulesStck = new Stack<RoutingConfiguration.RoutingRule>();
 		parser.setInput(is, "UTF-8");
 		int tok;
@@ -160,8 +161,9 @@ public class RoutingConfiguration {
 				} else if ("point".equals(name) || "way".equals(name)) {
 					String attribute = parser.getAttributeValue("", "attribute");
 					currentAttribute = RouteDataObjectAttribute.getValueOf(attribute);
+					preType = parser.getAttributeValue("", "type");
 				} else {
-					parseRoutingRule(parser, currentRouter, currentAttribute, rulesStck);
+					parseRoutingRule(parser, currentRouter, currentAttribute, preType, rulesStck);
 				}
 			} else if (tok == XmlPullParser.END_TAG) {
 				String pname = parser.getName();
@@ -207,7 +209,7 @@ public class RoutingConfiguration {
 	}
 
 	private static void parseRoutingRule(XmlPullParser parser, GeneralRouter currentRouter, RouteDataObjectAttribute attr,
-			Stack<RoutingRule> stack) {
+			String parentType, Stack<RoutingRule> stack) {
 		String pname = parser.getName();
 		if (checkTag(pname)) {
 			if(attr == null){
@@ -221,11 +223,15 @@ public class RoutingConfiguration {
 			rr.value1 = parser.getAttributeValue("", "value1");
 			rr.value2 = parser.getAttributeValue("", "value2");
 			rr.type = parser.getAttributeValue("", "type");
+			if((rr.type == null || rr.type.length() == 0) &&
+					parentType != null && parentType.length() > 0) {
+				rr.type = parentType;
+			}
 			
 			RouteAttributeContext ctx = currentRouter.getObjContext(attr);
 			if("select".equals(rr.tagName)) {
 				String val = parser.getAttributeValue("", "value");
-				String type = parser.getAttributeValue("", "type");
+				String type = rr.type;
 				ctx.registerNewRule(val, type);
 				addSubclause(rr, ctx);
 				for (int i = 0; i < stack.size(); i++) {
