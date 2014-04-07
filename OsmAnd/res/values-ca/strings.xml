@@ -1470,4 +1470,15 @@
     <string name="calculate_osmand_route_without_internet">Calcular segment de ruta OsmAnd sense internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular ruta OsmAnd pel primer i pel darrer segment de la ruta</string>
     <string name="use_displayed_track_for_navigation">Vols seguir el camí visualitzat per la navegació?</string>
+    <string name="tip_recent_changes_1_7_1_t">Canvis a la 1.7:
+    \n\t* IMPORTANT els mapes han de ser més recents de Febrer 2014.
+	\n\t* Navegació millorada completament (rapidesa i  precisió) - 
+    \n\t* Nova pantalla de Planificació de Ruta (més intuïtiva i potent)
+    \n\t** NOTA La traça GPX està disponible al botó Configuració de Ruta
+    \n\t* Ocultació automàtica de botons en mode navegació
+    \n\t* Càlcul offline de la ruta al primer punt de la traça GPX (opció \'recórrer tota la traça\')
+	\n\t* Simulació activa en els túnnels
+	\n\t* Moltes millores a la Interfície d'Usuari i correccions d'usabilitat
+	\n\t* Configuració de accessibilitat en la velocitat de pronuncia
+    </string>
     </resources>
