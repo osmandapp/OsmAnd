@@ -144,7 +144,7 @@
   <string name="search_position_current_location_search">Recherche de l\'emplacement…</string>
   <string name="search_position_current_location_found">Emplacement[Trouvé]</string>
   <string name="search_position_address">Adresse…</string>
-  <string name="search_position_favorites">Favoris…</string>
+  <string name="search_position_favorites">Favori…</string>
   <string name="search_position_undefined">Non défini</string>
   <string name="search_position_fixed">Fixé</string>
   <string name="search_position_current_location">Emplacement actuel…</string>
@@ -236,7 +236,7 @@
   <string name="tts_missing_language_data">Les données pour la langue sélectionnée ne sont pas installées. Voulez-vous les obtenir sur le Market ?</string>
   <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
   <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
-  <string name="gpx_option_from_start_point">Suivre la trace depuis le début</string>
+  <string name="gpx_option_from_start_point">Suivre l'ensemble de la trace</string>
   <string name="switch_to_vector_map_to_see">Vous pouvez basculer sur les cartes vectorielles locales en utilisant le menu (Couches -&gt; Source de la carte… -&gt; Cartes vectorielles OSM) pour voir la carte.</string>
   <string name="choose_audio_stream">Sélectionner le flux audio</string>
   <string name="choose_audio_stream_descr">Sélectionner le canal pour le guidage vocal (dépend de la configuration système)</string>
@@ -267,7 +267,7 @@
 	\n\nL\'option \'Cartes téléchargées\' dans le menu contextuel à droite de l\'écran permet de n\'afficher que les cartes déjà téléchargées sur votre système, avec les couleurs ou polices suivantes :
 	\n\n\'Vert\' - pour les cartes à jour avec le serveur
 	\n\n\'Bleu\' - pour les cartes qui peuvent être mises à jour depuis le serveur
-	\n\t\'Italique\' - pour les cartes désactivées sur l\'appareil
+	\n\n\'Italique\' - pour les cartes désactivées sur l\'appareil
 	</string>
   <string name="level_to_switch_vector_raster_descr">Niveau de zoom maximum pour l\'utilisation des cartes vectorielles au lieu des tuiles de carte</string>
   <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel</string>
@@ -279,9 +279,9 @@
 </string>
   <string name="tip_favorites">Lieux favoris</string>
   <string name="tip_favorites_t">"Les points utilisés fréquemment peuvent être enregistrés en tant que favoris.
-\n\tPour créer un lieu Favori, aller dans le menu contextuel de la carte, sélectionner l\'option \'Ajouter aux favoris\' et saisir un nom adapté. Après enregistrement, ce lieu est facilement accessible par le menu \'Menu principal\'-&gt;\'Favoris\'.
-\n\tUn appui long sur un favori dans le menu \'Favoris\' permet de le modifier, le supprimer ou de créer un itinéraire pour s\'y rendre.
-\n\tPour afficher tous les favoris sur la carte, activer le calque affichant tous les favoris directement sur la carte dans \'Menu contextuel de la carte\'-&gt;\'Couches\'. "</string>
+\n\tPour créer un favori, aller dans le menu contextuel de la carte, sélectionnez l\'option \'Ajouter aux favoris\' et saisissez un nom adapté. Après enregistrement, ce lieu est facilement accessible par \'Menu\' → \'Favoris\'.
+\n\tUn appui court sur un favori dans le menu \'Favoris\' permet de créer un itinéraire pour s\'y rendre.
+\n\tPour afficher tous les favoris sur la carte, activer la couche \'Favoris\' dans \'Menu\' → \'Couches\'. "</string>
   <string name="create_poi_link_to_osm_doc"> <u>OSM en ligne</u> classification des cartes en images</string>
   <string name="error_doing_search">Une erreur est survenue lors de la recherche hors-ligne</string>
   <string name="search_offline_geo_error">Ne peut interpréter le geo intent:\'%s\'</string>
@@ -294,7 +294,7 @@
   <string name="tip_app_mode">Mode de fonctionnement</string>
   
   <string name="tip_navigation">Navigation</string>
-  <string name="tip_navigation_t">La navigation vers un point peut être lancée soit directement par un appui long à son emplacement sur la carte (un appui court sur la bulle apparue ouvre alors le menu contextuel avec le choix \'Aller vers le point\'), soit en choisissant \'Navigation\' après un appui court sur un favori ou un résultat de recherche.
+  <string name="tip_navigation_t">La navigation vers un point peut être lancée soit directement par un appui long à son emplacement sur la carte (un appui court sur la bulle apparue ouvre alors le menu contextuel avec le choix \'Aller vers le point\'), soit par un appui court sur un favori ou un résultat de recherche (en choisissant alors \'Navigation\').
   	\n\nLa destination est alors indiquée par un point orange et un drapeau à damier. OsmAnd affiche la distance qui vous en sépare, et sa direction (par une flèche orange).
   </string>
   <string name="tip_search">Recherche</string>
@@ -336,7 +336,7 @@
   <string name="add_waypoint_dialog_title">Ajouter une étape à une trace GPX enregistrée</string>
   <string name="context_menu_item_add_waypoint">Ajouter une étape GPX</string>
   <string name="amenity_type_administrative">Territoire</string>
-  <string name="amenity_type_barrier">Barrière</string>
+  <string name="amenity_type_barrier">Obstacle</string>
   <string name="amenity_type_education">Éducation</string>
   <string name="amenity_type_emergency">Urgence</string>
   <string name="amenity_type_entertainment">Divertissement</string>
@@ -720,7 +720,7 @@
   <string name="default_buttons_apply">Appliquer</string>
   <string name="default_buttons_add">Ajouter</string>
   <string name="default_buttons_no">Non</string>
-  <string name="add_favorite_dialog_top_text">Nom du favoris</string>
+  <string name="add_favorite_dialog_top_text">Nom du favori</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoris</string>
   <string name="add_favorite_dialog_favourite_added_template">Le point \'\'{0}\'\' à été ajouté aux favoris.</string>
   <string name="favourites_context_menu_edit">Éditer le favori</string>
@@ -784,7 +784,7 @@
   <string name="online_map_settings_descr">Configurer la source des cartes en ligne ou en cache</string>
   <string name="map_settings">- Paramètres des cartes</string>
   <string name="map_settings_descr">Configurer l\'affichage des cartes</string>
-  <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'utiliser une grande gamme de cartes au format image en ligne, ou conservée en cache comme carte de base ou comme sur- ou sous-couche de carte. Les cartes peuvent également être préparées hors ligne et copiées dans le dossier OsmAnd.</string>
+  <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'accéder à une grande gamme de cartes sous forme de tuiles téléchargées ou conservées en cache, utilisables comme carte de base, fond de carte, ou sur-couche. Les cartes peuvent également être préparées hors-ligne et copiées dans le dossier OsmAnd.</string>
   <string name="osmand_background_plugin_description">Ce greffon permet d\'utiliser l\'enregistrement des traces et la navigation en mode économie (écran éteint) en réveillant périodiquement le GPS pour enregistrer une position ou jouer une instruction vocale.</string>
   <string name="osmand_accessibility_description">Ce greffon permet de configurer les fonctionnalités d\'accessibilité.</string>
   <string name="extra_settings">Paramètres avancés</string>
@@ -792,7 +792,7 @@
   <string name="osmand_extra_settings_description">Ce greffon permet de gérer des paramètres de configuration avancés et propres à certains appareils.</string>
   <string name="osmand_development_plugin_description">Ce greffon permet la gestion de paramètres de développement et de débogage tels que la navigation animée ou l\'affichage des temps de rendu.</string>
   <string name="plugins_screen">Gestionnaire des greffons</string>
-  <string name="select_plugin_to_activate">Toucher un greffon pour l\'activer ou le désactiver (Redémarrage d\'OsmAnd peut être nécessaire)</string>
+  <string name="select_plugin_to_activate">Toucher un greffon pour l\'activer ou le désactiver (le redémarrage d\'OsmAnd peut être nécessaire)</string>
   <string name="prefs_plugins_descr">Les greffons fournissent à l\'application des fonctionnalités supplémentaires, telles que l\'enregistrement des traces, l\'utilisation de cartes en ligne, le fonctionnement en arrière-plan, le mode accessibilité et bien d\'autres.</string>
   <string name="prefs_plugins">Gestionnaire de greffons</string>
   <string name="tip_recent_changes_0_8_0_t">Changements en 0.8.0 :
@@ -1014,17 +1014,17 @@
 <string name="int_continuosly">En continu</string>
 <string name="tip_rotation_switching_t_v2">\tVous pouvez modifier l\'orientation de la carte par un appui court sur l\'icône de la boussole
 \n\tLes choix sont :
-\n\t\'Ne pas tourner (nord vers le haut)\' - La carte ne changera pas d\'orientation, le nord sera toujours vers le haut
-\n\t\'Direction du déplacement\' - La carte est continuellement alignée dans la direction du déplacement
-\n\t\'Boussole\' - La carte est continuellement alignée sur la valeur de la boussole</string>
+\n\t\'Ne pas tourner (nord vers le haut)\' - La carte ne changera pas d\'orientation, le nord sera toujours vers le haut.
+\n\t\'Direction du déplacement\' - La carte est continuellement alignée dans la direction du déplacement.
+\n\t\'Boussole\' - La carte est continuellement alignée sur la valeur de la boussole.</string>
 <string name="tip_day_night_mode_t_v2">"\tLe style de la carte peut, pour certaines cartes vectorielles, être modifié selon qu\'il fait jour (plus clair) ou nuit (plus sombre)
 \n\tLes couleurs de nuit sont plus sûres pour la conduite nocturne
-\n\tVous pouvez configurer la politique de bascule jour/nuit dans \'Navigation\'-&gt;\'Mode jour/nuit\'
-\n\tLes choix sont:
-\n\t\'Lever/coucher du soleil\'
+\n\tVous pouvez changer de règle pour la bascule jour/nuit dans \'Menu\' → \'Configurer l\'écran\' → \'Mode jour/nuit\'.
+\n\tLes choix sont :
+\n\t\'Lever/coucher du soleil\' - Bascule automatique, en fonction de l\'éphéméride (mode par défaut)
 \n\t\'Jour\' - Toujours utiliser le mode jour
 \n\t\'Nuit\' - Toujours utiliser le mode nuit
-\n\t\'Détection de la luminosité\' - L\'affichage est contrôlé par le capteur de luminosité de votre appareil, s\'il existe "</string>
+\n\t\'Détection de la luminosité\' - Bascule contrôlée par le capteur de luminosité de votre appareil, s\'il existe "</string>
 <string name="osmand_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner avec des cartes hors ligne ou en ligne.</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner avec des cartes hors ligne ou en ligne</string>
 <string name="tip_recent_changes_0_8_3_t">"Changements en 0.8.3 :
@@ -1042,7 +1042,7 @@
 \n\tDans \'Source de la carte…\' vous pouvez choisir entre les cartes vectorielles préchargées (choix par défaut, nécessaires pour la navigation hors-ligne), ou des sources prédéfinies de tuiles de carte en ligne ou en cache (activer le greffon \'Cartes en ligne\' pour cela), ou des cartes créées manuellement sur un PC grâce à OsmAndMapCreator.
 \n\tOsmAnd supporte également des sources personnalisées.
 </string>
-<string name="tip_app_mode_t_v2">\tOsmAnd propose des profils (personnalisables) adaptés aux différents usages.
+<string name="tip_app_mode_t_v2">\tOsmAnd propose des profils (personnalisables) adaptés aux différentes utilisations.
 \n\tVous pouvez changer de profil via le bouton dédié dans l\'angle inférieur gauche de la carte (icône voiture, vélo, ou piéton), ou lors de la création d\'un itinéraire.
 </string>
 <string name="avoid_motorway">Éviter les autoroutes</string>
@@ -1087,7 +1087,7 @@
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (désactiver le dans les paramètres).</string>
     <string name="rendering_attr_showRoadMaps_description">Sélectionner quand afficher uniquement les cartes routières :</string>
-	<string name="rendering_attr_showRoadMaps_name">Cartes routières uniquement</string>
+	<string name="rendering_attr_showRoadMaps_name">Cartes uniquement routières</string>
     <string name="download_roads_only_item">Routes uniquement</string>
     <string name="download_regular_maps">Cartes standards</string>
     <string name="download_roads_only_maps">Cartes routières uniquement</string>
@@ -1415,9 +1415,9 @@
 	<string name="auto_zoom_close">Arrêt de l\'auto-zoom</string>
 	<string name="auto_zoom_far">Zoom éloigné</string>
 	<string name="auto_zoom_farthest">Zoom très éloigné</string>
-	<string name="tip_map_styles_t">OsmAnd supporte l\'affichage des cartes vectorielles hors-ligne dans différents styles de carte en fonction de vos besoins :
-		\n\nÀ la place du style de carte \'default\', vous pouvez dans \'Menu\' → \'Configuration\' → \'Styles de rendu\' sélectionner par exemple :
-		\n\t* le style \'Touring view\', qui fournit les informations les plus détaillées pour le voyage et le tourisme, incluant des optimisations pour les conducteurs professionnels (contraste élevé, les diverses routes sont distinguables).
+	<string name="tip_map_styles_t">OsmAnd permet l\'affichage des cartes vectorielles hors-ligne selon différents styles de rendu en fonction de vos besoins.
+		\n\nÀ la place du style de rendu \'default\', vous pouvez dans \'Menu\' → \'Configurer l'\écran\' → \'Styles de rendu\' sélectionner par exemple :
+		\n\t* le style \'Touring view\', qui fournit les informations les plus détaillées possibles pour le voyage et le tourisme, incluant des optimisations pour les conducteurs professionnels (contraste élevé, diverses routes bien distinguables).
 		\n\t* \'High contrast roads\' affiche les routes avec des couleurs très accentuées pour les situations de forte luminosité.
 		\n\t* \'Cycle-map\' est optimisé pour l\'affichage des routes pour cyclistes.
 		\n\t* \'Winter and ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'World ski\')
@@ -1486,9 +1486,9 @@
     \n\t* IMPORTANT : Les cartes doivent être postérieures à février 2014.
 \n\t* Navigation entièrement mise à jour (rapide et précise).
     \n\t* Nouvel écran d\'élaboration de l\'itinéraire (plus intuitif et plus puissant)
-    \n\t** Possibilité d\'utiliser les itinéraires GPX via le bouton Paramètres d\'itinéraire
+    \n\t* Possibilité d\'utiliser les itinéraires GPX via le bouton Paramètres d\'itinéraire
     \n\t* Boutons se masquant automatiquement durant la navigation
-    \n\t* Calcul d\'un itinéraire hors-ligne jusqu\'au début de l\'itinéraire GPX (option \'Suivre la trace depuis le début\')
+    \n\t* Calcul d\'un itinéraire hors-ligne jusqu\'au début de l\'itinéraire GPX (option \'Suivre l\'ensemble de la trace\')
 \n\t* Simulation active dans les tunnels
 \n\t* Nombreuses petites améliorations de l\'expérience utilisateur et de l\'utilisabilité
 \n\t* Paramétrage de la vitesse d\'élocution
