@@ -20,14 +20,27 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 	@Override
 	public boolean requestFocus(ClientContext context, int streamType) {
 		AudioManager mAudioManager = (AudioManager) ((Context) context).getSystemService(Context.AUDIO_SERVICE);
-		return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.requestAudioFocus(this, streamType,
-				AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+        if (context.getSettings().INTERRUPT_MUSIC.get())
+        {
+		    return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.requestAudioFocus(this, streamType, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
+        }
+        else
+        {
+            return true;
+        }
 	}
 
 	@Override
 	public boolean abandonFocus(ClientContext context, int streamType) {
 		AudioManager mAudioManager = (AudioManager) ((Context) context).getSystemService(Context.AUDIO_SERVICE);
-		return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
+        if (context.getSettings().INTERRUPT_MUSIC.get())
+        {
+            return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
+        }
+        else
+        {
+            return true;
+        }
 	}
 
 	@Override

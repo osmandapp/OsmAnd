@@ -14,6 +14,7 @@
 			<ListPreference android:key="auto_zoom_map_new" android:title="@string/auto_zoom_map"
 				android:summary="@string/auto_zoom_map_descr"></ListPreference>
 			<CheckBoxPreference android:title="@string/snap_to_road" android:summary="@string/snap_to_road_descr" android:key="snap_to_road"></CheckBoxPreference>
+            <CheckBoxPreference android:title="@string/interrupt_music" android:summary="@string/interrupt_music_descr" android:key="interrupt_music"></CheckBoxPreference>
 			<Preference android:title="@string/show_warnings_title" android:summary="@string/show_warnings_descr" android:key="show_routing_alarms"/>
 			<Preference android:title="@string/speak_title" android:summary="@string/speak_descr" android:key="speak_routing_alarms"/>
 			<CheckBoxPreference android:summary="@string/use_compass_navigation_descr" android:title="@string/use_compass_navigation"
