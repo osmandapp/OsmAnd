@@ -1620,7 +1620,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="guidance_preferences_descr">Navigatievoorkeuren</string>
     <string name="routing_preferences_descr">Routeberekening-voorkeuren</string>
     <string name="app_mode_truck">Vrachtauto</string>
-    <string name="android_19_location_disabled">Sinds Android KitKat kunnen kaarten niet meer owrden opgeslagen in de huisige directory (%s). Wilt u deze wijzigen in een versie die is toegestaan en de bestanden er heen kopiëren?
+    <string name="android_19_location_disabled">Sinds Android KitKat kunnen kaarten niet meer worden opgeslagen in de huidige directory (%s). Wilt u deze wijzigen in een versie die is toegestaan en de bestanden er heen kopiëren?
 \t\n Let op: oude bestanden blijven bestaan.
 \t\n Let op: het is niet meer mogelijk bestanden te delen tussen OsmAnd en Osmand+. </string>
     <string name="application_dir_change_warning2">OsmAnd kan proberen de bestanden naar de nieuwe bestemming te verplaatsen. Wil je dat?</string>
@@ -1630,7 +1630,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="calculate_osmand_route_gpx">Bereken de route offline met OsmAnd</string>
     <string name="routing_attr_prefer_motorway_name">Bij voorkeur autowegen</string>
 	<string name="routing_attr_prefer_motorway_description">Gebruik bij voorkeur autowegen</string>
-	<string name="routing_attr_short_way_name">Korte route</string>
+	<string name="routing_attr_short_way_name">Kortste route</string>
 	<string name="routing_attr_short_way_description">Gebruik de kortste route</string>
 	<string name="routing_attr_avoid_toll_name">Geen tolwegen</string>
 	<string name="routing_attr_avoid_toll_description">Vermijd tolwegen</string>
