@@ -26,7 +26,7 @@
   <string name="live_monitoring">﻿Tracking online in diretta</string>
   <string name="live_monitoring_interval_descr">Specifica l\'intervallo del tracking in diretta</string>
   <string name="live_monitoring_interval">Intervallo del Live tracking</string>
-  <string name="live_monitoring_url_descr">Specifica l\'indirizzo internet con la sintassi dei parametri: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
+  <string name="live_monitoring_url_descr">Specifica l\'indirizzo internet con la sintassi dei parametri: lat={0}, lon={1}, data/ora={2}, hdop={3}, altitudie={4}, velocità={5}, bearing={6}</string>
   <string name="live_monitoring_url">Indirizzo internet per il tracking in diretta</string>
   <string name="gpx_monitoring_disabled_warn">Abilita nelle impostazioni \'Registrazione della traccia nel file GPX\'.</string>
   <string name="show_current_gpx_title">Visualizza la traccia corrente</string>
@@ -297,8 +297,8 @@
   <string name="tip_initial_t">OsmAnd è una applicazione di navigazione con molte funzioni.
 	\n\nUn\'introduzione base e alcuni consigli d\'uso sono collegati nel \'Menù\'	\'Suggerimenti\'dallo schermo mappa.
 	</string>
-  <string name="next_button">Prossimo</string>
-  <string name="previous_button">Precedente</string>
+  <string name="next_button">Avanti</string>
+  <string name="previous_button">Indietro</string>
   <string name="unit_of_length_descr">Cambia le unità di misura per lunghezza e velocità</string>
   <string name="unit_of_length">Unità di misura</string>
   <string name="si_mi_foots">Miglia/piede</string>
@@ -1188,7 +1188,7 @@ Dati attualmente sul dispositivo (%1$s liberi):</string>
     
 	
 <string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione ...\" per assegnare una nota alla posizione specificata</string>
-    <string name="monitoring_control_stop">ferma</string>
+    <string name="monitoring_control_stop">Stop</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin Osmand per le curve di livello offline</string>
     <string name="osmand_srtm_long_description_1000_chars">Questo plugin fornisce le linee di livello che possono essere visualizzate nelle mappe offline di OsmAnd. I dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), uno strumento misuratore di terra a bordo, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).</string>
     
@@ -1229,8 +1229,8 @@ Dati attualmente sul dispositivo (%1$s liberi):</string>
     <string name="recording_context_menu_play">Riproduci</string>
     <string name="recording_description">Registrazione %1$s %2$s di %3$s</string>
     <string name="recording_default_name">registrazione</string>
-    <string name="av_control_stop">ferma</string>
-    <string name="av_control_start">registra</string>
+    <string name="av_control_stop">Stop</string>
+    <string name="av_control_start">Avvia</string>
     <string name="map_widget_av_notes">Note audio</string>
     <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto sul Market del plugin per le linee isocline per sostenere il futuro sviluppo.</string>
     <string name="srtm_paid_version_title">Plugin linee isocline</string>
@@ -1247,7 +1247,7 @@ Dati attualmente sul dispositivo (%1$s liberi):</string>
     <string name="precise_routing_mode_descr">Abilita per calcolare percorsi precisi senza intoppi. È lento e limitato in distanza.</string>
     <string name="precise_routing_mode">Calcolo della rotta preciso (alfa)</string>
     <string name="local_indexes_cat_av">Dati audio/video</string>
-    <string name="dist_control_start">avvia</string>
+    <string name="dist_control_start">Avvia</string>
     <string name="download_hillshade_item">Ombreggiamento dei rilievi</string>
     <string name="download_hillshade_maps">Sovrapposizioni ombreggiamento rilievi</string>
     <string name="tip_recent_changes_1_1_2_t">Cambiamenti nella 1.1.2:↵
@@ -1456,7 +1456,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="cancel_navigation">Ferma navigazione</string>
     <string name="clear_destination">Cancella la destinazione</string>
     <string name="other_location">Altra</string>
-    <string name="files_limit">%1$d file lasciati</string>
+    <string name="files_limit">hai ancora %1$d file</string>
     <string name="available_downloads_left">Disponibili %1$d file da scaricare</string>
     <string name="install_paid">Versione completa</string>
     <string name="use_magnetic_sensor_descr">Utilizza il sensore magnetico per determinare il valore della bussola invece del sensore di orientamento</string>
@@ -1615,7 +1615,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="animate_routing_route_not_calculated">Per favore, calcolare il percorso prima</string>
     <string name="animate_routing_route">Simula sulla base di un percorso calcolato </string>
     <string name="animate_routing_gpx">Simula usando una traccia GPX</string>
-    <string name="edit_tilesource_elliptic_tile">Mercatore Ellittico</string>
+    <string name="edit_tilesource_elliptic_tile">Mercatore ellittico</string>
     <string name="local_osm_changes_delete_all_confirm">Stai per cancellare %1$d modifiche. Sicuro?</string>
     <string name="local_osm_changes_delete_all">Cancella tutto</string>
     <string name="tip_faq_t">Visitate https://code.google.com/p/osmand/wiki/FAQ per vedere le domande più frequenti.</string>
@@ -1644,7 +1644,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="guidance_preferences_descr">Preferenze di navigazione</string>
     <string name="routing_preferences_descr">Preferenze di calcolo del percorso</string>
     <string name="app_mode_truck">Camion</string>
-    <string name="android_19_location_disabled">Dalla versione di KitKat non è più possibile scaricare e aggiornare le mappe nel precedente indirizzo di memorizzazione (%s). Volete sostituirlo con quello consentito e copiare lì tutti i file?
+    <string name="android_19_location_disabled">Dalla versione di KitKat non è più possibile scaricare e aggiornare le mappe nel precedente indirizzo di memorizzazione (%s). Vuoi sostituirlo con quello consentito e copiare lì tutti i file?
 	\n Nota: i file precedenti non verranno modificati. 
 	\n Nota: non sarà possibile condividere i files fra OsmAnd and OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd può provare a spostare i dati nella nuova destinazione. Volete farlo?</string>
@@ -1665,7 +1665,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="routing_attr_avoid_motorway_name">Evita le autostrade</string>
 	<string name="routing_attr_avoid_motorway_description">Evita le autostrade</string>
 	<string name="routing_attr_weight_name">Peso massimo</string>
-	<string name="routing_attr_weight_description">Specifica il limite di massa</string>
+	<string name="routing_attr_weight_description">Specifica limite massa veicolo</string>
     <string name="select_gpx">Scegli GPX…</string>
     <string name="route_descr_select_destination">Scegli la destinazione</string>
     <string name="route_descr_select_on_map">Scegli sulla mappa…</string>
@@ -1687,4 +1687,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     </string>
     <string name="calculate_osmand_route_without_internet">Calcola un percorso con OsmAnd senza l\'utilizzo di internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcola una percorso OsmAnd per il primo e l\'ultimo tratto del percorso</string>
+    <string name="osmodroid_unseek">Oggetto non trovato</string>
     </resources>
