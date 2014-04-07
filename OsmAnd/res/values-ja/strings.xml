@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
-     
-
-     <string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -1749,4 +1747,25 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 		\n\n「マップソース」下の事前にロードされたオフラインベクター形式マップを選択することができます(オフラインナビゲーションには必要です)、もしくは事前定義された(オンラインまたはオフラインキャッシュ)タイルマップ(有効化するには「オンラインマップ」プラグインは「設定」→「プラグイン」)もしくはPC上のOsmAndMapCreatorで作成されたe.g.も使用できます。
 		\n\nOsmAndまた、カスタムソースをサポートしています。
 	</string>
-	</resources>
+	<string name="keep_and_add_destination_point">目的地として追加</string>
+    <string name="select_gpx">GPXファイルを選択…</string>
+    <string name="route_descr_select_destination">目的地を選択</string>
+    <string name="route_descr_select_on_map">地図から選択</string>
+    <string name="route_descr_favorite">お気に入り…</string>
+    <string name="route_preferences">ルート設定</string>
+    <string name="route_info">ルート情報</string>
+    <string name="routing_attr_prefer_motorway_name">高速道路を優先する</string>
+	<string name="routing_attr_prefer_motorway_description">高速道路を優先する</string>
+	<string name="routing_attr_short_way_name">最も短い道</string>
+	<string name="routing_attr_short_way_description">最も短い道を使用する</string>
+	<string name="routing_attr_avoid_toll_name">有料道路を使用しない</string>
+	<string name="routing_attr_avoid_toll_description">有料道路を使用しない</string>
+	<string name="routing_attr_avoid_unpaved_name">未舗装道路を避ける</string>
+	<string name="routing_attr_avoid_unpaved_description">未舗装道路を避ける</string>
+	<string name="routing_attr_avoid_ferries_name">フェリーを使用しない</string>
+	<string name="routing_attr_avoid_ferries_description">フェリーを使用しない</string>
+	<string name="routing_attr_avoid_motorway_name">高速道路を使用しない</string>
+	<string name="routing_attr_avoid_motorway_description">高速道路を使用しない</string>
+	<string name="routing_attr_weight_name">最大重量</string>
+	<string name="routing_attr_weight_description">車両重量制限を使用する</string>
+    </resources>
