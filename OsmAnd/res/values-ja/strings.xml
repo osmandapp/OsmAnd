@@ -1792,4 +1792,10 @@ OsmAndはオープンソースであり、活発に開発が進められいま�
 	\n\t* 細かな操作感(ユーザーエクスペリエンス)などの改善、アクセシビリティの修正
 	\n\t* 発声速度の設定追加(アクセシビリティ設定内)↵
     </string>
+    <string name="complex_route_calculation_failed">高速ルート計算が失敗しました(%s)、低速モードで再計算します。</string>
+    <string name="disable_complex_routing_descr">車用ナビゲーションの2段階ルート計算を無効化</string>
+    <string name="disable_complex_routing">複雑なルート計算を無効化</string>
+    <string name="osmodroid_seek">オブジェクトを探す</string>
+    <string name="osmodroid_unseek">オブジェクトを探さない</string>
+    <string name="calculate_osmand_route_without_internet">インターネットを使用せずにOsmAnd経路セグメントを計算する</string>
     </resources>
