@@ -48,7 +48,7 @@
   <string name="routing_settings">Navigazione</string>
   <string name="routing_settings_descr">Specifica le opzioni di navigazione</string>
   <string name="global_settings">Impostazioni globali</string>
-  <string name="index_settings">Gestione Dati</string>
+  <string name="index_settings">Gestione dati</string>
   <string name="index_settings_descr">Scarica, visualizza i dettagli e gestisci le mappe offline</string>
   <string name="general_settings">Impostazioni generali</string>
   <string name="general_settings_descr">Configura le impostazioni globali</string>
@@ -61,7 +61,7 @@
   <string name="osmand_service_descr">Usato per eseguire OsmAnd con lo schermo spento</string>
   <string name="tip_rotation_switching">Orientamento della mappa</string>
   
-  <string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. Ne puoi scaricare una in \'Impostazioni (Gestione Dati), o passare alle mappe online.</string>
+  <string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. Ne puoi scaricare una in \'Impostazioni (Gestione dati), o passare alle mappe online.</string>
   <string name="binary_map_download_success">Download completato.
 		\n\t\n\tPer usarle attivare \'Impostazioni\' → \'Configurazione delle mappe\' → \'Mappe vettoriali offline\'.
 	</string>
@@ -195,10 +195,10 @@
   <string name="local_index_map_data">Dati mappa</string>
   
   <string name="local_indexes_cat_backup">Disattivato</string>
-  <string name="local_indexes_cat_tts">Dati voce (TTS)</string>
-  <string name="local_indexes_cat_voice">Dati voce (registrata)</string>
+  <string name="local_indexes_cat_tts">Voci (TTS)</string>
+  <string name="local_indexes_cat_voice">Voce (registrata)</string>
   <string name="local_indexes_cat_gpx">Dati GPX</string>
-  <string name="local_indexes_cat_tile">Mappe online (tasselli)</string>
+  <string name="local_indexes_cat_tile">Mappe (online e tasselli)</string>
   <string name="local_indexes_cat_map">Mappe offline (vettori)</string>
   <string name="local_indexes_cat_poi">Dati PDI</string>
   <string name="ttsvoice">Voce TTS</string>
@@ -249,13 +249,13 @@
   <string name="install_more">Installa altro…</string>
   <string name="tip_update_index">Aggiornamento Mappe Offline</string>
   <string name="tip_update_index_t">Avere dati aggiornati è essenziale per la visione offline delle mappe, cercare PDI/indirizzi. OsmAnd fornisce un download manager che può controllare la disponibilità di aggiornamenti offline.↵
-→→\n\nPer scaricare le mappe andare su \'Impostazioni\' -&gt; \'Gestione Dati\' -&gt; \'Download dati offline\'.↵
+→→\n\nPer scaricare le mappe andare in \'Impostazioni\' -&gt; \'Gestione dati\' -&gt; \'Download dati offline\'.↵
 →→\n\nDopo il download dell\'elenco regioni ti basterà cliccare su qualsiasi oggetto per scaricare o caricare un file. Prego notare il selettore di tipo di file nella zona superiore dello schermo, per selezionare il tipo di download richiesto (mappe regolari, ombreggiature rilievi, ecc..).
 ↵
-→→\n\nPuoi filtrare la lista delle regioni immettendo alcune lettere, oppure si può scegliere l\'opzione \Impostazioni\' → \Filtro scaricati\' per visualizzare gli aggiornamenti solo per le regioni già nel dispositivo.↵
-→→\n\n\t* Voci in \'Verde\' indica file identici su server e dispositivo↵
-→→\n\t* Voci in \'Blu\' indica aggiornamenti disponibili sul server↵
-→→\n\t* Voci in corsivo indica dati disattivati sul dispositivo↵
+→→\n\nPuoi filtrare l'\elenco delle regioni immettendo alcune lettere, oppure si può scegliere l\'opzione \Impostazioni\' → \Filtro download\' per visualizzare gli aggiornamenti solo per le regioni già nel dispositivo.↵
+→→\n\n\t* Voci in \'Verde\' indicano file identici su server e dispositivo↵
+→→\n\t* Voci in \'Blu\' indicano aggiornamenti disponibili sul server↵
+→→\n\t* Voci in '\corsivo'\ indicano dati disattivati sul dispositivo↵
 →
 	</string>
   <string name="level_to_switch_vector_raster_descr">Minimo livello di zoom per usare le mappe vettoriali</string>
@@ -381,7 +381,7 @@
   <string name="daynight">Modalità giorno/notte</string>
   <string name="download_files_question">Scarico {0} file(s) ({1} MB)?</string>
   <string name="items_were_selected">{0} oggetto(i) selezionati</string>
-  <string name="filter_existing_indexes">Filtro scaricato</string>
+  <string name="filter_existing_indexes">Filtro download</string>
   <string name="deselect_all">Deseleziona tutto</string>
   <string name="select_all">Seleziona tutto</string>
   <string name="reload">Ricarica</string>
@@ -404,7 +404,7 @@
   <string name="poi_context_menu_call">Visualizza telefoni PDI</string>
   <string name="website">Sito web</string>
   <string name="phone">Telefono</string>
-  <string name="download_type_to_filter">Tipo filtro</string>
+  <string name="download_type_to_filter">Chiave filtro</string>
   <string name="use_high_res_maps">Schermo ad alta risoluzione</string>
   <string name="use_high_res_maps_descr">Non stira (né offusca) le mattonelle della mappa nei dispositivi con display ad alta densità</string>
   <string name="unknown_location">Posizione non ancora conosciuta</string>
@@ -474,17 +474,17 @@
   <string name="background_router_service_descr">Lancia il servizio in background di OsmAnd per il tracking della posizione mentre lo schermo è spento</string>
   <string name="background_router_service">Esecuzione in background</string>
   <string name="off_router_service_no_gps_available">Il servizio in background OsmAnd di navigazione necessita del sistema di posizionamento attivato.</string>
-  <string name="hide_poi_filter">Nascondi il filtro</string>
-  <string name="show_poi_filter">Visualizza il filtro</string>
+  <string name="hide_poi_filter">Nascondi filtro</string>
+  <string name="show_poi_filter">Visualizza filtro</string>
   <string name="search_poi_filter">Filtro</string>
   <string name="menu_mute_off">L\'audio è attivato</string>
   <string name="menu_mute_on">Audio disattivato</string>
   <string name="voice_provider_descr">Scegli la voce da utilizzare per la navigazione (per i codici delle lingue vedi ISO 639-1)</string>
   <string name="voice_provider">Guida vocale</string>
-  <string name="voice_data_initializing">Dati voce in preparazione…</string>
+  <string name="voice_data_initializing">File voce in preparazione…</string>
   <string name="voice_data_not_supported">Versione di dati vocali non supportata</string>
-  <string name="voice_data_corrupted">I dati voce specificati sono corrotti</string>
-  <string name="voice_data_unavailable">Dati voce non disponibili</string>
+  <string name="voice_data_corrupted">I file voce specificati sono corrotti</string>
+  <string name="voice_data_unavailable">File voce non disponibili</string>
   
   <string name="sd_unmounted">La scheda SD non accessibile.
 \nImpossibile visualizzare le mappe e cercare alcunchè.</string>
@@ -501,7 +501,7 @@
   <string name="route_head">Avanti</string>
   <string name="first_time_continue">Dopo</string>
   <string name="first_time_download">Scarica le regioni</string>
-  <string name="first_time_msg">Grazie di utilizzare OsmAnd. Per molte delle caratteristiche dell\'applicazione, hai bisogno dei dati offline locali, che possono essere scaricati da \'Impostazioni\'-&gt;\'Gestione Dati\'. Sarà poi possibile visualizzare mappe, cercare indirizzi, PDI, e trovare trasporti pubblici.</string>
+  <string name="first_time_msg">Grazie di utilizzare OsmAnd. Per molte delle caratteristiche dell\'applicazione, hai bisogno dei dati offline locali, che possono essere scaricati da \'Impostazioni\'-&gt;\'Gestione dati\'. Sarà poi possibile visualizzare mappe, cercare indirizzi, PDI, e trovare trasporti pubblici.</string>
   <string name="search_poi_location">Ricerca segnale GPS…</string>
   <string name="search_near_map">Ricerca vicino all\'ultima posizione sulla mappa</string>
   <string name="search_nearby">Ricerca vicino</string>
@@ -603,7 +603,7 @@
   <string name="loading_data">Caricamento dati…</string>
   <string name="reading_indexes">Lettura dei dati locali…</string>
   <string name="previous_run_crashed">Il precedente avvio dell\'applicazione si è interrotto. Il file del registro è disponibile in {0}. Invia una segnalazione allegando il file del registro.</string>
-  <string name="saving_gpx_tracks">Salvataggio tracce GPX sulla scheda SD…</string>
+  <string name="saving_gpx_tracks">Salvataggio tracce GPX nella scheda SD…</string>
   <string name="finished_task">Completato</string>
   <string name="reload_indexes_descr">Rileggo le mappe vettoriali offline e i dati dalla scheda SD</string>
   <string name="reload_indexes">Ricarica indici</string>
@@ -620,7 +620,7 @@
   <string name="auto_zoom_map">Zoom automatico mappa</string>
   <string name="additional_settings">Impostazioni aggiuntive</string>
   <string name="settings">Impostazioni</string>
-  <string name="save_current_track_descr">Salva adesso la traccia corrente sulla scheda SD</string>
+  <string name="save_current_track_descr">Salva adesso la traccia corrente nella scheda SD</string>
   <string name="save_current_track">Salva la traccia corrente</string>
   <string name="save_track_interval_descr">Scegli l\'intervallo di posizionamento per le tracce</string>
   <string name="save_track_interval">Intervallo di salvataggio</string>
@@ -756,15 +756,15 @@
   <string name="offline_navigation_not_available">La navigazione offline di OsmAnd è temporaneamente non disponibile.</string>
   <string name="left_side_navigation">Guida a sinistra</string>
   <string name="left_side_navigation_descr">Abilita nei paesi in cui si guida tenendo la sinistra</string>
-  <string name="download_link_and_local_description">Clicca qui per scaricare o aggiornare i dati offline.\nPer vedere maggiori dettagli clicca sull\'elemento, per disabilitare o eliminare i dati offline tienilo premuto.
-Dati attualmente sul dispositivo (%1$s liberi):</string>
+  <string name="download_link_and_local_description">Fai clic qui per scaricare o aggiornare i dati offline.\nPer maggiori dettagli fai clic sull\'elemento, per disabilitare o eliminare i dati offline tienilo premuto.
+Dati attualmente nel dispositivo (%1$s liberi):</string>
   <string name="unknown_from_location">La posizione di partenza non è ancora stata determinata</string>
   <string name="confirm_interrupt_download">Vuoi interrompere il download dei file?</string>
   <string name="basemap_was_selected_to_download">La mappa di base è richiesta per il funzionamento corretto dell\'applicazione ed è stata selezionata per il download.</string>
   
   <string name="map_online_plugin_is_not_installed">Abilita il plugin per le mappe online per visualizzare altre sorgenti</string>
-  <string name="map_online_data">Mappe online (tasselli)</string>
-  <string name="map_online_data_descr">Usa le mappe online (scarica e archivia i tasselli sulla scheda SD)</string>
+  <string name="map_online_data">Mappe (online e tasselli)</string>
+  <string name="map_online_data_descr">Usa le mappe online (scarica e archivia i tasselli nella scheda SD)</string>
   <string name="online_map_settings">Mappe online</string>
   <string name="online_map_settings_descr">Configura le sorgenti delle mappe online o dei tasselli in cache</string>
   <string name="map_settings">Impostazioni mappa</string>
@@ -995,7 +995,7 @@ Dati attualmente sul dispositivo (%1$s liberi):</string>
   <string name="bg_service_screen_unlock">Sblocca schermo</string>
   <string name="bg_service_sleep_mode_off">Abilita\n modalità sleep</string>
   <string name="bg_service_sleep_mode_on">Ferma\n modalità sleep</string>
-<string name="filterpoi_activity">Crea un filtro dei PDI</string>
+<string name="filterpoi_activity">Crea un filtro per i PDI</string>
 <string name="select_navigation_mode">Scelta del mezzo di trasporto</string>
 <string name="day_night_info_description">Alba: %1$s
 \nTramonto: %2$s</string>
@@ -1044,7 +1044,7 @@ Dati attualmente sul dispositivo (%1$s liberi):</string>
 <string name="tip_app_mode_t_v2">OsmAnd supporta profili dell\'applicazione differenti (e personalizzabili) per differenti tipi di utilizzo.
 		\n\nPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando crei un itinerario.
 	</string>
-<string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto di navigazione per mappe offline e online</string>
+<string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione di navigazione opensource per mappe offline e online</string>
 <string name="osmand_long_description_1000_chars">
 		↵
 →→OsmAnd (OSM Automatizzata Navigazione Direzioni)↵
@@ -1167,7 +1167,7 @@ Dati attualmente sul dispositivo (%1$s liberi):</string>
 	<string name="map_widget_max_speed">Limite di velocità</string>
     <string name="tip_altitude_offset_t">La maggior parte dei GPS riportano la misura dell\'altitudine nel sistema di riferimento WGS84 basato su ellissoide, per cui una conversione nei sistemi di riferimento usati localmente richiede una correzione dipendente dalla posizione.↵
 →→\n\nUna migliore approssimazione a questi sistemi di riferimento locali è il EGM96. OsmAnd ora supporta la visualizzazione automatica dell\'altitudine nel sistema EGM96.↵
-→→\n\nPer attivarla, scarica il file WW15MGH.DAC tramite la Gestione Dati (il file originale si trova all\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).↵
+→→\n\nPer attivarla, scarica il file WW15MGH.DAC tramite la 'Gestione dati' (il file originale si trova all\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).↵
 →
 	</string>
     <string name="tip_altitude_offset">Correzione altitudine</string>
@@ -1181,7 +1181,7 @@ Dati attualmente sul dispositivo (%1$s liberi):</string>
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isocline</string>
     <string name="srtm_plugin_name">Plugin linee isocline</string>
-    <string name="srtm_plugin_description">Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni → Gestione Dati → Scarica → Seleziona il tipo di mappa desiderato).</string>
+    <string name="srtm_plugin_description">Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni → Gestione dati → Download → Seleziona il tipo di mappa desiderato).</string>
     <string name="index_srtm_ele">Linee di livello</string>
     <string name="audionotes_plugin_description">Prendi note audio/video durante il viaggio</string>
     <string name="audionotes_plugin_name">Plugin appunti audio</string>
@@ -1560,7 +1560,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="local_index_tile_data_downloadable">Scaricabile: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom massimo: %1$s</string>
     <string name="local_index_tile_data_minzoom">Zoom minimo: %1$s</string>
-    <string name="local_index_tile_data_name">Dati mattonelle: %1$s</string>
+    <string name="local_index_tile_data_name">Dati tasselli: %1$s</string>
     <string name="edit_tilesource_successfully">Sorgente mattonelle : %1$s è stata salvata con successo</string>
     <string name="edit_tilesource_maxzoom">Zoom massimo</string>
     <string name="edit_tilesource_expiration_time">Scadenza (minuti)</string>
