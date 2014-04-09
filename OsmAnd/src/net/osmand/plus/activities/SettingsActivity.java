@@ -143,19 +143,23 @@ public class SettingsActivity extends SettingsBaseActivity {
                 edition = getString(R.string.local_index_installed) + " :\t" + DateFormat.getDateFormat(getApplicationContext()).format(date);
             } catch (Exception e) {
             }
+            SpannableString content = new SpannableString(vt + version +"\n" +
+    				edition +"\n\n"+
+    				getString(R.string.about_content));
+    		content.setSpan(new ClickableSpan() {
+    			@Override
+    			public void onClick(View widget) {
+    				final Intent mapIntent = new Intent(SettingsActivity.this, ContributionVersionActivity.class);
+    				startActivityForResult(mapIntent, 0);
+    			}
+    			
+    		}, st, st + version.length(), 0);
+    		tv.setText(content);
+        } else {
+        	tv.setText(vt + version +"\n\n" +
+    				getString(R.string.about_content));
         }
-        SpannableString content = new SpannableString(vt + version +"\n" +
-				edition +"\n\n"+
-				getString(R.string.about_content));
-		content.setSpan(new ClickableSpan() {
-			@Override
-			public void onClick(View widget) {
-				final Intent mapIntent = new Intent(SettingsActivity.this, ContributionVersionActivity.class);
-				startActivityForResult(mapIntent, 0);
-			}
-			
-		}, st, st + version.length(), 0);
-		tv.setText(content);
+        
 		tv.setPadding(5, 0, 5, 5);
 		tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
 		tv.setMovementMethod(LinkMovementMethod.getInstance());
