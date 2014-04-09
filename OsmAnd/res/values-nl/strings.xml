@@ -1190,7 +1190,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
     <string name="audionotes_location_not_defined">Nog geen locatie gedefinieerd om aan notitie te koppelen. \"Gebruik locatie…\" om een notatie aan een specifieke locatie toe te wijzen</string>
     <string name="map_widget_audionotes">Audionotities</string>
     
-    <string name="monitoring_control_stop">stoppen</string>
+    <string name="monitoring_control_stop">Stop</string>
     <string name="recording_is_recorded">Audio/video wordt opgenomen. Om te stoppen, druk op de AV-widget.</string>
     <string name="recording_playing">Een geluidsfragment van de gekozen opname wordt afgespeeld.\n%1$s</string>
     <string name="recording_open_external_player">Open externe speler</string>
@@ -1212,8 +1212,8 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
     <string name="recording_context_menu_play">Afspelen</string>
     <string name="recording_description">Opname %1$s %2$s van %3$s</string>
     <string name="recording_default_name">opname</string>
-    <string name="av_control_stop">stop</string>
-    <string name="av_control_start">start</string>
+    <string name="av_control_stop">Stop</string>
+    <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio/video-notities</string>
     <string name="av_def_action_video">Video opnemen</string>
     <string name="av_def_action_audio">Audio opnemen</string>
@@ -1242,7 +1242,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
     <string name="precise_routing_mode_descr">Schakel nauwkeurige routeberekening in om precieze routes te berekenen zonder fouten. Nog beperkt in afstand en langzaam.</string>
     <string name="precise_routing_mode">Nauwkeurige routeberekening (alpha)</string>
     <string name="local_indexes_cat_av">Audio/video-gegevens</string>
-    <string name="dist_control_start">start</string>
+    <string name="dist_control_start">Start</string>
     <string name="support_new_features_descr">Doe een donatie om OsmAnd uit te laten breiden met nieuwe functies</string>
 	<string name="download_hillshade_item">Reliëfschaduw</string>
     <string name="download_hillshade_maps">Reliëfschaduwkaarten</string>
