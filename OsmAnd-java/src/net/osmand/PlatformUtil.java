@@ -30,7 +30,8 @@ public class PlatformUtil {
 
 	public static net.osmand.Collator primaryCollator() {
 		// romanian locale encounters diacritics as differnet symbols
-		final java.text.Collator instance = Locale.getDefault().getLanguage().equals("ro") ? java.text.Collator.getInstance(Locale.US)
+		final java.text.Collator instance = Locale.getDefault().getLanguage().equals("ro")  ||
+				Locale.getDefault().getLanguage().equals("sk")? java.text.Collator.getInstance(Locale.US)
 				: java.text.Collator.getInstance();
 		instance.setStrength(java.text.Collator.PRIMARY);
 		return wrapCollator(instance);
