@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
   <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, २५५ - अपारदर्शक)</string>
   <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
@@ -63,7 +64,7 @@
   <string name="settings_direction_style">दिशांचा प्रकार</string>
   <string name="i_am_here">मी इथे आहे</string>
   <string name="rendering_out_of_memory">निवडलेले क्षेत्र दाखवण्यासाठी पुरेशी प्रोसेस मेमरी नाही</string>
-  <string name="local_openstreetmap_uploading">अपलोड करत आहे…</string>
+  <string name="local_openstreetmap_uploading">अपलोड करत आहे …</string>
   <string name="local_openstreetmap_were_uploaded">{0} पीओआय/बग्स अपलोड झाले</string>
   <string name="local_openstreetmap_show">नकाशावर दाखवा</string>
   <string name="local_openstreetmap_upload">बदल ओएसएम मधे अपलोड करा</string>
@@ -108,9 +109,9 @@
   <string name="poi_filter_by_name">नावाने शोधा</string>
   <string name="local_index_mi_rename">नाव बदला</string>
   <string name="show_gpx_route">नकाशावर दाखवा</string>
-  <string name="search_position_current_location_search">स्थान शोधत आहे…</string>
+  <string name="search_position_current_location_search">स्थान शोधत आहे …</string>
   <string name="search_position_current_location_found">स्थान (सापडले)</string>
-  <string name="search_position_address">पत्ता…</string>
+  <string name="search_position_address">पत्ता …</string>
   <string name="search_position_favorites">आवडती ठिकाणे…</string>
   <string name="search_position_current_location">सध्याचे स्थान…</string>
   <string name="select_search_position">ह्याच्या जवळ शोधा :</string>
@@ -336,7 +337,7 @@
 <string name="map_widget_day_night">दिवस/रात्र नकाशा</string>
 <string name="live_monitoring_mode_off">लाइव्ह ट्रॅकिंग\n चालू करा</string>
 <string name="live_monitoring_mode_on">लाइव्ह ट्रॅकिंग\n बंद करा</string>
-<string name="layer_map_appearance">स्क्रिन कॉन्फिगर करा…</string>
+<string name="layer_map_appearance">स्क्रिन कॉन्फिगर करा</string>
 <string name="avoid_unpaved">कच्चे रस्ते टाळा</string>
 <string name="avoid_in_routing_title">टाळा…</string>
 <string name="map_widget_show_ruler">पट्टी</string>
@@ -452,7 +453,7 @@
 	<string name="unit_of_length">मोजमापाचे एकक</string>
 	<string name="tip_search">शोध</string>
 	<string name="tip_navigation">दिशादर्शन</string>
-	<string name="tip_map_switch">नकाशाचा स्त्रोत</string>
+	<string name="tip_map_switch">नकाशाचा स्त्रोत निवडा</string>
 	<string name="incomplete_locale">अपूर्ण</string>
 	<string name="preferred_locale">भाषा</string>
 	<string name="preferred_locale_descr">भाषा निवडा</string>
