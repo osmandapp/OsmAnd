@@ -15,7 +15,7 @@ public class OsmAndFormatter {
 	private final static float YARDS_IN_ONE_METER = 1.0936f;
 	private final static float FOOTS_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 	
-	public static double calculateRoundedDist(double distInMeters, ClientContext ctx) {
+	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		double mainUnitInMeter = 1;
@@ -48,7 +48,7 @@ public class OsmAndFormatter {
 		return (generator / point);
 	}
 	
-	public static String getFormattedDistance(float meters, ClientContext ctx) {
+	public static String getFormattedDistance(float meters, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		int mainUnitStr;
@@ -81,7 +81,7 @@ public class OsmAndFormatter {
 		}
 	}
 
-	public static String getFormattedAlt(double alt, ClientContext ctx) {
+	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
@@ -91,7 +91,7 @@ public class OsmAndFormatter {
 		}
 	}
 	
-	public static String getFormattedSpeed(float metersperseconds, ClientContext ctx) {
+	public static String getFormattedSpeed(float metersperseconds, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		ApplicationMode am = settings.getApplicationMode();

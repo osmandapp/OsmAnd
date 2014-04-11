@@ -258,7 +258,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 			TextView distanceLabel = (TextView) row.findViewById(R.id.distance_label);
 			if(location != null){
 				int dist = (int) (MapUtils.getDistance(location, model.lat, model.lon));
-				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, (ClientContext) getActivity().getApplication()));
+				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, (OsmandApplication) getActivity().getApplication()));
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}

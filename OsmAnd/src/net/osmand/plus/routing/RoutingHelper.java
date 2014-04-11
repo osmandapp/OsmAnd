@@ -4,6 +4,8 @@ package net.osmand.plus.routing;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
+
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -13,6 +15,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -96,12 +99,15 @@ public class RoutingHelper {
 	public void setFollowingMode(boolean follow) {
 		isFollowingMode = follow;
 		if(follow) {
-			if(!app.getInternalAPI().isNavigationServiceStarted()) {
-				app.getInternalAPI().startNavigationService(true);
+			if(app.getNavigationService() != null) {
+				Intent serviceIntent = new Intent(app, NavigationService.class);
+				serviceIntent.putExtra(NavigationService.NAVIGATION_START_SERVICE_PARAM, true);
+				app.startService(serviceIntent);
 			}
 		} else {
-			if(app.getInternalAPI().isNavigationServiceStartedForNavigation()) {
-				app.getInternalAPI().stopNavigationService();
+			if(app.getNavigationService() != null && app.getNavigationService().startedForNavigation()) {
+				Intent serviceIntent = new Intent(app, NavigationService.class);
+				app.stopService(serviceIntent);
 			}
 		}
 	}

@@ -30,7 +30,7 @@ public class PoiFilter {
 	protected String nameFilter;
 	protected boolean isStandardFilter;
 	
-	protected final ClientContext application;
+	protected final OsmandApplication app;
 	
 	protected int distanceInd = 1;
 	// in kilometers
@@ -38,8 +38,8 @@ public class PoiFilter {
 	
 	
 	// constructor for standard filters
-	public PoiFilter(AmenityType type, ClientContext application){
-		this.application = application;
+	public PoiFilter(AmenityType type, OsmandApplication application){
+		this.app = application;
 		isStandardFilter = true;
 		filterId = STD_PREFIX + type;
 		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : OsmAndFormatter.toPublicString(type, 
@@ -52,8 +52,8 @@ public class PoiFilter {
 	}
 	
 	// constructor for user defined filters
-	public PoiFilter(String name, String filterId, Map<AmenityType, LinkedHashSet<String>> acceptedTypes, ClientContext app){
-		application = app;
+	public PoiFilter(String name, String filterId, Map<AmenityType, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
+		this.app = app;
 		isStandardFilter = false;
 		if(filterId == null){
 			filterId = USER_PREFIX + name.replace(' ', '_').toLowerCase();
@@ -109,9 +109,9 @@ public class PoiFilter {
 	public String getSearchArea(){
 		double val = distanceToSearchValues[distanceInd];
 		if(val >= 1){
-			return " < " + OsmAndFormatter.getFormattedDistance(((int)val * 1000), application);  //$NON-NLS-1$//$NON-NLS-2$
+			return " < " + OsmAndFormatter.getFormattedDistance(((int)val * 1000), app);  //$NON-NLS-1$//$NON-NLS-2$
 		} else {
-			return " < " + OsmAndFormatter.getFormattedDistance(500, application);  //$NON-NLS-1$
+			return " < " + OsmAndFormatter.getFormattedDistance(500, app);  //$NON-NLS-1$
 		}
 	}
 	
@@ -147,7 +147,7 @@ public class PoiFilter {
 	public ResultMatcher<Amenity> getResultMatcher(final ResultMatcher<Amenity> matcher){
 		final String filter = nameFilter;
 		if(filter != null) {
-			final boolean en = application.getSettings().USE_ENGLISH_NAMES.get();
+			final boolean en = app.getSettings().USE_ENGLISH_NAMES.get();
 			return new ResultMatcher<Amenity>() {
 				@Override
 				public boolean publish(Amenity object) {
@@ -170,7 +170,7 @@ public class PoiFilter {
 	protected List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
 		
-		return application.getInternalAPI().searchAmenities(this, 
+		return app.getResourceManager().searchAmenities(this, 
 				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, matcher);
 	}
 
@@ -328,7 +328,7 @@ public class PoiFilter {
 	}
 	
 	public ClientContext getApplication() {
-		return application;
+		return app;
 	}
 	
 }

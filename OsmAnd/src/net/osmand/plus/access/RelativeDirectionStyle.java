@@ -1,8 +1,7 @@
 package net.osmand.plus.access;
 
-import android.content.Context;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.R;
+import android.content.Context;
 
 public enum RelativeDirectionStyle {
 

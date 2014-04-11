@@ -16,7 +16,6 @@ import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -148,7 +147,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 				int dist = (int) (MapUtils.getDistance(location, model
 						.getLocation().getLatitude(), model.getLocation()
 						.getLongitude()));
-				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist,(ClientContext) getApplication()));
+				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist,(OsmandApplication) getApplication()));
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}

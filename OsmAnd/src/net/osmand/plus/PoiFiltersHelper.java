@@ -16,7 +16,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 
 public class PoiFiltersHelper {
-	private final ClientContext application;
+	private final OsmandApplication application;
 	
 	private NameFinderPoiFilter nameFinderPOIFilter;
 	private List<PoiFilter> cacheTopStandardFilters;
@@ -37,7 +37,7 @@ public class PoiFiltersHelper {
 	
 	private static final String[] DEL = new String[] {};
 	
-	public PoiFiltersHelper(ClientContext application){
+	public PoiFiltersHelper(OsmandApplication application){
 		this.application = application;
 	}
 	public NameFinderPoiFilter getNameFinderPOIFilter() {

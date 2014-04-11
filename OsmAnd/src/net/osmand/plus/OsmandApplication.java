@@ -27,8 +27,6 @@ import net.osmand.plus.activities.LiveMonitoringHelper;
 import net.osmand.plus.activities.OsmandIntents;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.api.ExternalServiceAPI;
-import net.osmand.plus.api.InternalOsmAndAPI;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
@@ -112,8 +110,6 @@ public class OsmandApplication extends Application implements ClientContext {
 	private Locale prefferedLocale = null;
 	
 	SettingsAPI settingsAPI;
-	ExternalServiceAPI externalServiceAPI;
-	InternalOsmAndAPI internalOsmAndAPI;
 	SQLiteAPI sqliteAPI;
 	BRouterServiceConnection bRouterServiceConnection;
 
@@ -132,8 +128,6 @@ public class OsmandApplication extends Application implements ClientContext {
 		super.onCreate();
 		 
 		settingsAPI = new net.osmand.plus.api.SettingsAPIImpl(this);
-		externalServiceAPI = new net.osmand.plus.api.ExternalServiceAPIImpl(this);
-		internalOsmAndAPI = new net.osmand.plus.api.InternalOsmAndAPIImpl(this);
 		sqliteAPI = new SQLiteAPIImpl(this);
 		
 		try {
@@ -705,15 +699,6 @@ public class OsmandApplication extends Application implements ClientContext {
 		return settingsAPI;
 	}
 
-	@Override
-	public ExternalServiceAPI getExternalServiceAPI() {
-		return externalServiceAPI;
-	}
-
-	@Override
-	public InternalOsmAndAPI getInternalAPI() {
-		return internalOsmAndAPI;
-	}
 
 	@Override
 	public SQLiteAPI getSQLiteAPI() {

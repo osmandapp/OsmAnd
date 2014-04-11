@@ -1,7 +1,6 @@
 package net.osmand.plus.api;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ClientContext;
 
 import org.apache.commons.logging.Log;
 
@@ -14,18 +13,18 @@ import android.media.AudioManager;
  * 
  * @author genly
  */
-public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeListener, net.osmand.plus.api.ExternalServiceAPI.AudioFocusHelper {
+public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeListener, AudioFocusHelper {
 	private static final Log log = PlatformUtil.getLog(AudioFocusHelperImpl.class);
 	
 	@Override
-	public boolean requestFocus(ClientContext context, int streamType) {
-		AudioManager mAudioManager = (AudioManager) ((Context) context).getSystemService(Context.AUDIO_SERVICE);
+	public boolean requestFocus(Context context, int streamType) {
+		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.requestAudioFocus(this, streamType,
 				AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 	}
 
 	@Override
-	public boolean abandonFocus(ClientContext context, int streamType) {
+	public boolean abandonFocus(Context context, int streamType) {
 		AudioManager mAudioManager = (AudioManager) ((Context) context).getSystemService(Context.AUDIO_SERVICE);
 		return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
 	}

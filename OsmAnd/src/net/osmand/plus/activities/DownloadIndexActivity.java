@@ -564,7 +564,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	
 	protected void downloadFilesCheckInternet() {
-		if(!getMyApplication().getExternalServiceAPI().isWifiConnected()) {
+		if(!getMyApplication().getSettings().isWifiConnected()) {
 			Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(getString(R.string.download_using_mobile_internet));
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {

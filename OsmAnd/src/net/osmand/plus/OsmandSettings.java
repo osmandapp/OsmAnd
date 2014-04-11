@@ -28,7 +28,13 @@ import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
+import android.os.Environment;
 
 public class OsmandSettings {
 	
@@ -195,12 +201,29 @@ public class OsmandSettings {
 	public boolean isInternetConnectionAvailable(boolean update){
 		long delta = System.currentTimeMillis() - lastTimeInternetConnectionChecked;
 		if(delta < 0 || delta > 15000 || update){
-			internetConnectionAvailable = ctx.getExternalServiceAPI().isInternetConnected();
+			internetConnectionAvailable = isInternetConnected();
 		}
 		return internetConnectionAvailable;
 	}
 	
+	public boolean isWifiConnected() {
+		ConnectivityManager mgr =  (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo ni = mgr.getActiveNetworkInfo();
+		return ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI;
+	}
 	
+	private boolean isInternetConnected() {
+		ConnectivityManager mgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo active = mgr.getActiveNetworkInfo();
+		if(active == null){
+			return false;
+		} else {
+			NetworkInfo.State state = active.getState();
+			return state != NetworkInfo.State.DISCONNECTED && state != NetworkInfo.State.DISCONNECTING;
+		}
+	}
+
+
 	/////////////// PREFERENCES classes ////////////////
 	
 	public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
@@ -997,7 +1020,7 @@ public class OsmandSettings {
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 	
 	public File getExternalStorageDirectory() {
-		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
+		String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
 		return new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
 				defaultLocation));
 	}
@@ -1005,7 +1028,7 @@ public class OsmandSettings {
 	public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
 
 	public String getDefaultExternalStorageLocation() {
-		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
+		String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
 		return defaultLocation;
 	}
 	
@@ -1677,8 +1700,11 @@ public class OsmandSettings {
 			return this == NIGHT;
 		}
 		
-		public static DayNightMode[] possibleValues(ClientContext context) {
-	         if (context.getExternalServiceAPI().isLightSensorEnabled()) {
+		public static DayNightMode[] possibleValues(Context context) {
+			SensorManager mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);         
+		    Sensor mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+			boolean isLightSensorEnabled = mLight != null;
+	         if (isLightSensorEnabled) {
 	        	 return DayNightMode.values();
 	         } else {
 	        	 return new DayNightMode[] { AUTO, DAY, NIGHT };

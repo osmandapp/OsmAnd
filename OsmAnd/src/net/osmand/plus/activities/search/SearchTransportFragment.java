@@ -10,7 +10,6 @@ import java.util.List;
 import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -79,7 +78,7 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 	
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.search_transport, container, false);
-		settings = ((OsmandApplication) getApplication()).getSettings();
+		settings = getApplication().getSettings();
 		
 		searchTransportLevel = (Button) view.findViewById(R.id.SearchTransportLevelButton);
 		searchTransportLevel.setText(R.string.search_POI_level_btn);
@@ -263,19 +262,19 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 			}
 			ind++;
 		}
-		text.append(getString(R.string.transport_route_distance)).append(" ").append(OsmAndFormatter.getFormattedDistance((int) dist, (ClientContext) getApplication()));  //$NON-NLS-1$/
+		text.append(getString(R.string.transport_route_distance)).append(" ").append(OsmAndFormatter.getFormattedDistance((int) dist, getApplication()));  //$NON-NLS-1$/
 		if(!part){
 			text.append(", ").append(getString(R.string.transport_stops_to_pass)).append(" ").append(eInd - stInd);   //$NON-NLS-1$ //$NON-NLS-2$
 			LatLon endStop = getEndStop(position - 1);
 			if (endStop != null) {
 				String before = OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(endStop, route.getStart().getLocation()), 
-						(ClientContext) getApplication());
+						getApplication());
 				text.append(", ").append(getString(R.string.transport_to_go_before)).append(" ").append(before); //$NON-NLS-2$//$NON-NLS-1$
 			}
 
 			LatLon stStop = getStartStop(position + 1);
 			if (stStop != null) {
-				String after = OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(stStop, route.getStop().getLocation()), (ClientContext) getApplication());
+				String after = OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(stStop, route.getStop().getLocation()), getApplication());
 				text.append(", ").append(getString(R.string.transport_to_go_after)).append(" ").append(after); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
@@ -306,9 +305,9 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 			String name = st.getName(settings.usingEnglishNames());
 			if(locationToGo != null){
 				n.append(name).append(" - ["); //$NON-NLS-1$
-				n.append(OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(locationToGo, st.getLocation()), (ClientContext) getApplication())).append("]"); //$NON-NLS-1$ 
+				n.append(OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(locationToGo, st.getLocation()),  getApplication())).append("]"); //$NON-NLS-1$ 
 			} else if(locationToStart != null){
-				n.append("[").append(OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(locationToStart, st.getLocation()), (ClientContext) getApplication())).append("] - "); //$NON-NLS-1$ //$NON-NLS-2$
+				n.append("[").append(OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(locationToStart, st.getLocation()), getApplication())).append("] - "); //$NON-NLS-1$ //$NON-NLS-2$
 				n.append(name);
 			} else {
 				n.append(name);
@@ -494,7 +493,7 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 			labelW.append(" - ["); //$NON-NLS-1$
 			
 			if (locationToGo != null) {
-				labelW.append(OsmAndFormatter.getFormattedDistance(stop.getDistToLocation(), (ClientContext) getApplication()));
+				labelW.append(OsmAndFormatter.getFormattedDistance(stop.getDistToLocation(), getApplication()));
 			} else {
 				labelW.append(getString(R.string.transport_search_none));
 			}
@@ -506,7 +505,7 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 			}
 			
 			int dist = locationToStart == null ? 0 : (int) (MapUtils.getDistance(stop.getStart().getLocation(), locationToStart));
-			String distance =  OsmAndFormatter.getFormattedDistance(dist, (ClientContext) getApplication()) + " "; //$NON-NLS-1$
+			String distance =  OsmAndFormatter.getFormattedDistance(dist, getApplication()) + " "; //$NON-NLS-1$
 			label.setText(distance + labelW, TextView.BufferType.SPANNABLE);
 			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1, 0);
 			return (row);
@@ -530,7 +529,7 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 
 				if(st != null && end != null){
 					int dist = (int) MapUtils.getDistance(st, end);
-					text.setText(MessageFormat.format(getString(R.string.transport_searching_route), OsmAndFormatter.getFormattedDistance(dist, (ClientContext) getApplication())));
+					text.setText(MessageFormat.format(getString(R.string.transport_searching_route), OsmAndFormatter.getFormattedDistance(dist, getApplication())));
 				} else {
 					text.setText(getString(R.string.transport_searching_transport));
 				}
@@ -577,12 +576,12 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 				labelW.append(" ("); //$NON-NLS-1$
 				labelW.append(info.getStopNumbers()).append(" ").append(getString(R.string.transport_stops)).append(", "); //$NON-NLS-1$ //$NON-NLS-2$
 				int startDist = (int) MapUtils.getDistance(getEndStop(position - 1), info.getStart().getLocation());
-				labelW.append(getString(R.string.transport_to_go_before)).append(" ").append(OsmAndFormatter.getFormattedDistance(startDist, (ClientContext) getApplication())); //$NON-NLS-1$
+				labelW.append(getString(R.string.transport_to_go_before)).append(" ").append(OsmAndFormatter.getFormattedDistance(startDist, getApplication())); //$NON-NLS-1$
 				if (position == getCount() - 1) {
 					LatLon stop = getStartStop(position + 1);
 					if(stop != null) {
 						int endDist = (int) MapUtils.getDistance(stop, info.getStop().getLocation());
-						labelW.append(", ").append(getString(R.string.transport_to_go_after)).append(" ").append(OsmAndFormatter.getFormattedDistance(endDist, (ClientContext) getApplication()));  //$NON-NLS-1$ //$NON-NLS-2$
+						labelW.append(", ").append(getString(R.string.transport_to_go_after)).append(" ").append(OsmAndFormatter.getFormattedDistance(endDist, getApplication()));  //$NON-NLS-1$ //$NON-NLS-2$
 					}
 				}
 

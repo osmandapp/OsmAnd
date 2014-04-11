@@ -195,7 +195,7 @@ public class DownloadFileHelper {
 	}
 	
 	public boolean isWifiConnected(){
-		return ctx.getExternalServiceAPI().isWifiConnected();
+		return ctx.getSettings().isWifiConnected();
 	}
 	
 	public boolean downloadFile(DownloadEntry de, IProgress progress, 
