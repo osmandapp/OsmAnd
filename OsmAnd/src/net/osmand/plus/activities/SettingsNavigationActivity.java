@@ -245,6 +245,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  ["
 					+ settings.ROUTER_SERVICE.get() + "]");
 			prepareRoutingPrefs(getPreferenceScreen());
+			super.updateAllSettings();
 		}
 		return true;
 	}
