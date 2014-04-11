@@ -41,21 +41,10 @@ public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 	}
 
 	@Override
-	public String getPackageName() {
-		return app.getPackageName();
-	}
-
-	@Override
 	public InputStream openAsset(String name) throws IOException {
 		return app.getAssets().open(name);
 	}
 
-
-	@Override
-	public NativeLibrary getNativeLibrary() {
-		return NativeOsmandLibrary.getLoadedLibrary();
-	}
-	
 
 	@Override
 	public List<Amenity> searchAmenities(PoiFilter filter, double topLatitude, double leftLongitude, double bottomLatitude,
@@ -69,45 +58,6 @@ public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 		return app.getResourceManager().searchAmenitiesByName(searchQuery, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, matcher);
 	}
 
-	@Override
-	public String getVersionName() {
-		try {
-			PackageInfo info = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
-			return info.versionName;
-		} catch (NameNotFoundException e) {
-			return "";
-		}
-	}
-
-	@Override
-	public int getVersionCode() {
-		try {
-			PackageInfo info = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
-			return info.versionCode;
-		} catch (NameNotFoundException e) {
-			return 0;
-		}
-	}
-
-	@Override
-	public String getDeviceName() {
-		return Build.DEVICE;
-	}
-
-	@Override
-	public String getBrandName() {
-		return Build.BRAND;
-	}
-
-	@Override
-	public String getModelName() {
-		return Build.MODEL;
-	}
-
-	@Override
-	public TargetPointsHelper getTargetPointsHelper() {
-		return app.getTargetPointsHelper();
-	}
 
 	@Override
 	public boolean isNavigationServiceStarted() {

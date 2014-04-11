@@ -15,6 +15,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.util.Algorithms;
@@ -27,11 +28,11 @@ public class DownloadFileHelper {
 	private static final int BUFFER_SIZE = 32256;
 	protected static final int TRIES_TO_DOWNLOAD = 15;
 	protected static final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;
-	private final ClientContext ctx;
+	private final OsmandApplication ctx;
 	private boolean interruptDownloading = false;
 	
 	
-	public DownloadFileHelper(ClientContext ctx){
+	public DownloadFileHelper(OsmandApplication ctx){
 		this.ctx = ctx;
 	}
 	

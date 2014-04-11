@@ -37,10 +37,10 @@ public class FavouritesDbHelper {
 	private List<FavouritePoint> favoritePointsFromGPXFile = null;
 	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<FavouritePoint>();
 	private Map<String, List<FavouritePoint>> favoriteGroups = null;
-	private final ClientContext context;
+	private final OsmandApplication context;
 	private SQLiteConnection conn;
 
-	public FavouritesDbHelper(ClientContext context) {
+	public FavouritesDbHelper(OsmandApplication context) {
 		this.context = context;
 	}
 	

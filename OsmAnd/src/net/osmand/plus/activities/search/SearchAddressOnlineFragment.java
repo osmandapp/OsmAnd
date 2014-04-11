@@ -165,7 +165,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 					URL url = new URL(b.toString());
 					URLConnection conn = url.openConnection();
 					conn.setDoInput(true);
-					conn.setRequestProperty("User-Agent", Version.getFullVersion((ClientContext) getActivity().getApplication())); //$NON-NLS-1$
+					conn.setRequestProperty("User-Agent", Version.getFullVersion((OsmandApplication) getActivity().getApplication())); //$NON-NLS-1$
 					conn.connect();
 					InputStream is = conn.getInputStream();
 					XmlPullParser parser = Xml.newPullParser();

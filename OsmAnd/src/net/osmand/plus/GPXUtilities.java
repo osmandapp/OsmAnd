@@ -173,7 +173,7 @@ public class GPXUtilities {
 
 	}
 
-	public static String writeGpxFile(File fout, GPXFile file, ClientContext ctx) {
+	public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx) {
 		FileOutputStream output = null;
 		try {
 			SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);

@@ -407,7 +407,7 @@ public class RoutingHelper {
 			showMessage(app.getString(R.string.arrived_at_intermediate_point));
 			route.passIntermediatePoint();
 			
-			TargetPointsHelper targets = app.getInternalAPI().getTargetPointsHelper();
+			TargetPointsHelper targets = app.getTargetPointsHelper();
 			List<String> ns = targets.getIntermediatePointNames();
 			int toDel = targets.getIntermediatePoints().size() - route.getIntermediatePointsToPass();
 			int currentIndex = toDel - 1; 
@@ -429,7 +429,7 @@ public class RoutingHelper {
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
 		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < POSITION_TOLERANCE * 1.5) {
 			showMessage(app.getString(R.string.arrived_at_destination));
-			TargetPointsHelper targets = app.getInternalAPI().getTargetPointsHelper();
+			TargetPointsHelper targets = app.getTargetPointsHelper();
 			String description = targets.getPointNavigateDescription();
 			if(isFollowingMode) {
 				voiceRouter.arrivedDestinationPoint(description);

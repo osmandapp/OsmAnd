@@ -42,6 +42,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsNavigationActivity;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -612,14 +613,16 @@ public class RouteProvider {
 			//cf.planRoadDirection = 1;
 		}
 		// BUILD context
-		RoutingContext ctx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files, 
+		NativeOsmandLibrary lib = settings.SAFE_MODE.get() ? null : NativeOsmandLibrary.getLoadedLibrary();
+		RoutingContext ctx = router.buildRoutingContext(cf,
+				lib, files, 
 				RouteCalculationMode.NORMAL);
 		
 		RoutingContext complexCtx = null;
 		boolean complex = params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) && !settings.DISABLE_COMPLEX_ROUTING.get()
 				&& precalculated == null;
 		if(complex) {
-			complexCtx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files,
+			complexCtx = router.buildRoutingContext(cf, lib,files,
 				RouteCalculationMode.COMPLEX);
 			complexCtx.calculationProgress = params.calculationProgress;
 			complexCtx.leftSideNavigation = params.leftSide;

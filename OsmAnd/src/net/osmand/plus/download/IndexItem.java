@@ -15,6 +15,7 @@ import java.util.TimeZone;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 
@@ -141,7 +142,7 @@ public class IndexItem implements Comparable<IndexItem> {
 		return size;
 	}
 
-	public List<DownloadEntry> createDownloadEntry(ClientContext ctx, DownloadActivityType type, 
+	public List<DownloadEntry> createDownloadEntry(OsmandApplication ctx, DownloadActivityType type, 
 			List<DownloadEntry> downloadEntries) {
 		String fileName = this.fileName;
 		File parent = null;

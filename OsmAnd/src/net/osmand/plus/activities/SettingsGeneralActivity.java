@@ -13,6 +13,7 @@ import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -185,7 +186,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		}
 		registerListPreference(settings.APPLICATION_MODE, screen, entries, appModes);
 		
-		if (!Version.isBlackberry((ClientContext) getApplication())) {
+		if (!Version.isBlackberry((OsmandApplication) getApplication())) {
 			PreferenceScreen cat = getPreferenceScreen();
 			int nav = getResources().getConfiguration().navigation;
 			if (nav == Configuration.NAVIGATION_DPAD || nav == Configuration.NAVIGATION_TRACKBALL || 

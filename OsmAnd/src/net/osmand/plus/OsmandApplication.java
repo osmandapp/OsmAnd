@@ -56,6 +56,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
@@ -840,5 +841,23 @@ public class OsmandApplication extends Application implements ClientContext {
 			return false;
 		}
 		return ((AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
+	}
+
+	public String getVersionName() {
+		try {
+			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+			return info.versionName;
+		} catch (NameNotFoundException e) {
+			return "";
+		}
+	}
+
+	public int getVersionCode() {
+		try {
+			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+			return info.versionCode;
+		} catch (NameNotFoundException e) {
+			return 0;
+		}
 	}
 }

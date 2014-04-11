@@ -48,4 +48,5 @@ public interface ClientContext {
 	
 	public Location getLastKnownLocation();
 
+
 }

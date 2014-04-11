@@ -117,8 +117,7 @@ public class NavigationService extends Service implements LocationListener {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		handler = new Handler();
 		OsmandApplication app = (OsmandApplication) getApplication();
-		ClientContext cl = app;
-		settings = cl.getSettings();
+		settings = app.getSettings();
 		
 		startedForNavigation = intent.getBooleanExtra(NAVIGATION_START_SERVICE_PARAM, false);
 		if (startedForNavigation) {
@@ -159,12 +158,12 @@ public class NavigationService extends Service implements LocationListener {
 		// registering icon at top level
 		// Leave icon visible even for navigation for proper display
 //		if (!startedForNavigation) {
-			showNotificationInStatusBar(cl);
+			showNotificationInStatusBar(app);
 //		}
 		return START_REDELIVER_INTENT;
 	}
 
-	private void showNotificationInStatusBar(ClientContext cl) {
+	private void showNotificationInStatusBar(OsmandApplication cl) {
 		broadcastReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {

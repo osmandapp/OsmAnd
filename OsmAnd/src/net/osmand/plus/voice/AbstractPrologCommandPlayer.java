@@ -13,6 +13,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
@@ -35,7 +36,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 
 	private static final Log log = PlatformUtil.getLog(AbstractPrologCommandPlayer.class);
 
-	protected ClientContext ctx;
+	protected OsmandApplication ctx;
 	protected File voiceDir;
 	protected Prolog prologSystem;
 	protected static final String P_VERSION = "version";
@@ -56,7 +57,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	protected int streamType;
 	private int currentVersion;
 
-	protected AbstractPrologCommandPlayer(ClientContext ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
+	protected AbstractPrologCommandPlayer(OsmandApplication ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
 		throws CommandPlayerException 
 	{
 		this.ctx = ctx;

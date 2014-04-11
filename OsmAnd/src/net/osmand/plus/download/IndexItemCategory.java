@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 
@@ -26,7 +27,7 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 		return order < another.order ? -1 : 1;
 	}
 
-	public static List<IndexItemCategory> categorizeIndexItems(ClientContext ctx, Collection<IndexItem> indexItems) {
+	public static List<IndexItemCategory> categorizeIndexItems(OsmandApplication ctx, Collection<IndexItem> indexItems) {
 		boolean skipWiki = Version.isFreeVersion(ctx);
 		final Map<String, IndexItemCategory> cats = new TreeMap<String, IndexItemCategory>();
 		for (IndexItem i : indexItems) {
