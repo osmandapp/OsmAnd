@@ -18,6 +18,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.apache.http.client.protocol.ClientContext;
 
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
@@ -42,12 +43,12 @@ public class SQLiteTileSource implements ITileSource {
 	private int expirationTimeMillis = -1; // never
 
 	static final int tileSize = 256;
-	private ClientContext ctx;
+	private OsmandApplication ctx;
 	private boolean onlyReadonlyAvailable = false;
 	
 	
 	
-	public SQLiteTileSource(ClientContext ctx, File f, List<TileSourceTemplate> toFindUrl){
+	public SQLiteTileSource(OsmandApplication ctx, File f, List<TileSourceTemplate> toFindUrl){
 		this.ctx = ctx;
 		this.file = f;
 		if (f != null) {

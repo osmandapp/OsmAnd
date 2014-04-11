@@ -9,7 +9,6 @@ import java.util.List;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;

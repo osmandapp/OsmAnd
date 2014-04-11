@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.ShadowText;

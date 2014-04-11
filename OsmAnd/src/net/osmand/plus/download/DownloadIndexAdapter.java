@@ -5,10 +5,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -119,7 +120,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					}
 				}
 				List<IndexItem> filter = new ArrayList<IndexItem>();
-				ClientContext c = downloadActivity.getMyApplication();
+				Context c = downloadActivity;
 				for (IndexItem item : indexFiles) {
 					boolean add = true;
 					final String visibleName = item.getVisibleName(c).toLowerCase();
@@ -230,7 +231,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		TextView item = (TextView) row.findViewById(R.id.download_item);
 		TextView description = (TextView) row.findViewById(R.id.download_descr);
 		IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
-		ClientContext clctx = downloadActivity.getMyApplication();
+		OsmandApplication clctx = downloadActivity.getMyApplication();
 		String eName = e.getVisibleDescription(clctx) + "\n" + e.getVisibleName(clctx);
 		item.setText(eName.trim()); //$NON-NLS-1$
 		String d = e.getDate() + "\n" + e.getSizeDescription(clctx);

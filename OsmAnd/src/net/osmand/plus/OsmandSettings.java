@@ -119,7 +119,7 @@ public class OsmandSettings {
 		profilePreferences = getProfilePreferences(currentMode);
 	}
 	
-	public ClientContext getContext() {
+	public OsmandApplication getContext() {
 		return ctx;
 	}
 	
@@ -1680,7 +1680,7 @@ public class OsmandSettings {
 			this.key = key;
 		}
 		
-		public  String toHumanString(ClientContext ctx){
+		public  String toHumanString(Context ctx){
 			return ctx.getString(key);
 		}
 
@@ -1726,7 +1726,7 @@ public class OsmandSettings {
 			this.ttsString = ttsString;
 		}
 		
-		public String toHumanString(ClientContext ctx){
+		public String toHumanString(Context ctx){
 			return ctx.getString(key);
 		}
 		

@@ -259,7 +259,7 @@ public class ApplicationMode {
 		return ctx.getString(key);
 	}
 	
-	public String toHumanStringCtx(ClientContext ctx) {
+	public String toHumanStringCtx(Context ctx) {
 		return ctx.getString(key);
 	}
 	

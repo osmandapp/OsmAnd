@@ -46,7 +46,7 @@ public class MapInfoWidgetsFactory {
 			@Override
 			public boolean updateInfo(DrawSettings d) {
 				// draw speed
-				Location loc = map.getMyApplication().getLastKnownLocation();
+				Location loc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 				if (loc != null && loc.hasAltitude()) {
 					double compAlt = loc.getAltitude();
 					if (cachedAlt != (int) compAlt) {

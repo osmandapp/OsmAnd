@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 
 import org.apache.commons.logging.Log;

@@ -340,7 +340,7 @@ public class RouteInfoWidgetsFactory {
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				Location loc = app.getLastKnownLocation();
+				Location loc = app.getLocationProvider().getLastKnownLocation();
 				// draw speed
 				if (loc != null && loc.hasSpeed()) {
 					// .1 mps == 0.36 kph

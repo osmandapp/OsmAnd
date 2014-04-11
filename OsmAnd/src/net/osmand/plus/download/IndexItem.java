@@ -14,7 +14,6 @@ import java.util.TimeZone;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -52,7 +51,7 @@ public class IndexItem implements Comparable<IndexItem> {
 		this.type = type;
 	}
 
-	public String getVisibleDescription(ClientContext ctx) {
+	public String getVisibleDescription(Context ctx) {
 		String s = ""; //$NON-NLS-1$
 		if (type == DownloadActivityType.SRTM_COUNTRY_FILE) {
 			return ctx.getString(R.string.download_srtm_maps);
@@ -66,7 +65,7 @@ public class IndexItem implements Comparable<IndexItem> {
 		return s;
 	}
 
-	public String getVisibleName(ClientContext ctx) {
+	public String getVisibleName(Context ctx) {
 		String s = "";
 		if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 			s = ctx.getString(R.string.voice) + "\n";
@@ -134,7 +133,7 @@ public class IndexItem implements Comparable<IndexItem> {
 		return date;
 	}
 	
-	public String getSizeDescription(ClientContext ctx) {
+	public String getSizeDescription(Context ctx) {
 		return size + " MB";
 	}
 

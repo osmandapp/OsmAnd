@@ -8,6 +8,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.City.CityType;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
+import android.content.Context;
 
 public class OsmAndFormatter {
 	private final static float METERS_IN_KILOMETER = 1000f;
@@ -116,7 +117,7 @@ public class OsmAndFormatter {
 	}
 	
 	
-	public static String toPublicString(CityType t, ClientContext ctx) {
+	public static String toPublicString(CityType t, Context ctx) {
 		switch (t) {
 		case CITY:
 			return ctx.getString(R.string.city_type_city);
@@ -134,7 +135,7 @@ public class OsmAndFormatter {
 		return "";
 	}
 
-	public static String toPublicString(AmenityType t, ClientContext ctx) {
+	public static String toPublicString(AmenityType t, Context ctx) {
 		Class<?> cl = R.string.class;
 		try {
 			Field fld = cl.getField("amenity_type_"+t.getCategoryName());
@@ -147,7 +148,7 @@ public class OsmAndFormatter {
 	}
 
 	
-	public static String getPoiSimpleFormat(Amenity amenity, ClientContext ctx, boolean en){
+	public static String getPoiSimpleFormat(Amenity amenity, Context ctx, boolean en){
 		return toPublicString(amenity.getType(), ctx) + " : " + getPoiStringWithoutType(amenity, en); //$NON-NLS-1$
 	}
 	
@@ -167,7 +168,7 @@ public class OsmAndFormatter {
 		return type + " " + n; //$NON-NLS-1$
 	}
 
-	public static String getAmenityDescriptionContent(ClientContext ctx, Amenity amenity, boolean shortDescription) {
+	public static String getAmenityDescriptionContent(Context ctx, Amenity amenity, boolean shortDescription) {
 		StringBuilder d = new StringBuilder();
 		for(Entry<String, String>  e : amenity.getAdditionalInfo().entrySet()) {
 			String key = e.getKey();

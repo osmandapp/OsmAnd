@@ -3,7 +3,7 @@ package net.osmand.plus.render;
 
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -29,7 +29,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 	}
 
 
-    public static NativeOsmandLibrary getLibrary(RenderingRulesStorage storage, ClientContext ctx) {
+    public static NativeOsmandLibrary getLibrary(RenderingRulesStorage storage, OsmandApplication ctx) {
 		if (!isLoaded()) {
 			synchronized (NativeOsmandLibrary.class) {
 				if (!isLoaded()) {
@@ -73,7 +73,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 		return isNativeSupported != null;  
 	}
 	
-	public static boolean isNativeSupported(RenderingRulesStorage storage, ClientContext ctx) {
+	public static boolean isNativeSupported(RenderingRulesStorage storage, OsmandApplication ctx) {
 		if(storage != null) {
 			getLibrary(storage, ctx);
 		}

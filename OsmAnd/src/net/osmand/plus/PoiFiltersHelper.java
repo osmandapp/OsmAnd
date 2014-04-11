@@ -301,10 +301,10 @@ public class PoiFiltersHelper {
 	    private static final String CATEGORIES_COL_SUBCATEGORY = "subcategory"; //$NON-NLS-1$
 	    private static final String CATEGORIES_TABLE_CREATE =   "CREATE TABLE " + CATEGORIES_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
 	    CATEGORIES_FILTER_ID + ", " + CATEGORIES_COL_CATEGORY + ", " +  CATEGORIES_COL_SUBCATEGORY + ");"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		private ClientContext context;
+		private OsmandApplication context;
 		private SQLiteConnection conn;
 
-	    PoiFilterDbHelper(ClientContext context) {
+	    PoiFilterDbHelper(OsmandApplication context) {
 			this.context = context;
 	    }
 	    

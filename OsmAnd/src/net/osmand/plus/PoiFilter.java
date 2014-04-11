@@ -15,6 +15,10 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.util.MapUtils;
 
+import org.apache.http.client.protocol.ClientContext;
+
+import android.content.Context;
+
 public class PoiFilter {
 	
 	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
@@ -327,7 +331,7 @@ public class PoiFilter {
 		this.isStandardFilter = isStandardFilter;
 	}
 	
-	public ClientContext getApplication() {
+	public Context getApplication() {
 		return app;
 	}
 	

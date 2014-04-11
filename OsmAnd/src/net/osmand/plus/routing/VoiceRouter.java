@@ -4,7 +4,6 @@ package net.osmand.plus.routing;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
@@ -15,6 +14,7 @@ import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
+import android.content.Context;
 
 
 public class VoiceRouter {
@@ -653,7 +653,7 @@ public class VoiceRouter {
 		}
 	}
 
-	public void onApplicationTerminate(ClientContext ctx) {
+	public void onApplicationTerminate(Context ctx) {
 		if (player != null) {
 			player.clear();
 		}

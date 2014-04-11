@@ -78,7 +78,7 @@ import com.actionbarsherlock.app.SherlockExpandableListActivity;
 import com.actionbarsherlock.app.SherlockListActivity;
 
 
-public class OsmandApplication extends Application implements ClientContext {
+public class OsmandApplication extends Application {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
@@ -679,38 +679,31 @@ public class OsmandApplication extends Application implements ClientContext {
 		return targetPointsHelper;
 	}
 	
-	@Override
 	public void showShortToastMessage(int msgId, Object... args) {
 		AccessibleToast.makeText(this, getString(msgId, args), Toast.LENGTH_SHORT).show();
 	}
 
-	@Override
 	public void showToastMessage(int msgId, Object... args) {
 		AccessibleToast.makeText(this, getString(msgId, args), Toast.LENGTH_LONG).show();
 	}
 
-	@Override
 	public void showToastMessage(String msg) {
 		AccessibleToast.makeText(this, msg, Toast.LENGTH_LONG).show();		
 	}
 	
-	@Override
 	public SettingsAPI getSettingsAPI() {
 		return settingsAPI;
 	}
 
 
-	@Override
 	public SQLiteAPI getSQLiteAPI() {
 		return sqliteAPI;
 	}
 
-	@Override
 	public void runInUIThread(Runnable run) {
 		uiHandler.post(run);
 	}
 
-	@Override
 	public void runInUIThread(Runnable run, long delay) {
 		uiHandler.postDelayed(run, delay);
 	}
@@ -730,7 +723,6 @@ public class OsmandApplication extends Application implements ClientContext {
 		uiHandler.sendMessageDelayed(msg, delay);
 	}
 	
-	@Override
 	public File getAppPath(String path) {
 		if(path == null) {
 			path = "";
@@ -738,12 +730,6 @@ public class OsmandApplication extends Application implements ClientContext {
 		return new File(getSettings().getExternalStorageDirectory(), IndexConstants.APP_DIR + path);
 	}
 
-	@Override
-	public Location getLastKnownLocation() {
-		return locationProvider.getLastKnownLocation();
-	}
-	
-	
 	public void applyTheme(Context c) {
 		int t = R.style.OsmandLightDarkActionBarTheme;
 		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {

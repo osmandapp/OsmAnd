@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.londatiga.android.QuickAction;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -49,7 +48,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		helper = SearchHistoryHelper.getInstance((ClientContext) getActivity().getApplicationContext());
+		helper = SearchHistoryHelper.getInstance((OsmandApplication) getActivity().getApplicationContext());
 	}
 	
 	@Override

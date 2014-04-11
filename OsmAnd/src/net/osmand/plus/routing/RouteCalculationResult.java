@@ -14,7 +14,6 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -22,6 +21,7 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import android.content.Context;
 
 public class RouteCalculationResult {
 	// could not be null and immodifiable!
@@ -93,7 +93,7 @@ public class RouteCalculationResult {
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,  
-			ClientContext ctx, boolean leftSide, float routingTime) {
+			Context ctx, boolean leftSide, float routingTime) {
 		this.routingTime = routingTime;
 		List<RouteDirectionInfo> computeDirections = new ArrayList<RouteDirectionInfo>();
 		this.errorMessage = null;
@@ -141,7 +141,7 @@ public class RouteCalculationResult {
 		return Collections.emptyList();
 	}
 	
-	private static void calculateIntermediateIndexes(ClientContext ctx, List<Location> locations,
+	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
 			List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
 		if(intermediates != null && localDirections != null) {
 			int[] interLocations = new int[intermediates.size()];
@@ -226,7 +226,7 @@ public class RouteCalculationResult {
 	 * PREPARATION 
 	 */
 	private static List<RouteSegmentResult> convertVectorResult(List<RouteDirectionInfo> directions, List<Location> locations, List<RouteSegmentResult> list,
-			List<AlarmInfo> alarms, ClientContext ctx) {
+			List<AlarmInfo> alarms, Context ctx) {
 		float prevDirectionTime = 0;
 		float prevDirectionDistance = 0;
 		List<RouteSegmentResult> segmentsToPopulate = new ArrayList<RouteSegmentResult>();
@@ -296,7 +296,7 @@ public class RouteCalculationResult {
 	}
 	
 	protected static void addMissingTurnsToRoute(List<Location> locations, 
-			List<RouteDirectionInfo> originalDirections, Location start, LatLon end, ApplicationMode mode, ClientContext ctx,
+			List<RouteDirectionInfo> originalDirections, Location start, LatLon end, ApplicationMode mode, Context ctx,
 			boolean leftSide){
 		if(locations.isEmpty()){
 			return;
@@ -459,7 +459,7 @@ public class RouteCalculationResult {
 	}
 	
 	
-	public static String toString(TurnType type, ClientContext ctx) {
+	public static String toString(TurnType type, Context ctx) {
 		if(type.isRoundAbout()){
 			return ctx.getString(R.string.route_roundabout, type.getExitOut());
 		} else if(type.getValue().equals(TurnType.C)) {

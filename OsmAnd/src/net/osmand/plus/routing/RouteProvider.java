@@ -28,7 +28,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
@@ -66,6 +65,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import android.content.Context;
 import android.os.Bundle;
 import btools.routingapp.IBRouterService;
 
@@ -514,7 +514,7 @@ public class RouteProvider {
 		return sublist;
 	}
 	
-	protected String getString(ClientContext ctx, int resId){
+	protected String getString(Context ctx, int resId){
 		if(ctx == null){
 			return ""; //$NON-NLS-1$
 		}
