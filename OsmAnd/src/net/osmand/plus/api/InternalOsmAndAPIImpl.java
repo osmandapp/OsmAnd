@@ -4,22 +4,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import net.osmand.NativeLibrary;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.PoiFilter;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.render.NativeOsmandLibrary;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Build;
 import android.util.Xml;
 
 public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
@@ -28,21 +22,6 @@ public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 
 	public InternalOsmAndAPIImpl(OsmandApplication app) {
 		this.app = app;
-	}
-
-	@Override
-	public XmlSerializer newSerializer() {
-		return Xml.newSerializer();
-	}
-
-	@Override
-	public XmlPullParser newPullParser() {
-		return Xml.newPullParser();
-	}
-
-	@Override
-	public InputStream openAsset(String name) throws IOException {
-		return app.getAssets().open(name);
 	}
 
 

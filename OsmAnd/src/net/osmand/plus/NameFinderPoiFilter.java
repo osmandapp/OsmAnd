@@ -64,7 +64,7 @@ public class NameFinderPoiFilter extends PoiFilter {
 			log.info(urlq);
 			URL url = new URL(urlq); //$NON-NLS-1$
 			InputStream stream = url.openStream();
-			XmlPullParser parser = application.getInternalAPI().newPullParser();
+			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(stream, "UTF-8"); //$NON-NLS-1$
 			int eventType;
 			int namedDepth= 0;

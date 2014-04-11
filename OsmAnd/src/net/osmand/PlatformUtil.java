@@ -6,6 +6,9 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+import org.xmlpull.v1.XmlSerializer;
+
+import android.util.Xml;
 
 /**
  * That class is replacing of standard LogFactory due to 
@@ -22,7 +25,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
  */
 public class PlatformUtil {
 	public static String TAG = "net.osmand"; //$NON-NLS-1$
-	public static boolean AVIAN_LIBRARY = false;
 	private static class OsmandLogImplementation implements Log {
 		
 		private final String fullName;
@@ -159,7 +161,12 @@ public class PlatformUtil {
 	}
 	
 	public static XmlPullParser newXMLPullParser() throws XmlPullParserException {
-		return XmlPullParserFactory.newInstance().newPullParser();
+		// return XmlPullParserFactory.newInstance().newPullParser();
+		return Xml.newPullParser();
+	}
+	
+	public static XmlSerializer newSerializer() {
+		return Xml.newSerializer();
 	}
 	
 	public static net.osmand.Collator primaryCollator(){

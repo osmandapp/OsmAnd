@@ -32,6 +32,8 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
+import android.content.Context;
+
 public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
 
@@ -179,7 +181,7 @@ public class GPXUtilities {
 			SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
 			format.setTimeZone(TimeZone.getTimeZone("UTC"));
 			output = new FileOutputStream(fout);
-			XmlSerializer serializer = ctx.getInternalAPI().newSerializer();
+			XmlSerializer serializer = PlatformUtil.newSerializer();
 			serializer.setOutput(output, "UTF-8"); //$NON-NLS-1$
 			serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true); //$NON-NLS-1$
 			serializer.startDocument("UTF-8", true); //$NON-NLS-1$
@@ -332,7 +334,7 @@ public class GPXUtilities {
 		return text;
 	}
 
-	public static GPXFile loadGPXFile(ClientContext ctx, File f) {
+	public static GPXFile loadGPXFile(Context ctx, File f) {
 		FileInputStream fis = null;
 		try {
 			fis = new FileInputStream(f);
@@ -355,12 +357,12 @@ public class GPXUtilities {
 		}
 	}
 
-	public static GPXFile loadGPXFile(ClientContext ctx, InputStream f) {
+	public static GPXFile loadGPXFile(Context ctx, InputStream f) {
 		GPXFile res = new GPXFile();
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
-			XmlPullParser parser = ctx.getInternalAPI().newPullParser();
+			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(getUTF8Reader(f)); //$NON-NLS-1$
 			Stack<GPXExtensions> parserState = new Stack<GPXExtensions>();
 			boolean extensionReadMode = false;

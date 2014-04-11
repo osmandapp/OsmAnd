@@ -385,7 +385,7 @@ public class GpxUiHelper {
 				GPXFile r = currentFile; 
 				for(String fname : filename) {
 					final File f = new File(dir, fname);
-					GPXFile res = GPXUtilities.loadGPXFile((ClientContext) activity.getApplication(), f);
+					GPXFile res = GPXUtilities.loadGPXFile(activity.getApplication(), f);
 					GPXUtilities.mergeGPXFileInto(res, r);
 					r = res;
 				}

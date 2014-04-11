@@ -50,7 +50,7 @@ public class SpecialPhrases {
 	 * @param lang the language to use
 	 * @throws IOException when reading the text file failed
 	 */
-	public static void setLanguage(ClientContext ctx, OsmandSettings settings) throws IOException {
+	public static void setLanguage(OsmandApplication ctx, OsmandSettings settings) throws IOException {
 		String lang = getPreferredLanguage(settings).getLanguage();
 		m = new HashMap<String, String>();
 		// The InputStream opens the resourceId and sends it to the buffer
@@ -58,10 +58,10 @@ public class SpecialPhrases {
 		BufferedReader br = null;
 		try {
 			try {
-				is = ctx.getInternalAPI().openAsset("specialphrases/specialphrases_" + lang + ".txt");
+				is = ctx.getAssets().open("specialphrases/specialphrases_" + lang + ".txt");
 			} catch (IOException ex) {
 				// second try: default to English, if this fails, the error is thrown outside
-				is = ctx.getInternalAPI().openAsset("specialphrases/specialphrases_en.txt");
+				is = ctx.getAssets().open("specialphrases/specialphrases_en.txt");
 			}
 			br = new BufferedReader(new InputStreamReader(is));
 			String readLine = null;
