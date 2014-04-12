@@ -12,6 +12,7 @@ import java.util.TreeMap;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
@@ -40,8 +41,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public RegionAddressRepositoryBinary(BinaryMapIndexReader file, String name) {
 		this.file = file;
 		this.region = name;
- 	    this.collator = PlatformUtil.primaryCollator();
-		this.postCodes = new TreeMap<String, City>(PlatformUtil.primaryCollator());
+ 	    this.collator = OsmAndCollator.primaryCollator();
+		this.postCodes = new TreeMap<String, City>(OsmAndCollator.primaryCollator());
 	}
 	
 	@Override

@@ -20,6 +20,7 @@ import java.util.Map.Entry;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
@@ -1223,7 +1224,7 @@ public class BinaryMapIndexReader {
 		if (query == null || query.length() == 0) {
 			throw new IllegalArgumentException();
 		}
-		Collator collator = PlatformUtil.primaryCollator();
+		Collator collator = OsmAndCollator.primaryCollator();
 		for (PoiRegion poiIndex : poiIndexes) {
 			poiAdapter.initCategories(poiIndex);
 			for (int i = 0; i < poiIndex.categories.size(); i++) {

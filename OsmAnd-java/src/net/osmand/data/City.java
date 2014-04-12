@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.osmand.PlatformUtil;
+import net.osmand.OsmAndCollator;
 import net.osmand.util.Algorithms;
 
 public class City extends MapObject {
@@ -42,7 +42,7 @@ public class City extends MapObject {
 
 	private CityType type = null;
 	// Be attentive ! Working with street names ignoring case
-	private Map<String, Street> streets = new TreeMap<String, Street>(PlatformUtil.primaryCollator());
+	private Map<String, Street> streets = new TreeMap<String, Street>(OsmAndCollator.primaryCollator());
 	private String isin = null;
 	private String postcode = null;
 
