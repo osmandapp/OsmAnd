@@ -1445,7 +1445,7 @@
 	\n\t* Fehlerbehebungen bei Navigation und Kartenanzeige
     </string>
     <string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
-    <string name="local_index_tile_data_expire">Verfall (Minuten): %1$s</string>
+    <string name="local_index_tile_data_expire">Gültigkeit endet in (Minuten): %1$s</string>
     <string name="local_index_tile_data_downloadable">Herunterladbar: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maximum Zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimum Zoom: %1$s</string>
