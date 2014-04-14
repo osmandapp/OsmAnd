@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
-	<string name="route_is_too_long">Der OsmAnd Offline-Router braucht evtl. sehr lang (oder findet gar kein Ergebnis) für mehr als 200km voneinander entfernte Punkte. Um die Performanz zu verbessern, fügen Sie evtl. einen oder mehrere Wegpunkte in die Route ein.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="route_is_too_long">Der OsmAnd Offline-Router braucht evtl. sehr lang (oder findet gar kein Ergebnis) für mehr als 200km voneinander entfernte Punkte. Um die Performanz zu verbessern, fügen Sie evtl. einen oder mehrere Wegpunkte in die Route ein.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -1529,7 +1528,47 @@
     <string name="gpx_option_calculate_first_last_segment">Ergänze das erste und letze Segment via OsmAnd navigation</string>
     <string name="use_displayed_track_for_navigation">Möchten Sie die angezeigte GPX-Datei zur Navigation verwenden?</string>
     <string name="keep_and_add_destination_point">Als Ziel hinzufügen</string>
-    <string name="select_gpx">GPX-Datei wählen &#8230;</string>
+    <string name="select_gpx">GPX-Datei wählen …</string>
     <string name="route_descr_select_destination">Ziel wählen</string>
 
-</resources>
+<string name="lang_en">Englisch</string>
+	<string name="lang_af">Afrikaans</string>
+	<string name="lang_hy">Armenisch</string>
+	<string name="lang_eu">Baskisch</string>
+	<string name="lang_be">Weißrussisch</string>
+	<string name="lang_bg">Bulgarisch</string>
+	<string name="lang_ca">Katalanisch</string>
+	<string name="lang_cs">Tschechisch</string>
+	<string name="lang_da">Dänisch</string>
+	<string name="lang_nl">Niederländisch</string>
+	<string name="lang_fi">Finnisch</string>
+	<string name="lang_fr">Französisch</string>
+	<string name="lang_ka">Georgisch</string>
+	<string name="lang_de">Deutsch</string>
+	<string name="lang_el">Griechisch</string>
+	<string name="lang_iw">Hebräisch</string>
+	<string name="lang_hi">Hindi</string>
+	<string name="lang_hu">Ungarisch</string>
+	<string name="lang_id">Indonesisch</string>
+	<string name="lang_it">Italienisch</string>
+	<string name="lang_ja">Japanisch</string>
+	<string name="lang_ko">Koreanisch</string>
+	<string name="lang_lv">Lettisch</string>
+	<string name="lang_lt">Litauisch</string>
+	<string name="lang_mr">Marathi</string>
+	<string name="lang_no">Norwegisch</string>
+	<string name="lang_pl">Polnisch</string>
+	<string name="lang_pt">Portugiesisch</string>
+	<string name="lang_ro">Rumänisch</string>
+	<string name="lang_ru">Russisch</string>
+	<string name="lang_sk">Slowakisch</string>
+	<string name="lang_sl">Slowenisch</string>
+	<string name="lang_es">Spanisch</string>
+	<string name="lang_sv">Schwedisch</string>
+	<string name="lang_tr">Türkisch</string>
+	<string name="lang_uk">Ukrainisch</string>
+	<string name="lang_vi">Vietnamesisch</string>
+	<string name="lang_cy">Walisisch</string>
+    <string name="index_name_italy">Europa - Italien</string>
+    <string name="index_name_gb">Europa - Großbritannien</string>
+    </resources>
