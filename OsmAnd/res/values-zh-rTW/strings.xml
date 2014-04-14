@@ -1674,4 +1674,45 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	\n\t* 有很多小的 UX (使用者體驗)改進和適用性修復
 	\n\t* 語音速率協助工具設定
     </string>
+    <string name="lang_en">英文</string>
+	<string name="lang_af">南非荷蘭語</string>
+	<string name="lang_hy">亞美尼亞</string>
+	<string name="lang_eu">巴斯克</string>
+	<string name="lang_be">白俄羅斯</string>
+	<string name="lang_bs">波士尼亞</string>
+	<string name="lang_bg">保加利亞</string>
+	<string name="lang_ca">加泰隆尼亞</string>
+	<string name="lang_cs">捷克</string>
+	<string name="lang_da">丹麥</string>
+	<string name="lang_nl">荷蘭</string>
+	<string name="lang_fi">芬蘭</string>
+	<string name="lang_fr">法文</string>
+	<string name="lang_ka">喬治亞</string>
+	<string name="lang_de">德語</string>
+	<string name="lang_el">希臘語</string>
+	<string name="lang_iw">希伯來語</string>
+	<string name="lang_hi">印地語</string>
+	<string name="lang_hu">匈牙利</string>
+	<string name="lang_id">印尼</string>
+	<string name="lang_it">意大利</string>
+	<string name="lang_ja">日語</string>
+	<string name="lang_ko">韓文</string>
+	<string name="lang_lv">拉脫維亞</string>
+	<string name="lang_lt">立陶宛</string>
+	<string name="lang_mr">馬拉地語</string>
+	<string name="lang_no">挪威</string>
+	<string name="lang_pl">波蘭</string>
+	<string name="lang_pt">葡萄牙</string>
+	<string name="lang_ro">羅馬尼亞</string>
+	<string name="lang_ru">俄語</string>
+	<string name="lang_sk">斯洛伐克</string>
+	<string name="lang_sl">斯洛維尼亞</string>
+	<string name="lang_es">西班牙</string>
+	<string name="lang_sv">瑞典</string>
+	<string name="lang_tr">土耳其</string>
+	<string name="lang_uk">烏克蘭</string>
+	<string name="lang_vi">越南話</string>
+	<string name="lang_cy">威爾斯</string>
+    <string name="index_name_italy">歐洲 - 意大利</string>
+    <string name="index_name_gb">歐洲 - 英國</string>
     </resources>
