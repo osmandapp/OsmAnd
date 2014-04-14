@@ -1686,4 +1686,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     </string>
     <string name="calculate_osmand_route_without_internet">Vypočítať OsmAnd trasu úseku bez pripojenia na Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Vypočítať OsmAnd trasu pre prvý a posledný úsek</string>
+    <string name="lang_en">Anglický</string>
+	<string name="index_name_gb">Európa - Veľká Británia</string>
+    <string name="lang_cs">Český</string>
+	<string name="lang_de">Nemecký</string>
+	<string name="lang_hu">Maďarský</string>
+	<string name="lang_pl">Poľský</string>
+	<string name="lang_sk">Slovenský</string>
+	<string name="lang_uk">Ukrajinský</string>
+	<string name="index_name_italy">Európa - Taliansko</string>
     </resources>
