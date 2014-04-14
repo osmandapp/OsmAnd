@@ -128,7 +128,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					boolean add = true;
 					String indexLC = osmandRegions.getDownloadNameIndexLowercase(item.getBasename());
 					if(indexLC == null) {
-						item.getVisibleName(c, osmandRegions).toLowerCase();
+						indexLC = item.getVisibleName(c, osmandRegions).toLowerCase();
 					}
 					for(List<String> or : conds) {
 						boolean tadd = true;
