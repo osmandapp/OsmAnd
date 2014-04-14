@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="route_is_too_long">Der OsmAnd Offline-Router braucht evtl. sehr lang (oder findet gar kein Ergebnis) für mehr als 200km voneinander entfernte Punkte. Um die Performanz zu verbessern, fügen Sie evtl. einen oder mehrere Wegpunkte in die Route ein.</string>
+<resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -24,7 +24,7 @@
 		\n\t* Bedienkomfort und Höhenlinien-Modul verbessert
 		\n\t* Höhenlinien-Modul erweitert mit Relief-Schattierungen
 		\n\t* Fehlerbehebungen (Routing-Verbesserungen)
-	</string>
+    </string>
 	<string name="dist_control_start">Start</string>
 	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
@@ -46,18 +46,16 @@
 	<string name="download_roads_only_item">"Nur Straßen"</string>
 	<string name="download_regular_maps">Reguläre Karten</string>
 	<string name="download_roads_only_maps">Reine Straßenkarten</string>
-	<string name="safe_mode_description">Anwendung läuft im abgesicherten Modus (verwendet langsameren Android statt nativen Code).</string>
+	<string name="safe_mode_description">Anwendung läuft im abgesicherten Modus (Verwendung für langsamere Android-Versionen).</string>
 	<string name="safe_mode">Abgesicherter Modus</string>
 	<string name="native_library_not_running">Die Anwendung läuft im abgesicherten Modus (kann in den Einstellungen deaktiviert werden).</string>
 	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er beendet werden?</string>
 	<string name="tip_recent_changes_1_0_0_t">Änderungen in 1.0.0:
-		\n\t* Verbessertes Routing, schneller und präzise, bis 250km
+		\n\t* Verbessertes Routing: schneller, präziser, bis 250 km
 		\n\t* Option reiner Straßenkarten
 		\n\t* Karte behält nach Unterbrechungen Standortbindung
 		\n\t* Hintergrunddienst wird bei Navigation aktiviert
-		\n\t* \'Touring View\' Darstellungsoption mit mehr Kartendetails, neuer Straßendarstellung, mehr Kontrast und Bergwanderoption (SAC scale)
-		\n\t* Höhenangaben nun auch im praktischeren EGM96 System
-	</string>
+    </string>
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
 	<string name="show_warnings_title">Warnungen anzeigen…</string>
@@ -188,9 +186,7 @@
 	<string name="native_rendering">Natives Rendern</string>
 	
 	<string name="test_voice_prompts">Sprachansagen testen</string>
-	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Vektor-Karte via \'Einstellungen\' → \'Daten-Management\' herunterladen.
-		\n\nAlternativ auf Online-Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).
-	</string>
+	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Vektor-Karte über \'Einstellungen\' → \'Daten-Management\' herunterladen oder alternativ auf Online-Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).</string>
 	<string name="tip_recent_changes_0_7_2_t">Änderungen in 0.7.2:
 		\n\t- Native rendering auf allen Geräten
 		\n\t- Editiere POIs offline
@@ -322,7 +318,7 @@
 	<string name="index_name_other">Weltweite und thematische Karten</string>
 	<string name="index_name_wiki">Weltweite Wikipedia POIs</string>
 	<string name="index_name_voice">Sprachpakete (Aufnahmen - begrenzte Funktionalität)</string>
-	<string name="index_name_tts_voice">Sprachpakete (TTS-Synthesizer - flexiblere Ansagen)</string>
+	<string name="index_name_tts_voice">Sprachpakete (TTS-Synthese, empfohlen)</string>
 	<string name="amenity_type_osmwiki">Wikipedia (offline)</string>
 	<string name="amenity_type_user_defined">Benutzerdefiniert</string>
 	<string name="fav_export_confirmation">Eine Datei mit exportierten Favoriten existiert bereits. Überschreiben?</string>
@@ -531,7 +527,7 @@
 	<string name="gpx_option_reverse_route">GPX-Route umkehren</string>
 	<string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
-	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte ist für diesen Ort vorhanden.
+	<string name="switch_to_vector_map_to_see">Eine Offline-Vektor-Karte ist für diesen Ort vorhanden.
 		\n\t
 		\n\tZur Verwendung aktivieren: \'Menu\' → \'Kartenebenen\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
@@ -567,12 +563,9 @@
 	</string>
 	<string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
 	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomlevel</string>
-	<string name="tip_location_sharing">Position mitteilen</string>
-	<string name="tip_location_sharing_t">Wollen Sie einen interessanten Ort Freunden oder Familie mitteilen? Dazu einfach im \'Verwende Position\'-Kontextmenü die Option \'Position mitteilen\' auswählen.
-		\n\nZur Auswahl stehen die Übertragungswege:
-		\n\t* E-Mail
-		\n\t* SMS
-		\n\t* Kopieren der Koordinaten in die Zwischenablage (Clipboard)
+	<string name="tip_location_sharing">Position teilen</string>
+	<string name="tip_location_sharing_t">Wollen Sie einen interessanten Ort Ihren Freunden oder Ihrer Familie mitteilen? Dazu einfach im \'Verwende Position\'-Kontextmenü die Option \'Position mitteilen\' auswählen.
+		\n\nZur Auswahl stehen die Übertragungswege: E-Mail, SMS oder das Kopieren der Koordinaten in die Zwischenablage.
 	</string>
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">Sie können jeden beliebigen Ort als Favoriten speichern.
@@ -580,19 +573,19 @@
 		\n\nGespeicherte Favoriten sind leicht zugänglich via \'Menü\' →  \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
 		\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen.
 	</string>
-	<string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> Klassifizierung mit Bildern"</string>
+	<string name="create_poi_link_to_osm_doc"> <u>Online OSM</u> Klassifizierung mit Bildern"</string>
 	<string name="error_doing_search">Fehler in der Offlinesuche aufgetreten</string>
 	<string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: \'%s\'</string>
 	<string name="search_osm_offline">Adresssuche mit Offline-Daten</string>
 	<string name="system_locale">Systemeinstellung</string>
 	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
 	<string name="preferred_locale">Anzeigesprache</string>
-	<string name="tip_map_switch">Kartenquelle</string>
+	<string name="tip_map_switch">Kartenquelle auswählen</string>
 	<string name="tip_map_switch_t_v2">Die Kartenquelle und die angezeigten Ebenen können in der Kartenansicht über \'Menü\' → \'Kartenebenen\' gewählt werden.
 		\n\nIm Menü \'Kartenquelle…\' können Sie die Karte wählen: Vorher heruntergeladene Offline-Vektor-Karten, vordefinierte Online-Kachel-Karten (aktivieren Sie das Plugin \'Online und Kachel-Karten\') oder manuell am Rechner (z.B. mit OsmAndMapCreator) erstellte Karten.
 		\n\nOsmAnd unterstützt auch benutzerdefinierte Quellen.
 	</string>
-	<string name="tip_app_mode">Nutzerprofile</string>
+	<string name="tip_app_mode">Profil verwenden</string>
 	<string name="tip_app_mode_t_v2">OsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
 		\n\nDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route (Transportmittel).
 	</string>
@@ -606,7 +599,7 @@
 		\n\t* mittels Ihrer Favoriten
 		\n\nEin Kontextmenü für jeden Treffer einer Ergebnisliste bietet Optionen wie \'Navigation\' oder \'Auf Karte zeigen\'.
 	</string>
-	<string name="tip_map_context_menu">\'Verwende Position\'</string>
+	<string name="tip_map_context_menu">\'Verwende Position\' Menü</string>
 	<string name="tip_map_context_menu_t">Das \'Verwende Position\'-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.
 		\n\nEs wird über ein langes Drücken auf einen Punkt in der Karte (dann Anklicken des Positionsmarkers), durch das Drücken des Trackball-Knopfes in der Kartenansicht, oder via \'Menü\' → \'Verwende Position\' aufgerufen (die letzten beiden Methoden beziehen sich auf den Kartenmittelpunkt).
 		\n\nLanges Drücken auf einen Positionsmarker entfernt diesen wieder.
@@ -704,7 +697,7 @@
 	<string name="select_all">Alle markieren</string>
 	<string name="reload">Aktualisieren</string>
 	<string name="fast_route_mode">Schnellste Route</string>
-	<string name="fast_route_mode_descr">Auswählen für schnellste Route oder deaktivieren für kürzeste Route</string>
+	<string name="fast_route_mode_descr">Auswählen für schnellste oder deaktivieren für kürzeste Route </string>
 	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln\n ({2} MB)</string>
 	<string name="context_menu_item_download_map">Karte herunterladen</string>
 	<string name="select_max_zoom_preload_area">Wähle maximale zu ladende Vergrößerung</string>
@@ -752,7 +745,7 @@
 	<string name="show_route">Routendetails</string>
 	<string name="fav_imported_sucessfully">Favoriten erfolgreich importiert</string>
 	<string name="fav_file_to_load_not_found">GPX-Datei mit den Favoriten nicht gefunden unter {0}</string>
-	<string name="fav_saved_sucessfully">Favoriten erfolgreich gespeichert nach {0}</string>
+	<string name="fav_saved_sucessfully">Favoriten erfolgreich unter {0} gespeichert</string>
 	<string name="no_fav_to_save">Keine Favoriten zu speichern</string>
 	<string name="import_fav">Import</string>
 	<string name="export_fav">Export</string>
@@ -817,7 +810,7 @@
 	<string name="route_head">Geradeaus</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
-	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. \nFür viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter Offline-Daten herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen, Adressen, POI und ÖPNV finden.</string>
+	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter Offline-Daten herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen, Adressen, POI und ÖPNV finden.</string>
 	<string name="search_poi_location">Warte auf Signal…</string>
 	<string name="search_near_map">Suche in der Nähe</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
@@ -1024,7 +1017,7 @@
 	<string name="favourites_remove_dialog_success">Der Punkt {0} wurde erfolgreich gelöscht.</string>
 	<string name="osb_add_dialog_title">Eingabetext des Fehlers</string>
 	<string name="osb_add_dialog_success">OSM-Fehlerbericht erfolgreich erstellt</string>
-	<string name="osb_add_dialog_error">Ausnahme aufgetreten: Fehlerbericht wurde nicht erstellt</string>
+	<string name="osb_add_dialog_error">Fehler: Fehlerbericht wurde nicht erstellt</string>
 	<string name="osb_comment_menu_item">Kommentar hinzufügen</string>
 	<string name="osb_comment_dialog_message">Nachricht</string>
 	<string name="osb_comment_dialog_author">Autor</string>
@@ -1036,7 +1029,7 @@
 	<string name="osb_close_dialog_title">OSM-Fehlerbericht schließen</string>
 	<string name="osb_close_dialog_close_button">Schließen</string>
 	<string name="osb_close_dialog_success">OSM-Fehlerbericht wurde hinzugefügt</string>
-	<string name="osb_close_dialog_error">Ausnahmefehler aufgetreten: OSM-Fehlerbericht wurde nicht erstellt</string>
+	<string name="osb_close_dialog_error">Fehler: OSM-Fehlerbericht wurde nicht erstellt</string>
 	<string name="poi_edit_title">POI bearbeiten</string>
 	<string name="poi_create_title">POI erstellen</string>
 	<string name="poi_error_poi_not_found">POI wurde nicht gefunden oder die Einrichtung ist kein einzelner Knoten</string>
@@ -1047,8 +1040,8 @@
 	<string name="poi_action_add">hinzufügen</string>
 	<string name="poi_action_change">ändern</string>
 	<string name="poi_action_succeded_template">Aktion {0} erfolgreich abgeschlossen.</string>
-	<string name="poi_error_unexpected_template">Unerwarteter Fehler während der Aktion {0} aufgetreten.</string>
-	<string name="poi_error_io_error_template">I/O Fehler während der Aktion {0} aufgetreten.</string>
+	<string name="poi_error_unexpected_template">Unerwarteter Fehler beim Ausführen von {0} aufgetreten.</string>
+	<string name="poi_error_io_error_template">I/O Fehler während {0} aufgetreten.</string>
 	<string name="poi_error_info_not_loaded">Informationen über den Knoten wurden nicht geladen</string>
 	<string name="poi_dialog_name">Name</string>
 	<string name="poi_dialog_opening_hours">Öffnungszeiten</string>
@@ -1203,7 +1196,7 @@
 	\n\t* Einige Fehlerbehebungen
 	\n\t* Karte behält nach Unterbrechungen Standortbindung
 	\n\t* Hintergrunddienst wird bei Navigation aktiviert
-</string>
+    </string>
 <string name="context_menu_item_last_intermediate_point">Als letztes Zwischenziel setzen</string>
 <string name="context_menu_item_first_intermediate_point">Als erstes Zwischenziel setzen</string>
 <string name="target_point">Zwischenziel %1$s</string>
@@ -1229,7 +1222,7 @@
 	<string name="osmodroid_plugin_name">OsMoDroid-Plugin</string>
 	<string name="index_srtm_parts">Teile</string>
 	<string name="index_srtm_ele">Höhenlinien</string>
-	<string name="srtm_plugin_description">Ermöglicht das Laden von offline Höhenlinien und Relief-Schattierungen (Einstellungen -&gt; Daten-Management -&gt; Herunterladen -&gt; Kartentyp wählen).</string>
+	<string name="srtm_plugin_description">Ermöglicht das Laden von offline Höhenlinien und Relief-Schattierungen (\'Einstellungen\ -&gt; \'Daten-Management\ -&gt; \'Herunterladen\ -&gt; \'Kartentyp wählen\).</string>
 	<string name="srtm_plugin_name">Höhenlinien-Plugin</string>
 	<string name="download_select_map_types">Andere Karten</string>
 	<string name="download_srtm_maps">Höhenlinien</string>
@@ -1248,14 +1241,14 @@
 	<string name="recording_unavailable">nicht verfügbar</string>
 	<string name="recording_context_menu_play">Wiedergabe</string>
 	<string name="recording_default_name">aufnehmen</string>
-	<string name="av_control_stop">AV</string>
+	<string name="av_control_stop">Stopp</string>
 	<string name="dropbox_plugin_description">Das Dropbox-Plugin ermöglicht Ihnen eine Synchronisation von Tracks und Audio/Video-Notizen mit Ihrem Dropbox-Konto.</string>
 	<string name="dropbox_plugin_name">Dropbox-Plugin</string>
 	
 	<string name="intermediate_points_change_order">Reihenfolge ändern</string>
 	<string name="srtm_paid_version_msg">Bitte überlegen Sie, ob Sie durch den Kauf des Höhenlinien-Plugins im Play-Store die weitere Entwicklung unterstützen wollen.</string>
 	<string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
-	<string name="av_settings">"Audio/Video-Einstellungen "</string>
+	<string name="av_settings">Audio/Video-Einstellungen </string>
 	<string name="recording_error">Fehler bei der Aufnahme </string>
 	<string name="recording_is_recorded">Audio/Video wird aufgenommen. Zum Stoppen drücken Sie das AV Widget.</string>
 	<string name="recording_playing">Aus der angegebenen Aufnahme wird abgespielt.\n%1$s</string>
@@ -1264,7 +1257,7 @@
 	<string name="layer_recordings">Aufnahme-Ebene</string>
 	<string name="recording_can_not_be_played">Aufnahme kann nicht abgespielt werden</string>
 	<string name="recording_context_menu_delete">Aufnahme löschen</string>
-	<string name="av_control_start">AV</string>
+	<string name="av_control_start">Start</string>
 	<string name="map_widget_av_notes">Audio/Video-Notiz</string>
 	<string name="osmand_srtm_short_description_80_chars">OsmAnd-Plugin für Offline-Höhenlinien</string>
 	<string name="map_widget_distancemeasurement">Entfernungsmessung</string>
@@ -1279,7 +1272,7 @@
 		\n\t* Höhenlinien-Plugin\n\t* Fehlerbeseitigungen
 		\n\t* \'Touren-Ansicht\' der Karte mit mehr Kartendetails, neuer Straßenansicht, mehr Kontrast und alpine Wander-Optionen (SAC-Skalierung)
 		\n\t* EM96 Geoid-Offset-Korrektur für GPS-Höhenwerte
-	</string>
+    </string>
 	<string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. Benutzen Sie \'Verwende Position…\', um der Notiz einen Ort zuzuweisen</string>
 	<string name="osmand_srtm_long_description_1000_chars">Das Plugin beinhaltet Höhenlinien, die in Offline-Karten von OsmAnd angezeigt werden können. Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flagschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems).</string>
 	<string name="recording_context_menu_show">Anzeigen</string>
@@ -1288,24 +1281,24 @@
 	<string name="recording_context_menu_precord">Foto aufnehmen</string>
 	<string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
 	<string name="clear_dest_confirm">Wollen Sie das Ziel (inkl. Zwischenziele) wirklich löschen?</string>
-	<string name="precise_routing_mode_descr">Berechnet präzise Routen ohne Schätzfehler. Bis jetzt begrenzt auf kurze Entfernungen und langsam.</string>
+	<string name="precise_routing_mode_descr">Auswählen um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
 	<string name="precise_routing_mode">Präzises Routing (experimentell)</string>
 	<string name="local_indexes_cat_av">Audio/Video-Daten</string>
 	<string name="av_use_external_camera_descr">Externe System-Kamera für Foto-Aufnahmen verwenden</string>
 	<string name="av_use_external_camera">System-Kamera</string>
 	<string name="index_name_openmaps">OpenMaps EU</string>
-		<string name="tip_recent_changes_1_2_t">Änderungen in 1.2.1:
-		\n\t→* Fehlerbehebung für Geo Intent (Foursquare, c:geo)
-		\n\t→* Fehlerbehebung für zitterndes Bild bei Navigation
-		\n\t→* Andere kleine Fehlerbehebungen
-		\nÄnderungen in 1.2:
-		\n\t→* Fehlerbehebungen (Navigation, Suche, AV-Aufzeichnung, Sprachansagen, einige Anzeigeverbesserungen)
-		\n\t→* Einfachere Konfiguration des Bergkontur-Overlay (nur mit Kontur-Linien-Plugin)
-		\n\t→* Verarbeitet maps.google.com-Links auf Orte
-		\n\t→* Neues Widget (GPS info)
-		\n\t→* Hinzugefügt: Unterstützung von mehreren Fenstern auf aktuellen Samsung-Geräten
-		\n\t→* Kalman-Filter für Kompass
-		\n\t→* Unterstützung für Pebble-Uhr
+		<string name="tip_recent_changes_1_2_t">"Änderungen in 1.2.1:
+	\n\t*Fehlerbehebung für Geo Intent (Foursquare, c:geo)
+	\n\t*Fehlerbehebung für zitterndes Bild bei Navigation
+	\n\t*Andere kleine Fehlerbehebungen
+	\n\nÄnderungen in 1.2:
+		\n\t* Fehlerbehebungen (Navigation, Suche, AV-Aufzeichnung, Sprachansagen, einige Anzeigeverbesserungen)
+		\n\t* Einfachere Konfiguration des Bergkontur-Overlay (nur mit Höhenlinien-Plugin)
+		\n\t* Verarbeitet maps.google.com-Links auf Orte
+		\n\t* Neues Widget (GPS info)
+		\n\t* Hinzugefügt: Unterstützung von mehreren Fenstern auf aktuellen Samsung-Geräten
+		\n\t* Kalman-Filter für Kompass
+		\n\t* Unterstützung für Pebble-Uhr
 	</string>
 	<string name="prefer_motorways">Autobahnen bevorzugen</string>
 	<string name="prefer_in_routing_title">Bevorzugen von…</string>
@@ -1319,9 +1312,9 @@
 	<string name="map_widget_gps_info">GPS-Info</string>
 	<string name="save_current_track_widget">GPX-Track\n speichern</string>
 	<string name="tip_recent_changes_1_1_4_t">Änderungen in Version 1.1.4
-		\n\t* Benutzeroberfläche neu gestaltet
-		\n\t* weitere Fehlerbehebungen
-	</string>
+	\n\t* Neugestaltung der Benutzeroberfläche
+	\n\t* weitere Fehlerbehebungen
+    </string>
 	<string name="street_name">Straße</string>
 	<string name="hno">Hausnummer</string>
 	<string name="tip_recent_changes_1_3_t">Änderungen in 1.3:
@@ -1463,7 +1456,7 @@
     <string name="edit_tilesource_expiration_time">Ablauf (Minuten)</string>
     <string name="edit_tilesource_minzoom">Min Zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Wähle vorhandene...</string>
+    <string name="edit_tilesource_choose_existing">Wähle vorhandene…</string>
     <string name="edit_tilesource_name">Name</string>
     <string name="maps_define_edit">Definieren/Bearbeiten…</string>
 	<string name="base_world_map">Basis-Weltkarte</string>
@@ -1489,7 +1482,7 @@
 	<string name="routing_attr_prefer_motorway_name">Autobahnen bevorzugen</string>
 	<string name="routing_attr_prefer_motorway_description">Autobahnen bevorzugen</string>
 	<string name="routing_attr_short_way_name">Kürzeste Strecke</string>
-	<string name="routing_attr_short_way_description">Benutze kürzeste Strecke</string>
+	<string name="routing_attr_short_way_description">Kürzeste Strecke benutzen</string>
 	<string name="routing_attr_avoid_toll_name">Mautstraßen vermeiden</string>
 	<string name="routing_attr_avoid_toll_description">Mautstraßen vermeiden</string>
 	<string name="routing_attr_avoid_unpaved_name">Unbefestigte Wege meiden</string>
@@ -1499,8 +1492,8 @@
 	<string name="routing_attr_avoid_motorway_name">Autobahnen vermeiden</string>
 	<string name="routing_attr_avoid_motorway_description">Autobahnen vermeiden</string>
 	<string name="routing_attr_weight_name">Maximalgewicht</string>
-	<string name="routing_attr_weight_description">Angabe einer Fahrzeugs-Gewichtsbeschränkung</string>
-    <string name="android_19_location_disabled">Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Nun einen zulässigen Speicherort wählen und alle notwendigen Dateien dorthin kopieren?
+	<string name="routing_attr_weight_description">Angabe einer Massebeschränkung für die Fahrzeugart</string>
+    <string name="android_19_location_disabled">Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Jetzt einen zulässigen Speicherort wählen und alle notwendigen Dateien dorthin kopieren?
         \n Hinweis: Ursprüngliche Dateien bleiben hiervon unberührt. 
         \n Hinweis: Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden. </string>
     <string name="application_dir_change_warning2">Osmand kann versuchen, die Dateien an den neuen Speicherort zu kopieren. Fortfahren?</string>
@@ -1511,24 +1504,24 @@
     <string name="app_mode_truck">LKW</string>
     <string name="guidance_preferences_descr">Navigations-Einstellungen</string>
     <string name="routing_preferences_descr">Einstellungen für Routenberechnung</string>
-    <string name="speech_rate_descr">Geschwindigkeit der Text-Sprache-Ausgabe</string>
+    <string name="speech_rate_descr">Sprachgeschwindigkeit der TTS-Ausgabe</string>
     <string name="speech_rate">Sprachgeschwindigkeit</string>
     
-    <string name="complex_route_calculation_failed">Schnelle Routenberechnung fehlgeschlagen (%s), kehre zur langsamen Berechnung zurück.</string>
+    <string name="complex_route_calculation_failed">Schnelle Routenberechnung fehlgeschlagen (%s), Rückfall auf langsame Berechnung.</string>
     <string name="disable_complex_routing_descr">Zwei-Phasen-Routing für Auto-Navigation deaktivieren</string>
     <string name="disable_complex_routing">Komplexes Routing deaktivieren</string>
     <string name="route_descr_select_on_map">Auf Karte auswählen…</string>
     <string name="route_descr_favorite">Favorit…</string>
-    <string name="route_preferences">Routen-Präferenzen</string>
+    <string name="route_preferences">Routing-Einstellungen</string>
     <string name="route_info">Routen-Informationen</string>
     <string name="osmodroid_refresh">Kanäle aktualisieren</string>
     <string name="osmodroid_seek">Objekt suchen</string>
 
-    <string name="calculate_osmand_route_without_internet">Osmand Routensegment ohne Internet berechnen</string>
-    <string name="gpx_option_calculate_first_last_segment">Ergänze das erste und letze Segment via OsmAnd navigation</string>
-    <string name="use_displayed_track_for_navigation">Möchten Sie die angezeigte GPX-Datei zur Navigation verwenden?</string>
+    <string name="calculate_osmand_route_without_internet">OsmAnd-Route ohne Internetverbindung berechnen</string>
+    <string name="gpx_option_calculate_first_last_segment">Berechnen des ersten und letzten Abschnitts der OsmAnd-Route</string>
+    <string name="use_displayed_track_for_navigation">Soll der angezeigte Track zum Navigieren genutzt werden?</string>
     <string name="keep_and_add_destination_point">Als Ziel hinzufügen</string>
-    <string name="select_gpx">GPX-Datei wählen …</string>
+    <string name="select_gpx">GPX-Datei auswählen…</string>
     <string name="route_descr_select_destination">Ziel wählen</string>
 
 <string name="lang_en">Englisch</string>
@@ -1571,4 +1564,160 @@
 	<string name="lang_cy">Walisisch</string>
     <string name="index_name_italy">Europa - Italien</string>
     <string name="index_name_gb">Europa - Großbritannien</string>
-    </resources>
+    <string name="lang_zh">Chinesisch</string>
+    <string name="lang_pt_br">Portugiesisch (Brasilien)</string>
+    <string name="lang_bs">Bosnisch</string>
+	<string name="index_name_canada">Nordamerika - Kanada</string>
+    <string name="tip_recent_changes_1_7_1_t">Änderungen in 1.7:
+	\n\t* WICHTIG: Die Kartendaten sollten neuer als Februar 2014
+	\n\t* Komplett überarbeitete Routing-Funktion (schnell und präzise)
+	\n\t* Neuer Bildschirm zur Routenplanung (intuitiver und besser)
+	\n\t* HINWEIS: GPX-Routing ist verfügbar unter Route -&gt; Einstellung
+	\n\t* Automatisches Ausblenden von Bedienelementen im Navigationsmodus
+	\n\t* Berechnung der Offline-Route zum ersten Punkt einer GPX-Route (\'Den Gesamten Track folgen\' Option
+	\n\t* Aktive Simulation in Tunneln
+	\n\t* Viele weitere kleinere Verbesserungen
+	\n\t* Einstellen der Sprachwiedergabe-Geschwindigkeit möglich
+    </string>
+    <string name="osmodroid_unseek">Objektsuche beenden</string>
+    <string name="osmand_extended_description_4000_chars">
+OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigations-App mit Zugang zu den freien, weltweit verfügbaren und hoch qualitativen Daten von OpenStreetMap (OSM). Alle Kartendaten können für die Offline-Nutzung auf der Speicherkarte oder den internen Speicher des Endgerätes gespeichert werden. Über das GPS des Endgerätes bietet OsmAnd eine Routing-Funktion mit visueller Anzeige und Sprachausgabe für KFZ, Fahrräder und Fußgänger. Alle Hauptfunktionen funktionieren sowohl online als auch offline (ohne Verbindung zum Internet).
+
+Der Funktionsumfang beinhaltet unter anderem:
+
+Navigation
+ - funktioniert online (schnell) und offline (kein Roaming-Gebühren im Ausland)
+ - exakte Sprachausgabe (aufgenommen und synchronisierte Stimmen)
+ - optionale Fahrspurführung, Anzeige der Straßennamen und der geschätzten Ankunftszeit
+ - Unterstützung von Zwischenzielen auf ihrer Route
+ - automatische Neuberechnung der Route, sobald von der ursprünglichen Route abgewichen wird.
+ - Suche nach Punkten anhand der Adresse, dem Typ (z. B. Restaurant, Hotel, Tankstelle, Museum) oder geografischen Koordinaten
+
+Kartenansicht
+ - Anzeige des Standpunktes und der Blickrichtung auf der Karte
+ - optionale Ausrichtung der Karte anhand des Kompasses oder der Bewegungsrichtung
+ - Speichern der wichtigsten Punkte als Favorit
+ - Anzeige von POI (Point Of Interests)
+ - Darstellung spezieller Online-Karten
+ - Darstellung der Satelliten-Ansicht (auf Bing basierend)
+ - Darstellung verschiedener Überlagerungen wie GPS-Tracks und weitere Karten mit einstellbarer Transparenz
+ - Anzeige von Ortsnamen in Englisch, der lokalen Sprache oder phonetischer Aussprache
+
+Nutzen von Daten von OpenStreetMap und Wikipedia
+ - qualitativ hochwertige Informationen der besten frei verfügbaren Projekte der Welt
+ - globale Karten von Openstreetmap, verfügbar nach Land oder Region
+ - Wikipedia POIs, praktisch für Stadtbesichtigungen (nicht verfügbar in der kostenfreien Version)
+ - unlimitierter kostenloser Download direkt in der App (Download-Limit in der kostenfreien Version: 16 Karten)
+ - immer aktuelle Karten (mindestens eine aktualisierung pro Monat)
+ - kompakte Offline-Vektor-Karten
+ - Auswahl zwischen kompletten Karten und reinen Straßenkarten (Beispiel: Die gesamte Karte für Japan ist 700 MB, die reine Straßenkarte 200 MB groß)
+ - zusätzliche Unterstützung von Online-karten oder zwischengespeicherten Karten-Abschnitten
+
+Sicherheitsfunktionen
+ - optionaler automatisierter Wechsel zwischen Tag- und Nachtansicht
+ - optionale Einblendung der aktuellen Geschwindigkeitsbeschränkung mit Erinnerung falls diese überschritten wird
+ - optionales geschwindigkeitsabhängiges Zoomen der Karte
+ - Teilen des Standortes, so dass Ihre Freunde sie finden können
+
+Fahrrad- und Fußgängerfunktionen
+ -  - die Karten beinhalten Fuß, Wander- und Fahrradwege, gut geeignet für Outdoor-Aktivitäten
+ - spezielle Routing und Darstellungsoptionen für Radfahrende zu Fuß gehende
+ - optionales Einblenden von Haltestellen des öffentlichen Nahverkehrs (Bus, Straßenbahn, Zug...)
+ - optionales Aufzeichenen des zurückgelegten Weges als lokale GPX-Datei oder bei einem Online-Service
+ - optionale Darstellung der Geschwindigkeit und aktuelle Höhe
+ - Darstellung von Höhenlinien und Bergschattierungen (über zusätzliches Plugin)
+
+direktes Beitragen zu OpenStreetMap
+ - Melden von Fehlern
+ - Hochladen von GPX-Tracks zu OSM direkt aus der App
+ - Hinzufügen von POIs und hochladen dieser zu OSM (oder später, wenn gerade offline)
+ - optionales Aufzeichnen der Strecke (auch im Hintergrundmodues (während das Endgerät im Ruhemodus ist)
+
+OsmAnd ist OpenSource und wird aktiv weiterentwickelt. Jeder kann dazu beitragen, indem er Fehler mitteilt, die Übersetzungen verbessert oder neue Funktionen programmiert. Das Projekt befindet sich in einem Status der kontinuierlichen Verbesserung aufgrund der ständigen Interaktion zwischen Entwickler und Nutzer. Der Fortschritt des Projektes ist auch abhängig von finanzieller Unterstützung um die Entwicklung, das Programmieren und Testen neuer Funktionen zu ermöglichen. Durch den Kauf von OsmAnd+ können Sie helfen die App noch besser zu machen. Es ist auch möglich für spezielle neue Funktionen oder die allgemeine Entwicklung auf osmand.net zu spenden.
+
+Durchschnittliche Kartenabdeckung und -qualität:
+ - Westeuropa: ****
+ - Osteuropa: ***
+ - Russland: ***
+ - Nordamerika: ***
+ - Südamerika: **
+ - Asien: **
+ - Japan und Korea: ***
+ - mittlerer Osten: **
+ - Afrika: **
+ - Antarktis: *
+
+Liste der Unterstützten Länder (annähernd Weltweit!):
+Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua and Barbuda, Äquatorialguinea, Arabische Republik Sahara, Argentinien, Armenien, Aruba, Aserbaidschan, Äthiopien, Australien, Bahamas, Bahrain, Bangladesch, Barbados, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivien, Bonaire, Bosnien und Herzegowina, Botswana, Brasilien, Brunei, Bulgarien, Burkina Faso, Burundi, Chile, China, Costa Rica, Curaçao, Dänemark, Deutschland, Dominica, Dominikanische Republik, Dschibuti, Ecuador, El Salvador, Elfenbeinküste, Eritrea, Estland, Fidschi, Finnland, Frankreich, Französisch-Guayana, Französisch-Polynesien, Gabun, Gambia, Georgien, Ghana, Gibraltar, Grenada, Griechenland, Grönland, Großbritannien, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Honduras, Hong Kong, Indien, Indonesien, Insel Man, Irak, Iran, Irland, Island, Israel, Italien, Jamaika, Japan, Jemen, Jersey, Jordanien, Jungferninseln, Kambodscha, Kamerun, Kanada, Kap Verde, Kasastan, Katar, Kenia, Kirgistan, Kiribati, Kolumbien, Komoren, Kongo, Kroatien, Kuba, Kuwait, Laos, Lesotho, Lettland, Libanon, Liberia, Libyen, Liechtenstein, Litauen, Luxemburg, Macao, Madagaskar, Malawi, Malaysia, Malediven, Mali, Malta, Marokko, Martinique, Mauretanien, Mauritius, Mayotte, Mazedonien, Mexiko, Mikronesien, Moldau, Monaco, Mongolei, Montenegro, Montserrat, Mosambik, Myanmar, Namibia, Nauru, Nepal, Neukaledonien, Neuseeland, Nicaragua, Niederlande, Niederländische Antillen, Niger, Nigeria, Nordkorea, Norwegen, Oman, Österreich, Osttimor, Pakistan, Palau, Palästinensische Autonomiegebiete, Panama, Papua-Neuguinea, Paraquay, Peru, Philippinen, Polen, Portugal, Puerto Rico, Ruanda, Rumänien, Russland, Saint-Barthélemy, Saint Helena, Saint Helena, Ascension und Tristan da Cunha, Saint Kitts und Nevis, Saint Lucia, Saint Martin, Saint-Pierre und Miquelon, Saint Vincent und die Grenadinen, Sambia, Samoa, San Marino, Saudi Arabien, Schweden, Schweiz, Senegal, Serbien, Seychellen, Sierra Leona Singapur, Simbabwe, Slovakei, Slowenien, Somalia, Spanien, Sri Lanka, Südafrika, Sudan, Südgeorgien, Südkorea, Südsudan, Suriname, Swasiland, Syrien, Taiwan, Tadschikistan, Tansania, Thailand, Togo, Trinidad und Tobago, Tschad, Tschechische Republik, Tunesien, Türkei, Turkmenistan, Tuvalu, Uganda, Ukraine, Ungarn, Uruguay, Usbekistan, Vanuatu, Vatikan, Venezuela, Vereinigte Arabische Emirate, Vereinigte Staaten von Amerika, Vietnam, Wallis und Futuna, Weißrussland, Zentralafrikanische Republik, Zypern.
+	</string>
+	<string name="osmand_plus_extended_description_4000_chars">
+OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigations-App mit Zugang zu den freien, weltweit verfügbaren und hoch qualitativen Daten von OpenStreetMap (OSM). Alle Kartendaten können für die Offline-Nutzung auf der Speicherkarte oder den internen Speicher des Endgerätes gespeichert werden. Über das GPS des Endgerätes bietet OsmAnd eine Routing-Funktion mit visueller Anzeige und Sprachausgabe für KFZ, Fahrräder und Fußgänger. Alle Hauptfunktionen funktionieren sowohl online als auch offline (ohne Verbindung zum Internet).
+
+Der Funktionsumfang beinhaltet unter anderem:
+
+Navigation
+ - funktioniert online (schnell) und offline (kein Roaming-Gebühren im Ausland)
+ - exakte Sprachausgabe (aufgenommen und synchronisierte Stimmen)
+ - optionale Fahrspurführung, Anzeige der Straßennamen und der geschätzten Ankunftszeit
+ - Unterstützung von Zwischenzielen auf ihrer Route
+ - automatische Neuberechnung der Route, sobald von der ursprünglichen Route abgewichen wird.
+ - Suche nach Punkten anhand der Adresse, dem Typ (z. B. Restaurant, Hotel, Tankstelle, Museum) oder geografischen Koordinaten
+
+Kartenansicht
+ - Anzeige des Standpunktes und der Blickrichtung auf der Karte
+ - optionale Ausrichtung der Karte anhand des Kompasses oder der Bewegungsrichtung
+ - Speichern der wichtigsten Punkte als Favorit
+ - Anzeige von POI (Point Of Interests)
+ - Darstellung spezieller Online-Karten
+ - Darstellung der Satelliten-Ansicht (auf Bing basierend)
+ - Darstellung verschiedener Überlagerungen wie GPS-Tracks und weitere Karten mit einstellbarer Transparenz
+ - Anzeige von Ortsnamen in Englisch, der lokalen Sprache oder phonetischer Aussprache
+
+Nutzen von Daten von OpenStreetMap und Wikipedia
+ - qualitativ hochwertige Informationen der besten frei verfügbaren Projekte der Welt
+ - globale Karten von Openstreetmap, verfügbar nach Land oder Region
+ - Wikipedia POIs, praktisch für Stadtbesichtigungen (nicht verfügbar in der kostenfreien Version)
+ - unlimitierter kostenloser Download direkt in der App (Download-Limit in der kostenfreien Version: 16 Karten)
+ - immer aktuelle Karten (mindestens eine aktualisierung pro Monat)
+ - kompakte Offline-Vektor-Karten
+ - Auswahl zwischen kompletten Karten und reinen Straßenkarten (Beispiel: Die gesamte Karte für Japan ist 700 MB, die reine Straßenkarte 200 MB groß)
+ - zusätzliche Unterstützung von Online-karten oder zwischengespeicherten Karten-Abschnitten
+
+Sicherheitsfunktionen
+ - optionaler automatisierter Wechsel zwischen Tag- und Nachtansicht
+ - optionale Einblendung der aktuellen Geschwindigkeitsbeschränkung mit Erinnerung falls diese überschritten wird
+ - optionales geschwindigkeitsabhängiges Zoomen der Karte
+ - Teilen des Standortes, so dass Ihre Freunde sie finden können
+
+Fahrrad- und Fußgängerfunktionen
+ -  - die Karten beinhalten Fuß, Wander- und Fahrradwege, gut geeignet für Outdoor-Aktivitäten
+ - spezielle Routing und Darstellungsoptionen für Radfahrende zu Fuß gehende
+ - optionales Einblenden von Haltestellen des öffentlichen Nahverkehrs (Bus, Straßenbahn, Zug...)
+ - optionales Aufzeichenen des zurückgelegten Weges als lokale GPX-Datei oder bei einem Online-Service
+ - optionale Darstellung der Geschwindigkeit und aktuelle Höhe
+ - Darstellung von Höhenlinien und Bergschattierungen (über zusätzliches Plugin)
+
+direktes Beitragen zu OpenStreetMap
+ - Melden von Fehlern
+ - Hochladen von GPX-Tracks zu OSM direkt aus der App
+ - Hinzufügen von POIs und hochladen dieser zu OSM (oder später, wenn gerade offline)
+ - optionales Aufzeichnen der Strecke (auch im Hintergrundmodues (während das Endgerät im Ruhemodus ist)
+
+OsmAnd ist OpenSource und wird aktiv weiterentwickelt. Jeder kann dazu beitragen, indem er Fehler mitteilt, die Übersetzungen verbessert oder neue Funktionen programmiert. Das Projekt befindet sich in einem Status der kontinuierlichen Verbesserung aufgrund der ständigen Interaktion zwischen Entwickler und Nutzer. Der Fortschritt des Projektes ist auch abhängig von finanzieller Unterstützung um die Entwicklung, das Programmieren und Testen neuer Funktionen zu ermöglichen. Durch den Kauf von OsmAnd+ können Sie helfen die App noch besser zu machen. Es ist auch möglich für spezielle neue Funktionen oder die allgemeine Entwicklung auf osmand.net zu spenden.
+
+Durchschnittliche Kartenabdeckung und -qualität:
+ - Westeuropa: ****
+ - Osteuropa: ***
+ - Russland: ***
+ - Nordamerika: ***
+ - Südamerika: **
+ - Asien: **
+ - Japan und Korea: ***
+ - mittlerer Osten: **
+ - Afrika: **
+ - Antarktis: *
+
+Liste der Unterstützten Länder (annähernd Weltweit!):
+Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua and Barbuda, Äquatorialguinea, Arabische Republik Sahara, Argentinien, Armenien, Aruba, Aserbaidschan, Äthiopien, Australien, Bahamas, Bahrain, Bangladesch, Barbados, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivien, Bonaire, Bosnien und Herzegowina, Botswana, Brasilien, Brunei, Bulgarien, Burkina Faso, Burundi, Chile, China, Costa Rica, Curaçao, Dänemark, Deutschland, Dominica, Dominikanische Republik, Dschibuti, Ecuador, El Salvador, Elfenbeinküste, Eritrea, Estland, Fidschi, Finnland, Frankreich, Französisch-Guayana, Französisch-Polynesien, Gabun, Gambia, Georgien, Ghana, Gibraltar, Grenada, Griechenland, Grönland, Großbritannien, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Honduras, Hong Kong, Indien, Indonesien, Insel Man, Irak, Iran, Irland, Island, Israel, Italien, Jamaika, Japan, Jemen, Jersey, Jordanien, Jungferninseln, Kambodscha, Kamerun, Kanada, Kap Verde, Kasastan, Katar, Kenia, Kirgistan, Kiribati, Kolumbien, Komoren, Kongo, Kroatien, Kuba, Kuwait, Laos, Lesotho, Lettland, Libanon, Liberia, Libyen, Liechtenstein, Litauen, Luxemburg, Macao, Madagaskar, Malawi, Malaysia, Malediven, Mali, Malta, Marokko, Martinique, Mauretanien, Mauritius, Mayotte, Mazedonien, Mexiko, Mikronesien, Moldau, Monaco, Mongolei, Montenegro, Montserrat, Mosambik, Myanmar, Namibia, Nauru, Nepal, Neukaledonien, Neuseeland, Nicaragua, Niederlande, Niederländische Antillen, Niger, Nigeria, Nordkorea, Norwegen, Oman, Österreich, Osttimor, Pakistan, Palau, Palästinensische Autonomiegebiete, Panama, Papua-Neuguinea, Paraquay, Peru, Philippinen, Polen, Portugal, Puerto Rico, Ruanda, Rumänien, Russland, Saint-Barthélemy, Saint Helena, Saint Helena, Ascension und Tristan da Cunha, Saint Kitts und Nevis, Saint Lucia, Saint Martin, Saint-Pierre und Miquelon, Saint Vincent und die Grenadinen, Sambia, Samoa, San Marino, Saudi Arabien, Schweden, Schweiz, Senegal, Serbien, Seychellen, Sierra Leona Singapur, Simbabwe, Slovakei, Slowenien, Somalia, Spanien, Sri Lanka, Südafrika, Sudan, Südgeorgien, Südkorea, Südsudan, Suriname, Swasiland, Syrien, Taiwan, Tadschikistan, Tansania, Thailand, Togo, Trinidad und Tobago, Tschad, Tschechische Republik, Tunesien, Türkei, Turkmenistan, Tuvalu, Uganda, Ukraine, Ungarn, Uruguay, Usbekistan, Vanuatu, Vatikan, Venezuela, Vereinigte Arabische Emirate, Vereinigte Staaten von Amerika, Vietnam, Wallis und Futuna, Weißrussland, Zentralafrikanische Republik, Zypern.
+	</string>
+	</resources>
