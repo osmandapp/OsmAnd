@@ -5,6 +5,7 @@ import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,15 +62,31 @@ public class IndexItem implements Comparable<IndexItem> {
 		}
 		return s;
 	}
+	
+	public String getVoiceName(Context ctx) {
+		try {
+			String nm = getBasename().replace('-', '_').replace(' ', '_');
+			if (nm.endsWith("-tts")) {
+				nm = nm.substring(0, nm.length() - 4);
+			}
+			Field f = R.string.class.getField("lang_"+nm);
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return ctx.getString(in);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return getBasename();
+	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
-		String s = "";
 		if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
-			s = ctx.getString(R.string.voice) + "\n";
+			return ctx.getString(R.string.voice) + "\n" + getVoiceName(ctx);
 		} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
-			s = ctx.getString(R.string.ttsvoice) + "\n";
+			return ctx.getString(R.string.ttsvoice) + "\n" + getVoiceName(ctx);
 		}
-		return s + osmandRegions.getLocaleName(getBasename());
+		return osmandRegions.getLocaleName(getBasename());
 	}
 
 	public boolean isVoiceItem() {

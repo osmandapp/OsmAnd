@@ -3,10 +3,14 @@ package net.osmand.plus.download;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
+import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -26,7 +30,8 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 		return order < another.order ? -1 : 1;
 	}
 
-	public static List<IndexItemCategory> categorizeIndexItems(OsmandApplication ctx, Collection<IndexItem> indexItems) {
+	public static List<IndexItemCategory> categorizeIndexItems(final OsmandApplication ctx, 
+			Collection<IndexItem> indexItems) {
 		boolean skipWiki = Version.isFreeVersion(ctx);
 		final Map<String, IndexItemCategory> cats = new TreeMap<String, IndexItemCategory>();
 		for (IndexItem i : indexItems) {
@@ -49,6 +54,9 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 					(lc.contains("united states") && lc.startsWith("north-america")) ) {
 				nameId = R.string.index_name_us;
 				order = 31;
+			} else if (lc.startsWith("canada")) {
+				nameId = R.string.index_name_canada;
+				order = 32;
 			} else if (lc.contains("openmaps")) {
 				nameId = R.string.index_name_openmaps;
 				order = 90;
@@ -98,6 +106,17 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 			cats.get(name).items.add(i);
 		}
 		ArrayList<IndexItemCategory> r = new ArrayList<IndexItemCategory>(cats.values());
+		final Collator collator = OsmAndCollator.primaryCollator();
+		for(IndexItemCategory ct : r) {
+			final OsmandRegions osmandRegions = ctx.getResourceManager().getOsmandRegions();
+			Collections.sort(ct.items, new Comparator<IndexItem>() {
+				@Override
+				public int compare(IndexItem lhs, IndexItem rhs) {
+					return collator.compare(lhs.getVisibleName(ctx, osmandRegions),
+							rhs.getVisibleName(ctx, osmandRegions));
+				}
+			});
+		}
 		Collections.sort(r);
 		return r;
 	}
