@@ -1055,8 +1055,7 @@
     <string name="gps_status_eclipsim">GPS statuss</string>
     <string name="default_and">un</string>
     <string name="default_or">vai</string>
-	<string name="route_is_too_long">Maršruts ir par garu, lai tiktu aprēķināts ar OsmAnd bezsaistes plānotāju.
-	Bezsaistes plānošana ir iespējama attālumā līdz 200km starp ceļapunktiem. Lūdzu pievienojiet vienu vai vairākus ceļapunktus, lai aprēķinātu maršrutu.</string>
+	<string name="route_is_too_long">OsmAnd maršruta aprēķināšana var aizņemt ļoti ilgu laiku (vai pat neizdoties), ja ceļa punkti atrodas vairāk nekā 200km attālumā. Pievienojiet papildus pieturas vietas, lai optimizētu aprēķināšanu.</string>
 	<string name="auto_zoom_close">Tuvināti</string>
 	<string name="auto_zoom_far">Vidēji tuvu</string>
 	<string name="auto_zoom_farthest">Attālināti</string>
@@ -1481,13 +1480,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="routing_attr_avoid_ferries_description">Ivairīties no prāmjiem, pārceltuvēm pār upēm</string>
 	<string name="routing_attr_avoid_motorway_name">Izvairīties no automaģistrālēm</string>
 	<string name="routing_attr_avoid_motorway_description">Izvairīties no automaģistrālēm jeb ātrgaitas šosejām</string>
-	<string name="routing_attr_weight_name">Svars</string>
-	<string name="routing_attr_weight_description">Norādīt svara ierobežojumu</string>
+	<string name="routing_attr_weight_name">Maksimālais svars</string>
+	<string name="routing_attr_weight_description">Norādīt automašīnas svara limitu</string>
     <string name="select_gpx">Atzīmēt GPX…</string>
     <string name="route_descr_select_destination">Atlasīt galamērķi</string>
     <string name="route_descr_select_on_map">Atzīmēt no kartes…</string>
     <string name="route_preferences">Maršruta uzstādījumi</string>
-    <string name="route_info">Maršruta dati</string>
+    <string name="route_info">Maršruta informācija</string>
     <string name="keep_and_add_destination_point">Pievienot kā galamērķi</string>
     <string name="route_descr_favorite">Izlase…</string>
     <string name="calculate_osmand_route_without_internet">Aprēķināt OsmAnd maršruta segmentu, neizmantojot internetu</string>
@@ -1495,4 +1494,62 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="use_displayed_track_for_navigation">Vai lietot norādīto ceļu navigācijai?</string>
     <string name="index_name_italy">Eiropa - Itālija</string>
     <string name="index_name_gb">Eiropa - Lielbritānija</string>
+    <string name="lang_en">Angļu</string>
+	<string name="lang_af">Āfrikāņu</string>
+	<string name="lang_hy">Armēņu</string>
+	<string name="lang_eu">Basku</string>
+	<string name="lang_be">Baltkrievu</string>
+	<string name="lang_bs">Bosniešu</string>
+	<string name="lang_bg">Bulgāru</string>
+	<string name="lang_ca">Katalāņu</string>
+	<string name="lang_cs">Čehu</string>
+	<string name="lang_da">Dāņu</string>
+	<string name="lang_nl">Holandiešu</string>
+	<string name="lang_fi">Somu</string>
+	<string name="lang_fr">Franču</string>
+	<string name="lang_ka">Gruzijas</string>
+	<string name="lang_de">Vācu</string>
+	<string name="lang_el">Grieķu</string>
+	<string name="lang_iw">Ebreju</string>
+	<string name="lang_hi">Hindu</string>
+	<string name="lang_hu">Hungāru</string>
+	<string name="lang_id">Indonēziešu</string>
+	<string name="lang_it">Itāļu</string>
+	<string name="lang_ja">Japāņu</string>
+	<string name="lang_ko">Korejiešu</string>
+	<string name="lang_lv">Latviešu</string>
+	<string name="lang_lt">Lietuviešu</string>
+	<string name="lang_mr">Maratiešu</string>
+	<string name="lang_no">Norvēģu</string>
+	<string name="lang_pl">Poļu</string>
+	<string name="lang_pt">Portugāļu</string>
+	<string name="lang_ro">Rumāņu</string>
+	<string name="lang_ru">Krievu</string>
+	<string name="lang_sk">Slovāku</string>
+	<string name="lang_sl">Slovēņu</string>
+	<string name="lang_es">Spāņu</string>
+	<string name="lang_sv">Zviedru</string>
+	<string name="lang_tr">Turku</string>
+	<string name="lang_uk">Ukraiņu</string>
+	<string name="lang_vi">Vjetnamiešu</string>
+	<string name="lang_cy">Velsiešu</string>
+    <string name="tip_recent_changes_1_3_t">Izmaiņas uz 1.3:
+…………\n\t* pārstrādāts atbalsts tabletēm un lieliem ekrāniem
+…………\n\t* Holo tēma (iestatījumi)
+…………\n\t* Papildus uzstādījumi kompasa stabilizēšanai
+…………\n\t* Kreisā augšējā poga uz kartes nomaina izvēlnes pogu
+……
+    </string>
+    <string name="tip_recent_changes_1_1_4_t">Izmaiņas uz 1.1.4:
+…………\n\t* Pārveidota lietotāja saskarsne
+		\n\t* Kļūdu labojumi
+……
+    </string>
+    <string name="tip_recent_changes_1_0_0_t">Izmaiņas uz 1.0.0:
+	\n\t* Uzlabots maršruts: ātrāks, precīzāks, līdz 250km
+	\n\t* Jaunas kartes - tikai autoceļi
+	\n\t* Karte nepazaudē pozīcijas fiksāciju pēc pārtraukumiem
+	\n\t* Miega režīma pieejamība navigācijas laikā
+……
+    </string>
     </resources>
