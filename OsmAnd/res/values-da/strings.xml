@@ -1750,4 +1750,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="lang_bs">Bosnisk</string>
 	<string name="lang_ka">Georgisk</string>
 	<string name="lang_mr">Marathi</string>
-	</resources>
+	<string name="lang_zh">Kinesisk</string>
+    <string name="lang_pt_br">Portugisisk (Brasilien)</string>
+    <string name="index_name_canada">Nordamerika - Canada</string>
+    </resources>
