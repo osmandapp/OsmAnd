@@ -13,7 +13,7 @@
 		\n\t* \'High contrast roads\' zeigt alle Straßen in betont deutlichen Farben, nützlich in extrem hellen Umgebungen
 		\n\t* \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahrten und Lifte (benötigt wird die \'World ski\' Offline-Karte)
 	</string>
-	<string name="local_index_gpx_timespan">\nZeitspanne: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timespan">\nDauer: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
@@ -29,9 +29,9 @@
 	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
 	<string name="tip_altitude_offset">Höhenanzeige (Offset)</string>
-	<string name="tip_altitude_offset_t">Die meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
-		\n\nEine bessere Näherung für lokale Systeme ist das EGM96-System.
-		\n\nOsmAnd zeigt die Höhenangabe der Position im EGM96-System an, wenn man die \'World Altitide Correction\' (WW15MGH.DAC) Korrekturdatei unter \'Einstellungen\' → \'Daten-Management\' herunterlädt. (Das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
+	<string name="tip_altitude_offset_t">Die meisten GPS-Systeme zeigen die Höhenangaben im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
+		\n\nEine bessere Näherung an lokale Systeme ist das EGM96-System. OsmAnd unterstützt nun die automatische Anzeige aller Höhenangaben im EGM96-System.
+		\n\nDies erfolgt sobald die Offline-Datei WW15MGH.DAC vorhanden ist, verfügbar via Einstellungen/Daten-Management (das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
 	<string name="map_widget_max_speed">Tempolimit</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
@@ -158,15 +158,15 @@
 	<string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
 	<string name="osmand_rastermaps_plugin_description">Ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen (auch als Over- oder Underlay). Online-Karten werden im Unterverzeichnis \'tiles\' zwischengespeichert. Karten-Kacheln können auch offline erstellt und in das Unterverzeichnis \'tiles\' kopiert werden.</string>
 	<string name="osmand_background_plugin_description">Zeigt Einstellungen für die Standort-Aufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
-	<string name="osmand_accessibility_description">Zeigt Einstellungen für spezielle Barrierefreiheits-Erweiterungen.</string>
+	<string name="osmand_accessibility_description">Zeigt Einstellungen für spezielle Eingabehilfen.</string>
 	<string name="extra_settings">Erweiterte Einstellungen</string>
 	<string name="osmand_monitoring_description">Ermöglicht das Aufzeichnen zurückgelegter Strecken als lokale GPX-Datei oder online via Web-Service.</string>
 	<string name="osmand_extra_settings_description">Zeigt Einstellungen für erweiterte Kartenkonfiguration (z.B. mehr Details) und einige Gerätespezifika.</string>
 	<string name="osmand_development_plugin_description">Zeigt Einstellungen für Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
-	<string name="plugins_screen">Zusatzmodule</string>
+	<string name="plugins_screen">Plugins</string>
 	<string name="select_plugin_to_activate">Module zum Aktivieren oder Deaktivieren anklicken. (Ein Neustart von OsmAnd könnte nötig sein.)</string>
 	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Zusatzdienste</string>
-	<string name="prefs_plugins">Zusatzmodule</string>
+	<string name="prefs_plugins">Plugins</string>
 	<string name="tip_recent_changes_0_8_0_t">Änderungen in 0.8.0:
 		\n\t- *Modul-Funktionalität*
 		\n\t - Viele Funktionalitäten könnnen nun blockweise unter Einstellungen/Zusatzmodule aktiviert oder deaktiviert werden. Unter anderem finden Sie dort die Einstellungen für Online Kachel-Kartenquellen, Aufzeichnungs-Einstellungen und vielen anderen existierenden Funktionalitäten.
@@ -210,7 +210,7 @@
 	<string name="accessibility_extensions_descr">Barrierefreiheit-Erweiterungen für alte Android-Versionen</string>
 	<string name="accessibility_extensions">Barrierefreiheit-Erweiterungen</string>
 	<string name="accessibility_mode">Barrierefreiheit-Modus</string>
-	<string name="accessibility_mode_descr">Schaltet die Barrierefreiheit-Funktionen ein</string>
+	<string name="accessibility_mode_descr">Schaltet die Eingabehilfen-Funktionen ein</string>
 	<string name="accessibility_on">An</string>
 	<string name="accessibility_off">Aus</string>
 	<string name="accessibility_default">Wie globale Systemeinstellung</string>
@@ -363,8 +363,8 @@
 	<string name="tip_osm_improve_t">OsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann direkt zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte erstellen.
 		\n\nDazu müssen Sie zunächst unter \'Einstellungen\' → \'Zusatzmodule\' OSM-Berarbeitung aktivieren und dann unter \'Einstellungen\' → \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
 		\n\nEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im \'Verwende Position\'-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! 
-		\n\nAuch gefundene Fehler auf der Karte können direkt an OSM gemeldet werden. OSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im \'Verwende Position\'-Kontextmenü.
-		\n\nOsmAnd untertützt das lokale Vormerken Ihrer Einträge (siehe entsprechende Einstellung), aber zum Einsenden natürlich eine Internetverbindung benötigt.
+		\n\nAuch auf der Karte gefundene Fehler können direkt an OSM gemeldet werden. OSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im \'Verwende Position\'-Kontextmenü.
+		\n\nOsmAnd untertützt das lokale Vormerken Ihrer Einträge (siehe entsprechende Einstellung), aber zum späteren Einsenden wird natürlich eine Internetverbindung benötigt.
 	</string>
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
@@ -553,11 +553,11 @@
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
 	<string name="install_more">Weitere installieren…</string>
 	<string name="tip_update_index">Offline-Karten</string>
-	<string name="tip_update_index_t">Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und ide Offline-Navigation. OsmAnd hat einen Daten-Manager für das Herunterladen von Offline-Karten (und einigen anderen Offline-Daten), und zur Aktualisierung derselben.
+	<string name="tip_update_index_t">Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und die Offline-Navigation. OsmAnd hat einen Daten-Manager für das Herunterladen von Offline-Karten (und einigen anderen Offline-Daten), und zur Aktualisierung derselben.
 		\n\nDas Herunterladen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Herunterladen…\'.
 		\n\nNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Bitte beachten Sie die Dateityp-Auswahloption am oberen Ende des Bildschirms, wählen Sie dort die gewünschte Datei-Kategorie (Reguläre Karten, Relief-Overlay, etc.)
-		\n\nDie Regionsliste kann durch Eingabe von Zeichen gefiltert werden. Alternativ zeigt die Option \'Filter Gespeicherte\' zeigt nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
-		\n\n\t* Einträge in \'grün\': Daten aktuell
+		\n\nDie Regionenliste kann durch Eingabe von Zeichen gefiltert werden. Alternativ zeigt die Option \'Filter Gespeicherte\' nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
+		\n\n\t* Einträge in \'grün\': Daten auf dem Gerät sind aktuell
 		\n\t* Einträge in \'blau\': Neuere Version zum Herunterladen verfügbar
 		\n\t* Kursive Darstellung: Auf dem Gerät deaktivierte Karten
 	</string>
@@ -606,7 +606,7 @@
 	</string>
 	<string name="tip_initial">Tipps und Tricks</string>
 	<string name="tip_initial_t">OsmAnd ist eine Navigationsanwendung mit vielen Fähigkeiten.
-		\n\nEine Einführung geben Tipps, die über das Menü zugänglich sind.
+		\n\nEine Einführung gibt Tipps, die über das Menü zugänglich sind.
 	</string>
 	<string name="next_button">Weiter</string>
 	<string name="previous_button">Zurück</string>
@@ -620,7 +620,7 @@
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Position mitteilen mittels</string>
-	<string name="send_location_sms_pattern">Position: %1$s, %2$s</string>
+	<string name="send_location_sms_pattern">Position: %1$s\n%2$s</string>
 	<string name="send_location_email_pattern">Um die Position zu sehen, folge dem Web-Link %1$s oder Android Intent Link %2$s</string>
 	<string name="send_location">Position senden</string>
 	<string name="context_menu_item_share_location">Position mitteilen</string>
@@ -751,7 +751,7 @@
 	<string name="export_fav">Export</string>
 	<string name="error_occurred_loading_gpx">Fehler beim GPX-Laden</string>
 	<string name="send_report">Bericht senden</string>
-	<string name="none_region_found">Keine Offline-Daten auf der SD-Karte gefunden. Bitte versuchen Sie, Regionen via Internet zu laden.</string>
+	<string name="none_region_found">Keine Offline-Daten auf der SD-Karte gefunden. Bitte versuchen Sie, die Region über das Internet zu laden.</string>
 	<string name="poi_namefinder_query_empty">Suchbegriff eingeben</string>
 	<string name="any_poi">Alles</string>
 	<string name="layer_transport_route">ÖPNV-Linien</string>
@@ -1294,9 +1294,9 @@
 	\n\nÄnderungen in 1.2:
 		\n\t* Fehlerbehebungen (Navigation, Suche, AV-Aufzeichnung, Sprachansagen, einige Anzeigeverbesserungen)
 		\n\t* Einfachere Konfiguration des Bergkontur-Overlay (nur mit Höhenlinien-Plugin)
-		\n\t* Verarbeitet maps.google.com-Links auf Orte
+		\n\t* Verarbeitung von maps.google.com-Links zu Orten
 		\n\t* Neues Widget (GPS info)
-		\n\t* Hinzugefügt: Unterstützung von mehreren Fenstern auf aktuellen Samsung-Geräten
+		\n\t* Unterstützung von mehreren Fenstern auf aktuellen Samsung-Geräten hinzugefügt
 		\n\t* Kalman-Filter für Kompass
 		\n\t* Unterstützung für Pebble-Uhr
 	</string>
@@ -1404,11 +1404,11 @@
 	<string name="route_from">von:</string>
 	<string name="osb_author_dialog_password">OSM-Passwort (optional)</string>
 	<string name="tip_recent_changes_1_5_t">Änderungen in 1.5:
-		\n\t* Sprachansagen für Geschwindigkeitsbegrenzungen und -kameras
-		\n\t* Sprachansagen verbessert (Ansage von Straßennamen)
-		\n\t* Hochauflösende POI-Symbole
-		\n\t* Viele Bedienungs-Verbesserungen
-		\n\t* Fehlerbehebungen für Entfernungsanzeige, GPX Analyse, Behandlung von Zwischenzielen, Planungs-Widget, OSM-Schnittstelle, https-Kompatibilität
+	\n\t* Sprachansagen für Geschwindigkeitsbegrenzungen und -kameras
+	\n\t* Sprachansagen verbessert (Ansage von Straßennamen)
+	\n\t* Hochauflösende POI-Symbole
+	\n\t* Viele Verbesserungen der Bedienungsoberfläche
+	\n\t* Fehlerbehebungen für Entfernungsanzeige, GPX-Analyse, Behandlung von Zwischenzielen, Planungs-Widget, OSM-Schnittstelle, https-Kompatibilität
     </string>
 <string name="context_menu_item_directions_from">Navigiere von</string>
 	<string name="av_camera_focus_hiperfocal">Hyperfokaler Fokus</string>
@@ -1453,7 +1453,7 @@
     <string name="edit_tilesource_successfully">Kachelquelle %1$s wurde erfolgreich gespeichert</string>
     <string name="edit_tilesource_elliptic_tile">Elliptischer Merkator</string>
     <string name="edit_tilesource_maxzoom">Max Zoom</string>
-    <string name="edit_tilesource_expiration_time">Ablauf (Minuten)</string>
+    <string name="edit_tilesource_expiration_time">Verfallszeit (Minuten)</string>
     <string name="edit_tilesource_minzoom">Min Zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Wähle vorhandene…</string>
