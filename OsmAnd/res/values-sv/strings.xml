@@ -1427,4 +1427,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="lang_cy">Walesiska</string>
     <string name="index_name_italy">Europa - Italien</string>
     <string name="index_name_gb">Europa - Storbritannien</string>
+    <string name="lang_zh">Kinesiska</string>
+    <string name="lang_pt_br">Portugisiska (Brasilien)</string>
+    <string name="index_name_canada">Nordamerika - Kanada</string>
+    <string name="app_modes_choose_descr">Välj tillgängliga användarprofilerna</string>
     </resources>
