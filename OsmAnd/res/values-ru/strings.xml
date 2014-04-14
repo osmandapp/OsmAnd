@@ -1488,4 +1488,45 @@
 		\n\t* \'Зима и лыжи\' использует зимний(покрытый снегом) ландшафтный вид, показывает лыжные склоны и подъемники (используется загрузка карт \'World Ski\')
 	</string>
     <string name="edit_tilesource_elliptic_tile">Эллиптическая проекция Меркатора</string>
-    </resources>
+    <string name="lang_en">Английский</string>
+	<string name="lang_be">Белорусский</string>
+	<string name="lang_bg">Болгарский</string>
+	<string name="lang_cs">Чешский</string>
+	<string name="lang_fi">Финский</string>
+	<string name="lang_fr">Французский</string>
+	<string name="lang_ka">Грузинский</string>
+	<string name="lang_de">Немецкий</string>
+	<string name="lang_nl">Голландский</string>
+	<string name="lang_ca">Каталанский</string>
+	<string name="lang_eu">Баскский</string>
+	<string name="lang_hy">Армянский</string>
+	<string name="lang_bs">Боснийский</string>
+	<string name="lang_da">Датский</string>
+	<string name="lang_el">Греческий</string>
+	<string name="lang_iw">Иврит</string>
+	<string name="lang_hi">Хинди</string>
+	<string name="lang_hu">Венгерский</string>
+	<string name="lang_id">Индонезийский</string>
+	<string name="lang_it">Итальянский</string>
+	<string name="lang_ja">Японский</string>
+	<string name="lang_ko">Корейский</string>
+	<string name="lang_lv">Латышский</string>
+	<string name="lang_lt">Литовский</string>
+	<string name="lang_mr">Маратхи</string>
+	<string name="lang_no">Норвежский</string>
+	<string name="lang_pl">Польский</string>
+	<string name="lang_pt">Португальский</string>
+	<string name="lang_ro">Румынский</string>
+	<string name="lang_ru">Русский</string>
+	<string name="lang_sk">Словацкий</string>
+	<string name="lang_sl">Словенский</string>
+	<string name="lang_es">Испанский</string>
+	<string name="lang_sv">Шведский</string>
+	<string name="lang_tr">Турецкий</string>
+	<string name="lang_uk">Украинский</string>
+	<string name="lang_vi">Вьетнамский</string>
+	<string name="lang_cy">Валлийский</string>
+    <string name="index_name_italy">Европа - Италия</string>
+    <string name="index_name_gb">Европа - Великобритания</string>
+    <string name="lang_af">Африкаанс</string>
+	</resources>
