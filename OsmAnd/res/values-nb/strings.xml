@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -42,15 +43,15 @@
 	<string name="snap_to_road_descr">Hold posisjon på veien under navigering</string>
 	<string name="snap_to_road">Hold på vei</string>
 	<string name="osmand_short_description_80_chars">OsmAnd er et navigeringsprogram for offline og online kart og som er åpen kildekode</string>
-	<string name="osmand_plus_short_description_80_chars">OsmAnd er et navigeringsprogram for offline og online kart og som er åpen kildekode</string>
+	<string name="osmand_plus_short_description_80_chars">Global mobilkartvisning &amp; navigering for offline og nettbasert OSM-kart</string>
 	<string name="recalculate_route_to_your_location">Transportmodus:</string>
 	<string name="select_navigation_mode">Velg transportmetode</string>
 	<string name="day_night_info_description">Soloppgang: %1$s \nSolnedgang: %2$s</string>
 	<string name="day_night_info">Dag/natt-info</string>
 	<string name="map_widget_day_night">Dag/natt-kart</string>
 	<string name="map_widget_vector_attributes">Opptegningsattributter:</string>
-	<string name="map_widget_renderer">Opptegningsstil</string>
-	<string name="layer_map_appearance">Konfigurer skjerm</string>
+	<string name="map_widget_renderer">Kartstil</string>
+	<string name="layer_map_appearance">Still inn skjerm</string>
 	<string name="show_lanes">Vis kjørefelt</string>
 	<string name="avoid_unpaved">Unngå uasfalterte veier</string>
 	<string name="avoid_ferries">Unngå ferger</string>
@@ -58,7 +59,7 @@
 	<string name="avoid_in_routing_descr">Unngå bomveier, uasfalterte, ferger</string>
 	<string name="map_widget_fluorescent">Fluorescerende ruter</string>
 	<string name="map_widget_show_ruler">Målestokk</string>
-	<string name="map_widget_appearance">Diverse:</string>
+	<string name="map_widget_appearance">Resterende elementer:</string>
 	<string name="map_widget_top_text">Gatenavn</string>
 	<string name="map_widget_config">Still inn skjerm</string>
 	
@@ -331,12 +332,12 @@
 	<string name="system_locale">System</string>
 	<string name="preferred_locale_descr">Velg skjermspråk</string>
 	<string name="preferred_locale">Språk</string>
-	<string name="tip_map_switch">Kartkilde</string>
+	<string name="tip_map_switch">Velg en kartkilde</string>
 	<string name="tip_map_switch_t_v2">\tKartkilden og lag som vises endres via \'Meny\' -&gt; \'Vis\' i kartvisning.
 		\n\tUnder \'Kartkilde…\' kan du velge å bruke de forhåndslastede offline vektorkartene, forhåndsdefinerte (nettbaserte) fliskilder (aktiver programtillegget for \'Nettbaserte kart\' for dette), eller kart manuelt opprettet ved bruk av f.eks. OsmAndMapCreator på en PC.
 		\n\tOsmAnd støtter også egendefinerte kilder.
 	</string>
-	<string name="tip_app_mode">Brukerprofil</string>
+	<string name="tip_app_mode">Bruk profil</string>
 	<string name="tip_app_mode_t_v2">\tOsmAnd støtter forskjellige (tilpasningsbare) programprofiler for ulike bruksmåter.
 		\n\tDu kan endre profiler via profilknappen i nedre venstre hjørne av kartskjermen (ikon for bil, sykkel eller fotgjenger), eller når du oppretter en rute.
 	</string>
@@ -346,7 +347,7 @@
 	<string name="tip_search_t">\tDu kan søke etter steder direkte på kartet, eller etter adresse, etter plassering, interessepunkt eller som forhåndsdefinert favoritt.
 		\n\tÅ trykke \'Søk\' på hovedskjermen åpner søkeaktivitetene. For alle treff tilbyr en lokalmeny 2 valg: \'Sett som reisemål\' eller \'Vis på kart\'.
 	</string>
-	<string name="tip_map_context_menu">Lokalmeny for kart</string>
+	<string name="tip_map_context_menu">\'Bruk sted\' meny</string>
 	<string name="tip_map_context_menu_t">\tLokalmenyen for kart er tilgjengelig ved å trykke og holde på kartet eller ved å trykke på styrekule-knappen.
 		\n\tDette gir en boks med punktkoordinater. Kort trykk på den åpner lokalmenyen. (Eller trykk og hold på den for å skjule boksen igjen.)
 		\n\tLokalmenyen for kart inneholder alle handlinger som refererer til et punkt (sted).
@@ -414,7 +415,7 @@
 	<string name="renderers">Vektor-opptegning</string>
 	<string name="renderers_descr">Velg utseende på opptegningen</string>
 	<string name="website">nettsted</string>
-	<string name="phone">telefon</string>
+	<string name="phone">Telefon</string>
 	<string name="context_menu_item_search_transport">Søk transport</string>
 	<string name="transport_searching_transport">Transportresultater (ingen mål):</string>
 	<string name="transport_searching_route">Transportresultater ({0} til mål):</string>
@@ -435,7 +436,7 @@
 	<string name="rotate_map_to_bearing_descr">Velg kartskjermjustering</string>
 	<string name="rotate_map_to_bearing">Kartorientering</string>
 	<string name="show_route">Rutedetaljer</string>
-	<string name="fav_imported_sucessfully">Favoritter vellykket importert</string>
+	<string name="fav_imported_sucessfully">Favoritter er importert</string>
 	<string name="fav_file_to_load_not_found">GPX-fil som inneholder favoritter er ikke funnet på {0}</string>
 	<string name="fav_saved_sucessfully">Favoritter vellykket lagret til {0}</string>
 	<string name="no_fav_to_save">Ingen favorittpunkter å lagre</string>
@@ -449,7 +450,7 @@
 	<string name="layer_transport">Stoppesteder</string>
 	<string name="layer_poi">Interessepunkt…</string>
 	<string name="layer_map">Kartkilde…</string>
-	<string name="menu_layers">Vis</string>
+	<string name="menu_layers">Kartlag</string>
 	<string name="context_menu_item_search_poi">Søk interessepunkt</string>
 	
 	<string name="where_am_i">Hvor er jeg?</string>
@@ -514,8 +515,8 @@
 	<string name="fav_points_edited">Favorittpunkt ble redigert</string>
 	<string name="fav_points_not_exist">Ingen favorittpunkter finnes</string>
 	<string name="update_existing">Erstatt</string>
-	<string name="only_show">Bare vis</string>
-	<string name="follow">Følg</string>
+	<string name="only_show">Vis rute</string>
+	<string name="follow">Start navigering</string>
 	<string name="mark_final_location_first">Velg reisemål først</string>
 	<string name="get_directions">Anvisninger</string>
 	<string name="show_gps_status">Vis GPS-status</string>
@@ -699,11 +700,10 @@
     <string name="edit_tilesource_maxzoom">Maks-zoom</string>
     <string name="edit_tilesource_minzoom">Min-zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Velg eksisterende …</string>
+    <string name="edit_tilesource_choose_existing">Velg eksisterende…</string>
     <string name="edit_tilesource_name">Navn</string>
     <string name="maps_define_edit">Definer/rediger …</string>
-	<string name="route_is_too_long">Ruten er muligens for lang til å bli beregnet med OsmAnd offline ruteberegner.
-	Beregning er vanligvis mulig mellom punkter opp til 200km fra hverandre. Vennligst legg til ett eller fler mellomliggende punkter for å beregne ruten.</string>
+	<string name="route_is_too_long">OsmAnd offline ruteplanlegging kan ta veldig lang tid (eller ikke virke noen ganger) for punkter mere enn 200km fra hverandre. Man kan da legge til mellomliggende rutepunkter for bedre ytelse.</string>
 	<string name="auto_zoom_none">Ingen autozoom</string>
 	<string name="auto_zoom_close">Nært hold</string>
 	<string name="auto_zoom_far">Middels hold</string>
@@ -717,7 +717,7 @@
     <string name="app_mode_motorcycle">Motorsykkel</string>
     <string name="app_mode_boat">Båt</string>
     <string name="app_mode_aircraft">Fly</string>
-    <string name="tip_faq_t">Ofte stilte spørsmål finnes på https://code.google.com/p/osmand/wiki/FAQ</string>
+    <string name="tip_faq_t">Ofte stilte spørsmål finnes på https://code.google.com/p/osmand/wiki/FAQ.</string>
     <string name="tip_faq">Ofte stilte spørsmål</string>
     <string name="local_osm_changes_delete_all_confirm">Er du sikker på at du vil slette %1$d OSM endringer?</string>
     <string name="local_osm_changes_delete_all">Slett alle</string>
@@ -728,4 +728,45 @@
     <string name="gps_status_eclipsim">GPS-status</string>
     <string name="default_and">og</string>
     <string name="default_or">eller</string>
-	</resources>
+	<string name="lang_en">Engelsk</string>
+	<string name="lang_af">Afrikaans</string>
+	<string name="lang_hy">Armensk</string>
+	<string name="lang_eu">Baskisk</string>
+	<string name="lang_be">Hviterussisk</string>
+	<string name="lang_bs">Bosnisk</string>
+	<string name="lang_bg">Bulgarsk</string>
+	<string name="lang_ca">Katalansk</string>
+	<string name="lang_cs">Tsjekkisk</string>
+	<string name="lang_da">Dansk</string>
+	<string name="lang_nl">Nederlandsk</string>
+	<string name="lang_fi">Finsk</string>
+	<string name="lang_fr">Fransk</string>
+	<string name="lang_ka">Georgisk</string>
+	<string name="lang_de">Tysk</string>
+	<string name="lang_el">Gresk</string>
+	<string name="lang_iw">Hebraisk</string>
+	<string name="lang_hi">Hindi</string>
+	<string name="lang_hu">Ungarsk</string>
+	<string name="lang_id">Indonesisk</string>
+	<string name="lang_it">Italiensk</string>
+	<string name="lang_ja">Japansk</string>
+	<string name="lang_ko">Koreansk</string>
+	<string name="lang_lv">Lettisk</string>
+	<string name="lang_lt">Litauisk</string>
+	<string name="lang_mr">Marathi</string>
+	<string name="lang_no">Norsk</string>
+	<string name="lang_pl">Polsk</string>
+	<string name="lang_pt">Portugisisk</string>
+	<string name="lang_ro">Rumensk</string>
+	<string name="lang_ru">Russisk</string>
+	<string name="lang_sk">Slovakisk</string>
+	<string name="lang_sl">Slovensk</string>
+	<string name="lang_es">Spansk</string>
+	<string name="lang_sv">Svensk</string>
+	<string name="lang_tr">Tyrkisk</string>
+	<string name="lang_uk">Ukrainsk</string>
+	<string name="lang_vi">Vietnamesisk</string>
+	<string name="lang_cy">Walisisk</string>
+    <string name="index_name_italy">Europa - Italia</string>
+    <string name="index_name_gb">Europa - Storbritannia</string>
+    </resources>
