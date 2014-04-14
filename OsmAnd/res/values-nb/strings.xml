@@ -769,4 +769,7 @@
 	<string name="lang_cy">Walisisk</string>
     <string name="index_name_italy">Europa - Italia</string>
     <string name="index_name_gb">Europa - Storbritannia</string>
+    <string name="lang_zh">Kinesisk</string>
+    <string name="lang_pt_br">Portugisisk (Brasil)</string>
+    <string name="index_name_canada">Nord-Amerika - Canada</string>
     </resources>
