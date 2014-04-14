@@ -1736,4 +1736,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="lang_cy">Gallese</string>
     <string name="index_name_italy">Europa - Italia</string>
     <string name="index_name_gb">Europa - Gran Bretagna</string>
+    <string name="lang_zh">Cinese</string>
+    <string name="lang_pt_br">Portoghese (Brasile)</string>
+    <string name="index_name_canada">Americano - Canada</string>
     </resources>
