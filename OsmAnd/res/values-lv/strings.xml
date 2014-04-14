@@ -1493,4 +1493,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="calculate_osmand_route_without_internet">Aprēķināt OsmAnd maršruta segmentu, neizmantojot internetu</string>
     <string name="gpx_option_calculate_first_last_segment">Aprēķināt OsmAnd maršrutu pirmajam un pēdējam segmentam</string>
     <string name="use_displayed_track_for_navigation">Vai lietot norādīto ceļu navigācijai?</string>
+    <string name="index_name_italy">Eiropa - Itālija</string>
+    <string name="index_name_gb">Eiropa - Lielbritānija</string>
     </resources>
