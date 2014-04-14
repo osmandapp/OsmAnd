@@ -66,7 +66,7 @@ public class IndexItem implements Comparable<IndexItem> {
 	public String getVoiceName(Context ctx) {
 		try {
 			String nm = getBasename().replace('-', '_').replace(' ', '_');
-			if (nm.endsWith("-tts")) {
+			if (nm.endsWith("_tts")) {
 				nm = nm.substring(0, nm.length() - 4);
 			}
 			Field f = R.string.class.getField("lang_"+nm);
@@ -86,7 +86,35 @@ public class IndexItem implements Comparable<IndexItem> {
 		} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
 			return ctx.getString(R.string.ttsvoice) + "\n" + getVoiceName(ctx);
 		}
-		return osmandRegions.getLocaleName(getBasename());
+		final String bn = getBasename();
+		final String lc = bn.toLowerCase();
+		String std = getStandardMapName(ctx, lc);
+		if (std != null) {
+			return std;
+		}
+		if (bn.contains("addresses-nationwide")) {
+			final int ind = bn.indexOf("addresses-nationwide");
+			String downloadName = bn.substring(0, ind - 1) + bn.substring(ind + "addresses-nationwide".length());
+			return osmandRegions.getLocaleName(downloadName) + 
+					" "+ ctx.getString(R.string.index_item_nation_addresses);
+		}
+
+		return osmandRegions.getLocaleName(lc);
+	}
+
+	private String getStandardMapName(Context ctx, String basename) {
+		if(basename.equals("world-ski")) {
+			return ctx.getString(R.string.index_item_world_ski);
+		} else if(basename.equals("world_altitude_correction_ww15mgh")) {
+			return ctx.getString(R.string.index_item_world_altitude_correction);
+		} else if(basename.equals("world_basemap")) {
+			return ctx.getString(R.string.index_item_world_basemap);
+		} else if(basename.equals("world_bitcoin_payments")) {
+			return ctx.getString(R.string.index_item_world_bitcoin_payments);
+		} else if(basename.equals("world_seamarks")) {
+			return ctx.getString(R.string.index_item_world_seamarks);
+		}
+		return null;
 	}
 
 	public boolean isVoiceItem() {

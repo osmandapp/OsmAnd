@@ -17,9 +17,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher;
-import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -244,11 +241,9 @@ public class OsmandRegions {
 			
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
-				if (object.getPointsLength() < 1) {
-					return false;
-				}
 				initTypes(object);
 				String downloadName = object.getNameByType(downloadNameType).toLowerCase();
+				String prefix = object.getNameByType(prefixType);
 				String locName = getLocaleName(object);
 				if(locName != null && locName.length() > 0){
 					downloadNamesToLocaleNames.put(downloadName, locName);
@@ -257,6 +252,8 @@ public class OsmandRegions {
 				TIntObjectIterator<String> it = object.getObjectNames().iterator();
 				
 				StringBuilder ind = new StringBuilder();
+				String pr = getDownloadNameIndexLowercase(prefix);
+				ind.append(pr == null ? prefix.toLowerCase() : pr.toLowerCase()).append(" ");
 				while(it.hasNext()) {
 					it.advance();
 					TagValuePair tp = mi.decodeType(it.key());
