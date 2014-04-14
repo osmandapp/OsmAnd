@@ -62,18 +62,24 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 			} else if (lc.contains("southamerica") || lc.contains("south-america")) {
 				nameId = R.string.index_name_south_america;
 				order = 45;
-			} else if (lc.startsWith("france_")) {
-				nameId = R.string.index_name_france;
-				order = 17;
 			} else if ( lc.contains("germany")) {
 				nameId = R.string.index_name_germany;
 				order = 16;
+			} else if (lc.startsWith("france_")) {
+				nameId = R.string.index_name_france;
+				order = 17;
+			} else if (lc.startsWith("italy_")) {
+				nameId = R.string.index_name_italy;
+				order = 18;
+			} else if (lc.startsWith("gb_") || lc.startsWith("british")) {
+				nameId = R.string.index_name_gb;
+				order = 19;
+			} else if (lc.contains("russia")) {
+				nameId = R.string.index_name_russia;
+				order = 25;
 			} else if (lc.contains("europe")) {
 				nameId = R.string.index_name_europe;
 				order = 15;
-			} else if (lc.contains("russia")) {
-				nameId = R.string.index_name_russia;
-				order = 18;
 			} else if (lc.contains("africa") && !lc.contains("_wiki_")) {
 				nameId = R.string.index_name_africa;
 				order = 80;

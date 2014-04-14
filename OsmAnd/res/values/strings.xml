@@ -9,7 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    
+    <string name="index_name_italy">Europe - Italy</string>
+    <string name="index_name_gb">Europe - Great Britain</string>
     <string name="calculate_osmand_route_without_internet">Calculate OsmAnd route segment without internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calculate OsmAnd route for first and last route segment</string>
     <string name="use_displayed_track_for_navigation">Do you want to use displayed track for navigation?</string>

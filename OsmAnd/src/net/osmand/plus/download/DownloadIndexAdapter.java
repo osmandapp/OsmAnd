@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
@@ -34,6 +35,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	private int okColor;
 	private int defaultColor;
 	private int updateColor;
+	private OsmandRegions osmandRegions;
 
 	public DownloadIndexAdapter(DownloadIndexActivity downloadActivity, List<IndexItem> indexFiles) {
 		this.downloadActivity = downloadActivity;
@@ -48,6 +50,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		defaultColor = ta.getColor(0, downloadActivity.getResources().getColor(R.color.color_unknown));
 		ta.recycle();
 		updateColor = downloadActivity.getResources().getColor(R.color.color_update);
+		osmandRegions = downloadActivity.getMyApplication().getResourceManager().getOsmandRegions();
 	}
 
 	public void setLoadedFiles(Map<String, String> indexActivatedFileNames, Map<String, String> indexFileNames) {
@@ -123,12 +126,14 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				Context c = downloadActivity;
 				for (IndexItem item : indexFiles) {
 					boolean add = true;
-					final String visibleName = item.getVisibleName(c).toLowerCase();
+					String indexLC = osmandRegions.getDownloadNameIndexLowercase(item.getBasename());
+					if(indexLC == null) {
+						item.getVisibleName(c, osmandRegions).toLowerCase();
+					}
 					for(List<String> or : conds) {
 						boolean tadd = true;
 						for (String var : or) {
-							if (!visibleName.contains(var)
-									/*&& !item.getDescription().toLowerCase().contains(var)*/) {
+							if (!indexLC.contains(var)) {
 								tadd = false;
 								break;
 							}
@@ -232,7 +237,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		TextView description = (TextView) row.findViewById(R.id.download_descr);
 		IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
 		OsmandApplication clctx = downloadActivity.getMyApplication();
-		String eName = e.getVisibleDescription(clctx) + "\n" + e.getVisibleName(clctx);
+		String eName = e.getVisibleDescription(clctx) + "\n" + e.getVisibleName(clctx, osmandRegions);
 		item.setText(eName.trim()); //$NON-NLS-1$
 		String d = e.getDate() + "\n" + e.getSizeDescription(clctx);
 		description.setText(d.trim());

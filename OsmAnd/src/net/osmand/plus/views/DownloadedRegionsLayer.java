@@ -119,7 +119,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 
 	private static int ZOOM_TO_SHOW_BORDERS_ST = 5;
 	private static int ZOOM_TO_SHOW_BORDERS = 7;
-	private static int ZOOM_TO_SHOW_MAP_NAMES = 12;
+	private static int ZOOM_TO_SHOW_MAP_NAMES = 8;
 	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
@@ -217,7 +217,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				if ((currentObjects != null && currentObjects.size() > 0)) {
 					for (int i = 0; i < currentObjects.size(); i++) {
 						final BinaryMapDataObject o = currentObjects.get(i);
-						String name = Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
+						String name =  osmandRegions.getLocaleName(o); //Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
 						if (!set.add(name)) {
 							continue;
 						}

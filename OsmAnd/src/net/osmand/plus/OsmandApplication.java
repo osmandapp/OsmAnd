@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Locale;
 
 import net.osmand.IndexConstants;
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleAlertBuilder;
@@ -82,7 +81,7 @@ public class OsmandApplication extends Application {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
-	ResourceManager manager = null;
+	ResourceManager resourceManager = null;
 	PoiFiltersHelper poiFilters = null;
 	RoutingHelper routingHelper = null;
 	FavouritesDbHelper favorites = null;
@@ -147,7 +146,7 @@ public class OsmandApplication extends Application {
 		
 		routingHelper = new RoutingHelper(this, player);
 		taskManager = new OsmAndTaskManager(this);
-		manager = new ResourceManager(this);
+		resourceManager = new ResourceManager(this);
 		daynightHelper = new DayNightHelper(this);
 		locationProvider = new OsmAndLocationProvider(this);
 		savingTrackHelper = new SavingTrackHelper(this);
@@ -264,7 +263,7 @@ public class OsmandApplication extends Application {
 	}
 
 	public ResourceManager getResourceManager() {
-		return manager;
+		return resourceManager;
 	}
 
 	public DayNightHelper getDaynightHelper() {
@@ -274,7 +273,7 @@ public class OsmandApplication extends Application {
 	@Override
 	public void onLowMemory() {
 		super.onLowMemory();
-		manager.onLowMemory();
+		resourceManager.onLowMemory();
 	}
 
 	@Override
@@ -301,6 +300,8 @@ public class OsmandApplication extends Application {
 			config.locale = prefferedLocale;
 			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 		}
+		String clang = "".equals(lang) ? config.locale.getLanguage() : lang;
+		resourceManager.getOsmandRegions().setLocale(clang);
 
 	}
 
@@ -477,7 +478,7 @@ public class OsmandApplication extends Application {
 
 	private void closeApplicationAnyway(final Activity activity, boolean disableService) {
 		if (applicationInitializing) {
-			manager.close();
+			resourceManager.close();
 		}
 		applicationInitializing = false;
 
@@ -546,7 +547,7 @@ public class OsmandApplication extends Application {
 					}
 				}
 			}
-			warnings.addAll(manager.reloadIndexes(startDialog));
+			warnings.addAll(resourceManager.reloadIndexes(startDialog));
 			player = null;
 			if (savingTrackHelper.hasDataToSave()) {
 				startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);

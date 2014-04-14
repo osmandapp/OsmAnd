@@ -176,6 +176,7 @@ public class ResourceManager {
 		}
 	}
 	
+	
 	public OsmandApplication getContext() {
 		return context;
 	}

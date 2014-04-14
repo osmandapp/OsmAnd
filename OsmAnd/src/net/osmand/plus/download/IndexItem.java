@@ -14,6 +14,7 @@ import java.util.TimeZone;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -58,21 +59,17 @@ public class IndexItem implements Comparable<IndexItem> {
 		} else if (type == DownloadActivityType.ROADS_FILE) {
 			return ctx.getString(R.string.download_roads_only_item);
 		}
-//		fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) 
-//		fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)
-//		fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)
-//		fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)
 		return s;
 	}
 
-	public String getVisibleName(Context ctx) {
+	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
 		String s = "";
 		if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 			s = ctx.getString(R.string.voice) + "\n";
 		} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
 			s = ctx.getString(R.string.ttsvoice) + "\n";
 		}
-		return s + getBasename().replace('_', ' ');
+		return s + osmandRegions.getLocaleName(getBasename());
 	}
 
 	public boolean isVoiceItem() {
