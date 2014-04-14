@@ -1257,7 +1257,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="driving_region">Område</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">USA</string>
-	<string name="driving_region_canada">Canada</string>
+	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa &amp; Asien</string>
 	<string name="driving_region_uk">UK, Indien, Australien &amp; andra</string>
 	<string name="local_osm_changes_backup_successful">Ändrad OSM-fil skapad utan problem %1$s</string>
@@ -1386,4 +1386,45 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	\n\t* En mängd smärre förbättringar och fixar
 	\n\t* Inställning av talhastigheten
     </string>
+    <string name="lang_ca">Katalanska</string>
+	<string name="lang_en">Engelska</string>
+	<string name="lang_hy">Armeniska</string>
+	<string name="lang_eu">Baskiska</string>
+	<string name="lang_be">Vitryska</string>
+	<string name="lang_bs">Bosniska</string>
+	<string name="lang_af">Afrikaans</string>
+	<string name="lang_bg">Bulgariska</string>
+	<string name="lang_cs">Tjeckiska</string>
+	<string name="lang_da">Danska</string>
+	<string name="lang_nl">Nederländska</string>
+	<string name="lang_fi">Finska</string>
+	<string name="lang_fr">Franska</string>
+	<string name="lang_ka">Georgiska</string>
+	<string name="lang_de">Tyska</string>
+	<string name="lang_el">Grekiska</string>
+	<string name="lang_iw">Hebreiska</string>
+	<string name="lang_hi">Hindi</string>
+	<string name="lang_hu">Ungerska</string>
+	<string name="lang_id">Indonesiska</string>
+	<string name="lang_it">Italienska</string>
+	<string name="lang_ja">Japanska</string>
+	<string name="lang_ko">Koreanska</string>
+	<string name="lang_lv">Lettiska</string>
+	<string name="lang_lt">Litauiska</string>
+	<string name="lang_mr">Marathi</string>
+	<string name="lang_no">Norska</string>
+	<string name="lang_pl">Polska</string>
+	<string name="lang_pt">Portugisiska</string>
+	<string name="lang_ro">Rumänska</string>
+	<string name="lang_ru">Ryska</string>
+	<string name="lang_sk">Slovakiska</string>
+	<string name="lang_sl">Slovenska</string>
+	<string name="lang_es">Spanska</string>
+	<string name="lang_sv">Svenska</string>
+	<string name="lang_tr">Turkiska</string>
+	<string name="lang_uk">Ukrainska</string>
+	<string name="lang_vi">Vietnamesiska</string>
+	<string name="lang_cy">Walesiska</string>
+    <string name="index_name_italy">Europa - Italien</string>
+    <string name="index_name_gb">Europa - Storbritannien</string>
     </resources>
