@@ -480,7 +480,7 @@
 	<string name="favourites_edit_dialog_name">名稱</string>
 	<string name="favourites_edit_dialog_category">類別</string>
 	<string name="vector_map_not_needed">不需要，謝謝</string>
-	<string name="basemap_missing">缺少基本世界地圖(在小比列尺顯示，含蓋全球範圍)。請下載 World_basemap_x.obf 將軟體環境完整化。</string>
+	<string name="basemap_missing">缺少全球底圖(在小比列尺顯示，含蓋全球範圍)。請下載 World_basemap_x.obf 將軟體環境完整化。</string>
 	<string name="vector_data_missing">裝置端(\'離線\')的 SD 卡上找不到資料。欲使用離線地圖請去下載。</string>
 	<string name="local_index_gpx_info_show">\n\n按壓不放會出現選項</string>
 	<string name="local_index_gpx_info_speed">\n平均速度： %1$s \n最大速度：%2$s</string>
@@ -1554,7 +1554,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	\n\t* 支援 Full HD 裝置
 	\n\t* 直接從地圖檢視下載及概覽地區
 	\n\t* 下載特定國家的 SRTM 檔案  
-	\n\t* 全新的世界地圖與主要道路、森林和鐵路
+	\n\t* 全新的全球底圖與主要道路、森林和鐵路
 	\n\t* 地圖放大鏡 （長按縮放按鈕）- 非常好用的光柵地圖
 	\n\t* 定義/編輯線上圖磚來源 (指定失效時間)
 	\n\t* 支援時間條件速限（荷蘭）
@@ -1587,7 +1587,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t*\'高對比道路\'在明亮的環境照明情況下，非常突出的高亮顏色顯示道路
 		\n\t*\'冬季和滑雪\'建立一個（白雪覆蓋）冬季景觀視野，和顯示全球滑雪場和滑雪升降機
 	</string>
-    <string name="base_world_map">全球的基本地圖</string>
+    <string name="base_world_map">全球底圖</string>
 	
     
     
@@ -1715,4 +1715,14 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="lang_cy">威爾斯</string>
     <string name="index_name_italy">歐洲 - 意大利</string>
     <string name="index_name_gb">歐洲 - 英國</string>
+    <string name="index_item_nation_addresses">全國範圍的位址</string>
+	<string name="index_item_world_altitude_correction">全球海拔校正</string>
+	<string name="index_item_world_seamarks">全球航線標識</string>
+	<string name="index_item_world_bitcoin_payments">全球比特幣支付</string>
+	<string name="index_item_world_basemap">全球地圖總覽</string>
+    <string name="index_item_world_ski">全球滑雪地圖</string>
+    <string name="lang_hr">克羅埃西亞</string>
+    <string name="lang_zh">正體中文</string>
+    <string name="lang_pt_br">葡萄牙語(巴西)</string>
+    <string name="index_name_canada">北美洲 - 加拿大</string>
     </resources>
