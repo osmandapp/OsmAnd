@@ -1481,4 +1481,49 @@
 	\n\t* Moltes millores a la Interfície d'Usuari i correccions d'usabilitat
 	\n\t* Configuració de accessibilitat en la velocitat de pronuncia
     </string>
+    <string name="index_item_nation_addresses">adreces arreu del país</string>
+	<string name="index_item_world_altitude_correction">Correcció d'altitud mundial</string>
+	<string name="index_item_world_bitcoin_payments">Llocs amb pagament bitcoin al món</string>
+	<string name="index_item_world_basemap">Mapa genéric del món</string>
+    <string name="index_item_world_ski">Mapa d'esquí mundial</string>
+    <string name="lang_hr">Croat</string>
+    <string name="lang_zh">Xinès</string>
+    <string name="lang_pt_br">Portuguès (Brasil)</string>
+    <string name="lang_en">Anglès</string>
+	<string name="lang_af">Afrikaans</string>
+	<string name="lang_hy">Armeni</string>
+	<string name="lang_eu">Basc</string>
+	<string name="lang_be">belarús</string>
+	<string name="lang_bs">Bosni</string>
+	<string name="lang_bg">Búlgar</string>
+	<string name="lang_ca">Català</string>
+	<string name="lang_cs">Txec</string>
+	<string name="lang_da">Danès</string>
+	<string name="lang_nl">Neerlandès</string>
+	<string name="lang_fi">Finès</string>
+	<string name="lang_fr">Francès</string>
+	<string name="lang_ka">Georgià</string>
+	<string name="lang_de">Alemany</string>
+	<string name="lang_el">Grec</string>
+	<string name="lang_iw">Hebreu</string>
+	<string name="lang_hi">Hindi</string>
+	<string name="lang_hu">Hongarès</string>
+	<string name="lang_id">Indonesi</string>
+	<string name="lang_it">Italià</string>
+	<string name="lang_ja">Japonès</string>
+	<string name="lang_ko">Coreà</string>
+	<string name="lang_lv">Letò</string>
+	<string name="lang_lt">Lituà</string>
+	<string name="lang_ru">Rus</string>
+	<string name="lang_sk">Eslovac</string>
+	<string name="lang_sl">Eslovè</string>
+	<string name="lang_es">Castellà</string>
+	<string name="lang_sv">Suec</string>
+	<string name="lang_tr">Turc</string>
+	<string name="lang_uk">Ucrainès</string>
+	<string name="lang_vi">Vietnamita</string>
+	<string name="lang_cy">Gal·les</string>
+	<string name="index_name_canada">Amèrica del Nord - Canadà</string>
+    <string name="index_name_italy">Europa - Itàlia</string>
+    <string name="index_name_gb">Europa -Gran Bretanya</string>
     </resources>
