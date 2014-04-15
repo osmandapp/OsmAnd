@@ -1695,7 +1695,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="route_descr_select_on_map">Vælg på kort…</string>
     <string name="route_descr_favorite">Favorit…</string>
     <string name="keep_and_add_destination_point">Tilføj som destinationspunkt</string>
-    <string name="tip_recent_changes_1_7_1_t">Ændringer i 1.7:
+    <string name="tip_recent_changes_1_7_1_t">…Ændringer i 1.7:
 	\n\t* VIGTIGT kort skal være nyere end februar 2014.
 	\n\t* Helt ny opdateret ruteplanlægning (hurtig og præcis)-
 	\n\t* Nyt skærmbilled med ruteplanlægning (mere intuitiv og kraftfuld)
@@ -1753,4 +1753,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="lang_zh">Kinesisk</string>
     <string name="lang_pt_br">Portugisisk (Brasilien)</string>
     <string name="index_name_canada">Nordamerika - Canada</string>
-    </resources>
+    <string name="lang_hr">Kroatisk</string>
+    <string name="index_item_world_basemap">Verden oversigtskort</string>
+    <string name="index_item_world_ski">Verden skikort</string>
+    <string name="index_item_nation_addresses">Adresser på landsplan</string>
+	<string name="index_item_world_seamarks">Verden sømærker</string>
+	<string name="index_item_world_bitcoin_payments">Verden Bitcoin betalinger</string>
+	<string name="index_item_world_altitude_correction">Verden højdekorrektion</string>
+	</resources>
