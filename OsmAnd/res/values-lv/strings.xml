@@ -1552,4 +1552,22 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	\n\t* Miega režīma pieejamība navigācijas laikā
 ……
     </string>
+    <string name="index_item_nation_addresses">Adreses valsts mērogā</string>
+	<string name="index_item_world_altitude_correction">Pasaules augstuma korekcija</string>
+	<string name="index_item_world_seamarks">Pasaules kuģošanas zīmes</string>
+	<string name="index_item_world_bitcoin_payments">Pasaules bitcoin maksājumi</string>
+	<string name="index_item_world_basemap">Pasaules pamatkarte</string>
+    <string name="index_item_world_ski">Pasaules slēpošanas karte</string>
+    <string name="lang_hr">Horvātu</string>
+    <string name="lang_zh">Ķīniešu</string>
+    <string name="lang_pt_br">Portugāļu (Brazīlija)</string>
+    <string name="index_name_canada">Ziemeļamerika - Kanāda</string>
+    <string name="tip_recent_changes_1_5_t">Izmaiņas uz 1.5:
+	\n\t* Balss brīdinājumi par ātruma ierobežojumiem un fotokamerām
+	\n\t* Vēl vairāk balss iespējas (ielu nosaukumu teikšana)
+	\n\t* Augstas izšķirtspējas karšu ikonas
+	\n\t* Daudzas izmaiņas lietotāja saskarmē
+	\n\t* Novērstas kļūdas attāluma parādīšanā, GPX  analizatorā, ceļapunktu apstrādē, OSM augšupielādē, https apstrādē
+……
+    </string>
     </resources>
