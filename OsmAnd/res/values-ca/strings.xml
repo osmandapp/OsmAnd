@@ -1526,4 +1526,18 @@
 	<string name="index_name_canada">Amèrica del Nord - Canadà</string>
     <string name="index_name_italy">Europa - Itàlia</string>
     <string name="index_name_gb">Europa -Gran Bretanya</string>
-    </resources>
+    <string name="index_item_world_seamarks">Balises marítimes</string>
+	<string name="lang_mr">Marathi</string>
+	<string name="lang_no">Noruec</string>
+	<string name="lang_pl">Polonès</string>
+	<string name="lang_pt">Portugès</string>
+	<string name="lang_ro">Romanès</string>
+	<string name="tip_recent_changes_0_6_6_t">Darrers canvis a 0.6.6: 
+		\n\t- Motor de síntesi de veu en la navegació
+		\n\t- Dibuix de mapes més detallat
+		\n\t- Mapa base mundial inclòs amb l'aplicació
+		\n\t- Ajust en navegació sense connexió  (encara experimental)
+		\n\t- Opcions de navegació amb traces GPX
+		\n\t- Interfície millorada i forces errors corregits
+	</string>
+	</resources>
