@@ -1723,4 +1723,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="lang_cy">Valų</string>
     <string name="index_name_italy">Europa - Italija</string>
     <string name="index_name_gb">Europa - Didžioji Britanija</string>
-    </resources>
+    <string name="index_item_nation_addresses">adresai šalies mastu</string>
+	</resources>
