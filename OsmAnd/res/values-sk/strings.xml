@@ -1695,4 +1695,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="lang_sk">Slovenský</string>
 	<string name="lang_uk">Ukrajinský</string>
 	<string name="index_name_italy">Európa - Taliansko</string>
+    <string name="index_item_nation_addresses">národné adresy</string>
+	<string name="index_item_world_altitude_correction">Svetové korekcie nadmorskej výšky</string>
+	<string name="index_item_world_seamarks">Svetové námorné značky</string>
+	<string name="index_item_world_bitcoin_payments">Svetové platby bitcoinom</string>
+	<string name="index_item_world_basemap">Svetová základná mapa</string>
+    <string name="index_item_world_ski">Svetová lyžiarska mapa</string>
+    <string name="lang_hr">Chorvátsky</string>
+    <string name="lang_zh">Čínsky</string>
+    <string name="index_name_canada">Severná amerika - Kanada</string>
     </resources>
