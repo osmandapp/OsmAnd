@@ -1063,7 +1063,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="add_as_last_destination_point">Añadir como último punto de ruta</string>
     <string name="add_as_first_destination_point">Añadir como primer punto de ruta</string>
     <string name="replace_destination_point">Sustituir punto de destino</string>
-    <string name="new_destination_point_dialog">Ya has fijado el punto de destino.</string>
+    <string name="new_destination_point_dialog">Ya ha fijado el punto de destino.</string>
     <string name="target_point">Punto de ruta %1$s</string>
     <string name="target_points">Puntos de ruta</string>
     <string name="intermediate_point_too_far">Punto de ruta %1$s demasiado lejos de la carretera más cercana.</string>
@@ -1138,7 +1138,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">La localización para asociar la nota no está definida aún. \"Usar localización…\" para asignar una nota a la localización indicada</string>
-    <string name="monitoring_control_stop">para</string>
+    <string name="monitoring_control_stop">Parar</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     
     <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Para del mecanismo.</string>
@@ -1152,8 +1152,8 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="recording_context_menu_delete">Eliminar grabación</string>
     <string name="recording_context_menu_play">Reproducir</string>
     <string name="recording_default_name">grabación</string>
-    <string name="av_control_stop">para</string>
-    <string name="av_control_start">A/V</string>
+    <string name="av_control_stop">Parar</string>
+    <string name="av_control_start">Iniciar</string>
     <string name="map_widget_av_notes">Notas de audio</string>
     <string name="av_def_action_video">Grabar vídeo</string>
     <string name="av_def_action_audio">Grabar audio</string>
@@ -1407,7 +1407,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="local_index_tile_data_expire">Expirar (minutos): %1$s</string>
     <string name="about_settings">Acerca de</string>
     <string name="about_settings_descr">Información de la versión, licencias, miembros del proyecto</string>
-    <string name="edit_tilesource_choose_existing">Elegir existente...</string>
+    <string name="edit_tilesource_choose_existing">Elegir existente…</string>
     <string name="tip_map_styles">Estilos de Mapa</string>
 	<string name="tip_map_styles_t">OsmAnd permite visualizar los mapas vectoriales sin conexión en diferentes estilos de mapas para adaptarlos a tus necesidades:
 		\n\n Además del estilo de mapa equilibrado \"Por defecto\", en \'Menú\' → \'Configura pantalla\' → \ \'Estilo de dibujado\' puedes seleccionar por ejemplo
@@ -1558,10 +1558,10 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="routing_attr_avoid_ferries_description">Evita usar transbordadores</string>
 	<string name="routing_attr_avoid_motorway_name">Evitar autopistas</string>
 	<string name="routing_attr_avoid_motorway_description">Evita autopistas</string>
-	<string name="routing_attr_weight_name">Peso</string>
-	<string name="routing_attr_weight_description">Indica limitación de peso</string>
-    <string name="android_19_location_disabled">Desde la versión Android KitKat (4.4), no puedes descargar ni actualizar el mapa en el anterior lugar de almacenamiento (%s). ¿Quieres cambiar para permitir una nueva y copiar todos los archivos allí?
-        \n Nota : los antiguos archivos permanecerán intactos. 
+	<string name="routing_attr_weight_name">Peso máximo</string>
+	<string name="routing_attr_weight_description">Indica limitación de peso del vehículo</string>
+    <string name="android_19_location_disabled">Desde la versión Android KitKat (4.4), no puede descargar ni actualizar el mapa en el anterior lugar de almacenamiento (%s). ¿Quiere cambiar a una nueva localización permitida y copiar todos los archivos allí?
+        \n Nota : los archivos antiguos permanecerán intactos. 
         \n Nota : no será posible compartir archivos entre OsmAnd y OsmAnd+. </string>
     <string name="use_displayed_track_for_navigation">¿Desea usar la ruta mostrada para la navegación?</string>
     <string name="keep_and_add_destination_point">Añadir como punto de destino</string>
@@ -1626,4 +1626,14 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="lang_cy">Galés</string>
     <string name="index_name_italy">Europa - Italia</string>
     <string name="index_name_gb">Europa - Gran Bretaña</string>
+    <string name="index_item_nation_addresses">direcciones nacionales</string>
+	<string name="index_item_world_altitude_correction">Correcciones mundiales de altitud</string>
+	<string name="index_item_world_seamarks">Balizas mundiales</string>
+	<string name="index_item_world_bitcoin_payments">Pagos bitcoin mundiales</string>
+	<string name="index_item_world_basemap">Mapa mundial general</string>
+    <string name="index_item_world_ski">Mapa de ski mundial</string>
+    <string name="lang_hr">Croata</string>
+    <string name="lang_zh">Chino</string>
+    <string name="lang_pt_br">Portugués (Brasíl)</string>
+    <string name="index_name_canada">Norte América - Canadá</string>
     </resources>
