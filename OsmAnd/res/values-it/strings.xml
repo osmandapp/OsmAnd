@@ -893,7 +893,7 @@ Dati attualmente nel dispositivo (%1$s liberi):</string>
   <string name="index_name_oceania">Oceania</string>
   <string name="index_name_other">Mappe mondiali e di base</string>
   <string name="index_name_wiki">Wikipedia mondiale</string>
-  <string name="index_name_voice">Pacchetti voce(registrati, funzionalità limitate)</string>
+  <string name="index_name_voice">Pacchetti voce (registrati, funzionalità limitate)</string>
   <string name="index_name_tts_voice">Pacchetti voce (TTS-sintetizzati, preferibile)</string>
   <string name="favourites_edit_dialog_name">Nome</string>
   <string name="favourites_edit_dialog_category">Categoria</string>
@@ -1740,7 +1740,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_pt_br">Portoghese (Brasile)</string>
     <string name="index_name_canada">Americano - Canada</string>
     <string name="index_item_nation_addresses">indirizzi nazionali</string>
-	<string name="index_item_world_altitude_correction">Correzzione altitudine mondiale</string>
+	<string name="index_item_world_altitude_correction">Correzione altitudine mondiale</string>
 	<string name="index_item_world_seamarks">Boe mondiali</string>
 	<string name="index_item_world_bitcoin_payments">Pagameti bitcoin mondiale</string>
 	<string name="index_item_world_basemap">Mappa mondiale generale</string>
