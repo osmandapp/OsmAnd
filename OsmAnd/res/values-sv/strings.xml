@@ -1436,4 +1436,11 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="lang_pt_br">Portugisiska (Brasilien)</string>
     <string name="index_name_canada">Nordamerika - Kanada</string>
     <string name="app_modes_choose_descr">Välj tillgängliga användarprofilerna</string>
+    <string name="index_item_nation_addresses">adresser (hela nationen)</string>
+	<string name="index_item_world_altitude_correction">Rättning av höjd (världen)</string>
+	<string name="index_item_world_seamarks">Sjömärken (världen)</string>
+	<string name="index_item_world_bitcoin_payments">Bitcoinbetalningar (världen)</string>
+	<string name="index_item_world_basemap">Översiktskarta (världen)</string>
+    <string name="index_item_world_ski">Skidkarta (världen)</string>
+    <string name="lang_hr">Kroatiska</string>
     </resources>
