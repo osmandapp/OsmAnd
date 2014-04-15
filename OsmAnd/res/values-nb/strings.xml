@@ -71,7 +71,7 @@
 	<string name="map_widget_right_stack">Høyre panel:</string>
 	<string name="map_widget_left_stack">Venstre panel:</string>
 	<string name="map_widget_parking">Parkering</string>
-	<string name="map_widget_monitoring">Sporing</string>
+	<string name="map_widget_monitoring">GPX-opptak</string>
 	<string name="map_widget_speed">Hastighet</string>
 	<string name="map_widget_distance">Mål</string>
 	<string name="map_widget_altitude">Høyde</string>
@@ -96,7 +96,7 @@
 	<string name="rendering_attr_contourLines_name">Vis koter</string>
 	<string name="rendering_attr_hmRendered_description">Øk mengden av kartdetaljer vist</string>
 	<string name="rendering_attr_hmRendered_name">Vis flere kartdetaljer</string>
-	<string name="local_index_routing_data">Navigeringsdata</string>
+	<string name="local_index_routing_data">Ruteplanleggingsdata</string>
 	<string name="navigate_point_format">Format:</string>
 	<string name="poi_search_desc">Interessepunktsøk</string>
 	<string name="address_search_desc">Adressesøk</string>
@@ -216,9 +216,9 @@
 	<string name="routing_settings">Navigering</string>
 	<string name="routing_settings_descr">Spesifiser navigeringsalternativer</string>
 	<string name="global_settings">Globale innstillinger</string>
-	<string name="index_settings">Offline-data (Last ned)</string>
-	<string name="general_settings">Generelle innstillinger</string>
-	<string name="general_settings_descr">Still inn globale innstillinger</string>
+	<string name="index_settings">Databehandling</string>
+	<string name="general_settings">Generelt</string>
+	<string name="general_settings_descr">Still inn visning og generelle programinnstillinger</string>
 	<string name="global_app_settings">Globale programinnstillinger</string>
 	<string name="tip_rotation_switching">Kartorientering</string>
 	<string name="tip_rotation_switching_t_v2">\tDu kan velge hvordan kartvisningen roteres ved å gjentatte ganger klikke på kompassikonet.
@@ -252,8 +252,8 @@
 	<string name="city_type_town">By</string>
 	<string name="city_type_city">By</string>
 	<string name="layer_poi_label">Interessepunkt-påskrifter</string>
-	<string name="animate_route_off">Stopp animasjon</string>
-	<string name="animate_route">Start animasjon</string>
+	<string name="animate_route_off">Stopp simulering</string>
+	<string name="animate_route">Start simulering</string>
 	<string name="file_can_not_be_renamed">Fil kan ikke endre navn.</string>
 	<string name="file_with_name_already_exists">Fil med dette navnet finnes allerede.</string>
 	<string name="gpx_navigation">GPX-rute</string>
@@ -291,10 +291,10 @@
 	<string name="favorite_default_category">Andre</string>
 	<string name="favourites_edit_dialog_name">Navn</string>
 	<string name="favourites_edit_dialog_category">Kategori</string>
-	<string name="vector_map_not_needed">Ikke nødvendig</string>
+	<string name="vector_map_not_needed">Nei takk</string>
 	<string name="basemap_missing">Basis-verdenskart (som dekker hele verden ved lav zoom) mangler. Vurder å laste ned World_basemap_x.obf for et komplett miljø.</string>
 	<string name="local_index_gpx_info_show">\n\nTrykk og hold for alternativer</string>
-	<string name="local_index_descr_title">Offline data-behandler</string>
+	<string name="local_index_descr_title">Databehandling</string>
 	<string name="local_index_mi_restore">Aktiver</string>
 	<string name="local_index_mi_backup">Deaktiver</string>
 	<string name="local_index_mi_delete">Slett</string>
