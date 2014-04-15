@@ -401,7 +401,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="choose_auto_follow_route">Auto-centrerad kartvy</string>
 <string name="choose_auto_follow_route_descr">Tid tills kartvyn synkroniseras med aktuell position</string>
 <string name="auto_follow_route_never">Aldrig</string>
-<string name="auto_follow_route_navigation">Auto-centrera endast nav.</string>
+<string name="auto_follow_route_navigation">Auto-centrera endast nav</string>
 <string name="auto_follow_route_navigation_descr">Auto-centrera kartan endast vid navigering.</string>
 <string name="auto_follow_location_enabled">Auto-centrera aktuell kartvy.</string>
 <string name="pref_vector_rendering">Alternativ specifika för vektorrenderaren</string>
@@ -626,11 +626,11 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="replace_destination_point">Byt destination</string>
     <string name="new_destination_point_dialog">Du har redan en inställd destination.</string>
     <string name="target_point">Waypoint %1$s</string>
-    <string name="target_points">Waypoints</string>
+    <string name="target_points">Vägpunkter</string>
     <string name="intermediate_point_too_far">Waypointen %1$s för långt från närmaste väg.</string>
     <string name="arrived_at_intermediate_point">Du har anlänt till din waypoint</string>
     <string name="context_menu_item_intermediate_point">Lägg till som waypoint</string>
-    <string name="map_widget_intermediate_distance">Waypoint</string>
+    <string name="map_widget_intermediate_distance">Vägpunkt</string>
     <string name="ending_point_too_far">Slutpunkten för långt från närmaste väg.</string>
     <string name="btn_add_tag">Lägg till tagg</string>
     <string name="btn_advanced_mode">Avancerat läge…</string>
@@ -668,7 +668,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="select_all">Markera alla</string>
 	<string name="reload">Uppdatera</string>
 	<string name="fast_route_mode">Snabbaste vägen</string>
-	<string name="fast_route_mode_descr">Aktivera för att beräkna den snabbaste vägen eller inaktivera för den kortaste vägen</string>
+	<string name="fast_route_mode_descr">Aktivera för att beräkna den snabbaste vägen eller inaktivera för den kortaste vägen </string>
 	<string name="tiles_to_download_estimated_size">Vid zoom {0} hämta {1} kartbitar ({2} MB)</string>
 	<string name="context_menu_item_download_map">Ladda ner karta</string>
 	<string name="poi_filter_sightseeing">Sevärdheter</string>
@@ -973,7 +973,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="tip_recent_changes_1_1_0_t">Förändringar i 1.1.0:
 \n\t* Plugin för beräkning av avstånd\n\t* Plugin för ljud-/videoanteckningar\n\t* Plugin för höjdkurvor\n\t* Buggfixar
 \n\t* \'Touring View\' - kartutseende med mer kartdetaljer, nytt utseende för vägar, mer kontrast och fjällvandringsalternativ (SAC-skala)
-\n\t* EGM96 geoid offsetkorrigering för GPS-höjdavläsningar</string>
+\n\t* EGM96 geoid offsetkorrigering för GPS-höjdavläsningar
+    </string>
     
     
     
@@ -1009,12 +1010,12 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="av_use_external_recorder_descr">Använd systemets inspelare för video</string>
     <string name="av_use_external_recorder">Använd systemets inspelare</string>
     <string name="av_settings_descr">Konfigurera inställningar för ljud och video</string>
-    <string name="av_settings">Inställningar för ljud och video</string>
-    <string name="recording_error">"Ett fel uppstod under inspelningen "</string>
+    <string name="av_settings">Inställningar för ljud och video </string>
+    <string name="recording_error">Ett fel uppstod under inspelningen </string>
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
     <string name="srtm_plugin_description">Denna plugin gör det lättare att hämta höjdkurvor (Inställningar -&gt; Datahantering -&gt; Hämtning -&gt; Välj önskad karttyp).</string>
     <string name="delete_target_point">Ta bort waypoint</string>
-	<string name="intermediate_point">Waypoint %1$s</string>
+	<string name="intermediate_point">Vägpunkt %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="local_index_descr_title">Datahantering</string>
 	<string name="incomplete_locale">ofullständig</string>
@@ -1112,7 +1113,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="support_new_features_descr">Skänk lite pengar så att nya funktioner kan läggas till i appen</string>
 	<string name="download_hillshade_item">"Skuggad relief "</string>
     <string name="download_hillshade_maps">Skuggad relief-överlägg</string>
-    <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)\n\t* Fixat till höjdkurvs-pluginen\n\t* Skuggad relief-paket för höjdkurvs-pluginen\n\t* Buggfixar (suboptimal ruttning) "</string>
+    <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)\n\t* Fixat till höjdkurvs-pluginen\n\t* Skuggad relief-paket för höjdkurvs-pluginen\n\t* Buggfixar (suboptimal ruttning)
+    </string>
     <string name="av_use_external_camera_descr">Andvänd systemets app för foton</string>
     <string name="av_use_external_camera">Använd kamera-app</string>
     <string name="av_control_start">Starta</string>
@@ -1182,7 +1184,10 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="default_buttons_other_actions">Andra åtgärder</string>
     <string name="save_current_track_widget">Spara
     \n aktuellt GPX-spår</string>
-	<string name="tip_recent_changes_1_1_4_t">"Förändringar i 1.1.4: ↵\n→* Nytt gränssnitt↵\n→* Buggfixar  "</string>
+	<string name="tip_recent_changes_1_1_4_t">"Förändringar i 1.1.4:
+	\n\t* Nytt gränssnitt
+	\n\t* Buggfixar
+    </string>
     <string name="local_indexes_cat_srtm">Höjdkurvsdata</string>
     <string name="route_head">Riktning</string>
 	<string name="wait_current_task_finished">Vänta tills aktuell uppgift är slutförd</string>
