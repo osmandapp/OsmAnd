@@ -1689,4 +1689,12 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="index_name_gb">Europa - Wielka Brytania</string>
     <string name="lang_zh">Chiński</string>
     <string name="lang_hr">Chorwacki</string>
+    <string name="index_item_world_altitude_correction">Korekcja wysokości świata</string>
+	<string name="index_item_world_seamarks">Morskie znaki orientacyjne</string>
+	<string name="index_item_world_bitcoin_payments">Miejsca akceptujące płatności Bitcoin</string>
+	<string name="lang_pt_br">Portugalski (Brazylia)</string>
+    <string name="index_name_canada">Ameryka Północna - Kanada</string>
+    <string name="index_item_nation_addresses">Międzynarodowe adresy</string>
+	<string name="index_item_world_basemap">Ogólna mapa świata</string>
+    <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
     </resources>
