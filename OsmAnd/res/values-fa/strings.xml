@@ -1677,4 +1677,55 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     </string>
     <string name="calculate_osmand_route_without_internet">محاسبه مسیر اسمند بدون کمک از اینترنت</string>
     <string name="gpx_option_calculate_first_last_segment">محاسبه اسمند برای مبدا و مقصد مسیر</string>
+    <string name="index_item_nation_addresses">نشانی های سراسر کشور</string>
+	<string name="index_item_world_altitude_correction">اصلاح ارتفاع جهانی</string>
+	<string name="index_item_world_seamarks">علامت های دریایی جهان</string>
+	<string name="index_item_world_bitcoin_payments">پرداخت هزینه جهانی</string>
+	<string name="index_item_world_basemap">نقشه کلی جهانی</string>
+    <string name="index_item_world_ski">نقشه های اسکی جهان</string>
+    <string name="lang_hr">کرواسی</string>
+    <string name="lang_zh">چینی</string>
+    <string name="lang_pt_br">پرتغالی (برزیل)</string>
+    <string name="lang_en">انگلیسی</string>
+	<string name="lang_af">آفریقایی</string>
+	<string name="lang_hy">ارمنی</string>
+	<string name="lang_eu">باسکی</string>
+	<string name="lang_be">بلاروسی</string>
+	<string name="lang_bs">بوسنیایی</string>
+	<string name="lang_bg">بلغاری</string>
+	<string name="lang_ca">کاتالان</string>
+	<string name="lang_cs">چک</string>
+	<string name="lang_da">دانمارکی</string>
+	<string name="lang_nl">هلندی</string>
+	<string name="lang_fi">فنلاندی</string>
+	<string name="lang_fr">فرانسه</string>
+	<string name="lang_ka">گرجی</string>
+	<string name="lang_de">آلمانی</string>
+	<string name="lang_el">یونانی</string>
+	<string name="lang_iw">عبری</string>
+	<string name="lang_hi">هندی</string>
+	<string name="lang_hu">مجارستانی</string>
+	<string name="lang_id">اندونزی</string>
+	<string name="lang_it">ایتالیایی</string>
+	<string name="lang_ja">ژاپنی</string>
+	<string name="lang_ko">کره ای</string>
+	<string name="lang_lv">لتونی</string>
+	<string name="lang_lt">لیتوانی</string>
+	<string name="lang_mr">مراتی (شاخه ای از هندی)</string>
+	<string name="lang_no">نروژی</string>
+	<string name="lang_pl">لهستانی</string>
+	<string name="lang_pt">پرتغالی</string>
+	<string name="lang_ro">رومانیایی</string>
+	<string name="lang_ru">روسی</string>
+	<string name="lang_sk">اسلواکی</string>
+	<string name="lang_sl">اسلوونی</string>
+	<string name="lang_es">اسپانیایی</string>
+	<string name="lang_sv">سوئدی</string>
+	<string name="lang_tr">ترکی</string>
+	<string name="lang_uk">اوکراینی</string>
+	<string name="lang_vi">ویتنامی</string>
+	<string name="lang_cy">والش</string>
+	<string name="index_name_canada">شمال امریکا - کانادا</string>
+    <string name="index_name_italy">اروپا - ایتالیا</string>
+    <string name="index_name_gb">اروپا - بریتانیا</string>
     </resources>
