@@ -135,9 +135,6 @@ public class OsmandSettings {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
 	}
 	
-	public Object getGlobalPreferences(){
-		return settingsAPI.getPreferenceObject(getSharedPreferencesName(null));
-	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<ApplicationMode> APPLICATION_MODE = new PreferenceWithListener<ApplicationMode>(){

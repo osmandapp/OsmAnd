@@ -20,6 +20,7 @@ import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmodroid.OsMoDroidPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.sherpafy.SherpafyPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 import org.apache.commons.logging.Log;
@@ -34,6 +35,7 @@ public abstract class OsmandPlugin {
 	private static List<OsmandPlugin> activePlugins = new ArrayList<OsmandPlugin>();
 	private static final Log LOG = PlatformUtil.getLog(OsmandPlugin.class);
 	
+	private static final String SHERPAFY_PLUGIN_COMPONENT = "net.osmand.sherpafy"; //$NON-NLS-1$
 	private static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
 	private static final String SRTM_PLUGIN_COMPONENT_PAID = "net.osmand.srtmPlugin.paid"; //$NON-NLS-1$
 	private static final String SRTM_PLUGIN_COMPONENT = "net.osmand.srtmPlugin"; //$NON-NLS-1$
@@ -62,6 +64,7 @@ public abstract class OsmandPlugin {
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		OsmandRasterMapsPlugin rasterMapsPlugin = new OsmandRasterMapsPlugin(app);
+		installPlugin(SHERPAFY_PLUGIN_COMPONENT, SherpafyPlugin.ID, app, new SherpafyPlugin(app));
 		installedPlugins.add(rasterMapsPlugin);
 		installedPlugins.add(new OsmandMonitoringPlugin(app));
 		installedPlugins.add(new AccessibilityPlugin(app));
@@ -112,7 +115,7 @@ public abstract class OsmandPlugin {
 	 * Register layers calls when activity is created and before @mapActivityCreate
 	 * @param activity
 	 */
-	public abstract void registerLayers(MapActivity activity);
+	public void registerLayers(MapActivity activity)  { }
 
 	public void mapActivityCreate(MapActivity activity) { }
 	
