@@ -23,13 +23,10 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.LiveMonitoringHelper;
-import net.osmand.plus.activities.OsmandIntents;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
-import net.osmand.plus.api.SettingsAPI;
-import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -635,7 +632,8 @@ public class OsmandApplication extends Application {
 		public DefaultExceptionHandler() {
 			defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 			intent = PendingIntent.getActivity(OsmandApplication.this.getBaseContext(), 0,
-					new Intent(OsmandApplication.this.getBaseContext(), OsmandIntents.getMainMenuActivity()), 0);
+					new Intent(OsmandApplication.this.getBaseContext(),
+							getAppCustomization().getMainMenuActivity()), 0);
 		}
 
 		@Override

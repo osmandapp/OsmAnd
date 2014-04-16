@@ -60,10 +60,12 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				<LinearLayout android:id="@+id/FavoritesButton" android:background="@drawable/bg_left" 
 				android:layout_weight="1" android:layout_height="112dp" android:focusable="true" android:clickable="true">
 					<TextView android:layout_height="wrap_content" android:layout_width="0dp"
+					android:id="@+id/FavoritesButtonText"
 					android:layout_marginLeft="15dp" android:layout_gravity="center_vertical|left"
 					android:text="@string/favorites_Button" android:textColor="#000000" android:typeface="serif"
 					android:layout_weight="1" android:textSize="16sp"/>
 	 				<ImageView
+	 				android:id="@+id/FavoritesButtonImage"
 					android:src="@drawable/button_icon_favorites"
 					android:layout_gravity="center|right"
 					android:layout_width="wrap_content"
@@ -73,11 +75,13 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				<LinearLayout android:id="@+id/SettingsButton" android:background="@drawable/bg_right" 
 				android:layout_weight="1" android:layout_height="112dp" android:focusable="true" android:clickable="true">
 					<ImageView
+					android:id="@+id/SettingsButtonImage" 
 					android:src="@drawable/button_icon_settings"
 					android:layout_gravity="center|left"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"/>
 					<TextView android:layout_height="wrap_content" android:layout_width="0dp"
+					android:id="@+id/SettingsButtonText" 
 					android:layout_gravity="center_vertical|right"
 					android:layout_weight="1"
 					android:layout_marginRight="15dp"

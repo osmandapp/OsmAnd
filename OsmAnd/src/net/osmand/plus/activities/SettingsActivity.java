@@ -99,9 +99,9 @@ public class SettingsActivity extends SettingsBaseActivity {
 				}
 			}
 			if (empty) {
-				startActivity(new Intent(this, OsmandIntents.getDownloadIndexActivity()));
+				startActivity(new Intent(this, getMyApplication().getAppCustomization().getDownloadIndexActivity()));
 			} else {
-				startActivity(new Intent(this, OsmandIntents.getLocalIndexActivity()));
+				startActivity(new Intent(this, getMyApplication().getAppCustomization().getLocalIndexActivity()));
 			}
 			return true;
 		} else if (preference == bidforfix) {
@@ -116,7 +116,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 			showAboutDialog();
 			return true;
 		} else if (preference == plugins) {
-			startActivityForResult(new Intent(this, OsmandIntents.getPluginsActivity()), PLUGINS_SELECTION_REQUEST);
+			startActivityForResult(new Intent(this, getMyApplication().getAppCustomization().getPluginsActivity()), PLUGINS_SELECTION_REQUEST);
 			return true;
 		} else {
 			super.onPreferenceClick(preference);

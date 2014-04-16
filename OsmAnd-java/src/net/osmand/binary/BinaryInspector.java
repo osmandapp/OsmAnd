@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -62,6 +63,7 @@ public class BinaryInspector {
 				//"-zoom=16",
 				//"-bbox=4,55,7,50", 
 				//"/home/victor/projects/osmand/osm-gen/Map.obf"
+				// "/home/victor/projects/osmand/osm-gen/Russia_bashkiria_asia_2.obf"
 					});
 		} else {
 			in.inspector(args);
@@ -422,7 +424,7 @@ public class BinaryInspector {
 		try {
 			BinaryMapIndexReader index = new BinaryMapIndexReader(r);
 			int i = 1;
-			println("Binary index " + filename + " version = " + index.getVersion());
+			println("Binary index " + filename + " version = " + index.getVersion() +" edition = " + new Date(index.getDateCreated()));
 			for(BinaryIndexPart p : index.getIndexes()){
 				String partname = "";
 				if(p instanceof MapIndex ){

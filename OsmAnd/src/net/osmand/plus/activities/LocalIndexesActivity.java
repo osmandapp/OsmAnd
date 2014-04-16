@@ -129,8 +129,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	}
 	
 	
-	
-	
 	private void showContextMenu(final LocalIndexInfo info) {
 		Builder builder = new AlertDialog.Builder(this);
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(this);

@@ -200,7 +200,7 @@ public class MainMenuActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.menu);
 		
-		OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
+		final OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
 		
 		onCreateMainMenu(getWindow(), this);
 
@@ -210,7 +210,7 @@ public class MainMenuActivity extends Activity {
 		showMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent mapIndent = new Intent(activity, OsmandIntents.getMapActivity());
+				final Intent mapIndent = new Intent(activity, appCustomization.getMapActivity());
 				activity.startActivityForResult(mapIndent, 0);
 			}
 		});
@@ -218,7 +218,7 @@ public class MainMenuActivity extends Activity {
 		settingsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(activity, OsmandIntents.getSettingsActivity());
+				final Intent settings = new Intent(activity, appCustomization.getSettingsActivity());
 				activity.startActivity(settings);
 			}
 		});
@@ -227,7 +227,7 @@ public class MainMenuActivity extends Activity {
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent favorites = new Intent(activity, OsmandIntents.getFavoritesActivity());
+				final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(favorites);
 			}
@@ -244,12 +244,12 @@ public class MainMenuActivity extends Activity {
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent search = new Intent(activity, OsmandIntents.getSearchActivity());
+				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
 				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(search);
 			}
 		});
-		appCustomization.customizeMainMenu(window);
+		appCustomization.customizeMainMenu(window, this);
 		if(exit){
 			getMyApplication().closeApplication(activity);
 			return;
@@ -257,7 +257,7 @@ public class MainMenuActivity extends Activity {
 		OsmandApplication app = getMyApplication();
 		// restore follow route mode
 		if(app.getSettings().FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()){
-			final Intent mapIndent = new Intent(this, OsmandIntents.getMapActivity());
+			final Intent mapIndent = new Intent(this, appCustomization.getMapActivity());
 			startActivityForResult(mapIndent, 0);
 			return;
 		}
@@ -336,7 +336,7 @@ public class MainMenuActivity extends Activity {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					startActivity(new Intent(MainMenuActivity.this, OsmandIntents.getDownloadIndexActivity()));
+					startActivity(new Intent(MainMenuActivity.this, getMyApplication().getAppCustomization().getDownloadIndexActivity()));
 				}
 
 			});
@@ -409,6 +409,7 @@ public class MainMenuActivity extends Activity {
 		final View menuView = (View) a.getLayoutInflater().inflate(R.layout.menu, null);
 		menuView.setBackgroundColor(Color.argb(200, 150, 150, 150));
 		dlg.setContentView(menuView);
+		final OsmAndAppCustomization appCustomization = ((OsmandApplication) a.getApplication()).getAppCustomization();
 		MainMenuActivity.onCreateMainMenu(dlg.getWindow(), a);
 		Animation anim = new Animation() {
 			@Override
@@ -432,7 +433,7 @@ public class MainMenuActivity extends Activity {
 		settingsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(a, OsmandIntents.getSettingsActivity());
+				final Intent settings = new Intent(a, appCustomization.getSettingsActivity());
 				a.startActivity(settings);
 				dlg.dismiss();
 			}
@@ -442,7 +443,7 @@ public class MainMenuActivity extends Activity {
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent favorites = new Intent(a, OsmandIntents.getFavoritesActivity());
+				final Intent favorites = new Intent(a, appCustomization.getFavoritesActivity());
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				a.startActivity(favorites);
 				dlg.dismiss();
@@ -455,7 +456,7 @@ public class MainMenuActivity extends Activity {
 			public void onClick(View v) {
 				dlg.dismiss();
 				// 1. Work for almost all cases when user open apps from main menu
-				Intent newIntent = new Intent(a, OsmandIntents.getMainMenuActivity());
+				Intent newIntent = new Intent(a, appCustomization.getMainMenuActivity());
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY, MainMenuActivity.APP_EXIT_CODE);
 				a.startActivity(newIntent);
@@ -472,7 +473,7 @@ public class MainMenuActivity extends Activity {
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent search = new Intent(a, OsmandIntents.getSearchActivity());
+				final Intent search = new Intent(a, appCustomization.getSearchActivity());
 				LatLon loc = searchLocation;
 				search.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 				search.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());

@@ -8,8 +8,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
+import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.api.FileSettingsAPIImpl;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -59,13 +63,26 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 	
 	@Override
-	public void customizeMainMenu(Window window) {
+	public void customizeMainMenu(Window window, final Activity activity) {
 		// Update app name
 		TextView v =  (TextView) window.findViewById(R.id.AppName);
 		v.setText("Sherpafy");
 		
-		TextView toursButton = (TextView) window.findViewById(R.id.SettingsButtonText);
-		toursButton.setText(R.string.tour);
-		// the image could be updated
+		TextView toursButtonText = (TextView) window.findViewById(R.id.SettingsButtonText);
+		toursButtonText.setText(R.string.tour);
+		View toursButton = window.findViewById(R.id.SearchButton);
+		toursButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final Intent search = new Intent(activity, getTourSelectionActivity());
+				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				activity.startActivity(search);
+			}
+		});
+		// the image could be also updated
+	}
+	
+	private Class<?> getTourSelectionActivity() {
+		return MainMenuActivity.class;
 	}
 }
