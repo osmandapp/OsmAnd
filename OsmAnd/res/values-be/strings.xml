@@ -1,18 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
-    <!--
-    	 Disclaimer: 
-         If you are going to translate strings, please make sure: 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting English translations make sure:
-         3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
-    <string name="auto_zoom_none">No auto zoom</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
     <string name="auto_zoom_close">Зачыніць</string>
     <string name="auto_zoom_far">To mid-range</string>
     <string name="auto_zoom_farthest">To long-range</string>
-    <string name="map_magnifier">Map magnifier</string>
+    <string name="map_magnifier">Лупа мапы</string>
     <string name="base_world_map">Асноўная мапа сьвету</string>
     <string name="about_version">Версія:</string>
     <string name="about_settings">Аб праграме</string>
@@ -165,19 +156,19 @@
     <string name="srtm_paid_version_msg">Please consider to buy the Contour lines plugin in the Market to support further development.</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="av_def_action_choose">Select on request</string>
-    <string name="av_def_action_video">Record video</string>
-    <string name="av_def_action_audio">Record audio</string>
+    <string name="av_def_action_video">Запіс відэа</string>
+    <string name="av_def_action_audio">Запіс аўдыё</string>
     <string name="av_widget_action_descr">Select default widget action</string>
     <string name="av_widget_action">Default widget action</string>
-    <string name="av_video_format_descr">Select video output format</string>
+    <string name="av_video_format_descr">Выбар выхаднога фармату відэа</string>
     <string name="av_video_format">Video output format</string>
-    <string name="av_use_external_recorder_descr">Use system recorder for video</string>
+    <string name="av_use_external_recorder_descr">Выкарыстоўваць сістэмны рэкордэр для відэа</string>
     <string name="av_use_external_recorder">Use system recorder</string>
     <string name="av_use_external_camera_descr">Use system application for photo</string>
     <string name="av_use_external_camera">Use camera app</string>
     <string name="av_settings_descr">Configure audio and video settings</string>
-    <string name="av_settings">Audio/video settings </string>
-    <string name="recording_error">Error occurred while recording </string>
+    <string name="av_settings">Налады аўдыё і відэа </string>
+    <string name="recording_error">Адбылася памылка падчас запісу </string>
     <string name="recording_camera_not_available">Няма камэры</string>
     <string name="recording_is_recorded">Audio/video is being recorded. To stop it press the AV widget.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
@@ -1539,4 +1530,80 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* \'Высокая кантраснасьць дарог\' показвае дарогі вельмі адметнымі колерамі, каб яны былі заўважныя нават у сонечны дзень ці пры надта яркім асьвятленьні
 		\n\t* \'Зімовы ды гарналыжны\' стварае зімові выгляд (усё пакрыта сьнегам), а таксама показвае асноўныя гарналыжныя спускі і пад`ёмнікі (калі сьцягнута мапа \'World ski\')
 	</string>
-</resources>
+<string name="lang_hr">харвацкая</string>
+    <string name="lang_zh">кітайская</string>
+    <string name="lang_pt_br">партугальская (Бразілія)</string>
+    <string name="lang_en">англійская</string>
+	<string name="lang_af">афрыкаанс</string>
+	<string name="lang_hy">армянская</string>
+	<string name="lang_eu">баскская</string>
+	<string name="lang_be">беларуская</string>
+	<string name="lang_bs">баснійская</string>
+	<string name="lang_bg">балгарская</string>
+	<string name="lang_ca">каталонская</string>
+	<string name="lang_cs">чэшская</string>
+	<string name="lang_da">дацкая</string>
+	<string name="lang_nl">галяндзкая</string>
+	<string name="lang_fi">фінская</string>
+	<string name="lang_fr">французкая</string>
+	<string name="lang_ka">грузінская</string>
+	<string name="lang_de">нямецкая</string>
+	<string name="lang_el">грэцкая</string>
+	<string name="lang_iw">габрэйская</string>
+	<string name="lang_hi">хіндзі</string>
+	<string name="lang_hu">вугорская</string>
+	<string name="lang_id">інданэзійская</string>
+	<string name="lang_it">італьянская</string>
+	<string name="lang_ja">японская</string>
+	<string name="lang_ko">карэйская</string>
+	<string name="lang_lv">латыская</string>
+	<string name="lang_lt">летувіская</string>
+	<string name="lang_mr">маратхі</string>
+	<string name="lang_no">нарвэская</string>
+	<string name="lang_pl">польская</string>
+	<string name="lang_pt">партугальская</string>
+	<string name="lang_ro">румынская</string>
+	<string name="lang_ru">расейская</string>
+	<string name="lang_sk">славацкая</string>
+	<string name="lang_sl">славенская</string>
+	<string name="lang_es">гішпанская</string>
+	<string name="lang_sv">швэдзкая</string>
+	<string name="lang_tr">турэцкая</string>
+	<string name="lang_uk">украінская</string>
+	<string name="lang_vi">в'етнамская</string>
+	<string name="lang_cy">валійская</string>
+	<string name="index_name_canada">Паўночная Амэрыка - Канада</string>
+    <string name="index_name_italy">Эўропа - Італія</string>
+    <string name="index_name_gb">Эўропа - Вялікабрытанія</string>
+    <string name="calculate_osmand_route_without_internet">Вылічыць сегмент маршруту OsmAnd без Інтэрнэту</string>
+    <string name="gpx_option_calculate_first_last_segment">Вылічыць маршрут OsmAnd для першага і апошняга ўчастка маршруту</string>
+    <string name="use_displayed_track_for_navigation">Ці хочаце вы выкарыстоўваць адлюстраваны трэк для навігацыі?</string>
+    <string name="route_descr_select_on_map">Выбраць на карце …</string>
+    <string name="route_info">Інфармацыя пра маршрут</string>
+    <string name="routing_attr_prefer_motorway_name">Аддаваць перавагу аўтамагістралям</string>
+	<string name="routing_attr_short_way_name">Самы кароткі шлях</string>
+	<string name="routing_attr_short_way_description">Выкарыстоўваць кароткі шлях</string>
+	<string name="routing_attr_avoid_toll_name">Пазьбягаць платных дарог</string>
+	<string name="routing_attr_avoid_toll_description">Пазьбягаць платных дарог</string>
+	<string name="routing_attr_avoid_unpaved_name">Пазбягаць грунтавыя дарогі</string>
+	<string name="routing_attr_avoid_unpaved_description">Пазбягаць грунтавыя дарогі</string>
+	<string name="routing_attr_avoid_ferries_name">Пазьбягаць пераправы</string>
+	<string name="routing_attr_avoid_ferries_description">Пазбягаць пераправы</string>
+	<string name="routing_attr_avoid_motorway_name">Пазьбягаць аўтамагістралі</string>
+	<string name="routing_attr_avoid_motorway_description">Пазьбягаць аўтамагістралі</string>
+	<string name="routing_attr_weight_name">Максімальная вага</string>
+	<string name="routing_attr_weight_description">Задайце абмежаванне вагі аўтамабіля</string>
+    <string name="application_dir_change_warning2">OsmAnd можа паспрабаваць перамясьціць дадзеныя ў новае месца. Вы хочаце гэтага?</string>
+    <string name="copying_osmand_one_file_descr">Капіраваньне файла (%s) у новае месца...</string>
+    <string name="copying_osmand_files_descr">Капіяваньне файлаў OsmAnd у новае месца (%s)</string>
+    <string name="copying_osmand_files">Капіяваньне файлаў OsmAnd</string>
+    <string name="app_mode_truck">Грузавік</string>
+    <string name="speech_rate_descr">Задайце хуткасць вымаўленьня для TTS</string>
+    <string name="speech_rate">Хуткасьць вымаўленьня</string>
+    <string name="disable_complex_routing">Адключыць складаную маршрутызацыю</string>
+    <string name="map_widget_map_rendering">Адмалёўка мапы:</string>
+    <string name="app_mode_motorcycle">матацыкл</string>
+    <string name="app_mode_aircraft">Самалёт</string>
+    <string name="tip_faq">Частыя пытаньні</string>
+    <string name="local_osm_changes_delete_all">Выдаліць усё</string>
+    </resources>
