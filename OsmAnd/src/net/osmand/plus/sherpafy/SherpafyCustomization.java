@@ -62,7 +62,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	public void customizeMainMenu(Window window) {
 		// Update app name
 		TextView v =  (TextView) window.findViewById(R.id.AppName);
-		v.setText("Sherpafy " + Version.getAppVersion(app));
+		v.setText("Sherpafy");
 		
 		TextView toursButton = (TextView) window.findViewById(R.id.SettingsButtonText);
 		toursButton.setText(R.string.tour);
