@@ -1715,7 +1715,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="lang_cy">威爾斯</string>
     <string name="index_name_italy">歐洲 - 意大利</string>
     <string name="index_name_gb">歐洲 - 英國</string>
-    <string name="index_item_nation_addresses">全國範圍的位址</string>
+    <string name="index_item_nation_addresses">全國範圍的地址</string>
 	<string name="index_item_world_altitude_correction">全球海拔校正</string>
 	<string name="index_item_world_seamarks">全球航線標識</string>
 	<string name="index_item_world_bitcoin_payments">全球比特幣支付</string>
