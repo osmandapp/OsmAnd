@@ -1663,14 +1663,14 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     </string>
     <string name="calculate_osmand_route_without_internet">Bereken een OsmAnd routesegment zonder internet</string>
     <string name="gpx_option_calculate_first_last_segment">Bereken een OsmAnd route voor het eerste en laatste routesegment</string>
-    <string name="index_name_gb">Europa - Groot Brittannië</string>
+    <string name="index_name_gb">Europa - Groot-Brittannië</string>
     <string name="index_item_nation_addresses">landelijke adressen</string>
-	<string name="index_item_world_altitude_correction">Wereld hoogtecorrectie</string>
-	<string name="index_item_world_seamarks">Wereld zeebakens</string>
-	<string name="index_item_world_bitcoin_payments">Wereld bitcoin betalingen</string>
-	<string name="index_item_world_basemap">Wereld overzichtkaart</string>
-    <string name="index_item_world_ski">Wereld skikaart</string>
-    <string name="lang_hr">Croatisch</string>
+	<string name="index_item_world_altitude_correction">Wereldwijde hoogtecorrectie</string>
+	<string name="index_item_world_seamarks">Zeebakens (wereld)</string>
+	<string name="index_item_world_bitcoin_payments">Betalen met Bitcoin (wereld)</string>
+	<string name="index_item_world_basemap">Wereld-overzichtskaart</string>
+    <string name="index_item_world_ski">Skikaart (wereld)</string>
+    <string name="lang_hr">Kroatisch</string>
     <string name="lang_zh">Chinees</string>
     <string name="lang_pt_br">Portugees (Brazilië)</string>
     <string name="lang_en">Engels</string>
@@ -1705,7 +1705,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	<string name="lang_ro">Roemeens</string>
 	<string name="lang_ru">Russisch</string>
 	<string name="lang_sk">Slowaaks</string>
-	<string name="lang_sl">Sloweens</string>
+	<string name="lang_sl">Sloveens</string>
 	<string name="lang_es">Spaans</string>
 	<string name="lang_sv">Zweeds</string>
 	<string name="lang_tr">Turks</string>
