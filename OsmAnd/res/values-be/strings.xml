@@ -22,7 +22,7 @@
     <string name="edit_tilesource_expiration_time">Тэрмін дзеяньня (у хвілінах)</string>
     <string name="edit_tilesource_minzoom">Мін.маштаб</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Абярыце існуючую...</string>
+    <string name="edit_tilesource_choose_existing">Абярыце існуючую…</string>
     <string name="edit_tilesource_name">Назва</string>
     <string name="maps_define_edit">Вызначыць/зьмянiць…</string>
 	<string name="map_widget_fps_info">Адладачная інфармацыя FPS</string>
@@ -1606,4 +1606,17 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="app_mode_aircraft">Самалёт</string>
     <string name="tip_faq">Частыя пытаньні</string>
     <string name="local_osm_changes_delete_all">Выдаліць усё</string>
+    <string name="index_item_nation_addresses">адрасы па ўсёй краіне</string>
+	<string name="osmodroid_seek">Шукаць аб'ект</string>
+    <string name="osmodroid_refresh">Абнавіць каналы</string>
+    <string name="default_or">ці</string>
+	<string name="default_and">і</string>
+    <string name="gps_status_eclipsim">Статус GPS</string>
+    <string name="remember_choice">Запомніць мой выбар</string>
+    <string name="index_item_world_basemap">Сусьветная аглядная мапа</string>
+    <string name="index_item_world_ski">Сусьветная лыжная мапа</string>
+    <string name="select_gpx">Выбраць GPX …</string>
+    <string name="routing_attr_prefer_motorway_description">Аддаваць перавагу аўтамагістралям</string>
+	<string name="animate_routing_route">Імітацыя з выкарыстаньнем разлічанага маршруту </string>
+    <string name="animate_routing_gpx">Імітацыя з выкарыстаньнем GPX трэка</string>
     </resources>
