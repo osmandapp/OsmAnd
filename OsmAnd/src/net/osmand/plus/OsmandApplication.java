@@ -29,6 +29,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -81,6 +82,7 @@ public class OsmandApplication extends Application {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
+	
 	ResourceManager resourceManager = null;
 	PoiFiltersHelper poiFilters = null;
 	RoutingHelper routingHelper = null;
@@ -89,6 +91,7 @@ public class OsmandApplication extends Application {
 
 	OsmandSettings osmandSettings = null;
 
+	OsmAndAppCustomization appCustomization;
 	DayNightHelper daynightHelper;
 	NavigationService navigationService;
 	RendererRegistry rendererRegistry;
@@ -108,7 +111,6 @@ public class OsmandApplication extends Application {
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
 	
-	SettingsAPI settingsAPI;
 	SQLiteAPI sqliteAPI;
 	BRouterServiceConnection bRouterServiceConnection;
 
@@ -125,10 +127,10 @@ public class OsmandApplication extends Application {
 			}
 		}
 		super.onCreate();
+		appCustomization = new OsmAndAppCustomization();
+		appCustomization.setup(this);
 		 
-		settingsAPI = new net.osmand.plus.api.SettingsAPIImpl(this);
 		sqliteAPI = new SQLiteAPIImpl(this);
-		
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
 		} catch(Exception e) {
@@ -136,7 +138,7 @@ public class OsmandApplication extends Application {
 		}
 
 		// settings used everywhere so they need to be created first
-		osmandSettings = createOsmandSettingsInstance();
+		osmandSettings = appCustomization.createSettings(new net.osmand.plus.api.SettingsAPIImpl(this));
 		// always update application mode to default
 		if(!osmandSettings.FOLLOW_THE_ROUTE.get()){
 			osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
@@ -189,17 +191,18 @@ public class OsmandApplication extends Application {
 		return taskManager;
 	}
 
-	/**
-	 * Creates instance of OsmandSettings
-	 * 
-	 * @return Reference to instance of OsmandSettings
-	 */
-	protected OsmandSettings createOsmandSettingsInstance() {
-		return new OsmandSettings(this);
-	}
 	
 	public OsmAndLocationProvider getLocationProvider() {
 		return locationProvider;
+	}
+	
+	public OsmAndAppCustomization getAppCustomization() {
+		return appCustomization;
+	}
+	
+	public void setAppCustomization(OsmAndAppCustomization appCustomization) {
+		this.appCustomization = appCustomization;
+		this.appCustomization.setup(this);
 	}
 
 	/**
@@ -692,11 +695,6 @@ public class OsmandApplication extends Application {
 		AccessibleToast.makeText(this, msg, Toast.LENGTH_LONG).show();		
 	}
 	
-	public SettingsAPI getSettingsAPI() {
-		return settingsAPI;
-	}
-
-
 	public SQLiteAPI getSQLiteAPI() {
 		return sqliteAPI;
 	}

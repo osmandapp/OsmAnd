@@ -105,9 +105,9 @@ public class OsmandSettings {
 	private boolean internetConnectionAvailable = true;
 	
 	
-	protected OsmandSettings(OsmandApplication clientContext) {
+	protected OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI) {
 		ctx = clientContext;
-		settingsAPI = ctx.getSettingsAPI();
+		this.settingsAPI = settinsAPI;
 
 		globalPreferences = settingsAPI.getPreferenceObject(SHARED_PREFERENCES_NAME);
 		// start from default settings
@@ -121,6 +121,14 @@ public class OsmandSettings {
 	
 	public OsmandApplication getContext() {
 		return ctx;
+	}
+	
+	public void setSettingsAPI(SettingsAPI settingsAPI) {
+		this.settingsAPI = settingsAPI;
+	}
+	
+	public SettingsAPI getSettingsAPI() {
+		return settingsAPI;
 	}
 	
 	public static String getSharedPreferencesName(ApplicationMode mode){
@@ -553,6 +561,16 @@ public class OsmandSettings {
 			return (CommonPreference<Boolean>) registeredPreferences.get(id);
 		}
 		BooleanPreference p = new BooleanPreference(id, defValue);
+		registeredPreferences.put(id, p);
+		return p;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public CommonPreference<String> registerBooleanPreference(String id, String defValue) {
+		if(registeredPreferences.containsKey(id)) {
+			return (CommonPreference<String>) registeredPreferences.get(id);
+		}
+		StringPreference p = new StringPreference(id, defValue);
 		registeredPreferences.put(id, p);
 		return p;
 	}

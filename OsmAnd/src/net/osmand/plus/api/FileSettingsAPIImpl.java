@@ -20,12 +20,14 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 
 	public FileSettingsAPIImpl(OsmandApplication app, File file) throws IOException {
 		this.file = file;
-		Properties props = new Properties();
-		FileInputStream fis = new FileInputStream(file);
-		props.load(fis);
-		for (Object key : props.keySet()) {
-			String k = key.toString();
-			map.put(k, props.get(key));
+		if (file.exists()) {
+			Properties props = new Properties();
+			FileInputStream fis = new FileInputStream(file);
+			props.load(fis);
+			for (Object key : props.keySet()) {
+				String k = key.toString();
+				map.put(k, props.get(key));
+			}
 		}
 	}
 	
@@ -95,6 +97,10 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 				map.put(e.getKey(), e.getValue());
 			}
 		}
+		return saveFile();
+	}
+
+	public boolean saveFile() {
 		try {
 			Properties ps = new Properties();
 			ps.putAll(map);

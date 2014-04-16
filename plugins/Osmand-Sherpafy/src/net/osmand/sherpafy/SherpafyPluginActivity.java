@@ -28,7 +28,9 @@ public class SherpafyPluginActivity extends Activity {
 		ResolveInfo resolved = getPackageManager().resolveActivity(intentPlus, PackageManager.MATCH_DEFAULT_ONLY);
 		if(resolved != null) {
 			stopService(intentPlus);
+			intentPlus.putExtra("SHERPAFY", true);
 			startActivity(intentPlus);
+			finish();
 		} else {
 			Intent intentNormal = new Intent();
 			intentNormal.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
@@ -36,7 +38,9 @@ public class SherpafyPluginActivity extends Activity {
 			resolved = getPackageManager().resolveActivity(intentNormal, PackageManager.MATCH_DEFAULT_ONLY);
 			if (resolved != null) {
 				stopService(intentNormal);
+				intentNormal.putExtra("SHERPAFY", true);
 				startActivity(intentNormal);
+				finish();
 			} else {
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				builder.setMessage(getString(R.string.osmand_app_not_found));

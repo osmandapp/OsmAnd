@@ -6,11 +6,13 @@ import java.util.Random;
 
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.sherpafy.SherpafyCustomization;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -182,6 +184,9 @@ public class MainMenuActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		if(getIntent() != null) {
+			setupCustomization(getIntent());
+		}
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		boolean exit = false;
@@ -194,6 +199,8 @@ public class MainMenuActivity extends Activity {
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.menu);
+		
+		OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
 		
 		onCreateMainMenu(getWindow(), this);
 
@@ -242,6 +249,7 @@ public class MainMenuActivity extends Activity {
 				activity.startActivity(search);
 			}
 		});
+		appCustomization.customizeMainMenu(window);
 		if(exit){
 			getMyApplication().closeApplication(activity);
 			return;
@@ -255,43 +263,56 @@ public class MainMenuActivity extends Activity {
 		}
 		startProgressDialog = new ProgressDialog(this);
 		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
-		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
+		boolean dialogShown = false;
 		boolean firstTime = false;
-		if(!pref.contains(FIRST_TIME_APP_RUN)){
+		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
+		boolean appVersionChanged = false;
+		if (!pref.contains(FIRST_TIME_APP_RUN)) {
 			firstTime = true;
 			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
 			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-			
-			applicationInstalledFirstTime();
-		} else {
-			int i = pref.getInt(TIPS_SHOW, 0);
-			if (i < 7){
-				pref.edit().putInt(TIPS_SHOW, ++i).commit();
-			}
-			boolean appVersionChanged = false;
-			if(!Version.getFullVersion(app).equals(pref.getString(VERSION_INSTALLED, ""))){
-				pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-				appVersionChanged = true;
-			}
-						
-			if (i == 1 || i == 5 || appVersionChanged) {
-				TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
-				Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
-				dlg.show();
+		} else if (!Version.getFullVersion(app).equals(pref.getString(VERSION_INSTALLED, ""))) {
+			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
+			appVersionChanged = true;
+		}
+		if (appCustomization.showFirstTimeRunAndTips(firstTime, appVersionChanged)) {
+			if (firstTime) {
+				applicationInstalledFirstTime();
+				dialogShown = true;
 			} else {
-				if (startProgressDialog.isShowing()) {
-					startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							checkVectorIndexesDownloaded();
-						}
-					});
-				} else {
-					checkVectorIndexesDownloaded();
+				int i = pref.getInt(TIPS_SHOW, 0);
+				if (i < 7) {
+					pref.edit().putInt(TIPS_SHOW, ++i).commit();
+				}
+				if (i == 1 || i == 5 || appVersionChanged) {
+					TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
+					Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
+					dlg.show();
+					dialogShown = true;
 				}
 			}
 		}
-		checkPreviousRunsForExceptions(firstTime);
+		if(!dialogShown && appCustomization.checkBasemapDownloadedOnStart()) {
+			if (startProgressDialog.isShowing()) {
+				startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						checkVectorIndexesDownloaded();
+					}
+				});
+			} else {
+				checkVectorIndexesDownloaded();
+			}
+		}
+		if(appCustomization.checkExceptionsOnStart()){
+			checkPreviousRunsForExceptions(firstTime);
+		}
+	}
+
+	private void setupCustomization(Intent intent) {
+		if (intent.hasExtra("SHERPAFY")) {
+			((OsmandApplication) getApplication()).setAppCustomization(new SherpafyCustomization());
+		}
 	}
 
 	private void applicationInstalledFirstTime() {
