@@ -1573,13 +1573,13 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="route_info">Información de ruta</string>
     <string name="tip_recent_changes_1_7_1_t">Cambios en 1.7:↵
     \n\t* IMPORTANTE los mapas deben ser más nuevos que Febrero de 2014.↵
-→\n\t* Enrutado completamente actualizado (rapido y preciso) - ↵
+→\n\t* Enrutado completamente actualizado (rápido y preciso) - ↵
     \n\t* Nueva pantalla con Planificación de Ruta (más intuitiva y más potente)↵
     \n\t** NOTA La ruta GPX está disponible en el botón Opciones de Ruta↵
     \n\t* Auto ocultar botones en modo navegación↵
-    \n\t* Calcular la ruta offline al primer punto de la ruta GPX (opción \'pasar toda la ruta\')↵
-→\n\t* Simulación activa en tuneles↵
-→\n\t* Muchas pequeñas mejoras en la UX (Experiencia de Usuario) y arreglos de usabilidad↵
+    \n\t* Calcula la ruta offline al primer punto de la ruta GPX (opción \'pasar toda la ruta\')↵
+→\n\t* Simulación activa en túneles↵
+→\n\t* Muchas pequeñas mejoras en la experiencia de usuario y arreglos de usabilidad↵
 →\n\t* Opción de accesibilidad a la velocidad de voz↵
     </string>
     <string name="calculate_osmand_route_without_internet">Calcular segmento de ruta OsmAnd sin internet</string>
