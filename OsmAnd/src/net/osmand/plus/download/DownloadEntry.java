@@ -1,7 +1,8 @@
 package net.osmand.plus.download;
 
 import java.io.File;
-import java.util.List;
+
+import net.osmand.IndexConstants;
 
 public class DownloadEntry {
 	public Long dateModified;
@@ -21,7 +22,6 @@ public class DownloadEntry {
 	public String assetName;
 	public DownloadActivityType type;
 	
-	public List<String> srtmFilesToDownload;
 	public DownloadEntry attachedEntry;
 	public IndexItem item;
 
@@ -36,5 +36,6 @@ public class DownloadEntry {
 		this.assetName = assetName;
 		isAsset = true;
 	}
+	
 
 }

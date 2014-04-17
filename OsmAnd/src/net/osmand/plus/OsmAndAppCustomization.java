@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.view.Window;
 import net.osmand.plus.activities.DownloadIndexActivity;
@@ -11,6 +13,7 @@ import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.download.DownloadActivityType;
 
 public class OsmAndAppCustomization {
 	
@@ -71,6 +74,10 @@ public class OsmAndAppCustomization {
 	
 	public Class<? extends Activity> getLocalIndexActivity() {
 		return LocalIndexesActivity.class;
+	}
+
+	public void getDownloadTypes(List<DownloadActivityType> items) {
+		
 	}
 
 }

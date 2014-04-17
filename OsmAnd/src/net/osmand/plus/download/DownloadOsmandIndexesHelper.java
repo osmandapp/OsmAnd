@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,7 +32,6 @@ import android.text.format.DateFormat;
 
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
-	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 	
 
 	public static IndexFileList getIndexesList(Context ctx) {
@@ -71,8 +69,8 @@ public class DownloadOsmandIndexesHelper {
 	private static void listVoiceAssets(IndexFileList result, AssetManager amanager, PackageManager pm, 
 			OsmandSettings settings) {
 		try {
-			String ext = IndexItem.addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION);
-			String extvoice = IndexItem.addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION);
+			String ext = DownloadActivityType.addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION);
+			String extvoice = DownloadActivityType.addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION);
 			File voicePath = settings.getContext().getAppPath(IndexConstants.VOICE_INDEX_DIR); 
 			// list = amanager.list("voice");
 			String date = "";
@@ -90,7 +88,8 @@ public class DownloadOsmandIndexesHelper {
 				if (target.endsWith("-tts/_ttsconfig.p") && target.startsWith("voice/")) {
 					String voice = target.substring("voice/".length(), target.length() - "/_ttsconfig.p".length());
 					File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
-					result.add(new AssetIndexItem(voice +ext, "voice", date, dateModified, "0.1", "", key, destFile.getPath()));
+					result.add(new AssetIndexItem(voice +ext, "voice", date, dateModified, "0.1", "", key, destFile.getPath(), 
+							DownloadActivityType.VOICE_FILE));
 				} else if (target.endsWith("/_config.p") && target.startsWith("voice/")) {
 					String voice = target.substring("voice/".length(), target.length() - "/_config.p".length());
 					IndexItem item = result.getIndexFilesByName(key);
@@ -105,7 +104,8 @@ public class DownloadOsmandIndexesHelper {
 							log.error("Parse exception", es);
 						}
 						item.date = date;
-						item.attachedItem = new AssetIndexItem(voice +extvoice, "voice", date, dateModified, "0.1", "", key, destFile.getPath());
+						item.attachedItem = new AssetIndexItem(voice +extvoice, "voice", date, dateModified, "0.1", "", key, destFile.getPath(), 
+								DownloadActivityType.VOICE_FILE);
 					}
 				}
 			}
@@ -117,19 +117,6 @@ public class DownloadOsmandIndexesHelper {
 		}
 	}
 	
-	private static DownloadActivityType getIndexType(String tagName){
-		if("region".equals(tagName) ||
-							"multiregion".equals(tagName)) {
-			return DownloadActivityType.NORMAL_FILE;
-		} else if("road_region".equals(tagName) ) {
-			return DownloadActivityType.ROADS_FILE;
-		} else if("srtmcountry".equals(tagName) ) {
-			return DownloadActivityType.SRTM_COUNTRY_FILE;
-		} else if("hillshade".equals(tagName) ) {
-			return DownloadActivityType.HILLSHADE_FILE;
-		}
-		return null;
-	}
 
 	private static IndexFileList downloadIndexesListFromInternet(Context ctx, String versionAsUrl){
 		try {
@@ -144,17 +131,13 @@ public class DownloadOsmandIndexesHelper {
 				int next;
 				while((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
 					if (next == XmlPullParser.START_TAG) {
-						DownloadActivityType tp = getIndexType(parser.getName());
+						DownloadActivityType tp = DownloadActivityType.getIndexType(parser.getAttributeValue(null, "type"));
 						if (tp != null) {
-							String name = parser.getAttributeValue(null, "name"); //$NON-NLS-1$
-							String size = parser.getAttributeValue(null, "size"); //$NON-NLS-1$
-							String date = parser.getAttributeValue(null, "date"); //$NON-NLS-1$
-							String description = parser.getAttributeValue(null, "description"); //$NON-NLS-1$
-							String parts = parser.getAttributeValue(null, "parts"); //$NON-NLS-1$
-							date = reparseDate(ctx, date);
-							IndexItem it = new IndexItem(name, description, date, size, parts);
-							it.setType(tp);
-							result.add(it);
+							
+							IndexItem it = tp.parseIndexItem(ctx, parser);
+							if(it != null) {
+								result.add(it);
+							}
 						} else if ("osmand_regions".equals(parser.getName())) {
 							String mapversion = parser.getAttributeValue(null, "mapversion");
 							result.setMapVersion(mapversion);
@@ -181,15 +164,6 @@ public class DownloadOsmandIndexesHelper {
 		}
 	}
 
-	protected static String reparseDate(Context ctx, String date) {
-		try {
-			Date d = simpleDateFormat.parse(date);
-			return AndroidUtils.formatDate(ctx, d.getTime());
-		} catch (ParseException e) {
-			return date;
-		}
-	}
-
 	public static class AssetIndexItem extends IndexItem {
 		
 		private final String assetName;
@@ -197,8 +171,8 @@ public class DownloadOsmandIndexesHelper {
 		private final long dateModified;
 
 		public AssetIndexItem(String fileName, String description, String date,
-				long dateModified, String size, String parts, String assetName, String destFile) {
-			super(fileName, description, date, size, parts);
+				long dateModified, String size, String parts, String assetName, String destFile, DownloadActivityType type) {
+			super(fileName, description, date, size, parts, type);
 			this.dateModified = dateModified;
 			this.assetName = assetName;
 			this.destFile = destFile;
@@ -208,11 +182,6 @@ public class DownloadOsmandIndexesHelper {
 			return dateModified;
 		}
 
-		@Override
-		public boolean isAccepted(){
-			return true;
-		}
-		
 		@Override
 		public List<DownloadEntry> createDownloadEntry(OsmandApplication ctx, DownloadActivityType type, List<DownloadEntry> res) {
 			res.add(new DownloadEntry(this, assetName, destFile, dateModified));

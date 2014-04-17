@@ -2,4 +2,5 @@
 <resources>
     <string name="settings_file_create_error">Couldn\'t create settings file in tour folder.</string>
     <string name="tour">Tour</string>
+    <string name="download_tours">Tours</string>
  </resources>

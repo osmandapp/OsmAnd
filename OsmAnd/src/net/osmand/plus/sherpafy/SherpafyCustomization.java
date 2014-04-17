@@ -2,6 +2,7 @@ package net.osmand.plus.sherpafy;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
@@ -10,6 +11,7 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.api.FileSettingsAPIImpl;
+import net.osmand.plus.download.DownloadActivityType;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
@@ -84,5 +86,11 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	
 	private Class<?> getTourSelectionActivity() {
 		return MainMenuActivity.class;
+	}
+	
+	@Override
+	public void getDownloadTypes(List<DownloadActivityType> items) {
+		super.getDownloadTypes(items);
+		items.add(0, TourDownloadType.TOUR);
 	}
 }

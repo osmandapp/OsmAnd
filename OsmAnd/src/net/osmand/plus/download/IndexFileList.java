@@ -47,9 +47,7 @@ public class IndexFileList implements Serializable {
 	}
 
 	public void add(IndexItem indexItem) {
-		if (indexItem.isAccepted()) {
-			indexFiles.add(indexItem);
-		}
+		indexFiles.add(indexItem);
 		if(indexItem.getFileName().toLowerCase().startsWith("world_basemap")) {
 			basemap = indexItem;
 		}

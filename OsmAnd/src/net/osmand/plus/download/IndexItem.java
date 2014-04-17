@@ -1,11 +1,7 @@
 package net.osmand.plus.download;
 
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,7 +14,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 
 import org.apache.commons.logging.Log;
 
@@ -36,131 +31,17 @@ public class IndexItem implements Comparable<IndexItem> {
 	IndexItem attachedItem;
 	DownloadActivityType type;
 
-	public IndexItem(String fileName, String description, String date, String size, String parts) {
+	public IndexItem(String fileName, String description, String date, String size, String parts, DownloadActivityType tp) {
 		this.fileName = fileName;
 		this.description = description;
 		this.date = date;
 		this.size = size;
 		this.parts = parts;
-		this.type = DownloadActivityType.NORMAL_FILE;
+		this.type = tp;
 	}
 
 	public DownloadActivityType getType() {
 		return type;
-	}
-
-	public void setType(DownloadActivityType type) {
-		this.type = type;
-	}
-
-	public String getVisibleDescription(Context ctx) {
-		String s = ""; //$NON-NLS-1$
-		if (type == DownloadActivityType.SRTM_COUNTRY_FILE) {
-			return ctx.getString(R.string.download_srtm_maps);
-		} else if (type == DownloadActivityType.ROADS_FILE) {
-			return ctx.getString(R.string.download_roads_only_item);
-		}
-		return s;
-	}
-	
-	public String getVoiceName(Context ctx) {
-		try {
-			String nm = getBasename().replace('-', '_').replace(' ', '_');
-			if (nm.endsWith("_tts")) {
-				nm = nm.substring(0, nm.length() - 4);
-			}
-			Field f = R.string.class.getField("lang_"+nm);
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
-				return ctx.getString(in);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-		return getBasename();
-	}
-
-	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
-		if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
-			return ctx.getString(R.string.voice) + "\n" + getVoiceName(ctx);
-		} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
-			return ctx.getString(R.string.ttsvoice) + "\n" + getVoiceName(ctx);
-		}
-		final String bn = getBasename();
-		final String lc = bn.toLowerCase();
-		String std = getStandardMapName(ctx, lc);
-		if (std != null) {
-			return std;
-		}
-		if (bn.contains("addresses-nationwide")) {
-			final int ind = bn.indexOf("addresses-nationwide");
-			String downloadName = bn.substring(0, ind - 1) + bn.substring(ind + "addresses-nationwide".length());
-			return osmandRegions.getLocaleName(downloadName) + 
-					" "+ ctx.getString(R.string.index_item_nation_addresses);
-		}
-
-		return osmandRegions.getLocaleName(lc);
-	}
-
-	private String getStandardMapName(Context ctx, String basename) {
-		if(basename.equals("world-ski")) {
-			return ctx.getString(R.string.index_item_world_ski);
-		} else if(basename.equals("world_altitude_correction_ww15mgh")) {
-			return ctx.getString(R.string.index_item_world_altitude_correction);
-		} else if(basename.equals("world_basemap")) {
-			return ctx.getString(R.string.index_item_world_basemap);
-		} else if(basename.equals("world_bitcoin_payments")) {
-			return ctx.getString(R.string.index_item_world_bitcoin_payments);
-		} else if(basename.equals("world_seamarks")) {
-			return ctx.getString(R.string.index_item_world_seamarks);
-		}
-		return null;
-	}
-
-	public boolean isVoiceItem() {
-		return fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP) || fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP);
-	}
-
-	public String getBasename() {
-		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
-			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
-		}
-		if (fileName.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP)) {
-			String simple = fileName.substring(0, fileName.length() - IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP.length());
-			int ls = simple.lastIndexOf('_');
-			if (ls >= 0) {
-				return simple.substring(0, ls);
-			}
-			return simple;
-		}
-		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
-			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length()).replace('_', ' ');
-		}
-		int ls = fileName.lastIndexOf('_');
-		if (ls >= 0) {
-			return fileName.substring(0, ls);
-		}
-		return fileName;
-	}
-
-	public boolean isAccepted() {
-		// POI index download is not supported any longer
-		if (fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT, IndexConstants.BINARY_MAP_VERSION)) //
-				|| fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION)) //
-				|| fileName.endsWith(addVersionToExt(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION)) //
-				|| fileName.endsWith(addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION))
-				|| fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)
-				|| fileName.endsWith(IndexConstants.SQLITE_EXT)
-		// || fileName.endsWith(addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION)) drop support for
-		// downloading tts files from inet
-		) {
-			return true;
-		}
-		return false;
-	}
-
-	protected static String addVersionToExt(String ext, int version) {
-		return "_" + version + ext;
 	}
 
 	public String getFileName() {
@@ -186,47 +67,8 @@ public class IndexItem implements Comparable<IndexItem> {
 	public List<DownloadEntry> createDownloadEntry(OsmandApplication ctx, DownloadActivityType type, 
 			List<DownloadEntry> downloadEntries) {
 		String fileName = this.fileName;
-		File parent = null;
-		String extension = null;
-		boolean unzipDir = false;
-		boolean zipStream = false;
-		boolean preventMediaIndexing = false;
-		if (fileName.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT_ZIP)) {
-			parent = ctx.getAppPath(IndexConstants.SRTM_INDEX_DIR);
-			extension = BINARY_SRTM_MAP_INDEX_EXT;
-			zipStream = true;
-		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-			parent = ctx.getAppPath(IndexConstants.MAPS_PATH);
-			extension = BINARY_MAP_INDEX_EXT;
-		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
-			parent = ctx.getAppPath(IndexConstants.MAPS_PATH);
-			zipStream = true;
-			extension = BINARY_MAP_INDEX_EXT;
-		} else if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
-			parent = ctx.getAppPath("");
-			// unzipDir = true;
-			zipStream = true;
-			extension = IndexConstants.EXTRA_EXT;
-		} else if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
-			parent = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-			extension = IndexConstants.SQLITE_EXT;
-		} else if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
-			parent = ctx.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-			zipStream = true;
-			extension = ""; //$NON-NLS-1$
-			unzipDir = true;
-			preventMediaIndexing = true;
-		} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
-			parent = ctx.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-			zipStream = true;
-			extension = ""; //$NON-NLS-1$
-			unzipDir = true;
-		}
-		if (type == DownloadActivityType.ROADS_FILE) {
-			extension = "-roads" + extension;
-		} else if (type == DownloadActivityType.SRTM_COUNTRY_FILE) {
-//			extension = "-srtm" + extension;
-		}
+		File parent = type.getDownloadFolder(ctx, this);
+		boolean preventMediaIndexing = type.preventMediaIndexing(ctx, this);
 		if (parent != null) {
 			parent.mkdirs();
 			// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery and Music apps
@@ -246,20 +88,9 @@ public class IndexItem implements Comparable<IndexItem> {
 			entry = new DownloadEntry(this);
 			entry.type = type;
 			entry.baseName = getBasename();
-			String url = "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&";
-			url += Version.getVersionAsURLParam(ctx) + "&";
-			if (type == DownloadActivityType.ROADS_FILE) {
-				url += "road=yes&";
-			}
-			if (type == DownloadActivityType.SRTM_COUNTRY_FILE) {
-				url += "srtmcountry=yes&";
-			}
-			if (type == DownloadActivityType.HILLSHADE_FILE) {
-				url += "hillshade=yes&";
-			}
-			entry.urlToDownload = url + "file=" + fileName;
-			entry.zipStream = zipStream;
-			entry.unzipFolder = unzipDir;
+			entry.urlToDownload = entry.type.getBaseUrl(ctx, fileName) + entry.type.getUrlSuffix(ctx);
+			entry.zipStream = type.isZipStream(ctx, this);
+			entry.unzipFolder = type.isZipFolder(ctx, this);
 			try {
 				final java.text.DateFormat format = DateFormat.getDateFormat((Context) ctx);
 				format.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
@@ -277,6 +108,7 @@ public class IndexItem implements Comparable<IndexItem> {
 			if (parts != null) {
 				entry.parts = Integer.parseInt(parts);
 			}
+			String extension = type.getUnzipExtension(ctx, this);
 			entry.targetFile = new File(parent, entry.baseName + extension);
 			File backup = new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), entry.targetFile.getName());
 			if (backup.exists()) {
@@ -294,39 +126,6 @@ public class IndexItem implements Comparable<IndexItem> {
 		return downloadEntries;
 	}
 	
-	public String getTargetFileName(){
-		String e = getFileName();
-		
-		if (e.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || e.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
-			int l = e.lastIndexOf('_');
-			if(l == -1) {
-				l = e.length();
-			}
-			String s = e.substring(0, l);
-			if (getType() == DownloadActivityType.ROADS_FILE) {
-				s += "-roads" ;
-			}
-			if (getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
-				return s + IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
-			}
-			s += IndexConstants.BINARY_MAP_INDEX_EXT;
-			return s;
-		} else if(e.endsWith(IndexConstants.SQLITE_EXT)){
-			return e.replace('_', ' ');
-		} else if(e.endsWith(IndexConstants.EXTRA_ZIP_EXT)){
-			return e.substring(0, e.length() - IndexConstants.EXTRA_ZIP_EXT.length()) + IndexConstants.EXTRA_EXT; 
-		} else if(e.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP) || e.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
-			int l = e.lastIndexOf('_');
-			if(l == -1) {
-				l = e.length();
-			}
-			String s = e.substring(0, l);
-			return s;
-		}
-			
-		return e;
-	}
-
 	@Override
 	public int compareTo(IndexItem another) {
 		if(another == null) {
@@ -337,6 +136,22 @@ public class IndexItem implements Comparable<IndexItem> {
 
 	public boolean isAlreadyDownloaded(Map<String, String> listAlreadyDownloaded) {
 		return listAlreadyDownloaded.containsKey(getTargetFileName());
+	}
+
+	public String getBasename() {
+		return type.getBasename(this);
+	}
+
+	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
+		return type.getVisibleName(this, ctx, osmandRegions);
+	}
+
+	public String getVisibleDescription(OsmandApplication clctx) {
+		return type.getVisibleDescription(this, clctx);
+	}
+
+	public String getTargetFileName() {
+		return type.getTargetFileName(this);
 	}
 
 }

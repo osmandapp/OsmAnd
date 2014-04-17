@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,6 +95,8 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		final List<DownloadActivityType> downloadTypes = getDownloadTypes();
+		type = downloadTypes.get(0);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		if(downloadListIndexThread == null) {
 			downloadListIndexThread = new DownloadIndexesThread(this);
@@ -153,7 +154,11 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		if (intent != null && intent.getExtras() != null) {
 			final String filter = intent.getExtras().getString(FILTER_KEY);
 			if (filter != null) {
-				filterText.setText(filter);
+				if(filter.equals(getString(R.string.voice))) {
+					changeType(DownloadActivityType.VOICE_FILE);
+				} else {
+					filterText.setText(filter);
+				}
 			}
 		}
 		List<IndexItem> list = new ArrayList<IndexItem>();
@@ -176,16 +181,16 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		} else {
 			showDialogOfFreeDownloadsIfNeeded();
 		}
-		final DownloadActivityType[] downloadTypes = getDownloadTypes();
+		
 		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.sherlock_spinner_item, 
-				new ArrayList<String>(Arrays.asList(toString(downloadTypes)))	
+				toString(downloadTypes)	
 				);
 		spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
         getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
 			
 			@Override
 			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-				changeType(downloadTypes[itemPosition]);
+				changeType(downloadTypes.get(itemPosition));
 				return true;
 			}
 		});
@@ -409,46 +414,34 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 	public void selectDownloadType() {
 		Builder bld = new AlertDialog.Builder(this);
-		final DownloadActivityType[] items = getDownloadTypes();
-		bld.setItems(toString(items), new DialogInterface.OnClickListener() {
+		final List<DownloadActivityType> items = getDownloadTypes();
+		bld.setItems(toString(items).toArray(new String[items.size()]), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				changeType(items[which]);
+				changeType(items.get(which));
 			}
 		});
 		bld.show();
 	}
 
-	private String[] toString(DownloadActivityType[] t) {
-		String[] items = new String[t.length];
-		for (int i = 0; i < t.length; i++) {
-			if (t[i] == DownloadActivityType.NORMAL_FILE) {
-				items[i] = getString(R.string.download_regular_maps);
-			} else if (t[i] == DownloadActivityType.ROADS_FILE) {
-				items[i] = getString(R.string.download_roads_only_maps);
-			} else if ( t[i] == DownloadActivityType.SRTM_COUNTRY_FILE) {
-				items[i] = getString(R.string.download_srtm_maps);
-			} else if (t[i] == DownloadActivityType.HILLSHADE_FILE) {
-				items[i] = getString(R.string.download_hillshade_maps);
-			}
+	private List<String> toString(List<DownloadActivityType> t) {
+		ArrayList<String> items = new ArrayList<String>();
+		for(DownloadActivityType ts : t) {
+			items.add(ts.getString(getMyApplication()));
 		}
 		return items;
 	}
 
-	private DownloadActivityType[] getDownloadTypes() {
-		DownloadActivityType[] items;
+	private List<DownloadActivityType> getDownloadTypes() {
+		List<DownloadActivityType> items = new ArrayList<DownloadActivityType>();
+		items.add(DownloadActivityType.NORMAL_FILE);
+		items.add(DownloadActivityType.VOICE_FILE);
+		items.add(DownloadActivityType.ROADS_FILE);
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null){
-			items = new DownloadActivityType[]{
-					DownloadActivityType.NORMAL_FILE,
-					DownloadActivityType.ROADS_FILE,
-					DownloadActivityType.HILLSHADE_FILE,
-					DownloadActivityType.SRTM_COUNTRY_FILE};
-		} else {
-			items = new DownloadActivityType[]{
-					DownloadActivityType.NORMAL_FILE,
-					DownloadActivityType.ROADS_FILE,
-					};
+			items.add(DownloadActivityType.HILLSHADE_FILE);
+			items.add(DownloadActivityType.SRTM_COUNTRY_FILE);
 		}
+		getMyApplication().getAppCustomization().getDownloadTypes(items);
 		return items;
 	}
 
@@ -543,7 +536,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				if (es.getBasename() != null && es.getBasename().contains("_wiki")) {
 					wiki = true;
 					break;
-				} else if (DownloadActivityType.isCountedInDownloads(es)) {
+				} else if (DownloadActivityType.isCountedInDownloads(es.getType())) {
 					total++;
 				}
 			}
