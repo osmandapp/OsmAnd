@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
     <string name="auto_zoom_close">Зачыніць</string>
-    <string name="auto_zoom_far">To mid-range</string>
-    <string name="auto_zoom_farthest">To long-range</string>
+    <string name="auto_zoom_far">Для сярэдняга масштаба</string>
+    <string name="auto_zoom_farthest">Аддаліць</string>
     <string name="map_magnifier">Лупа мапы</string>
     <string name="base_world_map">Асноўная мапа сьвету</string>
     <string name="about_version">Версія:</string>
@@ -42,14 +42,20 @@
     <string name="speak_speed_limit">Анансаваць абмежаваньне хуткасьці</string>
     <string name="speak_cameras">Анансаваць камэры хуткасьці</string>
 	<string name="speak_traffic_warnings">Анансаваць заўвагі руху</string>
-    <string name="tip_recent_changes_1_5_t">Зьмены ў 1.5: \n\t* Галасавыя папярэджваньні аб абмежаваньні хуткасьці і камерах \n\t* Больш галасавых падказкак (агалошэньне назваў вуліц) \n\t* Значкі для мапаў для экранаў высокае шчыльнасьці \n\t* Шмат зьмен інтэрфейса \n\t* Выпраўленьні памылык паказу адлегласці, аналізу GPX, апрацоўкі маршрутных кропак, віджэта планаваньня маршрута, загрузкі дадзеных ў OSM, працы з https</string>
+    <string name="tip_recent_changes_1_5_t">Зьмены ў 1.5:
+	\n\t* Галасавыя папярэджваньні аб абмежаваньні хуткасьці і камерах
+	\n\t* Больш галасавых падказкак (агалошэньне назваў вуліц)
+	\n\t* Значкі для мапаў для экранаў высокае шчыльнасьці
+	\n\t* Шмат зьмен інтэрфейса
+	\n\t* Выпраўленьні памылык паказу адлегласці, аналізу GPX, апрацоўкі маршрутных кропак, віджэта планаваньня маршрута, загрузкі дадзеных ў OSM, працы з https
+    </string>
     <string name="osb_author_or_password_not_specified">Калі ласка , пазначце карыстальніка OSM і ягоны пароль у наладах</string>
     <string name="clear_intermediate_points">Ачысціць прамежкавыя кропкі</string>
     <string name="keep_intermediate_points">Захаваць прамежныя кропкі</string>
     <string name="new_directions_point_dialog">У вас ужо ёсць набор прамежных кропак.</string>
     <string name="context_menu_item_directions_to">Навігацыя да</string>
     <string name="context_menu_item_directions_from">Навігацыя ад</string>
-    <string name="route_descr_map_location">Мапа:</string>
+    <string name="route_descr_map_location">Мапа: </string>
     <string name="route_descr_lat_lon">%1$.3f шыр., %2$.3f даў.</string>
     <string name="route_descr_current_location">Гэтае месца</string>
     <string name="route_to">Да:</string>
@@ -63,7 +69,9 @@
     <string name="destination_point">Месца прызначэньня %1$s</string>
     <string name="context_menu_item_destination_point">Ужыць як прызначэньне</string>
     <string name="please_select_address">Абярыце спачатку горад ці вуліцу</string>
-    <string name="tip_recent_changes_1_4_t">Зміни в 1.4: \n\t* Магчымасьць аптымальнага ўпорадкаваньня промежных кропак маршруту (задача каміваяжора, сартаваньне па адлегласьці) \n\t* Пошук вуліцы па назве (побач) \n\t* Убудова планаваньня маршрутаў (сьцягваньне/редагаваньне/захавеньне GPX файлаў) \n\t* Новы экран сьцягваньня \n\t* Падтрымка ўкладзеных тэчак для GPX файлаў (упарадкуйце вашыя GPX файлы) \n\t* Выдалены файлы SRTM \n\t* Падтрымка OSM нататак</string>
+    <string name="tip_recent_changes_1_4_t">Зьмены в 1.4:
+\n\t* Магчымасьць аптымальнага ўпорадкаваньня промежных кропак маршруту (задача каміваяжора, сартаваньне па адлегласьці) \n\t* Пошук вуліцы па назве (побач) \n\t* Убудова планаваньня маршрутаў (сьцягваньне/редагаваньне/захавеньне GPX файлаў) \n\t* Новы экран сьцягваньня \n\t* Падтрымка ўкладзеных тэчак для GPX файлаў (упарадкуйце вашыя GPX файлы) \n\t* Выдалены файлы SRTM \n\t* Падтрымка OSM нататак 
+    </string>
     <string name="search_street_in_neighborhood_cities">Пошук вуліцы ў суседніх гарадах</string>
     <string name="intermediate_items_sort_return">Прамежкавыя кропкі перасартыраваныя ў парадку шляху да месца прызначэньня.</string>
     <string name="intermediate_items_sort_by_distance">Упарадкаваць па адлегласьці</string>
@@ -106,7 +114,8 @@
 	<string name="hno">Нумар дома</string>
     <string name="website">Вэб-сайт</string>
 	<string name="phone">Тэлефон</string>
-    <string name="tip_recent_changes_1_3_t">Зьмены ў версіі 1.3: \n\t* Перапісана падтрымка планшэтаў і вялікіх эканаў \n\t* Тэма Holo (налады) \n\t* Дадатковыя налады для стабілізацыі компасу \n\t* Верхняя левая кнопка на экране мапы замяняе кнопку Меню</string>
+    <string name="tip_recent_changes_1_3_t">Зьмены ў версіі 1.3: \n\t* Перапісана падтрымка планшэтаў і вялікіх эканаў \n\t* Тэма Holo (налады) \n\t* Дадатковыя налады для стабілізацыі компасу \n\t* Верхняя левая кнопка на экране мапы замяняе кнопку Меню
+    </string>
     <string name="monitoring_settings">Сэрвісы хронікі і сьпячы рэжым</string>
     <string name="monitoring_settings_descr">Наладжваньні запісу трэкаў і фонавага рэжыму</string>
     <string name="osmand_monitoring_plugin_description">Дазволіць трэкінг й навігацыю ў сьпячым рэжыме(калі эрран выключаны) праз пэрыядычнае апытаньне прылады GPS. Паказаць налады што садзейнічаюць запісу вандровак ў лякальныя GPX файлы ці ў сеткавы вэб-сэрвіс.</string>
@@ -124,7 +133,8 @@
 	<string name="tip_recent_changes_1_2_t">Зьмены ў 1.2.1 \n\t*Выпраўлены Геа сэрвісы (Foursquare, c:geo) \n\t*Выпраўлена дрыжаньне выявы пад час навігаціі \n\t*Інші незначні виправлення \n\nЗьмены ў 1.2: \n\t* Выпраўлены памылкі (маршруцізаціі, пошуку, запісу відэа/голасу, аудыё-падказак, некторыя паляпшэньні адлюстраваньня) \n\t* Спрошчанае наланаладжваньне слою рэльефу (патрэбная убудова Ізаліній вышынь) \n\t* Магчыма выкарыстоўваць спасылкі з maps.google.com \n\t* Новы віджэт (GPS інфа) \n\t* Дададзена падтрымка шматаконнага інтэрфейсу для апошніх мадэляў Samsung \n\t* Фільтр Калмана для компаса \n\t* Падтрымка гадзіньніка Pebble</string>
     <string name="layer_hillshade">Слой ценяў рэльефу</string>
     <string name="map_widget_gps_info">Зьвесткі GPS</string>
-    <string name="tip_recent_changes_1_1_4_t">Зьмены ў 1.1.4: \n\t* рэдызайн інтэрфейсу \n\t* Выпраўленыя памылкі</string>
+    <string name="tip_recent_changes_1_1_4_t">Зьмены ў 1.1.4: \n\t* рэдызайн інтэрфейсу \n\t* Выпраўленыя памылкі
+    </string>
     <string name="access_arrival_time">Час прыбыцьця</string>
     <string name="item_checked">адзначана</string>
     <string name="item_unchecked">не адзначана</string>
@@ -136,10 +146,11 @@
     <string name="index_name_openmaps">OpenMaps Эўропа</string>
     <string name="download_hillshade_item">Ценi рэльефу</string>
     <string name="download_hillshade_maps">Слой ценяў рэльефу</string>
-    <string name="tip_recent_changes_1_1_2_t">Зьмены ў 1.1.2: \n\t* Паляпшэньне аўдыё/відэа убудовы (фота з інфармацыяй EXIF) \n\t* Вапраўлена зручнасьць і рэструкрурызаваная убудова Ізалініі вышынь \n\t* Пакет ценяў рэльефу для убудовы Ізалініі вышынь \n\t* Выпраўленне памылак (неаптымальнай маршрутызацыі)</string>
+    <string name="tip_recent_changes_1_1_2_t">Зьмены ў 1.1.2: \n\t* Паляпшэньне аўдыё/відэа убудовы (фота з інфармацыяй EXIF) \n\t* Вапраўлена зручнасьць і рэструкрурызаваная убудова Ізалініі вышынь \n\t* Пакет ценяў рэльефу для убудовы Ізалініі вышынь \n\t* Выпраўленне памылак (неаптымальнай маршрутызацыі)
+    </string>
     <string name="dist_control_start">Пачаць</string>
     
-    <string name="local_indexes_cat_srtm">Contour lines data</string>
+    <string name="local_indexes_cat_srtm">Дадзеныя гарызанталяў</string>
     <string name="local_indexes_cat_av">Аўдыё/відэа зьвесткі</string>
     <string name="stop_routing_confirm">Сапраўды спыніць навігацыю ?</string>
     <string name="clear_dest_confirm">Сапраўды сьцерці месца прызначэньня (і кропкі шляху)?</string>
@@ -154,12 +165,12 @@
     
     <string name="intermediate_points_change_order">Зьмяніць парадак</string>
     <string name="srtm_paid_version_msg">Please consider to buy the Contour lines plugin in the Market to support further development.</string>
-    <string name="srtm_paid_version_title">Contour lines plugin</string>
-    <string name="av_def_action_choose">Select on request</string>
+    <string name="srtm_paid_version_title">Убудова для падтрымкі гарызанталяў</string>
+    <string name="av_def_action_choose">Выбар па запыце</string>
     <string name="av_def_action_video">Запіс відэа</string>
     <string name="av_def_action_audio">Запіс аўдыё</string>
-    <string name="av_widget_action_descr">Select default widget action</string>
-    <string name="av_widget_action">Default widget action</string>
+    <string name="av_widget_action_descr">Выберыце дзеяньне віджэта па змаўчаньні</string>
+    <string name="av_widget_action">Дзеяньне віджэте па змаўчанні</string>
     <string name="av_video_format_descr">Выбар выхаднога фармату відэа</string>
     <string name="av_video_format">Video output format</string>
     <string name="av_use_external_recorder_descr">Выкарыстоўваць сістэмны рэкордэр для відэа</string>
@@ -194,29 +205,29 @@
     <string name="av_control_stop">stop</string>
     <string name="av_control_start">Пачаць</string>
     <string name="map_widget_av_notes">Аўдыё/відэа нататкі</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
+    <string name="osmand_srtm_short_description_80_chars">Убудова OsmAnd для пазасеткавых гарызанталяў</string>
     <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd\'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Вымярэньне адлегласьці</string>
     <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location …\" to assign a note to the specified location</string>
     <string name="monitoring_control_stop">stop</string>
     <string name="map_widget_audionotes">Аўдыё-нататкі</string>
-    <string name="audionotes_plugin_description">Запісваць аўдыё/відэа нататкі падчас вандроўкі.</string>
+    <string name="audionotes_plugin_description">Запісваць аўдыё/відэа-нататкі падчас вандроўкі</string>
     <string name="audionotes_plugin_name">Аўдыё/відэа нататкі</string>
     <string name="index_srtm_parts">часткі</string>
-    <string name="index_srtm_ele">Contour lines</string>
+    <string name="index_srtm_ele">Гарызанталі</string>
     <string name="srtm_plugin_description">Facilitates downloading offline contour lines and hillshades (\'Settings\' → \'Data Management\' → \'Download\' → Select desired map type).</string>
     <string name="srtm_plugin_name">Contour lines plugin</string>
     <string name="download_select_map_types">Іншыя мапы</string>
     <string name="download_roads_only_item">Толькі дарогі</string>
-    <string name="download_srtm_maps">Contour lines</string>
+    <string name="download_srtm_maps">Гарызанталі</string>
     <string name="download_regular_maps">Звычайныя мапы</string>
     <string name="download_roads_only_maps">Мапы дарог</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Схаваць межы</string>
-	<string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin has an old version and needs to be updated.</string>
+	<string name="rendering_attr_noAdminboundaries_description">Не адлюстроўваць рэгіянальныя межы (адміністатыўныя ўзроўні 5-9)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid убудова мае старую версію і мае патрэбу ў абнаўленні.</string>
     <string name="osmodroid_plugin_description">OsMoDroid plugin is OsmAnd extension for OsModroid application for online tracking features. Information about the service is available on http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
+    <string name="osmodroid_plugin_name">Убудова OsMoDroid</string>
 	<string name="tip_altitude_offset">Карэкцыя вышыні над узроўнем мора</string>
 	<string name="tip_altitude_offset_t">Most GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
 		\n\nA better approximation to these local systems is the EGM96 (geoid) reference.
@@ -225,13 +236,13 @@
     <string name="map_widget_max_speed">Абмежаваньне хуткасьці</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Будынкаў ня знойдзена.</string>
-    <string name="incremental_search_city">Search city incrementally</string>
+    <string name="incremental_search_city">Пошук горада паступова</string>
     <string name="search_villages_and_postcodes">Пошук вёсак / паштовага індэкса</string>
-	<string name="rendering_attr_showRoadMaps_description">Select when to display roads-only maps:</string>
+	<string name="rendering_attr_showRoadMaps_description">Абярыце час для адлюстраваньня дарожных карт:</string>
 	<string name="rendering_attr_showRoadMaps_name">Мапы дарог</string>
     <string name="safe_mode_description">Працаваць у бясьпечным рэжыме (трохі павольней але бяз свойскіх бібліятэк).</string>
     <string name="safe_mode">Бясьпечны рэжым</string>
-    <string name="native_library_not_running">The application is running in safe mode (disable it in the Settings).</string>
+    <string name="native_library_not_running">Праграма працуе ў бясьпечным рэжыме (адключыць яго ў наладах).</string>
     <string name="background_service_is_enabled_question">Спячы рэжым OsmAnd па-ранейшаму працуе. Вы хочаце выключыць яго?</string>
     <string name="tip_recent_changes_1_0_0_t">Changes in 1.0.0:
 	\n\t* Improved routing: faster, more precise, up to 250 km
@@ -696,10 +707,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="validate_gpx_upload_name_pwd">Калі ласка, пазначце імя й пароль карыстальніка OSM каб заладоўваць файлы GPX.</string>
     	<string name="default_buttons_support">Падтрымка</string>
 	<string name="support_new_features">Падтрымка новых уласьцівасьцяў</string>
-	<string name="support_new_features_descr">Donate to see new features implemented in the application</string>
+	<string name="support_new_features_descr">Ахвяраваць, каб убачыць новыя магчымасці, рэалізаванымі ў праграме</string>
 	<string name="show_ruler_level">Паказваць лінейкі</string>	
 	<string name="info_button">Інфармацыя</string>
-	<string name="back_to_location">Back to position</string>
+	<string name="back_to_location">Вярнуцца да пазіцыі</string>
 	<string name="help">Дапамога</string>
 	<string name="show_details">Паказаць дэталі</string>
 	<string name="accessibility_extensions_descr">Пашырэньні даступнасьці для старых вэрсій Android</string>
@@ -760,8 +771,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="rendering_out_of_memory">Недастаткова памяці каб паказаць абраную прастору</string>
 	<string name="use_fluorescent_overlays">Флюарэсцэнтныя пласты</string>
 	<string name="use_fluorescent_overlays_descr">Ужываць флюарэсцэнтныя колеры для трэкаў і шляхоў</string>
-	<string name="offline_edition">Offline editing</string>
-	<string name="offline_edition_descr">Always use offline editing</string>
+	<string name="offline_edition">Аўтаномнае рэдагаваньне</string>
+	<string name="offline_edition_descr">Заўсёды выкарыстоўваць аўтаномнае рэдагаваньне</string>
 	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1:
 		\n\t- Offline POI editing 
 		\n\t- Online Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
@@ -773,25 +784,25 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t- Other changes
 	</string>
 	<string name="update_poi_does_not_change_indexes">Зьмены POI у праграме не ўплываюць на зладаваныя файлы мапы, зьмены захоўваюцца толькі ў лякальныя файлы.</string>
-	<string name="local_openstreetmap_uploading">Uploading …</string>
-	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs were uploaded</string>
-	<string name="local_openstreetmap_uploadall">Upload all</string>
+	<string name="local_openstreetmap_uploading">Перадача …</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/Памылкі былі адасланы</string>
+	<string name="local_openstreetmap_uploadall">Адаслаць усё</string>
 	<string name="local_openstreetmap_show">Паказаць на мапе</string>
 	<string name="local_openstreetmap_upload">Заладаваць зьмены ў OSM</string>
-	<string name="local_openstreetmap_delete">Delete modification</string>
-	<string name="local_openstreetmap_descr_title">Asynchronous OSM editing:</string>
-	<string name="local_openstreetmap_settings">Locally saved OSM POIs/Bugs</string>
+	<string name="local_openstreetmap_delete">Выдаліць зьмены</string>
+	<string name="local_openstreetmap_descr_title">Асінхроннае рэдагаванне OSM:</string>
+	<string name="local_openstreetmap_settings">Лакальна захаваныя OSM POI/Памылкі</string>
 	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs/Bugs noted in local database</string>
 	<string name="live_monitoring_descr">Дасылаць трэкінг ў пазначаны вэб-сэрвіс</string>
-	<string name="live_monitoring">Online tracking</string>
-	<string name="live_monitoring_interval_descr">Specify online tracking interval</string>
-	<string name="live_monitoring_interval">Online tracking interval</string>
+	<string name="live_monitoring">Сеткавае сачэньне</string>
+	<string name="live_monitoring_interval_descr">Задайце інтэрвал сеткавага сачэньня</string>
+	<string name="live_monitoring_interval">Інтэрвал сеткавага сачэньня</string>
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
-	<string name="live_monitoring_url">Online tracking web address</string>
+	<string name="live_monitoring_url">Вэб-адрас для сеткавага сачэньня</string>
 	<string name="gpx_monitoring_disabled_warn">Калі ласка, дазвольце \'Лагаваньне трэкаў у GPX файл\' у наладах трэкінгу.</string>
 	<string name="show_current_gpx_title">Паказаць дзейны трэк</string>
 	<string name="tip_recent_changes_0_7_0_t">Зьмены ў 0.7.0: \n\t- Пазасеткавыя зьвесткі вікіпэдыі з артыкуламі \n\t- Абноўленыя мапы \n\t- Іншыя невялікія пашырэньні</string>    
-	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads and does not support offline Wikipedia articles.</string>
+	<string name="free_version_message">Гэтая бясплатная версія OsmAnd абмяжоўваецца %1$s загрузкамі і не падтрымлівае аўтаномныя артыкулы Вікіпедыі.</string>
 	<string name="free_version_title">Свабодная вэрсія</string>
 	<string name="poi_context_menu_showdescription">Паказваць апісаньні POI</string>
 	<string name="index_name_north_america">Паўночная Амэрыка</string>
@@ -824,7 +835,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="user_name_descr">Патрэбна для прадстаўленьня ў openstreetmap.org</string>
 	<string name="user_password">Ваш пароль OSM</string>
 	<string name="user_password_descr">Патрэбна для прадстаўленьня ў openstreetmap.org</string>
-	<string name="osmand_service">Sleep mode functionality</string>
+	<string name="osmand_service">Функцыянальнасць рэжыму сну</string>
 	<string name="osmand_service_descr">Ужываць каб OsmAnd працавала падчас выключанага экрану</string>
 	<string name="tip_rotation_switching">Арыентацыя мапы</string>
 	<string name="tip_rotation_switching_t_v2">You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
@@ -879,7 +890,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="auto_follow_route_navigation_descr">Аўтаматычнае цэнтраваньне толькі падчас навігацыі.</string>
 	<string name="auto_follow_location_enabled">Аўтаматычнае цэнтраваньне падчас карыстаньня.</string>
 	<string name="pref_vector_rendering">Налады маляваньня вэктарамі</string>
-	<string name="pref_overlay">Overlay / underlay</string>
+	<string name="pref_overlay">Накладаньне / падкладка</string>
 	<string name="pref_raster_map">Налады крыніцы мапы</string>
 	<string name="pref_vector_map">Налады вэктарнай мапы</string>
 	<string name="delete_confirmation_msg">Выдаліць %1$s?</string>
@@ -913,9 +924,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_version_changed_info">Сэрвер утрымлівае файлы мапы якія не сумяшчальныя з вашай вэрсіяй праграмы. Каб зладаваць і карыстацца імі трэба абнавіць праграму да новай вэрсіі.</string>
 	<string name="local_index_mi_rename">Пераназваць</string>
 	<string name="show_gpx_route">Паказаць на мапе</string>
-	<string name="poi_filter_nominatim">Online Nominatim</string>
+	<string name="poi_filter_nominatim">Сеткавы Nominatim</string>
 	<string name="search_position_current_location_search">Пошук месца…</string>
-	<string name="search_position_current_location_found">Position (found)</string>
+	<string name="search_position_current_location_found">Месцазнаходжаньне (знойдзена)</string>
 	<string name="search_position_address">Адрас…</string>
 	<string name="search_position_favorites">Упадабаныя…</string>
 	<string name="search_position_undefined">Нявызначаныя</string>
@@ -938,7 +949,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="save_route_dialog_title">Захаваць шлях як GPX трэк</string>
 	<string name="route_successfully_saved_at">Шлях пасьпяхова захаваны як \'%1$s\'.</string>
-	<string name="filename_input">File name: </string>
+	<string name="filename_input">Імя файла: </string>
 	<string name="file_with_name_already_exist">Файл з такой самай назвай ужо існуе.</string>
 	<string name="default_buttons_save">Захаваць</string>
 	<string name="menu_save_directions">Захаваць напрамкі</string>
@@ -983,13 +994,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_indexes_cat_voice">Галасавыя зьвесткі (запісаныя)</string>
 	<string name="local_indexes_cat_gpx">Зьвесткі GPX</string>
 	<string name="local_indexes_cat_poi">Зьвесткі цікавосткаў</string>
-	<string name="ttsvoice">TTS Voice</string>
-	<string name="search_offline_clear_search">New Search</string>
-	<string name="map_text_size_descr">Select text size for names on the map</string>
+	<string name="ttsvoice">TTS голас</string>
+	<string name="search_offline_clear_search">Новы пошук</string>
+	<string name="map_text_size_descr">Выберыце памер шрыфта для назваў на карце</string>
 	<string name="map_text_size">Памер шрыфту мапы</string>
 	<string name="trace_rendering">Rendering debug info</string>
-	<string name="trace_rendering_descr">Display rendering performance</string>
-	<string name="tip_recent_changes">Recent Changes</string>
+	<string name="trace_rendering_descr">Паказаць прадукцыйнасць рэндэрынгу</string>
+	<string name="tip_recent_changes">Нядаўнія зьмены</string>
 	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6: 
 		\n\t- Text To Speech engine for voice navigation
 		\n\t- Make map renderer more detailed
@@ -1004,7 +1015,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no internet connection is available.</string>
 	<string name="tts_language_not_supported_title">Мова не падтрымліваецца</string>
 	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to look for another TTS engine in Market? Otherwise the preset TTS language will be used.</string>
-	<string name="tts_missing_language_data_title">Missing data</string>
+	<string name="tts_missing_language_data_title">Адсутнічаюць дадзеныя</string>
 	<string name="tts_missing_language_data">No data for the selected language is installed. Do you want to go to Market to install?</string>
 	<string name="gpx_option_reverse_route">Reverse GPX direction</string>
 	<string name="gpx_option_destination_point">Use current destination</string>
@@ -1017,7 +1028,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="voice_stream_music">Мэдыя/музычны канал</string>
 	<string name="warning_tile_layer_not_downloadable">Application cannot download map layer %1$s, please try to reinstall it.</string>
 	<string name="overlay_transparency_descr">Modify overlay transparency</string>
-	<string name="overlay_transparency">Overlay transparency</string>
+	<string name="overlay_transparency">Празрыстасць накладаньня</string>
 	<string name="map_transparency_descr">Modify base map transparency</string>
 	<string name="map_transparency">Base map transparency</string>
 	<string name="layer_underlay">Underlay map…</string>
@@ -1027,13 +1038,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="default_none">None</string>
 	<string name="map_overlay">Overlay map</string>
 	<string name="map_overlay_descr">Choose overlay map</string>
-	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
+	<string name="tile_source_already_installed">Карта ўжо ўсталявана, налады будуць абноўлены</string>
 	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
-	<string name="internet_not_available">Internet connection required for operation is not available</string>
+	<string name="internet_not_available">Патрабуецца падключэнне да Інтэрнэту для выкананьня аперацыі, але яго няма</string>
 	<string name="install_more">Усталяваць яшчэ…</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
-	<string name="tip_location_sharing">Share a Location</string>
+	<string name="tip_location_sharing">Дзяліцца месцазнаходжаньнем</string>
 	<string name="tip_location_sharing_t">You can share the location of interesting places on your trip with family or friends via the \'Use location\' context menu → \'Share location\'.
 		\n\nThen chose a way to share your location. The choices are: E-Mail, SMS(text), or just copy the location coordinates to the device clipboard.
 	</string>
@@ -1043,7 +1054,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\nAfter saving a Favorite, it is accessible via \'Menu\' → \'Favorites\'. Tapping on any entry in the \'Favorites\' list provides options like to navigate to it, edit or delete it.
 		\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' in \'Menu\' → \'Map layers\'.
 	</string>
-	<string name="error_doing_search">Error occurred in offline search</string>
+	<string name="error_doing_search">Памылка пры аўтаномным пошуку</string>
 	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
 	<string name="search_osm_offline">Search geo location</string>
 	<string name="system_locale">System</string>
@@ -1162,7 +1173,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="select_all">Вылучыць усе</string>
 	<string name="reload">Абнавіць</string>
 	<string name="fast_route_mode">Найхутчэйшы шлях</string>
-	<string name="fast_route_mode_descr">Пазначыць каб разьлічваць найхутчэйшы шлях, ці зьняць пазнаку для найкарацейшага шляху</string>
+	<string name="fast_route_mode_descr">Пазначыць каб разьлічваць найхутчэйшы шлях, ці зьняць пазнаку для найкарацейшага шляху </string>
 	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
 	<string name="context_menu_item_download_map">Download map</string>
 	<string name="select_max_zoom_preload_area">Select maximum zoom to preload</string>
@@ -1393,32 +1404,32 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="reload_tile">Reload tile</string>
 	<string name="mark_point">Target</string>
 	<string name="show_osm_bugs_descr">Show OpenStreetBugs on map</string>
-	<string name="show_osm_bugs">Show OpenStreetBugs</string>
+	<string name="show_osm_bugs">Паказаць OpenStreetBugs</string>
 	<string name="favourites_activity">Упадабаныя</string>
 	<string name="add_to_favourite">Дадаць да ўпадабаных</string>
 	<string name="use_english_names_descr">Выбар паміж стандартных і ангельскіх назваў</string>
 	<string name="use_english_names">Ангельскія назвы на мапе</string>
-	<string name="app_settings">Application settings</string>
-	<string name="search_address">Search address</string>
+	<string name="app_settings">Налады праграмы</string>
+	<string name="search_address">Пошук адраса</string>
 	<string name="choose_building">Абраць будынак</string>
 	<string name="choose_street">Абраць вуліцу</string>
 	<string name="choose_city">Абраць горад</string>
 	<string name="ChooseCountry">Абраць краіну</string>
 	<string name="show_view_angle">Display viewing direction</string>
-	<string name="map_view_3d_descr">Enable 3D view of the map</string>
+	<string name="map_view_3d_descr">Ўключыць 3D від на карце</string>
 	<string name="map_view_3d">Map View 3D</string>
-	<string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
-	<string name="show_poi_over_map">Show POI</string>
+	<string name="show_poi_over_map_description">Паказаць POI па карце (выкарыстаць апошні абраны фільтр)</string>
+	<string name="show_poi_over_map">Паказаць POI</string>
 	<string name="map_tile_source_descr">Choose the source of online or cached map tiles</string>
 	<string name="map_tile_source">Tile map source</string>
 	<string name="map_source">Крыніца мапы</string>
-	<string name="use_internet">Use Internet</string>
+	<string name="use_internet">Выкарыстоўваць Інтэрнэт</string>
 	<string name="show_location">Паказаць месца</string>
 	<string name="map_preferences">Мапа</string>
 	<string name="settings_activity">Налады</string>
-	<string name="show_gps_coordinates_text">Show GPS coordinates on map</string>
-	<string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
-	<string name="app_description">Navigation application</string>
+	<string name="show_gps_coordinates_text">Паказаць GPS каардынаты на мапе</string>
+	<string name="use_internet_to_download_tile">Выкарыстоўваць Інтэрнэт, каб спампаваць фрагмэнты мапы, што адсутнічаюць</string>
+	<string name="app_description">Навігацыйная праграма</string>
 	<string name="exit_Button">Выхад</string>
 	<string name="map_Button">Мапа</string>
 	<string name="settings_Button">Налады</string>
@@ -1429,14 +1440,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_POI_level_btn">Знайсьці больш</string>
 	<string name="incremental_search_street">Search street incrementally</string>
 	<string name="incremental_search_building">Search building incrementally</string>
-	<string name="choose_available_region">Choose region from list</string>
+	<string name="choose_available_region">Выбраць рэгіён са сьпісу</string>
 	<string name="choose_intersected_street">Абраць скрыжаваньне</string>
 	<string name="Closest_Amenities">Closest amenities</string>
 	<string name="app_mode_car">Аўта</string>
 	<string name="app_mode_bicycle">Ровар</string>
 	<string name="app_mode_pedestrian">Пешшу</string>
-	<string name="position_on_map_center">Center</string>
-	<string name="position_on_map_bottom">Bottom</string>
+	<string name="position_on_map_center">Цэнтр</string>
+	<string name="position_on_map_bottom">Ніз</string>
 	<string name="navigate_point_top_text">Увядзіце шырату й даўгату ў абраным фармаце (D - градусы, M - хвіліны, S - сэкунды)</string>
 	<string name="navigate_point_latitude">Шырата</string>
 	<string name="navigate_point_longitude">Даўгата</string>
@@ -1454,12 +1465,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_address_street_option">Скрыжаваньне вуліц</string>
 	<string name="search_tabs_location">Месца</string>
 	<string name="context_menu_item_add_favorite">Дадаць да ўпадабаных</string>
-	<string name="context_menu_item_update_map">Update map</string>
+	<string name="context_menu_item_update_map">Абнавіць карту</string>
 	<string name="context_menu_item_open_bug">Open OSM bug</string>
 	<string name="context_menu_item_create_poi">Стварыць цікавостку</string>
 	<string name="default_buttons_yes">Так</string>
 	<string name="default_buttons_cancel">Скасаваць</string>
-	<string name="default_buttons_apply">Apply</string>
+	<string name="default_buttons_apply">Застасаваць</string>
 	<string name="default_buttons_add">Дадаць</string>
 	<string name="default_buttons_no">Не</string>
 	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
@@ -1469,21 +1480,21 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="favourites_context_menu_delete">Выдаліць упадабанае</string>
 	<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
 	<string name="favourites_remove_dialog_success">Favorite point {0} was successfully deleted.</string>
-	<string name="osb_add_dialog_title">Enter bug text</string>
-	<string name="osb_add_dialog_success">Bug successfully created</string>
-	<string name="osb_add_dialog_error">Exception occurred: bug was not created</string>
-	<string name="osb_author_dialog_password">OSM password (optional)</string>
+	<string name="osb_add_dialog_title">Калі ласка, увядзіце тэкст памылкі</string>
+	<string name="osb_add_dialog_success">Памылка паспяхова створана</string>
+	<string name="osb_add_dialog_error">Выключная сітуацыя: памылка не была створана</string>
+	<string name="osb_author_dialog_password">OSM пароль (неабавязковы)</string>
 	<string name="osb_comment_menu_item">Дадаць камэнтар</string>
-	<string name="osb_comment_dialog_message">Message</string>
+	<string name="osb_comment_dialog_message">Паведамленьне</string>
 	<string name="osb_comment_dialog_author">Імя аўтара</string>
 	<string name="osb_comment_dialog_title">Adding comment to bug</string>
 	<string name="osb_comment_dialog_add_button">Дадаць камэнтар</string>
-	<string name="osb_comment_dialog_success">Comment was successfully added</string>
-	<string name="osb_comment_dialog_error">Exception occurred: comment was not added</string>
+	<string name="osb_comment_dialog_success">Гэты каментар быў паспяхова дададзены</string>
+	<string name="osb_comment_dialog_error">Выключная сітуацыя: каментар не быў дададзены</string>
 	<string name="osb_close_menu_item">Close bug</string>
 	<string name="osb_close_dialog_title">Closing bug</string>
 	<string name="osb_close_dialog_close_button">Close bug</string>
-	<string name="osb_close_dialog_success">Bug was successfully closed</string>
+	<string name="osb_close_dialog_success">Памылка была паспяхова зачынена</string>
 	<string name="osb_close_dialog_error">Exception occurred: bug was not closed</string>
 	<string name="poi_edit_title">Рэдагаваць цікавостку</string>
 	<string name="poi_create_title">Стварыць цікавостку</string>
@@ -1495,12 +1506,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_action_add">дадаць</string>
 	<string name="poi_action_change">зьмяніць</string>
 	<string name="poi_action_succeded_template">Action {0} completed successfully.</string>
-	<string name="poi_error_unexpected_template">Unexpected error occurred while performing action {0}.</string>
-	<string name="poi_error_io_error_template">I/O error occurred while performing action {0}.</string>
+	<string name="poi_error_unexpected_template">Нечаканая памылка пры выкананьні дзеяньня {0}.</string>
+	<string name="poi_error_io_error_template">Адбылася памылка ўводу/вываду пры выкананьні дзеяньня {0}.</string>
 	<string name="poi_error_info_not_loaded">Info about node was not loaded</string>
 	<string name="poi_dialog_name">Назва</string>
 	<string name="poi_dialog_opening_hours">Open</string>
-	<string name="poi_dialog_comment">Comment</string>
+	<string name="poi_dialog_comment">Каментар</string>
 	<string name="poi_dialog_comment_default">POI changing</string>
 	<string name="poi_dialog_other_tags_message">All other tags are preserved</string>
 	<string name="default_buttons_commit">Commit</string>
@@ -1508,21 +1519,21 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="filter_current_poiButton">Фільтраваць</string>
 	<string name="edit_filter_delete_menu_item">Выдаліць</string>
 	<string name="edit_filter_save_as_menu_item">Захаваць як</string>
-	<string name="edit_filter_delete_dialog_title">Delete selected filter?</string>
-	<string name="edit_filter_delete_message">Filter {0} has been deleted</string>
-	<string name="edit_filter_create_message">Filter {0} has been created</string>
+	<string name="edit_filter_delete_dialog_title">Выдаліць абраны фільтр?</string>
+	<string name="edit_filter_delete_message">Фільтр {0} быў выдалены</string>
+	<string name="edit_filter_create_message">Фільтр {0} быў створаны</string>
 	<string name="default_buttons_selectall">Вылучыць усе</string>
 	<string name="email">email</string>
 	<string name="av_camera_focus">Camera focus type</string>
 	<string name="av_camera_focus_descr">Select internal camera focus type</string>
-	<string name="av_camera_focus_auto">Auto focus</string>
+	<string name="av_camera_focus_auto">Аўтафокус</string>
 	<string name="av_camera_focus_hiperfocal">Hyperfocal focus</string>
 	<string name="av_camera_focus_edof">Extended depth of field (EDOF)</string>
-	<string name="av_camera_focus_infinity">Focus is set at infinity</string>
-	<string name="av_camera_focus_macro">Macro (close-up) focus mode</string>
-	<string name="av_camera_focus_continuous">The camera continuously tries to focus</string>
+	<string name="av_camera_focus_infinity">Фокус усталяваны на бясконцасці</string>
+	<string name="av_camera_focus_macro">Макра (буйны план) рэжым факусоўкі</string>
+	<string name="av_camera_focus_continuous">Камера пастаянна спрабуе сфакусавацца</string>
 	<string name="av_photo_play_sound">Play sound on photo shot</string>
-	<string name="av_photo_play_sound_descr">Choose whether to play a sound when shooting photos</string>
+	<string name="av_photo_play_sound_descr">Выберыце, ці трэба прайграваць гук пры здымцы фатаграфій</string>
 	<string name="tip_map_styles">Стылі мапы</string>
 	<string name="tip_map_styles_t">OsmAnd падтрымлівае адлюстраваньне лакальных вектарных мап рознымі стылямі ў адпаведнасьці з вашымі патрэбамі:↵
 →→\n\nКаб зьмяніць збалансаваны \'перадвызначаны\' стыль мапы, у \'Меню\' → \'Наладжваньні экрана\' → \'Стылі мапы\' абярыце напрыклад
@@ -1620,4 +1631,39 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="animate_routing_route">Імітацыя з выкарыстаньнем разлічанага маршруту </string>
     <string name="animate_routing_gpx">Імітацыя з выкарыстаньнем GPX трэка</string>
     <string name="app_modes_choose">Профілі праграмы</string>
-	</resources>
+	<string name="index_item_world_altitude_correction">Глябальная карэкцыя вышыні</string>
+	<string name="index_item_world_seamarks">Навігацыйныя знакі ўсяго сьвету</string>
+	<string name="index_item_world_bitcoin_payments">Bitcoin плацяжы ўсяго сьвету</string>
+	<string name="keep_and_add_destination_point">Дадаць пунктам прызначэньня</string>
+    <string name="route_descr_select_destination">Выбраць месца прызначэньня</string>
+    <string name="route_descr_favorite">Упадабаныя .…</string>
+    <string name="route_preferences">Настройкі маршрута</string>
+    <string name="calculate_osmand_route_gpx">Разьлічыць пазасеціўны маршрут OsmAnd</string>
+    <string name="guidance_preferences_descr">Навігацыйныя настройкі</string>
+    <string name="routing_preferences_descr">Настройкі маршрутызацыі</string>
+    <string name="complex_route_calculation_failed">Хуткі разлік маршруту ня ўдаўся (%s), пераход на марудны разлік.</string>
+    <string name="disable_complex_routing_descr">Адключэньне дзьвюх фазнай маршрутызацыі для аўтамабільнай навігацыі</string>
+    <string name="amenity_type_seamark">Навігацыйны знак</string>
+    <string name="app_mode_hiking">Пешы турызм</string>
+    <string name="app_mode_boat">Судна</string>
+    <string name="tip_faq_t">Калі ласка, наведайце https://code.google.com/p/osmand/wiki/FAQ каб пабачыць часта задаваныя пытаньні.</string>
+    <string name="local_osm_changes_delete_all_confirm">Вы зьбіраецеся выдаліць %1$d змены OSM. Вы ўпэўненыя?</string>
+    <string name="animate_routing_route_not_calculated">Калі ласка, разлічыць маршрут першым</string>
+    <string name="osmodroid_unseek">Не сачыць за аб'ектам</string>
+    <string name="android_19_location_disabled">З версіі KitKat вы ня можаце загружаць і абнаўляць карту ў папярэднім месцы захоўвання (%s).  Вы хочаце змяніць каталог на дазволены і скапіраваць ўсе файлы туды?
+         \n Увага: старыя файлы застануцца некранутымі.
+         \n Увага: будзе немагчымы абмен файламі паміж OsmAnd і OsmAnd+. </string>
+    <string name="route_is_too_long">Пазасеціўная маршрутызацыя OsmAnd можа заняць вельмі шмат часу (а часам і не спрацаваць) для кропак на адлегласьці больш чым у 200 км адзін ад аднаго.  Вы можаце дадаць прамежкавыя шляхавыя кропкі для павышэння прадукцыйнасці.</string>
+	<string name="tip_recent_changes_1_7_1_t">Зьмены ў 1.7:
+\n\t* ВАЖНА карты павінны быць навей лютага 2014 г.
+\n\t* Цалкам абноўленая маршрутызацыя (хуткая і дакладная)
+\n\t* Новы экран з планаваннем маршруту (больш інтуітыўным і больш магутны)
+\n\t* УВАГА GPX маршрут даступны ў па кнопцы Налады маршруту
+\n\t* Аўтаматычнае прыбіраньне кнопкак ў рэжыме навігацыі
+\n\t* Разлік маршрут да першай кропки GPX-маршруту
+\n\t* Актыўная мадэляванне ў тунэлях
+\n\t* Шмат дробных паляпшэнняў UX і выпраўленняў юзабіліці
+\n\t* Налада хуткасці вымаўленьня
+    </string>
+    <string name="app_modes_choose_descr">Выберыце профілі карыстання бачныя ў праграме</string>
+    </resources>
