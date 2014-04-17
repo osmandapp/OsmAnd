@@ -1694,7 +1694,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="index_item_world_bitcoin_payments">Miejsca akceptujące płatności Bitcoin</string>
 	<string name="lang_pt_br">Portugalski (Brazylia)</string>
     <string name="index_name_canada">Ameryka Północna - Kanada</string>
-    <string name="index_item_nation_addresses">Międzynarodowe adresy</string>
+    <string name="index_item_nation_addresses">Adresy krajowe</string>
 	<string name="index_item_world_basemap">Podstawowa mapa świata</string>
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
     </resources>
