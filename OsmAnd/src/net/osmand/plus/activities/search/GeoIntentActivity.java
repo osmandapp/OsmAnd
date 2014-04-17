@@ -204,7 +204,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			String parameter = data.getQueryParameter("q");
 			if (parameter == null) {
 				parameter = data.getQueryParameter("daddr");
-            }
+			}
 			if(parameter != null) {
 			    q = parameter.split(" ")[0];	
 			}
