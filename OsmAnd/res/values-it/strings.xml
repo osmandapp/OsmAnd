@@ -312,7 +312,7 @@
   <string name="si_mi_yard">Miglia/iarde</string>
   <string name="si_km_m">Chilometri/metri</string>
   <string name="yard">iarda</string>
-  <string name="foot">ft</string>
+  <string name="foot">piedi</string>
   <string name="mile_per_hour">mph</string>
   <string name="mile">miglio</string>
   <string name="send_location_way_choose_title">Condividi la posizione usando</string>
@@ -1738,7 +1738,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="index_name_gb">Europa - Gran Bretagna</string>
     <string name="lang_zh">Cinese</string>
     <string name="lang_pt_br">Portoghese (Brasile)</string>
-    <string name="index_name_canada">Americano - Canada</string>
+    <string name="index_name_canada">Nord americano - Canada</string>
     <string name="index_item_nation_addresses">indirizzi nazionali</string>
 	<string name="index_item_world_altitude_correction">Correzione altitudine mondiale</string>
 	<string name="index_item_world_seamarks">Boe mondiali</string>
