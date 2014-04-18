@@ -263,10 +263,10 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 						|| e.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
 					item.setTextColor(okColor); // GREEN
 					String sfName = e.getTargetFileName();
-					if (indexActivatedFileNames.containsKey(sfName)) {
-						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-					} else {
+					if (!indexActivatedFileNames.containsKey(sfName)) {
 						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+					} else {
+						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					}
 				} else if (e.getDate() != null) {
 					String sfName = e.getTargetFileName();
