@@ -289,11 +289,21 @@
   <string name="tip_app_mode">Profilo Utente</string>
   
   <string name="tip_navigation">Navigazione</string>
-  <string name="tip_navigation_t">Prima di iniziare la navigazione devi selezionare una destinazione. Dopo averla selezionata seleziona \'Menu\' -&gt; \'Percorsi\' sulla mappa e seleziona il tipo di navigazione.
+  <string name="tip_navigation_t">Per ottenere indicazioni, tieni premuto sul luogo di destinazione (poi premi la sua descrizione e seleziona \'Indicazioni verso\'), oppure seleziona \'Indicazioni\' dopo aver premuto sul risultato di una ricerca o un preferito.
+		\n\nLa destinazione è segnata sulla mappa con una bandiera arancione e OsmAnd mostrerà la distanza di arrivo e la direzione per raggiungerla in linea d'aria (con un triangolo arancione).
+		\n\nPuoi selezionare \'Avvia navigazione\', per chiedere a OsmAnd di guidarti fino a destinazione fornendoti avvisi vocali (se abilitati), etc. Oppure seleziona \'Mostra percorso\' per ottenere una guida statica senza aggiornamenti mentre ti muovi.
+		\n\nPer ricevere indicazioni partendo da un punto diverso alla tua posizione attuale, seleziona il punto voluto sulla mappa e scegli \'Indicazioni da\'.
+		\n\nSe usi \'Indicazioni da\' insieme ad \'Avvia navigazione\', OsmAnd passerà alla tua posizione attuale on appena essa sarà disponibile (questo modo è stato studiato proprio per permettere di avviare immediatamente la navigazione ancor prima che la posizione sia stata individuata), mentre \'Indicazioni da\' insieme a \'Mostra percorso\' calcola il percorso da un punto arbitrario senza effettuare alcun aggiornamento.
 	</string>
   <string name="tip_search">Ricerca</string>
-  <string name="tip_search_t">\tPuoi cercare i luoghi direttamente sulla mappa, per indirizzo, posizione, PDI, o come predefinito preferito.
-\n\tSelezionando \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menù contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'.
+  <string name="tip_search_t">Puoi cercare i luoghi direttamente sulla mappa attraverso \'Utilizza la posizione\' → \'Cerca nelle vicinanze\', oppure andando in \'Menu\' → \'Ricerca\'.
+		\n\nLa schermata di ricerca fornisce varie schede per effettuare ricerche
+		\n\tper indirizzo
+		\n\tdalle coordinate
+		\n\tda un PDI (dal tipo o dal nome)
+		\n\tdalla tua cronologia ricerche
+		\n\toppure fra i tuoi preferiti.
+		\n\nPer ogni risultato un menù contestuale permetterà di scegliere tra \'Indicazioni\' o \'Visualizza nella mappa\', etc.
 	</string>
   <string name="tip_map_context_menu">Menu \'Utilizza la posizione\'</string>
   <string name="tip_map_context_menu_t">Il menu contestuale \'Utilizza la posizione…\' mostra tutte le azioni possibili per un punto (posizione).
