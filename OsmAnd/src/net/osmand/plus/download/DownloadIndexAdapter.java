@@ -265,7 +265,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					String sfName = e.getTargetFileName();
 					if (indexActivatedFileNames.containsKey(sfName)) {
 						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-					} else
+					} else {
 						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					}
 				} else if (e.getDate() != null) {
