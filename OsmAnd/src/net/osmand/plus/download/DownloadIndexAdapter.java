@@ -262,7 +262,12 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				if(e.getType() == DownloadActivityType.HILLSHADE_FILE
 						|| e.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
 					item.setTextColor(okColor); // GREEN
-					item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+					String sfName = e.getTargetFileName();
+					if (indexActivatedFileNames.containsKey(sfName)) {
+						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+					} else
+						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+					}
 				} else if (e.getDate() != null) {
 					String sfName = e.getTargetFileName();
 					if (e.getDate().equals(indexActivatedFileNames.get(sfName))) {
