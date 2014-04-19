@@ -423,7 +423,7 @@
   <string name="next_button">Další</string>
   <string name="previous_button">Předchozí</string>
   <string name="unit_of_length_descr">Zvolte jednotku vzdálenosti a rychlosti</string>
-  <string name="unit_of_length">Jednotka vzdálenosti</string>
+  <string name="unit_of_length">Jednotky vzdálenosti</string>
   <string name="si_mi_foots">Míle/stopy</string>
   <string name="si_mi_yard">Míle/yardy</string>
   <string name="si_km_m">Kilometry/metry</string>
@@ -1126,8 +1126,8 @@
     <string name="av_def_action_audio">Nahrát zvuk</string>
     <string name="av_widget_action_descr">Zvolte výchozí funkci</string>
     <string name="av_widget_action">Výchozí funkce</string>
-    <string name="av_video_format_descr">Zvolte video formát záznamu</string>
-    <string name="av_video_format">Video formát záznamu</string>
+    <string name="av_video_format_descr">Zvolte formát videozáznamu</string>
+    <string name="av_video_format">Formát videozáznamu</string>
     <string name="av_use_external_recorder_descr">Použít systémový záznamník videa</string>
     <string name="av_use_external_recorder">Použít externí záznamník</string>
     <string name="av_settings_descr">Nastavit možnosti zvuku a videa</string>
@@ -1399,7 +1399,7 @@ s často kladenými otázkami.</string>
     <string name="calculate_osmand_route_gpx">Vypočítat OsmAnd offline trasu</string>
     <string name="app_mode_truck">Kamion</string>
     <string name="guidance_preferences_descr">Nastavení navigace</string>
-    <string name="routing_preferences_descr">Nastavení určování trasy</string>
+    <string name="routing_preferences_descr">Nastavení výpočtu trasy</string>
     <string name="speech_rate_descr">Zadejte rychlost řeči TTS</string>
     <string name="speech_rate">Rychlost řeči</string>
     <string name="tip_recent_changes_1_7_1_t">Změny verze 1.7:
