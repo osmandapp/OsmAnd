@@ -1453,7 +1453,7 @@
     <string name="edit_tilesource_successfully">Kachelquelle %1$s wurde erfolgreich gespeichert</string>
     <string name="edit_tilesource_elliptic_tile">Elliptischer Merkator</string>
     <string name="edit_tilesource_maxzoom">Max Zoom</string>
-    <string name="edit_tilesource_expiration_time">Verfallszeit (Minuten)</string>
+    <string name="edit_tilesource_expiration_time">Ablaufzeit (Minuten)</string>
     <string name="edit_tilesource_minzoom">Min Zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Wähle vorhandene…</string>
@@ -1465,7 +1465,7 @@
     <string name="default_or">oder</string>
 	<string name="gps_status_eclipsim">GPS Status</string>
     <string name="remember_choice">Auswahl merken</string>
-    <string name="animate_routing_route_not_calculated">Bitte berechnen Sie zuerst die Route</string>
+    <string name="animate_routing_route_not_calculated">Zuerst die Route berechnen</string>
     <string name="animate_routing_gpx">Simulation anhand einer GPX-Spur</string>
     <string name="animate_routing_route">Simulation anhand berechneter Route </string>
     <string name="app_mode_hiking">Wandern</string>
