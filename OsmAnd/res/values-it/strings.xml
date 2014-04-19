@@ -18,7 +18,7 @@
   <string name="local_openstreetmap_were_uploaded">{0} PDI/gli errori sono stati caricati</string>
   <string name="local_openstreetmap_uploadall">Carica tutti</string>
   
-  <string name="local_openstreetmap_show">Visualizza nella mappa</string>
+  <string name="local_openstreetmap_show">Visualizza sulla mappa</string>
   <string name="local_openstreetmap_upload">Carica in OSM la modifica</string>
   <string name="local_openstreetmap_delete">Elimina la modifica</string>
   <string name="local_openstreetmap_descr_title">Modifica asincrona di OSM:</string>
