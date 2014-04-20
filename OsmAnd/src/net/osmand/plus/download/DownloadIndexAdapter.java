@@ -265,6 +265,9 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					String sfName = e.getTargetFileName();
 					if (indexActivatedFileNames.containsKey(sfName)) {
 						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+					// next case since present hillshade files cannot be deactivated, but are not in indexActivatedFileNames
+					} else if (e.getType() == DownloadActivityType.HILLSHADE_FILE) {
+						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					} else {
 						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					}
