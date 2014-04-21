@@ -123,7 +123,7 @@
 	<string name="amenity_type_user_defined">사용자 정의</string>
 	<string name="fav_export_confirmation">이전에 저장한 등록지점들에 대한 파일이 이미 존재합니다. 이 파일을 대체하시겠습니까?</string>
 <string name="profile_settings">특정 설정 프로파일</string>
-	<string name="settings_preset">사용자 프로파일</string>
+	<string name="settings_preset">기본 프로필</string>
 	<string name="settings_preset_descr">사용자 프로파일을 선택합니다. (각 프로파일의 맵, 트래킹, 네비게이션 설정은 아래처럼 지정할 수 있습니다.)</string>
 	
 	
@@ -479,7 +479,7 @@
 	<string name="loading_builds_failed">OsmAnd 빌드 목록 추출이 실패하였습니다</string>
 	<string name="loading_builds">OsmAnd 빌드 적재…</string>
 	<string name="select_build_to_install">설치할 OsmAnd 빌드 선택</string>
-	<string name="contribution_activity">기부 버전을 위한 특별 액티비티</string>
+	<string name="contribution_activity">버전 설치</string>
 
 	<string name="gps_status_app_not_found">GPS 상태 앱이 설치되지 않았습니다. 마켓에서 찾을까요?</string>
 
@@ -795,7 +795,7 @@
 <string name="choose_available_region">목록에서 지역을 선택합니다</string>
 <string name="choose_intersected_street">교차로를 선택합니다</string>
 <string name="Closest_Amenities">가장 가까운 시설들</string>
-<string name="app_mode_default">기본</string>
+<string name="app_mode_default">지도 찾기</string>
 <string name="app_mode_car">자동차</string>
 <string name="app_mode_bicycle">자전거</string>
 <string name="app_mode_pedestrian">보행자</string>
@@ -898,41 +898,41 @@
 	<string name="lang_hy">아르메니아어</string>
 	<string name="lang_eu">바스크어</string>
 	<string name="lang_bg">불가리아어</string>
-	<string name="lang_cs">체코</string>
-	<string name="lang_da">덴마크</string>
-	<string name="lang_nl">독일</string>
-	<string name="lang_fi">핀란드</string>
-	<string name="lang_fr">프랑스</string>
-	<string name="lang_de">독일</string>
-	<string name="lang_el">그리스</string>
+	<string name="lang_cs">체코어</string>
+	<string name="lang_da">덴마크어</string>
+	<string name="lang_nl">네델란드어</string>
+	<string name="lang_fi">핀란드어</string>
+	<string name="lang_fr">프랑스어</string>
+	<string name="lang_de">독일어</string>
+	<string name="lang_el">그리스어</string>
 	<string name="lang_iw">히브리어</string>
-	<string name="lang_hi">인도</string>
-	<string name="lang_hu">헝가리</string>
-	<string name="lang_id">인도네시아</string>
-	<string name="lang_it">이탈리아</string>
-	<string name="lang_ja">일본</string>
-	<string name="lang_ko">한국</string>
-	<string name="lang_no">노르웨이</string>
-	<string name="lang_pl">폴란드</string>
-	<string name="lang_ro">루마니아</string>
-	<string name="lang_ru">러시아</string>
-	<string name="lang_sk">슬로바키아</string>
-	<string name="lang_es">스페인</string>
-	<string name="lang_sv">스웨덴</string>
-	<string name="lang_tr">터키</string>
-	<string name="lang_uk">우크라이나</string>
-	<string name="lang_vi">베트남</string>
-	<string name="index_name_canada">카나다</string>
-    <string name="index_name_italy">이탈리아</string>
-    <string name="index_name_gb">영국</string>
-    <string name="calculate_osmand_route_without_internet">인터넷 연결없이 루트구간 계산하기</string>
+	<string name="lang_hi">힌디어</string>
+	<string name="lang_hu">헝가리어</string>
+	<string name="lang_id">인도네시아어</string>
+	<string name="lang_it">이탈리아어</string>
+	<string name="lang_ja">일본어</string>
+	<string name="lang_ko">한국어</string>
+	<string name="lang_no">노르웨이어</string>
+	<string name="lang_pl">폴란드어</string>
+	<string name="lang_ro">루마니아어</string>
+	<string name="lang_ru">러시아어</string>
+	<string name="lang_sk">슬로바키아어</string>
+	<string name="lang_es">스페인어</string>
+	<string name="lang_sv">스웨덴어</string>
+	<string name="lang_tr">터키어</string>
+	<string name="lang_uk">우크라니아어</string>
+	<string name="lang_vi">베트남어</string>
+	<string name="index_name_canada">북미 - 캐나다</string>
+    <string name="index_name_italy">유럽 - 이탈리아</string>
+    <string name="index_name_gb">유럽 - 영국</string>
+    <string name="calculate_osmand_route_without_internet">인터넷 연결없이 루트구간 계산</string>
     <string name="gpx_option_calculate_first_last_segment">첫번째와 마지막 루트구간 계산하기</string>
-    <string name="use_displayed_track_for_navigation">항법을 위해 표시된 트랙을 사용하기</string>
+    <string name="use_displayed_track_for_navigation">항법을 위해 표시된 트랙을 사용하시겠습니까?</string>
     <string name="keep_and_add_destination_point">목적지로 추가</string>
     <string name="select_gpx">GPX파일 선택하기</string>
     <string name="route_descr_select_destination">목적지 선택</string>
-    <string name="route_descr_select_on_map">지도상에 선택</string>
-    <string name="route_descr_favorite">즐겨찾기</string>
+    <string name="route_descr_select_on_map">지도에서 선택</string>
+    <string name="route_descr_favorite">즐겨찾기…</string>
     <string name="route_info">루트 정보</string>
     <string name="routing_attr_prefer_motorway_name">전용도로 선호</string>
 	<string name="routing_attr_prefer_motorway_description">전용도로 선호</string>
@@ -947,21 +947,21 @@
 	<string name="routing_attr_avoid_motorway_name">전용도로 회피하기</string>
 	<string name="routing_attr_avoid_motorway_description">전용도로 회피하기</string>
 	<string name="routing_attr_weight_name">최대중량</string>
-	<string name="routing_attr_weight_description">차량무게제한 분류</string>
-    <string name="android_19_location_disabled">KitKat version 이후로 이전에 저장한 위치에 지도를 다운로드하고 업데이트 할 수 없다 (%s). 모든 파일을 그곳에 복사하는 것을 허락하겠는가?
+	<string name="routing_attr_weight_description">차량 중량 제한 분류</string>
+    <string name="android_19_location_disabled">KitKat version 이후로 이전에 저장한 위치에 지도를 다운로드하고 업데이트 할 수 없습니다 (%s). 모든 파일을 그곳에 복사하는 것을 허락하겠는가?
         \n Note : old files will stay untouched.  
         \n Note : it will not be possible to share files between OsmAnd and OsmAnd+. </string>
     <string name="application_dir_change_warning2">오슴앤드는 새 목적지로 데이터를 이동하려고 한다. 그렇게 하겠습니까?</string>
     <string name="copying_osmand_one_file_descr">새 목적지로 파일(%s)을 복사중...</string>
     <string name="copying_osmand_files_descr">새로운 목적지에 OsmAnd 파일을 복사중 (%s)</string>
     <string name="copying_osmand_files">OsmAnd 파일을 복사중</string>
-    <string name="calculate_osmand_route_gpx">오푸라인 루트 계산하기</string>
+    <string name="calculate_osmand_route_gpx">오스먼드 오프라인 루트 계산하기</string>
     <string name="app_mode_truck">트럭</string>
     <string name="routing_preferences_descr">길찾기 선호도</string>
-    <string name="speech_rate_descr">TTS 속도 뷴류하기</string>
+    <string name="speech_rate_descr">TTS에 대한 음성속도를 지정합니다</string>
     <string name="speech_rate">스피치 속도</string>
     <string name="complex_route_calculation_failed">빠른 루트 계산(%s) 실패, 느린 계산으로..</string>
-    <string name="disable_complex_routing">복잡한 길찾기 불가능</string>
+    <string name="disable_complex_routing">복잡한 라우팅을 사용하지 않도록 설정</string>
     <string name="amenity_type_seamark">등대</string>
     <string name="app_modes_choose">앱 프로필</string>
 	<string name="map_widget_map_rendering">지도 렌더링:</string>
@@ -969,14 +969,14 @@
     <string name="app_mode_motorcycle">모터사이클</string>
     <string name="app_mode_boat">배</string>
     <string name="app_mode_aircraft">비행기</string>
-    <string name="tip_faq_t">자주 질문하는 것을 보려면 https://code.google.com/p/osmand/wiki/FAQ 를 방문하세요.</string>
-    <string name="tip_faq">자주 질문하는 것들(FAQ)</string>
+    <string name="tip_faq_t">자주 묻는 질문을 보려면 https://code.google.com/p/osmand/wiki/FAQ 를 방문하세요.</string>
+    <string name="tip_faq">자주 묻는 질문 (FAQ)</string>
     <string name="local_osm_changes_delete_all">모두 삭제하기</string>
     <string name="animate_routing_route_not_calculated">먼저 루트를 계산하세요</string>
     <string name="animate_routing_route">계산된 루트를 사용하여 모의주행하기 </string>
     <string name="animate_routing_gpx">GPX파일을 이용하여 모의주행하기</string>
     <string name="remember_choice">나의 선택을 기억하기</string>
-    <string name="gps_status_eclipsim">GPS 상태</string>
+    <string name="gps_status_eclipsim">GPS status</string>
     <string name="default_and">그리고</string>
     <string name="default_or">또는</string>
 	<string name="auto_zoom_none">자동 줌 안됨</string>
@@ -1009,14 +1009,14 @@
     <string name="osmodroid_mode_off">OsMoDroid 시작</string>
     <string name="osmodroid_refresh">채널 새로 고침</string>
     <string name="osmodroid_seek">개체 탐색</string>
-    <string name="osmodroid_unseek">찾지못한 오브젝트</string>
+    <string name="osmodroid_unseek">객체 탐색않음</string>
     <string name="announce_gpx_waypoints">GPX 포인트 알리기</string>
     <string name="speak_title">알리기…</string>
 	<string name="speak_descr">거리 이름, 교통 경고(강제 정지, 속도 범프), 속도 카메라 경고, 제한 속도를 알리는 구성</string>
-	<string name="speak_street_names">거리 이름을 ( TTS ) 말하기</string>
+	<string name="speak_street_names">거리 이름을 말하기 (TTS )</string>
     <string name="speak_speed_limit">속도 제한 알리기</string>
     <string name="speak_cameras">속도 카메라 알리기</string>
-	<string name="speak_traffic_warnings">교통 알람을 알리기</string>
+	<string name="speak_traffic_warnings">교통 경고 알리기</string>
     <string name="index_item_world_bitcoin_payments">세계 비트코인 지불</string>
 	<string name="lang_be">벨라루스어</string>
 	<string name="lang_bs">보스니아어</string>
@@ -1030,11 +1030,11 @@
 	<string name="lang_cy">웨일스어</string>
 	<string name="route_preferences">루트 선호도</string>
     <string name="guidance_preferences_descr">항법 선호도</string>
-    <string name="disable_complex_routing_descr">자동차 네비게이션에 대한 2상 라우팅을 사용하지 않도록 설정</string>
+    <string name="disable_complex_routing_descr">자동차 네비게이션에 대한 2길 라우팅을 사용하지 않도록 설정</string>
     <string name="app_modes_choose_descr">응용 프로그램에서 볼 수있는 사용자 프로파일을 선택</string>
     <string name="map_widget_appearance">나머지 요소 :</string>
 	<string name="local_osm_changes_delete_all_confirm">%1$d OSM 변경 사항을 삭제하려고 합니다.  확실한가요?</string>
-    <string name="route_is_too_long">OsmAnd 오프라인 라우팅는 200km 이상 떨어진 포인트에 대해 매우 긴 (때때로 작동 되지 않을 수 있음) 시간이 걸리 수 있다.  당신은 더 나은 성능을 위해 중간 중간 포인트를 추가할 수 있다.</string>
+    <string name="route_is_too_long">OsmAnd 오프라인 라우팅는 200km 이상 떨어진 포인트에 대해 매우 긴 시간이 걸리 수 있다. (때때로 작동 되지 않을 수 있음)   당신은 더 나은 성능을 위해 중간 중간 포인트를 추가할 수 있다.</string>
 	<string name="auto_zoom_close">클로즈업</string>
 	<string name="auto_zoom_far">미드 레인지에</string>
 	<string name="auto_zoom_farthest">장거리에</string>
@@ -1052,7 +1052,7 @@
     <string name="route_descr_lat_lon">위도 %1$.3f, 경도 %2$.3f</string>
     <string name="route_descr_current_location">현재 위치</string>
     <string name="route_to">To:</string>
-    <string name="route_via">참조:</string>
+    <string name="route_via">Via:</string>
     <string name="route_from">보낸 사람 :</string>
 	<string name="local_index_gpx_timespan">\n시간 범위: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\n시간 이동: %1$d:%2$02d:%3$02d</string>
@@ -1069,9 +1069,9 @@
 	\n\t* Support OSM Notes 
     </string>
     <string name="search_street_in_neighborhood_cities">인근 도시에서 거리 검색</string>
-    <string name="intermediate_items_sort_return">중간 포인트는 목적지까지의 길에 포인트의 순서를 최적화하려고 재 정렬</string>
+    <string name="intermediate_items_sort_return">중간 포인트는 목적지까지의 길에 포인트의 순서를 최적화하기위해 재 정렬</string>
     <string name="intermediate_items_sort_by_distance">정렬 (도어 투 도어)</string>
-    <string name="local_osm_changes_backup_successful">OSM 변경 파일을 성공적으로 생성됨 %1$s</string>
+    <string name="local_osm_changes_backup_successful">OSM 변경 파일을 성공적으로 생성 %1$s</string>
     <string name="local_osm_changes_backup_failed">백업 OSM 변경 실패</string>
     <string name="local_osm_changes_backup">OSM 변화에 따라 백업</string>
     <string name="delete_point">포인트 삭제</string>
@@ -1083,17 +1083,17 @@
     <string name="gpx_file_name">GPX 파일 이름</string>
     <string name="gpx_saved_sucessfully">GPX 파일이 성공적으로 {0} 에 저장</string>
     <string name="osmand_distance_planning_plugin_description">포인트 사이의 거리를 측정하기 위해 경로 생성 (또는 기존 GPX 파일을 수정/사용).  GPX로 저장, GPX 루트를 계획할 수 있습니다.</string>
-    <string name="osmand_distance_planning_plugin_name">거리 계산기 및 계획 도구</string>
+    <string name="osmand_distance_planning_plugin_name">거리 계산 및 계획 도구</string>
     <string name="default_buttons_do_not_show_again">다시 표시하지 않음</string>
     <string name="distance_measurement_start_editing">편집 시작</string>
-    <string name="distance_measurement_finish_editing">끝마침 편집</string>
+    <string name="distance_measurement_finish_editing">편집 끝내기</string>
     <string name="distance_measurement_finish_subtrack">새로운 subtrack(세그먼트) 시작</string>
     <string name="distance_measurement_clear_route">모든 포인트 지우기</string>
-    <string name="distance_measurement_save_gpx">GPX 로 저장</string>
+    <string name="distance_measurement_save_gpx">GPX로 저장</string>
     <string name="distance_measurement_load_gpx">기존 GPX 열기</string>
     <string name="wait_current_task_finished">현재 작업이 완료 될 때까지 기다리십시오</string>
     <string name="use_kalman_filter_compass_descr">나침반 출렁거림을 방지하기 위해 칼만 필터를 사용</string>
-    <string name="use_kalman_filter_compass">칼만 필터를 사용</string>
+    <string name="use_kalman_filter_compass">칼만 필터 사용</string>
     <string name="access_mark_final_location_first">접근성 모드 : 먼저 목적지를 선택하세요</string> 
     <string name="use_magnetic_sensor_descr">방위센서(GPS) 대신 나침반 값을 결정하는 자기센서를 사용</string>
     <string name="use_magnetic_sensor">자기센서를 사용</string>
@@ -1103,7 +1103,7 @@
     <string name="cancel_route">루트 해제</string>
     <string name="cancel_navigation">항법 정지</string>
     <string name="clear_destination">목적지 지우기</string>
-    <string name="download_using_mobile_internet">현재 와이파이가 연결되어 있지 않습니다. 당신은 현재의 인터넷 연결을 통해서 계속 다운로드 하시겠습니까?</string>
+    <string name="download_using_mobile_internet">현재 와이파이가 연결되어 있지 않습니다. 현재의 인터넷 연결(3G)을 통해서 계속 다운로드 하시겠습니까?</string>
     <string name="street_name">거리</string>
 	<string name="hno">주택 수</string>
     <string name="tip_recent_changes_1_3_t">버전 1.3 의 변경 사항 :
@@ -1113,9 +1113,9 @@
          \n\t* 지도 화면에서 좌상단 버튼는  메뉴버튼을 대체
     </string>
     <string name="monitoring_settings">트랙로깅 및 절전 모드</string>
-    <string name="monitoring_settings_descr">여행을 기록하고 절전 모드를 사용하도록 설정하는 방법 구성</string>
-    <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트랙 및 황법 활성화, 주기적으로 GPS 장치를 깨어 통해.
-표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 여행을 기록하는 설비 .</string>
+    <string name="monitoring_settings_descr">트랙을 기록하고 절전 모드를 사용하도록 설정하는 방법 구성</string>
+    <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트랙 및 황법 활성화, 주기적으로 GPS 장치를 통해.
+표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능</string>
     <string name="osmand_monitoring_plugin_name">트랙로깅 및 절전 모드</string>
     <string name="osmand_background_plugin_description">주기적으로 GPS 장치를 깨어 통해 절전모드(스크린 끄기)에서 트랙 및 항법을 가능하게 하는 설정 표시</string>
     <string name="choose_osmand_theme_descr">응용 프로그램 테마를 선택</string>
@@ -1123,6 +1123,117 @@
     <string name="accessibility_options">접근성 옵션</string>
     <string name="select_address_activity">주소 선택</string>
     <string name="favourites_list_activity">즐겨찾기 선택</string>
-    <string name="local_openstreetmap_act_title">OSM 수정</string>
+    <string name="local_openstreetmap_act_title">OSM 대량수정</string>
     <string name="default_buttons_other_actions">다른 작업</string>
-    </resources>
+    <string name="available_downloads_left">다운로드 할 파일 가능 %1$d</string>
+    <string name="save_current_track_widget">저장
+        \n 현재 GPX 파일</string>
+	<string name="layer_hillshade">음영 층</string>
+    <string name="map_widget_gps_info">GPS 정보</string>
+    <string name="access_arrival_time">도착 시간</string>
+    <string name="item_checked">확인</string>
+    <string name="item_unchecked">선택되지 않은</string>
+    <string name="map_view">지도</string>
+    <string name="prefer_motorways">전용도로 선호</string>
+	<string name="prefer_in_routing_title">선호…</string>
+	<string name="prefer_in_routing_descr">전용도로 선호</string>
+    <string name="download_hillshade_item">음영</string>
+    <string name="download_hillshade_maps">음영 중첩</string>
+    <string name="dist_control_start">시작</string>
+    
+    <string name="local_indexes_cat_srtm">등고선 데이터</string>
+    <string name="local_indexes_cat_av">오디오/비디오 데이터</string>
+    <string name="stop_routing_confirm">항법을 중지 하시겠습니까 ?</string>
+    <string name="clear_dest_confirm">목적지를 취소 하시겠습니까 (그리고 중간 포인트 포함) ?</string>
+    <string name="precise_routing_mode_descr">고장 없이 정확한 루트를 계산 할 수 있습니다.  (아직도 거리 제한 하고 느린 속도로)</string>
+    <string name="precise_routing_mode">정확한 라우팅 (알파)</string>
+    <string name="recording_context_menu_show">표시</string>
+    <string name="recording_photo_description">사진 %1$s of %2$s</string>
+    <string name="av_def_action_picture">사진 찍기</string>
+    <string name="recording_context_menu_precord">사진 찍기</string>
+    <string name="dropbox_plugin_description">보관용 플러그인은 보관용 계정으로 트랙과 오디오/비디오 메모를 동기화 할 수 있습니다 .</string>
+    <string name="dropbox_plugin_name">보관용 플러그인</string>
+    <string name="intermediate_points_change_order">순서 변경</string>
+    <string name="srtm_paid_version_msg">등고선 추가 개발을 지원하기 위해 시장에서 플러그인 구입을 고려하시기 바랍니다 .</string>
+    <string name="srtm_paid_version_title">등고선 플러그인</string>
+    <string name="av_def_action_choose">요청에 대한 선택</string>
+    <string name="av_def_action_video">비디오 기록</string>
+    <string name="av_def_action_audio">오디오 기록</string>
+    <string name="av_widget_action_descr">기본 위젯의 동작을 선택합니다</string>
+    <string name="av_widget_action">기본 위젯 작업</string>
+    <string name="av_video_format_descr">비디오 출력 형식 선택</string>
+    <string name="av_video_format">비디오 출력 형식</string>
+    <string name="av_use_external_recorder_descr">비디오에 시스템 레코더를 사용</string>
+    <string name="av_use_external_recorder">시스템 레코더 사용</string>
+    <string name="av_use_external_camera_descr">사진에 대한 시스템 응용 프로그램을 사용</string>
+    <string name="av_use_external_camera">카메라 앱을 사용</string>
+    <string name="av_settings_descr">오디오 및 비디오 설정을 구성</string>
+    <string name="av_settings">오디오/비디오 설정 </string>
+    <string name="recording_error">레코딩하는 동안 오류가 발생했습니다 </string>
+    <string name="recording_camera_not_available">카메라는 사용할 수 없습니다</string>
+    <string name="recording_is_recorded">오디오/비디오는 기록 되고있다. 그것은 AV 위젯을 누르면 정지합니다.</string>
+    <string name="recording_playing">\n%1$s 지정된 레코딩에서 오디오가 재생되고 있습니다.</string>
+    <string name="recording_open_external_player">외부 플레이어 열기</string>
+    <string name="recording_delete_confirm">이 기록을 삭제하시겠습니까 ?</string>
+    <string name="recording_unavailable">사용할 수 없는</string>
+    <string name="recording_context_menu_arecord">오디오 기록하기</string>
+    <string name="recording_context_menu_vrecord">비디오 녹화하기</string>
+    <string name="layer_recordings">레코딩 층</string>
+    <string name="recording_can_not_be_played">녹화를 재생할 수 없습니다</string>
+    <string name="recording_context_menu_delete">기록 삭제</string>
+    <string name="recording_context_menu_play">재생</string>
+    <string name="recording_description">레코딩 %1$s %2$s of %3$s</string>
+    <string name="recording_default_name">기록</string>
+    <string name="av_control_stop">정지</string>
+    <string name="av_control_start">시작</string>
+    <string name="map_widget_av_notes">오디오/비디오 노트</string>
+    <string name="osmand_srtm_short_description_80_chars">오프라인 등고선에 대한 OsmAnd 플러그인</string>
+    <string name="map_widget_distancemeasurement">거리 측정</string>
+    <string name="monitoring_control_stop">정지</string>
+    <string name="map_widget_audionotes">오디오 노트</string>
+    <string name="audionotes_plugin_description">트래킹하는 동안 오디오/비디오 찍기</string>
+    <string name="audionotes_plugin_name">오디오/비디오 노트</string>
+    <string name="index_srtm_parts">부분</string>
+    <string name="index_srtm_ele">등고선</string>
+    <string name="srtm_plugin_description">오프라인 등고선 과 음영은 다운로드를 용이하게 한다. (설정→데이터 관리→다운로드→ 원하는 지도 유형 선택)</string>
+    <string name="srtm_plugin_name">등고선 플러그인</string>
+    <string name="download_select_map_types">다른지도</string>
+    <string name="download_roads_only_item">오직 도로 만</string>
+    <string name="download_srtm_maps">등고선</string>
+    <string name="download_regular_maps">일반 지도</string>
+    <string name="download_roads_only_maps">도로 전용 맵</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">경계 숨기기</string>
+	<string name="rendering_attr_noAdminboundaries_description">지역 경계 표시를 억제 (관리자 레벨 5-9 )</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid 플러그인은 이전 버전을 가지고 업데이트해야 합니다.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid 플러그인은 온라인 트래킹 기능에 대한 OsModroid 응용 프로그램에 대한 OsmAnd 확장이다. 서비스에 대한 정보는 http://esya.ru 에서 사용할 수 있습니다.</string>
+    <string name="osmodroid_plugin_name">OsMoDroid 플러그인</string>
+	<string name="tip_altitude_offset">고도 보정</string>
+	<string name="map_widget_max_speed">속도 제한</string>
+    <string name="no_buildings_found">어떤 건물도 찾을 수 없습니다 .</string>
+    <string name="search_villages_and_postcodes">마을/우편 번호 검색</string>
+	<string name="rendering_attr_showRoadMaps_description">도로 전용 지도를 표시할 경우에 선택합니다 :</string>
+	<string name="rendering_attr_showRoadMaps_name">도로 전용 맵</string>
+    <string name="safe_mode_description">안전 모드에서 응용 프로그램을 실행합니다.(네이티브 코드 대신 느린 안드로이드 사용)</string>
+    <string name="safe_mode">안전 모드</string>
+    <string name="native_library_not_running">이 응용 프로그램은 안전 모드에서 실행 중입니다.(설정에서 비활성화 )</string>
+    <string name="background_service_is_enabled_question">OsmAnd 절전 모드 서비스는 계속 실행 됩니다.  해제를 원하시나요?</string>
+    <string name="tip_recent_changes_1_0_0_t">버전 1.0.0 의 변경 사항 :
+\n\t* 향상된 라우팅 : 더 빨리, 더 정확히, 최대 250km
+\n\t* 도로 전용 맵 소개
+\n\t* 지도는 중단 후 위치 잠금을 잃지 않는다
+\n\t* 탐색하는 동안 절전 모드 서비스를 활성화
+    </string>
+    <string name="tip_recent_changes_0_8_4_t">버전 0.8.4 의 변경 사항 :
+	→\n\t* 일부 버그 수정
+	→\n\t* 지도는 중단 후 위치 잠금을 잃지 않는다
+	→\n\t* 탐색 하는 동안 절전 모드 서비스를 활성화
+    </string>
+    <string name="close_changeset">변경집합 닫기</string>
+	<string name="zxing_barcode_scanner_not_found">ZXing 바코드 스캐너 응용 프로그램 이 설치되어 있지 않습니다 .  구글시장에서 검색할까요 ?</string>
+	<string name="rendering_attr_roadColors_description">도로 색상을 선택</string>
+	<string name="rendering_attr_roadColors_name">도로 색상</string>
+    <string name="map_widget_show_destination_arrow">목적지 길안내 표시</string>
+    <string name="enable_plugin_monitoring_services">위치 로깅 서비스를 사용하여 트래킹 플러그인을 사용( GPX 기록, 온라인 트래킹)</string>
+    <string name="non_optimal_route_calculation">장거리를 위한 가능한 비최적 경로 계산</string>
+	</resources>
