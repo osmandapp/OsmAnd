@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="index_item_nation_addresses">addresses nationwide</string>
-	<string name="index_item_world_altitude_correction">World altitude correcion</string>
+	<string name="index_item_world_altitude_correction">World altitude correction</string>
 	<string name="index_item_world_seamarks">World seamarks</string>
 	<string name="index_item_world_bitcoin_payments">World bitcoin payments</string>
 	<string name="index_item_world_basemap">World overview map</string>
