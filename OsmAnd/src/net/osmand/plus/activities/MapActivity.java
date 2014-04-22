@@ -324,12 +324,18 @@ public class MapActivity extends AccessibleActivity  {
 		}
 
         final Intent intent = getIntent();
-        if (intent != null && intent.getData() != null)
+        if (intent != null)
         {
-            final Uri data = intent.getData();
-            if ("file".equalsIgnoreCase(data.getScheme()))
+            if (Intent.ACTION_VIEW.equals(intent.getAction()))
             {
-                showImportedGpx(data.getPath());
+                if (intent.getData() != null)
+                {
+                    final Uri data = intent.getData();
+                    if ("file".equalsIgnoreCase(data.getScheme()))
+                    {
+                        showImportedGpx(data.getPath());
+                    }
+                }
             }
         }
 
