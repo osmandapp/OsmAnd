@@ -23,6 +23,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -713,6 +714,12 @@ public class MapActivity extends AccessibleActivity  {
                     else
                     {
                         getMyApplication().setGpxFileToDisplay(result, true);
+                        final WptPt moveTo = result.findPointToShow();
+                        if (moveTo != null)
+                        {
+                            mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
+                        }
+                        mapView.refreshMap();
                     }
 
                 }
