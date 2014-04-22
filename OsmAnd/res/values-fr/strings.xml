@@ -84,7 +84,7 @@
 \n\tPour ajouter un nouveau PI, utiliser l\'option \'Créer un point d\'intérêt\' dans le menu contextuel de la carte. Saisir les informations dans la boite de dialogue \'Créer un point d\'intérêt\' avant d\'enregistrer.
 \n\tLes erreurs de cartographie peuvent être signalées immédiatement via les bogues OSM, permettant à la communauté OSM de corriger plus rapidement le problème.
 \n\tPour créer un bogue OSM utiliser l\'option \'Ouvrir un bogue OSM\' dans le menu contextuel de la carte. Saisir une description détaillée du problème et le poster avec le bouton \'Ajouter\'.
-\n\tOSMAnd supporte la mise en cache de vos entrées en mode déconnecté (voir le paramètre correspondant), mais una connexion internet est bien sûr nécessaire pour l\'envoi des contributions de PI et de bogues OSM.</string>
+\n\tOsmAnd supporte la mise en cache de vos entrées en mode déconnecté (voir le paramètre correspondant), mais une connexion internet est bien sûr nécessaire pour l\'envoi des contributions de PI et de bogues OSM.</string>
   <string name="download_files_not_enough_space">Il n\'y a pas assez de place pour télécharger %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">Espace actuellement disponible: {2} MB ! Télécharger {0} fichier(s) ({1} MB) ?</string>
   
@@ -174,8 +174,8 @@
   <string name="show_more_map_detail">Afficher plus de détails</string>
   <string name="show_more_map_detail_descr">Afficher plus de détails sur les cartes vectorielles (routes etc.) aux niveaux de zooms inférieurs</string>
   <string name="favourites_delete_multiple_succesful">Favoris correctement supprimés.</string>
-  <string name="favorite_delete_multiple">Vous allez supprimer %1$d favoris et %2$d groupes de favoris. Êtes vous sûr ?</string>
-  <string name="favorite_home_category">Maison</string>
+  <string name="favorite_delete_multiple">Vous allez supprimer %1$d favoris et %2$d groupes de favoris. Êtes-vous sûr ?</string>
+  <string name="favorite_home_category">Domicile</string>
   <string name="favorite_friends_category">Amis</string>
   <string name="favorite_places_category">Lieux</string>
   <string name="favorite_default_category">Autres</string>
@@ -261,10 +261,10 @@
   <string name="internet_not_available">Connexion Internet nécessaire pour cette opération non disponible</string>
   <string name="install_more">Installer plus…</string>
   <string name="tip_update_index">Mise à jour des cartes hors-ligne</string>
-  <string name="tip_update_index_t">Il est très important d\'avoir des données cartographiques à jour, pour la visualisation des cartes hors-ligne, pour la recherche de points d\'intérêt ou d\'adresses, et pour la navigation hors-ligne. OsmAnd fournit un gestionnaire de données qui permet de télécharger ces cartes hors-ligne (et d\'autres données), et de vérifier si des mises à jour sont disponibles.
-	\n\nPour télécharger ou vérifier les mises à jour, allez à \'Menu Principal\' → \'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\'.
-	\n\nUne fois la liste des régions établie à partir d\'internet, sélectionnez le fichier à télécharger ou mettre à jour. Un menu en haut de l\'écran vous permet de sélectionner le type de données recherché (cartes standards, courbes de niveau, etc.).
-	\n\nL\'option \'Cartes téléchargées\' dans le menu contextuel à droite de l\'écran permet de n\'afficher que les cartes déjà téléchargées sur votre système, avec les couleurs ou polices suivantes :
+  <string name="tip_update_index_t">\tIl est très important d\'avoir des données cartographiques à jour pour la visualisation des cartes hors-ligne, la recherche de points d\'intérêt ou d\'adresses, et la navigation hors-ligne. OsmAnd fournit un gestionnaire de données qui permet de télécharger ces cartes hors-ligne (et d\'autres données), et de vérifier si des mises à jour sont disponibles.
+	\n\tPour télécharger ou vérifier les mises à jour, allez dans \'Menu Principal\' → \'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\'.
+	\n\tUne fois la liste des régions établie à partir d\'internet, sélectionnez le fichier à télécharger ou mettre à jour. Un menu en haut de l\'écran vous permet de sélectionner le type de données recherché (cartes standards, courbes de niveau, etc.).
+	\n\tL\'option \'Cartes téléchargées\' dans le menu contextuel à droite de l\'écran permet de n\'afficher que les cartes déjà téléchargées sur votre système, avec les couleurs ou polices suivantes :
 	\n\n\'Vert\' - pour les cartes à jour avec le serveur
 	\n\n\'Bleu\' - pour les cartes qui peuvent être mises à jour depuis le serveur
 	\n\n\'Italique\' - pour les cartes désactivées sur l\'appareil
@@ -272,16 +272,16 @@
   <string name="level_to_switch_vector_raster_descr">Niveau de zoom maximum pour l\'utilisation des cartes vectorielles au lieu des tuiles de carte</string>
   <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel</string>
   <string name="tip_location_sharing">Partage d\'emplacement</string>
-  <string name="tip_location_sharing_t">Vous notez un point d\'intérêt pendant votre voyage que vous voulez partager avec des amis ou de la famille ?
-\nOsmAnd vous permet de facilement partager un lieu.
-\n\tVous pouvez aller dans \'Menu contextuel de la carte\'-&gt;\'Partager un lieu\'.
+  <string name="tip_location_sharing_t">\tPendant votre voyage, vous notez un point d\'intérêt que vous voulez partager avec des amis ou de la famille ?
+\n\tOsmAnd vous permet de facilement partager un lieu.
+\n\tAllez dans \'Menu contextuel de la carte\' → \'Partager le lieu\'.
 \nSélectionnez alors le mode de partage parmi : courriel, SMS, ou copie vers le presse-papier.
 </string>
   <string name="tip_favorites">Lieux favoris</string>
-  <string name="tip_favorites_t">"Les points utilisés fréquemment peuvent être enregistrés en tant que favoris.
-\n\tPour créer un favori, allez dans le menu contextuel de la carte, sélectionnez l\'option \'Ajouter aux favoris\' et saisissez un nom adapté. Après enregistrement, ce lieu est facilement accessible par \'Menu\' → \'Favoris\'.
+  <string name="tip_favorites_t">"\tLes points utilisés fréquemment peuvent être enregistrés en tant que favoris.
+\n\tPour créer un favori, allez dans le menu contextuel de la carte, sélectionnez l\'option \'Ajouter aux favoris\' et saisissez un nom adapté. Après enregistrement, ce lieu est facilement accessible dans \'Menu\' → \'Favoris\'.
 \n\tUn appui court sur un favori dans le menu \'Favoris\' permet de créer un itinéraire pour s\'y rendre.
-\n\tPour afficher tous les favoris sur la carte, activer la couche \'Favoris\' dans \'Menu\' → \'Couches\'. "</string>
+\n\tPour afficher tous les favoris sur la carte, activez la couche \'Favoris\' dans \'Menu\' → \'Couches\'. "</string>
   <string name="create_poi_link_to_osm_doc"> <u>OSM en ligne</u> classification des cartes en images</string>
   <string name="error_doing_search">Une erreur est survenue lors de la recherche hors-ligne</string>
   <string name="search_offline_geo_error">Ne peut interpréter le geo intent:\'%s\'</string>
@@ -294,23 +294,23 @@
   <string name="tip_app_mode">Mode de fonctionnement</string>
   
   <string name="tip_navigation">Navigation</string>
-  <string name="tip_navigation_t">La navigation vers un point peut être lancée soit directement par un appui long à son emplacement sur la carte (un appui court sur la bulle apparue ouvre alors le menu contextuel avec le choix \'Aller vers le point\'), soit par un appui court sur un favori ou un résultat de recherche (en choisissant alors \'Navigation\').
-  	\n\nLa destination est alors indiquée par un point orange et un drapeau à damier. OsmAnd affiche la distance qui vous en sépare, et sa direction (par une flèche orange).
+  <string name="tip_navigation_t">\tLa navigation vers un point peut être lancée soit directement par un appui long à son emplacement sur la carte (une bulle apparaît alors, sur laquelle un appui court ouvre le menu contextuel avec le choix \'Aller vers le point\'), soit par un appui court sur un favori ou un résultat de recherche (en choisissant alors \'Navigation\').
+  	\n\tLa destination est alors indiquée par un point orange et un drapeau à damier. OsmAnd affiche la distance qui vous en sépare, et sa direction (par une flèche orange).
   </string>
   <string name="tip_search">Recherche</string>
-  <string name="tip_search_t">Vous pouvez rechercher un lieu via l\'option \'Rechercher autour du point\' dans le menu contextuel de la carte, ou via \'Menu\' → \'Rechercher\'.
+  <string name="tip_search_t">\tVous pouvez rechercher un lieu via l\'option \'Rechercher autour du point\' dans le menu contextuel de la carte, ou via \'Menu\' → \'Rechercher\'.
   	\n\nVous pouvez alors rechercher :
   	\n\t* un point d\'intérêt (par type ou par nom)
 	\n\t* une adresse
 	\n\t* des coordonnées
 	\n\t* un favori prédéfini
 	\n\t* dans l\'historique des recherches
-	\n\nDans chacun des cas, il vous sera proposé un choix entre \'Navigation\' (vers le point) ou \'Voir sur la carte\', etc.
+	\n\tDans chacun des cas, il vous sera proposé un choix entre \'Navigation\' (vers le point) ou \'Voir sur la carte\', etc.
 </string>
   <string name="tip_map_context_menu">Menu contextuel de la carte</string>
-  <string name="tip_map_context_menu_t">\tLe menu contextuel de la carte est disponible par un appui long sur la carte ou le bouton trackball.
-\n\tUne bulle apparaît alors avec les coordonnées du point : un appui court dessus ouvre le menu contextuel, un appui long fait disparaître la bulle. Le menu contextuel est également disponible depuis le bouton \'Menu\'.
-\n\tLe menu contextuel de la carte regroupe les actions possibles autour de ce point.
+  <string name="tip_map_context_menu_t">\tLe menu contextuel de la carte regroupe les actions possibles au niveau d\'un point (un lieu).
+\n\tIl est disponible par un appui long au niveau du point sur la carte, suivi d\'un appui court sur la bulle apparue avec les coordonnées du point (un appui long sur la bulle la fait disparaître).
+\n\tIl est également disponible via \'Menu\' → \'Options du point\', ou par un appui sur le bouton trackball (dans ces deux derniers cas, le point défini est le centre de la carte).
 </string>
   <string name="tip_initial">Conseils et astuces</string>
   <string name="tip_initial_t">\tOsmAnd est une application de navigation avec beaucoup de fonctionnalités.
@@ -1017,8 +1017,8 @@
 \n\t\'Ne pas tourner (nord vers le haut)\' - La carte ne change pas d\'orientation, le nord est toujours vers le haut.
 \n\t\'Direction du déplacement\' - La carte est continuellement alignée dans la direction du déplacement.
 \n\t\'Boussole\' - La carte est continuellement alignée sur les informations de la boussole.</string>
-<string name="tip_day_night_mode_t_v2">"\tLe style de la carte peut, pour certaines cartes vectorielles, être modifié selon qu\'il fait jour (plus clair) ou nuit (plus sombre)
-\n\tLes couleurs de nuit sont plus sûres pour la conduite nocturne
+<string name="tip_day_night_mode_t_v2">"\tLe style de la carte peut, pour certaines cartes vectorielles, être modifié selon qu\'il fait jour (plus clair) ou nuit (plus sombre).
+\n\tLes couleurs de nuit sont plus sûres pour la conduite nocturne.
 \n\tVous pouvez changer de règle pour la bascule jour/nuit dans \'Menu\' → \'Configurer l\'écran\' → \'Mode jour/nuit\'.
 \n\tLes choix sont :
 \n\t\'Lever/coucher du soleil\' - Bascule automatique, en fonction de l\'éphéméride (mode par défaut)
@@ -1038,8 +1038,8 @@
 <string name="snap_to_road">Coller à la route</string>
 <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable) - Cartes hors-lignes compactes disponibles pour le monde entier - Téléchargement des cartes pour un pays ou une région directement depuis l\'application - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveau, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) Limitations de la version gratuite de OsmAnd : - Nombre de téléchargement de cartes limité - Pas d\'accès aux PI Wikipédia hors-ligne. OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique, ou un donation sur osmand.net. "</string>
 <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable) - Cartes es compactes disponibles pour le monde entier - Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application - Points d\'intérêt (PI) Wikipédia hors-ligne, parfait pour le tourisme - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des courbes de niveau, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) - Affichage des limitations de vitesse, voix enregistrées et voix de synthèse"</string>
-<string name="tip_map_switch_t_v2">\tLa source des cartes et des couches affichées est modifiable via \'Menu\' -&gt; \'Couches\'.
-\n\tDans \'Source de la carte…\' vous pouvez choisir entre les cartes vectorielles préchargées (choix par défaut, nécessaires pour la navigation hors-ligne), ou des sources prédéfinies de tuiles de carte en ligne ou en cache (activer le greffon \'Cartes en ligne\' pour cela), ou des cartes créées manuellement sur un PC grâce à OsmAndMapCreator.
+<string name="tip_map_switch_t_v2">\tLa source des cartes et des couches affichées est modifiable via \'Menu\' → \'Couches\' → \'Source de la carte…\'.
+\n\tVous pouvez choisir entre les cartes vectorielles hors-ligne préchargées (choix par défaut, nécessaires pour la navigation hors-ligne), ou des sources prédéfinies de tuiles de carte en ligne ou en cache (activer le greffon \'Cartes en ligne\' pour cela), ou des cartes créées manuellement sur un PC grâce à OsmAndMapCreator.
 \n\tOsmAnd supporte également des sources personnalisées.
 </string>
 <string name="tip_app_mode_t_v2">\tOsmAnd propose des profils (personnalisables) adaptés aux différentes utilisations.
@@ -1085,12 +1085,12 @@
     <string name="tip_recent_changes_1_0_0_t">"Changements en 1.0 :\n\t* Amélioration de la navigation, plus rapide et plus précise (jusqu\'à 250 km)\n\t* Cartographie des routes\n\t* La carte ne perd plus la position courante après les interruptions\n\t* Active le service d\'arrière-plan pendant la navigation "</string>
     <string name="safe_mode_description">Exécuter l\'application dans le mode sûr (ne pas utiliser de code natif).</string>
     <string name="safe_mode">Mode sûr</string>
-    <string name="native_library_not_running">L\'application s\'exécute en mode sûr (désactiver le dans les paramètres).</string>
-    <string name="rendering_attr_showRoadMaps_description">Sélectionner quand afficher uniquement les cartes routières :</string>
+    <string name="native_library_not_running">L\'application s\'exécute en mode sûr (peut être désactivé dans Paramètres).</string>
+    <string name="rendering_attr_showRoadMaps_description">Sélectionner à quel moment afficher les cartes uniquement routières :</string>
 	<string name="rendering_attr_showRoadMaps_name">Cartes uniquement routières</string>
     <string name="download_roads_only_item">Routes uniquement</string>
     <string name="download_regular_maps">Cartes standards</string>
-    <string name="download_roads_only_maps">Cartes routières uniquement</string>
+    <string name="download_roads_only_maps">Cartes uniquement routières</string>
     <string name="incomplete_locale">incomplet</string>
 	<string name="no_buildings_found">Aucun bâtiment trouvé.</string>
     <string name="search_villages_and_postcodes">Rechercher les villages et les codes postaux</string>
@@ -1105,12 +1105,12 @@
 	<string name="rendering_attr_noAdminboundaries_description">Ne pas afficher les limites administratives régionales (niveaux 5 à 9)</string>
 	<string name="tip_altitude_offset_t">"\tLa plupart des périphériques GPS donnent des mesures d\'altitude dans le référentiel ellipsoïdal WGS84, depuis lequel une conversion vers le système local nécessite une correction en fonction de la position courante.
 \n\tUne meilleure approximation des systèmes locaux est le référentiel EGM96. OsmAnd supporte désormais l\'affichage automatique  de l\'altitude dans ce référentiel.
-\n\tIl suffit pour cela de télécharger le fichier WW15MGH.DAC depuis le gestionnaire de données hors-ligne (l\'original est à l\'adresse http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+\n\tIl suffit pour cela de télécharger le fichier 'Monde - Correction d\'altitude' depuis le gestionnaire de données hors-ligne (l\'original est à l\'adresse http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="osmodroid_plugin_old_ver_not_supported">Le greffon OsMoDroid est obsolète et doit être mis à jour.</string>
     <string name="osmodroid_plugin_description">Le greffon OsMoDroid est une extension OsmAnd pour l\'application OsMoDroid qui permet la création de traces. Pour plus d\'information à propos du service, consulter le site http://esya.ru.</string>
     <string name="osmodroid_plugin_name">Greffon OsMoDroid</string>
 	<string name="index_srtm_ele">Courbes de niveau</string>
-    <string name="srtm_plugin_description">Ce greffon permet de télécharger les courbes de niveaux (\'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des donées hors-ligne\', sélectionner \'Courbes de niveau\' dans le menu) pour une région spécifique, et de les utiliser avec les cartes hors-ligne.</string>
+    <string name="srtm_plugin_description">Ce greffon permet de télécharger les courbes de niveaux pour une région spécifique (\'Paramètres\' → \'Données hors-ligne\' → \'Télécharger des données hors-ligne\', puis sélectionner \'Courbes de niveau\' dans le menu), et de les utiliser avec les cartes hors-ligne.</string>
     <string name="srtm_plugin_name">Courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
@@ -1120,7 +1120,7 @@
 <string name="audionotes_location_not_defined">L\'emplacement à associer à la note n\'est pas encore défini. Utilisez le menu contextuel de la carte pour associer à la note l\'emplacement ainsi spécifié.</string>
     <string name="monitoring_control_stop">arrêter</string>
     <string name="map_widget_audionotes">Notes audio</string>
-    <string name="audionotes_plugin_description">Ce greffon permet de prendre des notes audio/vidéo/photo durant le voyage</string>
+    <string name="audionotes_plugin_description">Ce greffon permet de prendre des notes audio/vidéo/photo durant le voyage.</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
@@ -1415,20 +1415,20 @@
 	<string name="auto_zoom_close">Arrêt de l\'auto-zoom</string>
 	<string name="auto_zoom_far">Zoom éloigné</string>
 	<string name="auto_zoom_farthest">Zoom très éloigné</string>
-	<string name="tip_map_styles_t">OsmAnd permet l\'affichage des cartes vectorielles hors-ligne selon différents styles de rendu en fonction de vos besoins.
-		\n\nÀ la place du style de rendu \'default\', vous pouvez dans \'Menu\' → \'Configurer l\'écran\' → \'Styles de rendu\' sélectionner par exemple :
-		\n\t* le style \'Touring view\', qui fournit les informations les plus détaillées possibles pour le voyage et le tourisme, incluant des optimisations pour les conducteurs professionnels (contraste élevé, diverses routes bien distinguables).
+	<string name="tip_map_styles_t">\tOsmAnd propose différents styles de rendu pour l\'affichage des cartes vectorielles hors-ligne, en fonction de vos besoins.
+		\n\tDans \'Menu\' → \'Configurer l\'écran\' → \'Styles de rendu\', vous pouvez à la place du style de rendu \'default\' sélectionner par exemple :
+		\n\t* le style \'Touring view\', qui fournit les informations les plus détaillées possibles pour le voyage et le tourisme, avec des optimisations pour les conducteurs professionnels (contraste élevé, distinction claire des différentes routes), des options pour la randonnée alpine (Alpine hiking, classification du Club Alpin Suisse), l\'affichage des symboles de randonnée, des véloroutes 
 		\n\t* \'High contrast roads\' affiche les routes avec des couleurs très accentuées pour les situations de forte luminosité.
-		\n\t* \'Cycle-map\' est optimisé pour l\'affichage des routes pour cyclistes.
-		\n\t* \'Winter and ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'World ski\')
-		\n\t* \'Topo-map-assimilation\' est optimisé pour la randonnée et affiche les chemins en fonction de l\'échelle SAC, ainsi que les symboles de randonnée.
+		\n\t* \'Cycle-map\' est optimisé pour l\'affichage des voies pour cyclistes.
+		\n\t* \'Winter and ski\' crée une vue hivernale du paysage, et montre les domaines skiables (nécessite le téléchargement de la carte \'Monde - Ski\')
+		\n\t* \'Topo-map-assimilation\' est optimisé pour la randonnée, et affiche les chemins en fonction de la classification du Club Alpin Suisse (SAC scale), ainsi que les symboles de randonnée.
 	</string>
     <string name="remember_choice">Mémoriser mon choix</string>
     <string name="gps_status_eclipsim">GPS Status</string>
     <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer l\'itinéraire</string>
     <string name="animate_routing_route">Simulation avec l\'itinéraire calculé </string>
     <string name="animate_routing_gpx">Simulation avec la trace GPX</string>
-    <string name="tip_faq_t">Merci de visiter https://code.google.com/p/osmand/wiki/FAQ pour la Foire Aux Questions.</string>
+    <string name="tip_faq_t">\tMerci de visiter https://code.google.com/p/osmand/wiki/FAQ pour la Foire Aux Questions.</string>
     <string name="tip_faq">Foire Aux Questions</string>
     <string name="local_osm_changes_delete_all_confirm">Vous allez supprimer %1$d modifications OSM. Êtes-vous sûr ?</string>
     <string name="local_osm_changes_delete_all">Effacer tout</string>
@@ -1495,4 +1495,55 @@
     </string>
     <string name="gpx_option_calculate_first_last_segment">Calculer un itinéraire OsmAnd pour le début et la fin de l\'itinéraire</string>
     <string name="calculate_osmand_route_without_internet">Calculer un itinéraire OsmAnd hors-ligne</string>
+    <string name="index_name_italy">Europe - Italie</string>
+    <string name="index_name_gb">Europe - Grande-Bretagne</string>
+    <string name="index_name_canada">Amérique du Nord - Canada</string>
+<string name="index_item_nation_addresses">Adresses sur l\'ensemble du pays</string>
+<string name="index_item_world_altitude_correction">Monde - Correction d\'altitude</string>
+<string name="index_item_world_seamarks">Monde - Balisage maritime</string>
+<string name="index_item_world_bitcoin_payments">Monde - Paiement en bitcoin</string>
+<string name="index_item_world_basemap">Monde - Carte générale</string>
+    <string name="index_item_world_ski">Monde - Ski</string>
+    <string name="lang_hr">Croate</string>
+    <string name="lang_zh">Chinois</string>
+    <string name="lang_pt_br">Portugais (Brésil)</string>
+    <string name="lang_en">Anglais</string>
+<string name="lang_af">Afrikaans</string>
+<string name="lang_hy">Arménien</string>
+<string name="lang_eu">Basque</string>
+<string name="lang_be">Biélorusse</string>
+<string name="lang_bs">Bosnien</string>
+<string name="lang_bg">Bulgare</string>
+<string name="lang_ca">Catalan</string>
+<string name="lang_cs">Tchèque</string>
+<string name="lang_da">Danois</string>
+<string name="lang_nl">Néerlandais</string>
+<string name="lang_fi">Finnois</string>
+<string name="lang_fr">Français</string>
+<string name="lang_ka">Géorgien</string>
+<string name="lang_de">Allemand</string>
+<string name="lang_el">Grec</string>
+<string name="lang_iw">Hébreu</string>
+<string name="lang_hi">Hindi</string>
+<string name="lang_hu">Hongrois</string>
+<string name="lang_id">Indonésien</string>
+<string name="lang_it">Italien</string>
+<string name="lang_ja">Japonais</string>
+<string name="lang_ko">Coréen</string>
+<string name="lang_lv">Letton</string>
+<string name="lang_lt">Lituanien</string>
+<string name="lang_mr">Marathi</string>
+<string name="lang_no">Norvégien</string>
+<string name="lang_pl">Polonais</string>
+<string name="lang_pt">Portugais</string>
+<string name="lang_ro">Roumain</string>
+<string name="lang_ru">Russe</string>
+<string name="lang_sk">Slovaque</string>
+<string name="lang_sl">Slovène</string>
+<string name="lang_es">Espagnol</string>
+<string name="lang_sv">Suédois</string>
+<string name="lang_tr">Turc</string>
+<string name="lang_uk">Ukrainien</string>
+<string name="lang_vi">Vietnamien</string>
+<string name="lang_cy">Gallois</string>
     </resources>
