@@ -7,7 +7,6 @@ import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.media.AudioManager;
-import org.apache.http.client.protocol.ClientContext;
 
 /**
  * This helper class allows API level 8 calls to be isolated from the rest of the app. This class is only be instantiated on OS versions
