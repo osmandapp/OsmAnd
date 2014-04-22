@@ -2,10 +2,12 @@ package net.osmand.plus.api;
 
 import net.osmand.PlatformUtil;
 
+import net.osmand.plus.OsmandApplication;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.media.AudioManager;
+import org.apache.http.client.protocol.ClientContext;
 
 /**
  * This helper class allows API level 8 calls to be isolated from the rest of the app. This class is only be instantiated on OS versions
@@ -17,16 +19,16 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 	private static final Log log = PlatformUtil.getLog(AudioFocusHelperImpl.class);
 	
 	@Override
-	public boolean requestFocus(ClientContext context, int streamType) {
-		AudioManager mAudioManager = (AudioManager) ((Context) context).getSystemService(Context.AUDIO_SERVICE);
+	public boolean requestFocus(Context context, int streamType) {
+		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.requestAudioFocus(this, streamType,
 				AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 	}
 
 	@Override
-	public boolean abandonFocus(ClientContext context, int streamType) {
-		AudioManager mAudioManager = (AudioManager) ((Context) context).getSystemService(Context.AUDIO_SERVICE);
-        if (context.getSettings().INTERRUPT_MUSIC.get())
+	public boolean abandonFocus(Context context, int streamType) {
+		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        if (((OsmandApplication)context.getApplicationContext()).getSettings().INTERRUPT_MUSIC.get())
         {
             return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
         }
