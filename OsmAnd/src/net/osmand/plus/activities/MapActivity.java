@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.CallbackWithObject;
+import android.os.AsyncTask;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibilityPlugin;
@@ -53,6 +53,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -67,7 +68,6 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import org.apache.http.client.protocol.ClientContext;
 
 public class MapActivity extends AccessibleActivity  {
 	
@@ -329,7 +329,7 @@ public class MapActivity extends AccessibleActivity  {
             final Uri data = intent.getData();
             if ("file".equalsIgnoreCase(data.getScheme()))
             {
-                navigateImportedGpx(data.getPath());
+                showImportedGpx(data.getPath());
             }
         }
 
@@ -682,49 +682,41 @@ public class MapActivity extends AccessibleActivity  {
 		getMapView().refreshMap();
 	}
 
-    private void navigateImportedGpx(final String gpxFile)
+    private void showImportedGpx(final String gpxFile)
     {
-        final CallbackWithObject<GPXFile> callback = new CallbackWithObject<GPXUtilities.GPXFile>()
+        new AsyncTask<Void, Void, GPXFile>()
         {
-            @Override
-            public boolean processResult(GPXFile result)
-            {
-                getMyApplication().setGpxFileToDisplay(result, true);
-                getMapActions().setGPXRouteParams(result);
-                getMyApplication().getTargetPointsHelper().updateRoutingHelper();
-                getRoutingHelper().recalculateRouteDueToSettingsChange();
-                return true;
-            }
-        };
+            ProgressDialog progress = null;
 
-        final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading), getString(R.string.loading_data));
-        new Thread(new Runnable()
-        {
             @Override
-            public void run()
+            protected void onPreExecute()
             {
-                final GPXFile res = GPXUtilities.loadGPXFile(getApplication(), new File(gpxFile));
-                dlg.dismiss();
-                if (res != null)
+                progress = ProgressDialog.show(MapActivity.this, getString(R.string.loading), getString(R.string.loading_data));
+            }
+
+            @Override
+            protected GPXFile doInBackground(Void... nothing)
+            {
+                return GPXUtilities.loadGPXFile(getMyApplication(), new File(gpxFile));
+            }
+
+            @Override
+            protected void onPostExecute(GPXFile result)
+            {
+                progress.dismiss();
+                if (result != null)
                 {
-                    MapActivity.this.runOnUiThread(new Runnable()
+                    if (result.warning != null)
                     {
-                        @Override
-                        public void run()
-                        {
-                            if (res.warning != null)
-                            {
-                                AccessibleToast.makeText(MapActivity.this, res.warning, Toast.LENGTH_LONG).show();
-                            }
-                            else
-                            {
-                                callback.processResult(res);
-                            }
-                        }
-                    });
+                        AccessibleToast.makeText(MapActivity.this, result.warning, Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        getMyApplication().setGpxFileToDisplay(result, true);
+                    }
+
                 }
             }
-
-        }, "Loading gpx").start(); //$NON-NLS-1$
+        }.execute();
     }
 }
