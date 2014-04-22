@@ -16,7 +16,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 
 public class PoiFiltersHelper {
-	private final ClientContext application;
+	private final OsmandApplication application;
 	
 	private NameFinderPoiFilter nameFinderPOIFilter;
 	private List<PoiFilter> cacheTopStandardFilters;
@@ -37,7 +37,7 @@ public class PoiFiltersHelper {
 	
 	private static final String[] DEL = new String[] {};
 	
-	public PoiFiltersHelper(ClientContext application){
+	public PoiFiltersHelper(OsmandApplication application){
 		this.application = application;
 	}
 	public NameFinderPoiFilter getNameFinderPOIFilter() {
@@ -301,10 +301,10 @@ public class PoiFiltersHelper {
 	    private static final String CATEGORIES_COL_SUBCATEGORY = "subcategory"; //$NON-NLS-1$
 	    private static final String CATEGORIES_TABLE_CREATE =   "CREATE TABLE " + CATEGORIES_NAME + " (" + //$NON-NLS-1$ //$NON-NLS-2$
 	    CATEGORIES_FILTER_ID + ", " + CATEGORIES_COL_CATEGORY + ", " +  CATEGORIES_COL_SUBCATEGORY + ");"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		private ClientContext context;
+		private OsmandApplication context;
 		private SQLiteConnection conn;
 
-	    PoiFilterDbHelper(ClientContext context) {
+	    PoiFilterDbHelper(OsmandApplication context) {
 			this.context = context;
 	    }
 	    

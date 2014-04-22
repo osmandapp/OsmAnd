@@ -9,7 +9,6 @@ import java.util.List;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -385,7 +384,7 @@ public class GpxUiHelper {
 				GPXFile r = currentFile; 
 				for(String fname : filename) {
 					final File f = new File(dir, fname);
-					GPXFile res = GPXUtilities.loadGPXFile((ClientContext) activity.getApplication(), f);
+					GPXFile res = GPXUtilities.loadGPXFile(activity.getApplication(), f);
 					GPXUtilities.mergeGPXFileInto(res, r);
 					r = res;
 				}

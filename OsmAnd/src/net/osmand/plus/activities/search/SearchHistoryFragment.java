@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.londatiga.android.QuickAction;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -49,7 +48,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		helper = SearchHistoryHelper.getInstance((ClientContext) getActivity().getApplicationContext());
+		helper = SearchHistoryHelper.getInstance((OsmandApplication) getActivity().getApplicationContext());
 	}
 	
 	@Override
@@ -143,7 +142,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 			final HistoryEntry model = getItem(position);
 			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(location, model.getLat(), model.getLon()));
-				distance = OsmAndFormatter.getFormattedDistance(dist, (ClientContext) getActivity().getApplication()) + "  ";
+				distance = OsmAndFormatter.getFormattedDistance(dist, (OsmandApplication) getActivity().getApplication()) + "  ";
 			}
 			label.setText(distance + model.getName(), BufferType.SPANNABLE);
 			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);

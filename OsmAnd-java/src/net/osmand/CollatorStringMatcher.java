@@ -22,7 +22,7 @@ public class CollatorStringMatcher implements StringMatcher {
 	}
 
 	public CollatorStringMatcher(String part, StringMatcherMode mode) {
-		this.collator = PlatformUtil.primaryCollator();
+		this.collator = OsmAndCollator.primaryCollator();
 		this.part = part;
 		this.mode = mode;
 	}

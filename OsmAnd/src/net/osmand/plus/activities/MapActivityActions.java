@@ -416,7 +416,7 @@ public class MapActivityActions implements DialogProvider {
 				if (click != null) {
 					click.onContextMenuClick(standardId, which, false, dialog);
 				} else if (standardId == R.string.context_menu_item_search) {
-					Intent intent = new Intent(mapActivity, OsmandIntents.getSearchActivity());
+					Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getSearchActivity());
 					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
 					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -731,7 +731,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						final Intent intentSettings = new Intent(mapActivity, OsmandIntents.getSettingsActivity());
+						final Intent intentSettings = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getSettingsActivity());
 						mapActivity.startActivity(intentSettings);
 					}
 				}).reg();
@@ -740,7 +740,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				Intent newIntent = new Intent(mapActivity, OsmandIntents.getSearchActivity());
+				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getSearchActivity());
 				// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				LatLon loc = mapActivity.getMapLocation();
 				newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
@@ -754,7 +754,7 @@ public class MapActivityActions implements DialogProvider {
 				.listen(new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				Intent newIntent = new Intent(mapActivity, OsmandIntents.getFavoritesActivity());
+				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getFavoritesActivity());
 				// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(newIntent);
 			}
@@ -811,7 +811,7 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				// 1. Work for almost all cases when user open apps from main menu
-				Intent newIntent = new Intent(mapActivity, OsmandIntents.getMainMenuActivity());
+				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getMainMenuActivity());
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY, MainMenuActivity.APP_EXIT_CODE);
 				mapActivity.startActivity(newIntent);

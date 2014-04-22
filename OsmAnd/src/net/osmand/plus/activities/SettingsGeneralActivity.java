@@ -12,7 +12,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -167,13 +167,45 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				"sl", "es", "sv", "tr", "uk", "vi",
 				"cy" };
 		entries = new String[] { getString(R.string.system_locale), 
-				"English", "Afrikaans", "Armenian" + incompleteSuffix, "Basque" + incompleteSuffix, "Belarusian" + incompleteSuffix, "Bosnian" + incompleteSuffix, "Bulgarian" + incompleteSuffix,
-				"Catalan", "Czech", "Danish", "Dutch", "Finnish" + incompleteSuffix, "French", "Georgian",
-				"German", "Greek", "Hebrew", "Hindi" + incompleteSuffix, "Hungarian", "Indonesian" + incompleteSuffix,
-				"Italian", "Japanese" + incompleteSuffix, "Korean" + incompleteSuffix, "Latvian", "Lithuanian", "Marathi" +incompleteSuffix,
-				"Norwegian" + incompleteSuffix, "Polish", "Portuguese", "Romanian", "Russian", "Slovak",
-				"Slovenian", "Spanish", "Swedish", "Turkish" , "Ukrainian" , "Vietnamese",
-				"Welsh" + incompleteSuffix };
+				getString(R.string.lang_en),
+				getString(R.string.lang_af),
+				getString(R.string.lang_hy) + incompleteSuffix,
+				getString(R.string.lang_eu) + incompleteSuffix,
+				getString(R.string.lang_be) + incompleteSuffix,
+				getString(R.string.lang_bs) + incompleteSuffix,
+				getString(R.string.lang_bg) + incompleteSuffix,
+				getString(R.string.lang_ca),
+				getString(R.string.lang_cs),
+				getString(R.string.lang_da),
+				getString(R.string.lang_nl),
+				getString(R.string.lang_fi) + incompleteSuffix,
+				getString(R.string.lang_fr),
+				getString(R.string.lang_ka),
+				getString(R.string.lang_de),
+				getString(R.string.lang_el),
+				getString(R.string.lang_iw),
+				getString(R.string.lang_hi) + incompleteSuffix,
+				getString(R.string.lang_hu),
+				getString(R.string.lang_id) + incompleteSuffix,
+				getString(R.string.lang_it),
+				getString(R.string.lang_ja) + incompleteSuffix,
+				getString(R.string.lang_ko) + incompleteSuffix,
+				getString(R.string.lang_lv),
+				getString(R.string.lang_lt),
+				getString(R.string.lang_mr),
+				getString(R.string.lang_no) + incompleteSuffix,
+				getString(R.string.lang_pl),
+				getString(R.string.lang_pt),
+				getString(R.string.lang_ro),
+				getString(R.string.lang_ru),
+				getString(R.string.lang_sk),
+				getString(R.string.lang_sl),
+				getString(R.string.lang_es),
+				getString(R.string.lang_sv),
+				getString(R.string.lang_tr),
+				getString(R.string.lang_uk),
+				getString(R.string.lang_vi),
+				getString(R.string.lang_cy) + incompleteSuffix,};
 		registerListPreference(settings.PREFERRED_LOCALE, screen, entries, entrieValues);
 
 		
@@ -185,7 +217,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		}
 		registerListPreference(settings.APPLICATION_MODE, screen, entries, appModes);
 		
-		if (!Version.isBlackberry((ClientContext) getApplication())) {
+		if (!Version.isBlackberry((OsmandApplication) getApplication())) {
 			PreferenceScreen cat = getPreferenceScreen();
 			int nav = getResources().getConfiguration().navigation;
 			if (nav == Configuration.NAVIGATION_DPAD || nav == Configuration.NAVIGATION_TRACKBALL || 

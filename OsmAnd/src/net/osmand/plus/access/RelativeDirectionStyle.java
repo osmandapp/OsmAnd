@@ -1,7 +1,7 @@
 package net.osmand.plus.access;
 
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.R;
+import android.content.Context;
 
 public enum RelativeDirectionStyle {
 
@@ -14,7 +14,7 @@ public enum RelativeDirectionStyle {
         this.key = key;
     }
 
-    public String toHumanString(ClientContext ctx) {
+    public String toHumanString(Context ctx) {
         return ctx.getString(key);
     }
 

@@ -9,14 +9,14 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 public class SearchHistoryHelper {
 	
 	private static final int HISTORY_LIMIT = 50;
-	private ClientContext context;
+	private OsmandApplication context;
 	private List<HistoryEntry> loadedEntries = null;
 	
-	public SearchHistoryHelper(ClientContext context) {
+	public SearchHistoryHelper(OsmandApplication context) {
 		this.context = context;
 	}
 
-	public static SearchHistoryHelper getInstance(ClientContext context){
+	public static SearchHistoryHelper getInstance(OsmandApplication context){
 		return new SearchHistoryHelper(context);
 	}
 	

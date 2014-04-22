@@ -28,7 +28,13 @@ import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
+import android.os.Environment;
 
 public class OsmandSettings {
 	
@@ -99,9 +105,9 @@ public class OsmandSettings {
 	private boolean internetConnectionAvailable = true;
 	
 	
-	protected OsmandSettings(OsmandApplication clientContext) {
+	protected OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI) {
 		ctx = clientContext;
-		settingsAPI = ctx.getSettingsAPI();
+		this.settingsAPI = settinsAPI;
 
 		globalPreferences = settingsAPI.getPreferenceObject(SHARED_PREFERENCES_NAME);
 		// start from default settings
@@ -113,8 +119,16 @@ public class OsmandSettings {
 		profilePreferences = getProfilePreferences(currentMode);
 	}
 	
-	public ClientContext getContext() {
+	public OsmandApplication getContext() {
 		return ctx;
+	}
+	
+	public void setSettingsAPI(SettingsAPI settingsAPI) {
+		this.settingsAPI = settingsAPI;
+	}
+	
+	public SettingsAPI getSettingsAPI() {
+		return settingsAPI;
 	}
 	
 	public static String getSharedPreferencesName(ApplicationMode mode){
@@ -129,9 +143,6 @@ public class OsmandSettings {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
 	}
 	
-	public Object getGlobalPreferences(){
-		return settingsAPI.getPreferenceObject(getSharedPreferencesName(null));
-	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<ApplicationMode> APPLICATION_MODE = new PreferenceWithListener<ApplicationMode>(){
@@ -195,12 +206,29 @@ public class OsmandSettings {
 	public boolean isInternetConnectionAvailable(boolean update){
 		long delta = System.currentTimeMillis() - lastTimeInternetConnectionChecked;
 		if(delta < 0 || delta > 15000 || update){
-			internetConnectionAvailable = ctx.getExternalServiceAPI().isInternetConnected();
+			internetConnectionAvailable = isInternetConnected();
 		}
 		return internetConnectionAvailable;
 	}
 	
+	public boolean isWifiConnected() {
+		ConnectivityManager mgr =  (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo ni = mgr.getActiveNetworkInfo();
+		return ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI;
+	}
 	
+	private boolean isInternetConnected() {
+		ConnectivityManager mgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo active = mgr.getActiveNetworkInfo();
+		if(active == null){
+			return false;
+		} else {
+			NetworkInfo.State state = active.getState();
+			return state != NetworkInfo.State.DISCONNECTED && state != NetworkInfo.State.DISCONNECTING;
+		}
+	}
+
+
 	/////////////// PREFERENCES classes ////////////////
 	
 	public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
@@ -533,6 +561,16 @@ public class OsmandSettings {
 			return (CommonPreference<Boolean>) registeredPreferences.get(id);
 		}
 		BooleanPreference p = new BooleanPreference(id, defValue);
+		registeredPreferences.put(id, p);
+		return p;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public CommonPreference<String> registerBooleanPreference(String id, String defValue) {
+		if(registeredPreferences.containsKey(id)) {
+			return (CommonPreference<String>) registeredPreferences.get(id);
+		}
+		StringPreference p = new StringPreference(id, defValue);
 		registeredPreferences.put(id, p);
 		return p;
 	}
@@ -1003,7 +1041,7 @@ public class OsmandSettings {
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 	
 	public File getExternalStorageDirectory() {
-		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
+		String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
 		return new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
 				defaultLocation));
 	}
@@ -1011,7 +1049,7 @@ public class OsmandSettings {
 	public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
 
 	public String getDefaultExternalStorageLocation() {
-		String defaultLocation = ctx.getExternalServiceAPI().getExternalStorageDirectory();
+		String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
 		return defaultLocation;
 	}
 	
@@ -1663,7 +1701,7 @@ public class OsmandSettings {
 			this.key = key;
 		}
 		
-		public  String toHumanString(ClientContext ctx){
+		public  String toHumanString(Context ctx){
 			return ctx.getString(key);
 		}
 
@@ -1683,8 +1721,11 @@ public class OsmandSettings {
 			return this == NIGHT;
 		}
 		
-		public static DayNightMode[] possibleValues(ClientContext context) {
-	         if (context.getExternalServiceAPI().isLightSensorEnabled()) {
+		public static DayNightMode[] possibleValues(Context context) {
+			SensorManager mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);         
+		    Sensor mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+			boolean isLightSensorEnabled = mLight != null;
+	         if (isLightSensorEnabled) {
 	        	 return DayNightMode.values();
 	         } else {
 	        	 return new DayNightMode[] { AUTO, DAY, NIGHT };
@@ -1706,7 +1747,7 @@ public class OsmandSettings {
 			this.ttsString = ttsString;
 		}
 		
-		public String toHumanString(ClientContext ctx){
+		public String toHumanString(Context ctx){
 			return ctx.getString(key);
 		}
 		

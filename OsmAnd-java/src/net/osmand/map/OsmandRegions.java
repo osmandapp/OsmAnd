@@ -1,36 +1,57 @@
 package net.osmand.map;
 
 
+import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
+
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.MapIndex;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
-import java.io.*;
-import java.util.*;
-
 public class OsmandRegions {
 
 	private BinaryMapIndexReader reader;
-	Map<String, LinkedList<BinaryMapDataObject>> countries = new HashMap<String, LinkedList<BinaryMapDataObject>>();
+	Map<String, LinkedList<BinaryMapDataObject>> countriesByDownloadName = new HashMap<String, LinkedList<BinaryMapDataObject>>();
+	Map<String, String> downloadNamesToLocaleNames = new HashMap<String, String>();
+	Map<String, String> downloadNamesToLowercaseIndex = new HashMap<String, String>();
 	QuadTree<String> quadTree = null ;
 
 
-	Integer downloadNameType = null;
 	Integer prefixType = null;
-	private Integer suffixType;
+	Integer downloadNameType = null;
+	Integer nameEnType = null;
+	Integer nameType = null;
+	Integer nameLocaleType = null;
+	String locale = "en";
+	Integer suffixType;
 
 
 	public void prepareFile(String fileName) throws IOException {
 		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"));
+		initLocaleNames();
 	}
 
 	public boolean containsCountry(String name){
-		return countries.containsKey(name);
+		return countriesByDownloadName.containsKey(name);
 	}
 
 	public String getDownloadName(BinaryMapDataObject o) {
@@ -38,6 +59,42 @@ public class OsmandRegions {
 			return null;
 		}
 		return o.getNameByType(downloadNameType);
+	}
+	
+	public String getLocaleName(String downloadName) {
+		final String lc = downloadName.toLowerCase();
+		if(downloadNamesToLocaleNames.containsKey(lc)) {
+			return downloadNamesToLocaleNames.get(lc);
+		}
+		return downloadName.replace('_', ' ');
+	}
+	
+	public String getDownloadNameIndexLowercase(String downloadName) {
+		final String lc = downloadName.toLowerCase();
+		if(downloadNamesToLowercaseIndex.containsKey(lc)) {
+			return downloadNamesToLowercaseIndex.get(lc);
+		}
+		return null;
+	}
+	
+	public String getLocaleName(BinaryMapDataObject object) {
+		String locName = "";
+		if(locName == null || locName.length() == 0){
+			if(nameLocaleType != null) {
+				locName = object.getNameByType(nameLocaleType);
+			}
+		}
+		if(locName == null || locName.length() == 0){
+			if(nameEnType != null) {
+				locName = object.getNameByType(nameEnType);
+			}
+		}
+		if(locName == null || locName.length() == 0){
+			if(nameType != null) {
+				locName = object.getNameByType(nameType);
+			}
+		}
+		return locName;
 	}
 
 	public String getPrefix(BinaryMapDataObject o) {
@@ -84,7 +141,7 @@ public class OsmandRegions {
 			String cname = it.next();
 			BinaryMapDataObject container = null;
 			int count = 0;
-			for (BinaryMapDataObject bo : countries.get(cname)) {
+			for (BinaryMapDataObject bo : countriesByDownloadName.get(cname)) {
 				if (contain(bo, tile31x, tile31y)) {
 					count++;
 					container = bo;
@@ -173,74 +230,125 @@ public class OsmandRegions {
 		}
 		return result;
 	}
+	
+	public void setLocale(String locale) {
+		this.locale = locale;
+	}
+	
+	public void initLocaleNames() throws IOException {
+//		final Collator clt = OsmAndCollator.primaryCollator();
+		final ResultMatcher<BinaryMapDataObject> resultMatcher = new ResultMatcher<BinaryMapDataObject>() {
+			
+			@Override
+			public boolean publish(BinaryMapDataObject object) {
+				initTypes(object);
+				String downloadName = object.getNameByType(downloadNameType).toLowerCase();
+				String prefix = object.getNameByType(prefixType);
+				String locName = getLocaleName(object);
+				if(locName != null && locName.length() > 0){
+					downloadNamesToLocaleNames.put(downloadName, locName);
+				}
+				MapIndex mi = object.getMapIndex();
+				TIntObjectIterator<String> it = object.getObjectNames().iterator();
+				
+				StringBuilder ind = new StringBuilder();
+				String pr = getDownloadNameIndexLowercase(prefix);
+				ind.append(pr == null ? prefix.toLowerCase() : pr.toLowerCase()).append(" ");
+				while(it.hasNext()) {
+					it.advance();
+					TagValuePair tp = mi.decodeType(it.key());
+					if(tp.tag.startsWith("name")) {
+						final String vl = it.value().toLowerCase();
+//						if (!CollatorStringMatcher.ccontains(clt, ind.toString(), vl)) {
+						if(ind.indexOf(vl) == -1) {
+							ind.append(" ").append(vl);
+						}
+					}							
+				}
+				downloadNamesToLowercaseIndex.put(downloadName, ind.toString());
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+		iterateOverAllObjects(resultMatcher);
+	}
 
 
 	public void cacheAllCountries() throws IOException {
 		quadTree = new QuadTree<String>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
 				8, 0.55f);
+		final ResultMatcher<BinaryMapDataObject> resultMatcher = new ResultMatcher<BinaryMapDataObject>() {
+			@Override
+			public boolean publish(BinaryMapDataObject object) {
+				if (object.getPointsLength() < 1) {
+					return false;
+				}
+				initTypes(object);
+				String nm = object.getNameByType(downloadNameType);
+				if (!countriesByDownloadName.containsKey(nm)) {
+					LinkedList<BinaryMapDataObject> ls = new LinkedList<BinaryMapDataObject>();
+					countriesByDownloadName.put(nm, ls);
+					ls.add(object);
+				} else {
+					countriesByDownloadName.get(nm).add(object);
+				}
+				int maxx = object.getPoint31XTile(0);
+				int maxy = object.getPoint31YTile(0);
+				int minx = maxx;
+				int miny = maxy;
+				for (int i = 1; i < object.getPointsLength(); i++) {
+					int x = object.getPoint31XTile(i);
+					int y = object.getPoint31YTile(i);
+					if (y < miny) {
+						miny = y;
+					} else if (y > maxy) {
+						maxy = y;
+					}
+					if (x < minx) {
+						minx = x;
+					} else if (x > maxx) {
+						maxx = x;
+					}
+				}
+				quadTree.insert(nm, new QuadRect(minx, miny, maxx, maxy));
+				return false;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+		iterateOverAllObjects(resultMatcher);
+	}
+
+	private void iterateOverAllObjects(final ResultMatcher<BinaryMapDataObject> resultMatcher) throws IOException {
 		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 				5, new BinaryMapIndexReader.SearchFilter() {
 					@Override
 					public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex index) {
 						return true;
 					}
-				}, new ResultMatcher<BinaryMapDataObject>() {
-
-
-					@Override
-					public boolean publish(BinaryMapDataObject object) {
-						if (object.getPointsLength() < 1) {
-							return false;
-						}
-						initTypes(object);
-						String nm = object.getNameByType(downloadNameType);
-						if (!countries.containsKey(nm)) {
-							LinkedList<BinaryMapDataObject> ls = new LinkedList<BinaryMapDataObject>();
-							countries.put(nm, ls);
-							ls.add(object);
-						} else {
-							countries.get(nm).add(object);
-						}
-
-						int maxx = object.getPoint31XTile(0);
-						int maxy = object.getPoint31YTile(0);
-						int minx = maxx;
-						int miny = maxy;
-						for (int i = 1; i < object.getPointsLength(); i++) {
-							int x = object.getPoint31XTile(i);
-							int y = object.getPoint31YTile(i);
-							if (y < miny) {
-								miny = y;
-							} else if (y > maxy) {
-								maxy = y;
-							}
-							if (x < minx) {
-								minx = x;
-							} else if (x > maxx) {
-								maxx = x;
-							}
-						}
-						quadTree.insert(nm, new QuadRect(minx, miny, maxx, maxy));
-						return false;
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return false;
-					}
-				}
-		);
+				}, resultMatcher);
 		if(reader != null) {
 			reader.searchMapIndex(sr);
 		}
 	}
 
+	
 	private void initTypes(BinaryMapDataObject object) {
 		if (downloadNameType == null) {
 			downloadNameType = object.getMapIndex().getRule("download_name", null);
+			nameType = object.getMapIndex().getRule("name", null);
+			nameEnType = object.getMapIndex().getRule("name:en", null);
+			nameLocaleType = object.getMapIndex().getRule("name:" + locale, null);
 			prefixType = object.getMapIndex().getRule("region_prefix", null);
 			suffixType = object.getMapIndex().getRule("region_suffix", null);
-			if (downloadNameType == null) {
+			if (downloadNameType == null || nameType == null) {
 				throw new IllegalStateException();
 			}
 		}
@@ -266,7 +374,7 @@ public class OsmandRegions {
 	public static void main(String[] args) throws IOException {
 		OsmandRegions or = new OsmandRegions();
 		or.prepareFile("/home/victor/projects/osmand/osm-gen/Osmand_regions.obf");
-
+//		or.cacheAllCountries();
 //		long t = System.currentTimeMillis();
 //		or.cacheAllCountries();
 //		System.out.println("Init " + (System.currentTimeMillis() - t));
@@ -274,7 +382,7 @@ public class OsmandRegions {
 		//testCountry(or, 15.8, 23.09, "chad");
 		testCountry(or, 52.10, 4.92, "netherlands");
 		testCountry(or, 52.15, 7.50, "nordrhein-westfalen");
-		testCountry(or, 40.0760, 9.2807, "italy");
+		testCountry(or, 40.0760, 9.2807, "italy", "sardegna");
 		testCountry(or, 28.8056, 29.9858, "africa", "egypt" );
 		testCountry(or, 35.7521, 139.7887, "japan");
 		testCountry(or, 46.5145, 102.2580, "mongolia");

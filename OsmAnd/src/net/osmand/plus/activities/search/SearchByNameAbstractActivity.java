@@ -12,6 +12,7 @@ import java.util.Map;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -113,7 +114,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		final NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>(), createComparator()); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 		
-		collator = PlatformUtil.primaryCollator();
+		collator = OsmAndCollator.primaryCollator();
  	    
 		
 		progress = (ProgressBar) findViewById(R.id.ProgressBar);

@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Locale;
 
 import net.osmand.IndexConstants;
-import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleAlertBuilder;
@@ -24,14 +23,10 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.LiveMonitoringHelper;
-import net.osmand.plus.activities.OsmandIntents;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.api.ExternalServiceAPI;
-import net.osmand.plus.api.InternalOsmAndAPI;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
-import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -56,6 +51,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
@@ -79,11 +75,12 @@ import com.actionbarsherlock.app.SherlockExpandableListActivity;
 import com.actionbarsherlock.app.SherlockListActivity;
 
 
-public class OsmandApplication extends Application implements ClientContext {
+public class OsmandApplication extends Application {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
-	ResourceManager manager = null;
+	
+	ResourceManager resourceManager = null;
 	PoiFiltersHelper poiFilters = null;
 	RoutingHelper routingHelper = null;
 	FavouritesDbHelper favorites = null;
@@ -91,6 +88,7 @@ public class OsmandApplication extends Application implements ClientContext {
 
 	OsmandSettings osmandSettings = null;
 
+	OsmAndAppCustomization appCustomization;
 	DayNightHelper daynightHelper;
 	NavigationService navigationService;
 	RendererRegistry rendererRegistry;
@@ -110,9 +108,6 @@ public class OsmandApplication extends Application implements ClientContext {
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
 	
-	SettingsAPI settingsAPI;
-	ExternalServiceAPI externalServiceAPI;
-	InternalOsmAndAPI internalOsmAndAPI;
 	SQLiteAPI sqliteAPI;
 	BRouterServiceConnection bRouterServiceConnection;
 
@@ -129,12 +124,10 @@ public class OsmandApplication extends Application implements ClientContext {
 			}
 		}
 		super.onCreate();
+		appCustomization = new OsmAndAppCustomization();
+		appCustomization.setup(this);
 		 
-		settingsAPI = new net.osmand.plus.api.SettingsAPIImpl(this);
-		externalServiceAPI = new net.osmand.plus.api.ExternalServiceAPIImpl(this);
-		internalOsmAndAPI = new net.osmand.plus.api.InternalOsmAndAPIImpl(this);
 		sqliteAPI = new SQLiteAPIImpl(this);
-		
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
 		} catch(Exception e) {
@@ -142,7 +135,7 @@ public class OsmandApplication extends Application implements ClientContext {
 		}
 
 		// settings used everywhere so they need to be created first
-		osmandSettings = createOsmandSettingsInstance();
+		osmandSettings = appCustomization.createSettings(new net.osmand.plus.api.SettingsAPIImpl(this));
 		// always update application mode to default
 		if(!osmandSettings.FOLLOW_THE_ROUTE.get()){
 			osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
@@ -152,7 +145,7 @@ public class OsmandApplication extends Application implements ClientContext {
 		
 		routingHelper = new RoutingHelper(this, player);
 		taskManager = new OsmAndTaskManager(this);
-		manager = new ResourceManager(this);
+		resourceManager = new ResourceManager(this);
 		daynightHelper = new DayNightHelper(this);
 		locationProvider = new OsmAndLocationProvider(this);
 		savingTrackHelper = new SavingTrackHelper(this);
@@ -195,17 +188,18 @@ public class OsmandApplication extends Application implements ClientContext {
 		return taskManager;
 	}
 
-	/**
-	 * Creates instance of OsmandSettings
-	 * 
-	 * @return Reference to instance of OsmandSettings
-	 */
-	protected OsmandSettings createOsmandSettingsInstance() {
-		return new OsmandSettings(this);
-	}
 	
 	public OsmAndLocationProvider getLocationProvider() {
 		return locationProvider;
+	}
+	
+	public OsmAndAppCustomization getAppCustomization() {
+		return appCustomization;
+	}
+	
+	public void setAppCustomization(OsmAndAppCustomization appCustomization) {
+		this.appCustomization = appCustomization;
+		this.appCustomization.setup(this);
 	}
 
 	/**
@@ -269,7 +263,7 @@ public class OsmandApplication extends Application implements ClientContext {
 	}
 
 	public ResourceManager getResourceManager() {
-		return manager;
+		return resourceManager;
 	}
 
 	public DayNightHelper getDaynightHelper() {
@@ -279,7 +273,7 @@ public class OsmandApplication extends Application implements ClientContext {
 	@Override
 	public void onLowMemory() {
 		super.onLowMemory();
-		manager.onLowMemory();
+		resourceManager.onLowMemory();
 	}
 
 	@Override
@@ -306,6 +300,8 @@ public class OsmandApplication extends Application implements ClientContext {
 			config.locale = prefferedLocale;
 			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 		}
+		String clang = "".equals(lang) ? config.locale.getLanguage() : lang;
+		resourceManager.getOsmandRegions().setLocale(clang);
 
 	}
 
@@ -482,7 +478,7 @@ public class OsmandApplication extends Application implements ClientContext {
 
 	private void closeApplicationAnyway(final Activity activity, boolean disableService) {
 		if (applicationInitializing) {
-			manager.close();
+			resourceManager.close();
 		}
 		applicationInitializing = false;
 
@@ -551,7 +547,7 @@ public class OsmandApplication extends Application implements ClientContext {
 					}
 				}
 			}
-			warnings.addAll(manager.reloadIndexes(startDialog));
+			warnings.addAll(resourceManager.reloadIndexes(startDialog));
 			player = null;
 			if (savingTrackHelper.hasDataToSave()) {
 				startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
@@ -636,7 +632,8 @@ public class OsmandApplication extends Application implements ClientContext {
 		public DefaultExceptionHandler() {
 			defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 			intent = PendingIntent.getActivity(OsmandApplication.this.getBaseContext(), 0,
-					new Intent(OsmandApplication.this.getBaseContext(), OsmandIntents.getMainMenuActivity()), 0);
+					new Intent(OsmandApplication.this.getBaseContext(),
+							getAppCustomization().getMainMenuActivity()), 0);
 		}
 
 		@Override
@@ -684,47 +681,26 @@ public class OsmandApplication extends Application implements ClientContext {
 		return targetPointsHelper;
 	}
 	
-	@Override
 	public void showShortToastMessage(int msgId, Object... args) {
 		AccessibleToast.makeText(this, getString(msgId, args), Toast.LENGTH_SHORT).show();
 	}
 
-	@Override
 	public void showToastMessage(int msgId, Object... args) {
 		AccessibleToast.makeText(this, getString(msgId, args), Toast.LENGTH_LONG).show();
 	}
 
-	@Override
 	public void showToastMessage(String msg) {
 		AccessibleToast.makeText(this, msg, Toast.LENGTH_LONG).show();		
 	}
 	
-	@Override
-	public SettingsAPI getSettingsAPI() {
-		return settingsAPI;
-	}
-
-	@Override
-	public ExternalServiceAPI getExternalServiceAPI() {
-		return externalServiceAPI;
-	}
-
-	@Override
-	public InternalOsmAndAPI getInternalAPI() {
-		return internalOsmAndAPI;
-	}
-
-	@Override
 	public SQLiteAPI getSQLiteAPI() {
 		return sqliteAPI;
 	}
 
-	@Override
 	public void runInUIThread(Runnable run) {
 		uiHandler.post(run);
 	}
 
-	@Override
 	public void runInUIThread(Runnable run, long delay) {
 		uiHandler.postDelayed(run, delay);
 	}
@@ -744,7 +720,6 @@ public class OsmandApplication extends Application implements ClientContext {
 		uiHandler.sendMessageDelayed(msg, delay);
 	}
 	
-	@Override
 	public File getAppPath(String path) {
 		if(path == null) {
 			path = "";
@@ -752,12 +727,6 @@ public class OsmandApplication extends Application implements ClientContext {
 		return new File(getSettings().getExternalStorageDirectory(), IndexConstants.APP_DIR + path);
 	}
 
-	@Override
-	public Location getLastKnownLocation() {
-		return locationProvider.getLastKnownLocation();
-	}
-	
-	
 	public void applyTheme(Context c) {
 		int t = R.style.OsmandLightDarkActionBarTheme;
 		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
@@ -840,5 +809,23 @@ public class OsmandApplication extends Application implements ClientContext {
 			return false;
 		}
 		return ((AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
+	}
+
+	public String getVersionName() {
+		try {
+			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+			return info.versionName;
+		} catch (NameNotFoundException e) {
+			return "";
+		}
+	}
+
+	public int getVersionCode() {
+		try {
+			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+			return info.versionCode;
+		} catch (NameNotFoundException e) {
+			return 0;
+		}
 	}
 }

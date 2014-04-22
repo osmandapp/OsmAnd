@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 import net.osmand.Collator;
-import net.osmand.PlatformUtil;
+import net.osmand.OsmAndCollator;
 
 
 public abstract class MapObject implements Comparable<MapObject>, Serializable {
@@ -66,7 +66,7 @@ public abstract class MapObject implements Comparable<MapObject>, Serializable {
 	
 	@Override
 	public int compareTo(MapObject o) {
-		return PlatformUtil.primaryCollator().compare(getName(), o.getName());
+		return OsmAndCollator.primaryCollator().compare(getName(), o.getName());
 	}
 	
 	public int getFileOffset() {
@@ -109,7 +109,7 @@ public abstract class MapObject implements Comparable<MapObject>, Serializable {
 	
 	public static class MapObjectComparator implements Comparator<MapObject>{
 		private final boolean en;
-		Collator collator = PlatformUtil.primaryCollator();
+		Collator collator = OsmAndCollator.primaryCollator();
 		public MapObjectComparator(boolean en){
 			this.en = en;
 		}

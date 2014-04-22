@@ -28,7 +28,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
@@ -42,6 +41,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsNavigationActivity;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -65,6 +65,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import android.content.Context;
 import android.os.Bundle;
 import btools.routingapp.IBRouterService;
 
@@ -513,7 +514,7 @@ public class RouteProvider {
 		return sublist;
 	}
 	
-	protected String getString(ClientContext ctx, int resId){
+	protected String getString(Context ctx, int resId){
 		if(ctx == null){
 			return ""; //$NON-NLS-1$
 		}
@@ -612,14 +613,16 @@ public class RouteProvider {
 			//cf.planRoadDirection = 1;
 		}
 		// BUILD context
-		RoutingContext ctx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files, 
+		NativeOsmandLibrary lib = settings.SAFE_MODE.get() ? null : NativeOsmandLibrary.getLoadedLibrary();
+		RoutingContext ctx = router.buildRoutingContext(cf,
+				lib, files, 
 				RouteCalculationMode.NORMAL);
 		
 		RoutingContext complexCtx = null;
 		boolean complex = params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) && !settings.DISABLE_COMPLEX_ROUTING.get()
 				&& precalculated == null;
 		if(complex) {
-			complexCtx = router.buildRoutingContext(cf, params.ctx.getInternalAPI().getNativeLibrary(), files,
+			complexCtx = router.buildRoutingContext(cf, lib,files,
 				RouteCalculationMode.COMPLEX);
 			complexCtx.calculationProgress = params.calculationProgress;
 			complexCtx.leftSideNavigation = params.leftSide;

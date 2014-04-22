@@ -18,7 +18,7 @@ public class SearchByNameFilter extends PoiFilter {
 	
 	private String query = ""; //$NON-NLS-1$
 	
-	public SearchByNameFilter(ClientContext application) {
+	public SearchByNameFilter(OsmandApplication application) {
 		super(application.getString(R.string.poi_filter_by_name), FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application);
 		this.distanceToSearchValues = new double[] {100, 1000, 5000};
 		this.isStandardFilter = true;
@@ -44,7 +44,7 @@ public class SearchByNameFilter extends PoiFilter {
 		searchedAmenities.clear();
 		final int limit = distanceInd == 0 ? 500 : -1;
 		
-		List<Amenity> result = application.getInternalAPI().searchAmenitiesByName(query, 
+		List<Amenity> result = app.getResourceManager().searchAmenitiesByName(query, 
 				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, new ResultMatcher<Amenity>() {
 					boolean elimit = false;
 					@Override

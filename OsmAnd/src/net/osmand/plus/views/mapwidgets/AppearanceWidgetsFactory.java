@@ -1,8 +1,10 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.widget.Toast;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -13,11 +15,9 @@ import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
-
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.widget.Toast;
 
 public class AppearanceWidgetsFactory {
 

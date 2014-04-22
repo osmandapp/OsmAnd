@@ -13,24 +13,26 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 
 import org.apache.commons.logging.Log;
 
+import android.os.Build;
+
 public class DownloadTracker {
 	private static final Log log = PlatformUtil.getLog(DownloadTracker.class);
 
-	private Map<String, String> getCustomVars(ClientContext ctx) {
+	private Map<String, String> getCustomVars(OsmandApplication ctx) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		map.put("App", Version.getFullVersion(ctx));
-		map.put("Device", ctx.getInternalAPI().getDeviceName());
-		map.put("Brand", ctx.getInternalAPI().getBrandName());
-		map.put("Model", ctx.getInternalAPI().getModelName());
-		map.put("Package", ctx.getInternalAPI().getPackageName());
+		map.put("Device", Build.DEVICE);
+		map.put("Brand", Build.BRAND);
+		map.put("Model", Build.MODEL);
+		map.put("Package", ctx.getPackageName());
 
-		map.put("Version name", ctx.getInternalAPI().getVersionName());
-		map.put("Version code", ctx.getInternalAPI().getVersionCode()+"");
+		map.put("Version name", ctx.getVersionName());
+		map.put("Version code", ctx.getVersionCode()+"");
 		return map;
 	}
 
@@ -41,7 +43,7 @@ public class DownloadTracker {
 	static final String beaconUrl = "http://www.google-analytics.com/__utm.gif";
 	static final String analyticsVersion = "4.3"; // Analytics version - AnalyticsVersion
 
-	public void trackEvent(ClientContext a,
+	public void trackEvent(OsmandApplication a,
 			String category, String action, String label, int value, String trackingAcount) {
 		Map<String, String> parameters = new LinkedHashMap<String, String>();
 		try {

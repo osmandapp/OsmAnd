@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
-import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.ShadowText;
 import android.content.Context;
@@ -99,8 +99,8 @@ public abstract class BaseMapWidget extends View implements UpdateableWidget {
 		return false;
 	}
 	
-	public ClientContext getClientContext(){
-		return (ClientContext) getContext().getApplicationContext();
+	public OsmandApplication getClientContext(){
+		return (OsmandApplication) getContext().getApplicationContext();
 	}
 	
 

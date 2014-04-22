@@ -12,7 +12,6 @@ import net.londatiga.android.QuickAction;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -165,7 +164,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 					URL url = new URL(b.toString());
 					URLConnection conn = url.openConnection();
 					conn.setDoInput(true);
-					conn.setRequestProperty("User-Agent", Version.getFullVersion((ClientContext) getActivity().getApplication())); //$NON-NLS-1$
+					conn.setRequestProperty("User-Agent", Version.getFullVersion((OsmandApplication) getActivity().getApplication())); //$NON-NLS-1$
 					conn.connect();
 					InputStream is = conn.getInputStream();
 					XmlPullParser parser = Xml.newPullParser();
@@ -258,7 +257,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 			TextView distanceLabel = (TextView) row.findViewById(R.id.distance_label);
 			if(location != null){
 				int dist = (int) (MapUtils.getDistance(location, model.lat, model.lon));
-				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, (ClientContext) getActivity().getApplication()));
+				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, (OsmandApplication) getActivity().getApplication()));
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}

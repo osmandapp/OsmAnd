@@ -31,7 +31,7 @@ public class NameFinderPoiFilter extends PoiFilter {
 	private String query = ""; //$NON-NLS-1$
 	private String lastError = ""; //$NON-NLS-1$
 	
-	public NameFinderPoiFilter(ClientContext application) {
+	public NameFinderPoiFilter(OsmandApplication application) {
 		super(null, application);
 		this.name = application.getString(R.string.poi_filter_nominatim); //$NON-NLS-1$
 		this.distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 50, 100, 200, 500 };
@@ -64,7 +64,7 @@ public class NameFinderPoiFilter extends PoiFilter {
 			log.info(urlq);
 			URL url = new URL(urlq); //$NON-NLS-1$
 			InputStream stream = url.openStream();
-			XmlPullParser parser = application.getInternalAPI().newPullParser();
+			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(stream, "UTF-8"); //$NON-NLS-1$
 			int eventType;
 			int namedDepth= 0;

@@ -10,13 +10,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.zip.GZIPInputStream;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.Version;
@@ -216,7 +214,7 @@ public class DownloadOsmandIndexesHelper {
 		}
 		
 		@Override
-		public List<DownloadEntry> createDownloadEntry(ClientContext ctx, DownloadActivityType type, List<DownloadEntry> res) {
+		public List<DownloadEntry> createDownloadEntry(OsmandApplication ctx, DownloadActivityType type, List<DownloadEntry> res) {
 			res.add(new DownloadEntry(this, assetName, destFile, dateModified));
 			return res;
 		}

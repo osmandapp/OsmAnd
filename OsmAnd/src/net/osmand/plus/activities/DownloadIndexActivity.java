@@ -14,7 +14,6 @@ import java.util.TimeZone;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -349,7 +348,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				filtered.add(fileItem);
 			}
 		}
-		listAdapter.setIndexFiles(filtered, IndexItemCategory.categorizeIndexItems(getClientContext(), filtered));
+		listAdapter.setIndexFiles(filtered, IndexItemCategory.categorizeIndexItems(getMyApplication(), filtered));
 		listAdapter.notifyDataSetChanged();
 	}
 
@@ -362,7 +361,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				IndexItem es = listAdapter.getChild(j, i);
 				if (!getEntriesToDownload().containsKey(es)) {
 					selected++;
-					getEntriesToDownload().put(es, es.createDownloadEntry(getClientContext(), type, new ArrayList<DownloadEntry>(1)));
+					getEntriesToDownload().put(es, es.createDownloadEntry(getMyApplication(), type, new ArrayList<DownloadEntry>(1)));
 				}
 			}
 		}
@@ -502,7 +501,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			return true;
 		}
 		
-		List<DownloadEntry> download = e.createDownloadEntry(getClientContext(), type, new ArrayList<DownloadEntry>());
+		List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), type, new ArrayList<DownloadEntry>());
 		if (download.size() > 0) {
 			// if(!fileToUnzip.exists()){
 			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
@@ -565,7 +564,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	
 	protected void downloadFilesCheckInternet() {
-		if(!getMyApplication().getExternalServiceAPI().isWifiConnected()) {
+		if(!getMyApplication().getSettings().isWifiConnected()) {
 			Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(getString(R.string.download_using_mobile_internet));
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
@@ -622,10 +621,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	
 	
-	public ClientContext getClientContext() {
-		return getMyApplication();
-	}
-
 
 	public void updateProgress(boolean updateOnlyProgress) {
 		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask = downloadListIndexThread.getCurrentRunningTask();

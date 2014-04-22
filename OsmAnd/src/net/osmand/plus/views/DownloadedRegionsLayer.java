@@ -13,7 +13,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
-import net.osmand.plus.activities.OsmandIntents;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -87,7 +86,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 		downloadBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent intent = new Intent(view.getContext(), OsmandIntents.getDownloadIndexActivity());
+				final Intent intent = new Intent(view.getContext(), view.getApplication().getAppCustomization().getDownloadIndexActivity());
 				intent.putExtra(DownloadIndexActivity.FILTER_KEY, filter.toString());
 				view.getContext().startActivity(intent);
 			}
@@ -119,7 +118,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 
 	private static int ZOOM_TO_SHOW_BORDERS_ST = 5;
 	private static int ZOOM_TO_SHOW_BORDERS = 7;
-	private static int ZOOM_TO_SHOW_MAP_NAMES = 12;
+	private static int ZOOM_TO_SHOW_MAP_NAMES = 8;
 	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
@@ -217,7 +216,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 				if ((currentObjects != null && currentObjects.size() > 0)) {
 					for (int i = 0; i < currentObjects.size(); i++) {
 						final BinaryMapDataObject o = currentObjects.get(i);
-						String name = Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
+						String name =  osmandRegions.getLocaleName(o); //Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
 						if (!set.add(name)) {
 							continue;
 						}

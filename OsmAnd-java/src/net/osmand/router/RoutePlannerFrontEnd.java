@@ -199,8 +199,10 @@ public class RoutePlannerFrontEnd {
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new BinaryMapRouteReaderAdapter.RouteRegion[ctx.reverseMap.size()]);
 		ctx.checkOldRoutingFiles(ctx.startX, ctx.startY);
 		ctx.checkOldRoutingFiles(ctx.targetX, ctx.targetY);
+		long time = System.currentTimeMillis();
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY,
 				ctx.config, regions, ctx.calculationProgress, ctx.precalculatedRouteDirection, ctx.calculationMode == RouteCalculationMode.BASE);
+		System.out.println("Native routing took " + (System.currentTimeMillis() - time) / 1000f + " seconds");
 		ArrayList<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));
 		ctx.routingTime = ctx.calculationProgress.routingCalculatedTime;
 		ctx.visitedSegments = ctx.calculationProgress.visitedSegments;

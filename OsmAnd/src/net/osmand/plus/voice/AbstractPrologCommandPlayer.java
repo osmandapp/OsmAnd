@@ -12,11 +12,11 @@ import java.util.List;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
-import net.osmand.plus.api.ExternalServiceAPI.AudioFocusHelper;
+import net.osmand.plus.api.AudioFocusHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -35,7 +35,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 
 	private static final Log log = PlatformUtil.getLog(AbstractPrologCommandPlayer.class);
 
-	protected ClientContext ctx;
+	protected OsmandApplication ctx;
 	protected File voiceDir;
 	protected Prolog prologSystem;
 	protected static final String P_VERSION = "version";
@@ -56,7 +56,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	protected int streamType;
 	private int currentVersion;
 
-	protected AbstractPrologCommandPlayer(ClientContext ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
+	protected AbstractPrologCommandPlayer(OsmandApplication ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
 		throws CommandPlayerException 
 	{
 		this.ctx = ctx;
@@ -229,10 +229,21 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	
 	protected void requestAudioFocus() {
 		log.debug("requestAudioFocus");
-		mAudioFocusHelper = ctx.getExternalServiceAPI().getAudioFocuseHelper();
+		if (android.os.Build.VERSION.SDK_INT >= 8) {
+			mAudioFocusHelper = getAudioFocus();
+		}
 		if (mAudioFocusHelper != null) {
 			mAudioFocusHelper.requestFocus(ctx, streamType);
 		}
+	}
+
+	private AudioFocusHelper getAudioFocus() {
+		try {
+			return new net.osmand.plus.api.AudioFocusHelperImpl();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+		return null;
 	}
 	
 	protected void abandonAudioFocus() {

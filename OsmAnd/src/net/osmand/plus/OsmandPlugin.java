@@ -112,7 +112,7 @@ public abstract class OsmandPlugin {
 	 * Register layers calls when activity is created and before @mapActivityCreate
 	 * @param activity
 	 */
-	public abstract void registerLayers(MapActivity activity);
+	public void registerLayers(MapActivity activity)  { }
 
 	public void mapActivityCreate(MapActivity activity) { }
 	

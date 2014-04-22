@@ -6,11 +6,13 @@ import java.util.Random;
 
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.sherpafy.SherpafyCustomization;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -182,6 +184,9 @@ public class MainMenuActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		if(getIntent() != null) {
+			setupCustomization(getIntent());
+		}
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		boolean exit = false;
@@ -195,6 +200,8 @@ public class MainMenuActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.menu);
 		
+		final OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
+		
 		onCreateMainMenu(getWindow(), this);
 
 		Window window = getWindow();
@@ -203,7 +210,7 @@ public class MainMenuActivity extends Activity {
 		showMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent mapIndent = new Intent(activity, OsmandIntents.getMapActivity());
+				final Intent mapIndent = new Intent(activity, appCustomization.getMapActivity());
 				activity.startActivityForResult(mapIndent, 0);
 			}
 		});
@@ -211,7 +218,7 @@ public class MainMenuActivity extends Activity {
 		settingsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(activity, OsmandIntents.getSettingsActivity());
+				final Intent settings = new Intent(activity, appCustomization.getSettingsActivity());
 				activity.startActivity(settings);
 			}
 		});
@@ -220,7 +227,7 @@ public class MainMenuActivity extends Activity {
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent favorites = new Intent(activity, OsmandIntents.getFavoritesActivity());
+				final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(favorites);
 			}
@@ -237,11 +244,12 @@ public class MainMenuActivity extends Activity {
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent search = new Intent(activity, OsmandIntents.getSearchActivity());
+				final Intent search = new Intent(activity, appCustomization.getSearchActivity());
 				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				activity.startActivity(search);
 			}
 		});
+		appCustomization.customizeMainMenu(window, this);
 		if(exit){
 			getMyApplication().closeApplication(activity);
 			return;
@@ -249,49 +257,62 @@ public class MainMenuActivity extends Activity {
 		OsmandApplication app = getMyApplication();
 		// restore follow route mode
 		if(app.getSettings().FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()){
-			final Intent mapIndent = new Intent(this, OsmandIntents.getMapActivity());
+			final Intent mapIndent = new Intent(this, appCustomization.getMapActivity());
 			startActivityForResult(mapIndent, 0);
 			return;
 		}
 		startProgressDialog = new ProgressDialog(this);
 		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
-		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
+		boolean dialogShown = false;
 		boolean firstTime = false;
-		if(!pref.contains(FIRST_TIME_APP_RUN)){
+		SharedPreferences pref = getPreferences(MODE_WORLD_WRITEABLE);
+		boolean appVersionChanged = false;
+		if (!pref.contains(FIRST_TIME_APP_RUN)) {
 			firstTime = true;
 			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
 			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-			
-			applicationInstalledFirstTime();
-		} else {
-			int i = pref.getInt(TIPS_SHOW, 0);
-			if (i < 7){
-				pref.edit().putInt(TIPS_SHOW, ++i).commit();
-			}
-			boolean appVersionChanged = false;
-			if(!Version.getFullVersion(app).equals(pref.getString(VERSION_INSTALLED, ""))){
-				pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-				appVersionChanged = true;
-			}
-						
-			if (i == 1 || i == 5 || appVersionChanged) {
-				TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
-				Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
-				dlg.show();
+		} else if (!Version.getFullVersion(app).equals(pref.getString(VERSION_INSTALLED, ""))) {
+			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
+			appVersionChanged = true;
+		}
+		if (appCustomization.showFirstTimeRunAndTips(firstTime, appVersionChanged)) {
+			if (firstTime) {
+				applicationInstalledFirstTime();
+				dialogShown = true;
 			} else {
-				if (startProgressDialog.isShowing()) {
-					startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							checkVectorIndexesDownloaded();
-						}
-					});
-				} else {
-					checkVectorIndexesDownloaded();
+				int i = pref.getInt(TIPS_SHOW, 0);
+				if (i < 7) {
+					pref.edit().putInt(TIPS_SHOW, ++i).commit();
+				}
+				if (i == 1 || i == 5 || appVersionChanged) {
+					TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
+					Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
+					dlg.show();
+					dialogShown = true;
 				}
 			}
 		}
-		checkPreviousRunsForExceptions(firstTime);
+		if(!dialogShown && appCustomization.checkBasemapDownloadedOnStart()) {
+			if (startProgressDialog.isShowing()) {
+				startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						checkVectorIndexesDownloaded();
+					}
+				});
+			} else {
+				checkVectorIndexesDownloaded();
+			}
+		}
+		if(appCustomization.checkExceptionsOnStart()){
+			checkPreviousRunsForExceptions(firstTime);
+		}
+	}
+
+	private void setupCustomization(Intent intent) {
+		if (intent.hasExtra("SHERPAFY")) {
+			((OsmandApplication) getApplication()).setAppCustomization(new SherpafyCustomization());
+		}
 	}
 
 	private void applicationInstalledFirstTime() {
@@ -315,7 +336,7 @@ public class MainMenuActivity extends Activity {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					startActivity(new Intent(MainMenuActivity.this, OsmandIntents.getDownloadIndexActivity()));
+					startActivity(new Intent(MainMenuActivity.this, getMyApplication().getAppCustomization().getDownloadIndexActivity()));
 				}
 
 			});
@@ -388,6 +409,7 @@ public class MainMenuActivity extends Activity {
 		final View menuView = (View) a.getLayoutInflater().inflate(R.layout.menu, null);
 		menuView.setBackgroundColor(Color.argb(200, 150, 150, 150));
 		dlg.setContentView(menuView);
+		final OsmAndAppCustomization appCustomization = ((OsmandApplication) a.getApplication()).getAppCustomization();
 		MainMenuActivity.onCreateMainMenu(dlg.getWindow(), a);
 		Animation anim = new Animation() {
 			@Override
@@ -411,7 +433,7 @@ public class MainMenuActivity extends Activity {
 		settingsButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent settings = new Intent(a, OsmandIntents.getSettingsActivity());
+				final Intent settings = new Intent(a, appCustomization.getSettingsActivity());
 				a.startActivity(settings);
 				dlg.dismiss();
 			}
@@ -421,7 +443,7 @@ public class MainMenuActivity extends Activity {
 		favouritesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent favorites = new Intent(a, OsmandIntents.getFavoritesActivity());
+				final Intent favorites = new Intent(a, appCustomization.getFavoritesActivity());
 				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				a.startActivity(favorites);
 				dlg.dismiss();
@@ -434,7 +456,7 @@ public class MainMenuActivity extends Activity {
 			public void onClick(View v) {
 				dlg.dismiss();
 				// 1. Work for almost all cases when user open apps from main menu
-				Intent newIntent = new Intent(a, OsmandIntents.getMainMenuActivity());
+				Intent newIntent = new Intent(a, appCustomization.getMainMenuActivity());
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY, MainMenuActivity.APP_EXIT_CODE);
 				a.startActivity(newIntent);
@@ -451,7 +473,7 @@ public class MainMenuActivity extends Activity {
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent search = new Intent(a, OsmandIntents.getSearchActivity());
+				final Intent search = new Intent(a, appCustomization.getSearchActivity());
 				LatLon loc = searchLocation;
 				search.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 				search.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());

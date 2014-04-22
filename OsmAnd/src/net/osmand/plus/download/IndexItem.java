@@ -5,6 +5,7 @@ import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +15,8 @@ import java.util.TimeZone;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ClientContext;
+import net.osmand.map.OsmandRegions;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 
@@ -51,28 +53,68 @@ public class IndexItem implements Comparable<IndexItem> {
 		this.type = type;
 	}
 
-	public String getVisibleDescription(ClientContext ctx) {
+	public String getVisibleDescription(Context ctx) {
 		String s = ""; //$NON-NLS-1$
 		if (type == DownloadActivityType.SRTM_COUNTRY_FILE) {
 			return ctx.getString(R.string.download_srtm_maps);
 		} else if (type == DownloadActivityType.ROADS_FILE) {
 			return ctx.getString(R.string.download_roads_only_item);
 		}
-//		fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) 
-//		fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)
-//		fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)
-//		fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)
 		return s;
 	}
-
-	public String getVisibleName(ClientContext ctx) {
-		String s = "";
-		if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
-			s = ctx.getString(R.string.voice) + "\n";
-		} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
-			s = ctx.getString(R.string.ttsvoice) + "\n";
+	
+	public String getVoiceName(Context ctx) {
+		try {
+			String nm = getBasename().replace('-', '_').replace(' ', '_');
+			if (nm.endsWith("_tts")) {
+				nm = nm.substring(0, nm.length() - 4);
+			}
+			Field f = R.string.class.getField("lang_"+nm);
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return ctx.getString(in);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
-		return s + getBasename().replace('_', ' ');
+		return getBasename();
+	}
+
+	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
+		if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
+			return ctx.getString(R.string.voice) + "\n" + getVoiceName(ctx);
+		} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
+			return ctx.getString(R.string.ttsvoice) + "\n" + getVoiceName(ctx);
+		}
+		final String bn = getBasename();
+		final String lc = bn.toLowerCase();
+		String std = getStandardMapName(ctx, lc);
+		if (std != null) {
+			return std;
+		}
+		if (bn.contains("addresses-nationwide")) {
+			final int ind = bn.indexOf("addresses-nationwide");
+			String downloadName = bn.substring(0, ind - 1) + bn.substring(ind + "addresses-nationwide".length());
+			return osmandRegions.getLocaleName(downloadName) + 
+					" "+ ctx.getString(R.string.index_item_nation_addresses);
+		}
+
+		return osmandRegions.getLocaleName(lc);
+	}
+
+	private String getStandardMapName(Context ctx, String basename) {
+		if(basename.equals("world-ski")) {
+			return ctx.getString(R.string.index_item_world_ski);
+		} else if(basename.equals("world_altitude_correction_ww15mgh")) {
+			return ctx.getString(R.string.index_item_world_altitude_correction);
+		} else if(basename.equals("world_basemap")) {
+			return ctx.getString(R.string.index_item_world_basemap);
+		} else if(basename.equals("world_bitcoin_payments")) {
+			return ctx.getString(R.string.index_item_world_bitcoin_payments);
+		} else if(basename.equals("world_seamarks")) {
+			return ctx.getString(R.string.index_item_world_seamarks);
+		}
+		return null;
 	}
 
 	public boolean isVoiceItem() {
@@ -133,7 +175,7 @@ public class IndexItem implements Comparable<IndexItem> {
 		return date;
 	}
 	
-	public String getSizeDescription(ClientContext ctx) {
+	public String getSizeDescription(Context ctx) {
 		return size + " MB";
 	}
 
@@ -141,7 +183,7 @@ public class IndexItem implements Comparable<IndexItem> {
 		return size;
 	}
 
-	public List<DownloadEntry> createDownloadEntry(ClientContext ctx, DownloadActivityType type, 
+	public List<DownloadEntry> createDownloadEntry(OsmandApplication ctx, DownloadActivityType type, 
 			List<DownloadEntry> downloadEntries) {
 		String fileName = this.fileName;
 		File parent = null;

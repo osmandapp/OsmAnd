@@ -55,10 +55,12 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				<LinearLayout android:id="@+id/FavoritesButton" android:background="@drawable/bg_leftr" android:orientation="vertical"
 	 			android:focusable="true" android:clickable="true" android:layout_weight="3" android:layout_height="250dp">
 	 				<ImageView
+	 				android:id="@+id/FavoritesButtonImage"
 					android:src="@drawable/button_icon_favorites" android:scaleType="center" android:layout_gravity="center"
 					android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="0dp"/>
 					<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center">
-						<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
+						<TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+						 android:id="@+id/FavoritesButtonText" 
 						android:layout_gravity="center_horizontal|top" android:textSize="27sp" 
 				 		android:text="@string/favorites_Button" android:typeface="serif" android:textColor="#000000"/>
 					</LinearLayout>
@@ -66,11 +68,12 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 				<LinearLayout android:layout_weight="2" android:layout_height="fill_parent"/>
 				<LinearLayout android:id="@+id/SettingsButton" android:background="@drawable/bg_rightr" android:orientation="vertical" 
 				android:focusable="true" android:clickable="true" android:layout_weight="3" android:layout_height="250dp">
-					<ImageView
+					<ImageView android:id="@+id/SettingsButtonImage" 
 					android:src="@drawable/button_icon_settings" android:scaleType="center" android:layout_gravity="center"
 					android:layout_weight="1" android:layout_width="wrap_content" android:layout_height="0dp"/>
 					<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center">
 						<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" 
+						    android:id="@+id/SettingsButtonText"  
 						android:layout_gravity="center_horizontal|top" android:textSize="27sp"					
 						android:text="@string/settings_Button" android:typeface="serif" android:textColor="#000000"/>
 					</LinearLayout>	
