@@ -689,6 +689,7 @@ public class MapActivity extends AccessibleActivity  {
             @Override
             public boolean processResult(GPXFile result)
             {
+                getMyApplication().setGpxFileToDisplay(result, true);
                 getMapActions().setGPXRouteParams(result);
                 getMyApplication().getTargetPointsHelper().updateRoutingHelper();
                 getRoutingHelper().recalculateRouteDueToSettingsChange();
