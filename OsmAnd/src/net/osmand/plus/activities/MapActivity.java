@@ -1,11 +1,13 @@
 package net.osmand.plus.activities;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibilityPlugin;
@@ -19,6 +21,8 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -63,6 +67,7 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import org.apache.http.client.protocol.ClientContext;
 
 public class MapActivity extends AccessibleActivity  {
 	
@@ -317,6 +322,16 @@ public class MapActivity extends AccessibleActivity  {
 			// remember if map should come back to isMapLinkedToLocation=true
 			mapViewTrackingUtilities.setMapLinkedToLocation(false);
 		}
+
+        final Intent intent = getIntent();
+        if (intent != null && intent.getData() != null)
+        {
+            final Uri data = intent.getData();
+            if ("file".equalsIgnoreCase(data.getScheme()))
+            {
+                navigateImportedGpx(data.getPath());
+            }
+        }
 
 		View progress = mapLayers.getMapInfoLayer().getProgressBar();
 		if (progress != null) {
@@ -641,7 +656,7 @@ public class MapActivity extends AccessibleActivity  {
 			}
 		}
 	}
-	
+
 	public MapActivityActions getMapActions() {
 		return mapActions;
 	}
@@ -666,7 +681,49 @@ public class MapActivity extends AccessibleActivity  {
 	public void refreshMap() {
 		getMapView().refreshMap();
 	}
-	
 
+    private void navigateImportedGpx(final String gpxFile)
+    {
+        final CallbackWithObject<GPXFile> callback = new CallbackWithObject<GPXUtilities.GPXFile>()
+        {
+            @Override
+            public boolean processResult(GPXFile result)
+            {
+                getMapActions().setGPXRouteParams(result);
+                getMyApplication().getTargetPointsHelper().updateRoutingHelper();
+                getRoutingHelper().recalculateRouteDueToSettingsChange();
+                return true;
+            }
+        };
 
+        final ProgressDialog dlg = ProgressDialog.show(this, getString(R.string.loading), getString(R.string.loading_data));
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                final GPXFile res = GPXUtilities.loadGPXFile(getApplication(), new File(gpxFile));
+                dlg.dismiss();
+                if (res != null)
+                {
+                    MapActivity.this.runOnUiThread(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            if (res.warning != null)
+                            {
+                                AccessibleToast.makeText(MapActivity.this, res.warning, Toast.LENGTH_LONG).show();
+                            }
+                            else
+                            {
+                                callback.processResult(res);
+                            }
+                        }
+                    });
+                }
+            }
+
+        }, "Loading gpx").start(); //$NON-NLS-1$
+    }
 }

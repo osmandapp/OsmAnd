@@ -68,6 +68,11 @@
 				<category android:name="android.intent.category.CAR_DOCK" />
 				<category android:name="android.intent.category.DESK_DOCK" />
 			</intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="file"  android:host="*" android:pathPattern=".*\\.gpx" android:mimeType="*/*"  />
+            </intent-filter>
 			<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
 		    <intent-filter>
                 <action android:name="android.intent.action.CAMERA_BUTTON" />
