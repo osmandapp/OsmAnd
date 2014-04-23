@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="bidforfix_loading">Loading</string>
-    <string name="bidforfix_supporters">%1$d Supporters</string>
-	<string name="bidforfix_funded">funded: %d%%</string>    
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="bidforfix_loading">로딩</string>
+    <string name="bidforfix_supporters">%1$d 서포터</string>
+	<string name="bidforfix_funded">펀디드 funded: %d%%</string>    
 </resources>
