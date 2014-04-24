@@ -242,7 +242,11 @@ public class MapActivity extends AccessibleActivity  {
 		return l;
 	}
 	
-	
+    @Override
+    protected void onNewIntent(final Intent intent)
+    {
+        setIntent(intent);
+    }
 
 	@Override
 	protected void onResume() {
