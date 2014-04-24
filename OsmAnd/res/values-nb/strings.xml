@@ -772,4 +772,13 @@
     <string name="lang_zh">Kinesisk</string>
     <string name="lang_pt_br">Portugisisk (Brasil)</string>
     <string name="index_name_canada">Nord-Amerika - Canada</string>
+    <string name="index_item_nation_addresses">adresser (hele landet)</string>
+	<string name="index_item_world_altitude_correction">Korreksjon av høyde (verden)</string>
+	<string name="index_item_world_seamarks">Sjømerkene(verden)</string>
+	<string name="index_item_world_bitcoin_payments">Bitcoinbetalinger (verden)</string>
+	<string name="index_item_world_basemap">Oversiktskart (verden)</string>
+    <string name="index_item_world_ski">Skikart (verden)</string>
+    <string name="lang_hr">Kroatisk</string>
+    <string name="calculate_osmand_route_without_internet">Beregn OsmAnd rutesegment uten internett</string>
+    <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd rute for første og siste rute segment</string>
     </resources>
