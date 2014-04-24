@@ -1131,7 +1131,7 @@
 	<string name="audionotes_location_not_defined">Még nem található pozíció hangjegyzet készítéséhez. A \"Hely használata…\" gombbal helyezhetsz el jegyzetet az adott helyen</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hangjegyzet bővítmény</string>
-    <string name="monitoring_control_stop">stop</string>
+    <string name="monitoring_control_stop">Stop</string>
     <string name="srtm_plugin_description">A bővítmény lehetővé teszi szintvonalfájlok letöltését (Beállítások → Offline adatok → Letöltés → válaszd a kívánt térképtípust) a megadott régiókhoz és használatukat offline térképekkel.</string>
     
     <string name="osmodroid_plugin_description">Az OsMoDroid bővítmény lehetővé teszi az OsMoDroid alkalmazás használatát online útvonalrögzítésre. További információk: http://esya.ru.</string>
@@ -1151,7 +1151,7 @@
     <string name="recording_context_menu_delete">Felvétel törlése</string>
     <string name="recording_context_menu_play">Lejátszás</string>
     <string name="recording_default_name">felvétel</string>
-    <string name="av_control_start">A/V</string>
+    <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Hangjegyzetek</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd bővítmény offline szintvonalakhoz</string>
     
@@ -1168,7 +1168,7 @@
     <string name="av_settings">Hang/videóbeállítások </string>
     <string name="recording_error">A felvétel közben hiba történt </string>
     <string name="recording_camera_not_available">A kamera nem elérhető</string>
-    <string name="av_control_stop">stop</string>
+    <string name="av_control_stop">Stop</string>
     <string name="osmand_srtm_long_description_1000_chars">Ez a bővítmény szintvonalakat szolgáltat, amik az OsmAndban offline térképként megjeleníthetőek. A globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, ami a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági Minisztérium, a Trade and Industry (METI) és a Japán Űrügynökség (J-spacesystems) közös projektje.</string>
     <string name="av_widget_action_descr">Válaszd ki a vezérlőgomb alapértelmezett működési módját</string>
     <string name="av_widget_action">Alapértelmezett mód</string>
@@ -1421,8 +1421,8 @@
     <string name="route_info">Útvonal információ</string>
     <string name="routing_attr_prefer_motorway_name">Autópályák preferálása</string>
 	<string name="routing_attr_prefer_motorway_description">Autópályák preferálása</string>
-	<string name="routing_attr_short_way_name">Rövidebb útvonal</string>
-	<string name="routing_attr_short_way_description">Rövidebb útvonal tervezése</string>
+	<string name="routing_attr_short_way_name">Legrövidebb útvonal</string>
+	<string name="routing_attr_short_way_description">Legrövidebb útvonal tervezése</string>
 	<string name="routing_attr_avoid_toll_name">Fizetős utak elkerülése</string>
 	<string name="routing_attr_avoid_toll_description">Fizetős utak elkerülése</string>
 	<string name="routing_attr_avoid_unpaved_name">Burkolatlan utak elkerülése</string>
@@ -1431,8 +1431,8 @@
 	<string name="routing_attr_avoid_ferries_description">Kompok elkerülése</string>
 	<string name="routing_attr_avoid_motorway_name">Autópályák elkerülése</string>
 	<string name="routing_attr_avoid_motorway_description">Autópályák elkerülése</string>
-	<string name="routing_attr_weight_name">Súly</string>
-	<string name="routing_attr_weight_description">Súlykorlátozás megadása</string>
+	<string name="routing_attr_weight_name">Maximális súly</string>
+	<string name="routing_attr_weight_description">Jármű súlykorlátozásának megadása</string>
     <string name="android_19_location_disabled">Az Android 4.4 KitKat verzió óta nem lehet térképet letölteni és frissíteni a korábbi helyre (%s). Szeretnéd az összes fájlt egy engedélyezett helyre másolni?
         \n Megjegyzés : a régi fájlok érintetlenül maradnak.
         \n Megjegyzés : nem lehetséges az OsmAnd és OsmAnd+ között fájlokat megosztani. </string>
@@ -1467,4 +1467,51 @@
 	\n\t* Sok apró javítás a felhasználói felületen
 	\n\t* Állítható beszédsebesség
     </string>
+    <string name="lang_hr">horvát</string>
+    <string name="lang_zh">kínai</string>
+    <string name="lang_pt_br">portugál (brazil)</string>
+    <string name="lang_en">angol</string>
+	<string name="lang_af">afrikaans</string>
+	<string name="lang_hy">örmény</string>
+	<string name="lang_eu">baszk</string>
+	<string name="lang_be">belarusz</string>
+	<string name="lang_bs">bosnyák</string>
+	<string name="lang_bg">bolgár</string>
+	<string name="lang_ca">katalán</string>
+	<string name="lang_cs">cseh</string>
+	<string name="lang_da">dán</string>
+	<string name="lang_nl">holland</string>
+	<string name="lang_fi">finn</string>
+	<string name="lang_fr">francia</string>
+	<string name="lang_ka">grúz</string>
+	<string name="lang_de">német</string>
+	<string name="lang_el">görög</string>
+	<string name="lang_iw">héber</string>
+	<string name="lang_hi">hindi</string>
+	<string name="lang_hu">magyar</string>
+	<string name="lang_id">indonéz</string>
+	<string name="lang_it">olasz</string>
+	<string name="lang_ja">japán</string>
+	<string name="lang_ko">koreai</string>
+	<string name="lang_lv">lett</string>
+	<string name="lang_lt">litván</string>
+	<string name="lang_mr">maráthi</string>
+	<string name="lang_no">norvég</string>
+	<string name="lang_pl">lengyel</string>
+	<string name="lang_pt">portugál</string>
+	<string name="lang_ro">román</string>
+	<string name="lang_ru">orosz</string>
+	<string name="lang_sk">szlovák</string>
+	<string name="lang_sl">szlovén</string>
+	<string name="lang_es">spanyol</string>
+	<string name="lang_sv">svéd</string>
+	<string name="lang_tr">török</string>
+	<string name="lang_uk">ukrán</string>
+	<string name="lang_vi">vietnami</string>
+	<string name="lang_cy">walesi</string>
+	<string name="index_name_canada">Észak-Amerika - Kanada</string>
+    <string name="index_name_italy">Európa - Olaszország</string>
+    <string name="index_name_gb">Európa - Nagy-Britannia</string>
+    <string name="calculate_osmand_route_without_internet">OsmAnd útvonalszakasz számítása internet nélkül</string>
+    <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és utolsó útszakaszra</string>
     </resources>
