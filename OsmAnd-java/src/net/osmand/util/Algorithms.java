@@ -25,6 +25,17 @@ public class Algorithms {
 		return s == null || s.length() == 0;
 	}
 	
+	public static long parseLongSilently(String input, long def) {
+		if(input != null && input.length() > 0) {
+			try {
+				return Long.parseLong(input);
+			} catch (NumberFormatException e) {
+				return def;
+			}
+		}
+		return def;
+	}
+	
 	public static int findFirstNumberEndIndex(String value) {
 		int i = 0;
 		boolean valid = false;

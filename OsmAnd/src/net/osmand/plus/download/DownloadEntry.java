@@ -2,10 +2,8 @@ package net.osmand.plus.download;
 
 import java.io.File;
 
-import net.osmand.IndexConstants;
-
 public class DownloadEntry {
-	public Long dateModified;
+	public long dateModified;
 	public double sizeMB;
 	
 	public File targetFile;
@@ -16,7 +14,6 @@ public class DownloadEntry {
 	
 	public String baseName;
 	public String urlToDownload;
-	public int parts;
 	public File existingBackupFile;
 	public boolean isAsset;
 	public String assetName;

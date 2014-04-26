@@ -88,23 +88,19 @@ public class DownloadOsmandIndexesHelper {
 				if (target.endsWith("-tts/_ttsconfig.p") && target.startsWith("voice/")) {
 					String voice = target.substring("voice/".length(), target.length() - "/_ttsconfig.p".length());
 					File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
-					result.add(new AssetIndexItem(voice +ext, "voice", date, dateModified, "0.1", "", key, destFile.getPath(), 
-							DownloadActivityType.VOICE_FILE));
+					result.add(new AssetIndexItem(voice +ext, "voice", date, dateModified, 
+							"0.1", 1024*100, key, destFile.getPath(), DownloadActivityType.VOICE_FILE));
 				} else if (target.endsWith("/_config.p") && target.startsWith("voice/")) {
 					String voice = target.substring("voice/".length(), target.length() - "/_config.p".length());
 					IndexItem item = result.getIndexFilesByName(key);
 					if (item != null) {
 						File destFile = new File(voicePath, voice + File.separatorChar + "_config.p");
-						try {
-							Date d = DateFormat.getDateFormat((Context) settings.getContext()).parse(item.getDate());
-							if (d.getTime() > dateModified) {
-								continue;
-							}
-						} catch (Exception es) {
-							log.error("Parse exception", es);
-						}
-						item.date = date;
-						item.attachedItem = new AssetIndexItem(voice +extvoice, "voice", date, dateModified, "0.1", "", key, destFile.getPath(), 
+						// always use bundled config
+//						if (item.getTimestamp() > dateModified) {
+//							continue;
+//						}
+						item.timestamp = dateModified;
+						item.attachedItem = new AssetIndexItem(voice +extvoice, "voice", date, dateModified, "0.1", 1024*100, key, destFile.getPath(), 
 								DownloadActivityType.VOICE_FILE);
 					}
 				}
@@ -133,7 +129,6 @@ public class DownloadOsmandIndexesHelper {
 					if (next == XmlPullParser.START_TAG) {
 						DownloadActivityType tp = DownloadActivityType.getIndexType(parser.getAttributeValue(null, "type"));
 						if (tp != null) {
-							
 							IndexItem it = tp.parseIndexItem(ctx, parser);
 							if(it != null) {
 								result.add(it);
@@ -171,8 +166,8 @@ public class DownloadOsmandIndexesHelper {
 		private final long dateModified;
 
 		public AssetIndexItem(String fileName, String description, String date,
-				long dateModified, String size, String parts, String assetName, String destFile, DownloadActivityType type) {
-			super(fileName, description, date, size, parts, type);
+				long dateModified, String size, long sizeL, String assetName, String destFile, DownloadActivityType type) {
+			super(fileName, description, dateModified, size, sizeL, sizeL, type);
 			this.dateModified = dateModified;
 			this.assetName = assetName;
 			this.destFile = destFile;

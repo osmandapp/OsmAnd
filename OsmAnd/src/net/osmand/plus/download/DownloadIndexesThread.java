@@ -43,6 +43,7 @@ import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Build;
 import android.os.StatFs;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Toast;
 
@@ -58,11 +59,14 @@ public class DownloadIndexesThread {
 	private List<BasicProgressAsyncTask<?, ?, ?> > currentRunningTask = Collections.synchronizedList(new ArrayList<BasicProgressAsyncTask<?, ?, ?>>());
 	private Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
 	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<String, String>();
+	private java.text.DateFormat dateFormat;
+	
 
 	public DownloadIndexesThread(Context ctx) {
 		this.ctx = ctx;
 		app = (OsmandApplication) ctx.getApplicationContext();
 		downloadFileHelper = new DownloadFileHelper(app);
+		dateFormat = DateFormat.getDateFormat(app);
 	}
 	
 	public void setUiActivity(DownloadIndexActivity uiActivity) {
@@ -369,7 +373,7 @@ public class DownloadIndexesThread {
 					IndexItem basemap = indexFiles.getBasemap();
 					if (basemap != null ) {
 						String dt = uiActivity.getMyApplication().getResourceManager().getIndexFileNames().get(basemap.getTargetFileName());
-						if (!basemapExists || !Algorithms.objectEquals(dt, basemap.getDate())) {
+						if (!basemapExists || !Algorithms.objectEquals(dt, basemap.getDate(dateFormat))) {
 							List<DownloadEntry> downloadEntry = basemap
 									.createDownloadEntry(uiActivity.getMyApplication(), uiActivity.getType(),
 											new ArrayList<DownloadEntry>());

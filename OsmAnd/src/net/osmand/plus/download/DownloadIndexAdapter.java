@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	private int defaultColor;
 	private int updateColor;
 	private OsmandRegions osmandRegions;
+	private java.text.DateFormat format;
 
 	public DownloadIndexAdapter(DownloadIndexActivity downloadActivity, List<IndexItem> indexFiles) {
 		this.downloadActivity = downloadActivity;
@@ -45,6 +47,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 			list.clear();
 			list.addAll(cats);
 		}
+		format = DateFormat.getDateFormat(downloadActivity);
 		okColor = downloadActivity.getResources().getColor(R.color.color_ok);
 		TypedArray ta = downloadActivity.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 		defaultColor = ta.getColor(0, downloadActivity.getResources().getColor(R.color.color_unknown));
@@ -239,7 +242,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		OsmandApplication clctx = downloadActivity.getMyApplication();
 		String eName = e.getVisibleDescription(clctx) + "\n" + e.getVisibleName(clctx, osmandRegions);
 		item.setText(eName.trim()); //$NON-NLS-1$
-		String d = e.getDate() + "\n" + e.getSizeDescription(clctx);
+		String d = e.getDate(format) + "\n" + e.getSizeDescription(clctx);
 		description.setText(d.trim());
 
 		CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);
@@ -271,14 +274,14 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					} else {
 						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					}
-				} else if (e.getDate() != null) {
+				} else if (e.getDate(format) != null) {
 					String sfName = e.getTargetFileName();
-					if (e.getDate().equals(indexActivatedFileNames.get(sfName))) {
+					if (e.getDate(format).equals(indexActivatedFileNames.get(sfName))) {
 						item.setText(item.getText() + "\n" + downloadActivity.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
 						item.setTextColor(okColor); // GREEN
 						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-					} else if (e.getDate().equals(indexFileNames.get(sfName))) {
+					} else if (e.getDate(format).equals(indexFileNames.get(sfName))) {
 						item.setText(item.getText() + "\n" + downloadActivity.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
 						item.setTextColor(okColor);

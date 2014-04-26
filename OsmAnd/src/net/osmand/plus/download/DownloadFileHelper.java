@@ -201,15 +201,8 @@ public class DownloadFileHelper {
 			List<File> toReIndex, DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
 		try {
 			final List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
-			if (de.parts == 1) {
-				URL url = new URL(de.urlToDownload); //$NON-NLS-1$
-				downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));
-			} else {
-				for (int i = 1; i <= de.parts; i++) {
-					URL url = new URL(de.urlToDownload + "-" + i); //$NON-NLS-1$
-					downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));
-				}
-			}
+			URL url = new URL(de.urlToDownload); //$NON-NLS-1$
+			downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));
 			de.fileToDownload = de.targetFile;
 			if(!de.unzipFolder) {
 				de.fileToDownload = new File(de.targetFile.getParentFile(), de.targetFile.getName() +".download");
@@ -298,10 +291,7 @@ public class DownloadFileHelper {
 			progress.remaining(remaining / 1024);
 		}
 		out.close();
-
-		if (de.dateModified != null) {
-			targetFile.setLastModified(de.dateModified);
-		}
+		targetFile.setLastModified(de.dateModified);
 	}
 	
 	

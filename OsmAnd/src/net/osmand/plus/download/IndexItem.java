@@ -2,12 +2,10 @@ package net.osmand.plus.download;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -24,19 +22,23 @@ public class IndexItem implements Comparable<IndexItem> {
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
 	
 	String description;
-	String date;
-	String parts;
 	String fileName;
 	String size;
+	long timestamp;
+	long contentSize;
+	long containerSize;
 	IndexItem attachedItem;
 	DownloadActivityType type;
 
-	public IndexItem(String fileName, String description, String date, String size, String parts, DownloadActivityType tp) {
+
+	public IndexItem(String fileName, String description, long timestamp, String size, long contentSize,
+			long containerSize, DownloadActivityType tp) {
 		this.fileName = fileName;
 		this.description = description;
-		this.date = date;
+		this.timestamp = timestamp;
 		this.size = size;
-		this.parts = parts;
+		this.contentSize = contentSize;
+		this.containerSize = containerSize;
 		this.type = tp;
 	}
 
@@ -52,17 +54,15 @@ public class IndexItem implements Comparable<IndexItem> {
 		return description;
 	}
 
-	public String getDate() {
-		return date;
+	public long getTimestamp() {
+		return timestamp;
 	}
+	
 	
 	public String getSizeDescription(Context ctx) {
 		return size + " MB";
 	}
-
-	public String getSize() {
-		return size;
-	}
+	
 
 	public List<DownloadEntry> createDownloadEntry(OsmandApplication ctx, DownloadActivityType type, 
 			List<DownloadEntry> downloadEntries) {
@@ -91,23 +91,8 @@ public class IndexItem implements Comparable<IndexItem> {
 			entry.urlToDownload = entry.type.getBaseUrl(ctx, fileName) + entry.type.getUrlSuffix(ctx);
 			entry.zipStream = type.isZipStream(ctx, this);
 			entry.unzipFolder = type.isZipFolder(ctx, this);
-			try {
-				final java.text.DateFormat format = DateFormat.getDateFormat((Context) ctx);
-				format.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
-				Date d = format.parse(date);
-				entry.dateModified = d.getTime();
-			} catch (ParseException e1) {
-				log.error("ParseException", e1);
-			}
-			try {
-				entry.sizeMB = Double.parseDouble(size);
-			} catch (NumberFormatException e1) {
-				log.error("ParseException", e1);
-			}
-			entry.parts = 1;
-			if (parts != null) {
-				entry.parts = Integer.parseInt(parts);
-			}
+			entry.dateModified = timestamp; 
+			entry.sizeMB = contentSize / (1024f*1024f);
 			String extension = type.getUnzipExtension(ctx, this);
 			entry.targetFile = new File(parent, entry.baseName + extension);
 			File backup = new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), entry.targetFile.getName());
@@ -152,6 +137,10 @@ public class IndexItem implements Comparable<IndexItem> {
 
 	public String getTargetFileName() {
 		return type.getTargetFileName(this);
+	}
+
+	public String getDate(java.text.DateFormat format) {
+		return format.format(new Date(timestamp));
 	}
 
 }

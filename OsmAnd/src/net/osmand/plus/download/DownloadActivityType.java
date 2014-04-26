@@ -11,14 +11,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.xmlpull.v1.XmlPullParser;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.util.Algorithms;
+
+import org.xmlpull.v1.XmlPullParser;
+
 import android.content.Context;
 
 public class DownloadActivityType {
@@ -28,8 +30,8 @@ public class DownloadActivityType {
 	public static final DownloadActivityType NORMAL_FILE = new DownloadActivityType(R.string.download_regular_maps, "map");
 	public static final DownloadActivityType VOICE_FILE = new DownloadActivityType(R.string.voice, "voice");
 	public static final DownloadActivityType ROADS_FILE = new DownloadActivityType(R.string.download_roads_only_maps, "road_map");
-	public static final DownloadActivityType HILLSHADE_FILE = new DownloadActivityType(R.string.download_srtm_maps, "srtm_map"); 
-	public static final DownloadActivityType SRTM_COUNTRY_FILE = new DownloadActivityType(R.string.download_hillshade_maps, "hillshade");
+	public static final DownloadActivityType SRTM_COUNTRY_FILE  = new DownloadActivityType(R.string.download_srtm_maps, "srtm_map"); 
+	public static final DownloadActivityType HILLSHADE_FILE = new DownloadActivityType(R.string.download_hillshade_maps, "hillshade");
 	private int resource;
 	private String[] tags;
 
@@ -151,12 +153,14 @@ public class DownloadActivityType {
 			return null;
 		}
 		String size = parser.getAttributeValue(null, "size"); //$NON-NLS-1$
-		String date = parser.getAttributeValue(null, "date"); //$NON-NLS-1$
 		String description = parser.getAttributeValue(null, "description"); //$NON-NLS-1$
-		String parts = parser.getAttributeValue(null, "parts"); //$NON-NLS-1$
-		date = reparseDate(ctx, date);
-		IndexItem it = new IndexItem(name, description, date, size, parts, this);
-		
+		long containerSize = Algorithms.parseLongSilently(
+				parser.getAttributeValue(null, "containerSize"), 0);
+		long contentSize = Algorithms.parseLongSilently(
+				parser.getAttributeValue(null, "contentSize"), 0);
+		long timestamp = Algorithms.parseLongSilently(
+				parser.getAttributeValue(null, "timestamp"), 0);
+		IndexItem it = new IndexItem(name, description, timestamp, size, contentSize, containerSize, this);
 		return it;
 	}
 

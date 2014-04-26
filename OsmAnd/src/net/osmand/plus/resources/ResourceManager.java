@@ -437,7 +437,6 @@ public class ResourceManager {
 		List<String> warnings = new ArrayList<String>();
 		if (file.exists() && file.canRead()) {
 			final java.text.DateFormat format = DateFormat.getDateFormat(context);
-			format.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
 			File[] lf = file.listFiles();
 			if (lf != null) {
 				for (File f : lf) {
@@ -616,7 +615,6 @@ public class ResourceManager {
 			}
 		}
 		final java.text.DateFormat format = DateFormat.getDateFormat(context);
-		format.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
 		for (File f : files) {
 			progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
 			try {
