@@ -1906,4 +1906,24 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		이동방향(나침반) : 지도는 계속 나침반의 진행방향을 가르킨다
 	</string>
 	<string name="mile_per_hour">마일퍼아워</string>
-	</resources>
+	<string name="tip_recent_changes_1_6_t">Changes in 1.6:
+	\n\t* 풀 HD 기기 지원. Support of Full HD devices
+	\n\t* 투명지도 백그라운드 지원. Support transparent map background
+	\n\t* 맵 뷰어로 다운로드된 지도 보이기 및 다운로드 누락된 지도 촉진하기
+Show downloaded maps and facilitate downloading missing maps directly from the map view
+	\n\t* Contour line map files now bundled for countries/regions
+등고선 지도 파일은 국가/지역의 번들
+	\n\t* New world basemap with major roads, railroads, and major areal features like forests 
+주요도로, 철도, 숲과 같은 주요면적의 세계 기본지도
+	\n\t* Map magnifier feature (long click on zoom button) - Useful both for tile and vector maps  
+지도 확대경 특징(줌 버튼 길게 클릭)- 타일지도와 벡터지도에 유용함
+	\n\t* Define/edit custom online tile sources (and specify expiration time)
+사용자 온라인 타일 소스 정의 및 편집
+	\n\t* Support of time conditional speed limits (Netherlands)
+시간 조건 제한 속도 (네덜란드) 지원
+	\n\t* Faster search address input
+빠른 검색 주소 임력
+	\n\t* Bug fixes with routing and rendering
+라우팅 및 렌더링의 버그 수정
+    </string>
+    </resources>
