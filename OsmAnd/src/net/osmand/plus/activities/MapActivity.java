@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,6 +20,9 @@ import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -49,6 +53,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -237,7 +242,11 @@ public class MapActivity extends AccessibleActivity  {
 		return l;
 	}
 	
-	
+    @Override
+    protected void onNewIntent(final Intent intent)
+    {
+        setIntent(intent);
+    }
 
 	@Override
 	protected void onResume() {
@@ -317,6 +326,22 @@ public class MapActivity extends AccessibleActivity  {
 			// remember if map should come back to isMapLinkedToLocation=true
 			mapViewTrackingUtilities.setMapLinkedToLocation(false);
 		}
+
+        final Intent intent = getIntent();
+        if (intent != null)
+        {
+            if (Intent.ACTION_VIEW.equals(intent.getAction()))
+            {
+                if (intent.getData() != null)
+                {
+                    final Uri data = intent.getData();
+                    if ("file".equalsIgnoreCase(data.getScheme()))
+                    {
+                        showImportedGpx(data.getPath());
+                    }
+                }
+            }
+        }
 
 		View progress = mapLayers.getMapInfoLayer().getProgressBar();
 		if (progress != null) {
@@ -641,7 +666,7 @@ public class MapActivity extends AccessibleActivity  {
 			}
 		}
 	}
-	
+
 	public MapActivityActions getMapActions() {
 		return mapActions;
 	}
@@ -666,7 +691,48 @@ public class MapActivity extends AccessibleActivity  {
 	public void refreshMap() {
 		getMapView().refreshMap();
 	}
-	
 
+    private void showImportedGpx(final String gpxFile)
+    {
+        new AsyncTask<Void, Void, GPXFile>()
+        {
+            ProgressDialog progress = null;
 
+            @Override
+            protected void onPreExecute()
+            {
+                progress = ProgressDialog.show(MapActivity.this, getString(R.string.loading), getString(R.string.loading_data));
+            }
+
+            @Override
+            protected GPXFile doInBackground(Void... nothing)
+            {
+                return GPXUtilities.loadGPXFile(getMyApplication(), new File(gpxFile));
+            }
+
+            @Override
+            protected void onPostExecute(GPXFile result)
+            {
+                progress.dismiss();
+                if (result != null)
+                {
+                    if (result.warning != null)
+                    {
+                        AccessibleToast.makeText(MapActivity.this, result.warning, Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        getMyApplication().setGpxFileToDisplay(result, true);
+                        final WptPt moveTo = result.findPointToShow();
+                        if (moveTo != null)
+                        {
+                            mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
+                        }
+                        mapView.refreshMap();
+                    }
+
+                }
+            }
+        }.execute();
+    }
 }
