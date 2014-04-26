@@ -96,7 +96,7 @@ public class DownloadActivityType {
 	}
 	
 	public boolean isZipStream(OsmandApplication ctx, IndexItem indexItem) {
-		return true;
+		return HILLSHADE_FILE != this;
 	}
 	
 	public boolean isZipFolder(OsmandApplication ctx, IndexItem indexItem) {
@@ -222,7 +222,7 @@ public class DownloadActivityType {
 					" "+ ctx.getString(R.string.index_item_nation_addresses);
 		}
 
-		return osmandRegions.getLocaleName(lc);
+		return osmandRegions.getLocaleName(bn);
 	}
 	
 	private String getStandardMapName(Context ctx, String basename) {

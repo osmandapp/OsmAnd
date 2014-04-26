@@ -1,4 +1,5 @@
 *.render.xml
+*.map_style_presets.xml
 routing*.xml
 rendering_types.xml
 countries.reginfo
