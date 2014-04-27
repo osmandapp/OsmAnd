@@ -1727,4 +1727,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="index_item_world_basemap">Übersichtskarte der Welt</string>
     <string name="index_item_world_ski">Ski-Karte (weltweit)</string>
     <string name="lang_hr">Kroatisch</string>
-    </resources>
+    <string name="interrupt_music_descr">Musikwiedergabe bei Navigationsanweisung unterbrechen</string>
+	</resources>
