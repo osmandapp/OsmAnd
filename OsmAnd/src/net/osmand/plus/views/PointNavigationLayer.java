@@ -110,7 +110,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			int locationY = tb.getPixYFromLatNoRot(pointToNavigate.getLatitude());
 			canvas.rotate(-tb.getRotate(), locationX, locationY);
 			canvas.drawBitmap(targetPoint, locationX - marginX, locationY - marginY, bitmapPaint);
-		} else if (pointToNavigate != null && view.getSettings().SHOW_DESTINATION_ARROW.get()) {
+		} else if (pointToNavigate != null && !view.getApplication().getRoutingHelper().isRouteCalculated()) {
 			net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(),
 					pointToNavigate.getLongitude(), calculations);
 			float bearing = calculations[1] - 90;
