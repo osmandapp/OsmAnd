@@ -136,7 +136,7 @@ public class MapActivityLayers {
 		transportInfoLayer = new TransportInfoLayer(TransportRouteHelper.getInstance());
 		mapView.addLayer(transportInfoLayer, 5.5f);
 		// 6. point location layer 
-		locationLayer = new PointLocationLayer();
+		locationLayer = new PointLocationLayer(activity.getMapViewTrackingUtilities());
 		mapView.addLayer(locationLayer, 6);
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(activity);

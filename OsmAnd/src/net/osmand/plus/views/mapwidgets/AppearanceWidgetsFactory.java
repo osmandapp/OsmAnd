@@ -32,15 +32,15 @@ public class AppearanceWidgetsFactory {
         final OsmandMapTileView view = map.getMapView();
 
 
-        final MapWidgetRegistry.MapWidgetRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(R.drawable.widget_viewing_direction, R.string.map_widget_view_direction,
-                "viewDirection", view.getSettings().SHOW_VIEW_ANGLE);
-        displayViewDirections.setStateChangeListener(new Runnable() {
-            @Override
-            public void run() {
-                view.getSettings().SHOW_VIEW_ANGLE.set(!view.getSettings().SHOW_VIEW_ANGLE.get());
-                map.getMapViewTrackingUtilities().updateSettings();
-            }
-        });
+//        final MapWidgetRegistry.MapWidgetRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(R.drawable.widget_viewing_direction, R.string.map_widget_view_direction,
+//                "viewDirection", view.getSettings().SHOW_VIEW_ANGLE);
+//        displayViewDirections.setStateChangeListener(new Runnable() {
+//            @Override
+//            public void run() {
+//                view.getSettings().SHOW_VIEW_ANGLE.set(!view.getSettings().SHOW_VIEW_ANGLE.get());
+//                map.getMapViewTrackingUtilities().updateSettings();
+//            }
+//        });
 
         if (EXTRA_SETTINGS) {
             final MapWidgetRegistry.MapWidgetRegInfo showRuler = mapInfoControls.registerAppearanceWidget(R.drawable.widget_ruler, R.string.map_widget_show_ruler,

@@ -27,7 +27,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4; 
 	
 	private long lastTimeAutoZooming = 0;
-	private long lastTimeSensorMapRotation = 0;
 	private boolean sensorRegistered = false;
 	private OsmandMapTileView mapView;
 	private OsmandSettings settings;
@@ -36,6 +35,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean isMapLinkedToLocation = false;
 	private boolean followingMode;
 	private boolean routePlanningMode;
+	private boolean showViewAngle = false;
 	
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
@@ -75,7 +75,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1) {
 					mapView.setRotate(-val);
 				}
-			} else if (settings.SHOW_VIEW_ANGLE.get()) {
+			} else if (showViewAngle) {
 				mapView.refreshMap();
 			}
 		}
@@ -83,37 +83,27 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	
 	@Override
 	public void updateLocation(Location location) {
+		showViewAngle = false;
 		if (mapView != null) {
 			if (isMapLinkedToLocation() && location != null) {
 				if (settings.AUTO_ZOOM_MAP.get() != AutoZoomMap.NONE) {
 					autozoom(location);
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
-				boolean enableCompass = false;
+				boolean smallSpeed = !location.hasSpeed() || location.getSpeed() < 0.5;
+				// boolean virtualBearing = fMode && settings.SNAP_TO_ROAD.get();
+				showViewAngle = (!location.hasBearing() || smallSpeed);
 				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
-					boolean smallSpeed = !location.hasSpeed() || location.getSpeed() < 0.5;
-					boolean fMode = app.getRoutingHelper().isFollowingMode();
-					// boolean virtualBearing = fMode && settings.SNAP_TO_ROAD.get();
-					enableCompass = (!location.hasBearing() || smallSpeed)
-							&& fMode && settings.USE_COMPASS_IN_NAVIGATION.get();
 					if (location.hasBearing() && !smallSpeed) {
 						// special case when bearing equals to zero (we don't change anything)
 						if (location.getBearing() != 0f) {
 							mapView.setRotate(-location.getBearing());
 						}
-					} else if (enableCompass) {
-						long now = System.currentTimeMillis();
-						OsmAndLocationProvider provider = app.getLocationProvider();
-						Float lastSensorRotation = provider.getHeading();
-						if (lastSensorRotation != null && Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -lastSensorRotation)) > 15) {
-							if (now - lastTimeSensorMapRotation > 3500) {
-								lastTimeSensorMapRotation = now;
-								mapView.setRotate(-lastSensorRotation);
-							}
-						}
 					}
+				} else if(currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS) {
+					showViewAngle = routePlanningMode; // disable compass rotation in that mode
 				}
-				registerUnregisterSensor(location, enableCompass);
+				registerUnregisterSensor(location);
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
 			}
 			RoutingHelper routingHelper = app.getRoutingHelper();
@@ -126,6 +116,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 	
+	
+	public boolean isShowViewAngle() {
+		
+		return showViewAngle;
+	}
 	
 	
 	public void switchToRoutePlanningMode() {
@@ -146,13 +141,12 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING && !routePlanningMode ? OsmandSettings.BOTTOM_CONSTANT
 					: OsmandSettings.CENTER_CONSTANT);
 		}
-		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation(), false);
+		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation());
 	}
 	
-	private void registerUnregisterSensor(net.osmand.Location location, boolean overruleRegister) {
-		boolean currentShowingAngle = settings.SHOW_VIEW_ANGLE.get();
+	private void registerUnregisterSensor(net.osmand.Location location) {
 		int currentMapRotation = settings.ROTATE_MAP.get();
-		boolean registerCompassListener = overruleRegister || (currentShowingAngle && location != null)
+		boolean registerCompassListener = (showViewAngle && location != null)
 				|| (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS && !routePlanningMode);
 		// show point view only if gps enabled
 		if(sensorRegistered != registerCompassListener) {
@@ -312,5 +306,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	@Override
 	public void routeWasCancelled() {
 	}
+
 
 }

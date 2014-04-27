@@ -6,6 +6,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -28,7 +29,12 @@ public class PointLocationLayer extends OsmandMapLayer {
 	private Bitmap bearingIcon;
 	private Bitmap locationIcon;
 	private OsmAndLocationProvider locationProvider;
+	private MapViewTrackingUtilities mapViewTrackingUtilities;
 	private boolean nm;
+	
+	public PointLocationLayer(MapViewTrackingUtilities mv) {
+		this.mapViewTrackingUtilities = mv;
+	}
 
 	private void initUI() {
 		locationPaint = new Paint();
@@ -53,7 +59,6 @@ public class PointLocationLayer extends OsmandMapLayer {
 		
 		checkAppMode(view.getSettings().getApplicationMode());
 		locationProvider = view.getApplication().getLocationProvider();
-		
 	}
 	
 	@Override
@@ -65,7 +70,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 
 	
 	private RectF getHeadingRect(int locationX, int locationY){
-		int rad = Math.min(3 * view.getWidth() / 8, 3 * view.getHeight() / 8);
+		int rad = (int) (view.getDensity() * 25);
 		return new RectF(locationX - rad, locationY - rad, locationX + rad, locationY + rad);
 	}
 	
@@ -102,10 +107,9 @@ public class PointLocationLayer extends OsmandMapLayer {
 						locationPaint);
 			}
 			Float heading = locationProvider.getHeading();
-			if (heading != null && view.getSettings().SHOW_VIEW_ANGLE.get()) {
+			if (heading != null && mapViewTrackingUtilities.isShowViewAngle()) {
 				canvas.drawArc(getHeadingRect(locationX, locationY), heading - HEADING_ANGLE / 2 - 90, HEADING_ANGLE, true, headingPaint);
 			}
-
 			if (isBearing) {
 				float bearing = lastKnownLocation.getBearing();
 				canvas.rotate(bearing - 90, locationX, locationY);
