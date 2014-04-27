@@ -1698,4 +1698,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="index_item_world_basemap">Podstawowa mapa świata</string>
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
     <string name="interrupt_music_descr">Przerwij muzykę podczas komunikatów</string>
+	<string name="interrupt_music">Przerwij muzykę</string>
 	</resources>
