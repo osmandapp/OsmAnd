@@ -1704,4 +1704,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lang_hr">Chorvátsky</string>
     <string name="lang_zh">Čínsky</string>
     <string name="index_name_canada">Severná amerika - Kanada</string>
-    </resources>
+    <string name="interrupt_music">Prerušiť hudbu</string>
+	<string name="interrupt_music_descr">Prerušiť hudbu keď prichádza oznam</string>
+	</resources>
