@@ -1724,4 +1724,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="index_name_italy">Europa - Italija</string>
     <string name="index_name_gb">Europa - Didžioji Britanija</string>
     <string name="index_item_nation_addresses">adresai šalies mastu</string>
-	</resources>
+	<string name="index_item_world_altitude_correction">Pasaulinė aukščio korekcija</string>
+	<string name="index_item_world_seamarks">Pasaulio jūriniai ženklai</string>
+	<string name="index_item_world_bitcoin_payments">Pasalinio Bitcoin atsiskaitymai</string>
+	<string name="index_item_world_basemap">Pasaulio apžvalginis žemėlapis</string>
+    <string name="index_item_world_ski">Pasaulio slidinėjimo žemėlapis</string>
+    <string name="lang_hr">Kroatų</string>
+    <string name="lang_zh">Kinų</string>
+    <string name="lang_pt_br">Portugalų (Brazilijos)</string>
+    <string name="index_name_canada">Šiaurės Amerika - Kanada</string>
+    </resources>
