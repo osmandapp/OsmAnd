@@ -995,8 +995,8 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="routing_attr_weight_name">최대중량</string>
 	<string name="routing_attr_weight_description">차량중량제한 지정하기</string>
     <string name="android_19_location_disabled">KitKat version 이후로 이전에 저장한 위치에 지도를 다운로드하고 업데이트 할 수 없습니다 (%s). 모든 파일을 그곳에 복사하는 것을 허락하겠는가?	
-        \n Note : old files will stay untouched.  
-        \n Note : it will not be possible to share files between OsmAnd and OsmAnd+. </string>
+        \n Note : 이전 파일은 그대로 유지됩니다.   
+        \n Note : OsmAnd 와 OsmAnd+ 간에 파일을 공유 할 수 없습니다. </string>
     <string name="application_dir_change_warning2">OsmAnd는 새 목적지로 데이터를 이동하려고 합니다. 그렇게 하겠습니까?</string>
     <string name="copying_osmand_one_file_descr">새 목적지로 파일(%s)을 복사중...</string>
     <string name="copying_osmand_files_descr">새로운 목적지에 OsmAnd 파일을 복사중 (%s)</string>
@@ -1382,34 +1382,13 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 지도 및 네비게이션</string>
 	<string name="osmand_plus_short_description_80_chars">글로벌 모바일 지도보기 및 오프라인 및 온라인 OSM지도를 위한 탐색</string>
 	<string name="osmand_plus_long_description_1000_chars">
-		OsmAnd+ (OSM Automated Navigation Directions)
-
-		OsmAnd+ is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
-
-		OsmAnd+ is the paid application version, by buying it you support the project, fund the development of new features, and receive the latest updates.
-
-		Some of the core features:
-		- Complete offline functionality (store downloaded vector or tile maps in a selectable folder)
-		- Compact offline vector maps for the whole world available
-		- Unlimited downloading of country or region maps directly from the app 
-		- Offline Wikipedia feature (download Wikipedia POIs), great for sightseeing
-		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transportation stops, additional maps with customizable transparency
-		- Offline search for addresses and places (POIs)
-		- Offline routing for short distances (experimental)
-		- Car, bicycle, and pedestrian modes with:
-		-  optional automated day/night view switching
-		-  optional speed-dependent map zooming
-		-  optional map alignment according to compass or direction of motion
-		-  optional lane guidance, speed limit display, recorded and TTS voices
-
-
 		OsmAnd + (OSM 자동 탐색 길안내 )
 
- OsmAnd + 글로벌 OpenStreetMap의 다양한 (OSM) 데이터 에 접근 할 수있는 오픈 소스 탐색 응용 프로그램입니다.  모든 지도 데이터 (벡터 또는 타일 맵 ) 오프라인 사용에 대한휴대 전화 메모리 카드 에 저장할 수 있습니다.  OsmAnd 또한 턴 - 바이 - 턴 음성 안내 등의 오프라인 및 온라인 라우팅 기능을 제공합니다.
+OsmAnd + 글로벌 OpenStreetMap의 다양한 (OSM) 데이터 에 접근 할 수있는 오픈 소스 탐색 응용 프로그램입니다.  모든 지도 데이터 (벡터 또는 타일 맵 ) 오프라인 사용에 대한휴대 전화 메모리 카드 에 저장할 수 있습니다.  OsmAnd 또한 턴 - 바이 - 턴 음성 안내 등의 오프라인 및 온라인 라우팅 기능을 제공합니다.
 
- OsmAnd + 는 프로젝트를 지원하는 새로운 기능 의 개발 을 투자 하고, 최신 업데이트를 받을 수 를 구입하여 , 유료 응용 프로그램 의 버전입니다.
+OsmAnd + 는 프로젝트를 지원하는 새로운 기능 의 개발 을 투자 하고, 최신 업데이트를 받을 수 를 구입하여 , 유료 응용 프로그램 의 버전입니다.
 
- 핵심 기능 중 일부 :
+핵심 기능 중 일부 :
  - 전체 오프라인 기능 (선택 폴더 에 저장 다운로드 벡터 또는 타일 지도 )
  - 컴팩트 오프라인 벡터는 전 세계 에서 사용할 수 매핑
  - 국가 또는 지역 의 무제한 다운로드가 응용 프로그램 에서 직접 매핑
@@ -1798,19 +1777,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* Fixed Arabic, Kannada scripting and RTL languages 
 	</string>
 	<string name="osmand_extended_description_4000_chars">
-OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed).
+OsmAnd 은 전세계에 무료로, 고품질의 OpenStreetMap 데이터에 액세스가 가능한 지도 및 운행 앱입니다. 모든 지도 데이터를 오프라인으로 사용할 장치의 메모리 카드 에 저장할 수 있습니다. 장치의 GPS 를 통해 , OsmAnd 는 자동차, 자전거 및 보행자을 위한 광학 및 음성 안내 와 함께 라우팅(길찾기)을 제공합니다. 모든 주요 기능은 온라인과 오프라인(인터넷연결 필요없음)에서 모두 작동합니다. OsmAnd+ 는 유료 버전 앱입니다. OsmAnd+ 를 구입하므로써 새로운 기능의 프로젝트와 개발을 지원합니다. 주요 
 
-Some of the main features:
-주기능 :
+
+기능 중 일부 :
 
 Navigation : 운행
-
- - Works online (fast) or offline (no roaming charges when you are abroad)
- - Turn-by-turn voice guidance (recorded and synthesized voices)
- - Optional lane guidance, street name display, and estimated time of arrival
- - Supports intermediate points on your itinerary
- - Automatic re-routing whenever you deviate from the route
- - Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates
 
  - 온라인 또는 오프라인 작업
  - 턴바이턴 음성안내
@@ -1820,15 +1792,6 @@ Navigation : 운행
  - 주소 또는 좌표로 장소를 검색(또는 레스토랑, 호텔, 주유소, 박물관 등등)
 
 Map Viewing :지도 보기
-
- - Display your position and orientation on the map
- - Optionally align the map according to compass or your direction of motion
- - Save your most important places as Favorites
- - Display POIs (point of interests) around you
- - Can display specialized online tile maps
- - Can display satellite view (from Bing)
- - Can display different overlays like touring/navigation GPX tracks and additional maps with customizable transparency
- - Optionally display place names in English, local, or phonetic spelling
 
  - 지도에 현재위치와 방향을 표시
  - 선택적으로 나침반 또는 GPS로 진행방향를 지도에 표시 가능
@@ -1907,23 +1870,15 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="mile_per_hour">마일퍼아워</string>
 	<string name="tip_recent_changes_1_6_t">Changes in 1.6:
-	\n\t* 풀 HD 기기 지원. Support of Full HD devices
-	\n\t* 투명지도 백그라운드 지원. Support transparent map background
+	\n\t* 풀 HD 기기 지원. 
+	\n\t* 투명지도 백그라운드 지원. 
 	\n\t* 맵 뷰어로 다운로드된 지도 보이기 및 다운로드 누락된 지도 촉진하기
-Show downloaded maps and facilitate downloading missing maps directly from the map view
-	\n\t* Contour line map files now bundled for countries/regions
-등고선 지도 파일은 국가/지역의 번들
-	\n\t* New world basemap with major roads, railroads, and major areal features like forests 
-주요도로, 철도, 숲과 같은 주요면적의 세계 기본지도
-	\n\t* Map magnifier feature (long click on zoom button) - Useful both for tile and vector maps  
-지도 확대경 특징(줌 버튼 길게 클릭)- 타일지도와 벡터지도에 유용함
-	\n\t* Define/edit custom online tile sources (and specify expiration time)
-사용자 온라인 타일 소스 정의 및 편집
-	\n\t* Support of time conditional speed limits (Netherlands)
-시간 조건 제한 속도 (네덜란드) 지원
-	\n\t* Faster search address input
-빠른 검색 주소 임력
-	\n\t* Bug fixes with routing and rendering
-라우팅 및 렌더링의 버그 수정
+	\n\t* 등고선 지도 파일은 국가/지역의 번들
+	\n\t* 주요도로, 철도, 숲과 같은 주요면적의 세계 기본지도
+	\n\t* 지도 확대경 특징(줌 버튼 길게 클릭)- 타일지도와 벡터지도에 유용함
+	\n\t* 사용자 온라인 타일 소스 정의 및 편집
+	\n\t* 시간 조건 제한 속도 (네덜란드) 지원
+	\n\t* 빠른 검색 주소 임력
+	\n\t* 라우팅 및 렌더링의 버그 수정
     </string>
     </resources>
