@@ -1664,7 +1664,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="calculate_osmand_route_without_internet">Bereken een OsmAnd routesegment zonder internet</string>
     <string name="gpx_option_calculate_first_last_segment">Bereken een OsmAnd route voor het eerste en laatste routesegment</string>
     <string name="index_name_gb">Europa - Groot-Brittannië</string>
-    <string name="index_item_nation_addresses">landelijke adressen</string>
+    <string name="index_item_nation_addresses">Adressen in het hele land</string>
 	<string name="index_item_world_altitude_correction">Wereldwijde hoogtecorrectie</string>
 	<string name="index_item_world_seamarks">Zeebakens (wereld)</string>
 	<string name="index_item_world_bitcoin_payments">Betalen met Bitcoin (wereld)</string>
