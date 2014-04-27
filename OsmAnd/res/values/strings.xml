@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="voice_pref_title">Voice</string>
+    <string name="misc_pref_title">Miscallenious</string>
+    <string name="localization_pref_title">Localization</string>
     <string name="index_item_nation_addresses">addresses nationwide</string>
 	<string name="index_item_world_altitude_correction">World altitude correction</string>
 	<string name="index_item_world_seamarks">World seamarks</string>

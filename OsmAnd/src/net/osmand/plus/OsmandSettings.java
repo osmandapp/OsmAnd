@@ -29,6 +29,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.net.ConnectivityManager;
@@ -638,7 +639,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumIntPreference<MetricsConstants>(
-			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()){
+			"default_metric_system_new", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()){
 		protected MetricsConstants getDefaultValue() {
 			return DRIVING_REGION.get().defMetrics;
 		};
@@ -1532,7 +1533,16 @@ public class OsmandSettings {
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE"; 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference("voice_provider", null).makeProfile();
+	// this value could localized
+	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference("voice_provider", null){
+		protected String getDefaultValue() {
+			Configuration config = ctx.getResources().getConfiguration();
+			if("de".equals(config.locale.getLanguage())) {
+				return "de-tts";
+			}
+			return "en-tts";
+		};
+	}.makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	//public final OsmandPreference<Boolean> USE_COMPASS_IN_NAVIGATION = new BooleanPreference("use_compass_navigation", true).makeProfile().cache();

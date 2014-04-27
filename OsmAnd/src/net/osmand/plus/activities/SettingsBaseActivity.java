@@ -30,6 +30,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -64,7 +65,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		profileSettings = profile;
 	}
 
-	public CheckBoxPreference registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceScreen screen) {
+	public CheckBoxPreference registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceGroup screen) {
 		CheckBoxPreference p = (CheckBoxPreference) screen.findPreference(b.getId());
 		p.setOnPreferenceChangeListener(this);
 		screenPreferences.put(b.getId(), p);
@@ -164,7 +165,7 @@ public abstract class SettingsBaseActivity extends SherlockPreferenceActivity im
 		return p;
 	}
 
-	public <T> void registerListPreference(OsmandPreference<T> b, PreferenceScreen screen, String[] names, T[] values) {
+	public <T> void registerListPreference(OsmandPreference<T> b, PreferenceGroup screen, String[] names, T[] values) {
 		ListPreference p = (ListPreference) screen.findPreference(b.getId());
 		prepareListPreference(b, names, values, p);
 	}

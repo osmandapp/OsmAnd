@@ -1,16 +1,11 @@
 package net.osmand.plus.activities;
 
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
@@ -22,7 +17,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
-import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -38,28 +32,13 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private Preference speakAlarms;
 	private ListPreference routerServicePreference;
 	private ListPreference autoZoomMapPreference;
-	public static final String MORE_VALUE = "MORE_VALUE";
+	
 	
 	private List<RoutingParameter> avoidParameters = new ArrayList<RoutingParameter>();
 	private List<RoutingParameter> preferParameters = new ArrayList<RoutingParameter>();
 	
 	public SettingsNavigationActivity() {
 		super(true);
-	}
-	
-
-	private Set<String> getVoiceFiles() {
-		// read available voice data
-		File extStorage = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
-		Set<String> setFiles = new LinkedHashSet<String>();
-		if (extStorage.exists()) {
-			for (File f : extStorage.listFiles()) {
-				if (f.isDirectory()) {
-					setFiles.add(f.getName());
-				}
-			}
-		}
-		return setFiles;
 	}
 
 	@Override
@@ -197,29 +176,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	}
 
 
-	private void reloadVoiceListPreference(PreferenceScreen screen) {
-		String[] entries;
-		String[] entrieValues;
-		Set<String> voiceFiles = getVoiceFiles();
-		entries = new String[voiceFiles.size() + 2];
-		entrieValues = new String[voiceFiles.size() + 2];
-		int k = 0;
-		// entries[k++] = getString(R.string.voice_not_specified);
-		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
-		entries[k++] = getString(R.string.voice_not_use);
-		for (String s : voiceFiles) {
-			entries[k] = s;
-			entrieValues[k] = s;
-			k++;
-		}
-		entrieValues[k] = MORE_VALUE;
-		entries[k] = getString(R.string.install_more);
-		registerListPreference(settings.VOICE_PROVIDER, screen, entries, entrieValues);
-	}
+	
 
 
-	public void updateAllSettings() {
-		reloadVoiceListPreference(getPreferenceScreen());
+	public void updateAllSettings() {	
 		prepareRoutingPrefs(getPreferenceScreen());
 		super.updateAllSettings();
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + settings.ROUTER_SERVICE.get() + "]");
@@ -228,18 +188,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String id = preference.getKey();
-		if (id.equals(settings.VOICE_PROVIDER.getId())) {
-			if (MORE_VALUE.equals(newValue)) {
-				// listPref.set(oldValue); // revert the change..
-				final Intent intent = new Intent(this, DownloadIndexActivity.class);
-				intent.putExtra(DownloadIndexActivity.FILTER_KEY, getString(R.string.voice));
-				startActivity(intent);
-			} else {
-				super.onPreferenceChange(preference, newValue);
-				getMyApplication().showDialogInitializingCommandPlayer(this, false);
-			}
-			return true;
-		}
 		super.onPreferenceChange(preference, newValue);
 		if (id.equals(settings.ROUTER_SERVICE.getId())) {
 			routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  ["

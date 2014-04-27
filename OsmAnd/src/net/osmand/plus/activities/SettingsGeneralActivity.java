@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
@@ -15,7 +17,6 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.DrivingRegion;
-import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -41,6 +42,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -50,6 +52,7 @@ import com.actionbarsherlock.view.Window;
 
 public class SettingsGeneralActivity extends SettingsBaseActivity {
 
+	public static final String MORE_VALUE = "MORE_VALUE";
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
 	private ListPreference drivingRegionPreference;
@@ -67,67 +70,14 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		PreferenceScreen screen = getPreferenceScreen();
 		settings = getMyApplication().getSettings();
 		
-		if (!Version.isBlackberry(getMyApplication())) {
-			CheckBoxPreference nativeCheckbox = createCheckBoxPreference(settings.SAFE_MODE, R.string.safe_mode,
-					R.string.safe_mode_description);
-			// disable the checkbox if the library cannot be used
-			if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || settings.NATIVE_RENDERING_FAILED.get()) {
-				nativeCheckbox.setEnabled(false);
-				nativeCheckbox.setChecked(true);
-			}
-			screen.addPreference(nativeCheckbox);
-
-			applicationDir = new Preference(this);
-			applicationDir.setTitle(R.string.application_dir);
-			applicationDir.setKey("external_storage_dir");
-			applicationDir.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-				
-				public void showOtherDialog(){
-					AlertDialog.Builder editalert = new AlertDialog.Builder(SettingsGeneralActivity.this);
-					editalert.setTitle(R.string.application_dir);
-					final EditText input = new EditText(SettingsGeneralActivity.this);
-					input.setText(settings.getExternalStorageDirectory().getAbsolutePath());
-					input.setPadding(3, 3, 3, 3);
-					LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-					        LinearLayout.LayoutParams.MATCH_PARENT,
-					        LinearLayout.LayoutParams.MATCH_PARENT);
-					input.setLayoutParams(lp);
-					settings.getExternalStorageDirectory().getAbsolutePath();
-					editalert.setView(input);
-					editalert.setNegativeButton(R.string.default_buttons_cancel, null);
-					editalert.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
-					    public void onClick(DialogInterface dialog, int whichButton) {
-					    	warnAboutChangingStorage(input.getText().toString());
-					    }
-					});
-					editalert.show();
-				}
-				@Override
-				public boolean onPreferenceClick(Preference preference) {
-					SuggestExternalDirectoryDialog.showDialog(SettingsGeneralActivity.this, new OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dialog.dismiss();
-							showOtherDialog();
-						}
-					}, new CallbackWithObject<String>() {
-						
-						@Override
-						public boolean processResult(String result) {
-							warnAboutChangingStorage(result);
-							return true;
-						}
-					});
-					return false;
-				}
-			});
-			screen.addPreference(applicationDir);
+		
+		
+		ApplicationMode[] appModes = ApplicationMode.values(settings).toArray(new ApplicationMode[0]);
+		entries = new String[appModes.length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = appModes[i].toHumanString(getMyApplication());
 		}
-		
-		screen.addPreference(createCheckBoxPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS, R.string.use_kalman_filter_compass, R.string.use_kalman_filter_compass_descr));
-		
-		registerBooleanPreference(settings.USE_ENGLISH_NAMES, screen);
-
+		registerListPreference(settings.APPLICATION_MODE, screen, entries, appModes);
 		
 		// List preferences
 		registerListPreference(settings.ROTATE_MAP, screen, 
@@ -138,23 +88,65 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)},
 				new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 		
-		registerListPreference(
-				settings.OSMAND_THEME, screen,
-				new String[] { "Dark", "Light", "Dark ActionBar" }, new Integer[] { OsmandSettings.OSMAND_DARK_THEME,
-						OsmandSettings.OSMAND_LIGHT_THEME, OsmandSettings.OSMAND_LIGHT_DARK_ACTIONBAR_THEME });
+		addLocalPrefs((PreferenceGroup) screen.findPreference("localization"));
+		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
+		addMiscPreferences((PreferenceGroup) screen.findPreference("misc"));
+
+		
+		applicationModePreference = (ListPreference) screen.findPreference(settings.APPLICATION_MODE.getId());
+		applicationModePreference.setOnPreferenceChangeListener(this);
+		drivingRegionPreference = (ListPreference) screen.findPreference(settings.DRIVING_REGION.getId());
+    }
+
+
+
+	private void addVoicePrefs(PreferenceGroup cat) {
+		if (!Version.isBlackberry((OsmandApplication) getApplication())) {
+			ListPreference lp = createListPreference(
+					settings.AUDIO_STREAM_GUIDANCE,
+					new String[] { getString(R.string.voice_stream_music), getString(R.string.voice_stream_notification),
+							getString(R.string.voice_stream_voice_call) }, new Integer[] { AudioManager.STREAM_MUSIC,
+							AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL }, R.string.choose_audio_stream,
+					R.string.choose_audio_stream_descr);
+			final OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
+			lp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object newValue) {
+					prev.onPreferenceChange(preference, newValue);
+					CommandPlayer player = getMyApplication().getPlayer();
+					if (player != null) {
+						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
+					}
+					return true;
+				}
+			});
+			cat.addPreference(lp);
+			cat.addPreference(createCheckBoxPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music,
+					R.string.interrupt_music_descr));
+		}
+	}
+
+
+
+	private void addLocalPrefs(PreferenceGroup screen) {
+		String[] entries;
+		String[] entrieValues;
+		registerBooleanPreference(settings.USE_ENGLISH_NAMES, screen);
+		
 		DrivingRegion[] drs  = DrivingRegion.values();
 		entries = new String[drs.length];
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = getString(drs[i].name);
+			entries[i] = getString(drs[i].name) + " (" + drs[i].defMetrics.toHumanString(this) +")" ;
 		}
 		registerListPreference(settings.DRIVING_REGION, screen, entries, drs);
 		
-		MetricsConstants[] mvls  = MetricsConstants.values();
-		entries = new String[mvls.length];
-		for(int i=0; i<entries.length; i++){
-			entries[i] = mvls[i].toHumanString(getMyApplication());
-		}
-		registerListPreference(settings.METRIC_SYSTEM, screen, entries, mvls);
+//		MetricsConstants[] mvls  = MetricsConstants.values();
+//		entries = new String[mvls.length];
+//		for(int i=0; i<entries.length; i++){
+//			entries[i] = mvls[i].toHumanString(getMyApplication());
+//		}
+//		registerListPreference(settings.METRIC_SYSTEM, screen, entries, mvls);
 		
 		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
 		//getResources().getAssets().getLocales();
@@ -207,54 +199,83 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				getString(R.string.lang_vi),
 				getString(R.string.lang_cy) + incompleteSuffix,};
 		registerListPreference(settings.PREFERRED_LOCALE, screen, entries, entrieValues);
+	}
 
-		
-		
-		ApplicationMode[] appModes = ApplicationMode.values(settings).toArray(new ApplicationMode[0]);
-		entries = new String[appModes.length];
-		for(int i=0; i<entries.length; i++){
-			entries[i] = appModes[i].toHumanString(getMyApplication());
-		}
-		registerListPreference(settings.APPLICATION_MODE, screen, entries, appModes);
-		
-		if (!Version.isBlackberry((OsmandApplication) getApplication())) {
-			PreferenceScreen cat = getPreferenceScreen();
+
+
+	private void addMiscPreferences(PreferenceGroup misc) {
+		if (!Version.isBlackberry(getMyApplication())) {
+			applicationDir = new Preference(this);
+			applicationDir.setTitle(R.string.application_dir);
+			applicationDir.setKey("external_storage_dir");
+			applicationDir.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+				
+				public void showOtherDialog(){
+					AlertDialog.Builder editalert = new AlertDialog.Builder(SettingsGeneralActivity.this);
+					editalert.setTitle(R.string.application_dir);
+					final EditText input = new EditText(SettingsGeneralActivity.this);
+					input.setText(settings.getExternalStorageDirectory().getAbsolutePath());
+					input.setPadding(3, 3, 3, 3);
+					LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					        LinearLayout.LayoutParams.MATCH_PARENT,
+					        LinearLayout.LayoutParams.MATCH_PARENT);
+					input.setLayoutParams(lp);
+					settings.getExternalStorageDirectory().getAbsolutePath();
+					editalert.setView(input);
+					editalert.setNegativeButton(R.string.default_buttons_cancel, null);
+					editalert.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog, int whichButton) {
+					    	warnAboutChangingStorage(input.getText().toString());
+					    }
+					});
+					editalert.show();
+				}
+				@Override
+				public boolean onPreferenceClick(Preference preference) {
+					SuggestExternalDirectoryDialog.showDialog(SettingsGeneralActivity.this, new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							showOtherDialog();
+						}
+					}, new CallbackWithObject<String>() {
+						
+						@Override
+						public boolean processResult(String result) {
+							warnAboutChangingStorage(result);
+							return true;
+						}
+					});
+					return false;
+				}
+			});
+			misc.addPreference(applicationDir);
+			CheckBoxPreference nativeCheckbox = createCheckBoxPreference(settings.SAFE_MODE, R.string.safe_mode,
+					R.string.safe_mode_description);
+			// disable the checkbox if the library cannot be used
+			if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || settings.NATIVE_RENDERING_FAILED.get()) {
+				nativeCheckbox.setEnabled(false);
+				nativeCheckbox.setChecked(true);
+			}
+			misc.addPreference(nativeCheckbox);
+			
 			int nav = getResources().getConfiguration().navigation;
 			if (nav == Configuration.NAVIGATION_DPAD || nav == Configuration.NAVIGATION_TRACKBALL || 
 					nav == Configuration.NAVIGATION_WHEEL || 
 					nav == Configuration.NAVIGATION_UNDEFINED) {
-				cat.addPreference(createCheckBoxPreference(settings.USE_TRACKBALL_FOR_MOVEMENTS, R.string.use_trackball,
+				misc.addPreference(createCheckBoxPreference(settings.USE_TRACKBALL_FOR_MOVEMENTS, R.string.use_trackball,
 						R.string.use_trackball_descr));
 			}
-			
-			ListPreference lp = createListPreference(
-					settings.AUDIO_STREAM_GUIDANCE,
-					new String[] { getString(R.string.voice_stream_music), getString(R.string.voice_stream_notification),
-							getString(R.string.voice_stream_voice_call) }, new Integer[] { AudioManager.STREAM_MUSIC,
-							AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL }, R.string.choose_audio_stream,
-					R.string.choose_audio_stream_descr);
-			final OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
-			lp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-				@Override
-				public boolean onPreferenceChange(Preference preference, Object newValue) {
-					prev.onPreferenceChange(preference, newValue);
-					CommandPlayer player = getMyApplication().getPlayer();
-					if (player != null) {
-						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
-					}
-					return true;
-				}
-			});
-			cat.addPreference(lp);
-			cat.addPreference(createCheckBoxPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music,
-					R.string.interrupt_music_descr));
 		}
 		
-		applicationModePreference = (ListPreference) screen.findPreference(settings.APPLICATION_MODE.getId());
-		applicationModePreference.setOnPreferenceChangeListener(this);
-		drivingRegionPreference = (ListPreference) screen.findPreference(settings.DRIVING_REGION.getId());
-    }
+		registerListPreference(
+				settings.OSMAND_THEME, misc,
+				new String[] { "Dark", "Light", "Dark ActionBar" }, new Integer[] { OsmandSettings.OSMAND_DARK_THEME,
+						OsmandSettings.OSMAND_LIGHT_THEME, OsmandSettings.OSMAND_LIGHT_DARK_ACTIONBAR_THEME });
+		
+		misc.addPreference(createCheckBoxPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS, R.string.use_kalman_filter_compass, R.string.use_kalman_filter_compass_descr));
+		
+	}
 
 
 
@@ -266,21 +287,30 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	}
 
 	public void updateAllSettings() {
+		reloadVoiceListPreference(getPreferenceScreen());
 		super.updateAllSettings();
 		updateApplicationDirTextAndSummary();
-
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
 				+ settings.APPLICATION_MODE.get().toHumanString(getMyApplication()) + "]");
 		drivingRegionPreference.setTitle(getString(R.string.driving_region) + "  ["
 				+ getString(settings.DRIVING_REGION.get().name) + "]");
-		// Too long
-//		metricsAndConstantsPreference.setTitle(getString(R.string.unit_of_length) + "  ["
-//				+ settings.METRIC_SYSTEM.get().toHumanString(getMyApplication()) + "]");
 	}
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String id = preference.getKey();
+		if (id.equals(settings.VOICE_PROVIDER.getId())) {
+			if (MORE_VALUE.equals(newValue)) {
+				// listPref.set(oldValue); // revert the change..
+				final Intent intent = new Intent(this, DownloadIndexActivity.class);
+				intent.putExtra(DownloadIndexActivity.FILTER_KEY, getString(R.string.voice));
+				startActivity(intent);
+			} else {
+				super.onPreferenceChange(preference, newValue);
+				getMyApplication().showDialogInitializingCommandPlayer(this, false);
+			}
+			return true;
+		}
 		super.onPreferenceChange(preference, newValue);
 		if (id.equals(settings.SAFE_MODE.getId())) {
 			if ((Boolean) newValue) {
@@ -520,5 +550,38 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	}
 
 
+	private void reloadVoiceListPreference(PreferenceScreen screen) {
+		String[] entries;
+		String[] entrieValues;
+		Set<String> voiceFiles = getVoiceFiles();
+		entries = new String[voiceFiles.size() + 2];
+		entrieValues = new String[voiceFiles.size() + 2];
+		int k = 0;
+		// entries[k++] = getString(R.string.voice_not_specified);
+		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
+		entries[k++] = getString(R.string.voice_not_use);
+		for (String s : voiceFiles) {
+			entries[k] = s;
+			entrieValues[k] = s;
+			k++;
+		}
+		entrieValues[k] = MORE_VALUE;
+		entries[k] = getString(R.string.install_more);
+		registerListPreference(settings.VOICE_PROVIDER, screen, entries, entrieValues);
+	}
 	
+
+	private Set<String> getVoiceFiles() {
+		// read available voice data
+		File extStorage = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		Set<String> setFiles = new LinkedHashSet<String>();
+		if (extStorage.exists()) {
+			for (File f : extStorage.listFiles()) {
+				if (f.isDirectory()) {
+					setFiles.add(f.getName());
+				}
+			}
+		}
+		return setFiles;
+	}
 }

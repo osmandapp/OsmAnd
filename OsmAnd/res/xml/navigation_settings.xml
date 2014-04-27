@@ -7,8 +7,7 @@
 			<Preference android:title="@string/avoid_in_routing_title" android:summary="@string/avoid_in_routing_descr" android:key="avoid_in_routing"/>
 			<Preference android:title="@string/prefer_in_routing_title" android:summary="@string/prefer_in_routing_descr" android:key="prefer_in_routing"/>
 		</PreferenceCategory>
-		<PreferenceCategory android:key="guidance_preferences" android:title="@string/guidance_preferences_descr">
-			<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
+		<PreferenceCategory android:key="guidance_preferences" android:title="@string/guidance_preferences_descr">			
 			<ListPreference android:key="auto_follow_route" android:title="@string/choose_auto_follow_route"
 				android:summary="@string/choose_auto_follow_route_descr"></ListPreference>
 			<ListPreference android:key="auto_zoom_map_new" android:title="@string/auto_zoom_map"
