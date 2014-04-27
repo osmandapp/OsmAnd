@@ -521,8 +521,8 @@
   <string name="index_settings">Данные</string>
   <string name="osmand_service">Фоновый режим</string>
   <string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>
-  <string name="fast_route_mode">Наибыстрейший маршрут</string>
-  <string name="fast_route_mode_descr">Расчёт наибыстрейшего маршрута вместо кратчайшего </string>
+  <string name="fast_route_mode">Скоростной маршрут</string>
+  <string name="fast_route_mode_descr">Расчёт скоростного маршрута вместо кратчайшего </string>
   <string name="tiles_to_download_estimated_size">На масштабе {0} загрузить {1} тайлов ({2} Mb )</string>
   <string name="context_menu_item_download_map">Загрузить карту</string>
   <string name="select_max_zoom_preload_area">Выберите максимальный масштаб для загрузки видимой области</string>
@@ -1367,7 +1367,7 @@
 	<string name="driving_region_us">США</string>
 	<string name="driving_region_europe_asia">Европа и Азия</string>
 	<string name="driving_region_uk">Англия, Индия, Австралия и др.</string>
-	<string name="context_menu_item_directions_to">Пункт назначения</string>
+	<string name="context_menu_item_directions_to">Проложить маршрут</string>
     <string name="context_menu_item_directions_from">Пункт отправления</string>
     <string name="driving_region_canada">Канада</string>
 	<string name="tip_map_styles">Стили карты</string>

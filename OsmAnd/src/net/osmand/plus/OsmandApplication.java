@@ -391,7 +391,7 @@ public class OsmandApplication extends Application {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(uiContext, SettingsActivity.class);
-						intent.putExtra(SettingsActivity.INTENT_KEY_SETTINGS_SCREEN, SettingsActivity.SCREEN_NAVIGATION_SETTINGS);
+						intent.putExtra(SettingsActivity.INTENT_KEY_SETTINGS_SCREEN, SettingsActivity.SCREEN_GENERAL_SETTINGS);
 						uiContext.startActivity(intent);
 					}
 				});
