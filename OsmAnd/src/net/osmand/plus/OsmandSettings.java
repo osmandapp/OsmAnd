@@ -753,6 +753,12 @@ public class OsmandSettings {
 		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.BICYCLE, true);
 	}
 	
+	public final CommonPreference<Boolean> INTERRUPT_MUSIC = new BooleanPreference("interrupt_music", false).makeProfile().cache();
+	{
+        INTERRUPT_MUSIC.setModeDefaultValue(ApplicationMode.CAR, true);
+        INTERRUPT_MUSIC.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
+	}
+
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
