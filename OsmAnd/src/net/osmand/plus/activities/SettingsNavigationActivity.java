@@ -85,7 +85,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		
 		
 		registerBooleanPreference(settings.SNAP_TO_ROAD, screen);
-		registerBooleanPreference(settings.INTERRUPT_MUSIC, screen);
 		registerBooleanPreference(settings.USE_COMPASS_IN_NAVIGATION, screen);
 		
 		Integer[] intValues = new Integer[] { 0, 5, 10, 15, 20, 25, 30, 45, 60, 90};

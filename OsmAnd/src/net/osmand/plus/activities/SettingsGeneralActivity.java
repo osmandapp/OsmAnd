@@ -247,6 +247,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				}
 			});
 			cat.addPreference(lp);
+			cat.addPreference(createCheckBoxPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music,
+					R.string.interrupt_music_descr));
 		}
 		
 		applicationModePreference = (ListPreference) screen.findPreference(settings.APPLICATION_MODE.getId());
