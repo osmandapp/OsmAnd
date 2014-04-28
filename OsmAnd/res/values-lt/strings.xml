@@ -1733,4 +1733,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="lang_zh">Kinų</string>
     <string name="lang_pt_br">Portugalų (Brazilijos)</string>
     <string name="index_name_canada">Šiaurės Amerika - Kanada</string>
-    </resources>
+    <string name="always_center_position_on_map">Vietą visada rodyti centre</string>
+    <string name="voice_pref_title">Balsas</string>
+    <string name="misc_pref_title">Įvairūs</string>
+    <string name="localization_pref_title">Lokalizacija</string>
+    <string name="interrupt_music_descr">Pristabdyti muziką skelbiant pranešimą</string>
+	<string name="interrupt_music">Pristabdyti muziką</string>
+	</resources>
