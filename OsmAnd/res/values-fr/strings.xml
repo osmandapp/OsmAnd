@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors-ligne des PI
@@ -1543,10 +1544,10 @@
 <string name="lang_uk">Ukrainien</string>
 <string name="lang_vi">Vietnamien</string>
 <string name="lang_cy">Gallois</string>
-	<string name="always_center_position_on_map">Toujours centrer la carte sur la position</string>
-	<string name="voice_pref_title">Voix</string>
-	<string name="misc_pref_title">Divers</string>
-	<string name="localization_pref_title">Localisation</string>
-	<string name="interrupt_music_descr">Interrompre la musique lors des annonces</string>
-	<string name="interrupt_music">Interrompre la musique</string>
-    </resources>
+<string name="always_center_position_on_map">Toujours centrer la carte sur la position</string>
+<string name="voice_pref_title">Voix</string>
+<string name="misc_pref_title">Divers</string>
+<string name="localization_pref_title">Localisation</string>
+<string name="interrupt_music_descr">Interrompre la musique lors des annonces</string>
+<string name="interrupt_music">Interrompre la musique</string>
+</resources>
