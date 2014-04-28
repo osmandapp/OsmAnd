@@ -1540,4 +1540,10 @@
 		\n\t- Opcions de navegació amb traces GPX
 		\n\t- Interfície millorada i forces errors corregits
 	</string>
+	<string name="always_center_position_on_map">Mostra sempre la posició en el centre</string>
+    <string name="voice_pref_title">Veu</string>
+    <string name="misc_pref_title">Miscel·lània</string>
+    <string name="localization_pref_title">Ubicació</string>
+    <string name="interrupt_music_descr">Pausa la música en fer indicacions</string>
+	<string name="interrupt_music">Pausa la música</string>
 	</resources>
