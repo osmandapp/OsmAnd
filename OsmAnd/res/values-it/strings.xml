@@ -1756,4 +1756,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="index_item_world_basemap">Mappa mondiale generale</string>
     <string name="index_item_world_ski">Mappa sci mondiale</string>
     <string name="lang_hr">Croato</string>
-    </resources>
+    <string name="always_center_position_on_map">Mostra la posizione sempre al centro</string>
+    <string name="voice_pref_title">Voce</string>
+    <string name="misc_pref_title">Miscellanea</string>
+    <string name="localization_pref_title">Localizzazione</string>
+    <string name="interrupt_music">Interrompi la musica</string>
+	<string name="interrupt_music_descr">Interrompi la musica per fare gli annunci</string>
+	</resources>
