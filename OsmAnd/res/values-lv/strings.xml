@@ -575,7 +575,7 @@
   <string name="transport_Routes">Maršruti</string>
   <string name="transport_Stop">Pietura</string>
   <string name="transport_stops">pieturas</string>
-  <string name="transport_search_after">Nākošais maršruts</string>
+  <string name="transport_search_after">Nākamais maršruts</string>
   <string name="transport_search_before">Iepriekšējais maršruts</string>
   <string name="transport_finish_search">Beigt meklēšanu</string>
   <string name="transport_stop_to_go_out">Izvēlieties izkāpšanas pieturu</string>
@@ -928,9 +928,9 @@
   <string name="map_widget_distance">Mērķis</string>
   <string name="map_widget_altitude">Augstums</string>
   <string name="map_widget_time">Laiks ceļam</string>
-  <string name="map_widget_next_turn">Nākošais pagr_</string>
-  <string name="map_widget_next_turn_small">Nākošais pagr. (mazs)</string>
-  <string name="map_widget_next_next_turn">Otrs nākošais pagr_</string>
+  <string name="map_widget_next_turn">Nākamais pagriez_</string>
+  <string name="map_widget_next_turn_small">Nāk. pagriez. (mazs)</string>
+  <string name="map_widget_next_next_turn">Aiznākamais pagriez_</string>
   <string name="map_widget_mini_route">Mini ceļa karte</string>
   <string name="bg_service_screen_lock">Aizslēgt/atslēgt ekrānu</string>
   <string name="bg_service_screen_lock_toast">Ekrāns ir aizslēgts</string>
@@ -1570,4 +1570,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	\n\t* Novērstas kļūdas attāluma parādīšanā, GPX  analizatorā, ceļapunktu apstrādē, OSM augšupielādē, https apstrādē
 ……
     </string>
+    <string name="always_center_position_on_map">Vienmēr centrēt karti</string>
+    <string name="voice_pref_title">Balss</string>
+    <string name="misc_pref_title">Dažādi</string>
+    <string name="localization_pref_title">Lokalizācija</string>
     </resources>
