@@ -115,7 +115,7 @@
   <string name="live_monitoring_interval">Tiešaistes sekošanas intervāls</string>
   <string name="live_monitoring_url_descr">Norādiet web adresi ar parametru sintaksi: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Tiešsaistes sekošanas web adrese</string>
-  <string name="gpx_monitoring_disabled_warn">Lūdzu ieslēgt \'Ierakstīt treku GPX failā\' uzstādījumos.</string>
+  <string name="gpx_monitoring_disabled_warn">Lūdzu ieslēgt \'Ierakstīt trasi GPX failā\' uzstādījumos.</string>
   <string name="show_current_gpx_title">Rādīt tekošo trasi</string>
   <string name="tip_recent_changes_0_7_0_t">"Jaunumi 0.7.0 versijā : \n\t- Bezsaistes wikipedia dati \n\t- Atjaunotas kartes \n\t- Citi mazi uzlabojumi "</string>
   <string name="free_version_message">Bezmaksas OsmAnd versijai ir ierobežojums uz %1$s lejupielādēm un tā neatbalsta bezsaistes wikipedia rakstus.</string>
@@ -202,7 +202,7 @@
   <string name="tip_recent_changes_0_6_8_t">"Izmaiņas 0.6.8 versijā : \n\t- Pilnībā pārstrādāta meklēšana (POI, Adrese)! Adresu meklēšana ir padarīta daudz ātrāka. Izveiots viena meklēšanas saskarne ar dažādām opcijām. \n\t- Implementēta POI meklēšana lielos apgabalos (valstīs) \n\t- Izlabota kartes raustīšanās tablet PC (Pieteikums 641) \n\t- Kartes auto-centrēšanas iespēja (Pieteikums 356) \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\' \n\t- POI data included in .obf file (all download indexes after 01/10/11) \n\t- Voice prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "</string>
   <string name="file_can_not_be_renamed">Failu nevar pārsaukt.</string>
   <string name="file_with_name_already_exists">Fails ar šādu nosaukumu jau eksistē.</string>
-  <string name="gpx_navigation">GPX navigācija</string>
+  <string name="gpx_navigation">GPX maršruts</string>
   <string name="poi_query_by_name_matches_categories">Pēc atslēgvārda atrastās POI kategorijas:</string>
   <string name="data_to_search_poi_not_available">Lokālie dati POI vārdu meklēšanai nav pieejami.</string>
   <string name="poi_filter_by_name">Meklēt pēc vārda</string>
@@ -224,7 +224,7 @@
   <string name="select_search_position">Meklēt blakus:</string>
   <string name="context_menu_item_search">Meklēt apkārtnē</string>
   <string name="tip_recent_changes_0_6_7_t">Izmaiņas 0.6.7 versijā:\n\t- Bezsaistes datu menedžeris (lejuplādēšana, dzēšana un aktivizācija/deaktivizācija neizejot no OsmAnd aplikācijas)\n\t- Izlases punkti un grupas (kategorizēšana, dzēšana, izlases vadība)\n\t- GPX pārlūkošana aplikācijā (skatīt ceļa detaļas, attālumu, vidējo ātrumu, augstuma izmaiņas u.t.t.)\n\t- GPX navigācija (vairāk iespēju, turpināt navigāciju pēc nobrukšanas, loka kustības atbalsts)\n\t- Funkcija GPX ceļa saglabāšanai bezsaistes lietojumam\n\t- Uzlabota GPX monitorēšana (filtrs uz neakurātu pozīciju un saglabāta precizitāte/augstums/ātrums)\n\t- Augšuplādēt GPX uz OSM (http://download.osmand.net/gpx/)\n\t- Uzlabota vektoru renderēšana\n\t- TTS dzinēja uzlabojumi (ziņo precīzu attālumu, jūdžu atbalsts)\n\t- Kļūdu labojumi</string>
-  <string name="save_route_dialog_title">Saglabāt maršrutu GPX trekā</string>
+  <string name="save_route_dialog_title">Saglabāt maršrutu GPX trasē</string>
   <string name="route_successfully_saved_at">Maršruts veiksmīgi saglabāts kā \'%1$s\'.</string>
   <string name="filename_input">Faila nosaukums : </string>
   <string name="file_with_name_already_exist">Fails ar šādu nosaukumu jau eksistē.</string>
@@ -377,7 +377,7 @@
   <string name="send_location">Sūtīt atrašanās vietu</string>
   <string name="context_menu_item_share_location">Koplietot atrašanos</string>
   <string name="add_waypoint_dialog_added">GPX ceļapunkts \'\'{0}\'\' tika veiksmīgi pievienots</string>
-  <string name="add_waypoint_dialog_title">Pievienot ceļapunktu GPX ceļa ierakstam</string>
+  <string name="add_waypoint_dialog_title">Pievienot ceļapunktu GPX trasei</string>
   <string name="context_menu_item_add_waypoint">Pievienot GPX ceļapunktu</string>
   <string name="amenity_type_administrative">Administratīvie</string>
   <string name="amenity_type_barrier">Barjera</string>
@@ -479,9 +479,9 @@
   <string name="map_index">Karte</string>
   <string name="voice">Balss</string>
   <string name="no_vector_map_loaded">Vektoru karte nav ielādēta</string>
-  <string name="map_route_by_gpx">Navigācija ar GPX</string>
-  <string name="gpx_files_not_found">GPX faili nav atrasti /tracks direktorijā</string>
-  <string name="layer_gpx_layer">GPX ceļš…</string>
+  <string name="map_route_by_gpx">Navigācija pēc GPX</string>
+  <string name="gpx_files_not_found">GPX faili nav atrasti /tracks mapē</string>
+  <string name="layer_gpx_layer">GPX trase…</string>
   <string name="error_reading_gpx">Kļūda, nolasot GPX datus</string>
   <string name="vector_data">Bezsaistes vektoru kartes</string>
   <string name="transport_context_menu">Meklēt transportu pieturas vietā</string>
@@ -496,12 +496,12 @@
   <string name="rotate_map_to_bearing">Kartes orientācija</string>
   <string name="show_route">Maršruta detaļas</string>
   <string name="fav_imported_sucessfully">Izlase veiksmīgi importēta</string>
-  <string name="fav_file_to_load_not_found">GPX fails, kas satur izlasi, nav atrasts uz {0}</string>
+  <string name="fav_file_to_load_not_found">GPX izlases fails nav atrasts {0}</string>
   <string name="fav_saved_sucessfully">Izlase veiksmīgi saglabāta uz {0}</string>
   <string name="no_fav_to_save">Nav izlases punktu ko saglabāt</string>
   <string name="import_fav">Importēt</string>
   <string name="export_fav">Eksportēt</string>
-  <string name="error_occurred_loading_gpx">Kļūda, ielādējot GPX</string>
+  <string name="error_occurred_loading_gpx">Kļūda ielādējot GPX</string>
   <string name="send_report">Sūtīt atskaiti</string>
   <string name="none_region_found">Uz SD kartes nav atrastas bezsaistes reģionālās kartes. Lūdzu lejupielādējiet kartes no interneta.</string>
   <string name="poi_namefinder_query_empty">Ievadiet atslēgvārdus POI meklēšanai</string>
@@ -663,7 +663,7 @@
   <string name="loading_data">Ielādē datus…</string>
   <string name="reading_indexes">Nolasa vietējos datus…</string>
   <string name="previous_run_crashed">Pēdējā OsmAnd palaišana beidzās ar avāriju. Žurnāla fails atrodas {0}. Lūdzu nosūtiet ziņojumu par kļūdu un klāt pievienojiet žurnāla failu.</string>
-  <string name="saving_gpx_tracks">Saglabā GPX ceļu uz SD…</string>
+  <string name="saving_gpx_tracks">Saglabā GPX trasi SD kartē…</string>
   <string name="finished_task">Pabeigts</string>
   <string name="reload_indexes_descr">Pārlādē vektora kartes un datus no SD kartes</string>
   <string name="reload_indexes">Pārlādē bezsaistes datus</string>
@@ -681,11 +681,11 @@
   <string name="additional_settings">Papildus uzstādījumi</string>
   <string name="settings">Uzstādījumi</string>
   <string name="save_current_track_descr">Saglabāt pašreizējo ceļu SD kartē</string>
-  <string name="save_current_track">Saglabāt pašreizējo ceļu</string>
+  <string name="save_current_track">Saglabāt patreizējo GPX trasi</string>
   <string name="save_track_interval">Pierakstīšanas intervāls</string>
   <string name="save_track_interval_descr">Izvēlieties ceļa pozicionēšanas intervālu</string>
   <string name="save_track_to_gpx_descrp">Ceļi mapē tiks saglabāti, sagrupējot pa dienām</string>
-  <string name="save_track_to_gpx">Ierakstīt ceļu GPX failā</string>
+  <string name="save_track_to_gpx">Ierakstīt trasi GPX failā</string>
   <string name="update_tile">Atjaunot karti</string>
   <string name="reload_tile">Pārlādēt atēlu</string>
   <string name="mark_point">Mērķis</string>
@@ -1050,7 +1050,7 @@
     <string name="local_osm_changes_delete_all">Dzēst visu</string>
     <string name="animate_routing_route_not_calculated">Vispirms lūdzu aprēķiniet maršrutu</string>
     <string name="animate_routing_route">Aprēķinātā maršruta simulācija </string>
-    <string name="animate_routing_gpx">GPX ieraksta simulācija</string>
+    <string name="animate_routing_gpx">GPX trases simulācija</string>
     <string name="remember_choice">Atcerēties manu izvēli</string>
     <string name="gps_status_eclipsim">GPS statuss</string>
     <string name="default_and">un</string>
@@ -1158,7 +1158,7 @@
     <string name="local_openstreetmap_act_title">OSM modifikācijas</string>
     <string name="default_buttons_other_actions">Citas darbības</string>
     <string name="save_current_track_widget">Saglabāt
-……………… \n GPX maršrutu</string>
+ \n GPX trasi</string>
 	<string name="layer_hillshade">Kalnu reljefa slānis</string>
     <string name="map_widget_gps_info">GPS informācija</string>
     <string name="access_arrival_time">Ierašanās laiks</string>
