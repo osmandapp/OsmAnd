@@ -229,7 +229,7 @@
   <string name="voice_not_use">Non utilisé</string>
   <string name="voice_not_specified">Aucun</string>
   <string name="installing_new_resources">Dépaquetage de nouvelles données…</string>
-  <string name="internet_connection_required_for_online_route">Vous vous apprêtez à utiliser le calcul d\'itinéraire en ligne mais vous n\'avez pas de connexion internet.</string>
+  <string name="internet_connection_required_for_online_route">Vous avez sélectionné un moteur de calcul d\'itinéraire en ligne, mais vous n\'avez pas de connexion internet.</string>
   <string name="tts_language_not_supported_title">Langue non disponible</string>
   <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous allez sur le Market et chercher d\'autres moteurs de synthèse vocale ? Sinon la langue par défaut sera utilisée.</string>
   <string name="tts_missing_language_data_title">Données manquantes</string>
@@ -238,8 +238,8 @@
   <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
   <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
   <string name="switch_to_vector_map_to_see">Vous pouvez basculer sur les cartes vectorielles locales en utilisant le menu (Couches -&gt; Source de la carte… -&gt; Cartes vectorielles OSM) pour voir la carte.</string>
-  <string name="choose_audio_stream">Sélectionner le flux audio</string>
-  <string name="choose_audio_stream_descr">Sélectionner le canal pour le guidage vocal (dépend de la configuration système)</string>
+  <string name="choose_audio_stream">Canal de sortie</string>
+  <string name="choose_audio_stream_descr">Sélectionner le canal à utiliser pour le guidage vocal (dépend de la configuration système)</string>
   <string name="voice_stream_voice_call">Canal d\'appels vocaux</string>
   <string name="voice_stream_notification">Canal de notification</string>
   <string name="voice_stream_music">Canal musique</string>
@@ -287,8 +287,8 @@
   <string name="search_offline_geo_error">Ne peut interpréter le geo intent:\'%s\'</string>
   <string name="search_osm_offline">Recherche d\'adresses dans les cartes hors-ligne</string>
   <string name="system_locale">Système</string>
-  <string name="preferred_locale_descr">Sélectionner la langue d\'affichage</string>
-  <string name="preferred_locale">Langue d\'affichage</string>
+  <string name="preferred_locale_descr">Sélectionner la langue employée à l\'écran</string>
+  <string name="preferred_locale">Langue de l\'interface</string>
   <string name="tip_map_switch">Source de cartes</string>
   
   <string name="tip_app_mode">Mode de fonctionnement</string>
@@ -429,10 +429,10 @@
   <string name="unknown_location">Position inconnue actuellement</string>
   <string name="download_files">Télécharger</string>
   <string name="context_menu_item_search_transport">Chercher transport</string>
-  <string name="transport_searching_transport">Recherche de transport (sans destination) :</string>
-  <string name="transport_searching_route">Recherche de transport ({0} pour destination) :</string>
+  <string name="transport_searching_transport">Lignes à proximité (pas de destination définie) :</string>
+  <string name="transport_searching_route">Lignes à proximité (destination située à {0}) :</string>
   <string name="transport_search_none">aucun</string>
-  <string name="transport_search_again">Rechercher les transports une nouvelle fois</string>
+  <string name="transport_search_again">Réinitialiser la recherche</string>
   <string name="map_index">Carte</string>
   <string name="voice">Voix</string>
   <string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
@@ -498,8 +498,8 @@
   <string name="search_poi_filter">Filtre</string>
   <string name="menu_mute_off">Son activé</string>
   <string name="menu_mute_on">Son désactivé</string>
-  <string name="voice_provider_descr">Choisir la langue pour l\'énonciation de l\'itinéraire</string>
-  <string name="voice_provider">Données vocales</string>
+  <string name="voice_provider_descr">Sélectionner la langue à employer pour le guidage vocal (codes des langues : cf. norme ISO 639-1)</string>
+  <string name="voice_provider">Guidage vocal</string>
   <string name="voice_data_initializing">Initialisation des données vocales…</string>
   <string name="voice_data_not_supported">Les données vocales utilisent une version non supportée</string>
   <string name="voice_data_corrupted">Données vocales corrompues</string>
@@ -538,10 +538,10 @@
   <string name="transport_search_before">Chercher l\'itinéraire précédent</string>
   <string name="transport_finish_search">Terminer la recherche</string>
   <string name="transport_stop_to_go_out">Sélectionnez la destination</string>
-  <string name="transport_to_go_after">reste à parcourir</string>
-  <string name="transport_to_go_before">distance préliminaire</string>
+  <string name="transport_to_go_after">parcourir ensuite</string>
+  <string name="transport_to_go_before">parcourir au préalable</string>
   <string name="transport_stops_to_pass">nombre d\'arrêts :</string>
-  <string name="transport_route_distance">Distance du trajet</string>
+  <string name="transport_route_distance">Distance du trajet :</string>
   <string name="transport">Transport</string>
   <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">Afficher les arrêts de transport en commun sur la carte</string>
@@ -556,8 +556,8 @@
   <string name="context_menu_item_update_map_confirm">Mettre à jour les données locales depuis internet ?</string>
   <string name="search_history_city">Ville :\n{0}</string>
   <string name="search_history_street">Rue:\n{0}\n{1}</string>
-  <string name="search_history_int_streets">Intersections :\n{0} x {1} dans {2}</string>
-  <string name="search_history_building">Édifice :\n{0} {1}\n{2}</string>
+  <string name="search_history_int_streets">Intersection :\n{0} x {1} dans {2}</string>
+  <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
   <string name="favorite">Favori</string>
   <string name="clear_all">Effacer tout</string>
   <string name="history">Historique</string>
@@ -573,8 +573,8 @@
   <string name="max_level_download_tile">Niveau de zoom maximum</string>
   <string name="max_level_download_tile_descr">Choisir un niveau de zoom maximum pour le téléchargement</string>
   <string name="route_general_information">Distance totale = %1$s, temps de déplacement = %2$d h %3$d m.</string>
-  <string name="router_service_descr">Choisir le service de navigation</string>
-  <string name="router_service">Itinéraire</string>
+  <string name="router_service_descr">Sélectionner un service de navigation, hors-ligne ou en ligne</string>
+  <string name="router_service">Moteur d\'itinéraire</string>
   <string name="sd_dir_not_accessible">Répertoire sur la carte SD inaccessible en écriture</string>
   <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
   <string name="download_question_exist">les données pour {0} existent déjà ({1}). Voulez-vous les mettre à jour ({2}) ?</string>
@@ -604,7 +604,7 @@
   <string name="auth_failed">Autorisation refusée</string>
   <string name="failed_op">Échec</string>
   <string name="converting_names">Convertir les noms en anglais…</string>
-  <string name="loading_streets_buildings">Chargement des rues/édifices…</string>
+  <string name="loading_streets_buildings">Chargement des rues/numéros…</string>
   <string name="loading_postcodes">Chargement des codes postaux…</string>
   <string name="loading_streets">Chargement des rues…</string>
   <string name="loading_cities">Chargement des villes…</string>
@@ -656,13 +656,10 @@
   <string name="use_english_names">Utiliser les noms anglais</string>
   <string name="app_settings">Paramètres de l\'application</string>
   <string name="search_address">Chercher adresse</string>
-  <string name="choose_building">Choisir édifice</string>
-  <string name="choose_street">Choisir rue</string>
-  <string name="choose_city">Choisir ville</string>
-  <string name="ChooseCountry">Choisir un pays</string>
-  <string name="position_on_map_descr">Choisir la position des points sur la carte</string>
-  <string name="position_on_map">Position des points</string>
-  
+  <string name="choose_building">Choisir un numéro</string>
+  <string name="choose_street">Choisir une rue</string>
+  <string name="choose_city">Choisir une ville</string>
+  <string name="ChooseCountry">Choisir une région</string>
   <string name="show_view_angle">Afficher l\'angle de vue</string>
   <string name="map_view_3d_descr">Activer vue 3D de la carte</string>
   <string name="map_view_3d">Vue 3D</string>
@@ -685,12 +682,12 @@
   <string name="search_button">Rechercher</string>
   <string name="search_activity">Rechercher</string>
   <string name="searchpoi_activity">Choisir PI</string>
-  <string name="search_POI_level_btn">Trouver plus</string>
+  <string name="search_POI_level_btn">Étendre la recherche</string>
   <string name="incremental_search_city">Recherche progressive de ville</string>
   <string name="incremental_search_street">Recherche progressive des rues</string>
-  <string name="incremental_search_building">Recherche progressive des édifices</string>
+  <string name="incremental_search_building">Recherche progressive des numéros de bâtiment</string>
   <string name="choose_available_region">Choisir une région dans la liste</string>
-  <string name="choose_intersected_street">Choisir la rue transversale</string>
+  <string name="choose_intersected_street">Choisir une intersection</string>
   <string name="Closest_Amenities">Équipements à proximité</string>
   <string name="app_mode_default">Carte</string>
   <string name="app_mode_car">Voiture</string>
@@ -707,9 +704,9 @@
   <string name="search_address_region">Région</string>
   <string name="search_address_city">Ville</string>
   <string name="search_address_street">Rue</string>
-  <string name="search_address_building">Édifice</string>
-  <string name="search_address_building_option">Édifice</string>
-  <string name="search_address_street_option">Rue transversale</string>
+  <string name="search_address_building">Numéro</string>
+  <string name="search_address_building_option">Numéro de bâtiment</string>
+  <string name="search_address_street_option">Intersection avec une rue transversale</string>
   <string name="search_tabs_location">Emplacement</string>
   <string name="context_menu_item_add_favorite">Ajouter aux favoris</string>
   <string name="context_menu_item_update_map">Mettre à jour la carte</string>
@@ -887,8 +884,8 @@
   <string name="poi_search_desc">Recherche de points d\'intérêt (PI)</string>
   <string name="address_search_desc">Recherche par adresse</string>
   <string name="navpoint_search_desc">Coordonnées</string>
-  <string name="transport_search_desc">Recherche dans les transports</string>
-  <string name="favourites_search_desc">Recherche dans les favoris</string>
+  <string name="transport_search_desc">Recherche de transports en commun</string>
+  <string name="favourites_search_desc">Recherche parmi les favoris</string>
   <string name="history_search_desc">Historique des recherches</string>
   <string name="route_roundabout">Rond-point : prendre la %1$d sortie et continuez pendant</string>
   <string name="route_kl">Serrez à gauche et continuez pendant</string>
@@ -1092,7 +1089,7 @@
     <string name="download_regular_maps">Cartes standards</string>
     <string name="download_roads_only_maps">Cartes uniquement routières</string>
     <string name="incomplete_locale">incomplet</string>
-	<string name="no_buildings_found">Aucun bâtiment trouvé.</string>
+	<string name="no_buildings_found">Aucun numéro de bâtiment trouvé</string>
     <string name="search_villages_and_postcodes">Rechercher les villages et les codes postaux</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="route_descr_current_location">la position actuelle</string>
@@ -1449,8 +1446,8 @@
     <string name="complex_route_calculation_failed">Échec du calcul rapide de route (%s), essai avec la méthode lente..</string>
     <string name="disable_complex_routing_descr">Désactiver le routage en 2 phases pour la navigation en voiture</string>
     <string name="disable_complex_routing">Désactiver le routage complexe</string>
-    <string name="guidance_preferences_descr">Préférences de navigation</string>
-    <string name="routing_preferences_descr">Préférences de navigation</string>
+    <string name="guidance_preferences_descr">Itinéraire</string>
+    <string name="routing_preferences_descr">Navigation</string>
     <string name="android_19_location_disabled">Depuis Android KitKat (4.4), vous ne pouvez plus télécharger et mettre à jour la carte dans l\'ancien emplacement de sauvegarde. Voulez-vous changer pour en autoriser un nouveau et y copier l\'ensemble des fichiers ?
         \n Note : Les anciens fichiers ne seront pas touchés
         \n Note : Il ne sera pas possible de partager des fichiers entre OsmAnd et OsmAnd+. </string>
@@ -1546,4 +1543,10 @@
 <string name="lang_uk">Ukrainien</string>
 <string name="lang_vi">Vietnamien</string>
 <string name="lang_cy">Gallois</string>
+	<string name="always_center_position_on_map">Toujours centrer la carte sur la position</string>
+	<string name="voice_pref_title">Voix</string>
+	<string name="misc_pref_title">Divers</string>
+	<string name="localization_pref_title">Localisation</string>
+	<string name="interrupt_music_descr">Interrompre la musique lors des annonces</string>
+	<string name="interrupt_music">Interrompre la musique</string>
     </resources>
