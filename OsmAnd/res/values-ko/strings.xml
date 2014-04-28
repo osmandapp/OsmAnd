@@ -1881,4 +1881,43 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	\n\t* 빠른 검색 주소 임력
 	\n\t* 라우팅 및 렌더링의 버그 수정
     </string>
-    </resources>
+    <string name="always_center_position_on_map">센터에 항상 위치 표시</string>
+    <string name="voice_pref_title">음성</string>
+    <string name="misc_pref_title">잡동사니</string>
+    <string name="localization_pref_title">현지화</string>
+    <string name="osmand_srtm_long_description_1000_chars">이 플러그인은 OsmAnd 의 오프라인 지도에 표시할 수 있는 등고선을 제공합니다. (북쪽으로 70도 남쪽으로 70도 사이 ) 글로벌 데이터는 SRTM (셔틀 레이더 지형 미션 ) 과 ASTER (고급화 된 Spaceborne 열 방출 및 반사 복사계 테라 온보드영상 기기) NASA 의 주력 위성에 의한 측정을 기반으로 합니다.  지구 관측 시스템의 애스터 는 NASA 사이의 협력 노력 , 일본의 경제 산업성(METI ), 일본 우주 시스템 (J- spacesystems )의 장관.</string>
+    <string name="tip_altitude_offset_t">대부분의 GPS 장치는 로컬로 사용되는 시스템에 대한 변환이 위치에 의존하는 보정을 필요로 하는 타원체 기반 WGS84 참조 시스템에서 고도 측정을 보고합니다.
+		이 지역 시스템에 nA의 더 나은 근사치의EGM96 (지오이드) 기준 입니다.
+		[설정]를 통해 (WW15MGH.DAC ) ' 세계 Altitide 보정 당신이 파일 \ 를 다운로드 한 후EGM96 시스템 의 고도 'N \ nOsmAnd 는 위치 \ 를 표시합니다 \ ' → \' 데이터 관리 \.  
+(원래 는 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC 에 있습니다. )
+	</string>
+    <string name="interrupt_music_descr">음성안내를 할 때 음악을 중지</string>
+	<string name="interrupt_music">음악 중지</string>
+	<string name="tip_recent_changes_0_8_0_t">0.8.0 의 변경 사항 :
+ \ n 개의 \ T -* 플러그인 기능 *
+ \ n \ t - 대부분의 기능은 기능 에 의해 분류 되고, 설정 / 플러그인 비활성화 / 활성화 할 수 있습니다.
+ 당신은 설정을 추적 , ( 온라인 또는 캐시 ) 타일 지도 소스를 활성화 , 그리고 다른 많은 신규 및 기존의 기능을 할 수 있습니다.
+ \ n \ t -* 새 오프라인 지도 데이터 지원 *
+ \ n \ t - 지도 렌더링 이 빠르고 ( 해안선과 침수 지역 문제 는 주로 고정 ) 더 정확한 됩니다.
+ \ n \ t - 당신은 완전히 새로운 오프라인 데이터를 다운로드 할 필요가 ( 이전 데이터 가 더 이상 지원되지 않습니다 )
+ \ n \ t -* 오프라인 라우팅 *
+ \ n \ t - 오프라인 라우팅은 더 강력한 됩니다
+ \ n 개의 \ 티셔츠 * 사용성 및 UI 경험 *
+ \ n \ t - 많은 분야에서 개선		
+	</string>
+	<string name="tip_day_night_mode_t_v2">지도의 모양은 오프라인 벡터 맵에서 주간(밝게 )과 야간(어둡게) 사이에서 변경 될 수 있습니다.  야간의 색상은 안전하고 야간 운전에 더 편안합니다.
+		'메뉴'→'화면구성'→'주간/야간 지도' 의 주간/야간 전환을 설정할 수 있습니다.
+		선택 사항은 다음과 같습니다 :
+			'일출/일몰' 자동 모드 (태양의 위치에 따라 제어)
+			'주간' 항상 주간 모드를 사용
+			'야간' 항상 야간 모드를 사용
+			'광 센서' : 지도 모양이 장치의 광센서에 의해 제어된다 (광센서가 장착된 경우에만)
+	</string>	
+	<string name="tip_map_switch_t_v2">표시된 지도소스와 지도레이어는 [메뉴]-&gt;[지도 레이어]에서 변경할 수 있다.
+		[지도 소스] 아래에 미리 로드된 오프라인 벡터 지도를 사용하여 선택할 수 있다.
+		OsmAnd 는 또한 사용자 지도를 지원한다.
+	</string>
+	<string name="tip_app_mode_t_v2">OsmAnd 는  다른 사용 사례에 대해 서로 다른 (사용자 정의) 애플리케이션 프로파일을 지원합니다.
+		 \n\n당신은 지도 화면 (아이콘 자동차, 자전거 또는 보행자 )의 왼쪽 하단 모서리에 있는 프로필 버튼을 통해 프로필을 변경하거나 루트('전송 모드')을 만들 때 할 수 있습니다.
+	</string>
+	</resources>
