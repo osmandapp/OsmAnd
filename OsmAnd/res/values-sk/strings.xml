@@ -1706,4 +1706,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="index_name_canada">Severná amerika - Kanada</string>
     <string name="interrupt_music">Prerušiť hudbu</string>
 	<string name="interrupt_music_descr">Prerušiť hudbu keď prichádza oznam</string>
-	</resources>
+	<string name="always_center_position_on_map">Zobraziť pozíciu vždy v strede</string>
+    <string name="voice_pref_title">Hlas</string>
+    <string name="misc_pref_title">Rôzne</string>
+    <string name="localization_pref_title">Lokalizácia</string>
+    </resources>
