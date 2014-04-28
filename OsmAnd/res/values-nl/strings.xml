@@ -1718,4 +1718,6 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="voice_pref_title">Stem</string>
     <string name="misc_pref_title">Diversen</string>
     <string name="localization_pref_title">Regiogebonden</string>
-    </resources>
+    <string name="interrupt_music_descr">Muziek onderbreken bij aankondigingen</string>
+	<string name="interrupt_music">Muziek onderbreken</string>
+	</resources>
