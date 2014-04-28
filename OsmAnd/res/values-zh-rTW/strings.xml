@@ -1725,4 +1725,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="lang_zh">正體中文</string>
     <string name="lang_pt_br">葡萄牙語(巴西)</string>
     <string name="index_name_canada">北美洲 - 加拿大</string>
-    </resources>
+    <string name="always_center_position_on_map">位置顯示始終處於中心</string>
+    <string name="voice_pref_title">聲音</string>
+    <string name="localization_pref_title">定位</string>
+    <string name="interrupt_music_descr">當制作告示時中斷音樂</string>
+	<string name="interrupt_music">中斷音樂</string>
+	</resources>
