@@ -1636,4 +1636,10 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="lang_zh">Chino</string>
     <string name="lang_pt_br">Portugués (Brasil)</string>
     <string name="index_name_canada">Norte América - Canadá</string>
-    </resources>
+    <string name="always_center_position_on_map">Mostrar siempre posición en el centro</string>
+    <string name="voice_pref_title">Voz</string>
+    <string name="misc_pref_title">Diversos</string>
+    <string name="localization_pref_title">Localización</string>
+    <string name="interrupt_music_descr">Interrumpir música al indicar</string>
+	<string name="interrupt_music">Interrumpir música</string>
+	</resources>
