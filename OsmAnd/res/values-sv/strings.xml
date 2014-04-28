@@ -1443,4 +1443,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="index_item_world_basemap">Översiktskarta (världen)</string>
     <string name="index_item_world_ski">Skidkarta (världen)</string>
     <string name="lang_hr">Kroatiska</string>
+    <string name="always_center_position_on_map">Visa alltid positionen i mitten</string>
+    <string name="voice_pref_title">Röst</string>
+    <string name="misc_pref_title">Diverse</string>
+    <string name="localization_pref_title">Översättning</string>
     </resources>
