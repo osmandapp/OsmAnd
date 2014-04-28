@@ -1760,7 +1760,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="index_item_world_seamarks">Sømærker (på verdensplan)</string>
 	<string name="index_item_world_bitcoin_payments">Bitcoinbetalinger (på verdensplan)</string>
 	<string name="index_item_world_altitude_correction">Højdekorrektion (på verdensplan)</string>
-	<string name="always_center_position_on_map">Vis altid placering centeret</string>
+	<string name="always_center_position_on_map">Vis altid position centeret</string>
     <string name="voice_pref_title">Stemme</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Lokalisering</string>
