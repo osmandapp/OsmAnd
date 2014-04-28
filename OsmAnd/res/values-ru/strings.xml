@@ -1538,4 +1538,10 @@
     <string name="index_item_world_seamarks">Мировые навигационные знаки</string>
 	<string name="index_item_world_altitude_correction">Мировая коррекция высоты</string>
 	<string name="index_name_canada">Северная Америка - Канада</string>
-    </resources>
+    <string name="always_center_position_on_map">Отображать положение всегда в центре</string>
+    <string name="voice_pref_title">Голос</string>
+    <string name="misc_pref_title">Разное</string>
+    <string name="localization_pref_title">Локализация</string>
+    <string name="interrupt_music_descr">Прерывание музыки во время объявления</string>
+	<string name="interrupt_music">Прерывание музыки</string>
+	</resources>
