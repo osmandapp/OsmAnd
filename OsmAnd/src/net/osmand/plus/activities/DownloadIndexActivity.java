@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleAlertBuilder;
@@ -31,7 +30,6 @@ import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -41,7 +39,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -506,16 +503,14 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 	
 	
-	public static Map<String, String> listWithAlternatives(final Context ctx, File file, final String ext, 
+	public static Map<String, String> listWithAlternatives(final java.text.DateFormat dateFormat, File file, final String ext, 
 			final Map<String, String> files) {
 		if (file.isDirectory()) {
-			final java.text.DateFormat format = DateFormat.getDateFormat(ctx);
-			format.setTimeZone(TimeZone.getTimeZone("GMT+01:00"));
 			file.list(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String filename) {
 					if (filename.endsWith(ext)) {
-						String date = format.format(new File(dir, filename).lastModified());
+						String date = dateFormat.format(new File(dir, filename).lastModified());
 						files.put(filename, date);
 						return true;
 					} else {

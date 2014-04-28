@@ -43,7 +43,6 @@ import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Build;
 import android.os.StatFs;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Toast;
 
@@ -66,7 +65,7 @@ public class DownloadIndexesThread {
 		this.ctx = ctx;
 		app = (OsmandApplication) ctx.getApplicationContext();
 		downloadFileHelper = new DownloadFileHelper(app);
-		dateFormat = DateFormat.getDateFormat(app);
+		dateFormat = app.getResourceManager().getDateFormat();
 	}
 	
 	public void setUiActivity(DownloadIndexActivity uiActivity) {
@@ -89,12 +88,12 @@ public class DownloadIndexesThread {
 	
 	public void updateLoadedFiles() {
 		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
-		DownloadIndexActivity.listWithAlternatives(app, app.getAppPath(""),
-				IndexConstants.EXTRA_EXT, indexActivatedFileNames);
+		DownloadIndexActivity.listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT,
+				indexActivatedFileNames);
 		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
-		DownloadIndexActivity.listWithAlternatives(app, app.getAppPath(""),
-				IndexConstants.EXTRA_EXT, indexFileNames);
-		DownloadIndexActivity.listWithAlternatives(app,app.getAppPath(IndexConstants.TILES_INDEX_DIR),
+		DownloadIndexActivity.listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT,
+				indexFileNames);
+		DownloadIndexActivity.listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.TILES_INDEX_DIR),
 				IndexConstants.SQLITE_EXT, indexFileNames);
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
@@ -535,11 +534,11 @@ public class DownloadIndexesThread {
 	}
 
 	
-	public boolean isDownloadRunning(){
-		for(int i =0; i<currentRunningTask.size(); i++) {
+	public boolean isDownloadRunning() {
+		for (int i = 0; i < currentRunningTask.size(); i++) {
 			if (currentRunningTask.get(i) instanceof DownloadIndexesAsyncTask) {
 				return true;
-				
+
 			}
 		}
 		return false;

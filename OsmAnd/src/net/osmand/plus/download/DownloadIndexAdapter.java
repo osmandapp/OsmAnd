@@ -47,7 +47,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 			list.clear();
 			list.addAll(cats);
 		}
-		format = DateFormat.getDateFormat(downloadActivity);
+		format = downloadActivity.getMyApplication().getResourceManager().getDateFormat();
 		okColor = downloadActivity.getResources().getColor(R.color.color_ok);
 		TypedArray ta = downloadActivity.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 		defaultColor = ta.getColor(0, downloadActivity.getResources().getColor(R.color.color_unknown));
