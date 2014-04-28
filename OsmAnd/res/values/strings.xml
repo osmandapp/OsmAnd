@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+   	<string name="always_center_position_on_map">Display position always in center</string>
     <string name="voice_pref_title">Voice</string>
     <string name="misc_pref_title">Miscallenious</string>
     <string name="localization_pref_title">Localization</string>
@@ -721,8 +722,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_renderer">Map style</string>
 	<string name="live_monitoring_mode_off">Start\n online tracking</string>
 	<string name="live_monitoring_mode_on">Stop\n online tracking</string>
-	<string name="position_on_map_descr">Choose location of position marker on the map</string>
-	<string name="position_on_map">Position marker</string>
 	<string name="layer_map_appearance">Configure screen</string>
 	<string name="show_lanes">Show lanes</string>
 	<string name="avoid_unpaved">Avoid unpaved roads</string>

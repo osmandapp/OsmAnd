@@ -866,12 +866,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final int CENTER_CONSTANT = 0;
 	public static final int BOTTOM_CONSTANT = 1;
-	public final CommonPreference<Integer> POSITION_ON_MAP = new IntPreference("position_on_map", CENTER_CONSTANT).makeProfile();
-	{
-		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.CAR, BOTTOM_CONSTANT);
-		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, BOTTOM_CONSTANT);
-		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, CENTER_CONSTANT);
-	}
+	public final CommonPreference<Boolean> CENTER_POSITION_ON_MAP = new BooleanPreference("center_position_on_map", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Integer> MAX_LEVEL_TO_DOWNLOAD_TILE = new IntPreference("max_level_download_tile", 18).makeProfile().cache();

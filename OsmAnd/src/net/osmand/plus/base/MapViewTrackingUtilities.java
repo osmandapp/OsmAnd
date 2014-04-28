@@ -138,8 +138,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS || routePlanningMode) {
 				mapView.setRotate(0);
 			}
-			mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING && !routePlanningMode ? OsmandSettings.BOTTOM_CONSTANT
-					: OsmandSettings.CENTER_CONSTANT);
+			mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING
+					&& !routePlanningMode
+					&& !settings.CENTER_POSITION_ON_MAP.get() ? 
+					OsmandSettings.BOTTOM_CONSTANT : OsmandSettings.CENTER_CONSTANT);
 		}
 		registerUnregisterSensor(app.getLocationProvider().getLastKnownLocation());
 	}

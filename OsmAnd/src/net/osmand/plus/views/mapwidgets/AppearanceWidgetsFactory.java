@@ -72,34 +72,18 @@ public class AppearanceWidgetsFactory {
                     mapInfoLayer.recreateControls();
                 }
             });
-
-			if (POSITION_ON_THE_MAP) {
-				final OsmandSettings.OsmandPreference<Integer> posPref = view.getSettings().POSITION_ON_MAP;
-				final MapWidgetRegistry.MapWidgetRegInfo posMap = mapInfoControls.registerAppearanceWidget(
-						R.drawable.widget_position_marker, R.string.position_on_map, "position_on_map", posPref);
-				posMap.setStateChangeListener(new Runnable() {
-					@Override
-					public void run() {
-						String[] entries = new String[] { map.getString(R.string.position_on_map_center),
-								map.getString(R.string.position_on_map_bottom) };
-						final Integer[] vals = new Integer[] { OsmandSettings.CENTER_CONSTANT,
-								OsmandSettings.BOTTOM_CONSTANT };
-						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
-						int i = Arrays.binarySearch(vals, posPref.get());
-						b.setSingleChoiceItems(entries, i, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								posPref.set(vals[which]);
-								map.updateApplicationModeSettings();
-								view.refreshMap(true);
-								dialog.dismiss();
-							}
-						});
-						b.show();
-					}
-				});
-			}
-
+            final MapWidgetRegistry.MapWidgetRegInfo centerPosition = mapInfoControls.registerAppearanceWidget(R.drawable.widget_position_marker,
+            		R.string.always_center_position_on_map,
+                    "centerPosition", view.getSettings().CENTER_POSITION_ON_MAP);
+            centerPosition.setStateChangeListener(new Runnable() {
+                @Override
+                public void run() {
+                    view.getSettings().CENTER_POSITION_ON_MAP.set(!view.getSettings().CENTER_POSITION_ON_MAP.get());
+                    map.updateApplicationModeSettings();
+					view.refreshMap(true);
+                    mapInfoLayer.recreateControls();
+                }
+            });
         }
 
         final MapWidgetRegistry.MapWidgetRegInfo vectorRenderer = mapInfoControls.registerAppearanceWidget(R.drawable.widget_rendering_style, map.getString(R.string.map_widget_renderer),
