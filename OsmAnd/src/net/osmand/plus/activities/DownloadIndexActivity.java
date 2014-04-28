@@ -67,6 +67,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private static final int FILTER_EXISTING_REGIONS = 3;
 	
     public static final String FILTER_KEY = "filter";
+    public static final String FILTER_CAT = "filter_cat";
 	
 	private static DownloadIndexesThread downloadListIndexThread;
 	private DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
@@ -76,10 +77,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
     private TextWatcher textWatcher ;
 	private EditText filterText;
 	private OsmandSettings settings;
-	private ArrayAdapter<String> spinnerAdapter;
-
-	
-
 
 	private View progressView;
 	private ProgressBar indeterminateProgressBar;
@@ -151,10 +148,15 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		if (intent != null && intent.getExtras() != null) {
 			final String filter = intent.getExtras().getString(FILTER_KEY);
 			if (filter != null) {
-				if(filter.equals(getString(R.string.voice))) {
-					changeType(DownloadActivityType.VOICE_FILE);
-				} else {
-					filterText.setText(filter);
+				filterText.setText(filter);
+			}
+			final String filterCat = intent.getExtras().getString(FILTER_CAT);
+			if (filterCat != null) {
+				DownloadActivityType type = DownloadActivityType.getIndexType(filterCat.toLowerCase());
+				if (type != null) {
+					this.type = type;
+					downloadTypes.remove(type);
+					downloadTypes.add(0, type);
 				}
 			}
 		}
@@ -179,7 +181,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			showDialogOfFreeDownloadsIfNeeded();
 		}
 		
-		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.sherlock_spinner_item, 
+		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.sherlock_spinner_item, 
 				toString(downloadTypes)	
 				);
 		spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
@@ -409,17 +411,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		}
 	}
 
-	public void selectDownloadType() {
-		Builder bld = new AlertDialog.Builder(this);
-		final List<DownloadActivityType> items = getDownloadTypes();
-		bld.setItems(toString(items).toArray(new String[items.size()]), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				changeType(items.get(which));
-			}
-		});
-		bld.show();
-	}
 
 	private List<String> toString(List<DownloadActivityType> t) {
 		ArrayList<String> items = new ArrayList<String>();

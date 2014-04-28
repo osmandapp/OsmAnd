@@ -3,6 +3,7 @@ package net.osmand.plus;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -1682,6 +1683,23 @@ public class OsmandSettings {
 			return true;
 		}
 		return false;
+	}
+	
+	public static String getVoiceName(Context ctx, String basename) {
+		try {
+			String nm = basename.replace('-', '_').replace(' ', '_');
+			if (nm.endsWith("_tts") || nm.endsWith("-tts")) {
+				nm = nm.substring(0, nm.length() - 4);
+			}
+			Field f = R.string.class.getField("lang_"+nm);
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return ctx.getString(in);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return basename;
 	}
 	
 	public enum DayNightMode {

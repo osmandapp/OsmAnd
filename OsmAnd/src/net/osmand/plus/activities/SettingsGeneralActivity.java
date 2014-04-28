@@ -21,6 +21,7 @@ import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
@@ -303,7 +304,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			if (MORE_VALUE.equals(newValue)) {
 				// listPref.set(oldValue); // revert the change..
 				final Intent intent = new Intent(this, DownloadIndexActivity.class);
-				intent.putExtra(DownloadIndexActivity.FILTER_KEY, getString(R.string.voice));
+				intent.putExtra(DownloadIndexActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
 				startActivity(intent);
 			} else {
 				super.onPreferenceChange(preference, newValue);
@@ -561,7 +562,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k++] = getString(R.string.voice_not_use);
 		for (String s : voiceFiles) {
-			entries[k] = s;
+			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) +" ":"") + 
+					OsmandSettings.getVoiceName(this, s);
 			entrieValues[k] = s;
 			k++;
 		}

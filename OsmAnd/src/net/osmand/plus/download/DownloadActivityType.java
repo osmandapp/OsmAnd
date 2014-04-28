@@ -15,6 +15,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.util.Algorithms;
@@ -41,6 +42,11 @@ public class DownloadActivityType {
 		for(String st : tags) {
 			byTag.put(st, this);
 		}
+	}
+	
+	
+	public String getTag() {
+		return tags[0];
 	}
 
 	public static boolean isCountedInDownloads(DownloadActivityType tp) {
@@ -182,30 +188,16 @@ public class DownloadActivityType {
 		return "";
 	}
 	
-	private String getVoiceName(Context ctx, String basename) {
-		try {
-			String nm = basename.replace('-', '_').replace(' ', '_');
-			if (nm.endsWith("_tts")) {
-				nm = nm.substring(0, nm.length() - 4);
-			}
-			Field f = R.string.class.getField("lang_"+nm);
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
-				return ctx.getString(in);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-		return basename;
-	}
-	
 	public String getVisibleName(IndexItem indexItem, Context ctx, OsmandRegions osmandRegions) {
 		String fileName = indexItem.fileName;
+		
 		if (this == VOICE_FILE) {
 			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
-				return ctx.getString(R.string.voice) + "\n" + getVoiceName(ctx, getBasename(indexItem));
+				return ctx.getString(R.string.voice) + "\n" + 
+						OsmandSettings.getVoiceName(ctx, getBasename(indexItem));
 			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
-				return ctx.getString(R.string.ttsvoice) + "\n" + getVoiceName(ctx, getBasename(indexItem));
+				return ctx.getString(R.string.ttsvoice) + "\n" + 
+						OsmandSettings.getVoiceName(ctx, getBasename(indexItem));
 			}
 			return getBasename(indexItem);
 		}
