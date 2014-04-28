@@ -1754,16 +1754,16 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="lang_pt_br">Portugisisk (Brasilien)</string>
     <string name="index_name_canada">Nordamerika - Canada</string>
     <string name="lang_hr">Kroatisk</string>
-    <string name="index_item_world_basemap">Verden oversigtskort</string>
-    <string name="index_item_world_ski">Verden skikort</string>
+    <string name="index_item_world_basemap">Oversigtskort (på verdensplan)</string>
+    <string name="index_item_world_ski">Skikort (på verdensplan)</string>
     <string name="index_item_nation_addresses">Adresser på landsplan</string>
-	<string name="index_item_world_seamarks">Verden sømærker</string>
-	<string name="index_item_world_bitcoin_payments">Verden Bitcoin betalinger</string>
-	<string name="index_item_world_altitude_correction">Verden højdekorrektion</string>
-	<string name="always_center_position_on_map">Vis altid position i centrum</string>
+	<string name="index_item_world_seamarks">Sømærker (på verdensplan)</string>
+	<string name="index_item_world_bitcoin_payments">Bitcoinbetalinger (på verdensplan)</string>
+	<string name="index_item_world_altitude_correction">Højdekorrektion (på verdensplan)</string>
+	<string name="always_center_position_on_map">Vis altid placering centeret</string>
     <string name="voice_pref_title">Stemme</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Lokalisering</string>
-    <string name="interrupt_music_descr">Afbryd musik, når annonceringen</string>
+    <string name="interrupt_music_descr">Afbryd musik ved navigationsinstruktioner</string>
 	<string name="interrupt_music">Afbryd musik</string>
 	</resources>
