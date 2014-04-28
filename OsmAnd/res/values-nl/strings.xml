@@ -1714,4 +1714,8 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	<string name="lang_cy">Welsh</string>
 	<string name="index_name_canada">Noord Amerika - Canada</string>
     <string name="index_name_italy">Europa - Italië</string>
+    <string name="always_center_position_on_map">Positie altijd midden op kaart</string>
+    <string name="voice_pref_title">Stem</string>
+    <string name="misc_pref_title">Diversen</string>
+    <string name="localization_pref_title">Regiogebonden</string>
     </resources>
