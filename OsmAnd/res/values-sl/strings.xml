@@ -1173,13 +1173,13 @@ Pomembnejše lastnosti:
     <string name="recording_context_menu_play">Predvajaj</string>
     <string name="recording_description">Snemanje %1$s %2$s na %3$s</string>
     <string name="recording_default_name">snemanje</string>
-    <string name="av_control_stop">ustavi</string>
+    <string name="av_control_stop">Ustavi</string>
     <string name="map_widget_av_notes">Zvočni zapisi</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd vtičnik za izohipse brez povezave</string>
     
     
     <string name="map_widget_distancemeasurement">Merjenje razdalj</string>
-    <string name="monitoring_control_stop">ustavi</string>
+    <string name="monitoring_control_stop">Ustavi</string>
     <string name="map_widget_audionotes">Zvočni zapisi</string>
     <string name="audionotes_plugin_description">Shrani zvočne zapise med potovanjem</string>
     <string name="audionotes_plugin_name">Vtičnik za zvočne zapise</string>
@@ -1203,7 +1203,7 @@ Pomembnejše lastnosti:
     <string name="recording_context_menu_delete">Zbriši posnetek</string>
     <string name="recording_is_recorded">Zvok/video se snema. Za ustavitev pritisnite gumb ustavi na pripomočku.</string>
     <string name="layer_recordings">Plast posnetkov</string>
-    <string name="av_control_start">snemaj</string>
+    <string name="av_control_start">Posnetek</string>
     
     
     <string name="av_def_action_video">Snemanje videa</string>
@@ -1235,7 +1235,7 @@ Pomembnejše lastnosti:
     <string name="precise_routing_mode_descr">Omogočite za izračun natančnih poti brez spodrsljajev. Še vedno počasno in zelo omejeno glede na razdaljo.</string>
     <string name="precise_routing_mode">Natančno usmerjanje (alfa)</string>
     <string name="local_indexes_cat_av">Podatki zvoka/videa</string>
-    <string name="dist_control_start">Začni</string>
+    <string name="dist_control_start">Izmeri</string>
     <string name="support_new_features_descr">Darujte, tako boste pripomogli k razvoju novih funkcionalnosti</string>
 	<string name="tip_recent_changes_1_1_2_t">Spremembe v 1.1.2:
 	\n\t* Audio/Video vtičnik za izboljšavo (fotografije z informacijami EXIF)
@@ -1590,7 +1590,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="amenity_type_seamark">Pomorski znak</string>
     <string name="app_modes_choose_descr">Izberite uporabne profile, ki so vidni v aplikaciji</string>
     <string name="app_modes_choose">Profili aplikacije</string>
-	<string name="osmodroid_seek">Poiskati predmet</string>
+	<string name="osmodroid_seek">Poišči predmet</string>
     <string name="guidance_preferences_descr">Nastavitve navigacije</string>
     <string name="disable_complex_routing_descr">Onemogoči 2-fazno usmerjanje za avtomobilsko navigacijo</string>
     <string name="routing_preferences_descr">Nastavitve usmerjanja</string>
@@ -1662,4 +1662,21 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="index_item_world_basemap">Pregledni zemljevid sveta</string>
     <string name="index_item_world_ski">Svetovna smučišča</string>
     <string name="lang_af">Afrikanščina</string>
-	</resources>
+	<string name="voice_pref_title">Glas</string>
+    <string name="misc_pref_title">Razno</string>
+    <string name="localization_pref_title">Lokalizacija</string>
+    <string name="index_item_world_altitude_correction">Svetovni popravki nadmorske višine</string>
+	<string name="index_item_world_seamarks">Svetovne pomorske oznake</string>
+	<string name="keep_and_add_destination_point">Dodaj kot ciljno točko</string>
+    <string name="select_gpx">Izberite GPX…</string>
+    <string name="route_descr_select_destination">Izberite cilj</string>
+    <string name="route_descr_select_on_map">Izberite na zemljevidu…</string>
+    <string name="route_descr_favorite">Priljubljene…</string>
+    <string name="android_19_location_disabled">Od verzije KitKat naprej prenos posodobitev zemljevidov ni mogoč na prejšnjo mesto hrambe (%s). Ali želite to spremeniti na takšno mesto, kjer bo posodobitev dovoljena in skopirati vse zemljevide tja?
+        \n Opomba : stare datoteke ne bodo spremenjene.
+        \n Opomba : zemljevidov si aplikaciji OsmAnd and OsmAnd+ ne bosta mogli deliti. </string>
+    <string name="application_dir_change_warning2">OsmAnd lahko poskusi premakniti podatke na novo mesto hrambe.  Ali si želite tega?</string>
+    <string name="copying_osmand_one_file_descr">Kopiranje datoteke (%s) na novo mesto hrambe...</string>
+    <string name="copying_osmand_files_descr">Kopiranje datotek OsmAnd na novo mesto hrambe (%s)</string>
+    <string name="copying_osmand_files">Kopiranje datotek programa OsmAnd</string>
+    </resources>
