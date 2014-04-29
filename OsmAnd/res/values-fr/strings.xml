@@ -534,8 +534,8 @@
   <string name="transport_Routes">Lignes</string>
   <string name="transport_Stop">Arrêt</string>
   <string name="transport_stops">arrêts</string>
-  <string name="transport_search_after">Chercher l\'itinéraire suivant</string>
-  <string name="transport_search_before">Chercher l\'itinéraire précédent</string>
+  <string name="transport_search_after">Itinéraire suivant</string>
+  <string name="transport_search_before">Itinéraire précédent</string>
   <string name="transport_finish_search">Terminer la recherche</string>
   <string name="transport_stop_to_go_out">Sélectionnez la destination</string>
   <string name="transport_to_go_after">parcourir ensuite</string>
@@ -552,13 +552,13 @@
   <string name="update_poi_error_loading">Erreur lors du chargement des données du serveur</string>
   <string name="update_poi_no_offline_poi_index">Il n\'y a pas de données hors-ligne pour cette région</string>
   <string name="update_poi_is_not_available_for_zoom">Mise à jour de PI n\'est pas disponible pour un petit niveau de zoom</string>
-  <string name="context_menu_item_update_poi">Points d\'Intérêts</string>
+  <string name="context_menu_item_update_poi">Mettre à jour les points d\'intérêt</string>
   <string name="context_menu_item_update_map_confirm">Mettre à jour les données locales depuis internet ?</string>
   <string name="search_history_city">Ville :\n{0}</string>
-  <string name="search_history_street">Rue:\n{0}\n{1}</string>
+  <string name="search_history_street">Rue :\n{0}\n{1}</string>
   <string name="search_history_int_streets">Intersection :\n{0} x {1} dans {2}</string>
   <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
-  <string name="favorite">Favori</string>
+  <string name="favorite">Favori :</string>
   <string name="clear_all">Effacer tout</string>
   <string name="history">Historique</string>
   <string name="uploading_data">Envoi des données…</string>
@@ -567,7 +567,7 @@
   <string name="searching">Recherche en cours…</string>
   <string name="searching_address">Recherche de l\'adresse…</string>
   <string name="search_osm_nominatim">Recherche de l\'adresse via OSM Nominatim</string>
-  <string name="hint_search_online">Numéro de la maison, rue, ville</string>
+  <string name="hint_search_online">Numéro du bâtiment, rue, ville</string>
   <string name="search_offline_address">Hors-ligne</string>
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Niveau de zoom maximum</string>
@@ -705,8 +705,8 @@
   <string name="search_address_city">Ville</string>
   <string name="search_address_street">Rue</string>
   <string name="search_address_building">Numéro</string>
-  <string name="search_address_building_option">Numéro de bâtiment</string>
-  <string name="search_address_street_option">Intersection avec une rue transversale</string>
+  <string name="search_address_building_option">Numéro</string>
+  <string name="search_address_street_option">Intersection</string>
   <string name="search_tabs_location">Emplacement</string>
   <string name="context_menu_item_add_favorite">Ajouter aux favoris</string>
   <string name="context_menu_item_update_map">Mettre à jour la carte</string>
@@ -1212,7 +1212,7 @@
     <string name="save_current_track_widget">Sauvegarder
 \n la trace GPX actuelle</string>
 	<string name="street_name">Rue</string>
-	<string name="hno">Numéro de maison</string>
+	<string name="hno">Numéro de bâtiment</string>
     <string name="tip_recent_changes_1_3_t">"Changements en 1.5:\n\t* Thème Holo (personnalisation de thème) "
     </string>
     <string name="monitoring_settings">Services de suivi et service d\'arrière-plan</string>
@@ -1446,8 +1446,8 @@
     <string name="complex_route_calculation_failed">Échec du calcul rapide de route (%s), essai avec la méthode lente..</string>
     <string name="disable_complex_routing_descr">Désactiver le routage en 2 phases pour la navigation en voiture</string>
     <string name="disable_complex_routing">Désactiver le routage complexe</string>
-    <string name="guidance_preferences_descr">Itinéraire</string>
-    <string name="routing_preferences_descr">Navigation</string>
+    <string name="guidance_preferences_descr">Navigation</string>
+    <string name="routing_preferences_descr">Itinéraire</string>
     <string name="android_19_location_disabled">Depuis Android KitKat (4.4), vous ne pouvez plus télécharger et mettre à jour la carte dans l\'ancien emplacement de sauvegarde. Voulez-vous changer pour en autoriser un nouveau et y copier l\'ensemble des fichiers ?
         \n Note : Les anciens fichiers ne seront pas touchés
         \n Note : Il ne sera pas possible de partager des fichiers entre OsmAnd et OsmAnd+. </string>
