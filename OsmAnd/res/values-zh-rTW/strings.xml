@@ -1730,4 +1730,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="localization_pref_title">定位</string>
     <string name="interrupt_music_descr">當制作告示時中斷音樂</string>
 	<string name="interrupt_music">中斷音樂</string>
-	</resources>
+	<string name="misc_pref_title">雜項</string>
+    </resources>
