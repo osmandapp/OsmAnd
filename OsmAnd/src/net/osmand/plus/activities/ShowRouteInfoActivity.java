@@ -58,7 +58,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == SAVE) {
-			MapActivityActions.createSaveDirections(ShowRouteInfoActivity.this).show();
+			MapActivityActions.createSaveDirections(ShowRouteInfoActivity.this, helper).show();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
