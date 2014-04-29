@@ -8,7 +8,10 @@ package net.osmand.plus.activities;
 
 import java.util.List;
 
+import android.content.Intent;
 import net.osmand.Location;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -37,6 +40,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 
 
 	private static final int SAVE = 0;
+	private static final int SHARE = 1;
 	private RoutingHelper helper;
 	private TextView header;
 	private DisplayMetrics dm;
@@ -61,6 +65,18 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			MapActivityActions.createSaveDirections(ShowRouteInfoActivity.this).show();
 			return true;
 		}
+        if (item.getItemId() == SHARE) {
+              final GPXFile gpx = getMyApplication().getRoutingHelper().generateGPXFileWithRoute();
+
+              final Intent sendIntent = new Intent();
+              sendIntent.setAction(Intent.ACTION_SEND);
+              sendIntent.putExtra(Intent.EXTRA_TEXT, GPXUtilities.asString(gpx, getMyApplication()));
+              sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
+              sendIntent.setType("application/gpx+xml");
+              startActivity(sendIntent);
+            return true;
+        }
+
 		return super.onOptionsItemSelected(item);
 	}
 	
@@ -98,6 +114,9 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		createMenuItem(menu, SAVE, R.string.save_route_as_gpx, 
 				R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
+				MenuItem.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(menu, SHARE, R.string.share_route_as_gpx,
+				R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
 				MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return super.onCreateOptionsMenu(menu);
 	}
