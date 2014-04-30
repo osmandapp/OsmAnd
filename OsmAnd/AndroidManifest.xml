@@ -127,6 +127,7 @@
         <activity android:name="net.osmand.plus.activities.search.SearchStreetByNameActivity"></activity>
         <activity android:name="net.osmand.plus.activities.search.SearchStreet2ByNameActivity"></activity>
         <activity android:name="net.osmand.plus.activities.search.SearchBuildingByNameActivity"></activity>
+        <activity android:name="net.osmand.plus.sherpafy.TourCommonActivity"></activity>
 		<activity android:name="net.osmand.plus.activities.EditPOIFilterActivity"></activity>
         <activity android:name="net.osmand.plus.activities.search.GeoIntentActivity">
             <intent-filter>

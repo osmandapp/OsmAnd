@@ -568,7 +568,7 @@ public class OsmandSettings {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public CommonPreference<String> registerBooleanPreference(String id, String defValue) {
+	public CommonPreference<String> registerStringPreference(String id, String defValue) {
 		if(registeredPreferences.containsKey(id)) {
 			return (CommonPreference<String>) registeredPreferences.get(id);
 		}

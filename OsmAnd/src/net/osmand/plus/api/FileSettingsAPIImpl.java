@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -103,7 +104,11 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 	public boolean saveFile() {
 		try {
 			Properties ps = new Properties();
-			ps.putAll(map);
+			Iterator<Entry<String, Object>> it = map.entrySet().iterator();
+			while(it.hasNext()) {
+				Entry<String, Object> e = it.next();
+				ps.put(e.getKey(), String.valueOf(e.getValue()));
+			}
 			final FileOutputStream fout = new FileOutputStream(file);
 			ps.store(fout, null);
 			fout.close();

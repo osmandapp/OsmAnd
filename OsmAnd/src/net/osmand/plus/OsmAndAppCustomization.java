@@ -1,10 +1,13 @@
 package net.osmand.plus;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
 import android.view.Window;
+import net.osmand.IProgress;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.LocalIndexesActivity;
@@ -84,6 +87,10 @@ public class OsmAndAppCustomization {
 	}
 
 	public void updatedLoadedFiles(Map<String, String> indexFileNames, Map<String, String> indexActivatedFileNames) {
+	}
+
+	public Collection<? extends String> onIndexingFiles(IProgress progress, Map<String, String> indexFileNames) {
+		return Collections.emptyList();
 	}
 
 }

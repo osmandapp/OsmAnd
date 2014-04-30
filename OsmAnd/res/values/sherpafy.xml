@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="download_more">Download more</string>
+    <string name="no_tour_selected">No tour selected</string>
     <string name="settings_file_create_error">Couldn\'t create settings file in tour folder.</string>
+    <string name="tab_stages">Stages</string>
+    <string name="tab_tours">Tours</string>
+    <string name="tab_current_tour">Current</string>
     <string name="tour">Tour</string>
     <string name="download_tours">Tours</string>
+    <string name="indexing_tour">Indexing selected tour \'%s\'&#8230;</string>
+    <string name="tour_activity_title">Tour</string>
  </resources>
