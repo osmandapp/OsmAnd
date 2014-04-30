@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.download.DownloadActivityType;
@@ -92,5 +94,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	public void getDownloadTypes(List<DownloadActivityType> items) {
 		super.getDownloadTypes(items);
 		items.add(0, TourDownloadType.TOUR);
+	}
+	
+	public void updatedLoadedFiles(java.util.Map<String,String> indexFileNames, java.util.Map<String,String> indexActivatedFileNames) {
+		DownloadIndexActivity.listWithAlternatives(app.getResourceManager().getDateFormat(), 
+				app.getAppPath("tours"), "", indexFileNames);	
 	}
 }

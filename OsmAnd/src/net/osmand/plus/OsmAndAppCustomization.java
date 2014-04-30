@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.view.Window;
@@ -27,6 +28,7 @@ public class OsmAndAppCustomization {
 		return new OsmandSettings(app, api);
 	}
 
+	// Main menu
 	public boolean checkExceptionsOnStart() {
 		return true;
 	}
@@ -43,7 +45,7 @@ public class OsmAndAppCustomization {
 	}
 	
 	
-	
+	// Activities
 	public Class<? extends Activity> getSettingsActivity(){
 		return SettingsActivity.class;
 	}
@@ -76,8 +78,12 @@ public class OsmAndAppCustomization {
 		return LocalIndexesActivity.class;
 	}
 
+	// Download screen
 	public void getDownloadTypes(List<DownloadActivityType> items) {
 		
+	}
+
+	public void updatedLoadedFiles(Map<String, String> indexFileNames, Map<String, String> indexActivatedFileNames) {
 	}
 
 }

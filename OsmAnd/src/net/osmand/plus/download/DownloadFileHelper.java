@@ -281,6 +281,7 @@ public class DownloadFileHelper {
 
 	private void copyFile(DownloadEntry de, IProgress progress, CountingMultiInputStream countIS, int length, InputStream toRead, File targetFile)
 			throws IOException {
+		targetFile.getParentFile().mkdirs();
 		FileOutputStream out = new FileOutputStream(targetFile);
 		int read;
 		byte[] buffer = new byte[BUFFER_SIZE];
