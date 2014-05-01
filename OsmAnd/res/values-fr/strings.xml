@@ -636,8 +636,8 @@
   <string name="data_settings">Données</string>
   <string name="map_preferences_descr">Préciser les paramètres de la carte : rotation, position centrale, orientation de l\'écran</string>
   <string name="osm_settings">Édition OSM</string>
-  <string name="auto_zoom_map_descr">Zoom automatique en fonction de votre vitesse</string>
-  <string name="auto_zoom_map">Zoom auto. sur la carte</string>
+  <string name="auto_zoom_map_descr">Zoom automatique sur la carte en fonction de la vitesse</string>
+  <string name="auto_zoom_map">Zoom automatique sur la carte</string>
   <string name="additional_settings">Paramètres supplémentaires</string>
   <string name="settings">Paramètres</string>
   <string name="save_current_track_descr">Enregistrer la trace actuelle sur la carte SD</string>
@@ -1410,9 +1410,9 @@
 	<string name="route_is_too_long">L\'itinéraire est probablement trop long pour être calculé localement par OsmAnd.
 	Le calcul en local est possible, en moyenne, pour des itinéraires jusqu\'à 200 km. Il est conseillé d\'ajouter des étapes intermédiaires pour un meilleur calcul.</string>
 	<string name="auto_zoom_none">Pas de zoom automatique</string>
-	<string name="auto_zoom_close">Arrêt de l\'auto-zoom</string>
-	<string name="auto_zoom_far">Zoom éloigné</string>
-	<string name="auto_zoom_farthest">Zoom très éloigné</string>
+	<string name="auto_zoom_close">Rapproché</string>
+	<string name="auto_zoom_far">Modéré</string>
+	<string name="auto_zoom_farthest">Éloigné</string>
 	<string name="tip_map_styles_t">\tOsmAnd propose différents styles de rendu pour l\'affichage des cartes vectorielles hors-ligne, en fonction de vos besoins.
 		\n\tDans \'Menu\' → \'Configurer l\'écran\' → \'Styles de rendu\', vous pouvez à la place du style de rendu \'default\' sélectionner par exemple :
 		\n\t* le style \'Touring view\', qui fournit les informations les plus détaillées possibles pour le voyage et le tourisme, avec des optimisations pour les conducteurs professionnels (contraste élevé, distinction claire des différentes routes), des options pour la randonnée alpine (Alpine hiking, classification du Club Alpin Suisse), l\'affichage des symboles de randonnée, des véloroutes 
