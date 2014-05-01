@@ -8,7 +8,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -175,14 +178,47 @@ public class GPXUtilities {
 
 	}
 
-	public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx) {
-		FileOutputStream output = null;
+    public static String asString(GPXFile file, OsmandApplication ctx) {
+           final Writer writer = new StringWriter();
+           GPXUtilities.writeGpx(writer, file, ctx);
+           return writer.toString();
+       }
+
+    public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx)
+    {
+        Writer output = null;
+        try
+        {
+            output = new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"); //$NON-NLS-1$
+            return writeGpx(output, file, ctx);
+        }
+        catch (IOException e)
+        {
+            log.error("Error saving gpx", e); //$NON-NLS-1$
+            return ctx.getString(R.string.error_occurred_saving_gpx);
+        }
+        finally
+        {
+            if (output != null)
+            {
+                try
+                {
+                    output.close();
+                }
+                catch (IOException ignore)
+                {
+                    // ignore
+                }
+            }
+        }
+    }
+
+	public static String writeGpx(Writer output, GPXFile file, OsmandApplication ctx) {
 		try {
 			SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
 			format.setTimeZone(TimeZone.getTimeZone("UTC"));
-			output = new FileOutputStream(fout);
 			XmlSerializer serializer = PlatformUtil.newSerializer();
-			serializer.setOutput(output, "UTF-8"); //$NON-NLS-1$
+			serializer.setOutput(output);
 			serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true); //$NON-NLS-1$
 			serializer.startDocument("UTF-8", true); //$NON-NLS-1$
 			serializer.startTag(null, "gpx"); //$NON-NLS-1$
@@ -243,14 +279,6 @@ public class GPXUtilities {
 		} catch (IOException e) {
 			log.error("Error saving gpx", e); //$NON-NLS-1$
 			return ctx.getString(R.string.error_occurred_saving_gpx);
-		} finally {
-			if (output != null) {
-				try {
-					output.close();
-				} catch (IOException ignore) {
-					// ignore
-				}
-			}
 		}
 		return null;
 	}
