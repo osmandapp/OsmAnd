@@ -202,6 +202,7 @@ public class DownloadFileHelper {
 		try {
 			final List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
 			URL url = new URL(de.urlToDownload); //$NON-NLS-1$
+			log.debug("Url downloading " + de.urlToDownload);
 			downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));
 			de.fileToDownload = de.targetFile;
 			if(!de.unzipFolder) {

@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -56,6 +59,43 @@ public class TourCommonActivity extends SherlockFragmentActivity {
             tabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
         }
     }
+	
+	public void selectTour(TourInformation ti){
+		final SherpafyCustomization c = (SherpafyCustomization) ((OsmandApplication) getApplication()).getAppCustomization();
+		
+		new AsyncTask<TourInformation, Void, Void> (){
+			private ProgressDialogImplementation dlg;
+			
+			protected void onPreExecute() {
+				dlg = ProgressDialogImplementation.createProgressDialog(TourCommonActivity.this, "", getString(R.string.indexing_tour, ""),
+						ProgressDialog.STYLE_SPINNER);
+				
+			};
+			
+			@Override
+			protected Void doInBackground(TourInformation... params) {
+				c.selectTour(params[0], dlg);
+				return null;
+			}
+			
+			protected void onPostExecute(Void result) {
+				dlg.getDialog().dismiss();
+				for(WeakReference<Fragment> ref : fragList) {
+			        Fragment f = ref.get();
+			        if(f instanceof TourFragment) {
+			            if(!f.isDetached()) {
+			            	((TourFragment) f).refreshTour();
+			            }
+			        }
+			    }
+			};
+		}.execute(ti);
+	}
+	
+	public interface TourFragment {
+		
+		public void refreshTour();
+	}
 	
 	@Override
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {

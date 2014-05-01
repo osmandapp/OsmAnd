@@ -50,12 +50,21 @@ public class TourDownloadType extends DownloadActivityType {
 		return "";
 	}
 	
+	@Override
+	public String getBasename(IndexItem indexItem) {
+		String fileName = indexItem.getFileName().replace('_', ' ');
+		if(fileName.indexOf('.') != -1) {
+			return fileName.substring(0, fileName.indexOf('.'));
+		}
+		return fileName;
+	}
+	
 	public String getVisibleName(IndexItem indexItem, Context ctx, OsmandRegions osmandRegions) {
-		return getBasename(indexItem) + "\n" + indexItem.getDescription();
+		return getBasename(indexItem).replace('_', ' ') + "\n" + indexItem.getDescription();
 	}
 	
 	public String getTargetFileName(IndexItem item) {
-		return item.getBasename();
+		return getBasename(item);
 	}
 
 }

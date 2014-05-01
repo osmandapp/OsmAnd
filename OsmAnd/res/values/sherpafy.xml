@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="no_stages_provided">No stages provided</string>
     <string name="download_more">Download more</string>
     <string name="no_tour_selected">No tour selected</string>
     <string name="settings_file_create_error">Couldn\'t create settings file in tour folder.</string>

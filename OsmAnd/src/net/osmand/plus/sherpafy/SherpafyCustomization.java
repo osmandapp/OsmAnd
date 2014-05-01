@@ -3,8 +3,6 @@ package net.osmand.plus.sherpafy;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
@@ -27,10 +26,13 @@ import android.widget.TextView;
 
 public class SherpafyCustomization extends OsmAndAppCustomization {
 	
-	private static final String SELECTED_TOUR = "sherpafy_tour";
+	private static final String SELECTED_TOUR = "selected_tour";
+	private static final String SELECTED_STAGE = "selected_stage";
 	private OsmandSettings originalSettings;
 	private CommonPreference<String> selectedTourPref;
-	private List<TourInformation> tourPresent = new ArrayList<TourInformation>(); 
+	private CommonPreference<String> selectedStagePref;
+	private List<TourInformation> tourPresent = new ArrayList<TourInformation>();
+	private StageInformation selectedStage = null;
 	private TourInformation selectedTour = null;
 	private File toursFolder;
 
@@ -90,8 +92,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 //				toursFolder, "", indexFileNames);	
 	}
 	
-	public Collection<? extends String> onIndexingFiles(IProgress progress, Map<String, String> indexFileNames) {
+	public List<String> onIndexingFiles(IProgress progress, Map<String, String> indexFileNames) {
 		ArrayList<TourInformation> tourPresent = new ArrayList<TourInformation>();
+		List<String> warns = new ArrayList<String>();
+		selectedTour = null;
 		if(toursFolder.exists()) {
 			File[] availableTours = toursFolder.listFiles();
 			if(availableTours != null) {
@@ -105,14 +109,14 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						final TourInformation tourInformation = new TourInformation(tr);
 						tourPresent.add(tourInformation);
 						if (selected) {
-							reloadSelectedTour(progress, tr, tourInformation);
+							reloadSelectedTour(progress, tr, tourInformation, warns);
 						}
 					}
 				}
 			}
 		}
 		this.tourPresent = tourPresent;
-		return Collections.emptyList();
+		return warns;
 	}
 
 	public List<TourInformation> getTourInformations() {
@@ -123,7 +127,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		return selectedTour;
 	}
 
-	private void reloadSelectedTour(IProgress progress, File tr, final TourInformation tourInformation) {
+	private void reloadSelectedTour(IProgress progress, File tr, final TourInformation tourInformation, List<String> warns) {
 		if(progress != null) {
 			progress.startTask(app.getString(R.string.indexing_tour, tr.getName()), -1);
 		}
@@ -136,19 +140,46 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			}
 			app.getSettings().setSettingsAPI(fapi);
 		} catch (IOException e) {
+			warns.add(app.getString(R.string.settings_file_create_error));
 			app.showToastMessage(R.string.settings_file_create_error);
 		}
-		tourInformation.loadFullInformation();
+		selectedStagePref = app.getSettings().registerStringPreference(SELECTED_STAGE, null).makeGlobal();
+		try {
+			tourInformation.loadFullInformation();
+		} catch (Exception e) {
+			warns.add("Selected tour : " + e.getMessage());
+		}
 		selectedTour = tourInformation;
+		if(selectedStagePref.get() != null) {
+			for(StageInformation s : selectedTour.getStageInformation()) {
+				if(s.getName().equals(selectedStagePref.get())) {
+					selectedStage = s;
+					break;
+				}
+			}
+		}
+	}
+	
+	public StageInformation getSelectedStage() {
+		return selectedStage;
 	}
 
+	public void selectStage(StageInformation tour, IProgress progress) {
+		if(tour == null) {
+			selectedStagePref.set(null);
+		} else {
+			selectedStagePref.set(tour.getName());
+		}
+	}
 
-	public void selectTour(TourInformation tour) {
+	public void selectTour(TourInformation tour, IProgress progress) {
 		if(tour == null) {
 			selectedTourPref.set(null);
 		} else {
 			selectedTourPref.set(tour.getName());
 		}
-		app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
+		selectedTour = null;
+		selectedStage = null;
+		app.getResourceManager().reloadIndexes(progress);
 	}
 }

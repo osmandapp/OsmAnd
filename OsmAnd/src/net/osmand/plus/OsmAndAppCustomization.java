@@ -89,7 +89,7 @@ public class OsmAndAppCustomization {
 	public void updatedLoadedFiles(Map<String, String> indexFileNames, Map<String, String> indexActivatedFileNames) {
 	}
 
-	public Collection<? extends String> onIndexingFiles(IProgress progress, Map<String, String> indexFileNames) {
+	public List<String> onIndexingFiles(IProgress progress, Map<String, String> indexFileNames) {
 		return Collections.emptyList();
 	}
 

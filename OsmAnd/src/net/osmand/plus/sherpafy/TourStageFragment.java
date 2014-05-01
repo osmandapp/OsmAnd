@@ -6,8 +6,10 @@ package net.osmand.plus.sherpafy;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.sherpafy.TourCommonActivity.TourFragment;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,7 +23,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockListFragment;
 
 
-public class TourStageFragment extends SherlockListFragment  {
+public class TourStageFragment extends SherlockListFragment implements TourFragment {
 	public static final int REQUEST_POI_EDIT = 55;
 	private SherpafyCustomization appCtx;
 	private boolean lightContent;
@@ -42,11 +44,11 @@ public class TourStageFragment extends SherlockListFragment  {
 //				return false;
 //			}
 //		});
+		setEmptyText(getString(R.string.no_stages_provided));
 		if(appCtx.getSelectedTour() != null) {
 			setListAdapter(new LocalAdapter(appCtx.getSelectedTour().getStageInformation()));
 		} else {
 			setListAdapter(new LocalAdapter(new ArrayList<TourInformation.StageInformation>()));
-			setEmptyText(getString(R.string.no_tour_selected));
 		}
 	}
 	
@@ -57,7 +59,7 @@ public class TourStageFragment extends SherlockListFragment  {
 	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		final StageInformation model = ((LocalAdapter) getListAdapter()).getItem(position);
-		// TODO
+		appCtx.selectStage(model, IProgress.EMPTY_PROGRESS);
 	}
 
 	private class LocalAdapter extends ArrayAdapter<StageInformation> {
@@ -76,8 +78,13 @@ public class TourStageFragment extends SherlockListFragment  {
 			ImageView icon = (ImageView) row.findViewById(R.id.icon);
 			ImageView check = (ImageView) row.findViewById(R.id.check_item);
 			icon.setImageResource(!lightContent ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_fav_light);
-			check.setImageResource(!lightContent ? R.drawable.ic_action_ok_dark : R.drawable.ic_action_ok_light);
 			final StageInformation model = getItem(position);
+			if(appCtx.getSelectedStage() ==  model) {
+				check.setImageResource(!lightContent ? R.drawable.ic_action_ok_dark : R.drawable.ic_action_ok_light);
+				check.setVisibility(View.VISIBLE);
+			} else {
+				check.setVisibility(View.INVISIBLE);
+			}
 			if(model.getDescription().length() > 0) {
 				label.setText(model.getName() +"\n" + model.getDescription());
 			} else {
@@ -86,6 +93,16 @@ public class TourStageFragment extends SherlockListFragment  {
 			return (row);
 		}
 
+	}
+
+	@Override
+	public void refreshTour() {
+		if(appCtx.getSelectedTour() != null) {
+			setListAdapter(new LocalAdapter(appCtx.getSelectedTour().getStageInformation()));
+		} else {
+			setListAdapter(new LocalAdapter(new ArrayList<TourInformation.StageInformation>()));
+		}		
+		
 	}
 
 }

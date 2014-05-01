@@ -7,8 +7,7 @@ import java.util.List;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.sherpafy.TourCommonActivity.TourFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,7 +25,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 
-public class TourSelectionFragment extends SherlockListFragment  {
+public class TourSelectionFragment extends SherlockListFragment implements TourFragment {
 	public static final int REQUEST_POI_EDIT = 55;
 	private static final int DOWNLOAD_MORE = 0;
 	private SherpafyCustomization appCtx;
@@ -59,10 +58,10 @@ public class TourSelectionFragment extends SherlockListFragment  {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		final OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-		boolean light = app.getSettings().isLightActionBar();
 		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, DOWNLOAD_MORE, 0, R.string.download_more).setShowAsActionFlags(
 				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		 menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdown_light : R.drawable.ic_action_gdown_dark);
+//		boolean light = app.getSettings().isLightActionBar();
+    	// menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdown_light : R.drawable.ic_action_gdown_dark);
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
@@ -77,9 +76,9 @@ public class TourSelectionFragment extends SherlockListFragment  {
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		final TourInformation tour = ((LocalAdapter) getListAdapter()).getItem(position);
 		if(appCtx.getSelectedTour() != tour) {
-			appCtx.selectTour(tour);
+			((TourCommonActivity) getActivity()).selectTour(tour);
 		} else {
-			appCtx.selectTour(null);
+			((TourCommonActivity) getActivity()).selectTour(null);
 		}
 	}
 
@@ -106,14 +105,20 @@ public class TourSelectionFragment extends SherlockListFragment  {
 			} else {
 				check.setVisibility(View.INVISIBLE);
 			}
-			if(model.getDescription().length() > 0) {
-				label.setText(model.getName() +"\n" + model.getDescription());
+			if(model.getShortDescription().length() > 0) {
+				label.setText(model.getName() +"\n" + model.getShortDescription());
 			} else {
 				label.setText(model.getName());
 			}
 			return (row);
 		}
 
+	}
+
+	@Override
+	public void refreshTour() {
+		setListAdapter(new LocalAdapter(appCtx.getTourInformations()));
+		
 	}
 
 }
