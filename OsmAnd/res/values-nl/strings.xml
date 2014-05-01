@@ -754,7 +754,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="show_view_angle">Toon kijkrichting</string>
   <string name="map_view_3d_descr">Activeer 3D kaartbeeld</string>
   <string name="map_view_3d">Kaartbeeld 3D</string>
-  <string name="show_poi_over_map_description">Toon interessepunten op kaart (met laatstgebruikt filter)</string>
+  <string name="show_poi_over_map_description">Toon interessepunten op kaart (met laatst gebruikte filter)</string>
   <string name="show_poi_over_map">Toon interessepunten</string>
   <string name="map_tile_source_descr">Kies de bron van online of offline kaartsegmenten</string>
   <string name="map_tile_source">Kaartsegment bron</string>
@@ -857,7 +857,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="filter_current_poiButton">Filter</string>
   <string name="edit_filter_delete_menu_item">Verwijder</string>
   <string name="edit_filter_save_as_menu_item">Bewaar als</string>
-  <string name="edit_filter_delete_dialog_title">Verwijder ingesteld filter?</string>
+  <string name="edit_filter_delete_dialog_title">Verwijder ingestelde filter?</string>
   <string name="edit_filter_delete_message">Filter {0} is verwijderd</string>
   <string name="edit_filter_create_message">Filter {0} is aangemaakt</string>
   <string name="default_buttons_selectall">Alles selecteren</string>
@@ -1677,7 +1677,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	<string name="lang_af">Afrikaans</string>
 	<string name="lang_hy">Armeens</string>
 	<string name="lang_eu">Baskisch</string>
-	<string name="lang_be">Belarussisch</string>
+	<string name="lang_be">Wit-Russisch</string>
 	<string name="lang_bs">Bosnisch</string>
 	<string name="lang_bg">Bulgaars</string>
 	<string name="lang_ca">Catalaans</string>
