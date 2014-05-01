@@ -985,8 +985,8 @@
   <string name="transport_search_desc">Hľadanie hromadnej dopravy</string>
   <string name="favourites_search_desc">Hľadanie obľúbeného bodu</string>
   <string name="history_search_desc">História hľadania</string>
-  <string name="rendering_attr_noPolygons_description">Ponechanie všetkých oblastí na mape priehľadnými</string>
-  <string name="rendering_attr_noPolygons_name">Žiadne polygóny</string>
+  <string name="rendering_attr_noPolygons_description">Zobraziť plošné krajinné objekty na mape priehľadne</string>
+  <string name="rendering_attr_noPolygons_name">Skryť polygóny</string>
   <string name="rendering_attr_appMode_name">Vykresľovací režim</string>
   <string name="rendering_attr_appMode_description">Prispôsobenie mapy pre príslušný užívateľský profil</string>
   <string name="rendering_attr_contourLines_name">Zobraziť vrstevnice</string>
@@ -995,7 +995,7 @@
   <string name="route_roundabout">Kruhový objazd : choďte cez %1$d. výjazd</string>
   <string name="route_kl">Držte sa vľavo</string>
   <string name="route_kr">Držte sa vpravo</string>
-  <string name="save_route_as_gpx">Uložiť cestu ako GPX súbor</string>
+  <string name="save_route_as_gpx">Uložiť trasu ako GPX súbor</string>
   <string name="asap">Ihneď</string>
   <string name="tip_recent_changes_0_8_1_t">Zmeny vo verzii 0.8.1:
 		\n\t* Presnejšia kalkulácia ciest (trochu pomalšia)
@@ -1710,4 +1710,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="voice_pref_title">Hlas</string>
     <string name="misc_pref_title">Rôzne</string>
     <string name="localization_pref_title">Lokalizácia</string>
-    </resources>
+    <string name="share_route_as_gpx">Zdieľať trasu ako GPX súbor</string>
+	<string name="share_route_subject">Trasa zdieľaná cez OsmAnd</string>
+	</resources>
