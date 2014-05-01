@@ -86,4 +86,9 @@
     <string name="copying_osmand_files_descr">Copiande sos documentos de OsmAnd in (%s), sa destinatzione noa</string>
     <string name="copying_osmand_files">Copiande sos documentos de OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Càlcula s'àndala OsmAnd sena lìnia</string>
+    <string name="app_mode_truck">Càmion</string>
+    <string name="guidance_preferences_descr">Preferèntzias de nàvigu</string>
+    <string name="routing_preferences_descr">Preferèntzias de càlculu de s'àndala</string>
+    <string name="speech_rate_descr">Imposta sa lestresa de sa boghe (TTS)</string>
+    <string name="speech_rate">Lestresa de sa boghe</string>
     </resources>
