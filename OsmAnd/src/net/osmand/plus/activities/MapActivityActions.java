@@ -297,7 +297,7 @@ public class MapActivityActions implements DialogProvider {
 		mapActivity.showDialog(DIALOG_SAVE_DIRECTIONS);
 	}
 	
-	public static  Dialog createSaveDirections(Activity activity) {
+	public static  Dialog createSaveDirections(Activity activity, RoutingHelper routingHelper) {
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		final File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final Dialog dlg = new Dialog(activity);
@@ -305,7 +305,15 @@ public class MapActivityActions implements DialogProvider {
 		dlg.setContentView(R.layout.save_directions_dialog);
 		final EditText edit = (EditText) dlg.findViewById(R.id.FileNameEdit);
 		
-		edit.setText("_" + MessageFormat.format("{0,date,yyyy-MM-dd}", new Date()) + "_");
+        final GPXRouteParamsBuilder rp = routingHelper.getCurrentGPXRoute();
+        final String editText;
+        if (rp == null || rp.getFile() == null || rp.getFile().path == null) {
+            editText = "_" + MessageFormat.format("{0,date,yyyy-MM-dd}", new Date()) + "_";
+        } else {
+            editText = new File(rp.getFile().path).getName();
+        }
+		edit.setText(editText);
+
 		((Button) dlg.findViewById(R.id.Save)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -582,7 +590,7 @@ public class MapActivityActions implements DialogProvider {
 			case DIALOG_RELOAD_TITLE:
 				return createReloadTitleDialog(args);
 			case DIALOG_SAVE_DIRECTIONS:
-				return createSaveDirections(mapActivity);
+				return createSaveDirections(mapActivity, mapActivity.getRoutingHelper());
 		}
 		return OsmAndDialogs.createDialog(id, mapActivity, args);
 	}
