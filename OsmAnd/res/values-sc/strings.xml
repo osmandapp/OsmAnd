@@ -91,4 +91,18 @@
     <string name="routing_preferences_descr">Preferèntzias de càlculu de s'àndala</string>
     <string name="speech_rate_descr">Imposta sa lestresa de sa boghe (TTS)</string>
     <string name="speech_rate">Lestresa de sa boghe</string>
+    <string name="tip_recent_changes_1_7_1_t">Novidades in sa versione 1.7:
+    \n\t* IMPORTANTE sas mapas diat èssere imbenientes a su freàrgiu 2014.
+	\n\t* Aggiornàu de su totu su càlculu de sa rotta (prus lestru e pretzisu) - 
+    \n\t* Ischermada noa cun Pianificatzione Caminera (prus atuativu e poderosu)
+    \n\t** NOTA su nàvigu de sa caminera GPX est disponìbile dae su buttone "Impostaduras de sas Àndalas"
+    \n\t* Iscumparta automàtica de sos buttones in sa modalidade navigu 
+    \n\t* Càlculu de s'andala sena lìnia cara a su primu puntu de sa traccia GPX (optzione \'percorri tutta la traccia\')
+	\n\t* Dispintatzione ativa in sas galerias
+	\n\t* Unu muntone de megiorus minores de s'interfatze utente &amp; corretziones pro s'usabilitade
+	\n\t* Impostaduras pro sa lestresa de sa bogalizzatzione
+    </string>
+    <string name="complex_route_calculation_failed">Càlculu lestru de s'àndala faddida (%s), rinviu a su calculu lentu.</string>
+    <string name="disable_complex_routing_descr">Istuda su calculu de s'àndala in duas fases pro s'impreu in màchina.</string>
+    <string name="disable_complex_routing">Disabilita su calculu cumplessu de s'àndala</string>
     </resources>
