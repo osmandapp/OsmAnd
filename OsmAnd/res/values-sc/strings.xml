@@ -104,5 +104,36 @@
     </string>
     <string name="complex_route_calculation_failed">Càlculu lestru de s'àndala faddida (%s), rinviu a su calculu lentu.</string>
     <string name="disable_complex_routing_descr">Istuda su calculu de s'àndala in duas fases pro s'impreu in màchina.</string>
-    <string name="disable_complex_routing">Disabilita su calculu cumplessu de s'àndala</string>
-    </resources>
+    <string name="disable_complex_routing">Istuta su calculu cumplessu de s'àndala</string>
+    <string name="amenity_type_seamark">Pidagnu</string>
+    <string name="app_modes_choose_descr">Issèbera intre sas modalidades de impreu de s'aplicu</string>
+    <string name="app_modes_choose">Modalidades de impreu</string>
+	<string name="map_widget_appearance">Vàrias:</string>
+	<string name="map_widget_map_rendering">Disinnu de sa mapa:</string>
+    <string name="app_mode_hiking">Escursionismu</string>
+    <string name="app_mode_motorcycle">Mototzicleta</string>
+    <string name="app_mode_boat">Barca</string>
+    <string name="app_mode_aircraft">Aèreo</string>
+    <string name="tip_faq_t">Vìsita https://code.google.com/p/osmand/wiki/FAQ pro bìdere sas preguntas prus fitianas.</string>
+    <string name="tip_faq">Preguntas fitianas</string>
+    <string name="local_osm_changes_delete_all_confirm">Istas pro burrare %1$d mudaduras. Ses seguru?</string>
+    <string name="local_osm_changes_delete_all">Burra totu</string>
+    <string name="animate_routing_route_not_calculated">Pro piaghere, càlcula s'andala in antis</string>
+    <string name="animate_routing_route">Dispinta impreande un'àndala calculada </string>
+    <string name="animate_routing_gpx">Dispinta impreande una caminera GPX</string>
+    <string name="remember_choice">Ammenta s'issèberu meu</string>
+    <string name="gps_status_eclipsim">Istadu GPS</string>
+    <string name="default_and">e</string>
+    <string name="default_or">o</string>
+	<string name="route_is_too_long">Su càlculu de s'àndala de OsmAnd sena impreare internet  diat pòtere dimandare meda tempus (o a bortas non funtzionare) pro distantzias prus longas de 200 km.
+Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas prestatziones.</string>
+	<string name="auto_zoom_none">No zoom automàticu</string>
+	<string name="auto_zoom_close">Zoom automàticu mannu</string>
+	<string name="auto_zoom_far">Zoom automàticu mesanu</string>
+	<string name="auto_zoom_farthest">Zoom automàticu minore</string>
+	<string name="map_magnifier">Ismanniamentu mapa</string>
+	<string name="base_world_map">Mapa mundiale de base</string>
+	<string name="tip_map_styles">Istiles de sa mapa</string>
+	<string name="default_buttons_no">Nono</string>
+	<string name="default_buttons_yes">Eja</string>
+	</resources>
