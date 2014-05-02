@@ -527,7 +527,7 @@
   <string name="map_orientation_landscape">Orizzontale</string>
   <string name="map_screen_orientation">Orientamento dello schermo</string>
   <string name="map_screen_orientation_descr">Verticale, orizzontale, o predefinito (dispositivo)</string>
-  <string name="opening_hours_not_supported">Il formato dell\'ora di apertura non è supportato per la modifica</string>
+  <string name="opening_hours_not_supported">Il formato dell\'orario di apertura non è supportato per la modifica</string>
   <string name="add_new_rule">Aggiungi una nuova regola</string>
   <string name="transport_Routes">Percorsi</string>
   <string name="transport_Stop">Fermata</string>
