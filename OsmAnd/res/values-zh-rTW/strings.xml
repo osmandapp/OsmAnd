@@ -1731,4 +1731,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="interrupt_music_descr">當制作告示時中斷音樂</string>
 	<string name="interrupt_music">中斷音樂</string>
 	<string name="misc_pref_title">雜項</string>
-    </resources>
+    <string name="share_route_as_gpx">以 GPX 檔案分享路線</string>
+	<string name="share_route_subject">經由 OsmAnd 分享路線</string>
+	</resources>
