@@ -1666,4 +1666,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 \n\t* Налада хуткасці вымаўленьня
     </string>
     <string name="app_modes_choose_descr">Выберыце профілі карыстання бачныя ў праграме</string>
-    </resources>
+    <string name="voice_pref_title">Голас</string>
+    <string name="misc_pref_title">Рознае</string>
+    <string name="localization_pref_title">Лакалізацыя</string>
+    <string name="interrupt_music">Перапыненьне музыкі</string>
+	</resources>
