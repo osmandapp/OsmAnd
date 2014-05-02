@@ -144,7 +144,7 @@ public class GeoIntentActivity extends OsmandListActivity {
             }
             else
             {
-                AccessibleToast.makeText(GeoIntentActivity.this, getString(R.string.error_doing_search), Toast.LENGTH_LONG).show();
+                AccessibleToast.makeText(GeoIntentActivity.this, getString(R.string.search_offline_geo_error, intent.getData()), Toast.LENGTH_LONG).show();
             }
         }
 
@@ -268,12 +268,12 @@ public class GeoIntentActivity extends OsmandListActivity {
                 }
                 catch (NumberFormatException e)
                 {
-                    showErrorMessage(q);
+                    return null;
                 }
             }
             else
             {
-                showErrorMessage(q);
+                return null;
             }
         }
         if ("geo".equals(scheme))
@@ -282,82 +282,57 @@ public class GeoIntentActivity extends OsmandListActivity {
             final String schemeSpecific = data.getSchemeSpecificPart();
             if (schemeSpecific == null)
             {
-                showErrorMessage("null");
-                return MyService.EMPTY;
+                return null;
             }
             if (schemeSpecific.startsWith("0,0?q="))
             {
                 //geo:0,0?q=34.99,-106.61(Treasure)
                 //geo:0,0?q=1600+Amphitheatre+Parkway%2C+CA
-                try
+                final String query = schemeSpecific.substring("0,0?q=".length());
+
+                final Matcher matcher = Pattern.compile("([\\-0-9.]+),([\\-0-9.]+)(?:,[\\-0-9.]+)?\\((.+?)\\)").matcher(query);
+                if (matcher.matches())
                 {
-                    final String query = schemeSpecific.substring("0,0?q=".length());
+                    final double lat = Double.valueOf(matcher.group(1));
+                    final double lon = Double.valueOf(matcher.group(2));
+                    final String name = matcher.group(3);
 
-                    final Matcher matcher = Pattern.compile("(.+?),(.+?)\\((.+?)\\)").matcher(query);
-                    if (matcher.matches() && matcher.groupCount() == 3)
-                    {
-                        try
-                        {
-                            final double lat = Double.valueOf(matcher.group(1));
-                            final double lon = Double.valueOf(matcher.group(2));
-                            final String name = matcher.group(3);
-
-                            return new GeoPointSearch(lat, lon, name);
-                        }
-                        catch (NumberFormatException e)
-                        {
-                            showErrorMessage(schemeSpecific);
-                            return MyService.EMPTY;
-                        }
-                    }
-                    else
-                    {
-                        //we suppose it's a search
-                        return new GeoAddressSearch(query);
-                    }
+                    return new GeoPointSearch(lat, lon, name);
                 }
-                catch (NumberFormatException e)
+                else
                 {
-                    showErrorMessage(schemeSpecific);
-                    return MyService.EMPTY;
+                    //we suppose it's a search
+                    return new GeoAddressSearch(query);
                 }
             }
             else
             {
                 //geo:47.6,-122.3
                 //geo:47.6,-122.3?z=11
-                final String pattern = "(.+?),(.+?)" + ( schemeSpecific.contains("?z=") ? "\\?z=(.+?)" : "");
+                //allow for http://tools.ietf.org/html/rfc5870 (geo uri) , just ignore everything after ';'
+                final String pattern = "([\\-0-9.]+),([\\-0-9.]+)(?:,([\\-0-9.]+))?(?:\\?z=([0-9]+))?(?:;.*)?";
 
                 final Matcher matcher = Pattern.compile(pattern).matcher(schemeSpecific);
-                if (matcher.matches() && matcher.groupCount() >= 2)
+                if (matcher.matches())
                 {
-                    try
+                    final double lat = Double.valueOf(matcher.group(1));
+                    final double lon = Double.valueOf(matcher.group(2));
+                    if (matcher.group(4) == null)
                     {
-                        final double lat = Double.valueOf(matcher.group(1));
-                        final double lon = Double.valueOf(matcher.group(2));
-                        if (matcher.groupCount() == 3)
-                        {
-                            return new GeoPointSearch(lat, lon, Integer.valueOf(matcher.group(3)));
-                        }
-                        else
-                        {
-                            return new GeoPointSearch(lat, lon);
-                        }
+                        return new GeoPointSearch(lat, lon);
                     }
-                    catch (NumberFormatException e)
+                    else
                     {
-                        showErrorMessage(schemeSpecific);
-                        return MyService.EMPTY;
+                        return new GeoPointSearch(lat, lon, Integer.valueOf(matcher.group(4)));
                     }
                 }
                 else
                 {
-                    showErrorMessage(schemeSpecific);
-                    return MyService.EMPTY;
+                    return null;
                 }
             }
         }
-        return MyService.EMPTY;
+        return null;
     }
 
     private final class GeoAddressSearch implements MyService {
@@ -494,7 +469,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		}
 
 		private Collection<RegionAddressRepository> limitSearchToCountries(List<String> q) {
-			ResourceManager resourceManager = resourceManager();
+			ResourceManager resourceManager = getMyApplication().getResourceManager();
 			List<RegionAddressRepository> foundCountries = new ArrayList<RegionAddressRepository>();
 			RegionAddressRepository country;
 			Iterator<String> it = q.iterator();
@@ -517,22 +492,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 
 	}
 
-	private ResourceManager resourceManager() {
-		return getMyApplication().getResourceManager();
-	}
-
-	private void showErrorMessage(final String geo) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				AccessibleToast.makeText(GeoIntentActivity.this,
-						getString(R.string.search_offline_geo_error, geo),
-						Toast.LENGTH_LONG);
-			}
-		});
-	}
-	
-	private static class GeoPointSearch implements MyService {
+    private static class GeoPointSearch implements MyService {
 		private final  MapObject point;
         private final int zoom;
 
@@ -577,7 +537,7 @@ public class GeoIntentActivity extends OsmandListActivity {
     private static class ExecutionResult
     {
         public static final int NO_ZOOM = -1;
-        public static ExecutionResult EMPTY = new ExecutionResult(null, NO_ZOOM);
+        public static final ExecutionResult EMPTY = new ExecutionResult(new ArrayList<MapObject>(), NO_ZOOM);
 
         private final Collection<? extends MapObject> mapObjects;
         private final int zoom;
@@ -595,7 +555,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 
         public boolean isEmpty()
         {
-            return this == EMPTY;
+            return mapObjects.isEmpty();
         }
 
         public boolean hasZoom()
@@ -625,15 +585,6 @@ public class GeoIntentActivity extends OsmandListActivity {
 
 	private static interface MyService
     {
-        public static MyService EMPTY = new MyService()
-        {
-            @Override
-            public ExecutionResult execute()
-            {
-                return ExecutionResult.EMPTY;
-            }
-        };
-
 		public ExecutionResult execute();
 	}
 }
