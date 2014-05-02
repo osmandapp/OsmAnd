@@ -1574,4 +1574,16 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="voice_pref_title">Balss</string>
     <string name="misc_pref_title">Dažādi</string>
     <string name="localization_pref_title">Lokalizācija</string>
+    <string name="tip_recent_changes_1_7_1_t">Izmaiņas uz 1.7:
+…\n\t* SVARĪGĀKAJĀM kartēm tagad vajadzētu būt jaunākām par 2014. gada februāri.
+…\n\t* Pilnībā atjaunota maršrutēšana (ātra un precīza).
+…\n\t* Jauns ekrāns Maršruta Plānošanā (intuitīvāks un iespējām bagātāks)
+…\n\t* IEVĒROJIET: GPX maršruts ir pieejams zem Maršruta Uzstādījumi pogas
+…\n\t* Automātiski paslēpt ekrāna pogas navigācijas režīmā
+…\n\t* Aprēķina bezsaistes maršrutu līdz pirmajam punktam GPX maršrutā (\'Izlaist kopējo ceļu\' opcija)
+…	…\n\t* Aktīvā simulācija tuneļos
+…	…\n\t* Vairāki uzlabojumi grafiskajā saskarsmē &amp; lietojamībā
+…	…\n\t* Izrunas ātrums pieejamības uzstādījums
+…
+    </string>
     </resources>
