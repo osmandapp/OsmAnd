@@ -1581,7 +1581,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="lang_sv">швэдзкая</string>
 	<string name="lang_tr">турэцкая</string>
 	<string name="lang_uk">украінская</string>
-	<string name="lang_vi">в'етнамская</string>
+	<string name="lang_vi">в\'етнамская</string>
 	<string name="lang_cy">валійская</string>
 	<string name="index_name_canada">Паўночная Амэрыка - Канада</string>
     <string name="index_name_italy">Эўропа - Італія</string>
@@ -1618,7 +1618,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="tip_faq">Частыя пытаньні</string>
     <string name="local_osm_changes_delete_all">Выдаліць усё</string>
     <string name="index_item_nation_addresses">адрасы па ўсёй краіне</string>
-	<string name="osmodroid_seek">Шукаць аб'ект</string>
+	<string name="osmodroid_seek">Шукаць аб\'ект</string>
     <string name="osmodroid_refresh">Абнавіць каналы</string>
     <string name="default_or">ці</string>
 	<string name="default_and">і</string>
@@ -1649,7 +1649,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="tip_faq_t">Калі ласка, наведайце https://code.google.com/p/osmand/wiki/FAQ каб пабачыць часта задаваныя пытаньні.</string>
     <string name="local_osm_changes_delete_all_confirm">Вы зьбіраецеся выдаліць %1$d змены OSM. Вы ўпэўненыя?</string>
     <string name="animate_routing_route_not_calculated">Калі ласка, разлічыць маршрут першым</string>
-    <string name="osmodroid_unseek">Не сачыць за аб'ектам</string>
+    <string name="osmodroid_unseek">Не сачыць за аб\'ектам</string>
     <string name="android_19_location_disabled">З версіі KitKat вы ня можаце загружаць і абнаўляць карту ў папярэднім месцы захоўвання (%s).  Вы хочаце змяніць каталог на дазволены і скапіраваць ўсе файлы туды?
          \n Увага: старыя файлы застануцца некранутымі.
          \n Увага: будзе немагчымы абмен файламі паміж OsmAnd і OsmAnd+. </string>

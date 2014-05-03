@@ -1478,14 +1478,14 @@
     \n\t* Ocultació automàtica de botons en mode navegació
     \n\t* Càlcul offline de la ruta al primer punt de la traça GPX (opció \'recórrer tota la traça\')
 	\n\t* Simulació activa en els túnnels
-	\n\t* Moltes millores a la Interfície d'Usuari i correccions d'usabilitat
+	\n\t* Moltes millores a la Interfície d\'Usuari i correccions d\'usabilitat
 	\n\t* Configuració de accessibilitat en la velocitat de pronuncia
     </string>
     <string name="index_item_nation_addresses">adreces arreu del país</string>
-	<string name="index_item_world_altitude_correction">Correcció d'altitud mundial</string>
+	<string name="index_item_world_altitude_correction">Correcció d\'altitud mundial</string>
 	<string name="index_item_world_bitcoin_payments">Llocs amb pagament bitcoin al món</string>
 	<string name="index_item_world_basemap">Mapa genéric del món</string>
-    <string name="index_item_world_ski">Mapa d'esquí mundial</string>
+    <string name="index_item_world_ski">Mapa d\'esquí mundial</string>
     <string name="lang_hr">Croat</string>
     <string name="lang_zh">Xinès</string>
     <string name="lang_pt_br">Portuguès (Brasil)</string>
@@ -1535,7 +1535,7 @@
 	<string name="tip_recent_changes_0_6_6_t">Darrers canvis a 0.6.6: 
 		\n\t- Motor de síntesi de veu en la navegació
 		\n\t- Dibuix de mapes més detallat
-		\n\t- Mapa base mundial inclòs amb l'aplicació
+		\n\t- Mapa base mundial inclòs amb l\'aplicació
 		\n\t- Ajust en navegació sense connexió  (encara experimental)
 		\n\t- Opcions de navegació amb traces GPX
 		\n\t- Interfície millorada i forces errors corregits
