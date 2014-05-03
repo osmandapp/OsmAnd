@@ -93,6 +93,7 @@ public class DownloadIndexesThread {
 		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
 		DownloadIndexActivity.listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT,
 				indexFileNames);
+		app.getAppCustomization().updatedLoadedFiles(indexFileNames, indexActivatedFileNames);
 		DownloadIndexActivity.listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.TILES_INDEX_DIR),
 				IndexConstants.SQLITE_EXT, indexFileNames);
 		app.getResourceManager().getBackupIndexes(indexFileNames);

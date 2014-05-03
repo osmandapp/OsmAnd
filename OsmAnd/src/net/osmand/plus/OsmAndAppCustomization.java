@@ -1,9 +1,13 @@
 package net.osmand.plus;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.view.Window;
+import net.osmand.IProgress;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.FavouritesActivity;
 import net.osmand.plus.activities.LocalIndexesActivity;
@@ -27,6 +31,7 @@ public class OsmAndAppCustomization {
 		return new OsmandSettings(app, api);
 	}
 
+	// Main menu
 	public boolean checkExceptionsOnStart() {
 		return true;
 	}
@@ -43,7 +48,7 @@ public class OsmAndAppCustomization {
 	}
 	
 	
-	
+	// Activities
 	public Class<? extends Activity> getSettingsActivity(){
 		return SettingsActivity.class;
 	}
@@ -76,8 +81,16 @@ public class OsmAndAppCustomization {
 		return LocalIndexesActivity.class;
 	}
 
+	// Download screen
 	public void getDownloadTypes(List<DownloadActivityType> items) {
 		
+	}
+
+	public void updatedLoadedFiles(Map<String, String> indexFileNames, Map<String, String> indexActivatedFileNames) {
+	}
+
+	public List<String> onIndexingFiles(IProgress progress, Map<String, String> indexFileNames) {
+		return Collections.emptyList();
 	}
 
 }

@@ -17,6 +17,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.Version;
+import net.osmand.plus.sherpafy.TourDownloadType;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;

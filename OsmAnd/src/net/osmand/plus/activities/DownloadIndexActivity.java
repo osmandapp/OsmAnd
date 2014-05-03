@@ -501,7 +501,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				@Override
 				public boolean accept(File dir, String filename) {
 					if (filename.endsWith(ext)) {
-						String date = dateFormat.format(new File(dir, filename).lastModified());
+						String date = dateFormat.format(findFileInDir(new File(dir, filename)).lastModified());
 						files.put(filename, date);
 						return true;
 					} else {
@@ -512,6 +512,20 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 		}
 		return files;
+	}
+	
+	public static File findFileInDir(File file) {
+		if(file.isDirectory()) {
+			File[] lf = file.listFiles();
+			if(lf != null) {
+				for(File f : lf) {
+					if(f.isFile()) {
+						return f;
+					}
+				}
+			}
+		}
+		return file;
 	}
 
 	protected void downloadFilesCheckFreeVersion() {

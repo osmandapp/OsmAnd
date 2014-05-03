@@ -202,6 +202,7 @@ public class DownloadFileHelper {
 		try {
 			final List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
 			URL url = new URL(de.urlToDownload); //$NON-NLS-1$
+			log.debug("Url downloading " + de.urlToDownload);
 			downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));
 			de.fileToDownload = de.targetFile;
 			if(!de.unzipFolder) {
@@ -281,6 +282,7 @@ public class DownloadFileHelper {
 
 	private void copyFile(DownloadEntry de, IProgress progress, CountingMultiInputStream countIS, int length, InputStream toRead, File targetFile)
 			throws IOException {
+		targetFile.getParentFile().mkdirs();
 		FileOutputStream out = new FileOutputStream(targetFile);
 		int read;
 		byte[] buffer = new byte[BUFFER_SIZE];

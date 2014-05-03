@@ -415,6 +415,7 @@ public class ResourceManager {
 		warnings.addAll(indexingMaps(progress));
 		warnings.addAll(indexVoiceFiles(progress));
 		warnings.addAll(OsmandPlugin.onIndexingFiles(progress));
+		warnings.addAll(context.getAppCustomization().onIndexingFiles(progress, indexFileNames));
 		
 		return warnings;
 	}
@@ -456,7 +457,6 @@ public class ResourceManager {
 			}
 		}
 		return warnings;
-		
 	}
 	
 	private List<String> checkAssets(IProgress progress) {
