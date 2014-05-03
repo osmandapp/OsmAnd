@@ -184,4 +184,31 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="osmodroid_refresh">Agiorna sos canales</string>
     <string name="osmodroid_seek">Chirca ogetu</string>
     <string name="osmodroid_unseek">Ogetu non agatau</string>
+    <string name="driving_region_descr">Issèbera sa regione de ghia: USA, Europa, UK, Àsia e Àteras</string>
+	<string name="driving_region_japan">Giappone</string>
+	<string name="announce_gpx_waypoints">Annuntzia sos puntos de coladòrgiu GPX</string>
+    <string name="speak_title">Annuntzia…</string>
+	<string name="speak_descr">Cunfigura pro annuntziare sos nùmenes de sas istradas, sos avèrtimentos (pasadas fortzadas, dossos), sos annuntzios de s'autovelox, sos lìmites de lestresa.</string>
+	<string name="speak_street_names">Annuntzia sos nùmenes de sas istradas (TTS)</string>
+    <string name="speak_speed_limit">Annuntzia sos lìmites de lestresa</string>
+    <string name="speak_cameras">Annuntzia sos autovelox</string>
+	<string name="speak_traffic_warnings">Annuntzia avisos de tràfficu</string>
+    <string name="tip_recent_changes_1_5_t">Mudas in sa 1.5:
+	\n\t* Annuntzios bogales pro sos lìmites de lestresa e sos autovelox
+	\n\t* Prus capabilidade de frunire annuntzios bogales (annuntziamentu de sos nùmenes de sas istradas)
+	\n\t* Arta carchidare de sas iconas de sa mapa
+	\n\t* Unu muntone de mudas in s'interfatze gràfica
+	\n\t* Curretzione de faddinas in sa bisualizatzione de sa distantzia, s'analizatzione de sos puntos  GPX, s'impreu de sos puntos de coladòrgiu, sos widget de pianificatzione, su carrigamentu de sos datos in OSM e sa gestione https
+    </string>
+    <string name="osb_author_or_password_not_specified">Pro piaghere dislinda su nùmene impitadore OSM e sa crae (password) in sas Impostaduras</string>
+    <string name="clear_intermediate_points">Burra sos puntos mesanos</string>
+    <string name="keep_intermediate_points">Mantènne sos puntos mesanos</string>
+    <string name="new_directions_point_dialog">Tenes giai puntos mesanos impostaos.</string>
+    <string name="context_menu_item_directions_to">Indicatziones cara a</string>
+    <string name="context_menu_item_directions_from">Indicatziones dae</string>
+    <string name="route_descr_map_location">Mapa: </string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="route_descr_current_location">Positzione atuale</string>
+    <string name="route_to">A:</string>
+    <string name="route_via">Pro:</string>
     </resources>
