@@ -211,4 +211,31 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="route_descr_current_location">Positzione atuale</string>
     <string name="route_to">A:</string>
     <string name="route_via">Pro:</string>
+    <string name="route_from">Dae:</string>
+	<string name="local_index_gpx_timespan">\nTempus colau: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nTempus in mòvida: %1$d:%2$02d:%3$02d</string>
+	<string name="app_mode_default">Predefinitu</string>
+	<string name="settings_preset">Perfilu de impreu</string>
+	<string name="settings_preset_descr">Issèbera unu perfilu de impreu cun impostaduras pro sa mapa e su nàvigu pessonalizzau.</string>
+    <string name="destination_point">Destinatzione %1$s</string>
+    <string name="context_menu_item_destination_point">Imposta comente destinatzione</string>
+    <string name="please_select_address">Issèbera in antis sa citade o s'istrada</string>
+    <string name="tip_recent_changes_1_4_t">Mudas in sa 1.4:
+	\n\t* Cusserta sos puntos de colaròrgiu pro los visitare totus in manèra primorosa (cummessu biagiadore, ghenna-a-ghenna)
+	\n\t* Chirca sas carreras impreande su nùmene (in sos bighinados) 
+	\n\t* Plugin Modalidade de pianificatzione (carriga/acontza/sarba camineras GPX)
+	\n\t* Ischermada noa de isgarrigamentu (isgarrigamentu in isfundu)
+	\n\t* Suporta sutacartellas GPX (ordingia sas tuas camineras GPX)
+	\n\t* Posibilidade de burrare sos documentos SRTM
+	\n\t* Suportu a sas notas de OSM 
+    </string>
+    <string name="search_street_in_neighborhood_cities">Chirca sas istradas in sas citades prus a curtzu</string>
+    <string name="intermediate_items_sort_return">Puntos mesanos cussertaos pro perfetzionare s'andala pro sa destinatzione.</string>
+    <string name="intermediate_items_sort_by_distance">Cusserta (ghenna a ghenna)</string>
+    <string name="local_osm_changes_backup_successful">Creatzione documentu de muda OSM %1$s acabada</string>
+    <string name="local_osm_changes_backup_failed">Creatzione de sa còpia locale de seguràntzia (backup) de sas mudas faddida</string>
+    <string name="local_osm_changes_backup">Crea una còpia de seguràntzia comente muda OSM</string>
+    <string name="delete_point">Burra puntu</string>
+    <string name="plugin_distance_point_time">orariu</string>
+    <string name="plugin_distance_point_hdop">pretzisione</string>
     </resources>
