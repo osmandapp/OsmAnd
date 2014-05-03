@@ -1447,4 +1447,5 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="voice_pref_title">Röst</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Översättning</string>
-    </resources>
+    <string name="navigation_intent_invalid">Ogiltigt format: %s</string>
+</resources>
