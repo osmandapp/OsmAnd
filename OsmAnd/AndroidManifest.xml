@@ -3,7 +3,7 @@
 	package="net.osmand.plus" android:installLocation="auto" android:versionName="@string/app_version" android:versionCode="170">
 	<meta-data android:name="com.google.android.backup.api_key"
     android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
-	
+
 	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="19"/>
 	
 	<uses-feature android:name="android.hardware.camera" android:required="false" />
@@ -68,6 +68,7 @@
 				<category android:name="android.intent.category.CAR_DOCK" />
 				<category android:name="android.intent.category.DESK_DOCK" />
 			</intent-filter>
+
             <!-- android matches non-greedy : http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i-->
             <!-- mimeType&host are both needed or you will either have unwanted matching or no match when needed -->
             <intent-filter>
@@ -78,7 +79,16 @@
                 <data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\.gpx"/>
                 <data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\.gpx"/>
             </intent-filter>
-			<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
+
+            <!-- google navigation intent -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="google.navigation"/>
+            </intent-filter>
+
+            <receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
+
 		    <intent-filter>
                 <action android:name="android.intent.action.CAMERA_BUTTON" />
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
@@ -117,36 +127,37 @@
         <activity android:name="net.osmand.plus.activities.search.SearchStreet2ByNameActivity"></activity>
         <activity android:name="net.osmand.plus.activities.search.SearchBuildingByNameActivity"></activity>
 		<activity android:name="net.osmand.plus.activities.EditPOIFilterActivity"></activity>
-		<activity android:name="net.osmand.plus.activities.search.GeoIntentActivity">
-		    <intent-filter><action android:name="android.intent.action.VIEW"></action>
-			<category android:name="android.intent.category.DEFAULT"></category>
-			<data android:scheme="geo"></data>
-			</intent-filter>
-			<intent-filter>
-    			<data android:scheme="http" android:host="maps.google.com" />
-    			<action android:name="android.intent.action.VIEW" />
-    			<category android:name="android.intent.category.DEFAULT"/>
-				<category android:name="android.intent.category.BROWSABLE"/>
-			</intent-filter>
-			<!-- requires read permission -->
-			<!-- 
-			<intent-filter android:label="OsmAnd">
-			<action android:name="android.intent.action.VIEW" />
-    			<category android:name="android.intent.category.DEFAULT" />
-				<data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
-			</intent-filter>
-			 -->
-		</activity>
-		<activity android:name="net.osmand.plus.development.TestVoiceActivity"></activity>
+        <activity android:name="net.osmand.plus.activities.search.GeoIntentActivity">
+            <intent-filter>
+                <data android:scheme="geo" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="http" android:host="maps.google.com"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+            <!-- requires read permission -->
+            <!--
+            <intent-filter android:label="OsmAnd">
+            <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
+            </intent-filter>
+             -->
+        </activity>
+        <activity android:name="net.osmand.plus.development.TestVoiceActivity"></activity>
 		<activity android:name="net.osmand.plus.activities.LocalIndexesActivity" android:label="@string/local_index_descr_title"></activity>
 		<activity android:name="net.osmand.plus.osmedit.LocalOpenstreetmapActivity" android:label="@string/local_openstreetmap_act_title"></activity>
-		
+
 		<service android:process="net.osmand.plus" android:label="@string/process_navigation_service" android:name="net.osmand.plus.NavigationService">
 			<intent-filter><action android:name="net.osmand.plus.NavigationService"></action></intent-filter>
 		</service>
 		<receiver android:name="net.osmand.plus.OnNavigationServiceAlarmReceiver"/>
     	<activity android:name="net.osmand.plus.activities.OsmandBidForFixActivity"></activity>
-		
+
 
 </application>
 </manifest> 

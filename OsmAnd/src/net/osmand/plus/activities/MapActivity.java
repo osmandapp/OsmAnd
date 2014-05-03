@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
@@ -335,9 +337,35 @@ public class MapActivity extends AccessibleActivity  {
                 if (intent.getData() != null)
                 {
                     final Uri data = intent.getData();
-                    if ("file".equalsIgnoreCase(data.getScheme()))
+                    final String scheme = data.getScheme();
+                    if ("file".equals(scheme))
                     {
                         showImportedGpx(data.getPath());
+                    }
+                    else if("google.navigation".equals(scheme))
+                    {
+                        final String schemeSpecificPart = data.getSchemeSpecificPart();
+
+                        final Matcher matcher = Pattern.compile("q=(.+?),(.+?)").matcher(schemeSpecificPart);
+                        if (matcher.matches())
+                        {
+                            try
+                            {
+                                final double lat = Double.valueOf(matcher.group(1));
+                                final double lon = Double.valueOf(matcher.group(2));
+
+                                getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(lat, lon), false, -1);
+                                getMapActions().enterRoutePlanningMode(null, null);
+                            }
+                            catch (NumberFormatException e)
+                            {
+                                AccessibleToast.makeText(this, getString(R.string.navigation_intent_invalid, schemeSpecificPart), Toast.LENGTH_LONG).show(); //$NON-NLS-1$
+                            }
+                        }
+                        else
+                        {
+                            AccessibleToast.makeText(this, getString(R.string.navigation_intent_invalid, schemeSpecificPart), Toast.LENGTH_LONG).show(); //$NON-NLS-1$
+                        }
                     }
                 }
             }
