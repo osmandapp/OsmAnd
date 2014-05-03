@@ -1679,4 +1679,29 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="copying_osmand_one_file_descr">Kopiranje datoteke (%s) na novo mesto hrambe...</string>
     <string name="copying_osmand_files_descr">Kopiranje datotek OsmAnd na novo mesto hrambe (%s)</string>
     <string name="copying_osmand_files">Kopiranje datotek programa OsmAnd</string>
+    <string name="always_center_position_on_map">Prikaz položaja vedno v središču</string>
+    <string name="index_item_nation_addresses">Naslovi za celotno državo</string>
+	<string name="lang_mr">Maratščina</string>
+	<string name="calculate_osmand_route_without_internet">Izračunanje OsmAnd poti brez interneta</string>
+    <string name="gpx_option_calculate_first_last_segment">Izračunanje OsmAnd poti za prvi in zadnji odsek poti</string>
+    <string name="use_displayed_track_for_navigation">Ali želite uporabiti prikazani posnetek za navigacijo?</string>
+    <string name="route_preferences">Nastavitve za pot</string>
+    <string name="route_info">Informacije o poti</string>
+    <string name="calculate_osmand_route_gpx">Izračunanje OsmAnd poti brez povezave</string>
+    <string name="interrupt_music_descr">Prekinitev glasbe med obvestili</string>
+	<string name="interrupt_music">Prekinitev glasbe</string>
+	<string name="share_route_as_gpx">Delitev poti kot datoteka GPX</string>
+	<string name="share_route_subject">Pot deljena preko OsmAnd-a</string>
+	<string name="navigation_intent_invalid">Neveljavna oblika: %s</string>
+<string name="tip_recent_changes_1_7_1_t">Spremembe v 1.7:
+	\n\t* POMEMBNO Zemljevidi morajo biti novejši od februarja 2014.
+	\n\t* Popolnoma posodobljeno usmerjanje (hitro in natančno)
+	\n\t* Nov zaslon z načrtovanjem poti (bolj intuitiven in zmogljivejši)
+	\n\t** OPOMBA GPX pot je na razpolago pod gumbom Nastavitve poti
+	\n\t* Samodejno skrivanje gumbov v navigacijskem načinu
+	\n\t* Izračunanje brez povezave poti do prve točke GPX poti (opcija \'prenesi celotno progo\')
+	\n\t* Aktivna simulacija v predorih
+	\n\t* Veliko malih izboljšav v uporabniškem vmesniku in uporabnostni popravki
+	\n\t* Nastavitev hitrost govora za dostopnost
+    </string>
     </resources>
