@@ -1705,4 +1705,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="localization_pref_title">Lokalizacja</string>
     <string name="share_route_as_gpx">Udostępnij trasę jako plik GPX</string>
 	<string name="share_route_subject">Trasa udostępniona przez OsmAnd</string>
-	</resources>
+	<string name="navigation_intent_invalid">Nieprawidłowy format : %s</string>
+</resources>
