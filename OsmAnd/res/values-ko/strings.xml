@@ -1916,19 +1916,19 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
  \ n \ t - 많은 분야에서 개선		
 	</string>
 	<string name="tip_day_night_mode_t_v2">지도의 모양은 오프라인 벡터 맵에서 주간(밝게 )과 야간(어둡게) 사이에서 변경 될 수 있습니다.  야간의 색상은 안전하고 야간 운전에 더 편안합니다.
-		'메뉴'→'화면구성'→'주간/야간 지도' 의 주간/야간 전환을 설정할 수 있습니다.
+		\'메뉴\'→\'화면구성\'→\'주간/야간 지도\' 의 주간/야간 전환을 설정할 수 있습니다.
 		선택 사항은 다음과 같습니다 :
-			'일출/일몰' 자동 모드 (태양의 위치에 따라 제어)
-			'주간' 항상 주간 모드를 사용
-			'야간' 항상 야간 모드를 사용
-			'광 센서' : 지도 모양이 장치의 광센서에 의해 제어된다 (광센서가 장착된 경우에만)
+			\'일출/일몰\' 자동 모드 (태양의 위치에 따라 제어)
+			\'주간\' 항상 주간 모드를 사용
+			\'야간\' 항상 야간 모드를 사용
+			\'광 센서\' : 지도 모양이 장치의 광센서에 의해 제어된다 (광센서가 장착된 경우에만)
 	</string>	
 	<string name="tip_map_switch_t_v2">표시된 지도소스와 지도레이어는 [메뉴]-&gt;[지도 레이어]에서 변경할 수 있다.
 		[지도 소스] 아래에 미리 로드된 오프라인 벡터 지도를 사용하여 선택할 수 있다.
 		OsmAnd 는 또한 사용자 지도를 지원한다.
 	</string>
 	<string name="tip_app_mode_t_v2">OsmAnd 는  다른 사용 사례에 대해 서로 다른 (사용자 정의) 애플리케이션 프로파일을 지원합니다.
-		 당신은 지도 화면 (아이콘 자동차, 자전거 또는 보행자 )의 왼쪽 하단 모서리에 있는 프로필 버튼을 통해 프로필을 변경하거나 루트('전송 모드')을 만들 때 할 수 있습니다.
+		 당신은 지도 화면 (아이콘 자동차, 자전거 또는 보행자 )의 왼쪽 하단 모서리에 있는 프로필 버튼을 통해 프로필을 변경하거나 루트(\'전송 모드\')을 만들 때 할 수 있습니다.
 	</string>
 	<string name="tip_search_t">You can search for places directly on the map via \'Use location\' → \'Search near here\', or by calling the search screen via \'Menu\' → \'Search\'.
 		\n\nThe search screen provides templates for searching
