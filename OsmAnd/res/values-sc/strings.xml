@@ -238,4 +238,48 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="delete_point">Burra puntu</string>
     <string name="plugin_distance_point_time">orariu</string>
     <string name="plugin_distance_point_hdop">pretzisione</string>
+    <string name="plugin_distance_point_speed">lestresa</string>
+    <string name="plugin_distance_point_ele">artària</string>
+    <string name="plugin_distance_point">Puntu</string>
+    <string name="gpx_file_name">Nùmene de su documentu GPX</string>
+    <string name="gpx_saved_sucessfully">Documentu GPX sarbadu cun sutzessu in {0}</string>
+    <string name="osmand_distance_planning_plugin_description">Creare àndalas (o impreare/mudare documentos GPX esistentes) pro medire sa distantzia intra 'e tres puntos. Sarbare comente GPX, at a poder èssere impreau pro pianificare una caminera GPX.</string>
+    <string name="osmand_distance_planning_plugin_name">Aina Calcoladore de distànzia e Pianificatzione</string>
+    <string name="use_distance_measurement_help">* Toca pro sinnare unu puntu.\n 
+        * Carca e tene carcau in sa mapa pro burrare sos puntos antepostos.\n
+        * Carca e tene carcau supra de unu puntu pro bìdere e alliongiare una descrizione.\n
+        * Carca supra su widget de medidura pro bìdere àteras atziones possibiles.</string>
+    <string name="default_buttons_do_not_show_again">Non ammustrare dae nou</string>
+    <string name="distance_measurement_start_editing">Incumintza a mudare</string>
+    <string name="distance_measurement_finish_editing">Fini de mudare</string>
+    <string name="distance_measurement_finish_subtrack">Incumintza una sutacaminera noa</string>
+    <string name="distance_measurement_clear_route">Burra totu sos puntos</string>
+    <string name="distance_measurement_save_gpx">Sarba comente GPX</string>
+    <string name="distance_measurement_load_gpx">Aberi GPX esistente</string>
+    <string name="wait_current_task_finished">Pro piaghere iseta sa fine de su traballu presente</string>
+    <string name="use_kalman_filter_compass_descr">Imprea su filtru pro istransire traviaduras de sa bùssola</string>
+    <string name="use_kalman_filter_compass">Impreu de su filtru de Kalman</string>
+    <string name="access_mark_final_location_first">Modalidade de atzessu fatzilidadu: Isseberare in antis sa destinatzione</string> 
+    <string name="use_magnetic_sensor_descr">Imprea su sensore magneticu pro determinare su balore de sa bùssola imbetzes de su sensore de orientamentu</string>
+    <string name="use_magnetic_sensor">Imprea su sensore magneticu (bùssola)</string>
+    <string name="other_location">Àtera</string>
+    <string name="files_limit">tenes galu %1$d documentos</string>
+    <string name="available_downloads_left">Disponìbiles %1$d documentos da isgarrigare</string>
+    <string name="install_paid">Versione cumprida</string>
+    <string name="cancel_route">Burra s'àndala</string>
+    <string name="cancel_navigation">Firma su nàvigu</string>
+    <string name="clear_destination">Burra sa destinatzione</string>
+    <string name="download_using_mobile_internet">Sa connessione WiFi non est ativa. Boles sighire a iscarrigare impreande sa connessione internet atuale?</string>
+    <string name="street_name">Istrada</string>
+	<string name="hno">Nùmeru tzivicu</string>
+    <string name="website">Giassu web</string>
+	<string name="phone">Telèfonu</string>
+    <string name="tip_recent_changes_1_3_t">Mudas in sa 1.3:
+        \n\t* Torrau a pònnere su suportu pro tauleddas (tablets) e ischermos mannos
+        \n\t* Tema Holo (personalizatzione)
+        \n\t* Prus impostaduras pro s'istabilizatzione de sa bùssola
+        \n\t* Su butone a manca in s'ischermada de sa mapa remplesa su butone "Menu"
+    </string>
+    <string name="monitoring_settings">Servitzios de registratzione e modalidade "a reposu"</string>
+    <string name="monitoring_settings_descr">Cunfigura comente registrare biàgios e ativare sa modalidade "a reposu"</string>
     </resources>
