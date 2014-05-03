@@ -1764,4 +1764,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="interrupt_music_descr">Interrompi la musica per fare gli annunci</string>
 	<string name="share_route_as_gpx">Condividi il percorso come file GPX</string>
 	<string name="share_route_subject">Percorso condiviso tramite OsmAnd</string>
-	</resources>
+	<string name="navigation_intent_invalid">Formato non valido: %s</string>
+</resources>
