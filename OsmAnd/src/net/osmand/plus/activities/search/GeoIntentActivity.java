@@ -1,5 +1,6 @@
 package net.osmand.plus.activities.search;
 
+import android.os.AsyncTask;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.util.ArrayList;
@@ -7,6 +8,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
@@ -42,59 +45,110 @@ import android.widget.Toast;
 
 public class GeoIntentActivity extends OsmandListActivity {
 
-	private ProgressDialog progressDlg;
+    private ProgressDialog progressDlg;
 	private LatLon location;
 	private ProgressDialog startProgressDialog;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.search_address_offline);
-		getSupportActionBar().setTitle(R.string.search_osm_offline);
-		startProgressDialog = new ProgressDialog(this);
-		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
-		location = getMyApplication().getSettings().getLastKnownMapLocation();
-		final Intent intent = getIntent();
-		if (intent != null) {
-			progressDlg = ProgressDialog.show(this,
-					getString(R.string.searching),
-					getString(R.string.searching_address));
-			final Thread searcher = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						while(getMyApplication().isApplicationInitializing()) {
-							Thread.sleep(200);
-						}
-						Collection<? extends MapObject> results = extract(
-								intent.getData()).execute();
-						// show the first result on map, and populate the list!
-						if (!results.isEmpty()) {
-							showResult(0, new ArrayList<MapObject>(results));
-						} else {
-							showResult(R.string.search_nothing_found, null);
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-						showResult(R.string.error_doing_search, null);
-					} finally {
-						if (progressDlg != null) {
-							progressDlg.dismiss();
-						}
-					}
-				}
-			}, "SearchingAddress");
-			searcher.start();
-			progressDlg.setOnCancelListener(new OnCancelListener() {
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					searcher.interrupt();
-				}
-			});
-			progressDlg.setCancelable(true);
-		}
-		// finish();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.search_address_offline);
+        getSupportActionBar().setTitle(R.string.search_osm_offline);
+        startProgressDialog = new ProgressDialog(this);
+        getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
+        location = getMyApplication().getSettings().getLastKnownMapLocation();
+
+        final Intent intent = getIntent();
+        if (intent != null)
+        {
+            final ProgressDialog progress = ProgressDialog.show(GeoIntentActivity.this, getString(R.string.searching), getString(R.string.searching_address));
+            final GeoIntentTask task = new GeoIntentTask(progress, intent);
+
+            progress.setOnCancelListener(new OnCancelListener()
+            {
+                @Override
+                public void onCancel(DialogInterface dialog)
+                {
+                    task.cancel(true);
+                }
+            });
+            progress.setCancelable(true);
+
+            task.execute();
+        }
+    }
+
+    private class GeoIntentTask extends AsyncTask<Void,Void, ExecutionResult>
+    {
+        private final ProgressDialog progress;
+        private final Intent intent;
+
+        private GeoIntentTask(final ProgressDialog progress, final Intent intent)
+        {
+            this.progress = progress;
+            this.intent = intent;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+        }
+
+        @Override
+        protected ExecutionResult doInBackground(Void... nothing)
+        {
+            try
+            {
+                while (getMyApplication().isApplicationInitializing())
+                {
+                    Thread.sleep(200);
+                }
+                return extract(intent.getScheme(), intent.getData()).execute();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(ExecutionResult result)
+        {
+            progress.dismiss();
+            if (result != null)
+            {
+                if (result.isEmpty())
+                {
+                    AccessibleToast.makeText(GeoIntentActivity.this, getString(R.string.search_nothing_found), Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    if (result.hasZoom())
+                    {
+                        getMyApplication().getSettings().setLastKnownMapZoom(result.getZoom());
+                    }
+
+                    final List<MapObject> places = new ArrayList<MapObject>(result.getMapObjects());
+					setListAdapter(new MapObjectAdapter(places));
+					if (places.size() == 1)
+                    {
+                        onListItemClick(
+                                getListView(),
+                                getListAdapter().getView(0, null, null),
+                                0,
+                                getListAdapter().getItemId(0)
+                        );
+                    }
+                }
+            }
+            else
+            {
+                AccessibleToast.makeText(GeoIntentActivity.this, getString(R.string.search_offline_geo_error, intent.getData()), Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
 
 	@Override
 	protected Dialog onCreateDialog(int id) {
@@ -104,26 +158,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		return super.onCreateDialog(id);
 	}
 	
-	private void showResult(final int warning, final List<MapObject> places) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				if (places == null) {
-					AccessibleToast.makeText(GeoIntentActivity.this, getString(warning),
-							Toast.LENGTH_LONG).show();
-				} else {
-					setListAdapter(new MapObjectAdapter(places));
-					if (places.size() == 1) {
-						onListItemClick(getListView(), getListAdapter()
-								.getView(0, null, null), 0, getListAdapter()
-								.getItemId(0));
-					}
-				}
-			}
-		});
-	}
-
-	class MapObjectAdapter extends ArrayAdapter<MapObject> {
+	private class MapObjectAdapter extends ArrayAdapter<MapObject> {
 
 		public MapObjectAdapter(List<MapObject> places) {
 			super(GeoIntentActivity.this,
@@ -190,74 +225,117 @@ public class GeoIntentActivity extends OsmandListActivity {
 	}
 
 	/**
-	 * geo:latitude,longitude<BR>
-	 * geo:latitude,longitude?z=zoom<BR>
-	 * geo:0,0?q=my+street+address<BR>
-	 * geo:0,0?q=business+near+city
-	 * 
-	 * @param data
+     * Extracts information from geo and map intents:
+     *
+	 * geo:47.6,-122.3<br/>
+     * geo:47.6,-122.3?z=11<br/>
+     * geo:0,0?q=34.99,-106.61(Treasure)<br/>
+     * geo:0,0?q=1600+Amphitheatre+Parkway%2C+CA<br/>
+	 *
+	 * @param scheme The intent scheme
+	 * @param data The intent uri
 	 * @return
 	 */
-	private MyService extract(Uri data) {
-		if ("http".equalsIgnoreCase(data.getScheme()) && "maps.google.com".equals(data.getHost())) {
-			String q = null;
-			String parameter = data.getQueryParameter("q");
-			if (parameter == null) {
-				parameter = data.getQueryParameter("daddr");
-			}
-			if(parameter != null) {
-			    q = parameter.split(" ")[0];	
-			}
-			if (q.indexOf(',') != -1) {
-				int i = q.indexOf(',');
-				String lat = q.substring(0, i);
-				String lon = q.substring(i + 1);
-				if (lat.indexOf(':') != -1) {
-					i = lat.indexOf(':');
-					lat = lat.substring(i + 1);
-				}
-				try {
-					double llat = Double.parseDouble(lat.trim());
-					double llon = Double.parseDouble(lon.trim());
-					return new GeoPointSearch(llat, llon);
-				} catch (NumberFormatException e) {
-					showErrorMessage(q);
-				}
-			} else {
-				showErrorMessage(q);
-			}
-		} else if (data.getSchemeSpecificPart().indexOf("0,0?") != -1) {
-			// it is 0,0? that means a search
-			return new GeoAddressSearch(data.getQuery());
-		} else {
-			String geo = data.getSchemeSpecificPart();
-			if(geo == null) {
-				showErrorMessage("");
-			} else {
-				int latIndex = geo.indexOf(',');
-				if (latIndex > 0) {
-					int lonIndex = geo.indexOf(',', latIndex + 1);
-					int altIndex = geo.indexOf(';', latIndex + 1);
-					int paramIndex = geo.indexOf('?', latIndex + 1);
-					paramIndex = paramIndex > 0 ? paramIndex : geo.length();
-					altIndex = altIndex > 0 && altIndex < paramIndex ? altIndex : paramIndex;
-					lonIndex = lonIndex > 0 && lonIndex < altIndex ? lonIndex : altIndex;
-					try {
-						double lat = Double.parseDouble(geo.substring(0, latIndex).trim());
-						double lon = Double.parseDouble(geo.substring(latIndex + 1, lonIndex).trim());
-						return new GeoPointSearch(lat, lon);
-					} catch (NumberFormatException e) {
-						showErrorMessage(geo);
-					}
-				} else {
-					showErrorMessage(geo);
-				}
-			}
-		}
-		return new Empty();
-	}
+    private MyService extract(final String scheme, final Uri data)
+    {
+        if ("http".equals(scheme))
+        {
+            String q = null;
+            String parameter = data.getQueryParameter("q");
+            if (parameter == null)
+            {
+                parameter = data.getQueryParameter("daddr");
+            }
+            if (parameter != null)
+            {
+                q = parameter.split(" ")[0];
+            }
+            if (q.indexOf(',') != -1)
+            {
+                int i = q.indexOf(',');
+                String lat = q.substring(0, i);
+                String lon = q.substring(i + 1);
+                if (lat.indexOf(':') != -1)
+                {
+                    i = lat.indexOf(':');
+                    lat = lat.substring(i + 1);
+                }
+                try
+                {
+                    double llat = Double.parseDouble(lat.trim());
+                    double llon = Double.parseDouble(lon.trim());
+                    return new GeoPointSearch(llat, llon);
+                }
+                catch (NumberFormatException e)
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        if ("geo".equals(scheme))
+        {
+            //geo:
+            final String schemeSpecific = data.getSchemeSpecificPart();
+            if (schemeSpecific == null)
+            {
+                return null;
+            }
+            if (schemeSpecific.startsWith("0,0?q="))
+            {
+                //geo:0,0?q=34.99,-106.61(Treasure)
+                //geo:0,0?q=1600+Amphitheatre+Parkway%2C+CA
+                final String query = schemeSpecific.substring("0,0?q=".length());
 
-	private final class GeoAddressSearch implements MyService {
+                final Matcher matcher = Pattern.compile("([\\-0-9.]+),([\\-0-9.]+)(?:,[\\-0-9.]+)?\\((.+?)\\)").matcher(query);
+                if (matcher.matches())
+                {
+                    final double lat = Double.valueOf(matcher.group(1));
+                    final double lon = Double.valueOf(matcher.group(2));
+                    final String name = matcher.group(3);
+
+                    return new GeoPointSearch(lat, lon, name);
+                }
+                else
+                {
+                    //we suppose it's a search
+                    return new GeoAddressSearch(query);
+                }
+            }
+            else
+            {
+                //geo:47.6,-122.3
+                //geo:47.6,-122.3?z=11
+                //allow for http://tools.ietf.org/html/rfc5870 (geo uri) , just ignore everything after ';'
+                final String pattern = "([\\-0-9.]+),([\\-0-9.]+)(?:,([\\-0-9.]+))?(?:\\?z=([0-9]+))?(?:;.*)?";
+
+                final Matcher matcher = Pattern.compile(pattern).matcher(schemeSpecific);
+                if (matcher.matches())
+                {
+                    final double lat = Double.valueOf(matcher.group(1));
+                    final double lon = Double.valueOf(matcher.group(2));
+                    if (matcher.group(4) == null)
+                    {
+                        return new GeoPointSearch(lat, lon);
+                    }
+                    else
+                    {
+                        return new GeoPointSearch(lat, lon, Integer.valueOf(matcher.group(4)));
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+
+    private final class GeoAddressSearch implements MyService {
 		private List<String> elements;
 
 		public GeoAddressSearch(String query) {
@@ -318,14 +396,14 @@ public class GeoIntentActivity extends OsmandListActivity {
 		}
 
 		@Override
-		public Collection<? extends MapObject> execute() {
+		public ExecutionResult execute() {
 			if (elements.isEmpty()) {
-				return Collections.emptyList();
+				return ExecutionResult.EMPTY;
 			}
 			List<String> q = new ArrayList<String>(elements);
 			MapObject geo = checkGeoPoint();
 			if(geo != null) {
-				return Collections.singleton(geo);
+				return new ExecutionResult(Collections.singleton(geo));
 			}
 
 			// now try to search the City, Street, Etc.. if Street is not found,
@@ -357,7 +435,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 				}
 			}
 			if(cityIds.isEmpty()) {
-				return allStreets;
+				return new ExecutionResult(allStreets);
 			}
 			final List<MapObject> connectedStreets = new ArrayList<MapObject>();
 			Iterator<Street> p = allStreets.iterator();
@@ -382,16 +460,16 @@ public class GeoIntentActivity extends OsmandListActivity {
 				List<MapObject> all = new ArrayList<MapObject>();
 				all.addAll(cityIds.valueCollection());
 				all.addAll(allStreets);
-				return all;
+				return new ExecutionResult(all);
 			} else {
 				// add all other results to connected streets
 				connectedStreets.addAll(cityIds.valueCollection());
-				return connectedStreets;
+				return new ExecutionResult(connectedStreets);
 			}
 		}
 
 		private Collection<RegionAddressRepository> limitSearchToCountries(List<String> q) {
-			ResourceManager resourceManager = resourceManager();
+			ResourceManager resourceManager = getMyApplication().getResourceManager();
 			List<RegionAddressRepository> foundCountries = new ArrayList<RegionAddressRepository>();
 			RegionAddressRepository country;
 			Iterator<String> it = q.iterator();
@@ -414,61 +492,99 @@ public class GeoIntentActivity extends OsmandListActivity {
 
 	}
 
-	private ResourceManager resourceManager() {
-		return getMyApplication().getResourceManager();
-	}
+    private static class GeoPointSearch implements MyService {
+		private final  MapObject point;
+        private final int zoom;
 
-	
+        public GeoPointSearch(double lat , double lon)
+        {
+            this(lat, lon, ExecutionResult.NO_ZOOM);
+        }
 
-	private void showErrorMessage(final String geo) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				AccessibleToast.makeText(GeoIntentActivity.this,
-						getString(R.string.search_offline_geo_error, geo),
-						Toast.LENGTH_LONG);
-			}
-		});
-	}
-	
-	private static class Empty implements MyService {
+        public GeoPointSearch(double lat , double lon, int zoom)
+        {
+            this(lat, lon, "Lat: " + lat + ",Lon: " + lon, zoom);
+        }
 
-		@Override
-		public Collection<MapObject> execute() {
-			return Collections.emptyList();
-		}
-		
-	}
-	
-	private static class GeoPointSearch implements MyService {
-		private MapObject point;
-		/**
-		 * geo:latitude,longitude geo:latitude,longitude?z=zoom
-		 */
-		public GeoPointSearch(double lat , double lon ) {
-			// TODO zoom is omited for now
-			point = new Amenity();
-			((Amenity)point).setType(AmenityType.USER_DEFINED);
-			((Amenity)point).setSubType("");
-			point.setLocation(lat, lon);
-			point.setName("Lat: " + lat + ",Lon:" + lon);
+        public GeoPointSearch(double lat , double lon, String name )
+        {
+            this(lat, lon, name,ExecutionResult.NO_ZOOM);
+        }
+
+        public GeoPointSearch(double lat , double lon, String name, int zoom )
+        {
+			final Amenity amenity = new Amenity();
+            amenity.setLocation(lat, lon);
+            amenity.setName(name);
+            amenity.setType(AmenityType.USER_DEFINED);
+            amenity.setSubType("");
+
+            this.point = amenity;
+            this.zoom = zoom;
 		}
 
-
-		@Override
-		public Collection<? extends MapObject> execute() {
+        @Override
+		public ExecutionResult execute() {
 			if (point != null) {
-				return Collections.singletonList(point);
+				return new ExecutionResult(Collections.singletonList(point), zoom);
 			} else {
-				return Collections.emptyList();
+				return ExecutionResult.EMPTY;
 			}
 		}
 
 	}
 
-	private interface MyService {
+    private static class ExecutionResult
+    {
+        public static final int NO_ZOOM = -1;
+        public static final ExecutionResult EMPTY = new ExecutionResult(new ArrayList<MapObject>(), NO_ZOOM);
 
-		public Collection<? extends MapObject> execute();
+        private final Collection<? extends MapObject> mapObjects;
+        private final int zoom;
+
+        public ExecutionResult(final Collection<? extends MapObject> mapObjects)
+        {
+            this(mapObjects, NO_ZOOM);
+        }
+
+        public ExecutionResult(final Collection<? extends MapObject> mapObjects, final int zoom)
+        {
+            this.mapObjects = mapObjects;
+            this.zoom = zoom;
+        }
+
+        public boolean isEmpty()
+        {
+            return mapObjects.isEmpty();
+        }
+
+        public boolean hasZoom()
+        {
+            return zoom != NO_ZOOM;
+        }
+
+        public Collection<? extends MapObject> getMapObjects()
+        {
+            return mapObjects;
+        }
+
+        public int getZoom()
+        {
+            return zoom;
+        }
+
+        @Override
+        public String toString()
+        {
+            return "ExecutionResult{" +
+                    "mapObjects=" + mapObjects +
+                    ", zoom=" + zoom +
+                    '}';
+        }
+    }
+
+	private static interface MyService
+    {
+		public ExecutionResult execute();
 	}
-
 }
