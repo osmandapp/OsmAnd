@@ -276,7 +276,7 @@ public class GeoIntentActivity extends OsmandListActivity {
                 return null;
             }
         }
-        if ("geo".equals(scheme))
+        if ("geo".equals(scheme) || "osmand.geo".equals(scheme))
         {
             //geo:
             final String schemeSpecific = data.getSchemeSpecificPart();

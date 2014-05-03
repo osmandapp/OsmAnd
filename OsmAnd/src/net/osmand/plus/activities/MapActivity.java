@@ -342,7 +342,7 @@ public class MapActivity extends AccessibleActivity  {
                     {
                         showImportedGpx(data.getPath());
                     }
-                    else if("google.navigation".equals(scheme))
+                    else if("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme))
                     {
                         final String schemeSpecificPart = data.getSchemeSpecificPart();
 
