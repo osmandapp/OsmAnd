@@ -14,7 +14,7 @@
     <string name="osmo_settings">OSMo (OpenStreetMap-Monitoring)</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Advanced Live Monitoring with lots of features for remote control http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (Advanced Live Monitoring)</string>
-    <string name="osmo_settings">OSMo settings</string>
+    <string name="osmo_settings">OSMo</string>
    	<string name="always_center_position_on_map">Display position always in center</string>
     <string name="voice_pref_title">Voice</string>
     <string name="misc_pref_title">Miscallenious</string>
