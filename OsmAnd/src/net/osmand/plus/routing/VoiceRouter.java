@@ -4,6 +4,7 @@ package net.osmand.plus.routing;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
@@ -29,7 +30,7 @@ public class VoiceRouter {
 	private final RoutingHelper router;
 	private boolean mute = false;
 	private CommandPlayer player;
-	
+    private final OsmandSettings settings;
  
 	private int currentStatus = STATUS_UNKNOWN;
 	private boolean playedAndArriveAtTarget = false;
@@ -60,10 +61,15 @@ public class VoiceRouter {
 	private RouteDirectionInfo nextRouteDirection;
 	private Term empty;
 
+    //remember when last announcement was made
+    private long lastAnnouncement = 0;
 
-	public VoiceRouter(RoutingHelper router, CommandPlayer player) {
+
+	public VoiceRouter(RoutingHelper router, final OsmandSettings settings, CommandPlayer player) {
 		this.router = router;
 		this.player = player;
+        this.settings = settings;
+
 		empty = new Struct("");
 	}
 	
@@ -95,6 +101,7 @@ public class VoiceRouter {
 		if(player == null || mute){
 			return null;
 		}
+        lastAnnouncement = System.currentTimeMillis();
 		return player.newCommandBuilder();
 	}
 	
@@ -279,10 +286,17 @@ public class VoiceRouter {
 				|| info.directionInfo.distance == 0;
 		return in || target;
 	}
-	
-	
-	
-	/**
+
+	private boolean needsInforming() {
+		final Integer repeat = settings.KEEP_INFORMING.get();
+		if (repeat == null || repeat == 0) return false;
+
+		final long notBefore = lastAnnouncement + repeat * 60 * 1000L;
+
+		return System.currentTimeMillis() > notBefore;
+	}
+
+    /**
 	 * Updates status of voice guidance 
 	 * @param currentLocation 
 	 */
@@ -297,7 +311,6 @@ public class VoiceRouter {
 			speed = Math.max(currentLocation.getSpeed(), speed);
 		}
 
-		
 		NextDirectionInfo nextInfo = router.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
         RouteSegmentResult currentSegment = router.getCurrentSegmentResult();
 		if (nextInfo.directionInfo == null) {
@@ -314,11 +327,19 @@ public class VoiceRouter {
 			playGoAheadDist = 0;
 		}
 
-		if (!repeat && (dist == 0 || currentStatus == STATUS_TOLD)) {
-			// nothing said possibly that's wrong case we should say before that
-			// however it should be checked manually ?
-			return;
+		if (!repeat) {
+			if (dist == 0) {
+				return;
+			} else if (needsInforming()) {
+				playGoAhead(dist, getSpeakableStreetName(currentSegment, next));
+				return;
+			} else if (currentStatus == STATUS_TOLD) {
+				// nothing said possibly that's wrong case we should say before that
+				// however it should be checked manually ?
+				return;
+			}
 		}
+
 		// say how much to go if there is next turn is a bit far
 		if (currentStatus == STATUS_UNKNOWN) {
 			if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3)) {

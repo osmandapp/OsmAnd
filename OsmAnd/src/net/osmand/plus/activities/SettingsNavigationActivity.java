@@ -64,7 +64,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		
 		
 		registerBooleanPreference(settings.SNAP_TO_ROAD, screen);
-		
+
 		Integer[] intValues = new Integer[] { 0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
 		entries = new String[intValues.length];
 		entries[0] = getString(R.string.auto_follow_route_never);
@@ -72,15 +72,23 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			entries[i] = (int) intValues[i] + " " + getString(R.string.int_seconds);
 		}
 		registerListPreference(settings.AUTO_FOLLOW_ROUTE, screen, entries, intValues);
-		
-		
-		
+
 		entries = new String[AutoZoomMap.values().length];
 		for(int i=0; i<entries.length; i++){
 			entries[i] = getString(AutoZoomMap.values()[i].name);
 		}
 		registerListPreference(settings.AUTO_ZOOM_MAP, screen, entries, AutoZoomMap.values());
 		
+        //keep informing option:
+        Integer[] keepInformingValues = new Integer[]{0, 1, 2, 3, 5, 7, 10, 15, 20, 25, 30};
+        String[] keepInformingNames = new String[keepInformingValues.length];
+        keepInformingNames[0] = getString(R.string.keep_informing_never);
+        for (int i = 1; i < keepInformingValues.length; i++)
+        {
+            keepInformingNames[i] = keepInformingValues[i] + " " + getString(R.string.int_min);
+        }
+        registerListPreference(settings.KEEP_INFORMING, screen, keepInformingNames, keepInformingValues);
+
 		autoZoomMapPreference = (ListPreference) screen.findPreference(settings.AUTO_ZOOM_MAP.getId());
 		autoZoomMapPreference.setOnPreferenceChangeListener(this);
 
