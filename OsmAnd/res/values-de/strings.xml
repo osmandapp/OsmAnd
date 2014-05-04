@@ -1736,4 +1736,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="localization_pref_title">Übersetzung</string>
     <string name="interrupt_music">Musikwiedergabe unterbrechen</string>
 	<string name="navigation_intent_invalid">Ungültiges Format: %s</string>
-</resources>
+<string name="osmo_settings_uuid">Geräte-ID</string>
+    <string name="osmo_settings_descr">Anzeigen der Geräteschlüssel und anderen Überwachsungs-Einstellungen </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Überwachung - Erweiterte Live-Überwachung mit vielen Funktionen zur Steuerung aus der Ferne http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Erweiterte Live-Überwachung)</string>
+    <string name="osmo_settings">OSMo-Einstellungen</string>
+   	</resources>
