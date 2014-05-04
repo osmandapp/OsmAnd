@@ -1,4 +1,4 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.monitoring;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -13,7 +13,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;
