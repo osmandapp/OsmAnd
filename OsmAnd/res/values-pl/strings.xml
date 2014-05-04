@@ -1706,4 +1706,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="share_route_as_gpx">Udostępnij trasę jako plik GPX</string>
 	<string name="share_route_subject">Trasa udostępniona przez OsmAnd</string>
 	<string name="navigation_intent_invalid">Nieprawidłowy format : %s</string>
-</resources>
+<string name="osmo_settings_uuid">Unikalny identyfikator urządzenia</string>
+    <string name="osmo_settings_descr">Sprawdź unikalny klucz rejestracyjny urządzenia i inne ustawienia monitorowania </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Zaawansowany Monitoring na Żywo z wieloma funkcjami do zdalnego zarządzania na http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Zaawansowany Monitoring na Żywo)</string>
+    <string name="osmo_settings">OSMo</string>
+   	</resources>
