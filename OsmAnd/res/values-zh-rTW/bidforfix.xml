@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="bidforfix_loading">載入中</string>
     <string name="bidforfix_supporters">%1$d 支援者</string>
-  <string name="bidforfix_funded">已找到: %d%%</string>    
+  <string name="bidforfix_funded">已找到：%d%%</string>    
 </resources>
