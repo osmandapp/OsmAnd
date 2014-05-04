@@ -8,7 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class OsMoService {
-	private static String TRACKER_URL = "ws://srv.osmo.mobi";
+	private static String TRACKER_URL = "ws://srv.osmo.mobi:4242";
 	private URLConnection conn;
 	private OutputStreamWriter out;
 	private BufferedReader in;
@@ -37,8 +37,8 @@ public class OsMoService {
 		return in.readLine();
 	}
 	
-	public void sendCoordinate(double lat, double lon, float hdop, float alt, float speed, float bearing) throws IOException {
-		sendCommand("p|"+lat+":"+lon+":"+hdop+":"+alt+":"+speed+":"+bearing);
+	public String sendCoordinate(double lat, double lon, float hdop, float alt, float speed, float bearing) throws IOException {
+		return sendCommand("p|"+lat+":"+lon+":"+hdop+":"+alt+":"+speed+":"+bearing);
 	}
 
 	public String deactivate() throws IOException {
