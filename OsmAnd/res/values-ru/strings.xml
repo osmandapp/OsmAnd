@@ -1545,4 +1545,10 @@
     <string name="interrupt_music_descr">Прерывание музыки во время объявления</string>
 	<string name="interrupt_music">Прерывание музыки</string>
 	<string name="share_route_as_gpx">Поделиться маршрутом используя файл GPX</string>
-	</resources>
+	<string name="osmo_settings_uuid">Уникальный ID устройства</string>
+    <string name="osmo_settings_descr">Просмотр уникального регистрационного ключа устройства и прочих специфичных настроек мониторинга </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Продвинутый живой мониторинг)</string>
+    <string name="osmo_settings">Настройки OSMo</string>
+   	<string name="navigation_intent_invalid">Неправильный формат: %s</string>
+</resources>
