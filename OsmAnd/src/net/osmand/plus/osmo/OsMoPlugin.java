@@ -27,7 +27,7 @@ import android.provider.Settings;
 public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlServices {
 
 	private OsmandApplication app;
-	public static final String ID = "osmand.osmodroid.v2";
+	public static final String ID = "osmand.osmo";
 	private static final Log log = PlatformUtil.getLog(OsMoPlugin.class);
 	private OsMoService service;
 	
@@ -68,10 +68,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	}
 	
 	@Override
-	public void addMonitorActions(ContextMenuAdapter qa, MonitoringInfoControl li, OsmandMapTileView view) {
+	public void addMonitorActions(ContextMenuAdapter qa, MonitoringInfoControl li, final OsmandMapTileView view) {
 		final boolean off = service.isActive();
-		qa.item(off ? R.string.osmodroid_mode_off : R.string.osmodroid_mode_on
-)
+		qa.item(off ? R.string.osmodroid_mode_off : R.string.osmodroid_mode_on)
 				.icon(off ? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big)
 				.listen(new OnContextMenuClick() {
 
@@ -92,6 +91,21 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 					
 				}).reg();
+		qa.item("Test (send)").
+		icons(R.drawable.ic_action_grefresh_dark, R.drawable.ic_action_grefresh_light).		listen(new OnContextMenuClick() {
+
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				try {
+					String response = service.sendCoordinate(view.getLatitude(), view.getLongitude(), 0, 0, 0, 0);
+					app.showToastMessage(response);
+				} catch (Exception e) {
+					app.showToastMessage(app.getString(R.string.error_io_error) + ": " + e.getMessage());
+				}
+			}
+
+			
+		}).reg();
 	}
 	
 	@Override
