@@ -1723,4 +1723,9 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	<string name="share_route_as_gpx">Deel route als GPX bestand</string>
 	<string name="share_route_subject">Route gedeeld via OsmAnd</string>
 	<string name="navigation_intent_invalid">ongeldig formaat : %s</string>
-</resources>
+<string name="osmo_settings_uuid">Uniek device-ID</string>
+    <string name="osmo_settings_descr">Bekijk uniek device-ID en andere instellingen voor monitoring </string>
+    <string name="osmo_plugin_description">OpenStreetmap-monitoring - geavanceerde live monitoring met veel mogelijkheden tot afstandbediening http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (geavanceerde live monitoring)</string>
+    <string name="osmo_settings">OSMO-instellingen</string>
+   	</resources>
