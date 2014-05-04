@@ -1734,4 +1734,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="share_route_as_gpx">以 GPX 檔案分享路線</string>
 	<string name="share_route_subject">藉由 OsmAnd 分享路線</string>
 	<string name="navigation_intent_invalid">無效的格式：%s</string>
-</resources>
+<string name="osmo_settings_uuid">專有的裝置 ID</string>
+    <string name="osmo_plugin_name">OSMo (進階即時監視)</string>
+    <string name="osmo_settings">OSMo 設定</string>
+   	<string name="osmo_settings_descr">檢視專有的裝置註冊金鑰和其它監視的具體設定 </string>
+    <string name="osmo_plugin_description">OpenStreetMap-監視 - 進階的即時監視，有很多的功能進行遠端控制 http://osmo.mobi</string>
+    </resources>
