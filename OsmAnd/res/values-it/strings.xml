@@ -1765,4 +1765,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="share_route_as_gpx">Condividi il percorso come file GPX</string>
 	<string name="share_route_subject">Percorso condiviso tramite OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato non valido: %s</string>
-</resources>
+<string name="osmo_settings_uuid">ID unico del dispositivo</string>
+    <string name="osmo_settings_descr">Mostra la chiave di registrazione unica del dispositivo e altre impostazioni di monitoraggio specifiche </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoraggio - Monitoraggio avanzato in diretta con molte funzioni per il controllo remoto http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Monitoraggio Avanzato in Diretta)</string>
+    <string name="osmo_settings">Impostazioni OSMo</string>
+   	</resources>
