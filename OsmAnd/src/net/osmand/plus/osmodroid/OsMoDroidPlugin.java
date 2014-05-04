@@ -161,12 +161,12 @@ public class OsMoDroidPlugin extends OsmandPlugin implements MonitoringInfoContr
 
 	@Override
 	public String getDescription() {
-		return app.getString(R.string.osmodroid_plugin_description);
+		return app.getString(R.string.osmodroid_plugin_description) + "\n External application.";
 	}
 
 	@Override
 	public String getName() {
-		return app.getString(R.string.osmodroid_plugin_name);
+		return app.getString(R.string.osmodroid_plugin_name) + " (external)";
 	}
 
 	// test

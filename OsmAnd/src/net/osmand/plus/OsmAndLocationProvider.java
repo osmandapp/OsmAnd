@@ -705,7 +705,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			scheduleCheckIfGpsLost(location);
 		}
 		app.getSavingTrackHelper().updateLocation(location);
-		app.getLiveMonitoringHelper().updateLocation(location);
+		OsmandPlugin.updateLocationPlugins(location);
 		// 2. accessibility routing
 		navigationInfo.setLocation(location);
 		
@@ -736,7 +736,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		// 1. Logging services
 		if (location != null) {
 			app.getSavingTrackHelper().updateLocation(location);
-			app.getLiveMonitoringHelper().updateLocation(location);
+			OsmandPlugin.updateLocationPlugins(location);
 		}
 		// 2. accessibility routing
 		navigationInfo.setLocation(location);

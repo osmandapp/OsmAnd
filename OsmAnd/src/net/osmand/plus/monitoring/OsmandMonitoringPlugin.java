@@ -1,5 +1,6 @@
 package net.osmand.plus.monitoring;
 
+import net.osmand.Location;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -36,10 +37,17 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	private OsmandSettings settings;
 	private OsmandApplication app;
 	private BaseMapWidget monitoringControl;
+	private LiveMonitoringHelper liveMonitoringHelper;
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {
 		this.app = app;
+		liveMonitoringHelper = new LiveMonitoringHelper(app);
 		ApplicationMode.regWidget("monitoring", (ApplicationMode[])null);
+	}
+	
+	@Override
+	public void updateLocation(Location location) {
+		liveMonitoringHelper.updateLocation(location);
 	}
 
 	@Override

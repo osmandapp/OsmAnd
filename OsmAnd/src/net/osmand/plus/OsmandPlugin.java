@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.preference.PreferenceScreen;
 import net.osmand.IProgress;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.plus.activities.LocalIndexInfo;
@@ -17,6 +18,7 @@ import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.osmo.OsMoPlugin;
 import net.osmand.plus.osmodroid.OsMoDroidPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
@@ -75,6 +77,7 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new DistanceCalculatorPlugin(app));
 		installedPlugins.add(new AudioVideoNotesPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
+		installedPlugins.add(new OsMoPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
 		
 		
@@ -130,7 +133,9 @@ public abstract class OsmandPlugin {
 	
 	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {}
 	
-	public void loadLocalIndexes(List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {};
+	public void loadLocalIndexes(List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {}
+	
+	public void updateLocation(Location location) {}
 	
 	public void contextMenuLocalIndexes(LocalIndexesActivity la, LocalIndexInfo info, ContextMenuAdapter adapter) {};
 	
@@ -298,6 +303,12 @@ public abstract class OsmandPlugin {
 				return true;
 		}
 		return false;
+	}
+
+	public static void updateLocationPlugins(net.osmand.Location location) {
+		for(OsmandPlugin p : installedPlugins){
+			p.updateLocation(location);
+		}		
 	}
 
 
