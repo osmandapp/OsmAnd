@@ -781,4 +781,9 @@
     <string name="lang_hr">Kroatisk</string>
     <string name="calculate_osmand_route_without_internet">Beregn OsmAnd rutesegment uten internett</string>
     <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd rute for første og siste rute segment</string>
-    </resources>
+    <string name="osmo_settings_uuid">Unik enhets-id</string>
+    <string name="osmo_settings_descr">Se unik registreringsnøkkel for enheten og andre spesifikke innstillinger </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Overvåkning - Avansert Live Overvåkning med mange funksjoner for fjernkontroll http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Avansert Live Overvåkning)</string>
+    <string name="osmo_settings">OSMo innstillinger</string>
+   	</resources>
