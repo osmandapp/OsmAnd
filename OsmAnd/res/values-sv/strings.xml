@@ -1448,4 +1448,9 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Översättning</string>
     <string name="navigation_intent_invalid">Ogiltigt format: %s</string>
-</resources>
+<string name="osmo_settings_uuid">Unikt enhets-id</string>
+    <string name="osmo_settings_descr">Visa unik registreringsnyckel för enheten och andra specifika inställningar </string>
+    <string name="osmo_plugin_name">OSMo(Advanced Live Monitoring)</string>
+    <string name="osmo_settings">OSMo-inställningar</string>
+   	<string name="osmo_plugin_description">OpenStreetMap-Monitoring - Avancerad Live Monitoring med mängder av funktioner för fjärrkontroll http://osmo.mobi</string>
+    </resources>
