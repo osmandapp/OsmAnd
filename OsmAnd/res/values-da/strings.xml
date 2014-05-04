@@ -1769,4 +1769,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="share_route_as_gpx">Del rute som GPX-fil</string>
 	<string name="share_route_subject">Ruten deles via OsmAnd</string>
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
-</resources>
+<string name="osmo_settings_uuid">Unik enheds-id</string>
+    <string name="osmo_settings_descr">Se unik enhed registrering nøglen og andre overvågningsaktiviteter specifikke indstillinger </string>
+    <string name="osmo_plugin_description">OpenStreetMap - Overvågning - Advanced Live- Overvågning med masser af funktioner til fjernbetjening http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OsMo (Advanced Live- overvågning)</string>
+    <string name="osmo_settings">OsMo indstillinger</string>
+   	</resources>
