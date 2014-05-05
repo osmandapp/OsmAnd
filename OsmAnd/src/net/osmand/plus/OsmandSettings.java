@@ -662,6 +662,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> SPEECH_RATE =
 		new FloatPreference("speech_rate", 1f).makeGlobal();
 	
+	public final OsmandPreference<Float> ARRIVAL_DISTANCE_FACTOR =
+		new FloatPreference("arrival_distance_factor", 1f).makeGlobal();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
 		new BooleanPreference("use_trackball_for_movements", true).makeGlobal();

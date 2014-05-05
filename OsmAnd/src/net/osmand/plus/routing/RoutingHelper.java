@@ -433,7 +433,7 @@ public class RoutingHelper {
 
 		// 3. check if destination found
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
-		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < POSITION_TOLERANCE * 1.5) {
+		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < (((float)settings.getApplicationMode().getArrivalDistance()) * settings.ARRIVAL_DISTANCE_FACTOR.get())) {
 			showMessage(app.getString(R.string.arrived_at_destination));
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			String description = targets.getPointNavigateDescription();
