@@ -515,11 +515,11 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		if(kr && left == 0) {
+		/*if(kr && left == 0) {
 			left = 1;
 		} else if(kl && right == 0) {
 			right = 1;
-		}
+		}*/
 		int current = currentSegm.getObject().getLanes();
 		if(currentSegm.getObject().getOneway() == 0) {
 			current = (current + 1) / 2;
@@ -531,6 +531,12 @@ public class RouteResultPreparation {
 			lanes = new int[current + left + right];
 			ls = current + left + right;
 			for(int it=0; it< ls; it++) {
+				if (kr && left == 0 && it == 0) {
+					lanes[it] = 1 | 16; // 1 | 10000
+				}
+				if (kl && right == 0 && it == ls - 1) {
+					lanes[it] = 1 | 24; // 1 | 11000
+				}
 				if(it < left || it >= left + current) {
 					lanes[it] = 0;
 				} else {
