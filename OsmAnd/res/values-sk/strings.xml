@@ -1746,4 +1746,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="lang_tr">Turecky</string>
 	<string name="lang_vi">Vietnamsky</string>
 	<string name="lang_cy">Welšsky</string>
-	</resources>
+	<string name="osmo_settings_uuid">Jedinečné ID zariadenia</string>
+    <string name="osmo_settings_descr">Zobraziť jedinečný registračný kľúč zariadenia a iné nastavenia pre monitorovanie </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitorovanie - Pokročilé sledovanie naživo s mnohými funkciami pre diaľkové ovládanie http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Pokročilé sledovanie naživo)</string>
+    <string name="osmo_settings">OSMo</string>
+   	</resources>
