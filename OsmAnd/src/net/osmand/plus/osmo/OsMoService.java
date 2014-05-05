@@ -4,25 +4,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.Socket;
 
 public class OsMoService {
-	private static String TRACKER_URL = "ws://srv.osmo.mobi:4242";
-	private URLConnection conn;
+	private static String TRACKER_SERVER = "srv.osmo.mobi";
+	private static int TRACKER_PORT = 4242;
 	private OutputStreamWriter out;
 	private BufferedReader in;
+	private Socket socket;
 
 	public boolean isActive() {
-		return conn != null;
+		return socket != null;
 	}
 
 	public String activate(String hash) throws IOException {
-		URL tu = new URL(TRACKER_URL);
-		conn = tu.openConnection();
-		conn.connect();
-		in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-		out = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
+		socket = new Socket(TRACKER_SERVER, TRACKER_PORT);
+		in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+		out = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 		
 		String t = sendCommand("auth|"+hash);
 		t += sendCommand("session_open");
@@ -45,7 +43,8 @@ public class OsMoService {
 		String t = sendCommand("session_close");
 		in.close();
 		out.close();
-		conn = null;
+		socket.close();
+		socket = null;
 		return t;
 	}
 
