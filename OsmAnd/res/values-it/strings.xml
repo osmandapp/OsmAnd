@@ -1770,4 +1770,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_plugin_description">OpenStreetMap-Monitoraggio - Monitoraggio avanzato in diretta con molte funzioni per il controllo remoto http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (Monitoraggio Avanzato in Diretta)</string>
     <string name="osmo_settings">Impostazioni OSMo</string>
-   	</resources>
+   	<string name="keep_informing_never">Mai</string>
+    <string name="keep_informing_descr">Annuncia a intervalli regolari le indicazioni di navigazione</string>
+    <string name="keep_informing">Ripeti le istruzioni di navigazione</string>
+	</resources>
