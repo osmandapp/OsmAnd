@@ -164,7 +164,7 @@
     <string name="dropbox_plugin_name">Убудова Dropbox</string>
     
     <string name="intermediate_points_change_order">Зьмяніць парадак</string>
-    <string name="srtm_paid_version_msg">Please consider to buy the Contour lines plugin in the Market to support further development.</string>
+    <string name="srtm_paid_version_msg">Калі ласка, падумайце пра набыццё ўбудовы Contour lines у Market для падтрымкі далейшай распрацоўкі.</string>
     <string name="srtm_paid_version_title">Убудова для падтрымкі гарызанталяў</string>
     <string name="av_def_action_choose">Выбар па запыце</string>
     <string name="av_def_action_video">Запіс відэа</string>
@@ -182,7 +182,7 @@
     <string name="recording_error">Адбылася памылка падчас запісу </string>
     <string name="recording_camera_not_available">Няма камэры</string>
     <string name="recording_is_recorded">Аўдыё/відэа запісваецца. Каб спыніць, націсьніце на віджэт AV.</string>
-    <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
+    <string name="recording_playing">Прайграецца аўдыё з абранага запісу.\n%1$s</string>
     <string name="recording_open_external_player">Адкрыць знешні прайгравальнік</string>
     <string name="recording_delete_confirm">Вы хочаце выдаліць гэты запіс?</string>
     <string name="tip_recent_changes_1_1_0_t">Changes in 1.1.0:
@@ -216,7 +216,7 @@
     <string name="index_srtm_parts">часткі</string>
     <string name="index_srtm_ele">Гарызанталі</string>
     <string name="srtm_plugin_description">Facilitates downloading offline contour lines and hillshades (\'Settings\' → \'Data Management\' → \'Download\' → Select desired map type).</string>
-    <string name="srtm_plugin_name">Contour lines plugin</string>
+    <string name="srtm_plugin_name">Дадатак Contour lines</string>
     <string name="download_select_map_types">Іншыя мапы</string>
     <string name="download_roads_only_item">Толькі дарогі</string>
     <string name="download_srtm_maps">Гарызанталі</string>
@@ -255,7 +255,7 @@
 	\n\t* Map does not lose position lock after interruptions
 	\n\t* Enable sleep mode service during navigation
     </string>
-    <string name="close_changeset">Close changeset</string>
+    <string name="close_changeset">Зачыніць мноства змен</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner application not installed. Search in Market?</string>
 	<string name="rendering_attr_roadColors_description">Select a road color scheme:</string>
 	<string name="rendering_attr_roadColors_name">Дарожная схема колераў</string>
@@ -317,7 +317,7 @@
 		\n\t* Fixed Arabic, Kannada scripting and RTL languages 
 	</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Мапы й навігацыя</string>
-	<string name="osmand_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
+	<string name="osmand_short_description_80_chars">Глабальная мабільная мапа і навігатар для аўтаномных і сеткавых мапаў OSM</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
@@ -519,14 +519,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* Entries in italic font indicate data de-activated on the device
 	</string>
 	<string name="filterpoi_activity">Стварыць фільтар цікавосткаў</string>
-	<string name="recalculate_route_to_your_location">Transport mode:</string>
-	<string name="select_navigation_mode">Select transport mode</string>
-	<string name="day_night_info_description">Sunrise: %1$s \nSunset: %2$s</string>
+	<string name="recalculate_route_to_your_location">Транспартны рэжым:</string>
+	<string name="select_navigation_mode">Выберыце від транспарту</string>
+	<string name="day_night_info_description">Узыход: %1$s \nЗаход: %2$s</string>
 	<string name="day_night_info">Day/night info</string>
 	<string name="map_widget_day_night">Мапа дзень/ноч</string>
 	<string name="map_widget_vector_attributes">Атрыбуты паказу:</string>
 	<string name="map_widget_renderer">Стыль мапы</string>
-	<string name="live_monitoring_mode_off">Start\n online tracking</string>
+	<string name="live_monitoring_mode_off">Старт\n адсочвання онлайн</string>
 	<string name="live_monitoring_mode_on">Stop\n online tracking</string>
 	<string name="position_on_map_descr">Choose location of position marker on the map</string>
 	<string name="position_on_map">Position marker</string>
@@ -536,17 +536,17 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="avoid_ferries">Пазьбягаць паромаў</string>
 	<string name="avoid_in_routing_title">Пазьбягаць…</string>
 	<string name="avoid_in_routing_descr">Пазьбягаць платных і грунтавых дарог, паромаў</string>
-	<string name="map_widget_fluorescent">Fluorescent routes</string>
+	<string name="map_widget_fluorescent">Люмінесцэнтныя маршруты</string>
 	<string name="map_widget_show_ruler">Лінейкі</string>
 	<string name="map_widget_appearance">Рознае:</string>
 	<string name="map_widget_view_direction">Кірунак погляду</string>
 	<string name="map_widget_transparent">Празрыстае афармленьне</string>
-	<string name="monitoring_mode_off">Record GPX</string>
-	<string name="monitoring_mode_on">Stop\n GPX rec.</string>
-	<string name="bg_service_sleep_mode_off">Enable\n sleep mode</string>
-	<string name="bg_service_sleep_mode_on">Stop\n sleep mode</string>
-	<string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
-	<string name="int_continuosly">Continuous</string>
+	<string name="monitoring_mode_off">Запіс GPX</string>
+	<string name="monitoring_mode_on">Спыніць\n запіс GPX</string>
+	<string name="bg_service_sleep_mode_off">Ўключыць\n спячы рэжым</string>
+	<string name="bg_service_sleep_mode_on">Спынiць\n рэжым сну</string>
+	<string name="gps_wakeup_interval">Iнтэрвал абуджэння GPS: %s</string>
+	<string name="int_continuosly">Бесперапынны</string>
 	<string name="screen_is_locked">To unlock screen press lock icon</string>
 	<string name="map_widget_top_text">Назва вуліцы</string>
 	<string name="map_widget_config">Сканфігураваць экран</string>
@@ -566,19 +566,19 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_next_turn">Паварот</string>
 	<string name="map_widget_next_turn_small">Невялікі паварот</string>
 	<string name="map_widget_next_next_turn">Наступны паварот</string>
-	<string name="map_widget_mini_route">Mini route map</string>
+	<string name="map_widget_mini_route">Міні карта маршруту</string>
 	<string name="bg_service_screen_lock">Блякаваць экран</string>
-	<string name="bg_service_screen_unlock">Unlock screen</string>
-	<string name="bg_service_screen_lock_toast">The screen is locked</string>
-	<string name="bg_service_interval">Set wake-up interval:</string>
+	<string name="bg_service_screen_unlock">Разблакіроўка экрана</string>
+	<string name="bg_service_screen_lock_toast">Экран заблакаваны</string>
+	<string name="bg_service_interval">Задайце інтэрвал абуджэння:</string>
 	<string name="show_cameras">Камэры хуткасьці</string>
 	<string name="show_traffic_warnings">Заўвагі руху</string>
 	<string name="avoid_toll_roads">Пазьбягаць платных дарог</string>
 	<string name="continue_follow_previous_route_auto">Папярэдняя навігацыя не была скончаная. Працягваць кіравацца ёю ? (%1$s сэкундаў)</string>
-	<string name="route_updated_loc_found">Route will be calculated once position is found</string>
-	<string name="osmand_parking_hours">Hours</string>
-	<string name="osmand_parking_minutes">Minutes</string>
-	<string name="osmand_parking_position_description_add_time">The car was parked at:</string>
+	<string name="route_updated_loc_found">Маршрут будзе разлічвацца як толькі вызначацца кардынаты</string>
+	<string name="osmand_parking_hours">Гадзіны</string>
+	<string name="osmand_parking_minutes">Хвiлiны</string>
+	<string name="osmand_parking_position_description_add_time">Аўтамабіль быў прыпаркаваны ў:</string>
 	<string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1:
 		\n\t* More precise routes (a bit slower)
 		\n\t* Smart and fast Route recalculation
@@ -590,26 +590,26 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="select_animate_speedup">Абярыце хуткасьць</string>
     	<string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
-	<string name="global_app_allocated_memory">Allocated memory</string>
+	<string name="global_app_allocated_memory">Выдзеленая памяць</string>
 	<string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
 		Proportional memory %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
-	<string name="native_app_allocated_memory">Total native memory</string>
+	<string name="native_app_allocated_memory">Усяго роднай памяці</string>
 	<string name="update_downlod_list">Перачытаць сьпіс</string>
-	<string name="starting_point_too_far">Starting point too far from nearest road.</string>
+	<string name="starting_point_too_far">Пачатковая кропка занадта далёка ад бліжэйшай дарогі.</string>
 	<string name="shared_location">Shared location</string>
-	<string name="osmand_parking_event">Pick up the car from parking</string>
-	<string name="osmand_parking_warning">Warning</string>
+	<string name="osmand_parking_event">Забраць машыну са стаянкі</string>
+	<string name="osmand_parking_warning">Папярэджанне</string>
 	<string name="osmand_parking_warning_text">Notification to pick up your car was previously added to your Calendar. It will remain there until you will delete it manually.</string>    
-	<string name="osmand_parking_time_limit_title">Set the time limit of parking</string>
-	<string name="osmand_parking_delete_confirm">Do you want to remove the location of the parked car?</string>
-	<string name="osmand_parking_delete">Delete a parking marker</string>
-	<string name="osmand_parking_choose_type">Choose the type of parking</string>
+	<string name="osmand_parking_time_limit_title">Задайце ліміт часу паркоўкі</string>
+	<string name="osmand_parking_delete_confirm">Вы хочаце выдаліць месцазнаходжанне прыпаркаванага аўтамабіля?</string>
+	<string name="osmand_parking_delete">Выдаліць маркер паркоўкі</string>
+	<string name="osmand_parking_choose_type">Выберыце тып паркоўкі</string>
 	<string name="osmand_parking_lim_text">Time-limited</string>
 	<string name="osmand_parking_no_lim_text">Time-unlimited</string>
 	<string name="osmand_parking_add_event">Add a notification to Calendar application</string>
 	<string name="osmand_parking_time_limit">Time-limited parking</string>
 	<string name="osmand_parking_time_no_limit">Time-unlimited parking</string>
-	<string name="osmand_parking_position_description">The position of your parked car. %1$s</string>
+	<string name="osmand_parking_position_description">Становішча вашага прыпаркаванага аўтамабіля. %1$s</string>
 	<string name="osmand_parking_position_description_add">To pick up the car at:</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
@@ -618,15 +618,15 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_parking_plugin_name">Parking Position Plugin</string>
 	<string name="context_menu_item_add_parking_point">Mark as a parking position</string>
 	<string name="context_menu_item_delete_parking_point">Delete a parking marker</string>
-	<string name="gpxup_public">Public</string>
+	<string name="gpxup_public">Грамадскі</string>
 	<string name="gpxup_identifiable">Identifiable</string>
 	<string name="gpxup_trackable">Trackable</string>
-	<string name="gpxup_private">Private</string>
+	<string name="gpxup_private">Прыватны</string>
 	<string name="asap">ASAP</string>
-	<string name="save_route_as_gpx">Save route as GPX file</string>
+	<string name="save_route_as_gpx">Захаваць маршрут як GPX файл</string>
 	<string name="route_roundabout">Roundabout: take %1$d exit and go</string>
-	<string name="route_kl">Keep left and go</string>
-	<string name="route_kr">Keep right and go</string>
+	<string name="route_kl">Трымайцеся левага боку і працягвайце рух</string>
+	<string name="route_kr">Трымайцеся правага боку і працягвайце рух</string>
 	<string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string>
 	<string name="rendering_attr_noPolygons_name">Схаваць палігоны</string>
 	<string name="rendering_attr_appMode_name">Рэжым візуалізацыі</string>
