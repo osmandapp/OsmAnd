@@ -529,6 +529,17 @@ public class RouteInfoWidgetsFactory {
 					// canvas.translate((int) (16 * scaleCoefficient), 0);
 					for (int i = 0; i < lanes.length; i++) {
 						if ((lanes[i] & 1) == 1) {
+							if ((lanes[i] & 16) == 16) {
+								final Path slightLeft = new Path();
+								TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf("TSLL"), pathTransform);
+								canvas.drawPath(slightLeft, paintBlack);
+								canvas.drawPath(slightLeft, paintRouteDirection);
+							} else if ((lanes[i] & 24) == 24) {
+								final Path slightRight = new Path();
+								TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf("TSLR"), pathTransform);
+								canvas.drawPath(slightRight, paintBlack);
+								canvas.drawPath(slightRight, paintRouteDirection);
+							}
 							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
 						} else {
 							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
