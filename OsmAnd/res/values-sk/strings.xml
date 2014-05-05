@@ -1751,4 +1751,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_plugin_description">OpenStreetMap-Monitorovanie - Pokročilé sledovanie naživo s mnohými funkciami pre diaľkové ovládanie http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (Pokročilé sledovanie naživo)</string>
     <string name="osmo_settings">OSMo</string>
-   	</resources>
+   	<string name="keep_informing_never">Nikdy</string>
+    <string name="keep_informing_descr">Oznamuj, navigačné pokyny v pravidelných intervaloch</string>
+    <string name="keep_informing">Opakuj navigačné pokyny</string>
+	</resources>
