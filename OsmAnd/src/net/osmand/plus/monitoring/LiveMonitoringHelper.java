@@ -3,6 +3,8 @@ package net.osmand.plus.monitoring;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -137,21 +139,24 @@ public class LiveMonitoringHelper  {
 			HttpParams params = new BasicHttpParams();
 			HttpConnectionParams.setConnectionTimeout(params, 15000);
 			DefaultHttpClient httpclient = new DefaultHttpClient(params);
-			HttpRequestBase method = new HttpGet(url);
-			log.info("Monitor " + url);
+			// Parse the URL and let the URI constructor handle proper encoding of special characters such as spaces
+			URL u = new URL(url);
+			URI uri = new URI(u.getProtocol(), u.getAuthority(), u.getHost(), u.getPort(), u.getPath(), u.getQuery(), u.getRef());
+			HttpRequestBase method = new HttpGet(uri);
+			log.info("Monitor " + uri);
 			HttpResponse response = httpclient.execute(method);
 			
 			if(response.getStatusLine() == null || 
 				response.getStatusLine().getStatusCode() != 200){
 				
 				String msg;
-				if(response.getStatusLine() != null){
+				if(response.getStatusLine() == null){
 					msg = ctx.getString(R.string.failed_op); //$NON-NLS-1$
 				} else {
 					msg = response.getStatusLine().getStatusCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$
 							response.getStatusLine().getReasonPhrase();
 				}
-				log.error("Error sending monitor request request : " +  msg);
+				log.error("Error sending monitor request: " +  msg);
 			} else {
 				InputStream is = response.getEntity().getContent();
 				StringBuilder responseBody = new StringBuilder();
@@ -165,12 +170,12 @@ public class LiveMonitoringHelper  {
 					is.close();
 				}
 				httpclient.getConnectionManager().shutdown();
-				log.info("Montior response : " + responseBody);
+				log.info("Monitor response (" + response.getFirstHeader("Content-Type") + "): " + responseBody.toString());
 			}
 
 			
 		} catch (Exception e) {
-			log.error("Failed connect to " + url, e);
+			log.error("Failed connect to " + url + ": " + e.getMessage(), e);
 		}
 	}
 }
