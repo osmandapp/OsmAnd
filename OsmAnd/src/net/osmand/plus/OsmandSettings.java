@@ -849,6 +849,16 @@ public class OsmandSettings {
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
+	// seconds to auto_follow
+	public final CommonPreference<Integer> KEEP_INFORMING = new IntPreference("keep_informing", 0).makeProfile();
+	{
+        // 0 means never
+        KEEP_INFORMING.setModeDefaultValue(ApplicationMode.CAR, 0);
+        KEEP_INFORMING.setModeDefaultValue(ApplicationMode.BICYCLE, 0);
+        KEEP_INFORMING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
+	}
+
+	// this value string is synchronized with settings_pref.xml preference name
 	// try without AUTO_FOLLOW_ROUTE_NAV (see forum discussion 'Simplify our navigation preference menu')
 	//public final CommonPreference<Boolean> AUTO_FOLLOW_ROUTE_NAV = new BooleanPreference("auto_follow_route_navigation", true, false);
 
