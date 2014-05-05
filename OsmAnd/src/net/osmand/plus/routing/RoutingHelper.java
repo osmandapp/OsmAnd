@@ -89,7 +89,7 @@ public class RoutingHelper {
 	public RoutingHelper(OsmandApplication context, CommandPlayer player){
 		this.app = context;
 		settings = context.getSettings();
-		voiceRouter = new VoiceRouter(this, player);
+		voiceRouter = new VoiceRouter(this, settings, player);
 	}
 
 	public boolean isFollowingMode() {
