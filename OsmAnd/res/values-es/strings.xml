@@ -1642,4 +1642,12 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="localization_pref_title">Localización</string>
     <string name="interrupt_music_descr">Interrumpir música al indicar</string>
 	<string name="interrupt_music">Interrumpir música</string>
-	</resources>
+	<string name="osmo_settings_uuid">Id único del dispositivo</string>
+    <string name="osmo_settings_descr">Ver llave única de registro y otras configuraciones específicas de monitorización </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitorización Avanzada en Vivo con muchas características para control remoto http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Monitorización Avanzada en Vivo)</string>
+    <string name="osmo_settings">OSMo</string>
+   	<string name="share_route_as_gpx">Compartir ruta como fichero GPX</string>
+	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
+	<string name="navigation_intent_invalid">Formato inválido: %s</string>
+</resources>
