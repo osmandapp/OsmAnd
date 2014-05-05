@@ -1670,4 +1670,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="misc_pref_title">Рознае</string>
     <string name="localization_pref_title">Лакалізацыя</string>
     <string name="interrupt_music">Перапыненьне музыкі</string>
+	<string name="osmo_settings_uuid">Унікальны ідэнтыфікатар прыстасаваньня</string>
+    <string name="osmo_settings_descr">Глянуць унікальны рэгістрацыйны ключ прыстасаваньня і іншыя налады маніторынгу </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Маніторынг - Пашыраны Маніторынг у рэальным часе з шырокім наборам функцый для дыстанцыйнага кіравання http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Пашыраны Маніторынг у рэальным часе)</string>
+    <string name="osmo_settings">OSMo</string>
+   	<string name="always_center_position_on_map">Паказваць становішча заўсёды ў цэнтры</string>
+    <string name="route_descr_destination"> </string>
+    <string name="interrupt_music_descr">Перапыняць музыку робячы аб'яву</string>
+	<string name="share_route_as_gpx">Падзяліцца маршрутам праз GPX файл</string>
 	</resources>
