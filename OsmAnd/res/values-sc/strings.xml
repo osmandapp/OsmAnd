@@ -180,7 +180,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="driving_region_europe_asia">Europa e Àsia</string>
 	<string name="driving_region_uk">UK, Ìndia, Austràlia e Àteros</string>
 	<string name="osmodroid_mode_on">Firma OsMoDroid</string>    
-    <string name="osmodroid_mode_off">Avvia/Inghitza OsMoDroid</string>
+    <string name="osmodroid_mode_off">Avia/Inghitza OsMoDroid</string>
     <string name="osmodroid_refresh">Agiorna sos canales</string>
     <string name="osmodroid_seek">Chirca ogetu</string>
     <string name="osmodroid_unseek">Ogetu non agatau</string>
@@ -282,4 +282,82 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     </string>
     <string name="monitoring_settings">Servitzios de registratzione e modalidade "a reposu"</string>
     <string name="monitoring_settings_descr">Cunfigura comente registrare biàgios e ativare sa modalidade "a reposu"</string>
+    <string name="osmo_settings_uuid">ID ùnicu de su dispositivu</string>
+    <string name="osmo_settings_descr">Ammustra sa crae ùnica de registratzione de su dispositivu e àteras impostaduras dislindadas de compidada. </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Compidada - Compidada avantzada in dereta cun medas tareas pro su tentu remotu http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Compidada Avantzada in Dereta)</string>
+    <string name="osmo_settings">Impostaduras OSMo</string>
+   	<string name="osmand_monitoring_plugin_description">Ativa sa compidada e su nàvigu in sa modalidade "a reposu" (ischermu istudau)impreande ischidaduras periòdicas de su dispositivu GPS.
+        Ammustra sas impostaduras chi fatzititana sa regitratzione de sos biàgios in documentos GPX locales o in lìnia, impreande unu servitziu in retza.</string>
+    <string name="osmand_monitoring_plugin_name">Servitzios de registratzione e modalidade "a reposu"</string>
+    <string name="osmand_background_plugin_description">Ammustra sas impostaduras pro abilitare sa compidada e su nàvigu in modalidade " a reposu" (ischermu istudau)pro mèdiu de ischidaduras periòdicas de su GPS.</string>
+    <string name="contribution_activity">Installa sa versione</string>
+    <string name="choose_osmand_theme_descr">Issèbera su tema de s'aplicu</string>
+    <string name="choose_osmand_theme">Tema de s'aplicu</string>
+    <string name="accessibility_options">Optziones pro s'atzessibilidade</string>
+    <string name="select_address_activity">Issèbera s'indiritzu</string>
+    <string name="favourites_list_activity">Issèbera preferridu</string>
+    <string name="local_openstreetmap_act_title">Mudas OSM</string>
+    <string name="default_buttons_other_actions">Àteras atziones</string>
+    <string name="save_current_track_widget">Sarba
+        \n sa caminera GPX atuale</string>
+	<string name="tip_recent_changes_1_2_t">Curretziones in sa 1.2.1:
+	    \n\t*Currettu Geo Intent (Foursquare, c:geo)
+	    \n\t*Currettu sa tremuledda de s'ischermu durante su nàvigu
+	    \n\t*Àteros errores minores
+	    \n\nMudas in sa 1.2:
+		\n\t* Curretzione de errores (perfessionados su nàvigu, sa chirca, sa registratzione AV, sas indicatziones bogales, carchi mezzoramentu pro sa bisualizzatzione)
+		\n\t* Cuffiguratzione prus fàtzile de sas umbraduras (rechedidi su Plugin Lìnias de Inghìriu)
+		\n\t* Como atzetada sos ligòngios de localizatzione maps.google.com
+		\n\t* Widgets novos (informatziones GPS) 
+		\n\t* Annangau su suportu pro sas bentanas mùltiplas pro dispositivos Samsung reghentes
+		\n\t* Filtru Kalman pro sa bùssola
+		\n\t* Suportu de su relògiu Pebble
+	</string>
+    <string name="layer_hillshade">Istratu umbradura rilievos</string>
+    <string name="map_widget_gps_info">Informatziones GPS</string>
+    <string name="tip_recent_changes_1_1_4_t">Mudas in sa 1.1.4:
+        \n\t* Redisinnu de sa UI
+		\n\t* Curretzione de errores
+    </string>
+    <string name="access_arrival_time">Oràriu de lòmpida</string>
+    <string name="item_checked">sinnau</string>
+    <string name="item_unchecked">non sinnau</string>
+    <string name="map_view">Mapa</string>
+    <string name="prefer_motorways">Preferre sas autostradas</string>
+	<string name="prefer_in_routing_title">Preferre…</string>
+	<string name="prefer_in_routing_descr">Preferre sas autostradas</string>
+    <string name="max_speed_none">perunu</string>
+    <string name="index_name_openmaps">OpenMaps UE</string>
+    <string name="download_hillshade_item">Umbraduras rilievos</string>
+    <string name="download_hillshade_maps">Subrapositziones umbraduras rilievos</string>
+    <string name="tip_recent_changes_1_1_2_t">Mudas in sa 1.1.2:
+		\n\t* Megioramentu de su plugin audio/video (figuras cun sas informatziones EXIF)
+		\n\t* Usabilidade attransada e plugin lìnias de livellu restruturau
+		\n\t* Pachetos pro su plugin de sas lìnias de livellu
+		\n\t* Curretzione de errores (incaminamentu sutaotimale)
+    </string>
+    <string name="dist_control_start">Avia/Inghitza</string>
+    
+    <string name="local_indexes_cat_srtm">Datos lìnias de livellu</string>
+    <string name="local_indexes_cat_av">Datos audio/video</string>
+    <string name="stop_routing_confirm">Ses seguru de bòlere firmare su nàvigu?</string>
+    <string name="clear_dest_confirm">Ses seguru de bòlere burrare sa destinatzione (e sos puntos mesanos)?</string>
+    <string name="precise_routing_mode_descr">Abìlita pro calculare àndalas pretzisas sena attoppos. Est lentu e limitadu in sa distantzia.</string>
+    <string name="precise_routing_mode">Calculu pretzisu de s'àndala (alfa)</string>
+    <string name="recording_context_menu_show">Bisualizza</string>
+    <string name="recording_photo_description">Foto %1$s a %2$s</string>
+    <string name="av_def_action_picture">Iscata una foto</string>
+    <string name="recording_context_menu_precord">Iscata una foto</string>
+    <string name="av_use_external_camera_descr">Imprea s'aplicu de sistema pro sas fotos</string>
+    <string name="dropbox_plugin_description">Su plugin Dropbox permìttidi de sincronizare sas camineras e sas notas audio/video cun s'acontu tuo de Dropbox.</string>
+    <string name="dropbox_plugin_name">Plugin Dropbox</string>
+    <string name="intermediate_points_change_order">Muda s'òrdine</string>
+    <string name="srtm_paid_version_msg">Pro piaghere lea a cunsideru s'acuistu de su plugin pro sas lìnias de livellu in su Market, pro sostènnere s'isvilupu imbeniente.</string>
+    <string name="srtm_paid_version_title">Pugin lìnias de livellu</string>
+    <string name="av_def_action_choose">Issèbera su rechesta</string>
+    <string name="av_def_action_video">Registra video</string>
+    <string name="av_def_action_audio">Registra audio</string>
+    <string name="av_widget_action_descr">Issèbera s'atzione predefinida de su widget</string>
+    <string name="av_widget_action">Azione predefinida de su widget</string>
     </resources>
