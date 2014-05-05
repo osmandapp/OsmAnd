@@ -1679,4 +1679,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="route_descr_destination"> </string>
     <string name="interrupt_music_descr">Перапыняць музыку робячы аб'яву</string>
 	<string name="share_route_as_gpx">Падзяліцца маршрутам праз GPX файл</string>
+	<string name="share_route_subject">Маршрут апублікаваны з дапамогай OsmAnd</string>
+	<string name="navigation_intent_invalid">Няправільны фармат: %s</string>
+<string name="create_poi_link_to_osm_doc"> <u>Online OSM</u> map classification with images</string>
 	</resources>
