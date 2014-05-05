@@ -390,7 +390,7 @@
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
 	<string name="auto_follow_route_never">Nie</string>
-	<string name="auto_follow_route_navigation">Nachführung nur bei Nav</string>
+	<string name="auto_follow_route_navigation">Nachführung nur bei aktiver Navigation</string>
 	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation.</string>
 	<string name="auto_follow_location_enabled">Kartennachführung aktiv</string>
 	<string name="pref_vector_rendering">Vektor Renderer spezif. Optionen</string>
@@ -1743,5 +1743,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_settings">OSMo</string>
    	<string name="keep_informing_never">Niemals</string>
     <string name="keep_informing_descr">Navigationsanweisungen in regelmäßigen Abständen wiederholen</string>
-    <string name="keep_informing">Navigationsanweisungen wiederholen</string>
+    <string name="keep_informing">Wiederholen von Navigationsanweisungen</string>
 	</resources>
