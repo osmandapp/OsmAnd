@@ -1740,5 +1740,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_settings_descr">Anzeigen der Geräteschlüssel und anderen Überwachsungs-Einstellungen </string>
     <string name="osmo_plugin_description">OpenStreetMap-Überwachung - Erweiterte Live-Überwachung mit vielen Funktionen zur Steuerung aus der Ferne http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (Erweiterte Live-Überwachung)</string>
-    <string name="osmo_settings">OSMo-Einstellungen</string>
-   	</resources>
+    <string name="osmo_settings">OSMo</string>
+   	<string name="keep_informing_never">Niemals</string>
+    <string name="keep_informing_descr">Navigationsanweisungen in regelmäßigen Abständen wiederholen</string>
+    <string name="keep_informing">Navigationsanweisungen wiederholen</string>
+	</resources>
