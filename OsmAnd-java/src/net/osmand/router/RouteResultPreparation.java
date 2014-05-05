@@ -533,11 +533,9 @@ public class RouteResultPreparation {
 			for(int it=0; it< ls; it++) {
 				if (kr && left == 0 && it == 0) {
 					lanes[it] = 1 | 16; // 1 | 10000
-				}
-				if (kl && right == 0 && it == ls - 1) {
-					lanes[it] = 1 | 24; // 1 | 11000
-				}
-				if(it < left || it >= left + current) {
+				} else if (kl && right == 0 && it == ls - 1) {
+					lanes[it] = 1 | 8; // 1 | 01000
+				} else if(it < left || it >= left + current) {
 					lanes[it] = 0;
 				} else {
 					lanes[it] = 1;

@@ -493,7 +493,7 @@ public class RouteInfoWidgetsFactory {
 	private static final float miniCoeff = 2f;
 	public BaseMapWidget createLanesControl(final RoutingHelper routingHelper, final OsmandMapTileView view) {
 		final Path laneStraight = new Path();
-		Matrix pathTransform = new Matrix();
+		final Matrix pathTransform = new Matrix();
 		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
 		TurnPathHelper.calcTurnPath(laneStraight, TurnType.sraight(), pathTransform);
 		final Paint paintBlack = new Paint();
@@ -531,14 +531,20 @@ public class RouteInfoWidgetsFactory {
 						if ((lanes[i] & 1) == 1) {
 							if ((lanes[i] & 16) == 16) {
 								final Path slightLeft = new Path();
-								TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf("TSLL"), pathTransform);
+								TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf("KL", false), pathTransform);
+								paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								canvas.translate((int) (-0.2 * w), 0);
 								canvas.drawPath(slightLeft, paintBlack);
 								canvas.drawPath(slightLeft, paintRouteDirection);
-							} else if ((lanes[i] & 24) == 24) {
+								canvas.translate((int) (0.2 * w), 0);
+							} else if ((lanes[i] & 8) == 8) {
 								final Path slightRight = new Path();
-								TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf("TSLR"), pathTransform);
+								TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf("KR", false), pathTransform);
+								paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								canvas.translate((int) (0.2 * w), 0);
 								canvas.drawPath(slightRight, paintBlack);
 								canvas.drawPath(slightRight, paintRouteDirection);
+								canvas.translate((int) (-0.2 * w), 0);
 							}
 							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
 						} else {
