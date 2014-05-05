@@ -13,6 +13,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.activities.MapActivity;
 
 import org.apache.commons.logging.Log;
 
