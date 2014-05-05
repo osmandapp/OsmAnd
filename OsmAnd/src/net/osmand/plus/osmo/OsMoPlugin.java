@@ -68,6 +68,16 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	}
 	
 	@Override
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		// registerLayers(activity);
+		super.updateLayers(mapView, activity);
+		MonitoringInfoControl lock = activity.getMapLayers().getMapInfoLayer().getMonitoringInfoControl();
+		if(lock != null && !lock.getMonitorActions().contains(this)) {
+			lock.addMonitorActions(this);
+		}
+	}
+	
+	@Override
 	public void addMonitorActions(ContextMenuAdapter qa, MonitoringInfoControl li, final OsmandMapTileView view) {
 		final boolean off = service.isActive();
 		qa.item(off ? R.string.osmodroid_mode_off : R.string.osmodroid_mode_on)
