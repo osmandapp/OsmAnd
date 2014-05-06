@@ -1586,4 +1586,32 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 …	…\n\t* Izrunas ātrums pieejamības uzstādījums
 …
     </string>
+    <string name="osmo_settings_uuid">Ierīces identifikators</string>
+    <string name="osmo_settings_descr">Skatīt ierīces unikālo reģistrācijas atslēgu un pārējos ar monitoringu saistītos uzstādījumus </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - attīstīts tiešsaistes monitorings ar daudzām attālinātās kontroles iespējām htttp://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Tiešsaistes monitorings)</string>
+    <string name="osmo_settings">OSMo</string>
+   	<string name="tip_recent_changes_1_6_t">Izmaiņas uz 1.6:
+…	…\n\t* Full HD ierīču atbalsts
+…	…\n\t* Caurspīdīga kartes dibenplāna atbalsts
+…	…\n\t* Lejupielādēto karšu apskats un trūkstošo karšu vienkāršota lejupielāde pa tiešo no kartes skata loga
+…	…\n\t* Kontūrlīniju karšu faili tagad apkopoti pa valstīm/reģioniem
+…	…\n\t* Jauna pasaules pamatkarte ar galvenajiem ceļiem, dzelzceļiem un vispārējiem teritorijas apzīmējumiem kā piemēram meži
+…	…\n\t* Kartes palielinājuma iespēja (turot nospiestu tālummaiņas pogu) - Var pielietot gan flīžu, gan vektoru kartēm
+…	…\n\t* Definēt/labot tiešsaistes flīžu avotus (un noteikt derīguma termiņu)
+…	…\n\t* Atbalsts ātruma ierobežojumiem atkarībā no diennakts laika (Nīderlande)
+…	…\n\t* Ātrāka meklēšanas adreses ievadīšana
+…	…\n\t* Kļūdu labojumi maršrutēšanā un kartes renderēšanā
+……
+    </string>
+    <string name="tip_recent_changes_1_4_t">Izmaiņas uz 1.4:
+…	…\n\t* Sakārto ceļapunktus optimālā kārtībā (ceļojošs pārdevējs, no vienas adreses līdz otrai)
+…	…\n\t* Meklē ielas pēc nosaukuma (tuvākā apkārtnē)
+…	…\n\t* Plānošanas režīma spraudnis (atvērt/labot/saglabāt GPX trases)
+…	…\n\t* Launs lejupielādes ekrāns (lejupielāde fonā)
+…	…\n\t* Atbalsts GPX apakšmapēm (organizē GPX trases)
+…	…\n\t* Dzēst SRTM failus
+…	…\n\t* Atbalsts OSM Piezīmēm
+…… 
+    </string>
     </resources>
