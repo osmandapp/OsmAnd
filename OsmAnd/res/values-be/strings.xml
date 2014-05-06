@@ -1682,4 +1682,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="share_route_subject">Маршрут апублікаваны з дапамогай OsmAnd</string>
 	<string name="navigation_intent_invalid">Няправільны фармат: %s</string>
 <string name="create_poi_link_to_osm_doc"> <u>Online OSM</u> map classification with images</string>
+	<string name="keep_informing_never">Ніколі</string>
+    <string name="keep_informing_descr">Анонс навігацыйных інструкцый праз рэгулярныя прамежкі часу</string>
+    <string name="keep_informing">Паўтараць навігацыйныя інструкцыі</string>
 	</resources>
