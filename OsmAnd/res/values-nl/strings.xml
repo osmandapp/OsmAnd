@@ -1728,4 +1728,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="osmo_plugin_description">OpenStreetmap-monitoring - geavanceerde live monitoring met veel mogelijkheden tot afstandbediening http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (geavanceerde live monitoring)</string>
     <string name="osmo_settings">OSMO-instellingen</string>
-   	</resources>
+   	<string name="keep_informing_never">Niet herhalen</string>
+    <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
+    <string name="keep_informing">Herhaal de aanwijzingen</string>
+	</resources>
