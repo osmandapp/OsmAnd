@@ -1746,5 +1746,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_settings_descr">Peržiūrėti unikalų įrenginio registravimo raktą ir kitus stebėjimo nustatymus </string>
     <string name="osmo_plugin_description">OpenStreetMap stebėjimas - Tiesioginis stebėjimas su daugybe nuotolinio valdymo funkcijų http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (Tiesioginis stebėjimas)</string>
-    <string name="osmo_settings">OSMo nustatymai</string>
-   	</resources>
+    <string name="osmo_settings">OSMo</string>
+   	<string name="keep_informing_never">Niekada</string>
+    <string name="keep_informing_descr">Maršruto instrukcijas pranešinėti reguliariais intervalais</string>
+    <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
+	</resources>
