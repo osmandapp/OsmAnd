@@ -360,4 +360,61 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="av_def_action_audio">Registra audio</string>
     <string name="av_widget_action_descr">Issèbera s'atzione predefinida de su widget</string>
     <string name="av_widget_action">Azione predefinida de su widget</string>
-    </resources>
+    <string name="av_video_format_descr">Issèbera su formadu de essida video</string>
+    <string name="av_video_format">Formadu de essida video</string>
+    <string name="av_use_external_recorder_descr">Imprea su registratore de sistema pro sos videos</string>
+    <string name="av_use_external_recorder">Imprea su registratore de sistema</string>
+    <string name="av_use_external_camera">Imprea s'app fotocàmera</string>
+    <string name="av_settings_descr">Cunfigura sas impostaduras audio e video</string>
+    <string name="av_settings">Impostaduras àudio/vìdeo </string>
+    <string name="recording_error">Errore durante sa registratzione </string>
+    <string name="recording_camera_not_available">Sa fotocamera non est disponibile</string>
+    <string name="recording_is_recorded">S'àudio/vìdeo istat pro èssere registrau. pro lu firmare carca su widget AV.</string>
+    <string name="recording_playing">S'àudio de sa registratzione isseberada istat pro èssere reprodotu.\n%1$s</string>
+    <string name="recording_open_external_player">Abèri reprodutòre esternu</string>
+    <string name="recording_delete_confirm">Bòles burrare custa registratzione?</string>
+    <string name="tip_recent_changes_1_1_0_t">Mudas in sa 1.1.0:
+		\n\t* Plugin pro calculare sa distantzia
+		\n\t* Plugin pro sas notas àudio/vìdeo
+		\n\t* Plugin pro sas lìnias de livellu
+		\n\t* Curretziones de errores
+		\n\t* Optzione \'Touring view\' de istile mapa, cun prus minujas, prus istiles pro sas istradas, prus cuntrastu, e optzione escursionismu alpinu (iscala SAC)
+		\n\t* Curretzione EGM96 de s'iscostamentu de sas leghiduras de s'artària GPS
+    </string>
+    <string name="recording_unavailable">non disponìbile</string>
+    <string name="recording_context_menu_arecord">Registra una nota àudio</string>
+    <string name="recording_context_menu_vrecord">Registra una nota vìdeo</string>
+    <string name="layer_recordings">Istratu regitratziònes</string>
+    <string name="recording_can_not_be_played">Sa registratzione non podet èssere reprodota</string>
+    <string name="recording_context_menu_delete">Burra sa registratzione</string>
+    <string name="recording_context_menu_play">Reprodui</string>
+    <string name="recording_description">Registratzione %1$s %2$s de %3$s</string>
+    <string name="recording_default_name">registratzione</string>
+    <string name="av_control_stop">Stop</string>
+    <string name="av_control_start">Avia/Inghitza</string>
+    <string name="map_widget_av_notes">Notas àudio/vìdeo</string>
+    <string name="osmand_srtm_short_description_80_chars">Plugin OsmAndfor pro sas lìnias de livellu sena lìnia</string>
+    <string name="osmand_srtm_long_description_1000_chars">Custu plugin frunidi sas lìnias de livellu chi podent èssere bisualizatas in sas mapas sena lìnia de OsmAnd. Sos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s'ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un'aina medidora a bordu de Terra, su satellite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un'isfortzu de coperassione intre NASA, su Ministeru de s'Economia Commercio e Industria (METI) de su Giappone, e su sistema ispatziale giapponesu (J-spacesystems).</string>
+    <string name="map_widget_distancemeasurement">Medidura de sa distantzia</string>
+    <string name="audionotes_location_not_defined">Sa positzione da assotziare cun sa nota non est galu dessinida. \"Imprea positzione ...\" pro assinzare una nota a sa positzione dislindada</string>
+    <string name="monitoring_control_stop">Stop</string>
+    <string name="map_widget_audionotes">Notas àudio</string>
+    <string name="audionotes_plugin_description">Registra noas àudio/vìdeo durante su biàgiu</string>
+    <string name="audionotes_plugin_name">Plugin notas àudio/vìdeo</string>
+    <string name="index_srtm_parts">partes</string>
+    <string name="index_srtm_ele">Lìnias de livellu</string>
+    <string name="srtm_plugin_description">Fatzìlita s'isgarrigamentu de sas lìnias de livellu e s'umbradura de sos rilievos (\'Impostaduras\' → \'Gestione datos\' → \'Isgarrigamentu\' → Issèbera su tipu de mapa disigiatu).</string>
+    <string name="srtm_plugin_name">Plugin lìnias de livellu</string>
+    <string name="download_select_map_types">Àteras mapas</string>
+    <string name="download_roads_only_item">Petzi istradas</string>
+    <string name="download_srtm_maps">Lìnias de livellu</string>
+    <string name="download_regular_maps">Mapas regulares</string>
+    <string name="download_roads_only_maps">Mapas cun petzi istradas</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">Cua sas làcanas</string>
+	<string name="rendering_attr_noAdminboundaries_description">Non bisualizzare sas làcanas regionales (livellos amministrativos 5-9)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">Su plugin OsMoDroid est in una versione disusada e depet èssere postu a die.</string>
+    <string name="osmodroid_plugin_description">Su plugin OsMoDroid est un estensione OsmAnd pro s'aplicu pro sas tareas de compidada in tempus reale OsModroid. Sas informatziones sunt disponìbiles in su giassu http://esya.ru.</string>
+    <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
+	<string name="tip_altitude_offset">Curretzione artària</string>
+	</resources>
