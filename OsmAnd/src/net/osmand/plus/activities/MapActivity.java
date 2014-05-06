@@ -1,7 +1,9 @@
 package net.osmand.plus.activities;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -36,6 +38,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.Kml2Gpx;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -340,7 +343,14 @@ public class MapActivity extends AccessibleActivity  {
                     final String scheme = data.getScheme();
                     if ("file".equals(scheme))
                     {
-                        showImportedGpx(data.getPath());
+						if (data.getPath().endsWith("kml"))
+						{
+							showImportedKml(new File(data.getPath()));
+						}
+						else
+						{
+							showImportedGpx(new File(data.getPath()));
+						}
                     }
                     else if("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme))
                     {
@@ -592,7 +602,7 @@ public class MapActivity extends AccessibleActivity  {
 		mapLayers.updateLayers(mapView);
 		mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsZoomScale());
 		app.getDaynightHelper().startSensorIfNeeded(new StateChangedListener<Boolean>() {
-			
+
 			@Override
 			public void stateChanged(Boolean change) {
 				getMapView().refreshMap(true);
@@ -720,47 +730,79 @@ public class MapActivity extends AccessibleActivity  {
 		getMapView().refreshMap();
 	}
 
-    private void showImportedGpx(final String gpxFile)
-    {
-        new AsyncTask<Void, Void, GPXFile>()
-        {
-            ProgressDialog progress = null;
+	private void showImportedGpx(final File gpxFile) {
+		new AsyncTask<Void, Void, GPXFile>() {
+			ProgressDialog progress = null;
 
-            @Override
-            protected void onPreExecute()
-            {
-                progress = ProgressDialog.show(MapActivity.this, getString(R.string.loading), getString(R.string.loading_data));
-            }
+			@Override
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(MapActivity.this, getString(R.string.loading), getString(R.string.loading_data));
+			}
 
-            @Override
-            protected GPXFile doInBackground(Void... nothing)
-            {
-                return GPXUtilities.loadGPXFile(getMyApplication(), new File(gpxFile));
-            }
+			@Override
+			protected GPXFile doInBackground(Void... nothing) {
+				return GPXUtilities.loadGPXFile(getMyApplication(), gpxFile);
+			}
 
-            @Override
-            protected void onPostExecute(GPXFile result)
-            {
-                progress.dismiss();
-                if (result != null)
-                {
-                    if (result.warning != null)
-                    {
-                        AccessibleToast.makeText(MapActivity.this, result.warning, Toast.LENGTH_LONG).show();
-                    }
-                    else
-                    {
-                        getMyApplication().setGpxFileToDisplay(result, true);
-                        final WptPt moveTo = result.findPointToShow();
-                        if (moveTo != null)
-                        {
-                            mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
-                        }
-                        mapView.refreshMap();
-                    }
+			@Override
+			protected void onPostExecute(GPXFile result) {
+				progress.dismiss();
+				if (result != null) {
+					if (result.warning != null) {
+						AccessibleToast.makeText(MapActivity.this, result.warning, Toast.LENGTH_LONG).show();
+					} else {
+						getMyApplication().setGpxFileToDisplay(result, true);
+						final WptPt moveTo = result.findPointToShow();
+						if (moveTo != null) {
+							mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
+						}
+						mapView.refreshMap();
+					}
 
-                }
-            }
-        }.execute();
-    }
+				}
+			}
+		}.execute();
+	}
+
+	private void showImportedKml(final File kmlFile) {
+		new AsyncTask<Void, Void, GPXFile>() {
+			ProgressDialog progress = null;
+
+			@Override
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(MapActivity.this, getString(R.string.loading), getString(R.string.loading_data));
+			}
+
+			@Override
+			protected GPXFile doInBackground(Void... nothing) {
+				final String result = Kml2Gpx.toGpx(kmlFile);
+				if (result == null) {
+					return null;
+				}
+				try {
+					return GPXUtilities.loadGPXFile(getMyApplication(), new ByteArrayInputStream(result.getBytes("UTF-8")));
+				} catch (UnsupportedEncodingException e) {
+					return null;
+				}
+			}
+
+			@Override
+			protected void onPostExecute(GPXFile result) {
+				progress.dismiss();
+				if (result != null) {
+					if (result.warning != null) {
+						AccessibleToast.makeText(MapActivity.this, result.warning, Toast.LENGTH_LONG).show();
+					} else {
+						getMyApplication().setGpxFileToDisplay(result, true);
+						final WptPt moveTo = result.findPointToShow();
+						if (moveTo != null) {
+							mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
+						}
+						mapView.refreshMap();
+					}
+
+				}
+			}
+		}.execute();
+	}
 }
