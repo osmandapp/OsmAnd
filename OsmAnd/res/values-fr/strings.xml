@@ -1552,4 +1552,13 @@
 <string name="interrupt_music">Interrompre la musique</string>
 <string name="share_route_as_gpx">Partager l'itinéraire en format GPX</string>
 	<string name="share_route_subject">Itinéraire partagé via OsmAnd</string>
-	</resources>
+	<string name="osmo_settings_uuid">Identifiant unique de l'appareil</string>
+    <string name="osmo_settings_descr">Voir la clé unique d'enregistrement de l'appareil et les autres paramètres spécifiques de surveillance </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Surveillance en temps réel avec beaucoup de fonctionnalités de contrôle à distance http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Advanced Live Monitoring)</string>
+    <string name="osmo_settings">OSMo</string>
+   	<string name="keep_informing_never">Jamais</string>
+    <string name="keep_informing_descr">Annoncer les instructions de navigation à intervalles réguliers</string>
+    <string name="keep_informing">Répéter les instructions de navigation</string>
+	<string name="navigation_intent_invalid">Format invalide: %s</string>
+</resources>
