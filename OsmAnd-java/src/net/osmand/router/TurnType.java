@@ -82,9 +82,11 @@ public class TurnType {
 		return value.equals("EXIT"); //$NON-NLS-1$
 	}
 	
-	// lanes encoded as array of int 
-	// last bit is 1, 0 (should we take this lane)
-	// first bits 0 - left, 1 - straight, 2 - right
+	// lanes encoded as array of int
+	// Bit 0 (lowest bit): 1 if this lane can be taken; otherwise, 0
+	// Bits 1 and 2: 00 - left, 01 - straight, 10 - right
+	// Bits 3 and 4: 00 - only one direction on this lane, 01 - straight or right branch, 10 - straight or left branch
+	// Bit 5 (highest bit): 1 if the branch should be taken instead
 	public void setLanes(int[] lanes) {
 		this.lanes = lanes;
 	}
