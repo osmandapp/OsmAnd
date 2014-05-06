@@ -1704,4 +1704,12 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	\n\t* Veliko malih izboljšav v uporabniškem vmesniku in uporabnostni popravki
 	\n\t* Nastavitev hitrost govora za dostopnost
     </string>
-    </resources>
+    <string name="osmo_settings_uuid">Enolični ID naprave</string>
+    <string name="osmo_settings_descr">Poglej enolični registracijski ključ naprave in druge nastavitve nadzora </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Nadzor - Napredno sledenje v živo z možnostmi za upravljanje na daljavo http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Napredno sledenje v živo)</string>
+    <string name="keep_informing_never">Nikoli</string>
+    <string name="keep_informing_descr">Napovej navigacijska navodila v rednih časovnih presledkih</string>
+    <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
+	<string name="osmo_settings">OSMo</string>
+   	</resources>
