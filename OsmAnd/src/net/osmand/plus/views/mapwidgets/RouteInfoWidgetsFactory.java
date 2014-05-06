@@ -493,7 +493,7 @@ public class RouteInfoWidgetsFactory {
 	private static final float miniCoeff = 2f;
 	public BaseMapWidget createLanesControl(final RoutingHelper routingHelper, final OsmandMapTileView view) {
 		final Path laneStraight = new Path();
-		Matrix pathTransform = new Matrix();
+		final Matrix pathTransform = new Matrix();
 		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
 		TurnPathHelper.calcTurnPath(laneStraight, TurnType.sraight(), pathTransform);
 		final Paint paintBlack = new Paint();
@@ -529,7 +529,43 @@ public class RouteInfoWidgetsFactory {
 					// canvas.translate((int) (16 * scaleCoefficient), 0);
 					for (int i = 0; i < lanes.length; i++) {
 						if ((lanes[i] & 1) == 1) {
-							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+							if ((lanes[i] & 16) == 16) {
+								final Path slightLeft = new Path();
+								TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf("KL", false), pathTransform);
+								if ((lanes[i] & 32) == 32) {
+									paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+								} else {
+									paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								}
+								canvas.translate((int) (-0.2 * w), 0);
+								canvas.drawPath(slightLeft, paintBlack);
+								canvas.drawPath(slightLeft, paintRouteDirection);
+								if ((lanes[i] & 32) != 32) {
+									paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+								} else {
+									paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								}
+								canvas.translate((int) (0.2 * w), 0);
+							} else if ((lanes[i] & 8) == 8) {
+								final Path slightRight = new Path();
+								TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf("KR", false), pathTransform);
+								if ((lanes[i] & 32) == 32) {
+									paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+								} else {
+									paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								}
+								canvas.translate((int) (0.2 * w), 0);
+								canvas.drawPath(slightRight, paintBlack);
+								canvas.drawPath(slightRight, paintRouteDirection);
+								if ((lanes[i] & 32) != 32) {
+									paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+								} else {
+									paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								}
+								canvas.translate((int) (-0.2 * w), 0);
+							} else {
+								paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+							}
 						} else {
 							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
 						}
