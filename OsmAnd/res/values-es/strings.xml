@@ -1650,4 +1650,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
    	<string name="share_route_as_gpx">Compartir ruta como fichero GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato inválido: %s</string>
-</resources>
+<string name="keep_informing_never">Nunca</string>
+    <string name="keep_informing_descr">Anunciar instrucciones de navegación a intervalos regulares</string>
+    <string name="keep_informing">Repetir instrucciones de navegación</string>
+	</resources>
