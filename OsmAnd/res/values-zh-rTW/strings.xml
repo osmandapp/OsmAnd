@@ -1739,4 +1739,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_settings">OSMo</string>
    	<string name="osmo_settings_descr">檢視專有的裝置註冊金鑰和其它監視的具體設定 </string>
     <string name="osmo_plugin_description">OpenStreetMap-監視 - 進階的即時監視，有很多的功能進行遠端控制 http://osmo.mobi</string>
-    </resources>
+    <string name="keep_informing_never">永不</string>
+    <string name="keep_informing_descr">按照定期間隔通報導航指示</string>
+    <string name="keep_informing">重複導航指示</string>
+	</resources>
