@@ -1364,4 +1364,26 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="default_or">of</string>
 	<string name="osmodroid_refresh">Verfris kanale</string>
     <string name="osmodroid_seek">Soek objek</string>
-    </resources>
+    <string name="osmo_settings_uuid">Unieke toestel ID</string>
+    <string name="osmo_settings_descr">Sien unieke toestel registrasie kode en ander monitor spesifieke stellings </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitering - Gevorderde Lewendige Monitering met baie features vir afstandbeheer http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Gevorderde Lewendige Monitering)</string>
+    <string name="osmo_settings">OSMo</string>
+   	<string name="always_center_position_on_map">Wys posisie altyd in senter</string>
+    <string name="voice_pref_title">Stem</string>
+    <string name="misc_pref_title">Allerlei</string>
+    <string name="localization_pref_title">lokalisering</string>
+    <string name="index_item_nation_addresses">adresse landwyd</string>
+	<string name="index_item_world_altitude_correction">Wêreld hoogte regstelling</string>
+	<string name="index_item_world_seamarks">Wêreld seemerke</string>
+	<string name="index_item_world_bitcoin_payments">Wêreld bitcoin betalings</string>
+	<string name="index_item_world_basemap">Wêreld oorsig kaart</string>
+    <string name="index_item_world_ski">Wêreld ski kaart</string>
+    <string name="lang_hr">Kroaties</string>
+    <string name="lang_zh">Sjinees</string>
+    <string name="lang_pt_br">Portugees (Brazilië)</string>
+    <string name="lang_en">Engels</string>
+	<string name="lang_af">Afrikaans</string>
+	<string name="lang_hy">Armeens</string>
+	<string name="lang_eu">Baskies</string>
+	</resources>
