@@ -532,21 +532,40 @@ public class RouteInfoWidgetsFactory {
 							if ((lanes[i] & 16) == 16) {
 								final Path slightLeft = new Path();
 								TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf("KL", false), pathTransform);
-								paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								if ((lanes[i] & 32) == 32) {
+									paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+								} else {
+									paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								}
 								canvas.translate((int) (-0.2 * w), 0);
 								canvas.drawPath(slightLeft, paintBlack);
 								canvas.drawPath(slightLeft, paintRouteDirection);
+								if ((lanes[i] & 32) != 32) {
+									paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+								} else {
+									paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								}
 								canvas.translate((int) (0.2 * w), 0);
 							} else if ((lanes[i] & 8) == 8) {
 								final Path slightRight = new Path();
 								TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf("KR", false), pathTransform);
-								paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								if ((lanes[i] & 32) == 32) {
+									paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+								} else {
+									paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								}
 								canvas.translate((int) (0.2 * w), 0);
 								canvas.drawPath(slightRight, paintBlack);
 								canvas.drawPath(slightRight, paintRouteDirection);
+								if ((lanes[i] & 32) != 32) {
+									paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
+								} else {
+									paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+								}
 								canvas.translate((int) (-0.2 * w), 0);
+							} else {
+								paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
 							}
-							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
 						} else {
 							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
 						}
