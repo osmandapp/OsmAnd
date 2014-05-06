@@ -1546,9 +1546,9 @@
     <string name="localization_pref_title">Ubicació</string>
     <string name="interrupt_music_descr">Pausa la música en fer indicacions</string>
 	<string name="interrupt_music">Pausa la música</string>
-	<string name="tip_altitude_offset_t">La majoria de dispositius GPS informen les mesures d'altitud en el sistema de referència WGS84, basat en l'el·lipsoide, que requereix una correcció depenent de la posició per la conversió a sistemes utilitzats localment.
+	<string name="tip_altitude_offset_t">La majoria de dispositius GPS informen les mesures d\'altitud en el sistema de referència WGS84, basat en l\'el·lipsoide, que requereix una correcció depenent de la posició per la conversió a sistemes utilitzats localment.
 		\n\nLa referència EGM96 (geoide) es una aproximació millor a aquests sistemes locals.
-		\n\nOsmAnd indicarà l'altitud de les teves ubicacions en el sistema EGM96 quan descarreguis el arxiu \'Correcció Mundial d'Altituds\' (WW15MGH.DAC) mitjançant \'Opcions\' → \'Gestió de Dades\'. (l'original és a http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
+		\n\nOsmAnd indicarà l\'altitud de les teves ubicacions en el sistema EGM96 quan descarreguis el arxiu \'Correcció Mundial d\'Altituds\' (WW15MGH.DAC) mitjançant \'Opcions\' → \'Gestió de Dades\'. (l\'original és a http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
     <string name="osmo_settings_uuid">Identificació única de  dispositiu</string>
     <string name="osmo_settings_descr">Veure la clau de registre única del dispositiu i altres paràmetres específics de monitorització </string>

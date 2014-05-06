@@ -4,7 +4,7 @@
     <string name="misc_pref_title">Mistura</string>
     <string name="localization_pref_title">Localizatzione</string>
     <string name="index_item_nation_addresses">Indiritzos natzionales</string>
-	<string name="index_item_world_altitude_correction">Curretzione de s'artària mundiale</string>
+	<string name="index_item_world_altitude_correction">Curretzione de s\'artària mundiale</string>
 	<string name="index_item_world_seamarks">Pidagnos mundiales</string>
 	<string name="index_item_world_bitcoin_payments">Pagamentos in bitcoins mundiale</string>
 	<string name="index_item_world_basemap">Mapa summarja mundiale</string>
@@ -54,16 +54,16 @@
 	<string name="index_name_canada">Nord Amèrica - Canada</string>
     <string name="index_name_italy">Europa - Itàlia</string>
     <string name="index_name_gb">Europa - Britannia Manna</string>
-    <string name="calculate_osmand_route_without_internet">Càlcula un'àndala cun OsmAnd sena impreare internet</string>
-    <string name="gpx_option_calculate_first_last_segment">Càlcula un'àndala cun OsmAnd pro su primu e s'ùrtimu tretu de sa caminera</string>
-    <string name="use_displayed_track_for_navigation">Boles impreare s'àndala visualizada pro su nàvigu?</string>
+    <string name="calculate_osmand_route_without_internet">Càlcula un\'àndala cun OsmAnd sena impreare internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Càlcula un\'àndala cun OsmAnd pro su primu e s\'ùrtimu tretu de sa caminera</string>
+    <string name="use_displayed_track_for_navigation">Boles impreare s\'àndala visualizada pro su nàvigu?</string>
     <string name="keep_and_add_destination_point">Annànghe unu puntu de destinatzione</string>
     <string name="select_gpx">Issèbera GPX…</string>
     <string name="route_descr_select_destination">Issèbera sa destinatzione</string>
     <string name="route_descr_select_on_map">Issèbera in sa mapa…</string>
     <string name="route_descr_favorite">Preferridu…</string>
-    <string name="route_preferences">Preferèntzias pro s'àndala</string>
-    <string name="route_info">Informatziones de s'àndalas</string>
+    <string name="route_preferences">Preferèntzias pro s\'àndala</string>
+    <string name="route_info">Informatziones de s\'àndalas</string>
     <string name="routing_attr_prefer_motorway_name">Preferre sas autostradas</string>
 	<string name="routing_attr_prefer_motorway_description">Preferre sas autostradas</string>
 	<string name="routing_attr_short_way_name">Istrada prus curtza</string>
@@ -78,17 +78,17 @@
 	<string name="routing_attr_avoid_motorway_description">Istranse sas autostradas</string>
 	<string name="routing_attr_weight_name">Pesu màssimu</string>
 	<string name="routing_attr_weight_description">Dislinda su pesu màssimu de su veìculu</string>
-    <string name="android_19_location_disabled">Dae sa versione KitKat non est prus possìbile iscarrigare e pònnere a die sas mapas in s'indiritzu de ammentu antepostu (%s). Lu bòles remplasare cun su chi est acusentidu e copiare in cue totus sos datos?
+    <string name="android_19_location_disabled">Dae sa versione KitKat non est prus possìbile iscarrigare e pònnere a die sas mapas in s\'indiritzu de ammentu antepostu (%s). Lu bòles remplasare cun su chi est acusentidu e copiare in cue totus sos datos?
 	\n Nota: sos datos antepostos non at a èssere mudados. 
 	\n Nota: non at a èssere possìbile cumpartzire sos datos intra OsmAnd e OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd podet proare a mòvere sos datos a sa destinatzione noa. Boles a lu fàghere?</string>
     <string name="copying_osmand_one_file_descr">Copiande su documentu (%s) in sa destinatzione noa...</string>
     <string name="copying_osmand_files_descr">Copiande sos documentos de OsmAnd in (%s), sa destinatzione noa</string>
     <string name="copying_osmand_files">Copiande sos documentos de OsmAnd</string>
-    <string name="calculate_osmand_route_gpx">Càlcula s'àndala OsmAnd sena lìnia</string>
+    <string name="calculate_osmand_route_gpx">Càlcula s\'àndala OsmAnd sena lìnia</string>
     <string name="app_mode_truck">Càmion</string>
     <string name="guidance_preferences_descr">Preferèntzias de nàvigu</string>
-    <string name="routing_preferences_descr">Preferèntzias de càlculu de s'àndala</string>
+    <string name="routing_preferences_descr">Preferèntzias de càlculu de s\'àndala</string>
     <string name="speech_rate_descr">Imposta sa lestresa de sa boghe (TTS)</string>
     <string name="speech_rate">Lestresa de sa boghe</string>
     <string name="tip_recent_changes_1_7_1_t">Novidades in sa versione 1.7:
@@ -97,16 +97,16 @@
     \n\t* Ischermada noa cun Pianificatzione Caminera (prus atuativu e poderosu)
     \n\t** NOTA su nàvigu de sa caminera GPX est disponìbile dae su buttone "Impostaduras de sas Àndalas"
     \n\t* Iscumparta automàtica de sos buttones in sa modalidade navigu 
-    \n\t* Càlculu de s'andala sena lìnia cara a su primu puntu de sa traccia GPX (optzione \'percorri tutta la traccia\')
+    \n\t* Càlculu de s\'andala sena lìnia cara a su primu puntu de sa traccia GPX (optzione \'percorri tutta la traccia\')
 	\n\t* Dispintatzione ativa in sas galerias
-	\n\t* Unu muntone de megiorus minores de s'interfatze utente &amp; corretziones pro s'usabilitade
+	\n\t* Unu muntone de megiorus minores de s\'interfatze utente &amp; corretziones pro s\'usabilitade
 	\n\t* Impostaduras pro sa lestresa de sa bogalizzatzione
     </string>
-    <string name="complex_route_calculation_failed">Càlculu lestru de s'àndala faddida (%s), rinviu a su calculu lentu.</string>
-    <string name="disable_complex_routing_descr">Istuda su calculu de s'àndala in duas fases pro s'impreu in màchina.</string>
-    <string name="disable_complex_routing">Istuta su calculu cumplessu de s'àndala</string>
+    <string name="complex_route_calculation_failed">Càlculu lestru de s\'àndala faddida (%s), rinviu a su calculu lentu.</string>
+    <string name="disable_complex_routing_descr">Istuda su calculu de s\'àndala in duas fases pro s\'impreu in màchina.</string>
+    <string name="disable_complex_routing">Istuta su calculu cumplessu de s\'àndala</string>
     <string name="amenity_type_seamark">Pidagnu</string>
-    <string name="app_modes_choose_descr">Issèbera intre sas modalidades de impreu de s'aplicu</string>
+    <string name="app_modes_choose_descr">Issèbera intre sas modalidades de impreu de s\'aplicu</string>
     <string name="app_modes_choose">Modalidades de impreu</string>
 	<string name="map_widget_appearance">Vàrias:</string>
 	<string name="map_widget_map_rendering">Disinnu de sa mapa:</string>
@@ -118,14 +118,14 @@
     <string name="tip_faq">Preguntas fitianas</string>
     <string name="local_osm_changes_delete_all_confirm">Istas pro burrare %1$d mudaduras. Ses seguru?</string>
     <string name="local_osm_changes_delete_all">Burra totu</string>
-    <string name="animate_routing_route_not_calculated">Pro piaghere, càlcula s'andala in antis</string>
-    <string name="animate_routing_route">Dispinta impreande un'àndala calculada </string>
+    <string name="animate_routing_route_not_calculated">Pro piaghere, càlcula s\'andala in antis</string>
+    <string name="animate_routing_route">Dispinta impreande un\'àndala calculada </string>
     <string name="animate_routing_gpx">Dispinta impreande una caminera GPX</string>
-    <string name="remember_choice">Ammenta s'issèberu meu</string>
+    <string name="remember_choice">Ammenta s\'issèberu meu</string>
     <string name="gps_status_eclipsim">Istadu GPS</string>
     <string name="default_and">e</string>
     <string name="default_or">o</string>
-	<string name="route_is_too_long">Su càlculu de s'àndala de OsmAnd sena impreare internet  diat pòtere dimandare meda tempus (o a bortas non funtzionare) pro distantzias prus longas de 200 km.
+	<string name="route_is_too_long">Su càlculu de s\'àndala de OsmAnd sena impreare internet  diat pòtere dimandare meda tempus (o a bortas non funtzionare) pro distantzias prus longas de 200 km.
 Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas prestatziones.</string>
 	<string name="auto_zoom_none">No zoom automàticu</string>
 	<string name="auto_zoom_close">Zoom automàticu mannu</string>
@@ -136,11 +136,11 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="tip_map_styles">Istiles de sa mapa</string>
 	<string name="default_buttons_no">Nono</string>
 	<string name="default_buttons_yes">Eja</string>
-	<string name="tip_map_styles_t">OsmAnd suportada sa visualizatzione de sas mapas vettoriales in istiles diferentes pro s'adatare a sas esigentzias tuas:
+	<string name="tip_map_styles_t">OsmAnd suportada sa visualizatzione de sas mapas vettoriales in istiles diferentes pro s\'adatare a sas esigentzias tuas:
 		\n\nDiferentes dae sos istiles balansados preimpostados de sa mapa, los agatas suta \'Menu\' -&gt; \'Cunfigura ischermu\' -&gt; \'Istile Mapa\' issèbera pro esempru
-		\n\t* The \'Touring view\' istile: cuntènnidi sas informatziones prus minujas possìbile pro biagiare e pro visitare, incluidas sas ottimizatziones pro sos ghiadores professionales (contrastu prus distinghìbile pro sas istradas), optzione pro s'escursionismu Alpinu (iscala SAC), itineràrios tziclìsticos, sìmbolos pro s'escursionismu, etc.
+		\n\t* The \'Touring view\' istile: cuntènnidi sas informatziones prus minujas possìbile pro biagiare e pro visitare, incluidas sas ottimizatziones pro sos ghiadores professionales (contrastu prus distinghìbile pro sas istradas), optzione pro s\'escursionismu Alpinu (iscala SAC), itineràrios tziclìsticos, sìmbolos pro s\'escursionismu, etc.
 		\n\t* \'Contrastu istradas artu \' ammustra sas istradas cun una lughentesa de sos colores atzentuata meda pro sas situatziones de mala illuminadura.
-		\n\t* \'Ierru e isci\' crea una vista de su paesàgiu ierrale (cucuzau dae su nie), e visione globale de sas pistas de isci e de sos impiantos de artziada (in acrobada cun s'isgarrigamentu de sa mapa\'World ski\' )
+		\n\t* \'Ierru e isci\' crea una vista de su paesàgiu ierrale (cucuzau dae su nie), e visione globale de sas pistas de isci e de sos impiantos de artziada (in acrobada cun s\'isgarrigamentu de sa mapa\'World ski\' )
 	</string>
     <string name="about_version">Versione:</string>
     <string name="about_settings">Informatziones</string>
@@ -152,9 +152,9 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	\n\t* Ammustra sas mapas isgarrigadas e fatzìlita sos isgarigamentos de sas mapas mancantes a moda dereta dae sa vista de sa mapa
 	\n\t* Documentu de sas lìnias de livellu como incluidas in sos istados o sas regiònes
 	\n\t* Mapa mondiale de base noa cun istradas printzipales, ferrovias, e àteras àreas,  comente sas padentes
-	\n\t* Immaniamentu mapa (tènne carcau su butone "zoom") - Impreàbile siat cun mapas vettoriales siat in lìnia
-	\n\t* Impostadura/muda de sas fontes in lìnia pessonalizzadas de sas imbrèstias (e impostadura de s'iscadentzia issoro)
-	\n\t* Suportu pro sos lìmites de lestresa cundissionados dae s'oràriu (Olanda)
+	\n\t* Immaniamentu mapa (tènne carcau su buttone "zoom") - Impreàbile siat cun mapas vettoriales siat in lìnia
+	\n\t* Impostadura/muda de sas fontes in lìnia pessonalizzadas de sas imbrèstias (e impostadura de s\'iscadentzia issoro)
+	\n\t* Suportu pro sos lìmides de lestresa cundissionados dae s\'oràriu (Olanda)
 	\n\t* Chirca prus lestra de sos indiritzos
 	\n\t* Curretzione de faddinas cun su nàvigu e su disinnu de sa mapa
     </string>
@@ -188,7 +188,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="driving_region_japan">Giappone</string>
 	<string name="announce_gpx_waypoints">Annuntzia sos puntos de coladòrgiu GPX</string>
     <string name="speak_title">Annuntzia…</string>
-	<string name="speak_descr">Cunfigura pro annuntziare sos nùmenes de sas istradas, sos avèrtimentos (pasadas fortzadas, dossos), sos annuntzios de s'autovelox, sos lìmites de lestresa.</string>
+	<string name="speak_descr">Cunfigura pro annuntziare sos nùmenes de sas istradas, sos avèrtimentos (pasadas fortzadas, dossos), sos annuntzios de s\'autovelox, sos lìmites de lestresa.</string>
 	<string name="speak_street_names">Annuntzia sos nùmenes de sas istradas (TTS)</string>
     <string name="speak_speed_limit">Annuntzia sos lìmites de lestresa</string>
     <string name="speak_cameras">Annuntzia sos autovelox</string>
@@ -197,8 +197,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	\n\t* Annuntzios bogales pro sos lìmites de lestresa e sos autovelox
 	\n\t* Prus capabilidade de frunire annuntzios bogales (annuntziamentu de sos nùmenes de sas istradas)
 	\n\t* Arta carchidare de sas iconas de sa mapa
-	\n\t* Unu muntone de mudas in s'interfatze gràfica
-	\n\t* Curretzione de faddinas in sa bisualizatzione de sa distantzia, s'analizatzione de sos puntos  GPX, s'impreu de sos puntos de coladòrgiu, sos widget de pianificatzione, su carrigamentu de sos datos in OSM e sa gestione https
+	\n\t* Unu muntone de mudas in s\'interfatze gràfica
+	\n\t* Curretzione de faddinas in sa bisualizatzione de sa distantzia, s\'analizatzione de sos puntos  GPX, s\'impreu de sos puntos de coladòrgiu, sos widget de pianificatzione, su carrigamentu de sos datos in OSM e sa gestione https
     </string>
     <string name="osb_author_or_password_not_specified">Pro piaghere dislinda su nùmene impitadore OSM e sa crae (password) in sas Impostaduras</string>
     <string name="clear_intermediate_points">Burra sos puntos mesanos</string>
@@ -219,7 +219,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="settings_preset_descr">Issèbera unu perfilu de impreu cun impostaduras pro sa mapa e su nàvigu pessonalizzau.</string>
     <string name="destination_point">Destinatzione %1$s</string>
     <string name="context_menu_item_destination_point">Imposta comente destinatzione</string>
-    <string name="please_select_address">Issèbera in antis sa citade o s'istrada</string>
+    <string name="please_select_address">Issèbera in antis sa citade o s\'istrada</string>
     <string name="tip_recent_changes_1_4_t">Mudas in sa 1.4:
 	\n\t* Cusserta sos puntos de colaròrgiu pro los visitare totus in manèra primorosa (cummessu biagiadore, ghenna-a-ghenna)
 	\n\t* Chirca sas carreras impreande su nùmene (in sos bighinados) 
@@ -230,7 +230,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	\n\t* Suportu a sas notas de OSM 
     </string>
     <string name="search_street_in_neighborhood_cities">Chirca sas istradas in sas citades prus a curtzu</string>
-    <string name="intermediate_items_sort_return">Puntos mesanos cussertaos pro perfetzionare s'andala pro sa destinatzione.</string>
+    <string name="intermediate_items_sort_return">Puntos mesanos cussertaos pro perfetzionare s\'andala pro sa destinatzione.</string>
     <string name="intermediate_items_sort_by_distance">Cusserta (ghenna a ghenna)</string>
     <string name="local_osm_changes_backup_successful">Creatzione documentu de muda OSM %1$s acabada</string>
     <string name="local_osm_changes_backup_failed">Creatzione de sa còpia locale de seguràntzia (backup) de sas mudas faddida</string>
@@ -243,7 +243,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="plugin_distance_point">Puntu</string>
     <string name="gpx_file_name">Nùmene de su documentu GPX</string>
     <string name="gpx_saved_sucessfully">Documentu GPX sarbadu cun sutzessu in {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Creare àndalas (o impreare/mudare documentos GPX esistentes) pro medire sa distantzia intra 'e tres puntos. Sarbare comente GPX, at a poder èssere impreau pro pianificare una caminera GPX.</string>
+    <string name="osmand_distance_planning_plugin_description">Creare àndalas (o impreare/mudare documentos GPX esistentes) pro medire sa distantzia intra \'e tres puntos. Sarbare comente GPX, at a poder èssere impreau pro pianificare una caminera GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Aina Calcoladore de distànzia e Pianificatzione</string>
     <string name="use_distance_measurement_help">* Toca pro sinnare unu puntu.\n 
         * Carca e tene carcau in sa mapa pro burrare sos puntos antepostos.\n
@@ -266,7 +266,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="files_limit">tenes galu %1$d documentos</string>
     <string name="available_downloads_left">Disponìbiles %1$d documentos da isgarrigare</string>
     <string name="install_paid">Versione cumprida</string>
-    <string name="cancel_route">Burra s'àndala</string>
+    <string name="cancel_route">Burra s\'àndala</string>
     <string name="cancel_navigation">Firma su nàvigu</string>
     <string name="clear_destination">Burra sa destinatzione</string>
     <string name="download_using_mobile_internet">Sa connessione WiFi non est ativa. Boles sighire a iscarrigare impreande sa connessione internet atuale?</string>
@@ -277,8 +277,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="tip_recent_changes_1_3_t">Mudas in sa 1.3:
         \n\t* Torrau a pònnere su suportu pro tauleddas (tablets) e ischermos mannos
         \n\t* Tema Holo (personalizatzione)
-        \n\t* Prus impostaduras pro s'istabilizatzione de sa bùssola
-        \n\t* Su butone a manca in s'ischermada de sa mapa remplesa su butone "Menu"
+        \n\t* Prus impostaduras pro s\'istabilizatzione de sa bùssola
+        \n\t* Su butone a manca in s\'ischermada de sa mapa remplesa su butone "Menu"
     </string>
     <string name="monitoring_settings">Servitzios de registratzione e modalidade "a reposu"</string>
     <string name="monitoring_settings_descr">Cunfigura comente registrare biàgios e ativare sa modalidade "a reposu"</string>
@@ -292,10 +292,10 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="osmand_monitoring_plugin_name">Servitzios de registratzione e modalidade "a reposu"</string>
     <string name="osmand_background_plugin_description">Ammustra sas impostaduras pro abilitare sa compidada e su nàvigu in modalidade " a reposu" (ischermu istudau)pro mèdiu de ischidaduras periòdicas de su GPS.</string>
     <string name="contribution_activity">Installa sa versione</string>
-    <string name="choose_osmand_theme_descr">Issèbera su tema de s'aplicu</string>
-    <string name="choose_osmand_theme">Tema de s'aplicu</string>
-    <string name="accessibility_options">Optziones pro s'atzessibilidade</string>
-    <string name="select_address_activity">Issèbera s'indiritzu</string>
+    <string name="choose_osmand_theme_descr">Issèbera su tema de s\'aplicu</string>
+    <string name="choose_osmand_theme">Tema de s\'aplicu</string>
+    <string name="accessibility_options">Optziones pro s\'atzessibilidade</string>
+    <string name="select_address_activity">Issèbera s\'indiritzu</string>
     <string name="favourites_list_activity">Issèbera preferridu</string>
     <string name="local_openstreetmap_act_title">Mudas OSM</string>
     <string name="default_buttons_other_actions">Àteras atziones</string>
@@ -303,7 +303,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
         \n sa caminera GPX atuale</string>
 	<string name="tip_recent_changes_1_2_t">Curretziones in sa 1.2.1:
 	    \n\t*Currettu Geo Intent (Foursquare, c:geo)
-	    \n\t*Currettu sa tremuledda de s'ischermu durante su nàvigu
+	    \n\t*Currettu sa tremuledda de s\'ischermu durante su nàvigu
 	    \n\t*Àteros errores minores
 	    \n\nMudas in sa 1.2:
 		\n\t* Curretzione de errores (perfessionados su nàvigu, sa chirca, sa registratzione AV, sas indicatziones bogales, carchi mezzoramentu pro sa bisualizzatzione)
@@ -344,21 +344,21 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="stop_routing_confirm">Ses seguru de bòlere firmare su nàvigu?</string>
     <string name="clear_dest_confirm">Ses seguru de bòlere burrare sa destinatzione (e sos puntos mesanos)?</string>
     <string name="precise_routing_mode_descr">Abìlita pro calculare àndalas pretzisas sena attoppos. Est lentu e limitadu in sa distantzia.</string>
-    <string name="precise_routing_mode">Calculu pretzisu de s'àndala (alfa)</string>
+    <string name="precise_routing_mode">Calculu pretzisu de s\'àndala (alfa)</string>
     <string name="recording_context_menu_show">Bisualizza</string>
     <string name="recording_photo_description">Foto %1$s a %2$s</string>
     <string name="av_def_action_picture">Iscata una foto</string>
     <string name="recording_context_menu_precord">Iscata una foto</string>
-    <string name="av_use_external_camera_descr">Imprea s'aplicu de sistema pro sas fotos</string>
-    <string name="dropbox_plugin_description">Su plugin Dropbox permìttidi de sincronizare sas camineras e sas notas àudio/vìdeo cun s'acontu tuo de Dropbox.</string>
+    <string name="av_use_external_camera_descr">Imprea s\'aplicu de sistema pro sas fotos</string>
+    <string name="dropbox_plugin_description">Su plugin Dropbox permìttidi de sincronizare sas camineras e sas notas audio/video cun s\'acontu tuo de Dropbox.</string>
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
-    <string name="intermediate_points_change_order">Muda s'òrdine</string>
-    <string name="srtm_paid_version_msg">Pro piaghere lea a cunsideru s'acuistu de su plugin pro sas lìnias de livellu in su Market, pro sostènnere s'isvilupu imbeniente.</string>
+    <string name="intermediate_points_change_order">Muda s\'òrdine</string>
+    <string name="srtm_paid_version_msg">Pro piaghere lea a cunsideru s\'acuistu de su plugin pro sas lìnias de livellu in su Market, pro sostènnere s\'isvilupu imbeniente.</string>
     <string name="srtm_paid_version_title">Pugin lìnias de livellu</string>
     <string name="av_def_action_choose">Issèbera su rechesta</string>
     <string name="av_def_action_video">Registra video</string>
-    <string name="av_def_action_audio">Registra àudio</string>
-    <string name="av_widget_action_descr">Issèbera s'atzione predefinida de su widget</string>
+    <string name="av_def_action_audio">Registra audio</string>
+    <string name="av_widget_action_descr">Issèbera s\'atzione predefinida de su widget</string>
     <string name="av_widget_action">Azione predefinida de su widget</string>
     <string name="av_video_format_descr">Issèbera su formadu de essida video</string>
     <string name="av_video_format">Formadu de essida video</string>
