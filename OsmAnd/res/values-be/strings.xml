@@ -69,8 +69,14 @@
     <string name="destination_point">Месца прызначэньня %1$s</string>
     <string name="context_menu_item_destination_point">Ужыць як прызначэньне</string>
     <string name="please_select_address">Абярыце спачатку горад ці вуліцу</string>
-    <string name="tip_recent_changes_1_4_t">Зьмены в 1.4:
-\n\t* Магчымасьць аптымальнага ўпорадкаваньня промежных кропак маршруту (задача каміваяжора, сартаваньне па адлегласьці) \n\t* Пошук вуліцы па назве (побач) \n\t* Убудова планаваньня маршрутаў (сьцягваньне/редагаваньне/захавеньне GPX файлаў) \n\t* Новы экран сьцягваньня \n\t* Падтрымка ўкладзеных тэчак для GPX файлаў (упарадкуйце вашыя GPX файлы) \n\t* Выдалены файлы SRTM \n\t* Падтрымка OSM нататак 
+    <string name="tip_recent_changes_1_4_t">Зьмены ў 1.4:
+	\n\t* Магчымасьць аптымальнага ўпарадкаваньня прамежных кропак маршруту (задача каміваяжора, сартаваньне па адлегласьці)
+	\n\t* Пошук вуліцы па назве (побач)
+	\n\t* Модуль планаваньня маршрутаў (сьцягваньне/редагаваньне/захаваньне GPX файлаў)
+	\n\t* Новы экран сьцягваньня
+	\n\t* Падтрымка ўкладзеных тэчак для GPX файлаў (упарадкаваньне вашых GPX файлы)
+	\n\t* Выдалены файлы SRTM
+	\n\t* Падтрымка нататак OSM 
     </string>
     <string name="search_street_in_neighborhood_cities">Пошук вуліцы ў суседніх гарадах</string>
     <string name="intermediate_items_sort_return">Прамежкавыя кропкі перасартыраваныя ў парадку шляху да месца прызначэньня.</string>
@@ -129,8 +135,20 @@
     <string name="favourites_list_activity">Абярыце з упадабаных</string>
     <string name="local_openstreetmap_act_title">Рэдагаваньне OSM</string>
     <string name="default_buttons_other_actions">Iншыя дзеяньні</string>
-    <string name="save_current_track_widget">Захаваць \n бягучы GPX трэк</string>
-	<string name="tip_recent_changes_1_2_t">Зьмены ў 1.2.1 \n\t*Выпраўлены Геа сэрвісы (Foursquare, c:geo) \n\t*Выпраўлена дрыжаньне выявы пад час навігаціі \n\t*Інші незначні виправлення \n\nЗьмены ў 1.2: \n\t* Выпраўлены памылкі (маршруцізаціі, пошуку, запісу відэа/голасу, аудыё-падказак, некторыя паляпшэньні адлюстраваньня) \n\t* Спрошчанае наланаладжваньне слою рэльефу (патрэбная убудова Ізаліній вышынь) \n\t* Магчыма выкарыстоўваць спасылкі з maps.google.com \n\t* Новы віджэт (GPS інфа) \n\t* Дададзена падтрымка шматаконнага інтэрфейсу для апошніх мадэляў Samsung \n\t* Фільтр Калмана для компаса \n\t* Падтрымка гадзіньніка Pebble</string>
+    <string name="save_current_track_widget">Захаваць \n бягучы GPX сьлед</string>
+	<string name="tip_recent_changes_1_2_t">Зьмены ў 1.2.1
+	\n\t*Выпраўлены Геа сэрвісы (Foursquare, c:geo)
+	\n\t*Выпраўлена дрыжаньне выявы пад час навігаціі
+	\n\t*Іншыя незначныя выпраўленьні
+	\n\nЗьмены ў 1.2:
+		\n\t* Выпраўлены памылкі (маршрутызацыі, пошуку, запісу відэа/голасу, аудыё-падказак, некторыя паляпшэньні адлюстраваньня)
+		\n\t* Спрошчанае наладжваньне слою рэльефу (патрэбны модуль Ізаліній вышынь)
+		\n\t* Магчыма выкарыстоўваць спасылкі з maps.google.com
+		\n\t* Новы віджэт (GPS інфа)
+		\n\t* Дададзена падтрымка шматаконнага інтэрфейсу для апошніх мадэляў Samsung
+		\n\t* Фільтр Калмана для компаса
+		\n\t* Падтрымка гадзіньніка Pebble
+	</string>
     <string name="layer_hillshade">Слой ценяў рэльефу</string>
     <string name="map_widget_gps_info">Зьвесткі GPS</string>
     <string name="tip_recent_changes_1_1_4_t">Зьмены ў 1.1.4: \n\t* рэдызайн інтэрфейсу \n\t* Выпраўленыя памылкі
@@ -146,7 +164,11 @@
     <string name="index_name_openmaps">OpenMaps Эўропа</string>
     <string name="download_hillshade_item">Ценi рэльефу</string>
     <string name="download_hillshade_maps">Слой ценяў рэльефу</string>
-    <string name="tip_recent_changes_1_1_2_t">Зьмены ў 1.1.2: \n\t* Паляпшэньне аўдыё/відэа убудовы (фота з інфармацыяй EXIF) \n\t* Вапраўлена зручнасьць і рэструкрурызаваная убудова Ізалініі вышынь \n\t* Пакет ценяў рэльефу для убудовы Ізалініі вышынь \n\t* Выпраўленне памылак (неаптымальнай маршрутызацыі)
+    <string name="tip_recent_changes_1_1_2_t">Зьмены ў 1.1.2:
+	\n\t* Паляпшэньне аўдыё/відэа модуля (фота з інфармацыяй EXIF)
+	\n\t* Вапраўлена зручнасьць і рэструкрурызаваны модуль Ізалініі вышынь
+	\n\t* Пакет ценяў рэльефу для модуля Ізалініі вышынь
+	\n\t* Выпраўленне памылак (неаптымальнай маршрутызацыі)
     </string>
     <string name="dist_control_start">Пачаць</string>
     
@@ -160,12 +182,12 @@
     <string name="recording_photo_description">Фота %1$ з %2$</string>
     <string name="av_def_action_picture">Сфатаграфаваць</string>
     <string name="recording_context_menu_precord">Сфатаграфаваць</string>
-    <string name="dropbox_plugin_description">Убудова Dropbox дазваляе сынхранізаваць трэкі і аўдыё/відэа натакi з вашым рахункам Dropbox.</string>
-    <string name="dropbox_plugin_name">Убудова Dropbox</string>
+    <string name="dropbox_plugin_description">Модуль Dropbox дазваляе сынхранізаваць трэкі і аўдыё/відэа натакi з вашым рахункам Dropbox.</string>
+    <string name="dropbox_plugin_name">Модуль Dropbox</string>
     
     <string name="intermediate_points_change_order">Зьмяніць парадак</string>
-    <string name="srtm_paid_version_msg">Калі ласка, падумайце пра набыццё ўбудовы Contour lines у Market для падтрымкі далейшай распрацоўкі.</string>
-    <string name="srtm_paid_version_title">Убудова для падтрымкі гарызанталяў</string>
+    <string name="srtm_paid_version_msg">Калі ласка, падумайце пра набыццё модуля Ізалініі вышынь у Market для падтрымкі далейшай распрацоўкі.</string>
+    <string name="srtm_paid_version_title">Модуль Ізалініі вышынь</string>
     <string name="av_def_action_choose">Выбар па запыце</string>
     <string name="av_def_action_video">Запіс відэа</string>
     <string name="av_def_action_audio">Запіс аўдыё</string>
@@ -185,18 +207,10 @@
     <string name="recording_playing">Прайграецца аўдыё з абранага запісу.\n%1$s</string>
     <string name="recording_open_external_player">Адкрыць знешні прайгравальнік</string>
     <string name="recording_delete_confirm">Вы хочаце выдаліць гэты запіс?</string>
-    <string name="tip_recent_changes_1_1_0_t">Changes in 1.1.0:
-		\n\t* Distance calculator plugin
-		\n\t* Audio/video notes plugin
-		\n\t* Contour lines plugin
-		\n\t* Bug fixes
-		\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
-		\n\t* EGM96 geoid offset correction for GPS altitude readings
-    </string>
     <string name="recording_unavailable">недаступны</string>
     <string name="recording_context_menu_arecord">Запісаць аўдыё-нататку</string>
     <string name="recording_context_menu_vrecord">Запісаць відэа-нататку</string>
-    <string name="layer_recordings">Recording layer</string>
+    <string name="layer_recordings">Слой запісу</string>
     <string name="recording_can_not_be_played">Запіс не можа быць прайграны</string>
     <string name="recording_context_menu_delete">Выдаліць запіс</string>
     <string name="recording_context_menu_play">Граць</string>
@@ -205,17 +219,15 @@
     <string name="av_control_stop">stop</string>
     <string name="av_control_start">Пачаць</string>
     <string name="map_widget_av_notes">Аўдыё/відэа нататкі</string>
-    <string name="osmand_srtm_short_description_80_chars">Убудова OsmAnd для пазасеткавых гарызанталяў</string>
-    <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd\'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
+    <string name="osmand_srtm_short_description_80_chars">Модуль OsmAnd для пазасеткавых ізаліній вышынь</string>
     <string name="map_widget_distancemeasurement">Вымярэньне адлегласьці</string>
-    <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location …\" to assign a note to the specified location</string>
+    <string name="audionotes_location_not_defined">Месцазнаходжаньне для прывязкі нататкі пакуль яшчэ не вызначылася. \"Выкарыстаць месцазнаходжаньне…\" каб прызначыць нататку ў выбраным месцы</string>
     <string name="monitoring_control_stop">stop</string>
     <string name="map_widget_audionotes">Аўдыё-нататкі</string>
     <string name="audionotes_plugin_description">Запісваць аўдыё/відэа-нататкі падчас вандроўкі</string>
     <string name="audionotes_plugin_name">Аўдыё/відэа нататкі</string>
     <string name="index_srtm_parts">часткі</string>
     <string name="index_srtm_ele">Гарызанталі</string>
-    <string name="srtm_plugin_description">Facilitates downloading offline contour lines and hillshades (\'Settings\' → \'Data Management\' → \'Download\' → Select desired map type).</string>
     <string name="srtm_plugin_name">Дадатак Contour lines</string>
     <string name="download_select_map_types">Іншыя мапы</string>
     <string name="download_roads_only_item">Толькі дарогі</string>
@@ -225,9 +237,8 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">Схаваць межы</string>
 	<string name="rendering_attr_noAdminboundaries_description">Не адлюстроўваць рэгіянальныя межы (адміністатыўныя ўзроўні 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid убудова мае старую версію і мае патрэбу ў абнаўленні.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid plugin is OsmAnd extension for OsModroid application for online tracking features. Information about the service is available on http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">Убудова OsMoDroid</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">Модуль OsMoDroid мае старую версію і мае патрэбу ў абнаўленні.</string>
+    <string name="osmodroid_plugin_name">Модуль OsMoDroid</string>
 	<string name="tip_altitude_offset">Карэкцыя вышыні над узроўнем мора</string>
 	<string name="tip_altitude_offset_t">Most GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
 		\n\nA better approximation to these local systems is the EGM96 (geoid) reference.
@@ -260,15 +271,15 @@
 	<string name="rendering_attr_roadColors_description">Выберыце схему колераў дарог:</string>
 	<string name="rendering_attr_roadColors_name">Дарожная схема колераў</string>
     <string name="map_widget_show_destination_arrow">Паказваць напрамак месца прызначэньня</string>
-    <string name="enable_plugin_monitoring_services">Дазвольце ўбудову сэрвісаў хронікі каб запісваць каардынаты (запіс GPX, сеткавы трэкінг)</string>
+    <string name="enable_plugin_monitoring_services">Дазволіць модулю адсочваньня выкарыстоўваць сэрвісы запісу сьледу (запіс GPX, адсочваньне праз сетку)</string>
     <string name="non_optimal_route_calculation">Разьлічваць прыблізны шлях на вялікія адлегласьці</string>
 	<string name="gps_not_available">Калі ласка, дазвольце GPS у наладах</string>
-    <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3:
-	\n\t* Waypoints
-	\n\t* Improved route guidance
-	\n\t* Added a setting which allows to avoid motorways while building a route
-	\n\t* Added one more type of roads for bicycles to the map (Cycleway=track)
-	\n\t* Bug fixes
+    <string name="tip_recent_changes_0_8_3_t">Зьмены ў 0.8.3 :
+	\n\t* Кропкі шляху
+	\n\t* Палепшана вядзенне на маршруту
+	\n\t* Дададзена налада, якая дазваляе пазбегнуць аўтастрад пры пабудове маршруту
+	\n\t* Дададзена яшчэ адзін тып дарог для ровараў на карце (Cycleway=трэк)
+	\n\t* Выпраўленне памылак
 	</string>
 	<string name="map_widget_monitoring_services">Сэрвісы хронікі</string>
 	<string name="no_route">Няма маршруту</string>
@@ -343,78 +354,77 @@
 		OsmAnd is actively being developed and our project and its further progress relies on financial contributions to fund the development and testdriving new functionality. Please consider buying OsmAnd+, or funding specific new features or making a general donation on osmand.net.
 	</string>
 	<string name="osmand_extended_description_4000_chars">
-OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed).
+OsmAnd (OSM Automated Navigation Directions) уяўляе сабой мапу і навігацыйную праграму з доступам да свабодных, глабальных і якасных дадзеных OpenStreetMap (OSM). Усе картаграфічныя дадзеныя могуць захоўвацца ў памяці прыстасаваньня для выкарыстання ў аўтаномным рэжыме. Дзякуючы выкарыстанью GPS вашага прыстасаваньня OsmAnd прапануе маршрутызацыю з візуальным і галасавых апавяшчэньнем для аўтамабілістаў, роварыстаў і пешаходаў. Усе асноўныя функці працуюць анлайн і аўтаномна (інтэрнэт не патрабуецца).
 
-Some of the main features:
+Некаторыя з галоўных магчымасцяў:
 
-Navigation
- - Works online (fast) or offline (no roaming charges when you are abroad)
- - Turn-by-turn voice guidance (recorded and synthesized voices)
- - Optional lane guidance, street name display, and estimated time of arrival
- - Supports intermediate points on your itinerary
- - Automatic re-routing whenever you deviate from the route
- - Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates
+Навігацыя 
+ - Працуе анлайн (хутка) або ў аўтаномным рэжыме (без платы за роўмінг, калі вы знаходзіцеся за мяжой)
+ - Галасавыя падказкі ад павароту да павароту (запіс і сінтэзаваны голас)
+ - Дадатковы падказка перастраеньня, паказ назвы вуліцы, разлічаны час прыбыцьця
+ - Падтрымка прамежкавых пунктаў на вашым маршруце
+ - Аўтаматычнае змяненне маршруту, калі вы адхіляцца ад маршруту
+ - Пошук месцаў па адрасе, па тыпу (напрыклад: рэстаран, гасцініца, АЗС, музей), альбо па геаграфічных каардынатах
 
-Map Viewing
- - Display your position and orientation on the map
- - Optionally align the map according to compass or your direction of motion
- - Save your most important places as Favorites
- - Display POIs (point of interests) around you
- - Can display specialized online tile maps
- - Can display satellite view (from Bing)
- - Can display different overlays like touring/navigation GPX tracks and additional maps with customizable transparency
- - Optionally display place names in English, local, or phonetic spelling
+Прагляд мапы
+ - Паказ вашага становішча і арыентацыы на мапе
+ - Пры жаданні паварочваць мапу ў адпаведнасці з компасам ці напрамкам вашага руху
+ - Захоўваньне сваіх найбольш важных месцаў, як Улюбёнае
+ - Паказ POI (кропкі цікавосьцяў) вакол вас
+ - Можна адлюстроўваць спецыялізаваныя онлайн tile мапы
+ - Можна адлюстроўваць выгляд са спадарожніка (ад Bing )
+ - Можна адлюстроўваць дадатковыя дадзеныя, як пройдзены ці навігацыйны GPX сьлед і дадатковыя мапы з выбарам празрыстасьці
+ - Пры жаданні паказ геаграфічных назваў англійскім, мясцовым або фанетычным правапісам
 
-Use OpenStreetMap and Wikipedia Data:
- - High quality information from the best collaborative projects of the world
- - Global maps from OpenStreetMap, available per country or region
- - Wikipedia POIs, great for sightseeing (not available in free version)
- - Unlimited free download, directly from the app (download limit 16 map files in free version)
- - Always up-to-date maps (updated at least once a month)
- - Compact offline vector maps
- - Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only)
- - Also supports online or cached tile maps
+Выкарыстаньне дадзеных OpenStreetMap і Wikipedia:
+ - Высокаякасная інфармацыя ад лепшых сумесных праектаў свету
+ - Глабальныя мапы з OpenStreetMap, даступныя для кожнай краіны або рэгіёну
+ - POI з Вікіпедыі - выдатна падыходзяць для агляду славутасцяў (не даступны ў бясплатнай версіі)
+ - Неабмежаваная бясплатная загрузка непасрэдна з праграмы (ліміт запампоўкі 16 картаграфічных файлаў у бясплатнай версіі)
+ - Заўсёды сучасныя мапы (абнаўляецца па меншай меры адзін раз у месяц)
+ - Кампактны аўтаномныя вектарныя мапы
+ - Выбар паміж поўнымі картаграфічнымі дадзенымі і проста дарожнай сеткай (прыклад: Уся Японія складае 700 Мб або 200 Мб толькі для дарожнай сеткі)
+ - Таксама падтрымлівае анлайн або кэшаваныя tile мапы
 
-Safety Features
- - Optional automated day/night view switching
- - Optional speed limit display, with reminder if you exceed it
- - Optional speed-dependent map zooming
- - Share your location so that your friends can find you
+Функцыі для бяспекі
+ - Дадатковае аўтаматычнае пераключэнне паміж дзённым і начным рэжымам
+ - Дадатковае адлюстраванне абмежавання хуткасці, з напамінам пры перавышэньні
+ - Дадатковая залежнасць маштабу мапы ад хуткасці
+ - Публікацыя свайго месцазнаходжання, каб вашы сябры мпглі знайсці вас
 
-Bicycle and Pedestrian Features
- - The maps include foot, hiking, and bike paths, great for outdoor activities
- - Special routing and display modes for bike and pedestrian
- - Optional public transport stops (bus, tram, train) including line names
- - Optional trip recording to local GPX file or online service
- - Optional speed and altitude display
- - Display of contour lines and hill-shading (via additional plugin)
+Функцыі для роварыстаў і пешаходаў
+ - Мапы збмяшчаюць зьвесткі пра  пешаходныя і веласіпедныя дарожкі, выдатна падыходзяць для мерапрыемстваў на свежым паветры
+ - Спецыяльныя рэжымы маршрутызацыі і адлюстравання для ровараў і пешаходаў
+ - Дадатковыя прыпынкі грамадскага транспарту (аўтобус, трамвай, цягнік) з назвай маршруту
+ - Дадатковы запіс сьледу ў лакальны файл GPX або анлайн службу
+ - Дадатковы паказ хуткасці і вышыні
+ - Адлюстраванне ізаліній вышыні і зацянення гор (праз дадатковы модуль)
 
-Directly Contribute to OpenStreetMap
- - Report map bugs
- - Upload GPX tracks to OSM directly from the app
- - Add POIs and directly upload them to OSM (or later if offline)
- - Optional trip recording also in background mode (while device is in sleep mode)
+Непасрэдны ўклад у OpenStreetMap
+ - Справаздача пра памылкі
+ - Загрузка GPX сьлядоў у OSM непасрэдна з праграмы
+ - Дадаваньне POI і непасрэдная загрузка іх на OSM (ці пазней, калі афлайн)
+ - Дадатковы запісу следу ў фонавым рэжыме (у той час як прыстасаваньне знаходзіцца ў спячым рэжыме )
 
-OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on osmand.net.
+OsmAnd мае адкрыты зыходны код і актыўна развіваецца. Кожны можа ўнесці свой уклад у праграму, паведамляючы пра памылкі, паляпшаючы пераклады, або праграмуючы новыя функцыі. Праект знаходзіцца ў стане пастаяннага ўдасканалення ўсіх гэтых формаў ўзаемадзеяння распрацоўніка з карыстальнікам. Прагрэс праекта таксама залежыць ад фінансавых узносаў у фонд развіцця, праграмаваньня і тэставаньня новых функцый. Пры куплі OsmAnd+ вы дапамагаеце праграме стаць яшчэ лепшай! Акрамя таго, можна фінансаваць канкрэтныя новыя функцыі або зрабіць агульнае ахвяраванне на osmand.net.
+↵
+Прыблізнае пакрыццё мапамі і якасць:
+ - Заходняя Еўропа : ****
+ - Усходняя Еўропа : ***
+ - Расія : ***
+ - Паўночная Амерыка: ***
+ - Паўднёвая Амерыка: **
+ - Азія : **
+ - Японія і Карэя : ***
+ - Блізкі Усход: **
+ - Афрыка : **
+ - Антарктыда : *
 
-
-Approximate map coverage and quality:
- - Western Europe: ****
- - Eastern Europe: ***
- - Russia: ***
- - North America: ***
- - South America: **
- - Asia: **
- - Japan &amp; Korea: ***
- - Middle East: **
- - Africa: **
- - Antarctica: *
-
-List of countries supported (basically world wide!):
-Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
+Спіс краін, якія падтрымліваюцца (увесь свет!):
+Афганістан, Албанія, Алжыр, Андора, Ангола, Ангілья, Антыгуа і Барбуда, Аргенціна, Арменія, Аруба, Аўстралія, Аўстрыя, Азербайджан, Багамскія выспы, Бангладэш  Бахрэйн, Барбадас, Беларусь, Бельгія, Беліз, Бенін, Бэрмудзкія выспы, Балівія, Бутан, Банайрэ, Боснія і Герцагавіна, Батсвана, Бразілія, Брытанскія Віргінскія выспы, Бруней, Балгарыя, Буркіна-Фасо, Бурундзі, Камбоджа, Камерун, Канада, Каба-Вэрдэ, Цэнтральнаафрыканская Рэспубліка, Чад, Чылі, Кітай, Калумбія, Каморскія Астравы, Конга, Коста-Рыка, Кот-дІвуар, Харватыя, Куба, Кюрасао, Кіпр, Чэшская Рэспубліка, Данія, Джыбуці, Дамініка, Дамініканская Рэспубліка, Эквадор, Егіпет, Сальвадор, Экватарыяльная Гвінея, Эрытрэя, Эстонія, Эфіопія, Фіджы, Фінляндыя, Францыя, Французская Гвіяна, Французская Палінезія, Габон, Гамбія, Грузія, Германія, Гана, Гібралтар, Грэцыя, Грэнландыя, Грэнада, Гвадэлупа, Гуам, Гватэмала, Гернсі, Гвінея, Гвінея-Бісаў, Гаяна, Гаіці, Ватыкан, Гандурас, Ганконг, Венгрыя, Ісландыя, Індыя, Інданезія, Іран, Ірак, Ірландыя, востраў Мэн, Ізраіль, Італія, Ямайка, Японія, Джэрсі, Іарданія, Казахстан, Кенія, Кірыбаці, Паўночнай Карэі і Паўднёвай Карэі, Кувейт, Кыргызстан, Лаос, Латвія, Ліван, Лесота, Ліберыя, Лівія, Ліхтэнштэйн, Літва, Люксембург, Макао, Македонія, Мадагаскар, Малаві, Малайзія, Мальдыўскія Астравы, Малі, Мальта, Марцініка, Маўрыкій, Маўрытанія, Майотта, Мексіка, Мікранэзія, Малдова, Манака, Манголія, Чарнагорыя, Монтсеррат, Марока, Мазамбік, Міянма, Намібія, Науру, Непал, Нідэрланды, Нідэрландскія Антыльскія выспы, Новая Каледонія, Новая Зеландыя, Нікарагуа, Нігер, Нігерыя, Нарвегія, Аман, Пакістан, Палаў, Палестынская тэрыторыя, Панама, Папуа-Новая Гвінея, Парагвай, Перу, Філіпіны, Польшча, Партугалія, Пуэрта-Рыка, Катар, Румынія, Расія, Руанда, Сэнт-Бартэлемі, Востраў Святой Алены Сэнт-Кітс і Нэвіс, Сэнт-Люсія, Сэнт-Марцін, Сен-Піер і Міквэлон, Сэнт-Вінсэнт і Грэнадыны, Самоа, Сан-Марына, Саудаўская Аравія, Сенегал, Сербія, Сейшэльскія Астравы, Сьера-Леонэ, Сінгапур, Славакія, Славенія, Самалі, Паўднёвая Афрыка, Паўднёвая Грузія, Паўднёвы Судан, Іспанія, Шры-Ланка, Судан, Сурынам, Свазіленд, Швецыя, Швейцарыя, Сірыя, Тайвань, Таджыкістан, Танзанія, Тайланд, Тымор-Лешці, Таго, Такелаў, Тангійская, Трынідад і Табага, Туніс, Турцыя, Тувалу, Туркменістан, Уганда, Украіна, ААЭ, Злучанае Каралеўства (UK), Злучаныя Штаты Амерыкі (ЗША) , Уругвай, Узбекістан, Вануату, Венесуэла, Віетнам, Уоліс і Футуна, Заходняя Сахара, Емен, Замбія, Зімбабвэ.
 	</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Мапы й навігацыя</string>
-	<string name="osmand_plus_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
+	<string name="osmand_plus_short_description_80_chars">Глабальная мабільная мапа і навігатар для аўтаномных і сеткавых мапаў OSM</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)
 
@@ -671,10 +681,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_monitoring_description">Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
 	<string name="osmand_extra_settings_description">Паказаць дадатковыя налады мапы (накшталт павялічэньня дэталёвасьці) і некаторыя налады спэцыфічныя для прылады.</string>
 	<string name="osmand_development_plugin_description">Паказаць налады для распрацоўшчыкаў накшталт сымуляцыі шляху ці хуткасьці паказу.</string>
-	<string name="plugins_screen">Убудовы</string>
-	<string name="select_plugin_to_activate">Пазначце ўбудову каб актываваць яе. (Магчыма спатрэбіцца перастартавацьOsmAnd.)</string>
-	<string name="prefs_plugins_descr">Убудовы актывуюць дадатковыя налады й магчымасьці</string>
-	<string name="prefs_plugins">Убудовы</string>
+	<string name="plugins_screen">Дадатковыя модулі</string>
+	<string name="select_plugin_to_activate">Пазначце модуль каб актываваць яго. (Магчыма спатрэбіцца перастартаваць OsmAnd.)</string>
+	<string name="prefs_plugins_descr">Модулі актывуюць дадатковыя налады й магчымасьці</string>
+	<string name="prefs_plugins">Дадатковыя модулі</string>
 	<string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0:
 		\n\t- *Plugin functionality*
 		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Settings/Plugins.
@@ -800,7 +810,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">Вэб-адрас для сеткавага сачэньня</string>
 	<string name="gpx_monitoring_disabled_warn">Калі ласка, дазвольце \'Лагаваньне трэкаў у GPX файл\' у наладах трэкінгу.</string>
-	<string name="show_current_gpx_title">Паказаць дзейны трэк</string>
+	<string name="show_current_gpx_title">Паказаць бягучы сьлед</string>
 	<string name="tip_recent_changes_0_7_0_t">Зьмены ў 0.7.0: \n\t- Пазасеткавыя зьвесткі вікіпэдыі з артыкуламі \n\t- Абноўленыя мапы \n\t- Іншыя невялікія пашырэньні</string>    
 	<string name="free_version_message">Гэтая бясплатная версія OsmAnd абмяжоўваецца %1$s загрузкамі і не падтрымлівае аўтаномныя артыкулы Вікіпедыі.</string>
 	<string name="free_version_title">Свабодная вэрсія</string>
@@ -915,7 +925,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="file_can_not_be_renamed">Файл ня можа быць пераназваны.</string>
 	<string name="file_with_name_already_exists">Файл з такой назвай ужо існуе.</string>
 	<string name="gpx_navigation">GPX шлях</string>
-	<string name="poi_query_by_name_matches_categories">Several POI categories found matching the query:</string>
+	<string name="poi_query_by_name_matches_categories">Некалькі катэгорый POI знойдзены, што адпавядаюць запыту:</string>
 	<string name="data_to_search_poi_not_available">Лякальных зьвестак для пошуку POI няма.</string>
 	<string name="poi_filter_by_name">Пошук па назьве</string>
 	<string name="old_poi_file_should_be_deleted">Файл POI \'%1$s\' залішні і можа быць выдалены.</string>
@@ -947,7 +957,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t- Improvement of TTS engine (announce exact distance, enable miles)
 		\n\t- Bug fixes
 	</string>
-	<string name="save_route_dialog_title">Захаваць шлях як GPX трэк</string>
+	<string name="save_route_dialog_title">Захаваць шлях як GPX сьлед</string>
 	<string name="route_successfully_saved_at">Шлях пасьпяхова захаваны як \'%1$s\'.</string>
 	<string name="filename_input">Імя файла: </string>
 	<string name="file_with_name_already_exist">Файл з такой самай назвай ужо існуе.</string>
@@ -970,8 +980,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="basemap_missing">Няма асноўнай мапы сьвету (якая пакрывае увесь сьвет на малых маштабах). Каб мець поўнае асяродзьдзе трэба зладаваць World_basemap_x.obf.</string>
 	<string name="vector_data_missing">Няма пазасеціўных зьвестак на картке SD. Каб карыстацца мапай па-за сеткай, трэба іх зладаваць.</string>
 	<string name="local_index_gpx_info_show">\n\nНаціснуць і трымаць для наладаў</string>
-	<string name="local_index_gpx_info_speed">\nAverage speed: %1$s \nMaximum speed: %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nAverage altitude: %1$s\nMinimum altitude: %2$s\nMaximum altitude: %3$s\nAscents: %4$s\nDescents: %5$s</string>
+	<string name="local_index_gpx_info_speed">\nСярэдняя хуткасць: %1$s \nМаксімальная хуткасць: %2$s</string>
+	<string name="local_index_gpx_info_elevation">\nСярэдняя вышыня: %1$s\nМінімальная вышыня: %2$s\nМаксімальная вышыня: %3$s\nЎзыходжанні: %4$s\nСпускі: %5$s</string>
 	<string name="local_index_gpx_info">Subtracks: %1$d\nTotal points: %2$d\nWaypoints: %3$d\nTotal distance: %4$s\nStart time: %5$tF,  %5$tR\nEnd time: %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Выданьне</string>
 	<string name="local_index_items_backuped">%1$d з %2$d рэчаў пасьпяхова дэактываваныя.</string>
@@ -986,10 +996,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_mi_reload">Перачытаць з карткі SD</string>
 	<string name="local_index_download">Зладаваць</string>
 	<string name="local_index_poi_data">Зьвесткі цікавосткаў</string>
-	<string name="local_index_address_data">Address data</string>
-	<string name="local_index_transport_data">Transportation data</string>
-	<string name="local_index_map_data">Map data</string>
-	<string name="local_indexes_cat_backup">Deactivated</string>
+	<string name="local_index_address_data">Адрасныя дадзеныя</string>
+	<string name="local_index_transport_data">Транспартныя дадзеныя</string>
+	<string name="local_index_map_data">Дадзеныя мапы</string>
+	<string name="local_indexes_cat_backup">Не актыўны</string>
 	<string name="local_indexes_cat_tts">Галасавыя зьвесткі (TTS)</string>
 	<string name="local_indexes_cat_voice">Галасавыя зьвесткі (запісаныя)</string>
 	<string name="local_indexes_cat_gpx">Зьвесткі GPX</string>
@@ -1012,21 +1022,21 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="voice_not_use">Не карыстацца</string>
 	<string name="voice_not_specified">None</string>
 	<string name="installing_new_resources">Unpacking new data…</string>
-	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no internet connection is available.</string>
+	<string name="internet_connection_required_for_online_route">Абраны навігацыйны анлайн сэрвіс, але няма злучэння з Інтэрнэтам.</string>
 	<string name="tts_language_not_supported_title">Мова не падтрымліваецца</string>
 	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to look for another TTS engine in Market? Otherwise the preset TTS language will be used.</string>
 	<string name="tts_missing_language_data_title">Адсутнічаюць дадзеныя</string>
-	<string name="tts_missing_language_data">No data for the selected language is installed. Do you want to go to Market to install?</string>
-	<string name="gpx_option_reverse_route">Reverse GPX direction</string>
-	<string name="gpx_option_destination_point">Use current destination</string>
-	<string name="gpx_option_from_start_point">Pass along entire track</string>
+	<string name="tts_missing_language_data">Няма усталяваных дадзеных для абранай мовы. Вы хочаце пайсці на Market, каб усталяваць?</string>
+	<string name="gpx_option_reverse_route">Развярнуць кірунак GPX</string>
+	<string name="gpx_option_destination_point">Выкарыстоўваць бягучы пункт прызначэння</string>
+	<string name="gpx_option_from_start_point">Прайсьці па ўсім сьледзе</string>
 	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' → \'Map layers\' → \'Map Source…\' → \'Offline vector maps\'.</string>
 	<string name="choose_audio_stream">Дзе казаць галасавыя падказкі</string>
 	<string name="choose_audio_stream_descr">Абярыце канал прайграваньня галасавых падказак</string>
 	<string name="voice_stream_voice_call">Галасавы канал</string>
 	<string name="voice_stream_notification">Канал апавяшчэньня</string>
 	<string name="voice_stream_music">Мэдыя/музычны канал</string>
-	<string name="warning_tile_layer_not_downloadable">Application cannot download map layer %1$s, please try to reinstall it.</string>
+	<string name="warning_tile_layer_not_downloadable">Праграма не можа спампаваць слой мапы %1$s, паспрабуйце пераўсталяваць яго.</string>
 	<string name="overlay_transparency_descr">Modify overlay transparency</string>
 	<string name="overlay_transparency">Празрыстасць накладаньня</string>
 	<string name="map_transparency_descr">Modify base map transparency</string>
@@ -1202,7 +1212,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="no_vector_map_loaded">Вектарныя карты не былі загружаны</string>
 	<string name="map_route_by_gpx">Navigate using GPX</string>
 	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
-	<string name="layer_gpx_layer">Трэк GPX…</string>
+	<string name="layer_gpx_layer">GPX сьлед…</string>
 	<string name="error_reading_gpx">Памылка пры чытанні GPX дадзеных</string>
 	<string name="vector_data">Оффлайн вектарныя карты</string>
 	<string name="transport_context_menu">Пошук транспарт на прыпынку</string>
@@ -1588,7 +1598,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="index_name_gb">Эўропа - Вялікабрытанія</string>
     <string name="calculate_osmand_route_without_internet">Вылічыць сегмент маршруту OsmAnd без Інтэрнэту</string>
     <string name="gpx_option_calculate_first_last_segment">Вылічыць маршрут OsmAnd для першага і апошняга ўчастка маршруту</string>
-    <string name="use_displayed_track_for_navigation">Ці хочаце вы выкарыстоўваць адлюстраваны трэк для навігацыі?</string>
+    <string name="use_displayed_track_for_navigation">Ці хочаце вы выкарыстоўваць адлюстраваны сьлед для навігацыі?</string>
     <string name="route_descr_select_on_map">Выбраць на карце …</string>
     <string name="route_info">Інфармацыя пра маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Аддаваць перавагу аўтамагістралям</string>
