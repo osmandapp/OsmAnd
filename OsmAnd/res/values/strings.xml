@@ -968,7 +968,15 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_short_object_names">Use object names</string>
 	<string name="accessibility_preferences_descr">Accessibility related preferences</string>
 	<string name="accessibility_preferences">Accessibility</string>
-	<string name="rendering_out_of_memory">Not enough process memory to display selected area</string>
+    <string-array name="arrival_distance_factors">
+        <item>Early</item>
+        <item>Normally</item>
+        <item>Late</item>
+		<item>At last metres</item>
+    </string-array>
+    <string name="arrival_distance">Arrival announcement</string>
+    <string name="arrival_distance_descr">How soon do you want the arrival announcement?</string>
+    <string name="rendering_out_of_memory">Not enough process memory to display selected area</string>
 	<string name="use_fluorescent_overlays">Fluorescent overlays</string>
 	<string name="use_fluorescent_overlays_descr">Use fluorescent colors to display tracks and routes</string>
 	<string name="offline_edition">Offline editing</string>
