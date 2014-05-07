@@ -558,6 +558,44 @@ public class RouteResultPreparation {
 			}
 //		}
 
+		String turnLanes = prevSegm.getObject().getValue("turn:lanes");
+		System.out.println("osmand turn lanes: " + turnLanes + ", " + ls);
+		if (turnLanes != null) {
+			System.out.println("osmand turn lanes count: " + turnLanes.split("\\|", -1).length);
+		}
+		if (turnLanes != null && turnLanes.split("\\|", -1).length == ls) {
+			String[] splitLaneOptions = turnLanes.split("\\|", -1);
+			System.out.println("osmand inside of special block");
+			for (int i = 0; i < ls; i++) {
+				String[] laneOptions = splitLaneOptions[i].split(";");
+				for (int j = 0; j < laneOptions.length; j++) {
+					if (laneOptions[j].equals("none") || laneOptions[j].equals("through")) {
+					lanes[i] |= 8;
+					} else if (laneOptions[j].equals("slight_right")) {
+						lanes[i] |= 16;
+					} else if (laneOptions[j].equals("slight_left")) {
+						lanes[i] |= 32;
+					} else if (laneOptions[j].equals("right")) {
+						lanes[i] |= 64;
+					} else if (laneOptions[j].equals("left")) {
+						lanes[i] |= 128;
+					} else if (laneOptions[j].equals("sharp_right")) {
+						lanes[i] |= 256;
+					} else if (laneOptions[j].equals("sharp_left")) {
+						lanes[i] |= 512;
+					} else if (laneOptions[j].equals("reverse")) {
+						lanes[i] |= 1024;
+					}
+				}
+			}
+		}
+
+		for (int i = 0; i < lanes.length; i++) {
+			if ((lanes[i] & 2040) == 0) {
+				lanes[i] |= 8;
+			}
+		}
+
 		double devation = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin()));
 		boolean makeSlightTurn = devation > 5 && (!isMotorway(prevSegm) || !isMotorway(currentSegm));
 		if (kl) {

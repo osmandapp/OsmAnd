@@ -519,10 +519,8 @@ public class RouteInfoWidgetsFactory {
 	
 	private static final float miniCoeff = 2f;
 	public BaseMapWidget createLanesControl(final RoutingHelper routingHelper, final OsmandMapTileView view) {
-		final Path laneStraight = new Path();
-		Matrix pathTransform = new Matrix();
+		final Matrix pathTransform = new Matrix();
 		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
-		TurnPathHelper.calcTurnPath(laneStraight, TurnType.sraight(), pathTransform);
 		final Paint paintBlack = new Paint();
 		paintBlack.setStyle(Style.STROKE);
 		paintBlack.setColor(Color.BLACK);
@@ -555,13 +553,58 @@ public class RouteInfoWidgetsFactory {
 					canvas.save();
 					// canvas.translate((int) (16 * scaleCoefficient), 0);
 					for (int i = 0; i < lanes.length; i++) {
+
+						System.out.println("osmand lane: " + lanes[i]);
+
 						if ((lanes[i] & 1) == 1) {
 							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
 						} else {
 							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
 						}
-						canvas.drawPath(laneStraight, paintBlack);
-						canvas.drawPath(laneStraight, paintRouteDirection);
+
+						if ((lanes[i] & 8) == 8) {
+							Path straight = new Path();
+							TurnPathHelper.calcTurnPath(straight, TurnType.valueOf("C", false), pathTransform);
+							canvas.drawPath(straight, paintBlack);
+							canvas.drawPath(straight, paintRouteDirection);
+						}
+						if ((lanes[i] & 16) == 16) {
+							Path slightRight = new Path();
+							TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf("TSLR", false), pathTransform);
+							canvas.drawPath(slightRight, paintBlack);
+							canvas.drawPath(slightRight, paintRouteDirection);
+						}
+						if ((lanes[i] & 32) == 32) {
+							Path slightLeft = new Path();
+							TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf("TSLL", false), pathTransform);
+							canvas.drawPath(slightLeft, paintBlack);
+							canvas.drawPath(slightLeft, paintRouteDirection);
+						}
+						if ((lanes[i] & 64) == 64) {
+							Path right = new Path();
+							TurnPathHelper.calcTurnPath(right, TurnType.valueOf("TR", false), pathTransform);
+							canvas.drawPath(right, paintBlack);
+							canvas.drawPath(right, paintRouteDirection);
+						}
+						if ((lanes[i] & 128) == 128) {
+							Path left = new Path();
+							TurnPathHelper.calcTurnPath(left, TurnType.valueOf("TL", false), pathTransform);
+							canvas.drawPath(left, paintBlack);
+							canvas.drawPath(left, paintRouteDirection);
+						}
+						if ((lanes[i] & 256) == 256) {
+							Path sharpRight = new Path();
+							TurnPathHelper.calcTurnPath(sharpRight, TurnType.valueOf("TSHR", false), pathTransform);
+							canvas.drawPath(sharpRight, paintBlack);
+							canvas.drawPath(sharpRight, paintRouteDirection);
+						}
+						if ((lanes[i] & 512) == 512) {
+							Path sharpLeft = new Path();
+							TurnPathHelper.calcTurnPath(sharpLeft, TurnType.valueOf("TSHL", false), pathTransform);
+							canvas.drawPath(sharpLeft, paintBlack);
+							canvas.drawPath(sharpLeft, paintRouteDirection);
+						}
+
 						canvas.translate(w, 0);
 					}
 					canvas.restore();

@@ -84,8 +84,16 @@ public class TurnType {
 	}
 	
 	// lanes encoded as array of int 
-	// last bit is 1, 0 (should we take this lane)
-	// first bits 0 - left, 1 - straight, 2 - right
+	// Bit 0: 1 if this lane can be allowed
+	// Bits 1-2: 0 - left, 1 - straight, 2 - right
+	// Bit 3: 1 if going straight is allowed
+	// Bit 4: 1 if slight right is allowed
+	// Bit 5: 1 if slight left is allowed
+	// Bit 6: 1 if right turn is allowed
+	// Bit 7: 1 if left turn is allowed
+	// Bit 8: 1 if sharp left is allowed
+	// Bit 9: 1 if sharp right is allowed
+	// Bit 10: 1 if U-turn is allowed
 	public void setLanes(int[] lanes) {
 		this.lanes = lanes;
 	}
