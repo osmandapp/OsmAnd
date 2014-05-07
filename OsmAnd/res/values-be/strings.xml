@@ -240,11 +240,7 @@
     <string name="osmodroid_plugin_old_ver_not_supported">Модуль OsMoDroid мае старую версію і мае патрэбу ў абнаўленні.</string>
     <string name="osmodroid_plugin_name">Модуль OsMoDroid</string>
 	<string name="tip_altitude_offset">Карэкцыя вышыні над узроўнем мора</string>
-	<string name="tip_altitude_offset_t">Most GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
-		\n\nA better approximation to these local systems is the EGM96 (geoid) reference.
-		\n\nOsmAnd will display your positions\'s altitude in the EGM96 system after you download the file \'World Altitide Correction\' (WW15MGH.DAC) via \'Settings\' → \'Data Management\'. (Original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
-	</string>
-    <string name="map_widget_max_speed">Абмежаваньне хуткасьці</string>
+	<string name="map_widget_max_speed">Абмежаваньне хуткасьці</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Будынкаў ня знойдзена.</string>
     <string name="incremental_search_city">Пошук горада паступова</string>
@@ -260,11 +256,6 @@
 	\n\t* Уведзены карты дарог
 	\n\t* Карта не губляе прывязкі да пазіцыі пасля перарыванняў
 	\n\t* Уключана служба рэжыма сну падчас навігацыі
-    </string>
-    <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4:
-	\n\t* Some bug fixes
-	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable sleep mode service during navigation
     </string>
     <string name="close_changeset">Зачыніць мноства змен</string>
 	<string name="zxing_barcode_scanner_not_found">Праграма ZXing Barcode Scanner не ўстаноўлена. Шукаць у Market?</string>
@@ -320,13 +311,6 @@
 	<string name="auto_zoom_map">Аўтаматычнае памяншэньне/павелічэньне</string>
 	<string name="snap_to_road_descr">Прывязвацца за дарог падчас навігацыі</string>
 	<string name="snap_to_road">Прывязвацца за дарогі</string>
-	<string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2:
-		\n\t* Improved Routing
-		\n\t* Dynamic map widgets
-		\n\t* Map settings moved to map screen
-		\n\t* Lock screen button with logging services
-		\n\t* Fixed Arabic, Kannada scripting and RTL languages 
-	</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Мапы й навігацыя</string>
 	<string name="osmand_short_description_80_chars">Глабальная мабільная мапа і навігатар для аўтаномных і сеткавых мапаў OSM</string>
 	<string name="osmand_long_description_1000_chars">
@@ -447,79 +431,78 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 		-  optional lane guidance, speed limit display, recorded and TTS voices
 	</string>
 	<string name="osmand_plus_extended_description_4000_chars">
-OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed).
+OsmAnd (OSM Automated Navigation Directions) уяўляе сабой мапу і навігацыйную праграму з доступам да свабодных, глабальных і якасных дадзеных OpenStreetMap (OSM). Усе картаграфічныя дадзеныя могуць захоўвацца ў памяці прыстасаваньня для выкарыстання ў аўтаномным рэжыме. Дзякуючы выкарыстанью GPS вашага прыстасаваньня OsmAnd прапануе маршрутызацыю з візуальным і галасавых апавяшчэньнем для аўтамабілістаў, роварыстаў і пешаходаў. Усе асноўныя функці працуюць анлайн і аўтаномна (інтэрнэт не патрабуецца).
 
-OsmAnd+ is the paid application version. By buying it you support the project, fund the development of new features, and receive the latest updates. You can test the application before buying by installing the free version called OsmAnd.
+OsmAnd+ - платная версія праграмы. Пры набыцці яе вы падтрымаеце праект, фінансуеце распрацоўку новых функцый і атрымліваеце апошнія абнаўленні. Вы можаце пратэставаць праграму перад набыццём, усталяваўшы бясплатную версію пад назвай OsmAnd.
 
-Some of the main features:
+Некаторыя з галоўных магчымасцяў:
 
-Navigation
- - Works online (fast) or offline (no roaming charges when you are abroad)
- - Turn-by-turn voice guidance (recorded and synthesized voices)
- - Optional lane guidance, street name display, and estimated time of arrival
- - Supports intermediate points on your itinerary
- - Automatic re-routing whenever you deviate from the route
- - Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates
+Навігацыя 
+ - Працуе анлайн (хутка) або ў аўтаномным рэжыме (без платы за роўмінг, калі вы знаходзіцеся за мяжой)
+ - Галасавыя падказкі ад павароту да павароту (запіс і сінтэзаваны голас)
+ - Дадатковы падказка перастраеньня, паказ назвы вуліцы, разлічаны час прыбыцьця
+ - Падтрымка прамежкавых пунктаў на вашым маршруце
+ - Аўтаматычнае змяненне маршруту, калі вы адхіляцца ад маршруту
+ - Пошук месцаў па адрасе, па тыпу (напрыклад: рэстаран, гасцініца, АЗС, музей), альбо па геаграфічных каардынатах
 
-Map Viewing
- - Display your position and orientation on the map
- - Optionally align the map according to compass or your direction of motion
- - Save your most important places as Favorites
- - Display POIs (point of interests) around you
- - Can display specialized online tile maps
- - Can display satellite view (from Bing)
- - Can display different overlays like touring/navigation GPX tracks and additional maps with customizable transparency
- - Optionally display place names in English, local, or phonetic spelling
+Прагляд мапы
+ - Паказ вашага становішча і арыентацыы на мапе
+ - Пры жаданні паварочваць мапу ў адпаведнасці з компасам ці напрамкам вашага руху
+ - Захоўваньне сваіх найбольш важных месцаў, як Улюбёнае
+ - Паказ POI (кропкі цікавосьцяў) вакол вас
+ - Можна адлюстроўваць спецыялізаваныя онлайн tile мапы
+ - Можна адлюстроўваць выгляд са спадарожніка (ад Bing )
+ - Можна адлюстроўваць дадатковыя дадзеныя, як пройдзены ці навігацыйны GPX сьлед і дадатковыя мапы з выбарам празрыстасьці
+ - Пры жаданні паказ геаграфічных назваў англійскім, мясцовым або фанетычным правапісам
 
-Use OpenStreetMap and Wikipedia Data:
- - High quality information from the best collaborative projects of the world
- - Global maps from OpenStreetMap, available per country or region
- - Wikipedia POIs, great for sightseeing
- - Unlimited free download, directly from the app
- - Always up-to-date maps (updated at least once a month)
- - Compact offline vector maps
- - Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only)
- - Also supports online or cached tile maps
+Выкарыстаньне дадзеных OpenStreetMap і Wikipedia:
+ - Высокаякасная інфармацыя ад лепшых сумесных праектаў свету
+ - Глабальныя мапы з OpenStreetMap, даступныя для кожнай краіны або рэгіёну
+ - POI з Вікіпедыі - выдатна падыходзяць для агляду славутасцяў
+ - Неабмежаваная бясплатная загрузка непасрэдна з праграмы
+ - Заўсёды сучасныя мапы (абнаўляецца па меншай меры адзін раз у месяц)
+ - Кампактны аўтаномныя вектарныя мапы
+ - Выбар паміж поўнымі картаграфічнымі дадзенымі і проста дарожнай сеткай (прыклад: Уся Японія складае 700 Мб або 200 Мб толькі для дарожнай сеткі)
+ - Таксама падтрымлівае анлайн або кэшаваныя tile мапы
 
-Safety Features
- - Optional automated day/night view switching
- - Optional speed limit display, with reminder if you exceed it
- - Optional speed-dependent map zooming
- - Share your location so that your friends can find you
+Функцыі для бяспекі
+ - Дадатковае аўтаматычнае пераключэнне паміж дзённым і начным рэжымам
+ - Дадатковае адлюстраванне абмежавання хуткасці, з напамінам пры перавышэньні
+ - Дадатковая залежнасць маштабу мапы ад хуткасці
+ - Публікацыя свайго месцазнаходжання, каб вашы сябры мпглі знайсці вас
 
-Bicycle and Pedestrian Features
- - The maps include foot, hiking, and bike paths, great for outdoor activities
- - Special routing and display modes for bike and pedestrian
- - Optional public transport stops (bus, tram, train) including line names
- - Optional trip recording to local GPX file or online service
- - Optional speed and altitude display
- - Display of contour lines and hill-shading (via additional plugin)
+Функцыі для роварыстаў і пешаходаў
+ - Мапы збмяшчаюць зьвесткі пра  пешаходныя і веласіпедныя дарожкі, выдатна падыходзяць для мерапрыемстваў на свежым паветры
+ - Спецыяльныя рэжымы маршрутызацыі і адлюстравання для ровараў і пешаходаў
+ - Дадатковыя прыпынкі грамадскага транспарту (аўтобус, трамвай, цягнік) з назвай маршруту
+ - Дадатковы запіс сьледу ў лакальны файл GPX або анлайн службу
+ - Дадатковы паказ хуткасці і вышыні
+ - Адлюстраванне ізаліній вышыні і зацянення гор (праз дадатковы модуль)
 
-Directly Contribute to OpenStreetMap
- - Report map bugs
- - Upload GPX tracks to OSM directly from the app
- - Add POIs and directly upload them to OSM (or later if offline)
- - Optional trip recording also in background mode (while device is in sleep mode)
+Непасрэдны ўклад у OpenStreetMap
+ - Справаздача пра памылкі
+ - Загрузка GPX сьлядоў у OSM непасрэдна з праграмы
+ - Дадаваньне POI і непасрэдная загрузка іх на OSM (ці пазней, калі афлайн)
+ - Дадатковы запісу следу ў фонавым рэжыме (у той час як прыстасаваньне знаходзіцца ў спячым рэжыме )
 
-OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on osmand.net.
+OsmAnd мае адкрыты зыходны код і актыўна развіваецца. Кожны можа ўнесці свой уклад у праграму, паведамляючы пра памылкі, паляпшаючы пераклады, або праграмуючы новыя функцыі. Праект знаходзіцца ў стане пастаяннага ўдасканалення ўсіх гэтых формаў ўзаемадзеяння распрацоўніка з карыстальнікам. Прагрэс праекта таксама залежыць ад фінансавых узносаў у фонд развіцця, праграмаваньня і тэставаньня новых функцый. Пры куплі OsmAnd+ вы дапамагаеце праграме стаць яшчэ лепшай! Акрамя таго, можна фінансаваць канкрэтныя новыя функцыі або зрабіць агульнае ахвяраванне на osmand.net.
 
+Прыблізнае пакрыццё мапамі і якасць:
+ - Заходняя Еўропа : ****
+ - Усходняя Еўропа : ***
+ - Расія : ***
+ - Паўночная Амерыка: ***
+ - Паўднёвая Амерыка: **
+ - Азія : **
+ - Японія і Карэя : ***
+ - Блізкі Усход: **
+ - Афрыка : **
+ - Антарктыда : *
 
-Approximate map coverage and quality:
- - Western Europe: ****
- - Eastern Europe: ***
- - Russia: ***
- - North America: ***
- - South America: **
- - Asia: **
- - Japan &amp; Korea: ***
- - Middle East: **
- - Africa: **
- - Antarctica: *
-
-List of countries supported (basically world wide!):
-Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
+Спіс краін, якія падтрымліваюцца (увесь свет!):
+Афганістан, Албанія, Алжыр, Андора, Ангола, Ангілья, Антыгуа і Барбуда, Аргенціна, Арменія, Аруба, Аўстралія, Аўстрыя, Азербайджан, Багамскія выспы, Бангладэш  Бахрэйн, Барбадас, Беларусь, Бельгія, Беліз, Бенін, Бэрмудзкія выспы, Балівія, Бутан, Банайрэ, Боснія і Герцагавіна, Батсвана, Бразілія, Брытанскія Віргінскія выспы, Бруней, Балгарыя, Буркіна-Фасо, Бурундзі, Камбоджа, Камерун, Канада, Каба-Вэрдэ, Цэнтральнаафрыканская Рэспубліка, Чад, Чылі, Кітай, Калумбія, Каморскія Астравы, Конга, Коста-Рыка, Кот-дІвуар, Харватыя, Куба, Кюрасао, Кіпр, Чэшская Рэспубліка, Данія, Джыбуці, Дамініка, Дамініканская Рэспубліка, Эквадор, Егіпет, Сальвадор, Экватарыяльная Гвінея, Эрытрэя, Эстонія, Эфіопія, Фіджы, Фінляндыя, Францыя, Французская Гвіяна, Французская Палінезія, Габон, Гамбія, Грузія, Германія, Гана, Гібралтар, Грэцыя, Грэнландыя, Грэнада, Гвадэлупа, Гуам, Гватэмала, Гернсі, Гвінея, Гвінея-Бісаў, Гаяна, Гаіці, Ватыкан, Гандурас, Ганконг, Венгрыя, Ісландыя, Індыя, Інданезія, Іран, Ірак, Ірландыя, востраў Мэн, Ізраіль, Італія, Ямайка, Японія, Джэрсі, Іарданія, Казахстан, Кенія, Кірыбаці, Паўночнай Карэі і Паўднёвай Карэі, Кувейт, Кыргызстан, Лаос, Латвія, Ліван, Лесота, Ліберыя, Лівія, Ліхтэнштэйн, Літва, Люксембург, Макао, Македонія, Мадагаскар, Малаві, Малайзія, Мальдыўскія Астравы, Малі, Мальта, Марцініка, Маўрыкій, Маўрытанія, Майотта, Мексіка, Мікранэзія, Малдова, Манака, Манголія, Чарнагорыя, Монтсеррат, Марока, Мазамбік, Міянма, Намібія, Науру, Непал, Нідэрланды, Нідэрландскія Антыльскія выспы, Новая Каледонія, Новая Зеландыя, Нікарагуа, Нігер, Нігерыя, Нарвегія, Аман, Пакістан, Палаў, Палестынская тэрыторыя, Панама, Папуа-Новая Гвінея, Парагвай, Перу, Філіпіны, Польшча, Партугалія, Пуэрта-Рыка, Катар, Румынія, Расія, Руанда, Сэнт-Бартэлемі, Востраў Святой Алены Сэнт-Кітс і Нэвіс, Сэнт-Люсія, Сэнт-Марцін, Сен-Піер і Міквэлон, Сэнт-Вінсэнт і Грэнадыны, Самоа, Сан-Марына, Саудаўская Аравія, Сенегал, Сербія, Сейшэльскія Астравы, Сьера-Леонэ, Сінгапур, Славакія, Славенія, Самалі, Паўднёвая Афрыка, Паўднёвая Грузія, Паўднёвы Судан, Іспанія, Шры-Ланка, Судан, Сурынам, Свазіленд, Швецыя, Швейцарыя, Сірыя, Тайвань, Таджыкістан, Танзанія, Тайланд, Тымор-Лешці, Таго, Такелаў, Тангійская, Трынідад і Табага, Туніс, Турцыя, Тувалу, Туркменістан, Уганда, Украіна, ААЭ, Злучанае Каралеўства (UK), Злучаныя Штаты Амерыкі (ЗША) , Уругвай, Узбекістан, Вануату, Венесуэла, Віетнам, Уоліс і Футуна, Заходняя Сахара, Емен, Замбія, Зімбабвэ.
 	</string>
-	<string name="tip_update_index">Абнаўленне Offline Карт</string>
+	<string name="tip_update_index">Абнаўленне мапаў для аўтаномнага выкарыстання</string>
 	<string name="tip_update_index_t">Up-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a data manager to download these offline maps (and some other data files), and to check for available updates.
 		\n\nTo download maps go to \'Settings\' → \'Data Management\' → \'Download offline data\'.
 		\n\nAfter the global region list is retrieved from the internet, click on any entry to download or update a file. Please note the file type selector near the top of the screen to select the type of download you want (regular maps, hillshade overlays, etc.).
@@ -532,12 +515,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="recalculate_route_to_your_location">Транспартны рэжым:</string>
 	<string name="select_navigation_mode">Выберыце від транспарту</string>
 	<string name="day_night_info_description">Узыход: %1$s \nЗаход: %2$s</string>
-	<string name="day_night_info">Day/night info</string>
+	<string name="day_night_info">Узыход/заход</string>
 	<string name="map_widget_day_night">Мапа дзень/ноч</string>
 	<string name="map_widget_vector_attributes">Атрыбуты паказу:</string>
 	<string name="map_widget_renderer">Стыль мапы</string>
 	<string name="live_monitoring_mode_off">Старт\n адсочвання онлайн</string>
-	<string name="live_monitoring_mode_on">Stop\n online tracking</string>
+	<string name="live_monitoring_mode_on">Спыніць\n адсочваньне праз сеціва</string>
 	<string name="position_on_map_descr">Choose location of position marker on the map</string>
 	<string name="position_on_map">Position marker</string>
 	<string name="layer_map_appearance">Сканфігураваць экран</string>
@@ -557,7 +540,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="bg_service_sleep_mode_on">Спынiць\n рэжым сну</string>
 	<string name="gps_wakeup_interval">Iнтэрвал абуджэння GPS: %s</string>
 	<string name="int_continuosly">Бесперапынны</string>
-	<string name="screen_is_locked">To unlock screen press lock icon</string>
+	<string name="screen_is_locked">Для разблакоўкі экрана дакраніцеся да значка блакаваньня</string>
 	<string name="map_widget_top_text">Назва вуліцы</string>
 	<string name="map_widget_config">Сканфігураваць экран</string>
 	<string name="map_widget_back_to_loc">Я тут</string>
@@ -599,75 +582,75 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* Enable/disable logging widget
 	</string>
 	<string name="select_animate_speedup">Абярыце хуткасьць</string>
-    	<string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
+    	<string name="global_app_allocated_memory_descr">Выдзелена памяці %1$s МБ (Абмежаваньне Android %2$s МБ, Dalvik %3$s МБ).</string>
 	<string name="global_app_allocated_memory">Выдзеленая памяць</string>
 	<string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
 		Proportional memory %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Усяго роднай памяці</string>
 	<string name="update_downlod_list">Перачытаць сьпіс</string>
 	<string name="starting_point_too_far">Пачатковая кропка занадта далёка ад бліжэйшай дарогі.</string>
-	<string name="shared_location">Shared location</string>
+	<string name="shared_location">Агульныя месцы</string>
 	<string name="osmand_parking_event">Забраць машыну са стаянкі</string>
 	<string name="osmand_parking_warning">Папярэджанне</string>
-	<string name="osmand_parking_warning_text">Notification to pick up your car was previously added to your Calendar. It will remain there until you will delete it manually.</string>    
+	<string name="osmand_parking_warning_text">Напамін аб абмежаванні часу паркоўкі аўтамабіля ўжо дададзены ў каляндар. Вам будзе неабходна яго выдаліць ўручную.</string>    
 	<string name="osmand_parking_time_limit_title">Задайце ліміт часу паркоўкі</string>
 	<string name="osmand_parking_delete_confirm">Вы хочаце выдаліць месцазнаходжанне прыпаркаванага аўтамабіля?</string>
 	<string name="osmand_parking_delete">Выдаліць маркер паркоўкі</string>
 	<string name="osmand_parking_choose_type">Выберыце тып паркоўкі</string>
-	<string name="osmand_parking_lim_text">Time-limited</string>
-	<string name="osmand_parking_no_lim_text">Time-unlimited</string>
-	<string name="osmand_parking_add_event">Add a notification to Calendar application</string>
-	<string name="osmand_parking_time_limit">Time-limited parking</string>
-	<string name="osmand_parking_time_no_limit">Time-unlimited parking</string>
+	<string name="osmand_parking_lim_text">З абмежаваннем па часе</string>
+	<string name="osmand_parking_no_lim_text">Без абмежавання па часе</string>
+	<string name="osmand_parking_add_event">Дадаць напамін ў каляндар</string>
+	<string name="osmand_parking_time_limit">Час стаянкі абмежаваны</string>
+	<string name="osmand_parking_time_no_limit">Час стаянкі неабмежаваны</string>
 	<string name="osmand_parking_position_description">Становішча вашага прыпаркаванага аўтамабіля. %1$s</string>
-	<string name="osmand_parking_position_description_add">To pick up the car at:</string>
+	<string name="osmand_parking_position_description_add">Забраць аўтамабіль у:</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
-	<string name="osmand_parking_position_name">Parking point</string>
-	<string name="osmand_parking_plugin_description">This plugin allows to store the location of your parked car.</string>
-	<string name="osmand_parking_plugin_name">Parking Position Plugin</string>
-	<string name="context_menu_item_add_parking_point">Mark as a parking position</string>
-	<string name="context_menu_item_delete_parking_point">Delete a parking marker</string>
+	<string name="osmand_parking_position_name">Месца паркоўкі</string>
+	<string name="osmand_parking_plugin_description">Модуль дазваляе запомніць месца, дзе прыпаркаваны ваш аўтамабіль.</string>
+	<string name="osmand_parking_plugin_name">Модуль месца паркоўкі</string>
+	<string name="context_menu_item_add_parking_point">Пазначыць месца стаянкі</string>
+	<string name="context_menu_item_delete_parking_point">Выдаліць пазнаку месца стаянкі</string>
 	<string name="gpxup_public">Грамадскі</string>
-	<string name="gpxup_identifiable">Identifiable</string>
-	<string name="gpxup_trackable">Trackable</string>
+	<string name="gpxup_identifiable">Ідэнтыфікуемы</string>
+	<string name="gpxup_trackable">Адсочвальны</string>
 	<string name="gpxup_private">Прыватны</string>
 	<string name="asap">ASAP</string>
 	<string name="save_route_as_gpx">Захаваць маршрут як GPX файл</string>
-	<string name="route_roundabout">Roundabout: take %1$d exit and go</string>
+	<string name="route_roundabout">Кругавы рух: %1$d зьезд</string>
 	<string name="route_kl">Трымайцеся левага боку і працягвайце рух</string>
 	<string name="route_kr">Трымайцеся правага боку і працягвайце рух</string>
-	<string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string>
+	<string name="rendering_attr_noPolygons_description">Адлюстроўваць толькі контуры, без залівання</string>
 	<string name="rendering_attr_noPolygons_name">Схаваць палігоны</string>
 	<string name="rendering_attr_appMode_name">Рэжым візуалізацыі</string>
-	<string name="rendering_attr_appMode_description">Optimize map for</string>
-	<string name="rendering_attr_contourLines_description">Display from zoom level (requires contour data):</string>
+	<string name="rendering_attr_appMode_description">Аптымізаваць карту для</string>
+	<string name="rendering_attr_contourLines_description">Мінімальны ўзровень маштабу з адлюстраваннем ізаліній вышынь:</string>
 	<string name="rendering_attr_contourLines_name">Паказваць лініі контуру</string>
-	<string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string>
+	<string name="rendering_attr_hmRendered_description">Адлюстроўваць больш дэталяў на мапе</string>
 	<string name="rendering_attr_hmRendered_name">Паказаць больш дэталей мапы</string>
-	<string name="local_index_routing_data">Routing data</string>
+	<string name="local_index_routing_data">Дадзеныя маршрутызацыі</string>
 	<string name="navigate_point_format">Фармат:</string>
 	<string name="poi_search_desc">Пошук цікавосткаў</string>
 	<string name="address_search_desc">Пошук па адрасе</string>
 	<string name="navpoint_search_desc">Каардынаты</string>
-	<string name="transport_search_desc">Transportation search</string>
+	<string name="transport_search_desc">Пошук транспарту</string>
 	<string name="favourites_search_desc">Пошук упадабаных</string>
 	<string name="history_search_desc">Гісторыя пошуку</string>
-	<string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
+	<string name="offline_navigation_not_available">Аўтаномная навігацыя OsmAnd часова недаступная.</string>
 	<string name="left_side_navigation">Леваручны рух</string>
 	<string name="left_side_navigation_descr">Абраць для краін з леваручным рухам</string>
 	<string name="download_link_and_local_description">Націсьніце тут каб зладаваць ці абнавіць пазасеціўныя зьвесткі. \nПстрыкніце на любы існуючы складнік каб бачыць падрабязнасьці, альбо націсьніце і трымайце каб дэактываваць ці выдаліць. Дзейныя зьвесткі на прыладзе (вольна %1$s):</string>
-	<string name="unknown_from_location">Starting point is not yet determined</string>
+	<string name="unknown_from_location">Першапачатковае месцазнаходжанне не вызначана</string>
 	<string name="unknown_location">Месца пакуль ня вызначанае</string>
-	<string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
-	<string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
+	<string name="modify_transparency">Змяніць празрыстасць (0 - празрысты, 255 - непразрысты)</string>
+	<string name="confirm_interrupt_download">Перапыніць загрузку файла?</string>
 	<string name="first_time_msg">Дзякуй за карыстаньне OsmAnd. Каб карыстацца ўсімі магчымасьцямі праграмы, вам патрэбныя некаторыя пазасеціўныя зьвесткі для вашага рэгіёну. Іх можна зладаваць праз \'Налады\' → \'Кіраваньне зьвесткамі\'. Пасьля гэтага вы зможаце глядзець мапу, шукаць адрасы, бачыць цікавосткі і грамадзкі транспарт.</string>    
-	<string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
-	<string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
+	<string name="basemap_was_selected_to_download">Базавая мапа неабходная для карэктнай працы праграмы і аўтаматычна была абраная для загрузкі.</string>
+	<string name="select_index_file_to_download">Нічога не знойдзена. Калі вы не знайшлі свой рэгіён, вы можаце стварыць мапу самастойна (гл. http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Сеціўныя і tile мапы</string>
 	<string name="local_indexes_cat_map">Пазасеціўныя мапы (вэктарныя)</string>
 	<string name="index_settings_descr">Ладаваньне мапаў і кіраваньне пазасеціўнымі зьвесткамі што захоўваюцца ў вашай прыладзе</string>
-	<string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
+	<string name="map_online_plugin_is_not_installed">Актывуйце модуль онлайн мапаў, каб выбіраць розныя крыніцы для мапаў</string>
 	<string name="map_online_data">Сеціўныя і tile мапы</string>
 	<string name="map_online_data_descr">Карыстацца сеціўнымі мапамі (зладаваць і кэшаваць тайлы на картцы SD)</string>
 	<string name="online_map_settings">Сеціўныя мапы</string>
@@ -698,11 +681,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t	- Improved in many areas		
 	</string>
 	<string name="osm_editing_plugin_description">Паказваць налады патрэбныя для зваротнай сувязі OSM накшталт збору/зьменаў цікавосткаў, стварэньня/камэнтаваньня хібаў OSM і дасыланьня запісаных файлаў GPX (патрабуе лагін/пароль OSM).</string>
-	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
-	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
+	<string name="vector_maps_may_display_faster_on_some_devices">Вектарныя мапы могуць адлюстроўвацца хутчэй. Падтрымліваецца не ўсімі прыладамі.</string>
+	<string name="play_commands_of_currently_selected_voice">Прайграць каманды абраным голасам</string>
 	<string name="debugging_and_development">Для распрацоўшчыкаў OsmAnd</string>
-	<string name="native_rendering">Native rendering</string>
-	<string name="test_voice_prompts">Test voice prompts</string>    
+	<string name="native_rendering">Хуткая адмалёўка</string>
+	<string name="test_voice_prompts">Пратэставаць галасавыя падказкі</string>    
 	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Data Management), or switch to online maps.</string>
 	<string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2:
 		\n\t- Native rendering for all devices
@@ -802,7 +785,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_openstreetmap_delete">Выдаліць зьмены</string>
 	<string name="local_openstreetmap_descr_title">Асінхроннае рэдагаванне OSM:</string>
 	<string name="local_openstreetmap_settings">Лакальна захаваныя OSM POI/Памылкі</string>
-	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs/Bugs noted in local database</string>
+	<string name="local_openstreetmap_settings_descr">Паказаць і кіраваць лакальнымі POI/Bugs</string>
 	<string name="live_monitoring_descr">Дасылаць трэкінг ў пазначаны вэб-сэрвіс</string>
 	<string name="live_monitoring">Сеткавае сачэньне</string>
 	<string name="live_monitoring_interval_descr">Задайце інтэрвал сеткавага сачэньня</string>
@@ -827,7 +810,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="index_name_asia">Азія</string>
 	<string name="index_name_oceania">Акеанія</string>
 	<string name="index_name_other">Сусьветныя і тэматычныя мапы</string>
-	<string name="index_name_wiki">Worldwide Wikipedia POIs</string>
+	<string name="index_name_wiki">Сусветная Вікіпедыя</string>
 	<string name="index_name_voice">Галасавыя пакункі (запісаныя)</string>
 	<string name="index_name_tts_voice">Галасавыя пакункі (TTS)</string>
 	<string name="amenity_type_osmwiki">Вікіпэдыя (пазасеціўная)</string>
@@ -1008,7 +991,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_offline_clear_search">Новы пошук</string>
 	<string name="map_text_size_descr">Выберыце памер шрыфта для назваў на карце</string>
 	<string name="map_text_size">Памер шрыфту мапы</string>
-	<string name="trace_rendering">Rendering debug info</string>
+	<string name="trace_rendering">Адладачная інфармацыя пра адмалёўку</string>
 	<string name="trace_rendering_descr">Паказаць прадукцыйнасць рэндэрынгу</string>
 	<string name="tip_recent_changes">Нядаўнія зьмены</string>
 	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6: 
@@ -1037,22 +1020,22 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="voice_stream_notification">Канал апавяшчэньня</string>
 	<string name="voice_stream_music">Мэдыя/музычны канал</string>
 	<string name="warning_tile_layer_not_downloadable">Праграма не можа спампаваць слой мапы %1$s, паспрабуйце пераўсталяваць яго.</string>
-	<string name="overlay_transparency_descr">Modify overlay transparency</string>
+	<string name="overlay_transparency_descr">Змяніць празрыстасць накладзенага слою</string>
 	<string name="overlay_transparency">Празрыстасць накладаньня</string>
-	<string name="map_transparency_descr">Modify base map transparency</string>
-	<string name="map_transparency">Base map transparency</string>
+	<string name="map_transparency_descr">Змяніць празрыстасць асноўнай карты</string>
+	<string name="map_transparency">Празрыстасьць асноўнай мапы</string>
 	<string name="layer_underlay">Underlay map…</string>
-	<string name="map_underlay">Underlay map</string>
-	<string name="map_underlay_descr">Choose underlay map</string>
+	<string name="map_underlay">Мапа падкладкі</string>
+	<string name="map_underlay_descr">Абраць мапу для падкладкі</string>
 	<string name="layer_overlay">Overlay map…</string>
 	<string name="default_none">None</string>
-	<string name="map_overlay">Overlay map</string>
-	<string name="map_overlay_descr">Choose overlay map</string>
+	<string name="map_overlay">Мапа для накладаньня</string>
+	<string name="map_overlay_descr">Абраць мапу для накладаньня</string>
 	<string name="tile_source_already_installed">Карта ўжо ўсталявана, налады будуць абноўлены</string>
-	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
+	<string name="select_tile_source_to_install">Выберыце (растравыя) мапы для ўстаноўкі або абнаўлення</string>
 	<string name="internet_not_available">Патрабуецца падключэнне да Інтэрнэту для выкананьня аперацыі, але яго няма</string>
 	<string name="install_more">Усталяваць яшчэ…</string>
-	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
+	<string name="level_to_switch_vector_raster_descr">Мінімальны маштаб для выкарыстання вектарных мапаў</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
 	<string name="tip_location_sharing">Дзяліцца месцазнаходжаньнем</string>
 	<string name="tip_location_sharing_t">You can share the location of interesting places on your trip with family or friends via the \'Use location\' context menu → \'Share location\'.
@@ -1150,14 +1133,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="old_map_index_is_not_supported">Састарэлы фармат дадзеных мапы \'\'{0}\'\' не падтрымліваецца</string>
 	<string name="poi_filter_closest_poi">Бліжэйшыя цікавосткі</string>
 	<string name="poi_filter_custom_filter">Дапасаваны фільтар</string>
-	<string name="poi_filter_namefinder">Online NameFinder</string>
+	<string name="poi_filter_namefinder">Сеткавы NameFinder</string>
 	<string name="reading_cached_tiles">Reading cached tiles…</string>
 	<string name="version_index_is_big_for_memory">Індэкс \'\'{0}\'\' не змяшчаецца ў памяці</string>
 	<string name="version_index_is_not_supported">Версія індэкса \'\'{0}\'\' не падтрымліваецца</string>
-	<string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
+	<string name="use_osmand_routing_service">Навігацыя OsmAnd &gt; 20 км</string>
 	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes &gt; 20 km (experimental)</string>
 	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
-	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
+	<string name="specified_dir_doesnt_exist">Указаны каталог не знойдзены.</string>
 	<string name="application_dir">Каталёг захоўваньня</string>
 	
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
@@ -1177,7 +1160,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="daynight_descr">Выберыце правіла пераключэння рэжыму дзень/ноч</string>
 	<string name="daynight">Рэжым дзень/ноч</string>
 	<string name="download_files_question">Спампаваць {0} файл(ы) ({1} MB)?</string>
-	<string name="items_were_selected">{0} item(s) selected</string>
+	<string name="items_were_selected">{0} адзінак абраныя</string>
 	<string name="filter_existing_indexes">Зладаванае</string>
 	<string name="deselect_all">Прыбраць вылучэньне ўсіх</string>
 	<string name="select_all">Вылучыць усе</string>
@@ -1189,18 +1172,18 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="select_max_zoom_preload_area">Выберыце максімальнае павелічэнне для папярэдняй загрузкі</string>
 	<string name="maps_could_not_be_downloaded">Гэтая карта не можа быць загружана</string>
 	<string name="continuous_rendering">Бесперапынны рэндэрынг</string>
-	<string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once</string>
-	<string name="rendering_exception">Error occurred while rendering selected area</string>
+	<string name="continuous_rendering_descr">Паказваць бесперапынную адмалёуку замест выявы цалкам</string>
+	<string name="rendering_exception">Памылка пры адмалёўцы абранай вобласьці</string>
 	<string name="renderer_load_sucess">Renderer паспяхова загружаны</string>
-	<string name="renderer_load_exception">Exception occurred: renderer was not loaded</string>
+	<string name="renderer_load_exception">Выключная сітуацыя: адмалёўшчык не загружаны</string>
 	<string name="renderers">Маляваньне</string>
 	<string name="show_point_options">Гэтае месца …</string>
 	<string name="renderers_descr">Choose rendering appearance</string>
 	<string name="poi_context_menu_website">Паказаць POI сайт</string>
 	<string name="poi_context_menu_call">Паказаць POI тэлефон</string>
 	<string name="download_type_to_filter">набярыце каб фільтраваць</string>
-	<string name="use_high_res_maps">High resolution display</string>
-	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
+	<string name="use_high_res_maps">Дысплей высокай рэзалюцыі</string>
+	<string name="use_high_res_maps_descr">Не расцягваць фрагменты мапы на дысплеях высокай шчыльнасці</string>
 	<string name="download_files">Зладаваць</string>
 	<string name="context_menu_item_search_transport">Пошук транспарту</string>
 	<string name="transport_searching_transport">Transportation results (no target):</string>
@@ -1210,8 +1193,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_index">Мапа</string>
 	<string name="voice">Голас</string>
 	<string name="no_vector_map_loaded">Вектарныя карты не былі загружаны</string>
-	<string name="map_route_by_gpx">Navigate using GPX</string>
-	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
+	<string name="map_route_by_gpx">Навігацыя з выкарыстаньнем GPX</string>
+	<string name="gpx_files_not_found">GPX файлы не знойдзены ў каталогу /tracks</string>
 	<string name="layer_gpx_layer">GPX сьлед…</string>
 	<string name="error_reading_gpx">Памылка пры чытанні GPX дадзеных</string>
 	<string name="vector_data">Оффлайн вектарныя карты</string>
@@ -1226,19 +1209,19 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="rotate_map_to_bearing_descr">Абраць раўнаваньне мапы на экране</string>
 	<string name="rotate_map_to_bearing">Арыентацыя мапы</string>
 	<string name="show_route">Падрабязнасьці шляху</string>
-	<string name="fav_imported_sucessfully">Favorites successfully imported</string>
+	<string name="fav_imported_sucessfully">Выбраныя паспяхова імпартаваны</string>
 	<string name="fav_file_to_load_not_found">GPX файл з упадабанымі ня знойдзены ў {0}</string>
-	<string name="fav_saved_sucessfully">Favorites successfully saved to {0}</string>
-	<string name="no_fav_to_save">No favorite points to save</string>
+	<string name="fav_saved_sucessfully">Выбраныя пасьпяхова захаваны ў {0}</string>
+	<string name="no_fav_to_save">Няма любімых месцаў для захоўваньня</string>
 	<string name="import_fav">Import</string>
 	<string name="export_fav">Export</string>
 	<string name="error_occurred_loading_gpx">Памылка пры загрузцы GPX</string>
 	<string name="send_report">Даслаць справаздачу</string>
-	<string name="none_region_found">No offline data for regions found on SD card. Download regions from the Internet.</string>
-	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
+	<string name="none_region_found">На SD-карце не знойдзена лакальных дадзеных для рэгіёнаў. Спампаваць рэгіёны з Інтэрнэту.</string>
+	<string name="poi_namefinder_query_empty">Увядзіце запыт для пошуку POI</string>
 	<string name="any_poi">Любы</string>
 	<string name="layer_transport_route">Маршрут перавозкі</string>
-	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
+	<string name="thanks_yandex_traffic">Дзякуй Яндэксу за дарожную інфармацыю.</string>
 	<string name="layer_yandex_traffic">Яндэкс трафік</string>
 	<string name="layer_route">Маршрут</string>
 	<string name="layer_favorites">Упадабаныя</string>
@@ -1248,23 +1231,23 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="layer_map">Крыніца мапы…</string>
 	<string name="menu_layers">Вызначыць выгляд</string>
 	<string name="context_menu_item_search_poi">Пошук POI</string>
-	<string name="use_trackball_descr">Use trackball to move map</string>
-	<string name="use_trackball">Use trackball</string>
+	<string name="use_trackball_descr">Выкарыстоўвайце трэкбол для перамяшчэння мапы</string>
+	<string name="use_trackball">Выкарыстоўвайце трэкбол</string>
 	<string name="background_service_wait_int_descr">Задаць максімальны час чакання для кожнага фонавага вызначэння каардынатаў</string>
-	<string name="background_service_wait_int">Maximum wait for fix</string>
-	<string name="service_stop_background_service">Switch off OsmAnd sleep mode navigation service</string>
+	<string name="background_service_wait_int">Максімальны час чаканьня вызначэньня каардынат</string>
+	<string name="service_stop_background_service">Выключыць навігацыю OsmAnd для рэжыму сну</string>
 	<string name="where_am_i">Дзе я ?</string>
 	<string name="process_navigation_service">Навігацыйны сэрвіс OsmAnd</string>
 	<string name="network_provider">Сетка</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">сэкундаў</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Set wake-up interval used by sleep mode service</string>
-	<string name="background_service_int">Wake-up interval</string>
-	<string name="background_service_provider_descr">Choose location provider used by sleep mode service</string>
-	<string name="background_service_provider">Location provider</string>
+	<string name="background_service_int_descr">Абярыце інтэрвал абуджэння для спячага рэжыму</string>
+	<string name="background_service_int">Інтэрвал абуджэньня</string>
+	<string name="background_service_provider_descr">Абярыце крыніцу каардынат для выкарыстаньня падчас спячага рэжыму</string>
+	<string name="background_service_provider">Крыніца каардынат</string>
 	<string name="background_router_service_descr">Runs OsmAnd in the background to track your position while screen is off</string>
-	<string name="background_router_service">Run in sleep mode</string>
+	<string name="background_router_service">Працуе ў рэжыме сну</string>
 	<string name="off_router_service_no_gps_available">The sleep mode navigation service requires a location provider to be turned on.</string>
 	<string name="hide_poi_filter">Схаваць фільтр</string>
 	<string name="show_poi_filter">Паказаць фільтр</string>
@@ -1275,9 +1258,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="voice_provider">Галасавыя падказкі</string>
 	<string name="voice_data_initializing">Initializing voice data…</string>
 	<string name="voice_data_not_supported">Непадтрымліваемая версія галасавых дадзеных</string>
-	<string name="voice_data_corrupted">Specified voice data is corrupted</string>
-	<string name="voice_data_unavailable">Selected voice data is not available</string>
-	<string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
+	<string name="voice_data_corrupted">Абраныя галасавыя дадзеныя пашкоджаны</string>
+	<string name="voice_data_unavailable">Абраныя галасавыя дадзеныя не даступныя</string>
+	<string name="sd_unmounted">SD-карта не даступная.\nВы не зможаце бачыць мапу або штосьці знайсці.</string>
 	<string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
 	<string name="unzipping_file">Unzipping file…</string>
 	<string name="route_tr">Направа і наперад</string>
@@ -1497,19 +1480,19 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osb_comment_menu_item">Дадаць камэнтар</string>
 	<string name="osb_comment_dialog_message">Паведамленьне</string>
 	<string name="osb_comment_dialog_author">Імя аўтара</string>
-	<string name="osb_comment_dialog_title">Adding comment to bug</string>
+	<string name="osb_comment_dialog_title">Даданне каментара да памылкі</string>
 	<string name="osb_comment_dialog_add_button">Дадаць камэнтар</string>
 	<string name="osb_comment_dialog_success">Гэты каментар быў паспяхова дададзены</string>
 	<string name="osb_comment_dialog_error">Выключная сітуацыя: каментар не быў дададзены</string>
-	<string name="osb_close_menu_item">Close bug</string>
-	<string name="osb_close_dialog_title">Closing bug</string>
-	<string name="osb_close_dialog_close_button">Close bug</string>
+	<string name="osb_close_menu_item">Зачыніць памылку</string>
+	<string name="osb_close_dialog_title">Закрыццё памылкі</string>
+	<string name="osb_close_dialog_close_button">Зачыніць памылку</string>
 	<string name="osb_close_dialog_success">Памылка была паспяхова зачынена</string>
-	<string name="osb_close_dialog_error">Exception occurred: bug was not closed</string>
+	<string name="osb_close_dialog_error">Выключная сітуацыя: памылка не была зачынена</string>
 	<string name="poi_edit_title">Рэдагаваць цікавостку</string>
 	<string name="poi_create_title">Стварыць цікавостку</string>
 	<string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
-	<string name="poi_remove_confirm_template">Delete {0} (enter comment)?</string>
+	<string name="poi_remove_confirm_template">Выдаліць {0} (дадаць каментар)?</string>
 	<string name="poi_remove_title">Выдаліць цікавостку</string>
 	<string name="default_buttons_delete">Выдаліць</string>
 	<string name="poi_remove_success">Цікавостка выдаленая</string>
@@ -1522,7 +1505,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_dialog_name">Назва</string>
 	<string name="poi_dialog_opening_hours">Open</string>
 	<string name="poi_dialog_comment">Каментар</string>
-	<string name="poi_dialog_comment_default">POI changing</string>
+	<string name="poi_dialog_comment_default">Зьмена POI</string>
 	<string name="poi_dialog_other_tags_message">Усе астатнія тэгі захоўваюцца</string>
 	<string name="default_buttons_commit">Commit</string>
 	<string name="default_buttons_reset">Reset</string>
@@ -1534,11 +1517,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="edit_filter_create_message">Фільтр {0} быў створаны</string>
 	<string name="default_buttons_selectall">Вылучыць усе</string>
 	<string name="email">email</string>
-	<string name="av_camera_focus">Camera focus type</string>
+	<string name="av_camera_focus">Тып факусоўкі камеры</string>
 	<string name="av_camera_focus_descr">Select internal camera focus type</string>
 	<string name="av_camera_focus_auto">Аўтафокус</string>
-	<string name="av_camera_focus_hiperfocal">Hyperfocal focus</string>
-	<string name="av_camera_focus_edof">Extended depth of field (EDOF)</string>
+	<string name="av_camera_focus_hiperfocal">Гіперфакальны фокус</string>
+	<string name="av_camera_focus_edof">Павялічаная глыбіня рэзкасці (EDOF)</string>
 	<string name="av_camera_focus_infinity">Фокус усталяваны на бясконцасці</string>
 	<string name="av_camera_focus_macro">Макра (буйны план) рэжым факусоўкі</string>
 	<string name="av_camera_focus_continuous">Камера пастаянна спрабуе сфакусавацца</string>
@@ -1695,4 +1678,18 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="keep_informing_never">Ніколі</string>
     <string name="keep_informing_descr">Анонс навігацыйных інструкцый праз рэгулярныя прамежкі часу</string>
     <string name="keep_informing">Паўтараць навігацыйныя інструкцыі</string>
-	</resources>
+	<string name="arrival_distance">Абвяшчэньне прыбыцьця</string>
+    <string name="tip_recent_changes_1_1_0_t">Зьмены ў 1.1.0:
+	\n\t* Модуль Разьлік адлегласці
+	\n\t* Модуль Аўдыё / відэа нататкі
+	\n\t* Модуль Ізалініі вышыні
+	\n\t* Выпраўленне памылак
+	\n\t* \'Турыстычны\' варыянт стылю мапы з большай колькасьцю дэталяў, новымі стылямі дарог, павышанай кантрастнасцю і інш.
+	\n\t* Карэкцыя геоіду EGM96 для паказанняў вышыні GPS
+    </string>
+    <string name="tip_recent_changes_0_8_4_t">Змены ў 0.8.4:
+	\n\t* Выпраўленне памылак
+	\n\t* Карта не губляе блакавання пазіцыі пасля перапыненняў
+	\n\t* Уключае рэжым сну падчас навігацыі
+    </string>
+    </resources>
