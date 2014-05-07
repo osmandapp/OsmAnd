@@ -1777,4 +1777,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
    	<string name="keep_informing_never">Aldrig</string>
     <string name="keep_informing_descr">Annoncer navigationsinstruktioner med jævne mellemrum</string>
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
-	</resources>
+	<string name="arrival_distance">Ankomst annoncering</string>
+    <string name="arrival_distance_descr">Hvor hurtigt vil du have ankomst annoncering?</string>
+    </resources>
