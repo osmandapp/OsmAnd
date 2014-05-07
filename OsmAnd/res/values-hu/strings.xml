@@ -1514,4 +1514,29 @@
     <string name="index_name_gb">Európa - Nagy-Britannia</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd útvonalszakasz számítása internet nélkül</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd útvonal számítása az első és utolsó útszakaszra</string>
-    </resources>
+    <string name="osmo_settings_uuid">Egyedi eszközazonosító</string>
+    <string name="osmo_settings_descr">Egyedi eszközregisztrációs kulcs megtekintése és egyéb monitoring beállítások </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring – Fejlett Live Monitoring sok funkcióval http://osmo.mobi távirányításhoz</string>
+    <string name="osmo_plugin_name">OSMo (Fejlett Live Monitoring)</string>
+    <string name="osmo_settings">OSMo</string>
+   	<string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
+    <string name="voice_pref_title">Hang</string>
+    <string name="misc_pref_title">Egyebek</string>
+    <string name="localization_pref_title">Fordítás</string>
+    <string name="index_item_nation_addresses">címek (egész ország)</string>
+	<string name="index_item_world_altitude_correction">GPS magasságkorrekció (globális)</string>
+	<string name="index_item_world_seamarks">Hajózási jelzések (globális)</string>
+	<string name="index_item_world_bitcoin_payments">Bitcoin fizetőhelyek (globális)</string>
+	<string name="index_item_world_basemap">Alaptérkép (globális)</string>
+    <string name="index_item_world_ski">Sítérkép (globális)</string>
+    <string name="interrupt_music_descr">Zene megszakítása bemondás közben</string>
+	<string name="interrupt_music">Zene megszakítása</string>
+	<string name="share_route_as_gpx">Útvonal megosztása GPX-ben</string>
+	<string name="share_route_subject">OsmAnd segítségével megosztott útvonal</string>
+	<string name="arrival_distance">Megérkezés bemondása</string>
+    <string name="arrival_distance_descr">Milyen korán szeretnéd hallani a megérkezés bejelentését?</string>
+    <string name="keep_informing_never">Soha</string>
+    <string name="keep_informing_descr">Navigációs utasítások bemondása rendszeres időközönként</string>
+    <string name="keep_informing">Navigációs utasítások ismétlése</string>
+	<string name="navigation_intent_invalid">Érvénytelen formátum: %s</string>
+</resources>
