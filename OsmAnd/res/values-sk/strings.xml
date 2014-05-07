@@ -1754,4 +1754,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
    	<string name="keep_informing_never">Nikdy</string>
     <string name="keep_informing_descr">Oznamuj navigačné pokyny v pravidelných intervaloch</string>
     <string name="keep_informing">Opakuj navigačné pokyny</string>
-	</resources>
+	<string name="arrival_distance">Oznámenie príjazdu</string>
+    <string name="arrival_distance_descr">Ako skoro má byť oznámený príjazd do cieľa?</string>
+    </resources>
