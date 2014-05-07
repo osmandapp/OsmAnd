@@ -562,45 +562,53 @@ public class RouteInfoWidgetsFactory {
 
 						if ((lanes[i] & 8) == 8) {
 							Path straight = new Path();
-							TurnPathHelper.calcTurnPath(straight, TurnType.valueOf("C", false), pathTransform);
+							TurnPathHelper.calcTurnPath(straight, TurnType.valueOf(TurnType.C, false), pathTransform);
 							canvas.drawPath(straight, paintBlack);
 							canvas.drawPath(straight, paintRouteDirection);
 						}
 						if ((lanes[i] & 16) == 16) {
 							Path slightRight = new Path();
-							TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf("TSLR", false), pathTransform);
+							TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf(TurnType.TSLR, false), pathTransform);
+							canvas.translate((int) (0.2 * w), 0);
 							canvas.drawPath(slightRight, paintBlack);
 							canvas.drawPath(slightRight, paintRouteDirection);
+							canvas.translate((int) (-0.2 * w), 0);
 						}
 						if ((lanes[i] & 32) == 32) {
 							Path slightLeft = new Path();
-							TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf("TSLL", false), pathTransform);
+							TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf(TurnType.TSLL, false), pathTransform);
+							canvas.translate((int) (-0.2 * w), 0);
 							canvas.drawPath(slightLeft, paintBlack);
 							canvas.drawPath(slightLeft, paintRouteDirection);
+							canvas.translate((int) (0.2 * w), 0);
 						}
 						if ((lanes[i] & 64) == 64) {
 							Path right = new Path();
-							TurnPathHelper.calcTurnPath(right, TurnType.valueOf("TR", false), pathTransform);
+							TurnPathHelper.calcTurnPath(right, TurnType.valueOf(TurnType.TR, false), pathTransform);
 							canvas.drawPath(right, paintBlack);
 							canvas.drawPath(right, paintRouteDirection);
 						}
 						if ((lanes[i] & 128) == 128) {
 							Path left = new Path();
-							TurnPathHelper.calcTurnPath(left, TurnType.valueOf("TL", false), pathTransform);
+							TurnPathHelper.calcTurnPath(left, TurnType.valueOf(TurnType.TL, false), pathTransform);
 							canvas.drawPath(left, paintBlack);
 							canvas.drawPath(left, paintRouteDirection);
 						}
 						if ((lanes[i] & 256) == 256) {
 							Path sharpRight = new Path();
-							TurnPathHelper.calcTurnPath(sharpRight, TurnType.valueOf("TSHR", false), pathTransform);
+							TurnPathHelper.calcTurnPath(sharpRight, TurnType.valueOf(TurnType.TSHR, false), pathTransform);
+							canvas.translate((int) (0.2 * w), 0);
 							canvas.drawPath(sharpRight, paintBlack);
 							canvas.drawPath(sharpRight, paintRouteDirection);
+							canvas.translate((int) (-0.2 * w), 0);
 						}
 						if ((lanes[i] & 512) == 512) {
 							Path sharpLeft = new Path();
-							TurnPathHelper.calcTurnPath(sharpLeft, TurnType.valueOf("TSHL", false), pathTransform);
+							TurnPathHelper.calcTurnPath(sharpLeft, TurnType.valueOf(TurnType.TSHL, false), pathTransform);
+							canvas.translate((int) (-0.2 * w), 0);
 							canvas.drawPath(sharpLeft, paintBlack);
 							canvas.drawPath(sharpLeft, paintRouteDirection);
+							canvas.translate((int) (0.2 * w), 0);
 						}
 
 						canvas.translate(w, 0);
