@@ -1614,4 +1614,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 …	…\n\t* Atbalsts OSM Piezīmēm
 …… 
     </string>
-    </resources>
+    <string name="interrupt_music">Pārtraukt mūziku</string>
+	<string name="share_route_subject">Maršruts kopīgots caur OsmAnd</string>
+	<string name="arrival_distance">Atbraukšanas paziņojums</string>
+    <string name="arrival_distance_descr">Kad paziņot par ierašanos galapunktā?</string>
+    <string name="keep_informing_never">Nekad</string>
+    <string name="keep_informing_descr">Ik pēc regulāriem intervāliem izrunāt navigācijas norādījumus</string>
+    <string name="keep_informing">Atkārtot navigācijas norādījumus</string>
+	<string name="navigation_intent_invalid">Nepareizs formāts: %s</string>
+</resources>
