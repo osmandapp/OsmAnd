@@ -559,29 +559,68 @@ public class RouteResultPreparation {
 //		}
 
 		String turnLanes = prevSegm.getObject().getValue("turn:lanes");
-		if (turnLanes != null && turnLanes.split("\\|", -1).length == ls) {
+		int finalLaneCount = 0;
+		if (turnLanes != null) {
 			String[] splitLaneOptions = turnLanes.split("\\|", -1);
-			for (int i = 0; i < ls; i++) {
+			int[] altLanes = new int[splitLaneOptions.length];
+
+			for (int i = 0; i < splitLaneOptions.length && finalLaneCount >= 0; i++) {
 				String[] laneOptions = splitLaneOptions[i].split(";");
+
+				if (finalLaneCount == lanes.length) {
+					finalLaneCount = -1;
+					break;
+				}
+
 				for (int j = 0; j < laneOptions.length; j++) {
 					if (laneOptions[j].equals("none") || laneOptions[j].equals("through")) {
-					lanes[i] |= 8;
+						altLanes[i] |= 8;
+						if ((lanes[finalLaneCount] & 1) == 1) {
+							altLanes[i] |= 1;
+						}
 					} else if (laneOptions[j].equals("slight_right")) {
-						lanes[i] |= 16;
+						altLanes[i] |= 16;
+						if ((lanes[finalLaneCount] & 1) == 1) {
+							altLanes[i] |= 1 | 2048;
+						}
 					} else if (laneOptions[j].equals("slight_left")) {
-						lanes[i] |= 32;
+						altLanes[i] |= 32;
+						if ((lanes[finalLaneCount] & 1) == 1) {
+							altLanes[i] |= 1 | 4096;
+						}
 					} else if (laneOptions[j].equals("right")) {
-						lanes[i] |= 64;
+						altLanes[i] |= 64;
+						if ((lanes[finalLaneCount] & 1) == 1) {
+							altLanes[i] |= 1 | 6144;
+						}
 					} else if (laneOptions[j].equals("left")) {
-						lanes[i] |= 128;
+						altLanes[i] |= 128;
+						if ((lanes[finalLaneCount] & 1) == 1) {
+							altLanes[i] |= 1 | 8192;
+						}
 					} else if (laneOptions[j].equals("sharp_right")) {
-						lanes[i] |= 256;
+						altLanes[i] |= 256;
+						if ((lanes[finalLaneCount] & 1) == 1) {
+							altLanes[i] |= 1 | 10240;
+						}
 					} else if (laneOptions[j].equals("sharp_left")) {
-						lanes[i] |= 512;
+						altLanes[i] |= 512;
+						if ((lanes[finalLaneCount] & 1) == 1) {
+							altLanes[i] |= 1 | 12288;
+						}
 					} else if (laneOptions[j].equals("reverse")) {
-						lanes[i] |= 1024;
+						altLanes[i] |= 1024;
+						if ((lanes[finalLaneCount] & 1) == 1) {
+							altLanes[i] |= 1 | 14336;
+						}
 					}
+
+					finalLaneCount++;
 				}
+			}
+
+			if (finalLaneCount == lanes.length) {
+				lanes = altLanes;
 			}
 		}
 
