@@ -292,6 +292,16 @@ public class RouteDataObject {
 		}
 		return -1;
 	}
+
+	public String getValue(String tag) {
+		for (int i = 0; i < types.length; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if (r.getTag().equals(tag)) {
+				return r.getValue();
+			}
+		}
+		return null;
+	}
 	
 	public double directionRoute(int startPoint, boolean plus) {
 		// same goes to C++
