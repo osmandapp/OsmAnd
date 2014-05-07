@@ -559,13 +559,8 @@ public class RouteResultPreparation {
 //		}
 
 		String turnLanes = prevSegm.getObject().getValue("turn:lanes");
-		System.out.println("osmand turn lanes: " + turnLanes + ", " + ls);
-		if (turnLanes != null) {
-			System.out.println("osmand turn lanes count: " + turnLanes.split("\\|", -1).length);
-		}
 		if (turnLanes != null && turnLanes.split("\\|", -1).length == ls) {
 			String[] splitLaneOptions = turnLanes.split("\\|", -1);
-			System.out.println("osmand inside of special block");
 			for (int i = 0; i < ls; i++) {
 				String[] laneOptions = splitLaneOptions[i].split(";");
 				for (int j = 0; j < laneOptions.length; j++) {

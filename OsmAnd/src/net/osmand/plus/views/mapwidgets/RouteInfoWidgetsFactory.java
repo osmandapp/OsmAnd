@@ -554,8 +554,6 @@ public class RouteInfoWidgetsFactory {
 					// canvas.translate((int) (16 * scaleCoefficient), 0);
 					for (int i = 0; i < lanes.length; i++) {
 
-						System.out.println("osmand lane: " + lanes[i]);
-
 						if ((lanes[i] & 1) == 1) {
 							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
 						} else {
