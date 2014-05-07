@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import android.view.WindowManager;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.AndroidUtils;
@@ -254,7 +255,16 @@ public class MapActivityActions implements DialogProvider {
 				dialog.dismiss();
 			}
 		});
-		return builder.create();
+		final AlertDialog alertDialog = builder.create();
+		editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+				}
+			}
+		});
+		return alertDialog;
     }
     
     public void reloadTile(final int zoom, final double latitude, final double longitude){
