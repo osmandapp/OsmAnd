@@ -1384,7 +1384,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     \n\t* VIKTIGT: Kartor bör vara nyare än februari 2014
 	\n\t* Helt uppdaterad ruttning (snabb och exakt) 
     \n\t* Ny skärm med Ruttplanering (intuitivare och kraftfullare)
-    \n\t** OBS: GPX-rutt finns under knappen Ruttinställningar
+    \n\t* OBS: GPX-rutt finns under knappen Ruttinställningar
     \n\t* Autodölj knappar i navigeringsläget
     \n\t* Beräkna offline-rutt till första punkten av GPX-rutt, (alternativet \'kör hela spåret\')
 	\n\t* Aktiv simulering i tunnlar
