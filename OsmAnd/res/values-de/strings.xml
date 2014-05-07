@@ -1744,4 +1744,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
    	<string name="keep_informing_never">Niemals</string>
     <string name="keep_informing_descr">Navigationsanweisungen in regelmäßigen Abständen wiederholen</string>
     <string name="keep_informing">Wiederholen von Navigationsanweisungen</string>
-	</resources>
+	<string name="arrival_distance">Zielankündigung</string>
+    <string name="arrival_distance_descr">Wann soll die Ankunft am Ziel angekündigt werden?</string>
+    </resources>
