@@ -1714,4 +1714,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
    	<string name="keep_informing_never">Nigdy</string>
     <string name="keep_informing_descr">Podawaj instrukcje nawigacji w regularnych odstępach czasu</string>
     <string name="keep_informing">Powtarzaj instrukcje nawigacji</string>
-	</resources>
+	<string name="arrival_distance">Informacja o odległości do celu</string>
+    <string name="arrival_distance_descr">Z jakim wyprzedzeniem ma się pojawić informacja o odległości do celu podróży?</string>
+    </resources>
