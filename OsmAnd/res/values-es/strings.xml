@@ -1547,11 +1547,11 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="calculate_osmand_route_gpx">Calcular ruta OsmAnd sin conexión</string>
     
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
-	<string name="routing_attr_prefer_motorway_description">Prefiere autopistas en el ruteo</string>
+	<string name="routing_attr_prefer_motorway_description">Prefierir autopistas en el ruteo</string>
 	<string name="routing_attr_short_way_name">Camino corto</string>
-	<string name="routing_attr_short_way_description">Usa el camino corto</string>
+	<string name="routing_attr_short_way_description">Usar el camino corto</string>
 	<string name="routing_attr_avoid_toll_name">Evitar peajes</string>
-	<string name="routing_attr_avoid_toll_description">Evita las carreteras de peaje</string>
+	<string name="routing_attr_avoid_toll_description">Evita las carreteras con peaje</string>
 	<string name="routing_attr_avoid_unpaved_name">Evitar carreteras no pavimentadas</string>
 	<string name="routing_attr_avoid_unpaved_description">Evita las carreteras no pavimentadas</string>
 	<string name="routing_attr_avoid_ferries_name">Evitar transbordadores</string>
@@ -1566,11 +1566,11 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="use_displayed_track_for_navigation">¿Desea usar la ruta mostrada para la navegación?</string>
     <string name="keep_and_add_destination_point">Añadir como punto de destino</string>
     <string name="select_gpx">Seleccionar GPX …</string>
-    <string name="route_descr_select_destination">Seleccionar Destino</string>
-    <string name="route_descr_select_on_map">Seleccionar en mapa …</string>
+    <string name="route_descr_select_destination">Seleccionar destino</string>
+    <string name="route_descr_select_on_map">Seleccionar en el mapa …</string>
     <string name="route_descr_favorite">Favorito …</string>
-    <string name="route_preferences">Preferencias de ruta</string>
-    <string name="route_info">Información de ruta</string>
+    <string name="route_preferences">Preferencias de la ruta</string>
+    <string name="route_info">Información de la ruta</string>
     <string name="tip_recent_changes_1_7_1_t">Cambios en 1.7:↵
     \n\t* IMPORTANTE los mapas deben ser más nuevos que Febrero de 2014.↵
 →\n\t* Enrutado completamente actualizado (rápido y preciso) - ↵
@@ -1582,8 +1582,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 →\n\t* Muchas pequeñas mejoras en la experiencia de usuario y arreglos de usabilidad↵
 →\n\t* Opción de accesibilidad a la velocidad de voz↵
     </string>
-    <string name="calculate_osmand_route_without_internet">Calcular segmento de ruta OsmAnd sin internet</string>
-    <string name="gpx_option_calculate_first_last_segment">Calcular ruta OsmAnd para primer y último segmento de ruta</string>
+    <string name="calculate_osmand_route_without_internet">Calcular el segmento de la ruta OsmAnd sin internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
     <string name="osmodroid_unseek">Objetos no buscados</string>
     <string name="lang_en">Inglés</string>
 	<string name="lang_af">Afrikáans</string>
@@ -1643,9 +1643,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="interrupt_music_descr">Interrumpir música al indicar</string>
 	<string name="interrupt_music">Interrumpir música</string>
 	<string name="osmo_settings_uuid">Id único del dispositivo</string>
-    <string name="osmo_settings_descr">Ver llave única de registro y otras configuraciones específicas de monitorización </string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitorización Avanzada en Vivo con muchas características para control remoto http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (Monitorización Avanzada en Vivo)</string>
+    <string name="osmo_settings_descr">Ver la clave única de registro y otras configuraciones específicas de monitoreo </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitoreo avanzada en directo con muchas características para control remoto http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (Monitoreo avanzada en directo)</string>
     <string name="osmo_settings">OSMo</string>
    	<string name="share_route_as_gpx">Compartir ruta como fichero GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
@@ -1653,4 +1653,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 <string name="keep_informing_never">Nunca</string>
     <string name="keep_informing_descr">Anunciar instrucciones de navegación a intervalos regulares</string>
     <string name="keep_informing">Repetir instrucciones de navegación</string>
-	</resources>
+	<string name="arrival_distance">Anuncio de llegada</string>
+    <string name="arrival_distance_descr">¿Para cuándo quiere el anuncio de llegada?</string>
+    </resources>
