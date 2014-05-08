@@ -318,7 +318,8 @@
   <string name="internet_not_available">Nav pieejams savienojums ar internetu</string>
   <string name="install_more">Instalēt vēl…</string>
   <string name="tip_update_index">Atjaunināt bezsaistes kartes</string>
-  <string name="tip_update_index_t">\tĻoti savarīgi, lai jums būtu jaunakās kartes. OsmAnd iebūvēts lejuplādes menedžeris var pārbaudīt pieejamo bezsaistes datu atjaunošanu. \n\tLai pārbaudītu jauninājumus izpildiet \'Uzstādījumi\' -&gt; \'Bezsaistes dati\' -&gt; \'Lejuplādēt bezsaistes datus\'. Pēc tam, kad saraksts ir lejuplādēts no interneta, jūs varat izvēlēties opciju \'Izvēlne\' -&gt; \'Filtrēt lejuplādētos\' lai redzētu tikai jauninājumus jau lejuplādētiem datiem. \n\tJauninājumu pieejamība ir norādīta ar krāsām: \n\t\'Zaļa\' - norāda datu failus kuri ir identiski uz servera un iekārtas \n\t\'Zila\' - norāda uz pieejamiem jauninājumiem</string>
+  <string name="tip_update_index_t">\tĻoti svarīgi, lai jums būtu jaunakās kartes. OsmAnd iebūvētais lejupielādes menedžeris var pārbaudīt pieejamo bezsaistes datu atjaunošanu. \n\tLai pārbaudītu jauninājumus, izpildiet \'Uzstādījumi\' -&gt; \'Bezsaistes dati\' -&gt; \'Lejuplādēt bezsaistes datus\'. Pēc tam, kad saraksts ir lejupielādēts no interneta, jūs varat izvēlēties opciju \'Izvēlne\' -&gt; \'Filtrēt lejupielādētos\' lai redzētu tikai jauninājumus jau lejuplādētiem datiem. \n\tJauninājumu pieejamība ir norādīta ar krāsām: \n\t\'Zaļa\' - norāda datu failus, kuri ir identiski uz servera un iekārtas \n\t\'Zila\' - norāda uz pieejamiem jauninājumiem
+	</string>
   <string name="level_to_switch_vector_raster_descr">Minimālais palielinājums, kurā var attēlot vektoru (bezsaistes) kartes</string>
   <string name="level_to_switch_vector_raster">Minimālais palielinājums vektoru kartēm</string>
   <string name="tip_location_sharing">Atrašanās vietas koplietošana</string>
@@ -976,7 +977,7 @@
     <string name="add_as_last_destination_point">Pievienot kā pēdējo pieturu</string>
     <string name="add_as_first_destination_point">Pievienot kā pirmo pieturu</string>
     <string name="replace_destination_point">Aizvietot galamērķi</string>
-    <string name="new_destination_point_dialog">Jūs jau esat uzstādījuši galamērķi.</string>
+    <string name="new_destination_point_dialog">Jūs jau esat uzstādījis galamērķi.</string>
     <string name="target_point">Pietura %1$s</string>
     <string name="target_points">Pieturas</string>
     <string name="intermediate_point_too_far">Pietura %1$s ir pārāk tālu no tuvākā ceļa.</string>
@@ -1073,7 +1074,7 @@
     <string name="edit_tilesource_expiration_time">Termiņš izbeigsies (minūtēs)</string>
     <string name="edit_tilesource_minzoom">Minimālais mērogs</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Izvēlēties esošo...</string>
+    <string name="edit_tilesource_choose_existing">Izvēlēties esošo…</string>
     <string name="edit_tilesource_name">Vārds</string>
     <string name="maps_define_edit">Definēt/labot…</string>
 	<string name="map_widget_fps_info">FPS atkļūdošana</string>
@@ -1177,7 +1178,7 @@
     <string name="local_indexes_cat_av">Audio/video dati</string>
     <string name="stop_routing_confirm">Vai vēlaties apturēt navigāciju?</string>
     <string name="clear_dest_confirm">Vai vēlaties noņemt galamērķi?</string>
-    <string name="precise_routing_mode_descr">Iespējot precīzāku maršrutēšanu bez kļūdīšanās. Tā ir ierobežota pēc attāluma un neizmanto iebūvēto bibliotēku.</string>
+    <string name="precise_routing_mode_descr">Iespējot precīzāku maršruta aprēķināšanu bez kļūdām. Pagaidām darbojas ierobežotā attālumā un ir lēna.</string>
     <string name="precise_routing_mode">Precīzāka maršrutēšana (alfa)</string>
     <string name="recording_context_menu_show">Parādīt</string>
     <string name="recording_photo_description">Bilde %1$s no %2$s</string>
@@ -1288,7 +1289,7 @@
     <string name="local_index_tile_data_name">Attēlu dati: %1$s</string>
     <string name="edit_tilesource_successfully">Attēlu avots %1$s ir saglabāts</string>
     <string name="edit_tilesource_elliptic_tile">Eliptisks merkators</string>
-    <string name="local_index_gpx_timespan">\nLaika sprīdis: %1$d:%2$02d:%3$02d</string>
+    <string name="local_index_gpx_timespan">\nLaika posms: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nBrauciena laiks: %1$d:%2$02d:%3$02d</string>
 	<string name="delete_point">Noņemt punktu</string>
     <string name="plugin_distance_point">Punkts</string>
@@ -1451,7 +1452,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="speech_rate_descr">TTS (runas robots) vārdu teikšanas ātrums</string>
     <string name="speech_rate">Vārdu ātrums</string>
     
-    <string name="complex_route_calculation_failed">Maršruta ātrā aprēķināšana neizdevās (%s), notiks lenā aprēķināšana.</string>
+    <string name="complex_route_calculation_failed">Maršruta ātrā aprēķināšana neizdevās (%s), notiks lēnā aprēķināšana.</string>
     <string name="disable_complex_routing_descr">Izslēgt kompleksu (divfāžu) maršrutēsanu</string>
     <string name="disable_complex_routing">Izslēgt kompleksu maršrutēšanu</string>
     <string name="tip_app_mode_t_v2">OsmAnd atbalsta vairākus pielāgojamus profilus dažādiem mērķiem.
@@ -1471,7 +1472,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="routing_attr_prefer_motorway_name">Priekšroka automaģistrālēm</string>
 	<string name="routing_attr_prefer_motorway_description">Maršruta plānošanā vispirms tiks dota priekšroka automaģistrālēm (ātrgaitas šosejām)</string>
 	<string name="routing_attr_short_way_name">Īsākais maršruts</string>
-	<string name="routing_attr_short_way_description">Īsākais maršruts līdz galamēŗkim</string>
+	<string name="routing_attr_short_way_description">Braukt pa Īsāko maršrutu</string>
 	<string name="routing_attr_avoid_toll_name">Izvairīties no maksas ceļiem</string>
 	<string name="routing_attr_avoid_toll_description">Jāmaksā nodeva par ceļa lietošanu</string>
 	<string name="routing_attr_avoid_unpaved_name">Izvairīties no neasfaltētiem ceļiem</string>
@@ -1554,7 +1555,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     </string>
     <string name="index_item_nation_addresses">Adreses valsts mērogā</string>
 	<string name="index_item_world_altitude_correction">Pasaules augstuma korekcija</string>
-	<string name="index_item_world_seamarks">Pasaules kuģošanas zīmes</string>
+	<string name="index_item_world_seamarks">Jūras navigācijas zīmes</string>
 	<string name="index_item_world_bitcoin_payments">Pasaules bitcoin maksājumi</string>
 	<string name="index_item_world_basemap">Pasaules pamatkarte</string>
     <string name="index_item_world_ski">Pasaules slēpošanas karte</string>
@@ -1622,4 +1623,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="keep_informing_descr">Ik pēc regulāriem intervāliem izrunāt navigācijas norādījumus</string>
     <string name="keep_informing">Atkārtot navigācijas norādījumus</string>
 	<string name="navigation_intent_invalid">Nepareizs formāts: %s</string>
-</resources>
+<string name="interrupt_music_descr">Paziņojumu laikā pārtraukt mūzikas atskaņošanu</string>
+	<string name="share_route_as_gpx">Koplietot maršrutu kā GPX failu</string>
+	</resources>
