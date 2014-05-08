@@ -1712,4 +1712,6 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="keep_informing_descr">Napovej navigacijska navodila v rednih časovnih presledkih</string>
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
 	<string name="osmo_settings">OSMo</string>
-   	</resources>
+   	<string name="arrival_distance_descr">Kako hitro želite napoved prihoda?</string>
+    <string name="arrival_distance">Napoved prihoda</string>
+    </resources>
