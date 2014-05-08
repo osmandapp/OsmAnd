@@ -505,14 +505,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 Афганістан, Албанія, Алжыр, Андора, Ангола, Ангілья, Антыгуа і Барбуда, Аргенціна, Арменія, Аруба, Аўстралія, Аўстрыя, Азербайджан, Багамскія выспы, Бангладэш  Бахрэйн, Барбадас, Беларусь, Бельгія, Беліз, Бенін, Бэрмудзкія выспы, Балівія, Бутан, Банайрэ, Боснія і Герцагавіна, Батсвана, Бразілія, Брытанскія Віргінскія выспы, Бруней, Балгарыя, Буркіна-Фасо, Бурундзі, Камбоджа, Камерун, Канада, Каба-Вэрдэ, Цэнтральнаафрыканская Рэспубліка, Чад, Чылі, Кітай, Калумбія, Каморскія Астравы, Конга, Коста-Рыка, Кот-дІвуар, Харватыя, Куба, Кюрасао, Кіпр, Чэшская Рэспубліка, Данія, Джыбуці, Дамініка, Дамініканская Рэспубліка, Эквадор, Егіпет, Сальвадор, Экватарыяльная Гвінея, Эрытрэя, Эстонія, Эфіопія, Фіджы, Фінляндыя, Францыя, Французская Гвіяна, Французская Палінезія, Габон, Гамбія, Грузія, Германія, Гана, Гібралтар, Грэцыя, Грэнландыя, Грэнада, Гвадэлупа, Гуам, Гватэмала, Гернсі, Гвінея, Гвінея-Бісаў, Гаяна, Гаіці, Ватыкан, Гандурас, Ганконг, Венгрыя, Ісландыя, Індыя, Інданезія, Іран, Ірак, Ірландыя, востраў Мэн, Ізраіль, Італія, Ямайка, Японія, Джэрсі, Іарданія, Казахстан, Кенія, Кірыбаці, Паўночнай Карэі і Паўднёвай Карэі, Кувейт, Кыргызстан, Лаос, Латвія, Ліван, Лесота, Ліберыя, Лівія, Ліхтэнштэйн, Літва, Люксембург, Макао, Македонія, Мадагаскар, Малаві, Малайзія, Мальдыўскія Астравы, Малі, Мальта, Марцініка, Маўрыкій, Маўрытанія, Майотта, Мексіка, Мікранэзія, Малдова, Манака, Манголія, Чарнагорыя, Монтсеррат, Марока, Мазамбік, Міянма, Намібія, Науру, Непал, Нідэрланды, Нідэрландскія Антыльскія выспы, Новая Каледонія, Новая Зеландыя, Нікарагуа, Нігер, Нігерыя, Нарвегія, Аман, Пакістан, Палаў, Палестынская тэрыторыя, Панама, Папуа-Новая Гвінея, Парагвай, Перу, Філіпіны, Польшча, Партугалія, Пуэрта-Рыка, Катар, Румынія, Расія, Руанда, Сэнт-Бартэлемі, Востраў Святой Алены Сэнт-Кітс і Нэвіс, Сэнт-Люсія, Сэнт-Марцін, Сен-Піер і Міквэлон, Сэнт-Вінсэнт і Грэнадыны, Самоа, Сан-Марына, Саудаўская Аравія, Сенегал, Сербія, Сейшэльскія Астравы, Сьера-Леонэ, Сінгапур, Славакія, Славенія, Самалі, Паўднёвая Афрыка, Паўднёвая Грузія, Паўднёвы Судан, Іспанія, Шры-Ланка, Судан, Сурынам, Свазіленд, Швецыя, Швейцарыя, Сірыя, Тайвань, Таджыкістан, Танзанія, Тайланд, Тымор-Лешці, Таго, Такелаў, Тангійская, Трынідад і Табага, Туніс, Турцыя, Тувалу, Туркменістан, Уганда, Украіна, ААЭ, Злучанае Каралеўства (UK), Злучаныя Штаты Амерыкі (ЗША) , Уругвай, Узбекістан, Вануату, Венесуэла, Віетнам, Уоліс і Футуна, Заходняя Сахара, Емен, Замбія, Зімбабвэ.
 	</string>
 	<string name="tip_update_index">Абнаўленне мапаў для аўтаномнага выкарыстання</string>
-	<string name="tip_update_index_t">Up-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a data manager to download these offline maps (and some other data files), and to check for available updates.
-		\n\nTo download maps go to \'Settings\' → \'Data Management\' → \'Download offline data\'.
-		\n\nAfter the global region list is retrieved from the internet, click on any entry to download or update a file. Please note the file type selector near the top of the screen to select the type of download you want (regular maps, hillshade overlays, etc.).
-		\n\nYou can filter the region list by typing some letters, or you may select the option \'Settings\' → \'Filter downloaded\' to see updates only for the data already on your device.
-		\n\n\t* Entries in \'green\' indicate data files identical on device and server
-		\n\t* Entries in \'blue\' indicate available updates on server
-		\n\t* Entries in italic font indicate data de-activated on the device
-	</string>
 	<string name="filterpoi_activity">Стварыць фільтар цікавосткаў</string>
 	<string name="recalculate_route_to_your_location">Транспартны рэжым:</string>
 	<string name="select_navigation_mode">Выберыце від транспарту</string>
@@ -586,8 +578,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="select_animate_speedup">Абярыце хуткасьць</string>
     	<string name="global_app_allocated_memory_descr">Выдзелена памяці %1$s МБ (Абмежаваньне Android %2$s МБ, Dalvik %3$s МБ).</string>
 	<string name="global_app_allocated_memory">Выдзеленая памяць</string>
-	<string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
-		Proportional memory %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
+	<string name="native_app_allocated_memory_descr">Усяго фізічнай памяці занятай праграмай %1$s МБ (Dalvik %2$s МБ, іншае %3$s МБ).
+		Прапарцыйнай памяці %4$s МБ (Абмежаванне Android %5$s МБ, Dalvik %6$s МБ).</string>
 	<string name="native_app_allocated_memory">Усяго роднай памяці</string>
 	<string name="update_downlod_list">Перачытаць сьпіс</string>
 	<string name="starting_point_too_far">Пачатковая кропка занадта далёка ад бліжэйшай дарогі.</string>
@@ -689,11 +681,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="native_rendering">Хуткая адмалёўка</string>
 	<string name="test_voice_prompts">Пратэставаць галасавыя падказкі</string>    
 	<string name="switch_to_raster_map_to_see">Для бягучай пазіцыі карта адсутнічае. Вы можаце загрузіць карту з дапамогай меню Налады-&gt; Дадзеныя або пераключыцца на выкарыстанне онлайн карт.</string>
-	<string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2:
-		\n\t- Native rendering for all devices
-		\n\t- Offline POI editing
-		\n\t- Accessibility
-		\n\t- Lots of bug fixes
+	<string name="tip_recent_changes_0_7_2_t">Змены 0.7.2: ↵ 
+		\n\t - Хуткі рэндэрынг для ўсіх прылад ↵ 
+		\n\t - Лакальнае рэдагаванне POI
+		\n\t - Дадатковыя магчымасці ↵ 
+		\n\t - Выпраўлена шмат памылак ↵
 	</string>
 	<string name="send_files_to_osm">Дасылаць GPX файлы ў OSM?</string>
 	<string name="gpx_visibility_txt">Бачнасьць</string>
@@ -839,8 +831,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 		\n\t* \'To direction of movement\': Map will continuously be aligned with your heading
 		\n\t* \'To compass\': Map will continuously be aligned with the device\'s compass reading
 	</string>
-	<string name="binary_map_download_success">Download successful.
-		\n\t\n\tTo use activate \'Menu\' → \'Map layers\' → \'Map source…\' → \'Offline vector maps\'.
+	<string name="binary_map_download_success">Загрузка скончана. ↵ 
+		\n\t\n\tАктывацыя мапаў праз \'Меню\' → \'Карта\' → \'Крыніца карты ...\' → \'Оффлайн вектарныя карты\". ↵ 
+→
 	</string>
 	<string name="tip_day_night_mode">Рэжым дзень/ноч</string>
 	<string name="tip_day_night_mode_t_v2">Для лакальных вектарных карт можна змяняць выгляд у залежнасці ад часу сутак: днём (светлы), ноччу (цёмны). Начны рэжым бяспечны для выкарыстання кіроўцамі ў цемры ↵
@@ -1050,13 +1043,13 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 		\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' in \'Menu\' → \'Map layers\'.
 	</string>
 	<string name="error_doing_search">Памылка пры аўтаномным пошуку</string>
-	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
-	<string name="search_osm_offline">Search geo location</string>
+	<string name="search_offline_geo_error">Немагчыма апрацаваць запыт \'%s\'</string>
+	<string name="search_osm_offline">Пошук ў лакальных картах</string>
 	<string name="system_locale">System</string>
 	<string name="preferred_locale_descr">Абраць мову інтэрфэйсу</string>
 	<string name="preferred_locale">Мова інтэрфэйсу</string>
 	<string name="incomplete_locale">няскончана</string>
-	<string name="tip_map_switch">Select a Map Source</string>
+	<string name="tip_map_switch">Абраць крыніцу карты</string>
 	<string name="tip_map_switch_t_v2">The map source and map layers displayed are changed via \'Menu\' → \'Map layers\'.
 		\n\nUnder \'Map source…\' you can choose using the pre-loaded offline vector maps (default, also needed for offline navigation), or predefined (online or cached offline) tile sources (activate the \'Online maps\' plugin under \'Settings\' → \'Plugins\' for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
 		\n\nOsmAnd also supports custom sources.
@@ -1075,7 +1068,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 		\n\t* or via your predefined favorites.
 		\n\nFor all hits a context menu or action bar offers options like \'Directions\' or \'Show on map\', etc.
 	</string>
-	<string name="tip_map_context_menu">\'Use location\' Menu</string>
+	<string name="tip_map_context_menu">Кантэкстнае меню карты</string>
 	<string name="tip_map_context_menu_t">The \'Use location\' context menu contains all actions referring to a point (location).
 		\n\nIt is available by long-pressing any point on the map (then tapping its marker), or by pressing the trackball button, or by selecting \'Menu\' → \'Use location\' (the last two ways take the map center as reference).
 		\n\nA marker box can be hidden again by long-clicking on it.
@@ -1097,10 +1090,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="mile">мі</string>
 	<string name="send_location_way_choose_title">Даслаць каардынаты праз</string>
 	<string name="send_location_sms_pattern">Месцазнаходжаньне: %1$s\n%2$s</string>
-	<string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
+	<string name="send_location_email_pattern">Для таго, каб убачыць месцазнаходжанне націсніце на спасылку %1$s ці android спасылку %2$s</string>
 	<string name="send_location">Даслаць каардынаты</string>
 	<string name="context_menu_item_share_location">Даслаць каардынаты</string>
-	<string name="add_waypoint_dialog_added">GPX Waypoint \'\'{0}\'\' was successfully added</string>
+	<string name="add_waypoint_dialog_added">Кропка GPX \'\'{0}\'\' была паспяхова дададзеная</string>
 	<string name="add_waypoint_dialog_title">Дадаць кропку да запісанага GPX трэка</string>
 	<string name="context_menu_item_add_waypoint">Дадаць GPX кропку</string>
 	<string name="amenity_type_administrative">Адміністрацыйны</string>
@@ -1121,7 +1114,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="amenity_type_other">Іншае</string>
 	<string name="amenity_type_shop">Крама</string>
 	<string name="amenity_type_sport">Спорт</string>
-	<string name="amenity_type_sustenance">Sustenance</string>
+	<string name="amenity_type_sustenance">Ежа</string>
 	<string name="amenity_type_tourism">Турызм</string>
 	<string name="amenity_type_transportation">Транспарт</string>
 	<string name="indexing_address">Індэксаваньне адрасоў…</string>
@@ -1140,7 +1133,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="version_index_is_big_for_memory">Індэкс \'\'{0}\'\' не змяшчаецца ў памяці</string>
 	<string name="version_index_is_not_supported">Версія індэкса \'\'{0}\'\' не падтрымліваецца</string>
 	<string name="use_osmand_routing_service">Навігацыя OsmAnd &gt; 20 км</string>
-	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes &gt; 20 km (experimental)</string>
+	<string name="use_osmand_routing_service_descr">Выкарыстоўваць аўтаномную OsmAnd навігацыю на адлегласці &gt; 20 км (эксперыментальна)</string>
 	<string name="osmand_routing_experimental">Аўтаномная навігацыя OsmAnd зьяўляецца эксперыментальнай і не працуе на адлегласцях больш 20 км.\n\nУ гэтым выпадку для пракладкі маршруту выкарыстоўваецца онлайн сэрвіс CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Указаны каталог не знойдзены.</string>
 	<string name="application_dir">Каталёг захоўваньня</string>
