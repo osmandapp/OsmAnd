@@ -255,7 +255,8 @@ public class MapActivityLayers {
 				settings.SHOW_FAVORITES.set(isChecked);
 			} else if(itemId == R.string.layer_gpx_layer){
 				if(getApplication().getGpxFileToDisplay() != null){
-					getApplication().setGpxFileToDisplay(null, false);
+					getApplication().clearGpxFileToDisplay();
+					getApplication().clearGpxFavourites();
 				} else {
 					dialog.dismiss();
 					showGPXFileLayer(mapView);
@@ -392,6 +393,7 @@ public class MapActivityLayers {
 				
 				settings.SHOW_FAVORITES.set(true);
 				getApplication().setGpxFileToDisplay(toShow, toShow.showCurrentTrack);
+				getApplication().setGpxFavourites(toShow.points);
 				WptPt loc = toShow.findPointToShow();
 				if(loc != null){
 					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, 

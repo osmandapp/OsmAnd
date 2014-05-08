@@ -967,7 +967,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
                     savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), name);
                     if (app.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
-                        app.getFavorites().addFavoritePointToGPXFile(new FavouritePoint(rec.lat, rec.lon, name, ""));
+                        app.getFavorites().addFavourite(new FavouritePoint(rec.lat, rec.lon, name, OsmandApplication.GPX_GROUP));
                     }
                 }
             }

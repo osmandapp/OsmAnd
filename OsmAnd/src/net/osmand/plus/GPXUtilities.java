@@ -88,6 +88,11 @@ public class GPXUtilities {
 			this.hdop = hdop;
 		}
 
+		public final boolean isFavourite()
+		{
+			return category != null;
+		}
+
 	}
 
 	public static class TrkSegment extends GPXExtensions {

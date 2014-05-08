@@ -15,6 +15,7 @@ import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -159,14 +160,15 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (info != null && info.getGpxFile() != null) {
-					WptPt loc = info.getGpxFile().findPointToShow();
+					final GPXUtilities.GPXFile gpxFile = info.getGpxFile();
+					WptPt loc = gpxFile.findPointToShow();
 					if (loc != null) {
 						settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 					}
-					getMyApplication().setGpxFileToDisplay(info.getGpxFile(), false);
+					getMyApplication().setGpxFileToDisplay(gpxFile, false);
+					getMyApplication().setGpxFavourites(gpxFile.points);
 					MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
 				}
-				
 			}
 		}).reg();
 	}

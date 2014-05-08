@@ -11,6 +11,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibilityPlugin;
@@ -48,11 +54,6 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
-import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -79,7 +80,7 @@ public class MapActivity extends AccessibleActivity  {
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
-	
+
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	
     /** Called when the activity is first created. */
@@ -345,10 +346,12 @@ public class MapActivity extends AccessibleActivity  {
                     {
 						if (data.getPath().endsWith("kml"))
 						{
+							setIntent(null);
 							showImportedKml(new File(data.getPath()));
 						}
 						else
 						{
+							setIntent(null);
 							showImportedGpx(new File(data.getPath()));
 						}
                     }
@@ -361,6 +364,8 @@ public class MapActivity extends AccessibleActivity  {
                         {
                             try
                             {
+								setIntent(null);
+
                                 final double lat = Double.valueOf(matcher.group(1));
                                 final double lon = Double.valueOf(matcher.group(2));
 
@@ -745,21 +750,9 @@ public class MapActivity extends AccessibleActivity  {
 			}
 
 			@Override
-			protected void onPostExecute(GPXFile result) {
+			protected void onPostExecute(final GPXFile result) {
 				progress.dismiss();
-				if (result != null) {
-					if (result.warning != null) {
-						AccessibleToast.makeText(MapActivity.this, result.warning, Toast.LENGTH_LONG).show();
-					} else {
-						getMyApplication().setGpxFileToDisplay(result, true);
-						final WptPt moveTo = result.findPointToShow();
-						if (moveTo != null) {
-							mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
-						}
-						mapView.refreshMap();
-					}
-
-				}
+				onImportReady(result);
 			}
 		}.execute();
 	}
@@ -787,22 +780,105 @@ public class MapActivity extends AccessibleActivity  {
 			}
 
 			@Override
-			protected void onPostExecute(GPXFile result) {
+			protected void onPostExecute(final GPXFile result) {
 				progress.dismiss();
-				if (result != null) {
-					if (result.warning != null) {
-						AccessibleToast.makeText(MapActivity.this, result.warning, Toast.LENGTH_LONG).show();
-					} else {
-						getMyApplication().setGpxFileToDisplay(result, true);
-						final WptPt moveTo = result.findPointToShow();
-						if (moveTo != null) {
-							mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
-						}
-						mapView.refreshMap();
-					}
-
-				}
+				onImportReady(result);
 			}
 		}.execute();
+	}
+
+	private boolean hasFavourite(final List<WptPt> wptPts) {
+		for (WptPt wptPt : wptPts) {
+			if (wptPt.isFavourite()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void onImportReady(final GPXFile result) {
+
+		if (result != null) {
+			if (result.warning != null) {
+				AccessibleToast.makeText(MapActivity.this, result.warning, Toast.LENGTH_LONG).show();
+			} else {
+				final List<WptPt> wayPoints;
+				//prefer route over track to re-import
+				if (!result.routes.isEmpty()) {
+					wayPoints = result.routes.get(0).points;
+				} else if (!result.tracks.isEmpty() && !result.tracks.get(0).segments.isEmpty()) {
+					wayPoints = result.tracks.get(0).segments.get(0).points;
+				} else if (result.points != null) {
+					if (hasFavourite(result.points)) {
+						final DialogInterface.OnClickListener importFavouritesListener = new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								switch (which) {
+									case DialogInterface.BUTTON_POSITIVE:
+										getMyApplication().setGpxFavourites(result.points);
+										break;
+
+								}
+							}
+						};
+
+						new AlertDialog.Builder(MapActivity.this)
+								.setMessage(R.string.import_file_favourites)
+								.setPositiveButton(R.string.default_buttons_yes, importFavouritesListener)
+								.setNegativeButton(R.string.default_buttons_no, importFavouritesListener)
+								.show();
+					}
+					return;
+				} else {
+					wayPoints = null;
+				}
+
+				if (wayPoints == null || wayPoints.size() == 0) {
+					AccessibleToast.makeText(MapActivity.this, R.string.import_file_no_waypoints, Toast.LENGTH_LONG).show();
+					return;
+				}
+
+				final DialogInterface.OnClickListener importTracksListener = new DialogInterface.OnClickListener() {
+				    @Override
+				    public void onClick(DialogInterface dialog, int which) {
+				        switch (which){
+				        case DialogInterface.BUTTON_POSITIVE:
+							final List<LatLon> points = new ArrayList<LatLon>();
+							for (final WptPt point : wayPoints) {
+								points.add(new LatLon(point.lat, point.lon));
+							}
+
+							getMyApplication().clearGpxFileToDisplay();
+							getMyApplication().clearGpxFavourites();
+							getMyApplication().setGpxFavourites(result.points);
+
+							getMyApplication().getTargetPointsHelper().navigateToPoints(points);
+
+							showMapAt(wayPoints.get(0));
+							break;
+
+				        case DialogInterface.BUTTON_NEGATIVE:
+							getMyApplication().setGpxFileToDisplay(result, true);
+							getMyApplication().clearGpxFavourites();
+							getMyApplication().setGpxFavourites(result.points);
+
+							showMapAt(wayPoints.get(0));
+				            break;
+				        }
+				    }
+				};
+
+				new AlertDialog.Builder(MapActivity.this)
+						.setMessage(getString(R.string.import_file_waypoints_message, wayPoints.size()))
+						.setPositiveButton(R.string.import_file_waypoints_button, importTracksListener)
+						.setNegativeButton(R.string.import_file_show_button, importTracksListener)
+						.show();
+			}
+		}
+	}
+
+	private void showMapAt(WptPt point) {
+		mapView.getAnimatedDraggingThread().startMoving(point.lat, point.lon, mapView.getZoom(), true);
+		mapView.refreshMap();
 	}
 }

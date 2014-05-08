@@ -76,6 +76,9 @@ import com.actionbarsherlock.app.SherlockListActivity;
 
 
 public class OsmandApplication extends Application {
+	// externalize ?
+	public static final String GPX_GROUP = "Gpx";
+
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
@@ -229,25 +232,32 @@ public class OsmandApplication extends Application {
 		return poiFilters;
 	}
 
+	public void clearGpxFileToDisplay() {
+		this.gpxFileToDisplay = null;
+		osmandSettings.SHOW_CURRENT_GPX_TRACK.set(false);
+	}
+
 	public void setGpxFileToDisplay(GPXFile gpxFileToDisplay, boolean showCurrentGpxFile) {
 		this.gpxFileToDisplay = gpxFileToDisplay;
 		osmandSettings.SHOW_CURRENT_GPX_TRACK.set(showCurrentGpxFile);
-		if (gpxFileToDisplay == null) {
-			getFavorites().setFavoritePointsFromGPXFile(null);
-		} else {
-			List<FavouritePoint> pts = new ArrayList<FavouritePoint>();
-			for (WptPt p : gpxFileToDisplay.points) {
-				FavouritePoint pt = new FavouritePoint();
-				pt.setLatitude(p.lat);
-				pt.setLongitude(p.lon);
-				if (p.name == null) {
-					p.name = "";
-				}
-				pt.setName(p.name);
-				pts.add(pt);
+		gpxFileToDisplay.proccessPoints();
+	}
+
+	public void clearGpxFavourites() {
+		getFavorites().removeGroup(GPX_GROUP);
+	}
+
+	public void setGpxFavourites(List<WptPt> wayPts) {
+		for (WptPt p : wayPts) {
+			final String name = p.name == null ? "" : p.name;
+			if (p.category == null)
+			{
+				getFavorites().addFavourite(new FavouritePoint(p.lat, p.lon, name, GPX_GROUP));
 			}
-			gpxFileToDisplay.proccessPoints();
-			getFavorites().setFavoritePointsFromGPXFile(pts);
+			else
+			{
+				getFavorites().saveFavourite(new FavouritePoint(p.lat, p.lon, name, p.category));
+			}
 		}
 	}
 

@@ -255,6 +255,20 @@ public class TargetPointsHelper {
 		updateRouteAndReferesh(updateRoute);
 	}
 	
+	public void navigateToPoints(List<LatLon> points){
+		removeAllWayPoints(false);
+		settings.clearPointToNavigate();
+		settings.clearIntermediatePoints();
+
+		for(int i=0;i<points.size()-1;i++) {
+			settings.addIntermediatePoint(points.get(i).getLatitude(), points.get(i).getLongitude(), null);
+		}
+		settings.setPointToNavigate(points.get(points.size()-1).getLatitude(), points.get(points.size()-1).getLongitude(), null);
+
+		readFromSettings(settings);
+		updateRouteAndReferesh(true);
+	}
+
 	public void setStartPoint(LatLon startPoint, boolean updateRoute, String name) {
 		if(startPoint != null) {
 			settings.setPointToStart(startPoint.getLatitude(), startPoint.getLongitude(), name);
