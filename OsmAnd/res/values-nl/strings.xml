@@ -36,7 +36,7 @@
   <string name="gpx_visibility_txt">Zichtbaarheid</string>
   <string name="gpx_tags_txt">Tags</string>
   <string name="gpx_description_txt">Beschrijving</string>
-  <string name="validate_gpx_upload_name_pwd">Geef je OSM gebruikersnaam en wachtwoord voor het uploaden van GPX-bestanden.</string>
+  <string name="validate_gpx_upload_name_pwd">Geef je OSM-gebruikersnaam en -wachtwoord voor het uploaden van GPX-bestanden.</string>
   <string name="default_buttons_support">Ondersteuning</string>
   <string name="support_new_features">Ondersteun nieuwe functies</string>
   
@@ -154,7 +154,7 @@
   <string name="index_name_tts_voice">Stembestanden (stemgenerator – aangeraden)</string>
   <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Zelfgedefinieerd</string>
-  <string name="fav_export_confirmation">Favorietenbestand bestaat al, wil je dit vervangen?</string>
+  <string name="fav_export_confirmation">Er is al een bestand met geëxporteerde favorieten. Wil je dat bestand overschrijven?</string>
   <string name="profile_settings">Profielspecifieke instellingen</string>
   <string name="settings_preset">Standaardprofiel</string>
   <string name="settings_preset_descr">Kaart- en navigatieinstellingen worden per profiel onthouden. Kies hier het standaardprofiel.</string>
@@ -231,7 +231,7 @@
   <string name="old_poi_file_should_be_deleted">Het interessepuntenbestand \'%1$s\' is overbodig en kan worden verwijderd.</string>
   <string name="update_poi_file_not_found">Lokaal bestand voor het bijhouden van wijzigingen van interessepunten niet gevonden en kan ook niet worden aangemaakt.</string>
   <string name="button_upgrade_osmandplus">Upgraden naar OsmAnd+</string>
-  <string name="map_version_changed_info">Server bevat kaartbestanden, die niet compatibel zijn met je huidige programmaversie. Om deze te downloaden en te gebruiken, moet je het programma upgraden naar een nieuwere versie.</string>
+  <string name="map_version_changed_info">Op de server staan kaartbestanden die niet compatibel zijn met de huidige programmaversie. Je moet eerst OsmAnd updaten voordat je kaarten kan downloaden en gebruiken.</string>
   <string name="local_index_mi_rename">Hernoem</string>
   <string name="show_gpx_route">Toon op kaart</string>
   <string name="poi_filter_nominatim">Online (Nominatim)</string>
@@ -322,9 +322,9 @@
   <string name="installing_new_resources">Installeren nieuwe gegevens…</string>
   <string name="internet_connection_required_for_online_route">Er is een online routeberekening gekozen, maar er is geen verbinding met internet.</string>
   <string name="tts_language_not_supported_title">Taal niet ondersteund</string>
-  <string name="tts_language_not_supported">De geselecteerde taal is niet ondersteund door de geïnstalleerde Android stemgenerator. Wil je een andere stemgenerator zoeken op Market? Anders wordt de huidige stemgenerator gebruikt.</string>
+  <string name="tts_language_not_supported">De gekozen taal is niet ondersteund door de geïnstalleerde Android stemgenerator. Wil je een andere stemgenerator zoeken op de Play-store? Anders wordt de huidige stemgenerator gebruikt.</string>
   <string name="tts_missing_language_data_title">Ontbrekende gegevens</string>
-  <string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Wil je naar Market gaan om deze te installeren?</string>
+  <string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Wil je naar de Play-store gaan om deze te installeren?</string>
   <string name="gpx_option_reverse_route">Keer richting van GPX-route om</string>
   <string name="gpx_option_destination_point">Gebruik huidige bestemming</string>
   <string name="gpx_option_from_start_point">Volg de gehele track</string>
@@ -363,8 +363,8 @@
   <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten inplaats van (raster)kaartsegmenten te gebruiken</string>
   <string name="level_to_switch_vector_raster">Min. vector zoomniveau</string>
   <string name="tip_location_sharing">Locatie delen</string>
-  <string name="tip_location_sharing_t">Je kan als volgt de locatie van interessante punten op je reis delen met familie of vrienden met het contextmenu \'Gebruik locatie\' → \'Locatie delen\'.
-		\n\nKies dan een manier om je locatie te delen. De opties zijn: e-mail, SMS (tekst), of kopieer de locatiecoördinaten naar het klembord van het apparaat.
+  <string name="tip_location_sharing_t">Wil je een interessant punt op je reis delen met familie of vrienden? Gebruik dan op de kaart het contextmenu \'Deel locatie\'.
+		\n\nDe locatie kan gedeeld worden via e-mail, SMS, QR-code, naar het klembord of naar een ander (navigatie)programma.
 	</string>
   <string name="tip_favorites">Favorieten</string>
   <string name="tip_favorites_t">Veelgebruikte punten kunnen als volgt worden bewaard als favorieten:
@@ -392,13 +392,13 @@
 		\n\nOp het zoekscherm kan je zoeken:
 		\n\t* op adres
 		\n\t* op coördinaten
-		\n\t* interessepunten (type of op naam)
+		\n\t* interessepunten (op categorie of op naam)
 		\n\t* uit de zoekgeschiedenis
 		\n\t* in de favorieten
-Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het op de kaart te tonen, etc.
+Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de favorieten toe te voegen.
 	</string>
   <string name="tip_map_context_menu">Menu \'Gebruik locatie\'</string>
-  <string name="tip_map_context_menu_t">\tHet kaart-contextmenu biedt alle acties die te maken hebben met een punt op de kaart.
+  <string name="tip_map_context_menu_t">\tHet contextmenu op de kaart biedt alle acties die te maken hebben met een punt op de kaart.
 		\n\nHet wordt getoond als je (lang) op een punt op de kaart drukt en dan op de markering tikt, of door op de trackball-knop te drukken, of via \'Menu\' → \'Gebruik locatie\'.
 		\n\tDe laatste twee manieren gebruiken het midden van de kaart als locatie.
 		\n\tEen markering kan worden gesloten door er lang op te drukken.
@@ -608,7 +608,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="route_head">Koers</string>
   <string name="first_time_continue">Ga door</string>
   <string name="first_time_download">Download regio\'s</string>
-  <string name="first_time_msg">Om alle features van het programma te gebruiken, heb je wat regionale offline gegevens nodig, die je kan downloaden (\'Instellingen\' → \'Offline gegevens\') of zelf aanmaken. Daarna kan je zoeken naar adressen, interessepunten en openbaar vervoer.</string>
+  <string name="first_time_msg">Om OsmAnd goed te gebruiken moet je kaartgegevens downloaden (\'Instellingen\' → \'Offline gegevens\') of zelf aanmaken. Daarna kan je de kaart bekijken en adressen, interessepunten en openbaar vervoer opzoeken.</string>
   <string name="search_poi_location">Naar signaal zoeken…</string>
   <string name="search_near_map">Zoek dichtbij de laatste kaartlocatie</string>
   <string name="search_nearby">Zoek dichtbij</string>
@@ -673,7 +673,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="downloading">Downloaden…</string>
   <string name="downloading_list_indexes">Lijst van beschikbare regio\'s wordt gedownload…</string>
   <string name="list_index_files_was_not_loaded">De lijst van regio\'s werd niet geladen van osmand.net.</string>
-  <string name="select_index_file_to_download">Niets gevonden. Als je je regio niet kan vinden, kan je deze zelf maken (zie http://osmand.net).</string>
+  <string name="select_index_file_to_download">Niets gevonden. Als je de regio niet kan vinden, kan je deze zelf maken (zie http://osmand.net).</string>
   <string name="show_poi_on_map">Toon op kaart</string>
   <string name="fav_points_edited">Favoriet punt is bewerkt</string>
   <string name="fav_points_not_exist">Er zijn geen favoriete punten</string>
@@ -703,7 +703,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="error_calculating_route_occured">Fout bij routeberekening</string>
   <string name="empty_route_calculated">Fout: berekende route is leeg</string>
   <string name="new_route_calculated_dist">Nieuwe route berekend, afstand</string>
-  <string name="arrived_at_destination">Je bent aangekomen op je bestemming</string>
+  <string name="arrived_at_destination">De bestemming is bereikt</string>
   <string name="invalid_locations">Coördinaten zijn ongeldig!</string>
   <string name="go_back_to_osmand">Ga terug naar de OsmAnd-kaart</string>
   <string name="close">Sluiten</string>
@@ -723,7 +723,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="data_settings">Gegevens</string>
   <string name="map_preferences_descr">Specificeer kaartinstellingen: kaartbron, rotatie, marker positie, scherm-orientation</string>
   <string name="osm_settings">OSM bewerken</string>
-  <string name="auto_zoom_map_descr">Kaart automatisch zoomen naargelang je snelheid</string>
+  <string name="auto_zoom_map_descr">Kaart automatisch zoomen naargelang de snelheid</string>
   <string name="auto_zoom_map">Kaart automatisch zoomen</string>
   <string name="additional_settings">Extra instellingen</string>
   <string name="settings">Instellingen</string>
@@ -952,12 +952,12 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
   <string name="osmand_parking_add_event">Voeg een notificatie toe aan de kalender</string>
   <string name="osmand_parking_time_limit">parkeren met tijdslimiet</string>
   <string name="osmand_parking_time_no_limit">parkeren zonder tijdslimiet</string>
-  <string name="osmand_parking_position_description">De positie van je geparkeerde auto. %1$s</string>
+  <string name="osmand_parking_position_description">De positie van de geparkeerde auto. %1$s</string>
   <string name="osmand_parking_position_description_add">De auto ophalen om:</string>
   <string name="osmand_parking_pm">\'s-middags</string>
   <string name="osmand_parking_am">\'s-ochtends</string>
   <string name="osmand_parking_position_name">Parkeerplek</string>
-  <string name="osmand_parking_plugin_description">Met deze plugin kan je onthouden waar je auto geparkeerd staat.</string>
+  <string name="osmand_parking_plugin_description">Met deze plugin kan je onthouden waar de auto geparkeerd staat.</string>
   <string name="osmand_parking_plugin_name">Parkeerpositie plugin</string>
   <string name="context_menu_item_add_parking_point">Markeer als parkeerpositie</string>
   <string name="context_menu_item_delete_parking_point">Verwijder de parkeerpositie</string>
@@ -1024,11 +1024,11 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
 <string name="map_widget_day_night">Dag/nacht kaart</string>
 <string name="map_widget_vector_attributes">Kaartweergave attributen:</string>
 <string name="map_widget_renderer">Kaartstijl</string>
-<string name="tip_rotation_switching_t_v2">Je kan kiezen hoe de kaartweergave geroteerd wordt door herhaaldelijk te tikken op het kompas-icoon.
-		\n\nDe keuzen zijn:
-		\n\t* \'Niet roteren (het noorden is boven)\' - De kaart wordt niet geroteerd. Het noorden is altijd boven
-		\n\t* \'In beweegrichting\' - De kaartrotatie wordt permanent aangepast aan de beweegrichting
-		\n\t* \'Volgens kompas\' - De kaartrotatie wordt permanent aangepast aan de kompas-uitlezing van het apparaat
+<string name="tip_rotation_switching_t_v2">Je kan kiezen hoe de kaart gedraaid wordt door op het kompas-icoon te tikken.
+		\n\nDe keuzes zijn:
+		\n\t* \'Niet draaien (het noorden is boven)\' - De kaart wordt niet geroteerd. Het noorden is altijd boven
+		\n\t* \'In beweegrichting\' - De kaart wordt gedraaid in de beweegrichting
+		\n\t* \'Volgens kompas\' - De kaartrotatie gedraaid volgens het kompas
 	</string>
 <string name="tip_day_night_mode_t_v2">De kaartpresentatie kan voor offline vectorkaarten gewisseld worden tussen dag (helderder) en nacht (donkerder). Nachtkleuren zijn veiliger voor nachtelijke ritten.
 		\n\nJe kan een voorkeursinstelling kiezen in \'Menu\' -&gt; \'Definieer beeld\' -&gt; \'Configureer scherm\' -&gt; \'Dag/nacht kaart\'.
@@ -1038,8 +1038,8 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
 		\n\t* \'Nacht\' - gebruik altijd de nacht modus
 		\n\t* \'Lichtsensor\' - de kaartweergave wordt bepaald door de lichtsensor van het apparaat (indien aanwezig)
 	</string>
-<string name="tip_map_switch_t_v2">De kaartbron en de kaartlagen kunnen worden gewijzigd via \'Menu\' → \'Kaartlagen\'.
-		\n\nOnder \'Kaartbron…\' kan je kiezen uit gedownloade vectorkaarten (standaard, benodigd voor offline navigatie), gegenereerde (online of opgeslagen) kaartsegmentenbronnen (activeer hiervoor de plugin \'Online kaarten\' under \'Instellingen\' → \'Plugins\') of kaarten die je gemaakt hebt met bv. OsmAndMapCreator op een PC.
+<string name="tip_map_switch_t_v2">De kaartbron en de kaartlagen kunnen worden gewijzigd. Activeer hiervoor de plugin \'Online kaarten\' onder \'Instellingen\' → \'Plugins\'.
+\n\nVia \'Menu\' → \'Kaartlagen kan je kiezen uit kaarten op het toestel (standaard, ook voor navigatie), en uit gegenereerde (online of opgeslagen) kaartsegmentenbronnen, of kaarten die je gemaakt hebt met bv. OsmAndMapCreator op een PC.
 		\n\nOsmAnd ondersteunt ook zelfgemaakte kaartbronnen.
 	</string>
 <string name="tip_app_mode_t_v2">OsmAnd ondersteunt verschillende vervoersprofielen.
@@ -1123,7 +1123,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
     <string name="add_as_last_destination_point">Voeg toe als laatste routepunt</string>
     <string name="add_as_first_destination_point">Voeg toe als eerste routepunt</string>
     <string name="replace_destination_point">Vervang het bestemmingspunt</string>
-    <string name="new_destination_point_dialog">Je hebt al een bestemmingspunt gekozen.</string>
+    <string name="new_destination_point_dialog">Er is al een bestemmingspunt gekozen.</string>
     <string name="target_point">Routepunt %1$s</string>
     <string name="target_points">Routepunten</string>
     <string name="map_widget_monitoring_services">Registratiediensten</string>
@@ -1141,7 +1141,7 @@ Bij elk resultaat kan via een menu gekozen worden om er heen te navigeren, het o
 	<string name="safe_mode_description">Gebruik OsmAnd in veilige modus (gebruikt langzamere Android-code in plaats van native code).</string>
     <string name="safe_mode">Veilige modus</string>
     <string name="native_library_not_running">Het programma werkt in veilige modus (uitzetten via Instellingen).</string>
-    <string name="background_service_is_enabled_question">Achtergrond-service staat nog aan. Wil je dat uitzetten?</string>
+    <string name="background_service_is_enabled_question">De achtergrond-service staat nog aan. Deze uitschakelen?</string>
     <string name="tip_recent_changes_1_0_0_t">Wijzigingen in 1.0.0:
 \n\t* Verbeterde routeberekening, sneller en nauwkeuriger (tot 250 km)
 \n\t* Wegenkaarten (bevatten uitsluitend wegen)
@@ -1432,7 +1432,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     </string>
     <string name="monitoring_settings">Registratiediensten &amp; Slaapmodus</string>
     <string name="monitoring_settings_descr">Stel in hoe reizen op te nemen en de slaapmodus te activeren</string>
-    <string name="osmand_monitoring_plugin_description">Activeren van tracking en navigatie in slaapmodus (scherm uit) met een periodiek ontwakend GPS-toestel. Toon de instellingen om je reizen op te nemen als lokale GPX-bestanden of online via een webdienst.</string>
+    <string name="osmand_monitoring_plugin_description">Activeren van tracking en navigatie in slaapmodus (scherm uit). De GPS gaat dan regelmatig aan. Toon de instellingen om uw reis vast te leggen als GPX-bestand of online via een webdienst.</string>
     <string name="street_name">Straat</string>
 	<string name="osmand_monitoring_plugin_name">Registratiediensten &amp; Slaapmodus</string>
     <string name="choose_osmand_theme_descr">Kies applicatie-thema</string>
@@ -1522,7 +1522,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osb_author_or_password_not_specified">Specificeer OSM-gebruikersnaam en -wachtwoord in Instellingen</string>
     <string name="clear_intermediate_points">Wis tussenpunten</string>
     <string name="keep_intermediate_points">Bewaar tussenpunten</string>
-    <string name="new_directions_point_dialog">Je hebt al tussenpunten gemaakt.</string>
+    <string name="new_directions_point_dialog">Er zijn al tussenpunten gemaakt.</string>
     <string name="context_menu_item_directions_to">Aanwijzingen naar</string>
     <string name="context_menu_item_directions_from">Aanwijzingen vanaf</string>
     <string name="route_descr_map_location">Kaart: </string>
@@ -1576,7 +1576,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="tips_and_tricks">Tips</string>
     <string name="tip_map_styles">Kaartstijlen</string>
 	<string name="tip_map_styles_t">OsmAnd kan de offline vectorkaarten in verschillende stijlen weergeven:
-		\n\nNaast de uitgebalanceerde standaardkaartstijl, heb je in \'Menu\' -&gt; \'Configureer scherm\' -&gt; \'Kaartstijl\' bijvoorbeeld de keuze uit:
+		\n\nNaast de uitgebalanceerde standaardkaartstijl, is er in \'Menu\' -&gt; \'Configureer scherm\' -&gt; \'Kaartstijl\' bijvoorbeeld de keuze uit:
 		\n\t* De \'Touring view\'-stijl: deze bevat de meest gedetailleerde informatie voor reizen en tours, waaronder optimalisatie voor professioneel gebruik (hoger contrast voor herkenbaarheid wegen), opties voor bergtochten (SAC-moeilijkheidsgraad), fietsroutes, wandelsymbolen, etc.
 		\n\t* \'High contrast roads\' toont wegen in uitgesproken kleuren voor situaties met veel omgevingslicht
 		\n\t* \'Winter and ski\' toont een (met sneeuw bedekt) winterlandschap en toont wereldwijd skihellingen en liften (wanneer gebruikt met de \'World ski\' kaartdownload)
@@ -1597,7 +1597,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="animate_routing_route">Simuleer met de berekende route </string>
     <string name="animate_routing_gpx">Simuleer met een GPX spoor</string>
     <string name="osmodroid_refresh">Ververs channels</string>
-    <string name="local_osm_changes_delete_all_confirm">Je gaat %1$d osm wijzigingen verwijderen. Doorgaan?</string>
+    <string name="local_osm_changes_delete_all_confirm">%1$d OSM-wijzigingen worden verwijderd. Doorgaan?</string>
     <string name="local_osm_changes_delete_all">Verwijder alle</string>
     <string name="tip_faq_t">Raadpleeg https://code.google.com/p/osmand/wiki/FAQ voor vaak gestelde vragen.</string>
     <string name="tip_faq">Vaak gestelde vragen</string>
@@ -1606,7 +1606,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="app_mode_boat">Boot</string>
     <string name="app_mode_aircraft">Vliegtuig</string>
     <string name="map_widget_map_rendering">Kaartweergave:</string>
-    <string name="app_modes_choose_descr">Kies de profielen die je in Osmand wilt gebruiken</string>
+    <string name="app_modes_choose_descr">Kies de profielen die in Osmand zichtbaar zijn</string>
     <string name="app_modes_choose">Toepassingsprofielen</string>
 	<string name="amenity_type_seamark">boei / baken</string>
     <string name="osmodroid_seek">Zoek object</string>
@@ -1649,7 +1649,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="route_preferences">Route-voorkeuren</string>
     <string name="route_info">Route-informatie</string>
     <string name="keep_and_add_destination_point">Toevoegen als bestemming</string>
-    <string name="use_displayed_track_for_navigation">Wil je de getoonde route gebruiken voor navigatie?</string>
+    <string name="use_displayed_track_for_navigation">De getoonde route gebruiken voor navigatie?</string>
     <string name="tip_recent_changes_1_7_1_t">Wijzigingen in 1.7:
     \n\t* BELANGRIJK: kaarten moeten nieuwer zijn dan februari 2014.
 	\n\t* Volledig nieuwe routeberekening (snel en nauwkeurig) - 
@@ -1731,4 +1731,6 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
    	<string name="keep_informing_never">Niet herhalen</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
     <string name="keep_informing">Herhaal de aanwijzingen</string>
-	</resources>
+	<string name="arrival_distance">Aankondigen van de bestemming</string>
+    <string name="arrival_distance_descr">Wanneer melden dat de bestemming bereikt is?</string>
+    </resources>
