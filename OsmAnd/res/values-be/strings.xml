@@ -662,17 +662,17 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="select_plugin_to_activate">Пазначце модуль каб актываваць яго. (Магчыма спатрэбіцца перастартаваць OsmAnd.)</string>
 	<string name="prefs_plugins_descr">Модулі актывуюць дадатковыя налады й магчымасьці</string>
 	<string name="prefs_plugins">Дадатковыя модулі</string>
-	<string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0:
-		\n\t- *Plugin functionality*
-		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Settings/Plugins.
-		You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.     
-		\n\t- *New offline map data support*
-		\n\t    - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed). 
-		\n\t    - You need to download completely new offline data (old data will not be supported anymore)
-		\n\t- *Offline Routing* 
-		\n\t	- Offline routing becomes more robust
-		\n\t  *Usability and UI experience*
-		\n\t	- Improved in many areas		
+	<string name="tip_recent_changes_0_8_0_t">Змены ў 0.8.0: ↵
+		\n\t - * Функыянальнасць модуляў * ↵
+		\n\t - Большая частка функцый згуртаваная па модулях і яны могуць быць уключаны ці выключаны ў меню Налады/Модулі. ↵
+		Вы можаце ўключыць (онлайн або кэшаваныя) крыніцы растравых мапаў, параметры адсочвання, а таксама шмат іншых новых функцый. ↵
+		\n\t - * Падтрымка новага фармату лакальных мапаў * ↵
+		\n\t - Адмалёўка мапы цяпер адбываецца хутчэй і больш дакладна (праблемы з берагавой лініяй і затопленымі ўчасткамі амаль выпраўленыя). ↵
+		\n\t - Вам трэба занава загрузіць дадзеныя для аўтаномнага выкарыстання (стары фармат больш не падтрымліваецца) ↵
+		\n\t - * Аўтаномная пракладка маршрутаў * ↵
+		\n\t → - Аўтаномная пракладка маршрутаў стала значна надзейней ↵
+		\n\t * Графічны інтэрфейс і ўзаемадзеянне * ↵
+		\n\t → - Палепшана ў многіх напрамках → → ↵		
 	</string>
 	<string name="osm_editing_plugin_description">Паказваць налады патрэбныя для зваротнай сувязі OSM накшталт збору/зьменаў цікавосткаў, стварэньня/камэнтаваньня хібаў OSM і дасыланьня запісаных файлаў GPX (патрабуе лагін/пароль OSM).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Вектарныя мапы могуць адлюстроўвацца хутчэй. Падтрымліваецца не ўсімі прыладамі.</string>
@@ -760,15 +760,15 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="use_fluorescent_overlays_descr">Ужываць флюарэсцэнтныя колеры для трэкаў і шляхоў</string>
 	<string name="offline_edition">Аўтаномнае рэдагаваньне</string>
 	<string name="offline_edition_descr">Заўсёды выкарыстоўваць аўтаномнае рэдагаваньне</string>
-	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1:
-		\n\t- Offline POI editing 
-		\n\t- Online Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
-		\n\t- Show currently recorded track on map
-		\n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn
-		\n\t- New voice prompt \'Route recalculated\'
-		\n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color
-		\n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue
-		\n\t- Other changes
+	<string name="tip_recent_changes_0_7_1_t">Змены ў 0.7.1 : ↵
+		\n\t - Лакальнае рэдагаванне POI ↵
+		\n\t - Параметры адсочваньня - перыядычная перадача каардынатаў у вэб-сэрвіс (як наладзіць вэб-сэрвіс адсочваньня - чытайце ў HowTo) ↵
+		\n\t - Паказ бягучага сьледу на мапе↵
+		\n\t - Вызначэнне напрамка руху: паведамленне \'Зрабіце разварот\' паказваецца і аб\'яўляецца, калі вы рухаецеся ў процілеглым кірунку, або прапусцілі паварот ↵
+		\n\t - Новае галасавое паведамленне \'Маршрут пералічаны\' ↵
+		\n\t - Візуальная індыкацыя бліжэйшага павароту, у межах 100 м стрэлка кірунку мяняе колер ↵
+		\n\t - Актуальнасць дэактываваных індэксных файлаў таксама паказваецца ў меню Загрузка, цёмна-блакітным або цёмна-зялёным ↵
+		\n\t - Іншыя змены ↵
 	</string>
 	<string name="update_poi_does_not_change_indexes">Зьмены POI у праграме не ўплываюць на зладаваныя файлы мапы, зьмены захоўваюцца толькі ў лякальныя файлы.</string>
 	<string name="local_openstreetmap_uploading">Перадача …</string>
@@ -825,11 +825,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="osmand_service">Функцыянальнасць рэжыму сну</string>
 	<string name="osmand_service_descr">Ужываць каб OsmAnd працавала падчас выключанага экрану</string>
 	<string name="tip_rotation_switching">Арыентацыя мапы</string>
-	<string name="tip_rotation_switching_t_v2">You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
-		\n\nThe choices are:
-		\n\t* \'Don\'t rotate (north is up)\': Map will not be rotated. North will be always up
-		\n\t* \'To direction of movement\': Map will continuously be aligned with your heading
-		\n\t* \'To compass\': Map will continuously be aligned with the device\'s compass reading
+	<string name="tip_rotation_switching_t_v2">Націснуўшы на значок компаса на экране з картай Вы можаце змяніць рэжым павароту карты. ↵ 
+		\n\nДаступныя варыянты: ↵ 
+		\n\t* \ 'Не паварочваць\' - Карта не будзе паварочвацца. Поўнач заўсёды зверху.
+		\n\t* \ 'Па кірунку руху\' - Карта будзе паварочвацца ў адпаведнасці з напрамкам Вашага руху. Зверху - кірунак руху. ↵ 
+		\n\t* \ 'Па кірунку компаса\' - Карта будзе паварочвацца так, каб сумясціць поўнач карты і паўночны напрамак (выкарыстоўваюцца паказанні компаса ў прыладзе). ↵
 	</string>
 	<string name="binary_map_download_success">Загрузка скончана. ↵ 
 		\n\t\n\tАктывацыя мапаў праз \'Меню\' → \'Карта\' → \'Крыніца карты ...\' → \'Оффлайн вектарныя карты\". ↵ 
@@ -860,13 +860,13 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 		\n\nTo display a route to the selected destination from any point other than your current position, select the start point on the map and tap \'Directions from\'.
 		\n\nIf you use \'Directions from\' together with \'Start navigation\', OsmAnd will switch to your actual position as soon as it is found (so this can be used to jump-start routing before the position is found), while \'Directions from\' in combination with \'Display route\' just shows you the route from any arbitrary point you had selected without subsequent updates.
 	</string>
-	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
-		\n\t- Improved offline map rendering
-		\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
-		\n\t- Massive look and feel changes
-		\n\t- Altitude info
-		\n\t- New translations (Vienamese, Polish)
-		\n\t- Other small features
+	<string name="tip_recent_changes_0_6_9_t">Змены ў 0.6.9: ↵ 
+		\n\t- Палепшана адмалёўка лакальных мапаў 
+		\n\t- Хуткі натыўная адмалёўка мапаў (эксперыментальныя налады - можа працаваць не на ўсіх прыладах) ↵ 
+		\n\t- Істотныя змены вонкавага выгляду ↵ 
+		\n\t- Інфармацыя аб вышыні
+		\n\t- Падтрымка новых моў (в\'етнамская, польская)
+		\n\t- Іншыя дробныя дапаўненні ↵
 	</string>
 	<string name="use_transparent_map_theme">Празрыстая тэма</string>
 	<string name="native_library_not_supported">Свойскія бібліятэкі не падтрымліваюцца гэтай прыладай.</string>
@@ -989,13 +989,13 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="trace_rendering">Адладачная інфармацыя пра адмалёўку</string>
 	<string name="trace_rendering_descr">Паказаць прадукцыйнасць рэндэрынгу</string>
 	<string name="tip_recent_changes">Нядаўнія зьмены</string>
-	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6: 
-		\n\t- Text To Speech engine for voice navigation
-		\n\t- Make map renderer more detailed
-		\n\t- Basemap for whole world packaged with app
-		\n\t- Tweak offline navigation (still experimental)
-		\n\t- GPX navigation options
-		\n\t- UI update and large bug fixing
+	<string name="tip_recent_changes_0_6_6_t">Змены ў 0.6.6: ↵ 
+		\n\t- Text To Speech можа быць выкарыстаны для галасавой навігацыі ↵ 
+		\n\t- Больш дэталізаваная адмалёўка мапы 
+		\n\t- Базавая мапа для ўсяго свету разам з праграмай↵ 
+		\n\t- Паляпшэнне аўтаномнай навігацыі (усё яшчэ эксперыментальна) ↵ 
+		\n\t- Дадатковыя опцыі пры навігацыі па GPX ↵ 
+		\n\t- Абнаўленне графікі і выпраўленне памылак ↵
 	</string>
 	<string name="voice_not_use">Не карыстацца</string>
 	<string name="voice_not_specified">None</string>
@@ -1050,10 +1050,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="preferred_locale">Мова інтэрфэйсу</string>
 	<string name="incomplete_locale">няскончана</string>
 	<string name="tip_map_switch">Абраць крыніцу карты</string>
-	<string name="tip_map_switch_t_v2">The map source and map layers displayed are changed via \'Menu\' → \'Map layers\'.
-		\n\nUnder \'Map source…\' you can choose using the pre-loaded offline vector maps (default, also needed for offline navigation), or predefined (online or cached offline) tile sources (activate the \'Online maps\' plugin under \'Settings\' → \'Plugins\' for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
-		\n\nOsmAnd also supports custom sources.
-	</string>
 	<string name="tip_app_mode">Профіль карыстальніка</string>
 	<string name="tip_app_mode_t_v2">OsmAnd supports different (customizable) application profiles for different use cases.
 		\n\nYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route (\'transport mode\').
@@ -1074,8 +1070,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 		\n\nA marker box can be hidden again by long-clicking on it.
 	</string>
 	<string name="tip_initial">Парады і хітрасьці</string>
-	<string name="tip_initial_t">OsmAnd is a navigation application with many features. 
-		\n\nAs a basic introduction, some usage tips and tricks are linked via \'Menu\' → \'Tips\' from the map screen.
+	<string name="tip_initial_t">OsmAnd - навігацыйная праграма з вялікімі магчымасцямі. ↵ 
+		\n\nПачатковыя звесткі, як і некаторыя парады і рэкамендацыі па выкарыстанні знаходзяцца ў \'Меню\' → \'Парады\'. ↵
 	</string>
 	<string name="next_button">Далей</string>
 	<string name="previous_button">Назад</string>
@@ -1162,7 +1158,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="reload">Абнавіць</string>
 	<string name="fast_route_mode">Найхутчэйшы шлях</string>
 	<string name="fast_route_mode_descr">Пазначыць каб разьлічваць найхутчэйшы шлях, ці зьняць пазнаку для найкарацейшага шляху </string>
-	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
+	<string name="tiles_to_download_estimated_size">На маштабе {0} загрузіць {1} фрагментаў ({2} МБ)</string>
 	<string name="context_menu_item_download_map">Спампаваць карту</string>
 	<string name="select_max_zoom_preload_area">Выберыце максімальнае павелічэнне для папярэдняй загрузкі</string>
 	<string name="maps_could_not_be_downloaded">Гэтая карта не можа быць загружана</string>
