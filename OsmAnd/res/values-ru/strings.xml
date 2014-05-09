@@ -1593,4 +1593,6 @@ OsmAnd - открытый источник и активно развается.
 	<string name="keep_informing_never">Никогда</string>
     <string name="keep_informing_descr">Объявлять о навигационных инструкциях с регулярными интервалами</string>
     <string name="keep_informing">Повторять навигационные инструкции</string>
-	</resources>
+	<string name="arrival_distance">Объявление прибытия</string>
+    <string name="arrival_distance_descr">Как скоро вы хотите объявить прибытие?</string>
+    </resources>
