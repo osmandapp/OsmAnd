@@ -1939,4 +1939,17 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 		\n\t* 즐겨찾기로 검색할 수 있습니다.
 		\n\n컨텍스트 메뉴를 이용하거나 또는 액션 바는 [길안내 또는 지도에서 보기] 등을 제공합니다.
 	</string>
-	</resources>
+	<string name="osmo_settings_uuid">고유 장치 id</string>
+    <string name="osmo_settings_descr">고유한 장치 등록 키 및 기타 모니터링 특정한 설정 보기 </string>
+    <string name="osmo_plugin_description">OpenStreetMap의 모니터링 - 원격 제어를 위한 많은 기능과 함께 고급 실시간 모니터링 http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (고급 라이브 모니터링)</string>
+    <string name="osmo_settings">OSMo(오스모)</string>
+   	<string name="share_route_as_gpx">GPX 파일로 루트 공유</string>
+	<string name="share_route_subject">OsmAnd 통해 공유된 루트</string>
+	<string name="arrival_distance">도착 알림</string>
+    <string name="arrival_distance_descr">도착 알림을 원하세요 ?</string>
+    <string name="keep_informing_never">결코</string>
+    <string name="keep_informing_descr">정기적 간격으로 운행 명령을 발표</string>
+    <string name="keep_informing">운행 명령을 반복</string>
+	<string name="navigation_intent_invalid">잘못된 포맷 : %s</string>
+</resources>
