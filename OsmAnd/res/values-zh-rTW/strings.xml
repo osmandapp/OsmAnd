@@ -325,7 +325,7 @@
 	<string name="use_short_object_names">使用物件名稱</string>
 	<string name="accessibility_preferences_descr">協助工具的相關偏好設定</string>
 	<string name="accessibility_preferences">協助工具</string>
-	<string name="rendering_out_of_memory">無足夠的處理記憶體以顯示選擇的區域</string>
+	<string name="rendering_out_of_memory">沒有足夠的處理記憶體去顯示已選取的區域</string>
 	<string name="use_fluorescent_overlays">螢光色的覆疊層</string>
 	<string name="use_fluorescent_overlays_descr">使用螢光色顯示軌跡與導航路線</string>
 	<string name="offline_edition">離線編輯</string>
@@ -1743,5 +1743,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="keep_informing_descr">按照定期間隔通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
 	<string name="arrival_distance">抵達通告</string>
-    <string name="arrival_distance_descr">您希望抵達通告要多快？</string>
+    <string name="arrival_distance_descr">您希望抵達通告要有多快？</string>
     </resources>
