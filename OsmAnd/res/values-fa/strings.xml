@@ -1745,4 +1745,5 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="keep_informing_descr">اعلان دستورات مسیریابی در فواصل منظم</string>
     <string name="keep_informing">تکرار دستورات مسیریابی</string>
 	<string name="navigation_intent_invalid">قالب نامعتبر: %s</string>
-</resources>
+<string name="arrival_distance">اعلام ورود</string>
+    </resources>
