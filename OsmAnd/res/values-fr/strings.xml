@@ -118,8 +118,8 @@
   <string name="city_type_town">Ville</string>
   <string name="city_type_city">Ville</string>
   <string name="layer_poi_label">Étiquette des points d\'intérêt</string>
-  <string name="animate_route_off">Arrêt animation</string>
-  <string name="animate_route">Démarrage animation</string>
+  <string name="animate_route_off">Arrêter l\'animation</string>
+  <string name="animate_route">Démarrer l\'animation</string>
   <string name="tip_recent_changes_0_6_8_t">Changements en 0.6.8 :
 \n\t- Refonte totale de la recherche (PI, adresses). Rend la recherche d\'adresses plus rapide. Possibilité de rechercher selon différents critères
 \n\t- Possibilité de chercher les PI par nom sur grande zone (pays)
@@ -366,11 +366,11 @@
   <string name="km_h">km/h</string>
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
-  <string name="poi_filter_car_aid">Pour automobilistes</string>
+  <string name="poi_filter_car_aid">Pour conducteurs</string>
   <string name="poi_filter_closest_poi">PI le plus proche</string>
   <string name="poi_filter_custom_filter">Filtre personnalisé</string>
   <string name="poi_filter_food_shop">Alimentation</string>
-  <string name="poi_filter_for_tourists">Pour touristes</string>
+  <string name="poi_filter_for_tourists">Pour voyageurs</string>
   <string name="poi_filter_fuel">Carburant</string>
   <string name="poi_filter_namefinder">Recherche de PI en ligne</string>
   <string name="reading_cached_tiles">Lecture carreaux en cache…</string>
@@ -559,7 +559,7 @@
   <string name="search_history_street">Rue :\n{0}\n{1}</string>
   <string name="search_history_int_streets">Intersection :\n{0} x {1} dans {2}</string>
   <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
-  <string name="favorite">Favori :</string>
+  <string name="favorite">Favori </string>
   <string name="clear_all">Effacer tout</string>
   <string name="history">Historique</string>
   <string name="uploading_data">Envoi des données…</string>
@@ -573,7 +573,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Niveau de zoom maximum</string>
   <string name="max_level_download_tile_descr">Choisir un niveau de zoom maximum pour le téléchargement</string>
-  <string name="route_general_information">Distance totale = %1$s, temps de déplacement = %2$d h %3$d m.</string>
+  <string name="route_general_information">Distance totale : %1$s, temps de déplacement : %2$d h %3$d m.</string>
   <string name="router_service_descr">Sélectionner un service de navigation, hors-ligne ou en ligne</string>
   <string name="router_service">Moteur d\'itinéraire</string>
   <string name="sd_dir_not_accessible">Répertoire sur la carte SD inaccessible en écriture</string>
@@ -900,7 +900,7 @@
   <string name="rendering_attr_hmRendered_description">Augmenter le niveau de détail affiché</string>
   <string name="rendering_attr_hmRendered_name">Afficher plus de détail</string>
   <string name="save_route_as_gpx">Enregistrer l\'itinéraire au format GPX</string>
-  <string name="asap">ASAP</string>
+  <string name="asap">Dès que possible</string>
   <string name="tip_recent_changes_0_8_1_t">Changements en 0.8.1 :
 \n\t* Routes plus précises (un peu plus lent)\n\t* Correction de parcours rapide et efficace\n\t* Direction par voies\n\t* Information à propos des limitations de vitesse, radars et des ralentisseurs\n\t* Guidage vocal sur autoroute amélioré\n\t* Greffon parking (\"Où ai-je garé ma voiture ?\")\n\t* Activation/désactivation du gadget d\'enregistrement</string>
   <string name="gpxup_public">Public</string>
@@ -930,7 +930,7 @@
   <string name="context_menu_item_delete_parking_point">Supprimer un emplacement de stationnement</string>
   <string name="starting_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
   <string name="shared_location">Lieu partagé</string>
-  <string name="select_animate_speedup">Sélectionner l\'animation de l\'accélération sur l\'itinéraire</string>
+  <string name="select_animate_speedup">Sélectionnez la vitesse de l\'animation</string>
   <string name="global_app_allocated_memory_descr">Mémoire allouée %1$s MB (limite Android %2$s MB, Dalvik %3$s MB).</string>
   <string name="global_app_allocated_memory">Mémoire allouée</string>
   <string name="native_app_allocated_memory_descr">Total de la mémoire allouée originaire de l\'application %1$s MB (Dalvik %2$s MB, autre %3$s MB). Mémoire proportionnelle %4$s MB (limite Android %5$s MB, Dalvik %6$s MB).</string>
@@ -967,11 +967,11 @@
   <string name="map_widget_right_stack">Côté droit :</string>
   <string name="map_widget_left_stack">Côté gauche :</string>
   <string name="map_widget_parking">Parking</string>
-  <string name="map_widget_monitoring">Suivi</string>
+  <string name="map_widget_monitoring">Enregistrement GPX</string>
   <string name="map_widget_speed">Vitesse</string>
   <string name="map_widget_distance">Destination</string>
   <string name="map_widget_altitude">Altitude</string>
-  <string name="map_widget_time">Temps de trajet</string>
+  <string name="map_widget_time">Temps de parcours</string>
   <string name="map_widget_next_turn">Prochaine bifurcation</string>
   <string name="map_widget_next_turn_small">Prochaine bifurcation (petit)</string>
   <string name="map_widget_next_next_turn">Deuxième prochaine bifurcation</string>
@@ -1199,7 +1199,7 @@
     <string name="item_unchecked">non vérifié</string>
     <string name="map_view">Carte</string>
     <string name="access_arrival_time">Heure d\'arrivée</string>
-    <string name="map_widget_gps_info">Infos GPS</string>
+    <string name="map_widget_gps_info">Informations GPS</string>
     <string name="layer_hillshade">Ombrage du relief</string>
     <string name="osmand_play_title_30_chars">Cartes et navigation OsmAnd</string>
 	<string name="osmand_plus_play_title_30_chars">Cartes et navigation OsmAnd+</string>
@@ -1363,7 +1363,7 @@
     <string name="context_menu_item_directions_to">Aller vers le point</string>
     <string name="context_menu_item_directions_from">Partir depuis le point</string>
     <string name="route_descr_map_location">Carte : </string>
-    <string name="map_widget_fps_info">Infos de debug du rendu</string>
+    <string name="map_widget_fps_info">Informations de débogage du rendu</string>
 	<string name="route_to">Vers :</string>
     <string name="route_via">Via :</string>
     <string name="route_from">De :</string>
@@ -1423,9 +1423,9 @@
 	</string>
     <string name="remember_choice">Mémoriser mon choix</string>
     <string name="gps_status_eclipsim">GPS Status</string>
-    <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer l\'itinéraire</string>
-    <string name="animate_routing_route">Simulation avec l\'itinéraire calculé </string>
-    <string name="animate_routing_gpx">Simulation avec la trace GPX</string>
+    <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer un itinéraire</string>
+    <string name="animate_routing_route">Simulation de l\'itinéraire calculé </string>
+    <string name="animate_routing_gpx">Simulation à partir d\'une trace GPX</string>
     <string name="tip_faq_t">\tMerci de visiter https://code.google.com/p/osmand/wiki/FAQ pour la Foire Aux Questions.</string>
     <string name="tip_faq">Foire Aux Questions</string>
     <string name="local_osm_changes_delete_all_confirm">Vous allez supprimer %1$d modifications OSM. Êtes-vous sûr ?</string>
@@ -1441,14 +1441,14 @@
     <string name="amenity_type_seamark">Balise marine</string>
     <string name="osmodroid_seek">Chercher objet</string>
     <string name="osmodroid_unseek">Ne plus chercher objet</string>
-    <string name="speech_rate_descr">Préciser la vitesse d\'élocution du TTS</string>
+    <string name="speech_rate_descr">Sélectionner la vitesse d\'élocution pour la voix de synthèse (TTS)</string>
     <string name="speech_rate">Vitesse d\'élocution</string>
     
     <string name="complex_route_calculation_failed">Échec du calcul rapide de route (%s), essai avec la méthode lente..</string>
     <string name="disable_complex_routing_descr">Désactiver le routage en 2 phases pour la navigation en voiture</string>
     <string name="disable_complex_routing">Désactiver le routage complexe</string>
-    <string name="guidance_preferences_descr">Navigation</string>
-    <string name="routing_preferences_descr">Itinéraire</string>
+    <string name="guidance_preferences_descr">Paramètres de navigation</string>
+    <string name="routing_preferences_descr">Paramètres d\'itinéraire</string>
     <string name="android_19_location_disabled">Depuis Android KitKat (4.4), vous ne pouvez plus télécharger et mettre à jour la carte dans l\'ancien emplacement de sauvegarde. Voulez-vous changer pour en autoriser un nouveau et y copier l\'ensemble des fichiers ?
         \n Note : Les anciens fichiers ne seront pas touchés
         \n Note : Il ne sera pas possible de partager des fichiers entre OsmAnd et OsmAnd+. </string>
@@ -1550,6 +1550,24 @@
 <string name="localization_pref_title">Localisation</string>
 <string name="interrupt_music_descr">Interrompre la musique lors des annonces</string>
 <string name="interrupt_music">Interrompre la musique</string>
-<string name="share_route_as_gpx">Partager l'itinéraire en format GPX</string>
-	<string name="share_route_subject">Itinéraire partagé via OsmAnd</string>
+<string name="share_route_as_gpx">Partager l\'itinéraire au format GPX</string>
+<string name="share_route_subject">Itinéraire partagé via OsmAnd</string>
+    <string-array name="arrival_distance_factors">
+        <item>Précoce</item>
+        <item>Normale</item>
+        <item>Tardive</item>
+	<item>Dans les derniers mètres</item>
+    </string-array>
+    <string name="arrival_distance">Annonce de l\'arrivée à destination</string>
+    <string name="arrival_distance_descr">Choisir à quel moment l\'arrivée à destination est annoncée</string>
+    <string name="keep_informing_never">Jamais</string>
+    <string name="keep_informing_descr">Annoncer les instructions de navigation à intervalles réguliers</string>
+    <string name="keep_informing">Répétition des instructions de navigation</string>
+    <string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
+    <string name="osmo_settings_descr">Visualiser la clef unique d\'enregistrement de l\'appareil, et d\'autres paramètres de suivi</string>
+    <string name="osmo_settings">OSMo (OpenStreetMap-Monitoring)</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Outil avancé de suivi en direct, avec de nombreuses fonctionnalités pour le contrôle à distance http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OSMo (suivi en direct avancé)</string>
+    <string name="osmo_settings">OSMo</string>
+    <string name="navigation_intent_invalid">Format non valide : %s</string>
 	</resources>
