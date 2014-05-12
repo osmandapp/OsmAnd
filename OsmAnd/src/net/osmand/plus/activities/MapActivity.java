@@ -351,6 +351,7 @@ public class MapActivity extends AccessibleActivity  {
 						{
 							showImportedGpx(new File(data.getPath()));
 						}
+						setIntent(null);
                     }
                     else if("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme))
                     {
@@ -376,6 +377,7 @@ public class MapActivity extends AccessibleActivity  {
                         {
                             AccessibleToast.makeText(this, getString(R.string.navigation_intent_invalid, schemeSpecificPart), Toast.LENGTH_LONG).show(); //$NON-NLS-1$
                         }
+						setIntent(null);
                     }
                 }
             }
