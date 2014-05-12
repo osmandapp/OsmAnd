@@ -1750,4 +1750,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
    	<string name="keep_informing_never">Niekada</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pranešinėti reguliariais intervalais</string>
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
-	</resources>
+	<string name="arrival_distance">Pranešimas apie atvykimą</string>
+    <string name="arrival_distance_descr">Kada anksti turi būti pranešama apie atvykimą?</string>
+    </resources>
