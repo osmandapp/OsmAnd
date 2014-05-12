@@ -76,6 +76,7 @@ public class GeoIntentActivity extends OsmandListActivity {
             progress.setCancelable(true);
 
             task.execute();
+			setIntent(null);
         }
     }
 
