@@ -785,5 +785,5 @@
     <string name="osmo_settings_descr">Se unik registreringsnøkkel for enheten og andre spesifikke innstillinger </string>
     <string name="osmo_plugin_description">OpenStreetMap-Overvåkning - Avansert Live Overvåkning med mange funksjoner for fjernkontroll http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (Avansert Live Overvåkning)</string>
-    <string name="osmo_settings">OSMo innstillinger</string>
+    <string name="osmo_settings">OSMo</string>
    	</resources>
