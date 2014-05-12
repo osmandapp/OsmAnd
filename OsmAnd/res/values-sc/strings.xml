@@ -152,7 +152,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	\n\t* Ammustra sas mapas isgarrigadas e fatzìlita sos isgarigamentos de sas mapas mancantes a moda dereta dae sa vista de sa mapa
 	\n\t* Documentu de sas lìnias de livellu como incluidas in sos istados o sas regiònes
 	\n\t* Mapa mondiale de base noa cun istradas printzipales, ferrovias, e àteras àreas,  comente sas padentes
-	\n\t* Immaniamentu mapa (tènne carcau su buttone "zoom") - Impreàbile siat cun mapas vettoriales siat in lìnia
+	\n\t* Immaniamentu mapa (tènne carcau su butone "zoom") - Impreàbile siat cun mapas vettoriales siat in lìnia
 	\n\t* Impostadura/muda de sas fontes in lìnia pessonalizzadas de sas imbrèstias (e impostadura de s'iscadentzia issoro)
 	\n\t* Suportu pro sos lìmites de lestresa cundissionados dae s'oràriu (Olanda)
 	\n\t* Chirca prus lestra de sos indiritzos
@@ -499,4 +499,21 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="avoid_motorway">Istense sas autostradas</string>
 	<string name="auto_zoom_map_descr">Zoom mapa automàticu relativu a sa lestresa (si sa mapa est sincronizzata cun sa positzione currente)</string>
 	<string name="auto_zoom_map">Zoom automàticu mapa</string>
+	<string name="snap_to_road_descr">Arrea sa positzione in subra de sas istradas durante su nàvigu</string>
+	<string name="snap_to_road">Arrea in subra de sas istradas</string>
+	<string name="interrupt_music_descr">Interrumpe sa mùsica pro faghere sos annuntzios</string>
+	<string name="interrupt_music">Interrumpe sa mùsica</string>
+	<string name="tip_recent_changes_0_8_2_t">Mudas in sa 0.8.2:
+		\n\t* Megiorau su calculu de s'àndalas
+		\n\t* Widgets dinàmicos pro sas mapas
+		\n\t* Impostaduras de sa mapa iscostiadas in s'ischermu de sa mapa
+		\n\t* Butone firma ischermu cun servitzios de registratzione
+		\n\t* Megiorada s'iscritura in àrabu, kannada e limbas RTL 
+	</string>
+	<string name="osmand_play_title_30_chars">OsmAnd Mapas &amp; Nàvigu</string>
+	<string name="osmand_short_description_80_chars">Aplicu a datos apertos (opensource) pro su nàvigu cun mapas in lìnia e sena lìnia</string>
+	<string name="edit_filter_save_as_menu_item">Sarba comente</string>
+	<string name="poi_dialog_opening_hours">Aberi</string>
+	<string name="poi_action_change">muda</string>
+	<string name="poi_action_add">annanghe</string>
 	</resources>
