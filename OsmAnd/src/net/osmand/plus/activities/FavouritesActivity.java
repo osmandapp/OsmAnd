@@ -241,7 +241,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				boolean editied = helper.editFavouriteName(point, editText.getText().toString().trim(), cat.getText().toString());
+				boolean editied = helper.updateFavourite(point, editText.getText().toString().trim(), cat.getText().toString());
 				if (editied) {
 					favouritesAdapter.synchronizeGroups();
 					favouritesAdapter.sort(favoritesComparator);
@@ -409,7 +409,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 							name = p.name.substring(0, c);
 						}
 						FavouritePoint fp = new FavouritePoint(p.lat, p.lon, name, categoryName);
-						if (helper.addFavourite(fp)) {
+						if (helper.saveFavourite(fp)) {
 							publishProgress(fp);
 						}
 					}
@@ -454,7 +454,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			final AsyncTask<Void, Void, String> exportTask = new AsyncTask<Void, Void, String>() {
 				@Override
 				protected String doInBackground(Void... params) {
-					return helper.exportFavorites();
+					return helper.exportFavourites();
 				}
 
 				@Override

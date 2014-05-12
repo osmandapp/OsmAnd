@@ -162,7 +162,7 @@ public class MapActivityActions implements DialogProvider {
 				final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
 				point.setName(editText.getText().toString().trim());
 				point.setCategory(cat.getText().toString().trim());
-				boolean added = helper.addFavourite(point);
+				boolean added = helper.saveFavourite(point);
 				if (added) {
 					AccessibleToast.makeText(activity, MessageFormat.format(
 							activity.getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
@@ -248,7 +248,7 @@ public class MapActivityActions implements DialogProvider {
 				SavingTrackHelper savingTrackHelper = mapActivity.getMyApplication().getSavingTrackHelper();
 				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), name);
 				if(settings.SHOW_CURRENT_GPX_TRACK.get()) {
-					getMyApplication().getFavorites().addFavoritePointToGPXFile(new FavouritePoint(latitude, longitude, name, ""));
+					getMyApplication().getFavorites().addFavourite(new FavouritePoint(latitude, longitude, name, OsmandApplication.GPX_GROUP));
 				}
 				AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 							.show();

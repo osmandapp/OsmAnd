@@ -62,6 +62,7 @@ public class GeoIntentActivity extends OsmandListActivity {
         final Intent intent = getIntent();
         if (intent != null)
         {
+			setIntent(null);
             final ProgressDialog progress = ProgressDialog.show(GeoIntentActivity.this, getString(R.string.searching), getString(R.string.searching_address));
             final GeoIntentTask task = new GeoIntentTask(progress, intent);
 

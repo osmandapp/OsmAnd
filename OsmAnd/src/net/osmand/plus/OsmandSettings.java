@@ -1341,6 +1341,18 @@ public class OsmandSettings {
 		}
 		return saveIntermediatePoints(ps,ds);
 	}
+
+	public boolean addIntermediatePoint(double latitude, double longitude, String historyDescription) {
+		List<LatLon> ps = getIntermediatePoints();
+		List<String> ds = getIntermediatePointDescriptions(ps.size());
+		ps.add( new LatLon(latitude, longitude));
+		ds.add( historyDescription);
+		if (historyDescription != null) {
+			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
+		}
+		return saveIntermediatePoints(ps,ds);
+	}
+
 	public boolean deleteIntermediatePoint( int index) {
 		List<LatLon> ps = getIntermediatePoints();
 		List<String> ds = getIntermediatePointDescriptions(ps.size());

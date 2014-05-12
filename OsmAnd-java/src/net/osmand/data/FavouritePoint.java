@@ -5,14 +5,11 @@ import java.io.Serializable;
 public class FavouritePoint implements Serializable {
 	private static final long serialVersionUID = 729654300829771466L;
 	private String name;
-	private String category = "";
+	private String category;
 	private double latitude;
 	private double longitude;
 	private boolean stored = false;
 	
-
-	public FavouritePoint(){
-	}
 
 	public FavouritePoint(double latitude, double longitude, String name, String category) {
 		this.latitude = latitude;
