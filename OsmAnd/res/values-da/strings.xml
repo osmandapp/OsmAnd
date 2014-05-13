@@ -1771,12 +1771,12 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Vis unik registreringsnøgle for enheden og andre specifikke indstillinger </string>
-    <string name="osmo_plugin_description">OpenStreetMap - Overvågning - Avanceret Live- Overvågning med mange funktioner til fjernkontrol http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetMap - Overvågning - Avanceret live overvågning med mange funktioner til fjernkontrol http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (avanceret live overvågning)</string>
     <string name="osmo_settings">OSMo</string>
    	<string name="keep_informing_never">Aldrig</string>
     <string name="keep_informing_descr">Annoncer navigationsinstruktioner med jævne mellemrum</string>
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
-	<string name="arrival_distance">Ankomst annoncering</string>
-    <string name="arrival_distance_descr">Hvor hurtigt vil du have ankomst annoncering?</string>
+	<string name="arrival_distance">Meddel ankomst</string>
+    <string name="arrival_distance_descr">Hvornår skal ankomst meddeles?</string>
     </resources>
