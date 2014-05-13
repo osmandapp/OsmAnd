@@ -558,78 +558,6 @@ public class RouteResultPreparation {
 			}
 //		}
 
-		String turnLanes = prevSegm.getObject().getValue("turn:lanes");
-		int finalLaneCount = 0;
-		if (turnLanes != null) {
-			String[] splitLaneOptions = turnLanes.split("\\|", -1);
-			int[] altLanes = new int[splitLaneOptions.length];
-
-			for (int i = 0; i < splitLaneOptions.length && finalLaneCount >= 0; i++) {
-				String[] laneOptions = splitLaneOptions[i].split(";");
-
-				if (finalLaneCount == lanes.length) {
-					finalLaneCount = -1;
-					break;
-				}
-
-				for (int j = 0; j < laneOptions.length; j++) {
-					if (laneOptions[j].equals("none") || laneOptions[j].equals("through")) {
-						altLanes[i] |= 8;
-						if ((lanes[finalLaneCount] & 1) == 1) {
-							altLanes[i] |= 1;
-						}
-					} else if (laneOptions[j].equals("slight_right")) {
-						altLanes[i] |= 16;
-						if ((lanes[finalLaneCount] & 1) == 1) {
-							altLanes[i] |= 1 | 2048;
-						}
-					} else if (laneOptions[j].equals("slight_left")) {
-						altLanes[i] |= 32;
-						if ((lanes[finalLaneCount] & 1) == 1) {
-							altLanes[i] |= 1 | 4096;
-						}
-					} else if (laneOptions[j].equals("right")) {
-						altLanes[i] |= 64;
-						if ((lanes[finalLaneCount] & 1) == 1) {
-							altLanes[i] |= 1 | 6144;
-						}
-					} else if (laneOptions[j].equals("left")) {
-						altLanes[i] |= 128;
-						if ((lanes[finalLaneCount] & 1) == 1) {
-							altLanes[i] |= 1 | 8192;
-						}
-					} else if (laneOptions[j].equals("sharp_right")) {
-						altLanes[i] |= 256;
-						if ((lanes[finalLaneCount] & 1) == 1) {
-							altLanes[i] |= 1 | 10240;
-						}
-					} else if (laneOptions[j].equals("sharp_left")) {
-						altLanes[i] |= 512;
-						if ((lanes[finalLaneCount] & 1) == 1) {
-							altLanes[i] |= 1 | 12288;
-						}
-					} else if (laneOptions[j].equals("reverse")) {
-						altLanes[i] |= 1024;
-						if ((lanes[finalLaneCount] & 1) == 1) {
-							altLanes[i] |= 1 | 14336;
-						}
-					}
-
-					finalLaneCount++;
-				}
-			}
-
-			if (finalLaneCount == lanes.length) {
-				lanes = altLanes;
-			}
-		}
-
-		for (int i = 0; i < lanes.length; i++) {
-			if ((lanes[i] & 2040) == 0) {
-				lanes[i] |= 8;
-			}
-		}
-
 		double devation = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin()));
 		boolean makeSlightTurn = devation > 5 && (!isMotorway(prevSegm) || !isMotorway(currentSegm));
 		if (kl) {
@@ -642,8 +570,88 @@ public class RouteResultPreparation {
 		}
 		if (t != null && lanes != null) {
 			t.setLanes(lanes);
+			attachTurnLanesData(prevSegm, currentSegm, t);
 		}
+
 		return t;
+	}
+
+	private void attachTurnLanesData(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, TurnType t) {
+		String turnLanes = prevSegm.getObject().getValue("turn:lanes");
+		if (turnLanes == null) {
+			for (int i = 0; i < t.getLanes().length; i++) {
+				t.getLanes()[i] |= TurnType.BIT_LANE_STRAIGHT_ALLOWED;
+			}
+			return;
+		}
+
+		int finalLaneCount = 0;
+		String[] splitLaneOptions = turnLanes.split("\\|", -1);
+		int[] altLanes = new int[splitLaneOptions.length];
+
+		for (int i = 0; i < splitLaneOptions.length && finalLaneCount >= 0; i++) {
+			String[] laneOptions = splitLaneOptions[i].split(";");
+
+			for (int j = 0; j < laneOptions.length && finalLaneCount >= 0; j++) {
+				if (finalLaneCount == t.getLanes().length) {
+					finalLaneCount = -1;
+					break;
+				}
+
+				if (laneOptions[j].equals("none") || laneOptions[j].equals("through")) {
+					altLanes[i] |= TurnType.BIT_LANE_STRAIGHT_ALLOWED;
+				} else if (laneOptions[j].equals("slight_right")) {
+					altLanes[i] |= TurnType.BIT_LANE_SLIGHT_RIGHT_ALLOWED;
+				} else if (laneOptions[j].equals("slight_left")) {
+					altLanes[i] |= TurnType.BIT_LANE_SLIGHT_LEFT_ALLOWED;
+				} else if (laneOptions[j].equals("right")) {
+					altLanes[i] |= TurnType.BIT_LANE_RIGHT_ALLOWED;
+				} else if (laneOptions[j].equals("left")) {
+					altLanes[i] |= TurnType.BIT_LANE_LEFT_ALLOWED;
+				} else if (laneOptions[j].equals("sharp_right")) {
+					altLanes[i] |= TurnType.BIT_LANE_SHARP_RIGHT_ALLOWED;
+				} else if (laneOptions[j].equals("sharp_left")) {
+					altLanes[i] |= TurnType.BIT_LANE_SHARP_LEFT_ALLOWED;
+				} else if (laneOptions[j].equals("reverse")) {
+					altLanes[i] |= TurnType.BIT_LANE_UTURN_ALLOWED;
+				}
+
+				if ((t.getLanes()[finalLaneCount] & 1) == 1) {
+					altLanes[i] |= 1;
+				}
+
+				finalLaneCount++;
+			}
+
+			if (finalLaneCount == -1) {
+				break;
+			}
+		}
+
+		if (finalLaneCount != t.getLanes().length) {
+			for (int i = 0; i < t.getLanes().length; i++) {
+				t.getLanes()[i] |= TurnType.BIT_LANE_STRAIGHT_ALLOWED;
+			}
+			return;
+		}
+
+		// Just in case
+		int allActions = TurnType.BIT_LANE_STRAIGHT_ALLOWED |
+			TurnType.BIT_LANE_SLIGHT_RIGHT_ALLOWED |
+			TurnType.BIT_LANE_SLIGHT_LEFT_ALLOWED | 
+			TurnType.BIT_LANE_RIGHT_ALLOWED |
+			TurnType.BIT_LANE_LEFT_ALLOWED |
+			TurnType.BIT_LANE_SHARP_RIGHT_ALLOWED |
+			TurnType.BIT_LANE_SHARP_LEFT_ALLOWED |
+			TurnType.BIT_LANE_UTURN_ALLOWED;
+		for (int i = 0; i < altLanes.length; i++) {
+			if ((altLanes[i] & allActions) == 0) {
+				// Default to straight
+				altLanes[i] |= TurnType.BIT_LANE_STRAIGHT_ALLOWED;
+			}
+		}
+
+		t.setLanes(altLanes);
 	}
 	
 	private boolean isMotorway(RouteSegmentResult s){

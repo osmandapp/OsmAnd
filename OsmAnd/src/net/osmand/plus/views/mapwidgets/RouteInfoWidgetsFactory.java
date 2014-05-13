@@ -538,6 +538,7 @@ public class RouteInfoWidgetsFactory {
 			int[] lanes = null; 
 			
 			boolean imminent = false;
+			boolean leftSide = false;
 			
 			@Override
 			protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -554,61 +555,67 @@ public class RouteInfoWidgetsFactory {
 					// canvas.translate((int) (16 * scaleCoefficient), 0);
 					for (int i = 0; i < lanes.length; i++) {
 
-						if ((lanes[i] & 1) == 1) {
+						if ((lanes[i] & TurnType.BIT_LANE_ALLOWED) == TurnType.BIT_LANE_ALLOWED) {
 							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
 						} else {
 							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
 						}
 
-						if ((lanes[i] & 8) == 8) {
+						if ((lanes[i] & TurnType.BIT_LANE_STRAIGHT_ALLOWED) == TurnType.BIT_LANE_STRAIGHT_ALLOWED) {
 							Path straight = new Path();
-							TurnPathHelper.calcTurnPath(straight, TurnType.valueOf(TurnType.C, false), pathTransform);
+							TurnPathHelper.calcTurnPath(straight, TurnType.valueOf(TurnType.C, leftSide), pathTransform);
 							canvas.drawPath(straight, paintBlack);
 							canvas.drawPath(straight, paintRouteDirection);
 						}
-						if ((lanes[i] & 16) == 16) {
+						if ((lanes[i] & TurnType.BIT_LANE_SLIGHT_RIGHT_ALLOWED) == TurnType.BIT_LANE_SLIGHT_RIGHT_ALLOWED) {
 							Path slightRight = new Path();
-							TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf(TurnType.TSLR, false), pathTransform);
+							TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf(TurnType.TSLR, leftSide), pathTransform);
 							canvas.translate((int) (0.2 * w), 0);
 							canvas.drawPath(slightRight, paintBlack);
 							canvas.drawPath(slightRight, paintRouteDirection);
 							canvas.translate((int) (-0.2 * w), 0);
 						}
-						if ((lanes[i] & 32) == 32) {
+						if ((lanes[i] & TurnType.BIT_LANE_SLIGHT_LEFT_ALLOWED) == TurnType.BIT_LANE_SLIGHT_LEFT_ALLOWED) {
 							Path slightLeft = new Path();
-							TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf(TurnType.TSLL, false), pathTransform);
+							TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf(TurnType.TSLL, leftSide), pathTransform);
 							canvas.translate((int) (-0.2 * w), 0);
 							canvas.drawPath(slightLeft, paintBlack);
 							canvas.drawPath(slightLeft, paintRouteDirection);
 							canvas.translate((int) (0.2 * w), 0);
 						}
-						if ((lanes[i] & 64) == 64) {
+						if ((lanes[i] & TurnType.BIT_LANE_RIGHT_ALLOWED) == TurnType.BIT_LANE_RIGHT_ALLOWED) {
 							Path right = new Path();
-							TurnPathHelper.calcTurnPath(right, TurnType.valueOf(TurnType.TR, false), pathTransform);
+							TurnPathHelper.calcTurnPath(right, TurnType.valueOf(TurnType.TR, leftSide), pathTransform);
 							canvas.drawPath(right, paintBlack);
 							canvas.drawPath(right, paintRouteDirection);
 						}
-						if ((lanes[i] & 128) == 128) {
+						if ((lanes[i] & TurnType.BIT_LANE_LEFT_ALLOWED) == TurnType.BIT_LANE_LEFT_ALLOWED) {
 							Path left = new Path();
-							TurnPathHelper.calcTurnPath(left, TurnType.valueOf(TurnType.TL, false), pathTransform);
+							TurnPathHelper.calcTurnPath(left, TurnType.valueOf(TurnType.TL, leftSide), pathTransform);
 							canvas.drawPath(left, paintBlack);
 							canvas.drawPath(left, paintRouteDirection);
 						}
-						if ((lanes[i] & 256) == 256) {
+						if ((lanes[i] & TurnType.BIT_LANE_SHARP_RIGHT_ALLOWED) == TurnType.BIT_LANE_SHARP_RIGHT_ALLOWED) {
 							Path sharpRight = new Path();
-							TurnPathHelper.calcTurnPath(sharpRight, TurnType.valueOf(TurnType.TSHR, false), pathTransform);
+							TurnPathHelper.calcTurnPath(sharpRight, TurnType.valueOf(TurnType.TSHR, leftSide), pathTransform);
 							canvas.translate((int) (0.2 * w), 0);
 							canvas.drawPath(sharpRight, paintBlack);
 							canvas.drawPath(sharpRight, paintRouteDirection);
 							canvas.translate((int) (-0.2 * w), 0);
 						}
-						if ((lanes[i] & 512) == 512) {
+						if ((lanes[i] & TurnType.BIT_LANE_SHARP_LEFT_ALLOWED) == TurnType.BIT_LANE_SHARP_LEFT_ALLOWED) {
 							Path sharpLeft = new Path();
-							TurnPathHelper.calcTurnPath(sharpLeft, TurnType.valueOf(TurnType.TSHL, false), pathTransform);
+							TurnPathHelper.calcTurnPath(sharpLeft, TurnType.valueOf(TurnType.TSHL, leftSide), pathTransform);
 							canvas.translate((int) (-0.2 * w), 0);
 							canvas.drawPath(sharpLeft, paintBlack);
 							canvas.drawPath(sharpLeft, paintRouteDirection);
 							canvas.translate((int) (0.2 * w), 0);
+						}
+						if ((lanes[i] & TurnType.BIT_LANE_UTURN_ALLOWED) == TurnType.BIT_LANE_UTURN_ALLOWED) {
+							Path uturn = new Path();
+							TurnPathHelper.calcTurnPath(uturn, TurnType.valueOf(TurnType.TU, leftSide), pathTransform);
+							canvas.drawPath(uturn, paintBlack);
+							canvas.drawPath(uturn, paintRouteDirection);
 						}
 
 						canvas.translate(w, 0);
@@ -627,6 +634,7 @@ public class RouteInfoWidgetsFactory {
 						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
 						if(r != null && r.directionInfo != null && r.directionInfo.getTurnType() != null) {
 							loclanes  = r.directionInfo.getTurnType().getLanes();
+							leftSide = r.directionInfo.getTurnType().isLeftSide();
 							locimminent = r.imminent;
 							// Do not show too far 
 							if ((r.distanceTo > 700 && r.directionInfo.getTurnType().isSkipToSpeak()) || r.distanceTo > 1200) {
