@@ -16,8 +16,8 @@
   <string name="map_widget_transparent">Transparante skin</string>
   <string name="monitoring_mode_off">GPX-track opnemen</string>
   <string name="monitoring_mode_on">Stop\n GPX-opname</string>
-  <string name="gps_wakeup_interval">Activeer GPS om de %s</string>
-  <string name="int_continuosly">Continue</string>
+  <string name="gps_wakeup_interval">GPS activatie interval: %s</string>
+  <string name="int_continuosly">continu</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
   
   <string name="play_commands_of_currently_selected_voice">Luister naar de commando\'s van de gekozen stem</string>
@@ -1431,7 +1431,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	\n\t* Menuknop vervangen door knop linksboven in het kaartvenster
     </string>
     <string name="monitoring_settings">Registratiediensten &amp; Slaapmodus</string>
-    <string name="monitoring_settings_descr">Stel in hoe reizen op te nemen en de slaapmodus te activeren</string>
+    <string name="monitoring_settings_descr">Stel in hoe lokaal of via online tracking reizen op te nemen</string>
     <string name="osmand_monitoring_plugin_description">Activeren van tracking en navigatie in slaapmodus (scherm uit). De GPS gaat dan regelmatig aan. Toon de instellingen om uw reis vast te leggen als GPX-bestand of online via een webdienst.</string>
     <string name="street_name">Straat</string>
 	<string name="osmand_monitoring_plugin_name">Registratiediensten &amp; Slaapmodus</string>
