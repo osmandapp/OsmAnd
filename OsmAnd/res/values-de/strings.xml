@@ -1746,4 +1746,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="keep_informing">Wiederholen von Navigationsanweisungen</string>
 	<string name="arrival_distance">Zielankündigung</string>
     <string name="arrival_distance_descr">Wann soll die Ankunft am Ziel angekündigt werden?</string>
+    <string name="osmo_io_error">OSMo Verbindungsproblem: </string>
+    <string name="osmo_mode_on">OSMo beenden</string>    
+    <string name="osmo_mode_off">OSMo starten</string>
     </resources>
