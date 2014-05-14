@@ -1421,7 +1421,7 @@
 	<string name="av_camera_focus_macro">Makro (z blízka) režim ostrenia</string>
 	<string name="av_camera_focus_continuous">Fotoaparát sa bude pokúšať ostriť priebežne</string>
 	<string name="av_photo_play_sound">Prehrať zvuk pri zachytení snímky</string>
-	<string name="av_photo_play_sound_descr">Zvoľte, či sa má prehrať zvuk pri zachytení snímky</string>
+	<string name="av_photo_play_sound_descr">Zvoľte, či sa má prehrať zvuk pri odfotografovaní snímky</string>
 <string name="edit_tilesource_elliptic_tile">Eliptický mercator</string>
     <string name="tip_recent_changes_1_5_t">Zmeny vo verzi 1.5:↵
 →\n\t* Hlasové upozornenia na rýchlostné obmedzenia a radary↵
@@ -1756,4 +1756,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="keep_informing">Opakuj navigačné pokyny</string>
 	<string name="arrival_distance">Oznámenie príjazdu</string>
     <string name="arrival_distance_descr">Ako skoro má byť oznámený príjazd do cieľa?</string>
+    <string name="osmo_io_error">Problém s pripojením OSMo : </string>
+    <string name="osmo_mode_on">Zastaviť OSMo</string>    
+    <string name="osmo_mode_off">Spustiť OSMo</string>
     </resources>
