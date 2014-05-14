@@ -1779,4 +1779,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
 	<string name="arrival_distance">Meddel ankomst</string>
     <string name="arrival_distance_descr">Hvornår skal ankomst meddeles?</string>
+    <string name="osmo_io_error">OSMo forbindelsesproblem: </string>
+    <string name="osmo_mode_on">Stop OSMo</string>    
+    <string name="osmo_mode_off">Start OSMo</string>
     </resources>
