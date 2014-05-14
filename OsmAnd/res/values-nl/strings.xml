@@ -20,7 +20,7 @@
   <string name="int_continuosly">continu</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
   
-  <string name="play_commands_of_currently_selected_voice">Luister naar de commando\'s van de gekozen stem</string>
+  <string name="play_commands_of_currently_selected_voice">Luister naar de instructies van de gekozen stem</string>
   <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
   <string name="native_rendering">Interne kaartgeneratie</string>
   
@@ -703,7 +703,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="error_calculating_route_occured">Fout bij routeberekening</string>
   <string name="empty_route_calculated">Fout: berekende route is leeg</string>
   <string name="new_route_calculated_dist">Nieuwe route berekend, afstand</string>
-  <string name="arrived_at_destination">De bestemming is bereikt</string>
+  <string name="arrived_at_destination">Je bestemming is bereikt</string>
   <string name="invalid_locations">Coördinaten zijn ongeldig!</string>
   <string name="go_back_to_osmand">Ga terug naar de OsmAnd-kaart</string>
   <string name="close">Sluiten</string>
@@ -974,7 +974,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="osmand_parking_position_description_add_time">De auto werd geparkeerd om:</string>
   <string name="use_compass_navigation_descr">Gebruik het kompas als de richting niet gedetecteerd is</string>
   <string name="use_compass_navigation">Gebruik kompas</string>
-  <string name="route_updated_loc_found">Route wordt herberekend als de locatie gevonden is</string>
+  <string name="route_updated_loc_found">Route wordt herberekend als je positie gevonden is</string>
   <string name="continue_follow_previous_route_auto">Vorige navigatie was nog niet klaar. Nu daarmee doorgaan? (%1$s seconden)</string>
   
   
@@ -1725,7 +1725,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	<string name="navigation_intent_invalid">ongeldig formaat : %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Bekijk uniek device-ID en andere instellingen voor monitoring </string>
-    <string name="osmo_plugin_description">OpenStreetmap-monitoring - geavanceerde live monitoring met veel mogelijkheden tot afstandbediening http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetmap-monitoring - geavanceerde live monitoring met veel mogelijkheden tot afstandsbediening http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (geavanceerde live monitoring)</string>
     <string name="osmo_settings">OSMO-instellingen</string>
    	<string name="keep_informing_never">Niet herhalen</string>
