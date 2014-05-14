@@ -1716,4 +1716,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="keep_informing">Powtarzaj instrukcje nawigacji</string>
 	<string name="arrival_distance">Informacja o odległości do celu</string>
     <string name="arrival_distance_descr">Z jakim wyprzedzeniem ma się pojawić informacja o odległości do celu podróży?</string>
+    <string name="osmo_io_error">OSMo problem z połączeniem : </string>
+    <string name="osmo_mode_on">Wyłącz OSMo</string>    
+    <string name="osmo_mode_off">Uruchom OSMo</string>
     </resources>
