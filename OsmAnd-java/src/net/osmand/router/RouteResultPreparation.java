@@ -558,14 +558,26 @@ public class RouteResultPreparation {
 			}
 //		}
 
-		double devation = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin()));
-		boolean makeSlightTurn = devation > 5 && (!isMotorway(prevSegm) || !isMotorway(currentSegm));
+		double deviation = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin()));
+		boolean continueOnRoad = deviation < 3 && (prevSegm.getObject().getName() == null
+				? currentSegm.getObject().getName() == null
+				: prevSegm.getObject().getName().equals(currentSegm.getObject().getName()));
+		boolean makeSlightTurn = deviation > 5 && (!isMotorway(prevSegm) || !isMotorway(currentSegm));
 		if (kl) {
-			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLL : TurnType.KL, leftSide);
+			if (continueOnRoad) {
+				t = TurnType.valueOf(TurnType.C, leftSide);
+			} else {
+				t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLL : TurnType.KL, leftSide);
+			}
 			t.setSkipToSpeak(!speak);
 		} 
 		if (kr) {
-			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLR : TurnType.KR, leftSide);
+			if (continueOnRoad) {
+				t = TurnType.valueOf(TurnType.C, leftSide);
+			} else {
+				t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLR : TurnType.KR, leftSide);
+			}
+
 			t.setSkipToSpeak(!speak);
 		}
 		if (t != null && lanes != null) {
@@ -585,19 +597,13 @@ public class RouteResultPreparation {
 			return;
 		}
 
-		int finalLaneCount = 0;
 		String[] splitLaneOptions = turnLanes.split("\\|", -1);
 		int[] altLanes = new int[splitLaneOptions.length];
 
-		for (int i = 0; i < splitLaneOptions.length && finalLaneCount >= 0; i++) {
+		for (int i = 0; i < splitLaneOptions.length; i++) {
 			String[] laneOptions = splitLaneOptions[i].split(";");
 
-			for (int j = 0; j < laneOptions.length && finalLaneCount >= 0; j++) {
-				if (finalLaneCount == t.getLanes().length) {
-					finalLaneCount = -1;
-					break;
-				}
-
+			for (int j = 0; j < laneOptions.length; j++) {
 				if (laneOptions[j].equals("none") || laneOptions[j].equals("through")) {
 					altLanes[i] |= TurnType.BIT_LANE_STRAIGHT_ALLOWED;
 				} else if (laneOptions[j].equals("slight_right")) {
@@ -615,24 +621,7 @@ public class RouteResultPreparation {
 				} else if (laneOptions[j].equals("reverse")) {
 					altLanes[i] |= TurnType.BIT_LANE_UTURN_ALLOWED;
 				}
-
-				if ((t.getLanes()[finalLaneCount] & 1) == 1) {
-					altLanes[i] |= 1;
-				}
-
-				finalLaneCount++;
 			}
-
-			if (finalLaneCount == -1) {
-				break;
-			}
-		}
-
-		if (finalLaneCount != t.getLanes().length) {
-			for (int i = 0; i < t.getLanes().length; i++) {
-				t.getLanes()[i] |= TurnType.BIT_LANE_STRAIGHT_ALLOWED;
-			}
-			return;
 		}
 
 		// Just in case

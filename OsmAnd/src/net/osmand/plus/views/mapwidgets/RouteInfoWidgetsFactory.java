@@ -535,14 +535,14 @@ public class RouteInfoWidgetsFactory {
 		
 		
 		final BaseMapWidget lanesControl = new BaseMapWidget(view.getContext()) {
-			int[] lanes = null; 
+			TurnType turn = null;
+			int[] prevLanes = null;
 			
 			boolean imminent = false;
-			boolean leftSide = false;
 			
 			@Override
 			protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-				int ls = (int) (lanes == null ? 0 : lanes.length * w);
+				int ls = (int) (turn == null && turn.getLanes() == null ? 0 : turn.getLanes().length * w);
 				setWDimensions(ls, (int)( w + 3 * scaleCoefficient));
 			}
 
@@ -550,72 +550,102 @@ public class RouteInfoWidgetsFactory {
 			protected void onDraw(Canvas canvas) {
 				super.onDraw(canvas);
 				//to change color immediately when needed
-				if (lanes != null && lanes.length > 0) {
+				if (turn != null && turn.getLanes() != null && turn.getLanes().length > 0) {
 					canvas.save();
 					// canvas.translate((int) (16 * scaleCoefficient), 0);
+					int[] lanes = turn.getLanes();
+					boolean leftSide = turn.isLeftSide();
+					int inactive = getResources().getColor(R.color.nav_arrow_distant);
+					int active = imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow);
+					paintRouteDirection.setColor(inactive);
 					for (int i = 0; i < lanes.length; i++) {
-
-						if ((lanes[i] & TurnType.BIT_LANE_ALLOWED) == TurnType.BIT_LANE_ALLOWED) {
-							paintRouteDirection.setColor(imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow));
-						} else {
-							paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
-						}
-
-						if ((lanes[i] & TurnType.BIT_LANE_STRAIGHT_ALLOWED) == TurnType.BIT_LANE_STRAIGHT_ALLOWED) {
+						if (turn.hasAttribute(i, TurnType.BIT_LANE_STRAIGHT_ALLOWED)) {
 							Path straight = new Path();
 							TurnPathHelper.calcTurnPath(straight, TurnType.valueOf(TurnType.C, leftSide), pathTransform);
+							if (turn.getValue().equals(TurnType.C)) {
+								paintRouteDirection.setColor(active);
+							}
 							canvas.drawPath(straight, paintBlack);
 							canvas.drawPath(straight, paintRouteDirection);
+							paintRouteDirection.setColor(inactive);
 						}
-						if ((lanes[i] & TurnType.BIT_LANE_SLIGHT_RIGHT_ALLOWED) == TurnType.BIT_LANE_SLIGHT_RIGHT_ALLOWED) {
+						if (turn.hasAttribute(i, TurnType.BIT_LANE_SLIGHT_RIGHT_ALLOWED)) {
 							Path slightRight = new Path();
 							TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf(TurnType.TSLR, leftSide), pathTransform);
+							if (turn.getValue().equals(TurnType.TSLR) || turn.getValue().equals(TurnType.KR)) {
+								paintRouteDirection.setColor(active);
+							}
 							canvas.translate((int) (0.2 * w), 0);
 							canvas.drawPath(slightRight, paintBlack);
 							canvas.drawPath(slightRight, paintRouteDirection);
 							canvas.translate((int) (-0.2 * w), 0);
+							paintRouteDirection.setColor(inactive);
 						}
-						if ((lanes[i] & TurnType.BIT_LANE_SLIGHT_LEFT_ALLOWED) == TurnType.BIT_LANE_SLIGHT_LEFT_ALLOWED) {
+						if (turn.hasAttribute(i, TurnType.BIT_LANE_SLIGHT_LEFT_ALLOWED)) {
 							Path slightLeft = new Path();
 							TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf(TurnType.TSLL, leftSide), pathTransform);
+							if (turn.getValue().equals(TurnType.TSLL) || turn.getValue().equals(TurnType.KL)) {
+								paintRouteDirection.setColor(active);
+							}
 							canvas.translate((int) (-0.2 * w), 0);
 							canvas.drawPath(slightLeft, paintBlack);
 							canvas.drawPath(slightLeft, paintRouteDirection);
 							canvas.translate((int) (0.2 * w), 0);
+							paintRouteDirection.setColor(inactive);
 						}
-						if ((lanes[i] & TurnType.BIT_LANE_RIGHT_ALLOWED) == TurnType.BIT_LANE_RIGHT_ALLOWED) {
+						if (turn.hasAttribute(i, TurnType.BIT_LANE_RIGHT_ALLOWED)) {
 							Path right = new Path();
 							TurnPathHelper.calcTurnPath(right, TurnType.valueOf(TurnType.TR, leftSide), pathTransform);
+							if (turn.getValue().equals(TurnType.TR)) {
+								paintRouteDirection.setColor(active);
+							}
 							canvas.drawPath(right, paintBlack);
 							canvas.drawPath(right, paintRouteDirection);
+							paintRouteDirection.setColor(inactive);
 						}
-						if ((lanes[i] & TurnType.BIT_LANE_LEFT_ALLOWED) == TurnType.BIT_LANE_LEFT_ALLOWED) {
+						if (turn.hasAttribute(i, TurnType.BIT_LANE_LEFT_ALLOWED)) {
 							Path left = new Path();
 							TurnPathHelper.calcTurnPath(left, TurnType.valueOf(TurnType.TL, leftSide), pathTransform);
+							if (turn.getValue().equals(TurnType.TL)) {
+								paintRouteDirection.setColor(active);
+							}
 							canvas.drawPath(left, paintBlack);
 							canvas.drawPath(left, paintRouteDirection);
+							paintRouteDirection.setColor(inactive);
 						}
-						if ((lanes[i] & TurnType.BIT_LANE_SHARP_RIGHT_ALLOWED) == TurnType.BIT_LANE_SHARP_RIGHT_ALLOWED) {
+						if (turn.hasAttribute(i, TurnType.BIT_LANE_SHARP_RIGHT_ALLOWED)) {
 							Path sharpRight = new Path();
 							TurnPathHelper.calcTurnPath(sharpRight, TurnType.valueOf(TurnType.TSHR, leftSide), pathTransform);
+							if (turn.getValue().equals(TurnType.TSHR)) {
+								paintRouteDirection.setColor(active);
+							}
 							canvas.translate((int) (0.2 * w), 0);
 							canvas.drawPath(sharpRight, paintBlack);
 							canvas.drawPath(sharpRight, paintRouteDirection);
 							canvas.translate((int) (-0.2 * w), 0);
+							paintRouteDirection.setColor(inactive);
 						}
-						if ((lanes[i] & TurnType.BIT_LANE_SHARP_LEFT_ALLOWED) == TurnType.BIT_LANE_SHARP_LEFT_ALLOWED) {
+						if (turn.hasAttribute(i, TurnType.BIT_LANE_SHARP_LEFT_ALLOWED)) {
 							Path sharpLeft = new Path();
 							TurnPathHelper.calcTurnPath(sharpLeft, TurnType.valueOf(TurnType.TSHL, leftSide), pathTransform);
+							if (turn.getValue().equals(TurnType.TSHL)) {
+								paintRouteDirection.setColor(active);
+							}
 							canvas.translate((int) (-0.2 * w), 0);
 							canvas.drawPath(sharpLeft, paintBlack);
 							canvas.drawPath(sharpLeft, paintRouteDirection);
 							canvas.translate((int) (0.2 * w), 0);
+							paintRouteDirection.setColor(inactive);
 						}
-						if ((lanes[i] & TurnType.BIT_LANE_UTURN_ALLOWED) == TurnType.BIT_LANE_UTURN_ALLOWED) {
+						if (turn.hasAttribute(i, TurnType.BIT_LANE_UTURN_ALLOWED)) {
 							Path uturn = new Path();
 							TurnPathHelper.calcTurnPath(uturn, TurnType.valueOf(TurnType.TU, leftSide), pathTransform);
+							if (turn.getValue().equals(TurnType.TU)) {
+								paintRouteDirection.setColor(active);
+							}
 							canvas.drawPath(uturn, paintBlack);
 							canvas.drawPath(uturn, paintRouteDirection);
+							paintRouteDirection.setColor(inactive);
 						}
 
 						canvas.translate(w, 0);
@@ -633,12 +663,11 @@ public class RouteInfoWidgetsFactory {
 					if (routingHelper.isFollowingMode()) {
 						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
 						if(r != null && r.directionInfo != null && r.directionInfo.getTurnType() != null) {
-							loclanes  = r.directionInfo.getTurnType().getLanes();
-							leftSide = r.directionInfo.getTurnType().isLeftSide();
+							turn = r.directionInfo.getTurnType();
 							locimminent = r.imminent;
 							// Do not show too far 
 							if ((r.distanceTo > 700 && r.directionInfo.getTurnType().isSkipToSpeak()) || r.distanceTo > 1200) {
-								loclanes = null;
+								turn = null;
 							}
 						}
 					} else {
@@ -647,15 +676,15 @@ public class RouteInfoWidgetsFactory {
 								&& di < routingHelper.getRouteDirections().size()) {
 							RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
 							if (next != null) {
-								loclanes = next.getTurnType().getLanes();
+								turn = next.getTurnType();
 							}
 						}
 					}
 				}
-				visible = loclanes != null && loclanes.length > 0;
+				visible = turn != null && turn.getLanes() != null && turn.getLanes().length > 0;
 				if (visible) {
-					if (!Arrays.equals(lanes, loclanes)) {
-						lanes = loclanes;
+					if (!Arrays.equals(prevLanes, turn.getLanes())) {
+						prevLanes = turn.getLanes();
 						requestLayout();
 						invalidate();
 					}

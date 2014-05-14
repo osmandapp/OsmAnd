@@ -17,7 +17,7 @@ public class TurnType {
 	// If the lane is usable for the current turn
 	public static final int BIT_LANE_ALLOWED = 1;
 
-	// If an action on a lane is allowed
+	// If a turn on a lane is allowed
 	public static final int BIT_LANE_STRAIGHT_ALLOWED = 1 << 3;
 	public static final int BIT_LANE_SLIGHT_RIGHT_ALLOWED = 1 << 4;
 	public static final int BIT_LANE_SLIGHT_LEFT_ALLOWED = 1 << 5;
@@ -26,16 +26,6 @@ public class TurnType {
 	public static final int BIT_LANE_SHARP_RIGHT_ALLOWED = 1 << 8;
 	public static final int BIT_LANE_SHARP_LEFT_ALLOWED = 1 << 9;
 	public static final int BIT_LANE_UTURN_ALLOWED = 1 << 10;
-
-	// Which action is needed for the current turn
-	public static final int BIT_LANE_USE_STRAIGHT = 0;
-	public static final int BIT_LANE_USE_SLIGHT_RIGHT = 1 << 11;
-	public static final int BIT_LANE_USE_SLIGHT_LEFT = 1 << 12;
-	public static final int BIT_LANE_USE_RIGHT = 1 << 12 | 1 << 11;
-	public static final int BIT_LANE_USE_LEFT = 1 << 13;
-	public static final int BIT_LANE_USE_SHARP_RIGHT = 1 << 13 | 1 << 11;
-	public static final int BIT_LANE_USE_SHARP_LEFT = 1 << 13 | 1 << 12;
-	public static final int BIT_LANE_USE_UTURN = 1 << 13 | 1 << 12 | 1 << 11;
 
 
 	public static String[] predefinedTypes = new String[] { C, KL, KR, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU, OFFR };
@@ -116,6 +106,10 @@ public class TurnType {
 	
 	public int[] getLanes() {
 		return lanes;
+	}
+
+	public boolean hasAttribute(int lane, int turn) {
+		return (lanes[lane] & turn) == turn;
 	}
 	
 	public boolean keepLeft() {
