@@ -1,7 +1,5 @@
 package net.osmand.plus.osmo;
 
-import java.io.IOException;
-
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
@@ -9,18 +7,17 @@ import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.activities.MapActivity;
 
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
@@ -30,11 +27,13 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 	private OsmandApplication app;
 	public static final String ID = "osmand.osmo";
-	private static final Log log = PlatformUtil.getLog(OsMoPlugin.class);
+	//private static final Log log = PlatformUtil.getLog(OsMoPlugin.class);
 	private OsMoService service;
+	private OsMoTracker tracker;
 
 	public OsMoPlugin(final OsmandApplication app) {
 		service = new OsMoService();
+		tracker = new OsMoTracker(service);
 		this.app = app;
 	}
 
@@ -45,13 +44,8 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 	@Override
 	public void updateLocation(Location location) {
-		if (service.isActive()) {
-			try {
-				service.sendCoordinate(location.getLatitude(), location.getLongitude(), location.getAccuracy(),
-						(float) location.getAltitude(), location.getSpeed(), location.getBearing());
-			} catch (IOException e) {
-				log.error(e.getMessage(), e);
-			}
+		if (service.isConnected()) {
+			tracker.sendCoordinate(location);
 		}
 	}
 
@@ -79,73 +73,22 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		}
 	}
 	
-	private void connect(final boolean enable) {
-		new AsyncTask<Void, Void, String>() {
-			private Exception e;
-			@Override
-			protected String doInBackground(Void... params) {
-				try {
-					String response;
-					if (enable) {
-						response = service.activate(getUUID(app));
-					} else {
-						response = service.deactivate();
-					}
-					return response;
-				} catch (Exception e) {
-					this.e = e;
-					return null;
-				}
-			}
-			protected void onPostExecute(String result) {
-				if(e != null) {
-					app.showToastMessage(app.getString(R.string.osmo_io_error) + ": " + e.getMessage());
-					log.error(e.getMessage(), e);
-				} else {
-					app.showToastMessage(result + "");
-				}
-			};
-			
-		}.execute();
-	}
 	
-	private void sendCoordinate(final double lat, final double lon) {
-		new AsyncTask<Void, Void, String>() {
-
-			private Exception e;
-
-			@Override
-			protected String doInBackground(Void... params) {
-				try {
-					return service.sendCoordinate(lat, lon, 0, 0, 0,
-							0);
-				} catch (Exception e) {
-					this.e = e;
-					return null;
-				}
-			}
-			protected void onPostExecute(String result) {
-				if(e != null) {
-					app.showToastMessage(app.getString(R.string.osmo_io_error) + ": " + e.getMessage());
-					log.error(e.getMessage(), e);
-				} else {
-					app.showToastMessage(result + "");
-				}
-			};
-			
-		}.execute();
-	}
 
 	@Override
 	public void addMonitorActions(ContextMenuAdapter qa, MonitoringInfoControl li, final OsmandMapTileView view) {
-		final boolean off = !service.isActive();
+		final boolean off = !service.isConnected();
 		qa.item(off ? R.string.osmo_mode_off : R.string.osmo_mode_on)
 				.icon(off ? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big)
 				.listen(new OnContextMenuClick() {
 
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						connect(off);
+						if(off) {
+							service.connect(true);
+						} else {
+							service.disconnect();
+						}
 					}
 
 					
@@ -158,7 +101,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						final double lat = view.getLatitude();
 						final double lon = view.getLongitude();
-						sendCoordinate(lat, lon);
+						tracker.sendCoordinate(lat, lon);
 					}
 				}).reg();
 	}
