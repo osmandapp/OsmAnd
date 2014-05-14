@@ -1,8 +1,6 @@
 package net.osmand.plus.osmo;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 import net.osmand.Location;
 import net.osmand.plus.osmo.OsMoService.OsMoSender;

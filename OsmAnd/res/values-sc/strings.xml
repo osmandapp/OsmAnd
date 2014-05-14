@@ -364,13 +364,13 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="av_video_format">Formadu de essida video</string>
     <string name="av_use_external_recorder_descr">Imprea su registratore de sistema pro sos videos</string>
     <string name="av_use_external_recorder">Imprea su registratore de sistema</string>
-    <string name="av_use_external_camera">Imprea s'app fotocàmera</string>
+    <string name="av_use_external_camera">Imprea s\'app fotocàmera</string>
     <string name="av_settings_descr">Cunfigura sas impostaduras àudio e vìdeo</string>
     <string name="av_settings">Impostaduras àudio/vìdeo </string>
     <string name="recording_error">Errore durante sa registratzione </string>
     <string name="recording_camera_not_available">Sa fotocamera non est disponibile</string>
-    <string name="recording_is_recorded">S'àudio/vìdeo istat pro èssere registrau. Pro lu firmare carca su widget AV.</string>
-    <string name="recording_playing">S'àudio de sa registratzione isseberada istat pro èssere reprodotu.\n%1$s</string>
+    <string name="recording_is_recorded">S\'àudio/vìdeo istat pro èssere registrau. Pro lu firmare carca su widget AV.</string>
+    <string name="recording_playing">S\'àudio de sa registratzione isseberada istat pro èssere reprodotu.\n%1$s</string>
     <string name="recording_open_external_player">Abèri reprodutòre esternu</string>
     <string name="recording_delete_confirm">Bòles burrare custa registratzione?</string>
     <string name="tip_recent_changes_1_1_0_t">Mudas in sa 1.1.0:
@@ -379,7 +379,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 		\n\t* Plugin pro sas lìnias de livellu
 		\n\t* Curretziones de errores
 		\n\t* Optzione \'Touring view\' de istile mapa, cun prus minujas, prus istiles pro sas istradas, prus cuntrastu, e optzione escursionismu alpinu (iscala SAC)
-		\n\t* Curretzione EGM96 de s'iscostamentu de sas leghiduras de s'artària GPS
+		\n\t* Curretzione EGM96 de s\'iscostamentu de sas leghiduras de s\'artària GPS
     </string>
     <string name="recording_unavailable">non disponìbile</string>
     <string name="recording_context_menu_arecord">Registra una nota àudio</string>
@@ -394,7 +394,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="av_control_start">Avia/Inghitza</string>
     <string name="map_widget_av_notes">Notas àudio/vìdeo</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin OsmAndfor pro sas lìnias de livellu sena lìnia</string>
-    <string name="osmand_srtm_long_description_1000_chars">Custu plugin frunidi sas lìnias de livellu chi podent èssere bisualizatas in sas mapas sena lìnia de OsmAnd. Sos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s'ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un'aina medidora a bordu de Terra, su satellite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un'isfortzu de coperassione intre NASA, su Ministeru de s'Economia Commercio e Industria (METI) de su Giappone, e su sistema ispatziale giapponesu (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">Custu plugin frunidi sas lìnias de livellu chi podent èssere bisualizatas in sas mapas sena lìnia de OsmAnd. Sos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s\'ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un\'aina medidora a bordu de Terra, su satellite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un\'isfortzu de coperassione intre NASA, su Ministeru de s\'Economia Commercio e Industria (METI) de su Giappone, e su sistema ispatziale giapponesu (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Medidura de sa distantzia</string>
     <string name="audionotes_location_not_defined">Sa positzione da assotziare cun sa nota non est galu dessinida. \"Imprea positzione ...\" pro assinzare una nota a sa positzione dislindada</string>
     <string name="monitoring_control_stop">Stop</string>
@@ -403,7 +403,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="audionotes_plugin_name">Plugin notas àudio/vìdeo</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Lìnias de livellu</string>
-    <string name="srtm_plugin_description">Fatzìlita s'isgarrigamentu de sas lìnias de livellu e s'umbradura de sos rilievos (\'Impostaduras\' → \'Gestione datos\' → \'Isgarrigamentu\' → Issèbera su tipu de mapa disigiatu).</string>
+    <string name="srtm_plugin_description">Fatzìlita s\'isgarrigamentu de sas lìnias de livellu e s\'umbradura de sos rilievos (\'Impostaduras\' → \'Gestione datos\' → \'Isgarrigamentu\' → Issèbera su tipu de mapa disigiatu).</string>
     <string name="srtm_plugin_name">Plugin lìnias de livellu</string>
     <string name="download_select_map_types">Àteras mapas</string>
     <string name="download_roads_only_item">Petzi istradas</string>
@@ -414,12 +414,12 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="rendering_attr_noAdminboundaries_name">Cua sas làcanas</string>
 	<string name="rendering_attr_noAdminboundaries_description">Non bisualizzare sas làcanas regionales (livellos amministrativos 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">Su plugin OsMoDroid est in una versione disusada e depet èssere postu a die.</string>
-    <string name="osmodroid_plugin_description">Su plugin OsMoDroid est un estensione OsmAnd pro s'aplicu pro sas tareas de compidada in tempus reale OsModroid. Sas informatziones sunt disponìbiles in su giassu http://esya.ru.</string>
+    <string name="osmodroid_plugin_description">Su plugin OsMoDroid est un estensione OsmAnd pro s\'aplicu pro sas tareas de compidada in tempus reale OsModroid. Sas informatziones sunt disponìbiles in su giassu http://esya.ru.</string>
     <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
 	<string name="tip_altitude_offset">Curretzione artària</string>
-	<string name="tip_altitude_offset_t">Sa majoria de sos dispositivos GPS marcana sa medida de s'artaria in su sistema de referèntzia WGS84 basadu in supra de un ellissoide. Pro custu una conversione in sos sistemas de referèntzia impreados localmente rechedidi una curretzione dipendente dae sa positzione.
-		\n\nUna aprossimassione a custos sistemas de referèntzia locales est su EGM96. OsmAnd como suportada sa bisualizzatzione automàtica de s'artaria in su sistema EGM96.
-		\n\nPro l'ativare, isgàrriga su documentu WW15MGH.DAC impreande sa \'Gestione datos\' (su documentu orizinale s'agatat a s'indiritzu http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)
+	<string name="tip_altitude_offset_t">Sa majoria de sos dispositivos GPS marcana sa medida de s\'artaria in su sistema de referèntzia WGS84 basadu in supra de un ellissoide. Pro custu una conversione in sos sistemas de referèntzia impreados localmente rechedidi una curretzione dipendente dae sa positzione.
+		\n\nUna aprossimassione a custos sistemas de referèntzia locales est su EGM96. OsmAnd como suportada sa bisualizzatzione automàtica de s\'artaria in su sistema EGM96.
+		\n\nPro l\'ativare, isgàrriga su documentu WW15MGH.DAC impreande sa \'Gestione datos\' (su documentu orizinale s\'agatat a s\'indiritzu http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)
 	</string>
     <string name="map_widget_max_speed">Lìmite de lestresa</string>
     <string name="monitoring_control_start">GPX</string>
@@ -431,9 +431,9 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="voice_stream_music">Àudio media/mùsica</string>
 	<string name="rendering_attr_showRoadMaps_description">Issèbera cando ammustrare mapas cun petzi sas istradas:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mapas cun petzi istradas</string>
-    <string name="safe_mode_description">Avia s'aplicu in modalidade segura (impreande Android, prus lentu, imbetzes de su còdighe nativu).</string>
+    <string name="safe_mode_description">Avia s\'aplicu in modalidade segura (impreande Android, prus lentu, imbetzes de su còdighe nativu).</string>
     <string name="safe_mode">Modalidade segura</string>
-    <string name="native_library_not_running">S'aplicu est traballande in modalidade segura (la podes disabilitare in sas Impostaduras).</string>
+    <string name="native_library_not_running">S\'aplicu est traballande in modalidade segura (la podes disabilitare in sas Impostaduras).</string>
     <string name="background_service_is_enabled_question">Su servitziu OsmAnd in modalidade "a reposu" est galu in esecutzione. Lu boles firmare?</string>
     <string name="tip_recent_changes_1_0_0_t">Mudas in sa 1.0.0:
 	\n\t* Nàvigu megiorau: prus lestru, prus pretzisu, finas a 250 km
@@ -447,17 +447,17 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	\n\t* Abilitatzione de sa modalidade "a reposu" durante su nàvigu.
     </string>
     <string name="close_changeset">Serra sas mudas</string>
-	<string name="zxing_barcode_scanner_not_found">S'aplicu ZXing Barcode Scanner non est installada. La boles chircare in su Market?</string>
+	<string name="zxing_barcode_scanner_not_found">S\'aplicu ZXing Barcode Scanner non est installada. La boles chircare in su Market?</string>
 	<string name="rendering_attr_roadColors_description">Issèbera una cumbinatzione de colores pro sas istradas:</string>
 	<string name="rendering_attr_roadColors_name">Ischema de colores de sas istradas</string>
     <string name="map_widget_show_destination_arrow">Bisualizza sa filada de sa destinatzione</string>
     <string name="enable_plugin_monitoring_services">Abìlita su plugin de compidada pro impreare sos servitzios de registratzione de sa positzione (registratzione GPX, compidada in lìnia)</string>
-    <string name="non_optimal_route_calculation">Càlcula, s'in casu mai, un'àndala non primorosa pro sas distantzias longas</string>
+    <string name="non_optimal_route_calculation">Càlcula, s\'in casu mai, un\'àndala non primorosa pro sas distantzias longas</string>
 	<string name="gps_not_available">Ativa su GPS in sas impostaduras</string>
     <string name="tip_recent_changes_0_8_3_t">Mudas in sa 0.8.3:
 	\n\t* Puntos mesanos
 	\n\t* Ghia de sa caminera megiorada
-	\n\t* Annangada un'impostadura chi permittidi de istransire sas autostradas durante sa costrutzione de s'àndala.
+	\n\t* Annangada un\'impostadura chi permittidi de istransire sas autostradas durante sa costrutzione de s\'àndala.
 	\n\t* Annangau una noa casta de istradas pro sas bitzicletas (Cycleway=track)
 	\n\t* Curretzione de errores
 	</string>
@@ -474,11 +474,11 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="replace_destination_point">Remplasa sa desinatzione</string>
     <string name="new_destination_point_dialog">Tenes giai una destinatzione impostada.</string>
     <string name="target_points">Puntos mesanos</string>
-    <string name="intermediate_point_too_far">Su puntu mesanu %1$s est tropu indedda dae s'istrada prus a curtzu.</string>
+    <string name="intermediate_point_too_far">Su puntu mesanu %1$s est tropu indedda dae s\'istrada prus a curtzu.</string>
     <string name="arrived_at_intermediate_point">Ses arribau a su puntu mesanu tuo</string>
     <string name="context_menu_item_intermediate_point">Annanghelu comente puntu mesanu</string>
     <string name="map_widget_intermediate_distance">Puntu mesanu</string>
-    <string name="ending_point_too_far">Puntu finale tropu indedda dae s'istrada prus a curtzu.</string>
+    <string name="ending_point_too_far">Puntu finale tropu indedda dae s\'istrada prus a curtzu.</string>
     <string name="btn_add_tag">Annanghe etichetta</string>
     <string name="btn_advanced_mode">Modalidade avantzada…</string>
     <string name="poi_filter_parking">Parchezu</string>
@@ -504,11 +504,11 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="interrupt_music_descr">Interrumpe sa mùsica pro faghere sos annuntzios</string>
 	<string name="interrupt_music">Interrumpe sa mùsica</string>
 	<string name="tip_recent_changes_0_8_2_t">Mudas in sa 0.8.2:
-		\n\t* Megiorau su calculu de s'àndalas
+		\n\t* Megiorau su calculu de s\'àndalas
 		\n\t* Widgets dinàmicos pro sas mapas
-		\n\t* Impostaduras de sa mapa iscostiadas in s'ischermu de sa mapa
+		\n\t* Impostaduras de sa mapa iscostiadas in s\'ischermu de sa mapa
 		\n\t* Butone firma ischermu cun servitzios de registratzione
-		\n\t* Megiorada s'iscritura in àrabu, kannada e limbas RTL 
+		\n\t* Megiorada s\'iscritura in àrabu, kannada e limbas RTL 
 	</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Mapas &amp; Nàvigu</string>
 	<string name="osmand_short_description_80_chars">Aplicu a datos apertos (opensource) pro su nàvigu cun mapas in lìnia e sena lìnia</string>
