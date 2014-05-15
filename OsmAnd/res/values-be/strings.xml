@@ -1713,4 +1713,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="osmo_io_error">Праблема з падключэннем OSMo: </string>
     <string name="osmo_mode_on">Спыніць OSMo</string>    
     <string name="osmo_mode_off">Запусьціць OSMo</string>
+    <string name="osmo_register_device">Рэгістрацыя прылады... </string>
     </resources>
