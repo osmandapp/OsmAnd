@@ -13,7 +13,7 @@ public class OsMoTracker implements OsMoSender {
 	}
 
 	@Override
-	public String nextSendCommand() {
+	public String nextSendCommand(OsMoThread thread) {
 		if(!bufferOfLocations.isEmpty()){
 			Location loc = bufferOfLocations.poll();
 			StringBuilder cmd = new StringBuilder("T|");

@@ -1,33 +1,50 @@
 package net.osmand.plus.osmo;
 
 
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.provider.Settings;
+import android.widget.ProgressBar;
 
 public class SettingsOsMoActivity extends SettingsBaseActivity {
 
 	public static final String MORE_VALUE = "MORE_VALUE";
 	public static final String DEFINE_EDIT = "DEFINE_EDIT";
+	private Preference uuid;
 	
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setTitle(R.string.online_map_settings);
+		getSupportActionBar().setTitle(R.string.osmo_settings);
 		PreferenceScreen grp = getPreferenceScreen();
 		
-		Preference pref = new Preference(this);
-		pref.setTitle(R.string.osmo_settings_uuid);
-		pref.setSummary(OsMoPlugin.getUUID(this));
+		uuid = new Preference(this);
+		uuid.setTitle(R.string.osmo_settings_uuid);
+		uuid.setSummary(getMyApplication().getSettings().OSMO_DEVICE_KEY.get().toUpperCase());
 		
-		grp.addPreference(pref);
+		grp.addPreference(uuid);
 		
 		
     }
+	
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		if (preference == uuid) {
+			OsMoPlugin.getEnabledPlugin(OsMoPlugin.class).getRegisterDeviceTask(this, new Runnable() {
+				@Override
+				public void run() {
+					updateAllSettings();						
+				}
+			}).execute();
+		}
+		return super.onPreferenceClick(preference);
+	}
 
 
 	public void updateAllSettings() {
