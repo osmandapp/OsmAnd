@@ -1643,7 +1643,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="interrupt_music_descr">Interrumpir música al indicar</string>
 	<string name="interrupt_music">Interrumpir música</string>
 	<string name="osmo_settings_uuid">Id único del dispositivo</string>
-    <string name="osmo_settings_descr">Ver la clave única de registro y otras configuraciones específicas de monitoreo </string>
+    <string name="osmo_settings_descr">Ver clave única de registro y otras configuraciones específicas de monitorización </string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitoreo avanzada en directo con muchas características para control remoto http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (Monitoreo avanzada en directo)</string>
     <string name="osmo_settings">OSMo</string>
@@ -1655,4 +1655,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="keep_informing">Repetir instrucciones de navegación</string>
 	<string name="arrival_distance">Anuncio de llegada</string>
     <string name="arrival_distance_descr">¿Para cuándo quiere el anuncio de llegada?</string>
+    <string name="osmo_io_error">Problema de conexión con OSMo : </string>
+    <string name="osmo_mode_on">Parar OSMo</string>    
+    <string name="osmo_mode_off">Iniciar OSMo</string>
     </resources>
