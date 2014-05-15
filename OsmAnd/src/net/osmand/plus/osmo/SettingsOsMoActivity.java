@@ -27,6 +27,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		uuid = new Preference(this);
 		uuid.setTitle(R.string.osmo_settings_uuid);
 		uuid.setSummary(getMyApplication().getSettings().OSMO_DEVICE_KEY.get().toUpperCase());
+		uuid.setOnPreferenceClickListener(this);
 		
 		grp.addPreference(uuid);
 		
@@ -39,9 +40,11 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			OsMoPlugin.getEnabledPlugin(OsMoPlugin.class).getRegisterDeviceTask(this, new Runnable() {
 				@Override
 				public void run() {
-					updateAllSettings();						
+					updateAllSettings();
+					uuid.setSummary(getMyApplication().getSettings().OSMO_DEVICE_KEY.get().toUpperCase());
 				}
 			}).execute();
+			return true;
 		}
 		return super.onPreferenceClick(preference);
 	}

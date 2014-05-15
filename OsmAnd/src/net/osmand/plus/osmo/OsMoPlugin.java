@@ -100,6 +100,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 			};
 			@Override
 			protected void onPostExecute(Exception result) {
+				if(dlg.isShowing()) {
+					dlg.dismiss();
+				}
 				if (result != null) {
 					result.printStackTrace();
 					app.showToastMessage(app.getString(R.string.osmo_io_error) + result.getMessage());
@@ -110,10 +113,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 			@Override
 			protected Exception doInBackground(Void... params) {
-				if(dlg.isShowing()) {
-					dlg.dismiss();
-				}
-				return OsmandPlugin.getEnabledPlugin(OsMoPlugin.class).registerOsmoDeviceKey();
+				return registerOsmoDeviceKey();
 			}
 		};
 	}
