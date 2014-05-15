@@ -516,4 +516,10 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="poi_dialog_opening_hours">Aberi</string>
 	<string name="poi_action_change">muda</string>
 	<string name="poi_action_add">annanghe</string>
+	<string name="osmo_io_error">OSMo problema de connessione: </string>
+    <string name="osmo_mode_on">Firma OSMo</string>    
+    <string name="osmo_mode_off">Inghitza/avia OSMo</string>
+    <string name="osmand_plus_play_title_30_chars">Mapas OsmAnd+ e Nàvigu</string>
+	<string name="osmand_plus_short_description_80_chars">OsmAnd est un'àplicu a mitza aperta pro su nàvigu cun mapas in lìnia e sena lìnia</string>
+	<string name="tip_update_index">Agiornamentu de sas mapas sarbadas</string>
 	</resources>
