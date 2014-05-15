@@ -522,4 +522,10 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="osmand_plus_play_title_30_chars">Mapas OsmAnd+ e Nàvigu</string>
 	<string name="osmand_plus_short_description_80_chars">OsmAnd est un'àplicu a mitza aperta pro su nàvigu cun mapas in lìnia e sena lìnia</string>
 	<string name="tip_update_index">Agiornamentu de sas mapas sarbadas</string>
+	<string name="filterpoi_activity">Crea unu filtru pro sos PDI</string>
+	<string name="recalculate_route_to_your_location">Issèbera su mèdiu pro su trasportu:</string>
+	<string name="select_navigation_mode">Sèbera de su mèdiu pro su trasportu</string>
+	<string name="day_night_info_description">Arbèschida: %1$s \nIntrinada: %2$s</string>
+	<string name="day_night_info">Informatziones die/note</string>
+	<string name="map_widget_day_night">Mapa die/note</string>
 	</resources>
