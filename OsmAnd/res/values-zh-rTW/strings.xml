@@ -1747,4 +1747,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_io_error">OSMo 連線問題： </string>
     <string name="osmo_mode_on">停止 OSMo</string>    
     <string name="osmo_mode_off">啟動 OSMo</string>
+    <string name="osmo_register_device">註冊裝置... </string>
     </resources>
