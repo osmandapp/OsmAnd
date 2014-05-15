@@ -364,8 +364,8 @@
 	<string name="index_name_oceania">大洋洲</string>
 	<string name="index_name_other">世界各地和專題地圖</string>
 	<string name="index_name_wiki">全球維基百科 POI</string>
-	<string name="index_name_voice">語音包 (真人，有限的功能)</string>
-	<string name="index_name_tts_voice">語音包 (TTS-合成提升)</string>
+	<string name="index_name_voice">語音包 (真人發音，功能有限)</string>
+	<string name="index_name_tts_voice">語音包 (TTS-合成音，優先)</string>
 	<string name="amenity_type_osmwiki">維基百科 (離線)</string>
 	<string name="amenity_type_user_defined">使用者定義</string>
 	<string name="fav_export_confirmation">我的最愛已有上次匯出的檔，要取代它嗎？</string>
