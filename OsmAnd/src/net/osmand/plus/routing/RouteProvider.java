@@ -12,6 +12,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -387,6 +388,7 @@ public class RouteProvider {
 					RouteDirectionInfo ch = new RouteDirectionInfo(info.getAverageSpeed(), info.getTurnType());
 					ch.routePointOffset = info.routePointOffset - startI[0];
 					ch.setDescriptionRoute(info.getDescriptionRoutePart());
+					ch.setStreetName(info.getStreetName());
 					directions.add(ch);
 				}
 			}
@@ -792,10 +794,15 @@ public class RouteProvider {
 			distanceToEnd[i] = distanceToEnd[i + 1] + res.get(i).distanceTo(res.get(i + 1));
 		}
 
+		final Map<String, WptPt> location2Points = new HashMap<String, WptPt>();
 		Route route = null;
 		if (gpxFile.routes.size() > 0) {
 			route = gpxFile.routes.get(0);
+			for (WptPt point : route.points) {
+				location2Points.put(asKey(point), point);
+			}
 		}
+
 		RouteDirectionInfo previous = null;
 		if (route != null && route.points.size() > 0) {
 			directions = new ArrayList<RouteDirectionInfo>();
@@ -860,6 +867,12 @@ public class RouteProvider {
 						}
 					}
 
+					final WptPt routePt = location2Points.get(asKey(item));
+					if (routePt != null)
+					{
+						dirInfo.setStreetName(routePt.getExtensionsToRead().get("street"));
+					}
+
 					directions.add(dirInfo);
 
 					previous = dirInfo;
@@ -886,7 +899,11 @@ public class RouteProvider {
 		}
 		return directions;
 	}
-	
+
+	private static String asKey(WptPt point) {
+		return "" + point.lat + "," + point.lon;
+	}
+
 	protected RouteCalculationResult findORSRoute(RouteCalculationParams params) throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError,
 			SAXException {
 		List<Location> res = new ArrayList<Location>();
@@ -999,6 +1016,7 @@ public class RouteProvider {
 				pt.desc = dirInfo.getDescriptionRoute(ctx);
 				Map<String, String> extensions = pt.getExtensionsToWrite();
 				extensions.put("time", dirInfo.getExpectedTime() + "");
+				extensions.put("street", dirInfo.getStreetName());
 				String turnType = dirInfo.getTurnType().getValue();
 				if (dirInfo.getTurnType().isRoundAbout()) {
 					turnType += dirInfo.getTurnType().getExitOut();
