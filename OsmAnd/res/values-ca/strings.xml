@@ -1555,4 +1555,8 @@
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitorització en directe avançada amb moltes característiques pel control remot  http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (Monitorització en directe avançada)</string>
     <string name="osmo_settings">OSMo</string>
-   	</resources>
+   	<string name="osmo_register_device">Registrant dispositiu... </string>
+    <string name="osmo_io_error">Problema de connexió amb OSMo : </string>
+    <string name="osmo_mode_on">Aturar OSMo</string>    
+    <string name="osmo_mode_off">Iniciar OSMo</string>
+    </resources>
