@@ -1778,4 +1778,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_io_error">OSMo problema di connessione: </string>
     <string name="osmo_mode_on">Ferma OSMo</string>    
     <string name="osmo_mode_off">Avvia OSMo</string>
+    <string name="osmo_register_device">Registrazione del dispositivo in corso ... </string>
     </resources>
