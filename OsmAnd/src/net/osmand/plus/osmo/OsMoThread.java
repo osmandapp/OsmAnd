@@ -47,10 +47,9 @@ public class OsMoThread {
 	private List<OsMoSender> listSenders;
 	private List<OsMoReactor> listReactors;
 
-	private boolean authorized;
+	private int authorized = 0; // 1 - send, 2 - authorized
 	private OsMoService service;
 	private SessionInfo token = null;
-	private String authorizationCommand = null;
 	private SocketChannel activeChannel;
 	private ByteBuffer pendingSendCommand;
 	private String readCommand = "";
@@ -89,7 +88,7 @@ public class OsMoThread {
 		if (token == null) {
 			token = service.getSessionToken();
 		}
-		authorized = false;
+		authorized = 0;
 		selector = Selector.open();
 		SocketChannel activeChannel = SocketChannel.open();
 		activeChannel.configureBlocking(true);
@@ -210,7 +209,7 @@ public class OsMoThread {
 		while (hasSomethingToRead) {
 			pendingReadCommand.clear();
 			int read = activeChannel.read(pendingReadCommand);
-			if (pendingReadCommand.hasRemaining()) {
+			if (!pendingReadCommand.hasRemaining()) {
 				hasSomethingToRead = true;
 			} else {
 				hasSomethingToRead = false;
@@ -256,14 +255,14 @@ public class OsMoThread {
 			if(obj != null && !obj.has("error")) {
 				error = true;
 				try {
-					service.showErrorMessage(obj.getString("error"));
+					service.showErrorMessage(obj.getString("description"));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 			}
-			if(cmd.equalsIgnoreCase("TOKEN")) {
+			if(header.equalsIgnoreCase("TOKEN")) {
 				if(!error){
-					authorized = true;
+					authorized = 2;
 					// TODO delete
 					service.showErrorMessage("OSMo authorization successfull");
 				}
@@ -290,17 +289,18 @@ public class OsMoThread {
 			activeChannel.write(pendingSendCommand);
 			if (!pendingSendCommand.hasRemaining()) {
 				pendingSendCommand = getNewPendingSendCommand();
+			} else {
+				break;
 			}
 		}
 	}
 
 	private ByteBuffer getNewPendingSendCommand() throws UnsupportedEncodingException {
-		if(authorizationCommand != null) {
-			String auth = authorizationCommand;
-			authorizationCommand = null;
+		if(authorized == 0) {
+			String auth = "TOKEN|"+ token.token;
 			return ByteBuffer.wrap(prepareCommand(auth).toString().getBytes("UTF-8"));
 		}
-		if(!authorized) {
+		if(authorized == 1) {
 			return null;
 		}
 		for (OsMoSender s : listSenders) {
