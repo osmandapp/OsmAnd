@@ -1733,4 +1733,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="keep_informing">Herhaal de aanwijzingen</string>
 	<string name="arrival_distance">Aankondigen van de bestemming</string>
     <string name="arrival_distance_descr">Wanneer melden dat de bestemming bereikt is?</string>
+    <string name="osmo_io_error">OSMo verbindingsprobleem: </string>
+    <string name="osmo_mode_on">Stop OSMo</string>    
+    <string name="osmo_mode_off">Start OSMo</string>
     </resources>
