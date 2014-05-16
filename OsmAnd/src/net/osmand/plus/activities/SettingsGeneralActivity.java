@@ -138,16 +138,16 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		DrivingRegion[] drs  = DrivingRegion.values();
 		entries = new String[drs.length];
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = getString(drs[i].name) + " (" + drs[i].defMetrics.toHumanString(this) +")" ;
+			entries[i] = getString(drs[i].name); // + " (" + drs[i].defMetrics.toHumanString(this) +")" ;
 		}
 		registerListPreference(settings.DRIVING_REGION, screen, entries, drs);
 		
-//		MetricsConstants[] mvls  = MetricsConstants.values();
-//		entries = new String[mvls.length];
-//		for(int i=0; i<entries.length; i++){
-//			entries[i] = mvls[i].toHumanString(getMyApplication());
-//		}
-//		registerListPreference(settings.METRIC_SYSTEM, screen, entries, mvls);
+		MetricsConstants[] mvls  = MetricsConstants.values();
+		entries = new String[mvls.length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = mvls[i].toHumanString(getMyApplication());
+		}
+		registerListPreference(settings.METRIC_SYSTEM, screen, entries, mvls);
 		
 		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
 		//getResources().getAssets().getLocales();
