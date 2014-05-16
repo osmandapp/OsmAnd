@@ -27,9 +27,29 @@ public class TurnType {
 	public static final int BIT_LANE_SHARP_LEFT_ALLOWED = 1 << 9;
 	public static final int BIT_LANE_UTURN_ALLOWED = 1 << 10;
 
+	public enum Turn {
+		STRAIGHT_ALLOWED (0),
+		SLIGHT_RIGHT_ALLOWED (1),
+		SLIGHT_LEFT_ALLOWED (1 << 1),
+		RIGHT_ALLOWED (1 | 1 << 1),
+		LEFT_ALLOWED (1 << 2),
+		SHARP_RIGHT_ALLOWED (1 << 2 | 1),
+		SHARP_LEFT_ALLOWED (1 << 2 | 1 << 1),
+		UTURN_ALLOWED (1 << 2 | 1 << 1 | 1);
+
+		private final int modifier;
+
+		Turn(int modifier) {
+			this.modifier = modifier;
+		}
+
+		public int getModifier() {
+			return modifier;
+		}
+	}
 
 	public static String[] predefinedTypes = new String[] { C, KL, KR, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU, OFFR };
-
+	
 	public static TurnType sraight() {
 		return valueOf(C, false);
 	}
@@ -108,6 +128,37 @@ public class TurnType {
 		return lanes;
 	}
 
+	public void setPrimaryTurn(int lane, Turn turn) {
+		lanes[lane] |= turn.getModifier() << 3;
+	}
+
+	public Turn getPrimaryTurn(int lane) {
+		// Get the primary turn modifier for the lane
+		int turnModifier = (lanes[lane] >> 3) & (1 << 2 | 1 << 1 | 1);
+		Turn[] turns = Turn.values();
+		for (int i = 0; i < turns.length; i++) {
+			if (turns[i].getModifier() == turnModifier) {
+				return turns[i];
+			}
+		}
+		throw new IllegalStateException("Unknown primary turn value");
+	}
+
+	public void setSecondaryTurn(int lane, Turn turn) {
+		lanes[lane] |= turn.getModifier() << 6;
+	}
+
+	public Turn getSecondaryTurn(int lane) {
+		// Get the primary turn modifier for the lane
+		int turnModifier = (lanes[lane] >> 6) & (1 << 2 | 1 << 1 | 1);
+		Turn[] turns = Turn.values();
+		for (int i = 0; i < turns.length; i++) {
+			if (turns[i].getModifier() == turnModifier) {
+				return turns[i];
+			}
+		}
+		throw new IllegalStateException("Unknown secondary turn value");
+	}
 	public boolean hasAttribute(int lane, int turn) {
 		return (lanes[lane] & turn) == turn;
 	}
