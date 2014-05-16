@@ -1755,4 +1755,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_io_error">OSMo prisijungimo problema : </string>
     <string name="osmo_mode_on">Sustabdyti OSMo</string>    
     <string name="osmo_mode_off">Paleisti OSMo</string>
+    <string name="osmo_register_device">Įrenginys registruojamas… </string>
     </resources>
