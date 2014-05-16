@@ -1661,6 +1661,10 @@ public class OsmandSettings {
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;
 	public static final int OSMAND_LIGHT_DARK_ACTIONBAR_THEME = 2;
+
+	public final CommonPreference<Integer> SEARCH_TAB = 
+			new IntPreference("SEARCH_TAB", 0).makeGlobal().cache();
+	
 	public final CommonPreference<Integer> OSMAND_THEME = 
 			new IntPreference("osmand_theme", OSMAND_DARK_THEME).makeGlobal().cache();
 	
