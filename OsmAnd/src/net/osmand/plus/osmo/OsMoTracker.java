@@ -6,7 +6,8 @@ import net.osmand.Location;
 import net.osmand.plus.osmo.OsMoService.OsMoSender;
 
 public class OsMoTracker implements OsMoSender {
-	private LinkedList<Location> bufferOfLocations = new LinkedList<Location>(); 
+	private LinkedList<Location> bufferOfLocations = new LinkedList<Location>();
+	private boolean start; 
 
 	public OsMoTracker(OsMoService service) {
 		service.registerSender(this);
@@ -14,6 +15,10 @@ public class OsMoTracker implements OsMoSender {
 
 	@Override
 	public String nextSendCommand(OsMoThread thread) {
+		if(!start) {
+			start = true;
+			return "TRACKER_SESSION_OPEN";
+		}
 		if(!bufferOfLocations.isEmpty()){
 			Location loc = bufferOfLocations.poll();
 			StringBuilder cmd = new StringBuilder("T|");

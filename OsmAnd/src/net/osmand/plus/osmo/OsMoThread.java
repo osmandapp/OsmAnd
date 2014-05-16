@@ -13,13 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.TreeMap;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.osmo.OsMoService.OsMoReactor;
 import net.osmand.plus.osmo.OsMoService.OsMoSender;
+import net.osmand.plus.osmo.OsMoService.SessionInfo;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
@@ -28,25 +26,21 @@ import org.json.JSONObject;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
-import android.provider.Settings.Secure;
 
 public class OsMoThread {
-	private static String TRACKER_SERVER = "srv.osmo.mobi";
-	private static int TRACKER_PORT = 4242;
+//	private static String TRACKER_SERVER = "srv.osmo.mobi";
+//	private static int TRACKER_PORT = 3245;
 
 	protected final static Log log = PlatformUtil.getLog(OsMoThread.class);
 	private static final long HEARTBEAT_DELAY = 100;
 	private static final long HEARTBEAT_FAILED_DELAY = 10000;
 	private static final long LIMIT_OF_FAILURES_RECONNECT = 10;
-	private static final long CONNECTION_DELAY = 25000;
 	private static final long SELECT_TIMEOUT = 500;
 	private static int HEARTBEAT_MSG = 3;
 	private Handler serviceThread;
 
 	private int failures = 0;
 	private int activeConnectionId = 0;
-	// -1 means connected, 0 needs to reconnect, > 0 when connection initiated
-	private long connectionStarted = 0;
 	private boolean stopThread;
 	private Selector selector;
 
@@ -54,7 +48,8 @@ public class OsMoThread {
 	private List<OsMoReactor> listReactors;
 
 	private boolean authorized;
-	private OsmandApplication ctx;
+	private OsMoService service;
+	private SessionInfo token = null;
 	private String authorizationCommand = null;
 	private SocketChannel activeChannel;
 	private ByteBuffer pendingSendCommand;
@@ -62,9 +57,10 @@ public class OsMoThread {
 	private ByteBuffer pendingReadCommand = ByteBuffer.allocate(2048);
 	private LinkedList<String> queueOfMessages = new LinkedList<String>();
 	
+	
 
-	public OsMoThread(OsmandApplication ctx, List<OsMoSender> listSenders, List<OsMoReactor> listReactors) {
-		this.ctx = ctx;
+	public OsMoThread(OsMoService service, List<OsMoSender> listSenders, List<OsMoReactor> listReactors) {
+		this.service = service;
 		this.listSenders = listSenders;
 		this.listReactors = listReactors;
 		// start thread to receive events from OSMO
@@ -90,19 +86,22 @@ public class OsMoThread {
 	}
 
 	protected void initConnection() throws IOException {
-		try {
-			authorized = false;
-			authorizationCommand = getAuthorizationCmd();
-			selector = Selector.open();
-			connectionStarted = System.currentTimeMillis();
-			activeChannel = SocketChannel.open();
-			activeChannel.configureBlocking(false);
-			SelectionKey key = activeChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
-			key.attach(new Integer(++activeConnectionId));
-			activeChannel.connect(new InetSocketAddress(TRACKER_SERVER, TRACKER_PORT));
-		} catch (IOException e) {
-			throw e;
+		if (token == null) {
+			token = service.getSessionToken();
 		}
+		authorized = false;
+		selector = Selector.open();
+		SocketChannel activeChannel = SocketChannel.open();
+		activeChannel.configureBlocking(true);
+		activeChannel.connect(new InetSocketAddress(token.hostName, Integer.parseInt(token.port)));
+		activeChannel.configureBlocking(false);
+		SelectionKey key = activeChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+		if (this.activeChannel != null) {
+			stopChannel();
+		}
+		this.activeChannel = activeChannel;
+		key.attach(new Integer(++activeConnectionId));
+
 	}
 	
 	public String format(String cmd, Map<String, Object> params) {
@@ -120,13 +119,6 @@ public class OsMoThread {
 		}
 	}
 
-	private String getAuthorizationCmd() {
-		Map<String, Object> params = new TreeMap<String, Object>();
-		params.put("protocol_version", 1);
-		params.put("key", ctx.getSettings().OSMO_DEVICE_KEY.get());
-		return format("AUTH", params);
-	}
-
 	public void scheduleHeartbeat(long delay) {
 		Message msg = serviceThread.obtainMessage();
 		msg.what = HEARTBEAT_MSG;
@@ -139,7 +131,7 @@ public class OsMoThread {
 	}
 
 	public boolean isConnected() {
-		return connectionStarted == -1;
+		return activeChannel != null;
 	}
 
 	protected void checkAsyncSocket() {
@@ -148,12 +140,7 @@ public class OsMoThread {
 			if (selector == null) {
 				stopThread = true;
 			} else {
-				if (activeChannel != null && connectionStarted != -1 && !activeChannel.isConnectionPending()) {
-					// connection ready
-					connectionStarted = -1;
-				}
-				if ((connectionStarted != -1 && System.currentTimeMillis() - connectionStarted > CONNECTION_DELAY)
-						|| activeChannel == null) {
+				if(activeChannel == null) {
 					initConnection();
 				} else {
 					checkSelectedKeys();
@@ -265,16 +252,20 @@ public class OsMoThread {
 					e.printStackTrace();
 				}
 			}
-			if(cmd.equalsIgnoreCase("AUTH")) {
-				if(obj != null && !obj.has("error")) {
-					try {
-						ctx.showToastMessage(ctx.getString(R.string.osmo_io_error) + obj.getString("error"));
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-				} else {
+			boolean error = false;
+			if(obj != null && !obj.has("error")) {
+				error = true;
+				try {
+					service.showErrorMessage(obj.getString("error"));
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			if(cmd.equalsIgnoreCase("TOKEN")) {
+				if(!error){
 					authorized = true;
-					ctx.showToastMessage("OSMo authorization successfull");
+					// TODO delete
+					service.showErrorMessage("OSMo authorization successfull");
 				}
 				continue;
 			}
