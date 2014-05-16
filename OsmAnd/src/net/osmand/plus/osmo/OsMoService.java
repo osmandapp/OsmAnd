@@ -155,9 +155,6 @@ public class OsMoService {
 			if(obj.has("error")) {
 				throw new RuntimeException(obj.getString("error"));
 			}
-			if(!obj.has("port")) {
-				throw new RuntimeException("Port not specified");
-			}
 			if(!obj.has("address")) {
 				throw new RuntimeException("Host name not specified");
 			}
