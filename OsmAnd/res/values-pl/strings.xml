@@ -1719,4 +1719,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_io_error">OSMo problem z połączeniem : </string>
     <string name="osmo_mode_on">Wyłącz OSMo</string>    
     <string name="osmo_mode_off">Uruchom OSMo</string>
+    <string name="osmo_register_device">Rejestrowanie urządzenia... </string>
     </resources>
