@@ -1759,4 +1759,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_io_error">Problém s pripojením OSMo : </string>
     <string name="osmo_mode_on">Zastaviť OSMo</string>    
     <string name="osmo_mode_off">Spustiť OSMo</string>
+    <string name="osmo_register_device">Registruje sa zariadenie… </string>
     </resources>
