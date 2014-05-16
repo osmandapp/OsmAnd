@@ -165,8 +165,10 @@ public class OsMoService {
 				throw new RuntimeException("Token not specified");
 			}
 			SessionInfo si = new SessionInfo();
-			si.hostName = obj.getString("address");
-			si.port = obj.getString("port");
+			String a = obj.getString("address");
+			int i = a.indexOf(':');
+			si.hostName = a.substring(0, i);
+			si.port = a.substring(i + 1);
 			si.token = obj.getString("token");
 			return si;
 		} catch (ClientProtocolException e) {
