@@ -1749,4 +1749,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_io_error">OSMo Verbindungsproblem: </string>
     <string name="osmo_mode_on">OSMo beenden</string>    
     <string name="osmo_mode_off">OSMo starten</string>
+    <string name="osmo_register_device">Gerät registrieren </string>
     </resources>
