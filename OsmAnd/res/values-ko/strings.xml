@@ -1952,4 +1952,8 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="keep_informing_descr">정기적 간격으로 운행 명령을 발표</string>
     <string name="keep_informing">운행 명령을 반복</string>
 	<string name="navigation_intent_invalid">잘못된 포맷 : %s</string>
-</resources>
+<string name="osmo_register_device">장치 등록... </string>
+    <string name="osmo_io_error">OSMo 연결 문제 : </string>
+    <string name="osmo_mode_on">OSMo 중지</string>    
+    <string name="osmo_mode_off">OSMo 시작</string>
+    </resources>
