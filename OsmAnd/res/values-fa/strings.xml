@@ -1746,4 +1746,9 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="keep_informing">تکرار دستورات مسیریابی</string>
 	<string name="navigation_intent_invalid">قالب نامعتبر: %s</string>
 <string name="arrival_distance">اعلام ورود</string>
+    <string name="osmo_register_device">ثبت دستگاه </string>
+    <string name="osmo_io_error">خطا در اتصال به سايت: </string>
+    <string name="osmo_mode_on">توقف OSM</string>    
+    <string name="osmo_mode_off">َشروع OSM</string>
+    <string name="arrival_distance_descr">مي خواهيد اعلان رسيدن به مقصد را چقدر زودتر دريافت كنيد؟</string>
     </resources>
