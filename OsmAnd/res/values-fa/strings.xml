@@ -1729,7 +1729,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="index_name_italy">اروپا - ایتالیا</string>
     <string name="index_name_gb">اروپا - بریتانیا</string>
     <string name="osmo_settings_uuid">شماره یکتای دستگاه</string>
-    <string name="osmo_settings_descr">مشاهده کلید ثبت یکتای دستگاه و سایر تنظیمات مونیتورینگ </string>
+    <string name="osmo_settings_descr">مشاهده کلید ثبت یکتای دستگاه و سایر تنظیمات نظارت </string>
     <string name="osmo_plugin_description">مونیتورینگ OpenStreetMap- مونیتورینگ پیشرفته زنده به همراه بسیاری از ویژگی‌های کنترل دور http://osmo.mobi</string>
     <string name="osmo_settings">OSMo</string>
    	<string name="always_center_position_on_map">موقعیت را همیشه وسط صفحه نشان بده</string>
@@ -1746,7 +1746,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="keep_informing">تکرار دستورات مسیریابی</string>
 	<string name="navigation_intent_invalid">قالب نامعتبر: %s</string>
 <string name="arrival_distance">اعلام ورود</string>
-    <string name="osmo_register_device">ثبت دستگاه </string>
+    <string name="osmo_register_device">ثبت دستگاه ... </string>
     <string name="osmo_io_error">خطا در اتصال به سايت: </string>
     <string name="osmo_mode_on">توقف OSM</string>    
     <string name="osmo_mode_off">َشروع OSM</string>
