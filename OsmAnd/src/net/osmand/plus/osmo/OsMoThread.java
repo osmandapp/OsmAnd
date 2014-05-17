@@ -252,7 +252,7 @@ public class OsMoThread {
 				}
 			}
 			boolean error = false;
-			if(obj != null && !obj.has("error")) {
+			if(obj != null && obj.has("error")) {
 				error = true;
 				try {
 					service.showErrorMessage(obj.getString("description"));
