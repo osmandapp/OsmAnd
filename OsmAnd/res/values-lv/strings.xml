@@ -977,7 +977,7 @@
     <string name="add_as_last_destination_point">Pievienot kā pēdējo pieturu</string>
     <string name="add_as_first_destination_point">Pievienot kā pirmo pieturu</string>
     <string name="replace_destination_point">Aizvietot galamērķi</string>
-    <string name="new_destination_point_dialog">Jūs jau esat uzstādījis galamērķi.</string>
+    <string name="new_destination_point_dialog">Galamērķis jau ir uzstādīts.</string>
     <string name="target_point">Pietura %1$s</string>
     <string name="target_points">Pieturas</string>
     <string name="intermediate_point_too_far">Pietura %1$s ir pārāk tālu no tuvākā ceļa.</string>
@@ -1588,7 +1588,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 …
     </string>
     <string name="osmo_settings_uuid">Ierīces identifikators</string>
-    <string name="osmo_settings_descr">Skatīt ierīces unikālo reģistrācijas atslēgu un pārējos ar monitoringu saistītos uzstādījumus </string>
+    <string name="osmo_settings_descr">Skatīt ierīces personīgo reģistrācijas atslēgu un pārējos ar monitoringu saistītos uzstādījumus </string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - attīstīts tiešsaistes monitorings ar daudzām attālinātās kontroles iespējām htttp://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (Tiešsaistes monitorings)</string>
     <string name="osmo_settings">OSMo</string>
@@ -1627,5 +1627,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="share_route_as_gpx">Koplietot maršrutu kā GPX failu</string>
 	<string name="osmo_io_error">Problēma ar OSMo savienojumu: </string>
     <string name="osmo_mode_on">Apturēt OSMo</string>    
-    <string name="osmo_mode_off">Palaist OSMo</string>
+    <string name="osmo_mode_off">Sākt OSMo</string>
+    <string name="osmo_register_device">Reģistrē ierīci... </string>
     </resources>
