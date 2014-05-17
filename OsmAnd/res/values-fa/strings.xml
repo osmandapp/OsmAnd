@@ -1730,13 +1730,13 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="index_name_gb">اروپا - بریتانیا</string>
     <string name="osmo_settings_uuid">شماره یکتای دستگاه</string>
     <string name="osmo_settings_descr">مشاهده کلید ثبت یکتای دستگاه و سایر تنظیمات نظارت </string>
-    <string name="osmo_plugin_description">مونیتورینگ OpenStreetMap- مونیتورینگ پیشرفته زنده به همراه بسیاری از ویژگی‌های کنترل دور http://osmo.mobi</string>
-    <string name="osmo_settings">OSMo</string>
+    <string name="osmo_plugin_description">نظارت OpenStreetMap- نظارت پیشرفته زنده به همراه بسیاری از ویژگی‌های کنترل دور http://osmo.mobi</string>
+    <string name="osmo_settings">OSMo (خدمات نظارت)</string>
    	<string name="always_center_position_on_map">موقعیت را همیشه وسط صفحه نشان بده</string>
     <string name="voice_pref_title">صدا</string>
     <string name="misc_pref_title">متفرقه</string>
     <string name="localization_pref_title">محلی‌سازی</string>
-    <string name="osmo_plugin_name">OSMo (مونیتورینگ زنده پیشرفته)</string>
+    <string name="osmo_plugin_name">نظارت در سايت (مونیتورینگ زنده پیشرفته)</string>
     <string name="interrupt_music_descr">در زمان اعلانها موسیقی را قطع کن</string>
 	<string name="interrupt_music">قطع موسیقی</string>
 	<string name="share_route_as_gpx">به اشتراک گذاری فایل GPX</string>
