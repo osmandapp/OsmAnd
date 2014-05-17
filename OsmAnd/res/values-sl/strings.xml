@@ -1714,4 +1714,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="osmo_settings">OSMo</string>
    	<string name="arrival_distance_descr">Kako hitro želite napoved prihoda?</string>
     <string name="arrival_distance">Napoved prihoda</string>
+    <string name="osmo_register_device">Registracija naprave … </string>
+    <string name="osmo_io_error">OSMo problem povezave: </string>
+    <string name="osmo_mode_on">Ustavi OSMo</string>    
+    <string name="osmo_mode_off">Začni OSMo</string>
     </resources>
