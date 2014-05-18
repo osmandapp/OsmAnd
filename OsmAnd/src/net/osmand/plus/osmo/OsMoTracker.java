@@ -68,7 +68,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 			if(loc.hasBearing()) {
 				cmd.append("C").append((float)loc.getBearing());
 			}
-			if((System.currentTimeMillis() - loc.getTime()) > 30000) {
+			if((System.currentTimeMillis() - loc.getTime()) > 30000 && loc.getTime() != 0) {
 				cmd.append("T").append(loc.getTime());
 			}
 			return cmd.toString(); 
@@ -77,7 +77,9 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	}
 
 	public void sendCoordinate(Location location) {
-		bufferOfLocations.add(location);
+		if(startSendingLocations) {
+			bufferOfLocations.add(location);
+		}
 	}
 
 	public void sendCoordinate(double lat, double lon) {

@@ -239,6 +239,7 @@ public class OsMoThread {
 	private void processReadMessages() {
 		while(!queueOfMessages.isEmpty()){
 			String cmd = queueOfMessages.poll();
+			log.info("OSMO get:"+cmd);
 			int k = cmd.indexOf('|');
 			String header = cmd;
 			String data = "";
@@ -258,7 +259,7 @@ public class OsMoThread {
 			if(obj != null && obj.has("error")) {
 				error = true;
 				try {
-					service.showErrorMessage(obj.getString("description"));
+					service.showErrorMessage(obj.getString("error"));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -297,10 +298,14 @@ public class OsMoThread {
 			}
 		}
 	}
+	
+	
 
 	private ByteBuffer getNewPendingSendCommand() throws UnsupportedEncodingException {
 		if(authorized == 0) {
 			String auth = "TOKEN|"+ token.token;
+			log.info("OSMO send:" + auth);
+			authorized = 1;
 			return ByteBuffer.wrap(prepareCommand(auth).toString().getBytes("UTF-8"));
 		}
 		if(authorized == 1) {
@@ -310,6 +315,7 @@ public class OsMoThread {
 			String l = s.nextSendCommand(this);
 			if (l != null) {
 				StringBuilder res = prepareCommand(l);
+				log.info("OSMO send " + res);
 				return ByteBuffer.wrap(res.toString().getBytes("UTF-8"));
 			}
 		}
