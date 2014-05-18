@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package net.osmand.plus.activities;
 
@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import android.content.Intent;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.access.AccessibleToast;
@@ -57,30 +58,26 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 
 /**
- * 
+ *
  */
 public class FavouritesActivity extends OsmandExpandableListActivity {
 
-	public static final int SHOW_ON_MAP = 0;
-	public static final int NAVIGATE_TO = 1;
-	public static final int DELETE_ITEM = 2;
-	public static final int EDIT_ITEM = 3;
-	
 	public static final int EXPORT_ID = 0;
 	public static final int IMPORT_ID = 1;
 	public static final int DELETE_ID = 2;
 	public static final int DELETE_ACTION_ID = 3;
-	
+	public static final int SHARE_ID = 4;
+
 
 	private FavouritesAdapter favouritesAdapter;
 	private FavouritesDbHelper helper;
-	
+
 	private boolean selectionMode = false;
 	private Set<FavouritePoint> favoritesToDelete = new LinkedHashSet<FavouritePoint>();
 	private Set<String> groupsToDelete = new LinkedHashSet<String>();
 	private Comparator<FavouritePoint> favoritesComparator;
 	private ActionMode actionMode;
-	
+
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -100,18 +97,18 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		};
 
 
-		
+
 		setContentView(R.layout.favourites_list);
 		getSupportActionBar().setTitle(R.string.favourites_activity);
 		setSupportProgressBarIndeterminateVisibility(false);
 		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
-		
-		
+
+
 		helper = getMyApplication().getFavorites();
 		favouritesAdapter = new FavouritesAdapter();
 		favouritesAdapter.setFavoriteGroups(helper.getFavoriteGroups());
 		getExpandableListView().setAdapter(favouritesAdapter);
-		
+
 	}
 
 	private void deleteFavorites() {
@@ -126,8 +123,8 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				hideProgressBar();
 				favouritesAdapter.synchronizeGroups();
 				favouritesAdapter.sort(favoritesComparator);
-			};
-			
+			}
+
 			@Override
 			protected void onProgressUpdate(Object... values) {
 				for(Object o : values){
@@ -137,8 +134,8 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 						favouritesAdapter.deleteCategory((String) o);
 					}
 				}
-			};
-			
+			}
+
 			@Override
 			protected String doInBackground(Void... params) {
 				for (FavouritePoint fp : favoritesToDelete) {
@@ -153,20 +150,20 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				groupsToDelete.clear();
 				return getString(R.string.favourites_delete_multiple_succesful);
 			}
-			
+
 		}.execute();
-		
+
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 //		final LatLon mapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 		favouritesAdapter.synchronizeGroups();
-		
+
 //		Sort Favs by distance on Search tab, but sort alphabetically here
 		favouritesAdapter.sort(favoritesComparator);
-		
+
 	}
 
 	@Override
@@ -189,10 +186,10 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			OnClickListener onshow = new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					settings.SHOW_FAVORITES.set(true);		
+					settings.SHOW_FAVORITES.set(true);
 				}
 			};
-			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), this, 
+			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), this,
 					true, onshow, false);
 			if (point.isStored()) {
 				ActionItem edit = new ActionItem();
@@ -219,12 +216,12 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				});
 				qa.addActionItem(delete);
 			}
-			
+
 			qa.show();
 		}
 		return true;
 	}
-	
+
 
 	private boolean editPoint(final FavouritePoint point) {
 		Builder builder = new AlertDialog.Builder(this);
@@ -276,7 +273,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		builder.create().show();
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		if (item.getItemId() == EXPORT_ID) {
@@ -284,6 +281,9 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			return true;
 		} else if (item.getItemId() == IMPORT_ID) {
 			importFile();
+			return true;
+		} else if (item.getItemId() == SHARE_ID) {
+			shareFavourites();
 			return true;
 		} else if (item.getItemId() == DELETE_ID) {
 			enterDeleteMode();
@@ -295,11 +295,13 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
-	
+
+
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		createMenuItem(menu, EXPORT_ID, R.string.export_fav, R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, IMPORT_ID, R.string.import_fav, R.drawable.ic_action_grefresh_light, R.drawable.ic_action_grefresh_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
@@ -307,19 +309,19 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT) ;
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	public void showProgressBar(){
 		setSupportProgressBarIndeterminateVisibility(true);
 	}
-	
+
 	public void hideProgressBar(){
 		setSupportProgressBarIndeterminateVisibility(false);
 	}
-	
+
 
 	private void enterDeleteMode() {
 		actionMode = startActionMode(new Callback() {
-			
+
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				selectionMode = true;
@@ -330,18 +332,18 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				favouritesAdapter.notifyDataSetInvalidated();
 				return true;
 			}
-			
+
 			@Override
 			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
 				return false;
 			}
-			
+
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 				selectionMode = false;
 				favouritesAdapter.notifyDataSetInvalidated();
 			}
-			
+
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if(item.getItemId() == DELETE_ACTION_ID) {
@@ -350,11 +352,11 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				return true;
 			}
 
-			
+
 		});
-		
+
 	}
-	
+
 	private void deleteFavoritesAction() {
 		if (groupsToDelete.size() + favoritesToDelete.size() > 0) {
 
@@ -444,6 +446,37 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		}
 	}
 
+	private void shareFavourites() {
+		if (favouritesAdapter.isEmpty()) {
+			AccessibleToast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
+		} else {
+			final AsyncTask<Void, Void, GPXFile> exportTask = new AsyncTask<Void, Void, GPXFile>() {
+				@Override
+				protected GPXFile doInBackground(Void... params) {
+					return helper.asGpxFile();
+				}
+
+				@Override
+				protected void onPreExecute() {
+					showProgressBar();
+				}
+
+				@Override
+				protected void onPostExecute(GPXFile gpxFile) {
+					hideProgressBar();
+					final Intent sendIntent = new Intent();
+					sendIntent.setAction(Intent.ACTION_SEND);
+					sendIntent.putExtra(Intent.EXTRA_TEXT, GPXUtilities.asString(gpxFile, getMyApplication()));
+					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
+					sendIntent.setType("application/gpx+xml");
+					startActivity(sendIntent);
+				}
+			};
+
+			exportTask.execute();
+		}
+	}
+
 	private void export() {
 		final File tosave = getMyApplication().getAppPath(FavouritesDbHelper.FILE_TO_SAVE);
 		if (favouritesAdapter.isEmpty()) {
@@ -491,19 +524,19 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			}
 		}
 	}
-	
+
 
 	class FavouritesAdapter extends OsmandBaseExpandableListAdapter {
 
 		Map<String, List<FavouritePoint>> sourceFavoriteGroups;
 		Map<String, List<FavouritePoint>> favoriteGroups = new LinkedHashMap<String, List<FavouritePoint>>();
 		List<String> groups = new ArrayList<String>();
-		
+
 		public void setFavoriteGroups(Map<String, List<FavouritePoint>> favoriteGroups) {
 			this.sourceFavoriteGroups = favoriteGroups;
 			synchronizeGroups();
 		}
-		
+
 		public void sort(Comparator<FavouritePoint> comparator) {
 			for(List<FavouritePoint> ps : favoriteGroups.values()) {
 				Collections.sort(ps, comparator);
@@ -518,14 +551,14 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			favoriteGroups.get(p.getCategory()).add(p);
 			notifyDataSetChanged();
 		}
-		
+
 		public void deleteFavoritePoint(FavouritePoint p) {
 			if(favoriteGroups.containsKey(p.getCategory())){
 				favoriteGroups.get(p.getCategory()).remove(p);
 			}
 			notifyDataSetChanged();
 		}
-		
+
 		public void deleteCategory(String p) {
 			favoriteGroups.remove(p);
 			groups.remove(p);
@@ -582,7 +615,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
 		}
-	    
+
 		@Override
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View row = convertView;
@@ -596,11 +629,11 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			final String model = getGroup(groupPosition);
 			label.setText(model);
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
-			
+
 			if(selectionMode){
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(groupsToDelete.contains(model));
-				
+
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -629,7 +662,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.favourites_list_item, parent, false);
 			}
-			
+
 			TextView label = (TextView) row.findViewById(R.id.favourite_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
@@ -640,7 +673,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				icon.setImageResource(R.drawable.opened_poi);
 			}
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), 
+			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
 			label.setText(distance + model.getName(), TextView.BufferType.SPANNABLE);
@@ -651,7 +684,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				ch.setChecked(favoritesToDelete.contains(model));
 				row.findViewById(R.id.favourite_icon).setVisibility(View.GONE);
 				ch.setOnClickListener(new View.OnClickListener() {
-					
+
 					@Override
 					public void onClick(View v) {
 						if(ch.isChecked()){
