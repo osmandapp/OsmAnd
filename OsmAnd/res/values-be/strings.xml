@@ -1714,4 +1714,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_mode_on">Спыніць OSMo</string>    
     <string name="osmo_mode_off">Запусьціць OSMo</string>
     <string name="osmo_register_device">Рэгістрацыя прылады... </string>
-    </resources>
+    <string name="share_fav">Падзяліцца</string>
+	<string name="share_fav_subject">Выбранае адаслана праз OsmAnd</string>
+	</resources>
