@@ -1638,9 +1638,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="index_name_canada">Norte América - Canadá</string>
     <string name="always_center_position_on_map">Mostrar siempre posición en el centro</string>
     <string name="voice_pref_title">Voz</string>
-    <string name="misc_pref_title">Diversos</string>
+    <string name="misc_pref_title">Varios</string>
     <string name="localization_pref_title">Localización</string>
-    <string name="interrupt_music_descr">Interrumpir música al indicar</string>
+    <string name="interrupt_music_descr">Interrumpir la música al hacer el anuncio</string>
 	<string name="interrupt_music">Interrumpir música</string>
 	<string name="osmo_settings_uuid">Id único del dispositivo</string>
     <string name="osmo_settings_descr">Ver clave única de registro y otras configuraciones específicas de monitorización </string>
@@ -1659,4 +1659,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_mode_on">Parar OSMo</string>    
     <string name="osmo_mode_off">Iniciar OSMo</string>
     <string name="osmo_register_device">Registrando dispositivo... </string>
-    </resources>
+    <string name="share_fav">Compartir</string>
+	<string name="share_fav_subject">Favoritos compartidos a través de OsmAnd</string>
+	</resources>
