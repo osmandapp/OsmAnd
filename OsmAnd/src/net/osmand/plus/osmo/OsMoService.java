@@ -6,6 +6,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
 
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;
@@ -22,31 +28,19 @@ import org.json.JSONObject;
 import android.os.Build;
 import android.provider.Settings.Secure;
 
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-
-public class OsMoService {
+public class OsMoService implements OsMoSender {
 	private OsMoThread thread;
 	private List<OsMoSender> listSenders = new java.util.concurrent.CopyOnWriteArrayList<OsMoSender>();
 	private List<OsMoReactor> listReactors = new java.util.concurrent.CopyOnWriteArrayList<OsMoReactor>();
+	private ConcurrentLinkedQueue<String> commands = new ConcurrentLinkedQueue<String>();
 	private OsmandApplication app;
 	private static final Log log = PlatformUtil.getLog(OsMoService.class);
 	
-	public interface OsMoSender {
-		
-		public String nextSendCommand(OsMoThread tracker);
-	}
 	
-	public interface OsMoReactor {
-		
-		public boolean acceptCommand(String command, String data, JSONObject obj, OsMoThread tracker);
-		
-	}
 	
 	public OsMoService(OsmandApplication app) {
 		this.app = app;
+		listSenders.add(this);
 	}
 	
 	public boolean isConnected() {
@@ -130,6 +124,7 @@ public class OsMoService {
 		public String hostName;
 		public String port;
 		public String token;
+		
 	}
 	
 	
@@ -179,6 +174,18 @@ public class OsMoService {
 
 	public void showErrorMessage(String string) {
 		app.showToastMessage(app.getString(R.string.osmo_io_error) +  string);		
+	}
+	
+	public void pushCommand(String cmd) {
+		commands.add(cmd);
+	}
+
+	@Override
+	public String nextSendCommand(OsMoThread tracker) {
+		if(!commands.isEmpty()) {
+			return commands.poll();
+		}
+		return null;
 	}
 	
 }

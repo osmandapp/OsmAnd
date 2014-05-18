@@ -826,6 +826,8 @@ public class OsmandSettings {
 	
 	public final OsmandPreference<String> OSMO_DEVICE_KEY = new StringPreference("osmo_device_token", "").makeGlobal();
 	
+	public final OsmandPreference<String> OSMO_GROUPS = new StringPreference("osmo_groups", "{}").makeGlobal();
+	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DEBUG_RENDERING_INFO = new BooleanPreference("debug_rendering", false).makeGlobal();
 	

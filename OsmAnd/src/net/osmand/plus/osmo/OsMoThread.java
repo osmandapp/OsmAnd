@@ -15,8 +15,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.osmo.OsMoService.OsMoReactor;
-import net.osmand.plus.osmo.OsMoService.OsMoSender;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 
 import org.apache.commons.logging.Log;
@@ -42,6 +40,7 @@ public class OsMoThread {
 	private int failures = 0;
 	private int activeConnectionId = 0;
 	private boolean stopThread;
+	private boolean reconnect;
 	private Selector selector;
 
 	private List<OsMoSender> listSenders;
@@ -55,6 +54,7 @@ public class OsMoThread {
 	private String readCommand = "";
 	private ByteBuffer pendingReadCommand = ByteBuffer.allocate(2048);
 	private LinkedList<String> queueOfMessages = new LinkedList<String>();
+	
 	
 	
 
@@ -89,6 +89,7 @@ public class OsMoThread {
 			token = service.getSessionToken();
 		}
 		authorized = 0;
+		reconnect = false;
 		selector = Selector.open();
 		SocketChannel activeChannel = SocketChannel.open();
 		activeChannel.configureBlocking(true);
@@ -139,7 +140,7 @@ public class OsMoThread {
 			if (selector == null) {
 				stopThread = true;
 			} else {
-				if(activeChannel == null) {
+				if(activeChannel == null || reconnect) {
 					initConnection();
 				} else {
 					checkSelectedKeys();
@@ -153,7 +154,7 @@ public class OsMoThread {
 				activeChannel = null;
 			}
 			if (failures++ > LIMIT_OF_FAILURES_RECONNECT) {
-				stopChannel();
+				reconnect = true;
 			}
 		}
 		if (stopThread) {
@@ -214,7 +215,9 @@ public class OsMoThread {
 			} else {
 				hasSomethingToRead = false;
 			}
-			if (read > 0) {
+			if(read == -1) {
+				reconnect = true;
+			} else if (read > 0) {
 				byte[] ar = pendingReadCommand.array();
 				String res = new String(ar, 0, read);
 				readCommand += res;

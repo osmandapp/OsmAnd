@@ -5,8 +5,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.Location;
-import net.osmand.plus.osmo.OsMoService.OsMoReactor;
-import net.osmand.plus.osmo.OsMoService.OsMoSender;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.json.JSONObject;
@@ -14,12 +12,13 @@ import org.json.JSONObject;
 public class OsMoTracker implements OsMoSender, OsMoReactor {
 	private ConcurrentLinkedQueue<Location> bufferOfLocations = new ConcurrentLinkedQueue<Location>();
 	private Map<String, Location> otherLocations = new ConcurrentHashMap<String, Location>();
-	private ConcurrentLinkedQueue<String> listenIds = new ConcurrentLinkedQueue<String>();
 	private boolean trackerStarted;
 	private boolean startSendingLocations;
 	private OsmandMapTileView view;
+	private OsMoService service;
 
 	public OsMoTracker(OsMoService service) {
+		this.service = service;
 		service.registerSender(this);
 		service.registerReactor(this);
 	}
@@ -33,12 +32,12 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	}
 	
 	public void startTrackingId(String id) {
-		listenIds.add("LISTEN|"+id);
+		service.pushCommand("LISTEN|"+id);
 		otherLocations.put(id, null);
 	}
 	
 	public void stopTrackingId(String id) {
-		listenIds.add("UNLISTEN|"+id);
+		service.pushCommand("UNLISTEN|"+id);
 		otherLocations.remove(id);
 	}
 
@@ -52,9 +51,6 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 				trackerStarted = false;
 				return "TRACKER_SESSION_CLOSE";
 			}
-		}
-		if(!listenIds.isEmpty()) {
-			return listenIds.poll();
 		}
 		if(!bufferOfLocations.isEmpty()){
 			Location loc = bufferOfLocations.poll();
@@ -102,7 +98,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	@Override
 	public boolean acceptCommand(String command, String data, JSONObject obj, OsMoThread thread) {
 		if(command.startsWith("LT:")) {
-			String tid = command.substring(3);
+			String tid = command.substring(command.indexOf(':') + 1);
 			float lat = 0;
 			float lon = 0;
 			float speed = 0;

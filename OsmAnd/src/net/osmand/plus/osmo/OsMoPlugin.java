@@ -26,10 +26,12 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	public static final String ID = "osmand.osmo";
 	private OsMoService service;
 	private OsMoTracker tracker;
+	private OsMoGroups groups;
 
 	public OsMoPlugin(final OsmandApplication app) {
 		service = new OsMoService(app);
 		tracker = new OsMoTracker(service);
+		groups = new OsMoGroups(service, tracker, app.getSettings());
 		this.app = app;
 	}
 
@@ -155,4 +157,14 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	public String getId() {
 		return ID;
 	}
+	
+	public OsMoGroups getGroups() {
+		return groups;
+	}
+	
+	
+	public OsMoTracker getTracker() {
+		return tracker;
+	}
+	
 }
