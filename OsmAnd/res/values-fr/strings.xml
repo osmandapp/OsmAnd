@@ -559,7 +559,7 @@
   <string name="search_history_street">Rue :\n{0}\n{1}</string>
   <string name="search_history_int_streets">Intersection :\n{0} x {1} dans {2}</string>
   <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
-  <string name="favorite">Favori</string>
+  <string name="favorite">Favori </string>
   <string name="clear_all">Effacer tout</string>
   <string name="history">Historique</string>
   <string name="uploading_data">Envoi des données…</string>
@@ -601,7 +601,7 @@
   <string name="opening_changeset">Ouverture des modifications…</string>
   <string name="closing_changeset">Fermeture des modifications…</string>
   <string name="commiting_node">Envoi des nœuds…</string>
-  <string name="loading_poi_obj">Chargement des Points d\'Intérêts…</string>
+  <string name="loading_poi_obj">Chargement des Points d\'intérêts…</string>
   <string name="auth_failed">Autorisation refusée</string>
   <string name="failed_op">Échec</string>
   <string name="converting_names">Convertir les noms en anglais…</string>
@@ -909,14 +909,14 @@
   <string name="gpxup_private">Privé</string>
   <string name="osmand_parking_event">Récupérer votre véhicule du parking</string>
   <string name="osmand_parking_warning">Avertissement</string>
-  <string name="osmand_parking_warning_text">Une notification pour récupérer votre véhicule a été ajoutée dans votre agenda. Elle y restera jusqu\'à ce que vous le supprimiez manuellement.</string>
+  <string name="osmand_parking_warning_text">Une notification pour récupérer votre véhicule a été ajoutée dans votre agenda. Elle y restera jusqu\'à ce que vous la supprimiez manuellement.</string>
   <string name="osmand_parking_time_limit_title">Donner un temps limite de stationnement</string>
   <string name="osmand_parking_delete_confirm">Voulez-vous supprimer l\'emplacement de stationnement du véhicule ?</string>
   <string name="osmand_parking_delete">Supprimer un emplacement de stationnement</string>
   <string name="osmand_parking_choose_type">Choisir le type de stationnement</string>
   <string name="osmand_parking_lim_text">Temps limité</string>
   <string name="osmand_parking_no_lim_text">Temps illimité</string>
-  <string name="osmand_parking_add_event">Ajouter une notification dans l\'Agenda</string>
+  <string name="osmand_parking_add_event">Ajouter une notification dans l\'agenda</string>
   <string name="osmand_parking_time_limit">Stationnement avec limite de temps</string>
   <string name="osmand_parking_time_no_limit">Stationnement sans limite de temps</string>
   <string name="osmand_parking_position_description">La position de votre véhicule. %1$s</string>
@@ -1093,7 +1093,7 @@
 	<string name="no_buildings_found">Aucun numéro de bâtiment trouvé</string>
     <string name="search_villages_and_postcodes">Rechercher les villages et les codes postaux</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
-    <string name="route_descr_current_location">la position actuelle</string>
+    <string name="route_descr_current_location">La position actuelle</string>
     
     
     <string name="map_widget_max_speed">Limite de vitesse</string>
@@ -1281,7 +1281,7 @@
     <string name="clear_destination">Effacer la destination</string>
     <string name="other_location">Autre</string>
     <string name="files_limit">Il reste %1$d fichiers</string>
-    <string name="available_downloads_left">Reste %1$d fichiers à télécharger</string>
+    <string name="available_downloads_left">Vous pouvez encore télécharger %1$d fichier(s).</string>
     <string name="install_paid">Version complète</string>
     <string name="use_magnetic_sensor_descr">Utiliser le magnétomètre pour déterminer l\'orientation de la boussole au lieu du capteur d\'orientation</string>
     <string name="use_magnetic_sensor">Utiliser le magnétomètre (boussole)</string>
@@ -1472,10 +1472,10 @@
 	<string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
 	<string name="routing_attr_weight_name">Poids</string>
 	<string name="routing_attr_weight_description">Spécifier la limite de poids</string>
-    <string name="select_gpx">Sélectionner GPX …</string>
+    <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Définir la destination</string>
-    <string name="route_descr_select_on_map">Définir sur la carte …</string>
-    <string name="route_descr_favorite">Favori …</string>
+    <string name="route_descr_select_on_map">Définir sur la carte…</string>
+    <string name="route_descr_favorite">Favori…</string>
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
     <string name="keep_and_add_destination_point">Ajouter comme destination</string>
@@ -1551,18 +1551,22 @@
 <string name="interrupt_music_descr">Interrompre la musique lors des annonces</string>
 <string name="interrupt_music">Interrompre la musique</string>
 <string name="share_route_as_gpx">Partager l\'itinéraire au format GPX</string>
-	<string name="share_route_subject">Itinéraire partagé via OsmAnd</string>
+<string name="share_route_subject">Itinéraire partagé via OsmAnd</string>
 	<string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
-    <string name="osmo_settings_descr">Voir la clé unique d\'enregistrement de l\'appareil et les autres paramètres spécifiques de suivi</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Suivi en temps réel avec de nombreuses fonctionnalités de contrôle à distance http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (suivi en temps réel)</string>
-    <string name="osmo_settings">OSMo</string>
-   	<string name="keep_informing_never">Jamais</string>
-    <string name="keep_informing_descr">Annoncer les instructions de navigation à intervalles réguliers</string>
-    <string name="keep_informing">Répéter les instructions de navigation</string>
-	<string name="navigation_intent_invalid">Format invalide : %s</string>
+	<string name="osmo_settings_descr">Voir la clé unique d\'enregistrement de l\'appareil et les autres paramètres spécifiques de suivi</string>
+	<string name="osmo_plugin_description">OpenStreetMap-Monitoring - Suivi en temps réel avec de nombreuses fonctionnalités de contrôle à distance http://osmo.mobi</string>
+	<string name="osmo_plugin_name">OSMo (suivi en temps réel)</string>
+	<string name="osmo_settings">OSMo</string>
+	<string name="osmo_register_device">Enregistrement de l\'appareil…</string>
+	<string name="osmo_io_error">Problème de connection OSMo : </string>
+	<string name="osmo_mode_on">Arrêter\nOSMo</string>
+	<string name="osmo_mode_off">Démarrer\nOSMo</string>
+<string name="keep_informing_never">Jamais</string>
+<string name="keep_informing_descr">Annoncer les instructions de navigation à intervalles réguliers</string>
+<string name="keep_informing">Répéter les instructions de navigation</string>
+<string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
-    <string name="arrival_distance_descr">Choisir à quel moment est annoncée l\'arrivée à destination</string>
+<string name="arrival_distance_descr">Choisir à quel moment est annoncée l\'arrivée à destination</string>
 <string-array name="arrival_distance_factors">
 <item>Précoce</item>
 <item>Normale</item>
