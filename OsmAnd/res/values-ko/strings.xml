@@ -1943,7 +1943,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_settings_descr">고유한 장치 등록 키 및 기타 모니터링 특정한 설정 보기 </string>
     <string name="osmo_plugin_description">OpenStreetMap의 모니터링 - 원격 제어를 위한 많은 기능과 함께 고급 실시간 모니터링 http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (고급 라이브 모니터링)</string>
-    <string name="osmo_settings">OSMo(오스모)</string>
+    <string name="osmo_settings">OSMo(오스모:OpenStreetMap-Monitoring)</string>
    	<string name="share_route_as_gpx">GPX 파일로 루트 공유</string>
 	<string name="share_route_subject">OsmAnd 통해 공유된 루트</string>
 	<string name="arrival_distance">도착 알림</string>
@@ -1956,4 +1956,6 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_io_error">OSMo 연결 문제 : </string>
     <string name="osmo_mode_on">OSMo 중지</string>    
     <string name="osmo_mode_off">OSMo 시작</string>
-    </resources>
+    <string name="share_fav">공유</string>
+	<string name="share_fav_subject">OsmAnd를 통해 공유된 즐겨찾기</string>
+	</resources>
