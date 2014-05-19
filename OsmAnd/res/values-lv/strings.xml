@@ -1629,4 +1629,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_mode_on">Apturēt OSMo</string>    
     <string name="osmo_mode_off">Sākt OSMo</string>
     <string name="osmo_register_device">Reģistrē ierīci... </string>
-    </resources>
+    <string name="share_fav">Kopīgot</string>
+	<string name="share_fav_subject">Izlase kopīgota OsmAnd</string>
+	</resources>
