@@ -1720,4 +1720,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_mode_on">Wyłącz OSMo</string>    
     <string name="osmo_mode_off">Uruchom OSMo</string>
     <string name="osmo_register_device">Rejestrowanie urządzenia... </string>
-    </resources>
+    <string name="share_fav">Udostępnij</string>
+	<string name="share_fav_subject">Ulubione miejsca udostępnione przez OsmAnd</string>
+	</resources>
