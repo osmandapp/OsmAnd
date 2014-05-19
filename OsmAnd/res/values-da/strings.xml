@@ -1784,5 +1784,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_mode_off">Start OSMo</string>
     <string name="osmo_register_device">Registrering af enhed… </string>
     <string name="share_fav">Del</string>
-	<string name="share_fav_subject">Favoritter deles via Osmand</string>
+	<string name="share_fav_subject">Favoritter delt via Osmand</string>
 	</resources>
