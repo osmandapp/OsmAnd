@@ -128,13 +128,16 @@ public class FailSafeFuntions {
 							final GPXRouteParamsBuilder gpxRoute;
 							if (result != null) {
 								gpxRoute = new GPXRouteParamsBuilder(result, settings);
-								if (settings.SPEAK_GPX_WPT.get()) {
+								if (settings.GPX_SPEAK_WPT.get()) {
 									gpxRoute.setAnnounceWaypoints(true);
 								}
-								if (settings.ROUTE_CALC_OSMAND_PARTS.get()) {
+								if (settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
 									gpxRoute.setCalculateOsmAndRouteParts(true);
 								}
-								if(settings.CALC_GPX_ROUTE.get()) {
+								if (settings.GPX_CALCULATE_RTEPT.get()) {
+									gpxRoute.setUseIntermediatePointsRTE(true);
+								}
+								if(settings.GPX_ROUTE_CALC.get()) {
 									gpxRoute.setCalculateOsmAndRoute(true);
 								}
 							} else {

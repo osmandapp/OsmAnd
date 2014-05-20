@@ -757,7 +757,7 @@ public class RoutingHelper {
 				return;
 			}
 			final boolean onlineSourceWithoutInternet = !res.isCalculated() && params.type.isOnline() && !settings.isInternetConnectionAvailable();
-			if (onlineSourceWithoutInternet && settings.ROUTE_CALC_OSMAND_PARTS.get()) {
+			if (onlineSourceWithoutInternet && settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
 				if (params.previousToRecalculate != null && params.previousToRecalculate.isCalculated()) {
 					res = provider.recalculatePartOfflineRoute(res, params);
 				}

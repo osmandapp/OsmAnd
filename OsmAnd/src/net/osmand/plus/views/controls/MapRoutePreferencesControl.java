@@ -188,20 +188,23 @@ public class MapRoutePreferencesControl extends MapControls {
 				}
 			} else if (gpxParam.id == R.string.gpx_option_calculate_first_last_segment) {
 				rp.setCalculateOsmAndRouteParts(selected);
-				settings.ROUTE_CALC_OSMAND_PARTS.set(selected);
+				settings.GPX_ROUTE_CALC_OSMAND_PARTS.set(selected);
 			} else if (gpxParam.id == R.string.gpx_option_from_start_point) {
 				rp.setPassWholeRoute(selected);
 			} else if (gpxParam.id == R.string.announce_gpx_waypoints) {
-				settings.SPEAK_GPX_WPT.set(selected);
+				settings.GPX_SPEAK_WPT.set(selected);
 				rp.setAnnounceWaypoints(selected);
+			} else if (gpxParam.id == R.string.use_points_as_intermediates) {
+				settings.GPX_CALCULATE_RTEPT.set(selected);
+				rp.setUseIntermediatePointsRTE(selected);
 			} else if (gpxParam.id == R.string.calculate_osmand_route_gpx) {
-				settings.CALC_GPX_ROUTE.set(selected);
+				settings.GPX_ROUTE_CALC.set(selected);
 				rp.setCalculateOsmAndRoute(selected);
 				updateParameters();
 			} 
 		}
 		if (gpxParam.id == R.string.calculate_osmand_route_without_internet) {
-			settings.ROUTE_CALC_OSMAND_PARTS.set(selected);
+			settings.GPX_ROUTE_CALC_OSMAND_PARTS.set(selected);
 		}
 		if (gpxParam.id == R.string.fast_route_mode) {
 			settings.FAST_ROUTE_MODE.set(selected);
@@ -215,18 +218,25 @@ public class MapRoutePreferencesControl extends MapControls {
 		boolean osmandRouter = settings.ROUTER_SERVICE.get() == RouteService.OSMAND ;
 		if(!osmandRouter) {
 			list.add(new OtherLocalRoutingParameter(R.string.calculate_osmand_route_without_internet, 
-					getString(R.string.calculate_osmand_route_without_internet), settings.ROUTE_CALC_OSMAND_PARTS.get()));
+					getString(R.string.calculate_osmand_route_without_internet), settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()));
 			list.add(new OtherLocalRoutingParameter(R.string.fast_route_mode, 
 					getString(R.string.fast_route_mode), settings.FAST_ROUTE_MODE.get()));
 			return list;
 		}
 		if(rparams != null) {
+			GPXFile fl = rparams.getFile();
+			if (fl.hasRtePt()) {
+				list.add(new OtherLocalRoutingParameter(R.string.use_points_as_intermediates,
+						getString(R.string.use_points_as_intermediates), rparams.isUseIntermediatePointsRTE()));
+			}
 			list.add(new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route, 
 					getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
-			list.add(new OtherLocalRoutingParameter(R.string.gpx_option_from_start_point, 
+			if (!rparams.isUseIntermediatePointsRTE()) {
+				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_from_start_point, 
 					getString(R.string.gpx_option_from_start_point), rparams.isPassWholeRoute()));
-			list.add(new OtherLocalRoutingParameter(R.string.gpx_option_calculate_first_last_segment, 
-					getString(R.string.gpx_option_calculate_first_last_segment), rparams.isCalculateOsmAndRouteParts()));
+				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_calculate_first_last_segment,
+						getString(R.string.gpx_option_calculate_first_last_segment), rparams.isCalculateOsmAndRouteParts()));
+			}
 			list.add(new OtherLocalRoutingParameter(R.string.announce_gpx_waypoints, 
 					getString(R.string.announce_gpx_waypoints), rparams.isAnnounceWaypoints()));
 			// Temporary disabled

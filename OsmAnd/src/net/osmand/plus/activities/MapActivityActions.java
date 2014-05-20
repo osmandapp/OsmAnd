@@ -473,9 +473,15 @@ public class MapActivityActions implements DialogProvider {
 		} else {
 			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, mapActivity.getMyApplication()
 					.getSettings());
-			params.setCalculateOsmAndRouteParts(settings.ROUTE_CALC_OSMAND_PARTS.get());
-			params.setAnnounceWaypoints(settings.SPEAK_GPX_WPT.get());
-			params.setCalculateOsmAndRoute(settings.CALC_GPX_ROUTE.get());
+			if (result.hasRtePt() && !result.hasTrkpt()) {
+				settings.GPX_CALCULATE_RTEPT.set(true);
+			} else {
+				settings.GPX_CALCULATE_RTEPT.set(false);
+			}
+			params.setCalculateOsmAndRouteParts(settings.GPX_ROUTE_CALC_OSMAND_PARTS.get());
+			params.setAnnounceWaypoints(settings.GPX_SPEAK_WPT.get());
+			params.setUseIntermediatePointsRTE(settings.GPX_CALCULATE_RTEPT.get());
+			params.setCalculateOsmAndRoute(settings.GPX_ROUTE_CALC.get());
 			List<Location> ps = params.getPoints();
 			mapActivity.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);

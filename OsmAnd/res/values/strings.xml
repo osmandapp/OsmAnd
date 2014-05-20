@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="use_points_as_intermediates">Calculate route between points</string>
     <string name="osmo_register_device">Registering device... </string>
     <string name="osmo_io_error">OSMo connection problem : </string>
     <string name="osmo_mode_on">Stop OSMo</string>    

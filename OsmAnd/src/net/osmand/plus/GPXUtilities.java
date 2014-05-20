@@ -123,6 +123,26 @@ public class GPXUtilities {
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
 		}
+		
+		public boolean hasRtePt() {
+			for(Route r : routes) {
+				if(r.points.size() > 0) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		public boolean hasTrkpt() {
+			for(Track t  : tracks) {
+				for (TrkSegment ts : t.segments) {
+					if (ts.points.size() > 0) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
 
 		public void proccessPoints() {
 			List<List<WptPt>> tpoints = new ArrayList<List<WptPt>>();
