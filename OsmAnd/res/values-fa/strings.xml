@@ -1679,7 +1679,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="gpx_option_calculate_first_last_segment">محاسبه قطعه مسیر ابتدایی و انتهایی</string>
     <string name="index_item_nation_addresses">نشانی های سراسر کشور</string>
 	<string name="index_item_world_altitude_correction">اصلاح ارتفاع جهانی</string>
-	<string name="index_item_world_seamarks">علامت‌های دریایی جهان</string>
+	<string name="index_item_world_seamarks">علائم دریایی جهان</string>
 	<string name="index_item_world_bitcoin_payments">پرداخت‌های هزینه جهانی</string>
 	<string name="index_item_world_basemap">نقشه کلی جهان</string>
     <string name="index_item_world_ski">نقشه های اسکی جهان</string>
@@ -1728,7 +1728,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="index_name_canada">شمال امریکا - کانادا</string>
     <string name="index_name_italy">اروپا - ایتالیا</string>
     <string name="index_name_gb">اروپا - بریتانیا</string>
-    <string name="osmo_settings_uuid">شماره یکتای دستگاه</string>
+    <string name="osmo_settings_uuid">شماره شناسايي یکتای دستگاه</string>
     <string name="osmo_settings_descr">مشاهده کلید ثبت یکتای دستگاه و سایر تنظیمات نظارت </string>
     <string name="osmo_plugin_description">نظارت OpenStreetMap- نظارت پیشرفته زنده به همراه بسیاری از ویژگی‌های کنترل دور http://osmo.mobi</string>
     <string name="osmo_settings">OSMo</string>
