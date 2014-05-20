@@ -1731,7 +1731,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osmo_settings_uuid">شماره یکتای دستگاه</string>
     <string name="osmo_settings_descr">مشاهده کلید ثبت یکتای دستگاه و سایر تنظیمات نظارت </string>
     <string name="osmo_plugin_description">نظارت OpenStreetMap- نظارت پیشرفته زنده به همراه بسیاری از ویژگی‌های کنترل دور http://osmo.mobi</string>
-    <string name="osmo_settings">OSMo (خدمات نظارت)</string>
+    <string name="osmo_settings">OSMo</string>
    	<string name="always_center_position_on_map">موقعیت را همیشه وسط صفحه نشان بده</string>
     <string name="voice_pref_title">صدا</string>
     <string name="misc_pref_title">متفرقه</string>
@@ -1747,9 +1747,9 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="navigation_intent_invalid">قالب نامعتبر: %s</string>
 <string name="arrival_distance">اعلام ورود</string>
     <string name="osmo_register_device">ثبت دستگاه ... </string>
-    <string name="osmo_io_error">خطا در اتصال به سايت: </string>
-    <string name="osmo_mode_on">توقف OSM</string>    
-    <string name="osmo_mode_off">َشروع OSM</string>
+    <string name="osmo_io_error">خطا در اتصال به OSMo: </string>
+    <string name="osmo_mode_on">توقف OSMo</string>    
+    <string name="osmo_mode_off">َشروع OSMo</string>
     <string name="arrival_distance_descr">مي خواهيد اعلان رسيدن به مقصد را چقدر زودتر دريافت كنيد؟</string>
     <string name="share_fav">اشتراک گذاری</string>
 	<string name="share_fav_subject">علاقه‌مندیها از راه OsmAnd به اشتراک گذاشته شد</string>
