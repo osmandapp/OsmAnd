@@ -1632,4 +1632,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="share_fav">Kopīgot</string>
 	<string name="share_fav_subject">Izlase kopīgota OsmAnd</string>
 	<string name="use_points_as_intermediates">Rēķināt maršrutu starp punktiem</string>
+    <string name="tip_recent_changes_1_8_alpha">Izmaiņas uz 1.8:
+…… * Maršruta aprēķināšana starp maršruta punktiem GPX trekā
+…… * Izmaiņas valsts karšu lejupielādē (vietējo nosaukumu meklēšanas atbalsts)
+……
+    </string>
     </resources>
