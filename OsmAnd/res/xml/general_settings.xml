@@ -8,9 +8,7 @@
 		<CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names"
 				android:key="use_english_names"></CheckBoxPreference>
 		<ListPreference android:key="default_driving_region" android:title="@string/driving_region" android:summary="@string/driving_region_descr"></ListPreference>
-		<!-- 
-			<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
-	 	-->
+		<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/voice_pref_title" android:key="voice">
 	    <ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
