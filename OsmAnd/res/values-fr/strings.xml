@@ -521,7 +521,7 @@
   <string name="route_head">Avancez</string>
   <string name="first_time_continue">Continuer</string>
   <string name="first_time_download">Téléchargement des régions</string>
-  <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. Pour la plupart des fonctionnalités de l\'application, vous devez avoir des données accessibles hors-ligne que vous pouvez télécharger (Paramètres -&gt; Données) ou préparer vous-même. Vous pourrez alors rechercher une adresse, un Point d\'Intérêt (PI), un moyen de transport public.</string>
+  <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. La plupart des fonctionnalités de l\'application nécessitent des données régionales, utilisables hors-ligne, que vous pouvez au préalable télécharger ('Paramètres' → 'Données hors-ligne') ou préparer vous-même. Ces données permettront de visualiser les cartes et de rechercher une adresse, un point d\'intérêt (PI) ou un transport en commun.</string>
   <string name="search_poi_location">Recherche d\'un signal…</string>
   <string name="search_near_map">Rechercher près du dernier emplacement</string>
   <string name="search_nearby">Rechercher à proximité</string>
@@ -1553,14 +1553,25 @@
 <string name="share_route_as_gpx">Partager l\'itinéraire au format GPX</string>
 <string name="share_route_subject">Itinéraire partagé via OsmAnd</string>
 	<string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
-	<string name="osmo_settings_descr">Voir la clé unique d\'enregistrement de l\'appareil et les autres paramètres spécifiques de suivi</string>
+	<string name="osmo_settings_descr">Configurer les paramètres de suivi et définir son canal de suivi personnel</string>
 	<string name="osmo_plugin_description">OpenStreetMap-Monitoring - Suivi en temps réel avec de nombreuses fonctionnalités de contrôle à distance http://osmo.mobi</string>
 	<string name="osmo_plugin_name">OSMo (suivi en temps réel)</string>
 	<string name="osmo_settings">OSMo</string>
 	<string name="osmo_register_device">Enregistrement de l\'appareil…</string>
 	<string name="osmo_io_error">Problème de connection OSMo : </string>
-	<string name="osmo_mode_on">Arrêter\nOSMo</string>
-	<string name="osmo_mode_off">Démarrer\nOSMo</string>
+	<string name="osmo_mode_on">Arrêter\nsession OSMo</string>
+	<string name="osmo_mode_off">Démarrer\nsession OSMo</string>
+	<string name="osmo_mode_restart">Redémarrer\nsession OSMo</string>
+	<string name="osmo_settings_debug">Informations de débogage</string>
+	<string name="osmo_tracker_id">Identifiant personnel de suivi</string>
+	<string name="osmo_tracker_id_descr">Cliquer pour voir ou partager l\'identifiant de suivi. 
+       L\'utilisation d\'appareils connectés par identifiant de suivi permettra de suivre tous les mouvements de cet appareil ! Pour se déconnecter, sélectionnez l\'option Redémarrer.</string>
+	<string name="osmo_session_token">Marque de session : %1$s</string>
+	<string name="osmo_auth_pending">En attente de l\'autorisation…</string>
+	<string name="osmo_locations_sent">Emplacements envoyés %1$d (en mémoire tampon %2$d) </string>
+	<string name="osmo_conn_successfull">Connexion établie : %1$s </string>
+	<string name="osmo_auto_send_locations_descr">Démarrer automatiquement une session de suivi et l\'envoi des emplacements dès le démarrage de l\'application</string>
+	<string name="osmo_auto_send_locations">Démarrage automatique de session de suivi</string>
 <string name="keep_informing_never">Jamais</string>
 <string name="keep_informing_descr">Annoncer les instructions de navigation à intervalles réguliers</string>
 <string name="keep_informing">Répéter les instructions de navigation</string>
@@ -1573,4 +1584,11 @@
 <item>Tardive</item>
 <item>Dans les derniers mètres</item>
 </string-array>
+<string name="share_fav">Partager</string>
+<string name="share_fav_subject">Favoris partagés via OsmAnd</string>
+<string name="use_points_as_intermediates">Calculer un intinéraire entre des points</string>
+<string name="tip_recent_changes_1_8_alpha">Nouveautés de la version 1.8 :
+* Calcul d\'itinéraire entre les points d\'une trace GPX
+* Modification de la présentation des pays pour les téléchargements (possibilité de rechercher les noms locaux)
+</string>
     </resources>
