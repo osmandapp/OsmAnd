@@ -1661,4 +1661,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_register_device">Registrando dispositivo... </string>
     <string name="share_fav">Compartir</string>
 	<string name="share_fav_subject">Favoritos compartidos a través de OsmAnd</string>
-	</resources>
+	<string name="use_points_as_intermediates">Calcular ruta entre puntos</string>
+    </resources>
