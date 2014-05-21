@@ -1722,4 +1722,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_register_device">Rejestrowanie urządzenia... </string>
     <string name="share_fav">Udostępnij</string>
 	<string name="share_fav_subject">Ulubione miejsca udostępnione przez OsmAnd</string>
-	</resources>
+	<string name="use_points_as_intermediates">Oblicz trasę między punktami</string>
+    </resources>
