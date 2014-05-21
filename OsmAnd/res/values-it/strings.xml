@@ -1693,7 +1693,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="use_displayed_track_for_navigation">Vuoi usare la traccia visualizzata per la navigazione?</string>
     <string name="tip_recent_changes_1_7_1_t">Novità nella versione 1.7:
     \n\t* IMPORTANTE le mappe dovrebbero essere successive al febbraio 2014.
-	\n\t* Completamente aggiornato il calcolo della rotta (veloce e preciso) - 
+	\n\t* Aggiornato completamente il calcolo della rotta (veloce e preciso)
     \n\t* Nuovo schermata con Pianificazione itinerario (più intuitivo e potente)
     \n\t** NOTA la navigazione del percorso GPX è disponibile dal pulsante Impostazioni Percorso
     \n\t* Scomparsa automatica dei pulsanti nella modalità navigazione 
@@ -1750,7 +1750,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_pt_br">Portoghese (Brasile)</string>
     <string name="index_name_canada">Nord americano - Canada</string>
     <string name="index_item_nation_addresses">indirizzi nazionali</string>
-	<string name="index_item_world_altitude_correction">Correzione altitudine mondiale</string>
+	<string name="index_item_world_altitude_correction">Correzione altitudine mondo</string>
 	<string name="index_item_world_seamarks">Boe mondiali</string>
 	<string name="index_item_world_bitcoin_payments">Pagamenti bitcoin mondiale</string>
 	<string name="index_item_world_basemap">Mappa mondiale generale</string>
