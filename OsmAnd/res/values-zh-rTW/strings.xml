@@ -1751,4 +1751,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="share_fav">分享</string>
 	<string name="share_fav_subject">經由 OsmAnd 分享我的最愛</string>
 	<string name="use_points_as_intermediates">預估兩點之間的路線</string>
+    <string name="tip_recent_changes_1_8_alpha">在1.8的變更：
+        * 
+        * Changed layout of countries for downloads (support local names search)
+    </string>
     </resources>
