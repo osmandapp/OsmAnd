@@ -1765,4 +1765,15 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_locations_sent">發送位置 %1$d（在緩衝區 %2$d） </string>
     <string name="osmo_conn_successfull">建立連線：%1$s </string>
     <string name="osmo_mode_restart">重新啟動 OsMo 工作階段</string>
+    <string name="osmo_settings_debug">除錯資訊</string>
+    <string name="hours_ago">小時前</string>
+    <string name="minutes_ago">分鐘前</string>
+    <string name="seconds_ago">秒前</string>
+    <string name="osmo_connect_to_device_name">裝置名稱</string>
+    <string name="osmo_connect_to_device_tracker_id">追蹤 ID</string>
+    <string name="osmo_connect_to_device">與裝置連結</string>
+    <string name="osmo_join_group">加入群組</string>
+    <string name="osmo_new_device">連接到裝置</string>
+    <string name="osmo_connected_devices">已連接裝置</string>
+    <string name="osmo_groups">OsMo 群組/裝置</string>
     </resources>
