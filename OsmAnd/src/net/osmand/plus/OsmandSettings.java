@@ -632,7 +632,8 @@ public class OsmandSettings {
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumIntPreference<DrivingRegion>(
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 		protected boolean setValue(Object prefs, DrivingRegion val) {
-			((CommonPreference<MetricsConstants>)METRIC_SYSTEM).cachedValue = null;
+			//((CommonPreference<MetricsConstants>)METRIC_SYSTEM).cachedValue = null;
+			((CommonPreference<MetricsConstants>)METRIC_SYSTEM).set(DRIVING_REGION.get().defMetrics);
 			return super.setValue(prefs, val);
 		};
 	}.makeGlobal().cache();
@@ -640,7 +641,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumIntPreference<MetricsConstants>(
-			"default_metric_system_2", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()){
+			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()){
 		protected MetricsConstants getDefaultValue() {
 			return DRIVING_REGION.get().defMetrics;
 		};
