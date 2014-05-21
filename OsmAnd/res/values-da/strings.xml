@@ -1787,7 +1787,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="share_fav_subject">Favoritter delt via Osmand</string>
 	<string name="use_points_as_intermediates">Beregn rute mellem punkter</string>
     <string name="tip_recent_changes_1_8_alpha">Ændringer i 1.8:
-         * Beregn rute mellem rutepunkter i GPX spor
-         * Ændret udseende for hentning af lande for downloads (understøtter søgning på lokale navne)
+         * Beregn rute mellem rutepunkter i GPX-spor
+         * Ændret udseende for hentning af lande (understøtter søgning på lokale navne)
     </string>
     </resources>
