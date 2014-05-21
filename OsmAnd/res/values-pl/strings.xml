@@ -1723,4 +1723,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="share_fav">Udostępnij</string>
 	<string name="share_fav_subject">Ulubione miejsca udostępnione przez OsmAnd</string>
 	<string name="use_points_as_intermediates">Oblicz trasę między punktami</string>
+    <string name="tip_recent_changes_1_8_alpha">Zmiany w wersji 1.8:
+        * Obliczanie trasy pomiędzy punktami w zapisanym śladzie GPX
+        * Zmieniono wygląd krajów do pobrania (wsparcie wyszukiwania nazw lokalnych)
+    </string>
     </resources>
