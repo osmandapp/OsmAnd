@@ -12,6 +12,7 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.text.format.DateFormat;
@@ -25,6 +26,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 	public static final String DEFINE_EDIT = "DEFINE_EDIT";
 	private Preference debugPref;
 	private Preference trackerId;
+	private CheckBoxPreference sendLocationsref;
 	
 	
 	@Override
@@ -34,13 +36,21 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		PreferenceScreen grp = getPreferenceScreen();
 		
 		
+		
 		trackerId = new Preference(this);
 		trackerId.setTitle(R.string.osmo_tracker_id);
 		trackerId.setSummary(R.string.osmo_tracker_id_descr);
+		trackerId.setOnPreferenceClickListener(this);
+		grp.addPreference(trackerId);
+		
+		sendLocationsref = createCheckBoxPreference(settings.OSMO_AUTO_SEND_LOCATIONS);
+		sendLocationsref.setTitle(R.string.osmo_auto_send_locations);
+		sendLocationsref.setSummary(R.string.osmo_auto_send_locations_descr);
+		grp.addPreference(sendLocationsref);
 		
 		debugPref = new Preference(this);
 		debugPref.setTitle(R.string.osmo_settings_debug);
-		
+		debugPref.setOnPreferenceClickListener(this);
 		updateDebugPref();
 		grp.addPreference(debugPref);
     }
@@ -50,8 +60,6 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		OsMoService service = plugin.getService();
 		OsMoTracker tracker = plugin.getTracker();
 		StringBuilder s = new StringBuilder();
-		s.append(getString(R.string.osmo_settings_uuid)).append(" : ")
-				.append(getMyApplication().getSettings().OSMO_DEVICE_KEY.get().toUpperCase()).append("\n");
 		if(service.isConnected()) {
 			int seconds = (int) ((System.currentTimeMillis() - service.getConnectionTime()) / 1000);
 			s.append(getString(R.string.osmo_conn_successfull, Algorithms.formatDuration(seconds))).append("\n");
@@ -62,13 +70,18 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 				s.append(getString(R.string.osmo_session_token, si.token)).append("\n");
 			}
 		} else {
-			s.append(getString(R.string.osmo_io_error) + service.getLastRegistrationError()).append("\n");
+			String err = service.getLastRegistrationError();
+			if(err == null) {
+				err = "...";
+			}
+			s.append(getString(R.string.osmo_io_error) + err).append("\n");
 		}
 		s.append(getString(R.string.osmo_locations_sent,
 				tracker.getLocationsSent(),
-				tracker.getBufferLocationsSize()));
+				tracker.getBufferLocationsSize())).append("\n");
+		s.append(getString(R.string.osmo_settings_uuid)).append(" : ")
+		.append(getMyApplication().getSettings().OSMO_DEVICE_KEY.get().toUpperCase()).append("\n");
 		debugPref.setSummary(s.toString().trim());
-		debugPref.setOnPreferenceClickListener(this);
 	}
 	
 	@Override
@@ -90,6 +103,19 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+	
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		boolean p = super.onPreferenceChange(preference, newValue);
+		String id = preference.getKey();
+		if (id.equals(settings.OSMO_AUTO_SEND_LOCATIONS.getId())) {
+			if ((Boolean) newValue) {
+				final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
+				plugin.getTracker().enableTracker();
+			}
+		}
+		return p;
 	}
 
 

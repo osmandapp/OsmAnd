@@ -128,14 +128,12 @@ public class OsMoThread {
 	protected void checkAsyncSocket() {
 		long delay = HEARTBEAT_DELAY;
 		try {
-			if (selector == null) {
-				stopThread = true;
+//			if (selector == null) {
+//				stopThread = true;
+			if(activeChannel == null || reconnect) {
+				initConnection();
 			} else {
-				if(activeChannel == null || reconnect) {
-					initConnection();
-				} else {
-					checkSelectedKeys();
-				}
+				checkSelectedKeys();
 			}
 		} catch (Exception e) {
 			log.info("Exception selecting socket", e);

@@ -12,7 +12,6 @@ import org.json.JSONObject;
 public class OsMoTracker implements OsMoSender, OsMoReactor {
 	private ConcurrentLinkedQueue<Location> bufferOfLocations = new ConcurrentLinkedQueue<Location>();
 	private Map<String, Location> otherLocations = new ConcurrentHashMap<String, Location>();
-	private boolean trackerStarted;
 	private boolean startSendingLocations;
 	private OsmandMapTileView view;
 	private OsMoService service;
@@ -24,12 +23,22 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 		service.registerReactor(this);
 	}
 	
+	public boolean isEnabledTracker() {
+		return startSendingLocations;
+	}
+	
 	public void enableTracker() {
-		startSendingLocations = true;
+		if(!startSendingLocations) {
+			startSendingLocations = true;
+			service.pushCommand("TRACKER_SESSION_OPEN");
+		}
 	}
 	
 	public void disableTracker() {
-		startSendingLocations = false;
+		if(startSendingLocations) {
+			startSendingLocations = false;
+			service.pushCommand("TRACKER_SESSION_CLOSE");
+		}
 	}
 	
 	public void startTrackingId(String id) {
@@ -44,15 +53,6 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 
 	@Override
 	public String nextSendCommand(OsMoThread thread) {
-		if (trackerStarted != startSendingLocations) {
-			if (!trackerStarted) {
-				trackerStarted = true;
-				return "TRACKER_SESSION_OPEN";
-			} else {
-				trackerStarted = false;
-				return "TRACKER_SESSION_CLOSE";
-			}
-		}
 		if(!bufferOfLocations.isEmpty()){
 			Location loc = bufferOfLocations.poll();
 			StringBuilder cmd = new StringBuilder("T|");

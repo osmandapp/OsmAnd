@@ -28,7 +28,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	public OsMoPlugin(final OsmandApplication app) {
 		service = new OsMoService(app);
 		tracker = new OsMoTracker(service);
-		tracker.enableTracker();
+		if(app.getSettings().OSMO_AUTO_SEND_LOCATIONS.get()) {
+			tracker.enableTracker();
+		}
 		groups = new OsMoGroups(service, tracker, app.getSettings());
 		this.app = app;
 	}
@@ -74,17 +76,23 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 	@Override
 	public void addMonitorActions(ContextMenuAdapter qa, MonitoringInfoControl li, final OsmandMapTileView view) {
-		final boolean off = !service.isConnected();
-		qa.item(off ? R.string.osmo_mode_off : R.string.osmo_mode_on)
-				.icon(off ? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big)
+		//final boolean off = !service.isConnected();
+		final boolean autosend = app.getSettings().OSMO_AUTO_SEND_LOCATIONS.get();
+		final boolean offTracker = tracker.isEnabledTracker();
+		qa.item(autosend ? R.string.osmo_mode_restart :
+				( offTracker ? R.string.osmo_mode_off : R.string.osmo_mode_on))
+				.icon(offTracker ? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big)
 				.listen(new OnContextMenuClick() {
 
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						if (off) {
-							service.connect(true);
+						if(autosend) {
+							tracker.disableTracker();
+							tracker.enableTracker();
+						} else if (offTracker) {
+							tracker.enableTracker();
 						} else {
-							service.disconnect();
+							tracker.disableTracker();
 						}
 					}
 				}).reg();
