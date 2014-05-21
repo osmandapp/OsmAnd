@@ -124,6 +124,19 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		grp.setKey("osmo_settings");
 		screen.addPreference(grp);
 	}
+	
+	@Override
+	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
+		helper.item(R.string.osmo_groups).icons(R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						Intent intent = new Intent(mapActivity, OsMoGroupsActivity.class);
+						mapActivity.startActivity(intent);
+					}
+				}).reg();
+	}
+	
 
 	@Override
 	public String getId() {

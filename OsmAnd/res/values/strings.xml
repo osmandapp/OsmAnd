@@ -9,6 +9,16 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="hours_ago">hours ago</string>
+    <string name="minutes_ago">min ago</string>
+    <string name="seconds_ago">sec ago</string>
+    <string name="osmo_connect_to_device_name">Name of device</string>
+    <string name="osmo_connect_to_device_tracker_id">Tracker id</string>
+    <string name="osmo_connect_to_device">Link with device</string>
+    <string name="osmo_join_group">Join group</string>
+    <string name="osmo_new_device">New device</string>
+    <string name="osmo_connected_devices">Connected devices</string>
+    <string name="osmo_groups">OsMo Groups/Devices</string>
     <string name="osmo_auto_send_locations_descr">Automatically start tracker session and send locations after application startup</string>
     <string name="osmo_auto_send_locations">Automatically start tracker session</string>
     <string name="osmo_tracker_id">Personal tracker id</string>

@@ -1,12 +1,9 @@
 package net.osmand.plus;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
-import android.view.Window;
 import net.osmand.IProgress;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.FavouritesActivity;
@@ -18,6 +15,8 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivityType;
+import android.app.Activity;
+import android.view.Window;
 
 public class OsmAndAppCustomization {
 	

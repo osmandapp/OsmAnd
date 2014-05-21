@@ -9,10 +9,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.osmo.OsMoService.SessionInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.content.Context;
 
 public class OsMoGroups implements OsMoReactor {
 	
@@ -22,7 +26,6 @@ public class OsMoGroups implements OsMoReactor {
 	private static final String NAME = "name";
 	private static final String USER_NAME = "userName";
 	private static final String GROUP_NAME = "group_name";
-	private static final String MY_GROUP_TRACKER_ID = "my_group_tracker_id";
 	private OsMoTracker tracker;
 	private ConcurrentHashMap<String, OsMoGroup> groups = new ConcurrentHashMap<String, OsMoGroup>();
 	private OsMoGroup mainGroup;
@@ -33,7 +36,6 @@ public class OsMoGroups implements OsMoReactor {
 		public String name;
 		public String userName;
 		public String groupId;
-		public String myGroupTrackerId;
 		public boolean active;
 		
 		public Map<String, OsMoUser> users = new ConcurrentHashMap<String, OsMoGroups.OsMoUser>(); 
@@ -42,7 +44,10 @@ public class OsMoGroups implements OsMoReactor {
 			return groupId == null;
 		}
 		
-		public String getVisibleName(){
+		public String getVisibleName(Context ctx){
+			if(isMainGroup()) {
+				return ctx.getString(R.string.osmo_connected_devices);
+			}
 			if(userName != null && userName.length() > 0) {
 				return userName;
 			}
@@ -60,7 +65,12 @@ public class OsMoGroups implements OsMoReactor {
 		public String serverName;
 		public String userName;
 		public String trackerId;
+		public OsMoGroup group ;
 		public List<OsMoMessage> messages = new ArrayList<OsMoMessage>();
+		
+		public OsMoGroup getGroup() {
+			return group;
+		}
 		
 		public String getVisibleName(){
 			if(userName != null && userName.length() > 0) {
@@ -87,6 +97,9 @@ public class OsMoGroups implements OsMoReactor {
 		try {
 			JSONObject obj = new JSONObject(grp);
 			parseGroupUsers(mainGroup, obj);
+			for(String connectedDevice : mainGroup.users.keySet()) {
+				tracker.startTrackingId(connectedDevice);
+			}
 			if(!obj.has("groups")) {
 				return;
 			}
@@ -95,9 +108,6 @@ public class OsMoGroups implements OsMoReactor {
 				JSONObject o = (JSONObject) groups.get(i);
 				OsMoGroup group = new OsMoGroup();
 				group.groupId = o.getString(GROUP_ID);
-				if(o.has(MY_GROUP_TRACKER_ID)) {
-					group.myGroupTrackerId = o.getString(MY_GROUP_TRACKER_ID);
-				}
 				if(o.has(NAME)) {
 					group.name = o.getString(NAME);
 				}
@@ -164,6 +174,7 @@ public class OsMoGroups implements OsMoReactor {
 		for (int i = 0; i < users.length(); i++) {
 			JSONObject o = (JSONObject) users.get(i);
 			OsMoUser user = new OsMoUser();
+			user.group = gr;
 			if(o.has("serverName")) {
 				user.serverName = o.getString("serverName");
 			}
@@ -172,6 +183,21 @@ public class OsMoGroups implements OsMoReactor {
 			}
 			user.trackerId = o.getString(TRACKER_ID);
 		}
+	}
+	
+	public ConcurrentHashMap<String, OsMoGroup> getGroups() {
+		return groups;
+	}
+	
+	public OsMoUser registerUser(String trackerId, String nameUser) {
+		OsMoUser us = new OsMoUser();
+		us.group = mainGroup;
+		us.trackerId = trackerId;
+		us.userName = nameUser;
+		mainGroup.users.put(trackerId, us);
+		tracker.startTrackingId(trackerId);
+		saveGroups();
+		return us;
 	}
 
 	@Override
@@ -196,24 +222,26 @@ public class OsMoGroups implements OsMoReactor {
 			joinGroup(gid);
 		} else if(command.startsWith("JOIN_GROUP:")) {
 			String gid = command.substring(command.indexOf(':') + 1);
+			String myGroupTrackerId = getMyGroupTrackerId();
 			OsMoGroup gr = groups.get(gid);
 			if(gr != null) {
 				mergeGroup(gr, obj, true);
 				gr.active = true;
 				for(String key : gr.users.keySet()) {
-					if (!key.equals(gr.myGroupTrackerId)) {
+					if (!key.equals(myGroupTrackerId)) {
 						tracker.startTrackingId(key);
 					}
 				}
 			}
 			return true;
 		} else if(command.startsWith("LEAVE_GROUP:")) {
+			String myGroupTrackerId = getMyGroupTrackerId();
 			String gid = command.substring(command.indexOf(':') + 1);
 			OsMoGroup gr = groups.get(gid);
 			if(gr != null) {
 				gr.active = false;
 				for(String key : gr.users.keySet()) {
-					if (!key.equals(gr.myGroupTrackerId)) {
+					if (!key.equals(myGroupTrackerId)) {
 						tracker.stopTrackingId(key);
 					}
 				}
@@ -222,6 +250,15 @@ public class OsMoGroups implements OsMoReactor {
 		}
 		return false;
 	}
+
+	private String getMyGroupTrackerId() {
+		String myGroupTrackerId = "";
+		SessionInfo currentSessionInfo = service.getCurrentSessionInfo();
+		if(currentSessionInfo != null) {
+			myGroupTrackerId = currentSessionInfo.groupTrackerId;
+		}
+		return myGroupTrackerId;
+	}
 	
 	
 	private void mergeGroup(OsMoGroup gr, JSONObject obj, boolean deleteUsers) {
@@ -229,9 +266,7 @@ public class OsMoGroups implements OsMoReactor {
 			if(obj.has(GROUP_NAME)) {
 				gr.name = obj.getString(GROUP_NAME);
 			}
-			if(obj.has(MY_GROUP_TRACKER_ID)) {
-				gr.myGroupTrackerId = obj.getString(MY_GROUP_TRACKER_ID);
-			}
+			String myGroupTrackerId = getMyGroupTrackerId();
 			JSONArray arr = obj.getJSONArray(GROUP_TRACKERS);
 			Set<String> toDelete = new HashSet<String>(gr.users.keySet());
 			for (int i = 0; i < arr.length(); i++) {
@@ -241,10 +276,11 @@ public class OsMoGroups implements OsMoReactor {
 				OsMoUser us = gr.users.get(tid);
 				if (us == null) {
 					us = new OsMoUser();
+					us.group = gr;
 					us.trackerId = tid;
 					gr.users.put(tid, us);
 					if(gr.active) {
-						if (!tid.equals(gr.myGroupTrackerId)) {
+						if (!tid.equals(myGroupTrackerId)) {
 							tracker.startTrackingId(tid);
 						}
 					}
@@ -279,5 +315,6 @@ public class OsMoGroups implements OsMoReactor {
 	public void leaveGroup(OsMoGroup group) {
 		service.pushCommand("LEAVE_GROUP|"+group.groupId);
 	}
+
 
 }

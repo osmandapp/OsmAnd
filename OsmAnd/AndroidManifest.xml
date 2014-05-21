@@ -105,7 +105,7 @@
 		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.rastermaps.SettingsRasterMapsActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		<activity android:name="net.osmand.plus.osmo.SettingsOsMoActivity" android:configChanges="keyboardHidden|orientation"></activity>
+		
 		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.audionotes.SettingsAudioVideoActivity" android:configChanges="keyboardHidden|orientation"></activity>
@@ -118,6 +118,10 @@
         <activity android:name="net.osmand.plus.activities.FavouritesActivity"></activity>
         <activity android:name="net.osmand.plus.activities.PluginsActivity"></activity>
         <activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity"></activity>
+        
+        
+        <activity android:name="net.osmand.plus.osmo.SettingsOsMoActivity" android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name="net.osmand.plus.osmo.OsMoGroupsActivity"></activity>
         
         
         <activity android:name="net.osmand.plus.activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>

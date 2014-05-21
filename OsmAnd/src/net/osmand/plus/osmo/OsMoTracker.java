@@ -5,7 +5,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.Location;
-import net.osmand.plus.views.OsmandMapTileView;
 
 import org.json.JSONObject;
 
@@ -13,9 +12,14 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	private ConcurrentLinkedQueue<Location> bufferOfLocations = new ConcurrentLinkedQueue<Location>();
 	private Map<String, Location> otherLocations = new ConcurrentHashMap<String, Location>();
 	private boolean startSendingLocations;
-	private OsmandMapTileView view;
 	private OsMoService service;
 	private int locationsSent = 0;
+	private OsmoTrackerListener trackerListener = null;
+	
+	public interface OsmoTrackerListener {
+		
+		public void locationChange(String trackerId);
+	}
 
 	public OsMoTracker(OsMoService service) {
 		this.service = service;
@@ -41,9 +45,12 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 		}
 	}
 	
+	public Location getLastLocation(String trackerId) {
+		return otherLocations.get(trackerId);
+	}
+	
 	public void startTrackingId(String id) {
 		service.pushCommand("LISTEN|"+id);
-		otherLocations.put(id, null);
 	}
 	
 	public void stopTrackingId(String id) {
@@ -99,13 +106,6 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 		bufferOfLocations.add(l);
 	}
 	
-	public void setView(OsmandMapTileView view) {
-		this.view = view;
-	}
-	
-	public OsmandMapTileView getView() {
-		return view;
-	}
 
 	@Override
 	public boolean acceptCommand(String command, String data, JSONObject obj, OsMoThread thread) {
@@ -140,15 +140,23 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 					loc.setSpeed(speed);
 				}
 				otherLocations.put(tid, loc);
-				OsmandMapTileView v = view;
-				if(v != null){
-					v.refreshMap();
+				if(trackerListener != null){
+					trackerListener.locationChange(tid);
 				}
 			}
 			return true;
 		}
 		return false;
 	}
+	
+	public OsmoTrackerListener getTrackerListener() {
+		return trackerListener;
+	}
+	
+	public void setTrackerListener(OsmoTrackerListener trackerListener) {
+		this.trackerListener = trackerListener;
+	}
+
 	
 
 }
