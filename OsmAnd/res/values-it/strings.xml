@@ -1781,4 +1781,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_register_device">Registrazione del dispositivo in corso ... </string>
     <string name="share_fav">Condividi</string>
 	<string name="share_fav_subject">Preferiti condivisi tramite OsmAnd</string>
-	</resources>
+	<string name="use_points_as_intermediates">Calcola il percorso tra i punti</string>
+    </resources>
