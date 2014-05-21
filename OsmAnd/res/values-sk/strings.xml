@@ -1762,4 +1762,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_register_device">Registruje sa zariadenie… </string>
     <string name="share_fav">Zdieľať</string>
 	<string name="share_fav_subject">Obľúbené zdieľané cez OsmAnd</string>
-	</resources>
+	<string name="tip_recent_changes_1_8_alpha">Zmeny v 1.8:
+        * Počítanie trasy medzi bodmi v GPX stope
+        * Zmenené rozmiestnenie krajín na stiahnutie (podporuje vyhľadanie podľa lokálnych názvov)
+    </string>
+    <string name="use_points_as_intermediates">Vypočítať trasu medzi bodmi</string>
+    </resources>
