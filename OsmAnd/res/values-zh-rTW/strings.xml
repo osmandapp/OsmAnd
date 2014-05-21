@@ -3,7 +3,7 @@
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追踪外掛元件，用位置日誌服務(GPX 記錄，網上追踪查詢)</string>
-    <string name="non_optimal_route_calculation">過遠的距離計算，可能不是最佳的路線</string>
+    <string name="non_optimal_route_calculation">預估過遠的距離，可能不是最佳的路線</string>
     <string name="tip_recent_changes_0_8_4_t">在0.8.4的變更：
 	\n\t* Some bug fixes
 	\n\t* Map does not lose position lock after interruptions
@@ -685,14 +685,14 @@
 	<string name="select_all">全選</string>
 	<string name="reload">重整</string>
 	<string name="fast_route_mode">最快路線</string>
-	<string name="fast_route_mode_descr">啟用以計算最快路線或停用為最短路線 </string>
-	<string name="tiles_to_download_estimated_size">下載縮放第{0}級別{1}張地圖圖磚({2} MB)</string>
+	<string name="fast_route_mode_descr">啟用為預估最快的路線而停用則為最短的路線 </string>
+	<string name="tiles_to_download_estimated_size">在縮放第{0}級別，下載{1}張地圖圖磚({2} MB)</string>
 	<string name="context_menu_item_download_map">下載地圖</string>
 	<string name="select_max_zoom_preload_area">選擇要預載的最大縮放級別</string>
 	<string name="maps_could_not_be_downloaded">此地圖無法下載</string>
 	<string name="continuous_rendering">連續繪製</string>
 	<string name="continuous_rendering_descr">顯示連續繪製代替立即圖像</string>
-	<string name="rendering_exception">在繪製選擇地區時發生錯誤</string>
+	<string name="rendering_exception">在繪製已選擇的地區時發生錯誤</string>
 	<string name="show_point_options">使用位置 …</string>
 	<string name="renderer_load_sucess">繪製器已成功載入</string>
 	<string name="renderer_load_exception">發生異常：繪製器未載入</string>
@@ -901,7 +901,7 @@
 	<string name="reload_indexes">重新讀取離線資料</string>
 	<string name="download_indexes_descr">透過網路下載或更新離線資料</string>
 	<string name="download_indexes">下載離線資料</string>
-	<string name="use_online_routing_descr">使用網際網路計算路線</string>
+	<string name="use_online_routing_descr">使用網際網路預估路線</string>
 	<string name="use_online_routing">使用線上導航</string>
 	<string name="osm_settings_descr">向 OSM 提出意見，需指定 Openstreetmap.org (OSM) 設定</string>
 	<string name="data_settings_descr">指定語言，下載/重載資料</string>
@@ -1112,7 +1112,7 @@
     <string name="stop_routing_confirm">您確定您要停止導航嗎？</string>
     <string name="clear_dest_confirm">您確定您想要清除您的目的地點(含中途點)？</string>
     <string name="precise_routing_mode">精確的路線 (alpha)</string>
-    <string name="precise_routing_mode_descr">允許去計算精確的路線而無差錯。仍然有距離限制並且緩慢。</string>
+    <string name="precise_routing_mode_descr">允許去預估精確而無差錯的路線。仍然有距離限制並且緩慢。</string>
     <string name="recording_context_menu_show">顯示</string>
     <string name="recording_photo_description">照片 %1$s 中的 %2$s</string>
     <string name="av_def_action_picture">拍攝照片</string>
@@ -1599,12 +1599,12 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="auto_zoom_close">特寫</string>
     <string name="auto_zoom_far">中等</string>
     <string name="auto_zoom_farthest">遠程</string>
-    <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 離線路線可能要花很長的時間(或有時無動作)。為有更好的效能，您可能需要增加中途點。</string>
+    <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 的離線路線可能要花很長的時間(或有時無動作)。為了有更好的效能，您或許需要增加中途點。</string>
     <string name="default_and">與</string>
     <string name="default_or">或</string>
 	<string name="remember_choice">記住我的選擇</string>
     <string name="gps_status_eclipsim">GPS 狀態</string>
-    <string name="animate_routing_route_not_calculated">請先計算行車路線</string>
+    <string name="animate_routing_route_not_calculated">請先計劃行車路線</string>
     <string name="animate_routing_route">使用模擬計算行車路線 </string>
     <string name="animate_routing_gpx">使用 GPX 軌跡模擬</string>
     <string name="osmodroid_refresh">更新頻道</string>
@@ -1635,7 +1635,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地...</string>
     <string name="copying_osmand_files_descr">複製 OsmAnd 檔案到新的目的地 (%s)</string>
     <string name="copying_osmand_files">複製 OsmAnd 的檔案</string>
-    <string name="calculate_osmand_route_gpx">計算 OsmAnd 離線路線</string>
+    <string name="calculate_osmand_route_gpx">OsmAnd 預估離線路線</string>
     <string name="android_19_location_disabled">由於 KitKat 版本，您無法下載和更新地圖於之前的存儲位置 (%s)。您是否想變更以允許複製所有檔案到那裡？
         \n注意：舊的檔案將保持不變。
         \n注意：它將不可能在 OsmAnd 和 OsmAnd + 兩者之間共用檔案。 </string>
@@ -1661,15 +1661,15 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="route_info">路線資訊</string>
     <string name="keep_and_add_destination_point">加為目的地點</string>
     <string name="use_displayed_track_for_navigation">您是否要將顯示軌跡使用於導航？</string>
-    <string name="calculate_osmand_route_without_internet">計算的 OsmAnd 路段沒有網際網路</string>
-    <string name="gpx_option_calculate_first_last_segment">計算最初和最後路段的 OsmAnd 路線</string>
+    <string name="calculate_osmand_route_without_internet">OsmAnd 預估的路段沒有網際網路</string>
+    <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路線</string>
     <string name="tip_recent_changes_1_7_1_t">在1.7的變更：
     \n\t* 重要，地圖應該會比 2014 年 2 月更新。
 	\n\t* 完全修改的路線（快速和精確）-↵ 
     \n\t* 新的螢幕畫面與路線規劃（更直觀和更強大） 
     \n\t** 注意，在路線設定按鈕之下可用 GPX 路線
     \n\t* 在導航模式下自動隱藏按鈕
-    \n\t* 計算離線路線到 GPX 路線的第一點（\'經過全程軌跡\'選項）
+    \n\t* 預估離線路線到 GPX 路線的第一點（\'經過全程軌跡\'選項）
 	\n\t* 在隧道主動的模擬 
 	\n\t* 有很多小的 UX (使用者體驗)改進和適用性修復
 	\n\t* 語音速率協助工具設定
@@ -1750,4 +1750,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_register_device">註冊裝置... </string>
     <string name="share_fav">分享</string>
 	<string name="share_fav_subject">經由 OsmAnd 分享我的最愛</string>
-	</resources>
+	<string name="use_points_as_intermediates">預估兩點之間的路線</string>
+    </resources>
