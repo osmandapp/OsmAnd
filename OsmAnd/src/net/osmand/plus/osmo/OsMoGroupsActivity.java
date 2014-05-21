@@ -71,7 +71,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	private static final long RECENT_THRESHOLD = 60000;
 
-	private Set<String> groupsToDelete = new LinkedHashSet<String>();
 	private OsMoPlugin osMoPlugin;
 	private OsMoGroupsAdapter adapter;
 	private LatLon mapLocation;

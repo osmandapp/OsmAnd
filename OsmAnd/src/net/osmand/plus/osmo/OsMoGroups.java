@@ -20,6 +20,9 @@ import android.content.Context;
 
 public class OsMoGroups implements OsMoReactor {
 	
+	private static final String GROUPS = "groups";
+	private static final String USERS = "users";
+	private static final String SERVER_NAME = "serverName";
 	private static final String TRACKER_ID = "trackerId";
 	private static final String GROUP_TRACKERS = "group_trackers";
 	private static final String GROUP_ID = "group_id";
@@ -100,10 +103,10 @@ public class OsMoGroups implements OsMoReactor {
 			for(String connectedDevice : mainGroup.users.keySet()) {
 				tracker.startTrackingId(connectedDevice);
 			}
-			if(!obj.has("groups")) {
+			if(!obj.has(GROUPS)) {
 				return;
 			}
-			JSONArray groups = obj.getJSONArray("groups");
+			JSONArray groups = obj.getJSONArray(GROUPS);
 			for (int i = 0; i < groups.length(); i++) {
 				JSONObject o = (JSONObject) groups.get(i);
 				OsMoGroup group = new OsMoGroup();
@@ -142,6 +145,7 @@ public class OsMoGroups implements OsMoReactor {
 				obj.put(GROUP_ID, gr.groupId);
 				ar.put(obj);	
 			}
+			mainObj.put(GROUPS, ar);
 		} catch (JSONException e) {
 			e.printStackTrace();
 			service.showErrorMessage(e.getMessage());
@@ -157,31 +161,32 @@ public class OsMoGroups implements OsMoReactor {
 				obj.put(USER_NAME, u.userName);
 			}
 			if (u.serverName != null) {
-				obj.put("serverName", u.serverName);
+				obj.put(SERVER_NAME, u.serverName);
 			}
 			obj.put(TRACKER_ID, u.trackerId);
 			
 			ar.put(obj);
 		}
-		grObj.put("users", ar);
+		grObj.put(USERS, ar);
 	}
 
 	private void parseGroupUsers(OsMoGroup gr, JSONObject obj) throws JSONException {
-		if(!obj.has("users")) {
+		if(!obj.has(USERS)) {
 			return;
 		}
-		JSONArray users = obj.getJSONArray("users");
+		JSONArray users = obj.getJSONArray(USERS);
 		for (int i = 0; i < users.length(); i++) {
 			JSONObject o = (JSONObject) users.get(i);
 			OsMoUser user = new OsMoUser();
 			user.group = gr;
-			if(o.has("serverName")) {
-				user.serverName = o.getString("serverName");
+			if(o.has(SERVER_NAME)) {
+				user.serverName = o.getString(SERVER_NAME);
 			}
 			if(o.has(USER_NAME)) {
 				user.userName = o.getString(USER_NAME);
 			}
 			user.trackerId = o.getString(TRACKER_ID);
+			gr.users.put(user.trackerId, user);
 		}
 	}
 	
