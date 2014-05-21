@@ -1750,7 +1750,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_pt_br">Portoghese (Brasile)</string>
     <string name="index_name_canada">Nord americano - Canada</string>
     <string name="index_item_nation_addresses">indirizzi nazionali</string>
-	<string name="index_item_world_altitude_correction">Correzione altitudine mondo</string>
+	<string name="index_item_world_altitude_correction">Correzione altitudine mondiale</string>
 	<string name="index_item_world_seamarks">Boe mondiali</string>
 	<string name="index_item_world_bitcoin_payments">Pagamenti bitcoin mondiale</string>
 	<string name="index_item_world_basemap">Mappa mondiale generale</string>
@@ -1782,4 +1782,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="share_fav">Condividi</string>
 	<string name="share_fav_subject">Preferiti condivisi tramite OsmAnd</string>
 	<string name="use_points_as_intermediates">Calcola il percorso tra i punti</string>
+    <string name="tip_recent_changes_1_8_alpha">Novità nella versione 1.8:
+        * Calcola il percorso tra i punti di un tracciato GPX
+        * Modificato l'aspetto per per il download degli stati (supporto alla ricerca con i nomi locali)
+    </string>
     </resources>
