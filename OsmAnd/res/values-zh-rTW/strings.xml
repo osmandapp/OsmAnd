@@ -1758,4 +1758,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_auto_send_locations_descr">自動開始追蹤工作階段和發送位置之後啟動應用程式</string>
     <string name="osmo_auto_send_locations">自動開始追蹤工作階段</string>
     <string name="osmo_tracker_id">個人追蹤 ID</string>
+    <string name="osmo_tracker_id_descr">點擊查看或分享追蹤 ID。
+         使用追蹤 ID 連線的裝置將能夠監視該裝置的所有動作！ 要斷開選擇恢復選項。</string>
+    <string name="osmo_session_token">工作階段記號：%1$s</string>
+    <string name="osmo_auth_pending">等候授權...</string>
+    <string name="osmo_locations_sent">發送位置 %1$d（在緩衝區 %2$d） </string>
     </resources>
