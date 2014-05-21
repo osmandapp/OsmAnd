@@ -1735,18 +1735,18 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="share_route_subject">藉由 OsmAnd 分享路線</string>
 	<string name="navigation_intent_invalid">無效的格式：%s</string>
 <string name="osmo_settings_uuid">專有的裝置 ID</string>
-    <string name="osmo_plugin_name">OSMo (進階即時監視)</string>
-    <string name="osmo_settings">OSMo</string>
-   	<string name="osmo_settings_descr">檢視專有的裝置註冊金鑰和其它監視的具體設定 </string>
+    <string name="osmo_plugin_name">OsMo (進階即時監視)</string>
+    <string name="osmo_settings">OsMo</string>
+   	<string name="osmo_settings_descr">組態監視設定值和設定個人監視頻道</string>
     <string name="osmo_plugin_description">OpenStreetMap-監視 - 進階的即時監視，有很多的功能進行遠端控制 http://osmo.mobi</string>
     <string name="keep_informing_never">永不</string>
     <string name="keep_informing_descr">按照定期間隔通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
 	<string name="arrival_distance">抵達通告</string>
     <string name="arrival_distance_descr">您希望抵達通告要有多快？</string>
-    <string name="osmo_io_error">OSMo 連線問題： </string>
-    <string name="osmo_mode_on">停止 OSMo</string>    
-    <string name="osmo_mode_off">啟動 OSMo</string>
+    <string name="osmo_io_error">OsMo 連線問題： </string>
+    <string name="osmo_mode_on">停止 OsMo 工作階段</string>    
+    <string name="osmo_mode_off">啟動 OsMo 工作階段</string>
     <string name="osmo_register_device">註冊裝置... </string>
     <string name="share_fav">分享</string>
 	<string name="share_fav_subject">經由 OsmAnd 分享我的最愛</string>
@@ -1755,4 +1755,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
         * 預估 GPX 軌跡路線點之間的路線
         * 為下載變更了各國的配置（支援本地名稱搜索）
     </string>
+    <string name="osmo_auto_send_locations_descr">自動開始追蹤工作階段和發送位置之後啟動應用程式</string>
+    <string name="osmo_auto_send_locations">自動開始追蹤工作階段</string>
+    <string name="osmo_tracker_id">個人追蹤 ID</string>
     </resources>
