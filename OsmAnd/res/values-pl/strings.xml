@@ -1706,19 +1706,19 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="share_route_as_gpx">Udostępnij trasę jako plik GPX</string>
 	<string name="share_route_subject">Trasa udostępniona przez OsmAnd</string>
 	<string name="navigation_intent_invalid">Nieprawidłowy format : %s</string>
-<string name="osmo_settings_uuid">Unikalny identyfikator urządzenia</string>
-    <string name="osmo_settings_descr">Sprawdź unikalny klucz rejestracyjny urządzenia i inne ustawienia monitorowania </string>
+<string name="osmo_settings_uuid">Unikatowy identyfikator urządzenia</string>
+    <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Zaawansowany Monitoring na Żywo z wieloma funkcjami do zdalnego zarządzania na http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (Zaawansowany Monitoring na Żywo)</string>
-    <string name="osmo_settings">OSMo</string>
+    <string name="osmo_plugin_name">OsMo (Zaawansowany Monitoring na Żywo)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Nigdy</string>
     <string name="keep_informing_descr">Podawaj instrukcje nawigacji w regularnych odstępach czasu</string>
     <string name="keep_informing">Powtarzaj instrukcje nawigacji</string>
 	<string name="arrival_distance">Informacja o odległości do celu</string>
     <string name="arrival_distance_descr">Z jakim wyprzedzeniem ma się pojawić informacja o odległości do celu podróży?</string>
-    <string name="osmo_io_error">OSMo problem z połączeniem : </string>
-    <string name="osmo_mode_on">Wyłącz OSMo</string>    
-    <string name="osmo_mode_off">Uruchom OSMo</string>
+    <string name="osmo_io_error">Problem z połączeniem OsMo: </string>
+    <string name="osmo_mode_on">Zatrzymaj sesję OsMo</string>    
+    <string name="osmo_mode_off">Uruchom sesję OsMo</string>
     <string name="osmo_register_device">Rejestrowanie urządzenia... </string>
     <string name="share_fav">Udostępnij</string>
 	<string name="share_fav_subject">Ulubione miejsca udostępnione przez OsmAnd</string>
@@ -1727,4 +1727,12 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
         * Obliczanie trasy pomiędzy punktami w zapisanym śladzie GPX
         * Zmieniono wygląd krajów do pobrania (wsparcie wyszukiwania nazw lokalnych)
     </string>
+    <string name="osmo_auto_send_locations_descr">Automatycznie uruchom sesję trackera i wysyłaj pozycje po uruchomieniu aplikacji</string>
+    <string name="osmo_auto_send_locations">Automatycznie uruchom sesję trackera</string>
+    <string name="osmo_tracker_id">Osobisty identyfikator trackera</string>
+    <string name="osmo_session_token">Token sesji: %1$s</string>
+    <string name="osmo_auth_pending">Oczekiwanie na autoryzację...</string>
+    <string name="osmo_conn_successfull">Ustanowiono połączenie: %1$s </string>
+    <string name="osmo_mode_restart">Uruchom ponownie sesję OsMo</string>
+    <string name="osmo_settings_debug">Informacje debugowania</string>
     </resources>
