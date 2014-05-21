@@ -1752,4 +1752,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_register_device">Gerät registrieren </string>
     <string name="share_fav">Teilen</string>
 	<string name="share_fav_subject">Über OsmAnd geteilte Favoriten</string>
-	</resources>
+	<string name="use_points_as_intermediates">Route zwischen Punkten berechnen</string>
+    </resources>
