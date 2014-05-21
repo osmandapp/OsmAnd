@@ -1465,4 +1465,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_mode_on">Stoppa OSMo</string>    
     <string name="osmo_mode_off">Starta OSMo</string>
     <string name="use_points_as_intermediates">Beräkna rutt mellan punkter</string>
+    <string name="tip_recent_changes_1_8_alpha">Förändringar i 1.8:
+        * Beräkna rutt mellan ruttpunkter i GPX-spår
+        * Ändrat utseende vid nedladdning av länder (stöd för sökning med lokala namn)
+    </string>
     </resources>
