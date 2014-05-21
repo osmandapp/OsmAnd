@@ -1723,4 +1723,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 </string>
     <string name="share_fav">Compartir</string>
 	<string name="share_fav_subject">Favorits compartits via OsmAnd</string>
-	</resources>
+	<string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
+    </resources>
