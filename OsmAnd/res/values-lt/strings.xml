@@ -1758,4 +1758,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_register_device">Įrenginys registruojamas… </string>
     <string name="share_fav">Bendrinti</string>
 	<string name="share_fav_subject">Įsimintos vietos bendrintos iš OsmAnd</string>
-	</resources>
+	<string name="use_points_as_intermediates">Apskaičiuoti maršrutą tarp taškų</string>
+    </resources>
