@@ -1599,4 +1599,5 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_io_error">Проблема подключения OSMo: </string>
     <string name="share_fav">Поделиться</string>
 	<string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
-	</resources>
+	<string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
+    </resources>
