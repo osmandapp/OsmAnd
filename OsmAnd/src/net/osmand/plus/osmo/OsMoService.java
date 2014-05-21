@@ -35,6 +35,7 @@ public class OsMoService implements OsMoSender {
 	private ConcurrentLinkedQueue<String> commands = new ConcurrentLinkedQueue<String>();
 	private OsmandApplication app;
 	private static final Log log = PlatformUtil.getLog(OsMoService.class);
+	private String lastRegistrationError = null;  
 	
 	
 	
@@ -45,6 +46,15 @@ public class OsMoService implements OsMoSender {
 	
 	public boolean isConnected() {
 		return thread != null && thread.isConnected();
+	}
+	
+	public long getConnectionTime() {
+		return thread == null || !thread.isConnected() ? System.currentTimeMillis() : thread.getConnectionTime(); 
+	}
+	
+	
+	public String getLastRegistrationError() {
+		return lastRegistrationError;
 	}
 	
 	public boolean connect(boolean forceReconnect) {
@@ -85,7 +95,7 @@ public class OsMoService implements OsMoSender {
 	}
 	
 
-	public Exception registerOsmoDeviceKey() {
+	public String registerOsmoDeviceKey() throws IOException {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://api.osmo.mobi/auth");
 		try {
@@ -107,16 +117,13 @@ public class OsMoService implements OsMoSender {
 			log.info("Authorization key : " + r);
 			final JSONObject obj = new JSONObject(r);
 			if(obj.has("error")) {
-				return new RuntimeException(obj.getString("error"));
+				lastRegistrationError = obj.getString("error");
+				throw new RuntimeException(obj.getString("error"));
 			}
 			app.getSettings().OSMO_DEVICE_KEY.set(obj.getString("key"));
-			return null;
-		} catch (ClientProtocolException e) {
-			return e;
-		} catch (IOException e) {
-			return e;
+			return obj.getString("key");
 		} catch (JSONException e) {
-			return e;
+			throw new IOException(e);
 		}
 	}
 	
@@ -124,12 +131,28 @@ public class OsMoService implements OsMoSender {
 		public String hostName;
 		public String port;
 		public String token;
-		
+		// after auth
+		public String protocol = "";
+		public String groupTrackerId;
+		public String trackerId;
+		public String username;
+		public long serverTimeDelta;
+		public long motdTimestamp;
+	}
+	
+	public SessionInfo getCurrentSessionInfo() {
+		if(thread == null) {
+			return null;
+		}
+		return thread.getSessionInfo();
 	}
 	
 	
-	public SessionInfo getSessionToken() throws IOException {
+	public SessionInfo prepareSessionToken() throws IOException {
 		String deviceKey = app.getSettings().OSMO_DEVICE_KEY.get();
+		if(deviceKey.length() == 0) {
+			deviceKey = registerOsmoDeviceKey();
+		}
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://api.osmo.mobi/prepare");
 		try {
@@ -148,14 +171,18 @@ public class OsMoService implements OsMoSender {
 			log.info("Authorization key : " + r);
 			final JSONObject obj = new JSONObject(r);
 			if(obj.has("error")) {
+				lastRegistrationError = obj.getString("error");
 				throw new RuntimeException(obj.getString("error"));
 			}
 			if(!obj.has("address")) {
+				lastRegistrationError = "Host name not specified";
 				throw new RuntimeException("Host name not specified");
 			}
 			if(!obj.has("token")) {
-				throw new RuntimeException("Token not specified");
+				lastRegistrationError = "Token not specified by server";
+				throw new RuntimeException("Token not specified by server");
 			}
+			
 			SessionInfo si = new SessionInfo();
 			String a = obj.getString("address");
 			int i = a.indexOf(':');

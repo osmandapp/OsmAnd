@@ -48,8 +48,9 @@ public class OsMoThread {
 
 	private int authorized = 0; // 1 - send, 2 - authorized
 	private OsMoService service;
-	private SessionInfo token = null;
+	private SessionInfo sessionInfo = null;
 	private SocketChannel activeChannel;
+	private long connectionTime;
 	private ByteBuffer pendingSendCommand;
 	private String readCommand = "";
 	private ByteBuffer pendingReadCommand = ByteBuffer.allocate(2048);
@@ -66,17 +67,6 @@ public class OsMoThread {
 		HandlerThread h = new HandlerThread("OSMo Service");
 		h.start();
 		serviceThread = new Handler(h.getLooper());
-		serviceThread.post(new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					initConnection();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
 		scheduleHeartbeat(HEARTBEAT_DELAY);
 	}
 
@@ -85,17 +75,18 @@ public class OsMoThread {
 	}
 
 	protected void initConnection() throws IOException {
-		if (token == null) {
-			token = service.getSessionToken();
+		if (sessionInfo == null) {
+			sessionInfo = service.prepareSessionToken();
 		}
 		authorized = 0;
 		reconnect = false;
 		selector = Selector.open();
 		SocketChannel activeChannel = SocketChannel.open();
 		activeChannel.configureBlocking(true);
-		activeChannel.connect(new InetSocketAddress(token.hostName, Integer.parseInt(token.port)));
+		activeChannel.connect(new InetSocketAddress(sessionInfo.hostName, Integer.parseInt(sessionInfo.port)));
 		activeChannel.configureBlocking(false);
 		SelectionKey key = activeChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+		connectionTime = System.currentTimeMillis();
 		if (this.activeChannel != null) {
 			stopChannel();
 		}
@@ -267,8 +258,11 @@ public class OsMoThread {
 			if(header.equalsIgnoreCase("TOKEN")) {
 				if(!error){
 					authorized = 2;
-					// TODO delete
-					service.showErrorMessage("OSMo authorization successfull");
+					try {
+						parseAuthCommand(data, obj);
+					} catch (JSONException e) {
+						service.showErrorMessage(e.getMessage());
+					}
 				}
 				continue;
 			}
@@ -283,6 +277,33 @@ public class OsMoThread {
 				log.warn("Command not processed '" + cmd + "'");
 			}
 		}
+	}
+
+	private void parseAuthCommand(String data, JSONObject obj) throws JSONException {
+		if(sessionInfo != null) {
+			if(obj.has("protocol")) {
+				sessionInfo.protocol = obj.getString("protocol");
+			}
+			if(obj.has("now")) {
+				sessionInfo.serverTimeDelta = obj.getLong("now") - System.currentTimeMillis();
+			}
+			if(obj.has("name")) {
+				sessionInfo.username = obj.getString("name");
+			}
+			if (obj.has("motd")) {
+				sessionInfo.motdTimestamp = obj.getLong("motd");
+			}
+			if(obj.has("tracker_id")) {
+				sessionInfo.trackerId= obj.getString("tracker_id");
+			}
+			if(obj.has("group_tracker_id")) {
+				sessionInfo.groupTrackerId= obj.getString("group_tracker_id");
+			}
+		}
+	}
+	
+	public long getConnectionTime() {
+		return connectionTime;
 	}
 
 	private void writeCommands() throws UnsupportedEncodingException, IOException {
@@ -303,7 +324,7 @@ public class OsMoThread {
 
 	private ByteBuffer getNewPendingSendCommand() throws UnsupportedEncodingException {
 		if(authorized == 0) {
-			String auth = "TOKEN|"+ token.token;
+			String auth = "TOKEN|"+ sessionInfo.token;
 			log.info("OSMO send:" + auth);
 			authorized = 1;
 			return ByteBuffer.wrap(prepareCommand(auth).toString().getBytes("UTF-8"));
@@ -320,6 +341,10 @@ public class OsMoThread {
 			}
 		}
 		return null;
+	}
+	
+	public SessionInfo getSessionInfo() {
+		return sessionInfo;
 	}
 
 	private StringBuilder prepareCommand(String l) {

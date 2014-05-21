@@ -87,6 +87,9 @@ public class OsMoGroups implements OsMoReactor {
 		try {
 			JSONObject obj = new JSONObject(grp);
 			parseGroupUsers(mainGroup, obj);
+			if(!obj.has("groups")) {
+				return;
+			}
 			JSONArray groups = obj.getJSONArray("groups");
 			for (int i = 0; i < groups.length(); i++) {
 				JSONObject o = (JSONObject) groups.get(i);
@@ -154,6 +157,9 @@ public class OsMoGroups implements OsMoReactor {
 	}
 
 	private void parseGroupUsers(OsMoGroup gr, JSONObject obj) throws JSONException {
+		if(!obj.has("users")) {
+			return;
+		}
 		JSONArray users = obj.getJSONArray("users");
 		for (int i = 0; i < users.length(); i++) {
 			JSONObject o = (JSONObject) users.get(i);

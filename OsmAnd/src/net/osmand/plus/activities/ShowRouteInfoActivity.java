@@ -20,6 +20,7 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
+import net.osmand.util.Algorithms;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -156,16 +157,8 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 
 	}
 	private String getTimeDescription(RouteDirectionInfo model) {
-		int seconds = model.getExpectedTime() % 60;
-		int min = (model.getExpectedTime() / 60) % 60;
-		int hours = (model.getExpectedTime() / 3600);
-		String timeText;
-		if (hours == 0) {
-			timeText = String.format("%02d:%02d", min, seconds); //$NON-NLS-1$
-		} else {
-			timeText = String.format("%d:%02d:%02d", hours, min, seconds); //$NON-NLS-1$ 
-		}
-		return timeText;
+		final int timeInSeconds = model.getExpectedTime();
+		return Algorithms.formatDuration(timeInSeconds);
 	}
 }
 

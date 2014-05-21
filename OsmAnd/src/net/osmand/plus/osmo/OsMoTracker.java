@@ -16,6 +16,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	private boolean startSendingLocations;
 	private OsmandMapTileView view;
 	private OsMoService service;
+	private int locationsSent = 0;
 
 	public OsMoTracker(OsMoService service) {
 		this.service = service;
@@ -71,6 +72,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 			if((System.currentTimeMillis() - loc.getTime()) > 30000 && loc.getTime() != 0) {
 				cmd.append("T").append(loc.getTime());
 			}
+			locationsSent ++;
 			return cmd.toString(); 
 		}
 		return null;
@@ -80,6 +82,14 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 		if(startSendingLocations) {
 			bufferOfLocations.add(location);
 		}
+	}
+	
+	public int getLocationsSent() {
+		return locationsSent;
+	}
+	
+	public int getBufferLocationsSize() {
+		return bufferOfLocations.size();
 	}
 
 	public void sendCoordinate(double lat, double lon) {

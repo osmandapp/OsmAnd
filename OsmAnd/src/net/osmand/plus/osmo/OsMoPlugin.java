@@ -11,11 +11,8 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
 import net.osmand.plus.views.OsmandMapTileView;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
@@ -38,7 +35,14 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 	@Override
 	public boolean init(final OsmandApplication app) {
+		service.connect(true);
 		return true;
+	}
+
+	@Override
+	public void disable(OsmandApplication app) {
+		super.disable(app);
+		service.disconnect();
 	}
 
 	@Override
@@ -67,63 +71,22 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 			lock.addMonitorActions(this);
 		}
 	}
-	
-	public AsyncTask<Void, Void, Exception> 
-	getRegisterDeviceTask(final Context uiContext, final Runnable postAction) {
-		return new AsyncTask<Void, Void, Exception>() {
-			private ProgressDialog dlg;
-			protected void onPreExecute() {
-				dlg = ProgressDialog.show(uiContext, "", app.getString(R.string.osmo_register_device));
-			};
-			@Override
-			protected void onPostExecute(Exception result) {
-				if(dlg.isShowing()) {
-					dlg.dismiss();
-				}
-				if (result != null) {
-					result.printStackTrace();
-					app.showToastMessage(app.getString(R.string.osmo_io_error) + result.getMessage());
-				} else if(postAction != null) {
-					postAction.run();
-				}
-			}
-
-			@Override
-			protected Exception doInBackground(Void... params) {
-				return service.registerOsmoDeviceKey();
-			}
-		};
-	}
-	
-	
 
 	@Override
 	public void addMonitorActions(ContextMenuAdapter qa, MonitoringInfoControl li, final OsmandMapTileView view) {
 		final boolean off = !service.isConnected();
-		
 		qa.item(off ? R.string.osmo_mode_off : R.string.osmo_mode_on)
 				.icon(off ? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big)
 				.listen(new OnContextMenuClick() {
 
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						if(app.getSettings().OSMO_DEVICE_KEY.get().length() == 0) {
-							getRegisterDeviceTask(view.getContext(), new Runnable() {
-								public void run() {
-									service.connect(true);
-								}
-							}); 
-							return;	
-						}
-						if(off) {
+						if (off) {
 							service.connect(true);
 						} else {
 							service.disconnect();
 						}
 					}
-
-					
-
 				}).reg();
 		qa.item("Test (send)").icons(R.drawable.ic_action_grefresh_dark, R.drawable.ic_action_grefresh_light)
 				.listen(new OnContextMenuClick() {
@@ -158,14 +121,16 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	public String getId() {
 		return ID;
 	}
-	
+
 	public OsMoGroups getGroups() {
 		return groups;
 	}
-	
-	
+
 	public OsMoTracker getTracker() {
 		return tracker;
 	}
-	
+
+	public OsMoService getService() {
+		return service;
+	}
 }
