@@ -1785,4 +1785,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_register_device">Registrering af enhed… </string>
     <string name="share_fav">Del</string>
 	<string name="share_fav_subject">Favoritter delt via Osmand</string>
-	</resources>
+	<string name="use_points_as_intermediates">Beregn rute mellem punkter</string>
+    </resources>
