@@ -1631,4 +1631,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_register_device">Reģistrē ierīci... </string>
     <string name="share_fav">Kopīgot</string>
 	<string name="share_fav_subject">Izlase kopīgota OsmAnd</string>
-	</resources>
+	<string name="use_points_as_intermediates">Rēķināt maršrutu starp punktiem</string>
+    </resources>
