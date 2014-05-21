@@ -640,7 +640,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumIntPreference<MetricsConstants>(
-			"default_metric_system_2", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()){
+			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()){
 		protected MetricsConstants getDefaultValue() {
 			return DRIVING_REGION.get().defMetrics;
 		};
