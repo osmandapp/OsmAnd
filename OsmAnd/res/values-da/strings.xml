@@ -986,7 +986,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="send_location_way_choose_title">Del placering ved hjælp af</string>
 	<string name="send_location_sms_pattern">Placering: %1$s
 \n%2$s</string>
-	<string name="send_location_email_pattern">For at se placering følg link %1$s eller android hensigts link %2$s</string>
+	<string name="send_location_email_pattern">For at se placering følg webadresse %1$s eller android hensigts link %2$s</string>
 	<string name="send_location">Send placering</string>
 	<string name="context_menu_item_share_location">Del placering</string>
 	<string name="add_waypoint_dialog_added">GPX-rutepunkt \'{0}\' blev korrekt tilføjet</string>
@@ -1770,18 +1770,18 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="share_route_subject">Ruten deles via OsmAnd</string>
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
-    <string name="osmo_settings_descr">Vis unik registreringsnøgle for enheden og andre specifikke indstillinger </string>
+    <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
     <string name="osmo_plugin_description">OpenStreetMap - Overvågning - Avanceret live overvågning med mange funktioner til fjernkontrol http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (avanceret live overvågning)</string>
-    <string name="osmo_settings">OSMo</string>
+    <string name="osmo_plugin_name">OsMo (avanceret live overvågning)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Aldrig</string>
     <string name="keep_informing_descr">Annoncer navigationsinstruktioner med jævne mellemrum</string>
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
 	<string name="arrival_distance">Meddel ankomst</string>
     <string name="arrival_distance_descr">Hvornår skal ankomst meddeles?</string>
-    <string name="osmo_io_error">OSMo forbindelsesproblem: </string>
-    <string name="osmo_mode_on">Stop OSMo</string>    
-    <string name="osmo_mode_off">Start OSMo</string>
+    <string name="osmo_io_error">OsMo forbindelsesproblem: </string>
+    <string name="osmo_mode_on">Stop OsMo session</string>    
+    <string name="osmo_mode_off">Start OsMo session</string>
     <string name="osmo_register_device">Registrering af enhed… </string>
     <string name="share_fav">Del</string>
 	<string name="share_fav_subject">Favoritter delt via Osmand</string>
@@ -1793,22 +1793,22 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="hours_ago">timer siden</string>
     <string name="minutes_ago">minutter siden</string>
     <string name="seconds_ago">sekunder siden</string>
-    <string name="osmo_connect_to_device_name">Navnet på enheden</string>
-    <string name="osmo_connect_to_device_tracker_id">Tracker-id</string>
-    <string name="osmo_connect_to_device">Sammenkæde med enheden</string>
-    <string name="osmo_join_group">Tilmeld dig gruppen</string>
-    <string name="osmo_new_device">Oprette forbindelse til enheden</string>
+    <string name="osmo_connect_to_device_name">Enhedsnavn</string>
+    <string name="osmo_connect_to_device_tracker_id">Sporings-id</string>
+    <string name="osmo_connect_to_device">Sammenkæd med enheden</string>
+    <string name="osmo_join_group">Tilmeld gruppen</string>
+    <string name="osmo_new_device">Opret forbindelse til enheden</string>
     <string name="osmo_connected_devices">Tilsluttede enheder</string>
     <string name="osmo_groups">OsMo grupper/enheder</string>
-    <string name="osmo_auto_send_locations_descr">Automatisk starte tracker session og sende steder efter start af programmet</string>
-    <string name="osmo_auto_send_locations">Automatisk starte tracker session</string>
-    <string name="osmo_tracker_id">Personlig tracker-id</string>
-    <string name="osmo_tracker_id_descr">Klik for at se eller dele tracker -id.
-         Brug Tracker-ID tilsluttede enheder vil være i stand til at overvåge alle bevægelser af denne enhed!  For at afbryde skal du vælge Genopret mulighed.</string>
+    <string name="osmo_auto_send_locations_descr">Start sporingssession automatisk og send placeringer efter start af programmet</string>
+    <string name="osmo_auto_send_locations">Start sporingssession automatisk</string>
+    <string name="osmo_tracker_id">Personligt sporings-id</string>
+    <string name="osmo_tracker_id_descr">Klik for at se eller dele sporings-id.
+         Med sporings-id vil tilsluttede enheder være i stand til at overvåge alle bevægelser af enheden! For at afbryde skal du vælge Genopret mulighed.</string>
     <string name="osmo_session_token">Sessiontoken: %1$s</string>
-    <string name="osmo_auth_pending">Venter på tilladelse ...</string>
-    <string name="osmo_locations_sent">Steder sendt %1$ d (i buffer %2$ d) </string>
-    <string name="osmo_conn_successfull">Forbindelse oprettet : % 1 $ s </string>
+    <string name="osmo_auth_pending">Venter på autorisation...</string>
+    <string name="osmo_locations_sent">Placeringer sendt %1$d (i buffer %2$d) </string>
+    <string name="osmo_conn_successfull">Forbindelse oprettet: %1$s </string>
     <string name="osmo_mode_restart">Genstart OsMo session</string>
-    <string name="osmo_settings_debug">Debug information</string>
+    <string name="osmo_settings_debug">Fejlsøgningsinformation</string>
     </resources>
