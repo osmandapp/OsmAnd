@@ -1753,4 +1753,30 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="arrival_distance_descr">مي خواهيد اعلان رسيدن به مقصد را چقدر زودتر دريافت كنيد؟</string>
     <string name="share_fav">اشتراک گذاری</string>
 	<string name="share_fav_subject">علاقه‌مندیها از راه OsmAnd به اشتراک گذاشته شد</string>
-	</resources>
+	<string name="hours_ago">چند ساعت قبل</string>
+    <string name="minutes_ago">چند دقیقه قبل</string>
+    <string name="seconds_ago">چند ساعت قبل</string>
+    <string name="osmo_connect_to_device_name">نام دستگاه</string>
+    <string name="osmo_connect_to_device_tracker_id">شناسه افزار</string>
+    <string name="osmo_connect_to_device">پیوند با دستگاه</string>
+    <string name="osmo_join_group">عضویت در گروه</string>
+    <string name="osmo_new_device">اتصال دستگاه</string>
+    <string name="osmo_connected_devices">دستگاه های متصل</string>
+    <string name="osmo_groups">OsMo گروه / دستگاه</string>
+    <string name="osmo_auto_send_locations_descr">شروع خودکار پس از راه اندازی و ارسال موقعیت</string>
+    <string name="osmo_auto_send_locations">آمار را به صورت خودکار در مان شروع وارد نمایید</string>
+    <string name="osmo_tracker_id">شناسه شخصی ردیاب</string>
+    <string name="osmo_tracker_id_descr">برای مشاهده و یا به اشتراک گذاشتن شناسه ردیاب کلیک کنید. ↵ 
+        با استفاده از شناسه ردیاب دستگاه قادر خواهد بود برای نظارت بر تمام جابجایی های این دستگاه! برای قطع اتصال گزینه باز سازی مجدد را انتخاب کنید.</string>
+    <string name="osmo_session_token">رمز را وارد نمایید : %1$s</string>
+    <string name="osmo_auth_pending">در انتظار مجوز ...</string>
+    <string name="osmo_locations_sent">ارسال مکان %1$d (in buffer %2$d) </string>
+    <string name="osmo_conn_successfull">اتصال برقرار شد : %1$s </string>
+    <string name="tip_recent_changes_1_8_alpha">تغییرات نسخه 1.8:↵
+        * محاسبه بین مسیر فایل gpx↵
+        * تغییر طرح دانلود کشورها (حمایت برای جستجوی نام های محلی)↵
+    </string>
+    <string name="use_points_as_intermediates">محاسبه مسیر بین دو نقطه</string>
+    <string name="osmo_mode_restart">راه اندازی مجدد osmo وارد کنید</string>
+    <string name="osmo_settings_debug">خطایابی اطلاعات</string>
+    </resources>
