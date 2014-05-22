@@ -1790,4 +1790,25 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
          * Beregn rute mellem rutepunkter i GPX-spor
          * Ændret udseende for hentning af lande (understøtter søgning på lokale navne)
     </string>
+    <string name="hours_ago">timer siden</string>
+    <string name="minutes_ago">minutter siden</string>
+    <string name="seconds_ago">sekunder siden</string>
+    <string name="osmo_connect_to_device_name">Navnet på enheden</string>
+    <string name="osmo_connect_to_device_tracker_id">Tracker-id</string>
+    <string name="osmo_connect_to_device">Sammenkæde med enheden</string>
+    <string name="osmo_join_group">Tilmeld dig gruppen</string>
+    <string name="osmo_new_device">Oprette forbindelse til enheden</string>
+    <string name="osmo_connected_devices">Tilsluttede enheder</string>
+    <string name="osmo_groups">OsMo grupper/enheder</string>
+    <string name="osmo_auto_send_locations_descr">Automatisk starte tracker session og sende steder efter start af programmet</string>
+    <string name="osmo_auto_send_locations">Automatisk starte tracker session</string>
+    <string name="osmo_tracker_id">Personlig tracker-id</string>
+    <string name="osmo_tracker_id_descr">Klik for at se eller dele tracker -id.
+         Brug Tracker-ID tilsluttede enheder vil være i stand til at overvåge alle bevægelser af denne enhed!  For at afbryde skal du vælge Genopret mulighed.</string>
+    <string name="osmo_session_token">Sessiontoken: %1$s</string>
+    <string name="osmo_auth_pending">Venter på tilladelse ...</string>
+    <string name="osmo_locations_sent">Steder sendt %1$ d (i buffer %2$ d) </string>
+    <string name="osmo_conn_successfull">Forbindelse oprettet : % 1 $ s </string>
+    <string name="osmo_mode_restart">Genstart OsMo session</string>
+    <string name="osmo_settings_debug">Debug information</string>
     </resources>
