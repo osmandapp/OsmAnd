@@ -2,7 +2,7 @@
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
-    <string name="enable_plugin_monitoring_services">啟用追踪外掛元件，用位置日誌服務(GPX 記錄，網上追踪查詢)</string>
+    <string name="enable_plugin_monitoring_services">啟用追蹤外掛元件，使用位置日誌服務(GPX 記錄，線上追蹤查詢)</string>
     <string name="non_optimal_route_calculation">預估過遠的距離，可能不是最佳的路線</string>
     <string name="tip_recent_changes_0_8_4_t">在0.8.4的變更：
 	\n\t* Some bug fixes
@@ -111,7 +111,7 @@
 	<string name="map_widget_day_night">日/夜地圖</string>
 	<string name="map_widget_vector_attributes">繪製屬性：</string>
 	<string name="map_widget_renderer">地圖樣式</string>
-	<string name="live_monitoring_mode_off">啟動\n 線上追蹤</string>
+	<string name="live_monitoring_mode_off">開始\n 線上追蹤</string>
 	<string name="live_monitoring_mode_on">停止\n 線上追蹤</string>
 	<string name="position_on_map_descr">在地圖上選取所在地的位置標記</string>
 	<string name="position_on_map">位置標記</string>
@@ -144,7 +144,7 @@
 	<string name="map_widget_right_stack">右邊面版：</string>
 	<string name="map_widget_left_stack">左邊面版：</string>
 	<string name="map_widget_parking">停車場</string>
-	<string name="map_widget_monitoring">GPX 記錄</string>
+	<string name="map_widget_monitoring">GPX 記錄中</string>
 	<string name="map_widget_speed">速度</string>
 	<string name="map_widget_distance">目地的</string>
 	<string name="map_widget_altitude">高度</string>
@@ -241,7 +241,7 @@
 	<string name="map_settings">地圖設定</string>
 	<string name="map_settings_descr">設定地圖顯示</string>
 	<string name="osmand_rastermaps_plugin_description">顯示設定去組態多種線上或快取地圖圖磚，以作為基本地圖或者覆蓋/襯底的地圖，這些地圖還可以在離線時準備，並複製到 OsmAnd 資料夾中。</string>
-	<string name="osmand_background_plugin_description">可在休眠(螢幕關閉)模式下，經由定期的喚醒 GPS 進行追蹤與導航。</string>
+	<string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在休眠模式下(螢幕關閉)顯示設定以啟用追蹤與導航。</string>
 	<string name="osmand_accessibility_description">顯示特殊協助工具的設定。</string>
 	<string name="extra_settings">進階設定</string>
 	<string name="osmand_monitoring_description">顯示便利設定來記錄您的行程到裝置端 GPX 檔或在線上使用網站的服務...</string>
@@ -439,7 +439,7 @@
 	<string name="animate_route">開始模擬</string>
 	<string name="file_can_not_be_renamed">檔名不可更改。</string>
 	<string name="file_with_name_already_exists">該檔名已存在。</string>
-	<string name="gpx_navigation">GPX 導航路線</string>
+	<string name="gpx_navigation">GPX 路線</string>
 	<string name="poi_query_by_name_matches_categories">數個興趣點類別中找到與查詢符合：</string>
 	<string name="data_to_search_poi_not_available">在裝置端資料查尋的興趣點不存在。</string>
 	<string name="poi_filter_by_name">以名稱查尋</string>
@@ -460,7 +460,7 @@
 	<string name="search_position_map_view">上次瀏覽的地圖</string>
 	<string name="select_search_position">附近查尋：</string>
 	<string name="context_menu_item_search">查尋這附近</string>
-	<string name="save_route_dialog_title">儲存導航路線成 GPX 軌跡</string>
+	<string name="save_route_dialog_title">儲存路線成 GPX 軌跡</string>
 	<string name="route_successfully_saved_at">導航路線成功存成\'%1$s\'。</string>
 	<string name="filename_input">檔名： </string>
 	<string name="file_with_name_already_exist">已有同檔名存在。</string>
@@ -715,9 +715,9 @@
 	<string name="voice">語音</string>
 	<string name="no_vector_map_loaded">向量地圖未載入</string>
 	<string name="map_route_by_gpx">以 GPX 導航</string>
-	<string name="gpx_files_not_found">在/tracks 目錄找不到 GPX</string>
+	<string name="gpx_files_not_found">在/tracks 目錄找不到 GPX 檔案</string>
 	<string name="layer_gpx_layer">GPX 軌跡…</string>
-	<string name="error_reading_gpx">GPX 讀取錯誤</string>
+	<string name="error_reading_gpx">讀取 GPX 資料錯誤</string>
 	<string name="vector_data">離線向量地圖</string>
 	<string name="transport_context_menu">在終點查尋交通運輸</string>
 	<string name="point_on_map">位置：\n 緯度 %1$.5f\n 經度 %2$.5f</string>
@@ -731,7 +731,7 @@
 	<string name="rotate_map_to_bearing">地圖方位</string>
 	<string name="show_route">導航路線資訊</string>
 	<string name="fav_imported_sucessfully">我的最愛匯入成功</string>
-	<string name="fav_file_to_load_not_found">在 GPX 檔案包含我的最愛未找到{0}</string>
+	<string name="fav_file_to_load_not_found">在 {0} 裡未找到含有我的最愛的 GPX 檔案</string>
 	<string name="fav_saved_sucessfully">我的最愛存到{0}</string>
 	<string name="no_fav_to_save">沒有我的最愛點要存</string>
 	<string name="import_fav">匯入</string>
@@ -913,8 +913,8 @@
 	<string name="save_current_track_descr">現在就將目前的軌跡存到 SD 卡</string>
 	<string name="save_current_track">儲存目前的 GPX 軌跡</string>
 	<string name="save_track_interval">記錄間隔</string>
-	<string name="save_track_interval_descr">選擇軌跡記錄的定位間隔</string>
-	<string name="save_track_to_gpx_descrp">軌跡將以每天為群組存放在 track 目錄</string>
+	<string name="save_track_interval_descr">為軌跡記錄選取定位間隔</string>
+	<string name="save_track_to_gpx_descrp">軌跡將以每日為分類存放在 track 目錄</string>
 	<string name="save_track_to_gpx">記錄軌跡成 GPX 檔案</string>
 	<string name="update_tile">更新地圖</string>
 	<string name="reload_tile">重新載入圖磚</string>
@@ -1078,7 +1078,8 @@
 	<string name="hno">門牌號碼</string>
     <string name="monitoring_settings">日誌記錄服務及休眠模式</string>
     <string name="monitoring_settings_descr">組態如何記錄行程和啟用休眠模式</string>
-    <string name="osmand_monitoring_plugin_description">透過週期性地喚醒 GPS 裝置，在休眠模式(螢幕關閉)啟用追蹤和導航。顯示設定，便於去記錄您的行程到裝置端 GPX 檔案或在線上使用網路服務。</string>
+    <string name="osmand_monitoring_plugin_description">透過週期性地喚醒 GPS 裝置，在休眠模式下(螢幕關閉)啟用追蹤和導航。
+        顯示設定便於去記錄您在當地的行程到裝置端 GPX 檔案或在線上使用網路服務。</string>
     <string name="osmand_monitoring_plugin_name">日誌記錄服務及休眠模式</string>
     <string name="choose_osmand_theme_descr">挑選應用程式主題</string>
     <string name="choose_osmand_theme">應用程式主題</string>
@@ -1420,7 +1421,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
 		\n\t* EGM96 geoid offset correction for GPS altitude readings
     </string>
-    <string name="osmodroid_plugin_description">OsMoDroid 外掛元件為 OsmAnd 的延伸，是 OsModroid 應用程式的線上追蹤功能。在 http://esya.ru 上有相關服務的資訊。</string>
+    <string name="osmodroid_plugin_description">OsMoDroid 外掛元件是 OsmAnd 延伸為 OsModroid 應用程式的線上追蹤功能。在 http://esya.ru 上有相關服務的資訊。</string>
     <string name="tip_altitude_offset_t">大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
 		\n\n到這些地方系統有一個更好的近似值參考是 EGM96。
 		\n\n在您透過\'設定\' -&gt; \'資料管理\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球高度校正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。
