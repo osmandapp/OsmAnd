@@ -1768,4 +1768,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_conn_successfull">Verbindung erfolgreich: %1$s </string>
     <string name="osmo_mode_restart">OsMo-Sitzung neustarten</string>
     <string name="osmo_settings_debug">Dubug-Information</string>
+    <string name="osmo_connect_to_device_name">Gerätename</string>
+    <string name="osmo_connect_to_device_tracker_id">Aufzeichnungs-ID</string>
+    <string name="osmo_connect_to_device">Mit Gerät koppeln</string>
+    <string name="osmo_join_group">Gruppe beitreten</string>
+    <string name="osmo_groups">OsMo Gruppen/Geräte</string>
     </resources>
