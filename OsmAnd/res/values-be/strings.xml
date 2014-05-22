@@ -1732,4 +1732,14 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_conn_successfull">Злучэнне ўстаноўлена : %1$s </string>
     <string name="osmo_mode_restart">Пачаць OsMo сэсію паўторна</string>
     <string name="osmo_settings_debug">Адладачная інфармацыя</string>
+    <string name="hours_ago">гадзін таму</string>
+    <string name="minutes_ago">хвілін таму</string>
+    <string name="seconds_ago">секунд таму</string>
+    <string name="osmo_connect_to_device_name">Назва прыстасавання</string>
+    <string name="osmo_connect_to_device_tracker_id">ID трэкера</string>
+    <string name="osmo_connect_to_device">Сувязь з прыстасаваннем</string>
+    <string name="osmo_join_group">Уступіць у групу</string>
+    <string name="osmo_new_device">Падключыцца да прыстасавання</string>
+    <string name="osmo_connected_devices">Падключаныя прыстасаванні</string>
+    <string name="osmo_groups">OsMo Групы/Прыстасаванні</string>
     </resources>
