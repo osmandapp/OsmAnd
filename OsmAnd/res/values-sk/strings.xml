@@ -1747,18 +1747,18 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="lang_vi">Vietnamsky (Việt)</string>
 	<string name="lang_cy">Welšsky (Cymraeg)</string>
 	<string name="osmo_settings_uuid">Jedinečné ID zariadenia</string>
-    <string name="osmo_settings_descr">Zobraziť jedinečný registračný kľúč zariadenia a iné nastavenia pre monitorovanie </string>
+    <string name="osmo_settings_descr">Zmeniť nastavenia monitorovania a nastaviť osobný monitorovací kanál</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitorovanie - Pokročilé sledovanie naživo s mnohými funkciami pre diaľkové ovládanie http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (Pokročilé sledovanie naživo)</string>
-    <string name="osmo_settings">OSMo</string>
+    <string name="osmo_plugin_name">OsMo (Pokročilé sledovanie naživo)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Nikdy</string>
     <string name="keep_informing_descr">Oznamuj navigačné pokyny v pravidelných intervaloch</string>
     <string name="keep_informing">Opakuj navigačné pokyny</string>
 	<string name="arrival_distance">Oznámenie príjazdu</string>
     <string name="arrival_distance_descr">Ako skoro má byť oznámený príjazd do cieľa?</string>
-    <string name="osmo_io_error">Problém s pripojením OSMo : </string>
-    <string name="osmo_mode_on">Zastaviť OSMo</string>    
-    <string name="osmo_mode_off">Spustiť OSMo</string>
+    <string name="osmo_io_error">Problém s pripojením OsMo : </string>
+    <string name="osmo_mode_on">Zastaviť reláciu OsMo</string>    
+    <string name="osmo_mode_off">Spustiť reláciu OsMo</string>
     <string name="osmo_register_device">Registruje sa zariadenie… </string>
     <string name="share_fav">Zdieľať</string>
 	<string name="share_fav_subject">Obľúbené zdieľané cez OsmAnd</string>
@@ -1767,4 +1767,25 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
         * Zmenené rozmiestnenie krajín na stiahnutie (podporuje vyhľadanie podľa lokálnych názvov)
     </string>
     <string name="use_points_as_intermediates">Vypočítať trasu medzi bodmi</string>
+    <string name="hours_ago">hodín dozadu</string>
+    <string name="minutes_ago">minút dozadu</string>
+    <string name="seconds_ago">sekúnd dozadu</string>
+    <string name="osmo_connect_to_device_name">Názov zariadenia</string>
+    <string name="osmo_connect_to_device_tracker_id">ID sledovacieho zariadenia</string>
+    <string name="osmo_connect_to_device">Spojiť so zariadením</string>
+    <string name="osmo_join_group">Pripojiť k skupine</string>
+    <string name="osmo_new_device">Pripojiť k zariadeniu</string>
+    <string name="osmo_connected_devices">Pripojené zariadenia</string>
+    <string name="osmo_groups">Skupiny/Zariadenia OsMo</string>
+    <string name="osmo_auto_send_locations_descr">Automaticky spustiť reláciu sledovania a odosielať polohu po spustení aplikácie</string>
+    <string name="osmo_auto_send_locations">Automaticky spustiť reláciu sledovania</string>
+    <string name="osmo_tracker_id">Osobné ID sledovacieho zariadenia</string>
+    <string name="osmo_tracker_id_descr">Kliknite pre zobrazenia alebo zdieľanie ID sledovacieho zariadenia.
+        Pomocou ID budú pripojené zariadenia schopné sledovať všetky pohyby tohto zariadenia! Pre odpojenie použite možnosť "Pregenerovať".</string>
+    <string name="osmo_session_token">Token relácie : %1$s</string>
+    <string name="osmo_auth_pending">Čaká sa na autorizáciu...</string>
+    <string name="osmo_locations_sent">Odoslané polohy %1$d (v zásobníku %2$d) </string>
+    <string name="osmo_conn_successfull">Vytvorené spojenie : %1$s </string>
+    <string name="osmo_mode_restart">Reštartovať reláciu OsMo</string>
+    <string name="osmo_settings_debug">Informácie pre ladenie</string>
     </resources>
