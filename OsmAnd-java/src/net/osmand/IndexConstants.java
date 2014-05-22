@@ -36,7 +36,8 @@ public class IndexConstants {
 	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
 	public static final String MAPS_PATH = "";
 	public static final String BACKUP_INDEX_DIR= "backup/";
-	public static final String GPX_INDEX_DIR= "tracks/";
+	public static final String GPX_INDEX_DIR = "tracks/";
+	public static final String GPX_IMPORT_DIR = GPX_INDEX_DIR + "import/";
 	public static final String TILES_INDEX_DIR= "tiles/";
 	public static final String TOURS_INDEX_DIR= "tours/";
 	public static final String SRTM_INDEX_DIR = "srtm/"; //$NON-NLS-1$
