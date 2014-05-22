@@ -1727,7 +1727,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
         * Obliczanie trasy pomiędzy punktami w zapisanym śladzie GPX
         * Zmieniono wygląd krajów do pobrania (wsparcie wyszukiwania nazw lokalnych)
     </string>
-    <string name="osmo_auto_send_locations_descr">Automatycznie uruchom sesję trackera i wysyłaj pozycje po uruchomieniu aplikacji</string>
+    <string name="osmo_auto_send_locations_descr">Po uruchomieniu aplikacji automatycznie rozpocznij sesję trackera i przesyłaj pozycję</string>
     <string name="osmo_auto_send_locations">Automatycznie uruchom sesję trackera</string>
     <string name="osmo_tracker_id">Osobisty identyfikator trackera</string>
     <string name="osmo_session_token">Token sesji: %1$s</string>
@@ -1735,4 +1735,17 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_conn_successfull">Ustanowiono połączenie: %1$s </string>
     <string name="osmo_mode_restart">Uruchom ponownie sesję OsMo</string>
     <string name="osmo_settings_debug">Informacje debugowania</string>
+    <string name="hours_ago">godzin temu</string>
+    <string name="minutes_ago">minut temu</string>
+    <string name="seconds_ago">sekund temu</string>
+    <string name="osmo_connect_to_device_name">Nazwa urządzenia</string>
+    <string name="osmo_connect_to_device_tracker_id">Identyfikator trackera</string>
+    <string name="osmo_connect_to_device">Sparuj z urządzeniem</string>
+    <string name="osmo_join_group">Dołącz do grupy</string>
+    <string name="osmo_new_device">Połącz z urządzeniem</string>
+    <string name="osmo_connected_devices">Podłączone urządzenia</string>
+    <string name="osmo_groups">Grupy/Urządzenia OSMo</string>
+    <string name="osmo_tracker_id_descr">Kliknij, aby zobaczyć lub udostępnić identyfikator trackera.
+	Używając identyfikatora trackera podłączone urządzenia będą mogły śledzić każdy ruch tego urządzenia! Aby się rozłączyć, wybierz opcję: Generuj ponownie.</string>
+    <string name="osmo_locations_sent">Położenie wysłane %1$d (w buforze %2$d) </string>
     </resources>
