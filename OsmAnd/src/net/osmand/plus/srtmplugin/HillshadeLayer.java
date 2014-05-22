@@ -105,8 +105,8 @@ public class HillshadeLayer extends MapTileLayer {
 						}
 						
 					} while(cursor.moveToNext());
-					cursor.close();
 				}
+				cursor.close();
 			}
 
 			private Map<String, SQLiteTileSource> readFiles(final OsmandApplication app, File tilesDir, Map<String, Long> fileModified) {
