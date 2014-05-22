@@ -56,8 +56,6 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 	public static final int HISTORY_TAB_INDEX = 3;
 	public static final int TRANSPORT_TAB_INDEX = 4;
 	
-	public static final String TAB_INDEX_EXTRA = "TAB_INDEX_EXTRA";
-	
 	protected static final int POSITION_CURRENT_LOCATION = 1;
 	protected static final int POSITION_LAST_MAP_VIEW = 2;
 	protected static final int POSITION_FAVORITES = 3;
@@ -106,6 +104,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		setContentView(R.layout.search_main);
 		settings = ((OsmandApplication) getApplication()).getSettings();
+		Integer tab = settings.SEARCH_TAB.get();
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle("");
 //		getSupportActionBar().setTitle(R.string.select_search_position);
@@ -119,7 +118,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
         tabHost.setup();
 
         ViewPager mViewPager = (ViewPager)findViewById(R.id.pager);
-        mTabsAdapter = new TabsAdapter(this, tabHost, tabinfo, mViewPager);
+        mTabsAdapter = new TabsAdapter(this, tabHost, tabinfo, mViewPager, settings);
         TabSpec poiTab = tabHost.newTabSpec(SEARCH_POI).setIndicator(getTabIndicator(tabHost, R.drawable.tab_search_poi_icon, R.string.poi));
 		mTabsAdapter.addTab(poiTab, SearchPoiFilterActivity.class, null);
 
@@ -135,22 +134,15 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 		mTabsAdapter.addTab(historyTab, SearchHistoryFragment.class, null);
 		TabSpec transportTab = tabHost.newTabSpec(SEARCH_TRANSPORT).setIndicator(getTabIndicator(tabHost, R.drawable.tab_search_transport_icon, R.string.transport));
 		mTabsAdapter.addTab(transportTab, SearchTransportFragment.class, null);
-		tabHost.setCurrentTab(POI_TAB_INDEX);
-        if (savedInstanceState != null) {
-            tabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
-        }
+		tabHost.setCurrentTab(tab);
         
         setTopSpinner();
 		
 		Log.i("net.osmand", "Start on create " + (System.currentTimeMillis() - t ));
 		
 		Intent intent = getIntent();
-		int tabIndex = 0;
+		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 		if (intent != null) {
-			if(intent.hasExtra(TAB_INDEX_EXTRA)){
-				tabIndex = intent.getIntExtra(TAB_INDEX_EXTRA, POI_TAB_INDEX);
-				mTabsAdapter.mTabHost.setCurrentTab(tabIndex);
-			}
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if (lat != 0 || lon != 0) {
@@ -234,7 +226,6 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("tab", mTabsAdapter.mTabHost.getCurrentTabTag());
     }
 
 		
@@ -358,7 +349,6 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
 //		mTabsAdapter.notifyDataSetChanged();
 //		mTabsAdapter.mViewPager.invalidate();
 		Intent intent = getIntent();
-		intent.putExtra(TAB_INDEX_EXTRA, ADDRESS_TAB_INDEX);
 		finish();
 		startActivity(intent);
 	}
@@ -382,6 +372,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
         private final ViewPager mViewPager;
         private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
 		private TextView tabInfo;
+		private OsmandSettings osmSettings;
 
         static final class TabInfo {
             private final String tag;
@@ -411,12 +402,13 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
             }
         }
 
-        public TabsAdapter(FragmentActivity activity, TabHost tabHost, TextView tabinfo, ViewPager pager) {
+        public TabsAdapter(FragmentActivity activity, TabHost tabHost, TextView tabinfo, ViewPager pager, OsmandSettings settings) {
             super(activity.getSupportFragmentManager());
             mContext = activity;
             mTabHost = tabHost;
 			tabInfo = tabinfo;
             mViewPager = pager;
+			osmSettings = settings;
             mTabHost.setOnTabChangedListener(this);
             mViewPager.setAdapter(this);
             mViewPager.setOnPageChangeListener(this);
@@ -447,6 +439,7 @@ public class SearchActivity extends SherlockFragmentActivity implements OsmAndLo
         @Override
         public void onTabChanged(String tabId) {
             int position = mTabHost.getCurrentTab();
+            osmSettings.SEARCH_TAB.set(position);
             mViewPager.setCurrentItem(position);
             if (SEARCH_POI.equals(tabId)) {
 				tabInfo.setText(R.string.poi_search_desc);

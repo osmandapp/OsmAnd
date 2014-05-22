@@ -9,15 +9,31 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="osmo_io_error">OSMo connection problem : </string>
-    <string name="osmo_mode_on">Stop OSMo</string>    
-    <string name="osmo_mode_off">Start OSMo</string>
+    <string name="osmo_auto_send_locations_descr">Automatically start tracker session and send locations after application startup</string>
+    <string name="osmo_auto_send_locations">Automatically start tracker session</string>
+    <string name="osmo_tracker_id">Personal tracker id</string>
+    <string name="osmo_tracker_id_descr">Click to view or share tracker id. 
+        Using tracker id connected devices will be able to monitor all movements of this device! To disconnect select Regenerate option.</string>
+    <string name="osmo_session_token">Session token : %1$s</string>
+    <string name="osmo_auth_pending">Waiting for authorization...</string>
+    <string name="osmo_locations_sent">Locations sent %1$d (in buffer %2$d) </string>
+    <string name="osmo_conn_successfull">Connection established : %1$s </string>
+    <string name="osmo_io_error">OsMo connection problem : </string>
     <string name="osmo_settings_uuid">Unique device id</string>
-    <string name="osmo_settings_descr">View unique device registration key and other monitoring specific settings </string>
-    <string name="osmo_settings">OSMo (OpenStreetMap-Monitoring)</string>
+    <string name="tip_recent_changes_1_8_alpha">Changes in 1.8:
+        * Calculate route between route points of GPX track
+        * Changed layout of countries for downloads (support local names search)
+    </string>
+    <string name="use_points_as_intermediates">Calculate route between points</string>
+    <string name="osmo_mode_restart">Restart OsMo session</string>
+    <string name="osmo_mode_on">Stop OsMo session</string>    
+    <string name="osmo_mode_off">Start OsMo session</string>
+    <string name="osmo_settings_debug">Debug information</string>
+    <string name="osmo_settings_descr">Configure monitoring settings and setup personal monitoring channel</string>
+    <string name="osmo_settings">OsMo (OpenStreetMap-Monitoring)</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Advanced Live Monitoring with lots of features for remote control http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (Advanced Live Monitoring)</string>
-    <string name="osmo_settings">OSMo</string>
+    <string name="osmo_plugin_name">OsMo (Advanced Live Monitoring)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">Display position always in center</string>
     <string name="voice_pref_title">Voice</string>
     <string name="misc_pref_title">Miscallenious</string>
@@ -1441,6 +1457,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="no_fav_to_save">No favorite points to save</string>
 	<string name="import_fav">Import</string>
 	<string name="export_fav">Export</string>
+	<string name="share_fav">Share</string>
+	<string name="share_fav_subject">Favourites shared via OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Error occurred while loading GPX</string>
 	<string name="send_report">Send report</string>
 	<string name="none_region_found">No offline data for regions found on SD card. Download regions from the Internet.</string>

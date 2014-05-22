@@ -119,7 +119,8 @@ public class RouteProvider {
 		private boolean reverse;
 		private boolean leftSide;
 		private boolean passWholeRoute;
-		public boolean calculateOsmAndRouteParts;
+		private boolean calculateOsmAndRouteParts;
+		private boolean useIntermediatePointsRTE;
 		
 		public GPXRouteParamsBuilder(GPXFile file, OsmandSettings settings){
 			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
@@ -140,6 +141,14 @@ public class RouteProvider {
 		
 		public void setCalculateOsmAndRouteParts(boolean calculateOsmAndRouteParts) {
 			this.calculateOsmAndRouteParts = calculateOsmAndRouteParts;
+		}
+		
+		public void setUseIntermediatePointsRTE(boolean useIntermediatePointsRTE) {
+			this.useIntermediatePointsRTE = useIntermediatePointsRTE;
+		}
+		
+		public boolean isUseIntermediatePointsRTE() {
+			return useIntermediatePointsRTE;
 		}
 		
 		public boolean isCalculateOsmAndRoute() {
@@ -196,6 +205,7 @@ public class RouteProvider {
 		boolean calculateOsmAndRoute;
 		boolean passWholeRoute;
 		boolean calculateOsmAndRouteParts;
+		boolean useIntermediatePointsRTE;
 		
 		public List<Location> getPoints() {
 			return points;
@@ -229,8 +239,9 @@ public class RouteProvider {
 			boolean reverse = builder.reverse; 
 			passWholeRoute = builder.passWholeRoute;
 			calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
+			useIntermediatePointsRTE = builder.useIntermediatePointsRTE;
 			boolean announceWaypoints = builder.announceWaypoints;
-			calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
+			builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
 			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){
 				directions =  parseOsmAndGPXRoute(points, file, OSMAND_ROUTER.equals(file.author), builder.leftSide, 10);
 				if(reverse){
@@ -240,10 +251,12 @@ public class RouteProvider {
 				}
 			} else {
 				// first of all check tracks
-				for (Track tr : file.tracks) {
-					for (TrkSegment tkSeg : tr.segments) {
-						for (WptPt pt : tkSeg.points) {
-							points.add(createLocation(pt));
+				if (!useIntermediatePointsRTE) {
+					for (Track tr : file.tracks) {
+						for (TrkSegment tkSeg : tr.segments) {
+							for (WptPt pt : tkSeg.points) {
+								points.add(createLocation(pt));
+							}
 						}
 					}
 				}
@@ -348,9 +361,13 @@ public class RouteProvider {
 		return res;
 	}
 
-	private RouteCalculationResult calculateGpxRoute(RouteCalculationParams routeParams) {
+	private RouteCalculationResult calculateGpxRoute(RouteCalculationParams routeParams) throws IOException {
 		// get the closest point to start and to end
 		GPXRouteParams gpxParams = routeParams.gpxRoute;
+		if(routeParams.gpxRoute.useIntermediatePointsRTE){
+			final List<Location> intermediates = gpxParams.points;
+			return calculateOsmAndRouteWithIntermediatePoints(routeParams, intermediates);
+		}
 		List<Location> gpxRoute ;
 		int[] startI = new int[]{0};
 		int[] endI = new int[]{gpxParams.points.size()}; 
@@ -373,6 +390,28 @@ public class RouteProvider {
 		}
 		RouteCalculationResult res = new RouteCalculationResult(gpxRoute, gpxDirections, routeParams, gpxParams.wpt);
 		return res;
+	}
+
+
+
+
+	private RouteCalculationResult calculateOsmAndRouteWithIntermediatePoints(RouteCalculationParams routeParams,
+			final List<Location> intermediates) throws IOException {
+		RouteCalculationParams rp = new RouteCalculationParams();
+		rp.calculationProgress = routeParams.calculationProgress;
+		rp.ctx = routeParams.ctx;
+		rp.mode = routeParams.mode;
+		rp.start = routeParams.start;
+		rp.end = routeParams.end;
+		rp.leftSide = routeParams.leftSide;
+		rp.type = routeParams.type;
+		rp.fast = routeParams.fast;
+		rp.previousToRecalculate = routeParams.previousToRecalculate;
+		rp.intermediates = new ArrayList<LatLon>();
+		for(Location w : intermediates) {
+			rp.intermediates.add(new LatLon(w.getLatitude(), w.getLongitude()));
+		}
+		return findVectorMapsRoute(rp, false);
 	}
 
 

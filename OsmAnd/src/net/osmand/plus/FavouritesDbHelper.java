@@ -89,6 +89,11 @@ public class FavouritesDbHelper {
 	
 	public String exportFavorites(String fileName) {
 		File f = new File(context.getAppPath(null), fileName);
+		GPXFile gpx = asGpxFile();
+		return GPXUtilities.writeGpxFile(f, gpx, context);
+	}
+
+	public GPXFile asGpxFile() {
 		GPXFile gpx = new GPXFile();
 		for (FavouritePoint p : getFavouritePoints()) {
 			if (p.isStored()) {
@@ -101,9 +106,9 @@ public class FavouritesDbHelper {
 				gpx.points.add(pt);
 			}
 		}
-		return GPXUtilities.writeGpxFile(f, gpx, context);
+		return gpx;
 	}
-	
+
 	private void createCategories(SQLiteConnection db){
 		addCategoryQuery(context.getString(R.string.favorite_home_category), db);
 		addCategoryQuery(context.getString(R.string.favorite_friends_category), db);

@@ -10,65 +10,63 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.osmo.OsMoService.OsMoReactor;
-import net.osmand.plus.osmo.OsMoService.OsMoSender;
+import net.osmand.plus.osmo.OsMoService.SessionInfo;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 
 public class OsMoThread {
-	private static String TRACKER_SERVER = "srv.osmo.mobi";
-	private static int TRACKER_PORT = 4242;
+//	private static String TRACKER_SERVER = "srv.osmo.mobi";
+//	private static int TRACKER_PORT = 3245;
 
 	protected final static Log log = PlatformUtil.getLog(OsMoThread.class);
 	private static final long HEARTBEAT_DELAY = 100;
 	private static final long HEARTBEAT_FAILED_DELAY = 10000;
 	private static final long LIMIT_OF_FAILURES_RECONNECT = 10;
-	private static final long CONNECTION_DELAY = 25000;
 	private static final long SELECT_TIMEOUT = 500;
 	private static int HEARTBEAT_MSG = 3;
 	private Handler serviceThread;
 
 	private int failures = 0;
 	private int activeConnectionId = 0;
-	// -1 means connected, 0 needs to reconnect, > 0 when connection initiated
-	private long connectionStarted = 0;
 	private boolean stopThread;
+	private boolean reconnect;
 	private Selector selector;
 
 	private List<OsMoSender> listSenders;
 	private List<OsMoReactor> listReactors;
 
+	private int authorized = 0; // 1 - send, 2 - authorized
+	private OsMoService service;
+	private SessionInfo sessionInfo = null;
 	private SocketChannel activeChannel;
+	private long connectionTime;
 	private ByteBuffer pendingSendCommand;
 	private String readCommand = "";
 	private ByteBuffer pendingReadCommand = ByteBuffer.allocate(2048);
 	private LinkedList<String> queueOfMessages = new LinkedList<String>();
+	
+	
+	
 
-	public OsMoThread(List<OsMoSender> listSenders, List<OsMoReactor> listReactors) {
+	public OsMoThread(OsMoService service, List<OsMoSender> listSenders, List<OsMoReactor> listReactors) {
+		this.service = service;
 		this.listSenders = listSenders;
 		this.listReactors = listReactors;
 		// start thread to receive events from OSMO
 		HandlerThread h = new HandlerThread("OSMo Service");
 		h.start();
 		serviceThread = new Handler(h.getLooper());
-		serviceThread.post(new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					initConnection();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
 		scheduleHeartbeat(HEARTBEAT_DELAY);
 	}
 
@@ -77,16 +75,38 @@ public class OsMoThread {
 	}
 
 	protected void initConnection() throws IOException {
+		if (sessionInfo == null) {
+			sessionInfo = service.prepareSessionToken();
+		}
+		authorized = 0;
+		reconnect = false;
+		selector = Selector.open();
+		SocketChannel activeChannel = SocketChannel.open();
+		activeChannel.configureBlocking(true);
+		activeChannel.connect(new InetSocketAddress(sessionInfo.hostName, Integer.parseInt(sessionInfo.port)));
+		activeChannel.configureBlocking(false);
+		SelectionKey key = activeChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+		connectionTime = System.currentTimeMillis();
+		if (this.activeChannel != null) {
+			stopChannel();
+		}
+		this.activeChannel = activeChannel;
+		key.attach(new Integer(++activeConnectionId));
+
+	}
+	
+	public String format(String cmd, Map<String, Object> params) {
+		JSONObject json;
 		try {
-			selector = Selector.open();
-			connectionStarted = System.currentTimeMillis();
-			activeChannel = SocketChannel.open();
-			activeChannel.configureBlocking(false);
-			SelectionKey key = activeChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
-			key.attach(new Integer(++activeConnectionId));
-			activeChannel.connect(new InetSocketAddress(TRACKER_SERVER, TRACKER_PORT));
-		} catch (IOException e) {
-			throw e;
+			json = new JSONObject();
+			Iterator<Entry<String, Object>> it = params.entrySet().iterator();
+			while(it.hasNext()) {
+				Entry<String, Object> e = it.next();
+				json.put(e.getKey(), e.getValue());
+			}
+			return cmd + "|"+json.toString();
+		} catch (JSONException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -102,25 +122,18 @@ public class OsMoThread {
 	}
 
 	public boolean isConnected() {
-		return connectionStarted == -1;
+		return activeChannel != null;
 	}
 
 	protected void checkAsyncSocket() {
 		long delay = HEARTBEAT_DELAY;
 		try {
-			if (selector == null) {
-				stopThread = true;
+//			if (selector == null) {
+//				stopThread = true;
+			if(activeChannel == null || reconnect) {
+				initConnection();
 			} else {
-				if (activeChannel != null && connectionStarted != -1 && !activeChannel.isConnectionPending()) {
-					// connection ready
-					connectionStarted = -1;
-				}
-				if ((connectionStarted != -1 && System.currentTimeMillis() - connectionStarted > CONNECTION_DELAY)
-						|| activeChannel == null) {
-					initConnection();
-				} else {
-					checkSelectedKeys();
-				}
+				checkSelectedKeys();
 			}
 		} catch (Exception e) {
 			log.info("Exception selecting socket", e);
@@ -130,7 +143,7 @@ public class OsMoThread {
 				activeChannel = null;
 			}
 			if (failures++ > LIMIT_OF_FAILURES_RECONNECT) {
-				stopChannel();
+				reconnect = true;
 			}
 		}
 		if (stopThread) {
@@ -186,12 +199,14 @@ public class OsMoThread {
 		while (hasSomethingToRead) {
 			pendingReadCommand.clear();
 			int read = activeChannel.read(pendingReadCommand);
-			if (pendingReadCommand.hasRemaining()) {
+			if (!pendingReadCommand.hasRemaining()) {
 				hasSomethingToRead = true;
 			} else {
 				hasSomethingToRead = false;
 			}
-			if (read > 0) {
+			if(read == -1) {
+				reconnect = true;
+			} else if (read > 0) {
 				byte[] ar = pendingReadCommand.array();
 				String res = new String(ar, 0, read);
 				readCommand += res;
@@ -205,45 +220,129 @@ public class OsMoThread {
 		}
 
 		if (queueOfMessages.size() > 0) {
-			while(!queueOfMessages.isEmpty()){
-				String cmd = queueOfMessages.poll();
-				boolean processed = false;
-				for (OsMoReactor o : listReactors) {
-					if (o.acceptCommand(cmd)) {
-						processed = true;
-						break;
-					}
-				}
-				if (!processed) {
-					log.warn("Command not processed '" + cmd + "'");
-				}
-			}
+			processReadMessages();
 		}
 
+	}
+
+	private void processReadMessages() {
+		while(!queueOfMessages.isEmpty()){
+			String cmd = queueOfMessages.poll();
+			log.info("OSMO get:"+cmd);
+			int k = cmd.indexOf('|');
+			String header = cmd;
+			String data = "";
+			if(k >= 0) {
+				header = cmd.substring(0, k);
+				data = cmd.substring(k + 1);
+			}
+			JSONObject obj = null;
+			if(data.startsWith("{")) {
+				try {
+					obj = new JSONObject(data);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			boolean error = false;
+			if(obj != null && obj.has("error")) {
+				error = true;
+				try {
+					service.showErrorMessage(obj.getString("error"));
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			if(header.equalsIgnoreCase("TOKEN")) {
+				if(!error){
+					authorized = 2;
+					try {
+						parseAuthCommand(data, obj);
+					} catch (JSONException e) {
+						service.showErrorMessage(e.getMessage());
+					}
+				}
+				continue;
+			}
+			boolean processed = false;
+			for (OsMoReactor o : listReactors) {
+				if (o.acceptCommand(header, data, obj, this)) {
+					processed = true;
+					break;
+				}
+			}
+			if (!processed) {
+				log.warn("Command not processed '" + cmd + "'");
+			}
+		}
+	}
+
+	private void parseAuthCommand(String data, JSONObject obj) throws JSONException {
+		if(sessionInfo != null) {
+			if(obj.has("protocol")) {
+				sessionInfo.protocol = obj.getString("protocol");
+			}
+			if(obj.has("now")) {
+				sessionInfo.serverTimeDelta = obj.getLong("now") - System.currentTimeMillis();
+			}
+			if(obj.has("name")) {
+				sessionInfo.username = obj.getString("name");
+			}
+			if (obj.has("motd")) {
+				sessionInfo.motdTimestamp = obj.getLong("motd");
+			}
+			if(obj.has("tracker_id")) {
+				sessionInfo.trackerId= obj.getString("tracker_id");
+			}
+			if(obj.has("group_tracker_id")) {
+				sessionInfo.groupTrackerId= obj.getString("group_tracker_id");
+			}
+		}
+	}
+	
+	public long getConnectionTime() {
+		return connectionTime;
 	}
 
 	private void writeCommands() throws UnsupportedEncodingException, IOException {
 		if (pendingSendCommand == null) {
-			getNewPendingSendCommand();
+			pendingSendCommand = getNewPendingSendCommand();
 		}
 		while (pendingSendCommand != null) {
 			activeChannel.write(pendingSendCommand);
 			if (!pendingSendCommand.hasRemaining()) {
-				pendingSendCommand = null;
-				getNewPendingSendCommand();
-			}
-		}
-	}
-
-	private void getNewPendingSendCommand() throws UnsupportedEncodingException {
-		for (OsMoSender s : listSenders) {
-			String l = s.nextSendCommand();
-			if (l != null) {
-				StringBuilder res = prepareCommand(l);
-				pendingSendCommand = ByteBuffer.wrap(res.toString().getBytes("UTF-8"));
+				pendingSendCommand = getNewPendingSendCommand();
+			} else {
 				break;
 			}
 		}
+	}
+	
+	
+
+	private ByteBuffer getNewPendingSendCommand() throws UnsupportedEncodingException {
+		if(authorized == 0) {
+			String auth = "TOKEN|"+ sessionInfo.token;
+			log.info("OSMO send:" + auth);
+			authorized = 1;
+			return ByteBuffer.wrap(prepareCommand(auth).toString().getBytes("UTF-8"));
+		}
+		if(authorized == 1) {
+			return null;
+		}
+		for (OsMoSender s : listSenders) {
+			String l = s.nextSendCommand(this);
+			if (l != null) {
+				StringBuilder res = prepareCommand(l);
+				log.info("OSMO send " + res);
+				return ByteBuffer.wrap(res.toString().getBytes("UTF-8"));
+			}
+		}
+		return null;
+	}
+	
+	public SessionInfo getSessionInfo() {
+		return sessionInfo;
 	}
 
 	private StringBuilder prepareCommand(String l) {

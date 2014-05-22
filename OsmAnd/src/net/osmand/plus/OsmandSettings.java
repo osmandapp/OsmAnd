@@ -632,7 +632,8 @@ public class OsmandSettings {
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumIntPreference<DrivingRegion>(
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 		protected boolean setValue(Object prefs, DrivingRegion val) {
-			((CommonPreference<MetricsConstants>)METRIC_SYSTEM).cachedValue = null;
+			//((CommonPreference<MetricsConstants>)METRIC_SYSTEM).cachedValue = null;
+			((CommonPreference<MetricsConstants>)METRIC_SYSTEM).set(DRIVING_REGION.get().defMetrics);
 			return super.setValue(prefs, val);
 		};
 	}.makeGlobal().cache();
@@ -640,7 +641,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<MetricsConstants> METRIC_SYSTEM = new EnumIntPreference<MetricsConstants>(
-			"default_metric_system_2", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()){
+			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()){
 		protected MetricsConstants getDefaultValue() {
 			return DRIVING_REGION.get().defMetrics;
 		};
@@ -786,9 +787,10 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SPEAK_SPEED_CAMERA = new BooleanPreference("speak_cameras", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_SPEED_LIMIT = new BooleanPreference("speak_speed_limit", true).makeProfile().cache();
 	
-	public final OsmandPreference<Boolean> ROUTE_CALC_OSMAND_PARTS = new BooleanPreference("gpx_routing_calculate_osmand_route", true).makeGlobal().cache();
-	public final OsmandPreference<Boolean> SPEAK_GPX_WPT = new BooleanPreference("speak_gpx_wpt", true).makeGlobal().cache();
-	public final OsmandPreference<Boolean> CALC_GPX_ROUTE = new BooleanPreference("calc_gpx_route", false).makeGlobal().cache();
+	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference("gpx_routing_calculate_osmand_route", true).makeGlobal().cache();
+	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference("gpx_routing_calculate_rtept", true).makeGlobal().cache();
+	public final OsmandPreference<Boolean> GPX_SPEAK_WPT = new BooleanPreference("speak_gpx_wpt", true).makeGlobal().cache();
+	public final OsmandPreference<Boolean> GPX_ROUTE_CALC = new BooleanPreference("calc_gpx_route", false).makeGlobal().cache();
 	
 	
 
@@ -823,6 +825,12 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false).makeGlobal();
 	
 	public final OsmandPreference<String> MAP_INFO_CONTROLS = new StringPreference("map_info_controls", "").makeProfile();
+	
+	public final OsmandPreference<String> OSMO_DEVICE_KEY = new StringPreference("osmo_device_token", "").makeGlobal();
+	
+	public final OsmandPreference<Boolean> OSMO_AUTO_SEND_LOCATIONS = new BooleanPreference("osmo_automatically_send_locations", false).makeGlobal();
+	
+	public final OsmandPreference<String> OSMO_GROUPS = new StringPreference("osmo_groups", "{}").makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DEBUG_RENDERING_INFO = new BooleanPreference("debug_rendering", false).makeGlobal();
@@ -1659,6 +1667,10 @@ public class OsmandSettings {
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;
 	public static final int OSMAND_LIGHT_DARK_ACTIONBAR_THEME = 2;
+
+	public final CommonPreference<Integer> SEARCH_TAB = 
+			new IntPreference("SEARCH_TAB", 0).makeGlobal().cache();
+	
 	public final CommonPreference<Integer> OSMAND_THEME = 
 			new IntPreference("osmand_theme", OSMAND_DARK_THEME).makeGlobal().cache();
 	
