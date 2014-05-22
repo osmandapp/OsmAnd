@@ -1739,4 +1739,14 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_conn_successfull">Connexió establerta : %1$s </string>
     <string name="osmo_mode_restart">Reinicia sessió OsMo</string>
     <string name="osmo_settings_debug">Depura informació</string>
+    <string name="hours_ago">hores fa</string>
+    <string name="minutes_ago">minuts fa</string>
+    <string name="seconds_ago">segons fa</string>
+    <string name="osmo_connect_to_device_name">Nom de dispositiu</string>
+    <string name="osmo_connect_to_device_tracker_id">Identificador de traça</string>
+    <string name="osmo_connect_to_device">Enllaç amb dispositiu</string>
+    <string name="osmo_join_group">Unir-se al grup</string>
+    <string name="osmo_new_device">Connectar al dispositiu</string>
+    <string name="osmo_connected_devices">Dispositius connectats</string>
+    <string name="osmo_groups">OsMo Grups/Dispositius</string>
     </resources>
