@@ -1591,4 +1591,16 @@
 * Calcul d\'itinéraire entre les points d\'une trace GPX
 * Modification de la présentation des pays pour les téléchargements (possibilité de rechercher les noms locaux)
 </string>
+    <string name="hours_ago">heures avant</string>
+    <string name="minutes_ago">minutes avant</string>
+    <string name="seconds_ago">secondes avant</string>
+    <string name="osmo_connect_to_device_name">Nom de l'appareil</string>
+    <string name="osmo_connect_to_device">Lier à l'appareil</string>
+    <string name="osmo_join_group">Rejoindre le groupe</string>
+    <string name="osmo_new_device">Connecter à l'appareil</string>
+    <string name="osmo_connected_devices">Appareils connectés</string>
+    <string name="osmo_groups">Groupes/appareils OsMo</string>
+    <string name="osmo_auto_send_locations_descr">Démarrer automatiquement la session de suivi et envoyer des lieux après le démarrage de l'application</string>
+    <string name="osmo_auto_send_locations">Démarre automatiquement la session de suivi</string>
+    <string name="osmo_tracker_id">Identifiant personnel de suivi</string>
 </resources>
