@@ -1710,7 +1710,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Zaawansowany Monitoring na Żywo z wieloma funkcjami do zdalnego zarządzania na http://osmo.mobi</string>
     <string name="osmo_plugin_name">OsMo (Zaawansowany Monitoring na Żywo)</string>
-    <string name="osmo_settings">OsMo</string>
+    <string name="osmo_settings">OSMo</string>
    	<string name="keep_informing_never">Nigdy</string>
     <string name="keep_informing_descr">Podawaj instrukcje nawigacji w regularnych odstępach czasu</string>
     <string name="keep_informing">Powtarzaj instrukcje nawigacji</string>
