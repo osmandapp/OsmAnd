@@ -1478,4 +1478,14 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_auth_pending">Väntar på autentisering…</string>
     <string name="osmo_locations_sent">Platser skickade %1$d (i buffer %2$d) </string>
     <string name="osmo_conn_successfull">Anslutning upprättad: %1$s </string>
+    <string name="hours_ago">timmar sedan</string>
+    <string name="minutes_ago">minuter sedan</string>
+    <string name="seconds_ago">sekunder sedan</string>
+    <string name="osmo_connect_to_device_name">Enhetsnamn</string>
+    <string name="osmo_connect_to_device_tracker_id">Tracker-id</string>
+    <string name="osmo_connect_to_device">Länka med enhet</string>
+    <string name="osmo_join_group">Anslut till grupp</string>
+    <string name="osmo_new_device">Anslut till enhet</string>
+    <string name="osmo_connected_devices">Anslutna enheter</string>
+    <string name="osmo_groups">OsMo-grupper/-enheter</string>
     </resources>
