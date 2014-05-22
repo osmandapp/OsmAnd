@@ -1797,4 +1797,14 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_conn_successfull">Connessione stabilita: %1$s </string>
     <string name="osmo_mode_restart">Riavvia la sessione OsMo</string>
     <string name="osmo_settings_debug">Informazioni di debug</string>
+    <string name="hours_ago">ore fa</string>
+    <string name="minutes_ago">minuti fa</string>
+    <string name="seconds_ago">secondi fa</string>
+    <string name="osmo_connect_to_device_name">Nome del dispositivo</string>
+    <string name="osmo_connect_to_device_tracker_id">Id tracciabilità</string>
+    <string name="osmo_connect_to_device">Collegamento con il dispositivo</string>
+    <string name="osmo_join_group">Unisciti al gruppo</string>
+    <string name="osmo_new_device">Collegati al dispositivo</string>
+    <string name="osmo_connected_devices">Dispositivi collegati</string>
+    <string name="osmo_groups">Grupppi/Dispositivi OsMo</string>
     </resources>
