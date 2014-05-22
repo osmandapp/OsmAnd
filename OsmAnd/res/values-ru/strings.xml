@@ -1596,7 +1596,7 @@ OsmAnd - открытый источник и активно развается.
 	<string name="arrival_distance">Объявление прибытия</string>
     <string name="arrival_distance_descr">Как скоро вы хотите объявить прибытие?</string>
     <string name="osmo_register_device">Регистрация устройства... </string>
-    <string name="osmo_io_error">Проблема подключения OSMo: </string>
+    <string name="osmo_io_error">Проблема подключения OsMo: </string>
     <string name="share_fav">Поделиться</string>
 	<string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
 	<string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
