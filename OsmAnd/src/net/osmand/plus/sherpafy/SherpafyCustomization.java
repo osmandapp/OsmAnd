@@ -113,6 +113,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						}
 					}
 				}
+				if (selectedName == null) {
+					app.getSettings().setSettingsAPI(originalSettings.getSettingsAPI());
+				}
 			}
 		}
 		this.tourPresent = tourPresent;
