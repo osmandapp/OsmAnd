@@ -110,13 +110,13 @@ public class OsmandSettings {
 	protected OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI) {
 		ctx = clientContext;
 		this.settingsAPI = settinsAPI;
-		currentMode = readApplicationMode();
 		initPrefs();
 	}
 
 	private void initPrefs() {
 		globalPreferences = settingsAPI.getPreferenceObject(SHARED_PREFERENCES_NAME);
 		defaultProfilePreferences = getProfilePreferences(ApplicationMode.DEFAULT);
+		currentMode = readApplicationMode();
 		profilePreferences = getProfilePreferences(currentMode);
 	}
 	
