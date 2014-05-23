@@ -1739,4 +1739,30 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="osmo_register_device">Toestel wordt geregistreerd... </string>
     <string name="share_fav">Delen</string>
 	<string name="share_fav_subject">Via AsmAnd gedeelde favorieten</string>
-	</resources>
+	<string name="hours_ago">uur geleden</string>
+    <string name="minutes_ago">minuten geleden</string>
+    <string name="seconds_ago">seconden geleden</string>
+    <string name="osmo_connect_to_device_name">Toestelnaam</string>
+    <string name="osmo_connect_to_device_tracker_id">Tracker-ID</string>
+    <string name="osmo_connect_to_device">Koppelen met toestel</string>
+    <string name="osmo_join_group">Lid worden van groep</string>
+    <string name="osmo_new_device">Verbind met toestel</string>
+    <string name="osmo_connected_devices">Verbonden toestellen</string>
+    <string name="osmo_groups">OsMo groepen/toestellen</string>
+    <string name="osmo_auto_send_locations_descr">Start tracker en stuur locaties automatisch na het starten van de applicatie</string>
+    <string name="osmo_auto_send_locations">Tracker-sessies automatisch starten</string>
+    <string name="osmo_tracker_id">Persoonlijk tracker-ID</string>
+    <string name="osmo_tracker_id_descr">Tik om tracker-ID te bekijken of te delen.
+      LET OP: met het tracker-ID kunnen verbonden toestellen alle bewegingen van dit toestel volgen! Maak een nieuw ID om ze los te koppelen.</string>
+    <string name="osmo_session_token">Sessietoken: %1$s</string>
+    <string name="osmo_auth_pending">Wacht op autorisatie…</string>
+    <string name="osmo_locations_sent">%1$d verzonden locaties (in buffer %2$d) </string>
+    <string name="osmo_conn_successfull">Verbinding gemaakt: %1$s </string>
+    <string name="tip_recent_changes_1_8_alpha">Wijzigingen in versie 1.8:
+      * Routeberekening tussen punten op een GPX-spoor
+      * Kaarten op het downloadscherm zoeken met de plaatselijke naam
+    </string>
+    <string name="use_points_as_intermediates">Bereken route tussen punten</string>
+    <string name="osmo_mode_restart">Herstart OsMo-sessie</string>
+    <string name="osmo_settings_debug">Debug-informatie</string>
+    </resources>
