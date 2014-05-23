@@ -1940,7 +1940,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 		\n\n컨텍스트 메뉴를 이용하거나 또는 액션 바는 [길안내 또는 지도에서 보기] 등을 제공합니다.
 	</string>
 	<string name="osmo_settings_uuid">고유 장치 id</string>
-    <string name="osmo_settings_descr">고유한 장치 등록 키 및 기타 모니터링 특정한 설정 보기 </string>
+    <string name="osmo_settings_descr">모니터링 설정 및 설정 개인 모니터링 채널을 구성</string>
     <string name="osmo_plugin_description">OpenStreetMap의 모니터링 - 원격 제어를 위한 많은 기능과 함께 고급 실시간 모니터링 http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (고급 라이브 모니터링)</string>
     <string name="osmo_settings">OSMo(오스모:OpenStreetMap-Monitoring)</string>
@@ -1958,4 +1958,31 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_mode_off">OSMo 시작</string>
     <string name="share_fav">공유</string>
 	<string name="share_fav_subject">OsmAnd를 통해 공유된 즐겨찾기</string>
-	</resources>
+	<string name="hours_ago">시간 전</string>
+    <string name="minutes_ago">분 전</string>
+    <string name="seconds_ago">초 전</string>
+    <string name="osmo_connect_to_device_name">장치의 이름</string>
+    <string name="osmo_connect_to_device_tracker_id">트래커 ID</string>
+    <string name="osmo_connect_to_device">장치와 연결</string>
+    <string name="osmo_join_group">그룹에 가입</string>
+    <string name="osmo_new_device">장치에 연결</string>
+    <string name="osmo_connected_devices">연결된 장치</string>
+    <string name="osmo_groups">OsMo 그룹/장치</string>
+    <string name="osmo_auto_send_locations_descr">자동으로 트래커 세션을 시작하고 응용 프로그램 시작 후 위치를 전송</string>
+    <string name="osmo_auto_send_locations">자동으로 트래킹 세션을 시작</string>
+    <string name="osmo_tracker_id">개인 트래커 ID</string>
+    <string name="osmo_tracker_id_descr">트래킹 ID를 보거나 공유하려면 클릭하십시오.
+         트래커 ID 연결된 장치를 사용하면 이 장치의 모든 움직임을 모니터 할 수 있습니다!  
+선택 재생성 옵션을 분리합니다.</string>
+    <string name="osmo_session_token">세션 토큰 : %1$s</string>
+    <string name="osmo_auth_pending">허가를 기다리는 중...</string>
+    <string name="osmo_locations_sent">위치 전송 %1$d (in buffer %2$d) </string>
+    <string name="osmo_conn_successfull">설정 된 연결 : %1$s </string>
+    <string name="tip_recent_changes_1_8_alpha">Changes in 1.8:
+        * GPX 트랙의 루트 포인트 사이의 길을 계산
+        * 다운로드에 대한 국가의 변경된 레이아웃 (support local names search)
+    </string>
+    <string name="use_points_as_intermediates">루트포인트 사이의 경로를 계산</string>
+    <string name="osmo_mode_restart">OsMo 세션 재시작</string>
+    <string name="osmo_settings_debug">디버그 정보</string>
+    </resources>
