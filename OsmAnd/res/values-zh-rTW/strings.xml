@@ -1421,7 +1421,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
 		\n\t* EGM96 geoid offset correction for GPS altitude readings
     </string>
-    <string name="osmodroid_plugin_description">OsMoDroid 外掛元件是 OsmAnd 延伸為 OsModroid 應用程式的線上追蹤功能。在 http://esya.ru 上有相關服務的資訊。</string>
+    <string name="osmodroid_plugin_description">OsMoDroid 外掛元件是 OsmAnd 的延伸，為 OsModroid 線上追蹤功能的應用程式。在 http://esya.ru 上有相關服務的資訊。</string>
     <string name="tip_altitude_offset_t">大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
 		\n\n到這些地方系統有一個更好的近似值參考是 EGM96。
 		\n\n在您透過\'設定\' -&gt; \'資料管理\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球高度校正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。
