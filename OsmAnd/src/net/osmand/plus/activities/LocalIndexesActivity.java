@@ -197,7 +197,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 					final Uri fileUri = Uri.fromFile(new File(info.getPathToData()));
 					final Intent sendIntent = new Intent(Intent.ACTION_SEND);
 					sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 					sendIntent.setType("application/gpx+xml");
 					startActivity(sendIntent);
 				}
