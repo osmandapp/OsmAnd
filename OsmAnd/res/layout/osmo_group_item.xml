@@ -19,12 +19,12 @@
 
     <TextView
         android:id="@+id/category_name"
-        android:layout_width="wrap_content"
+        style="@style/ListText"
+        android:layout_width="0dp" 
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
-        android:gravity="center_vertical"
         android:textSize="18sp">
     </TextView>
     

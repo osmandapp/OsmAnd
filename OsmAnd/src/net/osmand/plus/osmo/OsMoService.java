@@ -161,6 +161,15 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 		return thread.getSessionInfo();
 	}
 	
+	public String getMyGroupTrackerId() {
+		String myGroupTrackerId = "";
+		SessionInfo currentSessionInfo = getCurrentSessionInfo();
+		if (currentSessionInfo != null) {
+			myGroupTrackerId = currentSessionInfo.groupTrackerId;
+		}
+		return myGroupTrackerId;
+	}
+	
 	
 	public SessionInfo prepareSessionToken() throws IOException {
 		String deviceKey = app.getSettings().OSMO_DEVICE_KEY.get();

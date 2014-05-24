@@ -107,6 +107,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		final Drawable srcinactive = map.getResources().getDrawable(R.drawable.monitoring_rec_inactive);
 		final TextInfoWidget osmoControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
 			long lastUpdateTime;
+			private Drawable blinkImg;
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean visible = true;
@@ -120,7 +121,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					big = tracker.isEnabledTracker() ? srcSignalBig : srcBig;
 				}
 				setText(txt, subtxt);
-				setImageDrawable(small);
+				if(blinkImg != small) {
+					setImageDrawable(small);
+				}
 				if (last != lastUpdateTime) {
 					lastUpdateTime = last;
 					blink(big, small);
@@ -131,11 +134,13 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 			}
 			
 			private void blink(Drawable bigger, final Drawable smaller ) {
+				blinkImg = smaller;
 				setImageDrawable(bigger);
 				invalidate();
 				postDelayed(new Runnable() {
 					@Override
 					public void run() {
+						blinkImg = null;
 						setImageDrawable(smaller);
 						invalidate();
 					}

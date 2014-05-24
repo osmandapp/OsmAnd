@@ -1,342 +1,329 @@
 package net.osmand.plus.osmo;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
-import net.osmand.data.LatLon;
+import net.osmand.Location;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.osmo.OsMoService.SessionInfo;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
+import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-
-public class OsMoGroups implements OsMoReactor {
+public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
-	private static final String GROUPS = "groups";
+	private static final String GROUP_NAME = "name";
+	private static final String EXPIRE_TIME = "expireTime";
+	private static final String DESCRIPTION = "description";
+	private static final String POLICY = "policy";
 	private static final String USERS = "users";
-	private static final String SERVER_NAME = "serverName";
-	private static final String TRACKER_ID = "trackerId";
-	private static final String GROUP_TRACKERS = "group_trackers";
-	private static final String GROUP_ID = "group_id";
-	private static final String NAME = "name";
-	private static final String USER_NAME = "userName";
-	private static final String GROUP_NAME = "group_name";
+	private static final String USER_NAME = "name";
+	private static final String USER_COLOR = "color";
+	private static final String DELETED = "deleted";
+	private static final String GROUP_TRACKER_ID = "group_tracker_id";
+	private static final String LAST_ONLINE = "last_online";
+	
 	private OsMoTracker tracker;
-	private ConcurrentHashMap<String, OsMoGroup> groups = new ConcurrentHashMap<String, OsMoGroup>();
-	private OsMoGroup mainGroup;
-	private OsmandSettings settings;
 	private OsMoService service;
-
-	public static class OsMoGroup {
-		public String name;
-		public String userName;
-		public String groupId;
-		public boolean active;
-		
-		public Map<String, OsMoUser> users = new ConcurrentHashMap<String, OsMoGroups.OsMoUser>(); 
-		
-		public boolean isMainGroup() {
-			return groupId == null;
-		}
-		
-		public String getVisibleName(Context ctx){
-			if(isMainGroup()) {
-				return ctx.getString(R.string.osmo_connected_devices);
-			}
-			if(userName != null && userName.length() > 0) {
-				return userName;
-			}
-			return name;
-		}
-	}
+	private OsMoGroupsStorage storage;
+	private OsMoGroupsUIListener uiListener;
 	
-	public static class OsMoMessage {
-		public long timestamp;
-		public LatLon location;
-		public String text;
-	}
-	
-	public static class OsMoUser {
-		public String serverName;
-		public String userName;
-		public String trackerId;
-		public OsMoGroup group ;
-		public List<OsMoMessage> messages = new ArrayList<OsMoMessage>();
+	public interface OsMoGroupsUIListener {
 		
-		public OsMoGroup getGroup() {
-			return group;
-		}
-		
-		public String getVisibleName(){
-			if(userName != null && userName.length() > 0) {
-				return userName;
-			}
-			return serverName;
-		}
+		public void groupsListChange(String operation);
 	}
 
 	public OsMoGroups(OsMoService service, OsMoTracker tracker, OsmandSettings settings) {
 		this.service = service;
 		this.tracker = tracker;
-		this.settings = settings;
-//		service.registerSender(this);
 		service.registerReactor(this);
-		mainGroup = new OsMoGroup();
-		groups.put("", mainGroup);
+		tracker.setTrackerListener(this);
+		storage = new OsMoGroupsStorage(this, settings.OSMO_GROUPS);
+		storage.load();
+		for(OsMoDevice d : storage.getMainGroup().getGroupUsers()) {
+			if(d.isEnabled()) {
+				connectDeviceImpl(d);
+			}
+		}
+		for(OsMoGroup g : storage.getGroups()) {
+			if(!g.isMainGroup() && g.isEnabled()) {
+				connectGroupImpl(g);
+			}
+		}
+	}
+	
+	public void setUiListener(OsMoGroupsUIListener uiListener) {
+		this.uiListener = uiListener;
+	}
+	
+	public OsMoGroupsUIListener getUiListener() {
+		return uiListener;
+	}
+	
+	private void connectDeviceImpl(OsMoDevice d) {
+		d.enabled =  true;
+		if(!service.getMyGroupTrackerId().equals(d.getTrackerId())) {
+			tracker.startTrackingId(d.trackerId);
+		}
 		
-		parseGroups();
 	}
 
-	private void parseGroups() {
-		String grp = settings.OSMO_GROUPS.get();
-		try {
-			JSONObject obj = new JSONObject(grp);
-			parseGroupUsers(mainGroup, obj);
-			for(String connectedDevice : mainGroup.users.keySet()) {
-				tracker.startTrackingId(connectedDevice);
-			}
-			if(!obj.has(GROUPS)) {
-				return;
-			}
-			JSONArray groups = obj.getJSONArray(GROUPS);
-			for (int i = 0; i < groups.length(); i++) {
-				JSONObject o = (JSONObject) groups.get(i);
-				OsMoGroup group = new OsMoGroup();
-				group.groupId = o.getString(GROUP_ID);
-				if(o.has(NAME)) {
-					group.name = o.getString(NAME);
-				}
-				if(o.has(USER_NAME)) {
-					group.userName = o.getString(USER_NAME);
-				}
-				parseGroupUsers(group, o);
-				this.groups.put(group.groupId, group);
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-			service.showErrorMessage(e.getMessage());
-		}
-	}
-	
-	public void saveGroups() {
-		JSONObject mainObj = new JSONObject();
-		try {
-			saveGroupUsers(mainGroup, mainObj);
-			JSONArray ar = new JSONArray();
-			for(OsMoGroup gr : groups.values()) {
-				if(gr.isMainGroup()) {
-					continue;
-				}
-				JSONObject obj = new JSONObject();
-				if (gr.userName != null) {
-					obj.put(USER_NAME, gr.userName);
-				}
-				if (gr.name != null) {
-					obj.put(NAME, gr.name);
-				}
-				obj.put(GROUP_ID, gr.groupId);
-				ar.put(obj);	
-			}
-			mainObj.put(GROUPS, ar);
-		} catch (JSONException e) {
-			e.printStackTrace();
-			service.showErrorMessage(e.getMessage());
-		}
-		settings.OSMO_GROUPS.set(mainObj.toString());
+	private String connectGroupImpl(OsMoGroup g) {
+		g.enabled = true;
+		String operation = "CONNECT_GROUP:" + g.groupId;
+		service.pushCommand("CONNECT_GROUP:" + g.groupId);
+		return operation;
 	}
 
-	private void saveGroupUsers(OsMoGroup gr, JSONObject grObj) throws JSONException {
-		JSONArray ar = new JSONArray();
-		for(OsMoUser u : gr.users.values()) {
-			JSONObject obj = new JSONObject();
-			if (u.userName != null) {
-				obj.put(USER_NAME, u.userName);
-			}
-			if (u.serverName != null) {
-				obj.put(SERVER_NAME, u.serverName);
-			}
-			obj.put(TRACKER_ID, u.trackerId);
-			
-			ar.put(obj);
+	public String connectGroup(OsMoGroup model) {
+		String op = connectGroupImpl(model);
+		storage.save();
+		return op;
+	}
+	
+	public void connectDevice(OsMoDevice model) {
+		connectDeviceImpl(model);
+		storage.save();
+	}
+	
+
+	public String disconnectGroup(OsMoGroup model) {
+		model.enabled = false;
+		String operation = "GROUP_DISCONNECT:"+model.groupId;
+		service.pushCommand(operation);
+		for(OsMoDevice d : model.getGroupUsers()) {
+			tracker.startTrackingId(d.trackerId);
 		}
-		grObj.put(USERS, ar);
+		storage.save();
+		return operation;
+	}
+	
+	public void disconnectDevice(OsMoDevice model) {
+		disconnectImpl(model);
+		storage.save();
 	}
 
-	private void parseGroupUsers(OsMoGroup gr, JSONObject obj) throws JSONException {
-		if(!obj.has(USERS)) {
-			return;
-		}
-		JSONArray users = obj.getJSONArray(USERS);
-		for (int i = 0; i < users.length(); i++) {
-			JSONObject o = (JSONObject) users.get(i);
-			OsMoUser user = new OsMoUser();
-			user.group = gr;
-			if(o.has(SERVER_NAME)) {
-				user.serverName = o.getString(SERVER_NAME);
-			}
-			if(o.has(USER_NAME)) {
-				user.userName = o.getString(USER_NAME);
-			}
-			user.trackerId = o.getString(TRACKER_ID);
-			gr.users.put(user.trackerId, user);
-		}
+	private void disconnectImpl(OsMoDevice model) {
+		model.enabled = false;
+		tracker.stopTrackingId(model.trackerId);
+	}
+
+		
+	public Collection<OsMoGroup> getGroups() {
+		return storage.getGroups();
 	}
 	
-	public ConcurrentHashMap<String, OsMoGroup> getGroups() {
-		return groups;
-	}
-	
-	public OsMoUser registerUser(String trackerId, String nameUser) {
-		OsMoUser us = new OsMoUser();
-		us.group = mainGroup;
-		us.trackerId = trackerId;
-		us.userName = nameUser;
-		mainGroup.users.put(trackerId, us);
-		tracker.startTrackingId(trackerId);
-		saveGroups();
-		return us;
+	public void showErrorMessage(String message) {
+		service.showErrorMessage(message);
 	}
 
 	@Override
+	public void locationChange(String trackerId, Location location) {
+		for(OsMoGroup  g: getGroups()) {
+			g.updateLastLocation(trackerId, location);
+		}
+	}
+
+
+	@Override
 	public boolean acceptCommand(String command, String data, JSONObject obj, OsMoThread thread) {
-		if(command.startsWith("ON_GROUP_CHANGE:")) {
+		boolean processed = false;
+		String operation = command;
+		if(command.startsWith("GROUP_CHANGE:")) {
 			String gid = command.substring(command.indexOf(':') + 1);
-			OsMoGroup gr = groups.get(gid);
+			OsMoGroup gr = storage.getGroup(gid);
 			if(gr != null) {
-				mergeGroup(gr, obj, false);
+				List<OsMoDevice> delta = mergeGroup(gr, obj, false);
+				for(OsMoDevice d :delta) {
+					if(d.getDeletedTimestamp() != 0 && d.isEnabled()) {
+						disconnectImpl(d);
+					} else if(d.isEnabled() && !d.isActive()) {
+						connectDeviceImpl(d);
+					}
+				}
+				storage.save();
 			}
-			return true;
-		} else if(command.startsWith("CREATE_GROUP:")) {
+			processed = true;
+		} else if(command.startsWith("GROUP_DISCONNECT:")) {
 			String gid = command.substring(command.indexOf(':') + 1);
-			OsMoGroup gr = new OsMoGroup();
-			gr.groupId = gid;
-			try {
-				gr.name = obj.getString(GROUP_NAME);
-			} catch (JSONException e) {
-				e.printStackTrace();
-				service.showErrorMessage(e.getMessage());
+			OsMoGroup gr = storage.getGroup(gid);
+			if(gr != null) {
+				disconnectAllGroupUsers(gr);
 			}
-			joinGroup(gid);
-		} else if(command.startsWith("JOIN_GROUP:")) {
+			processed = true;
+		} else if(command.startsWith("GROUP_CONNECT:")) {
 			String gid = command.substring(command.indexOf(':') + 1);
-			String myGroupTrackerId = getMyGroupTrackerId();
-			OsMoGroup gr = groups.get(gid);
+			OsMoGroup gr = storage.getGroup(gid);
 			if(gr != null) {
 				mergeGroup(gr, obj, true);
 				gr.active = true;
-				for(String key : gr.users.keySet()) {
-					if (!key.equals(myGroupTrackerId)) {
-						tracker.startTrackingId(key);
-					}
+				// connect to all devices in group
+				for(OsMoDevice d : storage.getMainGroup().getGroupUsers()) {
+					connectDeviceImpl(d);
 				}
+				storage.save();
 			}
-			return true;
-		} else if(command.startsWith("LEAVE_GROUP:")) {
-			String myGroupTrackerId = getMyGroupTrackerId();
+			processed = true;
+		} else if(command.startsWith("GROUP_CREATE:") || command.startsWith("GROUP_JOIN:") ) {
+			if(command.startsWith("GROUP_CREATE:")) {
+				operation = "GROUP_CREATE";
+			}
 			String gid = command.substring(command.indexOf(':') + 1);
-			OsMoGroup gr = groups.get(gid);
-			if(gr != null) {
-				gr.active = false;
-				for(String key : gr.users.keySet()) {
-					if (!key.equals(myGroupTrackerId)) {
-						tracker.stopTrackingId(key);
-					}
-				}
+			OsMoGroup gr = storage.getGroup(gid);
+			if(gr == null) {
+				gr = new OsMoGroup();
+				gr.groupId = gid;
 			}
-			return true;
+			parseGroup(obj, gr);
+			connectGroupImpl(gr);
+			storage.save();
+			processed = true;
+		} else if(command.startsWith("LEAVE_GROUP:")) {
+			String gid = command.substring(command.indexOf(':') + 1);
+			OsMoGroup gr = storage.getGroup(gid);
+			if(gr != null) {
+				disconnectAllGroupUsers(gr);
+				storage.deleteGroup(gr);
+				storage.save();
+			}
+			processed = true;
 		}
-		return false;
+		if(processed && uiListener != null) {
+			uiListener.groupsListChange(operation);
+		}
+		return processed;
 	}
 
-	private String getMyGroupTrackerId() {
-		String myGroupTrackerId = "";
-		SessionInfo currentSessionInfo = service.getCurrentSessionInfo();
-		if(currentSessionInfo != null) {
-			myGroupTrackerId = currentSessionInfo.groupTrackerId;
-		}
-		return myGroupTrackerId;
-	}
-	
-	
-	private void mergeGroup(OsMoGroup gr, JSONObject obj, boolean deleteUsers) {
+	private void parseGroup(JSONObject obj, OsMoGroup gr) {
 		try {
 			if(obj.has(GROUP_NAME)) {
 				gr.name = obj.getString(GROUP_NAME);
 			}
-			String myGroupTrackerId = getMyGroupTrackerId();
-			JSONArray arr = obj.getJSONArray(GROUP_TRACKERS);
-			Set<String> toDelete = new HashSet<String>(gr.users.keySet());
+			if(obj.has(DESCRIPTION)) {
+				gr.description = obj.getString(DESCRIPTION);
+			}
+			if(obj.has(POLICY)) {
+				gr.description = obj.getString(POLICY);
+			}
+			if(obj.has(EXPIRE_TIME)) {
+				gr.expireTime = obj.getLong(EXPIRE_TIME);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+			service.showErrorMessage(e.getMessage());
+		}
+		
+	}
+
+	private void disconnectAllGroupUsers(OsMoGroup gr) {
+		gr.active = false;
+		for(OsMoDevice d : gr.getGroupUsers()) {
+			disconnectImpl(d);
+		}
+	}
+
+	
+	private List<OsMoDevice> mergeGroup(OsMoGroup gr, JSONObject obj, boolean deleteUsers) {
+		List<OsMoDevice> delta = new ArrayList<OsMoDevice>();
+		try {
+			parseGroup(obj, gr);
+			JSONArray arr = obj.getJSONArray(USERS);
+			Map<String, OsMoDevice> toDelete = new HashMap<String, OsMoDevice>(gr.users);
 			for (int i = 0; i < arr.length(); i++) {
 				JSONObject o = (JSONObject) arr.get(i);
-				String tid = o.getString(TRACKER_ID);
-				toDelete.remove(tid);
-				OsMoUser us = gr.users.get(tid);
-				if (us == null) {
-					us = new OsMoUser();
-					us.group = gr;
-					us.trackerId = tid;
-					gr.users.put(tid, us);
-					if(gr.active) {
-						if (!tid.equals(myGroupTrackerId)) {
-							tracker.startTrackingId(tid);
-						}
-					}
+				String tid = o.getString(GROUP_TRACKER_ID);
+				OsMoDevice device = toDelete.remove(tid);
+				if (device == null) {
+					device = new OsMoDevice();
+					device.group =  gr;
+					device.trackerId = tid;
+					device.enabled = true;
+					gr.users.put(tid, device);
 				}
-				if (o.has(NAME)) {
-					us.serverName = o.getString(NAME);
+				if (o.has(USER_NAME)) {
+					device.serverName = o.getString(USER_NAME);
 				}
+				if (o.has(DELETED) && o.getBoolean(DELETED)) {
+					device.deleted = System.currentTimeMillis();
+				} else {
+					device.deleted = 0;
+				}
+				
+				if (o.has(LAST_ONLINE)) {
+					device.lastOnline = o.getLong(LAST_ONLINE);
+				}
+				if (o.has(USER_COLOR)) {
+					device.serverColor = o.getInt(USER_COLOR);
+				}
+				delta.add(device);
 			}
 			if(deleteUsers) {
-				for(String s : toDelete) {
-					gr.users.remove(s);
-					if(gr.active) {
-						tracker.stopTrackingId(s);
-					}
+				for(OsMoDevice s : toDelete.values()) {
+					s.deleted = System.currentTimeMillis();
+					delta.add(s);
 				}
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 			service.showErrorMessage(e.getMessage());
 		}
-	}
-
-	public void joinGroup(String groupId) {
-		service.pushCommand("GROUP_JOIN:"+groupId);
+		return delta;
 	}
 	
-	public void connectGroup(String groupId) {
-		service.pushCommand("GROUP_CONNECT:"+groupId);
-	}
 	
-	public void disconnectGroup(String groupId) {
-		service.pushCommand("GROUP_DISCONNECT:"+groupId);
-	}
-	
-	public void createGroup(String groupName, long expireTime, String description, String policy) {
+	public String createGroup(String groupName, long expireTime, String description, String policy) {
 		JSONObject obj = new JSONObject();
 		try {
 			obj.put("name", groupName);
 			obj.put("expireTime", expireTime);
 			obj.put("description", description);
 			obj.put("policy", policy);
-			service.pushCommand("AGROUP_CREATE|" + obj.toString());
+			service.pushCommand("GROUP_CREATE|" + obj.toString());
+			return "GROUP_CREATE";
 		} catch (JSONException e) {
 			throw new RuntimeException(e);
 		}
 }
 	
 	
-	public void leaveGroup(OsMoGroup group) {
-		service.pushCommand("GROUP_LEAVE:"+group.groupId);
+	
+	public OsMoDevice addConnectedDevice(String trackerId, String nameUser, int userColor) {
+		OsMoDevice us = new OsMoDevice();
+		us.group = storage.getMainGroup();
+		us.trackerId = trackerId;
+		us.userName = nameUser;
+		us.userColor = userColor;
+		us.group.users.put(trackerId, us);
+		connectDeviceImpl(us);
+		storage.save();
+		return us;
 	}
+	public String joinGroup(String groupId, String userName) {
+		final String op = "GROUP_JOIN:"+groupId;
+		OsMoGroup g = storage.getGroup(groupId);
+		if(g == null){
+			g = new OsMoGroup();
+			g.groupId = groupId;
+			storage.addGroup(g);
+		}
+		g.userName = userName;		
+		service.pushCommand(op);
+		return op; 
+	}
+	
+	public String leaveGroup(OsMoGroup group) {
+		final String op = "GROUP_LEAVE:"+group.groupId;
+		service.pushCommand(op);
+		return op;
+	}
+	
+
 
 
 }

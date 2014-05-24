@@ -14,11 +14,13 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	private boolean startSendingLocations;
 	private OsMoService service;
 	private int locationsSent = 0;
+	private OsmoTrackerListener uiTrackerListener = null;
 	private OsmoTrackerListener trackerListener = null;
+	private Location lastSendLocation;
 	
 	public interface OsmoTrackerListener {
 		
-		public void locationChange(String trackerId);
+		public void locationChange(String trackerId, Location location);
 	}
 
 	public OsMoTracker(OsMoService service) {
@@ -62,6 +64,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	public String nextSendCommand(OsMoThread thread) {
 		if(!bufferOfLocations.isEmpty()){
 			Location loc = bufferOfLocations.poll();
+			lastSendLocation = loc;
 			StringBuilder cmd = new StringBuilder("T|");
 			cmd.append("L").append((float)loc.getLatitude()).append(":").append((float)loc.getLongitude());
 			if(loc.hasAccuracy()) {
@@ -83,6 +86,10 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 			return cmd.toString(); 
 		}
 		return null;
+	}
+	
+	public Location getLastSendLocation() {
+		return lastSendLocation;
 	}
 
 	public void sendCoordinate(Location location) {
@@ -140,8 +147,11 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 					loc.setSpeed(speed);
 				}
 				otherLocations.put(tid, loc);
-				if(trackerListener != null){
-					trackerListener.locationChange(tid);
+				if(trackerListener != null) {
+					trackerListener.locationChange(tid, loc);
+				}
+				if(uiTrackerListener != null){
+					uiTrackerListener.locationChange(tid, loc);
 				}
 			}
 			return true;
@@ -149,12 +159,20 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 		return false;
 	}
 	
+	public void setTrackerListener(OsmoTrackerListener trackerListener) {
+		this.trackerListener = trackerListener;
+	}
+	
 	public OsmoTrackerListener getTrackerListener() {
 		return trackerListener;
 	}
 	
-	public void setTrackerListener(OsmoTrackerListener trackerListener) {
-		this.trackerListener = trackerListener;
+	public OsmoTrackerListener getUITrackerListener() {
+		return uiTrackerListener;
+	}
+	
+	public void setUITrackerListener(OsmoTrackerListener trackerListener) {
+		this.uiTrackerListener = trackerListener;
 	}
 
 	
