@@ -5,8 +5,7 @@
     android:orientation="vertical"
     >
 
-
-
+	<include layout="@layout/osmo_groups_list_header"/>
     <ExpandableListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"

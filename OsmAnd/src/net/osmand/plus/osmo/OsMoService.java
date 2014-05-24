@@ -48,6 +48,17 @@ public class OsMoService implements OsMoSender {
 		return thread != null && thread.isConnected();
 	}
 	
+	public boolean isActive() {
+		return thread != null && thread.isActive();
+	}
+	
+	public long getLastCommandTime() {
+		if(isConnected()) {
+			return thread.getLastCommandTime();
+		}
+		return 0;
+	}
+	
 	public long getConnectionTime() {
 		return thread == null || !thread.isConnected() ? System.currentTimeMillis() : thread.getConnectionTime(); 
 	}

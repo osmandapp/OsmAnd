@@ -29,9 +29,12 @@ public class OsMoThread {
 //	private static String TRACKER_SERVER = "srv.osmo.mobi";
 //	private static int TRACKER_PORT = 3245;
 
+	private static final String PING_CMD = "P";
 	protected final static Log log = PlatformUtil.getLog(OsMoThread.class);
 	private static final long HEARTBEAT_DELAY = 100;
 	private static final long HEARTBEAT_FAILED_DELAY = 10000;
+	private static final long TIMEOUT_TO_RECONNECT = 10 * 60 * 1000;
+	private static final long TIMEOUT_TO_PING = 2 * 60 * 1000;
 	private static final long LIMIT_OF_FAILURES_RECONNECT = 10;
 	private static final long SELECT_TIMEOUT = 500;
 	private static int HEARTBEAT_MSG = 3;
@@ -51,6 +54,8 @@ public class OsMoThread {
 	private SessionInfo sessionInfo = null;
 	private SocketChannel activeChannel;
 	private long connectionTime;
+	private long lastSendCommand = 0;
+	private long pingSent = 0;
 	private ByteBuffer pendingSendCommand;
 	private String readCommand = "";
 	private ByteBuffer pendingReadCommand = ByteBuffer.allocate(2048);
@@ -80,6 +85,8 @@ public class OsMoThread {
 		}
 		authorized = 0;
 		reconnect = false;
+		failures = 0;
+		lastSendCommand = 0;
 		selector = Selector.open();
 		SocketChannel activeChannel = SocketChannel.open();
 		activeChannel.configureBlocking(true);
@@ -124,6 +131,10 @@ public class OsMoThread {
 	public boolean isConnected() {
 		return activeChannel != null;
 	}
+	
+	public boolean isActive() {
+		return activeChannel != null && pingSent == 0 && authorized == 2; 
+	}
 
 	protected void checkAsyncSocket() {
 		long delay = HEARTBEAT_DELAY;
@@ -142,7 +153,9 @@ public class OsMoThread {
 			if (activeChannel != null && !activeChannel.isConnected()) {
 				activeChannel = null;
 			}
-			if (failures++ > LIMIT_OF_FAILURES_RECONNECT) {
+			if(lastSendCommand != 0 && System.currentTimeMillis() - lastSendCommand > TIMEOUT_TO_RECONNECT  ) {
+				reconnect = true;
+			} else if (failures++ > LIMIT_OF_FAILURES_RECONNECT) {
 				reconnect = true;
 			}
 		}
@@ -263,6 +276,9 @@ public class OsMoThread {
 					}
 				}
 				continue;
+			} else if(header.equalsIgnoreCase(PING_CMD)) {
+				pingSent = 0;
+				// lastSendCommand = System.currentTimeMillis(); // not needed handled by send
 			}
 			boolean processed = false;
 			for (OsMoReactor o : listReactors) {
@@ -275,6 +291,7 @@ public class OsMoThread {
 				log.warn("Command not processed '" + cmd + "'");
 			}
 		}
+		lastSendCommand = System.currentTimeMillis();
 	}
 
 	private void parseAuthCommand(String data, JSONObject obj) throws JSONException {
@@ -311,6 +328,7 @@ public class OsMoThread {
 		while (pendingSendCommand != null) {
 			activeChannel.write(pendingSendCommand);
 			if (!pendingSendCommand.hasRemaining()) {
+				lastSendCommand = System.currentTimeMillis();
 				pendingSendCommand = getNewPendingSendCommand();
 			} else {
 				break;
@@ -337,6 +355,13 @@ public class OsMoThread {
 				log.info("OSMO send " + res);
 				return ByteBuffer.wrap(res.toString().getBytes("UTF-8"));
 			}
+		}
+		if(System.currentTimeMillis() - lastSendCommand > TIMEOUT_TO_PING) {
+			if(pingSent == 0) {
+				pingSent = System.currentTimeMillis();
+				return ByteBuffer.wrap(prepareCommand(PING_CMD).toString().getBytes("UTF-8"));
+			}
+			
 		}
 		return null;
 	}
@@ -368,5 +393,9 @@ public class OsMoThread {
 			l += "\n";
 		}
 		return res;
+	}
+
+	public long getLastCommandTime() {
+		return lastSendCommand;
 	}
 }

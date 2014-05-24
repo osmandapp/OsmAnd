@@ -3,19 +3,27 @@ package net.osmand.plus.osmo;
 import net.osmand.Location;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.BaseMapWidget;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+import android.view.View;
 
 public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlServices {
 
@@ -24,6 +32,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	private OsMoService service;
 	private OsMoTracker tracker;
 	private OsMoGroups groups;
+	private BaseMapWidget osmoControl;
 
 	public OsMoPlugin(final OsmandApplication app) {
 		service = new OsMoService(app);
@@ -33,6 +42,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		}
 		groups = new OsMoGroups(service, tracker, app.getSettings());
 		this.app = app;
+		ApplicationMode.regWidget("osmo_control", (ApplicationMode[])null);
 	}
 
 	@Override
@@ -72,6 +82,76 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		if (lock != null && !lock.getMonitorActions().contains(this)) {
 			lock.addMonitorActions(this);
 		}
+		
+		
+	}
+	
+	@Override
+	public void registerLayers(MapActivity activity) {
+		super.registerLayers(activity);
+		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
+		osmoControl = createOsMoControl(activity, layer.getPaintText(), layer.getPaintSubText());
+		layer.getMapInfoControls().registerSideWidget(osmoControl,
+				R.drawable.mon_osmo_conn_big, R.string.osmo_control, "osmo_control", false, 18);
+		layer.recreateControls();
+	}
+	
+	/**
+	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
+	 */
+	private BaseMapWidget createOsMoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+		final Drawable srcSmall = map.getResources().getDrawable(R.drawable.mon_osmo_conn_small);
+		final Drawable srcSignalSmall = map.getResources().getDrawable(R.drawable.mon_osmo_conn_signal_small);
+		final Drawable srcBig = map.getResources().getDrawable(R.drawable.mon_osmo_conn_big);
+		final Drawable srcSignalBig = map.getResources().getDrawable(R.drawable.mon_osmo_conn_signal_big);
+		final Drawable srcinactive = map.getResources().getDrawable(R.drawable.monitoring_rec_inactive);
+		final TextInfoWidget osmoControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
+			long lastUpdateTime;
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				boolean visible = true;
+				String txt = "";
+				String subtxt = "OsMo";
+				Drawable small = srcinactive;
+				Drawable big = srcinactive;
+				if (service.isActive()) {
+					small = tracker.isEnabledTracker() ? srcSignalSmall : srcSmall;
+					big = tracker.isEnabledTracker() ? srcSignalBig : srcBig;
+					long last = service.getLastCommandTime();
+					if (last != lastUpdateTime) {
+						lastUpdateTime = last;
+						blink(big, small);
+					}
+				}
+				setText(txt, subtxt);
+				setImageDrawable(small);
+				
+				updateVisibility(visible);
+				return true;
+			}
+			
+			private void blink(Drawable bigger, final Drawable smaller ) {
+				setImageDrawable(bigger);
+				invalidate();
+				postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						setImageDrawable(smaller);
+						invalidate();
+					}
+				}, 500);
+			}
+		};
+		osmoControl.updateInfo(null);
+
+		osmoControl.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(map, OsMoGroupsActivity.class);
+				map.startActivity(intent);
+			}
+		});
+		return osmoControl;
 	}
 
 	@Override
@@ -127,7 +207,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
-		helper.item(R.string.osmo_groups).icons(R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light)
+		helper.item(R.string.osmo_groups).icons(R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light).position(4)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {

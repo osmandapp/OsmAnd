@@ -309,16 +309,33 @@ public class OsMoGroups implements OsMoReactor {
 	}
 
 	public void joinGroup(String groupId) {
-		service.pushCommand("JOIN_GROUP|"+groupId);
+		service.pushCommand("GROUP_JOIN:"+groupId);
 	}
 	
-	public void createGroup(String groupName) {
-		service.pushCommand("CREATE_GROUP|{\"group_name\":\"" + groupName + "\"}");
+	public void connectGroup(String groupId) {
+		service.pushCommand("GROUP_CONNECT:"+groupId);
 	}
+	
+	public void disconnectGroup(String groupId) {
+		service.pushCommand("GROUP_DISCONNECT:"+groupId);
+	}
+	
+	public void createGroup(String groupName, long expireTime, String description, String policy) {
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("name", groupName);
+			obj.put("expireTime", expireTime);
+			obj.put("description", description);
+			obj.put("policy", policy);
+			service.pushCommand("AGROUP_CREATE|" + obj.toString());
+		} catch (JSONException e) {
+			throw new RuntimeException(e);
+		}
+}
 	
 	
 	public void leaveGroup(OsMoGroup group) {
-		service.pushCommand("LEAVE_GROUP|"+group.groupId);
+		service.pushCommand("GROUP_LEAVE:"+group.groupId);
 	}
 
 

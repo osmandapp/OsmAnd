@@ -7,6 +7,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -50,13 +51,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
+import com.actionbarsherlock.view.ActionMode.Callback;
 
 /**
  *
@@ -65,7 +70,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		OsmAndLocationListener, OsmoTrackerListener {
 
 	public static final int CONNECT_TO_DEVICE = 1;
-	public static final int DELETE_ID = 2;
+	protected static final int DELETE_ACTION_ID = 2;
 	public static final int CREATE_GROUP = 3;
 	public static final int JOIN_GROUP = 4;
 	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
@@ -82,6 +87,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private Path directionPath = new Path();
 	private Location lastLocation;
 	private float lastCompass;
+	private ActionMode actionMode;
+	private boolean selectionMode;
+	private Set<OsMoUser> selectedObjects = new HashSet<OsMoGroups.OsMoUser>();
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -90,18 +98,31 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		super.onCreate(icicle);
-		setContentView(R.layout.favourites_list);
-		getSupportActionBar().setTitle(R.string.favourites_activity);
+		setContentView(R.layout.osmo_groups_list);
+		getSupportActionBar().setTitle(R.string.osmo_activity);
 		setSupportProgressBarIndeterminateVisibility(false);
 		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
 
 		osMoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 		adapter = new OsMoGroupsAdapter(osMoPlugin.getGroups(), osMoPlugin.getTracker());
 		getExpandableListView().setAdapter(adapter);
-
 		app = (OsmandApplication) getApplication();
+		
 		uiHandler = new Handler();
 		directionPath = createDirectionPath();
+		CompoundButton trackr = (CompoundButton) findViewById(R.id.enable_tracker);
+		trackr.setChecked(osMoPlugin.getTracker().isEnabledTracker());
+		trackr.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked) {
+					osMoPlugin.getTracker().enableTracker();
+				} else {
+					osMoPlugin.getTracker().disableTracker();
+				}
+			}
+		});
 	}
 
 	private Path createDirectionPath() {
@@ -151,18 +172,44 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		app.getLocationProvider().removeLocationListener(this);
 		osMoPlugin.getTracker().setTrackerListener(null);
 	}
+	
+	private void enterSelectionMode() {
+		actionMode = startActionMode(new Callback() {
+			@Override
+			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+				selectionMode = true;
+				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
+						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				return true;
+			}
+
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				return false;
+			}
+
+			@Override
+			public void onDestroyActionMode(ActionMode mode) {
+				selectionMode = false;
+			}
+
+			@Override
+			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+				if(item.getItemId() == DELETE_ACTION_ID) {
+				}
+				return true;
+			}
+		});
+
+	}
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		// if(selectionMode){
-		// CheckBox ch = (CheckBox) v.findViewById(R.id.check_item);
-		// FavouritePoint model = adapter.getChild(groupPosition, childPosition);
-		// ch.setChecked(!ch.isChecked());
-		// if(ch.isChecked()){
-		// favoritesToDelete.add(model);
-		// } else {
-		// favoritesToDelete.remove(model);
-		// }
+		if (!selectionMode) {
+			enterSelectionMode();
+		}
+		OsMoUser user = adapter.getChild(groupPosition, childPosition);
+		selectedObjects.add(user);
 		return true;
 	}
 
@@ -173,12 +220,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			return true;
 		} else if (item.getItemId() == JOIN_GROUP) {
 			// shareFavourites();
-			return true;
-		} else if (item.getItemId() == DELETE_ID) {
-			// enterDeleteMode();
-			return true;
-		} else if (item.getItemId() == CREATE_GROUP) {
-			// deleteFavoritesAction();
 			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
@@ -210,12 +251,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				R.drawable.ic_action_marker_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, JOIN_GROUP, R.string.osmo_join_group, R.drawable.ic_action_markers_light,
 				R.drawable.ic_action_markers_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		// createMenuItem(menu, IMPORT_ID, R.string.import_fav, R.drawable.ic_action_grefresh_light,
-		// R.drawable.ic_action_grefresh_dark,
-		// MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		// createMenuItem(menu, DELETE_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light,
-		// R.drawable.ic_action_delete_dark,
-		// MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT) ;
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -337,33 +372,22 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = getLayoutInflater();
-				row = inflater.inflate(R.layout.expandable_list_item_category, parent, false);
+				row = inflater.inflate(R.layout.osmo_group_item, parent, false);
 				fixBackgroundRepeat(row);
 			}
 			adjustIndicator(groupPosition, isExpanded, row);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final OsMoGroup model = getGroup(groupPosition);
 			label.setText(model.getVisibleName(OsMoGroupsActivity.this));
-			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
-
-			ch.setVisibility(View.INVISIBLE);
-//			ch.setChecked(groupsToDelete.contains(model));
-//
-//			ch.setOnClickListener(new View.OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-					// if (ch.isChecked()) {
-					// groupsToDelete.add(model);
-					// List<FavouritePoint> fvs = helper.getFavoriteGroups().get(model);
-					// if (fvs != null) {
-					// favoritesToDelete.addAll(fvs);
-					// }
-					// adapter.notifyDataSetInvalidated();
-					// } else {
-					// groupsToDelete.remove(model);
-					// }
-//				}
-//			});
+			final CompoundButton ch = (CompoundButton) row.findViewById(R.id.check_item);
+			ch.setVisibility(View.VISIBLE);
+			ch.setChecked(model.active);
+			ch.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					osMoPlugin.getGroups().joinGroup(model.groupId);
+				}
+			});
 			return row;
 		}
 
@@ -378,6 +402,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 			TextView label = (TextView) row.findViewById(R.id.osmo_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.osmo_user_icon);
+			final CompoundButton ch = (CompoundButton) row.findViewById(R.id.check_item);
+			ch.setVisibility(View.VISIBLE);
+
 			final OsMoUser model = (OsMoUser) getChild(groupPosition, childPosition);
 			row.setTag(model);
 

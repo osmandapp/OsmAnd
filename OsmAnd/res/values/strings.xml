@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmo_activity">Osm Monitoring</string>
+    <string name="osmo_enable_tracker">Send my locations</string>
+    <string name="osmo_control">OsMo quick access</string>
     <string name="hours_ago">hours ago</string>
     <string name="minutes_ago">min ago</string>
     <string name="seconds_ago">sec ago</string>
@@ -33,6 +36,7 @@
     <string name="tip_recent_changes_1_8_alpha">Changes in 1.8:
         * Calculate route between route points of GPX track
         * Changed layout of countries for downloads (support local names search)
+        * Supports GPX/KML import (convert from KML to GPX)
     </string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
     <string name="osmo_mode_restart">Restart OsMo session</string>
