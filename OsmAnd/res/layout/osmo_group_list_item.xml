@@ -10,7 +10,7 @@
 	<ImageView android:id="@+id/osmo_user_icon" android:layout_width="26dp" android:layout_height="26dp" android:paddingRight="2dp" android:paddingTop="2dp"
 			/>
 	
-	<TextView android:id="@+id/osmo_label" android:layout_width="fill_parent" android:layout_marginLeft="10dp"
+	<TextView android:id="@+id/osmo_label" android:layout_width="wrap_content" android:layout_marginLeft="10dp"
 	    android:layout_weight="1"
 		android:layout_height="wrap_content" style="@style/ListText"/>
 	<include layout="@layout/check_item"/>

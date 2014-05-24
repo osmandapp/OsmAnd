@@ -19,12 +19,11 @@
 
     <TextView
         android:id="@+id/category_name"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
-        android:autoLink="web"
         android:gravity="center_vertical"
         android:textSize="18sp">
     </TextView>

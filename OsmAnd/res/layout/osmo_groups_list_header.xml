@@ -11,6 +11,8 @@
         android:id="@+id/motd"
         android:layout_marginBottom="8dip"
         android:gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:textSize="18sp" />
 
     <CheckBox

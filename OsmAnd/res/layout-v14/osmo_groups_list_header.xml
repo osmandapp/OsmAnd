@@ -7,11 +7,15 @@
     android:layout_marginRight="5dp"
     android:orientation="vertical" >
 
+
     <TextView
         android:id="@+id/motd"
         android:layout_marginBottom="8dip"
         android:gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:textSize="18sp" />
+
 
     <Switch
         android:id="@+id/enable_tracker"
