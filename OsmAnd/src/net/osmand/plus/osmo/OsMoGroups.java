@@ -77,8 +77,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 
 	private String connectGroupImpl(OsMoGroup g) {
 		g.enabled = true;
-		String operation = "CONNECT_GROUP:" + g.groupId;
-		service.pushCommand("CONNECT_GROUP:" + g.groupId);
+		String operation = "GROUP_CONNECT:" + g.groupId;
+		service.pushCommand("GROUP_CONNECT:" + g.groupId);
 		return operation;
 	}
 
@@ -337,6 +337,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	public String leaveGroup(OsMoGroup group) {
 		final String op = "GROUP_LEAVE:"+group.groupId;
 		storage.deleteGroup(group);
+		storage.save();
 		service.pushCommand(op);
 		if(group.isEnabled()) {
 			disconnectAllGroupUsers(group);

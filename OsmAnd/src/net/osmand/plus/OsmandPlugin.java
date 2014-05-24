@@ -66,6 +66,9 @@ public abstract class OsmandPlugin {
 		OsmandRasterMapsPlugin rasterMapsPlugin = new OsmandRasterMapsPlugin(app);
 		installedPlugins.add(rasterMapsPlugin);
 		installedPlugins.add(new OsmandMonitoringPlugin(app));
+		installedPlugins.add(new OsMoPlugin(app));
+		installedPlugins.add(new AudioVideoNotesPlugin(app));
+		installedPlugins.add(new DistanceCalculatorPlugin(app));
 		installedPlugins.add(new AccessibilityPlugin(app));
 		if(!installPlugin(SRTM_PLUGIN_COMPONENT_PAID, SRTMPlugin.ID, app,
 				new SRTMPlugin(app, true))) {
@@ -74,10 +77,7 @@ public abstract class OsmandPlugin {
 		}
 		installPlugin(PARKING_PLUGIN_COMPONENT, ParkingPositionPlugin.ID, app, new ParkingPositionPlugin(app));
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
-		installedPlugins.add(new DistanceCalculatorPlugin(app));
-		installedPlugins.add(new AudioVideoNotesPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
-		installedPlugins.add(new OsMoPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
 		
 		

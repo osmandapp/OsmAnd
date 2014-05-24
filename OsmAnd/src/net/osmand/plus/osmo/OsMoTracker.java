@@ -111,7 +111,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 			
 			if (location.getTime() - ltime  > pref.get()) {
 				if(lastBufferLocation != null && (!lastBufferLocation.hasSpeed() || lastBufferLocation.getSpeed() < 1) &&
-						lastBufferLocation.distanceTo(location) < 40){
+						lastBufferLocation.distanceTo(location) < 20){
 					// ignores
 					return;
 				}
@@ -131,9 +131,10 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 
 	public void sendCoordinate(double lat, double lon) {
 		Location l = new Location("test");
+		l.setTime(System.currentTimeMillis());
 		l.setLatitude(lat);
 		l.setLongitude(lon);
-		bufferOfLocations.add(l);
+		sendCoordinate(l);
 	}
 	
 

@@ -732,9 +732,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				long seconds = Math.max(0, (System.currentTimeMillis() - location.getTime()) / 1000);
 				String time = "";
 				if (seconds < 60) {
-					if(seconds > 15) {
-						seconds = (seconds / 5) * 5;
-					}
+					seconds = (seconds / 5) * 5;
 					time = seconds + " " + getString(R.string.seconds_ago);
 					
 				} else if (seconds / 60 < 100) {
@@ -749,10 +747,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				((Spannable) label.getText()).setSpan(
 						new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0,
 						distance.length() - 1, 0);
-				labelTime.setText(time);
+				labelTime.setText(time, TextView.BufferType.SPANNABLE);
 				((Spannable) labelTime.getText()).setSpan(
 						new ForegroundColorSpan(getResources().getColor(seconds < 60 ? R.color.color_ok : R.color.color_unknown)), 0,
-						time.length() -1, 0);
+						time.length(), 0);
 			}
 
 			return row;
