@@ -7,7 +7,14 @@
     android:layout_marginRight="5dp"
     android:orientation="vertical" >
 
-
+	<ImageView
+        android:id="@+id/osmo_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="6dp"
+        android:src="@drawable/mon_osmo_conn_small" />
+    
     <TextView
         android:id="@+id/motd"
         android:layout_marginBottom="8dip"

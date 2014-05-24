@@ -18,6 +18,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -256,7 +257,7 @@ public class OsMoThread {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-			}
+			} 
 			boolean error = false;
 			if(obj != null && obj.has("error")) {
 				error = true;

@@ -22,6 +22,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -243,6 +244,13 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 		if(command.equals("MOTD")) {
 			SessionInfo si = getCurrentSessionInfo();
 			if(si != null) {
+				if(data.startsWith("[")){
+					try {
+						data = new JSONArray(data).getString(0);
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
 				si.motd = data;
 			}
 			return true;

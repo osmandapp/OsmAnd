@@ -9,17 +9,22 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmo_connect_to_device_tracker_id">Tracker id</string>
+    <string name="osmo_connect_to_device_name">Device name</string>
+    <string name="osmo_connect_to_group_id">Group id</string>
+    <string name="osmo_connect_to_group_name">Group name</string>
+    <string name="osmo_connect_to_device">Device</string>
+    <string name="osmo_connect_to_group">Group</string>
+    <string name="osmo_connect">Connect to</string>
+    <string name="osmo_create_group">Create group</string>
+    <string name="osmo_server_operation_failed">OsMo Server operation failed</string>
     <string name="osmo_activity">Osm Monitoring</string>
     <string name="osmo_enable_tracker">Send my locations</string>
     <string name="osmo_control">OsMo quick access</string>
     <string name="hours_ago">hours ago</string>
     <string name="minutes_ago">min ago</string>
     <string name="seconds_ago">sec ago</string>
-    <string name="osmo_connect_to_device_name">Name of device</string>
-    <string name="osmo_connect_to_device_tracker_id">Tracker id</string>
     <string name="osmo_connect_to_device">Link with device</string>
-    <string name="osmo_join_group">Join group</string>
-    <string name="osmo_new_device">Connect to device</string>
     <string name="osmo_connected_devices">Connected devices</string>
     <string name="osmo_groups">OsMo Groups/Devices</string>
     <string name="osmo_auto_send_locations_descr">Automatically start tracker session and send locations after application startup</string>

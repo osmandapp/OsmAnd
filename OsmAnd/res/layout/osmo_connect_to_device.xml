@@ -1,17 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="3dp"
-	android:paddingRight="3dp" android:stretchColumns="1">
-  <TableRow >
-  	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" 
-  			android:text="@string/osmo_connect_to_device_tracker_id"/>
-  	<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="3dp"
-  			android:id="@+id/TrackerId" android:inputType="textCapCharacters" android:selectAllOnFocus="true"/>
-  </TableRow>
-  <TableRow>
-  	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" 
-  			android:text="@string/osmo_connect_to_device_name"/>
-  	<EditText android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="3dp"
-  			android:id="@+id/Name" android:inputType="textCapWords" />
-  </TableRow>
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    android:stretchColumns="1" >
+
+    <TableRow>
+
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_span="2" >
+
+            <RadioButton
+                android:id="@+id/ConnectToDevice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/osmo_connect_to_device" />
+
+            <RadioButton
+                android:id="@+id/ConnectToGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/osmo_connect_to_group" />
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/LabelTrackerId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/osmo_connect_to_device_tracker_id" />
+
+        <EditText
+            android:id="@+id/TrackerId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapCharacters"
+            android:paddingLeft="3dp"
+            android:selectAllOnFocus="true" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/LabelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/osmo_connect_to_device_name" />
+
+        <EditText
+            android:id="@+id/Name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:paddingLeft="3dp" />
+    </TableRow>
+
 </TableLayout>

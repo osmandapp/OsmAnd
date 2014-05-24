@@ -7,12 +7,9 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -25,10 +22,12 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListActivity;
-import net.osmand.plus.osmo.OsMoGroups.OsMoGroup;
-import net.osmand.plus.osmo.OsMoGroups.OsMoUser;
+import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -38,9 +37,9 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,30 +51,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.ActionMode.Callback;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
-import com.actionbarsherlock.view.ActionMode.Callback;
 
 /**
  *
  */
 public class OsMoGroupsActivity extends OsmandExpandableListActivity implements OsmAndCompassListener,
-		OsmAndLocationListener, OsmoTrackerListener {
+		OsmAndLocationListener, OsmoTrackerListener, OsMoGroupsUIListener {
 
-	public static final int CONNECT_TO_DEVICE = 1;
+	public static final int CONNECT_TO = 1;
 	protected static final int DELETE_ACTION_ID = 2;
 	public static final int CREATE_GROUP = 3;
-	public static final int JOIN_GROUP = 4;
 	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	private static final long RECENT_THRESHOLD = 60000;
 
@@ -91,8 +90,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private Location lastLocation;
 	private float lastCompass;
 	private ActionMode actionMode;
-	private boolean selectionMode;
-	private Set<OsMoDevice> selectedObjects = new HashSet<OsMoGroups.OsMoDevice>();
+	private Object selectedObject = null;
+	private String operation;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -124,6 +123,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				} else {
 					osMoPlugin.getTracker().disableTracker();
 				}
+				updateStatus();
 			}
 		});
 		TextView mtd = (TextView) findViewById(R.id.motd);
@@ -132,6 +132,49 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		mtd.setVisibility(visible? View.VISIBLE:View.GONE);
 		if(visible) {
 			mtd.setText(si.motd);
+		}
+		
+		updateStatus();
+	}
+
+	long lastUpdateTime;
+	private Drawable blinkImg;
+	private void blink(final ImageView status, Drawable bigger, final Drawable smaller ) {
+		blinkImg = smaller;
+		status.setImageDrawable(bigger);
+		status.invalidate();
+		uiHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				blinkImg = null;
+				status.setImageDrawable(smaller);
+				status.invalidate();
+			}
+		}, 500);
+	}
+
+	private void updateStatus() {
+		ImageView status = (ImageView) findViewById(R.id.osmo_status);
+		final Drawable srcSmall = getResources().getDrawable(R.drawable.mon_osmo_conn_small);
+		final Drawable srcSignalSmall = getResources().getDrawable(R.drawable.mon_osmo_conn_signal_small);
+		final Drawable srcBig = getResources().getDrawable(R.drawable.mon_osmo_conn_big);
+		final Drawable srcSignalBig = getResources().getDrawable(R.drawable.mon_osmo_conn_signal_big);
+		final Drawable srcinactive = getResources().getDrawable(R.drawable.monitoring_rec_inactive);
+		Drawable small = srcinactive;
+		Drawable big = srcinactive;
+		OsMoService service = osMoPlugin.getService();
+		OsMoTracker tracker = osMoPlugin.getTracker();
+		long last = service.getLastCommandTime();
+		if (service.isActive()) {
+			small = tracker.isEnabledTracker() ? srcSignalSmall : srcSmall;
+			big = tracker.isEnabledTracker() ? srcSignalBig : srcBig;
+		}
+		if (blinkImg != small) {
+			status.setImageDrawable(small);
+		}
+		if (last != lastUpdateTime) {
+			lastUpdateTime = last;
+			blink(status, big, small);
 		}
 	}
 
@@ -183,11 +226,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		osMoPlugin.getTracker().setUITrackerListener(null);
 	}
 	
-	private void enterSelectionMode() {
+	private void enterSelectionMode(final Object o) {
 		actionMode = startActionMode(new Callback() {
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-				selectionMode = true;
+				selectedObject = o;
 				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				return true;
@@ -200,12 +243,27 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
-				selectionMode = false;
+				selectedObject = null;
 			}
 
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-				if(item.getItemId() == DELETE_ACTION_ID) {
+				if(item.getItemId() == DELETE_ACTION_ID ) {
+					Builder bld = new AlertDialog.Builder(OsMoGroupsActivity.this);
+					String name = (selectedObject instanceof OsMoDevice)? ((OsMoDevice) selectedObject).getVisibleName() :
+						((OsMoGroup) selectedObject).getVisibleName(OsMoGroupsActivity.this);
+					bld.setTitle(getString(R.string.delete_confirmation_msg, name));
+					bld.setPositiveButton(R.string .default_buttons_yes, new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							Object obj = selectedObject;
+							quitSelectionMode();
+							deleteObject(obj);
+						}
+					});
+					bld.setNegativeButton(R.string.default_buttons_no, null);
+					bld.show();
 				}
 				return true;
 			}
@@ -213,42 +271,99 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 	}
 
+	protected void deleteObject(Object selectedObject) {
+		if(selectedObject instanceof OsMoDevice) {
+			OsMoDevice d = (OsMoDevice)selectedObject;
+			osMoPlugin.getGroups().deleteDevice(d);
+			adapter.update(d.getGroup());
+			adapter.notifyDataSetChanged();
+		} else {
+			if (checkOperationIsNotRunning()) {
+				String operation = osMoPlugin.getGroups().leaveGroup((OsMoGroup) selectedObject);
+				startLongRunningOperation(operation);
+			}
+			adapter.notifyDataSetChanged();
+		}
+		
+	}
+
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		if (!selectionMode) {
-			enterSelectionMode();
-		}
 		OsMoDevice user = adapter.getChild(groupPosition, childPosition);
-		selectedObjects.add(user);
+		if (user != selectedObject) {
+			enterSelectionMode(user);
+		} else {
+			quitSelectionMode();
+		}
 		return true;
+	}
+
+	private void quitSelectionMode() {
+		selectedObject = null;
+		actionMode.finish();
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
-		if (item.getItemId() == CONNECT_TO_DEVICE) {
+		if (item.getItemId() == CONNECT_TO) {
 			connectToDevice();
 			return true;
-		} else if (item.getItemId() == JOIN_GROUP) {
-			// shareFavourites();
+		} else if (item.getItemId() == CREATE_GROUP) {
+			createGroup();
 			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
+	private void createGroup() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void connectToDevice() {
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.osmo_connect_to_device);
 		final View v = getLayoutInflater().inflate(R.layout.osmo_connect_to_device, getExpandableListView(), false);
+		final RadioButton device = (RadioButton) v.findViewById(R.id.ConnectToDevice);
+		//final RadioButton group = (RadioButton) v.findViewById(R.id.ConnectToGroup);
+		final TextView labelTracker = (TextView ) v.findViewById(R.id.LabelTrackerId);
+		final TextView labelName = (TextView ) v.findViewById(R.id.LabelName);
 		final EditText tracker = (EditText) v.findViewById(R.id.TrackerId);
 		final EditText name = (EditText) v.findViewById(R.id.Name);
+		device.setChecked(true);
+		device.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked) {
+					labelTracker.setText(R.string.osmo_connect_to_device_tracker_id);
+					labelName.setText(R.string.osmo_connect_to_device_name);
+				} else {
+					labelTracker.setText(R.string.osmo_connect_to_group_id);
+					labelName.setText(R.string.osmo_connect_to_group_name);
+				}
+			}
+		});
+		
 		builder.setView(v);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				String nameUser = name.getText().toString();
-				adapter.registerUser(tracker.getText().toString(), nameUser);
+				final String nameUser = name.getText().toString();
+				final String id = tracker.getText().toString();
+				if(device.isChecked()) {
+					OsMoDevice dev = osMoPlugin.getGroups().addConnectedDevice(id, nameUser, 0);
+					adapter.update(dev.group);
+					adapter.notifyDataSetChanged();
+				} else {
+					if(!checkOperationIsNotRunning()) {
+						return;
+					}
+					String op = osMoPlugin.getGroups().joinGroup(id, nameUser);
+					startLongRunningOperation(op);
+				}
 			}
 		});
 		builder.create().show();
@@ -257,25 +372,62 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		createMenuItem(menu, CONNECT_TO_DEVICE, R.string.osmo_new_device, R.drawable.ic_action_marker_light,
-				R.drawable.ic_action_marker_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		createMenuItem(menu, JOIN_GROUP, R.string.osmo_join_group, R.drawable.ic_action_markers_light,
-				R.drawable.ic_action_markers_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		createMenuItem(menu, CONNECT_TO, R.string.osmo_connect, 
+				0, 0,/*R.drawable.ic_action_marker_light,*/
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		createMenuItem(menu, CREATE_GROUP, R.string.osmo_create_group, 
+				0, 0,/*R.drawable.ic_action_marker_light,*/
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	public void showProgressBar() {
+	public void startLongRunningOperation(String operation) {
+		this.operation = operation;
 		setSupportProgressBarIndeterminateVisibility(true);
+		uiHandler.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				Toast.makeText(OsMoGroupsActivity.this, R.string.osmo_server_operation_failed, Toast.LENGTH_LONG).show();
+				hideProgressBar();
+			}
+		}, 15000);
 	}
 
 	public void hideProgressBar() {
+		OsMoGroupsActivity.this.operation = null;
 		setSupportProgressBarIndeterminateVisibility(false);
+	}
+	
+	@Override
+	public void groupsListChange(final String operation, final OsMoGroup group) {
+		uiHandler.post(new Runnable() {
+			
+			@Override
+			public void run() {
+				String top = OsMoGroupsActivity.this.operation;
+				if(operation == top || (operation != null && operation.equals(top))) {
+					hideProgressBar();
+				}
+				adapter.update(group);				
+				adapter.notifyDataSetChanged();
+				updateStatus();
+			}
+		});
+	}
+	
+	public boolean checkOperationIsNotRunning() {
+		if(operation != null) {
+			Toast.makeText(this, R.string.wait_current_task_finished, Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		return true;
 	}
 
 	class OsMoGroupsAdapter extends OsmandBaseExpandableListAdapter {
 
-		private List<OsMoGroup> sortedGroups = new ArrayList<OsMoGroups.OsMoGroup>();
-		private Map<OsMoGroup, List<OsMoDevice>> users = new LinkedHashMap<OsMoGroups.OsMoGroup, List<OsMoDevice>>();
+		private List<OsMoGroup> sortedGroups = new ArrayList<OsMoGroup>();
+		private Map<OsMoGroup, List<OsMoDevice>> users = new LinkedHashMap<OsMoGroup, List<OsMoDevice>>();
 		private OsMoGroups grs;
 		private OsMoTracker tracker;
 
@@ -285,43 +437,38 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			synchronizeGroups();
 		}
 
-		public void registerUser(String trackerId, String nameUser) {
-			addUser(grs.registerUser(trackerId, nameUser));
-		}
+		public void update(OsMoGroup group) {
+			if(group.isDeleted()) {
+				sortedGroups.remove(group);
+				users.remove(group);
+			} else {
+				List<OsMoDevice> us = !group.isEnabled() && !group.isMainGroup() ? new ArrayList<OsMoDevice>(0) : group.getGroupUsers();
+				final Collator ci = Collator.getInstance();
+				Collections.sort(us, new Comparator<OsMoDevice>() {
 
-		public void sort(Comparator<OsMoDevice> comparator) {
-			for (List<OsMoDevice> ps : users.values()) {
-				Collections.sort(ps, comparator);
+					@Override
+					public int compare(OsMoDevice lhs, OsMoDevice rhs) {
+						return ci.compare(lhs.getVisibleName(), rhs.getVisibleName());
+					}
+				});
+				users.put(group, us);
+				if(!sortedGroups.contains(group)) {
+					sortedGroups.add(group);
+				}
 			}
 		}
+		
 
-		public void addUser(OsMoDevice p) {
-			if (!users.containsKey(p.getGroup())) {
-				users.put(p.getGroup(), new ArrayList<OsMoDevice>());
-				sortedGroups.add(p.getGroup());
-			}
-			users.get(p.getGroup()).add(p);
-			notifyDataSetChanged();
-		}
 
 		public void synchronizeGroups() {
 			users.clear();
 			sortedGroups.clear();
 			final Collator clt = Collator.getInstance();
-			for (OsMoGroup key : grs.getGroups().values()) {
+			for (OsMoGroup key : grs.getGroups()) {
 				sortedGroups.add(key);
-				final ArrayList<OsMoDevice> list = new ArrayList<OsMoDevice>(key.users.values());
-				Collections.sort(list, new Comparator<OsMoGroups.OsMoDevice>() {
-
-					@Override
-					public int compare(OsMoDevice lhs, OsMoDevice rhs) {
-						return clt.compare(lhs.getVisibleName(), rhs.getVisibleName());
-					}
-				});
-				users.put(key, list);
+				update(key);
 			}
-			Collections.sort(sortedGroups, new Comparator<OsMoGroups.OsMoGroup>() {
-
+			Collections.sort(sortedGroups, new Comparator<OsMoGroup>() {
 				@Override
 				public int compare(OsMoGroup lhs, OsMoGroup rhs) {
 					if (lhs.isMainGroup()) {
@@ -398,13 +545,24 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			ch.setVisibility(model.isMainGroup() ? View.INVISIBLE : View.VISIBLE);
 			ch.setChecked(model.enabled);
 			ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				
+				boolean revert = false;
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					if(revert) {
+						revert = false;
+						return;
+					}
+					if(checkOperationIsNotRunning()) {
+						revert = true;
+						ch.setChecked(!isChecked);
+						return;
+					}
 					if(isChecked) {
-						osMoPlugin.getGroups().connectGroup(model);
+						String operation = osMoPlugin.getGroups().connectGroup(model);
+						startLongRunningOperation(operation);
 					} else {
-						osMoPlugin.getGroups().disconnectGroup(model);
+						String operation = osMoPlugin.getGroups().disconnectGroup(model);
+						startLongRunningOperation(operation);
 					}
 				}
 			});
@@ -446,7 +604,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			
 
 			LatLon lnLocation = mapLocation;
-			Location location = tracker.getLastLocation(model.trackerId);
+			Location location = model.getLastLocation();
+			if(model.getTrackerId().equals(osMoPlugin.getService().getMyGroupTrackerId())) {
+				location = tracker.getLastSendLocation();
+			}
+			//Location location = tracker.getLastLocation(model.trackerId);
 			if (location == null || lnLocation == null) {
 				icon.setImageResource(R.drawable.list_favorite);
 				label.setText(model.getVisibleName());
@@ -505,6 +667,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				@Override
 				public void run() {
 					adapter.notifyDataSetChanged();
+					updateStatus();
 				}
 			});
 			msg.what = LIST_REFRESH_MSG_ID;
@@ -563,5 +726,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			paintRouteDirection.setColorFilter(cf);
 		}
 	}
+
 
 }

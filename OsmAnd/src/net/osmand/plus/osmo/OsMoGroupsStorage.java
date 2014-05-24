@@ -203,6 +203,7 @@ public class OsMoGroupsStorage {
 		protected boolean enabled;
 		protected long expireTime;
 		protected boolean active;
+		protected boolean deleted;
 		
 		protected Map<String, OsMoDevice> users = new ConcurrentHashMap<String, OsMoDevice>(); 
 		
@@ -215,6 +216,10 @@ public class OsMoGroupsStorage {
 				}
 			}
 			return dvs;
+		}
+		
+		public boolean isDeleted() {
+			return deleted;
 		}
 		
 		public String getDescription() {
@@ -370,10 +375,12 @@ public class OsMoGroupsStorage {
 
 	public void deleteGroup(OsMoGroup gr) {
 		groups.remove(gr.groupId);
+		gr.deleted = true;
 	}
 
 	public void addGroup(OsMoGroup g) {
 		groups.put(g.groupId, g);
+		g.deleted = false;
 		
 	}
 
