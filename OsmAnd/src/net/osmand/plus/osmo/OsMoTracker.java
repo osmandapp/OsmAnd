@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import net.osmand.Location;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class OsMoTracker implements OsMoSender, OsMoReactor {
@@ -20,6 +21,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	private Location lastSendLocation;
 	private Location lastBufferLocation;
 	private CommonPreference<Integer> pref;
+	private String sessionURL;
 	
 	public interface OsmoTrackerListener {
 		
@@ -31,6 +33,13 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 		this.pref = pref;
 		service.registerSender(this);
 		service.registerReactor(this);
+	}
+	
+	public String getSessionURL() {
+		if (!isEnabledTracker()) {
+			return null;
+		}
+		return "http://test1342.osmo.mobi/u/" + sessionURL;
 	}
 	
 	public boolean isEnabledTracker() {
@@ -130,15 +139,30 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 
 	@Override
 	public boolean acceptCommand(String command, String data, JSONObject obj, OsMoThread thread) {
-		if(command.startsWith("LT:")) {
+		if(command.equals("LISTEN")) {
+			return true;
+		} else if(command.equals("UNLISTEN")) {
+			return true;
+		} else if(command.equals("TRACKER_SESSION_CLOSE")) {
+			return true;
+		} else if(command.equals("TRACKER_SESSION_OPEN")) {
+			try {
+				sessionURL = obj.getString("url");
+			} catch (JSONException e) {
+				service.showErrorMessage(e.getMessage());
+				e.printStackTrace();
+			}
+			return true;
+		} else if(command.startsWith("LT:")) {
 			String tid = command.substring(command.indexOf(':') + 1);
 			float lat = 0;
 			float lon = 0;
 			float speed = 0;
-			int k = 1;
-			for (int i = 0; i <= data.length(); i++) {
-				boolean separator = i == data.length() || Character.isDigit(data.charAt(i)) || data.charAt(i) == ':'
-						|| data.charAt(i) == '.';
+			int k = 0;
+			for (int i = 1; i <= data.length(); i++) {
+				boolean separator = i == data.length() || 
+					!(Character.isDigit(data.charAt(i)) ||
+							data.charAt(i) == ':' || data.charAt(i) == '.');
 				if (separator) {
 					char ch = data.charAt(k);
 					String vl = data.substring(k + 1, i);

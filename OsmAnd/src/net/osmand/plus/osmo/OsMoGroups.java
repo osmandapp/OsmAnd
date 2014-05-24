@@ -195,14 +195,13 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 			connectGroupImpl(group);
 			storage.save();
 			processed = true;
-		} else if(command.startsWith("LEAVE_GROUP:")) {
+		} else if(command.startsWith("GROUP_LEAVE:")) {
 			String gid = command.substring(command.indexOf(':') + 1);
 			group = storage.getGroup(gid);
 			if(group != null) {
-				disconnectAllGroupUsers(group);
 				storage.deleteGroup(group);
-				storage.save();
 			}
+			storage.save();
 			processed = true;
 		}
 		if(processed && uiListener != null) {
@@ -339,6 +338,9 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		final String op = "GROUP_LEAVE:"+group.groupId;
 		storage.deleteGroup(group);
 		service.pushCommand(op);
+		if(group.isEnabled()) {
+			disconnectAllGroupUsers(group);
+		}
 		return op;
 	}
 

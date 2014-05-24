@@ -51,7 +51,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		grp.addPreference(sendLocationsref);
 		
 		grp.addPreference(createTimeListPreference(settings.OSMO_SAVE_TRACK_INTERVAL, SECONDS,
-				MINUTES, 1000, R.string.save_track_interval, R.string.save_track_interval_descr));
+				MINUTES, 1000, R.string.osmo_track_interval, R.string.osmo_track_interval_descr));
 		
 		debugPref = new Preference(this);
 		debugPref.setTitle(R.string.osmo_settings_debug);
