@@ -10,6 +10,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import android.net.Uri;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -192,8 +193,14 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 					confirm.show();
 				} else if (resId == R.string.local_index_mi_backup) {
 					new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
+				} else if (resId == R.string.local_index_mi_export) {
+					final Uri fileUri = Uri.fromFile(new File(info.getPathToData()));
+					final Intent sendIntent = new Intent(Intent.ACTION_SEND);
+					sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+					sendIntent.setType("application/gpx+xml");
+					startActivity(sendIntent);
 				}
-				
 			}
 		};
 		if(info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.SRTM_DATA){
@@ -205,7 +212,10 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			adapter.item(R.string.local_index_mi_restore).listen(listener).position(2).reg();
 		}
 		adapter.item(R.string.local_index_mi_rename).listen(listener).position(3).reg();
-		adapter.item(R.string.local_index_mi_delete).listen(listener).position( 4 ).reg();
+		adapter.item(R.string.local_index_mi_delete).listen(listener).position(4).reg();
+		if (info.getType() == LocalIndexType.GPX_DATA) {
+			adapter.item(R.string.local_index_mi_export).listen(listener).position(5).reg();
+		}
 	}
 	
 	private void renameFile(LocalIndexInfo info) {
