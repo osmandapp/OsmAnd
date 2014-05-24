@@ -95,6 +95,11 @@ public class GPXUtilities {
 		public double hdop = Double.NaN;
 
 		public WptPt() {
+			this(0,0);
+		}
+
+		public WptPt(double lat, double lon) {
+			this(lat, lon, 0, Double.NaN, 0, Double.NaN);
 		}
 
 		@Override
@@ -126,9 +131,12 @@ public class GPXUtilities {
 			this.hdop = hdop;
 		}
 
-		@Override
 		public boolean isVisible() {
 			return true;
+		}
+
+		public WptPt copy() {
+			 return new WptPt(lat, lon, time, ele, speed, hdop);
 		}
 
 	}
@@ -491,6 +499,9 @@ public class GPXUtilities {
 		public String warning = null;
 		public String path = "";
 		public boolean showCurrentTrack;
+
+		public GPXFile() {
+		}
 
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);

@@ -16,6 +16,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
+import net.osmand.plus.gpxedit.GpxEditorPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmo.OsMoPlugin;
@@ -93,6 +94,7 @@ public abstract class OsmandPlugin {
 //		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
+		installedPlugins.add(new GpxEditorPlugin(app));
 		
 		for (OsmandPlugin plugin : installedPlugins) {
 			if (enabledPlugins.contains(plugin.getId())) {

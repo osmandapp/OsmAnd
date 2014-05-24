@@ -222,6 +222,17 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 				setLocation(0, 0).setZoomAndScale(3, 0).setPixelDimensions(getWidth(), getHeight()).build();
 		currentViewport.setDensity(dm.density);
 
+		setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				for (OsmandMapLayer layer: layers) {
+					if (layer.onTouch(v, event))
+						return true;
+				}
+				return false;
+			}
+		});
+		
 	}
 
 	@Override
@@ -890,6 +901,11 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onScroll(e1,e2,distanceX, distanceY)) {
+					return true;
+				}
+			}
 			dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
 			return true;
 		}
@@ -923,6 +939,15 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private class MapTileViewOnDoubleTapListener implements OnDoubleTapListener {
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
+			PointF point = new PointF(e.getX(), e.getY());
+			if (log.isDebugEnabled()) {
+				log.debug("On double tap event " + point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onDoubleTap(point, getCurrentRotatedTileBox())) {
+					return true;
+				}
+			}
 			final RotatedTileBox tb = getCurrentRotatedTileBox();
 			final double lat = tb.getLatFromPixel(e.getX(), e.getY());
 			final double lon = tb.getLonFromPixel(e.getX(), e.getY());

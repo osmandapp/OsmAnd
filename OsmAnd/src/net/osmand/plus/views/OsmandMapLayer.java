@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 import java.util.Map;
 
+import android.view.View;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import android.graphics.Canvas;
@@ -46,7 +47,19 @@ public abstract class OsmandMapLayer {
 	 * it should return true.
 	 */
 	public abstract boolean drawInScreenPixels();
-	
+
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+		return false;
+	}
+
+	public boolean onTouch(View v, MotionEvent event) {
+		return false;
+	}
+
+	public boolean onDoubleTap(PointF point, RotatedTileBox currentRotatedTileBox) {
+		return false;
+	}
+
 	public static class DrawSettings {
 		private final boolean nightMode;
 		private final boolean updateVectorRendering;

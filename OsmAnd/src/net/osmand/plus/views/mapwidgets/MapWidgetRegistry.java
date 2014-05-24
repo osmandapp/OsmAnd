@@ -100,10 +100,15 @@ public class MapWidgetRegistry {
 	}
 	
 	public MapWidgetRegInfo registerTopWidget(View m, int drawable, int messageId, String key, int left, int priorityOrder) {
+		return registerTopWidget(m, drawable, messageId, key, left, priorityOrder, true);
+	}
+
+	public MapWidgetRegInfo registerTopWidget(View m, int drawable, int messageId, String key, int left, int priorityOrder, boolean configurable) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.key = key;
 		ii.visibleModes = new LinkedHashSet<ApplicationMode>(); 
 		ii.visibleCollapsible = null;
+		ii.configurable = configurable;
 		for(ApplicationMode ms : ApplicationMode.values(settings) ) {
 			boolean def = ms.isWidgetVisible(key);
 			Set<String> set = visibleElementsFromSettings.get(ms);
@@ -128,9 +133,11 @@ public class MapWidgetRegistry {
 		this.top.add(ii);
 		return ii;
 	}
-	
-	
-	
+
+	public Set<MapWidgetRegInfo> getTopWidgets() {
+		return top;
+	}
+
 	public void registerSideWidget(BaseMapWidget m, int drawable, int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.key = key;
@@ -238,7 +245,13 @@ public class MapWidgetRegistry {
 	}
 	
 	public Set<MapWidgetRegInfo> getTop() {
-		return top;
+		final Set<MapWidgetRegInfo> tops = new HashSet<MapWidgetRegInfo>();
+		for (MapWidgetRegInfo mapWidgetRegInfo : top) {
+			if (mapWidgetRegInfo.isConfigurable()) {
+				tops.add(mapWidgetRegInfo);
+			}
+		}
+		return tops;
 	}
 	
 	public Set<MapWidgetRegInfo> getAppearanceWidgets() {
@@ -314,13 +327,14 @@ public class MapWidgetRegistry {
 		public int drawable;
 		public int messageId;
 		public String message;
-		private String key;
+		public String key;
 		private int position;
 		private String category;
 		private Set<ApplicationMode> visibleModes;
 		private Set<ApplicationMode> visibleCollapsible;
 		private OsmandPreference<?> preference = null;
 		private Runnable stateChangeListener = null;
+		private boolean configurable = true;
 		public int priorityOrder;
 		
 		public boolean visibleCollapsed(ApplicationMode mode){
@@ -338,7 +352,11 @@ public class MapWidgetRegistry {
 		public boolean selecteable(){
 			return preference == null || (preference.get() instanceof Boolean);
 		}
-		
+
+		public boolean isConfigurable() {
+			return configurable;
+		}
+
 		public boolean visible(ApplicationMode mode){
 			if(preference != null) {
 				Object value = preference.getModeValue(mode);

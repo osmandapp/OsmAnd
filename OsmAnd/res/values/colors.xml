@@ -67,5 +67,7 @@
 	<color name="shadow_color">#33888888</color>
 	<color name="sherpafy_selection">#ff33b5e5</color>
 	<color name="sherpafy_add_text">#b9b9b9</color>
-	
+
+	<color name="red">#C8FF0000</color>
+	<color name="semi_transparent">#80000000</color>
 </resources>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:orientation="horizontal"
+		>
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				  android:orientation="horizontal"
+				  android:layout_width="wrap_content"
+				  android:layout_height="match_parent"
+			>
+		<ImageView
+				android:id="@+id/widget_gpx_edit_undo"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:src="@drawable/widget_gpx_edit_undo"
+				android:contentDescription="@string/gpx_edit_undo"
+				android:visibility="invisible"
+				/>
+
+		<ImageView
+				android:id="@+id/widget_gpx_edit_redo"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:src="@drawable/widget_gpx_edit_redo"
+				android:contentDescription="@string/gpx_edit_redo"
+				android:visibility="invisible"
+				/>
+		<ImageView
+				android:id="@+id/widget_gpx_edit_delete"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:src="@drawable/widget_gpx_edit_delete"
+				android:contentDescription="@string/gpx_edit_delete_long"
+				android:visibility="invisible"
+				/>
+	</LinearLayout>
+
+	<TextView
+			android:id="@+id/gpx_edit_gpx_file_name"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textSize="14pt"
+			android:textColor="@color/color_black"
+			android:textStyle="bold"
+			android:layout_weight="1"
+			android:scrollHorizontally="true"
+			android:ellipsize="end"
+			android:maxLines="1"
+			android:singleLine="true"
+			/>
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				  android:orientation="horizontal"
+				  android:layout_width="wrap_content"
+				  android:layout_height="match_parent"
+			>
+		<ImageView
+				android:id="@+id/widget_gpx_edit_route"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:src="@drawable/widget_gpx_edit_route"
+				android:contentDescription="@string/gpx_edit_route"
+				android:visibility="invisible"
+				android:paddingRight="5dp"
+				/>
+		<ImageView
+				android:id="@+id/widget_gpx_edit_poi"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:src="@drawable/widget_gpx_edit_favourite"
+				android:contentDescription="@string/gpx_edit_track_favourite"
+				android:visibility="invisible"
+				android:paddingRight="5dp"
+				/>
+		<ImageView
+				android:id="@+id/widget_gpx_edit_track"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:src="@drawable/widget_gpx_edit_track"
+				android:contentDescription="@string/gpx_edit_track"
+				android:visibility="invisible"
+				android:paddingRight="5dp"
+				/>
+		<ImageView
+				android:id="@+id/widget_gpx_edit_favourite"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:src="@drawable/widget_gxp_edit_poi_favourite"
+				android:contentDescription="@string/add_to_favourite"
+				android:visibility="invisible"
+				/>
+	</LinearLayout>
+</merge>
