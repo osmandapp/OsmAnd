@@ -306,7 +306,11 @@ public class OsMoThread {
 				sessionInfo.username = obj.getString("name");
 			}
 			if (obj.has("motd")) {
-				sessionInfo.motdTimestamp = obj.getLong("motd");
+				long l = obj.getLong("motd");
+				if(l != sessionInfo.motdTimestamp ){
+					sessionInfo.motdTimestamp  = l;
+					service.pushCommand("MOTD");
+				}
 			}
 			if(obj.has("tracker_id")) {
 				sessionInfo.trackerId= obj.getString("tracker_id");

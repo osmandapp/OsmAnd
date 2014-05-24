@@ -521,7 +521,7 @@
   <string name="route_head">Avancez</string>
   <string name="first_time_continue">Continuer</string>
   <string name="first_time_download">Téléchargement des régions</string>
-  <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. La plupart des fonctionnalités de l\'application nécessitent des données régionales, utilisables hors-ligne, que vous pouvez au préalable télécharger ('Paramètres' → 'Données hors-ligne') ou préparer vous-même. Ces données permettront de visualiser les cartes et de rechercher une adresse, un point d\'intérêt (PI) ou un transport en commun.</string>
+  <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. La plupart des fonctionnalités de l\'application nécessitent des données régionales, utilisables hors-ligne, que vous pouvez au préalable télécharger (\'Paramètres\' → \'Données hors-ligne\') ou préparer vous-même. Ces données permettront de visualiser les cartes et de rechercher une adresse, un point d\'intérêt (PI) ou un transport en commun.</string>
   <string name="search_poi_location">Recherche d\'un signal…</string>
   <string name="search_near_map">Rechercher près du dernier emplacement</string>
   <string name="search_nearby">Rechercher à proximité</string>

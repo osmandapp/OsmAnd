@@ -27,6 +27,7 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListActivity;
 import net.osmand.plus.osmo.OsMoGroups.OsMoGroup;
 import net.osmand.plus.osmo.OsMoGroups.OsMoUser;
+import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -52,6 +53,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -123,6 +125,13 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				}
 			}
 		});
+		TextView mtd = (TextView) findViewById(R.id.motd);
+		SessionInfo si = osMoPlugin.getService().getCurrentSessionInfo();
+		boolean visible = si != null && si.motd != null && si.motd.length() > 0;
+		mtd.setVisibility(visible? View.VISIBLE:View.GONE);
+		if(visible) {
+			mtd.setText(si.motd);
+		}
 	}
 
 	private Path createDirectionPath() {

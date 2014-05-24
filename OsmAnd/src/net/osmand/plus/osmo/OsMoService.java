@@ -28,7 +28,7 @@ import org.json.JSONObject;
 import android.os.Build;
 import android.provider.Settings.Secure;
 
-public class OsMoService implements OsMoSender {
+public class OsMoService implements OsMoSender, OsMoReactor {
 	private OsMoThread thread;
 	private List<OsMoSender> listSenders = new java.util.concurrent.CopyOnWriteArrayList<OsMoSender>();
 	private List<OsMoReactor> listReactors = new java.util.concurrent.CopyOnWriteArrayList<OsMoReactor>();
@@ -42,6 +42,7 @@ public class OsMoService implements OsMoSender {
 	public OsMoService(OsmandApplication app) {
 		this.app = app;
 		listSenders.add(this);
+		listReactors.add(this);
 	}
 	
 	public boolean isConnected() {
@@ -149,6 +150,8 @@ public class OsMoService implements OsMoSender {
 		public String username;
 		public long serverTimeDelta;
 		public long motdTimestamp;
+		
+		public String motd = "";
 	}
 	
 	public SessionInfo getCurrentSessionInfo() {
@@ -224,6 +227,18 @@ public class OsMoService implements OsMoSender {
 			return commands.poll();
 		}
 		return null;
+	}
+
+	@Override
+	public boolean acceptCommand(String command, String data, JSONObject obj, OsMoThread tread) {
+		if(command.equals("MOTD")) {
+			SessionInfo si = getCurrentSessionInfo();
+			if(si != null) {
+				si.motd = data;
+			}
+			return true;
+		}
+		return false;
 	}
 	
 }
