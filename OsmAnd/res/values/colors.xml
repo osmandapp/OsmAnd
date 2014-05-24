@@ -13,6 +13,8 @@
 	<color name="color_white">#FFFFFF</color>
 	<color name="color_black">#000000</color>
 	
+	<color name="row_selection_color">#CC33BBE0</color>
+	
 	<!-- Themed color list items -->
 	<!-- invalid -red, localindex not supported,  -->
 	<color name="color_invalid">#EE3232</color>

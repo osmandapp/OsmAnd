@@ -19,6 +19,7 @@ import org.json.JSONObject;
 public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
 	private static final String GROUP_NAME = "name";
+	private static final String GROUP_ID = "group_id";
 	private static final String EXPIRE_TIME = "expireTime";
 	private static final String DESCRIPTION = "description";
 	private static final String POLICY = "policy";
@@ -171,11 +172,19 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				storage.save();
 			}
 			processed = true;
-		} else if(command.startsWith("AGROUP_CREATE:") || command.startsWith("GROUP_JOIN:") ) {
-			if(command.startsWith("AGROUP_CREATE:")) {
-				operation = "AGROUP_CREATE";
+		} else if(command.startsWith("AGROUP_CREATE") || command.startsWith("GROUP_JOIN:") ) {
+			String gid ;
+			if(command.startsWith("AGROUP_CREATE")) {
+				try {
+					gid = obj.getString(GROUP_ID);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					service.showErrorMessage(e.getMessage());
+					return true;
+				}
+			} else {
+				gid = command.substring(command.indexOf(':') + 1);
 			}
-			String gid = command.substring(command.indexOf(':') + 1);
 			group = storage.getGroup(gid);
 			if(group == null) {
 				group = new OsMoGroup();

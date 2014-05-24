@@ -9,10 +9,14 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="int_days">days</string>
+    <string name="osmo_expire_group">Expires in</string>
+    <string name="osmo_group_description">Description</string>
+    <string name="osmo_group_policy">Policy</string>
     <string name="osmo_connect_to_device_tracker_id">Tracker id</string>
     <string name="osmo_connect_to_device_name">Device name</string>
     <string name="osmo_connect_to_group_id">Group id</string>
-    <string name="osmo_connect_to_group_name">Group name</string>
+    <string name="osmo_group_name">Group name</string>
     <string name="osmo_connect_to_device">Device</string>
     <string name="osmo_connect_to_group">Group</string>
     <string name="osmo_connect">Connect to</string>

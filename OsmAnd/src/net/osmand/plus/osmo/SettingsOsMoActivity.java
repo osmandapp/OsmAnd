@@ -5,6 +5,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
@@ -22,11 +23,12 @@ import android.widget.Toast;
 
 public class SettingsOsMoActivity extends SettingsBaseActivity {
 
-	public static final String MORE_VALUE = "MORE_VALUE";
-	public static final String DEFINE_EDIT = "DEFINE_EDIT";
 	private Preference debugPref;
 	private Preference trackerId;
 	private CheckBoxPreference sendLocationsref;
+	
+	public static final int[] SECONDS = new int[] {1, 2, 3, 5, 10, 15, 30, 60, 90};
+	public static final int[] MINUTES = new int[] {2, 3, 5};
 	
 	
 	@Override
@@ -47,6 +49,9 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		sendLocationsref.setTitle(R.string.osmo_auto_send_locations);
 		sendLocationsref.setSummary(R.string.osmo_auto_send_locations_descr);
 		grp.addPreference(sendLocationsref);
+		
+		grp.addPreference(createTimeListPreference(settings.OSMO_SAVE_TRACK_INTERVAL, SECONDS,
+				MINUTES, 1000, R.string.save_track_interval, R.string.save_track_interval_descr));
 		
 		debugPref = new Preference(this);
 		debugPref.setTitle(R.string.osmo_settings_debug);

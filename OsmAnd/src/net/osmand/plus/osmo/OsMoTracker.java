@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.Location;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 
 import org.json.JSONObject;
 
@@ -17,14 +18,17 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	private OsmoTrackerListener uiTrackerListener = null;
 	private OsmoTrackerListener trackerListener = null;
 	private Location lastSendLocation;
+	private Location lastBufferLocation;
+	private CommonPreference<Integer> pref;
 	
 	public interface OsmoTrackerListener {
 		
 		public void locationChange(String trackerId, Location location);
 	}
 
-	public OsMoTracker(OsMoService service) {
+	public OsMoTracker(OsMoService service, CommonPreference<Integer> pref) {
 		this.service = service;
+		this.pref = pref;
 		service.registerSender(this);
 		service.registerReactor(this);
 	}
@@ -93,8 +97,18 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	}
 
 	public void sendCoordinate(Location location) {
-		if(startSendingLocations) {
-			bufferOfLocations.add(location);
+		if(startSendingLocations && location != null) {
+			long ltime = lastBufferLocation == null ? 0 : lastBufferLocation.getTime();
+			
+			if (location.getTime() - ltime  > pref.get()) {
+				if(lastBufferLocation != null && (!lastBufferLocation.hasSpeed() || lastBufferLocation.getSpeed() < 1) &&
+						lastBufferLocation.distanceTo(location) < 40){
+					// ignores
+					return;
+				}
+				lastBufferLocation = location;
+				bufferOfLocations.add(location);
+			}
 		}
 	}
 	

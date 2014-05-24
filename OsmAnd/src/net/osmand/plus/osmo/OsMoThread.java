@@ -34,7 +34,7 @@ public class OsMoThread {
 	protected final static Log log = PlatformUtil.getLog(OsMoThread.class);
 	private static final long HEARTBEAT_DELAY = 100;
 	private static final long HEARTBEAT_FAILED_DELAY = 10000;
-	private static final long TIMEOUT_TO_RECONNECT = 10 * 60 * 1000;
+	private static final long TIMEOUT_TO_RECONNECT = 60 * 1000;
 	private static final long TIMEOUT_TO_PING = 2 * 60 * 1000;
 	private static final long LIMIT_OF_FAILURES_RECONNECT = 10;
 	private static final long SELECT_TIMEOUT = 500;
@@ -84,6 +84,7 @@ public class OsMoThread {
 		if (sessionInfo == null) {
 			sessionInfo = service.prepareSessionToken();
 		}
+		this.activeChannel = null;
 		authorized = 0;
 		reconnect = false;
 		failures = 0;
@@ -150,10 +151,10 @@ public class OsMoThread {
 		} catch (Exception e) {
 			log.info("Exception selecting socket", e);
 			e.printStackTrace();
-			delay = HEARTBEAT_FAILED_DELAY;
 			if (activeChannel != null && !activeChannel.isConnected()) {
 				activeChannel = null;
 			}
+			delay = HEARTBEAT_FAILED_DELAY;
 			if(lastSendCommand != 0 && System.currentTimeMillis() - lastSendCommand > TIMEOUT_TO_RECONNECT  ) {
 				reconnect = true;
 			} else if (failures++ > LIMIT_OF_FAILURES_RECONNECT) {
@@ -279,6 +280,7 @@ public class OsMoThread {
 				continue;
 			} else if(header.equalsIgnoreCase(PING_CMD)) {
 				pingSent = 0;
+				continue;
 				// lastSendCommand = System.currentTimeMillis(); // not needed handled by send
 			}
 			boolean processed = false;
