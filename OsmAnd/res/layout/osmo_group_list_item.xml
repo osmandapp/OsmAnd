@@ -24,6 +24,6 @@
         android:maxLines="7"
         android:layout_weight="1" />
 
-    <include layout="@layout/check_item" />
+    <!-- <include layout="@layout/check_item" />  -->
 
 </LinearLayout>

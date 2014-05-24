@@ -135,7 +135,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 			float lat = 0;
 			float lon = 0;
 			float speed = 0;
-			int k = 0;
+			int k = 1;
 			for (int i = 0; i <= data.length(); i++) {
 				boolean separator = i == data.length() || Character.isDigit(data.charAt(i)) || data.charAt(i) == ':'
 						|| data.charAt(i) == '.';

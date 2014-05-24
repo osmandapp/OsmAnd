@@ -189,6 +189,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 			if(group == null) {
 				group = new OsMoGroup();
 				group.groupId = gid;
+				storage.addGroup(group);
 			}
 			parseGroup(obj, group);
 			connectGroupImpl(group);
@@ -336,6 +337,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
 	public String leaveGroup(OsMoGroup group) {
 		final String op = "GROUP_LEAVE:"+group.groupId;
+		storage.deleteGroup(group);
 		service.pushCommand(op);
 		return op;
 	}

@@ -56,8 +56,10 @@ import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -79,6 +81,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	public static final int CONNECT_TO = 1;
 	protected static final int DELETE_ACTION_ID = 2;
 	public static final int CREATE_GROUP = 3;
+	protected static final int ON_OFF_ACTION_ID = 4;
 	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	private static final long RECENT_THRESHOLD = 60000;
 
@@ -139,6 +142,34 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 		
 		updateStatus();
+		getExpandableListView().setOnGroupClickListener(new OnGroupClickListener() {
+			@Override
+			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+				OsMoGroup gr = adapter.getGroup(groupPosition);
+				if(gr.isMainGroup()) {
+					if(parent.isGroupExpanded(groupPosition)) {
+						parent.collapseGroup(groupPosition);
+					} else {
+						parent.expandGroup(groupPosition);
+					}
+				} else {
+					if(selectedObject == gr) {
+						quitSelectionMode();
+						if(parent.isGroupExpanded(groupPosition)) {
+							parent.collapseGroup(groupPosition);
+						} else {
+							parent.expandGroup(groupPosition);
+						}
+					} else {
+						enterSelectionMode(gr);
+					}
+				}
+				if(groupPosition == 0) {
+					return true;
+				}
+				return false;
+			}
+		});
 	}
 
 	long lastUpdateTime;
@@ -218,6 +249,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().resumeAllUpdates();
 		osMoPlugin.getTracker().setUITrackerListener(this);
+		osMoPlugin.getGroups().setUiListener(this);
 		adapter.synchronizeGroups();
 	}
 
@@ -228,15 +260,35 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		app.getLocationProvider().removeCompassListener(this);
 		app.getLocationProvider().removeLocationListener(this);
 		osMoPlugin.getTracker().setUITrackerListener(null);
+		osMoPlugin.getGroups().setUiListener(null);
 	}
 	
 	private void enterSelectionMode(final Object o) {
+		if(!checkOperationIsNotRunning()) {
+			return;
+		}
 		actionMode = startActionMode(new Callback() {
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				selectedObject = o;
 				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				MenuItem mi = createMenuItem(menu, ON_OFF_ACTION_ID, R.string.default_buttons_ok, 0, 0,
+						MenuItem.SHOW_AS_ACTION_ALWAYS);
+				
+		        final LayoutInflater inflater = LayoutInflater.from(OsMoGroupsActivity.this);
+		        View view = inflater.inflate(R.layout.check_item_rel, null);
+		        final CompoundButton check = (CompoundButton) view.findViewById(R.id.check_item);
+				check.setChecked(o instanceof OsMoDevice ? 
+						((OsMoDevice) o).isEnabled() : ((OsMoGroup) o).isEnabled());
+		        check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+					
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						onOffAction(check);						
+					}
+				});
+		        mi.setActionView(view);
 				return true;
 			}
 
@@ -268,8 +320,32 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					});
 					bld.setNegativeButton(R.string.default_buttons_no, null);
 					bld.show();
+				} else if(item.getItemId() == ON_OFF_ACTION_ID) {
+					CompoundButton bt = ((CompoundButton) item.getActionView().findViewById(R.id.check_item));
+					onOffAction(bt);
 				}
 				return true;
+			}
+
+			private void onOffAction(CompoundButton bt) {
+				if((selectedObject instanceof OsMoDevice)) {
+					OsMoDevice d = (OsMoDevice) selectedObject;
+					if(bt.isChecked()) {
+						osMoPlugin.getGroups().connectDevice(d);
+					} else {
+						osMoPlugin.getGroups().disconnectDevice(d);
+					}
+				} else {
+					OsMoGroup g = (OsMoGroup) selectedObject;
+					if(bt.isChecked()) {
+						String operation = osMoPlugin.getGroups().connectGroup(g);
+						startLongRunningOperation(operation);
+					} else {
+						String operation = osMoPlugin.getGroups().disconnectGroup(g);
+						startLongRunningOperation(operation);
+					}	
+				}
+				quitSelectionMode();
 			}
 		});
 
@@ -287,6 +363,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 			String operation = osMoPlugin.getGroups().leaveGroup((OsMoGroup) selectedObject);
 			startLongRunningOperation(operation);
+			
 			adapter.notifyDataSetChanged();
 		}
 		
@@ -294,9 +371,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		OsMoDevice user = adapter.getChild(groupPosition, childPosition);
-		if (user != selectedObject) {
-			enterSelectionMode(user);
+		OsMoDevice model = adapter.getChild(groupPosition, childPosition);
+		if (model != selectedObject) {
+			enterSelectionMode(model);
 		} else {
 			quitSelectionMode();
 		}
@@ -509,10 +586,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				@Override
 				public int compare(OsMoGroup lhs, OsMoGroup rhs) {
 					if (lhs.isMainGroup()) {
-						return 1;
+						return -1;
 					}
 					if (rhs.isMainGroup()) {
-						return -1;
+						return 1;
 					}
 					return clt.compare(lhs.getVisibleName(OsMoGroupsActivity.this),
 							rhs.getVisibleName(OsMoGroupsActivity.this));
@@ -562,7 +639,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 
 		@Override
-		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+		public View getGroupView(final int groupPosition, final boolean isExpanded, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = getLayoutInflater();
@@ -584,33 +661,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}
-			final CompoundButton ch = (CompoundButton) row.findViewById(R.id.check_item);
-			ch.setVisibility(model.isMainGroup() ? View.INVISIBLE : View.VISIBLE);
-			ch.setOnCheckedChangeListener(null);
-			ch.setChecked(model.enabled);
-			ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				boolean revert = false;
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					if(revert) {
-						revert = false;
-						return;
-					}
-					if(!checkOperationIsNotRunning()) {
-						revert = true;
-						ch.setChecked(!isChecked);
-						return;
-					}
-					if(isChecked) {
-						String operation = osMoPlugin.getGroups().connectGroup(model);
-						startLongRunningOperation(operation);
-					} else {
-						String operation = osMoPlugin.getGroups().disconnectGroup(model);
-						startLongRunningOperation(operation);
-					}
-				}
-			});
-			
 			return row;
 		}
 
@@ -631,27 +681,25 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 			TextView label = (TextView) row.findViewById(R.id.osmo_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.osmo_user_icon);
-			final CompoundButton ch = (CompoundButton) row.findViewById(R.id.check_item);
-			if(model.getGroup().isMainGroup()) {
-				ch.setVisibility(View.VISIBLE);
-				ch.setOnCheckedChangeListener(null);
-				ch.setChecked(model.enabled);
-				ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						if(isChecked) {
-							osMoPlugin.getGroups().connectDevice(model);
-						} else {
-							osMoPlugin.getGroups().disconnectDevice(model);
-						}						
-					}
-				});
-			} else {
-				ch.setVisibility(View.GONE);
-			}
-
-			
+//			final CompoundButton ch = (CompoundButton) row.findViewById(R.id.check_item);
+//			if(model.getGroup().isMainGroup()) {
+//				ch.setVisibility(View.VISIBLE);
+//				ch.setOnCheckedChangeListener(null);
+//				ch.setChecked(model.enabled);
+//				ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//					
+//					@Override
+//					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//						if(isChecked) {
+//							osMoPlugin.getGroups().connectDevice(model);
+//						} else {
+//							osMoPlugin.getGroups().disconnectDevice(model);
+//						}						
+//					}
+//				});
+//			} else {
+//				ch.setVisibility(View.GONE);
+//			}
 
 			LatLon lnLocation = mapLocation;
 			Location location = model.getLastLocation();
@@ -704,6 +752,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 			return row;
 		}
+
+		
 	}
 
 	@Override

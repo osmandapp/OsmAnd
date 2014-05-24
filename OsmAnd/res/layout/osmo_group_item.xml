@@ -8,7 +8,6 @@
     android:paddingRight="4dp"
     android:paddingTop="5dp" >
 
-
     <ImageView
         android:id="@+id/explist_indicator"
         android:layout_width="wrap_content"
@@ -20,13 +19,29 @@
     <TextView
         android:id="@+id/category_name"
         style="@style/ListText"
-        android:layout_width="0dp" 
-        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
-        android:textSize="18sp">
+        android:layout_weight="1"
+        android:textSize="18sp" >
     </TextView>
-    
-   <include layout="@layout/check_item"/>
+
+<!-- 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical" >
+
+        <CheckBox
+            android:id="@+id/check_item"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:focusable="false"
+            android:gravity="center_vertical" />
+    </RelativeLayout>
+ -->
+
 </LinearLayout>
