@@ -7,6 +7,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +89,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	protected static final int SHARE_ID = 5;
 	protected static final int SHOW_ON_MAP_ID = 6;
 	public static final int SHARE_SESSION = 7;
+	public static final int GROUP_INFO = 8;
 	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	private static final long RECENT_THRESHOLD = 60000;
 
@@ -300,6 +302,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				}
 				createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				if(group != null) {
+					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_info_light, R.drawable.ic_action_info_dark,
+							MenuItem.SHOW_AS_ACTION_IF_ROOM);	
+				}
 				MenuItem mi = createMenuItem(menu, ON_OFF_ACTION_ID, R.string.default_buttons_ok, 0, 0,
 						MenuItem.SHOW_AS_ACTION_ALWAYS);
 				
@@ -346,6 +352,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					});
 					bld.setNegativeButton(R.string.default_buttons_no, null);
 					bld.show();
+				} else if(item.getItemId() == GROUP_INFO) {
+					showGroupInfo(group);
 				} else if(item.getItemId() == SHARE_ID) {
 					if(device != null) {
 						shareTrackerId(device.getVisibleName(), device.getTrackerId());
@@ -388,6 +396,27 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		});
 
+	}
+
+	protected void showGroupInfo(OsMoGroup group) {
+		Builder bld = new AlertDialog.Builder(this);
+		bld.setTitle(R.string.osmo_group);
+		StringBuilder sb = new StringBuilder();
+		sb.append(getString(R.string.osmo_group_name)).append(" ").append(group.name);
+		if(group.description != null) {
+			sb.append(getString(R.string.osmo_group_description)).append(" ").append(group.description);
+		}
+		if(group.expireTime != 0) {
+			sb.append(getString(R.string.osmo_expire_group)).append(" ").append(new Date(group.expireTime).toString());
+		}
+		if(group.policy != null) {
+			sb.append(getString(R.string.osmo_group_policy)).append(" ").append(group.policy);
+		}
+		sb.append(getString(R.string.osmo_connect_to_group_id)).append(" ").append(group.groupId);
+		bld.setMessage(sb.toString());
+		
+		bld.show();
+		
 	}
 
 	protected void deleteObject(Object selectedObject) {
