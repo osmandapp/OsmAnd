@@ -1,6 +1,9 @@
 package net.osmand.plus.helpers;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -9,6 +12,8 @@ import android.provider.OpenableColumns;
 import android.widget.Toast;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.FavouritePoint;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -24,7 +29,9 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Koen Rabaey
@@ -52,6 +59,8 @@ public class GpxImportHelper {
 	public void handleFileImport(final Uri intentUri, final String fileName) {
 		if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
 			handleKmlImport(intentUri, fileName);
+		} else if (fileName != null && fileName.endsWith("favourites.gpx")) {
+			handleFavouritesImport(intentUri, fileName);
 		} else {
 			handleGpxImport(intentUri, fileName);
 		}
@@ -103,6 +112,44 @@ public class GpxImportHelper {
 			protected void onPostExecute(GPXUtilities.GPXFile result) {
 				progress.dismiss();
 				handleResult(result, fileName);
+			}
+		}.execute();
+	}
+
+	private void handleFavouritesImport(final Uri gpxFile, final String fileName) {
+		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
+			ProgressDialog progress = null;
+
+			@Override
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(mapActivity, application.getString(R.string.loading), application.getString(R.string.loading_data));
+			}
+
+			@Override
+			protected GPXUtilities.GPXFile doInBackground(Void... nothing) {
+				InputStream is = null;
+				try {
+					final ParcelFileDescriptor pFD = application.getContentResolver().openFileDescriptor(gpxFile, "r");
+
+					if (pFD != null) {
+						is = new FileInputStream(pFD.getFileDescriptor());
+						return GPXUtilities.loadGPXFile(application, is);
+					}
+				} catch (FileNotFoundException e) {
+					//
+				} finally {
+					if (is != null) try {
+						is.close();
+					} catch (IOException ignore) {
+					}
+				}
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(final GPXUtilities.GPXFile result) {
+				progress.dismiss();
+				importFavourites(result, fileName);
 			}
 		}.execute();
 	}
@@ -226,5 +273,54 @@ public class GpxImportHelper {
 			}
 			mapView.refreshMap();
 		}
+	}
+
+	private void importFavourites(final GPXUtilities.GPXFile gpxFile, final String fileName) {
+		final DialogInterface.OnClickListener importFavouritesListener = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				switch (which) {
+					case DialogInterface.BUTTON_POSITIVE:
+						final List<FavouritePoint> favourites = asFavourites(gpxFile.points);
+						final FavouritesDbHelper favorites = application.getFavorites();
+
+						for (final FavouritePoint favourite : favourites) {
+							favorites.deleteFavourite(favourite);
+							favorites.addFavourite(favourite);
+						}
+
+						AccessibleToast.makeText(mapActivity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
+						final Intent newIntent = new Intent(mapActivity, application.getAppCustomization().getFavoritesActivity());
+						mapActivity.startActivity(newIntent);
+						break;
+					case DialogInterface.BUTTON_NEGATIVE:
+						handleResult(gpxFile, fileName );
+						break;
+				}
+			}
+		};
+
+		new AlertDialog.Builder(mapActivity)
+				.setMessage(R.string.import_file_favourites)
+				.setPositiveButton(R.string.import_fav, importFavouritesListener)
+				.setNegativeButton(R.string.import_save, importFavouritesListener)
+				.show();
+	}
+
+	private List<FavouritePoint> asFavourites(final List<GPXUtilities.WptPt> wptPts) {
+		final List<FavouritePoint> favourites = new ArrayList<FavouritePoint>();
+
+		for (GPXUtilities.WptPt p : wptPts) {
+			if (p.category != null) {
+				favourites.add(new FavouritePoint(p.lat, p.lon, p.name, p.category));
+			} else if (p.name != null) {
+				int c;
+				if ((c = p.name.lastIndexOf('_')) != -1) {
+					favourites.add(new FavouritePoint(p.lat, p.lon, p.name.substring(0, c), p.name.substring(c + 1)));
+				}
+			}
+		}
+
+		return favourites;
 	}
 }
