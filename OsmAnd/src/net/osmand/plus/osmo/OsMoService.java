@@ -114,10 +114,13 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 		try {
 			// Add your data
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			nameValuePairs.add(new BasicNameValuePair("android_id", Secure.ANDROID_ID));
+			nameValuePairs.add(new BasicNameValuePair("android_id",
+					Secure.getString(app.getContentResolver(),
+                            Secure.ANDROID_ID)));
 			nameValuePairs.add(new BasicNameValuePair("android_model", Build.MODEL));
 			nameValuePairs.add(new BasicNameValuePair("imei", "0"));
 			nameValuePairs.add(new BasicNameValuePair("android_product", Build.PRODUCT));
+			nameValuePairs.add(new BasicNameValuePair("client", Version.getFullVersion(app)));
 			nameValuePairs.add(new BasicNameValuePair("osmand", Version.getFullVersion(app)));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
