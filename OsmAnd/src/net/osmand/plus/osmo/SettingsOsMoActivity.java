@@ -96,7 +96,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 				ShareDialog dlg = new ShareDialog(this);
 				dlg.setTitle(getString(R.string.osmo_tracker_id));
 				dlg.viewContent(ci.trackerId);
-				dlg.shareURLOrText(ci.trackerId, getString(R.string.osmo_tracker_id_share, ci.trackerId), null);
+				dlg.shareURLOrText(ci.trackerId, getString(R.string.osmo_tracker_id_share, ci.trackerId, ""), null);
 				dlg.showDialog();
 			}
 		}

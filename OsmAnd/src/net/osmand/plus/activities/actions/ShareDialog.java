@@ -59,7 +59,7 @@ public class ShareDialog {
 		}
 		share.add(new ShareType(longExplanation, EMAIL));
 		share.add(new ShareType(shortExplanation, SMS));
-		share.add(new ShareType(shortExplanation, CLIPBOARD));
+		share.add(new ShareType(url, CLIPBOARD));
 		share.add(new ShareType(url, QR));
 		return this;
 	}
