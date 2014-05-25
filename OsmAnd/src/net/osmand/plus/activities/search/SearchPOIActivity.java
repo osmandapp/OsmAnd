@@ -261,6 +261,14 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 			}
 		});
+		searchFilter.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+				}
+			}
+		});
 		addFooterView();
 		amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
 		setListAdapter(amenityAdapter);
@@ -364,6 +372,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 		app.getLocationProvider().addCompassListener(this);
 		app.getLocationProvider().registerOrUnregisterCompassListener(true);
+		searchFilter.requestFocus();
 	}
 
 
