@@ -50,7 +50,7 @@
 	<string name="auto_zoom_map">自動縮放地圖</string>
 	<string name="snap_to_road_descr">導航過程中對齊道路位置</string>
 	<string name="snap_to_road">對齊道路</string>
-	<string name="osmand_short_description_80_chars">可離線與線上的 OSM 地圖，作為全球行動地圖查看和導航</string>
+	<string name="osmand_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
@@ -581,7 +581,7 @@
 		\n\n顯示從非您目前的位置中，選擇任意點到目的地的路線，接著在地圖上選擇\'指引來自\'。
 		\n\n如果您選擇\'指引來自\'連同\'隨行\'，只要它發現則 OsmAnd 將切換到您的實際位置（所以這個可以用於在快速啟動路線之前找到位置），當\'指引來自\'在與\'只顯示\'結合，只是告訴您從任意點的路線，您可選擇不包括後續的更新。
 	</string>
-	<string name="tip_search">查尋中</string>
+	<string name="tip_search">查尋</string>
 	<string name="tip_search_t">您可以在地圖上直接查尋地點，經由 \'使用位置 \' → \'附近查尋\'，或是透過 \'選單 \'→ \'查尋 \'。
 		\n\n在查尋畫面上有提供查尋範本
 		\n\t*經由地址
@@ -919,8 +919,8 @@
 	<string name="update_tile">更新地圖</string>
 	<string name="reload_tile">重新載入圖磚</string>
 	<string name="mark_point">目的地</string>
-	<string name="show_osm_bugs_descr">在地圖上顯示 OpenStreet 錯誤</string>
-	<string name="show_osm_bugs">顯示 OpenStreet 錯誤</string>
+	<string name="show_osm_bugs_descr">在地圖上顯示 OpenStreet 的錯誤</string>
+	<string name="show_osm_bugs">顯示 OpenStreet 的錯誤</string>
 	<string name="favourites_activity">我的最愛</string>
 	<string name="add_to_favourite">加到我的最愛</string>
 	<string name="use_english_names_descr">在本地語言或英語名稱之間選擇</string>
