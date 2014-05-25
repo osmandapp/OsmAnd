@@ -1743,20 +1743,42 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="share_route_subject">Maršrutas bendrintas per OsmAnd</string>
 	<string name="navigation_intent_invalid">Netinkamas formatas: %s</string>
 <string name="osmo_settings_uuid">Unikalus įrenginio ID</string>
-    <string name="osmo_settings_descr">Peržiūrėti unikalų įrenginio registravimo raktą ir kitus stebėjimo nustatymus </string>
+    <string name="osmo_settings_descr">Konfigūruoti stebėjimo nustatymus ir nustatyti asmeninį stebėjimo kanalą</string>
     <string name="osmo_plugin_description">OpenStreetMap stebėjimas - Tiesioginis stebėjimas su daugybe nuotolinio valdymo funkcijų http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (Tiesioginis stebėjimas)</string>
-    <string name="osmo_settings">OSMo</string>
+    <string name="osmo_plugin_name">OsMo (Pažangus tiesioginis stebėjimas)</string>
+    <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Niekada</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pranešinėti reguliariais intervalais</string>
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
 	<string name="arrival_distance">Pranešimas apie atvykimą</string>
     <string name="arrival_distance_descr">Kada anksti turi būti pranešama apie atvykimą?</string>
-    <string name="osmo_io_error">OSMo prisijungimo problema : </string>
-    <string name="osmo_mode_on">Sustabdyti OSMo</string>    
-    <string name="osmo_mode_off">Paleisti OSMo</string>
+    <string name="osmo_io_error">OsMo prisijungimo problema : </string>
+    <string name="osmo_mode_on">Sustabdyti OsMo sesiją</string>    
+    <string name="osmo_mode_off">Paleisti OsMo sesiją</string>
     <string name="osmo_register_device">Įrenginys registruojamas… </string>
     <string name="share_fav">Bendrinti</string>
 	<string name="share_fav_subject">Įsimintos vietos bendrintos iš OsmAnd</string>
 	<string name="use_points_as_intermediates">Apskaičiuoti maršrutą tarp taškų</string>
+    <string name="osmo_connect_to_device_name">Įrenginio pavadinimas</string>
+    <string name="osmo_connect_to_device_tracker_id">Sekiklio ID</string>
+    <string name="osmo_connect_to_device">Sujungti su įrenginiu</string>
+    <string name="osmo_join_group">Prisijungti prie grupės</string>
+    <string name="osmo_new_device">Prijungti įrenginį</string>
+    <string name="osmo_connected_devices">Prijungti įrenginiai</string>
+    <string name="osmo_groups">OsMo gruopės/įrenginiai</string>
+    <string name="osmo_auto_send_locations_descr">Automatiškai pradėti sekimo sesiją ir siųsti buvimo vietą tik paleidus programą</string>
+    <string name="osmo_auto_send_locations">Automatiškai pradėti sekimo sesiją</string>
+    <string name="osmo_tracker_id">Asmeninis sekiklio ID</string>
+    <string name="osmo_tracker_id_descr">Paspauskite peržiūrėti ar bendrinti sekiklio ID. 
+        Naudodami sekiklio ID prijungti prietaisai galės stebėti visą šio įrenginio judėjimą! Norėdami atjungti pasirinkite Regeneravimo nustatymą.</string>
+    <string name="osmo_session_token">Sesijos žymė: %1$s</string>
+    <string name="osmo_auth_pending">Laukiama autorizavimo...</string>
+    <string name="osmo_locations_sent">Buvimo vieta išsiųsta %1$d (talpykloje %2$d) </string>
+    <string name="osmo_conn_successfull">Prisijungta sėkmingai: %1$s </string>
+    <string name="tip_recent_changes_1_8_alpha">Pakeitimai 1.8 versijoje:
+        * Apskaičiouti maršrutą tarp GPX failo taškų
+        * Pakeistas šalių sąrašo išdėstymas žemėlapių parsiuntimui (palaikoma vietovardžių paieška)
+    </string>
+    <string name="osmo_mode_restart">OsMo sesiją paleisti iš naujo</string>
+    <string name="osmo_settings_debug">Derinimo informacija</string>
     </resources>
