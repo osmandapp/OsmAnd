@@ -98,17 +98,12 @@ public class RoutingHelper {
 	
 	public void setFollowingMode(boolean follow) {
 		isFollowingMode = follow;
-		if(follow) {
-			if(app.getNavigationService() != null) {
-				Intent serviceIntent = new Intent(app, NavigationService.class);
-				serviceIntent.putExtra(NavigationService.NAVIGATION_START_SERVICE_PARAM, true);
-				app.startService(serviceIntent);
+		if (!follow) {
+			if (app.getNavigationService() != null) {
+				app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_NAVIGATION);
 			}
 		} else {
-			if(app.getNavigationService() != null && app.getNavigationService().startedForNavigation()) {
-				Intent serviceIntent = new Intent(app, NavigationService.class);
-				app.stopService(serviceIntent);
-			}
+			app.startNavigationService(NavigationService.USED_BY_NAVIGATION);
 		}
 	}
 	

@@ -9,6 +9,14 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmo_group">OsMo group</string>
+    <string name="osmo_group_share">In order to Connect to the group %2$s, specify group id (%1$s)</string>
+    <string name="osmo_share_connect_device">Let permanently follow this device</string>
+    <string name="osmo_share_current_session">Share current session in browser</string>
+    <string name="osmo_session_not_available">Session not available, please check that \'Send locations\' is on.</string>
+    <string name="osmo_share_session">Share session</string>
+    <string name="osmo_session_id_share">Session url to track device (%1$s)</string>
+    <string name="osmo_tracker_id_share">In order to Connect to the target device %2$s, specify tracker id (%1$s)</string>
     <string name="osmo_track_interval">Logging interval</string>
 	<string name="osmo_track_interval_descr">Choose time interval to send location</string>
     <string name="int_days">days</string>

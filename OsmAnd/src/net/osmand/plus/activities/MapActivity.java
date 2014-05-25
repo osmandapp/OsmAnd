@@ -659,7 +659,7 @@ public class MapActivity extends AccessibleActivity  {
 		return mapView;
 	}
 	
-	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
+	public static MapViewTrackingUtilities getMapViewTrackingUtilities() {
 		return mapViewTrackingUtilities;
 	}
 	

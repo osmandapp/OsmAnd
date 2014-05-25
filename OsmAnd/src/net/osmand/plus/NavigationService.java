@@ -36,7 +36,10 @@ public class NavigationService extends Service implements LocationListener {
 	// global id don't conflict with others
 	private final static int NOTIFICATION_SERVICE_ID = 5;
 	public final static String OSMAND_STOP_SERVICE_ACTION  = "OSMAND_STOP_SERVICE_ACTION"; //$NON-NLS-1$
-	public final static String NAVIGATION_START_SERVICE_PARAM = "NAVIGATION_START_SERVICE_PARAM"; 
+	public static int USED_BY_NAVIGATION = 1;
+	public static int USED_BY_GPX = 2;
+	public static int USED_BY_LIVE = 4;
+	public final static String USAGE_INTENT = "SERVICE_USED_BY"; 
 	
 	private NavigationServiceBinder binder = new NavigationServiceBinder();
 
@@ -52,7 +55,8 @@ public class NavigationService extends Service implements LocationListener {
 	private static WakeLock lockStatic;
 	private PendingIntent pendingIntent;
 	private BroadcastReceiver broadcastReceiver;
-	private boolean startedForNavigation;
+	private int usedBy = 0;
+	
 	
 	private static Method mStartForeground;
 	private static Method mStopForeground;
@@ -110,17 +114,29 @@ public class NavigationService extends Service implements LocationListener {
 		return serviceOffProvider;
 	}
 	
-	public boolean startedForNavigation(){
-		return startedForNavigation;
+	public boolean isUsed() {
+		return usedBy != 0;
 	}
+	
+	public void addUsageIntent(int usageIntent) {
+		usedBy |= usageIntent;
+	}
+	
+	public void stopIfNeeded(Context ctx, int usageIntent) {
+		usedBy -= usageIntent;
+		if (usedBy == 0) {
+			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
+			ctx.stopService(serviceIntent);
+		}
+	}
+	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		handler = new Handler();
 		OsmandApplication app = (OsmandApplication) getApplication();
 		settings = app.getSettings();
-		
-		startedForNavigation = intent.getBooleanExtra(NAVIGATION_START_SERVICE_PARAM, false);
-		if (startedForNavigation) {
+		usedBy = intent.getIntExtra(USAGE_INTENT, 0);
+		if ((usedBy & USED_BY_NAVIGATION) != 0) {
 			serviceOffInterval = 0;
 		} else {
 			serviceOffInterval = settings.SERVICE_OFF_INTERVAL.get();
@@ -217,7 +233,7 @@ public class NavigationService extends Service implements LocationListener {
 	public void onDestroy() {
 		super.onDestroy();
 		((OsmandApplication)getApplication()).setNavigationService(null);
-		
+		usedBy = 0;
 		// remove updates
 		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		locationManager.removeUpdates(this);

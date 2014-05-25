@@ -2,23 +2,15 @@ package net.osmand.plus.osmo;
 
 
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.util.Algorithms;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.text.format.DateFormat;
-import android.util.TimeUtils;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class SettingsOsMoActivity extends SettingsBaseActivity {
@@ -101,10 +93,11 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			if(ci == null || ci.trackerId == null) {
 				AccessibleToast.makeText(this, R.string.osmo_auth_pending, Toast.LENGTH_SHORT).show();
 			} else {
-				Builder bld = new AlertDialog.Builder(this);
-				bld.setTitle(R.string.osmo_tracker_id);
-				bld.setMessage(ci.trackerId);
-				bld.show();
+				ShareDialog dlg = new ShareDialog(this);
+				dlg.setTitle(getString(R.string.osmo_tracker_id));
+				dlg.viewContent(ci.trackerId);
+				dlg.shareURLOrText(ci.trackerId, getString(R.string.osmo_tracker_id_share, ci.trackerId), null);
+				dlg.showDialog();
 			}
 		}
 		return super.onPreferenceClick(preference);

@@ -13,17 +13,21 @@ import java.util.Map;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListActivity;
+import net.osmand.plus.activities.actions.ShareDialog;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
@@ -83,19 +87,19 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	protected static final int ON_OFF_ACTION_ID = 4;
 	protected static final int SHARE_ID = 5;
 	protected static final int SHOW_ON_MAP_ID = 6;
+	public static final int SHARE_SESSION = 7;
 	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	private static final long RECENT_THRESHOLD = 60000;
 
 	private OsMoPlugin osMoPlugin;
 	private OsMoGroupsAdapter adapter;
-	private LatLon mapLocation;
+	private Location mapLocation;
 	private OsmandApplication app;
 	private Handler uiHandler;
 
 	private float width = 24;
 	private float height = 24;
 	private Path directionPath = new Path();
-	private Location lastLocation;
 	private float lastCompass;
 	private ActionMode actionMode;
 	private Object selectedObject = null;
@@ -128,8 +132,13 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if(isChecked) {
 					osMoPlugin.getTracker().enableTracker();
+					app.startNavigationService(NavigationService.USED_BY_LIVE);
+					app.getSettings().SERVICE_OFF_INTERVAL.set(0);
 				} else {
 					osMoPlugin.getTracker().disableTracker();
+					if (app.getNavigationService() != null) {
+						app.getNavigationService().stopIfNeeded(app,NavigationService.USED_BY_LIVE);
+					}
 				}
 				updateStatus();
 			}
@@ -244,7 +253,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
+		LatLon ml = getMyApplication().getSettings().getLastKnownMapLocation();
+		mapLocation = new Location("map");
+		mapLocation.setLatitude(ml.getLatitude());
+		mapLocation.setLongitude(ml.getLongitude());
 		app.getLocationProvider().addCompassListener(this);
 		app.getLocationProvider().registerOrUnregisterCompassListener(true);
 		app.getLocationProvider().addLocationListener(this);
@@ -335,6 +347,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					bld.setNegativeButton(R.string.default_buttons_no, null);
 					bld.show();
 				} else if(item.getItemId() == SHARE_ID) {
+					if(device != null) {
+						shareTrackerId(device.getVisibleName(), device.getTrackerId());
+					} else {
+						shareOsMoGroup(group.getVisibleName(app), group.getGroupId());
+					}
 				} else if(item.getItemId() == SHOW_ON_MAP_ID) {
 					if(device != null) {
 						Location location = device.getLastLocation();
@@ -412,12 +429,69 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		if (item.getItemId() == CONNECT_TO) {
 			connectToDevice();
 			return true;
+		} else if (item.getItemId() == SHARE_SESSION) {
+			shareSession();
+			return true;
 		} else if (item.getItemId() == CREATE_GROUP) {
 			createGroup();
 			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	private void shareSession() {
+		Builder bld = new AlertDialog.Builder(this);
+		bld.setItems(new String[] {
+				getString(R.string.osmo_share_current_session),
+				getString(R.string.osmo_share_connect_device)
+		}, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (which == 0) {
+					shareSessionUrl();
+				} else {
+					OsMoService service = osMoPlugin.getService();
+					SessionInfo ci = service.getCurrentSessionInfo();
+					shareTrackerId("", ci == null ? null : ci.trackerId);
+				}
+			}
+		});
+		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		bld.show();
+	}
+	
+	private void shareSessionUrl() {
+		String sessionURL = osMoPlugin.getTracker().getSessionURL();
+		if(sessionURL == null ) {
+			AccessibleToast.makeText(this, R.string.osmo_session_not_available, Toast.LENGTH_SHORT).show();
+		} else {
+			ShareDialog dlg = new ShareDialog(this);
+			dlg.setTitle(getString(R.string.osmo_share_session));
+			dlg.viewContent(sessionURL);
+			dlg.shareURLOrText(sessionURL, getString(R.string.osmo_session_id_share, sessionURL), null);
+			dlg.showDialog();
+		}
+	}
+
+	private void shareTrackerId(String name, String trackerId) {
+		if(trackerId == null) {
+			AccessibleToast.makeText(this, R.string.osmo_auth_pending, Toast.LENGTH_SHORT).show();
+		} else {
+			ShareDialog dlg = new ShareDialog(this);
+			dlg.setTitle(getString(R.string.osmo_tracker_id));
+			dlg.viewContent(trackerId);
+			dlg.shareURLOrText(trackerId, getString(R.string.osmo_tracker_id_share, trackerId, name), null);
+			dlg.showDialog();
+		}
+	}
+	
+	private void shareOsMoGroup(String name, String groupId) {
+		ShareDialog dlg = new ShareDialog(this);
+		dlg.setTitle(getString(R.string.osmo_group));
+		dlg.viewContent(groupId);
+		dlg.shareURLOrText(groupId, getString(R.string.osmo_group_share, groupId, name), null);
+		dlg.showDialog();
 	}
 
 	private void createGroup() {
@@ -510,6 +584,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		createMenuItem(menu, CONNECT_TO, R.string.osmo_connect, 
 				0, 0,/*R.drawable.ic_action_marker_light,*/
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		createMenuItem(menu, SHARE_SESSION, R.string.osmo_share_session, 
+				R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, CREATE_GROUP, R.string.osmo_create_group, 
 				0, 0,/*R.drawable.ic_action_marker_light,*/
@@ -704,27 +781,25 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			TextView label = (TextView) row.findViewById(R.id.osmo_label);
 			TextView labelTime = (TextView) row.findViewById(R.id.osmo_label_time);
 			ImageView icon = (ImageView) row.findViewById(R.id.osmo_user_icon);
-			LatLon lnLocation = mapLocation;
 			Location location = model.getLastLocation();
 			if(model.getTrackerId().equals(osMoPlugin.getService().getMyGroupTrackerId())) {
 				location = tracker.getLastSendLocation();
 			}
 			//Location location = tracker.getLastLocation(model.trackerId);
-			if (location == null || lnLocation == null) {
-				if(model.isEnabled()) {
-				icon.setImageResource(
-						//model.isActive() ? R.drawable.mon_osmo_conn_signal_small :
-						 R.drawable.mon_osmo_conn_small);
+			if (location == null || mapLocation == null) {
+				if (model.isEnabled()) {
+					icon.setImageResource(
+					// model.isActive() ? R.drawable.mon_osmo_conn_signal_small :
+					R.drawable.mon_osmo_conn_small);
 				} else {
 					icon.setImageResource(R.drawable.monitoring_rec_inactive);
-					
 				}
 				label.setText(model.getVisibleName());
 			} else {
 				DirectionDrawable draw = new DirectionDrawable();
 				float[] mes = new float[2];
 				net.osmand.Location.distanceBetween(location.getLatitude(), location.getLongitude(),
-						lnLocation.getLatitude(), lnLocation.getLongitude(), mes);
+						mapLocation.getLatitude(), mapLocation.getLongitude(), mes);
 				draw.setAngle(mes[1] - lastCompass + 180);
 				draw.setRecent(Math.abs(location.getTime() - System.currentTimeMillis()) < RECENT_THRESHOLD);
 				icon.setImageDrawable(draw);
@@ -761,8 +836,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 	@Override
 	public void updateLocation(Location location) {
-		lastLocation = location;
-		adapter.notifyDataSetInvalidated();
+		MapViewTrackingUtilities mv = MapActivity.getMapViewTrackingUtilities();
+		if(mv != null && mv.isMapLinkedToLocation() && location != null) {
+			mapLocation = location;
+			adapter.notifyDataSetInvalidated();
+		}
 	}
 
 	@Override

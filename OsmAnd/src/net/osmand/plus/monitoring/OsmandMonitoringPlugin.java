@@ -192,18 +192,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 					app.getSavingTrackHelper().startNewSegment();
 				}
 				settings.SAVE_TRACK_TO_GPX.set(!wasTrackMonitored);
-				final Intent serviceIntent = new Intent(map, NavigationService.class);
+				
 				if (wasTrackMonitored) {
-					if (app.getNavigationService() != null && !app.getNavigationService().startedForNavigation()) {
-						app.stopService(serviceIntent);
+					if (app.getNavigationService() != null) {
+						app.getNavigationService().stopIfNeeded(app,NavigationService.USED_BY_GPX);
 					}
 				} else {
-					if (app.getNavigationService() == null) {
-						app.getSettings().SERVICE_OFF_INTERVAL.set(0);
-						app.startService(serviceIntent);
-					}
+					app.startNavigationService(NavigationService.USED_BY_GPX);
 				}
-				
 				monitoringControl.updateInfo(null);
 			}
 		});
@@ -231,14 +227,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 							view.getSettings().SAVE_TRACK_TO_GPX.set(true);
 							if (view.getApplication().getNavigationService() == null) {
 								view.getSettings().SERVICE_OFF_INTERVAL.set(0);
-								view.getContext().startService(serviceIntent);
 							}
+							app.startNavigationService(NavigationService.USED_BY_GPX);
 						}
 					});
 				} else {
 					view.getSettings().SAVE_TRACK_TO_GPX.set(false);
-					if (view.getApplication().getNavigationService() != null && !view.getApplication().getNavigationService().startedForNavigation()) {
-						view.getContext().stopService(serviceIntent);
+					if (app.getNavigationService() != null) {
+						app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
 					}
 				}
 			}

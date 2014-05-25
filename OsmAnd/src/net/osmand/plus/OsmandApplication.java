@@ -828,4 +828,15 @@ public class OsmandApplication extends Application {
 			return 0;
 		}
 	}
+
+	public void startNavigationService(int intent) {
+		final Intent serviceIntent = new Intent(this, NavigationService.class);
+		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
+		if (getNavigationService() == null) {
+			getSettings().SERVICE_OFF_INTERVAL.set(0);
+			startService(serviceIntent);
+		} else {
+			getNavigationService().addUsageIntent(intent);
+		}		
+	}
 }
