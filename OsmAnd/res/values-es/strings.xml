@@ -1673,4 +1673,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_locations_sent">Localizaciones enviadas %1$d (en buffer %2$d) </string>
     <string name="osmo_conn_successfull">Conexión establecida : %1$s </string>
     <string name="osmo_groups">Grupos/Dispositivos OsMo</string>
+    <string name="osmo_group_info">Info</string>
     </resources>
