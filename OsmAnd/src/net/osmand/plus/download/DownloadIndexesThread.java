@@ -375,7 +375,7 @@ public class DownloadIndexesThread {
 						String dt = uiActivity.getMyApplication().getResourceManager().getIndexFileNames().get(basemap.getTargetFileName());
 						if (!basemapExists || !Algorithms.objectEquals(dt, basemap.getDate(dateFormat))) {
 							List<DownloadEntry> downloadEntry = basemap
-									.createDownloadEntry(uiActivity.getMyApplication(), uiActivity.getType(),
+									.createDownloadEntry(uiActivity.getMyApplication(), DownloadActivityType.NORMAL_FILE,
 											new ArrayList<DownloadEntry>());
 							uiActivity.getEntriesToDownload().put(basemap, downloadEntry);
 							AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download,
