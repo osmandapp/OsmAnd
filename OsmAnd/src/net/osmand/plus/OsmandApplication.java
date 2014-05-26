@@ -569,6 +569,7 @@ public class OsmandApplication extends Application {
 				bak.renameTo(save);
 			}
 		} catch (RuntimeException e) {
+			e.printStackTrace();
 			warnings.add(e.getMessage());
 		} finally {
 			synchronized (OsmandApplication.this) {

@@ -346,6 +346,10 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	}
 
 
-
+	public void setDeviceProperties(OsMoDevice model, String name, int color) {
+		model.userName = name;
+		model.userColor = color;
+		storage.save();
+	}
 
 }

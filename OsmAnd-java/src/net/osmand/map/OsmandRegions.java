@@ -71,6 +71,9 @@ public class OsmandRegions {
 	}
 	
 	public String getDownloadNameIndexLowercase(String downloadName) {
+		if(downloadName == null) {
+			return null;
+		}
 		final String lc = downloadName.toLowerCase();
 		if(downloadNamesToLowercaseIndex.containsKey(lc)) {
 			return downloadNamesToLowercaseIndex.get(lc);
@@ -245,6 +248,9 @@ public class OsmandRegions {
 				initTypes(object);
 				String downloadName = object.getNameByType(downloadNameType).toLowerCase();
 				String prefix = object.getNameByType(prefixType);
+				if(prefix == null) {
+					prefix = "";
+				}
 				String locName = getLocaleName(object);
 				if(locName != null && locName.length() > 0){
 					downloadNamesToLocaleNames.put(downloadName, locName);

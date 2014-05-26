@@ -3,6 +3,8 @@
  */
 package net.osmand.plus.osmo;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +13,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -90,6 +93,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	protected static final int SHOW_ON_MAP_ID = 6;
 	public static final int SHARE_SESSION = 7;
 	public static final int GROUP_INFO = 8;
+	protected static final int SETTINGS_ID = 9;
 	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	private static final long RECENT_THRESHOLD = 60000;
 
@@ -106,6 +110,28 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private ActionMode actionMode;
 	private Object selectedObject = null;
 	private String operation;
+	
+	private int[] paletteColors = new int[] {
+			R.string.color_red,
+			R.string.color_pink,
+			R.string.color_orange,
+			R.string.color_brown,
+			R.string.color_yellow,
+			R.string.color_lightblue,
+			R.string.color_blue,
+			R.string.color_magenta
+	};
+	
+	private int[] pallette = new int[] {
+			0xffd00d0d,
+			0xffe044bb,
+			0xffee5020,
+			0xff602010,
+			0xffeeee10,
+			0xff10c0f0,
+			0xff1010a0,
+			0xff88e030
+	};
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -291,8 +317,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				selectedObject = o;
 				device =  (OsMoDevice) (o instanceof OsMoDevice ?o : null); 
 				group =  (OsMoGroup) (o instanceof OsMoGroup ?o : null);
-				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
-						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				MenuItem mi = createMenuItem(menu, ON_OFF_ACTION_ID, R.string.default_buttons_ok, 0, 0,
+						MenuItem.SHOW_AS_ACTION_ALWAYS);
 				if(device != null && device.getLastLocation() != null) {
 					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.show_poi_on_map, R.drawable.ic_action_marker_light, R.drawable.ic_action_marker_dark,
 							MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -302,12 +328,19 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				}
 				createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				///
+				if(device != null) {
+					createMenuItem(menu, SETTINGS_ID, R.string.settings, R.drawable.ic_action_settings_light, R.drawable.ic_action_sail_boat_dark,
+						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				}
 				if(group != null) {
 					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_info_light, R.drawable.ic_action_info_dark,
 							MenuItem.SHOW_AS_ACTION_IF_ROOM);	
 				}
-				MenuItem mi = createMenuItem(menu, ON_OFF_ACTION_ID, R.string.default_buttons_ok, 0, 0,
-						MenuItem.SHOW_AS_ACTION_ALWAYS);
+				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
+						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				
+				
 				
 		        final LayoutInflater inflater = LayoutInflater.from(OsMoGroupsActivity.this);
 		        View view = inflater.inflate(R.layout.check_item_rel, null);
@@ -336,7 +369,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-				if(item.getItemId() == DELETE_ACTION_ID ) {
+				if(item.getItemId() == SETTINGS_ID) {
+					showSettingsDialog(device);
+				} else if(item.getItemId() == DELETE_ACTION_ID ) {
 					Builder bld = new AlertDialog.Builder(OsMoGroupsActivity.this);
 					String name = (selectedObject instanceof OsMoDevice)? ((OsMoDevice) selectedObject).getVisibleName() :
 						((OsMoGroup) selectedObject).getVisibleName(OsMoGroupsActivity.this);
@@ -593,7 +628,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				final String nameUser = name.getText().toString();
 				final String id = tracker.getText().toString();
 				if(device.isChecked()) {
-					OsMoDevice dev = osMoPlugin.getGroups().addConnectedDevice(id, nameUser, 0);
+					OsMoDevice dev = osMoPlugin.getGroups().addConnectedDevice(id, nameUser, getRandomColor());
 					adapter.update(dev.group);
 					adapter.notifyDataSetChanged();
 				} else {
@@ -830,7 +865,19 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				net.osmand.Location.distanceBetween(location.getLatitude(), location.getLongitude(),
 						mapLocation.getLatitude(), mapLocation.getLongitude(), mes);
 				draw.setAngle(mes[1] - lastCompass + 180);
-				draw.setRecent(Math.abs(location.getTime() - System.currentTimeMillis()) < RECENT_THRESHOLD);
+				final boolean recent = Math.abs(location.getTime() - System.currentTimeMillis()) < RECENT_THRESHOLD;
+				
+				int color;
+				if(recent){ 
+					color =  model.getColor();
+					if(color == 0) {
+						color = getRandomColor();
+						osMoPlugin.getGroups().setDeviceProperties(model, model.getVisibleName(), color);
+					}
+				} else {
+					color = getResources().getColor(R.color.color_unknown);
+				}
+				draw.setColor(color);
 				icon.setImageDrawable(draw);
 				int dist = (int) mes[0];
 				long seconds = Math.max(0, (System.currentTimeMillis() - location.getTime()) / 1000);
@@ -860,6 +907,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			return row;
 		}
 
+
 		
 	}
 
@@ -870,6 +918,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			mapLocation = location;
 			adapter.notifyDataSetInvalidated();
 		}
+	}
+	
+	private int getRandomColor() {
+		return pallette[new Random().nextInt(pallette.length)];
 	}
 
 	@Override
@@ -896,6 +948,54 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	public void locationChange(String trackerId, Location loc) {
 		refreshList();		
 	}
+	public static String colorToString(int color) {
+		if ((0xFF000000 & color) == 0xFF000000) {
+			return "#" + Integer.toHexString(color & 0x00FFFFFF); //$NON-NLS-1$
+		} else {
+			return "#" + Integer.toHexString(color); //$NON-NLS-1$
+		}
+	}
+
+	private void showSettingsDialog(final OsMoDevice device) {
+		Builder bld = new AlertDialog.Builder(OsMoGroupsActivity.this);
+		bld.setTitle(R.string.osmo_edit_device);
+		final LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.osmo_edit_device, null);
+        final EditText name = (EditText) view.findViewById(R.id.Name);
+        final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
+        bld.setView(view);
+        name.setText(device.getVisibleName());
+        final TIntArrayList list = new TIntArrayList(pallette);
+        List<String> colorNames= new ArrayList<String>();
+        int selection = -1;
+        int devColor = device.getColor();
+        for(int i = 0; i < pallette.length; i++) {
+        	colorNames.add(getString(paletteColors[i]));
+        	list.add(pallette[i]);
+        	if(devColor == pallette[i]) {
+        		selection = i;
+        	}
+        }
+        if(selection == -1) {
+        	list.insert(0, devColor);
+        	colorNames.add(0, colorToString(devColor));
+        	selection = 0;
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colorNames);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		colorSpinner.setAdapter(adapter);
+		colorSpinner.setSelection(selection);
+        
+		bld.setPositiveButton(R.string .default_buttons_yes, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				osMoPlugin.getGroups().setDeviceProperties(device, 
+						name.getText().toString(), list.get(colorSpinner.getSelectedItemPosition()));
+			}
+		});
+		bld.setNegativeButton(R.string.default_buttons_no, null);
+	}
 
 	class DirectionDrawable extends Drawable {
 		Paint paintRouteDirection;
@@ -909,12 +1009,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			paintRouteDirection.setAntiAlias(true);
 		}
 
-		public void setRecent(boolean recent) {
-			if (recent) {
-				paintRouteDirection.setColor(getResources().getColor(R.color.color_ok));
-			} else {
-				paintRouteDirection.setColor(getResources().getColor(R.color.color_unknown));
-			}
+		public void setColor(int color) {
+			paintRouteDirection.setColor(color);
 		}
 
 		public void setAngle(float angle) {

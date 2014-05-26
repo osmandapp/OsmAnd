@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
@@ -59,9 +60,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 	@Override
 	public void updateLocation(Location location) {
-		if (service.isConnected()) {
-			tracker.sendCoordinate(location);
-		}
+		tracker.sendCoordinate(location);
 	}
 
 	@Override
@@ -219,4 +218,5 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	public OsMoService getService() {
 		return service;
 	}
+
 }

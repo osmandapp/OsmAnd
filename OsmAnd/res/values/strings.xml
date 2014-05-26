@@ -9,6 +9,17 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="color_red">red</string>
+	<string name="color_pink">pink</string>
+	<string name="color_orange">orange</string>
+	<string name="color_brown">brown</string>
+	<string name="color_yellow">yellow</string>
+	<string name="color_lightblue">light blue</string>
+	<string name="color_blue">blue</string>
+	<string name="color_magenta">magenta</string>
+	
+    <string name="osmo_edit_device">Change user properties</string>
+    <string name="osmo_edit_color">Display color</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo group</string>
     <string name="osmo_group_share">In order to Connect to the group %2$s, specify group id (%1$s)</string>
@@ -26,7 +37,7 @@
     <string name="osmo_group_description">Description</string>
     <string name="osmo_group_policy">Policy</string>
     <string name="osmo_connect_to_device_tracker_id">Tracker id</string>
-    <string name="osmo_connect_to_device_name">Device name</string>
+    <string name="osmo_connect_to_device_name">User name</string>
     <string name="osmo_connect_to_group_id">Group id</string>
     <string name="osmo_group_name">Group name</string>
     <string name="osmo_connect_to_device">Link with device</string>

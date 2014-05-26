@@ -350,14 +350,15 @@ public class OsMoGroupsStorage {
 			return trackerId;
 		}
 		
-		public int getColor(int defAssignUserColor) {
+		
+		
+		public int getColor() {
 			if(userColor != 0) {
 				return userColor;
 			}
 			if(serverColor != 0) {
 				return serverColor ;
 			}
-			userColor = defAssignUserColor;
 			return userColor;
 		}
 		
