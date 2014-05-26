@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
 		\n\t* Вказання напрямку руху по смугам
@@ -1604,4 +1605,15 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	
     
     <string name="map_magnifier">Лупа</string>
+    <string name="osmo_group_info">Інформація</string>
+    <string name="int_days">днів</string>
+    <string name="osmo_group_description">Опис</string>
+    <string name="osmo_connect_to_device_name">Ім'я пристрою</string>
+    <string name="osmo_create_group">Створити групу</string>
+    <string name="osmo_connect">З'єднатися до</string>
+    <string name="osmo_enable_tracker">Надіслати мою позицію</string>
+    <string name="hours_ago">годин тому</string>
+    <string name="minutes_ago">хвилин тому</string>
+    <string name="seconds_ago">секунд тому</string>
+    <string name="osmo_connected_devices">Під'єднані пристрої</string>
     </resources>
