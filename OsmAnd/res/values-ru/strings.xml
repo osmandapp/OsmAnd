@@ -1127,7 +1127,7 @@
 		\n\t* \'По направлению компаса\' - Карта будет вращаться так, чтобы совместить север карты и северное направление (используются показания компаса в устройстве).
 	</string>
 
-<string name="tip_map_switch_t_v2">"\tОтображаемые карты и слои можно изменить выбрав \'Настройка вида\' (значок глобуса) на экране карты.\n\n\tВ \'Источник карты…\' можно выбрать предварительно загруженные векторные карты, онлайн-карты от различных источников (для использования включите плагин \'Онлайн карты\'), или самостоятельно созданные карты (при помощи OsmAndMapCreator для ПК, например).\n\n\tOsmAnd также поддерживает пользовательские источники. "
+<string name="tip_map_switch_t_v2">"\tОтображаемые карты и слои можно изменить выбрав \'Настройка вида\' (значок глобуса) на экране карты.\n\n\tВ \'Источник карты…\' можно выбрать предварительно загруженные векторные карты, онлайн-карты от различных источников (для использования включите плагин \'Онлайн карты\' в \'Настройки\' → \'Диспетчер плагинов\'), или самостоятельно созданные карты (при помощи OsmAndMapCreator для ПК, например).\n\n\tOsmAnd также поддерживает пользовательские источники. "
 	</string>
 <string name="tip_app_mode_t_v2">OsmAnd поддерживает настраиваемые профили для различных режимов.
 		\n\nВы можете изменить текущий профиль нажав кнопку выбора профилей в нижнем левом углу экрана карты (значок автомобиля, велосипеда или пешехода) или при построении маршрута.
@@ -1550,7 +1550,7 @@
     <string name="osmo_settings_descr">Настройка параметров мониторинга и установка персонального канала мониторинга</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
     <string name="osmo_plugin_name">OsMo (Продвинутый живой мониторинг)</string>
-    <string name="osmo_settings">OsMo</string>
+    <string name="osmo_settings">OsMo мониторинг OpenStreetMap (бета)</string>
    	<string name="navigation_intent_invalid">Неправильный формат: %s</string>
 <string name="share_route_subject">Маршрут предоставленный через OsmAnd</string>
 	<string name="osmand_extended_description_4000_chars">
@@ -1624,9 +1624,33 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_session_token">Токен: %1$s</string>
     <string name="tip_recent_changes_1_8_alpha">Изменения в 1.8:
 	* Расчёт маршрута между маршрутными точками трека GPX
-	* Изменённое расположение стран для загрузок (поддерживается местный поиск имён)
+	* Изменённый порядок стран для загрузок (поддерживается местный поиск имён)
+	* Поддержка импорта GPX/KML (конвертация KML в GPX)
     </string>
     <string name="osmo_tracker_id_descr">Выберите чтобы посмотреть или поделиться ID трекера.
 	Используя ID трекера присоединённые устройства будут доступны для мониторинга всех передвижений этого устройства! Для отключения выберите опцию восстановления.</string>
     <string name="index_item_world_bitcoin_payments">Мировые пункты обмена bitcoin</string>
+	<string name="osmo_connect_to_group_id">ID группы</string>
+    <string name="osmo_group_name">Название группы</string>
+    <string name="osmo_connect_to_group">Подключиться к группе</string>
+    <string name="osmo_create_group">Создать группу</string>
+    <string name="osmo_enable_tracker">Отправить моё местоположение</string>
+    <string name="osmo_group_description">Описание</string>
+    <string name="int_days">дней</string>
+    <string name="osmo_track_interval">Интервал логирования</string>
+	<string name="osmo_group">Группа OsMo</string>
+    <string name="osmo_track_interval_descr">Выберите временной интервал для отправки местоположения</string>
+    <string name="osmo_activity">Osm мониторинг</string>
+    <string name="osmo_share_current_session">Поделиться текущей сессией в браузере</string>
+    <string name="osmo_share_session">Поделиться сессией</string>
+    <string name="osmo_session_id_share">URL сессии для отслеживания устройства (%1$s)</string>
+    <string name="local_index_mi_export">Экспорт</string>
+	<string name="osmo_group_info">Информация</string>
+    <string name="osmo_group_share">Чтобы подключиться к группе %2$s, укажите ID группы (%1$s)</string>
+    <string name="osmo_share_connect_device">Разрешить постоянно отслеживать данное устройство</string>
+    <string name="osmo_connect_menu">Подключиться</string>
+    <string name="osmo_connect">Подключиться к</string>
+    <string name="osmo_server_operation_failed">Ошибка операции на сервере OsMo</string>
+    <string name="import_file_favourites">Сохранить как файл GPX или импортировать в избранное?</string>
+	<string name="import_save">Сохранить</string>
 	</resources>
