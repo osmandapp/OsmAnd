@@ -1777,7 +1777,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	 Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem.          
 	Læs mere på http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (avanceret live overvågning)</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
+    <string name="osmo_settings">OsMo OpenStreetMap overvågning (beta)</string>
    	<string name="keep_informing_never">Aldrig</string>
     <string name="keep_informing_descr">Gentag navigationsinstruktioner med jævne mellemrum</string>
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
@@ -1821,10 +1821,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_group_share">For at oprette forbindelse til gruppen %2$s, angiv gruppe-ID (%1$s)</string>
     <string name="osmo_share_connect_device">Følg enheden permanent</string>
     <string name="osmo_share_current_session">Del den aktuelle session i browser</string>
-    <string name="osmo_session_not_available">Session ikke er tilgængelig, kontroller at \'Send placering\' er til.</string>
-    <string name="osmo_share_session">Del session</string>
+    <string name="osmo_session_not_available">Sessionen er ikke tilgængelig, kontroller at \'Send placering\' er til.</string>
+    <string name="osmo_share_session">Del sessionen</string>
     <string name="osmo_session_id_share">Session url til at spore enhed (%1$s)</string>
-    <string name="osmo_tracker_id_share">For at oprette forbindelse til target enheden% 2$s, angiv tracker-ID (%1$s)</string>
+    <string name="osmo_tracker_id_share">For at oprette forbindelse til målenheden %2$s, angiv sporings-ID (%1$s)</string>
     <string name="osmo_track_interval">Logningsinterval</string>
 	<string name="osmo_track_interval_descr">Vælg tidsinterval til at sende placering</string>
     <string name="int_days">dage</string>
@@ -1838,7 +1838,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_connect">Opret forbindelse til</string>
     <string name="osmo_create_group">Opret gruppe</string>
     <string name="osmo_server_operation_failed">Osmo Server operation mislykkedes</string>
-    <string name="osmo_activity">OSM overvågning</string>
+    <string name="osmo_activity">Osm overvågning</string>
     <string name="osmo_enable_tracker">Send placeringer</string>
     <string name="osmo_control">OsMo hurtig adgang</string>
     <string name="local_index_mi_export">Eksport</string>
