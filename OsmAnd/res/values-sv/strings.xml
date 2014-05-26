@@ -1386,7 +1386,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     \n\t* Ny skärm med ruttplanering (intuitivare och kraftfullare)
     \n\t* OBS: GPX-rutt finns under knappen Ruttinställningar
     \n\t* Autodölj knappar i navigeringsläget
-    \n\t* Beräkna offline-rutt till första punkten av GPX-rutt, (alternativet \'kör hela spåret\')
+    \n\t* Beräkna offline-rutt till första punkten av GPX-rutt (alternativet \'kör hela spåret\')
 	\n\t* Aktiv simulering i tunnlar
 	\n\t* En mängd smärre förbättringar och fixar
 	\n\t* Inställning av talhastigheten
@@ -1449,10 +1449,14 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="localization_pref_title">Översättning</string>
     <string name="navigation_intent_invalid">Ogiltigt format: %s</string>
 <string name="osmo_settings_uuid">Unikt enhets-id</string>
-    <string name="osmo_settings_descr">Visa unik registreringsnyckel för enheten och andra specifika inställningar </string>
-    <string name="osmo_plugin_name">OSMo  (Advanced Live Monitoring)</string>
-    <string name="osmo_settings">OSMo</string>
-   	<string name="osmo_plugin_description">OpenStreetMap-Monitoring - Avancerad Live Monitoring med mängder av funktioner för fjärrkontroll http://osmo.mobi</string>
+    <string name="osmo_settings_descr">Konfigurera inställningar för övervakning och ställ in personlig övervakningskanal</string>
+    <string name="osmo_plugin_name">OSMo  (Avancerad live-övervakning)</string>
+    <string name="osmo_settings">OSMo OpenStreetMap-övervakning (beta)</string>
+   	<string name="osmo_plugin_description">OpenStreetMap-övervakning - Avancerad live-övervakning. Detta ger möjlighet att spåra andra enheter och att själv spåras.
+    Skapa anonyma grupper, dela varandras platser och kommunicera. Det finns olika inställningar för sessionsövervakning eller permanent övervakning.
+    Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör.
+    Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem.
+    Läs mer på http://osmo.mobi.</string>
     <string name="interrupt_music_descr">Avbryt musiken vid meddelanden</string>
 	<string name="interrupt_music">avbryt musiken</string>
 	<string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
@@ -1462,18 +1466,19 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="keep_informing">Upprepa navigationsinstruktioner</string>
 	<string name="osmo_register_device">Registrerar enheten … </string>
     <string name="osmo_io_error">Anslutningsproblem med OSsMo: </string>
-    <string name="osmo_mode_on">Stoppa OSMo</string>    
-    <string name="osmo_mode_off">Starta OSMo</string>
+    <string name="osmo_mode_on">Stoppa OsMo-session</string>    
+    <string name="osmo_mode_off">Starta OsMo-session</string>
     <string name="use_points_as_intermediates">Beräkna rutt mellan punkter</string>
     <string name="tip_recent_changes_1_8_alpha">Förändringar i 1.8:
         * Beräkna rutt mellan ruttpunkter i GPX-spår
         * Ändrat utseende vid nedladdning av länder (stöd för sökning med lokala namn)
+        * Stöder GPX-/KML-import (konvertera fråm KML till GPX)↵
     </string>
     <string name="osmo_auto_send_locations_descr">Starta trackersessionen automatiskt och sänd platser sedan appen startats</string>
     <string name="osmo_auto_send_locations">Starta trackersessionen automatiskt</string>
     <string name="osmo_tracker_id">Personligt tracker-id</string>
     <string name="osmo_tracker_id_descr">Klicka för att visa eller dela ut tracker-id.
-    Med tracker-id kommer anslutna enheter att kunna följa denna enhets alla rörelser! För att koppla ifrån, väl alternativet Generera om</string>
+    Med tracker-id kommer anslutna enheter att kunna följa denna enhets alla rörelser! För att koppla ifrån, välj alternativet Generera om</string>
     <string name="osmo_session_token">Sessionstoken: %1$s</string>
     <string name="osmo_auth_pending">Väntar på autentisering…</string>
     <string name="osmo_locations_sent">Platser skickade %1$d (i buffer %2$d) </string>
@@ -1488,4 +1493,31 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_new_device">Anslut till enhet</string>
     <string name="osmo_connected_devices">Anslutna enheter</string>
     <string name="osmo_groups">OsMo-grupper/-enheter</string>
+    <string name="osmo_group_info">Info</string>
+    <string name="osmo_group">OsMo-grupp</string>
+    <string name="osmo_group_share">För att ansluta till grupp %2$s, ange grupp-id (%1$s)</string>
+    <string name="osmo_share_connect_device">Följ denna enhet permanent</string>
+    <string name="osmo_share_current_session">Dela aktuell session i läsaren</string>
+    <string name="osmo_session_not_available">Sessionen inte tillgänglig. Kolla att \'Skicka platser\' är på.</string>
+    <string name="osmo_share_session">Dela session</string>
+    <string name="osmo_session_id_share">Sessions-URL för att spåra enhet (%1$s)</string>
+    <string name="osmo_tracker_id_share">För att ansluta till målenheten %2$s, ange tracker-id (%1$s)</string>
+    <string name="osmo_track_interval">Loggningsintervall</string>
+	<string name="osmo_track_interval_descr">Välj tidsintervall för skickande av platsen</string>
+    <string name="int_days">dagar</string>
+    <string name="osmo_connect_menu">Anslut</string>
+    <string name="osmo_expire_group">Förfaller om</string>
+    <string name="osmo_group_description">Beskrivning</string>
+    <string name="osmo_group_policy">Policy</string>
+    <string name="osmo_connect_to_group_id">Grupp-id</string>
+    <string name="osmo_group_name">Gruppnamn</string>
+    <string name="osmo_connect_to_group">Länka med grupp</string>
+    <string name="osmo_connect">Anslut till</string>
+    <string name="osmo_create_group">Skapa grupp</string>
+    <string name="osmo_server_operation_failed">OsMo-server operation misslyckades</string>
+    <string name="osmo_activity">Osm-övervakning</string>
+    <string name="osmo_enable_tracker">Skicka mina platser</string>
+    <string name="osmo_control">OsMo snabbåtkomst</string>
+    <string name="osmo_mode_restart">Starta om OsMo-session</string>
+    <string name="osmo_settings_debug">Avbuggningsinformation</string>
     </resources>
