@@ -248,8 +248,8 @@
   <string name="vector_data_missing">SD kartē nav atrodami bezsaistes dati. Lai lietotu bezsaistes kartes, lūdzu lejupielādējiet tās, lai varētu lietot bezsaistē.</string>
   <string name="local_index_gpx_info_show">"\n\nTuriet nospiestu izvēlnes atvēršanai"</string>
   <string name="local_index_gpx_info_speed">"\nVidējais ātrums : %1$s \nMaksimālais ātrums : %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nVidējais augstums : %1$s\nMinimālais augstums : %2$s\nMaksimālais augstums : %3$s\nAugšup : %4$s\nLejup : %5$s"</string>
-  <string name="local_index_gpx_info">Nobrauktais ceļš: %1$d\nVisas vietas: %2$d\nPieturvietas: %3$d\nKopējais attālums: %4$s\nSākuma laiks: %5$tF, %5$tR\nBeigu laiks: %6$tF, %6$tR</string>
+  <string name="local_index_gpx_info_elevation">"\nVidējais augstums : %1$s\nMinimālais augstums : %2$s\nMaksimālais augstums : %3$s\nUz augšu : %4$s\nUz leju : %5$s"</string>
+  <string name="local_index_gpx_info">Nobrauktie ceļi: %1$d\nVisas vietas: %2$d\nPieturvietas: %3$d\nKopējais attālums: %4$s\nSākuma laiks: %5$tF, %5$tR\nNobeiguma laiks: %6$tF, %6$tR</string>
   <string name="local_index_installed">Versija</string>
   <string name="local_index_items_backuped">Veiksmīgi arhivētas %1$d no %2$d vienībām.</string>
   <string name="local_index_items_deleted">Veiksmīgi izdzēstas %1$d no %2$d vienībām.</string>
@@ -305,7 +305,7 @@
   <string name="overlay_transparency">Pārklāja caurspīdīgums</string>
   <string name="map_transparency_descr">Modificēt bāzes kartes caurspīdīgumu</string>
   <string name="map_transparency">Bāzes kartes caurspīdīgums</string>
-  <string name="modify_transparency">Rediģēt caurspīdīgumu (0 - caurspīdīgs, 255 - necaurspīdīgs)</string>
+  <string name="modify_transparency">Mainīt caurspīdīgumu (0 - caurspīdīgs, 255 - necaurspīdīgs)</string>
   <string name="layer_underlay">Paklāja karte…</string>
   <string name="map_underlay">Paklāja karte</string>
   <string name="map_underlay_descr">Izvēlēties paklāja karti</string>
@@ -627,7 +627,7 @@
   <string name="downloading">Lejupielādē…</string>
   <string name="downloading_list_indexes">Lejupielādē reģionu sarakstu…</string>
   <string name="list_index_files_was_not_loaded">Netika saņemts reģionu saraksts no osmand.net.</string>
-  <string name="select_index_file_to_download">Nekas netika atrasts. Ja jūs nevarat atrast sava reģiona datus, jūs tos varat sagatavot paši (skatīt http://osmand.net).</string>
+  <string name="select_index_file_to_download">Nekas netika atrasts. Ja jūs nevariet atrast sava apgabala karti, tad jūs variet to izveidot (skatīt http://osmand.net).</string>
   <string name="show_poi_on_map">Rādīt kartē</string>
   <string name="fav_points_edited">Izlases punkts tika izlabots</string>
   <string name="fav_points_not_exist">Izlases punkti neeksistē</string>
@@ -815,12 +815,12 @@
   <string name="edit_filter_create_message">Filtrs {0} tika izveidots</string>
   <string name="default_buttons_selectall">Izvēlēties visu</string>
   <string name="offline_navigation_not_available">OsmAnd bezsaistes navigācija pagaidām nav pieejama.</string>
-  <string name="left_side_navigation">Kreisās rokas kustība</string>
-  <string name="left_side_navigation_descr">Ieslēdziet, ja jūs atrodieties valstīs ar kreisās puses kustību</string>
-  <string name="download_link_and_local_description">Lejuplādēt vai atjaunināt bezsaistes datus.\nLai redzētu detaļas uzklikšķiniet uz ieraksta, lai deaktivizētu vai dzēstu bezsaistes datus uzspiediet un turiet piespiestu. Datu apjoms (%1$s brīvs):</string>
-  <string name="unknown_from_location">Starta vieta vēl nav noteikta</string>
-  <string name="confirm_interrupt_download">Pārtraukt lejupielādi?</string>
-  <string name="basemap_was_selected_to_download">Kartes pamatdati, kas nepieciešami aplikācijas normālai darbībai, ir iezīmēti lejuplādei.</string>
+  <string name="left_side_navigation">Kreisās joslas kustība</string>
+  <string name="left_side_navigation_descr">Ieslēdziet, ja jūs atrodieties valstīs ar kreisās joslas kustību</string>
+  <string name="download_link_and_local_description">Lejupielādēt vai atjaunināt no interneta.\nLai atvērtu ierakstu, nospiediet uz krustiņa, lai deaktivizētu, dzēstu vai pārdēvētu vienības, turiet tās nospiestas. Datu apjoms (%1$s brīvs):</string>
+  <string name="unknown_from_location">Sākuma punkts vēl nav noteikts</string>
+  <string name="confirm_interrupt_download">Vai pārtraukt faila lejupielādi?</string>
+  <string name="basemap_was_selected_to_download">Pamatkarte, kas ir nepieciešama aplikācijas normālai darbībai, tika pievienota lejupielādei.</string>
   
   <string name="map_online_plugin_is_not_installed">Aktivizēt tiešsaistes kartes spraudni, dažādu kartes avotu atlasīšanai</string>
   <string name="map_online_data">Bezsaistes kartes (bildes)</string>
@@ -1289,7 +1289,7 @@
     <string name="local_index_tile_data_name">Attēlu dati: %1$s</string>
     <string name="edit_tilesource_successfully">Attēlu avots %1$s ir saglabāts</string>
     <string name="edit_tilesource_elliptic_tile">Eliptisks merkators</string>
-    <string name="local_index_gpx_timespan">\nLaika posms: %1$d:%2$02d:%3$02d</string>
+    <string name="local_index_gpx_timespan">\nKopējais laiks: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nBrauciena laiks: %1$d:%2$02d:%3$02d</string>
 	<string name="delete_point">Noņemt punktu</string>
     <string name="plugin_distance_point">Punkts</string>
@@ -1588,8 +1588,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 …
     </string>
     <string name="osmo_settings_uuid">Ierīces identifikators</string>
-    <string name="osmo_settings_descr">Skatīt ierīces personīgo reģistrācijas atslēgu un pārējos ar monitoringu saistītos uzstādījumus </string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - attīstīts tiešsaistes monitorings ar daudzām attālinātās kontroles iespējām htttp://osmo.mobi</string>
+    <string name="osmo_settings_descr">Konfigurēt monitoringa uzstādījumus un personīgo monitoringa kanālu</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - iespējām bagāts reālā laika monitorings ar attālinātu sekošanu savienotām ierīcēm.
+………Izveidojiet anonīmas grupas, kopīgojiet atrašanās vietas un komunicējiet savā starpā, ar dažādiem uzstādījumiem sesijas vai patstāvīgai sekošanai.
+……Anonīmās grupas ir ierobežotas līdz dienu skaitam un dažām iespējām, kā piemēram, nav attālinātās kontroles un grupas administratora.
+……Pilnībā funkcionējošas grupas var tikt izveidotas tīmekļa lapā un tām var piekļūt tikai reģistrētie lietotāji.
+……Vairāk lasiet http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OSMo (Tiešsaistes monitorings)</string>
     <string name="osmo_settings">OSMo</string>
    	<string name="tip_recent_changes_1_6_t">Izmaiņas uz 1.6:
@@ -1637,4 +1641,65 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 …… * Izmaiņas valsts karšu lejupielādē (vietējo nosaukumu meklēšanas atbalsts)
 ……
     </string>
+    <string name="osmo_group_info">Informācija</string>
+    <string name="osmo_group">OsMo grupa</string>
+    <string name="osmo_group_share">Lai pievienotos grupai %2$s, norādiet grupas id (%1$s)</string>
+    <string name="osmo_share_connect_device">Atļaut patstāvīgi sekot ierīcei</string>
+    <string name="osmo_share_current_session">Dalīties tekošajā sesijā pārlūkā</string>
+    <string name="osmo_session_not_available">Sesija nav pieejama, lūdzu, pārbaudiet vai \'sūtīt pozīciju\' ir iespējots.</string>
+    <string name="osmo_share_session">Dalīties sesijā</string>
+    <string name="osmo_session_id_share">Sesijas url ierīces izsekošanai (%1$s)</string>
+    <string name="osmo_tracker_id_share">Lai pievienotos ierīcei %2$s, norādiet izsekošanas id (%1$s)</string>
+    <string name="osmo_track_interval">Logošanas intervāls</string>
+	<string name="osmo_track_interval_descr">Laika intervāls lokācijas nosūtīšanai</string>
+    <string name="int_days">Dienas</string>
+    <string name="osmo_connect_menu">Pieslēgties</string>
+    <string name="osmo_expire_group">Derīgs līdz</string>
+    <string name="osmo_group_description">Apraksts</string>
+    <string name="osmo_group_policy">Politika</string>
+    <string name="osmo_connect_to_device_tracker_id">Izsekošanas id</string>
+    <string name="osmo_connect_to_device_name">Ierīces nosaukums</string>
+    <string name="osmo_connect_to_group_id">Grupas id</string>
+    <string name="osmo_group_name">Grupas nosaukums</string>
+    <string name="osmo_connect_to_device">Savienot ar ierīci</string>
+    <string name="osmo_connect_to_group">Savienot ar grupu</string>
+    <string name="osmo_connect">Pievienoties</string>
+    <string name="osmo_create_group">Izveidot grupu</string>
+    <string name="osmo_server_operation_failed">OsMO servera darbības kļūda</string>
+    <string name="osmo_activity">Osm Monitorings</string>
+    <string name="osmo_enable_tracker">Sūtīt manas atrašanās vietas</string>
+    <string name="osmo_control">OsMo ātrā pieejamība</string>
+    <string name="hours_ago">stundas atpakaļ</string>
+    <string name="minutes_ago">minūtes atpakaļ</string>
+    <string name="osmo_connected_devices">Savienotās ierīces</string>
+    <string name="osmo_groups">OsMo grupas/ierīces</string>
+    <string name="osmo_auto_send_locations_descr">Automātiski sākt sekošanas sesiju un sūtīt atrašanās vietas pēc aplikācijas palaišanas</string>
+    <string name="osmo_auto_send_locations">Automātiski sākt sekošanas sesiju</string>
+    <string name="osmo_tracker_id">Personīgais sekošanas ID</string>
+    <string name="osmo_tracker_id_descr">Nospiediet, lai redzētu vai kopīgotu sekošanas id.
+………Izmantojot sekošanas id, pievienotās ierīces varēs monitorēt ierīces pārvietošanos! Lai atvienotos, paņemiet Reģenerēt opciju.</string>
+    <string name="osmo_session_token">Sesijas laiks: %1$s</string>
+    <string name="osmo_auth_pending">Gaida autorizāciju...</string>
+    <string name="osmo_locations_sent">Atrašanās vieta nosūtīta %1$d (buferī %2$d) </string>
+    <string name="osmo_conn_successfull">Izveidots savienojums: %1$s </string>
+    <string name="osmo_mode_restart">Restartēt OsMo sesiju</string>
+    <string name="osmo_settings_debug">Atkļūdošanas informācija</string>
+    <string name="tip_recent_changes_1_2_t">Izmaiņas uz 1.2.3:
+……	…… \n\t*Fix Geo Intent (Foursquare, c:geo)
+……	…… \n\t*salabota ekrāna raustīšanās navigācijas laikā
+……	…… \n\t*Citi sīki labojumi
+……	…… \n\t*Izmaiņas uz 1.2:
+……	…… \n\nKļūdu labojumi (uzlabota maršrutēšana, meklēšana, AV ierakstīšana, balss priekšā teikšana, daži ekrāna labojumi)
+……	…… \n\t*Vieglāka kalnu pārklāja konfigurācija (nepieciešanas Kontūrlīniju spraudnis)
+……	…… \n\t*Tiek akceptētas maps.google.com atrašanās vietas linki
+……	…… \n\t*Jauns gadžets (GPS info)
+……	…… \n\t*Pievienots daudz-logu atbalsts patreizējām Samsung ierīcēm
+……	…… \n\t*Kalman filtrs kompasam
+……	…… \n\t*Pebble viedpulksteņa atbalsts
+……	……
+	</string>
+    <string name="local_index_mi_export">Eksports</string>
+	<string name="import_file_favourites">Vai saglabāt kā GPX failu vai importēt izlasē?</string>
+	<string name="import_save">Saglabāt</string>
+	<string name="seconds_ago">sekundes atpakaļ</string>
     </resources>
