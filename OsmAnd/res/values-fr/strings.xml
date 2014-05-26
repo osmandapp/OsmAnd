@@ -1554,8 +1554,12 @@
 <string name="share_route_subject">Itinéraire partagé via OsmAnd</string>
 	<string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
 	<string name="osmo_settings_descr">Configurer les paramètres de suivi et définir son canal de suivi personnel</string>
-	<string name="osmo_plugin_description">OpenStreetMap-Monitoring - Suivi en temps réel avec de nombreuses fonctionnalités de contrôle à distance http://osmo.mobi</string>
-	<string name="osmo_plugin_name">OSMo (suivi en temps réel)</string>
+	<string name="osmo_plugin_description">OpenStreetMap-Monitoring - Suivi en temps réel. Ce système offre la possibilité de suivre d'autres appareils ou d'être suivi.
+	Créer des groupes anonymes, partager sa position et communiquer avec d'autres. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent.
+	Les groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d'administrateur de groupe.
+	Des groupes totalement fonctionnels peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès.
+	Pour en savoir plus: http://osmo.mobi</string>
+	<string name="osmo_plugin_name">OsMo (Suivi en temps réel)</string>
 	<string name="osmo_settings">OSMo</string>
 	<string name="osmo_register_device">Enregistrement de l\'appareil…</string>
 	<string name="osmo_io_error">Problème de connection OSMo : </string>
@@ -1578,12 +1582,6 @@
 <string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
 <string name="arrival_distance_descr">Choisir à quel moment est annoncée l\'arrivée à destination</string>
-<string-array name="arrival_distance_factors">
-<item>Précoce</item>
-<item>Normale</item>
-<item>Tardive</item>
-<item>Dans les derniers mètres</item>
-</string-array>
 <string name="share_fav">Partager</string>
 <string name="share_fav_subject">Favoris partagés via OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un intinéraire entre des points</string>
@@ -1603,4 +1601,33 @@
     <string name="osmo_auto_send_locations_descr">Démarrer automatiquement la session de suivi et envoyer des lieux après le démarrage de l\'application</string>
     <string name="osmo_auto_send_locations">Démarre automatiquement la session de suivi</string>
     <string name="osmo_tracker_id">Identifiant personnel de suivi</string>
-</resources>
+<string name="osmo_group_info">Info</string>
+    <string name="osmo_group">Groupe OsMo</string>
+    <string name="osmo_group_share">Pour vous connecter au groupe %2$s, veuillez spécifier l'identifiant du groupe (%1$s)</string>
+    <string name="osmo_share_connect_device">Autoriser le suivi de cet appareil de façon permanente</string>
+    <string name="osmo_share_current_session">Partager la session courante dans le navigateur</string>
+    <string name="osmo_session_not_available">Session non disponible, veuillez vérifier que \'Envoyer mes positions\' est activé.</string>
+    <string name="osmo_enable_tracker">Envoyer mes positions</string>
+    <string name="osmo_share_session">Partager la session</string>
+    <string name="osmo_session_id_share">URL de la session pour suivre l'appareil (%1$s)</string>
+    <string name="osmo_tracker_id_share">Pour vous connecter à l'appareil cible %2$s, veuillez spécifier l'identifiant de suivi (%1$s)</string>
+    <string name="osmo_track_interval">Fréquence d'enregistrement</string>
+	<string name="osmo_track_interval_descr">Choisir la fréquence d'envoi de la position</string>
+    <string name="int_days">jours</string>
+    <string name="osmo_connect_menu">Connecter</string>
+    <string name="osmo_expire_group">Expire dans</string>
+    <string name="osmo_group_description">Description</string>
+    <string name="osmo_group_policy">Politique</string>
+    <string name="osmo_connect_to_device_tracker_id">Identifiant de suivi</string>
+    <string name="osmo_connect_to_group_id">Identifiant du groupe</string>
+    <string name="osmo_group_name">Nom du groupe</string>
+    <string name="osmo_connect_to_group">Lier au groupe</string>
+    <string name="osmo_connect">Connexion à</string>
+    <string name="osmo_create_group">Créer un groupe</string>
+    <string name="osmo_server_operation_failed">Échec du serveur OsMo</string>
+    <string name="osmo_activity">Monitoring OSM</string>
+    <string name="osmo_control">Accès rapide OsMo</string>
+    <string name="local_index_mi_export">Exporter</string>
+	<string name="import_file_favourites">Sauvegarder comme fichier GPX ou importer dans les favoris ?</string>
+	<string name="import_save">Sauvegarder</string>
+	</resources>
