@@ -986,7 +986,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="send_location_way_choose_title">Del placering ved hjælp af</string>
 	<string name="send_location_sms_pattern">Placering: %1$s
 \n%2$s</string>
-	<string name="send_location_email_pattern">For at se placering følg webadresse %1$s eller android hensigts link %2$s</string>
+	<string name="send_location_email_pattern">For at se placering brug webadressen %1$s eller android hensigts link %2$s</string>
 	<string name="send_location">Send placering</string>
 	<string name="context_menu_item_share_location">Del placering</string>
 	<string name="add_waypoint_dialog_added">GPX-rutepunkt \'{0}\' blev korrekt tilføjet</string>
@@ -1216,7 +1216,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="map_orientation_portrait">Stående</string>
 	<string name="map_orientation_landscape">Liggende</string>
 	<string name="map_screen_orientation">Skærmretning</string>
-	<string name="map_screen_orientation_descr">Stående, liggende eller enhed</string>
+	<string name="map_screen_orientation_descr">Stående, liggende eller som enhed</string>
 	<string name="add_new_rule">Tilføj ny regel</string>
 	<string name="transport_Routes">Ruter</string>
 	<string name="transport_search_after">Efterfølgende rute</string>	
@@ -1545,9 +1545,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
 	<string name="av_photo_play_sound_descr">Spil lyd når foto tages</string>
 <string name="av_photo_play_sound">Kameralyd</string>
-	<string name="speak_traffic_warnings">Meddel om trafikadvarsler</string>
-	<string name="speak_cameras">Meddel om fotofælder</string>
-	<string name="speak_speed_limit">Meddel om hastighedsgrænse</string>
+	<string name="speak_traffic_warnings">Meddel trafikadvarsler</string>
+	<string name="speak_cameras">Meddel fotofælder</string>
+	<string name="speak_speed_limit">Meddel hastighedsgrænse</string>
     
 	
     <string name="route_descr_map_location">Kort: </string>
@@ -1569,9 +1569,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="context_menu_item_directions_to">Kørselsvejledning til</string>
     <string name="context_menu_item_directions_from">Kørselsvejledning fra</string>
     <string name="speak_title">Meddel…</string>
-	<string name="speak_descr">Konfigurer til meddele gadenavne , trafikadvarsler ( tvungne stop, vejbump ) , fotofældeadvarsler , hastighedsbegrænsninger</string>
+	<string name="speak_descr">Konfigurer til at meddele gadenavne, trafikadvarsler (tvungne stop, vejbump), fotofældeadvarsler, hastighedsbegrænsninger</string>
 	<string name="speak_street_names">Meddel gadenavne (TTS)</string>
-    <string name="announce_gpx_waypoints">Meddel om GPX-rutepunkter</string>
+    <string name="announce_gpx_waypoints">Meddel GPX-rutepunkter</string>
     <string name="osmodroid_mode_off">Start OsMoDroid</string>
     <string name="osmodroid_mode_on">Stop OsMoDroid</string>    
     <string name="driving_region_japan">Japan</string>
@@ -1771,11 +1771,15 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">OpenStreetMap - Overvågning - Avanceret live overvågning med mange funktioner til fjernkontrol http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetMap - Overvågning - Advanced Live- Monitoring, giver muligheder for at spore andre enheder og blive sporet.          
+	Opret anonyme grupper, del hinandens placering og kommuniker. Der er forskellige indstillinger for sporing session eller permanent sporing.          
+	Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppe administrator.          
+	 Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem.          
+	Læs mere på http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (avanceret live overvågning)</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
    	<string name="keep_informing_never">Aldrig</string>
-    <string name="keep_informing_descr">Annoncer navigationsinstruktioner med jævne mellemrum</string>
+    <string name="keep_informing_descr">Gentag navigationsinstruktioner med jævne mellemrum</string>
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
 	<string name="arrival_distance">Meddel ankomst</string>
     <string name="arrival_distance_descr">Hvornår skal ankomst meddeles?</string>
@@ -1816,7 +1820,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_group">OsMo gruppe</string>
     <string name="osmo_group_share">For at oprette forbindelse til gruppen %2$s, angiv gruppe-ID (%1$s)</string>
     <string name="osmo_share_connect_device">Følg enheden permanent</string>
-    <string name="osmo_share_current_session">Del aktuelle session i browser</string>
+    <string name="osmo_share_current_session">Del den aktuelle session i browser</string>
     <string name="osmo_session_not_available">Session ikke er tilgængelig, kontroller at \'Send placering\' er til.</string>
     <string name="osmo_share_session">Del session</string>
     <string name="osmo_session_id_share">Session url til at spore enhed (%1$s)</string>
@@ -1830,11 +1834,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_group_policy">Politik</string>
     <string name="osmo_connect_to_group_id">Gruppe-id</string>
     <string name="osmo_group_name">Gruppenavn</string>
-    <string name="osmo_connect_to_group">Link med gruppe</string>
+    <string name="osmo_connect_to_group">Sammenkæd med gruppe</string>
     <string name="osmo_connect">Opret forbindelse til</string>
     <string name="osmo_create_group">Opret gruppe</string>
     <string name="osmo_server_operation_failed">Osmo Server operation mislykkedes</string>
-    <string name="osmo_activity">OSM Overvågning</string>
+    <string name="osmo_activity">OSM overvågning</string>
     <string name="osmo_enable_tracker">Send placeringer</string>
     <string name="osmo_control">OsMo hurtig adgang</string>
     <string name="local_index_mi_export">Eksport</string>
