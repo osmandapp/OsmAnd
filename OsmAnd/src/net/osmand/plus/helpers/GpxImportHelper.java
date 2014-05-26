@@ -57,12 +57,17 @@ public class GpxImportHelper {
 	}
 
 	public void handleFileImport(final Uri intentUri, final String fileName) {
+		final boolean isFileIntent = "file".equals(intentUri.getScheme());
+		final boolean isOsmandSubdir = isSubDirectory(application.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(intentUri.getPath()));
+
+		final boolean saveFile = !isFileIntent || !isOsmandSubdir;
+
 		if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
-			handleKmlImport(intentUri, fileName);
+			handleKmlImport(intentUri, fileName, saveFile);
 		} else if (fileName != null && fileName.endsWith("favourites.gpx")) {
-			handleFavouritesImport(intentUri, fileName);
+			handleFavouritesImport(intentUri, fileName, saveFile);
 		} else {
-			handleGpxImport(intentUri, fileName);
+			handleGpxImport(intentUri, fileName, saveFile);
 		}
 	}
 
@@ -78,7 +83,7 @@ public class GpxImportHelper {
 		return name;
 	}
 
-	private void handleGpxImport(final Uri gpxFile, final String fileName) {
+	private void handleGpxImport(final Uri gpxFile, final String fileName, final boolean save) {
 		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -111,12 +116,12 @@ public class GpxImportHelper {
 			@Override
 			protected void onPostExecute(GPXUtilities.GPXFile result) {
 				progress.dismiss();
-				handleResult(result, fileName);
+				handleResult(result, fileName, save);
 			}
 		}.execute();
 	}
 
-	private void handleFavouritesImport(final Uri gpxFile, final String fileName) {
+	private void handleFavouritesImport(final Uri gpxFile, final String fileName, final boolean save) {
 		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -149,12 +154,12 @@ public class GpxImportHelper {
 			@Override
 			protected void onPostExecute(final GPXUtilities.GPXFile result) {
 				progress.dismiss();
-				importFavourites(result, fileName);
+				importFavourites(result, fileName, save);
 			}
 		}.execute();
 	}
 
-	private void handleKmlImport(final Uri kmlFile, final String name) {
+	private void handleKmlImport(final Uri kmlFile, final String name, final boolean save) {
 		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -193,17 +198,22 @@ public class GpxImportHelper {
 			@Override
 			protected void onPostExecute(GPXUtilities.GPXFile result) {
 				progress.dismiss();
-				handleResult(result, name);
+				handleResult(result, name, save);
 			}
 		}.execute();
 	}
 
-	private void handleResult(final GPXUtilities.GPXFile result, final String name) {
+	private void handleResult(final GPXUtilities.GPXFile result, final String name, final boolean save) {
 		if (result != null) {
 			if (result.warning != null) {
 				AccessibleToast.makeText(mapActivity, result.warning, Toast.LENGTH_LONG).show();
 			} else {
-				new SaveAsyncTask(result, name).execute();
+				if (save) {
+					new SaveAsyncTask(result, name).execute();
+				}
+				else {
+					showGpxOnMap(result);
+				}
 			}
 		} else {
 			AccessibleToast.makeText(mapActivity, R.string.error_reading_gpx, Toast.LENGTH_LONG).show();
@@ -266,16 +276,21 @@ public class GpxImportHelper {
 			final String msg = warning == null ? MessageFormat.format(application.getString(R.string.gpx_saved_sucessfully), result.path) : warning;
 			AccessibleToast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
 
-			application.setGpxFileToDisplay(result, true);
-			final GPXUtilities.WptPt moveTo = result.findPointToShow();
-			if (moveTo != null) {
-				mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
-			}
-			mapView.refreshMap();
+			showGpxOnMap(result);
 		}
+
 	}
 
-	private void importFavourites(final GPXUtilities.GPXFile gpxFile, final String fileName) {
+	private void showGpxOnMap(final GPXUtilities.GPXFile result) {
+		application.setGpxFileToDisplay(result, true);
+		final GPXUtilities.WptPt moveTo = result.findPointToShow();
+		if (moveTo != null) {
+			mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
+		}
+		mapView.refreshMap();
+	}
+
+	private void importFavourites(final GPXUtilities.GPXFile gpxFile, final String fileName, final boolean save) {
 		final DialogInterface.OnClickListener importFavouritesListener = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -294,7 +309,7 @@ public class GpxImportHelper {
 						mapActivity.startActivity(newIntent);
 						break;
 					case DialogInterface.BUTTON_NEGATIVE:
-						handleResult(gpxFile, fileName );
+						handleResult(gpxFile, fileName, save);
 						break;
 				}
 			}
@@ -322,5 +337,31 @@ public class GpxImportHelper {
 		}
 
 		return favourites;
+	}
+
+	/**
+	   * Checks, whether the child directory is a subdirectory of the parent
+	   * directory.
+	   *
+	   * @param parent the parent directory.
+	   * @param child the suspected child directory.
+	   * @return true if the child is a subdirectory of the parent directory.
+	   */
+	public boolean isSubDirectory(File parent, File child) {
+		try {
+			parent = parent.getCanonicalFile();
+			child = child.getCanonicalFile();
+
+			File dir = child;
+			while (dir != null) {
+				if (parent.equals(dir)) {
+					return true;
+				}
+				dir = dir.getParentFile();
+			}
+		} catch (IOException e) {
+			return false;
+		}
+		return false;
 	}
 }
