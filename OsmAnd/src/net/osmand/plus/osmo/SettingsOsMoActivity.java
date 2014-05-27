@@ -17,6 +17,8 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SettingsOsMoActivity extends SettingsBaseActivity {
@@ -100,7 +102,13 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 					bs.append(hs.get(i)).append("\n");
 				}
 			}
+			ScrollView sv = new ScrollView(this);
+			TextView tv = new TextView(this);
+			sv.addView(tv);
+			tv.setText(bs.toString());
+			bld.setView(sv);
 			bld.setMessage(bs.toString());
+			bld.setPositiveButton(R.string.default_buttons_ok, null);
 			bld.show();
 			return true;
 		} else if(preference == trackerId) {
