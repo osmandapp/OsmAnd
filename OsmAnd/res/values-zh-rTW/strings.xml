@@ -1775,7 +1775,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="hours_ago">小時前</string>
     <string name="minutes_ago">分鐘前</string>
     <string name="seconds_ago">秒前</string>
-    <string name="osmo_connect_to_device_name">裝置名稱</string>
+    <string name="osmo_connect_to_device_name">使用者名稱</string>
     <string name="osmo_connect_to_device_tracker_id">追蹤 ID</string>
     <string name="osmo_connect_to_device">與裝置連結</string>
     <string name="osmo_join_group">加入群組</string>
@@ -1810,4 +1810,15 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="local_index_mi_export">匯出</string>
 	<string name="import_file_favourites">儲存為 GPX 檔案或匯入到我的最愛嗎？</string>
 	<string name="import_save">儲存</string>
-	</resources>
+	<string name="color_red">紅色</string>
+	<string name="color_pink">粉紅色</string>
+	<string name="color_orange">橙色</string>
+	<string name="color_brown">棕色</string>
+	<string name="color_yellow">黃色</string>
+	<string name="color_lightblue">淺藍色</string>
+	<string name="color_blue">藍色</string>
+	<string name="color_magenta">紫紅色</string>
+	
+    <string name="osmo_edit_device">更改使用者屬性</string>
+    <string name="osmo_edit_color">顯示色彩</string>
+    </resources>
