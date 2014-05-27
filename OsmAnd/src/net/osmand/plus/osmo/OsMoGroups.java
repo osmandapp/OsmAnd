@@ -333,6 +333,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		storage.save();
 		service.pushCommand(op);
 		if(group.isEnabled()) {
+			group.enabled = false;
 			disconnectAllGroupUsers(group);
 		}
 		return op;

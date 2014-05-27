@@ -327,8 +327,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				selectedObject = o;
 				device =  (OsMoDevice) (o instanceof OsMoDevice ?o : null); 
 				group =  (OsMoGroup) (o instanceof OsMoGroup ?o : null);
-				MenuItem mi = createMenuItem(menu, ON_OFF_ACTION_ID, R.string.default_buttons_ok, 0, 0,
-						MenuItem.SHOW_AS_ACTION_ALWAYS);
+				MenuItem mi = null;
+				if(device == null || device.getGroup().isMainGroup()) {
+					mi = createMenuItem(menu, ON_OFF_ACTION_ID, R.string.default_buttons_ok, 0, 0,
+							MenuItem.SHOW_AS_ACTION_ALWAYS);
+				}
 				if(device != null && device.getLastLocation() != null) {
 					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.show_poi_on_map, R.drawable.ic_action_marker_light, R.drawable.ic_action_marker_dark,
 							MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -351,19 +354,20 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				
 				
-				
-		        final LayoutInflater inflater = LayoutInflater.from(OsMoGroupsActivity.this);
-		        View view = inflater.inflate(R.layout.check_item_rel, null);
-		        final CompoundButton check = (CompoundButton) view.findViewById(R.id.check_item);
-				check.setChecked((device != null && device.isEnabled()) || (group != null && group.isEnabled()));
-		        check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						onOffAction(check);						
-					}
-				});
-		        mi.setActionView(view);
+				if (mi != null) {
+					final LayoutInflater inflater = LayoutInflater.from(OsMoGroupsActivity.this);
+					View view = inflater.inflate(R.layout.check_item_rel, null);
+					final CompoundButton check = (CompoundButton) view.findViewById(R.id.check_item);
+					check.setChecked((device != null && device.isEnabled()) || (group != null && group.isEnabled()));
+					check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							onOffAction(check);
+						}
+					});
+					mi.setActionView(view);
+				}
 				return true;
 			}
 
@@ -743,7 +747,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				sortedGroups.remove(group);
 				users.remove(group);
 			} else {
-				List<OsMoDevice> us = !group.isEnabled() && !group.isMainGroup() ? new ArrayList<OsMoDevice>(0) : group.getGroupUsers();
+				List<OsMoDevice> us = !group.isEnabled() && !group.isMainGroup() ? new ArrayList<OsMoDevice>(0) : group.getVisibleGroupUsers();
 				final Collator ci = Collator.getInstance();
 				Collections.sort(us, new Comparator<OsMoDevice>() {
 

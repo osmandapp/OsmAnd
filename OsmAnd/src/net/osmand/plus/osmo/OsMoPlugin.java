@@ -1,5 +1,7 @@
 package net.osmand.plus.osmo;
 
+import java.text.SimpleDateFormat;
+
 import net.osmand.Location;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -34,6 +36,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	private OsMoTracker tracker;
 	private OsMoGroups groups;
 	private BaseMapWidget osmoControl;
+
+	// 2014-05-27 23:11:40
+	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	public OsMoPlugin(final OsmandApplication app) {
 		service = new OsMoService(app);
