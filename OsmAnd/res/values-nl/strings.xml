@@ -1793,4 +1793,15 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="local_index_mi_export">Exporteer</string>
 	<string name="import_file_favourites">Bewaren als GPX bestand of importeren in favorieten?</string>
 	<string name="import_save">Bewaren</string>
-	</resources>
+	<string name="color_red">rood</string>
+	<string name="color_pink">roze</string>
+	<string name="color_orange">oranje</string>
+	<string name="color_brown">bruin</string>
+	<string name="color_yellow">geel</string>
+	<string name="color_lightblue">lichtblauw</string>
+	<string name="color_blue">blauw</string>
+	<string name="color_magenta">magenta</string>
+	
+    <string name="osmo_edit_device">Wijzig gebruiker-instellingen</string>
+    <string name="osmo_edit_color">Weergavekleur</string>
+    </resources>
