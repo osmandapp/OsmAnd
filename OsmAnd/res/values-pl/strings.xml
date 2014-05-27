@@ -1708,9 +1708,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="navigation_intent_invalid">Nieprawidłowy format : %s</string>
 <string name="osmo_settings_uuid">Unikatowy identyfikator urządzenia</string>
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Zaawansowany Monitoring na Żywo z wieloma funkcjami do zdalnego zarządzania na http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Zaawansowany Monitoring na Żywo. Daje możliwość śledzenia innych urządzeń i vice versa.
+	Twórz anonimowe grupy, dziel się lokalizacją i prowadź komunikację. System ma wiele ustawień dla śledzenia w sesji lub stałego śledzenia.
+	Grupy anonimowe mają ograniczenia czasowe i funkcjonalne, np. nie ma zdalnej kontroli i administratora grupy.
+	W pełni funkcjonalne grupy powinny być tworzone przez witrynę, a dostęp zarezerwowany tylko dla zarejestrowanych użytkowników.
+	Więcej na http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (Zaawansowany Monitoring na Żywo)</string>
-    <string name="osmo_settings">OSMo</string>
+    <string name="osmo_settings">OSMo Monitoring OpenStreetMap (beta)</string>
    	<string name="keep_informing_never">Nigdy</string>
     <string name="keep_informing_descr">Podawaj instrukcje nawigacji w regularnych odstępach czasu</string>
     <string name="keep_informing">Powtarzaj instrukcje nawigacji</string>
@@ -1726,6 +1730,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="tip_recent_changes_1_8_alpha">Zmiany w wersji 1.8:
         * Obliczanie trasy pomiędzy punktami w zapisanym śladzie GPX
         * Zmieniono wygląd krajów do pobrania (wsparcie wyszukiwania nazw lokalnych)
+	* Importowanie GPX/KML (zamiana z KML na GPX)
     </string>
     <string name="osmo_auto_send_locations_descr">Po uruchomieniu aplikacji automatycznie rozpocznij sesję trackera i przesyłaj pozycję</string>
     <string name="osmo_auto_send_locations">Automatycznie uruchom sesję trackera</string>
