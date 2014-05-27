@@ -366,6 +366,9 @@ public class OsMoGroupsStorage {
 			if(userName != null && userName.length() > 0) {
 				return userName;
 			}
+			if(serverName == null || serverName.length() == 0) {
+				return trackerId;
+			}
 			return serverName;
 		}
 	}

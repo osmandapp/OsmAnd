@@ -30,6 +30,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListActivity;
+import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
@@ -41,6 +42,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -438,24 +440,30 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				quitSelectionMode();
 			}
 		});
-
 	}
+	
+	private StringBuilder setFields(StringBuilder bld, int field, String value) {
+		bld.append(getString(field)).append(": ").append(value).append("\n");
+		return bld;
+	}
+	
+	
 
 	protected void showGroupInfo(OsMoGroup group) {
 		Builder bld = new AlertDialog.Builder(this);
 		bld.setTitle(R.string.osmo_group);
 		StringBuilder sb = new StringBuilder();
-		sb.append(getString(R.string.osmo_group_name)).append(" ").append(group.name);
+		setFields(sb, R.string.osmo_group_name, group.name);
 		if(group.description != null) {
-			sb.append(getString(R.string.osmo_group_description)).append(" ").append(group.description);
+			setFields(sb, R.string.osmo_group_description, group.description);
 		}
 		if(group.expireTime != 0) {
-			sb.append(getString(R.string.osmo_expire_group)).append(" ").append(new Date(group.expireTime).toString());
+			setFields(sb, R.string.osmo_expire_group, new Date(group.expireTime).toString());
 		}
 		if(group.policy != null) {
-			sb.append(getString(R.string.osmo_group_policy)).append(" ").append(group.policy);
+			setFields(sb, R.string.osmo_group_policy, group.policy);
 		}
-		sb.append(getString(R.string.osmo_connect_to_group_id)).append(" ").append(group.groupId);
+		setFields(sb, R.string.osmo_connect_to_group_id, group.groupId);
 		bld.setMessage(sb.toString());
 		
 		bld.show();
@@ -500,6 +508,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		if (item.getItemId() == CONNECT_TO) {
 			connectToDevice();
+			return true;
+		} else if (item.getItemId() == SETTINGS_ID) {
+			startActivity(new Intent(this, SettingsOsMoActivity.class));
 			return true;
 		} else if (item.getItemId() == SHARE_SESSION) {
 			shareSession();
@@ -663,6 +674,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		createMenuItem(menu, CREATE_GROUP, R.string.osmo_create_group, 
 				0, 0,/*R.drawable.ic_action_marker_light,*/
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		createMenuItem(menu, SETTINGS_ID, R.string.settings, 
+				R.drawable.ic_action_settings_light, R.drawable.ic_action_settings_dark,
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -694,7 +708,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				if(operation == top || (operation != null && operation.equals(top))) {
 					hideProgressBar();
 				}
-				adapter.update(group);				
+				if(group != null) {
+					adapter.update(group);
+				}
 				adapter.notifyDataSetChanged();
 				updateStatus();
 			}
@@ -1056,9 +1072,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		
 		@Override
 		public void draw(Canvas canvas) {
-			canvas.drawCircle(width/2, height/2, (width + height) / 7, paintRouteDirection);
 			canvas.drawCircle(width/2, height/2, (width + height) / 6, white);
-			
+			canvas.drawCircle(width/2, height/2, (width + height) / 7, paintRouteDirection);
 		}
 		
 		@Override

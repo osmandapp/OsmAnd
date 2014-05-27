@@ -65,11 +65,11 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	}
 	
 	public void startTrackingId(String id) {
-		service.pushCommand("LISTEN|"+id);
+		service.pushCommand("LISTEN:"+id);
 	}
 	
 	public void stopTrackingId(String id) {
-		service.pushCommand("UNLISTEN|"+id);
+		service.pushCommand("UNLISTEN:"+id);
 		otherLocations.remove(id);
 	}
 
@@ -139,7 +139,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	
 
 	@Override
-	public boolean acceptCommand(String command, String data, JSONObject obj, OsMoThread thread) {
+	public boolean acceptCommand(String command, String tid, String data, JSONObject obj, OsMoThread thread) {
 		if(command.equals("LISTEN")) {
 			return true;
 		} else if(command.equals("UNLISTEN")) {
@@ -154,8 +154,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 				e.printStackTrace();
 			}
 			return true;
-		} else if(command.startsWith("LT:")) {
-			String tid = command.substring(command.indexOf(':') + 1);
+		} else if(command.equals("LT")) {
 			float lat = 0;
 			float lon = 0;
 			float speed = 0;

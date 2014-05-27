@@ -133,16 +133,15 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 
 
 	@Override
-	public boolean acceptCommand(String command, String data, JSONObject obj, OsMoThread thread) {
+	public boolean acceptCommand(String command, String gid, String data, JSONObject obj, OsMoThread thread) {
 		boolean processed = false;
-		String operation = command;
+		String operation = command + ":" + gid;
 		OsMoGroup group = null;
-		if(command.startsWith("GROUP_CHANGE:")) {
-			String gid = command.substring(command.indexOf(':') + 1);
+		if(command.equalsIgnoreCase("GROUP_CHANGE")) {
 			group = storage.getGroup(gid);
 			if(group != null) {
 				List<OsMoDevice> delta = mergeGroup(group, obj, false);
-				for(OsMoDevice d :delta) {
+				for(OsMoDevice d : delta) {
 					if(d.getDeletedTimestamp() != 0 && d.isEnabled()) {
 						disconnectImpl(d);
 					} else if(d.isEnabled() && !d.isActive()) {
@@ -152,15 +151,13 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				storage.save();
 			}
 			processed = true;
-		} else if(command.startsWith("GROUP_DISCONNECT:")) {
-			String gid = command.substring(command.indexOf(':') + 1);
+		} else if(command.equalsIgnoreCase("GROUP_DISCONNECT")) {
 			group = storage.getGroup(gid);
 			if(group != null) {
 				disconnectAllGroupUsers(group);
 			}
 			processed = true;
-		} else if(command.startsWith("GROUP_CONNECT:")) {
-			String gid = command.substring(command.indexOf(':') + 1);
+		} else if(command.equalsIgnoreCase("GROUP_CONNECT")) {
 			group = storage.getGroup(gid);
 			if(group != null) {
 				mergeGroup(group, obj, true);
@@ -172,9 +169,9 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				storage.save();
 			}
 			processed = true;
-		} else if(command.startsWith("AGROUP_CREATE") || command.startsWith("GROUP_JOIN:") ) {
-			String gid ;
-			if(command.startsWith("AGROUP_CREATE")) {
+		} else if(command.equalsIgnoreCase("AGROUP_CREATE") || command.equalsIgnoreCase("GROUP_JOIN") ) {
+			if(command.equalsIgnoreCase("AGROUP_CREATE")) {
+				operation = command;
 				try {
 					gid = obj.getString(GROUP_ID);
 				} catch (JSONException e) {
@@ -182,8 +179,6 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					service.showErrorMessage(e.getMessage());
 					return true;
 				}
-			} else {
-				gid = command.substring(command.indexOf(':') + 1);
 			}
 			group = storage.getGroup(gid);
 			if(group == null) {
@@ -191,12 +186,10 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				group.groupId = gid;
 				storage.addGroup(group);
 			}
-			parseGroup(obj, group);
 			connectGroupImpl(group);
 			storage.save();
 			processed = true;
-		} else if(command.startsWith("GROUP_LEAVE:")) {
-			String gid = command.substring(command.indexOf(':') + 1);
+		} else if(command.equals("GROUP_LEAVE")) {
 			group = storage.getGroup(gid);
 			if(group != null) {
 				storage.deleteGroup(group);
@@ -242,7 +235,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private List<OsMoDevice> mergeGroup(OsMoGroup gr, JSONObject obj, boolean deleteUsers) {
 		List<OsMoDevice> delta = new ArrayList<OsMoDevice>();
 		try {
-			parseGroup(obj, gr);
+			parseGroup(obj.getJSONObject("group"), gr);
 			JSONArray arr = obj.getJSONArray(USERS);
 			Map<String, OsMoDevice> toDelete = new HashMap<String, OsMoDevice>(gr.users);
 			for (int i = 0; i < arr.length(); i++) {

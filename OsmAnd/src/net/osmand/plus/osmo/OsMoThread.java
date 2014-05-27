@@ -7,13 +7,17 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.Set;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 
@@ -25,6 +29,7 @@ import org.json.JSONObject;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.util.TimeUtils;
 
 public class OsMoThread {
 //	private static String TRACKER_SERVER = "srv.osmo.mobi";
@@ -62,6 +67,9 @@ public class OsMoThread {
 	private ByteBuffer pendingReadCommand = ByteBuffer.allocate(2048);
 	private LinkedList<String> queueOfMessages = new LinkedList<String>();
 	
+	private SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+	
+	private ConcurrentLinkedQueue<String> last100Commands = new ConcurrentLinkedQueue<String>();
 	
 	
 
@@ -246,10 +254,16 @@ public class OsMoThread {
 			log.info("OSMO get:"+cmd);
 			int k = cmd.indexOf('|');
 			String header = cmd;
+			String id = "";
 			String data = "";
 			if(k >= 0) {
 				header = cmd.substring(0, k);
 				data = cmd.substring(k + 1);
+			}
+			int ks = header.indexOf(':');
+			if (ks >= 0) {
+				id = header.substring(ks + 1);
+				header = header.substring(0, ks);
 			}
 			JSONObject obj = null;
 			if(data.startsWith("{")) {
@@ -285,7 +299,7 @@ public class OsMoThread {
 			}
 			boolean processed = false;
 			for (OsMoReactor o : listReactors) {
-				if (o.acceptCommand(header, data, obj, this)) {
+				if (o.acceptCommand(header, id, data, obj, this)) {
 					processed = true;
 					break;
 				}
@@ -349,6 +363,7 @@ public class OsMoThread {
 		if(authorized == 0) {
 			String auth = "TOKEN|"+ sessionInfo.token;
 			log.info("OSMO send:" + auth);
+			cmd(auth, true);
 			authorized = 1;
 			return ByteBuffer.wrap(prepareCommand(auth).toString().getBytes("UTF-8"));
 		}
@@ -366,6 +381,8 @@ public class OsMoThread {
 		if(System.currentTimeMillis() - lastSendCommand > TIMEOUT_TO_PING) {
 			if(pingSent == 0) {
 				pingSent = System.currentTimeMillis();
+				cmd(PING_CMD, true);
+				log.info("OSMO send " + PING_CMD);
 				return ByteBuffer.wrap(prepareCommand(PING_CMD).toString().getBytes("UTF-8"));
 			}
 			
@@ -373,6 +390,14 @@ public class OsMoThread {
 		return null;
 	}
 	
+	public ConcurrentLinkedQueue<String> getLast100Commands() {
+		return last100Commands;
+	}
+	
+	private void cmd(String cmd, boolean b) {
+		last100Commands.add((b ? "> " : ">> ") + df.format(new Date()) + cmd);
+	}
+
 	public SessionInfo getSessionInfo() {
 		return sessionInfo;
 	}

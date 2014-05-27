@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -60,6 +61,14 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 		}
 		return 0;
 	}
+	
+	public List<String> getHistoryOfCommands() {
+		if(thread == null) {
+			return Collections.emptyList();
+		}
+		return new ArrayList<String>(thread.getLast100Commands());
+	}
+	
 	
 	public long getConnectionTime() {
 		return thread == null || !thread.isConnected() ? System.currentTimeMillis() : thread.getConnectionTime(); 
@@ -243,7 +252,7 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 	}
 
 	@Override
-	public boolean acceptCommand(String command, String data, JSONObject obj, OsMoThread tread) {
+	public boolean acceptCommand(String command, String id, String data, JSONObject obj, OsMoThread tread) {
 		if(command.equals("MOTD")) {
 			SessionInfo si = getCurrentSessionInfo();
 			if(si != null) {

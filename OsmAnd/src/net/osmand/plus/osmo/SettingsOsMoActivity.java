@@ -1,12 +1,18 @@
 package net.osmand.plus.osmo;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.util.Algorithms;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -83,11 +89,21 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 	
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
+		final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
 		if (preference == debugPref) {
 			updateDebugPref();
+			Builder bld = new AlertDialog.Builder(this);
+			StringBuilder bs = new StringBuilder();
+			List<String> hs = plugin.getService().getHistoryOfCommands();
+			if(hs != null) {
+				for(int i = hs.size() - 1 ; i >= 0; i--) {
+					bs.append(hs.get(i)).append("\n");
+				}
+			}
+			bld.setMessage(bs.toString());
+			bld.show();
 			return true;
 		} else if(preference == trackerId) {
-			final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
 			OsMoService service = plugin.getService();
 			SessionInfo ci = service.getCurrentSessionInfo();
 			if(ci == null || ci.trackerId == null) {
