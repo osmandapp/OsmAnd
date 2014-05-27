@@ -1770,4 +1770,15 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_control">Хуткі доступ OsMo</string>
     <string name="osmo_session_not_available">Сесія не даступная, калі ласка, пераканайцеся, што пункт \'Адсылаць месцазнаходжанне\' уключаны.</string>
     <string name="osmo_tracker_id_share">Каб падключыцца да патрэбнага прыстасавання %2$s задайце ідэнтыфікатар трэкеру (%1$s)</string>
+    <string name="color_red">чырвоны</string>
+	<string name="color_pink">ружовы</string>
+	<string name="color_orange">аранжавы</string>
+	<string name="color_brown">карычневы</string>
+	<string name="color_yellow">жоўты</string>
+	<string name="color_lightblue">блакітны</string>
+	<string name="color_blue">сіні</string>
+	<string name="color_magenta">пурпурны</string>
+	
+    <string name="osmo_edit_color">Выбар колеру</string>
+    <string name="osmo_edit_device">Зьмяніць налады карыстальніка</string>
     </resources>
