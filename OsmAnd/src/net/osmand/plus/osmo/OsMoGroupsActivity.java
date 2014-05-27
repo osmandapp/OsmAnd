@@ -330,7 +330,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				///
 				if(device != null) {
-					createMenuItem(menu, SETTINGS_ID, R.string.settings, R.drawable.ic_action_settings_light, R.drawable.ic_action_sail_boat_dark,
+					createMenuItem(menu, SETTINGS_ID, R.string.settings, R.drawable.ic_action_settings_light, R.drawable.ic_action_settings_dark,
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				}
 				if(group != null) {
@@ -995,6 +995,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 		});
 		bld.setNegativeButton(R.string.default_buttons_no, null);
+		bld.show();
 	}
 
 	class DirectionDrawable extends Drawable {
