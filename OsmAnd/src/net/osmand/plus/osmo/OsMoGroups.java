@@ -20,7 +20,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
 	private static final String GROUP_NAME = "name";
 	private static final String GROUP_ID = "group_id";
-	private static final String EXPIRE_TIME = "expireTime";
+	private static final String EXPIRE_TIME = "until";
 	private static final String DESCRIPTION = "description";
 	private static final String POLICY = "policy";
 	private static final String USERS = "users";
@@ -137,7 +137,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		boolean processed = false;
 		String operation = command + ":" + gid;
 		OsMoGroup group = null;
-		if(command.equalsIgnoreCase("GROUP_CHANGE")) {
+		if(command.equalsIgnoreCase("GP")) {
 			group = storage.getGroup(gid);
 			if(group != null) {
 				List<OsMoDevice> delta = mergeGroup(group, obj, false);

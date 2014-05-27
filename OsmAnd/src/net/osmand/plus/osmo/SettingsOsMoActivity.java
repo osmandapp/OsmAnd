@@ -1,9 +1,7 @@
 package net.osmand.plus.osmo;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
