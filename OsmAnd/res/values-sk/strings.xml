@@ -1775,7 +1775,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="hours_ago">hodín dozadu</string>
     <string name="minutes_ago">minút dozadu</string>
     <string name="seconds_ago">sekúnd dozadu</string>
-    <string name="osmo_connect_to_device_name">Názov zariadenia</string>
+    <string name="osmo_connect_to_device_name">Meno používateľa</string>
     <string name="osmo_connect_to_device_tracker_id">ID sledovacieho zariadenia</string>
     <string name="osmo_connect_to_device">Spojiť so zariadením</string>
     <string name="osmo_join_group">Pripojiť k skupine</string>
@@ -1796,4 +1796,17 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="import_save">Uložiť</string>
 	<string name="import_file_favourites">Uložiť ako súbor GPX alebo importovať do obľúbených?</string>
 	<string name="local_index_mi_export">Exportovať</string>
-	</resources>
+	<string name="color_red">červená</string>
+	<string name="color_pink">ružová</string>
+	<string name="color_orange">oranžová</string>
+	<string name="color_brown">hnedá</string>
+	<string name="color_yellow">žltá</string>
+	<string name="color_lightblue">svetlomodrá</string>
+	<string name="color_blue">modrá</string>
+	<string name="color_magenta">purpurová</string>
+	
+    <string name="osmo_edit_device">Zmeniť vlastnosti používateľa</string>
+    <string name="osmo_edit_color">Zobrazovaná farba</string>
+    <string name="osmo_group_info">Informácie</string>
+    <string name="osmo_group">Skupina v OsMo</string>
+    </resources>
