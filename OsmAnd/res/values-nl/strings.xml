@@ -1787,7 +1787,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="osmo_connect">Verbind met</string>
     <string name="osmo_create_group">Maak een nieuwe groep</string>
     <string name="osmo_server_operation_failed">OsMo server probleem</string>
-    <string name="osmo_activity">OSMO monitor</string>
+    <string name="osmo_activity">OsMo-monitor</string>
     <string name="osmo_enable_tracker">Zend mijn posities</string>
     <string name="osmo_control">OsMo snelle toegang</string>
     <string name="local_index_mi_export">Exporteer</string>
