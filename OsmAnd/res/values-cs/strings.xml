@@ -1478,4 +1478,26 @@ s často kladenými otázkami.</string>
     <string name="index_name_italy">Evropa - Itálie</string>
     <string name="index_name_gb">Evropa - Velká Británie</string>
     <string name="index_item_nation_addresses">Adresy - celonárodní</string>
-	</resources>
+	<string name="localization_pref_title">Lokalizace</string>
+    <string name="misc_pref_title">Různé</string>
+    <string name="voice_pref_title">Hlas</string>
+    <string name="always_center_position_on_map">Zobrazit pozici vždy uprostřed</string>
+    <string name="osmo_plugin_name">OsMo (Pokročilé monitorování)</string>
+   	<string name="osmo_settings">OsMo OpenStreetMap monitorování (beta)</string>
+    <string name="osmo_settings_descr">Konfigurovat sledování a nastavit osobní monitorovací kanál</string>
+    <string name="osmo_settings_debug">Informace ladění</string>
+    <string name="osmo_mode_restart">Restartovat OsMo relaci</string>
+    <string name="osmo_mode_on">Zastavit OsMo relaci</string>    
+    <string name="osmo_mode_off">Spustit OsMo relaci</string>
+    <string name="use_points_as_intermediates">Vypočítat trasu mezi body</string>
+    <string name="tip_recent_changes_1_8_alpha">Změny v 1.8:
+        * Počítání trasy mezi body GPX trasy
+        * Změněny názvy krajin v downloadech (podpora národního hledání)
+        * Podpora importu GPX/KML (konverze z KML do GPX)
+    </string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitorování - Pokročilé monitorování. Poskytuje možnost sledování jiných zařízení nebo být sledován. 
+        Vytvořte anonymní skupiny, sdílejte vzájemně polohu a komunikujte. Různé možnosti nastavení krátkodobého nebo trvalého sledování.
+        Anonymní skupiny jsou omezeny na počet dní a některými vlastnostmi, například nemají dálkové ovládání a skupinového správce. 
+        Plně funkční skupiny se vytvářejí na webstránce a jsou přístupné pouze pro registrované uživatele.
+        Prosím čtěte více na http://osmo.mobi.</string>
+    </resources>
