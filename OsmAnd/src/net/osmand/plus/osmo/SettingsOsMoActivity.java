@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.text.method.LinkMovementMethod;
+import android.util.TypedValue;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -104,6 +106,9 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			TextView tv = new TextView(this);
 			sv.addView(tv);
 			tv.setText(bs.toString());
+			tv.setPadding(5, 0, 5, 5);
+			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
+			tv.setMovementMethod(LinkMovementMethod.getInstance());
 			bld.setView(sv);
 			bld.setMessage(bs.toString());
 			bld.setPositiveButton(R.string.default_buttons_ok, null);

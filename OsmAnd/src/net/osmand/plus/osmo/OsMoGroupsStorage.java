@@ -11,7 +11,6 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -220,7 +219,7 @@ public class OsMoGroupsStorage {
 		}
 		
 		public List<OsMoDevice> getVisibleGroupUsers() {
-			if(!isActive()) {
+			if(!isActive() &&  !isMainGroup()) {
 				return Collections.emptyList();
 			}
 			return getGroupUsers();
@@ -272,7 +271,6 @@ public class OsMoGroupsStorage {
 			OsMoDevice d = users.get(trackerId);
 			if(d != null) {
 				d.setLastLocation(location);
-				d.active = location != null;
 				if(location != null) {
 					d.setLastOnline(location.getTime());
 				}

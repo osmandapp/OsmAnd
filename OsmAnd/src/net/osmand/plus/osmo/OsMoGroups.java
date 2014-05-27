@@ -20,7 +20,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
 	private static final String GROUP_NAME = "name";
 	private static final String GROUP_ID = "group_id";
-	private static final String EXPIRE_TIME = "until";
+	private static final String EXPIRE_TIME = "expireTime";
 	private static final String DESCRIPTION = "description";
 	private static final String POLICY = "policy";
 	private static final String USERS = "users";
@@ -69,6 +69,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
 	private void connectDeviceImpl(OsMoDevice d) {
 		d.enabled =  true;
+		d.active = true;
 		if(!service.getMyGroupTrackerId().equals(d.getTrackerId())) {
 			tracker.startTrackingId(d.trackerId);
 		}

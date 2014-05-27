@@ -252,6 +252,7 @@ public class OsMoThread {
 		while(!queueOfMessages.isEmpty()){
 			String cmd = queueOfMessages.poll();
 			log.info("OSMO get:"+cmd);
+			cmd(cmd, false);
 			int k = cmd.indexOf('|');
 			String header = cmd;
 			String id = "";
@@ -373,6 +374,7 @@ public class OsMoThread {
 		for (OsMoSender s : listSenders) {
 			String l = s.nextSendCommand(this);
 			if (l != null) {
+				cmd(l, true);
 				StringBuilder res = prepareCommand(l);
 				log.info("OSMO send " + res);
 				return ByteBuffer.wrap(res.toString().getBytes("UTF-8"));
@@ -394,8 +396,8 @@ public class OsMoThread {
 		return last100Commands;
 	}
 	
-	private void cmd(String cmd, boolean b) {
-		last100Commands.add((b ? "> " : ">> ") + df.format(new Date()) + cmd);
+	private void cmd(String cmd, boolean send) {
+		last100Commands.add((send ? "> " : ">> ") + df.format(new Date()) + "  " + cmd);
 	}
 
 	public SessionInfo getSessionInfo() {

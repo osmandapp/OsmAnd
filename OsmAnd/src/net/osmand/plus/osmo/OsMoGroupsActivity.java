@@ -19,18 +19,17 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListActivity;
-import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
@@ -57,8 +56,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Spannable;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,7 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -358,7 +360,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					final LayoutInflater inflater = LayoutInflater.from(OsMoGroupsActivity.this);
 					View view = inflater.inflate(R.layout.check_item_rel, null);
 					final CompoundButton check = (CompoundButton) view.findViewById(R.id.check_item);
-					check.setChecked((device != null && device.isEnabled()) || (group != null && group.isEnabled()));
+					check.setChecked((device != null && device.isActive()) || (group != null && group.isActive()));
 					check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 						@Override
@@ -468,8 +470,15 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			setFields(sb, R.string.osmo_group_policy, group.policy);
 		}
 		setFields(sb, R.string.osmo_connect_to_group_id, group.groupId);
-		bld.setMessage(sb.toString());
-		
+		ScrollView sv = new ScrollView(this);
+		TextView tv = new TextView(this);
+		sv.addView(tv);
+		tv.setPadding(5, 0, 5, 5);
+		tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
+		tv.setMovementMethod(LinkMovementMethod.getInstance());
+		tv.setText(sb.toString());
+		bld.setView(sv);
+		bld.setPositiveButton(R.string.default_buttons_ok, null);
 		bld.show();
 		
 	}
