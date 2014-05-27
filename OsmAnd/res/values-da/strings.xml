@@ -1771,9 +1771,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">OpenStreetMap - Overvågning - Advanced Live- Monitoring, giver muligheder for at spore andre enheder og blive sporet.          
-	Opret anonyme grupper, del hinandens placering og kommuniker. Der er forskellige indstillinger for sporing session eller permanent sporing.          
-	Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppe administrator.          
+    <string name="osmo_plugin_description">OpenStreetMap - Overvågning - Advanced Live- Monitoring, giver muligheder for at spore andre enheder og selv at blive sporet.          
+	Opret anonyme grupper, del hinandens placering og kommuniker. Der er forskellige indstillinger for session sporing eller permanent sporing.          
+	Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator.          
 	 Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem.          
 	Læs mere på http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (avanceret live overvågning)</string>
@@ -1798,7 +1798,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="hours_ago">timer siden</string>
     <string name="minutes_ago">minutter siden</string>
     <string name="seconds_ago">sekunder siden</string>
-    <string name="osmo_connect_to_device_name">Enhedsnavn</string>
+    <string name="osmo_connect_to_device_name">Brugernavn</string>
     <string name="osmo_connect_to_device_tracker_id">Sporings-id</string>
     <string name="osmo_connect_to_device">Sammenkæd med enheden</string>
     <string name="osmo_join_group">Tilmeld gruppen</string>
@@ -1853,6 +1853,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="color_blue">blå</string>
 	<string name="color_magenta">magenta</string>
 	
-    <string name="osmo_edit_device">Ændre egenskaber for bruger</string>
-    <string name="osmo_edit_color">Display farve</string>
+    <string name="osmo_edit_device">Ændre brugeregenskaber</string>
+    <string name="osmo_edit_color">Visningsfarve</string>
     </resources>
