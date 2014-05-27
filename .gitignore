@@ -12,3 +12,4 @@ mx_*.png
 .settings
 .idea
 out/
+*.iml
