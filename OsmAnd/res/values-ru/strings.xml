@@ -1653,4 +1653,13 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_server_operation_failed">Ошибка операции на сервере OsMo</string>
     <string name="import_file_favourites">Сохранить как файл GPX или импортировать в избранное?</string>
 	<string name="import_save">Сохранить</string>
-	</resources>
+	<string name="color_red">красный</string>
+	<string name="color_pink">розовый</string>
+	<string name="color_orange">оранжевый</string>
+	<string name="color_brown">коричневый</string>
+	<string name="color_yellow">жёлтый</string>
+	<string name="color_lightblue">голубой</string>
+	<string name="color_blue">синий</string>
+	<string name="color_magenta">маджента</string>
+	
+    </resources>
