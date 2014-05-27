@@ -16,7 +16,7 @@
 	<string name="color_yellow">yellow</string>
 	<string name="color_lightblue">light blue</string>
 	<string name="color_blue">blue</string>
-	<string name="color_magenta">magenta</string>
+	<string name="color_green">green</string>
 	
     <string name="osmo_edit_device">Change user properties</string>
     <string name="osmo_edit_color">Display color</string>

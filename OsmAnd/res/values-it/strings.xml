@@ -1784,13 +1784,13 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="use_points_as_intermediates">Calcola il percorso tra i punti</string>
     <string name="tip_recent_changes_1_8_alpha">Novità nella versione 1.8:
         * Calcola il percorso tra i punti di un tracciato GPX
-        * Modificato l'aspetto per per il download degli stati (supporto alla ricerca con i nomi locali)
+        * Modificato l\'aspetto per per il download degli stati (supporto alla ricerca con i nomi locali)
     </string>
-    <string name="osmo_auto_send_locations_descr">Avvia automaticamente la registrazione della sessione e invia la localizzazione dopo l'avvio dell'applicazione</string>
+    <string name="osmo_auto_send_locations_descr">Avvia automaticamente la registrazione della sessione e invia la localizzazione dopo l\'avvio dell\'applicazione</string>
     <string name="osmo_auto_send_locations">Avvia automaticamente il tracciamento della sessione</string>
     <string name="osmo_tracker_id">ID tracciamento personale</string>
-    <string name="osmo_tracker_id_descr">Clicca per visualizzare o condividere l'id della tracciabilità.
- Usando l'id della tracciabilità i dispositivi connessi saranno in grado di seguire tutti i movimenti di questo dispositivo! Per disconnetersi seleziona Opzione rigenera.</string>
+    <string name="osmo_tracker_id_descr">Clicca per visualizzare o condividere l\'id della tracciabilità.
+ Usando l\'id della tracciabilità i dispositivi connessi saranno in grado di seguire tutti i movimenti di questo dispositivo! Per disconnetersi seleziona Opzione rigenera.</string>
     <string name="osmo_session_token">Token della sessione: %1$s</string>
     <string name="osmo_auth_pending">In attesa di autorizzazione...</string>
     <string name="osmo_locations_sent">Localizzazioni inviate %1$d (in buffer %2$d) </string>

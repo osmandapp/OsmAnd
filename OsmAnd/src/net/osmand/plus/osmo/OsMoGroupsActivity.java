@@ -61,6 +61,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -110,6 +112,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private ActionMode actionMode;
 	private Object selectedObject = null;
 	private String operation;
+	private Paint white;
 	
 	private int[] paletteColors = new int[] {
 			R.string.color_red,
@@ -119,14 +122,14 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			R.string.color_yellow,
 			R.string.color_lightblue,
 			R.string.color_blue,
-			R.string.color_magenta
+			R.string.color_green
 	};
 	
 	private int[] pallette = new int[] {
 			0xffd00d0d,
 			0xffe044bb,
-			0xffee5020,
-			0xff602010,
+			0xffff5020,
+			0xff8e2512,
 			0xffeeee10,
 			0xff10c0f0,
 			0xff1010a0,
@@ -178,6 +181,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		if(visible) {
 			mtd.setText(si.motd);
 		}
+		
+		white = new Paint();
+		white.setStyle(Style.FILL_AND_STROKE);
+		white.setColor(getResources().getColor(R.color.color_unknown));
+		white.setAntiAlias(true);
 		
 		updateStatus();
 		getExpandableListView().setOnGroupClickListener(new OnGroupClickListener() {
@@ -849,34 +857,36 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			if(model.getTrackerId().equals(osMoPlugin.getService().getMyGroupTrackerId())) {
 				location = tracker.getLastSendLocation();
 			}
+			int color = getResources().getColor(R.color.color_unknown);
+			int activeColor= 				model.getColor();
+			if(activeColor== 0) {
+				activeColor = getRandomColor();
+				osMoPlugin.getGroups().setDeviceProperties(model, model.getVisibleName(), activeColor);
+			}
 			//Location location = tracker.getLastLocation(model.trackerId);
 			if (location == null || mapLocation == null) {
-				if (model.isEnabled()) {
-					icon.setImageResource(
-					// model.isActive() ? R.drawable.mon_osmo_conn_signal_small :
-					R.drawable.mon_osmo_conn_small);
+				NonDirectionDrawable draw ;
+				if(icon.getDrawable() instanceof NonDirectionDrawable) {
+					draw = (NonDirectionDrawable) icon.getDrawable(); 
 				} else {
-					icon.setImageResource(R.drawable.monitoring_rec_inactive);
+					draw = new NonDirectionDrawable();
 				}
+				draw.setColor(model.isEnabled()?activeColor : color);
+				icon.setImageDrawable(draw);
 				label.setText(model.getVisibleName());
 			} else {
-				DirectionDrawable draw = new DirectionDrawable();
+				DirectionDrawable draw;
+				if (icon.getDrawable() instanceof DirectionDrawable) {
+					draw = (DirectionDrawable) icon.getDrawable();
+				} else {
+					draw = new DirectionDrawable();
+				}
 				float[] mes = new float[2];
 				net.osmand.Location.distanceBetween(location.getLatitude(), location.getLongitude(),
 						mapLocation.getLatitude(), mapLocation.getLongitude(), mes);
 				draw.setAngle(mes[1] - lastCompass + 180);
 				final boolean recent = Math.abs(location.getTime() - System.currentTimeMillis()) < RECENT_THRESHOLD;
-				
-				int color;
-				if(recent){ 
-					color =  model.getColor();
-					if(color == 0) {
-						color = getRandomColor();
-						osMoPlugin.getGroups().setDeviceProperties(model, model.getVisibleName(), color);
-					}
-				} else {
-					color = getResources().getColor(R.color.color_unknown);
-				}
+				draw.setColor(recent ? activeColor : color);
 				draw.setColor(color);
 				icon.setImageDrawable(draw);
 				int dist = (int) mes[0];
@@ -885,7 +895,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				if (seconds < 60) {
 					seconds = (seconds / 5) * 5;
 					time = seconds + " " + getString(R.string.seconds_ago);
-					
+
 				} else if (seconds / 60 < 100) {
 					time = (seconds / 60) + " " + getString(R.string.minutes_ago);
 				} else {
@@ -900,8 +910,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						distance.length() - 1, 0);
 				labelTime.setText(time, TextView.BufferType.SPANNABLE);
 				((Spannable) labelTime.getText()).setSpan(
-						new ForegroundColorSpan(getResources().getColor(seconds < 60 ? R.color.color_ok : R.color.color_unknown)), 0,
-						time.length(), 0);
+						new ForegroundColorSpan(getResources().getColor(
+								seconds < 60 ? R.color.color_ok : R.color.color_unknown)), 0, time.length(), 0);
 			}
 
 			return row;
@@ -968,7 +978,12 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
         final TIntArrayList list = new TIntArrayList(pallette);
         List<String> colorNames= new ArrayList<String>();
         int selection = -1;
+        if(device.getColor() == 0) {
+        	osMoPlugin.getGroups().setDeviceProperties(device, device.getVisibleName(), getRandomColor());	
+        }
         int devColor = device.getColor();
+        
+        
         for(int i = 0; i < pallette.length; i++) {
         	colorNames.add(getString(paletteColors[i]));
         	list.add(pallette[i]);
@@ -981,11 +996,37 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
         	colorNames.add(0, colorToString(devColor));
         	selection = 0;
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colorNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colorNames) {
+        	@Override
+        	public View getView(int position, View convertView, ViewGroup parent) {
+        		View v = super.getView(position, convertView, parent);
+        		if(v instanceof TextView) {
+ 				   ((TextView) v).setTextColor(list.get(position));
+ 				}
+        		return v;
+        	}
+        };
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		
 		colorSpinner.setAdapter(adapter);
+		
+		colorSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				View v = parent.getChildAt(0);
+				if(v instanceof TextView) {
+				   ((TextView) v).setTextColor(list.get(position));
+				}
+				colorSpinner.invalidate();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+			
+		});
 		colorSpinner.setSelection(selection);
-        
 		bld.setPositiveButton(R.string .default_buttons_yes, new DialogInterface.OnClickListener() {
 			
 			@Override
@@ -996,6 +1037,45 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		});
 		bld.setNegativeButton(R.string.default_buttons_no, null);
 		bld.show();
+	}
+	
+	class NonDirectionDrawable extends Drawable {
+		Paint paintRouteDirection;
+		
+		public void setColor(int color) {
+			paintRouteDirection.setColor(color);
+		}
+
+		public NonDirectionDrawable() {
+			paintRouteDirection = new Paint();
+			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
+			paintRouteDirection.setColor(getResources().getColor(R.color.color_unknown));
+			paintRouteDirection.setAntiAlias(true);
+			
+		}
+		
+		@Override
+		public void draw(Canvas canvas) {
+			canvas.drawCircle(width/2, height/2, (width + height) / 7, paintRouteDirection);
+			canvas.drawCircle(width/2, height/2, (width + height) / 6, white);
+			
+		}
+		
+		@Override
+		public int getOpacity() {
+			return 0;
+		}
+
+		@Override
+		public void setAlpha(int alpha) {
+			paintRouteDirection.setAlpha(alpha);
+
+		}
+
+		@Override
+		public void setColorFilter(ColorFilter cf) {
+			paintRouteDirection.setColorFilter(cf);
+		}
 	}
 
 	class DirectionDrawable extends Drawable {
