@@ -1835,4 +1835,15 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="local_index_mi_export">Esporta</string>
 	<string name="import_file_favourites">Salvare come file GPX o importare nei favoriti?</string>
 	<string name="import_save">Salva</string>
-	</resources>
+	<string name="color_red">rosso</string>
+	<string name="color_pink">rosa</string>
+	<string name="color_orange">arancione</string>
+	<string name="color_brown">marrone</string>
+	<string name="color_yellow">giallo</string>
+	<string name="color_lightblue">blu chiaro</string>
+	<string name="color_blue">blu</string>
+	<string name="color_magenta">magenta</string>
+	
+    <string name="osmo_edit_device">Cambia le proprietà dell'utilizzatore</string>
+    <string name="osmo_edit_color">Colore visualizzato</string>
+    </resources>
