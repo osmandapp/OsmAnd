@@ -1804,7 +1804,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_connect">連接到</string>
     <string name="osmo_create_group">建立群組</string>
     <string name="osmo_server_operation_failed">OsMo 伺服器操作失敗</string>
-    <string name="osmo_activity">Osm 監視</string>
+    <string name="osmo_activity">OsMo 監視</string>
     <string name="osmo_enable_tracker">傳送我的位置</string>
     <string name="osmo_control">OsMo 快速進入</string>
     <string name="local_index_mi_export">匯出</string>
