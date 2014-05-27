@@ -1844,4 +1844,15 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="local_index_mi_export">Eksport</string>
 	<string name="import_file_favourites">Gem som GPX-fil eller importer til favoritter?</string>
 	<string name="import_save">Gem</string>
-	</resources>
+	<string name="color_red">rød</string>
+	<string name="color_pink">lyserød</string>
+	<string name="color_orange">orange</string>
+	<string name="color_brown">brun</string>
+	<string name="color_yellow">gul</string>
+	<string name="color_lightblue">lyseblå</string>
+	<string name="color_blue">blå</string>
+	<string name="color_magenta">magenta</string>
+	
+    <string name="osmo_edit_device">Ændre egenskaber for bruger</string>
+    <string name="osmo_edit_color">Display farve</string>
+    </resources>
