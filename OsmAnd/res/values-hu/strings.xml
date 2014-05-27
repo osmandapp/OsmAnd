@@ -1536,7 +1536,7 @@
 	<string name="arrival_distance">Megérkezés bemondása</string>
     <string name="arrival_distance_descr">Milyen korán szeretnéd hallani a megérkezés bejelentését?</string>
     <string name="keep_informing_never">Soha</string>
-    <string name="keep_informing_descr">Navigációs utasítások bemondása rendszeres időközönként</string>
+    <string name="keep_informing_descr">Navigációs utasítások újra bemondása rendszeres időközönként</string>
     <string name="keep_informing">Navigációs utasítások ismétlése</string>
 	<string name="navigation_intent_invalid">Érvénytelen formátum: %s</string>
 <string name="color_red">piros</string>
@@ -1552,4 +1552,10 @@
     <string name="osmo_edit_color">Megjelenítési szín</string>
     <string name="osmo_group_info">Infó</string>
     <string name="osmo_group">OsMo csoport</string>
+    <string name="osmo_group_share">%2$s csoporthoz csatlakozáshoz add meg a csoportazonosítót (%1$s)</string>
+    <string name="osmo_share_connect_device">Eszköz állandó követésének engedélyezése</string>
+    <string name="osmo_share_current_session">Aktuális munkamenet megosztása böngészőben</string>
+    <string name="osmo_session_not_available">Munkamenet nem elérhető, kérlek ellenőrizd, hogy a \'Hely küldése\' be van-e kapcsolva.</string>
+    <string name="osmo_share_session">Munkamenet megosztása</string>
+    <string name="osmo_session_id_share">Munkamenet URL az eszköz követéséhez (%1$s)</string>
     </resources>
