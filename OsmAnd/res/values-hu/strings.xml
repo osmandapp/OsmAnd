@@ -1539,4 +1539,17 @@
     <string name="keep_informing_descr">Navigációs utasítások bemondása rendszeres időközönként</string>
     <string name="keep_informing">Navigációs utasítások ismétlése</string>
 	<string name="navigation_intent_invalid">Érvénytelen formátum: %s</string>
-</resources>
+<string name="color_red">piros</string>
+	<string name="color_pink">rózsaszín</string>
+	<string name="color_orange">narancs</string>
+	<string name="color_brown">barna</string>
+	<string name="color_yellow">sárga</string>
+	<string name="color_lightblue">világoskék</string>
+	<string name="color_blue">kék</string>
+	<string name="color_magenta">bíborvörös</string>
+	
+    <string name="osmo_edit_device">Felhasználói tulajdonságok módosítása</string>
+    <string name="osmo_edit_color">Megjelenítési szín</string>
+    <string name="osmo_group_info">Infó</string>
+    <string name="osmo_group">OsMo csoport</string>
+    </resources>
