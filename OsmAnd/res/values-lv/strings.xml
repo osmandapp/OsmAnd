@@ -1702,4 +1702,15 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="import_file_favourites">Vai saglabāt kā GPX failu vai importēt izlasē?</string>
 	<string name="import_save">Saglabāt</string>
 	<string name="seconds_ago">sekundes atpakaļ</string>
+    <string name="color_red">Sarkans</string>
+	<string name="color_pink">Rozā</string>
+	<string name="color_orange">Oranžs</string>
+	<string name="color_brown">Brūns</string>
+	<string name="color_yellow">Dzeltens</string>
+	<string name="color_lightblue">Gaiši zils</string>
+	<string name="color_blue">Zils</string>
+	<string name="color_magenta">Purpursarkans</string>
+	
+    <string name="osmo_edit_device">Mainīt lietotāja uzstādījumus</string>
+    <string name="osmo_edit_color">Ekrāna krāsa</string>
     </resources>
