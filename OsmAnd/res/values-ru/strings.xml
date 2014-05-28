@@ -1297,7 +1297,7 @@
     </string>
     <string name="available_downloads_left">Доступно %1$d файлов для скачивания</string>
     <string name="files_limit">осталось %1$d файлов</string>
-    <string name="wait_current_task_finished">Пожалуйста, подождите, пока завершится текущий трек</string>
+    <string name="wait_current_task_finished">Пожалуйста, подождите, пока завершится текущая операция</string>
     <string name="distance_measurement_load_gpx">Открыть существующий GPX</string>
     <string name="distance_measurement_finish_subtrack">Начать новый подтрек</string>
     <string name="gpx_file_name">Имя файла GPX</string>

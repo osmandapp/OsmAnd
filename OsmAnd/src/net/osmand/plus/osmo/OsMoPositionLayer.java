@@ -8,18 +8,23 @@ import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -28,7 +33,7 @@ import android.widget.Toast;
  * Class represents a layer for osmo positions
  *
  */
-public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, OsMoGroupsUIListener  {
 
 	private DisplayMetrics dm;
 	private final MapActivity map;
@@ -37,6 +42,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	private Paint point;
 	private OsMoPlugin plugin;
 	private final static float startZoom = 7;
+	private Handler uiHandler;
 
 	public OsMoPositionLayer(MapActivity map, OsMoPlugin plugin) {
 		this.map = map;
@@ -46,6 +52,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		uiHandler = new Handler();
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
@@ -140,14 +147,22 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	@Override
 	public String getObjectDescription(Object o) {
 		if (o instanceof OsMoDevice) {
-			return map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
+			String d = map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
+			final Location l = ((OsMoDevice) o).getLastLocation();
+			if(l != null && l.hasSpeed()) {
+				d += "\n"+ OsmAndFormatter.getFormattedSpeed(l.getSpeed(), map.getMyApplication());
+			}
+			return d;
 		}
 		return null;
 	}
 
 	@Override
 	public String getObjectName(Object o) {
-		return ((OsMoDevice) o).getVisibleName();
+		if(o instanceof OsMoDevice) {
+			return map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
+		}
+		return null;
 	}
 	
 	public void refresh() {
@@ -179,6 +194,70 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				}
 			}
 		}
+	}
+
+	@Override
+	public void groupsListChange(String operation, OsMoGroup group) {
+	}
+
+	private volatile boolean schedule = false;
+	// store between rotations
+	private static String followTrackerId;
+	private static LatLon followMapLocation;
+	
+	public void setFollowTrackerId(OsMoDevice d) {
+		if(d != null) {
+			followTrackerId = d.trackerId;
+			Location l = d.getLastLocation();
+			if(l != null) {
+				followMapLocation = new LatLon(l.getLatitude(), l.getLongitude());
+			}
+		} else {
+			followTrackerId = null;
+		}
+		
+	}
+	
+	@Override
+	public void deviceLocationChanged(final OsMoDevice device) {
+		boolean sameId = Algorithms.objectEquals(followTrackerId, device.trackerId);
+		Location l = device.getLastLocation();
+		if(sameId && !schedule  && l != null) {
+			schedule = true;
+			ContextMenuLayer cl = map.getMapLayers().getContextMenuLayer();
+			final boolean sameObject = Algorithms.objectEquals(device, cl.getFirstSelectedObject());
+			LatLon mapLoc = new LatLon(map.getMapView().getLatitude(), map.getMapView().getLongitude());
+			final boolean centered = Algorithms.objectEquals(followMapLocation, mapLoc);
+			if(sameObject || centered) {
+				if(centered ) {
+					followMapLocation = new LatLon(l.getLatitude(), l.getLongitude());
+				} else if(!map.getMapView().getAnimatedDraggingThread().isAnimating()) {
+					// disable tracking
+					followMapLocation = null;
+				}
+				uiHandler.postDelayed(new Runnable() {
+
+					@Override
+					public void run() {
+						schedule = false;
+						if (sameObject) {
+							ContextMenuLayer cl = map.getMapLayers().getContextMenuLayer();
+							Location l = device.getLastLocation();
+							cl.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), getObjectDescription(device));
+							cl.setSelectedObject(device);
+						}
+						if (centered) {
+							map.getMapView().setLatLon(followMapLocation.getLatitude(),
+									followMapLocation.getLongitude());
+						}
+						map.getMapView().refreshMap();
+					}
+
+				}, 150);
+			} else {
+				followTrackerId = null;
+			}
+		}		
 	}
 	
 	

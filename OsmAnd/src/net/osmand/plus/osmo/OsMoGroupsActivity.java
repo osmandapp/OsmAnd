@@ -36,7 +36,6 @@ import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
-import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -89,7 +88,7 @@ import com.actionbarsherlock.view.Window;
  *
  */
 public class OsMoGroupsActivity extends OsmandExpandableListActivity implements OsmAndCompassListener,
-		OsmAndLocationListener, OsmoTrackerListener, OsMoGroupsUIListener {
+		OsmAndLocationListener, OsMoGroupsUIListener {
 
 	public static final int CONNECT_TO = 1;
 	protected static final int DELETE_ACTION_ID = 2;
@@ -303,7 +302,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		app.getLocationProvider().registerOrUnregisterCompassListener(true);
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().resumeAllUpdates();
-		osMoPlugin.getTracker().setUITrackerListener(this);
 		osMoPlugin.getGroups().setUiListener(this);
 		adapter.synchronizeGroups();
 	}
@@ -314,7 +312,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		app.getLocationProvider().pauseAllUpdates();
 		app.getLocationProvider().removeCompassListener(this);
 		app.getLocationProvider().removeLocationListener(this);
-		osMoPlugin.getTracker().setUITrackerListener(null);
 		osMoPlugin.getGroups().setUiListener(null);
 	}
 	
@@ -339,9 +336,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				if(device != null && device.getLastLocation() != null) {
 					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.show_poi_on_map, R.drawable.ic_action_marker_light, R.drawable.ic_action_marker_dark,
 							MenuItem.SHOW_AS_ACTION_IF_ROOM);
-				} else if(group != null) {
-					createMenuItem(menu, SHOW_ON_MAP_ID, R.string.show_poi_on_map, R.drawable.ic_action_marker_light, R.drawable.ic_action_marker_dark,
-							MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				}
 				createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -354,8 +348,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_info_light, R.drawable.ic_action_info_dark,
 							MenuItem.SHOW_AS_ACTION_IF_ROOM);	
 				}
-				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
-						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				if (device == null || device.getGroup().isMainGroup()) {
+					createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete,
+							R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
+							MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				}
 				
 				
 				if (mi != null) {
@@ -417,7 +414,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					if(device != null) {
 						Location location = device.getLastLocation();
 						app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), app.getSettings().getMapZoomToShow(), 
-								null, device.getVisibleName(), device); 
+								null, device.getVisibleName(), device);
+						osMoPlugin.setMapFollowTrackerId(device);
 						MapActivity.launchMapActivityMoveToTop(OsMoGroupsActivity.this);
 					}
 				} else if(item.getItemId() == ON_OFF_ACTION_ID) {
@@ -1003,7 +1001,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	}
 	
 	@Override
-	public void locationChange(String trackerId, Location loc) {
+	public void deviceLocationChanged(OsMoDevice device) {
 		refreshList();		
 	}
 	public static String colorToString(int color) {
@@ -1167,6 +1165,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			paintRouteDirection.setColorFilter(cf);
 		}
 	}
+
 
 
 }

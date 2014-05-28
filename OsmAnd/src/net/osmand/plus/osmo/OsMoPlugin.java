@@ -11,8 +11,8 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
-import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
@@ -38,10 +38,10 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	private OsMoGroups groups;
 	private BaseMapWidget osmoControl;
 	private OsMoPositionLayer olayer;
+	private Object followTrackerId;
 
 	// 2014-05-27 23:11:40
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	private OsmandMapTileView mv;
 
 	public OsMoPlugin(final OsmandApplication app) {
 		service = new OsMoService(app);
@@ -109,23 +109,14 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	
 	@Override
 	public void mapActivityPause(MapActivity activity) {
-		mv = null;
-		tracker.setUITrackerListener(new OsmoTrackerListener() {
-			
-			@Override
-			public void locationChange(String trackerId, Location location) {
-				if(mv != null) {
-					mv.refreshMap();
-				}
-			}
-		});
+		groups.setUiListener(null);
 	}
 	
 	@Override
 	public void mapActivityResume(MapActivity activity) {
-		mv = activity.getMapView();
-		tracker.setUITrackerListener(null);
-		
+		if(olayer != null) {
+			groups.setUiListener(olayer);
+		}
 	}
 	
 	/**
@@ -249,6 +240,15 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				}).reg();
 	}
 	
+	public Object getFollowTrackerId() {
+		return followTrackerId;
+	}
+	
+	public void setMapFollowTrackerId(OsMoDevice d) {
+		if(olayer != null) {
+			olayer.setFollowTrackerId(d);
+		}
+	}
 
 	@Override
 	public String getId() {
@@ -266,5 +266,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	public OsMoService getService() {
 		return service;
 	}
+
+	
 
 }

@@ -16,7 +16,6 @@ public class OsMoTracker implements OsMoReactor {
 	private boolean startSendingLocations;
 	private OsMoService service;
 	private int locationsSent = 0;
-	private OsmoTrackerListener uiTrackerListener = null;
 	private OsmoTrackerListener trackerListener = null;
 	private Location lastSendLocation;
 	private Location lastBufferLocation;
@@ -29,6 +28,7 @@ public class OsMoTracker implements OsMoReactor {
 		
 		public void locationChange(String trackerId, Location location);
 	}
+	
 
 	public OsMoTracker(OsMoService service, OsmandPreference<Integer> interval,
 			OsmandPreference<Boolean> autoStart) {
@@ -112,8 +112,10 @@ public class OsMoTracker implements OsMoReactor {
 			if (location.getTime() - ltime  > pref.get()) {
 				if(lastBufferLocation != null && (!lastBufferLocation.hasSpeed() || lastBufferLocation.getSpeed() < 1) &&
 						lastBufferLocation.distanceTo(location) < 20){
-					// ignores
-					return;
+					if(lastBufferLocation != null && location.getTime() - ltime < 60000) {
+						// ignores
+						return;
+					}
 				}
 				lastBufferLocation = location;
 				bufferOfLocations.add(location);
@@ -187,9 +189,6 @@ public class OsMoTracker implements OsMoReactor {
 				if(trackerListener != null) {
 					trackerListener.locationChange(tid, loc);
 				}
-				if(uiTrackerListener != null){
-					uiTrackerListener.locationChange(tid, loc);
-				}
 			}
 			return true;
 		}
@@ -204,13 +203,6 @@ public class OsMoTracker implements OsMoReactor {
 		return trackerListener;
 	}
 	
-	public OsmoTrackerListener getUITrackerListener() {
-		return uiTrackerListener;
-	}
-	
-	public void setUITrackerListener(OsmoTrackerListener trackerListener) {
-		this.uiTrackerListener = trackerListener;
-	}
 
 	public Collection<OsMoDevice> getTrackingDevices() {
 		return trackingDevices.values();

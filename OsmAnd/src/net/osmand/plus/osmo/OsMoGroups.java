@@ -38,6 +38,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	public interface OsMoGroupsUIListener {
 		
 		public void groupsListChange(String operation, OsMoGroup group);
+		
+		public void deviceLocationChanged(OsMoDevice device);
 	}
 
 	public OsMoGroups(OsMoService service, OsMoTracker tracker, OsmandSettings settings) {
@@ -132,8 +134,11 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 
 	@Override
 	public void locationChange(String trackerId, Location location) {
-		for(OsMoGroup  g: getGroups()) {
-			g.updateLastLocation(trackerId, location);
+		for (OsMoGroup g : getGroups()) {
+			OsMoDevice d = g.updateLastLocation(trackerId, location);
+			if (d != null && uiListener != null) {
+				uiListener.deviceLocationChanged(d);
+			}
 		}
 	}
 

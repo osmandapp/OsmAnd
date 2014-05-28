@@ -270,7 +270,7 @@ public class OsMoGroupsStorage {
 			return name;
 		}
 
-		public void updateLastLocation(String trackerId, Location location) {
+		public OsMoDevice updateLastLocation(String trackerId, Location location) {
 			OsMoDevice d = users.get(trackerId);
 			if(d != null) {
 				d.setLastLocation(location);
@@ -278,6 +278,7 @@ public class OsMoGroupsStorage {
 					d.setLastOnline(location.getTime());
 				}
 			}
+			return d;
 		}
 	}
 	

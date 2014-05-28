@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -46,7 +47,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private static final String KEY_SELECTED_OBJECTS = "context_menu_selected_objects";
 	private LatLon latLon;
 	private String description;
-	private Map<Object, IContextMenuProvider> selectedObjects = new LinkedHashMap<Object, IContextMenuProvider>();
+	private Map<Object, IContextMenuProvider> selectedObjects = new ConcurrentHashMap<Object, IContextMenuProvider>();
 	
 	private TextView textView;
 	private ImageView closeButton;
@@ -73,6 +74,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	@Override
 	public void destroyLayer() {
+	}
+	
+	public Object getFirstSelectedObject() {
+		if(!selectedObjects.isEmpty()) {
+			return selectedObjects.keySet().iterator().next();
+		}
+		return null;
 	}
 
 	@Override
