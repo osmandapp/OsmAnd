@@ -319,8 +319,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		storage.save();
 		return us;
 	}
-	public String joinGroup(String groupId, String userName) {
-		final String op = "GROUP_JOIN:"+groupId;
+	public String joinGroup(String groupId, String userName, String nick) {
+		final String op = "GROUP_JOIN:"+groupId+"|"+nick;
 		OsMoGroup g = storage.getGroup(groupId);
 		if(g == null){
 			g = new OsMoGroup();

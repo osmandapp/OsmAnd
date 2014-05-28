@@ -828,6 +828,10 @@ public class OsmandSettings {
 	
 	public final OsmandPreference<String> OSMO_DEVICE_KEY = new StringPreference("osmo_device_token", "").makeGlobal();
 	
+	public final OsmandPreference<String> OSMO_USER_NAME = new StringPreference("osmo_user_name", "").makeGlobal();
+	
+	public final OsmandPreference<String> OSMO_USER_PWD = new StringPreference("osmo_user_pwd", null).makeGlobal();
+	
 	public final OsmandPreference<Boolean> OSMO_AUTO_SEND_LOCATIONS = new BooleanPreference("osmo_automatically_send_locations", false).makeGlobal();
 	
 	public final CommonPreference<Integer> OSMO_SAVE_TRACK_INTERVAL = new IntPreference("osmo_save_track_interval", 3000).makeGlobal().cache();

@@ -139,7 +139,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	@Override
 	public String getObjectDescription(Object o) {
 		if (o instanceof OsMoDevice) {
-			return map.getString(R.string.osmo_device_map_description, ((OsMoDevice) o).getVisibleName());
+			return map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
 		}
 		return null;
 	}

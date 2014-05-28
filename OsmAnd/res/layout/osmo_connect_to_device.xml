@@ -59,5 +59,20 @@
             android:inputType="textCapWords"
             android:paddingLeft="3dp" />
     </TableRow>
+    
+  <TableRow android:id="@+id/MyGroupName">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/osmo_connect_to_my_nickname" />
+
+        <EditText
+            android:id="@+id/NickName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:paddingLeft="3dp" />
+    </TableRow>
 
 </TableLayout>

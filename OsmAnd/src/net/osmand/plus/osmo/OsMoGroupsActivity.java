@@ -638,6 +638,14 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		final TextView labelName = (TextView ) v.findViewById(R.id.LabelName);
 		final EditText tracker = (EditText) v.findViewById(R.id.TrackerId);
 		final EditText name = (EditText) v.findViewById(R.id.Name);
+		
+		final View mgv = v.findViewById(R.id.MyGroupName);
+		final EditText nickname = (EditText) v.findViewById(R.id.NickName);
+		if(app.getSettings().OSMO_USER_NAME.get().isEmpty()) {
+			app.getSettings().OSMO_USER_NAME.set(getString(R.string.osmo_user_name) + " " + new Random(10));
+		}
+		nickname.setText(app.getSettings().OSMO_USER_NAME.get());
+		
 		device.setChecked(true);
 		device.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
@@ -646,9 +654,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				if(isChecked) {
 					labelTracker.setText(R.string.osmo_connect_to_device_tracker_id);
 					labelName.setText(R.string.osmo_connect_to_device_name);
+					mgv.setVisibility(View.GONE);
 				} else {
 					labelTracker.setText(R.string.osmo_connect_to_group_id);
 					labelName.setText(R.string.osmo_group_name);
+					mgv.setVisibility(View.VISIBLE);
 				}
 			}
 		});
@@ -660,6 +670,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			public void onClick(DialogInterface dialog, int which) {
 				final String nameUser = name.getText().toString();
 				final String id = tracker.getText().toString();
+				final String nick = nickname.getText().toString();
 				if(device.isChecked()) {
 					OsMoDevice dev = osMoPlugin.getGroups().addConnectedDevice(id, nameUser, getRandomColor());
 					adapter.update(dev.group);
@@ -668,7 +679,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					if(!checkOperationIsNotRunning()) {
 						return;
 					}
-					String op = osMoPlugin.getGroups().joinGroup(id, nameUser);
+					String op = osMoPlugin.getGroups().joinGroup(id, nameUser, nick);
+					if(app.getSettings().OSMO_USER_PWD.get() == null) {
+						app.getSettings().OSMO_USER_NAME.set(nick);
+					}
 					startLongRunningOperation(op);
 				}
 			}
@@ -888,8 +902,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				location = tracker.getLastSendLocation();
 			}
 			int color = getResources().getColor(R.color.color_unknown);
-			int activeColor= 				model.getColor();
-			if(activeColor== 0) {
+			int activeColor = model.getColor();
+			if (activeColor == 0) {
 				activeColor = getRandomColor();
 				osMoPlugin.getGroups().setDeviceProperties(model, model.getVisibleName(), activeColor);
 			}
@@ -915,12 +929,12 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				net.osmand.Location.distanceBetween(location.getLatitude(), location.getLongitude(),
 						mapLocation.getLatitude(), mapLocation.getLongitude(), mes);
 				draw.setAngle(mes[1] - lastCompass + 180);
-				final boolean recent = Math.abs(location.getTime() - System.currentTimeMillis()) < RECENT_THRESHOLD;
+				long now = System.currentTimeMillis();
+				final boolean recent = Math.abs( now - location.getTime() ) < RECENT_THRESHOLD;
 				draw.setColor(recent ? activeColor : color);
-				draw.setColor(color);
 				icon.setImageDrawable(draw);
 				int dist = (int) mes[0];
-				long seconds = Math.max(0, (System.currentTimeMillis() - location.getTime()) / 1000);
+				long seconds = Math.max(0, (now - location.getTime()) / 1000);
 				String time = "";
 				if (seconds < 60) {
 					seconds = (seconds / 5) * 5;
@@ -1152,3 +1166,4 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 
 }
+
