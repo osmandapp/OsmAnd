@@ -641,9 +641,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		
 		final View mgv = v.findViewById(R.id.MyGroupName);
 		final EditText nickname = (EditText) v.findViewById(R.id.NickName);
-		if(app.getSettings().OSMO_USER_NAME.get().isEmpty()) {
-			app.getSettings().OSMO_USER_NAME.set(getString(R.string.osmo_user_name) + " " + new Random(10));
-		}
 		nickname.setText(app.getSettings().OSMO_USER_NAME.get());
 		
 		device.setChecked(true);
@@ -658,6 +655,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				} else {
 					labelTracker.setText(R.string.osmo_connect_to_group_id);
 					labelName.setText(R.string.osmo_group_name);
+					name.setHint(R.string.osmo_use_server_name);
 					mgv.setVisibility(View.VISIBLE);
 				}
 			}

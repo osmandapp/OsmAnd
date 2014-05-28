@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    
+    <string name="osmo_use_server_name">Registered name</string>
     <string name="osmo_connect_to_my_nickname">My nickname</string>
     <string name="osmo_user_name">User</string>
 	<string name="color_red">red</string>
