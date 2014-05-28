@@ -71,7 +71,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		d.enabled =  true;
 		d.active = true;
 		if(!service.getMyGroupTrackerId().equals(d.getTrackerId())) {
-			tracker.startTrackingId(d.trackerId);
+			tracker.startTrackingId(d);
 		}
 		
 	}
@@ -100,7 +100,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		String operation = "GROUP_DISCONNECT:"+model.groupId;
 		service.pushCommand(operation);
 		for(OsMoDevice d : model.getGroupUsers()) {
-			tracker.startTrackingId(d.trackerId);
+			tracker.startTrackingId(d);
 		}
 		storage.save();
 		return operation;
@@ -113,7 +113,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 
 	private void disconnectImpl(OsMoDevice model) {
 		model.enabled = false;
-		tracker.stopTrackingId(model.trackerId);
+		tracker.stopTrackingId(model);
 	}
 
 		

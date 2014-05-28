@@ -110,7 +110,6 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
 			tv.setMovementMethod(LinkMovementMethod.getInstance());
 			bld.setView(sv);
-			bld.setMessage(bs.toString());
 			bld.setPositiveButton(R.string.default_buttons_ok, null);
 			bld.show();
 			return true;

@@ -12,6 +12,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
+import net.osmand.plus.osmodroid.OsMoDroidLayer;
+import net.osmand.plus.parkingpoint.ParkingPositionLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
@@ -36,6 +38,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	private OsMoTracker tracker;
 	private OsMoGroups groups;
 	private BaseMapWidget osmoControl;
+	private OsMoPositionLayer olayer;
 
 	// 2014-05-27 23:11:40
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -98,6 +101,12 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		layer.getMapInfoControls().registerSideWidget(osmoControl,
 				R.drawable.mon_osmo_conn_big, R.string.osmo_control, "osmo_control", false, 18);
 		layer.recreateControls();
+		
+		if(olayer != null) {
+			activity.getMapView().removeLayer(olayer);
+		}
+		olayer = new OsMoPositionLayer(activity, this);
+		activity.getMapView().addLayer(olayer, 5.5f);
 	}
 	
 	/**

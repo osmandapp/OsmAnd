@@ -1,18 +1,20 @@
 package net.osmand.plus.osmo;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.Location;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class OsMoTracker implements OsMoSender, OsMoReactor {
 	private ConcurrentLinkedQueue<Location> bufferOfLocations = new ConcurrentLinkedQueue<Location>();
-	private Map<String, Location> otherLocations = new ConcurrentHashMap<String, Location>();
 	private boolean startSendingLocations;
 	private OsMoService service;
 	private int locationsSent = 0;
@@ -22,6 +24,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	private Location lastBufferLocation;
 	private CommonPreference<Integer> pref;
 	private String sessionURL;
+	private Map<String, OsMoDevice> trackingDevices = new java.util.concurrent.ConcurrentHashMap<String, OsMoGroupsStorage.OsMoDevice>();
 	
 	public interface OsmoTrackerListener {
 		
@@ -60,17 +63,14 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 		}
 	}
 	
-	public Location getLastLocation(String trackerId) {
-		return otherLocations.get(trackerId);
+	public void startTrackingId(OsMoDevice d) {
+		service.pushCommand("LISTEN:"+d.getTrackerId());
+		trackingDevices.put(d.getTrackerId(), d);
 	}
 	
-	public void startTrackingId(String id) {
-		service.pushCommand("LISTEN:"+id);
-	}
-	
-	public void stopTrackingId(String id) {
-		service.pushCommand("UNLISTEN:"+id);
-		otherLocations.remove(id);
+	public void stopTrackingId(OsMoDevice d) {
+		service.pushCommand("UNLISTEN:"+d.getTrackerId());
+		trackingDevices.remove(d.getTrackerId());
 	}
 
 	@Override
@@ -184,7 +184,6 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 				if(speed > 0) {
 					loc.setSpeed(speed);
 				}
-				otherLocations.put(tid, loc);
 				if(trackerListener != null) {
 					trackerListener.locationChange(tid, loc);
 				}
@@ -211,6 +210,10 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	
 	public void setUITrackerListener(OsmoTrackerListener trackerListener) {
 		this.uiTrackerListener = trackerListener;
+	}
+
+	public Collection<OsMoDevice> getTrackingDevices() {
+		return trackingDevices.values();
 	}
 
 	
