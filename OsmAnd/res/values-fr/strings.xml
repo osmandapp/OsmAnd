@@ -1639,4 +1639,6 @@
 	<string name="color_blue">Bleu</string>
 	<string name="color_magenta">Magenta</string>
 	
+    <string name="osmo_edit_device">Modifier les caractéristiques de l'utilisateur</string>
+    <string name="osmo_edit_color">Afficher la couleur</string>
     </resources>
