@@ -60,7 +60,7 @@
             android:paddingLeft="3dp" />
     </TableRow>
     
-  <TableRow android:id="@+id/MyGroupName">
+  <TableRow android:id="@+id/MyGroupName" android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"

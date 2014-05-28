@@ -240,7 +240,9 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private List<OsMoDevice> mergeGroup(OsMoGroup gr, JSONObject obj, boolean deleteUsers) {
 		List<OsMoDevice> delta = new ArrayList<OsMoDevice>();
 		try {
-			parseGroup(obj.getJSONObject("group"), gr);
+			if(obj.has("group")) {
+				parseGroup(obj.getJSONObject("group"), gr);
+			}
 			JSONArray arr = obj.getJSONArray(USERS);
 			Map<String, OsMoDevice> toDelete = new HashMap<String, OsMoDevice>(gr.users);
 			for (int i = 0; i < arr.length(); i++) {
