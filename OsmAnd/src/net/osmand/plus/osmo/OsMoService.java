@@ -30,9 +30,8 @@ import org.json.JSONObject;
 import android.os.Build;
 import android.provider.Settings.Secure;
 
-public class OsMoService implements OsMoSender, OsMoReactor {
+public class OsMoService implements OsMoReactor {
 	private OsMoThread thread;
-	private List<OsMoSender> listSenders = new java.util.concurrent.CopyOnWriteArrayList<OsMoSender>();
 	private List<OsMoReactor> listReactors = new java.util.concurrent.CopyOnWriteArrayList<OsMoReactor>();
 	private ConcurrentLinkedQueue<String> commands = new ConcurrentLinkedQueue<String>();
 	private OsmandApplication app;
@@ -43,7 +42,6 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 	
 	public OsMoService(OsmandApplication app) {
 		this.app = app;
-		listSenders.add(this);
 		listReactors.add(this);
 	}
 	
@@ -86,7 +84,7 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 			}
 			thread.stopConnection();
 		}
-		thread = new OsMoThread(this, listSenders, listReactors);
+		thread = new OsMoThread(this, listReactors);
 		return true;
 	}
 	
@@ -96,11 +94,6 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 		}
 	}
 	
-	public void registerSender(OsMoSender sender) {
-		if(!listSenders.contains(sender)) {
-			listSenders.add(sender);
-		}
-	}
 	
 	public void registerReactor(OsMoReactor reactor) {
 		if(!listReactors.contains(reactor)) {
@@ -108,10 +101,6 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 		}
 	}
 
-	public void removeSender(OsMoSender s) {
-		listSenders.remove(s);
-	}
-	
 	public void removeReactor(OsMoReactor s) {
 		listReactors.remove(s);
 	}
@@ -268,6 +257,10 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void reconnect() {
 	}
 	
 }

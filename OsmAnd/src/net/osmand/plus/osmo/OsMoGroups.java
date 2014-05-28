@@ -47,16 +47,6 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		tracker.setTrackerListener(this);
 		storage = new OsMoGroupsStorage(this, settings.OSMO_GROUPS);
 		storage.load();
-		for(OsMoDevice d : storage.getMainGroup().getGroupUsers()) {
-			if(d.isEnabled()) {
-				connectDeviceImpl(d);
-			}
-		}
-		for(OsMoGroup g : storage.getGroups()) {
-			if(!g.isMainGroup() && g.isEnabled()) {
-				connectGroupImpl(g);
-			}
-		}
 	}
 	
 	public void setUiListener(OsMoGroupsUIListener uiListener) {
@@ -73,7 +63,20 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		if(!service.getMyGroupTrackerId().equals(d.getTrackerId())) {
 			tracker.startTrackingId(d);
 		}
-		
+	}
+	
+	@Override
+	public void reconnect() {
+		for(OsMoDevice d : storage.getMainGroup().getGroupUsers()) {
+			if(d.isEnabled()) {
+				connectDeviceImpl(d);
+			}
+		}
+		for(OsMoGroup g : storage.getGroups()) {
+			if(!g.isMainGroup() && g.isEnabled()) {
+				connectGroupImpl(g);
+			}
+		}
 	}
 
 	private String connectGroupImpl(OsMoGroup g) {
@@ -347,5 +350,11 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		model.userColor = color;
 		storage.save();
 	}
+
+	@Override
+	public String nextSendCommand(OsMoThread tracker) {
+		return null;
+	}
+
 
 }

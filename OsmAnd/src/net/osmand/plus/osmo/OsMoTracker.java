@@ -1,19 +1,17 @@
 package net.osmand.plus.osmo;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.Location;
-import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class OsMoTracker implements OsMoSender, OsMoReactor {
+public class OsMoTracker implements OsMoReactor {
 	private ConcurrentLinkedQueue<Location> bufferOfLocations = new ConcurrentLinkedQueue<Location>();
 	private boolean startSendingLocations;
 	private OsMoService service;
@@ -22,19 +20,21 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	private OsmoTrackerListener trackerListener = null;
 	private Location lastSendLocation;
 	private Location lastBufferLocation;
-	private CommonPreference<Integer> pref;
+	private OsmandPreference<Integer> pref;
 	private String sessionURL;
 	private Map<String, OsMoDevice> trackingDevices = new java.util.concurrent.ConcurrentHashMap<String, OsMoGroupsStorage.OsMoDevice>();
+	private OsmandPreference<Boolean> autoStart;
 	
 	public interface OsmoTrackerListener {
 		
 		public void locationChange(String trackerId, Location location);
 	}
 
-	public OsMoTracker(OsMoService service, CommonPreference<Integer> pref) {
+	public OsMoTracker(OsMoService service, OsmandPreference<Integer> interval,
+			OsmandPreference<Boolean> autoStart) {
 		this.service = service;
-		this.pref = pref;
-		service.registerSender(this);
+		this.pref = interval;
+		this.autoStart = autoStart;
 		service.registerReactor(this);
 	}
 	
@@ -214,6 +214,13 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 
 	public Collection<OsMoDevice> getTrackingDevices() {
 		return trackingDevices.values();
+	}
+
+	@Override
+	public void reconnect() {
+		if(autoStart.get()) {
+			enableTracker();
+		}
 	}
 
 	

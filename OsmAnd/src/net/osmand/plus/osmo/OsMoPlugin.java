@@ -46,7 +46,8 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 	public OsMoPlugin(final OsmandApplication app) {
 		service = new OsMoService(app);
-		tracker = new OsMoTracker(service, app.getSettings().OSMO_SAVE_TRACK_INTERVAL);
+		tracker = new OsMoTracker(service, app.getSettings().OSMO_SAVE_TRACK_INTERVAL,
+				app.getSettings().OSMO_AUTO_SEND_LOCATIONS);
 		this.app = app;
 		ApplicationMode.regWidget("osmo_control", (ApplicationMode[])null);
 	}
@@ -54,9 +55,6 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	@Override
 	public boolean init(final OsmandApplication app) {
 		service.connect(true);
-		if(app.getSettings().OSMO_AUTO_SEND_LOCATIONS.get()) {
-			tracker.enableTracker();
-		}
 		groups = new OsMoGroups(service, tracker, app.getSettings());
 		return true;
 	}

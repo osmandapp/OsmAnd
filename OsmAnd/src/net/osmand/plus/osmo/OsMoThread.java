@@ -40,7 +40,7 @@ public class OsMoThread {
 	private static final long HEARTBEAT_DELAY = 100;
 	private static final long HEARTBEAT_FAILED_DELAY = 10000;
 	private static final long TIMEOUT_TO_RECONNECT = 60 * 1000;
-	private static final long TIMEOUT_TO_PING = 2 * 60 * 1000;
+	private static final long TIMEOUT_TO_PING = 5 * 60 * 1000;
 	private static final long LIMIT_OF_FAILURES_RECONNECT = 10;
 	private static final long SELECT_TIMEOUT = 500;
 	private static int HEARTBEAT_MSG = 3;
@@ -52,7 +52,6 @@ public class OsMoThread {
 	private boolean reconnect;
 	private Selector selector;
 
-	private List<OsMoSender> listSenders;
 	private List<OsMoReactor> listReactors;
 
 	private int authorized = 0; // 1 - send, 2 - authorized
@@ -73,9 +72,8 @@ public class OsMoThread {
 	
 	
 
-	public OsMoThread(OsMoService service, List<OsMoSender> listSenders, List<OsMoReactor> listReactors) {
+	public OsMoThread(OsMoService service, List<OsMoReactor> listReactors) {
 		this.service = service;
-		this.listSenders = listSenders;
 		this.listReactors = listReactors;
 		// start thread to receive events from OSMO
 		HandlerThread h = new HandlerThread("OSMo Service");
@@ -109,6 +107,9 @@ public class OsMoThread {
 		}
 		this.activeChannel = activeChannel;
 		key.attach(new Integer(++activeConnectionId));
+		for(OsMoReactor sender : listReactors) {
+			sender.reconnect();
+		}
 
 	}
 	
@@ -251,7 +252,6 @@ public class OsMoThread {
 	private void processReadMessages() {
 		while(!queueOfMessages.isEmpty()){
 			String cmd = queueOfMessages.poll();
-			log.info("OSMO get:"+cmd);
 			cmd(cmd, false);
 			int k = cmd.indexOf('|');
 			String header = cmd;
@@ -363,7 +363,6 @@ public class OsMoThread {
 	private ByteBuffer getNewPendingSendCommand() throws UnsupportedEncodingException {
 		if(authorized == 0) {
 			String auth = "TOKEN|"+ sessionInfo.token;
-			log.info("OSMO send:" + auth);
 			cmd(auth, true);
 			authorized = 1;
 			return ByteBuffer.wrap(prepareCommand(auth).toString().getBytes("UTF-8"));
@@ -371,12 +370,11 @@ public class OsMoThread {
 		if(authorized == 1) {
 			return null;
 		}
-		for (OsMoSender s : listSenders) {
+		for (OsMoReactor s : listReactors) {
 			String l = s.nextSendCommand(this);
 			if (l != null) {
 				cmd(l, true);
 				StringBuilder res = prepareCommand(l);
-				log.info("OSMO send " + res);
 				return ByteBuffer.wrap(res.toString().getBytes("UTF-8"));
 			}
 		}
@@ -384,7 +382,6 @@ public class OsMoThread {
 			if(pingSent == 0) {
 				pingSent = System.currentTimeMillis();
 				cmd(PING_CMD, true);
-				log.info("OSMO send " + PING_CMD);
 				return ByteBuffer.wrap(prepareCommand(PING_CMD).toString().getBytes("UTF-8"));
 			}
 			
@@ -397,6 +394,7 @@ public class OsMoThread {
 	}
 	
 	private void cmd(String cmd, boolean send) {
+		log.info("OsMO" + (send ? "> " : ">> ") + cmd);
 		last100Commands.add((send ? "> " : ">> ") + df.format(new Date()) + "  " + cmd);
 	}
 
