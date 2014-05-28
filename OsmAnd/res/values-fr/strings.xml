@@ -1630,4 +1630,13 @@
     <string name="local_index_mi_export">Exporter</string>
 	<string name="import_file_favourites">Sauvegarder comme fichier GPX ou importer dans les favoris ?</string>
 	<string name="import_save">Sauvegarder</string>
-	</resources>
+	<string name="color_red">Rouge</string>
+	<string name="color_pink">Rose</string>
+	<string name="color_orange">Orange</string>
+	<string name="color_brown">Brun</string>
+	<string name="color_yellow">Jaune</string>
+	<string name="color_lightblue">Bleu clair</string>
+	<string name="color_blue">Bleu</string>
+	<string name="color_magenta">Magenta</string>
+	
+    </resources>
