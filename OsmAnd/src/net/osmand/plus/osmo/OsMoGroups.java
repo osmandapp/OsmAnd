@@ -169,7 +169,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				mergeGroup(group, obj, true);
 				group.active = true;
 				// connect to all devices in group
-				for(OsMoDevice d : storage.getMainGroup().getGroupUsers()) {
+				for(OsMoDevice d : group.getGroupUsers()) {
 					connectDeviceImpl(d);
 				}
 				storage.save();
