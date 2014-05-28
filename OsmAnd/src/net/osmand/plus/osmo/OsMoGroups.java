@@ -113,6 +113,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 
 	private void disconnectImpl(OsMoDevice model) {
 		model.enabled = false;
+		model.active = false;
 		tracker.stopTrackingId(model);
 	}
 
