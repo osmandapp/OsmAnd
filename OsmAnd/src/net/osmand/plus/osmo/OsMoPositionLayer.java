@@ -10,14 +10,17 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -103,7 +106,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 			}
 		}
 	}
-
+	
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		List<OsMoDevice> pos = new ArrayList<OsMoDevice>();
@@ -204,8 +207,9 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	// store between rotations
 	private static String followTrackerId;
 	private static LatLon followMapLocation;
+	private static String followDestinationId;
 	
-	public void setFollowTrackerId(OsMoDevice d) {
+	public static void setFollowTrackerId(OsMoDevice d) {
 		if(d != null) {
 			followTrackerId = d.trackerId;
 			Location l = d.getLastLocation();
@@ -218,14 +222,37 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		
 	}
 	
+	public static void setFollowDestination(OsMoDevice followDestination) {
+		followDestinationId = followDestination == null ? null : followDestination.trackerId;
+	}
+	
+	public static String getFollowDestinationId() {
+		return followDestinationId;
+	}
+	
 	@Override
 	public void deviceLocationChanged(final OsMoDevice device) {
 		boolean sameId = Algorithms.objectEquals(followTrackerId, device.trackerId);
+		boolean sameDestId = Algorithms.objectEquals(followDestinationId, device.trackerId);
 		Location l = device.getLastLocation();
+		if(sameDestId && l != null) {
+			TargetPointsHelper targets = map.getMyApplication().getTargetPointsHelper();
+			RoutingHelper rh = map.getMyApplication().getRoutingHelper();
+			double dist = 0.1;
+			if(rh.isRouteBeingCalculated()) {
+				dist = 100;
+			} else if(rh.isRouteCalculated()) {
+				dist = 30;
+			}
+			LatLon lt = new LatLon(l.getLatitude(), l.getLongitude());
+			if(targets.getPointToNavigate() == null || MapUtils.getDistance(targets.getPointToNavigate(), lt) > dist) {
+				targets.navigateToPoint(lt, true, -1);
+			}
+		}
 		if(sameId && !schedule  && l != null) {
 			schedule = true;
 			ContextMenuLayer cl = map.getMapLayers().getContextMenuLayer();
-			final boolean sameObject = Algorithms.objectEquals(device, cl.getFirstSelectedObject());
+			final boolean sameObject = Algorithms.objectEquals(device, cl.getFirstSelectedObject()) && cl.isVisible();
 			LatLon mapLoc = new LatLon(map.getMapView().getLatitude(), map.getMapView().getLongitude());
 			final boolean centered = Algorithms.objectEquals(followMapLocation, mapLoc);
 			if(sameObject || centered) {

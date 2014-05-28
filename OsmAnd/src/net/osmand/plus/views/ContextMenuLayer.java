@@ -2,7 +2,6 @@ package net.osmand.plus.views;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -120,7 +119,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		
 	}
+	
 
+	public boolean isVisible() {
+		return latLon != null;
+	}
+	
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
 		if(latLon != null){

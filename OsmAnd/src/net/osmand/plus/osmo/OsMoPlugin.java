@@ -3,16 +3,19 @@ package net.osmand.plus.osmo;
 import java.text.SimpleDateFormat;
 
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
@@ -20,6 +23,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.util.MapUtils;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -89,6 +93,51 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		}
 		
 		
+	}
+	
+	@Override
+	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude,
+			ContextMenuAdapter adapter, final Object selectedObj) {
+		if(selectedObj instanceof OsMoDevice) {
+			adapter.item(R.string.osmo_center_location).icons(R.drawable.ic_action_gloc_dark, 
+					R.drawable.ic_action_gloc_light).listen(new OnContextMenuClick() {
+						
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							OsMoDevice o = (OsMoDevice) selectedObj;
+							double lat = o.getLastLocation() == null ? latitude : o.getLastLocation().getLatitude();
+							double lon = o.getLastLocation() == null ? longitude : o.getLastLocation().getLongitude();
+							mapActivity.getMapView().setLatLon(lat, lon);
+							OsMoPositionLayer.setFollowTrackerId(o);
+						}
+					}).position(0).reg();
+			if(OsMoPositionLayer.getFollowDestinationId() != null) {
+				adapter.item(R.string.osmo_cancel_moving_target).icons(R.drawable.ic_action_close_dark, 
+						R.drawable.ic_action_close_light).listen(new OnContextMenuClick() {
+
+							@Override
+							public void onContextMenuClick(int itemId, int pos, boolean isChecked,
+									DialogInterface dialog) {
+								OsMoPositionLayer.setFollowDestination(null);
+							}
+							
+						}).position(0).reg();
+			}
+			adapter.item(R.string.osmo_set_moving_target).icons(R.drawable.ic_action_flag_dark, 
+					R.drawable.ic_action_flag_light).listen(new OnContextMenuClick() {
+						
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							OsMoDevice o = (OsMoDevice) selectedObj;
+							if(o.getLastLocation() != null) {
+								TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
+								targets.navigateToPoint(new LatLon(o.getLastLocation().getLatitude(), o.getLastLocation().getLongitude()), true, -1);
+							}
+							OsMoPositionLayer.setFollowDestination(o);
+						}
+					}).position(1).reg();
+		}
+		super.registerMapContextMenuActions(mapActivity, latitude, longitude, adapter, selectedObj);
 	}
 	
 	@Override
@@ -246,7 +295,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	
 	public void setMapFollowTrackerId(OsMoDevice d) {
 		if(olayer != null) {
-			olayer.setFollowTrackerId(d);
+			OsMoPositionLayer.setFollowTrackerId(d);
 		}
 	}
 

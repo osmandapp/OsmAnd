@@ -413,7 +413,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				} else if(item.getItemId() == SHOW_ON_MAP_ID) {
 					if(device != null) {
 						Location location = device.getLastLocation();
-						app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), app.getSettings().getMapZoomToShow(), 
+						app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), app.getSettings().getLastKnownMapZoom(), 
 								null, device.getVisibleName(), device);
 						osMoPlugin.setMapFollowTrackerId(device);
 						MapActivity.launchMapActivityMoveToTop(OsMoGroupsActivity.this);
