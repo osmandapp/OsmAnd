@@ -361,7 +361,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					final LayoutInflater inflater = LayoutInflater.from(OsMoGroupsActivity.this);
 					View view = inflater.inflate(R.layout.check_item_rel, null);
 					final CompoundButton check = (CompoundButton) view.findViewById(R.id.check_item);
-					check.setChecked((device != null && device.isActive()) || (group != null && group.isActive()));
+					check.setChecked((device != null && device.isActive() && device.isEnabled()) || (group != null && group.isActive() && group.isEnabled()));
 					check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 						@Override
