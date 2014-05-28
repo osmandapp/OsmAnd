@@ -150,7 +150,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				for(OsMoDevice d : delta) {
 					if(d.getDeletedTimestamp() != 0 && d.isEnabled()) {
 						disconnectImpl(d);
-					} else if(d.isEnabled() && !d.isActive()) {
+					} else if(!d.isActive()) {
 						connectDeviceImpl(d);
 					}
 				}
@@ -244,35 +244,37 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 			if(obj.has("group")) {
 				parseGroup(obj.getJSONObject("group"), gr);
 			}
-			JSONArray arr = obj.getJSONArray(USERS);
 			Map<String, OsMoDevice> toDelete = new HashMap<String, OsMoDevice>(gr.users);
-			for (int i = 0; i < arr.length(); i++) {
-				JSONObject o = (JSONObject) arr.get(i);
-				String tid = o.getString(GROUP_TRACKER_ID);
-				OsMoDevice device = toDelete.remove(tid);
-				if (device == null) {
-					device = new OsMoDevice();
-					device.group =  gr;
-					device.trackerId = tid;
-					device.enabled = true;
-					gr.users.put(tid, device);
+			if (obj.has(USERS)) {
+				JSONArray arr = obj.getJSONArray(USERS);
+				for (int i = 0; i < arr.length(); i++) {
+					JSONObject o = (JSONObject) arr.get(i);
+					String tid = o.getString(GROUP_TRACKER_ID);
+					OsMoDevice device = toDelete.remove(tid);
+					if (device == null) {
+						device = new OsMoDevice();
+						device.group = gr;
+						device.trackerId = tid;
+						device.enabled = true;
+						gr.users.put(tid, device);
+					}
+					if (o.has(USER_NAME)) {
+						device.serverName = o.getString(USER_NAME);
+					}
+					if (o.has(DELETED) && o.getBoolean(DELETED)) {
+						device.deleted = System.currentTimeMillis();
+					} else {
+						device.deleted = 0;
+					}
+
+					if (o.has(LAST_ONLINE)) {
+						device.lastOnline = o.getLong(LAST_ONLINE);
+					}
+					if (o.has(USER_COLOR)) {
+						device.serverColor = o.getInt(USER_COLOR);
+					}
+					delta.add(device);
 				}
-				if (o.has(USER_NAME)) {
-					device.serverName = o.getString(USER_NAME);
-				}
-				if (o.has(DELETED) && o.getBoolean(DELETED)) {
-					device.deleted = System.currentTimeMillis();
-				} else {
-					device.deleted = 0;
-				}
-				
-				if (o.has(LAST_ONLINE)) {
-					device.lastOnline = o.getLong(LAST_ONLINE);
-				}
-				if (o.has(USER_COLOR)) {
-					device.serverColor = o.getInt(USER_COLOR);
-				}
-				delta.add(device);
 			}
 			if(deleteUsers) {
 				for(OsMoDevice s : toDelete.values()) {
