@@ -36,7 +36,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	private Paint pointAltUI;
 	private Paint point;
 	private OsMoPlugin plugin;
-	private final static float startZoom = 10;
+	private final static float startZoom = 7;
 
 	public OsMoPositionLayer(MapActivity map, OsMoPlugin plugin) {
 		this.map = map;
@@ -55,9 +55,9 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		pointAltUI.setStyle(Style.FILL);
 		
 		point = new Paint();
-		point.setColor(Color.GRAY);
+		point.setColor(Color.DKGRAY);
 		point.setAntiAlias(true);
-		point.setStyle(Style.STROKE);
+		point.setStyle(Style.FILL_AND_STROKE);
 	}
 	
 	public Collection<OsMoDevice> getTrackingDevices() {
@@ -83,15 +83,16 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		final int r = getRadiusPoi(tb);
+		final int r = getRadiusPoi(tb) * 3 / 4;
 		for (OsMoDevice t : getTrackingDevices()) {
 			Location l = t.getLastLocation();
 			if (l != null) {
 				int x = (int) tb.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
 				int y = (int) tb.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
+				
 				pointAltUI.setColor(t.getColor());
-				canvas.drawCircle(x, y, r, pointAltUI);
-				canvas.drawCircle(x, y, r, point);
+				canvas.drawCircle(x, y, r , point);
+				canvas.drawCircle(x, y, r - 2, pointAltUI);
 			}
 		}
 	}

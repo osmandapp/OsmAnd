@@ -60,7 +60,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private void connectDeviceImpl(OsMoDevice d) {
 		d.enabled =  true;
 		d.active = true;
-		if(!service.getMyGroupTrackerId().equals(d.getTrackerId())) {
+		String mid = service.getMyGroupTrackerId();
+		if(mid == null || !mid.equals(d.getTrackerId())) {
 			tracker.startTrackingId(d);
 		}
 	}
