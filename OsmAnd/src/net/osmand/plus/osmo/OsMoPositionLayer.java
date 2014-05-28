@@ -86,7 +86,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		final int r = getRadiusPoi(tb);
 		for (OsMoDevice t : getTrackingDevices()) {
 			Location l = t.getLastLocation();
-			if (t != null) {
+			if (l != null) {
 				int x = (int) tb.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
 				int y = (int) tb.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
 				pointAltUI.setColor(t.getColor());
