@@ -15,7 +15,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
@@ -23,7 +22,6 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
-import net.osmand.util.MapUtils;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -51,6 +49,8 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		service = new OsMoService(app);
 		tracker = new OsMoTracker(service, app.getSettings().OSMO_SAVE_TRACK_INTERVAL,
 				app.getSettings().OSMO_AUTO_SEND_LOCATIONS);
+		new OsMoControlDevice(app, service);
+		groups = new OsMoGroups(service, tracker, app.getSettings());
 		this.app = app;
 		ApplicationMode.regWidget("osmo_control", (ApplicationMode[])null);
 	}
@@ -58,7 +58,6 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	@Override
 	public boolean init(final OsmandApplication app) {
 		service.connect(true);
-		groups = new OsMoGroups(service, tracker, app.getSettings());
 		return true;
 	}
 

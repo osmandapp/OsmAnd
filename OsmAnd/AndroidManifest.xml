@@ -28,6 +28,7 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 	<uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
 	<uses-permission android:name="android.permission.CAMERA"></uses-permission>
+	<uses-permission android:name="android.permission.VIBRATE"/>
 	<uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
 	<supports-screens  android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
 	    android:xlargeScreens="true" android:anyDensity="true" />
