@@ -12,6 +12,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
+import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.plus.osmodroid.OsMoDroidLayer;
 import net.osmand.plus.parkingpoint.ParkingPositionLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -126,6 +127,21 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				boolean visible = true;
 				String txt = "OsMo";
 				String subtxt = "";
+				SessionInfo si = getService().getCurrentSessionInfo();
+				if (si != null) {
+					String uname = si.username;
+					if (uname != null && uname.length() > 0) {
+						if (uname.length() > 7 && uname.indexOf(' ') != -1) {
+							uname = uname.substring(0, uname.indexOf(' '));
+						}
+						if (uname.length() > 4 && uname.indexOf(' ') != -1) {
+							txt = "";
+							subtxt = uname;
+						} else {
+							txt = uname;
+						}
+					}
+				}
 				Drawable small = srcinactive;
 				Drawable big = srcinactive;
 				long last = service.getLastCommandTime();

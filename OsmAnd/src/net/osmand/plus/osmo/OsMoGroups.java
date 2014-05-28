@@ -171,8 +171,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				storage.save();
 			}
 			processed = true;
-		} else if(command.equalsIgnoreCase("AGROUP_CREATE") || command.equalsIgnoreCase("GROUP_JOIN") ) {
-			if(command.equalsIgnoreCase("AGROUP_CREATE")) {
+		} else if(command.equalsIgnoreCase("GROUP_CREATE") || command.equalsIgnoreCase("GROUP_JOIN") ) {
+			if(command.equalsIgnoreCase("GROUP_CREATE")) {
 				operation = command;
 				try {
 					gid = obj.getString(GROUP_ID);
@@ -289,8 +289,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 			obj.put("expireTime", expireTime);
 			obj.put("description", description);
 			obj.put("policy", policy);
-			service.pushCommand("AGROUP_CREATE|" + obj.toString());
-			return "AGROUP_CREATE";
+			service.pushCommand("GROUP_CREATE|" + obj.toString());
+			return "GROUP_CREATE";
 		} catch (JSONException e) {
 			throw new RuntimeException(e);
 		}

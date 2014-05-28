@@ -41,6 +41,7 @@ public class TextInfoWidget extends BaseMapWidget {
 					+ (int) (3 * scaleCoefficient));
 		}
 	}
+	
 
 	public void setText(String text, String subtext) {
 		this.text = text;
