@@ -32,6 +32,7 @@ public class OsMoThread {
 //	private static String TRACKER_SERVER = "srv.osmo.mobi";
 //	private static int TRACKER_PORT = 3245;
 
+	
 	private static final String PING_CMD = "P";
 	protected final static Log log = PlatformUtil.getLog(OsMoThread.class);
 	private static final long HEARTBEAT_DELAY = 100;
@@ -289,6 +290,9 @@ public class OsMoThread {
 						service.showErrorMessage(e.getMessage());
 					}
 				}
+				continue;
+			} else if(header.equalsIgnoreCase(OsMoService.REGENERATE_CMD)) {
+				reconnect = true;
 				continue;
 			} else if(header.equalsIgnoreCase(PING_CMD)) {
 				pingSent = 0;

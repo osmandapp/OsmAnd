@@ -11,6 +11,8 @@ import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -121,6 +123,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			} else {
 				ShareDialog dlg = new ShareDialog(this);
 				dlg.setTitle(getString(R.string.osmo_tracker_id));
+				dlg.setAction(getString(R.string.osmo_regenerate_login_ids), getRegenerateAction());
 				dlg.viewContent(ci.trackerId);
 				dlg.shareURLOrText(ci.trackerId, getString(R.string.osmo_tracker_id_share, ci.trackerId, ""), null);
 				dlg.showDialog();
@@ -129,6 +132,27 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		return super.onPreferenceClick(preference);
 	}
 	
+	private Runnable getRegenerateAction() {
+		return new Runnable() {
+			
+			@Override
+			public void run() {
+				Builder bld = new AlertDialog.Builder(SettingsOsMoActivity.this);
+				bld.setMessage(R.string.osmo_regenerate_login_ids_confirm);
+				bld.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
+						plugin.getService().pushCommand(OsMoService.REGENERATE_CMD);
+					}
+				});
+				bld.setNegativeButton(R.string.default_buttons_no, null);
+				bld.show();
+			}
+		};
+	}
+
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		boolean p = super.onPreferenceChange(preference, newValue);

@@ -31,6 +31,7 @@ import android.os.Build;
 import android.provider.Settings.Secure;
 
 public class OsMoService implements OsMoReactor {
+	public static final String REGENERATE_CMD = "REGENERATE_TRACKER_ID";
 	private OsMoThread thread;
 	private List<OsMoReactor> listReactors = new java.util.concurrent.CopyOnWriteArrayList<OsMoReactor>();
 	private ConcurrentLinkedQueue<String> commands = new ConcurrentLinkedQueue<String>();

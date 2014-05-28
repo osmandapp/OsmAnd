@@ -29,6 +29,7 @@ public class ShareDialog {
 	private List<ShareType> share = new ArrayList<ShareType>();
 	private static final String ZXING_BARCODE_SCANNER_COMPONENT = "com.google.zxing.client.android"; //$NON-NLS-1$
 	private static final String ZXING_BARCODE_SCANNER_ACTIVITY = "com.google.zxing.client.android.ENCODE"; //$NON-NLS-1$
+	static final int ACTION = -1;
 	static final int VIEW = 0;
 	static final int EMAIL = 1;
 	static final int SMS = 2;
@@ -45,8 +46,14 @@ public class ShareDialog {
 		return this;
 	}
 	
+	
 	public ShareDialog viewContent(String content){
 		share.add(new ShareType(content, VIEW));
+		return this;
+	}
+	
+	public ShareDialog setAction(String content, Runnable r){
+		share.add(new ShareType(content, ACTION, r));
 		return this;
 	}
 	
@@ -68,14 +75,23 @@ public class ShareDialog {
 	private static class ShareType {
 		public String content;
 		public int type;
+		private Runnable runnable;
 		
 		public ShareType(String content, int type) {
 			this.content = content;
 			this.type = type;
 		}
 
+		public ShareType(String content, int action, Runnable r) {
+			this.content = content;
+			this.type = action;
+			this.runnable = r;
+		}
+
 		public String getShareName(Context ctx) {
-			if(type == VIEW) {
+			if(type == ACTION) {
+				return content;
+			} else if(type == VIEW) {
 				return ctx.getString(R.string.show_details);
 			} else if(type == EMAIL) {
 				return "Email";
@@ -90,7 +106,9 @@ public class ShareDialog {
 		}
 		
 		public void execute(Activity a, String title) {
-			if(type == VIEW) {
+			if(type == ACTION) {
+				runnable.run();
+			} else if(type == VIEW) {
 				Builder bld = new AlertDialog.Builder(a);
 				bld.setTitle(title);
 				bld.setMessage(content);
