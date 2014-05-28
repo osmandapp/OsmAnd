@@ -1965,7 +1965,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="hours_ago">시간 전</string>
     <string name="minutes_ago">분 전</string>
     <string name="seconds_ago">초 전</string>
-    <string name="osmo_connect_to_device_name">장치 이름</string>
+    <string name="osmo_connect_to_device_name">사용자 이름</string>
     <string name="osmo_connect_to_device_tracker_id">트래커 ID</string>
     <string name="osmo_connect_to_device">장치와 연결</string>
     <string name="osmo_join_group">그룹에 가입</string>
@@ -2011,10 +2011,21 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_connect">~에 연결</string>
     <string name="osmo_create_group">그룹 만들기</string>
     <string name="osmo_server_operation_failed">OsMo 서버 작업 실패</string>
-    <string name="osmo_activity">OSM 모니터링</string>
+    <string name="osmo_activity">OSMO 모니터링</string>
     <string name="osmo_enable_tracker">내 위치 보내기</string>
     <string name="osmo_control">OsMo 빠른 접근</string>
     <string name="local_index_mi_export">내보내기</string>
 	<string name="import_file_favourites">GPX 파일로 저장? 또는 즐겨찾기로 가져오기?</string>
 	<string name="import_save">저장</string>
-	</resources>
+	<string name="color_red">빨강</string>
+	<string name="color_pink">핑크</string>
+	<string name="color_orange">오렌지</string>
+	<string name="color_brown">갈색</string>
+	<string name="color_yellow">노랑</string>
+	<string name="color_lightblue">밝은 청색</string>
+	<string name="color_blue">파랑</string>
+	<string name="color_magenta">자청색</string>
+	
+    <string name="osmo_edit_device">사용자 등록 정보 변경</string>
+    <string name="osmo_edit_color">디스플레이 색상</string>
+    </resources>
