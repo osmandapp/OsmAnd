@@ -207,10 +207,13 @@ public class OsMoGroupsStorage {
 		
 		protected Map<String, OsMoDevice> users = new ConcurrentHashMap<String, OsMoDevice>(); 
 		
-		public List<OsMoDevice> getGroupUsers() {
+		public List<OsMoDevice> getGroupUsers(String mygid) {
 			// filter deleted
 			List<OsMoDevice> dvs = new ArrayList<OsMoDevice>(users.size());
 			for(OsMoDevice d : users.values()) {
+				if(mygid != null && mygid.equals(d.trackerId)) {
+					continue;
+				}
 				if(d.getDeletedTimestamp() == 0) {
 					dvs.add(d);
 				}
@@ -218,11 +221,11 @@ public class OsMoGroupsStorage {
 			return dvs;
 		}
 		
-		public List<OsMoDevice> getVisibleGroupUsers() {
+		public List<OsMoDevice> getVisibleGroupUsers(String mygid) {
 			if(!isActive() &&  !isMainGroup()) {
 				return Collections.emptyList();
 			}
-			return getGroupUsers();
+			return getGroupUsers(mygid);
 		}
 		
 		public boolean isDeleted() {

@@ -154,7 +154,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
 
 		osMoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
-		adapter = new OsMoGroupsAdapter(osMoPlugin.getGroups(), osMoPlugin.getTracker());
+		adapter = new OsMoGroupsAdapter(osMoPlugin.getGroups(), osMoPlugin.getTracker(),
+				osMoPlugin.getService());
 		getExpandableListView().setAdapter(adapter);
 		app = (OsmandApplication) getApplication();
 		
@@ -713,7 +714,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			
 			@Override
 			public void run() {
-				Toast.makeText(OsMoGroupsActivity.this, R.string.osmo_server_operation_failed, Toast.LENGTH_LONG).show();
+				if(OsMoGroupsActivity.this.operation != null) {
+					Toast.makeText(OsMoGroupsActivity.this, R.string.osmo_server_operation_failed, Toast.LENGTH_LONG).show();
+				}
 				hideProgressBar();
 			}
 		}, 15000);
@@ -757,10 +760,12 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		private Map<OsMoGroup, List<OsMoDevice>> users = new LinkedHashMap<OsMoGroup, List<OsMoDevice>>();
 		private OsMoGroups grs;
 		private OsMoTracker tracker;
+		private OsMoService srv;
 
-		public OsMoGroupsAdapter(OsMoGroups grs, OsMoTracker tracker) {
+		public OsMoGroupsAdapter(OsMoGroups grs, OsMoTracker tracker, OsMoService srv) {
 			this.grs = grs;
 			this.tracker = tracker;
+			this.srv = srv;
 			synchronizeGroups();
 		}
 
@@ -769,7 +774,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				sortedGroups.remove(group);
 				users.remove(group);
 			} else {
-				List<OsMoDevice> us = !group.isEnabled() && !group.isMainGroup() ? new ArrayList<OsMoDevice>(0) : group.getVisibleGroupUsers();
+				List<OsMoDevice> us = !group.isEnabled() && !group.isMainGroup() ? new ArrayList<OsMoDevice>(0) : 
+					group.getVisibleGroupUsers(srv.getMyGroupTrackerId());
 				final Collator ci = Collator.getInstance();
 				Collections.sort(us, new Comparator<OsMoDevice>() {
 

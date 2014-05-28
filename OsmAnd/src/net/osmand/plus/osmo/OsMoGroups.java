@@ -68,7 +68,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
 	@Override
 	public void reconnect() {
-		for(OsMoDevice d : storage.getMainGroup().getGroupUsers()) {
+		for(OsMoDevice d : storage.getMainGroup().getGroupUsers(null)) {
 			if(d.isEnabled()) {
 				connectDeviceImpl(d);
 			}
@@ -103,8 +103,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		model.enabled = false;
 		String operation = "GROUP_DISCONNECT:"+model.groupId;
 		service.pushCommand(operation);
-		for(OsMoDevice d : model.getGroupUsers()) {
-			tracker.startTrackingId(d);
+		for(OsMoDevice d : model.getGroupUsers(null)) {
+			tracker.stopTrackingId(d);
 		}
 		storage.save();
 		return operation;
@@ -169,7 +169,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				mergeGroup(group, obj, true);
 				group.active = true;
 				// connect to all devices in group
-				for(OsMoDevice d : group.getGroupUsers()) {
+				for(OsMoDevice d : group.getGroupUsers(null)) {
 					connectDeviceImpl(d);
 				}
 				storage.save();
@@ -232,7 +232,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 
 	private void disconnectAllGroupUsers(OsMoGroup gr) {
 		gr.active = false;
-		for(OsMoDevice d : gr.getGroupUsers()) {
+		for(OsMoDevice d : gr.getGroupUsers(null)) {
 			disconnectImpl(d);
 		}
 	}
