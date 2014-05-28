@@ -100,6 +100,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	public static final int SHARE_SESSION = 7;
 	public static final int GROUP_INFO = 8;
 	protected static final int SETTINGS_ID = 9;
+	protected static final int SETTINGS_DEV_ID = 10;
 	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	private static final long RECENT_THRESHOLD = 60000;
 
@@ -345,7 +346,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				///
 				if(device != null) {
-					createMenuItem(menu, SETTINGS_ID, R.string.settings, R.drawable.ic_action_settings_light, R.drawable.ic_action_settings_dark,
+					createMenuItem(menu, SETTINGS_DEV_ID, R.string.settings, R.drawable.ic_action_settings_light, R.drawable.ic_action_settings_dark,
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				}
 				if(group != null) {
@@ -385,7 +386,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-				if(item.getItemId() == SETTINGS_ID) {
+				if(item.getItemId() == SETTINGS_DEV_ID) {
 					showSettingsDialog(device);
 				} else if(item.getItemId() == DELETE_ACTION_ID ) {
 					Builder bld = new AlertDialog.Builder(OsMoGroupsActivity.this);

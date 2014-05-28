@@ -14,22 +14,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
-import android.util.TimeUtils;
 
 public class OsMoThread {
 //	private static String TRACKER_SERVER = "srv.osmo.mobi";

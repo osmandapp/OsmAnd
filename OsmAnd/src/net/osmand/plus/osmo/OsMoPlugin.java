@@ -3,18 +3,16 @@ package net.osmand.plus.osmo;
 import java.text.SimpleDateFormat;
 
 import net.osmand.Location;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
-import net.osmand.plus.osmodroid.OsMoDroidLayer;
-import net.osmand.plus.parkingpoint.ParkingPositionLayer;
+import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
@@ -43,6 +41,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 	// 2014-05-27 23:11:40
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private OsmandMapTileView mv;
 
 	public OsMoPlugin(final OsmandApplication app) {
 		service = new OsMoService(app);
@@ -106,6 +105,27 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		}
 		olayer = new OsMoPositionLayer(activity, this);
 		activity.getMapView().addLayer(olayer, 5.5f);
+	}
+	
+	@Override
+	public void mapActivityPause(MapActivity activity) {
+		mv = null;
+		tracker.setUITrackerListener(new OsmoTrackerListener() {
+			
+			@Override
+			public void locationChange(String trackerId, Location location) {
+				if(mv != null) {
+					mv.refreshMap();
+				}
+			}
+		});
+	}
+	
+	@Override
+	public void mapActivityResume(MapActivity activity) {
+		mv = activity.getMapView();
+		tracker.setUITrackerListener(null);
+		
 	}
 	
 	/**
