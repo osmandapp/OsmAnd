@@ -222,7 +222,7 @@ public class VoiceRouter {
 			if(waitAnnouncedOffRoute == 0) {
 				waitAnnouncedOffRoute = 30000;	
 			} else {
-				waitAnnouncedOffRoute += 10000;
+				waitAnnouncedOffRoute += 30000;
 			}
 			lastAnnouncedOffRoute = ms;
 		}
