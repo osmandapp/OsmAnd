@@ -403,28 +403,16 @@ public class OsMoThread {
 	}
 
 	private StringBuilder prepareCommand(String l) {
-		boolean addNL = true;
-		StringBuilder res = new StringBuilder();
-		int i = 0;
-		while (true) {
-			int ni = l.indexOf('\n');
-			if (ni == l.length() - 1) {
-				res.append(l.substring(i));
-				addNL = false;
-				break;
-			} else if (ni == -1) {
-				res.append(l.substring(i));
-				break;
-			} else {
-				res.append(l.substring(i, ni));
-				res.append("\\").append("n");
+		StringBuilder res = new StringBuilder(l.length());
+		for(int i = 0; i < l.length(); i++) {
+			char c = l.charAt(i);
+			if(c == '\n' || c == '=' || c == '\\') {
+			 res.append('\\')
 			}
-			i = ni + 1;
+			res.append(c);
 		}
-		if (addNL) {
-			l += "\n";
-		}
-		return res;
+		
+		return res.toString().trim() +"=\n"	
 	}
 
 	public long getLastCommandTime() {
