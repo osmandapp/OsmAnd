@@ -152,7 +152,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		app = (OsmandApplication) getApplication();
 		osMoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 		if(getIntent() != null) {
-			if("osmo".equals(getIntent().getScheme())) {
+			if("http".equals(getIntent().getScheme())) {
 				new OsMoIntentHandler(app, osMoPlugin).execute(getIntent());
 			}
 		}
