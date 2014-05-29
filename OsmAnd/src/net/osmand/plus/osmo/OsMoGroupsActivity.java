@@ -40,6 +40,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
@@ -51,6 +52,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -147,16 +149,23 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		super.onCreate(icicle);
+		app = (OsmandApplication) getApplication();
+		osMoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
+		if(getIntent() != null) {
+			if("osmo".equals(getIntent().getScheme())) {
+				new OsMoIntentHandler(app, osMoPlugin).execute(getIntent());
+			}
+		}
 		setContentView(R.layout.osmo_groups_list);
 		getSupportActionBar().setTitle(R.string.osmo_activity);
 		setSupportProgressBarIndeterminateVisibility(false);
 		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
 
-		osMoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
+		
 		adapter = new OsMoGroupsAdapter(osMoPlugin.getGroups(), osMoPlugin.getTracker(),
 				osMoPlugin.getService());
 		getExpandableListView().setAdapter(adapter);
-		app = (OsmandApplication) getApplication();
+		
 		
 		uiHandler = new Handler();
 		directionPath = createDirectionPath();
@@ -575,22 +584,52 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			AccessibleToast.makeText(this, R.string.osmo_auth_pending, Toast.LENGTH_SHORT).show();
 		} else {
 			ShareDialog dlg = new ShareDialog(this);
+			String url = "osmo://connect?id="+Uri.encode(trackerId);
+			if(name != null && name.length() > 0){;
+				url += "&name="+Uri.encode(name);
+			}
 			dlg.setTitle(getString(R.string.osmo_tracker_id));
 			dlg.viewContent(trackerId);
-			dlg.shareURLOrText(trackerId, getString(R.string.osmo_tracker_id_share, trackerId, name), null);
+			dlg.shareURLOrText(url, getString(R.string.osmo_tracker_id_share, trackerId, name), null);
 			dlg.showDialog();
 		}
 	}
 	
 	private void shareOsMoGroup(String name, String groupId) {
 		ShareDialog dlg = new ShareDialog(this);
+		String url = "osmo://join?id="+Uri.encode(groupId)+"&name="+Uri.encode(name);
 		dlg.setTitle(getString(R.string.osmo_group));
 		dlg.viewContent(groupId);
-		dlg.shareURLOrText(groupId, getString(R.string.osmo_group_share, groupId, name), null);
+		dlg.shareURLOrText(url, getString(R.string.osmo_group_share, groupId, name, url), null);
 		dlg.showDialog();
+	}
+	
+	private void signin() {
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.osmo_sign_in);
+		String message = "";
+		if(app.getSettings().OSMO_USER_PWD.get() != null) {
+			message = getString(R.string.osmo_credentials_not_valid) +"\n";
+		}
+		message += getString(R.string.osmo_create_groups_confirm);
+		builder.setMessage(message);
+		builder.setPositiveButton(R.string.osmo_sign_in, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(OsMoService.SIGN_IN_URL));
+				startActivity(browserIntent);
+			}
+		});
+		
+		builder.setNegativeButton(R.string.default_buttons_no, null);
+		builder.show();
 	}
 
 	private void createGroup() {
+		if(osMoPlugin.getService().getRegisteredUserName() == null) {
+			signin();
+		}
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.osmo_create_group);
 		final View v = getLayoutInflater().inflate(R.layout.osmo_create_group, getExpandableListView(), false);

@@ -32,6 +32,7 @@ import android.provider.Settings.Secure;
 
 public class OsMoService implements OsMoReactor {
 	public static final String REGENERATE_CMD = "REGENERATE_TRACKER_ID";
+	public static final String SIGN_IN_URL = "http://osmo.mobi/signin";
 	private OsMoThread thread;
 	private List<OsMoReactor> listReactors = new java.util.concurrent.CopyOnWriteArrayList<OsMoReactor>();
 	private ConcurrentLinkedQueue<String> commands = new ConcurrentLinkedQueue<String>();
@@ -49,6 +50,7 @@ public class OsMoService implements OsMoReactor {
 	public boolean isConnected() {
 		return thread != null && thread.isConnected();
 	}
+	
 	
 	public boolean isActive() {
 		return thread != null && thread.isActive();
@@ -164,6 +166,14 @@ public class OsMoService implements OsMoReactor {
 		return thread.getSessionInfo();
 	}
 	
+	public String getRegisteredUserName() {
+		SessionInfo si = getCurrentSessionInfo();
+		if(si != null) {
+			return si.username;
+		}
+		return null;
+	}
+	
 	public String getMyGroupTrackerId() {
 		String myGroupTrackerId = "";
 		SessionInfo currentSessionInfo = getCurrentSessionInfo();
@@ -262,6 +272,9 @@ public class OsMoService implements OsMoReactor {
 
 	@Override
 	public void reconnect() {
+		if(thread != null) {
+			thread.reconnect();
+		}
 	}
 	
 }

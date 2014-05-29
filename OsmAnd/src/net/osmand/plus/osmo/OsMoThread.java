@@ -431,4 +431,8 @@ public class OsMoThread {
 	public long getLastCommandTime() {
 		return lastSendCommand;
 	}
+
+	public void reconnect() {
+		reconnect = true;
+	}
 }
