@@ -24,7 +24,7 @@ public class OsMoIntentHandler extends AsyncTask<Intent, Void, String> {
 			for (Intent intent : params) {
 				String scheme = intent.getScheme();
 				Uri data = intent.getData();
-				if ("http".equals(scheme) && data.getHost().equals("m.osmo.mobi")) {
+				if ("http".equals(scheme) && data.getHost().equals("z.osmo.mobi")) {
 					String path = data.getPath();
 					String lastPath = path.substring(path.lastIndexOf('/') + 1);
 					if(lastPath.equals("login")) {
