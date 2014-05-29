@@ -31,17 +31,26 @@ public class OsMoControlDevice implements OsMoReactor {
 		service.registerReactor(this);
 	}
 	
-	public float getBatteryLevel() {
+	public JSONObject getBatteryLevel() throws JSONException {
 	    Intent batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 	    int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 	    int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+	    int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+	    int temperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1);
+	    int voltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1);
+				
+	    JSONObject postjson = new JSONObject();
+            postjson.put("batteryprocent",  (level == -1 || scale == -1)? 50.0f : ((float)level / (float)scale) * 100.0f);
+            postjson.put("temperature", temperature);
+            postjson.put("voltage", voltage);
+            postjson.put("plugged", plugged);
 
 	    // Error checking that probably isn't needed but I added just in case.
 	    if(level == -1 || scale == -1) {
 	        return 50.0f;
 	    }
 
-	    return ((float)level / (float)scale) * 100.0f; 
+	    return postjson; 
 	}
 
 	@Override
@@ -49,7 +58,11 @@ public class OsMoControlDevice implements OsMoReactor {
 		if(command.equals("REMOTE_CONTROL")) {
 			if(data.equals("BATTERY_INFO")) {
 				String rdata = getBatteryLevel()+"";
-				service.pushCommand("BATTERY_INFO|"+rdata);
+				try {
+				   service.pushCommand("BATTERY_INFO|"+getBatteryLevel().toString());
+				} catch(JSONException e) {
+				   e.printStackTrace();
+				}
 			} else if(data.equals("VIBRATE")) {
 				Vibrator v = (Vibrator) app.getSystemService(Context.VIBRATOR_SERVICE);
 				 // Vibrate for 500 milliseconds
