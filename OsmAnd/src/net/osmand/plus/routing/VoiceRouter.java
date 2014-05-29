@@ -480,15 +480,15 @@ public class VoiceRouter {
 	}
 
 	public String getSpeakablePointName(String pn) {
-		// replace characters which may produce unwanted tts sounds:
+		// Replace characters which may produce unwanted tts sounds:
 		if(pn != null) {
 			pn = pn.replace('-', ' ');
 			pn = pn.replace(':', ' ');
 			if ((player != null) && (!"de".equals(player.getLanguage()))){
-				pn = pn.replace("\u00df", "ss"); // helps non-German tts voices to pronounce German Strasse (=street)
+				pn = pn.replace("\u00df", "ss"); // Helps non-German tts voices to pronounce German Strasse (=street)
 			}
 			if ((player != null) && ("en".equals(player.getLanguage()))){
-				pn = pn.replace("SR", "S R"); // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English tts voice
+				pn = pn.replace("SR", "1 2");    // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English tts voice
 			}
 		}
 		return pn;
