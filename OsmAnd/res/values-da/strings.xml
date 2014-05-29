@@ -986,7 +986,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="send_location_way_choose_title">Del placering ved hjælp af</string>
 	<string name="send_location_sms_pattern">Placering: %1$s
 \n%2$s</string>
-	<string name="send_location_email_pattern">For at se placering brug webadressen %1$s eller android hensigts link %2$s</string>
+	<string name="send_location_email_pattern">For at se placering brug webadressen %1$s eller Android hensigts link %2$s</string>
 	<string name="send_location">Send placering</string>
 	<string name="context_menu_item_share_location">Del placering</string>
 	<string name="add_waypoint_dialog_added">GPX-rutepunkt \'{0}\' blev korrekt tilføjet</string>
