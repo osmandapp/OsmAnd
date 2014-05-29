@@ -11,7 +11,7 @@
 \n\t- État des fichiers de cartes désactivés affichés dans l\'écran de téléchargement en vert foncé et bleu foncé
 \n\t- Modifications diverses "</string>
   <string name="update_poi_does_not_change_indexes">Les modifications de PI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
-  <string name="local_openstreetmap_uploading">Envoi…</string>
+  <string name="local_openstreetmap_uploading">Transfert…</string>
   <string name="local_openstreetmap_were_uploaded">{0} PI/bogues ont été envoyés</string>
   <string name="local_openstreetmap_uploadall">Tout envoyer</string>
   
@@ -100,7 +100,7 @@
   
   <string name="use_transparent_map_theme">Thème de transparence</string>
   <string name="native_library_not_supported">Rendu acceléré non supporté sur cet appareil.</string>
-  <string name="init_native_library">Initialisation du rendu acceléré…</string>
+  <string name="init_native_library">Initialisation du rendu accéléré…</string>
   <string name="choose_auto_follow_route">Suivi automatique de la carte</string>
   <string name="choose_auto_follow_route_descr">Temps avant que la carte se recentre sur la position actuelle</string>
   <string name="auto_follow_route_never">Jamais</string>
@@ -142,13 +142,13 @@
   <string name="local_index_mi_rename">Renommer</string>
   <string name="show_gpx_route">Afficher sur la carte</string>
   <string name="poi_filter_nominatim">Nominatim en ligne</string>
-  <string name="search_position_current_location_search">Recherche de l\'emplacement…</string>
+  <string name="search_position_current_location_search">Recherche de la position…</string>
   <string name="search_position_current_location_found">Emplacement[Trouvé]</string>
   <string name="search_position_address">Adresse…</string>
   <string name="search_position_favorites">Favori…</string>
   <string name="search_position_undefined">Non défini</string>
   <string name="search_position_fixed">Fixé</string>
-  <string name="search_position_current_location">Emplacement actuel…</string>
+  <string name="search_position_current_location">Position actuelle…</string>
   <string name="search_position_map_view">Dernière vue</string>
   <string name="select_search_position">Recherche autour de :</string>
   <string name="context_menu_item_search">Rechercher autour du point</string>
@@ -238,7 +238,7 @@
   <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
   <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
   <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
-  <string name="switch_to_vector_map_to_see">Vous pouvez basculer sur les cartes vectorielles locales en utilisant le menu (Couches -&gt; Source de la carte… -&gt; Cartes vectorielles OSM) pour voir la carte.</string>
+  <string name="switch_to_vector_map_to_see">Cartes vectorielles disponibles pour cette position. \n\t\n\tPour activer: \'Menu\'→\'Couches\'→\'Source de la carte…\'→\'Cartes vectorielles hors ligne\'.</string>
   <string name="choose_audio_stream">Canal de sortie</string>
   <string name="choose_audio_stream_descr">Sélectionner le canal à utiliser pour le guidage vocal (dépend de la configuration système)</string>
   <string name="voice_stream_voice_call">Canal d\'appels vocaux</string>
@@ -253,7 +253,7 @@
   <string name="layer_underlay">Fond de carte…</string>
   <string name="map_underlay">Fond de carte</string>
   <string name="map_underlay_descr">Choisir un fond de carte</string>
-  <string name="layer_overlay">Sur-couche de la carte…</string>
+  <string name="layer_overlay">Sur-couche de carte…</string>
   <string name="default_none">Aucun</string>
   <string name="map_overlay">Sur-couche de la carte</string>
   <string name="map_overlay_descr">Choisir la carte en sur-couche</string>
@@ -1050,7 +1050,7 @@
     <string name="add_as_last_destination_point">Ajouter comme dernière étape</string>
     <string name="add_as_first_destination_point">Ajouter comme première étape</string>
     <string name="replace_destination_point">Remplacer le point de destination</string>
-    <string name="new_destination_point_dialog">Vous avez déjà défini un point de destination.</string>
+    <string name="new_destination_point_dialog">Vous avez déjà défini la destination.</string>
     <string name="target_point">Étape %1$s</string>
     <string name="target_points">Étapes</string>
     <string name="intermediate_point_too_far">Étape %1$s trop éloignée de la route la plus proche.</string>
@@ -1097,7 +1097,7 @@
     
     
     <string name="map_widget_max_speed">Limite de vitesse</string>
-    <string name="tip_altitude_offset">Affichage de l\'altitude - Écart de correction</string>
+    <string name="tip_altitude_offset">Correction de l\'altitude</string>
 	<string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Cacher les limites administratives</string>
 	<string name="rendering_attr_noAdminboundaries_description">Ne pas afficher les limites administratives régionales (niveaux 5 à 9)</string>
@@ -1116,7 +1116,7 @@
     
 	
 <string name="audionotes_location_not_defined">L\'emplacement à associer à la note n\'est pas encore défini. Utilisez le menu \'Options du point…\' pour spécifier l\'emplacement à associer à la note.</string>
-    <string name="monitoring_control_stop">arrêter</string>
+    <string name="monitoring_control_stop">Arrêter</string>
     <string name="map_widget_audionotes">Notes audio</string>
     <string name="audionotes_plugin_description">Ce greffon permet de prendre des notes audio/vidéo/photo durant le voyage.</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
@@ -1174,7 +1174,7 @@
     <string name="stop_routing_confirm">Êtes-vous sûr de vouloir arrêter la navigation ?</string>
     <string name="clear_dest_confirm">Êtes-vous sûr de vouloir effacer votre point de destination ?</string>
     <string name="precise_routing_mode">Routage précis (alpha)</string>
-    <string name="precise_routing_mode_descr">Activer le routage précis pour calculer des itinéraires précis sans failles. Il est très limité par la distance et n\'utilise pas la bibliothèque native.</string>
+    <string name="precise_routing_mode_descr">Activer le routage précis pour calculer des itinéraires précis sans failles. Il est très limité par la distance et lent.</string>
     <string name="local_indexes_cat_av">Données audio/vidéo</string>
     <string name="dist_control_start">Début</string>
     <string name="support_new_features_descr">Effectuer un don pour voir de nouvelles fonctionnalités implémentées dans l\'application</string>
@@ -1432,8 +1432,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     </string>
     <string name="default_and">et</string>
     <string name="default_or">ou</string>
-	<string name="route_is_too_long">L\'itinéraire est probablement trop long pour être calculé localement par OsmAnd.
-	Le calcul en local est possible, en moyenne, pour des itinéraires jusqu\'à 200 km. Il est conseillé d\'ajouter des étapes intermédiaires pour un meilleur calcul.</string>
+	<string name="route_is_too_long">Le calcul d\'itinénaire par OsmAnd peut prendre beaucoup de temps (et parfois ne pas aboutir) pour des points séparés de plus de 200 km. Veuillez ajouter des étapes intermédiaires pour une meilleure performance.</string>
 	<string name="auto_zoom_none">Pas de zoom automatique</string>
 	<string name="auto_zoom_close">Rapproché</string>
 	<string name="auto_zoom_far">Modéré</string>
@@ -1495,8 +1494,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_avoid_ferries_description">Éviter les ferries</string>
 	<string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
 	<string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
-	<string name="routing_attr_weight_name">Poids</string>
-	<string name="routing_attr_weight_description">Spécifier la limite de poids</string>
+	<string name="routing_attr_weight_name">Poids maximum</string>
+	<string name="routing_attr_weight_description">Spécifier la limite de poids du véhicule</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Définir la destination</string>
     <string name="route_descr_select_on_map">Définir sur la carte…</string>
@@ -1585,7 +1584,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	Des groupes totalement fonctionnels peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès.
 	Pour en savoir plus: http://osmo.mobi</string>
 	<string name="osmo_plugin_name">OsMo (Suivi en temps réel)</string>
-	<string name="osmo_settings">OSMo</string>
+	<string name="osmo_settings">OSMo OpenStreetMap Monitoring (beta)</string>
 	<string name="osmo_register_device">Enregistrement de l\'appareil…</string>
 	<string name="osmo_io_error">Problème de connexion OSMo : </string>
 	<string name="osmo_mode_on">Arrêter\nsession OSMo</string>
@@ -1602,7 +1601,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmo_auto_send_locations_descr">Démarrer automatiquement une session de suivi et l\'envoi des emplacements dès le démarrage de l\'application</string>
 	<string name="osmo_auto_send_locations">Démarrage automatique de session de suivi</string>
 <string name="keep_informing_never">Jamais</string>
-<string name="keep_informing_descr">Annoncer les instructions de navigation à intervalles réguliers</string>
+<string name="keep_informing_descr">Répéter les instructions de navigation à intervalles réguliers</string>
 <string name="keep_informing">Répéter les instructions de navigation</string>
 <string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
@@ -1611,9 +1610,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="share_fav_subject">Favoris partagés via OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un intinéraire entre des points</string>
 <string name="tip_recent_changes_1_8_alpha">Nouveautés de la version 1.8 :
-* Calcul d\'itinéraire entre les points d\'une trace GPX
-* Modification de la présentation des pays pour les téléchargements (possibilité de rechercher les noms locaux)
-</string>
+	* Calcul d\'itinéraire entre les points d\'une trace GPX
+	* Modification de la présentation des pays pour les téléchargements (possibilité de rechercher les noms locaux)
+	* Prise en charge de l'importation des fichiers GPX/KML et conversion KML en GPX
+    </string>
     <string name="hours_ago">heures avant</string>
     <string name="minutes_ago">minutes avant</string>
     <string name="seconds_ago">secondes avant</string>
