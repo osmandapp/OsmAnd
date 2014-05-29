@@ -168,7 +168,7 @@ public class OsMoService implements OsMoReactor {
 	
 	public String getRegisteredUserName() {
 		SessionInfo si = getCurrentSessionInfo();
-		if(si != null) {
+		if(si != null && si.username != null && si.username.length() > 0) {
 			return si.username;
 		}
 		return null;
