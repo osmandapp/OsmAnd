@@ -1713,7 +1713,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_connect">Conectase a</string>
     <string name="osmo_create_group">Crear grupo</string>
     <string name="osmo_server_operation_failed">Fallo de operación de Servidor OsMo</string>
-    <string name="osmo_activity">Monitorización Osm</string>
+    <string name="osmo_activity">Monitorización OsMo</string>
     <string name="osmo_enable_tracker">Enviar mis localizaciones</string>
     <string name="osmo_control">Acceso rápido OsMo</string>
     <string name="hours_ago">horas antes</string>
