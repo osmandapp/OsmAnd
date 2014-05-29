@@ -1809,4 +1809,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_edit_color">Zobrazovaná farba</string>
     <string name="osmo_group_info">Informácie</string>
     <string name="osmo_group">Skupina v OsMo</string>
+    <string name="osmo_sign_in">Prihlásiť sa</string>
+    <string name="osmo_activity">OpenStreetMap-Sledovanie</string>
+    <string name="osmo_connect_to_group">Spojiť so skupinou</string>
+    <string name="osmo_group_name">Názov skupiny</string>
+    <string name="osmo_connect">Pripojiť k</string>
+    <string name="osmo_create_group">Vytvoriť skupinu</string>
+    <string name="osmo_server_operation_failed">Zlyhala operácia s OsMo serverom</string>
+    <string name="osmo_enable_tracker">Odoslať moje pozície</string>
+    <string name="osmo_control">Rýchly prístup k OsMo</string>
     </resources>
