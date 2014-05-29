@@ -412,7 +412,7 @@ public class OsMoThread {
 			res.append(c);
 		}
 		
-		return res.toString().trim() +"=\n"	
+		return res.toString().trim() +"=\n";
 	}
 
 	public long getLastCommandTime() {
