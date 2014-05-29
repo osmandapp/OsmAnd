@@ -1815,4 +1815,14 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="local_index_mi_export">Export</string>
 	<string name="import_file_favourites">GPX-Datei speichern oder zu den Favoriten importieren?</string>
 	<string name="import_save">Speichern</string>
-	</resources>
+	<string name="osmo_sign_in">Anmelden</string>
+    <string name="osmo_create_groups_confirm">Um Gruppen erstellen zu können, müssen Sie ein registrierter Nutzer von OsMo sein.</string>
+    <string name="osmo_credentials_not_valid">Ihre OsMo-Anmeldedaten sind nicht gültig.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Sind sie sicher, dass Sie Ihre persönliche ID regenerieren möchten? Alle Geräte, die mit Ihnen verbunden sind, werden Ihnen nicht mehr folgen können.</string>
+    <string name="osmo_regenerate_login_ids">Nutzer-ID regenerieren</string>
+    <string name="osmo_use_server_name">Registrierter Name</string>
+    <string name="osmo_connect_to_my_nickname">Mein Nickname</string>
+    <string name="osmo_user_name">Nutzer</string>
+	<string name="color_green">grün</string>
+	
+    </resources>
