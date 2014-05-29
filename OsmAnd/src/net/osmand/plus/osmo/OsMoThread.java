@@ -407,7 +407,7 @@ public class OsMoThread {
 		for(int i = 0; i < l.length(); i++) {
 			char c = l.charAt(i);
 			if(c == '\n' || c == '=' || c == '\\') {
-			 res.append('\\')
+			 res.append('\\');
 			}
 			res.append(c);
 		}
