@@ -267,7 +267,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					if (o.has(USER_NAME)) {
 						device.serverName = o.getString(USER_NAME);
 					}
-					if (o.has(DELETED) && o.getBoolean(DELETED)) {
+					if (o.has(DELETED)) {
 						device.deleted = System.currentTimeMillis();
 					} else {
 						device.deleted = 0;
