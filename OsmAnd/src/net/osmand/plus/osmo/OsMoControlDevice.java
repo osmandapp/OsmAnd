@@ -57,7 +57,6 @@ public class OsMoControlDevice implements OsMoReactor {
 	public boolean acceptCommand(String command, String id, String data, JSONObject obj, OsMoThread tread) {
 		if(command.equals("REMOTE_CONTROL")) {
 			if(data.equals("BATTERY_INFO")) {
-				String rdata = getBatteryLevel()+"";
 				try {
 				   service.pushCommand("BATTERY_INFO|"+getBatteryLevel().toString());
 				} catch(JSONException e) {
@@ -66,7 +65,7 @@ public class OsMoControlDevice implements OsMoReactor {
 			} else if(data.equals("VIBRATE")) {
 				Vibrator v = (Vibrator) app.getSystemService(Context.VIBRATOR_SERVICE);
 				 // Vibrate for 500 milliseconds
-				 v.vibrate(500);
+				 v.vibrate(1000);
 			} else if(data.equals("STOP_TRACKING")) {
 				tracker.disableTracker();
 				if (app.getNavigationService() != null) {
