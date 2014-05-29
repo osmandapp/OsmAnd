@@ -1531,4 +1531,15 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	
     <string name="osmo_edit_device">Ändra användaregenskaper</string>
     <string name="osmo_edit_color">Visningsfärg</string>
-    </resources>
+    <string name="osmo_sign_in">Logga in</string>
+    <string name="osmo_create_groups_confirm">För att kunna skapa grupper måste du registrera dig på OsMo.</string>
+    <string name="osmo_credentials_not_valid">Dina OsMo-meriter är ogiltiga.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Är det säkert att du vill generera om personliga id? Alla enheter som är kopplade till dig kommer inte att kunna följa dig längre.</string>
+    <string name="osmo_regenerate_login_ids">Generera om användar-id</string>
+    <string name="osmo_cancel_moving_target">Avbryt rörligt mål</string>
+    <string name="osmo_center_location">Centrera på skärmen</string>
+    <string name="osmo_set_moving_target">Ange som rörlig mål</string>
+    <string name="osmo_use_server_name">Registrerat namn</string>
+    <string name="osmo_connect_to_my_nickname">Mitt nick</string>
+    <string name="osmo_user_name">Användare</string>
+	</resources>
