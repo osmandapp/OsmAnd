@@ -487,8 +487,8 @@ public class VoiceRouter {
 			if ((player != null) && (!"de".equals(player.getLanguage()))){
 				pn = pn.replace("\u00df", "ss"); // Helps non-German tts voices to pronounce German Strasse (=street)
 			}
-			if ((player != null) && ("en".equals(player.getLanguage()))){
-				pn = pn.replace("SR", "1 2");    // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English tts voice
+			if ((player != null) && ("en".startsWith(player.getLanguage()))){
+				pn = pn.replace("SR", "S R");    // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English tts voice
 			}
 		}
 		return pn;
