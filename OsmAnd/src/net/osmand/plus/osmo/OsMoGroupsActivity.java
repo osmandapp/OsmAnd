@@ -629,6 +629,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private void createGroup() {
 		if(osMoPlugin.getService().getRegisteredUserName() == null) {
 			signin();
+			return;
 		}
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.osmo_create_group);

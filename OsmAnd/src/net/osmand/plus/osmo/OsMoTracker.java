@@ -42,7 +42,7 @@ public class OsMoTracker implements OsMoReactor {
 		if (!isEnabledTracker()) {
 			return null;
 		}
-		return "http://test1342.osmo.mobi/u/" + sessionURL;
+		return OsMoService.TRACK_URL + sessionURL;
 	}
 	
 	public boolean isEnabledTracker() {
