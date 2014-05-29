@@ -30,7 +30,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 	private Preference trackerId;
 	private CheckBoxPreference sendLocationsref;
 	
-	public static final int[] SECONDS = new int[] {1, 2, 3, 5, 10, 15, 30, 60, 90};
+	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 30, 60, 90};
 	public static final int[] MINUTES = new int[] {2, 3, 5};
 	
 	

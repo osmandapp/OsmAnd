@@ -345,6 +345,12 @@ public class OsMoThread {
 	}
 
 	private void writeCommands() throws UnsupportedEncodingException, IOException {
+		if(authorized == 0) {
+			String auth = "TOKEN|"+ sessionInfo.token;
+			cmd(auth, true);
+			authorized = 1;
+			pendingSendCommand =  ByteBuffer.wrap(prepareCommand(auth).toString().getBytes("UTF-8"));
+		} 
 		if (pendingSendCommand == null) {
 			pendingSendCommand = getNewPendingSendCommand();
 		}
@@ -362,12 +368,6 @@ public class OsMoThread {
 	
 
 	private ByteBuffer getNewPendingSendCommand() throws UnsupportedEncodingException {
-		if(authorized == 0) {
-			String auth = "TOKEN|"+ sessionInfo.token;
-			cmd(auth, true);
-			authorized = 1;
-			return ByteBuffer.wrap(prepareCommand(auth).toString().getBytes("UTF-8"));
-		}
 		if(authorized == 1) {
 			return null;
 		}
@@ -385,7 +385,6 @@ public class OsMoThread {
 				cmd(PING_CMD, true);
 				return ByteBuffer.wrap(prepareCommand(PING_CMD).toString().getBytes("UTF-8"));
 			}
-			
 		}
 		return null;
 	}
