@@ -1743,7 +1743,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	Voll funktionsfähige Gruppen müssen auf der Internetseite erstellt werden, auf diese haben nur registrierte Nutzer Zugriff.
 	Weitere Informationen unter: http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (Erweiterte Live-Überwachung)</string>
-    <string name="osmo_settings">OsMo</string>
+    <string name="osmo_settings">OsMo OpenStreetMap-Überwachung (beta)</string>
    	<string name="keep_informing_never">Niemals</string>
     <string name="keep_informing_descr">Navigationsanweisungen in regelmäßigen Abständen wiederholen</string>
     <string name="keep_informing">Wiederholen von Navigationsanweisungen</string>
@@ -1759,6 +1759,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="tip_recent_changes_1_8_alpha">Änderungen in 1.8:
 	* Berechnen von Routen zwischen Punkten eines GPX-Tracks möglich
 	* Änderung der Darstellung der herunterladbaren Länder (Unterstützung der Suche mittels lokaler Namen)
+	* Unterstützung von GPX/KML-Import (Umwandeln von KML zu GPX)
     </string>
     <string name="osmo_auto_send_locations_descr">Aufzeichnung automatisch starten und Standorte nach dem Starten der Anwendung senden</string>
     <string name="osmo_auto_send_locations">Aufzeichnung automatisch starten</string>
@@ -1771,7 +1772,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_conn_successfull">Verbindung erfolgreich: %1$s </string>
     <string name="osmo_mode_restart">OsMo-Sitzung neustarten</string>
     <string name="osmo_settings_debug">Dubug-Information</string>
-    <string name="osmo_connect_to_device_name">Gerätename</string>
+    <string name="osmo_connect_to_device_name">Nutzername</string>
     <string name="osmo_connect_to_device_tracker_id">Aufzeichnungs-ID</string>
     <string name="osmo_connect_to_device">Mit Gerät koppeln</string>
     <string name="osmo_join_group">Gruppe beitreten</string>
@@ -1788,7 +1789,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_edit_device">Ändern der Nutzereinstellungen</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo-Gruppe</string>
-    <string name="osmo_group_share">Um eine Verbindung zur Gruppe %2$s herzustellen, bitte die Gruppen-ID (%1$s) angeben</string>
+    <string name="osmo_group_share">Um eine Verbindung zur Gruppe %2$s herzustellen, bitte die Gruppen-ID (%1$s) angeben oder (%3$s) anklicken.</string>
     <string name="osmo_share_connect_device">Diesem Gerät permanent folgen</string>
     <string name="osmo_share_current_session">Aktuelle Sitzung im Browser teilen</string>
     <string name="osmo_session_not_available">Sitzung nicht verfügbar, bitte überprüfen, ob \'Standort senden\'\ aktiviert ist.</string>
@@ -1807,7 +1808,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_connect">Verbinden mit</string>
     <string name="osmo_create_group">Gruppe erstellen</string>
     <string name="osmo_server_operation_failed">OsMo-Server-Vorgang fehlgeschlagen</string>
-    <string name="osmo_activity">OsMo-Überwachung</string>
+    <string name="osmo_activity">OpenStreetMap-Überwachung</string>
     <string name="osmo_enable_tracker">meine Standorte senden</string>
     <string name="osmo_control">OsMo-Schnellzugriff</string>
     <string name="osmo_connected_devices">Verbundene Geräte</string>
