@@ -1818,13 +1818,13 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_settings_debug">Fejlsøgningsinformation</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo gruppe</string>
-    <string name="osmo_group_share">For at oprette forbindelse til gruppen %2$s, angiv gruppe-ID (%1$s)</string>
+    <string name="osmo_group_share">For at oprette forbindelse til gruppen %2$s, angiv gruppe-ID (%1$s) eller klik på %3$s.</string>
     <string name="osmo_share_connect_device">Følg enheden permanent</string>
     <string name="osmo_share_current_session">Del den aktuelle session i browser</string>
     <string name="osmo_session_not_available">Sessionen er ikke tilgængelig, kontroller at \'Send placering\' er til.</string>
     <string name="osmo_share_session">Del sessionen</string>
     <string name="osmo_session_id_share">Session url til at spore enhed (%1$s)</string>
-    <string name="osmo_tracker_id_share">For at oprette forbindelse til målenheden %2$s, angiv sporings-ID (%1$s)</string>
+    <string name="osmo_tracker_id_share">For at oprette forbindelse til målenheden %2$s, klik på linket %3$s eller angiv sporings-ID (%1$s)</string>
     <string name="osmo_track_interval">Logningsinterval</string>
 	<string name="osmo_track_interval_descr">Vælg tidsinterval til at sende placering</string>
     <string name="int_days">dage</string>
@@ -1838,7 +1838,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_connect">Opret forbindelse til</string>
     <string name="osmo_create_group">Opret gruppe</string>
     <string name="osmo_server_operation_failed">Osmo Server operation mislykkedes</string>
-    <string name="osmo_activity">OsMo overvågning</string>
+    <string name="osmo_activity">OpenStreetMap-Monitoring</string>
     <string name="osmo_enable_tracker">Send placeringer</string>
     <string name="osmo_control">OsMo hurtig adgang</string>
     <string name="local_index_mi_export">Eksport</string>
