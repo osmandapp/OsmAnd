@@ -132,7 +132,7 @@
         <activity android:name="net.osmand.plus.osmo.SettingsOsMoActivity" android:configChanges="keyboardHidden|orientation"></activity>
         <activity android:name="net.osmand.plus.osmo.OsMoGroupsActivity">
             <intent-filter>
-                <data android:scheme="http" android:host="m.osmo.mobi" />
+                <data android:scheme="http" android:host="z.osmo.mobi" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE"></category>
