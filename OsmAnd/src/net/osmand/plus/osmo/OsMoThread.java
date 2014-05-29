@@ -375,8 +375,7 @@ public class OsMoThread {
 			String l = s.nextSendCommand(this);
 			if (l != null) {
 				cmd(l, true);
-				StringBuilder res = prepareCommand(l);
-				return ByteBuffer.wrap(res.toString().getBytes("UTF-8"));
+				return ByteBuffer.wrap(prepareCommand(l).toString().getBytes("UTF-8"));
 			}
 		}
 		if(System.currentTimeMillis() - lastSendCommand > TIMEOUT_TO_PING) {
@@ -402,7 +401,7 @@ public class OsMoThread {
 		return sessionInfo;
 	}
 
-	private StringBuilder prepareCommand(String l) {
+	private String prepareCommand(String l) {
 		StringBuilder res = new StringBuilder(l.length());
 		for(int i = 0; i < l.length(); i++) {
 			char c = l.charAt(i);
@@ -412,7 +411,7 @@ public class OsMoThread {
 			res.append(c);
 		}
 		
-		return res.toString().trim() +"=\n";
+		return res.toString().trim() + "=\n";
 	}
 
 	public long getLastCommandTime() {
