@@ -1846,4 +1846,17 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	
     <string name="osmo_edit_device">Cambia le proprietà dell\'utilizzatore</string>
     <string name="osmo_edit_color">Colore visualizzato</string>
+    <string name="osmo_sign_in">Autenticati</string>
+    <string name="osmo_create_groups_confirm">Per creare dei gruppi è necessario essere utenti registrati di OsMo.</string>
+    <string name="osmo_credentials_not_valid">Le tue credenziali di OsMo non sono valide.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Sei sicuro di voler rigenerare gli id personali? Tutti i dispositivi, collegati a te, non saranno più in grado di essere tracciati.</string>
+    <string name="osmo_regenerate_login_ids">Rigenera l'id</string>
+    <string name="osmo_cancel_moving_target">Cancella l'obiettivo mobile</string>
+    <string name="osmo_center_location">Centro nello schermo</string>
+    <string name="osmo_set_moving_target">Imposta come obiettivo mobile</string>
+    <string name="osmo_use_server_name">Nome registrato</string>
+    <string name="osmo_connect_to_my_nickname">Mio nickname</string>
+    <string name="osmo_user_name">Utente</string>
+	<string name="color_green">verde</string>
+	
     </resources>
