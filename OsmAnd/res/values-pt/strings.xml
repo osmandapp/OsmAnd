@@ -748,7 +748,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="overlay_transparency">Transparência da Sobreposição</string>
   <string name="map_transparency_descr">Modificar transparência do mapa base</string>
   <string name="map_transparency">Transparência do mapa base</string>
-  <string name="layer_underlay">Uapa de camada inferior…</string>
+  <string name="layer_underlay">Mapa de camada inferior…</string>
   <string name="map_underlay">Mapa de camada inferior</string>
   <string name="map_underlay_descr">Escolha mapa da camada inferior</string>
   <string name="layer_overlay">Mapa da camada superior…</string>
@@ -1518,7 +1518,8 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="osmodroid_unseek">Não procurar objecto</string>
     <string name="route_descr_destination"> </string>
     <string name="osmo_sign_in">Entrar</string>
-    <string name="osmo_create_groups_confirm">Para poder criar grupos tem de ser um utilizador registado de OsMo</string>
-    <string name="osmo_credentials_not_valid">Os seus credenciais de osmo não são válidos</string>
-    <string name="osmo_regenerate_login_ids_confirm">Tem a certeza que quer regenerar os identificadores pessoais ? Todos os dispositivos ligados a si não serão capazes de continuar a seguir-lo</string>
+    <string name="osmo_create_groups_confirm">Para poder criar grupos tem de ser um utilizador registado de OsMo.</string>
+    <string name="osmo_credentials_not_valid">Os seus credenciais de osmo não são válidos.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Tem a certeza que quer regenerar os identificadores pessoais ? Todos os dispositivos ligados a si não serão capazes de continuar a seguir-lo.</string>
+    <string name="osmo_regenerate_login_ids">Regenerar identificação do utilizador</string>
     </resources>
