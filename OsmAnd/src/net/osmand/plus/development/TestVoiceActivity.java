@@ -171,7 +171,7 @@ public class TestVoiceActivity extends SherlockActivity {
 		addButton(ll, "Prepare to turn slighlty left after 850m then bear right", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 850, street(p, "")).then().bearRight(street(p, "")));
 		addButton(ll, "After 1050m turn sharply left onto 'Hauptstrasse'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 1050, street(p, "Hauptstrasse")));
 		addButton(ll, "Turn left onto 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "Main Street")));
-		addButton(ll, "Prepare to turn right after 320m onto 'Mini'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 320, street(p, "Mini")) );
+		addButton(ll, "Prepare to turn right after 320m onto 'SR 80'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 320, street(p, "SR 80")) );
 		addButton(ll, "After 370m turn slightly right onto 'F23' 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Main street", "F23")));
 		addButton(ll, "Turn sharply right onto 'Main Street' then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "Main Street")).then().bearLeft(street(p, "")));
 
