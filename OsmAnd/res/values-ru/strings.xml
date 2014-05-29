@@ -1605,7 +1605,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_join_group">Присоединиться к группе</string>
     <string name="osmo_new_device">Подключиться к устройству</string>
     <string name="osmo_connected_devices">Подключённые устройства</string>
-    <string name="osmo_groups">Группы OsMo/Устройства</string>
+    <string name="osmo_groups">Управление OsMo</string>
     <string name="osmo_connect_to_device">Подключиться к устройству</string>
     <string name="osmo_auth_pending">Ожидание авторизации...</string>
     <string name="osmo_conn_successfull">Соединение установлено: %1$s </string>
@@ -1619,14 +1619,14 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_settings_debug">Отладочная информация</string>
     <string name="osmo_connect_to_device_tracker_id">ID трекера</string>
     <string name="osmo_auto_send_locations_descr">Автоматически стартовать сессию трекера и отправлять местоположение после запуска приложения</string>
-    <string name="osmo_auto_send_locations">Автоматически стартовать сессию трекера</string>
+    <string name="osmo_auto_send_locations">Автоматически запускать мониторинг</string>
     <string name="osmo_tracker_id">Персональный ID трекера</string>
-    <string name="osmo_session_token">Маркер сессии: %1$s</string>
+    <string name="osmo_session_token">Токен: %1$s</string>
     <string name="tip_recent_changes_1_8_alpha">Изменения в 1.8:
 	* Расчёт маршрута между маршрутными точками трека GPX
 	* Изменённое расположение стран для загрузок (поддерживается местный поиск имён)
     </string>
-    <string name="osmo_tracker_id_descr">Выберите что бы посмотреть или поделиться ID трекера.
+    <string name="osmo_tracker_id_descr">Выберите чтобы посмотреть или поделиться ID трекера.
 	Используя ID трекера присоединённые устройства будут доступны для мониторинга всех передвижений этого устройства! Для отключения выберите опцию восстановления.</string>
     <string name="index_item_world_bitcoin_payments">Мировые пункты обмена bitcoin</string>
 	</resources>
