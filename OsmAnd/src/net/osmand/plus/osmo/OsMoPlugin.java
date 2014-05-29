@@ -40,7 +40,6 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	private OsMoGroups groups;
 	private BaseMapWidget osmoControl;
 	private OsMoPositionLayer olayer;
-	private Object followTrackerId;
 
 	// 2014-05-27 23:11:40
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -288,15 +287,6 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				}).reg();
 	}
 	
-	public Object getFollowTrackerId() {
-		return followTrackerId;
-	}
-	
-	public void setMapFollowTrackerId(OsMoDevice d) {
-		if(olayer != null) {
-			OsMoPositionLayer.setFollowTrackerId(d);
-		}
-	}
 
 	@Override
 	public String getId() {

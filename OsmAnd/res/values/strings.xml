@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmo_follow">Follow</string>
     <string name="osmo_sign_in">Sign in</string>
     <string name="osmo_create_groups_confirm">In order to create groups you need to be a registered user of OsMo.</string>
     <string name="osmo_credentials_not_valid">Your osmo credentials are not valid.</string>

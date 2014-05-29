@@ -238,7 +238,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		if(sameDestId && l != null) {
 			TargetPointsHelper targets = map.getMyApplication().getTargetPointsHelper();
 			RoutingHelper rh = map.getMyApplication().getRoutingHelper();
-			double dist = 0.1;
+			double dist = 1;
 			if(rh.isRouteBeingCalculated()) {
 				dist = 100;
 			} else if(rh.isRouteCalculated()) {

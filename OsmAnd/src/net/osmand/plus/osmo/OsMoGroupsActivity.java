@@ -102,6 +102,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	public static final int GROUP_INFO = 8;
 	protected static final int SETTINGS_ID = 9;
 	protected static final int SETTINGS_DEV_ID = 10;
+	protected static final int TRACK_DEV_ID = 11;
 	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	private static final long RECENT_THRESHOLD = 60000;
 
@@ -353,6 +354,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					createMenuItem(menu, SETTINGS_DEV_ID, R.string.settings, R.drawable.ic_action_settings_light, R.drawable.ic_action_settings_dark,
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
 				}
+				if(device != null && device.getLastLocation() != null) {
+					MenuItem menuItem = createMenuItem(menu, TRACK_DEV_ID, R.string.osmo_set_moving_target, R.drawable.ic_action_flage_light, R.drawable.ic_action_flage_dark,
+						MenuItem.SHOW_AS_ACTION_IF_ROOM );
+					menuItem.setTitleCondensed(getString(R.string.osmo_follow));
+				}
 				if(group != null) {
 					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_info_light, R.drawable.ic_action_info_dark,
 							MenuItem.SHOW_AS_ACTION_IF_ROOM);	
@@ -393,7 +399,12 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-				if(item.getItemId() == SETTINGS_DEV_ID) {
+				if(item.getItemId() == TRACK_DEV_ID) {
+					if(device != null) {
+						OsMoPositionLayer.setFollowDestination(device);
+						MapActivity.launchMapActivityMoveToTop(OsMoGroupsActivity.this);
+					}
+				} else if(item.getItemId() == SETTINGS_DEV_ID) {
 					showSettingsDialog(device);
 				} else if(item.getItemId() == DELETE_ACTION_ID ) {
 					Builder bld = new AlertDialog.Builder(OsMoGroupsActivity.this);
@@ -424,7 +435,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 						Location location = device.getLastLocation();
 						app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), app.getSettings().getLastKnownMapZoom(), 
 								null, device.getVisibleName(), device);
-						osMoPlugin.setMapFollowTrackerId(device);
+						OsMoPositionLayer.setFollowTrackerId(device);
 						MapActivity.launchMapActivityMoveToTop(OsMoGroupsActivity.this);
 					}
 				} else if(item.getItemId() == ON_OFF_ACTION_ID) {
