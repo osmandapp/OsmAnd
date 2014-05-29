@@ -272,6 +272,10 @@ public class OsMoService implements OsMoReactor {
 
 	@Override
 	public void reconnect() {
+		
+	}
+	
+	public void reconnectToServer() {
 		if(thread != null) {
 			thread.reconnect();
 		}

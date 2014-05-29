@@ -31,7 +31,7 @@ public class OsMoIntentHandler extends AsyncTask<Intent, Void, String> {
 						String pwd = data.getQueryParameter("p");
 						app.getSettings().OSMO_USER_NAME.set(user);
 						app.getSettings().OSMO_USER_PWD.set(pwd);
-						plugin.getService().reconnect();
+						plugin.getService().reconnectToServer();
 					} else if(schemeSpecific.equals("join")) {
 						String gid = data.getQueryParameter("id");
 						String name = data.getQueryParameter("name");
@@ -41,7 +41,11 @@ public class OsMoIntentHandler extends AsyncTask<Intent, Void, String> {
 						plugin.getGroups().joinGroup(gid, name, app.getSettings().OSMO_USER_NAME.get());
 					} else if(schemeSpecific.equals("connect")) {
 						String gid = data.getQueryParameter("id");
-						plugin.getGroups().addConnectedDevice(gid, gid, 0);
+						String name = data.getQueryParameter("name");
+						if(name == null) {
+							name = gid;
+						}
+						plugin.getGroups().addConnectedDevice(gid, name, 0);
 					}
 				}
 				return null;

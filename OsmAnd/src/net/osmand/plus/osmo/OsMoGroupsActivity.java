@@ -590,7 +590,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 			dlg.setTitle(getString(R.string.osmo_tracker_id));
 			dlg.viewContent(trackerId);
-			dlg.shareURLOrText(url, getString(R.string.osmo_tracker_id_share, trackerId, name), null);
+			dlg.shareURLOrText(url, getString(R.string.osmo_tracker_id_share, trackerId, name, url), null);
 			dlg.showDialog();
 		}
 	}
