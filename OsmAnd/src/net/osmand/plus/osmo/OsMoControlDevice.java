@@ -35,20 +35,15 @@ public class OsMoControlDevice implements OsMoReactor {
 	    Intent batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 	    int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
 	    int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-	    int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
-	    int temperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1);
-	    int voltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1);
+	    int plugged = batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+	    int temperature = batteryIntent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1);
+	    int voltage = batteryIntent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1);
 				
 	    JSONObject postjson = new JSONObject();
             postjson.put("batteryprocent",  (level == -1 || scale == -1)? 50.0f : ((float)level / (float)scale) * 100.0f);
             postjson.put("temperature", temperature);
             postjson.put("voltage", voltage);
             postjson.put("plugged", plugged);
-
-	    // Error checking that probably isn't needed but I added just in case.
-	    if(level == -1 || scale == -1) {
-	        return 50.0f;
-	    }
 
 	    return postjson; 
 	}
