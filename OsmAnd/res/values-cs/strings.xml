@@ -1500,4 +1500,74 @@ s často kladenými otázkami.</string>
         Anonymní skupiny jsou omezeny na počet dní a některými vlastnostmi, například nemají dálkové ovládání a skupinového správce. 
         Plně funkční skupiny se vytvářejí na webstránce a jsou přístupné pouze pro registrované uživatele.
         Prosím čtěte více na http://osmo.mobi.</string>
-    </resources>
+    <string name="color_red">červená</string>
+	<string name="color_pink">růžová</string>
+	<string name="color_orange">oranžová</string>
+	<string name="color_brown">hnědá</string>
+	<string name="color_yellow">žlutá</string>
+	<string name="color_lightblue">světle modrá</string>
+	<string name="color_blue">modrá</string>
+	<string name="color_magenta">purpurová</string>
+	
+    <string name="osmo_edit_device">Změnit uživatelské vlastnosti</string>
+    <string name="osmo_edit_color">Zobrazit barvu</string>
+    <string name="osmo_group_info">Informace</string>
+    <string name="osmo_group">Skupina OsMo</string>
+    <string name="osmo_group_share">Aby bylo možné se připojit ke skupině %2$s, určete id skupiny (%1$s)</string>
+    <string name="osmo_share_connect_device">Trvale sledovat toto zařízení</string>
+    <string name="osmo_share_current_session">Sdílet aktuální relaci v prohlížeči</string>
+    <string name="osmo_session_not_available">Relace není k dispozici, prosím zkontrolujte že je zapnuta volba \'Odesílat pozici\'.</string>
+    <string name="osmo_share_session">Sdílet relaci</string>
+    <string name="osmo_session_id_share">Relace URL k sledování zařízení (%1$s)</string>
+    <string name="osmo_tracker_id_share">Aby bylo možné připojit cílové zařízení %2$s, určete ID sledovacího zařízení (%1$s)</string>
+    <string name="osmo_track_interval">Interval logování</string>
+	<string name="osmo_track_interval_descr">Vyberte časový interval odesílání polohy</string>
+    <string name="int_days">dnů</string>
+    <string name="osmo_connect_menu">Připojit</string>
+    <string name="osmo_expire_group">Vyprší za</string>
+    <string name="osmo_group_description">Popis</string>
+    <string name="osmo_group_policy">Politika</string>
+    <string name="osmo_connect_to_device_tracker_id">ID sledovacího zařízení</string>
+    <string name="osmo_connect_to_device_name">Jméno uživatele</string>
+    <string name="osmo_connect_to_group_id">ID skupiny</string>
+    <string name="osmo_group_name">Název skupiny</string>
+    <string name="osmo_connect_to_device">Připojit k zařízení</string>
+    <string name="osmo_connect_to_group">Připojit ke skupině</string>
+    <string name="osmo_connect">Připojit k</string>
+    <string name="osmo_create_group">Vytvořit skupinu</string>
+    <string name="osmo_server_operation_failed">Chyba operace na serveru OsMo</string>
+    <string name="osmo_activity">OsMo monitorování</string>
+    <string name="osmo_enable_tracker">Odeslat mou pozici</string>
+    <string name="osmo_control">OsMo rychlý přístup</string>
+    <string name="hours_ago">hodin dozadu</string>
+    <string name="minutes_ago">munut dozadu</string>
+    <string name="seconds_ago">sekund dozadu</string>
+    <string name="osmo_connected_devices">Připojená zařízení</string>
+    <string name="osmo_groups">OsMo skupiny/zařízení</string>
+    <string name="osmo_auto_send_locations_descr">Automaticky spustit relaci sledování a odesílat polohu po spuštení aplikace</string>
+    <string name="osmo_auto_send_locations">Automaticky spustit relaci sledování</string>
+    <string name="osmo_tracker_id">Osobní ID sledovacího zařízení</string>
+    <string name="osmo_tracker_id_descr">Klikněte pro zobrazení nebo sdílení ID sledovacího zařízení.↵
+        Pomocí ID budou připojená zařízení schopná sledovat všechny pohyby tohoto zařízení! Pro odpojení použijte možnost "Přegenerovat".</string>
+    <string name="osmo_session_token">Token relace : %1$s</string>
+    <string name="osmo_auth_pending">Čekání na autorizaci...</string>
+    <string name="osmo_locations_sent">Odeslané polohy %1$d (v zásobníku %2$d) </string>
+    <string name="osmo_conn_successfull">Vytvořená spojení : %1$s </string>
+    <string name="osmo_io_error">Problém s připojením OsMo: </string>
+    <string name="osmo_settings_uuid">Jedinečné ID zařízení</string>
+    <string name="interrupt_music_descr">Přerušit hudbu při oznámení</string>
+	<string name="interrupt_music">Přerušit hudbu</string>
+	<string name="share_route_as_gpx">Sdílet trasu jako GPX soubor</string>
+	<string name="share_route_subject">Sdílená trasa přes OsmAnd</string>
+	<string name="arrival_distance">Oznámení příjezdu</string>
+    <string name="arrival_distance_descr">Jak brzo oznamovat příjezd do cíle?</string>
+    <string name="keep_informing_never">Nikdy</string>
+    <string name="keep_informing_descr">Znovu opakovat navigační pokyny v pravidelných intervalech</string>
+    <string name="keep_informing">Opakovat navigační pokyny</string>
+	<string name="local_index_mi_export">Exportovat</string>
+	<string name="import_file_favourites">Uložit jako GPX soubor nebo importovat do oblíbených?</string>
+	<string name="import_save">Uložit</string>
+	<string name="share_fav">Sdílet</string>
+	<string name="share_fav_subject">Oblíbené sdílené přes OsmAnd</string>
+	<string name="navigation_intent_invalid">Neplatný formát : %s</string>
+</resources>
