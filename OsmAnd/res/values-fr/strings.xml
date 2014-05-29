@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -315,7 +315,7 @@
 </string>
   <string name="tip_initial">Conseils et astuces</string>
   <string name="tip_initial_t">OsmAnd est une application de navigation avec beaucoup de fonctionnalités.
-		\n\nPour une introduction générale, il y a quelques trucs et astuces disponibles via \'Menu\'→\'Conseils\' depuis l'écran principal.
+		\n\nPour une introduction générale, il y a quelques trucs et astuces disponibles via \'Menu\'→\'Conseils\' depuis l\'écran principal.
 	</string>
   <string name="next_button">Suivant</string>
   <string name="previous_button">Précédent</string>
@@ -1234,7 +1234,7 @@
     <string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions) est une application de cartographie et de navigation avec accès aux données libres d\'OpenStreetMap (OSM), à la couverture mondiale de haute qualité. Toutes les données cartographiques peuvent être stockées sur la carte mémoire de votre appareil pour une utilisation hors-ligne. OsmAnd propose une navigation par GPS, avec guidage visuel et vocal, pour la voiture, le vélo ou le piéton. Les fonctions principales peuvent être assurées aussi bien en ligne qu\'hors-ligne (sans connexion Internet).
 
-OsmAnd+ est la version payante de l\'application. En l'achetant, vous apportez votre support au projet, vous financez le développement de nouvelles fonctionnalités et vous recevez les dernières mises à jour. Vous pouvez tester l\'application avant de l\'acheter, en installant la version gratuite de l\'application, OsmAnd.
+OsmAnd+ est la version payante de l\'application. En l\'achetant, vous apportez votre support au projet, vous financez le développement de nouvelles fonctionnalités et vous recevez les dernières mises à jour. Vous pouvez tester l\'application avant de l\'acheter, en installant la version gratuite de l\'application, OsmAnd.
 
 Principales caractéristiques :
 
@@ -1582,9 +1582,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="share_route_subject">Itinéraire partagé via OsmAnd</string>
 	<string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
 	<string name="osmo_settings_descr">Configurer les paramètres de suivi et définir son canal de suivi personnel</string>
-	<string name="osmo_plugin_description">OpenStreetMap-Monitoring - Suivi en temps réel. Ce système offre la possibilité de suivre d'autres appareils ou d'être suivi.
-	Créer des groupes anonymes, partager sa position et communiquer avec d'autres. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent.
-	Les groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d'administrateur de groupe.
+	<string name="osmo_plugin_description">OpenStreetMap-Monitoring - Suivi en temps réel. Ce système offre la possibilité de suivre d\'autres appareils ou d\'être suivi.
+	Créer des groupes anonymes, partager sa position et communiquer avec d\'autres. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent.
+	Les groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe.
 	Des groupes totalement fonctionnels peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès.
 	Pour en savoir plus: http://osmo.mobi</string>
 	<string name="osmo_plugin_name">OsMo (Suivi en temps réel)</string>
@@ -1616,7 +1616,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="tip_recent_changes_1_8_alpha">Nouveautés de la version 1.8 :
 	* Calcul d\'itinéraire entre les points d\'une trace GPX
 	* Modification de la présentation des pays pour les téléchargements (possibilité de rechercher les noms locaux)
-	* Prise en charge de l'importation des fichiers GPX/KML et conversion KML en GPX
+	* Prise en charge de l\'importation des fichiers GPX/KML et conversion KML en GPX
     </string>
     <string name="hours_ago">heures avant</string>
     <string name="minutes_ago">minutes avant</string>
@@ -1632,16 +1632,16 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_tracker_id">Identifiant personnel de suivi</string>
 <string name="osmo_group_info">Info</string>
     <string name="osmo_group">Groupe OsMo</string>
-    <string name="osmo_group_share">Pour vous connecter au groupe %2$s, veuillez spécifier l'identifiant du groupe (%1$s)</string>
+    <string name="osmo_group_share">Pour vous connecter au groupe %2$s, veuillez spécifier l\'identifiant du groupe (%1$s)</string>
     <string name="osmo_share_connect_device">Autoriser le suivi de cet appareil de façon permanente</string>
     <string name="osmo_share_current_session">Partager la session courante dans le navigateur</string>
     <string name="osmo_session_not_available">Session non disponible, veuillez vérifier que \'Envoyer mes positions\' est activé.</string>
     <string name="osmo_enable_tracker">Envoyer mes positions</string>
     <string name="osmo_share_session">Partager la session</string>
-    <string name="osmo_session_id_share">URL de la session pour suivre l'appareil (%1$s)</string>
-    <string name="osmo_tracker_id_share">Pour vous connecter à l'appareil cible %2$s, veuillez spécifier l'identifiant de suivi (%1$s)</string>
-    <string name="osmo_track_interval">Fréquence d'enregistrement</string>
-	<string name="osmo_track_interval_descr">Choisir la fréquence d'envoi de la position</string>
+    <string name="osmo_session_id_share">URL de la session pour suivre l\'appareil (%1$s)</string>
+    <string name="osmo_tracker_id_share">Pour vous connecter à l\'appareil cible %2$s, veuillez spécifier l\'identifiant de suivi (%1$s)</string>
+    <string name="osmo_track_interval">Fréquence d\'enregistrement</string>
+	<string name="osmo_track_interval_descr">Choisir la fréquence d\'envoi de la position</string>
     <string name="int_days">jours</string>
     <string name="osmo_connect_menu">Connecter</string>
     <string name="osmo_expire_group">Expire dans</string>
@@ -1668,6 +1668,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="color_blue">Bleu</string>
 	<string name="color_magenta">Magenta</string>
 	
-    <string name="osmo_edit_device">Modifier les caractéristiques de l'utilisateur</string>
+    <string name="osmo_edit_device">Modifier les caractéristiques de l\'utilisateur</string>
     <string name="osmo_edit_color">Afficher la couleur</string>
     </resources>

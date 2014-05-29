@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
@@ -1791,7 +1791,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_group_share">Um eine Verbindung zur Gruppe %2$s herzustellen, bitte die Gruppen-ID (%1$s) angeben</string>
     <string name="osmo_share_connect_device">Diesem Gerät permanent folgen</string>
     <string name="osmo_share_current_session">Aktuelle Sitzung im Browser teilen</string>
-    <string name="osmo_session_not_available">Sitzung nicht verfügbar, bitte überprüfen, ob \'Standort senden'\ aktiviert ist.</string>
+    <string name="osmo_session_not_available">Sitzung nicht verfügbar, bitte überprüfen, ob \'Standort senden\'\ aktiviert ist.</string>
     <string name="osmo_share_session">Sitzung teilen</string>
     <string name="osmo_session_id_share">Sitzungs-URL zur Geräte-Verfolgung (%1$s)</string>
     <string name="osmo_track_interval">Aufzeichnungs-Intervall</string>
