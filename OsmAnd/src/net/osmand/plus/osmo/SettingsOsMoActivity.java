@@ -126,7 +126,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 				dlg.setTitle(getString(R.string.osmo_tracker_id));
 				dlg.setAction(getString(R.string.osmo_regenerate_login_ids), getRegenerateAction());
 				dlg.viewContent(ci.trackerId);
-				String url = "osmo://connect?id="+Uri.encode(ci.trackerId);
+				String url = OsMoService.SHARE_TRACKER_URL+Uri.encode(ci.trackerId);
 				dlg.shareURLOrText(ci.trackerId, getString(R.string.osmo_tracker_id_share, ci.trackerId, "", url), null);
 				dlg.showDialog();
 			}

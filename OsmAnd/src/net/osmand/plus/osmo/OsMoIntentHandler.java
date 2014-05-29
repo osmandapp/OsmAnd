@@ -24,22 +24,23 @@ public class OsMoIntentHandler extends AsyncTask<Intent, Void, String> {
 			for (Intent intent : params) {
 				String scheme = intent.getScheme();
 				Uri data = intent.getData();
-				if ("osmo".equals(scheme)) {
-					final String schemeSpecific = data.getSchemeSpecificPart();
-					if(schemeSpecific.equals("login")) {
+				if ("http".equals(scheme) && data.getHost().equals("osmo.mobi")) {
+					String path = data.getPath();
+					String lastPath = path.substring(path.lastIndexOf('/') + 1);
+					if(lastPath.equals("login")) {
 						String user = data.getQueryParameter("u");
 						String pwd = data.getQueryParameter("p");
 						app.getSettings().OSMO_USER_NAME.set(user);
 						app.getSettings().OSMO_USER_PWD.set(pwd);
 						plugin.getService().reconnectToServer();
-					} else if(schemeSpecific.equals("join")) {
+					} else if(lastPath.equals("join")) {
 						String gid = data.getQueryParameter("id");
 						String name = data.getQueryParameter("name");
 						if(name == null) {
 							name = "";
 						}
 						plugin.getGroups().joinGroup(gid, name, app.getSettings().OSMO_USER_NAME.get());
-					} else if(schemeSpecific.equals("connect")) {
+					} else if(lastPath.equals("connect")) {
 						String gid = data.getQueryParameter("id");
 						String name = data.getQueryParameter("name");
 						if(name == null) {

@@ -38,6 +38,8 @@ public class OsMoService implements OsMoReactor {
 	private ConcurrentLinkedQueue<String> commands = new ConcurrentLinkedQueue<String>();
 	private OsmandApplication app;
 	private static final Log log = PlatformUtil.getLog(OsMoService.class);
+	public static final String SHARE_TRACKER_URL = "http://osmo.mobi/connect?id=";
+	public static final String SHARE_GROUP_URL = "http://osmo.mobi/join?id=";
 	private String lastRegistrationError = null;  
 	
 	

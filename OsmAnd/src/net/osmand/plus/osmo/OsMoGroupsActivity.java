@@ -584,7 +584,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			AccessibleToast.makeText(this, R.string.osmo_auth_pending, Toast.LENGTH_SHORT).show();
 		} else {
 			ShareDialog dlg = new ShareDialog(this);
-			String url = "osmo://connect?id="+Uri.encode(trackerId);
+			String url = OsMoService.SHARE_TRACKER_URL + Uri.encode(trackerId);
 			if(name != null && name.length() > 0){;
 				url += "&name="+Uri.encode(name);
 			}
@@ -597,7 +597,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	
 	private void shareOsMoGroup(String name, String groupId) {
 		ShareDialog dlg = new ShareDialog(this);
-		String url = "osmo://join?id="+Uri.encode(groupId)+"&name="+Uri.encode(name);
+		String url = OsMoService.SHARE_GROUP_URL +Uri.encode(groupId)+"&name="+Uri.encode(name);
 		dlg.setTitle(getString(R.string.osmo_group));
 		dlg.viewContent(groupId);
 		dlg.shareURLOrText(url, getString(R.string.osmo_group_share, groupId, name, url), null);
