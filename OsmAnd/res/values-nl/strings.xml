@@ -1724,25 +1724,25 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	<string name="share_route_subject">Route gedeeld via OsmAnd</string>
 	<string name="navigation_intent_invalid">ongeldig formaat : %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
-    <string name="osmo_settings_descr">Bekijk uniek device-ID en andere instellingen voor monitoring </string>
+    <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
     <string name="osmo_plugin_description">OpenStreetmap-monitoring - geavanceerde live monitoring met veel mogelijkheden tot afstandsbediening http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (geavanceerde live monitoring)</string>
-    <string name="osmo_settings">OSMO-instellingen</string>
+    <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
    	<string name="keep_informing_never">Niet herhalen</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
     <string name="keep_informing">Herhaal de aanwijzingen</string>
 	<string name="arrival_distance">Aankondigen van de bestemming</string>
     <string name="arrival_distance_descr">Wanneer melden dat de bestemming bereikt is?</string>
-    <string name="osmo_io_error">OSMo verbindingsprobleem: </string>
-    <string name="osmo_mode_on">Stop OSMo</string>    
-    <string name="osmo_mode_off">Start OSMo</string>
+    <string name="osmo_io_error">OsMo verbindingsprobleem: </string>
+    <string name="osmo_mode_on">Stop OsMo sessie</string>    
+    <string name="osmo_mode_off">Start OsMo</string>
     <string name="osmo_register_device">Toestel wordt geregistreerd... </string>
     <string name="share_fav">Delen</string>
 	<string name="share_fav_subject">Via AsmAnd gedeelde favorieten</string>
 	<string name="hours_ago">uur geleden</string>
     <string name="minutes_ago">minuten geleden</string>
     <string name="seconds_ago">seconden geleden</string>
-    <string name="osmo_connect_to_device_name">Toestelnaam</string>
+    <string name="osmo_connect_to_device_name">Gebruikersnaam</string>
     <string name="osmo_connect_to_device_tracker_id">Tracker-ID</string>
     <string name="osmo_connect_to_device">Koppelen met toestel</string>
     <string name="osmo_join_group">Lid worden van groep</string>
@@ -1767,13 +1767,13 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="osmo_settings_debug">Debug-informatie</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo groep</string>
-    <string name="osmo_group_share">Om je te verbinden met de groep %2$s, specificeer groep id (%1$s)</string>
+    <string name="osmo_group_share">Om je te verbinden met de groep %2$s, specificeer groep id (%1$s) of klik %3$s .</string>
     <string name="osmo_share_connect_device">Sta toe, dat dit toestel permanent gevolgd wordt</string>
     <string name="osmo_share_current_session">Deel de huidige sessie in de browser</string>
     <string name="osmo_session_not_available">Sessie niet beschikbaar, controleer of \'Send locations\' aan staat.</string>
     <string name="osmo_share_session">Deel sessie</string>
     <string name="osmo_session_id_share">Sessie url om toestel (%1$s) te volgen</string>
-    <string name="osmo_tracker_id_share">Om je te verbinden met toestel %2$s, specifeer tracker id (%1$s)</string>
+    <string name="osmo_tracker_id_share">Om je te verbinden met toestel %2$s, klik op de link %3$s of specifeer tracker id (%1$s)</string>
     <string name="osmo_track_interval">Log interval</string>
 	<string name="osmo_track_interval_descr">Kies de interval om je positie te zenden</string>
     <string name="int_days">dagen</string>
@@ -1804,4 +1804,17 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	
     <string name="osmo_edit_device">Wijzig gebruiker-instellingen</string>
     <string name="osmo_edit_color">Weergavekleur</string>
+    <string name="osmo_sign_in">Log in</string>
+    <string name="osmo_create_groups_confirm">Om nieuwe groepen te maken, moet je een geregistreerde gebruiker van OsMo zijn.</string>
+    <string name="osmo_credentials_not_valid">Je OsMo inlog-gegevens zijn ongeldig.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Weet je zeker, dat je je persoonlijke id\'s wilt vernieuwen? Alle verbonden toestellen kunnen je dan niet meer volgen.</string>
+    <string name="osmo_regenerate_login_ids">Vernieuw gebruiker-ID\'s</string>
+    <string name="osmo_cancel_moving_target">Stop bewegen van het doel</string>
+    <string name="osmo_center_location">Centreer op het scherm</string>
+    <string name="osmo_set_moving_target">Stel in als bewegend doel</string>
+    <string name="osmo_use_server_name">Geregistreerde naam</string>
+    <string name="osmo_connect_to_my_nickname">Mijn bijnaam</string>
+    <string name="osmo_user_name">Gebruikersnaam</string>
+	<string name="color_green">groen</string>
+	
     </resources>
