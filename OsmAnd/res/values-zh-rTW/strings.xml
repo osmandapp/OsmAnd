@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -1784,13 +1784,13 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_groups">OsMo 群組/裝置</string>
     <string name="osmo_group">OsMo 群組</string>
     <string name="osmo_group_info">資訊</string>
-    <string name="osmo_group_share">為了連接到群組 %2$s，指定群組ID (%1$s)</string>
+    <string name="osmo_group_share">為了連接到群組 %2$s，指定群組ID (%1$s)或是點選 %3$s。</string>
     <string name="osmo_share_connect_device">允許持續的跟隨這個裝置</string>
     <string name="osmo_share_current_session">在瀏覽器分享目前的區段</string>
     <string name="osmo_session_not_available">無有效的區段，請檢查\'傳送位置\'是否有開。</string>
     <string name="osmo_share_session">分享區段</string>
     <string name="osmo_session_id_share">區段網址至追蹤裝置(%1$s)</string>
-    <string name="osmo_tracker_id_share">為了連接到目標裝置 %2$s，指定追蹤 ID (%1$s)</string>
+    <string name="osmo_tracker_id_share">為了連接到目標裝置 %2$s，點選連接 %3$s 或是指定追蹤 ID (%1$s)</string>
     <string name="osmo_track_interval">記錄間隔</string>
 	<string name="osmo_track_interval_descr">選擇發送位置間隔時間</string>
     <string name="int_days">天</string>
@@ -1804,7 +1804,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_connect">連接到</string>
     <string name="osmo_create_group">建立群組</string>
     <string name="osmo_server_operation_failed">OsMo 伺服器操作失敗</string>
-    <string name="osmo_activity">OsMo 監視</string>
+    <string name="osmo_activity">OpenStreetMap-監視</string>
     <string name="osmo_enable_tracker">傳送我的位置</string>
     <string name="osmo_control">OsMo 快速進入</string>
     <string name="local_index_mi_export">匯出</string>
@@ -1821,4 +1821,18 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	
     <string name="osmo_edit_device">更改使用者屬性</string>
     <string name="osmo_edit_color">顯示色彩</string>
+    <string name="osmo_follow">跟隨</string>
+    <string name="osmo_sign_in">登入</string>
+    <string name="osmo_create_groups_confirm">為了建立群組您需要註冊成為 OsMo 的使用者。</string>
+    <string name="osmo_credentials_not_valid">您的 osmo 憑據不是有效的。</string>
+    <string name="osmo_regenerate_login_ids_confirm">您確定要重新產生個人 id？這會使已連接到您的所有裝置，無法再追蹤您。</string>
+    <string name="osmo_regenerate_login_ids">重新產生使用者 ID</string>
+    <string name="osmo_cancel_moving_target">取消移動目標</string>
+    <string name="osmo_center_location">在螢幕中央</string>
+    <string name="osmo_set_moving_target">設定為移動目標</string>
+    <string name="osmo_use_server_name">已註冊的名稱</string>
+    <string name="osmo_connect_to_my_nickname">我的暱稱</string>
+    <string name="osmo_user_name">使用者</string>
+	<string name="color_green">綠色</string>
+	
     </resources>
