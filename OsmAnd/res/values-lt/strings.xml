@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -1763,7 +1763,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="share_fav">Bendrinti</string>
 	<string name="share_fav_subject">Įsimintos vietos bendrintos iš OsmAnd</string>
 	<string name="use_points_as_intermediates">Apskaičiuoti maršrutą tarp taškų</string>
-    <string name="osmo_connect_to_device_name">Įrenginio pavadinimas</string>
+    <string name="osmo_connect_to_device_name">Vartotojo vardas</string>
     <string name="osmo_connect_to_device_tracker_id">Sekiklio ID</string>
     <string name="osmo_connect_to_device">Sujungti su įrenginiu</string>
     <string name="osmo_join_group">Prisijungti prie grupės</string>
@@ -1788,13 +1788,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_settings_debug">Derinimo informacija</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo grupė</string>
-    <string name="osmo_group_share">Norėdami prisijungti prie %2$s grupės, nurodykite grupės id (%1$s)</string>
+    <string name="osmo_group_share">Norėdami prisijungti prie %2$s grupės, nurodykite grupės id (%1$s) arba paspauskite %3$s .</string>
     <string name="osmo_share_connect_device">Leiskite šį įrenginį sekti pastoviai</string>
     <string name="osmo_share_current_session">Dalinkitės dabartine sesija naršyklėje</string>
     <string name="osmo_session_not_available">Sesija neprieinama. Įsitikinkite kad įjungtas \'Siųsti vietą\' nustatymas.</string>
     <string name="osmo_share_session">Bendrinti sesiją</string>
     <string name="osmo_session_id_share">Sesijos url įrenginio (%1$s) sekimui</string>
-    <string name="osmo_tracker_id_share">Norėdami prisijungti prie %2$s įrenginio turite nurodyti sekiklio id (%1$s)</string>
+    <string name="osmo_tracker_id_share">Norėdami prisijungti prie %2$s įrenginio paspauskite nuorodą %3$s arba nurodykite sekiklio id (%1$s)</string>
     <string name="osmo_track_interval">Pozicijos išsaugojimo intervalas</string>
 	<string name="osmo_track_interval_descr">Pasirinkite laiko intervalą vietos siuntimui</string>
     <string name="int_days">dienos</string>
@@ -1808,10 +1808,36 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_connect">Prisijungti prie</string>
     <string name="osmo_create_group">Sukurti grupę</string>
     <string name="osmo_server_operation_failed">OsMo serverio veiksmas nepavyko</string>
-    <string name="osmo_activity">Osm stebėjimas</string>
+    <string name="osmo_activity">OpenStreetMap stebėjimas</string>
     <string name="osmo_enable_tracker">Siųsti mano buvimo vietą</string>
     <string name="osmo_control">OsMo greita prieiga</string>
     <string name="local_index_mi_export">Eksportas</string>
 	<string name="import_file_favourites">Išsaugoti GPX faile ar importuoti į įsimintas vietas?</string>
 	<string name="import_save">Išsaugoti</string>
-	</resources>
+	<string name="osmo_follow">Sekti</string>
+    <string name="osmo_sign_in">Prisijungti</string>
+    <string name="osmo_create_groups_confirm">Norėdami kurti grupes privalote turėti OsMo vartotojo paskyrą.</string>
+    <string name="osmo_credentials_not_valid">Jūsų OsMo prisijungimo vardas ar slaptažodis klaidingi.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Ar tikrai norite atkurti asmeninius id? Visi prie jūsų prisijungę įrenginiai nebegalės jūsų sekti.</string>
+    <string name="osmo_regenerate_login_ids">Atkurti vartotojo id</string>
+    <string name="osmo_cancel_moving_target">Atšaukti judantį taikinį</string>
+    <string name="osmo_center_location">Centruoti ekrane</string>
+    <string name="osmo_set_moving_target">Nustatyti judančiu taikiniu</string>
+    <string name="osmo_use_server_name">Registruotas vardas</string>
+    <string name="osmo_connect_to_my_nickname">Mano slapyvardis</string>
+    <string name="osmo_user_name">Vartotojas</string>
+	<string name="color_red">raudona</string>
+	<string name="color_pink">rožinė</string>
+	<string name="color_orange">oranžinė</string>
+	<string name="color_brown">ruda</string>
+	<string name="color_yellow">geltona</string>
+	<string name="color_lightblue">žydra</string>
+	<string name="color_blue">mėlyna</string>
+	<string name="color_green">žalia</string>
+	
+    <string name="osmo_edit_device">Pakeisti vartotojo nustatymus</string>
+    <string name="osmo_edit_color">Rodoma spalva</string>
+    <string name="hours_ago">valandų senumo</string>
+    <string name="minutes_ago">minučių senumo</string>
+    <string name="seconds_ago">sekundžių senumo</string>
+    </resources>
