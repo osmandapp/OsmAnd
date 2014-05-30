@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -1744,9 +1744,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="navigation_intent_invalid">Netinkamas formatas: %s</string>
 <string name="osmo_settings_uuid">Unikalus įrenginio ID</string>
     <string name="osmo_settings_descr">Konfigūruoti stebėjimo nustatymus ir nustatyti asmeninį stebėjimo kanalą</string>
-    <string name="osmo_plugin_description">OpenStreetMap stebėjimas - Tiesioginis stebėjimas su daugybe nuotolinio valdymo funkcijų http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - pažangus tiesioginis stebėjimas. Suteikia daug galimybių būti stebimam ir stebėti kitus įrenginius. 
+        Susikurkite anonimines grupes, bendrinkite vienas kito vietą ir komunikuokite. Ši paslauga turi įvairių nustatymų vienkartiniam ir pastoviam sekimui.
+        Anoniminių grupių gyvavimas yra tik kelios dienos su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. 
+        Pilno funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti.
+        Daugiau skaitykite http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (Pažangus tiesioginis stebėjimas)</string>
-    <string name="osmo_settings">OsMo</string>
+    <string name="osmo_settings">OsMo OpenStreetMap stebėjimas (beta)</string>
    	<string name="keep_informing_never">Niekada</string>
     <string name="keep_informing_descr">Maršruto instrukcijas pranešinėti reguliariais intervalais</string>
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
@@ -1778,7 +1782,36 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="tip_recent_changes_1_8_alpha">Pakeitimai 1.8 versijoje:
         * Apskaičiouti maršrutą tarp GPX failo taškų
         * Pakeistas šalių sąrašo išdėstymas žemėlapių parsiuntimui (palaikoma vietovardžių paieška)
+	* Palaiko GPX/KML importavimą (konvertuoja KML į GPX)
     </string>
     <string name="osmo_mode_restart">OsMo sesiją paleisti iš naujo</string>
     <string name="osmo_settings_debug">Derinimo informacija</string>
-    </resources>
+    <string name="osmo_group_info">Info</string>
+    <string name="osmo_group">OsMo grupė</string>
+    <string name="osmo_group_share">Norėdami prisijungti prie %2$s grupės, nurodykite grupės id (%1$s)</string>
+    <string name="osmo_share_connect_device">Leiskite šį įrenginį sekti pastoviai</string>
+    <string name="osmo_share_current_session">Dalinkitės dabartine sesija naršyklėje</string>
+    <string name="osmo_session_not_available">Sesija neprieinama. Įsitikinkite kad įjungtas \'Siųsti vietą\' nustatymas.</string>
+    <string name="osmo_share_session">Bendrinti sesiją</string>
+    <string name="osmo_session_id_share">Sesijos url įrenginio (%1$s) sekimui</string>
+    <string name="osmo_tracker_id_share">Norėdami prisijungti prie %2$s įrenginio turite nurodyti sekiklio id (%1$s)</string>
+    <string name="osmo_track_interval">Pozicijos išsaugojimo intervalas</string>
+	<string name="osmo_track_interval_descr">Pasirinkite laiko intervalą vietos siuntimui</string>
+    <string name="int_days">dienos</string>
+    <string name="osmo_connect_menu">Prisijungti</string>
+    <string name="osmo_expire_group">Baigs galioti už</string>
+    <string name="osmo_group_description">Aprašymas</string>
+    <string name="osmo_group_policy">Politika</string>
+    <string name="osmo_connect_to_group_id">Grupės ID</string>
+    <string name="osmo_group_name">Grupės pavadinimas</string>
+    <string name="osmo_connect_to_group">Prisijungti prie grupės</string>
+    <string name="osmo_connect">Prisijungti prie</string>
+    <string name="osmo_create_group">Sukurti grupę</string>
+    <string name="osmo_server_operation_failed">OsMo serverio veiksmas nepavyko</string>
+    <string name="osmo_activity">Osm stebėjimas</string>
+    <string name="osmo_enable_tracker">Siųsti mano buvimo vietą</string>
+    <string name="osmo_control">OsMo greita prieiga</string>
+    <string name="local_index_mi_export">Eksportas</string>
+	<string name="import_file_favourites">Išsaugoti GPX faile ar importuoti į įsimintas vietas?</string>
+	<string name="import_save">Išsaugoti</string>
+	</resources>

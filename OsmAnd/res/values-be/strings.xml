@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
     <string name="auto_zoom_close">Зачыніць</string>
     <string name="auto_zoom_far">Для сярэдняга масштаба</string>
@@ -1630,8 +1630,12 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="interrupt_music">Перапыненьне музыкі</string>
 	<string name="osmo_settings_uuid">Унікальны ідэнтыфікатар прылады</string>
     <string name="osmo_settings_descr">Глянуць унікальны рэгістрацыйны ключ прыстасаваньня і наладзіць асабісты канал адсочваньня</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Маніторынг - Пашыранае адсочваньне у рэальным часе з шырокім наборам функцый для дыстанцыйнага кіравання http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (Пашыранае адсочваньне ў рэальным часе)</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Маніторынг - Пашыранае адсочваньне ў рэальным часе. Яно забяспечвае магчымасьці для адсочваньня гэтага і іншых прыстасаваньняў.
+	Дазваляе ствараць ананімныя групы, дзяліцца адзін з адным месцазнаходжаньнем і камунікаваць. Яно мае розныя параметры для сеансавага або пастаяннага сачэньня.
+	Ананімныя групы абмежаваныя па колькасьці дзён і па магчымасьцях, г.зн. няма дыстанцыйнага кіраваньня і адміністратара групы.
+	Паўнавартасныя групы ствараюцца праз вэб-сайт і толькі зарэгістраваныя карыстальнікі маюць доступ да іх.
+	Падрабязьней на http://osmo.mobi.</string>
+    <string name="osmo_plugin_name">OsMo (Пашыранае адсочваньне ў рэальным часе)</string>
     <string name="osmo_settings">OSMo</string>
    	<string name="always_center_position_on_map">Паказваць становішча заўсёды ў цэнтры</string>
     <string name="route_descr_destination"> </string>
@@ -1742,4 +1746,43 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_new_device">Падключыцца да прыстасавання</string>
     <string name="osmo_connected_devices">Падключаныя прыстасаванні</string>
     <string name="osmo_groups">OsMo Групы/Прыстасаванні</string>
+    <string name="osmo_group_info">Інфармацыя</string>
+    <string name="osmo_group">Група OsMo</string>
+    <string name="osmo_group_share">Каб падключыцца да групы %2$s, задайце ID групы (%1$s)</string>
+    <string name="osmo_share_connect_device">Дазволіць пастаянна адсочваць дадзенае прыстасаванне</string>
+    <string name="osmo_share_current_session">Падзяліцца бягучай сесіяй у браўзэры</string>
+    <string name="osmo_share_session">Падзяліцца сэсіяй</string>
+    <string name="osmo_session_id_share">URL сесіі для адсочвання прыстасавання (%1$s)</string>
+    <string name="osmo_track_interval_descr">Выберыце часавы інтэрвал для адпраўкі месцазнаходжання</string>
+    <string name="int_days">дзён</string>
+    <string name="osmo_connect_menu">Падлучыцца</string>
+    <string name="osmo_group_description">Апісанне</string>
+    <string name="osmo_group_policy">Палітыка</string>
+    <string name="osmo_connect_to_group_id">ID групы</string>
+    <string name="osmo_group_name">Назва групы</string>
+    <string name="osmo_connect_to_group">Падлучыцца да групы</string>
+    <string name="osmo_connect">Падлучыцца да</string>
+    <string name="osmo_create_group">Стварыць групу</string>
+    <string name="osmo_server_operation_failed">Памылка аперацыі на сэрвэры OsMo</string>
+    <string name="osmo_activity">Osm Маніторынг</string>
+    <string name="osmo_enable_tracker">Адправіць маё месцазнаходжанне</string>
+    <string name="local_index_mi_export">Экспарт</string>
+	<string name="import_file_favourites">Захаваць як файл GPX або імпартаваць у абранае?</string>
+	<string name="import_save">Захаваць</string>
+	<string name="osmo_track_interval">Інтэрвал адсылкі дадзеных</string>
+	<string name="osmo_expire_group">Тэрмін дзеяння сканчаецца праз</string>
+    <string name="osmo_control">Хуткі доступ OsMo</string>
+    <string name="osmo_session_not_available">Сесія не даступная, калі ласка, пераканайцеся, што пункт \'Адсылаць месцазнаходжанне\' уключаны.</string>
+    <string name="osmo_tracker_id_share">Каб падключыцца да патрэбнага прыстасавання %2$s задайце ідэнтыфікатар трэкеру (%1$s)</string>
+    <string name="color_red">чырвоны</string>
+	<string name="color_pink">ружовы</string>
+	<string name="color_orange">аранжавы</string>
+	<string name="color_brown">карычневы</string>
+	<string name="color_yellow">жоўты</string>
+	<string name="color_lightblue">блакітны</string>
+	<string name="color_blue">сіні</string>
+	<string name="color_magenta">пурпурны</string>
+	
+    <string name="osmo_edit_color">Выбар колеру</string>
+    <string name="osmo_edit_device">Зьмяніць налады карыстальніка</string>
     </resources>

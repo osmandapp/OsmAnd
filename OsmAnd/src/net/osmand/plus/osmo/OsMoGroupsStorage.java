@@ -2,6 +2,7 @@ package net.osmand.plus.osmo;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,7 +11,6 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -207,15 +207,25 @@ public class OsMoGroupsStorage {
 		
 		protected Map<String, OsMoDevice> users = new ConcurrentHashMap<String, OsMoDevice>(); 
 		
-		public List<OsMoDevice> getGroupUsers() {
+		public List<OsMoDevice> getGroupUsers(String mygid) {
 			// filter deleted
 			List<OsMoDevice> dvs = new ArrayList<OsMoDevice>(users.size());
 			for(OsMoDevice d : users.values()) {
+				if(mygid != null && mygid.equals(d.trackerId)) {
+					continue;
+				}
 				if(d.getDeletedTimestamp() == 0) {
 					dvs.add(d);
 				}
 			}
 			return dvs;
+		}
+		
+		public List<OsMoDevice> getVisibleGroupUsers(String mygid) {
+			if(!isActive() &&  !isMainGroup()) {
+				return Collections.emptyList();
+			}
+			return getGroupUsers(mygid);
 		}
 		
 		public boolean isDeleted() {
@@ -260,15 +270,15 @@ public class OsMoGroupsStorage {
 			return name;
 		}
 
-		public void updateLastLocation(String trackerId, Location location) {
+		public OsMoDevice updateLastLocation(String trackerId, Location location) {
 			OsMoDevice d = users.get(trackerId);
 			if(d != null) {
 				d.setLastLocation(location);
-				d.active = location != null;
 				if(location != null) {
 					d.setLastOnline(location.getTime());
 				}
 			}
+			return d;
 		}
 	}
 	
@@ -365,6 +375,9 @@ public class OsMoGroupsStorage {
 		public String getVisibleName(){
 			if(userName != null && userName.length() > 0) {
 				return userName;
+			}
+			if(serverName == null || serverName.length() == 0) {
+				return trackerId;
 			}
 			return serverName;
 		}

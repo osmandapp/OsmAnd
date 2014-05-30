@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -29,26 +30,30 @@ import org.json.JSONObject;
 import android.os.Build;
 import android.provider.Settings.Secure;
 
-public class OsMoService implements OsMoSender, OsMoReactor {
+public class OsMoService implements OsMoReactor {
+	public static final String REGENERATE_CMD = "TRACKER_REGENERATE_ID";
+	public static final String SIGN_IN_URL = "http://osmo.mobi/signin";
 	private OsMoThread thread;
-	private List<OsMoSender> listSenders = new java.util.concurrent.CopyOnWriteArrayList<OsMoSender>();
 	private List<OsMoReactor> listReactors = new java.util.concurrent.CopyOnWriteArrayList<OsMoReactor>();
 	private ConcurrentLinkedQueue<String> commands = new ConcurrentLinkedQueue<String>();
 	private OsmandApplication app;
 	private static final Log log = PlatformUtil.getLog(OsMoService.class);
+	public static final String SHARE_TRACKER_URL = "http://z.osmo.mobi/connect?id=";
+	public static final String SHARE_GROUP_URL = "http://z.osmo.mobi/join?id=";
+	public static final String TRACK_URL = "http://test1342.osmo.mobi/u/";
 	private String lastRegistrationError = null;  
 	
 	
 	
 	public OsMoService(OsmandApplication app) {
 		this.app = app;
-		listSenders.add(this);
 		listReactors.add(this);
 	}
 	
 	public boolean isConnected() {
 		return thread != null && thread.isConnected();
 	}
+	
 	
 	public boolean isActive() {
 		return thread != null && thread.isActive();
@@ -60,6 +65,14 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 		}
 		return 0;
 	}
+	
+	public List<String> getHistoryOfCommands() {
+		if(thread == null) {
+			return Collections.emptyList();
+		}
+		return new ArrayList<String>(thread.getLast100Commands());
+	}
+	
 	
 	public long getConnectionTime() {
 		return thread == null || !thread.isConnected() ? System.currentTimeMillis() : thread.getConnectionTime(); 
@@ -77,7 +90,7 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 			}
 			thread.stopConnection();
 		}
-		thread = new OsMoThread(this, listSenders, listReactors);
+		thread = new OsMoThread(this, listReactors);
 		return true;
 	}
 	
@@ -87,11 +100,6 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 		}
 	}
 	
-	public void registerSender(OsMoSender sender) {
-		if(!listSenders.contains(sender)) {
-			listSenders.add(sender);
-		}
-	}
 	
 	public void registerReactor(OsMoReactor reactor) {
 		if(!listReactors.contains(reactor)) {
@@ -99,10 +107,6 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 		}
 	}
 
-	public void removeSender(OsMoSender s) {
-		listSenders.remove(s);
-	}
-	
 	public void removeReactor(OsMoReactor s) {
 		listReactors.remove(s);
 	}
@@ -163,6 +167,14 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 			return null;
 		}
 		return thread.getSessionInfo();
+	}
+	
+	public String getRegisteredUserName() {
+		SessionInfo si = getCurrentSessionInfo();
+		if(si != null && si.username != null && si.username.length() > 0) {
+			return si.username;
+		}
+		return null;
 	}
 	
 	public String getMyGroupTrackerId() {
@@ -243,7 +255,7 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 	}
 
 	@Override
-	public boolean acceptCommand(String command, String data, JSONObject obj, OsMoThread tread) {
+	public boolean acceptCommand(String command, String id, String data, JSONObject obj, OsMoThread tread) {
 		if(command.equals("MOTD")) {
 			SessionInfo si = getCurrentSessionInfo();
 			if(si != null) {
@@ -259,6 +271,17 @@ public class OsMoService implements OsMoSender, OsMoReactor {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void reconnect() {
+		
+	}
+	
+	public void reconnectToServer() {
+		if(thread != null) {
+			thread.reconnect();
+		}
 	}
 	
 }

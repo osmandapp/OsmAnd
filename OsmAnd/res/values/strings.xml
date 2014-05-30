@@ -9,6 +9,18 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmo_follow">Follow</string>
+    <string name="osmo_sign_in">Sign in</string>
+    <string name="osmo_create_groups_confirm">In order to create groups you need to be a registered user of OsMo.</string>
+    <string name="osmo_credentials_not_valid">Your osmo credentials are not valid.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Are you sure about regenerating personal ids? All devices, connected to you, won\'t be able to track you any more.</string>
+    <string name="osmo_regenerate_login_ids">Regenerate user id</string>
+    <string name="osmo_cancel_moving_target">Cancel moving target</string>
+    <string name="osmo_center_location">Center on the screen</string>
+    <string name="osmo_set_moving_target">Set as moving target</string>
+    <string name="osmo_use_server_name">Registered name</string>
+    <string name="osmo_connect_to_my_nickname">My nickname</string>
+    <string name="osmo_user_name">User</string>
 	<string name="color_red">red</string>
 	<string name="color_pink">pink</string>
 	<string name="color_orange">orange</string>
@@ -22,13 +34,13 @@
     <string name="osmo_edit_color">Display color</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo group</string>
-    <string name="osmo_group_share">In order to Connect to the group %2$s, specify group id (%1$s)</string>
+    <string name="osmo_group_share">In order to Connect to the group %2$s, specify group id (%1$s) or click %3$s .</string>
     <string name="osmo_share_connect_device">Let permanently follow this device</string>
     <string name="osmo_share_current_session">Share current session in browser</string>
     <string name="osmo_session_not_available">Session not available, please check that \'Send locations\' is on.</string>
     <string name="osmo_share_session">Share session</string>
     <string name="osmo_session_id_share">Session url to track device (%1$s)</string>
-    <string name="osmo_tracker_id_share">In order to Connect to the target device %2$s, specify tracker id (%1$s)</string>
+    <string name="osmo_tracker_id_share">In order to Connect to the target device %2$s, click on the link %3$s or specify tracker id (%1$s)</string>
     <string name="osmo_track_interval">Logging interval</string>
 	<string name="osmo_track_interval_descr">Choose time interval to send location</string>
     <string name="int_days">days</string>
@@ -45,8 +57,8 @@
     <string name="osmo_connect">Connect to</string>
     <string name="osmo_create_group">Create group</string>
     <string name="osmo_server_operation_failed">OsMo Server operation failed</string>
-    <string name="osmo_activity">OsMo Monitoring</string>
-    <string name="osmo_enable_tracker">Send my locations</string>
+    <string name="osmo_activity">OpenStreetMap-Monitoring</string>
+    <string name="osmo_enable_tracker">Send my lcations</string>
     <string name="osmo_control">OsMo quick access</string>
     <string name="hours_ago">hours ago</string>
     <string name="minutes_ago">min ago</string>

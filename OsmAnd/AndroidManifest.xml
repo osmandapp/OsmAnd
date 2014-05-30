@@ -28,6 +28,7 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 	<uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
 	<uses-permission android:name="android.permission.CAMERA"></uses-permission>
+	<uses-permission android:name="android.permission.VIBRATE"/>
 	<uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
 	<supports-screens  android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
 	    android:xlargeScreens="true" android:anyDensity="true" />
@@ -129,7 +130,14 @@
         
         
         <activity android:name="net.osmand.plus.osmo.SettingsOsMoActivity" android:configChanges="keyboardHidden|orientation"></activity>
-        <activity android:name="net.osmand.plus.osmo.OsMoGroupsActivity"></activity>
+        <activity android:name="net.osmand.plus.osmo.OsMoGroupsActivity">
+            <intent-filter>
+                <data android:scheme="http" android:host="z.osmo.mobi" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE"></category>
+            </intent-filter>
+        </activity>
         
         
         <activity android:name="net.osmand.plus.activities.search.SearchPOIActivity" android:label="@string/searchpoi_activity"></activity>

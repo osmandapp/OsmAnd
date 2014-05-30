@@ -764,7 +764,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
 		\n\nDepois a lista região global está recuperado da internet, clique em qualquer entrada para baixar ou atualizar um arquivo . Por favor, note que o seletor de tipo de arquivo na parte superior da tela para selecionar o tipo de download que você quer ( mapas regulares , sobreposições hillshade , etc.) 
 		\n\nVocê pode filtrar a lista região digitando algumas letras , ou você pode selecionar a opção "Configurações \' → \' Filtro baixado \'para ver as atualizações somente para os dados já no seu dispositivo. 
 		\n\n\t* Entradas no \' verde \' indicam arquivos de dados idênticos em dispositivo eo servidor 
-\n\t* Entradas no \ 'blue \' indicam atualizações disponíveis no servidor 
+\n\t* Entradas no \ \'blue \' indicam atualizações disponíveis no servidor 
 \n\t* entradas em itálico indicam dados de- ativado no dispositivo
 	</string>
   <string name="level_to_switch_vector_raster_descr">Nível de zoom mínimo para usar mapas vectoriais</string>

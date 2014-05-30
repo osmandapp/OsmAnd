@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="tip_recent_changes_1_6_t">1.6 bertsioan aldaketak:⏎\n⇥⏎\n⇥* Sareko tesela iturburuak definitu/editatu (iraungitze data zehaztu)⏎</string>
   <string name="local_index_tile_data_zooms">Deskargatutako zoomak: %1$s</string>
   <string name="local_index_tile_data_expire">Iraungitze epea (minutuak): %1$s</string>

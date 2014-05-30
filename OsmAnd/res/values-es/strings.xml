@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -1644,14 +1644,18 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="interrupt_music">Interrumpir música</string>
 	<string name="osmo_settings_uuid">Id único del dispositivo</string>
     <string name="osmo_settings_descr">Configurar opciones de monitorización y configurar canal de monitoreo</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitoreo avanzada en directo con muchas características para control remoto http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitoreo avanzado en directo. Proporcionar la posibilidad de seguir otros dispositivos y ser seguido.
+        Cree grupos anónimos, compartan sus localizaciones y comuníquense. Tiene varias opciones para seguimiento por sesión o permanente.
+        Los grupos anónimos están limitados a varios días y a algunas funcionalidades, p.e. no hay control remoto ni administrador de grupo.
+        Los grupos completamente funcionales deben ser creados en la web y solo los usuarios registrados tienen acceso a ellos.
+        Por favor, lea más en http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (Monitoreo avanzado en directo)</string>
-    <string name="osmo_settings">OsMo</string>
+    <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
    	<string name="share_route_as_gpx">Compartir ruta como fichero GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato inválido: %s</string>
 <string name="keep_informing_never">Nunca</string>
-    <string name="keep_informing_descr">Anunciar instrucciones de navegación a intervalos regulares</string>
+    <string name="keep_informing_descr">Re-anunciar instrucciones de navegación a intervalos regulares</string>
     <string name="keep_informing">Repetir instrucciones de navegación</string>
 	<string name="arrival_distance">Anuncio de llegada</string>
     <string name="arrival_distance_descr">¿Para cuándo quiere el anuncio de llegada?</string>
@@ -1665,12 +1669,65 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="tip_recent_changes_1_8_alpha">Cambios en 1.8:
         * Calcular ruta entre puntos de ruta de una pista GPX
         * Cambiada disposición de países para descargas (soporta búsquedas de nombres locales)
+        * Suporta importación de GPX/KML (conversión de KML a GPX)
     </string>
-    <string name="osmo_connect_to_device_name">Nombre del dispositivo</string>
+    <string name="osmo_connect_to_device_name">Nombre de usuario</string>
     <string name="osmo_new_device">Conectarse al dispositivo</string>
     <string name="osmo_connected_devices">Dispositivos conectados</string>
     <string name="osmo_auth_pending">Esperando autorización...</string>
     <string name="osmo_locations_sent">Localizaciones enviadas %1$d (en buffer %2$d) </string>
     <string name="osmo_conn_successfull">Conexión establecida : %1$s </string>
     <string name="osmo_groups">Grupos/Dispositivos OsMo</string>
-    </resources>
+    <string name="osmo_group_info">Info</string>
+    <string name="color_red">rojo</string>
+	<string name="color_pink">rosa</string>
+	<string name="color_orange">naranja</string>
+	<string name="color_brown">marrón</string>
+	<string name="color_yellow">amarillo</string>
+	<string name="color_lightblue">azul claro</string>
+	<string name="color_blue">azul</string>
+	<string name="color_magenta">magenta</string>
+	
+    <string name="osmo_edit_device">Cambiar propiedades de usuario</string>
+    <string name="osmo_edit_color">Mostrar color</string>
+    <string name="osmo_group">Grupo OsMo</string>
+    <string name="osmo_group_share">Para conectarse al grupo %2$s, especifique el id del grupo (%1$s)</string>
+    <string name="osmo_share_connect_device">Seguir permanentemente este dispositivo</string>
+    <string name="osmo_share_current_session">Compartir sesión actual en navegador</string>
+    <string name="osmo_session_not_available">Sesión no disponible, compruebe que \'Enviar localizaciones\' está activado por favor.</string>
+    <string name="osmo_share_session">Compartir sesión</string>
+    <string name="osmo_session_id_share">Url de la sesión para seguir dispositivo (%1$s)</string>
+    <string name="osmo_tracker_id_share">Para conectarse al dispositivo %2$s, especificar id (%1$s)</string>
+    <string name="osmo_track_interval">Intervalo de registro</string>
+	<string name="osmo_track_interval_descr">Elija intervalo de tiempo para enviar localización</string>
+    <string name="int_days">días</string>
+    <string name="osmo_connect_menu">Conectar</string>
+    <string name="osmo_expire_group">Expira en</string>
+    <string name="osmo_group_description">Descripción</string>
+    <string name="osmo_group_policy">Política</string>
+    <string name="osmo_connect_to_device_tracker_id">Id de rastreo</string>
+    <string name="osmo_connect_to_group_id">Id de grupo</string>
+    <string name="osmo_group_name">Nombre de grupo</string>
+    <string name="osmo_connect_to_device">Emparejar con dispositivo</string>
+    <string name="osmo_connect_to_group">Emparejar con grupo</string>
+    <string name="osmo_connect">Conectase a</string>
+    <string name="osmo_create_group">Crear grupo</string>
+    <string name="osmo_server_operation_failed">Fallo de operación de Servidor OsMo</string>
+    <string name="osmo_activity">Monitorización OsMo</string>
+    <string name="osmo_enable_tracker">Enviar mis localizaciones</string>
+    <string name="osmo_control">Acceso rápido OsMo</string>
+    <string name="hours_ago">horas antes</string>
+    <string name="minutes_ago">minutos antes</string>
+    <string name="seconds_ago">segundos antes</string>
+    <string name="osmo_auto_send_locations_descr">Automáticamente iniciar sesión de seguimiento y enviar localizaciones después de iniciar la aplicación</string>
+    <string name="osmo_auto_send_locations">Automáticamente iniciar sesión de rastreo</string>
+    <string name="osmo_tracker_id">Id de rastreo personal</string>
+    <string name="osmo_tracker_id_descr">Click para ver o compartir id de rastreo. 
+        ¡Usando el id de rastreo los dispositivos conectados podrán monitorear todos los movimientos de este dispositivo! Para desconectar seleccione la opción Regenerar.</string>
+    <string name="osmo_session_token">Token de sesión: %1$s</string>
+    <string name="osmo_mode_restart">Reiniciar sesión OsMo</string>
+    <string name="osmo_settings_debug">Información de debug</string>
+    <string name="local_index_mi_export">Exportar</string>
+	<string name="import_file_favourites">¿Guardar como archivo GPX o importar a favoritos?</string>
+	<string name="import_save">Guardar</string>
+	</resources>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1807,4 +1807,43 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_new_device">Collegati al dispositivo</string>
     <string name="osmo_connected_devices">Dispositivi collegati</string>
     <string name="osmo_groups">Grupppi/Dispositivi OsMo</string>
+    <string name="osmo_group_info">Informazioni</string>
+    <string name="osmo_group">Gruppo OsMo</string>
+    <string name="osmo_group_share">Per collegarsi al gruppo %2$s, specifica l\'id del gruppo (%1$s)</string>
+    <string name="osmo_share_connect_device">Permetti di seguire permanentemente questo dispositivo</string>
+    <string name="osmo_share_current_session">Condividi questa sessione nel browser</string>
+    <string name="osmo_session_not_available">Sessione non disponibile, per favore controllare che \'Invia posizioni\' sia attivo.</string>
+    <string name="osmo_share_session">Condividi sessione</string>
+    <string name="osmo_session_id_share">Url della sessione per tracciare il dispositivo (%1$s)</string>
+    <string name="osmo_tracker_id_share">Per collegare al dispositivo voluto %2$s, specificare il tracker id (%1$s)</string>
+    <string name="osmo_track_interval">Intervallo di registrazione</string>
+	<string name="osmo_track_interval_descr">Scegli l\'intervallo di tempo per l\'invio la posizione</string>
+    <string name="int_days">giorni</string>
+    <string name="osmo_connect_menu">Connetti</string>
+    <string name="osmo_expire_group">Scade fra</string>
+    <string name="osmo_group_description">Descrizione</string>
+    <string name="osmo_group_policy">Regole</string>
+    <string name="osmo_connect_to_group_id">Id gruppo</string>
+    <string name="osmo_group_name">Nome gruppo</string>
+    <string name="osmo_connect_to_group">Collega con il gruppo</string>
+    <string name="osmo_connect">Collega a</string>
+    <string name="osmo_create_group">Crea gruppo</string>
+    <string name="osmo_server_operation_failed">Operazione del server OsMo fallita</string>
+    <string name="osmo_activity">Monitoraggio Osm</string>
+    <string name="osmo_enable_tracker">Invia le mie posizioni</string>
+    <string name="osmo_control">Accesso rapido ad OsMo</string>
+    <string name="local_index_mi_export">Esporta</string>
+	<string name="import_file_favourites">Salvare come file GPX o importare nei favoriti?</string>
+	<string name="import_save">Salva</string>
+	<string name="color_red">rosso</string>
+	<string name="color_pink">rosa</string>
+	<string name="color_orange">arancione</string>
+	<string name="color_brown">marrone</string>
+	<string name="color_yellow">giallo</string>
+	<string name="color_lightblue">blu chiaro</string>
+	<string name="color_blue">blu</string>
+	<string name="color_magenta">magenta</string>
+	
+    <string name="osmo_edit_device">Cambia le proprietà dell\'utilizzatore</string>
+    <string name="osmo_edit_color">Colore visualizzato</string>
     </resources>

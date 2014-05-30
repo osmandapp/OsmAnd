@@ -1,37 +1,40 @@
 package net.osmand.plus.osmo;
 
+import java.util.Collection;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.Location;
-import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class OsMoTracker implements OsMoSender, OsMoReactor {
+public class OsMoTracker implements OsMoReactor {
 	private ConcurrentLinkedQueue<Location> bufferOfLocations = new ConcurrentLinkedQueue<Location>();
-	private Map<String, Location> otherLocations = new ConcurrentHashMap<String, Location>();
 	private boolean startSendingLocations;
 	private OsMoService service;
 	private int locationsSent = 0;
-	private OsmoTrackerListener uiTrackerListener = null;
 	private OsmoTrackerListener trackerListener = null;
 	private Location lastSendLocation;
 	private Location lastBufferLocation;
-	private CommonPreference<Integer> pref;
+	private OsmandPreference<Integer> pref;
 	private String sessionURL;
+	private Map<String, OsMoDevice> trackingDevices = new java.util.concurrent.ConcurrentHashMap<String, OsMoGroupsStorage.OsMoDevice>();
+	private OsmandPreference<Boolean> autoStart;
 	
 	public interface OsmoTrackerListener {
 		
 		public void locationChange(String trackerId, Location location);
 	}
+	
 
-	public OsMoTracker(OsMoService service, CommonPreference<Integer> pref) {
+	public OsMoTracker(OsMoService service, OsmandPreference<Integer> interval,
+			OsmandPreference<Boolean> autoStart) {
 		this.service = service;
-		this.pref = pref;
-		service.registerSender(this);
+		this.pref = interval;
+		this.autoStart = autoStart;
 		service.registerReactor(this);
 	}
 	
@@ -39,7 +42,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 		if (!isEnabledTracker()) {
 			return null;
 		}
-		return "http://test1342.osmo.mobi/u/" + sessionURL;
+		return OsMoService.TRACK_URL + sessionURL;
 	}
 	
 	public boolean isEnabledTracker() {
@@ -60,17 +63,14 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 		}
 	}
 	
-	public Location getLastLocation(String trackerId) {
-		return otherLocations.get(trackerId);
+	public void startTrackingId(OsMoDevice d) {
+		service.pushCommand("LISTEN:"+d.getTrackerId());
+		trackingDevices.put(d.getTrackerId(), d);
 	}
 	
-	public void startTrackingId(String id) {
-		service.pushCommand("LISTEN|"+id);
-	}
-	
-	public void stopTrackingId(String id) {
-		service.pushCommand("UNLISTEN|"+id);
-		otherLocations.remove(id);
+	public void stopTrackingId(OsMoDevice d) {
+		service.pushCommand("UNLISTEN:"+d.getTrackerId());
+		trackingDevices.remove(d.getTrackerId());
 	}
 
 	@Override
@@ -112,8 +112,10 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 			if (location.getTime() - ltime  > pref.get()) {
 				if(lastBufferLocation != null && (!lastBufferLocation.hasSpeed() || lastBufferLocation.getSpeed() < 1) &&
 						lastBufferLocation.distanceTo(location) < 20){
-					// ignores
-					return;
+					if(lastBufferLocation != null && location.getTime() - ltime < 60000) {
+						// ignores
+						return;
+					}
 				}
 				lastBufferLocation = location;
 				bufferOfLocations.add(location);
@@ -139,7 +141,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 	
 
 	@Override
-	public boolean acceptCommand(String command, String data, JSONObject obj, OsMoThread thread) {
+	public boolean acceptCommand(String command, String tid, String data, JSONObject obj, OsMoThread thread) {
 		if(command.equals("LISTEN")) {
 			return true;
 		} else if(command.equals("UNLISTEN")) {
@@ -154,8 +156,7 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 				e.printStackTrace();
 			}
 			return true;
-		} else if(command.startsWith("LT:")) {
-			String tid = command.substring(command.indexOf(':') + 1);
+		} else if(command.equals("LT")) {
 			float lat = 0;
 			float lon = 0;
 			float speed = 0;
@@ -185,12 +186,8 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 				if(speed > 0) {
 					loc.setSpeed(speed);
 				}
-				otherLocations.put(tid, loc);
 				if(trackerListener != null) {
 					trackerListener.locationChange(tid, loc);
-				}
-				if(uiTrackerListener != null){
-					uiTrackerListener.locationChange(tid, loc);
 				}
 			}
 			return true;
@@ -206,12 +203,16 @@ public class OsMoTracker implements OsMoSender, OsMoReactor {
 		return trackerListener;
 	}
 	
-	public OsmoTrackerListener getUITrackerListener() {
-		return uiTrackerListener;
+
+	public Collection<OsMoDevice> getTrackingDevices() {
+		return trackingDevices.values();
 	}
-	
-	public void setUITrackerListener(OsmoTrackerListener trackerListener) {
-		this.uiTrackerListener = trackerListener;
+
+	@Override
+	public void reconnect() {
+		if(autoStart.get()) {
+			enableTracker();
+		}
 	}
 
 	

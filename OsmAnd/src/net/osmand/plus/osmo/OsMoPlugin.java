@@ -1,15 +1,20 @@
 package net.osmand.plus.osmo;
 
+import java.text.SimpleDateFormat;
+
 import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
+import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
@@ -34,10 +39,17 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	private OsMoTracker tracker;
 	private OsMoGroups groups;
 	private BaseMapWidget osmoControl;
+	private OsMoPositionLayer olayer;
+
+	// 2014-05-27 23:11:40
+	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	public OsMoPlugin(final OsmandApplication app) {
 		service = new OsMoService(app);
-		tracker = new OsMoTracker(service, app.getSettings().OSMO_SAVE_TRACK_INTERVAL);
+		tracker = new OsMoTracker(service, app.getSettings().OSMO_SAVE_TRACK_INTERVAL,
+				app.getSettings().OSMO_AUTO_SEND_LOCATIONS);
+		new OsMoControlDevice(app, service, tracker);
+		groups = new OsMoGroups(service, tracker, app.getSettings());
 		this.app = app;
 		ApplicationMode.regWidget("osmo_control", (ApplicationMode[])null);
 	}
@@ -45,10 +57,6 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	@Override
 	public boolean init(final OsmandApplication app) {
 		service.connect(true);
-		if(app.getSettings().OSMO_AUTO_SEND_LOCATIONS.get()) {
-			tracker.enableTracker();
-		}
-		groups = new OsMoGroups(service, tracker, app.getSettings());
 		return true;
 	}
 
@@ -86,6 +94,51 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	}
 	
 	@Override
+	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude,
+			ContextMenuAdapter adapter, final Object selectedObj) {
+		if(selectedObj instanceof OsMoDevice) {
+			adapter.item(R.string.osmo_center_location).icons(R.drawable.ic_action_gloc_dark, 
+					R.drawable.ic_action_gloc_light).listen(new OnContextMenuClick() {
+						
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							OsMoDevice o = (OsMoDevice) selectedObj;
+							double lat = o.getLastLocation() == null ? latitude : o.getLastLocation().getLatitude();
+							double lon = o.getLastLocation() == null ? longitude : o.getLastLocation().getLongitude();
+							mapActivity.getMapView().setLatLon(lat, lon);
+							OsMoPositionLayer.setFollowTrackerId(o);
+						}
+					}).position(0).reg();
+			if(OsMoPositionLayer.getFollowDestinationId() != null) {
+				adapter.item(R.string.osmo_cancel_moving_target).icons(R.drawable.ic_action_close_dark, 
+						R.drawable.ic_action_close_light).listen(new OnContextMenuClick() {
+
+							@Override
+							public void onContextMenuClick(int itemId, int pos, boolean isChecked,
+									DialogInterface dialog) {
+								OsMoPositionLayer.setFollowDestination(null);
+							}
+							
+						}).position(0).reg();
+			}
+			adapter.item(R.string.osmo_set_moving_target).icons(R.drawable.ic_action_flag_dark, 
+					R.drawable.ic_action_flag_light).listen(new OnContextMenuClick() {
+						
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							OsMoDevice o = (OsMoDevice) selectedObj;
+							if(o.getLastLocation() != null) {
+								TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
+								targets.navigateToPoint(new LatLon(o.getLastLocation().getLatitude(), o.getLastLocation().getLongitude()), true, -1);
+							}
+							OsMoPositionLayer.setFollowDestination(o);
+						}
+					}).position(1).reg();
+		}
+		super.registerMapContextMenuActions(mapActivity, latitude, longitude, adapter, selectedObj);
+	}
+	
+	@Override
 	public void registerLayers(MapActivity activity) {
 		super.registerLayers(activity);
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
@@ -93,6 +146,24 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		layer.getMapInfoControls().registerSideWidget(osmoControl,
 				R.drawable.mon_osmo_conn_big, R.string.osmo_control, "osmo_control", false, 18);
 		layer.recreateControls();
+		
+		if(olayer != null) {
+			activity.getMapView().removeLayer(olayer);
+		}
+		olayer = new OsMoPositionLayer(activity, this);
+		activity.getMapView().addLayer(olayer, 5.5f);
+	}
+	
+	@Override
+	public void mapActivityPause(MapActivity activity) {
+		groups.setUiListener(null);
+	}
+	
+	@Override
+	public void mapActivityResume(MapActivity activity) {
+		if(olayer != null) {
+			groups.setUiListener(olayer);
+		}
 	}
 	
 	/**
@@ -112,6 +183,21 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				boolean visible = true;
 				String txt = "OsMo";
 				String subtxt = "";
+				SessionInfo si = getService().getCurrentSessionInfo();
+				if (si != null) {
+					String uname = si.username;
+					if (uname != null && uname.length() > 0) {
+						if (uname.length() > 7 && uname.indexOf(' ') != -1) {
+							uname = uname.substring(0, uname.indexOf(' '));
+						}
+						if (uname.length() > 4 && uname.indexOf(' ') != -1) {
+							txt = "";
+							subtxt = uname;
+						} else {
+							txt = uname;
+						}
+					}
+				}
 				Drawable small = srcinactive;
 				Drawable big = srcinactive;
 				long last = service.getLastCommandTime();
@@ -218,5 +304,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	public OsMoService getService() {
 		return service;
 	}
+
+	
 
 }

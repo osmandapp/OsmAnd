@@ -1,16 +1,27 @@
 package net.osmand.plus.osmo;
 
 
+import java.util.List;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.util.Algorithms;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.text.method.LinkMovementMethod;
+import android.util.TypedValue;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SettingsOsMoActivity extends SettingsBaseActivity {
@@ -19,7 +30,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 	private Preference trackerId;
 	private CheckBoxPreference sendLocationsref;
 	
-	public static final int[] SECONDS = new int[] {1, 2, 3, 5, 10, 15, 30, 60, 90};
+	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 30, 60, 90};
 	public static final int[] MINUTES = new int[] {2, 3, 5};
 	
 	
@@ -83,11 +94,29 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 	
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
+		final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
 		if (preference == debugPref) {
 			updateDebugPref();
+			Builder bld = new AlertDialog.Builder(this);
+			StringBuilder bs = new StringBuilder();
+			List<String> hs = plugin.getService().getHistoryOfCommands();
+			if(hs != null) {
+				for(int i = hs.size() - 1 ; i >= 0; i--) {
+					bs.append(hs.get(i)).append("\n");
+				}
+			}
+			ScrollView sv = new ScrollView(this);
+			TextView tv = new TextView(this);
+			sv.addView(tv);
+			tv.setText(bs.toString());
+			tv.setPadding(5, 0, 5, 5);
+			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
+			tv.setMovementMethod(LinkMovementMethod.getInstance());
+			bld.setView(sv);
+			bld.setPositiveButton(R.string.default_buttons_ok, null);
+			bld.show();
 			return true;
 		} else if(preference == trackerId) {
-			final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
 			OsMoService service = plugin.getService();
 			SessionInfo ci = service.getCurrentSessionInfo();
 			if(ci == null || ci.trackerId == null) {
@@ -95,14 +124,37 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			} else {
 				ShareDialog dlg = new ShareDialog(this);
 				dlg.setTitle(getString(R.string.osmo_tracker_id));
+				dlg.setAction(getString(R.string.osmo_regenerate_login_ids), getRegenerateAction());
 				dlg.viewContent(ci.trackerId);
-				dlg.shareURLOrText(ci.trackerId, getString(R.string.osmo_tracker_id_share, ci.trackerId, ""), null);
+				String url = OsMoService.SHARE_TRACKER_URL+Uri.encode(ci.trackerId);
+				dlg.shareURLOrText(ci.trackerId, getString(R.string.osmo_tracker_id_share, ci.trackerId, "", url), null);
 				dlg.showDialog();
 			}
 		}
 		return super.onPreferenceClick(preference);
 	}
 	
+	private Runnable getRegenerateAction() {
+		return new Runnable() {
+			
+			@Override
+			public void run() {
+				Builder bld = new AlertDialog.Builder(SettingsOsMoActivity.this);
+				bld.setMessage(R.string.osmo_regenerate_login_ids_confirm);
+				bld.setPositiveButton(R.string.default_buttons_yes, new OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
+						plugin.getService().pushCommand(OsMoService.REGENERATE_CMD);
+					}
+				});
+				bld.setNegativeButton(R.string.default_buttons_no, null);
+				bld.show();
+			}
+		};
+	}
+
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		boolean p = super.onPreferenceChange(preference, newValue);

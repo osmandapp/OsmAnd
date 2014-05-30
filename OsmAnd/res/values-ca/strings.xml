@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -1749,4 +1749,32 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_new_device">Connectar al dispositiu</string>
     <string name="osmo_connected_devices">Dispositius connectats</string>
     <string name="osmo_groups">OsMo Grups/Dispositius</string>
-    </resources>
+    <string name="osmo_group_info">Informació</string>
+    <string name="osmo_group">Grup OsMo</string>
+    <string name="osmo_group_share">Per connectar al grup %2$s, especifiqui l\'identificador de grup (%1$s)</string>
+    <string name="osmo_share_connect_device">Permetre el seguiment d\'aquest dispositiu permanentment</string>
+    <string name="osmo_share_current_session">Compartir la posició actual al navegador</string>
+    <string name="osmo_session_not_available">Sessió no disponible, si us plau verifiqui que \'Enviar posicions\' està activat.</string>
+    <string name="osmo_share_session">Compartir la sessió</string>
+    <string name="osmo_session_id_share">URL de la sessió per seguir el dispositiu (%1$s)</string>
+    <string name="osmo_tracker_id_share">Per connectar al dispositiu destí %2$s, especifiqui l\'identificador de seguiment (%1$s)</string>
+    <string name="osmo_track_interval">Freqüència de registre</string>
+	<string name="osmo_track_interval_descr">Seleccioneu la freqüència d\'enviament de la posició</string>
+    <string name="int_days">dies</string>
+    <string name="osmo_connect_menu">Connecti</string>
+    <string name="osmo_expire_group">Expira en</string>
+    <string name="osmo_group_description">Descripció</string>
+    <string name="osmo_group_policy">Política</string>
+    <string name="osmo_connect_to_group_id">Identificador de grup</string>
+    <string name="osmo_group_name">Nom del grup</string>
+    <string name="osmo_connect_to_group">Enllaç al grup</string>
+    <string name="osmo_connect">Connexió a</string>
+    <string name="osmo_create_group">Crear un grup</string>
+    <string name="osmo_server_operation_failed">Fallida del servidor OsMo</string>
+    <string name="osmo_activity">Monitorització OSM</string>
+    <string name="osmo_enable_tracker">Enviar les meves ubicacions</string>
+    <string name="osmo_control">Accés ràpid OsMo</string>
+    <string name="local_index_mi_export">Exportar</string>
+	<string name="import_file_favourites">Guardar com arxiu GPX o posar-lo als favorits?</string>
+	<string name="import_save">Guardar</string>
+	</resources>

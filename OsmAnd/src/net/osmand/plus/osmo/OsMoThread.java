@@ -7,18 +7,20 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,12 +32,13 @@ public class OsMoThread {
 //	private static String TRACKER_SERVER = "srv.osmo.mobi";
 //	private static int TRACKER_PORT = 3245;
 
+	
 	private static final String PING_CMD = "P";
 	protected final static Log log = PlatformUtil.getLog(OsMoThread.class);
 	private static final long HEARTBEAT_DELAY = 100;
 	private static final long HEARTBEAT_FAILED_DELAY = 10000;
 	private static final long TIMEOUT_TO_RECONNECT = 60 * 1000;
-	private static final long TIMEOUT_TO_PING = 2 * 60 * 1000;
+	private static final long TIMEOUT_TO_PING = 5 * 60 * 1000;
 	private static final long LIMIT_OF_FAILURES_RECONNECT = 10;
 	private static final long SELECT_TIMEOUT = 500;
 	private static int HEARTBEAT_MSG = 3;
@@ -47,7 +50,6 @@ public class OsMoThread {
 	private boolean reconnect;
 	private Selector selector;
 
-	private List<OsMoSender> listSenders;
 	private List<OsMoReactor> listReactors;
 
 	private int authorized = 0; // 1 - send, 2 - authorized
@@ -62,12 +64,14 @@ public class OsMoThread {
 	private ByteBuffer pendingReadCommand = ByteBuffer.allocate(2048);
 	private LinkedList<String> queueOfMessages = new LinkedList<String>();
 	
+	private SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+	
+	private ConcurrentLinkedQueue<String> last100Commands = new ConcurrentLinkedQueue<String>();
 	
 	
 
-	public OsMoThread(OsMoService service, List<OsMoSender> listSenders, List<OsMoReactor> listReactors) {
+	public OsMoThread(OsMoService service, List<OsMoReactor> listReactors) {
 		this.service = service;
-		this.listSenders = listSenders;
 		this.listReactors = listReactors;
 		// start thread to receive events from OSMO
 		HandlerThread h = new HandlerThread("OSMo Service");
@@ -101,6 +105,9 @@ public class OsMoThread {
 		}
 		this.activeChannel = activeChannel;
 		key.attach(new Integer(++activeConnectionId));
+		for(OsMoReactor sender : listReactors) {
+			sender.reconnect();
+		}
 
 	}
 	
@@ -243,13 +250,19 @@ public class OsMoThread {
 	private void processReadMessages() {
 		while(!queueOfMessages.isEmpty()){
 			String cmd = queueOfMessages.poll();
-			log.info("OSMO get:"+cmd);
+			cmd(cmd, false);
 			int k = cmd.indexOf('|');
 			String header = cmd;
+			String id = "";
 			String data = "";
 			if(k >= 0) {
 				header = cmd.substring(0, k);
 				data = cmd.substring(k + 1);
+			}
+			int ks = header.indexOf(':');
+			if (ks >= 0) {
+				id = header.substring(ks + 1);
+				header = header.substring(0, ks);
 			}
 			JSONObject obj = null;
 			if(data.startsWith("{")) {
@@ -278,6 +291,9 @@ public class OsMoThread {
 					}
 				}
 				continue;
+			} else if(header.equalsIgnoreCase(OsMoService.REGENERATE_CMD)) {
+				reconnect = true;
+				continue;
 			} else if(header.equalsIgnoreCase(PING_CMD)) {
 				pingSent = 0;
 				continue;
@@ -285,7 +301,7 @@ public class OsMoThread {
 			}
 			boolean processed = false;
 			for (OsMoReactor o : listReactors) {
-				if (o.acceptCommand(header, data, obj, this)) {
+				if (o.acceptCommand(header, id, data, obj, this)) {
 					processed = true;
 					break;
 				}
@@ -329,6 +345,12 @@ public class OsMoThread {
 	}
 
 	private void writeCommands() throws UnsupportedEncodingException, IOException {
+		if(authorized == 0) {
+			String auth = "TOKEN|"+ sessionInfo.token;
+			cmd(auth, true);
+			authorized = 1;
+			pendingSendCommand =  ByteBuffer.wrap(prepareCommand(auth).toString().getBytes("UTF-8"));
+		} 
 		if (pendingSendCommand == null) {
 			pendingSendCommand = getNewPendingSendCommand();
 		}
@@ -346,63 +368,57 @@ public class OsMoThread {
 	
 
 	private ByteBuffer getNewPendingSendCommand() throws UnsupportedEncodingException {
-		if(authorized == 0) {
-			String auth = "TOKEN|"+ sessionInfo.token;
-			log.info("OSMO send:" + auth);
-			authorized = 1;
-			return ByteBuffer.wrap(prepareCommand(auth).toString().getBytes("UTF-8"));
-		}
 		if(authorized == 1) {
 			return null;
 		}
-		for (OsMoSender s : listSenders) {
+		for (OsMoReactor s : listReactors) {
 			String l = s.nextSendCommand(this);
 			if (l != null) {
-				StringBuilder res = prepareCommand(l);
-				log.info("OSMO send " + res);
-				return ByteBuffer.wrap(res.toString().getBytes("UTF-8"));
+				cmd(l, true);
+				return ByteBuffer.wrap(prepareCommand(l).toString().getBytes("UTF-8"));
 			}
 		}
 		if(System.currentTimeMillis() - lastSendCommand > TIMEOUT_TO_PING) {
 			if(pingSent == 0) {
 				pingSent = System.currentTimeMillis();
+				cmd(PING_CMD, true);
 				return ByteBuffer.wrap(prepareCommand(PING_CMD).toString().getBytes("UTF-8"));
 			}
-			
 		}
 		return null;
 	}
 	
+	public ConcurrentLinkedQueue<String> getLast100Commands() {
+		return last100Commands;
+	}
+	
+	private void cmd(String cmd, boolean send) {
+		log.info("OsMO" + (send ? "> " : ">> ") + cmd);
+		last100Commands.add((send ? "> " : ">> ") + df.format(new Date()) + "  " + cmd);
+	}
+
 	public SessionInfo getSessionInfo() {
 		return sessionInfo;
 	}
 
-	private StringBuilder prepareCommand(String l) {
-		boolean addNL = true;
-		StringBuilder res = new StringBuilder();
-		int i = 0;
-		while (true) {
-			int ni = l.indexOf('\n');
-			if (ni == l.length() - 1) {
-				res.append(l.substring(i));
-				addNL = false;
-				break;
-			} else if (ni == -1) {
-				res.append(l.substring(i));
-				break;
-			} else {
-				res.append(l.substring(i, ni));
-				res.append("\\").append("n");
+	private String prepareCommand(String l) {
+		StringBuilder res = new StringBuilder(l.length());
+		for(int i = 0; i < l.length(); i++) {
+			char c = l.charAt(i);
+			if(c == '\n' || c == '=' || c == '\\') {
+			 res.append('\\');
 			}
-			i = ni + 1;
+			res.append(c);
 		}
-		if (addNL) {
-			l += "\n";
-		}
-		return res;
+		
+		return res.toString().trim() + "=\n";
 	}
 
 	public long getLastCommandTime() {
 		return lastSendCommand;
+	}
+
+	public void reconnect() {
+		reconnect = true;
 	}
 }

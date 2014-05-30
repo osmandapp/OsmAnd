@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
@@ -1941,7 +1941,11 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	</string>
 	<string name="osmo_settings_uuid">고유 장치 id</string>
     <string name="osmo_settings_descr">모니터링 설정 및 설정 개인 모니터링 채널을 구성</string>
-    <string name="osmo_plugin_description">OpenStreetMap의 모니터링 - 원격 제어를 위한 많은 기능과 함께 고급 실시간 모니터링 http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Advanced Live Monitoring. It provides possibilities to track other devices and be tracked. 
+        Create anonymous groups, share each other location and comminucate. It has various settings for session tracking or permanent tracking.
+        Anonymous groups are limited for a number of days and for some feature, i.e. there is no remote control and group administrator. 
+        Fully functional groups should be created on the website and only registered users have access to them.
+        Please read more on http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OSMo (고급 라이브 모니터링)</string>
     <string name="osmo_settings">OSMo(오스모:OpenStreetMap-Monitoring)</string>
    	<string name="share_route_as_gpx">GPX 파일로 루트 공유</string>
@@ -1949,7 +1953,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="arrival_distance">도착 알림</string>
     <string name="arrival_distance_descr">도착 알림을 원하세요 ?</string>
     <string name="keep_informing_never">결코</string>
-    <string name="keep_informing_descr">정기적 간격으로 운행 명령을 발표</string>
+    <string name="keep_informing_descr">정기적으로 탐색 지시를 다시 발표</string>
     <string name="keep_informing">운행 명령을 반복</string>
 	<string name="navigation_intent_invalid">잘못된 포맷 : %s</string>
 <string name="osmo_register_device">장치 등록... </string>
@@ -1961,7 +1965,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="hours_ago">시간 전</string>
     <string name="minutes_ago">분 전</string>
     <string name="seconds_ago">초 전</string>
-    <string name="osmo_connect_to_device_name">장치의 이름</string>
+    <string name="osmo_connect_to_device_name">사용자 이름</string>
     <string name="osmo_connect_to_device_tracker_id">트래커 ID</string>
     <string name="osmo_connect_to_device">장치와 연결</string>
     <string name="osmo_join_group">그룹에 가입</string>
@@ -1979,10 +1983,49 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_locations_sent">위치 전송 %1$d (in buffer %2$d) </string>
     <string name="osmo_conn_successfull">설정 된 연결 : %1$s </string>
     <string name="tip_recent_changes_1_8_alpha">Changes in 1.8:
-        * GPX 트랙의 루트 포인트 사이의 길을 계산
+        * GPX 트랙의 루트 포인트 사이의 도로 계산
         * 다운로드에 대한 국가의 변경된 레이아웃 (support local names search)
     </string>
     <string name="use_points_as_intermediates">루트포인트 사이의 경로를 계산</string>
     <string name="osmo_mode_restart">OsMo 세션 재시작</string>
     <string name="osmo_settings_debug">디버그 정보</string>
+    <string name="osmo_group_info">정보</string>
+    <string name="osmo_group">OsMo 그룹</string>
+    <string name="osmo_group_share">%2$s 그룹에 연결하려면, group id (%1$s)를 지정하세요</string>
+    <string name="osmo_share_connect_device">영구적으로 이 장치를 따릅니다.</string>
+    <string name="osmo_share_current_session">브라우저에서 현재의 세션을 공유하기</string>
+    <string name="osmo_session_not_available">세션을 사용할 수 없습니다 , \'Send locations\' 가 켜져 있는지 확인하시기 바랍니다</string>
+    <string name="osmo_share_session">세션 공유</string>
+    <string name="osmo_session_id_share">장치를 추적하기 위한 세션 URL(%1$s)</string>
+    <string name="osmo_tracker_id_share">%2$s 대상장치를 연결하려면, tracker id(%1$s)를 지정하세요</string>
+    <string name="osmo_track_interval">로깅 간격</string>
+	<string name="osmo_track_interval_descr">위치를 전송하도록 시간 간격을 선택</string>
+    <string name="int_days">일</string>
+    <string name="osmo_connect_menu">연결</string>
+    <string name="osmo_expire_group">만료</string>
+    <string name="osmo_group_description">설명</string>
+    <string name="osmo_group_policy">정책</string>
+    <string name="osmo_connect_to_group_id">그룹 ID</string>
+    <string name="osmo_group_name">그룹 이름</string>
+    <string name="osmo_connect_to_group">그룹 링크</string>
+    <string name="osmo_connect">~에 연결</string>
+    <string name="osmo_create_group">그룹 만들기</string>
+    <string name="osmo_server_operation_failed">OsMo 서버 작업 실패</string>
+    <string name="osmo_activity">OSMO 모니터링</string>
+    <string name="osmo_enable_tracker">내 위치 보내기</string>
+    <string name="osmo_control">OsMo 빠른 접근</string>
+    <string name="local_index_mi_export">내보내기</string>
+	<string name="import_file_favourites">GPX 파일로 저장? 또는 즐겨찾기로 가져오기?</string>
+	<string name="import_save">저장</string>
+	<string name="color_red">빨강</string>
+	<string name="color_pink">핑크</string>
+	<string name="color_orange">오렌지</string>
+	<string name="color_brown">갈색</string>
+	<string name="color_yellow">노랑</string>
+	<string name="color_lightblue">밝은 청색</string>
+	<string name="color_blue">파랑</string>
+	<string name="color_magenta">자청색</string>
+	
+    <string name="osmo_edit_device">사용자 등록 정보 변경</string>
+    <string name="osmo_edit_color">디스플레이 색상</string>
     </resources>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
@@ -1708,9 +1708,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="navigation_intent_invalid">Nieprawidłowy format : %s</string>
 <string name="osmo_settings_uuid">Unikatowy identyfikator urządzenia</string>
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Zaawansowany Monitoring na Żywo z wieloma funkcjami do zdalnego zarządzania na http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Zaawansowany Monitoring na Żywo. Daje możliwość śledzenia innych urządzeń i vice versa.
+	Twórz anonimowe grupy, dziel się lokalizacją i prowadź komunikację. System ma wiele ustawień dla śledzenia w sesji lub stałego śledzenia.
+	Grupy anonimowe mają ograniczenia czasowe i funkcjonalne, np. nie ma zdalnej kontroli i administratora grupy.
+	W pełni funkcjonalne grupy powinny być tworzone przez witrynę, a dostęp zarezerwowany tylko dla zarejestrowanych użytkowników.
+	Więcej na http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (Zaawansowany Monitoring na Żywo)</string>
-    <string name="osmo_settings">OSMo</string>
+    <string name="osmo_settings">OsMo Monitoring OpenStreetMap (beta)</string>
    	<string name="keep_informing_never">Nigdy</string>
     <string name="keep_informing_descr">Podawaj instrukcje nawigacji w regularnych odstępach czasu</string>
     <string name="keep_informing">Powtarzaj instrukcje nawigacji</string>
@@ -1726,6 +1730,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="tip_recent_changes_1_8_alpha">Zmiany w wersji 1.8:
         * Obliczanie trasy pomiędzy punktami w zapisanym śladzie GPX
         * Zmieniono wygląd krajów do pobrania (wsparcie wyszukiwania nazw lokalnych)
+	* Importowanie GPX/KML (zamiana z KML na GPX)
     </string>
     <string name="osmo_auto_send_locations_descr">Po uruchomieniu aplikacji automatycznie rozpocznij sesję trackera i przesyłaj pozycję</string>
     <string name="osmo_auto_send_locations">Automatycznie uruchom sesję trackera</string>
@@ -1738,14 +1743,53 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="hours_ago">godzin temu</string>
     <string name="minutes_ago">minut temu</string>
     <string name="seconds_ago">sekund temu</string>
-    <string name="osmo_connect_to_device_name">Nazwa urządzenia</string>
+    <string name="osmo_connect_to_device_name">Nazwa użytkownika</string>
     <string name="osmo_connect_to_device_tracker_id">Identyfikator trackera</string>
     <string name="osmo_connect_to_device">Sparuj z urządzeniem</string>
     <string name="osmo_join_group">Dołącz do grupy</string>
     <string name="osmo_new_device">Połącz z urządzeniem</string>
     <string name="osmo_connected_devices">Podłączone urządzenia</string>
-    <string name="osmo_groups">Grupy/Urządzenia OSMo</string>
+    <string name="osmo_groups">Grupy/Urządzenia OsMo</string>
     <string name="osmo_tracker_id_descr">Kliknij, aby zobaczyć lub udostępnić identyfikator trackera.
 	Używając identyfikatora trackera podłączone urządzenia będą mogły śledzić każdy ruch tego urządzenia! Aby się rozłączyć, wybierz opcję: Generuj ponownie.</string>
     <string name="osmo_locations_sent">Położenie wysłane %1$d (w buforze %2$d) </string>
-    </resources>
+    <string name="color_red">czerwony</string>
+	<string name="color_pink">różowy</string>
+	<string name="color_orange">pomarańczowy</string>
+	<string name="color_brown">brązowy</string>
+	<string name="color_yellow">żółty</string>
+	<string name="color_lightblue">jasnoniebieski</string>
+	<string name="color_blue">niebieski</string>
+	<string name="color_magenta">purpurowy</string>
+	
+    <string name="osmo_edit_device">Zmień właściwości użytkownika</string>
+    <string name="osmo_edit_color">Kolor wyświetlacza</string>
+    <string name="osmo_group_info">Informacje</string>
+    <string name="osmo_group">Grupa OsMo</string>
+    <string name="osmo_group_share">W celu dołączenia do grupy %2$s, określ identyfikator grupy (%1$s)</string>
+    <string name="osmo_share_connect_device">Pozwól na stałe śledzenie tego urządzenia</string>
+    <string name="osmo_share_current_session">Udostępnij bieżącą sesję w przeglądarce</string>
+    <string name="osmo_session_not_available">Sesja niedostępna, sprawdź, czy \'Send locations\' jest włączone.</string>
+    <string name="osmo_share_session">Udostępnij sesję</string>
+    <string name="osmo_session_id_share">Adres sesji, aby śledzić urządzenie (%1$s)</string>
+    <string name="osmo_tracker_id_share">W celu połączenia się z docelowym urządzeniem %2$s, określ identyfikator trackera (%1$s)</string>
+    <string name="osmo_track_interval">Interwał zapisu śledzenia</string>
+	<string name="osmo_track_interval_descr">Wybierz interwał wysyłania lokalizacji</string>
+    <string name="int_days">dni</string>
+    <string name="osmo_connect_menu">Połącz</string>
+    <string name="osmo_expire_group">Wygasa za</string>
+    <string name="osmo_group_description">Opis</string>
+    <string name="osmo_group_policy">Polityka grup</string>
+    <string name="osmo_connect_to_group_id">Identyfikator grupy</string>
+    <string name="osmo_group_name">Nazwa grupy</string>
+    <string name="osmo_connect_to_group">Sparuj z grupą</string>
+    <string name="osmo_connect">Połącz z</string>
+    <string name="osmo_create_group">Utwórz grupę</string>
+    <string name="osmo_server_operation_failed">Błąd działania Serwera OsMo</string>
+    <string name="osmo_activity">Monitorowanie OsMo</string>
+    <string name="osmo_enable_tracker">Wysyłaj moją lokalizację</string>
+    <string name="osmo_control">Szybki dostęp do OsMo</string>
+    <string name="local_index_mi_export">Eksportuj</string>
+	<string name="import_file_favourites">Zapisać jako plik GPX czy zaimportować do ulubionych?</string>
+	<string name="import_save">Zapisz</string>
+	</resources>

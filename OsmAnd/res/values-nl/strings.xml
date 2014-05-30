@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -1765,4 +1765,43 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="use_points_as_intermediates">Bereken route tussen punten</string>
     <string name="osmo_mode_restart">Herstart OsMo-sessie</string>
     <string name="osmo_settings_debug">Debug-informatie</string>
+    <string name="osmo_group_info">Info</string>
+    <string name="osmo_group">OsMo groep</string>
+    <string name="osmo_group_share">Om je te verbinden met de groep %2$s, specificeer groep id (%1$s)</string>
+    <string name="osmo_share_connect_device">Sta toe, dat dit toestel permanent gevolgd wordt</string>
+    <string name="osmo_share_current_session">Deel de huidige sessie in de browser</string>
+    <string name="osmo_session_not_available">Sessie niet beschikbaar, controleer of \'Send locations\' aan staat.</string>
+    <string name="osmo_share_session">Deel sessie</string>
+    <string name="osmo_session_id_share">Sessie url om toestel (%1$s) te volgen</string>
+    <string name="osmo_tracker_id_share">Om je te verbinden met toestel %2$s, specifeer tracker id (%1$s)</string>
+    <string name="osmo_track_interval">Log interval</string>
+	<string name="osmo_track_interval_descr">Kies de interval om je positie te zenden</string>
+    <string name="int_days">dagen</string>
+    <string name="osmo_connect_menu">Verbinden</string>
+    <string name="osmo_expire_group">Vervalt over</string>
+    <string name="osmo_group_description">Beschrijving</string>
+    <string name="osmo_group_policy">Groepsbeleid</string>
+    <string name="osmo_connect_to_group_id">Groep-ID</string>
+    <string name="osmo_group_name">Groepnaam</string>
+    <string name="osmo_connect_to_group">Verbind met groep</string>
+    <string name="osmo_connect">Verbind met</string>
+    <string name="osmo_create_group">Maak een nieuwe groep</string>
+    <string name="osmo_server_operation_failed">OsMo server probleem</string>
+    <string name="osmo_activity">OsMo-monitor</string>
+    <string name="osmo_enable_tracker">Zend mijn posities</string>
+    <string name="osmo_control">OsMo snelle toegang</string>
+    <string name="local_index_mi_export">Exporteer</string>
+	<string name="import_file_favourites">Bewaren als GPX bestand of importeren in favorieten?</string>
+	<string name="import_save">Bewaren</string>
+	<string name="color_red">rood</string>
+	<string name="color_pink">roze</string>
+	<string name="color_orange">oranje</string>
+	<string name="color_brown">bruin</string>
+	<string name="color_yellow">geel</string>
+	<string name="color_lightblue">lichtblauw</string>
+	<string name="color_blue">blauw</string>
+	<string name="color_magenta">magenta</string>
+	
+    <string name="osmo_edit_device">Wijzig gebruiker-instellingen</string>
+    <string name="osmo_edit_color">Weergavekleur</string>
     </resources>
