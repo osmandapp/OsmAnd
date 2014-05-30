@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
     <string name="auto_zoom_close">Зачыніць</string>
     <string name="auto_zoom_far">Для сярэдняга масштаба</string>
@@ -1798,4 +1798,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_set_moving_target">Ўсталяваць як рухомая мішэнь</string>
     <string name="osmo_cancel_moving_target">Скасаваць рухомую мішэнь</string>
     <string name="osmo_center_location">Цэнтраваць экран</string>
+    <string name="osmo_follow">Суправаджаць</string>
     </resources>
