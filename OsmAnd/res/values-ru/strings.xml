@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
@@ -1601,7 +1601,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="share_fav">Поделиться</string>
 	<string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
 	<string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
-    <string name="osmo_connect_to_device_name">Имя устройства</string>
+    <string name="osmo_connect_to_device_name">Имя пользователя</string>
     <string name="osmo_join_group">Войти в группу</string>
     <string name="osmo_new_device">Следить за устройством</string>
     <string name="osmo_connected_devices">Устройства</string>
@@ -1646,7 +1646,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_session_id_share">URL сессии для отслеживания устройства (%1$s)</string>
     <string name="local_index_mi_export">Экспорт</string>
 	<string name="osmo_group_info">Информация</string>
-    <string name="osmo_group_share">Чтобы подключиться к группе %2$s, укажите ID группы (%1$s)</string>
+    <string name="osmo_group_share">Чтобы подключиться к группе %2$s, укажите ID группы (%1$s) или нажмите %3$s.</string>
     <string name="osmo_share_connect_device">Поделиться ID трекера</string>
     <string name="osmo_connect_menu">Соединение</string>
     <string name="osmo_connect">Подключиться к</string>
