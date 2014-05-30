@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
@@ -1991,13 +1991,13 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_settings_debug">디버그 정보</string>
     <string name="osmo_group_info">정보</string>
     <string name="osmo_group">OsMo 그룹</string>
-    <string name="osmo_group_share">%2$s 그룹에 연결하려면, group id (%1$s)를 지정하세요</string>
+    <string name="osmo_group_share">%2$s 그룹에 연결하려면, 그룹 아이디(%1$s) 를 지정하세요 또는 %3$s 를 클릭하세요.</string>
     <string name="osmo_share_connect_device">영구적으로 이 장치를 따릅니다.</string>
     <string name="osmo_share_current_session">브라우저에서 현재의 세션을 공유하기</string>
     <string name="osmo_session_not_available">세션을 사용할 수 없습니다 , \'Send locations\' 가 켜져 있는지 확인하시기 바랍니다</string>
     <string name="osmo_share_session">세션 공유</string>
     <string name="osmo_session_id_share">장치를 추적하기 위한 세션 URL(%1$s)</string>
-    <string name="osmo_tracker_id_share">%2$s 대상장치를 연결하려면, tracker id(%1$s)를 지정하세요</string>
+    <string name="osmo_tracker_id_share">%2$s 목적지 장치를 연결하려면, %3$s 링크를 클릭하거나 tracker id(%1$s)를 지정하세요</string>
     <string name="osmo_track_interval">로깅 간격</string>
 	<string name="osmo_track_interval_descr">위치를 전송하도록 시간 간격을 선택</string>
     <string name="int_days">일</string>
@@ -2011,7 +2011,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_connect">~에 연결</string>
     <string name="osmo_create_group">그룹 만들기</string>
     <string name="osmo_server_operation_failed">OsMo 서버 작업 실패</string>
-    <string name="osmo_activity">OSMO 모니터링</string>
+    <string name="osmo_activity">OpenStreetMap의 모니터링</string>
     <string name="osmo_enable_tracker">내 위치 보내기</string>
     <string name="osmo_control">OsMo 빠른 접근</string>
     <string name="local_index_mi_export">내보내기</string>
@@ -2028,4 +2028,18 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	
     <string name="osmo_edit_device">사용자 등록 정보 변경</string>
     <string name="osmo_edit_color">디스플레이 색상</string>
+    <string name="osmo_follow">따라가기</string>
+    <string name="osmo_sign_in">로그인</string>
+    <string name="osmo_create_groups_confirm">그룹을 만들려면 OsMo의 사용자 등록이 필요합니다.</string>
+    <string name="osmo_credentials_not_valid">OsMo 자격 증명이 유효하지 않습니다.</string>
+    <string name="osmo_regenerate_login_ids_confirm">개인 ID를 재발급 받으시겠습니까?  연결된 모든 장치는 더 이상 당신의 트랙을 기록할 수 없습니다.</string>
+    <string name="osmo_regenerate_login_ids">사용자 ID 재생성</string>
+    <string name="osmo_cancel_moving_target">이동 목적지 취소</string>
+    <string name="osmo_center_location">화면 센터</string>
+    <string name="osmo_set_moving_target">이동 목적지로 설정</string>
+    <string name="osmo_use_server_name">등록된 이름</string>
+    <string name="osmo_connect_to_my_nickname">내 별명</string>
+    <string name="osmo_user_name">사용자</string>
+	<string name="color_green">녹색</string>
+	
     </resources>
