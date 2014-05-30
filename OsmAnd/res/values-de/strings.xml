@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
@@ -1764,7 +1764,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_auto_send_locations_descr">Aufzeichnung automatisch starten und Standorte nach dem Starten der Anwendung senden</string>
     <string name="osmo_auto_send_locations">Aufzeichnung automatisch starten</string>
     <string name="osmo_tracker_id">Persönliche Aufzeichnungs-ID</string>
-    <string name="osmo_tracker_id_descr">zum Anzeigen oder Teilen der Aufzeichnungs-ID klicken.
+    <string name="osmo_tracker_id_descr">Zum Anzeigen oder Teilen der Aufzeichnungs-ID klicken.
 	Mit der Aufzeichnungs-ID verbundene Geräte können alle Bewegungen dieses Geräts aufzeigen! Zum Trennen der Verbindung die Regenerieren-Option auswählen.</string>
     <string name="osmo_session_token">Sitzungstoken: %1$s</string>
     <string name="osmo_auth_pending">Auf Autorisierung warten…</string>
@@ -1825,4 +1825,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_user_name">Nutzer</string>
 	<string name="color_green">grün</string>
 	
+    <string name="osmo_follow">Folgen</string>
     </resources>
