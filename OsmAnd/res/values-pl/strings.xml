@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
@@ -1792,4 +1792,18 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="local_index_mi_export">Eksportuj</string>
 	<string name="import_file_favourites">Zapisać jako plik GPX czy zaimportować do ulubionych?</string>
 	<string name="import_save">Zapisz</string>
-	</resources>
+	<string name="osmo_follow">Śledź</string>
+    <string name="osmo_sign_in">Zarejestruj</string>
+    <string name="osmo_create_groups_confirm">Aby utworzyć grupy, musisz być zarejestrowanym użytkownikiem OsMo.</string>
+    <string name="osmo_credentials_not_valid">Twoje dane logowania są nieprawidłowe.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Czy jesteś pewny, że chcesz ponownie wygenerować identyfikator? Wszystkie urządzenia, połączone z Tobą nie będą mogły już Ciebie śledzić.</string>
+    <string name="osmo_regenerate_login_ids">Ponowne generowanie identyfikatora użytkownika</string>
+    <string name="osmo_cancel_moving_target">Anuluj poruszający się cel</string>
+    <string name="osmo_center_location">Wyśrodkuj na ekranie</string>
+    <string name="osmo_set_moving_target">Ustaw jako cel w ruchu</string>
+    <string name="osmo_use_server_name">Zarejestrowana nazwa</string>
+    <string name="osmo_connect_to_my_nickname">Mój nick</string>
+    <string name="osmo_user_name">Użytkownik</string>
+	<string name="color_green">zielony</string>
+	
+    </resources>
