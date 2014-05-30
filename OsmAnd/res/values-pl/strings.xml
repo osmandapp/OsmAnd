@@ -1766,13 +1766,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_edit_color">Kolor wyświetlacza</string>
     <string name="osmo_group_info">Informacje</string>
     <string name="osmo_group">Grupa OsMo</string>
-    <string name="osmo_group_share">W celu dołączenia do grupy %2$s, określ identyfikator grupy (%1$s)</string>
+    <string name="osmo_group_share">W celu dołączenia do grupy %2$s, określ identyfikator grupy (%1$s) lub kliknij %3$s.</string>
     <string name="osmo_share_connect_device">Pozwól na stałe śledzenie tego urządzenia</string>
     <string name="osmo_share_current_session">Udostępnij bieżącą sesję w przeglądarce</string>
-    <string name="osmo_session_not_available">Sesja niedostępna, sprawdź, czy \'Send locations\' jest włączone.</string>
+    <string name="osmo_session_not_available">Sesja niedostępna, sprawdź, czy \'Wyślij lokalizację\' jest włączone.</string>
     <string name="osmo_share_session">Udostępnij sesję</string>
     <string name="osmo_session_id_share">Adres sesji, aby śledzić urządzenie (%1$s)</string>
-    <string name="osmo_tracker_id_share">W celu połączenia się z docelowym urządzeniem %2$s, określ identyfikator trackera (%1$s)</string>
+    <string name="osmo_tracker_id_share">W celu połączenia się z docelowym urządzeniem %2$s, kliknij w link %3$s lub określ identyfikator trackera (%1$s)</string>
     <string name="osmo_track_interval">Interwał zapisu śledzenia</string>
 	<string name="osmo_track_interval_descr">Wybierz interwał wysyłania lokalizacji</string>
     <string name="int_days">dni</string>
@@ -1786,7 +1786,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_connect">Połącz z</string>
     <string name="osmo_create_group">Utwórz grupę</string>
     <string name="osmo_server_operation_failed">Błąd działania Serwera OsMo</string>
-    <string name="osmo_activity">Monitorowanie OsMo</string>
+    <string name="osmo_activity">Monitorowanie OpenStreetMap</string>
     <string name="osmo_enable_tracker">Wysyłaj moją lokalizację</string>
     <string name="osmo_control">Szybki dostęp do OsMo</string>
     <string name="local_index_mi_export">Eksportuj</string>
