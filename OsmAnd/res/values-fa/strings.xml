@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
@@ -1779,4 +1779,28 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="use_points_as_intermediates">محاسبه مسیر بین دو نقطه</string>
     <string name="osmo_mode_restart">راه اندازی مجدد osmo وارد کنید</string>
     <string name="osmo_settings_debug">خطایابی اطلاعات</string>
+    <string name="osmo_follow">در جریان</string>
+    <string name="osmo_sign_in">ورود</string>
+    <string name="osmo_create_groups_confirm">به منظور ایجاد گروه شما باید ابتدا در osmo ثبت نام نمایید.</string>
+    <string name="osmo_credentials_not_valid">حساب کاربری شما معتبر نیست.</string>
+    <string name="osmo_regenerate_login_ids">بازسازی شناسه کاربر</string>
+    <string name="osmo_use_server_name">این نام ثبت شده</string>
+    <string name="osmo_connect_to_my_nickname">نام مستعار</string>
+    <string name="osmo_user_name">کاربر</string>
+	<string name="color_red">قرمز</string>
+	<string name="color_pink">صورتی</string>
+	<string name="color_orange">نارنجی</string>
+	<string name="color_brown">قهوه ای</string>
+	<string name="color_yellow">زرد</string>
+	<string name="color_lightblue">آبی روشن</string>
+	<string name="color_blue">آبی</string>
+	<string name="color_green">سبز</string>
+	
+    <string name="osmo_edit_device">تغییر تنظیمات کاربر</string>
+    <string name="osmo_edit_color">نمایش رنگ</string>
+    <string name="osmo_group_info">اطلاعات</string>
+    <string name="osmo_group">گروه osmo</string>
+    <string name="osmo_group_share">برای اتصال به گروه %2$s, شناسه گروه را تعیین کنید (%1$s) و یا اینجا را کلیک کنید %3$s .</string>
+    <string name="osmo_share_connect_device">اجازه بدهید تا این دستگاه را به صورت دائم دانبال کند</string>
+    <string name="osmo_share_current_session">به اشتراک گذاشتن نشست جاری در مرورگر</string>
     </resources>
