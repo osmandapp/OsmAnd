@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -1542,4 +1542,5 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_use_server_name">Registrerat namn</string>
     <string name="osmo_connect_to_my_nickname">Mitt nick</string>
     <string name="osmo_user_name">Användare</string>
-	</resources>
+	<string name="osmo_follow">Följ</string>
+    </resources>
