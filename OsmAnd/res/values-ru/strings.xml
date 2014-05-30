@@ -1672,4 +1672,5 @@ OsmAnd - открытый источник и активно развается.
 	<string name="color_green">зелёный</string>
 	
     <string name="osmo_credentials_not_valid">Ваши учётные данные osmo не верные.</string>
+    <string name="osmo_follow">Следовать</string>
     </resources>
