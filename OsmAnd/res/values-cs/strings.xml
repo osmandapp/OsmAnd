@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -1570,4 +1570,13 @@ s často kladenými otázkami.</string>
 	<string name="share_fav">Sdílet</string>
 	<string name="share_fav_subject">Oblíbené sdílené přes OsmAnd</string>
 	<string name="navigation_intent_invalid">Neplatný formát : %s</string>
-</resources>
+<string name="osmo_follow">Sledovat</string>
+    <string name="osmo_sign_in">Přihlásit se</string>
+    <string name="osmo_create_groups_confirm">Aby bylo možné vytvořit skupiny musíte být registrovaným uživatelem OsMo.</string>
+    <string name="osmo_credentials_not_valid">Vaše přihlašovací údaje OsMo jsou neplatné.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Opravdu chcete regenerovat osobní ID? Všechna na vás připojená zařízení už nebude možné sledovat.</string>
+    <string name="osmo_regenerate_login_ids">Regenerovat uživatelské ID</string>
+    <string name="osmo_use_server_name">Registrované jméno</string>
+    <string name="osmo_connect_to_my_nickname">Moje přezdívka</string>
+    <string name="osmo_user_name">Uživatel</string>
+	</resources>
