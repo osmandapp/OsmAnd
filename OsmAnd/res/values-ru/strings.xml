@@ -1549,8 +1549,8 @@
 	<string name="osmo_settings_uuid">Уникальный ID устройства</string>
     <string name="osmo_settings_descr">Настройка параметров мониторинга и установка персонального канала мониторинга</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OsMo (Продвинутый живой мониторинг)</string>
-    <string name="osmo_settings">OsMo мониторинг OpenStreetMap (бета)</string>
+    <string name="osmo_plugin_name">OsMo (Продвинутый онлайн-мониторинг)</string>
+    <string name="osmo_settings">OpenStreetMap-Мониторинг</string>
    	<string name="navigation_intent_invalid">Неправильный формат: %s</string>
 <string name="share_route_subject">Маршрут предоставленный через OsmAnd</string>
 	<string name="osmand_extended_description_4000_chars">
