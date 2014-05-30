@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -1730,4 +1730,18 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="local_index_mi_export">Exportar</string>
 	<string name="import_file_favourites">¿Guardar como archivo GPX o importar a favoritos?</string>
 	<string name="import_save">Guardar</string>
-	</resources>
+	<string name="osmo_follow">Siguiente</string>
+    <string name="osmo_sign_in">Ingresar</string>
+    <string name="osmo_create_groups_confirm">Con el fin de crear grupos es necesario ser usuario registrado de OsMo.</string>
+    <string name="osmo_credentials_not_valid">Tus credenciales osmo no son válidas.</string>
+    <string name="osmo_regenerate_login_ids_confirm">¿Estás seguro de regenerar los identificadores personales? Todos los dispositivos conectados a ti, no serán capaces de registrarte nunca más.</string>
+    <string name="osmo_regenerate_login_ids">Regenerar identificación del usuario</string>
+    <string name="osmo_cancel_moving_target">Cancelar el objetivo móvil</string>
+    <string name="osmo_center_location">Centrar en la pantalla</string>
+    <string name="osmo_set_moving_target">Establecer como objetivo móvil</string>
+    <string name="osmo_use_server_name">Nombre registrado</string>
+    <string name="osmo_connect_to_my_nickname">Mi apodo</string>
+    <string name="osmo_user_name">Usuario</string>
+	<string name="color_green">verde</string>
+	
+    </resources>
