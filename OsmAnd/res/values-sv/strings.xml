@@ -1453,7 +1453,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_plugin_name">OSMo  (Avancerad live-övervakning)</string>
     <string name="osmo_settings">OSMo OpenStreetMap-övervakning (beta)</string>
    	<string name="osmo_plugin_description">OpenStreetMap-övervakning - Avancerad live-övervakning. Detta ger möjlighet att spåra andra enheter och att själv spåras.
-    Skapa anonyma grupper, dela varandras platser och kommunicera. Det finns olika inställningar för sessionsövervakning eller permanent övervakning.
+    Skapa anonyma grupper, dela ut varandras platser och kommunicera. Det finns olika inställningar för sessionsövervakning eller permanent övervakning.
     Anonyma grupper är begränsade till ett antal dagar och för vissa funktioner finns ingen fjärrkontroll eller gruppadministratör.
     Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem.
     Läs mer på http://osmo.mobi.</string>
@@ -1465,7 +1465,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="keep_informing_descr">Läs upp navigationsinstruktioner med regelbundna intervall</string>
     <string name="keep_informing">Upprepa navigationsinstruktioner</string>
 	<string name="osmo_register_device">Registrerar enheten … </string>
-    <string name="osmo_io_error">Anslutningsproblem med OSsMo: </string>
+    <string name="osmo_io_error">Anslutningsproblem med OsMo: </string>
     <string name="osmo_mode_on">Stoppa OsMo-session</string>    
     <string name="osmo_mode_off">Starta OsMo-session</string>
     <string name="use_points_as_intermediates">Beräkna rutt mellan punkter</string>
@@ -1495,13 +1495,13 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_groups">OsMo-grupper/-enheter</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo-grupp</string>
-    <string name="osmo_group_share">För att ansluta till grupp %2$s, ange grupp-id (%1$s)</string>
+    <string name="osmo_group_share">För att ansluta till gruppen %2$s, ange grupp-id (%1$s eller klicka på %3$s.</string>
     <string name="osmo_share_connect_device">Följ denna enhet permanent</string>
-    <string name="osmo_share_current_session">Dela aktuell session i läsaren</string>
+    <string name="osmo_share_current_session">Dela aktuell session i webbläsaren</string>
     <string name="osmo_session_not_available">Sessionen inte tillgänglig. Kolla att \'Skicka platser\' är på.</string>
     <string name="osmo_share_session">Dela session</string>
     <string name="osmo_session_id_share">Sessions-URL för att spåra enhet (%1$s)</string>
-    <string name="osmo_tracker_id_share">För att ansluta till målenheten %2$s, ange tracker-id (%1$s)</string>
+    <string name="osmo_tracker_id_share">För att ansluta till målenheten %2$s, klicka på länken %3$s eller ange tracker-id (%1$s)</string>
     <string name="osmo_track_interval">Loggningsintervall</string>
 	<string name="osmo_track_interval_descr">Välj tidsintervall för skickande av platsen</string>
     <string name="int_days">dagar</string>
@@ -1515,7 +1515,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_connect">Anslut till</string>
     <string name="osmo_create_group">Skapa grupp</string>
     <string name="osmo_server_operation_failed">OsMo-server operation misslyckades</string>
-    <string name="osmo_activity">Osm-övervakning</string>
+    <string name="osmo_activity">OpenStreetMap-bevakning</string>
     <string name="osmo_enable_tracker">Skicka mina platser</string>
     <string name="osmo_control">OsMo snabbåtkomst</string>
     <string name="osmo_mode_restart">Starta om OsMo-session</string>
@@ -1533,12 +1533,12 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_edit_color">Visningsfärg</string>
     <string name="osmo_sign_in">Logga in</string>
     <string name="osmo_create_groups_confirm">För att kunna skapa grupper måste du registrera dig på OsMo.</string>
-    <string name="osmo_credentials_not_valid">Dina OsMo-meriter är ogiltiga.</string>
+    <string name="osmo_credentials_not_valid">Dina OsMo-uppgifter är inte giltiga.</string>
     <string name="osmo_regenerate_login_ids_confirm">Är det säkert att du vill generera om personliga id? Alla enheter som är kopplade till dig kommer inte att kunna följa dig längre.</string>
     <string name="osmo_regenerate_login_ids">Generera om användar-id</string>
     <string name="osmo_cancel_moving_target">Avbryt rörligt mål</string>
     <string name="osmo_center_location">Centrera på skärmen</string>
-    <string name="osmo_set_moving_target">Ange som rörlig mål</string>
+    <string name="osmo_set_moving_target">Ange som rörligt mål</string>
     <string name="osmo_use_server_name">Registrerat namn</string>
     <string name="osmo_connect_to_my_nickname">Mitt nick</string>
     <string name="osmo_user_name">Användare</string>
