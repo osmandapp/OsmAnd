@@ -1691,13 +1691,13 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_edit_device">Cambiar propiedades de usuario</string>
     <string name="osmo_edit_color">Mostrar color</string>
     <string name="osmo_group">Grupo OsMo</string>
-    <string name="osmo_group_share">Para conectarse al grupo %2$s, especifique el id del grupo (%1$s)</string>
+    <string name="osmo_group_share">Para conectarse al grupo %2$s, especifica el id del grupo (%1$s) o pulsa %3$s.</string>
     <string name="osmo_share_connect_device">Seguir permanentemente este dispositivo</string>
     <string name="osmo_share_current_session">Compartir sesión actual en navegador</string>
     <string name="osmo_session_not_available">Sesión no disponible, compruebe que \'Enviar localizaciones\' está activado por favor.</string>
     <string name="osmo_share_session">Compartir sesión</string>
     <string name="osmo_session_id_share">Url de la sesión para seguir dispositivo (%1$s)</string>
-    <string name="osmo_tracker_id_share">Para conectarse al dispositivo %2$s, especificar id (%1$s)</string>
+    <string name="osmo_tracker_id_share">Para conectarse al dispositivo %2$s, pulsa en el enlace %3$s o especifica el id de rastreo (%1$s)</string>
     <string name="osmo_track_interval">Intervalo de registro</string>
 	<string name="osmo_track_interval_descr">Elija intervalo de tiempo para enviar localización</string>
     <string name="int_days">días</string>
@@ -1713,7 +1713,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_connect">Conectase a</string>
     <string name="osmo_create_group">Crear grupo</string>
     <string name="osmo_server_operation_failed">Fallo de operación de Servidor OsMo</string>
-    <string name="osmo_activity">Monitorización OsMo</string>
+    <string name="osmo_activity">Monitorización OpenStreetMap</string>
     <string name="osmo_enable_tracker">Enviar mis localizaciones</string>
     <string name="osmo_control">Acceso rápido OsMo</string>
     <string name="hours_ago">horas antes</string>
