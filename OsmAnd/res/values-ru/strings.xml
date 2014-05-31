@@ -1601,8 +1601,8 @@ OsmAnd - открытый источник и активно развается.
 	<string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
 	<string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
     <string name="osmo_connect_to_device_name">Имя пользователя</string>
-    
-    
+    <string name="osmo_join_group">Войти в группу</string>
+    <string name="osmo_new_device">Следить за устройством</string>
     <string name="osmo_connected_devices">Устройства</string>
     <string name="osmo_groups">Управление OsMo</string>
     <string name="osmo_connect_to_device">Подключиться к устройству</string>
