@@ -1673,4 +1673,5 @@ OsmAnd - открытый источник и активно развается.
 	
     <string name="osmo_credentials_not_valid">Ваши учётные данные osmo не верные.</string>
     <string name="osmo_follow">Следовать</string>
+    <string name="osmo_edit_device">Изменить пользовательские свойства</string>
     </resources>
