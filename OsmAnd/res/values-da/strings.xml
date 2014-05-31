@@ -1809,7 +1809,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_auto_send_locations">Start sporingssession automatisk</string>
     <string name="osmo_tracker_id">Personligt sporings-id</string>
     <string name="osmo_tracker_id_descr">Klik for at se eller dele sporings-id.
-\n\tMed sporings-id vil tilsluttede enheder være i stand til at overvåge alle bevægelser af enheden! For at afbryde, vælg Genopret mulighed.</string>
+\n\tMed sporings-id vil tilsluttede enheder være i stand til at overvåge alle bevægelser af enheden! For at afbryde, vælg \'Forny personlig id\' mulighed.</string>
     <string name="osmo_session_token">Sessiontoken: %1$s</string>
     <string name="osmo_auth_pending">Venter på autorisation...</string>
     <string name="osmo_locations_sent">Placeringer sendt %1$d (i buffer %2$d) </string>
@@ -1818,7 +1818,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_settings_debug">Fejlsøgningsinformation</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo gruppe</string>
-    <string name="osmo_group_share">For at oprette forbindelse til gruppen %2$s, angiv gruppe-ID (%1$s) eller klik på %3$s.</string>
+    <string name="osmo_group_share">For at oprette forbindelse til gruppen %2$s, angiv gruppe-id (%1$s) eller klik på %3$s.</string>
     <string name="osmo_share_connect_device">Følg enheden permanent</string>
     <string name="osmo_share_current_session">Del den aktuelle session i browser</string>
     <string name="osmo_session_not_available">Sessionen er ikke tilgængelig, kontroller at \'Send placering\' er til.</string>
@@ -1858,8 +1858,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_sign_in">Log på</string>
     <string name="osmo_create_groups_confirm">For at oprette grupper, skal du være registreret som bruger af OsMo.</string>
     <string name="osmo_credentials_not_valid">Dine OsMo legitimationsoplysninger er ikke gyldige.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Er du sikker på at regenerere personlige id? Alle enheder, der er tilsluttet dig, vil ikke være i stand til at spore dig mere.</string>
-    <string name="osmo_regenerate_login_ids">Regenerer bruger-id</string>
+    <string name="osmo_regenerate_login_ids_confirm">Er det sikkert at du vil forny det personlige id? Alle enheder, der er tilsluttet vil ikke være i stand til at spore dig mere.</string>
+    <string name="osmo_regenerate_login_ids">Forny bruger-id</string>
     <string name="osmo_cancel_moving_target">Annuller bevægeligt mål</string>
     <string name="osmo_center_location">Centrer på skærmen</string>
     <string name="osmo_set_moving_target">Indstil som bevægeligt mål</string>
