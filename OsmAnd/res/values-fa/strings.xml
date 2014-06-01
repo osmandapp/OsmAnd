@@ -1730,8 +1730,12 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="index_name_gb">اروپا - بریتانیا</string>
     <string name="osmo_settings_uuid">شماره شناسايي یکتای دستگاه</string>
     <string name="osmo_settings_descr">مشاهده کلید ثبت یکتای دستگاه و سایر تنظیمات نظارت</string>
-    <string name="osmo_plugin_description">نظارت OpenStreetMap- نظارت پیشرفته زنده به همراه بسیاری از ویژگی‌های کنترل دور http://osmo.mobi</string>
-    <string name="osmo_settings">OSMo</string>
+    <string name="osmo_plugin_description">نظارت OpenStreetMap- فراهم آوردن امکان پیگیری افراد از طریق دستگاه اشتراک اطلاعات مکانشان. ↵
+        ایجاد گروه های ناشناس و مخابره و به اشتراک گذاری مکان های مختلف، دارای امکان تنظیم ردیابی موقت و دائم.↵
+       گروه های ناشناس برای چن روز و برای برخی از ویژگی های حدود، یعنی مدیر گروههیچ کنترلی از راه دور بر روی اعضای گروه ندارد. ↵
+         کاربران با ثبت نام قابلیت دسترسی به گروه های کاملا کاربردی با بسیاری از امکانات برای مشاهده و نظارت از راه دور را بدست می آورند..↵
+        لطفا برای ادامه مطلب به این آدرس بروید http://osmo.mobi</string>
+    <string name="osmo_settings">OSMo: سرویس نظارت OpenStreetMap (آزمایشی)</string>
    	<string name="always_center_position_on_map">موقعیت را همیشه وسط صفحه نشان بده</string>
     <string name="voice_pref_title">صدا</string>
     <string name="misc_pref_title">متفرقه</string>
@@ -1742,7 +1746,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="share_route_as_gpx">به اشتراک گذاری فایل GPX</string>
 	<string name="share_route_subject">مسیر GPX از طریق OsmAnd به اشتراک گذاشته شد</string>
 	<string name="keep_informing_never">هرگز</string>
-    <string name="keep_informing_descr">اعلان دستورات مسیریابی در فواصل منظم</string>
+    <string name="keep_informing_descr">دستورات مسیریابی مجدد در فواصل منظم</string>
     <string name="keep_informing">تکرار دستورات مسیریابی</string>
 	<string name="navigation_intent_invalid">قالب نامعتبر: %s</string>
 <string name="arrival_distance">اعلام ورود</string>
@@ -1756,7 +1760,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="hours_ago">چند ساعت قبل</string>
     <string name="minutes_ago">چند دقیقه قبل</string>
     <string name="seconds_ago">چند ساعت قبل</string>
-    <string name="osmo_connect_to_device_name">نام دستگاه</string>
+    <string name="osmo_connect_to_device_name">نام کاربری</string>
     <string name="osmo_connect_to_device_tracker_id">شناسه افزار</string>
     <string name="osmo_connect_to_device">پیوند با دستگاه</string>
     <string name="osmo_join_group">عضویت در گروه</string>
@@ -1775,6 +1779,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="tip_recent_changes_1_8_alpha">تغییرات نسخه 1.8:↵
         * محاسبه بین مسیر فایل gpx↵
         * تغییر طرح دانلود کشورها (حمایت برای جستجوی نام های محلی)↵
+        * پشتیبانی از فرمت های GPX/KML(تبدیل از KML به GPX)↵
     </string>
     <string name="use_points_as_intermediates">محاسبه مسیر بین دو نقطه</string>
     <string name="osmo_mode_restart">راه اندازی مجدد osmo وارد کنید</string>
@@ -1803,4 +1808,31 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osmo_group_share">برای اتصال به گروه %2$s, شناسه گروه را تعیین کنید (%1$s) و یا اینجا را کلیک کنید %3$s .</string>
     <string name="osmo_share_connect_device">اجازه بدهید تا این دستگاه را به صورت دائم دانبال کند</string>
     <string name="osmo_share_current_session">به اشتراک گذاشتن نشست جاری در مرورگر</string>
-    </resources>
+    <string name="osmo_cancel_moving_target">حذف مقصد</string>
+    <string name="osmo_center_location">مرکز در صفحه نمایش</string>
+    <string name="osmo_set_moving_target">تنظیم به عنوان مقصد</string>
+    <string name="osmo_regenerate_login_ids_confirm">آیا از  بازسازی شناسه شخصی خود مطمئن می باشید؟ تمام دستگاه های, متصل، قادر به پیگیری شما باشند.</string>
+    <string name="osmo_session_not_available">جلسه در دسترس نیست، لطفا \'ارسال مکان های\' را بررسی کنید.</string>
+    <string name="osmo_share_session">اشتراک گذاری</string>
+    <string name="osmo_session_id_share">پیوند جلسه برای پیگیری (%1$s)</string>
+    <string name="osmo_tracker_id_share">به منظور اتصال به دستگاه هدف %2$s, بر روی پیوند %3$s کلیک کنید و یا شناسه ردیاب دستگاه هدف را وارد نمایید. (%1$s)</string>
+    <string name="osmo_track_interval">ورود به سیستم در بازه زمانی</string>
+	<string name="osmo_track_interval_descr">بازه زمانی ارسال موقعیت را مشخص نمایید</string>
+    <string name="int_days">روز</string>
+    <string name="osmo_connect_menu">اتصال</string>
+    <string name="osmo_expire_group">انقظاء در</string>
+    <string name="osmo_group_description">شرح</string>
+    <string name="osmo_group_policy">خط مشی</string>
+    <string name="osmo_connect_to_group_id">شناسه گروه</string>
+    <string name="osmo_group_name">نام گروه</string>
+    <string name="osmo_connect_to_group">پیوند به گروه</string>
+    <string name="osmo_connect">اتصال به</string>
+    <string name="osmo_create_group">ساخت گروه</string>
+    <string name="osmo_server_operation_failed">OsMo بهره برداری انجام نشد</string>
+    <string name="osmo_activity">OpenStreetMap-نظارت کننده</string>
+    <string name="osmo_enable_tracker">ارسال مکان های من</string>
+    <string name="osmo_control">OsMo دسترسی سریع</string>
+    <string name="local_index_mi_export">خروجی</string>
+	<string name="import_file_favourites">ذخیره به عنوان فایل GPX و یا واردات به مورد علاقه های شما؟</string>
+	<string name="import_save">ذخیره</string>
+	</resources>
