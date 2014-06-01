@@ -1829,7 +1829,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_connect">Collega a</string>
     <string name="osmo_create_group">Crea gruppo</string>
     <string name="osmo_server_operation_failed">Operazione del server OsMo fallita</string>
-    <string name="osmo_activity">Monitoraggio Osm</string>
+    <string name="osmo_activity">Monitoraggio OpenStreetMap</string>
     <string name="osmo_enable_tracker">Invia le mie posizioni</string>
     <string name="osmo_control">Accesso rapido ad OsMo</string>
     <string name="local_index_mi_export">Esporta</string>
