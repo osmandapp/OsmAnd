@@ -162,15 +162,16 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 			group = storage.getGroup(gid);
 			if(group != null) {
 				List<OsMoDevice> delta = mergeGroup(group, obj, false);
+				String mygid = service.getMyGroupTrackerId();
 				StringBuilder b = new StringBuilder();
 				for(OsMoDevice d : delta) {
 					if(d.getDeletedTimestamp() != 0 && d.isEnabled()) {
-						if(group.name != null) {
+						if(group.name != null && !d.getTrackerId().equals(mygid)) {
 							b.append(app.getString(R.string.osmo_user_left, d.getVisibleName(), group.getVisibleName(app))).append("\n");
 						}
 						disconnectImpl(d);
 					} else if(!d.isActive()) {
-						if(group.name != null) {
+						if(group.name != null && !d.getTrackerId().equals(mygid)) {
 							b.append(app.getString(R.string.osmo_user_joined, d.getVisibleName(), group.getVisibleName(app))).append("\n");
 						}
 						connectDeviceImpl(d);
