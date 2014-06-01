@@ -5,10 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
@@ -32,6 +32,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,9 +56,8 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	private BaseMapWidget osmoControl;
 	private OsMoPositionLayer olayer;
 	protected MapActivity mapActivity;
-
-	// 2014-05-27 23:11:40
-	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
+	private final static Log log = PlatformUtil.getLog(OsMoPlugin.class);
 
 	public OsMoPlugin(final OsmandApplication app) {
 		service = new OsMoService(app, this);
@@ -348,6 +348,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 							} else {
 								changed = true;
 								String url = obj.getString("url");
+								log.info("Download gpx " + url);
 								DownloadFileHelper df = new DownloadFileHelper(app);
 								InputStream is = df.getInputStreamToDownload(new URL(url), false);
 								FileOutputStream fout = new FileOutputStream(f);
@@ -358,7 +359,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 								}
 								fout.close();
 								is.close();
-								f.setLastModified(timestamp);
+								if(!f.setLastModified(timestamp)) {
+									log.error("Timestamp updates are not supported");
+								}
 							}
 						}
 						if(visible && (changed || makeVisible)) {

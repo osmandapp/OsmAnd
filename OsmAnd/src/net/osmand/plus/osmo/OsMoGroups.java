@@ -8,6 +8,7 @@ import java.util.Map;
 
 import net.osmand.Location;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
@@ -15,6 +16,8 @@ import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.os.AsyncTask;
 
 public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
@@ -29,7 +32,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private static final String DELETED = "deleted";
 	private static final String GROUP_TRACKER_ID = "group_tracker_id";
 	private static final String LAST_ONLINE = "last_online";
-	private static final String TRACK = "track";
+	private static final String TRACKS = "tracks";
 	
 	private OsMoTracker tracker;
 	private OsMoService service;
@@ -285,8 +288,13 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					delta.add(device);
 				}
 			}
-			if(obj.has(TRACK)){
-				plugin.getDownloadGpxTask(true).execute(obj.getJSONObject(TRACK));
+			if(obj.has(TRACKS)){
+				JSONArray ar = obj.getJSONArray(TRACKS);
+				JSONObject[] a = new JSONObject[ar.length()];
+				for(int i = 0; i < a.length; i++) {
+					a[i] = (JSONObject) ar.get(i);
+				}
+				plugin.getDownloadGpxTask(true).execute(a);
 			}
 			if(deleteUsers) {
 				for(OsMoDevice s : toDelete.values()) {
