@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -26,6 +27,7 @@ public class OsMoGroupsStorage {
 	private static final String TRACKER_ID = "trackerId";
 	private static final String USER_NAME = "userName";
 	private static final String USER_COLOR = "userSetColor";
+	private static final String GEN_COLOR = "genColor";
 	private static final String SERVER_COLOR = "serverColor";
 	private static final String DESCRIPTION = "description";
 	private static final String POLICY = "policy";
@@ -146,6 +148,9 @@ public class OsMoGroupsStorage {
 			if (u.userColor != 0) {
 				obj.put(USER_COLOR, u.userColor);
 			}
+			if (u.genColor != 0) {
+				obj.put(GEN_COLOR, u.genColor);
+			}
 			if (u.serverColor != 0) {
 				obj.put(SERVER_COLOR, u.serverColor);
 			}
@@ -182,6 +187,9 @@ public class OsMoGroupsStorage {
 			}
 			if(o.has(USER_COLOR)) {
 				user.userColor = o.getInt(USER_COLOR);
+			}
+			if(o.has(GEN_COLOR)) {
+				user.genColor = o.getInt(GEN_COLOR);
 			}
 			if(o.has(DELETED)) {
 				user.deleted = o.getLong(DELETED);
@@ -274,9 +282,6 @@ public class OsMoGroupsStorage {
 			OsMoDevice d = users.get(trackerId);
 			if(d != null) {
 				d.setLastLocation(location);
-				if(location != null) {
-					d.setLastOnline(location.getTime());
-				}
 			}
 			return d;
 		}
@@ -317,6 +322,7 @@ public class OsMoGroupsStorage {
 		protected long deleted;
 		protected OsMoGroup group ;
 		
+		protected ConcurrentLinkedQueue<Location> previousLocations = new java.util.concurrent.ConcurrentLinkedQueue<Location>();
 		protected List<OsMoMessage> messages = new ArrayList<OsMoMessage>();
 		protected long lastOnline;
 		protected Location lastLocation;
@@ -326,8 +332,21 @@ public class OsMoGroupsStorage {
 			return messages;
 		}
 		
+		public ConcurrentLinkedQueue<Location> getPreviousLocations(long threshold) {
+			while(!previousLocations.isEmpty() && previousLocations.peek().getTime() < threshold) {
+				previousLocations.poll();
+			}
+			return previousLocations;
+		}
+		
 		public void setLastLocation(Location lastLocation) {
+			if(this.lastLocation != null) {
+				previousLocations.add(this.lastLocation);
+			}
 			this.lastLocation = lastLocation;
+			if (lastLocation != null) {
+				setLastOnline(lastLocation.getTime());
+			}
 		}
 		
 		public Location getLastLocation() {

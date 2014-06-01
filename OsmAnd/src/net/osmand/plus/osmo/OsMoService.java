@@ -74,7 +74,7 @@ public class OsMoService implements OsMoReactor {
 		if(thread == null) {
 			return Collections.emptyList();
 		}
-		return new ArrayList<String>(thread.getLast100Commands());
+		return new ArrayList<String>(thread.getLastCommands());
 	}
 	
 	
@@ -245,6 +245,7 @@ public class OsMoService implements OsMoReactor {
 	public void showErrorMessage(String string) {
 		app.showToastMessage(app.getString(R.string.osmo_io_error) +  string);		
 	}
+	
 	
 	public void pushCommand(String cmd) {
 		commands.add(cmd);

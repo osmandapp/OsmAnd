@@ -36,7 +36,8 @@ import android.widget.Toast;
  * Class represents a layer for osmo positions
  *
  */
-public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, OsMoGroupsUIListener  {
+public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, OsMoGroupsUIListener,
+		ContextMenuLayer.IContextMenuProviderSelection{
  
 	private DisplayMetrics dm;
 	private final MapActivity map;
@@ -163,10 +164,10 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 
 	@Override
 	public String getObjectName(Object o) {
-		if(o instanceof OsMoDevice) {
-			return map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
-		}
-		return null;
+//		if(o instanceof OsMoDevice) {
+//			return map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
+//		}
+		return getObjectDescription(o);
 	}
 	
 	public void refresh() {
@@ -296,6 +297,22 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				followTrackerId = null;
 			}
 		}		
+	}
+
+	@Override
+	public void setSelectedObject(Object o) {
+		if(o instanceof OsMoDevice) {
+			followTrackerId = ((OsMoDevice) o).getTrackerId();
+		}
+	}
+
+	@Override
+	public void clearSelectedObjects() {
+		LatLon mapLoc = new LatLon(map.getMapView().getLatitude(), map.getMapView().getLongitude());
+		final boolean centered = Algorithms.objectEquals(followMapLocation, mapLoc);
+		if(!centered && followTrackerId != null) {
+			followTrackerId = null;
+		}
 	}
 	
 	

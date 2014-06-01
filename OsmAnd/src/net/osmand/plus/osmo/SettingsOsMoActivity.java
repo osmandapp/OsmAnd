@@ -28,7 +28,6 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 
 	private Preference debugPref;
 	private Preference trackerId;
-	private CheckBoxPreference sendLocationsref;
 	
 	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 30, 60, 90};
 	public static final int[] MINUTES = new int[] {2, 3, 5};
@@ -48,13 +47,18 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		trackerId.setOnPreferenceClickListener(this);
 		grp.addPreference(trackerId);
 		
-		sendLocationsref = createCheckBoxPreference(settings.OSMO_AUTO_SEND_LOCATIONS);
+		CheckBoxPreference sendLocationsref = createCheckBoxPreference(settings.OSMO_AUTO_SEND_LOCATIONS);
 		sendLocationsref.setTitle(R.string.osmo_auto_send_locations);
 		sendLocationsref.setSummary(R.string.osmo_auto_send_locations_descr);
 		grp.addPreference(sendLocationsref);
 		
 		grp.addPreference(createTimeListPreference(settings.OSMO_SAVE_TRACK_INTERVAL, SECONDS,
 				MINUTES, 1000, R.string.osmo_track_interval, R.string.osmo_track_interval_descr));
+		
+		CheckBoxPreference showGroupNotifiations = createCheckBoxPreference(settings.OSMO_SHOW_GROUP_NOTIFICATIONS);
+		sendLocationsref.setTitle(R.string.osmo_show_group_notifications);
+		sendLocationsref.setSummary(R.string.osmo_show_group_notifications_descr);
+		grp.addPreference(sendLocationsref);
 		
 		debugPref = new Preference(this);
 		debugPref.setTitle(R.string.osmo_settings_debug);

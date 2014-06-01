@@ -40,7 +40,17 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		
 		public String getObjectName(Object o);
 		
+		
 	}
+	
+	public interface IContextMenuProviderSelection {
+
+		public void setSelectedObject(Object o);
+		
+		public void clearSelectedObjects();
+		
+	}
+	
 	private static final String KEY_LAT_LAN = "context_menu_lat_lon";
 	private static final String KEY_DESCRIPTION = "context_menu_description";
 	private static final String KEY_SELECTED_OBJECTS = "context_menu_selected_objects";
@@ -189,15 +199,27 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 
 	public void setSelections(Map<Object, IContextMenuProvider> selections) {
+		clearSelectedObjects();
+
 		if (selections != null) {
 			selectedObjects = selections;
-		} else {
-			selectedObjects.clear();
 		}
 		if (!selectedObjects.isEmpty()) {
 			Entry<Object, IContextMenuProvider> e = selectedObjects.entrySet().iterator().next();
 			latLon = e.getValue().getObjectLocation(e.getKey());
+			if(e.getValue() instanceof IContextMenuProviderSelection){
+				((IContextMenuProviderSelection) e.getValue()).setSelectedObject(e.getKey());
+			}
 		}
+	}
+
+	private void clearSelectedObjects() {
+		for(IContextMenuProvider p : this.selectedObjects.values()) {
+			if(p instanceof IContextMenuProviderSelection){
+				((IContextMenuProviderSelection) p).clearSelectedObjects();
+			}
+		}
+		selectedObjects.clear();
 	}
 
 	@Override
@@ -223,15 +245,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public LatLon selectObjectsForContextMenu(RotatedTileBox tileBox, PointF point) {
 		final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
 		final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
-		selectedObjects.clear();
+		clearSelectedObjects();
 		List<Object> s = new ArrayList<Object>();
 		LatLon latLon = null;
-		for(OsmandMapLayer l : view.getLayers()){
-			if(l instanceof ContextMenuLayer.IContextMenuProvider){
+		for(OsmandMapLayer lt : view.getLayers()){
+			if(lt instanceof ContextMenuLayer.IContextMenuProvider){
 				s.clear();
-				((ContextMenuLayer.IContextMenuProvider) l).collectObjectsFromPoint(point, tileBox, s);
+				final IContextMenuProvider l = (ContextMenuLayer.IContextMenuProvider) lt;
+				l.collectObjectsFromPoint(point, tileBox, s);
 				for(Object o : s) {
-					selectedObjects.put(o, ((ContextMenuLayer.IContextMenuProvider) l));
+					selectedObjects.put(o, l);
+					if(l instanceof IContextMenuProviderSelection){
+						((IContextMenuProviderSelection) l).setSelectedObject(o);
+					}
 					if(latLon == null) {
 						latLon = ((ContextMenuLayer.IContextMenuProvider) l).getObjectLocation(o);
 					}
@@ -382,13 +408,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public void setSelectedObject(Object toShow) {
-		selectedObjects.clear();
+		clearSelectedObjects();
 		if(toShow != null){
 			for(OsmandMapLayer l : view.getLayers()){
 				if(l instanceof ContextMenuLayer.IContextMenuProvider){
 					String des = ((ContextMenuLayer.IContextMenuProvider) l).getObjectDescription(toShow);
 					if(des != null) {
 						selectedObjects.put(toShow, (IContextMenuProvider) l);
+						if(l instanceof IContextMenuProviderSelection){
+							((IContextMenuProviderSelection) l).setSelectedObject(toShow);
+						}
 					}
 				}
 			}
