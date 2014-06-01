@@ -79,8 +79,8 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		final float zoom = tb.getZoom() + tb.getZoomScale();
 		if(zoom < startZoom){
 			r = 0;
-		} else if(zoom <= 15){
-			r = 10;
+		} else if(zoom <= 14){
+			r = 12;
 		} else if(zoom <= 16){
 			r = 14;
 		} else if(zoom <= 17){
@@ -93,7 +93,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		final int r = getRadiusPoi(tb) * 3 / 4;
+		final int r = getRadiusPoi(tb);
 		for (OsMoDevice t : getTrackingDevices()) {
 			Location l = t.getLastLocation();
 			if (l != null) {
@@ -101,7 +101,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				int y = (int) tb.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
 				
 				pointAltUI.setColor(t.getColor());
-				canvas.drawCircle(x, y, r , point);
+				canvas.drawCircle(x, y, r + 2, point);
 				canvas.drawCircle(x, y, r - 2, pointAltUI);
 			}
 		}
@@ -152,9 +152,11 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		if (o instanceof OsMoDevice) {
 			String d = map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
 			final Location l = ((OsMoDevice) o).getLastLocation();
+			float speed = 0;
 			if(l != null && l.hasSpeed()) {
-				d += "\n"+ OsmAndFormatter.getFormattedSpeed(l.getSpeed(), map.getMyApplication());
+				speed = l.getSpeed();
 			}
+			d += "\n"+ OsmAndFormatter.getFormattedSpeed(speed, map.getMyApplication());
 			return d;
 		}
 		return null;

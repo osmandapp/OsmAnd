@@ -273,7 +273,7 @@ public class OsMoService implements OsMoReactor {
 				si.motd = data;
 			}
 			return true;
-		} else if(command.equals("GET_MY_TRACKS")) {
+		} else if(command.equals("TRACK_GET")) {
 			try {
 				JSONArray ar = new JSONArray(data);
 				AsyncTask<JSONObject, GPXFile, String> task = plugin.getDownloadGpxTask(false);
@@ -293,7 +293,7 @@ public class OsMoService implements OsMoReactor {
 
 	@Override
 	public void reconnect() {
-		pushCommand("GET_MY_TRACKS");
+		pushCommand("TRACK_GET");
 	}
 	
 	public void reconnectToServer() {

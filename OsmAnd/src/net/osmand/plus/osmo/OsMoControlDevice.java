@@ -99,7 +99,7 @@ public class OsMoControlDevice implements OsMoReactor {
 				}
 			}
 			return true;
-		} else if(command.equals("GPX_GET")) {
+		} else if(command.equals("TP")) {
 			plugin.getDownloadGpxTask(true).execute(obj);
 		}
 		return false;
