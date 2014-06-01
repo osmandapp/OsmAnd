@@ -324,7 +324,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		return service;
 	}
 
-	public AsyncTask<JSONObject, GPXFile, String> getDownloadGpxTask() {
+	public AsyncTask<JSONObject, GPXFile, String> getDownloadGpxTask(final boolean makeVisible) {
 		
 		return new AsyncTask<JSONObject, GPXFile, String> (){
 			
@@ -338,30 +338,32 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				for(JSONObject obj : params) {
 					try {
 						File f = new File(fl, obj.getString("name"));
-						long timestamp = obj.getLong("timestamp") * 1000;
+						long timestamp = obj.getLong("created") * 1000;
 						boolean visible = obj.has("visible");
+						boolean changed = false;
 						if(!f.exists() || (fl.lastModified() != timestamp) ) {
 							boolean sizeEqual = f.exists() && obj.has("size") && obj.getLong("size") == f.length();
 							if(sizeEqual && !f.setLastModified(timestamp - 1)){
 								// false alarm
-								continue;
+							} else {
+								changed = true;
+								String url = obj.getString("url");
+								DownloadFileHelper df = new DownloadFileHelper(app);
+								InputStream is = df.getInputStreamToDownload(new URL(url), false);
+								FileOutputStream fout = new FileOutputStream(f);
+								byte[] buf = new byte[1024];
+								int k;
+								while ((k = is.read(buf)) >= 0) {
+									fout.write(buf, 0, k);
+								}
+								fout.close();
+								is.close();
+								f.setLastModified(timestamp);
 							}
-							String url = obj.getString("url");
-							DownloadFileHelper df = new DownloadFileHelper(app);
-							InputStream is = df.getInputStreamToDownload(new URL(url), false);
-							FileOutputStream fout = new FileOutputStream(f);
-							byte[] buf = new byte[1024];
-							int k;
-							while((k = is.read(buf)) >= 0) {
-								fout.write(buf, 0, k);
-							}
-							fout.close();
-							is.close();
-							f.setLastModified(timestamp);
-							if(visible) {
-								GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, f);
-								app.setGpxFileToDisplay(selectGPXFile, app.getSettings().SHOW_CURRENT_GPX_TRACK.get());
-							}
+						}
+						if(visible && (changed || makeVisible)) {
+							GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, f);
+							app.setGpxFileToDisplay(selectGPXFile, app.getSettings().SHOW_CURRENT_GPX_TRACK.get());
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();

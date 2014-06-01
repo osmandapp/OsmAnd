@@ -276,7 +276,7 @@ public class OsMoService implements OsMoReactor {
 		} else if(command.equals("GET_MY_TRACKS")) {
 			try {
 				JSONArray ar = new JSONArray(data);
-				AsyncTask<JSONObject, GPXFile, String> task = plugin.getDownloadGpxTask();
+				AsyncTask<JSONObject, GPXFile, String> task = plugin.getDownloadGpxTask(false);
 				JSONObject[] a = new JSONObject[ar.length()];
 				for(int i = 0; i < a.length; i++) {
 					a[i] = (JSONObject) ar.get(i);

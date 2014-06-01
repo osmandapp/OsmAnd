@@ -286,7 +286,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				}
 			}
 			if(obj.has(TRACK)){
-				plugin.getDownloadGpxTask().execute(obj.getJSONObject(TRACK));
+				plugin.getDownloadGpxTask(true).execute(obj.getJSONObject(TRACK));
 			}
 			if(deleteUsers) {
 				for(OsMoDevice s : toDelete.values()) {
