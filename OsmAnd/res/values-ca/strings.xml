@@ -1751,7 +1751,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_groups">OsMo Grups/Dispositius</string>
     <string name="osmo_group_info">Informació</string>
     <string name="osmo_group">Grup OsMo</string>
-    <string name="osmo_group_share">Per connectar al grup %2$s, especifiqui l\'identificador de grup (%1$s)</string>
+    <string name="osmo_group_share">Per connectar al grup %2$s, indica l\'identificador de grup (%1$s) o prem %3$s.</string>
     <string name="osmo_share_connect_device">Permetre el seguiment d\'aquest dispositiu permanentment</string>
     <string name="osmo_share_current_session">Compartir la posició actual al navegador</string>
     <string name="osmo_session_not_available">Sessió no disponible, si us plau verifiqui que \'Enviar posicions\' està activat.</string>
