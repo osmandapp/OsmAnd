@@ -333,12 +333,12 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		storage.save();
 	}
 	
-	public OsMoDevice addConnectedDevice(String trackerId, String nameUser, int userColor) {
+	public OsMoDevice addConnectedDevice(String trackerId, String nameUser, int genColor) {
 		OsMoDevice us = new OsMoDevice();
 		us.group = storage.getMainGroup();
 		us.trackerId = trackerId;
 		us.userName = nameUser;
-		us.userColor = userColor;
+		us.genColor = genColor;
 		us.group.users.put(trackerId, us);
 		connectDeviceImpl(us);
 		storage.save();

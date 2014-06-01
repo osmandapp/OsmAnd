@@ -25,7 +25,7 @@ public class OsMoGroupsStorage {
 	private static final String GROUP_ID = "group_id";
 	private static final String TRACKER_ID = "trackerId";
 	private static final String USER_NAME = "userName";
-	private static final String USER_COLOR = "userColor";
+	private static final String USER_COLOR = "userSetColor";
 	private static final String SERVER_COLOR = "serverColor";
 	private static final String DESCRIPTION = "description";
 	private static final String POLICY = "policy";
@@ -310,6 +310,7 @@ public class OsMoGroupsStorage {
 		protected String userName;
 		protected int serverColor;
 		protected int userColor;
+		protected int genColor;
 		protected String trackerId;
 		protected boolean enabled;
 		protected boolean active;
@@ -336,6 +337,11 @@ public class OsMoGroupsStorage {
 		public void setLastOnline(long lastOnline) {
 			this.lastOnline = lastOnline;
 		}
+		
+		public void setGenColor(int genColor) {
+			this.genColor = genColor;
+		}
+		
 		public long getLastOnline() {
 			return lastOnline;
 		}
@@ -369,7 +375,7 @@ public class OsMoGroupsStorage {
 			if(serverColor != 0) {
 				return serverColor ;
 			}
-			return userColor;
+			return genColor;
 		}
 		
 		public String getVisibleName(){

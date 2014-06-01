@@ -958,7 +958,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			int activeColor = model.getColor();
 			if (activeColor == 0) {
 				activeColor = getRandomColor();
-				osMoPlugin.getGroups().setDeviceProperties(model, model.getVisibleName(), activeColor);
+				model.setGenColor(activeColor);
 			}
 			//Location location = tracker.getLastLocation(model.trackerId);
 			if (location == null || mapLocation == null) {

@@ -63,9 +63,10 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		pointAltUI = new Paint();
 		pointAltUI.setColor(view.getApplication().getResources().getColor(R.color.poi_background));
 		pointAltUI.setStyle(Style.FILL);
+		pointAltUI.setAntiAlias(true);
 		
 		point = new Paint();
-		point.setColor(Color.DKGRAY);
+		point.setColor(Color.GRAY);
 		point.setAntiAlias(true);
 		point.setStyle(Style.FILL_AND_STROKE);
 	}
@@ -79,14 +80,12 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		final float zoom = tb.getZoom() + tb.getZoomScale();
 		if(zoom < startZoom){
 			r = 0;
+		} else if(zoom <= 11){
+			r = 10;
 		} else if(zoom <= 14){
 			r = 12;
-		} else if(zoom <= 16){
-			r = 14;
-		} else if(zoom <= 17){
-			r = 16;
 		} else {
-			r = 18;
+			r = 14;
 		}
 		return (int) (r * tb.getDensity());
 	}

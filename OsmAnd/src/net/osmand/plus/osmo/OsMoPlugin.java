@@ -341,7 +341,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 						long timestamp = obj.getLong("created") * 1000;
 						boolean visible = obj.has("visible");
 						boolean changed = false;
-						if(!f.exists() || (fl.lastModified() != timestamp) ) {
+						if(!f.exists() || (f.lastModified() != timestamp) ) {
 							boolean sizeEqual = f.exists() && obj.has("size") && obj.getLong("size") == f.length();
 							if(sizeEqual && !f.setLastModified(timestamp - 1)){
 								// false alarm
