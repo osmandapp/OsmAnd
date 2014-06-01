@@ -23,9 +23,12 @@ public class OsMoControlDevice implements OsMoReactor {
 	private OsMoService service;
 	private OsmandApplication app;
 	private OsMoTracker tracker;
+	private OsMoPlugin plugin;
 
-	public OsMoControlDevice(OsmandApplication app, OsMoService service, OsMoTracker tracker) {
+	public OsMoControlDevice(OsmandApplication app, OsMoPlugin plugin, 
+			OsMoService service, OsMoTracker tracker) {
 		this.app = app;
+		this.plugin = plugin;
 		this.service = service;
 		this.tracker = tracker;
 		service.registerReactor(this);
@@ -96,6 +99,8 @@ public class OsMoControlDevice implements OsMoReactor {
 				}
 			}
 			return true;
+		} else if(command.equals("GPX_GET")) {
+			plugin.getDownloadGpxTask().execute(obj);
 		}
 		return false;
 	}

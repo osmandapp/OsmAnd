@@ -276,7 +276,11 @@ public class OsMoThread {
 			if(obj != null && obj.has("error")) {
 				error = true;
 				try {
-					service.showErrorMessage(obj.getString("error"));
+					String s = obj.getString("error");
+					if(obj.has("error_description")) {
+						s += " " +obj.getString("error_description");
+					}
+					service.showErrorMessage(s);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -395,6 +399,9 @@ public class OsMoThread {
 	private void cmd(String cmd, boolean send) {
 		log.info("OsMO" + (send ? "> " : ">> ") + cmd);
 		last100Commands.add((send ? "> " : ">> ") + df.format(new Date()) + "  " + cmd);
+		while(last100Commands.size() > 100) {
+			last100Commands.poll();
+		}
 	}
 
 	public SessionInfo getSessionInfo() {

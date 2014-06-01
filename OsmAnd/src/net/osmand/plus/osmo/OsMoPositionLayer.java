@@ -37,7 +37,7 @@ import android.widget.Toast;
  *
  */
 public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, OsMoGroupsUIListener  {
-
+ 
 	private DisplayMetrics dm;
 	private final MapActivity map;
 	private OsmandMapTileView view;
@@ -232,7 +232,6 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	
 	@Override
 	public void deviceLocationChanged(final OsMoDevice device) {
-		boolean sameId = Algorithms.objectEquals(followTrackerId, device.trackerId);
 		boolean sameDestId = Algorithms.objectEquals(followDestinationId, device.trackerId);
 		Location l = device.getLastLocation();
 		if(sameDestId && l != null) {
@@ -249,19 +248,30 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				targets.navigateToPoint(lt, true, -1);
 			}
 		}
-		if(sameId && !schedule  && l != null) {
-			schedule = true;
+		
+		boolean sameId = Algorithms.objectEquals(followTrackerId, device.trackerId);
+		if(sameId && !schedule && l != null) {
 			ContextMenuLayer cl = map.getMapLayers().getContextMenuLayer();
-			final boolean sameObject = Algorithms.objectEquals(device, cl.getFirstSelectedObject()) && cl.isVisible();
+			final boolean sameObject; 
+			if(cl.getFirstSelectedObject() instanceof OsMoDevice && cl.isVisible()) {
+				sameObject = Algorithms.objectEquals(device.trackerId, ((OsMoDevice) cl.getFirstSelectedObject()).trackerId) ;
+			} else{
+				sameObject = false; 
+			}
 			LatLon mapLoc = new LatLon(map.getMapView().getLatitude(), map.getMapView().getLongitude());
 			final boolean centered = Algorithms.objectEquals(followMapLocation, mapLoc);
 			if(sameObject || centered) {
+				final LatLon loc;
 				if(centered ) {
-					followMapLocation = new LatLon(l.getLatitude(), l.getLongitude());
+					loc = new LatLon(l.getLatitude(), l.getLongitude());
 				} else if(!map.getMapView().getAnimatedDraggingThread().isAnimating()) {
 					// disable tracking
-					followMapLocation = null;
+					loc = null;
+				} else {
+					loc = followMapLocation;
 				}
+				followMapLocation = loc;
+				schedule = true;
 				uiHandler.postDelayed(new Runnable() {
 
 					@Override
@@ -274,8 +284,8 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 							cl.setSelectedObject(device);
 						}
 						if (centered) {
-							map.getMapView().setLatLon(followMapLocation.getLatitude(),
-									followMapLocation.getLongitude());
+							map.getMapView().setLatLon(loc.getLatitude(),
+									loc.getLongitude());
 						}
 						map.getMapView().refreshMap();
 					}

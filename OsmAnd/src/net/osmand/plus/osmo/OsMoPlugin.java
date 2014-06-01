@@ -1,18 +1,27 @@
 package net.osmand.plus.osmo;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.download.DownloadFileHelper;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.plus.views.MapInfoLayer;
@@ -22,10 +31,15 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
@@ -40,16 +54,17 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	private OsMoGroups groups;
 	private BaseMapWidget osmoControl;
 	private OsMoPositionLayer olayer;
+	protected MapActivity mapActivity;
 
 	// 2014-05-27 23:11:40
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	public OsMoPlugin(final OsmandApplication app) {
-		service = new OsMoService(app);
+		service = new OsMoService(app, this);
 		tracker = new OsMoTracker(service, app.getSettings().OSMO_SAVE_TRACK_INTERVAL,
 				app.getSettings().OSMO_AUTO_SEND_LOCATIONS);
-		new OsMoControlDevice(app, service, tracker);
-		groups = new OsMoGroups(service, tracker, app.getSettings());
+		new OsMoControlDevice(app, this, service, tracker);
+		groups = new OsMoGroups(this, service, tracker, app.getSettings());
 		this.app = app;
 		ApplicationMode.regWidget("osmo_control", (ApplicationMode[])null);
 	}
@@ -80,6 +95,8 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	public String getName() {
 		return app.getString(R.string.osmo_plugin_name);
 	}
+	
+	
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
@@ -157,13 +174,15 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	@Override
 	public void mapActivityPause(MapActivity activity) {
 		groups.setUiListener(null);
+		mapActivity = activity;
 	}
 	
 	@Override
 	public void mapActivityResume(MapActivity activity) {
-		if(olayer != null) {
+		if (olayer != null) {
 			groups.setUiListener(olayer);
 		}
+		mapActivity = null;
 	}
 	
 	/**
@@ -305,6 +324,60 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		return service;
 	}
 
-	
+	public AsyncTask<JSONObject, GPXFile, String> getDownloadGpxTask() {
+		
+		return new AsyncTask<JSONObject, GPXFile, String> (){
+			
+			@Override
+			protected String doInBackground(JSONObject... params) {
+				final File fl = app.getAppPath(IndexConstants.GPX_INDEX_DIR+"/osmo");
+				if(!fl.exists()) {
+					fl.mkdirs();
+				}
+				String errors = "";
+				for(JSONObject obj : params) {
+					try {
+						File f = new File(fl, obj.getString("name"));
+						long timestamp = obj.getLong("timestamp");
+						boolean visible = obj.has("visible");
+						if(!f.exists() || fl.lastModified() != timestamp) {
+							String url = obj.getString("url");
+							DownloadFileHelper df = new DownloadFileHelper(app);
+							InputStream is = df.getInputStreamToDownload(new URL(url), false);
+							FileOutputStream fout = new FileOutputStream(f);
+							byte[] buf = new byte[1024];
+							int k;
+							while((k = is.read(buf)) >= 0) {
+								fout.write(buf, 0, k);
+							}
+							fout.close();
+							is.close();
+						}
+						if(visible) {
+							GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, f);
+							app.setGpxFileToDisplay(selectGPXFile, app.getSettings().SHOW_CURRENT_GPX_TRACK.get());
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+						errors += e.getMessage() +"\n";
+					} catch (IOException e) {
+						e.printStackTrace();
+						errors += e.getMessage() +"\n";
+					}
+				}
+				return errors;
+			}
+			
+			@Override
+			protected void onPostExecute(String result) {
+				if(result.length() > 0) {
+					app.showToastMessage(app.getString(R.string.osmo_io_error)+ result);
+				}
+			}
+			
+		};
+		
+	}
+
 
 }

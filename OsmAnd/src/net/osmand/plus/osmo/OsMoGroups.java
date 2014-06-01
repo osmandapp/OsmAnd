@@ -29,11 +29,13 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private static final String DELETED = "deleted";
 	private static final String GROUP_TRACKER_ID = "group_tracker_id";
 	private static final String LAST_ONLINE = "last_online";
+	private static final String TRACK = "track";
 	
 	private OsMoTracker tracker;
 	private OsMoService service;
 	private OsMoGroupsStorage storage;
 	private OsMoGroupsUIListener uiListener;
+	private OsMoPlugin plugin;
 	
 	public interface OsMoGroupsUIListener {
 		
@@ -42,7 +44,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		public void deviceLocationChanged(OsMoDevice device);
 	}
 
-	public OsMoGroups(OsMoService service, OsMoTracker tracker, OsmandSettings settings) {
+	public OsMoGroups(OsMoPlugin plugin, OsMoService service, OsMoTracker tracker, OsmandSettings settings) {
+		this.plugin = plugin;
 		this.service = service;
 		this.tracker = tracker;
 		service.registerReactor(this);
@@ -281,6 +284,9 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					}
 					delta.add(device);
 				}
+			}
+			if(obj.has(TRACK)){
+				plugin.getDownloadGpxTask().execute(obj.getJSONObject(TRACK));
 			}
 			if(deleteUsers) {
 				for(OsMoDevice s : toDelete.values()) {

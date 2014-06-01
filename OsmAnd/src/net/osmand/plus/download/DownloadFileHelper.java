@@ -44,7 +44,7 @@ public class DownloadFileHelper {
 		return e != null && e.getMessage().equals("Interrupted");
 	}
 	
-	private InputStream getInputStreamToDownload(final URL url, final boolean forceWifi) throws IOException {
+	public InputStream getInputStreamToDownload(final URL url, final boolean forceWifi) throws IOException {
 		InputStream cis = new InputStream() {
 			byte[] buffer = new byte[BUFFER_SIZE];
 			int bufLen = 0;
