@@ -338,7 +338,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				for(JSONObject obj : params) {
 					try {
 						File f = new File(fl, obj.getString("name"));
-						long timestamp = obj.getLong("timestamp");
+						long timestamp = obj.getLong("timestamp") * 1000;
 						boolean visible = obj.has("visible");
 						if(!f.exists() || fl.lastModified() != timestamp) {
 							String url = obj.getString("url");
@@ -352,10 +352,11 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 							}
 							fout.close();
 							is.close();
-						}
-						if(visible) {
-							GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, f);
-							app.setGpxFileToDisplay(selectGPXFile, app.getSettings().SHOW_CURRENT_GPX_TRACK.get());
+							f.setLastModified(timestamp);
+							if(visible) {
+								GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, f);
+								app.setGpxFileToDisplay(selectGPXFile, app.getSettings().SHOW_CURRENT_GPX_TRACK.get());
+							}
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
