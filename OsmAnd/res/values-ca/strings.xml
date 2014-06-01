@@ -1310,7 +1310,7 @@
     <string name="local_osm_changes_backup">Fes una còpia com a canvi OSM</string>
     <string name="index_name_openmaps">OpenMaps.eu</string>
     <string name="av_photo_play_sound">Reprodueix un so en fer una foto</string>
-	<string name="av_camera_focus_hiperfocal">Focus hiperfocal</string>
+	<string name="av_camera_focus_hiperfocal">Enfocament de nitidesa màxima</string>
 	<string name="av_camera_focus_auto">Enfocament automàtic</string>
 	<string name="osb_comment_dialog_error">Error: no s\'ha afegit el comentari</string>
 	<string name="osb_author_dialog_password">Contrasenya de l\'OSM (opcional)</string>
