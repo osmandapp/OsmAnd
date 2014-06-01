@@ -1546,7 +1546,7 @@
     <string name="interrupt_music_descr">Прерывание музыки во время объявления</string>
 	<string name="interrupt_music">Прерывание музыки</string>
 	<string name="share_route_as_gpx">Поделиться маршрутом используя файл GPX</string>
-	<string name="osmo_settings_uuid">Уникальный ID устройства</string>
+	<string name="osmo_settings_uuid">Ключ доступа</string>
     <string name="osmo_settings_descr">Настройка параметров мониторинга и установка персонального канала мониторинга</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - продвинутый живой мониторинг с множеством средств удалённого контроля http://osmo.mobi</string>
     <string name="osmo_plugin_name">OsMo (Продвинутый онлайн-мониторинг)</string>
@@ -1661,5 +1661,5 @@ OsmAnd - открытый источник и активно развается.
 	<string name="color_lightblue">голубой</string>
 	<string name="color_blue">синий</string>
 	<string name="color_magenta">маджента</string>
-	
+	<string name="color_green">зелёный</string>
     </resources>
