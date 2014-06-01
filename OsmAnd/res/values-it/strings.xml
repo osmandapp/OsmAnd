@@ -1765,11 +1765,11 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="share_route_as_gpx">Condividi il percorso come file GPX</string>
 	<string name="share_route_subject">Percorso condiviso tramite OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato non valido: %s</string>
-<string name="osmo_settings_uuid">ID unico del dispositivo</string>
+<string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Mostra la chiave di registrazione unica del dispositivo e altre impostazioni di monitoraggio specifiche </string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoraggio - Monitoraggio avanzato in diretta con molte funzioni per il controllo remoto http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (Monitoraggio Avanzato in Diretta)</string>
-    <string name="osmo_settings">Impostazioni OSMo</string>
+    <string name="osmo_plugin_name">OsMo (Monitoraggio avanzato in tempo reale)</string>
+    <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
    	<string name="keep_informing_never">Mai</string>
     <string name="keep_informing_descr">Annuncia a intervalli regolari le indicazioni di navigazione</string>
     <string name="keep_informing">Ripeti le istruzioni di navigazione</string>
@@ -1777,7 +1777,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="arrival_distance_descr">Quanto prima vuoi l\'annuncio dell\'arrivo?</string>
     <string name="osmo_io_error">OSMo problema di connessione: </string>
     <string name="osmo_mode_on">Ferma OSMo</string>    
-    <string name="osmo_mode_off">Avvia OSMo</string>
+    <string name="osmo_mode_off">Avvia sessione OsMo</string>
     <string name="osmo_register_device">Registrazione del dispositivo in corso ... </string>
     <string name="share_fav">Condividi</string>
 	<string name="share_fav_subject">Preferiti condivisi tramite OsmAnd</string>
@@ -1793,14 +1793,14 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
  Usando l\'id della tracciabilità i dispositivi connessi saranno in grado di seguire tutti i movimenti di questo dispositivo! Per disconnetersi seleziona Opzione rigenera.</string>
     <string name="osmo_session_token">Token della sessione: %1$s</string>
     <string name="osmo_auth_pending">In attesa di autorizzazione...</string>
-    <string name="osmo_locations_sent">Localizzazioni inviate %1$d (in buffer %2$d) </string>
+    <string name="osmo_locations_sent">Localizzazioni inviate %1$d (nel buffer %2$d) </string>
     <string name="osmo_conn_successfull">Connessione stabilita: %1$s </string>
     <string name="osmo_mode_restart">Riavvia la sessione OsMo</string>
     <string name="osmo_settings_debug">Informazioni di debug</string>
     <string name="hours_ago">ore fa</string>
     <string name="minutes_ago">minuti fa</string>
     <string name="seconds_ago">secondi fa</string>
-    <string name="osmo_connect_to_device_name">Nome del dispositivo</string>
+    <string name="osmo_connect_to_device_name">Nome utente</string>
     <string name="osmo_connect_to_device_tracker_id">Id tracciabilità</string>
     <string name="osmo_connect_to_device">Collegamento con il dispositivo</string>
     <string name="osmo_join_group">Unisciti al gruppo</string>
@@ -1809,7 +1809,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_groups">Grupppi/Dispositivi OsMo</string>
     <string name="osmo_group_info">Informazioni</string>
     <string name="osmo_group">Gruppo OsMo</string>
-    <string name="osmo_group_share">Per collegarsi al gruppo %2$s, specifica l\'id del gruppo (%1$s)</string>
+    <string name="osmo_group_share">Per collegarsi al gruppo %2$s, specifica l\'id del gruppo (%1$s).</string>
     <string name="osmo_share_connect_device">Permetti di seguire permanentemente questo dispositivo</string>
     <string name="osmo_share_current_session">Condividi questa sessione nel browser</string>
     <string name="osmo_session_not_available">Sessione non disponibile, per favore controllare che \'Invia posizioni\' sia attivo.</string>
@@ -1849,7 +1849,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_sign_in">Autenticati</string>
     <string name="osmo_create_groups_confirm">Per creare dei gruppi è necessario essere utenti registrati di OsMo.</string>
     <string name="osmo_credentials_not_valid">Le tue credenziali di OsMo non sono valide.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Sei sicuro di voler rigenerare gli id personali? Tutti i dispositivi, collegati a te, non saranno più in grado di essere tracciati.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Sei sicuro di voler rigenerare gli id personali? Tutti i dispositivi collegati a te non saranno più in grado di tracciarti.</string>
     <string name="osmo_regenerate_login_ids">Rigenera l'id</string>
     <string name="osmo_cancel_moving_target">Cancella l'obiettivo mobile</string>
     <string name="osmo_center_location">Centro nello schermo</string>
