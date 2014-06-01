@@ -340,7 +340,12 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 						File f = new File(fl, obj.getString("name"));
 						long timestamp = obj.getLong("timestamp") * 1000;
 						boolean visible = obj.has("visible");
-						if(!f.exists() || fl.lastModified() != timestamp) {
+						if(!f.exists() || (fl.lastModified() != timestamp) ) {
+							boolean sizeEqual = f.exists() && obj.has("size") && obj.getLong("size") == f.length();
+							if(sizeEqual && !f.setLastModified(timestamp - 1)){
+								// false alarm
+								continue;
+							}
 							String url = obj.getString("url");
 							DownloadFileHelper df = new DownloadFileHelper(app);
 							InputStream is = df.getInputStreamToDownload(new URL(url), false);
