@@ -75,7 +75,11 @@ public abstract class OsmandPlugin {
 			installPlugin(SRTM_PLUGIN_COMPONENT, SRTMPlugin.FREE_ID, app,
 					new SRTMPlugin(app, false));
 		}
-		installPlugin(PARKING_PLUGIN_COMPONENT, ParkingPositionPlugin.ID, app, new ParkingPositionPlugin(app));
+		final ParkingPositionPlugin parking = new ParkingPositionPlugin(app);
+		boolean f = installPlugin(PARKING_PLUGIN_COMPONENT, ParkingPositionPlugin.ID, app, parking);
+		if(!f && Version.isParkingPluginInlined(app)) {
+			installedPlugins.add(parking);
+		}
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));

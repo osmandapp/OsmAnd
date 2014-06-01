@@ -197,6 +197,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				// connect to enabled devices in group
 				for(OsMoDevice d : group.getGroupUsers(null)) {
 					if(d.isEnabled()) {
+						d.active = false;
 						connectDeviceImpl(d);
 					}
 				}
