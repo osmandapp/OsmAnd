@@ -100,6 +100,31 @@ public class Algorithms {
 		}
 	}
 	
+	
+	/**
+     	* Parse the color string, and return the corresponding color-int.
+     	* If the string cannot be parsed, throws an IllegalArgumentException
+     	* exception. Supported formats are:
+     	* #RRGGBB
+     	* #AARRGGBB
+     	* 'red', 'blue', 'green', 'black', 'white', 'gray', 'cyan', 'magenta',
+     	* 'yellow', 'lightgray', 'darkgray'
+     	*/
+    	public static int parseColor(String colorString) {
+        	if (colorString.charAt(0) == '#') {
+            	// Use a long to avoid rollovers on #ffXXXXXX
+            	long color = Long.parseLong(colorString.substring(1), 16);
+            	if (colorString.length() == 7) {
+	                // Set the alpha value
+        	        color |= 0x00000000ff000000;
+            	} else if (colorString.length() != 9) {
+                	throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
+            	}
+            	return (int)color;
+        	}
+        	throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
+    	}
+	
 	public static int extractFirstIntegerNumber(String s) {
 		int i = 0;
 		for (int k = 0; k < s.length(); k++) {

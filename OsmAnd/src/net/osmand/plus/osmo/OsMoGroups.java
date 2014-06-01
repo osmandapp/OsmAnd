@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.Location;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.R;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
@@ -15,6 +18,8 @@ import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.os.AsyncTask;
 
 public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
@@ -29,11 +34,14 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private static final String DELETED = "deleted";
 	private static final String GROUP_TRACKER_ID = "group_tracker_id";
 	private static final String LAST_ONLINE = "last_online";
+	private static final String TRACK = "track";
 	
 	private OsMoTracker tracker;
 	private OsMoService service;
 	private OsMoGroupsStorage storage;
 	private OsMoGroupsUIListener uiListener;
+	private OsMoPlugin plugin;
+	private OsmandApplication app;
 	
 	public interface OsMoGroupsUIListener {
 		
@@ -42,12 +50,14 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		public void deviceLocationChanged(OsMoDevice device);
 	}
 
-	public OsMoGroups(OsMoService service, OsMoTracker tracker, OsmandSettings settings) {
+	public OsMoGroups(OsMoPlugin plugin, OsMoService service, OsMoTracker tracker, OsmandApplication app) {
+		this.plugin = plugin;
 		this.service = service;
 		this.tracker = tracker;
+		this.app = app;
 		service.registerReactor(this);
 		tracker.setTrackerListener(this);
-		storage = new OsMoGroupsStorage(this, settings.OSMO_GROUPS);
+		storage = new OsMoGroupsStorage(this, app.getSettings().OSMO_GROUPS);
 		storage.load();
 	}
 	
@@ -152,12 +162,22 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 			group = storage.getGroup(gid);
 			if(group != null) {
 				List<OsMoDevice> delta = mergeGroup(group, obj, false);
+				StringBuilder b = new StringBuilder();
 				for(OsMoDevice d : delta) {
 					if(d.getDeletedTimestamp() != 0 && d.isEnabled()) {
+						if(group.name != null) {
+							b.append(app.getString(R.string.osmo_user_left, d.getVisibleName(), group.getVisibleName(app))).append("\n");
+						}
 						disconnectImpl(d);
 					} else if(!d.isActive()) {
+						if(group.name != null) {
+							b.append(app.getString(R.string.osmo_user_joined, d.getVisibleName(), group.getVisibleName(app))).append("\n");
+						}
 						connectDeviceImpl(d);
 					}
+				}
+				if(b.length() > 0 && app.getSettings().OSMO_SHOW_GROUP_NOTIFICATIONS.get()){
+					app.showToastMessage(b.toString().trim());
 				}
 				storage.save();
 			}
@@ -277,10 +297,18 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 						device.lastOnline = o.getLong(LAST_ONLINE);
 					}
 					if (o.has(USER_COLOR)) {
-						device.serverColor = o.getInt(USER_COLOR);
+						device.serverColor = net.osmand.util.Algorithms.parseColor(o.getString(USER_COLOR));
 					}
 					delta.add(device);
 				}
+			}
+			if(obj.has(TRACK)){
+				JSONArray ar = obj.getJSONArray(TRACK);
+				JSONObject[] a = new JSONObject[ar.length()];
+				for(int i = 0; i < a.length; i++) {
+					a[i] = (JSONObject) ar.get(i);
+				}
+				plugin.getDownloadGpxTask(true).execute(a);
 			}
 			if(deleteUsers) {
 				for(OsMoDevice s : toDelete.values()) {
@@ -318,13 +346,17 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		}
 		storage.save();
 	}
+	public void setGenColor(OsMoDevice device, int genColor) {
+		device.genColor = genColor;
+		storage.save();
+	}
 	
-	public OsMoDevice addConnectedDevice(String trackerId, String nameUser, int userColor) {
+	public OsMoDevice addConnectedDevice(String trackerId, String nameUser, int genColor) {
 		OsMoDevice us = new OsMoDevice();
 		us.group = storage.getMainGroup();
 		us.trackerId = trackerId;
 		us.userName = nameUser;
-		us.userColor = userColor;
+		us.genColor = genColor;
 		us.group.users.put(trackerId, us);
 		connectDeviceImpl(us);
 		storage.save();
@@ -340,7 +372,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		}
 		g.userName = userName;		
 		service.pushCommand(op);
-		return op; 
+		return "GROUP_JOIN:"+groupId; 
 	}
 	
 	public String leaveGroup(OsMoGroup group) {

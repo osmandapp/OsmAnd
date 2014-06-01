@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -27,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings.Secure;
 
@@ -41,12 +43,14 @@ public class OsMoService implements OsMoReactor {
 	public static final String SHARE_TRACKER_URL = "http://z.osmo.mobi/connect?id=";
 	public static final String SHARE_GROUP_URL = "http://z.osmo.mobi/join?id=";
 	public static final String TRACK_URL = "http://test1342.osmo.mobi/u/";
-	private String lastRegistrationError = null;  
+	private String lastRegistrationError = null;
+	private OsMoPlugin plugin;  
 	
 	
 	
-	public OsMoService(OsmandApplication app) {
+	public OsMoService(OsmandApplication app, OsMoPlugin plugin) {
 		this.app = app;
+		this.plugin = plugin;
 		listReactors.add(this);
 	}
 	
@@ -70,7 +74,7 @@ public class OsMoService implements OsMoReactor {
 		if(thread == null) {
 			return Collections.emptyList();
 		}
-		return new ArrayList<String>(thread.getLast100Commands());
+		return new ArrayList<String>(thread.getLastCommands());
 	}
 	
 	
@@ -242,6 +246,7 @@ public class OsMoService implements OsMoReactor {
 		app.showToastMessage(app.getString(R.string.osmo_io_error) +  string);		
 	}
 	
+	
 	public void pushCommand(String cmd) {
 		commands.add(cmd);
 	}
@@ -269,13 +274,27 @@ public class OsMoService implements OsMoReactor {
 				si.motd = data;
 			}
 			return true;
+		} else if(command.equals("TRACK_GET")) {
+			try {
+				JSONArray ar = new JSONArray(data);
+				AsyncTask<JSONObject, GPXFile, String> task = plugin.getDownloadGpxTask(false);
+				JSONObject[] a = new JSONObject[ar.length()];
+				for(int i = 0; i < a.length; i++) {
+					a[i] = (JSONObject) ar.get(i);
+				}
+				task.execute(a);
+			} catch (JSONException e) {
+				e.printStackTrace();
+				showErrorMessage(e.getMessage());
+			}
 		}
 		return false;
 	}
+	
 
 	@Override
 	public void reconnect() {
-		
+		pushCommand("TRACK_GET");
 	}
 	
 	public void reconnectToServer() {

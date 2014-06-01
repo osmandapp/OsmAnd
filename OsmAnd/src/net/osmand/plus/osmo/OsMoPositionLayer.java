@@ -2,7 +2,9 @@ package net.osmand.plus.osmo;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
@@ -25,7 +27,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Cap;
+import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
 import android.graphics.PointF;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -36,16 +41,19 @@ import android.widget.Toast;
  * Class represents a layer for osmo positions
  *
  */
-public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, OsMoGroupsUIListener  {
-
+public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, OsMoGroupsUIListener,
+		ContextMenuLayer.IContextMenuProviderSelection{
+ 
 	private DisplayMetrics dm;
 	private final MapActivity map;
 	private OsmandMapTileView view;
-	private Paint pointAltUI;
-	private Paint point;
+	private Paint pointInnerCircle;
+	private Paint pointOuter;
 	private OsMoPlugin plugin;
 	private final static float startZoom = 7;
 	private Handler uiHandler;
+	private Paint paintPath;
+	private Path pth;
 
 	public OsMoPositionLayer(MapActivity map, OsMoPlugin plugin) {
 		this.map = map;
@@ -60,14 +68,24 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
 
-		pointAltUI = new Paint();
-		pointAltUI.setColor(view.getApplication().getResources().getColor(R.color.poi_background));
-		pointAltUI.setStyle(Style.FILL);
+		pointInnerCircle = new Paint();
+		pointInnerCircle.setColor(view.getApplication().getResources().getColor(R.color.poi_background));
+		pointInnerCircle.setStyle(Style.FILL);
+		pointInnerCircle.setAntiAlias(true);
 		
-		point = new Paint();
-		point.setColor(Color.DKGRAY);
-		point.setAntiAlias(true);
-		point.setStyle(Style.FILL_AND_STROKE);
+		paintPath = new Paint();
+		paintPath.setStyle(Style.STROKE);
+		paintPath.setStrokeWidth(14);
+		paintPath.setAntiAlias(true);
+		paintPath.setStrokeCap(Cap.ROUND);
+		paintPath.setStrokeJoin(Join.ROUND);
+		
+		pth = new Path();
+
+		pointOuter = new Paint();
+		pointOuter.setColor(Color.GRAY);
+		pointOuter.setAntiAlias(true);
+		pointOuter.setStyle(Style.FILL_AND_STROKE);
 	}
 	
 	public Collection<OsMoDevice> getTrackingDevices() {
@@ -79,30 +97,48 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		final float zoom = tb.getZoom() + tb.getZoomScale();
 		if(zoom < startZoom){
 			r = 0;
-		} else if(zoom <= 15){
+		} else if(zoom <= 11){
 			r = 10;
-		} else if(zoom <= 16){
-			r = 14;
-		} else if(zoom <= 17){
-			r = 16;
+		} else if(zoom <= 14){
+			r = 12;
 		} else {
-			r = 18;
+			r = 14;
 		}
 		return (int) (r * tb.getDensity());
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		final int r = getRadiusPoi(tb) * 3 / 4;
+		final int r = getRadiusPoi(tb);
+		long treshold = System.currentTimeMillis() - 15000;
 		for (OsMoDevice t : getTrackingDevices()) {
 			Location l = t.getLastLocation();
 			if (l != null) {
+				ConcurrentLinkedQueue<Location> plocations = t.getPreviousLocations(treshold);
 				int x = (int) tb.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
 				int y = (int) tb.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
-				
-				pointAltUI.setColor(t.getColor());
-				canvas.drawCircle(x, y, r , point);
-				canvas.drawCircle(x, y, r - 2, pointAltUI);
+				if (plocations.size() > 0) {
+					pth.rewind();
+					Iterator<Location> it = plocations.iterator();
+					boolean f= true;
+					while (it.hasNext()) {
+						Location lo = it.next();
+						int xt = (int) tb.getPixXFromLatLon(lo.getLatitude(), lo.getLongitude());
+						int yt = (int) tb.getPixYFromLatLon(lo.getLatitude(), lo.getLongitude());
+						if(f) {
+							f = false;
+							pth.moveTo(xt, yt);
+						} else{
+							pth.lineTo(xt, yt);
+						}
+					}
+					pth.lineTo(x, y);
+					paintPath.setColor(t.getColor());
+					canvas.drawPath(pth, paintPath);
+				}
+				pointInnerCircle.setColor(t.getColor());
+				canvas.drawCircle(x, y, r + 2, pointOuter);
+				canvas.drawCircle(x, y, r - 2, pointInnerCircle);
 			}
 		}
 	}
@@ -152,9 +188,11 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		if (o instanceof OsMoDevice) {
 			String d = map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
 			final Location l = ((OsMoDevice) o).getLastLocation();
+			float speed = 0;
 			if(l != null && l.hasSpeed()) {
-				d += "\n"+ OsmAndFormatter.getFormattedSpeed(l.getSpeed(), map.getMyApplication());
+				speed = l.getSpeed();
 			}
+			d += "\n"+ OsmAndFormatter.getFormattedSpeed(speed, map.getMyApplication());
 			return d;
 		}
 		return null;
@@ -162,10 +200,10 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 
 	@Override
 	public String getObjectName(Object o) {
-		if(o instanceof OsMoDevice) {
-			return map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
-		}
-		return null;
+//		if(o instanceof OsMoDevice) {
+//			return map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
+//		}
+		return getObjectDescription(o);
 	}
 	
 	public void refresh() {
@@ -232,7 +270,6 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	
 	@Override
 	public void deviceLocationChanged(final OsMoDevice device) {
-		boolean sameId = Algorithms.objectEquals(followTrackerId, device.trackerId);
 		boolean sameDestId = Algorithms.objectEquals(followDestinationId, device.trackerId);
 		Location l = device.getLastLocation();
 		if(sameDestId && l != null) {
@@ -249,19 +286,30 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				targets.navigateToPoint(lt, true, -1);
 			}
 		}
-		if(sameId && !schedule  && l != null) {
-			schedule = true;
+		
+		boolean sameId = Algorithms.objectEquals(followTrackerId, device.trackerId);
+		if(sameId && !schedule && l != null) {
 			ContextMenuLayer cl = map.getMapLayers().getContextMenuLayer();
-			final boolean sameObject = Algorithms.objectEquals(device, cl.getFirstSelectedObject()) && cl.isVisible();
+			final boolean sameObject; 
+			if(cl.getFirstSelectedObject() instanceof OsMoDevice && cl.isVisible()) {
+				sameObject = Algorithms.objectEquals(device.trackerId, ((OsMoDevice) cl.getFirstSelectedObject()).trackerId) ;
+			} else{
+				sameObject = false; 
+			}
 			LatLon mapLoc = new LatLon(map.getMapView().getLatitude(), map.getMapView().getLongitude());
 			final boolean centered = Algorithms.objectEquals(followMapLocation, mapLoc);
 			if(sameObject || centered) {
+				final LatLon loc;
 				if(centered ) {
-					followMapLocation = new LatLon(l.getLatitude(), l.getLongitude());
+					loc = new LatLon(l.getLatitude(), l.getLongitude());
 				} else if(!map.getMapView().getAnimatedDraggingThread().isAnimating()) {
 					// disable tracking
-					followMapLocation = null;
+					loc = null;
+				} else {
+					loc = followMapLocation;
 				}
+				followMapLocation = loc;
+				schedule = true;
 				uiHandler.postDelayed(new Runnable() {
 
 					@Override
@@ -274,8 +322,8 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 							cl.setSelectedObject(device);
 						}
 						if (centered) {
-							map.getMapView().setLatLon(followMapLocation.getLatitude(),
-									followMapLocation.getLongitude());
+							map.getMapView().setLatLon(loc.getLatitude(),
+									loc.getLongitude());
 						}
 						map.getMapView().refreshMap();
 					}
@@ -285,6 +333,22 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				followTrackerId = null;
 			}
 		}		
+	}
+
+	@Override
+	public void setSelectedObject(Object o) {
+		if(o instanceof OsMoDevice) {
+			followTrackerId = ((OsMoDevice) o).getTrackerId();
+		}
+	}
+
+	@Override
+	public void clearSelectedObjects() {
+		LatLon mapLoc = new LatLon(map.getMapView().getLatitude(), map.getMapView().getLongitude());
+		final boolean centered = Algorithms.objectEquals(followMapLocation, mapLoc);
+		if(!centered && followTrackerId != null) {
+			followTrackerId = null;
+		}
 	}
 	
 	

@@ -363,7 +363,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					createMenuItem(menu, GROUP_INFO, R.string.osmo_group_info, R.drawable.ic_action_info_light, R.drawable.ic_action_info_dark,
 							MenuItem.SHOW_AS_ACTION_IF_ROOM);	
 				}
-				if (device == null || device.getGroup().isMainGroup()) {
+				if ((group != null && !group.isMainGroup()) || (device != null && device.getGroup().isMainGroup())) {
 					createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete,
 							R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
 							MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -958,7 +958,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			int activeColor = model.getColor();
 			if (activeColor == 0) {
 				activeColor = getRandomColor();
-				osMoPlugin.getGroups().setDeviceProperties(model, model.getVisibleName(), activeColor);
+				osMoPlugin.getGroups().setGenColor(model, activeColor);
 			}
 			//Location location = tracker.getLastLocation(model.trackerId);
 			if (location == null || mapLocation == null) {

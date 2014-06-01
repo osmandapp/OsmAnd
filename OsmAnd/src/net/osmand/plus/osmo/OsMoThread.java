@@ -66,7 +66,8 @@ public class OsMoThread {
 	
 	private SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
 	
-	private ConcurrentLinkedQueue<String> last100Commands = new ConcurrentLinkedQueue<String>();
+	private ConcurrentLinkedQueue<String> lastCommands = new ConcurrentLinkedQueue<String>();
+	private final static int STACK_CMD = 30;
 	
 	
 
@@ -91,6 +92,7 @@ public class OsMoThread {
 		this.activeChannel = null;
 		authorized = 0;
 		reconnect = false;
+		pingSent = 0;
 		failures = 0;
 		lastSendCommand = 0;
 		selector = Selector.open();
@@ -276,7 +278,11 @@ public class OsMoThread {
 			if(obj != null && obj.has("error")) {
 				error = true;
 				try {
-					service.showErrorMessage(obj.getString("error"));
+					String s = obj.getString("error");
+					if(obj.has("error_description")) {
+						s += " " +obj.getString("error_description");
+					}
+					service.showErrorMessage(s);
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -378,23 +384,30 @@ public class OsMoThread {
 				return ByteBuffer.wrap(prepareCommand(l).toString().getBytes("UTF-8"));
 			}
 		}
-		if(System.currentTimeMillis() - lastSendCommand > TIMEOUT_TO_PING) {
-			if(pingSent == 0) {
+		final long interval = System.currentTimeMillis() - lastSendCommand;
+		if(interval > TIMEOUT_TO_PING) {
+			final long pingInterval = System.currentTimeMillis() - pingSent;
+			if(pingSent == 0 || pingInterval > TIMEOUT_TO_PING) {
 				pingSent = System.currentTimeMillis();
 				cmd(PING_CMD, true);
 				return ByteBuffer.wrap(prepareCommand(PING_CMD).toString().getBytes("UTF-8"));
 			}
+		} else if(pingSent != 0) {
+			pingSent = 0;
 		}
 		return null;
 	}
 	
-	public ConcurrentLinkedQueue<String> getLast100Commands() {
-		return last100Commands;
+	public ConcurrentLinkedQueue<String> getLastCommands() {
+		return lastCommands;
 	}
 	
 	private void cmd(String cmd, boolean send) {
 		log.info("OsMO" + (send ? "> " : ">> ") + cmd);
-		last100Commands.add((send ? "> " : ">> ") + df.format(new Date()) + "  " + cmd);
+		lastCommands.add((send ? "> " : ">> ") + df.format(new Date()) + "  " + cmd);
+		while(lastCommands.size() > STACK_CMD) {
+			lastCommands.poll();
+		}
 	}
 
 	public SessionInfo getSessionInfo() {
