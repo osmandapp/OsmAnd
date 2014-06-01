@@ -277,7 +277,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 						device.lastOnline = o.getLong(LAST_ONLINE);
 					}
 					if (o.has(USER_COLOR)) {
-						device.serverColor = o.getInt(USER_COLOR);
+						device.serverColor = net.osmand.util.Algorithms.parseColor(o.getString(USER_COLOR));
 					}
 					delta.add(device);
 				}
