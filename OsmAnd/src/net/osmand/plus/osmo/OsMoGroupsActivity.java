@@ -440,6 +440,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				quitSelectionMode();
 			}
 		});
+		refreshList();
 	}
 	
 	private StringBuilder setFields(StringBuilder bld, int field, String value) {
@@ -509,6 +510,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private void quitSelectionMode() {
 		selectedObject = null;
 		actionMode.finish();
+		refreshList();
 	}
 
 	@Override
@@ -912,7 +914,11 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					
 					@Override
 					public void onClick(View v) {
-						enterSelectionMode(model);
+						if (model != selectedObject) {
+							enterSelectionMode(model);
+						} else {
+							quitSelectionMode();
+						}
 					}
 				});
 			}
@@ -969,7 +975,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				osMoPlugin.getGroups().setGenColor(model, activeColor);
 			}
 			//Location location = tracker.getLastLocation(model.trackerId);
-			if(model.isEnabled()) {
+			if(!model.isEnabled()) {
 				icon.setVisibility(View.INVISIBLE);
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 				label.setText(model.getVisibleName());

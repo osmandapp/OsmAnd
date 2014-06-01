@@ -14,28 +14,36 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingLeft="6dp"
-        android:src="@drawable/expandable_category_unpushed" /> 
-    
+        android:src="@drawable/expandable_category_unpushed" />
 
     <TextView
         android:id="@+id/category_name"
         style="@style/ListText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
-        android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:textSize="18sp" >
     </TextView>
-    <include layout="@layout/check_item_rel"/>
-    <ImageButton 
-        android:src="@drawable/ic_action_settings_dark" android:id="@+id/settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:focusable="false"
-         />
 
+    <include layout="@layout/check_item_rel" />
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical" >
+
+        <ImageView
+            android:id="@+id/settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="1dp"
+            android:focusable="false"
+            android:src="@drawable/ic_action_settings_dark" />
+    </RelativeLayout>
 
 </LinearLayout>
