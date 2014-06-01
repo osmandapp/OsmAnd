@@ -32,7 +32,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private static final String DELETED = "deleted";
 	private static final String GROUP_TRACKER_ID = "group_tracker_id";
 	private static final String LAST_ONLINE = "last_online";
-	private static final String TRACKS = "tracks";
+	private static final String TRACK = "track";
 	
 	private OsMoTracker tracker;
 	private OsMoService service;
@@ -288,8 +288,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					delta.add(device);
 				}
 			}
-			if(obj.has(TRACKS)){
-				JSONArray ar = obj.getJSONArray(TRACKS);
+			if(obj.has(TRACK)){
+				JSONArray ar = obj.getJSONArray(TRACK);
 				JSONObject[] a = new JSONObject[ar.length()];
 				for(int i = 0; i < a.length; i++) {
 					a[i] = (JSONObject) ar.get(i);
