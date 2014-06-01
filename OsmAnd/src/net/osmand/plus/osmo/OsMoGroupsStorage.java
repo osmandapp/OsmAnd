@@ -357,10 +357,6 @@ public class OsMoGroupsStorage {
 			this.lastOnline = lastOnline;
 		}
 		
-		public void setGenColor(int genColor) {
-			this.genColor = genColor;
-		}
-		
 		public long getLastOnline() {
 			return lastOnline;
 		}

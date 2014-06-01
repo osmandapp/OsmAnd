@@ -41,7 +41,6 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private OsMoGroupsStorage storage;
 	private OsMoGroupsUIListener uiListener;
 	private OsMoPlugin plugin;
-	private OsmandSettings settings;
 	private OsmandApplication app;
 	
 	public interface OsMoGroupsUIListener {
@@ -166,14 +165,18 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				StringBuilder b = new StringBuilder();
 				for(OsMoDevice d : delta) {
 					if(d.getDeletedTimestamp() != 0 && d.isEnabled()) {
-						b.append(app.getString(R.string.osmo_user_joined, d.getVisibleName(), group.getVisibleName(app))).append("\n");
+						if(group.name != null) {
+							b.append(app.getString(R.string.osmo_user_left, d.getVisibleName(), group.getVisibleName(app))).append("\n");
+						}
 						disconnectImpl(d);
 					} else if(!d.isActive()) {
-						b.append(app.getString(R.string.osmo_user_left, d.getVisibleName(), group.getVisibleName(app))).append("\n");
+						if(group.name != null) {
+							b.append(app.getString(R.string.osmo_user_joined, d.getVisibleName(), group.getVisibleName(app))).append("\n");
+						}
 						connectDeviceImpl(d);
 					}
 				}
-				if(b.length() > 0 && settings.OSMO_SHOW_GROUP_NOTIFICATIONS.get()){
+				if(b.length() > 0 && app.getSettings().OSMO_SHOW_GROUP_NOTIFICATIONS.get()){
 					app.showToastMessage(b.toString().trim());
 				}
 				storage.save();
@@ -343,6 +346,10 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		}
 		storage.save();
 	}
+	public void setGenColor(OsMoDevice device, int genColor) {
+		device.genColor = genColor;
+		storage.save();
+	}
 	
 	public OsMoDevice addConnectedDevice(String trackerId, String nameUser, int genColor) {
 		OsMoDevice us = new OsMoDevice();
@@ -365,7 +372,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		}
 		g.userName = userName;		
 		service.pushCommand(op);
-		return op; 
+		return "GROUP_JOIN:"+groupId; 
 	}
 	
 	public String leaveGroup(OsMoGroup group) {

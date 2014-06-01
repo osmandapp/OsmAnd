@@ -2,7 +2,9 @@ package net.osmand.plus.osmo;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
@@ -25,7 +27,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Cap;
+import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
 import android.graphics.PointF;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -42,11 +47,13 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	private DisplayMetrics dm;
 	private final MapActivity map;
 	private OsmandMapTileView view;
-	private Paint pointAltUI;
-	private Paint point;
+	private Paint pointInnerCircle;
+	private Paint pointOuter;
 	private OsMoPlugin plugin;
 	private final static float startZoom = 7;
 	private Handler uiHandler;
+	private Paint paintPath;
+	private Path pth;
 
 	public OsMoPositionLayer(MapActivity map, OsMoPlugin plugin) {
 		this.map = map;
@@ -61,15 +68,24 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
 
-		pointAltUI = new Paint();
-		pointAltUI.setColor(view.getApplication().getResources().getColor(R.color.poi_background));
-		pointAltUI.setStyle(Style.FILL);
-		pointAltUI.setAntiAlias(true);
+		pointInnerCircle = new Paint();
+		pointInnerCircle.setColor(view.getApplication().getResources().getColor(R.color.poi_background));
+		pointInnerCircle.setStyle(Style.FILL);
+		pointInnerCircle.setAntiAlias(true);
 		
-		point = new Paint();
-		point.setColor(Color.GRAY);
-		point.setAntiAlias(true);
-		point.setStyle(Style.FILL_AND_STROKE);
+		paintPath = new Paint();
+		paintPath.setStyle(Style.STROKE);
+		paintPath.setStrokeWidth(14);
+		paintPath.setAntiAlias(true);
+		paintPath.setStrokeCap(Cap.ROUND);
+		paintPath.setStrokeJoin(Join.ROUND);
+		
+		pth = new Path();
+
+		pointOuter = new Paint();
+		pointOuter.setColor(Color.GRAY);
+		pointOuter.setAntiAlias(true);
+		pointOuter.setStyle(Style.FILL_AND_STROKE);
 	}
 	
 	public Collection<OsMoDevice> getTrackingDevices() {
@@ -94,15 +110,35 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
 		final int r = getRadiusPoi(tb);
+		long treshold = System.currentTimeMillis() - 15000;
 		for (OsMoDevice t : getTrackingDevices()) {
 			Location l = t.getLastLocation();
 			if (l != null) {
+				ConcurrentLinkedQueue<Location> plocations = t.getPreviousLocations(treshold);
 				int x = (int) tb.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
 				int y = (int) tb.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
-				
-				pointAltUI.setColor(t.getColor());
-				canvas.drawCircle(x, y, r + 2, point);
-				canvas.drawCircle(x, y, r - 2, pointAltUI);
+				if (plocations.size() > 0) {
+					pth.rewind();
+					Iterator<Location> it = plocations.iterator();
+					boolean f= true;
+					while (it.hasNext()) {
+						Location lo = it.next();
+						int xt = (int) tb.getPixXFromLatLon(lo.getLatitude(), lo.getLongitude());
+						int yt = (int) tb.getPixYFromLatLon(lo.getLatitude(), lo.getLongitude());
+						if(f) {
+							f = false;
+							pth.moveTo(xt, yt);
+						} else{
+							pth.lineTo(xt, yt);
+						}
+					}
+					pth.lineTo(x, y);
+					paintPath.setColor(t.getColor());
+					canvas.drawPath(pth, paintPath);
+				}
+				pointInnerCircle.setColor(t.getColor());
+				canvas.drawCircle(x, y, r + 2, pointOuter);
+				canvas.drawCircle(x, y, r - 2, pointInnerCircle);
 			}
 		}
 	}
