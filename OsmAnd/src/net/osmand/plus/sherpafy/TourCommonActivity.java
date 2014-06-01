@@ -49,10 +49,10 @@ public class TourCommonActivity extends SherlockFragmentActivity {
 
         ViewPager mViewPager = (ViewPager)findViewById(R.id.pager);
         mTabsAdapter = new TabsAdapter(this, tabHost,  mViewPager);
-		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_INFO).setIndicator(getString(R.string.tab_current_tour)), 
-				TourInformationFragment.class, null);
-		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_STAGE).setIndicator(getString(R.string.tab_stages)), 
-				TourStageFragment.class, null);
+//		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_INFO).setIndicator(getString(R.string.tab_current_tour)),
+//				TourInformationFragment.class, null);
+//		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_STAGE).setIndicator(getString(R.string.tab_stages)),
+//				TourStageFragment.class, null);
 		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_SELECTION).setIndicator(getString(R.string.tab_tours)), 
 				TourSelectionFragment.class, null);
         if (savedInstanceState != null) {

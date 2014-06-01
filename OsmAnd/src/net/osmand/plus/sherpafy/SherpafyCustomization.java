@@ -63,17 +63,19 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		TextView v =  (TextView) window.findViewById(R.id.AppName);
 		v.setText("Sherpafy");
 		
-		TextView toursButtonText = (TextView) window.findViewById(R.id.SettingsButtonText);
-		toursButtonText.setText(R.string.tour);
-		View toursButton = window.findViewById(R.id.SettingsButton);
-		toursButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				final Intent search = new Intent(activity, getTourSelectionActivity());
-				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				activity.startActivity(search);
-			}
-		});
+//		TextView toursButtonText = (TextView) window.findViewById(R.id.SettingsButtonText);
+//		toursButtonText.setText(R.string.tour);
+//		View toursButton = window.findViewById(R.id.SettingsButton);
+//		toursButton.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				final Intent search = new Intent(activity, getTourSelectionActivity());
+//				search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//				activity.startActivity(search);
+//			}
+//		});
+
+
 		// the image could be also updated
 	}
 	
@@ -88,8 +90,8 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 	
 	public void updatedLoadedFiles(java.util.Map<String,String> indexFileNames, java.util.Map<String,String> indexActivatedFileNames) {
-//		DownloadIndexActivity.listWithAlternatives(app.getResourceManager().getDateFormat(), 
-//				toursFolder, "", indexFileNames);	
+		DownloadIndexActivity.listWithAlternatives(app.getResourceManager().getDateFormat(),
+				toursFolder, "", indexFileNames);
 	}
 	
 	public List<String> onIndexingFiles(IProgress progress, Map<String, String> indexFileNames) {

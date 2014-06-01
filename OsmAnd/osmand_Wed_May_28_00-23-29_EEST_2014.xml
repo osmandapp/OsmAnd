@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="osmand" default="all">
+  
+  
+  <property file="osmand.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/*.rbc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.zip"/>
+    <include name="*.apk"/>
+    <include name="*.war"/>
+    <include name="*.egg"/>
+    <include name="*.ear"/>
+    <include name="*.ane"/>
+    <include name="*.swc"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.6" value="${jdk.home.1.6}/bin"/>
+  <path id="jdk.classpath.1.6">
+    <fileset dir="${jdk.home.1.6}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="jdk.bin.android_api_19_platform" value="G:/glassfish3/jdk/bin"/>
+  <path id="jdk.classpath.android_api_19_platform">
+    <fileset dir="${jdk.home.android_api_19_platform}">
+      <include name="platforms/android-19/android.jar"/>
+      <include name="platforms/android-19/data/res"/>
+      <include name="tools/support/annotations.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.6}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.6}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.6"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.libs.classpath">
+    <pathelement location="${basedir}/libs/bzip2-20090327.jar"/>
+    <pathelement location="${basedir}/libs/gnu-trove-osmand.jar"/>
+    <pathelement location="${basedir}/libs/icu4j-49_1.jar"/>
+    <pathelement location="${basedir}/libs/junidecode-0.1.jar"/>
+    <pathelement location="${basedir}/libs/tuprolog.jar"/>
+    <pathelement location="${basedir}/../SherlockBar/libs/android-support-v4.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm4-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module OsmAnd-java -->
+  
+  <dirname property="module.osmand-java.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.osmand-java" value="${jdk.home.1.6}"/>
+  <property name="module.jdk.bin.osmand-java" value="${jdk.bin.1.6}"/>
+  <property name="module.jdk.classpath.osmand-java" value="jdk.classpath.1.6"/>
+  
+  <property name="compiler.args.osmand-java" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+  
+  <property name="osmand-java.output.dir" value="${module.osmand-java.basedir}/../OsmAnd-java/bin"/>
+  <property name="osmand-java.testoutput.dir" value="${module.osmand-java.basedir}/../OsmAnd-java/bin"/>
+  
+  <path id="osmand-java.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="osmand-java.module.production.classpath">
+    <path refid="${module.jdk.classpath.osmand-java}"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/bsh-core-2.0b4.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/bzip2-20090327.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/commons-logging-1.1.1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/json-20090211.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/junidecode-0.1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/kxml2-2.3.0.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/tuprolog.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/icu4j-49_1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/gnu-trove-osmand.jar"/>
+  </path>
+  
+  <path id="osmand-java.runtime.production.module.classpath">
+    <pathelement location="${osmand-java.output.dir}"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/bsh-core-2.0b4.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/bzip2-20090327.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/commons-logging-1.1.1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/json-20090211.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/junidecode-0.1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/kxml2-2.3.0.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/tuprolog.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/icu4j-49_1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/gnu-trove-osmand.jar"/>
+  </path>
+  
+  <path id="osmand-java.module.classpath">
+    <pathelement location="${osmand-java.output.dir}"/>
+    <path refid="${module.jdk.classpath.osmand-java}"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/bsh-core-2.0b4.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/bzip2-20090327.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/commons-logging-1.1.1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/json-20090211.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/junidecode-0.1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/kxml2-2.3.0.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/tuprolog.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/icu4j-49_1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/gnu-trove-osmand.jar"/>
+  </path>
+  
+  <path id="osmand-java.runtime.module.classpath">
+    <pathelement location="${osmand-java.output.dir}"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/bsh-core-2.0b4.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/bzip2-20090327.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/commons-logging-1.1.1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/json-20090211.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/junidecode-0.1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/kxml2-2.3.0.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/tuprolog.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/icu4j-49_1.jar"/>
+    <pathelement location="${basedir}/../OsmAnd-java/libs/gnu-trove-osmand.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.osmand-java">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.osmand-java">
+    <patternset refid="excluded.from.module.osmand-java"/>
+  </patternset>
+  
+  <path id="osmand-java.module.sourcepath">
+    <dirset dir="${module.osmand-java.basedir}/../OsmAnd-java">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.osmand-java" depends="compile.module.osmand-java.production,compile.module.osmand-java.tests" description="Compile module OsmAnd-java"/>
+  
+  <target name="compile.module.osmand-java.production" depends="register.custom.compilers" description="Compile module OsmAnd-java; production classes">
+    <mkdir dir="${osmand-java.output.dir}"/>
+    <javac2 destdir="${osmand-java.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.osmand-java}/javac">
+      <compilerarg line="${compiler.args.osmand-java}"/>
+      <bootclasspath refid="osmand-java.module.bootclasspath"/>
+      <classpath refid="osmand-java.module.production.classpath"/>
+      <src refid="osmand-java.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.osmand-java"/>
+    </javac2>
+    
+    <copy todir="${osmand-java.output.dir}">
+      <fileset dir="${module.osmand-java.basedir}/../OsmAnd-java/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.osmand-java.tests" depends="register.custom.compilers,compile.module.osmand-java.production" description="compile module OsmAnd-java; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.osmand-java" description="cleanup module">
+    <delete dir="${osmand-java.output.dir}"/>
+    <delete dir="${osmand-java.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module SherlockBar -->
+  
+  <dirname property="module.sherlockbar.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.sherlockbar" value="${jdk.home.android_api_19_platform}"/>
+  <property name="module.jdk.bin.sherlockbar" value="${jdk.bin.android_api_19_platform}"/>
+  <property name="module.jdk.classpath.sherlockbar" value="jdk.classpath.android_api_19_platform"/>
+  
+  <property name="compiler.args.sherlockbar" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+  
+  <property name="sherlockbar.output.dir" value="${module.sherlockbar.basedir}/../SherlockBar/bin/classes"/>
+  <property name="sherlockbar.testoutput.dir" value="${module.sherlockbar.basedir}/../SherlockBar/bin/classes"/>
+  
+  <path id="sherlockbar.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="sherlockbar.module.production.classpath">
+    <path refid="${module.jdk.classpath.sherlockbar}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  <path id="sherlockbar.runtime.production.module.classpath">
+    <pathelement location="${sherlockbar.output.dir}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  <path id="sherlockbar.module.classpath">
+    <path refid="${module.jdk.classpath.sherlockbar}"/>
+    <pathelement location="${sherlockbar.output.dir}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  <path id="sherlockbar.runtime.module.classpath">
+    <pathelement location="${sherlockbar.output.dir}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.sherlockbar">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.sherlockbar">
+    <patternset refid="excluded.from.module.sherlockbar"/>
+  </patternset>
+  
+  <path id="sherlockbar.module.sourcepath">
+    <dirset dir="${module.sherlockbar.basedir}/../SherlockBar">
+      <include name="src"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.sherlockbar" depends="compile.module.sherlockbar.production,compile.module.sherlockbar.tests" description="Compile module SherlockBar"/>
+  
+  <target name="compile.module.sherlockbar.production" depends="register.custom.compilers" description="Compile module SherlockBar; production classes">
+    <mkdir dir="${sherlockbar.output.dir}"/>
+    <javac2 destdir="${sherlockbar.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.sherlockbar}/javac">
+      <compilerarg line="${compiler.args.sherlockbar}"/>
+      <bootclasspath refid="sherlockbar.module.bootclasspath"/>
+      <classpath refid="sherlockbar.module.production.classpath"/>
+      <src refid="sherlockbar.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.sherlockbar"/>
+    </javac2>
+    
+    <copy todir="${sherlockbar.output.dir}">
+      <fileset dir="${module.sherlockbar.basedir}/../SherlockBar/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.sherlockbar.basedir}/../SherlockBar/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.sherlockbar.tests" depends="register.custom.compilers,compile.module.sherlockbar.production" description="compile module SherlockBar; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.sherlockbar" description="cleanup module">
+    <delete dir="${sherlockbar.output.dir}"/>
+    <delete dir="${sherlockbar.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module OsmAnd -->
+  
+  <dirname property="module.osmand.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.osmand" value="${jdk.home.android_api_19_platform}"/>
+  <property name="module.jdk.bin.osmand" value="${jdk.bin.android_api_19_platform}"/>
+  <property name="module.jdk.classpath.osmand" value="jdk.classpath.android_api_19_platform"/>
+  
+  <property name="compiler.args.osmand" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+  
+  <property name="osmand.output.dir" value="${module.osmand.basedir}/bin/classes"/>
+  <property name="osmand.testoutput.dir" value="${module.osmand.basedir}/bin/classes"/>
+  
+  <path id="osmand.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="osmand.module.production.classpath">
+    <path refid="${module.jdk.classpath.osmand}"/>
+    <pathelement location="${sherlockbar.output.dir}"/>
+    <pathelement location="${osmand-java.output.dir}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  <path id="osmand.runtime.production.module.classpath">
+    <pathelement location="${osmand.output.dir}"/>
+    <path refid="sherlockbar.runtime.production.module.classpath"/>
+    <path refid="osmand-java.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="osmand.module.classpath">
+    <path refid="${module.jdk.classpath.osmand}"/>
+    <pathelement location="${osmand.output.dir}"/>
+    <pathelement location="${sherlockbar.output.dir}"/>
+    <pathelement location="${osmand-java.output.dir}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  <path id="osmand.runtime.module.classpath">
+    <pathelement location="${osmand.output.dir}"/>
+    <path refid="sherlockbar.runtime.module.classpath"/>
+    <path refid="osmand-java.runtime.module.classpath"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.osmand">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.osmand">
+    <patternset refid="excluded.from.module.osmand"/>
+  </patternset>
+  
+  <path id="osmand.module.sourcepath">
+    <dirset dir="${module.osmand.basedir}">
+      <include name="src"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.osmand" depends="compile.module.osmand.production,compile.module.osmand.tests" description="Compile module OsmAnd"/>
+  
+  <target name="compile.module.osmand.production" depends="register.custom.compilers,compile.module.sherlockbar,compile.module.osmand-java" description="Compile module OsmAnd; production classes">
+    <mkdir dir="${osmand.output.dir}"/>
+    <javac2 destdir="${osmand.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.osmand}/javac">
+      <compilerarg line="${compiler.args.osmand}"/>
+      <bootclasspath refid="osmand.module.bootclasspath"/>
+      <classpath refid="osmand.module.production.classpath"/>
+      <src refid="osmand.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.osmand"/>
+    </javac2>
+    
+    <copy todir="${osmand.output.dir}">
+      <fileset dir="${module.osmand.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.osmand.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.osmand.tests" depends="register.custom.compilers,compile.module.osmand.production" description="compile module OsmAnd; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.osmand" description="cleanup module">
+    <delete dir="${osmand.output.dir}"/>
+    <delete dir="${osmand.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.osmand-java, clean.module.sherlockbar, clean.module.osmand" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.osmand-java, compile.module.sherlockbar, compile.module.osmand" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+</project>
