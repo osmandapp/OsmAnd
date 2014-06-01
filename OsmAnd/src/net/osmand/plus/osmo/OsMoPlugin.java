@@ -337,7 +337,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				String errors = "";
 				for(JSONObject obj : params) {
 					try {
-						File f = new File(fl, obj.getString("name"));
+						File f = new File(fl, obj.getString("name")+".gpx");
 						long timestamp = obj.getLong("created") * 1000;
 						boolean visible = obj.has("visible");
 						boolean changed = false;
