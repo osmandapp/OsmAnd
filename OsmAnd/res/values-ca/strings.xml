@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -1777,4 +1777,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="local_index_mi_export">Exportar</string>
 	<string name="import_file_favourites">Guardar com arxiu GPX o posar-lo als favorits?</string>
 	<string name="import_save">Guardar</string>
-	</resources>
+	<string name="osmo_follow">Seguir</string>
+    <string name="osmo_sign_in">Connectar-se</string>
+    <string name="osmo_create_groups_confirm">Per poder crear grups cal ser un usuari registrat de OsMo.</string>
+    </resources>
