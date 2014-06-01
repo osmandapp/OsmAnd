@@ -123,12 +123,12 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	}
 	
 	public void disconnectDevice(OsMoDevice model) {
+		model.enabled = false;
 		disconnectImpl(model);
 		storage.save();
 	}
 
 	private void disconnectImpl(OsMoDevice model) {
-		model.enabled = false;
 		model.active = false;
 		tracker.stopTrackingId(model);
 	}
@@ -192,12 +192,13 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		} else if(command.equalsIgnoreCase("GROUP_CONNECT")) {
 			group = storage.getGroup(gid);
 			if(group != null) {
-				group.users.clear();
 				mergeGroup(group, obj, true);
 				group.active = true;
-				// connect to all devices in group
+				// connect to enabled devices in group
 				for(OsMoDevice d : group.getGroupUsers(null)) {
-					connectDeviceImpl(d);
+					if(d.isEnabled()) {
+						connectDeviceImpl(d);
+					}
 				}
 				storage.save();
 			}
