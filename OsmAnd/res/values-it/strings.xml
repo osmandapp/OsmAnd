@@ -1787,7 +1787,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
         * Modificato l\'aspetto per per il download degli stati (supporto alla ricerca con i nomi locali)
     </string>
     <string name="osmo_auto_send_locations_descr">Avvia automaticamente la registrazione della sessione e invia la localizzazione dopo l\'avvio dell\'applicazione</string>
-    <string name="osmo_auto_send_locations">Avvia automaticamente il tracciamento della sessione</string>
+    <string name="osmo_auto_send_locations">Avvia automaticamente la sessione di tracciamento</string>
     <string name="osmo_tracker_id">ID tracciamento personale</string>
     <string name="osmo_tracker_id_descr">Clicca per visualizzare o condividere l\'id della tracciabilità.
  Usando l\'id della tracciabilità i dispositivi connessi saranno in grado di seguire tutti i movimenti di questo dispositivo! Per disconnettersi seleziona Opzione rigenera.</string>
