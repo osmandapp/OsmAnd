@@ -43,42 +43,7 @@ public class SherpafyStartActivity extends SherlockFragmentActivity {
 
 		if (customization.getTourInformations().isEmpty())
 		{
-			customization.onIndexingFiles(new IProgress() {
-				@Override
-				public void startTask(String taskName, int work) {
-
-				}
-
-				@Override
-				public void startWork(int work) {
-
-				}
-
-				@Override
-				public void progress(int deltaWork) {
-
-				}
-
-				@Override
-				public void remaining(int remainingWork) {
-
-				}
-
-				@Override
-				public void finishTask() {
-
-				}
-
-				@Override
-				public boolean isIndeterminate() {
-					return false;
-				}
-
-				@Override
-				public boolean isInterrupted() {
-					return false;
-				}
-			}, new ConcurrentHashMap<String, String>() );
+			customization.onIndexingFiles( IProgress.EMPTY_PROGRESS, new ConcurrentHashMap<String, String>() );
 		}
 
         if (customization.getSelectedTour() == null) {
