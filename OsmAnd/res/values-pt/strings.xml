@@ -1117,10 +1117,10 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="zxing_barcode_scanner_not_found">Aplicação ZXing Barcode Scanner não está instalada. Procurar no Market?</string>
 	<string name="support_new_features_descr">Faça uma doação para ver novas funcionalidades implementadas nesta aplicação</string>
 	<string name="tip_rotation_switching_t_v2">Você pode definir se, e como, o mapa será rotacionado clicando repetidamente no ícone da bússola na tela do mapa.
-		\n\t*As opções são:
-		\n\t\'Não girar\' - Mapa ficará fixo sempre com o norte para cima
-		\n\t\'Na direcção do movimento\' - Mapa será continuamente alinhado com a sua direcção
-		\n\t\'Na direcção da bússola\' - Mapa será continuamente alinhado com a leitura da bússola do dispositivo "
+		\n\nAs opções são:
+		\n\t*\'Não girar\' - Mapa ficará fixo sempre com o norte para cima
+		\n\t*\'Na direcção do movimento\' - Mapa será continuamente alinhado com a sua direcção
+		\n\t*\'Na direcção da bússola\' - Mapa será continuamente alinhado com a leitura da bússola do dispositivo "
 	</string>
 	<string name="tip_day_night_mode_t_v2">"\tA aparência do mapa pode mudar em alguns mapas vetoriais entre os modos Dia (mais claro) e Noite (mais escuro).\n\tCores noturnas são mais seguras para dirigir à noite.\n\tVocê pode definir uma política para a mudança entre os modos Dia/Noite em \'Menu\' -&gt; \'Diversos\' -&gt; \'Modo Dia/Noite\'.\n\tAs opções são:\n\t\'Nascer/Pôr-do-Sol\' - modo automático, controlado pela posição do sol (padrão)\n\t\'Dia\' - sempre usar o modo diurno\n\t\'Noite\' - sempre usar o modo noturno\n\t\'Sensor de luz\' - aparência do mapa é controlada pelo sensor de luz do dispositivo (se houver) "
 	</string>	
@@ -1246,8 +1246,8 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="local_indexes_cat_srtm">Dados de linhas de contorno</string>
     <string name="osmodroid_plugin_description">Plugin  OsMoDroid é uma extensão do OsmAnd para aplicação OsModroid para online tracking. Mais informações sobre o serviço em http://esya.ru.</string>
     <string name="tip_altitude_offset_t">A Maioria dos dispositivos GPS reportam medidas de altitude no sistema de referência elipsoidal WGS84, para o qual a conversão para sistemas usados localmente requerem a correção dependente de posição.
-		\n\tUma melhor aproximação para esses sistmas locais é a referência EGM96. OsmAnd agora também suporta a exibição automática de altitudes no sistema EGM96.
-		\n\tPara obtê-lo, faça o download do arquivo WW15MGH.DAC via Gerenciamento de Dados (original em http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+		\n\nUma melhor aproximação para esses sistmas locais é a referência EGM96. OsmAnd agora também suporta a exibição automática de altitudes no sistema EGM96.
+		\n\nPara obtê-lo, faça o download do arquivo WW15MGH.DAC via Gerenciamento de Dados (original em http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="osmand_play_title_30_chars">Mapas OsmAnd &amp; Navegação</string>
@@ -1360,7 +1360,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="edit_tilesource_expiration_time">Expira (minutos)</string>
     <string name="edit_tilesource_minzoom">Zoom min</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Escolha existente...</string>
+    <string name="edit_tilesource_choose_existing">Escolher existente…</string>
     <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Definir/Editar…</string>
 	<string name="map_widget_fps_info">FPS info debug</string>
@@ -1482,10 +1482,10 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 →
 	</string>
 	<string name="tip_map_styles_t">OsmAnd permite exibir mapas vetoriais, sem necessitar de conexão com a internet, em diferentes estilos dependendo das suas necessidades: ↵
-→ → \ n \ NOTHER que o \ "default \" estilo mapa equilibrado, você pode, em \'Menu \' → \'Configurar tela \' → \'Map Style \' escolha por exemplo ↵
-→ → \ n \ t * O \'Touring vista \' estilo, que contém as informações mais detalhadas feasable para viagens e turismo, incluindo a optimização dos motoristas profissionais (maior contraste, estradas distintas), as opções para caminhadas Alpine (escala SAC), ciclovias, apoio símbolo caminhadas, etc ↵
-→ → \ n \ t * \'estradas de alto contraste \' mostra estradas em cores muito acentuadas para situações de iluminação ambiente brilhantes ↵
-→ → \ n \ t * \'Winter e ski \' cria um (coberto de neve) Inverno modo paisagem, e mostra pistas de esqui e teleféricos globais (em conexão com a \'World ski \' mapa download) ↵
+→ → \n \n NOTHER que o \ "default \" estilo mapa equilibrado, você pode, em \'Menu \' → \'Configurar tela \' → \'Map Style \' escolha por exemplo ↵
+→ → \n \t * O \'Touring vista \' estilo, que contém as informações mais detalhadas feasable para viagens e turismo, incluindo a optimização dos motoristas profissionais (maior contraste, estradas distintas), as opções para caminhadas Alpine (escala SAC), ciclovias, apoio símbolo caminhadas, etc ↵
+→ → \n \t * \'estradas de alto contraste \' mostra estradas em cores muito acentuadas para situações de iluminação ambiente brilhantes ↵
+→ → \n \t * \'Winter e ski \' cria um (coberto de neve) Inverno modo paisagem, e mostra pistas de esqui e teleféricos globais (em conexão com a \'World ski \' mapa download) ↵
 	</string>
     <string name="auto_zoom_none">Sem auto zoom</string>
     <string name="auto_zoom_close">Aproximar</string>
@@ -1522,4 +1522,70 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="osmo_credentials_not_valid">Os seus credenciais de osmo não são válidos.</string>
     <string name="osmo_regenerate_login_ids_confirm">Tem a certeza que quer regenerar os identificadores pessoais ? Todos os dispositivos ligados a si não serão capazes de continuar a seguir-lo.</string>
     <string name="osmo_regenerate_login_ids">Regenerar identificação do utilizador</string>
+    <string name="osmo_follow">Seguir</string>
+    <string name="osmo_cancel_moving_target">Cancelar destino em movimento</string>
+    <string name="osmo_center_location">Centrar no ecrã</string>
+    <string name="osmo_set_moving_target">Definir como destino em movimento</string>
+    <string name="osmo_use_server_name">Nome registado</string>
+    <string name="osmo_connect_to_my_nickname">Minha alcunha</string>
+    <string name="osmo_user_name">Utilizador</string>
+	<string name="color_red">vermelho</string>
+	<string name="color_pink">rosa</string>
+	<string name="color_orange">laranja</string>
+	<string name="color_brown">castanho</string>
+	<string name="color_yellow">amarelo</string>
+	<string name="color_lightblue">azul claro</string>
+	<string name="color_blue">azul</string>
+	<string name="color_green">verde</string>
+	
+    <string name="osmo_edit_device">Mudar propriedades do utilizador</string>
+    <string name="osmo_edit_color">Mostrar cor</string>
+    <string name="osmo_group_info">Info</string>
+    <string name="osmo_group">OsMo grupo</string>
+    <string name="osmo_group_share">Para ligar-se ao grupo %2$s, indique o id do grupo (%1$s) ou click %3$s .</string>
+    <string name="osmo_share_connect_device">Permitir seguir permanentement este dispositivo</string>
+    <string name="osmo_share_current_session">Partilhar sessão actual no browser</string>
+    <string name="tip_recent_changes_1_7_1_t">Alterações em 1.7:
+    \n\t* IMPORTANTE os mapas devem ser mais recente do que Fevereiro de 2014.
+	\n\t* Roteamento completamente actualizado (rápido e preciso) - 
+    \n\t* Novo ecrã com planeamento da rota (mais intuitivo e poderoso)
+    \n\t** NOTA rota GPX está disponível no botão definições de Rota
+    \n\t* botões escondem-se automaticamente em modo navegação
+    \n\t* Calcular rota em modo offline para p primeiro ponto da rota GPX (\'pass the whole track\' option)
+	\n\t* Simulação activa em túneis 
+	\n\t* Muitos pequenos melhoramentos e correcções
+	\n\t* Definição da velocidade de fala
+    </string>
+    <string name="guidance_preferences_descr">Preferencias de navegação</string>
+    <string name="routing_preferences_descr">Preferências de rota</string>
+    <string name="speech_rate_descr">Definir velocidade de fala para TTS</string>
+    <string name="speech_rate">Velocidade de fala</string>
+    <string name="osmo_session_not_available">Sessão não disponível, por favor verifique que \'Envie localização\' está activo.</string>
+    <string name="osmo_share_session">Partilhar sessão</string>
+    <string name="osmo_session_id_share">Endereço da sessão para seguir aparelho (%1$s)</string>
+    <string name="osmo_track_interval">Intervalo de registo</string>
+	<string name="osmo_track_interval_descr">Escolher intervalo de tempo para enviar localização</string>
+    <string name="int_days">dias</string>
+    <string name="osmo_connect_menu">Conectar</string>
+    <string name="osmo_expire_group">Expira em</string>
+    <string name="osmo_group_description">Descrição</string>
+    <string name="osmo_group_policy">Politica</string>
+    <string name="osmo_connect_to_device_tracker_id">Identificador do tracker</string>
+    <string name="osmo_connect_to_device_name">Nome do utilizador</string>
+    <string name="osmo_connect_to_group_id">Identificação do grupo</string>
+    <string name="osmo_group_name">Nome do grupo</string>
+    <string name="osmo_connect_to_device">Ligar a um dispositivo</string>
+    <string name="osmo_connect_to_group">Ligar a um grupo</string>
+    <string name="osmo_connect">Ligar a</string>
+    <string name="osmo_create_group">Criar Grupo</string>
+    <string name="osmo_server_operation_failed">Operação do servidor OsMo falhou</string>
+    <string name="osmo_activity">Monitorização OpenStreetMap</string>
+    <string name="osmo_enable_tracker">Enviar minha localização</string>
+    <string name="osmo_control">Accesso rápido OsMo</string>
+    <string name="hours_ago">horas atras</string>
+    <string name="minutes_ago">minutos atras</string>
+    <string name="seconds_ago">segundos atras</string>
+    <string name="osmo_connected_devices">aparelhos ligados</string>
+    <string name="osmo_groups">OsMo Grupos/Aparelhos</string>
+    <string name="osmo_tracker_id_share">Para ligar o aparelho alvo %2$s, click no link %3$s ou especifique o id do tracker(%1$s)</string>
     </resources>
