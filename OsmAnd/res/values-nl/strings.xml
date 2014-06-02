@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -1725,8 +1725,8 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	<string name="navigation_intent_invalid">ongeldig formaat : %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">OpenStreetmap-monitoring - geavanceerde live monitoring met veel mogelijkheden tot afstandsbediening http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (geavanceerde live monitoring)</string>
+    <string name="osmo_plugin_description">OpenStreetmap-monitoring - volge andere toestellen en laat jezelf volgen. Maak anonieme groepen, deel je locatie en communiceer. Er zijn diverse instellingen voor permanent of tijdelijk volgen. Anonieme groepen hebben beperkingen, zoals het ontbreken van afstandbediening of een groepsbeheerder. Volwaardige groepen moeten op de website worden gemaakt en zijn alleen voor geregistreerde gebruikers. Lees verder op http://osmo.mobi</string>
+    <string name="osmo_plugin_name">OsMo (geavanceerde live monitoring)</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
    	<string name="keep_informing_never">Niet herhalen</string>
     <string name="keep_informing_descr">Herhaal de aanwijzingen regelmatig</string>
@@ -1761,6 +1761,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="tip_recent_changes_1_8_alpha">Wijzigingen in versie 1.8:
       * Routeberekening tussen punten op een GPX-spoor
       * Kaarten op het downloadscherm zoeken met de plaatselijke naam
+      * GPX/KML import (converteer KML naar GPX)
     </string>
     <string name="use_points_as_intermediates">Bereken route tussen punten</string>
     <string name="osmo_mode_restart">Herstart OsMo-sessie</string>
@@ -1817,4 +1818,5 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="osmo_user_name">Gebruikersnaam</string>
 	<string name="color_green">groen</string>
 	
+    <string name="osmo_follow">Volgen</string>
     </resources>
