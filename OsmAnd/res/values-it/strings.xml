@@ -1815,7 +1815,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_session_not_available">Sessione non disponibile, per favore controllare che \'Invia posizioni\' sia attivo.</string>
     <string name="osmo_share_session">Condividi sessione</string>
     <string name="osmo_session_id_share">Url della sessione per tracciare il dispositivo (%1$s)</string>
-    <string name="osmo_tracker_id_share">Per collegarsi al dispositivo desiderato %2$s, cliccare sul link %3$ o specificare il tracker id (%1$s)</string>
+    <string name="osmo_tracker_id_share">Per collegarsi al dispositivo desiderato %2$s, cliccare sul link %3$ o specificarne l'id di monitoraggio (%1$s)</string>
     <string name="osmo_track_interval">Intervallo di registrazione</string>
 	<string name="osmo_track_interval_descr">Scegli l\'intervallo di tempo per l\'invio la posizione</string>
     <string name="int_days">giorni</string>
