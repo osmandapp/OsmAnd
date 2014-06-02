@@ -43,7 +43,6 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
-import net.osmand.plus.sherpafy.SherpafyStartActivity;
 
 public class MainMenuActivity extends Activity {
 

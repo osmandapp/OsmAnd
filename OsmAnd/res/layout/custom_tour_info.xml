@@ -17,6 +17,13 @@
                 android:text="Itenerary"/>
     </RelativeLayout>
 
+    <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/stages">
+    </RadioGroup>
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" >
@@ -60,7 +67,7 @@
                     android:textSize="18sp" >
             </TextView>
 
-            <Button android:id="@+id/settings"
+            <Button android:id="@+id/btn_settings"
                     android:text="Settings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

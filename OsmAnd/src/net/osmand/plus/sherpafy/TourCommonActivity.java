@@ -69,7 +69,6 @@ public class TourCommonActivity extends SherlockFragmentActivity {
 			protected void onPreExecute() {
 				dlg = ProgressDialogImplementation.createProgressDialog(TourCommonActivity.this, "", getString(R.string.indexing_tour, ""),
 						ProgressDialog.STYLE_SPINNER);
-				
 			};
 			
 			@Override
@@ -80,14 +79,17 @@ public class TourCommonActivity extends SherlockFragmentActivity {
 			
 			protected void onPostExecute(Void result) {
 				dlg.getDialog().dismiss();
-				for(WeakReference<Fragment> ref : fragList) {
-			        Fragment f = ref.get();
-			        if(f instanceof TourFragment) {
-			            if(!f.isDetached()) {
-			            	((TourFragment) f).refreshTour();
-			            }
-			        }
-			    }
+//				for(WeakReference<Fragment> ref : fragList) {
+//			        Fragment f = ref.get();
+//			        if(f instanceof TourFragment) {
+//			            if(!f.isDetached()) {
+//			            	((TourFragment) f).refreshTour();
+//			            }
+//			        }
+//			    }
+				Intent intent = new Intent(getApplicationContext(), TourViewActivity.class);
+				startActivity(intent);
+				finish();
 			};
 		}.execute(ti);
 	}
