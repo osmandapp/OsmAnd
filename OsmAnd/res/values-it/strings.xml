@@ -1775,7 +1775,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="keep_informing">Ripeti le istruzioni di navigazione</string>
 	<string name="arrival_distance">Annuncio arrivo</string>
     <string name="arrival_distance_descr">Quanto prima vuoi l\'annuncio dell\'arrivo?</string>
-    <string name="osmo_io_error">Problema di connessione di OsMo: </string>
+    <string name="osmo_io_error">Problema di connessione ad OsMo: </string>
     <string name="osmo_mode_on">Ferma OSMo</string>    
     <string name="osmo_mode_off">Avvia sessione OsMo</string>
     <string name="osmo_register_device">Registrazione del dispositivo in corso ... </string>
