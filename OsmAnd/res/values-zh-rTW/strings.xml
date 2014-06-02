@@ -75,10 +75,10 @@
 
 		OsmAnd 正在積極開發我們的專案，並且它的更進一步發展依賴於提供資金的捐助，用以資助發展和新功能的駕駛測試。請考慮購買 OsmAnd +，或資助特定的新功能或在 osmand.net 網站上一般捐贈。
 	</string>
-	<string name="osmand_plus_short_description_80_chars">可用於離線和線上的 OSM 地圖，為通用的手機地圖查看和導航</string>
+	<string name="osmand_plus_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ OsmAnd (OSM Automated Navigation Directions)
-		OsmAnd 是開放源碼導航應用程式訪問到各式各樣的全球 OpenStreetMap (簡稱OSM開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
+		OsmAnd 是開放源碼導航應用程式，可以使用各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
 
 主要功能：
  - 完整離線功能 (存放下載的向量圖或地圖圖磚)
@@ -115,7 +115,7 @@
 	<string name="live_monitoring_mode_on">停止\n 線上追蹤</string>
 	<string name="position_on_map_descr">在地圖上選取所在地的位置標記</string>
 	<string name="position_on_map">位置標記</string>
-	<string name="layer_map_appearance">組態顯示畫面</string>
+	<string name="layer_map_appearance">組態螢幕顯示</string>
 	<string name="show_lanes">顯示車道數</string>
 	<string name="avoid_unpaved">避開顛頗路面</string>
 	<string name="avoid_ferries">避開渡輪</string>
@@ -134,7 +134,7 @@
 	<string name="int_continuosly">繼續</string>
 	<string name="screen_is_locked">要解鎖螢幕，按下鎖圖示</string>
 	<string name="map_widget_top_text">街道名稱</string>
-	<string name="map_widget_config">組態顯示畫面</string>
+	<string name="map_widget_config">組態螢幕顯示</string>
 	
 	<string name="map_widget_back_to_loc">目前位置</string>
 	<string name="map_widget_lock_screen">鎖住螢幕</string>
@@ -374,7 +374,7 @@
 	<string name="settings_preset_descr">檢視地圖和導航設定，記住每個使用設定檔。在這裡設定您的預設設定檔。</string>
 	<string name="routing_settings">導航</string>
 	<string name="routing_settings_descr">指定導航選項</string>
-	<string name="global_settings">全區設定</string>
+	<string name="global_settings">整體設定</string>
 	<string name="index_settings">資料管理</string>
 	<string name="general_settings">一般設定</string>
 	<string name="general_settings_descr">組態應用程式顯示和共通設定</string>
@@ -397,7 +397,7 @@
 	</string>
 	<string name="tip_day_night_mode">日/夜模式</string>
 	<string name="tip_day_night_mode_t_v2">離線向量地圖的地圖外觀顯示，可在日間(較亮)與夜間(較暗)之間切換。夜間顏色是在夜晚行駛時比較安全。
-		\n\n您可在\'選項\' -&gt; \'組態顯示畫面\' -&gt;\'日/夜地圖\'設定日/夜間切換原則。
+		\n\n您可在\'選項\' -&gt; \'組態螢幕顯示\' -&gt;\'日/夜地圖\'設定日/夜間切換原則。
 		\n\n選擇有：
 		\n\t* \'日出/日落\'：自動模式，依所處位置的日出/日落控制（預設）
 		\n\t* \'日間\'：永遠使用日間模式
@@ -422,7 +422,7 @@
 	<string name="choose_auto_follow_route_descr">一段時間後地圖會移到目前位置</string>
 	<string name="auto_follow_route_never">永不</string>
 	<string name="auto_follow_route_navigation">只有導航時自動置中</string>
-	<string name="auto_follow_route_navigation_descr">只有在導航中，地圖檢視自動置中。</string>
+	<string name="auto_follow_route_navigation_descr">只有在導航時，地圖檢視自動置中。</string>
 	<string name="auto_follow_location_enabled">使用地圖檢視自動置中。</string>
 	<string name="pref_vector_rendering">向量繪圖專用選項</string>
 	<string name="pref_overlay">上層 / 下層</string>
@@ -440,7 +440,7 @@
 	<string name="file_can_not_be_renamed">檔名不可更改。</string>
 	<string name="file_with_name_already_exists">該檔名已存在。</string>
 	<string name="gpx_navigation">GPX 路線</string>
-	<string name="poi_query_by_name_matches_categories">數個興趣點類別中找到與查詢符合：</string>
+	<string name="poi_query_by_name_matches_categories">在數個興趣點類別裡找到與查詢符合的：</string>
 	<string name="data_to_search_poi_not_available">在裝置端資料查尋的興趣點不存在。</string>
 	<string name="poi_filter_by_name">以名稱查尋</string>
 	<string name="old_poi_file_should_be_deleted">該興趣點資料檔 \'%1$s\' 是多餘的，且可刪除。</string>
@@ -826,7 +826,7 @@
 	<string name="update_poi_error_local">更新裝置端的興趣點列表錯誤</string>
 	<string name="update_poi_error_loading">由伺服器載入資料時發生錯誤</string>
 	<string name="update_poi_no_offline_poi_index">該地區無可用的離線興趣點資料</string>
-	<string name="update_poi_is_not_available_for_zoom">興趣點更新無法用於小縮放級別</string>
+	<string name="update_poi_is_not_available_for_zoom">更新的興趣點無法用於小的縮放級別</string>
 	<string name="context_menu_item_update_poi">更新興趣點</string>
 	<string name="context_menu_item_update_map_confirm">透過網路更新裝置端的資料？</string>
 	<string name="search_history_city">縣市：{0}</string>
@@ -858,7 +858,7 @@
 	<string name="error_io_error">存取發生錯誤</string>
 	
 	<string name="downloading">下載中…</string>
-	<string name="downloading_list_indexes">下載可用的地區列表…</string>
+	<string name="downloading_list_indexes">下載可以用的地區列表…</string>
 	<string name="list_index_files_was_not_loaded">無法由 osmand.net 取得地區列表。</string>
 	<string name="show_poi_on_map">在地圖上顯示</string>
 	<string name="fav_points_edited">我的最愛已被更改</string>
@@ -1583,7 +1583,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="tips_and_tricks">提示</string>
     <string name="tip_map_styles">地圖樣式</string>
 	<string name="tip_map_styles_t">OsmAnd 支援顯示離線的向量地圖，以不同的地圖樣式來適應您的需要：
-		\n\n除了平衡預設的地圖樣式，您可以根據\'選單\' -&gt; \'組態顯示畫面\' -&gt; \'地圖樣式\'選擇例如
+		\n\n除了平衡預設的地圖樣式，您可以根據\'選單\' -&gt; \'組態螢幕顯示\' -&gt; \'地圖樣式\'選擇例如
 		\n\t*\'遊覽檢視\'樣式：盡可能為旅行和遊覽提供包含了最詳細的資訊，包括專業的駕駛（高對比可區別的道路）、為徒步登山 (SAC 等級）作的選項、自行車路線、支援徒步旅行符號等。
 		\n\t*\'高對比道路\'在明亮的環境照明情況下，非常突出的高亮顏色顯示道路
 		\n\t*\'冬季和滑雪\'建立一個（白雪覆蓋）冬季景觀視野，和顯示全球滑雪場和滑雪升降機
