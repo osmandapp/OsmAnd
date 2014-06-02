@@ -100,7 +100,7 @@
     <string name="osmo_plugin_name">OsMo (Advanced Live Monitoring)</string>
    	<string name="always_center_position_on_map">Display position always in center</string>
     <string name="voice_pref_title">Voice</string>
-    <string name="misc_pref_title">Miscallenious</string>
+    <string name="misc_pref_title">Miscellaneous</string>
     <string name="localization_pref_title">Localization</string>
     <string name="index_item_nation_addresses">addresses nationwide</string>
 	<string name="index_item_world_altitude_correction">World altitude correction</string>
