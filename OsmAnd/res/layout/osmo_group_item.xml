@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="?attr/expandable_category_color"
     android:paddingBottom="5dp"
-    android:paddingLeft="4dp"
+    android:paddingLeft="3dp"
     android:paddingRight="4dp"
     android:paddingTop="5dp" >
 
@@ -21,27 +21,29 @@
         style="@style/ListText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
         android:layout_weight="1"
         android:textSize="18sp" >
     </TextView>
 
-<!-- 
+    <include layout="@layout/check_item_rel" />
+
     <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_gravity="center_vertical" >
 
-        <CheckBox
-            android:id="@+id/check_item"
+        <ImageView
+            android:id="@+id/settings"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="1dp"
             android:focusable="false"
-            android:gravity="center_vertical" />
+            android:src="@drawable/ic_action_settings_dark" />
     </RelativeLayout>
- -->
 
 </LinearLayout>

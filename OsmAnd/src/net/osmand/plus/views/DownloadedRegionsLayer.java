@@ -164,7 +164,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 		int right = MapUtils.get31TileNumberX(tileBox.getRightBottomLatLon().getLongitude());
 		int top = MapUtils.get31TileNumberY(tileBox.getLeftTopLatLon().getLatitude());
 		int bottom = MapUtils.get31TileNumberY(tileBox.getRightBottomLatLon().getLatitude());
-		final boolean empty = rm.getRenderer().isLastMapRenderedEmpty(false);
+		final boolean empty = rm.getRenderer().isLastMapRenderedEmpty(tileBox.getZoom() < 12);
 		noMapsPresent = empty;
 		if (!empty && tileBox.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
 			return Collections.emptyList();

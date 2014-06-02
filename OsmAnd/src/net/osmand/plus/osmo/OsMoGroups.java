@@ -123,12 +123,12 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	}
 	
 	public void disconnectDevice(OsMoDevice model) {
+		model.enabled = false;
 		disconnectImpl(model);
 		storage.save();
 	}
 
 	private void disconnectImpl(OsMoDevice model) {
-		model.enabled = false;
 		model.active = false;
 		tracker.stopTrackingId(model);
 	}
@@ -162,15 +162,16 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 			group = storage.getGroup(gid);
 			if(group != null) {
 				List<OsMoDevice> delta = mergeGroup(group, obj, false);
+				String mygid = service.getMyGroupTrackerId();
 				StringBuilder b = new StringBuilder();
 				for(OsMoDevice d : delta) {
 					if(d.getDeletedTimestamp() != 0 && d.isEnabled()) {
-						if(group.name != null) {
+						if(group.name != null && !d.getTrackerId().equals(mygid)) {
 							b.append(app.getString(R.string.osmo_user_left, d.getVisibleName(), group.getVisibleName(app))).append("\n");
 						}
 						disconnectImpl(d);
 					} else if(!d.isActive()) {
-						if(group.name != null) {
+						if(group.name != null && !d.getTrackerId().equals(mygid)) {
 							b.append(app.getString(R.string.osmo_user_joined, d.getVisibleName(), group.getVisibleName(app))).append("\n");
 						}
 						connectDeviceImpl(d);
@@ -191,12 +192,14 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		} else if(command.equalsIgnoreCase("GROUP_CONNECT")) {
 			group = storage.getGroup(gid);
 			if(group != null) {
-				group.users.clear();
 				mergeGroup(group, obj, true);
 				group.active = true;
-				// connect to all devices in group
+				// connect to enabled devices in group
 				for(OsMoDevice d : group.getGroupUsers(null)) {
-					connectDeviceImpl(d);
+					if(d.isEnabled()) {
+						d.active = false;
+						connectDeviceImpl(d);
+					}
 				}
 				storage.save();
 			}
