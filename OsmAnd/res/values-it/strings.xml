@@ -1769,9 +1769,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoraggio - Monitoraggio avanzato in diretta con molte funzioni per il controllo remoto http://osmo.mobi</string>
     <string name="osmo_plugin_name">OsMo (Monitoraggio avanzato in tempo reale)</string>
-    <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
+    <string name="osmo_settings">OsMo OpenStreetMap Monitoraggio (beta)</string>
    	<string name="keep_informing_never">Mai</string>
-    <string name="keep_informing_descr">Annuncia a intervalli regolari le indicazioni di navigazione</string>
+    <string name="keep_informing_descr">Annuncia nuovamente a intervalli regolari le indicazioni di navigazione</string>
     <string name="keep_informing">Ripeti le istruzioni di navigazione</string>
 	<string name="arrival_distance">Annuncio arrivo</string>
     <string name="arrival_distance_descr">Quanto prima vuoi l\'annuncio dell\'arrivo?</string>
