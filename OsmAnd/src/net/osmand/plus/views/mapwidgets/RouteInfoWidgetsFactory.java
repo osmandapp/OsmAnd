@@ -559,7 +559,7 @@ public class RouteInfoWidgetsFactory {
 					int active = imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow);
 					paintRouteDirection.setColor(inactive);
 					for (int i = 0; i < lanes.length; i++) {
-						if (turn.hasAttribute(i, TurnType.BIT_LANE_STRAIGHT_ALLOWED)) {
+						if (turn.isTurnAllowed(i, TurnType.Turn.STRAIGHT)) {
 							Path straight = new Path();
 							TurnPathHelper.calcTurnPath(straight, TurnType.valueOf(TurnType.C, leftSide), pathTransform);
 							if (turn.getValue().equals(TurnType.C)) {
@@ -569,7 +569,7 @@ public class RouteInfoWidgetsFactory {
 							canvas.drawPath(straight, paintRouteDirection);
 							paintRouteDirection.setColor(inactive);
 						}
-						if (turn.hasAttribute(i, TurnType.BIT_LANE_SLIGHT_RIGHT_ALLOWED)) {
+						if (turn.isTurnAllowed(i, TurnType.Turn.SLIGHT_RIGHT)) {
 							Path slightRight = new Path();
 							TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf(TurnType.TSLR, leftSide), pathTransform);
 							if (turn.getValue().equals(TurnType.TSLR) || turn.getValue().equals(TurnType.KR)) {
@@ -581,7 +581,7 @@ public class RouteInfoWidgetsFactory {
 							canvas.translate((int) (-0.2 * w), 0);
 							paintRouteDirection.setColor(inactive);
 						}
-						if (turn.hasAttribute(i, TurnType.BIT_LANE_SLIGHT_LEFT_ALLOWED)) {
+						if (turn.isTurnAllowed(i, TurnType.Turn.SLIGHT_LEFT)) {
 							Path slightLeft = new Path();
 							TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf(TurnType.TSLL, leftSide), pathTransform);
 							if (turn.getValue().equals(TurnType.TSLL) || turn.getValue().equals(TurnType.KL)) {
@@ -593,7 +593,7 @@ public class RouteInfoWidgetsFactory {
 							canvas.translate((int) (0.2 * w), 0);
 							paintRouteDirection.setColor(inactive);
 						}
-						if (turn.hasAttribute(i, TurnType.BIT_LANE_RIGHT_ALLOWED)) {
+						if (turn.isTurnAllowed(i, TurnType.Turn.RIGHT)) {
 							Path right = new Path();
 							TurnPathHelper.calcTurnPath(right, TurnType.valueOf(TurnType.TR, leftSide), pathTransform);
 							if (turn.getValue().equals(TurnType.TR)) {
@@ -603,7 +603,7 @@ public class RouteInfoWidgetsFactory {
 							canvas.drawPath(right, paintRouteDirection);
 							paintRouteDirection.setColor(inactive);
 						}
-						if (turn.hasAttribute(i, TurnType.BIT_LANE_LEFT_ALLOWED)) {
+						if (turn.isTurnAllowed(i, TurnType.Turn.LEFT)) {
 							Path left = new Path();
 							TurnPathHelper.calcTurnPath(left, TurnType.valueOf(TurnType.TL, leftSide), pathTransform);
 							if (turn.getValue().equals(TurnType.TL)) {
@@ -613,7 +613,7 @@ public class RouteInfoWidgetsFactory {
 							canvas.drawPath(left, paintRouteDirection);
 							paintRouteDirection.setColor(inactive);
 						}
-						if (turn.hasAttribute(i, TurnType.BIT_LANE_SHARP_RIGHT_ALLOWED)) {
+						if (turn.isTurnAllowed(i, TurnType.Turn.SHARP_RIGHT)) {
 							Path sharpRight = new Path();
 							TurnPathHelper.calcTurnPath(sharpRight, TurnType.valueOf(TurnType.TSHR, leftSide), pathTransform);
 							if (turn.getValue().equals(TurnType.TSHR)) {
@@ -625,7 +625,7 @@ public class RouteInfoWidgetsFactory {
 							canvas.translate((int) (-0.2 * w), 0);
 							paintRouteDirection.setColor(inactive);
 						}
-						if (turn.hasAttribute(i, TurnType.BIT_LANE_SHARP_LEFT_ALLOWED)) {
+						if (turn.isTurnAllowed(i, TurnType.Turn.SHARP_LEFT)) {
 							Path sharpLeft = new Path();
 							TurnPathHelper.calcTurnPath(sharpLeft, TurnType.valueOf(TurnType.TSHL, leftSide), pathTransform);
 							if (turn.getValue().equals(TurnType.TSHL)) {
@@ -637,7 +637,7 @@ public class RouteInfoWidgetsFactory {
 							canvas.translate((int) (0.2 * w), 0);
 							paintRouteDirection.setColor(inactive);
 						}
-						if (turn.hasAttribute(i, TurnType.BIT_LANE_UTURN_ALLOWED)) {
+						if (turn.isTurnAllowed(i, TurnType.Turn.UTURN)) {
 							Path uturn = new Path();
 							TurnPathHelper.calcTurnPath(uturn, TurnType.valueOf(TurnType.TU, leftSide), pathTransform);
 							if (turn.getValue().equals(TurnType.TU)) {
