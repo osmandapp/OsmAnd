@@ -1767,4 +1767,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_control">OsMo hiter dostop</string>
     <string name="osmo_connected_devices">Povezane naprave</string>
     <string name="osmo_auth_pending">Čakanje na dovoljenje...</string>
+    <string name="osmo_regenerate_login_ids_confirm">Ali ste prepričani, da želite ustvariti nov ID uporabnika? Vse naprave, ki so povezane z vami, vam ne bodo mogle več slediti.</string>
+    <string name="osmo_track_interval_descr">Izberite časovni interval za pošiljanje lokacije</string>
+    <string name="osmo_connect_menu">Poveži</string>
     </resources>
