@@ -1766,7 +1766,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="share_route_subject">Percorso condiviso tramite OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato non valido: %s</string>
 <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
-    <string name="osmo_settings_descr">Mostra la chiave di registrazione unica del dispositivo e altre impostazioni di monitoraggio specifiche </string>
+    <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoraggio - Monitoraggio avanzato in diretta con molte funzioni per il controllo remoto http://osmo.mobi</string>
     <string name="osmo_plugin_name">OsMo (Monitoraggio avanzato in tempo reale)</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
