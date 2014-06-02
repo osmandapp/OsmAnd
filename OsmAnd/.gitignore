@@ -10,3 +10,5 @@ cpd.xml
 jni/Local.mk
 out/
 use/
+osmand.properties
+osmand.xml

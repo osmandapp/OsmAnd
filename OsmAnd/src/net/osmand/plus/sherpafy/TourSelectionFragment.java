@@ -4,8 +4,13 @@
 package net.osmand.plus.sherpafy;
 
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
+import android.app.ProgressDialog;
+import android.widget.*;
+import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.sherpafy.TourCommonActivity.TourFragment;
 import android.content.Intent;
@@ -13,10 +18,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
@@ -30,14 +31,14 @@ public class TourSelectionFragment extends SherlockListFragment implements TourF
 	private static final int DOWNLOAD_MORE = 0;
 	private SherpafyCustomization appCtx;
 	private boolean lightContent;
-	
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		appCtx = (SherpafyCustomization) getApp().getAppCustomization();
 		lightContent = getApp().getSettings().isLightContent();
 		setHasOptionsMenu(true);
+
 		// ListActivity has a ListView, which you can get with:
 		//ListView lv = getListView();
 		// Then you can create a listener like so:
@@ -77,8 +78,6 @@ public class TourSelectionFragment extends SherlockListFragment implements TourF
 		final TourInformation tour = ((LocalAdapter) getListAdapter()).getItem(position);
 		if(appCtx.getSelectedTour() != tour) {
 			((TourCommonActivity) getActivity()).selectTour(tour);
-		} else {
-			((TourCommonActivity) getActivity()).selectTour(null);
 		}
 	}
 
@@ -118,7 +117,7 @@ public class TourSelectionFragment extends SherlockListFragment implements TourF
 	@Override
 	public void refreshTour() {
 		setListAdapter(new LocalAdapter(appCtx.getTourInformations()));
-		
+
 	}
 
 }

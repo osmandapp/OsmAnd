@@ -14,7 +14,7 @@ import android.os.Bundle;
 public class SherpafyPluginActivity extends Activity {
 	private static final String OSMAND_COMPONENT = "net.osmand"; //$NON-NLS-1$
 	private static final String OSMAND_COMPONENT_PLUS = "net.osmand.plus"; //$NON-NLS-1$
-	private static final String OSMAND_ACTIVITY = "net.osmand.plus.activities.MainMenuActivity"; //$NON-NLS-1$
+	private static final String OSMAND_ACTIVITY = "net.osmand.plus.sherpafy.SherpafyStartActivity"; //$NON-NLS-1$
 	
     /** Called when the activity is first created. */
     @Override
@@ -28,7 +28,6 @@ public class SherpafyPluginActivity extends Activity {
 		ResolveInfo resolved = getPackageManager().resolveActivity(intentPlus, PackageManager.MATCH_DEFAULT_ONLY);
 		if(resolved != null) {
 			stopService(intentPlus);
-			intentPlus.putExtra("SHERPAFY", true);
 			startActivity(intentPlus);
 			finish();
 		} else {

@@ -49,10 +49,10 @@ public class TourCommonActivity extends SherlockFragmentActivity {
 
         ViewPager mViewPager = (ViewPager)findViewById(R.id.pager);
         mTabsAdapter = new TabsAdapter(this, tabHost,  mViewPager);
-		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_INFO).setIndicator(getString(R.string.tab_current_tour)), 
-				TourInformationFragment.class, null);
-		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_STAGE).setIndicator(getString(R.string.tab_stages)), 
-				TourStageFragment.class, null);
+//		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_INFO).setIndicator(getString(R.string.tab_current_tour)),
+//				TourInformationFragment.class, null);
+//		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_STAGE).setIndicator(getString(R.string.tab_stages)),
+//				TourStageFragment.class, null);
 		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_SELECTION).setIndicator(getString(R.string.tab_tours)), 
 				TourSelectionFragment.class, null);
         if (savedInstanceState != null) {
@@ -69,7 +69,6 @@ public class TourCommonActivity extends SherlockFragmentActivity {
 			protected void onPreExecute() {
 				dlg = ProgressDialogImplementation.createProgressDialog(TourCommonActivity.this, "", getString(R.string.indexing_tour, ""),
 						ProgressDialog.STYLE_SPINNER);
-				
 			};
 			
 			@Override
@@ -80,14 +79,17 @@ public class TourCommonActivity extends SherlockFragmentActivity {
 			
 			protected void onPostExecute(Void result) {
 				dlg.getDialog().dismiss();
-				for(WeakReference<Fragment> ref : fragList) {
-			        Fragment f = ref.get();
-			        if(f instanceof TourFragment) {
-			            if(!f.isDetached()) {
-			            	((TourFragment) f).refreshTour();
-			            }
-			        }
-			    }
+//				for(WeakReference<Fragment> ref : fragList) {
+//			        Fragment f = ref.get();
+//			        if(f instanceof TourFragment) {
+//			            if(!f.isDetached()) {
+//			            	((TourFragment) f).refreshTour();
+//			            }
+//			        }
+//			    }
+				Intent intent = new Intent(getApplicationContext(), TourViewActivity.class);
+				startActivity(intent);
+				finish();
 			};
 		}.execute(ti);
 	}
