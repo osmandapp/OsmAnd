@@ -27,6 +27,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
@@ -54,6 +55,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	private Handler uiHandler;
 	private Paint paintPath;
 	private Path pth;
+	private Paint paintTextIcon;
 
 	public OsMoPositionLayer(MapActivity map, OsMoPlugin plugin) {
 		this.map = map;
@@ -79,6 +81,13 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		paintPath.setAntiAlias(true);
 		paintPath.setStrokeCap(Cap.ROUND);
 		paintPath.setStrokeJoin(Join.ROUND);
+		
+		paintTextIcon = new Paint();
+		paintTextIcon.setTextSize(10 * view.getDensity());
+		paintTextIcon.setTextAlign(Align.CENTER);
+		paintTextIcon.setFakeBoldText(true);
+		paintTextIcon.setColor(Color.BLACK);
+		paintTextIcon.setAntiAlias(true);
 		
 		pth = new Path();
 
@@ -139,6 +148,8 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				pointInnerCircle.setColor(t.getColor());
 				canvas.drawCircle(x, y, r + 2, pointOuter);
 				canvas.drawCircle(x, y, r - 2, pointInnerCircle);
+				paintTextIcon.setTextSize(r);
+				canvas.drawText(t.getVisibleName().substring(0, 1), x, y, paintTextIcon);
 			}
 		}
 	}
