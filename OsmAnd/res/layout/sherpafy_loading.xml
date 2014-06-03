@@ -19,8 +19,9 @@
             android:id="@+id/ProgressMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="3"
             android:text="@string/loading_data"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </FrameLayout>

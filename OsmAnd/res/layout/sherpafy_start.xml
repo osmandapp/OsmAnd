@@ -15,6 +15,7 @@
             android:id="@+id/select_tour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
             android:singleLine="true"
             android:text="@string/select_tour" />
     </LinearLayout>
@@ -30,6 +31,7 @@
             android:id="@+id/download_tour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
             android:singleLine="true"
             android:text="@string/download_tour" />
     </LinearLayout>

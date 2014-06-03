@@ -7,7 +7,7 @@
    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal" >
 
@@ -30,12 +30,6 @@
             android:text="@string/select_tour"
             android:textSize="21sp" />
 
-        <Button
-            android:id="@+id/start_tour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:text="@string/start_tour" />
     </LinearLayout>
 
     <ScrollView
@@ -86,12 +80,6 @@
                 android:textSize="16sp" >
             </TextView>
 
-            <TextView
-                android:id="@+id/btn_settings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="@string/settings_Button" />
         </LinearLayout>
     </ScrollView>
 

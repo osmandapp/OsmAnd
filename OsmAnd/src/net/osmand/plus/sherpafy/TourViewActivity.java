@@ -38,6 +38,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	private static final int GO_TO_MAP = 1;
 	private static final int SETTINGS_ID = 2;
+	private static final int TOUR_ID = 3;
 	private static final int STATE_TOUR_VIEW = 1; 
 	private static final int STATE_LOADING = 0;
 	private static final int STATE_SELECT_TOUR = -1;
@@ -121,29 +122,45 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			setTourSelectionContentView();
 			state = STATE_SELECT_TOUR;
 		}
+		invalidateOptionsMenu();
+	}
+	
+	private void startTourView() {
+		if(state != STATE_TOUR_VIEW) {
+			setTourInfoContent();
+			state = STATE_TOUR_VIEW;
+		}
+		getSupportActionBar().setTitle(customization.getSelectedTour().getName());
+		updateTourView();
+		invalidateOptionsMenu();
 	}
 	
 	private void setMainContent() {
 		if(customization.getSelectedTour() != null) {
-			if(state != STATE_TOUR_VIEW) {
-				setTourInfoContent();
-				state = STATE_TOUR_VIEW;
-			}
-			getSupportActionBar().setTitle(customization.getSelectedTour().getName());
-			updateTourView();
+			startTourView();
 		} else {
 			startSettings();
 		}
 	}
+
+
+
 	
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		createMenuItem(menu, GO_TO_MAP, R.string.start_tour, 
-				0, 0,/*R.drawable.ic_action_marker_light,*/
-				MenuItem.SHOW_AS_ACTION_ALWAYS| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		createMenuItem(menu, SETTINGS_ID, R.string.osmo_share_session, 
-				R.drawable.ic_action_settings_light, R.drawable.ic_action_settings_dark,
-				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		if (state == STATE_SELECT_TOUR) {
+			createMenuItem(menu, GO_TO_MAP, R.string.start_tour, 0, 0,/* R.drawable.ic_action_marker_light, */
+					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			createMenuItem(menu, SETTINGS_ID, R.string.osmo_share_session, R.drawable.ic_action_settings_light,
+					R.drawable.ic_action_settings_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM
+							| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		} else if(state == STATE_TOUR_VIEW) {
+			if (customization.isTourSelected()) {
+				createMenuItem(menu, TOUR_ID, R.string.osmo_share_session, R.drawable.ic_action_ok_light,
+						R.drawable.ic_action_ok_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM
+								| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			}
+		}
 		return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -173,17 +190,10 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		description.setVisibility(View.VISIBLE);
 		fullDescription = (TextView) findViewById(R.id.tour_fulldescription);
 		fullDescription.setVisibility(View.VISIBLE);
-		Button start_tour = (Button) findViewById(R.id.start_tour);
 
 		// in case of reloading view - remove all previous radio buttons
 		stages.removeAllViews();
 
-		start_tour.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				goToMap();
-			}
-		});
 		// get count of radio buttons
 		final int count = stagesInfo.size() + 1;
 		final RadioButton[] rb = new RadioButton[count];
@@ -250,6 +260,9 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			return true;
 		} else if (item.getItemId() == SETTINGS_ID) {
 			startSettings();
+			return true;
+		} else if (item.getItemId() == TOUR_ID) {
+			startTourView();
 			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
