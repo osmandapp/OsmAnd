@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -1835,4 +1835,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_user_name">使用者</string>
 	<string name="color_green">綠色</string>
 	
+    <string name="osmo_user_joined">使用者 %1$s 已加入群組 %2$s</string>
+    <string name="osmo_user_left">使用者 %1$s 離開群組 %2$s</string>
+    <string name="osmo_show_group_notifications">顯示群組通知</string>
+    <string name="osmo_show_group_notifications_descr">在使用者加入或離開群組時顯示提示訊息</string>
     </resources>
