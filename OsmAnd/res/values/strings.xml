@@ -38,7 +38,7 @@
     <string name="osmo_edit_color">Display color</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo group</string>
-    <string name="osmo_group_share">In order to Connect to the group %2$s, specify group id (%1$s) or click %3$s .</string>
+    <string name="osmo_group_share">In order to Connect to the group %2$s, specify group id (%1$s) or click %3$s.</string>
     <string name="osmo_share_connect_device">Let permanently follow this device</string>
     <string name="osmo_share_current_session">Share current session in browser</string>
     <string name="osmo_session_not_available">Session not available, please check that \'Send locations\' is on.</string>
@@ -74,11 +74,11 @@
     <string name="osmo_tracker_id">Personal tracker id</string>
     <string name="osmo_tracker_id_descr">Click to view or share tracker id. 
         Using tracker id connected devices will be able to monitor all movements of this device! To disconnect select Regenerate option.</string>
-    <string name="osmo_session_token">Session token : %1$s</string>
+    <string name="osmo_session_token">Session token: %1$s</string>
     <string name="osmo_auth_pending">Waiting for authorization...</string>
     <string name="osmo_locations_sent">Locations sent %1$d (in buffer %2$d) </string>
-    <string name="osmo_conn_successfull">Connection established : %1$s </string>
-    <string name="osmo_io_error">OsMo connection problem : </string>
+    <string name="osmo_conn_successfull">Connection established: %1$s </string>
+    <string name="osmo_io_error">OsMo connection problem: </string>
     <string name="osmo_settings_uuid">Unique device id</string>
     <string name="tip_recent_changes_1_8_alpha">Changes in 1.8:
         * Calculate route between route points of GPX track
@@ -178,8 +178,8 @@
 	<string name="routing_attr_weight_name">Maximum weight</string>
 	<string name="routing_attr_weight_description">Specify vehicle weight limitation</string>
     <string name="android_19_location_disabled">Since KitKat version you can\'t download and update map in previous storage location (%s). Do you want to change to allowed one and copy all files there?
-        \n Note : old files will stay untouched.  
-        \n Note : it will not be possible to share files between OsmAnd and OsmAnd+. </string>
+        \n Note: old files will stay untouched.  
+        \n Note: it will not be possible to share files between OsmAnd and OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd could try to move the data to new destination. Do you want it?</string>
     <string name="copying_osmand_one_file_descr">Copying file (%s) to new destination...</string>
     <string name="copying_osmand_files_descr">Copying OsmAnd files to new destination (%s)</string>
@@ -270,7 +270,7 @@
     <string name="edit_tilesource_name">Name</string>
     <string name="maps_define_edit">Define/Edit&#8230;</string>
 	<string name="map_widget_fps_info">FPS debug info</string>
-	<string name="driving_region_descr">Select Driving Region : US, Europe, UK, Asia and Others</string>
+	<string name="driving_region_descr">Select Driving Region: US, Europe, UK, Asia and Others</string>
 	<string name="driving_region">Driving Region</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">United States</string>
@@ -356,7 +356,7 @@
     <string name="wait_current_task_finished">Please wait until current task is finished</string>
     <string name="use_kalman_filter_compass_descr">Use Kalman filter to avoid compass aberrations</string>
     <string name="use_kalman_filter_compass">Use Kalman filter</string>
-    <string name="access_mark_final_location_first">Accessibility mode : please select destination first</string> 
+    <string name="access_mark_final_location_first">Accessibility mode: please select destination first</string> 
     <string name="use_magnetic_sensor_descr">Use magnetic sensor to determine compass value instead of orientation sensor</string>
     <string name="use_magnetic_sensor">Use magnetic sensor</string>
     <string name="other_location">Other</string>
@@ -1838,5 +1838,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_camera_focus_continuous">The camera continuously tries to focus</string>
 	<string name="av_photo_play_sound">Play sound on photo shot</string>
 	<string name="av_photo_play_sound_descr">Choose whether to play a sound when shooting photos</string>
-    <string name="navigation_intent_invalid">Invalid format : %s</string>
+    <string name="navigation_intent_invalid">Invalid format: %s</string>
 </resources>
