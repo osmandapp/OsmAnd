@@ -21,7 +21,6 @@ import java.util.List;
 public class TourViewActivity extends SherlockFragmentActivity {
 
 	private SherpafyCustomization customization;
-	private ProgressDialog startProgressDialog;
 	ImageView img;
 	TextView description;
 	TextView fullDescription;
@@ -35,7 +34,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		((OsmandApplication) getApplication()).applyTheme(this);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle("Sherpafy");
 
 
 		//		if (customization.getTourInformations().isEmpty())
@@ -43,15 +41,22 @@ public class TourViewActivity extends SherlockFragmentActivity {
 //			customization.onIndexingFiles( IProgress.EMPTY_PROGRESS, new ConcurrentHashMap<String, String>() );
 //		}
 
-		startProgressDialog = new ProgressDialog(this);
+		ProgressDialog startProgressDialog = new ProgressDialog(this);
 		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
 
-		customization = (SherpafyCustomization) getMyApplication().getAppCustomization();
-
 		setContentView(R.layout.custom_tour_info);
-		updateTourView();
-
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		customization = (SherpafyCustomization) getMyApplication().getAppCustomization();
+		getSupportActionBar().setTitle(customization.getSelectedTour().getName());
+
+		updateTourView();
+	}
+
 
 	private void updateTourView() {
 		img = (ImageView) findViewById(R.id.tour_image);
@@ -64,6 +69,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		Button itenerary = (Button) findViewById(R.id.itenerary);
 		Button settings = (Button) findViewById(R.id.btn_settings);
 		RadioGroup stages = (RadioGroup) findViewById(R.id.stages);
+
+		stages.removeAllViews();
 
 		start_tour.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -79,7 +86,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			@Override
 			public void onCheckedChanged(RadioGroup radioGroup, int i) {
 				customization.selectStage(stages_info.get(i), IProgress.EMPTY_PROGRESS);
-				if (i== 0){
+				if (i == 0) {
 					fullDescription.setText(cur_tour.getFulldescription());
 					description.setText((cur_tour.getShortDescription()));
 					prepareBitmap();
@@ -101,23 +108,17 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		});
 
 
-
 		//get count of radio buttons
 		final int count = stages_info.size();
 		final RadioButton[] rb = new RadioButton[count];
 
 		//add radio buttons to view
-		for (int i =0; i< count; i++){
+		for (int i = 0; i < count; i++) {
 			rb[i] = new RadioButton(this);
 			rb[i].setId(i);
 			stages.addView(rb[i]);
-			String stage_name = stages_info.get(i).getName();
-			//if string lenght is longer than 10 - app looks like shit, need to trim and find a workaround
-			if (stage_name.length() > 10){
-				rb[i].setText(stage_name.substring(0, 10));
-			} else {
-				rb[i].setText(stage_name);
-			}
+			rb[i].setText(stages_info.get(i).getName());
+			rb[i].setTextColor(getResources().getColor(R.color.color_black));
 		}
 
 		TourInformation.StageInformation cur_stage = customization.getSelectedStage();
@@ -125,26 +126,26 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		name.setText(cur_tour.getName());
 
 		//if there's no current stage - overview should be selected
-		if (cur_stage == null){
+		if (cur_stage == null) {
 			stages.check(0);
 			description.setText(cur_tour.getShortDescription());
 			fullDescription.setText(cur_tour.getFulldescription());
 			prepareBitmap();
-		} else{
+		} else {
 			int i = 0;
-			for (i=0; i<count;i++){
+			for (i = 0; i < count; i++) {
 				if (cur_stage.equals(stages_info.get(i)))
 					break;
 			}
-			if (i != count){
+			if (i != count) {
 				stages.check(i);
-			} else{
+			} else {
 				stages.check(0);
 			}
 		}
 	}
 
-	private void prepareBitmap(){
+	private void prepareBitmap() {
 		final Bitmap imageBitmap = cur_tour.getImageBitmap();
 		if (imageBitmap != null) {
 			img.setImageBitmap(imageBitmap);
@@ -161,5 +162,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		return (OsmandApplication) getApplication();
 	}
 
-	private TourViewActivity GetActivity(){ return this;}
+	private TourViewActivity GetActivity() {
+		return this;
+	}
 }
