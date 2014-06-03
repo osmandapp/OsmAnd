@@ -3,18 +3,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <Button android:id="@+id/select_tour"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:text="Select tour"
-            android:layout_centerVertical="true"
-            android:layout_height="wrap_content"/>
-    <Button android:id="@+id/download_tour"
-            android:layout_below="@+id/select_tour"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:text="Download tour"
-            android:layout_height="wrap_content"/>
+              android:layout_height="match_parent"
+        android:background="@color/color_white">
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerHorizontal="true"
+                  android:layout_centerVertical="true"
+            android:orientation="horizontal">
+        <Button android:id="@+id/select_tour"
+                android:background="@color/color_black"
+                android:layout_marginRight="5dp"
+                android:minWidth="40dp"
+                android:layout_width="wrap_content"
+                android:text="Select tour"
+                android:layout_height="wrap_content"/>
+        <Button android:id="@+id/download_tour"
+                android:layout_marginLeft="5dp"
+                android:background="@color/color_black"
+                android:minWidth="40dp"
+                android:text="Download tour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
 
 </RelativeLayout>

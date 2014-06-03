@@ -3,75 +3,109 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+        android:background="@color/color_white">
 
     <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
         <Button android:id="@+id/start_tour"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/color_black"
                 android:text="Start tour"/>
         <Button android:id="@+id/itenerary"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/color_black"
                 android:layout_alignParentRight="true"
                 android:text="Itenerary"/>
     </RelativeLayout>
 
+    <RelativeLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginLeft="10dp"
+            >
+
+        <Button android:id="@+id/collapse"
+                android:layout_width="30dp"
+                android:text="-"
+                android:background="@color/color_black"
+                android:layout_height="30dp"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerVertical="true"
+                  android:layout_marginLeft="10dp"
+                  android:textSize="20dp"
+                  android:layout_toRightOf="@+id/collapse"
+                  android:textColor="@color/color_black"
+                  android:text="Stages"/>
+
+    </RelativeLayout>
+
+
     <RadioGroup
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:id="@+id/stages">
     </RadioGroup>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent" >
-
-        <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-            <TextView
-                    android:id="@+id/tour_name"
+        <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <LinearLayout android:id="@+id/info_layout"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textSize="25sp" >
-            </TextView>
+                    android:orientation="vertical" >
 
-            <TextView
-                    android:id="@+id/tour_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp"
-                    android:textSize="18sp" >
-            </TextView>
+                <TextView
+                        android:textColor="@color/color_black"
+                        android:id="@+id/tour_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:textSize="18sp" >
+                </TextView>
 
-            <ImageView
-                    android:id="@+id/tour_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingTop="4dp" />
+                <ImageView
+                        android:id="@+id/tour_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="4dp" />
 
-            <TextView
-                    android:id="@+id/tour_fulldescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp"
-                    android:textSize="18sp" >
-            </TextView>
+                <TextView
+                        android:textColor="@color/color_black"
+                        android:id="@+id/tour_fulldescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:textSize="18sp" >
+                </TextView>
+
+
+            </LinearLayout>
 
             <Button android:id="@+id/btn_settings"
                     android:text="Settings"
+                    android:layout_below="@+id/info_layout"
+                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
+                    android:background="@color/color_black"
                     android:layout_height="wrap_content"/>
-        </LinearLayout>
+
+        </RelativeLayout>
+
+
 
     </ScrollView>
 
