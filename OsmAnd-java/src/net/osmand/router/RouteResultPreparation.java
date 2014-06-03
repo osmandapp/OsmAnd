@@ -486,9 +486,9 @@ public class RouteResultPreparation {
 	}
 
 	private class OutboundRoad implements Comparable<OutboundRoad>{
-		private double angle;
-		private int lanes;
-		private RouteSegmentResult road;
+		private final double angle;
+		private final int lanes;
+		private final RouteSegmentResult road;
 
 		public OutboundRoad(double angle, int lanes, RouteSegmentResult road) {
 			this.angle = angle;
@@ -510,7 +510,7 @@ public class RouteResultPreparation {
 
 		public int compareTo(OutboundRoad other) {
 			if (other.angle - this.angle < 0) {
-				return -1;
+				return 1;
 			} else if (other.angle - this.angle > 0) {
 				return -1;
 			} else {
@@ -541,7 +541,7 @@ public class RouteResultPreparation {
 						if (attached.getObject().getOneway() == 0) {
 							lns = (lns + 1) / 2;
 						}
-						if (lns == 0) {
+						if (lns <= 0) {
 							lns = 1;
 						}
 						outboundRoads.add(new OutboundRoad(ex, lns, attached));
@@ -552,7 +552,7 @@ public class RouteResultPreparation {
 						if (attached.getObject().getOneway() == 0) {
 							lns = (lns + 1) / 2;
 						}
-						if (lns == 0) {
+						if (lns <= 0) {
 							lns = 1;
 						}
 						outboundRoads.add(new OutboundRoad(ex, lns, attached));
@@ -575,7 +575,6 @@ public class RouteResultPreparation {
 		int totalOutboundLanes = 0;
 		for (OutboundRoad road : outboundRoads) {
 			totalOutboundLanes += road.getLanes();
-			System.out.println("osmand lanes: " + road.getLanes());
 		}
 
 		lanes = new int[totalOutboundLanes];
@@ -583,7 +582,7 @@ public class RouteResultPreparation {
 		int left = 0;
 		int right = 0;
 		for (OutboundRoad road : outboundRoads) {
-			for (; i < lanes.length; i++) {
+			for (int j = 0; i < lanes.length && j < road.getLanes(); i++, j++) {
 				lanes[i] = road.getAngle() == 0 ? 1 : 0;
 				if (road.getAngle() < 0) {
 					left++;
@@ -610,17 +609,13 @@ public class RouteResultPreparation {
 
 		if (t != null && lanes != null) {
 			t.setLanes(lanes);
-			try {
-				attachTurnLanesData(prevSegm, outboundRoads, t);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			t = attachTurnLanesData(leftSide, prevSegm, outboundRoads, t);
 		}
 
 		return t;
 	}
 
-	private void attachTurnLanesData(RouteSegmentResult prevSegm, List<OutboundRoad> outboundRoads, TurnType t) {
+	private TurnType attachTurnLanesData(boolean leftSide, RouteSegmentResult prevSegm, List<OutboundRoad> outboundRoads, TurnType t) {
 		int lanes = prevSegm.getObject().getLanes();
 		String turnLanes = prevSegm.getObject().getValue("turn:lanes");
 
@@ -630,13 +625,13 @@ public class RouteResultPreparation {
 		}
 
 		if (turnLanes == null) {
-			return;
+			return t;
 		}
 
 		String[] splitLaneOptions = turnLanes.split("\\|", -1);
 		if (splitLaneOptions.length != lanes) {
 			// Error in data or missing data, go to old behavior
-			return;
+			return t;
 		}
 
 		if (t.getLanes().length != lanes) {
@@ -657,7 +652,7 @@ public class RouteResultPreparation {
 						sourceLanesIndex++;
 					} else {
 						// Not yet supported
-						return;
+						return t;
 					}
 				} else {
 					sourceLanes.add(t.getLanes()[outgoingLanesIndex]);
@@ -756,6 +751,35 @@ public class RouteResultPreparation {
 				}
 			}
 		}
+
+		List<TurnType.Turn> possibleTurns = new ArrayList<TurnType.Turn>();
+		System.out.println("osmand lanes: " + Arrays.toString(t.getLanes()));
+		for (int i = 0; i < t.getLanes().length; i++) {
+			if ((t.getLanes()[i] & 1) == 1) {
+				if (possibleTurns.isEmpty()) {
+					possibleTurns.add(t.getPrimaryTurn(i));
+					if (t.getSecondaryTurn(i) != TurnType.Turn.UNKNOWN) {
+						possibleTurns.add(t.getSecondaryTurn(i));
+					}
+				} else {
+					List<TurnType.Turn> laneTurns = new ArrayList<TurnType.Turn>();
+					laneTurns.add(t.getPrimaryTurn(i));
+					laneTurns.add(t.getSecondaryTurn(i));
+					possibleTurns.retainAll(laneTurns);
+				}
+			}
+			System.out.println("osmand turns: " + possibleTurns.toString());
+		}
+
+		if (possibleTurns.size() == 1) {
+			TurnType derivedTurnType = TurnType.valueOf(possibleTurns.get(0).getValue(), leftSide);
+			System.out.println("osmand value: " + possibleTurns.get(0).getValue());
+			derivedTurnType.setLanes(t.getLanes());
+			derivedTurnType.setSkipToSpeak(t.isSkipToSpeak());
+			t = derivedTurnType;
+		}
+
+		return t;
 	}
 
 	private int countOccurrences(String haystack, char needle) {

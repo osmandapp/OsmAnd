@@ -18,24 +18,30 @@ public class TurnType {
 	public static final int BIT_LANE_ALLOWED = 1;
 
 	public enum Turn {
-		NONE (0),
-		STRAIGHT (1),
-		SLIGHT_RIGHT (1 << 1),
-		SLIGHT_LEFT (1 | 1 << 1),
-		RIGHT (1 << 2),
-		LEFT (1 << 2 | 1),
-		SHARP_RIGHT (1 << 2 | 1 << 1),
-		SHARP_LEFT (1 << 2 | 1 << 1 | 1),
-		UTURN (1 << 3);
+		UNKNOWN (0, ""),
+		STRAIGHT (1, C),
+		SLIGHT_RIGHT (1 << 1, TSLR),
+		SLIGHT_LEFT (1 | 1 << 1, TSLL),
+		RIGHT (1 << 2, TR),
+		LEFT (1 << 2 | 1, TL),
+		SHARP_RIGHT (1 << 2 | 1 << 1, TSHR),
+		SHARP_LEFT (1 << 2 | 1 << 1 | 1, TSHL),
+		UTURN (1 << 3, TU);
 
 		private final int modifier;
+		private final String value;
 
-		Turn(int modifier) {
+		Turn(int modifier, String value) {
 			this.modifier = modifier;
+			this.value = value;
 		}
 
 		public int getModifier() {
 			return modifier;
+		}
+
+		public String getValue() {
+			return value;
 		}
 	}
 
@@ -129,7 +135,6 @@ public class TurnType {
 	public Turn getPrimaryTurn(int lane) {
 		// Get the primary turn modifier for the lane
 		int turnModifier = (lanes[lane] >> 3) & (1 << 3 | 1 << 2 | 1 << 1 | 1);
-		System.out.println("osmand lane " + lane + " :" + lanes[lane]);
 		Turn[] turns = Turn.values();
 		for (int i = 0; i < turns.length; i++) {
 			if (turns[i].getModifier() == turnModifier) {
