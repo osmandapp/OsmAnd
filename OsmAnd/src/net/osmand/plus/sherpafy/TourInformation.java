@@ -79,9 +79,13 @@ public class TourInformation {
 					stage.description = text;
 				} else if(stage != null && tag.equals("fullDescription")) {
 					stage.fullDescription = text;
+				} else if(stage != null && tag.equals("image")) {
+					if(text.startsWith(FILE_PREFIX)) {
+						stage.imgFile = getFile(text);
+					}
 				} else if(stage != null && tag.equals("gpx")) {
 					if(text.startsWith(FILE_PREFIX)) {
-						stage.gpxFile = new File(folder, text.substring(FILE_PREFIX.length()));
+						stage.gpxFile = getFile(text);
 					}
 				} else if(tag.equals("fullDescription")) {
 					fulldescription = text;
@@ -89,13 +93,18 @@ public class TourInformation {
 					shortDescription = text;
 				} else if(tag.equals("defaultImage")) {
 					if(text.startsWith(FILE_PREFIX)) {
-						imgFile = new File(folder, text.substring(FILE_PREFIX.length()));
+						imgFile = getFile(text);
 					}
 				}
 				text = "";
 			}
 		}
 		reader.close();
+	}
+
+
+	private File getFile(String text) {
+		return new File(folder, text.substring(FILE_PREFIX.length()));
 	}
 	
 	private String getDefAttribute(XmlPullParser parser, String string, String def) {
@@ -142,6 +151,8 @@ public class TourInformation {
 		String name = "";
 		String description = "";
 		String fullDescription = "";
+		Bitmap img = null;
+		File imgFile;
 		
 		public String getName() {
 			return name;
@@ -157,6 +168,13 @@ public class TourInformation {
 		
 		public File getGpxFile() {
 			return gpxFile;
+		}
+
+		public Bitmap getImageBitmap() {
+			if(img == null && imgFile != null && imgFile.exists()) {
+				img = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+			}
+			return img;
 		}
 		
 	}

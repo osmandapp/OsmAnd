@@ -7,6 +7,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -16,8 +17,8 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -42,14 +43,13 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private static final int STATE_TOUR_VIEW = 1; 
 	private static final int STATE_LOADING = 0;
 	private static final int STATE_SELECT_TOUR = -1;
-	int state = 0;
+	private static int state = STATE_LOADING;
 	private SherpafyCustomization customization;
 	ImageView img;
 	TextView description;
 	TextView fullDescription;
-	List<TourInformation.StageInformation> stagesInfo;
-	TourInformation curTour;
 	RadioGroup stages;
+	private ToggleButton collapser;
 	
 
 	@Override
@@ -69,14 +69,23 @@ public class TourViewActivity extends SherlockFragmentActivity {
         getSupportActionBar().setTitle(R.string.sherpafy_app_name);
 
 		setContentView(R.layout.sherpafy_loading);
-		state = STATE_LOADING;
-		getMyApplication().checkApplicationIsBeingInitialized(this, (TextView) findViewById(R.id.ProgressMessage),
-				(ProgressBar) findViewById(R.id.ProgressBar), new Runnable() {
-					@Override
-					public void run() {
-						setMainContent();
-					}
-				});
+		if (state == STATE_LOADING) {
+			getMyApplication().checkApplicationIsBeingInitialized(this, (TextView) findViewById(R.id.ProgressMessage),
+					(ProgressBar) findViewById(R.id.ProgressBar), new Runnable() {
+						@Override
+						public void run() {
+							if(customization.getSelectedTour() != null) {
+								startTourView();
+							} else {
+								startSettings();
+							}
+						}
+					});
+		} else if(state == STATE_SELECT_TOUR ){
+			startSettings();
+		} else if(state == STATE_TOUR_VIEW){
+			startTourView();
+		}
 		
 	}
 	
@@ -84,24 +93,20 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private void setTourInfoContent() {
 		setContentView(R.layout.sherpafy_tour_info);
 
-		ToggleButton collapser = (ToggleButton) findViewById(R.id.collapse);
+		collapser = (ToggleButton) findViewById(R.id.collapse);
 		stages = (RadioGroup) findViewById(R.id.stages);
 		stages.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(RadioGroup radioGroup, int i) {
 				if (i == 0) {
 					customization.selectStage(null, IProgress.EMPTY_PROGRESS);
-					fullDescription.setText(curTour.getFulldescription());
-					description.setText((curTour.getShortDescription()));
-					((TextView)findViewById(R.id.tour_name)).setText(getString(R.string.overview));
-					prepareBitmap();
 				} else {
-					customization.selectStage(stagesInfo.get(i - 1), IProgress.EMPTY_PROGRESS);
-					description.setText(stagesInfo.get(i - 1).getDescription());
-					fullDescription.setText(stagesInfo.get(i - 1).getFullDescription());
-					((TextView)findViewById(R.id.tour_name)).setText(stagesInfo.get(i - 1).getName());
+					final StageInformation st = customization.getSelectedTour().getStageInformation().get(i - 1);
+					customization.selectStage(st, IProgress.EMPTY_PROGRESS);
 				}
+				updateTourContentView();
 			}
+
 		});
 
 		collapser.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -115,6 +120,30 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				}
 			}
 		});
+	}
+
+	private void updateTourContentView() {
+		if (customization.getSelectedStage() == null) {
+			if (customization.getSelectedTour() != null) {
+				TourInformation curTour = customization.getSelectedTour();
+				fullDescription.setText(curTour.getFulldescription());
+				description.setText((curTour.getShortDescription()));
+				// ((TextView)findViewById(R.id.tour_name)).setText(getString(R.string.overview));
+				collapser.setText(getString(R.string.overview));
+				collapser.setTextOff(getString(R.string.overview));
+				collapser.setTextOn(getString(R.string.overview));
+				prepareBitmap(curTour.getImageBitmap());
+			}
+		} else {
+			StageInformation st = customization.getSelectedStage();
+			description.setText(st.getDescription());
+			fullDescription.setText(st.getFullDescription());
+			// ((TextView)findViewById(R.id.tour_name)).setText(st.getName());
+			collapser.setText(st.getName());
+			collapser.setTextOff(st.getName());
+			collapser.setTextOn(st.getName());
+			prepareBitmap(st.getImageBitmap());
+		}
 	}
 
 	private void startSettings() {
@@ -135,28 +164,20 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		invalidateOptionsMenu();
 	}
 	
-	private void setMainContent() {
-		if(customization.getSelectedTour() != null) {
-			startTourView();
-		} else {
-			startSettings();
-		}
-	}
-
 
 
 	
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		if (state == STATE_SELECT_TOUR) {
+		if (state == STATE_TOUR_VIEW) {
 			createMenuItem(menu, GO_TO_MAP, R.string.start_tour, 0, 0,/* R.drawable.ic_action_marker_light, */
 					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			createMenuItem(menu, SETTINGS_ID, R.string.osmo_share_session, R.drawable.ic_action_settings_light,
+			createMenuItem(menu, SETTINGS_ID, R.string.settings, R.drawable.ic_action_settings_light,
 					R.drawable.ic_action_settings_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM
 							| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		} else if(state == STATE_TOUR_VIEW) {
+		} else if(state == STATE_SELECT_TOUR) {
 			if (customization.isTourSelected()) {
-				createMenuItem(menu, TOUR_ID, R.string.osmo_share_session, R.drawable.ic_action_ok_light,
+				createMenuItem(menu, TOUR_ID, R.string.default_buttons_ok, R.drawable.ic_action_ok_light,
 						R.drawable.ic_action_ok_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM
 								| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 			}
@@ -182,8 +203,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 
 	private void updateTourView() {
-		curTour = customization.getSelectedTour();
-		stagesInfo = curTour.getStageInformation();
+		TourInformation curTour = customization.getSelectedTour();
+		List<StageInformation> stagesInfo = curTour.getStageInformation();
 
 		img = (ImageView) findViewById(R.id.tour_image);
 		description = (TextView) findViewById(R.id.tour_description);
@@ -210,24 +231,21 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			rb[i].setText(stagesInfo.get(i - 1).getName());
 		}
 
-		TourInformation.StageInformation curStage = customization.getSelectedStage();
-		if (curStage == null) {
-			stages.check(0);
-			description.setText(curTour.getShortDescription());
-			fullDescription.setText(curTour.getFulldescription());
-			prepareBitmap();
-		} else {
-			int i;
+		StageInformation stage = customization.getSelectedStage();
+		
+		int i = 0;
+		if (stage != null) {
 			for (i = 1; i < count; i++) {
-				if (curStage.equals(stagesInfo.get(i - 1)))
+				if (stage == stagesInfo.get(i - 1))
 					break;
 			}
-			if (i != count) {
-				stages.check(i);
-			} else {
-				stages.check(0);
-			}
 		}
+		if (i != count) {
+			stages.check(i);
+		} else {
+			stages.check(0);
+		}
+		// updateTourContentView();
 	}
 	
 	private void goToMap() {
@@ -235,8 +253,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		// TODO select GPX
 	}
 
-	private void prepareBitmap() {
-		final Bitmap imageBitmap = curTour.getImageBitmap();
+	private void prepareBitmap(Bitmap imageBitmap) {
 		if (imageBitmap != null) {
 			img.setImageBitmap(imageBitmap);
 			img.setAdjustViewBounds(true);
@@ -272,62 +289,19 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	private void setTourSelectionContentView() {
 		setContentView(R.layout.sherpafy_start);
-		final Button selectTour = (Button) findViewById(R.id.select_tour);
 		final Button downloadTour = (Button) findViewById(R.id.download_tour);
-		int width = Math.max(downloadTour.getWidth(), selectTour.getWidth());
-		downloadTour.setWidth(width);
-		selectTour.setWidth(width);
-		selectTour.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// creating alert dialog with multiple tours to select
-				AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
-				final List<TourInformation> tours = customization.getTourInformations();
-				if (customization.getSelectedTour() != null) {
-					String[] tourNames = new String[tours.size()];
-					// creating list of tour names to select
-					for (int i = 0; i < tours.size(); i++) {
-						tourNames[i] = tours.get(i).getName();
-					}
-					int i;
-					for (i = 0; i < tours.size(); i++) {
-						if (customization.getSelectedTour().equals(tours.get(i))) {
-							break;
-						}
-					}
-
-					adb.setSingleChoiceItems(tourNames, i, new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialogInterface, int i) {
-							selectTour(tours.get(i));
-							dialogInterface.dismiss();
-						}
-					});
-				} else {
-					String[] tourNames = new String[tours.size() + 1];
-					tourNames[0] = getString(R.string.none);
-					for (int i = 1; i < tours.size() + 1; i++) {
-						tourNames[i] = tours.get(i - 1).getName();
-					}
-					adb.setSingleChoiceItems(tourNames, 0, new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialogInterface, int i) {
-							if (i == 0) {
-								return;
-							}
-							selectTour(tours.get(i - 1));
-							dialogInterface.dismiss();
-						}
-					});
+		final Button selectTour = (Button) findViewById(R.id.select_tour);
+		if(customization.getTourInformations().isEmpty()) {
+			((ViewGroup)selectTour.getParent()).setVisibility(View.GONE);
+		} else {
+			((ViewGroup) selectTour.getParent()).setVisibility(View.VISIBLE);
+			selectTour.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					selectTourDialog();
 				}
-
-				adb.setTitle(R.string.select_tour);
-				adb.setNegativeButton(R.string.default_buttons_cancel, null);
-				adb.show();
-			}
-		});
+			});
+		}
 
 		downloadTour.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -338,13 +312,62 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			}
 		});
 	}
+	
+	private void selectTourDialog() {
+		// creating alert dialog with multiple tours to select
+		AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+		final List<TourInformation> tours = customization.getTourInformations();
+		if (customization.getSelectedTour() != null) {
+			String[] tourNames = new String[tours.size()];
+			// creating list of tour names to select
+			for (int i = 0; i < tours.size(); i++) {
+				tourNames[i] = tours.get(i).getName();
+			}
+			int i;
+			for (i = 0; i < tours.size(); i++) {
+				if (customization.getSelectedTour().equals(tours.get(i))) {
+					break;
+				}
+			}
+
+			adb.setSingleChoiceItems(tourNames, i, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialogInterface, int i) {
+					selectTourAsync(tours.get(i));
+					dialogInterface.dismiss();
+				}
+			});
+		} else {
+			String[] tourNames = new String[tours.size() + 1];
+			tourNames[0] = getString(R.string.none);
+			for (int i = 1; i < tours.size() + 1; i++) {
+				tourNames[i] = tours.get(i - 1).getName();
+			}
+			adb.setSingleChoiceItems(tourNames, 0, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialogInterface, int i) {
+					if (i == 0) {
+						return;
+					}
+					selectTourAsync(tours.get(i - 1));
+					dialogInterface.dismiss();
+				}
+			});
+		}
+
+		adb.setTitle(R.string.select_tour);
+		adb.setNegativeButton(R.string.default_buttons_cancel, null);
+		adb.show();
+	}
 
 
 	private Activity getActivity() {
 		return this;
 	}
 
-	private void selectTour(final TourInformation tour){
+	private void selectTourAsync(final TourInformation tour){
 		new AsyncTask<TourInformation, Void, Void>(){
 			private ProgressDialog dlg;
 
@@ -363,7 +386,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 			protected void onPostExecute(Void result) {
 				dlg.dismiss();
-				setTourInfoContent();
+				startTourView();
 			};
 		}.execute(tour);
 	}

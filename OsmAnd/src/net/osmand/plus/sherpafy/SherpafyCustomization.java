@@ -170,11 +170,13 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		return selectedStage;
 	}
 
-	public void selectStage(StageInformation tour, IProgress progress) {
-		if(tour == null) {
+	public void selectStage(StageInformation stage, IProgress progress) {
+		if(stage == null) {
 			selectedStagePref.set(null);
+			selectedStage = null;
 		} else {
-			selectedStagePref.set(tour.getName());
+			selectedStagePref.set(stage.getName());
+			selectedStage = stage;
 		}
 	}
 

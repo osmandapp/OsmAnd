@@ -593,7 +593,7 @@ public class OsmandApplication extends Application {
 						@Override
 						public void run() {
 							if(pb != null) {
-								
+								pb.run();
 							}
 							if (toDismiss != null) {
 								// TODO handling this dialog is bad, we need a better standard way
