@@ -14,6 +14,7 @@
     <string name="indexing_tour">Loading selected tour \'%s\'&#8230;</string>
     <string name="tour_activity_title">Tour</string>
     <string name="select_tour">Select tour</string>
+    <string name="start_tour">Start tour</string>
     <string name="download_tour">Download tour</string>
     <string name="sherpafy_app_name">Sherpafy</string>
  </resources>

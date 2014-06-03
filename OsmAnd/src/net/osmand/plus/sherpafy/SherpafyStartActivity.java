@@ -26,9 +26,13 @@ public class SherpafyStartActivity extends SherlockFragmentActivity {
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	if (!(getMyApplication().getAppCustomization() instanceof SherpafyCustomization)) {
+            getMyApplication().setAppCustomization(new SherpafyCustomization());
+        }
+        customization = (SherpafyCustomization) getMyApplication().getAppCustomization();
 		//Initialization
     	Intent intent = getIntent();
-    	if(intent != null && !intent.hasExtra("SETTINGS") && customization.getSelectedTour() != null) {
+    	if(intent != null && !intent.hasExtra("SETTINGS") && customization.isTourSelected()) {
     		super.onCreate(savedInstanceState);
     		Intent nintent = new Intent(getApplicationContext(), TourViewActivity.class);
 			startActivity(nintent);
@@ -41,14 +45,9 @@ public class SherpafyStartActivity extends SherlockFragmentActivity {
         getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle(R.string.sherpafy_app_name);
-        
-        
-        
         super.setContentView(R.layout.sherpafy_start);
-        if (!(getMyApplication().getAppCustomization() instanceof SherpafyCustomization)) {
-            getMyApplication().setAppCustomization(new SherpafyCustomization());
-        }
-        customization = (SherpafyCustomization) getMyApplication().getAppCustomization();
+        
+
 
 		ProgressDialog startProgressDialog = new ProgressDialog(this);
 		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);

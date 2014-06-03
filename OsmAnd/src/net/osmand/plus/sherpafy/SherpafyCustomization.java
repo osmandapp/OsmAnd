@@ -45,6 +45,10 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 	}
 
 
+	public boolean isTourSelected() {
+		return selectedTourPref.get() != null;
+	}
+	
 	public boolean checkExceptionsOnStart() {
 		return false;
 	}
@@ -79,9 +83,6 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		// the image could be also updated
 	}
 	
-	private Class<?> getTourSelectionActivity() {
-		return TourCommonActivity.class;
-	}
 	
 	@Override
 	public void getDownloadTypes(List<DownloadActivityType> items) {

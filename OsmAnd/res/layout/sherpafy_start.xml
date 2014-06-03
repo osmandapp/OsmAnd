@@ -9,7 +9,6 @@
                   android:layout_centerVertical="true"
             android:orientation="horizontal">
         <Button android:id="@+id/select_tour"
-                android:background="@color/color_black"
                 android:layout_marginRight="5dp"
                 android:maxWidth="60dp"
                 android:minWidth="60dp"
@@ -18,7 +17,6 @@
                 android:layout_height="wrap_content"/>
         <Button android:id="@+id/download_tour"
                 android:layout_marginLeft="5dp"
-                android:background="@color/color_black"
                 android:maxWidth="60dp"
                 android:minWidth="60dp"
                 android:text="@string/download_tour"
