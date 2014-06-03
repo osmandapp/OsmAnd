@@ -18,7 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.ProgressDialogImplementation;
+import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
@@ -345,7 +345,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		private File to;
 		private Context ctx;
 		private File from;
-		protected ProgressDialogImplementation progress;
+		protected ProgressImplementation progress;
 		private Runnable runOnSuccess;
 
 		public MoveFilesToDifferentDirectory(Context ctx, File from, File to) {
@@ -360,7 +360,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialogImplementation.createProgressDialog(
+			progress = ProgressImplementation.createProgressDialog(
 					ctx, ctx.getString(R.string.copying_osmand_files),
 					ctx.getString(R.string.copying_osmand_files_descr, to.getPath()),
 					ProgressDialog.STYLE_HORIZONTAL);

@@ -63,6 +63,7 @@ import android.util.TypedValue;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -96,8 +97,7 @@ public class OsmandApplication extends Application {
 	OsmAndTaskManager taskManager;
 
 	// start variables
-	private ProgressDialogImplementation startDialog;
-	private List<String> startingWarnings;
+	private ProgressImplementation startDialog;
 	private Handler uiHandler;
 	private GPXFile gpxFileToDisplay;
 	private SavingTrackHelper savingTrackHelper;
@@ -307,33 +307,31 @@ public class OsmandApplication extends Application {
 
 	public static final int PROGRESS_DIALOG = 5;
 
-	/**
-	 * @param activity
-	 *            that supports onCreateDialog({@link #PROGRESS_DIALOG}) and returns @param progressdialog
-	 * @param progressDialog
-	 *            - it should be exactly the same as onCreateDialog
-	 * @return
-	 */
 	public void checkApplicationIsBeingInitialized(Activity activity, ProgressDialog progressDialog) {
 		// start application if it was previously closed
 		startApplication();
 		synchronized (OsmandApplication.this) {
 			if (startDialog != null) {
-				try {
-					SpecialPhrases.setLanguage(this, osmandSettings);
-				} catch (IOException e) {
-					LOG.error("I/O exception", e);
-					Toast error = Toast.makeText(this, "Error while reading the special phrases. Restart OsmAnd if possible",
-							Toast.LENGTH_LONG);
-					error.show();
-				}
-
 				progressDialog.setTitle(getString(R.string.loading_data));
 				progressDialog.setMessage(getString(R.string.reading_indexes));
 				activity.showDialog(PROGRESS_DIALOG);
 				startDialog.setDialog(progressDialog);
-			} else if (startingWarnings != null) {
-				showWarnings(startingWarnings, activity);
+			} else {
+				progressDialog.dismiss();
+			}
+		}
+	}
+	
+	public void checkApplicationIsBeingInitialized(Activity activity, TextView tv, ProgressBar progressBar,
+			Runnable onClose) {
+		// start application if it was previously closed
+		startApplication();
+		synchronized (OsmandApplication.this) {
+			if (startDialog != null ) {
+				tv.setText(getString(R.string.loading_data));
+				startDialog.setProgressBar(tv, progressBar, onClose);
+			} else if (onClose != null) {
+				onClose.run();
 			}
 		}
 	}
@@ -433,7 +431,7 @@ public class OsmandApplication extends Application {
 					if(dlg != null) {
 						dlg.dismiss();
 					}
-					showWarning(uiContext, e.getError());
+					showToastMessage(e.getError());
 				}
 			}
 		}).start();
@@ -513,7 +511,7 @@ public class OsmandApplication extends Application {
 			return;
 		}
 		applicationInitializing = true;
-		startDialog = new ProgressDialogImplementation(this, null, false);
+		startDialog = new ProgressImplementation(this, null, false);
 
 		startDialog.setRunnable("Initializing app", new Runnable() { //$NON-NLS-1$
 					@Override
@@ -530,6 +528,12 @@ public class OsmandApplication extends Application {
 	private void startApplicationBackground() {
 		List<String> warnings = new ArrayList<String>();
 		try {
+			try {
+				SpecialPhrases.setLanguage(this, osmandSettings);
+			} catch (IOException e) {
+				LOG.error("I/O exception", e);
+				warnings.add("Error while reading the special phrases. Restart OsmAnd if possible");
+			}
 			if (!Version.isBlackberry(this)) {
 				if (osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 					osmandSettings.SAFE_MODE.set(true);
@@ -574,17 +578,23 @@ public class OsmandApplication extends Application {
 		} finally {
 			synchronized (OsmandApplication.this) {
 				final ProgressDialog toDismiss;
+				final Runnable pb;
 				if (startDialog != null) {
 					toDismiss = startDialog.getDialog();
+					pb = startDialog.getFinishRunnable();
 				} else {
 					toDismiss = null;
+					pb = null;
 				}
 				startDialog = null;
 
-				if (toDismiss != null) {
+				if (toDismiss != null || pb != null) {
 					uiHandler.post(new Runnable() {
 						@Override
 						public void run() {
+							if(pb != null) {
+								
+							}
 							if (toDismiss != null) {
 								// TODO handling this dialog is bad, we need a better standard way
 								toDismiss.dismiss();
@@ -592,38 +602,28 @@ public class OsmandApplication extends Application {
 							}
 						}
 					});
-					showWarnings(warnings, toDismiss.getContext());
-				} else {
-					startingWarnings = warnings;
+				}
+				if (warnings != null && !warnings.isEmpty()) {
+					showToastMessage(formatWarnings(warnings).toString());
 				}
 			}
 		}
 	}
 
-	protected void showWarnings(List<String> warnings, final Context uiContext) {
-		if (warnings != null && !warnings.isEmpty()) {
-			final StringBuilder b = new StringBuilder();
-			boolean f = true;
-			for (String w : warnings) {
-				if (f) {
-					f = false;
-				} else {
-					b.append('\n');
-				}
-				b.append(w);
+	private StringBuilder formatWarnings(List<String> warnings) {
+		final StringBuilder b = new StringBuilder();
+		boolean f = true;
+		for (String w : warnings) {
+			if (f) {
+				f = false;
+			} else {
+				b.append('\n');
 			}
-			showWarning(uiContext, b.toString());
+			b.append(w);
 		}
+		return b;
 	}
 
-	private void showWarning(final Context uiContext, final String b) {
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				AccessibleToast.makeText(uiContext, b, Toast.LENGTH_LONG).show();
-			}
-		});
-	}
 
 	private class DefaultExceptionHandler implements UncaughtExceptionHandler {
 

@@ -77,6 +77,8 @@ public class TourInformation {
 					stage = null;
 				} else if(stage != null && tag.equals("description")) {
 					stage.description = text;
+				} else if(stage != null && tag.equals("fullDescription")) {
+					stage.fullDescription = text;
 				} else if(stage != null && tag.equals("gpx")) {
 					if(text.startsWith(FILE_PREFIX)) {
 						stage.gpxFile = new File(folder, text.substring(FILE_PREFIX.length()));
@@ -139,6 +141,7 @@ public class TourInformation {
 		File gpxFile;
 		String name = "";
 		String description = "";
+		String fullDescription = "";
 		
 		public String getName() {
 			return name;
@@ -146,6 +149,10 @@ public class TourInformation {
 		
 		public String getDescription() {
 			return description;
+		}
+		
+		public String getFullDescription() {
+			return fullDescription;
 		}
 		
 		public File getGpxFile() {

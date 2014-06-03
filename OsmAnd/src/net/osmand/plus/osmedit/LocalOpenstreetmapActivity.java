@@ -13,7 +13,7 @@ import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ProgressDialogImplementation;
+import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
@@ -200,7 +200,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 			case DIALOG_PROGRESS_UPLOAD:
-				return ProgressDialogImplementation.createProgressDialog(
+				return ProgressImplementation.createProgressDialog(
 						LocalOpenstreetmapActivity.this,
 						getString(R.string.uploading),
 						getString(R.string.local_openstreetmap_uploading),

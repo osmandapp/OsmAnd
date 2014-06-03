@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="selecting_tour_progress">"Selecting tour...</string>
+    <string name="overview">Overview</string>
+    <string name="selecting_tour_progress">Selecting tour...</string>
     <string name="no_stages_provided">No stages provided</string>
     <string name="download_more">Download more</string>
     <string name="no_tour_selected">No tour selected</string>

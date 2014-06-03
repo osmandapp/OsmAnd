@@ -7,8 +7,10 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
-public class ProgressDialogImplementation implements IProgress {
+public class ProgressImplementation implements IProgress {
 	
 	private static final int HANDLER_START_TASK = OsmAndConstants.UI_HANDLER_PROGRESS + 1;
 	private static final int HADLER_UPDATE_PROGRESS = OsmAndConstants.UI_HANDLER_PROGRESS + 2;
@@ -22,54 +24,70 @@ public class ProgressDialogImplementation implements IProgress {
 	private Thread run;
 	private Context context;
 	private ProgressDialog dialog = null;
+	private ProgressBar progressBar = null;
+	private Runnable finishRunnable = null;
 	private final boolean cancelable;
+	private TextView tv;
 	
 
-	public ProgressDialogImplementation(Context ctx, ProgressDialog dlg, boolean cancelable){
+	public ProgressImplementation(Context ctx, ProgressDialog dlg, boolean cancelable) {
 		this.cancelable = cancelable;
 		context = ctx;
 		setDialog(dlg);
-		
-		mViewUpdateHandler = new Handler(){
+
+		mViewUpdateHandler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
-				if(dialog != null){
-					switch (msg.what) {
-						case HANDLER_START_TASK:
-							dialog.setMessage(message);
-							if (isIndeterminate()) {
-								dialog.setMax(1);
-								dialog.setIndeterminate(true);
-							} else {
-								dialog.setIndeterminate(false);
-								dialog.setMax(work);
-							}
-							dialog.show();
-							break;
-						case HADLER_UPDATE_PROGRESS:
-							dialog.setProgress(msg.arg1);
-							break;
+
+				switch (msg.what) {
+				case HANDLER_START_TASK:
+					if (dialog != null) {
+						dialog.setMessage(message);
+						if (isIndeterminate()) {
+							dialog.setMax(1);
+							dialog.setIndeterminate(true);
+						} else {
+							dialog.setIndeterminate(false);
+							dialog.setMax(work);
+						}
+						dialog.show();
 					}
+					if (tv != null) {
+						tv.setText(message);
+					}
+					if (progressBar != null) {
+						if (isIndeterminate()) {
+							progressBar.setMax(1);
+							progressBar.setIndeterminate(true);
+						} else {
+							progressBar.setIndeterminate(false);
+							progressBar.setMax(work);
+						}
+					}
+					break;
+				case HADLER_UPDATE_PROGRESS:
+					if (dialog != null) {
+						dialog.setProgress(msg.arg1);
+					} else if (progressBar != null) {
+						progressBar.setProgress(msg.arg1);
+					}
+					break;
 				}
 			}
-		};	
+		};
 	}
 		
-	public ProgressDialogImplementation(ProgressDialog dlg, boolean cancelable){
+	public ProgressImplementation(ProgressDialog dlg, boolean cancelable){
 		this(dlg.getContext(), dlg, cancelable);
 	}
 
-	public ProgressDialogImplementation(final ProgressDialog dlg){
-		this(dlg, false);
-	}
-	
 
-	public static ProgressDialogImplementation createProgressDialog(Context ctx, String title, String message, int style) {
+	public static ProgressImplementation createProgressDialog(Context ctx, String title, String message, int style) {
 		return createProgressDialog(ctx, title, message, style, null);
 	}
 	
-	public static ProgressDialogImplementation createProgressDialog(Context ctx, String title, String message, int style, final DialogInterface.OnCancelListener listener) {
+	public static ProgressImplementation createProgressDialog(Context ctx, String title, String message, int style, final DialogInterface.OnCancelListener listener) {
 		ProgressDialog dlg = new ProgressDialog(ctx) {
 			@Override
 			public void cancel() {
@@ -98,7 +116,13 @@ public class ProgressDialogImplementation implements IProgress {
 			// failure, must be older device
 		}
 		dlg.setProgressStyle(style);
-		return new ProgressDialogImplementation(dlg, true);
+		return new ProgressImplementation(dlg, true);
+	}
+	
+	public void setProgressBar(TextView tv, ProgressBar progressBar, Runnable finish) {
+		this.tv = tv;
+		this.progressBar = progressBar;
+		this.finishRunnable = finish;
 	}
 
 	public void setDialog(ProgressDialog dlg){
@@ -188,7 +212,11 @@ public class ProgressDialogImplementation implements IProgress {
 	public ProgressDialog getDialog() {
 		return dialog;
 	}
-
+	
+	public Runnable getFinishRunnable() {
+		return finishRunnable;
+	}
+	
 	@Override
 	public void startWork(int work) {
 		this.work = work;

@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_centerHorizontal="true"
-                  android:layout_centerVertical="true"
-            android:orientation="horizontal">
-        <Button android:id="@+id/select_tour"
-                android:layout_marginRight="10dp"
-                android:layout_width="120dp"
-                android:text="@string/select_tour"
-                android:layout_height="wrap_content"/>
-        <Button android:id="@+id/download_tour"
-                android:layout_marginLeft="10dp"
-                android:text="@string/download_tour"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1" >
+
+        <Button
+            android:id="@+id/select_tour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/select_tour" />
     </LinearLayout>
-</RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1" >
+
+        <Button
+            android:id="@+id/download_tour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/download_tour" />
+    </LinearLayout>
+
+</LinearLayout>
