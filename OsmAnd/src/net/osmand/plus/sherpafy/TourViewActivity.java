@@ -49,6 +49,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 		ProgressDialog startProgressDialog = new ProgressDialog(this);
 		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
+		customization = (SherpafyCustomization) getMyApplication().getAppCustomization();
 
 		setContentView(R.layout.custom_tour_info);
 
@@ -102,11 +103,12 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
-		customization = (SherpafyCustomization) getMyApplication().getAppCustomization();
-		getSupportActionBar().setTitle(customization.getSelectedTour().getName());
-
-		updateTourView();
+		if(customization.getSelectedTour() != null) {
+			getSupportActionBar().setTitle(customization.getSelectedTour().getName());
+			updateTourView();
+		} else {
+			// 
+		}
 	}
 
 
