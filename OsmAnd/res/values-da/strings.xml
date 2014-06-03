@@ -1870,7 +1870,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	
     <string name="osmo_follow">Følg</string>
     <string name="osmo_show_group_notifications">Vis gruppe meddelelser</string>
-    <string name="osmo_show_group_notifications_descr">Vis toast meddelelser, når brugeren slutter eller forladet gruppen</string>
+    <string name="osmo_show_group_notifications_descr">Vis toast meddelelser, når brugeren tilslutter eller forlader gruppen</string>
     <string name="osmo_user_joined">Bruger %1$s sluttede sig til  gruppen %2$s</string>
     <string name="osmo_user_left">Bruger %1$s forlod gruppen %2$s</string>
     </resources>
