@@ -1799,4 +1799,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_cancel_moving_target">Скасаваць рухомую мішэнь</string>
     <string name="osmo_center_location">Цэнтраваць экран</string>
     <string name="osmo_follow">Суправаджаць</string>
+    <string name="osmo_user_joined">Карыстальнік %1$S далучыўся да групы %2$S</string>
+    <string name="osmo_user_left">Карыстальнік %1$S пакінуў групу %2$s</string>
+    <string name="osmo_show_group_notifications">Паказваць апавяшчэнні групы</string>
+    <string name="osmo_show_group_notifications_descr">Паказваць паведамленні, калі карыстальнік далучаецца або пакідае групу</string>
     </resources>
