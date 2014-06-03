@@ -577,7 +577,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="local_openstreetmap_show">Mostrar no mapa</string>
   <string name="local_openstreetmap_upload">Enviar a modificação OSM</string>
   <string name="local_openstreetmap_delete">Apagar modificação</string>
-  <string name="local_openstreetmap_descr_title">Edição assincrona de OSM:</string>
+  <string name="local_openstreetmap_descr_title">Edição assíncrona de OSM:</string>
   <string name="local_openstreetmap_settings">POI/Bugs armazenados na memória local</string>
   <string name="local_openstreetmap_settings_descr">Mostrar e gerir Pontos de Interesse e Erros guardados na memória local</string>
   <string name="live_monitoring_descr">Enviar rota para um serviço na Internet</string>
@@ -615,7 +615,8 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="global_app_settings">Configurações globais da aplicação</string>
   <string name="tip_rotation_switching">Orientação do Mapa</string>
   
-  <string name="binary_map_download_success">Download bem sucedido.\n\t\n\tAtive para usar: \'Configurações\' -&gt; \'Configuração do Mapa\' -&gt; \'Mapas Offline\'.</string>
+  <string name="binary_map_download_success">Download bem sucedido.\n\t\n\tAtive para usar: \'Configurações\' -&gt; \'Configuração do Mapa\' -&gt; \'Mapas Offline\'.
+	</string>
   <string name="tip_day_night_mode">Modo Dia/Noite</string>
   
   <string name="tip_osm_improve">Melhorar dados OSM</string>
@@ -1509,10 +1510,10 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="tip_faq_t">Por favor, visite https://code.google.com/p/osmand/wiki/FAQ ver as perguntas mais frequentes.</string>
     <string name="tip_faq">Perguntas Frequentes</string>
     <string name="local_osm_changes_delete_all_confirm">Você vai apagar %1$d mudanças no arquivo osm. Você tem certeza?</string>
-    <string name="local_osm_changes_delete_all">Deletar Tudo</string>
+    <string name="local_osm_changes_delete_all">Apagar Tudo</string>
     <string name="amenity_type_osmwiki">Wikipedia (off-line)</string>
 	<string name="amenity_type_seamark">Marca Marítima</string>
-    <string name="app_modes_choose_descr">Escolha o modo disponível dentro da aplicação</string>
+    <string name="app_modes_choose_descr">Escolha usar perfis visíveis em aplicação</string>
     <string name="app_modes_choose">Modo da aplicação</string>
 	<string name="osmodroid_seek">Procurar objecto</string>
     <string name="osmodroid_unseek">Não procurar objecto</string>
@@ -1588,4 +1589,86 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="osmo_connected_devices">aparelhos ligados</string>
     <string name="osmo_groups">OsMo Grupos/Aparelhos</string>
     <string name="osmo_tracker_id_share">Para ligar o aparelho alvo %2$s, click no link %3$s ou especifique o id do tracker(%1$s)</string>
-    </resources>
+    <string name="osmo_auto_send_locations_descr">Inicie automaticamente a sessão do tracker e envie localização após o início da aplicação</string>
+    <string name="osmo_auto_send_locations">Inicie automaticamente a sessão do tracker</string>
+    <string name="osmo_tracker_id">Identificação pessoal do tracker</string>
+    <string name="osmo_tracker_id_descr">Clique para partilhar a identificação do tracker
+	Ao usar a identificação do tracker, aparelhos ligados podem ver todos os movimentos deste aparelho ! Para desligar seleccione a opção regenerar.</string>
+    <string name="osmo_session_token">Token da sessão : %1$s</string>
+    <string name="osmo_auth_pending">Aguardando autorização...</string>
+    <string name="osmo_locations_sent">Localização enviada %1$d (in buffer %2$d) </string>
+    <string name="osmo_conn_successfull">Ligação estabelecida : %1$s </string>
+    <string name="osmo_io_error">Problema de ligação OsMo </string>
+    <string name="osmo_settings_uuid">Identificação exclusiva do aparelho</string>
+    <string name="use_points_as_intermediates">Calcular rota entre pontos</string>
+    <string name="tip_recent_changes_1_8_alpha">Alterações em 1,8: 
+         * Calcular rota entre os pontos da rota da trilha GPX 
+         * Mudou o esquema de países para downloads (suporta nomes de locais de pesquisa) 
+         * Suporta importação GPX / KML (converter de KML para GPX)
+    </string>
+    <string name="osmo_mode_restart">Reinciar sessão OsMo</string>
+    <string name="osmo_mode_on">Parar sessão OsMo</string>    
+    <string name="osmo_mode_off">Iniciar Sessão OsMo</string>
+    <string name="osmo_settings_debug">Informação de debug</string>
+    <string name="osmo_settings_descr">Configurar as definições de monitoramento e configuração do canal de monitoração pessoal</string>
+    <string name="osmo_settings">OsMo OpenStreetMap Monitorização (beta)</string>
+    <string name="osmo_plugin_description">penStreetMap-Monitoring - Monitoramento Avançado ao vivo. Ele fornece possibilidades para rastrear outros dispositivos e ser rastreado. 
+         Criar grupos anónimos, compartilhar entre si a localização e comunicar. Possui várias configurações para rastreamento de sessão ou acompanhamento permanente. 
+         Grupos anónimos são limitadas por um número de dias e, por alguma característica, ou seja, não há controle remoto e administrador do grupo. 
+         Grupos totalmente funcionais devem ser criados no site e apenas os usuários registados têm acesso a eles. 
+         Por favor, leia mais sobre http://osmo.mobi.</string>
+    <string name="osmo_plugin_name">OsMO (rastreamento avançado ao vivo)</string>
+   	<string name="always_center_position_on_map">Centrar sempre a posição no mapa</string>
+    <string name="voice_pref_title">Voz</string>
+    <string name="misc_pref_title">Vários</string>
+    <string name="localization_pref_title">Localização</string>
+    <string name="index_item_nation_addresses">moradas nacionais</string>
+	<string name="index_item_world_altitude_correction">Correcção de altitude mundial</string>
+	<string name="index_item_world_seamarks">Marcas marítimas mundiais</string>
+	<string name="index_item_world_bitcoin_payments">Pagamentos de bitcoin do mundo</string>
+	<string name="index_item_world_basemap">Mapa de visão geral do mundo</string>
+    <string name="index_item_world_ski">Mapa do mundo de esqui</string>
+    <string name="lang_hr">Croata</string>
+    <string name="lang_zh">Chinês</string>
+    <string name="lang_pt_br">Português (Brasil)</string>
+    <string name="lang_en">Inglês</string>
+	<string name="lang_af">Africâner</string>
+	<string name="lang_hy">Armênio</string>
+	<string name="calculate_osmand_route_without_internet">Calcule segmento de rota OsmAnd sem internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcular rota de OsmAnd para o primeira e último segmeto de rota</string>
+    <string name="use_displayed_track_for_navigation">Você quer usar o track apresentado para a navegação ?</string>
+    <string name="keep_and_add_destination_point">Adicionar como ponto de destino</string>
+    <string name="select_gpx">Selecione GPX …</string>
+    <string name="route_descr_select_destination">Selecionar destino</string>
+    <string name="route_descr_select_on_map">Seleccione no mapa…</string>
+    <string name="route_descr_favorite">Favorito …</string>
+    <string name="route_preferences">Preferências de rota</string>
+    <string name="route_info">Informações de rota</string>
+    <string name="routing_attr_prefer_motorway_name">Prefere auto-estradas</string>
+	<string name="routing_attr_prefer_motorway_description">Prefere auto-estradas</string>
+	<string name="routing_attr_short_way_name">Caminho mais curto</string>
+	<string name="routing_attr_short_way_description">Utilize caminho mais curto</string>
+	<string name="routing_attr_avoid_toll_name">Evite estradas com portagem</string>
+	<string name="routing_attr_avoid_toll_description">Evite estradas com portagem</string>
+	<string name="routing_attr_avoid_unpaved_name">Evite estradas não pavimentadas</string>
+	<string name="routing_attr_avoid_unpaved_description">Evite estradas não pavimentadas</string>
+	<string name="routing_attr_avoid_ferries_name">Evite ferries</string>
+	<string name="routing_attr_avoid_ferries_description">Evite ferries</string>
+	<string name="routing_attr_avoid_motorway_name">Evitar auto-estradas</string>
+	<string name="routing_attr_avoid_motorway_description">Evitar auto-estradas</string>
+	<string name="routing_attr_weight_name">Peso máximo</string>
+	<string name="routing_attr_weight_description">Especificar a limitação de peso de veículo</string>
+    <string name="android_19_location_disabled">Desde a versão KitKat você não pode fazer o download e actualização de mapa no local de armazenamento anterior (%s).  Você deseja alterar para um local com permissão e copiar todos os arquivos para lá?
+         \n Nota: Os arquivos antigos permanecerão intocados.
+         \n Nota: não será possível compartilhar arquivos entre OsmAnd e OsmAnd + . </string>
+    <string name="application_dir_change_warning2">OsmAnd pode tentar mover os dados para um novo destino.  Você quer isso ?</string>
+    <string name="copying_osmand_one_file_descr">Copiando o arquivo (% s) para novo destino ...</string>
+    <string name="copying_osmand_files_descr">Cópia de arquivos Osmand para novo destino (%s)</string>
+    <string name="copying_osmand_files">Cópia de arquivos Osmand</string>
+    <string name="calculate_osmand_route_gpx">Calcular rota offline OsmAnd</string>
+    <string name="app_mode_truck">Camião</string>
+    <string name="lang_eu">Basco</string>
+	<string name="lang_be">Bielorrusso</string>
+	<string name="lang_bs">Bósnio</string>
+	<string name="lang_bg">Búlgaro</string>
+	</resources>
