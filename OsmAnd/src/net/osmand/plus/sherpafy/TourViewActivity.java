@@ -24,9 +24,10 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	ImageView img;
 	TextView description;
 	TextView fullDescription;
-	TextView name;
 	List<TourInformation.StageInformation> stages_info;
 	TourInformation cur_tour;
+	RadioGroup stages;
+
 
 
 	@Override
@@ -44,6 +45,33 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
 
 		setContentView(R.layout.custom_tour_info);
+
+		Button collapser = (Button) findViewById(R.id.collapse);
+		stages = (RadioGroup) findViewById(R.id.stages);
+		collapser.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Button btn = (Button) view;
+				if (btn.getText().equals("+")){
+					btn.setText("-");
+					stages.setVisibility(View.VISIBLE);
+				} else{
+					btn.setText("+");
+					stages.setVisibility(View.GONE);
+				}
+			}
+		});
+
+		Button settings = (Button) findViewById(R.id.btn_settings);
+
+		settings.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getApplicationContext(), SherpafyStartActivity.class);
+				intent.putExtra("settings", "settings");
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override
@@ -63,12 +91,10 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		description.setVisibility(View.VISIBLE);
 		fullDescription = (TextView) findViewById(R.id.tour_fulldescription);
 		fullDescription.setVisibility(View.VISIBLE);
-		name = (TextView) findViewById(R.id.tour_name);
 		Button start_tour = (Button) findViewById(R.id.start_tour);
 		Button itenerary = (Button) findViewById(R.id.itenerary);
-		Button settings = (Button) findViewById(R.id.btn_settings);
-		RadioGroup stages = (RadioGroup) findViewById(R.id.stages);
 
+		//in case of reloading view - remove all previous radio buttons
 		stages.removeAllViews();
 
 		start_tour.setOnClickListener(new View.OnClickListener() {
@@ -97,14 +123,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			}
 		});
 
-		settings.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(), SherpafyStartActivity.class);
-				intent.putExtra("settings", "settings");
-				startActivity(intent);
-			}
-		});
 
 
 		//get count of radio buttons
@@ -122,7 +140,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 		TourInformation.StageInformation cur_stage = customization.getSelectedStage();
 
-		name.setText(cur_tour.getName());
 
 		//if there's no current stage - overview should be selected
 		if (cur_stage == null) {

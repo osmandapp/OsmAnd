@@ -24,6 +24,30 @@
                 android:text="Itenerary"/>
     </RelativeLayout>
 
+    <RelativeLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginLeft="10dp"
+            >
+
+        <Button android:id="@+id/collapse"
+                android:layout_width="30dp"
+                android:text="-"
+                android:background="@color/color_black"
+                android:layout_height="30dp"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerVertical="true"
+                  android:layout_marginLeft="10dp"
+                  android:textSize="20dp"
+                  android:layout_toRightOf="@+id/collapse"
+                  android:textColor="@color/color_black"
+                  android:text="Stages"/>
+
+    </RelativeLayout>
+
+
     <RadioGroup
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -39,14 +63,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
-                <TextView
-                        android:textColor="@color/color_black"
-                        android:id="@+id/tour_name"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:textSize="25sp" >
-                </TextView>
 
                 <TextView
                         android:textColor="@color/color_black"
