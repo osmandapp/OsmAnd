@@ -33,8 +33,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		((OsmandApplication) getApplication()).applyTheme(this);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
 		//		if (customization.getTourInformations().isEmpty())
 //		{
