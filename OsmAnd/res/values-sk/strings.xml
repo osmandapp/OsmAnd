@@ -80,7 +80,7 @@
   <string name="map_widget_speed">Rýchlosť</string>
   <string name="map_widget_distance">Cieľ</string>
   <string name="map_widget_altitude">Nadm. výška</string>
-  <string name="map_widget_time">Trvanie cesty</string>
+  <string name="map_widget_time">Zostávajúci čas</string>
   <string name="map_widget_next_turn">Nasledujúca odbočka</string>
   <string name="map_widget_next_turn_small">Nasled. odbočka (malá)</string>
   <string name="map_widget_next_next_turn">Druhá nasled. odbočka</string>
@@ -798,8 +798,8 @@
   <string name="loading">Načítava sa…</string>
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Chyba počas ukladania GPX</string>
-  <string name="error_calculating_route">Chyba počas počítania cesty</string>
-  <string name="error_calculating_route_occured">Vyskytla sa chyba počas počítania cesty</string>
+  <string name="error_calculating_route">Chyba počas počítania trasy</string>
+  <string name="error_calculating_route_occured">Vyskytla sa chyba počas počítania trasy</string>
   <string name="empty_route_calculated">Chyba: Vypočítaná cesta je prázdna</string>
   <string name="new_route_calculated_dist">Vypočítaná nová cesta, vzdialenosť</string>
   <string name="arrived_at_destination">Dorazili ste do cieľa</string>
@@ -815,7 +815,7 @@
   <string name="reload_indexes">Znovu načítať stiahnuté údaje</string>
   <string name="download_indexes_descr">Stiahnutie údajov pre offline použitie z internetu</string>
   <string name="download_indexes">Stiahnuť offline údaje</string>
-  <string name="use_online_routing_descr">Použitie internetu na výpočet cesty</string>
+  <string name="use_online_routing_descr">Použiť Internet na výpočet trasy</string>
   <string name="use_online_routing">Použiť online navigáciu</string>
   <string name="user_password_descr">Vaše OSM heslo</string>
   <string name="user_password">Užívateľské heslo</string>
@@ -1155,7 +1155,7 @@
     </string>
     <string name="native_library_not_running">Aplikácia je spustená v bezpečnom režime (vypnete ho v nastaveniach).</string>
     <string name="download_roads_only_maps">Iba mapy ciest</string>
-    <string name="download_roads_only_item">Cesty</string>
+    <string name="download_roads_only_item">Len cestná sieť</string>
     <string name="rendering_attr_showRoadMaps_name">Iba mapy ciest</string>
     <string name="download_regular_maps">Bežné mapy</string>
     <string name="close_changeset">Zavrieť súbor zmien</string>
