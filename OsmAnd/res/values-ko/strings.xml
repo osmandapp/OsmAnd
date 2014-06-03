@@ -2018,7 +2018,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="import_file_favourites">GPX 파일로 저장? 또는 즐겨찾기로 가져오기?</string>
 	<string name="import_save">저장</string>
 	<string name="color_red">빨강</string>
-	<string name="color_pink">핑크</string>
+	<string name="color_pink">분홍</string>
 	<string name="color_orange">오렌지</string>
 	<string name="color_brown">갈색</string>
 	<string name="color_yellow">노랑</string>
@@ -2026,13 +2026,13 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="color_blue">파랑</string>
 	<string name="color_magenta">자청색</string>
 	
-    <string name="osmo_edit_device">사용자 등록 정보 변경</string>
+    <string name="osmo_edit_device">사용자 등록정보 변경</string>
     <string name="osmo_edit_color">디스플레이 색상</string>
     <string name="osmo_follow">따라가기</string>
     <string name="osmo_sign_in">로그인</string>
     <string name="osmo_create_groups_confirm">그룹을 만들려면 OsMo의 사용자 등록이 필요합니다.</string>
     <string name="osmo_credentials_not_valid">OsMo 자격 증명이 유효하지 않습니다.</string>
-    <string name="osmo_regenerate_login_ids_confirm">개인 ID를 재발급 받으시겠습니까?  연결된 모든 장치는 더 이상 당신의 트랙을 기록할 수 없습니다.</string>
+    <string name="osmo_regenerate_login_ids_confirm">개인 ID를 재발급 받으시겠습니까?  연결된 모든 장치는 더 이상 트랙을 기록할 수 없습니다.</string>
     <string name="osmo_regenerate_login_ids">사용자 ID 재생성</string>
     <string name="osmo_cancel_moving_target">이동 목적지 취소</string>
     <string name="osmo_center_location">화면 센터</string>
