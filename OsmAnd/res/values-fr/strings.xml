@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -1672,12 +1672,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_edit_color">Afficher la couleur</string>
     <string name="osmo_follow">Suivre</string>
     <string name="osmo_sign_in">Se connecter</string>
-    <string name="osmo_create_groups_confirm">Pour créer des groupes que vous devez être un utilisateur enregistré d'OsMo.</string>
+    <string name="osmo_create_groups_confirm">Pour créer des groupes que vous devez être un utilisateur enregistré d\'OsMo.</string>
     <string name="osmo_credentials_not_valid">Vos identifiants OsMo sont incorrects.</string>
     <string name="osmo_regenerate_login_ids_confirm">Êtes-vous sûr de régénérer les identifiants personnels? Tous les appareils connectés à vous ne seront plus capables de vous suivre.</string>
-    <string name="osmo_regenerate_login_ids">Régénérer l'identifiant de l\'utilisateur</string>
+    <string name="osmo_regenerate_login_ids">Régénérer l\'identifiant de l\'utilisateur</string>
     <string name="osmo_cancel_moving_target">Annuler la cible mobile</string>
-    <string name="osmo_center_location">Centrer sur l'écran</string>
+    <string name="osmo_center_location">Centrer sur l\'écran</string>
     <string name="osmo_set_moving_target">Définir comme cible mobile</string>
     <string name="osmo_use_server_name">Nom enregistré</string>
     <string name="osmo_connect_to_my_nickname">Mon pseudo</string>

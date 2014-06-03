@@ -86,7 +86,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getApplicationContext(), SherpafyStartActivity.class);
-				intent.putExtra("settings", "settings");
+				intent.putExtra("SETTINGS", true);
 				startActivity(intent);
 			}
 		});

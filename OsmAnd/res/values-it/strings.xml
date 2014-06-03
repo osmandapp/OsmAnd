@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1815,7 +1815,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_session_not_available">Sessione non disponibile, per favore controllare che \'Invia posizioni\' sia attivo.</string>
     <string name="osmo_share_session">Condividi sessione</string>
     <string name="osmo_session_id_share">Url della sessione per tracciare il dispositivo (%1$s)</string>
-    <string name="osmo_tracker_id_share">Per collegarsi al dispositivo desiderato %2$s, cliccare sul link %3$ o specificarne l'id di monitoraggio (%1$s)</string>
+    <string name="osmo_tracker_id_share">Per collegarsi al dispositivo desiderato %2$s, cliccare sul link %3$ o specificarne l\'id di monitoraggio (%1$s)</string>
     <string name="osmo_track_interval">Intervallo di registrazione</string>
 	<string name="osmo_track_interval_descr">Scegli l\'intervallo di tempo per l\'invio la posizione</string>
     <string name="int_days">giorni</string>
@@ -1850,8 +1850,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_create_groups_confirm">Per creare dei gruppi è necessario essere utenti registrati di OsMo.</string>
     <string name="osmo_credentials_not_valid">Le tue credenziali di OsMo non sono valide.</string>
     <string name="osmo_regenerate_login_ids_confirm">Sei sicuro di voler rigenerare gli id personali? Tutti i dispositivi collegati a te non saranno più in grado di tracciarti.</string>
-    <string name="osmo_regenerate_login_ids">Rigenera l'id</string>
-    <string name="osmo_cancel_moving_target">Cancella l'obiettivo mobile</string>
+    <string name="osmo_regenerate_login_ids">Rigenera l\'id</string>
+    <string name="osmo_cancel_moving_target">Cancella l\'obiettivo mobile</string>
     <string name="osmo_center_location">Centro nello schermo</string>
     <string name="osmo_set_moving_target">Imposta come obiettivo mobile</string>
     <string name="osmo_use_server_name">Nome registrato</string>

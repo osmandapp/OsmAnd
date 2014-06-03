@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="selecting_tour_progress">"Selecting tour...</string>
     <string name="no_stages_provided">No stages provided</string>
     <string name="download_more">Download more</string>
     <string name="no_tour_selected">No tour selected</string>
@@ -8,7 +9,11 @@
     <string name="tab_tours">Tours</string>
     <string name="tab_current_tour">Current</string>
     <string name="tour">Tour</string>
+    <string name="none">None</string>
     <string name="download_tours">Tours</string>
-    <string name="indexing_tour">Indexing selected tour \'%s\'&#8230;</string>
+    <string name="indexing_tour">Loading selected tour \'%s\'&#8230;</string>
     <string name="tour_activity_title">Tour</string>
+    <string name="select_tour">Select tour</string>
+    <string name="download_tour">Download tour</string>
+    <string name="sherpafy_app_name">Sherpafy</string>
  </resources>
