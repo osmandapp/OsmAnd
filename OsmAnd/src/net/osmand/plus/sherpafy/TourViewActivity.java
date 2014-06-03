@@ -5,12 +5,16 @@ import java.util.List;
 import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -80,18 +84,19 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			}
 		});
 
-		Button settings = (Button) findViewById(R.id.btn_settings);
+		TextView settings = (TextView) findViewById(R.id.btn_settings);
+		SpannableString content = new SpannableString(settings.getText());
+		content.setSpan(new ClickableSpan() {
 
-		settings.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) {
+			public void onClick(View widget) {
 				Intent intent = new Intent(getApplicationContext(), SherpafyStartActivity.class);
 				intent.putExtra("SETTINGS", true);
 				startActivity(intent);
 			}
-		});
-
-
+		}, 0, content.length(), 0);
+		settings.setText(content);
+		settings.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 	@Override
