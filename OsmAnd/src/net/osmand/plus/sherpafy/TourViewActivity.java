@@ -5,7 +5,6 @@ import java.util.List;
 import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -40,7 +39,11 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setTheme(R.style.OsmandLightTheme);
+    	if (!(getMyApplication().getAppCustomization() instanceof SherpafyCustomization)) {
+            getMyApplication().setAppCustomization(new SherpafyCustomization());
+        }
+        customization = (SherpafyCustomization) getMyApplication().getAppCustomization();
+    	setTheme(R.style.OsmandLightTheme);
         ((OsmandApplication) getApplication()).setLanguage(this);
         super.onCreate(savedInstanceState);
         getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
@@ -49,9 +52,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 		ProgressDialog startProgressDialog = new ProgressDialog(this);
 		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
-		customization = (SherpafyCustomization) getMyApplication().getAppCustomization();
 
-		setContentView(R.layout.custom_tour_info);
+		setContentView(R.layout.sherpafy_tour_info);
 
 		ToggleButton collapser = (ToggleButton) findViewById(R.id.collapse);
 		stages = (RadioGroup) findViewById(R.id.stages);
@@ -91,8 +93,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 			@Override
 			public void onClick(View widget) {
-				Intent intent = new Intent(getApplicationContext(), SherpafyStartActivity.class);
-				intent.putExtra("SETTINGS", true);
+				Intent intent = new Intent(getApplicationContext(), SherpafySelectTourActivity.class);
 				startActivity(intent);
 			}
 		}, 0, content.length(), 0);
@@ -107,6 +108,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			getSupportActionBar().setTitle(customization.getSelectedTour().getName());
 			updateTourView();
 		} else {
+//			Intent intent = new Intent(getApplicationContext(), SherpafySelectTourActivity.class);
+//			startActivity(intent);
 			// 
 		}
 	}

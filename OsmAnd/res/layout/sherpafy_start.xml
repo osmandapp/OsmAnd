@@ -9,18 +9,14 @@
                   android:layout_centerVertical="true"
             android:orientation="horizontal">
         <Button android:id="@+id/select_tour"
-                android:layout_marginRight="5dp"
-                android:maxWidth="60dp"
-                android:minWidth="60dp"
-                android:layout_width="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_width="120dp"
                 android:text="@string/select_tour"
                 android:layout_height="wrap_content"/>
         <Button android:id="@+id/download_tour"
-                android:layout_marginLeft="5dp"
-                android:maxWidth="60dp"
-                android:minWidth="60dp"
+                android:layout_marginLeft="10dp"
                 android:text="@string/download_tour"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"/>
     </LinearLayout>
 </RelativeLayout>

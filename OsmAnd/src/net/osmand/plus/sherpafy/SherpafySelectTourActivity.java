@@ -6,6 +6,7 @@ import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -20,7 +21,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 /**
  */
-public class SherpafyStartActivity extends SherlockFragmentActivity {
+public class SherpafySelectTourActivity extends SherlockFragmentActivity {
 
     private SherpafyCustomization customization;
     
@@ -30,15 +31,6 @@ public class SherpafyStartActivity extends SherlockFragmentActivity {
             getMyApplication().setAppCustomization(new SherpafyCustomization());
         }
         customization = (SherpafyCustomization) getMyApplication().getAppCustomization();
-		//Initialization
-    	Intent intent = getIntent();
-    	if(intent != null && !intent.hasExtra("SETTINGS") && customization.isTourSelected()) {
-    		super.onCreate(savedInstanceState);
-    		Intent nintent = new Intent(getApplicationContext(), TourViewActivity.class);
-			startActivity(nintent);
-			finish();
-    		return;
-    	}
     	setTheme(R.style.OsmandLightTheme);
         ((OsmandApplication) getApplication()).setLanguage(this);
         super.onCreate(savedInstanceState);
@@ -46,11 +38,10 @@ public class SherpafyStartActivity extends SherlockFragmentActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle(R.string.sherpafy_app_name);
         super.setContentView(R.layout.sherpafy_start);
-        
-
 
 		ProgressDialog startProgressDialog = new ProgressDialog(this);
 		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
+		
         setContentView();
         
         // FIXME is this needed?
@@ -129,7 +120,7 @@ public class SherpafyStartActivity extends SherlockFragmentActivity {
 	}
 
 
-	private SherpafyStartActivity getActivity() {
+	private Activity getActivity() {
 		return this;
 	}
 

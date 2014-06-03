@@ -15,10 +15,11 @@
             android:id="@+id/collapse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/expandable_category" />
+            android:button="@drawable/expandable_category"
+            android:background="@null" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
@@ -30,7 +31,8 @@
             android:id="@+id/start_tour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:gravity="right"
+            android:layout_marginRight="5dp"
             android:text="@string/start_tour" />
     </LinearLayout>
 
@@ -60,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="2dp"
+                android:gravity="center_horizontal"
                 android:textSize="18sp" >
             </TextView>
 
@@ -75,6 +78,7 @@
                 android:id="@+id/tour_fulldescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="2dp"
                 android:textSize="16sp" >
