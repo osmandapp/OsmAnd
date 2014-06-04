@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
     <string name="auto_zoom_close">Зачыніць</string>
     <string name="auto_zoom_far">Для сярэдняга масштаба</string>
@@ -1815,4 +1815,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_user_left">Карыстальнік %1$S пакінуў групу %2$s</string>
     <string name="osmo_show_group_notifications">Паказваць апавяшчэнні групы</string>
     <string name="osmo_show_group_notifications_descr">Паказваць паведамленні, калі карыстальнік далучаецца або пакідае групу</string>
+    <string name="selected_track">Сьлед</string>
+    <string name="my_tracks">Усе сьляды</string>
+    <string name="my_favorites">Мае закладкі</string>
+    <string name="my_data_Button">Мае дадзеныя</string>
+    <string name="my_data_activity">Мае дадзеныя</string>
     </resources>
