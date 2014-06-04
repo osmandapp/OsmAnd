@@ -34,6 +34,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.text.Spannable;
@@ -782,30 +783,10 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			}
 			favouritesAdapter.notifyDataSetChanged();
 			if(constraint != null && constraint.length() > 1) {
-				collapseTrees();
+				collapseTrees(5);
 			}
 		}
-
 	}
-	
-	public void collapseTrees() {
-		getActivity().runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				synchronized (favouritesAdapter) {
-					final ExpandableListView expandableListView = getExpandableListView();
-					for (int i = 0; i < favouritesAdapter.getGroupCount(); i++) {
-						int cp = favouritesAdapter.getChildrenCount(i);
-						if (cp < 5) {
-							expandableListView.expandGroup(i);
-						} else {
-							expandableListView.collapseGroup(i);
-						}
-					}
-				}
-			}
-		});
 
-	}
 
 }

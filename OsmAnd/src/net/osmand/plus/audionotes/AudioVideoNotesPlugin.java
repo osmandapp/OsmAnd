@@ -50,6 +50,7 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -85,6 +86,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockFragment;
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
 
@@ -1071,32 +1074,42 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void contextMenuLocalIndexes(final LocalIndexesActivity la, LocalIndexInfo info, ContextMenuAdapter adapter) {
-		if (info.getType() == LocalIndexType.AV_DATA) {
-			final RecordingLocalIndexInfo ri = (RecordingLocalIndexInfo) info;
-			OnContextMenuClick listener = new OnContextMenuClick() {
-				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-					playRecording(la, ri.rec);
+	public void contextMenuLocalIndexes(Activity activity, SherlockFragment fragment, Object obj,
+			ContextMenuAdapter adapter) {
+		if (activity instanceof LocalIndexesActivity) {
+			final LocalIndexesActivity la = (LocalIndexesActivity) activity;
+			LocalIndexInfo info = (LocalIndexInfo) obj;
+			if (info.getType() == LocalIndexType.AV_DATA) {
+				final RecordingLocalIndexInfo ri = (RecordingLocalIndexInfo) info;
+				OnContextMenuClick listener = new OnContextMenuClick() {
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						playRecording(la, ri.rec);
+					}
+				};
+				if (ri.rec.isPhoto()) {
+					adapter.item(R.string.recording_context_menu_show)
+							.icons(R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light).listen(listener)
+							.reg();
+				} else {
+					adapter.item(R.string.recording_context_menu_play)
+							.icons(R.drawable.ic_action_play_dark, R.drawable.ic_action_play_light).listen(listener)
+							.reg();
 				}
-			};
-			if (ri.rec.isPhoto()) {
-				adapter.item(R.string.recording_context_menu_show).icons(R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light)
-						.listen(listener).reg();
-			} else {
-				adapter.item(R.string.recording_context_menu_play).icons(R.drawable.ic_action_play_dark, R.drawable.ic_action_play_light)
-						.listen(listener).reg();
-			}
-			adapter.item(R.string.show_location).icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light)
-					.listen(new OnContextMenuClick() {
-						@Override
-						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-							SHOW_RECORDINGS.set(true);
-							app.getSettings().setMapLocationToShow(ri.rec.lat, ri.rec.lon, app.getSettings().getLastKnownMapZoom());
-							MapActivity.launchMapActivityMoveToTop(la);
+				adapter.item(R.string.show_location)
+						.icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light)
+						.listen(new OnContextMenuClick() {
+							@Override
+							public void onContextMenuClick(int itemId, int pos, boolean isChecked,
+									DialogInterface dialog) {
+								SHOW_RECORDINGS.set(true);
+								app.getSettings().setMapLocationToShow(ri.rec.lat, ri.rec.lon,
+										app.getSettings().getLastKnownMapZoom());
+								MapActivity.launchMapActivityMoveToTop(la);
 
-						}
-					}).reg();
+							}
+						}).reg();
+			}
 		}
 	}
 

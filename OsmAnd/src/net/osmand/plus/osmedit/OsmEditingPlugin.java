@@ -1,5 +1,7 @@
 package net.osmand.plus.osmedit;
 
+import java.util.List;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.plus.ContextMenuAdapter;
@@ -8,15 +10,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.AvailableGPXFragment;
+import net.osmand.plus.activities.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.activities.EnumAdapter;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.LocalIndexesActivity;
-import net.osmand.plus.activities.LocalIndexesActivity.UploadVisibility;
+import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -31,6 +33,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragment;
 
 public class OsmEditingPlugin extends OsmandPlugin {
 	private static final String ID = "osm.editing";
@@ -167,38 +172,64 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public void contextMenuLocalIndexes(final LocalIndexesActivity la, final LocalIndexInfo info, ContextMenuAdapter adapter) {
-		if (info.getType() == LocalIndexType.GPX_DATA) {
-			adapter.item(R.string.local_index_mi_upload_gpx).icons(R.drawable.ic_action_gup_dark, R.drawable.ic_action_gup_light)
+	public void contextMenuLocalIndexes(final Activity la, final SherlockFragment fragment, final Object info, ContextMenuAdapter adapter) {
+		if (fragment instanceof AvailableGPXFragment) {
+			adapter.item(R.string.local_index_mi_upload_gpx)
+					.icons(R.drawable.ic_action_gup_dark, R.drawable.ic_action_gup_light)
 					.listen(new OnContextMenuClick() {
 
 						@Override
 						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-							sendGPXFiles(la, info);
+							sendGPXFiles(la, (AvailableGPXFragment) fragment, (GpxInfo) info);
 						}
 					}).reg();
 		}
 	}
 	
 	@Override
-	public void optionsMenuLocalIndexes(final LocalIndexesActivity la, ContextMenuAdapter optionsMenuAdapter) {
-		optionsMenuAdapter.item(R.string.local_index_mi_upload_gpx)
-		.icons(R.drawable.ic_action_gup_dark, R.drawable.ic_action_gup_light).listen(new OnContextMenuClick() {
+	public void optionsMenuLocalIndexes(final Activity activity, final SherlockFragment fragment, ContextMenuAdapter optionsMenuAdapter) {
+		if (fragment instanceof AvailableGPXFragment) {
+			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
+			optionsMenuAdapter.item(R.string.local_index_mi_upload_gpx)
+					.icons(R.drawable.ic_action_gup_dark, R.drawable.ic_action_gup_light)
+					.listen(new OnContextMenuClick() {
 
-			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				la.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_gup_dark, 
-						R.drawable.ic_action_gup_light, new OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								sendGPXFiles(la, la.getSelectedItems().toArray(new LocalIndexInfo[la.getSelectedItems().size()]));								
-							}
-						}, null, LocalIndexType.GPX_DATA);
-			}
-		}).position(5).reg();
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_gup_dark,
+									R.drawable.ic_action_gup_light, new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											List<GpxInfo> selectedItems = f.getSelectedItems();
+											sendGPXFiles(activity, f,
+													selectedItems.toArray(new GpxInfo[selectedItems.size()]));
+										}
+									});
+						}
+					}).position(5).reg();
+		}
 	}
 	
-	public boolean sendGPXFiles(final LocalIndexesActivity la, final LocalIndexInfo... info){
+	public enum UploadVisibility implements IEnumWithResource {
+		Public(R.string.gpxup_public),
+		Identifiable(R.string.gpxup_identifiable),
+		Trackable(R.string.gpxup_trackable),
+		Private(R.string.gpxup_private);
+		private final int resourceId;
+
+		private UploadVisibility(int resourceId) {
+			this.resourceId = resourceId;
+		}
+		public String asURLparam() {
+			return name().toLowerCase();
+		}
+		@Override
+		public int stringResource() {
+			return resourceId;
+		}
+	}
+	
+	public boolean sendGPXFiles(final Activity la, AvailableGPXFragment f, final GpxInfo... info){
 		String name = settings.USER_NAME.get();
 		String pwd = settings.USER_PASSWORD.get();
 		if(Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)){
@@ -226,7 +257,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				new UploadGPXFilesTask(la, descr.getText().toString(), tags.getText().toString(), 
+				new UploadGPXFilesTask((SherlockActivity) la, descr.getText().toString(), tags.getText().toString(), 
 				 (UploadVisibility) visibility.getItemAtPosition(visibility.getSelectedItemPosition())
 					).execute(info);
 			}

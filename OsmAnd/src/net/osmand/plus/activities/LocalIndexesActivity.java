@@ -10,17 +10,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import android.net.Uri;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -67,7 +63,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 	private boolean selectionMode = false;
 	private Set<LocalIndexInfo> selectedItems = new LinkedHashSet<LocalIndexInfo>();
-	private OsmandSettings settings;
 	
 	protected static int DELETE_OPERATION = 1;
 	protected static int BACKUP_OPERATION = 2;
@@ -89,7 +84,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		// getSupportActionBar().setLogo(R.drawable.tab_download_screen_icon);
 
 
-		settings = getMyApplication().getSettings();
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter(this);
 
@@ -133,13 +127,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	private void showContextMenu(final LocalIndexInfo info) {
 		Builder builder = new AlertDialog.Builder(this);
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(this);
-		if (info.getType() == LocalIndexType.GPX_DATA) {
-			showGPXRouteAction(info, adapter);
-			descriptionLoader = new LoadLocalIndexDescriptionTask();
-			descriptionLoader.execute(info);
-		}
 		basicFileOperation(info, adapter);
-		OsmandPlugin.onContextMenuLocalIndexes(this, info, adapter);
+		OsmandPlugin.onContextMenuActivity(this, null, info, adapter);
 
 		String[] values = adapter.getItemNames();
 		builder.setItems(values, new DialogInterface.OnClickListener() {
@@ -155,22 +144,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		builder.show();
 	}
 
-	private void showGPXRouteAction(final LocalIndexInfo info, ContextMenuAdapter adapter) {
-		adapter.item(R.string.show_gpx_route).listen(new OnContextMenuClick() {
-			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				if (info != null && info.getGpxFile() != null) {
-					WptPt loc = info.getGpxFile().findPointToShow();
-					if (loc != null) {
-						settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
-					}
-					getMyApplication().setGpxFileToDisplay(info.getGpxFile(), false);
-					MapActivity.launchMapActivityMoveToTop(LocalIndexesActivity.this);
-				}
-				
-			}
-		}).reg();
-	}
 	
 	private void basicFileOperation(final LocalIndexInfo info, ContextMenuAdapter adapter) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
@@ -193,12 +166,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 					confirm.show();
 				} else if (resId == R.string.local_index_mi_backup) {
 					new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
-				} else if (resId == R.string.local_index_mi_export) {
-					final Uri fileUri = Uri.fromFile(new File(info.getPathToData()));
-					final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-					sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-					sendIntent.setType("application/gpx+xml");
-					startActivity(sendIntent);
 				}
 			}
 		};
@@ -212,9 +179,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		}
 		adapter.item(R.string.local_index_mi_rename).listen(listener).position(3).reg();
 		adapter.item(R.string.local_index_mi_delete).listen(listener).position(4).reg();
-		if (info.getType() == LocalIndexType.GPX_DATA) {
-			adapter.item(R.string.local_index_mi_export).listen(listener).position(5).reg();
-		}
 	}
 	
 	private void renameFile(LocalIndexInfo info) {
@@ -305,9 +269,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	private File getFileToRestore(LocalIndexInfo i){
 		if(i.isBackupedData()){
 			File parent = new File(i.getPathToData()).getParentFile();
-			if(i.getType() == LocalIndexType.GPX_DATA){
-				parent = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-			} else if(i.getType() == LocalIndexType.SRTM_DATA){
+			if(i.getType() == LocalIndexType.SRTM_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
 			} else if(i.getType() == LocalIndexType.MAP_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.MAPS_PATH);
@@ -413,25 +375,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		}
 	}
 	
-	public enum UploadVisibility implements IEnumWithResource {
-		Public(R.string.gpxup_public),
-		Identifiable(R.string.gpxup_identifiable),
-		Trackable(R.string.gpxup_trackable),
-		Private(R.string.gpxup_private);
-		private final int resourceId;
-
-		private UploadVisibility(int resourceId) {
-			this.resourceId = resourceId;
-		}
-		public String asURLparam() {
-			return name().toLowerCase();
-		}
-		@Override
-		public int stringResource() {
-			return resourceId;
-		}
-	}
-	
 	
 
 	public class LoadLocalIndexDescriptionTask extends AsyncTask<LocalIndexInfo, LocalIndexInfo, LocalIndexInfo[]> {
@@ -530,7 +473,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		optionsMenuAdapter.item(R.string.local_index_mi_delete)
 						.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light)
 						.listen(listener).position(4).reg();
-		OsmandPlugin.onOptionsMenuLocalIndexes(this, optionsMenuAdapter);
+		OsmandPlugin.onOptionsMenuActivity(this, null, optionsMenuAdapter);
 		// doesn't work correctly
 		int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
 		SubMenu split = null;
@@ -579,6 +522,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
 	public void doAction(int actionResId){
 		if(actionResId == R.string.local_index_mi_backup){
 			operationTask = new LocalIndexOperationTask(BACKUP_OPERATION);
@@ -668,10 +612,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			
 		});
 		findViewById(R.id.DescriptionText).setVisibility(View.GONE);
-		if(R.string.local_index_mi_upload_gpx == actionResId){
-			((TextView) findViewById(R.id.DescriptionText)).setText(R.string.local_index_upload_gpx_description);
-			((TextView) findViewById(R.id.DescriptionText)).setVisibility(View.VISIBLE);
-		}
 		listAdapter.notifyDataSetChanged();
 	}
 	

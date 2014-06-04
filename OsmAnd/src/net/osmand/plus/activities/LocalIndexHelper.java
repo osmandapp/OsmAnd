@@ -132,7 +132,6 @@ public class LocalIndexHelper {
 		loadSrtmData(app.getAppPath(IndexConstants.SRTM_INDEX_DIR), result, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
-		loadGPXData(app.getAppPath(IndexConstants.GPX_INDEX_DIR), result, false, loadTask);
 		OsmandPlugin.onLoadLocalIndexes(result, loadTask);
 		
 		return result;
@@ -180,6 +179,15 @@ public class LocalIndexHelper {
 			}
 		}
 	}
+	
+	private File[] listFilesSorted(File dir){
+		File[] listFiles = dir.listFiles();
+		if(listFiles == null) {
+			return new File[0];
+		}
+		Arrays.sort(listFiles);
+		return listFiles;
+	}
 
 	
 	private void loadSrtmData(File mapPath, List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {
@@ -210,48 +218,8 @@ public class LocalIndexHelper {
 		}
 	}
 	
-	private void loadGPXData(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
-		if (mapPath.canRead()) {
-			List<LocalIndexInfo> progress = new ArrayList<LocalIndexInfo>();
-			loadGPXFolder(mapPath, result, backup, loadTask, progress, null);
-			if (!progress.isEmpty()) {
-				loadTask.loadFile(progress.toArray(new LocalIndexInfo[progress.size()]));
-			}
-		}
-	}
+	
 
-	private void loadGPXFolder(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask,
-			List<LocalIndexInfo> progress, String gpxSubfolder) {
-		for (File gpxFile : listFilesSorted(mapPath)) {
-			if (gpxFile.isDirectory()) {
-				String sub = gpxSubfolder == null ? gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
-				loadGPXFolder(gpxFile, result, backup, loadTask, progress, sub);
-			} else if (gpxFile.isFile() && gpxFile.getName().endsWith(".gpx")) {
-				LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.GPX_DATA, gpxFile, backup);
-				info.setSubfolder(gpxSubfolder);
-				result.add(info);
-				progress.add(info);
-				if (progress.size() > 7) {
-					loadTask.loadFile(progress.toArray(new LocalIndexInfo[progress.size()]));
-					progress.clear();
-				}
-
-			}
-		}
-	}
-	
-	
-	
-	private File[] listFilesSorted(File dir){
-		File[] listFiles = dir.listFiles();
-		if(listFiles == null) {
-			return new File[0];
-		}
-		Arrays.sort(listFiles);
-		return listFiles;
-	}
-	
-	
 	
 	private MessageFormat format = new MessageFormat("\t {0}, {1} NE \n\t {2}, {3} NE", Locale.US);
 

@@ -89,4 +89,25 @@ public abstract class OsmandExpandableListFragment extends SherlockFragment impl
 	public boolean isLightActionBar() {
 		return ((OsmandApplication) getActivity().getApplication()).getSettings().isLightActionBar();
 	}
+	
+	
+	public void collapseTrees(final int count) {
+		getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				synchronized (adapter) {
+					final ExpandableListView expandableListView = getExpandableListView();
+					for (int i = 0; i < adapter.getGroupCount(); i++) {
+						int cp = adapter.getChildrenCount(i);
+						if (cp < count) {
+							expandableListView.expandGroup(i);
+						} else {
+							expandableListView.collapseGroup(i);
+						}
+					}
+				}
+			}
+		});
+
+	}
 }

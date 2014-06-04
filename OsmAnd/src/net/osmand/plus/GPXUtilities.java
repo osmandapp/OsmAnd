@@ -261,6 +261,21 @@ public class GPXUtilities {
 		int endPointInd;
 		int metricEnd;
 		
+		public SplitSegment(TrkSegment s) {
+			startPointInd = 0;
+			startCoeff = 0;
+			endPointInd = s.points.size() - 2;
+			startCoeff = 1;
+			this.segment = s;
+		}
+		
+		public SplitSegment(TrkSegment s, int pointInd, float cf) {
+			this.segment = s;
+			this.startPointInd = pointInd;
+			this.startCoeff = cf;
+		}
+		
+		
 		public int getNumberOfPoints() {
 			return endPointInd - startPointInd + 2;
 		}
@@ -273,7 +288,7 @@ public class GPXUtilities {
 				}
 				return approx(segment.points.get(ind), segment.points.get(ind + 1), startCoeff);
 			}
-			if(j == getNumberOfPoints()) {
+			if(j == getNumberOfPoints() - 1) {
 				if(startCoeff == 1) {
 					return segment.points.get(ind);
 				}
@@ -311,19 +326,7 @@ public class GPXUtilities {
 			return vl + ((long) cf * (vl2 - vl));
 		}
 
-		public SplitSegment(TrkSegment s) {
-			startPointInd = 0;
-			startCoeff = 0;
-			endPointInd = s.points.size() - 1;
-			startCoeff = 1;
-		}
-		
-		public SplitSegment(TrkSegment s, int pointInd, float cf) {
-			this.segment = s;
-			this.startPointInd = pointInd;
-			this.startCoeff = cf;
-		}
-		
+	
 		public float setLastPoint(int pointInd, float endCf) {
 			endCoeff = endCf;
 			endPointInd = pointInd;
@@ -406,7 +409,7 @@ public class GPXUtilities {
 			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
 			for(int i = 0; i< tracks.size() ; i++){
 				Track subtrack = tracks.get(i);
-				for(int j = 0; j<subtrack.segments.size(); j++){
+				for (int j = 0; j < subtrack.segments.size(); j++) {
 					TrkSegment segment = subtrack.segments.get(j);
 					SplitSegment sp = new SplitSegment(segment, 0, 0);
 					int total = 0;
@@ -415,17 +418,18 @@ public class GPXUtilities {
 						if (k > 0) {
 							WptPt prev = segment.points.get(k - 1);
 							int currentSegment = m.metric(prev, point);
-							while(total + currentSegment > ml) {
-								int p = ml - total; 
-								float cf = sp.setLastPoint(k - 1, p / ((float)currentSegment));
+							while (total + currentSegment > ml) {
+								int p = ml - total;
+								float cf = sp.setLastPoint(k - 1, p / ((float) currentSegment));
 								sp = new SplitSegment(segment, k - 1, cf);
-								sp.metricEnd = ml; 
+								sp.metricEnd = ml;
 								ml += metricLimit;
 							}
 							total += currentSegment;
 						}
 					}
-					if(segment.points.size() > 0 && !(sp.endPointInd == segment.points.size() -1 && sp.startCoeff == 1)) {
+					if (segment.points.size() > 0
+							&& !(sp.endPointInd == segment.points.size() - 1 && sp.startCoeff == 1)) {
 						sp.metricEnd = total;
 						sp.setLastPoint(0, 1);
 						splitSegments.add(sp);

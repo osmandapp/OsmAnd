@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -38,7 +39,7 @@ public class FavouritesActivity extends SherlockFragmentActivity {
         //This has to be called before setContentView and you must use the
         //class in com.actionbarsherlock.view and NOT android.view
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-//        getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+        getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		super.onCreate(icicle);
 
 
@@ -54,9 +55,9 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 		mTabsAdapter.addTab(tabHost.newTabSpec(FAVOURITES_INFO).setIndicator(getString(R.string.my_favorites)),
 				FavouritesTreeFragment.class, null);
 		mTabsAdapter.addTab(tabHost.newTabSpec(TRACKS).setIndicator(getString(R.string.my_tracks)),
-				FavouritesTreeFragment.class, null);
+				AvailableGPXFragment.class, null);
 		mTabsAdapter.addTab(tabHost.newTabSpec(SELECTED_TRACK).setIndicator(getString(R.string.selected_track)),
-				FavouritesTreeFragment.class, null);
+				SelectedGPXFragment.class, null);
 		tabHost.setCurrentTab(tab);
 		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);

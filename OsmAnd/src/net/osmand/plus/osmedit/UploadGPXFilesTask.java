@@ -4,20 +4,21 @@ import java.io.File;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.LocalIndexesActivity;
-import net.osmand.plus.activities.LocalIndexesActivity.UploadVisibility;
+import net.osmand.plus.activities.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-public class UploadGPXFilesTask extends AsyncTask<LocalIndexInfo, String, String> {
+import com.actionbarsherlock.app.SherlockActivity;
+
+public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 
 	private final String visibility;
 	private final String description;
 	private final String tagstring;
-	private LocalIndexesActivity la;
+	private SherlockActivity la;
 
-	public UploadGPXFilesTask(LocalIndexesActivity la,
+	public UploadGPXFilesTask(SherlockActivity la,
 			String description, String tagstring, UploadVisibility visibility) {
 		this.la = la;
 		this.description = description;
@@ -27,13 +28,13 @@ public class UploadGPXFilesTask extends AsyncTask<LocalIndexInfo, String, String
 	}
 
 	@Override
-	protected String doInBackground(LocalIndexInfo... params) {
+	protected String doInBackground(GpxInfo... params) {
 		int count = 0;
 		int total = 0;
-		for (LocalIndexInfo info : params) {
+		for (GpxInfo info : params) {
 			if (!isCancelled()) {
 				String warning = null;
-				File file = new File(info.getPathToData());
+				File file = info.file;
 				warning = new OpenstreetmapRemoteUtil(la, null).uploadGPXFile(tagstring, description, visibility,
 						file);
 				total++;
