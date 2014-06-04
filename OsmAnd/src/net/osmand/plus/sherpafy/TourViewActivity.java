@@ -337,13 +337,13 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 		final String[] tourNames = new String[tours.size() + 1];
 		// creating list of tour names to select
-		for (int i = 0; i < tours.size() - 1; i++) {
+		for (int i = 0; i < tourNames.length - 1; i++) {
 			tourNames[i] = tours.get(i).getName();
 		}
-		tourNames[tours.size() - 1] = getString(R.string.download_more);
+		tourNames[tourNames.length - 1] = getString(R.string.download_more);
 		int ch = -1;
 		if (customization.getSelectedTour() != null) {
-			for (int i = 0; i < tours.size() - 1; i++) {
+			for (int i = 0; i < tourNames.length - 1; i++) {
 				if (customization.getSelectedTour().equals(tours.get(i))) {
 					ch = i;
 					break;
