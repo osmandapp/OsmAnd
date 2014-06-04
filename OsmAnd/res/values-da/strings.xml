@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1870,7 +1870,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	
     <string name="osmo_follow">Følg</string>
     <string name="osmo_show_group_notifications">Vis gruppe meddelelser</string>
-    <string name="osmo_show_group_notifications_descr">Vis toast meddelelser, når brugeren tilslutter eller forlader gruppen</string>
+    <string name="osmo_show_group_notifications_descr">Vis popup-meddelelser, når brugeren slutter sig til gruppen eller forlader den</string>
     <string name="osmo_user_joined">Bruger %1$s sluttede sig til  gruppen %2$s</string>
     <string name="osmo_user_left">Bruger %1$s forlod gruppen %2$s</string>
     </resources>
