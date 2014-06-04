@@ -15,6 +15,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.view.Window;
 
@@ -90,6 +91,15 @@ public class OsmAndAppCustomization {
 
 	public List<String> onIndexingFiles(IProgress progress, Map<String, String> indexFileNames) {
 		return Collections.emptyList();
+	}
+
+	public void prepareLayerContextMenu(MapActivity activity, ContextMenuAdapter adapter) {
+	}
+
+	public void prepareOptionsMenu(MapActivity mapActivity, ContextMenuAdapter optionsMenuHelper) {
+	}
+
+	public void prepareLocationMenu(MapActivity mapActivity, ContextMenuAdapter adapter) {
 	}
 
 }

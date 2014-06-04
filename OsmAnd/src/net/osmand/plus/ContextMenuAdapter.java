@@ -140,6 +140,15 @@ public class ContextMenuAdapter {
 	public String[] getItemNames() {
 		return itemNames.toArray(new String[itemNames.size()]);
 	}
+	
+	public void removeItem(int pos) {
+		items.removeAt(pos);
+		itemNames.remove(pos);
+		selectedList.removeAt(pos);
+		iconList.removeAt(pos);
+		iconListLight.removeAt(pos);
+		listeners.remove(pos);
+	}
 
 	
 
@@ -172,5 +181,7 @@ public class ContextMenuAdapter {
 		};
 		return listadapter;
 	}
+
+	
 
 }

@@ -294,6 +294,7 @@ public class MapActivityLayers {
 		
 		
 		OsmandPlugin.registerLayerContextMenu(mapView, adapter, activity);
+		getApplication().getAppCustomization().prepareLayerContextMenu(activity, adapter);
 		
 		
 		final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);

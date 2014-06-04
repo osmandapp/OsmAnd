@@ -416,6 +416,8 @@ public class MapActivityActions implements DialogProvider {
 		
 
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
+		getMyApplication().getAppCustomization().prepareLocationMenu(mapActivity, adapter);
+		
 		final Builder builder = new AlertDialog.Builder(mapActivity);
 		ListAdapter listAdapter ;
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
@@ -843,6 +845,7 @@ public class MapActivityActions implements DialogProvider {
 				// app.closeApplication(mapActivity);
 			}
 		}).reg();
+		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
 		return optionsMenuHelper;
 	}
 	

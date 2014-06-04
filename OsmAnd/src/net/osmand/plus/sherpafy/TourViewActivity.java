@@ -1,18 +1,23 @@
 package net.osmand.plus.sherpafy;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import net.osmand.IProgress;
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
+import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -22,12 +27,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.widget.LinearLayout.LayoutParams;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -304,6 +313,14 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private void setTourSelectionContentView() {
 		setContentView(R.layout.sherpafy_start);
 		final Button selectTour = (Button) findViewById(R.id.select_tour);
+		final View accessCode = (View) findViewById(R.id.access_code);
+		accessCode.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openAccessCode(false);
+			}
+		});
+		
 		if (!customization.getTourInformations().isEmpty()) {
 			selectTour.setText(R.string.select_tour);
 			selectTour.setOnClickListener(new View.OnClickListener() {
@@ -317,13 +334,43 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			selectTour.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					startDownloadActivity();
+					if(customization.getAccessCode().length() == 0) {
+						openAccessCode(true);
+					} else {
+						startDownloadActivity();
+					}
 				}
 
 			});
 		}
 	}
 	
+	protected void openAccessCode(final boolean startDownload) {
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.enter_access_code);
+		final EditText editText = new EditText(this);
+		LinearLayout ll = new LinearLayout(this);
+		ll.setPadding(5, 3, 5, 0);
+		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		builder.setView(ll);
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String acCode = editText.getText().toString();
+				if(!customization.setAccessCode(acCode)) {
+					Toast.makeText(getActivity(), R.string.access_code_is_not_valid, Toast.LENGTH_LONG).show();
+					return;
+				}
+				if(startDownload) {
+					startDownloadActivity();
+				}
+			}
+		});
+		builder.create().show();
+	}
+
+
 	private void startDownloadActivity() {
 		final Intent download = new Intent(this, DownloadIndexActivity.class);
 		download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
