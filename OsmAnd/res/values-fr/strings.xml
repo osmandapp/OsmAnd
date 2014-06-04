@@ -1699,4 +1699,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_user_left">L'utilisateur %1$s a quitté le groupe %2$s</string>
     <string name="osmo_show_group_notifications">Montrer les notifications de groupe</string>
     <string name="osmo_show_group_notifications_descr">Afficher des messages quand un utilisateur rejoint ou quitte le groupe</string>
+    <string name="selected_track">Piste</string>
+    <string name="my_tracks">Toutes les pistes</string>
+    <string name="my_favorites">Mes Favoris</string>
+    <string name="my_data_Button">Mes Données</string>
+    <string name="my_data_activity">Mes Données</string>
     </resources>
