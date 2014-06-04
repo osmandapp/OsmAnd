@@ -837,7 +837,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				String cs = constraint.toString().toLowerCase();
 				List<GpxInfo> res = new ArrayList<GpxInfo>();
 				for(GpxInfo r : raw) {
-					if(r.getName().toLowerCase().indexOf(cs) == -1) {
+					if(r.getName().toLowerCase().indexOf(cs) != -1) {
 						res.add(r);
 					}
 				}
