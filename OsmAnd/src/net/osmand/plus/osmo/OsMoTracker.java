@@ -78,27 +78,31 @@ public class OsMoTracker implements OsMoReactor {
 		if(!bufferOfLocations.isEmpty()){
 			Location loc = bufferOfLocations.poll();
 			lastSendLocation = loc;
-			StringBuilder cmd = new StringBuilder("T|");
-			cmd.append("L").append((float)loc.getLatitude()).append(":").append((float)loc.getLongitude());
-			if(loc.hasAccuracy()) {
-				cmd.append("H").append((float)loc.getAccuracy());
-			}
-			if(loc.hasAltitude()) {
-				cmd.append("A").append((float)loc.getAltitude());
-			}
-			if(loc.hasSpeed()) {
-				cmd.append("S").append((float)loc.getSpeed());
-			}
-			if(loc.hasBearing()) {
-				cmd.append("C").append((float)loc.getBearing());
-			}
-			if((System.currentTimeMillis() - loc.getTime()) > 30000 && loc.getTime() != 0) {
-				cmd.append("T").append(loc.getTime());
-			}
 			locationsSent ++;
-			return cmd.toString(); 
+			return "T|"+formatLocation(loc); 
 		}
 		return null;
+	}
+
+	public static String formatLocation(Location loc) {
+		StringBuilder cmd = new StringBuilder();
+		cmd.append("L").append((float)loc.getLatitude()).append(":").append((float)loc.getLongitude());
+		if(loc.hasAccuracy()) {
+			cmd.append("H").append((float)loc.getAccuracy());
+		}
+		if(loc.hasAltitude()) {
+			cmd.append("A").append((float)loc.getAltitude());
+		}
+		if(loc.hasSpeed()) {
+			cmd.append("S").append((float)loc.getSpeed());
+		}
+		if(loc.hasBearing()) {
+			cmd.append("C").append((float)loc.getBearing());
+		}
+		if((System.currentTimeMillis() - loc.getTime()) > 30000 && loc.getTime() != 0) {
+			cmd.append("T").append(loc.getTime());
+		}
+		return cmd.toString();
 	}
 	
 	public Location getLastSendLocation() {

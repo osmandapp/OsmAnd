@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="my_data_Button">My Data</string>
+    <string name="my_data_activity">My Data</string>
     <string name="osmo_user_joined">User %1$s joined group %2$s</string>
     <string name="osmo_user_left">User %1$s left group %2$s</string>
     <string name="osmo_show_group_notifications">Show group notifications</string>

@@ -12,9 +12,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.Track;
-import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -42,130 +40,46 @@ import android.widget.Toast;
 public class GpxUiHelper {
 
 	public static String getDescription(OsmandApplication app, GPXFile result, File f) {
+		GPXTrackAnalysis analysis = result.getAnalysis(f.lastModified());
+		return getDescription(app, analysis);
+	}
+	
+	public static String getDescription(OsmandApplication app, GPXTrackAnalysis analysis) {
 		StringBuilder description = new StringBuilder();
-		float totalDistance = 0;
-		int totalTracks = 0;
-		long startTime = Long.MAX_VALUE;
-		long endTime = Long.MIN_VALUE;
-		long timeSpan = 0;
-		long timeMoving = 0;
-		float totalDistanceMoving = 0;
-
-		double diffElevationUp = 0;
-		double diffElevationDown = 0;
-		double totalElevation = 0;
-		double minElevation = 99999;
-		double maxElevation = 0;
-		
-		float maxSpeed = 0;
-		int speedCount = 0;
-		double totalSpeedSum = 0;
-
-		float[] calculations = new float[1];
-
-		int points = 0;
-		for(int i = 0; i< result.tracks.size() ; i++){
-			Track subtrack = result.tracks.get(i);
-			for(TrkSegment segment : subtrack.segments){
-				totalTracks++;
-				points += segment.points.size();
-				for (int j = 0; j < segment.points.size(); j++) {
-					WptPt point = segment.points.get(j);
-					long time = point.time;
-					if(time != 0){
-						startTime = Math.min(startTime, time);
-						endTime = Math.max(startTime, time);
-					}
-
-					double elevation = point.ele;
-					if (!Double.isNaN(elevation)) {
-						totalElevation += elevation;
-						minElevation = Math.min(elevation, minElevation);
-						maxElevation = Math.max(elevation, maxElevation);
-					}
-
-					float speed = (float) point.speed;
-					if(speed > 0){
-						totalSpeedSum += speed;
-						maxSpeed = Math.max(speed, maxSpeed);
-						speedCount ++;
-					}
-					
-					if (j > 0) {
-						WptPt prev = segment.points.get(j - 1);
-
-						if (!Double.isNaN(point.ele) && !Double.isNaN(prev.ele)) {
-							double diff = point.ele - prev.ele;
-							if (diff > 0) {
-								diffElevationUp += diff;
-							} else {
-								diffElevationDown -= diff;
-							}
-						}
-
-						//totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
-						// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is a little more exact, also seems slightly faster:
-						net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
-						totalDistance += calculations[0];
-
-						// Averaging speed values is less exact than totalDistance/timeMoving
-						if(speed > 0 && point.time != 0 && prev.time != 0){
-							timeMoving = timeMoving + (point.time - prev.time);
-							totalDistanceMoving += calculations[0];
-						}
-					}
-				}
-			}
-		}
-		if(startTime == Long.MAX_VALUE){
-			startTime = f.lastModified();
-		}
-		if(endTime == Long.MIN_VALUE){
-			endTime = f.lastModified();
-		}
-
 		// OUTPUT:
 		// 1. Total distance, Start time, End time
-		description.append(app.getString(R.string.local_index_gpx_info, totalTracks, points,
-				result.points.size(), OsmAndFormatter.getFormattedDistance(totalDistance, app),
-				startTime, endTime));
+		description.append(app.getString(R.string.local_index_gpx_info, analysis.totalTracks, analysis.points,
+				analysis.wptPoints, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app),
+				analysis.startTime, analysis.endTime));
 
 		// 2. Time span
-		timeSpan = endTime - startTime;
-		description.append(app.getString(R.string.local_index_gpx_timespan, (int) ((timeSpan / 1000) / 3600), (int) (((timeSpan / 1000) / 60) % 60), (int) ((timeSpan / 1000) % 60)));
+		description.append(app.getString(R.string.local_index_gpx_timespan, analysis.getTimeHours(analysis.timeSpan),
+				analysis.getTimeMinutes(analysis.timeSpan), analysis.getTimeSeconds(analysis.timeSpan)));
 
 		// 3. Time moving, if any
-		if(timeMoving > 0){
+		if(analysis.isTimeMoving()){
 			description.append(
-				app.getString(R.string.local_index_gpx_timemoving, (int) ((timeMoving / 1000) / 3600), (int) (((timeMoving / 1000) / 60) % 60), (int) ((timeMoving / 1000) % 60)));
+				app.getString(R.string.local_index_gpx_timemoving, analysis.getTimeHours(analysis.timeMoving),
+						analysis.getTimeMinutes(analysis.timeMoving), analysis.getTimeSeconds(analysis.timeMoving)));
 		}
 
 		// 4. Elevation, eleUp, eleDown, if recorded
-		if(totalElevation != 0 || diffElevationUp != 0 || diffElevationDown != 0){
+		if(analysis.isElevationSpecified()){
 			description.append(  
 					app.getString(R.string.local_index_gpx_info_elevation,
-					OsmAndFormatter.getFormattedAlt(totalElevation / points, app),
-					OsmAndFormatter.getFormattedAlt(minElevation, app),
-					OsmAndFormatter.getFormattedAlt(maxElevation, app),
-					OsmAndFormatter.getFormattedAlt(diffElevationUp, app),
-					OsmAndFormatter.getFormattedAlt(diffElevationDown, app)));
+					OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app),
+					OsmAndFormatter.getFormattedAlt(analysis.minElevation, app),
+					OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app),
+					OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app),
+					OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app)));
 		}
 
-		// 5. Max speed and Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
-		if(speedCount > 0){
-			if(timeMoving > 0){
+
+		if(analysis.isSpeedSpecified()){
 				description.append(
 					app.getString(R.string.local_index_gpx_info_speed,
-					OsmAndFormatter.getFormattedSpeed((float) (totalDistanceMoving / timeMoving * 1000), app),
-					OsmAndFormatter.getFormattedSpeed(maxSpeed, app)));
-					// (Use totalDistanceMoving instead of totalDistance for av-speed to ignore effect of position fluctuations at rest)
-			} else {
-				// Averaging speed values is less exact than totalDistance/timeMoving
-				description.append(
-					app.getString(R.string.local_index_gpx_info_speed,
-					OsmAndFormatter.getFormattedSpeed((float) (totalSpeedSum / speedCount), app),
-					OsmAndFormatter.getFormattedSpeed(maxSpeed, app)));
-			}
+				OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app),
+				OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app)));
 		}
 		return description.toString();
 	}

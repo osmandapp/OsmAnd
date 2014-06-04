@@ -108,7 +108,236 @@ public class GPXUtilities {
 		public List<WptPt> points = new ArrayList<WptPt>();
 
 	}
+	
+	public static class GPXTrackAnalysis {
+		public float totalDistance = 0;
+		public int totalTracks = 0;
+		public long startTime = Long.MAX_VALUE;
+		public long endTime = Long.MIN_VALUE;
+		public long timeSpan = 0;
+		public long timeMoving = 0;
+		public float totalDistanceMoving = 0;
 
+		public double diffElevationUp = 0;
+		public double diffElevationDown = 0;
+		public double avgElevation = 0;
+		public double minElevation = 99999;
+		public double maxElevation = -100;
+		
+		public float maxSpeed = 0;
+		public float avgSpeed;
+		
+		public int points;
+		public int wptPoints = 0;
+		
+		public int metricEnd;
+
+		public boolean isTimeSpecified() {
+			return startTime != Long.MAX_VALUE;
+		}
+		
+		public boolean isTimeMoving() {
+			return timeMoving != 0;
+		}
+		
+		public boolean isElevationSpecified() {
+			return maxElevation != -100;
+		}
+		
+		public int getTimeHours(long time) {
+			return (int) ((time / 1000) / 3600);
+		}
+		
+		public int getTimeSeconds(long time) {
+			return (int) ((time / 1000) % 60);
+		}
+
+		public int getTimeMinutes(long time) {
+			return (int) (((time / 1000) / 60) % 60);
+		}
+		
+		public boolean isSpeedSpecified() {
+			return avgSpeed > 0;
+		}
+		
+		
+		
+		public void prepareInformation(long filestamp, SplitSegment... splitSegments) {
+			float[] calculations = new float[1];
+
+			float totalElevation = 0;
+			int elevationPoints = 0;
+			int speedCount = 0;
+			double totalSpeedSum = 0;
+			points = 0;
+			for (SplitSegment s : splitSegments) {
+				final int numberOfPoints = s.getNumberOfPoints();
+				metricEnd += s.metricEnd;
+				points += numberOfPoints;
+				for (int j = 0; j < numberOfPoints; j++) {
+					WptPt point = s.get(j);
+					long time = point.time;
+					if (time != 0) {
+						startTime = Math.min(startTime, time);
+						endTime = Math.max(startTime, time);
+					}
+
+					double elevation = point.ele;
+					if (!Double.isNaN(elevation)) {
+						totalElevation += elevation;
+						elevationPoints++;
+						minElevation = Math.min(elevation, minElevation);
+						maxElevation = Math.max(elevation, maxElevation);
+					}
+
+					float speed = (float) point.speed;
+					if (speed > 0) {
+						totalSpeedSum += speed;
+						maxSpeed = Math.max(speed, maxSpeed);
+						speedCount++;
+					}
+
+					if (j > 0) {
+						WptPt prev = s.get(j - 1);
+
+						if (!Double.isNaN(point.ele) && !Double.isNaN(prev.ele)) {
+							double diff = point.ele - prev.ele;
+							if (diff > 0) {
+								diffElevationUp += diff;
+							} else {
+								diffElevationDown -= diff;
+							}
+						}
+
+						// totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
+						// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
+						// a little more exact, also seems slightly faster:
+						net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
+						totalDistance += calculations[0];
+
+						// Averaging speed values is less exact than totalDistance/timeMoving
+						if (speed > 0 && point.time != 0 && prev.time != 0) {
+							timeMoving = timeMoving + (point.time - prev.time);
+							totalDistanceMoving += calculations[0];
+						}
+					}
+				}
+			}
+			if(!isTimeSpecified()){
+				startTime = filestamp;
+				endTime = filestamp;
+			}
+
+			// OUTPUT:
+			// 1. Total distance, Start time, End time
+			// 2. Time span
+			timeSpan = endTime - startTime;
+
+			// 3. Time moving, if any
+			if (elevationPoints > 0) {
+				avgElevation = elevationPoints / totalElevation;
+			}
+
+			// 4. Elevation, eleUp, eleDown, if recorded
+
+			// 5. Max speed and Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
+			if(speedCount > 0) {
+				if(timeMoving > 0){
+					avgSpeed = (float) (totalDistanceMoving / timeMoving * 1000);
+				} else {
+					avgSpeed = (float) (totalSpeedSum / speedCount);
+				}
+			} else {
+				avgSpeed = -1;
+			}
+		}
+	}
+	
+	private static class SplitSegment {
+		TrkSegment  segment;
+		float startCoeff = 0;
+		int startPointInd;
+		float endCoeff = 0;
+		int endPointInd;
+		int metricEnd;
+		
+		public int getNumberOfPoints() {
+			return endPointInd - startPointInd + 2;
+		}
+		
+		public WptPt get(int j) {
+			final int ind = j + startPointInd;
+			if(j == 0) {
+				if(startCoeff == 0) {
+					return segment.points.get(ind);
+				}
+				return approx(segment.points.get(ind), segment.points.get(ind + 1), startCoeff);
+			}
+			if(j == getNumberOfPoints()) {
+				if(startCoeff == 1) {
+					return segment.points.get(ind);
+				}
+				return approx(segment.points.get(ind - 1), segment.points.get(ind), endCoeff);
+			}
+			return segment.points.get(ind);
+		}
+
+		
+		private WptPt approx(WptPt w1, WptPt w2, float cf) {
+			long time = value(w1.time, w2.time, 0, cf);
+			double speed = value(w1.speed, w2.speed, 0, cf);
+			double ele = value(w1.ele, w2.ele, 0, cf);
+			double hdop = value(w1.hdop, w2.hdop, 0, cf);
+			double lat = value(w1.lat, w2.lat, -360, cf);
+			double lon = value(w1.lon, w2.lon, -360, cf);
+			return new WptPt(lat, lon, time, ele, speed, hdop);
+		}
+		
+		private double value(double vl, double vl2, double none, float cf) {
+			if(vl == none || Double.isNaN(vl)) {
+				return vl2;
+			} else if (vl2 == none || Double.isNaN(vl2)) {
+				return vl;
+			}
+			return vl + cf * (vl2 - vl);
+		}
+
+		private long value(long vl, long vl2, long none, float cf) {
+			if(vl == none) {
+				return vl2;
+			} else if(vl2 == none) {
+				return vl;
+			}
+			return vl + ((long) cf * (vl2 - vl));
+		}
+
+		public SplitSegment(TrkSegment s) {
+			startPointInd = 0;
+			startCoeff = 0;
+			endPointInd = s.points.size() - 1;
+			startCoeff = 1;
+		}
+		
+		public SplitSegment(TrkSegment s, int pointInd, float cf) {
+			this.segment = s;
+			this.startPointInd = pointInd;
+			this.startCoeff = cf;
+		}
+		
+		public float setLastPoint(int pointInd, float endCf) {
+			endCoeff = endCf;
+			endPointInd = pointInd;
+			return startCoeff;
+		}
+		
+	}
+	
+	private abstract static class SplitMetric {
+
+		public abstract int metric(WptPt p1, WptPt p2);
+
+	}
+	
 	public static class GPXFile extends GPXExtensions {
 		public String author;
 		public List<Track> tracks = new ArrayList<Track>();
@@ -122,6 +351,98 @@ public class GPXUtilities {
 
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
+		}
+		
+		public GPXTrackAnalysis getAnalysis(long fileTimestamp) {
+			GPXTrackAnalysis g = new GPXTrackAnalysis();
+			g.wptPoints = points.size();
+			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
+			for(int i = 0; i< tracks.size() ; i++){
+				Track subtrack = tracks.get(i);
+				for(TrkSegment segment : subtrack.segments){
+					g.totalTracks ++;
+					if(segment.points.size() > 1) {
+						splitSegments.add(new SplitSegment(segment));
+					}
+				}
+			}
+			g.prepareInformation(fileTimestamp, splitSegments.toArray(new SplitSegment[splitSegments.size()]));
+			return g ;
+		}
+		
+		
+		public List<GPXTrackAnalysis> splitByDistance(int meters) {
+			
+			return split(new SplitMetric() {
+				
+				private float[] calculations = new float[1];
+
+				@Override
+				public int metric(WptPt p1, WptPt p2) {
+					net.osmand.Location.distanceBetween(p1.lat, p1.lon, p2.lat, p2.lon, calculations);
+					return (int) calculations[0];
+				}
+			}, meters);
+		}
+		
+		public List<GPXTrackAnalysis> splitByTime(int seconds) {
+			
+			return split(new SplitMetric() {
+				
+				private float[] calculations = new float[1];
+
+				@Override
+				public int metric(WptPt p1, WptPt p2) {
+					if(p1.time != 0 && p2.time != 0) {
+						return (int) ((p1.time - p2.time) / 1000);
+					}
+					return 0;
+				}
+			}, seconds);
+		}
+		
+		public List<GPXTrackAnalysis> split(SplitMetric m, int metricLimit) {
+			int ml = metricLimit;
+			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
+			for(int i = 0; i< tracks.size() ; i++){
+				Track subtrack = tracks.get(i);
+				for(int j = 0; j<subtrack.segments.size(); j++){
+					TrkSegment segment = subtrack.segments.get(j);
+					SplitSegment sp = new SplitSegment(segment, 0, 0);
+					int total = 0;
+					for (int k = 0; k < segment.points.size(); k++) {
+						WptPt point = segment.points.get(k);
+						if (k > 0) {
+							WptPt prev = segment.points.get(k - 1);
+							int currentSegment = m.metric(prev, point);
+							while(total + currentSegment > ml) {
+								int p = ml - total; 
+								float cf = sp.setLastPoint(k - 1, p / ((float)currentSegment));
+								sp = new SplitSegment(segment, k - 1, cf);
+								sp.metricEnd = ml; 
+								ml += metricLimit;
+							}
+							total += currentSegment;
+						}
+					}
+					if(segment.points.size() > 0 && !(sp.endPointInd == segment.points.size() -1 && sp.startCoeff == 1)) {
+						sp.metricEnd = total;
+						sp.setLastPoint(0, 1);
+						splitSegments.add(sp);
+					}
+				}
+			}
+			return convert(splitSegments);
+		}
+
+		private List<GPXTrackAnalysis> convert(List<SplitSegment> splitSegments) {
+			List<GPXTrackAnalysis> ls = new ArrayList<GPXUtilities.GPXTrackAnalysis>();
+			for(SplitSegment s : splitSegments) {
+				GPXTrackAnalysis a = new GPXTrackAnalysis();
+				a.prepareInformation(0, s);
+				ls.add(a);
+			}
+			return ls;
 		}
 		
 		public boolean hasRtePt() {

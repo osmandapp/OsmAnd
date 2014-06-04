@@ -92,7 +92,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		pth = new Path();
 
 		pointOuter = new Paint();
-		pointOuter.setColor(Color.GRAY);
+		pointOuter.setColor(0x88555555);
 		pointOuter.setAntiAlias(true);
 		pointOuter.setStyle(Style.FILL_AND_STROKE);
 	}
@@ -122,34 +122,39 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		long treshold = System.currentTimeMillis() - 15000;
 		for (OsMoDevice t : getTrackingDevices()) {
 			Location l = t.getLastLocation();
-			if (l != null) {
-				ConcurrentLinkedQueue<Location> plocations = t.getPreviousLocations(treshold);
+			ConcurrentLinkedQueue<Location> plocations = t.getPreviousLocations(treshold);
+			if (!plocations.isEmpty() && l != null) {
 				int x = (int) tb.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
 				int y = (int) tb.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
-				if (plocations.size() > 0) {
-					pth.rewind();
-					Iterator<Location> it = plocations.iterator();
-					boolean f= true;
-					while (it.hasNext()) {
-						Location lo = it.next();
-						int xt = (int) tb.getPixXFromLatLon(lo.getLatitude(), lo.getLongitude());
-						int yt = (int) tb.getPixYFromLatLon(lo.getLatitude(), lo.getLongitude());
-						if(f) {
-							f = false;
-							pth.moveTo(xt, yt);
-						} else{
-							pth.lineTo(xt, yt);
-						}
+				pth.rewind();
+				Iterator<Location> it = plocations.iterator();
+				boolean f = true;
+				while (it.hasNext()) {
+					Location lo = it.next();
+					int xt = (int) tb.getPixXFromLatLon(lo.getLatitude(), lo.getLongitude());
+					int yt = (int) tb.getPixYFromLatLon(lo.getLatitude(), lo.getLongitude());
+					if (f) {
+						f = false;
+						pth.moveTo(xt, yt);
+					} else {
+						pth.lineTo(xt, yt);
 					}
-					pth.lineTo(x, y);
-					paintPath.setColor(t.getColor());
-					canvas.drawPath(pth, paintPath);
 				}
+				pth.lineTo(x, y);
+				paintPath.setColor(t.getColor());
+				canvas.drawPath(pth, paintPath);
+			}
+		}
+		for (OsMoDevice t : getTrackingDevices()) {
+			Location l = t.getLastLocation();
+			if (l != null) {
+				int x = (int) tb.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
+				int y = (int) tb.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
 				pointInnerCircle.setColor(t.getColor());
-				canvas.drawCircle(x, y, r + 2, pointOuter);
-				canvas.drawCircle(x, y, r - 2, pointInnerCircle);
-				paintTextIcon.setTextSize(r);
-				canvas.drawText(t.getVisibleName().substring(0, 1), x, y, paintTextIcon);
+				canvas.drawCircle(x, y, r + (float)Math.ceil(tb.getDensity()), pointOuter);
+				canvas.drawCircle(x, y, r - (float)Math.ceil(tb.getDensity()), pointInnerCircle);
+				paintTextIcon.setTextSize(r * 3 / 2);
+				canvas.drawText(t.getVisibleName().substring(0, 1).toUpperCase(), x, y - r, paintTextIcon);
 			}
 		}
 	}

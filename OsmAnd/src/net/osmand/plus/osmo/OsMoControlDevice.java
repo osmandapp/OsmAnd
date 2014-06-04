@@ -2,6 +2,7 @@ package net.osmand.plus.osmo;
 
 import java.util.List;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
@@ -54,7 +55,16 @@ public class OsMoControlDevice implements OsMoReactor {
 	@Override
 	public boolean acceptCommand(String command, String id, String data, JSONObject obj, OsMoThread tread) {
 		if(command.equals("REMOTE_CONTROL")) {
-			if(data.equals("BATTERY_INFO")) {
+			if(data.equals("PP")) {
+				   service.pushCommand("PP");
+			} else if(data.equals("FF")) {
+				Location ll = app.getLocationProvider().getLastKnownLocation();
+				if(ll == null) {
+					service.pushCommand("FF|0");
+				} else {
+					service.pushCommand("FF|"+OsMoTracker.formatLocation(ll));
+				}
+			} else if(data.equals("BATTERY_INFO")) {
 				try {
 				   service.pushCommand("BATTERY_INFO|"+getBatteryLevel().toString());
 				} catch(JSONException e) {

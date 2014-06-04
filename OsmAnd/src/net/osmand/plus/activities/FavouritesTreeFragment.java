@@ -1,6 +1,3 @@
-/**
- *
- */
 package net.osmand.plus.activities;
 
 import java.io.File;
@@ -15,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import android.content.Intent;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.access.AccessibleToast;
@@ -23,17 +19,20 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.sherpafy.TourSelectionFragment;
-import net.osmand.plus.sherpafy.TourCommonActivity.TabsAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.activities.FavouritesActivity.FavouritesAdapter;
+import net.osmand.plus.sherpafy.TourSelectionFragment;
+import net.osmand.plus.sherpafy.TourCommonActivity.TabsAdapter;
 import net.osmand.util.MapUtils;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ListFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -43,8 +42,8 @@ import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
@@ -56,15 +55,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.ActionMode.Callback;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
+import com.actionbarsherlock.view.ActionMode.Callback;
 
-/**
- *
- */
-public class FavouritesActivity extends OsmandExpandableListActivity {
+public class FavouritesTreeFragment extends Fragment{
 
 	public static final int EXPORT_ID = 0;
 	public static final int IMPORT_ID = 1;
@@ -88,9 +84,6 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	public void onCreate(Bundle icicle) {
         //This has to be called before setContentView and you must use the
         //class in com.actionbarsherlock.view and NOT android.view
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
-		super.onCreate(icicle);
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		favoritesComparator = new Comparator<FavouritePoint>(){
@@ -104,25 +97,6 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 
 
 		setContentView(R.layout.favourites_list);
-		getSupportActionBar().setTitle(R.string.favourites_activity);
-		setSupportProgressBarIndeterminateVisibility(false);
-        TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
-        tabHost.setup();
-
-        ViewPager mViewPager = (ViewPager)findViewById(R.id.pager);
-        mTabsAdapter = new TabsAdapter(this, tabHost,  mViewPager);
-		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_INFO).setIndicator(getString(R.string.tab_current_tour)),
-				TourInformationFragment.class, null);
-		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_STAGE).setIndicator(getString(R.string.tab_stages)),
-				TourStageFragment.class, null);
-		mTabsAdapter.addTab(tabHost.newTabSpec(TOUR_SELECTION).setIndicator(getString(R.string.tab_tours)), 
-				TourSelectionFragment.class, null);
-        if (savedInstanceState != null) {
-            tabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
-        }
-		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
-
-
 		helper = getMyApplication().getFavorites();
 		favouritesAdapter = new FavouritesAdapter();
 		favouritesAdapter.setFavoriteGroups(helper.getFavoriteGroups());
@@ -724,6 +698,4 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			return row;
 		}
 	}
-
-
 }
