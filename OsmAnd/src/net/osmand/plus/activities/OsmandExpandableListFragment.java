@@ -27,6 +27,7 @@ public abstract class OsmandExpandableListFragment extends SherlockFragment impl
 		return (OsmandApplication)getActivity().getApplication();
 	}
 	
+	@Override
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		View v = createView(inflater, container);
 		listView = (ExpandableListView) v.findViewById(android.R.id.list);
@@ -38,6 +39,7 @@ public abstract class OsmandExpandableListFragment extends SherlockFragment impl
 	}
 
 	public View createView(android.view.LayoutInflater inflater, android.view.ViewGroup container) {
+		setHasOptionsMenu(true);
 		return inflater.inflate(R.layout.expandable_list, container, false);
 	}
 	

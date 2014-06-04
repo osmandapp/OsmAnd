@@ -31,6 +31,8 @@ import com.actionbarsherlock.view.Window;
 public class FavouritesActivity extends SherlockFragmentActivity {
 
 	private static final String FAVOURITES_INFO = "FAVOURITES_INFO";
+	private static final String TRACKS = "TRACKS";
+	private static final String SELECTED_TRACK = "SELECTED_TRACK";
 	private TabsAdapter mTabsAdapter;
 
 
@@ -55,7 +57,12 @@ public class FavouritesActivity extends SherlockFragmentActivity {
         mTabsAdapter = new TabsAdapter(this, tabHost,  mViewPager, settings);
 		mTabsAdapter.addTab(tabHost.newTabSpec(FAVOURITES_INFO).setIndicator(getString(R.string.my_favorites)),
 				FavouritesTreeFragment.class, null);
+		mTabsAdapter.addTab(tabHost.newTabSpec(TRACKS).setIndicator(getString(R.string.my_tracks)),
+				FavouritesTreeFragment.class, null);
+		mTabsAdapter.addTab(tabHost.newTabSpec(SELECTED_TRACK).setIndicator(getString(R.string.selected_track)),
+				FavouritesTreeFragment.class, null);
 		tabHost.setCurrentTab(tab);
+		
 		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
 
 	}
