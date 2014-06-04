@@ -3,6 +3,7 @@
  */
 package net.osmand.plus.activities;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import net.osmand.plus.OsmandApplication;
@@ -17,6 +18,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 
@@ -41,28 +43,44 @@ public class FavouritesActivity extends SherlockFragmentActivity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		super.onCreate(icicle);
-
-
-		setContentView(R.layout.tab_content);
 		setSupportProgressBarIndeterminateVisibility(false);
-        TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
-        tabHost.setup();
-
-        OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
-        Integer tab = settings.FAVORITES_TAB.get();
-        ViewPager mViewPager = (ViewPager)findViewById(R.id.pager);
-        mTabsAdapter = new TabsAdapter(this, tabHost,  mViewPager, settings);
-		mTabsAdapter.addTab(tabHost.newTabSpec(FAVOURITES_INFO).setIndicator(getString(R.string.my_favorites)),
-				FavouritesTreeFragment.class, null);
-		mTabsAdapter.addTab(tabHost.newTabSpec(TRACKS).setIndicator(getString(R.string.my_tracks)),
-				AvailableGPXFragment.class, null);
-		mTabsAdapter.addTab(tabHost.newTabSpec(SELECTED_TRACK).setIndicator(getString(R.string.selected_track)),
-				SelectedGPXFragment.class, null);
-		tabHost.setCurrentTab(tab);
-		
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setTitle("");
 		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
+		File[] lf = ((OsmandApplication) getApplication()).getAppPath(TRACKS).listFiles();
+		boolean hasGpx =  false;
+		if(lf != null) {
+			for(File t : lf) {
+				if(t.isDirectory() || (t.getName().toLowerCase().endsWith(".gpx"))) {
+					hasGpx = true;
+					break;
+				}
+			}
+		}
+		
+		if(!hasGpx) {
+			FrameLayout fl = new FrameLayout(this);
+			fl.setId(R.id.layout);
+			setContentView(fl);
+			getSupportFragmentManager().beginTransaction().add(R.id.layout, new FavouritesTreeFragment()).commit();
+		} else {
+			setContentView(R.layout.tab_content);
+			TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+			tabHost.setup();
+
+			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
+			Integer tab = settings.FAVORITES_TAB.get();
+			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+			mTabsAdapter = new TabsAdapter(this, tabHost, mViewPager, settings);
+			mTabsAdapter.addTab(tabHost.newTabSpec(FAVOURITES_INFO).setIndicator(getString(R.string.my_favorites)),
+					FavouritesTreeFragment.class, null);
+			mTabsAdapter.addTab(tabHost.newTabSpec(TRACKS).setIndicator(getString(R.string.my_tracks)),
+					AvailableGPXFragment.class, null);
+			mTabsAdapter.addTab(tabHost.newTabSpec(SELECTED_TRACK).setIndicator(getString(R.string.selected_track)),
+					SelectedGPXFragment.class, null);
+			tabHost.setCurrentTab(tab);
+		}
+		
 
 	}
 

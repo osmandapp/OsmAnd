@@ -34,7 +34,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.text.Spannable;
@@ -80,6 +79,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 	private Comparator<FavouritePoint> favoritesComparator;
 	private ActionMode actionMode;
 	private SearchView searchView;
+	protected boolean hideActionBar;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -299,6 +299,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 		mi.setActionView(searchView);
 		searchView.setOnQueryTextListener(new OnQueryTextListener() {
 
+
 			@Override
 			public boolean onQueryTextSubmit(String query) {
 				favouritesAdapter.getFilter().filter(query);
@@ -311,6 +312,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 				return true;
 			}
 		});
+		if(!searchView.isActivated()) {
 		createMenuItem(menu, EXPORT_ID, R.string.export_fav, R.drawable.ic_action_gsave_light,
 				R.drawable.ic_action_gsave_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_light,
@@ -319,6 +321,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 				R.drawable.ic_action_grefresh_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, DELETE_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light,
 				R.drawable.ic_action_delete_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		}
 	}
 
 	public void showProgressBar() {

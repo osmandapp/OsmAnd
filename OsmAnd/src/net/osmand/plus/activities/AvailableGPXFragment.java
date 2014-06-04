@@ -12,18 +12,15 @@ import java.util.Map;
 
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexDescriptionTask;
-import net.osmand.plus.activities.LocalIndexesActivity.LocalIndexOperationTask;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -37,19 +34,18 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.AsyncTask.Status;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.ActionMode;
@@ -57,7 +53,6 @@ import com.actionbarsherlock.view.ActionMode.Callback;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.SubMenu;
 import com.actionbarsherlock.widget.SearchView;
 import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 
@@ -227,6 +222,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onContextMenuClick(final int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (itemId == R.string.local_index_mi_reload) {
+					asyncLoader = new LoadGpxTask();
 					asyncLoader.execute(getActivity());
 				} else if (itemId == R.string.local_index_mi_delete) {
 					openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light,
@@ -381,9 +377,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 							f.getParentFile().mkdirs();
 						}
 						if(f.renameTo(dest)){
-							if(asyncLoader.getStatus() == Status.PENDING) {
-								asyncLoader.execute(getActivity());
-							}
+							asyncLoader = new LoadGpxTask();
+							asyncLoader.execute(getActivity());
 						} else {
 							AccessibleToast.makeText(getActivity(), R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
 						}
