@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
@@ -1044,7 +1044,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="edit_tilesource_minzoom">최소 줌</string>
     <string name="edit_tilesource_name">이름</string>
     <string name="map_widget_fps_info">FPS 디버그 정보</string>
-	<string name="driving_region_descr">운전 지역 선택 : 미국, 유럽 , 영국, 아시아 및 기타</string>
+	<string name="driving_region_descr">운전 지역 선택 : 미국, 유럽, 영국, 아시아 및 기타</string>
 	<string name="driving_region">운전 지역</string>
 	<string name="driving_region_japan">일본</string>
 	<string name="driving_region_us">미국</string>
@@ -1893,7 +1893,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     </string>
     <string name="always_center_position_on_map">센터에 항상 위치 표시</string>
     <string name="voice_pref_title">음성</string>
-    <string name="misc_pref_title">잡동사니</string>
+    <string name="misc_pref_title">기타</string>
     <string name="localization_pref_title">현지화</string>
     <string name="osmand_srtm_long_description_1000_chars">이 플러그인은 OsmAnd 의 오프라인 지도에 표시할 수 있는 등고선을 제공합니다. (북쪽으로 70도 남쪽으로 70도 사이 ) 글로벌 데이터는 SRTM (셔틀 레이더 지형 미션 ) 과 ASTER (고급화 된 Spaceborne 열 방출 및 반사 복사계 테라 온보드영상 기기) NASA 의 주력 위성에 의한 측정을 기반으로 합니다.  지구 관측 시스템의 애스터 는 NASA 사이의 협력 노력 , 일본의 경제 산업성(METI ), 일본 우주 시스템 (J- spacesystems )의 장관.</string>
     <string name="tip_altitude_offset_t">대부분의 GPS 장치는 로컬로 사용되는 시스템에 대한 변환이 위치에 의존하는 보정을 필요로 하는 타원체 기반 WGS84 참조 시스템에서 고도 측정을 보고합니다.
@@ -1981,7 +1981,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_session_token">세션 토큰 : %1$s</string>
     <string name="osmo_auth_pending">허가를 기다리는 중...</string>
     <string name="osmo_locations_sent">위치 전송 %1$d (in buffer %2$d) </string>
-    <string name="osmo_conn_successfull">설정 된 연결 : %1$s </string>
+    <string name="osmo_conn_successfull">설정된 연결 : %1$s </string>
     <string name="tip_recent_changes_1_8_alpha">Changes in 1.8:
         * GPX 트랙의 루트 포인트 사이의 도로 계산
         * 다운로드에 대한 국가의 변경된 레이아웃 (support local names search)
@@ -2042,4 +2042,8 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_user_name">사용자</string>
 	<string name="color_green">녹색</string>
 	
+    <string name="osmo_user_joined">사용자 %1$s 이(가) 그룹 %2$s 에 합류</string>
+    <string name="osmo_user_left">사용자 %1$s 그룹 %2$s 남기다</string>
+    <string name="osmo_show_group_notifications">그룹 알림 보기</string>
+    <string name="osmo_show_group_notifications_descr">사용자가 그룹에 참여 또는 해체 할때 토스트 메시지를 표시</string>
     </resources>
