@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -1649,8 +1649,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="application_dir_change_warning2">OsmAnd sa môže pokúsiť presunúť údaje do nového cieľa. Súhlasíte?</string>
     <string name="calculate_osmand_route_gpx">Vypočítať OsmAnd offline trasu</string>
     <string name="android_19_location_disabled">Od verzie KitKat nie je možné sťahovať a aktualizovať mapy v pôvodnom úložisku (%s). Chcete ho zmeniť na vhodné nové a skopírovať tam všetky súbory?
-	\n Poznámka : pôvodné súbory zostanú nedotknuté. 
-	\n Poznámka : nebude možné zdieľať súbory medzi OsmAnd a OsmAnd+. </string>
+	\n Poznámka: pôvodné súbory zostanú nedotknuté. 
+	\n Poznámka: nebude možné zdieľať súbory medzi OsmAnd a OsmAnd+. </string>
     <string name="routing_attr_prefer_motorway_name">Uprednostniť diaľnice</string>
 	<string name="routing_attr_prefer_motorway_description">Uprednostniť diaľnice</string>
 	<string name="routing_attr_short_way_name">Najkratšia cesta</string>
@@ -1712,7 +1712,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="localization_pref_title">Lokalizácia</string>
     <string name="share_route_as_gpx">Zdieľať trasu ako GPX súbor</string>
 	<string name="share_route_subject">Trasa zdieľaná cez OsmAnd</string>
-	<string name="navigation_intent_invalid">Neplatný formát : %s</string>
+	<string name="navigation_intent_invalid">Neplatný formát: %s</string>
 <string name="lang_pt_br">Portugalsky (Brazília)</string>
     <string name="lang_af">Afrikánsky (Afrikaans)</string>
 	<string name="lang_hy">Arménsky (հայերեն)</string>
@@ -1760,7 +1760,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="keep_informing">Opakuj navigačné pokyny</string>
 	<string name="arrival_distance">Oznámenie príjazdu</string>
     <string name="arrival_distance_descr">Ako skoro má byť oznámený príjazd do cieľa?</string>
-    <string name="osmo_io_error">Problém s pripojením OsMo : </string>
+    <string name="osmo_io_error">Problém s pripojením OsMo: </string>
     <string name="osmo_mode_on">Zastaviť reláciu OsMo</string>    
     <string name="osmo_mode_off">Spustiť reláciu OsMo</string>
     <string name="osmo_register_device">Registruje sa zariadenie… </string>
@@ -1787,10 +1787,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_tracker_id">Osobné ID sledovacieho zariadenia</string>
     <string name="osmo_tracker_id_descr">Kliknite pre zobrazenia alebo zdieľanie ID sledovacieho zariadenia.
         Pomocou ID budú pripojené zariadenia schopné sledovať všetky pohyby tohto zariadenia! Pre odpojenie použite možnosť "Pregenerovať".</string>
-    <string name="osmo_session_token">Token relácie : %1$s</string>
+    <string name="osmo_session_token">Token relácie: %1$s</string>
     <string name="osmo_auth_pending">Čaká sa na autorizáciu...</string>
     <string name="osmo_locations_sent">Odoslané polohy %1$d (v zásobníku %2$d) </string>
-    <string name="osmo_conn_successfull">Vytvorené spojenie : %1$s </string>
+    <string name="osmo_conn_successfull">Vytvorené spojenie: %1$s </string>
     <string name="osmo_mode_restart">Reštartovať reláciu OsMo</string>
     <string name="osmo_settings_debug">Informácie pre ladenie</string>
     <string name="import_save">Uložiť</string>
@@ -1822,4 +1822,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="color_green">zelená</string>
 	
     <string name="osmo_connect_to_group_id">ID skupiny</string>
+    <string name="selected_track">Stopa</string>
+    <string name="my_tracks">Všetky stopy</string>
+    <string name="my_favorites">Moje obľúbené</string>
+    <string name="my_data_Button">Moje dáta</string>
+    <string name="my_data_activity">Moje dáta</string>
+    <string name="osmo_user_joined">Používateľ %1$s sa pripojil ku skupine %2$s</string>
+    <string name="osmo_user_left">Používateľ %1$s opustil skupinu %2$s</string>
+    <string name="osmo_show_group_notifications">Zobrazovať oznamy skupiny</string>
+    <string name="osmo_show_group_notifications_descr">Zobraziť správu ak sa používateľ pripojí alebo odpojí zo skupiny</string>
     </resources>
