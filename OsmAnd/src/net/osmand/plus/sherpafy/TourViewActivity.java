@@ -25,6 +25,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -349,6 +350,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.enter_access_code);
 		final EditText editText = new EditText(this);
+		editText.setInputType(EditorInfo.TYPE_TEXT_FLAG_CAP_CHARACTERS);
 		LinearLayout ll = new LinearLayout(this);
 		ll.setPadding(5, 3, 5, 0);
 		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
