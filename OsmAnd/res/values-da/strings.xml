@@ -1873,4 +1873,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_show_group_notifications_descr">Vis popup-meddelelser, når brugeren slutter sig til gruppen eller forlader den</string>
     <string name="osmo_user_joined">Bruger %1$s sluttede sig til  gruppen %2$s</string>
     <string name="osmo_user_left">Bruger %1$s forlod gruppen %2$s</string>
+    <string name="selected_track">Spor</string>
+    <string name="my_tracks">Alle spor</string>
+    <string name="my_favorites">Mine favoritter</string>
+    <string name="my_data_Button">Mine data</string>
+    <string name="my_data_activity">Mine data</string>
     </resources>
