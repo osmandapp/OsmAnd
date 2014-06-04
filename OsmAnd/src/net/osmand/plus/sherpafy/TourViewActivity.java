@@ -3,6 +3,8 @@ package net.osmand.plus.sherpafy;
 import java.util.List;
 
 import net.osmand.IProgress;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
@@ -18,7 +20,6 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -82,8 +83,10 @@ public class TourViewActivity extends SherlockFragmentActivity {
 						}
 					});
 		} else if(state == STATE_SELECT_TOUR ){
+			state = STATE_LOADING;
 			startSettings();
 		} else if(state == STATE_TOUR_VIEW){
+			state = STATE_LOADING;
 			startTourView();
 		}
 		
@@ -129,9 +132,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				fullDescription.setText(curTour.getFulldescription());
 				description.setText((curTour.getShortDescription()));
 				// ((TextView)findViewById(R.id.tour_name)).setText(getString(R.string.overview));
-				collapser.setText(getString(R.string.overview));
-				collapser.setTextOff(getString(R.string.overview));
-				collapser.setTextOn(getString(R.string.overview));
+				setCollapserText(getString(R.string.overview));
 				prepareBitmap(curTour.getImageBitmap());
 			}
 		} else {
@@ -139,11 +140,16 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			description.setText(st.getDescription());
 			fullDescription.setText(st.getFullDescription());
 			// ((TextView)findViewById(R.id.tour_name)).setText(st.getName());
-			collapser.setText(st.getName());
-			collapser.setTextOff(st.getName());
-			collapser.setTextOn(st.getName());
+			setCollapserText(st.getName());
 			prepareBitmap(st.getImageBitmap());
 		}
+	}
+
+
+	private void setCollapserText(String t) {
+		collapser.setText("  " + t);
+		collapser.setTextOff("  " + t);
+		collapser.setTextOn("  " + t);
 	}
 
 	private void startSettings() {
@@ -249,8 +255,16 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	}
 	
 	private void goToMap() {
+		if (customization.getSelectedStage() != null) {
+			GPXFile gpx = customization.getSelectedStage().getGpx();
+			if (gpx != null && gpx.findPointToShow() != null) {
+				WptPt p = gpx.findPointToShow();
+				getMyApplication().getSettings().setMapLocationToShow(p.lat, p.lon,
+						getMyApplication().getSettings().getLastKnownMapZoom(), null);
+				getMyApplication().setGpxFileToDisplay(gpx, false);
+			}
+		}
 		MapActivity.launchMapActivityMoveToTop(getActivity());
-		// TODO select GPX
 	}
 
 	private void prepareBitmap(Bitmap imageBitmap) {
@@ -289,73 +303,66 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	private void setTourSelectionContentView() {
 		setContentView(R.layout.sherpafy_start);
-		final Button downloadTour = (Button) findViewById(R.id.download_tour);
 		final Button selectTour = (Button) findViewById(R.id.select_tour);
-		if(customization.getTourInformations().isEmpty()) {
-			((ViewGroup)selectTour.getParent()).setVisibility(View.GONE);
-		} else {
-			((ViewGroup) selectTour.getParent()).setVisibility(View.VISIBLE);
+		if (!customization.getTourInformations().isEmpty()) {
+			selectTour.setText(R.string.select_tour);
 			selectTour.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					selectTourDialog();
 				}
 			});
-		}
+		} else {
+			selectTour.setText(R.string.download_tour);
+			selectTour.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					startDownloadActivity();
+				}
 
-		downloadTour.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				final Intent download = new Intent(v.getContext(), DownloadIndexActivity.class);
-				download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				v.getContext().startActivity(download);
-			}
-		});
+			});
+		}
+	}
+	
+	private void startDownloadActivity() {
+		final Intent download = new Intent(this, DownloadIndexActivity.class);
+		download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		startActivity(download);
 	}
 	
 	private void selectTourDialog() {
 		// creating alert dialog with multiple tours to select
 		AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
 		final List<TourInformation> tours = customization.getTourInformations();
+
+		final String[] tourNames = new String[tours.size() + 1];
+		// creating list of tour names to select
+		for (int i = 0; i < tours.size() - 1; i++) {
+			tourNames[i] = tours.get(i).getName();
+		}
+		tourNames[tours.size() - 1] = getString(R.string.download_more);
+		int ch = -1;
 		if (customization.getSelectedTour() != null) {
-			String[] tourNames = new String[tours.size()];
-			// creating list of tour names to select
-			for (int i = 0; i < tours.size(); i++) {
-				tourNames[i] = tours.get(i).getName();
-			}
-			int i;
-			for (i = 0; i < tours.size(); i++) {
+			for (int i = 0; i < tours.size() - 1; i++) {
 				if (customization.getSelectedTour().equals(tours.get(i))) {
+					ch = i;
 					break;
 				}
 			}
+		}
 
-			adb.setSingleChoiceItems(tourNames, i, new DialogInterface.OnClickListener() {
+		adb.setSingleChoiceItems(tourNames, ch, new DialogInterface.OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialogInterface, int i) {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				if (i == tourNames.length - 1) {
+					startDownloadActivity();
+				} else {
 					selectTourAsync(tours.get(i));
 					dialogInterface.dismiss();
 				}
-			});
-		} else {
-			String[] tourNames = new String[tours.size() + 1];
-			tourNames[0] = getString(R.string.none);
-			for (int i = 1; i < tours.size() + 1; i++) {
-				tourNames[i] = tours.get(i - 1).getName();
 			}
-			adb.setSingleChoiceItems(tourNames, 0, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialogInterface, int i) {
-					if (i == 0) {
-						return;
-					}
-					selectTourAsync(tours.get(i - 1));
-					dialogInterface.dismiss();
-				}
-			});
-		}
+		});
 
 		adb.setTitle(R.string.select_tour);
 		adb.setNegativeButton(R.string.default_buttons_cancel, null);

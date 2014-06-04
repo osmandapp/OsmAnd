@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.IProgress;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -160,6 +161,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			for(StageInformation s : selectedTour.getStageInformation()) {
 				if(s.getName().equals(selectedStagePref.get())) {
 					selectedStage = s;
+					loadSelectedStage();
 					break;
 				}
 			}
@@ -178,7 +180,18 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 			selectedStagePref.set(stage.getName());
 			selectedStage = stage;
 		}
+		loadSelectedStage();
 	}
+
+	private void loadSelectedStage() {
+		final StageInformation st = selectedStage;
+		if(st != null && st.gpxFile != null) {
+			if(st.gpx == null) {
+				st.gpx = GPXUtilities.loadGPXFile(app, st.gpxFile);
+			}
+		}
+	}
+
 
 	public void selectTour(TourInformation tour, IProgress progress) {
 		if(tour == null) {
@@ -188,6 +201,7 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		}
 		selectedTour = null;
 		selectedStage = null;
+		selectedStagePref.set(null);
 		app.getResourceManager().reloadIndexes(progress);
 	}
 }

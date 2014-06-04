@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.GPXUtilities.GPXFile;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -148,6 +149,7 @@ public class TourInformation {
 	public static class StageInformation {
 		
 		File gpxFile;
+		public GPXFile gpx;
 		String name = "";
 		String description = "";
 		String fullDescription = "";
@@ -156,6 +158,10 @@ public class TourInformation {
 		
 		public String getName() {
 			return name;
+		}
+		
+		public GPXFile getGpx() {
+			return gpx;
 		}
 		
 		public String getDescription() {
@@ -169,6 +175,7 @@ public class TourInformation {
 		public File getGpxFile() {
 			return gpxFile;
 		}
+		
 
 		public Bitmap getImageBitmap() {
 			if(img == null && imgFile != null && imgFile.exists()) {
