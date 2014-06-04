@@ -3,15 +3,12 @@
  */
 package net.osmand.plus.activities;
 
-import java.text.Collator;
 import java.util.ArrayList;
 
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -41,12 +38,11 @@ public class FavouritesActivity extends SherlockFragmentActivity {
         //This has to be called before setContentView and you must use the
         //class in com.actionbarsherlock.view and NOT android.view
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+//        getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		super.onCreate(icicle);
 
 
 		setContentView(R.layout.tab_content);
-		getSupportActionBar().setTitle(R.string.favourites_activity);
 		setSupportProgressBarIndeterminateVisibility(false);
         TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
         tabHost.setup();
@@ -63,12 +59,24 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 				FavouritesTreeFragment.class, null);
 		tabHost.setCurrentTab(tab);
 		
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setTitle("");
 		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
 
 	}
 
 
+	@Override
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+		int itemId = item.getItemId();
+		switch (itemId) {
+		case android.R.id.home:
+			finish();
+			return true;
 
+		}
+		return false;
+	}
 
     /**
      * This is a helper class that implements the management of tabs and all
