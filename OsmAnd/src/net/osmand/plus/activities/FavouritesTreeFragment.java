@@ -19,48 +19,41 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.activities.FavouritesActivity.FavouritesAdapter;
-import net.osmand.plus.sherpafy.TourSelectionFragment;
-import net.osmand.plus.sherpafy.TourCommonActivity.TabsAdapter;
 import net.osmand.util.MapUtils;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.ListFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
 import com.actionbarsherlock.view.ActionMode.Callback;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
-public class FavouritesTreeFragment extends Fragment{
+public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 	public static final int EXPORT_ID = 0;
 	public static final int IMPORT_ID = 1;
@@ -77,13 +70,11 @@ public class FavouritesTreeFragment extends Fragment{
 	private Set<String> groupsToDelete = new LinkedHashSet<String>();
 	private Comparator<FavouritePoint> favoritesComparator;
 	private ActionMode actionMode;
-	private TabsAdapter mTabsAdapter;
-
 
 	@Override
-	public void onCreate(Bundle icicle) {
-        //This has to be called before setContentView and you must use the
-        //class in com.actionbarsherlock.view and NOT android.view
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		favoritesComparator = new Comparator<FavouritePoint>(){
@@ -95,14 +86,12 @@ public class FavouritesTreeFragment extends Fragment{
 		};
 
 
-
-		setContentView(R.layout.favourites_list);
 		helper = getMyApplication().getFavorites();
 		favouritesAdapter = new FavouritesAdapter();
 		favouritesAdapter.setFavoriteGroups(helper.getFavoriteGroups());
-		getExpandableListView().setAdapter(favouritesAdapter);
-
+		setAdapter(favouritesAdapter);
 	}
+
 
 	private void deleteFavorites() {
 		new AsyncTask<Void, Object, String>(){
@@ -149,7 +138,7 @@ public class FavouritesTreeFragment extends Fragment{
 	}
 
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 //		final LatLon mapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 		favouritesAdapter.synchronizeGroups();
@@ -182,7 +171,7 @@ public class FavouritesTreeFragment extends Fragment{
 					settings.SHOW_FAVORITES.set(true);
 				}
 			};
-			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), this,
+			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), getActivity(),
 					true, onshow, false);
 			if (point.isStored()) {
 				ActionItem edit = new ActionItem();
@@ -217,16 +206,16 @@ public class FavouritesTreeFragment extends Fragment{
 
 
 	private boolean editPoint(final FavouritePoint point) {
-		Builder builder = new AlertDialog.Builder(this);
+		Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.favourites_context_menu_edit);
-		final View v = getLayoutInflater().inflate(R.layout.favourite_edit_dialog, getExpandableListView(), false);
+		final View v = getActivity().getLayoutInflater().inflate(R.layout.favourite_edit_dialog, getExpandableListView(), false);
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
 		final EditText editText =  (EditText) v.findViewById(R.id.Name);
 		builder.setView(v);
 		editText.setText(point.getName());
 		cat.setText(point.getCategory());
 		cat.setThreshold(1);
-		cat.setAdapter(new ArrayAdapter<String>(this, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray(new String[] {})));
+		cat.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray(new String[] {})));
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
 			@Override
@@ -244,9 +233,10 @@ public class FavouritesTreeFragment extends Fragment{
 		return true;
 	}
 
+
 	private boolean deletePoint(final FavouritePoint point) {
 		final Resources resources = this.getResources();
-		Builder builder = new AlertDialog.Builder(this);
+		Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setMessage(getString(R.string.favourites_remove_dialog_msg, point.getName()));
 		builder.setNegativeButton(R.string.default_buttons_no, null);
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
@@ -254,7 +244,7 @@ public class FavouritesTreeFragment extends Fragment{
 			public void onClick(DialogInterface dialog, int which) {
 				boolean deleted = helper.deleteFavourite(point);
 				if (deleted) {
-					AccessibleToast.makeText(FavouritesActivity.this,
+					AccessibleToast.makeText(getActivity(),
 							MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_success), point.getName()),
 							Toast.LENGTH_SHORT).show();
 					favouritesAdapter.synchronizeGroups();
@@ -291,7 +281,7 @@ public class FavouritesTreeFragment extends Fragment{
 
 
 	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		createMenuItem(menu, EXPORT_ID, R.string.export_fav, R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, SHARE_ID, R.string.share_fav, R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
@@ -300,20 +290,19 @@ public class FavouritesTreeFragment extends Fragment{
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		createMenuItem(menu, DELETE_ID, R.string.default_buttons_delete, R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT) ;
-		return super.onCreateOptionsMenu(menu);
 	}
 
 	public void showProgressBar(){
-		setSupportProgressBarIndeterminateVisibility(true);
+		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
 	}
 
 	public void hideProgressBar(){
-		setSupportProgressBarIndeterminateVisibility(false);
+		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
 	}
 
 
 	private void enterDeleteMode() {
-		actionMode = startActionMode(new Callback() {
+		actionMode = getSherlockActivity().startActionMode(new Callback() {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -353,7 +342,7 @@ public class FavouritesTreeFragment extends Fragment{
 	private void deleteFavoritesAction() {
 		if (groupsToDelete.size() + favoritesToDelete.size() > 0) {
 
-			Builder b = new AlertDialog.Builder(FavouritesActivity.this);
+			Builder b = new AlertDialog.Builder(getActivity());
 			b.setMessage(getString(R.string.favorite_delete_multiple, favoritesToDelete.size(), groupsToDelete.size()));
 			b.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener() {
 				@Override
@@ -372,7 +361,7 @@ public class FavouritesTreeFragment extends Fragment{
 	private void importFile() {
 		final File tosave = getMyApplication().getAppPath(FavouritesDbHelper.FILE_TO_SAVE);
 		if (!tosave.exists()) {
-			AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), tosave.getAbsolutePath()),
+			AccessibleToast.makeText(getActivity(), MessageFormat.format(getString(R.string.fav_file_to_load_not_found), tosave.getAbsolutePath()),
 					Toast.LENGTH_LONG).show();
 		} else {
 			new AsyncTask<Void, FavouritePoint, String>() {
@@ -427,9 +416,9 @@ public class FavouritesTreeFragment extends Fragment{
 				protected void onPostExecute(String warning) {
 					hideProgressBar();
 					if (warning == null) {
-						AccessibleToast.makeText(FavouritesActivity.this, R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT).show();
+						AccessibleToast.makeText(getActivity(), R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT).show();
 					} else {
-						AccessibleToast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(getActivity(), warning, Toast.LENGTH_LONG).show();
 					}
 					favouritesAdapter.synchronizeGroups();
 					favouritesAdapter.sort(favoritesComparator);
@@ -441,7 +430,7 @@ public class FavouritesTreeFragment extends Fragment{
 
 	private void shareFavourites() {
 		if (favouritesAdapter.isEmpty()) {
-			AccessibleToast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(getActivity(), R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
 		} else {
 			final AsyncTask<Void, Void, GPXFile> exportTask = new AsyncTask<Void, Void, GPXFile>() {
 				@Override
@@ -473,9 +462,9 @@ public class FavouritesTreeFragment extends Fragment{
 	private void export() {
 		final File tosave = getMyApplication().getAppPath(FavouritesDbHelper.FILE_TO_SAVE);
 		if (favouritesAdapter.isEmpty()) {
-			AccessibleToast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(getActivity(), R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
 		} else if (!tosave.getParentFile().exists()) {
-			AccessibleToast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
+			AccessibleToast.makeText(getActivity(), R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
 		} else {
 			final AsyncTask<Void, Void, String> exportTask = new AsyncTask<Void, Void, String>() {
 				@Override
@@ -492,17 +481,17 @@ public class FavouritesTreeFragment extends Fragment{
 				protected void onPostExecute(String warning) {
 					hideProgressBar();
 					if (warning == null) {
-						AccessibleToast.makeText(FavouritesActivity.this,
+						AccessibleToast.makeText(getActivity(),
 								MessageFormat.format(getString(R.string.fav_saved_sucessfully), tosave.getAbsolutePath()),
 								Toast.LENGTH_LONG).show();
 					} else {
-						AccessibleToast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
+						AccessibleToast.makeText(getActivity(), warning, Toast.LENGTH_LONG).show();
 					}
 				};
 			};
 
 			if (tosave.exists()) {
-				Builder bld = new AlertDialog.Builder(this);
+				Builder bld = new AlertDialog.Builder(getActivity());
 				bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -613,7 +602,7 @@ public class FavouritesTreeFragment extends Fragment{
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
-				LayoutInflater inflater = getLayoutInflater();
+				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.expandable_list_item_category, parent, false);
 				fixBackgroundRepeat(row);
 			}
@@ -652,7 +641,7 @@ public class FavouritesTreeFragment extends Fragment{
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
-				LayoutInflater inflater = getLayoutInflater();
+				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.favourites_list_item, parent, false);
 			}
 

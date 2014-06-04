@@ -2,31 +2,69 @@ package net.osmand.plus.activities;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import android.app.ActionBar;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 
-import com.actionbarsherlock.app.SherlockExpandableListActivity;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
-public abstract class OsmandExpandableListFragment extends SherlockFragment {
+public abstract class OsmandExpandableListFragment extends SherlockFragment implements OnChildClickListener {
 	
 	
+	private ExpandableListView listView;
+	private ExpandableListAdapter adapter;
+
+
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication)getActivity().getApplication();
 	}
 	
-	public 
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
-		com.android.internal.R.layout.list_content
-		listView = new ExpandableListView(getActivity());
+		View v = createView(inflater, container);
+		listView = (ExpandableListView) v.findViewById(android.R.id.list);
+		listView.setOnChildClickListener(this);
+		if(this.adapter != null) {
+			listView.setAdapter(this.adapter);
+		}
+		return v;
+	}
+
+	public View createView(android.view.LayoutInflater inflater, android.view.ViewGroup container) {
+		return inflater.inflate(R.layout.expandable_list, container, false);
+	}
+	
+	public void setAdapter(ExpandableListAdapter a) {
+		this.adapter = a;
+		if(listView != null) {
+			listView.setAdapter(a);
+		}
+		
+	}
+	
+	public void fixBackgroundRepeat(View view) {
+		Drawable bg = view.getBackground();
+		if (bg != null) {
+			if (bg instanceof BitmapDrawable) {
+				BitmapDrawable bmp = (BitmapDrawable) bg;
+				// bmp.mutate(); // make sure that we aren't sharing state anymore
+				bmp.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);
+			}
+		}
+	}
+	
+	public ExpandableListView getListView() {
+		return listView;
+	}
+	
+	public ExpandableListView getExpandableListView() {
 		return listView;
 	}
 
@@ -47,6 +85,6 @@ public abstract class OsmandExpandableListFragment extends SherlockFragment {
 	
 	
 	public boolean isLightActionBar() {
-		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
+		return ((OsmandApplication) getActivity().getApplication()).getSettings().isLightActionBar();
 	}
 }

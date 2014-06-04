@@ -1679,6 +1679,9 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> SEARCH_TAB = 
 			new IntPreference("SEARCH_TAB", 0).makeGlobal().cache();
 	
+	public final CommonPreference<Integer> FAVORITES_TAB = 
+			new IntPreference("FAVORITES_TAB", 0).makeGlobal().cache();
+	
 	public final CommonPreference<Integer> OSMAND_THEME = 
 			new IntPreference("osmand_theme", OSMAND_DARK_THEME).makeGlobal().cache();
 	

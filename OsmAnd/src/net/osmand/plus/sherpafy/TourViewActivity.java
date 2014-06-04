@@ -1,23 +1,19 @@
 package net.osmand.plus.sherpafy;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import net.osmand.IProgress;
-import net.osmand.access.AccessibleToast;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
-import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -31,13 +27,13 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import android.widget.LinearLayout.LayoutParams;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
