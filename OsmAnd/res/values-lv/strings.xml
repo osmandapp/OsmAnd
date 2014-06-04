@@ -1736,4 +1736,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_user_left">Lietotājs %1$s pameta %2$s grupu</string>
     <string name="osmo_show_group_notifications">Rādīt grupas ziņojumus</string>
     <string name="osmo_show_group_notifications_descr">Rādīt ziņojumos, kad lietotāji pievienojas vai pamet grupu</string>
+    <string name="selected_track">Treks</string>
+    <string name="my_tracks">Visi treki</string>
+    <string name="my_favorites">Mana izlase</string>
+    <string name="my_data_Button">Mani dati</string>
+    <string name="my_data_activity">Mani dati</string>
     </resources>
