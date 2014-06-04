@@ -70,7 +70,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	// layout pseudo-constants
 	private int STATUS_BAR_MARGIN_X = -4;
 	
-	private ImageView backToLocation;
 	private TopTextView topText;
 	private View progressBar;
 	
@@ -209,8 +208,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, 12);
 		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen, R.string.bg_service_screen_lock, "bgService", 
 				MapWidgetRegistry.LEFT_CONTROL,  15);
-		backToLocation = mic.createBackToLocation(map);
-		mapInfoControls.registerTopWidget(backToLocation, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
+		mapInfoControls.registerTopWidget(createBackToLocation(mic), R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, 5);
 		
 		View globus = createLayer();
 		mapInfoControls.registerTopWidget(globus, R.drawable.widget_layer, R.string.menu_layers, "layers", MapWidgetRegistry.RIGHT_CONTROL, 15);
@@ -249,7 +247,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		Rect topRectPadding = new Rect();
 		view.getResources().getDrawable(R.drawable.box_top).getPadding(topRectPadding);
 		// for measurement
-		statusBar.addView(backToLocation);		
+		//statusBar.addView(backToLocation);
 		STATUS_BAR_MARGIN_X = (int) (STATUS_BAR_MARGIN_X * scaleCoefficient);
 		statusBar.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 		Rect statusBarPadding = new Rect();
@@ -610,9 +608,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		configuration.setBackgroundDrawable(config);
 		FrameLayout fl = new ConfigLayout(view.getContext(), configuration) ;
 		fl.addView(configuration, fparams);
-		fparams = new FrameLayout.LayoutParams(config.getMinimumWidth(), config.getMinimumHeight());
-		progressBar = new View(view.getContext());
-		fl.addView(progressBar, fparams);
+		//fparams = new FrameLayout.LayoutParams(config.getMinimumWidth(), config.getMinimumHeight());
+		//fl.addView(progressBar, fparams);
 		fl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -679,5 +676,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 			System.err.println(e.getMessage());
 		}
 		return defValue;
+	}
+
+	private View createBackToLocation(MapInfoWidgetsFactory mic){
+		progressBar = new View(view.getContext());
+		View backToLocation = mic.createBackToLocation(map);
+		//backToLock needed to set needed size of controls
+		Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc);
+		FrameLayout layout = new FrameLayout(map.getMapView().getContext());
+		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(backToLoc.getMinimumWidth(), backToLoc.getMinimumHeight());
+		layout.addView(backToLocation,fparams);
+		layout.addView(progressBar,fparams);
+		return layout;
 	}
 }

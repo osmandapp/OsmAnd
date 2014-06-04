@@ -130,7 +130,7 @@ public class MapInfoWidgetsFactory {
 				return true;
 			}
 		};
-		backToLocation.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
+		//backToLocation.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
 		backToLocation.setImageDrawable(map.getResources().getDrawable(R.drawable.back_to_loc));
 		backToLocation.setOnClickListener(new View.OnClickListener() {
 			@Override
