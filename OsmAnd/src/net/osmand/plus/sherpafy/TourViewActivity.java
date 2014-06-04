@@ -447,7 +447,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				try {
 					dlg.dismiss();
 				} catch (Exception ex){
-
+					ex.printStackTrace();
 				}
 				startTourView();
 			};
