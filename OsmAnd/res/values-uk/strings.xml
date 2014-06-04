@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
@@ -1615,5 +1615,11 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="hours_ago">годин тому</string>
     <string name="minutes_ago">хвилин тому</string>
     <string name="seconds_ago">секунд тому</string>
-    <string name="osmo_connected_devices">Під\'єднані пристрої</string>
+    <string name="osmo_connected_devices">Під’єднані пристрої</string>
+    <string name="osmo_groups">OsMo Групи/Пристрої</string>
+    <string name="osmo_auto_send_locations_descr">Автоматично запускати сесію трекера та надсилати місцезнаходження після запуску застосунку</string>
+    <string name="osmo_auto_send_locations">Автоматично запускати моніторинг</string>
+    <string name="osmo_tracker_id">Персональний ID трекера</string>
+    <string name="osmo_tracker_id_descr">Натисніть щоб подивитись або подітись ID трекера
+	Використовуючи ID трекера можна відстежувати пересування цього пристрою! Для відключення скористайтесь опцією Перестворити.</string>
     </resources>
