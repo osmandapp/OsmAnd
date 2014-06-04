@@ -546,6 +546,10 @@ public class RouteInfoWidgetsFactory {
 				setWDimensions(ls, (int)( w + 3 * scaleCoefficient));
 			}
 
+			private boolean keepAndSlightTurnSubstitution(int lane) {
+				return (turn.getValue().equals(TurnType.KR) && turn.getPrimaryTurn(lane).getValue().equals(TurnType.TSLR)) || (turn.getValue().equals(TurnType.KL) && turn.getPrimaryTurn(lane).getValue().equals(TurnType.TSLL));
+			}
+
 			@Override
 			protected void onDraw(Canvas canvas) {
 				super.onDraw(canvas);
@@ -559,92 +563,69 @@ public class RouteInfoWidgetsFactory {
 					int active = imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow);
 					paintRouteDirection.setColor(inactive);
 					for (int i = 0; i < lanes.length; i++) {
-						if (turn.isTurnAllowed(i, TurnType.Turn.STRAIGHT)) {
-							Path straight = new Path();
-							TurnPathHelper.calcTurnPath(straight, TurnType.valueOf(TurnType.C, leftSide), pathTransform);
-							if (turn.getValue().equals(TurnType.C)) {
+						if (true) {
+							boolean orderSwitched = false;
+
+							Path path = new Path();
+							String turnSymbol;
+							if ((turn.getValue().equals(turn.getPrimaryTurn(i).getValue()) || keepAndSlightTurnSubstitution(i)) && turn.getSecondaryTurn(i) != TurnType.Turn.UNKNOWN) {
+								orderSwitched = true;
+								turnSymbol = turn.getSecondaryTurn(i).getValue();
+							} else {
+								turnSymbol = turn.getPrimaryTurn(i).getValue();
+							}
+							TurnPathHelper.calcTurnPath(path, TurnType.valueOf(turnSymbol, leftSide), pathTransform);
+							if (turn.getValue().equals(turnSymbol) || orderSwitched) {
 								paintRouteDirection.setColor(active);
 							}
-							canvas.drawPath(straight, paintBlack);
-							canvas.drawPath(straight, paintRouteDirection);
+
+							if (turnSymbol.equals(TurnType.TSLR) || turnSymbol.equals(TurnType.TSHR)) {
+								canvas.translate((int) (0.2 * w), 0);
+							} else if (turnSymbol.equals(TurnType.TSLL) || turnSymbol.equals(TurnType.TSHL)) {
+								canvas.translate((int) (-0.2 * w), 0);
+							}
+							canvas.drawPath(path, paintBlack);
+							canvas.drawPath(path, paintRouteDirection);
+							if (turnSymbol.equals(TurnType.TSLR) || turnSymbol.equals(TurnType.TSHR)) {
+								canvas.translate((int) (-0.2 * w), 0);
+							} else if (turnSymbol.equals(TurnType.TSLL) || turnSymbol.equals(TurnType.TSHL)) {
+								canvas.translate((int) (0.2 * w), 0);
+							}
+
 							paintRouteDirection.setColor(inactive);
-						}
-						if (turn.isTurnAllowed(i, TurnType.Turn.SLIGHT_RIGHT)) {
-							Path slightRight = new Path();
-							TurnPathHelper.calcTurnPath(slightRight, TurnType.valueOf(TurnType.TSLR, leftSide), pathTransform);
-							if (turn.getValue().equals(TurnType.TSLR) || turn.getValue().equals(TurnType.KR)) {
+
+							if (turn.getSecondaryTurn(i) != TurnType.Turn.UNKNOWN) {
+								Path path2 = new Path();
+								String turnSymbol2;
+								if (orderSwitched) {
+									turnSymbol2 = turn.getPrimaryTurn(i).getValue();
+								} else {
+									turnSymbol2 = turn.getSecondaryTurn(i).getValue();
+								}
+								TurnPathHelper.calcTurnPath(path2, TurnType.valueOf(turnSymbol2, leftSide), pathTransform);
+
+								if (turnSymbol2.equals(TurnType.TSLR) || turnSymbol2.equals(TurnType.TSHR)) {
+									canvas.translate((int) (0.2 * w), 0);
+								} else if (turnSymbol2.equals(TurnType.TSLL) || turnSymbol2.equals(TurnType.TSHL)) {
+									canvas.translate((int) (-0.2 * w), 0);
+								}
+								canvas.drawPath(path2, paintBlack);
+								canvas.drawPath(path2, paintRouteDirection);
+								if (turnSymbol2.equals(TurnType.TSLR) || turnSymbol2.equals(TurnType.TSHR)) {
+									canvas.translate((int) (-0.2 * w), 0);
+								} else if (turnSymbol2.equals(TurnType.TSLL) || turnSymbol2.equals(TurnType.TSHL)) {
+									canvas.translate((int) (0.2 * w), 0);
+								}
+
+							}
+						} else {
+							Path path = new Path();
+							TurnPathHelper.calcTurnPath(path, TurnType.valueOf(TurnType.C, leftSide), pathTransform);
+							if ((turn.getLanes()[i] & 1) == 1) {
 								paintRouteDirection.setColor(active);
 							}
-							canvas.translate((int) (0.2 * w), 0);
-							canvas.drawPath(slightRight, paintBlack);
-							canvas.drawPath(slightRight, paintRouteDirection);
-							canvas.translate((int) (-0.2 * w), 0);
-							paintRouteDirection.setColor(inactive);
-						}
-						if (turn.isTurnAllowed(i, TurnType.Turn.SLIGHT_LEFT)) {
-							Path slightLeft = new Path();
-							TurnPathHelper.calcTurnPath(slightLeft, TurnType.valueOf(TurnType.TSLL, leftSide), pathTransform);
-							if (turn.getValue().equals(TurnType.TSLL) || turn.getValue().equals(TurnType.KL)) {
-								paintRouteDirection.setColor(active);
-							}
-							canvas.translate((int) (-0.2 * w), 0);
-							canvas.drawPath(slightLeft, paintBlack);
-							canvas.drawPath(slightLeft, paintRouteDirection);
-							canvas.translate((int) (0.2 * w), 0);
-							paintRouteDirection.setColor(inactive);
-						}
-						if (turn.isTurnAllowed(i, TurnType.Turn.RIGHT)) {
-							Path right = new Path();
-							TurnPathHelper.calcTurnPath(right, TurnType.valueOf(TurnType.TR, leftSide), pathTransform);
-							if (turn.getValue().equals(TurnType.TR)) {
-								paintRouteDirection.setColor(active);
-							}
-							canvas.drawPath(right, paintBlack);
-							canvas.drawPath(right, paintRouteDirection);
-							paintRouteDirection.setColor(inactive);
-						}
-						if (turn.isTurnAllowed(i, TurnType.Turn.LEFT)) {
-							Path left = new Path();
-							TurnPathHelper.calcTurnPath(left, TurnType.valueOf(TurnType.TL, leftSide), pathTransform);
-							if (turn.getValue().equals(TurnType.TL)) {
-								paintRouteDirection.setColor(active);
-							}
-							canvas.drawPath(left, paintBlack);
-							canvas.drawPath(left, paintRouteDirection);
-							paintRouteDirection.setColor(inactive);
-						}
-						if (turn.isTurnAllowed(i, TurnType.Turn.SHARP_RIGHT)) {
-							Path sharpRight = new Path();
-							TurnPathHelper.calcTurnPath(sharpRight, TurnType.valueOf(TurnType.TSHR, leftSide), pathTransform);
-							if (turn.getValue().equals(TurnType.TSHR)) {
-								paintRouteDirection.setColor(active);
-							}
-							canvas.translate((int) (0.2 * w), 0);
-							canvas.drawPath(sharpRight, paintBlack);
-							canvas.drawPath(sharpRight, paintRouteDirection);
-							canvas.translate((int) (-0.2 * w), 0);
-							paintRouteDirection.setColor(inactive);
-						}
-						if (turn.isTurnAllowed(i, TurnType.Turn.SHARP_LEFT)) {
-							Path sharpLeft = new Path();
-							TurnPathHelper.calcTurnPath(sharpLeft, TurnType.valueOf(TurnType.TSHL, leftSide), pathTransform);
-							if (turn.getValue().equals(TurnType.TSHL)) {
-								paintRouteDirection.setColor(active);
-							}
-							canvas.translate((int) (-0.2 * w), 0);
-							canvas.drawPath(sharpLeft, paintBlack);
-							canvas.drawPath(sharpLeft, paintRouteDirection);
-							canvas.translate((int) (0.2 * w), 0);
-							paintRouteDirection.setColor(inactive);
-						}
-						if (turn.isTurnAllowed(i, TurnType.Turn.UTURN)) {
-							Path uturn = new Path();
-							TurnPathHelper.calcTurnPath(uturn, TurnType.valueOf(TurnType.TU, leftSide), pathTransform);
-							if (turn.getValue().equals(TurnType.TU)) {
-								paintRouteDirection.setColor(active);
-							}
-							canvas.drawPath(uturn, paintBlack);
-							canvas.drawPath(uturn, paintRouteDirection);
+							canvas.drawPath(path, paintBlack);
+							canvas.drawPath(path, paintRouteDirection);
 							paintRouteDirection.setColor(inactive);
 						}
 
