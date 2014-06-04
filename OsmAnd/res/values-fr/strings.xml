@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -1695,4 +1695,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="my_favorites">Mes favoris</string>
     <string name="my_data_Button">Mes données</string>
     <string name="my_data_activity">Mes données</string>
+    <string name="osmo_user_joined">L'utilisateur %1$s a rejoint le groupe %2$s</string>
+    <string name="osmo_user_left">L'utilisateur %1$s a quitté le groupe %2$s</string>
+    <string name="osmo_show_group_notifications">Montrer les notifications de groupe</string>
+    <string name="osmo_show_group_notifications_descr">Afficher des messages quand un utilisateur rejoint ou quitte le groupe</string>
     </resources>
