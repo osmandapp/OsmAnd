@@ -432,12 +432,23 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 			@Override
 			protected Void doInBackground(TourInformation... params) {
+				//if tour is already selected - do nothing
+				if (customization.getSelectedTour()!= null){
+					if (customization.getSelectedTour().equals(params[0])){
+						return null;
+					}
+				}
 				customization.selectTour(params[0], IProgress.EMPTY_PROGRESS);
 				return null;
 			}
 
 			protected void onPostExecute(Void result) {
-				dlg.dismiss();
+				//to avoid illegal argument exception when rotating phone during loading
+				try {
+					dlg.dismiss();
+				} catch (Exception ex){
+
+				}
 				startTourView();
 			};
 		}.execute(tour);
