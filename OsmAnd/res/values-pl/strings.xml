@@ -1369,7 +1369,7 @@
 	<string name="driving_region_us">Stany Zjednoczone</string>
 	<string name="driving_region_europe_asia">Europa i Azja</string>
 	<string name="driving_region_uk">Wielka Brytania, Indie, Australia i inne</string>
-	<string name="driving_region_descr">Wybierz region, w którym będziesz się poruszał: Stany Zjednoczone, Europa, Wielka Brytania, Azja i inne</string>
+	<string name="driving_region_descr">Wybierz region, w którym będziesz się poruszał: Stany Zjednoczone, Europa, Wielka Brytania, Azja oraz Inne</string>
 	<string name="driving_region">Region poruszania się</string>
 	<string name="driving_region_canada">Kanada</string>
 	<string name="map_widget_fps_info">Informacje debugowania FPS</string>
@@ -1705,7 +1705,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="localization_pref_title">Lokalizacja</string>
     <string name="share_route_as_gpx">Udostępnij trasę jako plik GPX</string>
 	<string name="share_route_subject">Trasa udostępniona przez OsmAnd</string>
-	<string name="navigation_intent_invalid">Nieprawidłowy format : %s</string>
+	<string name="navigation_intent_invalid">Nieprawidłowy format: %s</string>
 <string name="osmo_settings_uuid">Unikatowy identyfikator urządzenia</string>
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Zaawansowany Monitoring na Żywo. Daje możliwość śledzenia innych urządzeń i vice versa.
@@ -1809,7 +1809,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_user_joined">Użytkownik %1$s dołączył do grupy %2$s</string>
     <string name="osmo_user_left">Użytkownik %1$s opuścił grupę %2$s</string>
     <string name="osmo_show_group_notifications">Pokazuj powiadomienia grup</string>
-    <string name="osmo_show_group_notifications_descr">Pokazuj (?) wiadomości, gdy użytkownik dołącza do lub opuszcza grupę</string>
+    <string name="osmo_show_group_notifications_descr">Pokazuj powiadomienia, gdy użytkownik dołącza do grupy lub opuszcza grupę</string>
     <string name="gpx_file_is_empty">Plik GPX jest pusty</string>
     <string name="selected_track">Trasa</string>
     <string name="my_tracks">Wszystkie trasy</string>
