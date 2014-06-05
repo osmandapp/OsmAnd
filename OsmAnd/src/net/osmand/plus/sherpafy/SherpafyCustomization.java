@@ -234,9 +234,9 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 		selectedTour = null;
 		selectedStage = null;
 		//to avoid null reference ecxeption if there's no selected tour yet.
-		//if (selectedStagePref != null) {
+		if (selectedStagePref != null) {
 			selectedStagePref.set(null);
-		//}
+		}
 			app.getResourceManager().reloadIndexes(progress);
 	}
 
