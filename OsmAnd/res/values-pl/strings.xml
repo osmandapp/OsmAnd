@@ -1810,4 +1810,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_user_left">Użytkownik %1$s opuścił grupę %2$s</string>
     <string name="osmo_show_group_notifications">Pokazuj powiadomienia grup</string>
     <string name="osmo_show_group_notifications_descr">Pokazuj (?) wiadomości, gdy użytkownik dołącza do lub opuszcza grupę</string>
+    <string name="gpx_file_is_empty">Plik GPX jest pusty</string>
+    <string name="selected_track">Trasa</string>
+    <string name="my_tracks">Wszystkie trasy</string>
+    <string name="my_favorites">Moje Ulubione</string>
+    <string name="my_data_Button">Moje dane</string>
+    <string name="my_data_activity">Moje dane</string>
     </resources>
