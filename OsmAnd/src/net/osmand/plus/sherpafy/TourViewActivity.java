@@ -1,7 +1,11 @@
 package net.osmand.plus.sherpafy;
 
+import java.io.File;
 import java.util.List;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.text.Html;
 import net.osmand.IProgress;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -57,7 +61,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	TextView fullDescription;
 	RadioGroup stages;
 	private ToggleButton collapser;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -135,16 +138,27 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		if (customization.getSelectedStage() == null) {
 			if (customization.getSelectedTour() != null) {
 				TourInformation curTour = customization.getSelectedTour();
-				fullDescription.setText(curTour.getFulldescription());
-				description.setText((curTour.getShortDescription()));
+				fullDescription.setText(Html.fromHtml(curTour.getFulldescription()));
+				description.setText(Html.fromHtml(curTour.getShortDescription()));
 				// ((TextView)findViewById(R.id.tour_name)).setText(getString(R.string.overview));
 				setCollapserText(getString(R.string.overview));
 				prepareBitmap(curTour.getImageBitmap());
 			}
 		} else {
 			StageInformation st = customization.getSelectedStage();
-			description.setText(st.getDescription());
-			fullDescription.setText(st.getFullDescription());
+			description.setText(Html.fromHtml(st.getDescription(), new Html.ImageGetter() {
+				@Override
+				public Drawable getDrawable(String s) {
+
+					Bitmap file = customization.getSelectedTour().getImageBitmapFromPath(s);
+					Drawable bmp = new BitmapDrawable(getResources(),file);
+					bmp.setBounds(0,0, bmp.getIntrinsicHeight(), bmp.getIntrinsicHeight());
+					return bmp;
+				}
+
+			}, null));
+
+			fullDescription.setText(Html.fromHtml(st.getFullDescription()));
 			// ((TextView)findViewById(R.id.tour_name)).setText(st.getName());
 			setCollapserText(st.getName());
 			prepareBitmap(st.getImageBitmap());
@@ -257,7 +271,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		} else {
 			stages.check(0);
 		}
-		// updateTourContentView();
 	}
 	
 	private void goToMap() {
@@ -447,7 +460,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				try {
 					dlg.dismiss();
 				} catch (Exception ex){
-
+					ex.printStackTrace();
 				}
 				startTourView();
 			};

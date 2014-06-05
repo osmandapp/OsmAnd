@@ -17,6 +17,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import org.xmlpull.v1.XmlPullParserException;
 
 public class TourInformation {
 	final String FILE_PREFIX = "@file:";
@@ -68,6 +69,10 @@ public class TourInformation {
 					String name = getDefAttribute(parser, "name", "");
 					stage = new StageInformation();
 					stage.name = name;
+				} else if (tag.equals("fullDescription")){
+					fulldescription = getInnerXml(parser);
+				} else if (stage != null && tag.equals("description")){
+					stage.description = getInnerXml(parser);
 				}
 			} else if (tok == XmlPullParser.TEXT) {
 				text = parser.getText();
@@ -76,8 +81,6 @@ public class TourInformation {
 				if(tag.equals("stage")) {
 					stageInformation.add(stage);
 					stage = null;
-				} else if(stage != null && tag.equals("description")) {
-					stage.description = text;
 				} else if(stage != null && tag.equals("fullDescription")) {
 					stage.fullDescription = text;
 				} else if(stage != null && tag.equals("image")) {
@@ -145,6 +148,15 @@ public class TourInformation {
 		}
 		return defaultImg;
 	}
+
+	//returns image bitmap from selected relative path
+	public Bitmap getImageBitmapFromPath(String path){
+		File imgFile = getFile(path);
+		if (imgFile != null){
+			return BitmapFactory.decodeFile(imgFile.getAbsolutePath())
+;		}
+		return null;
+	}
 	
 	public static class StageInformation {
 		
@@ -184,6 +196,37 @@ public class TourInformation {
 			return img;
 		}
 		
+	}
+
+	//Returns full string from which contains XML tags from XMLParser
+	public static String getInnerXml(XmlPullParser parser)
+			throws XmlPullParserException, IOException {
+		StringBuilder sb = new StringBuilder();
+		int depth = 1;
+		while (depth != 0) {
+			switch (parser.next()) {
+				case XmlPullParser.END_TAG:
+					depth--;
+					if (depth > 0) {
+						sb.append("</" + parser.getName() + ">");
+					}
+					break;
+				case XmlPullParser.START_TAG:
+					depth++;
+					StringBuilder attrs = new StringBuilder();
+					for (int i = 0; i < parser.getAttributeCount(); i++) {
+						attrs.append(parser.getAttributeName(i) + "=\""
+								+ parser.getAttributeValue(i) + "\" ");
+					}
+					sb.append("<" + parser.getName() + " " + attrs.toString() + ">");
+					break;
+				default:
+					sb.append(parser.getText());
+					break;
+			}
+		}
+		String content = sb.toString();
+		return content;
 	}
 
 }
