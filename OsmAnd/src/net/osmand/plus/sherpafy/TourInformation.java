@@ -71,6 +71,8 @@ public class TourInformation {
 					stage.name = name;
 				} else if (tag.equals("fullDescription")){
 					fulldescription = getInnerXml(parser);
+				} else if (stage != null && tag.equals("description")){
+					stage.description = getInnerXml(parser);
 				}
 			} else if (tok == XmlPullParser.TEXT) {
 				text = parser.getText();
@@ -79,8 +81,6 @@ public class TourInformation {
 				if(tag.equals("stage")) {
 					stageInformation.add(stage);
 					stage = null;
-				} else if(stage != null && tag.equals("description")) {
-					stage.description = text;
 				} else if(stage != null && tag.equals("fullDescription")) {
 					stage.fullDescription = text;
 				} else if(stage != null && tag.equals("image")) {
@@ -148,6 +148,15 @@ public class TourInformation {
 		}
 		return defaultImg;
 	}
+
+	//returns image bitmap from selected relative path
+	public Bitmap getImageBitmapFromPath(String path){
+		File imgFile = getFile(path);
+		if (imgFile != null){
+			return BitmapFactory.decodeFile(imgFile.getAbsolutePath())
+;		}
+		return null;
+	}
 	
 	public static class StageInformation {
 		
@@ -189,6 +198,7 @@ public class TourInformation {
 		
 	}
 
+	//Returns full string from which contains XML tags from XMLParser
 	public static String getInnerXml(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		StringBuilder sb = new StringBuilder();
