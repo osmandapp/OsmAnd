@@ -1741,4 +1741,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="my_favorites">Mana izlase</string>
     <string name="my_data_Button">Mani dati</string>
     <string name="my_data_activity">Mani dati</string>
+    <string name="gpx_file_is_empty">Gpx treks ir tukšs</string>
     </resources>
