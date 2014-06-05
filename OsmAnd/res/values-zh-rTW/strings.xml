@@ -1844,4 +1844,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="my_data_activity">我的資料</string>
     <string name="selected_track">追蹤</string>
     <string name="my_tracks">全部追蹤</string>
+    <string name="gpx_file_is_empty">GPX 軌跡是空的</string>
     </resources>
