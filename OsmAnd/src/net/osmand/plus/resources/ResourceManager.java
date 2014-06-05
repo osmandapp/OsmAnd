@@ -415,9 +415,13 @@ public class ResourceManager {
 		warnings.addAll(indexingMaps(progress));
 		warnings.addAll(indexVoiceFiles(progress));
 		warnings.addAll(OsmandPlugin.onIndexingFiles(progress));
-		warnings.addAll(context.getAppCustomization().onIndexingFiles(progress, indexFileNames));
+		warnings.addAll(indexAdditionalMaps(progress));
 		
 		return warnings;
+	}
+
+	public List<String> indexAdditionalMaps(IProgress progress) {
+		return context.getAppCustomization().onIndexingFiles(progress, indexFileNames);
 	}
 
 	private void indexRegionsBoundaries(IProgress progress, boolean overwrite) {

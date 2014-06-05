@@ -281,11 +281,16 @@ public class DownloadIndexesThread {
 			}
 			// reindex vector maps all at one time
 			ResourceManager manager = app.getResourceManager();
-			manager.indexVoiceFiles(this);
 			List<String> warnings = new ArrayList<String>();
+			manager.indexVoiceFiles(this);
 			if (vectorMapsToReindex) {
 				warnings = manager.indexingMaps(this);
 			}
+			List<String> wns = manager.indexAdditionalMaps(this);
+			if(wns != null) {
+				warnings.addAll(wns);
+			}
+			
 			if (!warnings.isEmpty()) {
 				return warnings.get(0);
 			}
