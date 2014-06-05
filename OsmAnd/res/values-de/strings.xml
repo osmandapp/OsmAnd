@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
@@ -1341,7 +1341,7 @@
 	<string name="cancel_route">Route verwerfen</string>
 	<string name="use_kalman_filter_compass_descr">Kalman-Filter verwenden, um Kompass-Ungenauigkeiten auszublenden</string>
 	<string name="use_kalman_filter_compass">Kalman-Filter verwenden</string>
-	<string name="access_mark_final_location_first">Eingabehilfen-Modus : Bitte zuerst Ziel auswählen</string> 
+	<string name="access_mark_final_location_first">Eingabehilfen-Modus: Bitte zuerst Ziel auswählen</string> 
 	<string name="use_magnetic_sensor_descr">Magnetsensor statt Lagesensor zur Kompassermittlung verwenden</string>
 	<string name="use_magnetic_sensor">Magnetsensor verwenden</string>
 	<string name="local_indexes_cat_srtm">Höhenlinien-Daten</string>
@@ -1826,4 +1826,15 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="color_green">grün</string>
 	
     <string name="osmo_follow">Folgen</string>
+    <string name="gpx_file_is_empty">GPX-Track ist leer</string>
+    <string name="selected_track">Track</string>
+    <string name="my_tracks">Alle Tracks</string>
+    <string name="my_favorites">Meine Favoriten</string>
+    <string name="my_data_Button">Meine Daten</string>
+    <string name="my_data_activity">Meine Daten</string>
+    <string name="osmo_user_joined">Nutzer %1$s hat die Gruppe %2$s betreten</string>
+    <string name="osmo_user_left">Nutzer %1$s hat die Gruppe %2$s verlassen</string>
+    <string name="osmo_show_group_notifications">Gruppenbenachrichtigungen anzeigen</string>
+    <string name="osmo_show_group_notifications_descr">Zeige Pop-up-Meldung, wenn eine Nutzer der Gruppe beitritt oder sie verlässt</string>
+    <string name="osmo_tracker_id_share">Um eine Verbindung zum Gerät %2$s herzustellen, bitte den Link %3$s anklicken oder die Tracker-ID (%1$s) angeben</string>
     </resources>
