@@ -17,6 +17,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import org.xmlpull.v1.XmlPullParserException;
 
 public class TourInformation {
 	final String FILE_PREFIX = "@file:";
@@ -68,6 +69,8 @@ public class TourInformation {
 					String name = getDefAttribute(parser, "name", "");
 					stage = new StageInformation();
 					stage.name = name;
+				} else if (tag.equals("fullDescription")){
+					fulldescription = getInnerXml(parser);
 				}
 			} else if (tok == XmlPullParser.TEXT) {
 				text = parser.getText();
@@ -184,6 +187,36 @@ public class TourInformation {
 			return img;
 		}
 		
+	}
+
+	public static String getInnerXml(XmlPullParser parser)
+			throws XmlPullParserException, IOException {
+		StringBuilder sb = new StringBuilder();
+		int depth = 1;
+		while (depth != 0) {
+			switch (parser.next()) {
+				case XmlPullParser.END_TAG:
+					depth--;
+					if (depth > 0) {
+						sb.append("</" + parser.getName() + ">");
+					}
+					break;
+				case XmlPullParser.START_TAG:
+					depth++;
+					StringBuilder attrs = new StringBuilder();
+					for (int i = 0; i < parser.getAttributeCount(); i++) {
+						attrs.append(parser.getAttributeName(i) + "=\""
+								+ parser.getAttributeValue(i) + "\" ");
+					}
+					sb.append("<" + parser.getName() + " " + attrs.toString() + ">");
+					break;
+				default:
+					sb.append(parser.getText());
+					break;
+			}
+		}
+		String content = sb.toString();
+		return content;
 	}
 
 }

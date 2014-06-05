@@ -2,6 +2,7 @@ package net.osmand.plus.sherpafy;
 
 import java.util.List;
 
+import android.text.Html;
 import net.osmand.IProgress;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -135,7 +136,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		if (customization.getSelectedStage() == null) {
 			if (customization.getSelectedTour() != null) {
 				TourInformation curTour = customization.getSelectedTour();
-				fullDescription.setText(curTour.getFulldescription());
+				fullDescription.setText(Html.fromHtml(curTour.getFulldescription()));
 				description.setText((curTour.getShortDescription()));
 				// ((TextView)findViewById(R.id.tour_name)).setText(getString(R.string.overview));
 				setCollapserText(getString(R.string.overview));
@@ -144,7 +145,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		} else {
 			StageInformation st = customization.getSelectedStage();
 			description.setText(st.getDescription());
-			fullDescription.setText(st.getFullDescription());
+			fullDescription.setText(Html.fromHtml(st.getFullDescription()));
 			// ((TextView)findViewById(R.id.tour_name)).setText(st.getName());
 			setCollapserText(st.getName());
 			prepareBitmap(st.getImageBitmap());
