@@ -1552,4 +1552,5 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="my_favorites">Mina favoriter</string>
     <string name="my_data_Button">Mina data</string>
     <string name="my_data_activity">Mina data</string>
+    <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
     </resources>
