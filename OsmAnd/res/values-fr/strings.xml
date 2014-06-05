@@ -976,7 +976,7 @@
   <string name="map_widget_next_turn_small">Prochaine bifurcation (petit)</string>
   <string name="map_widget_next_next_turn">Deuxième prochaine bifurcation</string>
   <string name="map_widget_mini_route">Mini-carte de l\'itinéraire</string>
-  <string name="bg_service_screen_lock">Verrouillage/déverrouillage de l\'écran</string>
+  <string name="bg_service_screen_lock">Verrouillage de l\'écran</string>
   <string name="bg_service_screen_unlock">Déverrouiller écran</string>
   <string name="bg_service_sleep_mode_off">Activer\nmode veille</string>
   <string name="bg_service_sleep_mode_on">Désactiver\nmode veille</string>
@@ -1572,7 +1572,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="lang_uk">Ukrainien</string>
 <string name="lang_vi">Vietnamien</string>
 <string name="lang_cy">Gallois</string>
-<string name="always_center_position_on_map">Toujours centrer la carte sur la position</string>
+<string name="always_center_position_on_map">Position courante placée au centre de l\'écran</string>
 <string name="voice_pref_title">Voix</string>
 <string name="misc_pref_title">Divers</string>
 <string name="localization_pref_title">Localisation</string>
@@ -1610,6 +1610,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
 <string name="arrival_distance_descr">Choisir à quel moment est annoncée l\'arrivée à destination</string>
+<string-array name="arrival_distance_factors">
+<item>Précoce</item>
+<item>Normale</item>
+<item>Tardive</item>
+<item>Dans les derniers mètres</item>
+</string-array>
 <string name="share_fav">Partager</string>
 <string name="share_fav_subject">Favoris partagés via OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un intinéraire entre des points</string>
@@ -1674,7 +1680,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_sign_in">Se connecter</string>
     <string name="osmo_create_groups_confirm">Pour créer des groupes que vous devez être un utilisateur enregistré d\'OsMo.</string>
     <string name="osmo_credentials_not_valid">Vos identifiants OsMo sont incorrects.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Êtes-vous sûr de régénérer les identifiants personnels? Tous les appareils connectés à vous ne seront plus capables de vous suivre.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Êtes-vous sûr de régénérer les identifiants personnels ? Tous les appareils connectés à vous ne seront plus capables de vous suivre.</string>
     <string name="osmo_regenerate_login_ids">Régénérer l\'identifiant de l\'utilisateur</string>
     <string name="osmo_cancel_moving_target">Annuler la cible mobile</string>
     <string name="osmo_center_location">Centrer sur l\'écran</string>
@@ -1683,5 +1689,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_connect_to_my_nickname">Mon pseudo</string>
     <string name="osmo_user_name">Utilisateur</string>
 	<string name="color_green">vert</string>
-	
+    <string name="gpx_file_is_empty">La trace GPX est vide</string>
+    <string name="selected_track">Trace</string>
+    <string name="my_tracks">Toutes les traces</string>
+    <string name="my_favorites">Mes favoris</string>
+    <string name="my_data_Button">Mes données</string>
+    <string name="my_data_activity">Mes données</string>
     </resources>
