@@ -1878,5 +1878,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="my_favorites">Mine favoritter</string>
     <string name="my_data_Button">Mine data</string>
     <string name="my_data_activity">Mine data</string>
-    <string name="gpx_file_is_empty">Gpx spor er tomt</string>
+    <string name="gpx_file_is_empty">GPX-spor er tomt</string>
     </resources>
