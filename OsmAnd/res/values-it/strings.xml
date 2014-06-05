@@ -1865,7 +1865,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_show_group_notifications">Mostra le notifiche del gruppo</string>
     <string name="selected_track">Traccia</string>
     <string name="my_tracks">Tutte le tracce</string>
-    <string name="my_favorites">Miei preferiti</string>
+    <string name="my_favorites">I miei preferiti</string>
     <string name="my_data_Button">Miei dati</string>
     <string name="my_data_activity">Miei dati</string>
     <string name="osmo_show_group_notifications_descr">Mostra un messaggio popup quando l'utente aderisce o lascia un gruppo</string>
