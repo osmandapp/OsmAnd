@@ -1869,4 +1869,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="my_data_Button">Miei dati</string>
     <string name="my_data_activity">Miei dati</string>
     <string name="osmo_show_group_notifications_descr">Mostra un messaggio popup quando l'utente aderisce o lascia un gruppo</string>
+    <string name="gpx_file_is_empty">La traccia Gpx è vuota</string>
     </resources>
