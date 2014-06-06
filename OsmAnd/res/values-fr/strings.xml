@@ -416,7 +416,7 @@
   <string name="rendering_exception">Erreur lors de l\'affichage de la zone sélectionnée</string>
   <string name="rendering_out_of_memory">Pas suffisamment de mémoire pour afficher la zone sélectionnée</string>
   <string name="show_point_options">Options du point…</string>
-  <string name="renderer_load_sucess">Le moteur de rendu a bien été chargé</string>
+  <string name="renderer_load_sucess">Moteur de rendu chargé correctement</string>
   <string name="renderer_load_exception">Erreur: le moteur de rendu n\'est pas chargé</string>
   <string name="renderers">Rendu vectoriel</string>
   <string name="renderers_descr">Choisir le style de rendu vectoriel</string>
@@ -739,7 +739,7 @@
   <string name="osb_close_dialog_title">Fermeture du bogue</string>
   <string name="osb_close_dialog_close_button">Fermer bogue</string>
   <string name="osb_close_dialog_success">Bogue ajouté avec succès</string>
-  <string name="osb_close_dialog_error">Erreur : bogue n\'a pas été fermé</string>
+  <string name="osb_close_dialog_error">Erreur : le bogue n\'a pas été fermé</string>
   <string name="poi_edit_title">Éditer PI</string>
   <string name="poi_create_title">Créer un point d\'intérêt (PI)</string>
   <string name="poi_error_poi_not_found">Objet introuvable ou l\'équipement n\'est pas un composé d\'un seul objet</string>
@@ -750,8 +750,8 @@
   <string name="poi_action_add">ajouter</string>
   <string name="poi_action_change">modifier</string>
   <string name="poi_action_succeded_template">Action {0} réussie.</string>
-  <string name="poi_error_unexpected_template">Erreur lors de l\'exécution de l\'action {0}.</string>
-  <string name="poi_error_io_error_template">Erreur d\'entrée/sortie lors de l\'exécution de l\'action {0}.</string>
+  <string name="poi_error_unexpected_template">Erreur lors de l\'action {0}.</string>
+  <string name="poi_error_io_error_template">Erreur d\'entrée/sortie lors de l\'action {0}.</string>
   <string name="poi_error_info_not_loaded">Les informations sur l\'objet n\'ont pas étés chargés</string>
   <string name="poi_dialog_name">Nom</string>
   <string name="poi_dialog_opening_hours">Ouvert</string>
@@ -1317,7 +1317,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="local_indexes_cat_srtm">Courbes de niveau</string>
     <string name="use_kalman_filter_compass_descr">Utiliser un filtre de Kalman pour éviter les interférences de la boussole</string>
     <string name="use_kalman_filter_compass">Utiliser un filtre de Kalman</string>
-    <string name="access_mark_final_location_first">Mode accessibilité : veuillez d\'abord définir la destination</string> 
+    <string name="access_mark_final_location_first">Mode d'accessibilité : veuillez d\'abord définir la destination</string> 
     <string name="distance_measurement_start_editing">Commencer à modifier</string>
     <string name="distance_measurement_finish_editing">Finir de modifier</string>
     <string name="distance_measurement_save_gpx">Sauvegarder comme GPX</string>
@@ -1369,7 +1369,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="edit_tilesource_expiration_time">Expire (minutes)</string>
     <string name="edit_tilesource_minzoom">Zoom min</string>
     <string name="edit_tilesource_url_to_load">Lien</string>
-    <string name="driving_region_descr">Sélectionner la région de conduite : États-Unis, Europe, Angleterre, Asie et autres</string>
+    <string name="driving_region_descr">Sélectionner la région de conduite : États-Unis, Europe, Royaume-Uni, Asie et autres</string>
 	<string name="driving_region">Région de conduite</string>
 	<string name="driving_region_europe_asia">Europe &amp; Asie</string>
 	<string name="driving_region_uk">Angleterre, Inde, Australie et autres</string>
@@ -1598,7 +1598,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmo_tracker_id">Identifiant personnel de suivi</string>
 	<string name="osmo_tracker_id_descr">Cliquer pour voir ou partager l\'identifiant de suivi. 
        L\'utilisation d\'appareils connectés par identifiant de suivi permettra de suivre tous les mouvements de cet appareil ! Pour se déconnecter, sélectionnez l\'option Redémarrer.</string>
-	<string name="osmo_session_token">Marque de session : %1$s</string>
+	<string name="osmo_session_token">Jeton de session : %1$s</string>
 	<string name="osmo_auth_pending">En attente de l\'autorisation…</string>
 	<string name="osmo_locations_sent">Emplacements envoyés %1$d (en mémoire tampon %2$d) </string>
 	<string name="osmo_conn_successfull">Connexion établie : %1$s </string>
@@ -1638,7 +1638,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_tracker_id">Identifiant personnel de suivi</string>
 <string name="osmo_group_info">Info</string>
     <string name="osmo_group">Groupe OsMo</string>
-    <string name="osmo_group_share">Pour vous connecter au groupe %2$s, veuillez spécifier l\'identifiant du groupe (%1$s)</string>
+    <string name="osmo_group_share">Pour vous connecter au groupe %2$s, veuillez spécifier l\'identifiant du groupe (%1$s) ou cliquer %3$s.</string>
     <string name="osmo_share_connect_device">Autoriser le suivi de cet appareil de façon permanente</string>
     <string name="osmo_share_current_session">Partager la session courante dans le navigateur</string>
     <string name="osmo_session_not_available">Session non disponible, veuillez vérifier que \'Envoyer mes positions\' est activé.</string>
