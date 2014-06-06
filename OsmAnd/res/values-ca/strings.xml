@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -1800,4 +1800,14 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	
     <string name="osmo_edit_device">Canviar propietats d\'usuari</string>
     <string name="osmo_edit_color">Mostra color</string>
+    <string name="gpx_file_is_empty">La traça GPX està buida</string>
+    <string name="selected_track">Pista</string>
+    <string name="my_tracks">Totes les pistes</string>
+    <string name="my_favorites">El meus favorits</string>
+    <string name="my_data_Button">Les meves dades</string>
+    <string name="my_data_activity">Les meves dades</string>
+    <string name="osmo_user_joined">L'usuari %1$s s'ha unit al grup %2$s</string>
+    <string name="osmo_user_left">L'usuari %1$s ha deixat el grup %2$s</string>
+    <string name="osmo_show_group_notifications">Veure les notificacions de grup</string>
+    <string name="osmo_show_group_notifications_descr">Veure missatges quan un usuari s'uneix o deixa el grup</string>
     </resources>
