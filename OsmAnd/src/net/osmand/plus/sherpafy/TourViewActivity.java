@@ -114,6 +114,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	protected void onResume() {
 		super.onResume();
 
+		//this flag needed to start indexing tours is user downloaded some and returned to activity
 		if (afterDownload){
 			if (customization.getTourInformations().isEmpty()){
 				customization.onIndexingFiles(IProgress.EMPTY_PROGRESS,new LinkedHashMap<String, String>());
@@ -176,6 +177,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				public Drawable getDrawable(String s) {
 					Bitmap file = customization.getSelectedTour().getImageBitmapFromPath(s);
 					Drawable bmp = new BitmapDrawable(getResources(),file);
+					//if image is thicker than screen - it may cause some problems, so we need to scale it
 					int imagewidth = bmp.getIntrinsicWidth();
 					if (size.x-1 > imagewidth) {
 						bmp.setBounds(0,0, bmp.getIntrinsicWidth(), bmp.getIntrinsicHeight());
