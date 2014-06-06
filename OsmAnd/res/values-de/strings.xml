@@ -1400,7 +1400,7 @@
 	<string name="context_menu_item_directions_to">Navigiere zu</string>
 	<string name="route_descr_map_location">Karte: </string>
 	<string name="route_to">nach:</string>
-	<string name="route_via">via:</string>
+	<string name="route_via">über:</string>
 	<string name="route_from">von:</string>
 	<string name="osb_author_dialog_password">OSM-Passwort (optional)</string>
 	<string name="tip_recent_changes_1_5_t">Änderungen in 1.5:
