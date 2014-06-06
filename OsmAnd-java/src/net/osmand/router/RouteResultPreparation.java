@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.HashSet;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -651,7 +652,7 @@ public class RouteResultPreparation {
 						outgoingLanesIndex += 2;
 						sourceLanesIndex++;
 					} else {
-						// Not yet supported
+						// Not supported
 						return t;
 					}
 				} else {
@@ -753,10 +754,11 @@ public class RouteResultPreparation {
 		}
 
 		List<TurnType.Turn> possibleTurns = new ArrayList<TurnType.Turn>();
-		System.out.println("osmand lanes: " + Arrays.toString(t.getLanes()));
+		boolean filled = false;
 		for (int i = 0; i < t.getLanes().length; i++) {
 			if ((t.getLanes()[i] & 1) == 1) {
-				if (possibleTurns.isEmpty()) {
+				if (!filled) {
+					filled = true;
 					possibleTurns.add(t.getPrimaryTurn(i));
 					if (t.getSecondaryTurn(i) != TurnType.Turn.UNKNOWN) {
 						possibleTurns.add(t.getSecondaryTurn(i));
@@ -768,12 +770,21 @@ public class RouteResultPreparation {
 					possibleTurns.retainAll(laneTurns);
 				}
 			}
-			System.out.println("osmand turns: " + possibleTurns.toString());
 		}
 
-		if (possibleTurns.size() == 1) {
+		if (possibleTurns.size() > 1) {
+			for (int i = 0; i < t.getLanes().length; i++) {
+				if ((t.getLanes()[i] & 1) == 0 && !possibleTurns.isEmpty()) {
+					List<TurnType.Turn> notLaneTurns = new ArrayList<TurnType.Turn>();
+					notLaneTurns.add(t.getPrimaryTurn(i));
+					notLaneTurns.add(t.getSecondaryTurn(i));
+					possibleTurns.removeAll(notLaneTurns);
+				}
+			}
+		}
+
+		if (new HashSet<TurnType.Turn>(possibleTurns).size() == 1) {
 			TurnType derivedTurnType = TurnType.valueOf(possibleTurns.get(0).getValue(), leftSide);
-			System.out.println("osmand value: " + possibleTurns.get(0).getValue());
 			derivedTurnType.setLanes(t.getLanes());
 			derivedTurnType.setSkipToSpeak(t.isSkipToSpeak());
 			t = derivedTurnType;

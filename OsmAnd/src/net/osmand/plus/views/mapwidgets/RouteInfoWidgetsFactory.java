@@ -547,7 +547,10 @@ public class RouteInfoWidgetsFactory {
 			}
 
 			private boolean keepAndSlightTurnSubstitution(int lane) {
-				return (turn.getValue().equals(TurnType.KR) && turn.getPrimaryTurn(lane).getValue().equals(TurnType.TSLR)) || (turn.getValue().equals(TurnType.KL) && turn.getPrimaryTurn(lane).getValue().equals(TurnType.TSLL));
+				return ((turn.getValue().equals(TurnType.KR) && turn.getPrimaryTurn(lane).getValue().equals(TurnType.TSLR))
+						|| (turn.getValue().equals(TurnType.KL) && turn.getPrimaryTurn(lane).getValue().equals(TurnType.TSLL)));
+//					|| ((turn.getValue().equals(TurnType.KR) && turn.getSecondaryTurn(lane).getValue().equals(TurnType.TSLR))
+//						|| (turn.getValue().equals(TurnType.KL) && turn.getSecondaryTurn(lane).getValue().equals(TurnType.TSLL)));
 			}
 
 			@Override
@@ -565,6 +568,7 @@ public class RouteInfoWidgetsFactory {
 					for (int i = 0; i < lanes.length; i++) {
 						if (true) {
 							boolean orderSwitched = false;
+							boolean doNotMakeActive = false;
 
 							Path path = new Path();
 							String turnSymbol;
@@ -573,9 +577,12 @@ public class RouteInfoWidgetsFactory {
 								turnSymbol = turn.getSecondaryTurn(i).getValue();
 							} else {
 								turnSymbol = turn.getPrimaryTurn(i).getValue();
+								if (turn.getSecondaryTurn(i) != TurnType.Turn.UNKNOWN && turn.getValue().equals(turn.getSecondaryTurn(i).getValue())) {
+									doNotMakeActive = true;
+								}
 							}
 							TurnPathHelper.calcTurnPath(path, TurnType.valueOf(turnSymbol, leftSide), pathTransform);
-							if (turn.getValue().equals(turnSymbol) || orderSwitched) {
+							if (turn.getValue().equals(turnSymbol) || (!orderSwitched && (turn.getLanes()[i] & 1) == 1) && !doNotMakeActive) {
 								paintRouteDirection.setColor(active);
 							}
 
@@ -604,6 +611,9 @@ public class RouteInfoWidgetsFactory {
 								}
 								TurnPathHelper.calcTurnPath(path2, TurnType.valueOf(turnSymbol2, leftSide), pathTransform);
 
+								if (!(turn.getValue().equals(turnSymbol) || orderSwitched) && (turn.getLanes()[i] & 1) == 1) {
+									paintRouteDirection.setColor(active);
+								}
 								if (turnSymbol2.equals(TurnType.TSLR) || turnSymbol2.equals(TurnType.TSHR)) {
 									canvas.translate((int) (0.2 * w), 0);
 								} else if (turnSymbol2.equals(TurnType.TSLL) || turnSymbol2.equals(TurnType.TSHL)) {
