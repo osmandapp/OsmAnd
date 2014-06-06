@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -259,7 +259,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="wait_current_task_finished">Pro piaghere iseta sa fine de su traballu presente</string>
     <string name="use_kalman_filter_compass_descr">Imprea su filtru pro istransire traviaduras de sa bùssola</string>
     <string name="use_kalman_filter_compass">Impreu de su filtru de Kalman</string>
-    <string name="access_mark_final_location_first">Modalidade de atzessu fatzilidadu: Isseberare in antis sa destinatzione</string> 
+    <string name="access_mark_final_location_first">Modalidade de atzessu fatzilidadu: issebera in antis sa destinatzione</string> 
     <string name="use_magnetic_sensor_descr">Imprea su sensore magneticu pro determinare su balore de sa bùssola imbetzes de su sensore de orientamentu</string>
     <string name="use_magnetic_sensor">Imprea su sensore magneticu (bùssola)</string>
     <string name="other_location">Àtera</string>
@@ -283,10 +283,10 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="monitoring_settings">Servitzios de registratzione e modalidade "a reposu"</string>
     <string name="monitoring_settings_descr">Cunfigura comente registrare biàgios e ativare sa modalidade "a reposu"</string>
     <string name="osmo_settings_uuid">ID ùnicu de su dispositivu</string>
-    <string name="osmo_settings_descr">Ammustra sa crae ùnica de registratzione de su dispositivu e àteras impostaduras dislindadas de compidada. </string>
+    <string name="osmo_settings_descr">Cunfigura sas impostaduras de compidada de su dispositivu e imposta su canale de compidada pessonale.</string>
     <string name="osmo_plugin_description">OpenStreetMap-Compidada - Compidada avantzada in dereta cun medas tareas pro su tentu remotu http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (Compidada Avantzada in Dereta)</string>
-    <string name="osmo_settings">Impostaduras OSMo</string>
+    <string name="osmo_plugin_name">OsMo (Compidada Avantzada in Dereta)</string>
+    <string name="osmo_settings">OsMo OpenStreetMap Compidada (beta)</string>
    	<string name="osmand_monitoring_plugin_description">Ativa sa compidada e su nàvigu in sa modalidade "a reposu" (ischermu istudau)impreande ischidaduras periòdicas de su dispositivu GPS.
         Ammustra sas impostaduras chi fatzititana sa regitratzione de sos biàgios in documentos GPX locales o in lìnia, impreande unu servitziu in retza.</string>
     <string name="osmand_monitoring_plugin_name">Servitzios de registratzione e modalidade "a reposu"</string>
@@ -516,8 +516,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
 	<string name="poi_dialog_opening_hours">Aberi</string>
 	<string name="poi_action_change">muda</string>
 	<string name="poi_action_add">annanghe</string>
-	<string name="osmo_io_error">OSMo problema de connessione: </string>
-    <string name="osmo_mode_on">Firma OSMo</string>    
+	<string name="osmo_io_error">OsMo problema de connessione: </string>
+    <string name="osmo_mode_on">Firma sa sessione de OSMo</string>    
     <string name="osmo_mode_off">Inghitza/avia OSMo</string>
     <string name="osmand_plus_play_title_30_chars">Mapas OsmAnd+ e Nàvigu</string>
 	<string name="osmand_plus_short_description_80_chars">OsmAnd est un\'àplicu a mitza aperta pro su nàvigu cun mapas in lìnia e sena lìnia</string>
