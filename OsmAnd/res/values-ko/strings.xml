@@ -2046,4 +2046,10 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_user_left">사용자 %1$s 그룹 %2$s 남기다</string>
     <string name="osmo_show_group_notifications">그룹 알림 보기</string>
     <string name="osmo_show_group_notifications_descr">사용자가 그룹에 참여 또는 해체 할때 토스트 메시지를 표시</string>
+    <string name="gpx_file_is_empty">GPX 트랙이 비어있습니다</string>
+    <string name="selected_track">트랙</string>
+    <string name="my_tracks">모든 트랙</string>
+    <string name="my_favorites">내 즐겨찾기</string>
+    <string name="my_data_Button">내 데이터</string>
+    <string name="my_data_activity">내 데이터</string>
     </resources>
