@@ -14,6 +14,8 @@ public class TurnType {
 	public static final String TRU = "TRU"; // Right U-turn //$NON-NLS-1$
 	public static final String OFFR = "OFFR"; // Off route //$NON-NLS-1$
 
+	private boolean turnLanesRendering = false;
+
 	// If the lane is usable for the current turn
 	public static final int BIT_LANE_ALLOWED = 1;
 
@@ -165,10 +167,6 @@ public class TurnType {
 		return getPrimaryTurn(lane) == turn || getSecondaryTurn(lane) == turn;
 	}
 
-	public boolean hasAttribute(int lane, int turn) {
-		return (lanes[lane] & turn) == turn;
-	}
-	
 	public boolean keepLeft() {
 		return value.equals(KL); 
 	}
@@ -179,6 +177,14 @@ public class TurnType {
 	
 	public boolean goAhead() {
 		return value.equals(C); 
+	}
+
+	public boolean isTurnLanesRendering() {
+		return turnLanesRendering;
+	}
+
+	public void setTurnLanesRendering(boolean turnLanesRendering) {
+		this.turnLanesRendering = turnLanesRendering;
 	}
 	
 	public boolean isSkipToSpeak() {

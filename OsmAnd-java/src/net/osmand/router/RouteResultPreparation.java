@@ -753,6 +753,8 @@ public class RouteResultPreparation {
 			}
 		}
 
+		t.setTurnLanesRendering(true);
+
 		List<TurnType.Turn> possibleTurns = new ArrayList<TurnType.Turn>();
 		boolean filled = false;
 		for (int i = 0; i < t.getLanes().length; i++) {
@@ -787,6 +789,7 @@ public class RouteResultPreparation {
 			TurnType derivedTurnType = TurnType.valueOf(possibleTurns.get(0).getValue(), leftSide);
 			derivedTurnType.setLanes(t.getLanes());
 			derivedTurnType.setSkipToSpeak(t.isSkipToSpeak());
+			derivedTurnType.setTurnLanesRendering(t.isTurnLanesRendering());
 			t = derivedTurnType;
 		}
 

@@ -566,7 +566,7 @@ public class RouteInfoWidgetsFactory {
 					int active = imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow);
 					paintRouteDirection.setColor(inactive);
 					for (int i = 0; i < lanes.length; i++) {
-						if (true) {
+						if (turn.isTurnLanesRendering()) {
 							boolean orderSwitched = false;
 							boolean doNotMakeActive = false;
 
