@@ -1005,7 +1005,7 @@
 \n\t* Zobrazení Cycleway=track
 \n\t* Oprava chyb "</string>
 <string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace</string>
-<string name="map_widget_vector_attributes">Vlastnosti vykreslovače:</string>
+<string name="map_widget_vector_attributes">Vlastnosti vykreslování:</string>
 <string name="tip_rotation_switching_t_v2">"\tKliknutím na ikonu kompasu na mapové obrazovce můžete přepínat mezi způsobem otáčení mapy.
 \n\tMožnosti jsou:
 \n\t\'Neotáčet (sever nahoře)\' - mapa se nebude otáčet a zůstane vždy orientovaná severem nahoru
@@ -1509,14 +1509,14 @@ s často kladenými otázkami.</string>
 	<string name="color_blue">modrá</string>
 	<string name="color_magenta">purpurová</string>
 	
-    <string name="osmo_edit_device">Změnit uživatelské vlastnosti</string>
+    <string name="osmo_edit_device">Změnit vlastnosti uživatele</string>
     <string name="osmo_edit_color">Zobrazit barvu</string>
     <string name="osmo_group_info">Informace</string>
     <string name="osmo_group">Skupina OsMo</string>
-    <string name="osmo_group_share">Aby bylo možné se připojit ke skupině %2$s, určete id skupiny (%1$s) nebo klikněte %3$s.</string>
+    <string name="osmo_group_share">Aby se bylo možné připojit ke skupině %2$s, určete id skupiny (%1$s) nebo klikněte %3$s.</string>
     <string name="osmo_share_connect_device">Trvale sledovat toto zařízení</string>
     <string name="osmo_share_current_session">Sdílet aktuální relaci v prohlížeči</string>
-    <string name="osmo_session_not_available">Relace není k dispozici, prosím zkontrolujte že je zapnuta volba \'Odesílat pozici\'.</string>
+    <string name="osmo_session_not_available">Relace není k dispozici, prosím zkontrolujte že je zapnuta volba \'Odesílat pozice\'.</string>
     <string name="osmo_share_session">Sdílet relaci</string>
     <string name="osmo_session_id_share">Relace URL k sledování zařízení (%1$s)</string>
     <string name="osmo_tracker_id_share">Aby bylo možné připojit cílové zařízení %2$s, klikněte na link %3$s nebo určete ID sledovacího zařízení (%1$s)</string>
@@ -1537,7 +1537,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_create_group">Vytvořit skupinu</string>
     <string name="osmo_server_operation_failed">Chyba operace na serveru OsMo</string>
     <string name="osmo_activity">OsMo monitorování</string>
-    <string name="osmo_enable_tracker">Odeslat mou pozici</string>
+    <string name="osmo_enable_tracker">Odesílat mé pozice</string>
     <string name="osmo_control">OsMo rychlý přístup</string>
     <string name="hours_ago">hodin dozadu</string>
     <string name="minutes_ago">minut dozadu</string>
@@ -1546,9 +1546,9 @@ s často kladenými otázkami.</string>
     <string name="osmo_groups">OsMo skupiny/zařízení</string>
     <string name="osmo_auto_send_locations_descr">Automaticky spustit relaci sledování a odesílat polohu po spuštení aplikace</string>
     <string name="osmo_auto_send_locations">Automaticky spustit relaci sledování</string>
-    <string name="osmo_tracker_id">Osobní ID sledovacího zařízení</string>
-    <string name="osmo_tracker_id_descr">Klikněte pro zobrazení nebo sdílení ID sledovacího zařízení.
-        Pomocí ID budou připojená zařízení schopná sledovat všechny pohyby tohoto zařízení! Pro odpojení použijte možnost "Regenerovat".</string>
+    <string name="osmo_tracker_id">Osobní ID sledovaného zařízení</string>
+    <string name="osmo_tracker_id_descr">Klikněte pro zobrazení nebo sdílení ID sledovaného zařízení.
+        Pomocí ID budou připojená zařízení schopná sledovat všechny pohyby tohoto zařízení! Pro odpojení použijte možnost "Regenerovat uživatelské ID".</string>
     <string name="osmo_session_token">Token relace: %1$s</string>
     <string name="osmo_auth_pending">Čekání na autorizaci...</string>
     <string name="osmo_locations_sent">Odeslané polohy %1$d (v zásobníku %2$d) </string>
@@ -1583,4 +1583,15 @@ s často kladenými otázkami.</string>
     <string name="osmo_user_left">Uživatel %1$s odebrán ze skupiny %2$s</string>
     <string name="color_green">zelená</string>
 	
+    <string name="gpx_file_is_empty">GPX trasa je prázdná</string>
+    <string name="selected_track">Trasa</string>
+    <string name="my_tracks">Všechny trasy</string>
+    <string name="my_favorites">Moje oblíbené</string>
+    <string name="my_data_Button">Moje data</string>
+    <string name="my_data_activity">Moje data</string>
+    <string name="osmo_show_group_notifications">Zobrazovat upozornění skupin</string>
+    <string name="osmo_show_group_notifications_descr">Zobrazovat informační zprávu o připojení nebo odpojení uživatele ke skupině</string>
+    <string name="osmo_cancel_moving_target">Zrušit pohyblivý cíl</string>
+    <string name="osmo_center_location">Zarovnat na střed obrazovky</string>
+    <string name="osmo_set_moving_target">Nastavit jako pohyblivý cíl</string>
     </resources>
