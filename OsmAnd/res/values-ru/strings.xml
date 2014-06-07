@@ -1685,4 +1685,8 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_show_group_notifications">Показывать извещения группы</string>
     <string name="osmo_show_group_notifications_descr">Показывать сообщения, когда пользователь присоединяется или покидает группу</string>
     <string name="osmo_group_policy">Политика</string>
+    <string name="osmo_control">Быстрый доступ к OsMo</string>
+    <string name="osmo_cancel_moving_target">Отменить движущуюся цель</string>
+    <string name="osmo_set_moving_target">Установить как движущуюся цель</string>
+    <string name="osmo_center_location">Центр на экране</string>
     </resources>
