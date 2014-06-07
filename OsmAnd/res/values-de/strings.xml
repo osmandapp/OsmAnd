@@ -862,7 +862,7 @@
 	<string name="search_online_address">Internet verwenden</string>
 	<string name="max_level_download_tile">Max. Online-Zoom</string>
 	<string name="max_level_download_tile_descr">Maximale Vergrößerung bis zu der Online-Karten-Daten (Kacheln) aus dem Internet geladen werden</string>
-	<string name="route_general_information">%1$s Gesamtentfernung\n%2$d:%3$d Reisezeit</string>
+	<string name="route_general_information">Gesamtentfernung: %1$s\nReisezeit: %2$d h %3$d min</string>
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Routenberechnung wählen</string>
 	<string name="router_service">Navigationsdienst</string>
 	<string name="sd_dir_not_accessible">Auf das Verzeichnis auf der SD-Karte kann nicht zugegriffen werden</string>
