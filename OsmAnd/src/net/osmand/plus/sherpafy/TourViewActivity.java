@@ -120,9 +120,14 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				customization.onIndexingFiles(IProgress.EMPTY_PROGRESS,new LinkedHashMap<String, String>());
 			}
 
-			if (!customization.getTourInformations().isEmpty() && customization.getSelectedTour() == null){
-				setTourSelectionContentView();
-				state = STATE_SELECT_TOUR;
+			if (!customization.getTourInformations().isEmpty()){
+				if (customization.getSelectedTour() == null){
+					setTourSelectionContentView();
+					state = STATE_SELECT_TOUR;
+				} else {
+					startTourView();
+				}
+
 			}
 		}
 
@@ -186,6 +191,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 						double scale = (double)(size.x-1)/imagewidth;
 						bmp.setBounds(0,0, (int)(scale*bmp.getIntrinsicWidth()), (int)(scale*bmp.getIntrinsicHeight()));
 					}
+
 					return bmp;
 				}
 
