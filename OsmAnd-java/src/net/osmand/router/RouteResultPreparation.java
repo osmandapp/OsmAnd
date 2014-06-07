@@ -647,6 +647,10 @@ public class RouteResultPreparation {
 				if (splitLaneOptions[sourceLanesIndex].contains(";")) {
 					int options = countOccurrences(splitLaneOptions[sourceLanesIndex], ';');
 					if (options == 1) {
+						if (outgoingLanesIndex + 1 >= t.getLanes().length) {
+							// Likely an error in data
+							return t;
+						}
 						int usability = t.getLanes()[outgoingLanesIndex] | t.getLanes()[outgoingLanesIndex + 1];
 						sourceLanes.add(usability);
 						outgoingLanesIndex += 2;

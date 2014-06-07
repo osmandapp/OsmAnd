@@ -611,7 +611,7 @@ public class RouteInfoWidgetsFactory {
 								}
 								TurnPathHelper.calcTurnPath(path2, TurnType.valueOf(turnSymbol2, leftSide), pathTransform);
 
-								if (!(turn.getValue().equals(turnSymbol) || orderSwitched) && (turn.getLanes()[i] & 1) == 1) {
+								if ((!turn.getValue().equals(turnSymbol) || orderSwitched) && (turn.getLanes()[i] & 1) == 1) {
 									paintRouteDirection.setColor(active);
 								}
 								if (turnSymbol2.equals(TurnType.TSLR) || turnSymbol2.equals(TurnType.TSHR)) {
@@ -626,7 +626,7 @@ public class RouteInfoWidgetsFactory {
 								} else if (turnSymbol2.equals(TurnType.TSLL) || turnSymbol2.equals(TurnType.TSHL)) {
 									canvas.translate((int) (0.2 * w), 0);
 								}
-
+								paintRouteDirection.setColor(inactive);
 							}
 						} else {
 							Path path = new Path();
