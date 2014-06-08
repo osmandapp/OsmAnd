@@ -52,9 +52,10 @@ public class GpxUiHelper {
 	
 
 	
-	private static String getColorValue(String clr, String value) {
+	public static String getColorValue(String clr, String value) {
 		return "<font color=\"" + clr + "\">" + value + "</font>";
 	}
+	
 	public static String getDescription(OsmandApplication app, GPXTrackAnalysis analysis) {
 		StringBuilder description = new StringBuilder();
 		String timeSpanClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_time_span_color));
@@ -64,7 +65,6 @@ public class GpxUiHelper {
 		String descClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_altitude_desc));
 		// OUTPUT:
 		// 1. Total distance, Start time, End time
-		// TODO  distance
 		description.append(app.getString(R.string.gpx_info_distance, getColorValue(distanceClr, 
 				OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app)), 
 				getColorValue(distanceClr, analysis.points+"") ));
@@ -105,8 +105,9 @@ public class GpxUiHelper {
 			String max = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app));
 			String asc = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
 			String desc = getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
-			String format = min +" - " + max + "  ( \u2193 " + desc + ", \u2191 " + asc + " ) ";
-			description.append(app.getString(R.string.gpx_info_difference_altitude,format));
+			description.append(app.getString(R.string.gpx_info_diff_altitude,min +" - " + max ));
+			description.append("<br/>");
+			description.append(app.getString(R.string.gpx_info_asc_altitude,"\u2193 " + desc + "   \u2191 " + asc + ""));
 		}
 
 

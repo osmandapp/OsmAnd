@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="gpx_speed">#CCAA0088</color>
+    <color name="gpx_speed">#c79c00</color>
     <color name="gpx_altitude_desc">#32CD32</color>
     <color name="gpx_altitude_asc">#EE3232</color>
-    <color name="gpx_distance_color">#FD9822</color>
+    <color name="gpx_distance_color">#ffa500</color>
     <color name="gpx_time_span_color">#0080FF</color>
     
 	<color name="color_transparent">#00000000</color>

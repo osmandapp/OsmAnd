@@ -13,7 +13,6 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 
 public class GpxSelectionHelper {
 
@@ -155,26 +154,45 @@ public class GpxSelectionHelper {
 	private void processGroupTrack(GpxDisplayGroup group) {
 		List<GpxDisplayItem> list = group.getModifiableList();
 		String timeSpanClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_time_span_color));
+		String speedClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_speed));
+		String ascClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_altitude_asc));
+		String descClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_altitude_desc));
 		String distanceClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_distance_color));
+		final float eleThreshold = 3;
+		int t = 1;
 		for (TrkSegment r : group.track.segments) {
 			if (r.points.size() > 0) {
 				GpxDisplayItem item = new GpxDisplayItem();
 				item.group = group;
 				GPXTrackAnalysis analysis = GPXTrackAnalysis.segment(0, r);
 				item.description = GpxUiHelper.getDescription(app, analysis);
-				String dist = "  <font color=\"" + distanceClr + "\">"
-						+ OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app) + "</font>";
-				item.name = app.getString(R.string.gpx_selection_segment_title) + dist;
-
+				String name = t++ + ". "; 
+						
+				name += GpxUiHelper.getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+				
 				if (analysis.timeSpan > 0 || analysis.timeMoving > 0) {
 					long tm = analysis.timeMoving;
 					if (tm == 0) {
 						tm = analysis.timeSpan;
 					}
-					item.name += "  <font color=\"" + timeSpanClr + "\">"
-							+ Algorithms.formatDuration((int) (tm / 1000)) + "</font>";
+					name += ", "+GpxUiHelper.getColorValue(timeSpanClr, Algorithms.formatDuration((int) (tm / 1000)));
 				}
-
+				if (analysis.isSpeedSpecified()) {
+					name += ", "+GpxUiHelper.getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
+				}
+				if (analysis.isElevationSpecified() && (analysis.diffElevationUp > eleThreshold || 
+						analysis.diffElevationDown > eleThreshold) ) {
+					name += ",";
+					if(analysis.diffElevationDown > eleThreshold) {
+						name += GpxUiHelper.getColorValue(descClr, " \u2193 "+
+								OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
+					}
+					if(analysis.diffElevationUp > eleThreshold) {
+						name += GpxUiHelper.getColorValue(ascClr, " \u2191 "+
+								OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
+					}
+				}
+				item.name = name;
 				item.locationStart = r.points.get(0);
 				item.locationEnd = r.points.get(r.points.size() - 1);
 				list.add(item);

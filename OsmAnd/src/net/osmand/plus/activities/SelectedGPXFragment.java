@@ -169,36 +169,24 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
-				row = inflater.inflate(R.layout.expandable_list_item_category, parent, false);
+				row = inflater.inflate(R.layout.expandable_list_item_category_btn, parent, false);
 				fixBackgroundRepeat(row);
 			}
 			adjustIndicator(groupPosition, isExpanded, row);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final GpxDisplayGroup model = getGroup(groupPosition);
 			label.setText(model.getGroupName());
-//			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
-//			if (selectionMode) {
-//				ch.setVisibility(View.VISIBLE);
-//				ch.setChecked(groupsToDelete.contains(model));
-//
-//				ch.setOnClickListener(new View.OnClickListener() {
-//					@Override
-//					public void onClick(View v) {
-//						if (ch.isChecked()) {
-//							groupsToDelete.add(model);
-//							List<FavouritePoint> fvs = helper.getFavoriteGroups().get(model);
-//							if (fvs != null) {
-//								favoritesToDelete.addAll(fvs);
-//							}
-//							favouritesAdapter.notifyDataSetInvalidated();
-//						} else {
-//							groupsToDelete.remove(model);
-//						}
-//					}
-//				});
-//			} else {
-//				ch.setVisibility(View.GONE);
-//			}
+			final ImageView ch = (ImageView) row.findViewById(R.id.check_item);
+			ch.setImageDrawable(getActivity().getResources().getDrawable(
+					app.getSettings().isLightContent() ? R.drawable.ic_action_settings_light :
+						R.drawable.ic_action_settings_dark 
+			));
+			ch.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// TODO dialog
+				}
+			});
 			return row;
 		}
 
@@ -220,7 +208,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				icon.setImageResource(R.drawable.list_favorite);
 			label.setText(Html.fromHtml(child.name.replace("\n", "<br/>")));
 			if(child.expanded) {
-				description.setText(Html.fromHtml(child.description.replace("\n", "<br/>")));
+				description.setText(Html.fromHtml(child.description));
 				description.setVisibility(View.VISIBLE);
 			} else {
 				description.setVisibility(View.GONE);
