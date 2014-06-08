@@ -76,7 +76,7 @@ public class RouteProvider {
 	
 	public enum RouteService {
 			OSMAND("OsmAnd (offline)"), YOURS("YOURS"), 
-			ORS("OpenRouteService (outdated map data)"), OSRM("OSRM (only car)"),
+			ORS("OpenRouteService"), OSRM("OSRM (only car)"),
 			BROUTER("BRouter (offline)"); 
 		private final String name;
 		private RouteService(String name){
