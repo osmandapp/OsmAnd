@@ -564,6 +564,7 @@ public class RouteInfoWidgetsFactory {
 					boolean leftSide = turn.isLeftSide();
 					int inactive = getResources().getColor(R.color.nav_arrow_distant);
 					int active = imminent ? getResources().getColor(R.color.nav_arrow_imminent) : getResources().getColor(R.color.nav_arrow);
+					boolean crossedLeftSide = false;
 					paintRouteDirection.setColor(inactive);
 					for (int i = 0; i < lanes.length; i++) {
 						if (turn.isTurnLanesRendering()) {
@@ -630,9 +631,12 @@ public class RouteInfoWidgetsFactory {
 							}
 						} else {
 							Path path = new Path();
-							TurnPathHelper.calcTurnPath(path, TurnType.valueOf(TurnType.C, leftSide), pathTransform);
 							if ((turn.getLanes()[i] & 1) == 1) {
 								paintRouteDirection.setColor(active);
+								crossedLeftSide = true;
+								TurnPathHelper.calcTurnPath(path, TurnType.valueOf(TurnType.C, leftSide), pathTransform);
+							} else {
+								TurnPathHelper.calcTurnPath(path, TurnType.valueOf(!crossedLeftSide ? TurnType.TSLL : TurnType.TSLR, leftSide), pathTransform);
 							}
 							canvas.drawPath(path, paintBlack);
 							canvas.drawPath(path, paintRouteDirection);
