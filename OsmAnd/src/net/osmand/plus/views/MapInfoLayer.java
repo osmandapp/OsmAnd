@@ -668,14 +668,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private UpdateFrameLayout createBackToLocation(MapInfoWidgetsFactory mic){
 		progressBar = new View(view.getContext());
+		progressBar.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
 		final ImageViewWidget widget = mic.createBackToLocation(map);
-		Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc);
+		Drawable backToLoc = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled);
 		UpdateFrameLayout layout = new UpdateFrameLayout(view.getContext(), widget) ;
 		FrameLayout.LayoutParams fparams;
-		//= new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-		fparams = new FrameLayout.LayoutParams(backToLoc.getMinimumWidth(), backToLoc.getMinimumHeight());
+		fparams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 		layout.addView(widget, fparams);
-		fparams = new FrameLayout.LayoutParams(backToLoc.getMinimumWidth(), backToLoc.getMinimumHeight());
+		fparams = new FrameLayout.LayoutParams((int) (backToLoc.getMinimumWidth() ),
+				backToLoc.getMinimumHeight());
+		fparams.setMargins((int) (5 * scaleCoefficient), 0, 0, 0);
 		layout.addView(progressBar, fparams);
 		layout.setOnClickListener(new View.OnClickListener() {
 			@Override

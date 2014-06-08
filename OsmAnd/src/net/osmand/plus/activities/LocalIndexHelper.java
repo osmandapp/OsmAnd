@@ -27,14 +27,11 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
-import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.util.MapUtils;
@@ -69,8 +66,6 @@ public class LocalIndexHelper {
 		File f = new File(info.getPathToData());
 		if(info.getType() == LocalIndexType.MAP_DATA){
 			updateObfFileInformation(info, f);
-		} else if(info.getType() == LocalIndexType.GPX_DATA){
-			updateGpxInfo(info, f);
 		} else if(info.getType() == LocalIndexType.VOICE_DATA){
 			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.TTS_VOICE_DATA){
@@ -107,21 +102,6 @@ public class LocalIndexHelper {
 	}
 
 
-	private void updateGpxInfo(LocalIndexInfo info, File f) {
-		if(info.getGpxFile() == null){
-			info.setGpxFile(GPXUtilities.loadGPXFile(app, f));
-		}
-		GPXFile result = info.getGpxFile();
-		if(result.warning != null){
-			info.setCorrupted(true);
-			info.setDescription(result.warning);
-		} else {
-			// 'Long-press for options' message
-			info.setDescription(GpxUiHelper.getDescription(app, result, f) +  
-						app.getString(R.string.local_index_gpx_info_show));
-		}
-	}
-	
 	public List<LocalIndexInfo> getLocalIndexData(LoadLocalIndexTask loadTask){
 		Map<String, String> loadedMaps = app.getResourceManager().getIndexFileNames();
 		List<LocalIndexInfo> result = new ArrayList<LocalIndexInfo>();
@@ -297,7 +277,6 @@ public class LocalIndexHelper {
 		SRTM_DATA(R.string.local_indexes_cat_srtm),
 		VOICE_DATA(R.string.local_indexes_cat_voice),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts),
-		GPX_DATA(R.string.local_indexes_cat_gpx),
 		AV_DATA(R.string.local_indexes_cat_av);;
 		
 		private final int resId;

@@ -73,7 +73,7 @@ public class ApplicationMode {
 		
 		// top
 		regWidget("compass", all);
-		regWidget("config", all);
+		regWidget("config", none);
 		regWidget("street_name", exceptAirBoat);
 		regWidget("back_to_location", all);
 		regWidget("monitoring_services", none);

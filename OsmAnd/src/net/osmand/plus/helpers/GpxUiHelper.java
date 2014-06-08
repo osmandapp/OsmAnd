@@ -13,9 +13,11 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -44,42 +46,75 @@ public class GpxUiHelper {
 		return getDescription(app, analysis);
 	}
 	
+	public static String getDescription(OsmandApplication app, TrkSegment t) {
+		return getDescription(app, GPXTrackAnalysis.segment(0, t));
+	}
+	
+
+	
+	private static String getColorValue(String clr, String value) {
+		return "<font color=\"" + clr + "\">" + value + "</font>";
+	}
 	public static String getDescription(OsmandApplication app, GPXTrackAnalysis analysis) {
 		StringBuilder description = new StringBuilder();
+		String timeSpanClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_time_span_color));
+		String distanceClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_distance_color));
+		String speedClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_speed));
+		String ascClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_altitude_asc));
+		String descClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_altitude_desc));
 		// OUTPUT:
 		// 1. Total distance, Start time, End time
-		description.append(app.getString(R.string.local_index_gpx_info, analysis.totalTracks, analysis.points,
-				analysis.wptPoints, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app),
-				analysis.startTime, analysis.endTime));
+		// TODO  distance
+		description.append(app.getString(R.string.gpx_info_distance, getColorValue(distanceClr, 
+				OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app)), 
+				getColorValue(distanceClr, analysis.points+"") ));
+		if(analysis.totalTracks > 1) {
+			description.append("<br/>").append(app.getString(R.string.gpx_info_subtracks, getColorValue(speedClr, analysis.totalTracks+"")));
+		}
+		if(analysis.wptPoints > 0) {
+			description.append("<br/>").append(app.getString(R.string.gpx_info_waypoints, getColorValue(speedClr, analysis.wptPoints+"")));
+		}
+		if(analysis.isTimeSpecified()) {
+				description.append("<br/>").append(app.getString(R.string.gpx_info_start_time, analysis.startTime));
+				description.append("<br/>").append(app.getString(R.string.gpx_info_end_time, analysis.endTime));
+		}
 
 		// 2. Time span
-		description.append(app.getString(R.string.local_index_gpx_timespan, analysis.getTimeHours(analysis.timeSpan),
-				analysis.getTimeMinutes(analysis.timeSpan), analysis.getTimeSeconds(analysis.timeSpan)));
+		if(analysis.timeSpan > 0 && analysis.timeSpan / 1000 != analysis.timeMoving / 1000) {
+			final String formatDuration = Algorithms.formatDuration((int) (analysis.timeSpan/1000)
+							);
+			description.append("<br/>").append(app.getString(R.string.gpx_timespan,
+					getColorValue(timeSpanClr, formatDuration)));
+		}
 
 		// 3. Time moving, if any
 		if(analysis.isTimeMoving()){
-			description.append(
-				app.getString(R.string.local_index_gpx_timemoving, analysis.getTimeHours(analysis.timeMoving),
-						analysis.getTimeMinutes(analysis.timeMoving), analysis.getTimeSeconds(analysis.timeMoving)));
+			final String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving/1000)
+					);
+			description.append("<br/>").append(app.getString(R.string.gpx_timemoving,
+					getColorValue(timeSpanClr, formatDuration)));
 		}
 
 		// 4. Elevation, eleUp, eleDown, if recorded
-		if(analysis.isElevationSpecified()){
-			description.append(  
-					app.getString(R.string.local_index_gpx_info_elevation,
-					OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app),
-					OsmAndFormatter.getFormattedAlt(analysis.minElevation, app),
-					OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app),
-					OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app),
-					OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app)));
+		if (analysis.isElevationSpecified()) {
+			description.append("<br/>");
+			description.append(app.getString(R.string.gpx_info_avg_altitude,
+					getColorValue(speedClr, OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app))));
+			description.append("<br/>");
+			String min = getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app));
+			String max = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app));
+			String asc = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
+			String desc = getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
+			String format = min +" - " + max + "  ( \u2193 " + desc + ", \u2191 " + asc + " ) ";
+			description.append(app.getString(R.string.gpx_info_difference_altitude,format));
 		}
 
 
 		if(analysis.isSpeedSpecified()){
-				description.append(
-					app.getString(R.string.local_index_gpx_info_speed,
-				OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app),
-				OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app)));
+			String avg = getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
+			String max = getColorValue(ascClr, OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app));
+			description.append("<br/>").append(app.getString(R.string.gpx_info_average_speed,avg));
+			description.append("<br/>").append(app.getString(R.string.gpx_info_maximum_speed,max));
 		}
 		return description.toString();
 	}

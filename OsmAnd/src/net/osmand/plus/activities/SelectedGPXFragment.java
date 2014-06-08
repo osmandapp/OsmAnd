@@ -10,11 +10,13 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.app.Activity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.view.ActionMode;
@@ -53,6 +55,19 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	public void onResume() {
 		super.onResume();
 		adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
+		selectedGpxHelper.setUiListener(new Runnable() {
+			
+			@Override
+			public void run() {
+				adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());				
+			}
+		});
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		selectedGpxHelper.setUiListener(null);
 	}
 
 
@@ -104,6 +119,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		
 		public void setDisplayGroups(List<GpxDisplayGroup> displayGroups) {
 			this.displayGroups = displayGroups;
+			notifyDataSetChanged();
 		}
 
 
@@ -192,50 +208,24 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
-				row = inflater.inflate(R.layout.favourites_list_item, parent, false);
+				row = inflater.inflate(R.layout.gpx_item_list_item, parent, false);
 			}
 
-//			TextView label = (TextView) row.findViewById(R.id.favourite_label);
-//			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
-//			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
-//			row.setTag(model);
-//			if (model.isStored()) {
-//				icon.setImageResource(R.drawable.list_favorite);
-//			} else {
-//				icon.setImageResource(R.drawable.opened_poi);
-//			}
-//			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
-//			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
-//					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
-//			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
-//			label.setText(distance + model.getName(), TextView.BufferType.SPANNABLE);
-//			((Spannable) label.getText()).setSpan(
-//					new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
-//					0);
-//			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
-//			if (selectionMode && model.isStored()) {
-//				ch.setVisibility(View.VISIBLE);
-//				ch.setChecked(favoritesToDelete.contains(model));
-//				row.findViewById(R.id.favourite_icon).setVisibility(View.GONE);
-//				ch.setOnClickListener(new View.OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v) {
-//						if (ch.isChecked()) {
-//							favoritesToDelete.add(model);
-//						} else {
-//							favoritesToDelete.remove(model);
-//							if (groupsToDelete.contains(model.getCategory())) {
-//								groupsToDelete.remove(model.getCategory());
-//								favouritesAdapter.notifyDataSetInvalidated();
-//							}
-//						}
-//					}
-//				});
-//			} else {
-//				row.findViewById(R.id.favourite_icon).setVisibility(View.VISIBLE);
-//				ch.setVisibility(View.GONE);
-//			}
+			TextView label = (TextView) row.findViewById(R.id.name);
+			TextView additional = (TextView) row.findViewById(R.id.additional);
+			TextView description = (TextView) row.findViewById(R.id.description);
+			ImageView icon = (ImageView) row.findViewById(R.id.icon);
+			GpxDisplayItem child = getChild(groupPosition, childPosition);
+			row.setTag(child);
+				icon.setImageResource(R.drawable.list_favorite);
+			label.setText(Html.fromHtml(child.name.replace("\n", "<br/>")));
+			if(child.expanded) {
+				description.setText(Html.fromHtml(child.description.replace("\n", "<br/>")));
+				description.setVisibility(View.VISIBLE);
+			} else {
+				description.setVisibility(View.GONE);
+			}
+
 			return row;
 		}
 
@@ -244,7 +234,10 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		return false;
+		GpxDisplayItem child = adapter.getChild(groupPosition, childPosition);
+		child.expanded = !child.expanded;
+		adapter.notifyDataSetInvalidated();
+		return true;
 	}
 
 	

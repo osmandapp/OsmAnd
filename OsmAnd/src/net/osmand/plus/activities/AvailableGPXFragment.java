@@ -14,7 +14,6 @@ import java.util.Set;
 
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
@@ -38,6 +37,8 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -257,6 +258,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					return true;
 				}
 				runSelection(true);
+				actionMode.finish();
 				return true;
 			}
 
@@ -457,7 +459,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		protected List<GpxInfo> doInBackground(Activity... params) {
 			List<GpxInfo> result = new ArrayList<GpxInfo>();
-			if(savingTrackHelper.getCurrentGpx().isEmpty()) {
+			if(!savingTrackHelper.getCurrentGpx().isEmpty()) {
 				loadFile(new GpxInfo(savingTrackHelper.getCurrentGpx(),
 						getMyApplication().getString(R.string.gpx_available_current_track)));
 			}
@@ -600,7 +602,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if(info.gpx != null && info.gpx.showCurrentTrack) {
 				catName = info.name;
 			} else {
-				catName = info.subfolder;
+				catName = getString(R.string.local_indexes_cat_gpx) + " " + info.subfolder;
 			}
 			int found = -1;
 			// search from end
@@ -647,7 +649,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (child.isCorrupted()) {
 				viewName.setTextColor(corruptedColor);
 				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-			} else if(selectedGpxHelper.getSelectedFileByPath(child.getFileName()) != null){
+			} else if(selectedGpxHelper.getSelectedFileByName(child.getFileName()) != null){
 				viewName.setTextColor(okColor);
 				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else {
@@ -668,7 +670,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			TextView descr = ((TextView) v.findViewById(R.id.local_index_descr));
 			if (child.isExpanded()) {
 				descr.setVisibility(View.VISIBLE);
-				descr.setText(child.getDescription());
+				descr.setText(child.getHtmlDescription());
 			} else {
 				descr.setVisibility(View.GONE);
 			}
@@ -702,7 +704,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
 			}
-			StringBuilder t = new StringBuilder(getString(R.string.local_indexes_cat_gpx) + " " + group);
+			StringBuilder t = new StringBuilder(group);
 			adjustIndicator(groupPosition, isExpanded, v);
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
 			List<GpxInfo> list = data.get(group);
@@ -891,6 +893,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPostExecute(String result) {
+			Runnable r = selectedGpxHelper.getUiListener();
+			if(r != null) {
+				r.run();
+			}
 			getSherlockActivity().setProgressBarIndeterminateVisibility(false);
 			if(showOnMap && toShow != null) {
 				getMyApplication().getSettings().setMapLocationToShow(toShow.lat, toShow.lon,
@@ -957,12 +963,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		GpxInfo item = listAdapter.getChild(groupPosition, childPosition);
+		if(!selectionMode){
 		item.setExpanded(!item.isExpanded());
+		
 		if (item.isExpanded()) {
 			descriptionLoader = new LoadLocalIndexDescriptionTask();
 			descriptionLoader.execute(item);
 		}
-		if(selectionMode){
+		} else {
 			selectedItems.add(item);
 		}
 		listAdapter.notifyDataSetInvalidated();
@@ -981,6 +989,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		private String description;
 		private boolean corrupted;
 		private boolean expanded;
+		private Spanned htmlDescription;
 		
 		public GpxInfo(){
 		}
@@ -1034,6 +1043,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			return description;
 		}
 		
+		public Spanned getHtmlDescription() {
+			if(htmlDescription != null) {
+				return htmlDescription;
+			}
+			htmlDescription = Html.fromHtml(getDescription().toString().replace("\n", "<br/>"));
+			return htmlDescription;
+		}
+		
+		
+		
 		public void setGpx(GPXFile gpx) {
 			this.gpx = gpx;
 		}
@@ -1050,6 +1069,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				description =  GpxUiHelper.getDescription(app, gpx, file) +  
 							app.getString(R.string.local_index_gpx_info_show);
 			}
+			htmlDescription = null;
+			getHtmlDescription();
 		}
 		public String getFileName() {
 			if(fileName != null) {
