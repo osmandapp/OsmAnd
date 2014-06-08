@@ -82,10 +82,10 @@ public class OsmAndLocationSimulation {
 					boolean gpxNavigation = radioGPX.isChecked();
 					if (gpxNavigation) {
 						GpxUiHelper.selectGPXFile(ma, false, false,
-								new CallbackWithObject<GPXUtilities.GPXFile>() {
+								new CallbackWithObject<GPXUtilities.GPXFile[]>() {
 									@Override
-									public boolean processResult(GPXUtilities.GPXFile result) {
-										GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result, app.getSettings());
+									public boolean processResult(GPXUtilities.GPXFile[] result) {
+										GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result[0], app.getSettings());
 										if(ch.isChecked()){
 											builder.setAnnounceWaypoints(true);
 										}

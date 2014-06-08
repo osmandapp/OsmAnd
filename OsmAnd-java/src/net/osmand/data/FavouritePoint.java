@@ -8,7 +8,6 @@ public class FavouritePoint implements Serializable {
 	private String category = "";
 	private double latitude;
 	private double longitude;
-	private boolean stored = false;
 	
 
 	public FavouritePoint(){
@@ -23,13 +22,6 @@ public class FavouritePoint implements Serializable {
 
 	public double getLatitude() {
 		return latitude;
-	}
-
-	public boolean isStored() {
-		return stored;
-	}
-	public void setStored(boolean stored) {
-		this.stored = stored;
 	}
 
 	public void setLatitude(double latitude) {

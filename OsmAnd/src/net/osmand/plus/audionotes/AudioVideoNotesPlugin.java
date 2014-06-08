@@ -22,7 +22,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
@@ -967,11 +966,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
                         && OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
                     String name = f.getName();
                     SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-
                     savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), name);
-                    if (app.getSettings().SHOW_CURRENT_GPX_TRACK.get()) {
-                        app.getFavorites().addFavoritePointToGPXFile(new FavouritePoint(rec.lat, rec.lon, name, ""));
-                    }
                 }
             }
 

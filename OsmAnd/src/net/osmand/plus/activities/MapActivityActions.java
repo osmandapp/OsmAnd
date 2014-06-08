@@ -29,6 +29,7 @@ import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -200,11 +201,9 @@ public class MapActivityActions implements DialogProvider {
 		while (it.hasNext()) {
 			FavouritePoint fp = it.next();
 			// filter gpx points
-			if (fp.isStored()) {
-				favs[i] = fp;
-				names[i] = fp.getName();
-				i++;
-			}
+			favs[i] = fp;
+			names[i] = fp.getName();
+			i++;
 		}
 		b.setItems(names, new DialogInterface.OnClickListener(){
 			@Override
@@ -247,9 +246,6 @@ public class MapActivityActions implements DialogProvider {
 				String name = editText.getText().toString();
 				SavingTrackHelper savingTrackHelper = mapActivity.getMyApplication().getSavingTrackHelper();
 				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), name);
-				if(settings.SHOW_CURRENT_GPX_TRACK.get()) {
-					getMyApplication().getFavorites().addFavoritePointToGPXFile(new FavouritePoint(latitude, longitude, name, ""));
-				}
 				AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 							.show();
 				dialog.dismiss();
@@ -500,14 +496,22 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	public void enterRoutePlanningMode(final LatLon from, final String fromName) {
-		final GPXFile gpxFile = mapActivity.getMyApplication().getGpxFileToDisplay();
+		List<SelectedGpxFile> selectedGPXFiles = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
+		GPXFile gpxFile = null;
+		for (SelectedGpxFile gs : selectedGPXFiles) {
+			if (!gs.isShowCurrentTrack()) {
+				gpxFile = gs.getGpxFile();
+				break;
+			}
+		}
 		if(gpxFile != null) {
+			final GPXFile f = gpxFile;
 			Builder bld = new AlertDialog.Builder(mapActivity);
 			bld.setMessage(R.string.use_displayed_track_for_navigation);
 			bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					enterRoutePlanningModeImpl(gpxFile, from, fromName);
+					enterRoutePlanningModeImpl(f, from, fromName);
 				}
 			});
 			bld.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {

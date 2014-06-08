@@ -4,9 +4,9 @@ import java.util.List;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -26,11 +26,12 @@ public class GPXLayer extends OsmandMapLayer {
 
 	private Path path;
 
-	private OsmandSettings settings;
 	
 	private RenderingRulesStorage cachedRrs;
 	private boolean cachedNightMode;
 	private int cachedColor;
+
+	private GpxSelectionHelper selectedGpxHelper;
 	
 	
 	private void initUI() {
@@ -47,7 +48,7 @@ public class GPXLayer extends OsmandMapLayer {
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		settings = view.getSettings();
+		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
 		initUI();
 	}
 
@@ -72,14 +73,19 @@ public class GPXLayer extends OsmandMapLayer {
 	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		GPXFile gpxFile = view.getApplication().getGpxFileToDisplay();
-		if(gpxFile == null){
-			return;
+		List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
+		int clr = getColor(settings);
+		if (!selectedGPXFiles.isEmpty()) {
+			for (SelectedGpxFile g : selectedGPXFiles) {
+				List<List<WptPt>> points = g.getPointsToDisplay();
+				int t = g.getColor();
+				paint.setColor(t == 0 ? clr : t);
+				drawSegments(canvas, tileBox, points);
+			}
 		}
-		List<List<WptPt>> points = gpxFile.processedPointsToDisplay;
-		
-		paint.setColor(getColor(settings));
+	}
 
+	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<List<WptPt>> points) {
 		final QuadRect latLonBounds = tileBox.getLatLonBounds();
 		for (List<WptPt> l : points) {
 			path.rewind();
@@ -100,7 +106,6 @@ public class GPXLayer extends OsmandMapLayer {
 			}
 			if (startIndex != -1) {
 				drawSegment(canvas, tileBox, l, startIndex, l.size() - 1);
-				continue;
 			}
 		}
 	}
@@ -124,11 +129,6 @@ public class GPXLayer extends OsmandMapLayer {
 	}
 	
 
-	public boolean isShowingCurrentTrack(){
-		return settings.SHOW_CURRENT_GPX_TRACK.get();
-	}
-	
-	
 	@Override
 	public void destroyLayer() {
 		

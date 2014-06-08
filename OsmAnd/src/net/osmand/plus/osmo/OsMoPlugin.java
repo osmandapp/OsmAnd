@@ -367,7 +367,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 						}
 						if(visible && (changed || makeVisible)) {
 							GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, f);
-							app.setGpxFileToDisplay(selectGPXFile, app.getSettings().SHOW_CURRENT_GPX_TRACK.get());
+							app.getSelectedGpxHelper().setGpxFileToDisplay(selectGPXFile);
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();

@@ -280,7 +280,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				WptPt p = gpx.findPointToShow();
 				getMyApplication().getSettings().setMapLocationToShow(p.lat, p.lon,
 						getMyApplication().getSettings().getLastKnownMapZoom(), null);
-				getMyApplication().setGpxFileToDisplay(gpx, false);
+				getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(gpx);
 			}
 		}
 		MapActivity.launchMapActivityMoveToTop(getActivity());

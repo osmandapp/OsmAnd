@@ -254,8 +254,8 @@ public class MapActivityLayers {
 			} else if(itemId == R.string.layer_favorites){
 				settings.SHOW_FAVORITES.set(isChecked);
 			} else if(itemId == R.string.layer_gpx_layer){
-				if(getApplication().getGpxFileToDisplay() != null){
-					getApplication().setGpxFileToDisplay(null, false);
+				if(getApplication().getSelectedGpxHelper().isShowingAnyGpxFiles()){
+					getApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
 				} else {
 					dialog.dismiss();
 					showGPXFileLayer(mapView);
@@ -281,7 +281,7 @@ public class MapActivityLayers {
 		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0) 
 				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).reg();
 		adapter.item(R.string.layer_gpx_layer).selected(
-				getApplication().getGpxFileToDisplay() != null ? 1 : 0)
+				getApplication().getSelectedGpxHelper() != null ? 1 : 0)
 //				.icons(R.drawable.ic_action_foot_dark, R.drawable.ic_action_foot_light)
 				.icons(R.drawable.ic_action_polygom_dark, R.drawable.ic_action_polygom_light)
 				.reg();
@@ -372,30 +372,24 @@ public class MapActivityLayers {
 	
 	public void showGPXFileLayer(final OsmandMapTileView mapView){
 		final OsmandSettings settings = getApplication().getSettings();
-		GpxUiHelper.selectGPXFile(activity, true, true, new CallbackWithObject<GPXFile>() {
+		GpxUiHelper.selectGPXFile(activity, true, true, new CallbackWithObject<GPXFile[]>() {
 			@Override
-			public boolean processResult(GPXFile result) {
-				GPXFile toShow = result;
-				if (toShow == null || toShow.showCurrentTrack) {
-					if(!settings.SAVE_TRACK_TO_GPX.get()){
-						AccessibleToast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
-					}
-					Map<String, GPXFile> data = getApplication().getSavingTrackHelper().collectRecordedData();
-					if(toShow == null) {
-						toShow = new GPXFile();
-						toShow.showCurrentTrack = true;
-					}
-					if(!data.isEmpty()) {
-						GPXFile last = data.values().iterator().next();
-						GPXUtilities.mergeGPXFileInto(toShow, last);
+			public boolean processResult(GPXFile[] result) {
+				WptPt locToShow = null;
+				for(GPXFile g : result) {
+					if(g.showCurrentTrack) {
+						if(!settings.SAVE_TRACK_TO_GPX.get()){
+							AccessibleToast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
+						}	
+						break;
+					} 
+					if(!g.showCurrentTrack || locToShow == null) {
+						locToShow = g.findPointToShow();
 					}
 				}
-				
-				settings.SHOW_FAVORITES.set(true);
-				getApplication().setGpxFileToDisplay(toShow, toShow.showCurrentTrack);
-				WptPt loc = toShow.findPointToShow();
-				if(loc != null){
-					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, 
+				getApplication().getSelectedGpxHelper().setGpxFileToDisplay(result);
+				if(locToShow != null){
+					mapView.getAnimatedDraggingThread().startMoving(locToShow.lat, locToShow.lon, 
 							mapView.getZoom(), true);
 				}
 				mapView.refreshMap();

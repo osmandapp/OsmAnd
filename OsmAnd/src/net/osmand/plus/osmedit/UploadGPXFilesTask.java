@@ -32,7 +32,7 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 		int count = 0;
 		int total = 0;
 		for (GpxInfo info : params) {
-			if (!isCancelled()) {
+			if (!isCancelled() && info.file != null) {
 				String warning = null;
 				File file = info.file;
 				warning = new OpenstreetmapRemoteUtil(la, null).uploadGPXFile(tagstring, description, visibility,

@@ -345,5 +345,12 @@ public class Algorithms {
 		}
 		return defaultValue;
 	}
-	
+
+	public static String colorToString(int color) {
+		if ((0xFF000000 & color) == 0xFF000000) {
+			return "#" + Integer.toHexString(color & 0x00FFFFFF); //$NON-NLS-1$
+		} else {
+			return "#" + Integer.toHexString(color); //$NON-NLS-1$
+		}
+	}
 }

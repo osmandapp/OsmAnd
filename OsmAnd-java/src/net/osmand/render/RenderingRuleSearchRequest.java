@@ -1,6 +1,7 @@
 package net.osmand.render;
 
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.util.Algorithms;
 
 
 public class RenderingRuleSearchRequest {
@@ -239,7 +240,7 @@ public class RenderingRuleSearchRequest {
 	}
 	
 	public String getColorStringPropertyValue(RenderingRuleProperty property) {
-		return RenderingRuleProperty.colorToString(values[property.getId()]);
+		return Algorithms.colorToString(values[property.getId()]);
 	}
 	
 	public int getIntPropertyValue(RenderingRuleProperty property) {
