@@ -1,13 +1,13 @@
 package net.osmand.plus;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.Route;
+import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.activities.SavingTrackHelper;
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -18,58 +18,100 @@ public class GpxSelectionHelper {
 //	public final CommonPreference<Boolean> SHOW_CURRENT_GPX_TRACK = 
 //			new BooleanPreference("show_current_gpx_track", false).makeGlobal().cache();
 	private List<SelectedGpxFile> selectedGPXFiles = new java.util.concurrent.CopyOnWriteArrayList<SelectedGpxFile>();
+	private SavingTrackHelper savingTrackHelper;
 
 	public GpxSelectionHelper(OsmandApplication osmandApplication) {
 		this.app = osmandApplication;
+		savingTrackHelper = this.app.getSavingTrackHelper();
 	}
 	
 	public void clearAllGpxFileToShow() {
 		selectedGPXFiles.clear();
 	}
 	
-	public boolean isShowingCurrentTrack() {
-		return getCurrentTrack() != null;
-	}
-	
 	public boolean isShowingAnyGpxFiles() {
 		return !selectedGPXFiles.isEmpty();
-	}
-	
-	public SelectedGpxFile getCurrentTrack() {
-		for(SelectedGpxFile s : selectedGPXFiles) {
-			if(s.isShowCurrentTrack()) {
-				return s;
-			}
-		}
-		return null;
 	}
 	
 	public List<SelectedGpxFile> getSelectedGPXFiles() {
 		return selectedGPXFiles;
 	}
 	
-	public void setToDisplayCurrentGpxFile(boolean show) {
-		if(show != isShowingCurrentTrack()) {
-			if(show) {
-				TODO_LOAD_CURRENT_BUFFER ;
-				SelectedGpxFile sg = new SelectedGpxFile();
-				sg.setGpxFile(new GPXFile());
-				sg.setShowCurrentTrack(true);
-				selectedGPXFiles.add(sg);
-			} else {
-				Iterator<SelectedGpxFile> it = selectedGPXFiles.iterator();
-				while(it.hasNext()) {
-					if(it.next().isShowCurrentTrack()) {
-						it.remove();
-						break;
-					}
-				}
+	public final String getString(int resId, Object... formatArgs) {
+		return app.getString(resId, formatArgs);
+	}
+	
+	public List<GpxDisplayGroup> getDisplayGroups() {
+		List<GpxDisplayGroup> dg = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
+		for(SelectedGpxFile s : selectedGPXFiles) {
+			GPXFile g = s.getGpxFile();
+			collectDisplayGroups(dg, g);
+			
+		}
+		return dg;
+	}
+
+	private void collectDisplayGroups(List<GpxDisplayGroup> dg, GPXFile g) {
+		String name = g.path;
+		if(g.showCurrentTrack){
+			name =  getString(R.string.gpx_selection_current_track);
+		} else {
+			int i = name.indexOf('/');
+			if(i >= 0) {
+				name = name.substring(i + 1);
+			}
+			if(name.endsWith(".gpx")) {
+				name = name.substring(0, name.length() - 4);
 			}
 		}
-		TODO_SAVE_IN_SETTINGS;
-	}
-	public List<GpxDisplayGroup> getDisplayGroups() {
-		TODO;
+		if (g.tracks.size() > 0) {
+			int k = 0;
+			for (Track t : g.tracks) {
+				GpxDisplayGroup group = new GpxDisplayGroup(g);
+				group.setType(GpxDisplayItemType.TRACK_POINTS);
+				group.setTrack(t);
+				String ks = (k++) + "";
+				group.setName(getString(R.string.gpx_selection_track, name, g.tracks.size() == 1 ? "" : ks));
+				String d = "";
+				if(t.name != null && t.name.length() > 0) {
+					d = t.name + " " + d;
+				}
+				group.setDescription(d);
+				dg.add(group);
+			}
+		}
+		if (g.routes.size() > 0) {
+			int k = 0;
+			for (Route r : g.routes) {
+				GpxDisplayGroup group = new GpxDisplayGroup(g);
+				group.setType(GpxDisplayItemType.TRACK_ROUTE_POINTS);
+				String d = getString(R.string.gpx_selection_number_of_points, r.points.size());
+				if(r.name != null && r.name.length() > 0) {
+					d = r.name + " " + d;
+				}
+				group.setDescription(d);
+				String ks = (k++) + "";
+				group.setName(getString(R.string.gpx_selection_route_points, name, g.routes.size() == 1 ? "" : ks));
+				dg.add(group);
+			}
+		}
+		
+		if (g.points.size() > 0) {
+			GpxDisplayGroup group = new GpxDisplayGroup(g);
+			group.setType(GpxDisplayItemType.TRACK_POINTS);
+			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.points.size()));
+			group.setName(getString(R.string.gpx_selection_points));
+			dg.add(group);
+			List<GpxDisplayItem> list = group.getModifiableList();
+			for (WptPt r : g.points) {
+				GpxDisplayItem item = new GpxDisplayItem();
+				item.description = r.desc;
+				item.name = r.name;
+				item.locationStart = r;
+				item.locationEnd = r;
+				list.add(item);
+			}
+		}
 	}
 	
 	public SelectedGpxFile getSelectedFileByPath(String path) {
@@ -81,39 +123,47 @@ public class GpxSelectionHelper {
 		return null;
 	}
 	
-	public SelectedGpxFile setGpxFileToDisplay(GPXFile... gpx) {
+	public void setGpxFileToDisplay(GPXFile... gpxs) {
 		// special case for gpx current route
-		SelectedGpxFile sf = getSelectedFileByPath(gpx.path);
-		boolean displayed = sf != null;
-		if(displayed != show) {
-			if(show) {
-				sf = new SelectedGpxFile();
-				sf.setGpxFile(gpx);
-				selectedGPXFiles.add(sf);
-			} else {
-				selectedGPXFiles.remove(sf);
-			}
+		for(GPXFile gpx : gpxs) {
+			boolean show = true;
+			selectGpxFileImpl(gpx, show);
 		}
-		return sf;
-	}
-	
-	public SelectedGpxFile setGpxFileToDisplay(String path, boolean show) {
-		SelectedGpxFile sf = getSelectedFileByPath(path);
-		boolean displayed = sf != null;
-		if(displayed != show) {
-			if(show) {
-				TODO_ASYNC;
-				GPXFile r = GPXUtilities.loadGPXFile(app, new File(path));
-				sf = new SelectedGpxFile();
-				sf.setGpxFile(r);
-				selectedGPXFiles.add(sf);
-			} else {
-				selectedGPXFiles.remove(sf);
-			}
-		}
-		return sf;
+		saveCurrentSelections();
 	}
 
+	private void saveCurrentSelections() {
+//		TODO;
+	}
+
+	private void selectGpxFileImpl(GPXFile gpx, boolean show) {
+		boolean displayed = false;
+		SelectedGpxFile sf ;
+		if(gpx.showCurrentTrack) {
+			sf = savingTrackHelper.getCurrentTrack();
+			displayed = selectedGPXFiles.contains(sf);
+		} else {
+			sf = getSelectedFileByPath(gpx.path);
+			displayed = sf != null;
+			if(show && sf == null) {
+				sf = new SelectedGpxFile();
+				sf.setGpxFile(gpx);
+			}
+		}
+		if(displayed != show) {
+			if(show) {
+				selectedGPXFiles.add(sf);
+			} else {
+				selectedGPXFiles.remove(sf);
+			}
+		}
+	}
+	
+	public void selectGpxFile(GPXFile gpx, boolean show) {
+		selectGpxFileImpl(gpx, show);
+		saveCurrentSelections();
+	}
+	
 	public static class SelectedGpxFile {
 		private boolean showCurrentTrack;
 		private GPXFile gpxFile;
@@ -160,14 +210,48 @@ public class GpxSelectionHelper {
 		
 		private GpxDisplayItemType type = GpxDisplayItemType.TRACK_SEGMENT;
 		private List<GpxDisplayItem> list = new ArrayList<GpxDisplayItem>();
+		private GPXFile gpx;
+		private Track track;
+		private String name;
+		private String description;
 		
+		public GpxDisplayGroup(GPXFile gpx) {
+			this.gpx = gpx;
+		}
+
+		public void setTrack(Track track) {
+			this.track = track;
+		}
+		
+		public Track getTrack() {
+			return track;
+		}
+
 		public GpxDisplayGroup cloneInstance() {
-			GpxDisplayGroup group = new GpxDisplayGroup();
+			GpxDisplayGroup group = new GpxDisplayGroup(gpx);
 			group.type = type;
+			group.name = name;
+			group.description = description;
+			group.track = track;
 			group.list = new ArrayList<GpxSelectionHelper.GpxDisplayItem>(list);
 			return group;
 		}
 		
+		public String getDescription() {
+			return description;
+		}
+		
+		public void setDescription(String description) {
+			this.description = description;
+		}
+		
+		public void setName(String name) {
+			this.name = name;
+		}
+		
+		public String getName() {
+			return name;
+		}
 		
 		public List<GpxDisplayItem> getModifiableList() {
 			return list;
@@ -183,24 +267,20 @@ public class GpxSelectionHelper {
 
 
 		public String getGroupName(Context ctx) {
-			return TODO;
+			return name;
 		}
 	}
 	
 	public static class GpxDisplayItem {
 		
-		private boolean filter;
-		private String description;
-		private Bitmap image;
-		private String url;
+		public WptPt locationStart;
+		public WptPt locationEnd;
+		public String name;
+		public String description;
+		public String url;
+		public Bitmap image;
 		
-		public boolean isFilter() {
-			return filter;
-		}
 		
-		public void setFilter(boolean filter) {
-			this.filter = filter;
-		}
 	}
 
 

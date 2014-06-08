@@ -370,5 +370,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public GPXFile getCurrentGpx() {
 		return currentTrack.getGpxFile();
 	}
+	
+	public SelectedGpxFile getCurrentTrack() {
+		return currentTrack;
+	}
 
 }

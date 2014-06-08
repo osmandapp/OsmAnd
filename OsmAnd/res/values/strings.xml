@@ -9,6 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="gpx_selection_number_of_points">%1$s points</string>
+    <string name="gpx_selection_current_track">recording</string>
+    <string name="gpx_selection_route_points">Gpx %1$s - Route points %2$s</string>
+    <string name="gpx_selection_points">Gpx %1$s - Points</string>
+    <string name="gpx_selection_track">Gpx %1$s - Track %2$s</string>
     <string name="gpx_file_is_empty">Gpx track is empty</string>
     <string name="selected_track">Track</string>
     <string name="my_tracks">All tracks</string>
