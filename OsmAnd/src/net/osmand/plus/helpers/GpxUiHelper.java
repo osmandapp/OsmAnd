@@ -85,7 +85,7 @@ public class GpxUiHelper {
 	}
 	
 	public static void selectGPXFile(final Activity activity,
-			final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile> callbackWithObject) {
+			final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final List<String> list = getSortedGPXFilenames(dir);
@@ -114,11 +114,11 @@ public class GpxUiHelper {
 			final File dir, String filename, final int position) {
 		final Application app = activity.getApplication();
 		final File f = new File(dir, filename);
-		loadGPXFileInDifferentThread(activity, new CallbackWithObject<GPXUtilities.GPXFile>() {
+		loadGPXFileInDifferentThread(activity, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
 			
 			@Override
-			public boolean processResult(GPXFile result) {
-				cmAdapter.setItemName(position, cmAdapter.getItemName(position) + "\n" + getDescription((OsmandApplication) app, result, f));
+			public boolean processResult(GPXFile[] result) {
+				cmAdapter.setItemName(position, cmAdapter.getItemName(position) + "\n" + getDescription((OsmandApplication) app, result[0], f));
 				adapter.notifyDataSetInvalidated();
 				return true;
 			}
@@ -126,7 +126,7 @@ public class GpxUiHelper {
 	}
 
 	private static void createDialog(final Activity activity, final boolean showCurrentGpx,
-			final boolean multipleChoice, final CallbackWithObject<GPXFile> callbackWithObject,
+			final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject,
 			final List<String> list, final ContextMenuAdapter adapter) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
@@ -209,8 +209,7 @@ public class GpxUiHelper {
 				public void onClick(DialogInterface dialog, int which) {
 					GPXFile currentGPX = null;
 					if (showCurrentGpx && adapter.getSelection(0) > 0) {
-						currentGPX = new GPXFile();
-						currentGPX.showCurrentTrack = true;
+						currentGPX = app.getSavingTrackHelper().getCurrentGpx();
 					}
 					List<String> s = new ArrayList<String>();
 					for (int i = (showCurrentGpx ? 1 : 0); i < adapter.length(); i++) {
@@ -288,34 +287,39 @@ public class GpxUiHelper {
 		return getSortedGPXFilenames(dir, null);
 	}
 	
-	private static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile> callbackWithObject,
+	private static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
 			final File dir, final GPXFile currentFile, final String... filename) {
 		final ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading),
 				activity.getString(R.string.loading_data));
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				GPXFile r = currentFile; 
-				for(String fname : filename) {
+				final GPXFile[] result = new GPXFile[filename.length + (currentFile == null ? 1 : 0)];
+				int k = 0;
+				String w = "";
+				if (currentFile != null) {
+					result[k++] = currentFile;
+				}
+				for (String fname : filename) {
 					final File f = new File(dir, fname);
 					GPXFile res = GPXUtilities.loadGPXFile(activity.getApplication(), f);
-					GPXUtilities.mergeGPXFileInto(res, r);
-					r = res;
+					if (res.warning != null && res.warning.length() > 0) {
+						w += res.warning + "\n";
+					}
+					result[k++] = res;
 				}
-				final GPXFile res = r;
 				dlg.dismiss();
-				if (res != null) {
-					activity.runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							if (res.warning != null) {
-								AccessibleToast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
-							} else {
-								callbackWithObject.processResult(res);
-							}
+				final String warn = w;
+				activity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						if (warn.length() > 0) {
+							AccessibleToast.makeText(activity, warn, Toast.LENGTH_LONG).show();
+						} else {
+							callbackWithObject.processResult(result);
 						}
-					});
-				}
+					}
+				});
 			}
 
 		}, "Loading gpx").start(); //$NON-NLS-1$

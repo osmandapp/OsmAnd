@@ -183,31 +183,29 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			};
 			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(),
 					getActivity(), true, onshow, false);
-			if (point.isStored()) {
-				ActionItem edit = new ActionItem();
-				edit.setIcon(getResources().getDrawable(R.drawable.ic_action_edit_light));
-				edit.setTitle(getString(R.string.favourites_context_menu_edit));
-				edit.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						editPoint(point);
-						qa.dismiss();
-					}
-				});
-				qa.addActionItem(edit);
+			ActionItem edit = new ActionItem();
+			edit.setIcon(getResources().getDrawable(R.drawable.ic_action_edit_light));
+			edit.setTitle(getString(R.string.favourites_context_menu_edit));
+			edit.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					editPoint(point);
+					qa.dismiss();
+				}
+			});
+			qa.addActionItem(edit);
 
-				ActionItem delete = new ActionItem();
-				delete.setTitle(getString(R.string.favourites_context_menu_delete));
-				delete.setIcon(getResources().getDrawable(R.drawable.ic_action_delete_light));
-				delete.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						deletePoint(point);
-						qa.dismiss();
-					}
-				});
-				qa.addActionItem(delete);
-			}
+			ActionItem delete = new ActionItem();
+			delete.setTitle(getString(R.string.favourites_context_menu_delete));
+			delete.setIcon(getResources().getDrawable(R.drawable.ic_action_delete_light));
+			delete.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					deletePoint(point);
+					qa.dismiss();
+				}
+			});
+			qa.addActionItem(delete);
 
 			qa.show();
 		}
@@ -698,11 +696,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
 			row.setTag(model);
-			if (model.isStored()) {
-				icon.setImageResource(R.drawable.list_favorite);
-			} else {
-				icon.setImageResource(R.drawable.opened_poi);
-			}
+			icon.setImageResource(R.drawable.list_favorite);
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
@@ -712,7 +706,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 					new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
 					0);
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
-			if (selectionMode && model.isStored()) {
+			if (selectionMode) {
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(favoritesToDelete.contains(model));
 				row.findViewById(R.id.favourite_icon).setVisibility(View.GONE);

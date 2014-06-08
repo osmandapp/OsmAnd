@@ -356,11 +356,11 @@ public class MapRoutePreferencesControl extends MapControls {
 	}
 
 	protected void openGPXFileSelection(final Spinner gpxSpinner) {
-		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXUtilities.GPXFile>() {
+		GpxUiHelper.selectGPXFile(mapActivity, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
 			
 			@Override
-			public boolean processResult(GPXFile result) {
-				mapActivity.getMapActions().setGPXRouteParams(result);
+			public boolean processResult(GPXFile[] result) {
+				mapActivity.getMapActions().setGPXRouteParams(result[0]);
 				mapActivity.getMyApplication().getTargetPointsHelper().updateRoutingHelper();
 				updateSpinnerItems(gpxSpinner);
 				updateParameters();

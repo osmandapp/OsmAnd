@@ -1,7 +1,13 @@
 package net.osmand.plus.activities;
 
 import java.text.Collator;
+import java.util.ArrayList;
+import java.util.List;
 
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,11 +16,9 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.ActionMode.Callback;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
@@ -26,22 +30,30 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	public static final int SEARCH_ID = -1;
 	public static final int ACTION_ID = 0;
 	protected static final int DELETE_ACTION_ID = 1;
-	private boolean selectionMode = false;
 	private ActionMode actionMode;
 	private SearchView searchView;
-
+	private OsmandApplication app;
+	private GpxSelectionHelper selectedGpxHelper;
+	private SelectedGPXAdapter adapter;
+	
+	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
+		app = (OsmandApplication) activity.getApplication();
+		selectedGpxHelper = app.getSelectedGpxHelper();
 
+		adapter = new SelectedGPXAdapter();
+		setAdapter(adapter);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
+		adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
 	}
 
 
@@ -85,56 +97,21 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
 	}
 
-	private void enterDeleteMode() {
-		actionMode = getSherlockActivity().startActionMode(new Callback() {
 
-			@Override
-			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-				selectionMode = true;
-				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete,
-						R.drawable.ic_action_delete_light, R.drawable.ic_action_delete_dark,
-						MenuItem.SHOW_AS_ACTION_IF_ROOM);
-				return true;
-			}
-
-			@Override
-			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-				return false;
-			}
-
-			@Override
-			public void onDestroyActionMode(ActionMode mode) {
-				selectionMode = false;
-			}
-
-			@Override
-			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-				if (item.getItemId() == DELETE_ACTION_ID) {
-					// TODO delete
-				}
-				return true;
-			}
-
-		});
-
-	}
-
-	
-
-	
-
-	
-
-	
-
-	class SelectedGPXAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
+	class SelectedGPXAdapter extends OsmandBaseExpandableListAdapter  {
 
 		Filter myFilter;
+		private List<GpxDisplayGroup> displayGroups = new ArrayList<GpxDisplayGroup>();
+		
+		public void setDisplayGroups(List<GpxDisplayGroup> displayGroups) {
+			this.displayGroups = displayGroups;
+		}
 
 
 		@Override
-		public Object getChild(int groupPosition, int childPosition) {
-			return null;
+		public GpxDisplayItem getChild(int groupPosition, int childPosition) {
+			GpxDisplayGroup group = getGroup(groupPosition);
+			return group.getModifiableList().get(childPosition);
 		}
 
 		@Override
@@ -144,17 +121,17 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			return 0;
+			return getGroup(groupPosition).getModifiableList().size();
 		}
 
 		@Override
-		public String getGroup(int groupPosition) {
-			return "";
+		public GpxDisplayGroup getGroup(int groupPosition) {
+			return displayGroups.get(groupPosition);
 		}
 
 		@Override
 		public int getGroupCount() {
-			return 0;
+			return displayGroups.size();
 		}
 
 		@Override
@@ -182,10 +159,9 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			}
 			adjustIndicator(groupPosition, isExpanded, row);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
-			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
-//			final String model = getGroup(groupPosition);
-//			label.setText(model);
-//
+			final GpxDisplayGroup model = getGroup(groupPosition);
+			label.setText(model.getGroupName(app));
+//			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 //			if (selectionMode) {
 //				ch.setVisibility(View.VISIBLE);
 //				ch.setChecked(groupsToDelete.contains(model));
@@ -264,77 +240,13 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			return row;
 		}
 
-		@Override
-		public Filter getFilter() {
-			if (myFilter == null) {
-				myFilter = new SearchFilter();
-			}
-			return myFilter;
-		}
 	}
 
-	private class SearchFilter extends Filter {
-
-
-		public SearchFilter() {
-		}
-
-		@Override
-		protected FilterResults performFiltering(CharSequence constraint) {
-			FilterResults results = new FilterResults();
-//			if (constraint == null || constraint.length() == 0) {
-//				results.values = helper.getFavoriteGroups();
-//				results.count = 1;
-//			} else {
-//				TreeMap<String, List<FavouritePoint>> filter = new TreeMap<String, List<FavouritePoint>>(helper.getFavoriteGroups());
-//				TreeMap<String, List<FavouritePoint>> filterLists = new TreeMap<String, List<FavouritePoint>>();
-//				String cs = constraint.toString().toLowerCase();
-//				Iterator<Entry<String, List<FavouritePoint>>> ti = filter.entrySet().iterator();
-//				while(ti.hasNext()) {
-//					Entry<String, List<FavouritePoint>> next = ti.next();
-//					if(next.getKey().toLowerCase().indexOf(cs) == -1) {
-//						ti.remove();
-//						filterLists.put(next.getKey(), next.getValue());
-//					}
-//				}
-//				ti = filterLists.entrySet().iterator();
-//				while(ti.hasNext()) {
-//					Entry<String, List<FavouritePoint>> next = ti.next();
-//					final List<FavouritePoint> list = next.getValue();
-//					LinkedList<FavouritePoint> ll = new LinkedList<FavouritePoint>();
-//					for(FavouritePoint l : list) {
-//						if(l.getName().toLowerCase().indexOf(cs) != -1) {
-//							ll.add(l);
-//						}
-//							
-//					}
-//					if(ll.size() > 0) {
-//						filter.put(next.getKey(), ll);
-//					}
-//				}
-//				results.values = filter;
-//				results.count = filter.size();
-//			}
-			return results;
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		protected void publishResults(CharSequence constraint, FilterResults results) {
-//			synchronized (adapter) {
-//				favouritesAdapter.setFavoriteGroups((Map<String, List<FavouritePoint>>) results.values);
-//			}
-//			favouritesAdapter.notifyDataSetChanged();
-//			if(constraint != null && constraint.length() > 1) {
-//				collapseTrees();
-//			}
-		}
-
-	}
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		return false;
 	}
 
+	
 }

@@ -17,9 +17,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.FavouritePoint;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.SavingTrackHelper;
@@ -63,8 +60,8 @@ import android.util.TypedValue;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import btools.routingapp.BRouterServiceConnection;
@@ -99,7 +96,7 @@ public class OsmandApplication extends Application {
 	// start variables
 	private ProgressImplementation startDialog;
 	private Handler uiHandler;
-	private GPXFile gpxFileToDisplay;
+	private GpxSelectionHelper selectedGpxHelper;
 	private SavingTrackHelper savingTrackHelper;
 	private LiveMonitoringHelper liveMonitoringHelper;
 	private TargetPointsHelper targetPointsHelper;
@@ -150,6 +147,7 @@ public class OsmandApplication extends Application {
 		locationProvider = new OsmAndLocationProvider(this);
 		savingTrackHelper = new SavingTrackHelper(this);
 		liveMonitoringHelper = new LiveMonitoringHelper(this);
+		selectedGpxHelper = new GpxSelectionHelper(this);
 		uiHandler = new Handler();
 		rendererRegistry = new RendererRegistry();
 		targetPointsHelper = new TargetPointsHelper(this);
@@ -229,30 +227,9 @@ public class OsmandApplication extends Application {
 		return poiFilters;
 	}
 
-	public void setGpxFileToDisplay(GPXFile gpxFileToDisplay, boolean showCurrentGpxFile) {
-		this.gpxFileToDisplay = gpxFileToDisplay;
-		osmandSettings.SHOW_CURRENT_GPX_TRACK.set(showCurrentGpxFile);
-		if (gpxFileToDisplay == null) {
-			getFavorites().setFavoritePointsFromGPXFile(null);
-		} else {
-			List<FavouritePoint> pts = new ArrayList<FavouritePoint>();
-			for (WptPt p : gpxFileToDisplay.points) {
-				FavouritePoint pt = new FavouritePoint();
-				pt.setLatitude(p.lat);
-				pt.setLongitude(p.lon);
-				if (p.name == null) {
-					p.name = "";
-				}
-				pt.setName(p.name);
-				pts.add(pt);
-			}
-			gpxFileToDisplay.proccessPoints();
-			getFavorites().setFavoritePointsFromGPXFile(pts);
-		}
-	}
 
-	public GPXFile getGpxFileToDisplay() {
-		return gpxFileToDisplay;
+	public GpxSelectionHelper getSelectedGpxHelper() {
+		return selectedGpxHelper;
 	}
 
 	public FavouritesDbHelper getFavorites() {

@@ -1650,8 +1650,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> SERVICE_OFF_INTERVAL = new IntPreference("service_off_interval", 
 			5 * 60 * 1000).makeGlobal();
 	
-	public final CommonPreference<Boolean> SHOW_CURRENT_GPX_TRACK = 
-			new BooleanPreference("show_current_gpx_track", false).makeGlobal().cache();
 	
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference("CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();
 	

@@ -423,7 +423,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						if (loc != null) {
 							settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 							e = false;
-							getMyApplication().setGpxFileToDisplay(info.gpx, false);
+							getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(info.gpx);
 							MapActivity.launchMapActivityMoveToTop(getActivity());
 						}
 					}

@@ -350,8 +350,6 @@ public class GPXUtilities {
 		public String path = "";
 		public boolean showCurrentTrack;
 
-		public List<List<WptPt>> processedPointsToDisplay = new ArrayList<List<WptPt>>();
-
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
 		}
@@ -469,7 +467,7 @@ public class GPXUtilities {
 			return false;
 		}
 
-		public void proccessPoints() {
+		public List<List<WptPt>> proccessPoints() {
 			List<List<WptPt>> tpoints = new ArrayList<List<WptPt>>();
 			boolean created = false;
 			for (Track t : tracks) {
@@ -485,7 +483,7 @@ public class GPXUtilities {
 					tpoints.add(r.points);
 				}
 			}
-			processedPointsToDisplay = tpoints;
+			return tpoints;
 		}
 
 		public WptPt findPointToShow() {

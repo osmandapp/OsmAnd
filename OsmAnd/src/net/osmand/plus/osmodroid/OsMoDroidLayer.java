@@ -136,8 +136,7 @@ public class OsMoDroidLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 
 		for (ColoredGPX cg : gpxArrayList){
-			cg.gpxFile.proccessPoints();
-			List<List<WptPt>> points = cg.gpxFile.processedPointsToDisplay;
+			List<List<WptPt>> points = cg.gpxFile.proccessPoints();
 			
 			paint.setColor(cg.color);
 
