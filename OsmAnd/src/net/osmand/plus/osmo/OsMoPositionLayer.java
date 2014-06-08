@@ -154,7 +154,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				canvas.drawCircle(x, y, r + (float)Math.ceil(tb.getDensity()), pointOuter);
 				canvas.drawCircle(x, y, r - (float)Math.ceil(tb.getDensity()), pointInnerCircle);
 				paintTextIcon.setTextSize(r * 3 / 2);
-				canvas.drawText(t.getVisibleName().substring(0, 1).toUpperCase(), x, y - r, paintTextIcon);
+				canvas.drawText(t.getVisibleName().substring(0, 1).toUpperCase(), x, y + r, paintTextIcon);
 			}
 		}
 	}
