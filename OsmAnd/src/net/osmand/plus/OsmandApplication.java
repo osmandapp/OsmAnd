@@ -691,7 +691,7 @@ public class OsmandApplication extends Application {
 	}
 
 	public void showToastMessage(String msg) {
-		//AccessibleToast.makeText(this, msg, Toast.LENGTH_LONG).show();
+		AccessibleToast.makeText(this, msg, Toast.LENGTH_LONG).show();
 	}
 	
 	public SQLiteAPI getSQLiteAPI() {
