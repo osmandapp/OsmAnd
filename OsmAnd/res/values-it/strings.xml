@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1870,4 +1870,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="my_data_activity">I miei dati</string>
     <string name="osmo_show_group_notifications_descr">Mostra un messaggio popup quando l\'utente aderisce o lascia il gruppo</string>
     <string name="gpx_file_is_empty">La traccia Gpx è vuota</string>
-    </resources>
+    <string name="gpx_info_start_time">Orario di partenza: %1$tF, %1$tR </string>
+	<string name="gpx_info_average_speed">Velocità media: %1$s </string>
+	<string name="gpx_info_maximum_speed">Velocità massima: %1$s </string>
+	<string name="gpx_info_avg_altitude">Altitudine media: %1$s</string>
+	<string name="gpx_info_subtracks">Sottotracce: %1$s </string>
+	</resources>
