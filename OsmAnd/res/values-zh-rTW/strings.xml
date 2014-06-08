@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -169,7 +169,7 @@
     	<string name="global_app_allocated_memory_descr">已配置記憶體 %1$s MB (Android 限制%2$s MB, Dalvik %3$s MB)。</string>
 	<string name="global_app_allocated_memory">已配置記憶</string>
 	<string name="native_app_allocated_memory">原生記憶體總計</string>
-	<string name="update_downlod_list">重載入列表</string>
+	<string name="update_downlod_list">重新載入列表</string>
 	<string name="starting_point_too_far">出發點離最近的道路太遠。</string>
 	<string name="shared_location">分享位置</string>
 	<string name="osmand_parking_event">由停車場取車</string>
@@ -316,12 +316,12 @@
 	<string name="settings_direction_style_descr">選擇樣式來表示在行進中的相對方向</string>
 	<string name="auto_announce_on">啟動自動告知</string>
 	<string name="auto_announce_off">關閉自動告知</string>
-	<string name="scroll_map_by_gestures_descr">以觸控式螢幕手勢移動地圖</string>
-	<string name="scroll_map_by_gestures">自然捲動地圖</string>
+	<string name="scroll_map_by_gestures_descr">在觸控螢幕上用手勢移動地圖</string>
+	<string name="scroll_map_by_gestures">自然的捲動地圖</string>
 	<string name="i_am_here">我的位置</string>
 	<string name="zoom_by_trackball_descr">以軌跡球水平移動改變地圖縮放</string>
 	<string name="zoom_by_trackball">以軌跡球控制地圖縮放</string>
-	<string name="use_short_object_names_descr">用簡短的物件名稱在觸控探索模式上</string>
+	<string name="use_short_object_names_descr">在觸摸探索模式中用簡短的物件名稱</string>
 	<string name="use_short_object_names">使用物件名稱</string>
 	<string name="accessibility_preferences_descr">協助工具的相關偏好設定</string>
 	<string name="accessibility_preferences">協助工具</string>
@@ -560,7 +560,7 @@
 		\n\n欲將我的最愛顯示在地圖上，要在地圖螢幕上啟用圖層\'我的最愛\'，由\'選單\' -&gt;\'地圖圖層\'即可。
 	</string>
 	<string name="error_doing_search">離線查尋發生錯誤</string>
-	<string name="search_offline_geo_error">無法解析地理原意 \'%s\'</string>
+	<string name="search_offline_geo_error">無法解析地理含義 \'%s\'</string>
 	<string name="search_osm_offline">查尋地理位置</string>
 	<string name="system_locale">系統</string>
 	<string name="preferred_locale_descr">選擇顯示語言</string>
@@ -681,8 +681,8 @@
 	<string name="download_files_question">下載{0}個檔({1} MB)？</string>
 	<string name="items_were_selected">已選{0}項</string>
 	<string name="filter_existing_indexes">篩選已下載的</string>
-	<string name="deselect_all">全不選</string>
-	<string name="select_all">全選</string>
+	<string name="deselect_all">取消全選</string>
+	<string name="select_all">全部選取</string>
 	<string name="reload">重整</string>
 	<string name="fast_route_mode">最快路線</string>
 	<string name="fast_route_mode_descr">啟用為預估最快的路線而停用則為最短的路線 </string>
@@ -1769,7 +1769,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_session_token">區段記號：%1$s</string>
     <string name="osmo_auth_pending">等候授權...</string>
     <string name="osmo_locations_sent">發送位置 %1$d（在緩衝區 %2$d） </string>
-    <string name="osmo_conn_successfull">建立連線：%1$s </string>
+    <string name="osmo_conn_successfull">已建立的連線：%1$s </string>
     <string name="osmo_mode_restart">重新啟動 OsMo 區段</string>
     <string name="osmo_settings_debug">除錯資訊</string>
     <string name="hours_ago">小時前</string>
@@ -1784,7 +1784,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_groups">OsMo 群組/裝置</string>
     <string name="osmo_group">OsMo 群組</string>
     <string name="osmo_group_info">資訊</string>
-    <string name="osmo_group_share">為了連接到群組 %2$s，指定群組ID (%1$s)或是點選 %3$s。</string>
+    <string name="osmo_group_share">為了連接到群組 %2$s，指定群組 ID (%1$s)或是點選 %3$s。</string>
     <string name="osmo_share_connect_device">允許持續的跟隨這個裝置</string>
     <string name="osmo_share_current_session">在瀏覽器分享目前的區段</string>
     <string name="osmo_session_not_available">無有效的區段，請檢查\'傳送位置\'是否有開。</string>
@@ -1835,4 +1835,14 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_user_name">使用者</string>
 	<string name="color_green">綠色</string>
 	
+    <string name="osmo_user_joined">使用者 %1$s 已加入群組 %2$s</string>
+    <string name="osmo_user_left">使用者 %1$s 離開群組 %2$s</string>
+    <string name="osmo_show_group_notifications">顯示群組通知</string>
+    <string name="osmo_show_group_notifications_descr">在使用者加入或離開群組時顯示提示訊息</string>
+    <string name="my_favorites">我的最愛</string>
+    <string name="my_data_Button">我的資料</string>
+    <string name="my_data_activity">我的資料</string>
+    <string name="selected_track">追蹤</string>
+    <string name="my_tracks">全部追蹤</string>
+    <string name="gpx_file_is_empty">GPX 軌跡是空的</string>
     </resources>

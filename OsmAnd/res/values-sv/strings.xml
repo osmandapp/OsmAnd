@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -1534,13 +1534,23 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_sign_in">Logga in</string>
     <string name="osmo_create_groups_confirm">För att kunna skapa grupper måste du registrera dig på OsMo.</string>
     <string name="osmo_credentials_not_valid">Dina OsMo-uppgifter är inte giltiga.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Är det säkert att du vill generera om personliga id? Alla enheter som är kopplade till dig kommer inte att kunna följa dig längre.</string>
-    <string name="osmo_regenerate_login_ids">Generera om användar-id</string>
+    <string name="osmo_regenerate_login_ids_confirm">Är det säkert att du vill återskapa personliga id? Alla enheter som är kopplade till dig kommer inte att kunna följa dig längre.</string>
+    <string name="osmo_regenerate_login_ids">Återskapa användar-id</string>
     <string name="osmo_cancel_moving_target">Avbryt rörligt mål</string>
     <string name="osmo_center_location">Centrera på skärmen</string>
     <string name="osmo_set_moving_target">Ange som rörligt mål</string>
     <string name="osmo_use_server_name">Registrerat namn</string>
-    <string name="osmo_connect_to_my_nickname">Mitt nick</string>
+    <string name="osmo_connect_to_my_nickname">Mitt alias</string>
     <string name="osmo_user_name">Användare</string>
 	<string name="osmo_follow">Följ</string>
+    <string name="osmo_user_joined">Användare %1$s anslöt till grupp %2$s</string>
+    <string name="osmo_user_left">Användare %1$s lämnade grupp %2$s</string>
+    <string name="osmo_show_group_notifications">Visa gruppmeddelanden</string>
+    <string name="osmo_show_group_notifications_descr">Visa popup-meddelande när användar ansluter till eller lämnar gruppen</string>
+    <string name="selected_track">Spår</string>
+    <string name="my_tracks">Alla spår</string>
+    <string name="my_favorites">Mina favoriter</string>
+    <string name="my_data_Button">Mina data</string>
+    <string name="my_data_activity">Mina data</string>
+    <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
     </resources>

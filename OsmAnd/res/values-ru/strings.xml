@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
@@ -1621,7 +1621,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_auto_send_locations_descr">Автоматически стартовать сессию трекера и отправлять местоположение после запуска приложения</string>
     <string name="osmo_auto_send_locations">Автоматически запускать мониторинг</string>
     <string name="osmo_tracker_id">Персональный ID трекера</string>
-    <string name="osmo_session_token">Токен: %1$s</string>
+    <string name="osmo_session_token">Токен сессии: %1$s</string>
     <string name="tip_recent_changes_1_8_alpha">Изменения в 1.8:
 	* Расчёт маршрута между маршрутными точками трека GPX
 	* Изменённый порядок стран для загрузок (поддерживается местный поиск имён)
@@ -1634,7 +1634,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_group_name">Название группы</string>
     <string name="osmo_connect_to_group">Подключиться к группе</string>
     <string name="osmo_create_group">Создать группу</string>
-    <string name="osmo_enable_tracker">Мониторинг</string>
+    <string name="osmo_enable_tracker">Отправлять мои местоположения</string>
     <string name="osmo_group_description">Описание</string>
     <string name="int_days">дней</string>
     <string name="osmo_track_interval">Интервал отправки</string>
@@ -1674,4 +1674,15 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_credentials_not_valid">Ваши учётные данные osmo не верные.</string>
     <string name="osmo_follow">Следовать</string>
     <string name="osmo_edit_device">Изменить пользовательские свойства</string>
+    <string name="gpx_file_is_empty">Трэк GPX пуст</string>
+    <string name="selected_track">Трэк</string>
+    <string name="my_tracks">Все трэки</string>
+    <string name="my_favorites">Мои избранные</string>
+    <string name="my_data_Button">Мои данные</string>
+    <string name="my_data_activity">Мои данные</string>
+    <string name="osmo_user_joined">Пользователь %1$s присоединился к группе %2$s</string>
+    <string name="osmo_user_left">Пользователь %1$s покинул группу %2$s</string>
+    <string name="osmo_show_group_notifications">Показывать извещения группы</string>
+    <string name="osmo_show_group_notifications_descr">Показывать сообщения, когда пользователь присоединяется или покидает группу</string>
+    <string name="osmo_group_policy">Политика</string>
     </resources>

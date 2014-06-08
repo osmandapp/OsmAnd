@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -1513,13 +1513,13 @@ s často kladenými otázkami.</string>
     <string name="osmo_edit_color">Zobrazit barvu</string>
     <string name="osmo_group_info">Informace</string>
     <string name="osmo_group">Skupina OsMo</string>
-    <string name="osmo_group_share">Aby bylo možné se připojit ke skupině %2$s, určete id skupiny (%1$s)</string>
+    <string name="osmo_group_share">Aby bylo možné se připojit ke skupině %2$s, určete id skupiny (%1$s) nebo klikněte %3$s.</string>
     <string name="osmo_share_connect_device">Trvale sledovat toto zařízení</string>
     <string name="osmo_share_current_session">Sdílet aktuální relaci v prohlížeči</string>
     <string name="osmo_session_not_available">Relace není k dispozici, prosím zkontrolujte že je zapnuta volba \'Odesílat pozici\'.</string>
     <string name="osmo_share_session">Sdílet relaci</string>
     <string name="osmo_session_id_share">Relace URL k sledování zařízení (%1$s)</string>
-    <string name="osmo_tracker_id_share">Aby bylo možné připojit cílové zařízení %2$s, určete ID sledovacího zařízení (%1$s)</string>
+    <string name="osmo_tracker_id_share">Aby bylo možné připojit cílové zařízení %2$s, klikněte na link %3$s nebo určete ID sledovacího zařízení (%1$s)</string>
     <string name="osmo_track_interval">Interval logování</string>
 	<string name="osmo_track_interval_descr">Vyberte časový interval odesílání polohy</string>
     <string name="int_days">dnů</string>
@@ -1540,19 +1540,19 @@ s často kladenými otázkami.</string>
     <string name="osmo_enable_tracker">Odeslat mou pozici</string>
     <string name="osmo_control">OsMo rychlý přístup</string>
     <string name="hours_ago">hodin dozadu</string>
-    <string name="minutes_ago">munut dozadu</string>
+    <string name="minutes_ago">minut dozadu</string>
     <string name="seconds_ago">sekund dozadu</string>
     <string name="osmo_connected_devices">Připojená zařízení</string>
     <string name="osmo_groups">OsMo skupiny/zařízení</string>
     <string name="osmo_auto_send_locations_descr">Automaticky spustit relaci sledování a odesílat polohu po spuštení aplikace</string>
     <string name="osmo_auto_send_locations">Automaticky spustit relaci sledování</string>
     <string name="osmo_tracker_id">Osobní ID sledovacího zařízení</string>
-    <string name="osmo_tracker_id_descr">Klikněte pro zobrazení nebo sdílení ID sledovacího zařízení.↵
-        Pomocí ID budou připojená zařízení schopná sledovat všechny pohyby tohoto zařízení! Pro odpojení použijte možnost "Přegenerovat".</string>
-    <string name="osmo_session_token">Token relace : %1$s</string>
+    <string name="osmo_tracker_id_descr">Klikněte pro zobrazení nebo sdílení ID sledovacího zařízení.
+        Pomocí ID budou připojená zařízení schopná sledovat všechny pohyby tohoto zařízení! Pro odpojení použijte možnost "Regenerovat".</string>
+    <string name="osmo_session_token">Token relace: %1$s</string>
     <string name="osmo_auth_pending">Čekání na autorizaci...</string>
     <string name="osmo_locations_sent">Odeslané polohy %1$d (v zásobníku %2$d) </string>
-    <string name="osmo_conn_successfull">Vytvořená spojení : %1$s </string>
+    <string name="osmo_conn_successfull">Vytvořená spojení: %1$s </string>
     <string name="osmo_io_error">Problém s připojením OsMo: </string>
     <string name="osmo_settings_uuid">Jedinečné ID zařízení</string>
     <string name="interrupt_music_descr">Přerušit hudbu při oznámení</string>
@@ -1579,4 +1579,8 @@ s často kladenými otázkami.</string>
     <string name="osmo_use_server_name">Registrované jméno</string>
     <string name="osmo_connect_to_my_nickname">Moje přezdívka</string>
     <string name="osmo_user_name">Uživatel</string>
-	</resources>
+	<string name="osmo_user_joined">Uživatel %1$s připojen ke skupině %2$s</string>
+    <string name="osmo_user_left">Uživatel %1$s odebrán ze skupiny %2$s</string>
+    <string name="color_green">zelená</string>
+	
+    </resources>

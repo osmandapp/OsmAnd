@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -1620,7 +1620,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="guidance_preferences_descr">Navigatievoorkeuren</string>
     <string name="routing_preferences_descr">Routeberekening-voorkeuren</string>
     <string name="app_mode_truck">Vrachtauto</string>
-    <string name="android_19_location_disabled">Sinds Android KitKat kunnen kaarten niet meer worden opgeslagen in de huidige directory (%s). Wilt u deze wijzigen in een versie die is toegestaan en de bestanden er heen kopiëren?
+    <string name="android_19_location_disabled">Sinds Android KitKat kunnen kaarten niet meer worden opgeslagen in de huidige map(%s). Wil je deze wijzigen in een toegestane map en de bestanden daar naartoe kopiëren?
 \t\n Let op: oude bestanden blijven bestaan.
 \t\n Let op: het is niet meer mogelijk bestanden te delen tussen OsmAnd en Osmand+. </string>
     <string name="application_dir_change_warning2">OsmAnd kan proberen de bestanden naar de nieuwe bestemming te verplaatsen. Wil je dat?</string>
@@ -1754,7 +1754,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="osmo_tracker_id">Persoonlijk tracker-ID</string>
     <string name="osmo_tracker_id_descr">Tik om tracker-ID te bekijken of te delen.
       LET OP: met het tracker-ID kunnen verbonden toestellen alle bewegingen van dit toestel volgen! Maak een nieuw ID om ze los te koppelen.</string>
-    <string name="osmo_session_token">Sessietoken: %1$s</string>
+    <string name="osmo_session_token">Sessie-token: %1$s</string>
     <string name="osmo_auth_pending">Wacht op autorisatie…</string>
     <string name="osmo_locations_sent">%1$d verzonden locaties (in buffer %2$d) </string>
     <string name="osmo_conn_successfull">Verbinding gemaakt: %1$s </string>
@@ -1819,4 +1819,14 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	<string name="color_green">groen</string>
 	
     <string name="osmo_follow">Volgen</string>
+    <string name="osmo_user_joined">Gebruiker %1$s is nu lid van groep %2$s</string>
+    <string name="osmo_user_left">Gebruiker %1$s heeft groep %2$s verlaten</string>
+    <string name="osmo_show_group_notifications">Toon groepsmeldingen</string>
+    <string name="osmo_show_group_notifications_descr">Toon meldingen als een gebruiker bij een groep komt of deze verlaat</string>
+    <string name="my_favorites">Mijn favorieten</string>
+    <string name="my_data_Button">Mijn gegevens</string>
+    <string name="my_data_activity">Mijn gegevens</string>
+    <string name="selected_track">Track</string>
+    <string name="my_tracks">Alle tracks</string>
+    <string name="gpx_file_is_empty">Gpx track is leeg</string>
     </resources>

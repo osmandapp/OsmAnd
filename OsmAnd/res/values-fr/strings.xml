@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -416,7 +416,7 @@
   <string name="rendering_exception">Erreur lors de l\'affichage de la zone sélectionnée</string>
   <string name="rendering_out_of_memory">Pas suffisamment de mémoire pour afficher la zone sélectionnée</string>
   <string name="show_point_options">Options du point…</string>
-  <string name="renderer_load_sucess">Le moteur de rendu a bien été chargé</string>
+  <string name="renderer_load_sucess">Moteur de rendu chargé correctement</string>
   <string name="renderer_load_exception">Erreur: le moteur de rendu n\'est pas chargé</string>
   <string name="renderers">Rendu vectoriel</string>
   <string name="renderers_descr">Choisir le style de rendu vectoriel</string>
@@ -739,7 +739,7 @@
   <string name="osb_close_dialog_title">Fermeture du bogue</string>
   <string name="osb_close_dialog_close_button">Fermer bogue</string>
   <string name="osb_close_dialog_success">Bogue ajouté avec succès</string>
-  <string name="osb_close_dialog_error">Erreur : bogue n\'a pas été fermé</string>
+  <string name="osb_close_dialog_error">Erreur : le bogue n\'a pas été fermé</string>
   <string name="poi_edit_title">Éditer PI</string>
   <string name="poi_create_title">Créer un point d\'intérêt (PI)</string>
   <string name="poi_error_poi_not_found">Objet introuvable ou l\'équipement n\'est pas un composé d\'un seul objet</string>
@@ -750,8 +750,8 @@
   <string name="poi_action_add">ajouter</string>
   <string name="poi_action_change">modifier</string>
   <string name="poi_action_succeded_template">Action {0} réussie.</string>
-  <string name="poi_error_unexpected_template">Erreur lors de l\'exécution de l\'action {0}.</string>
-  <string name="poi_error_io_error_template">Erreur d\'entrée/sortie lors de l\'exécution de l\'action {0}.</string>
+  <string name="poi_error_unexpected_template">Erreur lors de l\'action {0}.</string>
+  <string name="poi_error_io_error_template">Erreur d\'entrée/sortie lors de l\'action {0}.</string>
   <string name="poi_error_info_not_loaded">Les informations sur l\'objet n\'ont pas étés chargés</string>
   <string name="poi_dialog_name">Nom</string>
   <string name="poi_dialog_opening_hours">Ouvert</string>
@@ -976,7 +976,7 @@
   <string name="map_widget_next_turn_small">Prochaine bifurcation (petit)</string>
   <string name="map_widget_next_next_turn">Deuxième prochaine bifurcation</string>
   <string name="map_widget_mini_route">Mini-carte de l\'itinéraire</string>
-  <string name="bg_service_screen_lock">Verrouillage/déverrouillage de l\'écran</string>
+  <string name="bg_service_screen_lock">Verrouillage de l\'écran</string>
   <string name="bg_service_screen_unlock">Déverrouiller écran</string>
   <string name="bg_service_sleep_mode_off">Activer\nmode veille</string>
   <string name="bg_service_sleep_mode_on">Désactiver\nmode veille</string>
@@ -1317,7 +1317,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="local_indexes_cat_srtm">Courbes de niveau</string>
     <string name="use_kalman_filter_compass_descr">Utiliser un filtre de Kalman pour éviter les interférences de la boussole</string>
     <string name="use_kalman_filter_compass">Utiliser un filtre de Kalman</string>
-    <string name="access_mark_final_location_first">Mode accessibilité : veuillez d\'abord définir la destination</string> 
+    <string name="access_mark_final_location_first">Mode d'accessibilité : veuillez d\'abord définir la destination</string> 
     <string name="distance_measurement_start_editing">Commencer à modifier</string>
     <string name="distance_measurement_finish_editing">Finir de modifier</string>
     <string name="distance_measurement_save_gpx">Sauvegarder comme GPX</string>
@@ -1369,7 +1369,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="edit_tilesource_expiration_time">Expire (minutes)</string>
     <string name="edit_tilesource_minzoom">Zoom min</string>
     <string name="edit_tilesource_url_to_load">Lien</string>
-    <string name="driving_region_descr">Sélectionner la région de conduite : États-Unis, Europe, Angleterre, Asie et autres</string>
+    <string name="driving_region_descr">Sélectionner la région de conduite : États-Unis, Europe, Royaume-Uni, Asie et autres</string>
 	<string name="driving_region">Région de conduite</string>
 	<string name="driving_region_europe_asia">Europe &amp; Asie</string>
 	<string name="driving_region_uk">Angleterre, Inde, Australie et autres</string>
@@ -1572,7 +1572,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="lang_uk">Ukrainien</string>
 <string name="lang_vi">Vietnamien</string>
 <string name="lang_cy">Gallois</string>
-<string name="always_center_position_on_map">Toujours centrer la carte sur la position</string>
+<string name="always_center_position_on_map">Position courante placée au centre de l\'écran</string>
 <string name="voice_pref_title">Voix</string>
 <string name="misc_pref_title">Divers</string>
 <string name="localization_pref_title">Localisation</string>
@@ -1591,14 +1591,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osmo_settings">OSMo OpenStreetMap Monitoring (beta)</string>
 	<string name="osmo_register_device">Enregistrement de l\'appareil…</string>
 	<string name="osmo_io_error">Problème de connexion OSMo : </string>
-	<string name="osmo_mode_on">Arrêter\nsession OSMo</string>
-	<string name="osmo_mode_off">Démarrer\nsession OSMo</string>
-	<string name="osmo_mode_restart">Redémarrer\nsession OSMo</string>
+	<string name="osmo_mode_on">Arrêter session OsMo</string>
+	<string name="osmo_mode_off">Démarrer session OsMo</string>
+	<string name="osmo_mode_restart">Redémarrer session OsMo</string>
 	<string name="osmo_settings_debug">Informations de débogage</string>
 	<string name="osmo_tracker_id">Identifiant personnel de suivi</string>
 	<string name="osmo_tracker_id_descr">Cliquer pour voir ou partager l\'identifiant de suivi. 
        L\'utilisation d\'appareils connectés par identifiant de suivi permettra de suivre tous les mouvements de cet appareil ! Pour se déconnecter, sélectionnez l\'option Redémarrer.</string>
-	<string name="osmo_session_token">Marque de session : %1$s</string>
+	<string name="osmo_session_token">Jeton de session : %1$s</string>
 	<string name="osmo_auth_pending">En attente de l\'autorisation…</string>
 	<string name="osmo_locations_sent">Emplacements envoyés %1$d (en mémoire tampon %2$d) </string>
 	<string name="osmo_conn_successfull">Connexion établie : %1$s </string>
@@ -1610,6 +1610,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
 <string name="arrival_distance_descr">Choisir à quel moment est annoncée l\'arrivée à destination</string>
+<string-array name="arrival_distance_factors">
+<item>Précoce</item>
+<item>Normale</item>
+<item>Tardive</item>
+<item>Dans les derniers mètres</item>
+</string-array>
 <string name="share_fav">Partager</string>
 <string name="share_fav_subject">Favoris partagés via OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un intinéraire entre des points</string>
@@ -1632,7 +1638,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_tracker_id">Identifiant personnel de suivi</string>
 <string name="osmo_group_info">Info</string>
     <string name="osmo_group">Groupe OsMo</string>
-    <string name="osmo_group_share">Pour vous connecter au groupe %2$s, veuillez spécifier l\'identifiant du groupe (%1$s)</string>
+    <string name="osmo_group_share">Pour vous connecter au groupe %2$s, veuillez spécifier l\'identifiant du groupe (%1$s) ou cliquer %3$s.</string>
     <string name="osmo_share_connect_device">Autoriser le suivi de cet appareil de façon permanente</string>
     <string name="osmo_share_current_session">Partager la session courante dans le navigateur</string>
     <string name="osmo_session_not_available">Session non disponible, veuillez vérifier que \'Envoyer mes positions\' est activé.</string>
@@ -1654,7 +1660,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_connect">Connexion à</string>
     <string name="osmo_create_group">Créer un groupe</string>
     <string name="osmo_server_operation_failed">Échec du serveur OsMo</string>
-    <string name="osmo_activity">Monitoring OsMo</string>
+    <string name="osmo_activity">Monitoring OpenStreetMap</string>
     <string name="osmo_control">Accès rapide OsMo</string>
     <string name="local_index_mi_export">Exporter</string>
 	<string name="import_file_favourites">Sauvegarder comme fichier GPX ou importer dans les favoris ?</string>
@@ -1674,7 +1680,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_sign_in">Se connecter</string>
     <string name="osmo_create_groups_confirm">Pour créer des groupes que vous devez être un utilisateur enregistré d\'OsMo.</string>
     <string name="osmo_credentials_not_valid">Vos identifiants OsMo sont incorrects.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Êtes-vous sûr de régénérer les identifiants personnels? Tous les appareils connectés à vous ne seront plus capables de vous suivre.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Êtes-vous sûr de régénérer les identifiants personnels ? Tous les appareils connectés à vous ne seront plus capables de vous suivre.</string>
     <string name="osmo_regenerate_login_ids">Régénérer l\'identifiant de l\'utilisateur</string>
     <string name="osmo_cancel_moving_target">Annuler la cible mobile</string>
     <string name="osmo_center_location">Centrer sur l\'écran</string>
@@ -1683,5 +1689,20 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_connect_to_my_nickname">Mon pseudo</string>
     <string name="osmo_user_name">Utilisateur</string>
 	<string name="color_green">vert</string>
-	
+    <string name="gpx_file_is_empty">La trace GPX est vide</string>
+    <string name="selected_track">Trace</string>
+    <string name="my_tracks">Toutes les traces</string>
+    <string name="my_favorites">Mes favoris</string>
+    <string name="my_data_Button">Mes données</string>
+    <string name="my_data_activity">Mes données</string>
+    <string name="osmo_user_joined">L'utilisateur %1$s a rejoint le groupe %2$s</string>
+    <string name="osmo_user_left">L'utilisateur %1$s a quitté le groupe %2$s</string>
+    <string name="osmo_show_group_notifications">Montrer les notifications de groupe</string>
+    <string name="osmo_show_group_notifications_descr">Afficher des messages quand un utilisateur rejoint ou quitte le groupe</string>
+    <string name="selected_track">Piste</string>
+    <string name="my_tracks">Toutes les pistes</string>
+    <string name="my_favorites">Mes Favoris</string>
+    <string name="my_data_Button">Mes Données</string>
+    <string name="my_data_activity">Mes Données</string>
+    <string name="gpx_file_is_empty">La trace GPX est vide</string>
     </resources>
