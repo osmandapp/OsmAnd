@@ -1877,4 +1877,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="gpx_info_subtracks">Sottotracce: %1$s </string>
 	<string name="gpx_info_waypoints">Tappe del percorso: $1%s </string>
 	<string name="gpx_info_distance">Distanza: %1$s (%2$s punti) </string>
+	<string name="gpx_info_end_time">Orario di arrivo: %1$tF, %1$tR </string>
 	</resources>
