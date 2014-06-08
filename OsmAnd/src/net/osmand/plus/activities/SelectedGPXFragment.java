@@ -13,7 +13,6 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.TextView;
@@ -160,7 +159,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			adjustIndicator(groupPosition, isExpanded, row);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final GpxDisplayGroup model = getGroup(groupPosition);
-			label.setText(model.getGroupName(app));
+			label.setText(model.getGroupName());
 //			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 //			if (selectionMode) {
 //				ch.setVisibility(View.VISIBLE);

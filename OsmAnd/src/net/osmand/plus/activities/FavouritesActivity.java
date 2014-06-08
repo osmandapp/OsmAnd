@@ -45,7 +45,8 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 		super.onCreate(icicle);
 		setSupportProgressBarIndeterminateVisibility(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setTitle("");
+		getSupportActionBar().setTitle(R.string.favorites_Button);
+//		getSupportActionBar().setTitle("");
 		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
 		File[] lf = ((OsmandApplication) getApplication()).getAppPath(TRACKS).listFiles();
 		boolean hasGpx =  false;

@@ -49,7 +49,6 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -571,24 +570,23 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return progressBar;
 	}
 
-	private static class ConfigLayout extends FrameLayout implements UpdateableWidget {
-		private ImageViewWidget config;
+	private static class UpdateFrameLayout extends FrameLayout implements UpdateableWidget {
+		private ImageViewWidget widget;
 
-		private ConfigLayout(Context c, ImageViewWidget config) {
+		private UpdateFrameLayout(Context c, ImageViewWidget widget) {
 			super(c);
-			this.config = config;
+			this.widget = widget;
 		}
 
 		@Override
 		public boolean updateInfo(DrawSettings drawSettings) {
-			return config.updateInfo(drawSettings);
+			return widget.updateInfo(drawSettings);
 		}
 	}
 	
 	private View createConfiguration(){
 		final OsmandMapTileView view = map.getMapView();
 		
-		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		final Drawable config = view.getResources().getDrawable(R.drawable.map_config);
 		final Drawable configWhite = view.getResources().getDrawable(R.drawable.map_config_white);
 		ImageViewWidget configuration = new ImageViewWidget(map) {
@@ -605,18 +603,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 				return false;
 			}
 		};
-		configuration.setBackgroundDrawable(config);
-		FrameLayout fl = new ConfigLayout(view.getContext(), configuration) ;
-		fl.addView(configuration, fparams);
-		//fparams = new FrameLayout.LayoutParams(config.getMinimumWidth(), config.getMinimumHeight());
-		//fl.addView(progressBar, fparams);
-		fl.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				openViewConfigureDialog();
-			}
-		});
-		return fl;
+		configuration.setImageDrawable(config);
+		return configuration;
 	}
 	private View createLayer(){
 //		final Drawable globusDrawable = view.getResources().getDrawable(R.drawable.map_globus);
@@ -678,15 +666,23 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return defValue;
 	}
 
-	private View createBackToLocation(MapInfoWidgetsFactory mic){
+	private UpdateFrameLayout createBackToLocation(MapInfoWidgetsFactory mic){
 		progressBar = new View(view.getContext());
-		View backToLocation = mic.createBackToLocation(map);
-		//backToLock needed to set needed size of controls
+		final ImageViewWidget widget = mic.createBackToLocation(map);
 		Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc);
-		FrameLayout layout = new FrameLayout(map.getMapView().getContext());
-		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(backToLoc.getMinimumWidth(), backToLoc.getMinimumHeight());
-		layout.addView(backToLocation,fparams);
-		layout.addView(progressBar,fparams);
+		UpdateFrameLayout layout = new UpdateFrameLayout(view.getContext(), widget) ;
+		FrameLayout.LayoutParams fparams;
+		//= new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+		fparams = new FrameLayout.LayoutParams(backToLoc.getMinimumWidth(), backToLoc.getMinimumHeight());
+		layout.addView(widget, fparams);
+		fparams = new FrameLayout.LayoutParams(backToLoc.getMinimumWidth(), backToLoc.getMinimumHeight());
+		layout.addView(progressBar, fparams);
+		layout.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				widget.performClick();
+			}
+		});
 		return layout;
 	}
 }

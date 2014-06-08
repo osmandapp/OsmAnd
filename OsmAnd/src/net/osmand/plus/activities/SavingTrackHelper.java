@@ -66,7 +66,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		this.ctx = ctx;
 		this.currentTrack = new SelectedGpxFile();
 		this.currentTrack.setShowCurrentTrack(true);
-		this.currentTrack.getGpxFile().showCurrentTrack = true;
+		GPXFile gx = new GPXFile();
+		gx.showCurrentTrack = true;
+		this.currentTrack.setGpxFile(gx);
 		this.currentTrack.getGpxFile().tracks.add(new Track());
 		updateScript = "INSERT INTO " + TRACK_NAME + 
 		" (" +TRACK_COL_LAT +", " +TRACK_COL_LON+", " +TRACK_COL_ALTITUDE+", " +TRACK_COL_SPEED

@@ -8,7 +8,6 @@ import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.activities.SavingTrackHelper;
-import android.content.Context;
 import android.graphics.Bitmap;
 
 public class GpxSelectionHelper {
@@ -85,7 +84,7 @@ public class GpxSelectionHelper {
 			for (Route r : g.routes) {
 				GpxDisplayGroup group = new GpxDisplayGroup(g);
 				group.setType(GpxDisplayItemType.TRACK_ROUTE_POINTS);
-				String d = getString(R.string.gpx_selection_number_of_points, r.points.size());
+				String d = getString(R.string.gpx_selection_number_of_points, name, r.points.size());
 				if(r.name != null && r.name.length() > 0) {
 					d = r.name + " " + d;
 				}
@@ -100,7 +99,7 @@ public class GpxSelectionHelper {
 			GpxDisplayGroup group = new GpxDisplayGroup(g);
 			group.setType(GpxDisplayItemType.TRACK_POINTS);
 			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.points.size()));
-			group.setName(getString(R.string.gpx_selection_points));
+			group.setName(getString(R.string.gpx_selection_points, name));
 			dg.add(group);
 			List<GpxDisplayItem> list = group.getModifiableList();
 			for (WptPt r : g.points) {
@@ -117,6 +116,24 @@ public class GpxSelectionHelper {
 	public SelectedGpxFile getSelectedFileByPath(String path) {
 		for(SelectedGpxFile s : selectedGPXFiles) {
 			if(s.getGpxFile().path.equals(path)) {
+				return s;
+			}
+		}
+		return null;
+	}
+	
+	public SelectedGpxFile getSelectedFileByName(String path) {
+		for (SelectedGpxFile s : selectedGPXFiles) {
+			if (s.getGpxFile().path.endsWith("/" + path)) {
+				return s;
+			}
+		}
+		return null;
+	}
+	
+	public SelectedGpxFile getSelectedCurrentRecordingTrack() {
+		for (SelectedGpxFile s : selectedGPXFiles) {
+			if (s.isShowCurrentTrack()) {
 				return s;
 			}
 		}
@@ -266,7 +283,7 @@ public class GpxSelectionHelper {
 		}
 
 
-		public String getGroupName(Context ctx) {
+		public String getGroupName() {
 			return name;
 		}
 	}

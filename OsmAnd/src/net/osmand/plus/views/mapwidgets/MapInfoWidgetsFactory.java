@@ -100,21 +100,21 @@ public class MapInfoWidgetsFactory {
 
 
 
-	public ImageView createBackToLocation(final MapActivity map){
+	public ImageViewWidget createBackToLocation(final MapActivity map){
 		final Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc);
 		final Drawable backToLocWhite = map.getResources().getDrawable(R.drawable.back_to_loc_white);
 		final Drawable backToLocDisabled = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled);
 		final Drawable backToLocDisabledWhite = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled_white);
 		final Drawable backToLocTracked = map.getResources().getDrawable(R.drawable.back_to_loc_tracked);
 		final Drawable backToLocTrackedWhite = map.getResources().getDrawable(R.drawable.back_to_loc_tracked_white);
-		ImageView backToLocation = new ImageViewWidget(map) {
+		ImageViewWidget backToLocation = new ImageViewWidget(map) {
 			Drawable lastDrawable = null;
 			
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
 				boolean enabled = map.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
-				boolean tracked = map.getMapViewTrackingUtilities().isMapLinkedToLocation();
+				boolean tracked = MapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 				Drawable d;
 				if(!enabled) {
 					d = nightMode ? backToLocDisabledWhite : backToLocDisabled; 
@@ -130,12 +130,12 @@ public class MapInfoWidgetsFactory {
 				return true;
 			}
 		};
-		//backToLocation.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
+		backToLocation.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
 		backToLocation.setImageDrawable(map.getResources().getDrawable(R.drawable.back_to_loc));
 		backToLocation.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				map.getMapViewTrackingUtilities().backToLocationImpl();
+				MapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 			}
 		});
 		return backToLocation;
