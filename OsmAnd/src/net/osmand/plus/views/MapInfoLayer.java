@@ -603,6 +603,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 				return false;
 			}
 		};
+		configuration.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				openViewConfigureDialog();				
+			}
+		});
 		configuration.setImageDrawable(config);
 		return configuration;
 	}
