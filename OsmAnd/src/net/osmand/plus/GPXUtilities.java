@@ -29,7 +29,6 @@ import java.util.TimeZone;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -93,6 +92,20 @@ public class GPXUtilities {
 
 	public static class TrkSegment extends GPXExtensions {
 		public List<WptPt> points = new ArrayList<WptPt>();
+		
+		public List<GPXTrackAnalysis> splitByDistance(int meters) {
+			return split(getDistanceMetric(), meters);
+		}
+		
+		public List<GPXTrackAnalysis> splitByTime(int seconds) {
+			return split(getMetricSplit(), seconds);
+		}
+		
+		private List<GPXTrackAnalysis> split(SplitMetric metric, int metricLimit) {
+			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
+			splitSegment(metric, metricLimit, splitSegments, this);
+			return convert(splitSegments);
+		}
 
 	}
 
@@ -239,11 +252,12 @@ public class GPXUtilities {
 			timeSpan = endTime - startTime;
 
 			// 3. Time moving, if any
+			// 4. Elevation, eleUp, eleDown, if recorded
 			if (elevationPoints > 0) {
 				avgElevation =  totalElevation / elevationPoints;
 			}
 
-			// 4. Elevation, eleUp, eleDown, if recorded
+
 
 			// 5. Max speed and Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
 			if(speedCount > 0) {
@@ -342,10 +356,75 @@ public class GPXUtilities {
 		
 	}
 	
+	private static SplitMetric getDistanceMetric() {
+		return new SplitMetric() {
+			
+			private float[] calculations = new float[1];
+
+			@Override
+			public int metric(WptPt p1, WptPt p2) {
+				net.osmand.Location.distanceBetween(p1.lat, p1.lon, p2.lat, p2.lon, calculations);
+				return (int) calculations[0];
+			}
+		};
+	}
+	
+	private static SplitMetric getMetricSplit() {
+		return new SplitMetric() {
+			
+			@Override
+			public int metric(WptPt p1, WptPt p2) {
+				if(p1.time != 0 && p2.time != 0) {
+					return (int) ((p1.time - p2.time) / 1000);
+				}
+				return 0;
+			}
+		};
+	}
+	
 	private abstract static class SplitMetric {
 
 		public abstract int metric(WptPt p1, WptPt p2);
 
+	}
+	
+	private static void splitSegment(SplitMetric metric, int metricLimit, List<SplitSegment> splitSegments,
+			TrkSegment segment) {
+		int ml = metricLimit;
+		SplitSegment sp = new SplitSegment(segment, 0, 0);
+		int total = 0;
+		for (int k = 0; k < segment.points.size(); k++) {
+			WptPt point = segment.points.get(k);
+			if (k > 0) {
+				WptPt prev = segment.points.get(k - 1);
+				int currentSegment = metric.metric(prev, point);
+				while (total + currentSegment > ml) {
+					int p = ml - total;
+					float cf = sp.setLastPoint(k - 1, p / ((float) currentSegment));
+					sp = new SplitSegment(segment, k - 1, cf);
+					sp.metricEnd = ml;
+					splitSegments.add(sp);
+					ml += metricLimit;
+				}
+				total += currentSegment;
+			}
+		}
+		if (segment.points.size() > 0
+				&& !(sp.endPointInd == segment.points.size() - 1 && sp.startCoeff == 1)) {
+			sp.metricEnd = total;
+			sp.setLastPoint(0, 1);
+			splitSegments.add(sp);
+		}
+	}
+
+	private static List<GPXTrackAnalysis> convert(List<SplitSegment> splitSegments) {
+		List<GPXTrackAnalysis> ls = new ArrayList<GPXUtilities.GPXTrackAnalysis>();
+		for(SplitSegment s : splitSegments) {
+			GPXTrackAnalysis a = new GPXTrackAnalysis();
+			a.prepareInformation(0, s);
+			ls.add(a);
+		}
+		return ls;
 	}
 	
 	public static class GPXFile extends GPXExtensions {
@@ -381,77 +460,27 @@ public class GPXUtilities {
 		
 		
 		public List<GPXTrackAnalysis> splitByDistance(int meters) {
-			
-			return split(new SplitMetric() {
-				
-				private float[] calculations = new float[1];
-
-				@Override
-				public int metric(WptPt p1, WptPt p2) {
-					net.osmand.Location.distanceBetween(p1.lat, p1.lon, p2.lat, p2.lon, calculations);
-					return (int) calculations[0];
-				}
-			}, meters);
+			return split(getDistanceMetric(), meters);
 		}
 		
 		public List<GPXTrackAnalysis> splitByTime(int seconds) {
-			
-			return split(new SplitMetric() {
-				
-				@Override
-				public int metric(WptPt p1, WptPt p2) {
-					if(p1.time != 0 && p2.time != 0) {
-						return (int) ((p1.time - p2.time) / 1000);
-					}
-					return 0;
-				}
-			}, seconds);
+			return split(getMetricSplit(), seconds);
 		}
-		
-		public List<GPXTrackAnalysis> split(SplitMetric m, int metricLimit) {
-			int ml = metricLimit;
+
+
+		public List<GPXTrackAnalysis> split(SplitMetric metric, int metricLimit) {
 			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
 			for(int i = 0; i< tracks.size() ; i++){
 				Track subtrack = tracks.get(i);
 				for (int j = 0; j < subtrack.segments.size(); j++) {
 					TrkSegment segment = subtrack.segments.get(j);
-					SplitSegment sp = new SplitSegment(segment, 0, 0);
-					int total = 0;
-					for (int k = 0; k < segment.points.size(); k++) {
-						WptPt point = segment.points.get(k);
-						if (k > 0) {
-							WptPt prev = segment.points.get(k - 1);
-							int currentSegment = m.metric(prev, point);
-							while (total + currentSegment > ml) {
-								int p = ml - total;
-								float cf = sp.setLastPoint(k - 1, p / ((float) currentSegment));
-								sp = new SplitSegment(segment, k - 1, cf);
-								sp.metricEnd = ml;
-								ml += metricLimit;
-							}
-							total += currentSegment;
-						}
-					}
-					if (segment.points.size() > 0
-							&& !(sp.endPointInd == segment.points.size() - 1 && sp.startCoeff == 1)) {
-						sp.metricEnd = total;
-						sp.setLastPoint(0, 1);
-						splitSegments.add(sp);
-					}
+					splitSegment(metric, metricLimit, splitSegments, segment);
 				}
 			}
 			return convert(splitSegments);
 		}
 
-		private List<GPXTrackAnalysis> convert(List<SplitSegment> splitSegments) {
-			List<GPXTrackAnalysis> ls = new ArrayList<GPXUtilities.GPXTrackAnalysis>();
-			for(SplitSegment s : splitSegments) {
-				GPXTrackAnalysis a = new GPXTrackAnalysis();
-				a.prepareInformation(0, s);
-				ls.add(a);
-			}
-			return ls;
-		}
+
 		
 		public boolean hasRtePt() {
 			for(Route r : routes) {
@@ -533,34 +562,24 @@ public class GPXUtilities {
            return writer.toString();
        }
 
-    public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx)
-    {
-        Writer output = null;
-        try
-        {
-            output = new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"); //$NON-NLS-1$
-            return writeGpx(output, file, ctx);
-        }
-        catch (IOException e)
-        {
-            log.error("Error saving gpx", e); //$NON-NLS-1$
-            return ctx.getString(R.string.error_occurred_saving_gpx);
-        }
-        finally
-        {
-            if (output != null)
-            {
-                try
-                {
-                    output.close();
-                }
-                catch (IOException ignore)
-                {
-                    // ignore
-                }
-            }
-        }
-    }
+	public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx) {
+		Writer output = null;
+		try {
+			output = new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"); //$NON-NLS-1$
+			return writeGpx(output, file, ctx);
+		} catch (IOException e) {
+			log.error("Error saving gpx", e); //$NON-NLS-1$
+			return ctx.getString(R.string.error_occurred_saving_gpx);
+		} finally {
+			if (output != null) {
+				try {
+					output.close();
+				} catch (IOException ignore) {
+					// ignore
+				}
+			}
+		}
+	}
 
 	public static String writeGpx(Writer output, GPXFile file, OsmandApplication ctx) {
 		try {

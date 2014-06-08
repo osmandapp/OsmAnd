@@ -818,7 +818,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			int count = 0;
 			int total = 0;
 			for (GpxInfo info : params) {
-				if (!isCancelled() && !info.gpx.showCurrentTrack) {
+				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
 					boolean successfull = false;
 					successfull = Algorithms.removeAllFiles(info.file);
 					total++;
