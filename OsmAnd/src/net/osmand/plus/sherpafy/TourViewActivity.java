@@ -1,15 +1,11 @@
 package net.osmand.plus.sherpafy;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.text.Html;
-import android.view.Display;
 import net.osmand.IProgress;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
@@ -23,10 +19,22 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.BitmapFactory.Options;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Html.ImageGetter;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -35,9 +43,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -61,7 +71,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private SherpafyCustomization customization;
 	ImageView img;
 	TextView description;
-	TextView fullDescription;
+	LinearLayout fullDescriptionView;
 	RadioGroup stages;
 	private ToggleButton collapser;
 	Point size;
@@ -108,6 +118,29 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			startTourView();
 		}
 
+	}
+
+	private ImageGetter getImageGetter(final View v) {
+		return new Html.ImageGetter() {
+			@Override
+			public Drawable getDrawable(String s) {
+				Bitmap file = customization.getSelectedTour().getImageBitmapFromPath(s);
+				v.setTag(file);
+				Drawable bmp = new BitmapDrawable(getResources(), file);
+				// if image is thicker than screen - it may cause some problems, so we need to scale it
+				int imagewidth = bmp.getIntrinsicWidth();
+				if (size.x - 1 > imagewidth) {
+					bmp.setBounds(0, 0, bmp.getIntrinsicWidth(), bmp.getIntrinsicHeight());
+				} else {
+					double scale = (double) (size.x - 1) / imagewidth;
+					bmp.setBounds(0, 0, (int) (scale * bmp.getIntrinsicWidth()),
+							(int) (scale * bmp.getIntrinsicHeight()));
+				}
+
+				return bmp;
+			}
+
+		};
 	}
 
 	@Override
@@ -169,41 +202,66 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		if (customization.getSelectedStage() == null) {
 			if (customization.getSelectedTour() != null) {
 				TourInformation curTour = customization.getSelectedTour();
-				fullDescription.setText(Html.fromHtml(curTour.getFulldescription()));
-				description.setText(Html.fromHtml(curTour.getShortDescription()));
+				description.setText(Html.fromHtml(curTour.getShortDescription(), getImageGetter(description), null));
+				setFullDescriptions(curTour.getFulldescription());
 				// ((TextView)findViewById(R.id.tour_name)).setText(getString(R.string.overview));
 				setCollapserText(getString(R.string.overview));
 				prepareBitmap(curTour.getImageBitmap());
 			}
 		} else {
 			StageInformation st = customization.getSelectedStage();
-			description.setText(Html.fromHtml(st.getDescription(), new Html.ImageGetter() {
-				@Override
-				public Drawable getDrawable(String s) {
-					Bitmap file = customization.getSelectedTour().getImageBitmapFromPath(s);
-					Drawable bmp = new BitmapDrawable(getResources(),file);
-					//if image is thicker than screen - it may cause some problems, so we need to scale it
-					int imagewidth = bmp.getIntrinsicWidth();
-					if (size.x-1 > imagewidth) {
-						bmp.setBounds(0,0, bmp.getIntrinsicWidth(), bmp.getIntrinsicHeight());
-					}
-					else {
-						double scale = (double)(size.x-1)/imagewidth;
-						bmp.setBounds(0,0, (int)(scale*bmp.getIntrinsicWidth()), (int)(scale*bmp.getIntrinsicHeight()));
-					}
-
-					return bmp;
-				}
-
-			}, null));
-
-			fullDescription.setText(Html.fromHtml(st.getFullDescription()));
+			description.setText(Html.fromHtml(st.getShortDescription(), getImageGetter(description), null));
+			setFullDescriptions(st.getFullDescription());
+			
 			// ((TextView)findViewById(R.id.tour_name)).setText(st.getName());
 			setCollapserText(st.getName());
 			prepareBitmap(st.getImageBitmap());
 		}
 	}
 
+
+	private void setFullDescriptions(String fulldescription) {
+		List<String> list = new ArrayList<String>();
+		if (fulldescription.length() > 0) {
+			int i = 0;
+			while ((i = fulldescription.indexOf("<img", 1)) != -1) {
+				list.add(fulldescription.substring(0, i));
+				fulldescription = fulldescription.substring(i);
+			}
+		}
+		list.add(fulldescription);
+		fullDescriptionView.removeAllViews();
+		for (int i = 0; i < list.size(); i++) {
+			final TextView tv = new TextView(this);
+			tv.setGravity(Gravity.CENTER_HORIZONTAL);
+			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+			tv.setPadding(0, 3, 0, 3);
+			tv.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			addOnClickListener(tv);
+			tv.setText(Html.fromHtml(list.get(i), getImageGetter(tv), null));
+			fullDescriptionView.addView(tv);
+		}
+		
+	}
+
+	private void addOnClickListener(final TextView tv) {
+		tv.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(v.getTag() instanceof Bitmap) {
+					final AccessibleAlertBuilder dlg = new AccessibleAlertBuilder(getActivity());
+					dlg.setPositiveButton(R.string.default_buttons_ok, null);
+					ScrollView sv = new ScrollView(getActivity());
+					ImageView img = new ImageView(getActivity());
+					img.setImageBitmap((Bitmap) tv.getTag());
+					sv.addView(img);
+					dlg.setView(sv);
+					dlg.show();
+				}
+			}
+		});
+	}
 
 	private void setCollapserText(String t) {
 		collapser.setText("  " + t);
@@ -274,8 +332,9 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		img = (ImageView) findViewById(R.id.tour_image);
 		description = (TextView) findViewById(R.id.tour_description);
 		description.setVisibility(View.VISIBLE);
-		fullDescription = (TextView) findViewById(R.id.tour_fulldescription);
-		fullDescription.setVisibility(View.VISIBLE);
+		addOnClickListener(description);
+		fullDescriptionView = (LinearLayout) findViewById(R.id.tour_fulldescription);
+		fullDescriptionView.setVisibility(View.VISIBLE);
 
 		// in case of reloading view - remove all previous radio buttons
 		stages.removeAllViews();
@@ -386,7 +445,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 					if(customization.getAccessCode().length() == 0) {
 						openAccessCode(true);
 					} else {
-
 						startDownloadActivity();
 					}
 				}
@@ -454,11 +512,11 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
+				dialogInterface.dismiss();
 				if (i == tourNames.length - 1) {
 					startDownloadActivity();
 				} else {
 					selectTourAsync(tours.get(i));
-					dialogInterface.dismiss();
 				}
 			}
 		});
