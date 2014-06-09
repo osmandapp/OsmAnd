@@ -1883,20 +1883,20 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="gpx_info_distance">Afstand: %1$s (%2$s pukter) </string>
 	<string name="gpx_info_start_time">Startid: %1$tF,  %1$tR </string>
 	<string name="gpx_info_end_time">Sluttid: %1$tF,  %1$tR </string>
-	<string name="gpx_info_average_speed">Gennemsnitlig hastighed: %1$s </string>
-	<string name="gpx_info_maximum_speed">Maksimal hastighed: %1$s </string>
-	<string name="gpx_info_avg_altitude">Gennemsnitlig højde: %1$s</string>
+	<string name="gpx_info_average_speed">Gennemsnitshastighed: %1$s </string>
+	<string name="gpx_info_maximum_speed">Maks hastighed: %1$s </string>
+	<string name="gpx_info_avg_altitude">Gennemsnitshøjde: %1$s</string>
 	<string name="gpx_info_diff_altitude">Højdeforskel: %1$s</string>
 	<string name="gpx_info_asc_altitude">Højdestigninger: %1$s</string>
     <string name="gpx_timespan">Periode: %1$s</string>
-	<string name="gpx_timemoving">Tid på at flytte: %1$s</string>
+	<string name="gpx_timemoving">Tid i bevægelse: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
     <string name="gpx_selection_number_of_points"> %1$s punkter</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
-    <string name="gpx_selection_current_track">Optagelse</string>
+    <string name="gpx_selection_current_track">optager</string>
     <string name="gpx_selection_route_points">%1$s \n Rutepunkter %2$s</string>
     <string name="gpx_selection_points">%1$s\n Punkter</string>
     <string name="gpx_selection_track">%1$s\n Spor %2$s</string>
-    <string name="gpx_available_current_track">Aktuel optagelse spor</string>
+    <string name="gpx_available_current_track">Aktuel optager spor</string>
     <string name="gpx_info_subtracks">Underspor: %1$s </string>
 	</resources>
