@@ -189,7 +189,7 @@ public class GpxSelectionHelper {
 					}
 					if(analysis.diffElevationUp > eleThreshold) {
 						name += GpxUiHelper.getColorValue(ascClr, " \u2191 "+
-								OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
+								OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
 					}
 				}
 				item.name = name;
