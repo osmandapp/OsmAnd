@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1415,7 +1415,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="exit_Button">Afslut</string>
 	<string name="map_Button">Kort</string>
 	<string name="settings_Button">Indstillinger</string>
-	<string name="favorites_Button">Favoritter</string>
+	<string name="favorites_Button">Mine steder</string>
 	<string name="search_button">Søg</string>
 	<string name="search_activity">Søg</string>
 	<string name="searchpoi_activity">Vælg interessepunkt</string>
@@ -1793,6 +1793,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="tip_recent_changes_1_8_alpha">Ændringer i 1.8:
          * Beregn rute mellem rutepunkter i GPX-spor
          * Ændret udseende for hentning af lande (understøtter søgning på lokale navne)
+   * GPX spor er flyttet til \ ' Mine data \'          * Du kan opdele GPX spor ved afstand og tjek højdeforskel / hastighed
+
 	 * Understøtter GPX/KML import (konverter fra KML til GPX)
     </string>
     <string name="hours_ago">timer siden</string>
@@ -1876,13 +1878,13 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="selected_track">Valgte spor</string>
     <string name="my_tracks">Alle spor</string>
     <string name="my_favorites">Mine favoritter</string>
-    <string name="my_data_Button">Mine data</string>
-    <string name="my_data_activity">Mine data</string>
+    <string name="my_data_Button">Mine steder</string>
+    <string name="my_data_activity">Mine steder</string>
     <string name="gpx_file_is_empty">GPX-spor er tomt</string>
     <string name="gpx_info_waypoints">Rutepunkter: %1$s </string>
 	<string name="gpx_info_distance">Afstand: %1$s (%2$s pukter) </string>
-	<string name="gpx_info_start_time">Startid: %1$tF,  %1$tR </string>
-	<string name="gpx_info_end_time">Sluttid: %1$tF,  %1$tR </string>
+	<string name="gpx_info_start_time">Startid: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">Sluttid: %1$tF,  %1$tT </string>
 	<string name="gpx_info_average_speed">Gennemsnitshastighed: %1$s </string>
 	<string name="gpx_info_maximum_speed">Maks hastighed: %1$s </string>
 	<string name="gpx_info_avg_altitude">Gennemsnitshøjde: %1$s</string>
@@ -1894,9 +1896,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="gpx_selection_number_of_points"> %1$s punkter</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
     <string name="gpx_selection_current_track">optager</string>
-    <string name="gpx_selection_route_points">%1$s \n Rutepunkter %2$s</string>
-    <string name="gpx_selection_points">%1$s\n Punkter</string>
-    <string name="gpx_selection_track">%1$s\n Spor %2$s</string>
+    <string name="gpx_selection_route_points">%1$s \nRutepunkter %2$s</string>
+    <string name="gpx_selection_points">%1$s\nPunkter</string>
+    <string name="gpx_selection_track">%1$s\nSpor %2$s</string>
     <string name="gpx_available_current_track">Aktuel optager spor</string>
     <string name="gpx_info_subtracks">Underspor: %1$s </string>
 	</resources>
