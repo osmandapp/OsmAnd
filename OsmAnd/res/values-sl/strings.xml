@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
@@ -1770,4 +1770,10 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_regenerate_login_ids_confirm">Ali ste prepričani, da želite ustvariti nov ID uporabnika? Vse naprave, ki so povezane z vami, vam ne bodo mogle več slediti.</string>
     <string name="osmo_track_interval_descr">Izberite časovni interval za pošiljanje lokacije</string>
     <string name="osmo_connect_menu">Poveži</string>
-    </resources>
+    <string name="gpx_info_distance">Razdalja: %1$s (%2$s točk) </string>
+	<string name="gpx_info_start_time">Čas začetka: %1$tF,  %1$tR </string>
+	<string name="gpx_info_end_time">Čas konca: %1$tF,  %1$tR </string>
+	<string name="gpx_info_average_speed">Povprečna hitrost: %1$s </string>
+	<string name="gpx_info_maximum_speed">Najvišja hitrost: %1$s </string>
+	<string name="gpx_info_avg_altitude">Povprečna višina: %1$s</string>
+	</resources>
