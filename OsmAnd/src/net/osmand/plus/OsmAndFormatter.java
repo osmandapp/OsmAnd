@@ -16,8 +16,8 @@ public class OsmAndFormatter {
 	public final static float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
 	public final static float YARDS_IN_ONE_METER = 1.0936f;
 	public final static float FOOTS_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
-	private static final DecimalFormat fixed2 = new DecimalFormat("#.##");
-	private static final DecimalFormat fixed1 = new DecimalFormat("#.#");
+	private static final DecimalFormat fixed2 = new DecimalFormat("#.00");
+	private static final DecimalFormat fixed1 = new DecimalFormat("#.0");
 	{
 		fixed2.setMinimumFractionDigits(2);
 		fixed1.setMinimumFractionDigits(1);

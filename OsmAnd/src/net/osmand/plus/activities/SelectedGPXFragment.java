@@ -62,6 +62,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		super.onResume();
 		getListView().setFastScrollEnabled(true);
 		lightContent = app.getSettings().isLightContent();
+		adapter.setView(getExpandableListView());
 		adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
 		selectedGpxHelper.setUiListener(new Runnable() {
 			

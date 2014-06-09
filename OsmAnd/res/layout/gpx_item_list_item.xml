@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingRight="4dp"
-                android:paddingTop="4dp"  >
+                android:paddingTop="2dp"  >
             </TextView>
         </FrameLayout>
 
@@ -41,6 +41,7 @@
             android:id="@+id/name"
             style="@style/ListText.Small"
             android:layout_width="0dp"
+            android:paddingTop="2dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
