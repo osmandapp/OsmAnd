@@ -128,7 +128,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		timeSplit.add(-1);
 		addOptionSplit(30, true, options, distanceSplit, timeSplit, checkedItem, model); // 100 feet, 50 yards, 50 m 
 		addOptionSplit(60, true, options, distanceSplit, timeSplit, checkedItem, model); // 200 feet, 100 yards, 100 m
-		addOptionSplit(180, true, options, distanceSplit, timeSplit, checkedItem, model); // 500 feet, 200 yards, 200 m
+		addOptionSplit(150, true, options, distanceSplit, timeSplit, checkedItem, model); // 500 feet, 200 yards, 200 m
 		addOptionSplit(300, true, options, distanceSplit, timeSplit, checkedItem, model); // 1000 feet, 500 yards, 500 m
 		addOptionSplit(600, true, options, distanceSplit, timeSplit, checkedItem, model); // 2000 feet, 1000 yards, 1km
 		addOptionSplit(1500, true, options, distanceSplit, timeSplit, checkedItem, model); // 1mi, 2km
@@ -212,9 +212,9 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		Filter myFilter;
 		private List<GpxDisplayGroup> displayGroups = new ArrayList<GpxDisplayGroup>();
 		private ExpandableListView expandableListView;
-		private boolean manualScroll;
+		private boolean groupScroll = true;
 		private int maxNumberOfSections = 1;
-		private double positionsInGroup;
+		private double itemsInSection;
 		
 		public SelectedGPXAdapter(ExpandableListView lv) {
 			this.expandableListView = lv;
@@ -224,7 +224,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		
 		@Override
 	    public void onScrollStateChanged(AbsListView view, int scrollState) {
-	        this.manualScroll = scrollState == SCROLL_STATE_TOUCH_SCROLL;
+//	        this.manualScroll = scrollState == SCROLL_STATE_TOUCH_SCROLL;
 	    }
 
 	    @Override
@@ -235,36 +235,48 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
 	    @Override
 	    public int getPositionForSection(int section) {
-	        if (manualScroll) {
-	            return section;
-	        } else {            
-//	            return expandableListView.getFlatListPosition(
-//	                       ExpandableListView.getPackedPositionForGroup(section));
-	        	return (int) (section * positionsInGroup);
+	    	if(groupScroll) {
+	    		return expandableListView.getFlatListPosition(
+	                       ExpandableListView.getPackedPositionForGroup(section));
+	    	} else {
+	        	return (int) (section * itemsInSection);
 	        }
 	    }
 
 	    // Gets called when scrolling the list manually
 	    @Override
-	    public int getSectionForPosition(int position) {
-	        // Get the packed position of the provided flat one and find the corresponding group
-//	        return ExpandableListView.getPackedPositionChild(expandableListView
-//	                .getExpandableListPosition(position));
-	    	return Math.min(maxNumberOfSections - 1, (int) (position / positionsInGroup));
-	    }
+		public int getSectionForPosition(int position) {
+			// Get the packed position of the provided flat one and find the corresponding group
+			if (groupScroll) {
+				return ExpandableListView
+						.getPackedPositionGroup(expandableListView.getExpandableListPosition(position));
+			} else {
+				int m = Math.min(maxNumberOfSections - 1, (int) (position / itemsInSection));
+				return m;
+			}
+		}
+	    
 		@Override
 		public Object[] getSections() {
-			int total = getGroupCount();
-			for(int i = 0; i < getGroupCount(); i++) {
-				if(expandableListView.isGroupExpanded(i)) {
-					total += getChildrenCount(i);
+			String[] ar ;
+			if (groupScroll) {
+				ar = new String[getGroupCount()];
+				for (int i = 0; i < getGroupCount(); i++) {
+					ar[i] = getGroup(i).getGroupName();
 				}
-			}
-			maxNumberOfSections = Math.max(1, Math.min(25, total));
-			positionsInGroup = ((double)total) / maxNumberOfSections;
-			String[] ar = new String[maxNumberOfSections];
-			for(int i = 0; i < ar.length; i++) {
-				ar[i] = ((i + 1) * 100 / maxNumberOfSections) + "%";
+			} else {
+				int total = getGroupCount();
+				for (int i = 0; i < getGroupCount(); i++) {
+					if (expandableListView.isGroupExpanded(i)) {
+						total += getChildrenCount(i);
+					}
+				}
+				maxNumberOfSections = Math.max(1, Math.min(25, total));
+				itemsInSection = ((double) total) / maxNumberOfSections;
+				ar = new String[maxNumberOfSections];
+				for (int i = 0; i < ar.length; i++) {
+					ar[i] = ((i + 1) * 100 / maxNumberOfSections) + "%";
+				}
 			}
 			return ar;
 		}

@@ -632,8 +632,9 @@ public class OsmandSettings {
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumIntPreference<DrivingRegion>(
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 		protected boolean setValue(Object prefs, DrivingRegion val) {
-			//((CommonPreference<MetricsConstants>)METRIC_SYSTEM).cachedValue = null;
-			((CommonPreference<MetricsConstants>)METRIC_SYSTEM).set(DRIVING_REGION.get().defMetrics);
+			if(val != null) {
+				((CommonPreference<MetricsConstants>)METRIC_SYSTEM).set(val.defMetrics);
+			}
 			return super.setValue(prefs, val);
 		};
 	}.makeGlobal().cache();

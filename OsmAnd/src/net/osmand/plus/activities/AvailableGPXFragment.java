@@ -79,11 +79,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private AsyncTask<GpxInfo, ?, ?> operationTask;
 	private GpxSelectionHelper selectedGpxHelper;
 	private SavingTrackHelper savingTrackHelper;
+	private OsmandApplication app;
 	
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		this.app = (OsmandApplication) getActivity().getApplication();
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		asyncLoader = new LoadGpxTask();
@@ -93,10 +95,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		setAdapter(listAdapter);
 	}
 	
-	public OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
-	}
-
 	public List<GpxInfo> getSelectedItems() {
 		return selectedItems;
 	}
@@ -231,7 +229,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	
 	private void updateSelectionMode(ActionMode m) {
 		if(selectedItems.size() > 0) {
-			m.setTitle(selectedItems.size() + " " + getString(R.string.selected));
+			m.setTitle(selectedItems.size() + " " + app.getString(R.string.selected));
 		} else{
 			m.setTitle("");
 		}
@@ -294,13 +292,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	public void openSelectionMode(final int actionResId,  int darkIcon, int lightIcon,  
 			final DialogInterface.OnClickListener listener){
 		final int actionIconId = !isLightActionBar() ? darkIcon : lightIcon;
-		String value = getString(actionResId);
+		String value = app.getString(actionResId);
 		if (value.endsWith("...")) {
 			value = value.substring(0, value.length() - 3);
 		}
 		final String actionButton = value;
 		if(listAdapter.getGroupCount() == 0){
-			AccessibleToast.makeText(getActivity(), getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(getActivity(), app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
@@ -329,7 +327,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (selectedItems.isEmpty()) {
 					AccessibleToast.makeText(getActivity(),
-							getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
+							app.getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
 					return true;
 				}
 
@@ -471,9 +469,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			List<GpxInfo> result = new ArrayList<GpxInfo>();
 			if(!savingTrackHelper.getCurrentGpx().isEmpty()) {
 				loadFile(new GpxInfo(savingTrackHelper.getCurrentGpx(),
-						getMyApplication().getString(R.string.gpx_available_current_track)));
+						app.getString(R.string.gpx_available_current_track)));
 			}
-			loadGPXData(getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR), result,  this);
+			loadGPXData(app.getAppPath(IndexConstants.GPX_INDEX_DIR), result,  this);
 			return result;
 		}
 
@@ -611,7 +609,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if(info.gpx != null && info.gpx.showCurrentTrack) {
 				catName = info.name;
 			} else {
-				catName = getString(R.string.local_indexes_cat_gpx) + " " + info.subfolder;
+				catName = app.getString(R.string.local_indexes_cat_gpx) + " " + info.subfolder;
 			}
 			int found = -1;
 			// search from end
@@ -838,7 +836,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					}
 				}
 			}
-			return getString(R.string.local_index_items_deleted, count, total);
+			return app.getString(R.string.local_index_items_deleted, count, total);
 		}
 
 
