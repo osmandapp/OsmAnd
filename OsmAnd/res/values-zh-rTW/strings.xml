@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -554,7 +554,7 @@
 		\n\n然後選擇分享位置的方式。選項有：電子郵件、SMS(文字)或複製座標到剪貼簿。
 	</string>
 	<string name="tip_favorites">我的最愛點</string>
-	<string name="tip_favorites_t">常用地點可記錄成我的最愛，具體如下： 
+	<string name="tip_favorites_t">常用地點可儲存成我的最愛，具體如下： 
 		\n\n叫出\'使用位置\'的快顯功能表，選\'加到我的最愛\'，然後輸入名字即可將某一點位置設為我的最愛。事後可經由\'選單\' -&gt;\'我的最愛\'找到它。
 		\n\n在\'我的最愛\'清單中輕按提供的任何選項，例如導航去那裡、編輯或刪除它。
 		\n\n欲將我的最愛顯示在地圖上，要在地圖螢幕上啟用圖層\'我的最愛\'，由\'選單\' -&gt;\'地圖圖層\'即可。
@@ -1523,7 +1523,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osb_author_or_password_not_specified">請在設定裡指定 OSM 的使用者名稱和密碼</string>
     <string name="clear_intermediate_points">清除中間點</string>
     <string name="keep_intermediate_points">保留中間點</string>
-    <string name="new_directions_point_dialog">您已經有中間點設置。</string>
+    <string name="new_directions_point_dialog">您已經有中間點設定。</string>
     <string name="context_menu_item_directions_to">指引到</string>
     <string name="context_menu_item_directions_from">指引來自</string>
     <string name="route_descr_map_location">地圖： </string>
@@ -1842,7 +1842,22 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="my_favorites">我的最愛</string>
     <string name="my_data_Button">我的資料</string>
     <string name="my_data_activity">我的資料</string>
-    <string name="selected_track">追蹤</string>
+    <string name="selected_track">已選取軌跡</string>
     <string name="my_tracks">全部追蹤</string>
     <string name="gpx_file_is_empty">GPX 軌跡是空的</string>
+    <string name="gpx_info_distance">距離：%1$s (%2$s個點) </string>
+	<string name="gpx_info_start_time">開始時間：%1$tF,  %1$tR </string>
+	<string name="gpx_info_end_time">結束時間：%1$tF,  %1$tR </string>
+	<string name="gpx_info_average_speed">平均速度：%1$s </string>
+	<string name="gpx_info_asc_altitude">海拔高度上升：%1$s</string>
+    <string name="gpx_timespan">時間跨度：%1$s</string>
+	<string name="gpx_timemoving">移動時間：%1$s</string>
+    <string name="gpx_selection_segment_title">區段</string>
+    <string name="gpx_selection_number_of_points"> %1$s 點</string>
+    <string name="gpx_selection_point">點 %1$s</string>
+    <string name="gpx_selection_current_track">錄制</string>
+    <string name="gpx_selection_route_points">%1$s \n路線點 %2$s</string>
+    <string name="gpx_selection_points">%1$s\n 個點</string>
+    <string name="gpx_selection_track">%1$s\n 軌跡 %2$s</string>
+    <string name="gpx_available_current_track">正在錄制的軌跡</string>
     </resources>

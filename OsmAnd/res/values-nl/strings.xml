@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -1829,4 +1829,23 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="selected_track">Track</string>
     <string name="my_tracks">Alle tracks</string>
     <string name="gpx_file_is_empty">Gpx track is leeg</string>
+    <string name="gpx_info_subtracks">Subtracks: %1$s </string>
+	<string name="gpx_info_distance">Afstand: %1$s (%2$s punten) </string>
+	<string name="gpx_info_start_time">Starttijd: %1$tF,  %1$tR </string>
+	<string name="gpx_info_end_time">Eindtijd: %1$tF,  %1$tR </string>
+	<string name="gpx_info_average_speed">Gemiddelde snelheid: %1$s </string>
+	<string name="gpx_info_maximum_speed">Maximum snelheid: %1$s </string>
+	<string name="gpx_info_avg_altitude">Gemiddelde hoogte: %1$s</string>
+	<string name="gpx_info_diff_altitude">Hoogteverschil: %1$s</string>
+	<string name="gpx_info_asc_altitude">Stijgingen: %1$s</string>
+    <string name="gpx_timespan">Tijdsduur: %1$s</string>
+	<string name="gpx_timemoving">Tijdsduur verplaatsingen: %1$s</string>
+    <string name="gpx_selection_segment_title">Segment</string>
+    <string name="gpx_selection_number_of_points"> %1$s punten</string>
+    <string name="gpx_selection_point">Punt %1$s</string>
+    <string name="gpx_selection_current_track">geregistreerde track</string>
+    <string name="gpx_selection_route_points">%1$s \n Routepunten %2$s</string>
+    <string name="gpx_selection_points">%1$s\n punten</string>
+    <string name="gpx_selection_track">%1$s\n Track %2$s</string>
+    <string name="gpx_available_current_track">Huidige geregistreerde track</string>
     </resources>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
@@ -1675,7 +1675,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_follow">Следовать</string>
     <string name="osmo_edit_device">Изменить пользовательские свойства</string>
     <string name="gpx_file_is_empty">Трэк GPX пуст</string>
-    <string name="selected_track">Трэк</string>
+    <string name="selected_track">Выбранный трэк</string>
     <string name="my_tracks">Все трэки</string>
     <string name="my_favorites">Мои избранные</string>
     <string name="my_data_Button">Мои данные</string>
@@ -1685,4 +1685,22 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_show_group_notifications">Показывать извещения группы</string>
     <string name="osmo_show_group_notifications_descr">Показывать сообщения, когда пользователь присоединяется или покидает группу</string>
     <string name="osmo_group_policy">Политика</string>
+    <string name="osmo_control">Быстрый доступ к OsMo</string>
+    <string name="osmo_cancel_moving_target">Отменить движущуюся цель</string>
+    <string name="osmo_set_moving_target">Установить как движущуюся цель</string>
+    <string name="osmo_center_location">Центр на экране</string>
+    <string name="gpx_selection_segment_title">Сегмент</string>
+    <string name="gpx_info_distance">Дистанция: %1$s (%2$s точек) </string>
+	<string name="gpx_info_start_time">Время старта: %1$tF, %1$tR </string>
+	<string name="gpx_info_end_time">Время завершения: %1$tF, %1$tR </string>
+	<string name="gpx_info_average_speed">Средняя скорость: %1$s </string>
+	<string name="gpx_info_maximum_speed">Максимальная скорость: %1$s </string>
+	<string name="gpx_info_avg_altitude">Средняя высота: %1$s</string>
+	<string name="gpx_info_diff_altitude">Высотное различие: %1$s</string>
+	<string name="gpx_info_asc_altitude">Высотные подъёмы: %1$s</string>
+    <string name="gpx_timespan">Отрезок времени: %1$s</string>
+	<string name="gpx_timemoving">Время передвижения: %1$s</string>
+    <string name="gpx_selection_points">%1$s\n Точек</string>
+    <string name="gpx_selection_track">%1$s\n Трэк %2$s</string>
+    <string name="gpx_available_current_track">Текущий пишущийся трэк</string>
     </resources>

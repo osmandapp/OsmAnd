@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -748,7 +748,12 @@
 <string name="osmand_background_plugin_description">Mostra els paràmetres per habilitar el seguiment i la navegació en segon pla (pantalla apagada) mitjançant l\'activació periòdica del dispositiu GPS.</string>
 <string name="accessibility_preferences_descr">Preferències d\'accessibilitat</string>
 <string name="trace_rendering_descr">Mostra el rendiment de la renderització</string>
-<string name="tip_navigation_t">\tAbans de què inicieu la navegació necessiteu seleccionar una destinació. Després premeu al mapa «Menú» -&gt; «Direccions» i seleccioneu el tipus de navegació.</string>
+<string name="tip_navigation_t">Per obtenir indicacions de com anar a un lloc, podeu mantenir recolzat un punt en el mapa, (llavors omplireu la seva descripció i la triareu amb \'Indicacions a\') o podeu seleccionar \'Indicacions\' després de triar un resultat d'una llista de recerca o de la vostra llista de favorits. 
+		\n\nEl destí es destaca amb una bandera taronja com marcador de destinació sobre el mapa i OsmAnd mostra la distància a ell i la direcció a ell (orientació d'un triangle taronja).
+		\n\nPots triar \'Inicia navegació\', que vol dir que OsmAnd et guiarà, et donarà instruccions de veu (si es configura), etc. O també pots seleccionar \'Mostra la ruta\', indicant una ruta  estàtica sense cap guia o correccions al teu moviment.
+		\n\nPer mostrar una ruta fins la destinació seleccionada des qualsevol punt diferent al que tu et trobes, selecciona el punt d'inici en el mapa i prem \'Indicacions des\'.
+		\n\nSi utilitzes \'Indicacions des\' junt amb \'Inicia navegació\', OsmAnd canviarà a la teva posició actual tant aviat com la determini (això es pot utilitzar per iniciar la navegació abans de trobar la posició actual), mentre \'Indicacions des\' combinat amb \'Mostra la ruta\' només et mostra la ruta des del punt arbitrari que hagis seleccionat sense posteriors correccions.
+	</string>
 <string name="context_menu_item_add_waypoint">Afegeix una fita GPX</string>
 <string name="poi_filter_namefinder">Cercador de noms en línia</string>
 <string name="continuous_rendering_descr">Mostra la renderització continuada en lloc d\'imatge a imatge</string>
@@ -783,8 +788,7 @@
 <string name="local_index_gpx_info">Subtraces : %1$d\nPunts en total: %2$d\nFites: %3$d\nDistància total: %4$s\nHora d\'inici: %5$tF, %5$tR\nHora final: %6$tF, %6$tR</string>
 <string name="tts_missing_language_data">No hi ha dades instal·lades per la llengua seleccionada. Voleu anar al Market per instal·lar-ne?</string>
 <string name="gpx_option_from_start_point">Passa al llarg de la traça sencera</string>
-<string name="switch_to_vector_map_to_see">Hi ha un mapa de vectors fora de línia per aquesta localització.
-\n\t\n\tPer activar-lo aneu a «Menú» -&gt; «Defineix visualització» -&gt; «Font de mapes...» -&gt; «Mapes de vectors fora de línia».</string>
+<string name="switch_to_vector_map_to_see">Hi ha un mapa de vectors fora de línia per aquesta localització. \n\t\n\tPer activar-lo aneu a «Menú»  →  «Defineix visualització»  →  «Font de mapes...»  →  «Mapes de vectors fora de línia».</string>
 <string name="overlay_transparency_descr">Modifiqueu l\'opacitat de la capa superposada</string>
 <string name="overlay_transparency">Opacitat de la capa superposada</string>
 <string name="layer_underlay">Mapa de base…</string>
@@ -879,7 +883,7 @@
     <string name="add_as_last_destination_point">Afegeix punt intermedi al final</string>
     <string name="add_as_first_destination_point">Afegeix punt intermedi al principi</string>
     <string name="replace_destination_point">Substitueix el punt de destinació</string>
-    <string name="new_destination_point_dialog">Ja teniu un punt de destinació definit.</string>
+    <string name="new_destination_point_dialog">Ja teniu definit el punt de destinació.</string>
     <string name="target_point">Punt objectiu %1$s</string>
     <string name="target_points">Objectius</string>
     <string name="intermediate_point_too_far">El punt intermedi %1$s és massa lluny de la carretera més propera.</string>
@@ -978,20 +982,21 @@
 	<string name="poi_remove_success">El PDI s\'ha eliminat correctament</string>
 	<string name="default_buttons_reset">Reinicia</string>
 	<string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
-	<string name="tip_day_night_mode_t_v2">\tL\'aspecte dels mapes vectorials pot canviar entre dia (clar) i nit (fosc).
-\n\tEls colors de nit són més segurs per conduir de nit.
-\n\tPodeu assignar una política per canviar de dia/nit a «Menú» -&gt; «Configura la 		pantalla...» -&gt;«Mapa dia/nit».
-\n\tLes opcions son:
-\n\t«Alba/Ocàs» - mode automàtic, controlat per la posició del sol (predeterminat)
-\n\t«Dia» - sempre usa mode de dia
-\n\t«Nit» - sempre usa mode de nit\n\t«Sensor de llum» - l\'aspecte del mapa es controlat pel sensor de llum del dispositiu (només si disposa d\'aquest sensor)
+	<string name="tip_day_night_mode_t_v2">L\'aspecte dels mapes vectorials pot canviar entre dia (clar) i nit (fosc). Els colors de nit són més segurs per la conducció nocturna.
+\n\nPodeu assignar un criteri pel canvi de dia/nit a «Menú» -&gt; «Configura la pantalla...» -&gt;«Mapa dia/nit».
+\n\nLes opcions son:
+\n\t «Alba/Ocàs» - mode automàtic, controlat per la posició del sol (predeterminat)
+\n\t «Dia» - sempre usa mode de dia
+\n\t «Nit» - sempre usa mode de nit
+\n\t «Sensor de llum» - l\'aspecte del mapa es controlat pel sensor de llum del dispositiu (només si disposa d\'aquest sensor)
 	</string>
-	<string name="tip_osm_improve_t">\tL\'OsmAnd usa mapes basats en dades de l\'Openstreetmap.org (OSM) i -a mes de veure i navegar- podeu usar-lo per a millorar la qualitat de les dades. Fàcilment podeu crear i publicar nous PDI o errors de l\'OSM amb només uns quants clics!
-\n\tPer a això heu de subministrar la vostra informació de registre de l\'OSM a «Preferències» -&gt; «Preferències generals» -&gt; «Edició d\'OSM».
-\n\tPer afegir un nou PDI useu l\'opcio «Crea un PDI» en el menú contextual del mapa. Introduïu la informacio sobre el nou PDI al dialeg de «Crea PDI» i finalment publiqueu-lo.
-\n\tEls errors en els mapes poden ser informats inmediatament via error d\'OSM, i la comunitat d\'OSM llavors podra solucionar l\'error rapidament.
-\n\tPer afegir un error useu l\'opcio «Obre error d\'OSM» en el menu contextual. Llavors entra una descripcio detallada del problema i finalment envia-ho usant el boto d\'Afegir.
-\n\tTingueu en compte que fa falta conexio a Internet per afegir PDI OSM i errors d\'OSM.</string>
+	<string name="tip_osm_improve_t">L\'OsmAnd usa mapes basats en dades de l\'Openstreetmap.org (OSM) i -a mes de veure i navegar- podeu usar-lo per a millorar la qualitat de les dades. Fàcilment podeu crear i publicar nous PDI o errors de l\'OSM amb només uns quants clics!
+\n\nPer a això heu de subministrar la vostra informació de registre de l\'OSM a «Preferències» -&gt; «Preferències generals» -&gt; «Edició d\'OSM».
+\n\nPer afegir un nou PDI useu l\'opció «Crea un PDI» en el menú contextual del mapa. Introduïu la informació sobre el nou PDI al diàleg de «Crea PDI» i finalment publiqueu-lo.
+\n\nEls errors en els mapes poden ser informats immediatament via error d\'OSM, i la comunitat d\'OSM llavors podrà solucionar l\'error ràpidament.
+\n\nPer afegir un error useu l\'opció «Obre error d\'OSM» en el menú contextual. Llavors entra una descripció detallada del problema i finalment envia-ho usant el boto d\'Afegir.
+\n\nTingueu en compte que OsmAnd pot recollir les vostres correccions sense connexió però fa falta una connexió a Internet per enviar els teus  PDI OSM i els errors d\'OSM detectats.
+	</string>
 	<string name="tip_recent_changes_0_6_9_t">Canvis a 0.6.9 :
 \n\t- Dibuixat fora línia millorat\n\t- Dibuixat natiu ràpid fora linina - mirar a les característiques experimentals (pot no funcionar en alguns dispositius)\n\t- Canvis massius per veure i sentir
 \n\t- Informació d\'altitud
@@ -999,10 +1004,8 @@
 \n\t- Altres petites característiques</string>
 	<string name="no_route">Sense ruta</string>
 	<string name="voice_stream_voice_call">Àudio de trucada de veu</string>
-	<string name="tip_location_sharing_t">\tPodeu compartir la ubicació de llocs interessants en el vostre viatge amb la família o els amics.
-\n\tPer compartir qualsevol ubicació que desitgeu:
-\n\tUseu «Menú contextual de mapa» -&gt; «Comparteix la ubicació».
-\n\tLlavors seleccioneu una via per compartir la vostra ubicació. Les opcions són: Correu electrònic, SMS(text) o només copiar la ubicació en el porta-retalls.
+	<string name="tip_location_sharing_t">Podeu compartir la ubicació de llocs interessants durant el vostre viatge amb la família o els amics per mitjà del menú de context «Usa posició» → «Comparteix la ubicació».
+\n\nLlavors seleccioneu una via per compartir la vostra ubicació. Les opcions són: Correu electrònic, SMS(text) o només copiar les coordenades de la ubicació en el porta-retalls.
 	</string>
 	<string name="enable_plugin_monitoring_services">Habilita els connectors de monitorització (enregistrament, enregistrament en viu) per poder utilitzar els serveis de monitorització</string>
     <string name="gps_not_available">Habiliteu el GPS a les preferències</string>
@@ -1053,7 +1056,7 @@
     <string name="recording_description">Enregistrament %1$s %2$s a %3$s</string>
     <string name="layer_recordings">Capa d\'enregistraments</string>
     <string name="recording_can_not_be_played">No es pot reproduir l\'enregistrament</string>
-    <string name="av_control_stop">atura</string>
+    <string name="av_control_stop">Atura</string>
     <string name="srtm_paid_version_msg">Considereu comprar el connector de les línies de nivell al Market per ajudar al desenvolupament futur.</string>
     <string name="srtm_paid_version_title">Connector de corbes de nivell</string>
     <string name="av_video_format">Format de sortida de vídeo</string>
@@ -1070,7 +1073,7 @@
 		\n\t* Opció \'Vista turística\'amb més detalls al mapa, nous estils de carretera, més contrast, i l\'opció per senderisme indicant el grau de dificultat SAC
 		\n\t* Correcció d\'altitud GPS basada en EGM96
     </string>
-    <string name="av_control_start">engega</string>
+    <string name="av_control_start">Comença</string>
     <string name="osmand_srtm_short_description_80_chars">Connector de l\'OsmAnd per a corbes de nivell fora de línia</string>
     
     
@@ -1148,10 +1151,11 @@
 \n\t- Dades de PDI incloses en fitxer .obf (tots els índexs de baixada després de 01/10/11)
 \n\t- Correcions en els missatges de veu (posició GPS, omissió de la primer comanda)
 \n\t- Petites millores "</string>
-	<string name="tip_favorites_t">"\tEls punts usats de forma freqüent els podeu desar coma a preferits.
-\n\tPer desar un punt com a preferit aneu al menú contextual del mapa, seleccioneu l\'opció «Afegeix als preferits» i introduïu un nom per al punt. Després de desar un preferit, és accessible mitjanl·lant «Pantalla principal» -&gt; «Preferits».
-\n\tFent pressió llarga a un preferit al menú «Preferit» proporciona opcions per establir-ho com a destinació, editar-lo o suprimir-lo.
-\n\tPer mostrar tots els punts preferits directament al mapa, a la pantalla mapa, activeu la capa «Preferits» que es troba a «Menú» -&gt; «Defineix visualització». "</string>
+	<string name="tip_favorites_t">Els punts usats de forma freqüent els podeu desar com a Preferits, com s'indica:
+\n\nEn el menú de context «Usa posició» per qualsevol punt, seleccioneu l\'opció «Afegeix als preferits» i introduïu un nom per identificar-lo. 
+\n\nDesprés de desar un preferit, aquest és accessible mitjançant «Menú» -&gt; «Preferits». Mantenint pressionat un determinat preferit en el menú «Preferits» es dona accés a opcions per establir-ho com a destinació, editar-lo o suprimir-lo.
+\n\nPer mostrar tots els punts preferits directament al mapa, a la pantalla mapa, activeu la capa «Preferits» que es troba a «Menú» → «Capes del mapa».
+	</string>
 	<string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
 	
 	<string name="loading_builds_failed">L\'obtenció del llistat de construccions disponibles de l\'OsmAnd ha fallat</string>
@@ -1160,7 +1164,7 @@
 	<string name="background_service_wait_int_descr">Estableix el temps màxim d\'espera per a cada correcció de la posició en segon pla</string>
 	<string name="background_service_wait_int">Espera màxima per corregir</string>
 	<string name="service_stop_background_service">Desactiva el servei de navegació en segon pla</string>
-	<string name="dist_control_start">Inicia</string>
+	<string name="dist_control_start">Inici</string>
     <string name="local_indexes_cat_av">Dades d\'àudio/vídeo</string>
     <string name="stop_routing_confirm">Esteu segurs de què voleu parar la navegació?</string>
     <string name="clear_dest_confirm">Esteu segurs de què voleu eliminar la vostra destinació?</string>
@@ -1205,7 +1209,7 @@
     <string name="wait_current_task_finished">Espereu fins que finalitzi la tasca actual</string>
     <string name="use_kalman_filter_compass_descr">Usa el filtre Kalman per evitar interferències a la brúixola</string>
     <string name="use_kalman_filter_compass">Usa el filtre Kalman</string>
-    <string name="access_mark_final_location_first">Mode accessibilitat: seleccioneu primer la destinació</string> 
+    <string name="access_mark_final_location_first">Mode d'accessibilitat: seleccioneu primer la destinació</string> 
     <string name="use_magnetic_sensor_descr">Podeu usar el sensor magnètic per determinar el valor la brúixola en comptes del sensor d\'orientació</string>
     <string name="use_magnetic_sensor">Usa el sensor magnètic</string>
     <string name="other_location">Una altra</string>
@@ -1382,8 +1386,8 @@
 	<string name="intermediate_items_sort_return">Les fites intermèdies han estat re-ordenades per optimitzar la ruta.</string>
     <string name="osmand_distance_planning_plugin_description">Creant itineraris i usant o modificant fitxers GPX existents podreu mesurar la distància entre punts. Si després els deseu, podreu usar-los per preparar més itineraris GPX.</string>
     <string name="android_19_location_disabled">Des de la versió KitKat no es pot descarregar un mapa actualitzat i guardar-lo on hi ha l\'anterior (%s). Voleu canviar la destinació a un lloc nou i copiar-hi totes les dades?
-        \n Nota : les dades antigues quedaran intactes. 
-        \n Nota : no serà possible compartir dades entre l\' OsmAnd i l\' OsmAnd+. </string>
+        \n Nota: les dades antigues quedaran intactes. 
+        \n Nota: no serà possible compartir dades entre l\' OsmAnd i l\' OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd pot provar de traslladar les dades a la nova destinació. Voleu fer-ho?</string>
     <string name="copying_osmand_one_file_descr">S\'estan copiant el fitxer (%s) a la nova destinació...</string>
     <string name="copying_osmand_files_descr">S\'estan copiant els fitxers de l\' OsmAnd a la nova destinació (%s)</string>
@@ -1398,7 +1402,7 @@
 	</string>
     <string name="routing_attr_prefer_motorway_name">Preferència per autopistes</string>
 	<string name="routing_attr_prefer_motorway_description">Preferència per autopista</string>
-	<string name="routing_attr_short_way_name">Camí curt</string>
+	<string name="routing_attr_short_way_name">Camí més curt</string>
 	<string name="routing_attr_short_way_description">Usa el camí més curt</string>
 	<string name="routing_attr_avoid_toll_name">Evita peatges</string>
 	<string name="routing_attr_avoid_toll_description">Evita els peatges</string>
@@ -1408,8 +1412,8 @@
 	<string name="routing_attr_avoid_ferries_description">Evita transbordadors</string>
 	<string name="routing_attr_avoid_motorway_name">Evita autopistes</string>
 	<string name="routing_attr_avoid_motorway_description">Evita autopistes</string>
-	<string name="routing_attr_weight_name">Pes</string>
-	<string name="routing_attr_weight_description">Especifica el límit de pes</string>
+	<string name="routing_attr_weight_name">Pes màxim</string>
+	<string name="routing_attr_weight_description">Especifica limitació de pes del vehicle</string>
     <string name="background_service_int_descr">Trieu cada quan voleu que s\'actualitzi la posició en el mode en segon pla</string>
 	<string name="av_photo_play_sound_descr">Trieu si voleu sentir un so en fer una foto</string>
 <string name="av_camera_focus_continuous">La camera està tractant d\'enfocar</string>
@@ -1551,14 +1555,18 @@
 		\n\nOsmAnd indicarà l\'altitud de les teves ubicacions en el sistema EGM96 quan descarreguis el arxiu \'Correcció Mundial d\'Altituds\' (WW15MGH.DAC) mitjançant \'Opcions\' → \'Gestió de Dades\'. (l\'original és a http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
     <string name="osmo_settings_uuid">Identificació única de dispositiu</string>
-    <string name="osmo_settings_descr">Veure la clau de registre única del dispositiu i altres paràmetres específics de monitorització </string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitorització avançada en directe amb moltes característiques pel control remot  http://osmo.mobi</string>
-    <string name="osmo_plugin_name">OSMo (Monitorització en directe avançada)</string>
-    <string name="osmo_settings">OSMo</string>
+    <string name="osmo_settings_descr">Configurar paràmetres de monitorització i fixar el canal de seguiment personal</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitorització avançada en temps real. Proporciona la possibilitat de fer el seguiment d'altres dispositius així com de ser seguit.
+Crea grups anònims per compartir posicions i comunicar-se. Hi ha diferents paràmetres de seguiment, tant permanents com de la sessió actual.
+Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup.
+Els grups totalment operatius s'han de crear via web i només els usuaris registrats en tenen accés.
+Si us plau, llegiu-ne més a http://osmo.mobi.</string>
+    <string name="osmo_plugin_name">OsMo (Monitorització avançada en temps real)</string>
+    <string name="osmo_settings">OsMo Monitorització OpenStreetMap (beta)</string>
    	<string name="osmo_register_device">Registrant dispositiu... </string>
-    <string name="osmo_io_error">Problema de connexió amb OSMo : </string>
-    <string name="osmo_mode_on">Aturar OSMo</string>    
-    <string name="osmo_mode_off">Iniciar OSMo</string>
+    <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
+    <string name="osmo_mode_on">Aturar sessió OsMo</string>    
+    <string name="osmo_mode_off">Iniciar sessió OsMo</string>
     <string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions, Guia de Navegació Automatitzada) és un mapa i una aplicació de navegació amb accés a dades de OpenStreetMap (OSM) lliure, de tot el món i d\'una gran qualitat. Totes les dades dels mapes es poden emmagatzemar a la memòria local del dispositiu (o en una targeta) pel seu ús sense connexió. A través del GPS del seu dispositiu, OsmAnd ofereix navegació, amb indicacions òptiques i de veu, per anar en cotxe, moto o caminant. Totes les funciones principals són disponibles tant amb connexió com sense a Internet.
 
@@ -1725,24 +1733,25 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="share_fav_subject">Favorits compartits via OsmAnd</string>
 	<string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
     <string name="tip_recent_changes_1_8_alpha">Canvis a la 1.8:
-        * Calcula la ruta entre els punts de la traça GPX
-        * Canviat ventall de països per descarregar (suporta la cerca de denominacions locals)
+	* Calcula la ruta entre els punts de la traça GPX
+	* Canviat ventall de països per descarregar (suporta la cerca de denominacions locals)
+	* Admet importació GPX/KML (conversió de KML a GPX)
     </string>
     <string name="osmo_auto_send_locations_descr">Inici automàtic del registre de la traça i del enviament de les posicions tot just iniciar l\'aplicació</string>
     <string name="osmo_auto_send_locations">Inici automàtic del registre de la traça</string>
     <string name="osmo_tracker_id">Identificació personal del traçador</string>
     <string name="osmo_tracker_id_descr">Prem per veure o compartir la identificació del traçador
 	Utilitzant la identificació del traçador altres dispositius connectats podran monitoritzar tots els moviments d\'aquest aparell. Per desconnectar seleccioni l\'opció Regenerar.</string>
-    <string name="osmo_session_token">Símbol de sessió:%1$s</string>
+    <string name="osmo_session_token">Símbol de sessió: %1$s</string>
     <string name="osmo_auth_pending">Esperant autorització...</string>
     <string name="osmo_locations_sent">Posicions enviades %1$d (en cua %2$d) </string>
-    <string name="osmo_conn_successfull">Connexió establerta : %1$s </string>
+    <string name="osmo_conn_successfull">Connexió establerta: %1$s </string>
     <string name="osmo_mode_restart">Reinicia sessió OsMo</string>
     <string name="osmo_settings_debug">Depura informació</string>
     <string name="hours_ago">hores fa</string>
     <string name="minutes_ago">minuts fa</string>
     <string name="seconds_ago">segons fa</string>
-    <string name="osmo_connect_to_device_name">Nom de dispositiu</string>
+    <string name="osmo_connect_to_device_name">Nom d'usuari</string>
     <string name="osmo_connect_to_device_tracker_id">Identificador de traça</string>
     <string name="osmo_connect_to_device">Enllaç amb dispositiu</string>
     <string name="osmo_join_group">Unir-se al grup</string>
@@ -1751,7 +1760,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_groups">OsMo Grups/Dispositius</string>
     <string name="osmo_group_info">Informació</string>
     <string name="osmo_group">Grup OsMo</string>
-    <string name="osmo_group_share">Per connectar al grup %2$s, indica l\'identificador de grup (%1$s) o prem %3$s.</string>
+    <string name="osmo_group_share">Per connectar amb el grup %2$s, indica l\'identificador de grup (%1$s) o prem %3$s.</string>
     <string name="osmo_share_connect_device">Permetre el seguiment d\'aquest dispositiu permanentment</string>
     <string name="osmo_share_current_session">Compartir la posició actual al navegador</string>
     <string name="osmo_session_not_available">Sessió no disponible, si us plau verifiqui que \'Enviar posicions\' està activat.</string>
@@ -1771,7 +1780,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_connect">Connexió a</string>
     <string name="osmo_create_group">Crear un grup</string>
     <string name="osmo_server_operation_failed">Fallida del servidor OsMo</string>
-    <string name="osmo_activity">Monitorització OSM</string>
+    <string name="osmo_activity">Monitorització OpenStreetMap</string>
     <string name="osmo_enable_tracker">Enviar les meves ubicacions</string>
     <string name="osmo_control">Accés ràpid OsMo</string>
     <string name="local_index_mi_export">Exportar</string>
@@ -1801,7 +1810,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_edit_device">Canviar propietats d\'usuari</string>
     <string name="osmo_edit_color">Mostra color</string>
     <string name="gpx_file_is_empty">La traça GPX està buida</string>
-    <string name="selected_track">Pista</string>
+    <string name="selected_track">Traces seleccionades</string>
     <string name="my_tracks">Totes les pistes</string>
     <string name="my_favorites">El meus favorits</string>
     <string name="my_data_Button">Les meves dades</string>
@@ -1810,4 +1819,12 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_user_left">L\'usuari %1$s ha deixat el grup %2$s</string>
     <string name="osmo_show_group_notifications">Veure les notificacions de grup</string>
     <string name="osmo_show_group_notifications_descr">Veure missatges quan un usuari s\'uneix o deixa el grup</string>
-    </resources>
+    <string name="gpx_info_subtracks">Segments: %1$s </string>
+	<string name="gpx_info_waypoints">Punts de pas: %1$s </string>
+	<string name="gpx_info_distance">Distància: %1$s (%2$s punts) </string>
+	<string name="gpx_info_start_time">Hora d'inici: %1$tF,  %1$tR </string>
+	<string name="gpx_info_end_time">Hora d'arribada : %1$tF,  %1$tR </string>
+	<string name="gpx_info_average_speed">Velocitat mitjana: %1$s </string>
+	<string name="gpx_info_maximum_speed">Velocitat màxima: %1$s </string>
+	<string name="gpx_info_avg_altitude">Alçada mitjana: %1$s</string>
+	</resources>

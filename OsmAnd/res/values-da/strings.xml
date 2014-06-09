@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -33,7 +33,7 @@
     <string name="recording_context_menu_delete">Slet optagelse</string>
     <string name="recording_context_menu_play">Afspil</string>
     <string name="recording_description">Optagelse %1$s %2$s af %3$s</string>
-    <string name="recording_default_name">optagelse</string>
+    <string name="recording_default_name">optager</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
@@ -1873,10 +1873,30 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_show_group_notifications_descr">Vis popup-meddelelser, når brugeren slutter sig til gruppen eller forlader den</string>
     <string name="osmo_user_joined">Bruger %1$s sluttede sig til  gruppen %2$s</string>
     <string name="osmo_user_left">Bruger %1$s forlod gruppen %2$s</string>
-    <string name="selected_track">Spor</string>
+    <string name="selected_track">Valgte spor</string>
     <string name="my_tracks">Alle spor</string>
     <string name="my_favorites">Mine favoritter</string>
     <string name="my_data_Button">Mine data</string>
     <string name="my_data_activity">Mine data</string>
     <string name="gpx_file_is_empty">GPX-spor er tomt</string>
-    </resources>
+    <string name="gpx_info_waypoints">Rutepunkter: %1$s </string>
+	<string name="gpx_info_distance">Afstand: %1$s (%2$s pukter) </string>
+	<string name="gpx_info_start_time">Startid: %1$tF,  %1$tR </string>
+	<string name="gpx_info_end_time">Sluttid: %1$tF,  %1$tR </string>
+	<string name="gpx_info_average_speed">Gennemsnitshastighed: %1$s </string>
+	<string name="gpx_info_maximum_speed">Maks hastighed: %1$s </string>
+	<string name="gpx_info_avg_altitude">Gennemsnitshøjde: %1$s</string>
+	<string name="gpx_info_diff_altitude">Højdeforskel: %1$s</string>
+	<string name="gpx_info_asc_altitude">Højdestigninger: %1$s</string>
+    <string name="gpx_timespan">Periode: %1$s</string>
+	<string name="gpx_timemoving">Tid i bevægelse: %1$s</string>
+    <string name="gpx_selection_segment_title">Segment</string>
+    <string name="gpx_selection_number_of_points"> %1$s punkter</string>
+    <string name="gpx_selection_point">Punkt %1$s</string>
+    <string name="gpx_selection_current_track">optager</string>
+    <string name="gpx_selection_route_points">%1$s \n Rutepunkter %2$s</string>
+    <string name="gpx_selection_points">%1$s\n Punkter</string>
+    <string name="gpx_selection_track">%1$s\n Spor %2$s</string>
+    <string name="gpx_available_current_track">Aktuel optager spor</string>
+    <string name="gpx_info_subtracks">Underspor: %1$s </string>
+	</resources>

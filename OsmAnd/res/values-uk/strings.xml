@@ -1608,10 +1608,10 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_group_info">Інформація</string>
     <string name="int_days">днів</string>
     <string name="osmo_group_description">Опис</string>
-    <string name="osmo_connect_to_device_name">Ім\'я пристрою</string>
+    <string name="osmo_connect_to_device_name">Ім’я пристрою</string>
     <string name="osmo_create_group">Створити групу</string>
-    <string name="osmo_connect">З\'єднатися до</string>
-    <string name="osmo_enable_tracker">Надіслати мою позицію</string>
+    <string name="osmo_connect">Приєднатись до</string>
+    <string name="osmo_enable_tracker">Надіслати моє місцезнаходження</string>
     <string name="hours_ago">годин тому</string>
     <string name="minutes_ago">хвилин тому</string>
     <string name="seconds_ago">секунд тому</string>
@@ -1622,4 +1622,41 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_tracker_id">Персональний ID трекера</string>
     <string name="osmo_tracker_id_descr">Натисніть щоб подивитись або подітись ID трекера
 	Використовуючи ID трекера можна відстежувати пересування цього пристрою! Для відключення скористайтесь опцією Перестворити.</string>
+    <string name="osmo_server_operation_failed">OsMo Server збій виконання операції</string>
+    <string name="osmo_activity">OpenStreetMap-Моніторинг</string>
+    <string name="osmo_control">OsMo швидкий доступ</string>
+    <string name="gpx_file_is_empty">Трек Gpx порожній</string>
+    <string name="selected_track">Трек</string>
+    <string name="my_tracks">Всі треки</string>
+    <string name="my_favorites">Мої Закладки</string>
+    <string name="my_data_Button">Мої Дані</string>
+    <string name="my_data_activity">Мої Дані</string>
+    <string name="osmo_user_joined">Користувач %1$s приєднався до групи %2$s</string>
+    <string name="osmo_user_left">Користувач %1$s покинув групу %2$s</string>
+    <string name="osmo_show_group_notifications">Показувати сповіщення групи</string>
+    <string name="osmo_show_group_notifications_descr">Показувати сповіщення, коли користувач приєднується або залишає групу</string>
+    <string name="osmo_follow">Стежити</string>
+    <string name="osmo_sign_in">Увійти</string>
+    <string name="osmo_create_groups_confirm">Для створення групи, Ви повинні бути зареєстрованим користувачем OsMo.</string>
+    <string name="osmo_credentials_not_valid">Ваші облікові дані OsMo хибні.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Ви впевнені у потребі перестворення персональних ID? Усі пристрої, зв’язані з Вами не зможуть відстежити ваше місцезнаходження.</string>
+    <string name="osmo_regenerate_login_ids">Перестворити ID користувача</string>
+    <string name="osmo_cancel_moving_target">Скасувати стеження</string>
+    <string name="osmo_center_location">По центру екрану</string>
+    <string name="osmo_set_moving_target">Почати стеження</string>
+    <string name="osmo_use_server_name">Зареєстроване ім’я</string>
+    <string name="osmo_connect_to_my_nickname">Моє призьвісько</string>
+    <string name="osmo_user_name">Користувач</string>
+	<string name="color_red">червоний</string>
+	<string name="color_pink">рожевий</string>
+	<string name="color_orange">помаранчевий</string>
+	<string name="color_brown">коричневий</string>
+	<string name="color_yellow">жовтий</string>
+	<string name="color_lightblue">блакитний</string>
+	<string name="color_blue">синій</string>
+	<string name="color_green">зелений</string>
+	
+    <string name="osmo_edit_device">Змінити властивості користувача</string>
+    <string name="osmo_edit_color">Колір</string>
+    <string name="osmo_group">Група OsMo</string>
     </resources>
