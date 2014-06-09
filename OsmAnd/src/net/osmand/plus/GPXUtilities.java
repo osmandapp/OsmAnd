@@ -310,7 +310,7 @@ public class GPXUtilities {
 				return approx(segment.points.get(ind), segment.points.get(ind + 1), startCoeff);
 			}
 			if(j == getNumberOfPoints() - 1) {
-				if(startCoeff == 1) {
+				if(endCoeff == 1) {
 					return segment.points.get(ind);
 				}
 				return approx(segment.points.get(ind - 1), segment.points.get(ind), endCoeff);
@@ -351,7 +351,7 @@ public class GPXUtilities {
 		public float setLastPoint(int pointInd, float endCf) {
 			endCoeff = endCf;
 			endPointInd = pointInd;
-			return startCoeff;
+			return endCoeff;
 		}
 		
 	}
@@ -390,29 +390,33 @@ public class GPXUtilities {
 	
 	private static void splitSegment(SplitMetric metric, int metricLimit, List<SplitSegment> splitSegments,
 			TrkSegment segment) {
-		int ml = metricLimit;
+		int currentMetricEnd = metricLimit;
 		SplitSegment sp = new SplitSegment(segment, 0, 0);
 		int total = 0;
+		WptPt prev = null ;
 		for (int k = 0; k < segment.points.size(); k++) {
 			WptPt point = segment.points.get(k);
 			if (k > 0) {
-				WptPt prev = segment.points.get(k - 1);
 				int currentSegment = metric.metric(prev, point);
-				while (total + currentSegment > ml) {
-					int p = ml - total;
-					float cf = sp.setLastPoint(k - 1, p / ((float) currentSegment));
-					sp = new SplitSegment(segment, k - 1, cf);
-					sp.metricEnd = ml;
+				while (total + currentSegment > currentMetricEnd) {
+					int p = currentMetricEnd - total;
+					float cf = p / ((float) currentSegment); 
+					sp.setLastPoint(k - 1, cf);
+					sp.metricEnd = currentMetricEnd;
 					splitSegments.add(sp);
-					ml += metricLimit;
+					
+					sp = new SplitSegment(segment, k - 1, cf);
+					currentMetricEnd += metricLimit;
+					prev = sp.get(0);
 				}
 				total += currentSegment;
 			}
+			prev = point;
 		}
 		if (segment.points.size() > 0
 				&& !(sp.endPointInd == segment.points.size() - 1 && sp.startCoeff == 1)) {
 			sp.metricEnd = total;
-			sp.setLastPoint(0, 1);
+			sp.setLastPoint(segment.points.size() - 2, 1);
 			splitSegments.add(sp);
 		}
 	}

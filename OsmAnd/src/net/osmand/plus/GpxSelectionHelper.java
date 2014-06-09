@@ -403,8 +403,16 @@ public class GpxSelectionHelper {
 			return splitDistance > 0;
 		}
 		
+		public int getSplitDistance() {
+			return splitDistance;
+		}
+		
 		public boolean isSplitTime() {
 			return splitTime > 0;
+		}
+		
+		public int getSplitTime() {
+			return splitTime;
 		}
 
 		public String getGroupName() {

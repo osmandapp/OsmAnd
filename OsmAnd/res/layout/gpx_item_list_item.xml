@@ -13,8 +13,10 @@
         android:layout_height="wrap_content" >
 
         <FrameLayout
-            android:layout_width="30dp"
-            android:layout_height="wrap_content" >
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_marginLeft="3dp"
+            >
 
             <ImageView
                 android:id="@+id/icon"
@@ -27,11 +29,11 @@
             <TextView
                 android:id="@+id/additional"
                 style="@style/ListText.Small"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingRight="2dp"
-                android:paddingTop="2dp"  >
+                android:paddingRight="4dp"
+                android:paddingTop="4dp"  >
             </TextView>
         </FrameLayout>
 

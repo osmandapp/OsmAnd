@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="selected">selected</string>
     <string name="gpx_split_interval">Select split interval</string>
     <string name="local_index_gpx_info_show">\n\nPress and hold for options</string>
 	<string name="gpx_info_subtracks">Subtracks: %1$s </string>

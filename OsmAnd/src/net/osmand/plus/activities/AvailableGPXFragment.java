@@ -229,6 +229,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
 	}
 	
+	private void updateSelectionMode(ActionMode m) {
+		if(selectedItems.size() > 0) {
+			m.setTitle(selectedItems.size() + " " + getString(R.string.selected));
+		} else{
+			m.setTitle("");
+		}
+	}
 	
 	private void openShowOnMapMode(){
 		selectionMode = true;
@@ -240,12 +247,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
 				selectionMode = true;
+				updateSelectionMode(mode);
 				MenuItem it = menu.add(R.string.show_gpx_route);
 					it.setIcon(!isLightActionBar() ? R.drawable.ic_action_map_marker_dark : R.drawable.ic_action_map_marker_light);
 				it.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | 
 						MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 				return true;
 			}
+
+			
 
 			@Override
 			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
@@ -486,9 +496,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		
 		public void setResult(List<GpxInfo> result) {
 			this.result = result;
-			if(result == null){
-				listAdapter.clear();
-			} else {
+			listAdapter.clear();
+			if(result != null){
 				for (GpxInfo v : result) {
 					listAdapter.addLocalIndexInfo(v);
 				}
@@ -688,6 +697,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						} else {
 							selectedItems.remove(child);
 						}
+						updateSelectionMode(actionMode);
 					}
 				});
 			}
@@ -963,15 +973,19 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		GpxInfo item = listAdapter.getChild(groupPosition, childPosition);
-		if(!selectionMode){
-		item.setExpanded(!item.isExpanded());
-		
-		if (item.isExpanded()) {
-			descriptionLoader = new LoadLocalIndexDescriptionTask();
-			descriptionLoader.execute(item);
-		}
+		if (!selectionMode) {
+			item.setExpanded(!item.isExpanded());
+			if (item.isExpanded()) {
+				descriptionLoader = new LoadLocalIndexDescriptionTask();
+				descriptionLoader.execute(item);
+			}
 		} else {
-			selectedItems.add(item);
+			if (!selectedItems.contains(item)) {
+				selectedItems.add(item);
+			} else {
+				selectedItems.remove(item);
+			}
+			updateSelectionMode(actionMode);
 		}
 		listAdapter.notifyDataSetInvalidated();
 		return true;

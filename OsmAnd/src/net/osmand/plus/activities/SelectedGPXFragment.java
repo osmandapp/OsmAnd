@@ -18,6 +18,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		getListView().setFastScrollEnabled(true);
 		lightContent = app.getSettings().isLightContent();
 		adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
 		selectedGpxHelper.setUiListener(new Runnable() {
@@ -66,7 +68,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 	}
-	
+
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -112,7 +114,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
 	private void selectSplitDistance(final GpxDisplayGroup model) {
 		Builder bld = new AlertDialog.Builder(getActivity());
-		int checkedItem = -1;
+		int[] checkedItem = new int[] {0};
 		List<String> options = new ArrayList<String>();
 		final TIntArrayList distanceSplit = new TIntArrayList();
 		final TIntArrayList timeSplit = new TIntArrayList();
@@ -120,35 +122,57 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		options.add(app.getString(R.string.none));
 		distanceSplit.add(-1);
 		timeSplit.add(-1);
-		addOptionSplit(50, true, options, distanceSplit, timeSplit);
-		addOptionSplit(100, true, options, distanceSplit, timeSplit);
-		addOptionSplit(200, true, options, distanceSplit, timeSplit);
-		addOptionSplit(500, true, options, distanceSplit, timeSplit);
-		addOptionSplit(1000, true, options, distanceSplit, timeSplit);
-		addOptionSplit(2000, true, options, distanceSplit, timeSplit);
-		addOptionSplit(5000, true, options, distanceSplit, timeSplit);
-		addOptionSplit(15, false, options, distanceSplit, timeSplit);
-		addOptionSplit(30, false, options, distanceSplit, timeSplit);
-		addOptionSplit(60, false, options, distanceSplit, timeSplit);
-		addOptionSplit(120, false, options, distanceSplit, timeSplit);
-		addOptionSplit(150, false, options, distanceSplit, timeSplit);
-		addOptionSplit(300, false, options, distanceSplit, timeSplit);
-		addOptionSplit(600, false, options, distanceSplit, timeSplit);
-		addOptionSplit(900, false, options, distanceSplit, timeSplit);
+		addOptionSplit(50, true, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(100, true, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(200, true, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(500, true, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(1000, true, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(2000, true, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(5000, true, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(15, false, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(30, false, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(60, false, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(120, false, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(150, false, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(300, false, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(600, false, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(900, false, options, distanceSplit, timeSplit, checkedItem, model);
 		
-		bld.setSingleChoiceItems(options.toArray(new String[options.size()]), checkedItem, new DialogInterface.OnClickListener() {
+		bld.setSingleChoiceItems(options.toArray(new String[options.size()]), checkedItem[0], new DialogInterface.OnClickListener() {
 			
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if(which == 0) {
-					model.noSplit(app);
-				} else if(distanceSplit.get(which) > 0) {
-					model.splitByDistance(app, distanceSplit.get(which));
-				} else if(timeSplit.get(which) > 0) {
-					model.splitByTime(app, timeSplit.get(which));
-				}
-				adapter.notifyDataSetChanged();
+			public void onClick(DialogInterface dialog, final int which) {
 				dialog.dismiss();
+				
+				
+				new AsyncTask<Void, Void, Void>() {
+					
+					protected void onPostExecute(Void result) {
+						adapter.notifyDataSetChanged();
+						getSherlockActivity().setProgressBarIndeterminateVisibility(false);
+					};
+					
+					protected void onPreExecute() {
+						getSherlockActivity().setProgressBarIndeterminateVisibility(true);
+					};
+
+					@Override
+					protected Void doInBackground(Void... params) {
+						if(which == 0) {
+							model.noSplit(app);
+						} else if(distanceSplit.get(which) > 0) {
+							model.splitByDistance(app, distanceSplit.get(which));
+						} else if(timeSplit.get(which) > 0) {
+							model.splitByTime(app, timeSplit.get(which));
+						}
+						return null;
+					}
+				}.execute((Void)null);
+			}
+
+			private void run(final GpxDisplayGroup model, final TIntArrayList distanceSplit,
+					final TIntArrayList timeSplit, int which) {
+				
 			}
 		});
 		bld.show();
@@ -156,11 +180,14 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	private void addOptionSplit(int value, boolean distance, List<String> options, TIntArrayList distanceSplit,
-			TIntArrayList timeSplit) {
+			TIntArrayList timeSplit, int[] checkedItem, GpxDisplayGroup model) {
 		if(distance) {
 			options.add(OsmAndFormatter.getFormattedDistance(value, app));
 			distanceSplit.add(value);
 			timeSplit.add(-1);
+			if(model.getSplitDistance() == value) {
+				checkedItem[0] = distanceSplit.size() -1;
+			}
 		} else {
 			if(value < 60) {
 				options.add(value+ " " + app.getString(R.string.int_seconds));
@@ -171,6 +198,9 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			}
 			distanceSplit.add(-1);
 			timeSplit.add(value);
+			if(model.getSplitTime() == value) {
+				checkedItem[0] = distanceSplit.size() -1;
+			}
 		}
 		
 	}
