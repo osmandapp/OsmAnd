@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
@@ -2047,9 +2047,27 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_show_group_notifications">그룹 알림 보기</string>
     <string name="osmo_show_group_notifications_descr">사용자가 그룹에 참여 또는 해체 할때 토스트 메시지를 표시</string>
     <string name="gpx_file_is_empty">GPX 트랙이 비어있습니다</string>
-    <string name="selected_track">트랙</string>
+    <string name="selected_track">선택한 트랙</string>
     <string name="my_tracks">모든 트랙</string>
     <string name="my_favorites">내 즐겨찾기</string>
     <string name="my_data_Button">내 데이터</string>
     <string name="my_data_activity">내 데이터</string>
+    <string name="gpx_info_subtracks">하위트랙 : %1$s </string>
+	<string name="gpx_info_distance">거리: %1$s (%2$s points) </string>
+	<string name="gpx_info_start_time">시작 시간: %1$tF,  %1$tR </string>
+	<string name="gpx_info_end_time">종료 시간: %1$tF,  %1$tR </string>
+	<string name="gpx_info_average_speed">평균 속도: %1$s </string>
+	<string name="gpx_info_maximum_speed">최대 속도: %1$s </string>
+	<string name="gpx_info_avg_altitude">평균 고도: %1$s</string>
+	<string name="gpx_info_diff_altitude">고도 편차: %1$s</string>
+	<string name="gpx_timespan">시간 범위: %1$s</string>
+	<string name="gpx_timemoving">이동한 시간: %1$s</string>
+    <string name="gpx_selection_segment_title">구간</string>
+    <string name="gpx_selection_number_of_points"> %1$s 포인트</string>
+    <string name="gpx_selection_point">포인트 %1$s</string>
+    <string name="gpx_selection_current_track">기록</string>
+    <string name="gpx_selection_route_points">%1$s \n 루트 포인트 %2$s</string>
+    <string name="gpx_selection_points">%1$s\n 포인트</string>
+    <string name="gpx_selection_track">%1$s\n 트랙 %2$s</string>
+    <string name="gpx_available_current_track">현재 트랙 기록</string>
     </resources>
