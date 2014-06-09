@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
@@ -621,9 +621,9 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   
   <string name="tip_osm_improve">Melhorar dados OSM</string>
   <string name="tip_osm_improve_t">OsmAnd utiliza mapas baseados em Openstreetmap.org dados (OSM) e pode ser directamente utilizado para melhorar a qualidade dos dados de OSM .  Você pode criar e fazer upload de novos relatórios de bugs POI ou OSM com apenas alguns cliques.
- \n \n Para isso, você precisa ativar o \ plug-in ' OSM Edição \' em \ ' Settings \ ' → \ ' Plugins \' , em seguida, fornecer suas informações de login na OSM \ ' Settings \ ' → \ ' OSM edição \' .
- \n \n Para adicionar um novo uso POI opção \ 'Criar POI \' no menu de contexto \ ' Use localização \' .  Prossiga com a inserir as informações sobre o novo POI na \ 'Criar POI \' diálogo e, finalmente, cometê-lo .
- erros \n \n Também em mapas podem imediatamente ser comunicados através de um bug OSM , para que a comunidade OSM pode corrigir esse problema .  Use a opção \ 'Open OSM bug \ ' em ' Use localização \' do menu \ contexto.  Em seguida, digite a descrição detalhada do problema e, finalmente, publicá-la usando o \ "Adicionar \ ' botão.
+ \n \n Para isso, você precisa ativar o \ plug-in \' OSM Edição \' em \ \' Settings \ \' → \ \' Plugins \' , em seguida, fornecer suas informações de login na OSM \ \' Settings \ \' → \ \' OSM edição \' .
+ \n \n Para adicionar um novo uso POI opção \ \'Criar POI \' no menu de contexto \ \' Use localização \' .  Prossiga com a inserir as informações sobre o novo POI na \ \'Criar POI \' diálogo e, finalmente, cometê-lo .
+ erros \n \n Também em mapas podem imediatamente ser comunicados através de um bug OSM , para que a comunidade OSM pode corrigir esse problema .  Use a opção \ \'Open OSM bug \ \' em \' Use localização \' do menu \ contexto.  Em seguida, digite a descrição detalhada do problema e, finalmente, publicá-la usando o \ "Adicionar \ \' botão.
  \n \n OsmAnd suporta cache suas entradas off-line ( ver respectiva definição ), mas conectividade com a Internet é, naturalmente, necessário para carregar o seu POI OSM e contribuições de bugs OSM .
 	</string>
   <string name="download_files_not_enough_space">Espaço livre insuficiente, precisa de %1$s MB (só tem: %2$s disponíveis).</string>
@@ -1148,7 +1148,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
 		\n\t*\'Na direcção da bússola\' - Mapa será continuamente alinhado com a leitura da bússola do dispositivo "
 	</string>
 	<string name="tip_day_night_mode_t_v2">A aparência do mapa pode para mapas vetoriais off-line ser alterado entre o dia (mais claro ) e noite ( mais escuro) .  Cores nocturnas são mais seguros e mais confortável para dirigir à noite .
-		\n\n Você pode definir uma política para o dia / noite de comutação em \ 'Menu \' → \ ' tela Configure \' → \' Dia / noite mapa \' .
+		\n\n Você pode definir uma política para o dia / noite de comutação em \ \'Menu \' → \ \' tela Configure \' → \' Dia / noite mapa \' .
 		\n\n As escolhas são:
                 \n\t* \' Sunrise / Sunset \' modo automático, controlado pela posição do sol (padrão): 
 		\n\t* \' Day \': sempre usar o modo de dia
@@ -1721,7 +1721,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
     <string name="my_data_Button">Meus Dados</string>
     <string name="my_data_activity">Meus Dados</string>
     <string name="osmo_user_joined">Usuário %1$s juntou-se ao grupo %2$s</string>
-    <string name="osmo_user_left">O usuário %1$s% deixou o grupo 2$s</string>
+    <string name="osmo_user_left">O usuário %1$s deixou o grupo %2$s</string>
     <string name="osmo_show_group_notifications">Mostrar notificações de grupo</string>
     <string name="osmo_show_group_notifications_descr">Mostrar as mensagens quando o usuário entra ou sai do grupo</string>
     <string name="lang_ca">Catalão</string>
