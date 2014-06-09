@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
@@ -1816,4 +1816,24 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="my_favorites">Moje Ulubione</string>
     <string name="my_data_Button">Moje dane</string>
     <string name="my_data_activity">Moje dane</string>
+    <string name="gpx_info_subtracks">Podścieżki: %1$s </string>
+	<string name="gpx_info_waypoints">Punkty trasy: %1$s </string>
+	<string name="gpx_info_distance">Odległość: %1$s (%2$s punktów) </string>
+	<string name="gpx_info_start_time">Czas rozpoczęcia: %1$tF, %1$tR </string>
+	<string name="gpx_info_end_time">Czas zakończenia: %1$tF, %1$tR </string>
+	<string name="gpx_info_average_speed">Prędkość średnia: %1$s </string>
+	<string name="gpx_info_maximum_speed">Prędkość maksymalna: %1$s </string>
+	<string name="gpx_info_avg_altitude">Średnia wysokość: %1$s</string>
+	<string name="gpx_info_diff_altitude">Różnica wysokości: %1$s</string>
+	<string name="gpx_info_asc_altitude">Wysokość wzniesień: %1$s</string>
+    <string name="gpx_timespan">Okres czasu: %1$s</string>
+	<string name="gpx_timemoving">Czas w ruchu: %1$s</string>
+    <string name="gpx_selection_segment_title">Odcinek</string>
+    <string name="gpx_selection_number_of_points"> %1$s punktów</string>
+    <string name="gpx_selection_point">Punkt %1$s</string>
+    <string name="gpx_selection_current_track">zapisywanie</string>
+    <string name="gpx_selection_route_points">%1$s \n Punkty trasy %2$s</string>
+    <string name="gpx_selection_points">%1$s\n Punkty</string>
+    <string name="gpx_selection_track">%1$s\n Trasa %2$s</string>
+    <string name="gpx_available_current_track">Zapisywanie bieżącej trasy</string>
     </resources>
