@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1890,4 +1890,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="gpx_selection_points">%1$s\n Punti</string>
     <string name="gpx_selection_track">%1$s\n Traccia %2$s</string>
     <string name="gpx_available_current_track">Traccia attualmente in registrazione</string>
+    <string name="selected">selezionato</string>
+    <string name="gpx_split_interval">Scegliere l'intervallo per la divisione</string>
     </resources>
