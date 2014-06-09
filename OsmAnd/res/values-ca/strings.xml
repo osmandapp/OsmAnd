@@ -1551,14 +1551,14 @@
 		\n\nOsmAnd indicarà l\'altitud de les teves ubicacions en el sistema EGM96 quan descarreguis el arxiu \'Correcció Mundial d\'Altituds\' (WW15MGH.DAC) mitjançant \'Opcions\' → \'Gestió de Dades\'. (l\'original és a http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
     <string name="osmo_settings_uuid">Identificació única de dispositiu</string>
-    <string name="osmo_settings_descr">Veure la clau de registre única del dispositiu i altres paràmetres específics de monitorització </string>
+    <string name="osmo_settings_descr">Configurar paràmetres de monitorització i fixar el canal de seguiment personal</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitorització avançada en directe amb moltes característiques pel control remot  http://osmo.mobi</string>
     <string name="osmo_plugin_name">OSMo (Monitorització en directe avançada)</string>
-    <string name="osmo_settings">OSMo</string>
+    <string name="osmo_settings">OsMo Monitorització OpenStreetMap (beta)</string>
    	<string name="osmo_register_device">Registrant dispositiu... </string>
-    <string name="osmo_io_error">Problema de connexió amb OSMo : </string>
-    <string name="osmo_mode_on">Aturar OSMo</string>    
-    <string name="osmo_mode_off">Iniciar OSMo</string>
+    <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
+    <string name="osmo_mode_on">Aturar sessió OsMo</string>    
+    <string name="osmo_mode_off">Iniciar sessió OsMo</string>
     <string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions, Guia de Navegació Automatitzada) és un mapa i una aplicació de navegació amb accés a dades de OpenStreetMap (OSM) lliure, de tot el món i d\'una gran qualitat. Totes les dades dels mapes es poden emmagatzemar a la memòria local del dispositiu (o en una targeta) pel seu ús sense connexió. A través del GPS del seu dispositiu, OsmAnd ofereix navegació, amb indicacions òptiques i de veu, per anar en cotxe, moto o caminant. Totes les funciones principals són disponibles tant amb connexió com sense a Internet.
 
@@ -1725,24 +1725,25 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="share_fav_subject">Favorits compartits via OsmAnd</string>
 	<string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
     <string name="tip_recent_changes_1_8_alpha">Canvis a la 1.8:
-        * Calcula la ruta entre els punts de la traça GPX
-        * Canviat ventall de països per descarregar (suporta la cerca de denominacions locals)
+	* Calcula la ruta entre els punts de la traça GPX
+	* Canviat ventall de països per descarregar (suporta la cerca de denominacions locals)
+	* Admet importació GPX/KML (conversió de KML a GPX)
     </string>
     <string name="osmo_auto_send_locations_descr">Inici automàtic del registre de la traça i del enviament de les posicions tot just iniciar l\'aplicació</string>
     <string name="osmo_auto_send_locations">Inici automàtic del registre de la traça</string>
     <string name="osmo_tracker_id">Identificació personal del traçador</string>
     <string name="osmo_tracker_id_descr">Prem per veure o compartir la identificació del traçador
 	Utilitzant la identificació del traçador altres dispositius connectats podran monitoritzar tots els moviments d\'aquest aparell. Per desconnectar seleccioni l\'opció Regenerar.</string>
-    <string name="osmo_session_token">Símbol de sessió:%1$s</string>
+    <string name="osmo_session_token">Símbol de sessió: %1$s</string>
     <string name="osmo_auth_pending">Esperant autorització...</string>
     <string name="osmo_locations_sent">Posicions enviades %1$d (en cua %2$d) </string>
-    <string name="osmo_conn_successfull">Connexió establerta : %1$s </string>
+    <string name="osmo_conn_successfull">Connexió establerta: %1$s </string>
     <string name="osmo_mode_restart">Reinicia sessió OsMo</string>
     <string name="osmo_settings_debug">Depura informació</string>
     <string name="hours_ago">hores fa</string>
     <string name="minutes_ago">minuts fa</string>
     <string name="seconds_ago">segons fa</string>
-    <string name="osmo_connect_to_device_name">Nom de dispositiu</string>
+    <string name="osmo_connect_to_device_name">Nom d'usuari</string>
     <string name="osmo_connect_to_device_tracker_id">Identificador de traça</string>
     <string name="osmo_connect_to_device">Enllaç amb dispositiu</string>
     <string name="osmo_join_group">Unir-se al grup</string>
@@ -1751,7 +1752,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_groups">OsMo Grups/Dispositius</string>
     <string name="osmo_group_info">Informació</string>
     <string name="osmo_group">Grup OsMo</string>
-    <string name="osmo_group_share">Per connectar al grup %2$s, indica l\'identificador de grup (%1$s) o prem %3$s.</string>
+    <string name="osmo_group_share">Per connectar amb el grup %2$s, indica l\'identificador de grup (%1$s) o prem %3$s.</string>
     <string name="osmo_share_connect_device">Permetre el seguiment d\'aquest dispositiu permanentment</string>
     <string name="osmo_share_current_session">Compartir la posició actual al navegador</string>
     <string name="osmo_session_not_available">Sessió no disponible, si us plau verifiqui que \'Enviar posicions\' està activat.</string>
@@ -1771,7 +1772,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_connect">Connexió a</string>
     <string name="osmo_create_group">Crear un grup</string>
     <string name="osmo_server_operation_failed">Fallida del servidor OsMo</string>
-    <string name="osmo_activity">Monitorització OSM</string>
+    <string name="osmo_activity">Monitorització OpenStreetMap</string>
     <string name="osmo_enable_tracker">Enviar les meves ubicacions</string>
     <string name="osmo_control">Accés ràpid OsMo</string>
     <string name="local_index_mi_export">Exportar</string>
@@ -1801,7 +1802,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_edit_device">Canviar propietats d\'usuari</string>
     <string name="osmo_edit_color">Mostra color</string>
     <string name="gpx_file_is_empty">La traça GPX està buida</string>
-    <string name="selected_track">Pista</string>
+    <string name="selected_track">Traces seleccionades</string>
     <string name="my_tracks">Totes les pistes</string>
     <string name="my_favorites">El meus favorits</string>
     <string name="my_data_Button">Les meves dades</string>
