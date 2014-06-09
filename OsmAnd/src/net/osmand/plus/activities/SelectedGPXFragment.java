@@ -262,7 +262,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			if (groupScroll) {
 				ar = new String[getGroupCount()];
 				for (int i = 0; i < getGroupCount(); i++) {
-					ar[i] = getGroup(i).getGroupName();
+					ar[i] = (i + 1) +".";
 				}
 			} else {
 				int total = getGroupCount();
