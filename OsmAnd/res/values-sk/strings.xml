@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -1845,7 +1845,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="osmo_group_share">Na pripojenie do skupiny %2$s, zadajte ID skupiny (%1$s) alebo kliknite %3$s.</string>
     <string name="osmo_share_connect_device">Trvale sledovať toto zariadenie</string>
     <string name="osmo_share_current_session">Zdieľať aktuálnu reláciu v prehliadači</string>
-    <string name="osmo_session_not_available">Relácia nie je k dispozícii, prosím skontrolujte či je 'Odosielať pozície' zapnuté.</string>
+    <string name="osmo_session_not_available">Relácia nie je k dispozícii, prosím skontrolujte či je \'Odosielať pozície\' zapnuté.</string>
     <string name="osmo_share_session">Zdieľať reláciu</string>
     <string name="osmo_session_id_share">URL relácie pre sledovanie zariadenia (%1$s)</string>
     <string name="osmo_tracker_id_share">Pre pripojenie cieľového zariadenia %2$s, kliknite linku %3$s alebo zadajte ID sledovacieho zariadenia (%1$s)</string>

@@ -30,9 +30,6 @@ public class FavouritesDbHelper {
 	
 	public static final String FILE_TO_SAVE = "favourites.gpx"; //$NON-NLS-1$
 	public static final String FILE_TO_BACKUP = "favourites_bak.gpx"; //$NON-NLS-1$
-	
-	// externalize ?
-	private static final String GPX_GROUP = "Gpx"; 
 
 	private List<FavouritePoint> favoritePointsFromGPXFile = null;
 	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<FavouritePoint>();
@@ -96,15 +93,13 @@ public class FavouritesDbHelper {
 	public GPXFile asGpxFile() {
 		GPXFile gpx = new GPXFile();
 		for (FavouritePoint p : getFavouritePoints()) {
-			if (p.isStored()) {
-				WptPt pt = new WptPt();
-				pt.lat = p.getLatitude();
-				pt.lon = p.getLongitude();
-				pt.name = p.getName();
-				if (p.getCategory().length() > 0)
-					pt.category = p.getCategory();
-				gpx.points.add(pt);
-			}
+			WptPt pt = new WptPt();
+			pt.lat = p.getLatitude();
+			pt.lon = p.getLongitude();
+			pt.name = p.getName();
+			if (p.getCategory().length() > 0)
+				pt.category = p.getCategory();
+			gpx.points.add(pt);
 		}
 		return gpx;
 	}
@@ -120,30 +115,7 @@ public class FavouritesDbHelper {
 		return favoritePointsFromGPXFile;
 	}
 
-	public void setFavoritePointsFromGPXFile(List<FavouritePoint> favoritePointsFromGPXFile) {
-		this.favoritePointsFromGPXFile = favoritePointsFromGPXFile;
-		if(favoritePointsFromGPXFile == null){
-			favoriteGroups.remove(GPX_GROUP);
-		} else {
-			checkFavoritePoints();
-			for(FavouritePoint t : favoritePointsFromGPXFile){
-				t.setCategory(GPX_GROUP);
-				t.setStored(false);	
-			}
-			favoriteGroups.put(GPX_GROUP, favoritePointsFromGPXFile);
-		}
-		recalculateCachedFavPoints();
-	}
 	
-	public void addFavoritePointToGPXFile(FavouritePoint fp) {
-		fp.setCategory(GPX_GROUP);
-		fp.setStored(false);
-		if (!favoriteGroups.containsKey(GPX_GROUP)) {
-			favoriteGroups.put(GPX_GROUP, new ArrayList<FavouritePoint>());
-		}
-		favoriteGroups.get(GPX_GROUP).add(fp);
-		recalculateCachedFavPoints();
-	}
 	
 	public List<FavouritePoint> getFavouritePoints() {
 		checkFavoritePoints();
@@ -227,7 +199,6 @@ public class FavouritesDbHelper {
 				if (fp != null) {
 					favoriteGroups.get(p.getCategory()).remove(fp);
 					cachedFavoritePoints.remove(fp);
-					fp.setStored(false);
 				}
 				backupSilently();
 			} finally{
@@ -269,7 +240,6 @@ public class FavouritesDbHelper {
 					favoriteGroups.get(p.getCategory()).add(p);
 					cachedFavoritePoints.add(p);
 				}
-				p.setStored(true);
 				backupSilently();
 			} finally {
 				db.close();
@@ -314,7 +284,6 @@ public class FavouritesDbHelper {
 							FavouritePoint p = new FavouritePoint();
 							p.setName(name);
 							p.setCategory(cat);
-							p.setStored(true);
 							p.setLatitude(query.getDouble(2));
 							p.setLongitude(query.getDouble(3));
 							favoriteGroups.get(cat).add(p);

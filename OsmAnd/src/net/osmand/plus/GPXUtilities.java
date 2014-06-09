@@ -29,6 +29,7 @@ import java.util.TimeZone;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -133,7 +134,7 @@ public class GPXUtilities {
 		public int metricEnd;
 
 		public boolean isTimeSpecified() {
-			return startTime != Long.MAX_VALUE;
+			return startTime != Long.MAX_VALUE && startTime != 0;
 		}
 		
 		public boolean isTimeMoving() {
@@ -148,6 +149,7 @@ public class GPXUtilities {
 			return (int) ((time / 1000) / 3600);
 		}
 		
+		
 		public int getTimeSeconds(long time) {
 			return (int) ((time / 1000) % 60);
 		}
@@ -161,8 +163,11 @@ public class GPXUtilities {
 		}
 		
 		
+		public static GPXTrackAnalysis segment(long filetimestamp, TrkSegment segment) {
+			return new GPXTrackAnalysis().prepareInformation(filetimestamp, new SplitSegment(segment));
+		}
 		
-		public void prepareInformation(long filestamp, SplitSegment... splitSegments) {
+		public GPXTrackAnalysis prepareInformation(long filestamp, SplitSegment... splitSegments) {
 			float[] calculations = new float[1];
 
 			float totalElevation = 0;
@@ -250,7 +255,9 @@ public class GPXUtilities {
 			} else {
 				avgSpeed = -1;
 			}
+			return this;
 		}
+		
 	}
 	
 	private static class SplitSegment {
@@ -350,11 +357,10 @@ public class GPXUtilities {
 		public String path = "";
 		public boolean showCurrentTrack;
 
-		public List<List<WptPt>> processedPointsToDisplay = new ArrayList<List<WptPt>>();
-
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
 		}
+		
 		
 		public GPXTrackAnalysis getAnalysis(long fileTimestamp) {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
@@ -392,8 +398,6 @@ public class GPXUtilities {
 			
 			return split(new SplitMetric() {
 				
-				private float[] calculations = new float[1];
-
 				@Override
 				public int metric(WptPt p1, WptPt p2) {
 					if(p1.time != 0 && p2.time != 0) {
@@ -469,7 +473,7 @@ public class GPXUtilities {
 			return false;
 		}
 
-		public void proccessPoints() {
+		public List<List<WptPt>> proccessPoints() {
 			List<List<WptPt>> tpoints = new ArrayList<List<WptPt>>();
 			boolean created = false;
 			for (Track t : tracks) {
@@ -485,7 +489,7 @@ public class GPXUtilities {
 					tpoints.add(r.points);
 				}
 			}
-			processedPointsToDisplay = tpoints;
+			return tpoints;
 		}
 
 		public WptPt findPointToShow() {

@@ -175,11 +175,7 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 			TextView label = (TextView) row.findViewById(R.id.favourite_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = getItem(position);
-			if (model.isStored()) {
-				icon.setImageResource(R.drawable.list_favorite);
-			} else {
-				icon.setImageResource(R.drawable.opened_poi);
-			}
+			icon.setImageResource(R.drawable.list_favorite);
 			String distance = "";
 			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), location.getLatitude(), location

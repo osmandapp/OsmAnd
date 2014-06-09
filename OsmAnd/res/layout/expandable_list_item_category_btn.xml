@@ -18,26 +18,29 @@
 
     <TextView
         android:id="@+id/category_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="0dp"
-        android:autoLink="web"
         android:gravity="center_vertical"
         android:textSize="18sp">
     </TextView>
     
         <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right" >
-		<CheckBox
+
+        <ImageView
             android:id="@+id/check_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_settings_dark"
             android:focusable="false"
             android:gravity="center_vertical"
-            android:visibility="gone" />
+            />
+        
     </LinearLayout>
     
 

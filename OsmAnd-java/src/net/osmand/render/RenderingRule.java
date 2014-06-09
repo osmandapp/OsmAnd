@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.osmand.util.Algorithms;
+
 public class RenderingRule {
 	
 	private RenderingRuleProperty[] properties;
@@ -81,7 +83,7 @@ public class RenderingRule {
 	public String getColorPropertyValue(String property) {
 		int i = getPropertyIndex(property);
 		if(i >= 0){
-			return RenderingRuleProperty.colorToString(intProperties[i]);
+			return Algorithms.colorToString(intProperties[i]);
 		}
 		return null;
 	}

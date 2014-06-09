@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -1317,7 +1317,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="local_indexes_cat_srtm">Courbes de niveau</string>
     <string name="use_kalman_filter_compass_descr">Utiliser un filtre de Kalman pour éviter les interférences de la boussole</string>
     <string name="use_kalman_filter_compass">Utiliser un filtre de Kalman</string>
-    <string name="access_mark_final_location_first">Mode d'accessibilité : veuillez d\'abord définir la destination</string> 
+    <string name="access_mark_final_location_first">Mode d\'accessibilité : veuillez d\'abord définir la destination</string> 
     <string name="distance_measurement_start_editing">Commencer à modifier</string>
     <string name="distance_measurement_finish_editing">Finir de modifier</string>
     <string name="distance_measurement_save_gpx">Sauvegarder comme GPX</string>
@@ -1695,8 +1695,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="my_favorites">Mes favoris</string>
     <string name="my_data_Button">Mes données</string>
     <string name="my_data_activity">Mes données</string>
-    <string name="osmo_user_joined">L'utilisateur %1$s a rejoint le groupe %2$s</string>
-    <string name="osmo_user_left">L'utilisateur %1$s a quitté le groupe %2$s</string>
+    <string name="osmo_user_joined">L\'utilisateur %1$s a rejoint le groupe %2$s</string>
+    <string name="osmo_user_left">L\'utilisateur %1$s a quitté le groupe %2$s</string>
     <string name="osmo_show_group_notifications">Montrer les notifications de groupe</string>
     <string name="osmo_show_group_notifications_descr">Afficher des messages quand un utilisateur rejoint ou quitte le groupe</string>
     <string name="selected_track">Piste</string>

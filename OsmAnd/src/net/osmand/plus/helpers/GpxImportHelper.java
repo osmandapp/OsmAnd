@@ -282,7 +282,7 @@ public class GpxImportHelper {
 	}
 
 	private void showGpxOnMap(final GPXUtilities.GPXFile result) {
-		application.setGpxFileToDisplay(result, true);
+		application.getSelectedGpxHelper().setGpxFileToDisplay(result);
 		final GPXUtilities.WptPt moveTo = result.findPointToShow();
 		if (moveTo != null) {
 			mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);

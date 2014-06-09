@@ -13,9 +13,11 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -44,48 +46,82 @@ public class GpxUiHelper {
 		return getDescription(app, analysis);
 	}
 	
+	public static String getDescription(OsmandApplication app, TrkSegment t) {
+		return getDescription(app, GPXTrackAnalysis.segment(0, t));
+	}
+	
+
+	
+	public static String getColorValue(String clr, String value) {
+		return "<font color=\"" + clr + "\">" + value + "</font>";
+	}
+	
 	public static String getDescription(OsmandApplication app, GPXTrackAnalysis analysis) {
 		StringBuilder description = new StringBuilder();
+		String timeSpanClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_time_span_color));
+		String distanceClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_distance_color));
+		String speedClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_speed));
+		String ascClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_altitude_asc));
+		String descClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_altitude_desc));
 		// OUTPUT:
 		// 1. Total distance, Start time, End time
-		description.append(app.getString(R.string.local_index_gpx_info, analysis.totalTracks, analysis.points,
-				analysis.wptPoints, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app),
-				analysis.startTime, analysis.endTime));
+		description.append(app.getString(R.string.gpx_info_distance, getColorValue(distanceClr, 
+				OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app)), 
+				getColorValue(distanceClr, analysis.points+"") ));
+		if(analysis.totalTracks > 1) {
+			description.append("<br/>").append(app.getString(R.string.gpx_info_subtracks, getColorValue(speedClr, analysis.totalTracks+"")));
+		}
+		if(analysis.wptPoints > 0) {
+			description.append("<br/>").append(app.getString(R.string.gpx_info_waypoints, getColorValue(speedClr, analysis.wptPoints+"")));
+		}
+		if(analysis.isTimeSpecified()) {
+				description.append("<br/>").append(app.getString(R.string.gpx_info_start_time, analysis.startTime));
+				description.append("<br/>").append(app.getString(R.string.gpx_info_end_time, analysis.endTime));
+		}
 
 		// 2. Time span
-		description.append(app.getString(R.string.local_index_gpx_timespan, analysis.getTimeHours(analysis.timeSpan),
-				analysis.getTimeMinutes(analysis.timeSpan), analysis.getTimeSeconds(analysis.timeSpan)));
+		if(analysis.timeSpan > 0 && analysis.timeSpan / 1000 != analysis.timeMoving / 1000) {
+			final String formatDuration = Algorithms.formatDuration((int) (analysis.timeSpan/1000)
+							);
+			description.append("<br/>").append(app.getString(R.string.gpx_timespan,
+					getColorValue(timeSpanClr, formatDuration)));
+		}
 
 		// 3. Time moving, if any
 		if(analysis.isTimeMoving()){
-			description.append(
-				app.getString(R.string.local_index_gpx_timemoving, analysis.getTimeHours(analysis.timeMoving),
-						analysis.getTimeMinutes(analysis.timeMoving), analysis.getTimeSeconds(analysis.timeMoving)));
+			final String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving/1000)
+					);
+			description.append("<br/>").append(app.getString(R.string.gpx_timemoving,
+					getColorValue(timeSpanClr, formatDuration)));
 		}
 
 		// 4. Elevation, eleUp, eleDown, if recorded
-		if(analysis.isElevationSpecified()){
-			description.append(  
-					app.getString(R.string.local_index_gpx_info_elevation,
-					OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app),
-					OsmAndFormatter.getFormattedAlt(analysis.minElevation, app),
-					OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app),
-					OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app),
-					OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app)));
+		if (analysis.isElevationSpecified()) {
+			description.append("<br/>");
+			description.append(app.getString(R.string.gpx_info_avg_altitude,
+					getColorValue(speedClr, OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app))));
+			description.append("<br/>");
+			String min = getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app));
+			String max = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app));
+			String asc = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
+			String desc = getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
+			description.append(app.getString(R.string.gpx_info_diff_altitude,min +" - " + max ));
+			description.append("<br/>");
+			description.append(app.getString(R.string.gpx_info_asc_altitude,"\u2193 " + desc + "   \u2191 " + asc + ""));
 		}
 
 
 		if(analysis.isSpeedSpecified()){
-				description.append(
-					app.getString(R.string.local_index_gpx_info_speed,
-				OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app),
-				OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app)));
+			String avg = getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
+			String max = getColorValue(ascClr, OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app));
+			description.append("<br/>").append(app.getString(R.string.gpx_info_average_speed,avg));
+			description.append("<br/>").append(app.getString(R.string.gpx_info_maximum_speed,max));
 		}
 		return description.toString();
 	}
 	
 	public static void selectGPXFile(final Activity activity,
-			final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile> callbackWithObject) {
+			final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final List<String> list = getSortedGPXFilenames(dir);
@@ -114,11 +150,11 @@ public class GpxUiHelper {
 			final File dir, String filename, final int position) {
 		final Application app = activity.getApplication();
 		final File f = new File(dir, filename);
-		loadGPXFileInDifferentThread(activity, new CallbackWithObject<GPXUtilities.GPXFile>() {
+		loadGPXFileInDifferentThread(activity, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
 			
 			@Override
-			public boolean processResult(GPXFile result) {
-				cmAdapter.setItemName(position, cmAdapter.getItemName(position) + "\n" + getDescription((OsmandApplication) app, result, f));
+			public boolean processResult(GPXFile[] result) {
+				cmAdapter.setItemName(position, cmAdapter.getItemName(position) + "\n" + getDescription((OsmandApplication) app, result[0], f));
 				adapter.notifyDataSetInvalidated();
 				return true;
 			}
@@ -126,7 +162,7 @@ public class GpxUiHelper {
 	}
 
 	private static void createDialog(final Activity activity, final boolean showCurrentGpx,
-			final boolean multipleChoice, final CallbackWithObject<GPXFile> callbackWithObject,
+			final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject,
 			final List<String> list, final ContextMenuAdapter adapter) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
@@ -209,8 +245,7 @@ public class GpxUiHelper {
 				public void onClick(DialogInterface dialog, int which) {
 					GPXFile currentGPX = null;
 					if (showCurrentGpx && adapter.getSelection(0) > 0) {
-						currentGPX = new GPXFile();
-						currentGPX.showCurrentTrack = true;
+						currentGPX = app.getSavingTrackHelper().getCurrentGpx();
 					}
 					List<String> s = new ArrayList<String>();
 					for (int i = (showCurrentGpx ? 1 : 0); i < adapter.length(); i++) {
@@ -288,34 +323,39 @@ public class GpxUiHelper {
 		return getSortedGPXFilenames(dir, null);
 	}
 	
-	private static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile> callbackWithObject,
+	private static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
 			final File dir, final GPXFile currentFile, final String... filename) {
 		final ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading),
 				activity.getString(R.string.loading_data));
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				GPXFile r = currentFile; 
-				for(String fname : filename) {
+				final GPXFile[] result = new GPXFile[filename.length + (currentFile == null ? 1 : 0)];
+				int k = 0;
+				String w = "";
+				if (currentFile != null) {
+					result[k++] = currentFile;
+				}
+				for (String fname : filename) {
 					final File f = new File(dir, fname);
 					GPXFile res = GPXUtilities.loadGPXFile(activity.getApplication(), f);
-					GPXUtilities.mergeGPXFileInto(res, r);
-					r = res;
+					if (res.warning != null && res.warning.length() > 0) {
+						w += res.warning + "\n";
+					}
+					result[k++] = res;
 				}
-				final GPXFile res = r;
 				dlg.dismiss();
-				if (res != null) {
-					activity.runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							if (res.warning != null) {
-								AccessibleToast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
-							} else {
-								callbackWithObject.processResult(res);
-							}
+				final String warn = w;
+				activity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						if (warn.length() > 0) {
+							AccessibleToast.makeText(activity, warn, Toast.LENGTH_LONG).show();
+						} else {
+							callbackWithObject.processResult(result);
 						}
-					});
-				}
+					}
+				});
 			}
 
 		}, "Loading gpx").start(); //$NON-NLS-1$

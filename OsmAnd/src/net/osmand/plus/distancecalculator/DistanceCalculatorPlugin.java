@@ -188,12 +188,13 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	
 
 	protected void loadGpx(final MapActivity activity) {
-		GpxUiHelper.selectGPXFile(activity, false, false, new CallbackWithObject<GPXUtilities.GPXFile>() {
+		GpxUiHelper.selectGPXFile(activity, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
 			
 			@Override
-			public boolean processResult(GPXFile result) {
+			public boolean processResult(GPXFile[] res) {
 				measurementPoints.clear();
-				if (result != null) {
+				if (res.length > 0 && res[0] != null) {
+					GPXFile result = res[0];
 					originalGPX = result;
 					for (Track t : result.tracks) {
 						for (TrkSegment s : t.segments) {
