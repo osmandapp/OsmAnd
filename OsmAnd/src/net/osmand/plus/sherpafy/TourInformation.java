@@ -17,6 +17,8 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 public class TourInformation {
@@ -72,7 +74,7 @@ public class TourInformation {
 				} else if (tag.equals("fullDescription")){
 					fulldescription = getInnerXml(parser);
 				} else if (stage != null && tag.equals("description")){
-					stage.description = getInnerXml(parser);
+					stage.fullDescription = getInnerXml(parser);
 				}
 			} else if (tok == XmlPullParser.TEXT) {
 				text = parser.getText();
@@ -153,17 +155,23 @@ public class TourInformation {
 	public Bitmap getImageBitmapFromPath(String path){
 		File imgFile = getFile(path);
 		if (imgFile != null){
-			return BitmapFactory.decodeFile(imgFile.getAbsolutePath())
-;		}
+			Options opts = new Options();
+//			if(imgFile.length() > 100 * 1024) {
+//				opts.inSampleSize = 4;
+//			}
+			return BitmapFactory.decodeFile(imgFile.getAbsolutePath(), opts);
+			//return BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+		}
 		return null;
 	}
+	
 	
 	public static class StageInformation {
 		
 		File gpxFile;
 		public GPXFile gpx;
 		String name = "";
-		String description = "";
+		String shortDescription = "";
 		String fullDescription = "";
 		Bitmap img = null;
 		File imgFile;
@@ -176,8 +184,8 @@ public class TourInformation {
 			return gpx;
 		}
 		
-		public String getDescription() {
-			return description;
+		public String getShortDescription() {
+			return shortDescription;
 		}
 		
 		public String getFullDescription() {

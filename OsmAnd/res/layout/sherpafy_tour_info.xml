@@ -3,31 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-   <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal" >
-
-        <ToggleButton
-            android:id="@+id/collapse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOn=""
-            android:textOff=""
-            android:textSize="21sp" 
-            android:checked="true"
-            android:button="@drawable/expandable_category"
-            android:background="@null" />
-
-
-    </LinearLayout>
 
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal" >
+
+            <ToggleButton
+                android:id="@+id/collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@drawable/expandable_category"
+                android:checked="true"
+                android:textOff=""
+                android:textOn=""
+                android:textSize="21sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -62,16 +60,14 @@
                 android:paddingRight="8dp"
                 android:paddingTop="4dp" />
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/tour_fulldescription"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="2dp"
-                android:textSize="16sp" >
-            </TextView>
-
+                android:orientation="vertical" >
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
