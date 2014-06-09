@@ -1,11 +1,14 @@
 package net.osmand.plus.sherpafy;
 
 import java.io.File;
+import java.util.LinkedHashMap;
 import java.util.List;
 
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
+import android.view.Display;
 import net.osmand.IProgress;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -61,10 +64,13 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	TextView fullDescription;
 	RadioGroup stages;
 	private ToggleButton collapser;
+	Point size;
+	private boolean afterDownload = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-    	if (!(getMyApplication().getAppCustomization() instanceof SherpafyCustomization)) {
+
+		if (!(getMyApplication().getAppCustomization() instanceof SherpafyCustomization)) {
             getMyApplication().setAppCustomization(new SherpafyCustomization());
         }
         customization = (SherpafyCustomization) getMyApplication().getAppCustomization();
@@ -79,6 +85,9 @@ public class TourViewActivity extends SherlockFragmentActivity {
         getSupportActionBar().setTitle(R.string.sherpafy_app_name);
 
 		setContentView(R.layout.sherpafy_loading);
+
+		size = new Point();
+		getWindowManager().getDefaultDisplay().getSize(size);
 		if (state == STATE_LOADING) {
 			getMyApplication().checkApplicationIsBeingInitialized(this, (TextView) findViewById(R.id.ProgressMessage),
 					(ProgressBar) findViewById(R.id.ProgressBar), new Runnable() {
@@ -98,9 +107,31 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			state = STATE_LOADING;
 			startTourView();
 		}
-		
+
 	}
-	
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		//this flag needed to start indexing tours is user downloaded some and returned to activity
+		if (afterDownload){
+			if (customization.getTourInformations().isEmpty()){
+				customization.onIndexingFiles(IProgress.EMPTY_PROGRESS,new LinkedHashMap<String, String>());
+			}
+
+			if (!customization.getTourInformations().isEmpty()){
+				if (customization.getSelectedTour() == null){
+					setTourSelectionContentView();
+					state = STATE_SELECT_TOUR;
+				} else {
+					startTourView();
+				}
+
+			}
+		}
+
+	}
 	
 	private void setTourInfoContent() {
 		setContentView(R.layout.sherpafy_tour_info);
@@ -149,10 +180,18 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			description.setText(Html.fromHtml(st.getDescription(), new Html.ImageGetter() {
 				@Override
 				public Drawable getDrawable(String s) {
-
 					Bitmap file = customization.getSelectedTour().getImageBitmapFromPath(s);
 					Drawable bmp = new BitmapDrawable(getResources(),file);
-					bmp.setBounds(0,0, bmp.getIntrinsicHeight(), bmp.getIntrinsicHeight());
+					//if image is thicker than screen - it may cause some problems, so we need to scale it
+					int imagewidth = bmp.getIntrinsicWidth();
+					if (size.x-1 > imagewidth) {
+						bmp.setBounds(0,0, bmp.getIntrinsicWidth(), bmp.getIntrinsicHeight());
+					}
+					else {
+						double scale = (double)(size.x-1)/imagewidth;
+						bmp.setBounds(0,0, (int)(scale*bmp.getIntrinsicWidth()), (int)(scale*bmp.getIntrinsicHeight()));
+					}
+
 					return bmp;
 				}
 
@@ -347,6 +386,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 					if(customization.getAccessCode().length() == 0) {
 						openAccessCode(true);
 					} else {
+
 						startDownloadActivity();
 					}
 				}
@@ -385,6 +425,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private void startDownloadActivity() {
 		final Intent download = new Intent(this, DownloadIndexActivity.class);
 		download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		afterDownload = true;
 		startActivity(download);
 	}
 	
