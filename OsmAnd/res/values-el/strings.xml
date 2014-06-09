@@ -100,8 +100,8 @@
 	<string name="map_widget_renderer">Στυλ χάρτη</string>
 	<string name="live_monitoring_mode_off">Έναρξη\n online ιχνηλάτησης</string>
 	<string name="live_monitoring_mode_on">Διακοπή\n online ιχνηλάτησης</string>
-	<string name="position_on_map_descr">Επιλέξτε την τοποθεσία του δείκτη θέσης στο χάρτη</string>
-	<string name="position_on_map">Δείκτης θέσης</string>
+	
+	
 	<string name="layer_map_appearance">Διαμόρφωση οθόνης</string>
 	<string name="show_lanes">Εμφάνιση λωρίδων</string>
 	<string name="avoid_unpaved">Αποφυγή χωματόδρομων</string>
@@ -535,9 +535,9 @@
 	<string name="basemap_missing">Λείπει ο βασικός παγκόσμιος χάρτης (καλύπτει όλο τον κόσμο στις μικρές κλίμακες). Παρακαλώ κατεβάστε το World_basemap_x.obf για ένα πλήρες περιβάλλον.</string>
 	<string name="vector_data_missing">Δεν υπάρχουν offline δεδομένα στην κάρτα SD. Παρακαλώ κατεβάστε τα  ώστε να μπορέσετε να χρησιμοποιήσετε χάρτες χωρίς σύνδεση.</string>
 	<string name="local_index_gpx_info_show">\n\nΠατήστε και κρατήστε για επιλογές</string>
-	<string name="local_index_gpx_info_speed">\nΜέση ταχύτητα : %1$s \nΜέγιστη ταχύτητα : %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nΜέσο υψόμετρο : %1$s\nΕλάχιστο υψόμετρο : %2$s\nΜέγιστο υψόμετρο : %3$s\nΑναβάσεις : %4$s\nΚαταβάσεις : %5$s</string>
-	<string name="local_index_gpx_info">Υποΐχνη : %1$d\nΣύνολο σημείων : %2$d\nΣημεία διαδρομής : %3$d\nΣυνολική απόσταση : %4$s\nΏρα έναρξης : %5$tF, %5$tR\nΏρα τερματισμού : %6$tF, %6$tR</string>
+	
+	
+	
 	<string name="local_index_installed">Έκδοση</string>
 	<string name="local_index_items_backuped">%1$d από %2$d αντικείμενο(α) απενεργοποιήθηκαν επιτυχώς.</string>
 	<string name="local_index_items_deleted">%1$d από %2$d αντικείμενο(α) διαγράφηκαν επιτυχώς.</string>
@@ -939,7 +939,7 @@
 	<string name="loading_postcodes">Φόρτωση ταχυδρομικών κωδικών…</string>
 	<string name="loading_streets">Φόρτωση δρόμων…</string>
 	<string name="loading_cities">Φόρτωση πόλεων…</string>
-	<string name="loading">Φόρτωση…</string>
+	
 	<string name="poi">Σημ Ενδ</string>
 	<string name="error_occurred_saving_gpx">Σφάλμα κατά την αποθήκευση του GPX</string>
 	<string name="error_calculating_route">Σφάλμα υπολογισμού διαδρομής</string>
@@ -1346,8 +1346,8 @@
     </string>
     <string name="osb_author_or_password_not_specified">Παρακαλώ καθορίστε όνομα χρήστη και κωδικό OSM στις ρυθμίσεις</string>
     <string name="new_directions_point_dialog">Έχετε ήδη καθορίσει ενδιάμεσα σημεία.</string>
-    <string name="local_index_gpx_timespan">\nΧρονική διάρκεια: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nΧρόνος μετακίνησης: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="intermediate_items_sort_return">Τα ενδιάμεσα σημεία διαδρομής αναταξινομήθηκαν για βελτιστοποίηση τις σειράς τους κατά τη διαδρομή στον προορισμό.</string>
     <string name="osmand_distance_planning_plugin_name">Υπολογιστής απόστασης &amp; Εργαλείο Σχεδιασμού</string>
     <string name="av_camera_focus">Τύπος εστίασης κάμερας</string>

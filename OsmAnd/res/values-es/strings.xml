@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
@@ -179,9 +178,9 @@
   <string name="basemap_missing">El mapa mundial base (cubriendo todo el mundo a niveles de zoom pequeños) no está disponible. Por favor, considere descargar World_basemap_x.obf para tener un entorno completo.</string>
   <string name="vector_data_missing">No hay datos (\'descargados\') en la tarjeta SD. Por favor, considera descargarlos para usar mapas sin conexión.</string>
   <string name="local_index_gpx_info_show">"\n\nPulsación larga para opciones"</string>
-  <string name="local_index_gpx_info_speed">"\nVelocidad media: %1$s \nVelocidad máxima: %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nAltitud media: %1$s\nAltitud mínima: %2$s\nAltitud máxima: %3$s\nAscensos: %4$s\nDescensos : %5$s"</string>
-  <string name="local_index_gpx_info">Subtrazas: %1$d\nPuntos totales: %2$d\nPuntos de paso: %3$d\nDistancia total: %4$s\nHora de inicio: %5$tF, %5$tR\nHora de fin: %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Edición</string>
   <string name="local_index_items_backuped">%1$d de %2$d elemento(s) correctamente desactivado(s).</string>
   <string name="local_index_items_deleted">%1$d de %2$d elemento(s) correctamente borrado(s).</string>
@@ -597,7 +596,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="loading_postcodes">Cargando códigos postales…</string>
   <string name="loading_streets">Cargando calles…</string>
   <string name="loading_cities">Cargando ciudades…</string>
-  <string name="loading">Cargando…</string>
+  
   <string name="poi">PDI</string>
   <string name="error_occurred_saving_gpx">Ocurrió un error al guardar el GPX</string>
   <string name="error_calculating_route">Error calculando ruta</string>
@@ -649,8 +648,8 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="choose_street">Elige calle</string>
   <string name="choose_city">Elige ciudad</string>
   <string name="ChooseCountry">Elige país</string>
-  <string name="position_on_map_descr">Elige la ubicación del marcador de posición en el mapa</string>
-  <string name="position_on_map">Marcador de posición</string>
+  
+  
   
   <string name="show_view_angle">Mostrar dirección de visualización</string>
   <string name="map_view_3d_descr">Habilita visión 3D del mapa</string>
@@ -1343,8 +1342,8 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="distance_measurement_clear_route">Borrar todos los puntos</string>
     <string name="distance_measurement_save_gpx">Guardar como GPX</string>
     <string name="distance_measurement_load_gpx">Abrir GPX existente</string>
-    <string name="local_index_gpx_timespan">\nTiempo total: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nTiempo en movimiento: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="av_camera_focus">Método de enfoque</string>
 	<string name="av_camera_focus_descr">Selecciona el método de enfoque de la cámara interna</string>
 	<string name="av_camera_focus_auto">Enfoque automático</string>
@@ -1662,7 +1661,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_io_error">Problema de conexión con OsMo: </string>
     <string name="osmo_mode_on">Parar sesión de OsMo</string>    
     <string name="osmo_mode_off">Iniciar sesión de OsMo</string>
-    <string name="osmo_register_device">Registrando dispositivo... </string>
+    
     <string name="share_fav">Compartir</string>
 	<string name="share_fav_subject">Favoritos compartidos a través de OsmAnd</string>
 	<string name="use_points_as_intermediates">Calcular ruta entre puntos</string>
@@ -1672,7 +1671,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
         * Suporta importación de GPX/KML (conversión de KML a GPX)
     </string>
     <string name="osmo_connect_to_device_name">Nombre de usuario</string>
-    <string name="osmo_new_device">Conectarse al dispositivo</string>
+    
     <string name="osmo_connected_devices">Dispositivos conectados</string>
     <string name="osmo_auth_pending">Esperando autorización...</string>
     <string name="osmo_locations_sent">Localizaciones enviadas %1$d (en buffer %2$d) </string>
@@ -1686,7 +1685,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="color_yellow">amarillo</string>
 	<string name="color_lightblue">azul claro</string>
 	<string name="color_blue">azul</string>
-	<string name="color_magenta">magenta</string>
+	
 	
     <string name="osmo_edit_device">Cambiar propiedades de usuario</string>
     <string name="osmo_edit_color">Mostrar color</string>

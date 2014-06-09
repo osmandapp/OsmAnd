@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
 \n\t- Offline editace POI
@@ -258,11 +257,9 @@
   <string name="basemap_missing">Chybí základní mapa světa. Prosím stáhněte ji pro správnou funkci programu.</string>
   <string name="vector_data_missing">Na SD kartě nejsou uložena žádná offline data. Prosím stáhněte je pro použití map v offline módu.</string>
   <string name="local_index_gpx_info_show">\n\nDlouhým kliknutím zobrazíte na mapě</string>
-  <string name="local_index_gpx_info_speed">\nPrůměrná rychlost : %1$s
-\nMaximální rychlost : %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nPrůměrná výška : %1$s\nStoupání : %2$s\nKlesání : %3$s\nAscents: %4$s\nDescents: %5$s</string>
-  <string name="local_index_gpx_info">Podtrasy : %1$d\nCelkem bodů : %2$d\nTrasových bodů : %3$d\nCelková vzdálenost : %4$s
-\nPočáteční čas : %5$tF, %5$tR\nKoncový čas : %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Vydání</string>
   <string name="local_index_items_backuped">Zálohováno %1$d položek z %2$d.</string>
   <string name="local_index_items_deleted">Smazáno %1$d položek z %2$d.</string>
@@ -665,7 +662,7 @@
   <string name="loading_postcodes">Načítám PSČ…</string>
   <string name="loading_streets">Načítám ulice…</string>
   <string name="loading_cities">Načítám města…</string>
-  <string name="loading">Nahrávám…</string>
+  
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Chyba při ukládání GPX</string>
   <string name="error_calculating_route">Chyba při výpočtu trasy</string>
@@ -717,8 +714,8 @@
   <string name="choose_street">Zvolte ulici</string>
   <string name="choose_city">Zvolte město</string>
   <string name="ChooseCountry">Zvolte zemi</string>
-  <string name="position_on_map_descr">Kde na displeji zobrazovat Vaši aktuální polohu</string>
-  <string name="position_on_map">Moje poloha na mapě</string>
+  
+  
   
   <string name="show_view_angle">Zorné pole</string>
   <string name="map_view_3d_descr">Zapnout 3D pohled na mapu</string>
@@ -1277,7 +1274,7 @@
     <string name="speak_speed_limit">Hlásit rychlostní omezení</string>
     <string name="speak_cameras">Hlásit radary</string>
 	<string name="speak_traffic_warnings">Hlásit dopravní upozornění</string>
-	<string name="local_index_gpx_timespan">\nČasový interval: %1$d:%2$02d:%3$02d</string>
+	
 	<string name="osb_author_dialog_password">Heslo OSM (volitelné)</string>
 	<string name="av_camera_focus">Typ ostření fotoaparátu</string>
 	<string name="av_camera_focus_descr">Zvolte způsob ostření vestavěného fotoaparátu</string>
@@ -1292,7 +1289,7 @@
 <string name="new_directions_point_dialog">Cíle jsou již zvoleny.</string>
     <string name="context_menu_item_directions_to">Navigovat sem</string>
     <string name="context_menu_item_directions_from">Navigovat odsud</string>
-    <string name="local_index_gpx_timemoving">\nČas pohybu: %1$d:%2$02d:%3$02d</string>
+    
 	<string name="osmodroid_mode_on">Zastavit OsMoDroid</string>    
     <string name="osmodroid_mode_off">Spustit OsMoDroid</string>
     <string name="announce_gpx_waypoints">Hlásit GPX body</string>
@@ -1507,7 +1504,7 @@ s často kladenými otázkami.</string>
 	<string name="color_yellow">žlutá</string>
 	<string name="color_lightblue">světle modrá</string>
 	<string name="color_blue">modrá</string>
-	<string name="color_magenta">purpurová</string>
+	
 	
     <string name="osmo_edit_device">Změnit vlastnosti uživatele</string>
     <string name="osmo_edit_color">Zobrazit barvu</string>

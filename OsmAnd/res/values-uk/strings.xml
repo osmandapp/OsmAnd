@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
 		\n\t* Вказання напрямку руху по смугам
@@ -321,9 +320,9 @@
   <string name="basemap_missing">Базова мапа (яка покриває цілий світ) відсутня. Будь ласка, завантажте World_basemap_x.obf для повноцінної роботи програми.</string>
   <string name="vector_data_missing">SD-карта не містить завантажених даних. Будь ласка, завантажте їх, щоб використовувати мапу без інтернету.</string>
   <string name="local_index_gpx_info_show">\n\nТривале натискання для перегляду на мапі</string>
-  <string name="local_index_gpx_info_speed">\nСередня швидкість: %1$s \nМаксимальна швидкість: %2$s"</string>
-  <string name="local_index_gpx_info_elevation">\nСередня висота: %1$s\nМінімальна висота: %2$s\nМаксимальна висота: %3$s\nПідйом вгору: %4$s\nСпуск вниз: %5$s"</string>
-  <string name="local_index_gpx_info">Путі: %1$d\nВсього точок: %2$d\nМаршрутних точок: %3$d\nЗагальна відстань: %4$s\nПочаток: %5$tF, %5$tR\nКінець: %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Редакція</string>
   <string name="local_index_items_backuped">%1$d з %2$d об’єктів успішно деактивовано.</string>
   <string name="local_index_items_deleted">%1$d з %2$d об’єктів успішно вилучено.</string>
@@ -720,7 +719,7 @@
   <string name="loading_postcodes">Завантажуються поштові індекси…</string>
   <string name="loading_streets">Завантажуються вулиці…</string>
   <string name="loading_cities">Завантажуються міста…</string>
-  <string name="loading">Завантаження…</string>
+  
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Помилка збереження шляху в GPX файл</string>
   <string name="error_calculating_route">Помилка прокладання маршруту</string>
@@ -772,8 +771,8 @@
   <string name="choose_street">Виберіть вулицю</string>
   <string name="choose_city">Виберіть місто</string>
   <string name="ChooseCountry">Виберіть країну</string>
-  <string name="position_on_map_descr">Встановити розташування поточної позиції на мапі</string>
-  <string name="position_on_map">Поточна позиція</string>
+  
+  
   
   <string name="show_view_angle">Відображати напрямок</string>
   <string name="map_view_3d_descr">Увімкнути 3D вигляд для мапи</string>
@@ -1484,8 +1483,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		\n\nУ допомогу до всіх підказок, контекстне меню пропонує два варіанти: \'Маршрут\' чи \'Показати на мапі\'
 	</string>
 	<string name="destination_point">Пункт призначення %1$s</string>
-    <string name="local_index_gpx_timespan">\nПроміжок часу: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nЧас в дорозі: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="av_camera_focus">Тип фокусування камери</string>
 	<string name="av_camera_focus_descr">Виберіть тип фокусу вбудованного застосунку для фотографування</string>
 	<string name="av_camera_focus_auto">Автофокус</string>

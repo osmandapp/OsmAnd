@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="background_service_is_enabled_question">Serviciul încă rulează în background. Doriți să-l opriți?</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="background_service_is_enabled_question">Serviciul încă rulează în background. Doriți să-l opriți?</string>
     <string name="tip_recent_changes_1_0_0_t">Modificări în versiunea 1.0.0 :
 \n\t* Rutare îmbunătățită, mai rapidă și mai exactă (până la 250 km)
 \n\t* Posibilitate afișare hartă exclusiv pentru drumuri
@@ -98,8 +97,8 @@
 	<string name="map_widget_renderer">Stil randare</string>
 	<string name="live_monitoring_mode_off">Pornește\nlive tracking</string>
 	<string name="live_monitoring_mode_on">Oprește\nlive tracking</string>
-	<string name="position_on_map_descr">Alege locația marker-ului de poziție pe hartă</string>
-	<string name="position_on_map">Marker de poziție</string>
+	
+	
 	<string name="layer_map_appearance">Configurare ecran</string>
 	<string name="show_lanes">Arată benzile de circulație</string>
 	<string name="avoid_unpaved">Evită drumurile nepavate</string>
@@ -534,9 +533,9 @@
 	<string name="basemap_missing">Lipsește harta lumii de bază - conține întreg globul la nivel mic de zoom. Vă rog să considerați descărcarea hărții World_basemap_*.obf pentru a completa mediul de lucru.</string>
 	<string name="vector_data_missing">Datele locale, (\'offline\'), lipsesc de pe cardul SD. Vă rog să considerați descărcarea acestora pentru a putea folosi hărți offline.</string>
 	<string name="local_index_gpx_info_show">\n\nApăsați prelung pentru afișarea opțiunilor</string>
-	<string name="local_index_gpx_info_speed">\nViteza medie: %1$s \nViteza maximă: %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nAltitudinea medie: %1$s\nAltitudinea minimă: %2$s\nAltitudinea maximă: %3$s\nAscensiune: %4$s\nDescendență: %5$s</string>
-	<string name="local_index_gpx_info">Subtrasee: %1$d\nTotal puncte: %2$d\nWaypoint-uri: %3$d\nDistanța totală: %4$s\nOra de start: %5$tF,  %5$tR\nOra de finiș: %6$tF,  %6$tR</string>
+	
+	
+	
 	<string name="local_index_installed">Ediție</string>
 	<string name="local_index_items_backuped">%1$d din %2$d element(e) dezactivate cu succes.</string>
 	<string name="local_index_items_deleted">%1$d din %2$d element(e) șterse cu succes.</string>
@@ -929,7 +928,7 @@
 	<string name="loading_postcodes">Se încarcă coduri poștale…</string>
 	<string name="loading_streets">Se încarcă străzi…</string>
 	<string name="loading_cities">Se încarcă orașe…</string>
-	<string name="loading">Se încarcă…</string>
+	
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Eroare la salvarea GPX</string>
 	<string name="error_calculating_route">Eroare la calcularea rutei</string>

@@ -42,7 +42,7 @@
 \nAuringon lasku : %2$s</string>
 	<string name="day_night_info">Päivä/yö info</string>
 	<string name="map_widget_day_night">Päivä/yö kartta</string>
-	<string name="position_on_map">Sijainnin merkki</string>
+	
 	<string name="show_lanes">Näytä ajokaistat</string>
 	<string name="avoid_unpaved">Vältä päällystämättömiä teitä</string>
 	<string name="avoid_ferries">Vältä lauttoja</string>
@@ -220,8 +220,7 @@
 	<string name="favourites_edit_dialog_name">Nimi</string>
 	<string name="favourites_edit_dialog_category">Kategoria</string>
 	<string name="vector_map_not_needed">Ei kiitos</string>
-	<string name="local_index_gpx_info_speed">\nKeskinopeus : %1$s
-\nMaksiminopeus : %2$s</string>
+	
 	<string name="daynight_mode_day">Päivä</string>
 	<string name="daynight_mode_night">Yö</string>
 	<string name="daynight_mode_auto">Auringonnousu/lasku</string>
@@ -340,7 +339,7 @@
 	<string name="loading_postcodes">Ladataan postinumeroita…</string>
 	<string name="loading_streets">Ladataan katuja…</string>
 	<string name="loading_cities">Ladataan kaupunkeja…</string>
-	<string name="loading">Ladataan…</string>
+	
 	<string name="poi">KP</string>
 	<string name="error_occurred_saving_gpx">Virhe tallennettaessa GPX tiedostoa</string>
 	<string name="error_calculating_route">Virhe reitin laskennassa</string>
@@ -576,8 +575,8 @@
 	<string name="file_with_name_already_exist">Tiedosto samalla nimellä on jo olemassa.</string>
 	<string name="show_more_map_detail">Näytä enemmän karttatietoja</string>
 	<string name="favorite_delete_multiple">Olet poistamassa %1$d suoosikkia ja %2$d suosikkiryhmää. Oletko varma?</string>
-	<string name="local_index_gpx_info_elevation">\nKeskimääräinen korkeus : %1$s\nMinimikorkeus : %2$s\nMaksimikorkeus : %3$s\nNousuja : %4$s\nLaskuja : %5$s</string>
-	<string name="local_index_gpx_info">Alireittejä : %1$d\nPisteitä yhteensä : %2$d\nVälietappeja : %3$d\nKokonaismatka : %4$s\nAloitusaika : %5$tF, %5$tR\nLopetusaika : %6$tF, %6$tR</string>
+	
+	
 	<string name="local_index_installed">Versio</string>
 	<string name="poi_remove_confirm_template">Poista {0} (lisää kommentti)?</string>
 	<string name="osb_close_dialog_error">Tapahtui virhe: bugia ei suljettu</string>

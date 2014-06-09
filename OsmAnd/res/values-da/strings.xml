@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -193,8 +192,8 @@
 \nsporing</string>
 	<string name="live_monitoring_mode_on">Stop online 
 \nsporing</string>
-	<string name="position_on_map_descr">Vælg placering af positionsmarkør på kortet</string>
-	<string name="position_on_map">Positionsmarkør</string>
+	
+	
 	<string name="layer_map_appearance">Konfigurer skærm</string>
 	<string name="show_lanes">Vis vognbaner</string>
 	<string name="avoid_unpaved">Undgå grusveje</string>
@@ -582,8 +581,7 @@
 	<string name="favourites_edit_dialog_category">Kategori</string>
 	<string name="vector_map_not_needed">Nej tak</string>
 	<string name="local_index_gpx_info_show">\nTryk og hold for valgmuligheder</string>
-	<string name="local_index_gpx_info_speed">\nGennemsnitsfart: %1$s
-\nTopfart: %2$s</string>
+	
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
@@ -868,17 +866,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="favorite_delete_multiple">%1$d favoritter og %2$d favoritgrupper slettes. Forsæt?</string>
 	<string name="basemap_missing">Basis verdenskort (dækker hele verden ved lav zoom) mangler. Overvej at hente World_basemap_x.obf for et komplet kortmiljø.</string>
 	<string name="vector_data_missing">Offline-data mangler på SD-kort. Overvej at hente for at kunne bruge kort offline.</string>
-	<string name="local_index_gpx_info_elevation">\nGennemsnits højde: %1$
-\nMinimum højde: %2$
-\nMaksimum højde: %3$
-\nStigninger: %4$
-\nFald: %5$</string>
-	<string name="local_index_gpx_info">Delspor: %1$d
-\nTotale punkter: %2$d
-\nRutepunkter: %3$d
-\nSamlet afstand: %4$s
-\nStarttid: %5$tF, %5$tR
-\nSluttid: %6$tF, %6$tR</string>
+	
+	
 	<string name="local_index_installed">Udgave</string>
 	<string name="local_index_items_backuped">%1$d af %2$d emner deaktiveret.</string>
 	<string name="local_index_items_deleted">%1$d af %2$d emner slettet.</string>
@@ -1347,7 +1336,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="loading_postcodes">Indlæser postnumre…</string>
 	<string name="loading_streets">Indlæser gader…</string>
 	<string name="loading_cities">Indlæser byer…</string>
-	<string name="loading">Indlæser…</string>
+	
 	<string name="poi">Interessepunkt</string>
 	<string name="error_occurred_saving_gpx">Fejl under lagring af GPX</string>
 	<string name="error_calculating_route">Fejl under ruteberegning</string>
@@ -1533,8 +1522,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="please_select_address">Vælg først en by eller gade</string>
     <string name="context_menu_item_destination_point">Vælg som destination</string>
     <string name="destination_point">Destinationen %1$s</string>
-    <string name="local_index_gpx_timespan">\nPeriode: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nTid i bevægelse: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="av_camera_focus">Kameraets fokustype</string>
 	<string name="av_camera_focus_descr">Vælg fokustype på intern kamera</string>
 	<string name="av_camera_focus_auto">Autofokus</string>
@@ -1786,7 +1775,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_io_error">OsMo forbindelsesproblem: </string>
     <string name="osmo_mode_on">Stop OsMo session</string>    
     <string name="osmo_mode_off">Start OsMo session</string>
-    <string name="osmo_register_device">Registrering af enhed… </string>
+    
     <string name="share_fav">Del</string>
 	<string name="share_fav_subject">Favoritter delt via Osmand</string>
 	<string name="use_points_as_intermediates">Beregn rute mellem punkter</string>
@@ -1803,8 +1792,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_connect_to_device_name">Brugernavn</string>
     <string name="osmo_connect_to_device_tracker_id">Sporings-id</string>
     <string name="osmo_connect_to_device">Sammenkæd med enheden</string>
-    <string name="osmo_join_group">Tilmeld gruppen</string>
-    <string name="osmo_new_device">Opret forbindelse til enheden</string>
+    
+    
     <string name="osmo_connected_devices">Tilsluttede enheder</string>
     <string name="osmo_groups">OsMo grupper/enheder</string>
     <string name="osmo_auto_send_locations_descr">Start sporingssession automatisk og send placeringer efter start af programmet</string>
@@ -1853,7 +1842,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="color_yellow">gul</string>
 	<string name="color_lightblue">lyseblå</string>
 	<string name="color_blue">blå</string>
-	<string name="color_magenta">magenta</string>
+	
 	
     <string name="osmo_edit_device">Ændre brugeregenskaber</string>
     <string name="osmo_edit_color">Visningsfarve</string>

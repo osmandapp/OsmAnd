@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -237,8 +236,8 @@
   <string name="global_app_settings">Общие настройки приложения</string>
   <string name="download_files_not_enough_space">Недостаточно места на диске для загрузки %1$s MB (свободно: %2$s).</string>
   <string name="download_files_question_space">Свободное место {2} MB! Загрузить {0} файл(ов) ({1} MB)?</string>
-  <string name="tip_select_destination_point">Выбор точки назначения</string>
-  <string name="tip_select_destination_point_t">"\tВы можете выбрать точку назначения на карте, в результатах поиска или списке избранного через пункт \'Идти к\' в контекстном меню.\n\n\tТочка назначения отображается на карте как оранжевый круг, направление к ней отображается оранжевой стрелкой. Так-же, в правом верхнем углу отображается расстояние по прямой до неё. "</string>
+  
+  
   <string name="tip_recent_changes_0_6_9_t">Изменения в 0.6.9:
 		\n\t- Более детальная отрисовка векторных карт
 		\n\t- Быстрая аппаратная отрисовка карт(экспериментальные настройки)
@@ -320,10 +319,9 @@
   <string name="basemap_missing">Отсутствует базовая карта, покрывающая весь мир на мелком масштабе. Пожалуйста загрузите World_basemap_x.obf для полноценный работы приложения.</string>
   <string name="vector_data_missing">Локальные данные отсутствуют на SD-носителе. Пожалуйста, загрузите их для того, чтобы использовать приложение без Интернета.</string>
   <string name="local_index_gpx_info_show">\n\nДлинное нажатие для просмотра на карте</string>
-  <string name="local_index_gpx_info_speed">\nСредняя скорость: %1$s\nМаксимальная скорость: %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nСредняя высота: %1$s\nМинимальная высота: %2$s\nМаксимальная высота: %3$s\nПодъём вверх: %4$s\nСпуск вниз: %5$s</string>
-  <string name="local_index_gpx_info">Путей: %1$d Всего точек: %2$d Отмечено точек : %3$d Всего расстояние: %4$s
-\nНачало: %5$tF, %5$tR Окончание: %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Издание</string>
   <string name="local_index_items_backuped">%1$d из %2$d объектов успешно архивированы.</string>
   <string name="local_index_items_deleted">%1$d из %2$d объектов успешно удалены.</string>
@@ -724,7 +722,7 @@
   <string name="loading_postcodes">Загружаются почтовые индексы…</string>
   <string name="loading_streets">Загружаются улицы…</string>
   <string name="loading_cities">Загружаются города…</string>
-  <string name="loading">Загрузка…</string>
+  
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Ошибка сохранения пути в GPX файл</string>
   <string name="error_calculating_route">Ошибка прокладки маршрута</string>
@@ -782,8 +780,8 @@
   <string name="choose_street">Выберите улицу</string>
   <string name="choose_city">Выберите город</string>
   <string name="ChooseCountry">Выберите регион</string>
-  <string name="position_on_map_descr">Установить расположение текущей позиции на карте</string>
-  <string name="position_on_map">Текущая позиция</string>
+  
+  
   
   <string name="show_view_angle">Угол обзора</string>
   <string name="map_view_3d_descr">Включить 3D вид для карты</string>
@@ -1361,7 +1359,7 @@
     <string name="osb_author_or_password_not_specified">Пожалуйста, укажите в настройках пароль и имя пользователя OSM</string>
     <string name="route_descr_map_location">Карта: </string>
     <string name="osb_author_dialog_password">Пароль OSM (опционально)</string>
-	<string name="local_index_gpx_timemoving">\nВремя в пути: %1$d:%2$02d:%3$02d</string>
+	
 	<string name="driving_region_descr">Выберите регион: США, Европа, Англия, Азия и т.д.</string>
 	<string name="driving_region">Регион</string>
 	<string name="driving_region_japan">Япония</string>
@@ -1373,7 +1371,7 @@
     <string name="driving_region_canada">Канада</string>
 	<string name="tip_map_styles">Стили карты</string>
 	<string name="about_version">Версия:</string>
-    <string name="local_index_gpx_timespan">\nПромежуток времени: %1$d:%2$02d:%3$02d</string>
+    
 	<string name="local_index_tile_data_expire">Время действия (в минутах): %1$s</string>
     <string name="local_index_tile_data_downloadable">Загружаемые: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Максимальное увеличение: %1$s</string>
@@ -1596,14 +1594,14 @@ OsmAnd - открытый источник и активно развается.
     <string name="keep_informing">Повторять навигационные инструкции</string>
 	<string name="arrival_distance">Объявление прибытия</string>
     <string name="arrival_distance_descr">Как скоро вы хотите объявить прибытие?</string>
-    <string name="osmo_register_device">Регистрация устройства...</string>
+    
     <string name="osmo_io_error">Проблема подключения OsMo: </string>
     <string name="share_fav">Поделиться</string>
 	<string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
 	<string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
     <string name="osmo_connect_to_device_name">Имя пользователя</string>
-    <string name="osmo_join_group">Войти в группу</string>
-    <string name="osmo_new_device">Следить за устройством</string>
+    
+    
     <string name="osmo_connected_devices">Устройства</string>
     <string name="osmo_groups">Управление OsMo</string>
     <string name="osmo_connect_to_device">Подключиться к устройству</string>
@@ -1660,7 +1658,7 @@ OsmAnd - открытый источник и активно развается.
 	<string name="color_yellow">жёлтый</string>
 	<string name="color_lightblue">голубой</string>
 	<string name="color_blue">синий</string>
-	<string name="color_magenta">маджента</string>
+	
 	<string name="color_green">зелёный</string>
     <string name="osmo_create_groups_confirm">Чтобы создать группы, Вы должны быть зарегистрированным пользователем OsMo.</string>
     <string name="osmo_sign_in">Войти</string>

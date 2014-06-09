@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追蹤外掛元件，使用位置日誌服務(GPX 記錄，線上追蹤查詢)</string>
@@ -113,8 +112,8 @@
 	<string name="map_widget_renderer">地圖樣式</string>
 	<string name="live_monitoring_mode_off">開始\n 線上追蹤</string>
 	<string name="live_monitoring_mode_on">停止\n 線上追蹤</string>
-	<string name="position_on_map_descr">在地圖上選取所在地的位置標記</string>
-	<string name="position_on_map">位置標記</string>
+	
+	
 	<string name="layer_map_appearance">組態螢幕顯示</string>
 	<string name="show_lanes">顯示車道數</string>
 	<string name="avoid_unpaved">避開顛頗路面</string>
@@ -483,9 +482,9 @@
 	<string name="basemap_missing">缺少全球底圖(在小比列尺顯示，含蓋全球範圍)。請下載 World_basemap_x.obf 將軟體環境完整化。</string>
 	<string name="vector_data_missing">裝置端(\'離線\')的 SD 卡上找不到資料。欲使用離線地圖請去下載。</string>
 	<string name="local_index_gpx_info_show">\n\n按壓不放會出現選項</string>
-	<string name="local_index_gpx_info_speed">\n平均速度： %1$s \n最大速度：%2$s</string>
-	<string name="local_index_gpx_info_elevation">\n平均高度：%1$s\n最低高度：%2$s\n最高高度：%3$s\n上坡：%4$s\n下坡：%5$s</string>
-	<string name="local_index_gpx_info">子軌跡：%1$d\n總點數：%2$d\n中途點：%3$d\n總距離：%4$s\n出發時間：%5$tF,  %5$tR\n終止時間：%6$tF,  %6$tR</string>
+	
+	
+	
 	<string name="local_index_installed">版本</string>
 	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已解除成功。</string>
 	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已刪除成功。</string>
@@ -881,7 +880,7 @@
 	<string name="loading_postcodes">載入郵遞區號中…</string>
 	<string name="loading_streets">載入街道中…</string>
 	<string name="loading_cities">載入縣市中…</string>
-	<string name="loading">戴入中…</string>
+	
 	<string name="poi">興趣點</string>
 	<string name="error_occurred_saving_gpx">儲存 GPX 時錯誤</string>
 	<string name="error_calculating_route">計算路線時錯誤</string>
@@ -1501,8 +1500,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t- GPX navigation options
 		\n\t- UI update and large bug fixing
 	</string>
-	<string name="local_index_gpx_timespan">\n時間跨距：%1$d：%2$02d：%3$02d</string>
-	<string name="local_index_gpx_timemoving">\n行駛時間：%1$d：%2$02d：%3$02d</string>
+	
+	
 	<string name="av_camera_focus">相機對焦類型</string>
 	<string name="av_camera_focus_descr">選擇內置相機對焦類型</string>
 	<string name="av_camera_focus_auto">自動對焦</string>
@@ -1752,7 +1751,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_io_error">OsMo 連線問題： </string>
     <string name="osmo_mode_on">停止 OsMo 工作階段</string>    
     <string name="osmo_mode_off">啟動 OsMo 工作階段</string>
-    <string name="osmo_register_device">註冊裝置... </string>
+    
     <string name="share_fav">分享</string>
 	<string name="share_fav_subject">經由 OsmAnd 分享我的最愛</string>
 	<string name="use_points_as_intermediates">預估兩點之間的路線</string>
@@ -1778,8 +1777,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_connect_to_device_name">使用者名稱</string>
     <string name="osmo_connect_to_device_tracker_id">追蹤 ID</string>
     <string name="osmo_connect_to_device">與裝置連結</string>
-    <string name="osmo_join_group">加入群組</string>
-    <string name="osmo_new_device">連接到裝置</string>
+    
+    
     <string name="osmo_connected_devices">已連接裝置</string>
     <string name="osmo_groups">OsMo 群組/裝置</string>
     <string name="osmo_group">OsMo 群組</string>
@@ -1817,7 +1816,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="color_yellow">黃色</string>
 	<string name="color_lightblue">淺藍色</string>
 	<string name="color_blue">藍色</string>
-	<string name="color_magenta">紫紅色</string>
+	
 	
     <string name="osmo_edit_device">更改使用者屬性</string>
     <string name="osmo_edit_color">顯示色彩</string>

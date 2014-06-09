@@ -53,7 +53,7 @@
     <string name="route_to">До:</string>
     <string name="route_via">Преко:</string>
     <string name="route_from">Из:</string>
-	<string name="local_index_gpx_timemoving">\nВреме кретања: %1$d:%2$02d:%3$02d</string>
+	
 	<string name="app_mode_default">Прегледај мапу</string>
 	<string name="settings_preset">Примарни профил</string>
 	<string name="destination_point">Дестинација %1$s</string>
@@ -134,7 +134,7 @@
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_position_address">Адреса …</string>
 	<string name="search_position_undefined">недефинисан</string>
-	<string name="position_on_map">Позиција маркера</string>
+	
 	<string name="layer_map_appearance">Конфигурација екрана</string>
 	<string name="show_lanes">Прикажи траке</string>
 	<string name="avoid_unpaved">Избегавај неасфалтиране путеве</string>
@@ -174,7 +174,7 @@
 	<string name="poi_context_menu_delete">Брисање POI</string>
 	<string name="rotate_map_none_opt">Без ротације (север је горе)</string>
 	<string name="rotate_map_to_bearing">Орјентација мапе</string>
-	<string name="position_on_map_descr">Изаберите локацију маркера на карти</string>
+	
 	<string name="avoid_in_routing_descr">Избегавај наплатне рампе, не асфалтиране путеве, трајекте</string>
 	<string name="map_widget_show_ruler">Лењир</string>
 	<string name="map_widget_appearance">Остало:</string>

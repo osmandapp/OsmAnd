@@ -72,9 +72,9 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="basemap_missing">Bản đồ nền (bao phủ toàn bộ thế giới ở tỉ lệ xem nhỏ) bị thiếu. Hãy tải về tập tin World_basemap_x.obf để bổ sung đầy đủ.</string>
 	<string name="vector_data_missing">Dữ liệu (\'offline\') không có trên thẻ nhớ SD. Vui lòng tải về để cập nhật.</string>
 	<string name="local_index_gpx_info_show">\n\nGiữ một lúc để mở chi tiết hơn</string>
-	<string name="local_index_gpx_info_speed">\nTốc độ trung bình : %1$s \nTốc độ lớn nhất : %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nĐộ cao trung bình : %1$s\nĐộ cao thấp nhất : %2$s\nĐộ cao cao nhất : %3$s\nAscents : %4$s\nDescents : %5$s</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nSố points : %2$d\nWay points : %3$d\nKhoảng cách : %4$s\nThời gian bắt đầu : %5$tF,  %5$tR\nThời gian kết thúc : %6$tF,  %6$tR</string>
+	
+	
+	
 	<string name="local_index_installed">Phiên bản</string>
 	<string name="local_index_items_backuped">%1$d của %2$d đối tượng được sao lưu thành công.</string>
 	<string name="local_index_items_deleted">%1$d của %2$d đối tượng được xóa thành công.</string>
@@ -486,7 +486,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="loading_postcodes">Đang tải postcodes…</string>
 	<string name="loading_streets">Đang tải phố…</string>
 	<string name="loading_cities">Đang tải thành phố…</string>
-	<string name="loading">Đang tải…</string>
+	
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Có lỗi khi lưu GPX</string>
 	<string name="error_calculating_route">Có lỗi khi tìm đường đi</string>
@@ -543,8 +543,8 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
     <string name="choose_street">Chọn tuyến phố</string>
     <string name="choose_city">Chọn Thành phố</string>
     <string name="ChooseCountry">Chọn Quốc gia</string>
-    <string name="position_on_map_descr">Chọn vị trí bạn muốn đánh dấu trên bản đồ</string>
-    <string name="position_on_map">Đánh dấu vị trị</string>
+    
+    
     
     <string name="show_view_angle">Hiển thị hướng xem</string>
     <string name="map_view_3d_descr">Bật chế độ 3D</string>

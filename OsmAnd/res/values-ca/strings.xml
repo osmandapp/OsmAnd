@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -210,10 +209,10 @@
 <string name="local_openstreetmap_were_uploaded">Es van penjar {0} PDI/errors</string>
 <string name="local_openstreetmap_settings">PDI/errors d\'OSM desats localment</string>
 <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/errors d\'OSM de les bases de dades locals</string>
-<string name="position_on_map_descr">Trieu la localització del marcador de posició al mapa</string>
+
 <string name="day_night_info">Informació de dia/nit</string>
 <string name="map_widget_day_night">Mapa dia/nit</string>
-<string name="position_on_map">Marcador de posició</string>
+
 <string name="show_lanes">Mostra els carrils</string>
 <string name="avoid_ferries">Evita els ferris</string>
 <string name="avoid_in_routing_descr">Evita les carreteres de peatge, les no pavimentades i els ferris</string>
@@ -305,8 +304,7 @@
 <string name="favorite_default_category">Altres</string>
 <string name="favourites_edit_dialog_name">Nom</string>
 <string name="favourites_edit_dialog_category">Categoria</string>
-<string name="local_index_gpx_info_speed">\nVelocitat mitjana: %1$s
-\nVelocitat màxima: %2$s</string>
+
 <string name="local_index_installed">Edició</string>
 <string name="local_index_items_backuped">S\'ha desactivat amb èxit %1$d de %2$d ítem(s).</string>
 <string name="local_index_items_deleted">S\'ha suprimit amb èxit %1$d de %2$d ítem(s).</string>
@@ -385,7 +383,7 @@
 <string name="button_upgrade_osmandplus">Actualitza a l\'OsmAnd+</string>
 <string name="favorite_home_category">Casa</string>
 <string name="local_index_gpx_info_show">\n\nPremeu i manteniu per veure les opcions</string>
-<string name="local_index_gpx_info_elevation">\nAltitud mitjana: %1$s\nAltitud mínima: %2$s\nAltitud màxima: %3$s\nAscensió: %4$s\nDescensió: %5$s</string>
+
 <string name="local_index_no_items_to_do">No hi ha ítems per %1$s</string>
 
 <string name="voice_not_use">No l\'utilitzis</string>
@@ -544,7 +542,7 @@
 <string name="downloading">S\'està baixant...</string>
 <string name="closing_changeset">S\'està tancant el conjunt de canvis...</string>
 <string name="loading_cities">S\'estan carregant les ciutats…</string>
-<string name="loading">S\'està carregant…</string>
+
 <string name="daynight_mode_day">Dia</string>
 <string name="daynight_mode_night">Nit</string>
 <string name="daynight_mode_auto">Alba/capvespre</string>
@@ -785,7 +783,7 @@
 <string name="favorite_delete_multiple">Esteu a punt de suprimir %1$d preferit(s) i %2$d grup(s) de preferits. N\'esteu segurs?</string>
 <string name="basemap_missing">No s\'ha trobat el mapa base del món (el qual cobreix tot el món als nivells de zoom menors). És recomanable que us baixeu el fitxer World_basemap_x.obf per gaudir d\'un entorn complet.</string>
 <string name="vector_data_missing">No s\'ha trobat les dades de bord («fora de línia») a la targeta SD. És recomanable que les baixeu per utilitzar els mapes fora de línia.</string>
-<string name="local_index_gpx_info">Subtraces : %1$d\nPunts en total: %2$d\nFites: %3$d\nDistància total: %4$s\nHora d\'inici: %5$tF, %5$tR\nHora final: %6$tF, %6$tR</string>
+
 <string name="tts_missing_language_data">No hi ha dades instal·lades per la llengua seleccionada. Voleu anar al Market per instal·lar-ne?</string>
 <string name="gpx_option_from_start_point">Passa al llarg de la traça sencera</string>
 <string name="switch_to_vector_map_to_see">Hi ha un mapa de vectors fora de línia per aquesta localització. \n\t\n\tPer activar-lo aneu a «Menú»  →  «Defineix visualització»  →  «Font de mapes...»  →  «Mapes de vectors fora de línia».</string>
@@ -1307,8 +1305,8 @@
     <string name="route_to">A:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">Des de:</string>
-	<string name="local_index_gpx_timespan">\nTemps total: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nTemps desplaçament: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="destination_point">Destinació %1$s</string>
     <string name="local_osm_changes_backup_failed">La còpia dels canvis OSM ha fallat</string>
     <string name="local_osm_changes_backup">Fes una còpia com a canvi OSM</string>
@@ -1563,7 +1561,7 @@ Els grups totalment operatius s\'han de crear via web i només els usuaris regis
 Si us plau, llegiu-ne més a http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (Monitorització avançada en temps real)</string>
     <string name="osmo_settings">OsMo Monitorització OpenStreetMap (beta)</string>
-   	<string name="osmo_register_device">Registrant dispositiu... </string>
+   	
     <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
     <string name="osmo_mode_on">Aturar sessió OsMo</string>    
     <string name="osmo_mode_off">Iniciar sessió OsMo</string>
@@ -1754,8 +1752,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_connect_to_device_name">Nom d\'usuari</string>
     <string name="osmo_connect_to_device_tracker_id">Identificador de traça</string>
     <string name="osmo_connect_to_device">Enllaç amb dispositiu</string>
-    <string name="osmo_join_group">Unir-se al grup</string>
-    <string name="osmo_new_device">Connectar al dispositiu</string>
+    
+    
     <string name="osmo_connected_devices">Dispositius connectats</string>
     <string name="osmo_groups">OsMo Grups/Dispositius</string>
     <string name="osmo_group_info">Informació</string>

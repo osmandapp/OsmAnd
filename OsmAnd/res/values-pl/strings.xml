@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
@@ -77,9 +76,9 @@
   <string name="basemap_missing">Podstawowa mapa świata jest niezainstalowana. Pobierz plik World_basemap_x.obf.</string>
   <string name="vector_data_missing">Brak danych (\'offline\') w urządzeniu na karcie SD. Musisz je najpierw pobrać, by używać map offline.</string>
   <string name="local_index_gpx_info_show">\n\nPrzytrzymaj, aby wyświetlić opcje</string>
-  <string name="local_index_gpx_info_speed">"\nŚrednia prędkość: %1$s \nMaksymalna prędkość: %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nŚrednia wysokość: %1$s\nMinimalna wysokość: %2$s\nMaksymalna wysokość: %3$s\nWzniosy: %4$s\nSpadki: %5$s"</string>
-  <string name="local_index_gpx_info">Podścieżki: %1$d\nWszystkie punkty: %2$d\nPunkty pośrednie: %3$d\nCałkowity dystans: %4$s\nCzas startu: %5$tF, %5$tR\nCzas zakończenia: %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Wydanie</string>
   <string name="local_index_items_backuped">%1$d z %2$d zarchiwizowano.</string>
   <string name="local_index_items_deleted">%1$d z %2$d skasowano.</string>
@@ -508,7 +507,7 @@
   <string name="loading_postcodes">Wczytywanie kodów pocztowych…</string>
   <string name="loading_streets">Wczytywanie ulic…</string>
   <string name="loading_cities">Wczytywanie miast…</string>
-  <string name="loading">Wczytywanie…</string>
+  
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Błąd podczas zapisywania śladu GPX</string>
   <string name="error_calculating_route">Błąd obliczania trasy</string>
@@ -568,8 +567,8 @@
   <string name="choose_street">Wybierz ulicę</string>
   <string name="choose_city">Wybierz miejscowość</string>
   <string name="ChooseCountry">Wybierz kraj</string>
-  <string name="position_on_map_descr">Wybierz lokalizację znacznika pozycji na mapie</string>
-  <string name="position_on_map">Znacznik pozycji</string>
+  
+  
   
   <string name="show_view_angle">Pokaż kierunek wyświetlania</string>
   <string name="map_view_3d_descr">Włącz widok 3D mapy</string>
@@ -1323,8 +1322,8 @@
     <string name="context_menu_item_destination_point">Ustaw jako punkt docelowy</string>
     <string name="please_select_address">Wybierz miasto lub ulicę</string>
     <string name="destination_point">Punkt docelowy %1$s</string>
-    <string name="local_index_gpx_timespan">\nCzas: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nCzas podróży: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="av_camera_focus">Typ fokusu kamery</string>
 	<string name="av_camera_focus_descr">Wybierz fokus kamery</string>
 	<string name="av_camera_focus_auto">Autofokus</string>
@@ -1590,12 +1589,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmodroid_unseek">Przestań szukać obiektu</string>
     <string name="speech_rate_descr">Określ szybkość wymowy dla TTS</string>
     <string name="speech_rate">Szybkość mowy</string>
-    <string name="tip_recent_changes_1_7_t">Zmiany w wersji 1.7:
-	\n\t* Całkowicie zmienione wytyczanie tras (szybkie i dokładne)
-	\n\t* Możliwość symulacji trasy w tunelach
-	\n\t* Kilka mniejszych usprawnień i poprawek w obsłudze
-	\n\t* Możliwość ustawienia szybkości czytania
-    </string>
+    
     <string name="disable_complex_routing_descr">Wyłącz 2-fazowe obliczanie trasy dla nawigacji samochodowej</string>
     <string name="complex_route_calculation_failed">Błąd szybkiego obliczania trasy (%s), przełączam na tryb wolny.</string>
     <string name="disable_complex_routing">Wyłącz złożone trasowanie</string>
@@ -1722,7 +1716,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_io_error">Problem z połączeniem OsMo: </string>
     <string name="osmo_mode_on">Zatrzymaj sesję OsMo</string>    
     <string name="osmo_mode_off">Uruchom sesję OsMo</string>
-    <string name="osmo_register_device">Rejestrowanie urządzenia... </string>
+    
     <string name="share_fav">Udostępnij</string>
 	<string name="share_fav_subject">Ulubione miejsca udostępnione przez OsmAnd</string>
 	<string name="use_points_as_intermediates">Oblicz trasę między punktami</string>
@@ -1748,8 +1742,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_connect_to_device_name">Nazwa użytkownika</string>
     <string name="osmo_connect_to_device_tracker_id">Identyfikator trackera</string>
     <string name="osmo_connect_to_device">Sparuj z urządzeniem</string>
-    <string name="osmo_join_group">Dołącz do grupy</string>
-    <string name="osmo_new_device">Połącz z urządzeniem</string>
+    
+    
     <string name="osmo_connected_devices">Podłączone urządzenia</string>
     <string name="osmo_groups">Grupy/Urządzenia OsMo</string>
     <string name="osmo_tracker_id_descr">Kliknij, aby zobaczyć lub udostępnić identyfikator trackera.
@@ -1762,7 +1756,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="color_yellow">żółty</string>
 	<string name="color_lightblue">jasnoniebieski</string>
 	<string name="color_blue">niebieski</string>
-	<string name="color_magenta">purpurowy</string>
+	
 	
     <string name="osmo_edit_device">Zmień właściwości użytkownika</string>
     <string name="osmo_edit_color">Kolor wyświetlacza</string>

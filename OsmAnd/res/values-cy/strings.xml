@@ -98,8 +98,8 @@ tip_recent_changes_0_8_3_t Cyd-destun</string>
 <string name="map_widget_day_night">Dydd/nos map</string>
 <string name="map_widget_vector_attributes">Priodoleddau Rendro:</string>
 <string name="map_widget_renderer">Arddull rendro</string>
-<string name="position_on_map_descr">Dewis lleoliad arwydd safle ar y map</string>
-<string name="position_on_map">Marciwr swydd</string>
+
+
 <string name="native_app_allocated_memory_descr">Cyfanswm cof brodorol a ddyrennir gan app %1$s MB (Dalvik %2$s MB, arall %3$s MB).↵
 Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="osmand_parking_event">Codwch y car o barcio</string>

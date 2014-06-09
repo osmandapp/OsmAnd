@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="search_button">Iskanje</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
 	<string name="favorites_Button">Priljubljene</string>
@@ -336,8 +335,8 @@
 	<string name="day_night_info_description">Vzhod: %1$s\nZahod: %2$s</string>
 	<string name="live_monitoring_mode_off">Začni\nsledenje</string>
 	<string name="live_monitoring_mode_on">Zaustavi\n sledenje v živo</string>
-	<string name="position_on_map_descr">Izberite mesto položaja na zemljevidu</string>
-	<string name="position_on_map">Oznaka položaja</string>
+	
+	
 	<string name="layer_map_appearance">Nastavitve zaslona</string>
 	<string name="show_lanes">Prikaži vozne pasove</string>
 	<string name="avoid_in_routing_title">Izogibanje …</string>
@@ -553,10 +552,9 @@
 	
 	<string name="local_indexes_cat_gpx">GPX podatki</string>
 	<string name="local_indexes_cat_poi">Podatki POI</string>
-	<string name="local_index_gpx_info">Poti: %1$d\nVseh točk: %2$d\nVmesnih točk: %3$d\nDolžina: %4$s\nČas začetka: %5$tF, %5$tR\nČas konca: %6$tF, %6$tR</string>
-	<string name="local_index_gpx_info_speed">\nPovprečna hitrost: %1$s
-\nNajvečja hitrost: %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nPovprečna višina: %1$s\nNajmanjša višina: %2$s\nNajvečja višina: %3$s\nDvig: %4$s\nSpust: %5$s</string>
+	
+	
+	
 	<string name="phone">Telefon</string>
 	<string name="get_directions">Navigacija</string>
 	<string name="follow">Začni navigacijo</string>
@@ -1062,7 +1060,7 @@ Pomembnejše lastnosti:
 	<string name="loading_postcodes">Nalaganje poštnih številk …</string>
 	<string name="loading_streets">Nalaganje ulic …</string>
 	<string name="loading_cities">Nalaganje mest …</string>
-	<string name="loading">Nalaganje …</string>
+	
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Napaka med shranjevanjem GPX-a</string>
 	<string name="error_calculating_route">Napaka pri izračunu poti</string>
@@ -1475,8 +1473,8 @@ Približna pokritost zemljevidov in kakovost le-teh:
 
 Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Argentina, Armenija, Aruba, Avstralija, Avstrija, Azerbajdžan, Bahami, Bahrajn, Bangladeš, Barbados, Belorusija, Belgija, Belize, Benin, Bermuda, Butan, Bolivija, Bonaire, Bosna in Hercegovina, Bocvana, Brazilija, Britanski Deviški otoki, Brunej, Bolgarija, Burkina Faso, Burundi, Kambodža, Kamerun, Kanada, Zelenortski otoki, Srednjeafriška republika, Čad, Čile, Kitajska, Kolumbija, Komori, Kongo, Kostarika, Slonokoščena obala, Hrvaška, Kuba, Curaçao, Ciper, Češka, Danska, Džibuti, Dominika, Dominikanska republika, Ekvador, Egipt, Salvador, Ekvatorialna Gvineja, Eritreja, Estonija, Etiopija, Fidži, Finska, Francija, Francoska Gvajana, Francoska Polinezija, Gabon, Gambija, Gruzija, Nemčija, Gana, Gibraltar, Grčija, Grenlandija, Grenada, Guadeloupe, Guam, Gvatemala, Guernsey, Gvineja, Gvineja Bissau, Gvajana, Haiti, Vatikan, Honduras, Hong Kong, Madžarska, Islandija, Indija, Indonezija, Iran, Irak, Irska, otok Man, Izrael, Italija, Jamajka, Japonska, Jersey, Jordanija, Kazahstan, Kenija, Kiribati, Severna Koreja in Južna Koreja, Kuvajt, Kirgizistan, Laos, Latvija, Libanon, Lesoto, Liberija, Libija, Liechtenstein, Litva, Luksemburg, Macao, Makedonija, Madagaskar, Malavi, Malezija, Maldivi, Mali, Malta, Martinique, Mavretanija, Mauritius, Mayotte, Mehika, Mikronezija, Moldavija, Monako, Mongolija, Črna gora, Montserrat, Maroko, Mozambik, Mjanmar, Namibija, Nauru, Nepal, Nizozemska, Nizozemski Antili, Nova Kaledonija, Nova Zelandija, Nikaragva, Niger, Nigerija, Norveška, Oman, Pakistan, Palau, Palestinsko ozemlje, Panama, Papua Nova Gvineja, Paragvaj, Peru, Filipini, Poljska, Portugalska, Portoriko, Katar, Romunija, Rusija, Ruanda, Saint Barthelemy, Saint Helena, Saint Kitts in Nevis, Sveta Lucija, Saint Martin, Saint Pierre in Miquelon, Saint Vincent in Grenadine, Samoa, San Marino, Saudska Arabija, Senegal, Srbija, Sejšeli, Sierra Leone, Singapur, Slovaška, Slovenija, Somalija, Južna Afrika, Južna Georgia, Južni Sudan, Španija, Šrilanka, Sudan, Surinam, Svazi, Švedska, Švica, Sirija, Tajvan, Tadžikistan, Tanzanija, Tajska, Vzhodni Timor, Togo, Tokelau, Tonga, Trinidad in Tobago, Tunizija, Turčija, Turkmenistan, Tuvalu, Uganda, Ukrajina, Združeni arabski emirati, Velika Britanija (UK), Združene države Amerike (ZDA), Urugvaj, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis in Fortuna, Zahodna Sahara, Jemen, Zambija, Zimbabve.
 	</string>
-	<string name="local_index_gpx_timespan">\nČasovni razpon: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nČas premikanja: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="av_camera_focus">Vrsta ostrenja kamere</string>
 	<string name="av_camera_focus_descr">Izberite vrsto ostrenja vgrajene kamere</string>
 	<string name="av_camera_focus_auto">Samodejno ostrenje</string>
@@ -1718,7 +1716,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="osmo_settings">OsMo OpenStreetMap sledenje (beta)</string>
    	<string name="arrival_distance_descr">Kako hitro želite napoved prihoda?</string>
     <string name="arrival_distance">Napoved prihoda</string>
-    <string name="osmo_register_device">Registracija naprave … </string>
+    
     <string name="osmo_io_error">OsMo problem povezave: </string>
     <string name="osmo_mode_on">Končaj OsMo sejo</string>    
     <string name="osmo_mode_off">Začni OsMo sejo</string>

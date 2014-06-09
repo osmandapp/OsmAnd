@@ -264,9 +264,9 @@
   <string name="basemap_missing">მსოფლიოს ბაზური რუკა, რომელიც შეიცავს მთელ მსოფლიოს პატარა გადიდებისას, არ არსებობს. გთხოვთ გადმოწეროთ World_basemap_x.obf.</string>
   <string name="vector_data_missing">დასტაში \"offline\" sdcard-ზე არ არსებობს მონაცემები. გთხოვთ გადმოწეროთ რუკებით გათიშულ რეჟიმში სარგებლობისათვის .</string>
   <string name="local_index_gpx_info_show">"\n\nპარამეტრების შესაცვლელად დააჭირეთ და გეჭიროთ"</string>
-  <string name="local_index_gpx_info_speed">"\nსაშუალო სიჩქარე : %1$s \nმაქსიმალური სიჩქარე : %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nსაშუალო სიმაღლე : %1$s\nმინიმალური სიმაღლე : %2$s\nმაქსიმალური სიმაღლე : %3$s\nასვლა: %4$s\nჩამოსვლა : %5$s"</string>
-  <string name="local_index_gpx_info">ქვეგზა : %1$d\nჯამური წერტილები : %2$d\nსაგზაო წერტილები : %3$d\nჯამური მანძილი : %4$s\nსაწყისი დრო : %5$tF, %5$tR\nდასასრულის დრო : %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">გამოცემა</string>
   <string name="local_index_items_backuped">%1$d %2$d -დან წარმატებით გაიარა დეაქტივაცია.</string>
   <string name="local_index_items_deleted">%1$d %2$d -დან წარმატებით წაიშალა.</string>
@@ -648,7 +648,7 @@
   <string name="loading_postcodes">საფოსტო კოდების ჩატვირთვა…</string>
   <string name="loading_streets">ქუჩების ჩატვირთვა…</string>
   <string name="loading_cities">ქალაქების ჩატვირთვა…</string>
-  <string name="loading">ჩატვირთვა…</string>
+  
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">შეცდომნა GPX-ის შენახვისას</string>
   <string name="error_calculating_route">შეცდომა გზის დათვლისას</string>
@@ -700,8 +700,8 @@
   <string name="choose_street">აირჩიეთ ქუჩა</string>
   <string name="choose_city">აირჩიეთ ქალაქი</string>
   <string name="ChooseCountry">აირჩიეთ ქვეყანა</string>
-  <string name="position_on_map_descr">აირჩიეთ მდებარეობა ან მისი ნიშნული რუკაზე</string>
-  <string name="position_on_map">პოზიციის მაჩვენებელი</string>
+  
+  
   
   <string name="show_view_angle">ხედვის კუთხის ჩვენება</string>
   <string name="map_view_3d_descr">რუკის 3D ხედვის ჩართვა</string>
@@ -1144,8 +1144,8 @@
     <string name="route_to">სადამდე:</string>
     <string name="route_via">გავლით:</string>
     <string name="route_from">საიდან:</string>
-	<string name="local_index_gpx_timespan">\nდაახლ. დრო: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nმოძრაობის დრო: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="destination_point">დანიშნულების წერტილი %1$s</string>
     <string name="context_menu_item_destination_point">დანიშნულების წერტილად დაყენება</string>
     <string name="please_select_address">ჯერ აირჩიეთ ქალაქი ან ქუჩა</string>

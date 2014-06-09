@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -13,8 +12,8 @@
 		\n\t* \'High contrast roads\' zeigt alle Straßen in betont deutlichen Farben, nützlich in extrem hellen Umgebungen
 		\n\t* \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahrten und Lifte (benötigt wird die \'World ski\' Offline-Karte)
 	</string>
-	<string name="local_index_gpx_timespan">\nDauer: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
 	<string name="download_hillshade_item">Relief-Schattierung</string>
@@ -474,9 +473,9 @@
 	<string name="basemap_missing">Die offline-Weltkarte für kleine Vergrößerungen ist noch nicht vorhanden. Bitte ggf. World_basemap_x.obf herunterladen.</string>
 	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggf. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">"\n\nLang klicken für Optionen"</string>
-	<string name="local_index_gpx_info_speed">"\nDurchschn.geschw.: %1$s \nMax. Geschw.: %2$s"</string>
-	<string name="local_index_gpx_info_elevation">"\nDurchschn.höhe: %1$s\nMinimalhöhe: %2$s\nMaximalhöhe: %3$s\nAufstiege: %4$s\nAbstiege: %5$s"</string>
-	<string name="local_index_gpx_info">Subtracks: %1$d\nPunkte insgesamt: %2$d\nWegpunkte: %3$d\nGesamtstrecke: %4$s\nStartzeit: %5$tF, %5$tR\nEndzeit: %6$tF, %6$tR</string>
+	
+	
+	
 	<string name="local_index_installed">Ausgabe</string>
 	<string name="local_index_items_backuped">%1$d von %2$d Datei(en) erfolgreich deaktiviert.</string>
 	<string name="local_index_items_deleted">%1$d von %2$d Datei(en) erfolgreich gelöscht.</string>
@@ -898,7 +897,7 @@
 	<string name="loading_postcodes">Lade Postleitzahlen…</string>
 	<string name="loading_streets">Lade Straßen…</string>
 	<string name="loading_cities">Lade Orte…</string>
-	<string name="loading">Laden…</string>
+	
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Fehler während des Speicherns aufgetreten</string>
 	<string name="error_calculating_route">Fehler während der Routenberechnung</string>
@@ -1155,8 +1154,8 @@
 	<string name="map_widget_renderer">Kartendarstellung</string>
 	<string name="live_monitoring_mode_off">Online-Tracking\n starten</string>
 	<string name="live_monitoring_mode_on">Online-Tracking\n stoppen</string>
-	<string name="position_on_map_descr">Position des Markers auf der Karte</string>
-	<string name="position_on_map">Standortmarker</string>
+	
+	
 	<string name="layer_map_appearance">Anzeige konfigurieren</string>
 	<string name="show_lanes">Fahrspuren anzeigen</string>
 	<string name="avoid_unpaved">Vermeide ungeteerte Straßen</string>
@@ -1752,7 +1751,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_io_error">OsMo Verbindungsproblem: </string>
     <string name="osmo_mode_on">OsMo-Sitzung beenden</string>    
     <string name="osmo_mode_off">OsMo-Sitzung starten</string>
-    <string name="osmo_register_device">Gerät registrieren </string>
+    
     <string name="share_fav">Teilen</string>
 	<string name="share_fav_subject">Über OsmAnd geteilte Favoriten</string>
 	<string name="use_points_as_intermediates">Route zwischen Punkten berechnen</string>
@@ -1775,7 +1774,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_connect_to_device_name">Nutzername</string>
     <string name="osmo_connect_to_device_tracker_id">Aufzeichnungs-ID</string>
     <string name="osmo_connect_to_device">Mit Gerät koppeln</string>
-    <string name="osmo_join_group">Gruppe beitreten</string>
+    
     <string name="osmo_groups">OsMo Gruppen/Geräte</string>
     <string name="color_red">rot</string>
 	<string name="color_pink">pink</string>
@@ -1784,7 +1783,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="color_yellow">gelb</string>
 	<string name="color_lightblue">hellblau</string>
 	<string name="color_blue">blau</string>
-	<string name="color_magenta">magenta</string>
+	
 	
     <string name="osmo_edit_device">Ändern der Nutzereinstellungen</string>
     <string name="osmo_group_info">Info</string>

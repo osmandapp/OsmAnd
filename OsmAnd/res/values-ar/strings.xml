@@ -442,8 +442,8 @@
 	<string name="map_widget_renderer">نمط الخريطة</string>
 	<string name="live_monitoring_mode_off">بدء\n  التعقب على الانترنت</string>
 	<string name="live_monitoring_mode_on">وقف\n  التعقب على الانترنت</string>
-	<string name="position_on_map_descr">اختر مكان العلامة على الخريطة</string>
-	<string name="position_on_map">علامة الموضع</string>
+	
+	
 	<string name="layer_map_appearance">إعداد الشاشة</string>
 	<string name="map_widget_fluorescent">طرق فلورية</string>
 	<string name="map_widget_show_ruler">مسطرة</string>
@@ -492,8 +492,8 @@
 	\n\t* حلّ العديد من العلل المتعلقة بعرض المسافة و بتحليل GPX و بالتقاط الإحداثيات أو بناء النوافذ وكذلك في رفع OSM والتقاط https
     </string>
     <string name="route_descr_lat_lon">خط عرض %1$.3f، طول %2$.3f</string>
-    <string name="local_index_gpx_timespan">\nالفترة الزّمنية: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nزمن التّحرك: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="tip_recent_changes_1_4_t">التّغييرات في الإصدار 1.4:
 	\n\t* طلب الإحداثيات بالطّريقة الأمثل لزيارة (من الباب إلى الباب - نقاط البيع السّفرية)
 	\n\t* البحث عن الشّوارع بالاسم (في الجوار) 
@@ -1170,9 +1170,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="basemap_missing">خريطة العالم الأساسية (التي تغطي العالم كله في الأزيز صغيرة) مفقود. يرجى النظر تحميله World_basemap_x.obf للبيئة كاملة</string>
 	<string name="vector_data_missing">على متن (\'حاليا \') البيانات مفقود على بطاقة SD. يرجى النظر إلى تحميل البرنامج من اجل استخدام الخرائط دون اتصال.</string>
 	<string name="local_index_gpx_info_show">\ ن \ ن الصحافة وعقد لمدة الخيارات</string>
-	<string name="local_index_gpx_info_speed">\ متوسط السرعة:٪ 1 $ S \ ن السرعة القصوى:٪ 2 $ S</string>
-	<string name="local_index_gpx_info_elevation">\ متوسط الارتفاع:٪ 1 $ S \ الدنيا الارتفاع:٪ 2 $ S \ أقصى ارتفاع:٪ 3 $ S \nAscents:٪ 4 $ S \nDescents:٪ 5 $ S</string>
-	<string name="local_index_gpx_info">Subtracks:٪ 1 $ د \ مجموع النقاط:٪ 2D \ نقاط الطريق:٪ 3D \ المسافة الإجمالية:٪ 4S \ وقت البدء:٪ 5 $ TF،٪ 5 دولارات الوقت RTR \ النهاية:٪ 6 $ TF،٪ 6 $ TR</string>
+	
+	
+	
 	<string name="local_index_installed">طبعة</string>
 	<string name="local_index_items_backuped">٪ 1 $ d من العناصر 2D٪) إبطال مفعولها بنجاح.</string>
 	<string name="local_index_items_deleted">٪ 1 $ d من العناصر 2D٪) حذف بنجاح.</string>

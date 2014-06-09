@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
 	<string name="debugging_and_development">OsmAnd 개발</string>
@@ -291,9 +290,9 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="basemap_missing">기본 세계 지도가 없습니다.(작은 줌으로 전세계를 커버). 완전한 환경을 위해 World_basemap_x.obf 파일을 다운로드 하시기 바랍니다.</string>
 	<string name="vector_data_missing">탑재된 (\'오프라인\') 데이터가 SD 카드에 없습니다. 맵을 오프라인으로 사용하기 위해 다운로드 하시기 바랍니다.</string>
 	<string name="local_index_gpx_info_show">\n\n선택하려면 길게 클릭</string>
-	<string name="local_index_gpx_info_speed">\n평균 속도 : %1$s \n최대 속도 : %2$s</string>
-	<string name="local_index_gpx_info_elevation">\n평균 고도 : %1$s\n최소 고도 : %2$s\n최대 고도 : %3$s\n오르막 : %4$s\n내리막 : %5$s</string>
-	<string name="local_index_gpx_info">Subtracks(세그먼트) : %1$d\n총 포인트 : %2$d\n중간 포인트 : %3$d\n총 거리 : %4$s\n시작 시간 : %5$tD %5$tR\n종료 시간 : %6$tD %6$tR</string>
+	
+	
+	
 	<string name="local_index_items_backuped">%2$d 개의 아이템 중 %1$d 가 성공적으로 비활성화되었습니다.</string>
 	<string name="local_index_items_deleted">%2$d 개의 아이템 중 %1$d 가 성공적으로 삭제되었습니다.</string>
 	<string name="local_index_items_restored">%2$d 개의 아이템 중 %1$d 가 성공적으로 활성화되었습니다.</string>
@@ -754,7 +753,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="loading_postcodes">우편번호 로딩…</string>
 	<string name="loading_streets">거리 로딩…</string>
 	<string name="loading_cities">도시 로딩…</string>
-	<string name="loading">로딩…</string>
+	
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">GPX를 저장하는 도중 오류가 발생하였습니다</string>
 	<string name="error_calculating_route">루트를 찾는 도중 오류</string>
@@ -806,8 +805,8 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="choose_street">거리를 선택하세요</string>
     <string name="choose_city">도시를 선택하세요</string>
     <string name="ChooseCountry">국가를 선택하세요</string>
-    <string name="position_on_map_descr">지도에 포지션 마커의 위치를 선택하세요</string>
-    <string name="position_on_map">포지션 마커</string>
+    
+    
     
     <string name="show_view_angle">시야각 표시</string>
     <string name="map_view_3d_descr">맵의 3D 뷰 활성화</string>
@@ -1102,8 +1101,8 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="route_to">~까지:</string>
     <string name="route_via">경유하여:</string>
     <string name="route_from">~부터 :</string>
-	<string name="local_index_gpx_timespan">\n시간 범위: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\n시간 이동: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="destination_point">목적지 %1$s</string>
     <string name="context_menu_item_destination_point">목적지로 설정</string>
     <string name="please_select_address">먼저 도시나 거리를 선택</string>
@@ -1956,7 +1955,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="keep_informing_descr">정기적으로 탐색 지시를 다시 발표</string>
     <string name="keep_informing">운행 명령을 반복</string>
 	<string name="navigation_intent_invalid">잘못된 포맷 : %s</string>
-<string name="osmo_register_device">장치 등록... </string>
+
     <string name="osmo_io_error">OSMo 연결 문제 : </string>
     <string name="osmo_mode_on">OSMo 중지</string>    
     <string name="osmo_mode_off">OSMo 시작</string>
@@ -1968,8 +1967,8 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_connect_to_device_name">사용자 이름</string>
     <string name="osmo_connect_to_device_tracker_id">트래커 ID</string>
     <string name="osmo_connect_to_device">장치와 연결</string>
-    <string name="osmo_join_group">그룹에 가입</string>
-    <string name="osmo_new_device">장치에 연결</string>
+    
+    
     <string name="osmo_connected_devices">연결된 장치</string>
     <string name="osmo_groups">OsMo 그룹/장치</string>
     <string name="osmo_auto_send_locations_descr">자동으로 트래커 세션을 시작하고 응용 프로그램 시작 후 위치를 전송</string>
@@ -2024,7 +2023,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="color_yellow">노랑</string>
 	<string name="color_lightblue">밝은 청색</string>
 	<string name="color_blue">파랑</string>
-	<string name="color_magenta">자청색</string>
+	
 	
     <string name="osmo_edit_device">사용자 등록정보 변경</string>
     <string name="osmo_edit_color">디스플레이 색상</string>

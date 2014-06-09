@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -269,7 +268,7 @@
   <string name="loading_postcodes">Carregando códigos postais…</string>
   <string name="loading_streets">Carregando ruas…</string>
   <string name="loading_cities">Carregando cidades…</string>
-  <string name="loading">Carregando…</string>
+  
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Erro ao gravar GPX</string>
   <string name="error_calculating_route">Erro de calculando a rota</string>
@@ -329,8 +328,8 @@
   <string name="choose_street">Escolher rua</string>
   <string name="choose_city">Escolher cidade</string>
   <string name="ChooseCountry">Escolher país</string>
-  <string name="position_on_map_descr">Escolha a posição do marcador no mapa</string>
-  <string name="position_on_map">Posição do marcador</string>
+  
+  
   
   <string name="show_view_angle">Mostrar ângulo de visão</string>
   <string name="map_view_3d_descr">Ativar a visualização em 3D do mapa</string>
@@ -702,9 +701,9 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="basemap_missing">Falta o mapa global base (abrange o mundo inteiro com pouco detalhe). Pode fazer download do World_basemap_x.obf para ter um ambiente completo.</string>
   <string name="vector_data_missing">Faltam os dados de mapas no cartão SD. Precisa de fazer download dos mapas, para os usar offline.</string>
   <string name="local_index_gpx_info_show">\n\nMantenha pressionado para opções</string>
-  <string name="local_index_gpx_info_speed">"\nAverage speed : %1$s \nMaximum speed : %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nAverage altitude : %1$s\nMinimum altitude : %2$s\nMaximum altitude : %3$s\nAscents : %4$s\nDescents : %5$s"</string>
-  <string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tF, %5$tR\nEnd time : %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Edição</string>
   <string name="local_index_items_backuped">%1$d de %2$d item(s) desactivados.</string>
   <string name="local_index_items_deleted">%1$d de %2$d item(s) apagados.</string>
@@ -1239,8 +1238,8 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="route_to">Para:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">A partir:</string>
-	<string name="local_index_gpx_timemoving">\nTempo em movimento: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timespan">\nTempo decorrido: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="destination_point">Destino %1$s</string>
     <string name="context_menu_item_destination_point">Defina como destino</string>
     <string name="please_select_address">Selecione cidade ou rua primeiro</string>

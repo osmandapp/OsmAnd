@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -683,8 +682,8 @@
     <string name="route_to">Til:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">Fra:</string>
-	<string name="local_index_gpx_timespan">\nTotal tid: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nTid i bevegelse: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="destination_point">Mål %1$s</string>
     <string name="context_menu_item_destination_point">Velg som mål</string>
     <string name="please_select_address">Velg by eller gate først</string>

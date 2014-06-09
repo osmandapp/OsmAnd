@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -358,11 +357,9 @@
   <string name="basemap_missing">Chýba základná mapa sveta(World Basemap). Prosím, zvážte jej stiahnutie pre správnu funkčnosť.</string>
   <string name="vector_data_missing">Na SD karte chýbajú offline údaje. Prosím, zvážte ich stiahnutie pre použitie máp bez internetu.</string>
   <string name="local_index_gpx_info_show">\n\nKliknite a podržte pre možnosti</string>
-  <string name="local_index_gpx_info_speed">\nPriemerná rýchlosť : %1$s
-\nMaximálna rýchlosť : %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nPriemerná nadm. výška : %1$s\nNajnižšia nadm. výška : %2$s\nNajvyššia nadm. výška : %3$s\nStúpanie hore : %4$s\nStúpanie dole : %5$s</string>
-  <string name="local_index_gpx_info">Pod-stopy : %1$d\nCelkovo bodov : %2$d\nWay-pointy : %3$d\nCelková vzdialenosť : %4$s
-\nČas spustenia : %5$tF, %5$tR\nČas ukončenia : %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Vydanie</string>
   <string name="local_index_items_backuped">%1$d položiek z %2$d úspešne zálohovaných.</string>
   <string name="local_index_items_deleted">%1$d položiek z %2$d úspešne vymazaných.</string>
@@ -795,7 +792,7 @@
   <string name="loading_postcodes">Načítavajú sa PSČ…</string>
   <string name="loading_streets">Načítavajú sa ulice…</string>
   <string name="loading_cities">Načítavajú sa mestá…</string>
-  <string name="loading">Načítava sa…</string>
+  
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Chyba počas ukladania GPX</string>
   <string name="error_calculating_route">Chyba počas počítania trasy</string>
@@ -855,8 +852,8 @@
   <string name="choose_street">Vybrať ulicu</string>
   <string name="choose_city">Vybrať mesto</string>
   <string name="ChooseCountry">Vybrať krajinu</string>
-  <string name="position_on_map_descr">Výber umiestnenia ukazovateľa pozície na mape</string>
-  <string name="position_on_map">Ukazovateľ pozície</string>
+  
+  
   
   <string name="show_view_angle">Zobraziť uhol pohľadu</string>
   <string name="map_view_3d_descr">Zapnutie 3D zobrazenia mapy</string>
@@ -1332,8 +1329,8 @@
     <string name="destination_point">Cieľ %1$s</string>
     <string name="intermediate_items_sort_return">Cesta bola zoptimalizovaná.</string>
     <string name="intermediate_items_sort_by_distance">Zoptimalizuj</string>
-    <string name="local_index_gpx_timespan">\nČasové rozpätie: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nČas pohybu: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="osmand_distance_planning_plugin_description">Vytvorenie cesty (alebo použite/upravite existujúce GPX súbory) pre meranie vzdialenosti medzi bodmi. Uložiť ako GPX, možno použiť pre plánovanie GPX trasy.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulačka vzdialenosti a plánovač cesty</string>
     <string name="use_distance_measurement_help">* Kliknutím označiť miesto.\n
@@ -1763,7 +1760,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_io_error">Problém s pripojením OsMo: </string>
     <string name="osmo_mode_on">Zastaviť reláciu OsMo</string>    
     <string name="osmo_mode_off">Spustiť reláciu OsMo</string>
-    <string name="osmo_register_device">Registruje sa zariadenie… </string>
+    
     <string name="share_fav">Zdieľať</string>
 	<string name="share_fav_subject">Obľúbené zdieľané cez OsmAnd</string>
 	<string name="tip_recent_changes_1_8_alpha">Zmeny v 1.8:
@@ -1781,8 +1778,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_connect_to_device_name">Meno používateľa</string>
     <string name="osmo_connect_to_device_tracker_id">ID sledovacieho zariadenia</string>
     <string name="osmo_connect_to_device">Spojiť so zariadením</string>
-    <string name="osmo_join_group">Pripojiť k skupine</string>
-    <string name="osmo_new_device">Pripojiť k zariadeniu</string>
+    
+    
     <string name="osmo_connected_devices">Pripojené zariadenia</string>
     <string name="osmo_groups">Skupiny/Zariadenia OsMo</string>
     <string name="osmo_auto_send_locations_descr">Automaticky spustiť reláciu sledovania a odosielať polohu po spustení aplikácie</string>
@@ -1806,7 +1803,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="color_yellow">žltá</string>
 	<string name="color_lightblue">svetlomodrá</string>
 	<string name="color_blue">modrá</string>
-	<string name="color_magenta">purpurová</string>
+	
 	
     <string name="osmo_edit_device">Zmeniť vlastnosti používateľa</string>
     <string name="osmo_edit_color">Zobrazovaná farba</string>
