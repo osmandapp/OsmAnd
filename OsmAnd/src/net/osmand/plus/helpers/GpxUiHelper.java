@@ -338,7 +338,7 @@ public class GpxUiHelper {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				final GPXFile[] result = new GPXFile[filename.length + (currentFile == null ? 1 : 0)];
+				final GPXFile[] result = new GPXFile[filename.length + (currentFile == null ? 0 : 1)];
 				int k = 0;
 				String w = "";
 				if (currentFile != null) {
