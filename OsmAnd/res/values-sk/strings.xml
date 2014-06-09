@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -123,7 +123,7 @@
   <string name="debugging_and_development">Vývoj OsmAndu</string>
   <string name="native_rendering">Natívne vykresľovanie</string>
   <string name="test_voice_prompts">Test hlasových povelov</string>
-  <string name="switch_to_raster_map_to_see">Nie je dostupná offline vektorová mapa pre túto oblasť. Môžete ju stiahnuť v Nastaveniach (Offline údaje), alebo prepnúť na online mapy.</string>
+  <string name="switch_to_raster_map_to_see">Nie je dostupná offline vektorová mapa pre túto oblasť. Môžete ju stiahnuť v Nastaveniach (Mapové súbory), alebo prepnúť na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Zmeny vo verzii 0.7.2 :
 \n\t- Natívne vykresľovanie pre všetky zariadenia
 \n\t- Offline upravovanie POI bodov
@@ -312,7 +312,7 @@
   <string name="old_poi_file_should_be_deleted">Súbor POI údajov "%1$s" je zbytočný a môže byť vymazaný.</string>
   <string name="update_poi_file_not_found">Miestny súbor na udržiavanie POI zmien sa nenašiel a nemôže byť vytvorený.</string>
   <string name="button_upgrade_osmandplus">Aktualizovať OsmAnd+</string>
-  <string name="map_version_changed_info">Na serveri sú nekompatibilné mapové súbory s Vašou aktuálnou verziou aplikácie. Na ich stiahnutie a použitie, prosím, aktualizujte aplikáciu na novšiu verziu.</string>
+  <string name="map_version_changed_info">Na serveri sú mapové súbory nekompatibilné s Vašou aktuálnou verziou aplikácie. Na ich stiahnutie a použitie, prosím, aktualizujte aplikáciu na novšiu verziu.</string>
   <string name="local_index_mi_rename">Premenovať</string>
   <string name="show_gpx_route">Zobraziť na mape</string>
   <string name="poi_filter_nominatim">Online Nominatim</string>
@@ -369,7 +369,7 @@
   <string name="local_index_items_restored">%1$d položiek z %2$d úspešne obnovených.</string>
   <string name="local_index_no_items_to_do">Žiadne položky pre akciu: %1$s</string>
   <string name="local_index_action_do">Chcete %1$s %2$s položiek. Ste si istý?</string>
-  <string name="local_index_descr_title">Správca offline údajov</string>
+  <string name="local_index_descr_title">Správca mapových súborov</string>
   <string name="local_index_mi_restore">Obnoviť</string>
   <string name="local_index_mi_backup">Zálohovať (vypnúť)</string>
   <string name="local_index_mi_delete">Vymazať</string>
@@ -386,7 +386,7 @@
   <string name="local_indexes_cat_voice">Hlasové údaje (mediálne)</string>
   <string name="local_indexes_cat_gpx">GPX údaje</string>
   <string name="local_indexes_cat_tile">Údaje online máp</string>
-  <string name="local_indexes_cat_map">Údaje offline máp</string>
+  <string name="local_indexes_cat_map">Offline mapy (vektorové)</string>
   <string name="local_indexes_cat_poi">POI údaje</string>
   <string name="ttsvoice">TTS hlas</string>
   <string name="search_offline_clear_search">Nové hľadanie</string>
@@ -443,7 +443,7 @@
   <string name="install_more">Inštalovať viac…</string>
   <string name="tip_update_index">Aktualizácia offline máp</string>
   <string name="tip_update_index_t">Veľmi dôležité je mať aktuálne mapové údaje, aby bolo možné zobrazovať mapu, hľadať adresy, body záujmu a navigovať. OsmAnd je vybavený sťahovacím manažérom, ktorý môže sťahovať offline mapy (a iné súbory) a zistiť, či sú dostupné aktualizácie.
-		\n\nPre stiahnutie máp choďte do "Nastavenia" → "Offline údaje" → "Stiahnuť offline údaje".
+		\n\nPre stiahnutie máp choďte do "Nastavenia" → "Správca mapových súborov" → "Stiahnuť offline údaje".
 		\n\nPo načítaní zoznamu oblastí z internetu, vyberte ktorýkoľvek súbor pre jeho stiahnutie alebo aktualizovanie. Všimnite si tiež výber typu súborov v hornej časti obrazovky, kde je potrebé zvoliť aký typ dát chcete stiahnuť (bežné mapy, tieňované reliéfy, atď.).
 		\n\nZoznam oblastí môžete filtrovať napísaním niekoľkých písmen alebo vyberte možnosť "Zobraziť stiahnuté". Potom uvidíte len aktualizácie pre súbory, ktoré už máte vo svojom zariadení.
 		\n\n\t* "Zelená" - indikuje, že súbor je aktuálny (na serveri rovnaký ako v zariadení)
@@ -461,7 +461,7 @@
   <string name="tip_favorites">Obľúbené miesta</string>
   <string name="tip_favorites_t">Často používané body si môžete uložiť do Obľúbených miest nasledovne:
 		\n\nV "Kontextovom menu" akéhokoľvek bodu mapy vyberte možnosť "Pridať medzi Obľúbené miesta" a zadajte meno.
-		\n\nPo uložení potom môžete k nemu jednoducho pristupovať cez "Hlavné Menu" → "Obľúbené". Dlhým kliknutím na obľúbený bod v zozname "Obľúbené" môžete k tomuto bodu navigovať, upraviť ho alebo vymazať.
+		\n\nPo uložení potom môžete k nemu jednoducho pristupovať cez "Hlavné Menu" → "Moje miesta". Dlhým kliknutím na obľúbený bod v zozname "Obľúbené" môžete k tomuto bodu navigovať, upraviť ho alebo vymazať.
 		\n\nNa zobrazenie všetkých Obľúbených bodov priamo na mape môžete zapnúť vrstvu "Obľúbené miesta" cez "Kontextové menu mapy" → "Zobrazenie".
 	</string>
   <string name="tip_osm_improve">Vylepšovanie Openstreetmap-u</string>
@@ -589,7 +589,7 @@
   <string name="general_settings_descr">Konfigurácia zobrazenia a iných globálnych nastavení</string>
   <string name="general_settings">Všeobecné nastavenia</string>
   <string name="index_settings_descr">Stiahnutie, zobrazenie podrobností a správa offline máp</string>
-  <string name="index_settings">Offline údaje</string>
+  <string name="index_settings">Správca mapových súborov</string>
   <string name="osmand_service">Funkcia v režime spánku</string>
   <string name="osmand_service_descr">Použite pre beh OsmAndu počas vypnutej obrazovky</string>
   <string name="fast_route_mode">Najrýchlejšia trasa</string>
@@ -707,7 +707,7 @@
   <string name="route_head">Pokračujte rovno</string>
   <string name="first_time_continue">Neskôr</string>
   <string name="first_time_download">Stiahnuť oblasti</string>
-  <string name="first_time_msg">Ďakujeme, že ste si vybrali OsmAnd. Na použitie hlavných funkcií tejto aplikácie potrebujete nejaké regionálne offline údaje, ktoré si môžete stiahnuť (použite Nastavenia, Offline údaje). Potom budete môcť zobrazovať mapy, vyhľadávať adresy, body záujmov (POI) a verejnú dopravu.</string>
+  <string name="first_time_msg">Ďakujeme, že ste si vybrali OsmAnd. Na použitie hlavných funkcií tejto aplikácie potrebujete nejaké regionálne offline údaje, ktoré si môžete stiahnuť (použite "Nastavenia" → "Mapové súbory"). Potom budete môcť zobrazovať mapy, vyhľadávať adresy, body záujmov (POI) a verejnú dopravu.</string>
   <string name="search_poi_location">Hľadá sa signál…</string>
   <string name="search_near_map">Hľadať v blízkosti poslednej pozície</string>
   <string name="search_nearby">Hľadať neďaleko Vás</string>
@@ -876,7 +876,7 @@
   <string name="exit_Button">Skončiť</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Nastavenia</string>
-  <string name="favorites_Button">Obľúbené</string>
+  <string name="favorites_Button">Moje miesta</string>
   <string name="search_button">Hľadať</string>
   <string name="search_activity">Hľadať</string>
   <string name="searchpoi_activity">Vybrať POI</string>
@@ -964,7 +964,7 @@
   <string name="edit_filter_delete_message">Filter {0} bol zmazaný</string>
   <string name="edit_filter_create_message">Filter {0} bol vytvorený</string>
   <string name="default_buttons_selectall">Vybrať všetko</string>
-  <string name="download_link_and_local_description">Kliknite sem na stiahnutie alebo aktualizáciu offline údajov.\nNa zobrazenie podrobností kliknite na položku, na deaktiváciu alebo zmazanie offline údaju kliknite a podržte.\nAktuálne údaje v zariadení (%1$s voľných):</string>
+  <string name="download_link_and_local_description">Kliknite sem na stiahnutie alebo aktualizáciu offline mapových súborov.\nNa zobrazenie podrobností kliknite na položku, na deaktiváciu alebo zmazanie súboru kliknite a podržte.\nAktuálne údaje v zariadení (%1$s voľných):</string>
   <string name="unknown_from_location">Štartovací bod nebol zatiaľ zistený</string>
   <string name="confirm_interrupt_download">Chcete prerušiť sťahovanie súboru?</string>
   <string name="basemap_was_selected_to_download">Základná mapa je potrebná pre správne fungovanie aplikácie a bola vybratá na stiahnutie.</string>
@@ -1173,7 +1173,7 @@
 	<string name="tip_altitude_offset">Korekcia nadmorskej výšky</string>
 	<string name="tip_altitude_offset_t">Väčšina GPS zariadení meria nadmorskú výšku podľa referenčného systému WGS84, z ktorého prepočet na lokálne používaný systém vyžaduje korekcie voči aktuálnej polohe.
 		\n\nNa lepšie aproximácie týchto miestnych systémov sa používa referenčný systém EGM96.
-		\n\nOsmAnd zobrazí nadmorskú výšku Vašej pozície v systéme EGM96 ak si stiahnete súbor "World altitude correction" (WW15MGH.DAC) cez "Nastavenia" → "Offline údaje". (Pôvodný je v http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
+		\n\nOsmAnd zobrazí nadmorskú výšku Vašej pozície v systéme EGM96 ak si stiahnete súbor "World altitude correction" (WW15MGH.DAC) cez "Nastavenia" → "Správca mapových súborov". (Pôvodný je v http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin má starú verziu a je potrebné ju aktualizovať.</string>
     
@@ -1222,7 +1222,7 @@
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytváranie zvukových poznámok počas cestovania</string>
     <string name="audionotes_plugin_name">Modul pre audio/video poznámky</string>
-    <string name="srtm_plugin_description">Tento modul umožňuje sťahovanie offline vrstevníc a tieňovaní svahov ("Nastavenia" → "Offline údaje" → vyberte požadovaný typ máp).</string>
+    <string name="srtm_plugin_description">Tento modul umožňuje sťahovanie offline vrstevníc a tieňovaní svahov ("Nastavenia" → "Správca mapových súborov" → vyberte požadovaný typ máp).</string>
     <string name="srtm_plugin_name">Modul vrstevníc</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
     <string name="download_srtm_maps">Údaje vrstevníc</string>
@@ -1770,6 +1770,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
         * Počítanie trasy medzi bodmi v GPX stope
         * Zmenené rozmiestnenie krajín na stiahnutie (podporuje vyhľadanie podľa lokálnych názvov)
         * Podporuje import GPX/KML (zkonvertuje KML na GPX)
+        * GPX stopy boli presunuté do "Moje dáta"
+        * Môžete rozdeliť GPX stopy podľa vzdialenosti a skontrolovať výškový rozdiel/rýchlosť
+        * Automatické spustenie navigácie po uplynutí času
     </string>
     <string name="use_points_as_intermediates">Vypočítať trasu medzi bodmi</string>
     <string name="hours_ago">hodín dozadu</string>
@@ -1822,11 +1825,11 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="color_green">zelená</string>
 	
     <string name="osmo_connect_to_group_id">ID skupiny</string>
-    <string name="selected_track">Stopa</string>
+    <string name="selected_track">Zvolená stopa</string>
     <string name="my_tracks">Všetky stopy</string>
     <string name="my_favorites">Moje obľúbené</string>
-    <string name="my_data_Button">Moje dáta</string>
-    <string name="my_data_activity">Moje dáta</string>
+    <string name="my_data_Button">Moje miesta</string>
+    <string name="my_data_activity">Moje miesta</string>
     <string name="osmo_user_joined">Používateľ %1$s sa pripojil ku skupine %2$s</string>
     <string name="osmo_user_left">Používateľ %1$s opustil skupinu %2$s</string>
     <string name="osmo_show_group_notifications">Zobrazovať oznamy skupiny</string>
