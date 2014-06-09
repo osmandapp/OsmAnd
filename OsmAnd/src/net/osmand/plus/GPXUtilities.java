@@ -240,7 +240,7 @@ public class GPXUtilities {
 
 			// 3. Time moving, if any
 			if (elevationPoints > 0) {
-				avgElevation = elevationPoints / totalElevation;
+				avgElevation =  totalElevation / elevationPoints;
 			}
 
 			// 4. Elevation, eleUp, eleDown, if recorded
