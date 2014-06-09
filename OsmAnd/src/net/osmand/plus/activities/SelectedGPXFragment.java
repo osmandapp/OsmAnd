@@ -52,9 +52,6 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		collator.setStrength(Collator.SECONDARY);
 		app = (OsmandApplication) activity.getApplication();
 		selectedGpxHelper = app.getSelectedGpxHelper();
-
-		adapter = new SelectedGPXAdapter();
-		setAdapter(adapter);
 	}
 
 	@Override
@@ -62,7 +59,10 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		super.onResume();
 		getListView().setFastScrollEnabled(true);
 		lightContent = app.getSettings().isLightContent();
-		adapter.setView(getExpandableListView());
+		if (adapter == null) {
+			adapter = new SelectedGPXAdapter(getListView());
+			setAdapter(adapter);
+		}
 		adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
 		selectedGpxHelper.setUiListener(new Runnable() {
 			
@@ -213,13 +213,12 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		private List<GpxDisplayGroup> displayGroups = new ArrayList<GpxDisplayGroup>();
 		private ExpandableListView expandableListView;
 		private boolean manualScroll;
+		private int maxNumberOfSections = 1;
 		
-		public SelectedGPXAdapter(){
-		}
-		
-		public void setView(ExpandableListView lv) {
-			 this.expandableListView = lv;
-		      this.expandableListView.setOnScrollListener(this);
+		public SelectedGPXAdapter(ExpandableListView lv) {
+			this.expandableListView = lv;
+			this.expandableListView.setOnScrollListener(this);
+
 		}
 		
 		@Override
@@ -238,28 +237,42 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	        if (manualScroll) {
 	            return section;
 	        } else {            
-	            return expandableListView.getFlatListPosition(
-	                       ExpandableListView.getPackedPositionForGroup(section));
+//	            return expandableListView.getFlatListPosition(
+//	                       ExpandableListView.getPackedPositionForGroup(section));
+	        	return section * maxNumberOfSections;
 	        }
 	    }
 
 	    // Gets called when scrolling the list manually
 	    @Override
 	    public int getSectionForPosition(int position) {
-	        return ExpandableListView.getPackedPositionGroup(
-	                   expandableListView
-	                       .getExpandableListPosition(position));
+	        // Get the packed position of the provided flat one and find the corresponding group
+//	        return ExpandableListView.getPackedPositionChild(expandableListView
+//	                .getExpandableListPosition(position));
+	    	return position / maxNumberOfSections;
 	    }
+		@Override
+		public Object[] getSections() {
+			int total = getGroupCount();
+			for(int i = 0; i < getGroupCount(); i++) {
+				if(expandableListView.isGroupExpanded(i)) {
+					total += getChildrenCount(i);
+				}
+			}
+			maxNumberOfSections = Math.max(1, Math.min(25, total));
+			String[] ar = new String[maxNumberOfSections];
+			for(int i = 0; i < ar.length; i++) {
+				ar[i] = ((i + 1) * 100 / maxNumberOfSections) + "%";
+			}
+			return ar;
+		}
 		
 		public void setDisplayGroups(List<GpxDisplayGroup> displayGroups) {
 			this.displayGroups = displayGroups;
 			notifyDataSetChanged();
 		}
 		
-		@Override
-		public Object[] getSections() {
-			return null;
-		}
+	
 
 
 

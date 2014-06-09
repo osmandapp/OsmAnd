@@ -21,6 +21,8 @@ public class OsmAndFormatter {
 	{
 		fixed2.setMinimumFractionDigits(2);
 		fixed1.setMinimumFractionDigits(1);
+		fixed1.setMinimumIntegerDigits(1);
+		fixed2.setMinimumIntegerDigits(1);
 	}
 	
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
