@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
     <string name="auto_zoom_close">Зачыніць</string>
     <string name="auto_zoom_far">Для сярэдняга масштаба</string>
@@ -1826,8 +1826,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="gpx_available_current_track">Сьлед, які запісваецца зараз</string>
     <string name="gpx_info_waypoints">Адзначаных пунктаў: %1$s </string>
 	<string name="gpx_info_distance">Даўжыня: %1$s (%2$s кропак) </string>
-	<string name="gpx_info_start_time">Пачатак: %1$tF,  %1$tR </string>
-	<string name="gpx_info_end_time">Канец: %1$tF,  %1$tR </string>
+	<string name="gpx_info_start_time">Пачатак: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">Канец: %1$tF,  %1$tT </string>
 	<string name="gpx_info_average_speed">Сярэдняя хуткасьць: %1$s </string>
 	<string name="gpx_info_maximum_speed">Максімальная хуткасьць: %1$s </string>
 	<string name="gpx_info_avg_altitude">Сярэдняя вышыня: %1$s</string>
@@ -1837,8 +1837,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="gpx_selection_number_of_points"> %1$s кропак</string>
     <string name="gpx_selection_point">Кропка %1$s</string>
     <string name="gpx_selection_current_track">запіс</string>
-    <string name="gpx_selection_route_points">%1$s \n Пунктаў маршруту %2$s</string>
+    <string name="gpx_selection_route_points">%1$s \nПунктаў маршруту %2$s</string>
     <string name="gpx_selection_points">%1$s\n Кропкі</string>
-    <string name="gpx_selection_track">%1$s\n Сьлед %2$s</string>
+    <string name="gpx_selection_track">%1$s \nСьлед %2$s</string>
     <string name="gpx_info_subtracks">Частак сьледу: %1$s </string>
-	</resources>
+	<string name="gpx_split_interval">Выберыце інтэрвал нарэзкі</string>
+    <string name="selected">выбрана</string>
+    <string name="gpx_info_asc_altitude">Пад\ʼём вышыні: %1$s</string>
+    </resources>
