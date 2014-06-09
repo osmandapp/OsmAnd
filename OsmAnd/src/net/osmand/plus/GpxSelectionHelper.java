@@ -282,7 +282,7 @@ public class GpxSelectionHelper {
 					if(obj.has(FILE)) {
 						File fl = new File(obj.getString(FILE));
 						if(p != null) {
-							p.startTask(getString(R.string.loading, fl.getName()), -1);
+							p.startTask(getString(R.string.loading_smth, fl.getName()), -1);
 						}
 						GPXFile gpx = GPXUtilities.loadGPXFile(app, fl);
 						selectGpxFile(gpx, true);

@@ -165,7 +165,7 @@ public class GpxImportHelper {
 
 			@Override
 			protected void onPreExecute() {
-				progress = ProgressDialog.show(mapActivity, application.getString(R.string.loading), application.getString(R.string.loading_data));
+				progress = ProgressDialog.show(mapActivity, application.getString(R.string.loading_smth, ""), application.getString(R.string.loading_data));
 			}
 
 			@Override
