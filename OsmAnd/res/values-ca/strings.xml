@@ -1151,10 +1151,11 @@
 \n\t- Dades de PDI incloses en fitxer .obf (tots els índexs de baixada després de 01/10/11)
 \n\t- Correcions en els missatges de veu (posició GPS, omissió de la primer comanda)
 \n\t- Petites millores "</string>
-	<string name="tip_favorites_t">"\tEls punts usats de forma freqüent els podeu desar coma a preferits.
-\n\tPer desar un punt com a preferit aneu al menú contextual del mapa, seleccioneu l\'opció «Afegeix als preferits» i introduïu un nom per al punt. Després de desar un preferit, és accessible mitjanl·lant «Pantalla principal» -&gt; «Preferits».
-\n\tFent pressió llarga a un preferit al menú «Preferit» proporciona opcions per establir-ho com a destinació, editar-lo o suprimir-lo.
-\n\tPer mostrar tots els punts preferits directament al mapa, a la pantalla mapa, activeu la capa «Preferits» que es troba a «Menú» -&gt; «Defineix visualització». "</string>
+	<string name="tip_favorites_t">Els punts usats de forma freqüent els podeu desar com a Preferits, com s'indica:
+\n\nEn el menú de context «Usa posició» per qualsevol punt, seleccioneu l\'opció «Afegeix als preferits» i introduïu un nom per identificar-lo. 
+\n\nDesprés de desar un preferit, aquest és accessible mitjançant «Menú» -&gt; «Preferits». Mantenint pressionat un determinat preferit en el menú «Preferits» es dona accés a opcions per establir-ho com a destinació, editar-lo o suprimir-lo.
+\n\nPer mostrar tots els punts preferits directament al mapa, a la pantalla mapa, activeu la capa «Preferits» que es troba a «Menú» → «Capes del mapa».
+	</string>
 	<string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
 	
 	<string name="loading_builds_failed">L\'obtenció del llistat de construccions disponibles de l\'OsmAnd ha fallat</string>
