@@ -1,7 +1,11 @@
 package net.osmand.plus.views;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -10,6 +14,8 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
@@ -17,21 +23,25 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.widget.Toast;
 
-public class GPXLayer extends OsmandMapLayer {
+public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	
 	private OsmandMapTileView view;
 	
 	private Paint paint;
 
 	private Path path;
-
+	private static final int startZoom = 7;
 	
 	private RenderingRulesStorage cachedRrs;
 	private boolean cachedNightMode;
 	private int cachedColor;
 
 	private GpxSelectionHelper selectedGpxHelper;
+
+	private Paint paintBmp;
+	private Bitmap favoriteIcon;
 	
 	
 	private void initUI() {
@@ -43,6 +53,12 @@ public class GPXLayer extends OsmandMapLayer {
 		paint.setStrokeJoin(Join.ROUND);
 
 		path = new Path();
+		
+		paintBmp = new Paint();
+		paintBmp.setAntiAlias(true);
+		paintBmp.setFilterBitmap(true);
+		paintBmp.setDither(true);
+		favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
 	}
 
 	@Override
@@ -78,9 +94,26 @@ public class GPXLayer extends OsmandMapLayer {
 		if (!selectedGPXFiles.isEmpty()) {
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<List<WptPt>> points = g.getPointsToDisplay();
-				int t = g.getColor();
-				paint.setColor(t == 0 ? clr : t);
+				int fcolor = g.getColor() == 0 ? clr : g.getColor();
+				paint.setColor(fcolor);
 				drawSegments(canvas, tileBox, points);
+			}
+			if (tileBox.getZoom() >= startZoom) {
+				// request to load
+				final QuadRect latLonBounds = tileBox.getLatLonBounds();
+				for (SelectedGpxFile g : selectedGPXFiles) {
+					List<WptPt> pts = g.getGpxFile().points;
+					// int fcolor = g.getColor() == 0 ? clr : g.getColor();
+					for (WptPt o : pts) {
+						if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
+								&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right) {
+							int x = (int) tileBox.getPixXFromLatLon(o.lat, o.lon);
+							int y = (int) tileBox.getPixYFromLatLon(o.lat, o.lon);
+							canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2,
+									y - favoriteIcon.getHeight(), paint);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -115,6 +148,7 @@ public class GPXLayer extends OsmandMapLayer {
 	}
 
 
+	
 	private void drawSegment(Canvas canvas, RotatedTileBox tb, List<WptPt> l, int startIndex, int endIndex) {
 		int px = tb.getPixXFromLonNoRot(l.get(startIndex).lon);
 		int py = tb.getPixYFromLatNoRot(l.get(startIndex).lat);
@@ -128,7 +162,78 @@ public class GPXLayer extends OsmandMapLayer {
 		canvas.drawPath(path, paint);
 	}
 	
+	
+	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
+		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
+	}
 
+	public void getWptFromPoint(RotatedTileBox tb, PointF point, List<? super WptPt> res) {
+		int r = (int) (15 * tb.getDensity());
+		int ex = (int) point.x;
+		int ey = (int) point.y;
+		for (SelectedGpxFile g : selectedGpxHelper.getSelectedGPXFiles()) {
+			List<WptPt> pts = g.getGpxFile().points;
+			// int fcolor = g.getColor() == 0 ? clr : g.getColor();
+			for (WptPt n : pts) {
+				int x = (int) tb.getPixXFromLatLon(n.lat, n.lon);
+				int y = (int) tb.getPixYFromLatLon(n.lat, n.lon);
+				if (calculateBelongs(ex, ey, x, y, r)) {
+					res.add(n);
+				}
+			}
+		}
+	}
+
+	@Override
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+		List<WptPt> favs = new ArrayList<WptPt>();
+		getWptFromPoint(tileBox, point, favs);
+		if(!favs.isEmpty()){
+			StringBuilder res = new StringBuilder();
+			int i = 0;
+			for(WptPt fav : favs) {
+				if (i++ > 0) {
+					res.append("\n\n");
+				}
+				res.append(view.getContext().getString(R.string.gpx_wpt) + " : " + fav.name);  //$NON-NLS-1$
+			}
+			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
+			return true;
+		}
+		return false;
+	}
+
+
+	@Override
+	public String getObjectDescription(Object o) {
+		if(o instanceof WptPt){
+			return view.getContext().getString(R.string.gpx_wpt) + " : " + ((WptPt)o).name; //$NON-NLS-1$
+		}
+		return null;
+	}
+	
+	@Override
+	public String getObjectName(Object o) {
+		if(o instanceof WptPt){
+			return ((WptPt)o).name; //$NON-NLS-1$
+		}
+		return null;
+	}
+
+	@Override
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res) {
+		getWptFromPoint(tileBox, point, res);
+	}
+
+	@Override
+	public LatLon getObjectLocation(Object o) {
+		if(o instanceof FavouritePoint){
+			return new LatLon(((FavouritePoint)o).getLatitude(), ((FavouritePoint)o).getLongitude());
+		}
+		return null;
+	}
+	
+	
 	@Override
 	public void destroyLayer() {
 		
@@ -140,11 +245,6 @@ public class GPXLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
-		return false;
-	}
-
-	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
 

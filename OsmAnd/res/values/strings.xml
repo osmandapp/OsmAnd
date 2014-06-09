@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="gpx_wpt">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nPress and hold to see on map</string>
     <string name="delay_navigation_start">Start navigation with delay</string>
     <string name="selected">selected</string>
