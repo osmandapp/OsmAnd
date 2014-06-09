@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -1810,4 +1810,11 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_user_left">L\'usuari %1$s ha deixat el grup %2$s</string>
     <string name="osmo_show_group_notifications">Veure les notificacions de grup</string>
     <string name="osmo_show_group_notifications_descr">Veure missatges quan un usuari s\'uneix o deixa el grup</string>
-    </resources>
+    <string name="gpx_info_subtracks">Segments: %1$s </string>
+	<string name="gpx_info_waypoints">Punts de pas: %1$s </string>
+	<string name="gpx_info_distance">Distància: %1$s (%2$s punts) </string>
+	<string name="gpx_info_start_time">Hora d'inici: %1$tF,  %1$tR </string>
+	<string name="gpx_info_end_time">Hora d'arribada : %1$tF,  %1$tR </string>
+	<string name="gpx_info_average_speed">Velocitat mitjana: %1$s </string>
+	<string name="gpx_info_maximum_speed">Velocitat màxima: %1$s </string>
+	</resources>
