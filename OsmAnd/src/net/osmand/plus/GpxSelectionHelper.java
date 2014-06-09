@@ -1,8 +1,14 @@
 package net.osmand.plus;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import net.osmand.IProgress;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.Route;
@@ -16,6 +22,8 @@ import android.graphics.Bitmap;
 
 public class GpxSelectionHelper {
 
+	private static final String CURRENT_TRACK = "currentTrack";
+	private static final String FILE = "file";
 	private OsmandApplication app;
 	// save into settings
 //	public final CommonPreference<Boolean> SHOW_CURRENT_GPX_TRACK = 
@@ -263,9 +271,50 @@ public class GpxSelectionHelper {
 		}
 		saveCurrentSelections();
 	}
+	
+	public void loadGPXTracks(IProgress p) {
+		String load = app.getSettings().SELECTED_GPX.get();
+		if(!Algorithms.isEmpty(load)) {
+			try {
+				JSONArray ar = new JSONArray("load");
+				for(int i = 0; i < ar.length(); i++) {
+					JSONObject obj = ar.getJSONObject(i);
+					if(obj.has(FILE)) {
+						File fl = new File(obj.getString(FILE));
+						if(p != null) {
+							p.startTask(getString(R.string.loading, fl.getName()), -1);
+						}
+						GPXFile gpx = GPXUtilities.loadGPXFile(app, fl);
+						selectGpxFile(gpx, true);
+					} else if(obj.has(CURRENT_TRACK)) {
+						selectedGPXFiles.add(savingTrackHelper.getCurrentTrack());
+					}
+				}
+			} catch (JSONException e) {
+				app.getSettings().SELECTED_GPX.set("");
+				e.printStackTrace();
+			}
+		}
+	}
 
 	private void saveCurrentSelections() {
-//		TODO;
+		JSONArray ar = new JSONArray();
+		for(SelectedGpxFile s : selectedGPXFiles) {
+			if(s.gpxFile != null) {
+				JSONObject obj = new JSONObject();
+				try {
+					if(!Algorithms.isEmpty(s.gpxFile.path)) {
+						obj.put(FILE, s.gpxFile.path);
+					} else {
+						obj.put(CURRENT_TRACK, true);
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				ar.put(obj);
+			}
+		}
+		app.getSettings().SELECTED_GPX.set(ar.toString());
 	}
 
 	private void selectGpxFileImpl(GPXFile gpx, boolean show) {

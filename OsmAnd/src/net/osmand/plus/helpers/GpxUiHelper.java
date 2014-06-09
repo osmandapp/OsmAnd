@@ -333,7 +333,7 @@ public class GpxUiHelper {
 	
 	private static void loadGPXFileInDifferentThread(final Activity activity, final CallbackWithObject<GPXFile[]> callbackWithObject,
 			final File dir, final GPXFile currentFile, final String... filename) {
-		final ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading),
+		final ProgressDialog dlg = ProgressDialog.show(activity, activity.getString(R.string.loading_smth, ""),
 				activity.getString(R.string.loading_data));
 		new Thread(new Runnable() {
 			@Override

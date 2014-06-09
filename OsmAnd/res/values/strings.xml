@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="loading_smth">Loading %1$s &#8230;</string>
+    <string name="map_widget_plain_time">Current time</string>
     <string name="gpx_wpt">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nPress and hold to see on map</string>
     <string name="delay_navigation_start">Start navigation with delay</string>
@@ -1699,7 +1701,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="loading_postcodes">Loading postcodes&#8230;</string>
 	<string name="loading_streets">Loading streets&#8230;</string>
 	<string name="loading_cities">Loading cities&#8230;</string>
-	<string name="loading">Loading&#8230;</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Error while saving GPX</string>
 	<string name="error_calculating_route">Error calculating route</string>
