@@ -1817,4 +1817,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="gpx_info_end_time">Hora d'arribada : %1$tF,  %1$tR </string>
 	<string name="gpx_info_average_speed">Velocitat mitjana: %1$s </string>
 	<string name="gpx_info_maximum_speed">Velocitat màxima: %1$s </string>
+	<string name="gpx_info_avg_altitude">Alçada mitjana: %1$s</string>
 	</resources>
