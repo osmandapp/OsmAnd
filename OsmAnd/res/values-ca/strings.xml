@@ -978,13 +978,13 @@
 	<string name="poi_remove_success">El PDI s\'ha eliminat correctament</string>
 	<string name="default_buttons_reset">Reinicia</string>
 	<string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
-	<string name="tip_day_night_mode_t_v2">\tL\'aspecte dels mapes vectorials pot canviar entre dia (clar) i nit (fosc).
-\n\tEls colors de nit són més segurs per conduir de nit.
-\n\tPodeu assignar una política per canviar de dia/nit a «Menú» -&gt; «Configura la 		pantalla...» -&gt;«Mapa dia/nit».
-\n\tLes opcions son:
-\n\t«Alba/Ocàs» - mode automàtic, controlat per la posició del sol (predeterminat)
-\n\t«Dia» - sempre usa mode de dia
-\n\t«Nit» - sempre usa mode de nit\n\t«Sensor de llum» - l\'aspecte del mapa es controlat pel sensor de llum del dispositiu (només si disposa d\'aquest sensor)
+	<string name="tip_day_night_mode_t_v2">L\'aspecte dels mapes vectorials pot canviar entre dia (clar) i nit (fosc). Els colors de nit són més segurs per la conducció nocturna.
+\n\nPodeu assignar un criteri pel canvi de dia/nit a «Menú» -&gt; «Configura la pantalla...» -&gt;«Mapa dia/nit».
+\n\nLes opcions son:
+\n\t «Alba/Ocàs» - mode automàtic, controlat per la posició del sol (predeterminat)
+\n\t «Dia» - sempre usa mode de dia
+\n\t «Nit» - sempre usa mode de nit
+\n\t «Sensor de llum» - l\'aspecte del mapa es controlat pel sensor de llum del dispositiu (només si disposa d\'aquest sensor)
 	</string>
 	<string name="tip_osm_improve_t">\tL\'OsmAnd usa mapes basats en dades de l\'Openstreetmap.org (OSM) i -a mes de veure i navegar- podeu usar-lo per a millorar la qualitat de les dades. Fàcilment podeu crear i publicar nous PDI o errors de l\'OSM amb només uns quants clics!
 \n\tPer a això heu de subministrar la vostra informació de registre de l\'OSM a «Preferències» -&gt; «Preferències generals» -&gt; «Edició d\'OSM».
