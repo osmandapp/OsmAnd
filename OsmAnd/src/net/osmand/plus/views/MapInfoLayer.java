@@ -239,6 +239,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void createControls() {
 		// 1. Create view groups and controls
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
+		statusBar.addView(createBackToLocation(new MapInfoWidgetsFactory(scaleCoefficient)));
 		rightStack = new StackWidgetView(view.getContext());
 		leftStack = new StackWidgetView(view.getContext());
 		

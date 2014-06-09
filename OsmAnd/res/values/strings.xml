@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="selected_gpx_info_show">\n\nPress and hold to see on map</string>
+    <string name="delay_navigation_start">Start navigation with delay</string>
     <string name="selected">selected</string>
     <string name="gpx_split_interval">Select split interval</string>
     <string name="local_index_gpx_info_show">\n\nPress and hold for options</string>
@@ -115,6 +117,7 @@
         * Supports GPX/KML import (convert from KML to GPX)
         * GPX tracks has moved to \'My Data\'
         * You can split GPX track by distance and check altitude difference/ speed
+        * Auto start navigation after delay
     </string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
     <string name="osmo_mode_restart">Restart OsMo session</string>
