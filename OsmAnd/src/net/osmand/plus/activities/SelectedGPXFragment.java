@@ -12,6 +12,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -23,9 +24,11 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.ImageView;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.actionbarsherlock.view.Menu;
@@ -114,21 +117,23 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 
 	private void selectSplitDistance(final GpxDisplayGroup model) {
 		Builder bld = new AlertDialog.Builder(getActivity());
-		int[] checkedItem = new int[] {0};
+		int[] checkedItem = new int[] {!model.isSplitDistance() && !model.isSplitTime()? 0 : -1};
 		List<String> options = new ArrayList<String>();
-		final TIntArrayList distanceSplit = new TIntArrayList();
+		final List<Double> distanceSplit = new ArrayList<Double>();
 		final TIntArrayList timeSplit = new TIntArrayList();
 		bld.setTitle(R.string.gpx_split_interval);
 		options.add(app.getString(R.string.none));
-		distanceSplit.add(-1);
+		distanceSplit.add(-1d);
 		timeSplit.add(-1);
-		addOptionSplit(50, true, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(100, true, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(200, true, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(500, true, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(1000, true, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(2000, true, options, distanceSplit, timeSplit, checkedItem, model);
-		addOptionSplit(5000, true, options, distanceSplit, timeSplit, checkedItem, model);
+		addOptionSplit(30, true, options, distanceSplit, timeSplit, checkedItem, model); // 100 feet, 50 yards, 50 m 
+		addOptionSplit(60, true, options, distanceSplit, timeSplit, checkedItem, model); // 200 feet, 100 yards, 100 m
+		addOptionSplit(180, true, options, distanceSplit, timeSplit, checkedItem, model); // 500 feet, 200 yards, 200 m
+		addOptionSplit(300, true, options, distanceSplit, timeSplit, checkedItem, model); // 1000 feet, 500 yards, 500 m
+		addOptionSplit(600, true, options, distanceSplit, timeSplit, checkedItem, model); // 2000 feet, 1000 yards, 1km
+		addOptionSplit(1500, true, options, distanceSplit, timeSplit, checkedItem, model); // 1mi, 2km
+		addOptionSplit(3000, true, options, distanceSplit, timeSplit, checkedItem, model); // 2mi, 5km
+		addOptionSplit(8000, true, options, distanceSplit, timeSplit, checkedItem, model); // 5mi, 10km
+		
 		addOptionSplit(15, false, options, distanceSplit, timeSplit, checkedItem, model);
 		addOptionSplit(30, false, options, distanceSplit, timeSplit, checkedItem, model);
 		addOptionSplit(60, false, options, distanceSplit, timeSplit, checkedItem, model);
@@ -169,51 +174,92 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 					}
 				}.execute((Void)null);
 			}
-
-			private void run(final GpxDisplayGroup model, final TIntArrayList distanceSplit,
-					final TIntArrayList timeSplit, int which) {
-				
-			}
 		});
 		bld.show();
 		
 	}
 
-	private void addOptionSplit(int value, boolean distance, List<String> options, TIntArrayList distanceSplit,
+	private void addOptionSplit(int value, boolean distance, List<String> options, List<Double> distanceSplit,
 			TIntArrayList timeSplit, int[] checkedItem, GpxDisplayGroup model) {
-		if(distance) {
-			options.add(OsmAndFormatter.getFormattedDistance(value, app));
-			distanceSplit.add(value);
+		if (distance) {
+			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
+			options.add(OsmAndFormatter.getFormattedDistance((float) dvalue, app));
+			distanceSplit.add(dvalue);
 			timeSplit.add(-1);
-			if(model.getSplitDistance() == value) {
-				checkedItem[0] = distanceSplit.size() -1;
+			if (Math.abs(model.getSplitDistance() - dvalue) < 1) {
+				checkedItem[0] = distanceSplit.size() - 1;
 			}
 		} else {
-			if(value < 60) {
-				options.add(value+ " " + app.getString(R.string.int_seconds));
-			} else if(value % 60 == 0){
-				options.add((value/60) + " " + app.getString(R.string.int_min));
+			if (value < 60) {
+				options.add(value + " " + app.getString(R.string.int_seconds));
+			} else if (value % 60 == 0) {
+				options.add((value / 60) + " " + app.getString(R.string.int_min));
 			} else {
-				options.add((value/60f) + " " + app.getString(R.string.int_min));
+				options.add((value / 60f) + " " + app.getString(R.string.int_min));
 			}
-			distanceSplit.add(-1);
+			distanceSplit.add(-1d);
 			timeSplit.add(value);
-			if(model.getSplitTime() == value) {
-				checkedItem[0] = distanceSplit.size() -1;
+			if (model.getSplitTime() == value) {
+				checkedItem[0] = distanceSplit.size() - 1;
 			}
 		}
 		
 	}
 
-	class SelectedGPXAdapter extends OsmandBaseExpandableListAdapter  {
+	class SelectedGPXAdapter extends OsmandBaseExpandableListAdapter implements SectionIndexer, AbsListView.OnScrollListener {
 
 		Filter myFilter;
 		private List<GpxDisplayGroup> displayGroups = new ArrayList<GpxDisplayGroup>();
+		private ExpandableListView expandableListView;
+		private boolean manualScroll;
+		
+		public SelectedGPXAdapter(){
+		}
+		
+		public void setView(ExpandableListView lv) {
+			 this.expandableListView = lv;
+		      this.expandableListView.setOnScrollListener(this);
+		}
+		
+		@Override
+	    public void onScrollStateChanged(AbsListView view, int scrollState) {
+	        this.manualScroll = scrollState == SCROLL_STATE_TOUCH_SCROLL;
+	    }
+
+	    @Override
+	    public void onScroll(AbsListView view, 
+	                         int firstVisibleItem, 
+	                         int visibleItemCount, 
+	                         int totalItemCount) {}
+
+	    @Override
+	    public int getPositionForSection(int section) {
+	        if (manualScroll) {
+	            return section;
+	        } else {            
+	            return expandableListView.getFlatListPosition(
+	                       ExpandableListView.getPackedPositionForGroup(section));
+	        }
+	    }
+
+	    // Gets called when scrolling the list manually
+	    @Override
+	    public int getSectionForPosition(int position) {
+	        return ExpandableListView.getPackedPositionGroup(
+	                   expandableListView
+	                       .getExpandableListPosition(position));
+	    }
 		
 		public void setDisplayGroups(List<GpxDisplayGroup> displayGroups) {
 			this.displayGroups = displayGroups;
 			notifyDataSetChanged();
 		}
+		
+		@Override
+		public Object[] getSections() {
+			return null;
+		}
+
 
 
 		@Override
@@ -306,9 +352,26 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				additional.setVisibility(View.VISIBLE);
 				icon.setVisibility(View.INVISIBLE);
 				if(child.group.isSplitDistance()) {
-					additional.setText(OsmAndFormatter.getFormattedDistance(child.splitMetric, app));
+					MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
+					if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+						final double sd = child.group.getSplitDistance();
+						int digits = sd < 100 ? 2 : (sd < 1000 ? 1 : 0);
+						int rem1000 = (int) (child.splitMetric + 0.5) % 1000;
+						if (rem1000 > 1 && digits < 1) {
+							digits = 1;
+						}
+						int rem100 = (int) (child.splitMetric + 0.5) % 100;
+						if (rem100 > 1 && digits < 2) {
+							digits = 2;
+						}
+						additional.setText(OsmAndFormatter.getFormattedRoundDistanceKm((float) child.splitMetric,
+								digits, app));
+					} else {
+						//  TODO 
+						additional.setText(OsmAndFormatter.getFormattedDistance((float) child.splitMetric, app));
+					}
 				} else{
-					additional.setText(Algorithms.formatDuration(child.splitMetric));
+					additional.setText(Algorithms.formatDuration((int) child.splitMetric));
 				}
 			} else {
 				icon.setVisibility(View.VISIBLE);

@@ -1080,7 +1080,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				description = gpx.warning;
 			} else {
 				// 'Long-press for options' message
-				description =  GpxUiHelper.getDescription(app, gpx, file) +  
+				description =  GpxUiHelper.getDescription(app, gpx, file, true) +  
 							app.getString(R.string.local_index_gpx_info_show);
 			}
 			htmlDescription = null;

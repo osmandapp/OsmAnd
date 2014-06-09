@@ -48,8 +48,12 @@ public class GpxSelectionHelper {
 	public List<GpxDisplayGroup> getDisplayGroups() {
 		List<GpxDisplayGroup> dg = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
 		for(SelectedGpxFile s : selectedGPXFiles) {
-			GPXFile g = s.getGpxFile();
-			collectDisplayGroups(dg, g);
+			if(s.displayGroups == null) {
+				s.displayGroups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
+				GPXFile g = s.getGpxFile();
+				collectDisplayGroups(s.displayGroups, g);
+			}
+			dg.addAll(s.displayGroups);
 			
 		}
 		return dg;
@@ -159,7 +163,7 @@ public class GpxSelectionHelper {
 		String descClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_altitude_desc));
 		String distanceClr = Algorithms.colorToString(app.getResources().getColor(R.color.gpx_distance_color));
 		final float eleThreshold = 3;
-		int t = 1;
+//		int t = 1;
 		for (TrkSegment r : group.track.segments) {
 			if (r.points.size() == 0) {
 				continue;
@@ -181,27 +185,32 @@ public class GpxSelectionHelper {
 					item.splitMetric = analysis.metricEnd;
 				}
 				
-				item.description = GpxUiHelper.getDescription(app, analysis);
+				item.description = GpxUiHelper.getDescription(app, analysis, true);
 				String name = "";
-				if(group.track.segments.size() > 1) {
-					name += t++ + ". ";
+//				if(group.track.segments.size() > 1) {
+//					name += t++ + ". ";
+//				}
+				if(!group.isSplitDistance()) {
+					name += GpxUiHelper.getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 				}
-						
-				name += GpxUiHelper.getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
-				
-				if (analysis.timeSpan > 0 || analysis.timeMoving > 0) {
+				if ((analysis.timeSpan > 0 || analysis.timeMoving > 0) && !group.isSplitTime()) {
 					long tm = analysis.timeMoving;
 					if (tm == 0) {
 						tm = analysis.timeSpan;
 					}
-					name += ", "+GpxUiHelper.getColorValue(timeSpanClr, Algorithms.formatDuration((int) (tm / 1000)));
+					if (name.length() != 0)
+						name += ", ";
+					name += GpxUiHelper.getColorValue(timeSpanClr, Algorithms.formatDuration((int) (tm / 1000)));
 				}
 				if (analysis.isSpeedSpecified()) {
-					name += ", "+GpxUiHelper.getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
+					if (name.length() != 0)
+						name += ", ";
+					name += GpxUiHelper.getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
 				}
 				if (analysis.isElevationSpecified() && (analysis.diffElevationUp > eleThreshold || 
 						analysis.diffElevationDown > eleThreshold) ) {
-					name += ",";
+					if (name.length() != 0)
+						name += ", ";
 					if(analysis.diffElevationDown > eleThreshold) {
 						name += GpxUiHelper.getColorValue(descClr, " \u2193 "+
 								OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
@@ -301,6 +310,7 @@ public class GpxSelectionHelper {
 		private GPXFile gpxFile;
 		private int color;
 		private List<List<WptPt>> processedPointsToDisplay = new ArrayList<List<WptPt>>();
+		private List<GpxDisplayGroup> displayGroups = null;
 		
 		public void setGpxFile(GPXFile gpxFile) {
 			this.gpxFile = gpxFile;
@@ -346,7 +356,7 @@ public class GpxSelectionHelper {
 		private String name;
 		private String description;
 		private Track track;
-		private int splitDistance = -1;
+		private double splitDistance = -1;
 		private int splitTime = -1;
 		
 		public GpxDisplayGroup(GPXFile gpx) {
@@ -403,7 +413,7 @@ public class GpxSelectionHelper {
 			return splitDistance > 0;
 		}
 		
-		public int getSplitDistance() {
+		public double getSplitDistance() {
 			return splitDistance;
 		}
 		
@@ -426,7 +436,7 @@ public class GpxSelectionHelper {
 			processGroupTrack(app, this	);
 		}
 
-		public void splitByDistance(OsmandApplication app, int meters) {
+		public void splitByDistance(OsmandApplication app, double meters) {
 			list.clear();
 			splitDistance = meters;
 			splitTime = -1;
@@ -446,7 +456,7 @@ public class GpxSelectionHelper {
 		public GpxDisplayGroup group;
 		public WptPt locationStart;
 		public WptPt locationEnd;
-		public int splitMetric = -1;
+		public double splitMetric = -1;
 		public String name;
 		public String description;
 		public String url;

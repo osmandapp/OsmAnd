@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import java.lang.reflect.Field;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.Map.Entry;
 
@@ -11,42 +12,60 @@ import net.osmand.plus.OsmandSettings.MetricsConstants;
 import android.content.Context;
 
 public class OsmAndFormatter {
-	private final static float METERS_IN_KILOMETER = 1000f;
-	private final static float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
-	private final static float YARDS_IN_ONE_METER = 1.0936f;
-	private final static float FOOTS_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
+	public final static float METERS_IN_KILOMETER = 1000f;
+	public final static float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
+	public final static float YARDS_IN_ONE_METER = 1.0936f;
+	public final static float FOOTS_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
+	private static final DecimalFormat fixed2 = new DecimalFormat("#.##");
+	private static final DecimalFormat fixed1 = new DecimalFormat("#.#");
+	{
+		fixed2.setMinimumFractionDigits(2);
+		fixed1.setMinimumFractionDigits(1);
+	}
 	
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		double mainUnitInMeter = 1;
-		double metersInSecondUnit = METERS_IN_KILOMETER; 
+		double metersInSecondUnit = METERS_IN_KILOMETER;
 		if (mc == MetricsConstants.MILES_AND_FOOTS) {
 			mainUnitInMeter = FOOTS_IN_ONE_METER;
 			metersInSecondUnit = METERS_IN_ONE_MILE;
-		} else if(mc == MetricsConstants.MILES_AND_YARDS){
+		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 			mainUnitInMeter = YARDS_IN_ONE_METER;
-			metersInSecondUnit = METERS_IN_ONE_MILE ;
+			metersInSecondUnit = METERS_IN_ONE_MILE;
 		}
 		// 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000 ...
-		
+
 		int generator = 1;
 		byte pointer = 1;
 		double point = mainUnitInMeter;
-		while(distInMeters * point > generator){
+		while (distInMeters * point > generator) {
 			if (pointer++ % 3 == 2) {
 				generator = generator * 5 / 2;
 			} else {
 				generator *= 2;
 			}
-			if(point == mainUnitInMeter && metersInSecondUnit * mainUnitInMeter * 0.9f <= generator ){
+			if (point == mainUnitInMeter && metersInSecondUnit * mainUnitInMeter * 0.9f <= generator) {
 				point = 1 / metersInSecondUnit;
 				generator = 1;
 				pointer = 1;
 			}
 		}
-		
+
 		return (generator / point);
+	}
+	
+	public static String getFormattedRoundDistanceKm(float meters, int digits, OsmandApplication ctx) {
+		int mainUnitStr = R.string.km;
+		float mainUnitInMeters = METERS_IN_KILOMETER;
+		if (digits == 0) {
+			return (int) (meters / mainUnitInMeters + 0.5) + " " + ctx.getString(mainUnitStr); //$NON-NLS-1$
+		} else if (digits == 1) {
+			return fixed1.format(((float) meters) / mainUnitInMeters) + " " + ctx.getString(mainUnitStr); 
+		} else {
+			return fixed2.format(((float) meters) / mainUnitInMeters) + " " + ctx.getString(mainUnitStr);
+		}
 	}
 	
 	public static String getFormattedDistance(float meters, OsmandApplication ctx) {
