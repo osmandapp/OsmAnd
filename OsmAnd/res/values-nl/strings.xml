@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -1826,7 +1826,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="my_favorites">Mijn favorieten</string>
     <string name="my_data_Button">Mijn gegevens</string>
     <string name="my_data_activity">Mijn gegevens</string>
-    <string name="selected_track">Track</string>
+    <string name="selected_track">Gekozen track</string>
     <string name="my_tracks">Alle tracks</string>
     <string name="gpx_file_is_empty">Gpx track is leeg</string>
     <string name="gpx_info_subtracks">Subtracks: %1$s </string>
