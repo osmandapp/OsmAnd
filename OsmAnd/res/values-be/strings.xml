@@ -943,7 +943,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="default_buttons_save">Захаваць</string>
 	<string name="menu_save_directions">Захаваць напрамкі</string>
 	<string name="local_index_upload_gpx_description">Заладаваць файлы GPX у суполку OSM. Яны будуць выкарыстаныя для паляпшэньня мапы.</string>
-	<string name="local_index_items_uploaded">%1$d з %2$d рэчаў пасьпяхова заладаваныя.</string>
+	<string name="local_index_items_uploaded">%1$d з %2$d аб\'ектаў пасьпяхова адасланыя.</string>
 	<string name="local_index_mi_upload_gpx">Даслаць у OSM</string>
 	<string name="show_more_map_detail">Паказаць больш дэталей мапы</string>
 	<string name="show_more_map_detail_descr">Паказаць некаторыя дэталі вэктарнай мапы (дарогі й іншыя) на меншым маштабе</string>
@@ -963,11 +963,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="local_index_gpx_info_elevation">\nСярэдняя вышыня: %1$s\nМінімальная вышыня: %2$s\nМаксімальная вышыня: %3$s\nЎзыходжанні: %4$s\nСпускі: %5$s</string>
 	<string name="local_index_gpx_info">Шляхоў: %1$d\nУсяго кропак: %2$d\nПазначана кропак: %3$d\nАгульная даўжыня: %4$s\nПачатак: %5$tF,  %5$tR\nКанец: %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Выданьне</string>
-	<string name="local_index_items_backuped">%1$d з %2$d рэчаў пасьпяхова дэактываваныя.</string>
-	<string name="local_index_items_deleted">%1$d з %2$d рэчаў пасьпяхова выдаленыя.</string>
-	<string name="local_index_items_restored">%1$d з %2$d рэчаў пасьпяхова актываваныя.</string>
-	<string name="local_index_no_items_to_do">Няма рэчаў да %1$s</string>
-	<string name="local_index_action_do">Вы каля %1$s %2$s рэчаў. Працягнуць ?</string>
+	<string name="local_index_items_backuped">%1$d з %2$d аб\'ектаў пасьпяхова дэактываваныя.</string>
+	<string name="local_index_items_deleted">%1$d з %2$d аб\'ектаў пасьпяхова выдаленыя.</string>
+	<string name="local_index_items_restored">%1$d з %2$d аб\'ектаў пасьпяхова актываваныя.</string>
+	<string name="local_index_no_items_to_do">Няма аб\'ектаў да %1$s</string>
+	<string name="local_index_action_do">Вы зьбіраецеся %1$s %2$s аб\'ектаў. Працягнуць?</string>
 	<string name="local_index_descr_title">Кіраваньне зьвесткамі</string>
 	<string name="local_index_mi_restore">Актываваць</string>
 	<string name="local_index_mi_backup">Дэактываваць</string>
