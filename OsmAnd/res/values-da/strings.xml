@@ -33,7 +33,7 @@
     <string name="recording_context_menu_delete">Slet optagelse</string>
     <string name="recording_context_menu_play">Afspil</string>
     <string name="recording_description">Optagelse %1$s %2$s af %3$s</string>
-    <string name="recording_default_name">optagelse</string>
+    <string name="recording_default_name">optager</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
@@ -1887,7 +1887,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="gpx_info_maximum_speed">Maksimal hastighed: %1$s </string>
 	<string name="gpx_info_avg_altitude">Gennemsnitlig højde: %1$s</string>
 	<string name="gpx_info_diff_altitude">Højdeforskel: %1$s</string>
-	<string name="gpx_info_asc_altitude">Stigninger: %1$s</string>
+	<string name="gpx_info_asc_altitude">Højdestigninger: %1$s</string>
     <string name="gpx_timespan">Periode: %1$s</string>
 	<string name="gpx_timemoving">Tid på at flytte: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
@@ -1898,5 +1898,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="gpx_selection_points">%1$s\n Punkter</string>
     <string name="gpx_selection_track">%1$s\n Spor %2$s</string>
     <string name="gpx_available_current_track">Aktuel optagelse spor</string>
-    <string name="gpx_info_subtracks">Delspor: %1$s </string>
+    <string name="gpx_info_subtracks">Underspor: %1$s </string>
 	</resources>
