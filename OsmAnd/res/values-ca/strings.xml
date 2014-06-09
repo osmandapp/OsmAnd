@@ -879,7 +879,7 @@
     <string name="add_as_last_destination_point">Afegeix punt intermedi al final</string>
     <string name="add_as_first_destination_point">Afegeix punt intermedi al principi</string>
     <string name="replace_destination_point">Substitueix el punt de destinació</string>
-    <string name="new_destination_point_dialog">Ja teniu un punt de destinació definit.</string>
+    <string name="new_destination_point_dialog">Ja teniu definit el punt de destinació.</string>
     <string name="target_point">Punt objectiu %1$s</string>
     <string name="target_points">Objectius</string>
     <string name="intermediate_point_too_far">El punt intermedi %1$s és massa lluny de la carretera més propera.</string>
@@ -1053,7 +1053,7 @@
     <string name="recording_description">Enregistrament %1$s %2$s a %3$s</string>
     <string name="layer_recordings">Capa d\'enregistraments</string>
     <string name="recording_can_not_be_played">No es pot reproduir l\'enregistrament</string>
-    <string name="av_control_stop">atura</string>
+    <string name="av_control_stop">Atura</string>
     <string name="srtm_paid_version_msg">Considereu comprar el connector de les línies de nivell al Market per ajudar al desenvolupament futur.</string>
     <string name="srtm_paid_version_title">Connector de corbes de nivell</string>
     <string name="av_video_format">Format de sortida de vídeo</string>
@@ -1070,7 +1070,7 @@
 		\n\t* Opció \'Vista turística\'amb més detalls al mapa, nous estils de carretera, més contrast, i l\'opció per senderisme indicant el grau de dificultat SAC
 		\n\t* Correcció d\'altitud GPS basada en EGM96
     </string>
-    <string name="av_control_start">engega</string>
+    <string name="av_control_start">Comença</string>
     <string name="osmand_srtm_short_description_80_chars">Connector de l\'OsmAnd per a corbes de nivell fora de línia</string>
     
     
@@ -1160,7 +1160,7 @@
 	<string name="background_service_wait_int_descr">Estableix el temps màxim d\'espera per a cada correcció de la posició en segon pla</string>
 	<string name="background_service_wait_int">Espera màxima per corregir</string>
 	<string name="service_stop_background_service">Desactiva el servei de navegació en segon pla</string>
-	<string name="dist_control_start">Inicia</string>
+	<string name="dist_control_start">Inici</string>
     <string name="local_indexes_cat_av">Dades d\'àudio/vídeo</string>
     <string name="stop_routing_confirm">Esteu segurs de què voleu parar la navegació?</string>
     <string name="clear_dest_confirm">Esteu segurs de què voleu eliminar la vostra destinació?</string>
@@ -1205,7 +1205,7 @@
     <string name="wait_current_task_finished">Espereu fins que finalitzi la tasca actual</string>
     <string name="use_kalman_filter_compass_descr">Usa el filtre Kalman per evitar interferències a la brúixola</string>
     <string name="use_kalman_filter_compass">Usa el filtre Kalman</string>
-    <string name="access_mark_final_location_first">Mode accessibilitat: seleccioneu primer la destinació</string> 
+    <string name="access_mark_final_location_first">Mode d'accessibilitat: seleccioneu primer la destinació</string> 
     <string name="use_magnetic_sensor_descr">Podeu usar el sensor magnètic per determinar el valor la brúixola en comptes del sensor d\'orientació</string>
     <string name="use_magnetic_sensor">Usa el sensor magnètic</string>
     <string name="other_location">Una altra</string>
