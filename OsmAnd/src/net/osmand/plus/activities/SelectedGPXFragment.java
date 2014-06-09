@@ -214,6 +214,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		private ExpandableListView expandableListView;
 		private boolean manualScroll;
 		private int maxNumberOfSections = 1;
+		private double positionsInGroup;
 		
 		public SelectedGPXAdapter(ExpandableListView lv) {
 			this.expandableListView = lv;
@@ -239,7 +240,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	        } else {            
 //	            return expandableListView.getFlatListPosition(
 //	                       ExpandableListView.getPackedPositionForGroup(section));
-	        	return section * maxNumberOfSections;
+	        	return (int) (section * positionsInGroup);
 	        }
 	    }
 
@@ -249,7 +250,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	        // Get the packed position of the provided flat one and find the corresponding group
 //	        return ExpandableListView.getPackedPositionChild(expandableListView
 //	                .getExpandableListPosition(position));
-	    	return position / maxNumberOfSections;
+	    	return Math.min(maxNumberOfSections - 1, (int) (position / positionsInGroup));
 	    }
 		@Override
 		public Object[] getSections() {
@@ -260,6 +261,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				}
 			}
 			maxNumberOfSections = Math.max(1, Math.min(25, total));
+			positionsInGroup = ((double)total) / maxNumberOfSections;
 			String[] ar = new String[maxNumberOfSections];
 			for(int i = 0; i < ar.length; i++) {
 				ar[i] = ((i + 1) * 100 / maxNumberOfSections) + "%";
