@@ -86,7 +86,7 @@
   <string name="local_index_items_restored">%1$d z %2$d przywrócono.</string>
   <string name="local_index_no_items_to_do">Brak elementów %1$s</string>
   <string name="local_index_action_do">Zamierzasz %1$s %2$s elementów. Kontynuować?</string>
-  <string name="local_index_descr_title">Zarządzanie danymi</string>
+  <string name="local_index_descr_title">Zarządzanie plikami map</string>
   <string name="local_index_mi_restore">Przywróć</string>
   <string name="local_index_mi_backup">Zarchiwizuj</string>
   <string name="local_index_mi_delete">Skasuj</string>
@@ -124,7 +124,7 @@
   <string name="gpx_option_destination_point">Użyj bieżącego celu</string>
   <string name="tip_rotation_switching">Orientacja mapy</string>
   
-  <string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz pobrać nową w Ustawieniach lub przełączyć się na mapy online.</string>
+  <string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz pobrać nową w Ustawieniach (Zarządzanie plikami map) lub przełączyć się na mapy online (włącz plugin map online).</string>
   <string name="switch_to_vector_map_to_see">Dla tej lokalizacji dostępna jest wektorowa mapa offline. \n\t\n\tAby użyć wybierz \'Menu\' → \'Warstwy mapy\' → \'Źródło mapy…\' → \'Wektorowe mapy offline\'.</string>
   <string name="binary_map_download_success">Pobieranie zakończone.
 		\n\t\n\tAby użyć aktywuj \'Menu\' -&gt; \'Warstwy mapy\' -&gt; \'Źródło mapy…\' -&gt; \'Wektorowe mapy offline\'.
@@ -152,8 +152,8 @@
   <string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
   <string name="install_more">Zainstaluj więcej…</string>
   <string name="tip_update_index">Aktualizacja map offline</string>
-  <string name="tip_update_index_t">Posiadanie aktualnych map to podstawa dla wyszukiwania adresów POI oraz dla nawigacji offline. OsmAnd zapewnia menedżer danych, który może sprawdzić dostępne aktualizacje (oraz inne pliki) oraz aby pobrać dostępne aktualizacje.
-		\n\nAby pobrać aktualizacje przejdź do \'Ustawienia\' -&gt; \'Zarządzanie danymi\' -&gt; \'Pobierz\'.
+  <string name="tip_update_index_t">Posiadanie aktualnych map to podstawa dla wyszukiwania adresów POI oraz dla nawigacji offline. OsmAnd zapewnia menedżer plików map, który może sprawdzić dostępne aktualizacje oraz aby pobrać dostępne aktualizacje.
+		\n\nAby pobrać aktualizacje przejdź do \'Ustawienia\' -&gt; \'Zarządzanie plikami map\' -&gt; \'Pobierz\'.
 		\n\nPo pobraniu listy wybierz pobierz lub zaktualizuj plik.
 		\n\nPo tym jak zostanie pobrana z Internetu lista regionów, możesz wybrać opcję \'Menu\' -&gt; \'Filtruj pobrane\', aby wybrać uaktualnienia jedynie dla danych znajdujących się już na urządzeniu.
 		\n\n\t* Wpisy koloru zielonego oznaczają dane identyczne z tymi na serwerze
@@ -171,7 +171,7 @@
   <string name="tip_favorites">Ulubione punkty</string>
   <string name="tip_favorites_t">Często używane punkty mogą zostać zapisane jako Ulubione.
 		\n\nAby zapisać punkt jako ulubiony przejdź do menu kontekstowego, wybierz \'Opcje punktu\' -&gt; \'Dodaj do ulubionych\' i wprowadź jego nazwę.
-		\n\nPo zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Ulubione\'. Dłuższe naciśnięcie pozycji w \'Ulubionych\' pokaże opcje dotyczące tego punktu.
+		\n\nPo zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Moje miejsca\'. Dłuższe naciśnięcie pozycji w \'Ulubionych\' pokaże opcje dotyczące tego punktu.
 		\n\nAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Warstwy mapy\'.
 	</string>
   <string name="error_doing_search">Wystąpił błąd podczas wyszukiwania offline</string>
@@ -300,8 +300,8 @@
   <string name="reload">Odśwież</string>
   <string name="general_settings_descr">Konfiguruj wyświetlanie i ogólne ustawienia dotyczące aplikacji</string>
   <string name="general_settings">Główne</string>
-  <string name="index_settings_descr">Pobieraj mapy i zarządzaj danymi offline przechowywanymi na urządzeniu</string>
-  <string name="index_settings">Zarządzanie danymi</string>
+  <string name="index_settings_descr">Pobieraj i zarządzaj plikami mapami trybu offline przechowywanymi na urządzeniu</string>
+  <string name="index_settings">Zarządzanie plikami map</string>
   <string name="osmand_service">Tryb uśpienia</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
   <string name="fast_route_mode">Najszybsza trasa</string>
@@ -420,7 +420,7 @@
   <string name="route_head">Prosto</string>
   <string name="first_time_continue">Kontynuuj</string>
   <string name="first_time_download">Pobierz region</string>
-  <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w Ustawienia → Zarządzaniu danymi. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i inne obiekty.</string>
+  <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w \'Ustawienia\' → \'Zarządzaniu plikami map\'. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i inne obiekty.</string>
   <string name="search_poi_location">Wyszukiwanie sygnału…</string>
   <string name="search_near_map">Szukaj w pobliżu ostatniej pozycji</string>
   <string name="search_nearby">Szukaj w pobliżu</string>
@@ -589,7 +589,7 @@
   <string name="exit_Button">Wyjście</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Ustawienia</string>
-  <string name="favorites_Button">Ulubione</string>
+  <string name="favorites_Button">Moje Miejsca</string>
   <string name="search_button">Szukaj</string>
   <string name="search_activity">Szukaj</string>
   <string name="searchpoi_activity">Wybierz POI</string>
@@ -683,8 +683,7 @@
   <string name="offline_navigation_not_available">Nawigacja offline w OsmAnd jest tymczasowo niedostępna.</string>
   <string name="left_side_navigation">Ruch lewostronny</string>
   <string name="left_side_navigation_descr">Wybierz dla krajów z ruchem lewostronnym</string>
-  <string name="download_link_and_local_description">Kliknij tutaj, aby pobrać lub zaktualizować dane offline.
-\nKliknij istniejący element, aby zobaczyć więcej szczegółów. Naciśnij i przytrzymaj, aby go wyłączyć lub usunąć. Obecne dane na urządzeniu (%1$s dostępne):</string>
+  <string name="download_link_and_local_description">Kliknij tutaj, aby pobrać lub zaktualizować pliki map w trybu offline. \nKliknij istniejący element, aby zobaczyć więcej szczegółów. Naciśnij i przytrzymaj, aby go wyłączyć lub usunąć. Obecne dane na urządzeniu (%1$s dostępne):</string>
   <string name="unknown_from_location">Punkt początkowy nie jest jeszcze wyznaczony</string>
   <string name="confirm_interrupt_download">Czy chcesz przerwać pobieranie pliku?</string>
   <string name="basemap_was_selected_to_download">Mapa bazowa jest wymagana do prawidłowego funkcjonowania aplikacji i została wybrana do pobrania.</string>
@@ -1134,12 +1133,12 @@
 	<string name="monitoring_control_start">start</string>
     <string name="tip_altitude_offset_t">Większość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.
 		\n\nLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96.
-		\n\nOsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96. W celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez Zarządzanie danymi (oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC .)
+		\n\nOsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96. W celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez \'Ustawienia\'  → \'Zarządzanie plikami map\'. (Oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC .)
 	</string>
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
-    <string name="srtm_plugin_description">Wtyczka ta pozwala na pobranie poziomic (\'Ustawienia\' → \'Zarządzanie danymi\' -&gt; \'Pobierz\' -&gt; Wskaż określony typ mapy).</string>
+    <string name="srtm_plugin_description">Wtyczka ta pozwala na pobranie poziomic (\'Ustawienia\' → \'Zarządzanie plikami map\' -&gt; \'Pobierz\' -&gt; Wskaż określony typ mapy).</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
     
@@ -1727,10 +1726,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="share_fav">Udostępnij</string>
 	<string name="share_fav_subject">Ulubione miejsca udostępnione przez OsmAnd</string>
 	<string name="use_points_as_intermediates">Oblicz trasę między punktami</string>
-    <string name="tip_recent_changes_1_8_alpha">Zmiany w wersji 1.8:
-        * Obliczanie trasy pomiędzy punktami w zapisanym śladzie GPX
-        * Zmieniono wygląd krajów do pobrania (wsparcie wyszukiwania nazw lokalnych)
-	* Importowanie GPX/KML (zamiana z KML na GPX)
+    <string name="tip_recent_changes_1_8_alpha">Zmiany w wersji 1.8:↵
+        * Obliczanie trasy pomiędzy punktami w zapisanym śladzie GPX↵
+        * Zmieniono wygląd krajów do pobrania (wsparcie wyszukiwania nazw lokalnych)↵
+	* Importowanie GPX/KML (zamiana z KML na GPX)↵
+	* Ścieżki GPX zostały przeniesione do \'Moich Danych\'↵
+	* Możesz podzielić ścieżkę GPX na odcinki i sprawdzić różnicę wysokości/prędkości↵
+	* Automatyczny start nnawigacji z opóxnieniem↵
     </string>
     <string name="osmo_auto_send_locations_descr">Po uruchomieniu aplikacji automatycznie rozpocznij sesję trackera i przesyłaj pozycję</string>
     <string name="osmo_auto_send_locations">Automatycznie uruchom sesję trackera</string>
@@ -1814,13 +1816,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="selected_track">Wybrane trasy</string>
     <string name="my_tracks">Wszystkie trasy</string>
     <string name="my_favorites">Moje Ulubione</string>
-    <string name="my_data_Button">Moje dane</string>
-    <string name="my_data_activity">Moje dane</string>
+    <string name="my_data_Button">Moje Miejsca</string>
+    <string name="my_data_activity">Moje Miejsca</string>
     <string name="gpx_info_subtracks">Podścieżki: %1$s </string>
 	<string name="gpx_info_waypoints">Punkty trasy: %1$s </string>
 	<string name="gpx_info_distance">Odległość: %1$s (%2$s punktów) </string>
-	<string name="gpx_info_start_time">Czas rozpoczęcia: %1$tF, %1$tR </string>
-	<string name="gpx_info_end_time">Czas zakończenia: %1$tF, %1$tR </string>
+	<string name="gpx_info_start_time">Czas rozpoczęcia: %1$tF, %1$tT </string>
+	<string name="gpx_info_end_time">Czas zakończenia: %1$tF, %1$tT </string>
 	<string name="gpx_info_average_speed">Prędkość średnia: %1$s </string>
 	<string name="gpx_info_maximum_speed">Prędkość maksymalna: %1$s </string>
 	<string name="gpx_info_avg_altitude">Średnia wysokość: %1$s</string>
@@ -1833,8 +1835,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="gpx_selection_point">Punkt %1$s</string>
     <string name="gpx_selection_current_track">zapisywanie</string>
     <string name="gpx_selection_route_points">%1$s \n Punkty trasy %2$s</string>
-    <string name="gpx_selection_points">%1$s\n Punkty</string>
-    <string name="gpx_selection_track">%1$s\n Trasa %2$s</string>
+    <string name="gpx_selection_points">%1$s \nPunkty</string>
+    <string name="gpx_selection_track">%1$s \nTrasa %2$s</string>
     <string name="gpx_available_current_track">Zapisywanie bieżącej trasy</string>
     <string name="selected_gpx_info_show">\n\nNaciśnij i przytrzymaj, aby zobaczyć na mapie</string>
     <string name="delay_navigation_start">Rozpocznij nawigację z opóźnieniem</string>
