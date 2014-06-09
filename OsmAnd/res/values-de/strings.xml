@@ -570,7 +570,7 @@
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">Sie können jeden beliebigen Ort als Favoriten speichern.
 		\n\nEinen Favoriten erstellen Sie im \'Verwende Position\'-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar.
-		\n\nGespeicherte Favoriten sind leicht zugänglich via \'Menü\' →  \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
+		\n\nGespeicherte Favoriten sind leicht zugänglich via \'Menü\' →  \'Meine Orte\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
 		\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen.
 	</string>
 	<string name="create_poi_link_to_osm_doc"> <u>Online OSM</u> Klassifizierung mit Bildern"</string>
@@ -967,7 +967,7 @@
 	<string name="exit_Button">Beenden</string>
 	<string name="map_Button">Karte</string>
 	<string name="settings_Button">Einstellungen</string>
-	<string name="favorites_Button">Favoriten</string>
+	<string name="favorites_Button">Meine Orte</string>
 	<string name="search_button">Suche</string>
 	<string name="search_activity">Suche</string>
 	<string name="searchpoi_activity">POI wählen</string>
@@ -1830,8 +1830,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="selected_track">Track</string>
     <string name="my_tracks">Alle Tracks</string>
     <string name="my_favorites">Meine Favoriten</string>
-    <string name="my_data_Button">Meine Daten</string>
-    <string name="my_data_activity">Meine Daten</string>
+    <string name="my_data_Button">Meine Orte</string>
+    <string name="my_data_activity">Meine Orte</string>
     <string name="osmo_user_joined">Nutzer %1$s hat die Gruppe %2$s betreten</string>
     <string name="osmo_user_left">Nutzer %1$s hat die Gruppe %2$s verlassen</string>
     <string name="osmo_show_group_notifications">Gruppenbenachrichtigungen anzeigen</string>
