@@ -300,7 +300,7 @@
   <string name="reload">Odśwież</string>
   <string name="general_settings_descr">Konfiguruj wyświetlanie i ogólne ustawienia dotyczące aplikacji</string>
   <string name="general_settings">Główne</string>
-  <string name="index_settings_descr">Pobieraj i zarządzaj plikami mapami trybu offline przechowywanymi na urządzeniu</string>
+  <string name="index_settings_descr">Pobieraj i zarządzaj plikami map przechowywanymi na urządzeniu</string>
   <string name="index_settings">Zarządzanie plikami map</string>
   <string name="osmand_service">Tryb uśpienia</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
