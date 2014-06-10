@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -1477,7 +1478,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_auto_send_locations">Starta trackersessionen automatiskt</string>
     <string name="osmo_tracker_id">Personligt tracker-id</string>
     <string name="osmo_tracker_id_descr">Klicka för att visa eller dela ut tracker-id.
-    Med tracker-id kommer anslutna enheter att kunna följa denna enhets alla rörelser! För att koppla ifrån, välj alternativet Generera om</string>
+    Med tracker-id kommer anslutna enheter att kunna följa denna enhets alla rörelser! För att koppla ifrån, välj alternativet Återskapa …</string>
     <string name="osmo_session_token">Sessionstoken: %1$s</string>
     <string name="osmo_auth_pending">Väntar på autentisering…</string>
     <string name="osmo_locations_sent">Platser skickade %1$d (i buffer %2$d) </string>
@@ -1552,4 +1553,31 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="my_data_Button">Mina data</string>
     <string name="my_data_activity">Mina data</string>
     <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
+    <string name="loading_smth">Laddar %1$s …</string>
+    <string name="map_widget_plain_time">Aktuell tid</string>
+    <string name="gpx_wpt">Waypoint</string>
+    <string name="selected_gpx_info_show">\n\nTryck och håll för att se på karta</string>
+    <string name="delay_navigation_start">Start navigering med fördröjning</string>
+    <string name="selected">valda</string>
+    <string name="gpx_split_interval">Välj split-intervall</string>
+    <string name="gpx_info_subtracks">Underspår: %1$s </string>
+	<string name="gpx_info_waypoints">Waypoints: %1$s </string>
+	<string name="gpx_info_distance">Avstånd: %1$s (%2$s punkter) </string>
+	<string name="gpx_info_start_time">Starttid: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">Sluttid: %1$tF,  %1$tT </string>
+	<string name="gpx_info_average_speed">Snittid: %1$s </string>
+	<string name="gpx_info_maximum_speed">Maxhastighet: %1$s </string>
+	<string name="gpx_info_avg_altitude">Snitthöjd: %1$s</string>
+	<string name="gpx_info_diff_altitude">Höjdskillnad: %1$s</string>
+	<string name="gpx_info_asc_altitude">Höjdstigningar: %1$s</string>
+    <string name="gpx_timespan">Tidsspann: %1$s</string>
+	<string name="gpx_timemoving">Tid i rörelse: %1$s</string>
+    <string name="gpx_selection_segment_title">Segment</string>
+    <string name="gpx_selection_number_of_points"> %1$s punkter</string>
+    <string name="gpx_selection_point">Punkt %1$s</string>
+    <string name="gpx_selection_current_track">spelar in</string>
+    <string name="gpx_selection_route_points">%1$s \nRuttpunkter %2$s</string>
+    <string name="gpx_selection_points">%1$s \nPunkter</string>
+    <string name="gpx_selection_track">%1$s \nSpår %2$s</string>
+    <string name="gpx_available_current_track">Aktuellt inspelningsspår</string>
     </resources>
