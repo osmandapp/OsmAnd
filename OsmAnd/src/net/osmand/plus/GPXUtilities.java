@@ -36,6 +36,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.content.Context;
+import android.graphics.Color;
 
 public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
@@ -53,6 +54,17 @@ public class GPXUtilities {
 				return Collections.emptyMap();
 			}
 			return extensions;
+		}
+		
+		public int getColor(int defColor) {
+			if(extensions != null && extensions.containsKey("color")) {
+				try {
+					return Color.parseColor(extensions.get("color").toUpperCase());
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				}
+			}
+			return defColor;
 		}
 
 		public Map<String, String> getExtensionsToWrite() {
@@ -78,6 +90,7 @@ public class GPXUtilities {
 
 		public WptPt() {
 		}
+		
 
 		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
 			this.lat = lat;

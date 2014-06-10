@@ -8,6 +8,7 @@ public class FavouritePoint implements Serializable {
 	private String category = "";
 	private double latitude;
 	private double longitude;
+	private int color;
 	
 
 	public FavouritePoint(){
@@ -18,6 +19,14 @@ public class FavouritePoint implements Serializable {
 		this.longitude = longitude;
 		this.category = category;
 		this.name = name;
+	}
+	
+	public int getColor() {
+		return color;
+	}
+	
+	public void setColor(int color) {
+		this.color = color;
 	}
 
 	public double getLatitude() {

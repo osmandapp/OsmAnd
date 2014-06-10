@@ -742,7 +742,7 @@
 <string name="poi_edit_title">Edita el PDI</string>
 <string name="poi_remove_title">Elimina el PDI</string>
 <string name="poi_create_title">Crea un PDI</string>
-<string name="first_time_msg">Gràcies per utilitzar l\'OsmAnd. Per gaudir de més característiques d\'aquesta aplicació necessiteu baixar-vos informació regional fora de línia a través de «Configuració» → «Gestió d'arxius de mapes». Llavors podreu veure mapes, cercar adreces, buscar els PDI i trobar transports públics.</string>
+<string name="first_time_msg">Gràcies per utilitzar l\'OsmAnd. Per gaudir de més característiques d\'aquesta aplicació necessiteu baixar-vos informació regional fora de línia a través de «Configuració» → «Gestió d\'arxius de mapes». Llavors podreu veure mapes, cercar adreces, buscar els PDI i trobar transports públics.</string>
 <string name="basemap_was_selected_to_download">Es requereix un mapa base pel correcte funcionament de l\'aplicació i s\'ha seleccionat per baixar-lo.</string>
 <string name="osmand_background_plugin_description">Mostra els paràmetres per habilitar el seguiment i la navegació en segon pla (pantalla apagada) mitjançant l\'activació periòdica del dispositiu GPS.</string>
 <string name="accessibility_preferences_descr">Preferències d\'accessibilitat</string>
@@ -1551,7 +1551,7 @@
 	<string name="interrupt_music">Pausa la música</string>
 	<string name="tip_altitude_offset_t">La majoria de dispositius GPS informen les mesures d\'altitud en el sistema de referència WGS84, basat en l\'el·lipsoide, que requereix una correcció depenent de la posició per la conversió a sistemes utilitzats localment.
 		\n\nLa referència EGM96 (geoide) es una aproximació millor a aquests sistemes locals.
-		\n\nOsmAnd indicarà l\'altitud de les teves ubicacions en el sistema EGM96 quan descarreguis el arxiu \'Correcció Mundial d\'Altituds\' (WW15MGH.DAC) mitjançant \'Opcions\' → \'Gestió d'arxius de mapes\'. (L\'original és a http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
+		\n\nOsmAnd indicarà l\'altitud de les teves ubicacions en el sistema EGM96 quan descarreguis el arxiu \'Correcció Mundial d\'Altituds\' (WW15MGH.DAC) mitjançant \'Opcions\' → \'Gestió d\'arxius de mapes\'. (L\'original és a http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
     <string name="osmo_settings_uuid">Identificació única de dispositiu</string>
     <string name="osmo_settings_descr">Configurar paràmetres de monitorització i fixar el canal de seguiment personal</string>
@@ -1735,8 +1735,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	* Calcula la ruta entre els punts de la traça GPX
 	* Canviat llistat de països per descarregar (suporta la cerca amb denominacions locals)
 	* Admet importació GPX/KML (conversió de KML a GPX)
-	* Les traces GPX s'han canviat a \'Les meves dades'\
-	* Pots dividir la traça GPX segons distància i comprovar la diferència d'alçada/velocitat
+	* Les traces GPX s\'han canviat a \'Les meves dades\'
+	* Pots dividir la traça GPX segons distància i comprovar la diferència d\'alçada/velocitat
 	* Inici automàtic programable de navegació
     </string>
     <string name="osmo_auto_send_locations_descr">Inici automàtic del registre de la traça i del enviament de les posicions tot just iniciar l\'aplicació</string>
@@ -1836,7 +1836,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="delay_navigation_start">Iniciar la navegació amb retard</string>
     <string name="selected">seleccionat</string>
     <string name="gpx_split_interval">Seleccioni interval de separació</string>
-    <string name="gpx_info_diff_altitude">Diferència d'altitud: %1$s</string>
+    <string name="gpx_info_diff_altitude">Diferència d\'altitud: %1$s</string>
 	<string name="gpx_info_asc_altitude">Desnivell positiu: %1$s</string>
     <string name="gpx_timespan">Lapse de temps: %1$s</string>
 	<string name="gpx_timemoving">Temps en moviment: %1$s</string>

@@ -28,6 +28,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -437,6 +438,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 							name = p.name.substring(0, c);
 						}
 						FavouritePoint fp = new FavouritePoint(p.lat, p.lon, name, categoryName);
+						fp.setColor(p.getColor(0));
 						if (helper.addFavourite(fp)) {
 							publishProgress(fp);
 						}
@@ -696,7 +698,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
 			row.setTag(model);
-			icon.setImageResource(R.drawable.list_favorite);
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), 0));
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));

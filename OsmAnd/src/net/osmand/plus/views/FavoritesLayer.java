@@ -12,12 +12,11 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -30,7 +29,7 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	private OsmandMapTileView view;
 	private Paint paint;
 	private FavouritesDbHelper favorites;
-	private Bitmap favoriteIcon;
+//	private Bitmap d;
 	
 	
 	public FavoritesLayer(){
@@ -47,7 +46,7 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		
 		favorites = view.getApplication().getFavorites();
 		
-		favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
+//		favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
 		
 	}
 	
@@ -77,12 +76,15 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 			// request to load
 			final QuadRect latLonBounds = tileBox.getLatLonBounds();
 			for (FavouritePoint o : favorites.getFavouritePoints()) {
+				
 				if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left
 						&& o.getLongitude() <= latLonBounds.right ) {
 					int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 					int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
-							y - favoriteIcon.getHeight(), paint);
+					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor());
+					fid.drawBitmapInCenter(canvas, x, y);
+//					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
+//							y - favoriteIcon.getHeight(), paint);
 				}
 			}
 		}

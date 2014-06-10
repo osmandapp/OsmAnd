@@ -169,7 +169,7 @@ public class OsmandApplication extends Application {
 		
 		
 	}
-
+	
 	@Override
 	public void onTerminate() {
 		super.onTerminate();

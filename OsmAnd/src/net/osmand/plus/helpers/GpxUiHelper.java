@@ -42,7 +42,7 @@ import android.widget.Toast;
 public class GpxUiHelper {
 
 	public static String getDescription(OsmandApplication app, GPXFile result, File f, boolean html) {
-		GPXTrackAnalysis analysis = result.getAnalysis(f.lastModified());
+		GPXTrackAnalysis analysis = result.getAnalysis(f == null ? 0 : f.lastModified());
 		return getDescription(app, analysis, html);
 	}
 	

@@ -14,6 +14,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -411,7 +412,14 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 					icon.setImageResource(!lightContent ? R.drawable.ic_action_markers_dark
 							: R.drawable.ic_action_markers_light);
 				} else {
-					icon.setImageResource(R.drawable.list_favorite);
+					int groupColor = child.group.getColor();
+					if(child.locationStart != null) {
+						groupColor = child.locationStart.getColor(groupColor);
+					}
+					if(groupColor == 0) {
+						groupColor = getResources().getColor(R.color.gpx_track);
+					}
+					icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),  groupColor));
 				}
 			}
 			row.setTag(child);

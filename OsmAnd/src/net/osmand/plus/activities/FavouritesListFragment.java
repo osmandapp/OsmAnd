@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.Intent;
@@ -175,7 +176,7 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 			TextView label = (TextView) row.findViewById(R.id.favourite_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = getItem(position);
-			icon.setImageResource(R.drawable.list_favorite);
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, 0));
 			String distance = "";
 			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), location.getLatitude(), location

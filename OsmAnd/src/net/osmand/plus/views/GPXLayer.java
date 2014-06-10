@@ -12,10 +12,9 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
@@ -41,7 +40,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private GpxSelectionHelper selectedGpxHelper;
 
 	private Paint paintBmp;
-	private Bitmap favoriteIcon;
+//	private Drawable favoriteIcon;
 	
 	
 	private void initUI() {
@@ -58,7 +57,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintBmp.setAntiAlias(true);
 		paintBmp.setFilterBitmap(true);
 		paintBmp.setDither(true);
-		favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
+		//favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
 	}
 
 	@Override
@@ -103,14 +102,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				final QuadRect latLonBounds = tileBox.getLatLonBounds();
 				for (SelectedGpxFile g : selectedGPXFiles) {
 					List<WptPt> pts = g.getGpxFile().points;
-					// int fcolor = g.getColor() == 0 ? clr : g.getColor();
+					int fcolor = g.getColor() == 0 ? clr : g.getColor();
+					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), fcolor);
 					for (WptPt o : pts) {
 						if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
 								&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right) {
 							int x = (int) tileBox.getPixXFromLatLon(o.lat, o.lon);
 							int y = (int) tileBox.getPixYFromLatLon(o.lat, o.lon);
-							canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2,
-									y - favoriteIcon.getHeight(), paint);
+							fid.drawBitmapInCenter(canvas, x, y);
+//							canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2,
+//									y - favoriteIcon.getHeight(), paint);
 						}
 					}
 				}

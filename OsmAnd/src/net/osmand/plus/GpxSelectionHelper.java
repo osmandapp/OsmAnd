@@ -89,6 +89,7 @@ public class GpxSelectionHelper {
 			int k = 1;
 			for (Track t : g.tracks) {
 				GpxDisplayGroup group = new GpxDisplayGroup(g);
+				group.color = t.getColor(g.getColor(0));
 				group.setType(GpxDisplayItemType.TRACK_SEGMENT);
 				group.setTrack(t);
 				String ks = (k++) + "";
@@ -407,6 +408,7 @@ public class GpxSelectionHelper {
 		private Track track;
 		private double splitDistance = -1;
 		private int splitTime = -1;
+		private int color;
 		
 		public GpxDisplayGroup(GPXFile gpx) {
 			this.gpx = gpx;
@@ -497,6 +499,10 @@ public class GpxSelectionHelper {
 			splitDistance = -1;
 			splitTime = seconds;
 			processGroupTrack(app, this	);			
+		}
+
+		public int getColor() {
+			return color;
 		}
 	}
 	

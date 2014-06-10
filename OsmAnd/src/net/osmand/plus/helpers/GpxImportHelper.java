@@ -327,7 +327,8 @@ public class GpxImportHelper {
 
 		for (GPXUtilities.WptPt p : wptPts) {
 			if (p.category != null) {
-				favourites.add(new FavouritePoint(p.lat, p.lon, p.name, p.category));
+				final FavouritePoint fp = new FavouritePoint(p.lat, p.lon, p.name, p.category);
+				favourites.add(fp);
 			} else if (p.name != null) {
 				int c;
 				if ((c = p.name.lastIndexOf('_')) != -1) {
