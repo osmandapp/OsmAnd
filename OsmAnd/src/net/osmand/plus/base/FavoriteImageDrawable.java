@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -37,7 +38,7 @@ public class FavoriteImageDrawable extends Drawable {
 		mgr.getDefaultDisplay().getMetrics(dm);
 		density = dm.density;
 		drawable = getResources().getDrawable(R.drawable.ic_action_fav_dark);
-		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_fav_dark);
+		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_fav_light);
 		bmpSize = bmp.getWidth();
 		paintOuter = new Paint();
 		paintOuter.setColor(0x88555555);
@@ -49,7 +50,7 @@ public class FavoriteImageDrawable extends Drawable {
 		paintBmp.setDither(true);
 		paintInnerCircle = new Paint();
 		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
-		paintInnerCircle.setColor(color == 0 ? getResources().getColor(R.color.color_distance) : color);
+		paintInnerCircle.setColor(color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_distance) : color);
 		paintInnerCircle.setAntiAlias(true);
 	}
 	
