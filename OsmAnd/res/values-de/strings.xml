@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -1759,6 +1760,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	* Berechnen von Routen zwischen Punkten eines GPX-Tracks möglich
 	* Änderung der Darstellung der herunterladbaren Länder (Unterstützung der Suche mittels lokaler Namen)
 	* Unterstützung von GPX/KML-Import (Umwandeln von KML zu GPX)
+	* Automatischer Navigationsstart nach einer Verzögerung
     </string>
     <string name="osmo_auto_send_locations_descr">Aufzeichnung automatisch starten und Standorte nach dem Starten der Anwendung senden</string>
     <string name="osmo_auto_send_locations">Aufzeichnung automatisch starten</string>
@@ -1826,7 +1828,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	
     <string name="osmo_follow">Folgen</string>
     <string name="gpx_file_is_empty">GPX-Track ist leer</string>
-    <string name="selected_track">Track</string>
+    <string name="selected_track">Ausgewählte Tracks</string>
     <string name="my_tracks">Alle Tracks</string>
     <string name="my_favorites">Meine Favoriten</string>
     <string name="my_data_Button">Meine Orte</string>
@@ -1838,8 +1840,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_tracker_id_share">Um eine Verbindung zum Gerät %2$s herzustellen, bitte den Link %3$s anklicken oder die Tracker-ID (%1$s) angeben</string>
     <string name="gpx_info_waypoints">Wegpunkte: %1$s </string>
 	<string name="gpx_info_distance">Entfernung: %1$s (%2$s Punkte) </string>
-	<string name="gpx_info_start_time">Startzeit: %1$tF, %1$tR </string>
-	<string name="gpx_info_end_time">Endzeit: %1$tF, %1$tR </string>
+	<string name="gpx_info_start_time">Startzeit: %1$tF, %1$tT </string>
+	<string name="gpx_info_end_time">Endzeit: %1$tF, %1$tT </string>
 	<string name="gpx_info_average_speed">Durchschnittsgeschwindigkeit: %1$s </string>
 	<string name="gpx_info_maximum_speed">Maximale Geschwindigkeit: %1$s </string>
 	<string name="gpx_info_avg_altitude">Durchschnittliche Höhe: %1$s</string>
@@ -1851,8 +1853,14 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="gpx_selection_number_of_points"> %1$s Punkte</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
     <string name="gpx_selection_current_track">Aufnahme</string>
-    <string name="gpx_selection_route_points">%1$s \n Routenpunkte %2$s</string>
-    <string name="gpx_selection_points">%1$s\n Punkte</string>
-    <string name="gpx_selection_track">%1$s\n Track %2$s</string>
+    <string name="gpx_selection_route_points">%1$s \nRoutenpunkte %2$s</string>
+    <string name="gpx_selection_points">%1$s \nPunkte</string>
+    <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
     <string name="gpx_available_current_track">Aktuell aufgenommener Track</string>
+    <string name="loading_smth">Lade %1$s …</string>
+    <string name="map_widget_plain_time">Aktuelle Zeit</string>
+    <string name="gpx_wpt">Wegpunkt</string>
+    <string name="selected_gpx_info_show">\n\nZur Darstellung auf der Karte Antippen und Halten</string>
+    <string name="delay_navigation_start">Navigation mit Verzögerung starten</string>
+    <string name="selected">ausgewählte</string>
     </resources>
