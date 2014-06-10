@@ -164,7 +164,7 @@
 <string name="edit_filter_create_message">S\'ha creat el filtre {0}</string>
 <string name="default_buttons_selectall">Selecciona-ho tot</string>
 <string name="email">correu electrònic</string>
-<string name="index_settings_descr">Baixeu, visualitzeu-ne els detalls i gestioneu mapes fora de línia</string>
+<string name="index_settings_descr">Baixeu i gestioneu mapes en desconnexió emmagatzemats al vostre dispositiu</string>
 <string name="osmand_extra_settings_description">Mostra els paràmetres per a una configuració avançada del mapa (per exemple augmentant-ne els detalls) i alguns d\'específics del dispositiu.</string>
 <string name="vector_maps_may_display_faster_on_some_devices">És probable que es mostrin els mapes de vectors més de pressa. Això pot no funcionar en alguns dispositius.</string>
 <string name="debugging_and_development">Desenvolupament de l\'OsmAnd</string>
@@ -187,7 +187,7 @@
 <string name="routing_settings">Navegació</string>
 <string name="routing_settings_descr">Especifiqueu les opcions de navegació</string>
 <string name="global_settings">Paràmetres globals</string>
-<string name="index_settings">Dades fora de línia (baixades)</string>
+<string name="index_settings">Gestionar arxius de mapes</string>
 <string name="general_settings">Paràmetres generals</string>
 <string name="general_settings_descr">Configureu els paràmetres globals</string>
 <string name="user_name">El vostre nom d\'usuari a OSM</string>
@@ -220,7 +220,7 @@
 <string name="osmand_parking_warning_text">Notificació que vau introduir a Calendari per treure el cotxe. Es mantindrà fins que l\'elimineu manualment.</string>
 <string name="route_kl">Mantingueu-vos a l\'esquerra i continueu</string>
 <string name="route_kr">Mantingueu-vos a la dreta i continueu</string>
-<string name="download_link_and_local_description">Feu clic per baixar o actualitzar dades fora de línia.
+<string name="download_link_and_local_description">Feu clic per baixar o actualitzar fitxers de mapes en desconnexió.
 \nFeu clic en algun del ítems per veure\'n més detalls i mantingueu-lo premut per desactivar-lo o esborrar-lo. Dades que hi ha al dispositiu (%1$s lliures):</string>
 <string name="test_voice_prompts">Prova els indicadors de veu</string>
 <string name="support_new_features">Ajuda per a noves característiques</string>
@@ -282,7 +282,7 @@
 <string name="global_app_allocated_memory_descr">Memòria assignada %1$s MB (límit de l\'Android %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Memòria assignada</string>
 <string name="native_app_allocated_memory_descr">Memòria nativa total assignada a l\'aplicació %1$s MB (Dalvik %2$s MB, altres %3$s MB). Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</string>
-<string name="switch_to_raster_map_to_see">No s\'ha trobat cap mapa de vectors fora de línia per aquesta localització. Podeu baixar-ne un a Configuració (dades fora de línia) o canviar a mapes en línia.</string>
+<string name="switch_to_raster_map_to_see">No s\'ha trobat cap mapa de vectors en desconnexió per aquesta localització. Podeu baixar-ne un a Configuració (Gestió de fitxers de mapes) o canviar per utilitzar mapes en connexió (activar el connector de mapes en línia per fer-ho).</string>
 <string name="tip_recent_changes_0_7_2_t">"Canvis a la versió 0.7.2:
 \n\t- Renderitzaió nativa per tots els dispositius
 \n\t- Edició fora de línia dels PDI
@@ -310,7 +310,7 @@
 <string name="local_index_items_backuped">S\'ha desactivat amb èxit %1$d de %2$d ítem(s).</string>
 <string name="local_index_items_deleted">S\'ha suprimit amb èxit %1$d de %2$d ítem(s).</string>
 <string name="local_index_items_restored">S\'ha activat amb èxit %1$d de %2$d ítem(s).</string>
-<string name="local_index_descr_title">Gestor de dades fora de línia</string>
+<string name="local_index_descr_title">Gestor de fitxers de mapes</string>
 <string name="local_index_mi_restore">Activa</string>
 <string name="local_index_mi_backup">Desactiva</string>
 <string name="local_index_mi_delete">Suprimeix</string>
@@ -742,7 +742,7 @@
 <string name="poi_edit_title">Edita el PDI</string>
 <string name="poi_remove_title">Elimina el PDI</string>
 <string name="poi_create_title">Crea un PDI</string>
-<string name="first_time_msg">Gràcies per utilitzar l\'OsmAnd. Per gaudir de més característiques d\'aquesta aplicació necessiteu baixar-vos informació regional fora de línia a través de «Configuració» → «Dades fora de línia». Llavors podreu veure mapes, cercar adreces, buscar els PDI i trobar transports públics.</string>
+<string name="first_time_msg">Gràcies per utilitzar l\'OsmAnd. Per gaudir de més característiques d\'aquesta aplicació necessiteu baixar-vos informació regional fora de línia a través de «Configuració» → «Gestió d'arxius de mapes». Llavors podreu veure mapes, cercar adreces, buscar els PDI i trobar transports públics.</string>
 <string name="basemap_was_selected_to_download">Es requereix un mapa base pel correcte funcionament de l\'aplicació i s\'ha seleccionat per baixar-lo.</string>
 <string name="osmand_background_plugin_description">Mostra els paràmetres per habilitar el seguiment i la navegació en segon pla (pantalla apagada) mitjançant l\'activació periòdica del dispositiu GPS.</string>
 <string name="accessibility_preferences_descr">Preferències d\'accessibilitat</string>
@@ -893,8 +893,8 @@
     <string name="poi_filter_accomodation">Allotjament</string>
     <string name="poi_filter_sightseeing">Vistes panoràmiques</string>
     <string name="poi_filter_car_aid">Assistència a vehicles</string>
-	<string name="tip_update_index_t">És essencial tenir actualitzats els mapes locals per poder visualitzar-los, fer recerca d\'adreces/punts d\'interès i navegació quan no hi ha connexió. L\'OsmAnd conta amb un gestor de dades per baixar aquests mapes (i altres arxius de dades) i comprovar si hi ha actualitzacions disponibles.
-		\n\nPer baixar mapes aneu a \'Configuració\' → \'Gestió de dades\' → \'Baixar dades locals\'. 
+	<string name="tip_update_index_t">És essencial tenir actualitzats els mapes locals per poder visualitzar-los, fer recerca d\'adreces/punts d\'interès i navegació quan no hi ha connexió. L\'OsmAnd conta amb un gestor de fitxers de mapes per baixar aquests mapes en desconnexió i comprovar si hi ha actualitzacions disponibles.
+		\n\nPer baixar mapes aneu a \'Configuració\' → \'Gestió de fitxers de mapes\' → \'Descàrrega\'. 
 		\n\nRebreu un llistat de regions d\'internet i podeu seleccionar per descarregar o actualitzar un arxiu. Fixeu-vos el selector de tipus d\'arxiu de la part superior de la pantalla per descarregar el que voleu (mapes normals, amb relleu, etc.).  
 		\n\nPodeu filtrar les opcions disponibles introduint les primeres lletres o podeu seleccionar l\'opció
 \'Configuració\ → \'Filtrar baixades\' per veure només les actualitzacions disponibles per les dades que ja teniu al vostre dispositiu.
@@ -1124,7 +1124,7 @@
 	<string name="error_io_error">S\'ha produït un error E/S</string>
 	<string name="save_track_to_gpx">Desa la traça en un fitxer GPX</string>
 	<string name="use_english_names_descr">Escolliu entre noms nadius i noms anglesos</string>
-	<string name="srtm_plugin_description">Aquest connector us facilita baixar les corbes de nivell (Baixa dades fora de línia →  Menú →  Altres mapes) per usar-les als mapes sense connexió.</string>
+	<string name="srtm_plugin_description">Us facilita baixar corbes de nivell i de relleu als mapes sense connexió (\'Paràmetres\' →  \'Gestionar arxius de mapes\' →  \'Descàrregues\' →  \'Seleccionar tipus de mapa desitjat\').</string>
     <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
 	<string name="tip_recent_changes_1_0_0_t">Canvis a la 1.0.0 :
 	\n\t* Encaminament millorat: més ràpid, més precís, fins a 250 km
@@ -1152,7 +1152,7 @@
 \n\t- Petites millores "</string>
 	<string name="tip_favorites_t">Els punts usats de forma freqüent els podeu desar com a Preferits, com s\'indica:
 \n\nEn el menú de context «Usa posició» per qualsevol punt, seleccioneu l\'opció «Afegeix als preferits» i introduïu un nom per identificar-lo. 
-\n\nDesprés de desar un preferit, aquest és accessible mitjançant «Menú» -&gt; «Preferits». Mantenint pressionat un determinat preferit en el menú «Preferits» es dona accés a opcions per establir-ho com a destinació, editar-lo o suprimir-lo.
+\n\nDesprés de desar un preferit, aquest és accessible mitjançant «Menú» -&gt; «Els meus llocs». Mantenint pressionat un determinat preferit en el menú «Preferits» es dona accés a opcions per establir-ho com a destinació, editar-lo o suprimir-lo.
 \n\nPer mostrar tots els punts preferits directament al mapa, a la pantalla mapa, activeu la capa «Preferits» que es troba a «Menú» → «Capes del mapa».
 	</string>
 	<string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
@@ -1551,7 +1551,7 @@
 	<string name="interrupt_music">Pausa la música</string>
 	<string name="tip_altitude_offset_t">La majoria de dispositius GPS informen les mesures d\'altitud en el sistema de referència WGS84, basat en l\'el·lipsoide, que requereix una correcció depenent de la posició per la conversió a sistemes utilitzats localment.
 		\n\nLa referència EGM96 (geoide) es una aproximació millor a aquests sistemes locals.
-		\n\nOsmAnd indicarà l\'altitud de les teves ubicacions en el sistema EGM96 quan descarreguis el arxiu \'Correcció Mundial d\'Altituds\' (WW15MGH.DAC) mitjançant \'Opcions\' → \'Gestió de Dades\'. (l\'original és a http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
+		\n\nOsmAnd indicarà l\'altitud de les teves ubicacions en el sistema EGM96 quan descarreguis el arxiu \'Correcció Mundial d\'Altituds\' (WW15MGH.DAC) mitjançant \'Opcions\' → \'Gestió d'arxius de mapes\'. (L\'original és a http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
     <string name="osmo_settings_uuid">Identificació única de dispositiu</string>
     <string name="osmo_settings_descr">Configurar paràmetres de monitorització i fixar el canal de seguiment personal</string>
@@ -1733,8 +1733,11 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
     <string name="tip_recent_changes_1_8_alpha">Canvis a la 1.8:
 	* Calcula la ruta entre els punts de la traça GPX
-	* Canviat ventall de països per descarregar (suporta la cerca de denominacions locals)
+	* Canviat llistat de països per descarregar (suporta la cerca amb denominacions locals)
 	* Admet importació GPX/KML (conversió de KML a GPX)
+	* Les traces GPX s'han canviat a \'Les meves dades'\
+	* Pots dividir la traça GPX segons distància i comprovar la diferència d'alçada/velocitat
+	* Inici automàtic programable de navegació
     </string>
     <string name="osmo_auto_send_locations_descr">Inici automàtic del registre de la traça i del enviament de les posicions tot just iniciar l\'aplicació</string>
     <string name="osmo_auto_send_locations">Inici automàtic del registre de la traça</string>
@@ -1812,8 +1815,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="selected_track">Traces seleccionades</string>
     <string name="my_tracks">Totes les pistes</string>
     <string name="my_favorites">El meus favorits</string>
-    <string name="my_data_Button">Les meves dades</string>
-    <string name="my_data_activity">Les meves dades</string>
+    <string name="my_data_Button">Les meus llocs</string>
+    <string name="my_data_activity">Els meus llocs</string>
     <string name="osmo_user_joined">L\'usuari %1$s s\'ha unit al grup %2$s</string>
     <string name="osmo_user_left">L\'usuari %1$s ha deixat el grup %2$s</string>
     <string name="osmo_show_group_notifications">Veure les notificacions de grup</string>
@@ -1821,8 +1824,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="gpx_info_subtracks">Segments: %1$s </string>
 	<string name="gpx_info_waypoints">Punts de pas: %1$s </string>
 	<string name="gpx_info_distance">Distància: %1$s (%2$s punts) </string>
-	<string name="gpx_info_start_time">Hora d\'inici: %1$tF,  %1$tR </string>
-	<string name="gpx_info_end_time">Hora d\'arribada : %1$tF,  %1$tR </string>
+	<string name="gpx_info_start_time">Hora d\'inici: %1$tF, %1$tT </string>
+	<string name="gpx_info_end_time">Hora d\'arribada : %1$tF, %1$tT </string>
 	<string name="gpx_info_average_speed">Velocitat mitjana: %1$s </string>
 	<string name="gpx_info_maximum_speed">Velocitat màxima: %1$s </string>
 	<string name="gpx_info_avg_altitude">Alçada mitjana: %1$s</string>
