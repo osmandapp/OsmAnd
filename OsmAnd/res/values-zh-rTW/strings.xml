@@ -232,7 +232,7 @@
 	<string name="local_indexes_cat_tile">線上地圖圖磚</string>
 	<string name="local_indexes_cat_map">離線地圖(向量地圖)</string>
 	
-	<string name="index_settings_descr">下載地圖與管理離線地圖檔案存儲在您的裝置</string>
+	<string name="index_settings_descr">下載與管理離線地圖檔案存儲在您的裝置</string>
 	<string name="map_online_plugin_is_not_installed">啟用線上地圖外掛元件，來選擇不同的地圖來源</string>
 	<string name="map_online_data">線上地圖圖磚</string>
 	<string name="map_online_data_descr">使用線上地圖(下載暫存地圖圖磚到SD卡)</string>
