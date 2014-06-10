@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追蹤外掛元件，使用位置日誌服務(GPX 記錄，線上追蹤查詢)</string>
@@ -93,8 +94,8 @@
  - 可選擇車道引導、速限顯示、使用真人語音或 TTS 語音
 	</string>
 	<string name="tip_update_index">更新離線地圖</string>
-	<string name="tip_update_index_t">離線地圖的查看與 POI/位址查尋，以及離線導航，有最新的圖資是不可或缺的。OsmAnd提供資料管理來下載那些離線圖資（以及其它的一些資料檔案），並且檢查能用的更新。
-		\n\n下載圖資更新由\'設定\' -&gt; \'資料管理\' -&gt; \'下載離線資料\'。
+	<string name="tip_update_index_t">離線地圖的查看與 POI/位址查尋，以及離線導航，有最新的圖資是不可或缺的。OsmAnd 提供地圖檔案管理以下載那些離線圖資，並且檢查能用的更新。
+		\n\n下載圖資更新由\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\'。
 		\n\n由網路取得區域列表後，點選進入任何一個去下載或更新檔案。請注意檔案類型選擇在畫面上方的附近，選取您想要的類型下載（正常地圖、地形陰影覆疊等）。
 		\n\n您可以篩選區域清單中輸入一些字母，或者您可以按選項\'設定\' -&gt; \'篩選已下載的\'可看見過濾出已經在您裝置上的更新資料。
 		\n\t* 登錄為\'綠色\'，表示裝置與伺服器是相同的
@@ -220,18 +221,18 @@
 	<string name="offline_navigation_not_available">OsmAnd 離線導航，暫時不能使用。</string>
 	<string name="left_side_navigation">左駕</string>
 	<string name="left_side_navigation_descr">選擇左駕的國家</string>
-	<string name="download_link_and_local_description">點選此處下載或更新離線資料\n按任何一項查看細節，按住即可解除或刪除。目前裝置上的資料空間剩(%1$s 可用)：</string>
+	<string name="download_link_and_local_description">點選此處下載或更新離線地圖檔案。\n按任何一項查看細節，按住即可解除或刪除。目前裝置上的資料空間剩(%1$s 可用)：</string>
 	<string name="unknown_from_location">出發地點尚未決定</string>
 	<string name="unknown_location">未知地理位置</string>
 	<string name="modify_transparency">調整透明度(0 - 透明, 255 - 不透明)</string>
 	<string name="confirm_interrupt_download">您要中斷檔案下載嗎？</string>
-	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些區域性的離線資料，您可以透過\'設定\' -&gt; \'資料管理\'來下載。之後您可瀏覽地圖、位置地址、查尋興趣點以及尋找共公交通設施。</string>    
+	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些區域性的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'下載。之後您可瀏覽地圖、位置地址、查尋興趣點以及尋找共公交通設施。</string>    
 	<string name="basemap_was_selected_to_download">基本地圖，為某些特別的應用功能必需使用的，並且預設為下載。</string>
 	<string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參考http://osmand.net)。</string>
 	<string name="local_indexes_cat_tile">線上地圖圖磚</string>
 	<string name="local_indexes_cat_map">離線地圖(向量地圖)</string>
 	
-	<string name="index_settings_descr">在您的裝置上，下載地圖與管理離線圖資存儲</string>
+	<string name="index_settings_descr">下載地圖與管理離線地圖檔案存儲在您的裝置</string>
 	<string name="map_online_plugin_is_not_installed">啟用線上地圖外掛元件，來選擇不同的地圖來源</string>
 	<string name="map_online_data">線上地圖圖磚</string>
 	<string name="map_online_data_descr">使用線上地圖(下載暫存地圖圖磚到SD卡)</string>
@@ -256,7 +257,7 @@
 	<string name="debugging_and_development">OsmAnd 開發</string>
 	<string name="native_rendering">原生繪製</string>
 	<string name="test_voice_prompts">測試語音提示</string>    
-	<string name="switch_to_raster_map_to_see">該地區目前沒有離線向量地圖，您可在設定功能下載(資料管理)或切換成線上地圖。</string>
+	<string name="switch_to_raster_map_to_see">該地區目前沒有離線向量地圖，您可在設定功能下載(管理地圖檔案)或切換成線上地圖(為此啟用線上地圖外掛)。</string>
 	<string name="send_files_to_osm">傳送 GPX 檔案到 OSM？</string>
 	<string name="gpx_visibility_txt">能見度</string>
 	<string name="gpx_tags_txt">旗標</string>
@@ -374,7 +375,7 @@
 	<string name="routing_settings">導航</string>
 	<string name="routing_settings_descr">指定導航選項</string>
 	<string name="global_settings">整體設定</string>
-	<string name="index_settings">資料管理</string>
+	<string name="index_settings">管理地圖檔案</string>
 	<string name="general_settings">一般設定</string>
 	<string name="general_settings_descr">組態應用程式顯示和共通設定</string>
 	<string name="global_app_settings">全區程式設定</string>
@@ -490,7 +491,7 @@
 	<string name="local_index_items_deleted">%2$d 項中的 %1$d 項已刪除成功。</string>
 	<string name="local_index_items_restored">%2$d 項中的 %1$d 項已啟動成功。</string>
 	<string name="local_index_action_do">您即將 %1$s %2$s 項，要繼續嗎？</string>
-	<string name="local_index_descr_title">資料管理</string>
+	<string name="local_index_descr_title">管理地圖檔案</string>
 	<string name="local_index_mi_restore">啟用</string>
 	<string name="local_index_mi_backup">解除</string>
 	<string name="local_index_mi_delete">刪除</string>
@@ -556,7 +557,7 @@
 	<string name="tip_favorites_t">常用地點可儲存成我的最愛，具體如下： 
 		\n\n叫出\'使用位置\'的快顯功能表，選\'加到我的最愛\'，然後輸入名字即可將某一點位置設為我的最愛。事後可經由\'選單\' -&gt;\'我的最愛\'找到它。
 		\n\n在\'我的最愛\'清單中輕按提供的任何選項，例如導航去那裡、編輯或刪除它。
-		\n\n欲將我的最愛顯示在地圖上，要在地圖螢幕上啟用圖層\'我的最愛\'，由\'選單\' -&gt;\'地圖圖層\'即可。
+		\n\n欲將我的最愛顯示在地圖上，要在地圖螢幕上啟用圖層\'我的地點\'，由\'選單\' -&gt;\'地圖圖層\'即可。
 	</string>
 	<string name="error_doing_search">離線查尋發生錯誤</string>
 	<string name="search_offline_geo_error">無法解析地理含義 \'%s\'</string>
@@ -948,7 +949,7 @@
 	<string name="exit_Button">離開</string>
 	<string name="map_Button">地圖</string>
 	<string name="settings_Button">設定</string>
-	<string name="favorites_Button">我的最愛</string>
+	<string name="favorites_Button">我的地點</string>
 	<string name="search_button">查尋</string>
 	<string name="search_activity">查尋</string>
 	<string name="searchpoi_activity">選取興趣點</string>
@@ -1359,7 +1360,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="intermediate_items_sort_return">在到達目的地之間路途上，沿路的中途點已採取了最佳化的排列。</string>
     <string name="osmand_srtm_long_description_1000_chars">這個外掛元件提供了等高線，可以在 OsmAnd 的離線地圖中顯示。全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未下定義。\"使用位置 …\"，把注解分配給指定的位置</string>
-    <string name="srtm_plugin_description">便於下載目前離線的等高線和地形陰影（\'設定\' -&gt; \'資料管理\' -&gt; \'下載\' -&gt; 選擇所需的地圖類型）。</string>
+    <string name="srtm_plugin_description">便於下載目前離線的等高線和地形陰影（\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\' -&gt; 選擇所需的地圖類型）。</string>
     <string name="tip_recent_changes_0_7_2_t">在0.7.2的變更：
 		\n\t- Native rendering for all devices
 		\n\t- Offline POI editing
@@ -1423,7 +1424,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmodroid_plugin_description">OsMoDroid 外掛元件是 OsmAnd 的延伸，為 OsModroid 線上追蹤功能的應用程式。在 http://esya.ru 上有相關服務的資訊。</string>
     <string name="tip_altitude_offset_t">大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
 		\n\n到這些地方系統有一個更好的近似值參考是 EGM96。
-		\n\n在您透過\'設定\' -&gt; \'資料管理\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球高度校正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。
+		\n\n在您透過\'設定\' -&gt; \'管理地圖檔案\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球高度校正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。
 	</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="tip_recent_changes_1_0_0_t">在1.0.0的變更：
@@ -1759,6 +1760,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
         * 預估 GPX 軌跡路線點之間的路線
         * 為下載變更了各國的配置（支援本地名稱搜索）
         * 支援 GPX/KML 匯入(由 KML 轉換為 GPX )
+        * GPX軌跡已經移到\'我的資料\'
+        * 您可以按距離分割 GPX 軌跡和查對海拔高度差異/速度
+        * 自動開始導航後延遲
     </string>
     <string name="osmo_auto_send_locations_descr">自動開始追蹤區段和發送位置之後啟動應用程式</string>
     <string name="osmo_auto_send_locations">自動開始追蹤區段</string>
@@ -1839,14 +1843,14 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_show_group_notifications">顯示群組通知</string>
     <string name="osmo_show_group_notifications_descr">在使用者加入或離開群組時顯示提示訊息</string>
     <string name="my_favorites">我的最愛</string>
-    <string name="my_data_Button">我的資料</string>
-    <string name="my_data_activity">我的資料</string>
+    <string name="my_data_Button">我的地點</string>
+    <string name="my_data_activity">我的地點</string>
     <string name="selected_track">已選取軌跡</string>
     <string name="my_tracks">全部追蹤</string>
     <string name="gpx_file_is_empty">GPX 軌跡是空的</string>
     <string name="gpx_info_distance">距離：%1$s (%2$s個點) </string>
-	<string name="gpx_info_start_time">開始時間：%1$tF,  %1$tR </string>
-	<string name="gpx_info_end_time">結束時間：%1$tF,  %1$tR </string>
+	<string name="gpx_info_start_time">開始時間：%1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">結束時間：%1$tF,  %1$tT </string>
 	<string name="gpx_info_average_speed">平均速度：%1$s </string>
 	<string name="gpx_info_asc_altitude">海拔高度上升：%1$s</string>
     <string name="gpx_timespan">時間跨度：%1$s</string>
@@ -1856,7 +1860,19 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="gpx_selection_point">點 %1$s</string>
     <string name="gpx_selection_current_track">錄制</string>
     <string name="gpx_selection_route_points">%1$s \n路線點 %2$s</string>
-    <string name="gpx_selection_points">%1$s\n 個點</string>
-    <string name="gpx_selection_track">%1$s\n 軌跡 %2$s</string>
+    <string name="gpx_selection_points">%1$s \n個點</string>
+    <string name="gpx_selection_track">%1$s \n軌跡 %2$s</string>
     <string name="gpx_available_current_track">正在錄制的軌跡</string>
-    </resources>
+    <string name="loading_smth">載入 %1$s …</string>
+    <string name="map_widget_plain_time">目前時間</string>
+    <string name="selected_gpx_info_show">\n\n長按在地圖上查看</string>
+    <string name="delay_navigation_start">開始導航與延遲</string>
+    <string name="selected">已選擇</string>
+    <string name="gpx_split_interval">選擇分割的間隔</string>
+    <string name="gpx_info_subtracks">子軌跡：%1$s </string>
+	<string name="gpx_info_maximum_speed">最大速度：%1$s </string>
+	<string name="gpx_info_avg_altitude">平均海拔：%1$s</string>
+	<string name="gpx_info_diff_altitude">海拔高度差異：%1$s</string>
+	<string name="gpx_wpt">中途點</string>
+    <string name="gpx_info_waypoints">中途點：%1$s </string>
+	</resources>
