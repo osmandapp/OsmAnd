@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -498,7 +497,7 @@ POIの更新は利用できません</string>
      <string name="loading_postcodes">郵便番号をロード中…</string>
      <string name="loading_streets">通りをロード中…</string>
      <string name="loading_cities">市町村をロード中…</string>
-     <string name="loading">ロード中</string>
+     
      <string name="poi">POI</string>
      <string name="error_occurred_saving_gpx">GPX保存中にエラー</string>
      <string name="error_calculating_route">ルート計算中にエラー</string>
@@ -561,8 +560,8 @@ POIの更新は利用できません</string>
  <string name="choose_street">通りを選ぶ</string>
  <string name="choose_city">市町村を選ぶ</string>
  <string name="ChooseCountry">国を選ぶ</string>
- <string name="position_on_map_descr">マップ上の位置マーカの位置を選ぶ</string>
- <string name="position_on_map">位置マーカ</string>
+ 
+ 
  
  <string name="show_view_angle">視線方向を表示</string>
  <string name="map_view_3d_descr">マップの3Dビューを有効化</string>
@@ -768,8 +767,8 @@ POIの更新は利用できません</string>
     <string name="route_to">行き先：</string>
     <string name="route_via">経由：</string>
     <string name="route_from">出発地：</string>
-	<string name="local_index_gpx_timespan">\n期間： %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\n移動時間： %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="destination_point">目的地 %1$s</string>
     <string name="context_menu_item_destination_point">目的地として設定</string>
     <string name="please_select_address">最初に都市か通りを選択してください</string>
@@ -1314,9 +1313,9 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="basemap_missing">ベースワールドマップ(小さなズームでのみ全世界をカバーします)が欠落しています。World_basemap_x.obfをダウンロードしてみてください。</string>
 	<string name="vector_data_missing">オンボード(オフライン)データがSDカード上に見つかりません。オフラインマップを使用するにはそれらをダウンロードしてください。</string>
 	<string name="local_index_gpx_info_show">\n\nオプションのために長押しして下さい</string>
-	<string name="local_index_gpx_info_speed">\n平均速度: %1$s \n最大速度: %2$s</string>
-	<string name="local_index_gpx_info_elevation">\n平均高度: %1$s\n最低高度: %2$s\n最高高度: %3$s\n上り: %4$s\n下り: %5$s</string>
-	<string name="local_index_gpx_info">サブトラック: %1$d\nトータルポイント: %2$d\n経由点: %3$d\n総距離: %4$s\n出発時間: %5$tF, %5$tR\n到着時間: %6$tF, %6$tR</string>
+	
+	
+	
 	<string name="local_index_installed">エディション</string>
 	<string name="local_index_items_backuped">%2$d個の項目のうち、%1$d個のアイテムを無効化しました。</string>
 	<string name="local_index_items_deleted">%2$d個の項目のうち、%1$d個のアイテムを削除しました。</string>

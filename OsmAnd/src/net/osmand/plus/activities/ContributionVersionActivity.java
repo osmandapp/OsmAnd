@@ -77,7 +77,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	private void startThreadOperation(int operationId, String message, int total) {
 		
 		progressDlg = new ProgressDialog(this);
-		progressDlg.setTitle(getString(R.string.loading));
+		progressDlg.setTitle(getString(R.string.loading_smth, ""));
 		progressDlg.setMessage(message);
 		if(total != -1){
 			progressDlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);

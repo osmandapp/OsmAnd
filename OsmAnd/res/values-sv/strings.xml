@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -37,8 +36,8 @@
 <string name="day_night_info">Dag-/nattinformation</string>
 <string name="map_widget_day_night">Dag-/nattkarta</string>
 <string name="map_widget_vector_attributes">Renderingsattribut:</string>
-<string name="position_on_map_descr">Välj positionsmarkörens placering på kartan</string>
-<string name="position_on_map">Positionsmarkör</string>
+
+
 <string name="layer_map_appearance">Konfigurera skärm</string>
 <string name="show_lanes">Visa körfält</string>
 <string name="avoid_unpaved">Undvik oasfalterade vägar</string>
@@ -462,7 +461,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="basemap_missing">Basvärldskarta (som omfattar hela världen i låg inzoomning) saknas. Hämta gärna World_basemap_x.obf för en komplett miljö.</string>
 <string name="vector_data_missing">Offline-data saknas på SD-kortet. Det kan vara klokt att ladda ner detta för att kunna använda kartor offline.</string>
 <string name="local_index_gpx_info_show">\n\nTryck och håll för alternativ</string>
-<string name="local_index_gpx_info_speed">\nSnitthastighet: %1$s\nMaxhastighet: %2$s</string>
+
 <string name="local_index_installed">Utgåva</string>
 <string name="local_index_items_backuped">%1$d av %2$d post(er) har inaktiveras utan problem.</string>
 <string name="local_index_items_deleted">%1$d av %2$d post(er) har tagits bort utan problem.</string>
@@ -688,8 +687,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="renderers_descr">Välj renderingsutseende</string>
 	<string name="poi_context_menu_website">Visa POI-webbplats</string>
 	<string name="poi_context_menu_call">Visa POI-telefon</string>
-	<string name="local_index_gpx_info_elevation">\nGenomsnittligt höjd: %1$s\nLägsta höjd: %2$s\nHögsta höjd: %3$s\nUppstigning: %4$s\nNedstigning: %5$s</string>
-	<string name="local_index_gpx_info">Subtracks: %1$d\nTotalt antal punkter: %2$d\nWaypoints: %3$d\nTotal sträcka: %4$s\nStarttid: %5$tF, %5$tR\nSluttid: %6$tF, %6$tR</string>
+	
+	
 	<string name="osmand_routing_experimental">OsmAnd offline-navigering är en experimentell funktion och den fungerar inte för sträckor över c:a 20 km.\n\nNavigeringstjänsten är tillfälligt kopplad till online CloudMade.</string>
 	<string name="website">Webbplats</string>
 	<string name="phone">Telefon</string>
@@ -1026,7 +1025,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="auth_failed">Åtkomst nekades</string>
 	<string name="failed_op">misslyckades</string>
 	<string name="converting_names">Konverterar inhemska/engelska namn…</string>
-	<string name="loading">Laddar …</string>
+	
 	<string name="error_occurred_saving_gpx">Ett fel uppstod när GPX sparades</string>
 	<string name="error_calculating_route">Fel vid ruttberäkningen</string>
 	<string name="error_calculating_route_occured">Ett fel uppstod vid ruttberäkningen</string>
@@ -1231,8 +1230,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="speak_speed_limit">Meddela vid hastighetsbegränsningar</string>
     <string name="speak_cameras">Meddela vid fartkameror</string>
 	<string name="speak_traffic_warnings">Meddela vid trafikvarningar</string>
-	<string name="local_index_gpx_timespan">\nTidsspann: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nTid i rörelse: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="plugin_distance_point_hdop">precision</string>
     <string name="tip_recent_changes_1_5_t">Förändringar i 1.5:
 	\n\t* Röstvarningar vid hastighetsbegränsningar och fartkameror
@@ -1464,7 +1463,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="keep_informing_never">Aldrig</string>
     <string name="keep_informing_descr">Läs upp navigationsinstruktioner med regelbundna intervall</string>
     <string name="keep_informing">Upprepa navigationsinstruktioner</string>
-	<string name="osmo_register_device">Registrerar enheten … </string>
+	
     <string name="osmo_io_error">Anslutningsproblem med OsMo: </string>
     <string name="osmo_mode_on">Stoppa OsMo-session</string>    
     <string name="osmo_mode_off">Starta OsMo-session</string>
@@ -1489,8 +1488,8 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_connect_to_device_name">Enhetsnamn</string>
     <string name="osmo_connect_to_device_tracker_id">Tracker-id</string>
     <string name="osmo_connect_to_device">Länka med enhet</string>
-    <string name="osmo_join_group">Anslut till grupp</string>
-    <string name="osmo_new_device">Anslut till enhet</string>
+    
+    
     <string name="osmo_connected_devices">Anslutna enheter</string>
     <string name="osmo_groups">OsMo-grupper/-enheter</string>
     <string name="osmo_group_info">Info</string>
@@ -1527,7 +1526,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="color_yellow">gul</string>
 	<string name="color_lightblue">ljusblå</string>
 	<string name="color_blue">blå</string>
-	<string name="color_magenta">magenta</string>
+	
 	
     <string name="osmo_edit_device">Ändra användaregenskaper</string>
     <string name="osmo_edit_color">Visningsfärg</string>

@@ -43,7 +43,7 @@
 	<string name="select_navigation_mode">選擇傳輸模式</string>
 	
 	<string name="map_widget_renderer">地圖風格</string>
-	<string name="position_on_map">位置標記</string>
+	
 	<string name="avoid_in_routing_descr">避開收費公路，土路，渡輪</string>
 	<string name="map_widget_fluorescent">熒光路線</string>
 	<string name="map_widget_show_ruler">統治者</string>
@@ -690,7 +690,7 @@
 	<string name="favorite_delete_multiple">您将要删除 %1$d 个收藏点和 %2$d 个收藏组。是否确认？</string>
 	<string name="basemap_missing">基础世界地图(小比例尺下覆盖整个世界)丢失。请考虑下载 World_basemap_x.obf 以确保应用运行环境完整。</string>
 	<string name="local_index_gpx_info_show">\n\n长按进入选项</string>
-	<string name="local_index_gpx_info_speed">\n平均速度：%1$s \n最大速度：%2$s</string>
+	
 	<string name="local_index_installed">版本</string>
 	<string name="local_index_descr_title">数据管理</string>
 	<string name="local_index_mi_delete">删除</string>
@@ -852,7 +852,7 @@
 	<string name="loading_postcodes">正在加载邮编…</string>
 	<string name="loading_streets">正在加载街道…</string>
 	<string name="loading_cities">正在加载城市…</string>
-	<string name="loading">正在加载…</string>
+	
 	<string name="poi">POI</string>
 	<string name="error_calculating_route">路线计算出错</string>
 	<string name="error_calculating_route_occured">计算路线时有错误发生</string>
@@ -947,8 +947,8 @@
 	<string name="clear_intermediate_points">清除中途点</string>
     <string name="keep_intermediate_points">保持中途点</string>
     <string name="new_directions_point_dialog">您已经有中途点集了。</string>
-    <string name="local_index_gpx_timespan">\n耗时：%1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\n移动时间：%1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="settings_preset_descr">每种使用场景的地图和导航设置是相互独立的。在这里设置您的缺省使用场景。</string>
     <string name="intermediate_items_sort_by_distance">排序 (门到门)</string>
     <string name="plugin_distance_point_ele">海拔</string>

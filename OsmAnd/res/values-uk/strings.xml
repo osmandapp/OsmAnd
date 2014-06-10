@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
 		\n\t* Більш точні маршрути (трохи повільніше)
 		\n\t* Розумний і швидкий перерахунок маршруту
 		\n\t* Вказання напрямку руху по смугам
@@ -321,9 +320,9 @@
   <string name="basemap_missing">Базова мапа (яка покриває цілий світ) відсутня. Будь ласка, завантажте World_basemap_x.obf для повноцінної роботи програми.</string>
   <string name="vector_data_missing">SD-карта не містить завантажених даних. Будь ласка, завантажте їх, щоб використовувати мапу без інтернету.</string>
   <string name="local_index_gpx_info_show">\n\nТривале натискання для перегляду на мапі</string>
-  <string name="local_index_gpx_info_speed">\nСередня швидкість: %1$s \nМаксимальна швидкість: %2$s"</string>
-  <string name="local_index_gpx_info_elevation">\nСередня висота: %1$s\nМінімальна висота: %2$s\nМаксимальна висота: %3$s\nПідйом вгору: %4$s\nСпуск вниз: %5$s"</string>
-  <string name="local_index_gpx_info">Путі: %1$d\nВсього точок: %2$d\nМаршрутних точок: %3$d\nЗагальна відстань: %4$s\nПочаток: %5$tF, %5$tR\nКінець: %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Редакція</string>
   <string name="local_index_items_backuped">%1$d з %2$d об’єктів успішно деактивовано.</string>
   <string name="local_index_items_deleted">%1$d з %2$d об’єктів успішно вилучено.</string>
@@ -720,7 +719,7 @@
   <string name="loading_postcodes">Завантажуються поштові індекси…</string>
   <string name="loading_streets">Завантажуються вулиці…</string>
   <string name="loading_cities">Завантажуються міста…</string>
-  <string name="loading">Завантаження…</string>
+  
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Помилка збереження шляху в GPX файл</string>
   <string name="error_calculating_route">Помилка прокладання маршруту</string>
@@ -772,8 +771,8 @@
   <string name="choose_street">Виберіть вулицю</string>
   <string name="choose_city">Виберіть місто</string>
   <string name="ChooseCountry">Виберіть країну</string>
-  <string name="position_on_map_descr">Встановити розташування поточної позиції на мапі</string>
-  <string name="position_on_map">Поточна позиція</string>
+  
+  
   
   <string name="show_view_angle">Відображати напрямок</string>
   <string name="map_view_3d_descr">Увімкнути 3D вигляд для мапи</string>
@@ -1484,8 +1483,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		\n\nУ допомогу до всіх підказок, контекстне меню пропонує два варіанти: \'Маршрут\' чи \'Показати на мапі\'
 	</string>
 	<string name="destination_point">Пункт призначення %1$s</string>
-    <string name="local_index_gpx_timespan">\nПроміжок часу: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nЧас в дорозі: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="av_camera_focus">Тип фокусування камери</string>
 	<string name="av_camera_focus_descr">Виберіть тип фокусу вбудованного застосунку для фотографування</string>
 	<string name="av_camera_focus_auto">Автофокус</string>
@@ -1608,10 +1607,10 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_group_info">Інформація</string>
     <string name="int_days">днів</string>
     <string name="osmo_group_description">Опис</string>
-    <string name="osmo_connect_to_device_name">Ім\'я пристрою</string>
+    <string name="osmo_connect_to_device_name">Ім’я пристрою</string>
     <string name="osmo_create_group">Створити групу</string>
-    <string name="osmo_connect">З\'єднатися до</string>
-    <string name="osmo_enable_tracker">Надіслати мою позицію</string>
+    <string name="osmo_connect">Приєднатись до</string>
+    <string name="osmo_enable_tracker">Надіслати моє місцезнаходження</string>
     <string name="hours_ago">годин тому</string>
     <string name="minutes_ago">хвилин тому</string>
     <string name="seconds_ago">секунд тому</string>
@@ -1622,4 +1621,41 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_tracker_id">Персональний ID трекера</string>
     <string name="osmo_tracker_id_descr">Натисніть щоб подивитись або подітись ID трекера
 	Використовуючи ID трекера можна відстежувати пересування цього пристрою! Для відключення скористайтесь опцією Перестворити.</string>
+    <string name="osmo_server_operation_failed">OsMo Server збій виконання операції</string>
+    <string name="osmo_activity">OpenStreetMap-Моніторинг</string>
+    <string name="osmo_control">OsMo швидкий доступ</string>
+    <string name="gpx_file_is_empty">Трек Gpx порожній</string>
+    <string name="selected_track">Трек</string>
+    <string name="my_tracks">Всі треки</string>
+    <string name="my_favorites">Мої Закладки</string>
+    <string name="my_data_Button">Мої Дані</string>
+    <string name="my_data_activity">Мої Дані</string>
+    <string name="osmo_user_joined">Користувач %1$s приєднався до групи %2$s</string>
+    <string name="osmo_user_left">Користувач %1$s покинув групу %2$s</string>
+    <string name="osmo_show_group_notifications">Показувати сповіщення групи</string>
+    <string name="osmo_show_group_notifications_descr">Показувати сповіщення, коли користувач приєднується або залишає групу</string>
+    <string name="osmo_follow">Стежити</string>
+    <string name="osmo_sign_in">Увійти</string>
+    <string name="osmo_create_groups_confirm">Для створення групи, Ви повинні бути зареєстрованим користувачем OsMo.</string>
+    <string name="osmo_credentials_not_valid">Ваші облікові дані OsMo хибні.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Ви впевнені у потребі перестворення персональних ID? Усі пристрої, зв’язані з Вами не зможуть відстежити ваше місцезнаходження.</string>
+    <string name="osmo_regenerate_login_ids">Перестворити ID користувача</string>
+    <string name="osmo_cancel_moving_target">Скасувати стеження</string>
+    <string name="osmo_center_location">По центру екрану</string>
+    <string name="osmo_set_moving_target">Почати стеження</string>
+    <string name="osmo_use_server_name">Зареєстроване ім’я</string>
+    <string name="osmo_connect_to_my_nickname">Моє призьвісько</string>
+    <string name="osmo_user_name">Користувач</string>
+	<string name="color_red">червоний</string>
+	<string name="color_pink">рожевий</string>
+	<string name="color_orange">помаранчевий</string>
+	<string name="color_brown">коричневий</string>
+	<string name="color_yellow">жовтий</string>
+	<string name="color_lightblue">блакитний</string>
+	<string name="color_blue">синій</string>
+	<string name="color_green">зелений</string>
+	
+    <string name="osmo_edit_device">Змінити властивості користувача</string>
+    <string name="osmo_edit_color">Колір</string>
+    <string name="osmo_group">Група OsMo</string>
     </resources>

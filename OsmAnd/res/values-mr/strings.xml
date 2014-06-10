@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
   <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, २५५ - अपारदर्शक)</string>
   <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
@@ -253,7 +252,7 @@
   <string name="mark_final_location_first">क्रुपया आधी इच्छिन स्थळ निवडा</string>
   <string name="show_gps_status">जीपीएस स्थिति दाखवा</string>
   <string name="failed_op">असफल</string>
-  <string name="loading">लोड करत आहे…</string>
+  
   <string name="new_route_calculated_dist">नविन मार्ग निवडला, अंतर</string>
   <string name="arrived_at_destination">आपण इच्छित स्थळी पोहोचला आहात</string>
   <string name="close">बंद करा</string>
@@ -399,8 +398,8 @@
     <string name="map_widget_show_destination_arrow">इच्छित स्थळाची दिशा दाखवा</string>
     <string name="no_route">मार्ग नाही</string>
 	<string name="poi_filter_accomodation">राहण्याची व्यवस्था</string>
-    <string name="position_on_map">स्थिती दर्षक</string>
-	<string name="position_on_map_descr">स्थिती दर्षकाची नकाशावर जागा निवडा</string>
+    
+	
 	<string name="map_widget_top_text">रस्त्याचे नाव</string>
 	
 	<string name="map_widget_back_to_loc">मी कुठे आहे</string>

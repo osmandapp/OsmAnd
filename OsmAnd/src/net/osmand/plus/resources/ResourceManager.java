@@ -412,6 +412,7 @@ public class ResourceManager {
 		indexRegionsBoundaries(progress, false);
 		// do it lazy
 		// indexingImageTiles(progress);
+		context.getSelectedGpxHelper().loadGPXTracks(progress);
 		warnings.addAll(indexingMaps(progress));
 		warnings.addAll(indexVoiceFiles(progress));
 		warnings.addAll(OsmandPlugin.onIndexingFiles(progress));

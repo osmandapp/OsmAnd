@@ -220,7 +220,6 @@ public class RouteInfoWidgetsFactory {
 		return nextTurnInfo;
 	}
 	
-	
 	public TextInfoWidget createTimeControl(final MapActivity map, Paint paintText, Paint paintSubText){
 		final RoutingHelper routingHelper = map.getRoutingHelper();
 		final Drawable time = map.getResources().getDrawable(R.drawable.widget_time);
@@ -284,6 +283,33 @@ public class RouteInfoWidgetsFactory {
 		leftTimeControl.setText(null, null);
 		leftTimeControl.setImageDrawable(showArrival.get()? time : timeToGo);
 		return leftTimeControl;
+	}
+	
+	
+	public TextInfoWidget createPlainTimeControl(final MapActivity map, Paint paintText, Paint paintSubText){
+		final Drawable timeToGo = map.getResources().getDrawable(R.drawable.widget_time_to_distance);
+		final OsmandApplication ctx = map.getMyApplication();
+		final TextInfoWidget plainTimeControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
+			private long cachedLeftTime = 0;
+			
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				long time = System.currentTimeMillis();
+				if(time - cachedLeftTime > 5000) {
+					cachedLeftTime = time;
+					if (DateFormat.is24HourFormat(ctx)) {
+						setText(DateFormat.format("k:mm", time).toString(), null); //$NON-NLS-1$
+					} else {
+						setText(DateFormat.format("h:mm", time).toString(), 
+								DateFormat.format("aa", time).toString()); //$NON-NLS-1$
+					}
+				}
+				return false;
+			};
+		};
+		plainTimeControl.setText(null, null);
+		plainTimeControl.setImageDrawable(timeToGo);
+		return plainTimeControl;
 	}
 	
 	

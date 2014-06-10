@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
     <string name="localization_pref_title">Localizatzione</string>
@@ -212,8 +211,8 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="route_to">A:</string>
     <string name="route_via">Pro:</string>
     <string name="route_from">Dae:</string>
-	<string name="local_index_gpx_timespan">\nTempus colau: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nTempus in mòvida: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="app_mode_default">Predefinitu</string>
 	<string name="settings_preset">Perfilu de impreu</string>
 	<string name="settings_preset_descr">Issèbera unu perfilu de impreu cun impostaduras pro sa mapa e su nàvigu pessonalizzau.</string>

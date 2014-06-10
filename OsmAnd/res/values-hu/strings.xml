@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
 \n\t- Akadálymentesítés 
@@ -234,9 +233,9 @@
   <string name="basemap_missing">Hiányzik az alap világtérkép (alacsony nagyításon az egész Földet lefedi). A teljes környezethez le lehet tölteni a World_basemap.obf -et.</string>
   <string name="vector_data_missing">Nincsenek offline használható adatok az SD kártyán. A térképek offline használathoz le kell töltened a kívánt területet.</string>
   <string name="local_index_gpx_info_show">\n\nHosszan megnyomva további lehetőségek</string>
-  <string name="local_index_gpx_info_speed">\nÁtlagsebesség: %1$s \nLegnagyobb sebesség: %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nÁtlagos magasság: %1$s\nLegkisebb magasság: %2$s\nLegnagyobb magasság: %3$s\nEreszkedés: %4$s\nEmelkedés: %5$s</string>
-  <string name="local_index_gpx_info">Rész útvonal: %1$d\nÖsszes pont: %2$d\nÚtpontok: %3$d\nTeljes távolság: %4$s\nIndulás: %5$tF, %5$tR\nÉrkezés: %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Kiadás</string>
   <string name="local_index_items_backuped">%2$d darabból %1$d sikeresen deaktiválva.</string>
   <string name="local_index_items_deleted">%2$d darabból %1$d sikeresen törölve.</string>
@@ -653,7 +652,7 @@
   <string name="loading_postcodes">Irányítószámok betöltése…</string>
   <string name="loading_streets">Utcák betöltése…</string>
   <string name="loading_cities">Települések betöltése…</string>
-  <string name="loading">Betöltés…</string>
+  
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Hiba történt a GPX-be való mentéskor</string>
   <string name="error_calculating_route">Útvonaltervezési hiba</string>
@@ -705,8 +704,8 @@
   <string name="choose_street">Utca kiválasztása</string>
   <string name="choose_city">Település kiválasztása</string>
   <string name="ChooseCountry">Ország kiválasztása</string>
-  <string name="position_on_map_descr">Pozíciójelző helyének kiválasztása a térképen</string>
-  <string name="position_on_map">Pozíció a térképen</string>
+  
+  
   
   <string name="show_view_angle">Látómező megjelenítése</string>
   <string name="map_view_3d_descr">A térkép 3D megjelenítésének engedélyezése</string>
@@ -1310,8 +1309,8 @@
     <string name="speak_speed_limit">Sebességhatár bemondása</string>
     <string name="speak_cameras">Traffipax bemondása</string>
 	<string name="speak_traffic_warnings">Közlekedési figyelmeztetések bemondása</string>
-	<string name="local_index_gpx_timespan">\nIdőtartam: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nHaladási idő: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="destination_point">Célpont %1$s</string>
     <string name="context_menu_item_destination_point">Beállítás célpontnak</string>
     <string name="please_select_address">Előbb válassz várost és utcát</string>
@@ -1446,12 +1445,7 @@
     <string name="routing_preferences_descr">Útvonaltervezési beállítások</string>
     <string name="speech_rate_descr">TTS beszédsebesség</string>
     <string name="speech_rate">Beszédsebesség</string>
-    <string name="tip_recent_changes_1_7_t">Az 1.7 kiadás újdonságai:
-	\n\t* Teljesen újraírt útvonaltervező (gyorsabb és pontosabb)
-	\n\t* Aktív szimuláció alagutakban
-	\n\t* Felhasználói élmény fokozása, felület javítások
-	\n\t* Állítható TTS beszédsebesség
-    </string>
+    
     <string name="complex_route_calculation_failed">Gyors útvonaltervezés sikertelen (%s), visszaállás a lassú tervezésre.</string>
     <string name="disable_complex_routing_descr">Kétfázisú autós útvonaltervezés letiltása</string>
     <string name="disable_complex_routing">Komplex tervezés letiltása</string>
@@ -1546,7 +1540,7 @@
 	<string name="color_yellow">sárga</string>
 	<string name="color_lightblue">világoskék</string>
 	<string name="color_blue">kék</string>
-	<string name="color_magenta">bíborvörös</string>
+	
 	
     <string name="osmo_edit_device">Felhasználói tulajdonságok módosítása</string>
     <string name="osmo_edit_color">Megjelenítési szín</string>

@@ -632,8 +632,9 @@ public class OsmandSettings {
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumIntPreference<DrivingRegion>(
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 		protected boolean setValue(Object prefs, DrivingRegion val) {
-			//((CommonPreference<MetricsConstants>)METRIC_SYSTEM).cachedValue = null;
-			((CommonPreference<MetricsConstants>)METRIC_SYSTEM).set(DRIVING_REGION.get().defMetrics);
+			if(val != null) {
+				((CommonPreference<MetricsConstants>)METRIC_SYSTEM).set(val.defMetrics);
+			}
 			return super.setValue(prefs, val);
 		};
 	}.makeGlobal().cache();
@@ -753,6 +754,8 @@ public class OsmandSettings {
 		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, AutoZoomMap.NONE);
 	}
 	
+	public final CommonPreference<Integer> DELAY_TO_START_NAVIGATION = new IntPreference("delay_to_start_navigation", 10).makeGlobal().cache();
+	
 	public final CommonPreference<Boolean> SNAP_TO_ROAD = new BooleanPreference("snap_to_road", false).makeProfile().cache();
 	{
 		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.CAR, true);
@@ -845,6 +848,9 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_FAVORITES = new BooleanPreference("show_favorites", false).makeGlobal();
+	
+	// Json 
+	public final OsmandPreference<String> SELECTED_GPX = new StringPreference("selected_gpx", "").makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Integer> MAP_SCREEN_ORIENTATION = 

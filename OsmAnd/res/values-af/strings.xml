@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
@@ -332,9 +331,9 @@
   <string name="basemap_missing">Basis wêreld kaart (wat die hele wêreld bevat op klein vergroting) ontbreek. Oorweeg dit asseblief om World_basemap_x.obf af te laai vir \'n volledige omgewing.</string>
   <string name="vector_data_missing">Aanboord (\'aflyn\') inligting ontbreek op SD-kaart. Oorweeg dit asseblief om dit af te laai om die kaarte aflyn te gebruik.</string>
   <string name="local_index_gpx_info_show">\n\nDruk en hou vir keuses</string>
-  <string name="local_index_gpx_info_speed">\nGemiddelde spoed: %1$s\nMaksimum spoed: %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nGemiddelde hoogte: %1$s\nMinimum hoogte: %2$s\nMaksimum hoogte: %3$s\nOpdraandes: %4$s\nAfdraandes: %5$s</string>
-  <string name="local_index_gpx_info">Subspore : %1$d\nTotale punte : %2$d\nTussenpunte : %3$d\nTotale afstand : %4$s\nBegin tyd : %5$tF, %5$tR\nEnd tyd : %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Uitgawe</string>
   <string name="local_index_items_backuped">%1$d van %2$d item(s) suksesvol afgeskakel.</string>
   <string name="local_index_items_deleted">%1$d van %2$d item(s) is suksesvol verwyder.</string>
@@ -718,7 +717,7 @@
   <string name="loading_postcodes">Besig om poskodes te laai…</string>
   <string name="loading_streets">Besig om strate te laai…</string>
   <string name="loading_cities">Besig om stede te laai…</string>
-  <string name="loading">Besig om te laai…</string>
+  
   <string name="poi">POI (interessante punt)</string>
   <string name="error_occurred_saving_gpx">Fout tydes GPX berging</string>
   <string name="error_calculating_route">Fout tydens roeteberekening</string>
@@ -770,8 +769,8 @@
   <string name="choose_street">Kies straat</string>
   <string name="choose_city">Kies stad</string>
   <string name="ChooseCountry">Kies land</string>
-  <string name="position_on_map_descr">Kies die plaasing van die posisie merker op die kaart</string>
-  <string name="position_on_map">Posisie merker</string>
+  
+  
   
   <string name="show_view_angle">Wys uitsig rigting</string>
   <string name="map_view_3d_descr">Skakel 3D kaart aan</string>
@@ -1241,8 +1240,8 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 \n\t* Verwyder SRTM lêers\n\t* Ondersteun OSM Notas 
 " 
     </string>
-    <string name="local_index_gpx_timespan">\nTydperk: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nTyd in beweging: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="av_camera_focus">Kamera fokus tipe</string>
 	<string name="av_camera_focus_descr">Kies interne kamera fokus tipe</string>
 	<string name="av_camera_focus_auto">Outo fokus</string>
@@ -1393,7 +1392,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="color_yellow">geel</string>
 	<string name="color_lightblue">ligblou</string>
 	<string name="color_blue">blou</string>
-	<string name="color_magenta">purperrooi</string>
+	
 	
     <string name="osmo_edit_device">Verander gebruiker eienskappe</string>
     <string name="osmo_edit_color">Vertoon kleur</string>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors-ligne des PI
@@ -184,10 +183,9 @@
   <string name="basemap_missing">La carte mondiale de base est absente (couvrant le monde entier à faible zoom). Pensez à télécharger World_basemap_x.obf pour avoir un environnement complet.</string>
   <string name="vector_data_missing">Il n\'y a pas de cartes (\'hors-ligne\') sur la carte SD. Pensez à en télécharger pour utiliser OsmAnd hors-ligne.</string>
   <string name="local_index_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
-  <string name="local_index_gpx_info_speed">\nVitesse moyenne : %1$s
-\nVitesse maximum : %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nAltitude moyenne : %1$s\nAltitude minimum : %2$s\nAltitude maximum : %3$s\nMontées : %4$s\nDescentes : %5$s</string>
-  <string name="local_index_gpx_info">Sections : %1$d\nPoints au total : %2$d\nPoints étapes : %3$d\nDistance totale : %4$s\nHeure de départ : %5$tF, %5$tR\nHeure d\'arrivée : %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Édition</string>
   <string name="local_index_items_backuped">%1$d sur %2$d éléments sauvegardés.</string>
   <string name="local_index_items_deleted">%1$d sur %2$d éléments supprimés.</string>
@@ -609,7 +607,7 @@
   <string name="loading_postcodes">Chargement des codes postaux…</string>
   <string name="loading_streets">Chargement des rues…</string>
   <string name="loading_cities">Chargement des villes…</string>
-  <string name="loading">Chargement…</string>
+  
   <string name="poi">PI</string>
   <string name="error_occurred_saving_gpx">Erreur lors de l\'enregistrement du fichier GPX</string>
   <string name="error_calculating_route">Erreur de calcul de l\'itinéraire</string>
@@ -1396,8 +1394,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="route_to">Vers :</string>
     <string name="route_via">Via :</string>
     <string name="route_from">De :</string>
-	<string name="local_index_gpx_timespan">\nTemps total : %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nTemps en déplacement : %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="destination_point">Destination %1$s</string>
     <string name="osb_author_dialog_password">Mot de passe OSM (optionnel)</string>
 	<string name="av_camera_focus">Mise au point</string>
@@ -1589,7 +1587,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	Pour en savoir plus: http://osmo.mobi</string>
 	<string name="osmo_plugin_name">OsMo (Suivi en temps réel)</string>
 	<string name="osmo_settings">OSMo OpenStreetMap Monitoring (beta)</string>
-	<string name="osmo_register_device">Enregistrement de l\'appareil…</string>
+	
 	<string name="osmo_io_error">Problème de connexion OSMo : </string>
 	<string name="osmo_mode_on">Arrêter session OsMo</string>
 	<string name="osmo_mode_off">Démarrer session OsMo</string>
@@ -1629,8 +1627,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="seconds_ago">secondes avant</string>
     <string name="osmo_connect_to_device_name">Nom de l\'appareil</string>
     <string name="osmo_connect_to_device">Lier à l\'appareil</string>
-    <string name="osmo_join_group">Rejoindre le groupe</string>
-    <string name="osmo_new_device">Connecter à l\'appareil</string>
+    
+    
     <string name="osmo_connected_devices">Appareils connectés</string>
     <string name="osmo_groups">Groupes/appareils OsMo</string>
     <string name="osmo_auto_send_locations_descr">Démarrer automatiquement la session de suivi et envoyer des lieux après le démarrage de l\'application</string>
@@ -1672,7 +1670,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="color_yellow">Jaune</string>
 	<string name="color_lightblue">Bleu clair</string>
 	<string name="color_blue">Bleu</string>
-	<string name="color_magenta">Magenta</string>
+	
 	
     <string name="osmo_edit_device">Modifier les caractéristiques de l\'utilisateur</string>
     <string name="osmo_edit_color">Afficher la couleur</string>

@@ -9,12 +9,19 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="loading_smth">Loading %1$s &#8230;</string>
+    <string name="map_widget_plain_time">Current time</string>
+    <string name="gpx_wpt">Waypoint</string>
+    <string name="selected_gpx_info_show">\n\nPress and hold to see on map</string>
+    <string name="delay_navigation_start">Start navigation with delay</string>
+    <string name="selected">selected</string>
+    <string name="gpx_split_interval">Select split interval</string>
     <string name="local_index_gpx_info_show">\n\nPress and hold for options</string>
 	<string name="gpx_info_subtracks">Subtracks: %1$s </string>
 	<string name="gpx_info_waypoints">Waypoints: %1$s </string>
 	<string name="gpx_info_distance">Distance: %1$s (%2$s points) </string>
-	<string name="gpx_info_start_time">Start time: %1$tF,  %1$tR </string>
-	<string name="gpx_info_end_time">End time: %1$tF,  %1$tR </string>
+	<string name="gpx_info_start_time">Start time: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">End time: %1$tF,  %1$tT </string>
 	<string name="gpx_info_average_speed">Average speed: %1$s </string>
 	<string name="gpx_info_maximum_speed">Maximum speed: %1$s </string>
 	<string name="gpx_info_avg_altitude">Average altitude: %1$s</string>
@@ -26,16 +33,16 @@
     <string name="gpx_selection_number_of_points"> %1$s points</string>
     <string name="gpx_selection_point">Point %1$s</string>
     <string name="gpx_selection_current_track">recording</string>
-    <string name="gpx_selection_route_points">%1$s \n Route points %2$s</string>
-    <string name="gpx_selection_points">%1$s\n Points</string>
-    <string name="gpx_selection_track">%1$s\n Track %2$s</string>
+    <string name="gpx_selection_route_points">%1$s \nRoute points %2$s</string>
+    <string name="gpx_selection_points">%1$s \nPoints</string>
+    <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
     <string name="gpx_available_current_track">Current recording track</string>
     <string name="gpx_file_is_empty">Gpx track is empty</string>
     <string name="selected_track">Selected tracks</string>
     <string name="my_tracks">All tracks</string>
     <string name="my_favorites">My Favorites</string>
-    <string name="my_data_Button">My Data</string>
-    <string name="my_data_activity">My Data</string>
+    <string name="my_data_Button">My Places</string>
+    <string name="my_data_activity">My Places</string>
     <string name="osmo_user_joined">User %1$s joined group %2$s</string>
     <string name="osmo_user_left">User %1$s left group %2$s</string>
     <string name="osmo_show_group_notifications">Show group notifications</string>
@@ -111,6 +118,9 @@
         * Calculate route between route points of GPX track
         * Changed layout of countries for downloads (support local names search)
         * Supports GPX/KML import (convert from KML to GPX)
+        * GPX tracks has moved to \'My Data\'
+        * You can split GPX track by distance and check altitude difference/ speed
+        * Auto start navigation after delay
     </string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
     <string name="osmo_mode_restart">Restart OsMo session</string>
@@ -521,7 +531,7 @@
     <string name="audionotes_plugin_name">Audio/video notes</string>
     <string name="index_srtm_parts">parts</string>
     <string name="index_srtm_ele">Contour lines</string>
-    <string name="srtm_plugin_description">Facilitates downloading offline contour lines and hillshades (\'Settings\' → \'Data Management\' → \'Download\' → Select desired map type).</string>
+    <string name="srtm_plugin_description">Facilitates downloading offline contour lines and hillshades (\'Settings\' → \'Manage map files\' → \'Download\' → Select desired map type).</string>
     <string name="srtm_plugin_name">Contour lines plugin</string>
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads only</string>
@@ -537,7 +547,7 @@
 	<string name="tip_altitude_offset">Altitude Correction</string>
 	<string name="tip_altitude_offset_t">Most GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
 		\n\nA better approximation to these local systems is the EGM96 (geoid) reference.
-		\n\nOsmAnd will display your positions\'s altitude in the EGM96 system after you download the file \'World Altitide Correction\' (WW15MGH.DAC) via \'Settings\' → \'Data Management\'. (Original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
+		\n\nOsmAnd will display your positions\'s altitude in the EGM96 system after you download the file \'World Altitide Correction\' (WW15MGH.DAC) via \'Settings\' → \'Manage map files\'. (Original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
 	</string>
     <string name="map_widget_max_speed">Speed limit</string>
     <string name="monitoring_control_start">GPX</string>
@@ -819,8 +829,8 @@ List of countries supported (basically world wide!):
 Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
 	</string>
 	<string name="tip_update_index">Updating Offline Maps</string>
-	<string name="tip_update_index_t">Up-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a data manager to download these offline maps (and some other data files), and to check for available updates.
-		\n\nTo download maps go to \'Settings\' → \'Data Management\' → \'Download offline data\'.
+	<string name="tip_update_index_t">Up-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a map file manager to download these offline maps and to check for available updates.
+		\n\nTo download maps go to \'Settings\' → \'Manage map files\' → \'Download\'.
 		\n\nAfter the global region list is retrieved from the internet, click on any entry to download or update a file. Please note the file type selector near the top of the screen to select the type of download you want (regular maps, hillshade overlays, etc.).
 		\n\nYou can filter the region list by typing some letters, or you may select the option \'Settings\' → \'Filter downloaded\' to see updates only for the data already on your device.
 		\n\n\t* Entries in \'green\' indicate data files identical on device and server
@@ -955,17 +965,17 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
 	<string name="left_side_navigation">Left-hand driving</string>
 	<string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
-	<string name="download_link_and_local_description">Click here to download or update offline data. \nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
+	<string name="download_link_and_local_description">Click here to download or update offline map files. \nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
 	<string name="unknown_from_location">Starting point is not yet determined</string>
 	<string name="unknown_location">Position not yet known</string>
 	<string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
 	<string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
-	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' →  \'Data Management\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transportation.</string>    
+	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' →  \'Manage map files\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transportation.</string>    
 	<string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
 	<string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online and tile maps</string>
 	<string name="local_indexes_cat_map">Offline maps (vector)</string>
-	<string name="index_settings_descr">Download maps and manage offline data stored on your device</string>
+	<string name="index_settings_descr">Download and manage offline map files stored on your device</string>
 	<string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
 	<string name="map_online_data">Online and tile maps</string>
 	<string name="map_online_data_descr">Use online maps (download and cache tiles on SD card)</string>
@@ -1002,7 +1012,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="debugging_and_development">OsmAnd development</string>
 	<string name="native_rendering">Native rendering</string>
 	<string name="test_voice_prompts">Test voice prompts</string>    
-	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Data Management), or switch to online maps.</string>
+	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Manage map files), or switch to online maps (enable online maps plugin for this).</string>
 	<string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2:
 		\n\t- Native rendering for all devices
 		\n\t- Offline POI editing
@@ -1148,7 +1158,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="routing_settings">Navigation</string>
 	<string name="routing_settings_descr">Specify options for the navigation</string>
 	<string name="global_settings">Global Settings</string>
-	<string name="index_settings">Data management</string>
+	<string name="index_settings">Manage map files</string>
 	<string name="general_settings">General</string>
 	<string name="general_settings_descr">Configure display and common settings for the application</string>
 	<string name="global_app_settings">Global app settings</string>
@@ -1299,7 +1309,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_items_restored">%1$d of %2$d item(s) successfully activated.</string>
 	<string name="local_index_no_items_to_do">No items to %1$s</string>
 	<string name="local_index_action_do">You are about to %1$s %2$s item(s). Continue?</string>
-	<string name="local_index_descr_title">Data Management</string>
+	<string name="local_index_descr_title">Manage map files</string>
 	<string name="local_index_mi_restore">Activate</string>
 	<string name="local_index_mi_backup">Deactivate</string>
 	<string name="local_index_mi_delete">Delete</string>
@@ -1372,7 +1382,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_favorites">Favorite Points</string>
 	<string name="tip_favorites_t">Frequently used points can be saved as Favorites, as follows:
 		\n\nIn the \'Use location\' context menu for any point, select option \'Add to favorites\' and then enter a name for it.
-		\n\nAfter saving a Favorite, it is accessible via \'Menu\' → \'Favorites\'. Tapping on any entry in the \'Favorites\' list provides options like to navigate to it, edit or delete it.
+		\n\nAfter saving a Favorite, it is accessible via \'Menu\' → \'My Places\'. Tapping on any entry in the \'Favorites\' list provides options like to navigate to it, edit or delete it.
 		\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' in \'Menu\' → \'Map layers\'.
 	</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
@@ -1691,7 +1701,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="loading_postcodes">Loading postcodes&#8230;</string>
 	<string name="loading_streets">Loading streets&#8230;</string>
 	<string name="loading_cities">Loading cities&#8230;</string>
-	<string name="loading">Loading&#8230;</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Error while saving GPX</string>
 	<string name="error_calculating_route">Error calculating route</string>
@@ -1759,7 +1768,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="exit_Button">Exit</string>
 	<string name="map_Button">Map</string>
 	<string name="settings_Button">Settings</string>
-	<string name="favorites_Button">Favorites</string>
+	<string name="favorites_Button">My Places</string>
 	<string name="search_button">Search</string>
 	<string name="search_activity">Search</string>
 	<string name="searchpoi_activity">Choose POI</string>

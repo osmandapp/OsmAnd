@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="map_widget_gps_info">GPS informacije</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
     <string name="item_unchecked">neprovjereno</string>
@@ -380,7 +379,7 @@
 	<string name="error_occurred_saving_gpx">Dogodila se greška pri spremanju GPX datoteke</string>
 	<string name="new_route_calculated_dist">Nova ruta je izračunata, udaljenost</string>
 	<string name="arrived_at_destination">Stigli ste na odredište</string>
-	<string name="loading">Učitavanje…</string>
+	
 	<string name="loading_postcodes">Učitavanje poštanskih brojeva…</string>
 	<string name="loading_streets">Učitavanje ulica…</string>
 	<string name="loading_cities">Učitavanje gradova…</string>
@@ -578,9 +577,8 @@
 	<string name="favourites_edit_dialog_name">Ime</string>
 	<string name="favourites_edit_dialog_category">Kategorija</string>
 	<string name="local_index_gpx_info_show">\n\nPritisnite i držite za opcije</string>
-	<string name="local_index_gpx_info_speed">\nSrednja brzina: %1$s
-\nMaksimalna brzina: %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nSrednja visina: %1$s\nMinimalna visina: %2$s\nMaksimaljna visina: %3$s\nUsponi: %4$s\nNizbrdica: %5$s</string>
+	
+	
 	<string name="local_index_installed">Izdanje</string>
 	<string name="precise_routing_mode">Precizni način navođenja (alfa)</string>
     <string name="av_def_action_choose">Odaberite na zahtjev</string>
@@ -773,7 +771,7 @@
 	<string name="local_index_items_restored">%1$d od %2$d item(s) stavke uspješno su uključene.</string>
 	<string name="local_index_no_items_to_do">Nema stavki za %1$s</string>
 	<string name="local_index_action_do">Namjeravate %1$s %2$s stavke. Nastaviti?</string>
-	<string name="local_index_gpx_info">Rute: %1$d\nSve točke: %2$d\nMeđutočke: %3$d\nUkupna udaljenost: %4$s\nVrijeme početka: %5$tF, %5$tR\nKraj vremena: %6$tF, %6$tR</string>
+	
 	<string name="local_index_mi_upload_gpx">Pošalji na OSM</string>
 	<string name="show_more_map_detail">Prikaži više pojedinosti na karti</string>
 	<string name="show_more_map_detail_descr">Pokaži neke pojedinosti vektorske karte (ceste i sl.) na manjem zoom-u</string>
@@ -873,8 +871,8 @@
 	<string name="prefs_plugins_descr">Dodaci aktiviraju napredne postavke i dodatne funkcije</string>
 	<string name="debugging_and_development">OsmAnd razvoj</string>
 	<string name="recording_open_external_player">Otvori preglednik</string>
-    <string name="position_on_map_descr">Odaberite lokaciju pozicije oznake na karti</string>
-	<string name="position_on_map">Oznaka pozicije</string>
+    
+	
 	<string name="enable_plugin_monitoring_services">Omogućite dodatak za bilježenje položaja (GPX snimanje, online praćenje)</string>
     <string name="intermediate_point_too_far">Međutočka %1$s je predaleko od najbliže ceste.</string>
     <string name="arrived_at_intermediate_point">Stigli ste na međutočku</string>
@@ -985,8 +983,8 @@
     <string name="route_to">Do:</string>
     <string name="route_via">Preko:</string>
     <string name="route_from">Od:</string>
-	<string name="local_index_gpx_timespan">\nVrijeme trajanja: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nVrijeme u pokretu: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="please_select_address">Odaberite prvo grad ili ulicu</string>
     <string name="app_modes_choose">Profili aplikacije</string>
 	<string name="app_modes_choose_descr">Odaberite profil koji će se koristiti u aplikaciji</string>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -274,9 +273,9 @@
   <string name="basemap_missing">De basis-wereldkaart (ruwe kaart van de gehele wereld) ontbreekt. Overweeg om deze te downloaden (World_basemap_x.obf) voor een compleet kaartbeeld.</string>
   <string name="vector_data_missing">Er staan nog geen offline kaarten op de SD-kaart. Download kaarten om offline te kunnen werken.</string>
   <string name="local_index_gpx_info_show">\n\nLang drukken voor opties</string>
-  <string name="local_index_gpx_info_speed">"\nGemiddelde snelheid : %1$s \nMaximum snelheid : %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nGemiddelde hoogte : %1$s\nMinimum hoogte : %2$s\nMaximum hoogte : %3$s\nStijgingen : %4$s\nDalingen : %5$s"</string>
-  <string name="local_index_gpx_info">Subtracks : %1$d\nTotaal aantal punten : %2$d\nRoutepunten : %3$d\nTotale afstand : %4$s\nStarttijd : %5$tF, %5$tR\nEindtijd : %6$tF, %6$tR</string>
+  
+  
+  
 <string name="local_index_installed">Editie</string>
   <string name="local_index_items_backuped">%1$d van %2$d gegevens succesvol gedeactiveerd.</string>
   <string name="local_index_items_deleted">%1$d van %2$d gegevens succesvol verwijderd.</string>
@@ -696,7 +695,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="loading_postcodes">Postcodes worden geladen…</string>
   <string name="loading_streets">Straten worden geladen…</string>
   <string name="loading_cities">Steden worden geladen…</string>
-  <string name="loading">Bezig met laden…</string>
+  
   <string name="poi">interessepunt</string>
   <string name="error_occurred_saving_gpx">Fout bij het opslaan van GPX</string>
   <string name="error_calculating_route">Fout bij routeberekening</string>
@@ -748,8 +747,8 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="choose_street">Kies straat</string>
   <string name="choose_city">Kies stad</string>
   <string name="ChooseCountry">Kies land</string>
-  <string name="position_on_map_descr">Kies plek van de positiemarkering op de kaart</string>
-  <string name="position_on_map">Positiemarkering</string>
+  
+  
   
   <string name="show_view_angle">Toon kijkrichting</string>
   <string name="map_view_3d_descr">Activeer 3D kaartbeeld</string>
@@ -1494,8 +1493,8 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="please_select_address">Kies eerst een stad of straat</string>
     <string name="context_menu_item_destination_point">Als bestemming\ninstellen</string>
     <string name="destination_point">Bestemming %1$s</string>
-    <string name="local_index_gpx_timemoving">\nTijd in beweging: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timespan">\nTijdspanne: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="av_photo_play_sound">Speel geluid af na nemen van foto</string>
 	<string name="av_camera_focus">Scherpstelmethode van camera</string>
 	<string name="av_camera_focus_descr">Kies scherpstelmethode van interne camera</string>
@@ -1736,7 +1735,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="osmo_io_error">OsMo verbindingsprobleem: </string>
     <string name="osmo_mode_on">Stop OsMo sessie</string>    
     <string name="osmo_mode_off">Start OsMo</string>
-    <string name="osmo_register_device">Toestel wordt geregistreerd... </string>
+    
     <string name="share_fav">Delen</string>
 	<string name="share_fav_subject">Via AsmAnd gedeelde favorieten</string>
 	<string name="hours_ago">uur geleden</string>
@@ -1745,8 +1744,8 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="osmo_connect_to_device_name">Gebruikersnaam</string>
     <string name="osmo_connect_to_device_tracker_id">Tracker-ID</string>
     <string name="osmo_connect_to_device">Koppelen met toestel</string>
-    <string name="osmo_join_group">Lid worden van groep</string>
-    <string name="osmo_new_device">Verbind met toestel</string>
+    
+    
     <string name="osmo_connected_devices">Verbonden toestellen</string>
     <string name="osmo_groups">OsMo groepen/toestellen</string>
     <string name="osmo_auto_send_locations_descr">Start tracker en stuur locaties automatisch na het starten van de applicatie</string>
@@ -1801,7 +1800,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
 	<string name="color_yellow">geel</string>
 	<string name="color_lightblue">lichtblauw</string>
 	<string name="color_blue">blauw</string>
-	<string name="color_magenta">magenta</string>
+	
 	
     <string name="osmo_edit_device">Wijzig gebruiker-instellingen</string>
     <string name="osmo_edit_color">Weergavekleur</string>
@@ -1826,7 +1825,26 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="my_favorites">Mijn favorieten</string>
     <string name="my_data_Button">Mijn gegevens</string>
     <string name="my_data_activity">Mijn gegevens</string>
-    <string name="selected_track">Track</string>
+    <string name="selected_track">Gekozen track</string>
     <string name="my_tracks">Alle tracks</string>
     <string name="gpx_file_is_empty">Gpx track is leeg</string>
+    <string name="gpx_info_subtracks">Subtracks: %1$s </string>
+	<string name="gpx_info_distance">Afstand: %1$s (%2$s punten) </string>
+	<string name="gpx_info_start_time">Starttijd: %1$tF,  %1$tR </string>
+	<string name="gpx_info_end_time">Eindtijd: %1$tF,  %1$tR </string>
+	<string name="gpx_info_average_speed">Gemiddelde snelheid: %1$s </string>
+	<string name="gpx_info_maximum_speed">Maximum snelheid: %1$s </string>
+	<string name="gpx_info_avg_altitude">Gemiddelde hoogte: %1$s</string>
+	<string name="gpx_info_diff_altitude">Hoogteverschil: %1$s</string>
+	<string name="gpx_info_asc_altitude">Stijgingen: %1$s</string>
+    <string name="gpx_timespan">Tijdsduur: %1$s</string>
+	<string name="gpx_timemoving">Tijdsduur verplaatsingen: %1$s</string>
+    <string name="gpx_selection_segment_title">Segment</string>
+    <string name="gpx_selection_number_of_points"> %1$s punten</string>
+    <string name="gpx_selection_point">Punt %1$s</string>
+    <string name="gpx_selection_current_track">geregistreerde track</string>
+    <string name="gpx_selection_route_points">%1$s \n Routepunten %2$s</string>
+    <string name="gpx_selection_points">%1$s\n punten</string>
+    <string name="gpx_selection_track">%1$s\n Track %2$s</string>
+    <string name="gpx_available_current_track">Huidige geregistreerde track</string>
     </resources>

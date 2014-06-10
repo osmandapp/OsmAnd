@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams OsmAnd vajadzēs restartēt.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus funkcijas un uzstādījumus kā piemēram sekošana, enerģijas taupīšana, pieejamība un daudzas citas</string>
   <string name="prefs_plugins">Spraudņi</string>
@@ -249,9 +248,9 @@
   <string name="basemap_missing">Pasaules karte (visa pasaule zemākā izšķirtspējā) nav pieejama. Lūdzu lejupielādējiet World_basemap_x.obf, pilnvērtīgai kartes pārlūkošanai.</string>
   <string name="vector_data_missing">SD kartē nav atrodami bezsaistes dati. Lai lietotu bezsaistes kartes, lūdzu lejupielādējiet tās, lai varētu lietot bezsaistē.</string>
   <string name="local_index_gpx_info_show">"\n\nTuriet nospiestu izvēlnes atvēršanai"</string>
-  <string name="local_index_gpx_info_speed">"\nVidējais ātrums : %1$s \nMaksimālais ātrums : %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nVidējais augstums : %1$s\nMinimālais augstums : %2$s\nMaksimālais augstums : %3$s\nUz augšu : %4$s\nUz leju : %5$s"</string>
-  <string name="local_index_gpx_info">Nobrauktie ceļi: %1$d\nVisas vietas: %2$d\nPieturvietas: %3$d\nKopējais attālums: %4$s\nSākuma laiks: %5$tF, %5$tR\nNobeiguma laiks: %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Versija</string>
   <string name="local_index_items_backuped">Veiksmīgi arhivētas %1$d no %2$d vienībām.</string>
   <string name="local_index_items_deleted">Veiksmīgi izdzēstas %1$d no %2$d vienībām.</string>
@@ -654,7 +653,7 @@
   <string name="loading_postcodes">Ielādē pasta indeksus…</string>
   <string name="loading_streets">Ielādē ielas…</string>
   <string name="loading_cities">Ielādē pilsētas…</string>
-  <string name="loading">Ielādē…</string>
+  
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Kļūda saglabājot GPX</string>
   <string name="error_calculating_route">Kļūda, aprēķinot maršrutu</string>
@@ -706,8 +705,8 @@
   <string name="choose_street">Izvēlieties ielu</string>
   <string name="choose_city">Izvēlieties pilsētu</string>
   <string name="ChooseCountry">Izvēlieties valsti</string>
-  <string name="position_on_map_descr">Izvēlieties pozīcijas marķiera vietu uz kartes</string>
-  <string name="position_on_map">Pozīcijas marķieris</string>
+  
+  
   
   <string name="show_view_angle">Rādīt redzamības virzienu</string>
   <string name="map_view_3d_descr">Ieslēgt kartes 3D skatu</string>
@@ -1293,8 +1292,8 @@
     <string name="local_index_tile_data_name">Attēlu dati: %1$s</string>
     <string name="edit_tilesource_successfully">Attēlu avots %1$s ir saglabāts</string>
     <string name="edit_tilesource_elliptic_tile">Eliptisks merkators</string>
-    <string name="local_index_gpx_timespan">\nKopējais laiks: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nBrauciena laiks: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="delete_point">Noņemt punktu</string>
     <string name="plugin_distance_point">Punkts</string>
     <string name="use_distance_measurement_help">…* Nospiediet, lai atzīmētu punktu.\n…
@@ -1636,7 +1635,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmo_io_error">Problēma ar OSMo savienojumu: </string>
     <string name="osmo_mode_on">Apturēt OSMo sesiju</string>    
     <string name="osmo_mode_off">Sākt OSMo sesiju</string>
-    <string name="osmo_register_device">Reģistrē ierīci... </string>
+    
     <string name="share_fav">Kopīgot</string>
 	<string name="share_fav_subject">Izlase kopīgota OsmAnd</string>
 	<string name="use_points_as_intermediates">Rēķināt maršrutu starp punktiem</string>
@@ -1714,7 +1713,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="color_yellow">dzeltens</string>
 	<string name="color_lightblue">gaiši zils</string>
 	<string name="color_blue">zils</string>
-	<string name="color_magenta">Purpursarkans</string>
+	
 	
     <string name="osmo_edit_device">Mainīt lietotāja uzstādījumus</string>
     <string name="osmo_edit_color">Ekrāna krāsa</string>

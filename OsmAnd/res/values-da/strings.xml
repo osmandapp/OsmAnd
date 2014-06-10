@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -33,7 +33,7 @@
     <string name="recording_context_menu_delete">Slet optagelse</string>
     <string name="recording_context_menu_play">Afspil</string>
     <string name="recording_description">Optagelse %1$s %2$s af %3$s</string>
-    <string name="recording_default_name">optagelse</string>
+    <string name="recording_default_name">optager</string>
     <string name="av_control_start">Start</string>
     <string name="map_widget_av_notes">Audio-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
@@ -51,7 +51,7 @@
     <string name="audionotes_plugin_name">Audio-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (\'Indstillinger\' → \'Datahåndtering\' → \'Hent\' → Vælg den ønskede korttype).</string>
+    <string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (\'Indstillinger\' → \'Korthåndtering\' → \'Hent\' → Vælg den ønskede korttype).</string>
     <string name="srtm_plugin_name">Højdekurver</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
@@ -70,7 +70,7 @@
 	<string name="tip_altitude_offset_t">De fleste GPS-enheder gengiver højdemålinger i det ellipsoide-baserede WGS84 referencesystem, hvorfra en konvertering til lokalt anvendte systemer kræver en positions afhængig korrektion.
 \n\nEn bedre tilnærmelse til disse lokale systemer er EGM96 reference.
 \n\n OsmAnd understøtter også den automatiske visning af højder i EGM96 systemet, når
- filen \'World Altitide Correction\' (WW15MGH.DAC) er hentet via \'Instillinger\' → \'Datahåndtering\'. (Original findes på http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+ filen \'World Altitide Correction\' (WW15MGH.DAC) er hentet via \'Instillinger\' → \'Korthåndtering\'. (Original findes på http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     <string name="map_widget_max_speed">Fartgrænse</string>
     <string name="route_descr_current_location">Aktuel position</string>
@@ -193,8 +193,8 @@
 \nsporing</string>
 	<string name="live_monitoring_mode_on">Stop online 
 \nsporing</string>
-	<string name="position_on_map_descr">Vælg placering af positionsmarkør på kortet</string>
-	<string name="position_on_map">Positionsmarkør</string>
+	
+	
 	<string name="layer_map_appearance">Konfigurer skærm</string>
 	<string name="show_lanes">Vis vognbaner</string>
 	<string name="avoid_unpaved">Undgå grusveje</string>
@@ -346,19 +346,19 @@
 	<string name="offline_navigation_not_available">OsmAnd offline navigation er midlertidig utilgængelig.</string>
 	<string name="left_side_navigation">Venstrekørsel</string>
 	<string name="left_side_navigation_descr">Vælg for lande med venstrekørsel</string>
-	<string name="download_link_and_local_description">Tryk her for at hente eller opdatere offlinedata.
+	<string name="download_link_and_local_description">Tryk her for at hente eller opdatere kortfiler.
 \nTryk på et eksisterende element for at se flere detaljer, tryk og hold for at deaktiver eller slette. Nuværende data på enheden (%1$s fri):</string>
 	<string name="unknown_from_location">Startpunkt er endnu ikke fastlagt</string>
 	<string name="unknown_location">Position endnu ikke kendt</string>
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
 	<string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
-	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Datahåndtering\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og finde offentlig transport.</string>    
+	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Korthåndtering\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og finde offentlig transport.</string>    
 	<string name="basemap_was_selected_to_download">Basiskort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
 	<string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online- og delkort</string>
 	<string name="local_indexes_cat_map">Offlinekort (vektor)</string>
 	
-	<string name="index_settings_descr">Hent kort og håndter offlinedata gemt på enheden</string>
+	<string name="index_settings_descr">Hent og håndter offline kortfiler gemt på enheden</string>
 	<string name="map_online_plugin_is_not_installed">Aktiver onlinekort udvidelse for at vælge andre kortkilder</string>
 	<string name="map_online_data">Online- og delkort</string>
 	<string name="map_online_data_descr">Brug onlinekort (hent og gem midlertidig delkort på SD-kort)</string>
@@ -582,8 +582,7 @@
 	<string name="favourites_edit_dialog_category">Kategori</string>
 	<string name="vector_map_not_needed">Nej tak</string>
 	<string name="local_index_gpx_info_show">\nTryk og hold for valgmuligheder</string>
-	<string name="local_index_gpx_info_speed">\nGennemsnitsfart: %1$s
-\nTopfart: %2$s</string>
+	
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
@@ -768,9 +767,9 @@ Anslået kort dækning og kvalitet:
 Liste over understøttede lande (dybest set world wide!): 
 Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
 	</string>
-	<string name="tip_update_index_t">At have opdaterede kortdata er afgørende for visning af offlinekort, for IP/adresse søgning og til offline navigation. OsmAnd har en datahåndtering, som kan hente offlinekort (og nogle andre datafiler), og søge efter tilgængelige opdateringer.
-\n\nFor at hente kort gå til \'Indstillinger\' → \'Datahåndtering\' → \'Hent offlinedata\'. 
-\n\nEfter at den globale regionsliste er hentet fra internettet, klikkes på en post for at hente eller opdatere en fil. Bemærk filtypen vælgeren nær toppen af skærmen, som kan vælge den type overførsel, som ønskes (almindelige kort, reliefoverlejring, osv.).
+	<string name="tip_update_index_t">At have opdaterede kortdata er afgørende for visning af offlinekort, for IP/adresse søgning og til offline navigation. OsmAnd har en korthåndtering, som kan hente offlinekort og søge efter tilgængelige opdateringer.
+\n\nFor at hente kort gå til \'Indstillinger\' → \'Korthåndtering\' → \'Hent\'. 
+\n\nEfter at den globale regionsliste er hentet fra internettet, tryk på en post for at hente eller opdatere en fil. Bemærk filtypen vælgeren nær toppen af skærmen, som kan vælge den type overførsel, som ønskes (almindelige kort, reliefoverlejring, osv.).
 \n\nFor at filtrere regionslisten tastes nogle bogstaver, eller ve d at vælge \'Indstillinger\' → \'Filtrer det hentede\' for at kun at se opdateringer til data, der allerede på enheden.
 \n\n * Emner i \'grøn\' indikerer datafiler identiske på enheden og serveren
 \n * Emner i \'blå\' angiver tilgængelige opdateringer på serveren
@@ -868,17 +867,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="favorite_delete_multiple">%1$d favoritter og %2$d favoritgrupper slettes. Forsæt?</string>
 	<string name="basemap_missing">Basis verdenskort (dækker hele verden ved lav zoom) mangler. Overvej at hente World_basemap_x.obf for et komplet kortmiljø.</string>
 	<string name="vector_data_missing">Offline-data mangler på SD-kort. Overvej at hente for at kunne bruge kort offline.</string>
-	<string name="local_index_gpx_info_elevation">\nGennemsnits højde: %1$
-\nMinimum højde: %2$
-\nMaksimum højde: %3$
-\nStigninger: %4$
-\nFald: %5$</string>
-	<string name="local_index_gpx_info">Delspor: %1$d
-\nTotale punkter: %2$d
-\nRutepunkter: %3$d
-\nSamlet afstand: %4$s
-\nStarttid: %5$tF, %5$tR
-\nSluttid: %6$tF, %6$tR</string>
+	
+	
 	<string name="local_index_installed">Udgave</string>
 	<string name="local_index_items_backuped">%1$d af %2$d emner deaktiveret.</string>
 	<string name="local_index_items_deleted">%1$d af %2$d emner slettet.</string>
@@ -1347,7 +1337,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="loading_postcodes">Indlæser postnumre…</string>
 	<string name="loading_streets">Indlæser gader…</string>
 	<string name="loading_cities">Indlæser byer…</string>
-	<string name="loading">Indlæser…</string>
+	
 	<string name="poi">Interessepunkt</string>
 	<string name="error_occurred_saving_gpx">Fejl under lagring af GPX</string>
 	<string name="error_calculating_route">Fejl under ruteberegning</string>
@@ -1415,7 +1405,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="exit_Button">Afslut</string>
 	<string name="map_Button">Kort</string>
 	<string name="settings_Button">Indstillinger</string>
-	<string name="favorites_Button">Favoritter</string>
+	<string name="favorites_Button">Mine steder</string>
 	<string name="search_button">Søg</string>
 	<string name="search_activity">Søg</string>
 	<string name="searchpoi_activity">Vælg interessepunkt</string>
@@ -1533,8 +1523,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="please_select_address">Vælg først en by eller gade</string>
     <string name="context_menu_item_destination_point">Vælg som destination</string>
     <string name="destination_point">Destinationen %1$s</string>
-    <string name="local_index_gpx_timespan">\nPeriode: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nTid i bevægelse: %1$d:%2$02d:%3$02d</string>
+    
+	
 	<string name="av_camera_focus">Kameraets fokustype</string>
 	<string name="av_camera_focus_descr">Vælg fokustype på intern kamera</string>
 	<string name="av_camera_focus_auto">Autofokus</string>
@@ -1786,13 +1776,15 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_io_error">OsMo forbindelsesproblem: </string>
     <string name="osmo_mode_on">Stop OsMo session</string>    
     <string name="osmo_mode_off">Start OsMo session</string>
-    <string name="osmo_register_device">Registrering af enhed… </string>
+    
     <string name="share_fav">Del</string>
 	<string name="share_fav_subject">Favoritter delt via Osmand</string>
 	<string name="use_points_as_intermediates">Beregn rute mellem punkter</string>
     <string name="tip_recent_changes_1_8_alpha">Ændringer i 1.8:
          * Beregn rute mellem rutepunkter i GPX-spor
          * Ændret udseende for hentning af lande (understøtter søgning på lokale navne)
+   * GPX spor er flyttet til \' Mine data \'          * Du kan opdele GPX spor ved afstand og tjek højdeforskel / hastighed
+
 	 * Understøtter GPX/KML import (konverter fra KML til GPX)
     </string>
     <string name="hours_ago">timer siden</string>
@@ -1801,8 +1793,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_connect_to_device_name">Brugernavn</string>
     <string name="osmo_connect_to_device_tracker_id">Sporings-id</string>
     <string name="osmo_connect_to_device">Sammenkæd med enheden</string>
-    <string name="osmo_join_group">Tilmeld gruppen</string>
-    <string name="osmo_new_device">Opret forbindelse til enheden</string>
+    
+    
     <string name="osmo_connected_devices">Tilsluttede enheder</string>
     <string name="osmo_groups">OsMo grupper/enheder</string>
     <string name="osmo_auto_send_locations_descr">Start sporingssession automatisk og send placeringer efter start af programmet</string>
@@ -1851,7 +1843,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="color_yellow">gul</string>
 	<string name="color_lightblue">lyseblå</string>
 	<string name="color_blue">blå</string>
-	<string name="color_magenta">magenta</string>
+	
 	
     <string name="osmo_edit_device">Ændre brugeregenskaber</string>
     <string name="osmo_edit_color">Visningsfarve</string>
@@ -1873,10 +1865,37 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_show_group_notifications_descr">Vis popup-meddelelser, når brugeren slutter sig til gruppen eller forlader den</string>
     <string name="osmo_user_joined">Bruger %1$s sluttede sig til  gruppen %2$s</string>
     <string name="osmo_user_left">Bruger %1$s forlod gruppen %2$s</string>
-    <string name="selected_track">Spor</string>
+    <string name="selected_track">Valgte spor</string>
     <string name="my_tracks">Alle spor</string>
     <string name="my_favorites">Mine favoritter</string>
-    <string name="my_data_Button">Mine data</string>
-    <string name="my_data_activity">Mine data</string>
+    <string name="my_data_Button">Mine steder</string>
+    <string name="my_data_activity">Mine steder</string>
     <string name="gpx_file_is_empty">GPX-spor er tomt</string>
+    <string name="gpx_info_waypoints">Rutepunkter: %1$s </string>
+	<string name="gpx_info_distance">Afstand: %1$s (%2$s pukter) </string>
+	<string name="gpx_info_start_time">Startid: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">Sluttid: %1$tF,  %1$tT </string>
+	<string name="gpx_info_average_speed">Gennemsnitshastighed: %1$s </string>
+	<string name="gpx_info_maximum_speed">Maks hastighed: %1$s </string>
+	<string name="gpx_info_avg_altitude">Gennemsnitshøjde: %1$s</string>
+	<string name="gpx_info_diff_altitude">Højdeforskel: %1$s</string>
+	<string name="gpx_info_asc_altitude">Højdestigninger: %1$s</string>
+    <string name="gpx_timespan">Periode: %1$s</string>
+	<string name="gpx_timemoving">Tid i bevægelse: %1$s</string>
+    <string name="gpx_selection_segment_title">Segment</string>
+    <string name="gpx_selection_number_of_points"> %1$s punkter</string>
+    <string name="gpx_selection_point">Punkt %1$s</string>
+    <string name="gpx_selection_current_track">optager</string>
+    <string name="gpx_selection_route_points">%1$s \nRutepunkter %2$s</string>
+    <string name="gpx_selection_points">%1$s\nPunkter</string>
+    <string name="gpx_selection_track">%1$s\nSpor %2$s</string>
+    <string name="gpx_available_current_track">Aktuel optager spor</string>
+    <string name="gpx_info_subtracks">Underspor: %1$s </string>
+	<string name="map_widget_plain_time">Aktuel tid</string>
+    <string name="gpx_wpt">Rutepunkt</string>
+    <string name="selected_gpx_info_show">\n\nTryk og hold for at se på kort</string>
+    <string name="delay_navigation_start">Start navigationen med forsinkelse</string>
+    <string name="selected">valgt</string>
+    <string name="gpx_split_interval">Vælg split interval</string>
+    <string name="loading_smth">Indlæser %1$s…</string>
     </resources>

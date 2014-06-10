@@ -12,30 +12,39 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="25dp"
-            android:layout_height="fill_parent"
-            android:paddingRight="2dp"
-            android:paddingTop="2dp" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" 
+            android:layout_marginLeft="3dp"
+            >
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:id="@+id/additional"
+                style="@style/ListText.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="3dp"
+                android:layout_marginLeft="2dp"  >
+            </TextView>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/name"
             style="@style/ListText.Small"
-            android:layout_marginLeft="5dp"
             android:layout_width="0dp"
+            android:paddingTop="2dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:gravity="center_vertical" >
-        </TextView>
-
-        <TextView
-            android:id="@+id/additional"
-            style="@style/ListText.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:gravity="right" >
         </TextView>
     </LinearLayout>
 

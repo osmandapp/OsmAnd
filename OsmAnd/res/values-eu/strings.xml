@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="tip_recent_changes_1_6_t">1.6 bertsioan aldaketak:⏎\n⇥⏎\n⇥* Sareko tesela iturburuak definitu/editatu (iraungitze data zehaztu)⏎</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_1_6_t">1.6 bertsioan aldaketak:⏎\n⇥⏎\n⇥* Sareko tesela iturburuak definitu/editatu (iraungitze data zehaztu)⏎</string>
   <string name="local_index_tile_data_zooms">Deskargatutako zoomak: %1$s</string>
   <string name="local_index_tile_data_expire">Iraungitze epea (minutuak): %1$s</string>
   <string name="local_index_tile_data_downloadable">Deskargagarria: %1$s</string>
@@ -45,8 +44,8 @@
   <string name="route_to">Nora:</string>
   <string name="route_via">Pasatuz:</string>
   <string name="route_from">Nondik:</string>
-  <string name="local_index_gpx_timespan">\nDenbora tartea: %1$d:%2$02d:%3$02d</string>
-  <string name="local_index_gpx_timemoving">\nDenbora mugimenduan: %1$d:%2$02d:%3$02d</string>
+  
+  
   <string name="app_mode_default">Mapa arakatu</string>
   <string name="settings_preset">Lehenetsitako profila</string>
   <string name="settings_preset_descr">Maparen ikuspegia eta nabigazio ezarpenak profilka gogoratzen dira. Ezarri hemen zure lehenetsitako profila.</string>
@@ -282,8 +281,8 @@
   <string name="map_widget_renderer">Mapa estiloa</string>
   <string name="live_monitoring_mode_off">Hasi⏎\nsare bidezko jarraipena</string>
   <string name="live_monitoring_mode_on">Gelditu⏎\nsare bidezko jarraipena</string>
-  <string name="position_on_map_descr">Aukeratu kokapen markatzailearen kokalekua</string>
-  <string name="position_on_map">Kokapen markatzailea</string>
+  
+  
   <string name="layer_map_appearance">Pantaila konfiguratu</string>
   <string name="show_lanes">Erreilak erakutsi</string>
   <string name="avoid_unpaved">Asfaltatu gabeko bideak sahistu</string>
@@ -638,9 +637,9 @@
   <string name="basemap_missing">Oinarrizko munduko mapa (mundu guztia estaliz zoom maila txikietan) falta da. Mesedez kontsideratu World_basemap_x.obf deskargatzea ikuspegi guztia eduki ahal izateko.</string>
   <string name="vector_data_missing">Datu lokalak (lineaz kanpokoak) ez daude SD txartelean. Lineaz kanpoko mapak erabili nahi badituzu, jaitsi beharko zenituzke.</string>
   <string name="local_index_gpx_info_show">⏎\n⏎\nZanpatuta mantendu aukerentzat</string>
-  <string name="local_index_gpx_info_speed">⏎\nBatazbesteko abiadura: %1$s ⏎\nAbiadura maximoa: %2$s</string>
-  <string name="local_index_gpx_info_elevation">⏎\nBatazbesteko altuera: %1$s⏎\nAltuera minimoa: %2$s⏎\nAltuera maximoa: %3$s⏎\nIgoerak: %4$s⏎\nJaitsierak: %5$s</string>
-  <string name="local_index_gpx_info">Azpibideak: %1$d⏎\nPuntuak guztira: %2$d⏎\nBide puntuak: %3$d⏎\nDistantzia guztira: %4$s⏎\nHasiera data: %5$tF, %5$tR⏎\nBukaera data: %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Edizioa</string>
   <string name="local_index_items_backuped">%2$d-tik %1$d elementu arrakastarekin ezgaituak.</string>
   <string name="local_index_items_deleted">%2$d-tik %1$d elementu arrakastarekin ezabatuak.</string>
@@ -1004,7 +1003,7 @@
   <string name="loading_postcodes">Posta kodeak kargatzen...</string>
   <string name="loading_streets">Kaleak kargatzen...</string>
   <string name="loading_cities">Herriak kargatzen...</string>
-  <string name="loading">Kargatzen...</string>
+  
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">GPXa gordetzean errorea</string>
   <string name="error_calculating_route">Ibilbidea kalkulatzean errorea</string>

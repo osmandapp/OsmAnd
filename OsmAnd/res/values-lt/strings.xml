@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
   <string name="osmand_parking_warning_text">Perspėjimas pasiimti automobilį jau buvo įtrauktas į jūsų kalendorių. Perspėjimas ten liks tol, kol jo nepanaikinsite.</string>
@@ -378,9 +377,9 @@
   <string name="basemap_missing">Trūksta bazinio viso pasaulio (mažo mastelio, dengiančio visą pasaulį) žemėlapio. Kad programa galėtų sklandžiai veikti parsisiųskite World_basemap_x.obf.</string>
   <string name="vector_data_missing">SD kortelėje nėra parsiųstų žemėlapių. Pirmiausia parsisiųskite žemėlapius, kad vėliau galėtumėte jais naudotis be interneto.</string>
   <string name="local_index_gpx_info_show">\n\nPaspauskite ir laikykite nustatymams atidaryti</string>
-  <string name="local_index_gpx_info_speed">\nVidutinis greitis : %1$s \nDidžiausias greitis : %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nVidutinis aukštis : %1$s\nMažiausias aukštis : %2$s\nDidžiausias aukštis : %3$s\nKopimas : %4$s\nNusileidimas : %5$s</string>
-  <string name="local_index_gpx_info">Sudėtinai maršrutai : %1$d\nIš viso taškų : %2$d\nMaršruto taškų : %3$d\nBendras atstumas : %4$s\nPradžios laikas : %5$tF, %5$tR\nPabaigos laikas : %6$tF, %6$tR</string>
+  
+  
+  
   <string name="local_index_installed">Atnaujinta</string>
   <string name="local_index_items_backuped">Sėkmingai deaktyvuota(-as) %1$d iš %2$d elementų(-o).</string>
   <string name="local_index_items_deleted">Sėkmingai ištrinta(-as) %1$d iš %2$d elementų(-o).</string>
@@ -796,7 +795,7 @@
   <string name="loading_postcodes">Įkeliami pašto indeksai…</string>
   <string name="loading_streets">Įkeliamos gatvės…</string>
   <string name="loading_cities">Įkeliami miestai…</string>
-  <string name="loading">Įkeliama…</string>
+  
   <string name="poi">LV</string>
   <string name="error_occurred_saving_gpx">Įvyko klaida įrašant GPX failą</string>
   <string name="error_calculating_route">Įvyko klaida skaičiuojant maršrutą</string>
@@ -848,8 +847,8 @@
   <string name="choose_street">Pasirinkti gatvę</string>
   <string name="choose_city">Pasirinkti miestą</string>
   <string name="ChooseCountry">Pasirinkti šalį</string>
-  <string name="position_on_map_descr">Pasirinkite žymeklio vietą žemėlapyje</string>
-  <string name="position_on_map">Žymeklio pozicija</string>
+  
+  
   
   <string name="show_view_angle">Rodyti vaizdo kryptį</string>
   <string name="map_view_3d_descr">Įjungti žemėlapio 3D rodinį</string>
@@ -1544,8 +1543,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="route_to">Į:</string>
     <string name="route_via">Per:</string>
     <string name="route_from">Iš:</string>
-	<string name="local_index_gpx_timespan">\nLaiko periodas: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nJudėjimo laikas: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="osb_author_dialog_password">OSM slaptažodis (neprivaloma)</string>
 	<string name="av_camera_focus">Kameros fokuso tipas</string>
 	<string name="av_camera_focus_descr">Pasirinkite vidinės kameros fokuso tipą</string>
@@ -1759,15 +1758,15 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_io_error">OsMo prisijungimo problema : </string>
     <string name="osmo_mode_on">Sustabdyti OsMo sesiją</string>    
     <string name="osmo_mode_off">Paleisti OsMo sesiją</string>
-    <string name="osmo_register_device">Įrenginys registruojamas… </string>
+    
     <string name="share_fav">Bendrinti</string>
 	<string name="share_fav_subject">Įsimintos vietos bendrintos iš OsmAnd</string>
 	<string name="use_points_as_intermediates">Apskaičiuoti maršrutą tarp taškų</string>
     <string name="osmo_connect_to_device_name">Vartotojo vardas</string>
     <string name="osmo_connect_to_device_tracker_id">Sekiklio ID</string>
     <string name="osmo_connect_to_device">Sujungti su įrenginiu</string>
-    <string name="osmo_join_group">Prisijungti prie grupės</string>
-    <string name="osmo_new_device">Prijungti įrenginį</string>
+    
+    
     <string name="osmo_connected_devices">Prijungti įrenginiai</string>
     <string name="osmo_groups">OsMo gruopės/įrenginiai</string>
     <string name="osmo_auto_send_locations_descr">Automatiškai pradėti sekimo sesiją ir siųsti buvimo vietą tik paleidus programą</string>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -13,8 +12,8 @@
 		\n\t* \'High contrast roads\' zeigt alle Straßen in betont deutlichen Farben, nützlich in extrem hellen Umgebungen
 		\n\t* \'Winter and ski\' zeigt Landschaften in einer (schneebedeckten) Winteransicht, und zeigt global Skiabfahrten und Lifte (benötigt wird die \'World ski\' Offline-Karte)
 	</string>
-	<string name="local_index_gpx_timespan">\nDauer: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\nZeit in Bewegung: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
 	<string name="download_hillshade_item">Relief-Schattierung</string>
@@ -31,7 +30,7 @@
 	<string name="tip_altitude_offset">Höhenanzeige (Offset)</string>
 	<string name="tip_altitude_offset_t">Die meisten GPS-Systeme zeigen die Höhenangaben im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
 		\n\nEine bessere Näherung an lokale Systeme ist das EGM96-System. OsmAnd unterstützt nun die automatische Anzeige aller Höhenangaben im EGM96-System.
-		\n\nDies erfolgt sobald die Offline-Datei WW15MGH.DAC vorhanden ist, verfügbar via Einstellungen/Daten-Management (das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+		\n\nDies erfolgt sobald die Offline-Datei WW15MGH.DAC vorhanden ist, verfügbar via Einstellungen/Karten-Management (das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
 	<string name="map_widget_max_speed">Tempolimit</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
@@ -186,7 +185,7 @@
 	<string name="native_rendering">Natives Rendern</string>
 	
 	<string name="test_voice_prompts">Sprachansagen testen</string>
-	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Vektor-Karte über \'Einstellungen\' → \'Daten-Management\' herunterladen oder alternativ auf Online-Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).</string>
+	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Offline-Karte über \'Einstellungen\' → \'Karten-Management\' herunterladen oder alternativ auf Online-Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).</string>
 	<string name="tip_recent_changes_0_7_2_t">Änderungen in 0.7.2:
 		\n\t- Native rendering auf allen Geräten
 		\n\t- Editiere POIs offline
@@ -330,8 +329,8 @@
 	<string name="routing_settings">Navigation</string>
 	<string name="routing_settings_descr">Nutzerprofilspezifische Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
 	<string name="global_settings">Globale Einstellungen</string>
-	<string name="index_settings">Daten-Management</string>
-	<string name="index_settings_descr">Laden und Verwalten von Landkarten und anderen lokalen Daten</string>
+	<string name="index_settings">Karten-Management</string>
+	<string name="index_settings_descr">Laden und Verwalten von Landkarten</string>
 	<string name="general_settings">Allgemein</string>
 	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
 	<string name="global_app_settings">Globale Einstellungen</string>
@@ -474,16 +473,16 @@
 	<string name="basemap_missing">Die offline-Weltkarte für kleine Vergrößerungen ist noch nicht vorhanden. Bitte ggf. World_basemap_x.obf herunterladen.</string>
 	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggf. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">"\n\nLang klicken für Optionen"</string>
-	<string name="local_index_gpx_info_speed">"\nDurchschn.geschw.: %1$s \nMax. Geschw.: %2$s"</string>
-	<string name="local_index_gpx_info_elevation">"\nDurchschn.höhe: %1$s\nMinimalhöhe: %2$s\nMaximalhöhe: %3$s\nAufstiege: %4$s\nAbstiege: %5$s"</string>
-	<string name="local_index_gpx_info">Subtracks: %1$d\nPunkte insgesamt: %2$d\nWegpunkte: %3$d\nGesamtstrecke: %4$s\nStartzeit: %5$tF, %5$tR\nEndzeit: %6$tF, %6$tR</string>
+	
+	
+	
 	<string name="local_index_installed">Ausgabe</string>
 	<string name="local_index_items_backuped">%1$d von %2$d Datei(en) erfolgreich deaktiviert.</string>
 	<string name="local_index_items_deleted">%1$d von %2$d Datei(en) erfolgreich gelöscht.</string>
 	<string name="local_index_items_restored">%1$d von %2$d Datei(en) erfolgreich aktiviert.</string>
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
 	<string name="local_index_action_do">%1$s: %2$s Datei(en). Fortfahren?</string>
-	<string name="local_index_descr_title">Daten-Management</string>
+	<string name="local_index_descr_title">Karten-Management</string>
 	<string name="local_index_mi_restore">Aktivieren</string>
 	<string name="local_index_mi_backup">Deaktivieren</string>
 	<string name="local_index_mi_delete">Löschen</string>
@@ -553,8 +552,8 @@
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
 	<string name="install_more">Weitere installieren…</string>
 	<string name="tip_update_index">Offline-Karten</string>
-	<string name="tip_update_index_t">Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und die Offline-Navigation. OsmAnd hat einen Daten-Manager für das Herunterladen von Offline-Karten (und einigen anderen Offline-Daten), und zur Aktualisierung derselben.
-		\n\nDas Herunterladen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Herunterladen…\'.
+	<string name="tip_update_index_t">Aktuelles Kartenmaterial ist wichtig für die Offline-Kartenansicht, die POI und Adresssuche, und die Offline-Navigation. OsmAnd hat einen Karten-Manager für das Herunterladen oder Aktualisieren von Offline-Karten.
+		\n\nDas Herunterladen finden Sie über \'Einstellungen\' → \'Karten-Management\' → \'Herunterladen…\'.
 		\n\nNachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie Daten zum Herunterladen oder Aktualisieren markieren. Bitte beachten Sie die Dateityp-Auswahloption am oberen Ende des Bildschirms, wählen Sie dort die gewünschte Datei-Kategorie (Reguläre Karten, Relief-Overlay, etc.)
 		\n\nDie Regionenliste kann durch Eingabe von Zeichen gefiltert werden. Alternativ zeigt die Option \'Filter Gespeicherte\' nur Daten an, für die bereits eine Version auf dem Gerät vorhanden ist.
 		\n\n\t* Einträge in \'grün\': Daten auf dem Gerät sind aktuell
@@ -570,7 +569,7 @@
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">Sie können jeden beliebigen Ort als Favoriten speichern.
 		\n\nEinen Favoriten erstellen Sie im \'Verwende Position\'-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar.
-		\n\nGespeicherte Favoriten sind leicht zugänglich via \'Menü\' →  \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
+		\n\nGespeicherte Favoriten sind leicht zugänglich via \'Menü\' →  \'Meine Orte\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Navigationsziel wählen oder einfach nur auf der Karte anzeigen lassen.
 		\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Kartenebenen\' einen Haken bei \'Favoriten\' setzen.
 	</string>
 	<string name="create_poi_link_to_osm_doc"> <u>Online OSM</u> Klassifizierung mit Bildern"</string>
@@ -810,7 +809,7 @@
 	<string name="route_head">Geradeaus</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
-	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter Offline-Daten herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen, Adressen, POI und ÖPNV finden.</string>
+	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter \'Karten-Management\' herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen, Adressen, POI und ÖPNV finden.</string>
 	<string name="search_poi_location">Warte auf Signal…</string>
 	<string name="search_near_map">Suche in der Nähe</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
@@ -898,7 +897,7 @@
 	<string name="loading_postcodes">Lade Postleitzahlen…</string>
 	<string name="loading_streets">Lade Straßen…</string>
 	<string name="loading_cities">Lade Orte…</string>
-	<string name="loading">Laden…</string>
+	
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Fehler während des Speicherns aufgetreten</string>
 	<string name="error_calculating_route">Fehler während der Routenberechnung</string>
@@ -967,7 +966,7 @@
 	<string name="exit_Button">Beenden</string>
 	<string name="map_Button">Karte</string>
 	<string name="settings_Button">Einstellungen</string>
-	<string name="favorites_Button">Favoriten</string>
+	<string name="favorites_Button">Meine Orte</string>
 	<string name="search_button">Suche</string>
 	<string name="search_activity">Suche</string>
 	<string name="searchpoi_activity">POI wählen</string>
@@ -1060,7 +1059,7 @@
 	<string name="offline_navigation_not_available">OsmAnd offline Navigation steht zur Zeit nicht zur Verfügung.</string>
 	<string name="left_side_navigation">Linksverkehr</string>
 	<string name="left_side_navigation_descr">Auswählen für Länder mit Linksverkehr</string>
-	<string name="download_link_and_local_description">Hier klicken um Offline-Daten herunterzuladen oder zu aktualisieren. \nAnklicken bestehender Einträge liefert Details, drücken und halten ermöglicht deaktivieren, umbenennen oder löschen. Aktuelle Daten auf dem Gerät (%1$s frei):</string>
+	<string name="download_link_and_local_description">Hier klicken um Offline-Karten herunterzuladen oder zu aktualisieren. \nAnklicken bestehender Einträge liefert Details, drücken und halten ermöglicht deaktivieren, umbenennen oder löschen. Aktuelle Daten auf dem Gerät (%1$s frei):</string>
 	<string name="unknown_from_location">Startpunkt ist noch nicht ermittelt</string>
 	<string name="confirm_interrupt_download">Möchten Sie den Datei-Download abbrechen?</string>
 	<string name="basemap_was_selected_to_download">Die Basis-Karte wird für die korrekte Benutzung der Anwendungen benötigt und ist für das Herunterladen vorausgewählt.</string>
@@ -1155,8 +1154,8 @@
 	<string name="map_widget_renderer">Kartendarstellung</string>
 	<string name="live_monitoring_mode_off">Online-Tracking\n starten</string>
 	<string name="live_monitoring_mode_on">Online-Tracking\n stoppen</string>
-	<string name="position_on_map_descr">Position des Markers auf der Karte</string>
-	<string name="position_on_map">Standortmarker</string>
+	
+	
 	<string name="layer_map_appearance">Anzeige konfigurieren</string>
 	<string name="show_lanes">Fahrspuren anzeigen</string>
 	<string name="avoid_unpaved">Vermeide ungeteerte Straßen</string>
@@ -1222,7 +1221,7 @@
 	<string name="osmodroid_plugin_name">OsMoDroid-Plugin</string>
 	<string name="index_srtm_parts">Teile</string>
 	<string name="index_srtm_ele">Höhenlinien</string>
-	<string name="srtm_plugin_description">Ermöglicht das Laden von offline Höhenlinien und Relief-Schattierungen (\'Einstellungen\ -&gt; \'Daten-Management\ -&gt; \'Herunterladen\ -&gt; \'Kartentyp wählen\).</string>
+	<string name="srtm_plugin_description">Ermöglicht das Laden von offline Höhenlinien und Relief-Schattierungen (\'Einstellungen\ -&gt; \'Karten-Management\ -&gt; \'Herunterladen\ -&gt; \'Kartentyp wählen\).</string>
 	<string name="srtm_plugin_name">Höhenlinien-Plugin</string>
 	<string name="download_select_map_types">Andere Karten</string>
 	<string name="download_srtm_maps">Höhenlinien</string>
@@ -1752,7 +1751,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_io_error">OsMo Verbindungsproblem: </string>
     <string name="osmo_mode_on">OsMo-Sitzung beenden</string>    
     <string name="osmo_mode_off">OsMo-Sitzung starten</string>
-    <string name="osmo_register_device">Gerät registrieren </string>
+    
     <string name="share_fav">Teilen</string>
 	<string name="share_fav_subject">Über OsmAnd geteilte Favoriten</string>
 	<string name="use_points_as_intermediates">Route zwischen Punkten berechnen</string>
@@ -1775,7 +1774,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_connect_to_device_name">Nutzername</string>
     <string name="osmo_connect_to_device_tracker_id">Aufzeichnungs-ID</string>
     <string name="osmo_connect_to_device">Mit Gerät koppeln</string>
-    <string name="osmo_join_group">Gruppe beitreten</string>
+    
     <string name="osmo_groups">OsMo Gruppen/Geräte</string>
     <string name="color_red">rot</string>
 	<string name="color_pink">pink</string>
@@ -1784,7 +1783,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="color_yellow">gelb</string>
 	<string name="color_lightblue">hellblau</string>
 	<string name="color_blue">blau</string>
-	<string name="color_magenta">magenta</string>
+	
 	
     <string name="osmo_edit_device">Ändern der Nutzereinstellungen</string>
     <string name="osmo_group_info">Info</string>
@@ -1830,11 +1829,30 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="selected_track">Track</string>
     <string name="my_tracks">Alle Tracks</string>
     <string name="my_favorites">Meine Favoriten</string>
-    <string name="my_data_Button">Meine Daten</string>
-    <string name="my_data_activity">Meine Daten</string>
+    <string name="my_data_Button">Meine Orte</string>
+    <string name="my_data_activity">Meine Orte</string>
     <string name="osmo_user_joined">Nutzer %1$s hat die Gruppe %2$s betreten</string>
     <string name="osmo_user_left">Nutzer %1$s hat die Gruppe %2$s verlassen</string>
     <string name="osmo_show_group_notifications">Gruppenbenachrichtigungen anzeigen</string>
     <string name="osmo_show_group_notifications_descr">Zeige Pop-up-Meldung, wenn eine Nutzer der Gruppe beitritt oder sie verlässt</string>
     <string name="osmo_tracker_id_share">Um eine Verbindung zum Gerät %2$s herzustellen, bitte den Link %3$s anklicken oder die Tracker-ID (%1$s) angeben</string>
+    <string name="gpx_info_waypoints">Wegpunkte: %1$s </string>
+	<string name="gpx_info_distance">Entfernung: %1$s (%2$s Punkte) </string>
+	<string name="gpx_info_start_time">Startzeit: %1$tF, %1$tR </string>
+	<string name="gpx_info_end_time">Endzeit: %1$tF, %1$tR </string>
+	<string name="gpx_info_average_speed">Durchschnittsgeschwindigkeit: %1$s </string>
+	<string name="gpx_info_maximum_speed">Maximale Geschwindigkeit: %1$s </string>
+	<string name="gpx_info_avg_altitude">Durchschnittliche Höhe: %1$s</string>
+	<string name="gpx_info_diff_altitude">Höhenunterschied: %1$s</string>
+	<string name="gpx_info_asc_altitude">Anstieg: %1$s</string>
+    <string name="gpx_timespan">Zeitspanne: %1$s</string>
+	<string name="gpx_timemoving">Zeit in Bewegung: %1$s</string>
+    <string name="gpx_selection_segment_title">Abschnitt</string>
+    <string name="gpx_selection_number_of_points"> %1$s Punkte</string>
+    <string name="gpx_selection_point">Punkt %1$s</string>
+    <string name="gpx_selection_current_track">Aufnahme</string>
+    <string name="gpx_selection_route_points">%1$s \n Routenpunkte %2$s</string>
+    <string name="gpx_selection_points">%1$s\n Punkte</string>
+    <string name="gpx_selection_track">%1$s\n Track %2$s</string>
+    <string name="gpx_available_current_track">Aktuell aufgenommener Track</string>
     </resources>

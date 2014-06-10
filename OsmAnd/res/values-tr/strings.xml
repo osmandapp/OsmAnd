@@ -55,7 +55,7 @@
 	<string name="map_widget_day_night">Gündüz/gece haritası</string>
 	<string name="osmand_short_description_80_chars">OsmAnd açık kaynak kodlu, çevrımdışı ve çevrimiçi çalışabilen bir navigasyon uygulamasıdır</string>
 	<string name="live_monitoring_mode_on">Durdur\nanlık takip</string>
-	<string name="position_on_map">Konum işaretleyicisi</string>
+	
 	<string name="map_widget_view_direction">Görüntüleme yönü</string>
 	<string name="monitoring_mode_off">GPX Kaydet</string>
 	<string name="bg_service_sleep_mode_off">Aktifleştir\nuyku modu</string>
@@ -259,7 +259,7 @@
 	<string name="map_widget_vector_attributes">Rendering öznitelikleri:</string>
 	<string name="map_widget_renderer">Harita tarzı</string>
 	<string name="live_monitoring_mode_off">Başlat\ncanlı takip</string>
-	<string name="position_on_map_descr">Harita üzerinde pozisyon işaretleyici konumu seçin</string>
+	
 	<string name="layer_map_appearance">Ekran yapılandırma</string>
 	<string name="show_lanes">Şeritleri göster</string>
 	<string name="avoid_unpaved">Asfaltsız yollardan kaçının</string>
@@ -447,7 +447,7 @@
 	<string name="failed_op">başarısız</string>
 	<string name="loading_postcodes">Posta kodları yükleniyor…</string>
 	<string name="loading_cities">Şehirler yükleniyor…</string>
-	<string name="loading">Yükleniyor…</string>
+	
 	<string name="arrived_at_destination">Hedefinize ulaştınız</string>
 	<string name="invalid_locations">Koordinatlar geçersiz!</string>
 	<string name="go_back_to_osmand">OsmAnd haritalara geri dön</string>
@@ -798,7 +798,7 @@
 	<string name="favourites_delete_multiple_succesful">Favari nokta(lar) silindi.</string>
 	<string name="favorite_delete_multiple">%1$d favori ve %2$d favori grubunu silmek istediğinize emin misiniz?</string>
 	<string name="local_index_gpx_info_show">\n\nAyarlar için bas ve bekle</string>
-	<string name="local_index_gpx_info_speed">\nOrtalama Hız: %1$s\nMaksimum Hız: %2$s</string>
+	
 	<string name="local_index_installed">Sürüm</string>
 	<string name="local_index_items_backuped">%1$d/%2$d nesne pasifleştirildi.</string>
 	<string name="local_index_items_deleted">%1$d/%2$d nesne silindi.</string>
@@ -844,8 +844,8 @@
     <string name="route_to">Buraya:</string>
     <string name="route_via">Üzerinden:</string>
     <string name="route_from">Buradan:</string>
-	<string name="local_index_gpx_timespan">\Zaman aralığı: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">\Seyahat süresi: %1$d:%2$02d:%3$02d</string>
+	
+	
 	<string name="destination_point">Hedef</string>
     <string name="context_menu_item_destination_point">Hedef olarak belirle</string>
     <string name="please_select_address">Önce şehir ya da sokak seç</string>
@@ -1166,12 +1166,7 @@
     <string name="routing_preferences_descr">Öncelikli yönlendirme</string>
     <string name="speech_rate_descr">TTS için ayarlanmış hoparlörler</string>
     <string name="speech_rate">Hoparlör yerleşimi</string>
-    <string name="tip_recent_changes_1_7_t">Sürüm 1.7 Değişiklikler:↵
-→\n\t* Tamamen güncellenmiş yönlendirme (Hızlı ve hassas)↵
-→\n\t* Tünellerde Aktif simülasyon↵
-→\n\t* Küçük UX iyileştirmeler çok &amp; kullanılabilirlik düzeltmeleri↵
-→\n\t* Konuşma hızı erişilebilirlik ayarı↵
-    </string>
+    
     <string name="complex_route_calculation_failed">Hızlı rota hesaplama ( % s ) başarısız oldu , hesaplama yavaş çare .</string>
     <string name="disable_complex_routing_descr">Araba navigasyonu için 2 fazlı yönlendirmesi devre dışı bırakın</string>
     <string name="disable_complex_routing">Karmaşık yönlendirmesi devre dışı bırakın</string>
