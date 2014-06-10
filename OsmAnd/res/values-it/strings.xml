@@ -1864,7 +1864,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="my_data_activity">I miei luoghi</string>
     <string name="osmo_show_group_notifications_descr">Mostra un messaggio popup quando l\'utente aderisce o lascia il gruppo</string>
     <string name="gpx_file_is_empty">La traccia Gpx è vuota</string>
-    <string name="gpx_info_start_time">Orario di partenza: %1$tF, %1$tR </string>
+    <string name="gpx_info_start_time">Orario di partenza: %1$tF, %1$tT </string>
 	<string name="gpx_info_average_speed">Velocità media: %1$s </string>
 	<string name="gpx_info_maximum_speed">Velocità massima: %1$s </string>
 	<string name="gpx_info_avg_altitude">Altitudine media: %1$s</string>
@@ -1872,7 +1872,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="gpx_info_waypoints">Tappe del percorso: $1%s </string>
 	<string name="gpx_info_distance">Distanza: %1$s (%2$s punti) </string>
 	<string name="gpx_info_end_time">Orario di arrivo: %1$tF, %1$tT </string>
-	<string name="gpx_info_diff_altitude">Dislivello: %1$s</string>
+	<string name="gpx_info_diff_altitude">Differenza di altitudine: %1$s</string>
 	<string name="gpx_info_asc_altitude">Salite: %1$s</string>
     <string name="gpx_timespan">Intervallo di tempo: %1$s</string>
 	<string name="gpx_timemoving">Tempo in movimento: %1$s</string>
@@ -1885,7 +1885,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="gpx_selection_track">%1$s \nTraccia %2$s</string>
     <string name="gpx_available_current_track">Traccia attualmente in registrazione</string>
     <string name="selected">selezionato</string>
-    <string name="gpx_split_interval">Scegliere l\'intervallo per la divisione</string>
+    <string name="gpx_split_interval">Scegliere l\'intervallo per la suddivisione</string>
     <string name="loading_smth">Caricamento di %1$s …</string>
     <string name="gpx_wpt">Tappa</string>
+    <string name="selected_gpx_info_show">\n\nTieni premuto per vederlo sulla mappa</string>
+    <string name="delay_navigation_start">Avvia la navigazione con ritardo</string>
+    <string name="map_widget_plain_time">Orario attuale</string>
     </resources>
