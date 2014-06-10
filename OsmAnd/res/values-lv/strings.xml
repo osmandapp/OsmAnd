@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams OsmAnd vajadzēs restartēt.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus funkcijas un uzstādījumus kā piemēram sekošana, enerģijas taupīšana, pieejamība un daudzas citas</string>
   <string name="prefs_plugins">Spraudņi</string>
@@ -247,7 +248,7 @@
   <string name="vector_map_not_needed">Nē, paldies</string>
   <string name="basemap_missing">Pasaules karte (visa pasaule zemākā izšķirtspējā) nav pieejama. Lūdzu lejupielādējiet World_basemap_x.obf, pilnvērtīgai kartes pārlūkošanai.</string>
   <string name="vector_data_missing">SD kartē nav atrodami bezsaistes dati. Lai lietotu bezsaistes kartes, lūdzu lejupielādējiet tās, lai varētu lietot bezsaistē.</string>
-  <string name="local_index_gpx_info_show">"\n\nTuriet nospiestu izvēlnes atvēršanai"</string>
+  <string name="local_index_gpx_info_show">\n\nTuriet nospiestu izvēlnes atvēršanai</string>
   
   
   
@@ -1734,11 +1735,38 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_user_joined">Lietotājs %1$s pievienojās %2$s grupai</string>
     <string name="osmo_user_left">Lietotājs %1$s pameta %2$s grupu</string>
     <string name="osmo_show_group_notifications">Rādīt grupas ziņojumus</string>
-    <string name="osmo_show_group_notifications_descr">Rādīt ziņojumos, kad lietotāji pievienojas vai pamet grupu</string>
-    <string name="selected_track">Treks</string>
+    <string name="osmo_show_group_notifications_descr">Rādīt paziņojumu, kad lietotājs pievienojas vai pamet grupu</string>
+    <string name="selected_track">Izvēlētais treks</string>
     <string name="my_tracks">Visi treki</string>
     <string name="my_favorites">Mana izlase</string>
-    <string name="my_data_Button">Mani dati</string>
-    <string name="my_data_activity">Mani dati</string>
+    <string name="my_data_Button">Manas vietas</string>
+    <string name="my_data_activity">Manas vietas</string>
     <string name="gpx_file_is_empty">Gpx treks ir tukšs</string>
+    <string name="loading_smth">Ielādē %1$s…</string>
+    <string name="map_widget_plain_time">Pašreizējais laiks</string>
+    <string name="gpx_wpt">Ceļapunkts</string>
+    <string name="selected_gpx_info_show">\n\nTuriet nospiestu, lai rādītu uz kartes</string>
+    <string name="delay_navigation_start">Sākt navigāciju ar aizturi</string>
+    <string name="selected">Izvēlēts</string>
+    <string name="gpx_split_interval">Izvēlēties sadalījuma intervālu</string>
+    <string name="gpx_info_subtracks">Apakšposmi: %1$s </string>
+	<string name="gpx_info_waypoints">Ceļapunkti: %1$s </string>
+	<string name="gpx_info_distance">Distance: %1$s (%2$s punkti) </string>
+	<string name="gpx_info_start_time">Sākums: %1$tF, %1$tT </string>
+	<string name="gpx_info_end_time">Beigas: %1$tF, %1$tT </string>
+	<string name="gpx_info_average_speed">Vidējais ātrums: %11$s </string>
+	<string name="gpx_info_maximum_speed">Maksimālais ātrums: %1$s </string>
+	<string name="gpx_info_avg_altitude">Vidējais augstums: %1$s</string>
+	<string name="gpx_info_diff_altitude">Augstuma starpība: %11$s</string>
+	<string name="gpx_info_asc_altitude">Kāpumi: %1$s</string>
+    <string name="gpx_timespan">Laika periods: %1$s</string>
+	<string name="gpx_timemoving">Laiks kustībā: %1$s</string>
+    <string name="gpx_selection_segment_title">Segments</string>
+    <string name="gpx_selection_number_of_points"> %1$s punkti</string>
+    <string name="gpx_selection_point">Punkts %1$s</string>
+    <string name="gpx_selection_current_track">Ieraksts</string>
+    <string name="gpx_selection_route_points">%1$s \nMaršruta punkti %2$s</string>
+    <string name="gpx_selection_points">%1$s \nPunkti</string>
+    <string name="gpx_selection_track">%1$s \nTreks %2$s</string>
+    <string name="gpx_available_current_track">Pašreizējais treka ieraksts</string>
     </resources>
