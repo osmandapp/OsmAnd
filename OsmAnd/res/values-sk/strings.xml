@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -1856,4 +1857,31 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_expire_group">Vyprší za</string>
     <string name="osmo_group_description">Popis</string>
     <string name="osmo_group_policy">Pravidlá</string>
+    <string name="loading_smth">Načítava sa %1$s …</string>
+    <string name="map_widget_plain_time">Aktuálny čas</string>
+    <string name="gpx_wpt">Prechodný bod</string>
+    <string name="selected_gpx_info_show">\n\nStlačte a podržte pre zobrazenie na mape</string>
+    <string name="delay_navigation_start">Spustiť navigáciu s oneskorením</string>
+    <string name="selected">vybrané</string>
+    <string name="gpx_split_interval">Vyberte interval na rozdelenie</string>
+    <string name="gpx_info_subtracks">Podstopy: %1$s </string>
+	<string name="gpx_info_waypoints">Prechodné body: %1$s </string>
+	<string name="gpx_info_distance">Vzdialenosť: %1$s (%2$s bodov) </string>
+	<string name="gpx_info_start_time">Čas začiatku: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">Čas konca: %1$tF,  %1$tT </string>
+	<string name="gpx_info_average_speed">Priemerná rýchlosť: %1$s </string>
+	<string name="gpx_info_maximum_speed">Maximálna rýchlosť: %1$s </string>
+	<string name="gpx_info_avg_altitude">Priemerná výška: %1$s</string>
+	<string name="gpx_info_diff_altitude">Výškový rozdiel: %1$s</string>
+	<string name="gpx_info_asc_altitude">Výškové výstupy: %1$s</string>
+    <string name="gpx_timespan">Časový úsek: %1$s</string>
+	<string name="gpx_timemoving">Čas pohybu: %1$s</string>
+    <string name="gpx_selection_segment_title">Úsek</string>
+    <string name="gpx_selection_number_of_points"> %1$s bodov</string>
+    <string name="gpx_selection_point">Bod %1$s</string>
+    <string name="gpx_selection_current_track">nahrávanie</string>
+    <string name="gpx_selection_route_points">%1$s \nBody trasy %2$s</string>
+    <string name="gpx_selection_points">%1$s \nBody</string>
+    <string name="gpx_selection_track">%1$s \nStopa %2$s</string>
+    <string name="gpx_available_current_track">Práve nahrávaná stopa</string>
     </resources>
