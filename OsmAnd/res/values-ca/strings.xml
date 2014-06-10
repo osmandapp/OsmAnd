@@ -672,8 +672,8 @@
 <string name="map_overlay_descr">Escolliu el mapa superposat</string>
 <string name="tip_location_sharing">Comparteix una ubicació</string>
 <string name="preferred_locale_descr">Selecciona la llengua a mostrar</string>
-<string name="tip_app_mode_t_v2">\tL\'OsmAnd suporta diferents (personalitzables) perfils d\'aplicació per a diferents usos.
-\n\tPodeu canviar de perfil amb el boto a la cantonada inferior esquerra de la pantalla de mapa(icona de cotxe,bici o vianant), o quan creeu una ruta.
+<string name="tip_app_mode_t_v2">L\'OsmAnd suporta diferents (i personalitzables) perfils d\'aplicació per a diferents usos.
+\n\nPodeu canviar de perfil amb el boto a la cantonada inferior esquerra de la pantalla del mapa(icona de cotxe,bici o vianant), o quan creeu una ruta.
 	</string>
 <string name="foot">peu</string>
 <string name="km">km</string>
@@ -843,9 +843,9 @@
 		\n\t\'Amb la brúixola\' - El mapa s\'alinearà contínuament amb la brúixola del dispositiu.
 	</string>
 <string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TAV (text a veu) d\'Android instal·lat. Voleu anar al Market per veure altres motors TAV? Altrament s\'usarà la llengua del TAV per defecte.</string>
-<string name="tip_map_switch_t_v2">\tLa font del mapa i les capes mostrades es poden canviar via «Menú» -&gt; «Defineix vista» en la vista del mapa.
-\n\tSota «Font del mapa…» podeu triar entre usar els mapes vectorials, font de tessel·la predeterminades (activades a «Mapes en línia» plugin per això), o mapes creats manualment usant per exemple OsmAndCreator en el vostre PC.
-\n\tL\'OsmAnd també suporta fonts personalitzades.
+<string name="tip_map_switch_t_v2">La font del mapa i les capes mostrades es poden canviar via «Menú» -&gt; «Capes del mapa».
+\n\nSota «Font del mapa…» podeu triar entre usar els mapes vectorials (per defecte, també necessaris a la navegació sense connexió) o les fonts de tessel·la predeterminades (en connexió o prèviament descarregades) (per això cal activar el connector «Mapes en línia» a «Opcions» → «Connectors»), o mapes creats manualment usant per exemple OsmAndCreator en el vostre PC.
+\n\n\'OsmAnd també suporta fonts personalitzades.
 	</string>
 <string name="tip_map_context_menu_t">"\tEl menú contextual de mapa esta disponible prement i aguantant en el mapa o prement el boto de la bola de desplaçament.
 \n\tAixò produeix una caixa amb les coordenades del punt.Per obrir el menú de diàleg del mapa,toca\'l.(O prem i aguanta per amagar la caixa un altre cop.)
