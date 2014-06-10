@@ -276,7 +276,7 @@ public class GpxSelectionHelper {
 		String load = app.getSettings().SELECTED_GPX.get();
 		if(!Algorithms.isEmpty(load)) {
 			try {
-				JSONArray ar = new JSONArray("load");
+				JSONArray ar = new JSONArray(load);
 				for(int i = 0; i < ar.length(); i++) {
 					JSONObject obj = ar.getJSONObject(i);
 					if(obj.has(FILE)) {
