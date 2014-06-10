@@ -1887,4 +1887,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="selected">selezionato</string>
     <string name="gpx_split_interval">Scegliere l\'intervallo per la divisione</string>
     <string name="loading_smth">Caricamento di %1$s …</string>
+    <string name="gpx_wpt">Tappa</string>
     </resources>
