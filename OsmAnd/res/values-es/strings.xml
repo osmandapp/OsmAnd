@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
@@ -76,8 +77,8 @@
   <string name="routing_settings">Navegación</string>
   <string name="routing_settings_descr">Especifica opciones de navegación</string>
   <string name="global_settings">Opciones Globales</string>
-  <string name="index_settings">Gestor de Datos</string>
-  <string name="index_settings_descr">Descargue, vea detalles y gestione mapas sin conexión</string>
+  <string name="index_settings">Gestionar mapas</string>
+  <string name="index_settings_descr">Descargue y gestione mapas sin conexión almacenados en su dispositivo</string>
   <string name="general_settings">Opciones Generales</string>
   <string name="general_settings_descr">Configura la presentación y otras opciones globales</string>
   <string name="global_app_settings">Opciones Globales de la aplicación</string>
@@ -89,7 +90,7 @@
   <string name="osmand_service_descr">Para ejecutar OsmAnd mientras la pantalla está apagada</string>
   <string name="tip_rotation_switching">Rotación del mapa</string>
   
-  <string name="switch_to_raster_map_to_see">No hay mapa vectorial descargado para esta localización. Puedes descargarlo en \'Opciones\' -&gt; \'Descarga de datos\', o pasar a mapas en línea vía \'Opciones\' -&gt; \'Mapas\'.</string>
+  <string name="switch_to_raster_map_to_see">No hay mapa vectorial descargado para esta localización. Puede descargar uno en Opciones (Gestionar mapas), o pasar a mapas en línea (activar plugin de mapas en línea para esto).</string>
   <string name="binary_map_download_success">Descarga correcta.
 		\n\t\n\tPara usarla, activa \'Menú\' -&gt; \'Capas de mapas\' -&gt; \'Fuente de mapas…\' -&gt; \'Mapas vectoriales descargados\'.
 	</string>
@@ -177,7 +178,7 @@
   <string name="vector_map_not_needed">No, gracias</string>
   <string name="basemap_missing">El mapa mundial base (cubriendo todo el mundo a niveles de zoom pequeños) no está disponible. Por favor, considere descargar World_basemap_x.obf para tener un entorno completo.</string>
   <string name="vector_data_missing">No hay datos (\'descargados\') en la tarjeta SD. Por favor, considera descargarlos para usar mapas sin conexión.</string>
-  <string name="local_index_gpx_info_show">"\n\nPulsación larga para opciones"</string>
+  <string name="local_index_gpx_info_show">\n\nMantenga pulsado para opciones</string>
   
   
   
@@ -187,7 +188,7 @@
   <string name="local_index_items_restored">%1$d de %2$d elemento(s) correctamente activado(s).</string>
   <string name="local_index_no_items_to_do">No hay elementos para %1$s</string>
   <string name="local_index_action_do">Está a punto de %1$s %2$s elemento(s). ¿Continuar?</string>
-  <string name="local_index_descr_title">Gestor de datos</string>
+  <string name="local_index_descr_title">Gestionar mapas</string>
   <string name="local_index_mi_restore">Activar</string>
   <string name="local_index_mi_backup">Desactivar</string>
   <string name="local_index_mi_delete">Borrar</string>
@@ -248,8 +249,8 @@
   <string name="internet_not_available">No está disponible la conexión a Internet que se necesita para la operación</string>
   <string name="install_more">Instalar más…</string>
   <string name="tip_update_index">Actualizar mapas descargados</string>
-  <string name="tip_update_index_t">Es esencial tener datos de mapa actualizados tanto para visualización de mapas, búsqueda de direcciones/PDI y navegación sin conexión.  OsmAnd proporciona un gestor de datos para descargar estos mapas (y otros archivos de datos) y comprobar las actualizaciones disponibles.
-		\n\nPara comprobar las actualizaciones ve a \'Opciones\' -&gt; \'Gestor de Datos\' -&gt; \'Descargar\'.
+  <string name="tip_update_index_t">Es esencial tener datos de mapa actualizados tanto para visualización de mapas, búsqueda de direcciones/PDI y navegación sin conexión.  OsmAnd proporciona un gestor de mapas para descargar estos mapas (y otros archivos de datos) y comprobar las actualizaciones disponibles.
+		\n\nPara comprobar las actualizaciones ve a \'Opciones\' -&gt; \'Gestionar mapas\' -&gt; \'Descargar\'.
 		\n\nTras recuperar de Internet la lista de regiones, pulsa en cualquier elemento para descargarlo o actualizarlo. Fíjate en el selector de archivos de la parte superior de la pantalla para elegir el tipo de descarga que quieras (mapas normales, carreteras, etc.).
 		\n\nPuedes filtrar la lista de regiones tecleando algunas letras o puedes seleccionar la opción del menú \'Filtrar descargados\' para buscar actualizaciones sólo para datos que estén ya en tu dispositivo.
 		\n\n\t* Entradas en \'verde\' indican archivos idénticos en el dispositivo y en el servidor
@@ -265,7 +266,7 @@
   <string name="tip_favorites">Puntos favoritos</string>
   <string name="tip_favorites_t">Los puntos usados frecuentemente se pueden guardar como favoritos. de la siguiente forma:
 		\n\nEn el menú contextual \'Usar localización…\', selecciona la opción \'Añadir a favoritos\' y escribe un nombre.
-		\n\nDespués de guardar un Favorito, es accessible vía \'Menú\'→\'Favoritos\'. Una pulsación sobre un favorito en el menú \'Favoritos\' proporciona opciones para navegar al mismo, editarlo o borrarlo.
+		\n\nDespués de guardar un Favorito, es accessible vía \'Menú\'→\'Mis Sitios\'. Una pulsación sobre un favorito en el menú \'Favoritos\' proporciona opciones para navegar al mismo, editarlo o borrarlo.
 		\n\nPara mostrar todos los puntos favoritos directamente en el mapa, active la capa \'Favoritos\' en \'Menú\'→\'Capas de mapa\'.
 	</string>
   <string name="create_poi_link_to_osm_doc">" <u>OSM en línea</u> clasificación de mapa con imágenes"</string>
@@ -508,7 +509,7 @@
   <string name="first_time_continue">Después</string>
   <string name="first_time_download">Descargar regiones</string>
   <string name="first_time_msg">Gracias por elegir OsmAnd.
-Para poder usar muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestor de Datos\'. Después, podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
+Para poder usar muchas características de la aplicación necesitas algunos datos regionales, que puedes descargar vía \'Opciones\' → \'Gestionar mapas\'. Después, podrás ver mapas, localizar direcciones, buscar PDIs y encontrar transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
   <string name="search_near_map">Buscar cerca de la última localización</string>
   <string name="search_nearby">Buscar cercanos</string>
@@ -669,7 +670,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="exit_Button">Salir</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Opciones</string>
-  <string name="favorites_Button">Favoritos</string>
+  <string name="favorites_Button">Mis Sitios</string>
   <string name="search_button">Buscar</string>
   <string name="search_activity">Buscar</string>
   <string name="searchpoi_activity">Elegir PDI</string>
@@ -763,7 +764,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="offline_navigation_not_available">La navegación offline no está disponible temporalmente.</string>
   <string name="left_side_navigation">Conducción por la izquierda</string>
   <string name="left_side_navigation_descr">Seleccionalo en países con tráfico por la izquierda</string>
-  <string name="download_link_and_local_description">Pulsa aquí para descargar o actualizar datos para su uso posterior sin conexión.\nPulsa cualquier ítem para ver más detalles, mantén pulsado para desactivar o borrar. Datos actuales en el dispositivo (libre %1$s):</string>
+  <string name="download_link_and_local_description">Pulsa aquí para descargar o actualizar mapas para su uso posterior sin conexión.\nPulsa cualquier ítem para ver más detalles, mantén pulsado para desactivar o borrar. Datos actuales en el dispositivo (libre %1$s):</string>
   <string name="unknown_from_location">El punto de inicio no ha sido determinado</string>
   <string name="confirm_interrupt_download">¿Quieres interrumpir la descarga de archivo?</string>
   <string name="basemap_was_selected_to_download">El Mapa Base (World Basemap) se necesita para el correcto funcionamiento de la aplicación y se seleccionó para su descarga.</string>
@@ -1111,7 +1112,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="search_villages_and_postcodes">Buscar pueblos/códigos postales</string>
 	<string name="tip_altitude_offset_t">La mayoría de dispositivos GPS informan de las medidas de altitud en el sistema de referencia WGS84 basado en elipsoide, que requiere de una corrección dependiente de la posición para su conversión a sistemas utilizados localmente.
 		\n\nUna mejor aproximación a estos sistemas locales es la referencia EGM96 (geoide).
-		\n\nOsmAnd mostrará la altitud de tu posición en el sistema EGM96 cuando descargues el archivo \'World Altitide Correction WW15MGH\' mediante \'Opciones\'→\'Gestor de datos\' (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "
+		\n\nOsmAnd mostrará la altitud de tu posición en el sistema EGM96 cuando descargues el archivo \'World Altitide Correction WW15MGH\' mediante \'Opciones\'→\'Gestionar mapas\' (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "
 	</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">Inicio</string>
@@ -1123,7 +1124,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="osmodroid_plugin_name">Extra OsMoDroid</string>
 	<string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">Permite descargar curvas de nivel y sombreados (Opciones → Gestor de Datos → Descargar y seleccionar el tipo de mapa deseado) para la región específica y usarlas con los mapas descargados.</string>
+    <string name="srtm_plugin_description">Permite descargar curvas de contorno y relieve (\'Opciones\' → \'Gestionar mapas\' → \'Descargar\' → Seleccionar el tipo de mapa deseado) para la región específica y usarlas con los mapas descargados.</string>
     <string name="srtm_plugin_name">Extra SRTM</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Mapas SRTM</string>
@@ -1668,7 +1669,10 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="tip_recent_changes_1_8_alpha">Cambios en 1.8:
         * Calcular ruta entre puntos de ruta de una pista GPX
         * Cambiada disposición de países para descargas (soporta búsquedas de nombres locales)
-        * Suporta importación de GPX/KML (conversión de KML a GPX)
+        * Soporta importación de GPX/KML (conversión de KML a GPX)
+        * Las pistas GPX se han movido a \'Mis Sitios\'
+        * Puede dividir las pistas GPX por distancia y comprobar la diferencia de altitud / velocidad
+        * Auto iniciar la navegación tras un retraso
     </string>
     <string name="osmo_connect_to_device_name">Nombre de usuario</string>
     
@@ -1748,19 +1752,34 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_show_group_notifications">Mostrar notificaciones de grupo</string>
     <string name="osmo_show_group_notifications_descr">Mostrar mensajes emergentes cuando usuarios se unen o abandonan el grupo</string>
     <string name="my_favorites">Mis Favoritos</string>
-    <string name="my_data_Button">Mis Datos</string>
-    <string name="my_data_activity">Mis datos</string>
+    <string name="my_data_Button">Mis Sitios</string>
+    <string name="my_data_activity">Mis Sitios</string>
     <string name="gpx_selection_number_of_points"> %1$s puntos</string>
     <string name="gpx_selection_point">Punto %1$s</string>
     <string name="gpx_selection_current_track">grabando</string>
-    <string name="gpx_selection_route_points">%1$s \n Puntos de ruta %2$s</string>
-    <string name="gpx_selection_points">%1$s\n Puntos</string>
+    <string name="gpx_selection_route_points">%1$s \nPuntos de ruta %2$s</string>
+    <string name="gpx_selection_points">%1$s\nPuntos</string>
     <string name="gpx_timespan">Lapso de tiempo: %1$s</string>
 	<string name="gpx_timemoving">Tiempo en movimiento: %1$s</string>
     <string name="gpx_selection_segment_title">Segmento</string>
-    <string name="gpx_selection_track">%1$s\n Pista %2$s</string>
+    <string name="gpx_selection_track">%1$s \nPista %2$s</string>
     <string name="gpx_available_current_track">Pista actual en grabación</string>
     <string name="gpx_file_is_empty">La pista Gps está vacía</string>
     <string name="selected_track">Pista seleccionada</string>
     <string name="my_tracks">Todas las pistas</string>
+    <string name="loading_smth">Cargando %1$s …</string>
+    <string name="selected_gpx_info_show">\n\nMantenga pulsado para ver el mapa</string>
+    <string name="delay_navigation_start">Iniciar navegación con retraso</string>
+    <string name="selected">seleccionado</string>
+    <string name="gpx_split_interval">Seleccione intervalo de división</string>
+    <string name="gpx_info_subtracks">Subpista: %1$s </string>
+	<string name="gpx_info_waypoints">Puntos de ruta: %1$s </string>
+	<string name="gpx_info_distance">Distancia: %1$s (%2$s puntos) </string>
+	<string name="gpx_info_start_time">Tiempo de inicio: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">Tiempo de finalización: %1$tF,  %1$tT </string>
+	<string name="gpx_info_average_speed">Velocidad media: %1$s </string>
+	<string name="gpx_info_maximum_speed">Velocidad máxima: %1$s </string>
+	<string name="gpx_info_avg_altitude">Altitud media: %1$s</string>
+	<string name="gpx_info_diff_altitude">Diferencia de altitud: %1$s</string>
+	<string name="gpx_info_asc_altitude">Altitud ascendida: %1$s</string>
     </resources>
