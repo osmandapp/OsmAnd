@@ -1625,9 +1625,9 @@ OsmAnd - открытый источник и активно развается.
 	* Расчёт маршрута между маршрутными точками трека GPX
 	* Изменённый порядок стран для загрузок (поддерживается местный поиск имён)
 	* Поддержка импорта GPX/KML (конвертация KML в GPX)
-	* GPX трэки перемещены в \'Мои данные\'
-	* Вы можете разбить GPX трэк по дистанции и сверить разницу высот/скорость
-	* Автостарт навигации по тайм-аутe
+	* GPX треки перемещены в \'Мои данные\'
+	* Вы можете разбить GPX трек по дистанции и сверить разницу высот/скорость
+	* Автостарт навигации по тайм-ауту
     </string>
     <string name="osmo_tracker_id_descr">Выберите чтобы посмотреть или поделиться ID трекера.
 	Используя ID трекера присоединённые устройства будут доступны для мониторинга всех передвижений этого устройства! Для отключения выберите опцию восстановления.</string>
@@ -1676,8 +1676,8 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_credentials_not_valid">Ваши учётные данные osmo не верные.</string>
     <string name="osmo_follow">Следовать</string>
     <string name="osmo_edit_device">Изменить пользовательские свойства</string>
-    <string name="gpx_file_is_empty">Трэк GPX пуст</string>
-    <string name="selected_track">Выбранный трэк</string>
+    <string name="gpx_file_is_empty">Трек GPX пуст</string>
+    <string name="selected_track">Выбранный трек</string>
     <string name="my_tracks">Все трэки</string>
     <string name="my_favorites">Мои избранные</string>
     <string name="my_data_Button">Мои места</string>
@@ -1704,7 +1704,7 @@ OsmAnd - открытый источник и активно развается.
 	<string name="gpx_timemoving">Время передвижения: %1$s</string>
     <string name="gpx_selection_points">%1$s \nТочек</string>
     <string name="gpx_selection_track">%1$s \nТрэк %2$s</string>
-    <string name="gpx_available_current_track">Текущий пишущийся трэк</string>
+    <string name="gpx_available_current_track">Текущий пишущийся трек</string>
     <string name="loading_smth">Загрузка %1$s…</string>
     <string name="map_widget_plain_time">Текущее время</string>
     <string name="gpx_wpt">Путевая точка</string>
