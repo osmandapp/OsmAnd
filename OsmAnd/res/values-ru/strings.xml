@@ -1636,7 +1636,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_group_name">Название группы</string>
     <string name="osmo_connect_to_group">Подключиться к группе</string>
     <string name="osmo_create_group">Создать группу</string>
-    <string name="osmo_enable_tracker">Отправлять мои местоположения</string>
+    <string name="osmo_enable_tracker">Отправлять координаты</string>
     <string name="osmo_group_description">Описание</string>
     <string name="int_days">дней</string>
     <string name="osmo_track_interval">Интервал отправки</string>
@@ -1667,14 +1667,14 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_create_groups_confirm">Чтобы создать группы, Вы должны быть зарегистрированным пользователем OsMo.</string>
     <string name="osmo_sign_in">Войти</string>
     <string name="osmo_regenerate_login_ids_confirm">Вы уверены в необходимости регенерации персональных ID? Все устройства, соединённые с Вами, больше не смогут отследить Вас.</string>
-    <string name="osmo_regenerate_login_ids">Регенерировать ID пользователя</string>
+    <string name="osmo_regenerate_login_ids">Регенерировать ID трекера</string>
     <string name="osmo_use_server_name">Зарегистрированное имя</string>
     <string name="osmo_connect_to_my_nickname">Мой ник</string>
     <string name="osmo_user_name">Пользователь</string>
 	<string name="color_green">зелёный</string>
 	
-    <string name="osmo_credentials_not_valid">Ваши учётные данные osmo не верные.</string>
-    <string name="osmo_follow">Следовать</string>
+    <string name="osmo_credentials_not_valid">Ваши учётные данные OsMo не верны.</string>
+    <string name="osmo_follow">Следить</string>
     <string name="osmo_edit_device">Изменить пользовательские свойства</string>
     <string name="gpx_file_is_empty">Трек GPX пуст</string>
     <string name="selected_track">Выбранный трек</string>
