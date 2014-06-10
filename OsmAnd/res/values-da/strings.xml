@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -1890,4 +1891,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="gpx_selection_track">%1$s\nSpor %2$s</string>
     <string name="gpx_available_current_track">Aktuel optager spor</string>
     <string name="gpx_info_subtracks">Underspor: %1$s </string>
-	</resources>
+	<string name="map_widget_plain_time">Aktuel tid</string>
+    <string name="gpx_wpt">Rutepunkt</string>
+    <string name="selected_gpx_info_show">\n\nTryk og hold for at se på kort</string>
+    <string name="delay_navigation_start">Start navigationen med forsinkelse</string>
+    <string name="selected">valgt</string>
+    <string name="gpx_split_interval">Vælg split interval</string>
+    <string name="loading_smth">Indlæser %1$s…</string>
+    </resources>
