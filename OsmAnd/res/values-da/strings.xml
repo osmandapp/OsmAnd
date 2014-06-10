@@ -346,7 +346,7 @@
 	<string name="offline_navigation_not_available">OsmAnd offline navigation er midlertidig utilgængelig.</string>
 	<string name="left_side_navigation">Venstrekørsel</string>
 	<string name="left_side_navigation_descr">Vælg for lande med venstrekørsel</string>
-	<string name="download_link_and_local_description">Tryk her for at hente eller opdatere kortfiler.
+	<string name="download_link_and_local_description">Tryk her for at hente eller opdatere offline kortfiler.
 \nTryk på et eksisterende element for at se flere detaljer, tryk og hold for at deaktiver eller slette. Nuværende data på enheden (%1$s fri):</string>
 	<string name="unknown_from_location">Startpunkt er endnu ikke fastlagt</string>
 	<string name="unknown_location">Position endnu ikke kendt</string>
@@ -383,7 +383,7 @@
 	<string name="debugging_and_development">OsmAnd udvikling</string>
 	<string name="native_rendering">Indbygget optegning</string>
 	<string name="test_voice_prompts">Test stemmemeddelelser</string>    
-	<string name="switch_to_raster_map_to_see">Ingen offline vektorkort til stede for denne placering. Hent et kort i \'Indstillinger\' → \'Datahåndtering\' eller skifte til onlinekort.</string>
+	<string name="switch_to_raster_map_to_see">Ingen offline vektorkort til stede for denne placering. Hent et kort i \'Indstillinger\' → \'Korthåndtering\' eller skifte til onlinekort (aktiver online kort udvidelsen først).</string>
 	<string name="send_files_to_osm">Send GPX-filer til OSM?</string>
 	<string name="gpx_visibility_txt">Synlighed</string>
 	<string name="gpx_description_txt">Beskrivelse</string>
@@ -502,7 +502,7 @@
 	<string name="settings_preset_descr">Kortvisnings- og navigationsindstillinger gemmes på hver profil. Indstil standardprofilen her.</string>
 	<string name="routing_settings_descr">Indstillinger for navigation</string>
 	<string name="global_settings">Globale indstillinger</string>
-	<string name="index_settings">Datahåndtering</string>
+	<string name="index_settings">Korthåndtering</string>
 	<string name="general_settings">Generelt</string>
 	<string name="general_settings_descr">Konfigurer visning og generelle indstillinger</string>
 	<string name="global_app_settings">Globale programindstillinger</string>
@@ -767,12 +767,12 @@ Anslået kort dækning og kvalitet:
 Liste over understøttede lande (dybest set world wide!): 
 Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
 	</string>
-	<string name="tip_update_index_t">At have opdaterede kortdata er afgørende for visning af offlinekort, for IP/adresse søgning og til offline navigation. OsmAnd har en korthåndtering, som kan hente offlinekort og søge efter tilgængelige opdateringer.
+	<string name="tip_update_index_t">Opdaterede kortdata er afgørende for visning af offlinekort, for IP/adresse søgning og til offline navigation. OsmAnd har en korthåndtering, som kan hente offlinekort og søge efter tilgængelige opdateringer.
 \n\nFor at hente kort gå til \'Indstillinger\' → \'Korthåndtering\' → \'Hent\'. 
 \n\nEfter at den globale regionsliste er hentet fra internettet, tryk på en post for at hente eller opdatere en fil. Bemærk filtypen vælgeren nær toppen af skærmen, som kan vælge den type overførsel, som ønskes (almindelige kort, reliefoverlejring, osv.).
 \n\nFor at filtrere regionslisten tastes nogle bogstaver, eller ve d at vælge \'Indstillinger\' → \'Filtrer det hentede\' for at kun at se opdateringer til data, der allerede på enheden.
-\n\n * Emner i \'grøn\' indikerer datafiler identiske på enheden og serveren
-\n * Emner i \'blå\' angiver tilgængelige opdateringer på serveren
+\n\n * Emner i \'grønt\' indikerer datafiler identiske på enheden og serveren
+\n * Emner i \'blåt\' angiver tilgængelige opdateringer på serveren
 \n * Emner i \'kursiv\' angiver data der er deaktiverede på enheden
 	</string>
 	<string name="tip_recent_changes_0_8_0_t">Ændringer i 0.8.0:
@@ -875,7 +875,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="local_index_items_restored">%1$d af %2$d emner aktiveret.</string>
 	<string name="local_index_no_items_to_do">Ingen emner at %1$s</string>
 	<string name="local_index_action_do">%1$s %2$s emner slettes. Fortsæt?</string>
-	<string name="local_index_descr_title">Datahåndtering</string>
+	<string name="local_index_descr_title">Korthåndtering</string>
 	<string name="local_index_mi_restore">Aktiver</string>
 	<string name="local_index_mi_backup">Deaktiver</string>
 	<string name="local_index_mi_delete">Slet</string>
@@ -1036,7 +1036,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="download_files_question">Hent {0} filer ({1} MB)?</string>
 	<string name="tip_favorites_t">Steder, som du ofte bruger, kan gemmes som favoritter:
 \n\nI genvejsmenuen \'Brug pladseringer\' vælg \'Tilføj til favoritter\', og indtast et navn.
-\n\nNår favoritten er gemt, er den tilgængelig via \'Menu\' → \'Favoritter\'. Tryk på en favorit i åbner mulighed for at bruge den som destination, redigere eller slette den.
+\n\nNår favoritten er gemt, er den tilgængelig via \'Menu\' → \'Mine steder\'. Tryk på en favorit i åbner mulighed for at bruge den som destination, redigere eller slette den.
 \n\nFor at vise alle favoritsteder direkte på kortet, aktiver kortlag \'Favoritter\' under \'Menu\' → \'Kortlag\'.
 	</string>
 	<string name="tip_recent_changes_1_1_4_t">Ændringer i 1.1.4:
@@ -1783,9 +1783,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="tip_recent_changes_1_8_alpha">Ændringer i 1.8:
          * Beregn rute mellem rutepunkter i GPX-spor
          * Ændret udseende for hentning af lande (understøtter søgning på lokale navne)
-   * GPX spor er flyttet til \' Mine data \'          * Du kan opdele GPX spor ved afstand og tjek højdeforskel / hastighed
-
 	 * Understøtter GPX/KML import (konverter fra KML til GPX)
+         * GPX-spor er flyttet til \'Mine data\'
+         * Opdel GPX-spor efter afstand og checke højdeforskel/hastighed
+         * Auto start navigation efter forsinkelse
     </string>
     <string name="hours_ago">timer siden</string>
     <string name="minutes_ago">minutter siden</string>
@@ -1896,6 +1897,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="selected_gpx_info_show">\n\nTryk og hold for at se på kort</string>
     <string name="delay_navigation_start">Start navigationen med forsinkelse</string>
     <string name="selected">valgt</string>
-    <string name="gpx_split_interval">Vælg split interval</string>
+    <string name="gpx_split_interval">Vælg opdelingsinterval</string>
     <string name="loading_smth">Indlæser %1$s…</string>
     </resources>
