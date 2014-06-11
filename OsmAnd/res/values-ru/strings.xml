@@ -1698,8 +1698,8 @@ OsmAnd - открытый источник и активно развается.
 	<string name="gpx_info_average_speed">Средняя скорость: %1$s </string>
 	<string name="gpx_info_maximum_speed">Максимальная скорость: %1$s </string>
 	<string name="gpx_info_avg_altitude">Средняя высота: %1$s</string>
-	<string name="gpx_info_diff_altitude">Высотное различие: %1$s</string>
-	<string name="gpx_info_asc_altitude">Высотные подъёмы: %1$s</string>
+	<string name="gpx_info_diff_altitude">Диапазон высот: %1$s</string>
+	<string name="gpx_info_asc_altitude">Снижение/подъём: %1$s</string>
     <string name="gpx_timespan">Отрезок времени: %1$s</string>
 	<string name="gpx_timemoving">Время передвижения: %1$s</string>
     <string name="gpx_selection_points">%1$s \nТочек</string>
