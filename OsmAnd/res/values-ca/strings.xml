@@ -989,12 +989,11 @@
 \n\t «Nit» - sempre usa mode de nit
 \n\t «Sensor de llum» - l\'aspecte del mapa es controlat pel sensor de llum del dispositiu (només si disposa d\'aquest sensor)
 	</string>
-	<string name="tip_osm_improve_t">L\'OsmAnd usa mapes basats en dades de l\'Openstreetmap.org (OSM) i -a mes de veure i navegar- podeu usar-lo per a millorar la qualitat de les dades. Fàcilment podeu crear i publicar nous PDI o errors de l\'OSM amb només uns quants clics!
-\n\nPer a això heu de subministrar la vostra informació de registre de l\'OSM a «Preferències» -&gt; «Preferències generals» -&gt; «Edició d\'OSM».
-\n\nPer afegir un nou PDI useu l\'opció «Crea un PDI» en el menú contextual del mapa. Introduïu la informació sobre el nou PDI al diàleg de «Crea PDI» i finalment publiqueu-lo.
-\n\nEls errors en els mapes poden ser informats immediatament via error d\'OSM, i la comunitat d\'OSM llavors podrà solucionar l\'error ràpidament.
-\n\nPer afegir un error useu l\'opció «Obre error d\'OSM» en el menú contextual. Llavors entra una descripció detallada del problema i finalment envia-ho usant el boto d\'Afegir.
-\n\nTingueu en compte que OsmAnd pot recollir les vostres correccions sense connexió però fa falta una connexió a Internet per enviar els teus  PDI OSM i els errors d\'OSM detectats.
+	<string name="tip_osm_improve_t">L\'OsmAnd usa mapes basats en dades de l\'Openstreetmap.org (OSM) i el podeu usar directament per millorar la qualitat de les dades OSM. Podeu crear i publicar nous PDI o reportar errors de l\'OSM amb només uns quants clics.
+\n\nPer a això heu de activar el connector «Edició d\'OSM» mitjançant «Preferències» → «Connectors» i llavors proporcionar la vostra informació de registre de l\'OSM a «Preferències» → «Edició d\'OSM».
+\n\nPer afegir un nou PDI useu l\'opció «Crea un PDI» en el menú contextual del mapa «Usa la ubicació». Introduïu la informació sobre el nou PDI al diàleg de «Crea PDI» i finalment publiqueu-lo.
+\n\nTambé els errors en els mapes es poden informar immediatament via error d\'OSM, així la comunitat d\'OSM podrà solucionar l\'error.Useu l\'opció «Obre error d\'OSM» en el menú contextual «Usa la ubicació». Llavors entri una descripció detallada del problema i finalment enviï’l usant el boto «Afegir».
+\n\nOsmAnd pot guardar les vostres entrades sense connexió però naturalment caldrà una connexió a Internet per enviar finalment els teus PDI i registres de errors d\'OSM detectats.
 	</string>
 	<string name="tip_recent_changes_0_6_9_t">Canvis a 0.6.9 :
 \n\t- Dibuixat fora línia millorat\n\t- Dibuixat natiu ràpid fora linina - mirar a les característiques experimentals (pot no funcionar en alguns dispositius)\n\t- Canvis massius per veure i sentir
