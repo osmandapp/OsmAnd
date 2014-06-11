@@ -22,6 +22,7 @@ import net.osmand.plus.osmo.OsMoPlugin;
 import net.osmand.plus.osmodroid.OsMoDroidPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.routesteps.RouteStepsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 import org.apache.commons.logging.Log;
@@ -41,10 +42,11 @@ public abstract class OsmandPlugin {
 	private static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
 	private static final String SRTM_PLUGIN_COMPONENT_PAID = "net.osmand.srtmPlugin.paid"; //$NON-NLS-1$
 	private static final String SRTM_PLUGIN_COMPONENT = "net.osmand.srtmPlugin"; //$NON-NLS-1$
-	
+
 	private static final String OSMODROID_PLUGIN_COMPONENT = "com.OsMoDroid"; //$NON-NLS-1$
 	
-	
+	private static final String ROUTE_STEPS_PLUGIN_COMPONENT = "net.osmand.routeStepsPlugin"; //$NON-NLS-1$
+
 	public abstract String getId();
 	
 	public abstract String getDescription();
@@ -82,6 +84,10 @@ public abstract class OsmandPlugin {
 		if(!f && Version.isParkingPluginInlined(app)) {
 			installedPlugins.add(parking);
 		}
+
+		final RouteStepsPlugin routeSteps = new RouteStepsPlugin(app);
+		installPlugin(ROUTE_STEPS_PLUGIN_COMPONENT, RouteStepsPlugin.ID, app, routeSteps);
+
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
