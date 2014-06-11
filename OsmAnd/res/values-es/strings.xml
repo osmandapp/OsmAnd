@@ -1780,6 +1780,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="gpx_info_average_speed">Velocidad media: %1$s </string>
 	<string name="gpx_info_maximum_speed">Velocidad máxima: %1$s </string>
 	<string name="gpx_info_avg_altitude">Altitud media: %1$s</string>
-	<string name="gpx_info_diff_altitude">Diferencia de altitud: %1$s</string>
-	<string name="gpx_info_asc_altitude">Altitud ascendida: %1$s</string>
+	<string name="gpx_info_diff_altitude">Rango de altitud: %1$s</string>
+	<string name="gpx_info_asc_altitude">Descendido/ascendido: %1$s</string>
+    <string name="map_widget_plain_time">Tiempo actual</string>
+    <string name="gpx_wpt">Punto de ruta</string>
     </resources>
