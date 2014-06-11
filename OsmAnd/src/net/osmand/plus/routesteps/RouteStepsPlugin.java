@@ -203,6 +203,7 @@ public class RouteStepsPlugin extends OsmandPlugin {
 					}
 				}
 				pointsStatus = new ArrayList<Boolean>(pointsIntermediateState);
+				saveGPXFile();
 			}
 		});
 		builder.setNegativeButton("Cancel", null);
