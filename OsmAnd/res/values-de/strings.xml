@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
@@ -1846,7 +1846,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="gpx_info_maximum_speed">Maximale Geschwindigkeit: %1$s </string>
 	<string name="gpx_info_avg_altitude">Durchschnittliche Höhe: %1$s</string>
 	<string name="gpx_info_diff_altitude">Höhenunterschied: %1$s</string>
-	<string name="gpx_info_asc_altitude">Anstieg: %1$s</string>
+	<string name="gpx_info_asc_altitude">Ab-/Anstieg: %1$s</string>
     <string name="gpx_timespan">Zeitspanne: %1$s</string>
 	<string name="gpx_timemoving">Zeit in Bewegung: %1$s</string>
     <string name="gpx_selection_segment_title">Abschnitt</string>

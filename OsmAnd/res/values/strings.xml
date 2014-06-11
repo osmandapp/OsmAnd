@@ -25,8 +25,8 @@
 	<string name="gpx_info_average_speed">Average speed: %1$s </string>
 	<string name="gpx_info_maximum_speed">Maximum speed: %1$s </string>
 	<string name="gpx_info_avg_altitude">Average altitude: %1$s</string>
-	<string name="gpx_info_diff_altitude">Altitude difference: %1$s</string>
-	<string name="gpx_info_asc_altitude">Altitude ascents: %1$s</string>
+	<string name="gpx_info_diff_altitude">Altitude range: %1$s</string>
+	<string name="gpx_info_asc_altitude">Descent/ascent: %1$s</string>
     <string name="gpx_timespan">Time span: %1$s</string>
 	<string name="gpx_timemoving">Time moving: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
