@@ -975,7 +975,7 @@
 <string name="show_warnings_title">Dopravní upozornění…</string>
 <string name="show_warnings_descr">Zobrazit omezení rychlosti, rychlostní radary, retardéry a řazení do pruhů</string>
 <string name="map_widget_show_ruler">Měřítko</string>
-<string name="map_widget_appearance">Ostatní:</string>
+<string name="map_widget_appearance">Ostatní prvky:</string>
 <string name="map_widget_transparent">Průhledné ovládání</string>
 <string name="monitoring_mode_off">Záznam\n do GPX</string>
 <string name="monitoring_mode_on">Zastavit\n GPX záznam</string>
@@ -1105,7 +1105,7 @@
     <string name="srtm_plugin_description">Tento modul umožňuje stáhnout mapy vrstevnic (Stáhnout mapy -&gt; Menu -&gt; Ostatní mapy) pro určitou oblast a použít je s offline mapami.</string>
     <string name="srtm_plugin_name">Modul vrstevnice</string>
     <string name="download_srtm_maps">Vrstevnice</string>
-    <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa</string>
+    <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa. Pokud chcete použít specifickou lokaci použijte \"Možnosti bodu\"</string>
     <string name="monitoring_control_stop">Zastavit</string>
     <string name="map_widget_audionotes">Audio poznámky</string>
     <string name="recording_is_recorded">Nahrávám audio/video. Stiskněte tlačítko \"stop\" pro zastavení.</string>
@@ -1310,7 +1310,7 @@
     <string name="edit_tilesource_maxzoom">Maximální zvětšení</string>
     <string name="edit_tilesource_minzoom">Minimální zvětšení</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Vybrat…</string>
+    <string name="edit_tilesource_choose_existing">Vybrat existující…</string>
     <string name="edit_tilesource_name">Název</string>
     <string name="tips_and_tricks">Tipy</string>
     <string name="tip_map_styles">Styly mapy</string>
@@ -1388,8 +1388,8 @@ s často kladenými otázkami.</string>
 	<string name="routing_attr_weight_name">Nejvyšší hmotnost</string>
 	<string name="routing_attr_weight_description">Zadejte hmotnostní omezení pro vaše vozidlo</string>
     <string name="android_19_location_disabled">Od verze KitKat není možné stahovat a aktualizovat mapy v předchozím úložišti (%s). Chcete ho změnit na vhodné nové a zkopírovat do něj všechny soubory.
-        \n Poznámka : původní soubory zůstanou nedotčeny.  
-        \n Poznámka : nebude možné sdílet soubory mezi OsmAnd a OsmAnd+. </string>
+        \n Poznámka: původní soubory zůstanou nedotčeny.  
+        \n Poznámka: nebude možné sdílet soubory mezi OsmAnd a OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd může zkusit přesunout data do nového cíle. Souhlasíte?</string>
     <string name="copying_osmand_one_file_descr">Kopírování souboru (%s) do nového umístění...</string>
     <string name="copying_osmand_files_descr">Kopírování souborů OsmAnd do nového umístění (%s)</string>
@@ -1492,6 +1492,9 @@ s často kladenými otázkami.</string>
         * Počítání trasy mezi body GPX trasy
         * Změněny názvy krajin v downloadech (podpora národního hledání)
         * Podpora importu GPX/KML (konverze z KML do GPX)
+	* GPX trasy byly přesunuty do \'Moje místa\'
+	* Můžete rozdělit GPX trasu podle vzdálenosti a kontrolovat výškový rozdíl/rychlost
+	* Automatický start navigace po uplynutí času
     </string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitorování - Pokročilé monitorování. Poskytuje možnost sledování jiných zařízení nebo být sledován. 
         Vytvořte anonymní skupiny, sdílejte vzájemně polohu a komunikujte. Různé možnosti nastavení krátkodobého nebo trvalého sledování.
@@ -1534,7 +1537,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_connect">Připojit k</string>
     <string name="osmo_create_group">Vytvořit skupinu</string>
     <string name="osmo_server_operation_failed">Chyba operace na serveru OsMo</string>
-    <string name="osmo_activity">OsMo monitorování</string>
+    <string name="osmo_activity">OpenStreetMap-Monitorování</string>
     <string name="osmo_enable_tracker">Odesílat mé pozice</string>
     <string name="osmo_control">OsMo rychlý přístup</string>
     <string name="hours_ago">hodin dozadu</string>
@@ -1582,11 +1585,11 @@ s často kladenými otázkami.</string>
     <string name="color_green">zelená</string>
 	
     <string name="gpx_file_is_empty">GPX trasa je prázdná</string>
-    <string name="selected_track">Trasa</string>
+    <string name="selected_track">Zvolená trasa</string>
     <string name="my_tracks">Všechny trasy</string>
     <string name="my_favorites">Moje oblíbené</string>
-    <string name="my_data_Button">Moje data</string>
-    <string name="my_data_activity">Moje data</string>
+    <string name="my_data_Button">Moje místa</string>
+    <string name="my_data_activity">Moje místa</string>
     <string name="osmo_show_group_notifications">Zobrazovat upozornění skupin</string>
     <string name="osmo_show_group_notifications_descr">Zobrazovat informační zprávu o připojení nebo odpojení uživatele ke skupině</string>
     <string name="osmo_cancel_moving_target">Zrušit pohyblivý cíl</string>
@@ -1597,4 +1600,26 @@ s často kladenými otázkami.</string>
     <string name="delay_navigation_start">Spustit navigaci se zpožděním</string>
     <string name="selected">vybrané</string>
     <string name="gpx_split_interval">Vyberte interval na rozdělení</string>
+    <string name="gpx_info_subtracks">Podtrasy: %1$s </string>
+	<string name="gpx_info_waypoints">Bodů na trase: %1$s </string>
+	<string name="gpx_info_distance">Vzdálenost: %1$s (%2$s bodů) </string>
+	<string name="gpx_info_start_time">Čas začátku: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">Čas konce: %1$tF,  %1$tT </string>
+	<string name="gpx_info_average_speed">Průměrná rychlost: %1$s </string>
+	<string name="gpx_info_maximum_speed">Nejvyšší rychlost: %1$s </string>
+	<string name="gpx_info_avg_altitude">Průměrná výška: %1$s</string>
+	<string name="gpx_info_diff_altitude">Výškový rozdíl: %1$s</string>
+	<string name="gpx_info_asc_altitude">Sestup/výstup: %1$s</string>
+    <string name="gpx_timespan">Časový rozsah: %1$s</string>
+	<string name="gpx_timemoving">Čas pohybu: %1$s</string>
+    <string name="gpx_selection_segment_title">Úsek</string>
+    <string name="gpx_selection_number_of_points"> %1$s bodů</string>
+    <string name="gpx_selection_point">Bod %1$s</string>
+    <string name="gpx_selection_current_track">nahrávání</string>
+    <string name="gpx_selection_route_points">%1$s \nBody trasy %2$s</string>
+    <string name="gpx_selection_points">%1$s \nBody</string>
+    <string name="gpx_selection_track">%1$s \nTrasa %2$s</string>
+    <string name="gpx_available_current_track">Právě nahrávaná trasa</string>
+    <string name="gpx_wpt">Bod na trase</string>
+    <string name="selected_gpx_info_show">\n\nStiskněte a podržte pro zobrazení na mapě</string>
     </resources>
