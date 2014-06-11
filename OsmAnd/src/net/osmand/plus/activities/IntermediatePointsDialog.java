@@ -105,20 +105,20 @@ public class IntermediatePointsDialog {
 
 			}
 		});
-		if (!changeOrder && intermediates.size()>1) {
+		if (!changeOrder && intermediates.size() > 1) {
 			builder.setNeutralButton(R.string.intermediate_points_change_order, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					openIntermediatePointsDialog(activity, app, true);
 				}
 			});
-		} else if(intermediates.size()>1) {
-			builder.setNeutralButton(R.string.intermediate_items_sort_by_distance,   new Dialog.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface d, int which) {
-                    //Do nothing here. We override the onclick
-                }
-            });
+		} else if (intermediates.size() > 1) {
+			builder.setNeutralButton(R.string.intermediate_items_sort_by_distance, new Dialog.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface d, int which) {
+					// Do nothing here. We override the onclick
+				}
+			});
 		}
 		AlertDialog dlg = builder.create();
 		if (changeOrder) {
@@ -289,7 +289,7 @@ public class IntermediatePointsDialog {
 						app.getTargetPointsHelper().removeWayPoint(cnt == 0, i);
 					}
 				}
-				// FIXME
+				// FIXME delete location when point is removed
 //				if(mapActivity instanceof MapActivity) {
 //					((MapActivity) mapActivity).getMapLayers().getContextMenuLayer().setLocation(null, "");
 //				}

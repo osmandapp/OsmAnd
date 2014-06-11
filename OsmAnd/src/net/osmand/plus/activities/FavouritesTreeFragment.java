@@ -61,7 +61,6 @@ import com.actionbarsherlock.view.ActionMode.Callback;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuItem.OnActionExpandListener;
 import com.actionbarsherlock.widget.SearchView;
 import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 
@@ -160,6 +159,10 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 		// Sort Favs by distance on Search tab, but sort alphabetically here
 		favouritesAdapter.sort(favoritesComparator);
+		if(favouritesAdapter.getGroupCount() > 0 && 
+				"".equals(favouritesAdapter.getGroup(0))) {
+			getListView().expandGroup(0);
+		}
 
 	}
 	
@@ -397,7 +400,6 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 				createMenuItem(menu, SELECT_DESTINATIONS_ACTION_MODE_ID, R.string.select_destination_and_intermediate_points,
 						R.drawable.ic_action_flage_light, R.drawable.ic_action_flage_dark,
 						MenuItem.SHOW_AS_ACTION_IF_ROOM);
-				updateSelectionMode(actionMode);
 				favoritesSelected.clear();
 				groupsToDelete.clear();
 				favouritesAdapter.notifyDataSetInvalidated();
@@ -419,6 +421,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (item.getItemId() == SELECT_DESTINATIONS_ACTION_MODE_ID) {
+					mode.finish();
 					selectDestinationImpl();
 				}
 				return true;
@@ -435,7 +438,9 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 						targetPointsHelper.getIntermediatePoints().size() + 1, 
 						getString(R.string.favorite) + ": " + fp.getName());		
 			}
-			targetPointsHelper.updateRoutingHelper();
+			if(getMyApplication().getRoutingHelper().isRouteCalculated()) {
+				targetPointsHelper.updateRouteAndReferesh(true);
+			}
 			IntermediatePointsDialog.openIntermediatePointsDialog(getActivity(), getMyApplication(), false);
 			//MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
@@ -471,6 +476,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (item.getItemId() == DELETE_ACTION_ID) {
+					mode.finish();
 					deleteFavoritesAction();
 				}
 				return true;
@@ -658,6 +664,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 		Map<String, List<FavouritePoint>> favoriteGroups = new LinkedHashMap<String, List<FavouritePoint>>();
 		List<String> groups = new ArrayList<String>();
 		Filter myFilter;
+		
 
 		public void setFavoriteGroups(Map<String, List<FavouritePoint>> favoriteGroups) {
 			this.sourceFavoriteGroups = favoriteGroups;
@@ -754,7 +761,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			adjustIndicator(groupPosition, isExpanded, row);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final String model = getGroup(groupPosition);
-			label.setText(model);
+			label.setText(model.length() == 0? getString(R.string.favourites_activity) : model);
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 
 			if (selectionMode) {
@@ -774,6 +781,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 						} else {
 							groupsToDelete.remove(model);
 						}
+						updateSelectionMode(actionMode);
 					}
 				});
 			} else {
@@ -822,6 +830,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 								favouritesAdapter.notifyDataSetInvalidated();
 							}
 						}
+						updateSelectionMode(actionMode);
 					}
 				});
 			} else {

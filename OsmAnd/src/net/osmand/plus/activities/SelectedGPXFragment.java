@@ -2,10 +2,14 @@ package net.osmand.plus.activities;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import java.io.File;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.FavouritePoint;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -14,6 +18,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.AvailableGPXFragment.LoadGpxTask;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -26,11 +31,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -84,6 +91,40 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		return super.onOptionsItemSelected(item);
+	}
+	
+	protected void saveAsFavorites(final GpxDisplayGroup model) {
+		Builder b = new AlertDialog.Builder(getActivity());
+		final EditText editText = new EditText(getActivity());
+		String name = model.getName();
+		if(name.indexOf('\n') > 0) {
+			name = name.substring(0, name.indexOf('\n'));
+		}
+		editText.setText(name);
+		editText.setPadding(7, 3, 7, 3);
+		b.setTitle(R.string.save_as_favorites_points);
+		b.setView(editText);
+		b.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				saveFavoritesImpl(model.getModifiableList(), editText.getText().toString());
+
+			}
+		});
+		b.setNegativeButton(R.string.default_buttons_cancel, null);
+		b.show();
+	}
+
+	protected void saveFavoritesImpl(List<GpxDisplayItem> modifiableList, String category) {
+		FavouritesDbHelper fdb = getMyApplication().getFavorites();
+		for(GpxDisplayItem i : modifiableList) {
+			if (i.locationStart != null) {
+				FavouritePoint fp = new FavouritePoint(i.locationStart.lat, i.locationStart.lon, i.locationStart.name,
+						category);
+				fdb.addFavourite(fp);
+			}
+		}
 	}
 
 	@Override
@@ -345,9 +386,8 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			final GpxDisplayGroup model = getGroup(groupPosition);
 			label.setText(model.getGroupName());
 			final ImageView ch = (ImageView) row.findViewById(R.id.check_item);
-			if(model.getType() != GpxDisplayItemType.TRACK_SEGMENT) {
-				ch.setVisibility(View.INVISIBLE);
-			} else {
+			
+			if(model.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
 				ch.setVisibility(View.VISIBLE);
 				ch.setImageDrawable(getActivity().getResources().getDrawable(
 						app.getSettings().isLightContent() ? R.drawable.ic_action_settings_light
@@ -359,10 +399,26 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 					}
 
 				});
+			} else if(model.getType() == GpxDisplayItemType.TRACK_POINTS || 
+					model.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
+				ch.setVisibility(View.VISIBLE);
+				ch.setImageDrawable(getActivity().getResources().getDrawable(
+						app.getSettings().isLightContent() ? R.drawable.ic_action_fav_light
+								: R.drawable.ic_action_fav_dark));
+				ch.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						saveAsFavorites(model);
+					}
+
+				});
+			} else {
+				ch.setVisibility(View.INVISIBLE);
 			}
 			return row;
 		}
 		
+
 
 		@Override
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,

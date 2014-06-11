@@ -133,7 +133,7 @@ public class TargetPointsHelper {
 		updateRouteAndReferesh(updateRoute);
 	}
 
-	private void updateRouteAndReferesh(boolean updateRoute) {
+	public void updateRouteAndReferesh(boolean updateRoute) {
 		if(updateRoute && ( routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
 				routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode())) {
 			updateRoutingHelper();
@@ -141,7 +141,7 @@ public class TargetPointsHelper {
 		updateListeners();
 	}
 
-	public void updateRoutingHelper() {
+	private void updateRoutingHelper() {
 		LatLon start = settings.getPointToStart();
 		Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
 		if((routingHelper.isFollowingMode() && lastKnownLocation != null) || start == null) {

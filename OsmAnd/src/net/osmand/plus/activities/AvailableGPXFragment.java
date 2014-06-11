@@ -360,6 +360,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		Builder b = new AlertDialog.Builder(getActivity());
 		if(f.exists()){
 			final EditText editText = new EditText(getActivity());
+			editText.setPadding(7, 3, 7, 3);
 			editText.setText(f.getName());
 			b.setView(editText);
 			b.setPositiveButton(R.string.default_buttons_save, new DialogInterface.OnClickListener() {

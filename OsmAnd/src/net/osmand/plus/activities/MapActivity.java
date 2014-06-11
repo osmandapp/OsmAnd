@@ -290,7 +290,7 @@ public class MapActivity extends AccessibleActivity  {
 				!Algorithms.objectEquals(targets.getPointToNavigate(), routingHelper.getFinalLocation() )||
 				!Algorithms.objectEquals(targets.getIntermediatePoints(), routingHelper.getIntermediatePoints())
 				)) {
-			targets.updateRoutingHelper();
+			targets.updateRouteAndReferesh(true);
 		}
 		app.getLocationProvider().resumeAllUpdates();
 
