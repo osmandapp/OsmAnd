@@ -1709,4 +1709,5 @@ OsmAnd - открытый источник и активно развается.
     <string name="map_widget_plain_time">Текущее время</string>
     <string name="gpx_wpt">Путевая точка</string>
     <string name="gpx_split_interval">Выбрать интервал разбиения</string>
+    <string name="delay_navigation_start">Старт навигации по тайм-ауту</string>
     </resources>
