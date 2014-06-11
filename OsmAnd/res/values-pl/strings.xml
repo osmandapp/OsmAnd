@@ -1821,8 +1821,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="gpx_info_average_speed">Prędkość średnia: %1$s </string>
 	<string name="gpx_info_maximum_speed">Prędkość maksymalna: %1$s </string>
 	<string name="gpx_info_avg_altitude">Średnia wysokość: %1$s</string>
-	<string name="gpx_info_diff_altitude">Różnica wysokości: %1$s</string>
-	<string name="gpx_info_asc_altitude">Wysokość wzniesień: %1$s</string>
+	<string name="gpx_info_diff_altitude">Zakres wysokości: %1$s</string>
+	<string name="gpx_info_asc_altitude">Zjazd/podjazd: %1$s</string>
     <string name="gpx_timespan">Okres czasu: %1$s</string>
 	<string name="gpx_timemoving">Czas w ruchu: %1$s</string>
     <string name="gpx_selection_segment_title">Odcinek</string>
