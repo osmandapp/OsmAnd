@@ -176,7 +176,7 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 			TextView label = (TextView) row.findViewById(R.id.favourite_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = getItem(position);
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, 0));
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, model.getColor()));
 			String distance = "";
 			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), location.getLatitude(), location

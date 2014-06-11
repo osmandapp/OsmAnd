@@ -31,7 +31,6 @@ public class FavouritesDbHelper {
 	public static final String FILE_TO_SAVE = "favourites.gpx"; //$NON-NLS-1$
 	public static final String FILE_TO_BACKUP = "favourites_bak.gpx"; //$NON-NLS-1$
 
-	private List<FavouritePoint> favoritePointsFromGPXFile = null;
 	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<FavouritePoint>();
 	private Map<String, List<FavouritePoint>> favoriteGroups = null;
 	private final OsmandApplication context;
@@ -111,9 +110,7 @@ public class FavouritesDbHelper {
 		addCategoryQuery(context.getString(R.string.favorite_default_category), db);
 	}
 
-	public List<FavouritePoint> getFavoritePointsFromGPXFile() {
-		return favoritePointsFromGPXFile;
-	}
+	
 
 	
 	

@@ -13,6 +13,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import android.graphics.Canvas;
@@ -24,7 +25,8 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.widget.Toast;
 
-public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, 
+			MapTextProvider<WptPt>{
 	
 	private OsmandMapTileView view;
 	
@@ -40,6 +42,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private GpxSelectionHelper selectedGpxHelper;
 
 	private Paint paintBmp;
+	private List<WptPt> cache = new ArrayList<WptPt>();
+	private MapTextLayer textLayer;
+
 //	private Drawable favoriteIcon;
 	
 	
@@ -57,6 +62,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintBmp.setAntiAlias(true);
 		paintBmp.setFilterBitmap(true);
 		paintBmp.setDither(true);
+		
+		textLayer = view.getLayerByClass(MapTextLayer.class);
 		//favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
 	}
 
@@ -90,6 +97,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
 		int clr = getColor(settings);
+		cache.clear();
+		int pointColor = view.getResources().getColor(R.color.gpx_track);
 		if (!selectedGPXFiles.isEmpty()) {
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<List<WptPt>> points = g.getPointsToDisplay();
@@ -102,20 +111,24 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				final QuadRect latLonBounds = tileBox.getLatLonBounds();
 				for (SelectedGpxFile g : selectedGPXFiles) {
 					List<WptPt> pts = g.getGpxFile().points;
-					int fcolor = g.getColor() == 0 ? clr : g.getColor();
+					int fcolor = g.getColor() == 0 ? pointColor : g.getColor();
 					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), fcolor);
 					for (WptPt o : pts) {
 						if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
 								&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right) {
+							cache.add(o);
 							int x = (int) tileBox.getPixXFromLatLon(o.lat, o.lon);
 							int y = (int) tileBox.getPixYFromLatLon(o.lat, o.lon);
-							fid.drawBitmapInCenter(canvas, x, y);
+							fid.drawBitmapInCenter(canvas, x, y, tileBox.getDensity());
 //							canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2,
 //									y - favoriteIcon.getHeight(), paint);
 						}
 					}
 				}
 			}
+		}
+		if(textLayer.isVisible()) {
+			textLayer.putData(this, cache);
 		}
 	}
 
@@ -188,9 +201,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+		if(tileBox.getZoom() < 11) {
+			return false;
+		}
 		List<WptPt> favs = new ArrayList<WptPt>();
 		getWptFromPoint(tileBox, point, favs);
-		if(!favs.isEmpty()){
+		if(!favs.isEmpty() && (tileBox.getZoom() > 14 || favs.size() < 6)){
 			StringBuilder res = new StringBuilder();
 			int i = 0;
 			for(WptPt fav : favs) {
@@ -229,8 +245,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if(o instanceof FavouritePoint){
-			return new LatLon(((FavouritePoint)o).getLatitude(), ((FavouritePoint)o).getLongitude());
+		if(o instanceof WptPt){
+			return new LatLon(((WptPt)o).lat, ((WptPt)o).lon);
 		}
 		return null;
 	}
@@ -248,6 +264,21 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		return false;
+	}
+
+	@Override
+	public LatLon getTextLocation(WptPt o) {
+		return new LatLon(((WptPt)o).lat, ((WptPt)o).lon);
+	}
+
+	@Override
+	public int getTextShift(WptPt o, RotatedTileBox rb) {
+		return (int) (16 * rb.getDensity());
+	}
+
+	@Override
+	public String getText(WptPt o) {
+		return o.name;
 	}
 
 

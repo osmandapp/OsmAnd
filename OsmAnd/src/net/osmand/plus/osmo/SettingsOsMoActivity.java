@@ -4,6 +4,7 @@ package net.osmand.plus.osmo;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
@@ -60,11 +61,13 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		sendLocationsref.setSummary(R.string.osmo_show_group_notifications_descr);
 		grp.addPreference(sendLocationsref);
 		
-		debugPref = new Preference(this);
-		debugPref.setTitle(R.string.osmo_settings_debug);
-		debugPref.setOnPreferenceClickListener(this);
-		updateDebugPref();
-		grp.addPreference(debugPref);
+		if (OsmandPlugin.isDevelopment()) {
+			debugPref = new Preference(this);
+			debugPref.setTitle(R.string.osmo_settings_debug);
+			debugPref.setOnPreferenceClickListener(this);
+			updateDebugPref();
+			grp.addPreference(debugPref);
+		}
     }
 
 	private void updateDebugPref() {

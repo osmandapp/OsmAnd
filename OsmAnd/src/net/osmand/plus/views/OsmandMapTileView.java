@@ -236,6 +236,18 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		return application.accessibilityEnabled() ? false : super.onKeyDown(keyCode, event);
 	}
+	
+	public boolean isLayerVisible(OsmandMapLayer layer) {
+		return layers.contains(layer);
+	}
+	
+	public float getZorder(OsmandMapLayer layer) {
+		Float z = zOrders.get(layer);
+		if(z == null) {
+			return 10;
+		}
+		return z;
+	}
 
 	public synchronized void addLayer(OsmandMapLayer layer, float zOrder) {
 		int i = 0;

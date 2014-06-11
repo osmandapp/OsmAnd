@@ -4,7 +4,6 @@ package net.osmand.plus.activities;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import net.osmand.CallbackWithObject;
@@ -17,7 +16,6 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.Item;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
@@ -46,6 +44,7 @@ import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.PointLocationLayer;
 import net.osmand.plus.views.PointNavigationLayer;
 import net.osmand.plus.views.RouteLayer;
+import net.osmand.plus.views.MapTextLayer;
 import net.osmand.plus.views.TransportInfoLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import android.app.AlertDialog;
@@ -87,6 +86,7 @@ public class MapActivityLayers {
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
 	private MapInfoLayer mapInfoLayer;
+	private MapTextLayer mapTextLayer;
 	private ContextMenuLayer contextMenuLayer;
 	private MapControlsLayer mapControlsLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
@@ -104,7 +104,10 @@ public class MapActivityLayers {
 		
 		OsmandApplication app = (OsmandApplication) getApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		
+		// first create to make accessible
+		mapTextLayer = new MapTextLayer();
+		// 5.95 all labels
+		mapView.addLayer(mapTextLayer, 5.95f);
 		// mapView.addLayer(underlayLayer, -0.5f);
 		mapTileLayer = new MapTileLayer(true);
 		mapView.addLayer(mapTileLayer, 0.0f);
@@ -135,8 +138,9 @@ public class MapActivityLayers {
 		// 5.5 transport info layer 
 		transportInfoLayer = new TransportInfoLayer(TransportRouteHelper.getInstance());
 		mapView.addLayer(transportInfoLayer, 5.5f);
+		// 5.95 all text labels
 		// 6. point location layer 
-		locationLayer = new PointLocationLayer(activity.getMapViewTrackingUtilities());
+		locationLayer = new PointLocationLayer(MapActivity.getMapViewTrackingUtilities());
 		mapView.addLayer(locationLayer, 6);
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(activity);
@@ -248,9 +252,8 @@ public class MapActivityLayers {
 					selectPOIFilterLayer(mapView);
 				}
 				settings.SHOW_POI_OVER_MAP.set(isChecked);
-			} else if(itemId == R.string.layer_poi_label){
+			} else if(itemId == R.string.layer_amenity_label){
 				settings.SHOW_POI_LABEL.set(isChecked);
-			
 			} else if(itemId == R.string.layer_favorites){
 				settings.SHOW_FAVORITES.set(isChecked);
 			} else if(itemId == R.string.layer_gpx_layer){
@@ -276,7 +279,7 @@ public class MapActivityLayers {
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
 		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
 				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).reg();
-		adapter.item(R.string.layer_poi_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0) 
+		adapter.item(R.string.layer_amenity_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0) 
 				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).reg();
 		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0) 
 				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).reg();
@@ -611,6 +614,11 @@ public class MapActivityLayers {
 	public FavoritesLayer getFavoritesLayer() {
 		return favoritesLayer;
 	}
+	
+	public MapTextLayer getMapTextLayer() {
+		return mapTextLayer;
+	}
+	
 	public PointLocationLayer getLocationLayer() {
 		return locationLayer;
 	}

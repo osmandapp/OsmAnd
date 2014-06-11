@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="layer_amenity_label">Text labels</string>
     <string name="loading_smth">Loading %1$s &#8230;</string>
     <string name="map_widget_plain_time">Current time</string>
     <string name="gpx_wpt">Waypoint</string>
@@ -1233,7 +1234,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="city_type_village">Village</string>
 	<string name="city_type_town">Town</string>
 	<string name="city_type_city">City</string>
-	<string name="layer_poi_label">POI labels</string>
+	
 	<string name="animate_route_off">Stop simulation</string>
 	<string name="animate_route">Start simulation</string>
 	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8:
