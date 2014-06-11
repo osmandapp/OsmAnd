@@ -383,6 +383,69 @@ public class RouteResultPreparation {
 				dist += result.get(i).getDistance();
 			}
 		}
+
+		for (int i = result.size() - 2; i >= 0; i--) {
+			RouteSegmentResult currentSegment = result.get(i);
+			RouteSegmentResult nextSegment = result.get(i + 1);
+			if (currentSegment.getTurnType() == null || currentSegment.getTurnType().getLanes() == null || nextSegment.getTurnType() == null || nextSegment.getTurnType().getLanes() == null) {
+				continue;
+			}
+			if (currentSegment.getDistance() < 60 && nextSegment.getTurnType().getLanes().length <= currentSegment.getTurnType().getLanes().length) {
+				mergeTurnLanes(leftside, currentSegment, nextSegment);
+			}
+		}
+	}
+
+	private void mergeTurnLanes(boolean leftSide, RouteSegmentResult currentSegment, RouteSegmentResult nextSegment) {
+		if (currentSegment.getTurnType().isTurnLanesRendering() && nextSegment.getTurnType().isTurnLanesRendering()) {
+			int[] lanes = new int[currentSegment.getTurnType().getLanes().length];
+			for (int i = 0; i < lanes.length; i++) {
+				lanes[i] = currentSegment.getTurnType().getLanes()[i] & ~1;
+			}
+			int matchingIndex = 0;
+			int maxMatchedLanes = 0;
+			for (int i = 0; i < lanes.length; i++) {
+				int matchedLanes = 0;
+				for (int j = 0; j < nextSegment.getTurnType().getLanes().length; j++) {
+					if (nextSegment.getTurnType().getPrimaryTurn(j) == currentSegment.getTurnType().getPrimaryTurn(i)) {
+						matchedLanes++;
+					} else {
+						break;
+					}
+				}
+				if (matchedLanes > maxMatchedLanes) {
+					matchingIndex = i;
+					maxMatchedLanes = matchedLanes;
+				}
+			}
+			if (maxMatchedLanes <= 1) {
+				return;
+			}
+			for (int i = matchingIndex; i - matchingIndex < nextSegment.getTurnType().getLanes().length; i++) {
+				lanes[i] |= nextSegment.getTurnType().getLanes()[i - matchingIndex] & 1;
+			}
+			currentSegment.getTurnType().setLanes(lanes);
+			currentSegment.setTurnType(inferTurnFromLanes(currentSegment.getTurnType(), leftSide));
+		} else if (!currentSegment.getTurnType().isTurnLanesRendering() && !nextSegment.getTurnType().isTurnLanesRendering()) {
+			int[] lanes = new int[currentSegment.getTurnType().getLanes().length];
+			int matchingIndex = 0;
+			int expectedLanes = 0;
+			for (int i = 0; i < lanes.length; i++) {
+				lanes[i] = currentSegment.getTurnType().getLanes()[i] & ~1;
+				if (currentSegment.getTurnType().getPrimaryTurn(i) == TurnType.Turn.SLIGHT_LEFT) {
+					matchingIndex++;
+				} else if (currentSegment.getTurnType().getPrimaryTurn(i) == TurnType.Turn.STRAIGHT) {
+					expectedLanes++;
+				}
+			}
+			if (nextSegment.getTurnType().getLanes().length != expectedLanes) {
+				return;
+			}
+			for (int i = matchingIndex; i - matchingIndex < nextSegment.getTurnType().getLanes().length; i++) {
+				lanes[i] = nextSegment.getTurnType().getLanes()[i - matchingIndex];
+			}
+			currentSegment.getTurnType().setLanes(lanes);
+		}
 	}
 	
 	private static final int MAX_SPEAK_PRIORITY = 5;
@@ -759,6 +822,12 @@ public class RouteResultPreparation {
 
 		t.setTurnLanesRendering(true);
 
+		t = inferTurnFromLanes(t, leftSide);
+
+		return t;
+	}
+
+	private TurnType inferTurnFromLanes(TurnType t, boolean leftSide) {
 		List<TurnType.Turn> possibleTurns = new ArrayList<TurnType.Turn>();
 		boolean filled = false;
 		for (int i = 0; i < t.getLanes().length; i++) {
@@ -789,8 +858,9 @@ public class RouteResultPreparation {
 			}
 		}
 
+		// removing duplicates
 		if (new HashSet<TurnType.Turn>(possibleTurns).size() == 1) {
-			TurnType derivedTurnType = TurnType.valueOf(possibleTurns.get(0).getValue(), leftSide);
+			TurnType derivedTurnType = TurnType.valueOf(possibleTurns.get(0).getValue(), false);
 			derivedTurnType.setLanes(t.getLanes());
 			derivedTurnType.setSkipToSpeak(t.isSkipToSpeak());
 			derivedTurnType.setTurnLanesRendering(t.isTurnLanesRendering());
