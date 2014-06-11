@@ -1839,7 +1839,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_show_group_notifications_descr">Zeige Pop-up-Meldung, wenn eine Nutzer der Gruppe beitritt oder sie verlässt</string>
     <string name="osmo_tracker_id_share">Um eine Verbindung zum Gerät %2$s herzustellen, bitte den Link %3$s anklicken oder die Tracker-ID (%1$s) angeben</string>
     <string name="gpx_info_waypoints">Wegpunkte: %1$s </string>
-	<string name="gpx_info_distance">Entfernung: %1$s (%2$s Punkte) </string>
+	<string name="gpx_info_distance">Strecke: %1$s (%2$s Punkte) </string>
 	<string name="gpx_info_start_time">Startzeit: %1$tF, %1$tT </string>
 	<string name="gpx_info_end_time">Endzeit: %1$tF, %1$tT </string>
 	<string name="gpx_info_average_speed">Durchschnittsgeschwindigkeit: %1$s </string>
