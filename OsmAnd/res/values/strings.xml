@@ -934,6 +934,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_parking_plugin_name">Parking Position Plugin</string>
 	<string name="context_menu_item_add_parking_point">Mark as a parking position</string>
 	<string name="context_menu_item_delete_parking_point">Delete a parking marker</string>
+    <string name="context_menu_item_show_route_points">Show route points</string>
 	<string name="gpxup_public">Public</string>
 	<string name="gpxup_identifiable">Identifiable</string>
 	<string name="gpxup_trackable">Trackable</string>
