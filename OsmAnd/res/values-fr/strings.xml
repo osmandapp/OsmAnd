@@ -32,7 +32,7 @@
 \n\t- Données Wikipedia hors-ligne avec articles
 \n\t- Cartes mises à jour
 \n\t- Petites améliorations diverses</string>
-  <string name="free_version_message">Cette version gratuite de OsmAnd est limitée à %1$s téléchargements et ne supporte pas les articles Wikipedia hors-ligne.</string>
+  <string name="free_version_message">La version gratuite d\'OsmAnd est limitée à %1$s téléchargements, et ne supporte pas les articles Wikipedia hors-ligne.</string>
   <string name="free_version_title">Version gratuite</string>
   <string name="poi_context_menu_showdescription">Afficher description PI</string>
   <string name="index_name_north_america">Amérique du Nord</string>
@@ -182,8 +182,7 @@
   <string name="vector_map_not_needed">Pas nécessaire</string>
   <string name="basemap_missing">La carte mondiale de base est absente (couvrant le monde entier à faible zoom). Pensez à télécharger World_basemap_x.obf pour avoir un environnement complet.</string>
   <string name="vector_data_missing">Il n\'y a pas de cartes (\'hors-ligne\') sur la carte SD. Pensez à en télécharger pour utiliser OsmAnd hors-ligne.</string>
-  <string name="local_index_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
-  
+ 
   
   
   <string name="local_index_installed">Édition</string>
@@ -332,8 +331,8 @@
   <string name="send_location">Envoyer le lieu</string>
   <string name="context_menu_item_share_location">Partager le lieu</string>
   <string name="add_waypoint_dialog_added">Point GPX \'\'{0}\'\' ajouté avec succès</string>
-  <string name="add_waypoint_dialog_title">Ajouter une étape à une trace GPX enregistrée</string>
-  <string name="context_menu_item_add_waypoint">Ajouter une étape GPX</string>
+  <string name="add_waypoint_dialog_title">Ajouter un point de cheminement à la trace GPX enregistrée</string>
+  <string name="context_menu_item_add_waypoint">Ajouter un point GPX</string>
   <string name="amenity_type_administrative">Territoire</string>
   <string name="amenity_type_barrier">Obstacle</string>
   <string name="amenity_type_education">Éducation</string>
@@ -599,7 +598,7 @@
   <string name="opening_changeset">Ouverture des modifications…</string>
   <string name="closing_changeset">Fermeture des modifications…</string>
   <string name="commiting_node">Envoi des nœuds…</string>
-  <string name="loading_poi_obj">Chargement des Points d\'intérêts…</string>
+  <string name="loading_poi_obj">Chargement des points d\'intérêts…</string>
   <string name="auth_failed">Autorisation refusée</string>
   <string name="failed_op">Échec</string>
   <string name="converting_names">Convertir les noms en anglais…</string>
@@ -1621,6 +1620,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	* Calcul d\'itinéraire entre les points d\'une trace GPX
 	* Modification de la présentation des pays pour les téléchargements (possibilité de rechercher les noms locaux)
 	* Prise en charge de l\'importation des fichiers GPX/KML et conversion KML en GPX
+	* Migration des traces GPX dans \'Mes lieux\'
+        * Possibilité de scinder une trace GPX en sections de distance définie, et de consulter la vitesse et les variations d\'altitude
+        * Lancement automatique de la navigation après un certain temps
     </string>
     <string name="hours_ago">heures avant</string>
     <string name="minutes_ago">minutes avant</string>
@@ -1697,10 +1699,38 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_user_left">L\'utilisateur %1$s a quitté le groupe %2$s</string>
     <string name="osmo_show_group_notifications">Montrer les notifications de groupe</string>
     <string name="osmo_show_group_notifications_descr">Afficher des messages quand un utilisateur rejoint ou quitte le groupe</string>
-    <string name="selected_track">Piste</string>
+    <string name="selected_track">Pistes sélectionnées</string>
     <string name="my_tracks">Toutes les pistes</string>
     <string name="my_favorites">Mes Favoris</string>
-    <string name="my_data_Button">Mes Données</string>
-    <string name="my_data_activity">Mes Données</string>
+    <string name="my_data_Button">Mes lieux</string>
+    <string name="my_data_activity">Mes lieux</string>
     <string name="gpx_file_is_empty">La trace GPX est vide</string>
+    <string name="selected_gpx_info_show">\n\nAppui long pour visualiser sur la carte</string>
+    <string name="delay_navigation_start">Lancement de la navigation au bout de… </string>
+    <string name="selected">sélectionner</string>
+    <string name="gpx_split_interval">Diviser tous les…</string>
+    <string name="local_index_gpx_info_show">\n\nAppui long pour afficher les options</string>
+<string name="gpx_info_subtracks">Sections : %1$s </string>
+<string name="gpx_info_waypoints">Points de cheminement : %1$s </string>
+<string name="gpx_info_distance">Distance : %1$s (%2$s points) </string>
+<string name="gpx_info_start_time">Heure de début : %1$tF, %1$tT </string>
+<string name="gpx_info_end_time">Heure de fin : %1$tF, %1$tT </string>
+<string name="gpx_info_average_speed">Vitesse moyenne : %1$s </string>
+<string name="gpx_info_maximum_speed">Vitesse maximale : %1$s </string>
+<string name="gpx_info_avg_altitude">Altitude moyenne : %1$s</string>
+<string name="gpx_info_diff_altitude">Altitudes extrêmes : %1$s</string>
+<string name="gpx_info_asc_altitude">Dénivelés : %1$s</string>
+    <string name="gpx_timespan">Durée : %1$s</string>
+<string name="gpx_timemoving">Temps en déplacement : %1$s</string>
+    <string name="gpx_selection_segment_title">Segment</string>
+    <string name="gpx_selection_number_of_points"> %1$s points</string>
+    <string name="gpx_selection_point">Point %1$s</string>
+    <string name="gpx_selection_current_track">En cours d\'enregistrement</string>
+    <string name="gpx_selection_route_points">%1$s \nPoints d\'itinéraire %2$s</string>
+    <string name="gpx_selection_points">%1$s \nPoints</string>
+    <string name="gpx_selection_track">%1$s \nTrace %2$s</string>
+    <string name="gpx_available_current_track">Trace en cours d\'enregistrement</string>
+    <string name="gpx_wpt">Point de cheminement</string>
+    <string name="map_widget_plain_time">Heure</string>
+    <string name="loading_smth">Chargement de %1$s &#8230;</string>
     </resources>
