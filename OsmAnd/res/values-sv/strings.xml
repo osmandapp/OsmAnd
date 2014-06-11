@@ -989,7 +989,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="dist_control_start">Starta</string>
     <string name="local_indexes_cat_av">Audio-/videodata</string>
     <string name="stop_routing_confirm">Är det säkert att du vill avbryta navigeringen?</string>
-    <string name="clear_dest_confirm">Är det säkert att du vill ta bort din destinationspunkt?</string>
+    <string name="clear_dest_confirm">Är det säkert att du vill ta bort din destinationspunkt (samt waypoints)?</string>
     <string name="recording_context_menu_show">Visa</string>
     <string name="recording_photo_description">Foto %1$s av %2$s</string>
     <string name="recording_context_menu_precord">Ta ett foto</string>
@@ -1103,7 +1103,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
 	<string name="get_directions">Vägvisning</string>
-	<string name="precise_routing_mode_descr">Aktivera exakt ruttning för beräkning utan småfel. Mycket begränsad av avståndet och använder inte inbyggt bibliotek.</string>
+	<string name="precise_routing_mode_descr">Aktivera exakt ruttning för beräkning utan småfel. Mycket begränsad av avståndet samt långsam.</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, long %2$.3f</string>
     <string name="non_optimal_route_calculation">Beräkna kanske icke-optimal rutt över långa avstånd</string>
 	<string name="incremental_search_street">Sök gator stegvis</string>
@@ -1111,9 +1111,13 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="show_view_angle">Visa rörelseriktning</string>
 	<string name="Closest_Amenities">Närmaste bekvämligheter</string>
 	<string name="support_new_features_descr">Skänk lite pengar så att nya funktioner kan läggas till i appen</string>
-	<string name="download_hillshade_item">"Skuggad relief "</string>
+	<string name="download_hillshade_item">Skuggad relief</string>
     <string name="download_hillshade_maps">Skuggad relief-överlägg</string>
-    <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)\n\t* Fixat till höjdkurvs-pluginen\n\t* Skuggad relief-paket för höjdkurvs-pluginen\n\t* Buggfixar (suboptimal ruttning)
+    <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2:
+		\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)
+		\n\t* Fixat till höjdkurvs-pluginen
+		\n\t* Skuggad relief-paket för höjdkurvs-pluginen
+		\n\t* Buggfixar (suboptimal ruttning)
     </string>
     <string name="av_use_external_camera_descr">Andvänd systemets app för foton</string>
     <string name="av_use_external_camera">Använd kamera-app</string>
@@ -1297,7 +1301,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	</string>
     <string name="osmand_monitoring_plugin_description">Gör det möjligt att spåra och navigera i viloläge (skärm av) genom att periodvis väcka upp GPS-enheten.
     Visa inställningar som gör det lätt att spela in dina tripper till lokala GPX-filer eller online med hjälp av en webbtjänst.</string>
-    <string name="base_world_map">basvärldskarta</string>
+    <string name="base_world_map">Baskarta (världen)</string>
 	<string name="av_camera_focus">Typ av kamerafokus</string>
 	<string name="av_camera_focus_descr">Välj typ av intern kamerafokus</string>
 	<string name="av_camera_focus_auto">Autofokus</string>
@@ -1312,8 +1316,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     
     
     <string name="map_magnifier">Kartförstoring</string>
-    <string name="route_is_too_long">Rutten är möjligen för lång för att kunna beräknas av OsmAnd offline-router.
-	I snitt är offline-ruttning möjlig mellan punkter upp till 200 km från varandra. Lägg till en eller flera mellanliggande waypoints för att beräkna rutten.</string>
+    <string name="route_is_too_long">OsmAnd offline-ruttning kan ta väldigt lång tid (eller inte fungera alls) för punkter mer än 200 km från varandra. Lägg till en eller flera mellanliggande waypoints för bättre prestanda.</string>
 	<string name="auto_zoom_none">Ingen auto-zoom</string>
 	<string name="auto_zoom_close">Nära</string>
 	<string name="auto_zoom_far">Medelavstånd</string>
@@ -1458,7 +1461,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     Helt fungerande grupper bör skapas på webbplatsen och endast registrerade användare har tillgång till dem.
     Läs mer på http://osmo.mobi.</string>
     <string name="interrupt_music_descr">Avbryt musiken vid meddelanden</string>
-	<string name="interrupt_music">avbryt musiken</string>
+	<string name="interrupt_music">Avbryt musiken</string>
 	<string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
 	<string name="share_route_subject">Utdelad rutt via OsmAnd</string>
 	<string name="keep_informing_never">Aldrig</string>
@@ -1478,15 +1481,15 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_auto_send_locations">Starta trackersessionen automatiskt</string>
     <string name="osmo_tracker_id">Personligt tracker-id</string>
     <string name="osmo_tracker_id_descr">Klicka för att visa eller dela ut tracker-id.
-    Med tracker-id kommer anslutna enheter att kunna följa denna enhets alla rörelser! För att koppla ifrån, välj alternativet Återskapa …</string>
+    Med tracker-id kommer anslutna enheter att kunna följa denna enhets alla rörelser! För att koppla ifrån, välj alternativet Återskapa...</string>
     <string name="osmo_session_token">Sessionstoken: %1$s</string>
-    <string name="osmo_auth_pending">Väntar på autentisering…</string>
+    <string name="osmo_auth_pending">Väntar på autentisering...</string>
     <string name="osmo_locations_sent">Platser skickade %1$d (i buffer %2$d) </string>
     <string name="osmo_conn_successfull">Anslutning upprättad: %1$s </string>
     <string name="hours_ago">timmar sedan</string>
     <string name="minutes_ago">minuter sedan</string>
     <string name="seconds_ago">sekunder sedan</string>
-    <string name="osmo_connect_to_device_name">Enhetsnamn</string>
+    <string name="osmo_connect_to_device_name">Användarnamn</string>
     <string name="osmo_connect_to_device_tracker_id">Tracker-id</string>
     <string name="osmo_connect_to_device">Länka med enhet</string>
     
@@ -1495,7 +1498,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_groups">OsMo-grupper/-enheter</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo-grupp</string>
-    <string name="osmo_group_share">För att ansluta till gruppen %2$s, ange grupp-id (%1$s eller klicka på %3$s.</string>
+    <string name="osmo_group_share">För att ansluta till gruppen %2$s, ange grupp-id (%1$s) eller klicka på %3$s.</string>
     <string name="osmo_share_connect_device">Följ denna enhet permanent</string>
     <string name="osmo_share_current_session">Dela aktuell session i webbläsaren</string>
     <string name="osmo_session_not_available">Sessionen inte tillgänglig. Kolla att \'Skicka platser\' är på.</string>
@@ -1546,12 +1549,12 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_user_joined">Användare %1$s anslöt till grupp %2$s</string>
     <string name="osmo_user_left">Användare %1$s lämnade grupp %2$s</string>
     <string name="osmo_show_group_notifications">Visa gruppmeddelanden</string>
-    <string name="osmo_show_group_notifications_descr">Visa popup-meddelande när användar ansluter till eller lämnar gruppen</string>
-    <string name="selected_track">Spår</string>
+    <string name="osmo_show_group_notifications_descr">Visa popup-meddelande när användare ansluter till eller lämnar gruppen</string>
+    <string name="selected_track">Valda spår</string>
     <string name="my_tracks">Alla spår</string>
     <string name="my_favorites">Mina favoriter</string>
-    <string name="my_data_Button">Mina data</string>
-    <string name="my_data_activity">Mina data</string>
+    <string name="my_data_Button">Mina platser</string>
+    <string name="my_data_activity">Mina platser</string>
     <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
     <string name="loading_smth">Laddar %1$s …</string>
     <string name="map_widget_plain_time">Aktuell tid</string>
@@ -1569,7 +1572,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="gpx_info_maximum_speed">Maxhastighet: %1$s </string>
 	<string name="gpx_info_avg_altitude">Snitthöjd: %1$s</string>
 	<string name="gpx_info_diff_altitude">Höjdskillnad: %1$s</string>
-	<string name="gpx_info_asc_altitude">Höjdstigningar: %1$s</string>
+	<string name="gpx_info_asc_altitude">Upp/Ner: %1$s</string>
     <string name="gpx_timespan">Tidsspann: %1$s</string>
 	<string name="gpx_timemoving">Tid i rörelse: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
