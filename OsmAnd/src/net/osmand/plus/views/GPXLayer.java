@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -201,15 +200,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		if(tileBox.getZoom() < 11) {
-			return false;
-		}
-		List<WptPt> favs = new ArrayList<WptPt>();
-		getWptFromPoint(tileBox, point, favs);
-		if(!favs.isEmpty() && (tileBox.getZoom() > 14 || favs.size() < 6)){
+		List<WptPt> gpxPoints = new ArrayList<WptPt>();
+		getWptFromPoint(tileBox, point, gpxPoints);
+		if(!gpxPoints.isEmpty() && (tileBox.getZoom() > 14 || gpxPoints.size() < 6)){
 			StringBuilder res = new StringBuilder();
 			int i = 0;
-			for(WptPt fav : favs) {
+			for(WptPt fav : gpxPoints) {
 				if (i++ > 0) {
 					res.append("\n\n");
 				}

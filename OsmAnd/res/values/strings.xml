@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="select_destination_and_intermediate_points">Select waypoints</string>
     <string name="layer_amenity_label">Text labels</string>
     <string name="loading_smth">Loading %1$s &#8230;</string>
     <string name="map_widget_plain_time">Current time</string>

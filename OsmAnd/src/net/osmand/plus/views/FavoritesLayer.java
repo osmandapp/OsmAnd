@@ -119,9 +119,6 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		if(tileBox.getZoom() < 11) {
-			return false;
-		}
 		List<FavouritePoint> favs = new ArrayList<FavouritePoint>();
 		getFavoriteFromPoint(tileBox, point, favs);
 		if(!favs.isEmpty() && (tileBox.getZoom() > 14 || favs.size() < 6)){

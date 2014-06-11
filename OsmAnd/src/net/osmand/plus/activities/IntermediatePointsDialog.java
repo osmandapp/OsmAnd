@@ -43,7 +43,7 @@ public class IntermediatePointsDialog {
 		openIntermediatePointsDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), false);
 	}
 	
-	public static void openIntermediatePointsDialog(final MapActivity activity,
+	public static void openIntermediatePointsDialog(final Activity activity,
 			final OsmandApplication app, final boolean changeOrder){
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		final List<LatLon> intermediates = targets.getIntermediatePointsWithTarget();
@@ -127,7 +127,7 @@ public class IntermediatePointsDialog {
 		dlg.show();
 	}
 
-	private static void applySortTargets(AlertDialog dlg, final MapActivity activity, final List<LatLon> intermediates,
+	private static void applySortTargets(AlertDialog dlg, final Activity activity, final List<LatLon> intermediates,
 			final TIntArrayList originalPositions, 
 			final List<String> names, final ArrayAdapter<LatLon> listadapter, final ProgressBar pb, final TextView textInfo) {
 		dlg.setOnShowListener(new OnShowListener() {
@@ -146,7 +146,12 @@ public class IntermediatePointsDialog {
 
 							protected int[] doInBackground(Void[] params) {
 								ArrayList<LatLon> lt = new ArrayList<LatLon>(intermediates);
-								LatLon start = new LatLon(activity.getMapView().getLatitude(), activity.getMapView().getLongitude());
+								LatLon start ;
+								if(activity instanceof MapActivity) {
+									start = new LatLon(((MapActivity) activity).getMapView().getLatitude(), ((MapActivity) activity).getMapView().getLongitude());
+								} else {
+									start = lt.get(0);
+								}
 								LatLon end = lt.remove(lt.size() - 1);
 								return new TspAnt().readGraph(lt, start, end).solve();
 							};
