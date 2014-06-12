@@ -1583,7 +1583,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="gpx_selection_points">%1$s \nPunkter</string>
     <string name="gpx_selection_track">%1$s \nSpår %2$s</string>
     <string name="gpx_available_current_track">Aktuellt inspelningsspår</string>
-    <string name="save_as_favorites_points">Spara som favoritgrupp</string>
+    <string name="save_as_favorites_points">Spara som grupp med favoriter</string>
     <string name="select_destination_and_intermediate_points">Välj waypoints</string>
     <string name="layer_amenity_label">Textetiketter</string>
     </resources>
