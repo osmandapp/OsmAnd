@@ -1875,4 +1875,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="gpx_info_diff_altitude">海拔高度範圍：%1$s</string>
 	<string name="gpx_wpt">中途點</string>
     <string name="gpx_info_waypoints">中途點：%1$s </string>
-	</resources>
+	<string name="save_as_favorites_points">另存為我的最愛群組</string>
+    <string name="select_destination_and_intermediate_points">選擇中途點</string>
+    <string name="layer_amenity_label">文字標籤</string>
+    </resources>
