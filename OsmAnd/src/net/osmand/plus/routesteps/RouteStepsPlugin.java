@@ -21,7 +21,6 @@ public class RouteStepsPlugin extends OsmandPlugin {
 	private static final String VISITED_KEY = "IsVisited";
 	private static final String POINT_KEY = "Point";
 	private static final String CURRENT_ROUTE_KEY = "CurrentRoute";
-	private int routeKey;
 
 
 	private OsmandApplication app;
@@ -35,9 +34,10 @@ public class RouteStepsPlugin extends OsmandPlugin {
 	private List<Boolean> pointsStatus;
 
 
-	public RouteStepsPlugin(OsmandApplication app) {
+
+	public RouteStepsPlugin(OsmandApplication app){
 		this.app = app;
-		this.file = new File("/storage/emulated/0/osmand/tracks/", "504.gpx");
+		this.file = new File("/storage/emulated/0/osmand/tracks/","504.gpx");
 		gpx = GPXUtilities.loadGPXFile(app, file);
 		loadCurrentRoute();
 		pointsList = currentRoute.points;
@@ -45,21 +45,17 @@ public class RouteStepsPlugin extends OsmandPlugin {
 		getAllPointsStatus();
 	}
 
-	public void setGpxFile(GPXUtilities.GPXFile file) {
-		this.gpx = file;
-	}
+	public void setGpxFile(GPXUtilities.GPXFile file){ this.gpx = file;}
 
-	public void saveGPXFile() {
-		GPXUtilities.writeGpxFile(file, gpx, app);
-	}
+	public void saveGPXFile(){ GPXUtilities.writeGpxFile(file,gpx,app); }
 
-	public void setCurrentPoint(GPXUtilities.WptPt point) {
+	public void setCurrentPoint(GPXUtilities.WptPt point){
 		currentPoint = point;
 		int number = findPointPosition(point);
 		currentPointPos = number;
 	}
 
-	public void setCurrentPoint(int number) {
+	public void setCurrentPoint(int number){
 		currentPoint = pointsList.get(number);
 		currentPointPos = number;
 	}
@@ -87,7 +83,7 @@ public class RouteStepsPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayers(MapActivity activity) {
 		// remove old if existing after turn
-		if (routeStepsLayer != null) {
+		if(routeStepsLayer != null) {
 			activity.getMapView().removeLayer(routeStepsLayer);
 		}
 		routeStepsLayer = new RouteStepsLayer(activity, this);
@@ -95,15 +91,14 @@ public class RouteStepsPlugin extends OsmandPlugin {
 		//registerWidget(activity);
 	}
 
-	public List<GPXUtilities.WptPt> getPoints() {
-		return currentRoute.points;
-	}
+	public List<GPXUtilities.WptPt> getPoints() {return currentRoute.points;}
+
 
 	public boolean getPointStatus(int numberOfPoint) {
-		Map<String, String> map = gpx.getExtensionsToRead();
+		Map<String, String> map = currentRoute.getExtensionsToRead();
 
-		String mapKey = routeKey + POINT_KEY + numberOfPoint + VISITED_KEY;
-		if (map.containsKey(mapKey)) {
+		String mapKey = POINT_KEY + numberOfPoint + VISITED_KEY;
+		if (map.containsKey(mapKey)){
 			String value = map.get(mapKey);
 			return (value.equals("true"));
 		}
@@ -113,44 +108,41 @@ public class RouteStepsPlugin extends OsmandPlugin {
 
 	//saves point status value to gpx extention file
 	public void setPointStatus(int numberOfPoint, boolean status) {
-		Map<String, String> map = gpx.getExtensionsToWrite();
+		Map<String, String> map = currentRoute.getExtensionsToWrite();
 
-		String mapKey = routeKey + POINT_KEY + numberOfPoint + VISITED_KEY;
-		if (status) {
+		String mapKey = POINT_KEY + numberOfPoint + VISITED_KEY;
+		if (status){
 			map.put(mapKey, "true");
 		} else {
 			map.put(mapKey, "false");
 		}
 	}
 
-	public GPXUtilities.WptPt getNextPoint() {
-		if (pointsList.size() > currentPointPos + 1) {
-			return pointsList.get(currentPointPos + 1);
-		} else {
+	public GPXUtilities.WptPt getNextPoint(){
+		if (pointsList.size() > currentPointPos +1){
+			return pointsList.get(currentPointPos+1);
+		} else{
 			return null;
 		}
 	}
 
 	private void loadCurrentRoute() {
-		if (gpx.routes.size() < 1) {
+		if (gpx.routes.size() < 1){
 			return;
 		}
 
-		Map<String, String> map = gpx.getExtensionsToRead();
-		if (map.containsKey(CURRENT_ROUTE_KEY)) {
+		Map<String,String> map = gpx.getExtensionsToRead();
+		if (map.containsKey(CURRENT_ROUTE_KEY)){
 			String routeName = map.get(CURRENT_ROUTE_KEY);
 			int i = 0;
-			for (GPXUtilities.Route route : gpx.routes) {
-				if (route.name.equals(routeName)) {
+			for(GPXUtilities.Route route : gpx.routes){
+				if (route.name.equals(routeName)){
 					currentRoute = route;
-					routeKey = i;
 					return;
 				}
 				i++;
 			}
 		}
-
-		routeKey = 0;
 		currentRoute = gpx.routes.get(0);
 	}
 
@@ -169,22 +161,22 @@ public class RouteStepsPlugin extends OsmandPlugin {
 			}
 		};
 		adapter.item(R.string.context_menu_item_show_route_points)
-				.icons(R.drawable.ic_action_parking_dark, R.drawable.ic_action_parking_light).listen(addListener).reg();
+				.icons( R.drawable.ic_action_parking_dark, R.drawable.ic_action_parking_light).listen(addListener).reg();
 
 	}
 
-	private void getAllPointsStatus() {
-		for (int i = 0; i < pointsList.size(); i++) {
+	private void getAllPointsStatus(){
+		for(int i=0; i< pointsList.size(); i++){
 			pointsStatus.add(getPointStatus(i));
 		}
 	}
 
-	private void showStepsDialog(MapActivity mapActivity) {
+	private void showStepsDialog(MapActivity mapActivity){
 
 		List<String> pointNames = new ArrayList<String>();
 		//this array need to collect user selection during dialogue
 		final List<Boolean> pointsIntermediateState = new ArrayList<Boolean>(pointsStatus);
-		for (GPXUtilities.WptPt point : pointsList) {
+		for(GPXUtilities.WptPt point : pointsList){
 			pointNames.add(point.name);
 		}
 
@@ -194,17 +186,17 @@ public class RouteStepsPlugin extends OsmandPlugin {
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
 				//saving user choice
-				pointsIntermediateState.set(i, isChecked);
+				pointsIntermediateState.set(i,isChecked);
 			}
 		});
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
-				for (int j = 0; j < pointsIntermediateState.size(); j++) {
+				for (int j=0; j< pointsIntermediateState.size(); j++){
 					boolean newValue = pointsIntermediateState.get(j);
 					//if values is the same - there's no need to save data
-					if (newValue != pointsStatus.get(j)) {
-						setPointStatus(j, newValue);
+					if (newValue != pointsStatus.get(j)){
+						setPointStatus(j,newValue);
 					}
 				}
 				pointsStatus = new ArrayList<Boolean>(pointsIntermediateState);
@@ -227,10 +219,10 @@ public class RouteStepsPlugin extends OsmandPlugin {
 	}
 
 
-	private int findPointPosition(GPXUtilities.WptPt point) {
+	private int findPointPosition(GPXUtilities.WptPt point){
 		int i = 0;
-		for (GPXUtilities.WptPt item : pointsList) {
-			if (item.equals(point)) {
+		for (GPXUtilities.WptPt item : pointsList){
+			if (item.equals(point)){
 				return i;
 			}
 			i++;
