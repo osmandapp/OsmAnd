@@ -1872,8 +1872,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="gpx_info_average_speed">Priemerná rýchlosť: %1$s </string>
 	<string name="gpx_info_maximum_speed">Maximálna rýchlosť: %1$s </string>
 	<string name="gpx_info_avg_altitude">Priemerná výška: %1$s</string>
-	<string name="gpx_info_diff_altitude">Výškový rozdiel: %1$s</string>
-	<string name="gpx_info_asc_altitude">Výškové výstupy: %1$s</string>
+	<string name="gpx_info_diff_altitude">Výškový rozsah: %1$s</string>
+	<string name="gpx_info_asc_altitude">Zostup/výstup: %1$s</string>
     <string name="gpx_timespan">Časový úsek: %1$s</string>
 	<string name="gpx_timemoving">Čas pohybu: %1$s</string>
     <string name="gpx_selection_segment_title">Úsek</string>

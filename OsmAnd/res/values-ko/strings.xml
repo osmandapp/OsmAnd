@@ -2069,4 +2069,14 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="gpx_selection_points">%1$s\n 포인트</string>
     <string name="gpx_selection_track">%1$s\n 트랙 %2$s</string>
     <string name="gpx_available_current_track">현재 트랙 기록</string>
+    <string name="loading_smth">%1$s 불러오는 중…</string>
+    <string name="map_widget_plain_time">현재 시간</string>
+    <string name="gpx_wpt">중간 지점</string>
+    <string name="selected_gpx_info_show">\n\n지도를 보려면 누르고 계십시요</string>
+    <string name="delay_navigation_start">지연 탐색을 시작</string>
+    <string name="selected">선택됨</string>
+    <string name="gpx_split_interval">분할 간격을 선택</string>
+    <string name="gpx_info_waypoints">"중간지점: %1$s "</string>
+	<string name="gpx_info_asc_altitude">하강/상승: %1$s</string>
+    <string name="route_descr_destination"></string>
     </resources>

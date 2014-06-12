@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="bidforfix_loading">Загрузка</string>
+    <string name="bidforfix_supporters">%1$d падтрымала</string>
+	<string name="bidforfix_funded">сабрана: %d%%</string>    
+</resources>

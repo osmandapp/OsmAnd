@@ -4,6 +4,7 @@ package net.osmand.plus.osmo;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
@@ -56,15 +57,17 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 				MINUTES, 1000, R.string.osmo_track_interval, R.string.osmo_track_interval_descr));
 		
 		CheckBoxPreference showGroupNotifiations = createCheckBoxPreference(settings.OSMO_SHOW_GROUP_NOTIFICATIONS);
-		sendLocationsref.setTitle(R.string.osmo_show_group_notifications);
-		sendLocationsref.setSummary(R.string.osmo_show_group_notifications_descr);
-		grp.addPreference(sendLocationsref);
+		showGroupNotifiations.setTitle(R.string.osmo_show_group_notifications);
+		showGroupNotifiations.setSummary(R.string.osmo_show_group_notifications_descr);
+		grp.addPreference(showGroupNotifiations);
 		
-		debugPref = new Preference(this);
-		debugPref.setTitle(R.string.osmo_settings_debug);
-		debugPref.setOnPreferenceClickListener(this);
-		updateDebugPref();
-		grp.addPreference(debugPref);
+		if (OsmandPlugin.isDevelopment()) {
+			debugPref = new Preference(this);
+			debugPref.setTitle(R.string.osmo_settings_debug);
+			debugPref.setOnPreferenceClickListener(this);
+			updateDebugPref();
+			grp.addPreference(debugPref);
+		}
     }
 
 	private void updateDebugPref() {

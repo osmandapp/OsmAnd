@@ -325,5 +325,9 @@ public abstract class OsmandPlugin {
 		}		
 	}
 
+	public static boolean isDevelopment() {
+		return getEnabledPlugin(OsmandDevelopmentPlugin.class) != null;
+	}
+
 
 }

@@ -101,8 +101,8 @@
     <string name="plugin_distance_point_speed">хуткасьць</string>
     <string name="plugin_distance_point_ele">вышыня</string>
     <string name="plugin_distance_point">Кропка</string>
-    <string name="gpx_file_name">Імя GPX-файла</string>
-    <string name="gpx_saved_sucessfully">GPX файл паспяхова захаваны ў {0}</string>
+    <string name="gpx_file_name">Назва GPX файлу</string>
+    <string name="gpx_saved_sucessfully">GPX файл пасьпяхова захаваны ў {0}</string>
     <string name="osmand_distance_planning_plugin_description">Ствараць шляхі (ці выкарыстоўваць/рэдагаваць існуючыя файлы GPX) каб мераць адлегласьць паміж кропкамі. Захоўваць у GPX і потым карыстацца каб плянаваць шлях па GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Прылада для разьліку адлегласьцей й плянаваньня</string>
     <string name="use_distance_measurement_help">* Націсніце , каб адзначыць кропку.\n * Націсьніце і ўтрымлівайце на мапе, каб выдаліць папярэднюю кропку.\n * Націсьніце і ўтрымлівайце на кропцы, каб паглядзець і прыкласьці апісаньне.\n * Націсніце на віджэце вымярэньня, каб убачыць больш дзеяньняў.</string>
@@ -1242,11 +1242,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="sd_mounted_ro">SD карта даступная толькі для чытання.\nВы не можаце сьцягнуць мапы з Інтэрнэту.</string>
 	<string name="unzipping_file">Файл распакоўваецца…</string>
 	<string name="route_tr">Паварочвайце направа і рухайцеся</string>
-	<string name="route_tshr">Паварочвайце рэзка направа і рухайцеся</string>
-	<string name="route_tslr">Паварочвайце трохі направа і рухайцеся</string>
+	<string name="route_tshr">Рэзка паварочвайце направа і рухайцеся</string>
+	<string name="route_tslr">Павольна паварочвайце направа і рухайцеся</string>
 	<string name="route_tl">Паварочвайце налева і рухайцеся</string>
-	<string name="route_tshl">Паварочвайце рэзка налева і рухайцеся</string>
-	<string name="route_tsll">Паварочвайце трохі налева і рухайцеся</string>
+	<string name="route_tshl">Рэзка паварочвайце налева і рухайцеся</string>
+	<string name="route_tsll">Павольна паварочвайце налева і рухайцеся</string>
 	<string name="route_tu">Развярніцеся і рухайцеся</string>
 	<string name="route_head">Рухайцеся</string>
 	<string name="first_time_continue">Далей</string>
@@ -1846,11 +1846,14 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="gpx_info_subtracks">Частак сьледу: %1$s </string>
 	<string name="gpx_split_interval">Выберыце інтэрвал нарэзкі</string>
     <string name="selected">выбрана</string>
-    <string name="gpx_info_asc_altitude">Пад\ʼём вышыні: %1$s</string>
+    <string name="gpx_info_asc_altitude">Пад\ʼём/спад: %1$s</string>
     <string name="loading_smth">Загрузка %1$s…</string>
     <string name="map_widget_plain_time">Бягучы час</string>
     <string name="gpx_wpt">Кропка шляху</string>
     <string name="selected_gpx_info_show">\n\nНацісьніце і ўтрымлівайце, каб убачыць на мапе</string>
     <string name="delay_navigation_start">Пачаць навігацыю з затрымкай</string>
     <string name="gpx_info_diff_altitude">Перапад вышынь: %1$s</string>
-	</resources>
+	<string name="save_as_favorites_points">Захаваць як групу упадабаных</string>
+    <string name="select_destination_and_intermediate_points">Абраць кропкі шляху</string>
+    <string name="layer_amenity_label">Тэкставыя пазнакі</string>
+    </resources>

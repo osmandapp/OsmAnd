@@ -1560,7 +1560,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="map_widget_plain_time">Aktuell tid</string>
     <string name="gpx_wpt">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nTryck och håll för att se på karta</string>
-    <string name="delay_navigation_start">Start navigering med fördröjning</string>
+    <string name="delay_navigation_start">Starta navigering med fördröjning</string>
     <string name="selected">valda</string>
     <string name="gpx_split_interval">Välj split-intervall</string>
     <string name="gpx_info_subtracks">Underspår: %1$s </string>
@@ -1583,4 +1583,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="gpx_selection_points">%1$s \nPunkter</string>
     <string name="gpx_selection_track">%1$s \nSpår %2$s</string>
     <string name="gpx_available_current_track">Aktuellt inspelningsspår</string>
+    <string name="save_as_favorites_points">Spara som grupp med favoriter</string>
+    <string name="select_destination_and_intermediate_points">Välj waypoints</string>
+    <string name="layer_amenity_label">Textetiketter</string>
     </resources>

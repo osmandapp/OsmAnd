@@ -139,8 +139,8 @@
   <string name="routing_settings">Navigace</string>
   <string name="routing_settings_descr">Nastavení způsobu navigace</string>
   <string name="global_settings">Obecná nastavení</string>
-  <string name="index_settings">Offline data</string>
-  <string name="index_settings_descr">Spravovat offline data (mapy, trasy, hlasová data…)</string>
+  <string name="index_settings">Spravovat mapové soubory</string>
+  <string name="index_settings_descr">Stáhnout a spravovat offline mapy uložené ve vašem zařízení</string>
   <string name="general_settings">Obecné</string>
   <string name="general_settings_descr">Nastavení displeje, jazyka, zvuku a dalších parametrů</string>
   <string name="user_name">Jméno uživatele</string>
@@ -151,15 +151,15 @@
   <string name="osmand_service_descr">Umožní běh aplikace při vypnutém displeji</string>
   <string name="tip_rotation_switching">Natočení mapy</string>
   
-  <string name="binary_map_download_success">Stahování dokončeno.\n\t\n\tNa vektorové mapy můžete přepnout v menu (Mapová data -&gt; Zdroj map -&gt; Vektorové mapy OSM).</string>
+  <string name="binary_map_download_success">"Stahování dokončeno.\n\t\n\tNa vektorové mapy můžete přepnout v menu (Mapová data -&gt; Zdroj map -&gt; Vektorové mapy OSM). "</string>
   <string name="tip_day_night_mode">Denní/noční režim</string>
   
   <string name="tip_osm_improve">Vylepšování Openstreetmap</string>
-  <string name="tip_osm_improve_t">\t OsmAnd využívá mapy založené na datech Openstreetmap.org (OSM). Program krom navigace umožňuje také přispívání k projektu Openstreetmap. Několika kliknutími tak můžete snadno vytvářet nové body zájmu (POI) nebo hlášení o chybách OSM.\n\t Pro začátek je pouze potřeba zadat přihlašovací informace v \'Nastavení\'-&gt;\'Obecné\'-&gt;\'OSM editace\'.
+  <string name="tip_osm_improve_t">"OsmAnd využívá mapy založené na datech Openstreetmap.org (OSM). Program krom navigace umožňuje také přispívání k projektu Openstreetmap. Několika kliknutími tak můžete snadno vytvářet nové body zájmu (POI) nebo hlášení o chybách OSM.\n\t Pro začátek je pouze potřeba zadat přihlašovací informace v \'Nastavení\'-&gt;\'Obecné\'-&gt;\'OSM editace\'.
 \n\t Nové POI zadáte volbou \'Vytvořit POI\' v kontextovém menu mapy. Pak můžete zadat informace o novém POI a stisknutím tlačítka ho odeslat.
 \n\t Pokud v mapě najdete chybu, můžete ji nahlásit a přispět tak k jejímu rychlejšímu opravení.
 \n\t OSM chybu nahlásíte pomocí volby \'Otevřít chybu OSM\' v kontextovém menu mapy. Tím se otevře dialog, kde můžete zadat detailní popis problému. Chybu odešlete tlačítkem \'Přidat\'.
-\n\t Pro zmíněné funkce je nutné internetové připojení.</string>
+\n\t Pro zmíněné funkce je nutné internetové připojení. "</string>
   <string name="download_files_not_enough_space">Nedostatek místa pro stažení %1$s MB dat (volné: %2$s).</string>
   <string name="download_files_question_space">Volné místo: {2} MB. Stáhnout {0} soubor(y) ({1} MB)?</string>
   
@@ -291,7 +291,7 @@
   <string name="amenity_type_education">Školství</string>
   <string name="amenity_type_emergency">Pomoc v nouzi</string>
   <string name="amenity_type_entertainment">Zábava</string>
-  <string name="amenity_type_finance">Finance</string>
+  <string name="amenity_type_finance">Peníze</string>
   <string name="amenity_type_geocache">Geocache</string>
   <string name="amenity_type_healthcare">Zdravotnictví</string>
   <string name="amenity_type_historic">Historie</string>
@@ -406,7 +406,7 @@
   <string name="tip_app_mode">Režim aplikace</string>
   
   <string name="tip_navigation">Navigace</string>
-  <string name="tip_navigation_t">\t Pro zapnutí navigace musíte nejprve vybrat cílový bod. Poté vyberte \'Menu\'-&gt;\'Navigace\' na mapě a vyberte typ navigování.</string>
+  <string name="tip_navigation_t">"Pro zapnutí navigace musíte nejprve vybrat cílový bod. Poté vyberte \'Menu\'-&gt;\'Navigace\' na mapě a vyberte typ navigování. "</string>
   <string name="tip_search">Vyhledávání</string>
   <string name="tip_search_t">\tMůžete vyhledat místo přímo na mapě, podle adresy, umístění, jako bod zájmu (POI), nebo v seznamu oblíbených.
 \n\t Vyhledávání se otevře stisknutím \'Hledat\'. Nalezené místo pak můžete nechat zobrazit na mapě, nebo ho použít jako cílový bod.
@@ -574,8 +574,7 @@
   <string name="route_head">Jeďte rovně</string>
   <string name="first_time_continue">Pokračujte</string>
   <string name="first_time_download">Stáhnout regiony</string>
-  <string name="first_time_msg">Děkujeme, že jste si zvolili OsmAnd.
-\n Abyste mohli využívat všech možností aplikace, potřebujete soubory s mapami a hlasem, které si můžete stáhnout (Nastavení -&gt; Data) nebo připravit sami. Poté budete moci hledat podle adres, hledat body zájmu (POI) a spojení veřejnou dopravou.</string>
+  <string name="first_time_msg">Děkujeme, že jste si zvolili OsmAnd. Abyste mohli využívat všech možností aplikace, potřebujete soubory s mapami a hlasem, které si můžete stáhnout (Nastavení → Spravovat mapové soubory) nebo připravit sami. Poté budete moci hledat podle adres, hledat body zájmu (POI) a spojení veřejnou dopravou.</string>
   <string name="search_poi_location">Hledám signál…</string>
   <string name="search_near_map">Hledat poblíž poslední polohy</string>
   <string name="search_nearby">Hledat poblíž</string>
@@ -736,7 +735,7 @@
   <string name="exit_Button">Konec</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Nastavení</string>
-  <string name="favorites_Button">Oblíbené</string>
+  <string name="favorites_Button">Moje místa</string>
   <string name="search_button">Hledat</string>
   <string name="search_activity">Hledat</string>
   <string name="searchpoi_activity">Zvolit POI</string>
@@ -827,7 +826,7 @@
   <string name="offline_navigation_not_available">Offline navigace v OsmAnd je dočasně nedostupná.</string>
   <string name="left_side_navigation">Levostranný provoz</string>
   <string name="left_side_navigation_descr">Zvolte pokud jste v zemi, kde se jezdí vlevo</string>
-  <string name="download_link_and_local_description">Klikněte zde pro stažení nebo aktualizaci offline dat.\nKlikněte na položku pro zobrazení více detailů, dlouze stiskněte pro deaktivaci nebo smazání.\nMnožství offline dat v zařízení (%1$s volného místa):</string>
+  <string name="download_link_and_local_description">Klikněte zde pro stažení nebo aktualizaci offline map.\nKlikněte na položku pro zobrazení více detailů, dlouze stiskněte pro deaktivaci nebo smazání.\nMnožství offline dat v zařízení (%1$s volného místa):</string>
   <string name="unknown_from_location">Startovní bod navigace ještě není zvolen</string>
   <string name="confirm_interrupt_download">Chcete přerušit stahování souboru?</string>
   <string name="basemap_was_selected_to_download">Pro správnou funkci aplikace je třeba základní mapa. Proto byla automaticky vybrána ke stažení.</string>
@@ -863,7 +862,7 @@
   <string name="global_app_settings">Všeobecná nastavení</string>
   <string name="favourites_edit_dialog_name">Jméno</string>
   <string name="favourites_edit_dialog_category">Kategorie</string>
-  <string name="local_index_descr_title">Správce offline dat</string>
+  <string name="local_index_descr_title">Správce mapových souborů</string>
   <string name="navigate_point_format_D">SSS.SSSSS</string>
   <string name="navigate_point_format_DM">SSS MM.MMMMM</string>
   <string name="navigate_point_format_DMS">SSS MM ss.sssss</string>
@@ -1022,7 +1021,7 @@
 <string name="map_widget_intermediate_distance">Mezicíl</string>
 <string name="ending_point_too_far">Cíl je příliš daleko od nejbližší cesty.</string>
 <string name="btn_add_tag">Přidat označení</string>
-<string name="btn_advanced_mode">Pokročilé…</string>
+<string name="btn_advanced_mode">Pokročilý režim…</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd podporuje několik konfigurovatelných profilů pro různé způsoby dopravy.
 \t\nProfil můžete změnit tlačítkem v levém dolním rohu mapové obrazovky (ikona auta, kola nebo chodce) nebo při zadávání navigace.
 </string>
@@ -1096,13 +1095,14 @@
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="osmodroid_plugin_old_ver_not_supported">Máte nainstalovanou starou verzi modulu OsMoDroid, která potřebuje být aktualizována.</string>
     <string name="tip_altitude_offset_t">"\tVětšina přijímačů GPS měří výškové souřadnice v systému WGS84. Převod z něj do lokálního systému vyžaduje korekci závislou na pozici.
-\n\tLepší aproximace k těmro lokálním systémům je systém EGM96. OsmAnd nyní podporuje automatické zobrazení nadmořské výšky v tomto systému.\n\tPro zobrazení výšky v systému EGM96 stáhněte soubor WW15MGH.DAC ve Správci offline dat (originál souboru je na http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+\n\tLepší aproximace k těmro lokálním systémům je systém EGM96. OsmAnd nyní podporuje automatické zobrazení nadmořské výšky v tomto systému.\n\tPro zobrazení výšky v systému EGM96 stáhněte soubor WW15MGH.DAC ve Správci offline dat (originál souboru je na http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "
+	</string>
     <string name="osmodroid_plugin_description">Modul OsMoDroid je rozšíření OsmAnd pro použití s aplikací OsModroid pro přímý přenos pozice. Informace o službě OsModroid jsou dostupné na http://esya.ru.</string>
     <string name="osmodroid_plugin_name">Modul OsMoDroid</string>
 	
 
 	<string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
-    <string name="srtm_plugin_description">Tento modul umožňuje stáhnout mapy vrstevnic (Stáhnout mapy -&gt; Menu -&gt; Ostatní mapy) pro určitou oblast a použít je s offline mapami.</string>
+    <string name="srtm_plugin_description">Tento modul umožňuje stáhnout mapy vrstevnic (Nastavení → Správce mapových souborů → Vyberte požadovaný typ map).</string>
     <string name="srtm_plugin_name">Modul vrstevnice</string>
     <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa. Pokud chcete použít specifickou lokaci použijte \"Možnosti bodu\"</string>
@@ -1520,7 +1520,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_session_not_available">Relace není k dispozici, prosím zkontrolujte že je zapnuta volba \'Odesílat pozice\'.</string>
     <string name="osmo_share_session">Sdílet relaci</string>
     <string name="osmo_session_id_share">Relace URL k sledování zařízení (%1$s)</string>
-    <string name="osmo_tracker_id_share">Aby bylo možné připojit cílové zařízení %2$s, klikněte na link %3$s nebo určete ID sledovacího zařízení (%1$s)</string>
+    <string name="osmo_tracker_id_share">Aby bylo možné připojit cílové zařízení %2$s, klikněte na link %3$s nebo určete ID sledovaného zařízení (%1$s)</string>
     <string name="osmo_track_interval">Interval logování</string>
 	<string name="osmo_track_interval_descr">Vyberte časový interval odesílání polohy</string>
     <string name="int_days">dnů</string>
@@ -1570,7 +1570,7 @@ s často kladenými otázkami.</string>
 	<string name="import_save">Uložit</string>
 	<string name="share_fav">Sdílet</string>
 	<string name="share_fav_subject">Oblíbené sdílené přes OsmAnd</string>
-	<string name="navigation_intent_invalid">Neplatný formát : %s</string>
+	<string name="navigation_intent_invalid">Neplatný formát: %s</string>
 <string name="osmo_follow">Sledovat</string>
     <string name="osmo_sign_in">Přihlásit se</string>
     <string name="osmo_create_groups_confirm">Aby bylo možné vytvořit skupiny musíte být registrovaným uživatelem OsMo.</string>
@@ -1622,4 +1622,8 @@ s často kladenými otázkami.</string>
     <string name="gpx_available_current_track">Právě nahrávaná trasa</string>
     <string name="gpx_wpt">Bod na trase</string>
     <string name="selected_gpx_info_show">\n\nStiskněte a podržte pro zobrazení na mapě</string>
-    </resources>
+    <string name="save_as_favorites_points">Uložit jako skupinu oblíbených</string>
+    <string name="select_destination_and_intermediate_points">Vybrat body na trase</string>
+    <string name="layer_amenity_label">Textové popisky</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapová klasifikace s obrázky</string>
+	</resources>

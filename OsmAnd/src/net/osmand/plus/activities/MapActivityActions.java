@@ -545,7 +545,7 @@ public class MapActivityActions implements DialogProvider {
 		// then set gpx
 		setGPXRouteParams(gpxFile);
 		// then update start and destination point  
-		targets.updateRoutingHelper();
+		targets.updateRouteAndReferesh(true);
 		
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		mapActivity.getMapView().refreshMap(true);

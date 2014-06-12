@@ -290,7 +290,7 @@ public class RoutingHelper {
 			recalculateRouteInBackground(false, currentLocation, finalLocation, intermediatePoints, currentGPXRoute, 
 					previousRoute.isCalculated() ? previousRoute : null);
 		}
-		double projectDist = mode.hasFastSpeed() ? posTolerance : posTolerance / 2;
+		double projectDist = mode != null && mode.hasFastSpeed() ? posTolerance : posTolerance / 2;
 		if(returnUpdatedLocation && locationProjection != null && currentLocation.distanceTo(locationProjection) < projectDist) {
 			return locationProjection;
 		} else {

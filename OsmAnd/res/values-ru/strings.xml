@@ -1601,8 +1601,8 @@ OsmAnd - открытый источник и активно развается.
 	<string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
 	<string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
     <string name="osmo_connect_to_device_name">Имя пользователя</string>
-    
-    
+    <string name="osmo_join_group">Войти в группу</string>
+    <string name="osmo_new_device">Следить за устройством</string>
     <string name="osmo_connected_devices">Устройства</string>
     <string name="osmo_groups">Управление OsMo</string>
     <string name="osmo_connect_to_device">Подключиться к устройству</string>
@@ -1710,4 +1710,10 @@ OsmAnd - открытый источник и активно развается.
     <string name="gpx_wpt">Путевая точка</string>
     <string name="gpx_split_interval">Выбрать интервал разбиения</string>
     <string name="delay_navigation_start">Старт навигации по тайм-ауту</string>
-    </resources>
+    <string name="save_as_favorites_points">Сохранить как группу избранных</string>
+    <string name="select_destination_and_intermediate_points">Выбрать путевые точки</string>
+    <string name="layer_amenity_label">Текстовые метки</string>
+    <string name="selected_gpx_info_show">\n\nНажать и удерживать для просмотра на карте</string>
+    <string name="selected">выбранные</string>
+    <string name="gpx_info_waypoints">Путевые точки: %1$s </string>
+	</resources>

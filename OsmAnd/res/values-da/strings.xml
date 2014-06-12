@@ -1879,9 +1879,9 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="gpx_info_average_speed">Gennemsnitshastighed: %1$s </string>
 	<string name="gpx_info_maximum_speed">Maks hastighed: %1$s </string>
 	<string name="gpx_info_avg_altitude">Gennemsnitshøjde: %1$s</string>
-	<string name="gpx_info_diff_altitude">Højdeforskel: %1$s</string>
-	<string name="gpx_info_asc_altitude">Højdestigninger: %1$s</string>
-    <string name="gpx_timespan">Periode: %1$s</string>
+	<string name="gpx_info_diff_altitude">Højdeinterval: %1$s</string>
+	<string name="gpx_info_asc_altitude">Op/ned: %1$s</string>
+    <string name="gpx_timespan">Tidsrum: %1$s</string>
 	<string name="gpx_timemoving">Tid i bevægelse: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
     <string name="gpx_selection_number_of_points"> %1$s punkter</string>
@@ -1890,7 +1890,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="gpx_selection_route_points">%1$s \nRutepunkter %2$s</string>
     <string name="gpx_selection_points">%1$s\nPunkter</string>
     <string name="gpx_selection_track">%1$s\nSpor %2$s</string>
-    <string name="gpx_available_current_track">Aktuel optager spor</string>
+    <string name="gpx_available_current_track">Aktuelt optagelsesspor</string>
     <string name="gpx_info_subtracks">Underspor: %1$s </string>
 	<string name="map_widget_plain_time">Aktuel tid</string>
     <string name="gpx_wpt">Rutepunkt</string>
@@ -1899,4 +1899,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="selected">valgt</string>
     <string name="gpx_split_interval">Vælg opdelingsinterval</string>
     <string name="loading_smth">Indlæser %1$s…</string>
+    <string name="save_as_favorites_points">Gem som en gruppe af favoritter</string>
+    <string name="select_destination_and_intermediate_points">Vælg rutepunkter</string>
+    <string name="layer_amenity_label">Tekstetiketter</string>
     </resources>

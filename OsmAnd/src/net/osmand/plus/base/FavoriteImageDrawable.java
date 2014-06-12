@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -26,8 +27,8 @@ public class FavoriteImageDrawable extends Drawable {
 	private Drawable drawable;
 	private float density;
 	private Bitmap bmp;
-	private int bmpSize;
 	private Paint paintBmp;
+	private RectF bmpDest;
 	
 
 	public FavoriteImageDrawable(Context ctx, int color) {
@@ -39,7 +40,7 @@ public class FavoriteImageDrawable extends Drawable {
 		density = dm.density;
 		drawable = getResources().getDrawable(R.drawable.ic_action_fav_dark);
 		bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_fav_light);
-		bmpSize = bmp.getWidth();
+		bmpDest = new RectF(); 
 		paintOuter = new Paint();
 		paintOuter.setColor(0x88555555);
 		paintOuter.setAntiAlias(true);
@@ -50,7 +51,7 @@ public class FavoriteImageDrawable extends Drawable {
 		paintBmp.setDither(true);
 		paintInnerCircle = new Paint();
 		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
-		paintInnerCircle.setColor(color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_distance) : color);
+		paintInnerCircle.setColor(color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : color);
 		paintInnerCircle.setAntiAlias(true);
 	}
 	
@@ -96,13 +97,12 @@ public class FavoriteImageDrawable extends Drawable {
 		drawable.draw(canvas);
 	}
 	
-	public void drawBitmapInCenter(Canvas canvas, int x, int y) {
-		int min = (int) (bmpSize + 4 * density);
-		int r = (int) (min / 2);
-		int rs = (int) (min / 2 - 2 * density);
-		canvas.drawCircle(x, density + y, r, paintOuter);
-		canvas.drawCircle(x, density + y, rs, paintInnerCircle);
-		canvas.drawBitmap(bmp, x - bmpSize / 2, y - bmpSize / 2 , paintBmp);
+	public void drawBitmapInCenter(Canvas canvas, int x, int y, float density) {
+		float bmpRad = 10 * density;
+		bmpDest.set(x - bmpRad, y - bmpRad, x + bmpRad, y + bmpRad);
+		canvas.drawCircle(x, density + y, bmpRad + 3 * density, paintOuter);
+		canvas.drawCircle(x, density + y, bmpRad + 2 * density, paintInnerCircle);
+		canvas.drawBitmap(bmp, null, bmpDest, paintBmp);
 	}
 
 	@Override
