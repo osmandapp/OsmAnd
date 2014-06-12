@@ -365,7 +365,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="poi_filter_car_aid">Pour conducteurs</string>
-  <string name="poi_filter_closest_poi">PI le plus proche</string>
+  <string name="poi_filter_closest_poi">PI les plus proches</string>
   <string name="poi_filter_custom_filter">Filtre personnalisé</string>
   <string name="poi_filter_food_shop">Alimentation</string>
   <string name="poi_filter_for_tourists">Pour voyageurs</string>
@@ -388,7 +388,7 @@
   <string name="loading_builds">Chargement des versions disponibles…</string>
   <string name="select_build_to_install">Sélectionnez la version d\'OsmAnd à installer</string>
   <string name="contribution_activity">Fonction spéciale pour la version des contributeurs</string>
-  <string name="gps_status_app_not_found">L\'application \'GPS Status\' n\'est pas installée. La chercher dans Market ?</string>
+  <string name="gps_status_app_not_found">L\'application \'GPS Status\' n\'est pas installée. Voulez-vous la chercher dans la boutique d\'application ?</string>
   <string name="voice_is_not_available_msg">Guidage vocal indisponible. Veuillez aller dans les paramètres et choisir les voix à télécharger.</string>
   <string name="voice_is_not_available_title">Aucune donnée vocale n\'est spécifiée</string>
   <string name="daynight_mode_day">Jour</string>
@@ -555,8 +555,8 @@
   <string name="context_menu_item_update_map_confirm">Mettre à jour les données locales depuis internet ?</string>
   <string name="search_history_city">Ville :\n{0}</string>
   <string name="search_history_street">Rue :\n{0}\n{1}</string>
-  <string name="search_history_int_streets">Intersection :\n{0} x {1} dans {2}</string>
-  <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
+  <string name="search_history_int_streets">Intersection :\n{0} x {1} à {2}</string>
+  <string name="search_history_building">Adresse :\n{0} {1}\n{2}</string>
   <string name="favorite">Favori </string>
   <string name="clear_all">Effacer tout</string>
   <string name="history">Historique</string>
@@ -677,14 +677,14 @@
   <string name="exit_Button">Quitter</string>
   <string name="map_Button">Carte</string>
   <string name="settings_Button">Paramètres</string>
-  <string name="favorites_Button">Favoris</string>
+  <string name="favorites_Button">Mes lieux</string>
   <string name="search_button">Rechercher</string>
   <string name="search_activity">Rechercher</string>
-  <string name="searchpoi_activity">Choisir PI</string>
+  <string name="searchpoi_activity">Choix de points d\'intérêt</string>
   <string name="search_POI_level_btn">Étendre la recherche</string>
-  <string name="incremental_search_city">Recherche progressive de ville</string>
-  <string name="incremental_search_street">Recherche progressive des rues</string>
-  <string name="incremental_search_building">Recherche progressive des numéros de bâtiment</string>
+  <string name="incremental_search_city">Choisir une ville</string>
+  <string name="incremental_search_street">Choisir une rue</string>
+  <string name="incremental_search_building">Choisir un numéro ou un bâtiment</string>
   <string name="choose_available_region">Choisir une région dans la liste</string>
   <string name="choose_intersected_street">Choisir une intersection</string>
   <string name="Closest_Amenities">Équipements à proximité</string>
@@ -886,10 +886,10 @@
   <string name="transport_search_desc">Recherche de transports en commun</string>
   <string name="favourites_search_desc">Recherche parmi les favoris</string>
   <string name="history_search_desc">Historique des recherches</string>
-  <string name="route_roundabout">Rond-point : prendre la %1$d sortie et continuez pendant</string>
-  <string name="route_kl">Serrez à gauche et continuez pendant</string>
-  <string name="route_kr">Serrez à droite et continuez pendant</string>
-  <string name="rendering_attr_noPolygons_description">Rendre toutes les zones transparentes sur la carte</string>
+  <string name="route_roundabout">Rond-point : prendre la %1$d sortie et continuez</string>
+  <string name="route_kl">Serrez à gauche et continuez</string>
+  <string name="route_kr">Serrez à droite et continuez</string>
+  <string name="rendering_attr_noPolygons_description">Rendre invisibles les surfaces représentant des éléments de terrain</string>
   <string name="rendering_attr_noPolygons_name">Pas de polygones</string>
   <string name="rendering_attr_appMode_name">Profil pour le rendu</string>
   <string name="rendering_attr_appMode_description">Optimisation de la carte selon le profil d\'utilisation</string>
@@ -1608,6 +1608,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
 <string name="arrival_distance_descr">Choisir à quel moment est annoncée l\'arrivée à destination</string>
+<string-array name="arrival_distance_factors">
+<item>Précoce</item>
+<item>Normale</item>
+<item>Tardive</item>
+<item>Dans les derniers mètres</item>
+</string-array>
 <string name="share_fav">Partager</string>
 <string name="share_fav_subject">Favoris partagés via OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un intinéraire entre des points</string>
@@ -1723,6 +1729,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="map_widget_plain_time">Heure</string>
     <string name="loading_smth">Chargement de %1$s …</string>
     <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
-    <string name="select_destination_and_intermediate_points">Sélectionner les points du chemin</string>
-    <string name="layer_amenity_label">Étiquettes textuelles</string>
+    <string name="select_destination_and_intermediate_points">Sélectionner les points de cheminement</string>
+    <string name="layer_amenity_label">Étiquette des points</string>
     </resources>
