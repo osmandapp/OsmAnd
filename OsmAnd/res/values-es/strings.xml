@@ -1784,4 +1784,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="gpx_info_asc_altitude">Descendido/ascendido: %1$s</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
     <string name="gpx_wpt">Punto de ruta</string>
+    <string name="select_destination_and_intermediate_points">Seleccionar puntos de ruta</string>
+    <string name="layer_amenity_label">Etiquetas de texto</string>
+    <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
     </resources>
