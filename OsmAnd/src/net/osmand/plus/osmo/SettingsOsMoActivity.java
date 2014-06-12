@@ -57,9 +57,9 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 				MINUTES, 1000, R.string.osmo_track_interval, R.string.osmo_track_interval_descr));
 		
 		CheckBoxPreference showGroupNotifiations = createCheckBoxPreference(settings.OSMO_SHOW_GROUP_NOTIFICATIONS);
-		sendLocationsref.setTitle(R.string.osmo_show_group_notifications);
-		sendLocationsref.setSummary(R.string.osmo_show_group_notifications_descr);
-		grp.addPreference(sendLocationsref);
+		showGroupNotifiations.setTitle(R.string.osmo_show_group_notifications);
+		showGroupNotifiations.setSummary(R.string.osmo_show_group_notifications_descr);
+		grp.addPreference(showGroupNotifiations);
 		
 		if (OsmandPlugin.isDevelopment()) {
 			debugPref = new Preference(this);
