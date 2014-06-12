@@ -1710,4 +1710,10 @@ OsmAnd - открытый источник и активно развается.
     <string name="gpx_wpt">Путевая точка</string>
     <string name="gpx_split_interval">Выбрать интервал разбиения</string>
     <string name="delay_navigation_start">Старт навигации по тайм-ауту</string>
-    </resources>
+    <string name="save_as_favorites_points">Сохранить как группу избранных</string>
+    <string name="select_destination_and_intermediate_points">Выбрать путевые точки</string>
+    <string name="layer_amenity_label">Текстовые метки</string>
+    <string name="selected_gpx_info_show">\n\nНажать и удерживать для просмотра на карте</string>
+    <string name="selected">выбранные</string>
+    <string name="gpx_info_waypoints">Путевые точки: %1$s </string>
+	</resources>
