@@ -21,7 +21,6 @@ public class RouteStepsPlugin extends OsmandPlugin {
 	private static final String VISITED_KEY = "IsVisited";
 	private static final String POINT_KEY = "Point";
 	private static final String CURRENT_ROUTE_KEY = "CurrentRoute";
-	private int routeKey;
 
 
 	private OsmandApplication app;
@@ -94,10 +93,11 @@ public class RouteStepsPlugin extends OsmandPlugin {
 
 	public List<GPXUtilities.WptPt> getPoints() {return currentRoute.points;}
 
-	public boolean getPointStatus(int numberOfPoint){
-		Map<String, String> map = gpx.getExtensionsToRead();
 
-		String mapKey = routeKey + POINT_KEY + numberOfPoint + VISITED_KEY;
+	public boolean getPointStatus(int numberOfPoint) {
+		Map<String, String> map = currentRoute.getExtensionsToRead();
+
+		String mapKey = POINT_KEY + numberOfPoint + VISITED_KEY;
 		if (map.containsKey(mapKey)){
 			String value = map.get(mapKey);
 			return (value.equals("true"));
@@ -107,10 +107,10 @@ public class RouteStepsPlugin extends OsmandPlugin {
 	}
 
 	//saves point status value to gpx extention file
-	public void setPointStatus(int numberOfPoint, boolean status){
-		Map<String, String> map = gpx.getExtensionsToWrite();
+	public void setPointStatus(int numberOfPoint, boolean status) {
+		Map<String, String> map = currentRoute.getExtensionsToWrite();
 
-		String mapKey = routeKey + POINT_KEY + numberOfPoint + VISITED_KEY;
+		String mapKey = POINT_KEY + numberOfPoint + VISITED_KEY;
 		if (status){
 			map.put(mapKey, "true");
 		} else {
@@ -138,14 +138,11 @@ public class RouteStepsPlugin extends OsmandPlugin {
 			for(GPXUtilities.Route route : gpx.routes){
 				if (route.name.equals(routeName)){
 					currentRoute = route;
-					routeKey = i;
 					return;
 				}
 				i++;
 			}
 		}
-
-		routeKey = 0;
 		currentRoute = gpx.routes.get(0);
 	}
 
