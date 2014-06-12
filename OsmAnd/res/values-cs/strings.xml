@@ -1521,7 +1521,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_session_not_available">Relace není k dispozici, prosím zkontrolujte že je zapnuta volba \'Odesílat pozice\'.</string>
     <string name="osmo_share_session">Sdílet relaci</string>
     <string name="osmo_session_id_share">Relace URL k sledování zařízení (%1$s)</string>
-    <string name="osmo_tracker_id_share">Aby bylo možné připojit cílové zařízení %2$s, klikněte na link %3$s nebo určete ID sledovacího zařízení (%1$s)</string>
+    <string name="osmo_tracker_id_share">Aby bylo možné připojit cílové zařízení %2$s, klikněte na link %3$s nebo určete ID sledovaného zařízení (%1$s)</string>
     <string name="osmo_track_interval">Interval logování</string>
 	<string name="osmo_track_interval_descr">Vyberte časový interval odesílání polohy</string>
     <string name="int_days">dnů</string>
@@ -1623,4 +1623,7 @@ s často kladenými otázkami.</string>
     <string name="gpx_available_current_track">Právě nahrávaná trasa</string>
     <string name="gpx_wpt">Bod na trase</string>
     <string name="selected_gpx_info_show">\n\nStiskněte a podržte pro zobrazení na mapě</string>
+    <string name="save_as_favorites_points">Uložit jako skupinu oblíbených</string>
+    <string name="select_destination_and_intermediate_points">Vybrat body na trase</string>
+    <string name="layer_amenity_label">Textové popisky</string>
     </resources>
