@@ -1891,4 +1891,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="selected_gpx_info_show">\n\nTieni premuto per vederlo sulla mappa</string>
     <string name="delay_navigation_start">Avvia la navigazione con ritardo</string>
     <string name="map_widget_plain_time">Orario attuale</string>
+    <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
+    <string name="select_destination_and_intermediate_points">Scegli le tappe</string>
+    <string name="layer_amenity_label">Etichette di testo</string>
     </resources>
