@@ -1,3 +1,4 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources>
-</resources>
+<resources><string name="default_buttons_yes">Так</string>
+    <string name="default_buttons_no">Не</string>
+    </resources>
