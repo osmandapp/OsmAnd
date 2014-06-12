@@ -139,8 +139,8 @@
   <string name="routing_settings">Navigace</string>
   <string name="routing_settings_descr">Nastavení způsobu navigace</string>
   <string name="global_settings">Obecná nastavení</string>
-  <string name="index_settings">Offline data</string>
-  <string name="index_settings_descr">Spravovat offline data (mapy, trasy, hlasová data…)</string>
+  <string name="index_settings">Spravovat mapové soubory</string>
+  <string name="index_settings_descr">Stáhnout a spravovat offline mapy uložené ve vašem zařízení</string>
   <string name="general_settings">Obecné</string>
   <string name="general_settings_descr">Nastavení displeje, jazyka, zvuku a dalších parametrů</string>
   <string name="user_name">Jméno uživatele</string>
@@ -574,8 +574,7 @@
   <string name="route_head">Jeďte rovně</string>
   <string name="first_time_continue">Pokračujte</string>
   <string name="first_time_download">Stáhnout regiony</string>
-  <string name="first_time_msg">Děkujeme, že jste si zvolili OsmAnd.
-\n Abyste mohli využívat všech možností aplikace, potřebujete soubory s mapami a hlasem, které si můžete stáhnout (Nastavení -&gt; Data) nebo připravit sami. Poté budete moci hledat podle adres, hledat body zájmu (POI) a spojení veřejnou dopravou.</string>
+  <string name="first_time_msg">Děkujeme, že jste si zvolili OsmAnd. Abyste mohli využívat všech možností aplikace, potřebujete soubory s mapami a hlasem, které si můžete stáhnout (Nastavení → Spravovat mapové soubory) nebo připravit sami. Poté budete moci hledat podle adres, hledat body zájmu (POI) a spojení veřejnou dopravou.</string>
   <string name="search_poi_location">Hledám signál…</string>
   <string name="search_near_map">Hledat poblíž poslední polohy</string>
   <string name="search_nearby">Hledat poblíž</string>
@@ -736,7 +735,7 @@
   <string name="exit_Button">Konec</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Nastavení</string>
-  <string name="favorites_Button">Oblíbené</string>
+  <string name="favorites_Button">Moje místa</string>
   <string name="search_button">Hledat</string>
   <string name="search_activity">Hledat</string>
   <string name="searchpoi_activity">Zvolit POI</string>
@@ -827,7 +826,7 @@
   <string name="offline_navigation_not_available">Offline navigace v OsmAnd je dočasně nedostupná.</string>
   <string name="left_side_navigation">Levostranný provoz</string>
   <string name="left_side_navigation_descr">Zvolte pokud jste v zemi, kde se jezdí vlevo</string>
-  <string name="download_link_and_local_description">Klikněte zde pro stažení nebo aktualizaci offline dat.\nKlikněte na položku pro zobrazení více detailů, dlouze stiskněte pro deaktivaci nebo smazání.\nMnožství offline dat v zařízení (%1$s volného místa):</string>
+  <string name="download_link_and_local_description">Klikněte zde pro stažení nebo aktualizaci offline map.\nKlikněte na položku pro zobrazení více detailů, dlouze stiskněte pro deaktivaci nebo smazání.\nMnožství offline dat v zařízení (%1$s volného místa):</string>
   <string name="unknown_from_location">Startovní bod navigace ještě není zvolen</string>
   <string name="confirm_interrupt_download">Chcete přerušit stahování souboru?</string>
   <string name="basemap_was_selected_to_download">Pro správnou funkci aplikace je třeba základní mapa. Proto byla automaticky vybrána ke stažení.</string>
@@ -863,7 +862,7 @@
   <string name="global_app_settings">Všeobecná nastavení</string>
   <string name="favourites_edit_dialog_name">Jméno</string>
   <string name="favourites_edit_dialog_category">Kategorie</string>
-  <string name="local_index_descr_title">Správce offline dat</string>
+  <string name="local_index_descr_title">Správce mapových souborů</string>
   <string name="navigate_point_format_D">SSS.SSSSS</string>
   <string name="navigate_point_format_DM">SSS MM.MMMMM</string>
   <string name="navigate_point_format_DMS">SSS MM ss.sssss</string>
@@ -1103,7 +1102,7 @@
 	
 
 	<string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
-    <string name="srtm_plugin_description">Tento modul umožňuje stáhnout mapy vrstevnic (Stáhnout mapy -&gt; Menu -&gt; Ostatní mapy) pro určitou oblast a použít je s offline mapami.</string>
+    <string name="srtm_plugin_description">Tento modul umožňuje stáhnout mapy vrstevnic (Nastavení → Správce mapových souborů → Vyberte požadovaný typ map).</string>
     <string name="srtm_plugin_name">Modul vrstevnice</string>
     <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa. Pokud chcete použít specifickou lokaci použijte \"Možnosti bodu\"</string>
@@ -1571,7 +1570,7 @@ s často kladenými otázkami.</string>
 	<string name="import_save">Uložit</string>
 	<string name="share_fav">Sdílet</string>
 	<string name="share_fav_subject">Oblíbené sdílené přes OsmAnd</string>
-	<string name="navigation_intent_invalid">Neplatný formát : %s</string>
+	<string name="navigation_intent_invalid">Neplatný formát: %s</string>
 <string name="osmo_follow">Sledovat</string>
     <string name="osmo_sign_in">Přihlásit se</string>
     <string name="osmo_create_groups_confirm">Aby bylo možné vytvořit skupiny musíte být registrovaným uživatelem OsMo.</string>
@@ -1626,4 +1625,5 @@ s často kladenými otázkami.</string>
     <string name="save_as_favorites_points">Uložit jako skupinu oblíbených</string>
     <string name="select_destination_and_intermediate_points">Vybrat body na trase</string>
     <string name="layer_amenity_label">Textové popisky</string>
-    </resources>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapová klasifikace s obrázky</string>
+	</resources>
