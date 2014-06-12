@@ -1840,4 +1840,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="loading_smth">Ładowanie %1$s …</string>
     <string name="map_widget_plain_time">Aktualny czas</string>
     <string name="gpx_wpt">Punkt trasy</string>
+    <string name="save_as_favorites_points">Zapisz jako grupę ulubionych</string>
+    <string name="select_destination_and_intermediate_points">Wybierz punkty</string>
+    <string name="layer_amenity_label">Etykiety tekstowe</string>
     </resources>
