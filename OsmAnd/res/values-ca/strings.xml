@@ -792,14 +792,14 @@
 <string name="overlay_transparency">Opacitat de la capa superposada</string>
 <string name="layer_underlay">Mapa de base…</string>
 <string name="preferred_locale">Llengua de visualització</string>
-<string name="tip_search_t">Podeu cercar llocs directament al mapa via \'Usar posició\' → \'Buscar prop d'aquí\', o amb la pantalla dedicada a les  cerques via \'Menú\' → \'Cerca\'.
+<string name="tip_search_t">Podeu cercar llocs directament al mapa via \'Usar posició\' → \'Buscar prop d\'aquí\', o amb la pantalla dedicada a les  cerques via \'Menú\' → \'Cerca\'.
 	\n\nLa pantalla de cerca admet diferents formats de cerca:
 	\n\t* per adreça
 	\n\t* amb coordenades
 	\n\t* com PDI (per tipus o per nom)
 	\n\t* dins el teu històric de cerques
 	\n\t* o entre els teus preferits ja predefinits
-	\n\n Per qualsevol selecció un menú de context o una barra d'accions ofereix opcions com \'Indicacions\' or \'Mostra al mapa\', etc.
+	\n\n Per qualsevol selecció un menú de context o una barra d\'accions ofereix opcions com \'Indicacions\' or \'Mostra al mapa\', etc.
 	</string>
 <string name="add_waypoint_dialog_added">La fita «{0}» s\'ha afegit correctament</string>
 <string name="add_waypoint_dialog_title">Afegeix una fita a la traça GPX enregistrada</string>
