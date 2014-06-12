@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors-ligne des PI
@@ -1607,12 +1608,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
 <string name="arrival_distance_descr">Choisir à quel moment est annoncée l\'arrivée à destination</string>
-<string-array name="arrival_distance_factors">
-<item>Précoce</item>
-<item>Normale</item>
-<item>Tardive</item>
-<item>Dans les derniers mètres</item>
-</string-array>
 <string name="share_fav">Partager</string>
 <string name="share_fav_subject">Favoris partagés via OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un intinéraire entre des points</string>
@@ -1732,5 +1727,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="gpx_available_current_track">Trace en cours d\'enregistrement</string>
     <string name="gpx_wpt">Point de cheminement</string>
     <string name="map_widget_plain_time">Heure</string>
-    <string name="loading_smth">Chargement de %1$s &#8230;</string>
+    <string name="loading_smth">Chargement de %1$s …</string>
+    <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
+    <string name="select_destination_and_intermediate_points">Sélectionner les points du chemin</string>
+    <string name="layer_amenity_label">Étiquettes textuelles</string>
     </resources>
