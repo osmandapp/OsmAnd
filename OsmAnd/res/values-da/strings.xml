@@ -1899,4 +1899,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="selected">valgt</string>
     <string name="gpx_split_interval">Vælg opdelingsinterval</string>
     <string name="loading_smth">Indlæser %1$s…</string>
+    <string name="save_as_favorites_points">Gem som en gruppe af favoritter</string>
+    <string name="select_destination_and_intermediate_points">Vælg rutepunkter</string>
+    <string name="layer_amenity_label">Tekstetiketter</string>
     </resources>
