@@ -317,7 +317,7 @@
 	<string name="gpxup_identifiable">Identificerbar</string>
 	<string name="gpxup_trackable">Sporbar</string>
 	<string name="gpxup_private">Privat</string>
-	<string name="asap">VEND!</string>
+	<string name="asap">VEND</string>
 	<string name="save_route_as_gpx">Gem rute som GPX-fil</string>
 	<string name="route_roundabout">Rundkørsel: tag afkørsel %1$d</string>
 	<string name="route_kl">Hold til venstre og kør</string>
@@ -1611,7 +1611,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n * \'Vinter og ski\' giver en visning af et (snedækket) vinterlandskab og viser globale skiløjper og lifter (hent \'World ski\' kortet)
 	</string>
     <string name="route_descr_destination"> </string>
-    <string name="create_poi_link_to_osm_doc">&lt;u&gt;Online OSM&lt;/u&gt; kort klassificering med billeder<u>Online OSM</u> map classification with images</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder</string>
 	<string name="base_world_map">Verdensgrundkort</string>
 	
     
@@ -1780,14 +1780,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="share_fav">Del</string>
 	<string name="share_fav_subject">Favoritter delt via Osmand</string>
 	<string name="use_points_as_intermediates">Beregn rute mellem punkter</string>
-    <string name="tip_recent_changes_1_8_alpha">Ændringer i 1.8:
-         * Beregn rute mellem rutepunkter i GPX-spor
-         * Ændret udseende for hentning af lande (understøtter søgning på lokale navne)
-	 * Understøtter GPX/KML import (konverter fra KML til GPX)
-         * GPX-spor er flyttet til \'Mine data\'
-         * Opdel GPX-spor efter afstand og checke højdeforskel/hastighed
-         * Auto start navigation efter forsinkelse
-    </string>
+    <string name="tip_recent_changes_1_8_alpha">"Ændringer i 1.8:\n          * Beregn rute mellem rutepunkter i GPX-spor\n          * Ændret udseende for hentning af lande (understøtter søgning på lokale navne)\n          * Understøtter GPX/KML import (konverter fra KML til GPX)\n          * GPX-spor er flyttet til \'Mine data\'\n          * Opdel GPX-spor efter afstand og checke højdeforskel/hastighed
+\n          * Auto start navigation efter forsinkelse "</string>
     <string name="hours_ago">timer siden</string>
     <string name="minutes_ago">minutter siden</string>
     <string name="seconds_ago">sekunder siden</string>
@@ -1873,7 +1867,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="my_data_activity">Mine steder</string>
     <string name="gpx_file_is_empty">GPX-spor er tomt</string>
     <string name="gpx_info_waypoints">Rutepunkter: %1$s </string>
-	<string name="gpx_info_distance">Afstand: %1$s (%2$s pukter) </string>
+	<string name="gpx_info_distance">"Afstand: %1$s (%2$s punkter) "</string>
 	<string name="gpx_info_start_time">Startid: %1$tF,  %1$tT </string>
 	<string name="gpx_info_end_time">Sluttid: %1$tF,  %1$tT </string>
 	<string name="gpx_info_average_speed">Gennemsnitshastighed: %1$s </string>
