@@ -402,7 +402,7 @@
 <string name="error_doing_search">Ha ocorregut un error en la cerca fora de línia</string>
 <string name="tip_map_switch">Trieu el proveïdor dels mapes</string>
 <string name="tip_app_mode">Perfil d\'utilització</string>
-<string name="tip_map_context_menu">Menú contextual del mapa</string>
+<string name="tip_map_context_menu">Menú \'Usar posició\'</string>
 <string name="amenity_type_healthcare">Serveis mèdics</string>
 <string name="amenity_type_man_made">Construccions</string>
 <string name="amenity_type_office">Oficines</string>
@@ -792,8 +792,15 @@
 <string name="overlay_transparency">Opacitat de la capa superposada</string>
 <string name="layer_underlay">Mapa de base…</string>
 <string name="preferred_locale">Llengua de visualització</string>
-<string name="tip_search_t">"\tPodeu cercar llocs directament al mapa o per l\'adreça, la localització, com a PDI, o bé com a preferit predefinit.
-\n\tPremeu «Cerca» al menú principal i obrireu les activitats de cerca. Per tots els resultats un menú contextual us ofereix dues opcions: «Estableix com a destinació» o «Mostra al mapa». "</string>
+<string name="tip_search_t">Podeu cercar llocs directament al mapa via \'Usar posició\' → \'Buscar prop d'aquí\', o amb la pantalla dedicada a les  cerques via \'Menú\' → \'Cerca\'.
+	\n\nLa pantalla de cerca admet diferents formats de cerca:
+	\n\t* per adreça
+	\n\t* amb coordenades
+	\n\t* com PDI (per tipus o per nom)
+	\n\t* dins el teu històric de cerques
+	\n\t* o entre els teus preferits ja predefinits
+	\n\n Per qualsevol selecció un menú de context o una barra d'accions ofereix opcions com \'Indicacions\' or \'Mostra al mapa\', etc.
+	</string>
 <string name="add_waypoint_dialog_added">La fita «{0}» s\'ha afegit correctament</string>
 <string name="add_waypoint_dialog_title">Afegeix una fita a la traça GPX enregistrada</string>
 <string name="version_index_is_big_for_memory">L\'índex «{0}» no cap a la memòria</string>
@@ -1835,8 +1842,8 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="delay_navigation_start">Iniciar la navegació amb retard</string>
     <string name="selected">seleccionat</string>
     <string name="gpx_split_interval">Seleccioni interval de separació</string>
-    <string name="gpx_info_diff_altitude">Diferència d\'altitud: %1$s</string>
-	<string name="gpx_info_asc_altitude">Desnivell positiu: %1$s</string>
+    <string name="gpx_info_diff_altitude">Interval d\'altitud: %1$s</string>
+	<string name="gpx_info_asc_altitude">Baixat/pujat: %1$s</string>
     <string name="gpx_timespan">Lapse de temps: %1$s</string>
 	<string name="gpx_timemoving">Temps en moviment: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
