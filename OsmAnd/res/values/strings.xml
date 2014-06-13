@@ -877,6 +877,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_right_stack">Right panel:</string>
 	<string name="map_widget_left_stack">Left panel:</string>
 	<string name="map_widget_parking">Parking</string>
+    <string name="map_widget_route_steps">Route steps</string>
+    <string name="all_route_points">All route points</string>
 	<string name="map_widget_monitoring">GPX recording</string>
 	<string name="map_widget_speed">Speed</string>
 	<string name="map_widget_distance">Destination</string>
