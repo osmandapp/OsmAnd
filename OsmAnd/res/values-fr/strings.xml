@@ -1725,4 +1725,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
     <string name="select_destination_and_intermediate_points">Sélectionner les points du chemin</string>
     <string name="layer_amenity_label">Étiquettes textuelles</string>
+    <string name="route_descr_destination">Description</string>
     </resources>
