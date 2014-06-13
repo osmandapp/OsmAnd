@@ -1,4 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="default_buttons_yes">Так</string>
     <string name="default_buttons_no">Не</string>
-    </resources>
+    <string name="osmand_app_not_found">OsmAnd не ўсталяваны</string>
+    <string name="app_name">OsmAnd Паркоўка</string>
+    <string name="parking_plugin_installed">Модуль OsmAnd Паркоўка усталяваны і ўключаны ў наладах OsmAnd.</string>
+</resources>
