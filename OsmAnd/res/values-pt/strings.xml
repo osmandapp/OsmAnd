@@ -302,8 +302,8 @@
   <string name="auto_zoom_map_descr">Zoom automático em função da sua velocidade</string>
   <string name="auto_zoom_map">Zoom automático do mapa</string>
   <string name="additional_settings">Outras definições</string>
-  <string name="settings_preset_descr">Vista do mapa e configurações de navegação são salvos por perfil. Ajuste o seu perfil padrão aqui.</string>
-  <string name="settings_preset">Perfil padrão</string>
+  <string name="settings_preset_descr">A vista de mapa e as definições de navegação são guardadas por perfil. Defina aqui o seu.</string>
+  <string name="settings_preset">Perfil pré-definido</string>
   <string name="settings">Configurações</string>
   <string name="save_current_track_descr">Salvar a trilha atual no cartão SD agora</string>
   <string name="save_current_track">Salvar a trilha atual</string>
@@ -361,7 +361,7 @@
   <string name="choose_available_region">Escolher uma região na lista</string>
   <string name="choose_intersected_street">Escolher a rua transversal</string>
   <string name="Closest_Amenities">Locais mais próximos</string>
-  <string name="app_mode_default">Escolha mapa</string>
+  <string name="app_mode_default">Explorar mapa</string>
   <string name="app_mode_car">Carro</string>
   <string name="app_mode_bicycle">Bicicleta</string>
   <string name="app_mode_pedestrian">Pedestre</string>
@@ -988,7 +988,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
 <string name="avoid_in_routing_descr">Evitar estradas com portagem, não pavimentadas, balsas</string>
 <string name="map_widget_fluorescent">Rotas fluorescentes</string>
 <string name="map_widget_show_ruler">Regua</string>
-<string name="map_widget_appearance">Diversos:</string>
+<string name="map_widget_appearance">Elementos restantes:</string>
 <string name="map_widget_view_direction">A direção da visão</string>
 <string name="map_widget_transparent">Pele transparente</string>
 <string name="monitoring_mode_off">Registro GPX</string>
@@ -1049,7 +1049,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="native_library_not_running">O aplicativo está sendo executado em modo seguro (desabilite em Configurações).</string>
     <string name="background_service_is_enabled_question">Serviço em segundo plano ainda em execução. Deseja cancelá-lo?</string>
     <string name="close_changeset">Fechar conjunto de alterações</string>
-	<string name="route_descr_current_location">Localização atual</string>
+	<string name="route_descr_current_location">Posição atual</string>
     
     
     <string name="search_villages_and_postcodes">Pesquisa por CEP</string>
@@ -1192,11 +1192,11 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
       \n→* Interface do usuário redesenhada ↵
          \n→* Correções de erros "
     </string>
-    <string name="local_osm_changes_backup_successful">Arquivo de mudança OSM gerou com sucesso %1$s</string>
-    <string name="local_osm_changes_backup_failed">Falhou a cópia das mudanças OSM</string>
+    <string name="local_osm_changes_backup_successful">Ficheiro de alterações OSM gerado com sucesso %1$s</string>
+    <string name="local_osm_changes_backup_failed">Falha ao copiar as alterações OSM</string>
     <string name="local_osm_changes_backup">Copiar como alteração OSM</string>
-    <string name="delete_point">Apagar Ponto</string>
-    <string name="plugin_distance_point_time">Tempo</string>
+    <string name="delete_point">Eliminar ponto</string>
+    <string name="plugin_distance_point_time">tempo</string>
     <string name="plugin_distance_point_hdop">precisão</string>
     <string name="plugin_distance_point_speed">Velocidade</string>
     <string name="plugin_distance_point_ele">Altitude</string>
@@ -1206,56 +1206,56 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="osmand_distance_planning_plugin_name">Calculadora de Distância e Ferramenta de Planeamento</string>
     <string name="osmand_distance_planning_plugin_description">"Criar caminhos (ou usar / modificar arquivos GPX existentes) para medir a distância entre  pontos. Se guardar como GPX, pode usar para planear rotas GPX."</string>
     <string name="tip_altitude_offset">Altitude - Corrigir o offset</string>
-	<string name="driving_region_descr">Selecione região: EUA, Europa, RU, Ásia e Outros</string>
+	<string name="driving_region_descr">Selecione região: EUA, Europa, RU, Ásia e outros</string>
 	<string name="driving_region">Região</string>
 	<string name="driving_region_japan">Japão</string>
 	<string name="driving_region_us">Estados Unidos</string>
-	<string name="driving_region_europe_asia">Europa &amp; Ásia</string>
-	<string name="driving_region_uk">Reino Unido, Índia, Austrália e Outras</string>
+	<string name="driving_region_europe_asia">Europa e Ásia</string>
+	<string name="driving_region_uk">Reino Unido, Índia, Austrália e outras</string>
 	<string name="osmodroid_mode_on">Parar OsMoDroid</string>    
     <string name="osmodroid_mode_off">Iniciar OsMoDroid</string>
-    <string name="announce_gpx_waypoints">Anuncie pontos de trilha GPX</string>
-    <string name="speak_title">Anuncie…</string>
-	<string name="speak_descr">Configure para anunciar nomes das ruas, avisos de tráfego (paradas obrigatórias, lombadas), avisos de radares, limites de velocidade</string>
-	<string name="speak_street_names">Anuncie nome das ruas (TTS)</string>
-    <string name="speak_speed_limit">Anuncie limite de velocidade</string>
-    <string name="speak_cameras">Anuncie radares</string>
-	<string name="speak_traffic_warnings">Anuncie avisos de tráfego</string>
-    <string name="tip_recent_changes_1_5_t">"Mudanças na versão 1.5:
-	\n\tAvisos de voz sobre limites de velocidade e câmeras
-	\n\tMais voice prompt capabilites(nome de ruas anunciados)
-	\n\tÍcones de mapas de alta densidade
-	\n\tMuitas mudanças na interface
-	\n\tCorreções no display de distância, analizador GPX, manuseio de waypoints, planejando 	widget, OSM uploading, manuseio em https"
+    <string name="announce_gpx_waypoints">Anunciar pontos intermédios GPX</string>
+    <string name="speak_title">Anunciar…</string>
+	<string name="speak_descr">Configure para anunciar nomes das ruas, avisos de tráfego (paragens obrigatórias, lombas), avisos de radares, limites de velocidade</string>
+	<string name="speak_street_names">Anunciar nome das ruas (TTS)</string>
+    <string name="speak_speed_limit">Anunciar limite de velocidade</string>
+    <string name="speak_cameras">Anunciar radares</string>
+	<string name="speak_traffic_warnings">Anunciar avisos de tráfego</string>
+    <string name="tip_recent_changes_1_5_t">Alterações na versão 1.5:
+	\n\t* Avisos vocais sobre limites de velocidade e radares
+	\n\t* Melhores capacidades (anúncio de nomes de rua)
+	\n\t* Ícones do mapa em alta densidade
+	\n\t* Diversas correções na interface
+	\n\t* Correções nas distâncias, analisador GPX, gestão de pontos de passagem, widget de planeamento, envios OSM, gestão HTTP
     </string>
-    <string name="osb_author_or_password_not_specified">Favor especificar usuário e senha em Configurações</string>
-    <string name="clear_intermediate_points">Limpar pontos intermediários</string>
-    <string name="keep_intermediate_points">Mantenha pontos intermediários</string>
-    <string name="new_directions_point_dialog">Você já definiu os pontos intermediários.</string>
-    <string name="context_menu_item_directions_to">Direções Para</string>
-    <string name="context_menu_item_directions_from">Direções a partir De</string>
+    <string name="osb_author_or_password_not_specified">Especifique o utilizador e a senha nas definições</string>
+    <string name="clear_intermediate_points">Remover pontos intermédios</string>
+    <string name="keep_intermediate_points">Manter pontos intermédios</string>
+    <string name="new_directions_point_dialog">Os pontos intermédios já estão definidos.</string>
+    <string name="context_menu_item_directions_to">Direções para</string>
+    <string name="context_menu_item_directions_from">Direções desde</string>
     <string name="route_descr_map_location">Mapa: </string>
-    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="route_to">Para:</string>
     <string name="route_via">Via:</string>
-    <string name="route_from">A partir:</string>
+    <string name="route_from">Desde:</string>
 	
 	
 	<string name="destination_point">Destino %1$s</string>
-    <string name="context_menu_item_destination_point">Defina como destino</string>
-    <string name="please_select_address">Selecione cidade ou rua primeiro</string>
-    <string name="tip_recent_changes_1_4_t">Mudanças na versão 1.4:
-	\n\t* Otimize ordenação de waypoints para visitá-los (vendedor itinerante, porta a porta)
-	\n\t* Procure rua por nome (na vizinhança) 
-	\n\t* Planning mode plugin (carregue/edite/salve GPX tracks)
-	\n\t* Nova tela de download (download em background)
-	\n\t* Suporte de GPX subdiretórios (organize suas rotas GPX)
-	\n\t* Apague arquivos SRTM
-	\n\t* Suporte de Notas 
+    <string name="context_menu_item_destination_point">Definir como destino</string>
+    <string name="please_select_address">Selecione primeiro a cidade ou rua</string>
+    <string name="tip_recent_changes_1_4_t">Alterações na versão 1.4:
+	\n\t* Organização de locais de passagem otimizada para os visitar todos (vendedor ambulante, porta a porta)
+	\n\t* Procura de ruas por nome (na vizinhança) 
+	\n\t* Modo de planeamento (carregar/editar/gravar  GPX)
+	\n\t* Novo ecrã de transferências (transferência em segundo plano)
+	\n\t* Suporte a subpastas GPX (organização de GPX )
+	\n\t* Eliminação de ficheiros SRTM
+	\n\t* Suporte a notas OSM 
     </string>
-    <string name="search_street_in_neighborhood_cities">Procure rua nas cidades vizinhas</string>
-    <string name="intermediate_items_sort_return">Waypoints intermediários reordenados para otimizar sua ordem no caminho para o destino.</string>
-    <string name="intermediate_items_sort_by_distance">Ordene(porta a porta)</string>
+    <string name="search_street_in_neighborhood_cities">Procurar rua na vizinhança</string>
+    <string name="intermediate_items_sort_return">Pontos intermédios organizados para otimizar a ordem até ao destino.</string>
+    <string name="intermediate_items_sort_by_distance">Ordem (porta a porta)</string>
     <string name="use_distance_measurement_help">Toque para marcar um pont.\n
 Pressione e segure no mapa para apagar pontos anteriores.\n
 Pressione e segure no ponto para ver e anexar descrição.\n
@@ -1374,19 +1374,19 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_photo_play_sound">Emita som ao tirar foto</string>
 	<string name="av_photo_play_sound_descr">Escolha se emitir som quando tirar fotos</string>
 <string name="driving_region_canada">Canadá</string>
-	<string name="tip_map_styles">Estilo de Mapa</string>
+	<string name="tip_map_styles">Estilos de mapa</string>
 	<string name="about_version">Versão:</string>
     <string name="about_settings">Sobre</string>
-    <string name="about_settings_descr">Versão, licenças, membros do projecto</string>
+    <string name="about_settings_descr">Versão, licenças, membros do projeto</string>
     <string name="tips_and_tricks">Dicas</string>
-    <string name="local_index_tile_data_zooms">Zooms descarregados: %1$s</string>
+    <string name="local_index_tile_data_zooms">Zoom transferidas: %1$s</string>
     <string name="local_index_tile_data_expire">Expira (minutos): %1$s</string>
-    <string name="local_index_tile_data_downloadable">Descarregado: %1$s</string>
+    <string name="local_index_tile_data_downloadable">Transferível: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Zoom máximo: %1$s</string>
     <string name="local_index_tile_data_minzoom">Zoom Mínimo: %1$s</string>
-    <string name="local_index_tile_data_name">Daods do mosaico: %1$s</string>
-    <string name="edit_tilesource_successfully">A origem dos mosaicos %1$s foi gravado com sucesso</string>
-    <string name="edit_tilesource_elliptic_tile">Elliptico mercator</string>
+    <string name="local_index_tile_data_name">Dados do mosaico: %1$s</string>
+    <string name="edit_tilesource_successfully">A origem do mosaico %1$s foi gravada com sucesso</string>
+    <string name="edit_tilesource_elliptic_tile">Mercator elíptico</string>
     <string name="edit_tilesource_maxzoom">Zoom máximo</string>
     <string name="edit_tilesource_expiration_time">Expira (minutos)</string>
     <string name="edit_tilesource_minzoom">Zoom min</string>
@@ -1394,27 +1394,26 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="edit_tilesource_choose_existing">Escolher existente…</string>
     <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Definir/Editar…</string>
-	<string name="map_widget_fps_info">FPS info debug</string>
-	<string name="tip_recent_changes_1_6_t">Alterações em 1.6
-	\n\t* Suporte de aparelhos Full HD
-	\n\t* Suporte transparente mapa de fundo
-	\n\t* Mostrar mapas baixados e facilitar o download de mapas que faltam diretamente da visualização do mapa
-	\n\t* Contour mapa linha arquivos agora vem para países / regiões
-	\n\t* Novo mapa base mundial com as principais estradas, ferrovias e principais características de área, como florestas
-	\n\t* Mapa característica lupa (clique longo no botão de zoom) - Útil tanto para a telha e mapas vetoriais
-	\n\t* Definir / editar fontes de azulejos personalizados on-line (e especificar tempo de expiração)
-	\n\t* Suporte de tempo limite de velocidade condicionais (Holanda)  
-
-	\n\t* Faster busca introduzir o endereço
-	\n\t* Correções de bugs com roteamento e tornando
+	<string name="map_widget_fps_info">Depuração FPS</string>
+	<string name="tip_recent_changes_1_6_t">Alterações na versão 1.6
+	\n\t* Suporte de dispositivos Full HD
+	\n\t* Suporte a fundo de mapa transparente
+	\n\t* Mostrar mapas transferidos e facilitar a transferência de mapas em falta diretamente na vista do mapa
+	\n\t* Ficheiros de linhas de contorno de mapas disponíveis para países e regiões
+	\n\t* Novo mapa mundial com as principais estradas, ferrovias e características de área, como florestas
+	\n\t* Uma lupa para o mapa (clique longo no botão de ampliação) - Útil para mapas vetoriais em em mosaico
+	\n\t* Possibilidade de definir/editar fontes de azulejos personalizados (e especificar tempo de expiração)
+	\n\t* Suporte a limites de velocidade condicionais (Holanda)  
+	\n\t* Melhorias no mapa de procura de endereços
+	\n\t* Correções de erros nas rotas e renderização
     </string>
     
     
     
     
     
-    <string name="map_magnifier">Lupa do Mapa</string>
-    <string name="base_world_map">Mapa base mundial</string>
+    <string name="map_magnifier">Lupa do mapa</string>
+    <string name="base_world_map">Mapa mundial</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		→ → Osmand + ( OSM automatizados direções de navegação ) ↵
 ↵
@@ -1518,35 +1517,35 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 → → \n \t * \'estradas de alto contraste \' mostra estradas em cores muito acentuadas para situações de iluminação ambiente brilhantes ↵
 → → \n \t * \'Winter e ski \' cria um (coberto de neve) Inverno modo paisagem, e mostra pistas de esqui e teleféricos globais (em conexão com a \'World ski \' mapa download) ↵
 	</string>
-    <string name="auto_zoom_none">Sem auto zoom</string>
+    <string name="auto_zoom_none">Sem zoom automático</string>
     <string name="auto_zoom_close">Aproximar</string>
     <string name="auto_zoom_far">Visão intermédia</string>
     <string name="auto_zoom_farthest">Mais abrangente</string>
-    <string name="animate_routing_route_not_calculated">Por favor calcule a rota primeiro</string>
+    <string name="animate_routing_route_not_calculated">Por favor calcule primeiro a rota</string>
     <string name="animate_routing_route">Simular usando rota calculada </string>
     <string name="animate_routing_gpx">Simular usando caminho GPX</string>
-    <string name="remember_choice">Lembrar a minha escolha</string>
-    <string name="gps_status_eclipsim">Status GPS</string>
+    <string name="remember_choice">Memorizar escolha</string>
+    <string name="gps_status_eclipsim">Estado do GPS</string>
     <string name="default_and">e</string>
     <string name="default_or">ou</string>
-	<string name="route_is_too_long">A rota é, possivelmente, demasiado longa para ser calculado pelo router offline OsmAnd. ↵
-         → Em média, o encaminhamento off-line é possível apenas entre os pontos de até 200 km de distância. Por favor, adicione um ou mais pontos intermédios ao calcular a rota.</string>
-	<string name="osmodroid_refresh">Actualizar canais</string>
+	<string name="route_is_too_long">A rota é, possivelmente, muito longa para ser calculada pelo router offline OsmAnd.
+         → Em média, a rota off-line apenas é possível para distâncias até 200 km. Por favor adicione um ou mais pontos intermédios para calcular a rota.</string>
+	<string name="osmodroid_refresh">Atualizar canais</string>
     <string name="map_widget_map_rendering">Renderização do mapa:</string>
-    <string name="app_mode_hiking">Caminhadas</string>
+    <string name="app_mode_hiking">Caminhada</string>
     <string name="app_mode_motorcycle">Motocicleta</string>
     <string name="app_mode_boat">Barco</string>
     <string name="app_mode_aircraft">Aeronave</string>
-    <string name="tip_faq_t">Por favor, visite https://code.google.com/p/osmand/wiki/FAQ ver as perguntas mais frequentes.</string>
-    <string name="tip_faq">Perguntas Frequentes</string>
-    <string name="local_osm_changes_delete_all_confirm">Você vai apagar %1$d mudanças no arquivo osm. Você tem certeza?</string>
-    <string name="local_osm_changes_delete_all">Apagar Tudo</string>
+    <string name="tip_faq_t">Por favor aceda a https://code.google.com/p/osmand/wiki/FAQ e veja as perguntas mais frequentes.</string>
+    <string name="tip_faq">Perguntas frequentes</string>
+    <string name="local_osm_changes_delete_all_confirm">Você vai apagar %1$d osm mudanças .  Você tem certeza ?</string>
+    <string name="local_osm_changes_delete_all">Eliminar tudo</string>
     <string name="amenity_type_osmwiki">Wikipedia (off-line)</string>
 	<string name="amenity_type_seamark">Marca Marítima</string>
-    <string name="app_modes_choose_descr">Escolha usar perfis visíveis em aplicação</string>
-    <string name="app_modes_choose">Modo da aplicação</string>
-	<string name="osmodroid_seek">Procurar objecto</string>
-    <string name="osmodroid_unseek">Não procurar objecto</string>
+    <string name="app_modes_choose_descr">Escolha os perfis disponíveis na aplicação</string>
+    <string name="app_modes_choose">Perfis da aplicação</string>
+	<string name="osmodroid_seek">Procurar objeto</string>
+    <string name="osmodroid_unseek">Não procurar objeto</string>
     <string name="route_descr_destination"> </string>
     <string name="osmo_sign_in">Entrar</string>
     <string name="osmo_create_groups_confirm">Para poder criar grupos tem de ser um utilizador registado de OsMo.</string>
