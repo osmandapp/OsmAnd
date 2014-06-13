@@ -7,10 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
+import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import net.osmand.plus.GPXUtilities;
@@ -22,7 +19,7 @@ import java.io.File;
 import java.util.*;
 
 /**
- * Created by Barsik on 13.06.2014.
+ * Created by Bars on 13.06.2014.
  */
 public class RouteStepsActivity extends SherlockFragmentActivity {
 
@@ -44,8 +41,6 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 	private List<Boolean> pointsChangedState;
 	private List<Boolean> pointsStartState;
 
-
-	private PointItemAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,14 +83,30 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 			}
 		}
 
-		adapter = new PointItemAdapter(this,R.layout.route_point_info, pointItemsList);
-		ListView listView = (ListView) findViewById(R.id.pointsListView);
+		PointItemAdapter adapter = new PointItemAdapter(this, R.layout.route_point_info, pointItemsList);
+		final ListView listView = (ListView) findViewById(R.id.pointsListView);
 		listView.setAdapter(adapter);
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+				final PopupMenu menu = new PopupMenu(RouteStepsActivity.this, view);
 
+				menu.getMenuInflater().inflate(R.menu.route_step_menu, menu.getMenu());
+
+				menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem menuItem) {
+						if (menuItem.getTitle().equals("Mark as next")){
+
+						} else {
+
+						}
+						return true;
+					}
+				});
+
+				menu.show();
 			}
 		});
 	}
@@ -108,13 +119,12 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 		Map<String, String> map = gpx.getExtensionsToRead();
 		if (map.containsKey(CURRENT_ROUTE_KEY)) {
 			String routeName = map.get(CURRENT_ROUTE_KEY);
-			int i = 0;
+
 			for (GPXUtilities.Route route : gpx.routes) {
 				if (route.name.equals(routeName)) {
 					currentRoute = route;
 					return;
 				}
-				i++;
 			}
 		}
 		currentRoute = gpx.routes.get(0);
