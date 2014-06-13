@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -57,8 +58,8 @@
   <string name="reload">Atualizar</string>
   <string name="general_settings_descr">Configurar o uso da Internet, opções de visualização, e mais</string>
   <string name="general_settings">Configurações Gerais</string>
-  <string name="index_settings_descr">Obter ou atualizar dados para uso offline</string>
-  <string name="index_settings">Dados offline</string>
+  <string name="index_settings_descr">Obter e gerir dados para uso offline</string>
+  <string name="index_settings">Gerir Ficheiros de mapa</string>
   <string name="osmand_service">Serviço de segundo plano</string>
   <string name="osmand_service_descr">Executar o serviço de segundo plano para usar OsmAnd enquanto a tela está desligada</string>
   <string name="fast_route_mode">Caminho mais rápido</string>
@@ -494,7 +495,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="native_rendering">Renderização nativa</string>
   
   <string name="test_voice_prompts">Testar comandos de voz</string>
-  <string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
+  <string name="switch_to_raster_map_to_see">Nenhum mapa vetorial presente para este local .  Você pode baixar um em Configurações (Gerenciar arquivos de mapas ) , ou mudar para mapas online ( activar mapas on-line do plugin para isso).</string>
   <string name="tip_recent_changes_0_7_2_t">"Changes in 0.7.2 : \n\t- Native rendering for all devices \n\t- Offline POI editing \n\t- Accessibility \n\t- Lots of bug fixes "</string>
   <string name="send_files_to_osm">Enviar arquivos GPX para o OSM?</string>
   <string name="gpx_visibility_txt">Visibilidade</string>
@@ -710,7 +711,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="local_index_items_restored">%1$d de %2$d item(s) activados.</string>
   <string name="local_index_no_items_to_do">Sem items para %1$s</string>
   <string name="local_index_action_do">Você está prestes a %1$s %2$s item(s). Continuar?</string>
-  <string name="local_index_descr_title">Offline Data Manager</string>
+  <string name="local_index_descr_title">Gerenciar arquivos de mapas</string>
   <string name="local_index_mi_restore">Activar</string>
   <string name="local_index_mi_backup">Desactivar</string>
   <string name="local_index_mi_delete">Apagar</string>
@@ -765,7 +766,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="internet_not_available">Precisa de ligação à Internet para essa operação</string>
   <string name="install_more">Instalar mais…</string>
   <string name="tip_update_index">Atualização de mapas offline</string>
-  <string name="tip_update_index_t">Up-to -date dados de mapa é essencial para a visão do mapa off-line, para POI / endereço de pesquisa , e para a navegação offline. OsmAnd fornece um gerenciador de dados para baixar os mapas off-line ( e alguns outros arquivos de dados) , e para verificar se há atualizações disponíveis. 
+  <string name="tip_update_index_t">Dados de mapa Actualizados são essenciais para a visão do mapa off-line, para POI / endereço de pesquisa , e para a navegação offline. OsmAnd fornece um gerenciador de dados para baixar os mapas off-line ( e alguns outros arquivos de dados) , e para verificar se há atualizações disponíveis. 
 		\n\n download de mapas ir a \'Configurações \' → \' Data Management \' \' → Download de dados off-line \' . 
 		\n\nDepois a lista região global está recuperado da internet, clique em qualquer entrada para baixar ou atualizar um arquivo . Por favor, note que o seletor de tipo de arquivo na parte superior da tela para selecionar o tipo de download que você quer ( mapas regulares , sobreposições hillshade , etc.) 
 		\n\nVocê pode filtrar a lista região digitando algumas letras , ou você pode selecionar a opção "Configurações \' → \' Filtro baixado \'para ver as atualizações somente para os dados já no seu dispositivo. 
@@ -1634,6 +1635,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
          * Calcular rota entre os pontos da rota da trilha GPX 
          * Mudou o esquema de países para downloads (suporta nomes de locais de pesquisa) 
          * Suporta importação GPX / KML (converter de KML para GPX)
+         * Auto recomeço de navegação após recomeço
     </string>
     <string name="osmo_mode_restart">Reinciar sessão OsMo</string>
     <string name="osmo_mode_on">Parar sessão OsMo</string>    
@@ -1703,15 +1705,15 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="gpx_info_subtracks">Subtrilhas : % 1 $ s </string>
 	<string name="gpx_info_maximum_speed">Velocidade máxima: % 1 $ s </string>
 	<string name="gpx_info_avg_altitude">Altitude média : %1$s</string>
-	<string name="gpx_info_asc_altitude">Altitude acumulada: %1$s</string>
+	<string name="gpx_info_asc_altitude">Descida/Subida: %1$s</string>
     <string name="gpx_timespan">Abrangência: %1$s</string>
 	<string name="gpx_timemoving">Tempo em movimento : %1$s</string>
     <string name="gpx_selection_segment_title">Segmento</string>
     <string name="gpx_selection_number_of_points"> %1$s pontos</string>
     <string name="gpx_selection_point">Ponto %1$s</string>
-    <string name="gpx_selection_route_points">%1$s \n Pontos de Rota %2$s</string>
-    <string name="gpx_selection_points">%1$s\n Pontos</string>
-    <string name="gpx_selection_track">%1$s\n Trilha %2$s</string>
+    <string name="gpx_selection_route_points">%1$s \nPontos de Rota %2$s</string>
+    <string name="gpx_selection_points">%1$s\nPontos</string>
+    <string name="gpx_selection_track">%1$s \nTrilha %2$s</string>
     <string name="gpx_available_current_track">Trilho de gravação actual</string>
     <string name="gpx_file_is_empty">O trilho Gpx está vazio</string>
     <string name="selected_track">Trilho seleccionado</string>
@@ -1776,4 +1778,21 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="share_fav">Partilhar</string>
 	<string name="share_fav_subject">Favoritos partilhados via OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato inválido: %s</string>
-</resources>
+<string name="save_as_favorites_points">Salvar como grupo de favoritos</string>
+    <string name="select_destination_and_intermediate_points">Selecionar waypoints</string>
+    <string name="layer_amenity_label">Rótulos de pontos</string>
+    <string name="loading_smth">Carregando %1$s …</string>
+    <string name="map_widget_plain_time">Tempo atual</string>
+    <string name="gpx_wpt">Ponto</string>
+    <string name="selected_gpx_info_show">\n\nPressione e segure para ver no mapa</string>
+    <string name="delay_navigation_start">Iniciar navegação com atraso</string>
+    <string name="selected">seleccionado</string>
+    <string name="gpx_split_interval">Selecione intervalo de divisão</string>
+    <string name="gpx_info_waypoints">Os pontos de passagem : %1$s </string>
+	<string name="gpx_info_distance">Distância: %1$s (%2$s pontos ) </string>
+	<string name="gpx_info_start_time">Hora de início: %1$tF, %1$tT </string>
+	<string name="gpx_info_end_time">Hora de fim: %1$tF, %1$tT </string>
+	<string name="gpx_info_average_speed">Velocidade média: %1$s </string>
+	<string name="gpx_info_diff_altitude">Faixa de altitude : %1$s</string>
+	<string name="gpx_selection_current_track">gravação</string>
+    </resources>
