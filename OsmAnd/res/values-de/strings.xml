@@ -762,6 +762,7 @@
 	<string name="layer_osm_bugs">OSM-Fehlerbericht (online)</string>
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
 	<string name="layer_poi">POI…</string>
+	<string name="layer_amenity_label">Punkt-Namen</string>
 	<string name="layer_map">Kartenquelle…</string>
 	<string name="menu_layers">Kartenebenen</string>
 	<string name="context_menu_item_search_poi">Suche POI</string>
@@ -848,7 +849,7 @@
 	<string name="search_history_street">Straße: {0}, {1}</string>
 	<string name="search_history_int_streets">Querstraße: {0} x {1} in {2}</string>
 	<string name="search_history_building">Hausnr.: {0}, {1}, {2}</string>
-	<string name="favorite">Favoriten</string>
+	<string name="favorite">Favorit</string>
 	<string name="clear_all">Alles löschen</string>
 	<string name="history">Verlauf</string>
 	<string name="uploading_data">Daten hochladen…</string>

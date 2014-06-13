@@ -11,7 +11,7 @@
     -->
     <string name="save_as_favorites_points">Save as group of favorites</string>
     <string name="select_destination_and_intermediate_points">Select waypoints</string>
-    <string name="layer_amenity_label">Text labels</string>
+    <string name="layer_amenity_label">Point labels</string>
     <string name="loading_smth">Loading %1$s &#8230;</string>
     <string name="map_widget_plain_time">Current time</string>
     <string name="gpx_wpt">Waypoint</string>

@@ -1175,7 +1175,7 @@
 	</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin má starú verziu a je potrebné ju aktualizovať.</string>
     
-    <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
+    <string name="osmodroid_plugin_name">OsMoDroid zásuvný modul</string>
 	<string name="index_srtm_parts">časti</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="av_def_action_video">Nahrať video</string>
@@ -1215,7 +1215,7 @@
     
     
     <string name="map_widget_distancemeasurement">Meranie vzdialenosti</string>
-    <string name="audionotes_location_not_defined">Umiestnenie na spojenie s poznámkou ešte nie je definované. Ak chcete použiť špecifické umiestnenie, použite "Použiť umiestnenie..."</string>
+    <string name="audionotes_location_not_defined">Umiestnenie na spojenie s poznámkou ešte nie je definované. Ak chcete použiť špecifické umiestnenie, použite Použiť umiestnenie…</string>
     <string name="monitoring_control_stop">Zastaviť</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytváranie zvukových poznámok počas cestovania</string>
@@ -1884,4 +1884,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="gpx_selection_points">%1$s \nBody</string>
     <string name="gpx_selection_track">%1$s \nStopa %2$s</string>
     <string name="gpx_available_current_track">Práve nahrávaná stopa</string>
+    <string name="save_as_favorites_points">Uložiť ako skupinu obľúbených</string>
+    <string name="select_destination_and_intermediate_points">Vybrať prechodné body</string>
+    <string name="layer_amenity_label">Textové popisy</string>
     </resources>

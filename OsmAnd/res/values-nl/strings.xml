@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -1847,4 +1848,15 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="gpx_selection_points">%1$s\n punten</string>
     <string name="gpx_selection_track">%1$s\n Track %2$s</string>
     <string name="gpx_available_current_track">Huidige geregistreerde track</string>
-    </resources>
+    <string name="save_as_favorites_points">Bewaar als groep van favorieten</string>
+    <string name="loading_smth">Laad %1$s …</string>
+    <string name="map_widget_plain_time">Huidige tijd</string>
+    <string name="select_destination_and_intermediate_points">Kies routepunten</string>
+    <string name="layer_amenity_label">Tekstlabels</string>
+    <string name="gpx_wpt">Routepunt</string>
+    <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
+    <string name="delay_navigation_start">Start navigatie met vertraging</string>
+    <string name="selected">gekozen</string>
+    <string name="gpx_split_interval">Verdeel in stukken elke …</string>
+    <string name="gpx_info_waypoints">Routepunten: %1$s </string>
+	</resources>
