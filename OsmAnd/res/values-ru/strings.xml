@@ -1712,7 +1712,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="delay_navigation_start">Старт навигации по тайм-ауту</string>
     <string name="save_as_favorites_points">Сохранить как группу избранных</string>
     <string name="select_destination_and_intermediate_points">Выбрать путевые точки</string>
-    <string name="layer_amenity_label">Текстовые метки</string>
+    <string name="layer_amenity_label">Метки точек</string>
     <string name="selected_gpx_info_show">\n\nНажать и удерживать для просмотра на карте</string>
     <string name="selected">выбранные</string>
     <string name="gpx_info_waypoints">Путевые точки: %1$s </string>
