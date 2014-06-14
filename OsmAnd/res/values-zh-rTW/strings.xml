@@ -1852,7 +1852,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="gpx_info_start_time">開始時間：%1$tF,  %1$tT </string>
 	<string name="gpx_info_end_time">結束時間：%1$tF,  %1$tT </string>
 	<string name="gpx_info_average_speed">平均速度：%1$s </string>
-	<string name="gpx_info_asc_altitude">下降坡/上升坡：%1$s</string>
+	<string name="gpx_info_asc_altitude">下坡路/上坡路：%1$s</string>
     <string name="gpx_timespan">時間跨度：%1$s</string>
 	<string name="gpx_timemoving">移動時間：%1$s</string>
     <string name="gpx_selection_segment_title">區段</string>
