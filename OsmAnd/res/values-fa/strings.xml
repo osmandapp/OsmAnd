@@ -1872,5 +1872,5 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="gpx_available_current_track">ثبت مسیر فعلی</string>
     <string name="save_as_favorites_points">ذخیره گروه در مورد علاقه های شما</string>
     <string name="select_destination_and_intermediate_points">انتخاب ایستگاههای بین راه</string>
-    <string name="layer_amenity_label">متن برچسب</string>
+    <string name="layer_amenity_label">برچسب نقطه</string>
     </resources>
