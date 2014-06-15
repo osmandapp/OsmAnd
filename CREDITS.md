@@ -8,3 +8,4 @@
  * Alexey Pelykh - C++ developer, created native library and made application much snappier.
  * Max (Zahnstocher) - Java contributor, active forum participant.
  * Harry van der Wolf - contributor (contribute to country boundaries + configuration file + address files and else), active forum participant.
+ * Robin `ypid` Schneider - opening hours contributor
