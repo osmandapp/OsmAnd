@@ -1842,5 +1842,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="gpx_wpt">Punkt trasy</string>
     <string name="save_as_favorites_points">Zapisz jako grupę ulubionych</string>
     <string name="select_destination_and_intermediate_points">Wybierz punkty</string>
-    <string name="layer_amenity_label">Etykiety tekstowe</string>
+    <string name="layer_amenity_label">Etykiety punktów</string>
     </resources>

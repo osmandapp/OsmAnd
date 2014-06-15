@@ -365,9 +365,9 @@
 <string name="amenity_type_sustenance">Alimentació i beguda</string>
 <string name="amenity_type_tourism">Turisme</string>
 <string name="amenity_type_transportation">Transports</string>
-<string name="indexing_address">S\'estan indexant les adreces...</string>
-<string name="indexing_map">S\'està indexant el mapa...</string>
-<string name="indexing_poi">S\'estan indexant els PDI...</string>
+<string name="indexing_address">S\'estan indexant les adreces-…</string>
+<string name="indexing_map">Indexant el mapa…</string>
+<string name="indexing_poi">S\'estan indexant els PDI …</string>
 <string name="indexing_transport">S\'estan indexant els transports...</string>
 <string name="poi_filter_custom_filter">Filtre personalitzat</string>
 <string name="poi_filter_for_tourists">Per a turistes</string>
@@ -801,7 +801,7 @@
 	\n\t* o entre els teus preferits ja predefinits
 	\n\n Per qualsevol selecció un menú de context o una barra d\'accions ofereix opcions com \'Indicacions\' or \'Mostra al mapa\', etc.
 	</string>
-<string name="add_waypoint_dialog_added">La fita «{0}» s\'ha afegit correctament</string>
+<string name="add_waypoint_dialog_added">La fita «{0}» de la traça GPX s\'ha afegit correctament</string>
 <string name="add_waypoint_dialog_title">Afegeix una fita a la traça GPX enregistrada</string>
 <string name="version_index_is_big_for_memory">L\'índex «{0}» no cap a la memòria</string>
 <string name="version_index_is_not_supported">La versió de l\'índex «{0}» no està suportada</string>
@@ -854,11 +854,13 @@
 \n\nSota «Font del mapa…» podeu triar entre usar els mapes vectorials (per defecte, també necessaris a la navegació sense connexió) o les fonts de tessel·la predeterminades (en connexió o prèviament descarregades) (per això cal activar el connector «Mapes en línia» a «Opcions» → «Connectors»), o mapes creats manualment usant per exemple OsmAndCreator en el vostre PC.
 \n\n\'OsmAnd també suporta fonts personalitzades.
 	</string>
-<string name="tip_map_context_menu_t">"\tEl menú contextual de mapa esta disponible prement i aguantant en el mapa o prement el boto de la bola de desplaçament.
-\n\tAixò produeix una caixa amb les coordenades del punt.Per obrir el menú de diàleg del mapa,toca\'l.(O prem i aguanta per amagar la caixa un altre cop.)
-\n\tEl menú contextual conte totes les accions referents a un punt(localització). "</string>
-<string name="tip_initial_t">"\tOsmAnd es una aplicació de navegació amb moltes característiques.
-\n\tCom a una introducció bàsica alguns consells s\'enllaçen a la pantalla principal. "</string>
+<string name="tip_map_context_menu_t">El menú contextual \'Usa posició\' inclou totes les opcions relatives al punt (posició).
+	\n\nEstà disponible prement i aguantant a qualsevol punt en el mapa (i llavors seleccionant el seu marcador) o prement el boto de la bola de desplaçament o seleccionant \'Menú\'→ \Usa posició\' (en les dues darreres opcions s'agafa el centre del mapa com referència).
+	\n\nLa caixa de diàleg s'amaga altre cop prement i aguantant dins seu.
+	</string>
+<string name="tip_initial_t">OsmAnd és una aplicació de navegació amb moltes funcionalitats.
+		\n\nCom a introducció bàsica, s\'enllacen alguns consells i dreceres via \'Menú\'→ \'Concells\' de la pantalla del mapa.
+	</string>
 <string name="send_location_way_choose_title">Comparteix l\'ubicació usant</string>
 <string name="old_map_index_is_not_supported">Format de mapa discontinuat «{0}» no esta suportat</string>
 <string name="select_max_zoom_preload_area">Selecciona el màxim zoom per precarregar</string>
@@ -1856,5 +1858,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="gpx_available_current_track">Traça actual en gravació</string>
     <string name="save_as_favorites_points">Guarda com grup de preferits</string>
     <string name="select_destination_and_intermediate_points">Selecciona punts de pas</string>
-    <string name="layer_amenity_label">Etiquetes de text</string>
+    <string name="layer_amenity_label">Etiquetes dels punts</string>
     </resources>

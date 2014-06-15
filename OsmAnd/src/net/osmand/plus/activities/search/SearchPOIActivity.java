@@ -440,7 +440,10 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			title = R.string.search_POI_level_btn;
 			enabled = (taskAlreadyFinished || currentSearchTask.getStatus() != Status.RUNNING) && filter.isSearchFurtherAvailable();
 		} else if (filter != null) {
-			title = R.string.search_button;
+			// TODO: for search-by-name case, as long as filter text field is empty, we could disable the search button (with title search_button) until at least 2 characters are typed
+			//title = R.string.search_button;
+			// The following is needed as it indicates that search radius can be extended in search-by-name case
+			title = R.string.search_POI_level_btn;
 			enabled = (taskAlreadyFinished || currentSearchTask.getStatus() != Status.RUNNING) && filter.isSearchFurtherAvailable();
 		}
 		if (searchPOILevel != null) {
