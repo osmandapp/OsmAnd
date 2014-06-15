@@ -25,6 +25,7 @@ public class MapRoutePlanControl extends MapControls {
 		routePlanButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				notifyClicked();
 				mapActivity.getRoutingHelper().setRoutePlanningMode(true);
 				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 				mapActivity.refreshMap();

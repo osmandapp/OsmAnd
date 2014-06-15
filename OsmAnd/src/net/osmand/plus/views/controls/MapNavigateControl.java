@@ -4,7 +4,6 @@ import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -12,8 +11,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.ShadowText;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.ShadowText;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -26,6 +25,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.text.TextPaint;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -38,7 +38,7 @@ public class MapNavigateControl extends MapControls {
 	private Bitmap mapMagnifier;
 	private TextPaint counterTextPaint;
 	private Paint bitmapPaint;
-	private static AtomicInteger startCounter = new AtomicInteger(); 
+	private static long startCounter = 0; 
 	
 	
 	public MapNavigateControl(MapRouteInfoControl ri,  MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
@@ -53,25 +53,30 @@ public class MapNavigateControl extends MapControls {
 	
 	public void startCounter() {
 		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		startCounter.set(settings.DELAY_TO_START_NAVIGATION.get());
-		delayStart = new Runnable() {
-			@Override
-			public void run() {
-				int cnt = startCounter.decrementAndGet();
-				if (cnt == 0) {
-					startNavigation();
-				} else if (cnt > 0)
-					mapActivity.refreshMap();
-				showUIHandler.postDelayed(delayStart, 1000);
-			}
-		};
-		if(startCounter.get() > 0) {
+		if (startCounter <= 0) {
+			startCounter = System.currentTimeMillis() + settings.DELAY_TO_START_NAVIGATION.get() * 1000;
+			delayStart = new Runnable() {
+				@Override
+				public void run() {
+					if (startCounter > 0) {
+						if (System.currentTimeMillis() > startCounter) {
+							startCounter = 0;
+							startNavigation();
+						} else {
+							mapActivity.refreshMap();
+							showUIHandler.postDelayed(delayStart, 1000);
+						}
+					}
+				}
+			};
 			delayStart.run();
 		}
+		
 	}
 	
+	
 	private void startNavigation() {
-		startCounter.set(-1);
+		stopCounter();
 		OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if(routingHelper.isFollowingMode()) {
@@ -99,6 +104,7 @@ public class MapNavigateControl extends MapControls {
 		navigateButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				notifyClicked();
 				startNavigation();
 			}
 		});
@@ -117,7 +123,7 @@ public class MapNavigateControl extends MapControls {
 	@Override
 	public void hideControls(FrameLayout layout) {
 		removeButton(layout, navigateButton);
-		startCounter.set(-1);
+		stopCounter();
 	}
 
 	@Override
@@ -127,10 +133,15 @@ public class MapNavigateControl extends MapControls {
 		}
 	}
 	
+
+	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+		stopCounter();
+		return false;
+	}
+	
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		startCounter.set(-1);
+		stopCounter();
 		if (navigateShadow.getBounds().contains((int) point.x, (int) point.y)) {
-			startCounter.set(-1);
 			openDialog();
 			return true;
 		}
@@ -155,10 +166,10 @@ public class MapNavigateControl extends MapControls {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				notifyClicked();
 				dialog.dismiss();
 				mapActivity.getMyApplication().getSettings().DELAY_TO_START_NAVIGATION.set(opt.get(which));
 				startCounter();
-				
 			}
 		});
 		bld.show();
@@ -186,8 +197,8 @@ public class MapNavigateControl extends MapControls {
 		if(navigateShadow.getBounds().width() > 0) {
 			navigateShadow.draw(canvas);
 		}
-		int get = startCounter.get();
-		if (get > 0) {
+		if (startCounter > 0) {
+			int get = (int) ((startCounter -System.currentTimeMillis())  / 1000l);
 			final String text = get + "";
 			float length = counterTextPaint.measureText(text);
 			ShadowText.draw(text, canvas, navigateButton.getLeft() + (navigateButton.getWidth() - length - 2) / 2,
@@ -207,5 +218,10 @@ public class MapNavigateControl extends MapControls {
 			width = buttonDrawable.getMinimumWidth();
 		}
 		return width ;
+	}
+
+
+	public void stopCounter() {
+		startCounter = 0;
 	}
 }

@@ -40,6 +40,7 @@ public class MapMenuControls extends MapControls {
 				// double lon = activity.getMapView().getLongitude();
 				// MainMenuActivity.backToMainMenuDialog(activity, new LatLon(lat, lon));
 				mapActivity.getMapActions().openOptionsMenuAsList();
+				notifyClicked();
 			}
 		});
 	}

@@ -90,6 +90,7 @@ public class MapRouteInfoControl extends MapControls implements IRouteInformatio
 		infoButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				notifyClicked();
 				if(dialog != null) {
 					hideDialog();
 				} else {
