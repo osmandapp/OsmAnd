@@ -114,7 +114,8 @@
 		<activity android:name="net.osmand.plus.activities.SettingsNavigationActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.monitoring.SettingsMonitoringActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.rastermaps.SettingsRasterMapsActivity" android:configChanges="keyboardHidden|orientation"></activity>
-		
+		<activity android:name=".routesteps.RouteStepsActivity"/>
+
 		<activity android:name="net.osmand.plus.osmedit.SettingsOsmEditingActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.development.SettingsDevelopmentActivity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.audionotes.SettingsAudioVideoActivity" android:configChanges="keyboardHidden|orientation"></activity>

@@ -86,7 +86,7 @@ public class StackWidgetView extends ViewGroup {
 	
 	
 	public void addStackView(BaseMapWidget v) {
-		stackViews.add(v);
+			stackViews.add(v);
 		v.setShadowColor(shadowColor);
 		StackWidgetView.this.addView(v, getChildCount());
 	}

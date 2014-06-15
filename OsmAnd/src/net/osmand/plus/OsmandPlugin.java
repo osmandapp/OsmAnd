@@ -85,8 +85,9 @@ public abstract class OsmandPlugin {
 			installedPlugins.add(parking);
 		}
 
-		final RouteStepsPlugin routeSteps = new RouteStepsPlugin(app);
-		installPlugin(ROUTE_STEPS_PLUGIN_COMPONENT, RouteStepsPlugin.ID, app, routeSteps);
+		//final RouteStepsPlugin routeSteps = new RouteStepsPlugin(app);
+		//installPlugin(ROUTE_STEPS_PLUGIN_COMPONENT, RouteStepsPlugin.ID, app, routeSteps);
+		installedPlugins.add(new RouteStepsPlugin(app));
 
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
