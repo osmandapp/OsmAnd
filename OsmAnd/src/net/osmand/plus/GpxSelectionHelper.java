@@ -39,6 +39,7 @@ public class GpxSelectionHelper {
 	
 	public void clearAllGpxFileToShow() {
 		selectedGPXFiles.clear();
+		saveCurrentSelections();
 	}
 	
 	public boolean isShowingAnyGpxFiles() {

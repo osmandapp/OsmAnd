@@ -48,11 +48,9 @@ public class LiveMonitoringHelper  {
 		if (OsmAndLocationProvider.isPointAccurateForRouting(location) && isLiveMonitoringEnabled()
 				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 			long locationTime = System.currentTimeMillis();
-			//* 1000 in next line seems to be wrong with new IntervalChooseDialog
-			//if (time - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get() * 1000) {
 			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
 				LiveMonitoringData data = new LiveMonitoringData((float)location.getLatitude(), (float)location.getLongitude(),
-						(float) location.getAltitude(),(float) location.getSpeed(),(float) location.getAccuracy(), (float) location.getBearing(), locationTime );
+						(float)location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
 				new LiveSender().execute(data);
 				lastTimeUpdated = locationTime;
 			}
@@ -141,7 +139,7 @@ public class LiveMonitoringHelper  {
 			DefaultHttpClient httpclient = new DefaultHttpClient(params);
 			// Parse the URL and let the URI constructor handle proper encoding of special characters such as spaces
 			URL u = new URL(url);
-			URI uri = new URI(u.getProtocol(), u.getAuthority(), u.getHost(), u.getPort(), u.getPath(), u.getQuery(), u.getRef());
+			URI uri = new URI(u.getProtocol(), u.getUserInfo(), u.getHost(), u.getPort(), u.getPath(), u.getQuery(), u.getRef());
 			HttpRequestBase method = new HttpGet(uri);
 			log.info("Monitor " + uri);
 			HttpResponse response = httpclient.execute(method);

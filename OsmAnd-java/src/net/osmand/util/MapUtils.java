@@ -156,11 +156,13 @@ public class MapUtils {
 	 */
 	
 	public static double getTileNumberX(float zoom, double longitude){
-		if(longitude == 180d) {
-			return getPowZoom(zoom) - 1;
-		}
 		longitude = checkLongitude(longitude);
-		return (longitude + 180d)/360d * getPowZoom(zoom);
+		final double powZoom = getPowZoom(zoom);
+		double dz = (longitude + 180d)/360d * powZoom;
+		if (dz >= powZoom) {
+			return powZoom - 0.01;
+		}
+		return dz;
 	}
 	
 	public static double getTileNumberY(float zoom,  double latitude){

@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
@@ -1864,4 +1864,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="selected_gpx_info_show">\n\nZur Darstellung auf der Karte Antippen und Halten</string>
     <string name="delay_navigation_start">Navigation mit Verzögerung starten</string>
     <string name="selected">ausgewählte</string>
+    <string name="save_as_favorites_points">als Favoriten-Gruppe speichern</string>
+    <string name="select_destination_and_intermediate_points">Wegpunkte auswählen</string>
+    <string name="gpx_split_interval">Trennungs-Intervall wählen</string>
+    <string name="gpx_info_subtracks">"Spurteile: %1$s "</string>
+	<string name="osmo_edit_color">Darstellungsfarbe</string>
     </resources>

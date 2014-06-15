@@ -1611,8 +1611,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n * \'Vinter og ski\' giver en visning af et (snedækket) vinterlandskab og viser globale skiløjper og lifter (hent \'World ski\' kortet)
 	</string>
     <string name="route_descr_destination"> </string>
-    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder</string>
-	<string name="base_world_map">Verdensgrundkort</string>
+    <string name="base_world_map">Verdensgrundkort</string>
 	
     
     
@@ -1679,7 +1678,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="routing_attr_short_way_name">Korteste rute</string>
 	<string name="routing_attr_short_way_description">Anvend korteste rute</string>
 	<string name="route_info">Ruteinformation</string>
-    <string name="select_gpx">Vælg GPX …</string>
+    <string name="select_gpx">Vælg GPX…</string>
     <string name="route_preferences">Ruteindstillinger</string>
     <string name="route_descr_select_destination">Vælg destination</string>
     <string name="route_descr_select_on_map">Vælg på kort…</string>
@@ -1780,8 +1779,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="share_fav">Del</string>
 	<string name="share_fav_subject">Favoritter delt via Osmand</string>
 	<string name="use_points_as_intermediates">Beregn rute mellem punkter</string>
-    <string name="tip_recent_changes_1_8_alpha">"Ændringer i 1.8:\n          * Beregn rute mellem rutepunkter i GPX-spor\n          * Ændret udseende for hentning af lande (understøtter søgning på lokale navne)\n          * Understøtter GPX/KML import (konverter fra KML til GPX)\n          * GPX-spor er flyttet til \'Mine data\'\n          * Opdel GPX-spor efter afstand og checke højdeforskel/hastighed
-\n          * Auto start navigation efter forsinkelse "</string>
+    <string name="tip_recent_changes_1_8_alpha">"Ændringer i 1.8:\n\t* Beregn rute mellem rutepunkter i GPX-spor\n\t* Ændret udseende for hentning af lande (understøtter søgning på lokale navne)\n\t* Understøtter GPX/KML import (konverter fra KML til GPX)\n\t* GPX-spor er flyttet til \'Mine data\'\n\t* Opdel GPX-spor efter afstand og checke højdeforskel/hastighed\n\t* Auto start navigation efter forsinkelse "</string>
     <string name="hours_ago">timer siden</string>
     <string name="minutes_ago">minutter siden</string>
     <string name="seconds_ago">sekunder siden</string>
@@ -1867,7 +1865,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="my_data_activity">Mine steder</string>
     <string name="gpx_file_is_empty">GPX-spor er tomt</string>
     <string name="gpx_info_waypoints">Rutepunkter: %1$s </string>
-	<string name="gpx_info_distance">"Afstand: %1$s (%2$s punkter) "</string>
+	<string name="gpx_info_distance">Afstand: %1$s (%2$s punkter) </string>
 	<string name="gpx_info_start_time">Startid: %1$tF,  %1$tT </string>
 	<string name="gpx_info_end_time">Sluttid: %1$tF,  %1$tT </string>
 	<string name="gpx_info_average_speed">Gennemsnitshastighed: %1$s </string>
@@ -1895,5 +1893,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="loading_smth">Indlæser %1$s…</string>
     <string name="save_as_favorites_points">Gem som en gruppe af favoritter</string>
     <string name="select_destination_and_intermediate_points">Vælg rutepunkter</string>
-    <string name="layer_amenity_label">Tekstetiketter</string>
-    </resources>
+    <string name="layer_amenity_label">Punktetiketter</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder</string>
+	</resources>

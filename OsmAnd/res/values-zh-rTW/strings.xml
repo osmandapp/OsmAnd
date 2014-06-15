@@ -20,14 +20,14 @@
     <string name="context_menu_item_first_intermediate_point">增為第一個中途點</string>
     <string name="add_as_last_destination_point">增為最後一個中途點</string>
     <string name="add_as_first_destination_point">增為第一個中途點</string>
-    <string name="replace_destination_point">替換目的地點</string>
-    <string name="new_destination_point_dialog">您已經有設定了目的地點。</string>
+    <string name="replace_destination_point">替換目的地標點</string>
+    <string name="new_destination_point_dialog">您已經有設定了目的地標點。</string>
     <string name="target_points">中途點</string>
     <string name="intermediate_point_too_far">中途點 %1$ 離最近的道路太遠。</string>
     <string name="arrived_at_intermediate_point">您已經來到您的中途點</string>
     <string name="context_menu_item_intermediate_point">增為中途點</string>
     <string name="map_widget_intermediate_distance">中途點</string>
-    <string name="ending_point_too_far">目的地離最近的道路太遠。</string>
+    <string name="ending_point_too_far">結束標點離最近的道路太遠。</string>
     <string name="btn_add_tag">增加旗標</string>
     <string name="btn_advanced_mode">進階模式…</string>
     <string name="poi_filter_parking">停車場</string>
@@ -170,7 +170,7 @@
 	<string name="global_app_allocated_memory">已配置記憶</string>
 	<string name="native_app_allocated_memory">原生記憶體總計</string>
 	<string name="update_downlod_list">重新載入列表</string>
-	<string name="starting_point_too_far">出發點離最近的道路太遠。</string>
+	<string name="starting_point_too_far">起始標點離最近的道路太遠。</string>
 	<string name="shared_location">分享位置</string>
 	<string name="osmand_parking_event">由停車場取車</string>
 	<string name="osmand_parking_warning">警示</string>
@@ -222,7 +222,7 @@
 	<string name="left_side_navigation">左駕</string>
 	<string name="left_side_navigation_descr">選擇左駕的國家</string>
 	<string name="download_link_and_local_description">點選此處下載或更新離線地圖檔案。\n按任何一項查看細節，按住即可解除或刪除。目前裝置上的資料空間剩(%1$s 可用)：</string>
-	<string name="unknown_from_location">出發地點尚未決定</string>
+	<string name="unknown_from_location">起始標點尚未決定</string>
 	<string name="unknown_location">未知地理位置</string>
 	<string name="modify_transparency">調整透明度(0 - 透明, 255 - 不透明)</string>
 	<string name="confirm_interrupt_download">您要中斷檔案下載嗎？</string>
@@ -262,7 +262,7 @@
 	<string name="gpx_visibility_txt">能見度</string>
 	<string name="gpx_tags_txt">旗標</string>
 	<string name="gpx_description_txt">敘述</string>
-	<string name="validate_gpx_upload_name_pwd">請指定 OSM 的帳號、密碼以上傳 GPX 檔案。</string>
+	<string name="validate_gpx_upload_name_pwd">請指定 OSM 的帳號、密碼用以上傳 GPX 檔案。</string>
     	<string name="default_buttons_support">支援</string>
 	<string name="support_new_features">支援新功能</string>
 	<string name="show_ruler_level">顯示比例尺</string>	
@@ -471,7 +471,7 @@
 	<string name="local_index_mi_upload_gpx">傳送到 OSM</string>
 	<string name="show_more_map_detail">顯示更多的地圖細節</string>
 	<string name="show_more_map_detail_descr">在放大地圖時已顯示部份向量地圖細節(道路等)</string>
-	<string name="favourites_delete_multiple_succesful">我的最愛點已刪除成功。</string>
+	<string name="favourites_delete_multiple_succesful">我的最愛標點已刪除成功。</string>
 	<string name="favorite_delete_multiple">您將刪除 %1$d 個我的最愛與 %2$d 我的最愛群組，您確定？</string>
 	<string name="favorite_home_category">住家</string>
 	<string name="favorite_friends_category">朋友</string>
@@ -553,11 +553,11 @@
 	<string name="tip_location_sharing_t">您可以在旅途中分享有趣的地方和位置，透過\'地圖快顯功能表\' -&gt; \'分享位置\'選單，讓您的家人或朋友。
 		\n\n然後選擇分享位置的方式。選項有：電子郵件、SMS(文字)或複製座標到剪貼簿。
 	</string>
-	<string name="tip_favorites">我的最愛點</string>
-	<string name="tip_favorites_t">常用地點可儲存成我的最愛，具體如下： 
-		\n\n叫出\'使用位置\'的快顯功能表，選\'加到我的最愛\'，然後輸入名字即可將某一點位置設為我的最愛。事後可經由\'選單\' -&gt;\'我的最愛\'找到它。
+	<string name="tip_favorites">我的最愛標點</string>
+	<string name="tip_favorites_t">常用標點可儲存成我的最愛，具體如下： 
+		\n\n叫出\'使用位置\'的快顯功能表，選\'加到我的最愛\'，然後輸入名字即可將某一標點位置設為我的最愛。事後可經由\'選單\' -&gt;\'我的最愛\'找到它。
 		\n\n在\'我的最愛\'清單中輕按提供的任何選項，例如導航去那裡、編輯或刪除它。
-		\n\n欲將我的最愛顯示在地圖上，要在地圖螢幕上啟用圖層\'我的地點\'，由\'選單\' -&gt;\'地圖圖層\'即可。
+		\n\n欲將我的最愛標點全部顯示在地圖上，要在地圖螢幕上啟用圖層\'我的最愛\'，由\'選單\' -&gt;\'地圖圖層\'即可。
 	</string>
 	<string name="error_doing_search">離線查尋發生錯誤</string>
 	<string name="search_offline_geo_error">無法解析地理含義 \'%s\'</string>
@@ -578,8 +578,8 @@
 	<string name="tip_navigation_t">為了取得指引到一個地方，可以直接在地圖上長按它，然然後再點選其敘述框\'指引到\'，或著選擇\'指引\'後在查尋結果清單或是我的最愛清單點選進入。
 		\n\n目的地標點以橙色旗標在地圖上，同時 OsmAnd 會顯示達到目的地的距離與它的方位(橙色三角形)。
 		\n\n您可以選擇到任何一個\'隨行\'的路線，這意味著 OsmAnd 將實地引導您，給您語音指示（如果有啟用語音），或者您可以選擇\'只顯示\'路線在地圖上，它會產生一個靜態的路線不會有任何實地引導或隨著您的移動而調整。
-		\n\n顯示從非您目前的位置中，選擇任意點到目的地的路線，接著在地圖上選擇\'指引來自\'。
-		\n\n如果您選擇\'指引來自\'連同\'隨行\'，只要它發現則 OsmAnd 將切換到您的實際位置（所以這個可以用於在快速啟動路線之前找到位置），當\'指引來自\'在與\'只顯示\'結合，只是告訴您從任意點的路線，您可選擇不包括後續的更新。
+		\n\n顯示從非您目前的位置中，選擇任意標點到目的地的路線，接著在地圖上選擇\'指引來自\'。
+		\n\n如果您選擇\'指引來自\'連同\'隨行\'，只要它發現則 OsmAnd 將切換到您的實際位置（所以這個可以用於在快速啟動路線之前找到位置），當\'指引來自\'在與\'只顯示\'結合，只是告訴您從任意標點的路線，您可選擇不包括後續的更新。
 	</string>
 	<string name="tip_search">查尋</string>
 	<string name="tip_search_t">您可以在地圖上直接查尋地點，經由 \'使用位置 \' → \'附近查尋\'，或是透過 \'選單 \'→ \'查尋 \'。
@@ -661,7 +661,7 @@
 	<string name="specified_dir_doesnt_exist">指定的目錄不存在。</string>
 	<string name="application_dir">存儲目錄</string>
 	
-	<string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的最愛內的地點須以舊版程式匯出後再用新版程式匯入。</string>
+	<string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的最愛內的標點須以舊版程式匯出後再用新版程式匯入。</string>
 	<string name="build_installed">編譯 {0} 成功安裝({1})。</string>
 	<string name="downloading_build">下載編譯…</string>
 	<string name="install_selected_build">您要安裝 OsmAnd - {0} 由{1} {2} MB ?</string>
@@ -733,7 +733,7 @@
 	<string name="fav_imported_sucessfully">我的最愛匯入成功</string>
 	<string name="fav_file_to_load_not_found">在 {0} 裡未找到含有我的最愛的 GPX 檔案</string>
 	<string name="fav_saved_sucessfully">我的最愛存到{0}</string>
-	<string name="no_fav_to_save">沒有我的最愛點要存</string>
+	<string name="no_fav_to_save">沒有我的最愛標點要儲存</string>
 	<string name="import_fav">匯入</string>
 	<string name="export_fav">匯出</string>
 	<string name="error_occurred_loading_gpx">載入 GPX 時發生錯誤</string>
@@ -861,8 +861,8 @@
 	<string name="downloading_list_indexes">下載可以用的地區列表…</string>
 	<string name="list_index_files_was_not_loaded">無法由 osmand.net 取得地區列表。</string>
 	<string name="show_poi_on_map">在地圖上顯示</string>
-	<string name="fav_points_edited">我的最愛已被更改</string>
-	<string name="fav_points_not_exist">沒有我的最愛點存在</string>
+	<string name="fav_points_edited">我的最愛標點已被更改</string>
+	<string name="fav_points_not_exist">沒有我的最愛標點存在</string>
 	<string name="update_existing">取代</string>
 	<string name="only_show">顯示路線</string>
 	<string name="follow">開始導航</string>
@@ -993,11 +993,11 @@
 	<string name="default_buttons_no">否</string>
 	<string name="add_favorite_dialog_top_text">輸入我的最愛名稱</string>
 	<string name="add_favorite_dialog_default_favourite_name">我的最愛</string>
-	<string name="add_favorite_dialog_favourite_added_template">我的最愛點 \'\'{0}\'\' 新增成功。</string>
+	<string name="add_favorite_dialog_favourite_added_template">我的最愛標點 \'\'{0}\'\' 新增成功。</string>
 	<string name="favourites_context_menu_edit">編輯我的最愛</string>
 	<string name="favourites_context_menu_delete">刪除我的最愛</string>
-	<string name="favourites_remove_dialog_msg">移除我的最愛點 \'%s\'？</string>
-	<string name="favourites_remove_dialog_success">我的最愛點 {0} 刪除成功。</string>
+	<string name="favourites_remove_dialog_msg">移除我的最愛標點 \'%s\'？</string>
+	<string name="favourites_remove_dialog_success">我的最愛標點 {0} 刪除成功。</string>
 	<string name="osb_add_dialog_title">輸入錯誤說明</string>
 	<string name="osb_add_dialog_success">錯誤回報成功建立</string>
 	<string name="osb_add_dialog_error">發生的異常：錯誤回報未建立</string>
@@ -1048,14 +1048,14 @@
     <string name="plugin_distance_point_ele">標高</string>
     <string name="gpx_file_name">GPX 檔案名稱</string>
     <string name="gpx_saved_sucessfully">GPX 檔案已完全成功儲存到{0}</string>
-    <string name="osmand_distance_planning_plugin_description">建立測量點之間的距離路徑（或是利用/修改現有的 GPX 檔案）。另存為 GPX，可以用來規劃 GPX 路線。</string>
+    <string name="osmand_distance_planning_plugin_description">建立測量標點之間的距離路徑（或是利用/修改現有的 GPX 檔案）。另存為 GPX，可以用來規劃 GPX 路線。</string>
     <string name="osmand_distance_planning_plugin_name">距離計算器和規劃工具</string>
     <string name="local_osm_changes_backup_failed">備份 OSM 的變更失敗</string>
     <string name="local_osm_changes_backup">備份 OSM 的變更</string>
     <string name="plugin_distance_point_hdop">精確度</string>
-    <string name="use_distance_measurement_help">* 點選標記一個點。\n 
-        * 在地圖上按住去刪除先前的點。\n
-        * 在點上按住以檢視並附加敘述。\n
+    <string name="use_distance_measurement_help">* 點選標記一個標點。\n 
+        * 在地圖上按住去刪除先前的標點。\n
+        * 在標點上按住以檢視並附加敘述。\n
         * 在測量小工具上點擊可看到更多作用。</string>
     <string name="default_buttons_do_not_show_again">不要再顯示</string>
     <string name="distance_measurement_start_editing">開始編輯</string>
@@ -1111,7 +1111,7 @@
     <string name="local_indexes_cat_srtm">等高線資料</string>
     <string name="local_indexes_cat_av">音訊/視訊資料</string>
     <string name="stop_routing_confirm">您確定要停止導航嗎？</string>
-    <string name="clear_dest_confirm">您確定想要清除您的目的地點(含中途點)？</string>
+    <string name="clear_dest_confirm">您確定想要清除您的目的地標點(含中途點)？</string>
     <string name="precise_routing_mode">精確的路線 (alpha)</string>
     <string name="precise_routing_mode_descr">允許去預估精確而無差錯的路線。仍然有距離限制並且緩慢。</string>
     <string name="recording_context_menu_show">顯示</string>
@@ -1351,9 +1351,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 支援的國家的名單 (基本上世界範圍內!）：
 阿富汗、阿爾巴尼亞、阿爾及利亞、安道爾、安哥拉、安圭拉、安地卡及巴布達、阿根廷、亞美尼亞、阿路巴、澳大利亞、奧地利、亞塞拜然、巴哈馬、巴林、孟加拉國、巴巴多斯、白俄羅斯、比利時、貝里斯、貝寧、百慕達、不丹、玻利維亞、博內爾、波士尼亞和黑塞哥維那、博茨瓦納、巴西、英屬維爾京群島、汶萊、保加利亞、布吉納法索、蒲隆地、柬埔寨、喀麥隆、加拿大、維德角、中非共和國、查德、智利、中國、哥倫比亞、科摩羅、剛果、哥斯大黎加、象牙海岸、克羅地亞、古巴、庫拉索、賽普勒斯、捷克共和國、丹麥、吉布地、多米尼克、多明尼加共和國、厄瓜多爾、埃及、薩爾瓦多、赤道幾內亞、厄立特里亞、愛沙尼亞、埃塞俄比亞、斐濟、芬蘭、法國、法屬圭亞那、法屬玻里尼西亞、加蓬、岡比亞、格魯吉亞、德國、加納、直布羅陀、希臘、格陵蘭島、格瑞那達、哥德洛普島、關島、瓜地馬拉、根西島、幾內亞、幾內亞比索、蓋亞納、海地、梵蒂岡、宏都拉斯、香港、匈牙利、冰島、印度、印尼、伊朗、伊拉克、愛爾蘭、曼城島、以色列、義大利、牙買加、日本、澤西島、約旦、哈薩克斯坦、肯雅、吉里巴斯、朝鮮和韓國、科威特、吉爾吉斯斯坦、老撾、拉脫維亞、黎巴嫩、賴索托、賴比瑞亞、利比亞、列支敦斯登、立陶宛、盧森堡、澳門、馬其頓、馬達加斯加、馬拉威、馬來西亞、馬爾地夫、馬里、馬爾他、馬丁尼克島、茅利塔尼亞、模里西斯、馬約特、墨西哥、密克羅尼西亞聯邦、摩爾多瓦、摩納哥、蒙古、黑山、蒙特塞拉特、摩洛哥、莫三比克、緬甸、納米比亞、瑙魯、尼泊爾、荷蘭、荷屬安地列斯群島、新赫里多尼亞、紐西蘭、尼加拉瓜、尼日爾、奈及利亞、挪威、阿曼、巴基斯坦、帕勞、巴勒斯坦領土、巴拿馬、巴布亞紐幾內亞、巴拉圭、秘魯、菲律賓、波蘭、葡萄牙、波多黎各、卡塔爾、羅馬尼亞、俄羅斯、盧安達、聖巴泰勒米、聖海倫娜、聖基茨和尼維斯、聖露西亞、聖馬丁島、聖匹島、聖文森及格瑞那丁、薩摩亞、聖馬利諾、沙烏地阿拉伯、塞內加爾、塞爾維亞、塞席爾、塞拉里昂、新加坡、斯洛伐克、斯洛維尼亞、索馬里、南非、格魯吉亞的南、南蘇丹、西班牙、斯里蘭卡、蘇丹、蘇利南、史瓦濟蘭、瑞典、瑞士、敘利亞、臺灣、塔吉克斯坦、坦尚尼亞、泰國、東帝汶、多哥、托克勞、湯加、特立尼達和多巴哥、突尼斯、土耳其、土庫曼斯坦、吐瓦魯、烏干達、烏克蘭、阿拉伯聯合大公國、英國、美國、烏拉圭、烏茲別克斯坦、瓦努阿圖、委內瑞拉、越南、瓦利斯群島和富圖納群島、西撒哈拉、葉門、尚比亞、辛巴威。
 	</string>
-	<string name="delete_point">刪除點</string>
-    <string name="plugin_distance_point">點</string>
-    <string name="distance_measurement_clear_route">清除所有的點</string>
+	<string name="delete_point">刪除標點</string>
+    <string name="plugin_distance_point">標點</string>
+    <string name="distance_measurement_clear_route">清除所有的標點</string>
     <string name="files_limit">剩餘 %1$d 個檔</string>
     <string name="layer_recordings">錄製階層</string>
     <string name="downloading_file_new">下載中  …</string>
@@ -1642,8 +1642,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
         \n注意：它將不可能在 OsmAnd 和 OsmAnd + 兩者之間共用檔案。 </string>
     <string name="routing_attr_prefer_motorway_name">高速公路優先</string>
 	<string name="routing_attr_prefer_motorway_description">高速公路優先</string>
-	<string name="routing_attr_short_way_name">較短的路</string>
-	<string name="routing_attr_short_way_description">使用較短的路</string>
+	<string name="routing_attr_short_way_name">最短路線</string>
+	<string name="routing_attr_short_way_description">使用最短路線</string>
 	<string name="routing_attr_avoid_toll_name">避開收費道路</string>
 	<string name="routing_attr_avoid_toll_description">避開收費道路</string>
 	<string name="routing_attr_avoid_unpaved_name">避開未鋪路面</string>
@@ -1660,7 +1660,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="route_descr_favorite">我的最愛 …</string>
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
-    <string name="keep_and_add_destination_point">加為目的地點</string>
+    <string name="keep_and_add_destination_point">加為目的地標點</string>
     <string name="use_displayed_track_for_navigation">您是否要將顯示軌跡使用於導航？</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd 預估的路段沒有網際網路</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路線</string>
@@ -1670,7 +1670,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     \n\t* 新的螢幕畫面與路線規劃（更直觀和更強大） 
     \n\t** 注意，在路線設定按鈕之下可用 GPX 路線
     \n\t* 在導航模式下自動隱藏按鈕
-    \n\t* 預估離線路線到 GPX 路線的第一點（\'經過全程軌跡\'選項）
+    \n\t* 預估離線路線到 GPX 路線的第一標點（\'經過全程軌跡\'選項）
 	\n\t* 在隧道主動的模擬 
 	\n\t* 有很多小的 UX (使用者體驗)改進和適用性修復
 	\n\t* 語音速率協助工具設定
@@ -1757,7 +1757,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="share_fav_subject">經由 OsmAnd 分享我的最愛</string>
 	<string name="use_points_as_intermediates">預估兩點之間的路線</string>
     <string name="tip_recent_changes_1_8_alpha">在1.8的變更：
-        * 預估 GPX 軌跡路線點之間的路線
+        * 預估 GPX 軌跡路線標點之間的路線
         * 為下載變更了各國的配置（支援本地名稱搜索）
         * 支援 GPX/KML 匯入(由 KML 轉換為 GPX )
         * GPX軌跡已經移到\'我的資料\'
@@ -1848,19 +1848,19 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="selected_track">已選取軌跡</string>
     <string name="my_tracks">全部追蹤</string>
     <string name="gpx_file_is_empty">GPX 軌跡是空的</string>
-    <string name="gpx_info_distance">距離：%1$s (%2$s個點) </string>
+    <string name="gpx_info_distance">距離：%1$s (%2$s 個標點) </string>
 	<string name="gpx_info_start_time">開始時間：%1$tF,  %1$tT </string>
 	<string name="gpx_info_end_time">結束時間：%1$tF,  %1$tT </string>
 	<string name="gpx_info_average_speed">平均速度：%1$s </string>
-	<string name="gpx_info_asc_altitude">下降/上升：%1$s</string>
+	<string name="gpx_info_asc_altitude">下坡路/上坡路：%1$s</string>
     <string name="gpx_timespan">時間跨度：%1$s</string>
 	<string name="gpx_timemoving">移動時間：%1$s</string>
     <string name="gpx_selection_segment_title">區段</string>
-    <string name="gpx_selection_number_of_points"> %1$s 點</string>
-    <string name="gpx_selection_point">點 %1$s</string>
+    <string name="gpx_selection_number_of_points"> %1$s 標點</string>
+    <string name="gpx_selection_point">標點 %1$s</string>
     <string name="gpx_selection_current_track">錄制</string>
-    <string name="gpx_selection_route_points">%1$s \n路線點 %2$s</string>
-    <string name="gpx_selection_points">%1$s \n個點</string>
+    <string name="gpx_selection_route_points">%1$s \n路線標點 %2$s</string>
+    <string name="gpx_selection_points">%1$s \n個標點</string>
     <string name="gpx_selection_track">%1$s \n軌跡 %2$s</string>
     <string name="gpx_available_current_track">正在錄制的軌跡</string>
     <string name="loading_smth">載入 %1$s …</string>
@@ -1877,5 +1877,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="gpx_info_waypoints">中途點：%1$s </string>
 	<string name="save_as_favorites_points">另存為我的最愛群組</string>
     <string name="select_destination_and_intermediate_points">選擇中途點</string>
-    <string name="layer_amenity_label">文字標籤</string>
+    <string name="layer_amenity_label">標點標籤</string>
     </resources>

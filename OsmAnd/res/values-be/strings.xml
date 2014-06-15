@@ -1855,5 +1855,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="gpx_info_diff_altitude">Перапад вышынь: %1$s</string>
 	<string name="save_as_favorites_points">Захаваць як групу упадабаных</string>
     <string name="select_destination_and_intermediate_points">Абраць кропкі шляху</string>
-    <string name="layer_amenity_label">Тэкставыя пазнакі</string>
+    <string name="layer_amenity_label">Назвы кропак</string>
     </resources>
