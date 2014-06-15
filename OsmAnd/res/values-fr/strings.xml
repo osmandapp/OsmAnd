@@ -350,7 +350,7 @@
   <string name="amenity_type_natural">Nature</string>
   <string name="amenity_type_office">Service</string>
   <string name="amenity_type_other">Autre</string>
-  <string name="amenity_type_shop">Magasin</string>
+  <string name="amenity_type_shop">Commerce</string>
   <string name="amenity_type_sport">Sport</string>
   <string name="amenity_type_sustenance">Restauration</string>
   <string name="amenity_type_tourism">Tourisme</string>
@@ -365,7 +365,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="poi_filter_car_aid">Pour conducteurs</string>
-  <string name="poi_filter_closest_poi">PI le plus proche</string>
+  <string name="poi_filter_closest_poi">PI les plus proches</string>
   <string name="poi_filter_custom_filter">Filtre personnalisé</string>
   <string name="poi_filter_food_shop">Alimentation</string>
   <string name="poi_filter_for_tourists">Pour voyageurs</string>
@@ -376,7 +376,7 @@
   <string name="version_index_is_not_supported">La version de l\'\'index \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="use_osmand_routing_service">Navigation hors-ligne OsmAnd &gt;20km</string>
   <string name="use_osmand_routing_service_descr">Utiliser la navigation hors-ligne pour les longues distances (expérimental)</string>
-  <string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.\n\nLe service utilise alors automatiquement le service en-ligne CloudMade.</string>
+  <string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.\n\nLe service utilise alors automatiquement le service en ligne CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Le répertoire spécifié est introuvable.</string>
   <string name="application_dir">Répertoire de stockage</string>
   
@@ -388,7 +388,7 @@
   <string name="loading_builds">Chargement des versions disponibles…</string>
   <string name="select_build_to_install">Sélectionnez la version d\'OsmAnd à installer</string>
   <string name="contribution_activity">Fonction spéciale pour la version des contributeurs</string>
-  <string name="gps_status_app_not_found">L\'application \'GPS Status\' n\'est pas installée. La chercher dans Market ?</string>
+  <string name="gps_status_app_not_found">L\'application \'GPS Status\' n\'est pas installée. Voulez-vous la chercher dans la boutique d\'application ?</string>
   <string name="voice_is_not_available_msg">Guidage vocal indisponible. Veuillez aller dans les paramètres et choisir les voix à télécharger.</string>
   <string name="voice_is_not_available_title">Aucune donnée vocale n\'est spécifiée</string>
   <string name="daynight_mode_day">Jour</string>
@@ -555,7 +555,7 @@
   <string name="context_menu_item_update_map_confirm">Mettre à jour les données locales depuis internet ?</string>
   <string name="search_history_city">Ville :\n{0}</string>
   <string name="search_history_street">Rue :\n{0}\n{1}</string>
-  <string name="search_history_int_streets">Intersection :\n{0} x {1} dans {2}</string>
+  <string name="search_history_int_streets">Intersection :\n{0} x {1} à {2}</string>
   <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
   <string name="favorite">Favori </string>
   <string name="clear_all">Effacer tout</string>
@@ -677,14 +677,14 @@
   <string name="exit_Button">Quitter</string>
   <string name="map_Button">Carte</string>
   <string name="settings_Button">Paramètres</string>
-  <string name="favorites_Button">Favoris</string>
+  <string name="favorites_Button">Mes lieux</string>
   <string name="search_button">Rechercher</string>
   <string name="search_activity">Rechercher</string>
-  <string name="searchpoi_activity">Choisir PI</string>
+  <string name="searchpoi_activity">Choix de points d\'intérêt</string>
   <string name="search_POI_level_btn">Étendre la recherche</string>
-  <string name="incremental_search_city">Recherche progressive de ville</string>
-  <string name="incremental_search_street">Recherche progressive des rues</string>
-  <string name="incremental_search_building">Recherche progressive des numéros de bâtiment</string>
+  <string name="incremental_search_city">Choisir une ville</string>
+  <string name="incremental_search_street">Choisir une rue</string>
+  <string name="incremental_search_building">Choisir un numéro ou un bâtiment</string>
   <string name="choose_available_region">Choisir une région dans la liste</string>
   <string name="choose_intersected_street">Choisir une intersection</string>
   <string name="Closest_Amenities">Équipements à proximité</string>
@@ -886,10 +886,10 @@
   <string name="transport_search_desc">Recherche de transports en commun</string>
   <string name="favourites_search_desc">Recherche parmi les favoris</string>
   <string name="history_search_desc">Historique des recherches</string>
-  <string name="route_roundabout">Rond-point : prendre la %1$d sortie et continuez pendant</string>
-  <string name="route_kl">Serrez à gauche et continuez pendant</string>
-  <string name="route_kr">Serrez à droite et continuez pendant</string>
-  <string name="rendering_attr_noPolygons_description">Rendre toutes les zones transparentes sur la carte</string>
+  <string name="route_roundabout">Rond-point : prendre la %1$d sortie et continuez</string>
+  <string name="route_kl">Serrez à gauche et continuez</string>
+  <string name="route_kr">Serrez à droite et continuez</string>
+  <string name="rendering_attr_noPolygons_description">Rendre invisibles les surfaces représentant des éléments de terrain</string>
   <string name="rendering_attr_noPolygons_name">Pas de polygones</string>
   <string name="rendering_attr_appMode_name">Profil pour le rendu</string>
   <string name="rendering_attr_appMode_description">Optimisation de la carte selon le profil d\'utilisation</string>
@@ -1608,6 +1608,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
 <string name="arrival_distance_descr">Choisir à quel moment est annoncée l\'arrivée à destination</string>
+<string-array name="arrival_distance_factors">
+<item>Précoce</item>
+<item>Normale</item>
+<item>Tardive</item>
+<item>Dans les derniers mètres</item>
+</string-array>
 <string name="share_fav">Partager</string>
 <string name="share_fav_subject">Favoris partagés via OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un intinéraire entre des points</string>
@@ -1673,9 +1679,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_edit_color">Afficher la couleur</string>
     <string name="osmo_follow">Suivre</string>
     <string name="osmo_sign_in">Se connecter</string>
-    <string name="osmo_create_groups_confirm">Pour créer des groupes que vous devez être un utilisateur enregistré d\'OsMo.</string>
+    <string name="osmo_create_groups_confirm">Pour créer des groupes, vous devez être un utilisateur enregistré d\'OsMo.</string>
     <string name="osmo_credentials_not_valid">Vos identifiants OsMo sont incorrects.</string>
-    <string name="osmo_regenerate_login_ids_confirm">Êtes-vous sûr de régénérer les identifiants personnels ? Tous les appareils connectés à vous ne seront plus capables de vous suivre.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Êtes-vous sûr de souhaiter régénérer vos identifiants personnels ? Les appareils qui vous sont connectés ne seront plus capables de vous suivre.</string>
     <string name="osmo_regenerate_login_ids">Régénérer l\'identifiant de l\'utilisateur</string>
     <string name="osmo_cancel_moving_target">Annuler la cible mobile</string>
     <string name="osmo_center_location">Centrer sur l\'écran</string>
@@ -1691,7 +1697,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="gpx_file_is_empty">La trace GPX est vide</string>
     <string name="selected_track">Traces sélectionnées</string>
     <string name="my_tracks">Toutes les\ntraces</string>
-    <string name="my_favorites">Mes\nfavoris</string>
+    <string name="my_favorites">Mes favoris</string>
     <string name="my_data_Button">Mes lieux</string>
     <string name="my_data_activity">Mes lieux</string>
     <string name="selected_gpx_info_show">\n\nAppui long pour visualiser sur la carte</string>
@@ -1701,14 +1707,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="local_index_gpx_info_show">\n\nAppui long pour afficher les options</string>
 <string name="gpx_info_subtracks">Sections : %1$s </string>
 <string name="gpx_info_waypoints">Points de cheminement : %1$s </string>
-<string name="gpx_info_distance">Distance : %1$s (%2$s points)… </string>
+<string name="gpx_info_distance">Distance : %1$s (%2$s points) </string>
 <string name="gpx_info_start_time">Heure de départ : %1$tF,  %1$tT </string>
 <string name="gpx_info_end_time">Heure d'arrivée : %1$tF,  %1$tT </string>
 <string name="gpx_info_average_speed">Vitesse moyenne : %1$s </string>
 <string name="gpx_info_maximum_speed">Vitesse maximale : %1$s </string>
 <string name="gpx_info_avg_altitude">Altitude moyenne : %1$s</string>
 <string name="gpx_info_diff_altitude">Amplitude altimétrique : %1$s</string>
-<string name="gpx_info_asc_altitude">Dénivellation : %1$s</string>
+<string name="gpx_info_asc_altitude">Dénivelées : %1$s</string>
     <string name="gpx_timespan">Durée : %1$s</string>
 <string name="gpx_timemoving">Temps en déplacement : %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
@@ -1723,7 +1729,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="map_widget_plain_time">Heure</string>
     <string name="loading_smth">Chargement de %1$s …</string>
     <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
-    <string name="select_destination_and_intermediate_points">Sélectionner les points du chemin</string>
-    <string name="layer_amenity_label">Étiquettes textuelles</string>
-    <string name="route_descr_destination">Description</string>
+    <string name="select_destination_and_intermediate_points">Sélectionner les points de cheminement</string>
+    <string name="layer_amenity_label">Étiquette des points</string>
+    <string name="route_descr_destination">Destination</string>
     </resources>
