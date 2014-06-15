@@ -86,8 +86,8 @@
     <string name="close_changeset">Закрыть changeset</string>
 	<string name="zxing_barcode_scanner_not_found">Приложение \'Сканнер штрих-кодов\' не найдено. Искать на Маркете?</string>
     <string name="non_optimal_route_calculation">Быстрое построение маршрута (возможно неоптимально)</string>
-    <string name="download_link_and_local_description">Загрузите или обновите локальные данные. \nЧтобы получить дополнительную информацию о карте, выделите её в списке. Удерживайте карту, если вы хотите удалить или деактивировать.
-Данные на устройстве (%1$s свободно):</string>
+    <string name="download_link_and_local_description">Загрузите или обновите локальные файлы карт.
+\nЧтобы получить дополнительную информацию о карте, выделите её в списке. Удерживайте карту, если вы хотите удалить или деактивировать. Данные на устройстве (%1$s свободно):</string>
 <string name="tip_recent_changes_0_8_3_t">Изменения в 0.8.3:
 	\n\t* Промежуточные точки
 	\n\t* Улучшенное сопровождение по маршруту
@@ -124,7 +124,7 @@
   <string name="local_indexes_cat_tile">Онлайн карты (растровые)</string>
   <string name="local_indexes_cat_map">Локальные карты (векторные)</string>
   
-  <string name="index_settings_descr">Загрузка и управление локальными картами</string>
+  <string name="index_settings_descr">Загрузка и управление локальными файлами карт на вашем устройстве</string>
   <string name="map_online_plugin_is_not_installed">Активируйте плагин онлайн карт, чтобы выбирать различные источники карт</string>
   <string name="map_online_data">Онлайн карты</string>
   <string name="map_online_data_descr">Использовать онлайн карты (кэшируются на SD-носителе)</string>
@@ -329,7 +329,7 @@
   <string name="local_index_items_restored">%1$d из %2$d объектов успешно активированы.</string>
   <string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>
   <string name="local_index_action_do">Вы собираетесь %1$s %2$s объектов. Вы уверены?</string>
-  <string name="local_index_descr_title">Менеджер локальных данных</string>
+  <string name="local_index_descr_title">Управление файлами карт</string>
   <string name="local_index_mi_restore">Активировать</string>
   <string name="local_index_mi_backup">Архив</string>
   <string name="local_index_mi_delete">Удалить</string>
@@ -517,7 +517,7 @@
   <string name="reload">Перезагрузить</string>
   <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие</string>
   <string name="general_settings">Общие</string>
-  <string name="index_settings">Данные</string>
+  <string name="index_settings">Управление файлами карт</string>
   <string name="osmand_service">Фоновый режим</string>
   <string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>
   <string name="fast_route_mode">Скоростной маршрут</string>
@@ -802,7 +802,7 @@
   <string name="exit_Button">Выход</string>
   <string name="map_Button">Карта</string>
   <string name="settings_Button">Настройки</string>
-  <string name="favorites_Button">Избранное</string>
+  <string name="favorites_Button">Мои места</string>
   <string name="search_button">Поиск</string>
   <string name="search_activity">Поиск</string>
   <string name="searchpoi_activity">Выберите POI</string>
@@ -1414,8 +1414,8 @@
 	<string name="routing_attr_avoid_motorway_name">Избегать автомагистралей</string>
 	<string name="routing_attr_prefer_motorway_name">Предпочитать автомагистрали</string>
 	<string name="routing_attr_prefer_motorway_description">Предпочитать автомагистрали</string>
-	<string name="routing_attr_short_way_name">Короткий путь</string>
-	<string name="routing_attr_short_way_description">Использовать короткий путь</string>
+	<string name="routing_attr_short_way_name">Кратчайший путь</string>
+	<string name="routing_attr_short_way_description">Использовать кратчайший путь</string>
 	<string name="routing_attr_avoid_toll_name">Избегать платных дорог</string>
 	<string name="routing_attr_avoid_toll_description">Избегать платных дорог</string>
 	<string name="routing_attr_avoid_unpaved_name">Избегать грунтовые дороги</string>
@@ -1423,7 +1423,7 @@
 	<string name="routing_attr_avoid_ferries_name">Избегать паромов</string>
 	<string name="routing_attr_avoid_ferries_description">Избегать паромов</string>
 	<string name="routing_attr_weight_name">Максимальный вес</string>
-	<string name="routing_attr_weight_description">Уточнить ограничение веса</string>
+	<string name="routing_attr_weight_description">Уточнить ограничение веса машины</string>
     
     <string name="map_widget_map_rendering">Отображение карты:</string>
     <string name="amenity_type_seamark">Навигационный знак</string>
