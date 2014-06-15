@@ -1642,8 +1642,8 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
         \n注意：它將不可能在 OsmAnd 和 OsmAnd + 兩者之間共用檔案。 </string>
     <string name="routing_attr_prefer_motorway_name">高速公路優先</string>
 	<string name="routing_attr_prefer_motorway_description">高速公路優先</string>
-	<string name="routing_attr_short_way_name">較短的路</string>
-	<string name="routing_attr_short_way_description">使用較短的路</string>
+	<string name="routing_attr_short_way_name">最短路線</string>
+	<string name="routing_attr_short_way_description">使用最短路線</string>
 	<string name="routing_attr_avoid_toll_name">避開收費道路</string>
 	<string name="routing_attr_avoid_toll_description">避開收費道路</string>
 	<string name="routing_attr_avoid_unpaved_name">避開未鋪路面</string>
