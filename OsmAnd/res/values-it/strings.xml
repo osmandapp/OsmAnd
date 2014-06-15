@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1894,4 +1894,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
     <string name="select_destination_and_intermediate_points">Scegli le tappe</string>
     <string name="layer_amenity_label">Etichette di testo</string>
+    <string name="show_zoom_buttons_navigation">Mostra i pulsanti per lo zoom</string>
     </resources>
