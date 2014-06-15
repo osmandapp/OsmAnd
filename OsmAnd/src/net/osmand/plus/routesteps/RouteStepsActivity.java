@@ -10,10 +10,14 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import net.osmand.CallbackWithObject;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.views.ContextMenuLayer;
 
 import java.io.File;
 import java.util.*;
@@ -41,22 +45,19 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 	private List<Boolean> pointsChangedState;
 	private List<Boolean> pointsStartState;
 
+	private RouteStepsPlugin plugin;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.setContentView(R.layout.route_steps_main);
 		this.app = (OsmandApplication) getApplication();
-		this.file = new File("/storage/emulated/0/osmand/tracks/", "504.gpx");
-		gpx = GPXUtilities.loadGPXFile(app, file);
-		loadCurrentRoute();
+		getPlugin();
+		getGpx();
 
-		pointsList = currentRoute.points;
-		sortPoints();
-		pointsStatus = getAllPointsStatus();
-		pointsStartState = getPointsState();
-		pointsChangedState = new ArrayList<Boolean>(pointsStartState);
-
-
+		if (gpx != null){
+			preparePoints();
+		}
 
 		Button done = (Button) findViewById(R.id.done);
 		done.setOnClickListener(new View.OnClickListener() {
@@ -65,11 +66,46 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 				saveStatus();
 			}
 		});
-		super.onCreate(savedInstanceState);
 
-		displayListView();
+		super.onCreate(savedInstanceState);
 	}
 
+
+	private void getPlugin(){
+		List<OsmandPlugin> plugins = OsmandPlugin.getEnabledPlugins();
+		for (OsmandPlugin plugin: plugins){
+			if (plugin instanceof RouteStepsPlugin){
+				this.plugin = (RouteStepsPlugin) plugin;
+			}
+		}
+
+	}
+
+	private void getGpx(){
+		if (plugin.getGpx() != null){
+			this.gpx = plugin.getGpx();
+		} else {
+			GpxUiHelper.selectGPXFile(this,false,false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+				@Override
+				public boolean processResult(GPXUtilities.GPXFile[] result) {
+					gpx = result[0];
+					preparePoints();
+					plugin.setGpx(gpx);
+					return false;
+				}
+			});
+		}
+	}
+
+	private void preparePoints(){
+		loadCurrentRoute();
+		pointsList = currentRoute.points;
+		sortPoints();
+		pointsStatus = getAllPointsStatus();
+		pointsStartState = getPointsState();
+		pointsChangedState = new ArrayList<Boolean>(pointsStartState);
+		displayListView();
+	}
 
 	private void displayListView() {
 		ArrayList<PointItem> pointItemsList = new ArrayList<PointItem>();
@@ -100,7 +136,10 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 						if (menuItem.getTitle().equals("Mark as next")){
 
 						} else {
-
+							//AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
+							///int position = info.position;
+							//GPXUtilities.WptPt point = pointsList.get(position);
+							//app.getSettings().setMapLocationToShow();
 						}
 						return true;
 					}
@@ -178,7 +217,7 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 	}
 
 	private void saveGPXFile() {
-		GPXUtilities.writeGpxFile(file, gpx, app);
+		GPXUtilities.writeGpxFile(new File(gpx.path), gpx, app);
 	}
 
 	private long getPointStatus(int numberOfPoint) {

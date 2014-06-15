@@ -42,8 +42,8 @@ public class RouteStepsPlugin extends OsmandPlugin {
 	public RouteStepsPlugin(OsmandApplication app) {
 		ApplicationMode. regWidget("route_steps", (ApplicationMode[]) null);
 		this.app = app;
-		this.file = new File("/storage/emulated/0/osmand/tracks/", "504.gpx");
-		gpx = GPXUtilities.loadGPXFile(app, file);
+//		this.file = new File("/storage/emulated/0/osmand/tracks/", "504.gpx");
+//		gpx = GPXUtilities.loadGPXFile(app, file);
 	}
 
 	public void setGpxFile(GPXUtilities.GPXFile file) {
@@ -85,7 +85,10 @@ public class RouteStepsPlugin extends OsmandPlugin {
 		return true;
 	}
 
-	@Override
+	public GPXUtilities.GPXFile getGpx(){ return gpx;}
+
+	public void setGpx(GPXUtilities.GPXFile gpx) { this.gpx = gpx;}
+
 	public void registerLayers(MapActivity activity) {
 		// remove old if existing after turn
 		if (routeStepsLayer != null) {
@@ -145,6 +148,9 @@ public class RouteStepsPlugin extends OsmandPlugin {
 				if (gpx != null) {
 					OsmandMapTileView view = map.getMapView();
 					setText("test", "test");
+				} else {
+					setText("No gpx", "");
+
 				}
 				return true;
 			}
