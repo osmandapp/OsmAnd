@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
   <string name="osmand_parking_warning_text">Perspėjimas pasiimti automobilį jau buvo įtrauktas į jūsų kalendorių. Perspėjimas ten liks tol, kol jo nepanaikinsite.</string>
@@ -1839,4 +1840,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="hours_ago">valandų senumo</string>
     <string name="minutes_ago">minučių senumo</string>
     <string name="seconds_ago">sekundžių senumo</string>
+    <string name="gpx_info_subtracks">Maršruto dalys: %1$s </string>
+	<string name="gpx_info_waypoints">Tarpiniai taškai: %1$s </string>
+	<string name="gpx_info_distance">Atstumas: %1$s (%2$s taškai/-ų) </string>
+	<string name="gpx_info_start_time">Pradžios laikas: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">Pabaigos laikas: %1$tF,  %1$tT </string>
+	<string name="gpx_info_average_speed">Vidutinis greitis: %1$s </string>
+	<string name="gpx_info_maximum_speed">Maksimalus greitis: %1$s </string>
+	<string name="gpx_selection_number_of_points"> %1$s taškai/-ų</string>
     </resources>

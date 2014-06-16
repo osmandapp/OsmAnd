@@ -1146,7 +1146,7 @@ Dati attualmente nel dispositivo (%1$s liberi):</string>
     <string name="add_as_last_destination_point">Aggiungi come ultimo punto intermedio</string>
     <string name="add_as_first_destination_point">Aggiungi come primo punto intermedio</string>
     <string name="replace_destination_point">Sostituisci la destinazione</string>
-    <string name="new_destination_point_dialog">Hai già una destinazione impostata.</string>
+    <string name="new_destination_point_dialog">Hai già impostato la destinazione.</string>
     <string name="target_point">Punto intermedio %1$s</string>
     <string name="target_points">Punti intermedi</string>
     <string name="map_widget_monitoring_services">Servizi di registrazione</string>
@@ -1873,7 +1873,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="gpx_info_distance">Distanza: %1$s (%2$s punti) </string>
 	<string name="gpx_info_end_time">Orario di arrivo: %1$tF, %1$tT </string>
 	<string name="gpx_info_diff_altitude">Dislivello: %1$s</string>
-	<string name="gpx_info_asc_altitude">Salite: %1$s</string>
+	<string name="gpx_info_asc_altitude">Discesa/salita: %1$s</string>
     <string name="gpx_timespan">Intervallo di tempo: %1$s</string>
 	<string name="gpx_timemoving">Tempo in movimento: %1$s</string>
     <string name="gpx_selection_segment_title">Segmento</string>
@@ -1894,4 +1894,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
     <string name="select_destination_and_intermediate_points">Scegli le tappe</string>
     <string name="layer_amenity_label">Etichette di testo</string>
+    <string name="show_zoom_buttons_navigation">Mostra i pulsanti dello zoom</string>
+    <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione</string>
     </resources>

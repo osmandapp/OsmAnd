@@ -119,6 +119,7 @@ public class MapRoutePreferencesControl extends MapControls {
 			
 			@Override
 			public void onClick(View v) {
+				notifyClicked();
 				if(dialog != null) {
 					dialog.hide();
 					dialog = null;

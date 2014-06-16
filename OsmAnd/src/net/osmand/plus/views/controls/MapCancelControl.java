@@ -25,6 +25,7 @@ public class MapCancelControl extends MapControls {
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				notifyClicked();
 				if(mapActivity.getRoutingHelper().isFollowingMode()) {
 					mapActivity.getMapActions().stopNavigationActionConfirm(mapActivity.getMapView());
 				} else {

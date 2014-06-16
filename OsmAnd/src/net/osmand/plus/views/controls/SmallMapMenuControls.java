@@ -25,6 +25,7 @@ public class SmallMapMenuControls extends MapControls {
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				notifyClicked();
 				mapActivity.getMapActions().openOptionsMenuAsList();
 			}
 		});

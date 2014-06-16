@@ -1878,4 +1878,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="save_as_favorites_points">另存為我的最愛群組</string>
     <string name="select_destination_and_intermediate_points">選擇中途點</string>
     <string name="layer_amenity_label">標點標籤</string>
-    </resources>
+    <string name="show_zoom_buttons_navigation_descr">在導航期間顯示縮放按鈕</string>
+    <string name="show_zoom_buttons_navigation">顯示縮放按鈕</string>
+    <string name="create_poi_link_to_osm_doc"><u>線上 OSM</u> 地圖的分類與影像</string>
+	</resources>

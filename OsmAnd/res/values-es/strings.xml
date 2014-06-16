@@ -949,7 +949,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="map_widget_top_text">Nombre de calle</string>
   <string name="map_widget_config">Configuración</string>
   
-  <string name="map_widget_back_to_loc">¿Dónde estoy?</string>
+  <string name="map_widget_back_to_loc">Dónde estoy</string>
   <string name="map_widget_lock_screen">Bloquear pantalla</string>
   <string name="map_widget_compass">Brújula</string>
   <string name="map_widget_top_stack">Barra de estado:</string>
@@ -1398,7 +1398,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 	<string name="driving_region_canada">Canadá</string>
 	<string name="driving_region_europe_asia">Europa y Asia</string>
 	<string name="driving_region_uk">Reino Unido, India, Australia y Otros</string>
-	<string name="driving_region_descr">Selecciona la región de conducción: EEUU, Europa, Reino Unido, Asia y otras</string>
+	<string name="driving_region_descr">Selecciona la región de conducción: EEUU, Europa, Reino Unido, Asia y Otras</string>
 	<string name="driving_region">Región de conducción</string>
 	<string name="edit_tilesource_minzoom">Zoom mínimo</string>
     <string name="edit_tilesource_expiration_time">Expirar (minutos)</string>
@@ -1548,7 +1548,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
 	<string name="routing_attr_prefer_motorway_description">Prefierir autopistas en el ruteo</string>
-	<string name="routing_attr_short_way_name">Camino corto</string>
+	<string name="routing_attr_short_way_name">Camino más corto</string>
 	<string name="routing_attr_short_way_description">Usar el camino corto</string>
 	<string name="routing_attr_avoid_toll_name">Evitar peajes</string>
 	<string name="routing_attr_avoid_toll_description">Evita las carreteras con peaje</string>
@@ -1785,6 +1785,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="map_widget_plain_time">Tiempo actual</string>
     <string name="gpx_wpt">Punto de ruta</string>
     <string name="select_destination_and_intermediate_points">Seleccionar puntos de ruta</string>
-    <string name="layer_amenity_label">Etiquetas de texto</string>
+    <string name="layer_amenity_label">Etiquetas de punto</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
+    <string name="show_zoom_buttons_navigation_descr">Mostrar botones de zoom durante navegación</string>
+    <string name="show_zoom_buttons_navigation">Mostrar botones de zoom</string>
+    <string name="route_descr_destination"/>
     </resources>

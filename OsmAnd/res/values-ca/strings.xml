@@ -855,8 +855,8 @@
 \n\n\'OsmAnd també suporta fonts personalitzades.
 	</string>
 <string name="tip_map_context_menu_t">El menú contextual \'Usa posició\' inclou totes les opcions relatives al punt (posició).
-	\n\nEstà disponible prement i aguantant a qualsevol punt en el mapa (i llavors seleccionant el seu marcador) o prement el boto de la bola de desplaçament o seleccionant \'Menú\'→ \Usa posició\' (en les dues darreres opcions s'agafa el centre del mapa com referència).
-	\n\nLa caixa de diàleg s'amaga altre cop prement i aguantant dins seu.
+	\n\nEstà disponible prement i aguantant a qualsevol punt en el mapa (i llavors seleccionant el seu marcador) o prement el boto de la bola de desplaçament o seleccionant \'Menú\'→ \Usa posició\' (en les dues darreres opcions s\'agafa el centre del mapa com referència).
+	\n\nLa caixa de diàleg s\'amaga altre cop prement i aguantant dins seu.
 	</string>
 <string name="tip_initial_t">OsmAnd és una aplicació de navegació amb moltes funcionalitats.
 		\n\nCom a introducció bàsica, s\'enllacen alguns consells i dreceres via \'Menú\'→ \'Concells\' de la pantalla del mapa.
@@ -1858,5 +1858,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="gpx_available_current_track">Traça actual en gravació</string>
     <string name="save_as_favorites_points">Guarda com grup de preferits</string>
     <string name="select_destination_and_intermediate_points">Selecciona punts de pas</string>
-    <string name="layer_amenity_label">Etiquetes dels punts</string>
+    <string name="layer_amenity_label">Etiquetes puntuals</string>
+    <string name="show_zoom_buttons_navigation_descr">Mostra els botons de zoom mentre la navegació</string>
+    <string name="show_zoom_buttons_navigation">Mostra els botons de zoom</string>
     </resources>

@@ -1895,4 +1895,6 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="select_destination_and_intermediate_points">Vælg rutepunkter</string>
     <string name="layer_amenity_label">Punktetiketter</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder</string>
-	</resources>
+	<string name="show_zoom_buttons_navigation_descr">Vis zoom-knapperne under navigation</string>
+    <string name="show_zoom_buttons_navigation">Vis zoom-knapperne</string>
+    </resources>

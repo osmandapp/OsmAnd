@@ -68,11 +68,19 @@ public class MapZoomControls extends MapControls {
 	@Override
 	protected void showControls(FrameLayout parent) {
 		int minimumWidth = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumWidth();
+		int minimumHeight = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumWidth();
+		vmargin = 0;
 		zoomInButton = addButton(parent, R.string.zoomIn, R.drawable.map_zoom_in);
-		zoomOutButton = addButton(parent, R.string.zoomOut, R.drawable.map_zoom_out, minimumWidth);
+		if(isBottom()) {
+			zoomOutButton = addButton(parent, R.string.zoomOut, R.drawable.map_zoom_out, minimumWidth);
+		} else {
+			vmargin = minimumHeight;
+			zoomOutButton = addButton(parent, R.string.zoomOut, R.drawable.map_zoom_out);
+		}
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				notifyClicked();
 				if (view.isZooming()) {
 					mapActivity.changeZoom(2);
 				} else {
@@ -86,6 +94,7 @@ public class MapZoomControls extends MapControls {
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				notifyClicked();
 				mapActivity.changeZoom(-1);
 			}
 		});
@@ -94,7 +103,9 @@ public class MapZoomControls extends MapControls {
 
 	@Override
 	public void initControls(FrameLayout parent) {
-		zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background).mutate();
+		if(isBottom()) {
+			zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background).mutate();
+		}
 		mapMagnifier = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_magnifier);
 		bitmapPaint = new Paint();
 	}
@@ -147,20 +158,21 @@ public class MapZoomControls extends MapControls {
 		if (zoomOutButton.isEnabled() != zoomOutEnabled) {
 			zoomOutButton.setEnabled(zoomOutEnabled);
 		}
-
-		if (view.isZooming()) {
-			showZoomLevel =  true;
-			showZoomLevelButton = false;
-			showUIHandler.removeMessages(SHOW_ZOOM_LEVEL_MSG_ID);
-			showUIHandler.removeMessages(SHOW_ZOOM_BUTTON_MSG_ID);
-		} else {
-			if (isShowZoomLevel() && view.getSettings().SHOW_RULER.get()) {
-				hideZoomLevelInTime();
+		if (isBottom()) {
+			if (view.isZooming()) {
+				showZoomLevel = true;
+				showZoomLevelButton = false;
+				showUIHandler.removeMessages(SHOW_ZOOM_LEVEL_MSG_ID);
+				showUIHandler.removeMessages(SHOW_ZOOM_BUTTON_MSG_ID);
+			} else {
+				if (isShowZoomLevel() && view.getSettings().SHOW_RULER.get()) {
+					hideZoomLevelInTime();
+				}
 			}
-		}
-		boolean drawZoomLevel = isShowZoomLevel() || !view.getSettings().SHOW_RULER.get();
-		if (drawZoomLevel) {
-			drawZoomLevel(canvas, tileBox, !showZoomLevelButton);
+			boolean drawZoomLevel = isShowZoomLevel() || !view.getSettings().SHOW_RULER.get();
+			if (drawZoomLevel) {
+				drawZoomLevel(canvas, tileBox, !showZoomLevelButton);
+			}
 		}
 	}
 

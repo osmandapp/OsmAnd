@@ -88,6 +88,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
             keepInformingNames[i] = keepInformingValues[i] + " " + getString(R.string.int_min);
         }
         registerListPreference(settings.KEEP_INFORMING, screen, keepInformingNames, keepInformingValues);
+        
+        registerBooleanPreference(settings.SHOW_ZOOM_BUTTONS_NAVIGATION, screen);
 
 		autoZoomMapPreference = (ListPreference) screen.findPreference(settings.AUTO_ZOOM_MAP.getId());
 		autoZoomMapPreference.setOnPreferenceChangeListener(this);

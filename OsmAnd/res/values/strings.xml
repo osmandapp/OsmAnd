@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    
+    <string name="show_zoom_buttons_navigation_descr">Show zoom buttons during navigation</string>
+    <string name="show_zoom_buttons_navigation">Show zoom buttons</string>
     <string name="save_as_favorites_points">Save as group of favorites</string>
     <string name="select_destination_and_intermediate_points">Select waypoints</string>
     <string name="layer_amenity_label">Point labels</string>

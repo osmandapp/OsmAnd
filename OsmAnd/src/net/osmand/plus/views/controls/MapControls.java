@@ -9,6 +9,7 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -29,6 +30,7 @@ public abstract class MapControls {
 	protected int vmargin;
 	protected int width;
 	protected int height;
+	protected Runnable notifyClick;
 	
 	public MapControls(MapActivity mapActivity, Handler showUIHandler, float scaleCoefficient) {
 		this.mapActivity = mapActivity;
@@ -65,7 +67,17 @@ public abstract class MapControls {
 		applyAttributes(ctx, parent, button, stringId, resourceId, extraMargin);
 		return button;
 	}
-
+	
+	public void setNotifyClick(Runnable notifyClick) {
+		this.notifyClick = notifyClick;
+	}
+	
+	protected void notifyClicked() {
+		if(notifyClick != null) {
+			notifyClick.run();
+		}
+	}
+	
 
 	private void applyAttributes(Context ctx, FrameLayout parent, View button, int stringId, int resourceId,
 			int extraMargin) {
@@ -154,6 +166,14 @@ public abstract class MapControls {
 		return visible;
 	}
 	
+	protected boolean isLeft() {
+		return (Gravity.LEFT & gravity) == Gravity.LEFT;
+	}
+
+	protected boolean isBottom() {
+		return (Gravity.BOTTOM & gravity) == Gravity.BOTTOM;
+	}
+	
 	
 	protected void initControls(FrameLayout layout) {
 	}
@@ -164,6 +184,11 @@ public abstract class MapControls {
 	
 
 	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode);
+	
+	
+	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+		return false;
+	}
 	
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
