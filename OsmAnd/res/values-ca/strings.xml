@@ -1858,7 +1858,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="gpx_available_current_track">Traça actual en gravació</string>
     <string name="save_as_favorites_points">Guarda com grup de preferits</string>
     <string name="select_destination_and_intermediate_points">Selecciona punts de pas</string>
-    <string name="layer_amenity_label">Etiquetes dels punts</string>
+    <string name="layer_amenity_label">Etiquetes puntuals</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra els botons de zoom mentre la navegació</string>
     <string name="show_zoom_buttons_navigation">Mostra els botons de zoom</string>
     </resources>
