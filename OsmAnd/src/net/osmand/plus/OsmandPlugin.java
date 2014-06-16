@@ -22,7 +22,7 @@ import net.osmand.plus.osmo.OsMoPlugin;
 import net.osmand.plus.osmodroid.OsMoDroidPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
-import net.osmand.plus.routesteps.RouteStepsPlugin;
+import net.osmand.plus.routepointsnavigation.RoutePointsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 import org.apache.commons.logging.Log;
@@ -85,7 +85,7 @@ public abstract class OsmandPlugin {
 
 		//final RouteStepsPlugin routeSteps = new RouteStepsPlugin(app);
 		//installPlugin(ROUTE_STEPS_PLUGIN_COMPONENT, RouteStepsPlugin.ID, app, routeSteps);
-		installedPlugins.add(new RouteStepsPlugin(app));
+		installedPlugins.add(new RoutePointsPlugin(app));
 
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));

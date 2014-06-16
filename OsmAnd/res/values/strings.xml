@@ -1878,4 +1878,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="navigation_intent_invalid">Invalid format: %s</string>
     <string name="route_step_menu_mark_as_next">Mark as next</string>
     <string name="route_step_menu_show_on_map">Show on map</string>
+    <string name="mark_as_visited">Mark as visited</string>
+    <string name="show_on_map">Show on map</string>
 </resources>
