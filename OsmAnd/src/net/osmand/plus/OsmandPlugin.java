@@ -45,8 +45,6 @@ public abstract class OsmandPlugin {
 
 	private static final String OSMODROID_PLUGIN_COMPONENT = "com.OsMoDroid"; //$NON-NLS-1$
 	
-	private static final String ROUTE_STEPS_PLUGIN_COMPONENT = "net.osmand.routeStepsPlugin"; //$NON-NLS-1$
-
 	public abstract String getId();
 	
 	public abstract String getDescription();

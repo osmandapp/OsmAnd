@@ -112,7 +112,7 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 		for (int i = 0; i < pointsList.size(); i++) {
 			String pointName = pointsList.get(i).name;
 			if (pointsStatus.get(i) != 0) {
-				String dateString= DateFormat.format("MM/dd/yyyy", new Date(pointsStatus.get(i))).toString();
+				String dateString= DateFormat.format("MM/dd/yyyy hh:mm:ss", new Date(pointsStatus.get(i))).toString();
 				pointItemsList.add(new PointItem(true, pointName, dateString));
 			} else {
 				pointItemsList.add(new PointItem(false, pointName, ""));
