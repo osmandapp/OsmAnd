@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -1586,4 +1586,6 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="save_as_favorites_points">Spara som grupp med favoriter</string>
     <string name="select_destination_and_intermediate_points">Välj waypoints</string>
     <string name="layer_amenity_label">Textetiketter</string>
+    <string name="show_zoom_buttons_navigation_descr">Visa zoom-knappar under navigering</string>
+    <string name="show_zoom_buttons_navigation">Visa zoom-knappar</string>
     </resources>
