@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
 \n\t- Akadálymentesítés 
@@ -1552,4 +1553,86 @@
     <string name="osmo_session_not_available">Munkamenet nem elérhető, kérlek ellenőrizd, hogy a \'Hely küldése\' be van-e kapcsolva.</string>
     <string name="osmo_share_session">Munkamenet megosztása</string>
     <string name="osmo_session_id_share">Munkamenet URL az eszköz követéséhez (%1$s)</string>
+    <string name="show_zoom_buttons_navigation_descr">Zoom gombok megjelenítése navigáció közben</string>
+    <string name="show_zoom_buttons_navigation">Zoom gombok megjelenítése</string>
+    <string name="save_as_favorites_points">Mentés kedvencek csoportként</string>
+    <string name="select_destination_and_intermediate_points">Útpontok kiválasztása</string>
+    <string name="layer_amenity_label">Pont nevek</string>
+    <string name="map_widget_plain_time">Pontos idő</string>
+    <string name="gpx_wpt">Útpont</string>
+    <string name="selected_gpx_info_show">\n\nTérképen megtekintéshez nyomd meg hosszan</string>
+    <string name="delay_navigation_start">Navigáció indítása késleltetéssel</string>
+    <string name="selected">kiválasztott</string>
+    <string name="gpx_split_interval">Felosztási intervallum kiválasztása</string>
+    <string name="gpx_info_subtracks">Résznyomvonalak: %1$s </string>
+	<string name="gpx_info_waypoints">Útpontok: %1$s </string>
+	<string name="gpx_info_distance">Távolság: %1$s (%2$s pont) </string>
+	<string name="gpx_info_start_time">Kezdés: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">Befejezés: %1$tF,  %1$tT </string>
+	<string name="gpx_info_average_speed">Átlagos sebesség: %1$s </string>
+	<string name="gpx_info_maximum_speed">Legnagyobb sebesség: %1$s </string>
+	<string name="gpx_info_avg_altitude">Átlagos magasság: %1$s</string>
+	<string name="gpx_info_diff_altitude">Magasság tartomány: %1$s</string>
+	<string name="gpx_info_asc_altitude">Le/fel: %1$s</string>
+    <string name="gpx_timespan">Eltelt idő: %1$s</string>
+	<string name="gpx_timemoving">Mozgási idő: %1$s</string>
+    <string name="gpx_selection_segment_title">Szakasz</string>
+    <string name="gpx_selection_number_of_points"> %1$s pont</string>
+    <string name="gpx_selection_point">%1$s. pont</string>
+    <string name="gpx_selection_current_track">felvétel</string>
+    <string name="gpx_selection_route_points">%1$s \n%2$s útpont</string>
+    <string name="gpx_selection_points">%1$s \nPontok</string>
+    <string name="gpx_selection_track">%1$s \nNyomvonal %2$s</string>
+    <string name="gpx_available_current_track">Aktív nyomvonal rögzítés</string>
+    <string name="gpx_file_is_empty">A gpx nyomvonal üres</string>
+    <string name="selected_track">Kiválasztott nyomvonalak</string>
+    <string name="my_tracks">Összes nyomvonal</string>
+    <string name="my_favorites">Kedvenceim</string>
+    <string name="my_data_Button">Saját helyek</string>
+    <string name="my_data_activity">Saját helyek</string>
+    <string name="osmo_user_joined">%1$s felhasználó csatlakozott a(z) %2$s csoporthoz</string>
+    <string name="osmo_user_left">%1$s felhasználó elhagyta a(z) %2$s csoportot</string>
+    <string name="osmo_show_group_notifications">Csoportértesítések megjelenítése</string>
+    <string name="osmo_show_group_notifications_descr">Értesítő popup megjelenítése, ha egy felhasználó csatlakozik a csoporthoz, vagy elhagyja</string>
+    <string name="osmo_follow">Követés</string>
+    <string name="osmo_sign_in">Bejelentkezés</string>
+    <string name="osmo_create_groups_confirm">Csoport létrehozásáshoz regisztrált OsMo felhasználó kell legyél.</string>
+    <string name="osmo_credentials_not_valid">Az OsMo hitelesítő adataid érvénytelenek.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Biztosan újragenerálod a személyes azonosítód? A hozzád kapcsolt összes készülék képtelen lesz követni téged.</string>
+    <string name="osmo_regenerate_login_ids">Felhasználói azonosító újragenerálása</string>
+    <string name="osmo_cancel_moving_target">Cél mozgatásának visszavonása</string>
+    <string name="osmo_center_location">Képernyő közepére</string>
+    <string name="osmo_set_moving_target">Beállítás mozgó célpontnak</string>
+    <string name="osmo_use_server_name">Regisztrált név</string>
+    <string name="osmo_connect_to_my_nickname">Felhasználónevem</string>
+    <string name="osmo_user_name">Felhasználó</string>
+	<string name="color_green">zöld</string>
+	
+    <string name="osmo_track_interval">Rögzítési intervallum</string>
+	<string name="osmo_track_interval_descr">Válaszd ki a pozícióküldés gyakoriságát</string>
+    <string name="int_days">nap</string>
+    <string name="osmo_connect_menu">Kapcsolódás</string>
+    <string name="osmo_expire_group">Lejár</string>
+    <string name="osmo_group_description">Leírás</string>
+    <string name="osmo_group_policy">Irányelv</string>
+    <string name="osmo_connect_to_device_tracker_id">Követő ID</string>
+    <string name="osmo_connect_to_device_name">Felhasználónév</string>
+    <string name="osmo_connect_to_group_id">Csoport ID</string>
+    <string name="osmo_group_name">Csoportnév</string>
+    <string name="osmo_connect_to_device">Összekötés eszközzel</string>
+    <string name="osmo_connect_to_group">Összekötés csoporttal</string>
+    <string name="osmo_connect">Kapcsolódás ide</string>
+    <string name="osmo_create_group">Csoport létrehozása</string>
+    <string name="osmo_server_operation_failed">OsMo kiszolgáló művelet sikertelen</string>
+    <string name="osmo_activity">OpenStreetMap-Megfigyelés</string>
+    <string name="osmo_enable_tracker">Pozícióm küldése</string>
+    <string name="osmo_control">OsMo gyors elérés</string>
+    <string name="hours_ago">órával ezelőtt</string>
+    <string name="minutes_ago">perce</string>
+    <string name="seconds_ago">másodperce</string>
+    <string name="osmo_connected_devices">Összekapcsolt eszközök</string>
+    <string name="osmo_groups">OsMo Csoportok/Eszközök</string>
+    <string name="osmo_auto_send_locations_descr">A programindítás után a nyomkövető automatikus indítása és pozícióküldés</string>
+    <string name="osmo_auto_send_locations">Nyomkövető automatikus indítása</string>
+    <string name="osmo_tracker_id">Személyes nyomkövető ID</string>
     </resources>
