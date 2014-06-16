@@ -77,7 +77,16 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		return true;
 	}
 
-	public GPXUtilities.WptPt getCurrentPoint(){return currentPoint;}
+	public GPXUtilities.WptPt getCurrentPoint(){
+		if (currentPoint == null){
+			for (int i =0; i< pointsList.size(); i++){
+				if (getPointStatus(i) == 0){
+					currentPoint = pointsList.get(i);
+				}
+			}
+		}
+		return currentPoint;
+	}
 
 	public GPXUtilities.GPXFile getGpx(){ return gpx;}
 
@@ -101,7 +110,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
-			routeStepsControl = createRouteStepsInfoControl(activity, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintText());
+			routeStepsControl = createRouteStepsInfoControl(activity, mapInfoLayer.getPaintSubText(), mapInfoLayer.getPaintSubText());
 			mapInfoLayer.getMapInfoControls().registerSideWidget(routeStepsControl,
 					R.drawable.widget_parking, R.string.map_widget_route_steps, "route_steps", false, 8);
 			mapInfoLayer.recreateControls();
@@ -138,6 +147,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			registerWidget(activity);
 		}
 	}
+
+	public String getVisitedAllString(){ return String.valueOf(visitedCount) + "/" + String.valueOf(pointsList.size());}
 
 	private TextInfoWidget createRouteStepsInfoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		TextInfoWidget routeStepsControl = new TextInfoWidget(map, 0, paintText, paintSubText) {

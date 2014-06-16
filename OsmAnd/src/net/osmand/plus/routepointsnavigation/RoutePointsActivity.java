@@ -35,8 +35,10 @@ public class RoutePointsActivity extends SherlockFragmentActivity {
 	private List<GPXUtilities.WptPt> pointsList;
 
 	private List<Long> pointsStatus;
+
 	//saves indexed of sorted list
 	private List<Integer> pointsIndex;
+
 	//needed to save user selection
 	private List<Boolean> pointsChangedState;
 	private List<Boolean> pointsStartState;
@@ -44,6 +46,8 @@ public class RoutePointsActivity extends SherlockFragmentActivity {
 	private RoutePointsPlugin plugin;
 
 	private int selectedItemIndex;
+
+	private ListView listView;
 
 
 	@Override
@@ -103,6 +107,9 @@ public class RoutePointsActivity extends SherlockFragmentActivity {
 		String fileName = gpx.path.substring(gpx.path.lastIndexOf("/") + 1,gpx.path.lastIndexOf("."));
 		gpxName.setText(fileName);
 
+		TextView visited = (TextView) findViewById(R.id.points_count);
+		visited.setText(plugin.getVisitedAllString());
+
 		loadCurrentRoute();
 		pointsList = currentRoute.points;
 		sortPoints();
@@ -125,7 +132,7 @@ public class RoutePointsActivity extends SherlockFragmentActivity {
 		}
 
 		PointItemAdapter adapter = new PointItemAdapter(this, R.layout.route_point_info, pointItemsList);
-		final ListView listView = (ListView) findViewById(R.id.pointsListView);
+		listView = (ListView) findViewById(R.id.pointsListView);
 		listView.setAdapter(adapter);
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -150,7 +157,9 @@ public class RoutePointsActivity extends SherlockFragmentActivity {
 							app.getSettings().setMapLocationToShow(point.lat, point.lon, app.getSettings().getMapZoomToShow());
 							finish();
 						} else {
-
+							//inverts selection state of item
+							boolean state = pointsChangedState.get(selectedItemIndex);
+							pointsChangedState.set(selectedItemIndex,!state);
 						}
 						return true;
 					}
