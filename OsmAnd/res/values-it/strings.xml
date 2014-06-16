@@ -1894,6 +1894,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
     <string name="select_destination_and_intermediate_points">Scegli le tappe</string>
     <string name="layer_amenity_label">Etichette di testo</string>
-    <string name="show_zoom_buttons_navigation">Mostra i pulsanti per lo zoom</string>
+    <string name="show_zoom_buttons_navigation">Mostra i pulsanti dello zoom</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione</string>
     </resources>
