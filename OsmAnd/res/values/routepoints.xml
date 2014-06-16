@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="route_points_no_gpx">No gpx</string>
+    <string name="mark_as_current">Mark as current</string>
+</resources>

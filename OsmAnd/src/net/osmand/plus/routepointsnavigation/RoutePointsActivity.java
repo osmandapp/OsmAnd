@@ -1,9 +1,6 @@
-package net.osmand.plus.routesteps;
+package net.osmand.plus.routepointsnavigation;
 
-import alice.tuprolog.Int;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -15,9 +12,9 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandExpandableListActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.views.ContextMenuLayer;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.*;
@@ -25,10 +22,9 @@ import java.util.*;
 /**
  * Created by Bars on 13.06.2014.
  */
-public class RouteStepsActivity extends SherlockFragmentActivity {
+public class RoutePointsActivity extends SherlockFragmentActivity {
 
-	private static final String VISITED_KEY = "IsVisited";
-	private static final String POINT_KEY = "Point";
+
 	private static final String CURRENT_ROUTE_KEY = "CurrentRoute";
 
 	private File file;
@@ -39,13 +35,19 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 	private List<GPXUtilities.WptPt> pointsList;
 
 	private List<Long> pointsStatus;
+
 	//saves indexed of sorted list
 	private List<Integer> pointsIndex;
+
 	//needed to save user selection
 	private List<Boolean> pointsChangedState;
 	private List<Boolean> pointsStartState;
 
-	private RouteStepsPlugin plugin;
+	private RoutePointsPlugin plugin;
+
+	private int selectedItemIndex;
+
+	private ListView listView;
 
 
 	@Override
@@ -55,8 +57,8 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 		getPlugin();
 		getGpx();
 
-		if (gpx != null){
-			preparePoints();
+		if (gpx != null) {
+			prepareView();
 		}
 
 		Button done = (Button) findViewById(R.id.done);
@@ -64,6 +66,9 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 			@Override
 			public void onClick(View view) {
 				saveStatus();
+				GPXUtilities.WptPt point = plugin.getCurrentPoint();
+				app.getSettings().setMapLocationToShow(point.lat, point.lon, app.getSettings().getMapZoomToShow());
+				finish();
 			}
 		});
 
@@ -71,33 +76,40 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 	}
 
 
-	private void getPlugin(){
+	private void getPlugin() {
 		List<OsmandPlugin> plugins = OsmandPlugin.getEnabledPlugins();
-		for (OsmandPlugin plugin: plugins){
-			if (plugin instanceof RouteStepsPlugin){
-				this.plugin = (RouteStepsPlugin) plugin;
+		for (OsmandPlugin plugin : plugins) {
+			if (plugin instanceof RoutePointsPlugin) {
+				this.plugin = (RoutePointsPlugin) plugin;
 			}
 		}
 
 	}
 
-	private void getGpx(){
-		if (plugin.getGpx() != null){
+	private void getGpx() {
+		if (plugin.getGpx() != null) {
 			this.gpx = plugin.getGpx();
 		} else {
-			GpxUiHelper.selectGPXFile(this,false,false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+			GpxUiHelper.selectGPXFile(this, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
 				@Override
 				public boolean processResult(GPXUtilities.GPXFile[] result) {
 					gpx = result[0];
-					preparePoints();
 					plugin.setGpx(gpx);
+					prepareView();
 					return false;
 				}
 			});
 		}
 	}
 
-	private void preparePoints(){
+	private void prepareView() {
+		TextView gpxName = (TextView) findViewById(R.id.gpx_name);
+		String fileName = gpx.path.substring(gpx.path.lastIndexOf("/") + 1,gpx.path.lastIndexOf("."));
+		gpxName.setText(fileName);
+
+		TextView visited = (TextView) findViewById(R.id.points_count);
+		visited.setText(plugin.getVisitedAllString());
+
 		loadCurrentRoute();
 		pointsList = currentRoute.points;
 		sortPoints();
@@ -112,7 +124,7 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 		for (int i = 0; i < pointsList.size(); i++) {
 			String pointName = pointsList.get(i).name;
 			if (pointsStatus.get(i) != 0) {
-				String dateString= DateFormat.format("MM/dd/yyyy", new Date(pointsStatus.get(i))).toString();
+				String dateString = DateFormat.format("MM/dd/yyyy hh:mm:ss", new Date(pointsStatus.get(i))).toString();
 				pointItemsList.add(new PointItem(true, pointName, dateString));
 			} else {
 				pointItemsList.add(new PointItem(false, pointName, ""));
@@ -120,32 +132,40 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 		}
 
 		PointItemAdapter adapter = new PointItemAdapter(this, R.layout.route_point_info, pointItemsList);
-		final ListView listView = (ListView) findViewById(R.id.pointsListView);
+		listView = (ListView) findViewById(R.id.pointsListView);
 		listView.setAdapter(adapter);
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				final PopupMenu menu = new PopupMenu(RouteStepsActivity.this, view);
+				selectedItemIndex = i;
+				final PopupMenu popup = new PopupMenu(RoutePointsActivity.this, view);
+				final Menu menu = popup.getMenu();
+				menu.add(getString(R.string.mark_as_current));
+				menu.add(getString(R.string.mark_as_visited));
+				menu.add(getString(R.string.show_on_map));
 
-				menu.getMenuInflater().inflate(R.menu.route_step_menu, menu.getMenu());
 
-				menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+				popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem menuItem) {
-						if (menuItem.getTitle().equals("Mark as next")){
+						if (menuItem.getTitle().equals(getResources().getString(R.string.mark_as_current))) {
+							plugin.setCurrentPoint(pointsList.get(selectedItemIndex));
 
+						} else if (menuItem.getTitle().equals(getResources().getString(R.string.show_on_map))) {
+							GPXUtilities.WptPt point = pointsList.get(selectedItemIndex);
+							app.getSettings().setMapLocationToShow(point.lat, point.lon, app.getSettings().getMapZoomToShow());
+							finish();
 						} else {
-							//AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo();
-							///int position = info.position;
-							//GPXUtilities.WptPt point = pointsList.get(position);
-							//app.getSettings().setMapLocationToShow();
+							//inverts selection state of item
+							boolean state = pointsChangedState.get(selectedItemIndex);
+							pointsChangedState.set(selectedItemIndex,!state);
 						}
 						return true;
 					}
 				});
 
-				menu.show();
+				popup.show();
 			}
 		});
 	}
@@ -172,43 +192,42 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 	private List<Long> getAllPointsStatus() {
 		List<Long> pointsStatus = new ArrayList<Long>();
 		for (int i = 0; i < pointsList.size(); i++) {
-			pointsStatus.add(getPointStatus(pointsIndex.get(i)));
+			pointsStatus.add(plugin.getPointStatus(pointsIndex.get(i)));
 		}
 
 		return pointsStatus;
 	}
 
-	private void saveStatus(){
+	private void saveStatus() {
 		for (int i = 0; i < pointsChangedState.size(); i++) {
 			boolean newValue = pointsChangedState.get(i);
 			//if values is the same - there's no need to save data
 			if (newValue != pointsStartState.get(i)) {
 				int indexToWrite = pointsIndex.get(i);
-				setPointStatus(indexToWrite, newValue);
+				plugin.setPointStatus(indexToWrite, newValue);
 			}
 		}
 
 		saveGPXFile();
-		finish();
 	}
 
-	private void sortPoints(){
+	private void sortPoints() {
 		List<GPXUtilities.WptPt> listToSort = new ArrayList<GPXUtilities.WptPt>();
 		List<Integer> indexItemsAtTheEnd = new ArrayList<Integer>();
 		pointsIndex = new ArrayList<Integer>();
 
 
-		for (int i =0; i< pointsList.size(); i++){
-			long status = getPointStatus(i);
-			if (status == 0L){
+		for (int i = 0; i < pointsList.size(); i++) {
+			long status = plugin.getPointStatus(i);
+			if (status == 0L) {
 				listToSort.add(pointsList.get(i));
 				pointsIndex.add(i);
-			} else{
+			} else {
 				indexItemsAtTheEnd.add(i);
 			}
 		}
 
-		for (int i : indexItemsAtTheEnd){
+		for (int i : indexItemsAtTheEnd) {
 			listToSort.add(pointsList.get(i));
 			pointsIndex.add(i);
 		}
@@ -218,34 +237,6 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 
 	private void saveGPXFile() {
 		GPXUtilities.writeGpxFile(new File(gpx.path), gpx, app);
-	}
-
-	private long getPointStatus(int numberOfPoint) {
-		Map<String, String> map = currentRoute.getExtensionsToRead();
-
-		String mapKey = POINT_KEY + numberOfPoint + VISITED_KEY;
-		if (map.containsKey(mapKey)) {
-			String value = map.get(mapKey);
-			return (Long.valueOf(value));
-		}
-
-		return 0L;
-	}
-
-	//saves point status value to gpx extention file
-	private void setPointStatus(int numberOfPoint, boolean status) {
-		Map<String, String> map = currentRoute.getExtensionsToWrite();
-
-		String mapKey = POINT_KEY + numberOfPoint + VISITED_KEY;
-		if (status) {
-			//value is current time
-			Calendar c = Calendar.getInstance();
-			long number = c.getTimeInMillis();
-			map.put(mapKey, String.valueOf(number));
-		} else if (map.containsKey(mapKey)) {
-			map.remove(mapKey);
-		}
-
 	}
 
 	public List<Boolean> getPointsState() {
@@ -270,12 +261,12 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 	}
 
 	private class PointItemAdapter extends ArrayAdapter<PointItem> {
-		private RouteStepsActivity ctx;
+		private RoutePointsActivity ctx;
 		private ArrayList<PointItem> pointsList;
 
 		public PointItemAdapter(Context context, int textViewResourceId, ArrayList<PointItem> pointsList) {
 			super(context, textViewResourceId, pointsList);
-			ctx = (RouteStepsActivity) context;
+			ctx = (RoutePointsActivity) context;
 			this.pointsList = new ArrayList<PointItem>();
 			this.pointsList.addAll(pointsList);
 		}
@@ -284,8 +275,6 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 			TextView index;
 			TextView name;
 			TextView date;
-			CheckBox visited;
-
 		}
 
 		@Override
@@ -300,31 +289,22 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 				holder.index = (TextView) convertView.findViewById(R.id.index);
 				holder.date = (TextView) convertView.findViewById(R.id.date);
 				holder.name = (TextView) convertView.findViewById(R.id.name);
-				holder.visited = (CheckBox) convertView.findViewById(R.id.checkBox1);
 				convertView.setTag(holder);
 
-				holder.visited.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						CheckBox ch = (CheckBox) view;
-						RelativeLayout parent = (RelativeLayout) ch.getParent();
-						TextView text = (TextView) parent.getChildAt(0);
-						pointsChangedState.set(Integer.parseInt(text.getText().toString()), ch.isChecked());
-					}
-				});
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
 			PointItem point = pointsList.get(position);
 			holder.index.setText(String.valueOf(position));
-			holder.visited.setChecked(point.isSelected());
 			String pointName = point.getName();
 			int pos = pointName.indexOf(":");
 			holder.name.setText(pointName.substring(0, pos));
-			if (point.isSelected()){
+			if (point.isSelected()) {
+				holder.name.setTextColor(getResources().getColor(R.color.osmbug_closed));
 				holder.date.setText(String.valueOf(point.getTime()));
-			} else{
+			} else {
+				holder.name.setTextColor(getResources().getColor(R.color.color_update));
 				holder.date.setText("");
 			}
 
@@ -333,6 +313,7 @@ public class RouteStepsActivity extends SherlockFragmentActivity {
 
 	}
 
+	//this class needed to represent route point in UI
 	private class PointItem {
 		private boolean visited;
 		private String name;

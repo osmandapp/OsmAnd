@@ -1,4 +1,4 @@
-package net.osmand.plus.routesteps;
+package net.osmand.plus.routepointsnavigation;
 
 import android.graphics.Canvas;
 import android.graphics.PointF;
@@ -14,12 +14,12 @@ import java.util.List;
 /**
  * Created by Barsik on 10.06.2014.
  */
-public class RouteStepsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+public class RoutePointsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 
 	private final MapActivity map;
-	private RouteStepsPlugin plugin;
+	private RoutePointsPlugin plugin;
 
-	public RouteStepsLayer(MapActivity map, RouteStepsPlugin plugin){
+	public RoutePointsLayer(MapActivity map, RoutePointsPlugin plugin){
 		this.map = map;
 		this.plugin = plugin;
 	}
