@@ -69,7 +69,6 @@
 				<isset property="net.osmand.sherpafy" />
 			</condition>
 			<then>
-				<replaceregexp file="AndroidManifest.xml" match='"@drawable/icon"' replace='"@drawable/icon_free"' byline="true" />
 				<property name="package.name" value="net.osmand.sherpafy" />
 				<property name="app.name" value="Sherpafy" />
 				<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon_sherpafy"' byline="true" />
@@ -132,8 +131,11 @@
 			<fileset dir="${gen.absolute.dir}/net/osmand">
 				<include name="R.java" />
 			</fileset>
+			<fileset dir="${gen.absolute.dir}/net/osmand/sherpafy">
+				<include name="R.java" />
+			</fileset>
 		</copy>
-		<replaceregexp file="${gen.absolute.dir}/net/osmand/plus/R.java" match='package net.osmand;' replace='package net.osmand.plus;' byline="true" />
+		<replaceregexp file="${gen.absolute.dir}/net/osmand/plus/R.java" match='package (.*);' replace='package net.osmand.plus;' byline="true" />
 		<!-- osmchange : Osmand plus support -->
 
 		<do-only-if-manifest-hasCode elseText="hasCode = false. Skipping...">
