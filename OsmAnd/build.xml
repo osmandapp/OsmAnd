@@ -94,14 +94,20 @@
 			    <replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon"' byline="true" />
 			</then>
 		</if>
-		
-		<replaceregexp file="AndroidManifest.xml" match='package="(.*)"' replace='package="${package.name}"' byline="true" />
-		<replaceregexp file="AndroidManifest.xml" match='android:process="(.*)"' replace='android:process="${package.name}"' byline="true" />
-		<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;${app.name}&lt;' byline="true" />
-		<replaceregexp file="res/layout/search_address.xml" match='xmlns:custom="http://schemas.android.com/apk/res/(.*)"' 
-			    replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
-		<replaceregexp file="res/layout/navigate_point.xml" match='xmlns:custom="http://schemas.android.com/apk/res/(.*)"' 
-			    replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
+		<if>
+			<condition>
+				<isset property="package.name" />
+			</condition>
+			<then>
+				<replaceregexp file="AndroidManifest.xml" match='package="(.*)"' replace='package="${package.name}"' byline="true" />
+				<replaceregexp file="AndroidManifest.xml" match='android:process="(.*)"' replace='android:process="${package.name}"' byline="true" />
+				<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;${app.name}&lt;' byline="true" />
+				<replaceregexp file="res/layout/search_address.xml" match='xmlns:custom="http://schemas.android.com/apk/res/(.*)"' 
+			    	replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
+				<replaceregexp file="res/layout/navigate_point.xml" match='xmlns:custom="http://schemas.android.com/apk/res/(.*)"' 
+			    	replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
+			</then>
+			</if>
 		<if>
 			<condition>
 				<isset property="build.version.code" />
