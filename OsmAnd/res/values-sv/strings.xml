@@ -1548,7 +1548,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="osmo_follow">Följ</string>
     <string name="osmo_user_joined">Användare %1$s anslöt till grupp %2$s</string>
     <string name="osmo_user_left">Användare %1$s lämnade grupp %2$s</string>
-    <string name="osmo_show_group_notifications">Visa gruppmeddelanden</string>
+    <string name="osmo_show_group_notifications">Visa gruppaviseringar</string>
     <string name="osmo_show_group_notifications_descr">Visa popup-meddelande när användare ansluter till eller lämnar gruppen</string>
     <string name="selected_track">Valda spår</string>
     <string name="my_tracks">Alla spår</string>
@@ -1588,4 +1588,6 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="layer_amenity_label">Punktetiketter</string>
     <string name="show_zoom_buttons_navigation_descr">Visa zoom-knappar under navigering</string>
     <string name="show_zoom_buttons_navigation">Visa zoom-knappar</string>
+    <string name="color_green">grön</string>
+	
     </resources>
