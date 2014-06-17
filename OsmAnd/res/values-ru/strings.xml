@@ -319,7 +319,7 @@
   <string name="vector_map_not_needed">Не нужно</string>
   <string name="basemap_missing">Отсутствует базовая карта, покрывающая весь мир на мелком масштабе. Пожалуйста загрузите World_basemap_x.obf для полноценный работы приложения.</string>
   <string name="vector_data_missing">Локальные данные отсутствуют на SD-носителе. Пожалуйста, загрузите их для того, чтобы использовать приложение без Интернета.</string>
-  <string name="local_index_gpx_info_show">\n\nДлинное нажатие для просмотра на карте</string>
+  <string name="local_index_gpx_info_show">\n\nНажать и удерживать для вызова меню</string>
   
   
   
@@ -1677,9 +1677,9 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_follow">Следить</string>
     <string name="osmo_edit_device">Изменить пользовательские свойства</string>
     <string name="gpx_file_is_empty">Трек GPX пуст</string>
-    <string name="selected_track">Выбранный трек</string>
-    <string name="my_tracks">Все трэки</string>
-    <string name="my_favorites">Мои избранные</string>
+    <string name="selected_track">Выбранные треки</string>
+    <string name="my_tracks">Все треки</string>
+    <string name="my_favorites">Избранное</string>
     <string name="my_data_Button">Мои места</string>
     <string name="my_data_activity">Мои места</string>
     <string name="osmo_user_joined">Пользователь %1$s присоединился к группе %2$s</string>
@@ -1692,7 +1692,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_set_moving_target">Установить как движущуюся цель</string>
     <string name="osmo_center_location">Центр на экране</string>
     <string name="gpx_selection_segment_title">Сегмент</string>
-    <string name="gpx_info_distance">Дистанция: %1$s (%2$s точек) </string>
+    <string name="gpx_info_distance">Расстояние: %1$s (%2$s точек) </string>
 	<string name="gpx_info_start_time">Время старта: %1$tF, %1$tT </string>
 	<string name="gpx_info_end_time">Время завершения: %1$tF, %1$tT </string>
 	<string name="gpx_info_average_speed">Средняя скорость: %1$s </string>
@@ -1700,10 +1700,10 @@ OsmAnd - открытый источник и активно развается.
 	<string name="gpx_info_avg_altitude">Средняя высота: %1$s</string>
 	<string name="gpx_info_diff_altitude">Диапазон высот: %1$s</string>
 	<string name="gpx_info_asc_altitude">Снижение/подъём: %1$s</string>
-    <string name="gpx_timespan">Отрезок времени: %1$s</string>
-	<string name="gpx_timemoving">Время передвижения: %1$s</string>
+    <string name="gpx_timespan">Общее время: %1$s</string>
+	<string name="gpx_timemoving">Время в движении: %1$s</string>
     <string name="gpx_selection_points">%1$s \nТочек</string>
-    <string name="gpx_selection_track">%1$s \nТрэк %2$s</string>
+    <string name="gpx_selection_track">%1$s \nТрек %2$s</string>
     <string name="gpx_available_current_track">Текущий пишущийся трек</string>
     <string name="loading_smth">Загрузка %1$s…</string>
     <string name="map_widget_plain_time">Текущее время</string>
