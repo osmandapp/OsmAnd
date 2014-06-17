@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
@@ -1720,4 +1720,6 @@ OsmAnd - открытый источник и активно развается.
     <string name="gpx_selection_point">Точка %1$s</string>
     <string name="gpx_selection_current_track">запись</string>
     <string name="gpx_selection_route_points">%1$s \nМаршрутных точек %2$s</string>
+    <string name="show_zoom_buttons_navigation_descr">Показывать кнопки изменения масштаба во время навигации</string>
+    <string name="show_zoom_buttons_navigation">Показывать кнопки изменения масштаба</string>
     </resources>
