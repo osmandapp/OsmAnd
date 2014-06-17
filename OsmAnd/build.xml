@@ -64,6 +64,8 @@
 				<replaceregexp file="res/values/no_translate.xml" match='versionFeatures"&gt;(.*)&lt;' replace='versionFeatures"&gt;${versionFeatures}&lt;' byline="true" />
 			</then>
 		</if>
+		<property name="package.name" value="net.osmand.plus" />
+		<property name="app.name" value="OsmAnd~" />
 		<if>
 			<condition>
 				<isset property="net.osmand.sherpafy" />
