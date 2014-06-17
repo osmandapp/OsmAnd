@@ -135,14 +135,30 @@
 	<target name="-compile" depends="-build-setup, -pre-build, -code-gen, -pre-compile">
 		<!-- osmchange : Osmand plus support -->
 		<mkdir dir="${gen.absolute.dir}/net/osmand/plus"/>
-		<copy todir="${gen.absolute.dir}/net/osmand/plus">
-			<fileset dir="${gen.absolute.dir}/net/osmand">
-				<include name="R.java" />
-			</fileset>
-			<fileset dir="${gen.absolute.dir}/net/osmand/sherpafy">
-				<include name="R.java" />
-			</fileset>
-		</copy>
+		<if>
+			<condition>
+				<isset property="net.osmand.sherpafy" />
+			</condition>
+			<then>
+			    <copy todir="${gen.absolute.dir}/net/osmand/plus">
+					<fileset dir="${gen.absolute.dir}/net/osmand/sherpafy">
+						<include name="R.java" />
+					</fileset>
+				</copy>
+			</then>
+		</if>
+		<if>
+			<condition>
+				<isset property="net.osmand" />
+			</condition>
+			<then>
+			    <copy todir="${gen.absolute.dir}/net/osmand/plus">
+					<fileset dir="${gen.absolute.dir}/net/osmand">
+						<include name="R.java" />
+					</fileset>
+				</copy>
+			</then>
+		</if>
 		<replaceregexp file="${gen.absolute.dir}/net/osmand/plus/R.java" match='package (.*);' replace='package net.osmand.plus;' byline="true" />
 		<!-- osmchange : Osmand plus support -->
 
