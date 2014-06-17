@@ -72,6 +72,7 @@
 				<replaceregexp file="AndroidManifest.xml" match='"@drawable/icon"' replace='"@drawable/icon_free"' byline="true" />
 				<property name="package.name" value="net.osmand.sherpafy" />
 				<property name="app.name" value="Sherpafy" />
+				<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon_sherpafy"' byline="true" />
 			</then>
 		</if>
 		<if>
@@ -79,9 +80,9 @@
 				<isset property="net.osmand" />
 			</condition>
 			<then>
-				<replaceregexp file="AndroidManifest.xml" match='"@drawable/icon"' replace='"@drawable/icon_free"' byline="true" />
 				<property name="package.name" value="net.osmand" />
 				<property name="app.name" value="OsmAnd" />
+				<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon_free"' byline="true" />
 			</then>
 		</if>
 		<if>
@@ -91,7 +92,7 @@
 			<then>
 			    <property name="package.name" value="net.osmand.plus" />
 			    <property name="app.name" value="OsmAnd+" />
-			    <replaceregexp file="AndroidManifest.xml" match='"@drawable/icon_free"' replace='"@drawable/icon"' byline="true" />
+			    <replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon"' byline="true" />
 			</then>
 		</if>
 		
