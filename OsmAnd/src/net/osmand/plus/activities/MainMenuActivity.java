@@ -13,6 +13,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.sherpafy.SherpafyCustomization;
+import net.osmand.plus.sherpafy.TourViewActivity;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -184,11 +185,15 @@ public class MainMenuActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		if(getIntent() != null) {
-			setupCustomization(getIntent());
-		}
-		((OsmandApplication) getApplication()).applyTheme(this);
+		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
+		if(Version.isSherpafy(getMyApplication())) {
+			final Intent mapIntent = new Intent(this, TourViewActivity.class);
+			getMyApplication().setAppCustomization(new SherpafyCustomization());
+			startActivity(mapIntent);
+			finish();
+		}
+		
 		boolean exit = false;
 		if(getIntent() != null){
 			Intent intent = getIntent();
@@ -309,11 +314,6 @@ public class MainMenuActivity extends Activity {
 		}
 	}
 
-	private void setupCustomization(Intent intent) {
-		if (intent.hasExtra("SHERPAFY")) {
-			((OsmandApplication) getApplication()).setAppCustomization(new SherpafyCustomization());
-		}
-	}
 
 	private void applicationInstalledFirstTime() {
 		boolean netOsmandWasInstalled = false;

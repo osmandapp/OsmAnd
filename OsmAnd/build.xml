@@ -66,30 +66,42 @@
 		</if>
 		<if>
 			<condition>
+				<isset property="net.osmand.sherpafy" />
+			</condition>
+			<then>
+				<replaceregexp file="AndroidManifest.xml" match='"@drawable/icon"' replace='"@drawable/icon_free"' byline="true" />
+				<property name="package.name" value="net.osmand.sherpafy" />
+				<property name="app.name" value="Sherpafy" />
+			</then>
+		</if>
+		<if>
+			<condition>
 				<isset property="net.osmand" />
 			</condition>
 			<then>
 				<replaceregexp file="AndroidManifest.xml" match='"@drawable/icon"' replace='"@drawable/icon_free"' byline="true" />
-				<replaceregexp file="AndroidManifest.xml" match='package="net.osmand.plus"' replace='package="net.osmand"' byline="true" />
-				<replaceregexp file="AndroidManifest.xml" match='android:process="net.osmand.plus"' replace='android:process="net.osmand"' byline="true" />
-				<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;OsmAnd&lt;' byline="true" />
-				<replaceregexp file="res/layout/search_address.xml" match='net.osmand.plus' replace='net.osmand' byline="true" />
-				<replaceregexp file="res/layout/navigate_point.xml" match='net.osmand.plus' replace='net.osmand' byline="true" />
+				<property name="package.name" value="net.osmand" />
+				<property name="app.name" value="OsmAnd" />
 			</then>
-			<else>
-				<replaceregexp file="AndroidManifest.xml" match='"@drawable/icon_free"' replace='"@drawable/icon"' byline="true" />
-				<replaceregexp file="AndroidManifest.xml" match='package="net.osmand"' replace='package="net.osmand.plus"' byline="true" />
-				<replaceregexp file="AndroidManifest.xml" match='android:process="net.osmand"' replace='android:process="net.osmand.plus"' byline="true" />
-			</else>
 		</if>
 		<if>
 			<condition>
 				<isset property="net.osmand.plus" />
 			</condition>
 			<then>
-				<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;OsmAnd+&lt;' byline="true" />
+			    <property name="package.name" value="net.osmand.plus" />
+			    <property name="app.name" value="OsmAnd+" />
+			    <replaceregexp file="AndroidManifest.xml" match='"@drawable/icon_free"' replace='"@drawable/icon"' byline="true" />
 			</then>
 		</if>
+		
+		<replaceregexp file="AndroidManifest.xml" match='package="(.*)"' replace='package="${package.name}"' byline="true" />
+		<replaceregexp file="AndroidManifest.xml" match='android:process="(.*)"' replace='android:process="${package.name}"' byline="true" />
+		<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;${app.name}&lt;' byline="true" />
+		<replaceregexp file="res/layout/search_address.xml" match='xmlns:custom="http://schemas.android.com/apk/res/(.*)"' 
+			    replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
+		<replaceregexp file="res/layout/navigate_point.xml" match='xmlns:custom="http://schemas.android.com/apk/res/(.*)"' 
+			    replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
 		<if>
 			<condition>
 				<isset property="build.version.code" />
