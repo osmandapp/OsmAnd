@@ -64,8 +64,7 @@
 				<replaceregexp file="res/values/no_translate.xml" match='versionFeatures"&gt;(.*)&lt;' replace='versionFeatures"&gt;${versionFeatures}&lt;' byline="true" />
 			</then>
 		</if>
-		<property name="package.name" value="net.osmand.plus" />
-		<property name="app.name" value="OsmAnd~" />
+		
 		<if>
 			<condition>
 				<isset property="net.osmand.sherpafy" />
@@ -75,26 +74,26 @@
 				<property name="app.name" value="Sherpafy" />
 				<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon_sherpafy"' byline="true" />
 			</then>
-		</if>
-		<if>
-			<condition>
-				<isset property="net.osmand" />
-			</condition>
-			<then>
-				<property name="package.name" value="net.osmand" />
-				<property name="app.name" value="OsmAnd" />
-				<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon_free"' byline="true" />
-			</then>
-		</if>
-		<if>
-			<condition>
-				<isset property="net.osmand.plus" />
-			</condition>
-			<then>
-			    <property name="package.name" value="net.osmand.plus" />
-			    <property name="app.name" value="OsmAnd+" />
-			    <replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon"' byline="true" />
-			</then>
+			<elseif>
+  				<isset property="net.osmand" />
+  				<then>
+  				    <property name="package.name" value="net.osmand" />
+					<property name="app.name" value="OsmAnd" />
+					<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon_free"' byline="true" />
+  			    </then>
+  			</elseif>
+  			<elseif>
+  				<isset property="net.osmand.plus" />
+  				<then>
+  				    <property name="package.name" value="net.osmand.plus" />
+			    	<property name="app.name" value="OsmAnd+" />
+			    	<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon"' byline="true" />
+  			    </then>
+  			</elseif>
+  			<else>
+  			      <property name="package.name" value="net.osmand.plus" />
+				  <property name="app.name" value="OsmAnd~" />
+ 			</else>
 		</if>
 		<if>
 			<condition>
