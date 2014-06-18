@@ -11,7 +11,6 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
-import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -123,7 +122,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null) {
 			routeStepsControl = createRouteStepsInfoControl(activity, mapInfoLayer.getPaintSubText(), mapInfoLayer.getPaintSubText());
 			mapInfoLayer.getMapInfoControls().registerSideWidget(routeStepsControl,
-					R.drawable.widget_parking, R.string.map_widget_route_steps, "route_steps", false, 8);
+					R.drawable.widget_target, R.string.map_widget_route_points, "route_steps", false, 8);
 			mapInfoLayer.recreateControls();
 		}
 	}
@@ -229,24 +228,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		} else if (map.containsKey(mapKey)) {
 			map.remove(mapKey);
 		}
-
-		refreshPointsStatus();
-	}
-
-	//saves point status value to gpx extention file
-	public void markPointAsVisited(GPXUtilities.WptPt point) {
-		if (point.equals(currentPoint)) {
-			currentPoint = null;
-		}
-		int pos = findPointPosition(point);
-		Map<String, String> map = currentRoute.getExtensionsToWrite();
-
-		String mapKey = POINT_KEY + pos + VISITED_KEY;
-
-		//value is current time
-		Calendar c = Calendar.getInstance();
-		long number = c.getTimeInMillis();
-		map.put(mapKey, String.valueOf(number));
 
 		refreshPointsStatus();
 	}
