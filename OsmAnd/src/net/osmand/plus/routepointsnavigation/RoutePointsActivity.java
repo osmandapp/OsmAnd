@@ -1,11 +1,9 @@
 package net.osmand.plus.routepointsnavigation;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -14,8 +12,6 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.*;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.*;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.OsmandListActivity;
@@ -27,6 +23,7 @@ import java.util.*;
 
 /**
  * Created by Bars on 13.06.2014.
+ *
  */
 public class RoutePointsActivity extends OsmandListActivity {
 
@@ -39,14 +36,10 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 	private List<GPXUtilities.WptPt> sortedPointsList;
 
-	private List<Long> pointsStatus;
-
 	//saves indexed of sorted list
 	private List<Integer> pointsIndex;
 
 	private int selectedItemIndex;
-
-	private ActionMode actionMode;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +99,10 @@ public class RoutePointsActivity extends OsmandListActivity {
 		ArrayList<PointItem> pointItemsList = new ArrayList<PointItem>();
 		for (int i = 0; i < sortedPointsList.size(); i++) {
 			String pointName = sortedPointsList.get(i).name;
-			if (pointsStatus.get(i) != 0) {
+			long time = plugin.getPointStatus(pointsIndex.get(i));
+			if (time != 0) {
 				String dateString;
-				Date date = new Date(pointsStatus.get(i));
+				Date date = new Date(time);
 				if (DateFormat.is24HourFormat(app)) {
 					dateString = DateFormat.format("MM/dd k:mm", date).toString();
 				} else {
@@ -136,12 +130,11 @@ public class RoutePointsActivity extends OsmandListActivity {
 		listView.setAdapter(adapter);
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 				selectedItemIndex = i;
 				view.setSelected(true);
-				actionMode = getActivity().startActionMode(mActionModeCallback);
+				getActivity().startActionMode(mActionModeCallback);
 			}
 		});
 	}
@@ -163,26 +156,19 @@ public class RoutePointsActivity extends OsmandListActivity {
 		}
 	}
 
-	private List<Long> getAllPointsStatus() {
-		List<Long> pointsStatus = new ArrayList<Long>();
-		for (int i = 0; i < sortedPointsList.size(); i++) {
-			pointsStatus.add(plugin.getPointStatus(pointsIndex.get(i)));
-		}
-
-		return pointsStatus;
-	}
-
 	private void sortPoints() {
 		sortedPointsList = plugin.getPoints();
 		List<GPXUtilities.WptPt> listToSort = new ArrayList<GPXUtilities.WptPt>();
 		List<Integer> indexItemsAtTheEnd = new ArrayList<Integer>();
 		pointsIndex = new ArrayList<Integer>();
 		int curPointInd = plugin.getCurrentPointIndex();
-		if (curPointInd != -1){
+		//current item should be first if it's exists
+		if (curPointInd != -1) {
 			pointsIndex.add(curPointInd);
 			listToSort.add(plugin.getCurrentPoint());
 		}
 
+		//all not visited points should be at the top
 		for (int i = 0; i < sortedPointsList.size(); i++) {
 			if (i == curPointInd) {
 				continue;
@@ -197,11 +183,14 @@ public class RoutePointsActivity extends OsmandListActivity {
 		}
 
 		List<Long> timeOfVisits = new ArrayList<Long>();
-		for(int i=0; i<indexItemsAtTheEnd.size();i++){
-			timeOfVisits.add(plugin.getPointStatus(indexItemsAtTheEnd.get(i)));
+		for (Integer anIndexItemsAtTheEnd : indexItemsAtTheEnd) {
+			timeOfVisits.add(plugin.getPointStatus(anIndexItemsAtTheEnd));
 		}
 
-		quickSort(timeOfVisits,indexItemsAtTheEnd,0, indexItemsAtTheEnd.size());
+		//sorting visited point from earliest to latest
+		quickSort(timeOfVisits, indexItemsAtTheEnd, 0, indexItemsAtTheEnd.size());
+		//reverting items so they will be from latest to earliest
+		Collections.reverse(indexItemsAtTheEnd);
 
 		for (int i : indexItemsAtTheEnd) {
 			listToSort.add(sortedPointsList.get(i));
@@ -209,16 +198,13 @@ public class RoutePointsActivity extends OsmandListActivity {
 		}
 
 		sortedPointsList = listToSort;
-		pointsStatus = getAllPointsStatus();
 	}
 
 	private class PointItemAdapter extends ArrayAdapter<PointItem> {
-		private RoutePointsActivity ctx;
 		private ArrayList<PointItem> pointsList;
 
 		public PointItemAdapter(Context context, int textViewResourceId, ArrayList<PointItem> pointsList) {
 			super(context, textViewResourceId, pointsList);
-			ctx = (RoutePointsActivity) context;
 			this.pointsList = new ArrayList<PointItem>();
 			this.pointsList.addAll(pointsList);
 		}
