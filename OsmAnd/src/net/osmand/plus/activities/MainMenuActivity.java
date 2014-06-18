@@ -192,6 +192,7 @@ public class MainMenuActivity extends Activity {
 			getMyApplication().setAppCustomization(new SherpafyCustomization());
 			startActivity(mapIntent);
 			finish();
+			return;
 		}
 		
 		boolean exit = false;
