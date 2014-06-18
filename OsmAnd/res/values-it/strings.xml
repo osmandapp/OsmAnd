@@ -52,7 +52,7 @@
   <string name="routing_settings_descr">Specifica le opzioni di navigazione</string>
   <string name="global_settings">Impostazioni globali</string>
   <string name="index_settings">Gestisci i file delle mappe</string>
-  <string name="index_settings_descr">Scarica e gestisci le mappe offline archiviate sul tuo dispositivo.</string>
+  <string name="index_settings_descr">Scarica e gestisci le mappe offline archiviate sul tuo dispositivo</string>
   <string name="general_settings">Impostazioni generali</string>
   <string name="general_settings_descr">Configura le impostazioni globali</string>
   <string name="global_app_settings">Impostazioni globali dell\'applicazione</string>
@@ -1760,7 +1760,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="navigation_intent_invalid">Formato non valido: %s</string>
 <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoraggio - Monitoraggio avanzato in diretta con molte funzioni per il controllo remoto http://osmo.mobi</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoraggio - Monitoraggio avanzato in diretta. Fornisce la possibilità di tracciare altri dispositivi e di essere tracciati. Creare gruppo anonimi, condividere reciprocamente la posizione e comunicare. Sono disponibili varie impostazioni di monitoraggio, per la sessione in corso o permanenti. I gruppi anonimi sono limitate per il numero di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. Maggiori informazioni su http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (Monitoraggio avanzato in tempo reale)</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitoraggio (beta)</string>
    	<string name="keep_informing_never">Mai</string>
