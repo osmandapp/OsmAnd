@@ -6,4 +6,7 @@
     <string name="current_route">Current route:</string>
     <string name="done">Done</string>
     <string name="marking_as_unvisited">Marking as unvisited...</string>
+    <string name="select_gpx">Select gpx</string>
+    <string name="save_gpx">Save gpx</string>
+    <string name="start_route">Start route</string>
 </resources>

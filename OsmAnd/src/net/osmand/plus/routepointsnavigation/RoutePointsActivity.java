@@ -14,8 +14,6 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.*;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.*;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.OsmandListActivity;
@@ -53,7 +51,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 		super.setContentView(R.layout.route_steps_main);
 		this.app = (OsmandApplication) getApplication();
 		getPlugin();
-		getGpx();
+		getGpx(false);
 
 		if (gpx != null) {
 			prepareView();
@@ -73,26 +71,33 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 	}
 
-	private void getGpx() {
-		if (plugin.getGpx() != null) {
+	private void getGpx(boolean forced) {
+		if (plugin.getGpx() != null && !forced) {
 			this.gpx = plugin.getGpx();
-		} else {
-			GpxUiHelper.selectGPXFile(this, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
-				@Override
-				public boolean processResult(GPXUtilities.GPXFile[] result) {
-					gpx = result[0];
-					plugin.setGpx(gpx);
-					prepareView();
-					return false;
-				}
-			});
 		}
+
+		GpxUiHelper.selectGPXFile(this, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+			@Override
+			public boolean processResult(GPXUtilities.GPXFile[] result) {
+				gpx = result[0];
+				plugin.setGpx(gpx);
+				prepareView();
+				return false;
+			}
+		});
+
 	}
 
 	private void prepareView() {
 		TextView gpxName = (TextView) findViewById(R.id.gpx_name);
 		String fileName = getString(R.string.current_route) + " " + gpx.path.substring(gpx.path.lastIndexOf("/") + 1, gpx.path.lastIndexOf("."));
 		gpxName.setText(fileName);
+		gpxName.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				actionMode = getActivity().startActionMode(mGpxActionModeCallback);
+			}
+		});
 
 		TextView visited = (TextView) findViewById(R.id.points_count);
 		visited.setText("(" + plugin.getVisitedAllString() + ")");
@@ -141,7 +146,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 				selectedItemIndex = i;
 				view.setSelected(true);
-				actionMode = getActivity().startActionMode(mActionModeCallback);
+				actionMode = getActivity().startActionMode(mPointActionModeCallback);
 			}
 		});
 	}
@@ -178,7 +183,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 		List<Integer> indexItemsAtTheEnd = new ArrayList<Integer>();
 		pointsIndex = new ArrayList<Integer>();
 		int curPointInd = plugin.getCurrentPointIndex();
-		if (curPointInd != -1){
+		if (curPointInd != -1) {
 			pointsIndex.add(curPointInd);
 			listToSort.add(plugin.getCurrentPoint());
 		}
@@ -197,11 +202,11 @@ public class RoutePointsActivity extends OsmandListActivity {
 		}
 
 		List<Long> timeOfVisits = new ArrayList<Long>();
-		for(int i=0; i<indexItemsAtTheEnd.size();i++){
+		for (int i = 0; i < indexItemsAtTheEnd.size(); i++) {
 			timeOfVisits.add(plugin.getPointStatus(indexItemsAtTheEnd.get(i)));
 		}
 
-		quickSort(timeOfVisits,indexItemsAtTheEnd,0, indexItemsAtTheEnd.size());
+		quickSort(timeOfVisits, indexItemsAtTheEnd, 0, indexItemsAtTheEnd.size());
 
 		for (int i : indexItemsAtTheEnd) {
 			listToSort.add(sortedPointsList.get(i));
@@ -303,7 +308,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 			protected void onPreExecute() {
 				dlg = new ProgressDialog(getActivity());
-				if (plugin.getPointStatus(point) == 0){
+				if (plugin.getPointStatus(point) == 0) {
 					dlg.setTitle(R.string.marking_as_visited);
 				} else {
 					dlg.setTitle(getString(R.string.marking_as_unvisited));
@@ -315,7 +320,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			@Override
 			protected Void doInBackground(GPXUtilities.WptPt... params) {
 				long status = plugin.getPointStatus(point);
-				if (status == 0){
+				if (status == 0) {
 					plugin.setPointStatus(point, true);
 				} else {
 					plugin.setPointStatus(point, false);
@@ -338,7 +343,46 @@ public class RoutePointsActivity extends OsmandListActivity {
 		}.execute(point);
 	}
 
-	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+	private ActionMode.Callback mGpxActionModeCallback = new ActionMode.Callback() {
+		@Override
+		public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+			MenuItem item = menu.add(getString(R.string.select_gpx));
+			item.setIcon(R.drawable.ic_action_layers_dark);
+			item = menu.add(getString(R.string.start_route));
+			item.setIcon(R.drawable.ic_action_map_marker_dark);
+			return true;
+		}
+
+		@Override
+		public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+			return false;
+		}
+
+		@Override
+		public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+			if (menuItem.getTitle().equals(getResources().getString(R.string.select_gpx))) {
+				getGpx(true);
+			} else if (menuItem.getTitle().equals(getResources().getString(R.string.start_route))) {
+				GPXUtilities.WptPt point = plugin.getCurrentPoint();
+				if (point == null) {
+					if (plugin.getPointStatus(pointsIndex.get(0)) == 0) {
+						plugin.setCurrentPoint(sortedPointsList.get(0));
+					}
+				}
+				actionMode.finish();
+				finish();
+			}
+			actionMode.finish();
+			return true;
+		}
+
+		@Override
+		public void onDestroyActionMode(ActionMode actionMode) {
+
+		}
+	};
+
+	private ActionMode.Callback mPointActionModeCallback = new ActionMode.Callback() {
 		@Override
 		public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
 			MenuItem item = menu.add(getString(R.string.mark_as_current));
@@ -434,14 +478,14 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 	}
 
-	private void swap(List<Long> valuesList, List<Integer> indexList, int piviotPos, int endIndex){
+	private void swap(List<Long> valuesList, List<Integer> indexList, int piviotPos, int endIndex) {
 		long value = valuesList.get(piviotPos);
 		valuesList.set(piviotPos, valuesList.get(endIndex));
-		valuesList.set(endIndex,value);
+		valuesList.set(endIndex, value);
 
 		int index = indexList.get(piviotPos);
-		indexList.set(piviotPos,indexList.get(endIndex));
-		indexList.set(endIndex,index);
+		indexList.set(piviotPos, indexList.get(endIndex));
+		indexList.set(endIndex, index);
 
 	}
 

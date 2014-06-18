@@ -44,13 +44,17 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	}
 
 	public void setCurrentPoint(GPXUtilities.WptPt point) {
-		currentPoint = point;
-		currentPointIndex = findPointPosition(point);
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		LatLon latLon = new LatLon(point.lat, point.lon);
+		targetPointsHelper.navigateToPoint(latLon, true, -1,":" + point.name);
+		getCurrentPoint();
 	}
 
 	public void setCurrentPoint(int number) {
-		currentPoint = pointsList.get(number);
-		currentPointIndex = number;
+		GPXUtilities.WptPt point = pointsList.get(number);
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		LatLon latLon = new LatLon(point.lat, point.lon);
+		targetPointsHelper.navigateToPoint(latLon, true, -1, point.name);
 	}
 
 	public List<GPXUtilities.WptPt> getPoints() {
@@ -79,12 +83,11 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 	public GPXUtilities.WptPt getCurrentPoint() {
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		LatLon latLon = targetPointsHelper.getPointToNavigate();
-
-		for(int i=0; i<pointsList.size();i++){
-			GPXUtilities.WptPt point = pointsList.get(i);
-			if (point.lat == latLon.getLatitude() && point.lon == latLon.getLongitude()){
-				currentPoint = point;
+		String locName = targetPointsHelper.getPointNavigateDescription();
+		for (int i = 0; i < pointsList.size(); i++) {
+			String pointName = ":" + pointsList.get(i).name;
+			if (pointName.equals(locName)) {
+				currentPoint = pointsList.get(i);
 				currentPointIndex = i;
 				break;
 			}
@@ -196,7 +199,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 	}
 
-	public long getPointStatus(GPXUtilities.WptPt point){
+	public long getPointStatus(GPXUtilities.WptPt point) {
 		return getPointStatus(findPointPosition(point));
 	}
 
@@ -231,7 +234,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 	//saves point status value to gpx extention file
 	public void markPointAsVisited(GPXUtilities.WptPt point) {
-		if (point.equals(currentPoint)){
+		if (point.equals(currentPoint)) {
 			currentPoint = null;
 		}
 		int pos = findPointPosition(point);
