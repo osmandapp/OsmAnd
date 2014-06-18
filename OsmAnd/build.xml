@@ -74,27 +74,27 @@
 				<property name="app.name" value="Sherpafy" />
 				<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon_sherpafy"' byline="true" />
 			</then>
-			<elseif>
+		</if>
+		<if>
+			<condition>
   				<isset property="net.osmand" />
-  				<then>
-  				    <property name="package.name" value="net.osmand" />
-					<property name="app.name" value="OsmAnd" />
-					<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon_free"' byline="true" />
-  			    </then>
-  			</elseif>
-  			<elseif>
+  			</condition>
+  			<then>
+  			    <property name="package.name" value="net.osmand" />
+				<property name="app.name" value="OsmAnd" />
+				<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon_free"' byline="true" />
+  		    </then>
+  		</if>
+		<if>
+			<condition>
   				<isset property="net.osmand.plus" />
+  			</condition>
   				<then>
   				    <property name="package.name" value="net.osmand.plus" />
 			    	<property name="app.name" value="OsmAnd+" />
 			    	<replaceregexp file="AndroidManifest.xml" match='"@drawable/(.*)"' replace='"@drawable/icon"' byline="true" />
   			    </then>
-  			</elseif>
-  			<else>
-  			      <property name="package.name" value="net.osmand.plus" />
-				  <property name="app.name" value="OsmAnd~" />
- 			</else>
-		</if>
+  		</if>
 		<if>
 			<condition>
 				<isset property="package.name" />
