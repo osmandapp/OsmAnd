@@ -51,7 +51,7 @@
   <string name="routing_settings">Navigazione</string>
   <string name="routing_settings_descr">Specifica le opzioni di navigazione</string>
   <string name="global_settings">Impostazioni globali</string>
-  <string name="index_settings">Gestisci file delle mappe</string>
+  <string name="index_settings">Gestisci i file delle mappe</string>
   <string name="index_settings_descr">Scarica e gestisci le mappe offline archiviate sul tuo dispositivo.</string>
   <string name="general_settings">Impostazioni generali</string>
   <string name="general_settings_descr">Configura le impostazioni globali</string>
