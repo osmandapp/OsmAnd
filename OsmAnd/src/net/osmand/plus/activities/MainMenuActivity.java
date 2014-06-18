@@ -195,11 +195,11 @@ public class MainMenuActivity extends Activity {
 			return;
 		}
 		
-		boolean exit = false;
 		if(getIntent() != null){
 			Intent intent = getIntent();
 			if(intent.getExtras() != null && intent.getExtras().containsKey(APP_EXIT_KEY)){
-				exit = true;
+				getMyApplication().closeApplication(this);
+				return;
 			}
 		}
 		
@@ -256,10 +256,6 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 		appCustomization.customizeMainMenu(window, this);
-		if(exit){
-			getMyApplication().closeApplication(activity);
-			return;
-		}
 		OsmandApplication app = getMyApplication();
 		// restore follow route mode
 		if(app.getSettings().FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()){

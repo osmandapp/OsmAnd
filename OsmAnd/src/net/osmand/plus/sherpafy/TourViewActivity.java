@@ -9,6 +9,7 @@ import net.osmand.IProgress;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
@@ -63,6 +64,9 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private static final int STATE_LOADING = 0;
 	private static final int STATE_SELECT_TOUR = -1;
 	private static int state = STATE_LOADING;
+	public static final int APP_EXIT_CODE = 4;
+	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
+	
 	private SherpafyCustomization customization;
 	ImageView img;
 	TextView description;
@@ -82,6 +86,13 @@ public class TourViewActivity extends SherlockFragmentActivity {
     	setTheme(R.style.OsmandLightTheme);
         ((OsmandApplication) getApplication()).setLanguage(this);
         super.onCreate(savedInstanceState);
+        if(getIntent() != null){
+			Intent intent = getIntent();
+			if(intent.getExtras() != null && intent.getExtras().containsKey(APP_EXIT_KEY)){
+				getMyApplication().closeApplication(this);
+				return;
+			}
+		}
         if(getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT || 
         		getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT) {
         	getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
@@ -136,6 +147,14 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			}
 
 		};
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == APP_EXIT_CODE){
+			getMyApplication().closeApplication(this);
+		}
 	}
 
 	@Override
@@ -365,15 +384,21 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private void goToMap() {
 		if (customization.getSelectedStage() != null) {
 			GPXFile gpx = customization.getSelectedStage().getGpx();
-			getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-			if (gpx != null && gpx.findPointToShow() != null) {
-				WptPt p = gpx.findPointToShow();
-				getMyApplication().getSettings().setMapLocationToShow(p.lat, p.lon,
-						getMyApplication().getSettings().getLastKnownMapZoom(), null);
-				getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(gpx);
+			List<SelectedGpxFile> sgpx = getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
+			if(gpx == null && sgpx.size() > 0) {
+				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
+			} else if (sgpx.size() != 1 || sgpx.get(0).getGpxFile() != gpx) {
+				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
+				if (gpx != null && gpx.findPointToShow() != null) {
+					WptPt p = gpx.findPointToShow();
+					getMyApplication().getSettings().setMapLocationToShow(p.lat, p.lon, 16, null);
+					getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(gpx);
+				}
 			}
 		}
-		MapActivity.launchMapActivityMoveToTop(getActivity());
+		Intent newIntent = new Intent(this, customization.getMapActivity());
+		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+		this.startActivityForResult(newIntent, 0);
 	}
 
 	private void prepareBitmap(Bitmap imageBitmap) {
