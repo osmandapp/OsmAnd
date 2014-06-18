@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
@@ -1235,7 +1235,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="context_menu_item_directions_to">Direções para</string>
     <string name="context_menu_item_directions_from">Direções desde</string>
     <string name="route_descr_map_location">Mapa: </string>
-    <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
+    <string name="route_descr_lat_lon">Lat. %1$.3f, Lon. %2$.3f</string>
     <string name="route_to">Para:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">Desde:</string>

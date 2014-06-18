@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\n online tracking</string>
   <string name="live_monitoring_mode_on">Stop\n online tracking</string>
   <string name="layer_map_appearance">Configureer scherm</string>
@@ -25,7 +25,7 @@
   <string name="native_rendering">Interne kaartgeneratie</string>
   
   <string name="test_voice_prompts">Test stem-instructies</string>
-  <string name="switch_to_raster_map_to_see">Geen offline vectorkaart aanwezig voor deze locatie. Je kan deze downloaden via Instellingen (Offline gegevens), of overschakelen naar online kaarten.</string>
+  <string name="switch_to_raster_map_to_see">Geen offline vectorkaart aanwezig voor deze locatie. Je kan deze downloaden via Instellingen (Kaartbeheer), of overschakelen naar online kaarten; activeer hiervoor de "online maps" plugin.</string>
   <string name="tip_recent_changes_0_7_2_t">Wijzigingen in 0.7.2:
 	\n\t- Interne kaartgeneratie op alle apparaten
 	\n\t- Offline interessepunt-bewerking
@@ -163,8 +163,8 @@
   <string name="routing_settings">Navigatie</string>
   <string name="routing_settings_descr">Opties voor navigatie</string>
   <string name="global_settings">Algemene instellingen</string>
-  <string name="index_settings">Offline gegevens</string>
-  <string name="index_settings_descr">Download kaarten en stemmen, en beheer en bekijk GPX-tracks</string>
+  <string name="index_settings">Kaartbeheer</string>
+  <string name="index_settings_descr">Download en beheer kaarten, stemmen en GPX-tracks</string>
   <string name="general_settings">Algemene instellingen</string>
   <string name="general_settings_descr">Kaartweergave en algemene instellingen</string>
   <string name="global_app_settings">Algemene app instellingen</string>
@@ -283,7 +283,7 @@
   <string name="local_index_items_restored">%1$d van %2$d gegevens succesvol geactiveerd.</string>
   <string name="local_index_no_items_to_do">Voor %1$s: geen bestanden</string>
   <string name="local_index_action_do">%1$s: %2$s bestanden. Doorgaan?</string>
-  <string name="local_index_descr_title">Offline gegevensbeheer</string>
+  <string name="local_index_descr_title">Kaartbeheer</string>
   <string name="local_index_mi_restore">Activeer</string>
   <string name="local_index_mi_backup">Deactiveer</string>
   <string name="local_index_mi_delete">Verwijder</string>
@@ -352,8 +352,8 @@
   <string name="internet_not_available">De benodigde internetverbinding voor deze actie is niet beschikbaar</string>
   <string name="install_more">Installeer meer…</string>
   <string name="tip_update_index">Bijwerken van offline kaarten</string>
-  <string name="tip_update_index_t">Het is belangrijk dat de kaartgegevens up-to-date zijn voor zoeken op interessepunt/adres en voor offline navigatie. De downloadmanager kan deze offline kaarten (en enkele andere gegevens) downloaden en aangeven of er updates beschikbaar zijn.
-		\n\nOm kaarten te downloaden, ga naar \'Instellingen\' -&gt; \'Offline gegevens\' -&gt; \'Download of update offline gegevens\'.
+  <string name="tip_update_index_t">Het is belangrijk dat de kaartgegevens up-to-date zijn voor zoeken op interessepunt/adres en voor offline navigatie. De kaartmanager kan deze offline kaarten (en enkele andere gegevens) downloaden en aangeven of er updates beschikbaar zijn.
+		\n\nOm kaarten te downloaden, ga naar \'Instellingen\' -&gt; \'Kaartbeheer\' -&gt; \'Download of update offline gegevens\'.
 		\n\nNadat de regiolijst van het internet is opgehaald, druk op een item om deze te downloaden of te updaten.
 		\n\nJe kan de lijst doorzoeken door letters te typen, of gebruik de optie \'Instellingen\' -&gt; \'Toon gedownloade\' om alleen de gegevens te zien die al op je apparaat aanwezig zijn.
 		\n\n\t* Groen: deze gegevens zijn up-to-date
@@ -369,7 +369,7 @@
   <string name="tip_favorites">Favorieten</string>
   <string name="tip_favorites_t">Veelgebruikte punten kunnen als volgt worden bewaard als favorieten:
 		\n\nIn het kaartcontextmenu van een punt, kies de optie \'Voeg toe aan favorieten\' en geef het dan een naam.
-		\n\nNa opslaan zijn favorieten toegankelijk via \'Hoofdmenu\' → \'Favorieten\'. Druk op een favoriet in het menu \'Favorieten\' om deze als als bestemming te kiezen, te bewerken of te verwijderen.
+		\n\nNa opslaan zijn favorieten toegankelijk via \'Hoofdmenu\' → \'Favorieten\'. Druk op een favoriet in het menu \'Mijn plaatsen\' om deze als als bestemming te kiezen, te bewerken of te verwijderen.
 		\n\nJe kan alle favorieten tegelijk op de kaart weergeven door de laag \'Favorieten\' aan te zetten op het kaartscherm in \'Menu\' → \'Kaartlagen\'.
 	</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> kaart classificatie met foto\'s"</string>
@@ -608,7 +608,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="route_head">Koers</string>
   <string name="first_time_continue">Ga door</string>
   <string name="first_time_download">Download regio\'s</string>
-  <string name="first_time_msg">Om OsmAnd goed te gebruiken moet je kaartgegevens downloaden (\'Instellingen\' → \'Offline gegevens\') of zelf aanmaken. Daarna kan je de kaart bekijken en adressen, interessepunten en openbaar vervoer opzoeken.</string>
+  <string name="first_time_msg">Om OsmAnd goed te gebruiken moet je kaartgegevens downloaden (\'Instellingen\' → \'Kaartbeheer\') of zelf aanmaken. Daarna kan je de kaart bekijken en adressen, interessepunten en openbaar vervoer opzoeken.</string>
   <string name="search_poi_location">Naar signaal zoeken…</string>
   <string name="search_near_map">Zoek dichtbij de laatste kaartlocatie</string>
   <string name="search_nearby">Zoek dichtbij</string>
@@ -769,7 +769,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="exit_Button">Afsluiten</string>
   <string name="map_Button">Kaart</string>
   <string name="settings_Button">Instellingen</string>
-  <string name="favorites_Button">Favorieten</string>
+  <string name="favorites_Button">Mijn plaatsen</string>
   <string name="search_button">Zoeken</string>
   <string name="search_activity">Zoeken</string>
   <string name="searchpoi_activity">Kies interessepunt</string>
@@ -864,7 +864,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
   <string name="offline_navigation_not_available">OsmAnd offline navigatie is tijdelijk niet beschikbaar.</string>
   <string name="left_side_navigation">Linksrijdend verkeer</string>
   <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt</string>
-  <string name="download_link_and_local_description">Download of update offline gegevens.\nKlik op een item om meer details te zien, druk lang om te deactiveren, te hernoemen of te verwijderen. Huidige data op apparaat (%1$s vrij):</string>
+  <string name="download_link_and_local_description">Download of actualiseer offline kaarten.\nKlik op een item om meer details te zien, druk lang om te deactiveren, te hernoemen of te verwijderen. Huidige data op apparaat (%1$s vrij):</string>
   <string name="unknown_from_location">Startlocatie is nog niet bepaald</string>
   <string name="confirm_interrupt_download">Wil je het downloaden afbreken?</string>
   <string name="basemap_was_selected_to_download">De basiskaart is nodig voor OsmAnd en is al geselecteerd om te downloaden.</string>
@@ -1164,7 +1164,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
     <string name="tip_altitude_offset">Hoogtecorrectie</string>
 	<string name="tip_altitude_offset_t">De meeste GPS ontvangers geven hoogtemetingen in het WGS84-systeem. De conversie naar lokale systemen vereist een positie-afhankelijke correctie.
 		\n\nEen nauwkeuriger benadering voor deze systemen is het EGM96-systeem (geoid).
-		\n\nOsmAnd kan de hoogte ook weergeven in het EGM96-systeem. Download hiervoor de gegevens voor World Altitude Correction (WW15MGH.DAC) via \'Instellingen\' -&gt; \'Offline gegevens\' (het origineel staat op http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+		\n\nOsmAnd kan de hoogte ook weergeven in het EGM96-systeem. Download hiervoor de gegevens voor World Altitude Correction (WW15MGH.DAC) via \'Instellingen\' -&gt; \'Kaartbeheer\' (het origineel staat op http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Verberg grenzen</string>
@@ -1174,7 +1174,7 @@ Kies daarna om er heen te navigeren, op de kaart te tonen, aan een route of de f
     <string name="osmodroid_plugin_name">OsMoDroid-plugin</string>
 	<string name="index_srtm_parts">gedeelten</string>
     <string name="index_srtm_ele">Hoogtelijnen</string>
-    <string name="srtm_plugin_description">Maakt het downloaden van offline hoogtelijnen en reliëfinformatie mogelijk (\'Instellingen\' → \'Offline gegevensbeheer\' → \'Download\' → Kies kaarttype).</string>
+    <string name="srtm_plugin_description">Maakt het downloaden van offline hoogtelijnen en reliëfinformatie mogelijk (\'Instellingen\' → \'Kaartbeheer\' → \'Download\' → Kies kaarttype).</string>
     <string name="srtm_plugin_name">Hoogtelijnen-plugin</string>
     <string name="download_select_map_types">Andere kaarten</string>
     <string name="download_srtm_maps">Hoogtelijnen</string>
@@ -1759,9 +1759,12 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="osmo_locations_sent">%1$d verzonden locaties (in buffer %2$d) </string>
     <string name="osmo_conn_successfull">Verbinding gemaakt: %1$s </string>
     <string name="tip_recent_changes_1_8_alpha">Wijzigingen in versie 1.8:
-      * Routeberekening tussen punten op een GPX-spoor
-      * Kaarten op het downloadscherm zoeken met de plaatselijke naam
-      * GPX/KML import (converteer KML naar GPX)
+    * Routeberekening tussen punten op een GPX-spoor
+    * Kaarten op het downloadscherm zoeken met de plaatselijke naam
+    * GPX/KML import (converteer KML naar GPX)
+    * GPX sporen verplaatst naar "Mijn plaatsen"
+    * GPX spoor splitsen en controle van hoogteverschil / snelheid
+    * Start navigatie automatisch na vertraging
     </string>
     <string name="use_points_as_intermediates">Bereken route tussen punten</string>
     <string name="osmo_mode_restart">Herstart OsMo-sessie</string>
@@ -1824,35 +1827,35 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="osmo_show_group_notifications">Toon groepsmeldingen</string>
     <string name="osmo_show_group_notifications_descr">Toon meldingen als een gebruiker bij een groep komt of deze verlaat</string>
     <string name="my_favorites">Mijn favorieten</string>
-    <string name="my_data_Button">Mijn gegevens</string>
-    <string name="my_data_activity">Mijn gegevens</string>
+    <string name="my_data_Button">Mijn plaatsen</string>
+    <string name="my_data_activity">Mijn plaatsen</string>
     <string name="selected_track">Gekozen track</string>
     <string name="my_tracks">Alle tracks</string>
     <string name="gpx_file_is_empty">Gpx track is leeg</string>
     <string name="gpx_info_subtracks">Subtracks: %1$s </string>
 	<string name="gpx_info_distance">Afstand: %1$s (%2$s punten) </string>
-	<string name="gpx_info_start_time">Starttijd: %1$tF,  %1$tR </string>
-	<string name="gpx_info_end_time">Eindtijd: %1$tF,  %1$tR </string>
+	<string name="gpx_info_start_time">Starttijd: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">Eindtijd: %1$tF,  %1$tT </string>
 	<string name="gpx_info_average_speed">Gemiddelde snelheid: %1$s </string>
 	<string name="gpx_info_maximum_speed">Maximum snelheid: %1$s </string>
 	<string name="gpx_info_avg_altitude">Gemiddelde hoogte: %1$s</string>
-	<string name="gpx_info_diff_altitude">Hoogteverschil: %1$s</string>
-	<string name="gpx_info_asc_altitude">Stijgingen: %1$s</string>
+	<string name="gpx_info_diff_altitude">Hoogtebereik: %1$s</string>
+	<string name="gpx_info_asc_altitude">Dalingen/Stijgingen: %1$s</string>
     <string name="gpx_timespan">Tijdsduur: %1$s</string>
 	<string name="gpx_timemoving">Tijdsduur verplaatsingen: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
     <string name="gpx_selection_number_of_points"> %1$s punten</string>
     <string name="gpx_selection_point">Punt %1$s</string>
     <string name="gpx_selection_current_track">geregistreerde track</string>
-    <string name="gpx_selection_route_points">%1$s \n Routepunten %2$s</string>
-    <string name="gpx_selection_points">%1$s\n punten</string>
-    <string name="gpx_selection_track">%1$s\n Track %2$s</string>
+    <string name="gpx_selection_route_points">%1$s \nRoutepunten %2$s</string>
+    <string name="gpx_selection_points">%1$s \npunten</string>
+    <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
     <string name="gpx_available_current_track">Huidige geregistreerde track</string>
     <string name="save_as_favorites_points">Bewaar als groep van favorieten</string>
     <string name="loading_smth">Laad %1$s …</string>
     <string name="map_widget_plain_time">Huidige tijd</string>
     <string name="select_destination_and_intermediate_points">Kies routepunten</string>
-    <string name="layer_amenity_label">Tekstlabels</string>
+    <string name="layer_amenity_label">Punt-labels</string>
     <string name="gpx_wpt">Routepunt</string>
     <string name="selected_gpx_info_show">\n\nLang drukken om op de kaart te bekijken</string>
     <string name="delay_navigation_start">Start navigatie met vertraging</string>

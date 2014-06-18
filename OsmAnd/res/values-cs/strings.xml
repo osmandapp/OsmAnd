@@ -1626,6 +1626,6 @@ s často kladenými otázkami.</string>
     <string name="select_destination_and_intermediate_points">Vybrat body na trase</string>
     <string name="layer_amenity_label">Textové popisky</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapová klasifikace s obrázky</string>
-	<string name="show_zoom_buttons_navigation_descr">Zobrazit tlačítka lupy během navigace</string>
+    <string name="show_zoom_buttons_navigation_descr">Zobrazit tlačítka lupy během navigace</string>
     <string name="show_zoom_buttons_navigation">Zobrazit tlačítka lupy</string>
     </resources>

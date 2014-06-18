@@ -22,7 +22,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.FileSettingsAPIImpl;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
-import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.view.Window;
 import android.widget.TextView;
@@ -226,18 +225,18 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 
 
 	public void selectTour(TourInformation tour, IProgress progress) {
-		if(tour == null) {
+		if (tour == null) {
 			selectedTourPref.set(null);
 		} else {
 			selectedTourPref.set(tour.getName());
 		}
 		selectedTour = null;
 		selectedStage = null;
-		//to avoid null reference ecxeption if there's no selected tour yet.
+		// to avoid null reference ecxeption if there's no selected tour yet.
 		if (selectedStagePref != null) {
 			selectedStagePref.set(null);
 		}
-			app.getResourceManager().reloadIndexes(progress);
+		app.getResourceManager().reloadIndexes(progress);
 	}
 
 	@Override

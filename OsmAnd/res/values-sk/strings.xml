@@ -1887,5 +1887,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="save_as_favorites_points">Uložiť ako skupinu obľúbených</string>
     <string name="select_destination_and_intermediate_points">Vybrať prechodné body</string>
     <string name="layer_amenity_label">Popisy bodov</string>
+    <string name="show_zoom_buttons_navigation_descr">Zobraziť tlačidlá priblíženia počas navigácie</string>
     <string name="show_zoom_buttons_navigation">Zobraziť tlačidlá priblíženia</string>
     </resources>

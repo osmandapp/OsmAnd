@@ -13,6 +13,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.sherpafy.SherpafyCustomization;
+import net.osmand.plus.sherpafy.TourViewActivity;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -184,16 +185,21 @@ public class MainMenuActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		if(getIntent() != null) {
-			setupCustomization(getIntent());
-		}
-		((OsmandApplication) getApplication()).applyTheme(this);
+		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
-		boolean exit = false;
+		if(Version.isSherpafy(getMyApplication())) {
+			final Intent mapIntent = new Intent(this, TourViewActivity.class);
+			getMyApplication().setAppCustomization(new SherpafyCustomization());
+			startActivity(mapIntent);
+			finish();
+			return;
+		}
+		
 		if(getIntent() != null){
 			Intent intent = getIntent();
 			if(intent.getExtras() != null && intent.getExtras().containsKey(APP_EXIT_KEY)){
-				exit = true;
+				getMyApplication().closeApplication(this);
+				return;
 			}
 		}
 		
@@ -250,10 +256,6 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 		appCustomization.customizeMainMenu(window, this);
-		if(exit){
-			getMyApplication().closeApplication(activity);
-			return;
-		}
 		OsmandApplication app = getMyApplication();
 		// restore follow route mode
 		if(app.getSettings().FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()){
@@ -309,11 +311,6 @@ public class MainMenuActivity extends Activity {
 		}
 	}
 
-	private void setupCustomization(Intent intent) {
-		if (intent.hasExtra("SHERPAFY")) {
-			((OsmandApplication) getApplication()).setAppCustomization(new SherpafyCustomization());
-		}
-	}
 
 	private void applicationInstalledFirstTime() {
 		boolean netOsmandWasInstalled = false;
