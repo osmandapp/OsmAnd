@@ -1848,4 +1848,16 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="gpx_info_average_speed">Vidutinis greitis: %1$s </string>
 	<string name="gpx_info_maximum_speed">Maksimalus greitis: %1$s </string>
 	<string name="gpx_selection_number_of_points"> %1$s taškai/-ų</string>
+    <string name="show_zoom_buttons_navigation_descr">Rodyti mąstelio mygtukus navigacijos metu</string>
+    <string name="show_zoom_buttons_navigation">Rodyti mąstelio mygtukus</string>
+    <string name="save_as_favorites_points">Išsaugoti kaip grupę įsimintų vietų</string>
+    <string name="select_destination_and_intermediate_points">Pasirinkti tarpinius kelionės taškus</string>
+    <string name="layer_amenity_label">Taškų pavadinimai</string>
+    <string name="loading_smth">Įkeliama %1$s …</string>
+    <string name="map_widget_plain_time">Dabartinis laikas</string>
+    <string name="gpx_wpt">Kelionės taškas</string>
+    <string name="selected_gpx_info_show">\n\nPaspauskite ir laikykite kad pamatytumėte ant žemėlapio</string>
+    <string name="delay_navigation_start">Pradėti navigaciją su uždelsimu</string>
+    <string name="selected">pasirinkti</string>
+    <string name="gpx_split_interval">Pasirinkti padalinimo intervalą</string>
     </resources>

@@ -9,6 +9,7 @@ public class Version {
 	private final String appVersion; 
 	private final String appName;
 	private final static String FREE_VERSION_NAME = "net.osmand";
+	private final static String SHERPAFY_VERSION_NAME = "net.osmand.sherpafy";
 	
 	
 	public static boolean isGpsStatusEnabled(OsmandApplication ctx) {
@@ -46,6 +47,14 @@ public class Version {
 	
 	public static boolean isParkingPluginInlined(OsmandApplication ctx) {
 		return ctx.getString(R.string.versionFeatures).contains("+parking_plugin");
+	}
+	
+	public static boolean isRouteNavPluginInlined(OsmandApplication ctx) {
+		return ctx.getString(R.string.versionFeatures).contains("+route_nav");
+	}
+	
+	public static boolean isSherpafy(OsmandApplication ctx) {
+		return ctx.getPackageName().equals(SHERPAFY_VERSION_NAME);
 	}
 	
 	private Version(OsmandApplication ctx) {
