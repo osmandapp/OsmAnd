@@ -177,9 +177,11 @@ public class RoutePointsActivity extends OsmandListActivity {
 		List<GPXUtilities.WptPt> listToSort = new ArrayList<GPXUtilities.WptPt>();
 		List<Integer> indexItemsAtTheEnd = new ArrayList<Integer>();
 		pointsIndex = new ArrayList<Integer>();
-		listToSort.add(plugin.getCurrentPoint());
 		int curPointInd = plugin.getCurrentPointIndex();
-		pointsIndex.add(curPointInd);
+		if (curPointInd != -1){
+			pointsIndex.add(curPointInd);
+			listToSort.add(plugin.getCurrentPoint());
+		}
 
 		for (int i = 0; i < sortedPointsList.size(); i++) {
 			if (i == curPointInd) {
@@ -223,7 +225,6 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 		private class ViewHolder {
 			ImageView image;
-			TextView index;
 			TextView name;
 			TextView dateOrDistance;
 		}
@@ -237,7 +238,6 @@ public class RoutePointsActivity extends OsmandListActivity {
 				convertView = vi.inflate(R.layout.route_point_info, null);
 
 				holder = new ViewHolder();
-				holder.index = (TextView) convertView.findViewById(R.id.index);
 				holder.dateOrDistance = (TextView) convertView.findViewById(R.id.date_or_distance);
 				holder.name = (TextView) convertView.findViewById(R.id.name);
 				holder.image = (ImageView) convertView.findViewById(R.id.point_icon);
@@ -248,7 +248,6 @@ public class RoutePointsActivity extends OsmandListActivity {
 			}
 
 			PointItem point = pointsList.get(position);
-			holder.index.setText(String.valueOf(position));
 			holder.name.setText(point.getName());
 			holder.dateOrDistance.setText(String.valueOf(point.getTime()));
 			if (point.isSelected()) {

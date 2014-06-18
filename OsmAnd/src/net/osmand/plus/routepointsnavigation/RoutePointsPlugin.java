@@ -3,6 +3,7 @@ package net.osmand.plus.routepointsnavigation;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.view.View;
+import net.osmand.data.LatLon;
 import net.osmand.plus.*;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.MapInfoLayer;
@@ -34,7 +35,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	private TextInfoWidget routeStepsControl;
 
 	private int visitedCount;
-	private Integer currentPointIndex;
+	private int currentPointIndex = -1;
 
 
 	public RoutePointsPlugin(OsmandApplication app) {
@@ -44,8 +45,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 	public void setCurrentPoint(GPXUtilities.WptPt point) {
 		currentPoint = point;
-		int number = findPointPosition(point);
-		currentPointIndex = number;
+		currentPointIndex = findPointPosition(point);
 	}
 
 	public void setCurrentPoint(int number) {
@@ -78,15 +78,18 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	}
 
 	public GPXUtilities.WptPt getCurrentPoint() {
-		if (currentPoint == null) {
-			for (int i = 0; i < pointsList.size(); i++) {
-				if (getPointStatus(i) == 0) {
-					currentPoint = pointsList.get(i);
-					currentPointIndex = i;
-					break;
-				}
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		LatLon latLon = targetPointsHelper.getPointToNavigate();
+
+		for(int i=0; i<pointsList.size();i++){
+			GPXUtilities.WptPt point = pointsList.get(i);
+			if (point.lat == latLon.getLatitude() && point.lon == latLon.getLongitude()){
+				currentPoint = point;
+				currentPointIndex = i;
+				break;
 			}
 		}
+
 		return currentPoint;
 	}
 
