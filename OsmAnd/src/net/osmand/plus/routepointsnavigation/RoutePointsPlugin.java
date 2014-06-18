@@ -105,6 +105,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		currentRoute = gpx.routes.get(0);
 		pointsList = currentRoute.points;
 		refreshPointsStatus();
+		getCurrentPoint();
 	}
 
 	public void registerLayers(MapActivity activity) {
