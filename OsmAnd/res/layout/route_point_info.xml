@@ -4,24 +4,36 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="6dip"
-                android:weightSum="6">
+                android:weightSum="1"
+                android:background="?android:attr/activatedBackgroundIndicator">
+    <ImageView android:id="@+id/point_icon"
+               android:layout_width="32dp"
+               android:padding="3dp"
+               android:layout_marginLeft="5dp"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_vertical"/>
 
     <TextView android:id="@+id/index"
+              android:layout_marginLeft="5dp"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical"
               android:visibility="gone"/>
 
     <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"/>
 
     <TextView
-            android:id="@+id/date"
+            android:id="@+id/date_or_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"/>
 
 </LinearLayout>
