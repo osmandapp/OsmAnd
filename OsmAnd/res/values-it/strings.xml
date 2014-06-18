@@ -678,7 +678,7 @@
   <string name="exit_Button">Uscita</string>
   <string name="map_Button">Mappa</string>
   <string name="settings_Button">Impostazioni</string>
-  <string name="favorites_Button">Preferiti</string>
+  <string name="favorites_Button">I miei luoghi</string>
   <string name="search_button">Ricerca</string>
   <string name="search_activity">Ricerca</string>
   <string name="searchpoi_activity">Scegli PDI</string>
