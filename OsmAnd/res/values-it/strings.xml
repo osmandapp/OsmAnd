@@ -51,8 +51,8 @@
   <string name="routing_settings">Navigazione</string>
   <string name="routing_settings_descr">Specifica le opzioni di navigazione</string>
   <string name="global_settings">Impostazioni globali</string>
-  <string name="index_settings">Gestione dati</string>
-  <string name="index_settings_descr">Scarica, visualizza i dettagli e gestisci le mappe offline</string>
+  <string name="index_settings">Gestisci file delle mappe</string>
+  <string name="index_settings_descr">Scarica e gestisci le mappe offline archiviate sul tuo dispositivo.</string>
   <string name="general_settings">Impostazioni generali</string>
   <string name="general_settings_descr">Configura le impostazioni globali</string>
   <string name="global_app_settings">Impostazioni globali dell\'applicazione</string>
@@ -772,8 +772,7 @@
   <string name="offline_navigation_not_available">La navigazione offline di OsmAnd è temporaneamente non disponibile.</string>
   <string name="left_side_navigation">Guida a sinistra</string>
   <string name="left_side_navigation_descr">Abilita nei paesi in cui si guida tenendo la sinistra</string>
-  <string name="download_link_and_local_description">Fai clic qui per scaricare o aggiornare i dati offline.\nPer maggiori dettagli fai clic sull\'elemento, per disabilitare o eliminare i dati offline tienilo premuto.
-Dati attualmente nel dispositivo (%1$s liberi):</string>
+  <string name="download_link_and_local_description">Fai clic qui per scaricare o aggiornare le mappe offline.\nPer maggiori dettagli fai clic sull\'elemento, per disabilitare o eliminare i dati offline tienilo premuto. Dati attualmente nel dispositivo (%1$s liberi):</string>
   <string name="unknown_from_location">La posizione di partenza non è ancora stata determinata</string>
   <string name="confirm_interrupt_download">Vuoi interrompere il download dei file?</string>
   <string name="basemap_was_selected_to_download">La mappa di base è richiesta per il funzionamento corretto dell\'applicazione ed è stata selezionata per il download.</string>
@@ -1035,7 +1034,7 @@ Dati attualmente nel dispositivo (%1$s liberi):</string>
 <string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, stop forzati, dossi e rallentatori), avvisi autovelox e indicazioni di corsia</string>
 <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
 <string name="map_widget_show_ruler">Scala grafica</string>
-<string name="map_widget_appearance">Varie:</string>
+<string name="map_widget_appearance">Altro:</string>
 <string name="map_widget_view_direction">﻿Direzione della visuale</string>
 <string name="map_widget_transparent">Aspetto trasparente</string>
 <string name="monitoring_mode_off">Registra GPX</string>
@@ -1893,7 +1892,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="map_widget_plain_time">Orario attuale</string>
     <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
     <string name="select_destination_and_intermediate_points">Scegli le tappe</string>
-    <string name="layer_amenity_label">Etichette di testo</string>
+    <string name="layer_amenity_label">Etichette dei punti</string>
     <string name="show_zoom_buttons_navigation">Mostra i pulsanti dello zoom</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione</string>
     </resources>
