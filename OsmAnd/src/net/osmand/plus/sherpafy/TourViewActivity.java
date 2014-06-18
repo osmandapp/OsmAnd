@@ -1,8 +1,9 @@
 package net.osmand.plus.sherpafy;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import net.osmand.IProgress;
 import net.osmand.access.AccessibleAlertBuilder;
@@ -19,16 +20,11 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.graphics.Point;
-import android.graphics.BitmapFactory.Options;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -43,7 +39,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -75,7 +70,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	RadioGroup stages;
 	private ToggleButton collapser;
 	Point size;
-	private boolean afterDownload = false;
+	private Set<TourInformation> currentTourInformations  = new HashSet<TourInformation>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -147,23 +142,19 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	protected void onResume() {
 		super.onResume();
 
-		//this flag needed to start indexing tours is user downloaded some and returned to activity
-		if (afterDownload){
-			if (customization.getTourInformations().isEmpty()){
-				customization.onIndexingFiles(IProgress.EMPTY_PROGRESS,new LinkedHashMap<String, String>());
-			}
-
-			if (!customization.getTourInformations().isEmpty()){
-				if (customization.getSelectedTour() == null){
-					setTourSelectionContentView();
-					state = STATE_SELECT_TOUR;
-				} else {
-					startTourView();
+		TourInformation selectedTour = customization.getSelectedTour();
+		if (selectedTour == null || currentTourInformations.contains(selectedTour)) {
+			for (TourInformation i : customization.getTourInformations()) {
+				if (!currentTourInformations.contains(i)) {
+					currentTourInformations.add(i);
+					selectedTour = i; 
 				}
-
+			}
+			if(selectedTour != null) {
+				selectTourAsync(selectedTour);
+				//startTourView();
 			}
 		}
-
 	}
 	
 	private void setTourInfoContent() {
@@ -374,6 +365,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private void goToMap() {
 		if (customization.getSelectedStage() != null) {
 			GPXFile gpx = customization.getSelectedStage().getGpx();
+			getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
 			if (gpx != null && gpx.findPointToShow() != null) {
 				WptPt p = gpx.findPointToShow();
 				getMyApplication().getSettings().setMapLocationToShow(p.lat, p.lon,
@@ -483,7 +475,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private void startDownloadActivity() {
 		final Intent download = new Intent(this, DownloadIndexActivity.class);
 		download.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		afterDownload = true;
 		startActivity(download);
 	}
 	
