@@ -11,7 +11,6 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
-import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -44,13 +43,17 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	}
 
 	public void setCurrentPoint(GPXUtilities.WptPt point) {
-		currentPoint = point;
-		currentPointIndex = findPointPosition(point);
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		LatLon latLon = new LatLon(point.lat, point.lon);
+		targetPointsHelper.navigateToPoint(latLon, true, -1,":" + point.name);
+		getCurrentPoint();
 	}
 
 	public void setCurrentPoint(int number) {
-		currentPoint = pointsList.get(number);
-		currentPointIndex = number;
+		GPXUtilities.WptPt point = pointsList.get(number);
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		LatLon latLon = new LatLon(point.lat, point.lon);
+		targetPointsHelper.navigateToPoint(latLon, true, -1, point.name);
 	}
 
 	public List<GPXUtilities.WptPt> getPoints() {
@@ -79,12 +82,11 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 	public GPXUtilities.WptPt getCurrentPoint() {
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		LatLon latLon = targetPointsHelper.getPointToNavigate();
-
-		for(int i=0; i<pointsList.size();i++){
-			GPXUtilities.WptPt point = pointsList.get(i);
-			if (point.lat == latLon.getLatitude() && point.lon == latLon.getLongitude()){
-				currentPoint = point;
+		String locName = targetPointsHelper.getPointNavigateDescription();
+		for (int i = 0; i < pointsList.size(); i++) {
+			String pointName = ":" + pointsList.get(i).name;
+			if (pointName.equals(locName)) {
+				currentPoint = pointsList.get(i);
 				currentPointIndex = i;
 				break;
 			}
@@ -102,6 +104,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		currentRoute = gpx.routes.get(0);
 		pointsList = currentRoute.points;
 		refreshPointsStatus();
+		getCurrentPoint();
 	}
 
 	public void registerLayers(MapActivity activity) {
@@ -119,7 +122,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null) {
 			routeStepsControl = createRouteStepsInfoControl(activity, mapInfoLayer.getPaintSubText(), mapInfoLayer.getPaintSubText());
 			mapInfoLayer.getMapInfoControls().registerSideWidget(routeStepsControl,
-					R.drawable.widget_parking, R.string.map_widget_route_steps, "route_steps", false, 8);
+					R.drawable.widget_target, R.string.map_widget_route_points, "route_steps", false, 8);
 			mapInfoLayer.recreateControls();
 		}
 	}
@@ -196,7 +199,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 	}
 
-	public long getPointStatus(GPXUtilities.WptPt point){
+	public long getPointStatus(GPXUtilities.WptPt point) {
 		return getPointStatus(findPointPosition(point));
 	}
 
@@ -225,24 +228,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		} else if (map.containsKey(mapKey)) {
 			map.remove(mapKey);
 		}
-
-		refreshPointsStatus();
-	}
-
-	//saves point status value to gpx extention file
-	public void markPointAsVisited(GPXUtilities.WptPt point) {
-		if (point.equals(currentPoint)){
-			currentPoint = null;
-		}
-		int pos = findPointPosition(point);
-		Map<String, String> map = currentRoute.getExtensionsToWrite();
-
-		String mapKey = POINT_KEY + pos + VISITED_KEY;
-
-		//value is current time
-		Calendar c = Calendar.getInstance();
-		long number = c.getTimeInMillis();
-		map.put(mapKey, String.valueOf(number));
 
 		refreshPointsStatus();
 	}
