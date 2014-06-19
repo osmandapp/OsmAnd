@@ -83,9 +83,10 @@ public abstract class OsmandPlugin {
 			installedPlugins.add(parking);
 		}
 
-		//routePointsPlugin routePointsPlugin = new RoutePointsPlugin(app);
-		//installedPlugins.add(routePointsPlugin);
-		//enablePlugin(app,routePointsPlugin,true);
+		if(Version.isRouteNavPluginInlined(app)) {
+			RoutePointsPlugin routePointsPlugin = new RoutePointsPlugin(app);
+			installedPlugins.add(routePointsPlugin);
+		}
 
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));

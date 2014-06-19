@@ -27,6 +27,8 @@ public abstract class OsmandListActivity extends SherlockListActivity {
 	protected OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
 	}
+	
+	
 
 	@Override
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
