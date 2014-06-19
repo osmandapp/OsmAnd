@@ -10,6 +10,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routepointsnavigation.RoutePointsPlugin.RoutePoint;
@@ -45,7 +46,6 @@ public class RoutePointsActivity extends OsmandListActivity {
 	protected static final int MARK_AS_CURRENT_ID = 6;
 	protected static final int AS_VISITED_ID = 7;
 	protected static final int POI_ON_MAP_ID = 8;
-	protected static final int GPX_SELECT_ID = 9;
 	private RoutePointsPlugin plugin;
 	private OsmandApplication app;
 
@@ -111,7 +111,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 			@Override
 			public void onClick(View widget) {
-				getSherlock().startActionMode(mGpxActionModeCallback);
+				selectGPX();
 			}
 		}, 0, content.length(), 0);
 		gpxName.setText(content);
@@ -216,33 +216,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 		}.execute(plugin.getCurrentRoute());
 	}
 
-	private ActionMode.Callback mGpxActionModeCallback = new ActionMode.Callback() {
-		@Override
-		public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-			createMenuItem(menu, GPX_SELECT_ID, R.string.select_gpx, R.drawable.ic_action_layers_light, R.drawable.ic_action_layers_dark,
-					MenuItem.SHOW_AS_ACTION_IF_ROOM);
-			return true;
-		}
-
-		@Override
-		public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
-			return false;
-		}
-
-		@Override
-		public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-			if (menuItem.getItemId() == GPX_SELECT_ID) {
-				selectGPX();
-			}
-			actionMode.finish();
-			return true;
-		}
-
-		@Override
-		public void onDestroyActionMode(ActionMode actionMode) {
-
-		}
-	};
+	
 	
 	private ActionMode.Callback getPointActionModeCallback(final RoutePoint rp) {
 		return new ActionMode.Callback() {
@@ -310,6 +284,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			return true;
 		} else if (item.getItemId() == NAVIGATE_DIALOG_ID){
 			app.getSettings().navigateDialog();
+			MapActivity.launchMapActivityMoveToTop(getMyApplication());
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

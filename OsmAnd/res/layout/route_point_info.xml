@@ -3,9 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1"
-                android:background="?android:attr/activatedBackgroundIndicator">
+                android:orientation="horizontal">
     <ImageView android:id="@+id/point_icon"
                android:layout_width="32dp"
                android:padding="3dp"
