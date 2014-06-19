@@ -3,6 +3,7 @@ package net.osmand.plus.routepointsnavigation;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -139,7 +140,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	}
 
 	
-	public class RoutePoint implements Comparable<RoutePoint> {
+	public class RoutePoint {
 		boolean isNextNavigate;
 		int gpxOrder;
 		long visitedTime; // 0 not visited
@@ -184,28 +185,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			return dateString;
 		}
 		
-		@Override
-		public int compareTo(RoutePoint another) {
-			if(isNextNavigate) {
-				return -1;
-			}
-			// this point is not visited
-			if(!isVisited()) {
-				if(another.isNextNavigate) {
-					return 1;
-				}
-				if(another.isVisited()) {
-					return -1;
-				}
-				return Integer.compare(gpxOrder, another.gpxOrder);
-			}
-			// this point is visited
-			if(!another.isVisited()) {
-				return 1;
-			}
-			return -Long.compare(visitedTime, another.visitedTime);
-		}
-
 		public LatLon getPoint() {
 			return new LatLon(wpt.lat, wpt.lon);
 		}
@@ -288,7 +267,25 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 
 		private void sortPoints() {
-			Collections.sort(currentPoints);
+			Collections.sort(currentPoints, new Comparator<RoutePoint>() {
+
+				@Override
+				public int compare(RoutePoint lhs, RoutePoint rhs) {
+					if(lhs.isNextNavigate || rhs.isNextNavigate) {
+						return lhs.isNextNavigate? -1 : 1;
+					}
+					if(!lhs.isVisited() || !rhs.isVisited()) {
+						if(lhs.isVisited()) {
+							return 1;
+						}
+						if(rhs.isVisited()) {
+							return -1;
+						}
+						return Integer.compare(lhs.gpxOrder, rhs.gpxOrder);
+					}
+					return -Long.compare(lhs.visitedTime, rhs.visitedTime);
+				}
+			});
 		}
 
 		
