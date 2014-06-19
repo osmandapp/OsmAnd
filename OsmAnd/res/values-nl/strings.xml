@@ -1862,4 +1862,6 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="selected">gekozen</string>
     <string name="gpx_split_interval">Verdeel in stukken elke …</string>
     <string name="gpx_info_waypoints">Routepunten: %1$s </string>
-	</resources>
+	<string name="show_zoom_buttons_navigation_descr">Zoomknoppen tonen tijdens navigeren</string>
+    <string name="show_zoom_buttons_navigation">Zoomknoppen</string>
+    </resources>
