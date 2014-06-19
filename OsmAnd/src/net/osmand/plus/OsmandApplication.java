@@ -121,6 +121,7 @@ public class OsmandApplication extends Application {
 			}
 		}
 		super.onCreate();
+		new Toast(this); // activate in UI thread to avoid further exceptions
 		appCustomization = new OsmAndAppCustomization();
 		appCustomization.setup(this);
 		 
