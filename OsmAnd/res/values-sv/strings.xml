@@ -1590,4 +1590,5 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="show_zoom_buttons_navigation">Visa zoom-knappar</string>
     <string name="color_green">grön</string>
 	
+    <string name="osmodroid_unseek">Sluta söka objekt</string>
     </resources>
