@@ -434,16 +434,17 @@ public class RoutingHelper {
 			if(isFollowingMode) {
 				voiceRouter.arrivedDestinationPoint(description);
 			}
-			clearCurrentRoute(null, null);
-			setRoutePlanningMode(false);
-			OsmandPlugin.onDestinationReached();
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
-				}
-			});
-			 
+			if (OsmandPlugin.onDestinationReached()) {
+				clearCurrentRoute(null, null);
+				setRoutePlanningMode(false);
+				OsmandPlugin.onDestinationReached();
+				app.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
+					}
+				});
+			}
 			// targets.clearPointToNavigate(false);
 			return true;
 		}

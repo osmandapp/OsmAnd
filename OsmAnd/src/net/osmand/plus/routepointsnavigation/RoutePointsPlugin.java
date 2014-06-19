@@ -62,10 +62,14 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	
 	
 	@Override
-	public void destinationReached() {
+	public boolean destinationReached() {
 		if(currentRoute != null) {
-			currentRoute.naviateToNextPoint();
+			boolean naviateToNextPoint = currentRoute.naviateToNextPoint();
+			if(naviateToNextPoint) {
+				return false;
+			}
 		}
+		return true;
 	}
 
 	@Override
@@ -248,7 +252,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			sortPoints();
 		}
 		
-		public void naviateToNextPoint() {
+		public boolean naviateToNextPoint() {
 			if(!currentPoints.isEmpty()) {
 				RoutePoint rp = currentPoints.get(0);
 				if(rp.isNextNavigate) {
@@ -259,11 +263,12 @@ public class RoutePointsPlugin extends OsmandPlugin {
 				if(!first.isVisited()) {
 					app.getTargetPointsHelper().navigateToPoint(first.getPoint(), true, -1, first.getName());
 					first.isNextNavigate = true;
+					return true;
 				} else {
 					app.getTargetPointsHelper().clearPointToNavigate(true);
 				}
-				
 			}
+			return false;
 		}
 
 		private void sortPoints() {
