@@ -40,6 +40,7 @@ import com.actionbarsherlock.view.Window;
  */
 public class RoutePointsActivity extends OsmandListActivity {
 
+	private static final int NAVIGATE_DIALOG_ID = 4;
 	private static final int OK_ID = 5;
 	protected static final int MARK_AS_CURRENT_ID = 6;
 	protected static final int AS_VISITED_ID = 7;
@@ -295,6 +296,9 @@ public class RoutePointsActivity extends OsmandListActivity {
 		createMenuItem(menu, OK_ID, R.string.default_buttons_ok, 
 				R.drawable.ic_action_map_marker_light, R.drawable.ic_action_map_marker_dark ,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		createMenuItem(menu, NAVIGATE_DIALOG_ID, R.string.navigate_dialog,
+				R.drawable.ic_action_gdirections_light, R.drawable.ic_action_gdirections_dark,
+				MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -302,6 +306,9 @@ public class RoutePointsActivity extends OsmandListActivity {
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		if (item.getItemId() == OK_ID) {
 			finish();
+			return true;
+		} else if (item.getItemId() == NAVIGATE_DIALOG_ID){
+			app.getSettings().navigateDialog();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
