@@ -64,7 +64,7 @@
   <string name="osmand_service_descr">Usato per eseguire OsmAnd con lo schermo spento</string>
   <string name="tip_rotation_switching">Orientamento della mappa</string>
   
-  <string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. Ne puoi scaricare una in \'Impostazioni (Gestione dati), o passare alle mappe online.</string>
+  <string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. Ne puoi scaricare una in \'Impostazioni (Gestisci i file mappe), o passa alle mappe online (abilita il plugin delle mappe online).</string>
   <string name="binary_map_download_success">Download completato.
 		\n\t\n\tPer usarle attivare \'Impostazioni\' → \'Configurazione delle mappe\' → \'Mappe vettoriali offline\'.
 	</string>
@@ -256,14 +256,13 @@
   <string name="internet_not_available">La connessione internet è richiesta per questa operazione ma non è disponibile</string>
   <string name="install_more">Installa altro…</string>
   <string name="tip_update_index">Aggiornamento Mappe Offline</string>
-  <string name="tip_update_index_t">Avere dati aggiornati è essenziale per la visione offline delle mappe, cercare PDI/indirizzi. OsmAnd fornisce un download manager che può controllare la disponibilità di aggiornamenti offline.
-		\n\nPer scaricare le mappe andare in \'Impostazioni\' -&gt; \'Gestione dati\' -&gt; \'Download dati offline\'.
-		\n\nDopo il download dell\'elenco regioni ti basterà cliccare su qualsiasi oggetto per scaricare o caricare un file. Nota che il selettore di tipo di file nella zona superiore dello schermo, per selezionare il tipo di download richiesto (mappe regolari, ombreggiature dei rilievi, etc.).
-		\n\nPuoi filtrare l\'elenco delle regioni immettendo alcune lettere, oppure si può scegliere l\'opzione \Impostazioni\' → \Filtro download\' per visualizzare gli aggiornamenti solo per le regioni già nel dispositivo.
-		\n\n\t* Voci in \'Verde\' indicano file identici su server e dispositivo
-		\n\t* Voci in \'Blu\' indicano aggiornamenti disponibili sul server
-		\n\t* Voci in \'\corsivo\' indicano dati disattivati sul dispositivo
-	</string>
+  <string name="tip_update_index_t">"Avere dati aggiornati è essenziale per la visione offline delle mappe, cercare PDI/indirizzi. OsmAnd fornisce un gestore delle mappe che le scarica e le rende disponibili offline e inoltre può controllare la disponibilità di aggiornamenti.
+\n\nPer scaricare le mappe andare in \'Impostazioni\' -&gt; \'Gestisci i file delle mappe\' -&gt; \'Download\'.
+\n\nDopo il download dell\'elenco regioni ti basterà cliccare su qualsiasi oggetto per scaricare o caricare un file. Nota che il selettore di tipo di file nella zona superiore dello schermo, per selezionare il tipo di download richiesto (mappe regolari, ombreggiature dei rilievi, etc.).
+\n\nPuoi filtrare l\'elenco delle regioni immettendo alcune lettere, oppure si può scegliere l\'opzione mpostazioni\' → iltro download\' per visualizzare gli aggiornamenti solo per le regioni già nel dispositivo.
+\n\n\t* Voci in \'Verde\' indicano file identici su server e dispositivo
+\n\t* Voci in \'Blu\' indicano aggiornamenti disponibili sul server
+\n\t* Voci in corsivo indicano dati disattivati sul dispositivo "</string>
   <string name="level_to_switch_vector_raster_descr">Minimo livello di zoom per usare le mappe vettoriali</string>
   <string name="level_to_switch_vector_raster">Min. livello zoom vettoriale</string>
   <string name="tip_location_sharing">Condividi una posizione</string>
@@ -271,11 +270,8 @@
 		\n\nScegli poi un modo per condividere la tua posizione. Le opzioni sono: E-Mail, SMS o semplicemente copia le coordinate sugli appunti.
 	</string>
   <string name="tip_favorites">Punti Preferiti</string>
-  <string name="tip_favorites_t">I punti usati di frequente possono essere salvati come Preferiti:
-		\n\nPer salvare un punto come Preferito vai nel menu contestuale \'Utilizza la posizione…\' → \'Aggiungi ai preferiti\' e inserisci il nome desiderato.
-		\n\nDopo il salvataggio, il punto preferito sarà accessibile nel menù \'Preferiti\'. Tenendo premuto a lungo su un Preferito nel menu \'Preferiti\', appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.
-		\n\nPer visualizzare tutti i punti preferiti direttamente sulla mappa, nella schermata della mappa attiva il livello \'Preferiti\' dal menù contestuale \'Strati mappa\'. "
-	</string>
+  <string name="tip_favorites_t">"I punti usati di frequente possono essere salvati come Preferiti:
+\n\nDopo il salvataggio, il punto preferito sarà accessibile nel \'Menu\'→\'I miei luoghi\'. Tenendo premuto a lungo su una qualsiasi voce della lista dei \'Preferiti\', appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.\n\nPer visualizzare tutti i punti preferiti direttamente sulla mappa, nella schermata della mappa attiva il livello \'Preferiti\' dal menù contestuale \'Strati mappa\'. "</string>
   <string name="create_poi_link_to_osm_doc">  <u>OSM Online</u> con immagini</string>
   <string name="error_doing_search">Errore nella ricerca offline</string>
   <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'</string>
@@ -517,7 +513,7 @@
   <string name="route_head">Avanti</string>
   <string name="first_time_continue">Dopo</string>
   <string name="first_time_download">Scarica le regioni</string>
-  <string name="first_time_msg">Grazie di utilizzare OsmAnd. Per molte delle caratteristiche dell\'applicazione, hai bisogno dei dati offline locali, che possono essere scaricati da \'Impostazioni\'-&gt;\'Gestione dati\'. Sarà poi possibile visualizzare mappe, cercare indirizzi, PDI, e trovare trasporti pubblici.</string>
+  <string name="first_time_msg">Grazie di utilizzare OsmAnd. Per molte delle caratteristiche dell\'applicazione, hai bisogno dei dati offline locali, che possono essere scaricati da \'Impostazioni\'→\'Gestisci i file mappe\'. Sarà poi possibile visualizzare mappe, cercare indirizzi, PDI, e trovare trasporti pubblici.</string>
   <string name="search_poi_location">Ricerca segnale GPS…</string>
   <string name="search_near_map">Ricerca vicino all\'ultima posizione sulla mappa</string>
   <string name="search_nearby">Ricerca vicino</string>
@@ -1183,10 +1179,9 @@
     <string name="download_roads_only_maps">Mappe solo strade</string>
     <string name="incomplete_locale">incompleto</string>
 	<string name="map_widget_max_speed">Limite di velocità</string>
-    <string name="tip_altitude_offset_t">La maggior parte dei GPS riportano la misura dell\'altitudine nel sistema di riferimento WGS84 basato su ellissoide, per cui una conversione nei sistemi di riferimento usati localmente richiede una correzione dipendente dalla posizione.
-		\n\nUna migliore approssimazione a questi sistemi di riferimento locali è il EGM96. OsmAnd ora supporta la visualizzazione automatica dell\'altitudine nel sistema EGM96.
-		\n\nPer attivarla, scarica il file WW15MGH.DAC tramite la \'Gestione dati\' (il file originale si trova all\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
-	</string>
+    <string name="tip_altitude_offset_t">"La maggior parte dei GPS riportano la misura dell\'altitudine nel sistema di riferimento WGS84 basato su ellissoide, per cui una conversione nei sistemi di riferimento usati localmente richiede una correzione dipendente dalla posizione.
+\n\nUna migliore approssimazione a questi sistemi di riferimento locali è il EGM96.
+\n\nOsmAnd mostrerà l\'altitudine della tua posizione nel sistema EGM96 dopo che avrai scaricato il file \"Correzione dell\'altitudine mondiale\" (WW15MGH.DAC) da \'Impostazioni\' → \'Gestisci i file mappe\'. (Il file originale si trova all\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="tip_altitude_offset">Correzione altitudine</string>
 	<string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Nascondi i confini</string>
@@ -1198,7 +1193,7 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isocline</string>
     <string name="srtm_plugin_name">Plugin linee isocline</string>
-    <string name="srtm_plugin_description">Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni → Gestione dati → Download → Seleziona il tipo di mappa desiderato).</string>
+    <string name="srtm_plugin_description">Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni → Gestione file mappe → Download → Seleziona il tipo di mappa desiderato).</string>
     <string name="index_srtm_ele">Linee di livello</string>
     <string name="audionotes_plugin_description">Prendi note audio/video durante il viaggio</string>
     <string name="audionotes_plugin_name">Plugin appunti audio</string>
@@ -1760,7 +1755,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="navigation_intent_invalid">Formato non valido: %s</string>
 <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoraggio - Monitoraggio avanzato in diretta. Fornisce la possibilità di tracciare altri dispositivi e di essere tracciati. Creare gruppo anonimi, condividere reciprocamente la posizione e comunicare. Sono disponibili varie impostazioni di monitoraggio, per la sessione in corso o permanenti. I gruppi anonimi sono limitate per il numero di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. Maggiori informazioni su http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoraggio - Monitoraggio avanzato in diretta. Fornisce la possibilità di tracciare altri dispositivi e di essere tracciati. Crea gruppo anonimi, condivide reciprocamente la posizione e comunica. Sono disponibili varie impostazioni di monitoraggio, per la sessione in corso o permanenti. I gruppi anonimi sono limitate per il numero di giorni e alcune funzioni es. non c\'è il controllo remoto e l\'amministratore del gruppo. Gruppi con tutte le funzionalità possono essere creati dal sito e solo gli utenti registrati possono accedervi. Maggiori informazioni su http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (Monitoraggio avanzato in tempo reale)</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitoraggio (beta)</string>
    	<string name="keep_informing_never">Mai</string>
@@ -1775,10 +1770,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="share_fav">Condividi</string>
 	<string name="share_fav_subject">Preferiti condivisi tramite OsmAnd</string>
 	<string name="use_points_as_intermediates">Calcola il percorso tra i punti</string>
-    <string name="tip_recent_changes_1_8_alpha">Novità nella versione 1.8:
-        * Calcola il percorso tra i punti di un tracciato GPX
-        * Modificato l\'aspetto per per il download degli stati (supporto alla ricerca con i nomi locali)
-    </string>
+    <string name="tip_recent_changes_1_8_alpha">"Novità nella versione 1.8: * Calcola il percorso tra i punti di un tracciato GPX * Modificato l\'aspetto per per il download degli stati (supporto alla ricerca con i nomi locali) * Supporta l\'importazione di file GPX/KML (converte da KLM a GPX) * Le tracce GPX sono state spostate in \'I miei luoghi\' * Puoi dividere le tracce GPX in base alla distanza o al tempo e controllare la diferenza di altitudine o della velocità per ogni spezzone * Avvio automatico della navigazione dopo una breve attesa "</string>
     <string name="osmo_auto_send_locations_descr">Avvia automaticamente la registrazione della sessione e invia la localizzazione dopo l\'avvio dell\'applicazione</string>
     <string name="osmo_auto_send_locations">Avvia automaticamente la sessione di tracciamento</string>
     <string name="osmo_tracker_id">ID tracciamento personale</string>
