@@ -46,6 +46,7 @@ public class RenderingRuleStorageProperties {
 	public static final String TEXT_BOLD = "textBold";
 	public static final String TEXT_ORDER = "textOrder";
 	public static final String ICON_ORDER = "iconOrder";
+	public static final String ICON_VISIBLE_SIZE = "iconVisibleSize";
 	public static final String TEXT_MIN_DISTANCE = "textMinDistance";
 	public static final String TEXT_ON_PATH = "textOnPath";
 	public static final String ICON = "icon";
@@ -109,6 +110,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TEXT_MIN_DISTANCE;
 	public RenderingRuleProperty R_TEXT_ON_PATH;
 	public RenderingRuleProperty R_ICON;
+	public RenderingRuleProperty R_ICON_VISIBLE_SIZE;
 	public RenderingRuleProperty R_LAYER;
 	public RenderingRuleProperty R_ORDER;
 	public RenderingRuleProperty R_POINT;
@@ -133,6 +135,7 @@ public class RenderingRuleStorageProperties {
 	// C++
 	final List<RenderingRuleProperty> rules ;
 	final List<RenderingRuleProperty> customRules ;
+	
 	
 	public RenderingRuleStorageProperties() {
 		properties = new LinkedHashMap<String, RenderingRuleProperty>();
@@ -184,6 +187,7 @@ public class RenderingRuleStorageProperties {
 		R_TEXT_SIZE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_SIZE));
 		R_TEXT_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(TEXT_ORDER));
 		R_ICON_ORDER = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ICON_ORDER));
+		R_ICON_VISIBLE_SIZE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(ICON_VISIBLE_SIZE));
 		R_TEXT_MIN_DISTANCE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(TEXT_MIN_DISTANCE));
 		R_TEXT_SHIELD = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(TEXT_SHIELD));
 		
