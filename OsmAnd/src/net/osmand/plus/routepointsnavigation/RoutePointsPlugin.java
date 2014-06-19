@@ -102,10 +102,14 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 	}
 
+	@Override
+	public void registerLayers(MapActivity activity) {
+		super.registerLayers(activity);
+		registerWidget(activity);
+	}
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-
 		if (routeStepsControl == null) {
 			registerWidget(activity);
 		}
