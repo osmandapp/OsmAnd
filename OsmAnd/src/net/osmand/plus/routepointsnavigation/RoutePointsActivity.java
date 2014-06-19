@@ -77,7 +77,9 @@ public class RoutePointsActivity extends OsmandListActivity {
 				app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);				
 				plugin.setCurrentRoute(gpx);
 				SelectedRouteGpxFile sgpx = plugin.getCurrentRoute();
-				sgpx.naviateToNextPoint();
+				if (!sgpx.getCurrentPoints().get(0).isNextNavigate){
+					sgpx.naviateToNextPoint();
+				}
 				prepareView();
 				return false;
 			}
@@ -265,6 +267,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 				if (menuItem.getItemId() == MARK_AS_CURRENT_ID) {
 					plugin.getCurrentRoute().navigateToPoint(rp);
 					saveGPXAsync();
+					prepareView();
 				} else if (menuItem.getItemId() == POI_ON_MAP_ID) {
 					LatLon point = rp.getPoint();
 					app.getSettings().setMapLocationToShow(point.getLatitude(), point.getLongitude(),
@@ -274,6 +277,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 					// inverts selection state of item
 					plugin.getCurrentRoute().markPoint(rp, !rp.isVisited());
 					saveGPXAsync();
+					prepareView();
 				}
 				actionMode.finish();
 				return true;
