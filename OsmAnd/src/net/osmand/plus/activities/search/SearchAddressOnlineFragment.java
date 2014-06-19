@@ -142,6 +142,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 	}
 
 	protected void searchPlaces(final String search) {
+		
 		if(Algorithms.isEmpty(search)){
 			return;
 		}
@@ -154,9 +155,21 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 			@Override
 			protected Void doInBackground(Void... params) {
 				try {
+					
+					final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
+
+					String NOMINATIM_API;
+				
+					if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
+						NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
+					}
+					else {
+						NOMINATIM_API = "http://nominatim.openstreetmap.org/search";
+					}
+					
 					final List<Place> places = new ArrayList<Place>();
 					StringBuilder b = new StringBuilder();
-					b.append("http://nominatim.openstreetmap.org/search"); //$NON-NLS-1$
+					b.append(NOMINATIM_API); //$NON-NLS-1$
 					b.append("?format=xml&addressdetails=0&accept-language=").append(Locale.getDefault().getLanguage()); //$NON-NLS-1$
 					b.append("&q=").append(URLEncoder.encode(search, "UTF-8")); //$NON-NLS-1$
 					
