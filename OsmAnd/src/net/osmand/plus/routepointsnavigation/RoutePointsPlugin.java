@@ -135,7 +135,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			}
 		});
 		routeStepsControl.setText(null, null);
-		routeStepsControl.setImageDrawable(map.getResources().getDrawable(R.drawable.widget_parking));
+		routeStepsControl.setImageDrawable(map.getResources().getDrawable(R.drawable.widget_target));
 		return routeStepsControl;
 	}
 
@@ -213,7 +213,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		public int getVisitedCount() {
 			int k = 0;
 			for(RoutePoint rp : currentPoints) {
-				if(!rp.isVisited()) {
+				if(rp.isVisited()) {
 					k++;
 				}
 			}
@@ -300,6 +300,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 					WptPt wptPt = rt.points.get(i);
 					RoutePoint rtp = new RoutePoint();
 					rtp.gpxOrder = i;
+					rtp.wpt = wptPt;
 					String time = wptPt.getExtensionsToRead().get(VISITED_KEY);
 					try {
 						rtp.visitedTime = Long.parseLong(time);
@@ -309,7 +310,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 					if(rtp.isNextNavigate) {
 						locName = null;
 					}
-					
+					currentPoints.add(rtp);
 				}
 				sortPoints();
 			}
