@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="map_widget_route_points">Route steps</string>
+    <string name="route_points_no_gpx">No gpx</string>
+    <string name="mark_as_current">Mark as current</string>
+    <string name="marking_as_visited">Marking as visited…</string>
+    <string name="current_route">Current route:</string>
+    <string name="done">Done</string>
+    <string name="marking_as_unvisited">Marking as unvisited…</string>
+    <string name="map_widget_route_steps">Route steps</string>
+    <string name="context_menu_item_show_route_points">Show route points</string>
+    <string name="route_step_menu_mark_as_next">Mark as next</string>
+    <string name="mark_as_visited">Mark as visited</string>
+    <string name="select_gpx">Select gpx</string>
+    <string name="save_gpx">Save gpx</string>
+    <string name="all_route_points">All route points</string>
+    <string name="start_route">Start route</string>
+</resources>
