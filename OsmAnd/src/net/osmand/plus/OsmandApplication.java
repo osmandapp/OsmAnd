@@ -660,16 +660,31 @@ public class OsmandApplication extends Application {
 		return targetPointsHelper;
 	}
 	
-	public void showShortToastMessage(int msgId, Object... args) {
-		AccessibleToast.makeText(this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+	public void showShortToastMessage(final int msgId, final Object... args) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				AccessibleToast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
-	public void showToastMessage(int msgId, Object... args) {
-		AccessibleToast.makeText(this, getString(msgId, args), Toast.LENGTH_LONG).show();
+	public void showToastMessage(final int msgId, final Object... args) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				AccessibleToast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
+			}
+		});
 	}
 
-	public void showToastMessage(String msg) {
-		AccessibleToast.makeText(this, msg, Toast.LENGTH_LONG).show();
+	public void showToastMessage(final String msg) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				AccessibleToast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();				
+			}
+		});
 	}
 	
 	public SQLiteAPI getSQLiteAPI() {
