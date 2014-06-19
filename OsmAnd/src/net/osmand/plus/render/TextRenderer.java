@@ -63,21 +63,21 @@ public class TextRenderer {
 		public void fillProperties(RenderingContext rc, RenderingRuleSearchRequest render, float centerX, float centerY) {
 			this.centerX = centerX;
 			// used only for draw on path where centerY doesn't play role
-			this.vOffset = (int) rc.getComplexValue(render, render.ALL.R_TEXT_DY, 0);
+			this.vOffset = (int) rc.getComplexValue(render, render.ALL.R_TEXT_DY);
 			this.centerY = centerY + this.vOffset;
 			textColor = render.getIntPropertyValue(render.ALL.R_TEXT_COLOR);
 			if (textColor == 0) {
 				textColor = Color.BLACK;
 			}
-			textSize = rc.getComplexValue(render, render.ALL.R_TEXT_SIZE, 0);
-			textShadow = (int) rc.getComplexValue(render, render.ALL.R_TEXT_HALO_RADIUS, 0);
+			textSize = rc.getComplexValue(render, render.ALL.R_TEXT_SIZE);
+			textShadow = (int) rc.getComplexValue(render, render.ALL.R_TEXT_HALO_RADIUS);
 			textShadowColor = render.getIntPropertyValue(render.ALL.R_TEXT_HALO_COLOR);
 			if(textShadowColor == 0) {
 				textShadowColor = Color.WHITE;
 			}
-			textWrap = (int) rc.getComplexValue(render, render.ALL.R_TEXT_WRAP_WIDTH, 0);
+			textWrap = (int) rc.getComplexValue(render, render.ALL.R_TEXT_WRAP_WIDTH);
 			bold = render.getIntPropertyValue(render.ALL.R_TEXT_BOLD, 0) > 0;
-			minDistance = rc.getComplexValue(render, render.ALL.R_TEXT_MIN_DISTANCE, 0);
+			minDistance = rc.getComplexValue(render, render.ALL.R_TEXT_MIN_DISTANCE);
 			if (render.isSpecified(render.ALL.R_TEXT_SHIELD)) {
 				shieldRes = render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD);
 			}

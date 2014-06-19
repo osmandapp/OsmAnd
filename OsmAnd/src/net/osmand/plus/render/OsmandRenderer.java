@@ -664,7 +664,7 @@ public class OsmandRenderer {
 			p.setColorFilter(null);
 			p.clearShadowLayer();
 			p.setStyle(Style.STROKE);
-			p.setStrokeWidth(rc.getComplexValue(req, rStrokeW, 0));
+			p.setStrokeWidth(rc.getComplexValue(req, rStrokeW));
 			String cap = req.getStringPropertyValue(rCap);
 			if(!Algorithms.isEmpty(cap)){
 				p.setStrokeCap(Cap.valueOf(cap.toUpperCase()));
@@ -715,7 +715,7 @@ public class OsmandRenderer {
 				if(shadowColor == 0) {
 					shadowColor = rc.shadowRenderingColor;
 				}
-				int shadowRadius = (int) rc.getComplexValue(req, req.ALL.R_SHADOW_RADIUS, 0);
+				int shadowRadius = (int) rc.getComplexValue(req, req.ALL.R_SHADOW_RADIUS);
 				if (shadowColor == 0) {
 					shadowRadius = 0;
 				}
@@ -869,7 +869,7 @@ public class OsmandRenderer {
 		if (path != null) {
 			if(drawOnlyShadow) {
 				int shadowColor = render.getIntPropertyValue(render.ALL.R_SHADOW_COLOR);
-				int shadowRadius = (int) rc.getComplexValue(render, render.ALL.R_SHADOW_RADIUS, 0);
+				int shadowRadius = (int) rc.getComplexValue(render, render.ALL.R_SHADOW_RADIUS);
 				if(shadowColor == 0) {
 					shadowColor = rc.shadowRenderingColor;
 				}

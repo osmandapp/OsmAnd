@@ -63,8 +63,12 @@ public class RenderingContext {
 		return val * density;
 	}
 	
-	public float getComplexValue(RenderingRuleSearchRequest req, RenderingRuleProperty prop, float defVal) {
-		return req.getFloatPropertyValue(prop, defVal) * density + req.getIntPropertyValue(prop, 0);
+	public float getComplexValue(RenderingRuleSearchRequest req, RenderingRuleProperty prop, int defVal) {
+		return req.getFloatPropertyValue(prop, 0) * density + req.getIntPropertyValue(prop, defVal);
+	}
+	
+	public float getComplexValue(RenderingRuleSearchRequest req, RenderingRuleProperty prop) {
+		return req.getFloatPropertyValue(prop, 0) * density + req.getIntPropertyValue(prop, 0);
 	}
 	
 	protected byte[] getIconRawData(String data) {
