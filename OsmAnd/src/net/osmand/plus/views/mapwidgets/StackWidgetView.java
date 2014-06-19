@@ -24,7 +24,7 @@ public class StackWidgetView extends ViewGroup {
 	// by default opened
 	private boolean isCollapsed = false;
 	private boolean isCollapsible = true;
-	
+
 	private Drawable topDrawable;
 	List<Drawable> cacheStackDrawables = new ArrayList<Drawable>();
 	private int stackDrawable;
@@ -40,7 +40,7 @@ public class StackWidgetView extends ViewGroup {
 			protected void onDraw(Canvas canvas) {
 				super.onDraw(canvas);
 				int cx = (getLeft() + getRight()) / 2 - getLeft();
-				int t = (int) (10 * MapInfoLayer.scaleCoefficient); 
+				int t = (int) (10 * MapInfoLayer.scaleCoefficient);
 
 				if (!isCollapsed) {
 					canvas.drawBitmap(arrowUp, cx - arrowUp.getWidth() / 2, t , paintImg);
@@ -60,15 +60,15 @@ public class StackWidgetView extends ViewGroup {
 		});
 		StackWidgetView.this.addView(expandView);
 	}
-	
+
 	public void setExpandImageDrawable(Drawable d) {
 		expandView.setImageDrawable(d);
 	}
-	
+
 	public void setTopDrawable(Drawable topDrawable) {
 		this.topDrawable = topDrawable;
 	}
-	
+
 	public void setStackDrawable(int stackDrawable) {
 		this.stackDrawable = stackDrawable;
 		this.cacheStackDrawables.clear();
@@ -83,8 +83,8 @@ public class StackWidgetView extends ViewGroup {
 			v.updateInfo(drawSettings);
 		}
 	}
-	
-	
+
+
 	public void addStackView(BaseMapWidget v) {
 		stackViews.add(v);
 		v.setShadowColor(shadowColor);
@@ -96,7 +96,7 @@ public class StackWidgetView extends ViewGroup {
 		v.setShadowColor(shadowColor);
 		StackWidgetView.this.addView(v, getChildCount());
 	}
-	
+
 	public void clearAllViews(){
 		stackViews.clear();
 		collapsedViews.clear();
@@ -104,15 +104,15 @@ public class StackWidgetView extends ViewGroup {
 			removeViewAt(1);
 		}
 	}
-	
+
 	public List<BaseMapWidget> getStackViews() {
 		return stackViews;
 	}
-	
+
 	public List<BaseMapWidget> getCollapsedViews() {
 		return collapsedViews;
 	}
-	
+
 	public List<BaseMapWidget> getAllViews(){
 		List<BaseMapWidget> l = new ArrayList<BaseMapWidget>();
 		l.addAll(stackViews);
@@ -127,8 +127,8 @@ public class StackWidgetView extends ViewGroup {
 	public boolean isCollapsible() {
 		return isCollapsible;
 	}
-	
-	
+
+
 	private Drawable getStackDrawable(int i){
 		while(i >= cacheStackDrawables.size()) {
 			Drawable d = getResources().getDrawable(stackDrawable);
@@ -156,7 +156,7 @@ public class StackWidgetView extends ViewGroup {
 					c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 					w = Math.max(w, c.getMeasuredWidth());
 					if (h > 0) {
-						h -= prevBot; 
+						h -= prevBot;
 					} else {
 						h += c.getPaddingTop();
 					}
@@ -176,7 +176,7 @@ public class StackWidgetView extends ViewGroup {
 						w = Math.max(w, c.getMeasuredWidth());
 						h -= c.getPaddingBottom();
 						if (h > 0) {
-							h -= prevBot; 
+							h -= prevBot;
 						}
 						h += c.getMeasuredHeight();
 						prevBot = c.getPaddingBottom();
@@ -187,7 +187,7 @@ public class StackWidgetView extends ViewGroup {
 							h += c.getPaddingTop();
 						}
 					}
-					
+
 				}
 			}
 			if (isCollapsible) {
@@ -255,7 +255,7 @@ public class StackWidgetView extends ViewGroup {
 		for(BaseMapWidget c : collapsedViews) {
 			c.setShadowColor(shadowColor);
 		}
-		
+
 	}
 
 }
