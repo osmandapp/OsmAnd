@@ -59,6 +59,13 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 	}
 	
+	
+	@Override
+	public void destinationReached() {
+		if(currentRoute != null) {
+			currentRoute.naviateToNextPoint();
+		}
+	}
 
 	@Override
 	public String getId() {
@@ -251,7 +258,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		
 		public void markPoint(RoutePoint point, boolean visited) {
 			if(point.isNextNavigate() && visited) {
-				setNextPointToNavigate();
+				naviateToNextPoint();
 				return;
 			}
 			if(visited) {
@@ -262,7 +269,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			sortPoints();
 		}
 		
-		public void setNextPointToNavigate() {
+		public void naviateToNextPoint() {
 			if(!currentPoints.isEmpty()) {
 				RoutePoint rp = currentPoints.get(0);
 				if(rp.isNextNavigate) {
@@ -315,7 +322,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			return gpx.path.substring(gpx.path.lastIndexOf("/") + 1, gpx.path.lastIndexOf("."));
 		}
 
-		public void setNextPointToNavigate(RoutePoint rp) {
+		public void navigateToPoint(RoutePoint rp) {
 			if (!currentPoints.isEmpty()) {
 				if (currentPoints.get(0).isNextNavigate()) {
 					currentPoints.get(0).isNextNavigate = false;

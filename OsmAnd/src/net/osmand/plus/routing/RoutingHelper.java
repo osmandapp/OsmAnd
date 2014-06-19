@@ -4,8 +4,6 @@ package net.osmand.plus.routing;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
-
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -18,6 +16,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
@@ -437,6 +436,7 @@ public class RoutingHelper {
 			}
 			clearCurrentRoute(null, null);
 			setRoutePlanningMode(false);
+			OsmandPlugin.onDestinationReached();
 			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {

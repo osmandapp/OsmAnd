@@ -105,6 +105,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				paint.setColor(fcolor);
 				drawSegments(canvas, tileBox, points);
 			}
+			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			if (tileBox.getZoom() >= startZoom) {
 				// request to load
 				final QuadRect latLonBounds = tileBox.getLatLonBounds();

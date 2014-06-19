@@ -73,7 +73,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			public boolean processResult(GPXUtilities.GPXFile[] result) {
 				plugin.setCurrentRoute(result[0]);
 				SelectedRouteGpxFile sgpx = plugin.getCurrentRoute();
-				sgpx.setNextPointToNavigate();
+				sgpx.naviateToNextPoint();
 				prepareView();
 				return false;
 			}
@@ -251,7 +251,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			@Override
 			public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
 				if (menuItem.getItemId() == MARK_AS_CURRENT_ID) {
-					plugin.getCurrentRoute().setNextPointToNavigate(rp);
+					plugin.getCurrentRoute().navigateToPoint(rp);
 					saveGPXAsync();
 				} else if (menuItem.getItemId() == POI_ON_MAP_ID) {
 					LatLon point = rp.getPoint();

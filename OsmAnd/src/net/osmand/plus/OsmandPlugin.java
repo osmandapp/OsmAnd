@@ -137,6 +137,8 @@ public abstract class OsmandPlugin {
 	
 	public void mapActivityDestroy(MapActivity activity) { }
 	
+	public void destinationReached() {	}
+	
 	public void settingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {}
 	
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {}
@@ -238,6 +240,13 @@ public abstract class OsmandPlugin {
 		}
 	}
 	
+	public static void onDestinationReached() {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.destinationReached();
+		}		
+	}
+	
+
 	public static void createLayers(OsmandMapTileView mapView, MapActivity activity) {
 		for (OsmandPlugin plugin : activePlugins) {
 			plugin.registerLayers(activity);
@@ -328,6 +337,8 @@ public abstract class OsmandPlugin {
 	public static boolean isDevelopment() {
 		return getEnabledPlugin(OsmandDevelopmentPlugin.class) != null;
 	}
+
+	
 
 
 }
