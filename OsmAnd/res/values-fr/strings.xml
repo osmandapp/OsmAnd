@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -573,7 +573,7 @@
   <string name="max_level_download_tile_descr">Choisir un niveau de zoom maximum pour le téléchargement</string>
   <string name="route_general_information">Distance totale : %1$s, temps de déplacement : %2$d h %3$d m.</string>
   <string name="router_service_descr">Sélectionner un service de navigation, hors-ligne ou en ligne</string>
-  <string name="router_service">Moteur d\'itinéraire</string>
+  <string name="router_service">Service de navigation</string>
   <string name="sd_dir_not_accessible">Répertoire sur la carte SD inaccessible en écriture</string>
   <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
   <string name="download_question_exist">les données pour {0} existent déjà ({1}). Voulez-vous les mettre à jour ({2}) ?</string>
@@ -1732,4 +1732,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="select_destination_and_intermediate_points">Sélectionner les points de cheminement</string>
     <string name="layer_amenity_label">Étiquette des points</string>
     <string name="route_descr_destination">Destination</string>
+    <string name="show_zoom_buttons_navigation_descr">Afficher les boutons de zoom pendant la navigation</string>
+    <string name="show_zoom_buttons_navigation">Afficher les boutons de zoom</string>
     </resources>
