@@ -97,7 +97,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
 		int clr = getColor(settings);
 		cache.clear();
-		int pointColor = view.getResources().getColor(R.color.gpx_track);
+		int defPointColor = view.getResources().getColor(R.color.gpx_color_point);
+		int visitedColor = view.getContext().getResources().getColor(R.color.color_ok);
 		if (!selectedGPXFiles.isEmpty()) {
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<List<WptPt>> points = g.getPointsToDisplay();
@@ -111,9 +112,18 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				final QuadRect latLonBounds = tileBox.getLatLonBounds();
 				for (SelectedGpxFile g : selectedGPXFiles) {
 					List<WptPt> pts = g.getGpxFile().points;
-					int fcolor = g.getColor() == 0 ? pointColor : g.getColor();
-					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), fcolor);
+					if(pts.isEmpty() & !g.getGpxFile().routes.isEmpty()) {
+						pts = g.getGpxFile().routes.get(0).points;
+					}
+					int fcolor = g.getColor() == 0 ? defPointColor : g.getColor();
+					
 					for (WptPt o : pts) {
+						int pointColor = o.getColor(fcolor);
+						String visited = o.getExtensionsToRead().get("VISITED_KEY");
+						if(visited != null && !visited.equals("0")) {
+							pointColor = visitedColor;
+						}
+						FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor);
 						if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
 								&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right) {
 							cache.add(o);

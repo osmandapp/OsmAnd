@@ -332,6 +332,21 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			sortPoints();
 			app.getTargetPointsHelper().navigateToPoint(rp.getPoint(), true, -1, rp.getName());
 		}
+
+		public void updateCurrentTargetPoint() {
+			TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+			String locName = targetPointsHelper.getPointNavigateDescription();
+			for(int i = 0; i < currentPoints.size(); i++) {
+				RoutePoint rtp = currentPoints.get(i);
+				rtp.isNextNavigate = rtp.visitedTime == 0 && locName != null && locName.equals(rtp.getName());
+				if(rtp.isNextNavigate) {
+					locName = null;
+				}
+				
+			}
+			sortPoints();
+		}
 	
 	}
+
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -71,13 +72,24 @@ public class RoutePointsActivity extends OsmandListActivity {
 		GpxUiHelper.selectGPXFile(this, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
 			@Override
 			public boolean processResult(GPXUtilities.GPXFile[] result) {
-				plugin.setCurrentRoute(result[0]);
+				final GPXFile gpx = result[0];
+				app.getSelectedGpxHelper().clearAllGpxFileToShow();
+				app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);				
+				plugin.setCurrentRoute(gpx);
 				SelectedRouteGpxFile sgpx = plugin.getCurrentRoute();
 				sgpx.naviateToNextPoint();
 				prepareView();
 				return false;
 			}
 		});
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(plugin.getCurrentRoute() != null) {
+			plugin.getCurrentRoute().updateCurrentTargetPoint();
+		}
 	}
 
 
