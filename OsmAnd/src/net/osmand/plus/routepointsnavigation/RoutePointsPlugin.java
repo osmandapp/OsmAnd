@@ -290,10 +290,14 @@ public class RoutePointsPlugin extends OsmandPlugin {
 						if(rhs.isVisited()) {
 							return -1;
 						}
-						return Integer.compare(lhs.gpxOrder, rhs.gpxOrder);
+						return lcompare(lhs.gpxOrder, rhs.gpxOrder);
 					}
-					return -Long.compare(lhs.visitedTime, rhs.visitedTime);
+					return -lcompare(lhs.visitedTime, rhs.visitedTime);
 				}
+				
+				public int lcompare(long lhs, long rhs) {
+			        return lhs < rhs ? -1 : (lhs == rhs ? 0 : 1);
+			    }
 			});
 		}
 
