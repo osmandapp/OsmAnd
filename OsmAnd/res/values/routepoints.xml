@@ -13,5 +13,6 @@
     <string name="mark_as_visited">Mark as visited</string>
     <string name="select_gpx">Select gpx</string>
     <string name="save_gpx">Save gpx</string>
+    <string name="all_route_points">All route points</string>
     <string name="start_route">Start route</string>
 </resources>
