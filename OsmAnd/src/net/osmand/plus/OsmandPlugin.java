@@ -83,7 +83,7 @@ public abstract class OsmandPlugin {
 			installedPlugins.add(parking);
 		}
 
-		//RoutePointsPlugin routePointsPlugin = new RoutePointsPlugin(app);
+		//routePointsPlugin routePointsPlugin = new RoutePointsPlugin(app);
 		//installedPlugins.add(routePointsPlugin);
 		//enablePlugin(app,routePointsPlugin,true);
 

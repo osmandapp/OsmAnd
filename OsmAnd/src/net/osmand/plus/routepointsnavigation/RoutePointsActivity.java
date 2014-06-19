@@ -382,7 +382,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			item.setIcon(R.drawable.ic_action_signpost_dark);
 			item = menu.add(getString(R.string.mark_as_visited));
 			item.setIcon(R.drawable.ic_action_ok_dark);
-			item = menu.add(getString(R.string.show_on_map));
+			item = menu.add(getString(R.string.show_poi_on_map));
 			item.setIcon(R.drawable.ic_action_map_marker_dark);
 			return true;
 		}
@@ -398,7 +398,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 				plugin.setCurrentPoint(sortedPointsList.get(selectedItemIndex));
 				sortPoints();
 				displayListView();
-			} else if (menuItem.getTitle().equals(getResources().getString(R.string.show_on_map))) {
+			} else if (menuItem.getTitle().equals(getResources().getString(R.string.show_poi_on_map))) {
 				GPXUtilities.WptPt point = sortedPointsList.get(selectedItemIndex);
 				app.getSettings().setMapLocationToShow(point.lat, point.lon, app.getSettings().getMapZoomToShow());
 				finish();

@@ -29,7 +29,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	private GPXUtilities.GPXFile gpx;
 	private GPXUtilities.Route currentRoute;
 	private GPXUtilities.WptPt currentPoint;
-	private RoutePointsLayer routeStepsLayer;
 	private List<GPXUtilities.WptPt> pointsList;
 	private TextInfoWidget routeStepsControl;
 
@@ -107,16 +106,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		getCurrentPoint();
 	}
 
-	public void registerLayers(MapActivity activity) {
-		// remove old if existing after turn
-		if (routeStepsLayer != null) {
-			activity.getMapView().removeLayer(routeStepsLayer);
-		}
-		routeStepsLayer = new RoutePointsLayer(activity, this);
-		activity.getMapView().addLayer(routeStepsLayer, 5.5f);
-		registerWidget(activity);
-	}
-
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
@@ -148,10 +137,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-
-		if (routeStepsLayer == null) {
-			registerLayers(activity);
-		}
 
 		if (routeStepsControl == null) {
 			registerWidget(activity);
