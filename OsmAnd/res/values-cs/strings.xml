@@ -1528,7 +1528,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_expire_group">Vyprší za</string>
     <string name="osmo_group_description">Popis</string>
     <string name="osmo_group_policy">Politika</string>
-    <string name="osmo_connect_to_device_tracker_id">ID sledovacího zařízení</string>
+    <string name="osmo_connect_to_device_tracker_id">ID sledovaného zařízení</string>
     <string name="osmo_connect_to_device_name">Jméno uživatele</string>
     <string name="osmo_connect_to_group_id">ID skupiny</string>
     <string name="osmo_group_name">Název skupiny</string>
