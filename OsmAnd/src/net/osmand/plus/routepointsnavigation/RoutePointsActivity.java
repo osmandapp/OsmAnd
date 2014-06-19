@@ -59,7 +59,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 		setSupportProgressBarIndeterminateVisibility(false);
-		
+		getSupportActionBar().setTitle(R.string.route_points_activity);
 		super.setContentView(R.layout.route_steps_main);
 		if (plugin.getCurrentRoute() == null) {
 			selectGPX();
@@ -78,7 +78,8 @@ public class RoutePointsActivity extends OsmandListActivity {
 				app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);				
 				plugin.setCurrentRoute(gpx);
 				SelectedRouteGpxFile sgpx = plugin.getCurrentRoute();
-				if (!sgpx.getCurrentPoints().get(0).isNextNavigate){
+				if (!sgpx.getCurrentPoints().isEmpty() && 
+						!sgpx.getCurrentPoints().get(0).isNextNavigate){
 					sgpx.naviateToNextPoint();
 				}
 				prepareView();
