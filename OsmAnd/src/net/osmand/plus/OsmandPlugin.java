@@ -86,6 +86,7 @@ public abstract class OsmandPlugin {
 		if(Version.isRouteNavPluginInlined(app)) {
 			RoutePointsPlugin routePointsPlugin = new RoutePointsPlugin(app);
 			installedPlugins.add(routePointsPlugin);
+			enablePlugin(app, routePointsPlugin, true);
 		}
 
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
@@ -137,7 +138,7 @@ public abstract class OsmandPlugin {
 	
 	public void mapActivityDestroy(MapActivity activity) { }
 	
-	public void destinationReached() {	}
+	public boolean destinationReached() { return true;	}
 	
 	public void settingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {}
 	
@@ -240,10 +241,14 @@ public abstract class OsmandPlugin {
 		}
 	}
 	
-	public static void onDestinationReached() {
+	public static boolean onDestinationReached() {
+		boolean b = true;
 		for (OsmandPlugin plugin : activePlugins) {
-			plugin.destinationReached();
+			if(!plugin.destinationReached()){
+				b = false;
+			}
 		}		
+		return b;
 	}
 	
 
