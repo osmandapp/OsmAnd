@@ -27,7 +27,6 @@ public class NameFinderPoiFilter extends PoiFilter {
 	
 	List<Amenity> searchedAmenities = new ArrayList<Amenity>();
 	
-
 	private String query = ""; //$NON-NLS-1$
 	private String lastError = ""; //$NON-NLS-1$
 	
@@ -55,12 +54,24 @@ public class NameFinderPoiFilter extends PoiFilter {
 	@Override
 	protected List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, ResultMatcher<Amenity> matcher) {
+		
+		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
+
+		String NOMINATIM_API;
+	
+		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
+			NOMINATIM_API = "https://nominatim.openstreetmap.org/search/";
+		}
+		else {
+			NOMINATIM_API = "http://nominatim.openstreetmap.org/search/";
+		}
+			
 		searchedAmenities.clear();
 		
 		String viewbox = "viewboxlbrt="+((float) leftLongitude)+","+((float) bottomLatitude)+","+((float) rightLongitude)+","+((float) topLatitude);
 		try {
 			lastError = "";
-			String urlq = "http://nominatim.openstreetmap.org/search/"+URLEncoder.encode(query)+ "?format=xml&addressdetails=1&limit="+LIMIT+"&bounded=1&"+viewbox;
+			String urlq = NOMINATIM_API + URLEncoder.encode(query)+ "?format=xml&addressdetails=1&limit="+LIMIT+"&bounded=1&"+viewbox;
 			log.info(urlq);
 			URL url = new URL(urlq); //$NON-NLS-1$
 			InputStream stream = url.openStream();

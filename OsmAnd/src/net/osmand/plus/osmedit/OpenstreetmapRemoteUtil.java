@@ -44,9 +44,6 @@ import android.view.View;
 import android.widget.Toast;
 
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
-	
-//	private final static String SITE_API = "http://api06.dev.openstreetmap.org/";
-	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$
 
 	private static final long NO_CHANGESET_ID = -1;
 	
@@ -73,7 +70,25 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return entityInfo;
 	}
 	
-	private final static String URL_TO_UPLOAD_GPX = " http://api.openstreetmap.org/api/0.6/gpx/create";
+	private static String getSiteApi()
+	{
+		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
+		
+		String RETURN_API;
+		
+		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
+			RETURN_API = "https://api.openstreetmap.org/";
+		}
+		else {
+			RETURN_API = "http://api.openstreetmap.org/";
+		}
+		
+//		RETURN_API = "http://api06.dev.openstreetmap.org/";
+		
+		return RETURN_API;
+	}
+	
+	private final static String URL_TO_UPLOAD_GPX = getSiteApi() + "api/0.6/gpx/create";
 
 	public String uploadGPXFile(String tagstring, String description, String visibility, File f) {
 		String url = URL_TO_UPLOAD_GPX; 
@@ -178,7 +193,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		} catch (IOException e) {
 			log.error("Unhandled exception", e); //$NON-NLS-1$
 		}
-		String response = sendRequest(SITE_API + "api/0.6/changeset/create/", "PUT", writer.getBuffer().toString(), ctx.getString(R.string.opening_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$
+		String response = sendRequest(getSiteApi() + "api/0.6/changeset/create/", "PUT", writer.getBuffer().toString(), ctx.getString(R.string.opening_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$
 		if (response != null && response.length() > 0) {
 			id = Long.parseLong(response);
 		}
@@ -256,7 +271,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			} catch (IOException e) {
 				log.error("Unhandled exception", e); //$NON-NLS-1$
 			}
-			String res = sendRequest(SITE_API+"api/0.6/changeset/"+changeSetId + "/upload", "POST", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			String res = sendRequest(getSiteApi() + "api/0.6/changeset/"+changeSetId + "/upload", "POST", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					writer.getBuffer().toString(), ctx.getString(R.string.commiting_node), true);
 			log.debug(res+""); //$NON-NLS-1$
 			if (res != null) {
@@ -286,7 +301,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	@Override
 	public void closeChangeSet() {
 		if (changeSetId != NO_CHANGESET_ID) {
-			String response = sendRequest(SITE_API+"api/0.6/changeset/"+changeSetId+"/close", "PUT", "", ctx.getString(R.string.closing_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			String response = sendRequest(getSiteApi() + "api/0.6/changeset/"+changeSetId+"/close", "PUT", "", ctx.getString(R.string.closing_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			log.info("Response : " + response); //$NON-NLS-1$
 			changeSetId = NO_CHANGESET_ID;
 		}
@@ -296,7 +311,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	public EntityInfo loadNode(Node n) {
 		long nodeId = n.getId(); // >> 1;
 		try {
-			String res = sendRequest(SITE_API + "api/0.6/node/"+nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
+			String res = sendRequest(getSiteApi() + "api/0.6/node/"+nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if(res != null){
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
@@ -330,7 +345,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 		long nodeId = n.getId() >> 1;
 		try {
-			String res = sendRequest(SITE_API+"api/0.6/node/"+nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
+			String res = sendRequest(getSiteApi() + "api/0.6/node/"+nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if(res != null){
 				OsmBaseStorage st = new OsmBaseStorage();
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
