@@ -880,7 +880,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_right_stack">Right panel:</string>
 	<string name="map_widget_left_stack">Left panel:</string>
 	<string name="map_widget_parking">Parking</string>
-    <string name="map_widget_route_steps">Route steps</string>
     <string name="all_route_points">All route points</string>
 	<string name="map_widget_monitoring">GPX recording</string>
 	<string name="map_widget_speed">Speed</string>
@@ -942,7 +941,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_parking_plugin_name">Parking Position Plugin</string>
 	<string name="context_menu_item_add_parking_point">Mark as a parking position</string>
 	<string name="context_menu_item_delete_parking_point">Delete a parking marker</string>
-    <string name="context_menu_item_show_route_points">Show route points</string>
 	<string name="gpxup_public">Public</string>
 	<string name="gpxup_identifiable">Identifiable</string>
 	<string name="gpxup_trackable">Trackable</string>
@@ -1879,8 +1877,4 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_photo_play_sound">Play sound on photo shot</string>
 	<string name="av_photo_play_sound_descr">Choose whether to play a sound when shooting photos</string>
     <string name="navigation_intent_invalid">Invalid format: %s</string>
-    <string name="route_step_menu_mark_as_next">Mark as next</string>
-    <string name="route_step_menu_show_on_map">Show on map</string>
-    <string name="mark_as_visited">Mark as visited</string>
-    <string name="show_on_map">Show on map</string>
 </resources>

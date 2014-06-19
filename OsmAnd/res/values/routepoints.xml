@@ -5,5 +5,11 @@
     <string name="marking_as_visited">Marking as visited…</string>
     <string name="current_route">Current route:</string>
     <string name="done">Done</string>
-    <string name="marking_as_unvisited">Marking as unvisited...</string>
+    <string name="marking_as_unvisited">Marking as unvisited…</string>
+    <string name="map_widget_route_steps">Route steps</string>
+    <string name="context_menu_item_show_route_points">Show route points</string>
+    <string name="route_step_menu_mark_as_next">Mark as next</string>
+    <string name="mark_as_visited">Mark as visited</string>
+
+
 </resources>
