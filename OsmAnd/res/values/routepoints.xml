@@ -9,5 +9,5 @@
     <string name="mark_as_not_visited">Mark as not-visited</string>
     <string name="mark_as_current">Navigate to</string>
     <string name="map_widget_route_points">Route points</string>
-    
+    <string name="navigate_dialog">Navigate dialog</string>
 </resources>
