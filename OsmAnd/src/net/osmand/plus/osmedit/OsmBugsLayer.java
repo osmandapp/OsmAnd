@@ -235,9 +235,20 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	
 	
 	protected List<OpenStreetNote> loadingBugs(double topLatitude, double leftLongitude, double bottomLatitude,double rightLongitude){
+		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
+		
+		String SITE_API;
+		
+		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
+			SITE_API = "https://api.openstreetmap.org/";
+		}
+		else {
+			SITE_API = "http://api.openstreetmap.org/";
+		}
+	
 		List<OpenStreetNote> bugs = new ArrayList<OpenStreetNote>();
 		StringBuilder b = new StringBuilder();
-		b.append("http://api.openstreetmap.org/api/0.6/notes?bbox="); //$NON-NLS-1$
+		b.append(SITE_API + "api/0.6/notes?bbox="); //$NON-NLS-1$
 		b.append(leftLongitude); //$NON-NLS-1$
 		b.append(",").append(bottomLatitude); //$NON-NLS-1$
 		b.append(",").append(rightLongitude); //$NON-NLS-1$

@@ -4,7 +4,6 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -86,6 +85,7 @@ public class OsmandRenderer {
 		float y = 0;
 		String resId;
 		int iconOrder;
+		float iconSize;
 	}
 	
 	
@@ -315,29 +315,34 @@ public class OsmandRenderer {
 				Bitmap ico = RenderingIcons.getIcon(context, icon.resId);
 				if (ico != null) {
 					if (icon.y >= 0 && icon.y < rc.height && icon.x >= 0 && icon.x < rc.width) {
-						float left = icon.x - ico.getWidth() / 2 * rc.screenDensityRatio;
-						float top = icon.y - ico.getHeight() / 2 * rc.screenDensityRatio;
-						float right = left + ico.getWidth() * rc.screenDensityRatio;
-						float bottom = top + ico.getHeight() * rc.screenDensityRatio;
-						RectF rf = new RectF(left, top, right , bottom);
-						boundIntersections.queryInBox(new QuadRect(left, top, right, bottom), result);
+						int visbleWidth = icon.iconSize >= 0 ? (int) icon.iconSize : ico.getWidth();
+						int visbleHeight = icon.iconSize >= 0 ? (int) icon.iconSize : ico.getHeight();
 						boolean intersects = false;
-						for(RectF r : result) {
-							if(r.intersect(rf)) {
-								intersects = true;
-								break;
+						RectF rf = calculateRect(rc, icon, ico.getWidth(), ico.getHeight());
+						RectF visibleRect = null;
+						if (visbleHeight > 0 && visbleWidth > 0) {
+							visibleRect = calculateRect(rc, icon, visbleWidth, visbleHeight);
+							boundIntersections.queryInBox(new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom), result);
+							for (RectF r : result) {
+								if (r.intersect(visibleRect)) {
+									intersects = true;
+									break;
+								}
 							}
 						}
+						
 						if (!intersects) {
-							if(rc.screenDensityRatio != 1f){
-								Rect src = new Rect(0, 0, ico.getWidth(), ico
-										.getHeight());
+							if (rc.screenDensityRatio != 1f) {
+								Rect src = new Rect(0, 0, ico.getWidth(), ico.getHeight());
 								cv.drawBitmap(ico, src, rf, paintIcon);
 							} else {
-								cv.drawBitmap(ico, left, top, paintIcon);
+								cv.drawBitmap(ico, rf.left, rf.top, paintIcon);
 							}
-							rf.inset(-rf.width()/4, -rf.height()/4);
-							boundIntersections.insert(rf, new QuadRect(rf.left, rf.top, rf.right, rf.bottom));
+							if(visibleRect != null) {
+								visibleRect.inset(-visibleRect.width() / 4, -visibleRect.height() / 4);
+								boundIntersections.insert(visibleRect, 
+										new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom));
+							}
 						}
 					}
 				}
@@ -346,6 +351,16 @@ public class OsmandRenderer {
 				return;
 			}
 		}
+	}
+
+	private RectF calculateRect(RenderingContext rc, IconDrawInfo icon, int visbleWidth, int visbleHeight) {
+		RectF rf;
+		float left = icon.x - visbleWidth / 2 * rc.screenDensityRatio;
+		float top = icon.y - visbleHeight / 2 * rc.screenDensityRatio;
+		float right = left + visbleWidth * rc.screenDensityRatio;
+		float bottom = top + visbleHeight * rc.screenDensityRatio;
+		rf = new RectF(left, top, right, bottom);
+		return rf;
 	}
 	
 	Comparator<MapDataObjectPrimitive> sortByOrder() {
@@ -649,7 +664,7 @@ public class OsmandRenderer {
 			p.setColorFilter(null);
 			p.clearShadowLayer();
 			p.setStyle(Style.STROKE);
-			p.setStrokeWidth(rc.getComplexValue(req, rStrokeW, 0));
+			p.setStrokeWidth(rc.getComplexValue(req, rStrokeW));
 			String cap = req.getStringPropertyValue(rCap);
 			if(!Algorithms.isEmpty(cap)){
 				p.setStrokeCap(Cap.valueOf(cap.toUpperCase()));
@@ -700,7 +715,7 @@ public class OsmandRenderer {
 				if(shadowColor == 0) {
 					shadowColor = rc.shadowRenderingColor;
 				}
-				int shadowRadius = (int) rc.getComplexValue(req, req.ALL.R_SHADOW_RADIUS, 0);
+				int shadowRadius = (int) rc.getComplexValue(req, req.ALL.R_SHADOW_RADIUS);
 				if (shadowColor == 0) {
 					shadowRadius = 0;
 				}
@@ -742,6 +757,7 @@ public class OsmandRenderer {
 			ico.x = ps.x;
 			ico.y = ps.y;
 			ico.iconOrder = render.getIntPropertyValue(render.ALL.R_ICON_ORDER, 100);
+			ico.iconSize = rc.getComplexValue(render, render.ALL.R_ICON_VISIBLE_SIZE, -1);
 			ico.resId = resId;
 			rc.iconsToDraw.add(ico);
 		}
@@ -853,7 +869,7 @@ public class OsmandRenderer {
 		if (path != null) {
 			if(drawOnlyShadow) {
 				int shadowColor = render.getIntPropertyValue(render.ALL.R_SHADOW_COLOR);
-				int shadowRadius = (int) rc.getComplexValue(render, render.ALL.R_SHADOW_RADIUS, 0);
+				int shadowRadius = (int) rc.getComplexValue(render, render.ALL.R_SHADOW_RADIUS);
 				if(shadowColor == 0) {
 					shadowColor = rc.shadowRenderingColor;
 				}

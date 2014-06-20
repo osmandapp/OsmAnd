@@ -284,7 +284,7 @@ public class MapActivityLayers {
 		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0) 
 				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).reg();
 		adapter.item(R.string.layer_gpx_layer).selected(
-				getApplication().getSelectedGpxHelper() != null ? 1 : 0)
+				getApplication().getSelectedGpxHelper().isShowingAnyGpxFiles()? 1 : 0)
 //				.icons(R.drawable.ic_action_foot_dark, R.drawable.ic_action_foot_light)
 				.icons(R.drawable.ic_action_polygom_dark, R.drawable.ic_action_polygom_light)
 				.reg();

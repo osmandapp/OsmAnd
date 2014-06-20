@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="net.osmand.plus" android:installLocation="auto" android:versionName="@string/app_version" android:versionCode="170">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" 
+    android:versionName="@string/app_version" 
+    android:versionCode="170"
+	package="net.osmand.plus">
 
 	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="19"/>
 	

@@ -331,7 +331,7 @@ public class EditingPOIActivity implements DialogProvider {
 
 			@Override
 			public void onClick(View v) {
-				ctx.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://wiki.openstreetmap.org/wiki/Map_Features")));
+				ctx.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
 			}
 		});
 		linkToOsmDoc.setMovementMethod(LinkMovementMethod.getInstance());
