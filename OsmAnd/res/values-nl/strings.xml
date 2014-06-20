@@ -1583,8 +1583,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	</string>
     <string name="base_world_map">Basis-wereldkaart</string>
     <string name="map_magnifier">Kaartvergrootglas</string>
-    <string name="route_is_too_long">De route is mogelijk te lang om te worden berekend door de OsmAnd offline router.
-De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of meer routepunten om de route te berekenen.</string>
+    <string name="route_is_too_long">De bestemming ligt verder dan 200 kilometer. De routeberekening kan dan erg lang duren. Door zelf tussenliggende routepunten te maken kunt u de routeberekening sneller maken.</string>
     <string name="auto_zoom_none">Geen automatische zoom</string>
     <string name="auto_zoom_close">Zoom naar close-up</string>
     <string name="auto_zoom_far">Zoom naar gemiddelde afstand</string>
