@@ -131,6 +131,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 		super.onListItemClick(l, v, position, id);
 		RoutePoint rp = adapter.getItem(position);
 		getSherlock().startActionMode(getPointActionModeCallback(rp));
+		adapter.notifyDataSetChanged();
 	}
 
 	private class PointItemAdapter extends ArrayAdapter<RoutePoint> {
@@ -239,7 +240,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 		@Override
 		public void onDestroyActionMode(ActionMode actionMode) {
-
+			adapter.notifyDataSetChanged();
 		}
 	};
 	
@@ -287,6 +288,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			@Override
 			public void onDestroyActionMode(ActionMode actionMode) {
 				selectedItem = null;
+				adapter.notifyDataSetChanged();
 			}
 		};
 	}
