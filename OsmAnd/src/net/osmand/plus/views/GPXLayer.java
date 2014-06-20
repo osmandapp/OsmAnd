@@ -111,10 +111,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				// request to load
 				final QuadRect latLonBounds = tileBox.getLatLonBounds();
 				for (SelectedGpxFile g : selectedGPXFiles) {
-					List<WptPt> pts = g.getGpxFile().points;
-					if(pts.isEmpty() & !g.getGpxFile().routes.isEmpty()) {
-						pts = g.getGpxFile().routes.get(0).points;
-					}
+					List<WptPt> pts = getListStarPoints(g);
 					int fcolor = g.getColor() == 0 ? defPointColor : g.getColor();
 					
 					for (WptPt o : pts) {
@@ -140,6 +137,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		if(textLayer.isVisible()) {
 			textLayer.putData(this, cache);
 		}
+	}
+
+	private List<WptPt> getListStarPoints(SelectedGpxFile g) {
+		List<WptPt> pts = g.getGpxFile().points;
+		if(pts.isEmpty() & !g.getGpxFile().routes.isEmpty()) {
+			pts = g.getGpxFile().routes.get(0).points;
+		}
+		return pts;
 	}
 
 	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<List<WptPt>> points) {
@@ -197,7 +202,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		for (SelectedGpxFile g : selectedGpxHelper.getSelectedGPXFiles()) {
-			List<WptPt> pts = g.getGpxFile().points;
+			List<WptPt> pts = getListStarPoints(g);
 			// int fcolor = g.getColor() == 0 ? clr : g.getColor();
 			for (WptPt n : pts) {
 				int x = (int) tb.getPixXFromLatLon(n.lat, n.lon);
