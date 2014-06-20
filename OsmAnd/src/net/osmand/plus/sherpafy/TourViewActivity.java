@@ -13,7 +13,6 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.app.Activity;
 import android.app.AlertDialog;

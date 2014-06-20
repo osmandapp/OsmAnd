@@ -9,7 +9,7 @@ public class FavouritePoint implements Serializable {
 	private double latitude;
 	private double longitude;
 	private int color;
-	
+	private boolean visible = true;
 
 	public FavouritePoint(){
 	}
@@ -28,6 +28,15 @@ public class FavouritePoint implements Serializable {
 	public void setColor(int color) {
 		this.color = color;
 	}
+	
+	public boolean isVisible() {
+		return visible;
+	}
+	
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	
 
 	public double getLatitude() {
 		return latitude;
@@ -65,4 +74,5 @@ public class FavouritePoint implements Serializable {
 	public String toString() {
 		return "Favourite " + getName(); //$NON-NLS-1$
 	}
+
 }

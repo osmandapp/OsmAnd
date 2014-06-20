@@ -149,6 +149,7 @@ public class OsmandApplication extends Application {
 		savingTrackHelper = new SavingTrackHelper(this);
 		liveMonitoringHelper = new LiveMonitoringHelper(this);
 		selectedGpxHelper = new GpxSelectionHelper(this);
+		favorites = new FavouritesDbHelper(this);
 		uiHandler = new Handler();
 		rendererRegistry = new RendererRegistry();
 		targetPointsHelper = new TargetPointsHelper(this);
@@ -234,9 +235,6 @@ public class OsmandApplication extends Application {
 	}
 
 	public FavouritesDbHelper getFavorites() {
-		if (favorites == null) {
-			favorites = new FavouritesDbHelper(this);
-		}
 		return favorites;
 	}
 
@@ -506,6 +504,7 @@ public class OsmandApplication extends Application {
 	private void startApplicationBackground() {
 		List<String> warnings = new ArrayList<String>();
 		try {
+			favorites.loadFavorites();
 			try {
 				SpecialPhrases.setLanguage(this, osmandSettings);
 			} catch (IOException e) {

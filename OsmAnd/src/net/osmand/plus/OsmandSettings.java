@@ -91,6 +91,7 @@ public class OsmandSettings {
 	
 	// These settings are stored in SharedPreferences
 	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings"; //$NON-NLS-1$
+
 	
 	/// Settings variables
 	private final OsmandApplication ctx;
@@ -611,6 +612,9 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES = new BooleanPreference("use_internet_to_download_tiles", true).makeGlobal().cache();
 	
 	public final OsmandPreference<String> AVAILABLE_APP_MODES =  new StringPreference("available_application_modes", "car,bicycle,pedestrian,").makeGlobal().cache();
+	
+	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED =  new StringPreference("last_fav_category", "").makeGlobal();
+	
 	
 	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>("default_application_mode_string", ApplicationMode.DEFAULT) {
 		{

@@ -322,10 +322,10 @@ public class MainMenuActivity extends Activity {
 		}
 		
 		if(netOsmandWasInstalled){
-			Builder builder = new AccessibleAlertBuilder(this);
-			builder.setMessage(R.string.osmand_net_previously_installed);
-			builder.setPositiveButton(R.string.default_buttons_ok, null);
-			builder.show();
+//			Builder builder = new AccessibleAlertBuilder(this);
+//			builder.setMessage(R.string.osmand_net_previously_installed);
+//			builder.setPositiveButton(R.string.default_buttons_ok, null);
+//			builder.show();
 		} else {
 			Builder builder = new AccessibleAlertBuilder(this);
 			builder.setMessage(R.string.first_time_msg);

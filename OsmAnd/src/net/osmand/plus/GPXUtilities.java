@@ -29,6 +29,7 @@ import java.util.TimeZone;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -65,6 +66,10 @@ public class GPXUtilities {
 				}
 			}
 			return defColor;
+		}
+		
+		public void setColor(int color) {
+			getExtensionsToWrite().put("color", Algorithms.colorToString(color));
 		}
 
 		public Map<String, String> getExtensionsToWrite() {
@@ -753,6 +758,10 @@ public class GPXUtilities {
 			fis = new FileInputStream(f);
 			GPXFile file = loadGPXFile(ctx, fis);
 			file.path = f.getAbsolutePath();
+			try {
+				fis.close();
+			} catch (IOException e) {
+			}
 			return file;
 		} catch (FileNotFoundException e) {
 			GPXFile res = new GPXFile();

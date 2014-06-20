@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import android.view.WindowManager;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.AndroidUtils;
@@ -27,6 +26,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -59,6 +59,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -120,8 +121,8 @@ public class MapActivityActions implements DialogProvider {
 		if(name == null) {
 			name = resources.getString(R.string.add_favorite_dialog_default_favourite_name);
 		}
-		final FavouritePoint point = new FavouritePoint(lat, lon, name,
-				resources.getString(R.string.favorite_default_category));
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final FavouritePoint point = new FavouritePoint(lat, lon, name, app.getSettings().LAST_FAV_CATEGORY_ENTERED.get());
 		args.putSerializable(KEY_FAVORITE, point);
 		final EditText editText =  (EditText) dialog.findViewById(R.id.Name);
 		editText.setText(point.getName());
@@ -140,7 +141,12 @@ public class MapActivityActions implements DialogProvider {
 		builder.setView(v);
 		final EditText editText =  (EditText) v.findViewById(R.id.Name);
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
-		cat.setAdapter(new ArrayAdapter<String>(activity, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray(new String[] {})));
+		List<FavoriteGroup> gs = helper.getFavoriteGroups();
+		String[] list = new String[gs.size()];
+		for (int i = 0; i < list.length; i++) {
+			list[i] = gs.get(i).name;
+		}
+		cat.setAdapter(new ArrayAdapter<String>(activity, R.layout.list_textview, list));
 		
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setNeutralButton(R.string.update_existing, new DialogInterface.OnClickListener(){
@@ -160,9 +166,12 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
-				final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
+				OsmandApplication app = (OsmandApplication) activity.getApplication();
+				String categoryStr = cat.getText().toString().trim();
+				final FavouritesDbHelper helper = app.getFavorites();
+				app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(categoryStr);
 				point.setName(editText.getText().toString().trim());
-				point.setCategory(cat.getText().toString().trim());
+				point.setCategory(categoryStr);
 				boolean added = helper.addFavourite(point);
 				if (added) {
 					AccessibleToast.makeText(activity, MessageFormat.format(
