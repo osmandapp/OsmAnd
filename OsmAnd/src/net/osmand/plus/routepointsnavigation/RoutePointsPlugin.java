@@ -374,11 +374,18 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 
 		public void markPoint(WptPt point, boolean visited) {
-			markPoint(getRoutePointFromWpt(point), visited);
+			RoutePoint routePoint = getRoutePointFromWpt(point);
+			if (routePoint != null) {
+				markPoint(routePoint, visited);
+			}
 		}
 
 		public void navigateToPoint(WptPt point) {
-			navigateToPoint(getRoutePointFromWpt(point));
+			RoutePoint routePoint = getRoutePointFromWpt(point);
+			if (routePoint != null) {
+				navigateToPoint(routePoint);
+
+			}
 		}
 
 		public RoutePoint getRoutePointFromWpt(WptPt point) {
