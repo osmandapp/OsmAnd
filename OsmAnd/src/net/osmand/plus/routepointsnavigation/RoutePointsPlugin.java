@@ -26,6 +26,7 @@ import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.MapUtils;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 import android.text.format.DateFormat;
 import android.view.View;
 
@@ -67,6 +68,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	public boolean destinationReached() {
 		if (currentRoute != null) {
 			boolean naviateToNextPoint = currentRoute.naviateToNextPoint();
+			
 			if (naviateToNextPoint) {
 				return false;
 			}
@@ -402,5 +404,24 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			}
 			return null;
 		}
+	}
+	
+	public void saveGPXAsync() {
+		new AsyncTask<RoutePointsPlugin.SelectedRouteGpxFile, Void, Void>() {
+			
+			protected void onPreExecute() {
+			}
+
+			@Override
+			protected Void doInBackground(RoutePointsPlugin.SelectedRouteGpxFile... params) {
+				if(getCurrentRoute() != null) {
+					getCurrentRoute().saveFile();
+				}
+				return null;
+			}
+
+			protected void onPostExecute(Void result) {
+			}
+		}.execute(getCurrentRoute());
 	}
 }

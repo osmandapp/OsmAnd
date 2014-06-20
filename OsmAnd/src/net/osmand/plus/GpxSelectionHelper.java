@@ -362,10 +362,19 @@ public class GpxSelectionHelper {
 		private int color;
 		private List<List<WptPt>> processedPointsToDisplay = new ArrayList<List<WptPt>>();
 		private List<GpxDisplayGroup> displayGroups = null;
+		private boolean routePoints;
 		
 		public void setGpxFile(GPXFile gpxFile) {
 			this.gpxFile = gpxFile;
 			this.processedPointsToDisplay = gpxFile.proccessPoints();
+			if(this.processedPointsToDisplay.isEmpty()) {
+				this.processedPointsToDisplay = gpxFile.processRoutePoints();
+				routePoints = true;
+			}
+		}
+		
+		public boolean isRoutePoints() {
+			return routePoints;
 		}
 		
 		public List<List<WptPt>> getPointsToDisplay() {

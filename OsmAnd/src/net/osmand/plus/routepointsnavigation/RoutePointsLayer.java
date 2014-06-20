@@ -78,18 +78,19 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.mark_as_not_visited){
 						plugin.getCurrentRoute().markPoint(point,false);
-						saveGPXAsync();
+						plugin.saveGPXAsync();
 					} else if (itemId == R.string.mark_as_visited) {
 						plugin.getCurrentRoute().markPoint(point, true);
-						saveGPXAsync();
+						plugin.saveGPXAsync();
 					} else if (itemId == R.string.mark_as_current){
 						plugin.getCurrentRoute().markPoint(point, false);
 						plugin.getCurrentRoute().navigateToPoint(point);
-						saveGPXAsync();
+						plugin.saveGPXAsync();
 					} else if (itemId == R.string.navigate_to_next){
 						plugin.getCurrentRoute().naviateToNextPoint();
-						saveGPXAsync();
+						plugin.saveGPXAsync();
 					}
+					map.refreshMap();
 				}
 			};
 
@@ -102,34 +103,19 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 			}
 
 			RoutePointsPlugin.RoutePoint routePoint = plugin.getCurrentRoute().getRoutePointFromWpt(point);
-			if (routePoint.isNextNavigate) {
-				adapter.item(R.string.navigate_to_next).icons(
-						R.drawable.ic_action_gnext_dark, R.drawable.ic_action_gnext_light).listen(listener).reg();
-			} else {
-				adapter.item(R.string.mark_as_current).icons(
-						R.drawable.ic_action_signpost_dark, R.drawable.ic_action_signpost_light).listen(listener).reg();
+			if (routePoint != null) {
+				if (routePoint.isNextNavigate) {
+					adapter.item(R.string.navigate_to_next)
+							.icons(R.drawable.ic_action_gnext_dark, R.drawable.ic_action_gnext_light).listen(listener)
+							.reg();
+				} else {
+					adapter.item(R.string.mark_as_current)
+							.icons(R.drawable.ic_action_signpost_dark, R.drawable.ic_action_signpost_light)
+							.listen(listener).reg();
+				}
 			}
 		}
 	}
 
 
-	private void saveGPXAsync() {
-		new AsyncTask<RoutePointsPlugin.SelectedRouteGpxFile, Void, Void>() {
-			protected void onPreExecute() {
-
-			}
-
-			@Override
-			protected Void doInBackground(RoutePointsPlugin.SelectedRouteGpxFile... params) {
-				if(plugin.getCurrentRoute() != null) {
-					plugin.getCurrentRoute().saveFile();
-				}
-				return null;
-			}
-
-			protected void onPostExecute(Void result) {
-
-			}
-		}.execute(plugin.getCurrentRoute());
-	}
 }

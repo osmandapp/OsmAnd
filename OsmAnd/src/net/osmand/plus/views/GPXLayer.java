@@ -16,6 +16,7 @@ import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
@@ -44,6 +45,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private List<WptPt> cache = new ArrayList<WptPt>();
 	private MapTextLayer textLayer;
 
+	private DashPathEffect pathEffect;
+
 //	private Drawable favoriteIcon;
 	
 	
@@ -62,6 +65,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintBmp.setFilterBitmap(true);
 		paintBmp.setDither(true);
 		
+		
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 		//favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
 	}
@@ -70,6 +74,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
+		pathEffect = new DashPathEffect(new float[] { 5 * view.getDensity(),
+				3 * view.getDensity() }, 0);
 		initUI();
 	}
 
@@ -102,8 +108,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		if (!selectedGPXFiles.isEmpty()) {
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<List<WptPt>> points = g.getPointsToDisplay();
+				boolean routePoints = g.isRoutePoints();
 				int fcolor = g.getColor() == 0 ? clr : g.getColor();
 				paint.setColor(fcolor);
+				paint.setPathEffect(routePoints ? pathEffect : null);
 				drawSegments(canvas, tileBox, points);
 			}
 			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -115,11 +123,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					int fcolor = g.getColor() == 0 ? defPointColor : g.getColor();
 					
 					for (WptPt o : pts) {
-						int pointColor = o.getColor(fcolor);
-						String visited = o.getExtensionsToRead().get("VISITED_KEY");
-						if(visited != null && !visited.equals("0")) {
-							pointColor = visitedColor;
-						}
+						boolean visit = isPointVisited(o);
+						int pointColor = visit ? visitedColor : o.getColor(fcolor);
 						FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor);
 						if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
 								&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right) {
@@ -137,6 +142,15 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		if(textLayer.isVisible()) {
 			textLayer.putData(this, cache);
 		}
+	}
+
+	private boolean isPointVisited(WptPt o) {
+		boolean visit = false;
+		String visited = o.getExtensionsToRead().get("VISITED_KEY");
+		if(visited != null && !visited.equals("0")) {
+			visit = true;
+		}
+		return visit;
 	}
 
 	private List<WptPt> getListStarPoints(SelectedGpxFile g) {
@@ -157,7 +171,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				WptPt ls = l.get(i);
 				if (startIndex == -1) {
 					if (ls.lat >= latLonBounds.bottom - 0.1 && ls.lat <= latLonBounds.top + 0.1  && ls.lon >= latLonBounds.left - 0.1
-							&& ls.lon <= latLonBounds.right + 0.1) {
+							&& ls.lon <= latLonBounds.right + 0.1 && !isPointVisited(ls)) {
 						startIndex = i > 0 ? i - 1 : i;
 					}
 				} else if (!(latLonBounds.left <= ls.lon + 0.1 && ls.lon - 0.1 <= latLonBounds.right
@@ -184,6 +198,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		path.moveTo(px, py);
 		for (int i = startIndex + 1; i <= endIndex; i++) {
 			WptPt p = l.get(i);
+			if(isPointVisited(p)) {
+				continue;
+			}
 			int x = tb.getPixXFromLonNoRot(p.lon);
 			int y = tb.getPixYFromLatNoRot(p.lat);
 			path.lineTo(x, y);

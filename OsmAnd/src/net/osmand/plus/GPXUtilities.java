@@ -523,21 +523,24 @@ public class GPXUtilities {
 			}
 			return false;
 		}
+		
+		public List<List<WptPt>> processRoutePoints() {
+			List<List<WptPt>> tpoints = new ArrayList<List<WptPt>>();
+			if (routes.size() > 0) {
+				for (Route r : routes) {
+					tpoints.add(r.points);
+				}
+			}
+			return tpoints;
+		}
 
 		public List<List<WptPt>> proccessPoints() {
 			List<List<WptPt>> tpoints = new ArrayList<List<WptPt>>();
-			boolean created = false;
 			for (Track t : tracks) {
 				for (TrkSegment ts : t.segments) {
 					if (ts.points.size() > 0) {
-						created = true;
 						tpoints.add(ts.points);
 					}
-				}
-			}
-			if (!created && routes.size() > 0) {
-				for (Route r : routes) {
-					tpoints.add(r.points);
 				}
 			}
 			return tpoints;

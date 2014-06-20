@@ -437,7 +437,6 @@ public class RoutingHelper {
 			if (OsmandPlugin.onDestinationReached()) {
 				clearCurrentRoute(null, null);
 				setRoutePlanningMode(false);
-				OsmandPlugin.onDestinationReached();
 				app.runInUIThread(new Runnable() {
 					@Override
 					public void run() {
