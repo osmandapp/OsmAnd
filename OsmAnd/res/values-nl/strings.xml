@@ -1631,7 +1631,7 @@ De maximale afstand tussen start en bestemming is ongeveer 200 km. Maak één of
     <string name="routing_attr_prefer_motorway_name">Bij voorkeur autowegen</string>
 	<string name="routing_attr_prefer_motorway_description">Gebruik bij voorkeur autowegen</string>
 	<string name="routing_attr_short_way_name">Kortste route</string>
-	<string name="routing_attr_short_way_description">Gebruik de kortste route</string>
+	<string name="routing_attr_short_way_description">Kortste route gebruiken</string>
 	<string name="routing_attr_avoid_toll_name">Geen tolwegen</string>
 	<string name="routing_attr_avoid_toll_description">Vermijd tolwegen</string>
 	<string name="routing_attr_avoid_unpaved_name">Geen onverharde wegen</string>
