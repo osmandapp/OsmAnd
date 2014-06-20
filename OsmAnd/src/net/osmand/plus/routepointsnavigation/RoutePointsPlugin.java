@@ -99,7 +99,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null) {
 			routeStepsControl = createRouteStepsInfoControl(activity, mapInfoLayer.getPaintSubText(), mapInfoLayer.getPaintSubText());
 			mapInfoLayer.getMapInfoControls().registerSideWidget(routeStepsControl,
-					R.drawable.ic_signpost, R.string.map_widget_route_points, "route_steps", false, 8);
+					R.drawable.widget_signpost, R.string.map_widget_route_points, "route_steps", false, 8);
 			mapInfoLayer.recreateControls();
 		}
 	}
@@ -156,7 +156,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			}
 		});
 		routeStepsControl.setText(null, null);
-		routeStepsControl.setImageDrawable(map.getResources().getDrawable(R.drawable.ic_signpost));
+		routeStepsControl.setImageDrawable(map.getResources().getDrawable(R.drawable.widget_signpost));
 		return routeStepsControl;
 	}
 
