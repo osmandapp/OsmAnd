@@ -3,6 +3,7 @@ package net.osmand.plus.routepointsnavigation;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.os.AsyncTask;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
@@ -77,13 +78,17 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.mark_as_not_visited){
 						plugin.getCurrentRoute().markPoint(point,false);
+						saveGPXAsync();
 					} else if (itemId == R.string.mark_as_visited) {
 						plugin.getCurrentRoute().markPoint(point, true);
+						saveGPXAsync();
 					} else if (itemId == R.string.mark_as_current){
 						plugin.getCurrentRoute().markPoint(point, false);
 						plugin.getCurrentRoute().navigateToPoint(point);
+						saveGPXAsync();
 					} else if (itemId == R.string.navigate_to_next){
 						plugin.getCurrentRoute().naviateToNextPoint();
+						saveGPXAsync();
 					}
 				}
 			};
@@ -105,5 +110,26 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 						R.drawable.ic_action_signpost_dark, R.drawable.ic_action_signpost_light).listen(listener).reg();
 			}
 		}
+	}
+
+
+	private void saveGPXAsync() {
+		new AsyncTask<RoutePointsPlugin.SelectedRouteGpxFile, Void, Void>() {
+			protected void onPreExecute() {
+
+			}
+
+			@Override
+			protected Void doInBackground(RoutePointsPlugin.SelectedRouteGpxFile... params) {
+				if(plugin.getCurrentRoute() != null) {
+					plugin.getCurrentRoute().saveFile();
+				}
+				return null;
+			}
+
+			protected void onPostExecute(Void result) {
+
+			}
+		}.execute(plugin.getCurrentRoute());
 	}
 }
