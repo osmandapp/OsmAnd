@@ -80,6 +80,7 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 					} else if (itemId == R.string.mark_as_visited) {
 						plugin.getCurrentRoute().markPoint(point, true);
 					} else if (itemId == R.string.mark_as_current){
+						plugin.getCurrentRoute().markPoint(point, false);
 						plugin.getCurrentRoute().navigateToPoint(point);
 					} else if (itemId == R.string.navigate_to_next){
 						plugin.getCurrentRoute().naviateToNextPoint();
@@ -89,10 +90,10 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 
 			if (plugin.getCurrentRoute().getPointStatus(point)){
 				adapter.item(R.string.mark_as_not_visited).icons(
-						R.drawable.ic_action_ok_dark, R.drawable.ic_action_ok_light).listen(listener).reg();
+						R.drawable.ic_action_gremove_dark, R.drawable.ic_action_gremove_light).listen(listener).reg();
 			} else {
 				adapter.item(R.string.mark_as_visited).icons(
-						R.drawable.ic_action_gremove_dark, R.drawable.ic_action_gremove_light).listen(listener).reg();
+						R.drawable.ic_action_ok_dark, R.drawable.ic_action_ok_light).listen(listener).reg();
 			}
 
 			RoutePointsPlugin.RoutePoint routePoint = plugin.getCurrentRoute().getRoutePointFromWpt(point);

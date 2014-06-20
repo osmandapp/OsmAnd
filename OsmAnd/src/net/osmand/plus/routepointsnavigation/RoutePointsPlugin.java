@@ -119,6 +119,10 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		if (routePointsLayer == null){
+			registerLayers(activity);
+		}
+
 		if (routeStepsControl == null) {
 			registerWidget(activity);
 		}
@@ -384,7 +388,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			RoutePoint routePoint = getRoutePointFromWpt(point);
 			if (routePoint != null) {
 				navigateToPoint(routePoint);
-
 			}
 		}
 
