@@ -87,7 +87,8 @@
     * Special tools for new rendering (GPLv3) - (C) Alexey Pelykh 
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-inspector
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-verifier
-        obf-inspector  route-tester
+        - https://github.com/osmandapp/OsmAnd-tools/tree/master/route-tester
+
     * OSM data 2014
         - Extracts - https://github.com/osmandapp/OsmAnd-misc/blob/master/osm-planet/osm-data/
 
