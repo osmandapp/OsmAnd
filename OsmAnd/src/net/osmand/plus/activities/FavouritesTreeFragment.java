@@ -1,5 +1,7 @@
 package net.osmand.plus.activities;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -39,6 +42,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
@@ -47,8 +51,10 @@ import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.ActionMode.Callback;
@@ -79,7 +85,6 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 	private ActionMode actionMode;
 	private SearchView searchView;
 	protected boolean hideActionBar;
-	private int defColor;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -87,7 +92,6 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 		helper = getMyApplication().getFavorites();
 		favouritesAdapter = new FavouritesAdapter();
-		defColor = getResources().getColor(R.color.color_favorite);
 		favouritesAdapter.synchronizeGroups();
 		setAdapter(favouritesAdapter);
 	}
@@ -451,8 +455,26 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 	}
 	
-	protected void openChangeGroupDialog() {
-		// TODO Auto-generated method stub
+	protected void openChangeGroupDialog(FavoriteGroup group) {
+		Builder bld = new AlertDialog.Builder(getActivity());
+		View favEdit = getActivity().getLayoutInflater().inflate(R.layout.fav_group_edit, null);
+		final Spinner colorSpinner = (Spinner) favEdit.findViewById(R.id.ColorSpinner);
+        final TIntArrayList list = new TIntArrayList();
+        ColorDialogs.setupColorSpinner(getActivity(), group.color, colorSpinner, list);
+		
+		CheckBox checkBox = (CheckBox) favEdit.findViewById(R.id.Visibility);
+		checkBox.setChecked(group.visible);
+		bld.setView(favEdit);
+		bld.setNegativeButton(R.string.default_buttons_cancel, null);
+		bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				list.get(colorSpinner.getSelectedItemPosition());
+				
+			}
+		});
+		bld.show();
 		
 	}
 
@@ -475,41 +497,6 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private void importFile() {
-		final File tosave = getMyApplication().getAppPath(FavouritesDbHelper.FILE_TO_SAVE);
-		if (!tosave.exists()) {
-			AccessibleToast.makeText(getActivity(),
-					MessageFormat.format(getString(R.string.fav_file_to_load_not_found), tosave.getAbsolutePath()),
-					Toast.LENGTH_LONG).show();
-		} else {
-			new AsyncTask<Void, FavouritePoint, String>() {
-						
-				@Override
-				protected String doInBackground(Void... params) {
-					// helper.loadGPXFile(getMyApplication(), tosave, this);
-					return null ;
-				}
-
-				@Override
-				protected void onPreExecute() {
-					showProgressBar();
-				};
-
-				@Override
-				protected void onPostExecute(String warning) {
-					hideProgressBar();
-					if (warning == null) {
-						AccessibleToast.makeText(getActivity(), R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT)
-								.show();
-					} else {
-						AccessibleToast.makeText(getActivity(), warning, Toast.LENGTH_LONG).show();
-					}
-					favouritesAdapter.synchronizeGroups();
-				};
-
-			}.execute();
-		}
-	}
 
 	private void shareFavourites() {
 		if (favouritesAdapter.isEmpty()) {
@@ -542,7 +529,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private void export() {
+	protected void export() {
 		final File tosave = getMyApplication().getAppPath(FavouritesDbHelper.FILE_TO_SAVE);
 		if (favouritesAdapter.isEmpty()) {
 			AccessibleToast.makeText(getActivity(), R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
@@ -726,7 +713,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						openChangeGroupDialog();
+						openChangeGroupDialog(model);
 					}
 
 				});

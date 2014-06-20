@@ -32,6 +32,7 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
@@ -123,28 +124,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	private String operation;
 	private Paint white;
 	
-	private int[] paletteColors = new int[] {
-			R.string.color_red,
-			R.string.color_pink,
-			R.string.color_orange,
-			R.string.color_brown,
-			R.string.color_yellow,
-			R.string.color_lightblue,
-			R.string.color_blue,
-			R.string.color_green
-	};
 	
-	private int[] pallette = new int[] {
-			0xffd00d0d,
-			0xffe044bb,
-			0xffff5020,
-			0xff8e2512,
-			0xffeeee10,
-			0xff10c0f0,
-			0xff1010a0,
-			0xff88e030
-	};
-
 	@Override
 	public void onCreate(Bundle icicle) {
 		// This has to be called before setContentView and you must use the
@@ -697,7 +677,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				final String id = tracker.getText().toString();
 				final String nick = nickname.getText().toString();
 				if(device.isChecked()) {
-					OsMoDevice dev = osMoPlugin.getGroups().addConnectedDevice(id, nameUser, getRandomColor());
+					OsMoDevice dev = osMoPlugin.getGroups().addConnectedDevice(id, nameUser, 
+							ColorDialogs.getRandomColor());
 					adapter.update(dev.group);
 					adapter.notifyDataSetChanged();
 				} else {
@@ -972,7 +953,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			int color = getResources().getColor(R.color.color_unknown);
 			int activeColor = model.getColor();
 			if (activeColor == 0) {
-				activeColor = getRandomColor();
+				activeColor = ColorDialogs.getRandomColor();
 				osMoPlugin.getGroups().setGenColor(model, activeColor);
 			}
 			//Location location = tracker.getLastLocation(model.trackerId);
@@ -1053,9 +1034,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 	}
 	
-	private int getRandomColor() {
-		return pallette[new Random().nextInt(pallette.length)];
-	}
+	
 
 	@Override
 	public void updateCompassValue(float value) {
@@ -1087,13 +1066,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		refreshList();		
 	}
 	
-	public static String colorToString(int color) {
-		if ((0xFF000000 & color) == 0xFF000000) {
-			return "#" + Integer.toHexString(color & 0x00FFFFFF); //$NON-NLS-1$
-		} else {
-			return "#" + Integer.toHexString(color); //$NON-NLS-1$
-		}
-	}
 
 	private void showSettingsDialog(final OsMoDevice device) {
 		Builder bld = new AlertDialog.Builder(OsMoGroupsActivity.this);
@@ -1101,61 +1073,18 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		final LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.osmo_edit_device, null);
         final EditText name = (EditText) view.findViewById(R.id.Name);
-        final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
+        if(device.getColor() == 0) {
+        	osMoPlugin.getGroups().setDeviceProperties(device, device.getVisibleName(), 
+        			ColorDialogs.getRandomColor());	
+        }
+        int devColor = device.getColor();        
         bld.setView(view);
         name.setText(device.getVisibleName());
-        final TIntArrayList list = new TIntArrayList(pallette);
-        List<String> colorNames= new ArrayList<String>();
-        int selection = -1;
-        if(device.getColor() == 0) {
-        	osMoPlugin.getGroups().setDeviceProperties(device, device.getVisibleName(), getRandomColor());	
-        }
-        int devColor = device.getColor();
         
-        
-        for(int i = 0; i < pallette.length; i++) {
-        	colorNames.add(getString(paletteColors[i]));
-        	list.add(pallette[i]);
-        	if(devColor == pallette[i]) {
-        		selection = i;
-        	}
-        }
-        if(selection == -1) {
-        	list.insert(0, devColor);
-        	colorNames.add(0, colorToString(devColor));
-        	selection = 0;
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colorNames) {
-        	@Override
-        	public View getView(int position, View convertView, ViewGroup parent) {
-        		View v = super.getView(position, convertView, parent);
-        		if(v instanceof TextView) {
- 				   ((TextView) v).setTextColor(list.get(position));
- 				}
-        		return v;
-        	}
-        };
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
+        final TIntArrayList list = new TIntArrayList();
+        ColorDialogs.setupColorSpinner(this, devColor, colorSpinner, list);
 		
-		colorSpinner.setAdapter(adapter);
-		
-		colorSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				View v = parent.getChildAt(0);
-				if(v instanceof TextView) {
-				   ((TextView) v).setTextColor(list.get(position));
-				}
-				colorSpinner.invalidate();
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-			}
-			
-		});
-		colorSpinner.setSelection(selection);
 		bld.setPositiveButton(R.string .default_buttons_yes, new DialogInterface.OnClickListener() {
 			
 			@Override
@@ -1167,6 +1096,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		bld.setNegativeButton(R.string.default_buttons_no, null);
 		bld.show();
 	}
+
+	
 	
 	class NonDirectionDrawable extends Drawable {
 		Paint paintRouteDirection;
