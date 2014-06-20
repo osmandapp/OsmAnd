@@ -1791,7 +1791,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     
     
     <string name="osmo_connected_devices">Dispositivi collegati</string>
-    <string name="osmo_groups">Grupppi/Dispositivi OsMo</string>
+    <string name="osmo_groups">Gruppi/Dispositivi OsMo</string>
     <string name="osmo_group_info">Informazioni</string>
     <string name="osmo_group">Gruppo OsMo</string>
     <string name="osmo_group_share">Per collegarsi al gruppo %2$s, specificare l\'id del gruppo (%1$s) o cliccare %3$s.</string>
