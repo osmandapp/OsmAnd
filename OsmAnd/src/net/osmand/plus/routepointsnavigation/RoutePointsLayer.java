@@ -81,6 +81,8 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 						plugin.getCurrentRoute().markPoint(point, true);
 					} else if (itemId == R.string.mark_as_current){
 						plugin.getCurrentRoute().navigateToPoint(point);
+					} else if (itemId == R.string.navigate_to_next){
+						plugin.getCurrentRoute().naviateToNextPoint();
 					}
 				}
 			};
