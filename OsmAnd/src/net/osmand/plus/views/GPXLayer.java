@@ -75,7 +75,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		this.view = view;
 		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
 		pathEffect = new DashPathEffect(new float[] { 5 * view.getDensity(),
-				3 * view.getDensity() }, 0);
+				3 * view.getDensity()}, 3);
 		initUI();
 	}
 
@@ -111,8 +111,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				boolean routePoints = g.isRoutePoints();
 				int fcolor = g.getColor() == 0 ? clr : g.getColor();
 				paint.setColor(fcolor);
-				paint.setPathEffect(routePoints ? pathEffect : null);
-				drawSegments(canvas, tileBox, points);
+				drawSegments(canvas, tileBox, points, routePoints);
 			}
 			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			if (tileBox.getZoom() >= startZoom) {
@@ -161,10 +160,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		return pts;
 	}
 
-	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<List<WptPt>> points) {
+	private void drawSegments(Canvas canvas, RotatedTileBox tileBox, List<List<WptPt>> points, boolean routePoints) {
 		final QuadRect latLonBounds = tileBox.getLatLonBounds();
 		for (List<WptPt> l : points) {
 			path.rewind();
+			paint.setPathEffect(routePoints ? pathEffect : null);
 			int startIndex = -1;
 
 			for (int i = 0; i < l.size(); i++) {
