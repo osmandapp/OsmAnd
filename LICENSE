@@ -43,6 +43,9 @@
 
     * Generated voice files from TTS files are covered by proprietary license :
         - Voice files (https://github.com/osmandapp/OsmAnd-resources/tree/master/voice)
+        
+    * Fonts (https://github.com/osmandapp/OsmAnd-resources/tree/master/rendering_styles/fonts)
+        - Google Fonts (Apache License 2)
     
     * Map icons (Mapnik) :
         - Open-SVG-Map-Icons - Public Domain 
