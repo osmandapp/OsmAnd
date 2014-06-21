@@ -1001,7 +1001,7 @@
   <string name="map_widget_time">Tempo rimasto</string>
   <string name="map_widget_next_turn">Prossima svolta</string>
   <string name="map_widget_next_turn_small">Prossima svolta (piccola)</string>
-  <string name="map_widget_next_next_turn">Svolta successiva a questa</string>
+  <string name="map_widget_next_next_turn">Svolta successiva</string>
   <string name="map_widget_mini_route">Minimappa del percorso</string>
   <string name="bg_service_screen_lock">Blocca lo schermo</string>
   <string name="bg_service_screen_lock_toast">Lo schermo è bloccato</string>
