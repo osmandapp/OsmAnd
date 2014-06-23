@@ -19,7 +19,7 @@ function copyLibs {
 }
 
 function compile {
-	"$CORE_LOC/core/externals/configure.sh"
+	"$CORE_LOC/externals/configure.sh"
 	if [ ! -d "$CORE_LOC/targets/amd64-linux-gcc-amd64-linux-gcc-release.baked" ]; then 
 		"$CORE_LOC/targets/amd64-linux-gcc.sh" release
 	fi
