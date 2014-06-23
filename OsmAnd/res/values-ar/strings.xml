@@ -10,7 +10,7 @@
     
     <string name="search_villages_and_postcodes">البحث القرى / الرمز البريدي</string>
 	<string name="gps_not_available">يرجى تمكين GPS في إعدادات</string>
-    <string name="replace_destination_point">استبدال نقطة الوجهة</string>
+    <string name="replace_destination_point">استبدل نقطة الوجهة</string>
 <string name="email">بريد إلكتروني</string>
 	<string name="edit_filter_delete_menu_item">حذف</string>
 	<string name="filter_current_poiButton">تصفية</string>
@@ -61,24 +61,24 @@
     <string name="srtm_plugin_name">كفاف خطوط البرنامج المساعد</string>
     <string name="download_select_map_types">خرائط أخرى</string>
     <string name="download_roads_only_item">الطرق فقط</string>
-    <string name="download_srtm_maps">الخطوط الكنتورية</string>
-    <string name="download_regular_maps">خرائط العادية</string>
-    <string name="rendering_attr_noAdminboundaries_name">إخفاء حدود</string>
-	<string name="map_widget_max_speed">تحديد السرعة</string>
+    <string name="download_srtm_maps">الخطوط المحيطية (الكنتورية)</string>
+    <string name="download_regular_maps">الخرائط العادية</string>
+    <string name="rendering_attr_noAdminboundaries_name">اخفِ الحدود</string>
+	<string name="map_widget_max_speed">حدّ السرعة</string>
     <string name="route_descr_current_location">الموقع الحالي</string>
     
     
-    <string name="no_buildings_found">العثور على المباني.</string>
+    <string name="no_buildings_found">لم أعثر على أي مبنى.</string>
     <string name="incremental_search_city">البحث المدينة تدريجيا</string>
     <string name="safe_mode">الوضع الآمن</string>
     <string name="close_changeset">إغلاق تغيير تعيين</string>
 	<string name="enable_plugin_monitoring_services">تمكين البرنامج المساعد تتبع للاستفادة من خدمات تسجيل موقف (تسجيل GPX، وتتبع عبر الإنترنت)</string>
-    <string name="non_optimal_route_calculation">حساب ربما غير الأمثل الطريق لمسافات طويلة</string>
-	<string name="map_widget_show_destination_arrow">تظهر اتجاه الوجهة</string>
-    <string name="map_widget_monitoring_services">تسجيل الخدمات</string>
+    <string name="non_optimal_route_calculation">ربما لا يكون من الأحسن حساب الطريق لمسافات طويلة</string>
+	<string name="map_widget_show_destination_arrow">أظهر إتجاه المقصد</string>
+    <string name="map_widget_monitoring_services">خدمات التسجيل</string>
 	<string name="no_route">لا الطريق</string>
 	<string name="delete_target_point">إزالة إحداثية</string>
-    <string name="new_destination_point_dialog">لديك مجموعة الوجهة النقطة.</string>
+    <string name="new_destination_point_dialog">لديك نقطة وجهة بالفعل.</string>
     <string name="target_points">نقاط الطريق</string>
     <string name="btn_advanced_mode">الوضع المتقدم…</string>
     <string name="poi_filter_parking">موقف سيارات</string>
@@ -88,12 +88,12 @@
     <string name="poi_filter_accomodation">الإقامة</string>
     <string name="poi_filter_restaurants">مطاعم</string>
     <string name="poi_filter_sightseeing">زيارة معالم المدينة</string>
-    <string name="poi_filter_car_aid">المساعدات السيارة</string>
-	<string name="poi_filter_food_shop">متجر المواد الغذائية</string>
+    <string name="poi_filter_car_aid">مساعدات السيارة</string>
+	<string name="poi_filter_food_shop">متاجر المواد الغذائية</string>
 	<string name="poi_filter_for_tourists">للسياح</string>
 	<string name="poi_filter_fuel">وقود</string>
 	<string name="show_warnings_title">إظهار أجهزة الإنذار…</string>
-	<string name="use_compass_navigation">يستخدمون البوصلة</string>
+	<string name="use_compass_navigation">استخدم البوصلة</string>
 	<string name="avoid_motorway">تجنب الطرق السريعة</string>
 	<string name="tip_update_index">تحديث الخرائط المحلية</string>
 	
@@ -101,31 +101,31 @@
 	<string name="avoid_unpaved">تجنب الطرق غير المعبدة</string>
 	<string name="avoid_ferries">تجنب العبارات</string>
 	<string name="avoid_in_routing_title">تجنب…</string>
-	<string name="avoid_in_routing_descr">تجنب الطرق ذات الرسوم، وغير معبد، العبارات</string>
+	<string name="avoid_in_routing_descr">تجنب الطرق ذات الرسوم، وغير المعبدة، والعبارات</string>
 	<string name="monitoring_mode_off">سجل GPX</string>
 	<string name="monitoring_mode_on">وقف ↵\nGPX تفصيل.</string>
 	<string name="gps_wakeup_interval">GPS إيقاظ الفاصل الزمني: %s</string>
 	<string name="int_continuosly">متواصل</string>
-	<string name="screen_is_locked">لفتح قفل الشاشة أيقونة الصحافة</string>
+	<string name="screen_is_locked">لفتح قفل الشاشة اضغط على أيقونة القفل</string>
 	<string name="map_widget_top_text">اسم الشارع</string>
 	<string name="map_widget_reset">إعادة تعيين إلى الافتراضي</string>
 	<string name="map_widget_parking">موقف سيارات</string>
 	<string name="map_widget_monitoring">تسجيل GPX</string>
 	<string name="map_widget_speed">سرعة</string>
-	<string name="map_widget_distance">المكان المقصود</string>
+	<string name="map_widget_distance">الوجهة</string>
 	<string name="map_widget_altitude">ارتفاع</string>
-	<string name="map_widget_time">الوقت للذهاب</string>
+	<string name="map_widget_time">وقت الذهاب</string>
 	<string name="map_widget_next_turn">المنعطف التالي</string>
-	<string name="bg_service_screen_lock_toast">تم تأمين الشاشة</string>
+	<string name="bg_service_screen_lock_toast">أقفلت الشاشة</string>
 	<string name="bg_service_screen_lock">قفل الشاشة</string>
 	<string name="bg_service_screen_unlock">فتح الشاشة</string>
-	<string name="show_cameras">مشاهدة كاميرات السرعة</string>
-	<string name="show_traffic_warnings">تظهر تحذيرات المرور</string>
+	<string name="show_cameras">أظهر كاميرات السرعة</string>
+	<string name="show_traffic_warnings">أظهر تحذيرات المرور</string>
 	<string name="avoid_toll_roads">تجنب الطرق ذات الرسوم</string>
 	<string name="osmand_parking_hours">ساعات</string>
 	<string name="osmand_parking_minutes">دقيقة</string>
 	<string name="global_app_allocated_memory">الذاكرة المخصصة</string>
-	<string name="update_downlod_list">تحديث قائمة</string>
+	<string name="update_downlod_list">قائمة التحديث</string>
 	<string name="osmand_parking_warning">تحذير</string>
 	<string name="gpxup_public">جمهور</string>
 	<string name="gpxup_identifiable">يمكن تحديدها</string>
@@ -363,17 +363,17 @@
     <string name="download_roads_only_maps">خرائط الطرق فقط</string>
     
 	<string name="rendering_attr_noAdminboundaries_description">منع عرض الحدود الإقليمية ( مستويات مشرف 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">إضافة OsMoDroid لديه نسخة قديمة و بحاجة إلى تحديث.</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">ملحق OsMoDroid ذو نسخة قديمة و بحاجة إلى تحديث.</string>
     <string name="osmodroid_plugin_name">ملحق OsMoDroid</string>
 	<string name="tip_altitude_offset">تصحيح الارتفاع</string>
 	<string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_showRoadMaps_description">تحديد وقت عرض خرائط الطرق فقط:</string>
 	<string name="rendering_attr_showRoadMaps_name">خرائط الطرق فقط</string>
-    <string name="safe_mode_description">تشغيل التطبيق في الوضع الآمن (باستخدام أندرويد البطيء بدلا من التعليمات البرمجية الأصلية) .</string>
-    <string name="native_library_not_running">يعمل  التطبيق في الوضع الآمن ( عطله من إعدادات ).</string>
+    <string name="safe_mode_description">تشغيل التطبيق في الوضع الآمن (باستخدام تعليمات أندرويد البطيئة بدلا من التعليمات البرمجية الأصلية) .</string>
+    <string name="native_library_not_running">يعمل التطبيق في الوضع الآمن ( عطّله من إعدادات ).</string>
     <string name="background_service_is_enabled_question">خدمة وضع السكون لـOsmAnd لا تزال قيد التشغيل. هل تريد إيقافها؟</string>
     <string name="rendering_attr_roadColors_description">اختر نظام ألوان الطريق:</string>
-	<string name="rendering_attr_roadColors_name">نظام الألوان الطريق</string>
+	<string name="rendering_attr_roadColors_name">نظام ألوان الطريق</string>
     <string name="target_point">إحداثية %1$s</string>
     <string name="intermediate_point">إحداثية %1$s</string>
     <string name="context_menu_item_last_intermediate_point">أضف كآخر إحداثية</string>
@@ -408,7 +408,7 @@
     <string name="map_widget_intermediate_distance">إحداثية</string>
     <string name="ending_point_too_far">نقطة النهاية بعيدة جدا عن أقرب طريق.</string>
     <string name="btn_add_tag">أضف وسما</string>
-    <string name="show_warnings_descr">إعداد تحذيرات المرور ( حدود السرعة، و توقف القسري، مطبات صناعية ) ، تحذيرات كاميرا السرعة ، والمعلومات ممرات</string>
+    <string name="show_warnings_descr">ضبط تحذيرات المرور ( حدود السرعة، والتوقف القسري، والمطبات الصناعية ) ، وتحذيرات كاميرا السرعة ، ومعلومات الممرات</string>
 	<string name="tip_recent_changes_1_6_t">التّغيرات في الإصدار 1.6:
     \n\t* دعم أجهزة الدّقة العالية الكاملة
     \n\t* دعم خلفية الخريطة الشّفافة
@@ -424,7 +424,7 @@
     <string name="local_index_tile_data_zooms">التّكبيرات المُحمّلة: %1$s</string>
     <string name="local_index_tile_data_name">معلومات التّجانب: %1$s</string>
     <string name="edit_tilesource_successfully">تم تحميل المصدر التّجانبي %1$sبنجاح</string>
-    <string name="use_compass_navigation_descr">استخدام البوصلة عندما لا تكون هناك أي وجهة محددة</string>
+    <string name="use_compass_navigation_descr">استخدم البوصلة عندما لا تكون هناك أي وجهة محددة</string>
 	<string name="auto_zoom_map_descr">لائم تكبير الخريطة وفقا لسرعتك (بينما تتزامن الخريطة مع الموقع الحالي)</string>
 	<string name="auto_zoom_map">تكبير الخريطة التلقائي</string>
 	<string name="snap_to_road_descr">ألصق الموقع إلى الشوارع أثناء الملاحة</string>
@@ -437,15 +437,15 @@
 	<string name="recalculate_route_to_your_location">نمط المواصلات:</string>
 	<string name="select_navigation_mode">اختر نمط المواصلات</string>
 	<string name="day_night_info_description">الشروق: %1$s \nالغروب: %2$s</string>
-	<string name="day_night_info">معلومات يوم/ليلة</string>
-	<string name="map_widget_day_night">خريطة اليوم/الليل</string>
+	<string name="day_night_info">معلومات اليوم والليلة</string>
+	<string name="map_widget_day_night">خريطة النهار والليل</string>
 	<string name="map_widget_vector_attributes">سمات التصيير:</string>
 	<string name="map_widget_renderer">نمط الخريطة</string>
 	<string name="live_monitoring_mode_off">بدء\n  التعقب على الانترنت</string>
 	<string name="live_monitoring_mode_on">وقف\n  التعقب على الانترنت</string>
 	
 	
-	<string name="layer_map_appearance">إعداد الشاشة</string>
+	<string name="layer_map_appearance">ضبط الشاشة</string>
 	<string name="map_widget_fluorescent">طرق فلورية</string>
 	<string name="map_widget_show_ruler">مسطرة</string>
 	<string name="map_widget_appearance">العناصر المتبقية:</string>
@@ -453,7 +453,7 @@
 	<string name="map_widget_transparent">سطح شفاف</string>
 	<string name="bg_service_sleep_mode_off">تمكين\n وضع السكون</string>
 	<string name="bg_service_sleep_mode_on">إيقاف\n وضع السكون</string>
-	<string name="map_widget_config">إعداد الشاشة</string>
+	<string name="map_widget_config">ضبط الشاشة</string>
 	<string name="map_widget_back_to_loc">أين أنا</string>
 	<string name="map_widget_lock_screen">اقفل الشاشة</string>
 	<string name="map_widget_compass">البوصلة</string>
@@ -476,11 +476,11 @@
 	<string name="osmand_parking_warning_text">لقد أضيف تنبيه لأخذ سيارتك مسبقا إلى تقويمك. سيظل هناك حتى تقوم بحذفه يدويا.</string>    
 	<string name="osmand_parking_time_limit_title">حدد المهلة القصوى لوقوف السيارات</string>
 	<string name="osmand_parking_delete_confirm">هل تريد إزالة موقع وقوف السيارة؟</string>
-	<string name="osmand_parking_delete">حذف علامة وقوف السيارة</string>
+	<string name="osmand_parking_delete">ازالة علامة وقوف السيارة</string>
 	<string name="osmand_parking_choose_type">اختر نوع مواقف السيارات</string>
 	<string name="osmand_parking_lim_text">وقت محدود</string>
 	<string name="osmand_parking_no_lim_text">وقت غير محدود</string>
-	<string name="osmand_parking_add_event">إضافة إخطارا إلى تطبيق التقويم</string>
+	<string name="osmand_parking_add_event">اضف إخطارا إلى تطبيق التقويم</string>
 	<string name="osmand_parking_time_limit">مواقف محدودة زمنيا</string>
 	<string name="osmand_parking_time_no_limit">مواقف غير محدودة زمنيا</string>
 	<string name="av_photo_play_sound_descr">فعّل هذا في حال رغبتك بسماع نغمة التقاط الصّور</string>
@@ -710,7 +710,7 @@
 		\n\t* خيار نمط خريطة \'التنقل\' مع مزيد من تفاصيل الخريطة، و أنماط طرق جديدة، و زيادة في التّباين، وخيار التّنقل الجبلي (مقياس SAC)
 		\n\t* تصحيح EGM96 من أجل قراءات الارتفاع في GPS
     </string>
-    <string name="osmodroid_plugin_description">إضافة OsMoDroid هي امتداد لبرنامج OsmAnd ليستخدم تطبيق OsModroid لمزايا المسارات عبر الشّابكة. معلومات أكثر عن هذه الإضافة متوفرة على http://esya.ru.</string>
+    <string name="osmodroid_plugin_description">ملحق OsMoDroid هو امتداد لبرنامج OsmAnd ليستخدم تطبيق OsModroid لمزايا المسارات عبر الشّابكة. معلومات أكثر عن هذه الخدمة متوفرة على http://esya.ru.</string>
     <string name="tip_recent_changes_1_0_0_t">التّغييرات في 1.0.0:
 	\n\t* تحسين التّوجيه: أسرع، أكثر دقّة، يصل إلى 250كم
 	\n\t* إدخال خرائط من نمط طرق فقط
@@ -1382,4 +1382,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="routing_attr_short_way_name">أقصر طريق</string>
 	<string name="copying_osmand_files">ينسخ ملفات OsmAnd</string>
     <string name="guidance_preferences_descr">تفضيلات الملاحة</string>
-    </resources>
+    <string name="interrupt_music_descr">اقطع تشغيل الصوتيات عند ورود إعلان ما</string>
+	<string name="interrupt_music">اوقف الصوتيات</string>
+	</resources>
