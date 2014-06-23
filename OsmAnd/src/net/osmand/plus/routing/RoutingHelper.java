@@ -434,7 +434,7 @@ public class RoutingHelper {
 			if(isFollowingMode) {
 				voiceRouter.arrivedDestinationPoint(description);
 			}
-			if (!OsmandPlugin.onDestinationReached()) {
+			if (OsmandPlugin.onDestinationReached()) {
 				clearCurrentRoute(null, null);
 				setRoutePlanningMode(false);
 				app.runInUIThread(new Runnable() {
@@ -443,9 +443,10 @@ public class RoutingHelper {
 						settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 					}
 				});
+				// targets.clearPointToNavigate(false);
+				return true;
 			}
-			// targets.clearPointToNavigate(false);
-			return true;
+
 		}
 		return false;
 	}

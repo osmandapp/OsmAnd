@@ -50,8 +50,7 @@ public class Version {
 	}
 	
 	public static boolean isRouteNavPluginInlined(OsmandApplication ctx) {
-//		return ctx.getString(R.string.versionFeatures).contains("+route_nav");
-		return true;
+		return ctx.getString(R.string.versionFeatures).contains("+route_nav");
 	}
 	
 	public static boolean isSherpafy(OsmandApplication ctx) {

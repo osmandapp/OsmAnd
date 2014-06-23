@@ -64,6 +64,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -72,6 +73,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -250,10 +252,17 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
-				View v = activity.getLayoutInflater().inflate(layout, null);
+				View v = convertView;
+				if (v == null) {
+					v = activity.getLayoutInflater().inflate(layout, null);
+					int vl = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, activity.getResources()
+							.getDisplayMetrics());
+					v.findViewById(R.id.icon).setLayoutParams(new LinearLayout.LayoutParams(vl, vl));
+				}
 				ImageView icon = (ImageView) v.findViewById(R.id.icon);
 				FavouritePoint fp = points.get(position);
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, fp.getColor()));
+				
 				icon.setVisibility(View.VISIBLE);
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				tv.setText(names[position]);
