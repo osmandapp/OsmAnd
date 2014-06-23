@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">عرضإظهار</string>
-    <string name="av_def_action_picture">التقاط صورةالتقاط صورة</string>
+    <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
     <string name="av_def_action_audio">تسجيل الصوت</string>
@@ -10,7 +10,7 @@
     
     <string name="search_villages_and_postcodes">البحث القرى / الرمز البريدي</string>
 	<string name="gps_not_available">يرجى تمكين GPS في إعدادات</string>
-    <string name="replace_destination_point">استبدال نقطة الوجهة</string>
+    <string name="replace_destination_point">استبدل نقطة الوجهة</string>
 <string name="email">بريد إلكتروني</string>
 	<string name="edit_filter_delete_menu_item">حذف</string>
 	<string name="filter_current_poiButton">تصفية</string>
@@ -31,27 +31,27 @@
     <string name="map_view">خريطة</string>
     <string name="prefer_motorways">تفضل الطرق السريعة</string>
 	<string name="prefer_in_routing_title">فضّل…</string>
-	<string name="prefer_in_routing_descr">تفضل الطرق السريعة</string>
+	<string name="prefer_in_routing_descr">فضّل الطرق السريعة</string>
     <string name="max_speed_none">لا شيء</string>
     <string name="index_name_openmaps">فتح خرائط الاتحاد الأوروبي</string>
     <string name="dist_control_start">بداية</string>
-    <string name="local_indexes_cat_av">الصوت / الفيديو البيانات</string>
+    <string name="local_indexes_cat_av">بيانات الصوت / الفيديو</string>
     <string name="stop_routing_confirm">هل أنت متأكد أنك تريد إيقاف الملاحة؟</string>
     <string name="clear_dest_confirm">هل أنت متأكد أنك تريد مسح نقطة المقصد؟</string>
     <string name="precise_routing_mode">التوجيه الدقيق (ألفا)</string>
     <string name="recording_context_menu_precord">التقاط صورة</string>
-    <string name="dropbox_plugin_name">دروببوإكس البرنامج المساعد</string>
+    <string name="dropbox_plugin_name">ملحق دروب بوكس</string>
     <string name="av_def_action_choose">حدد بناء على طلبها</string>
     <string name="recording_error">حدث خطأ أثناء التسجيل.. </string>
     <string name="recording_delete_confirm">هل تريد إزالة هذا التسجيل؟</string>
     <string name="recording_unavailable">غير متاح</string>
-    <string name="recording_can_not_be_played">لا يمكن أن تؤديه تسجيل</string>
+    <string name="recording_can_not_be_played">تعذر تشغيل التسجيل</string>
     <string name="recording_context_menu_delete">حذف تسجيل</string>
-    <string name="recording_context_menu_play">لعب</string>
+    <string name="recording_context_menu_play">شغّل</string>
     <string name="recording_default_name">تسجيل</string>
     <string name="av_control_stop">توقف</string>
     <string name="av_control_start">بداية</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd المساعد لخطوط كفاف متواجد حاليا</string>
+    <string name="osmand_srtm_short_description_80_chars">ملحق OsmAnd للخطوط المحيطية بدون اتصال</string>
     
     <string name="map_widget_distancemeasurement">قياس المسافة</string>
     <string name="monitoring_control_stop">توقف</string>
@@ -61,24 +61,24 @@
     <string name="srtm_plugin_name">كفاف خطوط البرنامج المساعد</string>
     <string name="download_select_map_types">خرائط أخرى</string>
     <string name="download_roads_only_item">الطرق فقط</string>
-    <string name="download_srtm_maps">الخطوط الكنتورية</string>
-    <string name="download_regular_maps">خرائط العادية</string>
-    <string name="rendering_attr_noAdminboundaries_name">إخفاء حدود</string>
-	<string name="map_widget_max_speed">تحديد السرعة</string>
-    <string name="route_descr_current_location">الوظيفة الحالية</string>
+    <string name="download_srtm_maps">الخطوط المحيطية (الكنتورية)</string>
+    <string name="download_regular_maps">الخرائط العادية</string>
+    <string name="rendering_attr_noAdminboundaries_name">اخفِ الحدود</string>
+	<string name="map_widget_max_speed">حدّ السرعة</string>
+    <string name="route_descr_current_location">الموقع الحالي</string>
     
     
-    <string name="no_buildings_found">العثور على المباني.</string>
+    <string name="no_buildings_found">لم أعثر على أي مبنى.</string>
     <string name="incremental_search_city">البحث المدينة تدريجيا</string>
     <string name="safe_mode">الوضع الآمن</string>
     <string name="close_changeset">إغلاق تغيير تعيين</string>
 	<string name="enable_plugin_monitoring_services">تمكين البرنامج المساعد تتبع للاستفادة من خدمات تسجيل موقف (تسجيل GPX، وتتبع عبر الإنترنت)</string>
-    <string name="non_optimal_route_calculation">حساب ربما غير الأمثل الطريق لمسافات طويلة</string>
-	<string name="map_widget_show_destination_arrow">تظهر اتجاه الوجهة</string>
-    <string name="map_widget_monitoring_services">تسجيل الخدمات</string>
+    <string name="non_optimal_route_calculation">ربما لا يكون من الأحسن حساب الطريق لمسافات طويلة</string>
+	<string name="map_widget_show_destination_arrow">أظهر إتجاه المقصد</string>
+    <string name="map_widget_monitoring_services">خدمات التسجيل</string>
 	<string name="no_route">لا الطريق</string>
 	<string name="delete_target_point">إزالة إحداثية</string>
-    <string name="new_destination_point_dialog">لديك مجموعة الوجهة النقطة.</string>
+    <string name="new_destination_point_dialog">لديك نقطة وجهة بالفعل.</string>
     <string name="target_points">نقاط الطريق</string>
     <string name="btn_advanced_mode">الوضع المتقدم…</string>
     <string name="poi_filter_parking">موقف سيارات</string>
@@ -88,12 +88,12 @@
     <string name="poi_filter_accomodation">الإقامة</string>
     <string name="poi_filter_restaurants">مطاعم</string>
     <string name="poi_filter_sightseeing">زيارة معالم المدينة</string>
-    <string name="poi_filter_car_aid">المساعدات السيارة</string>
-	<string name="poi_filter_food_shop">متجر المواد الغذائية</string>
+    <string name="poi_filter_car_aid">مساعدات السيارة</string>
+	<string name="poi_filter_food_shop">متاجر المواد الغذائية</string>
 	<string name="poi_filter_for_tourists">للسياح</string>
 	<string name="poi_filter_fuel">وقود</string>
 	<string name="show_warnings_title">إظهار أجهزة الإنذار…</string>
-	<string name="use_compass_navigation">يستخدمون البوصلة</string>
+	<string name="use_compass_navigation">استخدم البوصلة</string>
 	<string name="avoid_motorway">تجنب الطرق السريعة</string>
 	<string name="tip_update_index">تحديث الخرائط المحلية</string>
 	
@@ -101,31 +101,31 @@
 	<string name="avoid_unpaved">تجنب الطرق غير المعبدة</string>
 	<string name="avoid_ferries">تجنب العبارات</string>
 	<string name="avoid_in_routing_title">تجنب…</string>
-	<string name="avoid_in_routing_descr">تجنب الطرق ذات الرسوم، وغير معبد، العبارات</string>
+	<string name="avoid_in_routing_descr">تجنب الطرق ذات الرسوم، وغير المعبدة، والعبارات</string>
 	<string name="monitoring_mode_off">سجل GPX</string>
 	<string name="monitoring_mode_on">وقف ↵\nGPX تفصيل.</string>
 	<string name="gps_wakeup_interval">GPS إيقاظ الفاصل الزمني: %s</string>
 	<string name="int_continuosly">متواصل</string>
-	<string name="screen_is_locked">لفتح قفل الشاشة أيقونة الصحافة</string>
+	<string name="screen_is_locked">لفتح قفل الشاشة اضغط على أيقونة القفل</string>
 	<string name="map_widget_top_text">اسم الشارع</string>
 	<string name="map_widget_reset">إعادة تعيين إلى الافتراضي</string>
 	<string name="map_widget_parking">موقف سيارات</string>
 	<string name="map_widget_monitoring">تسجيل GPX</string>
 	<string name="map_widget_speed">سرعة</string>
-	<string name="map_widget_distance">المكان المقصود</string>
+	<string name="map_widget_distance">الوجهة</string>
 	<string name="map_widget_altitude">ارتفاع</string>
-	<string name="map_widget_time">الوقت للذهاب</string>
+	<string name="map_widget_time">وقت الذهاب</string>
 	<string name="map_widget_next_turn">المنعطف التالي</string>
-	<string name="bg_service_screen_lock_toast">تم تأمين الشاشة</string>
+	<string name="bg_service_screen_lock_toast">أقفلت الشاشة</string>
 	<string name="bg_service_screen_lock">قفل الشاشة</string>
 	<string name="bg_service_screen_unlock">فتح الشاشة</string>
-	<string name="show_cameras">مشاهدة كاميرات السرعة</string>
-	<string name="show_traffic_warnings">تظهر تحذيرات المرور</string>
+	<string name="show_cameras">أظهر كاميرات السرعة</string>
+	<string name="show_traffic_warnings">أظهر تحذيرات المرور</string>
 	<string name="avoid_toll_roads">تجنب الطرق ذات الرسوم</string>
 	<string name="osmand_parking_hours">ساعات</string>
 	<string name="osmand_parking_minutes">دقيقة</string>
 	<string name="global_app_allocated_memory">الذاكرة المخصصة</string>
-	<string name="update_downlod_list">تحديث قائمة</string>
+	<string name="update_downlod_list">قائمة التحديث</string>
 	<string name="osmand_parking_warning">تحذير</string>
 	<string name="gpxup_public">جمهور</string>
 	<string name="gpxup_identifiable">يمكن تحديدها</string>
@@ -201,7 +201,7 @@
     <string name="about_settings_descr">معلومات النسخة، والتراخيص، أعضاء المشروع</string>
     <string name="tips_and_tricks">نصائح</string>
     <string name="edit_tilesource_maxzoom">التّكبير الأقصى</string>
-    <string name="edit_tilesource_minzoom">دقيقة التكبير</string>
+    <string name="edit_tilesource_minzoom">التصغير اﻷقصى</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_name">اسم</string>
     <string name="driving_region_descr">حدد قيادة المنطقة: الولايات المتحدة، أوروبا، المملكة المتحدة وآسيا وآخرون</string>
@@ -213,8 +213,8 @@
 	<string name="driving_region_uk">المملكة المتحدة والهند واستراليا وآخرون</string>
 	<string name="announce_gpx_waypoints">تعلن نقاط الطريق GPX</string>
     <string name="speak_title">أعلن…</string>
-	<string name="osb_author_or_password_not_specified">يرجى تحديد المستخدم وكلمة المرور OSM في إعدادات</string>
-    <string name="clear_intermediate_points">نقاط وسيطة واضحة</string>
+	<string name="osb_author_or_password_not_specified">يرجى تحديد مستخدم OSM وكلمة سره في الإعدادات</string>
+    <string name="clear_intermediate_points">محو النقاط الوسيطة</string>
     <string name="keep_intermediate_points">الحفاظ على نقاط وسيطة</string>
     <string name="new_directions_point_dialog">لديك مجموعة نقاط وسيطة.</string>
     <string name="context_menu_item_directions_to">الاتجاهات إلى</string>
@@ -222,9 +222,9 @@
     <string name="route_to">إلى:</string>
     <string name="route_via">بواسطة:</string>
     <string name="route_from">من:</string>
-	<string name="app_mode_default">إستعراض الخريطة</string>
+	<string name="app_mode_default">استعرض الخريطة</string>
 	<string name="settings_preset">الوضع الافتراضي</string>
-	<string name="context_menu_item_destination_point">تعيين كوجهة</string>
+	<string name="context_menu_item_destination_point">تعيينه وجهة</string>
     <string name="please_select_address">اختر المدينة أو الشارع الأول</string>
     <string name="delete_point">حذف نقطة</string>
     <string name="plugin_distance_point_time">وقت</string>
@@ -243,17 +243,17 @@
     <string name="distance_measurement_clear_route">مسح جميع نقاط</string>
     <string name="distance_measurement_save_gpx">حفظ ك GPX</string>
     <string name="distance_measurement_load_gpx">فتح القائمة GPX</string>
-    <string name="other_location">آخر</string>
+    <string name="other_location">أخرى</string>
     <string name="install_paid">النسخة الكاملة</string>
     <string name="cancel_navigation">توقف الملاحة</string>
-    <string name="clear_destination">المقصد واضح</string>
-    <string name="download_using_mobile_internet">حاليا واي فاي غير متصل. هل تريد متابعة تحميل مع اتصال الإنترنت الحالية؟</string>
+    <string name="clear_destination">امح الهدف</string>
+    <string name="download_using_mobile_internet">واي فاي غير متصل حاليا. هل تريد متابعة التنزيل بواسطة اتصال الإنترنت الحالي؟</string>
     <string name="street_name">شارع</string>
 	<string name="hno">رقم البيت</string>
     <string name="website">الموقع</string>
 	<string name="phone">هاتف</string>
     <string name="contribution_activity">تثبيت الإصدار</string>
-    <string name="accessibility_options">خيارات الوصول</string>
+    <string name="accessibility_options">خيارات الإتاحة</string>
     <string name="select_address_activity">حدد عنوان</string>
     <string name="default_buttons_other_actions">إجراءات أخرى</string>
     <string name="edit_filter_save_as_menu_item">حفظ باسم</string>
@@ -329,7 +329,7 @@
     <string name="maps_define_edit">تعريف/تحرير…</string>
 	<string name="osmodroid_mode_on">أوقف OsMoDroid</string>    
     <string name="osmodroid_mode_off">شغل OsMoDroid</string>
-    <string name="speak_descr">إعداد لنطق أسماء الشوارع، وتحذيرات المرور (توقيفات الإجبارية، ومطبات السرعة)، و تحذيرات كاميرات السرعة، و السرعة القصوى</string>
+    <string name="speak_descr">ضبط إعدادات نطق أسماء الشوارع، وتحذيرات المرور (توقيفات الإجبارية، ومطبات السرعة)، و تحذيرات كاميرات السرعة، و السرعة القصوى</string>
 	<string name="speak_street_names">نطق أسماء الشوارع (نطق آلي)</string>
     <string name="speak_speed_limit">تحذير السرعة القصوى</string>
     <string name="speak_cameras">تحذير عن كاميرات السرعة</string>
@@ -342,9 +342,9 @@
     <string name="available_downloads_left">توفر %1$d ملفات للتنزيل</string>
     <string name="cancel_route">ألغ المسار</string>
     <string name="monitoring_settings">خدمات التسجيل ووضعية النوم</string>
-    <string name="monitoring_settings_descr">قم بإعداد كيفية تسجيل الرحلات و تمكين وضعية النوم</string>
+    <string name="monitoring_settings_descr">قم بضبط كيفية تسجيل الرحلات و تمكين وضعية النوم</string>
     <string name="osmand_monitoring_plugin_name">خدمات التسجيل ووضعية النوم</string>
-    <string name="choose_osmand_theme_descr">اختار سمة التطبيق</string>
+    <string name="choose_osmand_theme_descr">اختر سمة التطبيق</string>
     <string name="choose_osmand_theme">سمة التطبيق</string>
     <string name="favourites_list_activity">اختار تفضيلة</string>
     <string name="local_openstreetmap_act_title">تغييرات OSM</string>
@@ -352,7 +352,7 @@
         \n مسار GPX الحالي</string>
 	<string name="intermediate_points_change_order">تغيير الفرز</string>
     <string name="recording_is_recorded">بدأ تسجيل الصوت / الفيديو. لوقفه اضغط على ودجة AV.</string>
-    <string name="recording_open_external_player">افتح مشغل خارجي</string>
+    <string name="recording_open_external_player">افتح مشغلًا خارجيًا</string>
     <string name="recording_context_menu_arecord">خذ ملاحظة صوتية</string>
     <string name="recording_context_menu_vrecord">خذ ملاحظة فيديو</string>
     <string name="layer_recordings">طبقة التسجيل</string>
@@ -363,28 +363,28 @@
     <string name="download_roads_only_maps">خرائط الطرق فقط</string>
     
 	<string name="rendering_attr_noAdminboundaries_description">منع عرض الحدود الإقليمية ( مستويات مشرف 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">إضافة OsMoDroid لديه نسخة قديمة و بحاجة إلى تحديث.</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">ملحق OsMoDroid ذو نسخة قديمة و بحاجة إلى تحديث.</string>
     <string name="osmodroid_plugin_name">ملحق OsMoDroid</string>
 	<string name="tip_altitude_offset">تصحيح الارتفاع</string>
 	<string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_showRoadMaps_description">تحديد وقت عرض خرائط الطرق فقط:</string>
 	<string name="rendering_attr_showRoadMaps_name">خرائط الطرق فقط</string>
-    <string name="safe_mode_description">تشغيل التطبيق في الوضع الآمن (باستخدام أندرويد البطيء بدلا من التعليمات البرمجية الأصلية) .</string>
-    <string name="native_library_not_running">يعمل  التطبيق في الوضع الآمن ( عطله من إعدادات ).</string>
+    <string name="safe_mode_description">تشغيل التطبيق في الوضع الآمن (باستخدام تعليمات أندرويد البطيئة بدلا من التعليمات البرمجية الأصلية) .</string>
+    <string name="native_library_not_running">يعمل التطبيق في الوضع الآمن ( عطّله من إعدادات ).</string>
     <string name="background_service_is_enabled_question">خدمة وضع السكون لـOsmAnd لا تزال قيد التشغيل. هل تريد إيقافها؟</string>
     <string name="rendering_attr_roadColors_description">اختر نظام ألوان الطريق:</string>
-	<string name="rendering_attr_roadColors_name">نظام الألوان الطريق</string>
+	<string name="rendering_attr_roadColors_name">نظام ألوان الطريق</string>
     <string name="target_point">إحداثية %1$s</string>
     <string name="intermediate_point">إحداثية %1$s</string>
     <string name="context_menu_item_last_intermediate_point">أضف كآخر إحداثية</string>
     <string name="context_menu_item_first_intermediate_point">أضف كأول إحداثية</string>
     
     <string name="edit_tilesource_expiration_time">الانتهاء (دقائق)</string>
-    <string name="edit_tilesource_choose_existing">اختر الخروج...</string>
+    <string name="edit_tilesource_choose_existing">اختر موجودا…</string>
     <string name="map_widget_fps_info">معلومات تنقيح FPS</string>
-	<string name="settings_preset_descr">إعدادات عرض الخريط والاستكشاف محفوظة لكل ملف استخدام. قم بتعيين ملفك الافتراضي هنا.</string>
+	<string name="settings_preset_descr">إعدادات عرض الخريط والملاحة محفوظة لكل ملف استخدام. قم بتعيين ملفك الافتراضي هنا.</string>
     <string name="intermediate_items_sort_return">أعيد ترتيب نقاط الطرق وسيطة لتحسين ترتيبها في الطريق إلى الوجهة.</string>
-    <string name="local_osm_changes_backup_successful">أنشيء ملف تغيير OSM بنجاح %1$s</string>
+    <string name="local_osm_changes_backup_successful">أنشئ ملف تغيير OSM بنجاح %1$s</string>
     <string name="local_osm_changes_backup_failed">فشلت عملية النسخ الاحتياطي لتغييرات OSM</string>
     <string name="local_osm_changes_backup">نسخ الاحتياطي كتغيير OSM</string>
     <string name="files_limit">%1$d ملف بقى</string>
@@ -393,7 +393,7 @@
     <string name="osmand_background_plugin_description">يظهر الإعدادات لتمكين تتبع والملاحة في وضعية السكون ( الشاشة مغلقة ) عبر الاستيقاظ بشكل دوري لجهاز GPS.</string>
     <string name="precise_routing_mode_descr">تمكين التوجيه الدقيق لحساب المسارات بدقة دون أخطاء. إنه محدود جدا من خلال المسافة ولا يستخدم مكتبة أصلية.</string>
     <string name="recording_photo_description">صورة %1$s من %2$s</string>
-    <string name="dropbox_plugin_description">ملحق دروب بوكس يسمح بمزامنة مسارات و الملاحظات الصوتية / الفيديو مع حسابك في دروب بوكس.</string>
+    <string name="dropbox_plugin_description">ملحق دروب بوكس يسمح بمزامنة المسارات و الملاحظات الصوتية والمرئية مع حسابك في دروب بوكس.</string>
     <string name="av_video_format_descr">حدد تنسيق الفيديو الناتج</string>
     <string name="av_video_format">تنسيق الفيديو الناتج</string>
     <string name="av_use_external_recorder_descr">استخدام مسجل نظام للفيديو</string>
@@ -408,7 +408,7 @@
     <string name="map_widget_intermediate_distance">إحداثية</string>
     <string name="ending_point_too_far">نقطة النهاية بعيدة جدا عن أقرب طريق.</string>
     <string name="btn_add_tag">أضف وسما</string>
-    <string name="show_warnings_descr">إعداد تحذيرات المرور ( حدود السرعة، و توقف القسري، مطبات صناعية ) ، تحذيرات كاميرا السرعة ، والمعلومات ممرات</string>
+    <string name="show_warnings_descr">ضبط تحذيرات المرور ( حدود السرعة، والتوقف القسري، والمطبات الصناعية ) ، وتحذيرات كاميرا السرعة ، ومعلومات الممرات</string>
 	<string name="tip_recent_changes_1_6_t">التّغيرات في الإصدار 1.6:
     \n\t* دعم أجهزة الدّقة العالية الكاملة
     \n\t* دعم خلفية الخريطة الشّفافة
@@ -424,7 +424,7 @@
     <string name="local_index_tile_data_zooms">التّكبيرات المُحمّلة: %1$s</string>
     <string name="local_index_tile_data_name">معلومات التّجانب: %1$s</string>
     <string name="edit_tilesource_successfully">تم تحميل المصدر التّجانبي %1$sبنجاح</string>
-    <string name="use_compass_navigation_descr">استخدام البوصلة عندما لا تكون هناك أي وجهة محددة</string>
+    <string name="use_compass_navigation_descr">استخدم البوصلة عندما لا تكون هناك أي وجهة محددة</string>
 	<string name="auto_zoom_map_descr">لائم تكبير الخريطة وفقا لسرعتك (بينما تتزامن الخريطة مع الموقع الحالي)</string>
 	<string name="auto_zoom_map">تكبير الخريطة التلقائي</string>
 	<string name="snap_to_road_descr">ألصق الموقع إلى الشوارع أثناء الملاحة</string>
@@ -437,15 +437,15 @@
 	<string name="recalculate_route_to_your_location">نمط المواصلات:</string>
 	<string name="select_navigation_mode">اختر نمط المواصلات</string>
 	<string name="day_night_info_description">الشروق: %1$s \nالغروب: %2$s</string>
-	<string name="day_night_info">معلومات يوم/ليلة</string>
-	<string name="map_widget_day_night">خريطة اليوم/الليل</string>
+	<string name="day_night_info">معلومات اليوم والليلة</string>
+	<string name="map_widget_day_night">خريطة النهار والليل</string>
 	<string name="map_widget_vector_attributes">سمات التصيير:</string>
 	<string name="map_widget_renderer">نمط الخريطة</string>
 	<string name="live_monitoring_mode_off">بدء\n  التعقب على الانترنت</string>
 	<string name="live_monitoring_mode_on">وقف\n  التعقب على الانترنت</string>
 	
 	
-	<string name="layer_map_appearance">إعداد الشاشة</string>
+	<string name="layer_map_appearance">ضبط الشاشة</string>
 	<string name="map_widget_fluorescent">طرق فلورية</string>
 	<string name="map_widget_show_ruler">مسطرة</string>
 	<string name="map_widget_appearance">العناصر المتبقية:</string>
@@ -453,7 +453,7 @@
 	<string name="map_widget_transparent">سطح شفاف</string>
 	<string name="bg_service_sleep_mode_off">تمكين\n وضع السكون</string>
 	<string name="bg_service_sleep_mode_on">إيقاف\n وضع السكون</string>
-	<string name="map_widget_config">إعداد الشاشة</string>
+	<string name="map_widget_config">ضبط الشاشة</string>
 	<string name="map_widget_back_to_loc">أين أنا</string>
 	<string name="map_widget_lock_screen">اقفل الشاشة</string>
 	<string name="map_widget_compass">البوصلة</string>
@@ -476,11 +476,11 @@
 	<string name="osmand_parking_warning_text">لقد أضيف تنبيه لأخذ سيارتك مسبقا إلى تقويمك. سيظل هناك حتى تقوم بحذفه يدويا.</string>    
 	<string name="osmand_parking_time_limit_title">حدد المهلة القصوى لوقوف السيارات</string>
 	<string name="osmand_parking_delete_confirm">هل تريد إزالة موقع وقوف السيارة؟</string>
-	<string name="osmand_parking_delete">حذف علامة وقوف السيارة</string>
+	<string name="osmand_parking_delete">ازالة علامة وقوف السيارة</string>
 	<string name="osmand_parking_choose_type">اختر نوع مواقف السيارات</string>
 	<string name="osmand_parking_lim_text">وقت محدود</string>
 	<string name="osmand_parking_no_lim_text">وقت غير محدود</string>
-	<string name="osmand_parking_add_event">إضافة إخطارا إلى تطبيق التقويم</string>
+	<string name="osmand_parking_add_event">اضف إخطارا إلى تطبيق التقويم</string>
 	<string name="osmand_parking_time_limit">مواقف محدودة زمنيا</string>
 	<string name="osmand_parking_time_no_limit">مواقف غير محدودة زمنيا</string>
 	<string name="av_photo_play_sound_descr">فعّل هذا في حال رغبتك بسماع نغمة التقاط الصّور</string>
@@ -509,8 +509,8 @@
     <string name="access_mark_final_location_first">نمط الإتاحة: اختر وجهتك أولًا رجاءً</string> 
     <string name="av_photo_play_sound">شغّل صوتًا عند التقاط صورة</string>
 	<string name="use_magnetic_sensor">استخدم الاستشعار المغناطيسي</string>
-    <string name="av_widget_action_descr">حدد عمل المتحكم الافتراضي</string>
-    <string name="av_widget_action">عمل المتحكم الافتراضي</string>
+    <string name="av_widget_action_descr">حدد عمل الودجة الافتراضي</string>
+    <string name="av_widget_action">عمل الودجة الافتراضي</string>
     <string name="osmand_parking_position_description">مكان موقف سيارتك. %1$s</string>
 	<string name="osmand_parking_position_description_add">لأخذ السيارة من:</string>
 	<string name="osmand_parking_pm">م</string>
@@ -623,7 +623,7 @@
 		\n\t* حلّ العديد من العلل
     </string>
     <string name="local_indexes_cat_srtm">بيانات الخطوط المحيطية</string>
-    <string name="srtm_paid_version_msg">فكّر من فضلك في شراء ملحق الخطوط المحيطية من السّوق لدعم مزيد من التّطوير.</string>
+    <string name="srtm_paid_version_msg">فكّر من فضلك في شراء ملحق الخطوط المحيطية من السّوق لدعم المزيد من التّطوير.</string>
     <string name="srtm_paid_version_title">ملحق الخطوط المحيطية</string>
     <string name="recording_playing">تم تشغيل صوت من التّسجيل المحدد.\n%1$s</string>
     <string name="zxing_barcode_scanner_not_found">برنامج ZXing للبحث عن الباركود غيرُ مثبّت. أأبحث في السّوق؟</string>
@@ -670,7 +670,7 @@
 	<string name="oclock">o\'على مدار الساعة</string>
 	<string name="auto_announce_off">إيقاف الإخطار التلقائي</string>
 	<string name="auto_announce_on">تفعيل الأخطار التلقائي</string>
-	<string name="route_is_too_long">من المحتمل أن الطريق طويلة جدا قد لايتمكن جهاز توجية OsmAnd من حساب المسافة إلا بعد وضع نقطة وصل واحدة أو أكثر ↵ → متوسط طول المسافة المحتسب هو 200 كيلو متر تقريبًا. لذلك يرجى إضافة نقطة وصل أو أكثر على طول الطريق حتى يتمكن الجهاز من حساب طول مسافة الطريق.</string>
+	<string name="route_is_too_long">من المحتمل أن الطريق طويلة جدا قد لايتمكن جهاز توجيه OsmAnd من حساب المسافة إلا بعد وضع نقطة وصل واحدة أو أكثر ↵ → متوسط طول المسافة المحتسب هو 200 كيلو متر تقريبًا. لذلك يرجى إضافة نقطة وصل أو أكثر على طول الطريق حتى يتمكن الجهاز من حساب طول مسافة الطريق.</string>
 	<string name="audionotes_location_not_defined">لم يعين المكان المرتبط بالملاحظة. استخدم \"استخدم المكان …\" لتعيين ملاحظة لمكان محدد</string>
     <string name="use_short_object_names_descr">استخدم أسماء عناصر صغيرة في نمط التّصفح اللمسي</string>
 	<string name="animate_routing_route_not_calculated">رجاء، احتسب المسار أولا</string>
@@ -678,12 +678,11 @@
     <string name="animate_routing_gpx">حاكي باستخدام مسار GPX</string>
     <string name="remember_choice">تذكر اختياري</string>
     <string name="gps_status_eclipsim">حالة GPS</string>
-    <string name="tip_map_styles_t">يدعم OsmAnd عرض الخرائط بدون اتصال بهيئات مختلفة بما يُلاءم احتياجاتك:
-		\n\nفيما عدا نمط الخرائط  \'العادية\' المُعتدلة، بإمكانك التّغيير من \'القائمة\' → \'ضبط الشّاشة\' → \'نمط الخريطة\' و منها على سبيل المثال
-		\n\t* نمط \'عرض النّقل\'، و الذي يحوي معلومات تفصيلية للسّفر و التّجوال، بما يتضمنه ذلك من معلومات تخص السائقين المُحترفين (تمييز الطّرق، التباين العالي)، و خيارات المشي الجبلي الطّويل (مقياس SAC)، طرق الدّراجات، دعم المشي لمسافات طويلة، إلخ.
-		\n\t* \'طرق التّباين العالي\' يعرض الطّرق في تباين عالٍ عاكسة حالات الإضاءة في الخارج.
-		\n\t* \'الشّتاء و الانزلاقات\' حيث يُنشئ عرضًا أًفقيًا شتويًا (مغطّى بالثّلوج)، و يظهر المنحدرات و المصاعد الثّلجية ( بالتّواصل مع خريطة \'World ski\' المُحمّلة)
-	</string>
+    <string name="tip_map_styles_t">"يدعم OsmAnd عرض الخرائط بدون اتصال بهيئات مختلفة بما يُلائم احتياجاتك:
+\n\nفيما عدا نمط الخرائط \'العادية\' المُعتدلة، بإمكانك التّغيير من \'القائمة\' → \'ضبط الشّاشة\' → \'نمط الخريطة\' و منها على سبيل المثال
+\n\t* نمط \'عرض النّقل\'، و الذي يحوي معلومات تفصيلية للسّفر و التّجوال، بما يتضمنه ذلك من معلومات تخص السائقين المُحترفين (تمييز الطّرق، التباين العالي)، و خيارات المشي الجبلي الطّويل (مقياس SAC)، طرق الدّراجات، دعم المشي لمسافات طويلة، إلخ.
+\n\t* \'طرق التّباين العالي\' يعرض الطّرق في تباين عالٍ عاكسة حالات الإضاءة في الخارج.
+\n\t* \'الشّتاء و الانزلاقات\' حيث يُنشئ عرضًا أًفقيًا شتويًا (مغطّى بالثّلوج)، و يظهر المنحدرات و المصاعد الثّلجية ( بالتّواصل مع خريطة \'World ski\' المُحمّلة) "</string>
     <string name="tip_recent_changes_1_3_t">التّغييرات في 1.3:
         \n\t* إعادة العمل ضمن الأجهزة اللّوحية و دعم الشّاشات الكبيرة
         \n\t* سمة هولو (بالتّخصيص)
@@ -711,7 +710,7 @@
 		\n\t* خيار نمط خريطة \'التنقل\' مع مزيد من تفاصيل الخريطة، و أنماط طرق جديدة، و زيادة في التّباين، وخيار التّنقل الجبلي (مقياس SAC)
 		\n\t* تصحيح EGM96 من أجل قراءات الارتفاع في GPS
     </string>
-    <string name="osmodroid_plugin_description">إضافة OsMoDroid هي امتداد لبرنامج OsmAnd ليستخدم تطبيق OsModroid لمزايا المسارات عبر الشّابكة. معلومات أكثر عن هذه الإضافة متوفرة على http://esya.ru.</string>
+    <string name="osmodroid_plugin_description">ملحق OsMoDroid هو امتداد لبرنامج OsmAnd ليستخدم تطبيق OsModroid لمزايا المسارات عبر الشّابكة. معلومات أكثر عن هذه الخدمة متوفرة على http://esya.ru.</string>
     <string name="tip_recent_changes_1_0_0_t">التّغييرات في 1.0.0:
 	\n\t* تحسين التّوجيه: أسرع، أكثر دقّة، يصل إلى 250كم
 	\n\t* إدخال خرائط من نمط طرق فقط
@@ -739,7 +738,7 @@
 	</string>
 	<string name="native_app_allocated_memory_descr">المساحة المحجوزة من الذّاكرة الأصلية %1$s MB (Dalvik %2$s MB, other %3$s MB).
 		الذّاكرة النّسبية %4$s MB (الأقصى لأندرويد %5$s MB, Dalvik %6$s MB).</string>
-	<string name="app_mode_hiking">المشي لمسافات طويلة</string>
+	<string name="app_mode_hiking">المشي</string>
     <string name="app_mode_motorcycle">دراجة نارية</string>
     <string name="app_mode_boat">قارب</string>
     <string name="app_mode_aircraft">الطائرات</string>
@@ -748,8 +747,8 @@
 	<string name="tip_faq">اسئلةواجوبة</string>
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
     <string name="tip_faq_t">يرجى زيارة https://code.google.com/p/osmand/wiki/FAQ لرؤية الأسئلة المتداولة</string>
-    <string name="local_osm_changes_delete_all_confirm">هل تريد حزف 1 من التغيرات .هل انت مناكد ؟</string>
-    <string name="local_osm_changes_delete_all">حذف الجميع</string>
+    <string name="local_osm_changes_delete_all_confirm">هل تريد حذف 1 من التغيرات .هل انت مناكد ؟</string>
+    <string name="local_osm_changes_delete_all">احذف الكل</string>
     <string name="osmodroid_refresh">تحديث القنوات</string>
     <string name="osmand_srtm_long_description_1000_chars">يوفر هذا البرنامج المساعد الخطوط الكنتورية التي يمكن عرضها في OsmAnd \'ق حاليا الخرائط. ويستند البيانات العالمية (بين 70 درجة شمالا و 70 درجة جنوبا) على القياسات التي كتبها SRTM (المكوك بعثة الطوبوغرافيا الرادار) وASTER (المتقدم المحمول في الفضاء الانبعاث الحراري وانعكاس الإشعاع)، أداة التصوير على متن تيرا، القمر الصناعي الرئيسي من وكالة ناسا \'ق نظام مراقبة الأرض. ASTER هو جهد تعاوني بين وكالة ناسا واليابان \'ق وزارة الاقتصاد والتجارة والصناعة (METI)، وأنظمة الفضاء اليابانية (J-spacesystems)</string>
     <string name="srtm_plugin_description">يسهل تحميله خطوط الكنتورية وحاليا hillshades (\'إعدادات \' \ → \'إدارة البيانات \' → \'تحميل \' → حدد المطلوب نوع الخريطة).</string>
@@ -1358,4 +1357,31 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="version_index_is_not_supported">اصدار المنتج غير مدعوم</string>
 	<string name="poi_error_unexpected_template">حدث خطأ غير متوقع أثناء ممارسة العمل {0}.</string>
 	<string name="show_zoom_buttons_navigation">أظهر أزرار التقريب</string>
-    </resources>
+    <string name="osmo_settings_debug">معلومات التنقيح</string>
+    <string name="lang_zh">الصينية</string>
+    <string name="lang_en">الإنجليزية</string>
+	<string name="lang_bs">البوسنية</string>
+	<string name="lang_bg">البلغارية</string>
+	<string name="lang_fr">الفرنسية</string>
+	<string name="lang_iw">العبرية</string>
+	<string name="lang_hi">الهندية</string>
+	<string name="lang_hu">الهنغارية</string>
+	<string name="lang_id">اﻹندونيسية</string>
+	<string name="lang_it">اﻹيطالية</string>
+	<string name="lang_ja">اليابانية</string>
+	<string name="lang_ko">الكورية</string>
+	<string name="lang_no">النرويجية</string>
+	<string name="lang_ro">الرومانية</string>
+	<string name="lang_ru">الروسية</string>
+	<string name="lang_es">اﻷسبانية</string>
+	<string name="lang_sv">السويدية</string>
+	<string name="lang_tr">التركية</string>
+	<string name="lang_uk">اﻷوكرانية</string>
+	<string name="index_name_canada">أميركا الشمالية - كندا</string>
+    <string name="index_name_italy">أوروبا - إيطاليا</string>
+    <string name="routing_attr_short_way_name">أقصر طريق</string>
+	<string name="copying_osmand_files">ينسخ ملفات OsmAnd</string>
+    <string name="guidance_preferences_descr">تفضيلات الملاحة</string>
+    <string name="interrupt_music_descr">اقطع تشغيل الصوتيات عند ورود إعلان ما</string>
+	<string name="interrupt_music">اوقف الصوتيات</string>
+	</resources>

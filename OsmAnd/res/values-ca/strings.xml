@@ -197,7 +197,7 @@
 <string name="download_files_not_enough_space">No hi ha prou espai lliure per baixar %1$s MB (lliure: %2$s).</string>
 <string name="download_files_question_space">Ara disposeu de {2} MB d\'espai lliure. Voleu baixar {0} fitxer(s) ({1} MB)?</string>
 <string name="use_transparent_map_theme">Tema transparent</string>
-<string name="map_widget_appearance">Miscel·lània:</string>
+<string name="map_widget_appearance">Altres elements:</string>
 <string name="gps_wakeup_interval">Interval de despertament del GPS: %s</string>
 <string name="osmand_parking_event">Traieu el cotxe de l\'aparcament</string>
 <string name="rendering_attr_appMode_description">Optimitza el mapa per</string>
@@ -368,7 +368,7 @@
 <string name="indexing_address">S\'estan indexant les adreces-…</string>
 <string name="indexing_map">Indexant el mapa…</string>
 <string name="indexing_poi">S\'estan indexant els PDI …</string>
-<string name="indexing_transport">S\'estan indexant els transports...</string>
+<string name="indexing_transport">Indexant els transports…</string>
 <string name="poi_filter_custom_filter">Filtre personalitzat</string>
 <string name="poi_filter_for_tourists">Per a turistes</string>
 <string name="poi_filter_fuel">Carburants</string>
@@ -407,7 +407,7 @@
 <string name="amenity_type_man_made">Construccions</string>
 <string name="amenity_type_office">Oficines</string>
 <string name="m">m</string>
-<string name="reading_cached_tiles">S\'està llegint les tessel·les emmagatzemades...</string>
+<string name="reading_cached_tiles">Llegint les tessel·les emmagatzemades…</string>
 <string name="specified_dir_doesnt_exist">No s\'ha trobat el directori especificat.</string>
 <string name="application_dir">Directori d\'emmagatzematge</string>
 <string name="osmand_long_description_1000_chars">
@@ -509,7 +509,7 @@
 <string name="follow">Seguir</string>
 <string name="address">Adreça</string>
 <string name="search_online_address">Internet</string>
-<string name="searching">S\'està cercant...</string>
+<string name="searching">Cercant…</string>
 <string name="search_history_city">Ciutat: {0}</string>
 <string name="search_history_street">Carrer: {0}, {1}</string>
 <string name="transport">Transport</string>
@@ -540,8 +540,8 @@
 <string name="install_more">Instal·la\'n més…</string>
 <string name="tip_search">Cerca</string>
 <string name="km_h">km/h</string>
-<string name="downloading">S\'està baixant...</string>
-<string name="closing_changeset">S\'està tancant el conjunt de canvis...</string>
+<string name="downloading">S\'està baixant…</string>
+<string name="closing_changeset">Tancant les modificacions…</string>
 <string name="loading_cities">S\'estan carregant les ciutats…</string>
 
 <string name="daynight_mode_day">Dia</string>
@@ -574,21 +574,21 @@
 <string name="import_fav">Importa</string>
 <string name="any_poi">Algun</string>
 <string name="layer_osm_bugs">Errors d\'OSM</string>
-<string name="layer_map">Font del mapa...</string>
-<string name="layer_poi">PDI...</string>
+<string name="layer_map">Origen del mapa…</string>
+<string name="layer_poi">Punts D\'Interès…</string>
 <string name="context_menu_item_search_poi">Cerca PDI</string>
 <string name="int_min">min.</string>
 <string name="background_router_service">Executa en segon pla</string>
 <string name="show_poi_filter">Mostrar filtre</string>
 <string name="search_poi_filter">Filtre</string>
 <string name="hide_poi_filter">Ocultar filtre</string>
-<string name="voice_data_initializing">S\'està inicialitzant les dades de veu...</string>
-<string name="unzipping_file">S\'està descomprimint el fitxer...</string>
+<string name="voice_data_initializing">Inicialitzant dades de veu…</string>
+<string name="unzipping_file">Descomprimint el fitxer…</string>
 <string name="first_time_download">Baixar regions</string>
 <string name="map_screen_orientation">Orientació de pantalla</string>
 <string name="transport_search_before">Ruta previa</string>
 <string name="context_menu_item_update_poi">Actualitzar PDI</string>
-<string name="searching_address">S\'està cercant l\'adreça...</string>
+<string name="searching_address">Cercant l\'adreça…</string>
 <string name="search_offline_address">Fora de línia</string>
 <string name="download_index_success">Baixada amb èxit</string>
 
@@ -597,7 +597,7 @@
 <string name="opening_hours">Horari d\'obertura</string>
 <string name="poi">PDI</string>
 <string name="new_route_calculated_dist">Nova ruta calculada,distancia</string>
-<string name="loading_data">S\'està carregant les dades...</string>
+<string name="loading_data">Carregant dades…</string>
 <string name="finished_task">Finalitzat</string>
 <string name="update_tile">Actualitza el mapa</string>
 <string name="app_settings">Preferències d\'aplicació</string>
@@ -622,7 +622,7 @@
 <string name="use_fluorescent_overlays">Capes superposades fluorescents</string>
 <string name="reload">Refresca</string>
 <string name="download_files">Baixa</string>
-<string name="layer_gpx_layer">Traça GPX...</string>
+<string name="layer_gpx_layer">Traça GPX…</string>
 <string name="vector_data">Mapes de vectors fora de línia</string>
 <string name="point_on_map">Localització:\n Lat %1$.5f\n Lon %2$.5f</string>
 <string name="poi_context_menu_modify">Modifica el PDI</string>
@@ -731,7 +731,7 @@
 <string name="map_source">Font de mapes</string>
 <string name="show_poi_over_map_description">Mostra els PDI sobre el mapa (utilitza el darrer filtre escollit)</string>
 <string name="use_internet">Usa Internet</string>
-<string name="favorites_Button">Preferit</string>
+<string name="favorites_Button">Els meus llocs</string>
 <string name="search_address_top_text">Escull l\'adreça</string>
 <string name="context_menu_item_add_favorite">Afegeix a preferits</string>
 <string name="favourites_context_menu_edit">Edita el preferit</string>
@@ -756,7 +756,7 @@
 <string name="context_menu_item_add_waypoint">Afegeix una fita GPX</string>
 <string name="poi_filter_namefinder">Cercador de noms en línia</string>
 <string name="continuous_rendering_descr">Mostra la renderització continuada en lloc d\'imatge a imatge</string>
-<string name="uploading_data">S\'està penjant les dades...</string>
+<string name="uploading_data">Penjant les dades…</string>
 <string name="search_nothing_found">No s\'ha trobat res</string>
 <string name="list_index_files_was_not_loaded">No s\'ha recuperat la llista de les regions des d\'osmand.net.</string>
 <string name="failed_op">fallada</string>
@@ -806,8 +806,8 @@
 <string name="version_index_is_big_for_memory">L\'índex «{0}» no cap a la memòria</string>
 <string name="version_index_is_not_supported">La versió de l\'índex «{0}» no està suportada</string>
 <string name="build_installed">Paquet {0} instal·lat correctament ({1}).</string>
-<string name="downloading_build">S\'està baixant el paquet...</string>
-<string name="loading_builds">S\'està carregant els paquets de l\'OsmAnd...</string>
+<string name="downloading_build">Baixant compilació…</string>
+<string name="loading_builds">Carregant paquets de l\'OsmAnd…</string>
 <string name="select_build_to_install">Seleccioneu un dels paquets de l\'OsmAnd per instal·lar-lo</string>
 <string name="voice_is_not_available_msg">El guiatge de veu no està disponible. Aneu a la configuració, escolliu el paquet de dades de veu preferit i baixeu-lo.</string>
 <string name="voice_is_not_available_title">Cap guiatge de veu seleccionat</string>
@@ -871,7 +871,7 @@
 <string name="layer_transport_route">Ruta de transport</string>
 <string name="layer_transport">Parades de transport</string>
 <string name="voice_data_unavailable">Les dades de veu seleccionades no estan disponibles</string>
-<string name="search_poi_location">S\'està cercant senyal...</string>
+<string name="search_poi_location">Cercant senyal…</string>
 <string name="opening_hours_not_supported">Format d\'horaris d\'obertura no suportat per a l\'edició</string>
 <string name="transport_to_go_after">prioritza distancia</string>
 <string name="hello">Aplicació de navegació OsmAnd</string>
@@ -941,7 +941,7 @@
 	<string name="search_history_int_streets">Intersecció: {0} x {1} a {2}</string>
 	<string name="favorite">Preferit</string>
 	<string name="history">Història</string>
-	<string name="uploading">S\'esta penjant...</string>
+	<string name="uploading">Enviant…</string>
 	<string name="search_osm_nominatim">Cerca una adreça utilitzant OSM Nominatim</string>
 	<string name="hint_search_online">Núm. de la casa, carrer, ciutat</string>
 	<string name="max_level_download_tile_descr">Seleccioneu el nivell màxim de zoom per baixar les tessel·les dels mapes en línia</string>
@@ -957,7 +957,7 @@
 	<string name="error_calculating_route_occured">Ha succeït un error en calcular la ruta</string>
 	<string name="empty_route_calculated">Error: La ruta calculada és buida</string>					
 	<string name="go_back_to_osmand">Torna enrere al mapa de l\'OsmAnd</string>
-	<string name="reading_indexes">S\'està llegint les dades locals...</string>
+	<string name="reading_indexes">Llegint dades locals…</string>
 	<string name="download_indexes_descr">Baixeu o actualitzeu dades des d\'Internet pel seu ús fora de línia</string>
 	<string name="use_online_routing_descr">Utilitzeu Internet per calcular la ruta</string>
 	<string name="save_current_track">Desa la traça GPX actual</string>
@@ -1086,7 +1086,7 @@
     
     <string name="map_widget_distancemeasurement">Mesura de distàncies</string>
     <string name="audionotes_location_not_defined">Encara no teniu definida la localització de la nota. «Usa localització...» per assignar una nota a la localitzacio especificada</string>
-    <string name="monitoring_control_stop">Atura</string>
+    <string name="monitoring_control_stop">Aturar</string>
     <string name="audionotes_plugin_description">Pren notes d\'àudio durant el viatge</string>
     <string name="audionotes_plugin_name">Connector de notes d\'àudio</string>
     <string name="index_srtm_parts">peces</string>
@@ -1110,7 +1110,7 @@
 	<string name="sd_mounted_ro">La targeta SD és només de lectura.\nNomés podeu visualitzar el mapa precarregat i no podeu baixar-ne des d\'Internet.</string>
 	<string name="map_orientation_portrait">Vertical</string>
 	<string name="map_screen_orientation_descr">Vertical, apaïsat, o dispositiu</string>
-	<string name="opening_changeset">S\'està obrint el conjunt de canvis...</string>
+	<string name="opening_changeset">Obrint les modificacions…</string>
 	<string name="reload_indexes_descr">Torna a llegir els mapes de vectors fora de línia i les dades de la targeta SD</string>
 	<string name="reload_indexes">Torna a llegir les dades fora de línia</string>
 	<string name="map_preferences_descr">Especifiqueu els paràmetres del mapa: font del mapa, rotació, posició del marcador i orientació de la pantalla</string>
@@ -1187,7 +1187,7 @@
 		\n\t* Paquets de relleu per al connector de corbes de nivell
 		\n\t* Correcció d\'errors (encaminador sub-òptim)
     </string>
-    <string name="precise_routing_mode_descr">Activa l\'encaminament precís per calcular els itineraris precisos sense errades. Està molt limitat per la distància i no utilitza la biblioteca nativa.</string>
+    <string name="precise_routing_mode_descr">Activa per calcular itineraris precisos sense errades. Encara és lent i de distància limitada.</string>
     <string name="precise_routing_mode">Encaminament precís (alfa)</string>
     <string name="intermediate_point">Fita %1$s</string>
     <string name="support_new_features_descr">Feu un donatiu per veure noves funcionalitats implementades a l\'aplicació</string>
@@ -1257,7 +1257,7 @@
 	<string name="osmand_plus_play_title_30_chars">Mapes i navegació OsmAnd+</string>
 	<string name="transport_stops_to_pass">parades que heu de passar</string>
 	<string name="downloading_file_new">Baixant …</string>
-	<string name="commiting_node">S\\\'està enviant el node...</string>
+	<string name="commiting_node">Enviant el node…</string>
 	<string name="choose_intersected_street">Seleccioneu la intersecció</string>
 	<string name="poi_remove_confirm_template">Voleu suprimir {0}(escriviu un comentari)?</string>
 	<string name="poi_dialog_comment_default">Canvis en el PDI</string>
@@ -1279,7 +1279,7 @@
     </string>
     <string name="av_def_action_choose">Selecciona sota demanda</string>
     <string name="background_service_provider">Proveïdor de la ubicació</string>
-	<string name="converting_names">S\\\'estan convertint els noms nadius a l\'anglès...</string>
+	<string name="converting_names">Convertint els noms nadius a l\'anglès…</string>
 	<string name="save_track_interval_descr">Indiqueu l\\\'interval d\\\'enregistrament de traces</string>
 	<string name="incremental_search_street">Cerca de carrers progressiva</string>
 	<string name="incremental_search_building">Cerca d\\\'edificis progressiva</string>
@@ -1292,7 +1292,7 @@
     <string name="osmodroid_mode_off">Inicia l\'OsMoDroid</string>
     <string name="announce_gpx_waypoints">Anuncia fites GPX</string>
     <string name="speak_title">Anuncia…</string>
-	<string name="speak_descr">Configureu per anunciar noms de carrer, avisos de trànsit (cues, bandes sonores), avisos de radar, límits de velocitat...</string>
+	<string name="speak_descr">Configureu per anunciar noms de carrer, avisos de trànsit (cues, bandes sonores), avisos de radar, límits de velocitat</string>
 	<string name="speak_street_names">Anuncia els noms dels carrers (TTS)</string>
     <string name="speak_speed_limit">Anuncia els límits de velocitat</string>
     <string name="speak_cameras">Anuncia els radars</string>
@@ -1861,4 +1861,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="layer_amenity_label">Etiquetes puntuals</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra els botons de zoom mentre la navegació</string>
     <string name="show_zoom_buttons_navigation">Mostra els botons de zoom</string>
+    <string name="visible_element">Visible</string>
     </resources>
