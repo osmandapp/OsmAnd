@@ -144,7 +144,11 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 			@Override()
 			public boolean updateInfo(OsmandMapLayer.DrawSettings drawSettings) {
-				setText(getVisitedAllString(), "");
+				if (currentRoute != null) {
+					setText(getVisitedAllString(), "");
+				} else {
+					setText("", app.getString(R.string.route_points_no_gpx));
+				}
 				return true;
 			}
 
