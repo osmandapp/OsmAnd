@@ -80,8 +80,7 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 			// request to load
 			final QuadRect latLonBounds = tileBox.getLatLonBounds();
 			for (FavouritePoint o : favorites.getFavouritePoints()) {
-				
-				if (o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left
+				if (o.isVisible() && o.getLatitude() >= latLonBounds.bottom && o.getLatitude() <= latLonBounds.top  && o.getLongitude() >= latLonBounds.left
 						&& o.getLongitude() <= latLonBounds.right ) {
 					cache.add(o);
 					int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());

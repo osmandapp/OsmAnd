@@ -34,6 +34,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.text.Spannable;
@@ -42,7 +43,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
@@ -54,7 +54,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.ActionMode.Callback;
@@ -455,14 +454,15 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 	}
 	
-	protected void openChangeGroupDialog(FavoriteGroup group) {
+	protected void openChangeGroupDialog(final FavoriteGroup group) {
 		Builder bld = new AlertDialog.Builder(getActivity());
 		View favEdit = getActivity().getLayoutInflater().inflate(R.layout.fav_group_edit, null);
 		final Spinner colorSpinner = (Spinner) favEdit.findViewById(R.id.ColorSpinner);
         final TIntArrayList list = new TIntArrayList();
-        ColorDialogs.setupColorSpinner(getActivity(), group.color, colorSpinner, list);
+        final int intColor = group.color == 0? getResources().getColor(R.color.color_favorite) : group.color;
+        ColorDialogs.setupColorSpinner(getActivity(), intColor, colorSpinner, list);
 		
-		CheckBox checkBox = (CheckBox) favEdit.findViewById(R.id.Visibility);
+		final CheckBox checkBox = (CheckBox) favEdit.findViewById(R.id.Visibility);
 		checkBox.setChecked(group.visible);
 		bld.setView(favEdit);
 		bld.setNegativeButton(R.string.default_buttons_cancel, null);
@@ -470,7 +470,11 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				list.get(colorSpinner.getSelectedItemPosition());
+				int clr = list.get(colorSpinner.getSelectedItemPosition());
+				if(clr != intColor || group.visible != checkBox.isChecked()) {
+					getMyApplication().getFavorites().editFavouriteGroup(group, clr, checkBox.isChecked());
+					favouritesAdapter.notifyDataSetInvalidated();
+				}
 				
 			}
 		});
@@ -741,6 +745,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
 			label.setText(distance + model.getName(), TextView.BufferType.SPANNABLE);
+			label.setTypeface(Typeface.DEFAULT, model.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
 			((Spannable) label.getText()).setSpan(
 					new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
 					0);

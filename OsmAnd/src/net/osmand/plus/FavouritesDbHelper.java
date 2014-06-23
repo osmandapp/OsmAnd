@@ -249,7 +249,7 @@ public class FavouritesDbHelper {
 				pt.getExtensionsToWrite().put(HIDDEN, "true");
 			}
 			if(p.getColor() != 0) {
-				pt.getColor(p.getColor());
+				pt.setColor(p.getColor());
 			}
 			pt.name = p.getName();
 			if (p.getCategory().length() > 0)
@@ -345,6 +345,24 @@ public class FavouritesDbHelper {
 			points.put(getKey(fp), fp);
 		}
 		return null;
+	}
+	
+	public void editFavouriteGroup(FavoriteGroup group, int color, boolean visible) {
+		if(color != 0 && group.color != color) {
+			FavoriteGroup gr = flatGroups.get(group.name);
+			group.color = color;
+			for(FavouritePoint p : gr.points) {
+				p.setColor(color);
+			}	
+		}
+		if(group.visible != visible) {
+			FavoriteGroup gr = flatGroups.get(group.name);
+			group.visible = visible;
+			for(FavouritePoint p : gr.points) {
+				p.setVisible(visible);
+			}	
+		}
+		saveCurrentPointsIntoFile();
 	}
 
 	protected void createDefaultCategories() {
@@ -552,5 +570,8 @@ public class FavouritesDbHelper {
 		String singleFavourite = " " + FAVOURITE_COL_NAME + "= ? AND " + FAVOURITE_COL_LAT + " = ? AND " + FAVOURITE_COL_LON + " = ?";
 		return singleFavourite;
 	}
+
+
+
 
 }
