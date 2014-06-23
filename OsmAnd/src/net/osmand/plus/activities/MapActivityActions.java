@@ -30,6 +30,7 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -41,12 +42,14 @@ import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.activities.actions.ShareLocation;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -57,15 +60,20 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MapActivityActions implements DialogProvider {
@@ -190,15 +198,23 @@ public class MapActivityActions implements DialogProvider {
 		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
 		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
 		final Collator ci = java.text.Collator.getInstance();
+		final boolean distance = args.containsKey("DISTANCE");
 		Collections.sort(points, new Comparator<FavouritePoint>() {
 
 			@Override
-			public int compare(FavouritePoint object1, FavouritePoint object2) {
-				return ci.compare(object1.getName(), object2.getName());
+			public int compare(FavouritePoint o1, FavouritePoint o2) {
+				if(distance && activity instanceof MapActivity) {
+					float f1 = (float) MapUtils.getDistance(((MapActivity) activity).getMapLocation(), o1.getLatitude(), 
+							o1.getLongitude());
+					float f2 = (float) MapUtils.getDistance(((MapActivity) activity).getMapLocation(), o2.getLatitude(), 
+									o2.getLongitude());
+					return Float.compare(f1, f2);
+				}
+				return ci.compare(o1.getCategory() + " " + o1.getName(), o2.getCategory() + " " + o2.getName());
 			}
 		});
 		final String[] names = new String[points.size()];
-		if(names.length == 0){
+		if(points.size() == 0){
 			AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
 			return null;
 		}
@@ -211,22 +227,71 @@ public class MapActivityActions implements DialogProvider {
 			FavouritePoint fp = it.next();
 			// filter gpx points
 			favs[i] = fp;
-			names[i] = fp.getName();
+			if(fp.getCategory().trim().length() ==0){
+				names[i] = fp.getName();
+			} else {
+				names[i] = fp.getCategory() + ": " + fp.getName();
+			}
+			if(activity instanceof MapActivity) {
+				names[i] += "  " + OsmAndFormatter.getFormattedDistance(
+						(float) MapUtils.getDistance(((MapActivity) activity).getMapLocation(), fp.getLatitude(), 
+								fp.getLongitude()), ((MapActivity) activity).getMyApplication());
+			}
 			i++;
 		}
-		b.setItems(names, new DialogInterface.OnClickListener(){
+		final int layout;
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+			layout = R.layout.list_menu_item;
+		} else {
+			layout = R.layout.list_menu_item_native;
+		}
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout, R.id.title,
+				names) {
+			@Override
+			public View getView(final int position, View convertView, ViewGroup parent) {
+				// User super class to create the View
+				View v = activity.getLayoutInflater().inflate(layout, null);
+				ImageView icon = (ImageView) v.findViewById(R.id.icon);
+				FavouritePoint fp = points.get(position);
+				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, fp.getColor()));
+				icon.setVisibility(View.VISIBLE);
+				TextView tv = (TextView) v.findViewById(R.id.title);
+				tv.setText(names[position]);
+				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
+					ch.setVisibility(View.INVISIBLE);
+				return v;
+			}
+		};
+		b.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				FavouritePoint fv = favs[which];
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
-				if(helper.editFavourite(fv, point.getLatitude(), point.getLongitude())){
-					AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
+				if (helper.editFavourite(fv, point.getLatitude(), point.getLongitude())) {
+					AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_edited),
+							Toast.LENGTH_SHORT).show();
 				}
-				if(activity instanceof MapActivity) {
+				if (activity instanceof MapActivity) {
 					((MapActivity) activity).getMapView().refreshMap();
 				}
 			}
 		});
+		if (activity instanceof MapActivity) {
+			b.setPositiveButton(distance ? R.string.sort_by_name : R.string.sort_by_distance,
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if (distance) {
+								args.remove("DISTANCE");
+							} else {
+								args.putBoolean("DISTANCE", true);
+							}
+							createReplaceFavouriteDialog(activity, args).show();
+						}
+					});
+		}
 		AlertDialog al = b.create();
 		return al;
 	}
