@@ -258,7 +258,7 @@ public class MapActivityActions implements DialogProvider {
 					int vl = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, activity.getResources()
 							.getDisplayMetrics());
 					final LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(vl, vl);
-					ll.setMargins(vl / 2, vl / 2, 0, 0);
+					ll.setMargins(vl / 4, vl / 4, vl / 4, vl / 4);
 					v.findViewById(R.id.icon).setLayoutParams(ll);
 				}
 				ImageView icon = (ImageView) v.findViewById(R.id.icon);
