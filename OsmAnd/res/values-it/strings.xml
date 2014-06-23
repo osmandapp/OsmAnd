@@ -455,7 +455,7 @@
   <string name="send_report">Invia rapporto</string>
   <string name="none_region_found">Non è stata trovato nessuna dato per la regione nella scheda SD. Scarica una regione da internet.</string>
   <string name="poi_namefinder_query_empty">Inserisci i parametri di ricerca per trovare un PDI</string>
-  <string name="any_poi">Qualsiasi</string>
+  <string name="any_poi">Tutti</string>
   <string name="layer_transport_route">Percorso di trasporto pubblico</string>
   <string name="thanks_yandex_traffic">Grazie a Yandex per le informazioni sul traffico.</string>
   <string name="layer_yandex_traffic">Yandex (traffico)</string>
@@ -1001,7 +1001,7 @@
   <string name="map_widget_time">Tempo rimasto</string>
   <string name="map_widget_next_turn">Prossima svolta</string>
   <string name="map_widget_next_turn_small">Prossima svolta (piccola)</string>
-  <string name="map_widget_next_next_turn">Svolta successiva a questa</string>
+  <string name="map_widget_next_next_turn">Svolta successiva</string>
   <string name="map_widget_mini_route">Minimappa del percorso</string>
   <string name="bg_service_screen_lock">Blocca lo schermo</string>
   <string name="bg_service_screen_lock_toast">Lo schermo è bloccato</string>

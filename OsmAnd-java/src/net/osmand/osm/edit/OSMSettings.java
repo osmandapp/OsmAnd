@@ -35,6 +35,7 @@ public class OSMSettings {
 		ADDR_STREET("addr:street"), //$NON-NLS-1$
 		ADDR_STREET2("addr:street2"), //$NON-NLS-1$
 		ADDR_CITY("addr:city"), //$NON-NLS-1$
+		ADDR_PLACE("addr:place"), //$NON-NLS-1$
 		ADDR_POSTCODE("addr:postcode"), //$NON-NLS-1$
 		ADDR_INTERPOLATION("addr:interpolation"), //$NON-NLS-1$
 		ADDRESS_TYPE("address:type"), //$NON-NLS-1$
