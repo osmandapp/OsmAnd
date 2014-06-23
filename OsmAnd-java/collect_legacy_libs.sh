@@ -23,7 +23,7 @@ function compile {
 	if [ ! -d "$CORE_LOC/targets/amd64-linux-gcc-amd64-linux-gcc-release.baked" ]; then 
 		"$CORE_LOC/targets/amd64-linux-gcc.sh" release
 	fi
-	(cd "$CORE_LOC/targets/amd64-linux-gcc-amd64-linux-gcc-release.baked" && make -j$OSMAND_BUILD_CPU_CORES_NUM OsmAndJNI)
+	(cd "$CORE_LOC/targets/amd64-linux-gcc-amd64-linux-gcc-release.baked" && make -j$OSMAND_BUILD_CPU_CORES_NUM)
 }
 
 compile
