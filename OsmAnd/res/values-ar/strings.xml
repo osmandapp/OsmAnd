@@ -65,7 +65,7 @@
     <string name="download_regular_maps">خرائط العادية</string>
     <string name="rendering_attr_noAdminboundaries_name">إخفاء حدود</string>
 	<string name="map_widget_max_speed">تحديد السرعة</string>
-    <string name="route_descr_current_location">الوظيفة الحالية</string>
+    <string name="route_descr_current_location">الموقع الحالي</string>
     
     
     <string name="no_buildings_found">العثور على المباني.</string>
@@ -201,7 +201,7 @@
     <string name="about_settings_descr">معلومات النسخة، والتراخيص، أعضاء المشروع</string>
     <string name="tips_and_tricks">نصائح</string>
     <string name="edit_tilesource_maxzoom">التّكبير الأقصى</string>
-    <string name="edit_tilesource_minzoom">دقيقة التكبير</string>
+    <string name="edit_tilesource_minzoom">التصغير اﻷقصى</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_name">اسم</string>
     <string name="driving_region_descr">حدد قيادة المنطقة: الولايات المتحدة، أوروبا، المملكة المتحدة وآسيا وآخرون</string>
@@ -213,8 +213,8 @@
 	<string name="driving_region_uk">المملكة المتحدة والهند واستراليا وآخرون</string>
 	<string name="announce_gpx_waypoints">تعلن نقاط الطريق GPX</string>
     <string name="speak_title">أعلن…</string>
-	<string name="osb_author_or_password_not_specified">يرجى تحديد المستخدم وكلمة المرور OSM في إعدادات</string>
-    <string name="clear_intermediate_points">نقاط وسيطة واضحة</string>
+	<string name="osb_author_or_password_not_specified">يرجى تحديد مستخدم OSM وكلمة سره في الإعدادات</string>
+    <string name="clear_intermediate_points">محو النقاط الوسيطة</string>
     <string name="keep_intermediate_points">الحفاظ على نقاط وسيطة</string>
     <string name="new_directions_point_dialog">لديك مجموعة نقاط وسيطة.</string>
     <string name="context_menu_item_directions_to">الاتجاهات إلى</string>
@@ -222,9 +222,9 @@
     <string name="route_to">إلى:</string>
     <string name="route_via">بواسطة:</string>
     <string name="route_from">من:</string>
-	<string name="app_mode_default">إستعراض الخريطة</string>
+	<string name="app_mode_default">استعرض الخريطة</string>
 	<string name="settings_preset">الوضع الافتراضي</string>
-	<string name="context_menu_item_destination_point">تعيين كوجهة</string>
+	<string name="context_menu_item_destination_point">تعيينه وجهة</string>
     <string name="please_select_address">اختر المدينة أو الشارع الأول</string>
     <string name="delete_point">حذف نقطة</string>
     <string name="plugin_distance_point_time">وقت</string>
@@ -243,7 +243,7 @@
     <string name="distance_measurement_clear_route">مسح جميع نقاط</string>
     <string name="distance_measurement_save_gpx">حفظ ك GPX</string>
     <string name="distance_measurement_load_gpx">فتح القائمة GPX</string>
-    <string name="other_location">آخر</string>
+    <string name="other_location">أخرى</string>
     <string name="install_paid">النسخة الكاملة</string>
     <string name="cancel_navigation">توقف الملاحة</string>
     <string name="clear_destination">المقصد واضح</string>
@@ -329,7 +329,7 @@
     <string name="maps_define_edit">تعريف/تحرير…</string>
 	<string name="osmodroid_mode_on">أوقف OsMoDroid</string>    
     <string name="osmodroid_mode_off">شغل OsMoDroid</string>
-    <string name="speak_descr">إعداد لنطق أسماء الشوارع، وتحذيرات المرور (توقيفات الإجبارية، ومطبات السرعة)، و تحذيرات كاميرات السرعة، و السرعة القصوى</string>
+    <string name="speak_descr">ضبط إعدادات نطق أسماء الشوارع، وتحذيرات المرور (توقيفات الإجبارية، ومطبات السرعة)، و تحذيرات كاميرات السرعة، و السرعة القصوى</string>
 	<string name="speak_street_names">نطق أسماء الشوارع (نطق آلي)</string>
     <string name="speak_speed_limit">تحذير السرعة القصوى</string>
     <string name="speak_cameras">تحذير عن كاميرات السرعة</string>
@@ -380,11 +380,11 @@
     <string name="context_menu_item_first_intermediate_point">أضف كأول إحداثية</string>
     
     <string name="edit_tilesource_expiration_time">الانتهاء (دقائق)</string>
-    <string name="edit_tilesource_choose_existing">اختر الخروج...</string>
+    <string name="edit_tilesource_choose_existing">اختر موجودا…</string>
     <string name="map_widget_fps_info">معلومات تنقيح FPS</string>
-	<string name="settings_preset_descr">إعدادات عرض الخريط والاستكشاف محفوظة لكل ملف استخدام. قم بتعيين ملفك الافتراضي هنا.</string>
+	<string name="settings_preset_descr">إعدادات عرض الخريط والملاحة محفوظة لكل ملف استخدام. قم بتعيين ملفك الافتراضي هنا.</string>
     <string name="intermediate_items_sort_return">أعيد ترتيب نقاط الطرق وسيطة لتحسين ترتيبها في الطريق إلى الوجهة.</string>
-    <string name="local_osm_changes_backup_successful">أنشيء ملف تغيير OSM بنجاح %1$s</string>
+    <string name="local_osm_changes_backup_successful">أنشئ ملف تغيير OSM بنجاح %1$s</string>
     <string name="local_osm_changes_backup_failed">فشلت عملية النسخ الاحتياطي لتغييرات OSM</string>
     <string name="local_osm_changes_backup">نسخ الاحتياطي كتغيير OSM</string>
     <string name="files_limit">%1$d ملف بقى</string>
@@ -670,7 +670,7 @@
 	<string name="oclock">o\'على مدار الساعة</string>
 	<string name="auto_announce_off">إيقاف الإخطار التلقائي</string>
 	<string name="auto_announce_on">تفعيل الأخطار التلقائي</string>
-	<string name="route_is_too_long">من المحتمل أن الطريق طويلة جدا قد لايتمكن جهاز توجية OsmAnd من حساب المسافة إلا بعد وضع نقطة وصل واحدة أو أكثر ↵ → متوسط طول المسافة المحتسب هو 200 كيلو متر تقريبًا. لذلك يرجى إضافة نقطة وصل أو أكثر على طول الطريق حتى يتمكن الجهاز من حساب طول مسافة الطريق.</string>
+	<string name="route_is_too_long">من المحتمل أن الطريق طويلة جدا قد لايتمكن جهاز توجيه OsmAnd من حساب المسافة إلا بعد وضع نقطة وصل واحدة أو أكثر ↵ → متوسط طول المسافة المحتسب هو 200 كيلو متر تقريبًا. لذلك يرجى إضافة نقطة وصل أو أكثر على طول الطريق حتى يتمكن الجهاز من حساب طول مسافة الطريق.</string>
 	<string name="audionotes_location_not_defined">لم يعين المكان المرتبط بالملاحظة. استخدم \"استخدم المكان …\" لتعيين ملاحظة لمكان محدد</string>
     <string name="use_short_object_names_descr">استخدم أسماء عناصر صغيرة في نمط التّصفح اللمسي</string>
 	<string name="animate_routing_route_not_calculated">رجاء، احتسب المسار أولا</string>
@@ -678,12 +678,11 @@
     <string name="animate_routing_gpx">حاكي باستخدام مسار GPX</string>
     <string name="remember_choice">تذكر اختياري</string>
     <string name="gps_status_eclipsim">حالة GPS</string>
-    <string name="tip_map_styles_t">يدعم OsmAnd عرض الخرائط بدون اتصال بهيئات مختلفة بما يُلاءم احتياجاتك:
-		\n\nفيما عدا نمط الخرائط  \'العادية\' المُعتدلة، بإمكانك التّغيير من \'القائمة\' → \'ضبط الشّاشة\' → \'نمط الخريطة\' و منها على سبيل المثال
-		\n\t* نمط \'عرض النّقل\'، و الذي يحوي معلومات تفصيلية للسّفر و التّجوال، بما يتضمنه ذلك من معلومات تخص السائقين المُحترفين (تمييز الطّرق، التباين العالي)، و خيارات المشي الجبلي الطّويل (مقياس SAC)، طرق الدّراجات، دعم المشي لمسافات طويلة، إلخ.
-		\n\t* \'طرق التّباين العالي\' يعرض الطّرق في تباين عالٍ عاكسة حالات الإضاءة في الخارج.
-		\n\t* \'الشّتاء و الانزلاقات\' حيث يُنشئ عرضًا أًفقيًا شتويًا (مغطّى بالثّلوج)، و يظهر المنحدرات و المصاعد الثّلجية ( بالتّواصل مع خريطة \'World ski\' المُحمّلة)
-	</string>
+    <string name="tip_map_styles_t">"يدعم OsmAnd عرض الخرائط بدون اتصال بهيئات مختلفة بما يُلائم احتياجاتك:
+\n\nفيما عدا نمط الخرائط \'العادية\' المُعتدلة، بإمكانك التّغيير من \'القائمة\' → \'ضبط الشّاشة\' → \'نمط الخريطة\' و منها على سبيل المثال
+\n\t* نمط \'عرض النّقل\'، و الذي يحوي معلومات تفصيلية للسّفر و التّجوال، بما يتضمنه ذلك من معلومات تخص السائقين المُحترفين (تمييز الطّرق، التباين العالي)، و خيارات المشي الجبلي الطّويل (مقياس SAC)، طرق الدّراجات، دعم المشي لمسافات طويلة، إلخ.
+\n\t* \'طرق التّباين العالي\' يعرض الطّرق في تباين عالٍ عاكسة حالات الإضاءة في الخارج.
+\n\t* \'الشّتاء و الانزلاقات\' حيث يُنشئ عرضًا أًفقيًا شتويًا (مغطّى بالثّلوج)، و يظهر المنحدرات و المصاعد الثّلجية ( بالتّواصل مع خريطة \'World ski\' المُحمّلة) "</string>
     <string name="tip_recent_changes_1_3_t">التّغييرات في 1.3:
         \n\t* إعادة العمل ضمن الأجهزة اللّوحية و دعم الشّاشات الكبيرة
         \n\t* سمة هولو (بالتّخصيص)
@@ -739,7 +738,7 @@
 	</string>
 	<string name="native_app_allocated_memory_descr">المساحة المحجوزة من الذّاكرة الأصلية %1$s MB (Dalvik %2$s MB, other %3$s MB).
 		الذّاكرة النّسبية %4$s MB (الأقصى لأندرويد %5$s MB, Dalvik %6$s MB).</string>
-	<string name="app_mode_hiking">المشي لمسافات طويلة</string>
+	<string name="app_mode_hiking">المشي</string>
     <string name="app_mode_motorcycle">دراجة نارية</string>
     <string name="app_mode_boat">قارب</string>
     <string name="app_mode_aircraft">الطائرات</string>
@@ -748,8 +747,8 @@
 	<string name="tip_faq">اسئلةواجوبة</string>
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
     <string name="tip_faq_t">يرجى زيارة https://code.google.com/p/osmand/wiki/FAQ لرؤية الأسئلة المتداولة</string>
-    <string name="local_osm_changes_delete_all_confirm">هل تريد حزف 1 من التغيرات .هل انت مناكد ؟</string>
-    <string name="local_osm_changes_delete_all">حذف الجميع</string>
+    <string name="local_osm_changes_delete_all_confirm">هل تريد حذف 1 من التغيرات .هل انت مناكد ؟</string>
+    <string name="local_osm_changes_delete_all">احذف الكل</string>
     <string name="osmodroid_refresh">تحديث القنوات</string>
     <string name="osmand_srtm_long_description_1000_chars">يوفر هذا البرنامج المساعد الخطوط الكنتورية التي يمكن عرضها في OsmAnd \'ق حاليا الخرائط. ويستند البيانات العالمية (بين 70 درجة شمالا و 70 درجة جنوبا) على القياسات التي كتبها SRTM (المكوك بعثة الطوبوغرافيا الرادار) وASTER (المتقدم المحمول في الفضاء الانبعاث الحراري وانعكاس الإشعاع)، أداة التصوير على متن تيرا، القمر الصناعي الرئيسي من وكالة ناسا \'ق نظام مراقبة الأرض. ASTER هو جهد تعاوني بين وكالة ناسا واليابان \'ق وزارة الاقتصاد والتجارة والصناعة (METI)، وأنظمة الفضاء اليابانية (J-spacesystems)</string>
     <string name="srtm_plugin_description">يسهل تحميله خطوط الكنتورية وحاليا hillshades (\'إعدادات \' \ → \'إدارة البيانات \' → \'تحميل \' → حدد المطلوب نوع الخريطة).</string>
@@ -1358,4 +1357,29 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="version_index_is_not_supported">اصدار المنتج غير مدعوم</string>
 	<string name="poi_error_unexpected_template">حدث خطأ غير متوقع أثناء ممارسة العمل {0}.</string>
 	<string name="show_zoom_buttons_navigation">أظهر أزرار التقريب</string>
+    <string name="osmo_settings_debug">معلومات التنقيح</string>
+    <string name="lang_zh">الصينية</string>
+    <string name="lang_en">الإنجليزية</string>
+	<string name="lang_bs">البوسنية</string>
+	<string name="lang_bg">البلغارية</string>
+	<string name="lang_fr">الفرنسية</string>
+	<string name="lang_iw">العبرية</string>
+	<string name="lang_hi">الهندية</string>
+	<string name="lang_hu">الهنغارية</string>
+	<string name="lang_id">اﻹندونيسية</string>
+	<string name="lang_it">اﻹيطالية</string>
+	<string name="lang_ja">اليابانية</string>
+	<string name="lang_ko">الكورية</string>
+	<string name="lang_no">النرويجية</string>
+	<string name="lang_ro">الرومانية</string>
+	<string name="lang_ru">الروسية</string>
+	<string name="lang_es">اﻷسبانية</string>
+	<string name="lang_sv">السويدية</string>
+	<string name="lang_tr">التركية</string>
+	<string name="lang_uk">اﻷوكرانية</string>
+	<string name="index_name_canada">أميركا الشمالية - كندا</string>
+    <string name="index_name_italy">أوروبا - إيطاليا</string>
+    <string name="routing_attr_short_way_name">أقصر طريق</string>
+	<string name="copying_osmand_files">ينسخ ملفات OsmAnd</string>
+    <string name="guidance_preferences_descr">تفضيلات الملاحة</string>
     </resources>
