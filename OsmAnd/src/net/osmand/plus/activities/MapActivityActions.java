@@ -73,6 +73,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -256,7 +257,7 @@ public class MapActivityActions implements DialogProvider {
 					v = activity.getLayoutInflater().inflate(layout, null);
 					int vl = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, activity.getResources()
 							.getDisplayMetrics());
-					v.findViewById(R.id.icon).setLayoutParams(new LayoutParams(vl, vl));
+					v.findViewById(R.id.icon).setLayoutParams(new LinearLayout.LayoutParams(vl, vl));
 				}
 				ImageView icon = (ImageView) v.findViewById(R.id.icon);
 				FavouritePoint fp = points.get(position);
