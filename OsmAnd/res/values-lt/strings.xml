@@ -1511,13 +1511,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="destination_point">Kelionės tikslas %1$s</string>
     <string name="context_menu_item_destination_point">Nustatyti kelionės tikslu</string>
     <string name="map_widget_fps_info">Kadrai/s info</string>
-	<string name="driving_region_descr">Pasirinkite vairavimo regioną: JAV, Europa, Didžioji britanija, Azija ir kt.</string>
+	<string name="driving_region_descr">Pasirinkite vairavimo regioną: JAV, Europa, Didžioji britanija, Azija ir kitos</string>
 	<string name="driving_region">Vairavimo regionas</string>
 	<string name="driving_region_japan">Japonija</string>
 	<string name="driving_region_us">JAV</string>
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa ir Azija</string>
-	<string name="driving_region_uk">JK, Indija, Australija ir kt.</string>
+	<string name="driving_region_uk">JK, Indija, Australija ir kitos</string>
 	<string name="osmodroid_mode_on">Išjungti OsMoDroid</string>    
     <string name="osmodroid_mode_off">Įjungti OsMoDroid</string>
     <string name="announce_gpx_waypoints">Pranešti apie GPX tarpinius taškus</string>
@@ -1756,7 +1756,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
 	<string name="arrival_distance">Pranešimas apie atvykimą</string>
     <string name="arrival_distance_descr">Kada anksti turi būti pranešama apie atvykimą?</string>
-    <string name="osmo_io_error">OsMo prisijungimo problema : </string>
+    <string name="osmo_io_error">"OsMo prisijungimo problema: "</string>
     <string name="osmo_mode_on">Sustabdyti OsMo sesiją</string>    
     <string name="osmo_mode_off">Paleisti OsMo sesiją</string>
     
