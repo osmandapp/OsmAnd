@@ -1897,4 +1897,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder</string>
 	<string name="show_zoom_buttons_navigation_descr">Vis zoom-knapperne under navigation</string>
     <string name="show_zoom_buttons_navigation">Vis zoom-knapperne</string>
+    <string name="visible_element">Synlig</string>
     </resources>
