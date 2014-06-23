@@ -1888,4 +1888,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="show_zoom_buttons_navigation">Mostra i pulsanti dello zoom</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione</string>
     <string name="visible_element">Visibile</string>
+    <string name="sort_by_distance">Ordina per distanza</string>
+    <string name="sort_by_name">Ordina per nome</string>
     </resources>
