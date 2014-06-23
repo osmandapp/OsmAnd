@@ -1889,4 +1889,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="layer_amenity_label">Popisy bodov</string>
     <string name="show_zoom_buttons_navigation_descr">Zobraziť tlačidlá priblíženia počas navigácie</string>
     <string name="show_zoom_buttons_navigation">Zobraziť tlačidlá priblíženia</string>
+    <string name="sort_by_distance">Zoradiť podľa vzdialenosti</string>
+    <string name="sort_by_name">Zoradiť podľa názvu</string>
+    <string name="visible_element">Viditeľný</string>
     </resources>
