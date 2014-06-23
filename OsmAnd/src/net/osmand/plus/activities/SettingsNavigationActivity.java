@@ -101,6 +101,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		speakAlarms = (Preference) screen.findPreference("speak_routing_alarms");
 		speakAlarms.setOnPreferenceClickListener(this);
 		
+		Float[] arrivalValues = new Float[] {1.5f, 1f, 0.5f, 0.25f} ;
+		String[] arrivalNames = getResources().getStringArray(R.array.arrival_distance_factors);
+		registerListPreference(settings.ARRIVAL_DISTANCE_FACTOR, screen, arrivalNames, arrivalValues);
+		
 		profileDialog();
 	}
 	
