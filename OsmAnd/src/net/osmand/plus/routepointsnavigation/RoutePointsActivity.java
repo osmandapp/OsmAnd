@@ -3,6 +3,7 @@ package net.osmand.plus.routepointsnavigation;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
@@ -80,7 +81,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 				SelectedRouteGpxFile sgpx = plugin.getCurrentRoute();
 				if (!sgpx.getCurrentPoints().isEmpty() && 
 						!sgpx.getCurrentPoints().get(0).isNextNavigate){
-					sgpx.naviateToNextPoint();
+					sgpx.navigateToNextPoint();
 				}
 				prepareView();
 				return false;
@@ -286,7 +287,9 @@ public class RoutePointsActivity extends OsmandListActivity {
 			return true;
 		} else if (item.getItemId() == NAVIGATE_DIALOG_ID){
 			app.getSettings().navigateDialog();
-			MapActivity.launchMapActivityMoveToTop(getMyApplication());
+			Intent intent = new Intent(this, app.getAppCustomization().getMapActivity());
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
