@@ -1608,12 +1608,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="navigation_intent_invalid">Format invalide : %s</string>
 <string name="arrival_distance">Annonce de l\'arrivée</string>
 <string name="arrival_distance_descr">Choisir à quel moment est annoncée l\'arrivée à destination</string>
-<string-array name="arrival_distance_factors">
-<item>Précoce</item>
-<item>Normale</item>
-<item>Tardive</item>
-<item>Dans les derniers mètres</item>
-</string-array>
 <string name="share_fav">Partager</string>
 <string name="share_fav_subject">Favoris partagés via OsmAnd</string>
 <string name="use_points_as_intermediates">Calculer un intinéraire entre des points</string>
@@ -1734,4 +1728,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="route_descr_destination">Destination</string>
     <string name="show_zoom_buttons_navigation_descr">Afficher les boutons de zoom pendant la navigation</string>
     <string name="show_zoom_buttons_navigation">Afficher les boutons de zoom</string>
+    <string name="visible_element">Visible</string>
     </resources>
