@@ -82,7 +82,7 @@
 	</target>
 	
 	<target name="native-legacy-libs-jar" depends="compile">
-		<exec command="bash collect_libs.sh" failonerror="true">
+		<exec command="bash collect_legacy_libs.sh" failonerror="true">
 		</exec>
 		<antcall target="jar" />
 	</target>
