@@ -172,12 +172,14 @@ public class RoutePointsActivity extends OsmandListActivity {
 			} else {
 				convertView.setBackgroundColor(Color.TRANSPARENT);
 			}
-			
+
 			if (point.isVisited()) {
 				holder.image.setImageResource(R.drawable.ic_action_ok_dark);
 				holder.name.setTextColor(getResources().getColor(R.color.osmbug_closed));
 				holder.dateOrDistance.setTextColor(getResources().getColor(R.color.color_unknown));
 				holder.dateOrDistance.setText(point.getTime());
+				holder.dateOrDistance.setTextSize(14);
+
 			} else {
 				if (point.isNextNavigate()) {
 					holder.image.setImageResource(R.drawable.ic_action_signpost_dark);
@@ -191,6 +193,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 				}
 				holder.name.setTextColor(getResources().getColor(R.color.color_update));
 				holder.dateOrDistance.setTextColor(getResources().getColor(R.color.color_distance));
+				holder.dateOrDistance.setTextSize(20);
 			}
 			return convertView;
 		}
