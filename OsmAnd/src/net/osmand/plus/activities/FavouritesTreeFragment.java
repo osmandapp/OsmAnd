@@ -128,7 +128,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 		favouritesAdapter.synchronizeGroups();
 
 		if(favouritesAdapter.getGroupCount() > 0 && 
-				"".equals(favouritesAdapter.getGroup(0))) {
+				"".equals(favouritesAdapter.getGroup(0).name)) {
 			getListView().expandGroup(0);
 		}
 
