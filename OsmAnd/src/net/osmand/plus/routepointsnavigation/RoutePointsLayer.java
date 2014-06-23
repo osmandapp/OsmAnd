@@ -87,7 +87,7 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 						plugin.getCurrentRoute().navigateToPoint(point);
 						plugin.saveGPXAsync();
 					} else if (itemId == R.string.navigate_to_next){
-						plugin.getCurrentRoute().naviateToNextPoint();
+						plugin.getCurrentRoute().navigateToNextPoint();
 						plugin.saveGPXAsync();
 					}
 					map.refreshMap();
