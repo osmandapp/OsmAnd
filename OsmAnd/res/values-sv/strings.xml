@@ -1591,4 +1591,5 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="color_green">grön</string>
 	
     <string name="osmodroid_unseek">Sluta söka objekt</string>
+    <string name="visible_element">Synlig</string>
     </resources>
