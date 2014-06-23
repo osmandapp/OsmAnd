@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">عرضإظهار</string>
-    <string name="av_def_action_picture">التقاط صورةالتقاط صورة</string>
+    <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
     <string name="av_def_action_audio">تسجيل الصوت</string>
@@ -31,27 +31,27 @@
     <string name="map_view">خريطة</string>
     <string name="prefer_motorways">تفضل الطرق السريعة</string>
 	<string name="prefer_in_routing_title">فضّل…</string>
-	<string name="prefer_in_routing_descr">تفضل الطرق السريعة</string>
+	<string name="prefer_in_routing_descr">فضّل الطرق السريعة</string>
     <string name="max_speed_none">لا شيء</string>
     <string name="index_name_openmaps">فتح خرائط الاتحاد الأوروبي</string>
     <string name="dist_control_start">بداية</string>
-    <string name="local_indexes_cat_av">الصوت / الفيديو البيانات</string>
+    <string name="local_indexes_cat_av">بيانات الصوت / الفيديو</string>
     <string name="stop_routing_confirm">هل أنت متأكد أنك تريد إيقاف الملاحة؟</string>
     <string name="clear_dest_confirm">هل أنت متأكد أنك تريد مسح نقطة المقصد؟</string>
     <string name="precise_routing_mode">التوجيه الدقيق (ألفا)</string>
     <string name="recording_context_menu_precord">التقاط صورة</string>
-    <string name="dropbox_plugin_name">دروببوإكس البرنامج المساعد</string>
+    <string name="dropbox_plugin_name">ملحق دروب بوكس</string>
     <string name="av_def_action_choose">حدد بناء على طلبها</string>
     <string name="recording_error">حدث خطأ أثناء التسجيل.. </string>
     <string name="recording_delete_confirm">هل تريد إزالة هذا التسجيل؟</string>
     <string name="recording_unavailable">غير متاح</string>
-    <string name="recording_can_not_be_played">لا يمكن أن تؤديه تسجيل</string>
+    <string name="recording_can_not_be_played">تعذر تشغيل التسجيل</string>
     <string name="recording_context_menu_delete">حذف تسجيل</string>
-    <string name="recording_context_menu_play">لعب</string>
+    <string name="recording_context_menu_play">شغّل</string>
     <string name="recording_default_name">تسجيل</string>
     <string name="av_control_stop">توقف</string>
     <string name="av_control_start">بداية</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd المساعد لخطوط كفاف متواجد حاليا</string>
+    <string name="osmand_srtm_short_description_80_chars">ملحق OsmAnd للخطوط المحيطية بدون اتصال</string>
     
     <string name="map_widget_distancemeasurement">قياس المسافة</string>
     <string name="monitoring_control_stop">توقف</string>
@@ -246,14 +246,14 @@
     <string name="other_location">أخرى</string>
     <string name="install_paid">النسخة الكاملة</string>
     <string name="cancel_navigation">توقف الملاحة</string>
-    <string name="clear_destination">المقصد واضح</string>
-    <string name="download_using_mobile_internet">حاليا واي فاي غير متصل. هل تريد متابعة تحميل مع اتصال الإنترنت الحالية؟</string>
+    <string name="clear_destination">امح الهدف</string>
+    <string name="download_using_mobile_internet">واي فاي غير متصل حاليا. هل تريد متابعة التنزيل بواسطة اتصال الإنترنت الحالي؟</string>
     <string name="street_name">شارع</string>
 	<string name="hno">رقم البيت</string>
     <string name="website">الموقع</string>
 	<string name="phone">هاتف</string>
     <string name="contribution_activity">تثبيت الإصدار</string>
-    <string name="accessibility_options">خيارات الوصول</string>
+    <string name="accessibility_options">خيارات الإتاحة</string>
     <string name="select_address_activity">حدد عنوان</string>
     <string name="default_buttons_other_actions">إجراءات أخرى</string>
     <string name="edit_filter_save_as_menu_item">حفظ باسم</string>
@@ -342,9 +342,9 @@
     <string name="available_downloads_left">توفر %1$d ملفات للتنزيل</string>
     <string name="cancel_route">ألغ المسار</string>
     <string name="monitoring_settings">خدمات التسجيل ووضعية النوم</string>
-    <string name="monitoring_settings_descr">قم بإعداد كيفية تسجيل الرحلات و تمكين وضعية النوم</string>
+    <string name="monitoring_settings_descr">قم بضبط كيفية تسجيل الرحلات و تمكين وضعية النوم</string>
     <string name="osmand_monitoring_plugin_name">خدمات التسجيل ووضعية النوم</string>
-    <string name="choose_osmand_theme_descr">اختار سمة التطبيق</string>
+    <string name="choose_osmand_theme_descr">اختر سمة التطبيق</string>
     <string name="choose_osmand_theme">سمة التطبيق</string>
     <string name="favourites_list_activity">اختار تفضيلة</string>
     <string name="local_openstreetmap_act_title">تغييرات OSM</string>
@@ -352,7 +352,7 @@
         \n مسار GPX الحالي</string>
 	<string name="intermediate_points_change_order">تغيير الفرز</string>
     <string name="recording_is_recorded">بدأ تسجيل الصوت / الفيديو. لوقفه اضغط على ودجة AV.</string>
-    <string name="recording_open_external_player">افتح مشغل خارجي</string>
+    <string name="recording_open_external_player">افتح مشغلًا خارجيًا</string>
     <string name="recording_context_menu_arecord">خذ ملاحظة صوتية</string>
     <string name="recording_context_menu_vrecord">خذ ملاحظة فيديو</string>
     <string name="layer_recordings">طبقة التسجيل</string>
@@ -393,7 +393,7 @@
     <string name="osmand_background_plugin_description">يظهر الإعدادات لتمكين تتبع والملاحة في وضعية السكون ( الشاشة مغلقة ) عبر الاستيقاظ بشكل دوري لجهاز GPS.</string>
     <string name="precise_routing_mode_descr">تمكين التوجيه الدقيق لحساب المسارات بدقة دون أخطاء. إنه محدود جدا من خلال المسافة ولا يستخدم مكتبة أصلية.</string>
     <string name="recording_photo_description">صورة %1$s من %2$s</string>
-    <string name="dropbox_plugin_description">ملحق دروب بوكس يسمح بمزامنة مسارات و الملاحظات الصوتية / الفيديو مع حسابك في دروب بوكس.</string>
+    <string name="dropbox_plugin_description">ملحق دروب بوكس يسمح بمزامنة المسارات و الملاحظات الصوتية والمرئية مع حسابك في دروب بوكس.</string>
     <string name="av_video_format_descr">حدد تنسيق الفيديو الناتج</string>
     <string name="av_video_format">تنسيق الفيديو الناتج</string>
     <string name="av_use_external_recorder_descr">استخدام مسجل نظام للفيديو</string>
@@ -509,8 +509,8 @@
     <string name="access_mark_final_location_first">نمط الإتاحة: اختر وجهتك أولًا رجاءً</string> 
     <string name="av_photo_play_sound">شغّل صوتًا عند التقاط صورة</string>
 	<string name="use_magnetic_sensor">استخدم الاستشعار المغناطيسي</string>
-    <string name="av_widget_action_descr">حدد عمل المتحكم الافتراضي</string>
-    <string name="av_widget_action">عمل المتحكم الافتراضي</string>
+    <string name="av_widget_action_descr">حدد عمل الودجة الافتراضي</string>
+    <string name="av_widget_action">عمل الودجة الافتراضي</string>
     <string name="osmand_parking_position_description">مكان موقف سيارتك. %1$s</string>
 	<string name="osmand_parking_position_description_add">لأخذ السيارة من:</string>
 	<string name="osmand_parking_pm">م</string>
@@ -623,7 +623,7 @@
 		\n\t* حلّ العديد من العلل
     </string>
     <string name="local_indexes_cat_srtm">بيانات الخطوط المحيطية</string>
-    <string name="srtm_paid_version_msg">فكّر من فضلك في شراء ملحق الخطوط المحيطية من السّوق لدعم مزيد من التّطوير.</string>
+    <string name="srtm_paid_version_msg">فكّر من فضلك في شراء ملحق الخطوط المحيطية من السّوق لدعم المزيد من التّطوير.</string>
     <string name="srtm_paid_version_title">ملحق الخطوط المحيطية</string>
     <string name="recording_playing">تم تشغيل صوت من التّسجيل المحدد.\n%1$s</string>
     <string name="zxing_barcode_scanner_not_found">برنامج ZXing للبحث عن الباركود غيرُ مثبّت. أأبحث في السّوق؟</string>
