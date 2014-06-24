@@ -1592,4 +1592,6 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	
     <string name="osmodroid_unseek">Sluta söka objekt</string>
     <string name="visible_element">Synlig</string>
+    <string name="sort_by_distance">Sortera efter avstånd</string>
+    <string name="sort_by_name">Sortera efter namn</string>
     </resources>

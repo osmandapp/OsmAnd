@@ -255,9 +255,11 @@ public class MapActivityActions implements DialogProvider {
 				View v = convertView;
 				if (v == null) {
 					v = activity.getLayoutInflater().inflate(layout, null);
-					int vl = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, activity.getResources()
+					int vl = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, activity.getResources()
 							.getDisplayMetrics());
-					v.findViewById(R.id.icon).setLayoutParams(new LinearLayout.LayoutParams(vl, vl));
+					final LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(vl, vl);
+					ll.setMargins(vl / 4, vl / 4, vl / 4, vl / 4);
+					v.findViewById(R.id.icon).setLayoutParams(ll);
 				}
 				ImageView icon = (ImageView) v.findViewById(R.id.icon);
 				FavouritePoint fp = points.get(position);

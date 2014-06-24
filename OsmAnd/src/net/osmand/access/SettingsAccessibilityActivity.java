@@ -84,10 +84,6 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 			cat.addPreference(createCheckBoxPreference(settings.ACCESSIBILITY_EXTENSIONS, R.string.accessibility_extensions,
 					R.string.accessibility_extensions));
 		}
-
-		Float[] arrivalValues = new Float[] {1.5f, 1f, 0.5f, 0.25f} ;
-		String[] arrivalNames = getResources().getStringArray(R.array.arrival_distance_factors);
-		cat.addPreference(createListPreference(settings.ARRIVAL_DISTANCE_FACTOR, arrivalNames, arrivalValues, R.string.arrival_distance, R.string.arrival_distance_descr));
     }
 
 

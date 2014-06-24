@@ -80,6 +80,12 @@
 		</exec>
 		<antcall target="jar" />
 	</target>
+	
+	<target name="native-legacy-libs-jar" depends="compile">
+		<exec command="bash collect_legacy_libs.sh" failonerror="true">
+		</exec>
+		<antcall target="jar" />
+	</target>
 
 	<target name="jar" depends="compile">
 		<manifestclasspath property="lib.list" jarfile="OsmAnd-core.jar">
