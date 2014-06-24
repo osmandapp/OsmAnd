@@ -1862,4 +1862,6 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="show_zoom_buttons_navigation_descr">Mostra els botons de zoom mentre la navegació</string>
     <string name="show_zoom_buttons_navigation">Mostra els botons de zoom</string>
     <string name="visible_element">Visible</string>
+    <string name="sort_by_distance">Ordenar per distància</string>
+    <string name="sort_by_name">Ordenar per nom</string>
     </resources>
