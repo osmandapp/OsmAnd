@@ -105,6 +105,8 @@ public class GeoIntentActivity extends OsmandListActivity {
                 {
                     Thread.sleep(200);
                 }
+				String scheme = intent.getScheme();
+				Uri data = intent.getData();
                 return extract(intent.getScheme(), intent.getData()).execute();
             }
             catch (Exception e)
@@ -312,8 +314,15 @@ public class GeoIntentActivity extends OsmandListActivity {
                 //geo:47.6,-122.3?z=11
                 //allow for http://tools.ietf.org/html/rfc5870 (geo uri) , just ignore everything after ';'
                 final String pattern = "([\\-0-9.]+),([\\-0-9.]+)(?:,([\\-0-9.]+))?(?:\\?z=([0-9]+))?(?:;.*)?";
+				int indexQ = schemeSpecific.indexOf("&q");
+				final Matcher matcher;
+				if (indexQ != -1){
+					final String schemeQ = schemeSpecific.substring(0,indexQ);
+					matcher = Pattern.compile(pattern).matcher(schemeQ);
+				} else {
+					matcher = Pattern.compile(pattern).matcher(schemeSpecific);
+				}
 
-                final Matcher matcher = Pattern.compile(pattern).matcher(schemeSpecific);
                 if (matcher.matches())
                 {
                     final double lat = Double.valueOf(matcher.group(1));
