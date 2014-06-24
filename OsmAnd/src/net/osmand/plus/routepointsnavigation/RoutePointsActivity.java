@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.util.TypedValue;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
@@ -178,7 +179,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 				holder.name.setTextColor(getResources().getColor(R.color.osmbug_closed));
 				holder.dateOrDistance.setTextColor(getResources().getColor(R.color.color_unknown));
 				holder.dateOrDistance.setText(point.getTime());
-				holder.dateOrDistance.setTextSize(14);
+				holder.dateOrDistance.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
 			} else {
 				if (point.isNextNavigate()) {
@@ -193,7 +194,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 				}
 				holder.name.setTextColor(getResources().getColor(R.color.color_update));
 				holder.dateOrDistance.setTextColor(getResources().getColor(R.color.color_distance));
-				holder.dateOrDistance.setTextSize(20);
+				holder.dateOrDistance.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 			}
 			return convertView;
 		}
