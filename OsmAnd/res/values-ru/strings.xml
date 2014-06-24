@@ -1722,4 +1722,6 @@ OsmAnd - открытый источник и активно развается.
     <string name="gpx_selection_route_points">%1$s \nМаршрутных точек %2$s</string>
     <string name="show_zoom_buttons_navigation_descr">Показывать кнопки изменения масштаба во время навигации</string>
     <string name="show_zoom_buttons_navigation">Показывать кнопки изменения масштаба</string>
+    <string name="sort_by_distance">Сортировать по дистанции</string>
+    <string name="sort_by_name">Сортировать по имени</string>
     </resources>
