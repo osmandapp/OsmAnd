@@ -317,7 +317,7 @@
 	</string>
   <string name="next_button">Suivant</string>
   <string name="previous_button">Précédent</string>
-  <string name="unit_of_length_descr">Sélectionner les unités de distance et vitesse à utiliser</string>
+  <string name="unit_of_length_descr">Sélectionner les unités de longueur et de vitesse</string>
   <string name="unit_of_length">Unités de mesure</string>
   <string name="si_mi_foots">Miles/pieds</string>
   <string name="si_mi_yard">Miles/yards</string>
@@ -1729,4 +1729,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="show_zoom_buttons_navigation_descr">Afficher les boutons de zoom pendant la navigation</string>
     <string name="show_zoom_buttons_navigation">Afficher les boutons de zoom</string>
     <string name="visible_element">Visible</string>
+    <string name="sort_by_distance">Trier par distance</string>
+    <string name="sort_by_name">Trier par nom</string>
     </resources>
