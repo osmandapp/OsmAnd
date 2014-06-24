@@ -105,6 +105,8 @@ public class GeoIntentActivity extends OsmandListActivity {
                 {
                     Thread.sleep(200);
                 }
+				String scheme = intent.getScheme();
+				Uri data = intent.getData();
                 return extract(intent.getScheme(), intent.getData()).execute();
             }
             catch (Exception e)
