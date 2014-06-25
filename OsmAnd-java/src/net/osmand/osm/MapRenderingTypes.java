@@ -253,6 +253,7 @@ public class MapRenderingTypes {
 			MapRulType parent = rType;
 			rType = MapRulType.createAdditional(tag, val);
 			rType.additional = true;
+			rType.order = parent.order;
 			rType.applyToTagValue = parent.applyToTagValue;
 			rType.onlyMap = parent.onlyMap;
 			rType.onlyPoi = parent.onlyPoi;
@@ -373,15 +374,17 @@ public class MapRenderingTypes {
 			parser.setInput(is, "UTF-8");
 			String poiParentCategory = null;
 			String poiParentPrefix  = null;
+			String order = null;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
 					if (name.equals("category")) { //$NON-NLS-1$
 						poiParentCategory = parser.getAttributeValue("","poi_category");
 						poiParentPrefix = parser.getAttributeValue("","poi_prefix");
+						order = parser.getAttributeValue("","order");
 						parseCategoryFromXml(parser, poiParentCategory, poiParentPrefix);
 					} else if (name.equals("type")) {
-						parseTypeFromXML(parser, poiParentCategory, poiParentPrefix);
+						parseTypeFromXML(parser, poiParentCategory, poiParentPrefix, order);
 					} else if (name.equals("routing_type")) {
 						parseRouteTagFromXML(parser);
 					}
@@ -407,11 +410,11 @@ public class MapRenderingTypes {
 	protected void parseRouteTagFromXML(XmlPullParser parser) {
 	}
 
-	protected MapRulType parseTypeFromXML(XmlPullParser parser, String poiParentCategory, String poiParentPrefix) {
-		return parseBaseRuleType(parser, poiParentCategory, poiParentPrefix, true);
+	protected MapRulType parseTypeFromXML(XmlPullParser parser, String poiParentCategory, String poiParentPrefix, String parentOrder) {
+		return parseBaseRuleType(parser, poiParentCategory, poiParentPrefix, parentOrder, true);
 	}
 
-	protected MapRulType parseBaseRuleType(XmlPullParser parser, String poiParentCategory, String poiParentPrefix, boolean filterOnlyMap) {
+	protected MapRulType parseBaseRuleType(XmlPullParser parser, String poiParentCategory, String poiParentPrefix, String parentOrder, boolean filterOnlyMap) {
 		String tag = parser.getAttributeValue("", "tag");
 		String value = parser.getAttributeValue("", "value");
 		String additional = parser.getAttributeValue("", "additional");
@@ -441,6 +444,12 @@ public class MapRenderingTypes {
 			if (rtype.targetTagValue == null) {
 				throw new RuntimeException("Illegal target tag/value " + targetTag + " " + targetValue + " for " + tag + " / " + value);
 			}
+		}
+		String order = parser.getAttributeValue("", "order");
+		if(!Algorithms.isEmpty(order)) {
+			rtype.order = Integer.parseInt(order);
+		} else if(!Algorithms.isEmpty(parentOrder)) {
+			rtype.order = Integer.parseInt(parentOrder);
 		}
 		String applyTo = parser.getAttributeValue("", "apply_to");
 		String applyValue = parser.getAttributeValue("", "apply_value");
@@ -643,6 +652,7 @@ public class MapRenderingTypes {
 		protected boolean additional;
 		protected boolean additionalText;
 		protected boolean main;
+		protected int order = 50;
 		protected Set<TagValuePattern> applyToTagValue = null;
 		
 		protected String poiPrefix;
@@ -684,6 +694,10 @@ public class MapRenderingTypes {
 		
 		public boolean isMap(){
 			return !onlyPoi;
+		}
+		
+		public int getOrder() {
+			return order;
 		}
 		
 		public static MapRulType createMainEntity(String tag, String value) {

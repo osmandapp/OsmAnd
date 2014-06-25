@@ -62,8 +62,9 @@ public class BinaryInspector {
 //				"-vaddress", "-vcities", "-vstreets", "-vstreetgroups","-vbuildings", 
 				//"-zoom=16",
 				//"-bbox=4,55,7,50", 
-				//"/home/victor/projects/osmand/osm-gen/Map.obf"
-				// "/home/victor/projects/osmand/osm-gen/Russia_bashkiria_asia_2.obf"
+//				"/home/victor/projects/osmand/osm-gen/Map.obf"
+//				 "/home/victor/projects/osmand/osm-gen/World_basemap_2_b.obf___"
+//					"/home/victor/projects/osmand/osm-gen/World_basemap_2.obf__"
 					});
 		} else {
 			in.inspector(args);
