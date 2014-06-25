@@ -1,5 +1,6 @@
 package net.osmand.binary;
 
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.render.RenderingRulesStorage;
@@ -13,6 +14,7 @@ public class BinaryMapDataObject {
 	protected int objectType = RenderingRulesStorage.POINT_RULES;
 	
 	protected TIntObjectHashMap<String> objectNames = null;
+	protected TIntArrayList namesOrder = null;
 	protected long id = 0;
 	
 	protected MapIndex mapIndex = null;
@@ -53,8 +55,10 @@ public class BinaryMapDataObject {
 	public void putObjectName(int type, String name){
 		if(objectNames == null){
 			objectNames = new TIntObjectHashMap<String>();
+			namesOrder = new TIntArrayList();
 		}
 		objectNames.put(type, name);
+		namesOrder.add(type);
 	}
 	
 	public int[][] getPolygonInnerCoordinates() {
@@ -139,6 +143,10 @@ public class BinaryMapDataObject {
 			
 		}
 		return 0;
+	}
+	
+	public TIntArrayList getNamesOrder() {
+		return namesOrder;
 	}
 	
 	public MapIndex getMapIndex() {

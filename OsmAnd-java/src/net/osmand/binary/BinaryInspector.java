@@ -58,11 +58,11 @@ public class BinaryInspector {
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
 				//"-vpoi",
-//				"-vmap", "-vmapobjects", 
+				"-vmap", "-vmapobjects", 
 //				"-vaddress", "-vcities", "-vstreets", "-vstreetgroups","-vbuildings", 
 				//"-zoom=16",
 				//"-bbox=4,55,7,50", 
-//				"/home/victor/projects/osmand/osm-gen/Map.obf"
+				"/home/victor/projects/osmand/osm-gen/Map.obf"
 //				 "/home/victor/projects/osmand/osm-gen/World_basemap_2_b.obf___"
 //					"/home/victor/projects/osmand/osm-gen/World_basemap_2.obf__"
 					});
@@ -652,19 +652,20 @@ public class BinaryInspector {
 			b.append("]");
 		}
 		TIntObjectHashMap<String> names = obj.getObjectNames();
-		if(names != null && !names.isEmpty()) {
+		TIntArrayList order = obj.getNamesOrder();
+		if (names != null && !names.isEmpty()) {
 			b.append(" Names [");
-			int[] keys = names.keys();
-			for(int j = 0; j<keys.length; j++){
-				if(j > 0) {
+			// int[] keys = names.keys();
+			for (int j = 0; j < order.size(); j++) {
+				if (j > 0) {
 					b.append(", ");
 				}
-				TagValuePair pair = obj.getMapIndex().decodeType(keys[j]);
-				if(pair == null) {
-					throw new NullPointerException("Type " + keys[j] + "was not found");
+				TagValuePair pair = obj.getMapIndex().decodeType(order.get(j));
+				if (pair == null) {
+					throw new NullPointerException("Type " + order.get(j) + "was not found");
 				}
-				b.append(pair.toSimpleString()+"("+keys[j]+")");
-				b.append(" - ").append(names.get(keys[j]));
+				b.append(pair.toSimpleString() + "(" + order.get(j) + ")");
+				b.append(" - ").append(names.get(order.get(j)));
 			}
 			b.append("]");
 		}

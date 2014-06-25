@@ -75,8 +75,10 @@ public class MapRenderingTypes {
 			types = new LinkedHashMap<String, MapRulType>();
 			typeList.clear();
 			nameRuleType = MapRulType.createText("name");
+			nameRuleType.order = 40;
 			registerRuleType(nameRuleType);
 			nameEnRuleType = MapRulType.createText("name:en");
+			nameEnRuleType.order = 45;
 			registerRuleType(nameEnRuleType);
 			init();
 		}

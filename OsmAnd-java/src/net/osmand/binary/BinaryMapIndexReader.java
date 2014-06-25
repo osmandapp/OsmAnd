@@ -1079,6 +1079,7 @@ public class BinaryMapIndexReader {
 		List<TIntArrayList> innercoordinates = null;
 		TIntArrayList additionalTypes = null;
 		TIntObjectHashMap<String> stringNames = null;
+		TIntArrayList stringOrder = null;
 		long id = 0;
 		
 		boolean loop = true; 
@@ -1141,12 +1142,14 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.MapData.STRINGNAMES_FIELD_NUMBER:
 				stringNames = new TIntObjectHashMap<String>();
+				stringOrder = new TIntArrayList();
 				sizeL = codedIS.readRawVarint32();
 				old = codedIS.pushLimit(sizeL);
 				while (codedIS.getBytesUntilLimit() > 0) {
 					int stag = codedIS.readRawVarint32();
 					int pId = codedIS.readRawVarint32();
 					stringNames.put(stag, ((char)pId)+"");
+					stringOrder.add(stag);
 				}
 				codedIS.popLimit(old);
 				break;
@@ -1166,6 +1169,7 @@ public class BinaryMapIndexReader {
 		dataObject.area = area;
 		dataObject.coordinates = req.cacheCoordinates.toArray();
 		dataObject.objectNames = stringNames;
+		dataObject.namesOrder = stringOrder;
 		if (innercoordinates == null) {
 			dataObject.polygonInnerCoordinates = new int[0][0];
 		} else {
