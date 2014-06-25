@@ -261,11 +261,11 @@ public class GpxSelectionHelper {
 		return null;
 	}
 	
-	public void setGpxFileToDisplay(GPXFile... gpxs) {
+	public void setGpxFileToDisplay(boolean notShowNavigationDialog, GPXFile... gpxs) {
 		// special case for gpx current route
 		for(GPXFile gpx : gpxs) {
 			boolean show = true;
-			selectGpxFileImpl(gpx, show);
+			selectGpxFileImpl(gpx, show, notShowNavigationDialog);
 		}
 		saveCurrentSelections();
 	}
@@ -283,7 +283,7 @@ public class GpxSelectionHelper {
 							p.startTask(getString(R.string.loading_smth, fl.getName()), -1);
 						}
 						GPXFile gpx = GPXUtilities.loadGPXFile(app, fl);
-						selectGpxFile(gpx, true);
+						selectGpxFile(gpx, true, false);
 					} else if(obj.has(CURRENT_TRACK)) {
 						selectedGPXFiles.add(savingTrackHelper.getCurrentTrack());
 					}
@@ -298,7 +298,7 @@ public class GpxSelectionHelper {
 	private void saveCurrentSelections() {
 		JSONArray ar = new JSONArray();
 		for(SelectedGpxFile s : selectedGPXFiles) {
-			if(s.gpxFile != null) {
+			if(s.gpxFile != null && !s.notShowNavigationDialog) {
 				JSONObject obj = new JSONObject();
 				try {
 					if(!Algorithms.isEmpty(s.gpxFile.path)) {
@@ -315,11 +315,12 @@ public class GpxSelectionHelper {
 		app.getSettings().SELECTED_GPX.set(ar.toString());
 	}
 
-	private void selectGpxFileImpl(GPXFile gpx, boolean show) {
+	private void selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
 		boolean displayed = false;
 		SelectedGpxFile sf ;
 		if(gpx.showCurrentTrack) {
 			sf = savingTrackHelper.getCurrentTrack();
+			sf.notShowNavigationDialog = notShowNavigationDialog;
 			displayed = selectedGPXFiles.contains(sf);
 		} else {
 			sf = getSelectedFileByPath(gpx.path);
@@ -327,6 +328,7 @@ public class GpxSelectionHelper {
 			if(show && sf == null) {
 				sf = new SelectedGpxFile();
 				sf.setGpxFile(gpx);
+				sf.notShowNavigationDialog = notShowNavigationDialog;
 			}
 		}
 		if(displayed != show) {
@@ -338,8 +340,8 @@ public class GpxSelectionHelper {
 		}
 	}
 	
-	public void selectGpxFile(GPXFile gpx, boolean show) {
-		selectGpxFileImpl(gpx, show);
+	public void selectGpxFile(GPXFile gpx, boolean show, boolean showNavigationDialog) {
+		selectGpxFileImpl(gpx, show, showNavigationDialog);
 		saveCurrentSelections();
 	}
 	
@@ -353,6 +355,8 @@ public class GpxSelectionHelper {
 	
 	
 	public static class SelectedGpxFile {
+		public boolean notShowNavigationDialog = false;
+
 		private boolean showCurrentTrack;
 		private GPXFile gpxFile;
 		private int color;
@@ -396,6 +400,7 @@ public class GpxSelectionHelper {
 		public int getColor() {
 			return color;
 		}
+
 	}
 	
 	public enum GpxDisplayItemType {

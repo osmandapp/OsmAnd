@@ -53,6 +53,9 @@ public class MapNavigateControl extends MapControls {
 	
 	public void startCounter() {
 		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		if(settings.DELAY_TO_START_NAVIGATION.get() <= 0) {
+			return;
+		}
 		if (startCounter <= 0) {
 			startCounter = System.currentTimeMillis() + settings.DELAY_TO_START_NAVIGATION.get() * 1000;
 			delayStart = new Runnable() {
