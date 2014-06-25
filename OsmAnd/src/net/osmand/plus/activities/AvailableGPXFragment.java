@@ -422,7 +422,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						if (loc != null) {
 							settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 							e = false;
-							getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(info.gpx);
+							getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(false, info.gpx);
 							MapActivity.launchMapActivityMoveToTop(getActivity());
 						}
 					}
@@ -887,7 +887,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		protected void onProgressUpdate(GpxInfo... values) {
 			for(GpxInfo g : values) {
 				final boolean visible = selectedItems.contains(g);
-				selectedGpxHelper.selectGpxFile(g.gpx, visible);
+				selectedGpxHelper.selectGpxFile(g.gpx, visible, false);
 				if(visible && toShow == null) {
 					toShow = g.gpx.findPointToShow();
 				}

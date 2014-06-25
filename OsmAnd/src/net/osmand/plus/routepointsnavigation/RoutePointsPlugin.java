@@ -99,7 +99,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
-			routeStepsControl = createRouteStepsInfoControl(activity, mapInfoLayer.getPaintSubText(), mapInfoLayer.getPaintSubText());
+			routeStepsControl = createRouteStepsInfoControl(activity, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
 			mapInfoLayer.getMapInfoControls().registerSideWidget(routeStepsControl,
 					R.drawable.widget_signpost, R.string.map_widget_route_points, "route_steps", false, 8);
 			mapInfoLayer.recreateControls();
@@ -195,8 +195,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 		public String getDistance(RoutePoint rp) {
 			double d = MapUtils.getDistance(rp.getPoint(), getPoint());
-			String distance = OsmAndFormatter.getFormattedDistance((float) d, app);
-			return distance;
+			return OsmAndFormatter.getFormattedDistance((float) d, app);
 		}
 
 		public String getTime() {
