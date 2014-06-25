@@ -1562,7 +1562,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="selected_gpx_info_show">\n\nTryck och håll för att se på karta</string>
     <string name="delay_navigation_start">Starta navigering med fördröjning</string>
     <string name="selected">valda</string>
-    <string name="gpx_split_interval">Välj split-intervall</string>
+    <string name="gpx_split_interval">Split-intervall</string>
     <string name="gpx_info_subtracks">Underspår: %1$s </string>
 	<string name="gpx_info_waypoints">Waypoints: %1$s </string>
 	<string name="gpx_info_distance">Avstånd: %1$s (%2$s punkter) </string>
