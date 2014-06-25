@@ -139,7 +139,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				if (resId == R.string.show_gpx_route) {
 					OsmandSettings settings = getMyApplication().getSettings();
 					settings.setMapLocationToShow(gpxDisplayItem.locationStart.lat, gpxDisplayItem.locationStart.lon,
-							settings.getLastKnownMapZoom(), gpxDisplayItem.name);
+							settings.getLastKnownMapZoom(), Html.fromHtml(gpxDisplayItem.name).toString());
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			}
@@ -266,7 +266,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(!vis.isChecked()) {
-					getMyApplication().getSelectedGpxHelper().selectGpxFile(model.getGpx(), false);
+					getMyApplication().getSelectedGpxHelper().selectGpxFile(model.getGpx(), false, false);
 					
 					SelectedGPXFragment.this.adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
 				} else {

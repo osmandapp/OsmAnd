@@ -77,7 +77,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			public boolean processResult(GPXUtilities.GPXFile[] result) {
 				final GPXFile gpx = result[0];
 				app.getSelectedGpxHelper().clearAllGpxFileToShow();
-				app.getSelectedGpxHelper().setGpxFileToDisplay(true, gpx);
+				app.getSelectedGpxHelper().selectGpxFile(gpx, true, true);
 				plugin.setCurrentRoute(gpx);
 				SelectedRouteGpxFile sgpx = plugin.getCurrentRoute();
 				if (!sgpx.getCurrentPoints().isEmpty() && 

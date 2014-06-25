@@ -390,7 +390,7 @@ public class MapActivityLayers {
 						locToShow = g.findPointToShow();
 					}
 				}
-				getApplication().getSelectedGpxHelper().setGpxFileToDisplay(false, result);
+				getApplication().getSelectedGpxHelper().setGpxFileToDisplay(result);
 				if(locToShow != null){
 					mapView.getAnimatedDraggingThread().startMoving(locToShow.lat, locToShow.lon, 
 							mapView.getZoom(), true);

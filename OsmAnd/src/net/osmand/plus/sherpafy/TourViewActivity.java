@@ -391,7 +391,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				if (gpx != null && gpx.findPointToShow() != null) {
 					WptPt p = gpx.findPointToShow();
 					getMyApplication().getSettings().setMapLocationToShow(p.lat, p.lon, 16, null);
-					getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(false, gpx);
+					getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(gpx);
 				}
 			}
 		}
