@@ -86,7 +86,6 @@ public abstract class OsmandPlugin {
 		if(Version.isRouteNavPluginInlined(app)) {
 			RoutePointsPlugin routePointsPlugin = new RoutePointsPlugin(app);
 			installedPlugins.add(routePointsPlugin);
-			enablePlugin(app, routePointsPlugin, true);
 		}
 
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));

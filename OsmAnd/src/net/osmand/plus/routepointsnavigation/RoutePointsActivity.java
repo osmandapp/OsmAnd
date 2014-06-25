@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.Paint;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
@@ -101,6 +103,10 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 	private void prepareView() {
 		TextView gpxName = (TextView) findViewById(R.id.gpx_name);
+		TextView visited = (TextView) findViewById(R.id.points_count);
+		String visitedString = "(" + plugin.getVisitedAllString() + ")";
+		visited.setText(visitedString);
+
 		SelectedRouteGpxFile route = plugin.getCurrentRoute();
 		String fileName;
 		if(route != null) {
@@ -108,7 +114,23 @@ public class RoutePointsActivity extends OsmandListActivity {
 		} else {
 			fileName = getString(R.string.rp_current_route_not_available);
 		}
-		SpannableString content = new SpannableString(fileName);
+		DisplayMetrics displaymetrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+		float screenWight = displaymetrics.widthPixels - visited.getPaint().measureText(visitedString) - 15;
+		Paint textPaint = gpxName.getPaint();
+		String name = fileName;
+		int i = fileName.length()-1;
+		for(;;){
+			float textSize = textPaint.measureText(name);
+			if (textSize < screenWight){
+				break;
+			}
+			name = fileName.substring(0, i);
+			i--;
+		}
+
+
+		SpannableString content = new SpannableString(name);
 		content.setSpan(new ClickableSpan() {
 
 			@Override
@@ -118,9 +140,6 @@ public class RoutePointsActivity extends OsmandListActivity {
 		}, 0, content.length(), 0);
 		gpxName.setText(content);
 		gpxName.setMovementMethod(LinkMovementMethod.getInstance());
-
-		TextView visited = (TextView) findViewById(R.id.points_count);
-		visited.setText("(" + plugin.getVisitedAllString() + ")");
 
 		adapter = new PointItemAdapter(this, R.layout.route_point_info,
 				route == null ? new ArrayList<RoutePoint>() :
@@ -294,6 +313,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			Intent intent = new Intent(this, app.getAppCustomization().getMapActivity());
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(intent);
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
