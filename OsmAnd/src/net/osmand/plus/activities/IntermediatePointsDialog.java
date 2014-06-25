@@ -254,7 +254,8 @@ public class IntermediatePointsDialog {
 					tv.setCompoundDrawablePadding(padding);
 					final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
 					ch.setVisibility(View.VISIBLE);
-					ch.setChecked(true);
+					ch.setOnCheckedChangeListener(null);
+					ch.setChecked(checkedIntermediates[position]);
 					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
