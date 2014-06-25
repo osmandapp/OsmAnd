@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
     <string name="poi_filter_emergency">Επείγοντα</string>
@@ -224,13 +225,13 @@
 	<string name="unknown_location">Η Θέση σας δεν είναι ακόμα γνωστή</string>
 	<string name="modify_transparency">﻿Τροποποίηση διαφάνειας (0 - διάφανο, 255 - αδιαφανές)</string>
 	<string name="confirm_interrupt_download">﻿Θέλετε να διακόψετε τη λήψη αρχείων;</string>
-	<string name="first_time_msg">Ευχαριστούμε που χρησιμοποιείτε το OsmAnd. Για πολλά χαρακτηριστικά αυτής της εφαρμογής χρειάζεστε μερικά τοπικά offline δεδομένα τα οποία μπορείτε να κατεβάσετε μέσω του \'Ρυθμίσεις\' → \'Διαχείριση δεδομένων\'. Μετά από αυτό θα μπορείτε να δείτε χάρτες, να εντοπίσετε διευθύνσεις, να ψάξετε Σημ. Ενδ. και να βρείτε δημόσιες μεταφορές.</string>    
+	<string name="first_time_msg">Ευχαριστούμε που χρησιμοποιείτε το OsmAnd. Για πολλά χαρακτηριστικά αυτής της εφαρμογής χρειάζεστε μερικά τοπικά offline δεδομένα τα οποία μπορείτε να κατεβάσετε μέσω του \'Ρυθμίσεις\' → \'Διαχείριση αρχείων χάρτη\'. Μετά από αυτό θα μπορείτε να δείτε χάρτες, να εντοπίσετε διευθύνσεις, να ψάξετε Σημ. Ενδ. και να βρείτε δημόσιες μεταφορές.</string>    
 	<string name="basemap_was_selected_to_download">Ο βασικός χάρτης είναι απαραίτητος για τη σωστή λειτουργία της εφαρμογής και επιλέχθηκε προς λήψη.</string>
 	<string name="select_index_file_to_download">Δεν βρέθηκε τίποτα. Εάν δεν μπορείτε να βρείτε την περιοχή σας, μπορείτε να τη φτιάξετε μόνοι σας (βλέπε http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online και πλακίδια χάρτες</string>
 	<string name="local_indexes_cat_map">Offline χάρτες (διανυσματικοί)</string>
 	
-	<string name="index_settings_descr">Λήψη χαρτών και διαχείριση εκτός σύνδεσης δεδομένων αποθηκευμένων στη συσκευή σας</string>
+	<string name="index_settings_descr">Λήψη και διαχείριση εκτός σύνδεσης αρχείων χαρτών αποθηκευμένων στη συσκευή σας</string>
 	<string name="map_online_plugin_is_not_installed">Ενεργοποιήστε το πρόσθετο για τους online χάρτες για να επιλέξετε διαφορετικές πηγές χάρτη</string>
 	<string name="map_online_data">Online και χάρτες πλακίδια</string>
 	<string name="map_online_data_descr">Χρήση online χαρτών (λήψη και φύλαξη πλακιδίων στην κάρτα SD)</string>
@@ -265,7 +266,7 @@
 	<string name="debugging_and_development">Ανάπτυξη του OsmAnd</string>
 	<string name="native_rendering">Εγγενής απεικόνιση</string>
 	<string name="test_voice_prompts">Δοκιμή φωνητικών εντολών</string>    
-	<string name="switch_to_raster_map_to_see">Δεν υπάρχουν offline διανυσματικοί χάρτες για αυτήν την τοποθεσία. Μπορείτε να κατεβάσετε έναν από τις Ρυθμίσεις (Διαχείριση Δεδομένων), ή αλλάξτε σε online χάρτες.</string>
+	<string name="switch_to_raster_map_to_see">Δεν υπάρχουν offline διανυσματικοί χάρτες για αυτήν την τοποθεσία. Μπορείτε να κατεβάσετε έναν από τις Ρυθμίσεις (Διαχείριση αρχείων χαρτών), ή αλλάξτε σε online χάρτες (ενεργοποιήστε το πρόσθετο online χάρτες για αυτό).</string>
 	<string name="tip_recent_changes_0_7_2_t">"Αλλαγές στην 0.7.2 :
 \n\t- Εγγενής απεικόνιση για όλες τις συσκευές
 \n\t- Επεξεργασία ΣΕ εκτός σύνδεσης
@@ -400,7 +401,7 @@
 	<string name="routing_settings">Πλοήγηση</string>
 	<string name="routing_settings_descr">Καθορίστε τις επιλογές πλοήγησης</string>
 	<string name="global_settings">Καθολικές Ρυθμίσεις</string>
-	<string name="index_settings">Διαχείριση Δεδομένων</string>
+	<string name="index_settings">Διαχείριση αρχείων χαρτών</string>
 	<string name="general_settings">Γενικές</string>
 	<string name="general_settings_descr">Διαμόρφωση οθόνης και κοινές ρυθμίσεις για την εφαρμογή</string>
 	<string name="global_app_settings">Καθολικές ρυθμίσεις εφαρμογής</string>
@@ -544,7 +545,7 @@
 	<string name="local_index_items_restored">%1$d από %2$d αντικείμενο(α) ενεργοποιήθηκαν επιτυχώς.</string>
 	<string name="local_index_no_items_to_do">Δεν υπάρχουν στοιχεία προς %1$s</string>
 	<string name="local_index_action_do">Πρόκειται να %1$s %2$s αντικείμενο(α). Συνέχεια?</string>
-	<string name="local_index_descr_title">Διαχείριση Δεδομένων</string>
+	<string name="local_index_descr_title">Διαχείριση αρχείων χαρτών</string>
 	<string name="local_index_mi_restore">Ενεργοποίηση</string>
 	<string name="local_index_mi_backup">Απενεργοποίηση</string>
 	<string name="local_index_mi_delete">Διαγραφή</string>
@@ -616,7 +617,7 @@
 	<string name="tip_favorites">Αγαπημένα Σημεία</string>
 	<string name="tip_favorites_t">Τα σημεία που χρησιμοποιούνται συχνά μπορούν να αποθηκευτούν ως Αγαπημένα, ως ακολούθως.
 		\n\nΣτο \'Χρήση τοποθεσίας\'του μενού περιβάλλοντος χάρτη για οποιοδήποτε σημείο, επιλέξτε \'Προσθήκη στα αγαπημένα\' και δώστε του κάποιο όνομα.
-		\n\nΜετά την αποθήκευση ενός Αγαπημένου, είναι προσβάσιμο μέσω του \'Μενού\' → \'Αγαπημένα\'. Πατώντας σε κάποια καταχώρηση της λίστας \'Αγαπημένα\' σας παρέχει επιλογές να το ορίσετε ως προορισμό, να το επεξεργαστείτε ή να το διαγράψετε.
+		\n\nΜετά την αποθήκευση ενός Αγαπημένου, είναι προσβάσιμο μέσω του \'Μενού\' → \'Τα Μέρη μου\'. Πατώντας σε κάποια καταχώρηση της λίστας \'Αγαπημένα\' σας παρέχει επιλογές να το ορίσετε ως προορισμό, να το επεξεργαστείτε ή να το διαγράψετε.
 		\n\nΓια να εμφανιστούν όλα τα Αγαπημένα κατευθείαν στο χάρτη, στην οθόνη χάρτη ενεργοποιήστε το επίπεδο \'Αγαπημένα\' στο \'Μενού\' → \'Επίπεδα χάρτη\'.
 	</string>
 	<string name="error_doing_search">Προέκυψε σφάλμα κατά την offline αναζήτηση</string>
@@ -1007,7 +1008,7 @@
 	<string name="exit_Button">Έξοδος</string>
 	<string name="map_Button">Χάρτης</string>
 	<string name="settings_Button">Ρυθμίσεις</string>
-	<string name="favorites_Button">Αγαπημένα</string>
+	<string name="favorites_Button">Τα Μέρη μου</string>
 	<string name="search_button">Αναζήτηση</string>
 	<string name="search_activity">Αναζήτηση</string>
 	<string name="searchpoi_activity">Επιλέξτε ΣΕ</string>
@@ -1113,7 +1114,7 @@
     <string name="add_as_last_destination_point">Προσθήκη ως τελευταίο σημείο διαδρομής</string>
     <string name="add_as_first_destination_point">Προσθήκη ως πρώτο σημείο διαδρομής</string>
     <string name="replace_destination_point">Αντικαταστήστε το σημείο προορισμού</string>
-    <string name="new_destination_point_dialog">Έχετε ήδη ορισμένο σημείο προορισμού.</string>
+    <string name="new_destination_point_dialog">Έχετε ήδη ορίσει το σημείο προορισμού.</string>
     <string name="target_point">Σημείο διαδρομής %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Προσθήκη ως τελευταίο σημείο διαδρομής</string>
     <string name="target_points">Σημεία διαδρομής</string>
@@ -1164,13 +1165,13 @@
     <string name="osmodroid_plugin_description">Το πρόσθετο OsMoDroid είναι μια επέκταση του OsmAnd για την εφαρμογή OsModroid για δυνατότητα online ιχνηλάτησης. Πληροφορίες σχετικά με την υπηρεσία είναι διαθέσιμες στο http://esya.ru.</string>
     <string name="download_select_map_types">Άλλοι χάρτες</string>
     <string name="index_srtm_ele">Ισοϋψείς γραμμές</string>
-    <string name="srtm_plugin_description">Διευκολύνει τη λήψη offline υψομετρικών γραμμών και ανάγλυφου (\'Ρυθμίσεις\' → \'Διαχείριση Δεδομένων\' → \'Λήψη\' → Επιλογή του επιθυμητού τύπου χάρτη).</string>
+    <string name="srtm_plugin_description">Διευκολύνει τη λήψη offline υψομετρικών γραμμών και ανάγλυφου (\'Ρυθμίσεις\' → \'Διαχείριση αρχείων χαρτών\' → \'Λήψη\' → Επιλογή του επιθυμητού τύπου χάρτη).</string>
     <string name="srtm_plugin_name">Πρόσθετο ισοϋψών γραμμών</string>
     <string name="download_srtm_maps">Ισοϋψείς γραμμές</string>
     
 	
 <string name="index_srtm_parts">μέρη</string>
-    <string name="monitoring_control_stop">σταμάτημα</string>
+    <string name="monitoring_control_stop">Σταμάτημα</string>
     <string name="map_widget_audionotes">Ηχητικές σημειώσεις</string>
     <string name="audionotes_plugin_description">Κάντε σημειώσεις ήχου/video κατά τη διάρκεια του ταξιδιού</string>
     <string name="audionotes_plugin_name">Σημειώσεις ήχου/video</string>
@@ -1207,7 +1208,7 @@
     <string name="av_settings">Ρυθμίσεις ήχου/video </string>
     <string name="recording_error">Προέκυψε σφάλμα κατά την εγγραφή </string>
     <string name="recording_camera_not_available">Κάμερα μη διαθέσιμη</string>
-    <string name="av_control_stop">σταμάτημα</string>
+    <string name="av_control_stop">Σταμάτημα</string>
     <string name="av_video_format_descr">Επιλέξτε μορφή εξόδου video</string>
     <string name="av_video_format">Μορφή εξόδου video</string>
     <string name="av_use_external_recorder_descr">Χρήση τού εγγραφέα συστήματος για video</string>
@@ -1228,10 +1229,10 @@
     <string name="recording_context_menu_precord">Λήψη φωτογραφίας</string>
     <string name="audionotes_location_not_defined">Δεν έχει καθοριστεί ακόμα τοποθεσία για συσχέτιση με την σημείωση. \"Χρήση τοποθεσίας ...\" για να συνδέσετε την σημείωση με την καθορισμένη τοποθεσία</string>
     <string name="local_indexes_cat_av">Δεδομένα Ήχου/Εικόνας</string>
-    <string name="dist_control_start">έναρξη</string>
+    <string name="dist_control_start">Έναρξη</string>
     <string name="precise_routing_mode_descr">Ενεργοποίηση ακριβούς δρομολόγησης για υπολογισμό δρομολογίων με ακρίβεια χωρίς προβλήματα. Είναι πολύ περιορισμένη σε σχέση με την απόσταση και δεν χρησιμοποιεί τη εγγενή βιβλιοθήκη.</string>
     <string name="layer_recordings">Επίπεδο εγγραφής</string>
-    <string name="av_control_start">έναρξη</string>
+    <string name="av_control_start">Έναρξη</string>
     <string name="av_use_external_camera_descr">Χρήση εφαρμογής συστήματος για φωτογραφία</string>
     <string name="av_use_external_camera">Χρήση εφαρμογής κάμερας</string>
     <string name="tip_recent_changes_1_1_2_t">Αλλαγές στην 1.1.2:
@@ -1378,8 +1379,8 @@
     <string name="edit_tilesource_successfully">Η πηγή πλακιδίων %1$s αποθηκεύτηκε επιτυχώς</string>
     <string name="edit_tilesource_elliptic_tile">Ελλειπτικό Μερκάτωρ</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_choose_existing">Επιλογή υπάρχοντος...</string>
-    <string name="driving_region_descr">Επιλέξτε Περιοχή Οδήγησης :ΗΠΑ, Ευρώπη, ΗΒ, Ασία κλπ</string>
+    <string name="edit_tilesource_choose_existing">Επιλογή υπάρχοντος…</string>
+    <string name="driving_region_descr">Επιλέξτε Περιοχή Οδήγησης: ΗΠΑ, Ευρώπη, ΗΒ, Ασία κλπ</string>
 	<string name="driving_region">Περιοχή Οδήγησης</string>
 	<string name="av_photo_play_sound_descr">Επιλέξτε εάν θα αναπαράγεται ήχος κατά τη λήψη φωτογραφίας</string>
 <string name="app_modes_choose">Προφίλ εφαρμογής</string>
@@ -1408,4 +1409,33 @@
     <string name="osmodroid_unseek">Ακύρωση αναζήτησης αντικειμένου</string>
     <string name="distance_measurement_finish_subtrack">Ξεκινήστε ένα νέο υπομονοπάτι</string>
     <string name="av_camera_focus_continuous">Η κάμερα προσπαθεί συνεχώς να εστιάσει</string>
-	</resources>
+	<string name="sort_by_distance">Ταξινόμηση κατά απόσταση</string>
+    <string name="sort_by_name">Ταξινόμηση κατά όνομα</string>
+    <string name="visible_element">Ορατό</string>
+    <string name="save_as_favorites_points">Αποθήκευση ως ομάδα αγαπημένων</string>
+    <string name="app_modes_choose_descr">Επιλογή εμφανών προφιλ χρήσεων στην εφαρμογή</string>
+    <string name="loading_smth">Φόρτωση %1$s …</string>
+    <string name="delay_navigation_start">Έναρξη πλοήγησης με καθυστέρηση</string>
+    <string name="selected">επιλεγμένο</string>
+    <string name="gpx_info_distance">Απόσταση: %1$s (%2$s σημεία) </string>
+	<string name="gpx_info_average_speed">Μέση ταχύτητα: %1$s </string>
+	<string name="gpx_info_maximum_speed">Μέγιστη ταχύτητα: %1$s </string>
+	<string name="gpx_info_avg_altitude">Μέσο υψόμετρο: %1$s</string>
+	<string name="selected_track">Επιλεγμένα ίχνη</string>
+    <string name="my_tracks">Όλα τα ίχνη</string>
+    <string name="my_favorites">Τα Αγαπημένα μου</string>
+    <string name="my_data_Button">Τα Μέρη μου</string>
+    <string name="my_data_activity">Τα Μέρη μου</string>
+    <string name="color_red">κόκκινο</string>
+	<string name="color_pink">ροζ</string>
+	<string name="color_orange">πορτοκαλί</string>
+	<string name="color_brown">καφέ</string>
+	<string name="color_yellow">κίτρινο</string>
+	<string name="color_lightblue">γαλάζιο</string>
+	<string name="color_blue">μπλε</string>
+	<string name="color_green">πράσινο</string>
+	
+    <string name="hours_ago">ώρες πριν</string>
+    <string name="minutes_ago">λεπτά πριν</string>
+    <string name="seconds_ago">δευτερόλεπτα πριν</string>
+    </resources>
