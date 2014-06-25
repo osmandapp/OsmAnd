@@ -461,18 +461,26 @@ public class EditingPOIActivity implements DialogProvider {
 				String website = websiteText.getText().toString();
 				if (website.length() > 0 ){
 					n.putTag(OSMTagKey.WEBSITE.getValue(),website);
+				} else {
+					n.removeTag(OSMTagKey.WEBSITE.getValue());
 				}
 				String phone = phoneText.getText().toString();
 				if (phone.length() > 0 ){
 					n.putTag(OSMTagKey.PHONE.getValue(),phone);
+				} else {
+					n.removeTag(OSMTagKey.PHONE.getValue());
 				}
 				String str = streetNameText.getText().toString();
 				if (str .length() > 0 ){
 					n.putTag(OSMTagKey.ADDR_STREET.getValue(),str);
+				} else {
+					n.removeTag(OSMTagKey.ADDR_STREET.getValue());
 				}
 				String hno = hnoText.getText().toString();
 				if (hno .length() > 0 ){
 					n.putTag(OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),hno);
+				} else {
+					n.removeTag(OSMTagKey.ADDR_HOUSE_NUMBER.getValue());
 				}
 				commitNode(action, n, openstreetmapUtil.getEntityInfo(), commentText.getText().toString(), closeChange.isSelected(), 
 						new Runnable() {

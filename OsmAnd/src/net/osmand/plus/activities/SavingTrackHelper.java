@@ -144,9 +144,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	 */
 	public List<String> saveDataToGpx() {
 		List<String> warnings = new ArrayList<String>();
-		File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		File dir = ctx.getAppPath(IndexConstants.GPX_RECORDED_INDEX_DIR);
+		dir.mkdirs();
 		if (dir.getParentFile().canWrite()) {
-			dir.mkdirs();
 			if (dir.exists()) {
 				Map<String, GPXFile> data = collectRecordedData();
 

@@ -20,6 +20,7 @@ public class RenderingRuleStorageProperties {
 	public static final String NAME_TAG = "nameTag";
 	public static final String NAME_TAG2 = "nameTag2";
 	public static final String TEXT_SHIELD = "textShield";
+	public static final String SHIELD = "shield";
 	public static final String SHADOW_RADIUS = "shadowRadius";
 	public static final String SHADOW_COLOR = "shadowColor";
 	public static final String SHADER = "shader";
@@ -81,6 +82,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_NAME_TAG;
 	public RenderingRuleProperty R_NAME_TAG2;
 	public RenderingRuleProperty R_TEXT_SHIELD;
+	public RenderingRuleProperty R_SHIELD;
 	public RenderingRuleProperty R_SHADOW_RADIUS;
 	public RenderingRuleProperty R_SHADOW_COLOR;
 	public RenderingRuleProperty R_SHADER;
@@ -199,6 +201,7 @@ public class RenderingRuleStorageProperties {
 
 		// point
 		R_ICON = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(ICON));
+		R_SHIELD = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(SHIELD));
 
 		// polygon/way
 		R_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(COLOR));

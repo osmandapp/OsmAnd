@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="gpx_split_interval">Split interval</string>
     <string name="sort_by_distance">Sort by distance</string>
     <string name="sort_by_name">Sort by name</string>
     <string name="visible_element">Visible</string>
@@ -23,7 +24,6 @@
     <string name="selected_gpx_info_show">\n\nPress and hold to see on map</string>
     <string name="delay_navigation_start">Start navigation with delay</string>
     <string name="selected">selected</string>
-    <string name="gpx_split_interval">Select split interval</string>
     <string name="local_index_gpx_info_show">\n\nPress and hold for options</string>
 	<string name="gpx_info_subtracks">Subtracks: %1$s </string>
 	<string name="gpx_info_waypoints">Waypoints: %1$s </string>

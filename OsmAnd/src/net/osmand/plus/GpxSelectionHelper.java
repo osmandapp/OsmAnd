@@ -123,13 +123,11 @@ public class GpxSelectionHelper {
 					GpxDisplayItem item = new GpxDisplayItem();
 					item.group = group;
 					item.description = r.desc;
+					item.expanded = true;
 					item.name = r.name;
 					t++;
 					if (Algorithms.isEmpty(item.name)) {
 						item.name = getString(R.string.gpx_selection_point, t + "");
-					}
-					if(Algorithms.isEmpty(item.description)) {
-						item.description = item.name;
 					}
 					item.locationStart = r;
 					item.locationEnd = r;
@@ -155,9 +153,7 @@ public class GpxSelectionHelper {
 				if (Algorithms.isEmpty(item.name)) {
 					item.name = getString(R.string.gpx_selection_point, k + "");
 				}
-				if(Algorithms.isEmpty(item.description)) {
-					item.description = item.name;
-				}
+				item.expanded = true;	
 				item.locationStart = r;
 				item.locationEnd = r;
 				list.add(item);
@@ -231,8 +227,8 @@ public class GpxSelectionHelper {
 					}
 				}
 				item.name = name;
-				item.locationStart = r.points.get(0);
-				item.locationEnd = r.points.get(r.points.size() - 1);
+				item.locationStart = analysis.locationStart;
+				item.locationEnd = analysis.locationEnd;
 				list.add(item);
 			}
 		}		
@@ -426,6 +422,10 @@ public class GpxSelectionHelper {
 
 		public void setTrack(Track track) {
 			this.track = track;
+		}
+		
+		public GPXFile getGpx() {
+			return gpx;
 		}
 		
 		public Track getTrack() {

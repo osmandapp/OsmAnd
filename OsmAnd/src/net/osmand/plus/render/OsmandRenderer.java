@@ -84,6 +84,7 @@ public class OsmandRenderer {
 		float x = 0;
 		float y = 0;
 		String resId;
+		String shieldId;
 		int iconOrder;
 		float iconSize;
 	}
@@ -332,6 +333,16 @@ public class OsmandRenderer {
 						}
 						
 						if (!intersects) {
+							Bitmap shield = icon.shieldId == null ? null : RenderingIcons.getIcon(context, icon.shieldId);
+							if(shield != null) {
+								RectF shieldRf = calculateRect(rc, icon, shield.getWidth(), shield.getHeight());
+								if (rc.screenDensityRatio != 1f) {
+									Rect src = new Rect(0, 0, shield.getWidth(), shield.getHeight());
+									cv.drawBitmap(shield, src, shieldRf, paintIcon);
+								} else {
+									cv.drawBitmap(shield, shieldRf.left, shieldRf.top, paintIcon);
+								}	
+							}
 							if (rc.screenDensityRatio != 1f) {
 								Rect src = new Rect(0, 0, ico.getWidth(), ico.getHeight());
 								cv.drawBitmap(ico, src, rf, paintIcon);
@@ -758,6 +769,7 @@ public class OsmandRenderer {
 			ico.y = ps.y;
 			ico.iconOrder = render.getIntPropertyValue(render.ALL.R_ICON_ORDER, 100);
 			ico.iconSize = rc.getComplexValue(render, render.ALL.R_ICON_VISIBLE_SIZE, -1);
+			ico.shieldId = render.getStringPropertyValue(render.ALL.R_SHIELD);
 			ico.resId = resId;
 			rc.iconsToDraw.add(ico);
 		}

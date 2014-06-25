@@ -22,6 +22,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.FrameLayout.LayoutParams;
@@ -190,7 +191,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				description = view.getContext().getString(R.string.point_on_map, 
 						latLon.getLatitude(), latLon.getLongitude());
 			}
-			textView.setText(description);
+			textView.setText(Html.fromHtml(description.replace("\n", "<br/>")));
 		} else {
 			textView.setText(""); //$NON-NLS-1$
 		}

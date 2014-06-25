@@ -190,7 +190,7 @@ public class MapTextLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean drawInScreenPixels() {
-		return false;
+		return true;
 	}
 
 }

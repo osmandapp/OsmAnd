@@ -2,13 +2,15 @@ package net.osmand.plus.activities;
 
 import gnu.trove.list.array.TIntArrayList;
 
-import java.io.File;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.access.AccessibleToast;
+import net.londatiga.android.QuickAction;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
@@ -16,9 +18,10 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.AvailableGPXFragment.LoadGpxTask;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -26,18 +29,24 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.Html;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.SectionIndexer;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -85,6 +94,60 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	public void onPause() {
 		super.onPause();
 		selectedGpxHelper.setUiListener(null);
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View vs = super.onCreateView(inflater, container, savedInstanceState);
+		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+			@Override
+			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+				long packedPos = ((ExpandableListContextMenuInfo) menuInfo).packedPosition;
+				int group = ExpandableListView.getPackedPositionGroup(packedPos);
+				int child = ExpandableListView.getPackedPositionChild(packedPos);
+				if (child >= 0 && group >= 0) {
+					showContextMenu(adapter.getChild(group, child));
+				}
+			}
+		});
+		return vs;
+	}
+	
+	private void showContextMenu(final GpxDisplayItem gpxDisplayItem) {
+		Builder builder = new AlertDialog.Builder(getActivity());
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(getActivity());
+		basicFileOperation(gpxDisplayItem, adapter);
+
+		String[] values = adapter.getItemNames();
+		builder.setItems(values, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				OnContextMenuClick clk = adapter.getClickAdapter(which);
+				if (clk != null) {
+					clk.onContextMenuClick(adapter.getItemId(which), which, false, dialog);
+				}
+			}
+
+		});
+		builder.show();
+	}
+	
+	private void basicFileOperation(final GpxDisplayItem gpxDisplayItem, ContextMenuAdapter adapter) {
+		OnContextMenuClick listener = new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
+				if (resId == R.string.show_gpx_route) {
+					OsmandSettings settings = getMyApplication().getSettings();
+					settings.setMapLocationToShow(gpxDisplayItem.locationStart.lat, gpxDisplayItem.locationStart.lon,
+							settings.getLastKnownMapZoom(), gpxDisplayItem.name);
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+				}
+			}
+		};
+		if (gpxDisplayItem.locationStart != null) {
+			adapter.item(R.string.show_gpx_route).listen(listener).reg();
+		}
+		OsmandPlugin.onContextMenuActivity(getSherlockActivity(), this, gpxDisplayItem, adapter);
 	}
 
 
@@ -164,7 +227,8 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		List<String> options = new ArrayList<String>();
 		final List<Double> distanceSplit = new ArrayList<Double>();
 		final TIntArrayList timeSplit = new TIntArrayList();
-		bld.setTitle(R.string.gpx_split_interval);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.selected_track_edit, null);
+		
 		options.add(app.getString(R.string.none));
 		distanceSplit.add(-1d);
 		timeSplit.add(-1);
@@ -185,41 +249,62 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		addOptionSplit(300, false, options, distanceSplit, timeSplit, checkedItem, model);
 		addOptionSplit(600, false, options, distanceSplit, timeSplit, checkedItem, model);
 		addOptionSplit(900, false, options, distanceSplit, timeSplit, checkedItem, model);
+		final CheckBox vis = (CheckBox) view.findViewById(R.id.Visibility);
+		vis.setChecked(true);
+		final Spinner sp = (Spinner) view.findViewById(R.id.Spinner);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, options);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		sp.setAdapter(adapter);
+		if(checkedItem[0] > 0) {
+			sp.setSelection(checkedItem[0]);
+		}
 		
-		bld.setSingleChoiceItems(options.toArray(new String[options.size()]), checkedItem[0], new DialogInterface.OnClickListener() {
+		bld.setView(view);
+		bld.setNegativeButton(R.string.default_buttons_cancel, null); 
+		bld.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
 			
 			@Override
-			public void onClick(DialogInterface dialog, final int which) {
-				dialog.dismiss();
-				
-				
-				new AsyncTask<Void, Void, Void>() {
+			public void onClick(DialogInterface dialog, int which) {
+				if(!vis.isChecked()) {
+					getMyApplication().getSelectedGpxHelper().selectGpxFile(model.getGpx(), false);
 					
-					protected void onPostExecute(Void result) {
-						adapter.notifyDataSetChanged();
-						getSherlockActivity().setProgressBarIndeterminateVisibility(false);
-					};
-					
-					protected void onPreExecute() {
-						getSherlockActivity().setProgressBarIndeterminateVisibility(true);
-					};
-
-					@Override
-					protected Void doInBackground(Void... params) {
-						if(which == 0) {
-							model.noSplit(app);
-						} else if(distanceSplit.get(which) > 0) {
-							model.splitByDistance(app, distanceSplit.get(which));
-						} else if(timeSplit.get(which) > 0) {
-							model.splitByTime(app, timeSplit.get(which));
-						}
-						return null;
-					}
-				}.execute((Void)null);
+					SelectedGPXFragment.this.adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
+				} else {
+					updateSplit(model, distanceSplit, timeSplit, sp.getSelectedItemPosition() );
+				}
+				
 			}
 		});
+		
 		bld.show();
 		
+	}
+	
+	private void updateSplit(final GpxDisplayGroup model, final List<Double> distanceSplit,
+			final TIntArrayList timeSplit, final int which) {
+		new AsyncTask<Void, Void, Void>() {
+			
+			protected void onPostExecute(Void result) {
+				adapter.notifyDataSetChanged();
+				getSherlockActivity().setProgressBarIndeterminateVisibility(false);
+			};
+			
+			protected void onPreExecute() {
+				getSherlockActivity().setProgressBarIndeterminateVisibility(true);
+			};
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				if(which == 0) {
+					model.noSplit(app);
+				} else if(distanceSplit.get(which) > 0) {
+					model.splitByDistance(app, distanceSplit.get(which));
+				} else if(timeSplit.get(which) > 0) {
+					model.splitByTime(app, timeSplit.get(which));
+				}
+				return null;
+			}
+		}.execute((Void)null);
 	}
 
 	private void addOptionSplit(int value, boolean distance, List<String> options, List<Double> distanceSplit,
@@ -452,7 +537,6 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 						additional.setText(OsmAndFormatter.getFormattedRoundDistanceKm((float) child.splitMetric,
 								digits, app));
 					} else {
-						//  TODO 
 						additional.setText(OsmAndFormatter.getFormattedDistance((float) child.splitMetric, app));
 					}
 				} else{
@@ -481,8 +565,12 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			row.setTag(child);
 				
 			label.setText(Html.fromHtml(child.name.replace("\n", "<br/>")));
-			if(child.expanded) {
-				description.setText(Html.fromHtml(child.description));
+			if (child.expanded && !Algorithms.isEmpty(child.description)) {
+				String d = child.description;
+				if (child.group.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
+					d += "<br/>" + getString(R.string.local_index_gpx_info_show);
+				}
+				description.setText(Html.fromHtml(d));
 				description.setVisibility(View.VISIBLE);
 			} else {
 				description.setVisibility(View.GONE);
@@ -497,8 +585,19 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		GpxDisplayItem child = adapter.getChild(groupPosition, childPosition);
-		child.expanded = !child.expanded;
-		adapter.notifyDataSetInvalidated();
+		if(child.group.getType() == GpxDisplayItemType.TRACK_POINTS ||
+				child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
+			QuickAction qa = new QuickAction(v);
+			String name = getString(R.string.favorite) + ": " + child.name;
+			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
+			OsmandSettings settings = getMyApplication().getSettings();
+			MapActivityActions.createDirectionsActions(qa, location, child.locationStart, name, settings.getLastKnownMapZoom(), getActivity(),
+					true, null, false);
+			qa.show();
+		} else {
+			child.expanded = !child.expanded;
+			adapter.notifyDataSetInvalidated();
+		}
 		return true;
 	}
 

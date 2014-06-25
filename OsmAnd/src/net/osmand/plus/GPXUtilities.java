@@ -163,6 +163,8 @@ public class GPXUtilities {
 		public int wptPoints = 0;
 		
 		public double metricEnd;
+		public WptPt locationStart;
+		public WptPt locationEnd;
 
 		public boolean isTimeSpecified() {
 			return startTime != Long.MAX_VALUE && startTime != 0;
@@ -206,12 +208,19 @@ public class GPXUtilities {
 			int speedCount = 0;
 			double totalSpeedSum = 0;
 			points = 0;
+			
 			for (SplitSegment s : splitSegments) {
 				final int numberOfPoints = s.getNumberOfPoints();
 				metricEnd += s.metricEnd;
 				points += numberOfPoints;
 				for (int j = 0; j < numberOfPoints; j++) {
 					WptPt point = s.get(j);
+					if(j == 0 && locationStart == null) {
+						locationStart = point;
+					}
+					if(j == numberOfPoints - 1) {
+						locationEnd = point;
+					}
 					long time = point.time;
 					if (time != 0) {
 						startTime = Math.min(startTime, time);
