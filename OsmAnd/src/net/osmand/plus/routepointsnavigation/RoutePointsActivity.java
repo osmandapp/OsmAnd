@@ -79,7 +79,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 			public boolean processResult(GPXUtilities.GPXFile[] result) {
 				final GPXFile gpx = result[0];
 				app.getSelectedGpxHelper().clearAllGpxFileToShow();
-				app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);				
+				app.getSelectedGpxHelper().setGpxFileToDisplay(true, gpx);
 				plugin.setCurrentRoute(gpx);
 				SelectedRouteGpxFile sgpx = plugin.getCurrentRoute();
 				if (!sgpx.getCurrentPoints().isEmpty() && 
@@ -310,9 +310,6 @@ public class RoutePointsActivity extends OsmandListActivity {
 			return true;
 		} else if (item.getItemId() == NAVIGATE_DIALOG_ID){
 			app.getSettings().navigateDialog();
-			Intent intent = new Intent(this, app.getAppCustomization().getMapActivity());
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent);
 			finish();
 			return true;
 		}
