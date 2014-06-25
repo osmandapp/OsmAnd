@@ -1754,7 +1754,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="share_fav_subject">علاقه‌مندیها از راه OsmAnd به اشتراک گذاشته شد</string>
 	<string name="hours_ago">چند ساعت قبل</string>
     <string name="minutes_ago">چند دقیقه قبل</string>
-    <string name="seconds_ago">چند ساعت قبل</string>
+    <string name="seconds_ago">چند ثانیه قبل</string>
     <string name="osmo_connect_to_device_name">نام کاربری</string>
     <string name="osmo_connect_to_device_tracker_id">شناسه افزار</string>
     <string name="osmo_connect_to_device">پیوند با دستگاه</string>
@@ -1769,7 +1769,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
         با استفاده از شناسه ردیاب دستگاه قادر خواهد بود برای نظارت بر تمام جابجایی های این دستگاه! برای قطع اتصال گزینه باز سازی مجدد را انتخاب کنید.</string>
     <string name="osmo_session_token">رمز را وارد نمایید : %1$s</string>
     <string name="osmo_auth_pending">در انتظار مجوز ...</string>
-    <string name="osmo_locations_sent">ارسال مکان %1$d (in buffer %2$d) </string>
+    <string name="osmo_locations_sent">ارسال مکان %1$d (in buffer %2$d)… </string>
     <string name="osmo_conn_successfull">اتصال برقرار شد : %1$s </string>
     <string name="tip_recent_changes_1_8_alpha">تغییرات نسخه 1.8:↵
         * محاسبه بین مسیر فایل gpx↵
@@ -1818,7 +1818,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="osmo_track_interval_descr">بازه زمانی ارسال موقعیت را مشخص نمایید</string>
     <string name="int_days">روز</string>
     <string name="osmo_connect_menu">اتصال</string>
-    <string name="osmo_expire_group">انقظاء در</string>
+    <string name="osmo_expire_group">انقضاء در</string>
     <string name="osmo_group_description">شرح</string>
     <string name="osmo_group_policy">خط مشی</string>
     <string name="osmo_connect_to_group_id">شناسه گروه</string>
@@ -1834,7 +1834,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="import_file_favourites">ذخیره به عنوان فایل GPX و یا واردات به مورد علاقه های شما؟</string>
 	<string name="import_save">ذخیره</string>
 	<string name="gpx_file_is_empty">GPX مسیر خالی است</string>
-    <string name="selected_track">انتخاب مسیر</string>
+    <string name="selected_track">مسیرهای انتخاب شده</string>
     <string name="my_tracks">همه مسیرها</string>
     <string name="my_favorites">علاقه مندی های من</string>
     <string name="my_data_Button">مکان های من</string>
@@ -1844,8 +1844,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osmo_show_group_notifications">نمایش اطلاعیه های گروه</string>
     <string name="osmo_show_group_notifications_descr">نمایش پیام ها از زمانی که کاربر به گروه پیوسته و یا گروه را ترک کرده</string>
     <string name="loading_smth">بارگزاری %1$s …</string>
-    <string name="map_widget_plain_time">هم اکنون</string>
-    <string name="gpx_wpt">ایستگاه بین راه</string>
+    <string name="map_widget_plain_time">زمان جاری</string>
+    <string name="gpx_wpt">نقطه بین راهی</string>
     <string name="selected_gpx_info_show">\n\n برای نمایش بر روی نقشه انگشت خود را چند لحظه بر روی صفحه نگه دارید</string>
     <string name="delay_navigation_start">شروع مسیریابی در زمان دیگر</string>
     <string name="selected">انتخاب</string>
@@ -1855,7 +1855,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="gpx_info_distance">فاصله: %1$s (%2$s points) </string>
 	<string name="gpx_info_start_time">زمان شروع: %1$tF,  %1$tT </string>
 	<string name="gpx_info_end_time">زمان اتمام: %1$tF,  %1$tT </string>
-	<string name="gpx_info_average_speed">سرعت متوسط: %1$s </string>
+	<string name="gpx_info_average_speed">متوسط سرعت: %1$s </string>
 	<string name="gpx_info_maximum_speed">بیشترین سرعت: %1$s </string>
 	<string name="gpx_info_avg_altitude">میانگین ارتفاع: %1$s</string>
 	<string name="gpx_info_diff_altitude">ارتفاع: %1$s</string>
@@ -1865,15 +1865,17 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="gpx_selection_segment_title">بخش</string>
     <string name="gpx_selection_number_of_points"> %1$s نقاط</string>
     <string name="gpx_selection_point">نقطه %1$s</string>
-    <string name="gpx_selection_current_track">ثبت</string>
+    <string name="gpx_selection_current_track">ضبط</string>
     <string name="gpx_selection_route_points">%1$s \nنقاط مسیر %2$s</string>
     <string name="gpx_selection_points">%1$s \n نقاط</string>
     <string name="gpx_selection_track">%1$s \n مسیر %2$s</string>
     <string name="gpx_available_current_track">ثبت مسیر فعلی</string>
-    <string name="save_as_favorites_points">ذخیره گروه در مورد علاقه های شما</string>
+    <string name="save_as_favorites_points">ذخیره به عنوان گروه مورد علاقه ها</string>
     <string name="select_destination_and_intermediate_points">انتخاب ایستگاههای بین راه</string>
     <string name="layer_amenity_label">برچسب نقطه</string>
     <string name="visible_element">قابل مشاهده</string>
-    <string name="show_zoom_buttons_navigation_descr">نمایش دکمه زوم در زمان مسیریابی</string>
-    <string name="show_zoom_buttons_navigation">نمایش دکمه زوم</string>
+    <string name="show_zoom_buttons_navigation_descr">نمایش دکمه های زوم در زمان مسیریابی</string>
+    <string name="show_zoom_buttons_navigation">نمایش دکمه های زوم</string>
+    <string name="sort_by_distance">ترتیب براساس مسافت</string>
+    <string name="sort_by_name">ترتیب براساس نام</string>
     </resources>
