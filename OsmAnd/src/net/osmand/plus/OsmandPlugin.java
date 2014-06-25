@@ -82,19 +82,17 @@ public abstract class OsmandPlugin {
 		if(!f && Version.isParkingPluginInlined(app)) {
 			installedPlugins.add(parking);
 		}
-
+		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		if(Version.isRouteNavPluginInlined(app)) {
 			RoutePointsPlugin routePointsPlugin = new RoutePointsPlugin(app);
 			installedPlugins.add(routePointsPlugin);
-			enablePlugin(app, routePointsPlugin, true);
+			enabledPlugins.add(routePointsPlugin.getId());
 		}
 
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
 		
-		
-		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		for (OsmandPlugin plugin : installedPlugins) {
 			if (enabledPlugins.contains(plugin.getId())) {
 				try {
