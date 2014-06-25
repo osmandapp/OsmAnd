@@ -1724,4 +1724,6 @@ OsmAnd - открытый источник и активно развается.
     <string name="show_zoom_buttons_navigation">Показывать кнопки изменения масштаба</string>
     <string name="sort_by_distance">Сортировать по дистанции</string>
     <string name="sort_by_name">Сортировать по имени</string>
+    <string name="visible_element">Показывать</string>
+    <string name="osmo_edit_color">Цвет метки</string>
     </resources>
