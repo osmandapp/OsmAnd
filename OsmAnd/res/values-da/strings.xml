@@ -347,7 +347,7 @@
 	<string name="left_side_navigation">Venstrekørsel</string>
 	<string name="left_side_navigation_descr">Vælg for lande med venstrekørsel</string>
 	<string name="download_link_and_local_description">Tryk her for at hente eller opdatere offline kortfiler.
-\nTryk på et eksisterende element for at se flere detaljer, tryk og hold for at deaktiver eller slette. Nuværende data på enheden (%1$s fri):</string>
+\nTryk på et eksisterende element for at se flere detaljer, langt tryk for at deaktiver eller slette. Nuværende data på enheden (%1$s fri):</string>
 	<string name="unknown_from_location">Startpunkt er endnu ikke fastlagt</string>
 	<string name="unknown_location">Position endnu ikke kendt</string>
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
@@ -581,7 +581,7 @@
 	<string name="favourites_edit_dialog_name">Navn</string>
 	<string name="favourites_edit_dialog_category">Kategori</string>
 	<string name="vector_map_not_needed">Nej tak</string>
-	<string name="local_index_gpx_info_show">\nTryk og hold for valgmuligheder</string>
+	<string name="local_index_gpx_info_show">\n\nLangt tryk for valgmuligheder</string>
 	
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
@@ -1500,10 +1500,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="plugin_distance_point_ele">højde</string>
     <string name="osmand_distance_planning_plugin_description">Opret et spor (eller brug eksisterende GPX-filer) til at måle afstanden mellem punkter. Gem som GPX, kan bruges til at planlægge GPX-ruter.</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
-    <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n
-* Tryk og hold på kortet for at slette tidligere punkt.\n
-* Tryk og hold på punkt for at se og vedhæfte beskrivelse.\n
-* Klik på målemodul for at se flere handlinger.</string>
+    <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n * Langt tryk på kortet for at slette tidligere punkt.\n * Langt tryk på punkt for at se og vedhæfte beskrivelse.\n * Klik på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
     <string name="local_osm_changes_backup_failed">Sikkerhedskopiering af OSM-data ændringer mislykkedes</string>
     <string name="local_osm_changes_backup_successful">OSM-data ændringsfilen %1$s genereret</string>
@@ -1886,7 +1883,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="gpx_info_subtracks">Underspor: %1$s </string>
 	<string name="map_widget_plain_time">Aktuel tid</string>
     <string name="gpx_wpt">Rutepunkt</string>
-    <string name="selected_gpx_info_show">\n\nTryk og hold for at se på kort</string>
+    <string name="selected_gpx_info_show">\n\nLangt tryk for at se på kort</string>
     <string name="delay_navigation_start">Start navigationen med forsinkelse</string>
     <string name="selected">valgt</string>
     <string name="gpx_split_interval">Vælg opdelingsinterval</string>
