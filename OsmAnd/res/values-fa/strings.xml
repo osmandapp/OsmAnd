@@ -1876,4 +1876,6 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="visible_element">قابل مشاهده</string>
     <string name="show_zoom_buttons_navigation_descr">نمایش دکمه زوم در زمان مسیریابی</string>
     <string name="show_zoom_buttons_navigation">نمایش دکمه زوم</string>
+    <string name="sort_by_distance">ترتیب براساس مسافت</string>
+    <string name="sort_by_name">ترتیب براساس نام</string>
     </resources>
