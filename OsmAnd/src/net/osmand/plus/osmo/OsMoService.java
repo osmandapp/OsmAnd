@@ -42,7 +42,7 @@ public class OsMoService implements OsMoReactor {
 	private static final Log log = PlatformUtil.getLog(OsMoService.class);
 	public static final String SHARE_TRACKER_URL = "http://z.osmo.mobi/connect?id=";
 	public static final String SHARE_GROUP_URL = "http://z.osmo.mobi/join?id=";
-	public static final String TRACK_URL = "http://test1342.osmo.mobi/u/";
+	public static final String TRACK_URL = "http://osmo.mobi/u/";
 	private String lastRegistrationError = null;
 	private OsMoPlugin plugin;  
 	

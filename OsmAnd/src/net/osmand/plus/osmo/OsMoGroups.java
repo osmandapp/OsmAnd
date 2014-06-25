@@ -8,8 +8,6 @@ import java.util.Map;
 
 import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
@@ -18,8 +16,6 @@ import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.os.AsyncTask;
 
 public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
