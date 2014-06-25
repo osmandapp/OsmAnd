@@ -58,12 +58,13 @@
   <string name="offline_navigation_not_available">Vidinė (be interneto) OsmAnd navigacija laikinai neprieinama.</string>
   <string name="left_side_navigation">Važiavimas kairiąja kelio puse</string>
   <string name="left_side_navigation_descr">Pasirinkite šalims, kuriose važiuojama kairiąja kelio puse</string>
-  <string name="download_link_and_local_description">Spauskite čia duomenų parsiuntimui į įrenginį arba parsiųstų duomenų atnaujinimui. \nNorėdami pamatyti detalią informaciją paspauskite ant dominančio elemento. Paspauskite ir laikykite elementą norėdami jį deaktyvuoti ar panaikinti. Duomenys įrenginyje (laisva %1$s):</string>
+  <string name="download_link_and_local_description">Spauskite čia žemėlapių failų parsiuntimui į įrenginį arba jau parsiųstų žemėlapių atnaujinimui.
+\nNorėdami pamatyti detalią informaciją paspauskite ant dominančio elemento. Paspauskite ir laikykite elementą norėdami jį deaktyvuoti ar panaikinti. Duomenys įrenginyje (laisva %1$s):</string>
   <string name="unknown_from_location">Pradžios taškas dar nenustatytas</string>
   <string name="unknown_location">Vieta dar nežinoma</string>
   <string name="modify_transparency">Pakeisti skaidrumą (0 - permatoma, 255 - nepermatoma)</string>
   <string name="confirm_interrupt_download">Ar norite nutraukti failų parsiuntimą?</string>
-  <string name="first_time_msg">Ačiū kad naudojate OsmAnd. Pagrindinių programos funkcijų naudojimui įrenginyje turi būti regiono duomenys, kuriuos galite parsisiųsti \'Nustatymai\' →  \'Parsiųsti duomenys\'. Tik po to galėsite ieškoti adreso, LV ar viešojo transporto.</string>
+  <string name="first_time_msg">Ačiū kad naudojate OsmAnd. Pagrindinių programos funkcijų naudojimui įrenginyje turi būti regiono duomenys, kuriuos galite parsisiųsti \'Nustatymai\' → \'Valdyti žemėlapius\'. Tik po to galėsite ieškoti adreso, LV ar viešojo transporto.</string>
   <string name="basemap_was_selected_to_download">Programos funkcionavimui reikalingas bazinis žemėlapis. Jis buvo pažymėtas parsiuntimui.</string>
   <string name="select_index_file_to_download">Nieko nerasta. Jei nerandate savo regiono, jį galite pasigaminti patys (eikite į http://osmand.net).</string>
   <string name="local_indexes_cat_tile">Žemėlapiai internete</string>
@@ -108,7 +109,7 @@
   <string name="native_rendering">Aparatinis atvaizdavimas</string>
   
   <string name="test_voice_prompts">Patikrinti balso nurodymus</string>
-  <string name="switch_to_raster_map_to_see">Šiai vietai nėra parsiųsto vektorinio žemėlapio. Jūs galite jį parsisiųsti Nustatymuose (Parsiųsti duomenys) arba perjungti į interneto žemėlapius.</string>
+  <string name="switch_to_raster_map_to_see">Šiai vietai nėra parsiųsto vektorinio žemėlapio. Jūs galite jį parsisiųsti Nustatymuose (Žemėlapių valdymas) arba perjungti į interneto žemėlapius (įjunkite tam skirtą įskiepį).</string>
   <string name="tip_recent_changes_0_7_2_t">Pakeitimai 0.7.2 versijoje :
 		\n\t- Aparatinis atvaizdavimo spartinimas visuose įrenginiuose
 		\n\t- LV redagavimas be interneto
@@ -251,7 +252,7 @@
   <string name="routing_settings">Navigacija</string>
   <string name="routing_settings_descr">Nurodykite navigacijos nustatymus</string>
   <string name="global_settings">Globalūs nustatymai</string>
-  <string name="index_settings">Duomenys įrenginyje (parsiųsti)</string>
+  <string name="index_settings">Valdyti žemėlapius</string>
   <string name="general_settings">Bendrieji nustatymai</string>
   <string name="general_settings_descr">Derinkite globaliuosius nustatymus</string>
   <string name="global_app_settings">Globalūs programos nustatymai</string>
@@ -387,7 +388,7 @@
   <string name="local_index_items_restored">Sėkmingai aktyvuota(-s) %1$d iš %2$d elementų(-o).</string>
   <string name="local_index_no_items_to_do">Nėra elementų %1$s</string>
   <string name="local_index_action_do">Norite %1$s %2$s elementą(-us). Tęsti?</string>
-  <string name="local_index_descr_title">Parsiųstų duomenų valdymas</string>
+  <string name="local_index_descr_title">Valdyti žemėlapius</string>
   <string name="local_index_mi_restore">Aktyvuoti</string>
   <string name="local_index_mi_backup">Deaktyvuoti</string>
   <string name="local_index_mi_delete">Ištrinti</string>
@@ -453,14 +454,13 @@
   <string name="internet_not_available">Nėra šiam veiksmui reikalingo interneto ryšio</string>
   <string name="install_more">Įdiegti daugiau…</string>
   <string name="tip_update_index">Atnaujinami parsiųsti žemėlapiai</string>
-  <string name="tip_update_index_t">Turėti naujausius žemėlapius yra labai svarbu jei norite žiūrėti žemėlapius ar naudoti navigaciją nenaudodami interneto ryšio, išekoti LV ar adresų. OsmAnd turi parsiųstų duomenų valdymo funkcijas skirtas žemėlapių (ir kitų failų) parsiuntimui ir kurios patikrina ar yra atnaujinimų. 
-		\n\nNorėdami patikrinti ar yra atnaujinimų eikite į \'Nustatymai\' → \'Parsiųsti duomenys\' → \'Parsisiųsti duomenų\'. 
-		\n\nPo to kai bus parsiųstas regionų sąrašas, pasirinkite įrašą iš sąrašo, kurį norite parsisiųsti ar atnaujinti. Ekrano viršuje yra failų tipo parinkiklis, kur galėsite pasirinkti pageidaujamą failo tipą parsiuntimui ar atnaujinimui (žemėlpaiai, kalnų šešėliai ir kt.) 
-		\n\nJūs galite pasirinkti regioną įvesdami keletą raidžių arba pasirinkti\'Meniu\' → \'Rodyti parsiųstus\' kad būtų rodomi tik parsiųstų žemėlapių atnaujinimai. 
-		\n\n\t* \'Žalia\' - rodo, kad jūsų žemėlapiai identiški esantiems serveryje 
-		\n\t\t* \'Mėlyna\' - rodo, kad serveryje yra atnaujinimų
-		\n\t\t* \'Tamsiai žalia/mėlyna\' - atitinkamai deaktyvuotus įrenginio duomenis
-	</string>
+  <string name="tip_update_index_t">"Turėti naujausius žemėlapius yra labai svarbu jei norite žiūrėti žemėlapius ar naudoti navigaciją nenaudodami interneto ryšio, išekoti LV ar adresų. OsmAnd turi žemėlapių valdymo funkcijas skirtas žemėlapių ir jų atnaujinimų parsisiuntimui.
+\n\nNorėdami patikrinti ar yra atnaujinimų eikite į \'Nustatymai\' → \'Valdyti žemėlapius\' → \'Parsisiųsti duomenų\'.
+\n\nPo to kai bus parsiųstas regionų sąrašas, pasirinkite įrašą iš sąrašo, kurį norite parsisiųsti ar atnaujinti. Ekrano viršuje yra failų tipo parinkiklis, kur galėsite pasirinkti pageidaujamą failo tipą parsiuntimui ar atnaujinimui (žemėlpaiai, kalnų šešėliai ir kt.)
+\n\nJūs galite pasirinkti regioną įvesdami keletą raidžių arba pasirinkti\'Meniu\' → \'Rodyti parsiųstus\' kad būtų rodomi tik parsiųstų žemėlapių atnaujinimai.
+\n\n\t* \'Žalia\' - rodo, kad jūsų žemėlapiai identiški esantiems serveryje
+\n\t\t* \'Mėlyna\' - rodo, kad serveryje yra atnaujinimų
+\n\t\t* \'Tamsiai žalia/mėlyna\' - atitinkamai deaktyvuotus įrenginio duomenis "</string>
   <string name="level_to_switch_vector_raster_descr">Mažiausias dydis, kuriuo rodyti vektorinius žemėlapius</string>
   <string name="level_to_switch_vector_raster">Mažiausias vektorinių žemėl. dydis</string>
   <string name="tip_location_sharing">Bendrinti vietą</string>
@@ -468,11 +468,10 @@
 		\n\nPo to pasirinkite kaip nusiųsite savo pasirinktą vietą. Turėsite tokį pasirinkimą: elektroniniu paštu, SMS(tekstu), ar paprasčiausiai nukopijuoti koordinates į iškarpinę.
 	</string>
   <string name="tip_favorites">Įsimintos vietos</string>
-  <string name="tip_favorites_t">Dažnai naudojamos vietos gali būti išsaugotos kaip Įsimintos vietos štai taip:
-		\n\nPasirinkę norimą vietą kontekstiniame meniu \'Naudoti vietą\' pasirinkite \'Pridėti prie įsimintų\' bei įveskite pavadinimą.
-		\n\nIšsaugota Įsiminta vieta bus prieinama per \'Meniu\' → \'Įsimintos vietos\'. Ilgai paspaudę ant įsimintos vietos sąraše \'Įsimintos vietos\' galėsite tą vietą nustatyti kelionės tikslu, ją redaguoti ar ištrinti.
-		\n\nNorėdami Įsimintas vietas matyti tiesiog ant žemėlapio turite įjungti \'Įsimintos vietos\' sluoksnį atsidarę \'Meniu\' → \'Žemėlapio sluoksniai\'.
-	</string>
+  <string name="tip_favorites_t">"Dažnai naudojamos vietos gali būti išsaugotos kaip Įsimintos vietos štai taip:
+\n\nPasirinkę norimą vietą kontekstiniame meniu \'Naudoti vietą\' pasirinkite \'Pridėti prie įsimintų\' bei įveskite pavadinimą.
+\n\nIšsaugota Įsiminta vieta bus prieinama per \'Meniu\' → \'Mano vietos\'. Ilgai paspaudę ant įsimintos vietos sąraše \'Įsimintos vietos\' galėsite tą vietą nustatyti kelionės tikslu, ją redaguoti ar ištrinti.
+\n\nNorėdami Įsimintas vietas matyti tiesiog ant žemėlapio turite įjungti \'Įsimintos vietos\' sluoksnį atsidarę \'Meniu\' → \'Žemėlapio sluoksniai\'. "</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
   <string name="error_doing_search">Įvyko klaida vykdant paiešką be interneto</string>
   <string name="search_offline_geo_error">Nepavyko suprasti geo poreikio \'%s\'</string>
@@ -869,7 +868,7 @@
   <string name="exit_Button">Išeiti</string>
   <string name="map_Button">Žemėlapis</string>
   <string name="settings_Button">Nustatymai</string>
-  <string name="favorites_Button">Įsimintos vietos</string>
+  <string name="favorites_Button">Mano vietos</string>
   <string name="search_button">Ieškoti</string>
   <string name="search_activity">Ieškoti</string>
   <string name="searchpoi_activity">Pasirinkti LV</string>
@@ -1177,15 +1176,14 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5-9 lygiai)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid įskiepio versija yra pasenusi ir turi būti atnaujinta.</string>
     <string name="osmodroid_plugin_name">OsMoDroid įskiepis</string>
-	<string name="tip_altitude_offset_t">Daugelis GPS įrenginių apskaičiuoja aukštį virš jūros lygio naudodami WGS84 elipsiodo atskaitos sistemą iš kurios vėlesnis konvertavimui į vietinę sistemą reikia nuo pozicijos priklausančios aukščio pataisos.
-		\n\nGeresniam vietinio aukščio apskaičiavimui labiau tinka EGM96 atskaitos sistema. OsmAnd dabar jau gali automatiškai apskaičiuoti ir atvaizduoti jūsų buvimo vietos aukštį pagal EGM96 sistemą.
-		\n\nJei norite tai įgyvendinti, tiesiog parsisiųskite failą \'Pasaulinė aukščio korekcija\' (WW15MGH.DAC) naudodami Parsiųstų Duomenų Valdymą \'Nustatymai\'→\'Parsiųsti duomenys\'. (Orginalas yra čia http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)
-	</string>
+	<string name="tip_altitude_offset_t">"Daugelis GPS įrenginių apskaičiuoja aukštį virš jūros lygio naudodami WGS84 elipsiodo atskaitos sistemą iš kurios vėlesnis konvertavimui į vietinę sistemą reikia nuo pozicijos priklausančios aukščio pataisos.
+\n\nGeresniam vietinio aukščio apskaičiavimui labiau tinka EGM96 atskaitos sistema. OsmAnd dabar jau gali automatiškai apskaičiuoti ir atvaizduoti jūsų buvimo vietos aukštį pagal EGM96 sistemą.
+\n\nJei norite tai įgyvendinti, tiesiog parsisiųskite failą \'Pasaulinė aukščio korekcija\' (WW15MGH.DAC) naudodami Parsiųstų Duomenų Valdymą \'Nustatymai\'→\'Valdyti žemėlapius\'. (Orginalas yra čia http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC) "</string>
     <string name="monitoring_control_start">pradėti</string>
     <string name="osmodroid_plugin_description">OsMoDroid įskiepis yra yra skirtas tiesioginiam sekimui. Daugiau informacijos apie paslaugą rasite http://esya.ru.</string>
     <string name="index_srtm_parts">dalys</string>
     <string name="index_srtm_ele">Aukščio kontūrų linijos</string>
-    <string name="srtm_plugin_description">Leidžia parsisiųsti kontūrines linijas ir kalnų šešėlius (\'Nustatymai\' → \'Parsiųsti duomenys\' → \'Parsiųsti\' → Pasirinkite pageidaujamą žemėlapio tipą).</string>
+    <string name="srtm_plugin_description">Leidžia parsisiųsti kontūrines linijas ir kalnų šešėlius (\'Nustatymai\' → \'Valdyti žemėlapius\' → \'Parsiųsti\' → Pasirinkite pageidaujamą žemėlapio tipą).</string>
     <string name="srtm_plugin_name">SRTM įskiepis</string>
     <string name="download_select_map_types">Kiti žemėlapiai</string>
     <string name="download_srtm_maps">SRTM žemėlapiai</string>
@@ -1654,9 +1652,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="routing_attr_avoid_motorway_description">Vengti greitkelių</string>
 	<string name="routing_attr_weight_name">Maksimalus svoris</string>
 	<string name="routing_attr_weight_description">Įvesti automobilio svorio apribojimą</string>
-    <string name="android_19_location_disabled">Pradedant KitKat versija jūs nebegalėsite parsisųsti ir atnaujinti žemėlapių ankstesnėse saugojimo vietose (%s). Ar norite pakeisti saugyklos vietą ir į ją nukopijuoto visus failus?
-        \n Pastaba : Seni failai išliks kur buvę. 
-        \n Pastaba : dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima. </string>
+    <string name="android_19_location_disabled">"Pradedant KitKat versija jūs nebegalėsite parsisųsti ir atnaujinti žemėlapių ankstesnėse saugojimo vietose (%s). Ar norite pakeisti saugyklos vietą ir į ją nukopijuoto visus failus?
+\n Pastaba: Seni failai išliks kur buvę.
+\n Pastaba: dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima. "</string>
     <string name="application_dir_change_warning2">OsmAnd gali pabandyti perkelti duomenis į naują saugyklą. Ar atlikti tai?</string>
     <string name="copying_osmand_one_file_descr">Kopijuojami failai (%/s) į naują saugojimo vietą...</string>
     <string name="copying_osmand_files_descr">OsmAnd failai kopijuojami į naują vietą (%/s)</string>
@@ -1752,7 +1750,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_plugin_name">OsMo (Pažangus tiesioginis stebėjimas)</string>
     <string name="osmo_settings">OsMo OpenStreetMap stebėjimas (beta)</string>
    	<string name="keep_informing_never">Niekada</string>
-    <string name="keep_informing_descr">Maršruto instrukcijas pranešinėti reguliariais intervalais</string>
+    <string name="keep_informing_descr">Maršruto instrukcijas pakartotinai pranešinėti reguliariais intervalais</string>
     <string name="keep_informing">Pakartoti maršruto instrukcijas</string>
 	<string name="arrival_distance">Pranešimas apie atvykimą</string>
     <string name="arrival_distance_descr">Kada anksti turi būti pranešama apie atvykimą?</string>
@@ -1779,11 +1777,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_auth_pending">Laukiama autorizavimo...</string>
     <string name="osmo_locations_sent">Buvimo vieta išsiųsta %1$d (talpykloje %2$d) </string>
     <string name="osmo_conn_successfull">Prisijungta sėkmingai: %1$s </string>
-    <string name="tip_recent_changes_1_8_alpha">Pakeitimai 1.8 versijoje:
-        * Apskaičiouti maršrutą tarp GPX failo taškų
-        * Pakeistas šalių sąrašo išdėstymas žemėlapių parsiuntimui (palaikoma vietovardžių paieška)
-	* Palaiko GPX/KML importavimą (konvertuoja KML į GPX)
-    </string>
+    <string name="tip_recent_changes_1_8_alpha">"Pakeitimai 1.8 versijoje: * Apskaičiouti maršrutą tarp GPX failo taškų * Pakeistas šalių sąrašo išdėstymas žemėlapių parsiuntimui (palaikoma vietovardžių paieška) * Palaiko GPX/KML importavimą (konvertuoja KML į GPX) * GPX maršrutai perkelti į \'Mano duomenys\' * GPX maršrutus galima padalinti į kelias dalis pagal atstumą ir patikrinti altitudės skirtumus ir greitį * Automatiškai pradėti navigaciją su uždelsimu "</string>
     <string name="osmo_mode_restart">OsMo sesiją paleisti iš naujo</string>
     <string name="osmo_settings_debug">Derinimo informacija</string>
     <string name="osmo_group_info">Info</string>
@@ -1860,4 +1854,32 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="delay_navigation_start">Pradėti navigaciją su uždelsimu</string>
     <string name="selected">pasirinkti</string>
     <string name="gpx_split_interval">Pasirinkti padalinimo intervalą</string>
+    <string name="sort_by_distance">Rūšiuoti pagal atstumą</string>
+    <string name="sort_by_name">Rūšiuoti pagal pavadinimą</string>
+    <string name="visible_element">Matomas</string>
+    <string name="gpx_info_avg_altitude">Vidutinė altitudė: %1$s</string>
+	<string name="gpx_info_diff_altitude">Altitudės diapazonas: %1$s</string>
+	<string name="gpx_info_asc_altitude">Nusileidimas/pakilimas: %1$s</string>
+    <string name="gpx_timespan">Laikotarpis: %1$s</string>
+	<string name="gpx_timemoving">Judėjimo laikas: %1$s</string>
+    <string name="gpx_selection_segment_title">Segmentas</string>
+    <string name="gpx_selection_point">Taškas %1$s</string>
+    <string name="gpx_selection_current_track">įrašymas</string>
+    <string name="gpx_selection_route_points">%1$s
+\nMaršruto taškų %2$s</string>
+    <string name="gpx_selection_points">%1$s
+\nTaškų</string>
+    <string name="gpx_selection_track">%1$s
+\nMaršrutas %2$s</string>
+    <string name="gpx_available_current_track">Dabartinis įrašomas maršrutas</string>
+    <string name="gpx_file_is_empty">GPX maršrutas yra tuščias</string>
+    <string name="selected_track">Pasirinkti maršrutai</string>
+    <string name="my_tracks">Visi maršrutai</string>
+    <string name="my_favorites">Mano mėgiami</string>
+    <string name="my_data_Button">Mano vietos</string>
+    <string name="my_data_activity">Mano vietos</string>
+    <string name="osmo_user_joined">Vartotojas %1$s prisijungė prie %2$s grupės</string>
+    <string name="osmo_user_left">Vartotojas %1$s atsijungė nuo %2$s grupės</string>
+    <string name="osmo_show_group_notifications">Rodyti grupės pranešimus</string>
+    <string name="osmo_show_group_notifications_descr">Rodyti iššokančius pranešimus vartotojui prisijungiant arba atsijungiant nuo grupės</string>
     </resources>
