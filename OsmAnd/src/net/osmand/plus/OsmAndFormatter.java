@@ -169,12 +169,20 @@ public class OsmAndFormatter {
 	}
 
 	
-	public static String getPoiSimpleFormat(Amenity amenity, Context ctx, boolean en){
-		return toPublicString(amenity.getType(), ctx) + " : " + getPoiStringWithoutType(amenity, en); //$NON-NLS-1$
+	public static String getPoiSimpleFormat(Amenity amenity, Context ctx, boolean en) {
+		return getPoiStringWithoutType(amenity, en,
+				toPublicString(amenity.getType(), ctx) + ": " + amenity.getSubType()); //$NON-NLS-1$
 	}
 	
 	public static String getPoiStringWithoutType(Amenity amenity, boolean en) {
-		String type = SpecialPhrases.getSpecialPhrase(amenity.getSubType());
+		return getPoiStringWithoutType(amenity, en, amenity.getSubType());
+	}
+	
+	public static String getPoiStringWithoutType(Amenity amenity, boolean en, String defName) {
+		String nm = SpecialPhrases.getSpecialPhrase(amenity.getSubType(), defName);
+		String type = 
+				SpecialPhrases.getSpecialPhrase(amenity.getType().getCategoryName() + "_" + amenity.getSubType(),
+				nm);
 		String n = amenity.getName(en);
 		if (n.indexOf(type) != -1) {
 			// type is contained in name e.g.
@@ -198,16 +206,16 @@ public class OsmAndFormatter {
 					continue;
 				}
 			} else if(Amenity.OPENING_HOURS.equals(key)) {
-				d.append(ctx.getString(R.string.opening_hours) + " : ");
+				d.append(ctx.getString(R.string.opening_hours) + ": ");
 			} else if(Amenity.PHONE.equals(key)) {
-				d.append(ctx.getString(R.string.phone) + " : ");
+				d.append(ctx.getString(R.string.phone) + ": ");
 			} else if(Amenity.WEBSITE.equals(key)) {
 				if(amenity.getType() == AmenityType.OSMWIKI) {
 					continue;
 				}
-				d.append(ctx.getString(R.string.website) + " : ");
+				d.append(ctx.getString(R.string.website) + ": ");
 			} else {
-				d.append(e.getKey() + " : ");
+				d.append(e.getKey() + ": ");
 			}
 			d.append(e.getValue()).append('\n');
 		}

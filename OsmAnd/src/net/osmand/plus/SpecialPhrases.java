@@ -28,7 +28,7 @@ public class SpecialPhrases {
 	 * @param value the subtype to query
 	 * @return the special phrase according to the asked key, or "null" if the key isn't found
 	 */
-	public static String getSpecialPhrase(String value) {
+	public static String getSpecialPhrase(String value, String defValue) {
 		if (m == null) {
 			// do not throw exception because OsmAndApplication is not always initiliazed before 
 			// this call
@@ -38,9 +38,9 @@ public class SpecialPhrases {
 		}
 		String specialValue = m.get(value);
 		if(Algorithms.isEmpty(specialValue)) {
-			return value.replace('_', ' ');
+			specialValue = defValue;
 		}
-		return specialValue;
+		return specialValue.replace('_', ' ');
 	}
 
 	/**

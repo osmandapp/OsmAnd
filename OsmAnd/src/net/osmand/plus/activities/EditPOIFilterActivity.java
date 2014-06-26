@@ -226,8 +226,10 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 
 			@Override
 			public int compare(String object1, String object2) {
-				String v1 = SpecialPhrases.getSpecialPhrase(object1).replace('_', ' ');
-				String v2 = SpecialPhrases.getSpecialPhrase(object2).replace('_', ' ');
+				String v1 = SpecialPhrases.getSpecialPhrase(object1, object1);
+				String v2 = SpecialPhrases.getSpecialPhrase(object2, object2);
+				v1 = SpecialPhrases.getSpecialPhrase(amenity.getDefaultTag()+"_"+object1, v1);
+				v2 = SpecialPhrases.getSpecialPhrase(amenity.getDefaultTag()+"_"+object2, v2);
 				return cl.compare(v1, v2);
 			}
 		});
@@ -235,11 +237,14 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		final boolean[] selected = new boolean[array.length];
 		
 		for (int i = 0; i < array.length; i++) {
-			visibleNames[i] = SpecialPhrases.getSpecialPhrase(array[i]).replace('_', ' ');			
+			final String subcategory = array[i];
+			String name = SpecialPhrases.getSpecialPhrase(subcategory, subcategory);
+			visibleNames[i] = SpecialPhrases.getSpecialPhrase(amenity.getDefaultTag()+"_"+subcategory,
+					name);			
 			if (acceptedCategories == null) {
 				selected[i] = true;
 			} else {
-				selected[i] = acceptedCategories.contains(array[i]);
+				selected[i] = acceptedCategories.contains(subcategory);
 			}
 		}
 
