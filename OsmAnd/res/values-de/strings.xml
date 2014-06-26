@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
@@ -1494,9 +1494,9 @@
 	<string name="routing_attr_avoid_motorway_description">Autobahnen vermeiden</string>
 	<string name="routing_attr_weight_name">Maximalgewicht</string>
 	<string name="routing_attr_weight_description">Angabe einer Massebeschränkung für die Fahrzeugart</string>
-    <string name="android_19_location_disabled">Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Jetzt einen zulässigen Speicherort wählen und alle notwendigen Dateien dorthin kopieren?
-        \n Hinweis: Ursprüngliche Dateien bleiben hiervon unberührt. 
-        \n Hinweis: Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden. </string>
+    <string name="android_19_location_disabled">"Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Jetzt einen zulässigen Speicherort wählen und alle notwendigen Dateien dorthin kopieren?
+\n Hinweis: Ursprüngliche Dateien bleiben hiervon unberührt.
+\n Hinweis: Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden. "</string>
     <string name="application_dir_change_warning2">Osmand kann versuchen, die Dateien an den neuen Speicherort zu kopieren. Fortfahren?</string>
     <string name="copying_osmand_one_file_descr">Kopieren der Datei (%s) an den neuen Speicherort...</string>
     <string name="copying_osmand_files_descr">Kopieren der Osmand-Dateien zum neuen Speicherort (%s)</string>
@@ -1869,4 +1869,10 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="gpx_split_interval">Trennungs-Intervall wählen</string>
     <string name="gpx_info_subtracks">"Spurteile: %1$s "</string>
 	<string name="osmo_edit_color">Darstellungsfarbe</string>
+    <string name="sort_by_distance">Sortieren nach Entfernung</string>
+    <string name="sort_by_name">Sortieren nach Namen</string>
+    <string name="visible_element">Sichtbar</string>
+    <string name="show_zoom_buttons_navigation_descr">Zoom-Buttons bei Navigation anzeigen</string>
+    <string name="show_zoom_buttons_navigation">Zeige Zoom-Buttons</string>
+    <string name="osmo_center_location">Zentrieren auf dem Bildschirm</string>
     </resources>
