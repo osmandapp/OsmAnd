@@ -165,6 +165,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		for (List<WptPt> l : points) {
 			path.rewind();
 			paint.setPathEffect(routePoints ? pathEffect : null);
+			if (routePoints){
+				paint.setStrokeCap(Cap.BUTT);
+			} else {
+				paint.setStrokeCap(Cap.ROUND);
+			}
 			int startIndex = -1;
 
 			for (int i = 0; i < l.size(); i++) {
