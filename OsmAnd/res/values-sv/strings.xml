@@ -1594,4 +1594,13 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="visible_element">Synlig</string>
     <string name="sort_by_distance">Sortera efter avstånd</string>
     <string name="sort_by_name">Sortera efter namn</string>
-    </resources>
+    <string name="arrival_distance">Ankomstmeddelande</string>
+    <string name="arrival_distance_descr">Hur tidigt vill du höra ankomstmeddelandet?</string>
+    <string name="local_index_mi_export">Exportera</string>
+	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-kartklassificering med bilder</string>
+	<string name="import_file_favourites">Spara som GPX-fil eller importera till favoriter?</string>
+	<string name="import_save">Spara</string>
+	<string name="share_fav">Dela ut</string>
+	<string name="share_fav_subject">Favoriter utdelade via OsmAnd</string>
+	<string name="commiting_node">Skickar nod…</string>
+	</resources>
