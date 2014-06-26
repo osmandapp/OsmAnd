@@ -97,6 +97,9 @@ public class MapUtils {
 	}
 	
 	public static double checkLongitude(double longitude) {
+		if(longitude > -180 && longitude <= 180) {
+			return longitude;
+		}
 		while (longitude < -180 || longitude > 180) {
 			if (longitude < 0) {
 				longitude += 360;
@@ -108,6 +111,9 @@ public class MapUtils {
 	}
 	
 	public static double checkLatitude(double latitude) {
+		if(latitude > -80 && latitude <= 80) {
+			return latitude;
+		}
 		while (latitude < -90 || latitude > 90) {
 			if (latitude < 0) {
 				latitude += 180;
