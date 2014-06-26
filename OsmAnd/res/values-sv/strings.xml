@@ -537,7 +537,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="preferred_locale">Visningsspråk</string>
 <string name="tip_map_switch">Kartkälla</string>
 <string name="tip_app_mode">Användarprofil</string>
-<string name="tip_app_mode_t_v2">\tOsmAnd stöder olika (anpassningsbara) profiler för olika användningar.\n\tDu kan byta profil via profilknappen i det nedre vänstra hörnet på kartbilden (bil, cykel eller fotgängare), eller när du skapar en rutt.</string>
+<string name="tip_app_mode_t_v2">"OsmAnd stöder olika (anpassningsbara) profiler för olika användningar.\n\nDu kan byta profil via profilknappen i det nedre vänstra hörnet på kartbilden (bil, cykel eller fotgängare), eller när du skapar en rutt (\'transportläge\'). "</string>
 <string name="tip_navigation">Navigering</string>
 <string name="tip_navigation_t">För att få vägvisning till en plats, antingen peta länge på den direkt på kartan (peta sedan på beskrivningsmarkören och välj \'Vägvisning till\') eller \'Vägvisning\' efter att du petat på valfri post i en sökresultatslista eller i favoritlistan.
 		\n\nDestinationen markeras med en orange flagga på kartan och OsmAnd visar avståndet och riktningen till den (en orange triangel).
@@ -560,7 +560,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="unit_of_length_descr">Ändra enheter för längd och hastighet</string>
 <string name="unit_of_length">Måttenhet</string>
 <string name="si_mi_foots">Miles/fot</string>
-<string name="si_mi_yard">Miles/yards</string>
+<string name="si_mi_yard">Eng. mile/yard</string>
 <string name="si_km_m">Kilometer/meter</string>
 <string name="yard">yd</string>
 <string name="send_location_way_choose_title">Dela platsen med</string>
@@ -630,7 +630,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="intermediate_point_too_far">Waypointen %1$s för långt från närmaste väg.</string>
     <string name="arrived_at_intermediate_point">Du har anlänt till din waypoint</string>
     <string name="context_menu_item_intermediate_point">Lägg till som waypoint</string>
-    <string name="map_widget_intermediate_distance">Vägpunkt</string>
+    <string name="map_widget_intermediate_distance">Waypoint</string>
     <string name="ending_point_too_far">Slutpunkten för långt från närmaste väg.</string>
     <string name="btn_add_tag">Lägg till tagg</string>
     <string name="btn_advanced_mode">Avancerat läge…</string>
@@ -640,7 +640,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="poi_filter_entertainment">Underhållning</string>
     <string name="poi_filter_accomodation">Boende</string>
     <string name="poi_filter_restaurants">Restauranger</string>
-    <string name="tip_map_context_menu_t">\tSnabbmenyn för kartor finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulans knapp.\n\tDå visas en ruta med koordinaterna. För att öppna dialogrutan, trycker du på den. (Eller tryck och håll på den för att dölja rutan igen.)\n\tSnabbmenyn för kartor innehåller alla åtgärder som hänför sig till en punkt (plats).</string>
+    <string name="tip_map_context_menu_t">"Kontextmenyn \'Använd plats\' innehåller alla åtgärder med anknytning till en punkt (plats).\n\nMan kommer åt den genom att trycka och hålla på valfri plats på kartan (och sedan klickar på markören), genom att trycka på knappen på styrkulan eller genom att välja \'Meny\' → \'Använd plats\' (de två sista tar kartcentrum som referens).\n\nEn markörbox kan gömmas igen genom att långklicka på den. "</string>
 	<string name="tip_initial_t">"\tOsmAnd är en navigeringsapp med många funktioner.\n\tSom en introduktion finns ett antal tips och tricks länkade på huvudskärmen (se \'?\'-ikonen). "</string>
 	<string name="application_dir">Lagringskatalog</string>
 	
@@ -1015,7 +1015,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
     <string name="srtm_plugin_description">Denna plugin gör det lättare att hämta höjdkurvor (Inställningar -&gt; Datahantering -&gt; Hämtning -&gt; Välj önskad karttyp).</string>
     <string name="delete_target_point">Ta bort waypoint</string>
-	<string name="intermediate_point">Vägpunkt %1$s</string>
+	<string name="intermediate_point">Waypoint %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="local_index_descr_title">Datahantering</string>
 	<string name="incomplete_locale">ofullständig</string>
@@ -1594,4 +1594,13 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="visible_element">Synlig</string>
     <string name="sort_by_distance">Sortera efter avstånd</string>
     <string name="sort_by_name">Sortera efter namn</string>
-    </resources>
+    <string name="arrival_distance">Ankomstmeddelande</string>
+    <string name="arrival_distance_descr">Hur tidigt vill du höra ankomstmeddelandet?</string>
+    <string name="local_index_mi_export">Exportera</string>
+	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-kartklassificering med bilder</string>
+	<string name="import_file_favourites">Spara som GPX-fil eller importera till favoriter?</string>
+	<string name="import_save">Spara</string>
+	<string name="share_fav">Dela ut</string>
+	<string name="share_fav_subject">Favoriter utdelade via OsmAnd</string>
+	<string name="commiting_node">Skickar nod…</string>
+	</resources>

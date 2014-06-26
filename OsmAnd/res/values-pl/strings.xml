@@ -1182,7 +1182,7 @@
     <string name="recording_default_name">nagranie</string>
     <string name="av_control_stop">Kończ</string>
     <string name="av_control_start">Nagraj</string>
-    <string name="map_widget_av_notes">Notatki audio</string>
+    <string name="map_widget_av_notes">Notatki audio/video</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     
     
@@ -1836,7 +1836,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="selected_gpx_info_show">\n\nNaciśnij i przytrzymaj, aby zobaczyć na mapie</string>
     <string name="delay_navigation_start">Rozpocznij nawigację z opóźnieniem</string>
     <string name="selected">wybrano</string>
-    <string name="gpx_split_interval">Wybierz interwał podziału</string>
+    <string name="gpx_split_interval">Interwał podziału</string>
     <string name="loading_smth">Ładowanie %1$s …</string>
     <string name="map_widget_plain_time">Aktualny czas</string>
     <string name="gpx_wpt">Punkt trasy</string>
@@ -1846,4 +1846,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="visible_element">Widoczne</string>
     <string name="show_zoom_buttons_navigation_descr">Pokazuj przyciski zbliżania podczas nawigacji</string>
     <string name="show_zoom_buttons_navigation">Pokazuj przyciski zbliżania</string>
+    <string name="sort_by_distance">Sortuj według odległości</string>
+    <string name="sort_by_name">Sortuj według nazwy</string>
     </resources>

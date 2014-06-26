@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
@@ -282,7 +282,7 @@
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs wurden hochgeladen</string>
 	<string name="local_openstreetmap_uploadall">Alle hochladen</string>
 	
-	<string name="local_openstreetmap_show">Auf Karte zeigen</string>
+	<string name="local_openstreetmap_show">Auf Karte anzeigen</string>
 	<string name="local_openstreetmap_upload">Änderung auf OSM hochladen</string>
 	<string name="local_openstreetmap_delete">Änderung löschen</string>
 	<string name="local_openstreetmap_descr_title">Asynchrone OSM Bearbeitung:</string>
@@ -597,7 +597,7 @@
 		\n\t* als POI (via Typ oder nach Name)
 		\n\t* über die Such-Historie
 		\n\t* mittels Ihrer Favoriten
-		\n\nEin Kontextmenü für jeden Treffer einer Ergebnisliste bietet Optionen wie \'Navigation\' oder \'Auf Karte zeigen\'.
+		\n\nEin Kontextmenü für jeden Treffer einer Ergebnisliste bietet Optionen wie \'Navigation\' oder \'Auf Karte anzeigen\'.
 	</string>
 	<string name="tip_map_context_menu">\'Verwende Position\' Menü</string>
 	<string name="tip_map_context_menu_t">Das \'Verwende Position\'-Kontextmenü enthält alle Aktionen im Zusammenhang mit einem Kartenpunkt.
@@ -877,7 +877,7 @@
 	<string name="downloading_list_indexes">Die Liste der verfügbaren Regionen wird geladen…</string>
 	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
 	<string name="select_index_file_to_download">Nicht gefunden. Nicht vorhandene Regionen können selbst erstellt werden, siehe http://osmand.net.</string>
-	<string name="show_poi_on_map">Auf Karte zeigen</string>
+	<string name="show_poi_on_map">Auf Karte anzeigen</string>
 	<string name="fav_points_edited">Favorit wurde bearbeitet</string>
 	<string name="fav_points_not_exist">Keine Favoriten vorhanden</string>
 	<string name="update_existing">Ersetzen</string>
@@ -990,7 +990,7 @@
 	<string name="navigate_point_format_D">DDD.DDDDD</string>
 	<string name="navigate_point_format_DM">DDD MM.MMMMM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-	<string name="search_shown_on_map">Auf Karte zeigen</string>
+	<string name="search_shown_on_map">Auf Karte anzeigen</string>
 	<string name="navigate_point_cancel">Abbrechen</string>
 	<string name="search_address_top_text">Adresseingabe</string>
 	<string name="search_address_region">Region</string>
@@ -1494,9 +1494,9 @@
 	<string name="routing_attr_avoid_motorway_description">Autobahnen vermeiden</string>
 	<string name="routing_attr_weight_name">Maximalgewicht</string>
 	<string name="routing_attr_weight_description">Angabe einer Massebeschränkung für die Fahrzeugart</string>
-    <string name="android_19_location_disabled">Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Jetzt einen zulässigen Speicherort wählen und alle notwendigen Dateien dorthin kopieren?
-        \n Hinweis: Ursprüngliche Dateien bleiben hiervon unberührt. 
-        \n Hinweis: Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden. </string>
+    <string name="android_19_location_disabled">"Seit Android 4.4 (KitKat) können neue Karten-Downloads nicht mehr am Speicherort früherer Android-Versionen gespeichert werden (%s). Jetzt einen zulässigen Speicherort wählen und alle notwendigen Dateien dorthin kopieren?
+\n Hinweis: Ursprüngliche Dateien bleiben hiervon unberührt.
+\n Hinweis: Dateien können dann nicht mehr von OsmAnd und OsmAnd+ gemeinsam genutzt werden. "</string>
     <string name="application_dir_change_warning2">Osmand kann versuchen, die Dateien an den neuen Speicherort zu kopieren. Fortfahren?</string>
     <string name="copying_osmand_one_file_descr">Kopieren der Datei (%s) an den neuen Speicherort...</string>
     <string name="copying_osmand_files_descr">Kopieren der Osmand-Dateien zum neuen Speicherort (%s)</string>
@@ -1869,4 +1869,10 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="gpx_split_interval">Trennungs-Intervall wählen</string>
     <string name="gpx_info_subtracks">"Spurteile: %1$s "</string>
 	<string name="osmo_edit_color">Darstellungsfarbe</string>
+    <string name="sort_by_distance">Sortieren nach Entfernung</string>
+    <string name="sort_by_name">Sortieren nach Namen</string>
+    <string name="visible_element">Auf Karte anzeigen</string>
+    <string name="show_zoom_buttons_navigation_descr">Zoom-Buttons bei Navigation anzeigen</string>
+    <string name="show_zoom_buttons_navigation">Zeige Zoom-Buttons</string>
+    <string name="osmo_center_location">Zentrieren auf dem Bildschirm</string>
     </resources>

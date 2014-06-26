@@ -1863,7 +1863,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="selected_gpx_info_show">\n\nStlačte a podržte pre zobrazenie na mape</string>
     <string name="delay_navigation_start">Spustiť navigáciu s oneskorením</string>
     <string name="selected">vybrané</string>
-    <string name="gpx_split_interval">Vyberte interval na rozdelenie</string>
+    <string name="gpx_split_interval">Interval rozdelenia</string>
     <string name="gpx_info_subtracks">Podstopy: %1$s </string>
 	<string name="gpx_info_waypoints">Prechodné body: %1$s </string>
 	<string name="gpx_info_distance">Vzdialenosť: %1$s (%2$s bodov) </string>
@@ -1891,5 +1891,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="show_zoom_buttons_navigation">Zobraziť tlačidlá priblíženia</string>
     <string name="sort_by_distance">Zoradiť podľa vzdialenosti</string>
     <string name="sort_by_name">Zoradiť podľa názvu</string>
-    <string name="visible_element">Viditeľný</string>
+    <string name="visible_element">Zobraziť na mape</string>
     </resources>

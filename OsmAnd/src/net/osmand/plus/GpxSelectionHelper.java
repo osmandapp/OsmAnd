@@ -251,7 +251,7 @@ public class GpxSelectionHelper {
 		}
 		return null;
 	}
-	
+
 	public SelectedGpxFile getSelectedCurrentRecordingTrack() {
 		for (SelectedGpxFile s : selectedGPXFiles) {
 			if (s.isShowCurrentTrack()) {
@@ -260,7 +260,7 @@ public class GpxSelectionHelper {
 		}
 		return null;
 	}
-	
+
 	public void setGpxFileToDisplay(GPXFile... gpxs) {
 		// special case for gpx current route
 		for(GPXFile gpx : gpxs) {

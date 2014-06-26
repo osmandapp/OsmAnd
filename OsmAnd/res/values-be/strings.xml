@@ -1844,7 +1844,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="gpx_selection_points">%1$s \nКропкі</string>
     <string name="gpx_selection_track">%1$s \nСьлед %2$s</string>
     <string name="gpx_info_subtracks">Частак сьледу: %1$s </string>
-	<string name="gpx_split_interval">Выберыце інтэрвал нарэзкі</string>
+	<string name="gpx_split_interval">Інтэрвал нарэзкі</string>
     <string name="selected">выбрана</string>
     <string name="gpx_info_asc_altitude">Пад\ʼём/спад: %1$s</string>
     <string name="loading_smth">Загрузка %1$s…</string>

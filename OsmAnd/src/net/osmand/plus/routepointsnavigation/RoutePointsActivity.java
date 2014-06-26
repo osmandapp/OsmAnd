@@ -2,7 +2,6 @@ package net.osmand.plus.routepointsnavigation;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
