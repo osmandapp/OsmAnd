@@ -271,7 +271,7 @@ public class OsmandRenderer {
 			drawIconsOverCanvas(rc, cv);
 
 			notifyListeners(notifyList);
-			textRenderer.drawTextOverCanvas(rc, cv, rc.useEnglishNames);
+			textRenderer.drawTextOverCanvas(rc, cv, rc.preferredLocale);
 
 			long time = System.currentTimeMillis() - now;
 			rc.renderingDebugInfo = String.format("Rendering: %s ms  (%s text)\n"

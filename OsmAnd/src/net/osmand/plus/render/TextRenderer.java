@@ -204,7 +204,7 @@ public class TextRenderer {
 		cv.drawText(text, centerX, centerY, paint);
 	}
 
-	public void drawTextOverCanvas(RenderingContext rc, Canvas cv, boolean useEnglishNames) {
+	public void drawTextOverCanvas(RenderingContext rc, Canvas cv, String preferredLocale) {
 		int size = rc.textToDraw.size();
 
 		// 1. Sort text using text order
@@ -221,7 +221,7 @@ public class TextRenderer {
 		for (int i = 0; i < size; i++) {
 			TextDrawInfo text = rc.textToDraw.get(i);
 			if (text.text != null && text.text.length() > 0) {
-				if (useEnglishNames) {
+				if (preferredLocale.length() > 0) {
 					text.text = Junidecode.unidecode(text.text);
 				}
 
@@ -377,12 +377,14 @@ public class TextRenderer {
 						boolean isName = tag == obj.getMapIndex().nameEncodingType;
 						String nameTag = isName ? "" : obj.getMapIndex().decodeType(tag).tag;
 						boolean skip = false;
-						if (isName && rc.useEnglishNames && map.containsKey(obj.getMapIndex().nameEnEncodingType)) {
+						// not completely correct we should check "name"+rc.preferredLocale
+						if (isName && !rc.preferredLocale.equals("") && 
+								map.containsKey(obj.getMapIndex().nameEnEncodingType)) {
 							skip = true;
 						} 
-						if (tag == obj.getMapIndex().nameEnEncodingType && !rc.useEnglishNames) {
-							skip = true;
-						}
+//						if (tag == obj.getMapIndex().nameEnEncodingType && !rc.useEnglishNames) {
+//							skip = true;
+//						}
 						if(!skip) {
 							createTextDrawInfo(obj, render, rc, pair, xMid, yMid, path, points, name, nameTag);
 						}

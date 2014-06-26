@@ -668,7 +668,7 @@ public class MapRenderRepositories {
 			currentRenderingContext.width = requestedBox.getPixWidth();
 			currentRenderingContext.height = requestedBox.getPixHeight();
 			currentRenderingContext.nightMode = nightMode;
-			currentRenderingContext.useEnglishNames = prefs.USE_ENGLISH_NAMES.get();
+			currentRenderingContext.preferredLocale = prefs.USE_ENGLISH_NAMES.get()?":en":"";
 			currentRenderingContext.setDensityValue(mapDensity);
 			currentRenderingContext.screenDensityRatio = mapDensity / Math.max(1, requestedBox.getDensity()) ;
 			// init rendering context
