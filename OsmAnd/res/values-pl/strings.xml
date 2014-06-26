@@ -1846,4 +1846,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="visible_element">Widoczne</string>
     <string name="show_zoom_buttons_navigation_descr">Pokazuj przyciski zbliżania podczas nawigacji</string>
     <string name="show_zoom_buttons_navigation">Pokazuj przyciski zbliżania</string>
+    <string name="sort_by_distance">Sortuj według odległości</string>
+    <string name="sort_by_name">Sortuj według nazwy</string>
     </resources>
