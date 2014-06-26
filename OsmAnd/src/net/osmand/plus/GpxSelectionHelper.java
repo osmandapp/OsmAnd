@@ -261,11 +261,11 @@ public class GpxSelectionHelper {
 		return null;
 	}
 	
-	public void setGpxFileToDisplay(GPXFile... gpxs) {
+	public void setGpxFileToDisplay(boolean notShowNavigationDialog, GPXFile... gpxs) {
 		// special case for gpx current route
 		for(GPXFile gpx : gpxs) {
 			boolean show = true;
-			selectGpxFileImpl(gpx, show, false);
+			selectGpxFileImpl(gpx, show, notShowNavigationDialog);
 		}
 		saveCurrentSelections();
 	}
