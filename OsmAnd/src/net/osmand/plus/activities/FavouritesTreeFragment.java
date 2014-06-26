@@ -303,7 +303,7 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.export_fav, R.drawable.ic_action_search_light,
+		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_light,
 				R.drawable.ic_action_search_dark, MenuItem.SHOW_AS_ACTION_ALWAYS
 						| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		searchView = new com.actionbarsherlock.widget.SearchView(getActivity());
