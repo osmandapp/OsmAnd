@@ -1894,7 +1894,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder</string>
 	<string name="show_zoom_buttons_navigation_descr">Vis zoom-knapperne under navigation</string>
     <string name="show_zoom_buttons_navigation">Vis zoom-knapperne</string>
-    <string name="visible_element">Synlig</string>
+    <string name="visible_element">Vis på kort</string>
     <string name="sort_by_distance">Sorter efter afstand</string>
     <string name="sort_by_name">Sorter efter navn</string>
     <string name="none_selected_gpx">Ingen GPX filer valgt. Langt tryk for at vælge et tilgængeligt spor.</string>
