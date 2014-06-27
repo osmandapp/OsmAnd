@@ -1603,4 +1603,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="share_fav">Dela ut</string>
 	<string name="share_fav_subject">Favoriter utdelade via OsmAnd</string>
 	<string name="commiting_node">Skickar nod…</string>
-	</resources>
+	<string name="none_selected_gpx">Inga GPX-filer markerade. För att markera tryck och håll ned på tillgängligt spår.</string>
+    <string name="local_index_unselect_gpx_file">Avmarkera</string>
+    <string name="local_index_select_gpx_file">Markera för att visa</string>
+    </resources>
