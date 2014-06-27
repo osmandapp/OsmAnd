@@ -1892,4 +1892,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="sort_by_distance">Zoradiť podľa vzdialenosti</string>
     <string name="sort_by_name">Zoradiť podľa názvu</string>
     <string name="visible_element">Zobraziť na mape</string>
+    <string name="none_selected_gpx">Žiadny súbor GPX nebol vybraný. Podržaním vyberte z dostupných stôp.</string>
+    <string name="local_index_unselect_gpx_file">Odznačiť</string>
+    <string name="local_index_select_gpx_file">Vybrať na zobrazenie</string>
     </resources>
