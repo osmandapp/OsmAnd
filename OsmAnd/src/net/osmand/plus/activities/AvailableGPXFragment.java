@@ -396,12 +396,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (resId == R.string.local_index_mi_rename) {
 					renameFile(info);
-				} else if (resId == R.string.local_index_select_gpx_file) {
-					getMyApplication().getSelectedGpxHelper().selectGpxFile(info.gpx, true, true);
-					listAdapter.notifyDataSetChanged();
 				} else if (resId == R.string.local_index_unselect_gpx_file) {
-					getMyApplication().getSelectedGpxHelper().selectGpxFile(info.gpx, false, true);
+					getMyApplication().getSelectedGpxHelper().selectGpxFile(info.gpx, resId == R.string.local_index_select_gpx_file, true);
 					listAdapter.notifyDataSetChanged();
+					Runnable r = selectedGpxHelper.getUiListener();
+					if(r != null) {
+						r.run();
+					}
 				} else if (resId == R.string.local_index_mi_delete) {
 					Builder confirm = new AlertDialog.Builder(getActivity());
 					confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
@@ -1098,6 +1099,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			htmlDescription = null;
 			getHtmlDescription();
 		}
+		
 		public String getFileName() {
 			if(fileName != null) {
 				return fileName;
