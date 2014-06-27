@@ -1708,7 +1708,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="loading_smth">Загрузка %1$s…</string>
     <string name="map_widget_plain_time">Текущее время</string>
     <string name="gpx_wpt">Путевая точка</string>
-    <string name="gpx_split_interval">Выбрать интервал разбиения</string>
+    <string name="gpx_split_interval">Интервал разбиения</string>
     <string name="delay_navigation_start">Старт навигации по тайм-ауту</string>
     <string name="save_as_favorites_points">Сохранить как группу избранных</string>
     <string name="select_destination_and_intermediate_points">Выбрать путевые точки</string>
@@ -1726,4 +1726,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="sort_by_name">Сортировать по имени</string>
     <string name="visible_element">Показывать</string>
     <string name="osmo_edit_color">Цвет метки</string>
+    <string name="none_selected_gpx">Нет выбранных файлов GPX. Используйте длительное нажатие для выбора доступного трека.</string>
+    <string name="local_index_unselect_gpx_file">Сбросить выбор</string>
+    <string name="local_index_select_gpx_file">Выбрать для отображения</string>
     </resources>
