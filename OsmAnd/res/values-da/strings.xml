@@ -1897,4 +1897,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="visible_element">Synlig</string>
     <string name="sort_by_distance">Sorter efter afstand</string>
     <string name="sort_by_name">Sorter efter navn</string>
+    <string name="none_selected_gpx">Ingen GPX filer valgt. Langt tryk for at vælge et tilgængeligt spor.</string>
+    <string name="local_index_select_gpx_file">Vælg at få vist</string>
+    <string name="local_index_unselect_gpx_file">Fravælg</string>
     </resources>
