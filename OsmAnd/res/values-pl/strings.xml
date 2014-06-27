@@ -1843,7 +1843,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="save_as_favorites_points">Zapisz jako grupę ulubionych</string>
     <string name="select_destination_and_intermediate_points">Wybierz punkty</string>
     <string name="layer_amenity_label">Etykiety punktów</string>
-    <string name="visible_element">Widoczne</string>
+    <string name="visible_element">Pokaż na mapie</string>
     <string name="show_zoom_buttons_navigation_descr">Pokazuj przyciski zbliżania podczas nawigacji</string>
     <string name="show_zoom_buttons_navigation">Pokazuj przyciski zbliżania</string>
     <string name="sort_by_distance">Sortuj według odległości</string>
