@@ -140,7 +140,7 @@
 	<string name="map_widget_next_turn">Επόμενη στροφή</string>
 	<string name="map_widget_next_turn_small">Επόμενη στροφή (μικρή)</string>
 	<string name="map_widget_next_next_turn">Μεθεπόμενη στροφή</string>
-	<string name="map_widget_mini_route">Mini route map</string>
+	<string name="map_widget_mini_route">Μίνι χάρτης διαδρομής</string>
 	<string name="bg_service_screen_lock">Κλείδωμα οθόνης</string>
 	<string name="bg_service_screen_unlock">Ξεκλείδωμα οθόνης</string>
 	<string name="bg_service_screen_lock_toast">Η οθόνη είναι κλειδωμένη</string>
@@ -716,7 +716,7 @@
 	<string name="version_index_is_not_supported">Η εκδοχή \'\'{0}\'\' του ευρετηρίου δεν υποστηρίζεται</string>
 	<string name="use_osmand_routing_service">Πλοήγηση OsmAnd &gt;20χλμ</string>
 	<string name="use_osmand_routing_service_descr">Χρήση της εκτός σύνδεσης πλοήγησης του OsmAnd ισχύει μόνο για διαδρομές &gt; 20 χλμ (πειραματικό)</string>
-	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
+	<string name="osmand_routing_experimental">Η πλοήγηση εκτός δικτύου OsmAnd είναι μια πειραματική λειτουργία και δε λειτουργεί για αποστάσεις άνω των 20 χλμ.\n\nΗ υπηρεσία πλοήγησης έχει προσωρινά αλλάξει στην δικτυακή CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Δεν μπορώ να βρω τον καθορισμένο κατάλογο.</string>
 	<string name="application_dir">Κατάλογος αποθήκευσης</string>
 	
@@ -931,7 +931,7 @@
 	<string name="opening_hours">Ώρες λειτουργίας</string>
 	<string name="opening_changeset">Άνοιγμα ομάδας αλλαγών…</string>
 	<string name="closing_changeset">Κλείσιμο ομάδας αλλαγών…</string>
-	<string name="commiting_node">Committing node…</string>
+	<string name="commiting_node">Δέσμευση κόμβου…</string>
 	<string name="loading_poi_obj">Φόρτωση ΣΕ…</string>
 	<string name="auth_failed">Αποτυχία εξουσιοδότησης</string>
 	<string name="failed_op">απέτυχε</string>
@@ -1411,7 +1411,7 @@
     <string name="av_camera_focus_continuous">Η κάμερα προσπαθεί συνεχώς να εστιάσει</string>
 	<string name="sort_by_distance">Ταξινόμηση κατά απόσταση</string>
     <string name="sort_by_name">Ταξινόμηση κατά όνομα</string>
-    <string name="visible_element">Ορατό</string>
+    <string name="visible_element">Ορατό στο χάρτη</string>
     <string name="save_as_favorites_points">Αποθήκευση ως ομάδα αγαπημένων</string>
     <string name="app_modes_choose_descr">Επιλογή εμφανών προφιλ χρήσεων στην εφαρμογή</string>
     <string name="loading_smth">Φόρτωση %1$s …</string>
