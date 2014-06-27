@@ -70,6 +70,8 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		app = (OsmandApplication) activity.getApplication();
 		selectedGpxHelper = app.getSelectedGpxHelper();
 	}
+	
+	
 
 	@Override
 	public void onResume() {
@@ -110,6 +112,11 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 				}
 			}
 		});
+		TextView tv = new TextView(getSherlockActivity());
+		tv.setText(R.string.none_selected_gpx);
+		tv.setTextSize(24);
+		//((ViewGroup)getExpandableListView().getParent()).addView(tv); 
+		getExpandableListView().setEmptyView(tv);
 		return vs;
 	}
 	
