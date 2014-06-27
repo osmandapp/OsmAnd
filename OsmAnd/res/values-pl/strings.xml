@@ -1848,4 +1848,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="show_zoom_buttons_navigation">Pokazuj przyciski zbliżania</string>
     <string name="sort_by_distance">Sortuj według odległości</string>
     <string name="sort_by_name">Sortuj według nazwy</string>
+    <string name="none_selected_gpx">Nie wybrano żadnych plików GPX. W celu wyboru naciśnij i przytrzymaj dostępną ścieżkę.</string>
+    <string name="local_index_unselect_gpx_file">Odznacz</string>
+    <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
     </resources>
