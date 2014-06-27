@@ -288,7 +288,11 @@ public class RoutingHelper {
 		if (calculateRoute) {
 			recalculateRouteInBackground(false, currentLocation, finalLocation, intermediatePoints, currentGPXRoute, 
 					previousRoute.isCalculated() ? previousRoute : null);
+		} else if (currentRunningJob != null && currentRunningJob instanceof RouteRecalculationThread) {
+			RouteRecalculationThread thread = (RouteRecalculationThread) currentRunningJob;
+			thread.stopCalculation();
 		}
+
 		double projectDist = mode != null && mode.hasFastSpeed() ? posTolerance : posTolerance / 2;
 		if(returnUpdatedLocation && locationProjection != null && currentLocation.distanceTo(locationProjection) < projectDist) {
 			return locationProjection;
