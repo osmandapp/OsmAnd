@@ -213,14 +213,14 @@ public class GpxSelectionHelper {
 						name += ", ";
 					name += GpxUiHelper.getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
 				}
-// min/max elevation data contains less noise than up/down, but is less useful in split track analysis
-//				if (analysis.isElevationSpecified()) {
-//					if (name.length() != 0)
-//						name += ", ";
-//						name += GpxUiHelper.getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app));
-//						name += " - ";
-//						name += GpxUiHelper.getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app));
-//				}
+// add min/max elevation data to split track analysis to facilitate easier track/segment identification
+				if (analysis.isElevationSpecified()) {
+					if (name.length() != 0)
+						name += ", ";
+						name += GpxUiHelper.getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app));
+						name += " - ";
+						name += GpxUiHelper.getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app));
+				}
 				if (analysis.isElevationSpecified() && (analysis.diffElevationUp > eleThreshold || 
 						analysis.diffElevationDown > eleThreshold) ) {
 					if (name.length() != 0)
