@@ -30,17 +30,17 @@ public class SpecialPhrases {
 	 */
 	public static String getSpecialPhrase(String value, String defValue) {
 		if (m == null) {
-			// do not throw exception because OsmAndApplication is not always initiliazed before 
+			// do not throw exception because OsmAndApplication is not always initiliazed before
 			// this call
 			log.warn("The language has not been set for special phrases");
 			return value;
-			
+
 		}
 		String specialValue = m.get(value);
-		if(Algorithms.isEmpty(specialValue)) {
+		if (Algorithms.isEmpty(specialValue)) {
 			specialValue = defValue;
 		}
-		return specialValue.replace('_', ' ');
+		return specialValue == null ? null : specialValue.replace('_', ' ');
 	}
 
 	/**
