@@ -1878,4 +1878,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="show_zoom_buttons_navigation">نمایش دکمه های زوم</string>
     <string name="sort_by_distance">ترتیب براساس مسافت</string>
     <string name="sort_by_name">ترتیب براساس نام</string>
+    <string name="none_selected_gpx">هیچ فایل GPX انتخاب نشده است. جهت انتخاب فشار دهید و نگه دارید در مسیر در دسترس.</string>
+    <string name="local_index_unselect_gpx_file">لغو</string>
+    <string name="local_index_select_gpx_file">برای نمایش انتخاب کنید</string>
     </resources>
