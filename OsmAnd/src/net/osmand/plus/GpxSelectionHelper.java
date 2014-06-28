@@ -213,27 +213,27 @@ public class GpxSelectionHelper {
 						name += ", ";
 					name += GpxUiHelper.getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
 				}
-// Let's show min/max elevation in the track summary instead of up/down, it is more characteristic (up/down contains a lot of noise)
-				if (analysis.isElevationSpecified()) {
-					if (name.length() != 0)
-						name += ", ";
-						name += GpxUiHelper.getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app));
-						name += " - ";
-						name += GpxUiHelper.getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app));
-				}
-//				if (analysis.isElevationSpecified() && (analysis.diffElevationUp > eleThreshold || 
-//						analysis.diffElevationDown > eleThreshold) ) {
+// min/max elevation data contains less noise than up/down, but is less useful in split track analysis
+//				if (analysis.isElevationSpecified()) {
 //					if (name.length() != 0)
 //						name += ", ";
-//					if(analysis.diffElevationDown > eleThreshold) {
-//						name += GpxUiHelper.getColorValue(descClr, " \u2193 "+
-//								OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
-//					}
-//					if(analysis.diffElevationUp > eleThreshold) {
-//						name += GpxUiHelper.getColorValue(ascClr, " \u2191 "+
-//								OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
-//					}
+//						name += GpxUiHelper.getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app));
+//						name += " - ";
+//						name += GpxUiHelper.getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app));
 //				}
+				if (analysis.isElevationSpecified() && (analysis.diffElevationUp > eleThreshold || 
+						analysis.diffElevationDown > eleThreshold) ) {
+					if (name.length() != 0)
+						name += ", ";
+					if(analysis.diffElevationDown > eleThreshold) {
+						name += GpxUiHelper.getColorValue(descClr, " \u2193 "+
+								OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
+					}
+					if(analysis.diffElevationUp > eleThreshold) {
+						name += GpxUiHelper.getColorValue(ascClr, " \u2191 "+
+								OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
+					}
+				}
 				item.name = name;
 				item.locationStart = analysis.locationStart;
 				item.locationEnd = analysis.locationEnd;
