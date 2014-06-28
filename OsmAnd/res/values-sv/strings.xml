@@ -1560,7 +1560,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="map_widget_plain_time">Aktuell tid</string>
     <string name="gpx_wpt">Waypoint</string>
     <string name="selected_gpx_info_show">\n\nTryck och håll för att se på karta</string>
-    <string name="delay_navigation_start">Starta navigering med fördröjning</string>
+    <string name="delay_navigation_start">Starta turn-by-turn-navigering automatiskt</string>
     <string name="selected">valda</string>
     <string name="gpx_split_interval">Split-intervall</string>
     <string name="gpx_info_subtracks">Underspår: %1$s </string>
@@ -1591,7 +1591,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="color_green">grön</string>
 	
     <string name="osmodroid_unseek">Sluta söka objekt</string>
-    <string name="visible_element">Synlig</string>
+    <string name="visible_element">Visa på karta</string>
     <string name="sort_by_distance">Sortera efter avstånd</string>
     <string name="sort_by_name">Sortera efter namn</string>
     <string name="arrival_distance">Ankomstmeddelande</string>

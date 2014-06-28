@@ -145,7 +145,7 @@
 	<string name="favourites_search_desc">البحث في المفضلة</string>
 	<string name="offline_navigation_not_available">ملاحة OsmAnd غير متاحة مؤقتا.</string>
 	<string name="unknown_from_location">نقطة الانطلاق لم تحدد بعد</string>
-	<string name="local_indexes_cat_map">خرائط حاليا (ناقلات)</string>
+	<string name="local_indexes_cat_map">خرائط محفوظة (متجهية)</string>
 	
 	<string name="index_settings_descr">تنزيل الخرائط وإدارة متواجد حاليا البيانات المخزنة على جهازك</string>
 	<string name="extra_settings">الإعدادات المتقدمة</string>
@@ -523,7 +523,7 @@
 	<string name="asap">في أسرع وقت ممكن</string>
 	<string name="route_roundabout">دوّار: خذ المخرج %1$d ثم استمر</string>
 	<string name="rendering_attr_noPolygons_description">اجعل جميع الميزات الأرض المساحية شفافة على خريطة</string>
-	<string name="rendering_attr_noPolygons_name">إخفاء المضلعات</string>
+	<string name="rendering_attr_noPolygons_name">اخف المضلعات</string>
 	<string name="rendering_attr_appMode_name">نمط التصيير</string>
 	<string name="rendering_attr_appMode_description">تحسين الخريطة لـ</string>
 	<string name="poi_search_desc">بحث عن النقاط المهمة</string>
@@ -541,7 +541,7 @@
 	<string name="auto_zoom_none">تعطيل التكبير التلقائي</string>
 	<string name="auto_zoom_far">قم بتوسيط الخريطة هنا</string>
 	<string name="local_indexes_cat_tile">خرائط متصلة بالإنترنت و مربعية</string>
-	<string name="map_online_plugin_is_not_installed">تمكين ملحق الخرائط على الإنترنت على تحديد مصادر مختلفة للخرائط</string>
+	<string name="map_online_plugin_is_not_installed">مكّن ملحق الخرائط على الإنترنت على تحديد مصادر مختلفة للخرائط</string>
 	<string name="map_online_data">خرائط من الانترنت والمربعية</string>
 	<string name="map_online_data_descr">استخدام الخرائط من الإنترنت (تنزيل وحفظ نسخة منها على بطاقة SD)</string>
 	<string name="online_map_settings">خرائط المتصلة بالانترنت</string>
@@ -555,7 +555,7 @@
 	<string name="osmand_development_plugin_description">عرض إعدادات مميزات التطوير والتنقيح من مثل محاكاة المسار أو عرض أداء التصيير.</string>
 	<string name="plugins_screen">ملحقات</string>
 	<string name="select_plugin_to_activate">المس الملحق لتفعيله أو إلغاء تفعليه. (ربما تحتاج إلى إعادة تشغيل OsmAnd)</string>
-	<string name="prefs_plugins_descr">الملحقات تفعل إعدادات متقدمة و وظائف إضافية</string>
+	<string name="prefs_plugins_descr">تفعّل الملحقات إعداداتٍ متقدمة ووظائف إضافية</string>
 	<string name="osm_editing_plugin_description">تظهر الإعدادات اللازمة للتغذية الراجعة لموقع OSM  من مثل تجميع/تحرير كائنات النقاط المهمة، فتح/تعليق علل OSM والمساهمة بلمفات GPX المسجلة (يتطلب حساب OSM).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">عادة تعرض الخرائط الاتجاهية أسرع. ربما لا تعمل جيدا على بعض الأجهزة.</string>
 	<string name="play_commands_of_currently_selected_voice">شغل الأوامر من الصوت المحدد الحالي</string>
