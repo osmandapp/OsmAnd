@@ -1797,4 +1797,27 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
 	<string name="osmo_conn_successfull">Povezava vzpostavljena: %1$s </string>
     <string name="osmo_session_token">Žeton seje: %1$s</string>
     <string name="gpx_timemoving">Čas premikanja: %1$s</string>
+    <string name="local_index_select_gpx_file">Izberite za prikaz</string>
+    <string name="sort_by_distance">Razvrsti po razdalji</string>
+    <string name="sort_by_name">Razvrsti po imenu</string>
+    <string name="visible_element">Pokaži na zemljevidu</string>
+    <string name="show_zoom_buttons_navigation_descr">Pokaži gumbe za povečavo med navigacijo</string>
+    <string name="show_zoom_buttons_navigation">Pokaži gumbe za povečavo</string>
+    <string name="save_as_favorites_points">Shrani kot skupino priljubljenih</string>
+    <string name="select_destination_and_intermediate_points">Izberite točke</string>
+    <string name="layer_amenity_label">Oznake točk</string>
+    <string name="gpx_wpt">Točka</string>
+    <string name="selected_gpx_info_show">\n\nPritisnite in držite za prikaz na zemljevidu</string>
+    <string name="delay_navigation_start">Samodejno začni vodenje od zavoja do zavoja (turn-by-turn)</string>
+    <string name="gpx_info_subtracks">"Podsledi: %1$s "</string>
+	<string name="gpx_info_waypoints">"Točke: %1$s "</string>
+	<string name="gpx_info_diff_altitude">Višinski razpon: %1$s</string>
+	<string name="gpx_info_asc_altitude">Spust/vzpon: %1$s</string>
+    <string name="gpx_selection_segment_title">Odsek</string>
+    <string name="gpx_selection_route_points">%1$s
+\nTočk na poti %2$s</string>
+    <string name="gpx_selection_track">%1$s
+\nSled %2$s</string>
+    <string name="gpx_available_current_track">Trenutna shranjena sled</string>
+    <string name="my_favorites">Moji priljubljeni</string>
     </resources>
