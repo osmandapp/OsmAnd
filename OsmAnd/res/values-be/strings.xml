@@ -1858,7 +1858,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="layer_amenity_label">Назвы кропак</string>
     <string name="show_zoom_buttons_navigation">Паказваць кнопкі маштабаваньня</string>
     <string name="show_zoom_buttons_navigation_descr">Паказваць кнопкі маштабаваньня падчас навігацыі</string>
-    <string name="visible_element">Бачны</string>
+    <string name="visible_element">Паказваць на мапе</string>
     <string name="sort_by_distance">Сартаваць па адлегласьці</string>
     <string name="sort_by_name">Сартаваць па назьве</string>
+    <string name="none_selected_gpx">GPX файлы ня выбраныя. Каб выбраць націсьніце і ўтрымлівайце наяўны сьлед.</string>
+    <string name="local_index_unselect_gpx_file">Ачысьціць</string>
+    <string name="local_index_select_gpx_file">Выбраць для паказу</string>
     </resources>
