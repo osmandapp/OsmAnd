@@ -948,7 +948,7 @@
   <string name="osmand_parking_time_limit">Parcheggio a tempo</string>
   <string name="osmand_parking_time_no_limit">Parcheggio senza limiti di tempo</string>
   <string name="osmand_parking_position_description">La posizione del parcheggio della tua auto. %1$s</string>
-  <string name="osmand_parking_position_description_add">Recupera l\'auto a:</string>
+  <string name="osmand_parking_position_description_add">Recupera l\'auto tra:</string>
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Punto di parcheggio</string>
