@@ -9,6 +9,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.City.CityType;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
+import net.osmand.util.Algorithms;
 import android.content.Context;
 
 public class OsmAndFormatter {
@@ -201,6 +202,7 @@ public class OsmAndFormatter {
 		StringBuilder d = new StringBuilder();
 		for(Entry<String, String>  e : amenity.getAdditionalInfo().entrySet()) {
 			String key = e.getKey();
+			String vl = e.getValue();
 			if(Amenity.DESCRIPTION.equals(key)) {
 				if(amenity.getType() == AmenityType.OSMWIKI && shortDescription) {
 					continue;
@@ -215,9 +217,14 @@ public class OsmAndFormatter {
 				}
 				d.append(ctx.getString(R.string.website) + ": ");
 			} else {
-				d.append(e.getKey() + ": ");
+				vl = SpecialPhrases.getSpecialPhrase(e.getKey() + "_" + e.getValue(), null);
+				if(vl == null){
+					vl = SpecialPhrases.getSpecialPhrase(e.getKey(), 
+							Algorithms.capitalizeFirstLetterAndLowercase(e.getKey())) + ": ";
+					vl += SpecialPhrases.getSpecialPhrase(e.getValue(), e.getValue());
+				}
 			}
-			d.append(e.getValue()).append('\n');
+			d.append(vl).append('\n');
 		}
 		return d.toString().trim();
 	}
