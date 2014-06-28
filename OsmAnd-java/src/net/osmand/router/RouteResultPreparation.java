@@ -521,7 +521,13 @@ public class RouteResultPreparation {
 
 	private void getLanesInfo(RouteSegmentResult prevSegm, TurnType t) {
 		int lanes = prevSegm.getObject().getLanes();
-		t.setLanes(new int[lanes]);
+		if(prevSegm.getObject().getOneway() == 0) {
+			lanes = (lanes + 1) / 2;
+		}
+		if (lanes <= 0) {
+			return;
+		}
+
 		String turnLanes = prevSegm.getObject().getValue("turn:lanes");
 
 		if (turnLanes == null) {
@@ -533,6 +539,8 @@ public class RouteResultPreparation {
 			// Error in data or missing data, go to old behavior
 			return;
 		}
+
+		t.setLanes(new int[lanes]);
 
 		assignTurns(splitLaneOptions, t);
 	}
@@ -611,6 +619,7 @@ public class RouteResultPreparation {
 		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
 		boolean speak = false;
 		int speakPriority = Math.max(highwaySpeakPriority(prevSegm.getObject().getHighway()), highwaySpeakPriority(currentSegm.getObject().getHighway()));
+		boolean otherRoutesExist = false;
 		if (attachedRoutes != null) {
 			for (RouteSegmentResult attached : attachedRoutes) {
 				double ex = MapUtils.degreesDiff(attached.getBearingBegin(), currentSegm.getBearingBegin());
@@ -641,6 +650,9 @@ public class RouteResultPreparation {
 						outboundRoads.add(new OutboundRoad(ex, lns, attached));
 						speak |= rsSpeakPriority <= speakPriority;
 					}
+				}
+				if (mpi > TURN_DEGREE_MIN) {
+					otherRoutesExist = true;
 				}
 			}
 		}
@@ -691,6 +703,46 @@ public class RouteResultPreparation {
 		} else if (kr) {
 			t = TurnType.valueOf(makeSlightTurn ? TurnType.TSLR : TurnType.KR, leftSide);
 			t.setSkipToSpeak(!speak);
+		} else {
+			if (!otherRoutesExist) {
+				return null;
+			}
+			// Most likely, we're going straight at a 90-degree intersection with another road
+			t = TurnType.valueOf(TurnType.C, leftSide);
+			t.setSkipToSpeak(true);
+
+			int prevLanes = prevSegm.getObject().getLanes();
+			if(prevSegm.getObject().getOneway() == 0) {
+				prevLanes = (prevLanes + 1) / 2;
+			}
+			if (prevLanes <= 0) {
+				return null;
+			}
+			lanes = new int[prevLanes];
+			
+			String turnLanes = prevSegm.getObject().getValue("turn:lanes");
+
+			if (turnLanes == null) {
+				return null;
+			}
+
+			String[] splitLaneOptions = turnLanes.split("\\|", -1);
+			if (splitLaneOptions.length != lanes.length) {
+				// Error in data or missing data
+				return null;
+			}
+
+			t.setLanes(lanes);
+
+			assignTurns(splitLaneOptions, t);
+
+			for (int j = 0; j < lanes.length; j++) {
+				if (t.getPrimaryTurn(j) == TurnType.Turn.STRAIGHT || t.getSecondaryTurn(j) == TurnType.Turn.STRAIGHT) {
+					t.getLanes()[j] |= 1;
+				}
+			}
+
+			return t;
 		}
 
 		if (t != null && lanes != null) {
