@@ -1535,7 +1535,7 @@
     <string name="index_item_nation_addresses">Адреса по стране</string>
 	<string name="index_item_world_ski">Мировая лыжная карта</string>
     <string name="index_item_world_basemap">Мировая обзорная карта</string>
-    <string name="index_item_world_seamarks">Мировые навигационные знаки</string>
+    <string name="index_item_world_seamarks">Мировые морские объекты</string>
 	<string name="index_item_world_altitude_correction">Мировая коррекция высоты</string>
 	<string name="index_name_canada">Северная Америка - Канада</string>
     <string name="always_center_position_on_map">Отображать положение всегда в центре</string>
