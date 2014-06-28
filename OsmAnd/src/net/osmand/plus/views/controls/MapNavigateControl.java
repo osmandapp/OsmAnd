@@ -185,7 +185,7 @@ public class MapNavigateControl extends MapControls {
 		}
 		opt.add(i);
 		if(i < 0) {
-			items.add(mapActivity.getString(R.string.none)); 
+			items.add(mapActivity.getString(R.string.auto_follow_route_never));
 		} else {
 			items.add(i + " " +mapActivity.getString(R.string.int_seconds));
 		}
