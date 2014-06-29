@@ -1884,7 +1884,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="map_widget_plain_time">Aktuel tid</string>
     <string name="gpx_wpt">Rutepunkt</string>
     <string name="selected_gpx_info_show">\n\nLangt tryk for at se på kort</string>
-    <string name="delay_navigation_start">Start navigationen med forsinkelse</string>
+    <string name="delay_navigation_start">Start sving-for-sving vejledning automatisk</string>
     <string name="selected">valgt</string>
     <string name="gpx_split_interval">Opdelingsinterval</string>
     <string name="loading_smth">Indlæser %1$s…</string>
