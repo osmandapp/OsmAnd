@@ -1787,7 +1787,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar botones de zoom durante navegación</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de zoom</string>
-    <string name="route_descr_destination"/>
+    <string name="route_descr_destination">\t</string>
     <string name="sort_by_distance">Ordenar por distancia</string>
     <string name="sort_by_name">Ordenar por nombre</string>
     <string name="visible_element">Mostrar en el mapa</string>
