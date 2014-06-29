@@ -1863,7 +1863,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="gpx_info_waypoints">Tappe del percorso: $1%s </string>
 	<string name="gpx_info_distance">Distanza: %1$s (%2$s punti) </string>
 	<string name="gpx_info_end_time">Orario di arrivo: %1$tF, %1$tT </string>
-	<string name="gpx_info_diff_altitude">Dislivello: %1$s</string>
+	<string name="gpx_info_diff_altitude">Gamma alititudini: %1$s</string>
 	<string name="gpx_info_asc_altitude">Discesa/salita: %1$s</string>
     <string name="gpx_timespan">Intervallo di tempo: %1$s</string>
 	<string name="gpx_timemoving">Tempo in movimento: %1$s</string>
@@ -1880,17 +1880,17 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="loading_smth">Caricamento di %1$s …</string>
     <string name="gpx_wpt">Tappa</string>
     <string name="selected_gpx_info_show">\n\nTieni premuto per vederlo sulla mappa</string>
-    <string name="delay_navigation_start">Avvia la navigazione con ritardo</string>
+    <string name="delay_navigation_start">Avvia la navigazione svolta per svolta automaticamente</string>
     <string name="map_widget_plain_time">Orario attuale</string>
     <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
     <string name="select_destination_and_intermediate_points">Scegli le tappe</string>
     <string name="layer_amenity_label">Etichette dei punti</string>
     <string name="show_zoom_buttons_navigation">Mostra i pulsanti dello zoom</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione</string>
-    <string name="visible_element">Visibile</string>
+    <string name="visible_element">Mostra nella mapppa</string>
     <string name="sort_by_distance">Ordina per distanza</string>
     <string name="sort_by_name">Ordina per nome</string>
     <string name="none_selected_gpx">Nessun file GPX selezionato. Per selezionarlo tieni premuto su una delle tracce disponibili.</string>
     <string name="local_index_unselect_gpx_file">Deseleziona</string>
-    <string name="local_index_select_gpx_file">Seleziona per mostrare</string>
+    <string name="local_index_select_gpx_file">Seleziona per visualizzarlo</string>
     </resources>
