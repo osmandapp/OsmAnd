@@ -1837,7 +1837,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_regenerate_login_ids_confirm">Sei sicuro di voler rigenerare gli id personali? Tutti i dispositivi collegati a te non saranno più in grado di tracciarti.</string>
     <string name="osmo_regenerate_login_ids">Rigenera l\'id</string>
     <string name="osmo_cancel_moving_target">Cancella l\'obiettivo mobile</string>
-    <string name="osmo_center_location">Centro nello schermo</string>
+    <string name="osmo_center_location">Centra nello schermo</string>
     <string name="osmo_set_moving_target">Imposta come obiettivo mobile</string>
     <string name="osmo_use_server_name">Nome registrato</string>
     <string name="osmo_connect_to_my_nickname">Mio nickname</string>
@@ -1880,7 +1880,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="loading_smth">Caricamento di %1$s …</string>
     <string name="gpx_wpt">Tappa</string>
     <string name="selected_gpx_info_show">\n\nTieni premuto per vederlo sulla mappa</string>
-    <string name="delay_navigation_start">Avvia la navigazione svolta per svolta automaticamente</string>
+    <string name="delay_navigation_start">Avvia la navigazione passo per passo automaticamente</string>
     <string name="map_widget_plain_time">Orario attuale</string>
     <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
     <string name="select_destination_and_intermediate_points">Scegli le tappe</string>
