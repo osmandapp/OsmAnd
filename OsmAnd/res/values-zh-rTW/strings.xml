@@ -1887,4 +1887,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="none_selected_gpx">沒有選定 GPX 檔案。選取現有的軌跡再按住。</string>
     <string name="local_index_unselect_gpx_file">取消選擇</string>
     <string name="local_index_select_gpx_file">選取要顯示的</string>
+    <string name="route_descr_destination">\t</string>
     </resources>
