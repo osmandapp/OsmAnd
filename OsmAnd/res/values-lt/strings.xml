@@ -1885,4 +1885,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="none_selected_gpx">Nepasirinktas joks GPX failas. Norėdami pasirinkti paspauskite ir laikykite pageidaujamą failą.</string>
     <string name="local_index_unselect_gpx_file">Panaikinti žymėjimą</string>
     <string name="local_index_select_gpx_file">Pasirinkite ką atvaizduoti</string>
+    <string name="route_descr_destination">\t</string>
     </resources>
