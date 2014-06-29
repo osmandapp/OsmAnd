@@ -141,16 +141,15 @@
 <string name="offline_navigation_not_available">OsmAnd offlinenavigering är inte tillgänglig för tillfället.</string>
 <string name="left_side_navigation">Vänstertrafik</string>
 <string name="left_side_navigation_descr">Välj för länder med vänstertrafik</string>
-<string name="download_link_and_local_description">Tryck här för att ladda ner eller uppdatera offline-data.
-\nTryck på en befintligt post för att se detaljer; tryck och håll för att inaktivera eller ta bort en post.
-Aktuella data på enheten (%1$s ledigt):</string>
+<string name="download_link_and_local_description">Tryck här för att ladda ner eller uppdatera offline-kartfiler.
+\nTryck på en befintligt post för att se detaljer; tryck och håll för att inaktivera eller ta bort en post. Aktuella data på enheten (%1$s ledigt):</string>
 <string name="unknown_from_location">Startpunkten är ännu inte bestämd</string>
 <string name="unknown_location">Positionen är ännu inte känd</string>
 <string name="confirm_interrupt_download">Vill du avbryta nedladdningen?</string>
 <string name="local_indexes_cat_tile">Online-kartor och kartbitar (tiles)</string>
 <string name="local_indexes_cat_map">Offline-kartor (vektor)</string>
 
-<string name="index_settings_descr">Ladda ner, visa detaljer, och hantera offline-kartor</string>
+<string name="index_settings_descr">Ladda ner och hantera offline-kartor lagrade på din enhet</string>
 <string name="online_map_settings">Online-kartor</string>
 <string name="osmand_accessibility_description">Visa inställningar för speciella tillgänglighetsanpassning.</string>
 <string name="extra_settings">Avancerade inställningar</string>
@@ -225,7 +224,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="favourites_search_desc">Favoritsökning</string>
 <string name="history_search_desc">Sökhistorik</string>
 <string name="modify_transparency">Ändra transparens (0 - transparent, 255 - ogenomskinlig)</string>
-<string name="first_time_msg">Tack för att du använder OsmAnd. För många funktioner i programmet behöver du vissa regionala offline-data som du kan ladda ner via \'Inställningar\' -&gt; \'Offline-data\'. Därefter kommer du att kunna se kartor, hitta adresser, leta efter intressepunkter och hitta kollektivtrafik.</string>
+<string name="first_time_msg">Tack för att du använder OsmAnd. För många funktioner i programmet behöver du vissa regionala offline-data som du kan ladda ner via \'Inställningar\' -&gt; \'Hantera kartfiler\'. Därefter kommer du att kunna se kartor, hitta adresser, leta efter intressepunkter och hitta kollektivtrafik.</string>
 <string name="basemap_was_selected_to_download">En baskarta krävs för att appen ska fungera korrekt och den har markerats för nedladdning.</string>
 <string name="select_index_file_to_download">Hittade ingenting. Om du inte kan hitta din region, kan du skapa den själv (se http://osmand.net).</string>
 <string name="map_online_plugin_is_not_installed">Aktivera pluginen online-kartor för att välja olika kartkällor</string>
@@ -264,7 +263,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 <string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt upp snabbare. Fungerar kanske inte så bra på vissa enheter.</string>
 <string name="play_commands_of_currently_selected_voice">Spela upp kommandon med aktuell röst</string>
 <string name="test_voice_prompts">Test av röstmeddelanden</string>
-<string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan ladda ner en i Inställningar (Datahantering) eller byta till online-kartor.</string>
+<string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan ladda ner en i Inställningar (Hantera kartfiler) eller byta till online-kartor (aktivera plugin för online-kartor för detta).</string>
 <string name="tip_recent_changes_0_7_2_t">Förändringar i 0.7.2:
 \n\t- Inbyggd rendering för alla enheter
 \n\t- Offline POI-redigering
@@ -624,7 +623,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="add_as_last_destination_point">Lägg till som sista waypoint</string>
     <string name="add_as_first_destination_point">Lägg till som första waypoint</string>
     <string name="replace_destination_point">Byt destination</string>
-    <string name="new_destination_point_dialog">Du har redan en inställd destination.</string>
+    <string name="new_destination_point_dialog">Du har redan en angiven destination.</string>
     <string name="target_point">Waypoint %1$s</string>
     <string name="target_points">Vägpunkter</string>
     <string name="intermediate_point_too_far">Waypointen %1$s för långt från närmaste väg.</string>
@@ -672,7 +671,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="tiles_to_download_estimated_size">Vid zoom {0} hämta {1} kartbitar ({2} MB)</string>
 	<string name="context_menu_item_download_map">Ladda ner karta</string>
 	<string name="poi_filter_sightseeing">Sevärdheter</string>
-    <string name="index_settings">Offline-data (hämta)</string>
+    <string name="index_settings">Hantera kartfiler</string>
 	<string name="tip_day_night_mode_t_v2">\tKartans utseende kan för vissa vektorkartor ändras mellan dag (ljusare) och natt (mörkare).
 \n\tNattfärgerna är säkrare vid mörkerkörning.\n\tDu kan ange en regel för dag-/nattomkoppling i Meny -&gt; Konfigurera skärm ... -&gt; Dag-/nattkarta.\n\tAlternativen är:\n\tSoluppgång/Solnedgång - automatläge, styrs av solens position (standard)\n\tDag - använd alltid dagläge\n\tNatt - använd alltid nattläge\n\tLjussensor - kartans utseende styrs av ljussensorn på enheten (endast om sådan finns)
 	</string>	
@@ -769,11 +768,10 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="tip_location_sharing_t">Du kan dela med dig av intressanta platser på din resa till familj eller vänner via menyn \'Använd platsen …\' -&gt; \'Dela ut platsen\'.
 		\n\nVälj sedan ett sätt att dela med dig av platsen: e-post, SMS, eller helt enkelt kopiera koordinaterna till Urklipp.
 	</string>
-	<string name="tip_favorites_t">Platser som du använder ofta kan sparas som favoriter:
-	\n\nI kontextmenyn \'Använd platsen\' välj alternativet \'Lägg till i favoriter\' och ge den ett namn.
-	\n\nEn sparad favorit är tillgänglig via \'Meny\'→\'Favoriter\'. Tryck på någon post i denna lista för att navigera till den, redigera den eller ta bort den.
-	\n\nOm du vill visa alla favoriter på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Kartlager\' på kartskärmen.
-	</string>
+	<string name="tip_favorites_t">"Platser som du använder ofta kan sparas som favoriter:
+\n\nI kontextmenyn \'Använd platsen\' välj alternativet \'Lägg till i favoriter\' och ge den ett namn.
+\n\nEn sparad favorit är tillgänglig via \'Meny\'→\'Mina platser\'. Tryck på någon post i denna lista för att navigera till den, redigera den eller ta bort den.
+\n\nOm du vill visa alla favoriter på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Kartlager\' på kartskärmen. "</string>
 	<string name="voice_provider">Röstvägledning</string>
 	<string name="voice_data_initializing">Initierar röstdata …</string>
 	<string name="voice_data_not_supported">Version som inte stöds av röstdata</string>
@@ -882,14 +880,13 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="rendering_attr_roadColors_description">Välj färgschema för vägar:</string>
 	<string name="rendering_attr_roadColors_name">Färgschema för vägar</string>
     <string name="no_route">Ingen rutt</string>
-	<string name="tip_update_index_t">Uppdaterade kartdata är viktigt för att titta på kartor offline, för sökning efter POI/adresser och för navigering offline. OsmAnd har en nerladdningshanterare som kan söka efter tillgängliga offline-data.
-		\n\nFör att hämta kartor, gå till \'Inställningar\' -&gt; \'Datahantering\' -&gt; \'Ladda ner offline-data\'.
-		\n\nEfter att regionslistan hämtats från Internet, klicka på valfri post för att ladda ner eller uppdatera en fil. Observera filtypsväljaren längst upp på skärmen för att välja vad du vill ladda ned: vanliga kartor, överlägg, etc.
-		\n\nDu kan filtrera områdeslistan genom att skriva några tecken eller du kan välja alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.
-		\n\n\t* \'Grönt\' innebär att data är identiska på enheten och servern
-		\n\t* \'Blått\' innebär att det finns uppdateringar på servern
-		\n\t* Poster i kursiv stil innebär att data är inaktiverade på enheten
-	</string>
+	<string name="tip_update_index_t">"Uppdaterade kartdata är viktigt för att titta på kartor offline, för sökning efter POI/adresser och för navigering offline. OsmAnd har en kartfilshanterare som kan söka efter tillgängliga offline-kartor och kolla efter tillgängliga uppdateringar.
+\n\nFör att hämta kartor, gå till \'Inställningar\' -&gt; \'Hantera kartfiler\' -&gt; \'Ladda ner\'.
+\n\nEfter att regionslistan hämtats från Internet, klicka på valfri post för att ladda ner eller uppdatera en fil. Observera filtypsväljaren längst upp på skärmen för att välja vad du vill ladda ned: vanliga kartor, överlägg, etc.
+\n\nDu kan filtrera områdeslistan genom att skriva några tecken eller du kan välja alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.
+\n\n\t* \'Grönt\' innebär att data är identiska på enheten och servern
+\n\t* \'Blått\' innebär att det finns uppdateringar på servern
+\n\t* Poster i kursiv stil innebär att data är inaktiverade på enheten "</string>
 	<string name="rendering_attr_noAdminboundaries_name">Dölj gränser</string>
 	<string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (adminnivåer 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid-pluginen har en gammal version och behöver uppdateras.</string>
@@ -961,7 +958,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin för höjdkurvor offline</string>
     
     <string name="map_widget_distancemeasurement">Avståndsmätning</string>
-    <string name="monitoring_control_stop">stopp</string>
+    <string name="monitoring_control_stop">Stoppa</string>
     <string name="map_widget_audionotes">Ljudanteckningar</string>
     <string name="audionotes_plugin_description">Göra ljud-/videoanteckningar under resan</string>
     <string name="audionotes_plugin_name">Ljud-/videoanteckningar</string>
@@ -1013,11 +1010,11 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="av_settings">Inställningar för ljud och video </string>
     <string name="recording_error">Ett fel uppstod under inspelningen </string>
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
-    <string name="srtm_plugin_description">Denna plugin gör det lättare att hämta höjdkurvor (Inställningar -&gt; Datahantering -&gt; Hämtning -&gt; Välj önskad karttyp).</string>
+    <string name="srtm_plugin_description">Denna plugin gör det lättare att hämta höjdkurvor (Inställningar -&gt; Hantera kartfiler -&gt; Hämtning -&gt; Välj önskad karttyp).</string>
     <string name="delete_target_point">Ta bort waypoint</string>
 	<string name="intermediate_point">Waypoint %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="local_index_descr_title">Datahantering</string>
+	<string name="local_index_descr_title">Hantera kartfiler</string>
 	<string name="incomplete_locale">ofullständig</string>
 	<string name="search_osm_nominatim">Sök adress med OSM Nominatim</string>
 	<string name="max_level_download_tile">Max. online-zoom</string>
@@ -1083,7 +1080,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
 	<string name="exit_Button">Avsluta</string>
 	<string name="map_Button">Karta</string>
 	<string name="settings_Button">Inställningar</string>
-	<string name="favorites_Button">Favoriter</string>
+	<string name="favorites_Button">Mina platser</string>
 	<string name="search_button">Sök</string>
 	<string name="search_activity">Sök</string>
 	<string name="searchpoi_activity">Välj POI</string>
@@ -1472,11 +1469,7 @@ Aktuella data på enheten (%1$s ledigt):</string>
     <string name="osmo_mode_on">Stoppa OsMo-session</string>    
     <string name="osmo_mode_off">Starta OsMo-session</string>
     <string name="use_points_as_intermediates">Beräkna rutt mellan punkter</string>
-    <string name="tip_recent_changes_1_8_alpha">Förändringar i 1.8:
-        * Beräkna rutt mellan ruttpunkter i GPX-spår
-        * Ändrat utseende vid nedladdning av länder (stöd för sökning med lokala namn)
-        * Stöder GPX-/KML-import (konvertera fråm KML till GPX)↵
-    </string>
+    <string name="tip_recent_changes_1_8_alpha">"Förändringar i 1.8: * Beräkna rutt mellan ruttpunkter i GPX-spår * Ändrat utseende vid nedladdning av länder (stöd för sökning med lokala namn) * Stöder GPX-/KML-import (konvertera fråm KML till GPX) * GPX-spår har flyttat till \'Mina data\' * Du kan dela upp GPX-spår efter sträcka och kolla höjdskillnad/hastighet * Autostarta navigering efter fördröjning "</string>
     <string name="osmo_auto_send_locations_descr">Starta trackersessionen automatiskt och sänd platser sedan appen startats</string>
     <string name="osmo_auto_send_locations">Starta trackersessionen automatiskt</string>
     <string name="osmo_tracker_id">Personligt tracker-id</string>
