@@ -55,7 +55,7 @@
   <string name="backToMenu">Terug naar menu</string>
   <string name="zoomOut">Zoom uit</string>
   <string name="zoomIn">Zoom in</string>
-  <string name="zoomIs">Zoom is</string>
+  <string name="zoomIs">Vergroting is</string>
   <string name="north">noord</string>
   <string name="north_north_east">noordnoordoost</string>
   <string name="north_east">noordoost</string>
@@ -209,7 +209,7 @@
   <string name="auto_follow_route_navigation_descr">Alleen automatisch volgen tijdens navigatie.</string>
   <string name="auto_follow_location_enabled">Automatisch kaart volgen in gebruik.</string>
   <string name="pref_vector_rendering">Opties voor vectorkaarten</string>
-  <string name="pref_overlay">Overlay / underlay</string>
+  <string name="pref_overlay">Bovenlaag / onderlaag</string>
   <string name="pref_raster_map">Kaartbron-instellingen</string>
   <string name="pref_vector_map">Vectorkaart-instellingen</string>
   <string name="delete_confirmation_msg">Verwijder %1$s?</string>
@@ -1865,7 +1865,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="show_zoom_buttons_navigation">Zoomknoppen</string>
     <string name="sort_by_distance">Sorteer op afstand</string>
     <string name="sort_by_name">Sorteer op naam</string>
-    <string name="visible_element">Zichtbaar</string>
+    <string name="visible_element">Toon op kaart</string>
     <string name="none_selected_gpx">Geen GPX bestanden geselecteerd. Om track te selecteren, druk lang op de gewenste track.</string>
     <string name="local_index_unselect_gpx_file">Deselecteer</string>
     <string name="local_index_select_gpx_file">Selecteer om te bekijken</string>
