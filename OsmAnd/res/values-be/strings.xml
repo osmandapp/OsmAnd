@@ -1851,7 +1851,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="map_widget_plain_time">Бягучы час</string>
     <string name="gpx_wpt">Кропка шляху</string>
     <string name="selected_gpx_info_show">\n\nНацісьніце і ўтрымлівайце, каб убачыць на мапе</string>
-    <string name="delay_navigation_start">Пачаць навігацыю з затрымкай</string>
+    <string name="delay_navigation_start">Аўтаматычна пачаць навігацыю</string>
     <string name="gpx_info_diff_altitude">Перапад вышынь: %1$s</string>
 	<string name="save_as_favorites_points">Захаваць як групу упадабаных</string>
     <string name="select_destination_and_intermediate_points">Абраць кропкі шляху</string>
