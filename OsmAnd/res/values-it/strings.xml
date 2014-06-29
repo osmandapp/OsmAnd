@@ -1554,7 +1554,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="route_from">Da:</string>
     <string name="osb_author_dialog_password">Password OSM (opzionale)</string>
 	<string name="speak_title">Annuncia…</string>
-	<string name="speak_descr">Configura per annunciare i nomi delle strade, gli avvertimenti di traffico (soste forzate, dossi), gli avvisi autovelox, i limiti di velocità</string>
+	<string name="speak_descr">Configura per annunciare i nomi delle strade, gli avvertimenti di traffico (fermate forzate, dossi), gli avvisi autovelox, i limiti di velocità</string>
 	<string name="speak_street_names">Annuncia i nomi delle strade (TTS)</string>
     <string name="announce_gpx_waypoints">Annuncia i punti GPX di passaggio</string>
     <string name="osmodroid_mode_on">Ferma OsMoDroid</string>    
