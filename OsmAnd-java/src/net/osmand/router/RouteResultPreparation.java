@@ -540,9 +540,19 @@ public class RouteResultPreparation {
 			return;
 		}
 
-		t.setLanes(new int[lanes]);
+		int[] lanesArray = new int[lanes];
+
+		t.setLanes(lanesArray);
 
 		assignTurns(splitLaneOptions, t);
+
+		if (t.getValue() == TurnType.TR && !t.isTurnAllowed(lanesArray.length - 1, TurnType.Turn.RIGHT) && !t.isTurnAllowed(lanesArray.length - 1, TurnType.Turn.SLIGHT_RIGHT) && !t.isTurnAllowed(lanesArray.length - 1, TurnType.Turn.SHARP_RIGHT)) {
+			if (t.getPrimaryTurn(lanesArray.length - 1) != TurnType.Turn.UNKNOWN && t.getSecondaryTurn(lanesArray.length - 1) == TurnType.Turn.UNKNOWN) {
+				// This was just to make sure that there's no bad data and that there's an empty slot.
+				t.setSecondaryTurn(lanesArray.length - 1, TurnType.Turn.RIGHT);
+				lanesArray[lanesArray.length - 1] |= 1;
+			}
+		}
 	}
 
 	private TurnType processRoundaboutTurn(List<RouteSegmentResult> result, int i, boolean leftSide, RouteSegmentResult prev,
@@ -620,6 +630,7 @@ public class RouteResultPreparation {
 		boolean speak = false;
 		int speakPriority = Math.max(highwaySpeakPriority(prevSegm.getObject().getHighway()), highwaySpeakPriority(currentSegm.getObject().getHighway()));
 		boolean otherRoutesExist = false;
+		boolean rightTurnPossible = false;
 		if (attachedRoutes != null) {
 			for (RouteSegmentResult attached : attachedRoutes) {
 				double ex = MapUtils.degreesDiff(attached.getBearingBegin(), currentSegm.getBearingBegin());
@@ -653,6 +664,9 @@ public class RouteResultPreparation {
 				}
 				if (mpi > TURN_DEGREE_MIN) {
 					otherRoutesExist = true;
+					if (ex > TURN_DEGREE_MIN) {
+						rightTurnPossible = true;
+					}
 				}
 			}
 		}
@@ -736,8 +750,15 @@ public class RouteResultPreparation {
 
 			assignTurns(splitLaneOptions, t);
 
+			if (rightTurnPossible && !t.isTurnAllowed(lanes.length - 1, TurnType.Turn.RIGHT) && !t.isTurnAllowed(lanes.length - 1, TurnType.Turn.SLIGHT_RIGHT) && !t.isTurnAllowed(lanes.length - 1, TurnType.Turn.SHARP_RIGHT)) {
+				if (t.getPrimaryTurn(lanes.length - 1) != TurnType.Turn.UNKNOWN && t.getSecondaryTurn(lanes.length - 1) == TurnType.Turn.UNKNOWN) {
+					// This was just to make sure that there's no bad data and that there's an empty slot.
+					t.setSecondaryTurn(lanes.length - 1, TurnType.Turn.RIGHT);
+				}
+			}
+
 			for (int j = 0; j < lanes.length; j++) {
-				if (t.getPrimaryTurn(j) == TurnType.Turn.STRAIGHT || t.getSecondaryTurn(j) == TurnType.Turn.STRAIGHT) {
+				if (t.isTurnAllowed(j, TurnType.Turn.STRAIGHT)) {
 					t.getLanes()[j] |= 1;
 				}
 			}

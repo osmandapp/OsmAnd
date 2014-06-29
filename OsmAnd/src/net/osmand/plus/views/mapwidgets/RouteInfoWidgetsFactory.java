@@ -593,6 +593,8 @@ public class RouteInfoWidgetsFactory {
 								canvas.translate((int) (0.2 * w), 0);
 							} else if (turnSymbol.equals(TurnType.TSLL) || turnSymbol.equals(TurnType.TSHL)) {
 								canvas.translate((int) (-0.2 * w), 0);
+							} else if (turnSymbol.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.RIGHT)) {
+								canvas.translate((int) (-0.4 * w), 0);
 							}
 							canvas.drawPath(path, paintBlack);
 							canvas.drawPath(path, paintRouteDirection);
@@ -600,6 +602,8 @@ public class RouteInfoWidgetsFactory {
 								canvas.translate((int) (-0.2 * w), 0);
 							} else if (turnSymbol.equals(TurnType.TSLL) || turnSymbol.equals(TurnType.TSHL)) {
 								canvas.translate((int) (0.2 * w), 0);
+							} else if (turnSymbol.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.RIGHT)) {
+								canvas.translate((int) (0.4 * w), 0);
 							}
 
 							paintRouteDirection.setColor(inactive);
@@ -621,6 +625,8 @@ public class RouteInfoWidgetsFactory {
 									canvas.translate((int) (0.2 * w), 0);
 								} else if (turnSymbol2.equals(TurnType.TSLL) || turnSymbol2.equals(TurnType.TSHL)) {
 									canvas.translate((int) (-0.2 * w), 0);
+								} else if (turnSymbol2.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.RIGHT)) {
+									canvas.translate((int) (-0.4 * w), 0);
 								}
 								canvas.drawPath(path2, paintBlack);
 								canvas.drawPath(path2, paintRouteDirection);
@@ -628,6 +634,8 @@ public class RouteInfoWidgetsFactory {
 									canvas.translate((int) (-0.2 * w), 0);
 								} else if (turnSymbol2.equals(TurnType.TSLL) || turnSymbol2.equals(TurnType.TSHL)) {
 									canvas.translate((int) (0.2 * w), 0);
+								} else if (turnSymbol2.equals(TurnType.C) && turn.isTurnAllowed(i, TurnType.Turn.RIGHT)) {
+									canvas.translate((int) (0.4 * w), 0);
 								}
 								paintRouteDirection.setColor(inactive);
 							}
