@@ -1895,4 +1895,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="none_selected_gpx">Žiadny súbor GPX nebol vybraný. Podržaním vyberte z dostupných stôp.</string>
     <string name="local_index_unselect_gpx_file">Odznačiť</string>
     <string name="local_index_select_gpx_file">Vybrať na zobrazenie</string>
+    <string name="route_descr_destination">\t</string>
     </resources>
