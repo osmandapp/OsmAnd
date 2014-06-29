@@ -1030,7 +1030,7 @@
 <string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, stop forzati, dossi e rallentatori), avvisi autovelox e indicazioni di corsia</string>
 <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
 <string name="map_widget_show_ruler">Scala grafica</string>
-<string name="map_widget_appearance">Altro:</string>
+<string name="map_widget_appearance">Elementi rimanenti:</string>
 <string name="map_widget_view_direction">﻿Direzione della visuale</string>
 <string name="map_widget_transparent">Aspetto trasparente</string>
 <string name="monitoring_mode_off">Registra GPX</string>
@@ -1637,8 +1637,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="app_mode_aircraft">Aereo</string>
     <string name="map_widget_map_rendering">Disegno della mappa:</string>
     <string name="app_modes_choose_descr">Scegli fra le modalità d\'uso disponibili nell\'applicazione</string>
-    <string name="app_modes_choose">Modalità applicazione</string>
-	<string name="amenity_type_seamark">Meda</string>
+    <string name="app_modes_choose">Profili applicazione</string>
+	<string name="amenity_type_seamark">Limiti costieri</string>
     <string name="osmodroid_seek">Cerca oggetto</string>
     
     <string name="complex_route_calculation_failed">Calcolo veloce del percorso fallita (%s), rinvio al calcolo lento.</string>
@@ -1653,7 +1653,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	\n Nota: i file precedenti non verranno modificati. 
 	\n Nota: non sarà possibile condividere i files fra OsmAnd and OsmAnd+. </string>
     <string name="application_dir_change_warning2">OsmAnd può provare a spostare i dati nella nuova destinazione. Volete farlo?</string>
-    <string name="copying_osmand_one_file_descr">Copia del file (%s) nella nuova destinazione...</string>
+    <string name="copying_osmand_one_file_descr">Copia in corso del file (%s) nella nuova destinazione...</string>
     <string name="copying_osmand_files_descr">Copia in corso dei file OsmAnd nella nuova destinazione (%s)</string>
     <string name="copying_osmand_files">Copia dei file di OsmAnd</string>
     <string name="calculate_osmand_route_gpx">Calcola percorso OsmAnd offline</string>
@@ -1690,7 +1690,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	\n\t* Molte piccole migliorie dell\'interfaccia utente &amp; correzioni usabilità
 	\n\t* Impostazioni della velocità della vocalizzazione
     </string>
-    <string name="calculate_osmand_route_without_internet">Calcola un percorso con OsmAnd senza l\'utilizzo di internet</string>
+    <string name="calculate_osmand_route_without_internet">Calcola un tratto di percorso con OsmAnd senza l\'utilizzo di internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcola una percorso OsmAnd per il primo e l\'ultimo tratto del percorso</string>
     <string name="osmodroid_unseek">Oggetto non trovato</string>
     <string name="lang_en">Inglese</string>
@@ -1810,7 +1810,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_group_policy">Regole</string>
     <string name="osmo_connect_to_group_id">Id gruppo</string>
     <string name="osmo_group_name">Nome gruppo</string>
-    <string name="osmo_connect_to_group">Collega con il gruppo</string>
+    <string name="osmo_connect_to_group">Collegamento con il gruppo</string>
     <string name="osmo_connect">Collega a</string>
     <string name="osmo_create_group">Crea gruppo</string>
     <string name="osmo_server_operation_failed">Operazione del server OsMo fallita</string>
