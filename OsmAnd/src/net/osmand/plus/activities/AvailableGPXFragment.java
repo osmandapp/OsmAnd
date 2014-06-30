@@ -1035,7 +1035,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 		
 		private String formatName(String name) {
-			int ext = name.indexOf('.');
+			int ext = name.lastIndexOf('.');
 			if (ext != -1) {
 				name = name.substring(0, ext);
 			}
