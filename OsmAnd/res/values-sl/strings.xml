@@ -835,7 +835,7 @@
 	<string name="transport">Prevoz</string>
 	<string name="additional_settings">Dodatne nastavitve</string>
 	<string name="settings">Nastavitve</string>
-	<string name="save_current_track">Shrani trenutno GPX pot</string>
+	<string name="save_current_track">Shrani trenutno sled GPX</string>
 	<string name="save_current_track_descr">Shrani trenutno GPX pot na SD kartico</string>
 	<string name="save_track_interval">Interval beleženja</string>
 	<string name="save_track_interval_descr">Izberite interval beleženja položaja za sledi</string>
@@ -1838,4 +1838,8 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_tracker_id_descr">Kliknite za ogled ali delitev ID sledilnika. Z uporabo ID sledilnika povezane naprave lahko spremljajo vse premike te naprave! Če želite prekiniti povezavo, izberite možnost Obnovitev.</string>
     <string name="osmo_mode_restart">Znova zaženite OsMo sejo</string>
     <string name="local_index_unselect_gpx_file">Preklicati izbor</string>
+    <string name="osmo_tracker_id_share">Za povezavo s ciljno napravo %2$s, kliknite na link %3$s ali določite ID sledilnika (%1$s)</string>
+    <string name="osmo_connect_to_device_tracker_id">ID sledilnika</string>
+    <string name="osmo_auto_send_locations_descr">Samodejno začni sejo sledilnika in pošiljanje lokacije po zagonu aplikacije</string>
+    <string name="tip_recent_changes_1_8_alpha">"Spremembe v 1.8:\n\t* Računanje poti med točkami poti v sledi GPX\n\t* Spremenjena razporeditev držav za prenose (podpira iskanje krajevnih imen)\n\t* Podpira GPX/KML uvoz (pretvorba iz KML v GPX)\n\t* Sledi GPX premeščene v \'Moji podatki\'\n\t* Sedaj lahko razdelite sled GPX po razdalji in preverite višinsko razliko/hitrost\n\t* Samodejni začetek navigacije po zakasnitvi "</string>
     </resources>
