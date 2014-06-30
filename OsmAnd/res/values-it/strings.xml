@@ -1686,7 +1686,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	\n\t* Molte piccole migliorie dell\'interfaccia utente &amp; correzioni usabilità
 	\n\t* Impostazioni della velocità della vocalizzazione
     </string>
-    <string name="calculate_osmand_route_without_internet">Calcola un tratto di percorso con OsmAnd senza l\'utilizzo di internet</string>
+    <string name="calculate_osmand_route_without_internet">Calcola un tratto di percorso OsmAnd senza l\'utilizzo di internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcola una percorso OsmAnd per il primo e l\'ultimo tratto del percorso</string>
     <string name="osmodroid_unseek">Oggetto non trovato</string>
     <string name="lang_en">Inglese</string>
@@ -1859,7 +1859,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="gpx_info_waypoints">Tappe del percorso: $1%s </string>
 	<string name="gpx_info_distance">Distanza: %1$s (%2$s punti) </string>
 	<string name="gpx_info_end_time">Orario di arrivo: %1$tF, %1$tT </string>
-	<string name="gpx_info_diff_altitude">Gamma alititudini: %1$s</string>
+	<string name="gpx_info_diff_altitude">Estermi gamma alititudini: %1$s</string>
 	<string name="gpx_info_asc_altitude">Discesa/salita: %1$s</string>
     <string name="gpx_timespan">Intervallo di tempo: %1$s</string>
 	<string name="gpx_timemoving">Tempo in movimento: %1$s</string>
