@@ -192,7 +192,11 @@ public class RoutePointsActivity extends OsmandListActivity {
 
 			if (point.isVisited()) {
 				holder.image.setImageResource(R.drawable.ic_action_ok_dark);
-				holder.name.setTextColor(getResources().getColor(R.color.osmbug_closed));
+				if (point.isDelivered()){
+					holder.name.setTextColor(getResources().getColor(R.color.osmbug_closed));
+				} else {
+					holder.name.setTextColor(getResources().getColor(R.color.color_invalid));
+				}
 				holder.dateOrDistance.setTextColor(getResources().getColor(R.color.color_unknown));
 				holder.dateOrDistance.setText(point.getTime());
 				holder.dateOrDistance.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
@@ -273,7 +277,13 @@ public class RoutePointsActivity extends OsmandListActivity {
 					finish();
 				} else if (menuItem.getItemId() == AS_VISITED_ID) {
 					// inverts selection state of item
+					if (!rp.isVisited()){
+						rp.setDelivered(true);
+					} else if (rp.isDelivered()){
+						rp.setDelivered(false);
+					}
 					plugin.getCurrentRoute().markPoint(rp, !rp.isVisited());
+
 					saveGPXAsync();
 					prepareView();
 				}

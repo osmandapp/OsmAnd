@@ -12,4 +12,5 @@
     <string name="map_widget_route_points">Route points</string>
     <string name="route_points_activity">Route Points</string>
     <string name="navigate_dialog">Navigate dialog</string>
+    <string name="package_delivered">Was the package delivered?</string>
 </resources>
