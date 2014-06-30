@@ -3,9 +3,12 @@ package net.osmand.plus.routepointsnavigation;
 import java.io.File;
 import java.util.*;
 
+import android.app.ActionBar;
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
@@ -45,6 +48,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	MapActivity map;
 
 	private View deliveredView;
+	private MapActivity mapActivity;
 
 	private RoutePointsLayer routePointsLayer;
 
@@ -76,6 +80,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			@Override
 			public void onClick(View view) {
 				currentRoute.navigateToNextPoint(true);
+				FrameLayout layout = (FrameLayout) mapActivity.getLayout();
+				layout.removeView(deliveredView);
 			}
 		});
 
@@ -85,6 +91,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			@Override
 			public void onClick(View view) {
 				currentRoute.navigateToNextPoint(false);
+				FrameLayout layout = (FrameLayout) mapActivity.getLayout();
+				layout.removeView(deliveredView);
 			}
 		});
 	}
@@ -93,8 +101,10 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	@Override
 	public boolean destinationReached() {
 		if (currentRoute != null) {
-			//TODO: add delivered view to map
-
+			FrameLayout layout = (FrameLayout) mapActivity.getLayout();
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+			params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
+			layout.addView(deliveredView, params);
 		}
 
 		return true;
@@ -133,6 +143,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayers(MapActivity activity) {
 		super.registerLayers(activity);
+		mapActivity = activity;
 		prepareDeliveredView();
 		map = activity;
 		if (routePointsLayer != null) {
@@ -197,6 +208,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		int gpxOrder;
 		long visitedTime; // 0 not visited
 		WptPt wpt;
+		boolean delivered;
 
 		public String getName() {
 			return wpt.name;
@@ -213,6 +225,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		public boolean isVisited() {
 			return visitedTime != 0;
 		}
+
+		public boolean isDelivered() { return delivered;}
 
 		public int getGpxOrder() {
 			return gpxOrder;
@@ -241,8 +255,9 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			return new LatLon(wpt.lat, wpt.lon);
 		}
 
-		public void setDelivered(boolean delivered) {
-			wpt.getExtensionsToWrite().put(DELIVERED_KEY, String.valueOf(delivered));
+		public void setDelivered(boolean d) {
+			wpt.getExtensionsToWrite().put(DELIVERED_KEY, String.valueOf(d));
+			this.delivered = d;
 		}
 
 		public void setVisitedTime(long currentTimeMillis) {
@@ -255,7 +270,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	public class SelectedRouteGpxFile {
 		private GPXUtilities.GPXFile gpx;
 		private List<RoutePoint> currentPoints = new ArrayList<RoutePointsPlugin.RoutePoint>();
-
 
 		public SelectedRouteGpxFile(GPXUtilities.GPXFile gpx) {
 			this.gpx = gpx;
@@ -367,6 +381,9 @@ public class RoutePointsPlugin extends OsmandPlugin {
 					RoutePoint rtp = new RoutePoint();
 					rtp.gpxOrder = i;
 					rtp.wpt = wptPt;
+					String delivered = wptPt.getExtensionsToRead().get(DELIVERED_KEY);
+					rtp.delivered = Boolean.parseBoolean(delivered);
+
 					String time = wptPt.getExtensionsToRead().get(VISITED_KEY);
 					try {
 						rtp.visitedTime = Long.parseLong(time);

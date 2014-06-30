@@ -711,4 +711,8 @@ public class MapActivity extends AccessibleActivity  {
 	public void refreshMap() {
 		getMapView().refreshMap();
 	}
+
+	public View getLayout() {
+		return getWindow().getDecorView().findViewById(android.R.id.content);
+	}
 }
