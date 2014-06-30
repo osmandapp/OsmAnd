@@ -1831,4 +1831,11 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_connect">Poveži se z</string>
     <string name="none_selected_gpx">Ni izbranih GPX datotek. Izberete tako, da pritisnete in zadržite ime želene sledi.</string>
     <string name="gpx_split_interval">Interval za razdelitev</string>
+    <string name="osmo_server_operation_failed">Neuspela operacija OsMo strežnika</string>
+    <string name="osmo_groups">OsMo skupine/naprave</string>
+    <string name="osmo_auto_send_locations">Samodejno začni sejo sledilnika</string>
+    <string name="osmo_tracker_id">Osebni ID sledilnika</string>
+    <string name="osmo_tracker_id_descr">Kliknite za ogled ali delitev ID sledilnika. Z uporabo ID sledilnika povezane naprave lahko spremljajo vse premike te naprave! Če želite prekiniti povezavo, izberite možnost Obnovitev.</string>
+    <string name="osmo_mode_restart">Znova zaženite OsMo sejo</string>
+    <string name="local_index_unselect_gpx_file">Preklicati izbor</string>
     </resources>
