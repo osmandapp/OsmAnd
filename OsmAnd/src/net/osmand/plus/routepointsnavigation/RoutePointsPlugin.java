@@ -101,7 +101,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	public boolean destinationReached() {
 		if (currentRoute != null) {
 			FrameLayout layout = (FrameLayout) mapActivity.getLayout();
-			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 			params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
 			layout.addView(deliveredView, params);
 		}
