@@ -270,8 +270,7 @@
 		\n\nScegli poi un modo per condividere la tua posizione. Le opzioni sono: E-Mail, SMS o semplicemente copia le coordinate sugli appunti.
 	</string>
   <string name="tip_favorites">Punti Preferiti</string>
-  <string name="tip_favorites_t">"I punti usati di frequente possono essere salvati come Preferiti:
-\n\nDopo il salvataggio, il punto preferito sarà accessibile nel \'Menu\'→\'I miei luoghi\'. Tenendo premuto a lungo su una qualsiasi voce della lista dei \'Preferiti\', appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.\n\nPer visualizzare tutti i punti preferiti direttamente sulla mappa, nella schermata della mappa attiva il livello \'Preferiti\' dal menù contestuale \'Strati mappa\'. "</string>
+  <string name="tip_favorites_t">"I punti usati di frequente possono essere salvati come Preferiti in questo modo:\n\nNel menu contestuale per ogni punto \'Utilizza posizione\' scegliere \'Aggiungi ai favoriti\' e quindi immettere un nome per esso.\n\nDopo il salvataggio, il punto preferito sarà accessibile nel \'Menu\'→\'I miei luoghi\'. Premendo su una qualsiasi voce della lista dei \'Preferiti\', appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.\n\nPer visualizzare tutti i punti preferiti direttamente sulla mappa, nella schermata della mappa attiva il livello \'Preferiti\' dal menù \'Strati mappa\'. "</string>
   <string name="create_poi_link_to_osm_doc">  <u>OSM Online</u> con immagini</string>
   <string name="error_doing_search">Errore nella ricerca offline</string>
   <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'</string>
@@ -1085,7 +1084,7 @@
 →→OsmAnd è continuamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Ti preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net↵
 →
 	</string>
-<string name="osmand_plus_short_description_80_chars">Visualizzazione &amp; navigazione mobile con le mappe OSM online e offline</string>
+<string name="osmand_plus_short_description_80_chars">Visualizzazione &amp; navigazione mobile con le mappe mondiali OSM online e offline</string>
 <string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automatizzate Navigazione e Direzioni)
 
