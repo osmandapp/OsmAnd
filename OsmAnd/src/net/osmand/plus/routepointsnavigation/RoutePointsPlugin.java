@@ -45,7 +45,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	private OsmandApplication app;
 	private TextInfoWidget routeStepsControl;
 	private SelectedRouteGpxFile currentRoute;
-	MapActivity map;
 
 	private View deliveredView;
 	private MapActivity mapActivity;
@@ -145,7 +144,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		super.registerLayers(activity);
 		mapActivity = activity;
 		prepareDeliveredView();
-		map = activity;
 		if (routePointsLayer != null) {
 			activity.getMapView().removeLayer(routePointsLayer);
 		}
