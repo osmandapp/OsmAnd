@@ -1234,7 +1234,7 @@
 	<string name="speak_traffic_warnings">Meddela vid trafikvarningar</string>
 	
 	
-	<string name="plugin_distance_point_hdop">precision</string>
+	<string name="plugin_distance_point_hdop">noggrannhet</string>
     <string name="tip_recent_changes_1_5_t">Förändringar i 1.5:
 	\n\t* Röstvarningar vid hastighetsbegränsningar och fartkameror
 	\n\t* Fler röstprompter (uppläsning av gatunamn)
