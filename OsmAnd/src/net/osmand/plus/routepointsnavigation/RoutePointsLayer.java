@@ -78,17 +78,17 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.mark_as_not_visited){
 						plugin.getCurrentRoute().markPoint(point,false);
-						plugin.getCurrentRoute().saveGPXAsync();
+						plugin.saveCurrentRoute();
 					} else if (itemId == R.string.mark_as_visited) {
 						plugin.getCurrentRoute().markPoint(point, true);
-						plugin.getCurrentRoute().saveGPXAsync();
+						plugin.saveCurrentRoute();
 					} else if (itemId == R.string.mark_as_current){
 						plugin.getCurrentRoute().markPoint(point, false);
 						plugin.getCurrentRoute().navigateToPoint(point);
-						plugin.getCurrentRoute().saveGPXAsync();
+						plugin.saveCurrentRoute();
 					} else if (itemId == R.string.navigate_to_next){
 						plugin.getCurrentRoute().navigateToNextPoint();
-						plugin.getCurrentRoute().saveGPXAsync();
+						plugin.saveCurrentRoute();
 					}
 					map.refreshMap();
 				}

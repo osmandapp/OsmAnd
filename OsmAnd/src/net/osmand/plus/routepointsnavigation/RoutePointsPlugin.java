@@ -173,6 +173,12 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 	}
 
+	public void saveCurrentRoute(){
+		if (currentRoute != null){
+			currentRoute.saveGPXAsync();
+		}
+	}
+
 	private TextInfoWidget createRouteStepsInfoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		TextInfoWidget routeStepsControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
 
@@ -479,9 +485,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 				@Override
 				protected Void doInBackground(RoutePointsPlugin.SelectedRouteGpxFile... params) {
-					if (getCurrentRoute() != null) {
-						getCurrentRoute().saveFile();
-					}
+					saveFile();
 					return null;
 				}
 
