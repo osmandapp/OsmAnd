@@ -167,6 +167,8 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				Collection<IndexItem> items = (Collection<IndexItem>) results.values;
 				if (items != null && !items.isEmpty()) {
 					list.addAll(IndexItemCategory.categorizeIndexItems(downloadActivity.getMyApplication(), items));
+				} else if(DownloadIndexAdapter.this.indexFiles.isEmpty()){
+					list.add(new IndexItemCategory(downloadActivity.getResources().getString(R.string.no_index_file_to_download), 1));
 				} else {
 					list.add(new IndexItemCategory(downloadActivity.getResources().getString(R.string.select_index_file_to_download), 1));
 				}

@@ -6,6 +6,7 @@ package net.osmand.plus.activities;
 import java.io.File;
 import java.util.ArrayList;
 
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -20,7 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Window;
@@ -34,6 +37,8 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 	private static final String TRACKS = "TRACKS";
 	private static final String SELECTED_TRACK = "SELECTED_TRACK";
 	private TabsAdapter mTabsAdapter;
+	private TabSpec selectedTrack;
+	private TabHost tabHost;
 
 
 	@Override
@@ -67,7 +72,7 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 			getSupportFragmentManager().beginTransaction().add(R.id.layout, new FavouritesTreeFragment()).commit();
 		} else {
 			setContentView(R.layout.tab_content);
-			TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+			tabHost = (TabHost) findViewById(android.R.id.tabhost);
 			tabHost.setup();
 
 			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
@@ -78,12 +83,45 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 					FavouritesTreeFragment.class, null);
 			mTabsAdapter.addTab(tabHost.newTabSpec(TRACKS).setIndicator(getString(R.string.my_tracks)),
 					AvailableGPXFragment.class, null);
-			mTabsAdapter.addTab(tabHost.newTabSpec(SELECTED_TRACK).setIndicator(getString(R.string.selected_track)),
+			selectedTrack = mTabsAdapter.addTab(tabHost.newTabSpec(SELECTED_TRACK).setIndicator(getString(R.string.selected_track)),
 					SelectedGPXFragment.class, null);
 			tabHost.setCurrentTab(tab);
+			updateSelectedTracks();
 		}
-		
-
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		((OsmandApplication) getApplication()).getSelectedGpxHelper().setUiListener(FavouritesActivity.class,new Runnable() {
+			
+			@Override
+			public void run() {
+				updateSelectedTracks();
+			}
+		});
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		((OsmandApplication) getApplication()).getSelectedGpxHelper().setUiListener(FavouritesActivity.class, null);
+	}
+	
+	public void updateSelectedTracks() {
+		if (selectedTrack != null) {
+			GpxSelectionHelper gpx = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
+			String vl = getString(R.string.selected_track);
+			if (gpx.isShowingAnyGpxFiles()) {
+				vl += " (" + gpx.getSelectedGPXFiles().size()
+						+ ")";
+			}
+			try {
+				((TextView)tabHost.getTabWidget().getChildAt(2).findViewById(android.R.id.title)).setText(vl);
+			} catch (Exception e) {
+			}
+			mTabsAdapter.notifyDataSetChanged();
+		}
 	}
 
 
@@ -157,7 +195,7 @@ public class FavouritesActivity extends SherlockFragmentActivity {
             mViewPager.setOnPageChangeListener(this);
         }
 
-        public void addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
+        public TabSpec addTab(TabHost.TabSpec tabSpec, Class<?> clss, Bundle args) {
             tabSpec.setContent(new DummyTabFactory(mContext));
             String tag = tabSpec.getTag();
 
@@ -165,6 +203,7 @@ public class FavouritesActivity extends SherlockFragmentActivity {
             mTabs.add(info);
             mTabHost.addTab(tabSpec);
             notifyDataSetChanged();
+            return tabSpec;
         }
         
 
@@ -210,3 +249,4 @@ public class FavouritesActivity extends SherlockFragmentActivity {
     }
 
 }
+

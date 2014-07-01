@@ -42,7 +42,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	public OsmandMonitoringPlugin(OsmandApplication app) {
 		this.app = app;
 		liveMonitoringHelper = new LiveMonitoringHelper(app);
-		ApplicationMode.regWidget("monitoring", (ApplicationMode[])null);
+		ApplicationMode.regWidget("monitoring", ApplicationMode.DEFAULT);
 	}
 	
 	@Override

@@ -83,7 +83,8 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			setAdapter(adapter);
 		}
 		adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
-		selectedGpxHelper.setUiListener(new Runnable() {
+		selectedGpxHelper.setUiListener(SelectedGPXFragment.class, 
+					new Runnable() {
 			
 			@Override
 			public void run() {
@@ -95,7 +96,7 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onPause() {
 		super.onPause();
-		selectedGpxHelper.setUiListener(null);
+		selectedGpxHelper.setUiListener(SelectedGPXFragment.class, null);
 	}
 	
 	@Override
@@ -274,8 +275,8 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				if(!vis.isChecked()) {
 					getMyApplication().getSelectedGpxHelper().selectGpxFile(model.getGpx(), false, false);
-					
 					SelectedGPXFragment.this.adapter.setDisplayGroups(selectedGpxHelper.getDisplayGroups());
+					getMyApplication().getSelectedGpxHelper().runUiListeners();
 				} else {
 					updateSplit(model, distanceSplit, timeSplit, sp.getSelectedItemPosition() );
 				}
