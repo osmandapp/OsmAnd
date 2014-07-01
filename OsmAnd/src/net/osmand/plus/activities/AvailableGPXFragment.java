@@ -793,7 +793,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			// search from end
 			for (int i = category.size() - 1; i >= 0; i--) {
 				String cat = category.get(i);
-				if (Algorithms.objectEquals(g.subfolder, cat)) {
+				if (Algorithms.objectEquals(getActivity().getString(R.string.local_indexes_cat_gpx) + " " + g.subfolder, cat)) {
 					found = i;
 					break;
 				}
