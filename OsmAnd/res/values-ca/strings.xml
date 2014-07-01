@@ -1867,4 +1867,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="none_selected_gpx">Cap arxiu GPX seleccionat. Per seleccionar-ne premi i mantingui sobre una traça disponible.</string>
     <string name="local_index_unselect_gpx_file">No seleccionat</string>
     <string name="local_index_select_gpx_file">Selecciona per veure</string>
+    <string name="no_index_file_to_download">Res per descarregar, verifiqui la connexió a internet.</string>
     </resources>
