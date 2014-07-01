@@ -1870,4 +1870,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="local_index_unselect_gpx_file">Deselecteer</string>
     <string name="local_index_select_gpx_file">Selecteer om te bekijken</string>
     <string name="route_descr_destination">Route beschrijving</string>
+    <string name="no_index_file_to_download">Geen bestand gevonden, controleer je internet verbinding.</string>
     </resources>
