@@ -390,7 +390,12 @@ public class RouteResultPreparation {
 			if (currentSegment.getTurnType() == null || currentSegment.getTurnType().getLanes() == null || nextSegment.getTurnType() == null || nextSegment.getTurnType().getLanes() == null) {
 				continue;
 			}
-			if (currentSegment.getDistance() < 60 && nextSegment.getTurnType().getLanes().length <= currentSegment.getTurnType().getLanes().length) {
+			if (currentSegment.getDistance() < 60 && nextSegment.getTurnType().getLanes().length <= currentSegment.getTurnType().getLanes().length
+					&& (currentSegment.getTurnType().getValue() == TurnType.C
+					 || currentSegment.getTurnType().getValue() == TurnType.TSLL
+					 || currentSegment.getTurnType().getValue() == TurnType.TSLR
+					 || currentSegment.getTurnType().getValue() == TurnType.KL
+					 || currentSegment.getTurnType().getValue() == TurnType.KR)) {
 				mergeTurnLanes(leftside, currentSegment, nextSegment);
 			}
 		}
@@ -551,6 +556,12 @@ public class RouteResultPreparation {
 				// This was just to make sure that there's no bad data and that there's an empty slot.
 				t.setSecondaryTurn(lanesArray.length - 1, TurnType.Turn.RIGHT);
 				lanesArray[lanesArray.length - 1] |= 1;
+			}
+		}
+
+		for (int i = 0; i < lanesArray.length; i++) {
+			if (t.getPrimaryTurn(i).getValue() == t.getValue() || t.getSecondaryTurn(i).getValue() == t.getValue()) {
+				lanesArray[i] |= 1;
 			}
 		}
 	}
