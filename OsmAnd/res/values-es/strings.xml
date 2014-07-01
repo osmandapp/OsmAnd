@@ -1794,4 +1794,5 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="none_selected_gpx">No hay archivos GPX seleccionado. Para seleccionar presione y mantenga presionado en la traza disponible.</string>
     <string name="local_index_unselect_gpx_file">No seleccionado</string>
     <string name="local_index_select_gpx_file">Seleccionar para mostrar</string>
+    <string name="no_index_file_to_download">No hay nada que descargar, compruebe la conexión a Internet.</string>
     </resources>
