@@ -400,10 +400,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						resId == R.string.local_index_select_gpx_file) {
 					getMyApplication().getSelectedGpxHelper().selectGpxFile(info.gpx, resId == R.string.local_index_select_gpx_file, true);
 					listAdapter.notifyDataSetChanged();
-					Runnable r = selectedGpxHelper.getUiListener();
-					if(r != null) {
-						r.run();
-					}
+					selectedGpxHelper.runUiListeners();
 				} else if (resId == R.string.local_index_mi_delete) {
 					Builder confirm = new AlertDialog.Builder(getActivity());
 					confirm.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
@@ -498,6 +495,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPreExecute() {
 			getSherlockActivity().setSupportProgressBarIndeterminateVisibility(true);
+			listAdapter.clear();
 		}
 		
 		@Override
@@ -917,10 +915,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPostExecute(String result) {
-			Runnable r = selectedGpxHelper.getUiListener();
-			if(r != null) {
-				r.run();
-			}
+			selectedGpxHelper.runUiListeners();
 			getSherlockActivity().setProgressBarIndeterminateVisibility(false);
 			if(showOnMap && toShow != null) {
 				getMyApplication().getSettings().setMapLocationToShow(toShow.lat, toShow.lon,
