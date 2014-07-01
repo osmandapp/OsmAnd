@@ -1889,4 +1889,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="local_index_unselect_gpx_file">Deseleziona</string>
     <string name="local_index_select_gpx_file">Seleziona per visualizzarlo</string>
     <string name="route_descr_destination">\t</string>
+    <string name="no_index_file_to_download">Nulla da scaricare, per favore controllare la connessione internet.</string>
     </resources>
