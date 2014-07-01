@@ -13,11 +13,11 @@ import java.util.Set;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.map.OsmandRegions;
+import net.osmand.plus.*;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -72,6 +72,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 	private ContextMenuAdapter optionsMenuAdapter;
 	private ActionMode actionMode;
+	private OsmandRegions osmandRegions;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -86,6 +87,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
 		listAdapter = new LocalIndexesAdapter(this);
+		osmandRegions = ((OsmandApplication) getApplication()).getResourceManager().getOsmandRegions();
 
 
 		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
@@ -749,9 +751,10 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		int okColor;
 		int defaultColor;
 		int corruptedColor;
-		
+		Context ctx;
 
 		public LocalIndexesAdapter(Context ctx) {
+			this.ctx = ctx;
 			warningColor = ctx.getResources().getColor(R.color.color_warning);
 			okColor = ctx.getResources().getColor(R.color.color_ok);
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
@@ -877,7 +880,13 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item, parent, false);
 			}
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
-			viewName.setText(child.getName());
+			String mapDescr = getMapDescription(child.getFileName());
+			String mapName = getMapName(child.getFileName());
+			if (mapDescr.length() > 0){
+				viewName.setText(mapDescr + " - " + mapName);
+			} else {
+				viewName.setText(mapName);
+			}
 			if (child.isNotSupported()) {
 				viewName.setTextColor(warningColor);
 				viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
@@ -1007,6 +1016,67 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
 		}
+
+		private String getMapName(String fileName){
+			String mapname = getBasename(fileName);
+			String lc = mapname.toLowerCase();
+
+			String std = getStandardMapName(ctx,lc);
+			if (std != null){
+				return std;
+			}
+
+			return osmandRegions.getLocaleName(mapname);
+		}
+
+		private String getBasename(String fileName) {
+			if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
+				return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
+			}
+			if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
+				return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length()).replace('_', ' ');
+			}
+
+			int ls = fileName.lastIndexOf('-');
+			if (ls >= 0) {
+				return fileName.substring(0, ls);
+			} else {
+				ls = fileName.lastIndexOf(".");
+				if (ls >= 0){
+					return fileName.substring(0,ls);
+				}
+			}
+			return fileName;
+		}
+
+		private String getMapDescription(String fileName){
+			int ls = fileName.lastIndexOf(".");
+			String name = fileName;
+			if (ls >= 0) {
+				name = fileName.substring(0, ls);
+			}
+
+			if (name.endsWith("-roads")){
+					return ctx.getString(R.string.download_roads_only_item);
+			}
+
+			return "";
+		}
+
+		private String getStandardMapName(Context ctx, String basename) {
+			if(basename.equals("world-ski")) {
+				return ctx.getString(R.string.index_item_world_ski);
+			} else if(basename.equals("world_altitude_correction_ww15mgh")) {
+				return ctx.getString(R.string.index_item_world_altitude_correction);
+			} else if(basename.equals("world_basemap")) {
+				return ctx.getString(R.string.index_item_world_basemap);
+			} else if(basename.equals("world_bitcoin_payments")) {
+				return ctx.getString(R.string.index_item_world_bitcoin_payments);
+			} else if(basename.equals("world_seamarks")) {
+				return ctx.getString(R.string.index_item_world_seamarks);
+			}
+			return null;
+		}
+
 	}
-	
 }
