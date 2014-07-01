@@ -1888,4 +1888,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="local_index_unselect_gpx_file">取消選擇</string>
     <string name="local_index_select_gpx_file">選取要顯示的</string>
     <string name="route_descr_destination">\t</string>
+    <string name="no_index_file_to_download">無法下載，請檢查網路連線。</string>
     </resources>
