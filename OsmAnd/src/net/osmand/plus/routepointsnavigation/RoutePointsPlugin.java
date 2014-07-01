@@ -1,12 +1,14 @@
 package net.osmand.plus.routepointsnavigation;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
+import android.app.ActionBar;
+import android.content.Context;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
@@ -38,10 +40,14 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.route.stepsPlugin";
 
 	private static final String VISITED_KEY = "VISITED_KEY";
+	private static final String DELIVERED_KEY = "DELIVERED_KEY";
 
 	private OsmandApplication app;
 	private TextInfoWidget routeStepsControl;
 	private SelectedRouteGpxFile currentRoute;
+
+	private View deliveredView;
+	private MapActivity mapActivity;
 
 	private RoutePointsLayer routePointsLayer;
 
@@ -63,16 +69,43 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 	}
 
+	private void prepareDeliveredView() {
+		LayoutInflater vi = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		deliveredView = vi.inflate(R.layout.package_delivered, null);
+
+		Button btnY = (Button) deliveredView.findViewById(R.id.delivered_yes);
+
+		btnY.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				currentRoute.navigateToNextPoint(true);
+				FrameLayout layout = (FrameLayout) mapActivity.getLayout();
+				layout.removeView(deliveredView);
+			}
+		});
+
+		Button btnN = (Button) deliveredView.findViewById(R.id.delivered_no);
+
+		btnN.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				currentRoute.navigateToNextPoint(false);
+				FrameLayout layout = (FrameLayout) mapActivity.getLayout();
+				layout.removeView(deliveredView);
+			}
+		});
+	}
+
 
 	@Override
 	public boolean destinationReached() {
 		if (currentRoute != null) {
-			boolean naviateToNextPoint = currentRoute.navigateToNextPoint();
-			
-			if (naviateToNextPoint) {
-				return false;
-			}
+			FrameLayout layout = (FrameLayout) mapActivity.getLayout();
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+			params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
+			layout.addView(deliveredView, params);
 		}
+
 		return true;
 	}
 
@@ -109,7 +142,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayers(MapActivity activity) {
 		super.registerLayers(activity);
-
+		mapActivity = activity;
+		prepareDeliveredView();
 		if (routePointsLayer != null) {
 			activity.getMapView().removeLayer(routePointsLayer);
 		}
@@ -121,7 +155,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (routePointsLayer == null){
+		if (routePointsLayer == null) {
 			registerLayers(activity);
 		}
 
@@ -136,6 +170,12 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		} else {
 			return app.getString(R.string.route_points_no_gpx);
 
+		}
+	}
+
+	public void saveCurrentRoute(){
+		if (currentRoute != null){
+			currentRoute.saveGPXAsync();
 		}
 	}
 
@@ -172,6 +212,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		int gpxOrder;
 		long visitedTime; // 0 not visited
 		WptPt wpt;
+		boolean delivered;
 
 		public String getName() {
 			return wpt.name;
@@ -188,6 +229,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		public boolean isVisited() {
 			return visitedTime != 0;
 		}
+
+		public boolean isDelivered() { return delivered;}
 
 		public int getGpxOrder() {
 			return gpxOrder;
@@ -216,6 +259,11 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			return new LatLon(wpt.lat, wpt.lon);
 		}
 
+		public void setDelivered(boolean d) {
+			wpt.getExtensionsToWrite().put(DELIVERED_KEY, String.valueOf(d));
+			this.delivered = d;
+		}
+
 		public void setVisitedTime(long currentTimeMillis) {
 			visitedTime = currentTimeMillis;
 			wpt.getExtensionsToWrite().put(VISITED_KEY, visitedTime + "");
@@ -226,7 +274,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	public class SelectedRouteGpxFile {
 		private GPXUtilities.GPXFile gpx;
 		private List<RoutePoint> currentPoints = new ArrayList<RoutePointsPlugin.RoutePoint>();
-
 
 		public SelectedRouteGpxFile(GPXUtilities.GPXFile gpx) {
 			this.gpx = gpx;
@@ -276,23 +323,27 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 
 		public boolean navigateToNextPoint() {
-			if (!currentPoints.isEmpty()) {
-				RoutePoint rp = currentPoints.get(0);
-				if (rp.isNextNavigate) {
-					rp.setVisitedTime(System.currentTimeMillis());
-					rp.isNextNavigate = false;
-					sortPoints();
-				}
-				RoutePoint first = currentPoints.get(0);
-				if (!first.isVisited()) {
-					app.getTargetPointsHelper().navigateToPoint(first.getPoint(), true, -1, first.getName());
-					first.isNextNavigate = true;
-					return true;
-				} else {
-					app.getTargetPointsHelper().clearPointToNavigate(true);
-				}
+			if (currentPoints.isEmpty()) {
+				return false;
+			}
+
+			RoutePoint rp = currentPoints.get(0);
+			if (rp.isNextNavigate) {
+				rp.setVisitedTime(System.currentTimeMillis());
+				rp.isNextNavigate = false;
+				sortPoints();
+			}
+
+			RoutePoint first = currentPoints.get(0);
+			if (!first.isVisited()) {
+				app.getTargetPointsHelper().navigateToPoint(first.getPoint(), true, -1, first.getName());
+				first.isNextNavigate = true;
+				return true;
+			} else {
+				app.getTargetPointsHelper().clearPointToNavigate(true);
 			}
 			return false;
+
 		}
 
 		private void sortPoints() {
@@ -334,6 +385,9 @@ public class RoutePointsPlugin extends OsmandPlugin {
 					RoutePoint rtp = new RoutePoint();
 					rtp.gpxOrder = i;
 					rtp.wpt = wptPt;
+					String delivered = wptPt.getExtensionsToRead().get(DELIVERED_KEY);
+					rtp.delivered = Boolean.parseBoolean(delivered);
+
 					String time = wptPt.getExtensionsToRead().get(VISITED_KEY);
 					try {
 						rtp.visitedTime = Long.parseLong(time);
@@ -408,24 +462,36 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			}
 			return null;
 		}
-	}
-	
-	public void saveGPXAsync() {
-		new AsyncTask<RoutePointsPlugin.SelectedRouteGpxFile, Void, Void>() {
-			
-			protected void onPreExecute() {
+
+		public boolean navigateToNextPoint(boolean delivered) {
+			if (currentPoints.isEmpty()) {
+				return false;
 			}
 
-			@Override
-			protected Void doInBackground(RoutePointsPlugin.SelectedRouteGpxFile... params) {
-				if(getCurrentRoute() != null) {
-					getCurrentRoute().saveFile();
+			RoutePoint rp = currentPoints.get(0);
+			if (rp.isNextNavigate) {
+				rp.setDelivered(delivered);
+				return navigateToNextPoint();
+			}
+
+			return false;
+		}
+
+		public void saveGPXAsync() {
+			new AsyncTask<RoutePointsPlugin.SelectedRouteGpxFile, Void, Void>() {
+
+				protected void onPreExecute() {
 				}
-				return null;
-			}
 
-			protected void onPostExecute(Void result) {
-			}
-		}.execute(getCurrentRoute());
+				@Override
+				protected Void doInBackground(RoutePointsPlugin.SelectedRouteGpxFile... params) {
+					saveFile();
+					return null;
+				}
+
+				protected void onPostExecute(Void result) {
+				}
+			}.execute(getCurrentRoute());
+		}
 	}
 }

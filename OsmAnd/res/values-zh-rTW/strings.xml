@@ -1866,7 +1866,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="loading_smth">載入 %1$s …</string>
     <string name="map_widget_plain_time">目前時間</string>
     <string name="selected_gpx_info_show">\n\n長按在地圖上查看</string>
-    <string name="delay_navigation_start">開始導航與延遲</string>
+    <string name="delay_navigation_start">自動啟動轉向建議指引</string>
     <string name="selected">已選擇</string>
     <string name="gpx_split_interval">分割的間隔</string>
     <string name="gpx_info_subtracks">子軌跡：%1$s </string>
@@ -1887,4 +1887,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="none_selected_gpx">沒有選定 GPX 檔案。選取現有的軌跡再按住。</string>
     <string name="local_index_unselect_gpx_file">取消選擇</string>
     <string name="local_index_select_gpx_file">選取要顯示的</string>
+    <string name="route_descr_destination">\t</string>
     </resources>

@@ -2090,5 +2090,5 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="sort_by_distance">거리로 정렬</string>
     <string name="sort_by_name">이름으로 정렬</string>
     <string name="visible_element">지도에서 보기</string>
-    <string name="route_descr_destination"/>
+    <string name="route_descr_destination">\t</string>
     </resources>
