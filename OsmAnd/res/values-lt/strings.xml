@@ -1886,4 +1886,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="local_index_unselect_gpx_file">Panaikinti žymėjimą</string>
     <string name="local_index_select_gpx_file">Pasirinkite ką atvaizduoti</string>
     <string name="route_descr_destination">\t</string>
+    <string name="no_index_file_to_download">Nėra ką parsisiųsti. Pasitikrinkite interneto ryšį.</string>
     </resources>
