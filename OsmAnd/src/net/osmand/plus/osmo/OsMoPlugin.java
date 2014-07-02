@@ -325,9 +325,9 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		return service;
 	}
 
-	public AsyncTask<JSONObject, GPXFile, String> getDownloadGpxTask(final boolean makeVisible) {
+	public AsyncTask<JSONObject, String, String> getDownloadGpxTask(final boolean makeVisible) {
 		
-		return new AsyncTask<JSONObject, GPXFile, String> (){
+		return new AsyncTask<JSONObject, String, String> (){
 			
 			@Override
 			protected String doInBackground(JSONObject... params) {
@@ -364,6 +364,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 									log.error("Timestamp updates are not supported");
 								}
 							}
+							publishProgress(app.getString(R.string.osmo_gpx_track_downloaded, obj.getString("name")));
 						}
 						if(visible && (changed || makeVisible)) {
 							GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, f);
@@ -379,6 +380,16 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				}
 				return errors;
 			}
+			
+			protected void onProgressUpdate(String... values) {
+				if (values != null) {
+					String t = "";
+					for (String s : values) {
+						t += s + "\n";
+					}
+					app.showToastMessage(t.trim());
+				}
+			};
 			
 			@Override
 			protected void onPostExecute(String result) {
