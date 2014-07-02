@@ -615,9 +615,11 @@ public class MapActivityActions implements DialogProvider {
 	
 	private void enterRoutePlanningModeImpl(GPXFile gpxFile, LatLon from, String fromName) {
 		ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
-		if(mode == ApplicationMode.DEFAULT) {
-			mode = ApplicationMode.CAR;
+		if (mode == ApplicationMode.DEFAULT) {
+			ApplicationMode selected = settings.APPLICATION_MODE.get();
+			mode = selected == ApplicationMode.DEFAULT ? ApplicationMode.CAR : selected;
 		}
+
 		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		app.getSettings().APPLICATION_MODE.set(mode);
