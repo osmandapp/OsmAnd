@@ -1724,7 +1724,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="show_zoom_buttons_navigation">Показывать кнопки изменения масштаба</string>
     <string name="sort_by_distance">Сортировать по дистанции</string>
     <string name="sort_by_name">Сортировать по имени</string>
-    <string name="visible_element">Показывать</string>
+    <string name="visible_element">Отображать на карте</string>
     <string name="osmo_edit_color">Цвет метки</string>
     <string name="none_selected_gpx">Нет выбранных файлов GPX. Используйте длительное нажатие для выбора доступного трека.</string>
     <string name="local_index_unselect_gpx_file">Сбросить выбор</string>
