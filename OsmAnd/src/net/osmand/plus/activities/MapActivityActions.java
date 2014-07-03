@@ -959,7 +959,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
 		routingHelper.setRoutePlanningMode(false);
-		//settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
+		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 		mapActivity.updateApplicationModeSettings();
 	}
 	
