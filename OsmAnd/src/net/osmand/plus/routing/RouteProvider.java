@@ -670,7 +670,7 @@ public class RouteProvider {
 		ctx.calculationProgress = params.calculationProgress;
 		if(params.previousToRecalculate != null) {
 			 // not used any more
-			// ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
+			ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
 		}
 		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
 		LatLon en = new LatLon(params.end.getLatitude(), params.end.getLongitude());

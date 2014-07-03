@@ -437,7 +437,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				}
 			}
 		};
-		if (info.gpx != null) {
+		if(info.gpx != null){
 			if (info.file == null){
 				GpxSelectionHelper.SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedCurrentRecordingTrack();
 				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() == info.gpx){
