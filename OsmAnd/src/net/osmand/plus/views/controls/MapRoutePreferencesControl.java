@@ -283,7 +283,7 @@ public class MapRoutePreferencesControl extends MapControls {
 				final LocalRoutingParameter rp = getItem(position);
 				tv.setText(rp.getText(mapActivity));
 				tv.setPadding((int) (5 * scaleCoefficient), 0, 0, 0);
-				if (rp.routingParameter.getId().equals("short_way")){
+				if (rp.routingParameter != null && rp.routingParameter.getId().equals("short_way")){
 					//if short route settings - it should be inverse of fast_route_mode
 					ch.setChecked(!settings.FAST_ROUTE_MODE.get());
 				} else {
@@ -294,7 +294,7 @@ public class MapRoutePreferencesControl extends MapControls {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						//if short way that it should set valut to fast mode opposite of current
-						if (rp.routingParameter.getId().equals("short_way")){
+						if (rp.routingParameter != null && rp.routingParameter.getId().equals("short_way")){
 							settings.FAST_ROUTE_MODE.set(!isChecked);
 						} else {
 							rp.setSelected(settings, isChecked);
