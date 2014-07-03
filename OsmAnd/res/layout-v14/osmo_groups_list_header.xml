@@ -5,15 +5,8 @@
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
     android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/motd"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dip"
-        android:gravity="center"
-        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -30,12 +23,28 @@
             android:src="@drawable/mon_osmo_conn_small" />
 
         <Switch
-            android:id="@+id/enable_tracker"
-            android:layout_width="wrap_content"
+            android:id="@+id/enable_service"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
             android:gravity="center_vertical"
-            android:text="@string/osmo_enable_tracker" />
+            android:text="@string/osmo_start_service" />
     </LinearLayout>
+
+    <Switch
+        android:id="@+id/enable_tracker"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:gravity="center_vertical"
+        android:text="@string/osmo_enable_tracker" />
+
+    <TextView
+        android:id="@+id/motd"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dip"
+        android:gravity="center"
+        android:textSize="18sp" />
 
 </LinearLayout>

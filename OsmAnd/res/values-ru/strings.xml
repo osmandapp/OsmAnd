@@ -1689,7 +1689,7 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_group_policy">Политика</string>
     <string name="osmo_control">Быстрый доступ к OsMo</string>
     <string name="osmo_cancel_moving_target">Отменить движущуюся цель</string>
-    <string name="osmo_set_moving_target">Установить как движущуюся цель</string>
+    <string name="osmo_set_moving_target">Движущаяся цель</string>
     <string name="osmo_center_location">Центр на экране</string>
     <string name="gpx_selection_segment_title">Сегмент</string>
     <string name="gpx_info_distance">Расстояние: %1$s (%2$s точек) </string>

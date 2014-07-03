@@ -71,7 +71,10 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 
 	@Override
 	public boolean init(final OsmandApplication app) {
-		service.connect(true);
+		if(app.getSettings().OSMO_AUTO_CONNECT.get() || 
+				(System.currentTimeMillis() - app.getSettings().OSMO_LAST_PING.get() < 5 * 60 * 1000 )) {
+			service.connect(true);
+		}
 		return true;
 	}
 
@@ -190,6 +193,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
 	 */
 	private BaseMapWidget createOsMoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+		
 		final Drawable srcSmall = map.getResources().getDrawable(R.drawable.mon_osmo_conn_small);
 		final Drawable srcSignalSmall = map.getResources().getDrawable(R.drawable.mon_osmo_conn_signal_small);
 		final Drawable srcBig = map.getResources().getDrawable(R.drawable.mon_osmo_conn_big);

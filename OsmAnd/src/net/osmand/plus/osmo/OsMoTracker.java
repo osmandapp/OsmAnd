@@ -214,7 +214,7 @@ public class OsMoTracker implements OsMoReactor {
 
 	@Override
 	public void reconnect() {
-		if(autoStart.get()) {
+		if(autoStart.get() || startSendingLocations) {
 			enableTracker();
 		}
 	}

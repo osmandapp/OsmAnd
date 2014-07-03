@@ -243,7 +243,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				gr.description = obj.getString(DESCRIPTION);
 			}
 			if(obj.has(POLICY)) {
-				gr.description = obj.getString(POLICY);
+				gr.policy = obj.getString(POLICY);
 			}
 			if(obj.has(EXPIRE_TIME)) {
 				gr.expireTime = obj.getLong(EXPIRE_TIME);
