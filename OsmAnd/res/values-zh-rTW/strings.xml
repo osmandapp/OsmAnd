@@ -1754,7 +1754,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="share_fav">分享</string>
 	<string name="share_fav_subject">經由 OsmAnd 分享我的最愛</string>
 	<string name="use_points_as_intermediates">預估兩點之間的路線</string>
-    <string name="tip_recent_changes_1_8_alpha">"在1.8的變更： * 預估 GPX 軌跡路線標點之間的路線 * 為下載變更了各國的配置（支援當地名稱搜索） * 支援 GPX/KML 匯入(由 KML 轉換為 GPX ) * GPX軌跡已經移到\'我的資料\' * 您可以按路程分割 GPX 軌跡和查對海拔高度差異/速度 * 自動開始導航後延遲 "</string>
+    <string name="tip_recent_changes_1_8_alpha">"在1.8的變更： * 預估 GPX 軌跡路線標點之間的路線 * 為下載變更了各國的配置（支援當地名稱搜索） * 支援 GPX/KML 匯入(由 KML 轉換為 GPX ) * GPX 軌跡已經移到\'我的資料\' * 您可以按路程分割 GPX 軌跡和查對海拔高度差異/速度 * 自動開始導航後延遲 "</string>
     <string name="osmo_auto_send_locations_descr">自動開始追蹤區段和發送位置之後啟動應用程式</string>
     <string name="osmo_auto_send_locations">自動開始追蹤區段</string>
     <string name="osmo_tracker_id">個人追蹤 ID</string>
