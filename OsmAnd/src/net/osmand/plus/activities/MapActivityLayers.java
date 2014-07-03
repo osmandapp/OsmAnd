@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import android.widget.*;
 import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
@@ -13,20 +14,12 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.*;
 import net.osmand.plus.ContextMenuAdapter.Item;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.PoiFilter;
-import net.osmand.plus.PoiFiltersHelper;
-import net.osmand.plus.R;
-import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
@@ -55,15 +48,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ListAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Object is responsible to maintain layers using by map activity 
@@ -90,9 +76,11 @@ public class MapActivityLayers {
 	private ContextMenuLayer contextMenuLayer;
 	private MapControlsLayer mapControlsLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
+	private GpxSelectionHelper gpxSelectionHelper;
 
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
+		gpxSelectionHelper = getApplication().getSelectedGpxHelper();
 	}
 
 	public OsmandApplication getApplication(){
@@ -261,7 +249,7 @@ public class MapActivityLayers {
 					getApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
 				} else {
 					dialog.dismiss();
-					showGPXFileLayer(mapView);
+					showGPXFileLayer(getAlreadySelectedGpx(), mapView);
 				}
 			} else if(itemId == R.string.layer_transport_route){
 				transportInfoLayer.setVisible(isChecked);
@@ -318,8 +306,37 @@ public class MapActivityLayers {
 					public View getView(final int position, View convertView, ViewGroup parent) {
 						// User super class to create the View
 						View v = activity.getLayoutInflater().inflate(layout, null);
-			            TextView tv = (TextView)v.findViewById(R.id.title);
-			            tv.setText(adapter.getItemName(position));			            
+ 			            TextView tv = (TextView)v.findViewById(R.id.title);
+			            tv.setText(adapter.getItemName(position));
+
+						//if it's gpx or poi layer - need to show settings icon
+						int specialItemId = adapter.getItemId(position);
+						if (specialItemId == R.string.layer_poi || specialItemId == R.string.layer_gpx_layer) {
+							ImageView set = (ImageView) v.findViewById(R.id.icon_settings);
+
+							//setting icon depending on theme
+							if(light){
+								set.setImageResource(R.drawable.ic_action_settings_light);
+							} else {
+								set.setImageResource(R.drawable.ic_action_settings_dark);
+							}
+
+							if (specialItemId == R.string.layer_poi){
+								set.setOnClickListener( new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										selectPOIFilterLayer(mapView);
+									}
+								});
+							} else {
+								set.setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										showGPXFileLayer(getAlreadySelectedGpx(), mapView);
+									}
+								});
+							}
+						}
 
 			            //Put the image on the TextView
 			            if(adapter.getImageId(position, light) != 0) {
@@ -372,37 +389,53 @@ public class MapActivityLayers {
 		});
 		dlg.show();
 	}
-	
-	public void showGPXFileLayer(final OsmandMapTileView mapView){
+
+	public void showGPXFileLayer(List<String> files, final OsmandMapTileView mapView) {
 		final OsmandSettings settings = getApplication().getSettings();
-		GpxUiHelper.selectGPXFile(activity, true, true, new CallbackWithObject<GPXFile[]>() {
+		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
 			@Override
 			public boolean processResult(GPXFile[] result) {
 				WptPt locToShow = null;
-				for(GPXFile g : result) {
-					if(g.showCurrentTrack) {
-						if(!settings.SAVE_TRACK_TO_GPX.get()){
+				for (GPXFile g : result) {
+					if (g.showCurrentTrack) {
+						if (!settings.SAVE_TRACK_TO_GPX.get()) {
 							AccessibleToast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
-						}	
+						}
 						break;
-					} 
-					if(!g.showCurrentTrack || locToShow == null) {
+					}
+					if (!g.showCurrentTrack || locToShow == null) {
 						locToShow = g.findPointToShow();
 					}
 				}
 				getApplication().getSelectedGpxHelper().setGpxFileToDisplay(result);
-				if(locToShow != null){
-					mapView.getAnimatedDraggingThread().startMoving(locToShow.lat, locToShow.lon, 
+				if (locToShow != null) {
+					mapView.getAnimatedDraggingThread().startMoving(locToShow.lat, locToShow.lon,
 							mapView.getZoom(), true);
 				}
 				mapView.refreshMap();
 				return true;
 			}
-		});
+		};
+
+		if (files == null) {
+			GpxUiHelper.selectGPXFile(activity, true, true, callbackWithObject);
+		} else {
+			GpxUiHelper.selectGPXFile(files, activity, true, true, callbackWithObject);
+		}
 	}
 	
 	
-
+	private List<String> getAlreadySelectedGpx(){
+		if (gpxSelectionHelper == null){
+			return null;
+		}
+		List<GpxSelectionHelper.SelectedGpxFile> selectedGpxFiles = gpxSelectionHelper.getSelectedGPXFiles();
+		List<String> files = new ArrayList<String>();
+		for (GpxSelectionHelper.SelectedGpxFile file : selectedGpxFiles) {
+			files.add(file.getGpxFile().path);
+		}
+		return files;
+	}
 	
 	
 	private void selectPOIFilterLayer(final OsmandMapTileView mapView){
