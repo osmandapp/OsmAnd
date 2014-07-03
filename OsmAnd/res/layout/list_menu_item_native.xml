@@ -36,7 +36,9 @@
         <ImageView android:id="@+id/icon_settings"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:gravity="center_vertical"/>
+                   android:gravity="center_vertical"
+                   android:visibility="gone"
+                   android:focusable="false"/>
 
 <!-- android:button="@drawable/ic_btn_wocheckbox" -->
     <CheckBox

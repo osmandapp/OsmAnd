@@ -316,6 +316,7 @@ public class MapActivityLayers {
 						if ((specialItemId == R.string.layer_poi || specialItemId == R.string.layer_gpx_layer)
 								&& adapter.getSelection(position) > 0) {
 
+							settingsImage.setVisibility(View.VISIBLE);
 							//setting icon depending on theme
 							if(light){
 								settingsImage.setImageResource(R.drawable.ic_action_settings_light);
