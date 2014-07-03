@@ -310,28 +310,33 @@ public class MapActivityLayers {
 			            tv.setText(adapter.getItemName(position));
 
 						//if it's gpx or poi layer - need to show settings icon
-						int specialItemId = adapter.getItemId(position);
-						if (specialItemId == R.string.layer_poi || specialItemId == R.string.layer_gpx_layer) {
-							ImageView set = (ImageView) v.findViewById(R.id.icon_settings);
+						//need imageview and specialItemId o
+						final ImageView settingsImage = (ImageView) v.findViewById(R.id.icon_settings);
+						final int specialItemId = adapter.getItemId(position);
+						if ((specialItemId == R.string.layer_poi || specialItemId == R.string.layer_gpx_layer)
+								&& adapter.getSelection(position) > 0) {
 
 							//setting icon depending on theme
 							if(light){
-								set.setImageResource(R.drawable.ic_action_settings_light);
+								settingsImage.setImageResource(R.drawable.ic_action_settings_light);
 							} else {
-								set.setImageResource(R.drawable.ic_action_settings_dark);
+								settingsImage.setImageResource(R.drawable.ic_action_settings_dark);
 							}
 
 							if (specialItemId == R.string.layer_poi){
-								set.setOnClickListener( new View.OnClickListener() {
+								settingsImage.setOnClickListener(new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
 										selectPOIFilterLayer(mapView);
 									}
 								});
 							} else {
-								set.setOnClickListener(new View.OnClickListener() {
+								settingsImage.setOnClickListener(new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
+										if (listener.dialog != null) {
+											listener.dialog.dismiss();
+										}
 										showGPXFileLayer(getAlreadySelectedGpx(), mapView);
 									}
 								});
@@ -355,6 +360,13 @@ public class MapActivityLayers {
 							ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 								@Override
 								public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+									if (specialItemId == R.string.layer_poi){
+										if (isChecked){
+											settingsImage.setVisibility(View.VISIBLE);
+										} else {
+											settingsImage.setVisibility(View.GONE);
+										}
+									}
 									listener.onClick(position, isChecked);
 								}
 							});
