@@ -331,7 +331,7 @@ public class MapActivityLayers {
 										selectPOIFilterLayer(mapView);
 									}
 								});
-							} else {
+							} else if (specialItemId == R.string.layer_gpx_layer) {
 								settingsImage.setOnClickListener(new View.OnClickListener() {
 									@Override
 									public void onClick(View view) {
