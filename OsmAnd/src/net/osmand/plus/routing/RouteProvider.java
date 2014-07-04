@@ -77,7 +77,7 @@ public class RouteProvider {
 	public enum RouteService {
 			OSMAND("OsmAnd (offline)"), YOURS("YOURS"), 
 			ORS("OpenRouteService"), OSRM("OSRM (only car)"),
-			BROUTER("BRouter (offline)"), STRAIGHT("Straight line(offline)");
+			BROUTER("BRouter (offline)"), STRAIGHT("Straight line");
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
