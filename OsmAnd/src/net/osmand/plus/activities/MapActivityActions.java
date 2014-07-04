@@ -614,10 +614,13 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	private void enterRoutePlanningModeImpl(GPXFile gpxFile, LatLon from, String fromName) {
-		ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
+		ApplicationMode mode = settings.APPLICATION_MODE.get();
+		ApplicationMode defaultMode = settings.DEFAULT_APPLICATION_MODE.get();
+		
+		//if current application mode is "Browse map" (DEFAULT), then it is not possible to set routing mode to current application mode
 		if (mode == ApplicationMode.DEFAULT) {
-			ApplicationMode selected = settings.APPLICATION_MODE.get();
-			mode = selected == ApplicationMode.DEFAULT ? ApplicationMode.CAR : selected;
+			//if default application mode is also "Browse map" (DEFAULT), then set mode to car, else set mode to default application mode
+			mode = (defaultMode == ApplicationMode.DEFAULT) ? ApplicationMode.CAR : defaultMode;
 		}
 
 		OsmandApplication app = mapActivity.getMyApplication();
