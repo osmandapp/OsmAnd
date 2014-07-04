@@ -127,6 +127,24 @@ public class GpxUiHelper {
 		}
 		return description.toString();
 	}
+
+	public static void selectGPXFile(List<String> selectedGpxList, final Activity activity,
+									 final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject){
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		final List<String> allGpxList = getSortedGPXFilenames(dir);
+		if(allGpxList.isEmpty()){
+			AccessibleToast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
+		}
+
+		if(!allGpxList.isEmpty() || showCurrentGpx){
+			if(showCurrentGpx){
+				allGpxList.add(0, activity.getString(R.string.show_current_gpx_title));
+			}
+			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity,allGpxList, selectedGpxList, multipleChoice);
+			createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, allGpxList, adapter);
+		}
+	}
 	
 	public static void selectGPXFile(final Activity activity,
 			final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject) {
@@ -137,21 +155,41 @@ public class GpxUiHelper {
 			AccessibleToast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
 		if(!list.isEmpty() || showCurrentGpx){
-			
-			final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 			if(showCurrentGpx){
 				list.add(0, activity.getString(R.string.show_current_gpx_title));
 			}
-			for(String s : list) {
-				if (s.endsWith(".gpx")) {
-					s = s.substring(0, s.length() - ".gpx".length());
-				}
-				s = s.replace('_', ' ');
-				adapter.item(s).selected(multipleChoice ? 0 : -1)
-						.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).reg();
-			}
+
+			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, list, null, multipleChoice);
 			createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, list, adapter);
 		}
+	}
+
+	private static ContextMenuAdapter createGpxContextMenuAdapter(Activity activity, List<String> allGpxList, List<String> selectedGpxList, boolean multipleChoice) {
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
+		//element position in adapter
+		int i = 0;
+		for (String s : allGpxList) {
+			String fileName = s;
+			if (s.endsWith(".gpx")) {
+				s = s.substring(0, s.length() - ".gpx".length());
+			}
+			s = s.replace('_', ' ');
+
+			adapter.item(s).selected(multipleChoice ? 0 : -1)
+					.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).reg();
+
+			//if there's some selected files - need to mark them as selected
+			if (selectedGpxList != null) {
+				for (String file : selectedGpxList) {
+					if (file.endsWith(fileName)) {
+						adapter.setSelection(i, 1);
+						break;
+					}
+				}
+			}
+			i++;
+		}
+		return adapter;
 	}
 	
 	private static void setDescripionInDialog(final ArrayAdapter<?> adapter, final ContextMenuAdapter cmAdapter, Activity activity,
@@ -252,6 +290,11 @@ public class GpxUiHelper {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					GPXFile currentGPX = null;
+					//clear all previously selected files before adding new one
+					OsmandApplication app = (OsmandApplication) activity.getApplication();
+					if(app != null && app.getSelectedGpxHelper() != null){
+						app.getSelectedGpxHelper().clearAllGpxFileToShow();
+					}
 					if (showCurrentGpx && adapter.getSelection(0) > 0) {
 						currentGPX = app.getSavingTrackHelper().getCurrentGpx();
 					}
