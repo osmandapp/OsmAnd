@@ -517,7 +517,7 @@
 	<string name="voice_not_use">不要使用</string>
 	<string name="voice_not_specified">無</string>
 	<string name="installing_new_resources">安裝新資料…</string>
-	<string name="internet_connection_required_for_online_route">選用線上導航服務，但是沒有可用網路連線。</string>
+	<string name="internet_connection_required_for_online_route">選用線上導航服務，但是沒有能使用的網路連線。</string>
 	<string name="tts_language_not_supported_title">該語言未支援</string>
 	<string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到 Play 商場找其它引擎嗎？否則使用之前設定的語言。</string>
 	<string name="tts_missing_language_data_title">資料遺失</string>
