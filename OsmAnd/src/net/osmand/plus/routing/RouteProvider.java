@@ -77,7 +77,7 @@ public class RouteProvider {
 	public enum RouteService {
 			OSMAND("OsmAnd (offline)"), YOURS("YOURS"), 
 			ORS("OpenRouteService"), OSRM("OSRM (only car)"),
-			BROUTER("BRouter (offline)"); 
+			BROUTER("BRouter (offline)"), STRAIGHT("Straight line");
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
@@ -324,7 +324,10 @@ public class RouteProvider {
 					res = findORSRoute(params);
 				} else if (params.type == RouteService.OSRM) {
 					res = findOSRMRoute(params);
-				} else {
+				} else if (params.type == RouteService.STRAIGHT){
+					res = findStraightRoute(params);
+				}
+				else {
 					res = new RouteCalculationResult("Selected route service is not available");
 				}
 				if(log.isInfoEnabled() ){
@@ -344,7 +347,6 @@ public class RouteProvider {
 		return new RouteCalculationResult(null);
 	}
 
-	
 	public RouteCalculationResult recalculatePartOfflineRoute(RouteCalculationResult res, RouteCalculationParams params) {
 		RouteCalculationResult rcr = params.previousToRecalculate;
 		List<Location> locs = new ArrayList<Location>(rcr.getRouteLocations());
@@ -670,7 +672,7 @@ public class RouteProvider {
 		ctx.calculationProgress = params.calculationProgress;
 		if(params.previousToRecalculate != null) {
 			 // not used any more
-			// ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
+			ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
 		}
 		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
 		LatLon en = new LatLon(params.end.getLatitude(), params.end.getLongitude());
@@ -1205,7 +1207,31 @@ public class RouteProvider {
 		}
 		return new RouteCalculationResult(res, null, params, null);
 	}
-	
 
-	
+	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
+		double[] lats = new double[] { params.start.getLatitude(), params.end.getLatitude() };
+		double[] lons = new double[] { params.start.getLongitude(), params.end.getLongitude() };
+		List<LatLon> intermediates = params.intermediates;
+		List<Location> dots = new ArrayList<Location>();
+		//writing start location
+		Location location = new Location(String.valueOf("start"));
+		location.setLatitude(lats[0]);
+		location.setLongitude(lons[0]);
+		//adding intermediate dots if they exists
+		if (intermediates != null){
+			for(int i =0; i<intermediates.size();i++){
+				location = new Location(String.valueOf(i));
+				location.setLatitude(intermediates.get(i).getLatitude());
+				location.setLongitude(intermediates.get(i).getLongitude());
+				dots.add(location);
+			}
+		}
+		//writing end location
+		location = new Location(String.valueOf("end"));
+		location.setLatitude(lats[1]);
+		location.setLongitude(lons[1]);
+		dots.add(location);
+		return new RouteCalculationResult(dots,null,params,null);
+	}
+
 }

@@ -1149,7 +1149,7 @@
 	<string name="intermediate_point">Punto intermedio %1$s</string>
     <string name="gps_not_available">Attiva il GPS nelle impostazioni</string>
     <string name="map_widget_show_destination_arrow">Visualizza la direzione della destinazione</string>
-    <string name="non_optimal_route_calculation">Calcola un percorso anche non ottimale su lunghe distanze</string>
+    <string name="non_optimal_route_calculation">Calcola un percorso, eventualmente anche non ottimale, su lunghe distanze</string>
     <string name="enable_plugin_monitoring_services">Abilita il plugin di monitoraggio per utilizzare i servizi di registrazione della posizione (tracking, tracking in tempo reale)</string>
     <string name="rendering_attr_roadColors_description">Seleziona una combinazione di colori per le strade:</string>
 	<string name="rendering_attr_roadColors_name">Schema di colorazioni per le strade</string>
@@ -1858,9 +1858,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="gpx_info_waypoints">Tappe del percorso: $1%s </string>
 	<string name="gpx_info_distance">Distanza: %1$s (%2$s punti) </string>
 	<string name="gpx_info_end_time">Orario di arrivo: %1$tF, %1$tT </string>
-	<string name="gpx_info_diff_altitude">Estermi gamma alititudini: %1$s</string>
+	<string name="gpx_info_diff_altitude">Gamma altitudini: %1$s</string>
 	<string name="gpx_info_asc_altitude">Discesa/salita: %1$s</string>
-    <string name="gpx_timespan">Intervallo di tempo: %1$s</string>
+    <string name="gpx_timespan">Durata: %1$s</string>
 	<string name="gpx_timemoving">Tempo in movimento: %1$s</string>
     <string name="gpx_selection_segment_title">Segmento</string>
     <string name="gpx_selection_number_of_points"> %1$s punti</string>
@@ -1889,4 +1889,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="local_index_unselect_gpx_file">Deseleziona</string>
     <string name="local_index_select_gpx_file">Seleziona per visualizzarlo</string>
     <string name="route_descr_destination">\t</string>
+    <string name="no_index_file_to_download">Nulla da scaricare, per favore controllare la connessione internet.</string>
     </resources>

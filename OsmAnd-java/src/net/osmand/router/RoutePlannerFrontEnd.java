@@ -213,60 +213,63 @@ public class RoutePlannerFrontEnd {
 
 	private List<RouteSegmentResult> searchRoute(final RoutingContext ctx, List<RouteSegment> points, PrecalculatedRouteDirection routeDirection) 
 			throws IOException, InterruptedException {
-		if(points.size() > 2) {
-			ArrayList<RouteSegmentResult> firstPartRecalculatedRoute = null;
-			ArrayList<RouteSegmentResult> restPartRecalculatedRoute = null;
-			if (ctx.previouslyCalculatedRoute != null) {
-				List<RouteSegmentResult> prev = ctx.previouslyCalculatedRoute;
-				long id = points.get(1).getRoad().id;
-				int ss = points.get(1).getSegmentStart();
-				for (int i = 0; i < prev.size(); i++) {
-					RouteSegmentResult rsr = prev.get(i);
-					if (id == rsr.getObject().getId() && ss == rsr.getEndPointIndex()) {
-						firstPartRecalculatedRoute = new ArrayList<RouteSegmentResult>(i + 1);
-						restPartRecalculatedRoute = new ArrayList<RouteSegmentResult>(prev.size() - i);
-						for(int k = 0; k < prev.size(); k++) {
-							if(k <= i) {
-								firstPartRecalculatedRoute.add(prev.get(k));
-							} else {
-								restPartRecalculatedRoute.add(prev.get(k));
-							}
-						}
-						break;
-					}
-				}
-			}
-			List<RouteSegmentResult> results = new ArrayList<RouteSegmentResult>();
-			for (int i = 0; i < points.size() - 1; i++) {
-				RoutingContext local = new RoutingContext(ctx);
-				if(i == 0) {
-					local.previouslyCalculatedRoute = firstPartRecalculatedRoute;
-				}
-				local.visitor = ctx.visitor;
-				local.calculationProgress = ctx.calculationProgress;
-				List<RouteSegmentResult> res = searchRouteInternalPrepare(local, points.get(i), points.get(i + 1), routeDirection);
+		if (points.size() <= 2) {
+			ctx.previouslyCalculatedRoute = null;
+			return searchRoute(ctx, points.get(0), points.get(1), routeDirection);
+		}
 
-				results.addAll(res);
-				ctx.distinctLoadedTiles += local.distinctLoadedTiles;
-				ctx.loadedTiles += local.loadedTiles;
-				ctx.visitedSegments += local.visitedSegments;
-				ctx.loadedPrevUnloadedTiles += local.loadedPrevUnloadedTiles;
-				ctx.timeToCalculate += local.timeToCalculate;
-				ctx.timeToLoad += local.timeToLoad;
-				ctx.timeToLoadHeaders += local.timeToLoadHeaders;
-				ctx.relaxedSegments += local.relaxedSegments;
-				ctx.routingTime += local.routingTime;
-				
-				local.unloadAllData(ctx);
-				if(restPartRecalculatedRoute != null) {
-					results.addAll(restPartRecalculatedRoute);
+		ArrayList<RouteSegmentResult> firstPartRecalculatedRoute = null;
+		ArrayList<RouteSegmentResult> restPartRecalculatedRoute = null;
+		if (ctx.previouslyCalculatedRoute != null) {
+			List<RouteSegmentResult> prev = ctx.previouslyCalculatedRoute;
+			long id = points.get(1).getRoad().id;
+			int ss = points.get(1).getSegmentStart();
+			for (int i = 0; i < prev.size(); i++) {
+				RouteSegmentResult rsr = prev.get(i);
+				if (id == rsr.getObject().getId() && ss == rsr.getEndPointIndex()) {
+					firstPartRecalculatedRoute = new ArrayList<RouteSegmentResult>(i + 1);
+					restPartRecalculatedRoute = new ArrayList<RouteSegmentResult>(prev.size() - i);
+					for (int k = 0; k < prev.size(); k++) {
+						if (k <= i) {
+							firstPartRecalculatedRoute.add(prev.get(k));
+						} else {
+							restPartRecalculatedRoute.add(prev.get(k));
+						}
+					}
 					break;
 				}
 			}
-			ctx.unloadAllData();
-			return results;
 		}
-		return searchRoute(ctx, points.get(0), points.get(1), routeDirection);
+		List<RouteSegmentResult> results = new ArrayList<RouteSegmentResult>();
+		for (int i = 0; i < points.size() - 1; i++) {
+			RoutingContext local = new RoutingContext(ctx);
+			if (i == 0) {
+				//local.previouslyCalculatedRoute = firstPartRecalculatedRoute;
+			}
+			local.visitor = ctx.visitor;
+			local.calculationProgress = ctx.calculationProgress;
+			List<RouteSegmentResult> res = searchRouteInternalPrepare(local, points.get(i), points.get(i + 1), routeDirection);
+
+			results.addAll(res);
+			ctx.distinctLoadedTiles += local.distinctLoadedTiles;
+			ctx.loadedTiles += local.loadedTiles;
+			ctx.visitedSegments += local.visitedSegments;
+			ctx.loadedPrevUnloadedTiles += local.loadedPrevUnloadedTiles;
+			ctx.timeToCalculate += local.timeToCalculate;
+			ctx.timeToLoad += local.timeToLoad;
+			ctx.timeToLoadHeaders += local.timeToLoadHeaders;
+			ctx.relaxedSegments += local.relaxedSegments;
+			ctx.routingTime += local.routingTime;
+
+			local.unloadAllData(ctx);
+			if (restPartRecalculatedRoute != null) {
+				results.addAll(restPartRecalculatedRoute);
+				break;
+			}
+		}
+		ctx.unloadAllData();
+		return results;
+
 	}
 	
 	@SuppressWarnings("static-access")

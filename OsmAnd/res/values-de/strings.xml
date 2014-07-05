@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
@@ -876,7 +876,7 @@
 	<string name="downloading">Herunterladen…</string>
 	<string name="downloading_list_indexes">Die Liste der verfügbaren Regionen wird geladen…</string>
 	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
-	<string name="select_index_file_to_download">Nicht gefunden. Nicht vorhandene Regionen können selbst erstellt werden, siehe http://osmand.net.</string>
+	<string name="select_index_file_to_download">Suche war erfolglos. Karten für nicht vorhandene Regionen können selbst erstellt werden, siehe http://osmand.net.</string>
 	<string name="show_poi_on_map">Auf Karte anzeigen</string>
 	<string name="fav_points_edited">Favorit wurde bearbeitet</string>
 	<string name="fav_points_not_exist">Keine Favoriten vorhanden</string>
@@ -1773,7 +1773,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osmo_locations_sent">Gesendete Standorte %1$d (im Zwischenspeicher %2$d) </string>
     <string name="osmo_conn_successfull">Verbindung erfolgreich: %1$s </string>
     <string name="osmo_mode_restart">OsMo-Sitzung neustarten</string>
-    <string name="osmo_settings_debug">Dubug-Information</string>
+    <string name="osmo_settings_debug">Debug-Information</string>
     <string name="osmo_connect_to_device_name">Nutzername</string>
     <string name="osmo_connect_to_device_tracker_id">Aufzeichnungs-ID</string>
     <string name="osmo_connect_to_device">Mit Gerät koppeln</string>
@@ -1875,4 +1875,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="show_zoom_buttons_navigation_descr">Zoom-Buttons bei Navigation anzeigen</string>
     <string name="show_zoom_buttons_navigation">Zeige Zoom-Buttons</string>
     <string name="osmo_center_location">Zentrieren auf dem Bildschirm</string>
+    <string name="no_index_file_to_download">Download-Ziel nicht gefunden. Bitte Internet-Verbindung überprüfen.</string>
+    <string name="none_selected_gpx">Keine GPX-Spur ausgewählt. Zum Auswählen auf eine Spur lange drücken.</string>
+    <string name="local_index_unselect_gpx_file">Deselektieren</string>
+    <string name="local_index_select_gpx_file">Zum Anzeigen auswählen</string>
     </resources>

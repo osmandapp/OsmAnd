@@ -20,14 +20,14 @@
   <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas</string>
   <string name="offline_edition">Edición sin conexión</string>
   <string name="offline_edition_descr">Usa siempre edición sin conexión</string>
-  <string name="tip_recent_changes_0_7_1_t">"Cambios en 0.7.1 :
+  <string name="tip_recent_changes_0_7_1_t">"Cambios en 0.7.1:
 \n\t- Edición de PDI sin conexión
-\n\t- Seguimiento en directo opcional - envía las coordenadas a un servicio web periódicamente (lea cómo configurar su propio servicio web en los artículos HowTo)
-\n\t- Muestra la traza actual en el mapa
-\n\t- Detección de la dirección : \'Da la vuelta\' se indica y se anuncia cuando se orienta en la dirección opuesta o después de saltarse un giro
+\n\t- Opción seguimiento con conexión - envía las coordenadas a un servicio web periódicamente (lea cómo configurar su propio servicio web en los artículos HowTo)
+\n\t- Muestra el registro de la traza actual en el mapa
+\n\t- Detección de la dirección: \'Hacer vuelta en U\' se indica y anuncia cuando se orienta en la dirección opuesta o después de saltarse un giro
 \n\t- Nuevo anuncio de voz \'Ruta recalculada\'
 \n\t- Indicación óptica de un giro inminente en menos de 100m por el cambio de color en la flecha de dirección
-\n\t- Disponibilidad de versión actual también para ficheros de índice desactivados - se muestra en la pantalla de Descarga en verde oscuro y azul oscuro
+\n\t- Actualmente también los archivos índice desactivados se muestran en la pantalla de Descarga en verde oscuro y azul oscuro
 \n\t- Otros cambios "</string>
   <string name="update_poi_does_not_change_indexes">Los cambios a PDIs dentro de la aplicación no afectan a los archivos de mapa descargados; los cambios se guardan en un archivo local.</string>
   <string name="local_openstreetmap_uploading">Enviando-…</string>
@@ -222,7 +222,7 @@
   <string name="tts_language_not_supported">El idioma seleccionado no está soportado por el sintetizador de voz (TTS) de Android. ¿Quiere ir a G. Play a buscar otro motor TTS? Si no, se utilizará el idioma TTS preseleccionado.</string>
   <string name="tts_missing_language_data_title">Faltan datos</string>
   <string name="tts_missing_language_data">No hay datos instalados para el idioma seleccionado. ¿Quiere ir a G. Play para instalarlos?</string>
-  <string name="gpx_option_reverse_route">Invertir la dirección del GPX</string>
+  <string name="gpx_option_reverse_route">Invertir la dirección GPX</string>
   <string name="gpx_option_destination_point">Usar destino actual</string>
   <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
   <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta localización. \n\t\n\tPara usarlo activa \'Menú\'→\'Capas de mapa\'→\'Fuente del mapa…\'→\'Mapas vectoriales descargados\'.</string>
@@ -275,7 +275,7 @@
   <string name="search_osm_offline">Buscar dirección usando mapas sin conexión</string>
   <string name="system_locale">Sistema</string>
   <string name="preferred_locale_descr">Selecciona el idioma de visualización</string>
-  <string name="preferred_locale">Idioma de visualización</string>
+  <string name="preferred_locale">Idioma de la pantalla</string>
   <string name="tip_map_switch">Elige una Fuente de mapa</string>
   
   <string name="tip_app_mode">Perfil de uso</string>
@@ -523,7 +523,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="transport_Routes">Rutas</string>
   <string name="transport_Stop">Parada</string>
   <string name="transport_stops">paradas</string>
-  <string name="transport_search_after">Ruta siguiente</string>
+  <string name="transport_search_after">Ruta subsiguiente</string>
   <string name="transport_search_before">Ruta previa</string>
   <string name="transport_finish_search">Finalizar búsqueda</string>
   <string name="transport_stop_to_go_out">Elige parada a la que ir</string>
@@ -579,9 +579,9 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="fav_points_edited">Se editó el punto favorito</string>
   <string name="fav_points_not_exist">No hay puntos favoritos</string>
   <string name="update_existing">Reemplazar</string>
-  <string name="only_show">Sólo mostrar</string>
+  <string name="only_show">Mostrar ruta</string>
   <string name="follow">Seguir</string>
-  <string name="recalculate_route_to_your_location">Seleccione el modo de transporte (opcional):</string>
+  <string name="recalculate_route_to_your_location">Modo transporte:</string>
   <string name="mark_final_location_first">Seleccione primero el destino</string>
   <string name="get_directions">Indicaciones</string>
   <string name="show_gps_status">Mostrar estado del GPS</string>
@@ -782,7 +782,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="extra_settings">Configuraciones avanzadas</string>
   <string name="osmand_monitoring_description">Este agregado facilita el registro de sus excursiones a un fichero GPX o en directo usando un servicio web.</string>
   <string name="osmand_extra_settings_description">Muestra opciones para configuraciones avanzadas de mapa (como aumentar detalles del mapa) y algunas especificas de dispositivos.</string>
-  <string name="osmand_development_plugin_description">Muestra opciones de características de desarrollo y depuración como navegación animada o mostrar el rendimiento de la visualización.</string>
+  <string name="osmand_development_plugin_description">Mostrar opciones de características de desarrollo y depuración como la simulación de rutas o la pantalla de rendimiento de la visualización.</string>
   <string name="plugins_screen">Gestor de Extras</string>
   <string name="select_plugin_to_activate">Toque un extra para activarlo o desactivarlo. (Puede ser necesario reiniciar OsmAnd.)</string>
   <string name="prefs_plugins_descr">Los extras activan opciones avanzadas y proporcionan funcionalidades adicionales</string>
@@ -887,16 +887,16 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="route_roundabout">Rotonda: coja la %1$d salida y continúe</string>
   <string name="route_kl">Manténgase a la izquierda y continúe</string>
   <string name="route_kr">Manténgase a la derecha y continúe</string>
-  <string name="save_route_as_gpx">Guardar ruta como fichero GPX</string>
+  <string name="save_route_as_gpx">Guardar la ruta como archivo GPX</string>
   <string name="asap">Si puedes</string>
-  <string name="tip_recent_changes_0_8_1_t">"Cambios en 0.8.1 :
+  <string name="tip_recent_changes_0_8_1_t">"Cambios en 0.8.1:
 \n\t* Rutas más precisas (algo más lento)
 \n\t* Recálculo inteligente y rápido de la ruta
 \n\t* Direcciones por carriles
-\n\t* Información sobre radares, limites de velocidad y puntos negros
-\n\t* Mejoras en la guía por voz en autopistas
-\n\t* Extra de parking (¿Dónde está aparcado mi coche?)
-\n\t* Activar/Desactivar mecanismo de monitorización "</string>
+\n\t* Información sobre límites de velocidad, radares y reductores de velocidad 
+\n\t* Mejoras en la guía por voz en carreteras
+\n\t* Agregado de aparcamiento (¿Dónde está aparcado mi autoóvil?)
+\n\t* Habilitar/Deshabilitar el widget de registro "</string>
   <string name="gpxup_public">Público</string>
   <string name="gpxup_identifiable">Identificable</string>
   <string name="gpxup_trackable">Trazable</string>
@@ -930,14 +930,14 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="native_app_allocated_memory_descr">Memoria nativa total usada por la app %1$s MB (Dalvik %2$s MB, otros %3$s MB).
 		Memoria proporcional %4$s MB (Límite Android %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Memoria nativa total</string>
-  <string name="select_animate_speedup">Seleccionar aceleración de ruta animada</string>
+  <string name="select_animate_speedup">Seleccionar la velocidad del simulador de ruta</string>
   <string name="osmand_parking_hours">Horas</string>
   <string name="osmand_parking_minutes">Minutos</string>
   <string name="osmand_parking_position_description_add_time">El automóvil fue aparcado en:</string>
   <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta la dirección</string>
   <string name="use_compass_navigation">Usar brújula</string>
-  <string name="route_updated_loc_found">La ruta será recalculada cuando se encuentre la localización</string>
-  <string name="continue_follow_previous_route_auto">La navegación anterior no ha finalizado. ¿Continuar siguiéndola? (%1$s segundos)</string>
+  <string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>
+  <string name="continue_follow_previous_route_auto">La navegación anterior no finalizó. ¿Continuar siguiéndola? (%1$s segundos)</string>
   
   
   
@@ -957,7 +957,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="map_widget_right_stack">Lado derecho:</string>
   <string name="map_widget_left_stack">Lado izquierdo:</string>
   <string name="map_widget_parking">Aparcamiento</string>
-  <string name="map_widget_monitoring">Seguimiento</string>
+  <string name="map_widget_monitoring">Grabando GPX</string>
   <string name="map_widget_speed">Velocidad</string>
   <string name="map_widget_distance">Destino</string>
   <string name="map_widget_altitude">Altitud</string>
@@ -1049,9 +1049,11 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
 			 - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales
 	</string>
 <string name="avoid_motorway">Evitar autopistas</string>
-<string name="tip_recent_changes_0_8_3_t">"﻿Cambios en 0.8.3 :
-\n\t* Puntos intermedios\n\t* Mejoras en indicaciones de ruta
-\n\t* Añadida una opción de evitar autopistas cuando se contruye una ruta\n\t* Añadido un tipo adicional de vía ciclista (Cycleway=track)
+<string name="tip_recent_changes_0_8_3_t">"﻿Cambios en 0.8.3:
+\n\t* Puntos de interés
+\n\t* Mejoras en indicaciones de ruta
+\n\t* Añadida una opción de evitar autopistas cuando se construye una ruta
+\n\t* Añadido un tipo más de carretera para bicicletas al mapa (Cycleway=track)
 \n\t* Corrección de errores "</string>
 <string name="snap_to_road_descr">﻿Ajusta la posición a las carreteras durante la navegación</string>
 <string name="snap_to_road">Ajustar a carreteras</string>
@@ -1066,7 +1068,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="target_point">Punto de interés %1$s</string>
     <string name="target_points">Puntos de ruta</string>
     <string name="intermediate_point_too_far">Punto de ruta %1$s demasiado lejos de la carretera más cercana.</string>
-    <string name="arrived_at_intermediate_point">Usted llegó a su punto de interés</string>
+    <string name="arrived_at_intermediate_point">Llegaste a tu punto de interés</string>
     <string name="context_menu_item_intermediate_point">Añadir como punto de interés</string>
     <string name="map_widget_intermediate_distance">Punto de interés</string>
     <string name="ending_point_too_far">Punto final demasiado lejos de la carretera más cercana.</string>
@@ -1080,13 +1082,13 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="poi_filter_restaurants">Restaurantes</string>
     <string name="poi_filter_sightseeing">Turismo</string>
     <string name="map_widget_monitoring_services">Servicios de registro</string>
-	<string name="no_route">No hay ruta</string>
+	<string name="no_route">Sin ruta</string>
 	<string name="delete_target_point">Eliminar el punto de interés</string>
 	<string name="intermediate_point">Punto de interés %1$s</string>
     <string name="gps_not_available">Por favor, habilite el GPS en ajustes</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
     <string name="enable_plugin_monitoring_services">Permite que los extras de monitorización (registro, seguimiento en directo) usen los servicios de monitorización</string>
-    <string name="non_optimal_route_calculation">Calcula una ruta posiblemente no óptima en largas distancias</string>
+    <string name="non_optimal_route_calculation">Calcular una ruta posiblemente no óptima en largas distancias</string>
     <string name="rendering_attr_roadColors_description">Selecciona un esquema de color de carreteras:</string>
 	<string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
     <string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscarla en el Market?</string>
@@ -1114,7 +1116,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
 		\n\nOsmAnd mostrará la altitud de tu posición en el sistema EGM96 cuando descargues el archivo \'World Altitide Correction WW15MGH\' mediante \'Opciones\'→\'Gestionar mapas\' (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "
 	</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
-    <string name="monitoring_control_start">Inicio</string>
+    <string name="monitoring_control_start">GPX</string>
     <string name="tip_altitude_offset">Corrección de Altitud</string>
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evita mostrar las fronteras regionales (niveles administrativos 5-9)</string>
@@ -1182,7 +1184,7 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
     <string name="recording_context_menu_precord">Hacer una foto</string>
     <string name="stop_routing_confirm">¿Seguro que quieres parar la navegación?</string>
     <string name="clear_dest_confirm">¿Seguro que quieres borrar tu punto de destino?</string>
-    <string name="precise_routing_mode_descr">Activa el enrutamiento preciso para calcular rutas precisas sin fallos. Aún está limitado por la distancia y es lento.</string>
+    <string name="precise_routing_mode_descr">Habilitar para calcular rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
     <string name="local_indexes_cat_av">Datos de Audio/Vídeo</string>
     <string name="dist_control_start">Inicio</string>
@@ -1332,7 +1334,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nombre del archivo GPX</string>
     <string name="gpx_saved_sucessfully">Archivo GPX guardado correctamente en {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Crea caminos (o usa / modifica archivos GPX existentes) para medir la distancia entre los puntos. Guardado como GPX, se puede utilizar para planificar rutas GPX.</string>
+    <string name="osmand_distance_planning_plugin_description">Crear caminos (o usar / modificar archivos GPX existentes) para medir la distancia entre los puntos. Guardado como GPX, se puede utilizar para planificar rutas GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Cálculador de distancia y Herramienta de planificación</string>
     <string name="use_distance_measurement_help">* Toca para marcar un punto.\n * Mantenga pulsado el mapa para suprimir el punto anterior.\n * Mantenga pulsado el punto para ver e incluir descripción.\n * Pulse en el control de medición para ver más acciones.</string>
     <string name="default_buttons_do_not_show_again">No mostrar de nuevo</string>
@@ -1412,7 +1414,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 \n\nAdemás del estilo de mapa equilibrado «predeterminado», en \'Menú\' → \'Configurar pantalla\' →  \'Estilo de mapa\' puedes seleccionar por ejemplo
 \n\t* El estilo \'Vista de tour\', que contiene información detallada y adecuada para viajes y giras, incluyendo optimización para profesionales de la conducción (mayor contraste, carreteras distinguibles), opciones para ir de senderismo Alpino (escala SAC), rutas ciclistas, soporte para símbolos de senderismo, etc.
 \n\t* \'Carreteras de alto contraste\' muestra las carreteras en colores muy acentuados para situaciones con brillante iluminación ambiental
-\n\t* \'Invierno y esquí\' crea una vista del paisaje del invierno (nevado), y muestra pistas y remontes (en relación con la descarga del mapa \"Mundo de esquí\" "</string>
+\n\t* \'Invierno y esquí\' crea una vista del paisaje del invierno (nevado), y muestra pistas y remontes (en relación con la descarga del mapa \'Mundo de esquí\') "</string>
     <string name="tip_recent_changes_1_6_t">Cambios en 1.6:
 	\n\t* Soporte de dispositivos Full HD
 	\n\t* Soporte de fondo transparente
@@ -1504,7 +1506,7 @@ La lista de países incluídos (¡prácticamente todo el mundo!):
 Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papua Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabue.
 	</string>
 	<string name="map_magnifier">Lupa</string>
-    <string name="route_is_too_long">El cálculo de ruta por OsmAnd puede tardar mucho (o a veces no funcionar) para puntos separados más de 200 km. Tal vez quieras añadir puntos de ruta intermedios para un mejor rendimiento.</string>
+    <string name="route_is_too_long">El cálculo de la ruta de OsmAnd sin conexión puede tardar mucho tiempo (o a veces no funcionar) para puntos separados a más de 200km. Tal vez quieras añadir puntos de interés intermedios para un mejor rendimiento.</string>
 	<string name="auto_zoom_none">Sin zoom automático</string>
 	<string name="remember_choice">Recordar mi elección</string>
     <string name="gps_status_eclipsim">Estado del GPS</string>
@@ -1513,8 +1515,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="auto_zoom_close">Cercano</string>
 	<string name="auto_zoom_far">Medio</string>
 	<string name="auto_zoom_farthest">Alejado</string>
-	<string name="animate_routing_route_not_calculated">Por favor, primero calcula la ruta</string>
-    <string name="animate_routing_route">Simula usando la ruta calculada </string>
+	<string name="animate_routing_route_not_calculated">Calcule la primera ruta</string>
+    <string name="animate_routing_route">"Simulae usando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simula usando traza GPX</string>
     <string name="app_mode_hiking">Senderismo</string>
     <string name="app_mode_motorcycle">Moto</string>
@@ -1569,18 +1571,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="route_descr_favorite">Favorito …</string>
     <string name="route_preferences">Preferencias de la ruta</string>
     <string name="route_info">Información de la ruta</string>
-    <string name="tip_recent_changes_1_7_1_t">Cambios en 1.7:↵
-    \n\t* IMPORTANTE los mapas deben ser más nuevos que Febrero de 2014.↵
-→\n\t* Enrutado completamente actualizado (rápido y preciso) - ↵
-    \n\t* Nueva pantalla con Planificación de Ruta (más intuitiva y más potente)↵
-    \n\t** NOTA La ruta GPX está disponible en el botón Opciones de Ruta↵
-    \n\t* Auto ocultar botones en modo navegación↵
-    \n\t* Calcula la ruta offline al primer punto de la ruta GPX (opción \'pasar toda la ruta\')↵
-→\n\t* Simulación activa en túneles↵
-→\n\t* Muchas pequeñas mejoras en la experiencia de usuario y arreglos de usabilidad↵
-→\n\t* Opción de accesibilidad a la velocidad de voz↵
-    </string>
-    <string name="calculate_osmand_route_without_internet">Calcular el segmento de la ruta OsmAnd sin internet</string>
+    <string name="tip_recent_changes_1_7_1_t">"Cambios en 1.7:↵
+\n\t* IMPORTANTE los mapas deben ser más nuevos que Febrero de 2014. ↵\n\t* Navegación completamente actualizado (rápido y preciso) - ↵\n\t* Nueva pantalla con planificación de ruta (más intuitiva y más potente) ↵\n\t** NOTA La traza GPX está disponible en el botón Opciones de ruta ↵\n\t* Auto ocultar botones en modo navegación ↵\n\t* Calcular sin conexión la ruta al primer punto de la ruta GPX (opción \'pasar toda la ruta\') ↵\n\t* Simulación activa en túneles ↵\n\t* Muchas pequeñas mejoras en la experiencia de usuario y arreglos de usabilidad ↵\n\t* Opción de accesibilidad a la velocidad de voz "</string>
+    <string name="calculate_osmand_route_without_internet">Calcular el segmento de la ruta OsmAnd sin Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
     <string name="osmodroid_unseek">Objetos no buscados</string>
     <string name="lang_en">Inglés</string>
@@ -1649,7 +1642,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
         Por favor, lea más en http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (Monitoreo avanzado en directo)</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
-   	<string name="share_route_as_gpx">Compartir ruta como fichero GPX</string>
+   	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
 	<string name="share_route_subject">Ruta compartida vía OsmAnd</string>
 	<string name="navigation_intent_invalid">Formato inválido: %s</string>
 <string name="keep_informing_never">Nunca</string>
@@ -1664,14 +1657,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="share_fav">Compartir</string>
 	<string name="share_fav_subject">Favoritos compartidos a través de OsmAnd</string>
 	<string name="use_points_as_intermediates">Calcular ruta entre puntos</string>
-    <string name="tip_recent_changes_1_8_alpha">Cambios en 1.8:
-        * Calcular ruta entre puntos de ruta de una pista GPX
-        * Cambiada disposición de países para descargas (soporta búsquedas de nombres locales)
-        * Soporta importación de GPX/KML (conversión de KML a GPX)
-        * Las pistas GPX se han movido a \'Mis Sitios\'
-        * Puede dividir las pistas GPX por distancia y comprobar la diferencia de altitud / velocidad
-        * Auto iniciar la navegación tras un retraso
-    </string>
+    <string name="tip_recent_changes_1_8_alpha">"Cambios en 1.8: * Calcular ruta entre puntos de ruta de una traza GPX * Cambiado el diseño de los países para descargar (soporta búsquedas de nombres locales) * Soporta importación GPX/KML (conversión de KML a GPX) * Las trazas GPX se han movido a \'Mis datos\' * Puedes dividir las trazas GPX por distancia y comprobar la diferencia de altitud / velocidad * Auto iniciar la navegación tras un retraso "</string>
     <string name="osmo_connect_to_device_name">Nombre de usuario</string>
     
     <string name="osmo_connected_devices">Dispositivos conectados</string>
@@ -1762,7 +1748,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="gpx_selection_segment_title">Segmento</string>
     <string name="gpx_selection_track">%1$s \nPista %2$s</string>
     <string name="gpx_available_current_track">Pista actual en grabación</string>
-    <string name="gpx_file_is_empty">La pista Gps está vacía</string>
+    <string name="gpx_file_is_empty">La traza GPX está vacía</string>
     <string name="selected_track">Pista seleccionada</string>
     <string name="my_tracks">Todas las pistas</string>
     <string name="loading_smth">Cargando %1$s …</string>
@@ -1791,7 +1777,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="sort_by_distance">Ordenar por distancia</string>
     <string name="sort_by_name">Ordenar por nombre</string>
     <string name="visible_element">Mostrar en el mapa</string>
-    <string name="none_selected_gpx">No hay archivos GPX seleccionado. Para seleccionar presione y mantenga presionado en la traza disponible.</string>
+    <string name="none_selected_gpx">No hay archivos GPX seleccionados. Para seleccionar presione y mantenga presionado en la traza disponible.</string>
     <string name="local_index_unselect_gpx_file">No seleccionado</string>
     <string name="local_index_select_gpx_file">Seleccionar para mostrar</string>
+    <string name="no_index_file_to_download">No hay nada que descargar, compruebe la conexión a Internet.</string>
     </resources>

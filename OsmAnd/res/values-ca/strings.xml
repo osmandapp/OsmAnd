@@ -1841,7 +1841,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="map_widget_plain_time">Hora actual</string>
     <string name="gpx_wpt">Punt de pas</string>
     <string name="selected_gpx_info_show">\n\nPrémer i mantenir per veure al mapa</string>
-    <string name="delay_navigation_start">Iniciar la navegació amb retard</string>
+    <string name="delay_navigation_start">Iniciar automàticament la navegació turn-by-turn</string>
     <string name="selected">seleccionat</string>
     <string name="gpx_split_interval">Interval de registre</string>
     <string name="gpx_info_diff_altitude">Interval d\'altitud: %1$s</string>
@@ -1867,4 +1867,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="none_selected_gpx">Cap arxiu GPX seleccionat. Per seleccionar-ne premi i mantingui sobre una traça disponible.</string>
     <string name="local_index_unselect_gpx_file">No seleccionat</string>
     <string name="local_index_select_gpx_file">Selecciona per veure</string>
+    <string name="no_index_file_to_download">Res per descarregar, verifiqui la connexió a internet.</string>
     </resources>

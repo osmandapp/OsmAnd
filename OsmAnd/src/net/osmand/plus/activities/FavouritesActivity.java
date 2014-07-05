@@ -115,6 +115,8 @@ public class FavouritesActivity extends SherlockFragmentActivity {
 			if (gpx.isShowingAnyGpxFiles()) {
 				vl += " (" + gpx.getSelectedGPXFiles().size()
 						+ ")";
+			} else {
+				vl += " (0)";
 			}
 			try {
 				((TextView)tabHost.getTabWidget().getChildAt(2).findViewById(android.R.id.title)).setText(vl);

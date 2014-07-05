@@ -1896,4 +1896,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="local_index_unselect_gpx_file">Odznačiť</string>
     <string name="local_index_select_gpx_file">Vybrať na zobrazenie</string>
     <string name="route_descr_destination">\t</string>
+    <string name="no_index_file_to_download">Nenašlo sa nič na stiahnutie, prosím skontrolujte pripojenie na Internet.</string>
     </resources>

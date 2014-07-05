@@ -1900,4 +1900,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="none_selected_gpx">Ingen GPX filer valgt. Langt tryk for at vælge et tilgængeligt spor.</string>
     <string name="local_index_select_gpx_file">Vælg at få vist</string>
     <string name="local_index_unselect_gpx_file">Fravælg</string>
+    <string name="no_index_file_to_download">Ingenting at hente, kontroller internetforbindelsen.</string>
     </resources>

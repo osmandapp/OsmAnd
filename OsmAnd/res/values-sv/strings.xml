@@ -1234,7 +1234,7 @@
 	<string name="speak_traffic_warnings">Meddela vid trafikvarningar</string>
 	
 	
-	<string name="plugin_distance_point_hdop">precision</string>
+	<string name="plugin_distance_point_hdop">noggrannhet</string>
     <string name="tip_recent_changes_1_5_t">Förändringar i 1.5:
 	\n\t* Röstvarningar vid hastighetsbegränsningar och fartkameror
 	\n\t* Fler röstprompter (uppläsning av gatunamn)
@@ -1599,4 +1599,5 @@
 	<string name="none_selected_gpx">Inga GPX-filer markerade. För att markera tryck och håll ned på tillgängligt spår.</string>
     <string name="local_index_unselect_gpx_file">Avmarkera</string>
     <string name="local_index_select_gpx_file">Markera för att visa</string>
+    <string name="no_index_file_to_download">Inget att ladda ner; kolla din Internetanslutning.</string>
     </resources>

@@ -1731,4 +1731,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="visible_element">Visible</string>
     <string name="sort_by_distance">Trier par distance</string>
     <string name="sort_by_name">Trier par nom</string>
+    <string name="no_index_file_to_download">Rien à télécharger, veuillez vérifier votre connexion Internet.</string>
+    <string name="none_selected_gpx">Aucun fichier GPX sélectionné. Pour sélectionner, presser longuement sur la trace disponible.</string>
+    <string name="local_index_unselect_gpx_file">Désélectionner</string>
+    <string name="local_index_select_gpx_file">Sélectionner pour afficher</string>
     </resources>

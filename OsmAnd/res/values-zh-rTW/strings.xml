@@ -517,7 +517,7 @@
 	<string name="voice_not_use">不要使用</string>
 	<string name="voice_not_specified">無</string>
 	<string name="installing_new_resources">安裝新資料…</string>
-	<string name="internet_connection_required_for_online_route">選用線上導航服務，但是沒有可用網路連線。</string>
+	<string name="internet_connection_required_for_online_route">選用線上導航服務，但是沒有能使用的網路連線。</string>
 	<string name="tts_language_not_supported_title">該語言未支援</string>
 	<string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到 Play 商場找其它引擎嗎？否則使用之前設定的語言。</string>
 	<string name="tts_missing_language_data_title">資料遺失</string>
@@ -1664,17 +1664,15 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="use_displayed_track_for_navigation">您是否要將顯示軌跡使用於導航？</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd 預估的路段沒有網際網路</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路線</string>
-    <string name="tip_recent_changes_1_7_1_t">在1.7的變更：
-    \n\t* 重要，地圖應該會比 2014 年 2 月更新。
-	\n\t* 完全修改的路線（快速和精確）-↵ 
-    \n\t* 新的螢幕畫面與路線規劃（更直觀和更強大） 
-    \n\t** 注意，在路線設定按鈕之下可用 GPX 路線
-    \n\t* 在導航模式下自動隱藏按鈕
-    \n\t* 預估離線路線到 GPX 路線的第一標點（\'經過全程軌跡\'選項）
-	\n\t* 在隧道主動的模擬 
-	\n\t* 有很多小的 UX (使用者體驗)改進和適用性修復
-	\n\t* 語音速率協助工具設定
-    </string>
+    <string name="tip_recent_changes_1_7_1_t">"在1.7的變更：
+\n\t* 重要，地圖應該會比 2014 年 2 月更新。
+\n\t* 完全修改的路線（快速和精確）-\n\t* 新的螢幕畫面與路線規劃（更直觀和更強大）
+\n\t** 注意，在路線設定按鈕之下可用 GPX 路線
+\n\t* 在導航模式下自動隱藏按鈕
+\n\t* 預估離線路線到 GPX 路線的第一標點（\'經過全程軌跡\'選項）
+\n\t* 在隧道主動的模擬
+\n\t* 有很多小的 UX (使用者體驗)改進和適用性修復
+\n\t* 語音速率協助工具設定 "</string>
     <string name="lang_en">英文</string>
 	<string name="lang_af">南非荷蘭語</string>
 	<string name="lang_hy">亞美尼亞</string>
@@ -1756,14 +1754,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="share_fav">分享</string>
 	<string name="share_fav_subject">經由 OsmAnd 分享我的最愛</string>
 	<string name="use_points_as_intermediates">預估兩點之間的路線</string>
-    <string name="tip_recent_changes_1_8_alpha">在1.8的變更：
-        * 預估 GPX 軌跡路線標點之間的路線
-        * 為下載變更了各國的配置（支援本地名稱搜索）
-        * 支援 GPX/KML 匯入(由 KML 轉換為 GPX )
-        * GPX軌跡已經移到\'我的資料\'
-        * 您可以按距離分割 GPX 軌跡和查對海拔高度差異/速度
-        * 自動開始導航後延遲
-    </string>
+    <string name="tip_recent_changes_1_8_alpha">"在1.8的變更： * 預估 GPX 軌跡路線標點之間的路線 * 為下載變更了各國的配置（支援當地名稱搜索） * 支援 GPX/KML 匯入(由 KML 轉換為 GPX ) * GPX 軌跡已經移到\'我的資料\' * 您可以按路程分割 GPX 軌跡和查對海拔高度差異/速度 * 自動開始導航後延遲 "</string>
     <string name="osmo_auto_send_locations_descr">自動開始追蹤區段和發送位置之後啟動應用程式</string>
     <string name="osmo_auto_send_locations">自動開始追蹤區段</string>
     <string name="osmo_tracker_id">個人追蹤 ID</string>
@@ -1888,4 +1879,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="local_index_unselect_gpx_file">取消選擇</string>
     <string name="local_index_select_gpx_file">選取要顯示的</string>
     <string name="route_descr_destination">\t</string>
+    <string name="no_index_file_to_download">無法下載，請檢查網路連線。</string>
     </resources>
