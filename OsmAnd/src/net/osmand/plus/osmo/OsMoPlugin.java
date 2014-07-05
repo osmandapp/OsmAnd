@@ -356,7 +356,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 				File ps = new File(fl, name + ".gpx");
 				String errors = "";
 				boolean changed = false;
-				if (!ps.exists() || ps.lastModified() != timestamp) {
+				if (!ps.exists() || (ps.lastModified() / 1000) != (timestamp / 1000)) {
 					changed = true;
 					GPXFile g = new GPXFile();
 					g.points.addAll(Arrays.asList(params));
