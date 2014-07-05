@@ -1871,4 +1871,9 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="local_index_select_gpx_file">Selecteer om te bekijken</string>
     <string name="route_descr_destination">Route beschrijving</string>
     <string name="no_index_file_to_download">Geen bestand gevonden: controleer de internetverbinding.</string>
+    <string name="osmo_gpx_points_downloaded">OsMo punten: %1$s opgehaald.</string>
+    <string name="osmo_auto_connect_descr">Verbind automatisch met OsMo service bij het opstarten van de applicatie</string>
+    <string name="osmo_auto_connect">Automatisch verbinding maken</string>
+    <string name="osmo_start_service">OsMo service</string>
+    <string name="osmo_gpx_track_downloaded">OsMo track: %1$s opgehaald.</string>
     </resources>
