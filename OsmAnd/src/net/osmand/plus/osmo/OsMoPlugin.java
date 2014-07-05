@@ -335,15 +335,25 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	}
 	
 	public AsyncTask<WptPt, String, String> getSaveGpxTask(final String name, final long timestamp) {
-			return new AsyncTask<WptPt, String, String> (){
-			
+		return new AsyncTask<WptPt, String, String>() {
+
+			protected void onProgressUpdate(String... values) {
+				if (values != null) {
+					String t = "";
+					for (String s : values) {
+						t += s + "\n";
+					}
+					app.showToastMessage(t.trim());
+				}
+			}
+
 			@Override
 			protected String doInBackground(WptPt... params) {
-				final File fl = app.getAppPath(IndexConstants.GPX_INDEX_DIR+"/osmo");
-				if(!fl.exists()) {
+				final File fl = app.getAppPath(IndexConstants.GPX_INDEX_DIR + "/osmo");
+				if (!fl.exists()) {
 					fl.mkdirs();
 				}
-				File ps = new File(fl, name+".gpx");
+				File ps = new File(fl, name + ".gpx");
 				String errors = "";
 				boolean changed = false;
 				if (!ps.exists() || ps.lastModified() != timestamp) {
@@ -352,28 +362,29 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					g.points.addAll(Arrays.asList(params));
 					errors = GPXUtilities.writeGpxFile(ps, g, app);
 					ps.setLastModified(timestamp);
-					if(errors == null ) {
+					if (errors == null) {
 						errors = "";
 					}
+					publishProgress(app.getString(R.string.osmo_gpx_points_downloaded, name));
 				}
 				SelectedGpxFile byPath = app.getSelectedGpxHelper().getSelectedFileByPath(ps.getAbsolutePath());
-				if(byPath == null || changed) {
+				if (byPath == null || changed) {
 					GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, ps);
-					if(byPath != null) {
+					if (byPath != null) {
 						app.getSelectedGpxHelper().selectGpxFile(selectGPXFile, false, false);
 					}
 					app.getSelectedGpxHelper().setGpxFileToDisplay(selectGPXFile);
 				}
 				return errors;
 			}
-			
+
 			@Override
 			protected void onPostExecute(String result) {
-				if(result.length() > 0) {
-					app.showToastMessage(app.getString(R.string.osmo_io_error)+ result);
+				if (result.length() > 0) {
+					app.showToastMessage(app.getString(R.string.osmo_io_error) + result);
 				}
 			}
-			
+
 		};
 	}
 

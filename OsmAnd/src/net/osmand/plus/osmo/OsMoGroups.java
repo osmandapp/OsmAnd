@@ -13,6 +13,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -327,6 +328,9 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					if (jobj.has("name")) {
 						pt.name = jobj.getString("name");
 					}
+					if (jobj.has("color")) {
+						pt.setColor(Algorithms.parseColor(jobj.getString("color")));
+					}
 					if (jobj.has("description")) {
 						pt.desc = jobj.getString("description");
 					}
@@ -336,8 +340,9 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					if (jobj.has("visible")) {
 						pt.getExtensionsToWrite().put("visible", a[i].getBoolean("visible") + "");
 					}
+					points.add(pt);
 				}
-				plugin.getSaveGpxTask(gr.groupId + "_points", modify).execute(points.toArray(new WptPt[0]));
+				plugin.getSaveGpxTask(gr.groupId + "_points", modify).execute(points.toArray(new WptPt[points.size()]));
 			}
 			if(deleteUsers) {
 				for(OsMoDevice s : toDelete.values()) {
