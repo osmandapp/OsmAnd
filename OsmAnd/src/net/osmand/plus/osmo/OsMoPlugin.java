@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Arrays;
 
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -15,6 +16,9 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.Track;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -31,6 +35,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
@@ -328,6 +333,49 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 	public OsMoService getService() {
 		return service;
 	}
+	
+	public AsyncTask<WptPt, String, String> getSaveGpxTask(final String name, final long timestamp) {
+			return new AsyncTask<WptPt, String, String> (){
+			
+			@Override
+			protected String doInBackground(WptPt... params) {
+				final File fl = app.getAppPath(IndexConstants.GPX_INDEX_DIR+"/osmo");
+				if(!fl.exists()) {
+					fl.mkdirs();
+				}
+				File ps = new File(fl, name+".gpx");
+				String errors = "";
+				boolean changed = false;
+				if (!ps.exists() || ps.lastModified() != timestamp) {
+					changed = true;
+					GPXFile g = new GPXFile();
+					g.points.addAll(Arrays.asList(params));
+					errors = GPXUtilities.writeGpxFile(ps, g, app);
+					ps.setLastModified(timestamp);
+					if(errors == null ) {
+						errors = "";
+					}
+				}
+				SelectedGpxFile byPath = app.getSelectedGpxHelper().getSelectedFileByPath(ps.getAbsolutePath());
+				if(byPath == null || changed) {
+					GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, ps);
+					if(byPath != null) {
+						app.getSelectedGpxHelper().selectGpxFile(selectGPXFile, false, false);
+					}
+					app.getSelectedGpxHelper().setGpxFileToDisplay(selectGPXFile);
+				}
+				return errors;
+			}
+			
+			@Override
+			protected void onPostExecute(String result) {
+				if(result.length() > 0) {
+					app.showToastMessage(app.getString(R.string.osmo_io_error)+ result);
+				}
+			}
+			
+		};
+	}
 
 	public AsyncTask<JSONObject, String, String> getDownloadGpxTask(final boolean makeVisible) {
 		
@@ -344,6 +392,13 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					try {
 						File f = new File(fl, obj.getString("name")+".gpx");
 						long timestamp = obj.getLong("created") * 1000;
+						int color = 0;
+						if (obj.has("color")) {
+							try {
+								color = Algorithms.parseColor(obj.getString("color"));
+							} catch (RuntimeException e) {
+							}
+						}
 						boolean visible = obj.has("visible");
 						boolean changed = false;
 						if(!f.exists() || (f.lastModified() != timestamp) ) {
@@ -366,6 +421,19 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 								is.close();
 								if(!f.setLastModified(timestamp)) {
 									log.error("Timestamp updates are not supported");
+								}
+							}
+							if(color != 0) {
+								try {
+									GPXFile loaded = GPXUtilities.loadGPXFile(app, f);
+									if(loaded.tracks.size() > 0) {
+										for(Track t : loaded.tracks) {
+											t.setColor(color);
+										}
+										GPXUtilities.writeGpxFile(f, loaded, app);
+									}
+								} catch (RuntimeException e) {
+									e.printStackTrace();
 								}
 							}
 							publishProgress(app.getString(R.string.osmo_gpx_track_downloaded, obj.getString("name")));

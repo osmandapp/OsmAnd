@@ -9,6 +9,7 @@ import java.util.Map;
 import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
 import net.osmand.plus.osmo.OsMoTracker.OsmoTrackerListener;
@@ -31,6 +32,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private static final String GROUP_TRACKER_ID = "group_tracker_id";
 	private static final String LAST_ONLINE = "last_online";
 	private static final String TRACK = "track";
+	private static final String POINT = "point";
 	
 	private OsMoTracker tracker;
 	private OsMoService service;
@@ -301,13 +303,41 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 					delta.add(device);
 				}
 			}
-			if(obj.has(TRACK)){
+			
+			if (obj.has(TRACK)) {
 				JSONArray ar = obj.getJSONArray(TRACK);
 				JSONObject[] a = new JSONObject[ar.length()];
-				for(int i = 0; i < a.length; i++) {
+				for (int i = 0; i < a.length; i++) {
 					a[i] = (JSONObject) ar.get(i);
 				}
 				plugin.getDownloadGpxTask(true).execute(a);
+			}
+			
+			if (obj.has(POINT)) {
+				JSONArray ar = obj.getJSONArray(POINT);
+				ArrayList<WptPt> points = new ArrayList<WptPt>();
+				long modify = obj.has("point_modify") ? obj.getLong("point_modify") : System.currentTimeMillis();
+				JSONObject[] a = new JSONObject[ar.length()];
+				for (int i = 0; i < a.length; i++) {
+					a[i] = (JSONObject) ar.get(i);
+					final JSONObject jobj = a[i];
+					WptPt pt = new WptPt();
+					pt.lat = a[i].getDouble("lat");
+					pt.lon = a[i].getDouble("lon");
+					if (jobj.has("name")) {
+						pt.name = jobj.getString("name");
+					}
+					if (jobj.has("description")) {
+						pt.desc = jobj.getString("description");
+					}
+					if (jobj.has("created")) {
+						pt.getExtensionsToWrite().put("created", a[i].getLong("created") + "");
+					}
+					if (jobj.has("visible")) {
+						pt.getExtensionsToWrite().put("visible", a[i].getBoolean("visible") + "");
+					}
+				}
+				plugin.getSaveGpxTask(gr.groupId + "_points", modify).execute(points.toArray(new WptPt[0]));
 			}
 			if(deleteUsers) {
 				for(OsMoDevice s : toDelete.values()) {

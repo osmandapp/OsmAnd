@@ -635,7 +635,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(OsMoService.SIGN_IN_URL));
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+						OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get()));
 				startActivity(browserIntent);
 			}
 		});

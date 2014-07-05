@@ -33,7 +33,7 @@ import android.provider.Settings.Secure;
 
 public class OsMoService implements OsMoReactor {
 	public static final String REGENERATE_CMD = "TRACKER_REGENERATE_ID";
-	public static final String SIGN_IN_URL = "http://osmo.mobi/signin";
+	public static final String SIGN_IN_URL = "http://osmo.mobi/signin?key=";
 	private OsMoThread thread;
 	private List<OsMoReactor> listReactors = new java.util.concurrent.CopyOnWriteArrayList<OsMoReactor>();
 	private ConcurrentLinkedQueue<String> commands = new ConcurrentLinkedQueue<String>();
