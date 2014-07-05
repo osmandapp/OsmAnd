@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -34,7 +33,7 @@ import android.provider.Settings.Secure;
 
 public class OsMoService implements OsMoReactor {
 	public static final String REGENERATE_CMD = "TRACKER_REGENERATE_ID";
-	public static final String SIGN_IN_URL = "http://osmo.mobi/signin";
+	public static final String SIGN_IN_URL = "http://osmo.mobi/signin?key=";
 	private OsMoThread thread;
 	private List<OsMoReactor> listReactors = new java.util.concurrent.CopyOnWriteArrayList<OsMoReactor>();
 	private ConcurrentLinkedQueue<String> commands = new ConcurrentLinkedQueue<String>();
@@ -45,6 +44,7 @@ public class OsMoService implements OsMoReactor {
 	public static final String TRACK_URL = "http://osmo.mobi/u/";
 	private String lastRegistrationError = null;
 	private OsMoPlugin plugin;  
+	private boolean enabled = false;
 	
 	
 	
@@ -95,15 +95,21 @@ public class OsMoService implements OsMoReactor {
 			thread.stopConnection();
 		}
 		thread = new OsMoThread(this, listReactors);
+		enabled = true;
 		return true;
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
 	}
 	
 	public void disconnect() {
 		if(thread != null) {
+			enabled = false;
 			thread.stopConnection();
+			app.getSettings().OSMO_LAST_PING.set(0l);
 		}
 	}
-	
 	
 	public void registerReactor(OsMoReactor reactor) {
 		if(!listReactors.contains(reactor)) {
@@ -202,6 +208,9 @@ public class OsMoService implements OsMoReactor {
 			// Add your data
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 			nameValuePairs.add(new BasicNameValuePair("key", deviceKey));
+			if(app.getSettings().OSMO_USER_PWD.get() != null) {
+				nameValuePairs.add(new BasicNameValuePair("auth", app.getSettings().OSMO_USER_PWD.get()));
+			}
 			nameValuePairs.add(new BasicNameValuePair("protocol", "1"));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -253,6 +262,9 @@ public class OsMoService implements OsMoReactor {
 
 	@Override
 	public String nextSendCommand(OsMoThread tracker) {
+		if(System.currentTimeMillis() - app.getSettings().OSMO_LAST_PING.get() > 30000) {
+			app.getSettings().OSMO_LAST_PING.set(System.currentTimeMillis());
+		}
 		if(!commands.isEmpty()) {
 			return commands.poll();
 		}
@@ -277,7 +289,7 @@ public class OsMoService implements OsMoReactor {
 		} else if(command.equals("TRACK_GET")) {
 			try {
 				JSONArray ar = new JSONArray(data);
-				AsyncTask<JSONObject, GPXFile, String> task = plugin.getDownloadGpxTask(false);
+				AsyncTask<JSONObject, String, String> task = plugin.getDownloadGpxTask(false);
 				JSONObject[] a = new JSONObject[ar.length()];
 				for(int i = 0; i < a.length; i++) {
 					a[i] = (JSONObject) ar.get(i);

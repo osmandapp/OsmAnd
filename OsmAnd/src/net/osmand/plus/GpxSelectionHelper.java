@@ -381,6 +381,9 @@ public class GpxSelectionHelper {
 		
 		public void setGpxFile(GPXFile gpxFile) {
 			this.gpxFile = gpxFile;
+			if(gpxFile.tracks.size() > 0) {
+				this.color = gpxFile.tracks.get(0).getColor(0);
+			}
 			this.processedPointsToDisplay = gpxFile.proccessPoints();
 			if(this.processedPointsToDisplay.isEmpty()) {
 				this.processedPointsToDisplay = gpxFile.processRoutePoints();

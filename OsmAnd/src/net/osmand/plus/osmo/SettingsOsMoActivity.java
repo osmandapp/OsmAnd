@@ -29,6 +29,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 
 	private Preference debugPref;
 	private Preference trackerId;
+	private CheckBoxPreference sendLocationsref;
 	
 	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 30, 60, 90};
 	public static final int[] MINUTES = new int[] {2, 3, 5};
@@ -48,9 +49,15 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		trackerId.setOnPreferenceClickListener(this);
 		grp.addPreference(trackerId);
 		
-		CheckBoxPreference sendLocationsref = createCheckBoxPreference(settings.OSMO_AUTO_SEND_LOCATIONS);
+		CheckBoxPreference autoConnectref = createCheckBoxPreference(settings.OSMO_AUTO_CONNECT);
+		autoConnectref.setTitle(R.string.osmo_auto_connect);
+		autoConnectref.setSummary(R.string.osmo_auto_connect_descr);
+		grp.addPreference(autoConnectref);
+		
+		sendLocationsref = createCheckBoxPreference(settings.OSMO_AUTO_SEND_LOCATIONS);
 		sendLocationsref.setTitle(R.string.osmo_auto_send_locations);
 		sendLocationsref.setSummary(R.string.osmo_auto_send_locations_descr);
+		sendLocationsref.setEnabled(settings.OSMO_AUTO_CONNECT.get());
 		grp.addPreference(sendLocationsref);
 		
 		grp.addPreference(createTimeListPreference(settings.OSMO_SAVE_TRACK_INTERVAL, SECONDS,
@@ -171,6 +178,12 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 				final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
 				plugin.getTracker().enableTracker();
 			}
+		} else if (id.equals(settings.OSMO_AUTO_CONNECT.getId())) {
+			if ((Boolean) newValue) {
+				final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
+				plugin.getService().connect(false);
+			}
+			sendLocationsref.setEnabled(settings.OSMO_AUTO_CONNECT.get());
 		}
 		return p;
 	}
