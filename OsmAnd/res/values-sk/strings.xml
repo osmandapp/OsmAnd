@@ -1897,4 +1897,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="local_index_select_gpx_file">Vybrať na zobrazenie</string>
     <string name="route_descr_destination">\t</string>
     <string name="no_index_file_to_download">Nenašlo sa nič na stiahnutie, prosím skontrolujte pripojenie na Internet.</string>
+    <string name="osmo_gpx_points_downloaded">OsMo body %1$s stiahnuté.</string>
+    <string name="osmo_auto_connect_descr">Automaticky pripojiť k zariadeniu po spustení aplikácie</string>
+    <string name="osmo_auto_connect">Automatické pripojenie</string>
+    <string name="osmo_start_service">OsMo služba</string>
+    <string name="osmo_gpx_track_downloaded">OsMo stopa %1$s stiahnutá.</string>
     </resources>
