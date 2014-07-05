@@ -256,6 +256,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 					public void run() {
 						blinkImg = null;
 						setImageDrawable(smaller);
+						requestLayout();
 						invalidate();
 					}
 				}, 500);
