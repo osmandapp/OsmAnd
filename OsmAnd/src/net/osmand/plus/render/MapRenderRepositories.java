@@ -95,7 +95,8 @@ public class MapRenderRepositories {
 	// already rendered bitmap
 	private Bitmap prevBmp;
 	// to track necessity of map download (1 (if basemap) + 2 (if normal map) 
-	private int previousRenderedState;
+	private int checkedRenderedState;
+	private RotatedTileBox checkedBox;
 
 	// location of rendered bitmap
 	private RotatedTileBox bmpLocation = null;
@@ -555,15 +556,16 @@ public class MapRenderRepositories {
 		}
 	}
 
-	
-
-	public boolean isLastMapRenderedEmpty(boolean checkBaseMap){
-		if(checkBaseMap) {
-			return prevBmp != null && previousRenderedState == 0;
-		} else {
-			return prevBmp != null && previousRenderedState == 1;
-		}
+	public RotatedTileBox getCheckedBox() {
+		return checkedBox;
 	}
+	
+	public int getCheckedRenderedState() {
+		// to track necessity of map download (1 (if basemap) + 2 (if normal map)
+		return checkedRenderedState;
+	}
+
+	
 
 	public synchronized void loadMap(RotatedTileBox tileRect, List<IMapDownloaderCallback> notifyList) {
 		interrupted = false;
@@ -689,7 +691,6 @@ public class MapRenderRepositories {
 			Bitmap reuse = prevBmp;
 			this.prevBmp = this.bmp;
 			this.prevBmpLocation = this.bmpLocation;
-			this.previousRenderedState = renderedState;
 			if (reuse != null && reuse.getWidth() == currentRenderingContext.width && reuse.getHeight() == currentRenderingContext.height) {
 				bmp = reuse;
 				bmp.eraseColor(currentRenderingContext.defaultColor);
@@ -731,6 +732,9 @@ public class MapRenderRepositories {
 				}
 				currentRenderingContext = null;
 				return;
+			} else {
+				this.checkedRenderedState = renderedState;
+				this.checkedBox = this.bmpLocation;
 			}
 			currentRenderingContext = null;
 
@@ -798,7 +802,6 @@ public class MapRenderRepositories {
 		cObjectsBox = new QuadRect();
 
 		requestedBox = prevBmpLocation = null;
-		previousRenderedState = 0;
 		// Do not clear main bitmap to not cause a screen refresh
 //		prevBmp = null;
 //		bmp = null;

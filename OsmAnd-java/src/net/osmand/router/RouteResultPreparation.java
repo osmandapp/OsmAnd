@@ -336,13 +336,23 @@ public class RouteResultPreparation {
 					boolean tr = TurnType.TR.equals(t.getValue());
 					if(tl || tr) {
 						TurnType tnext = getTurnInfo(result, i + 1, leftside);
-						if(tnext != null && result.get(i).getDistance() < 35) {
-							if(tl && TurnType.TL.equals(tnext.getValue()) ) {
-								next = i + 2;
-								t = TurnType.valueOf(TurnType.TU, false);
-							} else if(tr && TurnType.TR.equals(tnext.getValue()) ) {
-								next = i + 2;
-								t = TurnType.valueOf(TurnType.TU, true);
+						if (tnext != null && result.get(i).getDistance() < 35) { //
+							boolean ut = true;
+							if (i > 0) {
+								double uTurn = MapUtils.degreesDiff(result.get(i - 1).getBearingEnd(), result
+										.get(i + 1).getBearingBegin());
+								if (Math.abs(uTurn) < 120) {
+									ut = false;
+								}
+							}
+							if (ut) {
+								if (tl && TurnType.TL.equals(tnext.getValue())) {
+									next = i + 2;
+									t = TurnType.valueOf(TurnType.TU, false);
+								} else if (tr && TurnType.TR.equals(tnext.getValue())) {
+									next = i + 2;
+									t = TurnType.valueOf(TurnType.TU, true);
+								}
 							}
 						}
 					}

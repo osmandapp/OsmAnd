@@ -107,10 +107,35 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 			}
 			
 			@Override
+			public void layerOnPostExecute() {
+				view.refreshMap();
+			}
+			public boolean queriedBoxContains(final RotatedTileBox queriedData, final RotatedTileBox newBox) {
+				if (newBox.getZoom() < ZOOM_TO_SHOW_MAP_NAMES) {
+					if (queriedData != null && queriedData.getZoom() < ZOOM_TO_SHOW_MAP_NAMES) {
+						if (newBox.getZoom() >= ZOOM_TO_SHOW_BORDERS_ST && newBox.getZoom() < ZOOM_TO_SHOW_BORDERS) {
+							return queriedData != null && queriedData.containsTileBox(newBox);
+						}
+						return true;
+					} else {
+						return false;
+					}
+				}
+				List<BinaryMapDataObject> queriedResults = getResults();
+				if(queriedData != null && queriedData.containsTileBox(newBox) && queriedData.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
+					if(queriedResults != null && ( queriedResults.isEmpty() || 
+							Math.abs(queriedData.getZoom() - newBox.getZoom()) <= 1)) {
+						return true;
+					}
+				}
+				return false;
+			}
+			
+			@Override
 			protected List<BinaryMapDataObject> calculateResult(RotatedTileBox tileBox) {
 				return queryData(tileBox);
 			}
-
+			
 		};
 
 	}
@@ -118,7 +143,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 
 	private static int ZOOM_TO_SHOW_BORDERS_ST = 5;
 	private static int ZOOM_TO_SHOW_BORDERS = 7;
-	private static int ZOOM_TO_SHOW_MAP_NAMES = 8;
+	private static int ZOOM_TO_SHOW_MAP_NAMES = 12;
 	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
@@ -159,16 +184,39 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 		if (tileBox.getZoom() < ZOOM_TO_SHOW_MAP_NAMES) {
 			basemapExists = rm.getRenderer().basemapExists();
 		}
+		// wait for image to be rendered
+		int count = 0;
+		RotatedTileBox cb = rm.getRenderer().getCheckedBox();
+		while (cb == null || cb.getZoom() != tileBox.getZoom() || 
+				!cb.containsLatLon(tileBox.getCenterLatLon())) {
+			if (count++ > 7) {
+				return null;
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				return null;
+			}
+			cb = rm.getRenderer().getCheckedBox();
+		}
+		int cState = rm.getRenderer().getCheckedRenderedState();
+		final boolean empty;
+		if (tileBox.getZoom() < ZOOM_TO_SHOW_MAP_NAMES) {
+			empty = cState == 0;
+		} else {
+			empty = cState <= 1;
+		}
+		noMapsPresent = empty;
+		if (!empty && tileBox.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
+			return Collections.emptyList();
+		}
+
 		List<BinaryMapDataObject> result = null;
 		int left = MapUtils.get31TileNumberX(tileBox.getLeftTopLatLon().getLongitude());
 		int right = MapUtils.get31TileNumberX(tileBox.getRightBottomLatLon().getLongitude());
 		int top = MapUtils.get31TileNumberY(tileBox.getLeftTopLatLon().getLatitude());
 		int bottom = MapUtils.get31TileNumberY(tileBox.getRightBottomLatLon().getLatitude());
-		final boolean empty = rm.getRenderer().isLastMapRenderedEmpty(tileBox.getZoom() < 12);
-		noMapsPresent = empty;
-		if (!empty && tileBox.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
-			return Collections.emptyList();
-		}
+
 		try {
 			result = osmandRegions.queryBbox(left, right, top, bottom);
 		} catch (IOException e) {

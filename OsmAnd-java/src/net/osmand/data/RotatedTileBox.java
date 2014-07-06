@@ -456,6 +456,12 @@ public class RotatedTileBox {
 		double ty = getPixYFromLatLon(lat, lon);
 		return tx >= 0 && tx <= pixWidth && ty >= 0 && ty <= pixHeight;
 	}
+	
+	public boolean containsLatLon(LatLon latLon) {
+		double tx = getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+		double ty = getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+		return tx >= 0 && tx <= pixWidth && ty >= 0 && ty <= pixHeight;
+	}
 
 
 	public double getDistance(int pixX, int pixY, int pixX2, int pixY2) {
