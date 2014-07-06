@@ -1902,8 +1902,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="local_index_unselect_gpx_file">Fravælg</string>
     <string name="no_index_file_to_download">Ingenting at hente, kontroller internetforbindelsen.</string>
     <string name="osmo_gpx_points_downloaded">OsMo punkter %1$s hentet.</string>
-    <string name="osmo_auto_connect_descr">Opret automatisk forbindelse til tjenesten efter start af programmet</string>
+    <string name="osmo_auto_connect_descr">Forbind automatisk til tjenesten efter start af programmet</string>
     <string name="osmo_auto_connect">Automatisk forbindelse</string>
-    <string name="osmo_start_service">OsMo service</string>
+    <string name="osmo_start_service">OsMo tjeneste</string>
     <string name="osmo_gpx_track_downloaded">OsMo spor %1$s hentet.</string>
     </resources>
