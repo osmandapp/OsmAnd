@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.londatiga.android.ActionItem;
-import net.londatiga.android.QuickAction;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.NavigationInfo;
@@ -24,11 +22,14 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.Item;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.NameFinderPoiFilter;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
@@ -70,9 +71,8 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -557,57 +557,57 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	
 
 	@Override
-	public void onListItemClick(ListView parent, View v, int position, long id) {
+	public void onListItemClick(ListView parent, final View v, int position, long id) {
 		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		final QuickAction qa = new QuickAction(v);
+		ContextMenuAdapter adapter = new ContextMenuAdapter(v.getContext());
+		adapter.setAnchor(v);
 		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), settings.usingEnglishNames());
 		String name = poiSimpleFormat;
 		int z = Math.max(16, settings.getLastKnownMapZoom());
-		MapActivityActions.createDirectionsActions(qa, amenity.getLocation(), amenity, name, z, this, true , null);
-		ActionItem poiDescription = new ActionItem();
-		poiDescription.setIcon(getResources().getDrawable(R.drawable.ic_action_note_light));
-		poiDescription.setTitle(getString(R.string.poi_context_menu_showdescription));
+		
+		
+		
+		
+		MapActivityActions.createDirectionsActions(adapter, amenity.getLocation(), amenity, name, z, this, true );
 		final String d = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false);
-		poiDescription.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// Build text(amenity)
-				
-				// Find and format links
-				SpannableString spannable = new SpannableString(d);
-				Linkify.addLinks(spannable, Linkify.ALL);
-
-				// Create dialog
-				Builder bs = new AlertDialog.Builder(v.getContext());
-				bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(),
-						settings.USE_ENGLISH_NAMES.get()));
-				bs.setMessage(spannable);
-				AlertDialog dialog = bs.show();
-
-				// Make links clickable
-				TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-				textView.setMovementMethod(LinkMovementMethod.getInstance());
-				textView.setLinksClickable(true);
-			}
-
-		});
 		if(d.toString().trim().length() > 0) { 
-			qa.addActionItem(poiDescription);
-		}
-		if (((OsmandApplication)getApplication()).accessibilityEnabled()) {
-			ActionItem showDetails = new ActionItem();
-			showDetails.setTitle(getString(R.string.show_details));
-			showDetails.setOnClickListener(new OnClickListener() {
+			Item poiDescr = adapter.item(R.string.poi_context_menu_showdescription).icons(R.drawable.ic_action_note_light,
+					R.drawable.ic_action_note_dark);
+			poiDescr.listen(new OnContextMenuClick() {
 				
 				@Override
-				public void onClick(View v) {
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dlg) {
+					// Build text(amenity)
+					
+					// Find and format links
+					SpannableString spannable = new SpannableString(d);
+					Linkify.addLinks(spannable, Linkify.ALL);
+
+					// Create dialog
+					Builder bs = new AlertDialog.Builder(v.getContext());
+					bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(),
+							settings.USE_ENGLISH_NAMES.get()));
+					bs.setMessage(spannable);
+					AlertDialog dialog = bs.show();
+
+					// Make links clickable
+					TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+					textView.setMovementMethod(LinkMovementMethod.getInstance());
+					textView.setLinksClickable(true);					
+				}
+			}).reg();
+		}
+		if (((OsmandApplication)getApplication()).accessibilityEnabled()) {
+			Item showDetails = adapter.item(R.string.show_details);
+			showDetails.listen(new OnContextMenuClick() {
+				
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dlg) {
 					showPOIDetails(amenity, settings.usingEnglishNames());
 				}
-			});
-			qa.addActionItem(showDetails);
+			}).reg();
 		}
-		qa.show();
+		MapActivityActions.showObjectContextMenu(adapter, this, null);
 		
 		
 	}

@@ -6,9 +6,9 @@ package net.osmand.plus.activities;
 import java.util.Comparator;
 import java.util.List;
 
-import net.londatiga.android.QuickAction;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -103,7 +103,6 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		
 		if (!isSelectFavoriteMode()) {
-			QuickAction qa = new QuickAction(v);
 			FavouritePoint point = favouritesAdapter.getItem(position);
 			String name = getString(R.string.favorite) + ": " + point.getName();
 			LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
@@ -114,9 +113,11 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 					settings.SHOW_FAVORITES.set(true);							
 				}
 			};
+			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
+			qa.setAnchor(v);
 			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), getActivity(),
-					true, onshow, false);
-			qa.show();
+					true, false);
+			MapActivityActions.showObjectContextMenu(qa, getActivity(), onshow);
 		} else {
 			Intent intent = getActivity().getIntent();
 			intent.putExtra(SELECT_FAVORITE_POINT_INTENT_KEY, favouritesAdapter.getItem(position));

@@ -22,6 +22,7 @@ public class ContextMenuAdapter {
 	}
 	
 	private final Context ctx;
+	private View anchor;
 	final TIntArrayList items = new TIntArrayList();
 	final ArrayList<String> itemNames = new ArrayList<String>();
 	final ArrayList<OnContextMenuClick> listeners = new ArrayList<ContextMenuAdapter.OnContextMenuClick>();
@@ -31,6 +32,14 @@ public class ContextMenuAdapter {
 
 	public ContextMenuAdapter(Context ctx) {
 		this.ctx = ctx;
+	}
+	
+	public void setAnchor(View anchor) {
+		this.anchor = anchor;
+	}
+	
+	public View getAnchor() {
+		return anchor;
 	}
 	
 	public int length(){

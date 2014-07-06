@@ -2,8 +2,8 @@ package net.osmand.plus.activities.search;
 
 import java.util.List;
 
-import net.londatiga.android.QuickAction;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -109,7 +109,8 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	}
 
 	private void selectModel(final HistoryEntry model, View v) {
-		QuickAction qa = new QuickAction(v);
+		ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
+		qa.setAnchor(v);
 		String name = model.getName();
 		OsmandSettings settings = ((OsmandApplication) getActivity().getApplication()).getSettings();
 		OnClickListener onShow = new View.OnClickListener() {
@@ -119,8 +120,8 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 			}
 		};
 		MapActivityActions.createDirectionsActions(qa, new LatLon(model.getLat(), model.getLon()),
-				model, name, settings.getLastKnownMapZoom(), getActivity(), false, onShow);
-		qa.show();
+				model, name, settings.getLastKnownMapZoom(), getActivity(), false);
+		MapActivityActions.showObjectContextMenu(qa, getActivity(), onShow);
 	}
 
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {

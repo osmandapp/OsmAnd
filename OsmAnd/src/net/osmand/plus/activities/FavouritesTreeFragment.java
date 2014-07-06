@@ -12,11 +12,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.londatiga.android.ActionItem;
-import net.londatiga.android.QuickAction;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.Item;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
@@ -155,7 +156,8 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			}
 			updateSelectionMode(actionMode);
 		} else {
-			final QuickAction qa = new QuickAction(v);
+			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
+			qa.setAnchor(v);
 			final OsmandSettings settings = getMyApplication().getSettings();
 			final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(groupPosition, childPosition);
 			String name = getString(R.string.favorite) + ": " + point.getName();
@@ -167,32 +169,28 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 				}
 			};
 			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(),
-					getActivity(), true, onshow, false);
-			ActionItem edit = new ActionItem();
-			edit.setIcon(getResources().getDrawable(R.drawable.ic_action_edit_light));
-			edit.setTitle(getString(R.string.favourites_context_menu_edit));
-			edit.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					editPoint(point);
-					qa.dismiss();
-				}
-			});
-			qa.addActionItem(edit);
-
-			ActionItem delete = new ActionItem();
-			delete.setTitle(getString(R.string.favourites_context_menu_delete));
-			delete.setIcon(getResources().getDrawable(R.drawable.ic_action_delete_light));
-			delete.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					deletePoint(point);
-					qa.dismiss();
-				}
-			});
-			qa.addActionItem(delete);
-
-			qa.show();
+					getActivity(), true, false);
+			Item edit = qa.item(R.string.favourites_context_menu_edit).icons(R.drawable.ic_action_edit_light ,
+					R.drawable.ic_action_edit_dark);
+			edit.listen(
+					new OnContextMenuClick() {
+						
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							editPoint(point);
+						}
+					}).reg();
+			Item delete = qa.item(R.string.favourites_context_menu_delete).icons(R.drawable.ic_action_delete_light ,
+					R.drawable.ic_action_delete_dark);
+			delete.listen(
+					new OnContextMenuClick() {
+						
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							deletePoint(point);
+						}
+					}).reg();
+			MapActivityActions.showObjectContextMenu(qa, getActivity(), onshow);
 		}
 		return true;
 	}

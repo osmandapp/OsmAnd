@@ -24,6 +24,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.Item;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
@@ -64,7 +65,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -1022,88 +1022,116 @@ public class MapActivityActions implements DialogProvider {
 		menu.show();
 	}
 	
-	public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, 
-    		final int z, final Activity activity, final boolean saveHistory, final OnClickListener onShow) {
-		createDirectionsActions(qa, location, obj, name, z, activity, saveHistory, onShow, true);
+	public static void createDirectionsActions(final ContextMenuAdapter qa , final LatLon location, final Object obj, final String name, 
+    		final int z, final Activity activity, final boolean saveHistory) {
+		createDirectionsActions(qa, location, obj, name, z, activity, saveHistory, true);
 	}
     
-    public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, 
-    		final int z, final Activity activity, final boolean saveHistory, final OnClickListener onShow, boolean favorite) {
+    public static void createDirectionsActions(final ContextMenuAdapter qa , final LatLon location, final Object obj, final String name, 
+    		final int z, final Activity activity, final boolean saveHistory, boolean favorite) {
 
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-
-		ActionItem setAsDestination = new ActionItem();
-		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_gdirections_light));
-		setAsDestination.setTitle(activity.getString(R.string.get_directions));
-		setAsDestination.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (onShow != null) {
-					onShow.onClick(v);
-				}
-				qa.dismiss();
-				MapActivityActions.directionsToDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
-			}
-		});
-		qa.addActionItem(setAsDestination);
-
-		ActionItem intermediate = new ActionItem();
-		if (targetPointsHelper.getPointToNavigate() != null) {
-			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_flage_light));
-			intermediate.setTitle(activity.getString(R.string.context_menu_item_intermediate_point));
-		} else {
-			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_flag_light));
-			intermediate.setTitle(activity.getString(R.string.context_menu_item_destination_point));
-		}
-		intermediate.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (onShow != null) {
-					onShow.onClick(v);
-				}
-				addWaypointDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
-				qa.dismiss();
-			}
-		});
-		qa.addActionItem(intermediate);
-
-		ActionItem showOnMap = new ActionItem();
-		showOnMap.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_marker_light));
-		showOnMap.setTitle(activity.getString(R.string.show_poi_on_map));
-		showOnMap.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (onShow != null) {
-					onShow.onClick(v);
-				}
-				app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), z, saveHistory ? name : null, name,
-						obj); //$NON-NLS-1$
-				MapActivity.launchMapActivityMoveToTop(activity);
-				qa.dismiss();
-			}
-		});
-		qa.addActionItem(showOnMap);
-
-		if (favorite) {
-			ActionItem addToFavorite = new ActionItem();
-			addToFavorite.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_fav_light));
-			addToFavorite.setTitle(activity.getString(R.string.add_to_favourite));
-			addToFavorite.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (onShow != null) {
-						onShow.onClick(v);
+		
+		
+		Item dir = qa.item(R.string.get_directions).icons(R.drawable.ic_action_gdirections_light ,
+				R.drawable.ic_action_gdirections_dark);
+		dir.listen(
+				new OnContextMenuClick() {
+					
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						MapActivityActions.directionsToDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);						
 					}
-					qa.dismiss();
+				}).reg();
+		Item intermediate; 
+		if (targetPointsHelper.getPointToNavigate() != null) {
+			intermediate = qa.item(R.string.context_menu_item_intermediate_point).icons(R.drawable.ic_action_flage_light,
+					R.drawable.ic_action_flage_dark);
+		} else {
+			intermediate = qa.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_flag_light,
+					R.drawable.ic_action_flag_dark);
+		}
+		intermediate.listen(new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				addWaypointDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
+			}
+		}).reg();
+
+		Item showOnMap = qa.item(R.string.show_poi_on_map).icons(R.drawable.ic_action_marker_light ,
+				R.drawable.ic_action_marker_dark);
+		showOnMap.listen(
+				new OnContextMenuClick() {
+					
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), z, saveHistory ? name : null, name,
+								obj); //$NON-NLS-1$
+						MapActivity.launchMapActivityMoveToTop(activity);
+					}
+				}).reg();
+		if (favorite) {
+			Item addToFavorite = qa.item(R.string.add_to_favourite).icons(R.drawable.ic_action_fav_light,
+					R.drawable.ic_action_fav_dark);
+			addToFavorite.listen(new OnContextMenuClick() {
+
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					Bundle args = new Bundle();
 					Dialog dlg = createAddFavouriteDialog(activity, args);
 					dlg.show();
-					prepareAddFavouriteDialog(activity, dlg, args, location.getLatitude(), location.getLongitude(), name);
+					prepareAddFavouriteDialog(activity, dlg, args, location.getLatitude(), location.getLongitude(),
+							name);
 
 				}
+			}).reg();
+		}
+	}
+
+	public static void showObjectContextMenu(final ContextMenuAdapter qa, final Activity activity,
+			final OnClickListener onShow) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		if(app.accessibilityEnabled()) {
+			Builder builder = new AlertDialog.Builder(activity);
+			String[] values = qa.getItemNames();
+			builder.setItems(values, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					OnContextMenuClick clk = qa.getClickAdapter(which);
+					if (clk != null) {
+						clk.onContextMenuClick(qa.getItemId(which), which, false, dialog);
+					}
+				}
+
 			});
-			qa.addActionItem(addToFavorite);
+			builder.show();
+		} else {
+			final QuickAction view = new QuickAction(qa.getAnchor());
+			for (int i = 0; i < qa.length(); i++) {
+
+				ActionItem ai = new ActionItem();
+				int id = qa.getImageId(0, true);
+				if (id != 0) {
+					ai.setIcon(activity.getResources().getDrawable(id));
+				}
+				final int ki = i;
+				ai.setTitle(qa.getItemName(i));
+				ai.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						if (onShow != null) {
+							onShow.onClick(v);
+						}
+						view.dismiss();
+						qa.getClickAdapter(ki).onContextMenuClick(qa.getItemId(ki), ki, false, null);
+
+					}
+				});
+				view.addActionItem(ai);
+			}
+			view.show();
 		}
 	}
     

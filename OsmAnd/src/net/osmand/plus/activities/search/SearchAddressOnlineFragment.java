@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import net.londatiga.android.QuickAction;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -228,11 +228,12 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		Place item = adapter.getItem(position);
-		QuickAction qa = new QuickAction(view);
+		ContextMenuAdapter qa = new ContextMenuAdapter(view.getContext());
+		qa.setAnchor(view);
 		MapActivityActions.createDirectionsActions(qa, new LatLon(item.lat, item.lon), item, 
 				getString(R.string.address)+ " : " + item.displayName, Math.max(15, settings.getLastKnownMapZoom()), 
-				getActivity(), true, null);
-		qa.show();		
+				getActivity(), true);
+		MapActivityActions.showObjectContextMenu(qa, getActivity(), null);
 	}
 	
 	private static class Place {

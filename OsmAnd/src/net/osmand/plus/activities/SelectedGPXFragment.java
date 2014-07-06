@@ -6,7 +6,6 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.londatiga.android.QuickAction;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
@@ -595,13 +594,14 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 		GpxDisplayItem child = adapter.getChild(groupPosition, childPosition);
 		if(child.group.getType() == GpxDisplayItemType.TRACK_POINTS ||
 				child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
-			QuickAction qa = new QuickAction(v);
+			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
+			qa.setAnchor(v);
 			String name = getString(R.string.favorite) + ": " + child.name;
 			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
 			OsmandSettings settings = getMyApplication().getSettings();
 			MapActivityActions.createDirectionsActions(qa, location, child.locationStart, name, settings.getLastKnownMapZoom(), getActivity(),
-					true, null, false);
-			qa.show();
+					true, false);
+			MapActivityActions.showObjectContextMenu(qa, getActivity(), null);
 		} else {
 			child.expanded = !child.expanded;
 			adapter.notifyDataSetInvalidated();
