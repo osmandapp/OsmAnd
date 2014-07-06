@@ -103,6 +103,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	protected static final int TRACK_DEV_ID = 11;
 	private static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	private static final long RECENT_THRESHOLD = 60000;
+	private boolean joinGroup;
 
 	private OsMoPlugin osMoPlugin;
 	private OsMoGroupsAdapter adapter;
@@ -722,6 +723,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		builder.setView(v);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				final String nameUser = name.getText().toString();
@@ -736,6 +738,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					if(!checkOperationIsNotRunning()) {
 						return;
 					}
+					joinGroup = true;
 					String op = osMoPlugin.getGroups().joinGroup(id, nameUser, nick);
 					if(app.getSettings().OSMO_USER_PWD.get() == null) {
 						app.getSettings().OSMO_USER_NAME.set(nick);
@@ -794,6 +797,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				String top = OsMoGroupsActivity.this.operation;
 				if(operation == top || (operation != null && operation.equals(top))) {
 					hideProgressBar();
+				}
+				if(joinGroup && (operation != null && operation.startsWith("GROUP_JOIN"))) {
+					showGroupInfo(group);
+					joinGroup = false;
 				}
 				if(group != null) {
 					adapter.update(group);
