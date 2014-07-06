@@ -710,14 +710,14 @@ public class GPXUtilities {
 		if (!Double.isNaN(p.ele)) {
 			writeNotNullText(serializer, "ele", p.ele + "");
 		}
-		writeNotNullText(serializer, "name", p.name);
-		writeNotNullText(serializer, "category", p.category);
-		writeNotNullText(serializer, "desc", p.desc);
-		if (!Double.isNaN(p.hdop)) {
-			writeNotNullText(serializer, "hdop", p.hdop + "");
-		}
 		if (p.time != 0) {
 			writeNotNullText(serializer, "time", format.format(new Date(p.time)));
+		}
+		writeNotNullText(serializer, "name", p.name);
+		writeNotNullText(serializer, "desc", p.desc);
+		writeNotNullText(serializer, "category", p.category);
+		if (!Double.isNaN(p.hdop)) {
+			writeNotNullText(serializer, "hdop", p.hdop + "");
 		}
 		if (p.speed > 0) {
 			p.getExtensionsToWrite().put("speed", p.speed + "");

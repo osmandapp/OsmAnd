@@ -798,7 +798,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				if(operation == top || (operation != null && operation.equals(top))) {
 					hideProgressBar();
 				}
-				if(joinGroup && (operation != null && operation.startsWith("GROUP_JOIN"))) {
+				if(joinGroup && (operation != null && operation.startsWith("GROUP_CONNECT"))) {
 					showGroupInfo(group);
 					joinGroup = false;
 				}
