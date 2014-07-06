@@ -358,11 +358,11 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	}
 	
 	
-	public String createGroup(String groupName, long expireTime, String description, String policy) {
+	public String createGroup(String groupName, boolean onlyByInvite, String description, String policy) {
 		JSONObject obj = new JSONObject();
 		try {
 			obj.put("name", groupName);
-			obj.put("expireTime", expireTime);
+			obj.put("onlyByInvite", onlyByInvite);
 			obj.put("description", description);
 			obj.put("policy", policy);
 			service.pushCommand("GROUP_CREATE|" + obj.toString());
