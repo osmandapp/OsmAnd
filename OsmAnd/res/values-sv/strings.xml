@@ -1606,4 +1606,5 @@
     <string name="osmo_start_service">OsMo-tjänst</string>
     <string name="osmo_gpx_track_downloaded">OsMo-spår %1$s nedladdat.</string>
     <string name="tip_map_switch_t_v2">"Kartkälla och kartlager som ska visas ändras via \'Meny\' → \'Kartlager\'.\n\nUnder \'Kartkälla...\' kan du välja mellan de förladdade offline vektorkartorna (standard, krävs också för offline-navigering), eller fördefinierade (online eller cachade offline) kartbitskällor (aktivera insticksmodulen \'Online-kartor\' under \'Inställningar\'→ \'Plugin\' för detta), eller kartor skapade manuellt med t.ex. OsmaAndMapCreator på en PC.\n\nOsmAnd stöder också egna källor. "</string>
-	</resources>
+	<string name="osmo_not_signed_in">Inloggningen till OsMo misslyckades</string>
+    </resources>
