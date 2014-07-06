@@ -1880,4 +1880,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="local_index_select_gpx_file">選取要顯示的</string>
     <string name="route_descr_destination">\t</string>
     <string name="no_index_file_to_download">無法下載，請檢查網路連線。</string>
+    <string name="osmo_gpx_points_downloaded">OsMo 標點 %1$s 已下載。</string>
+    <string name="osmo_auto_connect_descr">自動連線至服務，隨後啟動應用程式</string>
+    <string name="osmo_auto_connect">自動連線</string>
+    <string name="osmo_start_service">OsMo 服務</string>
+    <string name="osmo_gpx_track_downloaded">OsMo 軌跡 %1$s 已下載。</string>
     </resources>

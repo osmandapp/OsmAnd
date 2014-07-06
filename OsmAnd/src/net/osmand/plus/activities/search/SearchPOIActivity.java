@@ -571,8 +571,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		MapActivityActions.createDirectionsActions(adapter, amenity.getLocation(), amenity, name, z, this, true );
 		final String d = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false);
 		if(d.toString().trim().length() > 0) { 
-			Item poiDescr = adapter.item(R.string.poi_context_menu_showdescription).icons(R.drawable.ic_action_note_light,
-					R.drawable.ic_action_note_dark);
+			Item poiDescr = adapter.item(R.string.poi_context_menu_showdescription).icons(
+					R.drawable.ic_action_note_dark, R.drawable.ic_action_note_light);
 			poiDescr.listen(new OnContextMenuClick() {
 				
 				@Override

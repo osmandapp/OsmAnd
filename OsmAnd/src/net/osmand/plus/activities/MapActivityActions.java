@@ -1034,8 +1034,8 @@ public class MapActivityActions implements DialogProvider {
 		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		
 		
-		Item dir = qa.item(R.string.get_directions).icons(R.drawable.ic_action_gdirections_light ,
-				R.drawable.ic_action_gdirections_dark);
+		Item dir = qa.item(R.string.get_directions).icons(
+				R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light);
 		dir.listen(
 				new OnContextMenuClick() {
 					
@@ -1046,11 +1046,11 @@ public class MapActivityActions implements DialogProvider {
 				}).reg();
 		Item intermediate; 
 		if (targetPointsHelper.getPointToNavigate() != null) {
-			intermediate = qa.item(R.string.context_menu_item_intermediate_point).icons(R.drawable.ic_action_flage_light,
-					R.drawable.ic_action_flage_dark);
+			intermediate = qa.item(R.string.context_menu_item_intermediate_point).icons(
+					R.drawable.ic_action_flage_dark,R.drawable.ic_action_flage_light);
 		} else {
-			intermediate = qa.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_flag_light,
-					R.drawable.ic_action_flag_dark);
+			intermediate = qa.item(R.string.context_menu_item_destination_point).icons(
+					R.drawable.ic_action_flag_dark, R.drawable.ic_action_flag_light);
 		}
 		intermediate.listen(new OnContextMenuClick() {
 			@Override
@@ -1059,8 +1059,8 @@ public class MapActivityActions implements DialogProvider {
 			}
 		}).reg();
 
-		Item showOnMap = qa.item(R.string.show_poi_on_map).icons(R.drawable.ic_action_marker_light ,
-				R.drawable.ic_action_marker_dark);
+		Item showOnMap = qa.item(R.string.show_poi_on_map).icons(
+				R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light );
 		showOnMap.listen(
 				new OnContextMenuClick() {
 					
@@ -1072,8 +1072,8 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 		if (favorite) {
-			Item addToFavorite = qa.item(R.string.add_to_favourite).icons(R.drawable.ic_action_fav_light,
-					R.drawable.ic_action_fav_dark);
+			Item addToFavorite = qa.item(R.string.add_to_favourite).icons(
+					R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light);
 			addToFavorite.listen(new OnContextMenuClick() {
 
 				@Override
@@ -1111,7 +1111,7 @@ public class MapActivityActions implements DialogProvider {
 			for (int i = 0; i < qa.length(); i++) {
 
 				ActionItem ai = new ActionItem();
-				int id = qa.getImageId(0, true);
+				int id = qa.getImageId(i, true);
 				if (id != 0) {
 					ai.setIcon(activity.getResources().getDrawable(id));
 				}

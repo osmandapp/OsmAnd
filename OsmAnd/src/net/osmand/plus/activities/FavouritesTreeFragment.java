@@ -170,8 +170,8 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 			};
 			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(),
 					getActivity(), true, false);
-			Item edit = qa.item(R.string.favourites_context_menu_edit).icons(R.drawable.ic_action_edit_light ,
-					R.drawable.ic_action_edit_dark);
+			Item edit = qa.item(R.string.favourites_context_menu_edit).icons(
+					R.drawable.ic_action_edit_dark, R.drawable.ic_action_edit_light);
 			edit.listen(
 					new OnContextMenuClick() {
 						
@@ -180,8 +180,8 @@ public class FavouritesTreeFragment extends OsmandExpandableListFragment {
 							editPoint(point);
 						}
 					}).reg();
-			Item delete = qa.item(R.string.favourites_context_menu_delete).icons(R.drawable.ic_action_delete_light ,
-					R.drawable.ic_action_delete_dark);
+			Item delete = qa.item(R.string.favourites_context_menu_delete).icons(
+					R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light);
 			delete.listen(
 					new OnContextMenuClick() {
 						
