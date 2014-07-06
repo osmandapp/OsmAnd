@@ -82,14 +82,13 @@
 		- προαιρετική καθοδήγηση με λωρίδες, εμφάνιση ορίου ταχύτητας, μαγνητοφωνημένες και TTS φωνές
 	</string>
 	<string name="tip_update_index">Ενημέρωση των offline Χαρτών</string>
-	<string name="tip_update_index_t">Το να έχετε ενημερωμένα δεδομένα χάρτη είναι βασικό για εμφάνιση, αναζήτηση ΣΕ/Διευθύνσεων και offline πλοήγηση. Ο OsmAnd παρέχει έναν διαχειριστή δεδομένων για τη λήψη αυτών των offline χαρτών (και ορισμένα άλλα αρχεία δεδομένων) και τον έλεγχο διαθέσιμων ενημερώσεων.
-		\n\nΓια λήψη χαρτών πηγαίνετε στο \'Ρυθμίσεις\' → \'Διαχείριση δεδομένων\' → \'Λήψη offline δεδομένων\'.
-		\n\nΜόλις η παγκόσμια λίστα περιοχών ανακτηθεί από το internet, πατήστε σε οποιαδήποτε καταχώρηση για να κατεβάσετε ή να ενημερώσετε κάποιο αρχείο. Παρακαλώ δώστε βάση στον επιλογέα τύπου αρχείου στο πάνω μέρος της οθόνης για να επιλέξετε τον τύπο αρχείου που θέλετε (κανονικοί χάρτες, οδικοί μόνο κλπ)
-		 \n\nΜπορείτε να φιλτράρετε τη λίστα των περιοχών γράφοντας μερικά γράμματα, ή μπορείτε να επιλέξετε \'Menu\' → \'Φιλτράρισμα ληφθέντων\' για να εμφανιστούν μόνο οι ενημερώσεις για δεδομένα που έχετε ήδη στη συσκευή σας.
-		\n\n\t* Καταχωρίσεις σε \'Πράσινο\' - δείχνουν αρχεία δεδομένων όμοια στη συσκευή και στο διακομιστή
-		\n\t* Καταχωρίσεις σε \'Μπλε\' - δείχνουν διαθέσιμες ενημερώσεις στο διακομιστή
-		\n\t* Καταχωρίσεις σε πλάγια δείχνουν δεδομένα απενεργοποιημένα στη συσκευή
-	</string>
+	<string name="tip_update_index_t">"Το να έχετε ενημερωμένα δεδομένα χάρτη είναι βασικό για εμφάνιση, αναζήτηση ΣΕ/Διευθύνσεων και offline πλοήγηση. Ο OsmAnd παρέχει έναν διαχειριστή δεδομένων για τη λήψη αυτών των offline χαρτών (και ορισμένα άλλα αρχεία δεδομένων) και τον έλεγχο διαθέσιμων ενημερώσεων.
+\n\nΓια λήψη χαρτών πηγαίνετε στο \'Ρυθμίσεις\' → \'Διαχείριση αρχείων χαρτών\' → \'Λήψη\'.
+\n\nΜόλις η παγκόσμια λίστα περιοχών ανακτηθεί από το internet, πατήστε σε οποιαδήποτε καταχώρηση για να κατεβάσετε ή να ενημερώσετε κάποιο αρχείο. Παρακαλώ δώστε βάση στον επιλογέα τύπου αρχείου στο πάνω μέρος της οθόνης για να επιλέξετε τον τύπο αρχείου που θέλετε (κανονικοί χάρτες, οδικοί μόνο κλπ)
+\n\nΜπορείτε να φιλτράρετε τη λίστα των περιοχών γράφοντας μερικά γράμματα, ή μπορείτε να επιλέξετε \'Menu\' → \'Φιλτράρισμα ληφθέντων\' για να εμφανιστούν μόνο οι ενημερώσεις για δεδομένα που έχετε ήδη στη συσκευή σας.
+\n\n\t* Καταχωρίσεις σε \'Πράσινο\' - δείχνουν αρχεία δεδομένων όμοια στη συσκευή και στο διακομιστή
+\n\t* Καταχωρίσεις σε \'Μπλε\' - δείχνουν διαθέσιμες ενημερώσεις στο διακομιστή
+\n\t* Καταχωρίσεις σε πλάγια δείχνουν δεδομένα απενεργοποιημένα στη συσκευή "</string>
 	<string name="filterpoi_activity">Δημιουργία φίλτρου ΣΕ</string>
 	<string name="recalculate_route_to_your_location">Τρόπος μετακίνησης:</string>
 	<string name="select_navigation_mode">Επιλογή τρόπου μετακίνησης</string>
@@ -219,7 +218,7 @@
 	<string name="offline_navigation_not_available">Η εκτός σύνδεσης πλοήγηση του OsmAnd δεν είναι διαθέσιμη προσωρινά.</string>
 	<string name="left_side_navigation">Οδήγηση ﻿αριστερά</string>
 	<string name="left_side_navigation_descr">﻿Επιλέξτε για χώρες με κυκλοφορία αριστερά</string>
-	<string name="download_link_and_local_description">﻿Πατήστε εδώ, για να κατεβάσετε ή να ενημερώσετε offline δεδομένα.
+	<string name="download_link_and_local_description">﻿Πατήστε εδώ, για να κατεβάσετε ή να ενημερώσετε offline αρχεία χαρτών.
 \nΚλικ κάποιο σε υπάρχον στοιχείο για περισσότερες λεπτομέρειες, πατήστε και κρατήστε πατημένο για να το απενεργοποιήσετε ή να το διαγράψετε. Τρέχοντα δεδομένα στη συσκευή (%1$s ελεύθερα):</string>
 	<string name="unknown_from_location">﻿Το αφετηρία δεν έχει ακόμη καθοριστεί</string>
 	<string name="unknown_location">Η Θέση σας δεν είναι ακόμα γνωστή</string>
@@ -497,7 +496,7 @@
 	<string name="search_position_address">Διεύθυνση…</string>
 	<string name="search_position_favorites">Αγαπημένα…</string>
 	<string name="search_position_undefined">Ακαθόριστο</string>
-	<string name="search_position_fixed">Fixed</string>
+	<string name="search_position_fixed">Βρέθηκε</string>
 	<string name="search_position_current_location">Τρέχουσα θέση…</string>
 	<string name="search_position_map_view">Τελευταία οπτική χάρτη</string>
 	<string name="select_search_position">Αναζήτηση κοντά:</string>
@@ -1153,10 +1152,9 @@
     
     <string name="map_widget_max_speed">Όριο ταχύτητας</string>
     <string name="monitoring_control_start">GPX</string>
-    <string name="tip_altitude_offset_t">Οι περισσότερες συσκευές GPS εμφανίζουν το υψόμετρο σε σύστημα αναφοράς βασισμένο στο ελλειψοειδές WGS84, από το οποίο η μετατροπή στα συστήματα που χρησιμοποιούνται τοπικά απαιτεί διόρθωση εξαρτούμενη από τη θέση.
-		\n\nΜια καλύτερη προσέγγιση σε αυτά τα τοπικά συστήματα είναι το σύστημα αναφοράς EGM96 (geoid).
-		\n\nΟ OsmAnd υποστηρίζει την εμφάνιση του υψομέτρου στο σύστημα EGM96. Για να το πετύχετε αυτό, απλά κάντε λήψη του αρχείου WW15MGH.DAC μέσω του διαχειριστή Offline δεδομένων (το αυθεντικό είναι στο http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
-	</string>
+    <string name="tip_altitude_offset_t">"Οι περισσότερες συσκευές GPS εμφανίζουν το υψόμετρο σε σύστημα αναφοράς βασισμένο στο ελλειψοειδές WGS84, από το οποίο η μετατροπή στα συστήματα που χρησιμοποιούνται τοπικά απαιτεί διόρθωση εξαρτούμενη από τη θέση.
+\n\nΜια καλύτερη προσέγγιση σε αυτά τα τοπικά συστήματα είναι το σύστημα αναφοράς EGM96 (geoid).
+\n\nΟ OsmAnd υποστηρίζει την εμφάνιση του υψομέτρου στο σύστημα EGM96. Για να το πετύχετε αυτό, απλά κάντε λήψη του αρχείου WW15MGH.DAC μέσω του \'Ρυθμίσεις\' → \'Διαχείριση αρχείων χαρτών\'. (Το αυθεντικό είναι στο http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="rendering_attr_noAdminboundaries_name">Απόκρυψη διοικητικών ορίων</string>
 	<string name="rendering_attr_noAdminboundaries_description">Περιορισμός εμφάνισης διοικητικών ορίων (επίπεδα 5-9)</string>
 	<string name="tip_altitude_offset">Διόρθωση Υψομέτρου</string>
@@ -1230,7 +1228,7 @@
     <string name="audionotes_location_not_defined">Δεν έχει καθοριστεί ακόμα τοποθεσία για συσχέτιση με την σημείωση. \"Χρήση τοποθεσίας ...\" για να συνδέσετε την σημείωση με την καθορισμένη τοποθεσία</string>
     <string name="local_indexes_cat_av">Δεδομένα Ήχου/Εικόνας</string>
     <string name="dist_control_start">Έναρξη</string>
-    <string name="precise_routing_mode_descr">Ενεργοποίηση ακριβούς δρομολόγησης για υπολογισμό δρομολογίων με ακρίβεια χωρίς προβλήματα. Είναι πολύ περιορισμένη σε σχέση με την απόσταση και δεν χρησιμοποιεί τη εγγενή βιβλιοθήκη.</string>
+    <string name="precise_routing_mode_descr">Ενεργοποίηση για υπολογισμό δρομολογίων με ακρίβεια χωρίς προβλήματα. Ακόμη περιορισμένο σε σχέση με την απόσταση και αργό.</string>
     <string name="layer_recordings">Επίπεδο εγγραφής</string>
     <string name="av_control_start">Έναρξη</string>
     <string name="av_use_external_camera_descr">Χρήση εφαρμογής συστήματος για φωτογραφία</string>
@@ -1411,7 +1409,7 @@
     <string name="av_camera_focus_continuous">Η κάμερα προσπαθεί συνεχώς να εστιάσει</string>
 	<string name="sort_by_distance">Ταξινόμηση κατά απόσταση</string>
     <string name="sort_by_name">Ταξινόμηση κατά όνομα</string>
-    <string name="visible_element">Ορατό στο χάρτη</string>
+    <string name="visible_element">Εμφάνιση στο χάρτη</string>
     <string name="save_as_favorites_points">Αποθήκευση ως ομάδα αγαπημένων</string>
     <string name="app_modes_choose_descr">Επιλογή εμφανών προφιλ χρήσεων στην εφαρμογή</string>
     <string name="loading_smth">Φόρτωση %1$s …</string>
@@ -1439,13 +1437,13 @@
     <string name="minutes_ago">λεπτά πριν</string>
     <string name="seconds_ago">δευτερόλεπτα πριν</string>
     <string name="local_index_unselect_gpx_file">Αποεπιλογή</string>
-    <string name="local_index_select_gpx_file">Επιλογή για εμφάνιση</string>
+    <string name="local_index_select_gpx_file">Επιλέξτε για εμφάνιση</string>
     <string name="show_zoom_buttons_navigation_descr">Εμφάνιση κουμπιών ζουμ κατά την πλοήγηση</string>
     <string name="show_zoom_buttons_navigation">Εμφάνιση κουμπιών ζουμ</string>
     <string name="layer_amenity_label">Ετικέτες σημείων</string>
     <string name="map_widget_plain_time">Τρέχουσα ώρα</string>
     <string name="selected_gpx_info_show">\n\nΠατήστε παρατεταμένα για εμφάνιση στο χάρτη</string>
-    <string name="gpx_info_start_time">"Χρόνος εκκίνησης: %1$tF, %1$tT "</string>
+    <string name="gpx_info_start_time">"Χρόνος έναρξης: %1$tF, %1$tT "</string>
 	<string name="gpx_info_end_time">"Χρόνος λήξης: %1$tF, %1$tT "</string>
 	<string name="gpx_info_diff_altitude">Εύρος υψομέτρου: %1$s</string>
 	<string name="gpx_info_asc_altitude">Κατηφόρα/Ανηφόρα: %1$s</string>
@@ -1477,4 +1475,128 @@
     <string name="osmo_share_current_session">Κοινή χρήση της τρέχουσας συνεδρίας στο πρόγραμμα περιήγησης</string>
     <string name="osmo_session_not_available">Η συνεδρία δεν είναι διαθέσιμη. Παρακαλώ ελέγξτε ότι η \"Αποστολή τοποθεσιών\" είναι ενεργή.</string>
     <string name="osmo_share_session">Κοινή χρήση συνεδρίας</string>
-    </resources>
+    <string name="osmo_track_interval">Διάστημα καταγραφής</string>
+	<string name="int_days">ημέρες</string>
+    <string name="osmo_connect_menu">Σύνδεση</string>
+    <string name="osmo_group_description">Περιγραφή</string>
+    <string name="osmo_auto_connect_descr">Αυτόματη σύνδεση στην υπηρεσία μετά την έναρξη της εφαρμογής</string>
+    <string name="osmo_auto_connect">Αυτόματη σύνδεση</string>
+    <string name="osmo_start_service">Υπηρεσία OsMo</string>
+    <string name="gpx_split_interval">Διάστημα διαχωρισμού</string>
+    <string name="select_destination_and_intermediate_points">Επιλέξτε σημεία διαδρομής</string>
+    <string name="gpx_wpt">Σημείο διαδρομής</string>
+    <string name="gpx_info_subtracks">"Υποΐχνη: %1$s "</string>
+	<string name="gpx_info_waypoints">"Σημεία διαδρομής: %1$ s "</string>
+	<string name="gpx_timespan">Χρονικό διάστημα: %1$s</string>
+	<string name="gpx_timemoving">Χρόνος σε κίνηση: %1$s</string>
+    <string name="gpx_selection_segment_title">Τμήμα</string>
+    <string name="gpx_selection_track">%1$s
+\nΊχνος %2$s</string>
+    <string name="gpx_file_is_empty">Το ίχνος gpx είναι άδειο</string>
+    <string name="osmo_center_location">Κέντρο στην οθόνη</string>
+    <string name="osmo_track_interval_descr">Επιλέξτε το χρονικό διάστημα αποστολής της θέσης</string>
+    <string name="osmo_expire_group">Λήγει στις</string>
+    <string name="osmo_group_policy">Πολιτική</string>
+    <string name="osmo_connect_to_device_name">Όνομα χρήστη</string>
+    <string name="osmo_group_name">Όνομα ομάδας</string>
+    <string name="osmo_create_group">Δημιουργία ομάδας</string>
+    <string name="osmo_activity">Παρακολούθηση-OpenStreetMap</string>
+    <string name="osmo_connected_devices">Συνδεδεμένες συσκευές</string>
+    <string name="osmo_groups">Ομάδες/συσκευές OsMo</string>
+    <string name="osmo_auth_pending">Αναμονή εξουσιοδότησης...</string>
+    <string name="osmo_settings_uuid">Μοναδικό αναγνωριστικό συσκευής</string>
+    <string name="use_points_as_intermediates">Υπολογισμός διαδρομής μεταξύ σημείων</string>
+    <string name="always_center_position_on_map">Εμφάνιση της θέσης πάντα στο κέντρο</string>
+    <string name="voice_pref_title">Φωνή</string>
+    <string name="misc_pref_title">Διάφορα</string>
+    <string name="index_item_nation_addresses">διευθύνσεις πανεθνικά</string>
+	<string name="index_item_world_altitude_correction">Παγκόσμια διόρθωση υψομέτρου</string>
+	<string name="index_item_world_bitcoin_payments">Παγκόσμιες πληρωμές bitcoin</string>
+	<string name="index_item_world_ski">Παγκόσμιος Χάρτης σκι</string>
+    <string name="lang_hr">Κροατικά</string>
+    <string name="lang_zh">Κινέζικα</string>
+    <string name="lang_pt_br">Πορτογαλικά (Βραζιλίας)</string>
+    <string name="lang_en">Αγγλικά</string>
+	<string name="lang_af">Αφρικάανς</string>
+	<string name="lang_hy">Αρμενικά</string>
+	<string name="lang_eu">Βασκικά</string>
+	<string name="lang_be">Λευκορωσικά</string>
+	<string name="lang_bs">Βοσνιακά</string>
+	<string name="lang_bg">Βουλγαρικά</string>
+	<string name="lang_ca">Καταλανικά</string>
+	<string name="lang_cs">Τσεχικά</string>
+	<string name="lang_da">Δανικά</string>
+	<string name="lang_nl">Ολλανδικά</string>
+	<string name="lang_fi">Φινλανδικά</string>
+	<string name="lang_fr">Γαλλικά</string>
+	<string name="lang_ka">Γεωργιανά</string>
+	<string name="lang_de">Γερμανικά</string>
+	<string name="lang_el">Ελληνικά</string>
+	<string name="lang_iw">Εβραϊκά</string>
+	<string name="lang_hi">Χίντι</string>
+	<string name="lang_hu">Ουγγρικά</string>
+	<string name="lang_id">Ινδονησιακά</string>
+	<string name="lang_it">Ιταλικά</string>
+	<string name="lang_ja">Ιαπωνικά</string>
+	<string name="lang_ko">Κορεατικά</string>
+	<string name="lang_lv">Λεττονικά</string>
+	<string name="lang_lt">Λιθουανικά</string>
+	<string name="lang_mr">Μαραθικά</string>
+	<string name="lang_no">Νορβηγικά</string>
+	<string name="lang_pl">Πολωνικά</string>
+	<string name="lang_pt">Πορτογαλικά</string>
+	<string name="lang_ro">Ρουμανικά</string>
+	<string name="lang_ru">Ρωσικά</string>
+	<string name="lang_sk">Σλοβακικά</string>
+	<string name="lang_sl">Σλοβενικά</string>
+	<string name="lang_es">Ισπανικά</string>
+	<string name="lang_sv">Σουηδικά</string>
+	<string name="lang_tr">Τουρκικά</string>
+	<string name="lang_uk">Ουκρανικά</string>
+	<string name="lang_vi">Βιετναμέζικα</string>
+	<string name="lang_cy">Ουαλικά</string>
+	<string name="index_name_canada">Βόρεια Αμερική - Καναδάς</string>
+    <string name="index_name_italy">Ευρώπη - Ιταλία</string>
+    <string name="index_name_gb">Ευρώπη - Μεγάλη Βρετανία</string>
+    <string name="keep_and_add_destination_point">Προσθήκη ως σημείο προορισμού</string>
+    <string name="select_gpx">Επιλέξτε GPX…</string>
+    <string name="route_descr_select_destination">Επιλέξτε Προορισμό</string>
+    <string name="route_descr_select_on_map">Επιλέξτε στο χάρτη…</string>
+    <string name="route_descr_favorite">Αγαπημένο…</string>
+    <string name="route_preferences">Προτιμήσεις δρομολογίου</string>
+    <string name="route_info">Πληροφορίες δρομολογίου</string>
+    <string name="routing_attr_prefer_motorway_name">Προτίμηση αυτοκινητοδρόμων</string>
+	<string name="routing_attr_prefer_motorway_description">Προτίμηση αυτοκινητοδρόμων</string>
+	<string name="routing_attr_short_way_name">Συντομότερη διαδρομή</string>
+	<string name="routing_attr_short_way_description">Χρησιμοποιήστε τη συντομότερη διαδρομή</string>
+	<string name="routing_attr_avoid_toll_name">Αποφυγή διοδίων</string>
+	<string name="routing_attr_avoid_toll_description">Αποφυγή διοδίων</string>
+	<string name="routing_attr_avoid_unpaved_name">Αποφυγή χωματόδρομων</string>
+	<string name="routing_attr_avoid_unpaved_description">Αποφυγή χωματόδρομων</string>
+	<string name="routing_attr_avoid_ferries_name">Αποφυγή πορθμείων</string>
+	<string name="routing_attr_avoid_ferries_description">Αποφυγή πορθμείων</string>
+	<string name="routing_attr_avoid_motorway_name">Αποφυγή αυτοκινητόδρομων</string>
+	<string name="routing_attr_avoid_motorway_description">Αποφυγή αυτοκινητόδρομων</string>
+	<string name="routing_attr_weight_name">Μέγιστο βάρος</string>
+	<string name="routing_attr_weight_description">Καθορίσετε όριο βάρους οχήματος</string>
+    <string name="copying_osmand_one_file_descr">Αντιγραφή αρχείου (%s) στο νέο προορισμό...</string>
+    <string name="copying_osmand_files_descr">Αντιγραφή αρχείων OsmAnd στο νέο προορισμό (%s)</string>
+    <string name="copying_osmand_files">Αντιγραφή αρχείων OsmAnd</string>
+    <string name="app_mode_truck">Φορτηγό</string>
+    <string name="guidance_preferences_descr">Προτιμήσεις πλοήγησης</string>
+    <string name="routing_preferences_descr">Προτιμήσεις δρομολόγησης</string>
+    <string name="speech_rate_descr">Καθορίσετε το ρυθμό ομιλίας TTS</string>
+    <string name="speech_rate">Ρυθμός ομιλίας</string>
+    <string name="interrupt_music_descr">Διακοπή μουσικής κατά την ανακοίνωση</string>
+	<string name="interrupt_music">Διακοπή μουσικής</string>
+	<string name="share_route_as_gpx">Διαμοιρασμός διαδρομής ως αρχείο GPX</string>
+	<string name="arrival_distance">Ανακοίνωση άφιξης</string>
+    <string name="arrival_distance_descr">Πόσο σύντομα θέλετε την αναγγελία άφιξης;</string>
+    <string name="keep_informing_never">Ποτέ</string>
+    <string name="keep_informing">Επανάληψη οδηγιών πλοήγησης</string>
+	<string name="local_index_mi_export">Εξαγωγή</string>
+	<string name="import_file_favourites">Αποθήκευση ως αρχείο GPX ή εισαγωγή στα αγαπημένα;</string>
+	<string name="import_save">Αποθήκευση</string>
+	<string name="share_fav">Διαμοιρασμός</string>
+	<string name="navigation_intent_invalid">Μη έγκυρη μορφή: %s</string>
+</resources>
