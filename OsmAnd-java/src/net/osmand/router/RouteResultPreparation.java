@@ -387,9 +387,12 @@ public class RouteResultPreparation {
 		for (int i = result.size() - 2; i >= 0; i--) {
 			RouteSegmentResult currentSegment = result.get(i);
 			RouteSegmentResult nextSegment = result.get(i + 1);
+
 			if (currentSegment.getTurnType() == null || currentSegment.getTurnType().getLanes() == null || nextSegment.getTurnType() == null || nextSegment.getTurnType().getLanes() == null) {
 				continue;
 			}
+
+			// Only allow slight turns to be merged.
 			if (currentSegment.getDistance() < 60 && nextSegment.getTurnType().getLanes().length <= currentSegment.getTurnType().getLanes().length
 					&& (currentSegment.getTurnType().getValue() == TurnType.C
 					 || currentSegment.getTurnType().getValue() == TurnType.TSLL
@@ -405,7 +408,7 @@ public class RouteResultPreparation {
 		if (currentSegment.getTurnType().isTurnLanesRendering() && nextSegment.getTurnType().isTurnLanesRendering()) {
 			int[] lanes = new int[currentSegment.getTurnType().getLanes().length];
 			for (int i = 0; i < lanes.length; i++) {
-				lanes[i] = currentSegment.getTurnType().getLanes()[i] & ~1;
+				lanes[i] = currentSegment.getTurnType().getLanes()[i] & ~TurnType.BIT_LANE_ALLOWED;
 			}
 			int matchingIndex = 0;
 			int maxMatchedLanes = 0;
@@ -427,7 +430,7 @@ public class RouteResultPreparation {
 				return;
 			}
 			for (int i = matchingIndex; i - matchingIndex < nextSegment.getTurnType().getLanes().length; i++) {
-				lanes[i] |= nextSegment.getTurnType().getLanes()[i - matchingIndex] & 1;
+				lanes[i] |= nextSegment.getTurnType().getLanes()[i - matchingIndex] & TurnType.BIT_LANE_ALLOWED;
 			}
 			currentSegment.getTurnType().setLanes(lanes);
 			currentSegment.setTurnType(inferTurnFromLanes(currentSegment.getTurnType(), leftSide));
@@ -436,7 +439,7 @@ public class RouteResultPreparation {
 			int matchingIndex = 0;
 			int expectedLanes = 0;
 			for (int i = 0; i < lanes.length; i++) {
-				lanes[i] = currentSegment.getTurnType().getLanes()[i] & ~1;
+				lanes[i] = currentSegment.getTurnType().getLanes()[i] & ~TurnType.BIT_LANE_ALLOWED;
 				if (currentSegment.getTurnType().getPrimaryTurn(i) == TurnType.Turn.SLIGHT_LEFT) {
 					matchingIndex++;
 				} else if (currentSegment.getTurnType().getPrimaryTurn(i) == TurnType.Turn.STRAIGHT) {
@@ -551,6 +554,7 @@ public class RouteResultPreparation {
 
 		assignTurns(splitLaneOptions, t);
 
+		// In some cases (at least in the US), the rightmost lane might not have a right turn indicator, but is allowed. This section adds in that indicator.  The same applies for where leftSide is true.
 		if (leftSide) {
 			if (t.getValue() == TurnType.TL
 					&& !t.isTurnAllowed(0, TurnType.Turn.LEFT)
@@ -559,7 +563,7 @@ public class RouteResultPreparation {
 				if (t.getPrimaryTurn(0) != TurnType.Turn.UNKNOWN && t.getSecondaryTurn(0) == TurnType.Turn.UNKNOWN) {
 					// This was just to make sure that there's no bad data and that there's an empty slot.
 					t.setSecondaryTurn(0, TurnType.Turn.LEFT);
-					lanesArray[0] |= 1;
+					lanesArray[0] |= TurnType.BIT_LANE_ALLOWED;
 				}
 			}
 		} else {
@@ -570,14 +574,15 @@ public class RouteResultPreparation {
 				if (t.getPrimaryTurn(lanesArray.length - 1) != TurnType.Turn.UNKNOWN && t.getSecondaryTurn(lanesArray.length - 1) == TurnType.Turn.UNKNOWN) {
 					// This was just to make sure that there's no bad data and that there's an empty slot.
 					t.setSecondaryTurn(lanesArray.length - 1, TurnType.Turn.RIGHT);
-					lanesArray[lanesArray.length - 1] |= 1;
+					lanesArray[lanesArray.length - 1] |= TurnType.BIT_LANE_ALLOWED;
 				}
 			}
 		}
 
+		// Manually set the allowed lanes.
 		for (int i = 0; i < lanesArray.length; i++) {
 			if (t.getPrimaryTurn(i).getValue() == t.getValue() || t.getSecondaryTurn(i).getValue() == t.getValue()) {
-				lanesArray[i] |= 1;
+				lanesArray[i] |= TurnType.BIT_LANE_ALLOWED;
 			}
 		}
 	}
@@ -693,13 +698,17 @@ public class RouteResultPreparation {
 				if (mpi > TURN_DEGREE_MIN) {
 					otherRoutesExist = true;
 					if (ex > TURN_DEGREE_MIN) {
+						// A right turn is allowed at this intersection.
 						rightTurnPossible = true;
 					} else if (ex < TURN_DEGREE_MIN) {
+						// A left turn is allowed at this intersection.
 						leftTurnPossible = true;
 					}
 				}
 			}
 		}
+
+		// attachedRoutes covers all allowed outbound routes at that point except currentSegm.
 		int current = currentSegm.getObject().getLanes();
 		if(currentSegm.getObject().getOneway() == 0) {
 			current = (current + 1) / 2;
@@ -722,7 +731,7 @@ public class RouteResultPreparation {
 		int right = 0;
 		for (OutboundRoad road : outboundRoads) {
 			for (int j = 0; i < lanes.length && j < road.getLanes(); i++, j++) {
-				lanes[i] = road.getAngle() == 0 ? 1 : 0;
+				lanes[i] = road.getAngle() == 0 ? TurnType.BIT_LANE_ALLOWED : 0;
 				if (road.getAngle() < 0) {
 					left++;
 				} else if (road.getAngle() > 0) {
@@ -753,7 +762,7 @@ public class RouteResultPreparation {
 			}
 			// Most likely, we're going straight at a 90-degree intersection with another road
 			t = TurnType.valueOf(TurnType.C, leftSide);
-			t.setSkipToSpeak(true);
+			t.setSkipToSpeak(true); // Always skip the talking when going straight
 
 			int prevLanes = prevSegm.getObject().getLanes();
 			if(prevSegm.getObject().getOneway() == 0) {
@@ -780,6 +789,7 @@ public class RouteResultPreparation {
 
 			assignTurns(splitLaneOptions, t);
 
+			// In some cases (at least in the US), the rightmost lane might not have a right turn indicator, but is allowed. This section adds in that indicator.  The same applies for where leftSide is true.
 			if (leftSide) {
 				if (leftTurnPossible
 						&& !t.isTurnAllowed(0, TurnType.Turn.LEFT)
@@ -802,9 +812,10 @@ public class RouteResultPreparation {
 				}
 			}
 
+			// Manually set the allowed lanes, in case the turn gets merged.
 			for (int j = 0; j < lanes.length; j++) {
 				if (t.isTurnAllowed(j, TurnType.Turn.STRAIGHT)) {
-					t.getLanes()[j] |= 1;
+					t.getLanes()[j] |= TurnType.BIT_LANE_ALLOWED;
 				}
 			}
 
@@ -814,9 +825,10 @@ public class RouteResultPreparation {
 		if (t != null && lanes != null) {
 			t.setLanes(lanes);
 
+			// This code block, in the cases where turn:lanes is not available, replaces the straight arrows with slight-left or slight-right arrows. It compares the number of lanes going straight to the number of lanes turning to determine which symbol to display where.
 			boolean crossedLeftSide = false;
 			for (int j = 0; j < t.getLanes().length; j++) {
-				if (!crossedLeftSide && (t.getLanes()[j] & 1) == 0) {
+				if (!crossedLeftSide && (t.getLanes()[j] & TurnType.BIT_LANE_ALLOWED) == 0) {
 					if (current > left + right || right != 0) {
 						t.setPrimaryTurn(j, TurnType.Turn.SLIGHT_LEFT);
 					} else {
@@ -824,7 +836,7 @@ public class RouteResultPreparation {
 					}
 				} else {
 					crossedLeftSide = true;
-					if ((t.getLanes()[j] & 1) == 1) {
+					if ((t.getLanes()[j] & TurnType.BIT_LANE_ALLOWED) == TurnType.BIT_LANE_ALLOWED) {
 						if (current > left + right || (left != 0 && right != 0)) {
 							t.setPrimaryTurn(j, TurnType.Turn.STRAIGHT);
 						} else if (left != 0) {
@@ -999,7 +1011,7 @@ public class RouteResultPreparation {
 		List<TurnType.Turn> possibleTurns = new ArrayList<TurnType.Turn>();
 		boolean filled = false;
 		for (int i = 0; i < t.getLanes().length; i++) {
-			if ((t.getLanes()[i] & 1) == 1) {
+			if ((t.getLanes()[i] & TurnType.BIT_LANE_ALLOWED) == TurnType.BIT_LANE_ALLOWED) {
 				if (!filled) {
 					filled = true;
 					possibleTurns.add(t.getPrimaryTurn(i));
@@ -1017,7 +1029,7 @@ public class RouteResultPreparation {
 
 		if (possibleTurns.size() > 1) {
 			for (int i = 0; i < t.getLanes().length; i++) {
-				if ((t.getLanes()[i] & 1) == 0 && !possibleTurns.isEmpty()) {
+				if ((t.getLanes()[i] & TurnType.BIT_LANE_ALLOWED) == 0 && !possibleTurns.isEmpty()) {
 					List<TurnType.Turn> notLaneTurns = new ArrayList<TurnType.Turn>();
 					notLaneTurns.add(t.getPrimaryTurn(i));
 					notLaneTurns.add(t.getSecondaryTurn(i));
