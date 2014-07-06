@@ -69,14 +69,17 @@
 
         
         <TableRow>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/osmo_group_by_invite" />
 
             <CheckBox
-                android:paddingLeft="3dp"
-                android:layout_span="2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/OnlyByInvite"
-                android:text="@string/osmo_group_by_invite" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dp" />
         </TableRow>
         <TableRow>
 
