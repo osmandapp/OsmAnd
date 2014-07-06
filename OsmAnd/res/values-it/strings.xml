@@ -1895,4 +1895,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_auto_connect">Connesione automatica</string>
     <string name="osmo_start_service">Servizio OsMo</string>
     <string name="osmo_gpx_track_downloaded">Scaricate %1$s tracce OsMo.</string>
+    <string name="osmo_not_signed_in">Login a OsMo fallito</string>
     </resources>
