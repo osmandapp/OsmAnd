@@ -1,64 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="7dp"
-    android:paddingRight="7dp"
-    android:stretchColumns="1" >
+    android:layout_height="fill_parent" >
 
-    <TableRow>
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:stretchColumns="1" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/osmo_group_name" />
+        <TableRow>
 
-        <EditText
-            android:id="@+id/Name"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="3dp" />
-    </TableRow>
+            <TextView
+                android:paddingLeft="3dp"
+                android:layout_span="2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/osmo_group_create_info"
+                android:textSize="18sp"
+                android:drawableRight="@drawable/ic_action_info_dark"
+                android:text="@string/osmo_group_information" />
+        </TableRow>
 
-    <TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/osmo_group_description" />
+        <TableRow>
 
-        <EditText
-            android:id="@+id/Description"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:lines="3"
-            android:paddingLeft="3dp" />
-    </TableRow>
-    <TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/osmo_expire_group" />
+            <TextView
+                android:paddingLeft="3dp"
+                android:id="@+id/osmo_group_create_dinfo"
+                android:textSize="16sp"
+                android:layout_span="2"
+                android:minLines="3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/osmo_group_information_desc"
+                android:animateLayoutChanges="true"
+                android:visibility="gone" />
+        </TableRow>
 
-        <Spinner
-            android:id="@+id/ExpireGroup"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="3dp" />
-     </TableRow>
-     <TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/osmo_group_policy" />
+        <TableRow>
 
-        <EditText
-            android:id="@+id/Policy"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:lines="2"
-            android:paddingLeft="3dp" />
-    </TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/osmo_group_name" />
 
+            <EditText
+                android:id="@+id/Name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="3dp" />
+        </TableRow>
 
+        <TableRow>
 
-</TableLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/osmo_group_description" />
+
+            <EditText
+                android:id="@+id/Description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="3"
+                android:paddingLeft="3dp" />
+        </TableRow>
+
+        
+        <TableRow>
+
+            <CheckBox
+                android:paddingLeft="3dp"
+                android:layout_span="2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/OnlyByInvite"
+                android:text="@string/osmo_group_by_invite" />
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/osmo_group_policy" />
+
+            <EditText
+                android:id="@+id/Policy"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:paddingLeft="3dp" />
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>

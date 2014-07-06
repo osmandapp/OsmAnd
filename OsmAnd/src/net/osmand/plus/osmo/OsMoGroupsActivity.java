@@ -69,7 +69,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
@@ -749,16 +749,19 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		final EditText policy = (EditText) v.findViewById(R.id.Policy);
 		final EditText description = (EditText) v.findViewById(R.id.Description);
 		final EditText name = (EditText) v.findViewById(R.id.Name);
-		final Spinner expire = (Spinner) v.findViewById(R.id.ExpireGroup);
-		final int[] days = new int[]{1,2,3,7,14};
-		String[] ds = new String[days.length];
-		for(int k = 0; k < days.length; k++) {
-			ds[k] = days[k] + " " + getString(R.string.int_days);
-		}
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ds);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		expire.setAdapter(adapter);
-		expire.setSelection(3);
+		final CheckBox onlyByInvite = (CheckBox) v.findViewById(R.id.OnlyByInvite);
+		final TextView warnCreate = (TextView) v.findViewById(R.id.osmo_group_create_info);
+		final TextView warnCreateDesc = (TextView) v.findViewById(R.id.osmo_group_create_dinfo);
+		View.OnClickListener click = new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				int vls = warnCreateDesc.getVisibility();
+				warnCreateDesc.setVisibility(vls == View.VISIBLE? View.GONE : View.VISIBLE);
+			}
+		};
+		warnCreate.setOnClickListener(click);
+		warnCreateDesc.setOnClickListener(click);
 		
 		builder.setView(v);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
@@ -768,8 +771,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				if(!checkOperationIsNotRunning()) {
 					return ;
 				}
-				long eTime = days[expire.getSelectedItemPosition()] * 60 * 60 * 24 * 1000 + System.currentTimeMillis();
-				String op = osMoPlugin.getGroups().createGroup(name.getText().toString(), eTime,
+				String op = osMoPlugin.getGroups().createGroup(name.getText().toString(), onlyByInvite.isChecked(),
 						description.getText().toString(), policy.getText().toString());
 				startLongRunningOperation(op);
 			}

@@ -9,6 +9,14 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmo_group_by_invite">Enter by invite</string>
+    <string name="osmo_group_information_desc">
+        - All created groups are public! If you want to be anonymous, connect devices directly via Tracker ids.\n
+        - The group could be registered up to 16 people.\n
+        - In case of inactivity or only 1 person activity for 2 weeks, group will be deleted.\n
+        - You can restrict group entrance, as only by invite, but to control group you need to go to admin console.\n
+        - If you need to create a group, but with other conditions please contact http://osmo.mobi</string>
+    <string name="osmo_group_information">Please read before creating a group!</string>
     <string name="osmo_not_signed_in">OsMo login failed</string>
     <string name="osmo_gpx_points_downloaded">OsMo points %1$s downloaded.</string>
     <string name="osmo_auto_connect_descr">Automatically connect to the service after application startup</string>
