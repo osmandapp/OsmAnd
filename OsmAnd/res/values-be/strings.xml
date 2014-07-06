@@ -1865,4 +1865,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="local_index_unselect_gpx_file">Ачысьціць</string>
     <string name="local_index_select_gpx_file">Выбраць для паказу</string>
     <string name="no_index_file_to_download">Няма чаго сьцягваць, калі-ласка, праверце Інтэрнэт злучэньне.</string>
+    <string name="osmo_not_signed_in">Не ўдалося ўвайсьці ў OsMo</string>
+    <string name="osmo_gpx_points_downloaded">Загружана %1$s кропак OsMo.</string>
+    <string name="osmo_auto_connect_descr">Аўтаматычнае падлучэньне да службы пасьля запуску праграмы</string>
+    <string name="osmo_auto_connect">Аўтаматычнае падлучэньне</string>
+    <string name="osmo_start_service">Служба OsMo</string>
+    <string name="osmo_gpx_track_downloaded">Загружаны %1$s сьлед OsMo.</string>
     </resources>
