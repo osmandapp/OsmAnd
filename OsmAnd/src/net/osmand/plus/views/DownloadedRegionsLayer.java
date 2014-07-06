@@ -187,7 +187,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 		// wait for image to be rendered
 		int count = 0;
 		RotatedTileBox cb = rm.getRenderer().getCheckedBox();
-		while (cb == null || cb.getZoom() != tileBox.getZoom()) {
+		while (cb == null || cb.getZoom() != tileBox.getZoom() || 
+				!cb.containsLatLon(tileBox.getCenterLatLon())) {
 			if (count++ > 7) {
 				return null;
 			}
