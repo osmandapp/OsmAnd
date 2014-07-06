@@ -530,7 +530,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPostExecute(List<GpxInfo> result) {
 			this.result = result;
-			getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+			if(getSherlockActivity() != null) {
+				getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+			}
 		}
 
 		private File[] listFilesSorted(File dir) {

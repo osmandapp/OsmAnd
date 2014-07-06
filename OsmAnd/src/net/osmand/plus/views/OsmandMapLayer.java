@@ -106,6 +106,9 @@ public abstract class OsmandMapLayer {
 			}
 		}
 		
+		public void layerOnPostExecute() {
+		}
+		
 		public boolean isInterrupted() {
 			return pendingTask != null;
 		}
@@ -152,6 +155,8 @@ public abstract class OsmandMapLayer {
 				if (pendingTask != null) {
 					executeTaskInBackground(pendingTask);
 					pendingTask = null;
+				} else {
+					layerOnPostExecute();
 				}
 			}
 		}
