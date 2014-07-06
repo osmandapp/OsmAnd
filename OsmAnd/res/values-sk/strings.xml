@@ -1902,4 +1902,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_auto_connect">Automatické pripojenie</string>
     <string name="osmo_start_service">OsMo služba</string>
     <string name="osmo_gpx_track_downloaded">OsMo stopa %1$s stiahnutá.</string>
+    <string name="osmo_not_signed_in">Prihlásenie k OsMo zlyhalo</string>
     </resources>
