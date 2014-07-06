@@ -125,7 +125,8 @@ public class OsMoGroupsStorage {
 					obj.put(ENABLED, true);
 				}
 				obj.put(GROUP_ID, gr.groupId);
-				ar.put(obj);	
+				ar.put(obj);
+				saveGroupUsers(gr, obj);
 			}
 			mainObj.put(GROUPS, ar);
 		} catch (JSONException e) {
