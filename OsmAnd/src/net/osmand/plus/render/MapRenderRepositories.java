@@ -691,8 +691,6 @@ public class MapRenderRepositories {
 			Bitmap reuse = prevBmp;
 			this.prevBmp = this.bmp;
 			this.prevBmpLocation = this.bmpLocation;
-			this.checkedRenderedState = renderedState;
-			this.checkedBox = this.bmpLocation;
 			if (reuse != null && reuse.getWidth() == currentRenderingContext.width && reuse.getHeight() == currentRenderingContext.height) {
 				bmp = reuse;
 				bmp.eraseColor(currentRenderingContext.defaultColor);
@@ -734,6 +732,9 @@ public class MapRenderRepositories {
 				}
 				currentRenderingContext = null;
 				return;
+			} else {
+				this.checkedRenderedState = renderedState;
+				this.checkedBox = this.bmpLocation;
 			}
 			currentRenderingContext = null;
 
