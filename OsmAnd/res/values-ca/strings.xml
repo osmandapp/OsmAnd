@@ -1873,4 +1873,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_auto_connect">Auto-connexió</string>
     <string name="osmo_start_service">Servei OsMo</string>
     <string name="osmo_gpx_track_downloaded">Traça OsMo %1$s descarregada.</string>
+    <string name="osmo_not_signed_in">Inici sessió OsMo erroni</string>
     </resources>
