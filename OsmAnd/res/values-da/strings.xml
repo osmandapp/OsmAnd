@@ -1906,4 +1906,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_auto_connect">Automatisk forbindelse</string>
     <string name="osmo_start_service">OsMo tjeneste</string>
     <string name="osmo_gpx_track_downloaded">OsMo spor %1$s hentet.</string>
+    <string name="osmo_not_signed_in">OsMo logind mislykkedes</string>
     </resources>
