@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmo_not_signed_in">OsMo login failed</string>
     <string name="osmo_gpx_points_downloaded">OsMo points %1$s downloaded.</string>
     <string name="osmo_auto_connect_descr">Automatically connect to the service after application startup</string>
     <string name="osmo_auto_connect">Auto-connect</string>

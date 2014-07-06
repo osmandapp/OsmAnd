@@ -41,6 +41,7 @@ public class OsMoService implements OsMoReactor {
 	private static final Log log = PlatformUtil.getLog(OsMoService.class);
 	public static final String SHARE_TRACKER_URL = "http://z.osmo.mobi/connect?id=";
 	public static final String SHARE_GROUP_URL = "http://z.osmo.mobi/join?id=";
+	public static final String SIGNED_IN_CONTAINS = "z.osmo.mobi/login";
 	public static final String TRACK_URL = "http://osmo.mobi/u/";
 	private String lastRegistrationError = null;
 	private OsMoPlugin plugin;  
@@ -161,11 +162,12 @@ public class OsMoService implements OsMoReactor {
 		public String hostName;
 		public String port;
 		public String token;
+		public String uid;
+		public String username;
 		// after auth
 		public String protocol = "";
 		public String groupTrackerId;
 		public String trackerId;
-		public String username;
 		public long serverTimeDelta;
 		public long motdTimestamp;
 		
@@ -237,6 +239,12 @@ public class OsMoService implements OsMoReactor {
 			
 			SessionInfo si = new SessionInfo();
 			String a = obj.getString("address");
+			if(obj.has("name")) {
+				si.username = obj.getString("name");
+			}
+			if(obj.has("uid")) {
+				si.uid = obj.getString("uid");
+			}
 			int i = a.indexOf(':');
 			si.hostName = a.substring(0, i);
 			si.port = a.substring(i + 1);

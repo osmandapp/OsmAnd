@@ -276,6 +276,9 @@ public class OsMoGroupsStorage {
 			if(userName != null && userName.length() > 0) {
 				return userName;
 			}
+			if(name == null) {
+				return "";
+			}
 			return name;
 		}
 

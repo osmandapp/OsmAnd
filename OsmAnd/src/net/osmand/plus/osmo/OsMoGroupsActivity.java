@@ -63,15 +63,19 @@ import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -557,7 +561,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			shareSession();
 			return true;
 		} else if (item.getItemId() == CREATE_GROUP) {
-			createGroup();
+			createGroup(true);
 			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
@@ -624,6 +628,94 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	}
 	
 	private void signin() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.osmo_sign_in);
+		String message = "";
+		if(app.getSettings().OSMO_USER_PWD.get() != null) {
+			message = getString(R.string.osmo_credentials_not_valid) +"\n";
+		}
+		message += getString(R.string.osmo_create_groups_confirm);
+		LinearLayout ll = new LinearLayout(this);
+		ll.setOrientation(LinearLayout.VERTICAL);
+		ll.setPadding(5, 5, 5, 5);
+		TextView tv = new TextView(this);
+		tv.setText(message);
+		tv.setTextSize(17);
+		ll.addView(tv);
+		setSupportProgressBarIndeterminateVisibility(true);
+		final WebView wv = new WebView(this);
+		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
+		ll.addView(wv);
+		final EditText et = new EditText(this);
+		et.setVisibility(View.GONE);
+		ll.addView(et);
+		builder.setView(ll);
+		wv.setFocusable(true);
+        wv.setFocusableInTouchMode(true);
+		wv.requestFocus(View.FOCUS_DOWN);
+		wv.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+				case MotionEvent.ACTION_UP:
+					if (!v.hasFocus()) {
+						v.requestFocus();
+					}
+					break;
+				}
+				return false;
+			}
+		});
+		
+		final AlertDialog dlg = builder.show();
+		
+		wv.setWebViewClient(new WebViewClient() {
+			
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				setSupportProgressBarIndeterminateVisibility(false);
+				wv.requestFocus(View.FOCUS_DOWN);
+			}
+		    public boolean shouldOverrideUrlLoading(WebView view, String url){
+				if (url.contains(OsMoService.SIGNED_IN_CONTAINS)) {
+					Uri data = Uri.parse(url);
+					String user = data.getQueryParameter("u");
+					String pwd = data.getQueryParameter("p");
+					app.getSettings().OSMO_USER_NAME.set(user);
+					app.getSettings().OSMO_USER_PWD.set(pwd);
+					osMoPlugin.getService().reconnectToServer();
+					createGroupWithDelay(3000);
+					dlg.dismiss();
+					return true;
+				}
+		        return false; // then it is not handled by default action
+		   }
+		});
+	}
+	
+	public void createGroupWithDelay(final int delay) {
+		if(delay <= 0) {
+			app.showToastMessage(R.string.osmo_not_signed_in);
+			setSupportProgressBarIndeterminateVisibility(false);
+			return;
+		}
+		setSupportProgressBarIndeterminateVisibility(true);
+		new Handler().postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				if(osMoPlugin.getService().getRegisteredUserName() == null) {
+					createGroupWithDelay(delay - 700);
+				} else {
+					setSupportProgressBarIndeterminateVisibility(false);
+					createGroup(true);
+				}
+			}
+		}, delay);
+	}
+	
+	protected void signin2() {
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.osmo_sign_in);
 		String message = "";
@@ -646,8 +738,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		builder.show();
 	}
 
-	private void createGroup() {
-		if(osMoPlugin.getService().getRegisteredUserName() == null) {
+	private void createGroup(boolean check) {
+		if(osMoPlugin.getService().getRegisteredUserName() == null && check) {
 			signin();
 			return;
 		}
