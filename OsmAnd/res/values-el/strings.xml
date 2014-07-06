@@ -1415,7 +1415,7 @@
     <string name="save_as_favorites_points">Αποθήκευση ως ομάδα αγαπημένων</string>
     <string name="app_modes_choose_descr">Επιλογή εμφανών προφιλ χρήσεων στην εφαρμογή</string>
     <string name="loading_smth">Φόρτωση %1$s …</string>
-    <string name="delay_navigation_start">Έναρξη πλοήγησης με καθυστέρηση</string>
+    <string name="delay_navigation_start">Έναρξη πλοήγησης στροφή-στροφή αυτόματα</string>
     <string name="selected">επιλεγμένο</string>
     <string name="gpx_info_distance">Απόσταση: %1$s (%2$s σημεία) </string>
 	<string name="gpx_info_average_speed">Μέση ταχύτητα: %1$s </string>

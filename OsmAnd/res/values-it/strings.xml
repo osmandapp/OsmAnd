@@ -1890,4 +1890,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="local_index_select_gpx_file">Seleziona per visualizzarlo</string>
     <string name="route_descr_destination">\t</string>
     <string name="no_index_file_to_download">Nulla da scaricare, per favore controllare la connessione internet.</string>
+    <string name="osmo_gpx_points_downloaded">Scaricati %1$s punti OsMo.</string>
+    <string name="osmo_auto_connect_descr">Connettiti al servizio automaticamente dopo l\'accensione</string>
+    <string name="osmo_auto_connect">Connesione automatica</string>
+    <string name="osmo_start_service">Servizio OsMo</string>
+    <string name="osmo_gpx_track_downloaded">Scaricate %1$s tracce OsMo.</string>
     </resources>

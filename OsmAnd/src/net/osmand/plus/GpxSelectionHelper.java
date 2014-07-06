@@ -328,7 +328,7 @@ public class GpxSelectionHelper {
 	private void selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
 		boolean displayed = false;
 		SelectedGpxFile sf ;
-		if(gpx.showCurrentTrack) {
+		if(gpx != null && gpx.showCurrentTrack) {
 			sf = savingTrackHelper.getCurrentTrack();
 			sf.notShowNavigationDialog = notShowNavigationDialog;
 			displayed = selectedGPXFiles.contains(sf);
