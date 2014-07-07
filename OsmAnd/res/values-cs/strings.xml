@@ -1599,7 +1599,7 @@ s často kladenými otázkami.</string>
     <string name="map_widget_plain_time">Aktuální čas</string>
     <string name="delay_navigation_start">Spustit navigaci se zpožděním</string>
     <string name="selected">vybrané</string>
-    <string name="gpx_split_interval">Vyberte interval na rozdělení</string>
+    <string name="gpx_split_interval">Rozdělit interval</string>
     <string name="gpx_info_subtracks">Podtrasy: %1$s </string>
 	<string name="gpx_info_waypoints">Bodů na trase: %1$s </string>
 	<string name="gpx_info_distance">Vzdálenost: %1$s (%2$s bodů) </string>
@@ -1628,4 +1628,9 @@ s často kladenými otázkami.</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapová klasifikace s obrázky</string>
     <string name="show_zoom_buttons_navigation_descr">Zobrazit tlačítka lupy během navigace</string>
     <string name="show_zoom_buttons_navigation">Zobrazit tlačítka lupy</string>
+    <string name="sort_by_distance">Třídit podle vzdálenosti</string>
+    <string name="sort_by_name">Třídit podle jména</string>
+    <string name="visible_element">Zobrazit na mapě</string>
+    <string name="local_index_select_gpx_file">Vybrat k zobrazení</string>
+    <string name="local_index_unselect_gpx_file">Odznačit</string>
     </resources>
