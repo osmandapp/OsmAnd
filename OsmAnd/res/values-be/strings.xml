@@ -1871,4 +1871,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_auto_connect">Аўтаматычнае падлучэньне</string>
     <string name="osmo_start_service">Служба OsMo</string>
     <string name="osmo_gpx_track_downloaded">Загружаны %1$s сьлед OsMo.</string>
+    <string name="osmo_group_by_invite">Уваход па запрашэньнi</string>
+    <string name="osmo_group_information">Калі ласка, прачытайце перад стварэньнем групы!</string>
     </resources>
