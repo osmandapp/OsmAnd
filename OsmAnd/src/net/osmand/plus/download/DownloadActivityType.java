@@ -18,6 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -194,10 +195,10 @@ public class DownloadActivityType {
 		if (this == VOICE_FILE) {
 			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 				return ctx.getString(R.string.voice) + "\n" + 
-						OsmandSettings.getVoiceName(ctx, getBasename(indexItem));
+						FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
-				return ctx.getString(R.string.ttsvoice) + "\n" + 
-						OsmandSettings.getVoiceName(ctx, getBasename(indexItem));
+				return ctx.getString(R.string.ttsvoice) + "\n" +
+						FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			}
 			return getBasename(indexItem);
 		}
