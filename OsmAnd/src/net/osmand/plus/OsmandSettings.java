@@ -1746,23 +1746,6 @@ public class OsmandSettings {
 		return false;
 	}
 	
-	public static String getVoiceName(Context ctx, String basename) {
-		try {
-			String nm = basename.replace('-', '_').replace(' ', '_');
-			if (nm.endsWith("_tts") || nm.endsWith("-tts")) {
-				nm = nm.substring(0, nm.length() - 4);
-			}
-			Field f = R.string.class.getField("lang_"+nm);
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
-				return ctx.getString(in);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-		return basename;
-	}
-	
 	public enum DayNightMode {
 		AUTO(R.string.daynight_mode_auto), 
 		DAY(R.string.daynight_mode_day), 

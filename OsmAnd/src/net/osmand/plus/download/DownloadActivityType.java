@@ -18,6 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -194,16 +195,16 @@ public class DownloadActivityType {
 		if (this == VOICE_FILE) {
 			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 				return ctx.getString(R.string.voice) + "\n" + 
-						OsmandSettings.getVoiceName(ctx, getBasename(indexItem));
+						FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
-				return ctx.getString(R.string.ttsvoice) + "\n" + 
-						OsmandSettings.getVoiceName(ctx, getBasename(indexItem));
+				return ctx.getString(R.string.ttsvoice) + "\n" +
+						FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			}
 			return getBasename(indexItem);
 		}
 		final String bn = getBasename(indexItem);
 		final String lc = bn.toLowerCase();
-		String std = getStandardMapName(ctx, lc);
+		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
 		if (std != null) {
 			return std;
 		}
@@ -215,21 +216,6 @@ public class DownloadActivityType {
 		}
 
 		return osmandRegions.getLocaleName(bn);
-	}
-	
-	private String getStandardMapName(Context ctx, String basename) {
-		if(basename.equals("world-ski")) {
-			return ctx.getString(R.string.index_item_world_ski);
-		} else if(basename.equals("world_altitude_correction_ww15mgh")) {
-			return ctx.getString(R.string.index_item_world_altitude_correction);
-		} else if(basename.equals("world_basemap")) {
-			return ctx.getString(R.string.index_item_world_basemap);
-		} else if(basename.equals("world_bitcoin_payments")) {
-			return ctx.getString(R.string.index_item_world_bitcoin_payments);
-		} else if(basename.equals("world_seamarks")) {
-			return ctx.getString(R.string.index_item_world_seamarks);
-		}
-		return null;
 	}
 	
 	public String getTargetFileName(IndexItem item) {
