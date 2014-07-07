@@ -1907,4 +1907,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_start_service">OsMo tjeneste</string>
     <string name="osmo_gpx_track_downloaded">OsMo spor %1$s hentet.</string>
     <string name="osmo_not_signed_in">OsMo logind mislykkedes</string>
+    <string name="osmo_group_information">"Læs  dette før du opretter en gruppe!"</string>
+    <string name="osmo_group_by_invite">Indtast ved invitere</string>
+    <string name="osmo_group_information_desc">" -Alle grupper oprettet er offentlige! Hvis du ønsker at være anonym, tilslutte enheder direkte via Tracker-id\'er.\n -Gruppen kunne registreres op til 16 personer.\n -I tilfælde af inaktivitet eller kun 1 person aktivitet i 2 uger, vil gruppen blive slettet.\n -Du kan begrænse gruppe indgangen, som kun invitere, men at kontrolgruppen skal du gå til administrationskonsol.\n -Hvis du har brug at oprette en gruppe, men med andre betingelser, bedes du kontakte http://osmo.mobi"</string>
     </resources>
