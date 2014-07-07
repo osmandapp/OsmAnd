@@ -204,7 +204,7 @@ public class DownloadActivityType {
 		}
 		final String bn = getBasename(indexItem);
 		final String lc = bn.toLowerCase();
-		String std = getStandardMapName(ctx, lc);
+		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
 		if (std != null) {
 			return std;
 		}
@@ -216,21 +216,6 @@ public class DownloadActivityType {
 		}
 
 		return osmandRegions.getLocaleName(bn);
-	}
-	
-	private String getStandardMapName(Context ctx, String basename) {
-		if(basename.equals("world-ski")) {
-			return ctx.getString(R.string.index_item_world_ski);
-		} else if(basename.equals("world_altitude_correction_ww15mgh")) {
-			return ctx.getString(R.string.index_item_world_altitude_correction);
-		} else if(basename.equals("world_basemap")) {
-			return ctx.getString(R.string.index_item_world_basemap);
-		} else if(basename.equals("world_bitcoin_payments")) {
-			return ctx.getString(R.string.index_item_world_bitcoin_payments);
-		} else if(basename.equals("world_seamarks")) {
-			return ctx.getString(R.string.index_item_world_seamarks);
-		}
-		return null;
 	}
 	
 	public String getTargetFileName(IndexItem item) {
