@@ -51,6 +51,9 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 	private RoutePointsLayer routePointsLayer;
 
+	private RoutePoint lastReachedPoint;
+
+
 	public RoutePointsPlugin(OsmandApplication app) {
 		ApplicationMode.regWidget("route_steps", ApplicationMode.CAR, ApplicationMode.DEFAULT);
 		this.app = app;
@@ -78,7 +81,10 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		btnY.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				currentRoute.navigateToNextPoint(true);
+				if (lastReachedPoint != null){
+					lastReachedPoint.setDelivered(true);
+					lastReachedPoint = null;
+				}
 				FrameLayout layout = (FrameLayout) mapActivity.getLayout();
 				layout.removeView(deliveredView);
 			}
@@ -89,7 +95,10 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		btnN.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				currentRoute.navigateToNextPoint(false);
+				if (lastReachedPoint != null){
+					lastReachedPoint.setDelivered(false);
+					lastReachedPoint = null;
+				}
 				FrameLayout layout = (FrameLayout) mapActivity.getLayout();
 				layout.removeView(deliveredView);
 			}
@@ -100,10 +109,16 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	@Override
 	public boolean destinationReached() {
 		if (currentRoute != null) {
+			if (currentRoute.currentPoints != null && !currentRoute.currentPoints.isEmpty()){
+				lastReachedPoint = currentRoute.currentPoints.get(0);
+			}
 			FrameLayout layout = (FrameLayout) mapActivity.getLayout();
 			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 			params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
 			layout.addView(deliveredView, params);
+			//if it's possible to navigate to next point - navigation continues
+			return !currentRoute.navigateToNextPoint();
+
 		}
 
 		return true;
@@ -461,20 +476,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 				}
 			}
 			return null;
-		}
-
-		public boolean navigateToNextPoint(boolean delivered) {
-			if (currentPoints.isEmpty()) {
-				return false;
-			}
-
-			RoutePoint rp = currentPoints.get(0);
-			if (rp.isNextNavigate) {
-				rp.setDelivered(delivered);
-				return navigateToNextPoint();
-			}
-
-			return false;
 		}
 
 		public void saveGPXAsync() {
