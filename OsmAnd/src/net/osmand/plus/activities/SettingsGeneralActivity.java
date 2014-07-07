@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
@@ -563,8 +564,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k++] = getString(R.string.voice_not_use);
 		for (String s : voiceFiles) {
-			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) +" ":"") + 
-					OsmandSettings.getVoiceName(this, s);
+			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) +" ":"") +
+					FileNameTranslationHelper.getVoiceName(this, s);
 			entrieValues[k] = s;
 			k++;
 		}
