@@ -1729,4 +1729,5 @@ OsmAnd - открытый источник и активно развается.
     <string name="none_selected_gpx">Нет выбранных файлов GPX. Используйте длительное нажатие для выбора доступного трека.</string>
     <string name="local_index_unselect_gpx_file">Сбросить выбор</string>
     <string name="local_index_select_gpx_file">Выбрать для отображения</string>
+    <string name="osmo_group_by_invite">Войти по приглашению</string>
     </resources>
