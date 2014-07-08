@@ -9,6 +9,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -16,8 +18,10 @@ import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
@@ -47,6 +51,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private DashPathEffect pathEffect;
 
+	private Paint paintOuter;
+
+	private Paint paintInnerCircle;
+
+	private Paint paintTextIcon;
+
 //	private Drawable favoriteIcon;
 	
 	
@@ -65,9 +75,24 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintBmp.setFilterBitmap(true);
 		paintBmp.setDither(true);
 		
+		paintTextIcon = new Paint();
+		paintTextIcon.setTextSize(10 * view.getDensity());
+		paintTextIcon.setTextAlign(Align.CENTER);
+		paintTextIcon.setFakeBoldText(true);
+		paintTextIcon.setColor(Color.BLACK);
+		paintTextIcon.setAntiAlias(true);
 		
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 		//favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
+		
+		paintOuter = new Paint();
+		paintOuter.setColor(0x88555555);
+		paintOuter.setAntiAlias(true);
+		paintOuter.setStyle(Style.FILL_AND_STROKE);
+		paintInnerCircle = new Paint();
+		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
+		paintInnerCircle.setColor(0xddFFFFFF);
+		paintInnerCircle.setAntiAlias(true);
 	}
 
 	@Override
@@ -101,45 +126,106 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
-		int clr = getColor(settings);
 		cache.clear();
-		int defPointColor = view.getResources().getColor(R.color.gpx_color_point);
-		int visitedColor = view.getContext().getResources().getColor(R.color.color_ok);
 		if (!selectedGPXFiles.isEmpty()) {
-			for (SelectedGpxFile g : selectedGPXFiles) {
-				List<List<WptPt>> points = g.getPointsToDisplay();
-				boolean routePoints = g.isRoutePoints();
-				int fcolor = g.getColor() == 0 ? clr : g.getColor();
-				paint.setColor(fcolor);
-				drawSegments(canvas, tileBox, points, routePoints);
-			}
+			drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
 			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-			if (tileBox.getZoom() >= startZoom) {
-				// request to load
-				final QuadRect latLonBounds = tileBox.getLatLonBounds();
-				for (SelectedGpxFile g : selectedGPXFiles) {
-					List<WptPt> pts = getListStarPoints(g);
-					int fcolor = g.getColor() == 0 ? defPointColor : g.getColor();
-					
-					for (WptPt o : pts) {
-						boolean visit = isPointVisited(o);
-						int pointColor = visit ? visitedColor : o.getColor(fcolor);
-						FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor);
-						if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
-								&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right) {
-							cache.add(o);
-							int x = (int) tileBox.getPixXFromLatLon(o.lat, o.lon);
-							int y = (int) tileBox.getPixYFromLatLon(o.lat, o.lon);
-							fid.drawBitmapInCenter(canvas, x, y, tileBox.getDensity());
-//							canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2,
-//									y - favoriteIcon.getHeight(), paint);
-						}
+			drawSelectedFilesSplits(canvas, tileBox, selectedGPXFiles, settings);
+			drawSelectedFilesPoints(canvas, tileBox, selectedGPXFiles);
+		}
+		if(textLayer.isVisible()) {
+			textLayer.putData(this, cache);
+		}
+	}
+	
+	private void drawSelectedFilesSplits(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles, 
+			DrawSettings settings) {
+		if (tileBox.getZoom() >= startZoom) {
+			// request to load
+			for (SelectedGpxFile g : selectedGPXFiles) {
+				List<GpxDisplayGroup> groups = g.getDisplayGroups();
+				if (groups != null) {
+					for (GpxDisplayGroup group : groups) {
+						List<GpxDisplayItem> items = group.getModifiableList();
+						drawSplitItems(canvas, tileBox, items, settings);
 					}
 				}
 			}
 		}
-		if(textLayer.isVisible()) {
-			textLayer.putData(this, cache);
+	}
+
+	private void drawSplitItems(Canvas canvas, RotatedTileBox tileBox, List<GpxDisplayItem> items, DrawSettings settings) {
+		final QuadRect latLonBounds = tileBox.getLatLonBounds();
+		int r = (int) (12 * tileBox.getDensity());
+		int dr = r * 3 / 2; 
+		int px = -1;
+		int py = -1;
+		for(int k = 0; k < items.size(); k++) {
+			GpxDisplayItem i = items.get(k);
+			WptPt o = i.locationEnd;
+			if (o != null && o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top && o.lon >= latLonBounds.left
+					&& o.lon <= latLonBounds.right) {
+				int x = (int) tileBox.getPixXFromLatLon(o.lat, o.lon);
+				int y = (int) tileBox.getPixYFromLatLon(o.lat, o.lon);
+				if (px != -1 || py != -1) {
+					if (Math.abs(x - px) <= dr && Math.abs(y - py) <= dr) {
+						continue;
+					}
+				}
+				px = x;
+				py = y;
+				String nm = i.splitName;
+				if (nm != null) {
+					int ind = nm.indexOf(' ');
+					if (ind > 0) {
+						nm = nm.substring(0, ind);
+					}
+					canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintOuter);
+					canvas.drawCircle(x, y, r - (float) Math.ceil(tileBox.getDensity()), paintInnerCircle);
+					paintTextIcon.setTextSize(r);
+					canvas.drawText(nm, x, y + r / 2, paintTextIcon);
+				}
+			}
+		}
+	}
+
+	private void drawSelectedFilesPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
+		int defPointColor = view.getResources().getColor(R.color.gpx_color_point);
+		int visitedColor = view.getContext().getResources().getColor(R.color.color_ok);
+		if (tileBox.getZoom() >= startZoom) {
+			// request to load
+			final QuadRect latLonBounds = tileBox.getLatLonBounds();
+			for (SelectedGpxFile g : selectedGPXFiles) {
+				List<WptPt> pts = getListStarPoints(g);
+				int fcolor = g.getColor() == 0 ? defPointColor : g.getColor();
+				
+				for (WptPt o : pts) {
+					boolean visit = isPointVisited(o);
+					int pointColor = visit ? visitedColor : o.getColor(fcolor);
+					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor);
+					if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
+							&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right) {
+						cache.add(o);
+						int x = (int) tileBox.getPixXFromLatLon(o.lat, o.lon);
+						int y = (int) tileBox.getPixYFromLatLon(o.lat, o.lon);
+						fid.drawBitmapInCenter(canvas, x, y, tileBox.getDensity());
+//							canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2,
+//									y - favoriteIcon.getHeight(), paint);
+					}
+				}
+			}
+		}
+	}
+
+	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
+			List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
+		int clr = getColor(settings);
+		for (SelectedGpxFile g : selectedGPXFiles) {
+			List<List<WptPt>> points = g.getPointsToDisplay();
+			boolean routePoints = g.isRoutePoints();
+			int fcolor = g.getColor() == 0 ? clr : g.getColor();
+			paint.setColor(fcolor);
+			drawSegments(canvas, tileBox, points, routePoints);
 		}
 	}
 

@@ -525,30 +525,10 @@ public class SelectedGPXFragment extends OsmandExpandableListFragment {
 			TextView description = (TextView) row.findViewById(R.id.description);
 			TextView additional = (TextView) row.findViewById(R.id.additional);
 			ImageView icon = (ImageView) row.findViewById(R.id.icon);
-			if(child.splitMetric >= 0) {
+			if(child.splitMetric >= 0 && child.splitName != null) {
 				additional.setVisibility(View.VISIBLE);
 				icon.setVisibility(View.INVISIBLE);
-				if(child.group.isSplitDistance()) {
-					MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
-					if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-						final double sd = child.group.getSplitDistance();
-						int digits = sd < 100 ? 2 : (sd < 1000 ? 1 : 0);
-						int rem1000 = (int) (child.splitMetric + 0.5) % 1000;
-						if (rem1000 > 1 && digits < 1) {
-							digits = 1;
-						}
-						int rem100 = (int) (child.splitMetric + 0.5) % 100;
-						if (rem100 > 1 && digits < 2) {
-							digits = 2;
-						}
-						additional.setText(OsmAndFormatter.getFormattedRoundDistanceKm((float) child.splitMetric,
-								digits, app));
-					} else {
-						additional.setText(OsmAndFormatter.getFormattedDistance((float) child.splitMetric, app));
-					}
-				} else{
-					additional.setText(Algorithms.formatDuration((int) child.splitMetric));
-				}
+				additional.setText(child.splitName);
 			} else {
 				icon.setVisibility(View.VISIBLE);
 				additional.setVisibility(View.INVISIBLE);
