@@ -17,6 +17,7 @@ import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.util.Algorithms;
@@ -191,6 +192,7 @@ public class GpxSelectionHelper {
 				item.group = group;
 				if(split) {
 					item.splitMetric = analysis.metricEnd;
+					item.splitName = formatSplitName(analysis.metricEnd, group, app);
 				}
 				
 				item.description = GpxUiHelper.getDescription(app, analysis, true);
@@ -242,6 +244,29 @@ public class GpxSelectionHelper {
 				list.add(item);
 			}
 		}		
+	}
+
+	private static String formatSplitName(double metricEnd, GpxDisplayGroup group, OsmandApplication app) {
+		if (group.isSplitDistance()) {
+			MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
+			if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+				final double sd = group.getSplitDistance();
+				int digits = sd < 100 ? 2 : (sd < 1000 ? 1 : 0);
+				int rem1000 = (int) (metricEnd + 0.5) % 1000;
+				if (rem1000 > 1 && digits < 1) {
+					digits = 1;
+				}
+				int rem100 = (int) (metricEnd + 0.5) % 100;
+				if (rem100 > 1 && digits < 2) {
+					digits = 2;
+				}
+				return OsmAndFormatter.getFormattedRoundDistanceKm((float) metricEnd, digits, app);
+			} else {
+				return OsmAndFormatter.getFormattedDistance((float) metricEnd, app);
+			}
+		} else {
+			return Algorithms.formatDuration((int) metricEnd);
+		}
 	}
 
 	public SelectedGpxFile getSelectedFileByPath(String path) {
@@ -403,6 +428,10 @@ public class GpxSelectionHelper {
 			return processedPointsToDisplay;
 		}
 		
+		public List<GpxDisplayGroup> getDisplayGroups() {
+			return displayGroups;
+		}
+		
 		public GPXFile getGpxFile() {
 			return gpxFile;
 		}
@@ -545,6 +574,7 @@ public class GpxSelectionHelper {
 		public WptPt locationStart;
 		public WptPt locationEnd;
 		public double splitMetric = -1;
+		public String splitName;
 		public String name;
 		public String description;
 		public String url;

@@ -219,7 +219,7 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 						if (uname.length() > 7 && uname.indexOf(' ') != -1) {
 							uname = uname.substring(0, uname.indexOf(' '));
 						}
-						if (uname.length() > 4 && uname.indexOf(' ') != -1) {
+						if (uname.length() > 4) {
 							txt = "";
 							subtxt = uname;
 						} else {
