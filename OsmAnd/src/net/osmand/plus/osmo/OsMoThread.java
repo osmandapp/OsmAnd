@@ -89,6 +89,9 @@ public class OsMoThread {
 		if (sessionInfo == null) {
 			sessionInfo = service.prepareSessionToken();
 		}
+		if(sessionInfo == null) {
+			return;
+		}
 		this.activeChannel = null;
 		authorized = 0;
 		reconnect = false;
@@ -154,6 +157,9 @@ public class OsMoThread {
 //				stopThread = true;
 			if(activeChannel == null || reconnect) {
 				initConnection();
+				if(activeChannel == null) {
+					delay = HEARTBEAT_FAILED_DELAY;
+				}
 			} else {
 				checkSelectedKeys();
 			}

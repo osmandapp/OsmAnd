@@ -27,9 +27,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.Settings.Secure;
+import android.support.v4.app.NotificationCompat;
 
 public class OsMoService implements OsMoReactor {
 	public static final String REGENERATE_CMD = "TRACKER_REGENERATE_ID";
@@ -46,13 +54,44 @@ public class OsMoService implements OsMoReactor {
 	private String lastRegistrationError = null;
 	private OsMoPlugin plugin;  
 	private boolean enabled = false;
+	private BroadcastReceiver broadcastReceiver;
+	private Notification notification;
+	public final static String OSMO_REGISTER_AGAIN  = "OSMO_REGISTER_AGAIN"; //$NON-NLS-1$
+	private final static int SIMPLE_NOTFICATION_ID = 5;
 	
 	
 	
-	public OsMoService(OsmandApplication app, OsMoPlugin plugin) {
+	public OsMoService(final OsmandApplication app, OsMoPlugin plugin) {
 		this.app = app;
 		this.plugin = plugin;
 		listReactors.add(this);
+		broadcastReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				notification = null;
+				NotificationManager mNotificationManager = (NotificationManager) app
+						.getSystemService(Context.NOTIFICATION_SERVICE);
+				mNotificationManager.cancel(SIMPLE_NOTFICATION_ID);
+				registerAsync();
+			}
+
+
+		};
+		app.registerReceiver(broadcastReceiver, new IntentFilter(OSMO_REGISTER_AGAIN));
+	}
+	
+	private void registerAsync() {
+		new AsyncTask<Void, Void, Void>() {
+			public Void doInBackground(Void... voids ) {
+				try {
+					registerOsmoDeviceKey();
+					reconnect();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+		}.execute((Void)null);
 	}
 	
 	public boolean isConnected() {
@@ -226,7 +265,8 @@ public class OsMoService implements OsMoReactor {
 			final JSONObject obj = new JSONObject(r);
 			if(obj.has("error")) {
 				lastRegistrationError = obj.getString("error");
-				throw new RuntimeException(obj.getString("error"));
+				runNotification(lastRegistrationError);
+				return null;
 			}
 			if(!obj.has("address")) {
 				lastRegistrationError = "Host name not specified";
@@ -257,6 +297,31 @@ public class OsMoService implements OsMoReactor {
 		} catch (JSONException e) {
 			throw new IOException(e);
 		}
+	}
+
+	private void runNotification(String error) {
+		if (notification == null) {
+			Intent notificationIntent = new Intent(OSMO_REGISTER_AGAIN);
+			PendingIntent intent = PendingIntent.getBroadcast(app, 0, notificationIntent,
+					PendingIntent.FLAG_UPDATE_CURRENT);
+			android.support.v4.app.NotificationCompat.Builder bld = new NotificationCompat.Builder(app);
+			bld.setContentInfo(app.getString(R.string.osmo_auth_error, error));
+			bld.setContentIntent(intent);
+			bld.setContentTitle(app.getString(R.string.osmo_auth_error_short));
+			bld.setSmallIcon(R.drawable.bgs_icon);
+
+			NotificationManager mNotificationManager = (NotificationManager) app
+					.getSystemService(Context.NOTIFICATION_SERVICE);
+			notification = bld.getNotification();
+			mNotificationManager.notify(SIMPLE_NOTFICATION_ID, notification);
+		}
+	}
+	
+
+	private void showDialogAskToReregister(String error) {
+//		Builder bld = new AlertDialog.Builder(this);
+//		bld.setMessage(app.getString(R.string.osmo_io_error) +  error);
+//		bld.show();
 	}
 
 	public void showErrorMessage(String string) {

@@ -303,6 +303,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		height *= dm.density;
 		return path;
 	}
+	
 
 	@Override
 	protected void onResume() {
