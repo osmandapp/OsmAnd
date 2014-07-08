@@ -1011,7 +1011,16 @@ public class RouteProvider {
 		track.segments.add(trkSegment);
 		int cRoute = currentRoute;
 		int cDirInfo = currentDirectionInfo;
-		
+
+		//saving start point to gpx file
+		WptPt startpoint = new WptPt();
+		LatLon sc = helper.getPointToStart();
+		if (sc != null){
+			startpoint.lon = sc.getLongitude();
+			startpoint.lat = sc.getLatitude();
+			trkSegment.points.add(startpoint);
+		}
+
 		for(int i = cRoute; i< routeNodes.size(); i++){
 			Location loc = routeNodes.get(i);
 			WptPt pt = new WptPt();
