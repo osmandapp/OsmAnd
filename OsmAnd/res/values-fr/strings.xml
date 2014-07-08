@@ -1743,4 +1743,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_auto_connect">Autoconnexion</string>
     <string name="osmo_start_service">Service OsMo</string>
     <string name="osmo_gpx_track_downloaded">Trace OsMo %1$s téléchargée.</string>
+    <string name="osmo_group_by_invite">Admission sur invitation</string>
     </resources>
