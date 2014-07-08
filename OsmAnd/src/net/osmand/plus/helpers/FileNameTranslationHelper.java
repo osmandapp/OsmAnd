@@ -81,7 +81,7 @@ public class FileNameTranslationHelper {
 			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length()).replace('_', ' ');
 		}
 
-		int ls = fileName.lastIndexOf('-');
+		int ls = fileName.lastIndexOf("-roads");
 		if (ls >= 0) {
 			return fileName.substring(0, ls);
 		} else {
