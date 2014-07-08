@@ -1896,4 +1896,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_start_service">Servizio OsMo</string>
     <string name="osmo_gpx_track_downloaded">Scaricate %1$s tracce OsMo.</string>
     <string name="osmo_not_signed_in">Login a OsMo fallito</string>
+    <string name="osmo_group_by_invite">Accedere su invito</string>
+    <string name="osmo_group_information_desc">" - Tutti i gruppi creati sono pubblici! Se volete rimanere anonimi connettete i dispositivi direttamente tramite gli id di tracciamento.\n - Al gruppo possono essere registrate fino a 16 persone.\n - Nel caso di inattività o di attività di una sola persona per due settimane, il gruppo sarà cancellato.\n - È possibile limitare l\'accesso al gruppo, tipo solo su invito, per amministrare il gruppo devi andare al pannello di amministrazione.\n - Se avete bisogno di creare un gruppo ma ad altre condizioni per favore visitate http://osmo.mobi"</string>
+    <string name="osmo_group_information">Per favore leggere prima di creare un gruppo!</string>
     </resources>
