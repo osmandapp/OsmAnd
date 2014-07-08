@@ -296,9 +296,9 @@ public class MapRoutePreferencesControl extends MapControls {
 						//if short way that it should set valut to fast mode opposite of current
 						if (rp.routingParameter != null && rp.routingParameter.getId().equals("short_way")){
 							settings.FAST_ROUTE_MODE.set(!isChecked);
-						} else {
-							rp.setSelected(settings, isChecked);
 						}
+						rp.setSelected(settings, isChecked);
+
 						if(rp instanceof OtherLocalRoutingParameter) {
 							updateGpxRoutingParameter((OtherLocalRoutingParameter) rp);
 						}
