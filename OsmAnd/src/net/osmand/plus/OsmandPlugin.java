@@ -89,7 +89,8 @@ public abstract class OsmandPlugin {
 			enabledPlugins.add(routePointsPlugin.getId());
 		}
 
-		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
+		// osmodroid disabled
+//		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
 		
