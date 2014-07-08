@@ -370,8 +370,10 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		} else if(isSearchByNameFilter() ){
 			searchFilterLayout.setVisibility(View.VISIBLE);
 		}
-		app.getLocationProvider().addCompassListener(this);
-		app.getLocationProvider().registerOrUnregisterCompassListener(true);
+		if(!app.accessibilityEnabled()) {
+			app.getLocationProvider().addCompassListener(this);
+			app.getLocationProvider().registerOrUnregisterCompassListener(true);
+		}
 		searchFilter.requestFocus();
 	}
 
@@ -549,7 +551,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		super.onPause();
 		if (searchNearBy) {
 			app.getLocationProvider().pauseAllUpdates();
-			app.getLocationProvider().removeCompassListener(this);
+			if(!app.accessibilityEnabled()) {
+				app.getLocationProvider().removeCompassListener(this);
+			}
 			app.getLocationProvider().removeLocationListener(this);
 		}
 	}

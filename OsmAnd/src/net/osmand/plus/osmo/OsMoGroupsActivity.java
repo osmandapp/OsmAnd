@@ -312,8 +312,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		mapLocation = new Location("map");
 		mapLocation.setLatitude(ml.getLatitude());
 		mapLocation.setLongitude(ml.getLongitude());
-		app.getLocationProvider().addCompassListener(this);
-		app.getLocationProvider().registerOrUnregisterCompassListener(true);
+		if(!app.accessibilityEnabled()) {
+			app.getLocationProvider().addCompassListener(this);
+			app.getLocationProvider().registerOrUnregisterCompassListener(true);
+		}
 		app.getLocationProvider().addLocationListener(this);
 		app.getLocationProvider().resumeAllUpdates();
 		osMoPlugin.getGroups().setUiListener(this);
@@ -326,7 +328,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	protected void onPause() {
 		super.onPause();
 		app.getLocationProvider().pauseAllUpdates();
-		app.getLocationProvider().removeCompassListener(this);
+		if(!app.accessibilityEnabled()) {
+			app.getLocationProvider().removeCompassListener(this);
+		}
 		app.getLocationProvider().removeLocationListener(this);
 		osMoPlugin.getGroups().setUiListener(null);
 	}
