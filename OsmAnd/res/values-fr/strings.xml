@@ -600,7 +600,7 @@
   <string name="closing_changeset">Fermeture des modifications…</string>
   <string name="commiting_node">Envoi des nœuds…</string>
   <string name="loading_poi_obj">Chargement des points d\'intérêts…</string>
-  <string name="auth_failed">Autorisation refusée</string>
+  <string name="auth_failed">Échec de l\\\'autorisation</string>
   <string name="failed_op">Échec</string>
   <string name="converting_names">Convertir les noms en anglais…</string>
   <string name="loading_streets_buildings">Chargement des rues/numéros…</string>
@@ -1744,4 +1744,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_start_service">Service OsMo</string>
     <string name="osmo_gpx_track_downloaded">Trace OsMo %1$s téléchargée.</string>
     <string name="osmo_group_by_invite">Admission sur invitation</string>
+    <string name="osmo_auth_error_short">Échec de l\'autorisation</string>
+    <string name="osmo_auth_error">Erreur d\\\'autorisation OsMo : %1$s.\n Le service est temporairement hors-service ou votre inscription a expiré.\n Voulez-vous procéder à nouvelle inscription?</string>
     </resources>
