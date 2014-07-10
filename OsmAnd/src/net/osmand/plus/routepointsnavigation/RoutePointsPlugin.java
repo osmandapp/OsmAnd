@@ -3,12 +3,12 @@ package net.osmand.plus.routepointsnavigation;
 import java.io.File;
 import java.util.*;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
@@ -46,13 +46,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	private TextInfoWidget routeStepsControl;
 	private SelectedRouteGpxFile currentRoute;
 
-	private View deliveredView;
 	private MapActivity mapActivity;
-
 	private RoutePointsLayer routePointsLayer;
-
-	private RoutePoint lastReachedPoint;
-
 
 	public RoutePointsPlugin(OsmandApplication app) {
 		ApplicationMode.regWidget("route_steps", ApplicationMode.CAR, ApplicationMode.DEFAULT);
@@ -63,7 +58,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		return currentRoute;
 	}
 
-
 	public void setCurrentRoute(GPXFile gpx) {
 		if (gpx == null) {
 			currentRoute = null;
@@ -72,50 +66,88 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 	}
 
-	private void prepareDeliveredView() {
-		LayoutInflater vi = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		deliveredView = vi.inflate(R.layout.package_delivered, null);
+	private View createDeliveredView(RoutePoint point) {
+		final LayoutInflater vi = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View deliveredView = vi.inflate(R.layout.package_delivered, null);
+
+		TextView name = (TextView) deliveredView.findViewById(R.id.point_name);
+		name.setText(point.getName());
+		TextView id = (TextView) deliveredView.findViewById(R.id.point_id);
+		id.setText(point.id.toString());
 
 		Button btnY = (Button) deliveredView.findViewById(R.id.delivered_yes);
-
 		btnY.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (lastReachedPoint != null){
-					lastReachedPoint.setDelivered(true);
-					lastReachedPoint = null;
-				}
-				FrameLayout layout = (FrameLayout) mapActivity.getLayout();
-				layout.removeView(deliveredView);
+				setPointDelivered(view, true);
 			}
 		});
 
 		Button btnN = (Button) deliveredView.findViewById(R.id.delivered_no);
-
 		btnN.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (lastReachedPoint != null){
-					lastReachedPoint.setDelivered(false);
-					lastReachedPoint = null;
-				}
-				FrameLayout layout = (FrameLayout) mapActivity.getLayout();
-				layout.removeView(deliveredView);
+				setPointDelivered(view, false);
 			}
 		});
+
+		return deliveredView;
+	}
+
+	private void setPointDelivered(View child, boolean delivered) {
+		if (child == null || child.getParent() == null) {
+			return;
+		}
+
+		View parent = (View) child.getParent().getParent();
+		if (parent == null) {
+			return;
+		}
+		TextView id = (TextView) parent.findViewById(R.id.point_id);
+		if (id != null) {
+			RoutePoint point = getPointById(UUID.fromString(id.getText().toString()));
+			if (point != null) {
+				point.setDelivered(delivered);
+			}
+		}
+
+		FrameLayout layout = (FrameLayout) mapActivity.getLayout();
+		if (layout != null) {
+			layout.removeView(parent);
+		}
+	}
+
+	private RoutePoint getPointById(UUID id) {
+		if (currentRoute == null) {
+			return null;
+		}
+
+		for (RoutePoint p : currentRoute.currentPoints) {
+			if (p.id.compareTo(id) == 0) {
+				return p;
+			}
+		}
+		return null;
 	}
 
 
 	@Override
 	public boolean destinationReached() {
 		if (currentRoute != null) {
-			if (currentRoute.currentPoints != null && !currentRoute.currentPoints.isEmpty()){
-				lastReachedPoint = currentRoute.currentPoints.get(0);
+			//Check EVERYTHING
+			if (currentRoute.currentPoints != null &&
+					currentRoute.currentPoints.size() > 0 &&
+					currentRoute.currentPoints.get(0).isNextNavigate) {
+				FrameLayout layout = (FrameLayout) mapActivity.getLayout();
+				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+				params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
+				View deliveredView = createDeliveredView(currentRoute.currentPoints.get(0));
+
+				if (deliveredView != null) {
+					layout.addView(deliveredView, params);
+				}
 			}
-			FrameLayout layout = (FrameLayout) mapActivity.getLayout();
-			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-			params.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
-			layout.addView(deliveredView, params);
+
 			//if it's possible to navigate to next point - navigation continues
 			return !currentRoute.navigateToNextPoint();
 
@@ -158,7 +190,6 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	public void registerLayers(MapActivity activity) {
 		super.registerLayers(activity);
 		mapActivity = activity;
-		prepareDeliveredView();
 		if (routePointsLayer != null) {
 			activity.getMapView().removeLayer(routePointsLayer);
 		}
@@ -188,8 +219,8 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void saveCurrentRoute(){
-		if (currentRoute != null){
+	public void saveCurrentRoute() {
+		if (currentRoute != null) {
 			currentRoute.saveGPXAsync();
 		}
 	}
@@ -221,13 +252,13 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		return routeStepsControl;
 	}
 
-
 	public class RoutePoint {
 		boolean isNextNavigate;
 		int gpxOrder;
-		long visitedTime; // 0 not visited
+		long visitedTime = 0; // 0 not visited
 		WptPt wpt;
 		boolean delivered;
+		public UUID id;
 
 		public String getName() {
 			return wpt.name;
@@ -245,10 +276,27 @@ public class RoutePointsPlugin extends OsmandPlugin {
 			return visitedTime != 0;
 		}
 
-		public boolean isDelivered() { return delivered;}
+		public boolean isDelivered() {
+			return delivered;
+		}
 
 		public int getGpxOrder() {
 			return gpxOrder;
+		}
+
+		public RoutePoint(WptPt point) {
+			id = UUID.randomUUID();
+			this.wpt = point;
+			if (wpt != null) {
+				String delivered = wpt.getExtensionsToRead().get(DELIVERED_KEY);
+				this.delivered = Boolean.parseBoolean(delivered);
+
+				String time = wpt.getExtensionsToRead().get(VISITED_KEY);
+				try {
+					visitedTime = Long.parseLong(time);
+				} catch (NumberFormatException e) {
+				}
+			}
 		}
 
 		public String getDistance(RoutePoint rp) {
@@ -277,11 +325,13 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		public void setDelivered(boolean d) {
 			wpt.getExtensionsToWrite().put(DELIVERED_KEY, String.valueOf(d));
 			this.delivered = d;
+			saveCurrentRoute();
 		}
 
 		public void setVisitedTime(long currentTimeMillis) {
 			visitedTime = currentTimeMillis;
 			wpt.getExtensionsToWrite().put(VISITED_KEY, visitedTime + "");
+			saveCurrentRoute();
 		}
 
 	}
@@ -397,17 +447,9 @@ public class RoutePointsPlugin extends OsmandPlugin {
 				String locName = targetPointsHelper.getPointNavigateDescription();
 				for (int i = 0; i < rt.points.size(); i++) {
 					WptPt wptPt = rt.points.get(i);
-					RoutePoint rtp = new RoutePoint();
+					RoutePoint rtp = new RoutePoint(wptPt);
 					rtp.gpxOrder = i;
-					rtp.wpt = wptPt;
-					String delivered = wptPt.getExtensionsToRead().get(DELIVERED_KEY);
-					rtp.delivered = Boolean.parseBoolean(delivered);
 
-					String time = wptPt.getExtensionsToRead().get(VISITED_KEY);
-					try {
-						rtp.visitedTime = Long.parseLong(time);
-					} catch (NumberFormatException e) {
-					}
 					rtp.isNextNavigate = rtp.visitedTime == 0 && locName != null && locName.equals(wptPt.name);
 					if (rtp.isNextNavigate) {
 						locName = null;
@@ -480,17 +522,10 @@ public class RoutePointsPlugin extends OsmandPlugin {
 
 		public void saveGPXAsync() {
 			new AsyncTask<RoutePointsPlugin.SelectedRouteGpxFile, Void, Void>() {
-
-				protected void onPreExecute() {
-				}
-
 				@Override
 				protected Void doInBackground(RoutePointsPlugin.SelectedRouteGpxFile... params) {
 					saveFile();
 					return null;
-				}
-
-				protected void onPostExecute(Void result) {
 				}
 			}.execute(getCurrentRoute());
 		}
