@@ -1896,4 +1896,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_group_information_desc">" - Visos sukurtos grupės yra viešos! Jei jungtis anonimiškai, tai darykite naudodami sekiklio ID.\n- Grupėje gali būti iki 16 asmenų.\n- Jei grupėje nebus jokios veiklos arba tik vienas asmuo dvi savaites, ji bus panaikinta.\n- Narystę grupėje galima apriboti pakvietimais, tačiau valdyti grupę bus galima tik iš administravimo konsolės.\n- Jei jums reikia sukuti grupę su kitokiais reikalavimais, susisiekite su http://osmo.mobi"</string>
     <string name="osmo_group_information">Perskaitykite prieš kurdami grupę!</string>
     <string name="osmo_not_signed_in">Prisijungimas prie OsMo nepavyko</string>
+    <string name="osmo_auth_error_short">Autorizavimas nepavyko</string>
+    <string name="osmo_auth_error">OsMo autorizavimo metu įvyko klaida : %1$s.\n Gali būti kad paslauga laikinai neveikia arba baigėsi jūsų prisijungimo laikas.\n Ar norite registruotis iš naujo?</string>
     </resources>
