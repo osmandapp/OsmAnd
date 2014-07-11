@@ -1888,7 +1888,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_lessDetailed_name">Menys detallat</string>
     <string name="rendering_attr_hideAccess_name">Amaga el tipus d\'accés</string>
     <string name="rendering_attr_showAccess_name">Mostra el tipus d\'accés</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Mostrar la qualitat de les carreteres</string>
-    <string name="rendering_attr_showSurfaces_name">Indica el tipus de superfície de les vies</string>
-    <string name="rendering_attr_cycleRoutes_name">Mostra rutes de ciclista</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Mostra la qualitat de les vies</string>
+    <string name="rendering_attr_showSurfaces_name">Mostra el tipus de superfície de les vies</string>
+    <string name="rendering_attr_cycleRoutes_name">Mostra vies de ciclista</string>
     </resources>
