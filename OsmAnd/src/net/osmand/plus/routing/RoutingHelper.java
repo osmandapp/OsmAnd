@@ -744,6 +744,7 @@ public class RoutingHelper {
 		public RouteRecalculationThread(String name, RouteCalculationParams params, boolean paramsChanged) {
 			super(name);
 			this.params = params;
+			this.paramsChanged = paramsChanged;
 			if(params.calculationProgress == null) {
 				params.calculationProgress = new RouteCalculationProgress();
 			}
