@@ -292,7 +292,7 @@ public class RoutingHelper {
 			Thread job = currentRunningJob;
 			if(job instanceof RouteRecalculationThread) {
 				RouteRecalculationThread thread = (RouteRecalculationThread) job;
-				if(thread.isParamsChanged()) {
+				if(!thread.isParamsChanged()) {
 					thread.stopCalculation();
 				}
 			}
