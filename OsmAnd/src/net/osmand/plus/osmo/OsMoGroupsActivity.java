@@ -633,21 +633,12 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		dlg.showDialog();
 	}
 	
-	private void signin() {
+	private void signinPost() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.osmo_sign_in);
-		String message = "";
-		if(app.getSettings().OSMO_USER_PWD.get() != null) {
-			message = getString(R.string.osmo_credentials_not_valid) +"\n";
-		}
-		message += getString(R.string.osmo_create_groups_confirm);
 		LinearLayout ll = new LinearLayout(this);
 		ll.setOrientation(LinearLayout.VERTICAL);
 		ll.setPadding(5, 5, 5, 5);
-		TextView tv = new TextView(this);
-		tv.setText(message);
-		tv.setTextSize(17);
-		ll.addView(tv);
 		setSupportProgressBarIndeterminateVisibility(true);
 		final WebView wv = new WebView(this);
 		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
@@ -723,7 +714,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}, delay);
 	}
 	
-	protected void signin2() {
+	protected void signin() {
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.osmo_sign_in);
 		String message = "";
@@ -736,13 +727,14 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
-						OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get()));
-				startActivity(browserIntent);
+				signinPost();
+//				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(
+//						OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get()));
+//				startActivity(browserIntent);
 			}
 		});
 		
-		builder.setNegativeButton(R.string.default_buttons_no, null);
+		//builder.setNegativeButton(R.string.default_buttons_no, null);
 		builder.show();
 	}
 
