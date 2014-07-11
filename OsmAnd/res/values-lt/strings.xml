@@ -1898,4 +1898,16 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_not_signed_in">Prisijungimas prie OsMo nepavyko</string>
     <string name="osmo_auth_error_short">Autorizavimas nepavyko</string>
     <string name="osmo_auth_error">OsMo autorizavimo metu įvyko klaida : %1$s.\n Gali būti kad paslauga laikinai neveikia arba baigėsi jūsų prisijungimo laikas.\n Ar norite registruotis iš naujo?</string>
+    <string name="rendering_attr_hideBuildings_name">Paslėpti pastatus</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Paslėpti ne automobiliams skirtus greitkelius</string>
+    <string name="rendering_attr_hideText_name">Paslėpti tekstą</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Paslėpti miškus ir krūmynus</string>
+    <string name="rendering_attr_buildings15zoom_name">Pastatus rodyti 15 didinimo laipsnyje</string>
+    <string name="rendering_attr_moreDetailed_name">Detaliau</string>
+    <string name="rendering_attr_lessDetailed_name">Mažiau detalių</string>
+    <string name="rendering_attr_hideAccess_name">Paslėpti prieigos tipą</string>
+    <string name="rendering_attr_showAccess_name">Rodyti prieigos tipą</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Rodyti kelių kokybę</string>
+    <string name="rendering_attr_showSurfaces_name">Rodyti kelių paviršiaus tipą</string>
+    <string name="rendering_attr_showCycleRoutes_name">Rodyti dviračiu maršrutus</string>
     </resources>
