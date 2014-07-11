@@ -1916,12 +1916,12 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="rendering_attr_hideNonVehicleHighways_name">Skjul ikke-køretøj motorveje</string>
     <string name="rendering_attr_hideText_name">Skjul tekst</string>
     <string name="rendering_attr_hideWoodScrubs_name">Skjul skov og krat</string>
-    <string name="rendering_attr_buildings15zoom_name">Bygninger på 15 zoom</string>
-    <string name="rendering_attr_moreDetailed_name">Mere detaljerede</string>
-    <string name="rendering_attr_lessDetailed_name">Mindre detaljerede</string>
-    <string name="rendering_attr_hideAccess_name">Skjule typen adgang</string>
-    <string name="rendering_attr_showAccess_name">Vis typen adgang</string>
-    <string name="rendering_attr_showSurfaceGrade_name">Vis kvaliteten af veje</string>
+    <string name="rendering_attr_buildings15zoom_name">Bygninger på zoom 15</string>
+    <string name="rendering_attr_moreDetailed_name">Mere detaljeret</string>
+    <string name="rendering_attr_lessDetailed_name">Mindre detaljeret</string>
+    <string name="rendering_attr_hideAccess_name">Skjul adgangstypen</string>
+    <string name="rendering_attr_showAccess_name">Vis adgangstypen</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Vis vejkvaliteten</string>
     <string name="rendering_attr_showSurfaces_name">Vis vejbelægninger</string>
     <string name="rendering_attr_showCycleRoutes_name">Vis cykelruter</string>
     </resources>
