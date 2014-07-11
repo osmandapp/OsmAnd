@@ -1879,4 +1879,16 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="osmo_group_information">Si us plau, llegiu abans de crear un grup!</string>
     <string name="osmo_auth_error_short">Autorització fallida</string>
     <string name="osmo_auth_error">Trobat error OsMo d\'autorització : %1$s.\n Podria ser una caiguda temporal del servei o l\'expiració del teu usuari.\n Vols procedir a crear un nou usuari?</string>
+    <string name="rendering_attr_hideBuildings_name">Amaga edificis</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Amaga vies sense circulació de vehicles</string>
+    <string name="rendering_attr_hideText_name">Amaga text</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Amaga tipus de vegetació</string>
+    <string name="rendering_attr_buildings15zoom_name">Representació d\'edificis al detall 15 de zoom</string>
+    <string name="rendering_attr_moreDetailed_name">Més detallat</string>
+    <string name="rendering_attr_lessDetailed_name">Menys detallat</string>
+    <string name="rendering_attr_hideAccess_name">Amaga el tipus d\'accés</string>
+    <string name="rendering_attr_showAccess_name">Mostra el tipus d\'accés</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Mostrar la qualitat de les carreteres</string>
+    <string name="rendering_attr_showSurfaces_name">Indica el tipus de superfície de les vies</string>
+    <string name="rendering_attr_cycleRoutes_name">Mostra rutes de ciclista</string>
     </resources>
