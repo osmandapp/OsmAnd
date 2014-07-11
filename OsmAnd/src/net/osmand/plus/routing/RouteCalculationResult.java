@@ -24,6 +24,7 @@ import net.osmand.util.MapUtils;
 import android.content.Context;
 
 public class RouteCalculationResult {
+	private static double distanceClosestToIntermediate = 400;
 	// could not be null and immodifiable!
 	private final List<Location> locations;
 	private final List<RouteDirectionInfo> directions;
@@ -151,8 +152,8 @@ public class RouteCalculationResult {
 			double prevDistance = distanceThreshold * 4;
 			while((currentIntermediate < intermediates.size() || prevDistance > distanceThreshold)
 				&& currentLocation < locations.size()){
-				if(currentIntermediate < intermediates.size() && 
-						getDistanceToLocation(locations, intermediates.get(currentIntermediate), currentLocation) < 50) {
+				if(currentIntermediate < intermediates.size() &&
+						getDistanceToLocation(locations, intermediates.get(currentIntermediate), currentLocation) < distanceClosestToIntermediate) {
 					prevDistance = getDistanceToLocation(locations, intermediates.get(currentIntermediate), currentLocation);
 					interLocations[currentIntermediate] = currentLocation;
 					currentIntermediate++;
