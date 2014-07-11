@@ -345,6 +345,11 @@ public class RouteResultPreparation {
 									ut = false;
 								}
 							}
+							String highway = result.get(i).getObject().getHighway();
+							if(highway == null || highway.endsWith("track") || highway.endsWith("services") || highway.endsWith("service")
+									|| highway.endsWith("path")) {
+								ut = false;
+							}
 							if (ut) {
 								if (tl && TurnType.TL.equals(tnext.getValue())) {
 									next = i + 2;
