@@ -1581,12 +1581,11 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="about_settings_descr">版本訊息、授權、專案成員</string>
     <string name="tips_and_tricks">提示</string>
     <string name="tip_map_styles">地圖樣式</string>
-	<string name="tip_map_styles_t">OsmAnd 支援顯示離線的向量地圖，以不同的地圖樣式來適應您的需要：
-		\n\n除了均衡的\'預設\'地圖樣式，您可以根據\'選單\' -&gt; \'組態螢幕顯示\' -&gt; \'地圖樣式\'選擇例如
-		\n\t*\'遊覽檢視\'樣式：盡可能為旅行和遊覽提供包含了最詳細的資訊，包括專業的駕駛（高對比可區別的道路）、為徒步登山 (SAC 等級）作的選項、自行車路線、支援徒步旅行符號等。
-		\n\t*\'高對比道路\'在明亮的環境照明情況下，非常突出的高亮顏色顯示道路
-		\n\t*\'冬季和滑雪\'建立一個（白雪覆蓋）冬季景觀視野，和顯示全球滑雪場和滑雪升降機
-	</string>
+	<string name="tip_map_styles_t">"OsmAnd 支援顯示離線的向量地圖，以不同的地圖樣式來適應您的需要：
+\n\n除了均衡的\'預設\'地圖樣式，您可以根據\'選單\' -&gt; \'組態螢幕顯示\' -&gt; \'地圖樣式\'選擇例如
+\n\t*\'遊覽檢視\'樣式：盡可能為旅行和遊覽提供包含了最詳細的資訊，包括專業的駕駛（高對比可區別的道路）、為徒步登山 (SAC 等級）作的選項、自行車道、支援徒步旅行符號等。
+\n\t*\'高對比道路\'在明亮的環境照明情況下，非常突出的高亮顏色顯示道路
+\n\t*\'冬季和滑雪\'建立一個（白雪覆蓋）冬季景觀視野，和顯示全球滑雪場和滑雪升降機 "</string>
     <string name="base_world_map">全球底圖</string>
 	
     
@@ -1901,5 +1900,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="rendering_attr_showAccess_name">顯示存取類型</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路的品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示道路表面</string>
-    <string name="rendering_attr_cycleRoutes_name">顯示腳踏車道</string>
+    <string name="rendering_attr_cycleRoutes_name">顯示自行車道</string>
     </resources>
