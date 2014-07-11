@@ -96,7 +96,7 @@
 	<string name="tip_update_index">更新離線地圖</string>
 	<string name="tip_update_index_t">"離線地圖的查看與 POI/位址查尋，以及離線導航，有最新的圖資是不可或缺的。OsmAnd 提供地圖檔案管理用以下載那些離線圖資，並且檢查能用的更新。
 \n\n下載圖資更新由\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\'。
-\n\n經由網路取得區域列表後，點選任意一個進入，做下載或更新檔案。請注意，檔案類型選擇，在畫面上方的附近，選取您想要的類型下載（正常地圖、地形陰影覆疊等）。
+\n\n經由網路取得區域列表後，點選任意一個進入，做下載或更新檔案。請注意檔案類型選擇，在畫面上方的附近，選取您想要的類型下載（正常地圖、地形陰影覆疊等）。
 \n\n您可以在篩選區域清單中輸入一些文字，或者您可以按選項的\'設定\' -&gt; \'篩選已下載的\'可看見已篩選出在您裝置上的更新資料。
 \n\t* 登錄為\'綠色\'，表示裝置與伺服器是相同的
 \n\t* 登錄為\'藍色\'，表示伺服器有更新的版本
@@ -1890,4 +1890,16 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_not_signed_in">OsMo 登入失敗</string>
     <string name="osmo_auth_error_short">授權失敗</string>
     <string name="osmo_auth_error">OsMo 授權時遇到錯誤：%1$s。\n這可能是服務臨時當機或是您的註冊已過期。\n您想要繼續跟新的註冊。</string>
+    <string name="rendering_attr_hideBuildings_name">隱藏建築物</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">隱藏非車輛的高速公路</string>
+    <string name="rendering_attr_hideText_name">隱藏文字</string>
+    <string name="rendering_attr_hideWoodScrubs_name">隱藏樹木和灌樹叢</string>
+    <string name="rendering_attr_buildings15zoom_name">在 15 級下縮放建築物</string>
+    <string name="rendering_attr_moreDetailed_name">更多細節</string>
+    <string name="rendering_attr_lessDetailed_name">較少細節</string>
+    <string name="rendering_attr_hideAccess_name">隱藏存取類型</string>
+    <string name="rendering_attr_showAccess_name">顯示存取類型</string>
+    <string name="rendering_attr_showSurfaceGrade_name">顯示道路的品質</string>
+    <string name="rendering_attr_showSurfaces_name">顯示道路表面</string>
+    <string name="rendering_attr_cycleRoutes_name">顯示腳踏車道</string>
     </resources>
