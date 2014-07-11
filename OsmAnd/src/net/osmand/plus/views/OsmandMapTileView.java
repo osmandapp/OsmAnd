@@ -151,14 +151,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private boolean afterTwoFingerTap = false;
 	SimpleTwoFingerTapDetector twoFingerTapDetector = new SimpleTwoFingerTapDetector() {
 		@Override
-		public void onTwoFingerTap(MotionEvent firstevent, MotionEvent secondevent) {
+		public void onTwoFingerTap() {
 			afterTwoFingerTap = true;
-			final RotatedTileBox tb = getCurrentRotatedTileBox();
-			float midx = (firstevent.getX() + secondevent.getX()) / 2;
-			float midy = (firstevent.getY() + secondevent.getY()) / 2;
-			final double lat = tb.getLatFromPixel(midx, midy);
-			final double lon = tb.getLonFromPixel(midx, midy);
-			getAnimatedDraggingThread().startMoving(lat, lon, getZoom() - 1, true);
+			getAnimatedDraggingThread().startZooming(getZoom()-1,true);
 		}
 	};
 

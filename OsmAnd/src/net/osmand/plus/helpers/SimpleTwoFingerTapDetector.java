@@ -1,5 +1,7 @@
 package net.osmand.plus.helpers;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
@@ -10,15 +12,20 @@ public abstract class SimpleTwoFingerTapDetector {
 	private static final int TIMEOUT = ViewConfiguration.getTapTimeout() + 100;
 	private long mFirstDownTime = 0;
 	private byte mTwoFingerTapCount = 0;
-	private MotionEvent firstEvent = null;
 
 	private void reset(long time) {
 		mFirstDownTime = time;
 		mTwoFingerTapCount = 0;
 	}
 
+
 	public boolean onTouchEvent(MotionEvent event) {
-		switch (event.getActionMasked()) {
+		//this is workaround
+		// because we support android 2.2
+		int action = event.getAction();
+		//action code will have value same as event.getActionMasked()
+		int actionCode = action & MotionEvent.ACTION_MASK;
+		switch (actionCode) {
 			case MotionEvent.ACTION_DOWN:
 				if (mFirstDownTime == 0 || event.getEventTime() - mFirstDownTime > TIMEOUT){
 					reset(event.getDownTime());
@@ -27,18 +34,15 @@ public abstract class SimpleTwoFingerTapDetector {
 			case MotionEvent.ACTION_POINTER_UP:
 				if (event.getPointerCount() == 2) {
 					mTwoFingerTapCount++;
-					firstEvent = MotionEvent.obtain(event);
 				}
 				else{
 					mFirstDownTime = 0;
-					firstEvent = null;
 				}
 				break;
 			case MotionEvent.ACTION_UP:
 				if (mTwoFingerTapCount == 1 && event.getEventTime() - mFirstDownTime < TIMEOUT) {
-					onTwoFingerTap(firstEvent, event);
+					onTwoFingerTap();
 					mFirstDownTime = 0;
-					firstEvent = null;
 					return true;
 				}
 		}
@@ -46,5 +50,5 @@ public abstract class SimpleTwoFingerTapDetector {
 		return false;
 	}
 
-	public abstract void onTwoFingerTap(MotionEvent firstevent, MotionEvent secondevent);
+	public abstract void onTwoFingerTap();
 }
