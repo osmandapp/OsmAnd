@@ -1635,7 +1635,7 @@ s často kladenými otázkami.</string>
     <string name="local_index_unselect_gpx_file">Odznačit</string>
     <string name="osmo_not_signed_in">Selhání autentizace OsMo</string>
     <string name="osmo_gpx_points_downloaded">OsMo body %1$s stažené.</string>
-    <string name="osmo_auto_connect_descr">Připojit z zařízení automaticky po spuštění aplikace</string>
+    <string name="osmo_auto_connect_descr">Připojit ke službě automaticky po spuštění aplikace</string>
     <string name="osmo_auto_connect">Automatické připojení</string>
     <string name="osmo_start_service">OsMo služba</string>
     <string name="osmo_gpx_track_downloaded">OsMo trasa %1$s stažena.</string>
