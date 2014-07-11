@@ -117,22 +117,22 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings nightMode) {
-		final int r = getRadiusPoi(tb);
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
+		final int r = getRadiusPoi(tileBox);
 		long treshold = System.currentTimeMillis() - 15000;
 		for (OsMoDevice t : getTrackingDevices()) {
 			Location l = t.getLastLocation();
 			ConcurrentLinkedQueue<Location> plocations = t.getPreviousLocations(treshold);
 			if (!plocations.isEmpty() && l != null) {
-				int x = (int) tb.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
-				int y = (int) tb.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
+				int x = (int) tileBox.getPixXFromLonNoRot(l.getLongitude());
+				int y = (int) tileBox.getPixYFromLatNoRot(l.getLatitude());
 				pth.rewind();
 				Iterator<Location> it = plocations.iterator();
 				boolean f = true;
 				while (it.hasNext()) {
 					Location lo = it.next();
-					int xt = (int) tb.getPixXFromLatLon(lo.getLatitude(), lo.getLongitude());
-					int yt = (int) tb.getPixYFromLatLon(lo.getLatitude(), lo.getLongitude());
+					int xt = (int) tileBox.getPixXFromLonNoRot(lo.getLongitude());
+					int yt = (int) tileBox.getPixYFromLatNoRot(lo.getLatitude());
 					if (f) {
 						f = false;
 						pth.moveTo(xt, yt);
@@ -145,14 +145,15 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 				canvas.drawPath(pth, paintPath);
 			}
 		}
+		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		for (OsMoDevice t : getTrackingDevices()) {
 			Location l = t.getLastLocation();
 			if (l != null) {
-				int x = (int) tb.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
-				int y = (int) tb.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
+				int x = (int) tileBox.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
+				int y = (int) tileBox.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
 				pointInnerCircle.setColor(t.getColor());
-				canvas.drawCircle(x, y, r + (float)Math.ceil(tb.getDensity()), pointOuter);
-				canvas.drawCircle(x, y, r - (float)Math.ceil(tb.getDensity()), pointInnerCircle);
+				canvas.drawCircle(x, y, r + (float)Math.ceil(tileBox.getDensity()), pointOuter);
+				canvas.drawCircle(x, y, r - (float)Math.ceil(tileBox.getDensity()), pointInnerCircle);
 				paintTextIcon.setTextSize(r * 3 / 2);
 				canvas.drawText(t.getVisibleName().substring(0, 1).toUpperCase(), x, y + r / 2, paintTextIcon);
 			}
