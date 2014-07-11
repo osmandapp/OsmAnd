@@ -201,6 +201,9 @@ public class DownloadActivityType {
 			return getBasename(indexItem);
 		}
 		final String bn = getBasename(indexItem);
+		if (bn.endsWith(FileNameTranslationHelper.WIKI_NAME)){
+			return FileNameTranslationHelper.getWikiName(ctx,bn);
+		}
 		final String lc = bn.toLowerCase();
 		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
 		if (std != null) {
