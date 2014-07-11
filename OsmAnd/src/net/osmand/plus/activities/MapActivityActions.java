@@ -583,15 +583,16 @@ public class MapActivityActions implements DialogProvider {
 	public void enterRoutePlanningMode(final LatLon from, final String fromName) {
 		List<SelectedGpxFile> selectedGPXFiles = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
 		GPXFile gpxFile = null;
-		boolean notShowDialog = false;
 		for (SelectedGpxFile gs : selectedGPXFiles) {
-			if (!gs.isShowCurrentTrack()) {
-				notShowDialog = gs.notShowNavigationDialog;
-				gpxFile = gs.getGpxFile();
-				break;
+			if (!gs.isShowCurrentTrack() && 
+					!gs.notShowNavigationDialog) {
+				if(gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkpt()) {
+					gpxFile = gs.getGpxFile();
+					break;
+				}
 			}
 		}
-		if(gpxFile != null && !notShowDialog) {
+		if(gpxFile != null) {
 			final GPXFile f = gpxFile;
 			Builder bld = new AlertDialog.Builder(mapActivity);
 			bld.setMessage(R.string.use_displayed_track_for_navigation);

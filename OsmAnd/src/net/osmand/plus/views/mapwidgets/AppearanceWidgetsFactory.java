@@ -15,6 +15,7 @@ import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.widget.Toast;
@@ -96,14 +97,17 @@ public class AppearanceWidgetsFactory {
                 bld.setTitle(R.string.renderers);
                 Collection<String> rendererNames = app.getRendererRegistry().getRendererNames();
                 final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
-                int i = -1;
-                for(int j = 0; j< items.length; j++) {
-                    if(items[j].equals(app.getRendererRegistry().getCurrentSelectedRenderer().getName())) {
-                        i = j;
-                        break;
-                    }
-                }
-                bld.setSingleChoiceItems(items, i, new DialogInterface.OnClickListener() {
+                final String[] visibleNames = new String[items.length];
+                int selected = -1;
+                final String selectedName = app.getRendererRegistry().getCurrentSelectedRenderer().getName();
+				for (int j = 0; j < items.length; j++) {
+					if (items[j].equals(selectedName)) {
+						selected = j;
+					}
+					visibleNames[j] = Algorithms.capitalizeFirstLetterAndLowercase(items[j].replace('_', ' ').replace(
+							'-', ' '));
+				}
+                bld.setSingleChoiceItems(items, selected, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
