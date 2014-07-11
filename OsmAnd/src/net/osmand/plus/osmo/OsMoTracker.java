@@ -39,7 +39,7 @@ public class OsMoTracker implements OsMoReactor {
 	}
 	
 	public String getSessionURL() {
-		if (!isEnabledTracker()) {
+		if (!isEnabledTracker() || sessionURL == null) {
 			return null;
 		}
 		return OsMoService.TRACK_URL + sessionURL;
