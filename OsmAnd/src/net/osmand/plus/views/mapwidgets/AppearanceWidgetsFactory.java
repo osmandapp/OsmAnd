@@ -107,7 +107,7 @@ public class AppearanceWidgetsFactory {
 					visibleNames[j] = Algorithms.capitalizeFirstLetterAndLowercase(items[j].replace('_', ' ').replace(
 							'-', ' '));
 				}
-                bld.setSingleChoiceItems(items, selected, new DialogInterface.OnClickListener() {
+                bld.setSingleChoiceItems(visibleNames, selected, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
