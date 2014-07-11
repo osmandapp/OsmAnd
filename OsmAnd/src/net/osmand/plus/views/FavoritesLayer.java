@@ -108,7 +108,7 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		int ex = (int) point.x;
 		int ey = (int) point.y;
 		for (FavouritePoint n : favorites.getFavouritePoints()) {
-			if (n.isVisible()) {
+			if (n.isVisible()) { 
 				int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
 				int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
 				if (calculateBelongs(ex, ey, x, y, r)) {

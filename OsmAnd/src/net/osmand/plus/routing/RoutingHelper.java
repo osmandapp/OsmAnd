@@ -287,10 +287,15 @@ public class RoutingHelper {
 
 		if (calculateRoute) {
 			recalculateRouteInBackground(false, currentLocation, finalLocation, intermediatePoints, currentGPXRoute, 
-					previousRoute.isCalculated() ? previousRoute : null);
-		} else if (currentRunningJob != null && currentRunningJob instanceof RouteRecalculationThread) {
-			RouteRecalculationThread thread = (RouteRecalculationThread) currentRunningJob;
-			thread.stopCalculation();
+					previousRoute.isCalculated() ? previousRoute : null, false);
+		} else {
+			Thread job = currentRunningJob;
+			if(job instanceof RouteRecalculationThread) {
+				RouteRecalculationThread thread = (RouteRecalculationThread) job;
+				if(thread.isParamsChanged()) {
+					thread.stopCalculation();
+				}
+			}
 		}
 
 		double projectDist = mode != null && mode.hasFastSpeed() ? posTolerance : posTolerance / 2;
@@ -734,13 +739,18 @@ public class RoutingHelper {
 	private class RouteRecalculationThread extends Thread {
 		
 		private final RouteCalculationParams params;
+		private boolean paramsChanged;
 
-		public RouteRecalculationThread(String name, RouteCalculationParams params) {
+		public RouteRecalculationThread(String name, RouteCalculationParams params, boolean paramsChanged) {
 			super(name);
 			this.params = params;
 			if(params.calculationProgress == null) {
 				params.calculationProgress = new RouteCalculationProgress();
 			}
+		}
+		
+		public boolean isParamsChanged() {
+			return paramsChanged;
 		}
 
 		public void stopCalculation(){
@@ -795,11 +805,11 @@ public class RoutingHelper {
 	}
 	
 	public void recalculateRouteDueToSettingsChange() {
-		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route);
+		recalculateRouteInBackground(true, lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true);
 	}
 	
 	private void recalculateRouteInBackground(boolean force, final Location start, final LatLon end, final List<LatLon> intermediates,
-			final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute){
+			final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute, boolean paramsChanged){
 		if (start == null || end == null) {
 			return;
 		}
@@ -822,7 +832,7 @@ public class RoutingHelper {
 					updateProgress(params.calculationProgress);
 				}
 				synchronized (this) {
-					currentRunningJob = new RouteRecalculationThread("Calculating route", params); //$NON-NLS-1$
+					currentRunningJob = new RouteRecalculationThread("Calculating route", params, paramsChanged); //$NON-NLS-1$
 					currentRunningJob.start();
 				}
 			}

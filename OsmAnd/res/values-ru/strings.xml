@@ -38,11 +38,6 @@
     <string name="av_control_start">Запись</string>
     <string name="map_widget_av_notes">Аудио заметки</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd плагин для линий высот</string>
-    
-    
-    
-    
-    
     <string name="map_widget_distancemeasurement">Измерение расстояний</string>
     <string name="audionotes_location_not_defined">Текущее местоположение для заметки ещё не определено. Используйте контекстное меню для привязки заметки к определённой точке.</string>
     <string name="monitoring_control_stop">Стоп</string>
@@ -51,9 +46,7 @@
     <string name="audionotes_plugin_name">Аудио-видео заметки</string>
     <string name="index_srtm_parts">частей</string>
     <string name="index_srtm_ele">Линии высот</string>
-    
     <string name="srtm_plugin_name">Плагин линий высот</string>
-    
 	<string name="rendering_attr_noAdminboundaries_name">Скрыть границы</string>
 	<string name="rendering_attr_noAdminboundaries_description">Скрыть региональные границы (admin levels 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">Плагин OsMoDroid устарел и нуждается в обновлении.</string>
@@ -1213,7 +1206,7 @@
 	\n\t* добавлен пакет затемнённого рельефа местности для плагина контурных линий
 	\n\t* исправлены ошибки (неоптимальной маршрутизации)
     </string>
-    <string name="download_hillshade_maps">Карты с затемнённым рельефом местности</string>
+    <string name="download_hillshade_maps">Карты с затемнённым рельефом</string>
     <string name="av_use_external_camera_descr">Использовать системную программу для фото</string>
     <string name="av_use_external_camera">Использовать приложение Камера</string>
     <string name="index_name_openmaps">OpenMaps - Европа</string>
