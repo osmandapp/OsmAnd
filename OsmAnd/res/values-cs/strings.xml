@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
+<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
 \n\t- Offline editace POI
@@ -335,17 +335,17 @@
   <string name="select_build_to_install">Vyberte jeden z balíčků OsmAnd k nainstalování</string>
   <string name="contribution_activity">Speciální aktivita pro vývojovou verzi</string>
   <string name="tip_update_index">Aktualizace offline map</string>
-  <string name="tip_update_index_t">" \t Mít k dispozici aktuální mapová data je důležité. OsmAnd obsahuje správce stahování map, kde můžete snadno ověřit, zda jsou k dispozici novější mapy.
-\n\t Pro zkontrolování aktualizací \'Hlavní Menu\'-&gt;\'Nastavení\'-&gt;\'Offline data\'-&gt;\'Stáhnout offline data\'. Po aktualizaci seznamu z internetu vyberte z kontextového menu \'Zobrazit jen aktualizace\'.
+  <string name="tip_update_index_t">"Mít k dispozici aktuální mapová data je důležité. OsmAnd obsahuje správce stahování map, kde můžete snadno ověřit, zda jsou k dispozici novější mapy.
+\n\t Pro zkontrolování aktualizací \'Hlavní Menu\'-&gt;\'Nastavení\'-&gt;\'Spravovat mapové soubory\'-&gt;\'Stáhnout\'. Po aktualizaci seznamu z internetu vyberte z kontextového menu \'Zobrazit jen aktualizace\'.
 \n\t Teď se zobrazí jen indexy, které už máte stažené. Navíc jsou zvýrazněné následovně:
 \n\t Zelená - označuje aktuální mapy a data
-\n\t Modrá - označuje mapy a data, u kterých lze stáhnout novější verzi\n\t Tmavě zelená/Modrá - označuje vypnuté datové spojení"</string>
+\n\t Modrá - označuje mapy a data, u kterých lze stáhnout novější verzi\n\t Tmavě zelená/Modrá - označuje vypnuté datové spojení "</string>
   <string name="tip_location_sharing">Sdílení polohy</string>
   <string name="tip_location_sharing_t">"\t Našli jste po cestě nějaké zajímavé místo a chcete se o něj podělit s ostatními?
 \n\t OsmAnd umožňuje vaši polohu snadno sdílet.
 \n\t V kontextovém menu mapy vyberte volbu \'Sdílet polohu\'. Následně můžete zvolit způsob, jak polohu odešlete. Máte na výběr mezi E-Mailem, SMS nebo zkopírováním souřadnic do schránky. "</string>
   <string name="tip_favorites">Oblíbená místa</string>
-  <string name="tip_favorites_t">"\t Často navštěvovaná místa mohou být uložena jako Oblíbená místa.\n\t Pro přidání oblíbeného místa otevřete kontextové menu mapy (dlouhý stisk), vyberte \'Přidat k oblíbeným\' a zadejte vhodné jméno. Po uložení se k oblíbeným dostanete skrze \'Hlavní Menu\'-&gt;\'Oblíbené\'.
+  <string name="tip_favorites_t">"Často navštěvovaná místa mohou být uložena jako Oblíbená místa.\n\t Pro přidání oblíbeného místa otevřete kontextové menu mapy (dlouhý stisk), vyberte \'Přidat k oblíbeným\' a zadejte vhodné jméno. Po uložení se k oblíbeným dostanete skrze \'Hlavní Menu\'-&gt;\'Moje místa\'.
 \n\t Dlouhým stisknutím položky v oblíbených vyvoláte další možnosti - nastavení jako cíl, její úpravy nebo vymazání.
 \n\t Pro zobrazení všech oblíbených bodů na mapě zvolte \'Oblíbené\' v menu \'Kontextové menu\' -&gt; \'Mapová data\'. "</string>
   <string name="tip_recent_changes">Poslední změny</string>
@@ -406,7 +406,7 @@
   <string name="tip_app_mode">Režim aplikace</string>
   
   <string name="tip_navigation">Navigace</string>
-  <string name="tip_navigation_t">"Pro zapnutí navigace musíte nejprve vybrat cílový bod. Poté vyberte \'Menu\'-&gt;\'Navigace\' na mapě a vyberte typ navigování. "</string>
+  <string name="tip_navigation_t">"Chcete-li získat pokyny k cílovému bodu, buď dlouze tapněte na mapu (pak krátce na popis a vyberte \'Navigovat sem\'), nebo vyberte \'Navigace\' po tapnutí na výsledek hledání nebo oblíbeného místa.\n\nCíl je vyznačený jako cílová vlajka - šachovnice a OsmAnd zobrazí směr (oranžový trojúhelník) a vzdálenost k cíli.\n\nPro zobrazení trasy k cíli z jiného bodu než současného místa, zvolte bod startu na mapě a vyberte volbu \'Navigovat odsud\'\n\nJestliže použijete volbu \'Navigovat odsud\' spolu s volbou \'Navigace\', OsmAnd se přepne na vaší aktuální polohu ihned jakmile bude zjištěna (proto tato kombinace může být použita pro rychlý start navigace) "</string>
   <string name="tip_search">Vyhledávání</string>
   <string name="tip_search_t">\tMůžete vyhledat místo přímo na mapě, podle adresy, umístění, jako bod zájmu (POI), nebo v seznamu oblíbených.
 \n\t Vyhledávání se otevře stisknutím \'Hledat\'. Nalezené místo pak můžete nechat zobrazit na mapě, nebo ho použít jako cílový bod.
@@ -1597,7 +1597,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_set_moving_target">Nastavit jako pohyblivý cíl</string>
     <string name="loading_smth">Načítá se %1$s …</string>
     <string name="map_widget_plain_time">Aktuální čas</string>
-    <string name="delay_navigation_start">Spustit navigaci se zpožděním</string>
+    <string name="delay_navigation_start">Spustit navigaci automaticky</string>
     <string name="selected">vybrané</string>
     <string name="gpx_split_interval">Rozdělit interval</string>
     <string name="gpx_info_subtracks">Podtrasy: %1$s </string>
@@ -1624,7 +1624,7 @@ s často kladenými otázkami.</string>
     <string name="selected_gpx_info_show">\n\nStiskněte a podržte pro zobrazení na mapě</string>
     <string name="save_as_favorites_points">Uložit jako skupinu oblíbených</string>
     <string name="select_destination_and_intermediate_points">Vybrat body na trase</string>
-    <string name="layer_amenity_label">Textové popisky</string>
+    <string name="layer_amenity_label">Popisky bodů</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> mapová klasifikace s obrázky</string>
     <string name="show_zoom_buttons_navigation_descr">Zobrazit tlačítka lupy během navigace</string>
     <string name="show_zoom_buttons_navigation">Zobrazit tlačítka lupy</string>
@@ -1633,4 +1633,12 @@ s často kladenými otázkami.</string>
     <string name="visible_element">Zobrazit na mapě</string>
     <string name="local_index_select_gpx_file">Vybrat k zobrazení</string>
     <string name="local_index_unselect_gpx_file">Odznačit</string>
+    <string name="osmo_not_signed_in">Selhání autentizace OsMo</string>
+    <string name="osmo_gpx_points_downloaded">OsMo body %1$s stažené.</string>
+    <string name="osmo_auto_connect_descr">Připojit z zařízení automaticky po spuštění aplikace</string>
+    <string name="osmo_auto_connect">Automatické připojení</string>
+    <string name="osmo_start_service">OsMo služba</string>
+    <string name="osmo_gpx_track_downloaded">OsMo trasa %1$s stažena.</string>
+    <string name="no_index_file_to_download">Není nic ke stažení, prosím zkontrolujte připojení k Internetu.</string>
+    <string name="none_selected_gpx">Nebyl vybrán žádný GPX soubor. Podržením vyberte z dostupných tras.</string>
     </resources>
