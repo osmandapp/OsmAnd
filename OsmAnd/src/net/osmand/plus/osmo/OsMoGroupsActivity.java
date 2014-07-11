@@ -251,11 +251,12 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		final Drawable srcSignalSmall = getResources().getDrawable(R.drawable.mon_osmo_conn_signal_small);
 		final Drawable srcBig = getResources().getDrawable(R.drawable.mon_osmo_conn_big);
 		final Drawable srcSignalBig = getResources().getDrawable(R.drawable.mon_osmo_conn_signal_big);
-		final Drawable srcinactive = getResources().getDrawable(R.drawable.monitoring_rec_inactive);
-		Drawable small = srcinactive;
-		Drawable big = srcinactive;
+//		final Drawable srcinactive = getResources().getDrawable(R.drawable.mon_osmo_inactive);
+		final Drawable srcSignalinactive = getResources().getDrawable(R.drawable.mon_osmo_signal_inactive);
 		OsMoService service = osMoPlugin.getService();
 		OsMoTracker tracker = osMoPlugin.getTracker();
+		Drawable small = srcSignalinactive; //tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
+		Drawable big = srcSignalinactive;// tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
 		long last = service.getLastCommandTime();
 		if (service.isActive()) {
 			small = tracker.isEnabledTracker() ? srcSignalSmall : srcSmall;
@@ -654,7 +655,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		final EditText et = new EditText(this);
 		et.setVisibility(View.GONE);
 		ll.addView(et);
-		builder.setView(ll);
+		ScrollView scrollView = new ScrollView(this);
+		scrollView.addView(ll);
+		builder.setView(scrollView);
 		wv.setFocusable(true);
         wv.setFocusableInTouchMode(true);
 		wv.requestFocus(View.FOCUS_DOWN);

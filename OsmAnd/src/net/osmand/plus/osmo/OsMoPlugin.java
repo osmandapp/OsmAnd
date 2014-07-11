@@ -203,7 +203,8 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 		final Drawable srcSignalSmall = map.getResources().getDrawable(R.drawable.mon_osmo_conn_signal_small);
 		final Drawable srcBig = map.getResources().getDrawable(R.drawable.mon_osmo_conn_big);
 		final Drawable srcSignalBig = map.getResources().getDrawable(R.drawable.mon_osmo_conn_signal_big);
-		final Drawable srcinactive = map.getResources().getDrawable(R.drawable.monitoring_rec_inactive);
+//		final Drawable srcinactive = map.getResources().getDrawable(R.drawable.mon_osmo_inactive);
+		final Drawable srcSignalinactive = map.getResources().getDrawable(R.drawable.mon_osmo_signal_inactive);
 		final TextInfoWidget osmoControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
 			long lastUpdateTime;
 			private Drawable blinkImg;
@@ -227,8 +228,8 @@ public class OsMoPlugin extends OsmandPlugin implements MonitoringInfoControlSer
 						}
 					}
 				}
-				Drawable small = srcinactive;
-				Drawable big = srcinactive;
+				Drawable small = srcSignalinactive; //tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
+				Drawable big = srcSignalinactive; // tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
 				long last = service.getLastCommandTime();
 				if (service.isActive()) {
 					small = tracker.isEnabledTracker() ? srcSignalSmall : srcSmall;
