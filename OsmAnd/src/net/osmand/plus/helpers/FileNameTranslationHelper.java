@@ -13,21 +13,12 @@ import java.lang.reflect.Field;
  */
 public class FileNameTranslationHelper {
 
+	public static final String WIKI_NAME = "_wiki";
+
 	public static String getFileName(Context ctx, OsmandRegions regions, String fileName) {
 		String basename = getBasename(fileName);
-		if (basename.endsWith("_wiki")) { //wiki files
-			String cutted = basename.substring(0, basename.indexOf("_wiki"));
-			String wikiName = getStandardLangName(ctx, cutted);
-			if (wikiName == null){
-				wikiName = cutted;
-			}
-			String wikiWord = ctx.getString(R.string.amenity_type_osmwiki);
-			int index = wikiWord.indexOf("(");
-			if (index >= 0) {
-				//removing word in "()" from recourse file
-				return wikiWord.substring(0, index) + wikiName;
-			}
-			return ctx.getString(R.string.amenity_type_osmwiki) + " " + wikiName;
+		if (basename.endsWith(WIKI_NAME)) { //wiki files
+			return getWikiName(ctx,basename);
 		} else if (fileName.endsWith("tts")) { //tts files
 			return getVoiceName(ctx, fileName);
 		} else if (fileName.length() == 2) { //voice recorded files
@@ -54,6 +45,21 @@ public class FileNameTranslationHelper {
 		}
 
 		return null;
+	}
+
+	public static String getWikiName(Context ctx, String basename){
+		String cutted = basename.substring(0, basename.indexOf("_wiki"));
+		String wikiName = getStandardLangName(ctx, cutted);
+		if (wikiName == null){
+			wikiName = cutted;
+		}
+		String wikiWord = ctx.getString(R.string.amenity_type_osmwiki);
+		int index = wikiWord.indexOf("(");
+		if (index >= 0) {
+			//removing word in "()" from recourse file
+			return wikiWord.substring(0, index) + wikiName;
+		}
+		return ctx.getString(R.string.amenity_type_osmwiki) + " " + wikiName;
 	}
 
 	public static String getVoiceName(Context ctx, String basename) {
@@ -85,7 +91,7 @@ public class FileNameTranslationHelper {
 		if (ls >= 0) {
 			return fileName.substring(0, ls);
 		} else {
-			ls = fileName.lastIndexOf(".");
+			ls = fileName.indexOf(".");
 			if (ls >= 0) {
 				return fileName.substring(0, ls);
 			}
