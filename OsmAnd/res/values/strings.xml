@@ -9,7 +9,19 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-   	<string name="osmo_auth_error_short">Authorization failed</string>
+    <string name="rendering_attr_hideBuildings_name">Hide buildings</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Hide non-vehicle highways</string>
+    <string name="rendering_attr_hideText_name">Hide text</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Hide wood and scrubs</string>
+    <string name="rendering_attr_buildings15zoom_name">Buildings on 15 zoom</string>
+    <string name="rendering_attr_moreDetailed_name">More detailed</string>
+    <string name="rendering_attr_lessDetailed_name">Less detailed</string>
+    <string name="rendering_attr_hideAccess_name">Hide the type of access</string>
+    <string name="rendering_attr_showAccess_name">Show the type of access</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Show the quality of roads</string>
+    <string name="rendering_attr_showSurfaces_name">Show road surfaces</string>
+    <string name="rendering_attr_cycleRoutes_name">Show cycle routes</string>
+    <string name="osmo_auth_error_short">Authorization failed</string>
     <string name="osmo_auth_error">OsMo authorization error encountered : %1$s.\n
         It could be a temporary service down or your registration expired.\n
         Do you want to proceed with new registration.</string>

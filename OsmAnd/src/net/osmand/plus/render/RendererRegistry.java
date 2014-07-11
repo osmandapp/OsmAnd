@@ -36,11 +36,10 @@ public class RendererRegistry {
 	public RendererRegistry(){
 		internalRenderers.put(DEFAULT_RENDER, "default.render.xml");
 		internalRenderers.put("Touring-view_(more-contrast-and-details)", "Touring-view_(more-contrast-and-details)" +".render.xml");
-		internalRenderers.put("High-contrast-roads", "High-contrast-roads" + ".render.xml");
-		internalRenderers.put("Winter-and-ski", "Winter-and-ski" + ".render.xml");
-		internalRenderers.put("Topo-map-assimilation", "Topo-map-assimilation" + ".render.xml");
 		internalRenderers.put("UniRS", "UniRS" + ".render.xml");
 		internalRenderers.put("LightRS", "LightRS" + ".render.xml");
+		internalRenderers.put("High-contrast-roads", "High-contrast-roads" + ".render.xml");
+		internalRenderers.put("Winter-and-ski", "Winter-and-ski" + ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
