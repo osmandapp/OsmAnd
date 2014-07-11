@@ -7,7 +7,7 @@ import android.view.ViewConfiguration;
  * Created by Barsik on 24.06.2014.
  */
 public abstract class SimpleTwoFingerTapDetector {
-	private static final int TIMEOUT = ViewConfiguration.getDoubleTapTimeout() + 100;
+	private static final int TIMEOUT = ViewConfiguration.getTapTimeout() + 100;
 	private long mFirstDownTime = 0;
 	private byte mTwoFingerTapCount = 0;
 	private MotionEvent firstEvent = null;
