@@ -13,4 +13,5 @@ use/
 osmand.properties
 osmand.xml
 assets/help/*.html
+assets/help/images
 assets/help/screens
