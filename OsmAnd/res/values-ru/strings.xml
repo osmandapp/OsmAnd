@@ -1724,11 +1724,16 @@ OsmAnd - открытый источник и активно развается.
     <string name="local_index_select_gpx_file">Выбрать для отображения</string>
     <string name="osmo_group_by_invite">Войти по приглашению</string>
     <string name="rendering_attr_hideBuildings_name">Скрыть строения</string>
-    <string name="rendering_attr_hideText_name">Срыть текст</string>
+    <string name="rendering_attr_hideText_name">Скрыть текст</string>
     <string name="rendering_attr_hideWoodScrubs_name">Скрыть леса и кустарники</string>
     <string name="rendering_attr_moreDetailed_name">Более подробно</string>
     <string name="rendering_attr_lessDetailed_name">Менее подробно</string>
     <string name="rendering_attr_showSurfaceGrade_name">Отображать качество дорог</string>
     <string name="rendering_attr_showSurfaces_name">Отображать тип покрытия</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Скрыть непроезжие дороги</string>
+    <string name="rendering_attr_buildings15zoom_name">Здания на масштабе 15</string>
+    <string name="rendering_attr_hideAccess_name">Скрыть тип доступа</string>
+    <string name="rendering_attr_showAccess_name">Показать тип доступа</string>
+    <string name="rendering_attr_showCycleRoutes_name">Показать веломаршруты</string>
+    <string name="osmo_auth_error_short">Сбой авторизации</string>
     </resources>
