@@ -1901,4 +1901,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路的品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示道路表面</string>
     <string name="rendering_attr_cycleRoutes_name">顯示自行車道</string>
+    <string name="rendering_attr_showCycleRoutes_name">顯示自行車道</string>
     </resources>
