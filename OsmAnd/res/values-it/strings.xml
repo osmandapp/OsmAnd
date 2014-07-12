@@ -1902,7 +1902,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_auth_error">Errore di autorizzazione OsMo: %1$s.\nPotrebbe essere un disservizio temporaneo oppure che la registrazione è scaduta.\nVuoi procedere con una nuova registrazione?</string>
     <string name="rendering_attr_hideBuildings_name">Nascondi gli edifici</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Nascondi le strade non carrabili</string>
-    <string name="rendering_attr_hideText_name">Nascondi le scritte</string>
+    <string name="rendering_attr_hideText_name">Nascondi il testo</string>
     <string name="rendering_attr_hideWoodScrubs_name">Nascondi foreste e boscaglie</string>
     <string name="rendering_attr_buildings15zoom_name">Edifici dal zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Più dettagliato</string>
