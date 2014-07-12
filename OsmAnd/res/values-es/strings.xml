@@ -1781,4 +1781,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="local_index_unselect_gpx_file">No seleccionado</string>
     <string name="local_index_select_gpx_file">Seleccionar para mostrar</string>
     <string name="no_index_file_to_download">No hay nada que descargar, compruebe la conexión a Internet.</string>
+    <string name="rendering_attr_hideBuildings_name">Ocultar edificios</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Ocultar vías no aptas para vehículos</string>
+    <string name="rendering_attr_hideText_name">Ocultar textos</string>
     </resources>
