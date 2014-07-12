@@ -325,8 +325,8 @@
 	<string name="accessibility_preferences_descr">協助工具的相關偏好設定</string>
 	<string name="accessibility_preferences">協助工具</string>
 	<string name="rendering_out_of_memory">沒有足夠的處理記憶體去顯示已選取的區域</string>
-	<string name="use_fluorescent_overlays">螢光色的覆疊層</string>
-	<string name="use_fluorescent_overlays_descr">使用螢光色顯示軌跡與導航路線</string>
+	<string name="use_fluorescent_overlays">螢光覆疊層</string>
+	<string name="use_fluorescent_overlays_descr">使用螢光色彩來顯示軌跡與導航路線</string>
 	<string name="offline_edition">離線編輯</string>
 	<string name="offline_edition_descr">永遠使用離線編輯</string>
 	<string name="update_poi_does_not_change_indexes">在程式中修改興趣點，不會影響到下載的地圖檔案，修改的資料是另外存在裝置上的內部檔案。</string>
