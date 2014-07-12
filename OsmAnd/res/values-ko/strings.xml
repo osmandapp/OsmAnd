@@ -2088,4 +2088,16 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_auto_connect">자동 연결</string>
     <string name="osmo_start_service">OsMo 서비스</string>
     <string name="osmo_gpx_track_downloaded">OsMo 트랙 %1$s 다운로드됨.</string>
+    <string name="rendering_attr_hideBuildings_name">건물 숨기기</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">비 차량 고속도로 숨기기</string>
+    <string name="rendering_attr_hideText_name">텍스트 숨기기</string>
+    <string name="rendering_attr_hideWoodScrubs_name">나무와 스크럽 숨기기</string>
+    <string name="rendering_attr_buildings15zoom_name">15 줌에 있는 건물</string>
+    <string name="rendering_attr_moreDetailed_name">더 상세히</string>
+    <string name="rendering_attr_lessDetailed_name">덜 상세히</string>
+    <string name="rendering_attr_hideAccess_name">액세스 유형 숨기기</string>
+    <string name="rendering_attr_showAccess_name">액세스 유형을 표시합니다</string>
+    <string name="rendering_attr_showSurfaceGrade_name">도로의 품질 표시</string>
+    <string name="rendering_attr_showSurfaces_name">도로 표면 표시</string>
+    <string name="rendering_attr_showCycleRoutes_name">자전거 노선 표시하기</string>
     </resources>
