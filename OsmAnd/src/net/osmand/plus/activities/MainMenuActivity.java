@@ -57,6 +57,7 @@ public class MainMenuActivity extends Activity {
 	
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
+	protected static final boolean TIPS_AND_TRICKS = false;
 	
 	private ProgressDialog startProgressDialog;
 	
@@ -161,9 +162,16 @@ public class MainMenuActivity extends Activity {
 		helpButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				TipsAndTricksActivity tactivity = new TipsAndTricksActivity(activity);
-				Dialog dlg = tactivity.getDialogToShowTips(false, true);
-				dlg.show();
+				if(TIPS_AND_TRICKS) {
+					TipsAndTricksActivity tactivity = new TipsAndTricksActivity(activity);
+					Dialog dlg = tactivity.getDialogToShowTips(false, true);
+					dlg.show();					
+				} else {
+					final Intent helpIntent = new Intent(activity, HelpActivity.class);
+					activity.startActivity(helpIntent);
+				}
+
+				
 			}
 		});
 	}
@@ -287,10 +295,20 @@ public class MainMenuActivity extends Activity {
 					pref.edit().putInt(TIPS_SHOW, ++i).commit();
 				}
 				if (i == 1 || i == 5 || appVersionChanged) {
+					if(TIPS_AND_TRICKS) {
 					TipsAndTricksActivity tipsActivity = new TipsAndTricksActivity(this);
 					Dialog dlg = tipsActivity.getDialogToShowTips(!appVersionChanged, false);
 					dlg.show();
 					dialogShown = true;
+					} else {
+						if(appVersionChanged) {
+							final Intent helpIntent = new Intent(activity, HelpActivity.class);
+							helpIntent.putExtra(HelpActivity.TITLE, Version.getAppVersion(getMyApplication()));
+							helpIntent.putExtra(HelpActivity.URL, "changes-1.8.html");
+							activity.startActivity(helpIntent);
+							dialogShown = true;
+						}
+					}
 				}
 			}
 		}
@@ -306,7 +324,7 @@ public class MainMenuActivity extends Activity {
 				checkVectorIndexesDownloaded();
 			}
 		}
-		if(appCustomization.checkExceptionsOnStart()){
+		if(appCustomization.checkExceptionsOnStart() && !dialogShown){
 			checkPreviousRunsForExceptions(firstTime);
 		}
 	}

@@ -34,7 +34,7 @@
 				<include name="*.xml"/>
 			</fileset>
 		</copy>
-		<copy todir="${src.absolute.dir}/help/">
+		<copy todir="assets/help/">
 			<fileset dir="../../help/" >
 				<include name="*.html"/>
 				<include name="screens/**/*.png"/>
