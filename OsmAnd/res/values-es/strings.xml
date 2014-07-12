@@ -1784,4 +1784,24 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="rendering_attr_hideBuildings_name">Ocultar edificios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ocultar vías no aptas para vehículos</string>
     <string name="rendering_attr_hideText_name">Ocultar textos</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Ocultar bosques y matorrales</string>
+    <string name="rendering_attr_buildings15zoom_name">Edificios en zoom 15</string>
+    <string name="rendering_attr_moreDetailed_name">Más detallado</string>
+    <string name="rendering_attr_lessDetailed_name">Menos detallado</string>
+    <string name="rendering_attr_hideAccess_name">Ocultar el tipo de acceso</string>
+    <string name="rendering_attr_showAccess_name">Mostrar el tipo de acceso</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Mostar la calidad de las carreteras</string>
+    <string name="rendering_attr_showSurfaces_name">Mostrar superficie de carreteras</string>
+    <string name="rendering_attr_showCycleRoutes_name">Mostrar rutas ciclistas</string>
+    <string name="osmo_auth_error_short">Falló la autorización</string>
+    <string name="osmo_auth_error">Error de autorización OsMo: %1$s.\nPuede deberse a que el servicio esté temporalmente caído o que tu registro ha expirado.\n¿Quieres realizar un nuevo registro?</string>
+    <string name="osmo_group_by_invite">Entrar por invitación</string>
+    <string name="osmo_group_information_desc">" - ¡Todos los grupos creados son públicos!. Si quieres ser anónimo, conecta dispositivos directamente a través de identificadores Tracker.\n - El grupo puede ser registrado hasta por 16 personas.\n - En caso de inactividad o que sólo 1 persona esté activa durante 2 semanas, se eliminará el grupo.\n - Puede restringir la entrada de grupo, como sólo por invitación, pero para controlar el grupo tienes que ir a la consola de administración.\n - Si tienes que crear un grupo, pero con otras condiciones, por favor contacta con http://osmo.mobi"</string>
+    <string name="osmo_group_information">¡Por favor, lea antes de crear un grupo!</string>
+    <string name="osmo_not_signed_in">Fallo en conexión a OsMo</string>
+    <string name="osmo_gpx_points_downloaded">Puntos OsMo %1$s descargados.</string>
+    <string name="osmo_auto_connect_descr">Conectar automáticamente al servicio después de iniciar la aplicación</string>
+    <string name="osmo_auto_connect">Autoconectar</string>
+    <string name="osmo_start_service">Servicio OsMo</string>
+    <string name="osmo_gpx_track_downloaded">Pista OsMo %1$s descargada.</string>
     </resources>
