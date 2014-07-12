@@ -37,7 +37,7 @@
 		<copy todir="assets/help/">
 			<fileset dir="../../help/" >
 				<include name="*.html"/>
-				<include name="screens/**/*.png"/>
+				<include name="images/**/*.png"/>
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/render/">
