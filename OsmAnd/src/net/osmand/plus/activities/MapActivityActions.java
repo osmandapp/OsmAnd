@@ -906,9 +906,14 @@ public class MapActivityActions implements DialogProvider {
 					
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						TipsAndTricksActivity tactivity = new TipsAndTricksActivity(mapActivity);
-						Dialog dlg = tactivity.getDialogToShowTips(false, true);
-						dlg.show();
+						if (MainMenuActivity.TIPS_AND_TRICKS) {
+							TipsAndTricksActivity tactivity = new TipsAndTricksActivity(mapActivity);
+							Dialog dlg = tactivity.getDialogToShowTips(false, true);
+							dlg.show();
+						} else {
+							final Intent helpIntent = new Intent(mapActivity, HelpActivity.class);
+							mapActivity.startActivity(helpIntent);
+						}
 					}
 				}).reg();
 		final OsmAndLocationProvider loc = app.getLocationProvider();

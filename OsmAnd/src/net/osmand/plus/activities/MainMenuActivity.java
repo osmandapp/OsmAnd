@@ -57,7 +57,7 @@ public class MainMenuActivity extends Activity {
 	
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
-	protected static final boolean TIPS_AND_TRICKS = false;
+	public static final boolean TIPS_AND_TRICKS = false;
 	
 	private ProgressDialog startProgressDialog;
 	
