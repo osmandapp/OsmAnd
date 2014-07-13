@@ -28,7 +28,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	
 	public static final int[] BG_SECONDS = new int[]{0, 30, 60, 90};
 	public static final int[] BG_MINUTES = new int[]{2, 3, 5, 10, 15, 30, 60, 90};
-	private final static boolean REGISTER_BG_SETTINGS = false;
+	private final static boolean REGISTER_BG_SETTINGS = true;
 	private static final int[] SECONDS = OsmandMonitoringPlugin.SECONDS;
 	private static final int[] MINUTES = OsmandMonitoringPlugin.MINUTES;
 	
@@ -84,13 +84,14 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	private void createLiveSection(PreferenceScreen grp) {
 		PreferenceCategory cat;
 		cat = new PreferenceCategory(this);
-		cat.setTitle(R.string.live_monitoring);
+		cat.setTitle(R.string.live_monitoring_m);
 		grp.addPreference(cat);
 		
 		cat.addPreference(createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
 				R.string.live_monitoring_url_descr));
-		cat.addPreference(createCheckBoxPreference(settings.LIVE_MONITORING, R.string.live_monitoring,
-				R.string.live_monitoring_descr));
+		final CheckBoxPreference liveMonitoring = createCheckBoxPreference(settings.LIVE_MONITORING, R.string.live_monitoring_m,
+				R.string.live_monitoring_m_descr);
+		cat.addPreference(liveMonitoring);
 		cat.addPreference(createTimeListPreference(settings.LIVE_MONITORING_INTERVAL, SECONDS,
 				MINUTES, 1000, R.string.live_monitoring_interval, R.string.live_monitoring_interval_descr));
 	}

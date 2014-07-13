@@ -54,10 +54,10 @@
 	<string name="day_night_info">Gündüz/gece bilgisi</string>
 	<string name="map_widget_day_night">Gündüz/gece haritası</string>
 	<string name="osmand_short_description_80_chars">OsmAnd açık kaynak kodlu, çevrımdışı ve çevrimiçi çalışabilen bir navigasyon uygulamasıdır</string>
-	<string name="live_monitoring_mode_on">Durdur\nanlık takip</string>
+	
 	
 	<string name="map_widget_view_direction">Görüntüleme yönü</string>
-	<string name="monitoring_mode_off">GPX Kaydet</string>
+	
 	<string name="bg_service_sleep_mode_off">Aktifleştir\nuyku modu</string>
 	<string name="bg_service_sleep_mode_on">Durdur\nuyku modu</string>
 	<string name="int_continuosly">Devam et</string>
@@ -258,7 +258,7 @@
 \nGün batımı:%2$s</string>
 	<string name="map_widget_vector_attributes">Rendering öznitelikleri:</string>
 	<string name="map_widget_renderer">Harita tarzı</string>
-	<string name="live_monitoring_mode_off">Başlat\ncanlı takip</string>
+	
 	
 	<string name="layer_map_appearance">Ekran yapılandırma</string>
 	<string name="show_lanes">Şeritleri göster</string>
@@ -270,7 +270,7 @@
 	<string name="map_widget_show_ruler">Cetvel</string>
 	<string name="map_widget_appearance">Çeşitli:</string>
 	<string name="map_widget_transparent">Şeffaf skin</string>
-	<string name="monitoring_mode_on">Durdur\nGPX kaydı.</string>
+	
 	<string name="gps_wakeup_interval">GPS uyandırma aralığı:%1$s</string>
 	<string name="map_widget_config">Ekranı ayarla</string>
 	<string name="map_widget_parking">Park et</string>
@@ -681,8 +681,8 @@
 	<string name="local_openstreetmap_descr_title">Asenkron OSM düzenleme:</string>
 	<string name="local_openstreetmap_settings">Yerel olarak kaydedilen OSM POIler/Hatalar</string>
 	<string name="local_openstreetmap_settings_descr">Yerel veritabanında belirtilmiş POIler/Hataları OSMde gösterme ve yönetme</string>
-	<string name="live_monitoring_descr">Belirtilen bir web hizmetine izleme gönder</string>
-	<string name="live_monitoring">Çevrimiçi canlı izleme</string>
+	
+	
 	<string name="live_monitoring_interval_descr">Canlı izleme aralığı belirtin</string>
 	<string name="live_monitoring_interval">Canlı izleme aralığı</string>
 	<string name="live_monitoring_url_descr">"Parametre sözdizimi ile web adresini belirtin: Enlem={0}, Boylam={1}, Damga zamanı={2}, HDOP={3}, Rakım={4}, Hız={5}, bearing={6} "</string>
@@ -758,9 +758,8 @@
 	<string name="city_type_village">Köy</string>
 	<string name="city_type_town">Kasaba</string>
 	<string name="city_type_city">Şehir</string>
-	<string name="layer_poi_label">POI etiketler</string>
-	<string name="save_current_track_widget">mağaza↵
-        \n Geçerli GPX iz</string>
+	
+	
 	<string name="map_widget_gps_info">GPS Bilgisi</string>
     <string name="access_arrival_time">Varış Zamanı</string>
     <string name="item_checked">işaretli</string>

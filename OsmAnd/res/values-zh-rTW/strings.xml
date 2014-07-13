@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追蹤外掛元件，使用位置日誌服務(GPX 記錄，線上追蹤查詢)</string>
@@ -110,8 +109,8 @@
 	<string name="map_widget_day_night">日/夜地圖</string>
 	<string name="map_widget_vector_attributes">繪製屬性：</string>
 	<string name="map_widget_renderer">地圖樣式</string>
-	<string name="live_monitoring_mode_off">開始\n 線上追蹤</string>
-	<string name="live_monitoring_mode_on">停止\n 線上追蹤</string>
+	
+	
 	
 	
 	<string name="layer_map_appearance">組態螢幕顯示</string>
@@ -125,8 +124,8 @@
 	<string name="map_widget_appearance">其餘的元件：</string>
 	<string name="map_widget_view_direction">目視方向</string>
 	<string name="map_widget_transparent">透明面版</string>
-	<string name="monitoring_mode_off">記錄 GPX</string>
-	<string name="monitoring_mode_on">停止\n GPX 記錄。</string>
+	
+	
 	<string name="bg_service_sleep_mode_off">開啟\n 休眠模式</string>
 	<string name="bg_service_sleep_mode_on">關閉\n 休眠模式</string>
 	<string name="gps_wakeup_interval">GPS 喚醒間隔：%s</string>
@@ -339,8 +338,8 @@
 	<string name="local_openstreetmap_descr_title">與 OSM 非同步編輯：</string>
 	<string name="local_openstreetmap_settings">裝置端已儲存的 OSM 興趣點/問題</string>
 	<string name="local_openstreetmap_settings_descr">顯示和管理在裝置端資料庫的 OSM 興趣點/問題注解</string>
-	<string name="live_monitoring_descr">傳送軌跡到指定的網路服務</string>
-	<string name="live_monitoring">線上即時追蹤</string>
+	
+	
 	<string name="live_monitoring_interval_descr">指定線上即時追蹤間隔</string>
 	<string name="live_monitoring_interval">線上即時追蹤間隔</string>
 	<string name="live_monitoring_url_descr">指定位置的參數語法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -433,7 +432,7 @@
 	<string name="city_type_village">農村</string>
 	<string name="city_type_town">鎮</string>
 	<string name="city_type_city">市</string>
-	<string name="layer_poi_label">興趣點標簽</string>
+	
 	<string name="animate_route_off">停止模擬</string>
 	<string name="animate_route">開始模擬</string>
 	<string name="file_can_not_be_renamed">檔名不可更改。</string>
@@ -1087,8 +1086,7 @@
     <string name="favourites_list_activity">選取我的最愛</string>
     <string name="local_openstreetmap_act_title">OSM 修改</string>
     <string name="default_buttons_other_actions">其它的作用</string>
-    <string name="save_current_track_widget">儲存
-        \n現在的 GPX 軌跡</string>
+    
 	<string name="layer_hillshade">地形陰影圖層</string>
     <string name="map_widget_gps_info">GPS 資訊</string>
     <string name="access_arrival_time">抵達時間</string>
@@ -1900,6 +1898,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="rendering_attr_showAccess_name">顯示存取類型</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路的品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示道路表面</string>
-    <string name="rendering_attr_cycleRoutes_name">顯示自行車道</string>
+    
     <string name="rendering_attr_showCycleRoutes_name">顯示自行車道</string>
     </resources>

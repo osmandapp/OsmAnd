@@ -250,7 +250,7 @@
 	<string name="city_type_village">Landsby</string>
 	<string name="city_type_town">By</string>
 	<string name="city_type_city">By</string>
-	<string name="layer_poi_label">Interessepunkt-påskrifter</string>
+	
 	<string name="animate_route_off">Stopp simulering</string>
 	<string name="animate_route">Start simulering</string>
 	<string name="file_can_not_be_renamed">Fil kan ikke endre navn.</string>

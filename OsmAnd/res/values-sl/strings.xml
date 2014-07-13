@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="search_button">Iskanje</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
 	<string name="favorites_Button">Moji kraji</string>
@@ -227,8 +226,8 @@
 	<string name="settings_direction_style">Stil smeri</string>
 	<string name="settings_direction_style_descr">Izberi stil za izražanje smeri med premikanjem</string>
 	<string name="i_am_here">Tukaj sem</string>
-	<string name="monitoring_mode_off">Snemaj sled</string>
-	<string name="monitoring_mode_on">Zaustavi\n snemanje sledi.</string>
+	
+	
 	<string name="save_route_as_gpx">Shrani pot kot datoteko GPX</string>
 	
 	<string name="osmand_monitoring_description">Pokaži nastavitve, ki določajo snemanje sledi v GPX datoteke oz. sledenje v živo s pomočjo spletne storitve.</string>
@@ -334,8 +333,8 @@
 	<string name="select_navigation_mode">Izberi način prevoza</string>
 	
 	<string name="day_night_info_description">Vzhod: %1$s\nZahod: %2$s</string>
-	<string name="live_monitoring_mode_off">Začni\nsledenje</string>
-	<string name="live_monitoring_mode_on">Zaustavi\n sledenje v živo</string>
+	
+	
 	
 	
 	<string name="layer_map_appearance">Nastavitve zaslona</string>
@@ -709,8 +708,8 @@
 	<string name="local_openstreetmap_descr_title">Asinhrono urejanje OSM:</string>
 	<string name="local_openstreetmap_settings">Krajevno shranjene točke POI/hrošči OSM</string>
 	<string name="local_openstreetmap_settings_descr">Pokaži in upravljaj točke POI/hrošče OSM, ki so zabeleženi v krajevni podatkovni zbirki</string>
-	<string name="live_monitoring_descr">Pošlji sledenje na določeno spletno storitev</string>
-	<string name="live_monitoring">Spletno sledenje v živo</string>
+	
+	
 	<string name="live_monitoring_interval_descr">Določi interval sledenja v živo</string>
 	<string name="live_monitoring_interval">Interval sledenja v živo</string>
 	<string name="live_monitoring_url_descr">Navedite spletne naslove z naslednjo sintakso za parametre: geogr. šir.={0}, geogr. dolž.={1}, čas={2}, hdop={3}, višina={4}, hitrost={5}, usmeritev={6}</string>
@@ -755,7 +754,7 @@
 	<string name="pref_vector_map">Nastavitve vektorskega zemljevida</string>
 	<string name="delete_confirmation_msg">Izbris %1$s?</string>
 	<string name="city_type_suburb">Predmestje</string>
-	<string name="layer_poi_label">Oznake POI</string>
+	
 	<string name="file_can_not_be_renamed">Datoteke ni mogoče preimenovati.</string>
 	<string name="file_with_name_already_exists">Datoteka s tem imenom že obstaja.</string>
 	<string name="gpx_navigation">Pot GPX</string>
@@ -1268,8 +1267,7 @@ Pomembnejše lastnosti:
 	\n\t* Prenovljen izgled
 	\n\t* Odpravljene napake
     </string>
-    <string name="save_current_track_widget">Shrani
-\n trenutno sled GPX</string>
+    
 	<string name="street_name">Ulica</string>
 	<string name="hno">Hišna številka</string>
     <string name="tip_recent_changes_1_3_t">Spremembe v 1.3:

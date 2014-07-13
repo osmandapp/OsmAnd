@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="tip_recent_changes_0_8_1_t">"Promjene u 0.8.1 : "</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">"Promjene u 0.8.1 : "</string>
   <string name="asap">Što prije</string>
   <string name="save_route_as_gpx">Sačuvajte put kao GPX datoteku</string>
   <string name="route_roundabout">Kružni tok : idite %1$d izlaz i idite</string>
@@ -123,7 +122,7 @@
     <string name="prefer_in_routing_title">Preferiraj...</string>
 	<string name="prefer_in_routing_descr">Preferiraj autocestu</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="save_current_track_widget">Spasi\n…trenutnu GPX traku</string>
+    
 	<string name="map_widget_gps_info">GPS status</string>
     <string name="default_buttons_no">Ne</string>
 	<string name="default_buttons_yes">Da</string>

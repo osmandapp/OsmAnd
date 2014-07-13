@@ -132,8 +132,8 @@
   <string name="local_openstreetmap_descr_title">OSM POI-ის ასინქრონული ჩასწორება:</string>
   <string name="local_openstreetmap_settings">ადგილობრივად შენახული OSM POI-ები/Bugs</string>
   <string name="local_openstreetmap_settings_descr">ადგილობრივ ბაზაში შენახული OSM POI-ების/Bugs ჩვენება და მართვა</string>
-  <string name="live_monitoring_descr">დევნის მითითებულ ვებსერვისზე გაგზავნა</string>
-  <string name="live_monitoring">დევნა მიმდინარე რეჟიმში</string>
+  
+  
   <string name="live_monitoring_interval_descr">მიუთითეთ მიმდინარე რეჟიმში დევნის ინტერვალი</string>
   <string name="live_monitoring_interval">ცოცხალი დევნის ინტერვალი</string>
   <string name="live_monitoring_url_descr">მიუთითეთ ვებ მისამართუ შემდეგი პარამეტრების სინტაქსით : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -213,7 +213,7 @@
   <string name="city_type_village">სოფელი</string>
   <string name="city_type_town">ქალაქი</string>
   <string name="city_type_city">ქალაქი</string>
-  <string name="layer_poi_label">POI ჭდეები</string>
+  
   <string name="animate_route_off">ანიმაციის შეჩერება</string>
   <string name="animate_route">ანიმაციის დაწყება</string>
   <string name="tip_recent_changes_0_6_8_t">"ცვლილებები 0.6.8-ში : \n\t- მთლიანად შეიცვალა ძებნის ინტერფეისი! ძებნა გახდა უფრო სწრაფი. შეიძლება ერთიდაიგივე რამის ძებნა სხვადასხვა პარამეტრებით.\n\t- POI-ის ძებნა დიდ არეალზე.\n\t- ჩასწორებულია რუკის ციმციმი (შეცდომა 641)\n\t- თვითცენტრირებადი რუკის პარამეტრი (შეცდომა 356)\n\t- GPX ნავიგაცია გადატანილია. \'მიმართულებები\' და \'მიმართულებების შენახვა\' გადატანილია \'გზის შესახებ\'-ში\n\t- POI-ის მონაცემები ინახება .obf ფაილში (01/10/11-ის შემდეგ ჩამოტვირთულ ინდექსებში) \n\t- ჩასწორებულია ხმოვანი შეტყობინებები (GPS მდებარეობა, პირველი ბრძანების უგულებელყოფა)\n\t- Small improvements "</string>
@@ -912,8 +912,8 @@
 <string name="day_night_info">ინფორმაცია დღეღამის შესახებ</string>
 <string name="map_widget_day_night">დღეღამის რუკა</string>
 <string name="map_widget_vector_attributes">რენდერის ატრიბუტები:</string>
-<string name="live_monitoring_mode_off">ცოცხალი დევნის რეჟიმის გამორთვა</string>
-<string name="live_monitoring_mode_on">ცოცხალი დევნის რეჟიმის ჩართვა</string>
+
+
 <string name="layer_map_appearance">ეკრანის გამართვა</string>
 <string name="show_lanes">ბილიკების ჩვენება</string>
 <string name="avoid_unpaved">მოუკირწყლავი გზებისათვის თავის არიდება</string>
@@ -927,8 +927,8 @@
 <string name="map_widget_appearance">დარჩენილი ელემენტები:</string>
 <string name="map_widget_view_direction">ხედვის მიმართულება</string>
 <string name="map_widget_transparent">გამჭირვალე ხედი</string>
-<string name="monitoring_mode_off">GPX-ის ჩაწერის გამორთვა</string>
-<string name="monitoring_mode_on">GPX-ის ჩაწერის ჩართვა.</string>
+
+
 <string name="gps_wakeup_interval">GPS-ის გაღვიძების ინტერვალი: %s</string>
 <string name="int_continuosly">გაგრძელებადი</string>
 <string name="email">ელ-ფოსტა</string>
@@ -1198,8 +1198,7 @@
     <string name="favourites_list_activity">რჩეულის არჩევა</string>
     <string name="local_openstreetmap_act_title">OSM ცვლილებები</string>
     <string name="default_buttons_other_actions">სხვა საქმიანობები</string>
-    <string name="save_current_track_widget">შენახვა
-	\nმიმდინარე GPX გზაში</string>
+    
 	<string name="map_widget_gps_info">GPS ინფორმაცია</string>
     <string name="tip_recent_changes_1_1_4_t">ცვლილებები 1.1.4-ში
 	\n\t* UI-ს მთლიანი შეცვლა

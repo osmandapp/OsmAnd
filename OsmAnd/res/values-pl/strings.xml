@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
@@ -20,7 +19,7 @@
   <string name="city_type_village">Wieś</string>
   <string name="city_type_town">Miasteczko</string>
   <string name="city_type_city">Miasto</string>
-  <string name="layer_poi_label">Etykiety POI</string>
+  
   <string name="animate_route_off">Zatrzymaj symulację</string>
   <string name="animate_route">Uruchom symulację</string>
   <string name="tip_recent_changes_0_6_8_t">"Zmiany w 0.6.8:
@@ -805,8 +804,8 @@
   <string name="local_openstreetmap_descr_title">Asynchroniczna edycja OSM:</string>
   <string name="local_openstreetmap_settings">Lokalnie zapisane POI/Bugs OSM</string>
   <string name="local_openstreetmap_settings_descr">Pokaż i zarządzaj POI/Bugs OSM zapisanymi w lokalnej bazie danych</string>
-  <string name="live_monitoring_descr">Wysyłaj informacje o pozycji do wybranej usługi sieciowej</string>
-  <string name="live_monitoring">Śledzenie online</string>
+  
+  
   <string name="live_monitoring_interval_descr">Określ interwał pomiędzy wysyłaniem danych</string>
   <string name="live_monitoring_interval">Interwał wysyłania danych</string>
   <string name="live_monitoring_url_descr">Określ adres usługi webowej używając następujących parametrów ({n} określa dany parametr): {0}=szer., {1}=dł., {2}=znacznik czasu, {3}=HDOP, {4}=wysokość, {5}=prędkość, kierunek={6}</string>
@@ -975,7 +974,7 @@
   <string name="avoid_in_routing_descr">Unikaj dróg płatnych, nieutwardzonych, promów</string>
   <string name="show_warnings_title">Pokaż ostrzeżenia…</string>
   <string name="show_warnings_descr">Konfiguruj ostrzeżenia ruchu (ograniczenia prędkości, przymusowe przystanki, progi zwalniające), ostrzeżenia o fotoradarach i informacje o pasach</string>
-  <string name="monitoring_mode_off">Zapisuj GPX</string>
+  
   <string name="tip_rotation_switching_t_v2">Możesz zmieniać sposób obracania mapy przez klikanie na ikonie kompasu.
 		\n\nMasz do wyboru:
 		\n\t* \'Nie obraca (północ jest na górze)\' - Mapa nie będzie obracana. Północ zawsze będzie na górze.
@@ -1069,14 +1068,14 @@
 		- głosy zarejestrowane i generowane automatycznie
 	</string>
 	<string name="select_navigation_mode">Wybierz tryb poruszania się</string>
-	<string name="live_monitoring_mode_off">Uruchom\nśledzenie online</string>
-	<string name="live_monitoring_mode_on">Zatrzymaj\nśledzenie online</string>
+	
+	
 	<string name="map_widget_fluorescent">Odblaskowe trasy</string>
 	<string name="map_widget_show_ruler">Linijka</string>
 	<string name="map_widget_appearance">Pozostałe elementy:</string>
 	<string name="map_widget_view_direction">Kierunek patrzenia</string>
 	<string name="map_widget_transparent">Przezroczysta skórka</string>
-	<string name="monitoring_mode_on">Zatrzymaj\nrejestrację GPX.</string>
+	
 	<string name="gps_wakeup_interval">Częstość wybudzania GPS: %s</string>
 	<string name="int_continuosly">Ciągły</string>
 	<string name="tip_day_night_mode_t_v2">Tryb wyświetlania niektórych map wektorowych może być wybierany jako dzienny (jaśniejszy) lub nocny (ciemniejszy). Nocne kolory są bezpieczniejsze podczas jazdy w nocy.
@@ -1246,8 +1245,7 @@
 \n\t* Zmiany w interfejsie
 \n\t* Naprawa błędów
     </string>
-    <string name="save_current_track_widget">Zapisz
-\n aktualny ślad GPX</string>
+    
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapy i Nawigacja</string>
 	<string name="street_name">Ulica</string>
 	<string name="hno">Numer domu</string>

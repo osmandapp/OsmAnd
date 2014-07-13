@@ -116,8 +116,8 @@
 	<string name="day_night_info">Informacije dan/noć</string>
 	<string name="map_widget_day_night">Dnevna / noćna karta</string>
 	<string name="map_widget_renderer">Stil karte</string>
-	<string name="live_monitoring_mode_off">Pokreni\n online praćenje</string>
-	<string name="live_monitoring_mode_on">Zaustavi\n online praćenje</string>
+	
+	
 	<string name="layer_map_appearance">Konfiguracija zaslona</string>
 	<string name="show_lanes">Prikaži staze</string>
 	<string name="avoid_unpaved">Izbjegavaj neasfaltirane ceste</string>
@@ -127,8 +127,8 @@
 	<string name="map_widget_view_direction">Smjer kretanja</string>
 	<string name="map_widget_appearance">Ostali elementi:</string>
 	<string name="map_widget_transparent">Transparentna tema</string>
-	<string name="monitoring_mode_off">Snimi GPX</string>
-	<string name="monitoring_mode_on">Zaustavi\n GPX snimanje.</string>
+	
+	
 	<string name="bg_service_sleep_mode_off">Omogući\n stanje mirovanja</string>
 	<string name="bg_service_sleep_mode_on">Onemogući\n stanje mirovanja</string>
 	<string name="int_continuosly">Stalno</string>
@@ -812,7 +812,7 @@
 	<string name="city_type_village">Selo</string>
 	<string name="city_type_town">Mjesto</string>
 	<string name="city_type_city">Grad</string>
-	<string name="layer_poi_label">POI oznake</string>
+	
 	<string name="delete_confirmation_msg">Brisanje %1$s?</string>
 	<string name="auto_follow_route_navigation_descr">Automatski centriraj prikaz karte samo tijekom navigacije.</string>
 	<string name="auto_follow_location_enabled">Automatsko centriranje karte je uključeno.</string>
@@ -909,8 +909,7 @@
 	<string name="map_settings_descr">Konfiguracija zaslona</string>
 	<string name="hno">Kućni broj</string>
     <string name="street_name">Ulica</string>
-	<string name="save_current_track_widget">Spremi
-\n trenutni GPX</string>
+	
 	<string name="select_address_activity">Odaberite adresu</string>
     <string name="cancel_navigation">Zaustavi navigaciju</string>
     <string name="clear_destination">Obriši odredište</string>

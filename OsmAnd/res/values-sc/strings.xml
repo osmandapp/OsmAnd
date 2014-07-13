@@ -298,8 +298,7 @@ Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas pres
     <string name="favourites_list_activity">Issèbera preferridu</string>
     <string name="local_openstreetmap_act_title">Mudas OSM</string>
     <string name="default_buttons_other_actions">Àteras atziones</string>
-    <string name="save_current_track_widget">Sarba
-        \n sa caminera GPX atuale</string>
+    
 	<string name="tip_recent_changes_1_2_t">Curretziones in sa 1.2.1:
 	    \n\t*Currettu Geo Intent (Foursquare, c:geo)
 	    \n\t*Currettu sa tremuledda de s\'ischermu durante su nàvigu

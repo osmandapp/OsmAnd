@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
     <string name="poi_filter_emergency">Επείγοντα</string>
@@ -98,8 +97,8 @@
 	<string name="map_widget_day_night">Χάρτης ημέρας/νύχτας</string>
 	<string name="map_widget_vector_attributes">Χαρακτηριστικά απεικόνισης:</string>
 	<string name="map_widget_renderer">Στυλ χάρτη</string>
-	<string name="live_monitoring_mode_off">Έναρξη\n online ιχνηλάτησης</string>
-	<string name="live_monitoring_mode_on">Διακοπή\n online ιχνηλάτησης</string>
+	
+	
 	
 	
 	<string name="layer_map_appearance">Διαμόρφωση οθόνης</string>
@@ -113,8 +112,8 @@
 	<string name="map_widget_appearance">Παραμένοντα στοιχεία:</string>
 	<string name="map_widget_view_direction">Κατεύθυνση επισκόπησης</string>
 	<string name="map_widget_transparent">Διάφανο skin</string>
-	<string name="monitoring_mode_off">Εγγραφή GPX</string>
-	<string name="monitoring_mode_on">Διακοπή\n εγγρ. GPX.</string>
+	
+	
 	<string name="bg_service_sleep_mode_off">Ενεργοποίηση\n κατάστασης νάρκης</string>
 	<string name="bg_service_sleep_mode_on">Απενεργοποίηση\n κατάστασης νάρκης</string>
 	<string name="gps_wakeup_interval">Διάστημα αφύπνισης GPS: %s</string>
@@ -361,8 +360,8 @@
 	<string name="local_openstreetmap_descr_title">Ασύγχρονη επεξεργασία OSM:</string>
 	<string name="local_openstreetmap_settings">Τοπικά αποθηκευμένα ΣΕ/Σφάλματα OSM</string>
 	<string name="local_openstreetmap_settings_descr">Εμφάνιση και διαχείριση των ΣΕ/Σφαλμάτων OSM σημειωμένων στην τοπική βάση δεδομένων</string>
-	<string name="live_monitoring_descr">Αποστολή ιχνηλάτησης σε μια συγκεκριμένη υπηρεσία web</string>
-	<string name="live_monitoring">Online ιχνηλάτηση</string>
+	
+	
 	<string name="live_monitoring_interval_descr">Καθορίστε το διάστημα της online ιχνηλάτησης</string>
 	<string name="live_monitoring_interval">Διάστημα online ιχνηλάτησης</string>
 	<string name="live_monitoring_url_descr">Καθορίστε τη διεύθυνση web με την σύνταξη παραμέτρων : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5},bearing={6}</string>
@@ -466,7 +465,7 @@
 	<string name="city_type_village">Χωριό</string>
 	<string name="city_type_town">Κωμόπολη</string>
 	<string name="city_type_city">Πόλη</string>
-	<string name="layer_poi_label">Ετικέτες Σημ Ενδ</string>
+	
 	<string name="animate_route_off">Διακοπή προσομοίωσης</string>
 	<string name="animate_route">Έναρξη προσομοίωσης</string>
 	<string name="tip_recent_changes_0_6_8_t">"Αλλαγές στην 0.6.8 :
@@ -1258,8 +1257,7 @@
 \n\t* Επανασχεδιασμός UI
 		\n\t* Διόρθωση σφαλμάτων
     </string>
-    <string name="save_current_track_widget">Αποθήκευση
-\n τρέχοντος ίχνους GPX</string>
+    
 	<string name="street_name">Οδός</string>
 	<string name="hno">Αριθμός σπιτιού</string>
     <string name="monitoring_settings">Υπηρεσίες καταγραφής &amp; Κατάσταση Νάρκης</string>

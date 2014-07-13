@@ -1,6 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
-  <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+  
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
   <string name="avoid_unpaved">Evitar carreteras sin pavimentar</string>
@@ -14,8 +13,8 @@
   <string name="map_widget_appearance">Elementos restantes:</string>
   <string name="map_widget_view_direction">Dirección de visualización</string>
   <string name="map_widget_transparent">Apecto transparente</string>
-  <string name="monitoring_mode_off">Grabar GPX</string>
-  <string name="monitoring_mode_on">Parar\n grab. GPX</string>
+  
+  
   <string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
   <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas</string>
   <string name="offline_edition">Edición sin conexión</string>
@@ -39,8 +38,8 @@
   <string name="local_openstreetmap_descr_title">Edición asíncrona de OSM:</string>
   <string name="local_openstreetmap_settings">PDIs/Fallos OSM guardados localmente</string>
   <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDIs/Fallos OSM anotados en la base de datos local</string>
-  <string name="live_monitoring_descr">Envía el seguimiento a un servicio web especificado</string>
-  <string name="live_monitoring">Seguimiento en directo</string>
+  
+  
   <string name="live_monitoring_interval_descr">Especifica el intervalo de seguimiento en directo</string>
   <string name="live_monitoring_interval">Intervalo de seguimiento en directo</string>
   <string name="live_monitoring_url_descr">Especifica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -128,7 +127,7 @@
   <string name="city_type_village">Villa</string>
   <string name="city_type_town">Pueblo</string>
   <string name="city_type_city">Ciudad</string>
-  <string name="layer_poi_label">Etiquetas de PDI</string>
+  
   <string name="animate_route_off">Detener animación</string>
   <string name="animate_route">Comenzar animación</string>
   <string name="tip_recent_changes_0_6_8_t">"Cambios en 0.6.8 : \n\t- Búsqueda completamente rediseñada (PDI, Dirección). Hace la búsqueda de dirección mucho más rápida y sensible. Crea una interfaz de búqueda con muchas opciones diferentes. \n\t- Implementa búsqueda de PDI por nombre en grandes áreas (paises) \n\t- Arregla el parpadeo de la pantalla del mapa para tablets (Issue 641) \n\t- Opción de autocentrado de la vista del mapa (Issue 356) \n\t- Navegación GPX movida a \'Direcciones\' y \'Guardar Direcciones\' movida a \'Sobre ruta\' \n\t- Datos de PDI incluidos en archivo .obf (todos los índices descargados después del 01/10/11) \n\t- Arreglos en los mensajes de voz (arreglo de la posición GPS, omitiendo el primer comando) \n\t- Pequeñas mejoras "</string>
@@ -1283,7 +1282,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
 	<string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
 	<string name="tip_recent_changes_1_1_4_t">"Cambios en 1.1.4:\n\t* Rediseño de interfaz de usuario\n\t* Corrección de errores "
     </string>
-    <string name="save_current_track_widget">Guardar\ntraza GPX actual</string>
+    
 	<string name="street_name">Calle</string>
 	<string name="hno">Número</string>
     <string name="tip_recent_changes_1_3_t">"Cambio en 1.5:\n\t* Tema Holo (personalización de tema) "

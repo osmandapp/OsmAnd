@@ -77,8 +77,8 @@
 	<string name="map_widget_day_night">מפת יום/לילה</string>
 	<string name="map_widget_vector_attributes">מאפייני עיבוד תמונה:</string>
 	<string name="map_widget_renderer">סגנון עיבוד התמונה</string>
-	<string name="live_monitoring_mode_off">התחלה\n במעקב החי</string>
-	<string name="live_monitoring_mode_on">הפסקת\n המעקב החי</string>
+	
+	
 	
 	
 	<string name="layer_map_appearance">הגדרת המסך</string>
@@ -91,8 +91,8 @@
 	<string name="map_widget_appearance">שונות:</string>
 	<string name="map_widget_view_direction">כיוון הצפייה</string>
 	<string name="map_widget_transparent">מעטפת שקופה</string>
-	<string name="monitoring_mode_off">הקלטת GPX</string>
-	<string name="monitoring_mode_on">הפסקת\n הקלטת ה־GPX.</string>
+	
+	
 	<string name="bg_service_sleep_mode_off">הפעלת\n מצב שינה</string>
 	<string name="bg_service_sleep_mode_on">הפסקת\n מצב שינה</string>
 	<string name="gps_wakeup_interval">הפרשי התעוררות של רכיב האיכון: %s</string>
@@ -344,8 +344,8 @@
 	<string name="local_openstreetmap_descr_title">עריכה בלתי מתואמת של OSM:</string>
 	<string name="local_openstreetmap_settings">נ״ע/תקלות של OSM שנשמרו מקומית</string>
 	<string name="local_openstreetmap_settings_descr">הצגה וניהול של נ״ע/תקלות שנרשמו במסד הנתונים המקומי</string>
-	<string name="live_monitoring_descr">שליחת מעקב לשירות מקוון מוגדר</string>
-	<string name="live_monitoring">מעקב חי מקוון</string>
+	
+	
 	<string name="live_monitoring_interval_descr">נא לציין הפסקות בין דיווחי מעקב חי</string>
 	<string name="live_monitoring_interval">הפסקות בין דיווחי מעקב חי</string>
 	<string name="live_monitoring_url_descr">נא לציין את כתובת השרת עם תחביר הפרמטרים הבא: רוחב={0}, אורך={1}, חותמת_זמן={2}, hdop‏={3}, גובה={4}, מהירות={5}, bearing={6} </string>
@@ -440,7 +440,7 @@
 	<string name="city_type_village">כפר</string>
 	<string name="city_type_town">עיר קטנה</string>
 	<string name="city_type_city">עיר</string>
-	<string name="layer_poi_label">תוויות נ״ע</string>
+	
 	<string name="animate_route_off">הפסקת ההנפשה</string>
 	<string name="animate_route">התחלת ההנפשה</string>
 	<string name="tip_recent_changes_0_6_8_t">"שינויים ב־0.6.8 :
@@ -1199,7 +1199,7 @@
     <string name="layer_hillshade">שכבת הצללת תבליט</string>
     <string name="osmand_play_title_30_chars">מפות וניווט עם OsmAnd</string>
 	<string name="osmand_plus_play_title_30_chars">מפות וניווט עם OsmAnd+‎</string>
-	<string name="save_current_track_widget">שמירת\n מסלול האיכון הנוכחי</string>
+	
 	<string name="tip_recent_changes_1_1_4_t">"שינויים ב־1.1.4:
 \n\t* מנשק המשתמש תוכנן מחדש\n\t* תוקנו תקלות "</string>
     <string name="street_name">רחוב</string>

@@ -531,14 +531,19 @@ public class OsmandApplication extends Application {
 			warnings.addAll(resourceManager.reloadIndexes(startDialog));
 			player = null;
 			if (savingTrackHelper.hasDataToSave()) {
-				startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
-				try {
-					warnings.addAll(savingTrackHelper.saveDataToGpx());
-				} catch (RuntimeException e) {
-					warnings.add(e.getMessage());
+				long timeUpdated = savingTrackHelper.getLastTrackPointTime();
+				if (System.currentTimeMillis() - timeUpdated >= 45000) {
+					startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
+					try {
+						warnings.addAll(savingTrackHelper.saveDataToGpx());
+					} catch (RuntimeException e) {
+						warnings.add(e.getMessage());
+					}
 				}
 			}
-
+			if(getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()){
+				startNavigationService(NavigationService.USED_BY_GPX);
+			}
 			// restore backuped favorites to normal file
 			final File appDir = getAppPath(null);
 			File save = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);

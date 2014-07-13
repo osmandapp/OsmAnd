@@ -172,8 +172,8 @@
   <string name="local_openstreetmap_descr_title">Асинхронне редагування OSM:</string>
   <string name="local_openstreetmap_settings">Локальні POI/Баги</string>
   <string name="local_openstreetmap_settings_descr">Показати і керувати локальними POI/Bugs</string>
-  <string name="live_monitoring_descr">Відсилати поточне місцезнаходження на спеціальний web-сервіс</string>
-  <string name="live_monitoring">Онлайн-моніторинг</string>
+  
+  
   <string name="live_monitoring_interval_descr">Вкажіть інтервал надсилання даних</string>
   <string name="live_monitoring_interval">Інтервал надсилання даних</string>
   <string name="live_monitoring_url_descr">Вкажіть веб-адресу з наступними параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -261,7 +261,7 @@
   <string name="city_type_village">Село</string>
   <string name="city_type_town">Місто</string>
   <string name="city_type_city">Велике місто</string>
-  <string name="layer_poi_label">POI мітки</string>
+  
   <string name="animate_route_off">Закінчити моделювання</string>
   <string name="animate_route">Почати моделювання</string>
   <string name="tip_recent_changes_0_6_8_t">Зміни в 0.6.8:
@@ -1164,8 +1164,8 @@
 	<string name="map_widget_show_ruler">Лінійка</string>
 	<string name="map_widget_appearance">Різне:</string>
 	<string name="map_widget_transparent">Прозорість</string>
-	<string name="monitoring_mode_off">Увімкнути запис GPX</string>
-	<string name="monitoring_mode_on">Вимкнути\nзапис GPX.</string>
+	
+	
 	<string name="gps_wakeup_interval">Інтервал пробудження GPS: %s</string>
 	<string name="int_continuosly">Безперервно</string>
 	<string name="map_widget_view_direction">Напрямок</string>
@@ -1173,7 +1173,7 @@
 	<string name="email">Email</string>
 <string name="map_widget_gps_info">GPS дані</string>
     <string name="layer_recordings">Аудіо записи</string>
-    <string name="live_monitoring_mode_off">Ввімкнути трекінг\nв реальному режимі</string>
+    
 	<string name="tip_recent_changes_1_1_4_t">Зміни в 1.1.4:
         \n\t* Редизайн
 		\n\t* Виправлені помилки
@@ -1184,8 +1184,7 @@
     <string name="tip_app_mode_t_v2">OsmAnd підтримує різні профілі для різних режимів.
 		\n\nВи можете змінити поточний профіль, натиснувши кнопку вибору профілів в нижньому лівому куті екрану мапи (іконка автомобіля, велосипеда або пішохода) або при побудові маршруту (\'режим пересування\').
 	</string>
-	<string name="save_current_track_widget">Зберегти
-        \nпоточний GPX трек</string>
+	
 	<string name="download_regular_maps">Повні мапи</string>
     <string name="tip_recent_changes_0_8_3_t">Зміни в 0.8.3:
 	\n\t* Дорожні точки
@@ -1310,7 +1309,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 		- можливість орієнтації мапи за компасом чи напрямком руху, 
 		- показ руху по смугах та обмежень швидкості, голосове супроводження (записане чи синтезоване).
 	</string>
-	<string name="live_monitoring_mode_on">Вимкнути трекінг\nв реальному режимі</string>
+	
 	<string name="tip_rotation_switching_t_v2">Натиснувши на іконку компаса на екрані з мапою ви можете змінити режим повороту мапи
 		\n\nДоступні варіанти
 		\n\t \'Не обертати\' - Мапа не буде обертатись. Північ завжди вгорі.

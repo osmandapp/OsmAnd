@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
   <string name="osmand_parking_warning_text">Perspėjimas pasiimti automobilį jau buvo įtrauktas į jūsų kalendorių. Perspėjimas ten liks tol, kol jo nepanaikinsite.</string>
@@ -210,8 +209,8 @@
   <string name="local_openstreetmap_descr_title">Asinchroninis OSM redagavimas:</string>
   <string name="local_openstreetmap_settings">Įrenginyje išsaugoti LV/pranešimai apie klaidas</string>
   <string name="local_openstreetmap_settings_descr">Rodyti ir valdyti OSM LV/pranešimus apie klaidas išsaugotus įrenginio duomenų bazėje</string>
-  <string name="live_monitoring_descr">Siųsti sekimo informaciją nurodytai tarnybai</string>
-  <string name="live_monitoring">Tiesioginis sekimas internete</string>
+  
+  
   <string name="live_monitoring_interval_descr">Nurodyti tiesioginio sekimo intervalą</string>
   <string name="live_monitoring_interval">Tiesioginio sekimo intervalas</string>
   <string name="live_monitoring_url_descr">Nurodykite interneto adresą su tokia parametrų sintakse : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -308,7 +307,7 @@
   <string name="city_type_village">Kaimas</string>
   <string name="city_type_town">Miestas</string>
   <string name="city_type_city">Didmiestis</string>
-  <string name="layer_poi_label">LV užrašai</string>
+  
   <string name="animate_route_off">Sustabdyti animaciją</string>
   <string name="animate_route">Paleisti animaciją</string>
   <string name="tip_recent_changes_0_6_8_t">Pakeitimai 0.6.8 versijoje: 
@@ -1029,10 +1028,10 @@
 <string name="map_widget_appearance">Likę elementai:</string>
 <string name="map_widget_view_direction">Žiūrėjimo kryptis</string>
 <string name="map_widget_transparent">Permatomas apvalkalas</string>
-<string name="monitoring_mode_off">Įrašyti GPX</string>
-<string name="monitoring_mode_on">Stabdyti\n GPX įraš.</string>
-<string name="live_monitoring_mode_on">Stabdyti\n tiesioginį sekimą</string>
-<string name="live_monitoring_mode_off">Pradėti\n tiesioginį stebėjimą</string>
+
+
+
+
 <string name="filterpoi_activity">Sukurti LV filtrą</string>
 <string name="select_navigation_mode">Pasirinkite judėjimo režimą</string>
 <string name="day_night_info_description">Saulėtekis : %1$s \nSaulėlydis : %2$s</string>
@@ -1294,8 +1293,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="layer_hillshade">Kalnų šešėlių sluoksnis</string>
     <string name="osmand_play_title_30_chars">OsmAnd žemėlapiai ir navigacija</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ žemėlapiai ir navigacija</string>
-	<string name="save_current_track_widget">Išsaugoti
-\n dabartinį kelią į GPX</string>
+	
 	<string name="osmand_plus_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions) yra žemėlapių ir navigacijos programa naudojanti nemokamus, visą pasaulį dengiančius, aukštos kokybės OpenStreetMap (OSM) žemėlapius. Visi žemėlapiai gali būti išsaugoti jūsų įrenginio atminties kortelėje ir naudojami be interneto ryšio. Naudodama jūsų įrenginio GPS imtuvą OsmAnd apskaičiuoja maršrutą, kelionės nuorodas teikia vizualiai ir balsu tiek automobiliui, tiek ir dviračiui bei pėsčiajam. Visas pagrindinis funkcionalumas veikia tiek su, tiek ir be interneto ryšio.
 

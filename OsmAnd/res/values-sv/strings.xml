@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -49,8 +48,8 @@
 <string name="map_widget_appearance">Kvarvarande element:</string>
 <string name="map_widget_view_direction">Rörelseriktning</string>
 <string name="map_widget_transparent">Genomskinligt skal</string>
-<string name="monitoring_mode_off">Spela in GPX</string>
-<string name="monitoring_mode_on">Stoppa\n GPX-insp.</string>
+
+
 <string name="gps_wakeup_interval">GPS-väckningsintervall: %s</string>
 <string name="int_continuosly">Kontinuerlig</string>
 
@@ -200,7 +199,7 @@
 <string name="towards">mot</string>
 <string name="altitude">Höjd</string>
 <string name="map_widget_renderer">Kartutseende</string>
-<string name="live_monitoring_mode_off">Starta\n live-spårning</string>
+
 <string name="osmand_parking_position_description_add">Att hämta bilen på:</string>
 <string name="osmand_parking_pm">em</string>
 <string name="osmand_parking_am">fm</string>
@@ -239,7 +238,7 @@
 <string name="osmand_development_plugin_description">Visa inställningar för utveckling och felsökning funktioner som animerade navigering eller rendering prestanda display.</string>
 <string name="plugins_screen">Plugin-hanterare</string>
 <string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Widgets för dynamisk karta\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fixat arabiska, Kannada skript och RTL språk "</string>
-<string name="live_monitoring_mode_on">Stoppa\n live-spårning</string>
+
 <string name="map_widget_fluorescent">Fluorescerande rutter</string>
 <string name="bg_service_sleep_mode_off">Aktivera\n viloläge</string>
 <string name="bg_service_sleep_mode_on">Stoppa\n viloläge</string>
@@ -322,8 +321,8 @@
 <string name="local_openstreetmap_descr_title">Asynkron OSM-redigering:</string>
 <string name="local_openstreetmap_settings">Lokalt sparade OSM-POIs/-buggar</string>
 <string name="local_openstreetmap_settings_descr">Visa och hantera OSM-POIs/-buggar noterade i lokal databas</string>
-<string name="live_monitoring_descr">Skicka spårning till en angiven webbtjänst</string>
-<string name="live_monitoring">Online Live-spårning</string>
+
+
 <string name="live_monitoring_interval_descr">Ange intervall för Live tracking</string>
 <string name="live_monitoring_interval">Intervall för Live tracking</string>
 <string name="live_monitoring_url_descr">Ange webbadressen med parametersyntax: lat={0}, lon={1}, tidsstämpel={2}, hdop={3}, höjd={4}, hastighet={5}, bearing={6}</string>
@@ -413,7 +412,7 @@
 <string name="city_type_village">By</string>
 <string name="city_type_town">Stad</string>
 <string name="city_type_city">Större stad</string>
-<string name="layer_poi_label">POI-etiketter</string>
+
 <string name="animate_route_off">Stoppa simuleringen</string>
 <string name="animate_route">Starta simuleringen</string>
 <string name="file_can_not_be_renamed">Filen kan inte döpas om.</string>
@@ -1183,8 +1182,7 @@
     <string name="favourites_list_activity">Välj favorit</string>
     <string name="local_openstreetmap_act_title">OSM-modifieringar</string>
     <string name="default_buttons_other_actions">Andra åtgärder</string>
-    <string name="save_current_track_widget">Spara
-    \n aktuellt GPX-spår</string>
+    
 	<string name="tip_recent_changes_1_1_4_t">"Förändringar i 1.1.4:
 	\n\t* Nytt gränssnitt
 	\n\t* Buggfixar

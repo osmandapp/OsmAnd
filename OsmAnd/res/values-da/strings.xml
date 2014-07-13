@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -189,10 +188,8 @@
 	<string name="map_widget_day_night">Dag-/natkort</string>
 	<string name="map_widget_vector_attributes">Optegningsattributter:</string>
 	<string name="map_widget_renderer">Kortformat</string>
-	<string name="live_monitoring_mode_off">Start online 
-\nsporing</string>
-	<string name="live_monitoring_mode_on">Stop online 
-\nsporing</string>
+	
+	
 	
 	
 	<string name="layer_map_appearance">Konfigurer skærm</string>
@@ -206,10 +203,8 @@
 	<string name="map_widget_appearance">Resterende elementer:</string>
 	<string name="map_widget_view_direction">Synsretning</string>
 	<string name="map_widget_transparent">Gennemsigtig layout</string>
-	<string name="monitoring_mode_off">Optag 
-\nGPX-spor</string>
-	<string name="monitoring_mode_on">Stop
-\nGPX-opt.</string>
+	
+	
 	<string name="bg_service_sleep_mode_off">Aktiver
 \ndvaletilstand</string>
 	<string name="bg_service_sleep_mode_on">Stop
@@ -469,8 +464,8 @@
 	<string name="local_openstreetmap_descr_title">Asynkron OSM redigering:</string>
 	<string name="local_openstreetmap_settings">Lokalt gemt OSM interessepunkt/fejl</string>
 	<string name="local_openstreetmap_settings_descr">Vis og håndter OSM interessepunkt/fejl registreret i lokal database</string>
-	<string name="live_monitoring_descr">Send sporing til en specifik webtjeneste</string>
-	<string name="live_monitoring">Online sporing</string>
+	
+	
 	<string name="live_monitoring_interval_descr">Indstil interval for onlinesporing</string>
 	<string name="live_monitoring_interval">Interval for online sporing</string>
 	<string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, long={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}</string>
@@ -540,7 +535,7 @@
 	<string name="delete_confirmation_msg">Slet %1$s?</string>
 	<string name="city_type_suburb">Forstad</string>
 	<string name="city_type_village">Landsby</string>
-	<string name="layer_poi_label">Interessepunkt-etiketter</string>
+	
 	<string name="animate_route_off">Stop simulering</string>
 	<string name="animate_route">Start simulering</string>
 	<string name="file_can_not_be_renamed">Filen kan ikke omdøbes.</string>
@@ -1438,8 +1433,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="poi_dialog_comment_default">Interessepunkt ændres</string>
 	<string name="app_mode_default">Gennemse kort</string>
 	<string name="poi_error_info_not_loaded">Information om knudepunkt blev ikke indlæst</string>
-	<string name="save_current_track_widget">Gem aktuel
-\nGPX-spor</string>
+	
 	<string name="default_buttons_commit">Udfør</string>
 	<string name="amenity_type_geocache">Geocache</string>
 	<string name="commiting_node">Overfør knudepunkt…</string>
