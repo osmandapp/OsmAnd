@@ -13,13 +13,10 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import android.content.Context;
 import android.graphics.PointF;
 import android.os.Build;
-import android.util.DisplayMetrics;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
-import android.view.WindowManager;
 
 // Provide touch exploration mode for map view
 // when scrolling it by gestures is disabled.
@@ -103,7 +100,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         if ((Build.VERSION.SDK_INT >= 14) || mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
-            return fallback.onFling(e1, e2, velocityX, velocityY);
+            return fallback.onFling(e1, e2, velocityX/3, velocityY/3);
         return true;
     }
 
