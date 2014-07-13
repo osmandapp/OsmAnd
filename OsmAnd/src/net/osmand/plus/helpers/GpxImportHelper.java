@@ -15,6 +15,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -158,6 +159,37 @@ public class GpxImportHelper {
 			}
 		}.execute();
 	}
+	
+	private void importFavoritesImpl(final GPXFile gpxFile) {
+		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
+			ProgressDialog progress = null;
+
+			@Override
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(mapActivity, application.getString(R.string.loading_smth, ""), application.getString(R.string.loading_data));
+			}
+
+			@Override
+			protected GPXUtilities.GPXFile doInBackground(Void... nothing) {
+				final List<FavouritePoint> favourites = asFavourites(gpxFile.points);
+				final FavouritesDbHelper favoritesHelper = application.getFavorites();
+				for (final FavouritePoint favourite : favourites) {
+					favoritesHelper.deleteFavourite(favourite, false);
+					favoritesHelper.addFavourite(favourite, false);
+				}
+				favoritesHelper.saveCurrentPointsIntoFile();
+				AccessibleToast.makeText(mapActivity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(GPXUtilities.GPXFile result) {
+				progress.dismiss();
+				final Intent newIntent = new Intent(mapActivity, application.getAppCustomization().getFavoritesActivity());
+				mapActivity.startActivity(newIntent);
+			}
+		}.execute();
+	}
 
 	private void handleKmlImport(final Uri kmlFile, final String name, final boolean save) {
 		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
@@ -296,17 +328,7 @@ public class GpxImportHelper {
 			public void onClick(DialogInterface dialog, int which) {
 				switch (which) {
 					case DialogInterface.BUTTON_POSITIVE:
-						final List<FavouritePoint> favourites = asFavourites(gpxFile.points);
-						final FavouritesDbHelper favorites = application.getFavorites();
-
-						for (final FavouritePoint favourite : favourites) {
-							favorites.deleteFavourite(favourite);
-							favorites.addFavourite(favourite);
-						}
-
-						AccessibleToast.makeText(mapActivity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
-						final Intent newIntent = new Intent(mapActivity, application.getAppCustomization().getFavoritesActivity());
-						mapActivity.startActivity(newIntent);
+						importFavoritesImpl(gpxFile);
 						break;
 					case DialogInterface.BUTTON_NEGATIVE:
 						handleResult(gpxFile, fileName, save);

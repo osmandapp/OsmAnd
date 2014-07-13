@@ -113,8 +113,11 @@ public class FavouritesDbHelper {
 		saveCurrentPointsIntoFile();
 	}
 	
-
 	public boolean deleteFavourite(FavouritePoint p) {
+		return deleteFavourite(p, true);
+	}
+
+	public boolean deleteFavourite(FavouritePoint p, boolean saveImmediately) {
 		if (p != null) {
 			FavoriteGroup group = flatGroups.get(p.getCategory());
 			if (group != null) {
@@ -122,12 +125,17 @@ public class FavouritesDbHelper {
 			}
 			cachedFavoritePoints.remove(p);
 		}
-		saveCurrentPointsIntoFile();
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile();
+		}
 		return true;
 	}
-
-
+	
 	public boolean addFavourite(FavouritePoint p) {
+		return addFavourite(p, true);
+	}
+
+	public boolean addFavourite(FavouritePoint p, boolean saveImmediately) {
 		if (p.getName().equals("") && flatGroups.containsKey(p.getCategory())) {
 			return true;
 		}
@@ -138,7 +146,9 @@ public class FavouritesDbHelper {
 			group.points.add(p);
 			cachedFavoritePoints.add(p);
 		}
-		saveCurrentPointsIntoFile();
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile();
+		}
 		return true;
 	}
 	
@@ -171,7 +181,7 @@ public class FavouritesDbHelper {
 		return true;
 	}
 	
-	private void saveCurrentPointsIntoFile() {
+	public void saveCurrentPointsIntoFile() {
 		try {
 			Map<String, FavouritePoint> ex = new LinkedHashMap<String, FavouritePoint>();
 			loadGPXFile(getInternalFile(), ex);
