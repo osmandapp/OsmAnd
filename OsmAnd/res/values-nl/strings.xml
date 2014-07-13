@@ -1881,4 +1881,16 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_group_by_invite">Alleen toegang met uitnodiging</string>
     <string name="osmo_auth_error_short">Aanmelding mislukt</string>
     <string name="osmo_auth_error">OsMo aanmeldings fout: %1$s.\nMogelijk is de service tijdelijk niet beschikbaar of is uw registratie verlopen.\nWilt u verder gaan met een nieuwe registratie.</string>
+    <string name="rendering_attr_hideBuildings_name">Verberg gebouwen</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Verberg voet- en fietspaden</string>
+    <string name="rendering_attr_hideText_name">Verberg tekst</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Verberg bossen en beplanting</string>
+    <string name="rendering_attr_buildings15zoom_name">Gebouwen op zoom 15</string>
+    <string name="rendering_attr_moreDetailed_name">Meer details</string>
+    <string name="rendering_attr_lessDetailed_name">Minder details</string>
+    <string name="rendering_attr_hideAccess_name">Verberg toegestane gebruik</string>
+    <string name="rendering_attr_showAccess_name">Toon toegestane gebruik</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Toon kwaliteit van wegen</string>
+    <string name="rendering_attr_showSurfaces_name">Toon wegoppervlak</string>
+    <string name="rendering_attr_showCycleRoutes_name">Toon fietsroutes</string>
     </resources>

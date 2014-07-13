@@ -1721,4 +1721,12 @@ OsmAnd - открытый источник и активно развается.
     <string name="local_index_unselect_gpx_file">Сбросить выбор</string>
     <string name="local_index_select_gpx_file">Выбрать для отображения</string>
     <string name="osmo_group_by_invite">Войти по приглашению</string>
+    <string name="rendering_attr_hideBuildings_name">Скрыть строения</string>
+    <string name="rendering_attr_hideText_name">Срыть текст</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Скрыть леса и кустарники</string>
+    <string name="rendering_attr_moreDetailed_name">Более подробно</string>
+    <string name="rendering_attr_lessDetailed_name">Менее подробно</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Отображать качество дорог</string>
+    <string name="rendering_attr_showSurfaces_name">Отображать тип покрытия</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Скрыть непроезжие дороги</string>
     </resources>

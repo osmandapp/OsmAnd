@@ -1878,4 +1878,16 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 \n - Калі вам трэба стварыць групу з іншымі ўмовамі, калі ласка, звяртайцеся на http://osmo.mobi"</string>
     <string name="osmo_auth_error_short">Не атрымалася выканаць аўтарызацыю</string>
     <string name="osmo_auth_error">Адбылася памылка аўтарызацыі OsMo: %1$s.\nГэта можа быць выклікана часовай непрацаздольнасьцю службы ці сканьчэньнем вашай рэгістрацыі.\nХочаце зарэгістравацца ізноў?</string>
+    <string name="rendering_attr_hideBuildings_name">Схаваць будынкі</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Схаваць не аўтамабільныя дарогі</string>
+    <string name="rendering_attr_hideText_name">Схаваць тэкст</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Схаваць лясы і хмызнякі</string>
+    <string name="rendering_attr_buildings15zoom_name">Будынкі на маштабе 15</string>
+    <string name="rendering_attr_moreDetailed_name">Больш падрабязна</string>
+    <string name="rendering_attr_lessDetailed_name">Менш падрабязна</string>
+    <string name="rendering_attr_hideAccess_name">Схаваць тып доступу</string>
+    <string name="rendering_attr_showAccess_name">Паказаць тып доступу</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Адлюстроўваць якасць дарог</string>
+    <string name="rendering_attr_showSurfaces_name">Адлюстроўваць тып пакрыцьця</string>
+    <string name="rendering_attr_showCycleRoutes_name">Паказаць веламаршруты</string>
     </resources>
