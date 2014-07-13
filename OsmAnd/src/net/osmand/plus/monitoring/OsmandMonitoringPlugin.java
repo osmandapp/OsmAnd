@@ -284,7 +284,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 						vs, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						settings.SAVE_TRACK_INTERVAL.set(vs.value);
+						settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
 						settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 						if (app.getNavigationService() == null) {
 							settings.SERVICE_OFF_INTERVAL.set(0);
