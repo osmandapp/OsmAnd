@@ -1891,4 +1891,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_showSurfaceGrade_name">Mostra la qualitat de les vies</string>
     <string name="rendering_attr_showSurfaces_name">Mostra el tipus de superfície de les vies</string>
     <string name="rendering_attr_cycleRoutes_name">Mostra vies de ciclista</string>
+    <string name="rendering_attr_showCycleRoutes_name">Mostra vies ciclistes</string>
     </resources>
