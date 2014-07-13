@@ -295,7 +295,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				
 			}
 		});
-		
+		bld.show();
 	}
 	
 	public static void showIntervalChooseDialog(final Context uiCtx, final String patternMsg,
