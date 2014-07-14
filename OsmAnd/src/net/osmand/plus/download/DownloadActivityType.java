@@ -204,6 +204,9 @@ public class DownloadActivityType {
 		if (bn.endsWith(FileNameTranslationHelper.WIKI_NAME)){
 			return FileNameTranslationHelper.getWikiName(ctx,bn);
 		}
+		if (bn.startsWith(FileNameTranslationHelper.HILL_SHADE)){
+			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
+		}
 		final String lc = bn.toLowerCase();
 		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
 		if (std != null) {
