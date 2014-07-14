@@ -359,12 +359,15 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				return null;
 			}
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
-		} catch (SAXException e) {
-			log.error("Loading node failed " + nodeId, e); //$NON-NLS-1$
-			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();
+			ctx.runInUIThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.error_io_error), Toast.LENGTH_LONG).show();					
+				}
+			});
 		}
 		return null;
 	}
