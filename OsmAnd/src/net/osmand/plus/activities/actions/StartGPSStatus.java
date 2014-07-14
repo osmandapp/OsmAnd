@@ -31,27 +31,38 @@ import android.widget.Toast;
 public class StartGPSStatus extends OsmAndAction {
 
 	public enum GpsStatusApps {
-		GPS_STATUS("GPS Status & Toolbox", "com.eclipsim.gpsstatus2", "com.eclipsim.gpsstatus2.GPSStatus"),
-		GPS_TEST("GPS Test", "com.chartcross.gpstest", ""),
-		INVIU_GPS("inViu GPS-details ", "de.enaikoon.android.inviu.gpsdetails", ""),
-		SAT_STAT("SatStat (F-droid)", "com.vonglasow.michael.satstat", "");
+		GPS_STATUS("GPS Status & Toolbox", "com.eclipsim.gpsstatus2", "", "com.eclipsim.gpsstatus2.GPSStatus"),
+		GPS_TEST("GPS Test", "com.chartcross.gpstest", "com.chartcross.gpstestplus", ""),
+		INVIU_GPS("inViu GPS-details ", "de.enaikoon.android.inviu.gpsdetails", "", ""),
+		ANDROI_TS_GPS_TEST("AndroiTS GPS Test", "com.androits.gps.test.free", "com.androits.gps.test.pro", "");
 		
 		public final String stringRes;
-		public final String activity;
 		public final String appName;
+		public final String paidAppName;
+		public final String activity;
 
-		GpsStatusApps(String res, String appName, String activity) {
+		GpsStatusApps(String res, String appName, String paidAppName, String activity) {
 			this.stringRes = res;
 			this.appName = appName;
+			this.paidAppName = paidAppName;
 			this.activity = activity;
 		}
 		
 		public boolean installed(Activity a) {
+			return installed(a, appName, paidAppName);
+		}
+		
+		public boolean installed(Activity a, String... appName) {
 			boolean installed = false;
-			try{
-				installed = a.getPackageManager().getPackageInfo(appName, 0) != null;
-			} catch ( NameNotFoundException e){
-			}
+			PackageManager packageManager = a.getPackageManager();
+			for (String app: appName) {
+				try{
+					installed = packageManager.getPackageInfo(app, 0) != null;
+					break;
+				} catch ( NameNotFoundException e){
+					installed = false;
+				}	
+			}			
 			return installed;
 		}
 	}
@@ -145,7 +156,9 @@ public class StartGPSStatus extends OsmAndAction {
 			// if (g.activity.length() == 0) {
 				PackageManager pm = mapActivity.getPackageManager();
 				try {
-					intent = pm.getLaunchIntentForPackage(g.appName);
+					String appName = !g.paidAppName.isEmpty() && 
+							g.installed(mapActivity, g.paidAppName) ? g.paidAppName : g.appName;
+					intent = pm.getLaunchIntentForPackage(appName);
 				} catch (RuntimeException e) {
 				}
 //			} else {
