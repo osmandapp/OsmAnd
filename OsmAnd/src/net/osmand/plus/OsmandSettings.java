@@ -717,6 +717,12 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> PREFERRED_LOCALE =  new StringPreference("preferred_locale", "").makeGlobal();
+	
+	public final OsmandPreference<String> MAP_PREFERRED_LOCALE =  new StringPreference("map_preferred_locale", "").makeGlobal();
+	
+	public boolean usingEnglishNames() {
+		return MAP_PREFERRED_LOCALE.get().length() > 0;
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> USER_NAME = new StringPreference("user_name", "NoName").makeGlobal();
@@ -937,13 +943,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> AUDIO_STREAM_GUIDANCE = new IntPreference("audio_stream",
 			3/*AudioManager.STREAM_MUSIC*/).makeGlobal();
 
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> USE_ENGLISH_NAMES = new BooleanPreference("use_english_names", false).makeGlobal();
-	
-	public boolean usingEnglishNames(){
-		return USE_ENGLISH_NAMES.get();
-	}
-	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data", false).makeGlobal();
 
@@ -1857,6 +1856,8 @@ public class OsmandSettings {
 		}
 
 	}
+
+	
 
 	
 }
