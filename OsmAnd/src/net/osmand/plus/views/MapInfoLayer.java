@@ -687,6 +687,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		layout.addView(widget, fparams);
 		fparams = new FrameLayout.LayoutParams((int) (backToLoc.getMinimumWidth() ),
 				backToLoc.getMinimumHeight());
+		//this fix needed for android 2.3 because margin doesn't work without gravity
+		fparams.gravity = Gravity.TOP;
 		fparams.setMargins((int) (5 * scaleCoefficient), 0, 0, 0);
 		layout.addView(progressBar, fparams);
 		layout.setOnClickListener(new View.OnClickListener() {
