@@ -35,6 +35,23 @@ public class QuadTree<T> {
 		doInsertData(data, box, root, depth);
 	}
 	
+	public void clear() {
+		clear(root);
+	}
+	
+	private void clear(Node<T> rt) {
+		if(rt != null ){
+			if(rt.data != null) {
+				rt.data.clear();
+			}
+			if(rt.children != null) {
+				for(Node<T> c : rt.children) {
+					clear(c);
+				}
+			}
+		}
+	}
+
 	public void insert(T data, float x, float y) {
 		insert(data, new QuadRect(x, y, x, y));
 	}
