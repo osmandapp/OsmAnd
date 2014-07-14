@@ -1015,7 +1015,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 → → \ ن \ ر ميزات أخرى صغيرة ↵
 →
 	</string>    
-	<string name="free_version_message">هذا الإصدار OsmAnd مجانية محدودة إلى٪ 1 $ S التنزيلات وحاليا لا يدعم مقالات ويكيبيديا.</string>
+	<string name="free_version_message">هذا الإصدار OsmAnd مجانية محدودة إلى ٪1$s التنزيلات وحاليا لا يدعم مقالات ويكيبيديا.</string>
 	<string name="poi_context_menu_showdescription">وصف المعرض POI</string>
 	<string name="index_name_other">خرائط في جميع أنحاء العالم والموضوع</string>
 	<string name="index_name_wiki">في جميع أنحاء العالم ويكيبيديا النقاط المهمة</string>
@@ -1058,7 +1058,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 يمكن على الفور يتم الإبلاغ عن الأخطاء \ ن \nAlso في الخرائط عن طريق الخطأ OSM ، لذلك يمكن للمجتمع OSM ثم إصلاح هذه المشكلة. استخدام خيار \' علة المفتوحة OSM \' في \' استخدام موقع \' القائمة على \ السياق. ثم أدخل وصف مفصل لل مشكلة وبعد ذلك أخيرا باستخدام \' إضافة \' زر .
 \ ن \nOsmAnd تدعم التخزين المؤقت الإدخالات حاليا (انظر الإعداد منها )، ولكن الاتصال بالإنترنت هو بالطبع هناك حاجة لتحميل POI OSM الخاص والمساهمات علة OSM .
 	</string>
-	<string name="download_files_not_enough_space">ليس هناك مساحة حرة كافية لتحميل٪ 1 $ S MB (مجاني:٪ 2 $ ق)</string>
+	<string name="download_files_not_enough_space">ليس هناك مساحة حرة كافية لتحميل ٪1$s MB (مجاني: ٪2$s ق)</string>
 	<string name="download_files_question_space">مساحة حرة الآن {2} MB! تحميل {0} ملف (ق) ({1} MB)؟</string>
 	<string name="tip_navigation">ملاحة</string>
 	<string name="tip_navigation_t">للحصول على توجيهات إلى مكان ، إما انقر الطويلة مباشرة على أنه على الخريطة، ( ثم اضغط على وصفه علامة و حدد \' الاتجاهات إلى \') ، أو حدد \' الاتجاهات \' بعد التنصت على أي إدخال في قائمة نتائج البحث أو قائمة المفضلة . ↵
@@ -1157,7 +1157,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="show_more_map_detail">عرض المزيد من تفاصيل الخريطة</string>
 	<string name="show_more_map_detail_descr">تظهر بعض ناقلات خريطة التفاصيل (الطرق الخ) في الادني أقل بالفعل</string>
 	<string name="favourites_delete_multiple_succesful">حزف النقظة المفضلة بنجاح</string>
-	<string name="favorite_delete_multiple">أنت ذاهب إلى حذف٪ 1 $ د المفضلة (ق) و٪ 2 $ d من المجموعة المفضلة (ق). هل أنت متأكد؟</string>
+	<string name="favorite_delete_multiple">أنت ذاهب إلى حذف ٪1$s د المفضلة (ق) و٪2$d من المجموعة المفضلة (ق). هل أنت متأكد؟</string>
 	<string name="favorite_home_category">منزل</string>
 	<string name="favorite_friends_category">اصدقاء</string>
 	<string name="favorite_places_category">الاماكن</string>
@@ -1172,11 +1172,11 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	
 	
 	<string name="local_index_installed">طبعة</string>
-	<string name="local_index_items_backuped">٪ 1 $ d من العناصر 2D٪) إبطال مفعولها بنجاح.</string>
-	<string name="local_index_items_deleted">٪ 1 $ d من العناصر 2D٪) حذف بنجاح.</string>
-	<string name="local_index_items_restored">٪ 1 $ d من العناصر 2D٪) تنشيط بنجاح.</string>
-	<string name="local_index_no_items_to_do">أي عناصر ل٪ 1 $ S</string>
-	<string name="local_index_action_do">كنت على وشك أن٪ 1 $ و٪ 2 $ بنود ق). المتابعة؟</string>
+	<string name="local_index_items_backuped">٪1$d من العناصر %2$d) إبطال مفعولها بنجاح.</string>
+	<string name="local_index_items_deleted">٪1$d من العناصر %2$d) حذف بنجاح.</string>
+	<string name="local_index_items_restored">٪1$d من العناصر %2$d) تنشيط بنجاح.</string>
+	<string name="local_index_no_items_to_do">أي عناصر ل ٪1$s</string>
+	<string name="local_index_action_do">كنت على وشك أن ٪1$s و ٪2$s بنود ق). المتابعة؟</string>
 	<string name="local_index_descr_title">ادارة البيانات</string>
 	<string name="local_index_mi_restore">تفعيل</string>
 	<string name="local_index_mi_backup">عطل</string>
@@ -1225,7 +1225,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="voice_stream_voice_call">المكالمات الصوتية السمعية</string>
 	<string name="voice_stream_notification">صوت الاشعارات</string>
 	<string name="voice_stream_music">صوت الموسيقي</string>
-	<string name="warning_tile_layer_not_downloadable">التطبيق لا يمكن تحميل خريطة طبقة٪ 1 $ ق، يرجى محاولة إعادة تثبيته.</string>
+	<string name="warning_tile_layer_not_downloadable">التطبيق لا يمكن تحميل خريطة طبقة ٪1$s ق، يرجى محاولة إعادة تثبيته.</string>
 	<string name="overlay_transparency_descr">تعديل تراكب الشفافية</string>
 	<string name="overlay_transparency">تراكب الشفافية</string>
 	<string name="map_transparency_descr">تعديل خريطة قاعدة الشفافية</string>
@@ -1313,7 +1313,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="mile">ميل</string>
 	<string name="send_location_way_choose_title">حصة الموقع باستخدام</string>
 	<string name="send_location_sms_pattern">المكان</string>
-	<string name="send_location_email_pattern">لرؤية الموقع اتبع الرابط متصفح الويب٪ 1 $ S أو الروبوت الرابط نية٪ 2 $ S</string>
+	<string name="send_location_email_pattern">لرؤية الموقع اتبع الرابط متصفح الويب ٪1$s أو الروبوت الرابط نية ٪2$s</string>
 	<string name="send_location">ارسال الموقع</string>
 	<string name="context_menu_item_share_location">مشاركة الموقع</string>
 	<string name="add_waypoint_dialog_added">GPX إحداثية \'\' {0} \'\' تمت إضافة بنجاح</string>

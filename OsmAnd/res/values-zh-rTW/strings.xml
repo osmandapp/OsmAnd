@@ -22,7 +22,7 @@
     <string name="replace_destination_point">替換目的地標點</string>
     <string name="new_destination_point_dialog">您已經有設定了目的地標點。</string>
     <string name="target_points">中途點</string>
-    <string name="intermediate_point_too_far">中途點 %1$ 離最近的道路太遠。</string>
+    <string name="intermediate_point_too_far">中途點 %1$s 離最近的道路太遠。</string>
     <string name="arrived_at_intermediate_point">您已經來到您的中途點</string>
     <string name="context_menu_item_intermediate_point">增為中途點</string>
     <string name="map_widget_intermediate_distance">中途點</string>
@@ -1198,7 +1198,7 @@
     <string name="background_service_is_enabled_question">OsmAnd 休眠模式服務仍在執行。您想要關閉它嗎？</string>
     <string name="osmand_play_title_30_chars">OsmAnd 地圖和導航</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 地圖和導航</string>
-	<string name="native_app_allocated_memory_descr">原生記憶體總計由應用程式 %1$ MB (Dalvik %2$ MB，其它 %3$ MB) 。Proportional memory %4$ MB (Android 限制 %5$ MB，Dalvik %6$ MB)分配佔用。</string>
+	<string name="native_app_allocated_memory_descr">原生記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB) 。Proportional memory %4$s MB (Android 限制 %5$s MB，Dalvik %6$ MB)分配佔用。</string>
 	<string name="context_menu_item_destination_point">設定為目的地</string>
     <string name="please_select_address">首先選擇城市或街道</string>
     <string name="available_downloads_left">還可下載 %1$d 個檔案</string>

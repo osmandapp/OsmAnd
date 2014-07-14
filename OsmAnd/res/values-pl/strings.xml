@@ -1476,7 +1476,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	\n\t* Szybsze wprowadzanie wyszukiwania adresu
 	\n\t* Poprawki do błędów nawigacji i rysowania
     </string>
-    <string name="edit_tilesource_successfully">Źródło płytek %1$ zostało zapisane z powodzeniem</string>
+    <string name="edit_tilesource_successfully">Źródło płytek %1$s zostało zapisane z powodzeniem</string>
     <string name="edit_tilesource_elliptic_tile">Eliptyczna Merkatora</string>
     <string name="route_descr_destination">Cel</string>
     <string name="osmand_plus_extended_description_4000_chars">

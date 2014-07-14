@@ -1691,7 +1691,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
          \n Nota: Os arquivos antigos permanecerão intocados.
          \n Nota: não será possível compartilhar arquivos entre OsmAnd e OsmAnd + . </string>
     <string name="application_dir_change_warning2">OsmAnd pode tentar mover os dados para um novo destino.  Você quer isso ?</string>
-    <string name="copying_osmand_one_file_descr">Copiando o arquivo (% s) para novo destino ...</string>
+    <string name="copying_osmand_one_file_descr">Copiando o arquivo (%s) para novo destino ...</string>
     <string name="copying_osmand_files_descr">Cópia de arquivos Osmand para novo destino (%s)</string>
     <string name="copying_osmand_files">Cópia de arquivos Osmand</string>
     <string name="calculate_osmand_route_gpx">Calcular rota offline OsmAnd</string>
@@ -1700,8 +1700,8 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="lang_be">Bielorrusso</string>
 	<string name="lang_bs">Bósnio</string>
 	<string name="lang_bg">Búlgaro</string>
-	<string name="gpx_info_subtracks">Subtrilhas : % 1 $ s </string>
-	<string name="gpx_info_maximum_speed">Velocidade máxima: % 1 $ s </string>
+	<string name="gpx_info_subtracks">Subtrilhas : %1$s </string>
+	<string name="gpx_info_maximum_speed">Velocidade máxima: %1$s </string>
 	<string name="gpx_info_avg_altitude">Altitude média : %1$s</string>
 	<string name="gpx_info_asc_altitude">Descida/Subida: %1$s</string>
     <string name="gpx_timespan">Abrangência: %1$s</string>

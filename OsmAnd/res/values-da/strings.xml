@@ -1648,7 +1648,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="app_mode_truck">Lastbil</string>
     <string name="calculate_osmand_route_gpx">Beregn OsmAnd offline rute</string>
     <string name="application_dir_change_warning2">OsmAnd kan forsøge at flytte data til ny destination . Vil du det?</string>
-    <string name="copying_osmand_one_file_descr">Kopierer fil (% s) til ny destination...</string>
+    <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til ny destination...</string>
     <string name="copying_osmand_files_descr">Kopierer OsmAnd filer til ny destination (%s)</string>
     <string name="copying_osmand_files">Kopierer OsmAnd filer</string>
     <string name="android_19_location_disabled">Efter KitKat versionen kan man ikke hente og opdatere kort i tidligere lagerplacering (%s). Ønsker du at skifte til en tilladt placering og kopiere alle filer dertil?

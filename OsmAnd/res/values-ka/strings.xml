@@ -974,7 +974,7 @@
     <string name="replace_destination_point">დანიშნულების წერტილის შეცვლა</string>
     <string name="new_destination_point_dialog">თქვენ უკვე მიუთითეთ დანიშნულების წერტილი.</string>
     <string name="target_points">გზის ნიშნულები</string>
-    <string name="intermediate_point_too_far">გზის ნიშნანი %1$ მეტისმეტად შორსაა უახლოესი გზიდან.</string>
+    <string name="intermediate_point_too_far">გზის ნიშნანი %1$s მეტისმეტად შორსაა უახლოესი გზიდან.</string>
     <string name="arrived_at_intermediate_point">თქვენ მიაღწიეთ თქვენს დანიშნულების წერტილს</string>
     <string name="context_menu_item_intermediate_point">გზის წერტილად დამატება</string>
     <string name="ending_point_too_far">საბოლოო წერტილი მეტისმეტად სორსაა უახლოესი გზიდან.</string>

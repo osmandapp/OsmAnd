@@ -993,7 +993,7 @@
     <string name="stop_routing_confirm">Ви впевнені, що хочете зупинити навігацію?</string>
     <string name="clear_dest_confirm">Ви впевнені, що хочете вилучити пункт призначення?</string>
     <string name="recording_context_menu_show">Показати</string>
-    <string name="recording_photo_description">Фото %1$ з %2$</string>
+    <string name="recording_photo_description">Фото %1$s з %2$s</string>
     <string name="av_def_action_picture">Сфотографувати</string>
     <string name="recording_context_menu_precord">Сфотографувати</string>
     <string name="dropbox_plugin_description">Втулок Dropbox дає можливість синхронізувати треки і відео/аудіо замітки з вашим обліковим записом dropbox.</string>

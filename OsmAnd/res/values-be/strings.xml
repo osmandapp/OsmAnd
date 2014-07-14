@@ -190,7 +190,7 @@
     <string name="precise_routing_mode_descr">Дазволіць дакладную навігацыю каб шукаць шлях без памылак. Усё яшчэ абмежавана адлегласцю і павольная.</string>
     <string name="precise_routing_mode">Дакладны маршрут (эксп.)</string>
     <string name="recording_context_menu_show">Паказаць</string>
-    <string name="recording_photo_description">Фота %1$ з %2$</string>
+    <string name="recording_photo_description">Фота %1$s %2$s</string>
     <string name="av_def_action_picture">Сфатаграфаваць</string>
     <string name="recording_context_menu_precord">Сфатаграфаваць</string>
     <string name="dropbox_plugin_description">Модуль Dropbox дазваляе сынхранізаваць трэкі і аўдыё/відэа натакi з вашым рахункам Dropbox.</string>

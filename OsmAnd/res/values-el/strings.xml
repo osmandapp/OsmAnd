@@ -619,7 +619,7 @@
 		\n\nΓια να εμφανιστούν όλα τα Αγαπημένα κατευθείαν στο χάρτη, στην οθόνη χάρτη ενεργοποιήστε το επίπεδο \'Αγαπημένα\' στο \'Μενού\' → \'Επίπεδα χάρτη\'.
 	</string>
 	<string name="error_doing_search">Προέκυψε σφάλμα κατά την offline αναζήτηση</string>
-	<string name="search_offline_geo_error">Δεν ήταν δυνατή η ανάλυση της γεωγρ πρόθεσης \'% s\'</string>
+	<string name="search_offline_geo_error">Δεν ήταν δυνατή η ανάλυση της γεωγρ πρόθεσης \'%s\'</string>
 	<string name="search_osm_offline">Αναζήτηση γεωγραφικής τοποθεσίας</string>
 	<string name="system_locale">Σύστημα</string>
 	<string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης</string>
@@ -1484,7 +1484,7 @@
     <string name="select_destination_and_intermediate_points">Επιλέξτε σημεία διαδρομής</string>
     <string name="gpx_wpt">Σημείο διαδρομής</string>
     <string name="gpx_info_subtracks">"Υποΐχνη: %1$s "</string>
-	<string name="gpx_info_waypoints">"Σημεία διαδρομής: %1$ s "</string>
+	<string name="gpx_info_waypoints">"Σημεία διαδρομής: %1$s "</string>
 	<string name="gpx_timespan">Χρονικό διάστημα: %1$s</string>
 	<string name="gpx_timemoving">Χρόνος σε κίνηση: %1$s</string>
     <string name="gpx_selection_segment_title">Τμήμα</string>

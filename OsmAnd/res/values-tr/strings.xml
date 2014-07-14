@@ -1159,14 +1159,14 @@
     <string name="app_mode_truck">kamyon</string>
     <string name="routing_attr_short_way_description">Kısa yoldan git</string>
 	<string name="application_dir_change_warning2">Osmand tekraryeni bir hedefe gitmek için deneyebilirsiniz .Katılıyor musunuz ?</string>
-    <string name="copying_osmand_one_file_descr">Şimdidosya (s % ) Yeni Geliş kopyalamak ...</string>
-    <string name="copying_osmand_files_descr">Osmandyeni hedefedosyaları kopyalamak ( % s )</string>
+    <string name="copying_osmand_one_file_descr">Şimdidosya ($1%s ) Yeni Geliş kopyalamak ...</string>
+    <string name="copying_osmand_files_descr">Osmandyeni hedefedosyaları kopyalamak ( $1%s )</string>
     <string name="guidance_preferences_descr">öncelikli navigasyon</string>
     <string name="routing_preferences_descr">Öncelikli yönlendirme</string>
     <string name="speech_rate_descr">TTS için ayarlanmış hoparlörler</string>
     <string name="speech_rate">Hoparlör yerleşimi</string>
     
-    <string name="complex_route_calculation_failed">Hızlı rota hesaplama ( % s ) başarısız oldu , hesaplama yavaş çare .</string>
+    <string name="complex_route_calculation_failed">Hızlı rota hesaplama ( $1%s) başarısız oldu , hesaplama yavaş çare .</string>
     <string name="disable_complex_routing_descr">Araba navigasyonu için 2 fazlı yönlendirmesi devre dışı bırakın</string>
     <string name="disable_complex_routing">Karmaşık yönlendirmesi devre dışı bırakın</string>
     <string name="amenity_type_seamark">Mark Deniz</string>
@@ -1179,7 +1179,7 @@
     <string name="app_mode_aircraft">düzlem</string>
     <string name="tip_faq_t">https://code.google.com/p/osmand/wiki/FAQ Sık sorulan soruları görmek için , karşılaşabileceğinizURL\'ye bakın .</string>
     <string name="tip_faq">SSS</string>
-    <string name="local_osm_changes_delete_all_confirm">Siz % 1 $ d osm değişiklikleri kaldırmak üzeresiniz .Emin misin ?</string>
+    <string name="local_osm_changes_delete_all_confirm">Siz %1$d osm değişiklikleri kaldırmak üzeresiniz .Emin misin ?</string>
     <string name="local_osm_changes_delete_all">Tümünü kaldır</string>
     <string name="animate_routing_route_not_calculated">Şimdi rotayı hesaplamak Lütfen</string>
     <string name="animate_routing_route">Hesaplanan rotayı kullanarak simülasyon </string>
@@ -1197,8 +1197,8 @@
 	<string name="base_world_map">Dünya Haritası</string>
 	<string name="tip_map_styles">style Harita</string>
 	<string name="local_index_tile_data_zooms">Zvmhay indirildi : %1$s</string>
-    <string name="local_index_tile_data_name">Çini bilgisi : % 1 $ s</string>
-    <string name="edit_tilesource_successfully">Kaydedilen Çini kaynağı% 1 $ s</string>
+    <string name="local_index_tile_data_name">Çini bilgisi : %1$s</string>
+    <string name="edit_tilesource_successfully">Kaydedilen Çini kaynağı %1$s</string>
     <string name="edit_tilesource_maxzoom">maksimum Yakınlaştırma</string>
     <string name="tip_recent_changes_1_1_4_t">Sürüm 1.1.4 Değişiklikler :↵
         \n\t* Yeniden tasarlanmış arayüz↵
