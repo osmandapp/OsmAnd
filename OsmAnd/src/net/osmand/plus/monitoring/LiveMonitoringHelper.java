@@ -46,6 +46,7 @@ public class LiveMonitoringHelper  {
 	
 	public void updateLocation(net.osmand.Location location) {
 		if (OsmAndLocationProvider.isPointAccurateForRouting(location) && isLiveMonitoringEnabled()
+				&& OsmAndLocationProvider.isNotSimulatedLocation(location)
 				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 			long locationTime = System.currentTimeMillis();
 			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {

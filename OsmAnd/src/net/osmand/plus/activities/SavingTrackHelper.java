@@ -315,7 +315,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		long locationTime = System.currentTimeMillis();
 		OsmandSettings settings = ctx.getSettings();
 		boolean record = false;
-		if(OsmAndLocationProvider.isPointAccurateForRouting(location) &&
+		if(OsmAndLocationProvider.isPointAccurateForRouting(location) && 
+				OsmAndLocationProvider.isNotSimulatedLocation(location) &&
 				OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 			if (settings.SAVE_TRACK_TO_GPX.get() && 
 					locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
