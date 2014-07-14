@@ -132,9 +132,9 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 	
 	private void addPrefmapNames(PreferenceGroup screen) {
-		String[] entries = new String[] { "", "en", "be", "ca", "cs", "da", "de", "el", "es", "fi", "fr", "he", "hi",
+		String[] entrieValues  = new String[] { "", "en", "be", "ca", "cs", "da", "de", "el", "es", "fi", "fr", "he", "hi",
 				"hr", "hu", "it", "ja", "ko", "lv", "nl", "pl", "ro", "ru", "sk", "sl", "sv", "sw", "zh" };
-		String[] entrieValues = new String[] { getString(R.string.local_map_names), getString(R.string.lang_en),
+		String[] entries = new String[] { getString(R.string.local_map_names), getString(R.string.lang_en),
 				getString(R.string.lang_be), getString(R.string.lang_ca), getString(R.string.lang_cs),
 				getString(R.string.lang_da), getString(R.string.lang_de), getString(R.string.lang_el),
 				getString(R.string.lang_es), getString(R.string.lang_fi), getString(R.string.lang_fr),
