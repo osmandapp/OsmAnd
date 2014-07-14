@@ -1308,7 +1308,7 @@
     <string name="local_indexes_cat_srtm">Данные горизонталей</string>
     <string name="downloading_file_new">Загрузка…</string>
 	<string name="osmand_distance_planning_plugin_description">Создание путей (или модификация существующего файла GPX) для измерения дистанции между точками. Сохранить как GPX (может использоваться для планирования маршрутов GPX).</string>
-    <string name="context_menu_item_destination_point">Установить как пункт назначения</string>
+    <string name="context_menu_item_destination_point">Пункт назначения</string>
     <string name="please_select_address">Сначала выберите город или улицу</string>
     <string name="destination_point">Пункт назначения %1$s</string>
 	<string name="av_camera_focus">Режим фокусировки камеры</string>

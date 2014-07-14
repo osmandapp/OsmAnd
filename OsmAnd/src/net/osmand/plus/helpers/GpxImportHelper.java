@@ -178,13 +178,13 @@ public class GpxImportHelper {
 					favoritesHelper.addFavourite(favourite, false);
 				}
 				favoritesHelper.saveCurrentPointsIntoFile();
-				AccessibleToast.makeText(mapActivity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
 				return null;
 			}
 
 			@Override
 			protected void onPostExecute(GPXUtilities.GPXFile result) {
 				progress.dismiss();
+				AccessibleToast.makeText(mapActivity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
 				final Intent newIntent = new Intent(mapActivity, application.getAppCustomization().getFavoritesActivity());
 				mapActivity.startActivity(newIntent);
 			}
