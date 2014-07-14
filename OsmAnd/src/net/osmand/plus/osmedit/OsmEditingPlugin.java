@@ -34,7 +34,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragment;
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -257,7 +256,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				new UploadGPXFilesTask((SherlockActivity) la, descr.getText().toString(), tags.getText().toString(), 
+				new UploadGPXFilesTask(la, descr.getText().toString(), tags.getText().toString(), 
 				 (UploadVisibility) visibility.getItemAtPosition(visibility.getSelectedItemPosition())
 					).execute(info);
 			}
