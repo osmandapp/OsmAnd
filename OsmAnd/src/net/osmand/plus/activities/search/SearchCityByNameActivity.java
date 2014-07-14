@@ -204,7 +204,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		    if(st1 != st2) {
 		    	return st1 ? 1 : -1;
 		    }
-			compare = cs.compare(lhs.getName(en), rhs.getName(en));
+			compare = cs.compare(getText(lhs), getText(rhs));
 			if (compare != 0) {
 				return compare;
 			}
