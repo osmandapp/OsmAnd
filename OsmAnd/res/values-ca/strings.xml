@@ -1563,11 +1563,7 @@
 	</string>
     <string name="osmo_settings_uuid">Identificació única de dispositiu</string>
     <string name="osmo_settings_descr">Configurar paràmetres de monitorització i fixar el canal de seguiment personal</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitorització avançada en temps real. Proporciona la possibilitat de fer el seguiment d\'altres dispositius així com de ser seguit.
-Crea grups anònims per compartir posicions i comunicar-se. Hi ha diferents paràmetres de seguiment, tant permanents com de la sessió actual.
-Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup.
-Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés.
-Si us plau, llegiu-ne més a http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitorització avançada en temps real. Proporciona la possibilitat de fer el seguiment d\'altres dispositius així com de ser seguit. Crea grups anònims, comparteix posicions amb els altres membres i permet comunicar-se. Hi ha diferents paràmetres de seguiment, tant permanents com de la sessió actual. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (Monitorització avançada en temps real)</string>
     <string name="osmo_settings">OsMo Monitorització OpenStreetMap (beta)</string>
    	
@@ -1904,7 +1900,7 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="live_monitoring_m">Registre de traça online (cal GPX)</string>
     <string name="live_monitoring_start">Inicia registre de traça online</string>
 	<string name="live_monitoring_stop">Atura el registre de traça online</string>
-	<string name="gpx_monitoring_start">Grava GPX</string>
+	<string name="gpx_monitoring_start">Inicia gravació GPX</string>
 	<string name="gpx_monitoring_stop">Atura gravació GPX</string>
     <string name="gpx_start_new_segment">Inicia nou segment</string>
     <string name="lang_fa">Persa</string>
