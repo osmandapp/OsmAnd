@@ -1915,5 +1915,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="gpx_start_new_segment">開始新區段</string>
     <string name="lang_fa">پارسی</string>
 	<string name="map_preferred_locale_descr">在地圖標籤上優先的語言(如果優先的語言無法使用，將會切換成英文或本地名稱)</string>
-    <string name="live_monitoring_m_descr">果已啟用了 GPX 記錄，如發送軌跡到指定的 web 服務。</string>
+    <string name="live_monitoring_m_descr">如果已啟用了 GPX 記錄，發送軌跡到指定的 web 服務。</string>
 	</resources>
