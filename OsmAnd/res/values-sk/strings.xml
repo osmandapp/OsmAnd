@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -1272,9 +1273,9 @@
     
 	<string name="street_name">Ulica</string>
 	<string name="hno">Číslo domu</string>
-    <string name="monitoring_settings">Logovacie služby a režim spánku</string>
+    <string name="monitoring_settings">Logovacie služby</string>
     <string name="monitoring_settings_descr">Konfiguruje ako sa majú zaznamenať trasy a povoliť režim spánku</string>
-    <string name="osmand_monitoring_plugin_name">Logovacie služby a režim spánku</string>
+    <string name="osmand_monitoring_plugin_name">Logovacie služby</string>
     <string name="choose_osmand_theme_descr">Výber témy pre aplikáciu</string>
     <string name="choose_osmand_theme">Téma aplikácie</string>
     <string name="accessibility_options">Voľby zjednodušeného prístupu</string>
@@ -1906,4 +1907,22 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_group_by_invite">Vstúpiť pozvaním</string>
     <string name="osmo_group_information_desc">" - Všetky vytvorené skupiny sú verejné! Ak chcete byť anonymný, pripojte zariadenia priamo cez Tracker id.\n - Skupina môže zaregistrovať až do 16 ľudí.\n - Skupina bude zrušená v prípade nečinnosti alebo aktivity len jednej osoby počas 2 týždňov.\n - Môžete obmedziť vstup do skupiny len na pozvánky, ale pre ovládanie skupiny musíte použiť administračnú konzolu.\n - Ak potrebujete vytvoriť skupinu s inými podmienkami, kontaktujte http://osmo.mobi"</string>
     <string name="osmo_group_information">Prosím prečítajte si pred vytváraním skupiny!</string>
+    <string name="stop_navigation_service">Zastaviť</string>
+	<string name="enable_sleep_mode">Zapnúť režim spánku</string>
+	<string name="gps_wake_up_timer">interval prebúdzania GPS</string>
+	<string name="sleep_mode_stop_dialog">Udržovať GPS zapnuté?</string>
+	<string name="map_preferred_locale_descr">Preferovaný jazyk pre nápisy na mape (ak nie je dostupný budú použité anglické alebo lokálne názvy)</string>
+    <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
+    <string name="local_map_names">Lokálne názvy</string>
+    <string name="lang_sw">Svahilský</string>
+    <string name="lang_he">Hebrejský</string>
+    <string name="forward">Dopredu</string>
+    <string name="home">Domov</string>
+    <string name="live_monitoring_m_descr">Odosielať stopovanie určenej webovej službe ak je zaznamenávanie GPX zapnuté.</string>
+	<string name="live_monitoring_m">Online stopovanie (potrebné GPX)</string>
+    <string name="live_monitoring_start">Zapnúť online stopovanie</string>
+	<string name="live_monitoring_stop">Zastaviť online stopovanie</string>
+	<string name="gpx_monitoring_start">Zapnúť zaznamenávanie GPX</string>
+	<string name="gpx_monitoring_stop">Zastaviť zaznamenávanie GPX</string>
+    <string name="gpx_start_new_segment">Začať nový segment</string>
     </resources>
