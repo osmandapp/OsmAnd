@@ -20,8 +20,8 @@
 	<string name="live_monitoring_m">Online tracking (GPX required)</string>
     <string name="live_monitoring_start">Start online tracking</string>
 	<string name="live_monitoring_stop">Stop online tracking</string>
-	<string name="gpx_monitoring_start">Record GPX</string>
-	<string name="gpx_monitoring_stop">Stop GPX record</string>
+	<string name="gpx_monitoring_start">Start GPX recording</string>
+	<string name="gpx_monitoring_stop">Stop GPX recording</string>
     <string name="gpx_start_new_segment">Start new segment</string>
     <string name="rendering_attr_hideBuildings_name">Hide buildings</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Hide non-vehicle highways</string>
