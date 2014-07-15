@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -1892,4 +1893,18 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_cycleRoutes_name">Mostra vies de ciclista</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostra vies ciclistes</string>
     
+    <string name="map_preferred_locale_descr">Idioma preferit a les etiquetes del mapa (si no està disponible es canviarà la preferència actual entre l\'anglès i les denominacions locals)</string>
+    <string name="map_preferred_locale">Idioma preferit al mapa</string>
+    <string name="local_map_names">Denominacions locals</string>
+    <string name="lang_sw">Suahili</string>
+    <string name="lang_he">Hebreu</string>
+    <string name="forward">Endavant</string>
+    <string name="home">Punt inicial</string>
+    <string name="live_monitoring_m_descr">Envia registre de traces a un servei web específic si s\'ha activat la gravació GPX.</string>
+	<string name="live_monitoring_m">Registre de traça online (cal GPX)</string>
+    <string name="live_monitoring_start">Inicia registre de traça online</string>
+	<string name="live_monitoring_stop">Atura el registre de traça online</string>
+	<string name="gpx_monitoring_start">Grava GPX</string>
+	<string name="gpx_monitoring_stop">Atura gravació GPX</string>
+    <string name="gpx_start_new_segment">Inicia nou segment</string>
     </resources>
