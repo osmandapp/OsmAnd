@@ -187,7 +187,7 @@
     <string name="osmo_settings_descr">Configure monitoring settings and setup personal monitoring channel</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Advanced Live Monitoring. It provides possibilities to track other devices and be tracked. 
-        Create anonymous groups, share each other\'s location, and comminucate. Has various settings for session tracking or permanent tracking.
+        Create anonymous groups, share each other\'s location, and communicate. Has various settings for session tracking or permanent tracking.
         Anonymous groups are limited for a number of days and for some feature, i.e. there is no remote control and group administrator. 
         Fully functional groups should be created on the website and only registered users have access to them.
         Please read more on http://osmo.mobi.</string>
