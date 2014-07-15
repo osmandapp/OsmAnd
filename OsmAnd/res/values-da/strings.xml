@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -1918,4 +1919,19 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="rendering_attr_showSurfaceGrade_name">Vis vejkvaliteten</string>
     <string name="rendering_attr_showSurfaces_name">Vis vejbelægninger</string>
     <string name="rendering_attr_showCycleRoutes_name">Vis cykelruter</string>
+    <string name="local_map_names">Lokale navne</string>
+    <string name="lang_sw">Swahili</string>
+    <string name="lang_he">Hebræisk</string>
+    <string name="forward">Fremad</string>
+    <string name="home">Hjem</string>
+    <string name="live_monitoring_m_descr">Send sporing til en angivne webtjeneste, hvis GPX optagelse er aktiveret.</string>
+	<string name="live_monitoring_m">Online sporing (GPX kræves)</string>
+    <string name="live_monitoring_start">Start online sporing</string>
+	<string name="live_monitoring_stop">Stop online sporing</string>
+	<string name="gpx_monitoring_start">Optag GPX</string>
+	<string name="gpx_monitoring_stop">Stop GPX optagelse</string>
+    <string name="gpx_start_new_segment">Start nyt segment</string>
+    <string name="lang_fa">Persisk</string>
+	<string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis det ikke findes skiftes til engelsk eller lokale navne)</string>
+    <string name="map_preferred_locale">Kort foretrukne sprog</string>
     </resources>
