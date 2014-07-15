@@ -1752,11 +1752,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="navigation_intent_invalid">Ugyldigt format: %s</string>
 <string name="osmo_settings_uuid">Unik enheds-id</string>
     <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
-    <string name="osmo_plugin_description">OpenStreetMap - Overvågning - Advanced Live- Monitoring, giver muligheder for at spore andre enheder og selv at blive sporet.          
-	Opret anonyme grupper, del hinandens placering og kommuniker. Der er forskellige indstillinger for session sporing eller permanent sporing.          
-	Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator.          
-	 Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem.          
-	Læs mere på http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">OpenStreetMap - Overvågning - Advanced Live- Monitoring, giver muligheder for at spore andre enheder og selv at blive sporet. Opret anonyme grupper, del hinandens placering og kommuniker. Har forskellige indstillinger for session sporing eller permanent sporing. Anonyme grupper er begrænset til et antal dage og nogle funktioner, dvs der er ingen fjernkontrol og gruppeadministrator. Fuldt funktionelle grupper bør oprettes på hjemmesiden og kun registrerede brugere har adgang til dem. Læs mere på http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (avanceret live overvågning)</string>
     <string name="osmo_settings">OsMo OpenStreetMap overvågning (beta)</string>
    	<string name="keep_informing_never">Aldrig</string>
@@ -1924,8 +1920,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="lang_he">Hebræisk</string>
     <string name="forward">Fremad</string>
     <string name="home">Hjem</string>
-    <string name="live_monitoring_m_descr">Send sporing til en angivne webtjeneste, hvis GPX optagelse er aktiveret.</string>
-	<string name="live_monitoring_m">Online sporing (GPX kræves)</string>
+    <string name="live_monitoring_m_descr">Send sporing til en beestemt webtjeneste, hvis GPX optagelse er aktiveret.</string>
+	<string name="live_monitoring_m">Online sporing (GPX påkrævet)</string>
     <string name="live_monitoring_start">Start online sporing</string>
 	<string name="live_monitoring_stop">Stop online sporing</string>
 	<string name="gpx_monitoring_start">Optag GPX</string>
