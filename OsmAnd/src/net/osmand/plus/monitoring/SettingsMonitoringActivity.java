@@ -28,7 +28,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	
 	public static final int[] BG_SECONDS = new int[]{0, 30, 60, 90};
 	public static final int[] BG_MINUTES = new int[]{2, 3, 5, 10, 15, 30, 60, 90};
-	private final static boolean REGISTER_BG_SETTINGS = true;
+	private final static boolean REGISTER_BG_SETTINGS = false;
 	private static final int[] SECONDS = OsmandMonitoringPlugin.SECONDS;
 	private static final int[] MINUTES = OsmandMonitoringPlugin.MINUTES;
 	
@@ -46,9 +46,9 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		
 		createLoggingSection(grp);
 		createLiveSection(grp);
-//		if(REGISTER_BG_SETTINGS) {
-//			registerBackgroundSettings();
-//		}
+		if(REGISTER_BG_SETTINGS) {
+			registerBackgroundSettings();
+		}
 		profileDialog();
     }
 
