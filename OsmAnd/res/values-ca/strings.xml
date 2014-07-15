@@ -1907,4 +1907,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
 	<string name="gpx_monitoring_start">Grava GPX</string>
 	<string name="gpx_monitoring_stop">Atura gravació GPX</string>
     <string name="gpx_start_new_segment">Inicia nou segment</string>
-    </resources>
+    <string name="lang_fa">Persa</string>
+	</resources>
