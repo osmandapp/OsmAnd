@@ -101,7 +101,7 @@ public class MapInfoWidgetsFactory {
 			public void onClick(View view) {
 				if (app.getNavigationService() != null){
 					AlertDialog.Builder dlg = new AlertDialog.Builder(map);
-					dlg.setTitle(app.getString(R.string.navigation_stop_dialog));
+					dlg.setTitle(app.getString(R.string.sleep_mode_stop_dialog));
 					dlg.setPositiveButton(app.getString(R.string.keep_navigation_service), null);
 					dlg.setNegativeButton(app.getString(R.string.stop_navigation_service), new DialogInterface.OnClickListener() {
 						@Override
@@ -114,19 +114,15 @@ public class MapInfoWidgetsFactory {
 					
 				} else {
 					final MonitoringInfoControl.ValueHolder<Integer> vs = new MonitoringInfoControl.ValueHolder<Integer>();
-					vs.value = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
-					OsmandMonitoringPlugin.showIntervalChooseDialog(map, app.getString(R.string.save_track_interval) + " : %s",
-							app.getString(R.string.save_track_to_gpx),
+					vs.value = app.getSettings().SERVICE_OFF_INTERVAL.get();
+					OsmandMonitoringPlugin.showIntervalChooseDialog(map, app.getString(R.string.gps_wake_up_timer) + " : %s",
+							app.getString(R.string.enable_sleep_mode),
 							OsmandMonitoringPlugin.SECONDS,
 							OsmandMonitoringPlugin.MINUTES,
 							vs, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
-									app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.set(true);
-									if (app.getNavigationService() == null) {
-										app.getSettings().SERVICE_OFF_INTERVAL.set(0);
-									}
+									app.getSettings().SERVICE_OFF_INTERVAL.set(vs.value);
 									app.startNavigationService(NavigationService.USED_BY_GPX);
 								}
 							});
