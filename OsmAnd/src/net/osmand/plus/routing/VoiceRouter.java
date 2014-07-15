@@ -220,9 +220,9 @@ public class VoiceRouter {
 				p.offRoute(dist).play();
 			}
 			if(waitAnnouncedOffRoute == 0) {
-				waitAnnouncedOffRoute = 30000;	
+				waitAnnouncedOffRoute = 60000;	
 			} else {
-				waitAnnouncedOffRoute += 30000;
+				waitAnnouncedOffRoute *= 2.5;
 			}
 			lastAnnouncedOffRoute = ms;
 		}
