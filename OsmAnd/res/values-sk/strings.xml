@@ -1925,4 +1925,16 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="gpx_monitoring_start">Zapnúť zaznamenávanie GPX</string>
 	<string name="gpx_monitoring_stop">Zastaviť zaznamenávanie GPX</string>
     <string name="gpx_start_new_segment">Začať nový segment</string>
+    <string name="rendering_attr_hideBuildings_name">Skryť budovy</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Skryť cesty, ktoré nie sú pre vozidlá</string>
+    <string name="rendering_attr_hideText_name">Skryť text</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Skryť lesy a kríky</string>
+    <string name="rendering_attr_buildings15zoom_name">Budovy na priblížení 15</string>
+    <string name="rendering_attr_moreDetailed_name">Viac detailov</string>
+    <string name="rendering_attr_lessDetailed_name">Menej detailov</string>
+    <string name="rendering_attr_hideAccess_name">Skryť typ prístupu</string>
+    <string name="rendering_attr_showAccess_name">Zobraziť typ prístupu</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Zobraziť kvalitu ciest</string>
+    <string name="rendering_attr_showSurfaces_name">Zobraziť povrch ciest</string>
+    <string name="rendering_attr_showCycleRoutes_name">Zobraziť cyklocesty</string>
     </resources>
