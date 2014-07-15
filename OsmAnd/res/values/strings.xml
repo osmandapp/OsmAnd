@@ -12,8 +12,9 @@
 	<string name="keep_navigation_service">Keep</string>
 	<string name="stop_navigation_service">Stop</string>
 	<string name="enable_sleep_mode">Enable sleep mode</string>
-	<string name="gps_wake_up_timer">Service off interval</string>
-    <string name="map_preferred_locale_descr">Preferred lanaguage for labels on the map (if it is not available will switch to English or to local names)</string>
+	<string name="gps_wake_up_timer">GPS wake up interval</string>
+	<string name="sleep_mode_stop_dialog">Keep GPS on?</string>
+	<string name="map_preferred_locale_descr">Preferred lanaguage for labels on the map (if it is not available will switch to English or to local names)</string>
     <string name="map_preferred_locale">Map prefferred language</string>
     <string name="local_map_names">Local names</string>
     <string name="lang_sw">Swahili</string>
@@ -1923,5 +1924,4 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_photo_play_sound">Play sound on photo shot</string>
 	<string name="av_photo_play_sound_descr">Choose whether to play a sound when shooting photos</string>
     <string name="navigation_intent_invalid">Invalid format: %s</string>
-	<string name="sleep_mode_stop_dialog">Do you want to stop sleep mode service?</string>
 </resources>
