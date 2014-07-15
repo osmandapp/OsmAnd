@@ -1927,4 +1927,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="gpx_start_new_segment">Avvia un nuovo segmento</string>
     <string name="lang_fa">Persiano</string>
 	<string name="lang_he">Ebraico</string>
-    </resources>
+    <string name="keep_navigation_service">Mantieni</string>
+	<string name="stop_navigation_service">Ferma</string>
+	<string name="enable_sleep_mode">Abilita la modalità quiescente</string>
+	<string name="gps_wake_up_timer">Intervallo risveglio GPS</string>
+	<string name="sleep_mode_stop_dialog">Tenere il GPS acceso?</string>
+	</resources>
