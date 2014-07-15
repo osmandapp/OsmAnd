@@ -9,6 +9,20 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="map_preferred_locale_descr">Preferred lanaguage for labels on the map (if it is not available will switch to English or to local names)</string>
+    <string name="map_preferred_locale">Map prefferred language</string>
+    <string name="local_map_names">Local names</string>
+    <string name="lang_sw">Swahili</string>
+    <string name="lang_he">Hebrew</string>
+    <string name="forward">Forward</string>
+    <string name="home">Home</string>
+    <string name="live_monitoring_m_descr">Send tracking to a specified web service if GPX recording is enabled.</string>
+	<string name="live_monitoring_m">Online tracking (GPX required)</string>
+    <string name="live_monitoring_start">Start online tracking</string>
+	<string name="live_monitoring_stop">Stop online tracking</string>
+	<string name="gpx_monitoring_start">Record GPX</string>
+	<string name="gpx_monitoring_stop">Stop GPX record</string>
+    <string name="gpx_start_new_segment">Start new segment</string>
     <string name="rendering_attr_hideBuildings_name">Hide buildings</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Hide non-vehicle highways</string>
     <string name="rendering_attr_hideText_name">Hide text</string>
@@ -173,7 +187,7 @@
     <string name="osmo_settings_descr">Configure monitoring settings and setup personal monitoring channel</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Advanced Live Monitoring. It provides possibilities to track other devices and be tracked. 
-        Create anonymous groups, share each other location and comminucate. It has various settings for session tracking or permanent tracking.
+        Create anonymous groups, share each other\'s location, and comminucate. Has various settings for session tracking or permanent tracking.
         Anonymous groups are limited for a number of days and for some feature, i.e. there is no remote control and group administrator. 
         Fully functional groups should be created on the website and only registered users have access to them.
         Please read more on http://osmo.mobi.</string>
@@ -218,6 +232,7 @@
 	<string name="lang_lt">Lithuanian</string>
 	<string name="lang_mr">Marathi</string>
 	<string name="lang_no">Norwegian</string>
+	<string name="lang_fa">Persian</string>
 	<string name="lang_pl">Polish</string>
 	<string name="lang_pt">Portuguese</string>
 	<string name="lang_ro">Romanian</string>
@@ -470,8 +485,6 @@
     <string name="favourites_list_activity">Select favorite</string>
     <string name="local_openstreetmap_act_title">OSM modifications</string>
     <string name="default_buttons_other_actions">Other actions</string>
-    <string name="save_current_track_widget">Save
-        \n current GPX track</string>
 	<string name="tip_recent_changes_1_2_t">Fixes in 1.2.1:
 	    \n\t*Fix Geo Intent (Foursquare, c:geo)
 	    \n\t*Fix screen tremble during navigation
@@ -888,8 +901,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_day_night">Day/night map</string>
 	<string name="map_widget_vector_attributes">Rendering attributes:</string>
 	<string name="map_widget_renderer">Map style</string>
-	<string name="live_monitoring_mode_off">Start\n online tracking</string>
-	<string name="live_monitoring_mode_on">Stop\n online tracking</string>
 	<string name="layer_map_appearance">Configure screen</string>
 	<string name="show_lanes">Show lanes</string>
 	<string name="avoid_unpaved">Avoid unpaved roads</string>
@@ -900,8 +911,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_show_ruler">Ruler</string>
 	<string name="map_widget_view_direction">Viewing direction</string>
 	<string name="map_widget_transparent">Transparent skin</string>
-	<string name="monitoring_mode_off">Record GPX</string>
-	<string name="monitoring_mode_on">Stop\n GPX rec.</string>
 	<string name="bg_service_sleep_mode_off">Enable\n sleep mode</string>
 	<string name="bg_service_sleep_mode_on">Stop\n sleep mode</string>
 	<string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
@@ -1162,8 +1171,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_openstreetmap_descr_title">Asynchronous OSM editing:</string>
 	<string name="local_openstreetmap_settings">Locally saved OSM POIs/Bugs</string>
 	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs/Bugs noted in local database</string>
-	<string name="live_monitoring_descr">Send tracking to a specified web service</string>
-	<string name="live_monitoring">Online tracking</string>
 	<string name="live_monitoring_interval_descr">Specify online tracking interval</string>
 	<string name="live_monitoring_interval">Online tracking interval</string>
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>

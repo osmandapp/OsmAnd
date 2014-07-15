@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors-ligne des PI
@@ -21,8 +20,8 @@
   <string name="local_openstreetmap_descr_title">Édition asynchrone d\'OSM :</string>
   <string name="local_openstreetmap_settings">Points/bogues OSM enregistrés en local</string>
   <string name="local_openstreetmap_settings_descr">Afficher et gérer les points/bogues OSM enregistrés dans la base de données locale</string>
-  <string name="live_monitoring_descr">Activer l\'envoi de requêtes HTTP à un service web donné</string>
-  <string name="live_monitoring">Activer le suivi en ligne</string>
+  
+  
   <string name="live_monitoring_interval_descr">Préciser l\'intervalle pour le suivi en ligne</string>
   <string name="live_monitoring_interval">Intervalle pour le suivi en ligne</string>
   <string name="live_monitoring_url_descr">Préciser l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -117,7 +116,7 @@
   <string name="city_type_village">Village</string>
   <string name="city_type_town">Ville</string>
   <string name="city_type_city">Ville</string>
-  <string name="layer_poi_label">Étiquette des points d\'intérêt</string>
+  
   <string name="animate_route_off">Arrêter l\'animation</string>
   <string name="animate_route">Démarrer l\'animation</string>
   <string name="tip_recent_changes_0_6_8_t">Changements en 0.6.8 :
@@ -980,8 +979,8 @@
   <string name="bg_service_sleep_mode_on">Désactiver\nmode veille</string>
   <string name="bg_service_screen_lock_toast">L\'écran est verrouillé</string>
   <string name="bg_service_interval">Positionner l\'intervalle d\'activation :</string>
-<string name="live_monitoring_mode_off">Démarrer\nsuivi en ligne</string>
-<string name="live_monitoring_mode_on">Arrêter\nsuivi en ligne</string>
+
+
 <string name="layer_map_appearance">Configurer l\'écran</string>
 <string name="show_lanes">Afficher les voies de circulation</string>
 <string name="avoid_unpaved">Éviter les voies non revêtues</string>
@@ -995,8 +994,8 @@
 <string name="map_widget_appearance">Autres éléments :</string>
 <string name="map_widget_view_direction">Orientation</string>
 <string name="map_widget_transparent">Habillage transparent</string>
-<string name="monitoring_mode_off">Enregistrer\ntrace GPX</string>
-<string name="monitoring_mode_on">Arrêter\nenr. GPX</string>
+
+
 <string name="gps_wakeup_interval">Intervalle d\'activation du GPS: %s</string>
 <string name="email">courriel</string>
 <string name="map_widget_day_night">Mode jour/nuit</string>
@@ -1212,8 +1211,7 @@
 \n\t* Ajout du support multi-fenêtres pour les appareils Samsung
 \n\t* Filtre de Kalman pour la boussole\n\t* Support des montres Pebble "
     </string>
-    <string name="save_current_track_widget">Sauvegarder
-\ntrace GPX en cours</string>
+    
 	<string name="street_name">Rue</string>
 	<string name="hno">Numéro de bâtiment</string>
     <string name="tip_recent_changes_1_3_t">"Changements en 1.5:\n\t* Thème Holo (personnalisation de thème) "

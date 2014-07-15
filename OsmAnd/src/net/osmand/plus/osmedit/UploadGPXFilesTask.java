@@ -6,19 +6,18 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.widget.Toast;
-
-import com.actionbarsherlock.app.SherlockActivity;
 
 public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 
 	private final String visibility;
 	private final String description;
 	private final String tagstring;
-	private SherlockActivity la;
+	private Activity la;
 
-	public UploadGPXFilesTask(SherlockActivity la,
+	public UploadGPXFilesTask(Activity la,
 			String description, String tagstring, UploadVisibility visibility) {
 		this.la = la;
 		this.description = description;

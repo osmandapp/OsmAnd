@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="address_search_desc">Mencari alamat</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="address_search_desc">Mencari alamat</string>
   <string name="navpoint_search_desc">Koordinat</string>
   <string name="transport_search_desc">Mencari transportasi</string>
   <string name="favourites_search_desc">Mencari favorit</string>
@@ -33,8 +32,7 @@
     <string name="favourites_list_activity">Pilih favorit</string>
     <string name="local_openstreetmap_act_title">Modifikasi OSM</string>
     <string name="default_buttons_other_actions">Perintah lain</string>
-    <string name="save_current_track_widget">Simpan
-\n track GPX sekarang</string>
+    
 	<string name="tip_recent_changes_1_2_t">"Perbaikan pada 1.2.1:
 \n\t*Perbaikan Geo Intent (Foursquare, c:geo)
 \n\t*Perbaikan getaran layar saat navigasi

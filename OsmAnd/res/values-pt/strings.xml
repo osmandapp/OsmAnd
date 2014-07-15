@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -580,8 +579,8 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="local_openstreetmap_descr_title">Edição assíncrona de OSM:</string>
   <string name="local_openstreetmap_settings">POI/Bugs armazenados na memória local</string>
   <string name="local_openstreetmap_settings_descr">Mostrar e gerir Pontos de Interesse e Erros guardados na memória local</string>
-  <string name="live_monitoring_descr">Enviar rota para um serviço na Internet</string>
-  <string name="live_monitoring">Online live tracking</string>
+  
+  
   <string name="live_monitoring_interval_descr">Especificar intervalo de monitoramento ao vivo</string>
   <string name="live_monitoring_interval">Live tracking interval</string>
   <string name="live_monitoring_url_descr">Especifique o endereço web com a sintaxe de parâmetros: lat={0}, lon={1}, data/hora={2}, hdop={3}, altitude={4}, velocidade={5}, bearing={6}</string>
@@ -652,7 +651,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
   <string name="city_type_village">Vila</string>
   <string name="city_type_town">Cidade</string>
   <string name="city_type_city">Cidade</string>
-  <string name="layer_poi_label">Nomes de POI</string>
+  
   <string name="animate_route_off">Parar animação</string>
   <string name="animate_route">Iniciar animação</string>
   <string name="tip_recent_changes_0_6_8_t">"Changes in 0.6.8 : \n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options. \n\t- Implement POI search by name in big areas (countries) \n\t- Fix flickering map screen for tablets (Issue 641) \n\t- Auto-center map view option (Issue 356) \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\' \n\t- POI data included in .obf file (all download indexes after 01/10/11) \n\t- Voice prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "</string>
@@ -978,8 +977,8 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
 <string name="map_widget_day_night">Modo Dia/noite</string>
 <string name="map_widget_vector_attributes">Atributos de renderização:</string>
 <string name="map_widget_renderer">Estilo de renderização</string>
-<string name="live_monitoring_mode_off">Iniciar\n rastreamento online</string>
-<string name="live_monitoring_mode_on">Parar\n viver rastreamento</string>
+
+
 <string name="layer_map_appearance">Configurar tela</string>
 <string name="show_lanes">Mostrar pistas</string>
 <string name="avoid_unpaved">Evitar estradas não pavimentadas</string>
@@ -991,8 +990,8 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
 <string name="map_widget_appearance">Elementos restantes:</string>
 <string name="map_widget_view_direction">A direção da visão</string>
 <string name="map_widget_transparent">Pele transparente</string>
-<string name="monitoring_mode_off">Registro GPX</string>
-<string name="monitoring_mode_on">Parar\n GPX rec.</string>
+
+
 <string name="gps_wakeup_interval">GPS intervalo de despertar: %s</string>
 <string name="int_continuosly">Contínuo</string>
 <string name="email">e-mail</string>
@@ -1133,7 +1132,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="rendering_attr_noAdminboundaries_name">Esconder limites administrativos</string>
 	<string name="rendering_attr_noAdminboundaries_description">Esconder limites regionais (níveis 5 a 9)</string>
     <string name="recording_context_menu_show">Ver</string>
-    <string name="save_current_track_widget">Salvar\nrota GPX atual</string>
+    
 	<string name="item_unchecked">desmarcado</string>
     <string name="osmodroid_plugin_old_ver_not_supported">Plugin OsMoDroid é antigo e precisa ser atualizado.</string>
     <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
@@ -1692,7 +1691,7 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
          \n Nota: Os arquivos antigos permanecerão intocados.
          \n Nota: não será possível compartilhar arquivos entre OsmAnd e OsmAnd + . </string>
     <string name="application_dir_change_warning2">OsmAnd pode tentar mover os dados para um novo destino.  Você quer isso ?</string>
-    <string name="copying_osmand_one_file_descr">Copiando o arquivo (% s) para novo destino ...</string>
+    <string name="copying_osmand_one_file_descr">Copiando o arquivo (%s) para novo destino ...</string>
     <string name="copying_osmand_files_descr">Cópia de arquivos Osmand para novo destino (%s)</string>
     <string name="copying_osmand_files">Cópia de arquivos Osmand</string>
     <string name="calculate_osmand_route_gpx">Calcular rota offline OsmAnd</string>
@@ -1701,8 +1700,8 @@ Afeganistão , Albânia, Argélia , Andorra, Angola , Anguilla, Antígua e Barbu
 	<string name="lang_be">Bielorrusso</string>
 	<string name="lang_bs">Bósnio</string>
 	<string name="lang_bg">Búlgaro</string>
-	<string name="gpx_info_subtracks">Subtrilhas : % 1 $ s </string>
-	<string name="gpx_info_maximum_speed">Velocidade máxima: % 1 $ s </string>
+	<string name="gpx_info_subtracks">Subtrilhas : %1$s </string>
+	<string name="gpx_info_maximum_speed">Velocidade máxima: %1$s </string>
 	<string name="gpx_info_avg_altitude">Altitude média : %1$s</string>
 	<string name="gpx_info_asc_altitude">Descida/Subida: %1$s</string>
     <string name="gpx_timespan">Abrangência: %1$s</string>

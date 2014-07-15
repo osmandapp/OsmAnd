@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -24,8 +23,8 @@
   <string name="local_openstreetmap_descr_title">Modifica asincrona di OSM:</string>
   <string name="local_openstreetmap_settings">PDI/Errori OSM salvati in locale</string>
   <string name="local_openstreetmap_settings_descr">Visualizza e gestisci i PDI/errori OSM inseriti nel database locale</string>
-  <string name="live_monitoring_descr">Invia il tracking ad un servizio web specificato</string>
-  <string name="live_monitoring">﻿Tracking online in diretta</string>
+  
+  
   <string name="live_monitoring_interval_descr">Specifica l\'intervallo del tracking in diretta</string>
   <string name="live_monitoring_interval">Intervallo del Live tracking</string>
   <string name="live_monitoring_url_descr">Specifica l\'indirizzo internet con la sintassi dei parametri: lat={0}, lon={1}, data/ora={2}, hdop={3}, altitudine={4}, velocità={5}, angolo={6}</string>
@@ -109,7 +108,7 @@
   <string name="city_type_village">Villaggio</string>
   <string name="city_type_town">Cittadina</string>
   <string name="city_type_city">Città</string>
-  <string name="layer_poi_label">Etichette PDI</string>
+  
   <string name="animate_route_off">Ferma animazione</string>
   <string name="animate_route">Avvia animazione</string>
   <string name="tip_recent_changes_0_6_8_t">Novità nella versione 0.6.8:
@@ -1017,8 +1016,8 @@
 <string name="map_widget_day_night">Mappa giorno/notte</string>
 <string name="map_widget_vector_attributes">Attributi del disegno:</string>
 <string name="map_widget_renderer">Stile della mappa</string>
-<string name="live_monitoring_mode_off">Avvia\n tracciatura live</string>
-<string name="live_monitoring_mode_on">Ferma\n tracciatura live</string>
+
+
 <string name="layer_map_appearance">Configura lo schermo</string>
 <string name="show_lanes">Visualizza le corsie</string>
 <string name="avoid_unpaved">Evita le strade non asfaltate</string>
@@ -1032,8 +1031,8 @@
 <string name="map_widget_appearance">Elementi rimanenti:</string>
 <string name="map_widget_view_direction">﻿Direzione della visuale</string>
 <string name="map_widget_transparent">Aspetto trasparente</string>
-<string name="monitoring_mode_off">Registra GPX</string>
-<string name="monitoring_mode_on">Ferma\n reg. GPX</string>
+
+
 <string name="gps_wakeup_interval">﻿Intervallo di risveglio GPS: %s</string>
 <string name="int_continuosly">Continuo</string>
 <string name="email">e-mail</string>
@@ -1440,8 +1439,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
         \n\t* Ridisegno della IU
 		\n\t* Correzione di errori
     </string>
-    <string name="save_current_track_widget">Salva↵
-        \n la traccia GPX attuale</string>
+    
 	<string name="street_name">Strada</string>
 	<string name="hno">Numero civico</string>
     <string name="tip_recent_changes_1_3_t">Cambiamenti nella versione 1.3:

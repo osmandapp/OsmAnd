@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
 public class FileNameTranslationHelper {
 
 	public static final String WIKI_NAME = "_wiki";
+	public static final String HILL_SHADE = "Hillshade";
 
 	public static String getFileName(Context ctx, OsmandRegions regions, String fileName) {
 		String basename = getBasename(fileName);
@@ -21,6 +22,8 @@ public class FileNameTranslationHelper {
 			return getWikiName(ctx,basename);
 		} else if (fileName.endsWith("tts")) { //tts files
 			return getVoiceName(ctx, fileName);
+		} else if (fileName.startsWith(HILL_SHADE)){
+			return getHillShadeName(ctx, regions, basename);
 		} else if (fileName.length() == 2) { //voice recorded files
 			try {
 				Field f = R.string.class.getField("lang_"+fileName);
@@ -45,6 +48,14 @@ public class FileNameTranslationHelper {
 		}
 
 		return null;
+	}
+
+	public static String getHillShadeName(Context ctx, OsmandRegions regions, String basename) {
+		String intermName = basename.replace(HILL_SHADE,"");
+		String hillsh = ctx.getString(R.string.download_hillshade_item) + " ";
+
+		String locName = regions.getLocaleName(intermName.trim().replace(" ", "_"));
+		return hillsh + locName;
 	}
 
 	public static String getWikiName(Context ctx, String basename){

@@ -95,8 +95,8 @@
 	<string name="map_widget_day_night">Hartă zi/noapte</string>
 	<string name="map_widget_vector_attributes">Atribute randare:</string>
 	<string name="map_widget_renderer">Stil randare</string>
-	<string name="live_monitoring_mode_off">Pornește\nlive tracking</string>
-	<string name="live_monitoring_mode_on">Oprește\nlive tracking</string>
+	
+	
 	
 	
 	<string name="layer_map_appearance">Configurare ecran</string>
@@ -110,8 +110,8 @@
 	<string name="map_widget_appearance">Diverse:</string>
 	<string name="map_widget_view_direction">Direcția de deplasare</string>
 	<string name="map_widget_transparent">Skin transparent</string>
-	<string name="monitoring_mode_off">Înregistrează GPX</string>
-	<string name="monitoring_mode_on">Stop\n înreg. GPX.</string>
+	
+	
 	<string name="bg_service_sleep_mode_off">Activează\n mod standby</string>
 	<string name="bg_service_sleep_mode_on">Oprește\n mod standby</string>
 	<string name="gps_wakeup_interval">Interval menținere GPS activ: %s</string>
@@ -361,8 +361,8 @@
 	<string name="local_openstreetmap_descr_title">Editare OSM asincronă:</string>
 	<string name="local_openstreetmap_settings">POI/Bug-uri OSM salvate local</string>
 	<string name="local_openstreetmap_settings_descr">Arată și organizează POI/Bug-uri notate în baza de date salvată pe dispozitiv</string>
-	<string name="live_monitoring_descr">Trimite coordonatele poziției curente la un serviciu specializat de monitorizare a poziției (live tracking)</string>
-	<string name="live_monitoring">Monitorizare online a poziției</string>
+	
+	
 	<string name="live_monitoring_interval_descr">Specificarea intervalului de timp între două trimiteri consecutive ale poziției curente</string>
 	<string name="live_monitoring_interval">Intervalul de trimitere a poziției</string>
 	<string name="live_monitoring_url_descr">Specificarea adresei de web la care se trimit coordonatele poziției curente cu sintaxa: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -463,7 +463,7 @@
 	<string name="city_type_village">Sat</string>
 	<string name="city_type_town">Oraș</string>
 	<string name="city_type_city">Oraș</string>
-	<string name="layer_poi_label">Etichete POI</string>
+	
 	<string name="animate_route_off">Opriți simularea</string>
 	<string name="animate_route">Porniți simularea</string>
 	<string name="tip_recent_changes_0_6_8_t">"Modificări în versiunea 0.6.8 :

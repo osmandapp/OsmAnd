@@ -151,7 +151,7 @@ public class PoiFilter {
 	public ResultMatcher<Amenity> getResultMatcher(final ResultMatcher<Amenity> matcher){
 		final String filter = nameFilter;
 		if(filter != null) {
-			final boolean en = app.getSettings().USE_ENGLISH_NAMES.get();
+			final boolean en = app.getSettings().usingEnglishNames();
 			return new ResultMatcher<Amenity>() {
 				@Override
 				public boolean publish(Amenity object) {

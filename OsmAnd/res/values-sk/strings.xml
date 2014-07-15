@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -44,8 +43,8 @@
   <string name="snap_to_road_descr">Prichytenie pozície k cestám počas navigácie</string>
   <string name="snap_to_road">Prichytiť k ceste</string>
   <string name="avoid_motorway">Diaľniciam</string>
-  <string name="live_monitoring_mode_off">Spustiť\n stopovanie naživo</string>
-  <string name="live_monitoring_mode_on">Zastaviť\n stopovanie naživo</string>
+  
+  
   <string name="layer_map_appearance">Konfigurovať obrazovku</string>
   <string name="show_lanes">Jazdné pruhy</string>
   <string name="avoid_unpaved">Nespevneným cestám</string>
@@ -61,8 +60,8 @@
   <string name="map_widget_transparent">Priehľadná téma</string>
   <string name="gps_wakeup_interval">Interval prebúdzania GPS: %s</string>
   <string name="int_continuosly">Priebežne</string>
-  <string name="monitoring_mode_off">Zaznamenať GPX</string>
-  <string name="monitoring_mode_on">Zastaviť\n GPX záznam</string>
+  
+  
   <string name="bg_service_sleep_mode_off">Zapnúť\n režim spánku</string>
   <string name="bg_service_sleep_mode_on">Vypnúť\n režim spánku</string>  
   <string name="map_widget_top_text">Názov ulice</string>
@@ -223,8 +222,8 @@
   <string name="local_openstreetmap_descr_title">Asynchrónne upravovanie OSM:</string>
   <string name="local_openstreetmap_settings">Lokálne uložené OSM POI/chyby</string>
   <string name="local_openstreetmap_settings_descr">Zobrazenie a správa OSM bodov záujmov/chýb uložených v lokálnej databáze</string>
-  <string name="live_monitoring_descr">Zapnutie posielania HTTP požiadaviek na určenú webovú službu</string>
-  <string name="live_monitoring">Zapnúť stopovanie naživo</string>
+  
+  
   <string name="live_monitoring_interval_descr">Určenie intervalu stopovania naživo</string>
   <string name="live_monitoring_interval">Interval stopovania naživo</string>
   <string name="live_monitoring_url_descr">Zadajte webovú adresu stopovania naživo so syntaxom parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -290,7 +289,7 @@
   <string name="city_type_village">Obec</string>
   <string name="city_type_town">Mesto</string>
   <string name="city_type_city">Veľkomesto</string>
-  <string name="layer_poi_label">POI popisy</string>
+  
   <string name="animate_route_off">Vypnúť simuláciu</string>
   <string name="animate_route">Začať simuláciu</string>
   <string name="tip_recent_changes_0_6_8_t">Zmeny v 0.6.8:
@@ -1270,8 +1269,7 @@
 \n\t* Kalmanov filter pre kompas
 \n\t* Podpora hodiniek Pebble
     </string>
-    <string name="save_current_track_widget">Uložiť
-\n aktuálnu stopu GPX</string>
+    
 	<string name="street_name">Ulica</string>
 	<string name="hno">Číslo domu</string>
     <string name="monitoring_settings">Logovacie služby a režim spánku</string>

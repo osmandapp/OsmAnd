@@ -7,8 +7,8 @@
 <string name="map_widget_appearance">Gwedd:</string>
 <string name="map_widget_view_direction">Golwg cyfeiriad</string>
 <string name="map_widget_transparent">Golwg tryloyw</string>
-<string name="monitoring_mode_off">GPX rec</string>
-<string name="monitoring_mode_on">Diffodd GPX</string>
+
+
 <string name="bg_service_sleep_mode_off">Rhedeg yn y cefndir</string>
 <string name="bg_service_sleep_mode_on">Atal y cefndir</string>
 <string name="gps_wakeup_interval">Cyfnod deffro GPS: %S</string>
@@ -64,8 +64,8 @@
 <string name="select_animate_speedup">Defnyddio cyflymu animeiddio taith</string>
 <string name="global_app_allocated_memory_descr">Cof Dynodedig %1$s MB (Terfyn Android %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Cof Dynodedig</string>
-<string name="live_monitoring_mode_off">Cychwyn\n tracio byw</string>
-<string name="live_monitoring_mode_on">Atal\n tracio byw</string>
+
+
 <string name="layer_map_appearance">Ffurfweddu\'r sgrin</string>
 <string name="show_lanes">Dangos lonydd</string>
 <string name="avoid_unpaved">Osgoi ffyrdd heb wyneb caled</string>

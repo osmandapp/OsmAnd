@@ -17,7 +17,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="city_type_village">Làng</string>
 	<string name="city_type_town">Thị xã</string>
 	<string name="city_type_city">Thành phố</string>
-	<string name="layer_poi_label">nhãn POI</string>
+	
 	<string name="animate_route_off">Dừng mô phỏng</string>
 	<string name="animate_route">Bắt đầu mô phỏng</string>
 	<string name="file_can_not_be_renamed">Không thể đổi tên tập tin.</string>

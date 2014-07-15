@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -21,7 +20,7 @@
 <string name="osmand_parking_choose_type">Tria el tipus d\'aparcament</string>
 <string name="avoid_unpaved">Evita les carreteres no pavimentades</string>
 <string name="avoid_in_routing_title">Evita…</string>
-<string name="monitoring_mode_on">Atura\n enr. GPX.</string>
+
 <string name="int_continuosly">Sense interrupció</string>
 <string name="map_widget_config">Configura la pantalla</string>
 <string name="map_widget_compass">Brúixola</string>
@@ -83,7 +82,7 @@
 <string name="unknown_from_location">El punt d\'inici encara no s\'ha determinat</string>
 <string name="unknown_location">La posició encara no es coneix</string>
 <string name="modify_transparency">Modifica l\'opacitat (0 - transparent, 255 - opac)</string>
-<string name="monitoring_mode_off">Enregistra en un GPX</string>
+
 <string name="bg_service_sleep_mode_off">Activa\'n\n el mode adormit</string>
 <string name="bg_service_sleep_mode_on">Atura\'n\n el mode adormit</string>
 <string name="offline_navigation_not_available">La navegació fora de línia de l\'OsmAnd no està disponible temporalment.</string>
@@ -239,7 +238,7 @@
 <string name="delete_confirmation_msg">Voleu suprimir %1$s?</string>
 <string name="city_type_town">Poble</string>
 <string name="city_type_city">Ciutat</string>
-<string name="layer_poi_label">Etiquetes dels PDI</string>
+
 <string name="animate_route_off">Atura l\'animació</string>
 <string name="animate_route">Inicia l\'animació</string>
 <string name="file_with_name_already_exists">Ja existeix un fitxer amb aquest nom.</string>
@@ -647,11 +646,11 @@
 <string name="use_trackball">Utilitza el ratolí de bola</string>
 <string name="process_navigation_service">Servei de navegació de l\'OsmAnd</string>
 
-<string name="live_monitoring_mode_off">Inicia\n el seguiment en viu</string>
-<string name="live_monitoring_mode_on">Atura\n el seguiment en viu</string>
+
+
 <string name="osmand_parking_position_description_add">Per recollir el cotxe a:</string>
-<string name="live_monitoring_descr">Enviar el seguiment a un servei web especific</string>
-<string name="live_monitoring">Seguiment en línia en viu</string>
+
+
 <string name="live_monitoring_interval">Interval de seguiment en viu</string>
 <string name="live_monitoring_interval_descr">Interval de seguiment en viu especific</string>
 <string name="live_monitoring_url">Adreça web de seguiment en viu</string>
@@ -1237,7 +1236,7 @@
     <string name="favourites_list_activity">Seleccioneu el preferit</string>
     <string name="local_openstreetmap_act_title">Modificacions de l\'OSM</string>
     <string name="default_buttons_other_actions">Altres accions</string>
-    <string name="save_current_track_widget">Desa\n la traça GPX actual</string>
+    
 	<string name="layer_hillshade">Capa d\'ombrejat</string>
     <string name="map_widget_gps_info">Informació GPS</string>
     <string name="access_arrival_time">Hora d\'arribada</string>
@@ -1892,4 +1891,5 @@ La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, 
     <string name="rendering_attr_showSurfaces_name">Mostra el tipus de superfície de les vies</string>
     <string name="rendering_attr_cycleRoutes_name">Mostra vies de ciclista</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostra vies ciclistes</string>
+    
     </resources>

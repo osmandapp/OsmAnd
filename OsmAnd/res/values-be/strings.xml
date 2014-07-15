@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага масштабіраваньня</string>
     <string name="auto_zoom_close">Зачыніць</string>
     <string name="auto_zoom_far">Для сярэдняга масштаба</string>
     <string name="auto_zoom_farthest">Аддаліць</string>
@@ -147,8 +146,7 @@
     <string name="favourites_list_activity">Абярыце з упадабаных</string>
     <string name="local_openstreetmap_act_title">Мадыфікацыі OSM</string>
     <string name="default_buttons_other_actions">Iншыя дзеяньні</string>
-    <string name="save_current_track_widget">Захаваць
-	\n бягучы GPX сьлед</string>
+    
 	<string name="tip_recent_changes_1_2_t">Зьмены ў 1.2.1
 	\n\t*Выпраўлены Геа сэрвісы (Foursquare, c:geo)
 	\n\t*Выпраўлена дрыжаньне выявы пад час навігаціі
@@ -192,7 +190,7 @@
     <string name="precise_routing_mode_descr">Дазволіць дакладную навігацыю каб шукаць шлях без памылак. Усё яшчэ абмежавана адлегласцю і павольная.</string>
     <string name="precise_routing_mode">Дакладны маршрут (эксп.)</string>
     <string name="recording_context_menu_show">Паказаць</string>
-    <string name="recording_photo_description">Фота %1$ з %2$</string>
+    <string name="recording_photo_description">Фота %1$s %2$s</string>
     <string name="av_def_action_picture">Сфатаграфаваць</string>
     <string name="recording_context_menu_precord">Сфатаграфаваць</string>
     <string name="dropbox_plugin_description">Модуль Dropbox дазваляе сынхранізаваць трэкі і аўдыё/відэа натакi з вашым рахункам Dropbox.</string>
@@ -526,8 +524,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="map_widget_day_night">Рэжым дзень/ноч</string>
 	<string name="map_widget_vector_attributes">Налады адмалёўкі:</string>
 	<string name="map_widget_renderer">Стыль мапы</string>
-	<string name="live_monitoring_mode_off">Пачаць\n адсочваньне онлайн</string>
-	<string name="live_monitoring_mode_on">Спыніць\n адсочваньне праз сеціва</string>
+	
+	
 	
 	
 	<string name="layer_map_appearance">Сканфігураваць экран</string>
@@ -541,8 +539,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="map_widget_appearance">Астатнія элементы:</string>
 	<string name="map_widget_view_direction">Кірунак погляду</string>
 	<string name="map_widget_transparent">Празрыстае афармленьне</string>
-	<string name="monitoring_mode_off">Запіс GPX</string>
-	<string name="monitoring_mode_on">Спыніць\n запіс GPX</string>
+	
+	
 	<string name="bg_service_sleep_mode_off">Ўключыць\n спячы рэжым</string>
 	<string name="bg_service_sleep_mode_on">Спынiць\n рэжым сну</string>
 	<string name="gps_wakeup_interval">Iнтэрвал абуджэння GPS: %s</string>
@@ -793,8 +791,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="local_openstreetmap_descr_title">Асінхроннае рэдагаваньне OSM:</string>
 	<string name="local_openstreetmap_settings">Лакальна захаваныя OSM POI/Памылкі</string>
 	<string name="local_openstreetmap_settings_descr">Паказаць і кіраваць лакальнымі POI/Bugs</string>
-	<string name="live_monitoring_descr">Дасылаць месцазнаходжаньне ў пазначаны вэб-сэрвіс</string>
-	<string name="live_monitoring">Сеткавае сачэньне</string>
+	
+	
 	<string name="live_monitoring_interval_descr">Задайце інтэрвал сеткавага сачэньня</string>
 	<string name="live_monitoring_interval">Інтэрвал сеткавага сачэньня</string>
 	<string name="live_monitoring_url_descr">Задайце вэб-адрас з наступнымі параметрамі: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -900,7 +898,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="city_type_village">Вёска</string>
 	<string name="city_type_town">Мястэчка</string>
 	<string name="city_type_city">Горад</string>
-	<string name="layer_poi_label">Назвы цікавосткаў</string>
+	
 	<string name="animate_route_off">Спыніць мадэляваньне</string>
 	<string name="animate_route">Пачаць мадэляваньне</string>
 	<string name="tip_recent_changes_0_6_8_t">Змены ў 0.6.8 : ↵

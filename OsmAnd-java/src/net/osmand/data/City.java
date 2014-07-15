@@ -45,6 +45,7 @@ public class City extends MapObject {
 	private Map<String, Street> streets = new TreeMap<String, Street>(OsmAndCollator.primaryCollator());
 	private String isin = null;
 	private String postcode = null;
+	private City closestCity = null;
 
 	private static long POSTCODE_INTERNAL_ID = -1000;
 	public static City createPostcode(String postcode){
@@ -91,6 +92,14 @@ public class City extends MapObject {
 
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+	
+	public City getClosestCity() {
+		return closestCity;
+	}
+	
+	public void setClosestCity(City closestCity) {
+		this.closestCity = closestCity;
 	}
 
 	protected Street registerStreet(Street street, boolean en) {

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_is_too_long">Die Route ist wahrscheinlich zu lang um vom OsmAnd-Offline-Router berechnet zu werden. Offline-Routing ist bis ungefähr 200 km Abstand zwischen einzelnen Punkten möglich. Bitte einen oder mehrere Zwischenpunkte setzen um die Route berechnen zu können.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -288,8 +287,8 @@
 	<string name="local_openstreetmap_descr_title">Asynchrone OSM Bearbeitung:</string>
 	<string name="local_openstreetmap_settings">Lokal notierte OSM Punkte/Bugs</string>
 	<string name="local_openstreetmap_settings_descr">Lokal vorgemerkte OSM Punkte/Bugs anzeigen und verwalten</string>
-	<string name="live_monitoring_descr">Senden von HTTP-Daten an einen Web-Service</string>
-	<string name="live_monitoring">Online-Tracking aktivieren</string>
+	
+	
 	<string name="live_monitoring_interval_descr">Angabe des Online-Tracking Invervalls</string>
 	<string name="live_monitoring_interval">Online-Tracking Intervall</string>
 	<string name="live_monitoring_url_descr">Spezifikation der Online-Tracking Web-Adresse mit Datenübergabe: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -403,7 +402,7 @@
 	<string name="city_type_village">Gemeinde</string>
 	<string name="city_type_town">Stadt</string>
 	<string name="city_type_city">Großstadt</string>
-	<string name="layer_poi_label">POI Namen</string>
+	
 	<string name="animate_route_off">Simulation stoppen</string>
 	<string name="animate_route">Simulation starten</string>
 	<string name="tip_recent_changes_0_6_8_t">Änderungen in v0.6.8:
@@ -1154,8 +1153,8 @@
 	<string name="map_widget_day_night">Tag/Nacht-Modus</string>
 	<string name="map_widget_vector_attributes">Karten-Zusatzoptionen:</string>
 	<string name="map_widget_renderer">Kartendarstellung</string>
-	<string name="live_monitoring_mode_off">Online-Tracking\n starten</string>
-	<string name="live_monitoring_mode_on">Online-Tracking\n stoppen</string>
+	
+	
 	
 	
 	<string name="layer_map_appearance">Anzeige konfigurieren</string>
@@ -1170,8 +1169,8 @@
 	<string name="map_widget_view_direction">Blickrichtung einblenden</string>
 	<string name="map_widget_map_rendering">Kartenanzeige:</string>
 	<string name="map_widget_transparent">Transparentes Layout</string>
-	<string name="monitoring_mode_off">GPX-Track\n aufnehmen</string>
-	<string name="monitoring_mode_on">GPX-Aufnahme\n  stoppen</string>
+	
+	
 	<string name="bg_service_sleep_mode_off">Schlafmodus\n einschalten</string>
 	<string name="bg_service_sleep_mode_on">Schlafmodus\n ausschalten</string>
 	<string name="gps_wakeup_interval">GPS-Aufwachintervall: %s</string>
@@ -1311,7 +1310,7 @@
 	<string name="map_view">Karte</string>
 	<string name="access_arrival_time">Ankunftszeit</string>
 	<string name="map_widget_gps_info">GPS-Info</string>
-	<string name="save_current_track_widget">GPX-Track\n speichern</string>
+	
 	<string name="tip_recent_changes_1_1_4_t">Änderungen in Version 1.1.4
 	\n\t* Neugestaltung der Benutzeroberfläche
 	\n\t* weitere Fehlerbehebungen

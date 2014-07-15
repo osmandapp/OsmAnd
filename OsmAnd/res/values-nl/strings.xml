@@ -1,6 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="live_monitoring_mode_off">Start\n online volgen</string>
-  <string name="live_monitoring_mode_on">Stop\n online volgen</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+  
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
   <string name="avoid_unpaved">Vermijd onverharde wegen</string>
@@ -14,8 +13,8 @@
   <string name="map_widget_appearance">Overige opties:</string>
   <string name="map_widget_view_direction">Kijkrichting</string>
   <string name="map_widget_transparent">Transparante skin</string>
-  <string name="monitoring_mode_off">GPX-track opnemen</string>
-  <string name="monitoring_mode_on">Stop\n GPX-opname.</string>
+  
+  
   <string name="gps_wakeup_interval">GPS activatie interval: %s</string>
   <string name="int_continuosly">continu</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
@@ -125,8 +124,8 @@
   <string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap wijziging:</string>
   <string name="local_openstreetmap_settings">Bewaarde gegevens voor OSM</string>
   <string name="local_openstreetmap_settings_descr">Beheer interessepunten en bugs die in OsmAnd zijn bewaard</string>
-  <string name="live_monitoring_descr">Verstuur tracking-gegevens naar een webservice</string>
-  <string name="live_monitoring">Online volgen</string>
+  
+  
   <string name="live_monitoring_interval_descr">Specificeer interval voor online tracking</string>
   <string name="live_monitoring_interval">Interval voor online tracking</string>
   <string name="live_monitoring_url_descr">Specificeer het webadres met parameters: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -218,7 +217,7 @@
   <string name="city_type_village">Dorp</string>
   <string name="city_type_town">Plaats</string>
   <string name="city_type_city">Stad</string>
-  <string name="layer_poi_label">Interessepunt-namen</string>
+  
   <string name="animate_route_off">Stop simulatie</string>
   <string name="animate_route">Start simulatie</string>
   <string name="tip_recent_changes_0_6_8_t">"Wijzigingen in 0.6.8 : \n\t- Completely redesigned zoek (interessepunt, Address)! Make address zoek much faster and more responsive. Create one Zoek interface with many different options. \n\t- Implement interessepunt zoek by name in big areas (countries) \n\t- Fix flickering kaart screen for tablets (Issue 641) \n\t- Auto follow route option (Issue 356) \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\' \n\t- interessepunt gegevens included in .obf bestand (all download indexes after 01/10/11) \n\t- Stem prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "</string>
@@ -1422,7 +1421,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	\n\t* Nieuw ontwerp gebruikersinterface
 	\n\t* Bugs opgelost
     </string>
-    <string name="save_current_track_widget">Huidige GPX-\ntrack opslaan</string>
+    
 	<string name="hno">Huisnummer</string>
     <string name="tip_recent_changes_1_3_t">Veranderingen in 1.3:
 	\n\t* Nieuwe implementatie van tablet- en groot schermondersteuning

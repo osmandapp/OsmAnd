@@ -828,8 +828,7 @@ POIの更新は利用できません</string>
     <string name="favourites_list_activity">お気に入りを選択</string>
     <string name="local_openstreetmap_act_title">OSMの修正</string>
     <string name="default_buttons_other_actions">その他のアクション</string>
-    <string name="save_current_track_widget">保存
-        \n 現在のGPXトラック</string>
+    
 	<string name="layer_hillshade">陰影起伏層</string>
     <string name="map_widget_gps_info">GPS情報</string>
     <string name="access_arrival_time">到着時間</string>
@@ -968,8 +967,8 @@ POIの更新は利用できません</string>
 	<string name="map_widget_day_night">日中/夜間モード</string>
 	<string name="map_widget_vector_attributes">描画方法の属性:</string>
 	<string name="map_widget_renderer">地図のスタイル</string>
-	<string name="live_monitoring_mode_off">スタート\n オンライン追跡</string>
-	<string name="live_monitoring_mode_on">停止\n オンライン追跡</string>
+	
+	
 	<string name="layer_map_appearance">画面設定</string>
 	<string name="show_lanes">車線を表示</string>
 	<string name="avoid_unpaved">未舗装の道路を使用しない</string>
@@ -981,8 +980,8 @@ POIの更新は利用できません</string>
 	<string name="map_widget_appearance">その他:</string>
 	<string name="map_widget_view_direction">視線方向</string>
 	<string name="map_widget_transparent">透明なスキン</string>
-	<string name="monitoring_mode_off">GPXの記録</string>
-	<string name="monitoring_mode_on">停止\n GPX記録</string>
+	
+	
 	<string name="bg_service_sleep_mode_off">有効\n スリープモード</string>
 	<string name="bg_service_sleep_mode_on">停止\n スリープモード</string>
 	<string name="gps_wakeup_interval">GPS呼び出し間隔: %s</string>
@@ -1213,8 +1212,8 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
     <string name="tip_altitude_offset">高度補正</string>
 	<string name="close_changeset">チェンジセットを閉じる</string>
 	<string name="local_openstreetmap_settings_descr">ローカルデータベースに記載されているPOIとバグの閲覧と管理</string>
-	<string name="live_monitoring_descr">指定されたWebサービスにトラッキングを送る</string>
-	<string name="live_monitoring">オンライン追跡</string>
+	
+	
 	<string name="live_monitoring_interval_descr">オンライン追跡間隔を指定</string>
 	<string name="live_monitoring_interval">オンライン追跡間隔</string>
 	<string name="live_monitoring_url_descr">パラメータの構文を使用してWebアドレスを指定します:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
@@ -1266,7 +1265,7 @@ ASTERはNASAと日本の経済産業省（METI）、そして宇宙システム�
 	<string name="city_type_village">村</string>
 	<string name="city_type_town">町</string>
 	<string name="city_type_city">市</string>
-	<string name="layer_poi_label">POIラベル</string>
+	
 	<string name="file_can_not_be_renamed">ファイルの名前は変更できません。</string>
 	<string name="file_with_name_already_exists">その名前のファイルが既に存在します。</string>
 	<string name="gpx_navigation">GPXルート</string>

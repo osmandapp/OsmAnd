@@ -456,8 +456,8 @@ public class SearchAddressFragment extends SherlockFragment {
 		building = null;
 		region = osmandSettings.getLastSearchedRegion();
 		RegionAddressRepository reg = ((OsmandApplication)getApplication()).getResourceManager().getRegionRepository(region);
-		if(reg != null && reg.useEnglishNames() != osmandSettings.USE_ENGLISH_NAMES.get()){
-			reg.setUseEnglishNames(osmandSettings.USE_ENGLISH_NAMES.get());
+		if(reg != null && reg.useEnglishNames() != osmandSettings.usingEnglishNames()){
+			reg.setUseEnglishNames(osmandSettings.usingEnglishNames());
 		}
 		loadData();
 		updateUI();

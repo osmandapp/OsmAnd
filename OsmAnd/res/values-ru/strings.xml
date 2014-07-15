@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -96,7 +95,7 @@
 		\n\t* \'Ночной\' - всегда использовать ночной режим
 		\n\t* \'Датчик освещённости\' - режим переключается в зависимости от показаний датчика освещённости Вашего устройства (при его наличии)
 	</string>  
-  <string name="layer_poi_label">Названия POI</string>
+  
   <string name="tip_recent_changes_0_8_1_t">Изменения в 0.8.1:
 		\n\t* Более точные маршруты (немного медленнее)
 		\n\t* Умный и быстрый пересчет маршрута
@@ -189,8 +188,8 @@
   <string name="local_openstreetmap_descr_title">Offline дополнение:</string>
   <string name="local_openstreetmap_settings">Локальные POI/Bugs</string>
   <string name="local_openstreetmap_settings_descr">Управление локальными POI/Bugs</string>
-  <string name="live_monitoring_descr">Отсылать текущее положение на специальный web-сервис</string>
-  <string name="live_monitoring">Включить Live слежение</string>
+  
+  
   <string name="live_monitoring_interval_descr">Укажите интервал Live слежения</string>
   <string name="live_monitoring_interval">Интервал Live слежения</string>
   <string name="live_monitoring_url_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -1098,8 +1097,8 @@
 <string name="map_widget_appearance">Остальные элементы:</string>
 <string name="map_widget_view_direction">Направление взгляда</string>
 <string name="map_widget_transparent">Прозрачность</string>
-<string name="monitoring_mode_off">Запись GPX</string>
-<string name="monitoring_mode_on">Остановить\nзапись GPX.</string>
+
+
 <string name="int_continuosly">Постоянно</string>
 <string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
 <string name="map_widget_day_night">Дневной/ночной режим</string>
@@ -1109,9 +1108,8 @@
 \nЗакат : %2$s</string>
 <string name="map_widget_vector_attributes">Настройки отрисовки (векторн.):</string>
 <string name="map_widget_renderer">Стиль отрисовки (векторн.)</string>
-<string name="live_monitoring_mode_off">Включить слежение
-\nв реальном времени</string>
-<string name="live_monitoring_mode_on">Выключить слежение\nв реальном времени</string>
+
+
 <string name="tip_rotation_switching_t_v2">Нажав на значок компаса на экране с картой Вы можете изменить режим вращения карты.
 		\n\nДоступные варианты:
 		\n\t* \'Не вращать\' - Карта не будет вращаться. Север всегда сверху.
@@ -1237,7 +1235,7 @@
 	\n\t*исправление ошибок
     </string>
     <string name="layer_hillshade">Слой рельефа местности</string>
-    <string name="save_current_track_widget">Сохранить\nтекущий трек GPX</string>
+    
 	<string name="street_name">Улица</string>
 	<string name="hno">Номер дома</string>
     <string name="download_using_mobile_internet">В настоящее время нет соединения по WiFi. Хотите продолжить загрузку по текущему интернет-соединению?</string>
@@ -1310,7 +1308,7 @@
     <string name="local_indexes_cat_srtm">Данные горизонталей</string>
     <string name="downloading_file_new">Загрузка…</string>
 	<string name="osmand_distance_planning_plugin_description">Создание путей (или модификация существующего файла GPX) для измерения дистанции между точками. Сохранить как GPX (может использоваться для планирования маршрутов GPX).</string>
-    <string name="context_menu_item_destination_point">Установить как пункт назначения</string>
+    <string name="context_menu_item_destination_point">Пункт назначения</string>
     <string name="please_select_address">Сначала выберите город или улицу</string>
     <string name="destination_point">Пункт назначения %1$s</string>
 	<string name="av_camera_focus">Режим фокусировки камеры</string>
@@ -1594,8 +1592,8 @@ OsmAnd - открытый источник и активно развается.
 	<string name="share_fav_subject">Избранные точки расшаренные через OsmAnd</string>
 	<string name="use_points_as_intermediates">Рассчитать маршрут между точками</string>
     <string name="osmo_connect_to_device_name">Имя пользователя</string>
-    <string name="osmo_join_group">Войти в группу</string>
-    <string name="osmo_new_device">Следить за устройством</string>
+    
+    
     <string name="osmo_connected_devices">Устройства</string>
     <string name="osmo_groups">Управление OsMo</string>
     <string name="osmo_connect_to_device">Подключиться к устройству</string>
@@ -1657,7 +1655,7 @@ OsmAnd - открытый источник и активно развается.
 	<string name="color_blue">синий</string>
 	
 	<string name="color_green">зелёный</string>
-    <string name="osmo_create_groups_confirm">Чтобы создать группы, Вы должны быть зарегистрированным пользователем OsMo.</string>
+    <string name="osmo_create_groups_confirm">Чтобы создать группу, необходимо авторизоваться в OsMo.</string>
     <string name="osmo_sign_in">Войти</string>
     <string name="osmo_regenerate_login_ids_confirm">Вы уверены в необходимости регенерации персональных ID? Все устройства, соединённые с Вами, больше не смогут отследить Вас.</string>
     <string name="osmo_regenerate_login_ids">Регенерировать ID трекера</string>

@@ -146,13 +146,20 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	public String getText(City obj) {
 		LatLon l = obj.getLocation();
-		if (getFilter().length() > 2 && locationToSearch != null && l != null) {
+		if (getCurrentFilter().length() > 2 ) {
 			String name = obj.getName(region.useEnglishNames());
 			if (obj.getType() != null) {
 				name += " [" + OsmAndFormatter.toPublicString(obj.getType(), getMyApplication()) + "]";
 			}
-			return name + " - " + //$NON-NLS-1$
-					OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, locationToSearch), getMyApplication());
+			if(obj.getClosestCity() != null) {
+				name += " - " + obj.getClosestCity().getName(region.useEnglishNames()) ;
+				LatLon loc = obj.getClosestCity().getLocation();
+				if(loc != null && l != null) {
+					name += " " + OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, loc), getMyApplication()); 
+				}
+				return name;
+			}
+			return name;
 		} else {
 			return obj.getName(region.useEnglishNames());
 		}
@@ -197,7 +204,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		    if(st1 != st2) {
 		    	return st1 ? 1 : -1;
 		    }
-			compare = cs.compare(lhs.getName(en), rhs.getName(en));
+			compare = cs.compare(getText(lhs), getText(rhs));
 			if (compare != 0) {
 				return compare;
 			}

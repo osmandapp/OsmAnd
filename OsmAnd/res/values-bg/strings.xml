@@ -103,8 +103,7 @@
     <string name="favourites_list_activity">Изберете любим</string>
     <string name="local_openstreetmap_act_title">Изменения в OSM</string>
     <string name="default_buttons_other_actions">Други действия</string>
-    <string name="save_current_track_widget">Запиши
-        \n текущата GPX следа</string>
+    
 	<string name="tip_recent_changes_1_2_t">Промени в 1.2.1:
 	    \n\t*Поправка Geo Intent (Foursquare, c:geo)
 	    \n\t*Поправка трептенето на екрана при движение
@@ -524,8 +523,8 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="map_widget_day_night">Дневна/нощна карта</string>
 	<string name="map_widget_vector_attributes">Опции за изчертаване:</string>
 	<string name="map_widget_renderer">Стил на картата</string>
-	<string name="live_monitoring_mode_off">Старт\n на онлайн следа</string>
-	<string name="live_monitoring_mode_on">Спиране\n на онлайн следата</string>
+	
+	
 	
 	
 	<string name="layer_map_appearance">Настройки на екрана</string>
@@ -539,8 +538,8 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="map_widget_appearance">Оставащи:</string>
 	<string name="map_widget_view_direction">Посока на изгледа</string>
 	<string name="map_widget_transparent">Прозрачна кожа</string>
-	<string name="monitoring_mode_off">Запис на GPX</string>
-	<string name="monitoring_mode_on">Спри\n записа на GPX.</string>
+	
+	
 	<string name="bg_service_sleep_mode_off">Включване на\n спящ режим</string>
 	<string name="bg_service_sleep_mode_on">Изключване на\n спящия режим</string>
 	<string name="gps_wakeup_interval">Интервал за задействане на GPS: %s</string>
@@ -793,8 +792,8 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="local_openstreetmap_descr_title">Асинхронно редактиране на OSM:</string>
 	<string name="local_openstreetmap_settings">Запазени в устройството POI/Неточности в OSM</string>
 	<string name="local_openstreetmap_settings_descr">Показване и управление на локално записаните в устройството забележителности и неточности на картата OSM</string>
-	<string name="live_monitoring_descr">Изпращане на следата към даден интернет сървър</string>
-	<string name="live_monitoring">Онлайн следа</string>
+	
+	
 	<string name="live_monitoring_interval_descr">Определяне на интервал за изпращане на онлайн следа</string>
 	<string name="live_monitoring_interval">Интервал за онлайн следене</string>
 	<string name="live_monitoring_url_descr">Задайте интернет адрес със следните параметри: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
@@ -898,7 +897,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="city_type_village">Село</string>
 	<string name="city_type_town">Град</string>
 	<string name="city_type_city">Голям град</string>
-	<string name="layer_poi_label">Етикети на POI</string>
+	
 	<string name="animate_route_off">Спри симулацията</string>
 	<string name="animate_route">Старт на симулацията</string>
 	<string name="tip_recent_changes_0_6_8_t">Промени в 0.6.8:

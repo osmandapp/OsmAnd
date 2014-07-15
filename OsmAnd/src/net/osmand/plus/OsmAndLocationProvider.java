@@ -34,6 +34,9 @@ import android.util.Log;
 
 public class OsmAndLocationProvider implements SensorEventListener {
 	
+	private static final String SIMULATED_PROVIDER = "OsmAnd";
+
+
 	public interface OsmAndLocationListener {
 		void updateLocation(net.osmand.Location location);
 	}
@@ -184,7 +187,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				return null;
 			}
 			
-			net.osmand.Location loc = new net.osmand.Location("OsmAnd");
+			net.osmand.Location loc = new net.osmand.Location(SIMULATED_PROVIDER);
 			loc.setSpeed(startLocation.getSpeed());
 			loc.setAltitude(startLocation.getAltitude());
 			loc.setTime(System.currentTimeMillis());
@@ -822,6 +825,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		public int foundSatellites = 0;
 		public int usedSatellites = 0;
 		public boolean fixed = false;
+	}
+
+	public static boolean isNotSimulatedLocation(net.osmand.Location l) {
+		if(l != null) {
+			return !SIMULATED_PROVIDER.equals(l.getProvider());
+		}
+		return true;
 	}
 
 }

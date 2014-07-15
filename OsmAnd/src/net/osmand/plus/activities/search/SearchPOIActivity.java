@@ -590,7 +590,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 					// Create dialog
 					Builder bs = new AlertDialog.Builder(v.getContext());
 					bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(),
-							settings.USE_ENGLISH_NAMES.get()));
+							settings.usingEnglishNames()));
 					bs.setMessage(spannable);
 					AlertDialog dialog = bs.show();
 

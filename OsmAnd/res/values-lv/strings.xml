@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams OsmAnd vajadzēs restartēt.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus funkcijas un uzstādījumus kā piemēram sekošana, enerģijas taupīšana, pieejamība un daudzas citas</string>
   <string name="prefs_plugins">Spraudņi</string>
@@ -109,8 +108,8 @@
   <string name="local_openstreetmap_descr_title">Bezsaistes OSM rediģēšana:</string>
   <string name="local_openstreetmap_settings">Saglabātie OSM POIs/Bugs</string>
   <string name="local_openstreetmap_settings_descr">Pārvaldīt krātuvē ieliktos OSM POI/Bugs</string>
-  <string name="live_monitoring_descr">Nosūtīt patreizējo pārvietošanos pa maršrutu uz norādīto web servisu</string>
-  <string name="live_monitoring">Tiešsaistes sekošana</string>
+  
+  
   <string name="live_monitoring_interval_descr">Norādīt patreizējās pozīcijas nodošanas intervālu</string>
   <string name="live_monitoring_interval">Tiešaistes sekošanas intervāls</string>
   <string name="live_monitoring_url_descr">Norādiet web adresi ar parametru sintaksi: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -198,7 +197,7 @@
   <string name="city_type_village">Apdzīvota vieta</string>
   <string name="city_type_town">Miests</string>
   <string name="city_type_city">Pilsēta</string>
-  <string name="layer_poi_label">POI marķējums</string>
+  
   <string name="animate_route_off">Izslēgt animāciju</string>
   <string name="animate_route">Ieslēgt animāciju</string>
   <string name="tip_recent_changes_0_6_8_t">"Izmaiņas 0.6.8 versijā : \n\t- Pilnībā pārstrādāta meklēšana (POI, Adrese)! Adresu meklēšana ir padarīta daudz ātrāka. Izveiots viena meklēšanas saskarne ar dažādām opcijām. \n\t- Implementēta POI meklēšana lielos apgabalos (valstīs) \n\t- Izlabota kartes raustīšanās tablet PC (Pieteikums 641) \n\t- Kartes auto-centrēšanas iespēja (Pieteikums 356) \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\' \n\t- POI data included in .obf file (all download indexes after 01/10/11) \n\t- Voice prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "</string>
@@ -944,8 +943,8 @@
   <string name="bg_service_screen_unlock">Atslēgt ekrānu</string>
   <string name="bg_service_sleep_mode_off">Ieslēgt\n miega režīmu</string>
   <string name="bg_service_sleep_mode_on">Izslēgt\n miega režīmu</string>
-<string name="live_monitoring_mode_off">Sākt\n tiešsaistes sekošanu</string>
-<string name="live_monitoring_mode_on">Pārtraukt\n tiešsaistes sekošanu</string>
+
+
 <string name="layer_map_appearance">Ekrāna konfigurācija</string>
 <string name="show_lanes">Rādīt joslas</string>
 <string name="avoid_unpaved">Izvairīties no grants ceļiem</string>
@@ -959,8 +958,8 @@
 <string name="map_widget_appearance">Dažādi:</string>
 <string name="map_widget_view_direction">Skata virziens</string>
 <string name="map_widget_transparent">Caurspīdīga ādiņa</string>
-<string name="monitoring_mode_off">Ierakstīt GPX</string>
-<string name="monitoring_mode_on">Pārtraukt\n GPX ier.</string>
+
+
 <string name="gps_wakeup_interval">GPS pamošanās intervāls: %s</string>
 <string name="email">e-pasts</string>
 <string name="tip_recent_changes_0_8_4_t">Izmaiņas 0.8.4:
@@ -1162,8 +1161,7 @@
     <string name="favourites_list_activity">Atlasīt favorītu</string>
     <string name="local_openstreetmap_act_title">OSM modifikācijas</string>
     <string name="default_buttons_other_actions">Citas darbības</string>
-    <string name="save_current_track_widget">Saglabāt
- \n GPX trasi</string>
+    
 	<string name="layer_hillshade">Kalnu reljefa slānis</string>
     <string name="map_widget_gps_info">GPS informācija</string>
     <string name="access_arrival_time">Ierašanās laiks</string>

@@ -140,7 +140,7 @@
 	<string name="avoid_unpaved">Избегавај неасфалтиране путеве</string>
 	<string name="avoid_ferries">Избегавај трајекте</string>
 	<string name="map_widget_fluorescent">Флуоресцентне руте</string>
-	<string name="monitoring_mode_off">Сними GPX</string>
+	
 	<string name="bg_service_sleep_mode_off">Омогући\n режим спавања</string>
 	<string name="map_widget_top_text">Назив улице</string>
 	<string name="map_widget_config">Подешавање екрана</string>
@@ -191,7 +191,7 @@
 	<string name="day_night_info">Дан/ноћ информације</string>
 	<string name="map_widget_day_night">Дневна/ноћна мапа</string>
 	<string name="map_widget_renderer">Стил мапе</string>
-	<string name="live_monitoring_mode_off">Start\n online tracking</string>
+	
 	<string name="avoid_in_routing_title">Избегавати…</string>
 	<string name="rendering_exception">Дошло је до грешке током рендеровања изабране области</string>
 	<string name="show_point_options">Користи локацију…</string>

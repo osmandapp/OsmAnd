@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
 	<string name="debugging_and_development">OsmAnd 개발</string>
@@ -86,8 +85,8 @@
 	<string name="local_openstreetmap_settings">로컬로 저장된 OSM POI/버그</string>
 	<string name="local_openstreetmap_settings_descr">로컬 DB에 저장된 OSM POIs/Bugs 표시하고 관리하기</string>
 
-	<string name="live_monitoring_descr">특정한 웹 서비스로 트래킹를 전송합니다</string>
-	<string name="live_monitoring">온라인 트래킹</string>
+	
+	
 	<string name="live_monitoring_interval_descr">온라인 트래킹 시간 간격을 지정합니다</string>
 	<string name="live_monitoring_interval">온라인 트래킹 시간 간격</string>
 	<string name="live_monitoring_url_descr">온라인 트래킹할 웹 주소를 지정합니다. 매개변수 형식 : 위도={0}, 경도={1}, 시간={2}, hdop={3}, 고도={4}, 속도={5}, bearing={6}</string>
@@ -210,7 +209,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="pref_raster_map">지도 소스 설정</string>
 	<string name="pref_vector_map">벡터 지도 설정</string>
 	<string name="delete_confirmation_msg">%1$s 를 삭제하시겠습니까?</string>
-	<string name="layer_poi_label">POI 라벨</string>
+	
 	<string name="animate_route_off">시뮬레이션 정지</string>
 	<string name="animate_route">시뮬레이션을 시작합니다</string>
 	
@@ -1174,8 +1173,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
     <string name="local_openstreetmap_act_title">OSM 대량수정</string>
     <string name="default_buttons_other_actions">다른 작업</string>
     <string name="available_downloads_left">다운로드 할 파일 가능 %1$d</string>
-    <string name="save_current_track_widget">저장
-        \n 현재 GPX 파일</string>
+    
 	<string name="layer_hillshade">음영 레이어</string>
     <string name="map_widget_gps_info">GPS 정보</string>
     <string name="access_arrival_time">도착 시간</string>
@@ -1449,8 +1447,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_day_night">주간/야간 지도</string>
 	<string name="map_widget_vector_attributes">특성 렌더링 :</string>
 	<string name="map_widget_renderer">지도 스타일</string>
-	<string name="live_monitoring_mode_off">시작\n 온라인 트래킹</string>
-	<string name="live_monitoring_mode_on">정지\n 온라인 트래킹</string>
+	
+	
 	<string name="layer_map_appearance">화면 구성</string>
 	<string name="show_lanes">레인 표시</string>
 	<string name="avoid_unpaved">비포장 도로 회피</string>
@@ -1461,8 +1459,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_show_ruler">축척(Ruler)</string>
 	<string name="map_widget_view_direction">방향 보기</string>
 	<string name="map_widget_transparent">투명 스킨</string>
-	<string name="monitoring_mode_off">GPX 기록</string>
-	<string name="monitoring_mode_on">정지\n GPX REC.</string>
+	
+	
 	<string name="bg_service_sleep_mode_off">활성화\n 절전 모드</string>
 	<string name="bg_service_sleep_mode_on">정지\n 절전 모드</string>
 	<string name="gps_wakeup_interval">GPS 깨우는(wake-up) 간격: %s</string>

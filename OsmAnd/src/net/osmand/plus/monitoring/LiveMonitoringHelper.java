@@ -41,11 +41,12 @@ public class LiveMonitoringHelper  {
 	}
 	
 	public boolean isLiveMonitoringEnabled(){
-		return settings.LIVE_MONITORING.get() ;
+		return settings.LIVE_MONITORING.get() && (settings.SAVE_TRACK_TO_GPX.get() || settings.SAVE_GLOBAL_TRACK_TO_GPX.get());
 	}
 	
 	public void updateLocation(net.osmand.Location location) {
 		if (OsmAndLocationProvider.isPointAccurateForRouting(location) && isLiveMonitoringEnabled()
+				&& OsmAndLocationProvider.isNotSimulatedLocation(location)
 				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 			long locationTime = System.currentTimeMillis();
 			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {

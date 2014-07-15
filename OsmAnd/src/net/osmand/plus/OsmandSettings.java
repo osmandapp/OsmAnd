@@ -717,6 +717,12 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> PREFERRED_LOCALE =  new StringPreference("preferred_locale", "").makeGlobal();
+	
+	public final OsmandPreference<String> MAP_PREFERRED_LOCALE =  new StringPreference("map_preferred_locale", "").makeGlobal();
+	
+	public boolean usingEnglishNames() {
+		return MAP_PREFERRED_LOCALE.get().length() > 0;
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> USER_NAME = new StringPreference("user_name", "NoName").makeGlobal();
@@ -780,6 +786,8 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
 
+	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_TO_GPX = new BooleanPreference("save_global_track_to_gpx", false).makeGlobal().cache();
+	public final CommonPreference<Integer> SAVE_GLOBAL_TRACK_INTERVAL  = new IntPreference("save_global_track_interval", 5000).makeGlobal().cache();
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false).makeProfile().cache();
 	{
@@ -935,13 +943,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> AUDIO_STREAM_GUIDANCE = new IntPreference("audio_stream",
 			3/*AudioManager.STREAM_MUSIC*/).makeGlobal();
 
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> USE_ENGLISH_NAMES = new BooleanPreference("use_english_names", false).makeGlobal();
-	
-	public boolean usingEnglishNames(){
-		return USE_ENGLISH_NAMES.get();
-	}
-	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data", false).makeGlobal();
 
@@ -1675,7 +1676,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Integer> SERVICE_OFF_INTERVAL = new IntPreference("service_off_interval", 
-			5 * 60 * 1000).makeGlobal();
+			0).makeGlobal();
 	
 	
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference("CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();
@@ -1855,6 +1856,8 @@ public class OsmandSettings {
 		}
 
 	}
+
+	
 
 	
 }

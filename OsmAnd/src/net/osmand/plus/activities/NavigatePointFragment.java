@@ -345,7 +345,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
      * in one of the valid formats.
      */
     public static double convert(String coordinate) {
-    	coordinate = coordinate.replace(' ', ':').replace('#', ':');
+    	coordinate = coordinate.replace(' ', ':').replace('#', ':').replace(',', '.');
         if (coordinate == null) {
             throw new NullPointerException("coordinate");
         }

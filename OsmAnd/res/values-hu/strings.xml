@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
 \n\t- Akadálymentesítés 
@@ -90,8 +89,8 @@
   <string name="local_openstreetmap_descr_title">Aszinkron OSM szerkesztés:</string>
   <string name="local_openstreetmap_settings">Helyileg tárolt OSM pontok/Hibák</string>
   <string name="local_openstreetmap_settings_descr">Helyi adatbázisban tárolt OSM pontok/Hibák megjelenítése, kezelése</string>
-  <string name="live_monitoring_descr">Lehetővé teszi HTTP üzenetek küldését a megadott webes szolgáltatásnak</string>
-  <string name="live_monitoring">Online útvonalrögzítés</string>
+  
+  
   <string name="live_monitoring_interval_descr">Online útvonalrögzítés intervalluma</string>
   <string name="live_monitoring_interval">Online rögzítési sűrűség</string>
   <string name="live_monitoring_url_descr">Add meg a használni kívánt webcímet az alábbi szintaxissal: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
@@ -181,7 +180,7 @@
   <string name="city_type_village">község</string>
   <string name="city_type_town">város</string>
   <string name="city_type_city">város</string>
-  <string name="layer_poi_label">POI feliratok</string>
+  
   <string name="animate_route_off">Szimuláció leállítása</string>
   <string name="animate_route">Szimuláció indítása</string>
   <string name="tip_recent_changes_0_6_8_t">A 0.6.8 verzió változásai: \n\t- Teljesen újratervezett kereső (POI, cím)! Az új kereső sokkal gyorsabb és lehetőséget ad különféle kiindulópontok szerinti kereséshez. \n\t- Név szerinti POI keresés nagy területekre (akár országnyi) \n\t- Javítva a képernyő villódzása tableteken (641-es hiba) \n\t- Útvonal automatikus követése beállítás (356-os hiba) \n\t- GPX navigáció áthelyezve az \'Útirány\' és az \'Útvonal mentése\' az \'Útvonal mutatása\' alá \n\t- POI adatok becsomagolva az .obf fájlba (tölts le 2011. 10. 01. utáni indexadatokat) \n\t- Hangutasítás javítások (a GPS pozícióval és a parancs első kimondásával kapcsolatban) \n\t- Apró fejlesztések
@@ -959,12 +958,12 @@
 <string name="map_widget_appearance">További elemek:</string>
 <string name="map_widget_view_direction">Látómező</string>
 <string name="map_widget_transparent">Átlátszó téma</string>
-<string name="monitoring_mode_off">GPX felv.</string>
-<string name="monitoring_mode_on">GPX ki.</string>
+
+
 <string name="gps_wakeup_interval">GPS helymeghatározási időköz: %s</string>
 <string name="int_continuosly">Folyamatos</string>
-<string name="live_monitoring_mode_off">Online útvonalrögzítés\n indítása</string>
-<string name="live_monitoring_mode_on">Online útvonalrögzítés\n megállítása</string>
+
+
 <string name="layer_map_appearance">Képernyő beállítása</string>
 <string name="show_lanes">Sávok megjelenítése</string>
 <string name="avoid_unpaved">Burkolat nélküli utak elkerülése</string>
@@ -1226,7 +1225,7 @@
 \n\t* Iránytűhöz Kalman-szűrő
 \n\t* Pebble óra támogatás "
 	</string>
-    <string name="save_current_track_widget">GPX nyomvonal\n mentése</string>
+    
 	<string name="street_name">Utca</string>
 	<string name="hno">Házszám</string>
     <string name="monitoring_settings">Rögzítési szolgáltatások &amp; Alvó mód</string>

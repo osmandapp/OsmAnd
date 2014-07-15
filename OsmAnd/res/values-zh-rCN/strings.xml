@@ -47,7 +47,7 @@
 	<string name="avoid_in_routing_descr">避開收費公路，土路，渡輪</string>
 	<string name="map_widget_fluorescent">熒光路線</string>
 	<string name="map_widget_show_ruler">統治者</string>
-	<string name="monitoring_mode_off">記錄GPX</string>
+	
 	<string name="map_widget_view_direction">觀察方向</string>
 	<string name="map_widget_top_text">街道名稱</string>
 	<string name="map_widget_gps_info">GPS信息</string>
@@ -81,7 +81,7 @@
 	<string name="avoid_ferries">避开轮渡</string>
 	<string name="avoid_in_routing_title">避让…</string>
 	<string name="map_widget_appearance">杂项：</string>
-	<string name="monitoring_mode_on">停止↵\nGPX建议。</string>
+	
 	<string name="int_continuosly">连续</string>
 	<string name="screen_is_locked">要解锁屏幕按锁图标</string>
 	<string name="map_widget_config">配置屏幕</string>
@@ -391,7 +391,7 @@
 	<string name="default_buttons_add">加</string>
 	<string name="default_buttons_no">没有</string>
 	<string name="default_buttons_delete">删除</string>
-	<string name="save_current_track_widget">保存\n当前GPX轨迹</string>
+	
 	<string name="layer_hillshade">山体阴影层</string>
     <string name="tip_recent_changes_1_1_4_t">1.1.4 中的修改：
         \n\t* UI 重新设计
@@ -661,7 +661,7 @@
 	<string name="pref_raster_map">地图来源设置</string>
 	<string name="pref_vector_map">矢量地图设置</string>
 	<string name="delete_confirmation_msg">删除 %1$s？</string>
-	<string name="layer_poi_label">POI 标签</string>
+	
 	<string name="animate_route_off">停止模拟导航</string>
 	<string name="animate_route">开始模拟导航</string>
 	<string name="file_can_not_be_renamed">文件无法重命名。</string>

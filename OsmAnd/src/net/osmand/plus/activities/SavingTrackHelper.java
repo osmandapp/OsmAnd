@@ -109,7 +109,25 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 	
 	
-	
+	public long getLastTrackPointTime() {
+		long res = 0;
+		try {
+			SQLiteDatabase db = getWritableDatabase();
+			if (db != null) {
+				try {
+					Cursor query = db.rawQuery("SELECT " + TRACK_COL_DATE + " FROM " + TRACK_NAME+" ORDER BY " + TRACK_COL_DATE +" DESC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					if(query.moveToFirst()) {
+						res = query.getLong(0);
+					}
+					query.close();
+				} finally {
+					db.close();
+				}
+			}
+		} catch(RuntimeException e) {
+		}
+		return res;
+	}
 		
 	public boolean hasDataToSave() {
 		try {
@@ -205,7 +223,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private void collectDBPoints(SQLiteDatabase db, Map<String, GPXFile> dataTracks) {
 		Cursor query = db.rawQuery("SELECT " + POINT_COL_LAT + "," + POINT_COL_LON + "," + POINT_COL_DATE + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				+ POINT_COL_DESCRIPTION + " FROM " + POINT_NAME+" ORDER BY " + TRACK_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
+				+ POINT_COL_DESCRIPTION + " FROM " + POINT_NAME+" ORDER BY " + POINT_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
 		if (query.moveToFirst()) {
 			do {
 				WptPt pt = new WptPt();
@@ -296,33 +314,43 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		// use because there is a bug on some devices with location.getTime()
 		long locationTime = System.currentTimeMillis();
 		OsmandSettings settings = ctx.getSettings();
-		if (OsmAndLocationProvider.isPointAccurateForRouting(location) && settings.SAVE_TRACK_TO_GPX.get()
-				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+		boolean record = false;
+		if(OsmAndLocationProvider.isPointAccurateForRouting(location) && 
+				OsmAndLocationProvider.isNotSimulatedLocation(location) &&
+				OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+			if (settings.SAVE_TRACK_TO_GPX.get() && 
+					locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
+				record = true;
+			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() && 
+					locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
+				record = true;
+			}
+		}
+		if (record) {
 			insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
 					location.getAccuracy(), locationTime, settings);
 		}
 	}
 	
-	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
-		//* 1000 in next line seems to be wrong with new IntervalChooseDialog
-		//if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000) {
-		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
-			execWithClose(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
-			boolean newSegment = false;
-			if (lastPoint == null || (time - lastTimeUpdated) > 180 * 1000) {
-				lastPoint = new LatLon(lat, lon);
-				newSegment = true;
-			} else {
-				float[] lastInterval = new float[1];
-				net.osmand.Location.distanceBetween(lat, lon, lastPoint.getLatitude(), lastPoint.getLongitude(),
-						lastInterval);
-				distance += lastInterval[0];
-				lastPoint = new LatLon(lat, lon);
-			}
-			lastTimeUpdated = time;
-			WptPt pt = new GPXUtilities.WptPt(lat, lon, time, alt, speed, hdop);
-			addTrackPoint(pt, newSegment);
+	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time,
+			OsmandSettings settings) {
+		// * 1000 in next line seems to be wrong with new IntervalChooseDialog
+		// if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000) {
+		execWithClose(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
+		boolean newSegment = false;
+		if (lastPoint == null || (time - lastTimeUpdated) > 180 * 1000) {
+			lastPoint = new LatLon(lat, lon);
+			newSegment = true;
+		} else {
+			float[] lastInterval = new float[1];
+			net.osmand.Location.distanceBetween(lat, lon, lastPoint.getLatitude(), lastPoint.getLongitude(),
+					lastInterval);
+			distance += lastInterval[0];
+			lastPoint = new LatLon(lat, lon);
 		}
+		lastTimeUpdated = time;
+		WptPt pt = new GPXUtilities.WptPt(lat, lon, time, alt, speed, hdop);
+		addTrackPoint(pt, newSegment);
 	}
 	
 	private void addTrackPoint(WptPt pt, boolean newSegment) {

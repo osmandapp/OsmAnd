@@ -68,7 +68,7 @@
   <string name="local_openstreetmap_show">नकाशावर दाखवा</string>
   <string name="local_openstreetmap_upload">बदल ओएसएम मधे अपलोड करा</string>
   <string name="local_openstreetmap_delete">बदल काढून टाका</string>
-  <string name="live_monitoring">ऑनलइन लाइव्ह ट्रॅकिंग</string>
+  
   <string name="free_version_title">निशुल्क व्हर्जन</string>
   <string name="poi_context_menu_showdescription">पिओआय वर्णन दाखवा</string>
   <string name="index_name_north_america">उत्तर अमेरिका</string>
@@ -334,15 +334,15 @@
 <string name="day_night_info_description">सुर्योदय : %1$s \nसूर्यास्त : %2$s</string>
 <string name="day_night_info">दिवस/रात्र माहिती</string>
 <string name="map_widget_day_night">दिवस/रात्र नकाशा</string>
-<string name="live_monitoring_mode_off">लाइव्ह ट्रॅकिंग\n चालू करा</string>
-<string name="live_monitoring_mode_on">लाइव्ह ट्रॅकिंग\n बंद करा</string>
+
+
 <string name="layer_map_appearance">स्क्रिन कॉन्फिगर करा</string>
 <string name="avoid_unpaved">कच्चे रस्ते टाळा</string>
 <string name="avoid_in_routing_title">टाळा…</string>
 <string name="map_widget_show_ruler">पट्टी</string>
 <string name="map_widget_view_direction">बघण्याची दिशा</string>
-<string name="monitoring_mode_off">जिपीएक्स रेकॉर्ड करा</string>
-<string name="monitoring_mode_on">जिपीएक्स रेकॉर्ड\n थांबवा.</string>
+
+
 <string name="int_continuosly">सलग</string>
 <string name="email">इमेल</string>
 <string name="poi_filter_parking">पार्किंग</string>
