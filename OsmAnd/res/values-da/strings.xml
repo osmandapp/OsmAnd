@@ -1924,10 +1924,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="live_monitoring_m">Online sporing (GPX påkrævet)</string>
     <string name="live_monitoring_start">Start online sporing</string>
 	<string name="live_monitoring_stop">Stop online sporing</string>
-	<string name="gpx_monitoring_start">Optag GPX</string>
+	<string name="gpx_monitoring_start">Start GPX optagelse</string>
 	<string name="gpx_monitoring_stop">Stop GPX optagelse</string>
     <string name="gpx_start_new_segment">Start nyt segment</string>
     <string name="lang_fa">Persisk</string>
-	<string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis det ikke findes skiftes til engelsk eller lokale navne)</string>
-    <string name="map_preferred_locale">Kort foretrukne sprog</string>
+	<string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sprog ikke findes skiftes til engelsk eller lokale navne)</string>
+    <string name="map_preferred_locale">Foretrukket sprog på kort</string>
     </resources>
