@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Iskanje</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="search_button">Iskanje</string>
 	<string name="search_activity">Iskanje</string>
 	<string name="settings_Button">Nastavitve</string>
 	<string name="favorites_Button">Moji kraji</string>
@@ -1276,8 +1277,8 @@ Pomembnejše lastnosti:
 	\n\t* Dodatne nastavitve za stabiliziranje kompasa
 	\n\t* Zgornji levi gumb na zaslonu zemljevida nadomesti gumb Meni
     </string>
-    <string name="monitoring_settings">Storitve beleženja in način spanja</string>
-    <string name="osmand_monitoring_plugin_name">Storitve beleženja in način spanja</string>
+    <string name="monitoring_settings">Storitve beleženja</string>
+    <string name="osmand_monitoring_plugin_name">Storitve beleženja</string>
     <string name="select_address_activity">Izberite naslov</string>
     <string name="favourites_list_activity">Izberite priljubljeno</string>
     <string name="local_openstreetmap_act_title">Spremembe OSM</string>
@@ -1700,11 +1701,7 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     </string>
     <string name="osmo_settings_uuid">Enolični ID naprave</string>
     <string name="osmo_settings_descr">Nastavi možnosti sledenja in osebni sledilni kanal</string>
-    <string name="osmo_plugin_description">OpenStreetMap-sledenje - Napredno sledenje v živo. Omogoča možnosti sledenja drugim napravam in biti sleden.
-        Ustvarite anonimne skupine, katerih člani si med seboj delite lokacije. Ponuja različne možnosit za trajno sledenje ali sledenje v okviru sej.
-        Anonimne skupine so omejene na nekaj dni in nekatere funkcije, npr. ni upravljanja na daljavo in ni skrbnika skupine.
-        Polno delujoče skupine je potrebno ustvariti na splentem mestu in le registrirani uporabniki imajo dostop do njih.
-        Več o tem na http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">OpenStreetMap-sledenje - Napredno sledenje v živo. Omogoča možnosti sledenja drugih naprav in biti sleden. Ustvarite anonimne skupine, katerih člani si med seboj delite lokacije. Ponuja različne možnosti za trajno sledenje ali sledenje v okviru sej. Anonimne skupine so omejene na nekaj dni in nekatere funkcije, npr. ni upravljanja na daljavo in ni skrbnika skupine. Polno delujoče skupine je potrebno ustvariti na spletnem mestu in le registrirani uporabniki imajo dostop do njih. Več o tem na http://osmo.mobi.</string>
     <string name="osmo_plugin_name">OsMo (Napredno sledenje v živo)</string>
     <string name="keep_informing_never">Nikoli</string>
     <string name="keep_informing_descr">Napoveduj navigacijska navodila v rednih časovnih presledkih</string>
@@ -1841,4 +1838,11 @@ Seznam držav (praktično ves svet!): Afganistan, Albanija, Alžirija, Andora, A
     <string name="osmo_auto_send_locations_descr">Samodejno začni sejo sledilnika in pošiljanje lokacije po zagonu aplikacije</string>
     <string name="tip_recent_changes_1_8_alpha">"Spremembe v 1.8:\n\t* Računanje poti med točkami poti v sledi GPX\n\t* Spremenjena razporeditev držav za prenose (podpira iskanje krajevnih imen)\n\t* Podpira GPX/KML uvoz (pretvorba iz KML v GPX)\n\t* Sledi GPX premeščene v \'Moji podatki\'\n\t* Sedaj lahko razdelite sled GPX po razdalji in preverite višinsko razliko/hitrost\n\t* Samodejni začetek navigacije po zakasnitvi "</string>
     <string name="no_index_file_to_download">Nič za prenesti, prosim preverite internetno povezavo.</string>
+    <string name="keep_navigation_service">Obdrži</string>
+	<string name="stop_navigation_service">Ustavi</string>
+	<string name="enable_sleep_mode">Omogočiti način spanja</string>
+	<string name="gps_wake_up_timer">Interval prebujanja GPS-a</string>
+	<string name="sleep_mode_stop_dialog">Obdržati vključen GPS?</string>
+	<string name="map_preferred_locale_descr">Jezik za oznake na zemljevidu (če ni na voljo bodo uporabljena angleška ali lokalna imena)</string>
+    <string name="map_preferred_locale">Jezik za zemljevid</string>
     </resources>
