@@ -46,9 +46,9 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		
 		createLoggingSection(grp);
 		createLiveSection(grp);
-		if(REGISTER_BG_SETTINGS) {
-			registerBackgroundSettings();
-		}
+//		if(REGISTER_BG_SETTINGS) {
+//			registerBackgroundSettings();
+//		}
 		profileDialog();
     }
 

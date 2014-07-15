@@ -471,11 +471,11 @@
         \n\t* Additional settings for stabilizing compass
         \n\t* Top left button on the map screen replaces Menu button
     </string>
-    <string name="monitoring_settings">Logging services &amp; Sleep mode</string>
+    <string name="monitoring_settings">Logging services</string>
     <string name="monitoring_settings_descr">Configure how to record trips and enable sleep mode</string>
     <string name="osmand_monitoring_plugin_description">Enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.
         Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
-    <string name="osmand_monitoring_plugin_name">Logging services &amp; Sleep Mode</string>
+    <string name="osmand_monitoring_plugin_name">Logging services</string>
     <string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Choose application theme</string>
@@ -1919,4 +1919,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_photo_play_sound">Play sound on photo shot</string>
 	<string name="av_photo_play_sound_descr">Choose whether to play a sound when shooting photos</string>
     <string name="navigation_intent_invalid">Invalid format: %s</string>
+	<string name="navigation_stop_dialog">Do you want to stop service?</string>
+	<string name="keep_navigation_service">Keep</string>
+	<string name="stop_navigation_service">Stop</string>
 </resources>
