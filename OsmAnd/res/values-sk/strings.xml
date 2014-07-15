@@ -1937,4 +1937,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_showSurfaceGrade_name">Zobraziť kvalitu ciest</string>
     <string name="rendering_attr_showSurfaces_name">Zobraziť povrch ciest</string>
     <string name="rendering_attr_showCycleRoutes_name">Zobraziť cyklocesty</string>
-    </resources>
+    <string name="lang_fa">Perzsky</string>
+	<string name="keep_navigation_service">Ponechať</string>
+	</resources>
