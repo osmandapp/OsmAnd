@@ -1,16 +1,18 @@
 package net.osmand.plus.views.mapwidgets;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.*;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.ShadowText;
@@ -94,6 +96,40 @@ public class MapInfoWidgetsFactory {
 		};
 		gpsInfoControl.setImageDrawable(app.getResources().getDrawable(R.drawable.widget_gps_info));
 		gpsInfoControl.setText(null, null);
+		gpsInfoControl.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (app.getNavigationService() != null){
+					AlertDialog.Builder dlg = new AlertDialog.Builder(map);
+					dlg.setTitle(app.getString(R.string.sleep_mode_stop_dialog));
+					dlg.setPositiveButton(app.getString(R.string.keep_navigation_service), null);
+					dlg.setNegativeButton(app.getString(R.string.stop_navigation_service), new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialogInterface, int i) {
+							Intent serviceIntent = new Intent(app, NavigationService.class);
+							app.stopService(serviceIntent);
+						}
+					});
+					dlg.show();
+					
+				} else {
+					final MonitoringInfoControl.ValueHolder<Integer> vs = new MonitoringInfoControl.ValueHolder<Integer>();
+					vs.value = app.getSettings().SERVICE_OFF_INTERVAL.get();
+					OsmandMonitoringPlugin.showIntervalChooseDialog(map, app.getString(R.string.gps_wake_up_timer) + " : %s",
+							app.getString(R.string.enable_sleep_mode),
+							OsmandMonitoringPlugin.SECONDS,
+							OsmandMonitoringPlugin.MINUTES,
+							vs, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									app.getSettings().SERVICE_OFF_INTERVAL.set(vs.value);
+									app.startNavigationService(NavigationService.USED_BY_GPX);
+								}
+							});
+				}
+
+			}
+		});
 		return gpsInfoControl;
 	}
 	
