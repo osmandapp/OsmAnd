@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -1911,4 +1912,19 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_showSurfaces_name">Mostra il tipo di superficie delle strade</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostra i percorsi per bicicletta</string>
     <string name="osmo_auth_error_short">Autorizzazione fallita</string>
+    <string name="map_preferred_locale_descr">Lingua preferita per le etichette della mappa (se non disponibile si opterà per l\'inglese o i nomi locali)</string>
+    <string name="map_preferred_locale">Lingua della mappa preferita</string>
+    <string name="local_map_names">Nomi locali</string>
+    <string name="lang_sw">Swahili</string>
+    <string name="forward">Avanti</string>
+    <string name="home">Home</string>
+    <string name="live_monitoring_m_descr">Invia il tracciamento a un specifico servizio web se la registrazione GPX e abilitata.</string>
+	<string name="live_monitoring_m">Tracciamento online (GPX richiesto)</string>
+    <string name="live_monitoring_start">Avvia il tracciamento online</string>
+	<string name="live_monitoring_stop">Ferma il tracciamento online</string>
+	<string name="gpx_monitoring_start">Registrazione GPX</string>
+	<string name="gpx_monitoring_stop">Ferma la registrazione GPX</string>
+    <string name="gpx_start_new_segment">Avvia un nuovo segmento</string>
+    <string name="lang_fa">Persiano</string>
+	<string name="lang_he">Ebraico</string>
     </resources>
