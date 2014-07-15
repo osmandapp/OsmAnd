@@ -1640,4 +1640,15 @@ s často kladenými otázkami.</string>
     <string name="osmo_gpx_track_downloaded">OsMo trasa %1$s stažena.</string>
     <string name="no_index_file_to_download">Není nic ke stažení, prosím zkontrolujte připojení k Internetu.</string>
     <string name="none_selected_gpx">Nebyl vybrán žádný GPX soubor. Podržením vyberte z dostupných tras.</string>
+    <string name="rendering_attr_hideBuildings_name">Skrýt budovy</string>
+    <string name="rendering_attr_hideText_name">Skrýt text</string>
+    <string name="rendering_attr_hideWoodScrubs_name">Skrýt lesy a křoviny</string>
+    <string name="rendering_attr_showSurfaces_name">Ukázat povrchy cest</string>
+    <string name="osmo_group_information">Prosím čtěte před vytvářením skupiny!</string>
+    <string name="osmo_group_information_desc">" - Všechny vytvořené skupiny jsou veřejné! Pokud chcete být anonymní, připojte zařízení přímo přes ID\n - Do skupiny se může registrovat až 16 lidí.
+\n - V případě neaktivity nebo aktivity pouze jedné osoby v průběhu dvou týdnů, bude skupina zrušena.\n - Můžete omezit vstup do skupiny pozvánkami, ale pro ovládání skupiny musíte použít administrátorskou konzoli.\n - Pokud potřebujete vytvořit skupinu s jinými podmínkami prosím kontaktujte http://osmo.mobi"</string>
+    <string name="osmo_auth_error">Chyba při autorizaci OsMo: %1$s.\n Služba může být dočasně nedostupná nebo vám vypršela registrace.
+\n Chcete pokračovat v nové registraci.</string>
+    <string name="osmo_auth_error_short">Autorizace selhala</string>
+    <string name="rendering_attr_showCycleRoutes_name">Zobrazit cyklostezky</string>
     </resources>

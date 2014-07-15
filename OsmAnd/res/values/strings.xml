@@ -9,7 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="map_preferred_locale_descr">Preferred lanaguage for labels on the map (if it is not available will switch to English or to local names)</string>
+	<string name="keep_navigation_service">Keep</string>
+	<string name="stop_navigation_service">Stop</string>
+	<string name="enable_sleep_mode">Enable sleep mode</string>
+	<string name="gps_wake_up_timer">GPS wake up interval</string>
+	<string name="sleep_mode_stop_dialog">Keep GPS on?</string>
+	<string name="map_preferred_locale_descr">Preferred lanaguage for labels on the map (if it is not available will switch to English or to local names)</string>
     <string name="map_preferred_locale">Map prefferred language</string>
     <string name="local_map_names">Local names</string>
     <string name="lang_sw">Swahili</string>
@@ -20,8 +25,8 @@
 	<string name="live_monitoring_m">Online tracking (GPX required)</string>
     <string name="live_monitoring_start">Start online tracking</string>
 	<string name="live_monitoring_stop">Stop online tracking</string>
-	<string name="gpx_monitoring_start">Record GPX</string>
-	<string name="gpx_monitoring_stop">Stop GPX record</string>
+	<string name="gpx_monitoring_start">Start GPX recording</string>
+	<string name="gpx_monitoring_stop">Stop GPX recording</string>
     <string name="gpx_start_new_segment">Start new segment</string>
     <string name="rendering_attr_hideBuildings_name">Hide buildings</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Hide non-vehicle highways</string>
@@ -187,7 +192,7 @@
     <string name="osmo_settings_descr">Configure monitoring settings and setup personal monitoring channel</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
     <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Advanced Live Monitoring. It provides possibilities to track other devices and be tracked. 
-        Create anonymous groups, share each other location and comminucate. It has various settings for session tracking or permanent tracking.
+        Create anonymous groups, share each other\'s location, and communicate. Has various settings for session tracking or permanent tracking.
         Anonymous groups are limited for a number of days and for some feature, i.e. there is no remote control and group administrator. 
         Fully functional groups should be created on the website and only registered users have access to them.
         Please read more on http://osmo.mobi.</string>
@@ -471,11 +476,11 @@
         \n\t* Additional settings for stabilizing compass
         \n\t* Top left button on the map screen replaces Menu button
     </string>
-    <string name="monitoring_settings">Logging services &amp; Sleep mode</string>
+    <string name="monitoring_settings">Logging services</string>
     <string name="monitoring_settings_descr">Configure how to record trips and enable sleep mode</string>
     <string name="osmand_monitoring_plugin_description">Enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.
         Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
-    <string name="osmand_monitoring_plugin_name">Logging services &amp; Sleep Mode</string>
+    <string name="osmand_monitoring_plugin_name">Logging services</string>
     <string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Choose application theme</string>
