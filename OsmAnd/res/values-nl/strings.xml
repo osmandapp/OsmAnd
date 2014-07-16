@@ -1912,4 +1912,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="stop_navigation_service">Stop</string>
 	<string name="enable_sleep_mode">Slaapstand inschakelen</string>
 	<string name="gps_wake_up_timer">GPS ontwaak interval</string>
+	<string name="sleep_mode_stop_dialog">GPS aanlaten?</string>
+	<string name="lang_fa">Perzisch</string>
 	</resources>
