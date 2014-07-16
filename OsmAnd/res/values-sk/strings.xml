@@ -1914,8 +1914,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="map_preferred_locale_descr">Preferovaný jazyk pre nápisy na mape (ak nie je dostupný budú použité anglické alebo lokálne názvy)</string>
     <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
     <string name="local_map_names">Lokálne názvy</string>
-    <string name="lang_sw">Svahilský</string>
-    <string name="lang_he">Hebrejský</string>
+    <string name="lang_sw">Svahilsky</string>
+    <string name="lang_he">Hebrejsky</string>
     <string name="forward">Dopredu</string>
     <string name="home">Domov</string>
     <string name="live_monitoring_m_descr">Odosielať stopovanie určenej webovej službe ak je zaznamenávanie GPX zapnuté.</string>
