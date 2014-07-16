@@ -426,7 +426,7 @@
 	<string name="front_right">Front til højre</string>
 	<string name="right">Højre</string>
 	<string name="back_right">Bagerst til højre</string>
-	<string name="back">Bagerst</string>
+	<string name="back">Tilbage</string>
 	<string name="back_left">Bagerst til venstre</string>
 	<string name="left">Venstre</string>
 	<string name="front_left">Front til venstre</string>
@@ -1917,7 +1917,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="local_map_names">Lokale navne</string>
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebræisk</string>
-    <string name="forward">Fremad</string>
+    <string name="forward">Frem</string>
     <string name="home">Hjem</string>
     <string name="live_monitoring_m_descr">Send sporing til en beestemt webtjeneste, hvis GPX optagelse er aktiveret.</string>
 	<string name="live_monitoring_m">Online sporing (GPX påkrævet)</string>
@@ -1931,7 +1931,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="map_preferred_locale">Foretrukket sprog på kort</string>
     <string name="stop_navigation_service">Stop</string>
 	<string name="enable_sleep_mode">Aktiver dvaletilstand</string>
-	<string name="gps_wake_up_timer">GPS vågn-op interval: %s</string>
+	<string name="gps_wake_up_timer">GPS vågn-op interval</string>
 	<string name="sleep_mode_stop_dialog">Hold GPS aktiv?</string>
 	<string name="keep_navigation_service">Holde</string>
 	</resources>
