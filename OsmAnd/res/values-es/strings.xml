@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
@@ -1805,4 +1806,24 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_auto_connect">Autoconectar</string>
     <string name="osmo_start_service">Servicio OsMo</string>
     <string name="osmo_gpx_track_downloaded">Pista OsMo %1$s descargada.</string>
-    </resources>
+    <string name="keep_navigation_service">Mantener</string>
+	<string name="stop_navigation_service">Parar</string>
+	<string name="enable_sleep_mode">Habilitar modo de reposo</string>
+	<string name="gps_wake_up_timer">Intervalo despertar GPS</string>
+	<string name="sleep_mode_stop_dialog">¿Mantener el GPS encendido?</string>
+	<string name="map_preferred_locale_descr">Lenguaje preferido para las etiquetas en el mapa (si no está disponible se cambiará a Ingles o a los nombres locales)</string>
+    <string name="map_preferred_locale">Lenguaje preferido del mapa</string>
+    <string name="local_map_names">Nombres locales</string>
+    <string name="lang_sw">Swahili</string>
+    <string name="lang_he">Hebreo</string>
+    <string name="forward">Siguiente</string>
+    <string name="home">Casa</string>
+    <string name="live_monitoring_m_descr">Enviar seguimiento a un servicio web específico si la grabación GPS está habilitada.</string>
+	<string name="live_monitoring_m">Seguimiento online (requiere GPX)</string>
+    <string name="live_monitoring_start">Iniciar seguimiento online</string>
+	<string name="live_monitoring_stop">Parar seguimiento online</string>
+	<string name="gpx_monitoring_start">Iniciar grabación GPX</string>
+	<string name="gpx_monitoring_stop">Parar grabación GPX</string>
+    <string name="gpx_start_new_segment">Iniciar nuevo segmento</string>
+    <string name="lang_fa">Persa</string>
+	</resources>
