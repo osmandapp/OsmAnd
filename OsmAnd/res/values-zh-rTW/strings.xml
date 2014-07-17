@@ -1198,7 +1198,7 @@
     <string name="background_service_is_enabled_question">OsmAnd 休眠模式服務仍在執行。您想要關閉它嗎？</string>
     <string name="osmand_play_title_30_chars">OsmAnd 地圖和導航</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 地圖和導航</string>
-	<string name="native_app_allocated_memory_descr">原生記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB) 。Proportional memory %4$s MB (Android 限制 %5$s MB，Dalvik %6$ MB)分配佔用。</string>
+	<string name="native_app_allocated_memory_descr">原生記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB) 。Proportional memory %4$s MB (Android 限制 %5$s MB，Dalvik %6$s MB)分配佔用。</string>
 	<string name="context_menu_item_destination_point">設定為目的地</string>
     <string name="please_select_address">首先選擇城市或街道</string>
     <string name="available_downloads_left">還可下載 %1$d 個檔案</string>
