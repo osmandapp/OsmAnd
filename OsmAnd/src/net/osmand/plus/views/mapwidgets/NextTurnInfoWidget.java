@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -22,6 +23,8 @@ public class NextTurnInfoWidget extends BaseMapWidget {
 	private float height ;
 	private static final float miniCoeff = 2.5f;
 
+	protected double deviatedPath = 0;
+
 	protected Path pathForTurn = new Path();
 
 	protected TurnType turnType = null;
@@ -34,7 +37,7 @@ public class NextTurnInfoWidget extends BaseMapWidget {
 	private Paint paintBlack;
 	private Paint paintRouteDirection;
 
-	protected boolean makeUturnWhenPossible;
+	protected boolean deviatedFromRoute;
 	protected int turnImminent;
 	protected boolean horisontalMini;
 
@@ -94,7 +97,10 @@ public class NextTurnInfoWidget extends BaseMapWidget {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		if (pathForTurn != null) {
-			if (turnImminent > 0) {
+			//if user deviates from route that we should draw grey arrow
+			if (deviatedFromRoute){
+				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_distant));
+			} else if (turnImminent > 0) {
 				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow));
 			} else if (turnImminent == 0) {
 				paintRouteDirection.setColor(getResources().getColor(R.color.nav_arrow_imminent));
@@ -105,15 +111,15 @@ public class NextTurnInfoWidget extends BaseMapWidget {
 			canvas.translate(0, 3 * scaleCoefficient);
 			canvas.drawPath(pathForTurn, paintRouteDirection);
 			canvas.drawPath(pathForTurn, paintBlack);
-			if (exitOut != null && !horisontalMini && !makeUturnWhenPossible) {
+			if (exitOut != null && !horisontalMini && !deviatedFromRoute) {
 				drawShadowText(canvas, exitOut, width / 2 - 7 * scaleCoefficient, 
 						height / 2 + textPaint.getTextSize() / 2 - 3 * scaleCoefficient, textPaint);
 			}
 			String text = OsmAndFormatter.getFormattedDistance(nextTurnDirection, getClientContext());
 			String subtext = null;
 
-			if (makeUturnWhenPossible) {
-				text = getResources().getString(R.string.asap);
+			if (deviatedFromRoute) {
+				text = OsmAndFormatter.getFormattedDistance((float) deviatedPath, (OsmandApplication)getContext().getApplicationContext());
 			}
 
 			int ls = text.lastIndexOf(' ');
