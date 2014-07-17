@@ -21,4 +21,6 @@ public interface CommandPlayer {
     public String getLanguage();
     
     public boolean supportsStructuredStreetNames();
+
+	public void stop();
 }

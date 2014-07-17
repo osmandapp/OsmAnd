@@ -111,6 +111,13 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 	}
 
+	@Override
+	public void stop(){
+		if (mTts != null){
+			mTts.stop();
+		}
+	}
+
 	public void sendAlertToPebble(String message) {
 	    final Intent i = new Intent("com.getpebble.action.SEND_NOTIFICATION");
 	    final Map<String, Object> data = new HashMap<String, Object>();

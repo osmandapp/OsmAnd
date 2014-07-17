@@ -43,7 +43,17 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		super.clear();
 		mediaPlayer = null;
 	}
-	
+
+	@Override
+	public void stop(){
+		if (filesToPlay != null){
+			filesToPlay.clear();
+		}
+		if (mediaPlayer != null){
+			mediaPlayer.stop();
+		}
+	}
+
 	//  Called from the calculating route thread.
 	@Override
 	public synchronized void playCommands(CommandBuilder builder) {
