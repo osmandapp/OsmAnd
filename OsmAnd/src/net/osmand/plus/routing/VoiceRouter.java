@@ -201,17 +201,6 @@ public class VoiceRouter {
 		return currentStatus <= statusToCheck;
 	}
 	
-	protected void makeUTStatus() {
-		// Mechanism via STATUS_UTWP_TOLD: Until turn in the right direction, or route is re-calculated in forward direction
-		if (currentStatus != STATUS_UTWP_TOLD) {
-			if (playMakeUTwp()) {
-				currentStatus = STATUS_UTWP_TOLD;
-				playGoAheadDist = 0;
-			}
-		}
-
-	}
-	
 	public void announceOffRoute(double dist) {
 		long ms = System.currentTimeMillis();
 		if(waitAnnouncedOffRoute == 0 || ms - lastAnnouncedOffRoute > waitAnnouncedOffRoute) {
@@ -682,7 +671,13 @@ public class VoiceRouter {
 			player.clear();
 		}
 	}
-	
+
+	public void interruptRouteCommands() {
+		if (player != null){
+			player.stop();
+		}
+	}
+
 	/**
 	 * Command to wait until voice player is initialized 
 	 */
