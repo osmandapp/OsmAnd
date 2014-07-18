@@ -1894,9 +1894,21 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="stop_navigation_service">Спыніць</string>
 	<string name="enable_sleep_mode">Уключыць спячы рэжым</string>
 	<string name="gps_wake_up_timer">Iнтэрвал абуджэньня GPS</string>
-	<string name="lang_sw">Суахілі</string>
+	<string name="lang_sw">суахілі</string>
     <string name="lang_he">іўрыт</string>
     <string name="gpx_monitoring_start">Пачаць запіс GPX</string>
 	<string name="gpx_start_new_segment">Пачаць новы адрэзак</string>
     <string name="lang_fa">пэрсійдзкая</string>
+	<string name="sleep_mode_stop_dialog">Пакінуць GPS уключаным?</string>
+	<string name="map_preferred_locale_descr">Пажаданая мова надпісаў на мапе (калі не даступна, то будуць выкарыстны ангельскія ці мясцовыя назвы)</string>
+    <string name="map_preferred_locale">Пажаданая мова мапы</string>
+    <string name="local_map_names">Мясцовыя назвы</string>
+    <string name="forward">Наперад</string>
+    <string name="home">Дамоў</string>
+    <string name="keep_navigation_service">Пакінуць</string>
+	<string name="gpx_monitoring_stop">Спыніць запіс GPX</string>
+    <string name="live_monitoring_start">Пачаць адсочваньне праз Інтэрнэт</string>
+	<string name="live_monitoring_stop">Спыніць адсочваньне праз Інтэрнэт</string>
+	<string name="live_monitoring_m">Адсочваньне праз Інтэрнэт (патрабуецца GPX)</string>
+    <string name="live_monitoring_m_descr">Адсылаць месцазнаходжаньне на пазначаны вэб сэрвіс пры ўключаным запісе GPX.</string>
 	</resources>
