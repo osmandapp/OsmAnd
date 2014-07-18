@@ -18,33 +18,33 @@
 
 
 	<target name="copy_resources">
-		<sync todir="assets">
+		<copy todir="assets">
 			<fileset dir="../../resources/" >
 				<include name="specialphrases/**"/>
 				<include name="voice/**/*.p"/>
 			</fileset>
-		</sync>
-		<sync todir="res/">
+		</copy>
+		<copy todir="res/">
 			<fileset dir="../../resources/rendering_styles/style-icons/"  >
 				<include name="**/*"/>
 			</fileset>
-		</sync>
-		<sync todir="${src.absolute.dir}/net/osmand/router/">
+		</copy>
+		<copy todir="${src.absolute.dir}/net/osmand/router/">
 			<fileset dir="../../resources/routing/" >
 				<include name="*.xml"/>
 			</fileset>
-		</sync>
+		</copy>
 		<sync todir="assets/help/">
 			<fileset dir="../../help/" >
 				<include name="*.html"/>
 				<include name="images/**/*.png"/>
 			</fileset>
 		</sync>
-		<sync todir="${src.absolute.dir}/net/osmand/render/">
+		<copy todir="${src.absolute.dir}/net/osmand/render/">
 			<fileset dir="../../resources/rendering_styles/" >
 				<include name="*.xml"/>
 			</fileset>
-		</sync>
+		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/osm/">
 			<fileset dir="../../resources/obf_creation/" >
 				<include name="rendering_types.xml"/>
