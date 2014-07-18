@@ -370,7 +370,7 @@
 	<string name="osmand_extra_settings_description">Vis indstillinger for avanceret kortkonfiguration (som at øge kortdetaljer) og nogle enhedsspecifikke indstillinger.</string>
 	<string name="osmand_development_plugin_description">Vis indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne.</string>
 	<string name="plugins_screen">Udvidelser</string>
-	<string name="select_plugin_to_activate">Tryk på en udvidelse for at aktivere eller deaktivere den. (Kan kræve genstart af OsmAnd.)</string>
+	<string name="select_plugin_to_activate">Tryk på en udvidelse for at aktivere eller deaktivere den. (Genstart af OsmAnd kan være nødvendig.)</string>
 	<string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet</string>
 	<string name="prefs_plugins">Udvidelser</string>
 	<string name="osm_editing_plugin_description">Vis indstillinger, der kræves for OSM tilbagemelding, som f.eks. at indsamle/ændre OSM interessepunkter (IP), åbne/kommentere OSM fejl, og bidrage med optagede GPX-filer (kræver OSM legitimationsoplysninger).</string>
@@ -933,7 +933,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="map_overlay_descr">Vælg kort til overlejring</string>
 	<string name="tile_source_already_installed">Kort er allerede installeret, indstillinger bliver opdateret</string>
 	<string name="select_tile_source_to_install">Vælg (del)kort der skal installeres eller opdateres</string>
-	<string name="internet_not_available">Internetforbindelse krævet for handlingen, men er ikke tilgængelig</string>
+	<string name="internet_not_available">Internetforbindelse er nødvendig for handlingen, men er ikke tilgængelig</string>
 	<string name="install_more">Installer flere…</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoomniveau for at bruge vektorkort</string>
 	<string name="level_to_switch_vector_raster">Min. vektor zoomniveau</string>
@@ -1920,7 +1920,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="forward">Frem</string>
     <string name="home">Hjem</string>
     <string name="live_monitoring_m_descr">Send sporing til en beestemt webtjeneste, hvis GPX optagelse er aktiveret.</string>
-	<string name="live_monitoring_m">Online sporing (GPX påkrævet)</string>
+	<string name="live_monitoring_m">Online sporing (GPX nødvendig)</string>
     <string name="live_monitoring_start">Start online sporing</string>
 	<string name="live_monitoring_stop">Stop online sporing</string>
 	<string name="gpx_monitoring_start">Start GPX optagelse</string>
@@ -1933,5 +1933,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="enable_sleep_mode">Aktiver dvaletilstand</string>
 	<string name="gps_wake_up_timer">GPS vågn-op interval</string>
 	<string name="sleep_mode_stop_dialog">Hold GPS aktiv?</string>
-	<string name="keep_navigation_service">Holde</string>
+	<string name="keep_navigation_service">Hold</string>
 	</resources>

@@ -12,7 +12,8 @@ public class TurnType {
 	public static final String KR = "KR"; // keep right//$NON-NLS-1$
 	public static final String TU = "TU"; // U-turn //$NON-NLS-1$
 	public static final String TRU = "TRU"; // Right U-turn //$NON-NLS-1$
-	public static String[] predefinedTypes = new String[] { C, KL, KR, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU };
+	public static final String OFFR = "OFFR"; // Off route //$NON-NLS-1$
+	public static String[] predefinedTypes = new String[] { C, KL, KR, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU, OFFR };
 	
 	public static TurnType sraight() {
 		return valueOf(C, false);
@@ -138,6 +139,8 @@ public class TurnType {
 			return "Keep left";
 		} else if(value.equals(KR)) {
 			return "Keep right";
+		} else if(value.equals(OFFR)) {
+			return "Off route";
 		}
 		return super.toString();
 	}
