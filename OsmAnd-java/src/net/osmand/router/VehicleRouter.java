@@ -23,6 +23,11 @@ public interface VehicleRouter {
 	public int isOneWay(RouteDataObject road);
 	
 	/**
+	 * return penalty transition in seconds
+	 */
+	public float getPenaltyTransition(RouteDataObject road);
+	
+	/**
 	 * return delay in seconds (0 no obstacles)
 	 */
 	public float defineObstacle(RouteDataObject road, int point);

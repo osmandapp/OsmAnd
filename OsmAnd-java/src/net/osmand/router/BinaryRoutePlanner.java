@@ -136,11 +136,11 @@ public class BinaryRoutePlanner {
 			}
 			if (ctx.planRouteIn2Directions()) {
 				forwardSearch = (nonHeuristicSegmentsComparator.compare(graphDirectSegments.peek(), graphReverseSegments.peek()) < 0);
-				if (graphDirectSegments.size() * 2 > graphReverseSegments.size()) {
-					forwardSearch = false;
-				} else if (graphDirectSegments.size() < 2 * graphReverseSegments.size()) {
-					forwardSearch = true;
-				}
+//				if (graphDirectSegments.size() * 2 > graphReverseSegments.size()) {
+//					forwardSearch = false;
+//				} else if (graphDirectSegments.size() < 2 * graphReverseSegments.size()) {
+//					forwardSearch = true;
+//				}
 			} else {
 				// different strategy : use onedirectional graph
 				forwardSearch = onlyForward;
