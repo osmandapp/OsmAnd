@@ -34,12 +34,12 @@
 				<include name="*.xml"/>
 			</fileset>
 		</copy>
-		<copy todir="assets/help/">
+		<sync todir="assets/help/">
 			<fileset dir="../../help/" >
 				<include name="*.html"/>
 				<include name="images/**/*.png"/>
 			</fileset>
-		</copy>
+		</sync>
 		<copy todir="${src.absolute.dir}/net/osmand/render/">
 			<fileset dir="../../resources/rendering_styles/" >
 				<include name="*.xml"/>
