@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использования оффлайн.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -1734,4 +1735,14 @@ OsmAnd - открытый источник и активно развается.
     <string name="rendering_attr_showAccess_name">Показать тип доступа</string>
     <string name="rendering_attr_showCycleRoutes_name">Показать веломаршруты</string>
     <string name="osmo_auth_error_short">Сбой авторизации</string>
+    <string name="map_preferred_locale_descr">Предпочтительный язык для меток на карте (если он не доступен, то английский язык или местные названия)</string>
+    <string name="map_preferred_locale">Предпочтительный язык на карте</string>
+    <string name="lang_sw">Суахили</string>
+    <string name="lang_he">Иврит</string>
+    <string name="forward">Вперёд</string>
+    <string name="home">В начало</string>
+    <string name="osmo_group_information">Пожалуйста, прочтите перед созданием группы!</string>
+    <string name="osmo_auto_connect_descr">Автоматическое подключение к сервису при запуске приложения</string>
+    <string name="osmo_auto_connect">Автоматическое подключение</string>
+    <string name="osmo_start_service">Сервис OsMo</string>
     </resources>
