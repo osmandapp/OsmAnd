@@ -542,7 +542,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="continuous_rendering">연속 렌더링</string>
 	<string name="continuous_rendering_descr">전체 이미지 대신 연속 렌더링을 표시합니다</string>
 	<string name="rendering_exception">선택 영역을 렌더링하는 도중 오류가 발생하였습니다</string>
-	<string name="show_point_options">위치 사용하기…</string>
+	<string name="show_point_options">포인트…</string>
 	<string name="renderer_load_sucess">렌더러가 성공적으로 적재되었습니다</string>
 	<string name="renderer_load_exception">예외발생: 렌더러가 적재되지 않았습니다</string>
 	<string name="renderers">벡터 렌더러</string>
@@ -614,7 +614,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="background_service_wait_int_descr">위치를 찾는 최대 대기시간을 설정합니다</string>
 	<string name="background_service_wait_int">최대 대기시간</string>
 	<string name="service_stop_background_service">OsmAnd 절전 모드 길안내 서비스 정지</string>
-	<string name="where_am_i">현재 위치?</string>
+	<string name="where_am_i">GPS 위치</string>
 	<string name="process_navigation_service">OsmAnd 네비게이션 서비스</string>
 	<string name="network_provider">네트워크</string>
 	<string name="gps_provider">GPS</string>
@@ -1446,7 +1446,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_renderer">지도 스타일</string>
 	
 	
-	<string name="layer_map_appearance">화면 구성</string>
+	<string name="layer_map_appearance">맵뷰어 구성</string>
 	<string name="show_lanes">레인 표시</string>
 	<string name="avoid_unpaved">비포장 도로 회피</string>
 	<string name="avoid_ferries">뱃길 회피</string>
@@ -1464,8 +1464,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="int_continuosly">연속적인</string>
 	<string name="screen_is_locked">화면을 해제하려면 잠금아이콘을 누르세요</string>
 	<string name="map_widget_top_text">거리 이름</string>
-	<string name="map_widget_config">화면 구성</string>
-	<string name="map_widget_back_to_loc">현재 나의 위치</string>
+	<string name="map_widget_config">맵뷰어 구성</string>
+	<string name="map_widget_back_to_loc">현재 위치</string>
 	<string name="map_widget_lock_screen">화면 잠금</string>
 	<string name="map_widget_compass">나침반</string>
 	<string name="map_widget_top_stack">상태 표시줄 :</string>
