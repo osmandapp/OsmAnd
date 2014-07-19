@@ -817,12 +817,11 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \n * \'Nat\': Brug altid nattilstand
 \n * \'Lysføler\': Kortvisning styres af lysføleren i enheden (kun hvis der er en)
 	</string>	
-	<string name="tip_osm_improve_t">OsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Man kan nemt oprettet og sende nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk.
-\n\nFor dette skal man aktivere \'OSM redigering\' udvidelsen under \'Indstillinger\' → \'Udvidelser\', skal man indtaste sine logind-oplysninger til OSM i \'Indstillinger\' → \' OSM redigering\'. 
-\n\nFor at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i  \'Brug placeringer\' i genvejsmenuen. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
+	<string name="tip_osm_improve_t">"OsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Man kan nemt oprettet og sende nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk.
+\n\nFor dette skal man aktivere \'OSM redigering\' udvidelsen under \'Indstillinger\' → \'Udvidelser\', skal man indtaste sine log ind oplysninger til OSM i \'Indstillinger\' → \' OSM redigering\'.
+\n\nFor at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i \'Brug placeringer\' i genvejsmenuen. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
 \n\nFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejlregistrering\' i \'Brug placeringer\' i genvejsmenuen. Indtast derefter en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
-\n\nOsmAnd understøtter cachelagring af indtastninger offline (se pågældende indstilling), men internetforbindelser er naturligvis nødvendig for at sende OSM IP og OSM fejlrapporter.
-	</string>
+\n\nOsmAnd understøtter cachelagring af indtastninger offline (se pågældende indstilling), men internetforbindelser er naturligvis nødvendig for at sende OSM IP og OSM fejlrapporter. "</string>
 	 
 	<string name="tip_recent_changes_0_6_9_t">Ændringer i 0.6.9:
 \n - Forbedret offline kortoptegning
@@ -1896,7 +1895,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="osmo_auto_connect">Automatisk forbindelse</string>
     <string name="osmo_start_service">OsMo tjeneste</string>
     <string name="osmo_gpx_track_downloaded">OsMo spor %1$s hentet.</string>
-    <string name="osmo_not_signed_in">OsMo logind mislykkedes</string>
+    <string name="osmo_not_signed_in">OsMo log ind mislykkedes</string>
     <string name="osmo_group_information">Læs dette før du opretter en gruppe!</string>
     <string name="osmo_group_by_invite">Tilslut med invitation</string>
     <string name="osmo_group_information_desc">" -Alle grupper der oprettes er offentlige! Hvis de skal være anonyme, tilsluttes enheder direkte via sporings-id\'er.\n -Op til 16 personer kan registreres i gruppen.\n -I tilfælde af inaktivitet eller aktivitet af kun 1 person i 2 uger, vil gruppen blive slettet.\n -Du kan begrænse adgangen til gruppen, til kun med invitation, men for at kontrollere gruppen skal man bruge administrationskonsollen.\n -Hvis du har brug at oprette en gruppe, men med andre betingelser, kontakt http://osmo.mobi"</string>
