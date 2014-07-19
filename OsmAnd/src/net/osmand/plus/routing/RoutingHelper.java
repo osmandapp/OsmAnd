@@ -877,8 +877,8 @@ public class RoutingHelper {
 				@Override
 				public void run() {
 					if (isRouteBeingCalculated()) {
-						float p = calculationProgress.distanceFromBegin + calculationProgress.distanceFromEnd;
-						float all = calculationProgress.totalEstimatedDistance * 1.5f;
+						float p = Math.max(calculationProgress.distanceFromBegin, calculationProgress.distanceFromEnd);
+						float all = calculationProgress.totalEstimatedDistance * 1.25f;
 						if (all > 0) {
 							int t = (int) Math.min(p * p / (all * all) * 100f, 99);
 							progressRoute.updateProgress(t);
