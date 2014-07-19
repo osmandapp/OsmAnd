@@ -1593,9 +1593,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     
     
     <string name="auto_zoom_none">不自動縮放</string>
-    <string name="auto_zoom_close">特寫</string>
-    <string name="auto_zoom_far">中等</string>
-    <string name="auto_zoom_farthest">遠程</string>
+    <string name="auto_zoom_close">近距</string>
+    <string name="auto_zoom_far">中距</string>
+    <string name="auto_zoom_farthest">遠距</string>
     <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 的離線路線可能要花很長的時間(或有時無動作)。為了有更好的效能，您或許需要增加中途點。</string>
     <string name="default_and">與</string>
     <string name="default_or">或</string>
