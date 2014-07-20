@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="sherpafy_more_information">More information</string>
+    <string name="sherpafy_tour_info_txt">Tour Information</string>
+    <string name="sherpafy_stages_txt">Stages</string>
+    <string name="sherpafy_instructions">Instructions</string>
+    <string name="sherpafy_overview">Overview</string>
+    <string name="sherpafy_gallery">Gallery</string>
+    <string name="sherpafy_more_information">MORE INFORMATION</string>
     <string name="sherpafy_continue_stage">Continue</string>
     <string name="sherpafy_start_stage">Start</string>
     <string name="sherpafy_download_tours">Download Tours</string>

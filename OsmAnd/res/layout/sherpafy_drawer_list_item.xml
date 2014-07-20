@@ -16,6 +16,9 @@
     <TextView
         android:id="@+id/Text"
         android:layout_width="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:textSize="17sp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1" />

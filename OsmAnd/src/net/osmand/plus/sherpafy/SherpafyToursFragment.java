@@ -6,14 +6,21 @@ import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
+import net.osmand.plus.activities.LocalIndexesActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +43,6 @@ import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 public class SherpafyToursFragment extends SherlockListFragment {
 	private static final int ACTION_DOWNLOAD = 5;
 	OsmandApplication app;
-	private View view;
 	private SherpafyCustomization custom;
 
 	public SherpafyToursFragment() {
@@ -164,9 +170,20 @@ public class SherpafyToursFragment extends SherlockListFragment {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.sherpafy_list_tour_item, parent, false);
 			}
-			TourInformation ti = getItem(position);
+			final TourInformation ti = getItem(position);
 			TextView description = (TextView) row.findViewById(R.id.TourDescription);
 			TextView name = (TextView) row.findViewById(R.id.TourName);
+			TextView moreInformation = (TextView) row.findViewById(R.id.MoreInformation);
+			SpannableString content = new SpannableString(getString(R.string.sherpafy_more_information));
+			content.setSpan(new ClickableSpan() {
+				@Override
+				public void onClick(View widget) {
+					((TourViewActivity) getActivity()).selectMenu( ti);
+				}
+			}, 0, content.length(), 0);
+			moreInformation.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+			moreInformation.setText(content);
+			moreInformation.setMovementMethod(LinkMovementMethod.getInstance());
 			description.setText(ti.getShortDescription());
 			name.setText(ti.getName());
 			ImageView iv = (ImageView) row.findViewById(R.id.TourImage);

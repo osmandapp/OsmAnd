@@ -14,18 +14,18 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.GPXUtilities.GPXFile;
 
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
-
-import org.xmlpull.v1.XmlPullParserException;
 
 public class TourInformation {
 	final String FILE_PREFIX = "@file:";
 	
 	private String name;
 	private File folder;
+	private String homeUrl = "";
 	private String shortDescription = "";
 	private String fulldescription = "";
 	private Bitmap defaultImg = null;
@@ -67,9 +67,10 @@ public class TourInformation {
 				String tag = parser.getName();
 				if(tag.equals("tour")) {
 					name = getDefAttribute(parser, "name", name);
+					homeUrl = getDefAttribute(parser, "url", "");
 				} else if (tag.equals("stage")) {
 					String name = getDefAttribute(parser, "name", "");
-					stage = new StageInformation();
+					stage = new StageInformation(this, stageInformation.size());
 					stage.name = name;
 				} else if (tag.equals("fullDescription")){
 					fulldescription = getInnerXml(parser);
@@ -175,6 +176,21 @@ public class TourInformation {
 		String fullDescription = "";
 		Bitmap img = null;
 		File imgFile;
+		private TourInformation tour;
+		private int order;
+		
+		public TourInformation getTour() {
+			return tour;
+		}
+		
+		public int getOrder() {
+			return order;
+		}
+		
+		public StageInformation(TourInformation tour, int order) {
+			this.tour = tour;
+			this.order = order;
+		}
 		
 		public String getName() {
 			return name;
@@ -245,6 +261,10 @@ public class TourInformation {
 	@Override
 	public String toString() {
 		return name;
+	}
+	
+	public String getHomeUrl() {
+		return homeUrl;
 	}
 
 }

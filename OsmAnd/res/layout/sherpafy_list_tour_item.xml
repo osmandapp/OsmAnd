@@ -7,11 +7,11 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="15dp"
         android:background="#ffffff"
-        android:layout_marginBottom="10dp"
-    	android:layout_marginLeft="5dp"
-    	android:layout_marginRight="10dp"
-    	android:layout_marginTop="15dp"
         android:orientation="vertical" >
 
         <FrameLayout
@@ -23,32 +23,49 @@
                 android:id="@+id/TourImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                >
+                android:scaleType="centerCrop" >
             </ImageView>
 
             <TextView
                 android:id="@+id/TourName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
                 android:background="@color/shadow_color"
                 android:ellipsize="end"
-                android:layout_gravity="bottom"
                 android:maxLines="1"
                 android:textColor="@color/color_white"
-                android:textSize="20sp" />
+                android:textSize="23sp" />
         </FrameLayout>
 
         <TextView
             android:id="@+id/TourDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/MoreInformation"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                />
+        </LinearLayout>
     </LinearLayout>
+
 </FrameLayout>

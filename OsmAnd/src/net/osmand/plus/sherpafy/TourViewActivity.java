@@ -89,7 +89,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				selectMenu(position, drawerAdapter.getItem(position));
+				selectMenu(drawerAdapter.getItem(position));
 			}
 		});
 
@@ -127,17 +127,14 @@ public class TourViewActivity extends SherlockFragmentActivity {
 					} else if(selectedItem == it) {
 						imView.setImageResource(R.drawable.ic_action_ok_light);
 					} else {
-						imView.setImageDrawable(null);
+						imView.setImageDrawable(
+								new StageImageDrawable(TourViewActivity.this, StageImageDrawable.MENU_COLOR, 
+								(((StageInformation) it).getOrder() + 1)+"", 0));
 					}
 					tv.setText(((StageInformation) it).getName());
 				} else {
 					imView.setImageDrawable(null);
 					tv.setText(it.toString());
-				}
-				if(position == 0) {
-					((TextView) convertView).setText(R.string.sherpafy_tours);
-				} else {
-					((TextView) convertView).setText(it.toString());
 				}
 				return convertView;
 			}
@@ -156,10 +153,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	}
 	
 	
-	public void loadingFinished() {
-		selectMenu(0, getString(R.string.sherpafy_tours));
-	}
-
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
@@ -219,9 +212,9 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	}
 
 
-	protected void selectMenu(int position, Object item) {
+	public void selectMenu(Object item) {
 		FragmentManager fragmentManager = getSupportFragmentManager();
-		if (position == 0) {
+		if (new Integer(R.string.sherpafy_tours).equals(item)) {
 			if (toursFragment == null) {
 				toursFragment = new SherpafyToursFragment();
 			}
@@ -233,7 +226,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				tourOverview = new SherpafyTourOverviewFragment();
 			}
 			tourOverview.setTour((TourInformation)item);
-			fragmentManager.beginTransaction().replace(R.id.content_frame, toursFragment).commit();
+			fragmentManager.beginTransaction().replace(R.id.content_frame, tourOverview).commit();
 		} else if(item instanceof StageInformation) {
 			state = STATE_STAGE_OVERVIEW;
 		}
@@ -250,7 +243,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				insert = 1;
 			}
 			drawerAdapter.insert(it, insert++);
-			if(it == selectedItem) {
+			if(it == selectedItem || (selectedItem instanceof StageInformation &&
+					((StageInformation) selectedItem).getTour() == it)) {
 				for(StageInformation st : it.getStageInformation()) {
 					drawerAdapter.insert(st, insert++);
 				}

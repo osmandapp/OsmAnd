@@ -33,7 +33,7 @@ public class SherpafyLoadingFragment extends SherlockFragment {
 					public void run() {
 						((TextView) view.findViewById(R.id.ProgressMessage)).setVisibility(View.GONE);
 						view.findViewById(R.id.ProgressBar).setVisibility(View.GONE);
-						((TourViewActivity)getSherlockActivity()).loadingFinished();
+						((TourViewActivity)getSherlockActivity()).selectMenu(R.string.sherpafy_tours);
 					}
 				});
 	}
