@@ -204,6 +204,11 @@ public class TourInformation {
 			return img;
 		}
 		
+		@Override
+		public String toString() {
+			return name;
+		}
+		
 	}
 
 	//Returns full string from which contains XML tags from XMLParser
@@ -235,6 +240,11 @@ public class TourInformation {
 		}
 		String content = sb.toString();
 		return content;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 
 }

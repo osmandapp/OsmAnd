@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" android:background="@color/color_white"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
+
+    <FrameLayout >
+    	<ImageView
+        	android:id="@+id/TourImage"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"/>
+    	<TextView
+    	    android:id="@+id/TourName"
+    	    android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:maxLines="1"
+        	android:background="@color/shadow_color"
+        	android:ellipsize="end"
+    	    android:textSize="20sp" 
+    	    android:textColor="@color/color_white"
+    	    />
+    </FrameLayout>
+    <TextView
+        android:id="@+id/TourDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>
