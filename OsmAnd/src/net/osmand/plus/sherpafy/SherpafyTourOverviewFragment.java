@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -40,14 +42,12 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 	private static final int SHARE_ID = 6;
 	OsmandApplication app;
 	private SherpafyCustomization customization;
-	private TourInformation item;
+	private TourInformation tour;
+	private StageAdapter stageAdapter;
 
 	public SherpafyTourOverviewFragment() {
 	}
 	
-	public void setTour(TourInformation item) {
-		this.item = item;
-	}
 	
 	private enum StageItemType {
 		OVERVIEW,
@@ -61,12 +61,14 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 		
 		boolean stage;
 		String txt;
+		String header;
 		Object type;
 
-		public StageItem(Object type, String txt, boolean stage) {
+		public StageItem(Object type, String header, String txt, boolean stage) {
 			this.type = type;
 			this.txt = txt;
 			this.stage = stage;
+			this.header = header;
 		}
 	}
 	
@@ -75,25 +77,16 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 		super.onAttach(activity);
 		app = (OsmandApplication) getSherlockActivity().getApplication();
 		customization = (SherpafyCustomization) app.getAppCustomization();
-		List<StageItem> items = new ArrayList<SherpafyTourOverviewFragment.StageItem>();
-		items.add(new StageItem(StageItemType.TEXT, getString(R.string.sherpafy_tour_info_txt), false));
-		items.add(new StageItem(StageItemType.OVERVIEW, getString(R.string.sherpafy_overview), false));
-		items.add(new StageItem(StageItemType.INSTRUCTIONS, getString(R.string.sherpafy_instructions), false));
-		items.add(new StageItem(StageItemType.GALLERY, getString(R.string.sherpafy_gallery), false));
-		items.add(new StageItem(StageItemType.TEXT, getString(R.string.sherpafy_stages_txt), true));
-		for(StageInformation si : item.getStageInformation()) {
-			StageItem it = new StageItem(si, si.getName(), true);
-			items.add(it);
-		}
-		StageAdapter stageAdapter = new StageAdapter(items);
-		getSherlockActivity().getSupportActionBar().setTitle(item.getName());
-		ImageView iv = new ImageView(getActivity());
-		iv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-		iv.setScaleType(ScaleType.CENTER_CROP);
-		iv.setImageBitmap(item.getImageBitmap());
-		getListView().addHeaderView(iv);
-		setListAdapter(stageAdapter);
+
 		setHasOptionsMenu(true);
+		String id = getArguments().getString("TOUR");
+		for(TourInformation ti : customization.getTourInformations()) {
+			if(ti.getId().equals(id)) {
+				tour = ti;
+				getSherlockActivity().getSupportActionBar().setTitle(tour.getName());
+				break;
+			}
+		}
 	}
 	
 
@@ -105,22 +98,23 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//		createMenuItem(menu, ACTION_GO_TO_MAP, R.string.start_tour, 0, 0,/* R.drawable.ic_action_marker_light, */
-//		MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		((TourViewActivity) getSherlockActivity()).createMenuItem(menu, SHARE_ID, R.string.settings, R.drawable.ic_action_gshare_light,
-		R.drawable.ic_action_gshare_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM
-				| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		
+		// createMenuItem(menu, ACTION_GO_TO_MAP, R.string.start_tour, 0, 0,/* R.drawable.ic_action_marker_light, */
+		// MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		if (tour != null) {
+			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, SHARE_ID, R.string.settings,
+					R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
+					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		}
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if(item.getItemId() == SHARE_ID) {
 			ShareDialog sd = new ShareDialog(getActivity());
-			if(this.item.getHomeUrl().equals("")) {
-				sd.shareURLOrText(null, this.item.getName(), null);
+			if(this.tour.getHomeUrl().equals("")) {
+				sd.shareURLOrText(null, this.tour.getName(), null);
 			} else {
-				sd.shareURLOrText(this.item.getHomeUrl(), this.item.getName() + " " + this.item.getHomeUrl(), null);
+				sd.shareURLOrText(this.tour.getHomeUrl(), this.tour.getName() + " " + this.tour.getHomeUrl(), null);
 			}
 			sd.showDialog();
 			return true;
@@ -132,6 +126,29 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		List<StageItem> items = new ArrayList<SherpafyTourOverviewFragment.StageItem>();
+		items.add(new StageItem(StageItemType.TEXT, "", getString(R.string.sherpafy_tour_info_txt), false));
+		items.add(new StageItem(StageItemType.OVERVIEW, getString(R.string.sherpafy_overview), 
+				getString(R.string.sherpafy_overview), false));
+		items.add(new StageItem(StageItemType.INSTRUCTIONS, getString(R.string.sherpafy_instructions), 
+				getString(R.string.sherpafy_instructions), false));
+		items.add(new StageItem(StageItemType.GALLERY, getString(R.string.sherpafy_gallery),
+				getString(R.string.sherpafy_gallery), false));
+		items.add(new StageItem(StageItemType.TEXT, "", getString(R.string.sherpafy_stages_txt), true));
+		if (tour != null) {
+			for (StageInformation si : tour.getStageInformation()) {
+				StageItem it = new StageItem(si, si.getName(), si.getShortDescription(), true);
+				items.add(it);
+			}
+			stageAdapter = new StageAdapter(items);
+
+			ImageView iv = new ImageView(getActivity());
+			iv.setLayoutParams(new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			iv.setScaleType(ScaleType.CENTER_CROP);
+			iv.setImageBitmap(tour.getImageBitmap());
+			getListView().addHeaderView(iv);
+			setListAdapter(stageAdapter);
+		}
 	}
 	
 	
@@ -161,23 +178,33 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 			} else {
 				addtext.setText("");
 			}
-			if(ti.type == StageItemType.TEXT){
-				text.setTextColor(ti.stage ? StageImageDrawable.STAGE_COLOR :
-						StageImageDrawable.INFO_COLOR);
-				text.setText(ti.txt);
-				img.setImageDrawable(null);
+			if(Algorithms.isEmpty(ti.header)) {
 				header.setVisibility(View.GONE);
+			} else {
+				header.setVisibility(View.VISIBLE);
+				header.setText(ti.header);
+			}
+			if(Algorithms.isEmpty(ti.txt)) {
+				text.setVisibility(View.GONE);
+			} else {
+				text.setVisibility(View.VISIBLE);
+				text.setText(ti.txt);
+				if (ti.type == StageItemType.TEXT) {
+					text.setTextColor(ti.stage ? StageImageDrawable.STAGE_COLOR : StageImageDrawable.INFO_COLOR);
+				} else {
+					text.setTextColor(StageImageDrawable.MENU_COLOR);
+				}
+			}
+			if(ti.type == StageItemType.TEXT){
+				img.setVisibility(View.GONE);
+				img.setImageDrawable(null);
 			} else if(ti.type instanceof StageInformation) {
 				StageInformation si = (StageInformation) ti.type;
-				header.setVisibility(View.VISIBLE);
-				text.setTextColor(StageImageDrawable.MENU_COLOR);
-				text.setText(ti.txt);
+				img.setVisibility(View.VISIBLE);
 				img.setImageDrawable(new StageImageDrawable(getActivity(), 
 					StageImageDrawable.STAGE_COLOR, (si.getOrder() + 1) +"", 0 ));
 			} else {
-				header.setVisibility(View.VISIBLE);
-				text.setTextColor(StageImageDrawable.MENU_COLOR);
-				text.setText(ti.txt);
+				img.setVisibility(View.VISIBLE);
 				img.setImageDrawable(new StageImageDrawable(getActivity(), 
 					StageImageDrawable.INFO_COLOR, ti.txt.substring(0, 1) +"", 0 ));
 			}

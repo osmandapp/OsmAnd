@@ -37,6 +37,10 @@ public class TourInformation {
 		this.name = f.getName().replace('_', ' ');
 	}
 	
+	public String getId() {
+		return folder.getName();
+	}
+	
 	
 	private static Reader getUTF8Reader(InputStream f) throws IOException {
 		BufferedInputStream bis = new BufferedInputStream(f);

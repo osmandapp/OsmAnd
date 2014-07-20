@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
@@ -30,7 +31,9 @@ public class StageImageDrawable extends Drawable {
 	private int color;
 	public static final int STAGE_COLOR = 0xff2897d4;
 	public static final int INFO_COLOR = 0xffadc90e;
-	public static final int MENU_COLOR = 0xff8f8f8f;
+	public static final int MENU_COLOR = 0xffb9b9b9;
+	public static final int MENU_TCOLOR = 0xff8f8f8f;
+	
 
 	public StageImageDrawable(Context ctx, int color, String text, int drawableRes) {
 		this.resources = ctx.getResources();
@@ -43,8 +46,9 @@ public class StageImageDrawable extends Drawable {
 		if (text != null) {
 			this.text = text;
 			textPaint = new TextPaint();
-			textPaint.setColor(R.color.color_white);
+			textPaint.setTypeface(Typeface.DEFAULT_BOLD);
 			textPaint.setTextAlign(Align.CENTER);
+			textPaint.setColor(ctx.getResources().getColor(R.color.color_white));
 		} else {
 			drawable = getResources().getDrawable(drawableRes);
 			paintBmp = new Paint();
@@ -86,7 +90,7 @@ public class StageImageDrawable extends Drawable {
 		// bs.inset((int)(bs.width() - min + 3 * density) / 2,
 		// (int) (bs.height() - min + 3 * density) / 2);
 		if(textPaint != null) {
-			textPaint.setTextSize(bs.height() / 2);
+			textPaint.setTextSize(bs.height() * 3 / 4);
 		}
 		if(drawable != null) {
 			drawable.setBounds(bs);
@@ -97,14 +101,14 @@ public class StageImageDrawable extends Drawable {
 	public void draw(Canvas canvas) {
 		// int max = Math.max(drawable.getMinimumHeight(), drawable.getMinimumWidth());
 		Rect bs = getBounds();
-		int min = (int) (Math.min(bs.width(), bs.height()) - 8 * density);
-		int c = bs.width() / 2;
-		int r = (int) (min / 2);
-		canvas.drawCircle(c, c, r, paintInnerCircle);
+		int cx = bs.width() / 2;
+		int cy = bs.height() / 2;
+		int rx = (int) (Math.min(bs.width(), bs.height()) - 8 * density) / 2;
+		canvas.drawCircle(cx, cy, rx, paintInnerCircle);
 		if (drawable != null) {
 			drawable.draw(canvas);
 		} else if(text != null ){
-			canvas.drawText(text, c, r * 3 / 4, textPaint);
+			canvas.drawText(text, cx, cy + 3 * rx / 8, textPaint);
 		}
 	}
 

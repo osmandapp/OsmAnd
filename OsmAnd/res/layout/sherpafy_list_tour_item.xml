@@ -57,13 +57,14 @@
             android:layout_marginLeft="14dp"
             android:layout_marginRight="14dp"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/MoreInformation"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 />
         </LinearLayout>
     </LinearLayout>

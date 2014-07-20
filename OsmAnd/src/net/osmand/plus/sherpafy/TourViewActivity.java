@@ -1,5 +1,7 @@
 package net.osmand.plus.sherpafy;
 
+import java.util.WeakHashMap;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
@@ -9,6 +11,7 @@ import android.content.res.Configuration;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -46,9 +49,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ArrayAdapter<Object> drawerAdapter;
-	private SherpafyToursFragment toursFragment;
+	private WeakHashMap<Object, Fragment> fragments = new WeakHashMap<Object, Fragment>();
 	private Object selectedItem;
-	private SherpafyTourOverviewFragment tourOverview;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -214,21 +216,27 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	public void selectMenu(Object item) {
 		FragmentManager fragmentManager = getSupportFragmentManager();
+		Fragment fragment = fragments.get(item);
 		if (new Integer(R.string.sherpafy_tours).equals(item)) {
-			if (toursFragment == null) {
-				toursFragment = new SherpafyToursFragment();
+			if (fragment == null) {
+				fragment = new SherpafyToursFragment();
+				fragments.put(item, fragment);
 			}
-			fragmentManager.beginTransaction().replace(R.id.content_frame, toursFragment).commit();
 			state = STATE_SELECT_TOUR;
 		} else if(item instanceof TourInformation) {
 			state = STATE_TOUR_VIEW;
-			if(tourOverview == null) {
-				tourOverview = new SherpafyTourOverviewFragment();
+			if (fragment == null) {
+				fragment = new SherpafyTourOverviewFragment();
+				Bundle bl = new Bundle();
+				bl.putString("TOUR", ((TourInformation) item).getId());
+				fragment.setArguments(bl);
+				fragments.put(item, fragment);
 			}
-			tourOverview.setTour((TourInformation)item);
-			fragmentManager.beginTransaction().replace(R.id.content_frame, tourOverview).commit();
 		} else if(item instanceof StageInformation) {
 			state = STATE_STAGE_OVERVIEW;
+		}
+		if(fragment != null) {
+			fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 		}
 		selectedItem = item;
 		if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
