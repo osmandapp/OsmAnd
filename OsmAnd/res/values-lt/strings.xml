@@ -160,7 +160,7 @@
   <string name="front_right">Priekio dešinė</string>
   <string name="right">Dešinė</string>
   <string name="back_right">Galo dešinė</string>
-  <string name="back">Galas</string>
+  <string name="back">Atgal</string>
   <string name="back_left">Galo kairė</string>
   <string name="left">Kairė</string>
   <string name="front_left">Priekio kairė</string>
@@ -1601,11 +1601,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="navigation_intent_invalid">Netinkamas formatas: %s</string>
 <string name="osmo_settings_uuid">Unikalus įrenginio ID</string>
     <string name="osmo_settings_descr">Konfigūruoti stebėjimo nustatymus ir nustatyti asmeninį stebėjimo kanalą</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - pažangus tiesioginis stebėjimas. Suteikia daug galimybių būti stebimam ir stebėti kitus įrenginius. 
-        Susikurkite anonimines grupes, bendrinkite vienas kito vietą ir komunikuokite. Ši paslauga turi įvairių nustatymų vienkartiniam ir pastoviam sekimui.
-        Anoniminių grupių gyvavimas yra tik kelios dienos su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. 
-        Pilno funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti.
-        Daugiau skaitykite http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">"OpenStreetMap-Monitoring - pažangus tiesioginis stebėjimas. Suteikia daug galimybių būti stebimam ir stebėti kitus įrenginius. Susikurkite anonimines grupes, bendrinkite vienas kito vietą ir komunikuokite. Ši paslauga turi įvairių nustatymų vienkartiniam ir pastoviam sekimui. Anoniminių grupių gyvavimas yra tik kelios dienos su ribotomis funkcijomis, t.y. nėra nuotolinio valdymo ar grupės administratoriaus. Pilno funkcionalumo grupes galima susikurti interneto svetainėje ir tik registruoti vartotojai galės prie jų prieiti. "</string>
     <string name="osmo_plugin_name">OsMo (Pažangus tiesioginis stebėjimas)</string>
     <string name="osmo_settings">OsMo OpenStreetMap stebėjimas (beta)</string>
    	<string name="keep_informing_never">Niekada</string>
