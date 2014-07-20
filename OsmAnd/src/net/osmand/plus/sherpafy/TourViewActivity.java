@@ -12,13 +12,8 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -26,41 +21,31 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -153,6 +138,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				selectMenu(position, drawerAdapter.getItem(position));
+				mDrawerLayout.closeDrawer(mDrawerList);
 			}
 		});
 
@@ -163,20 +149,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				.commit();
 		
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
-				R.string.default_buttons_other_actions, R.string.close) {
-
-			@Override
-			public void onDrawerOpened(View view) {
-				super.onDrawerOpened(view);
-				invalidateOptionsMenu();
-			}
-
-			@Override
-			public void onDrawerClosed(View view) {
-				super.onDrawerOpened(view);
-				invalidateOptionsMenu();
-			}
-		};
+				R.string.default_buttons_other_actions, R.string.close);
 	}
 	
 	protected void selectMenu(int position, Object item) {
@@ -260,20 +233,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
-		// TourInformation selectedTour = customization.getSelectedTour();
-		// if (selectedTour == null || currentTourInformations.contains(selectedTour)) {
-		// for (TourInformation i : customization.getTourInformations()) {
-		// if (!currentTourInformations.contains(i)) {
-		// currentTourInformations.add(i);
-		// selectedTour = i;
-		// }
-		// }
-		// if (selectedTour != null) {
-		// selectTourAsync(selectedTour);
-		// // startTourView();
-		// }
-		// }
 	}
 
 	private void setTourInfoContent() {
@@ -392,19 +351,11 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		if (state == STATE_TOUR_VIEW) {
 //			createMenuItem(menu, ACTION_GO_TO_MAP, R.string.start_tour, 0, 0,/* R.drawable.ic_action_marker_light, */
 //					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 //			createMenuItem(menu, ACTION_SETTINGS_ID, R.string.settings, R.drawable.ic_action_settings_light,
 //					R.drawable.ic_action_settings_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM
 //							| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		} else if (state == STATE_SELECT_TOUR) {
-			if (customization.isTourSelected()) {
-				createMenuItem(menu, ACTION_TOUR_ID, R.string.default_buttons_ok, R.drawable.ic_action_ok_light,
-						R.drawable.ic_action_ok_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM
-								| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			}
-		} 
 		return super.onCreateOptionsMenu(menu);
 	}
 

@@ -2,38 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" android:background="@color/color_white"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="15dp"
+    android:background="#fafafa"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp" >
 
-    <FrameLayout >
-    	<ImageView
-        	android:id="@+id/TourImage"
-        	android:layout_width="match_parent"
-        	android:layout_height="wrap_content"/>
-    	<TextView
-    	    android:id="@+id/TourName"
-    	    android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:maxLines="1"
-        	android:background="@color/shadow_color"
-        	android:ellipsize="end"
-    	    android:textSize="20sp" 
-    	    android:textColor="@color/color_white"
-    	    />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/TourImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/shadow_color"
+            android:gravity="bottom"
+            android:paddingBottom="5dp"
+            android:paddingLeft="7dp"
+            android:paddingTop="5dp" >
+
+            <TextView
+                android:id="@+id/TourName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/color_white"
+                android:textSize="24sp" />
+        </LinearLayout>
     </FrameLayout>
+
     <TextView
         android:id="@+id/TourDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="3"
         android:ellipsize="end"
-        android:textSize="20sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_weight="1"/>
+        android:maxLines="3"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp"
+        android:textSize="18sp" />
 
 </LinearLayout>

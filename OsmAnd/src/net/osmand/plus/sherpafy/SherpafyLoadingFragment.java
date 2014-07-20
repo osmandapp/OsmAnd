@@ -20,7 +20,12 @@ public class SherpafyLoadingFragment extends SherlockFragment {
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.sherpafy_loading, container, false);
-
+		return view;
+	}
+	
+	@Override
+	public void onViewCreated(final View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 		app.checkApplicationIsBeingInitialized(getActivity(), (TextView) view.findViewById(R.id.ProgressMessage),
 				(ProgressBar) view.findViewById(R.id.ProgressBar), new Runnable() {
 					@Override
@@ -30,7 +35,6 @@ public class SherpafyLoadingFragment extends SherlockFragment {
 						((TourViewActivity)getSherlockActivity()).loadingFinished();
 					}
 				});
-		return view;
 	}
 
 }

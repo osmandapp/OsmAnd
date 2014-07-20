@@ -50,6 +50,7 @@ public class SherpafyToursFragment extends SherlockListFragment {
 		custom = (SherpafyCustomization) app.getAppCustomization();
 		TourAdapter tourAdapter = new TourAdapter(custom.getTourInformations());
 		setListAdapter(tourAdapter);
+		getListView().setBackgroundColor(0x00eeeeee);
 	}
 
 	@Override
@@ -58,10 +59,11 @@ public class SherpafyToursFragment extends SherlockListFragment {
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-		boolean light = true; //app.getSettings().isLightActionBar();
+		
 		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, ACTION_DOWNLOAD, 0, R.string.download_tours).setShowAsActionFlags(
 				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+//		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
+//		boolean light = true; //app.getSettings().isLightActionBar();
 		//menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
