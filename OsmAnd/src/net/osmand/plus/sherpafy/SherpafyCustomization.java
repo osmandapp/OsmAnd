@@ -143,6 +143,11 @@ public class SherpafyCustomization extends OsmAndAppCustomization {
 						indexFileNames.put(tr.getName(), date);
 						final TourInformation tourInformation = new TourInformation(tr);
 						tourPresent.add(tourInformation);
+						try {
+							tourInformation.loadFullInformation();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 						if (selected) {
 							reloadSelectedTour(progress, tr, tourInformation, warns);
 						}

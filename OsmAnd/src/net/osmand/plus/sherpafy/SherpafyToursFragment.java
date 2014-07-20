@@ -12,8 +12,8 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,28 +39,29 @@ public class SherpafyToursFragment extends SherlockListFragment {
 	private View view;
 	private SherpafyCustomization custom;
 
-	public SherpafyToursFragment(OsmandApplication app) {
-		this.app = app;
+	public SherpafyToursFragment() {
 	}
 	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		OsmandApplication app = (OsmandApplication) getSherlockActivity().getApplication();
+		app = (OsmandApplication) getSherlockActivity().getApplication();
 		custom = (SherpafyCustomization) app.getAppCustomization();
 		TourAdapter tourAdapter = new TourAdapter(custom.getTourInformations());
 		setListAdapter(tourAdapter);
-		getListView().setBackgroundColor(0x00eeeeee);
+		setHasOptionsMenu(true);
 	}
+	
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
+		Toast.makeText(getActivity(), getListAdapter().getItem(position).toString(), Toast.LENGTH_LONG).show();
 	}
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		
-		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, ACTION_DOWNLOAD, 0, R.string.download_tours).setShowAsActionFlags(
+		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, ACTION_DOWNLOAD, 0, R.string.sherpafy_download_tours).setShowAsActionFlags(
 				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 //		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 //		boolean light = true; //app.getSettings().isLightActionBar();
@@ -76,7 +77,11 @@ public class SherpafyToursFragment extends SherlockListFragment {
 				return true;
 			}
 		});
-
+	}
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		getListView().setBackgroundColor(0x00eeeeee);
 	}
 	
 	protected void openAccessCode(final boolean startDownload) {
@@ -149,7 +154,7 @@ public class SherpafyToursFragment extends SherlockListFragment {
 	class TourAdapter extends ArrayAdapter<TourInformation> {
 
 		public TourAdapter(List<TourInformation> list) {
-			super(getActivity(), R.layout.search_history_list_item, list);
+			super(getActivity(), R.layout.sherpafy_list_tour_item, list);
 		}
 
 		@Override
@@ -166,7 +171,7 @@ public class SherpafyToursFragment extends SherlockListFragment {
 			name.setText(ti.getName());
 			ImageView iv = (ImageView) row.findViewById(R.id.TourImage);
 			if(ti.getImageBitmap() != null) {
-				iv.setBackground(new BitmapDrawable(getResources(), ti.getImageBitmap()));
+				iv.setImageBitmap(ti.getImageBitmap());
 			}
 			return row;
 		}

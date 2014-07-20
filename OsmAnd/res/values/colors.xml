@@ -64,5 +64,5 @@
 	<color name="osmbug_not_submitted">#C8FFFF00</color> <!-- standard YELLOW -->
 
 	<color name="distance_color">#dd6CB336</color>
-	<color name="shadow_color">#33aaaaaa</color>
+	<color name="shadow_color">#33888888</color>
 </resources>

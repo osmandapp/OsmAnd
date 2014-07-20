@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="sherpafy_more_information">More information</string>
+    <string name="sherpafy_continue_stage">Continue</string>
+    <string name="sherpafy_start_stage">Start</string>
+    <string name="sherpafy_download_tours">Download Tours</string>
     <string name="sherpafy_tours">Sherpafy Tours</string>
     <string name="access_code_is_not_valid">Access code is not valid</string>
     <string name="enter_access_code">Enter access code</string>

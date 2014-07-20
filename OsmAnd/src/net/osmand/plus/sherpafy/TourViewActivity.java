@@ -1,50 +1,25 @@
 package net.osmand.plus.sherpafy;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import net.osmand.IProgress;
-import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.text.Html;
-import android.text.Html.ImageGetter;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -55,26 +30,15 @@ import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
  */
 public class TourViewActivity extends SherlockFragmentActivity {
 
-	private static final int ACTION_GO_TO_MAP = 1;
-	private static final int ACTION_TOUR_ID = 3;
-	private static final int ACTION_SHARE = 4;
-	
 	private static final int STATE_LOADING = -1;
-	private static final int STATE_TOUR_VIEW = 1;
-	private static final int STATE_SELECT_TOUR = 2;
+	private static final int STATE_SELECT_TOUR = 1;
+	private static final int STATE_TOUR_VIEW = 2;
+	private static final int STATE_STAGE_OVERVIEW = 3;
 	private static int state = STATE_LOADING;
-	
 	
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
 
-	
-	ImageView img;
-	TextView description;
-	LinearLayout fullDescriptionView;
-	RadioGroup stages;
-	private ToggleButton collapser;
-	private Set<TourInformation> currentTourInformations = new HashSet<TourInformation>();
 	
 	private SherpafyCustomization customization;
 	private Point displaySize;
@@ -83,6 +47,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private ListView mDrawerList;
 	private ArrayAdapter<Object> drawerAdapter;
 	private SherpafyToursFragment toursFragment;
+	private Object selectedItem;
+	private SherpafyTourOverviewFragment tourOverview;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -116,12 +82,57 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		mDrawerLayout.setDrawerTitle(GravityCompat.START, getString(R.string.sherpafy_app_name));
 
 		// Set the adapter for the list view
-		drawerAdapter = new ArrayAdapter<Object>(this, android.R.layout.simple_list_item_1){
+		drawerAdapter = setupAdapter();
+		mDrawerList.setAdapter(drawerAdapter);
+		// Set the list's click listener
+		mDrawerList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				selectMenu(position, drawerAdapter.getItem(position));
+			}
+		});
+
+		displaySize = new Point();
+		getWindowManager().getDefaultDisplay().getSize(displaySize);
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentManager.beginTransaction().replace(R.id.content_frame, new SherpafyLoadingFragment())
+				.commit();
+		
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
+				R.string.default_buttons_other_actions, R.string.close);
+	}
+
+
+	private ArrayAdapter<Object> setupAdapter() {
+		return new ArrayAdapter<Object>(this, R.layout.sherpafy_drawer_list_item){
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				Object it = getItem(position);
 				if(convertView == null){
-					convertView = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
+					convertView = getLayoutInflater().inflate(R.layout.sherpafy_drawer_list_item, null);
+				}
+				final ImageView imView = (ImageView) convertView.findViewById(R.id.Icon);
+				TextView tv = (TextView) convertView.findViewById(R.id.Text);
+				if(it.equals(R.string.sherpafy_tours)) {
+					imView.
+						setImageResource(R.drawable.icon_sherpafy);
+					tv.setText(getString(R.string.sherpafy_tours));
+				} else if(it instanceof TourInformation){
+					imView.setImageResource(R.drawable.ic_action_globus_light);
+					tv.setText(((TourInformation) it).getName());
+				} else if(it instanceof StageInformation){
+					if(customization.getSelectedStage() == it) {
+						imView.setImageResource(R.drawable.ic_action_gplay_over_light);
+					} else if(selectedItem == it) {
+						imView.setImageResource(R.drawable.ic_action_ok_light);
+					} else {
+						imView.setImageDrawable(null);
+					}
+					tv.setText(((StageInformation) it).getName());
+				} else {
+					imView.setImageDrawable(null);
+					tv.setText(it.toString());
 				}
 				if(position == 0) {
 					((TextView) convertView).setText(R.string.sherpafy_tours);
@@ -131,38 +142,8 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				return convertView;
 			}
 		};
-		mDrawerList.setAdapter(drawerAdapter);
-		// Set the list's click listener
-		mDrawerList.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				selectMenu(position, drawerAdapter.getItem(position));
-				mDrawerLayout.closeDrawer(mDrawerList);
-			}
-		});
-
-		displaySize = new Point();
-		getWindowManager().getDefaultDisplay().getSize(displaySize);
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.content_frame, new SherpafyLoadingFragment(getMyApplication()))
-				.commit();
-		
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
-				R.string.default_buttons_other_actions, R.string.close);
 	}
 	
-	protected void selectMenu(int position, Object item) {
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		if (position == 0) {
-			if (toursFragment == null) {
-				toursFragment = new SherpafyToursFragment(getMyApplication());
-			}
-			fragmentManager.beginTransaction().replace(R.id.content_frame, toursFragment).commit();
-			state = STATE_SELECT_TOUR;
-		}
-		updateActionBarTitle();
-	}
 
 	public void updateActionBarTitle() {
 		if(state == STATE_LOADING) {
@@ -176,14 +157,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	
 	
 	public void loadingFinished() {
-		drawerAdapter.clear();
-		drawerAdapter.add(getString(R.string.sherpafy_tours));
-		if(customization.getSelectedTour() != null) {
-			drawerAdapter.add(customization.getSelectedTour());
-			if(customization.getSelectedStage() != null) {
-				drawerAdapter.add(customization.getSelectedStage());
-			}
-		}
+		selectMenu(0, getString(R.string.sherpafy_tours));
 	}
 
 	@Override
@@ -199,29 +173,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	private ImageGetter getImageGetter(final View v) {
-		return new Html.ImageGetter() {
-			@Override
-			public Drawable getDrawable(String s) {
-				Bitmap file = customization.getSelectedTour().getImageBitmapFromPath(s);
-				v.setTag(file);
-				Drawable bmp = new BitmapDrawable(getResources(), file);
-				// if image is thicker than screen - it may cause some problems, so we need to scale it
-				int imagewidth = bmp.getIntrinsicWidth();
-				if (displaySize.x - 1 > imagewidth) {
-					bmp.setBounds(0, 0, bmp.getIntrinsicWidth(), bmp.getIntrinsicHeight());
-				} else {
-					double scale = (double) (displaySize.x - 1) / imagewidth;
-					bmp.setBounds(0, 0, (int) (scale * bmp.getIntrinsicWidth()),
-							(int) (scale * bmp.getIntrinsicHeight()));
-				}
-
-				return bmp;
-			}
-
-		};
-	}
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -233,130 +184,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-	}
-
-	private void setTourInfoContent() {
-		setContentView(R.layout.sherpafy_tour_info);
-
-		collapser = (ToggleButton) findViewById(R.id.collapse);
-		stages = (RadioGroup) findViewById(R.id.stages);
-		stages.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(RadioGroup radioGroup, int i) {
-				if (i == 0) {
-					customization.selectStage(null, IProgress.EMPTY_PROGRESS);
-				} else {
-					final StageInformation st = customization.getSelectedTour().getStageInformation().get(i - 1);
-					customization.selectStage(st, IProgress.EMPTY_PROGRESS);
-				}
-				updateTourContentView();
-			}
-
-		});
-
-		collapser.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isChecked) {
-					stages.setVisibility(View.VISIBLE);
-				} else {
-					stages.setVisibility(View.GONE);
-				}
-			}
-		});
-	}
-
-	private void updateTourContentView() {
-		if (customization.getSelectedStage() == null) {
-			if (customization.getSelectedTour() != null) {
-				TourInformation curTour = customization.getSelectedTour();
-				description.setText(Html.fromHtml(curTour.getShortDescription(), getImageGetter(description), null));
-				setFullDescriptions(curTour.getFulldescription());
-				// ((TextView)findViewById(R.id.tour_name)).setText(getString(R.string.overview));
-				setCollapserText(getString(R.string.overview));
-				prepareBitmap(curTour.getImageBitmap());
-			}
-		} else {
-			StageInformation st = customization.getSelectedStage();
-			description.setText(Html.fromHtml(st.getShortDescription(), getImageGetter(description), null));
-			setFullDescriptions(st.getFullDescription());
-
-			// ((TextView)findViewById(R.id.tour_name)).setText(st.getName());
-			setCollapserText(st.getName());
-			prepareBitmap(st.getImageBitmap());
-		}
-	}
-
-	private void setFullDescriptions(String fulldescription) {
-		List<String> list = new ArrayList<String>();
-		if (fulldescription.length() > 0) {
-			int i = 0;
-			while ((i = fulldescription.indexOf("<img", 1)) != -1) {
-				list.add(fulldescription.substring(0, i));
-				fulldescription = fulldescription.substring(i);
-			}
-		}
-		list.add(fulldescription);
-		fullDescriptionView.removeAllViews();
-		for (int i = 0; i < list.size(); i++) {
-			final TextView tv = new TextView(this);
-			tv.setGravity(Gravity.CENTER_HORIZONTAL);
-			tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-			tv.setPadding(0, 3, 0, 3);
-			tv.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-			addOnClickListener(tv);
-			tv.setText(Html.fromHtml(list.get(i), getImageGetter(tv), null));
-			fullDescriptionView.addView(tv);
-		}
-
-	}
-
-	private void addOnClickListener(final TextView tv) {
-		tv.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if (v.getTag() instanceof Bitmap) {
-					final AccessibleAlertBuilder dlg = new AccessibleAlertBuilder(getActivity());
-					dlg.setPositiveButton(R.string.default_buttons_ok, null);
-					ScrollView sv = new ScrollView(getActivity());
-					ImageView img = new ImageView(getActivity());
-					img.setImageBitmap((Bitmap) tv.getTag());
-					sv.addView(img);
-					dlg.setView(sv);
-					dlg.show();
-				}
-			}
-		});
-	}
-
-	private void setCollapserText(String t) {
-		collapser.setText("  " + t);
-		collapser.setTextOff("  " + t);
-		collapser.setTextOn("  " + t);
-	}
-
-
-	private void startTourView() {
-		if (state != STATE_TOUR_VIEW) {
-			setTourInfoContent();
-			state = STATE_TOUR_VIEW;
-		}
-		getSupportActionBar().setTitle(customization.getSelectedTour().getName());
-		updateTourView();
-		invalidateOptionsMenu();
-	}
-
-
-	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-//			createMenuItem(menu, ACTION_GO_TO_MAP, R.string.start_tour, 0, 0,/* R.drawable.ic_action_marker_light, */
-//					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-//			createMenuItem(menu, ACTION_SETTINGS_ID, R.string.settings, R.drawable.ic_action_settings_light,
-//					R.drawable.ic_action_settings_dark, MenuItem.SHOW_AS_ACTION_IF_ROOM
-//							| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		return super.onCreateOptionsMenu(menu);
 	}
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconLight, int iconDark, int menuItemType) {
@@ -375,84 +202,6 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		return menuItem;
 	}
 
-	private void updateTourView() {
-		TourInformation curTour = customization.getSelectedTour();
-		List<StageInformation> stagesInfo = curTour.getStageInformation();
-
-		img = (ImageView) findViewById(R.id.tour_image);
-		description = (TextView) findViewById(R.id.tour_description);
-		description.setVisibility(View.VISIBLE);
-		addOnClickListener(description);
-		fullDescriptionView = (LinearLayout) findViewById(R.id.tour_fulldescription);
-		fullDescriptionView.setVisibility(View.VISIBLE);
-
-		// in case of reloading view - remove all previous radio buttons
-		stages.removeAllViews();
-
-		// get count of radio buttons
-		final int count = stagesInfo.size() + 1;
-		final RadioButton[] rb = new RadioButton[count];
-
-		rb[0] = new RadioButton(this);
-		rb[0].setId(0);
-		stages.addView(rb[0]);
-		rb[0].setText(getString(R.string.overview));
-		// add radio buttons to view
-		for (int i = 1; i < count; i++) {
-			rb[i] = new RadioButton(this);
-			rb[i].setId(i);
-			stages.addView(rb[i]);
-			rb[i].setText(stagesInfo.get(i - 1).getName());
-		}
-
-		StageInformation stage = customization.getSelectedStage();
-
-		int i = 0;
-		if (stage != null) {
-			for (i = 1; i < count; i++) {
-				if (stage == stagesInfo.get(i - 1))
-					break;
-			}
-		}
-		if (i != count) {
-			stages.check(i);
-		} else {
-			stages.check(0);
-		}
-	}
-
-	private void goToMap() {
-		if (customization.getSelectedStage() != null) {
-			GPXFile gpx = customization.getSelectedStage().getGpx();
-			List<SelectedGpxFile> sgpx = getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-			if (gpx == null && sgpx.size() > 0) {
-				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-			} else if (sgpx.size() != 1 || sgpx.get(0).getGpxFile() != gpx) {
-				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-				if (gpx != null && gpx.findPointToShow() != null) {
-					WptPt p = gpx.findPointToShow();
-					getMyApplication().getSettings().setMapLocationToShow(p.lat, p.lon, 16, null);
-					getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(gpx);
-				}
-			}
-		}
-		Intent newIntent = new Intent(this, customization.getMapActivity());
-		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		this.startActivityForResult(newIntent, 0);
-	}
-
-	private void prepareBitmap(Bitmap imageBitmap) {
-		if (imageBitmap != null) {
-			img.setImageBitmap(imageBitmap);
-			img.setAdjustViewBounds(true);
-			img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			img.setCropToPadding(true);
-			img.setVisibility(View.VISIBLE);
-		} else {
-			img.setVisibility(View.GONE);
-		}
-	}
-
 	private OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
 	}
@@ -465,20 +214,53 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				mDrawerLayout.openDrawer(mDrawerList);
 			}
 			return true;
-		} else if (item.getItemId() == ACTION_GO_TO_MAP) {
-			goToMap();
-			return true;
-		} else if (item.getItemId() == ACTION_TOUR_ID) {
-			startTourView();
-			return true;
-		} else {
-			return true;
-			// return super.onOptionsItemSelected(item);
 		}
+		return super.onOptionsItemSelected(item);
 	}
 
-	private Activity getActivity() {
-		return this;
-	}
 
+	protected void selectMenu(int position, Object item) {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if (position == 0) {
+			if (toursFragment == null) {
+				toursFragment = new SherpafyToursFragment();
+			}
+			fragmentManager.beginTransaction().replace(R.id.content_frame, toursFragment).commit();
+			state = STATE_SELECT_TOUR;
+		} else if(item instanceof TourInformation) {
+			state = STATE_TOUR_VIEW;
+			if(tourOverview == null) {
+				tourOverview = new SherpafyTourOverviewFragment();
+			}
+			tourOverview.setTour((TourInformation)item);
+			fragmentManager.beginTransaction().replace(R.id.content_frame, toursFragment).commit();
+		} else if(item instanceof StageInformation) {
+			state = STATE_STAGE_OVERVIEW;
+		}
+		selectedItem = item;
+		if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
+			mDrawerLayout.closeDrawer(mDrawerList);
+		}
+		drawerAdapter.clear();
+		drawerAdapter.add(R.string.sherpafy_tours);
+		TourInformation selectedTour = customization.getSelectedTour();
+		for(TourInformation it :  customization.getTourInformations()) {
+			int insert = drawerAdapter.getCount();
+			if(it == selectedTour) {
+				insert = 1;
+			}
+			drawerAdapter.insert(it, insert++);
+			if(it == selectedItem) {
+				for(StageInformation st : it.getStageInformation()) {
+					drawerAdapter.insert(st, insert++);
+				}
+			} else if(it == selectedTour) {
+				StageInformation st = customization.getSelectedStage();
+				if(st != null) {
+					drawerAdapter.insert(st, insert++);
+				}
+			}
+		}
+		updateActionBarTitle();
+	}
 }
