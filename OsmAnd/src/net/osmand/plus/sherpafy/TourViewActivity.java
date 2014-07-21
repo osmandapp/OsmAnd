@@ -219,14 +219,14 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		Fragment fragment = fragments.get(item);
 		if (new Integer(R.string.sherpafy_tours).equals(item)) {
 			if (fragment == null) {
-				fragment = new SherpafyToursFragment();
+				fragment = new SherpafySelectToursFragment();
 				fragments.put(item, fragment);
 			}
 			state = STATE_SELECT_TOUR;
 		} else if(item instanceof TourInformation) {
 			state = STATE_TOUR_VIEW;
 			if (fragment == null) {
-				fragment = new SherpafyTourOverviewFragment();
+				fragment = new SherpafyTourFragment();
 				Bundle bl = new Bundle();
 				bl.putString("TOUR", ((TourInformation) item).getId());
 				fragment.setArguments(bl);
@@ -234,6 +234,14 @@ public class TourViewActivity extends SherlockFragmentActivity {
 			}
 		} else if(item instanceof StageInformation) {
 			state = STATE_STAGE_OVERVIEW;
+			if (fragment == null) {
+				fragment = new SherpafyStageFragment();
+				Bundle bl = new Bundle();
+				bl.putString(SherpafyStageFragment.TOUR_PARAM, ((StageInformation) item).getTour().getId());
+				bl.putInt(SherpafyStageFragment.STAGE_PARAM, ((StageInformation) item).getOrder());
+				fragment.setArguments(bl);
+				fragments.put(item, fragment);
+			}
 		}
 		if(fragment != null) {
 			fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
@@ -265,4 +273,18 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		}
 		updateActionBarTitle();
 	}
+
+
+
+	public void showHtmlFragment(String title, String cont) {
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		SherpafyHtmlFragment fragment = new SherpafyHtmlFragment();
+		Bundle bl = new Bundle();
+		bl.putString(SherpafyHtmlFragment.HTML, cont);
+		bl.putString(SherpafyHtmlFragment.TITLE, title);
+		fragment.setArguments(bl);
+		fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+	}
+
+
 }

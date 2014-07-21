@@ -28,9 +28,11 @@ public class TourInformation {
 	private String homeUrl = "";
 	private String shortDescription = "";
 	private String fulldescription = "";
+	private String instructions = "";
 	private Bitmap defaultImg = null;
 	private File imgFile;
 	private List<StageInformation> stageInformation = new ArrayList<TourInformation.StageInformation>();
+
 
 	public TourInformation(File f) {
 		this.folder = f;
@@ -39,6 +41,10 @@ public class TourInformation {
 	
 	public String getId() {
 		return folder.getName();
+	}
+	
+	public String getInstructions() {
+		return instructions;
 	}
 	
 	
@@ -78,6 +84,10 @@ public class TourInformation {
 					stage.name = name;
 				} else if (tag.equals("fullDescription")){
 					fulldescription = getInnerXml(parser);
+				} else if (tag.equals("instructions")){
+					instructions = getInnerXml(parser);
+				} else if (stage != null && tag.equals("interval")){
+					stage.distance = Double.parseDouble(getDefAttribute(parser, "distance", "0"));
 				} else if (stage != null && tag.equals("description")){
 					stage.fullDescription = getInnerXml(parser);
 				}
@@ -90,21 +100,23 @@ public class TourInformation {
 					stage = null;
 				} else if(stage != null && tag.equals("fullDescription")) {
 					stage.fullDescription = text;
-				} else if(stage != null && tag.equals("image")) {
+				} else if(stage != null && tag.equals("defaultImage")) {
 					if(text.startsWith(FILE_PREFIX)) {
 						stage.imgFile = getFile(text);
+					}
+				} else if(tag.equals("defaultImage")) {
+					if(text.startsWith(FILE_PREFIX)) {
+						imgFile = getFile(text);
 					}
 				} else if(stage != null && tag.equals("gpx")) {
 					if(text.startsWith(FILE_PREFIX)) {
 						stage.gpxFile = getFile(text);
 					}
-				} else if(tag.equals("fullDescription")) {
-					fulldescription = text;
 				} else if(tag.equals("shortDescription")) {
-					shortDescription = text;
-				} else if(tag.equals("defaultImage")) {
-					if(text.startsWith(FILE_PREFIX)) {
-						imgFile = getFile(text);
+					if(stage != null) {
+						stage.shortDescription = text;
+					} else {
+						shortDescription = text;
 					}
 				}
 				text = "";
@@ -180,6 +192,7 @@ public class TourInformation {
 		String fullDescription = "";
 		Bitmap img = null;
 		File imgFile;
+		double distance;
 		private TourInformation tour;
 		private int order;
 		
@@ -227,6 +240,10 @@ public class TourInformation {
 		@Override
 		public String toString() {
 			return name;
+		}
+
+		public double getDistance() {
+			return distance;
 		}
 		
 	}

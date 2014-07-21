@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#eeeeee" >
+    android:background="@drawable/sherpafy_tour_row" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -11,7 +11,8 @@
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
         android:layout_marginTop="15dp"
-        android:background="#ffffff"
+        android:id="@+id/AreaPreview"
+        android:background="@color/color_white"
         android:orientation="vertical" >
 
         <FrameLayout
@@ -65,6 +66,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:focusable="false"
                 />
         </LinearLayout>
     </LinearLayout>

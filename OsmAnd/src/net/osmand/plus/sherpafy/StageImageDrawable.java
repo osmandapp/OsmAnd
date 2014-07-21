@@ -90,7 +90,7 @@ public class StageImageDrawable extends Drawable {
 		// bs.inset((int)(bs.width() - min + 3 * density) / 2,
 		// (int) (bs.height() - min + 3 * density) / 2);
 		if(textPaint != null) {
-			textPaint.setTextSize(bs.height() * 3 / 4);
+			textPaint.setTextSize(bs.height() * 5 / 8);
 		}
 		if(drawable != null) {
 			drawable.setBounds(bs);
@@ -108,7 +108,7 @@ public class StageImageDrawable extends Drawable {
 		if (drawable != null) {
 			drawable.draw(canvas);
 		} else if(text != null ){
-			canvas.drawText(text, cx, cy + 3 * rx / 8, textPaint);
+			canvas.drawText(text, cx, cy + rx / 2, textPaint);
 		}
 	}
 

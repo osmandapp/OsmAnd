@@ -3,23 +3,14 @@ package net.osmand.plus.sherpafy;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Html.ImageGetter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,23 +20,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-public class SherpafyTourOverviewFragment extends SherlockListFragment {
+public class SherpafyTourFragment extends SherlockListFragment {
 	private static final int SHARE_ID = 6;
+	private static final int START = 7;
 	OsmandApplication app;
 	private SherpafyCustomization customization;
 	private TourInformation tour;
 	private StageAdapter stageAdapter;
+	private ImageView imageView;
 
-	public SherpafyTourOverviewFragment() {
+	public SherpafyTourFragment() {
 	}
 	
 	
@@ -92,7 +83,20 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		Toast.makeText(getActivity(), getListAdapter().getItem(position).toString(), Toast.LENGTH_LONG).show();
+		if(position > 0) {
+			StageItem si = (StageItem) getListAdapter().getItem(position - 1);
+			if(si.type instanceof StageInformation) {
+				((TourViewActivity) getSherlockActivity()).selectMenu(si.type);
+			} else {
+				if(si.type ==StageItemType.GALLERY) {
+					//((TourViewActivity) getSherlockActivity()).showGallery(tour);
+				} else if(si.type ==StageItemType.OVERVIEW) {
+					((TourViewActivity) getSherlockActivity()).showHtmlFragment(si.header, tour.getFulldescription());
+				} else if(si.type ==StageItemType.INSTRUCTIONS) {
+					((TourViewActivity) getSherlockActivity()).showHtmlFragment(si.header, tour.getInstructions());
+				}
+			}
+		}
 	}
 
 
@@ -101,9 +105,12 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 		// createMenuItem(menu, ACTION_GO_TO_MAP, R.string.start_tour, 0, 0,/* R.drawable.ic_action_marker_light, */
 		// MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		if (tour != null) {
-			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, SHARE_ID, R.string.settings,
-					R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
+			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, R.string.start_tour,
+					0, 0,
 					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, SHARE_ID, R.string.share_fav,
+					R.drawable.ic_action_gshare_light, R.drawable.ic_action_gshare_dark,
+					MenuItem.SHOW_AS_ACTION_IF_ROOM);
 		}
 	}
 	
@@ -124,16 +131,25 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 	
 	
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		List<StageItem> items = new ArrayList<SherpafyTourOverviewFragment.StageItem>();
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View v = super.onCreateView(inflater, container, savedInstanceState);
+		imageView = new ImageView(getActivity());
+		imageView.setLayoutParams(new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		imageView.setScaleType(ScaleType.CENTER_CROP);
+		return v;
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		List<StageItem> items = new ArrayList<SherpafyTourFragment.StageItem>();
 		items.add(new StageItem(StageItemType.TEXT, "", getString(R.string.sherpafy_tour_info_txt), false));
 		items.add(new StageItem(StageItemType.OVERVIEW, getString(R.string.sherpafy_overview), 
-				getString(R.string.sherpafy_overview), false));
+				getString(R.string.sherpafy_overview_desr), false));
 		items.add(new StageItem(StageItemType.INSTRUCTIONS, getString(R.string.sherpafy_instructions), 
-				getString(R.string.sherpafy_instructions), false));
+				getString(R.string.sherpafy_instructions_desr), false));
 		items.add(new StageItem(StageItemType.GALLERY, getString(R.string.sherpafy_gallery),
-				getString(R.string.sherpafy_gallery), false));
+				getString(R.string.sherpafy_gallery_descr), false));
 		items.add(new StageItem(StageItemType.TEXT, "", getString(R.string.sherpafy_stages_txt), true));
 		if (tour != null) {
 			for (StageInformation si : tour.getStageInformation()) {
@@ -141,16 +157,20 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 				items.add(it);
 			}
 			stageAdapter = new StageAdapter(items);
-
-			ImageView iv = new ImageView(getActivity());
-			iv.setLayoutParams(new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-			iv.setScaleType(ScaleType.CENTER_CROP);
-			iv.setImageBitmap(tour.getImageBitmap());
-			getListView().addHeaderView(iv);
+			imageView.setImageBitmap(tour.getImageBitmap());
+			if(imageView != null) {
+				getListView().addHeaderView(imageView);
+			}
 			setListAdapter(stageAdapter);
 		}
 	}
 	
+	
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		setListAdapter(null);
+	}
 	
 	
 	class StageAdapter extends ArrayAdapter<StageItem> {
@@ -172,9 +192,13 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 			TextView text = (TextView) row.findViewById(R.id.Text);
 			TextView addtext = (TextView) row.findViewById(R.id.AdditionalText);
 			
-			if(ti.type instanceof StageInformation) {
-				// TODO !!
-				addtext.setText("10 km");
+			if (ti.type instanceof StageInformation) {
+				double d = ((StageInformation) ti.type).getDistance();
+				if (d > 0) {
+					addtext.setText(OsmAndFormatter.getFormattedDistance((float) d, getMyApplication()));
+				} else {
+					addtext.setText("");
+				}
 			} else {
 				addtext.setText("");
 			}
@@ -206,90 +230,13 @@ public class SherpafyTourOverviewFragment extends SherlockListFragment {
 			} else {
 				img.setVisibility(View.VISIBLE);
 				img.setImageDrawable(new StageImageDrawable(getActivity(), 
-					StageImageDrawable.INFO_COLOR, ti.txt.substring(0, 1) +"", 0 ));
+					StageImageDrawable.INFO_COLOR, ti.header.substring(0, 1) +"", 0 ));
 			}
 			return row;
 		}
 	}
 	
 
-	private ImageGetter getImageGetter(final View v) {
-		return new Html.ImageGetter() {
-			@Override
-			public Drawable getDrawable(String s) {
-				Bitmap file = customization.getSelectedTour().getImageBitmapFromPath(s);
-				v.setTag(file);
-				Drawable bmp = new BitmapDrawable(getResources(), file);
-				// if image is thicker than screen - it may cause some problems, so we need to scale it
-				int imagewidth = bmp.getIntrinsicWidth();
-				// TODO
-//				if (displaySize.x - 1 > imagewidth) {
-//					bmp.setBounds(0, 0, bmp.getIntrinsicWidth(), bmp.getIntrinsicHeight());
-//				} else {
-//					double scale = (double) (displaySize.x - 1) / imagewidth;
-//					bmp.setBounds(0, 0, (int) (scale * bmp.getIntrinsicWidth()),
-//							(int) (scale * bmp.getIntrinsicHeight()));
-//				}
-				return bmp;
-			}
-
-		};
-	}
-	
-
-
-	private void addOnClickListener(final TextView tv) {
-		tv.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if (v.getTag() instanceof Bitmap) {
-					final AccessibleAlertBuilder dlg = new AccessibleAlertBuilder(getActivity());
-					dlg.setPositiveButton(R.string.default_buttons_ok, null);
-					ScrollView sv = new ScrollView(getActivity());
-					ImageView img = new ImageView(getActivity());
-					img.setImageBitmap((Bitmap) tv.getTag());
-					sv.addView(img);
-					dlg.setView(sv);
-					dlg.show();
-				}
-			}
-		});
-	}
-
-	private void prepareBitmap(Bitmap imageBitmap) {
-		ImageView img = null;
-		if (imageBitmap != null) {
-			img.setImageBitmap(imageBitmap);
-			img.setAdjustViewBounds(true);
-			img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			img.setCropToPadding(true);
-			img.setVisibility(View.VISIBLE);
-		} else {
-			img.setVisibility(View.GONE);
-		}
-	}
-
-	private void goToMap() {
-		if (customization.getSelectedStage() != null) {
-			GPXFile gpx = customization.getSelectedStage().getGpx();
-			List<SelectedGpxFile> sgpx = getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-			if (gpx == null && sgpx.size() > 0) {
-				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-			} else if (sgpx.size() != 1 || sgpx.get(0).getGpxFile() != gpx) {
-				getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
-				if (gpx != null && gpx.findPointToShow() != null) {
-					WptPt p = gpx.findPointToShow();
-					getMyApplication().getSettings().setMapLocationToShow(p.lat, p.lon, 16, null);
-					getMyApplication().getSelectedGpxHelper().setGpxFileToDisplay(gpx);
-				}
-			}
-		}
-		Intent newIntent = new Intent(getActivity(), customization.getMapActivity());
-		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		this.startActivityForResult(newIntent, 0);
-	}
-	
 	private OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
 	}

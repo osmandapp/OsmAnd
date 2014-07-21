@@ -6,7 +6,6 @@ import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
-import net.osmand.plus.activities.LocalIndexesActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -17,14 +16,14 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,12 +39,12 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
-public class SherpafyToursFragment extends SherlockListFragment {
+public class SherpafySelectToursFragment extends SherlockListFragment {
 	private static final int ACTION_DOWNLOAD = 5;
 	OsmandApplication app;
 	private SherpafyCustomization custom;
 
-	public SherpafyToursFragment() {
+	public SherpafySelectToursFragment() {
 	}
 	
 	@Override
@@ -61,7 +60,7 @@ public class SherpafyToursFragment extends SherlockListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		Toast.makeText(getActivity(), getListAdapter().getItem(position).toString(), Toast.LENGTH_LONG).show();
+		((TourViewActivity) getActivity()).selectMenu(getListAdapter().getItem(position));
 	}
 	
 	@Override
@@ -87,7 +86,13 @@ public class SherpafyToursFragment extends SherlockListFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		getListView().setBackgroundColor(0x00eeeeee);
+//		getListView().setOnItemClickListener(new OnItemClickListener() {
+//
+//		    @Override
+//		    public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
+//		    	view.findViewById(R.id.AreaPreview).setSelected(true);
+//		    }
+//		});
 	}
 	
 	protected void openAccessCode(final boolean startDownload) {
