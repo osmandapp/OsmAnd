@@ -1745,4 +1745,5 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_auto_connect_descr">Автоматическое подключение к сервису при запуске приложения</string>
     <string name="osmo_auto_connect">Автоматическое подключение</string>
     <string name="osmo_start_service">Сервис OsMo</string>
+    <string name="local_map_names">Местные названия</string>
     </resources>
