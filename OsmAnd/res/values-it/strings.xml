@@ -1932,4 +1932,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="enable_sleep_mode">Abilita la modalità quiescente</string>
 	<string name="gps_wake_up_timer">Intervallo risveglio GPS</string>
 	<string name="sleep_mode_stop_dialog">Tenere il GPS acceso?</string>
+	<string name="lang_al">Albanese</string>
+	<string name="lang_ar">Arabo</string>
+	<string name="lang_sc">Sardo</string>
+	<string name="lang_sr">Serbo</string>
+	<string name="lang_zh_CN">Cinese semplificato</string>
+	<string name="lang_zh_TW">Cinese tradizionale</string>
 	</resources>
