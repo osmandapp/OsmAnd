@@ -1860,4 +1860,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="routing_attr_avoid_motorway_description">Уникати автомагістралі</string>
 	<string name="routing_attr_weight_name">Максимальна вага</string>
 	<string name="routing_attr_weight_description">Задайте обмеження маси автівки</string>
+    <string name="android_19_location_disabled">"Починаючи з версії KitKat ви не в змозі завантажувати та оновлювати мапи у попередньому сховищі (%s). Чи бажаєте його змінити та скопіювати всі файли в нове місце?
+\n Примітка: старі фали залишаться недоторканими.
+\n Примітка: спільне користування фалами між OsmAnd та OsmAnd+ не можливе. "</string>
+    <string name="application_dir_change_warning2">OsmAnd намагається перенести дані до нового місця. Ви згодні?</string>
     </resources>
