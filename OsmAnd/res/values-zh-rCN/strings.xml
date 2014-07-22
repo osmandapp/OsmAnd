@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="email">電子郵件</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="email">電子郵件</string>
 <string name="poi_dialog_name">名稱</string>
 	<string name="poi_dialog_opening_hours">打開</string>
 	<string name="poi_dialog_comment">評論</string>
@@ -955,4 +956,6 @@
     <string name="use_kalman_filter_compass_descr">使用卡尔曼滤波避免罗盘误差</string>
     <string name="use_kalman_filter_compass">使用卡尔曼滤波</string>
     <string name="monitoring_settings_descr">配置如何记录旅程以及启用睡眠模式</string>
-    </resources>
+    <string name="lang_zh_CN">简体中文</string>
+	<string name="lang_zh_TW">繁体中文</string>
+	</resources>
