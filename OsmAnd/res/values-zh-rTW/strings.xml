@@ -1916,4 +1916,10 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="enable_sleep_mode">啟用休眠模式</string>
 	<string name="gps_wake_up_timer">GPS 喚醒間隔</string>
 	<string name="sleep_mode_stop_dialog">維持 GPS 開啟？</string>
+	<string name="lang_al">阿爾巴尼亞</string>
+	<string name="lang_ar">阿拉伯</string>
+	<string name="lang_sc">薩丁尼亞島</string>
+	<string name="lang_sr">塞爾維亞</string>
+	<string name="lang_zh_CN">簡體中文</string>
+	<string name="lang_zh_TW">正體中文</string>
 	</resources>
