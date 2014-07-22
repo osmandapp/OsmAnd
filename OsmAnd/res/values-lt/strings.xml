@@ -1785,4 +1785,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="gpx_monitoring_stop">Stabdyti GPX įrašymą</string>
     <string name="gpx_start_new_segment">Pradėti naują segmentą</string>
     <string name="lang_fa">Persų</string>
+	<string name="lang_al">Albanų</string>
+	<string name="lang_ar">Arabų</string>
+	<string name="lang_sr">Serbų</string>
+	<string name="lang_zh_TW">Tradicinė kinų</string>
+	<string name="lang_sc">Sardinų</string>
 	</resources>
