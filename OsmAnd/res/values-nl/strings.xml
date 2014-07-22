@@ -1914,4 +1914,10 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="gps_wake_up_timer">GPS ontwaak interval</string>
 	<string name="sleep_mode_stop_dialog">GPS aanlaten?</string>
 	<string name="lang_fa">Perzisch</string>
+	<string name="lang_al">Albanees</string>
+	<string name="lang_ar">Arabisch</string>
+	<string name="lang_sc">Sardijns</string>
+	<string name="lang_sr">Servisch</string>
+	<string name="lang_zh_CN">Vereenvoudigd Chinees</string>
+	<string name="lang_zh_TW">Traditioneel Chinees</string>
 	</resources>
