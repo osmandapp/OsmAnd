@@ -1422,7 +1422,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmodroid_plugin_description">OsMoDroid 外掛元件是 OsmAnd 的延伸，為 OsModroid 線上追蹤功能的應用程式。在 http://esya.ru 上有相關服務的資訊。</string>
     <string name="tip_altitude_offset_t">"大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
 \n\n到這些地方系統有一個更好的近似值參考是 EGM96。
-\n\n在您透過\'設定\' -&gt; \'管理地圖檔案\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球海拔修正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。 "</string>
+\n\n在您透過\'設定\' -&gt; \'管理地圖檔案\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球海拔矯正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。 "</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="tip_recent_changes_1_0_0_t">在1.0.0的變更：
 	\n\t* Improved routing: faster, more precise, up to 250 km
@@ -1597,7 +1597,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="auto_zoom_far">中距</string>
     <string name="auto_zoom_farthest">遠距</string>
     <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 的離線路線可能要花很長的時間(或有時無動作)。為了有更好的效能，您或許需要增加中途點。</string>
-    <string name="default_and">與</string>
+    <string name="default_and">和</string>
     <string name="default_or">或</string>
 	<string name="remember_choice">記住我的選擇</string>
     <string name="gps_status_eclipsim">GPS 狀態</string>
@@ -1711,7 +1711,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="index_name_italy">歐洲 - 意大利</string>
     <string name="index_name_gb">歐洲 - 英國</string>
     <string name="index_item_nation_addresses">全國範圍的地址</string>
-	<string name="index_item_world_altitude_correction">全球海拔校正</string>
+	<string name="index_item_world_altitude_correction">全球海拔矯正</string>
 	<string name="index_item_world_seamarks">全球航線標識</string>
 	<string name="index_item_world_bitcoin_payments">全球比特幣支付</string>
 	<string name="index_item_world_basemap">全球地圖總覽</string>
@@ -1733,34 +1733,30 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_plugin_name">OsMo (進階即時監視)</string>
     <string name="osmo_settings">OsMo OpenStreetMap 監視（測試版）</string>
    	<string name="osmo_settings_descr">組態監視設定值和設定個人監視頻道</string>
-    <string name="osmo_plugin_description">OpenStreetMap-監視 - 進階的即時監視。它提供了去追蹤其它裝置和被追蹤的可能性。
-        建立匿名群組，分享彼此的位置和交流。它具有各種設定用於區段追蹤或持續的追蹤。
-        匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。
-        需在網站上建立完整功能的群組，並且只有已註冊的使用者才能進入他們。
-        要更進一步的了解請到 http://osmo.mobi。</string>
+    <string name="osmo_plugin_description">"OpenStreetMap 進階即時監視，跟蹤其它裝置並進行追蹤，請參閱 http://osmo.mobi。建立匿名群組，分享彼此的位置和交流。它具有各種設定用於連線階段追蹤或持續的追蹤。匿名群組是有限制天數和一些功能，也就是沒有遠端控制和群組管理員。完整的功能需在網站上建立群組，並且只有已註冊的使用者才能進入他們。 "</string>
     <string name="keep_informing_never">永不</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
 	<string name="arrival_distance">抵達通告</string>
     <string name="arrival_distance_descr">您希望抵達通告要有多快？</string>
     <string name="osmo_io_error">OsMo 連線問題： </string>
-    <string name="osmo_mode_on">停止 OsMo 工作階段</string>    
-    <string name="osmo_mode_off">啟動 OsMo 工作階段</string>
+    <string name="osmo_mode_on">停止 OsMo 連線階段</string>    
+    <string name="osmo_mode_off">啟動 OsMo 連線階段</string>
     
     <string name="share_fav">分享</string>
 	<string name="share_fav_subject">經由 OsmAnd 分享我的最愛</string>
 	<string name="use_points_as_intermediates">預估兩點之間的路線</string>
     <string name="tip_recent_changes_1_8_alpha">"在1.8的變更： * 預估 GPX 軌跡路線標點之間的路線 * 為下載變更了各國的配置（支援當地名稱搜索） * 支援 GPX/KML 匯入(由 KML 轉換為 GPX ) * GPX 軌跡已經移到\'我的資料\' * 您可以按路程分割 GPX 軌跡和查對海拔高度差異/速度 * 自動開始導航後延遲 "</string>
-    <string name="osmo_auto_send_locations_descr">自動開始追蹤區段和發送位置之後啟動應用程式</string>
-    <string name="osmo_auto_send_locations">自動開始追蹤區段</string>
+    <string name="osmo_auto_send_locations_descr">自動開始追蹤連線階段和發送位置之後啟動應用程式</string>
+    <string name="osmo_auto_send_locations">自動開始追蹤連線階段</string>
     <string name="osmo_tracker_id">個人追蹤 ID</string>
     <string name="osmo_tracker_id_descr">點擊查看或分享追蹤 ID。
          使用追蹤 ID 連線的裝置將能夠監視該裝置的所有動作！ 要斷開選擇恢復選項。</string>
-    <string name="osmo_session_token">區段記號：%1$s</string>
+    <string name="osmo_session_token">連線階段標記：%1$s</string>
     <string name="osmo_auth_pending">等候授權...</string>
     <string name="osmo_locations_sent">發送位置 %1$d（在緩衝區 %2$d） </string>
     <string name="osmo_conn_successfull">已建立的連線：%1$s </string>
-    <string name="osmo_mode_restart">重新啟動 OsMo 區段</string>
+    <string name="osmo_mode_restart">重新啟動 OsMo 連線階段</string>
     <string name="osmo_settings_debug">除錯資訊</string>
     <string name="hours_ago">小時前</string>
     <string name="minutes_ago">分鐘前</string>
@@ -1776,10 +1772,10 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmo_group_info">資訊</string>
     <string name="osmo_group_share">為了連接到群組 %2$s，指定群組 ID (%1$s)或是點選 %3$s。</string>
     <string name="osmo_share_connect_device">允許持續的跟隨這個裝置</string>
-    <string name="osmo_share_current_session">在瀏覽器分享目前的區段</string>
-    <string name="osmo_session_not_available">無有效的區段，請檢查\'傳送位置\'是否有開。</string>
-    <string name="osmo_share_session">分享區段</string>
-    <string name="osmo_session_id_share">區段網址至追蹤裝置(%1$s)</string>
+    <string name="osmo_share_current_session">在瀏覽器分享目前的連線階段</string>
+    <string name="osmo_session_not_available">無效的連線階段，請檢查\'傳送位置\'是否有開。</string>
+    <string name="osmo_share_session">分享連線階段</string>
+    <string name="osmo_session_id_share">連線階段網址至追蹤裝置(%1$s)</string>
     <string name="osmo_tracker_id_share">為了連接到目標裝置 %2$s，點選連接 %3$s 或是指定追蹤 ID (%1$s)</string>
     <string name="osmo_track_interval">記錄間隔</string>
 	<string name="osmo_track_interval_descr">選擇發送位置間隔時間</string>
