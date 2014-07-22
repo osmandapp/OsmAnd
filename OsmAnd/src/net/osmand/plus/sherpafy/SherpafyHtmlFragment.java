@@ -3,6 +3,7 @@ package net.osmand.plus.sherpafy;
 import net.osmand.plus.OsmandApplication;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -21,6 +22,8 @@ public class SherpafyHtmlFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		app = (OsmandApplication) getSherlockActivity().getApplication();
 		wv = new WebView(getActivity());
+		WebSettings settings = wv.getSettings();
+		settings.setDefaultTextEncodingName("utf-8");
 		return wv;
 	}
 	
@@ -33,6 +36,14 @@ public class SherpafyHtmlFragment extends SherlockFragment {
 			getSherlockActivity().getSupportActionBar().setTitle(tl);
 		}
 		wv.loadData("<html><body>"+data+"</body></html", "text/html", "utf-8");
+	}
+	
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			((TourViewActivity) getSherlockActivity()).showSelectedItem();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }

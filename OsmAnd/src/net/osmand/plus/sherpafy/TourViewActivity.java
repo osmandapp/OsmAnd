@@ -97,14 +97,17 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 		displaySize = new Point();
 		getWindowManager().getDefaultDisplay().getSize(displaySize);
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction().replace(R.id.content_frame, new SherpafyLoadingFragment())
-				.commit();
+		if (getMyApplication().isApplicationInitializing()) {
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			fragmentManager.beginTransaction().replace(R.id.content_frame, new SherpafyLoadingFragment()).commit();
+		} else {
+			showSelectedItem();
+		}
 		
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
 				R.string.default_buttons_other_actions, R.string.close);
 	}
-
+	
 
 	private ArrayAdapter<Object> setupAdapter() {
 		return new ArrayAdapter<Object>(this, R.layout.sherpafy_drawer_list_item){
@@ -202,7 +205,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	}
 
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
+		if (item.getItemId() == android.R.id.home && mDrawerToggle.isDrawerIndicatorEnabled()) {
 			if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
 				mDrawerLayout.closeDrawer(mDrawerList);
 			} else {
@@ -223,6 +226,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				fragments.put(item, fragment);
 			}
 			state = STATE_SELECT_TOUR;
+			setDrawerIndicatorVisible(true);
 		} else if(item instanceof TourInformation) {
 			state = STATE_TOUR_VIEW;
 			if (fragment == null) {
@@ -232,6 +236,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				fragment.setArguments(bl);
 				fragments.put(item, fragment);
 			}
+			setDrawerIndicatorVisible(true);
 		} else if(item instanceof StageInformation) {
 			state = STATE_STAGE_OVERVIEW;
 			if (fragment == null) {
@@ -242,6 +247,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 				fragment.setArguments(bl);
 				fragments.put(item, fragment);
 			}
+			setDrawerIndicatorVisible(false);
 		}
 		if(fragment != null) {
 			fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
@@ -273,11 +279,29 @@ public class TourViewActivity extends SherlockFragmentActivity {
 		}
 		updateActionBarTitle();
 	}
+	
+	private void setDrawerIndicatorVisible(boolean b) {
+		mDrawerToggle.setDrawerIndicatorEnabled(b);		
+	}
 
 
+	public void showSelectedItem() {
+		if(selectedItem == null) {
+			selectMenu(selectedItem);
+		} else {
+			if(customization.getSelectedStage() != null) {
+				selectMenu(customization.getSelectedStage());
+			} else if(customization.getSelectedTour() != null) {
+				selectMenu(customization.getSelectedTour());
+			} else {
+				selectMenu(R.string.sherpafy_tours);
+			}
+		}
+	}
 
 	public void showHtmlFragment(String title, String cont) {
 		FragmentManager fragmentManager = getSupportFragmentManager();
+		setDrawerIndicatorVisible(false);
 		SherpafyHtmlFragment fragment = new SherpafyHtmlFragment();
 		Bundle bl = new Bundle();
 		bl.putString(SherpafyHtmlFragment.HTML, cont);

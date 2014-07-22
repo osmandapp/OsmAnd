@@ -27,15 +27,19 @@ public class SherpafyLoadingFragment extends SherlockFragment {
 	@Override
 	public void onViewCreated(final View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		if(app.isApplicationInitializing()) {
 		app.checkApplicationIsBeingInitialized(getActivity(), (TextView) view.findViewById(R.id.ProgressMessage),
 				(ProgressBar) view.findViewById(R.id.ProgressBar), new Runnable() {
 					@Override
 					public void run() {
 						((TextView) view.findViewById(R.id.ProgressMessage)).setVisibility(View.GONE);
 						view.findViewById(R.id.ProgressBar).setVisibility(View.GONE);
-						((TourViewActivity)getSherlockActivity()).selectMenu(R.string.sherpafy_tours);
+						((TourViewActivity)getSherlockActivity()).showSelectedItem();			
 					}
 				});
+		} else {
+			((TourViewActivity)getSherlockActivity()).showSelectedItem();
+		}
 	}
 
 }

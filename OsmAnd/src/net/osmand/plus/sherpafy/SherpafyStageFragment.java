@@ -75,7 +75,9 @@ public class SherpafyStageFragment extends SherlockFragment {
 		// createMenuItem(menu, ACTION_GO_TO_MAP, R.string.start_tour, 0, 0,/* R.drawable.ic_action_marker_light, */
 		// MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		if (tour != null) {
-			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, R.string.start_tour,
+			boolean current = customization.getSelectedStage() == stage;
+			((TourViewActivity) getSherlockActivity()).createMenuItem(menu, START, 
+					current ? R.string.continue_stage : R.string.start_stage ,
 					0, 0,
 					MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		}
@@ -83,7 +85,10 @@ public class SherpafyStageFragment extends SherlockFragment {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if(item.getItemId() == START) {
+		if (item.getItemId() == android.R.id.home) {
+			((TourViewActivity) getSherlockActivity()).selectMenu(tour);
+			return true;
+		} else if(item.getItemId() == START) {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -115,8 +120,7 @@ public class SherpafyStageFragment extends SherlockFragment {
 		return view;
 	}
 	
-	
-
+/////////
 	private ImageGetter getImageGetter(final View v) {
 		return new Html.ImageGetter() {
 			@Override
