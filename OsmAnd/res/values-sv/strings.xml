@@ -1639,4 +1639,10 @@
     <string name="lang_fa">Persiska</string>
 	<string name="osmo_auth_error_short">Godkännandet misslyckades</string>
     <string name="osmo_auth_error">Fel vid godkännande av OsMo: %1$s.↵\nTjänsten kan vara tillfälligt nere eller så har din registrering förfallit.\nVill du fortsätta med en ny registrering?</string>
-    </resources>
+    <string name="lang_al">Albanska</string>
+	<string name="lang_ar">Arabiska</string>
+	<string name="lang_sc">Sardinska</string>
+	<string name="lang_sr">Serbiska</string>
+	<string name="lang_zh_CN">Förenklad kinesiska</string>
+	<string name="lang_zh_TW">Traditionell kinesiska</string>
+	</resources>
