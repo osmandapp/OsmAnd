@@ -171,7 +171,7 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.lang_mr);
 		} else if (filename.equalsIgnoreCase("Norwegian")) {
 			return ctx.getString(R.string.lang_no);
-		} else if (filename.equalsIgnoreCase("persian")) {
+		} else if (filename.equalsIgnoreCase("Persian")) {
 			return ctx.getString(R.string.lang_fa);
 		} else if (filename.equalsIgnoreCase("Polish")) {
 			return ctx.getString(R.string.lang_pl);
