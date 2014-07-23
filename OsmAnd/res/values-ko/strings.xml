@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
@@ -93,7 +93,7 @@
 	<string name="live_monitoring_url_descr">온라인 트래킹할 웹 주소를 지정합니다. 매개변수 형식 : 위도={0}, 경도={1}, 시간={2}, hdop={3}, 고도={4}, 속도={5}, bearing={6}</string>
 	<string name="live_monitoring_url">온라인 트래킹 웹 주소</string>
 	<string name="gpx_monitoring_disabled_warn">\'Log track to GPX 파일\' 설정을 활성화하세요.</string>
-	<string name="show_current_gpx_title">현재 트랙을 보여줍니다</string>
+	<string name="show_current_gpx_title">현재의 GPX트랙을 보여줍니다</string>
 	<string name="tip_recent_changes_0_7_0_t">0.7.0 버전에 대한 변경 사항들 :
 		\n\t- 오프라인 위키피디아 기사 포함 데이터
 		\n\t- 업데이트된 맵들
@@ -124,11 +124,11 @@
 	<string name="fav_export_confirmation">이전에 익스포트한 즐겨찾기에 대한 파일이 이미 존재합니다. 이 파일을 대체하시겠습니까?</string>
 <string name="profile_settings">특정 설정 프로필</string>
 	<string name="settings_preset">기본 프로필</string>
-	<string name="settings_preset_descr">각 프로필마다 지도보기 와 운행설정을 기억합니다. 여기에 기본 프로필을 설정합니다.</string>
+	<string name="settings_preset_descr">각 프로필마다 지도보기 와 길안내 설정을 기억합니다. 여기에 기본 프로필을 설정합니다.</string>
 	
 	
 	<string name="routing_settings">길안내</string>
-	<string name="routing_settings_descr">운행을 위한 옵션을 지정합니다</string>
+	<string name="routing_settings_descr">길안내를 위한 옵션을 지정합니다</string>
 	<string name="global_settings">전체 설정</string>
 	<string name="index_settings">지도 관리</string>
 	<string name="index_settings_descr">기기에 저장된 오프라인 지도를 다운로드하고 관리합니다</string>
@@ -343,7 +343,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 
 	<string name="gpx_option_reverse_route">GPX 길안내 반대로 가기</string>
 	<string name="gpx_option_destination_point">현재 목적지 사용</string>
-	<string name="gpx_option_from_start_point">전체 트랙을 따라 이동</string>
+	<string name="gpx_option_from_start_point">전체 GPX트랙을 따라 이동</string>
 
 	<string name="switch_to_vector_map_to_see">이 위치에 대해 존재하는 오프라인 벡터 맵. \n\t\n\t사용하려면 \'메뉴\'-&gt;\'지도레이어\'-&gt;\'맵 소스…\'-&gt;\'오프라인 벡터 맵\' 을 활성화합니다.</string>
 	<string name="choose_audio_stream">음성 안내 출력</string>
@@ -632,7 +632,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="search_poi_filter">필터</string>
 	<string name="menu_mute_off">음성 켜짐</string>
 	<string name="menu_mute_on">음성 꺼짐</string>
-	<string name="voice_provider_descr">운행을 위하여 음성 안내를 선택합니다</string>
+	<string name="voice_provider_descr">길안내를 위하여 음성 안내를 선택합니다</string>
 	<string name="voice_provider">음성 안내</string>
 	<string name="voice_data_initializing">음성 데이터 초기화 중…</string>
 	<string name="voice_data_not_supported">지원되지 않는 음성 데이터 버전</string>
@@ -776,9 +776,9 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="settings">설정</string>
     <string name="save_current_track_descr">현재 트랙을 SD 카드에 저장합니다</string>
     <string name="save_current_track">현재의 GPX 트랙을 저장합니다</string>
-    <string name="save_track_interval_descr">트랙을 저장하는 시간 주기를 선택합니다</string>
+    <string name="save_track_interval_descr">GPX트랙을 저장하는 시간 주기를 선택합니다</string>
     <string name="save_track_interval">트랙로깅 간격</string>
-    <string name="save_track_to_gpx_descrp">트랙이 날짜 단위로 구분된 폴더에 저장됩니다</string>
+    <string name="save_track_to_gpx_descrp">GPX트랙이 날짜 단위로 구분된 폴더에 저장됩니다</string>
     <string name="save_track_to_gpx">트랙을 GPX파일로 저장</string>
     <string name="update_tile">맵 업데이트</string>
     <string name="reload_tile">타일 재로드</string>
@@ -962,7 +962,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="index_name_gb">유럽 - 영국</string>
     <string name="calculate_osmand_route_without_internet">인터넷 연결없이 OsmAnd 루트구간 계산</string>
     <string name="gpx_option_calculate_first_last_segment">첫번째와 마지막 루트구간 계산</string>
-    <string name="use_displayed_track_for_navigation">길안내를 위해 GPX 트랙을 사용하시겠습니까?</string>
+    <string name="use_displayed_track_for_navigation">길안내를 위해 맵뷰어에 표시된 GPX트랙을 사용하시겠습니까?</string>
     <string name="keep_and_add_destination_point">목적지로 추가</string>
     <string name="select_gpx">GPX파일 선택…</string>
     <string name="route_descr_select_destination">목적지 선택</string>
@@ -1009,7 +1009,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="local_osm_changes_delete_all">모두 삭제하기</string>
     <string name="animate_routing_route_not_calculated">먼저 루트를 계산하세요</string>
     <string name="animate_routing_route">계산된 루트를 사용하여 모의주행하기 </string>
-    <string name="animate_routing_gpx">GPX트랙파일을 이용하여 모의주행하기</string>
+    <string name="animate_routing_gpx">GPX트랙을 이용하여 모의주행하기</string>
     <string name="remember_choice">나의 선택을 기억하기</string>
     <string name="gps_status_eclipsim">GPS 상태</string>
     <string name="default_and">그리고</string>
@@ -1065,7 +1065,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="lang_cy">웨일스어</string>
 	<string name="route_preferences">루트 선호도</string>
     <string name="guidance_preferences_descr">길안내 선호도</string>
-    <string name="disable_complex_routing_descr">자동차 운행에 대한 2길 길찾기(라우팅)을 사용하지 않도록 설정합니다</string>
+    <string name="disable_complex_routing_descr">자동차 길안내에 대한 2길 길찾기(라우팅) 비활성화</string>
     <string name="app_modes_choose_descr">앱에서 볼 수있는 사용자 프로필를 선택합니다</string>
     <string name="map_widget_appearance">나머지 요소 :</string>
 	<string name="local_osm_changes_delete_all_confirm">%1$d OSM 변경 사항을 삭제하려고 합니다.  확실합니까?</string>
@@ -1157,11 +1157,11 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
          \n\t* 나침반을 안정화하기 위해 추가 설정
          \n\t* 지도 화면에서 좌상단 버튼는  메뉴버튼을 대체
     </string>
-    <string name="monitoring_settings">트랙로깅 서비스</string>
+    <string name="monitoring_settings">로깅 서비스</string>
     <string name="monitoring_settings_descr">트랙을 기록하는 방법을 구성하고 절전 모드를 활성화합니다</string>
-    <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트랙 및 길안내 활성화, 주기적으로 GPS 장치를 통해. 표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능.</string>
-    <string name="osmand_monitoring_plugin_name">트랙로깅 서비스</string>
-    <string name="osmand_background_plugin_description">주기적으로 GPS 장치를 깨어 통해 절전모드(스크린 끄기)에서 트랙 및 항법을 가능하게 하는 설정 표시.</string>
+    <string name="osmand_monitoring_plugin_description">절전모드(스크린 끄기)에서 트래킹 및 길안내 활성화, 주기적으로 GPS 장치가 작동중일 때 . 표시 설정은 로컬 GPX 파일이나 웹 서비스를 사용하는 온라인에 트랙을 기록하는 설비 가능.</string>
+    <string name="osmand_monitoring_plugin_name">로깅 서비스</string>
+    <string name="osmand_background_plugin_description">주기적으로 GPS 장치를 깨어 절전모드(스크린 끄기)에서 트랙 및 길안내를 가능하게 하는 설정 표시.</string>
     <string name="choose_osmand_theme_descr">앱 테마(색상)를 선택</string>
     <string name="choose_osmand_theme">앱 테마</string>
     <string name="accessibility_options">접근성(내게 필요한) 옵션</string>
@@ -1186,7 +1186,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
     
     <string name="local_indexes_cat_srtm">등고선 데이터</string>
     <string name="local_indexes_cat_av">오디오/비디오 데이터</string>
-    <string name="stop_routing_confirm">운행을 중지하시겠습니까 ?</string>
+    <string name="stop_routing_confirm">길안내를 중지하시겠습니까 ?</string>
     <string name="clear_dest_confirm">목적지를 취소하시겠습니까?</string>
     <string name="precise_routing_mode_descr">고장 없이 정확한 루트를 계산할 수 있습니다(여전히 거리 제한 하고 느린 속도로).</string>
     <string name="precise_routing_mode">정확한 길찾기:라우팅 (알파)</string>
@@ -1194,7 +1194,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
     <string name="recording_photo_description">사진 %1$s of %2$s</string>
     <string name="av_def_action_picture">사진 찍기</string>
     <string name="recording_context_menu_precord">사진 찍기</string>
-    <string name="dropbox_plugin_description">드롭박스 플러그인은 드롭박스 계정으로 트랙과 오디오/비디오 메모를 동기화 할 수 있습니다 .</string>
+    <string name="dropbox_plugin_description">드롭박스 플러그인은 드롭박스 계정으로 GPX트랙과 오디오/비디오 메모를 동기화 할 수 있습니다 .</string>
     <string name="dropbox_plugin_name">드롭박스 플러그인</string>
     <string name="intermediate_points_change_order">순서 변경</string>
     <string name="srtm_paid_version_msg">등고선 추가 개발을 지원하기 위해 구글시장에서 플러그인을 구입하시기 바랍니다 .</string>
@@ -1212,14 +1212,14 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
     <string name="av_use_external_camera">카메라 앱을 사용</string>
     <string name="av_settings_descr">오디오 및 비디오 설정을 구성합니다</string>
     <string name="av_settings">오디오/비디오 설정 </string>
-    <string name="recording_error">레코딩하는 동안 오류가 발생했습니다 </string>
+    <string name="recording_error">"기록하는 동안 오류가 발생했습니다 "</string>
     <string name="recording_camera_not_available">카메라는 사용할 수 없습니다</string>
     <string name="recording_is_recorded">오디오/비디오는 기록 되고있다. 정지하려면 AV 위젯을 누르면 됩니다.</string>
     <string name="recording_playing">지정된 레코딩에서 오디오가 재생되고 있습니다.\n%1$s</string>
     <string name="recording_open_external_player">외부 플레이어 열기</string>
     <string name="recording_delete_confirm">이 기록을 삭제하시겠습니까 ?</string>
-    <string name="recording_unavailable">사용할 수 없는</string>
-    <string name="recording_context_menu_arecord">오디오 기록하기</string>
+    <string name="recording_unavailable">사용 불가능</string>
+    <string name="recording_context_menu_arecord">오디오 녹음하기</string>
     <string name="recording_context_menu_vrecord">비디오 녹화하기</string>
     <string name="layer_recordings">레코딩 레이어</string>
     <string name="recording_can_not_be_played">레코딩을 재생할 수 없습니다</string>
@@ -1262,17 +1262,12 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
     <string name="safe_mode">안전 모드</string>
     <string name="native_library_not_running">이 앱은 안전 모드에서 실행 중입니다(설정에서 비활성화).</string>
     <string name="background_service_is_enabled_question">OsmAnd 절전 모드 서비스는 계속 실행 됩니다.  해제를 원하시나요?</string>
-    <string name="tip_recent_changes_1_0_0_t">버전 1.0.0 의 변경 사항 :
-	\n\t* 향상된 라우팅(길찾기) : 더 빨리, 더 정확히, 최대 250km
-	\n\t* 도로 전용 지도 소개
-	\n\t* 지도는 중단 후 위치 잠금을 잃지 않는다
-	\n\t* 운행하는 동안 절전 모드 서비스를 활성화
-    </string>
-    <string name="tip_recent_changes_0_8_4_t">버전 0.8.4 의 변경 사항 :
-	→\n\t* 일부 버그 수정
-	→\n\t* 지도는 중단 후 위치 잠금을 잃지 않는다
-	→\n\t* 운행하는 동안 절전 모드 서비스를 활성화
-    </string>
+    <string name="tip_recent_changes_1_0_0_t">"버전 1.0.0 의 변경 사항 :
+\n\t* 향상된 라우팅(길찾기) : 더 빨리, 더 정확히, 최대 거리 250km
+\n\t* 도로 전용 지도 소개
+\n\t* 지도는 중단 후 위치 잠금을 잃지 않는다
+\n\t* 길안내하는 동안 절전 모드 서비스를 활성화 "</string>
+    <string name="tip_recent_changes_0_8_4_t">"버전 0.8.4 의 변경 사항 : →\n\t* 일부 버그 수정 →\n\t* 지도는 중단 후 위치 잠금을 잃지 않는다 →\n\t* 길안내하는 동안 절전 모드 서비스를 활성화 "</string>
     <string name="close_changeset">변경세트 닫기</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing 바코드 스캐너 앱이 설치되어 있지 않습니다 .  구글시장에서 검색할까요 ?</string>
 	<string name="rendering_attr_roadColors_description">도로 색상을 선택합니다:</string>
@@ -1281,7 +1276,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
     <string name="enable_plugin_monitoring_services">위치로깅서비스(GPX 기록, 온라인 트래킹)를 사용하여 트래킹 플러그인을 활성화</string>
     <string name="non_optimal_route_calculation">장거리를 가능하게 하는 비최적 루트 계산</string>
 	<string name="gps_not_available">설정에서 GPS를 활성화하십시오</string>
-    <string name="map_widget_monitoring_services">트랙로깅 서비스</string>
+    <string name="map_widget_monitoring_services">로깅 서비스</string>
 	<string name="no_route">어떠한 루트도 없음</string>
 	<string name="delete_target_point">포인트 제거</string>
 	<string name="target_point">목적지 %1$s</string>
@@ -1317,30 +1312,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
 	<string name="snap_to_road">도로에 밀착</string>
 	<string name="osmand_play_title_30_chars">OsmAnd 지도 및 네비게이션</string>
 	<string name="osmand_short_description_80_chars">글로벌 모바일 지도 보기 및 오프라인 및 온라인 OSM지도를 위한 길안내</string>
-	<string name="osmand_long_description_1000_chars">
-		OsmAnd (OSM 자동 운행 길안내 )
-
-OsmAnd 글로벌 OpenStreetMap의 다양한 데이터에 접근할 수 있는 오픈 소스 탐색 응용 프로그램입니다.  모든 지도 데이터 (벡터 맵 또는 타일 맵 ) 오프라인 사용에 대한 휴대 전화 메모리 카드에 저장할 수 있습니다.  OsmAnd는 또한 턴-바이-턴 음성 안내 등의 오프라인 및 온라인 라우팅(길찾기) 기능을 제공합니다.
-
- 핵심 기능 중 일부 :
- - 전체 오프라인 기능 (선택한 폴더에 저장, 벡터지도 또는 타일지도 다운로드)
- - 컴팩트한 오프라인 벡터는 전 세계에서 사용가능
- - 국가 또는 지역의 다운로드는 앱에서 직접 매핑
- - GPX 또는 탐색 트랙, 관광 명소 등 가능한 여러 지도 레이어의 중첩, 즐겨 찾기, 등고선, 대중 교통 정류장, 사용자 정의 투명성 추가
- - 주소 및 장소에 대한 오프라인 검색 장소(POI)
- - 짧은 거리를 위한 오프라인 라우팅(실험)
- - 자동차, 자전거, 보행자 모드 :
- - 옵션으로 자동 주간/야간 지도 전환
- - 옵션으로 속도에 따라 지도 줌레벨 변경
- - 옴션으로 나침반이나 방향에 따라 맵 정렬
- - 옴션으로 차선 안내, 속도제한 표시, 녹음음성 및 TTS음성
-
- OsmAnd 무료 버전 제한 사항 :
- - 지도 다운로드 수 10회로 제한
- - 위키 백과 또는 오프라인 관심 장소에 액세스할 수 없음. 
-
-OsmAnd 는 적극적으로 개발하고 우리의 프로젝트와 프로젝트의 추가 진행은 개발 자금을 재정 지원에 의존하고 새로운 기능을 testdriving 하고있다. OsmAnd+ 를 구입, 또는 특정 새로운 기능에 자금을 지원하거나 osmand.net 에 일반 후원을 부탁드립니다.
-	</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM 자동 길안내 시스템) OsmAnd 글로벌 OpenStreetMap의 다양한 데이터에 접근할 수 있는 오픈 소스 탐색 응용 프로그램입니다. 모든 지도 데이터(벡터 맵 또는 타일 맵 ) 는 오프라인 사용을 위하여 휴대 전화 메모리 카드에 저장할 수 있습니다. OsmAnd는 또한 턴-바이-턴 음성 안내 등의 오프라인 및 온라인 라우팅(길찾기) 기능을 제공합니다. 핵심 기능 중 일부 : - 전체 오프라인 기능 (선택한 폴더에 저장, 벡터지도 또는 타일지도 다운로드 가능) - 컴팩트한 오프라인 벡터는 전 세계에서 사용가능 - 국가 또는 지역의 다운로드는 앱에서 직접 매핑 - GPX 또는 탐색 트랙, 관광 명소 등 가능한 여러 지도 레이어의 중첩, 즐겨 찾기, 등고선, 대중 교통 정류장, 사용자 정의 투명성 추가 - 주소 및 장소에 대한 오프라인 검색 장소(POI) - 짧은 거리를 위한 오프라인 라우팅 - 자동차, 자전거, 보행자 모드 : - 옵션으로 자동 주간/야간 지도 전환 - 옵션으로 속도에 따라 지도 줌레벨 변경 - 옴션으로 나침반이나 방향에 따라 맵 정렬 - 옴션으로 차선 안내, 속도제한 표시, 녹음음성 및 TTS음성 OsmAnd 무료 버전 제한 사항 : - 지도 다운로드 수 10회로 제한 - 위키 백과 또는 오프라인 관심 장소에 액세스할 수 없음. OsmAnd 는 적극적으로 개발하고 우리의 프로젝트와 프로젝트의 추가 진행은 개발 자금을 재정 지원에 의존하고 새로운 기능을 testdriving 하고있다. OsmAnd+ 를 구입, 또는 특정 새로운 기능에 자금을 지원하거나 osmand.net 에 일반 후원을 부탁드립니다. "</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 지도 및 네비게이션</string>
 	<string name="osmand_plus_short_description_80_chars">글로벌 모바일 지도보기 및 오프라인 및 온라인 OSM지도를 위한 탐색</string>
 	<string name="osmand_plus_long_description_1000_chars">
@@ -1489,20 +1461,19 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="show_cameras">속도 카메라 표시</string>
 	<string name="show_traffic_warnings">트래픽 경고 표시</string>
 	<string name="avoid_toll_roads">유료 도로 회피</string>
-	<string name="continue_follow_previous_route_auto">이전 운행은 아직 끝나지 안났습니다. 계속 운행하시겠습니까? (%1$s 초)</string>
+	<string name="continue_follow_previous_route_auto">이전 길안내는 아직 끝나지 안났습니다. 계속 길안내를 받으시겠습니까? (%1$s 초)</string>
 	<string name="route_updated_loc_found">위치가 발견되면 루트를 찾을 것입니다</string>
 	<string name="osmand_parking_hours">시간</string>
 	<string name="osmand_parking_minutes">분</string>
 	<string name="osmand_parking_position_description_add_time">자동차를 ~에 주차했습니다 :</string>
-	<string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1:
-		\n\t* 더욱 정밀한 루트 찾기(좀 더 느려짐) More precise routes (a bit slower)
-		\n\t* 스마트 하고 빠른 루트 계산. Smart and fast Route recalculation
-		\n\t* 좁은 길로 길안내. Direction by lanes
-		\n\t* 속도 제한 정보, 속도 카메라, 속도위반에 관한 정보. Information about speed limits, speed cams, and speed bumps 
-		\n\t* 고속도로에서 향상된 음성안내. Improved voice guidance on highways
-		\n\t* 주차 플러그인. Parking plugin (\'Where is my car parked at?\')
-		\n\t* 트랙로깅 위젯 활성화/비활성화. Enable/disable logging widget
-	</string>
+	<string name="tip_recent_changes_0_8_1_t">"Changes in 0.8.1:
+\n\t* 더욱 정밀한 루트 찾기(좀 더 느려짐) More precise routes (a bit slower)
+\n\t* 스마트 하고 빠른 루트 계산. Smart and fast Route recalculation
+\n\t* 좁은 길로 길안내. Direction by lanes
+\n\t* 속도 제한 정보, 속도 카메라, 속도위반에 관한 정보.
+\n\t* 고속도로에서 향상된 음성안내. Improved voice guidance on highways
+\n\t* 주차 플러그인. Parking plugin (\'Where is my car parked at?\')
+\n\t* 트랙로깅 위젯 활성화/비활성화. Enable/disable logging widget "</string>
 	<string name="select_animate_speedup">루트 시뮬레이션의 속도를 선택합니다</string>
     	<string name="global_app_allocated_memory_descr">할당된 메모리 %1$s MB (안드로이드 메모리 제한 %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">할당된 메모리</string>
@@ -1558,7 +1529,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="transport_search_desc">교통 검색</string>
 	<string name="favourites_search_desc">즐겨 찾기 검색</string>
 	<string name="history_search_desc">검색한 기록</string>
-	<string name="offline_navigation_not_available">OsmAnd 오프라인 운행은 일시적으로 사용할 수 없습니다.</string>
+	<string name="offline_navigation_not_available">OsmAnd 오프라인 길안내는 일시적으로 사용할 수 없습니다.</string>
 	<string name="left_side_navigation">왼쪽좌석 운전</string>
 	<string name="left_side_navigation_descr">왼쪽좌석 운전 국가를 선택합니다</string>
 	<string name="download_link_and_local_description">오프라인 데이터를 다운로드 하거나 업데이트 하려면 여기를 클릭하십시오. 
@@ -1642,17 +1613,16 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="av_camera_focus_continuous">카메라 초점을 지속적으로 시도</string>
 	<string name="av_photo_play_sound">사진찍을 때 소리재생</string>
 	<string name="av_photo_play_sound_descr">사진 찍을 때 소리를 재생할 것인지 선택</string>
-<string name="tip_recent_changes_1_7_1_t">Changes in 1.7:
-    \n\t* 중요한 지도는 2014년 2월 보다 새로운 지도 이어야 한다. IMPORTANT maps should be newer than February 2014.
-    \n\t* 완전히 업데이트된 길찾기(빠르고 정확하게). Completely updated routing (fast and precise) - 
-    \n\t* 루트 플래닝에서 새로운 화면(더 직관적이고 더 강력하게). New screen with Route Planning (more intuitive and more powerful)
-    \n\t* 주의! GPS 루트파일은 루트 설정 버튼으로 이용할 수 있다. NOTE GPX route is available under Route Settings buttton
-    \n\t* 운행모드에서 자동 숨김 버튼. Auto hide buttons in navigation mode
-    \n\t* GPX 루트파일의 첫 포인트에서 오프라인 루트를 계산. Calculate offline route to the first point of GPX route (\'pass the whole track\' option)
-    \n\t* 터널에서 시뮬레이션 활성화. Active simulation in tunnels
-    \n\t* 많은 UX 개선 및 사용성 고정. Lots of small UX improvements &amp; usability fixes
-    \n\t* 음성 속도 접근성 설정. Speech rate accessibility setting
-    </string>
+<string name="tip_recent_changes_1_7_1_t">"Changes in 1.7:
+\n\t* 중요한 지도는 2014년 2월 보다 새로운 지도 이어야 한다.
+\n\t* 완전히 업데이트된 길찾기(빠르고 정확하게).
+\n\t* 루트 플래닝에서 새로운 화면(더 직관적이고 더 강력하게).
+\n\t* 주의! GPS 루트파일은 루트 설정 버튼으로 이용할 수 있다.
+\n\t* 길안내모드에서 자동 숨김 버튼.
+\n\t* GPX 루트파일의 첫 포인트에서 오프라인 루트를 계산.
+\n\t* 터널에서 시뮬레이션 활성화.
+\n\t* 많은 UX 개선 및 사용성 고정.
+\n\t* 음성 속도 접근성 설정. "</string>
     <string name="av_camera_focus_edof">필드의 확장된 깊이(EDoF )</string>
 	<string name="local_index_installed">편집</string>
 	<string name="voice_not_specified">지정없음</string>
@@ -1663,26 +1633,21 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_distance_measurement_help">* Tap to mark a point.\n * Press and hold on the map to delete previous point.\n 이전 포인트를 지우기 위해 지도에서 누르고 홀드하기 * Press and hold on point to view and attach description.\n 설명을 읽고 알리기 위해 포인트에서누르고 홀드하기 * Click on measurement widget to see more actions. 더 많은 액션을 보기 위해 측정위젯 클릭하기.</string>
     <string name="tip_map_styles_t">
 	</string>
-    <string name="tip_recent_changes_1_2_t">Fixes in 1.2.1:
-	    \n\t*Fix Geo Intent (Foursquare, c:geo)
-지오 인텐트 고정
-	    \n\t*Fix screen tremble during navigation
-운행중 화면 떨림 고정
-	    \n\t*Other small fixes
-다른 사소한 고정
-	    \n\nChanges in 1.2:
-		\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
-		\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)
-		\n\t* Now accepts maps.google.com location links
-		\n\t* New widget (GPS info) 
-		\n\t* Added multi-window support for recent Samsung devices
-		\n\t* Kalman filter for compass
-		\n\t* Pebble watch support
-	</string>
-    <string name="tip_recent_changes_1_1_4_t">Changes in 1.1.4:
-        \n\t* UI redesign. UI 재디자인
-		\n\t* Bug fixes. 버그 수정
-    </string>
+    <string name="tip_recent_changes_1_2_t">"Fixes in 1.2.1:
+\n\t*Fix Geo Intent (Foursquare, c:geo) 지오 인텐트 고정
+\n\t*Fix screen tremble during navigation 길안내중 화면 떨림 고정
+\n\t*Other small fixes 다른 사소한 고정
+\n\nChanges in 1.2:
+\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
+\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)
+\n\t* Now accepts maps.google.com location links
+\n\t* New widget (GPS info)
+\n\t* Added multi-window support for recent Samsung devices
+\n\t* Kalman filter for compass
+\n\t* Pebble watch support "</string>
+    <string name="tip_recent_changes_1_1_4_t">"Changes in 1.1.4:
+\n\t* UI 재디자인
+\n\t* 버그 수정 "</string>
     <string name="tip_recent_changes_1_1_2_t">Changes in 1.1.2:
 		\n\t* Audio/video plugin enhancement (photos with EXIF information)
 		오디오/비디오 플러그인 개선사항
@@ -1693,33 +1658,20 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* Bug fixes (suboptimal routing)
 		버그 수정
     </string>
-    <string name="tip_recent_changes_1_1_0_t">Changes in 1.1.0:
-		\n\t* Distance calculator plugin
-		거리 계산 플러그인
-		\n\t* Audio/video notes plugin
-		오디오/비디오 메모 플러그인
-		\n\t* Contour lines plugin
-		등고선 플러그인
-		\n\t* Bug fixes
-		버그 수정
-		\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
-		지도 세부정보아 함께 지도 스타일 옵션, 새 도로 스타일, 
-		\n\t* EGM96 geoid offset correction for GPS altitude readings
-		EGM96 geoid 오프셋 보정, GPS 고도 읽기
-    </string>
+    <string name="tip_recent_changes_1_1_0_t">"Changes in 1.1.0:
+\n\t* 거리 계산 플러그인
+\n\t* 오디오/비디오 메모 플러그인
+\n\t* 등고선 플러그인
+\n\t* 버그 수정
+\n\t* 지도 세부정보아 함께 지도 스타일 옵션, 새 도로 스타일,
+\n\t* EGM96 geoid 오프셋 보정, GPS 고도 읽기 "</string>
     <string name="audionotes_location_not_defined">메모와 연결할 위치는 아직 정의되지 않았습니다. 지정된 위치에 메모를 할당하려면 \" 위치 사용…\"</string>
-    <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3:
-	\n\t* Waypoints
-	포인트
-	\n\t* Improved route guidance
-	향상된 루트 안내
-	\n\t* Added a setting which allows to avoid motorways while building a route
-	루트를 만드는 동안 전용도로를 회피하는 것을 허락하는 설정을 추가
-	\n\t* Added one more type of roads for bicycles to the map (Cycleway=track)
-	지도(Cycleway=트랙)에 자전거 도로의 유형을 추가
-	\n\t* Bug fixes
-	버그 수정
-	</string>
+    <string name="tip_recent_changes_0_8_3_t">"Changes in 0.8.3:
+\n\t* 포인트
+\n\t* 향상된 루트 안내
+\n\t* 루트를 만드는 동안 전용도로를 회피하는 것을 허락하는 설정을 추가
+\n\t* 지도(Cycleway=트랙)에 자전거 도로의 유형을 추가
+\n\t* 버그 수정 "</string>
 	<string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2:
 		\n\t* Improved Routing
 		향상된 길찾기
@@ -1958,11 +1910,8 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_auth_pending">허가를 기다리는 중...</string>
     <string name="osmo_locations_sent">위치 전송 %1$d (in buffer %2$d) </string>
     <string name="osmo_conn_successfull">설정된 연결 : %1$s </string>
-    <string name="tip_recent_changes_1_8_alpha">Changes in 1.8:
-        * GPX 트랙의 루트 포인트 사이의 도로 계산
-        * 다운로드에 대한 국가의 변경된 레이아웃 (support local names search)
-    </string>
-    <string name="use_points_as_intermediates">루트포인트 사이의 경로를 계산</string>
+    <string name="tip_recent_changes_1_8_alpha">"Changes in 1.8: * Calculate route between route points of GPX track * Changed layout of countries for downloads (support local names search) * Supports GPX/KML import (convert from KML to GPX) * GPX tracks has moved to \'My Data\' * You can split GPX track by distance and check altitude difference/ speed * Auto start navigation after delay "</string>
+    <string name="use_points_as_intermediates">포인트 사이의 루트를 계산</string>
     <string name="osmo_mode_restart">OsMo 세션 재시작</string>
     <string name="osmo_settings_debug">디버그 정보</string>
     <string name="osmo_group_info">정보</string>
@@ -2008,7 +1957,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_sign_in">로그인</string>
     <string name="osmo_create_groups_confirm">그룹을 만들려면 OsMo의 사용자 등록이 필요합니다.</string>
     <string name="osmo_credentials_not_valid">OsMo 자격증명이 유효하지 않습니다.</string>
-    <string name="osmo_regenerate_login_ids_confirm">개인 ID를 재발급 받으시겠습니까?  연결된 모든 장치는 더 이상 트랙을 기록할 수 없습니다.</string>
+    <string name="osmo_regenerate_login_ids_confirm">개인 ID를 재발급 받으시겠습니까? 연결된 모든 장치는 더 이상 GPX트랙을 기록할 수 없습니다.</string>
     <string name="osmo_regenerate_login_ids">사용자 ID 재생성</string>
     <string name="osmo_cancel_moving_target">이동 목적지 취소</string>
     <string name="osmo_center_location">화면 센터</string>
@@ -2022,9 +1971,9 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_user_left">사용자 %1$s 그룹 %2$s 남기다</string>
     <string name="osmo_show_group_notifications">그룹 알림 보기</string>
     <string name="osmo_show_group_notifications_descr">사용자가 그룹에 참여 또는 해체 할때 토스트 메시지를 표시</string>
-    <string name="gpx_file_is_empty">GPX 트랙이 비어있습니다</string>
-    <string name="selected_track">선택한 트랙</string>
-    <string name="my_tracks">모든 트랙</string>
+    <string name="gpx_file_is_empty">GPX트랙이 비어있습니다</string>
+    <string name="selected_track">선택한 GPX트랙</string>
+    <string name="my_tracks">모든 GPX트랙</string>
     <string name="my_favorites">내 즐겨찾기</string>
     <string name="my_data_Button">즐겨찾기</string>
     <string name="my_data_activity">즐겨찾기</string>
@@ -2044,8 +1993,8 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="gpx_selection_current_track">기록</string>
     <string name="gpx_selection_route_points">%1$s \n 루트 포인트 %2$s</string>
     <string name="gpx_selection_points">%1$s\n 포인트</string>
-    <string name="gpx_selection_track">%1$s\n 트랙 %2$s</string>
-    <string name="gpx_available_current_track">현재 트랙 기록</string>
+    <string name="gpx_selection_track">%1$s\n GPX트랙 %2$s</string>
+    <string name="gpx_available_current_track">현재 기록중인 GPX트랙</string>
     <string name="loading_smth">%1$s 불러오는 중…</string>
     <string name="map_widget_plain_time">현재 시간</string>
     <string name="gpx_wpt">중간지점</string>
@@ -2060,7 +2009,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="layer_amenity_label">포인트 레이블</string>
     <string name="show_zoom_buttons_navigation_descr">길안내중에 줌 버튼 보기</string>
     <string name="show_zoom_buttons_navigation">줌 버튼 보이기</string>
-    <string name="none_selected_gpx">"선택한 GPX 파일 없음. 사용 가능한 트랙을 선택 하려면  누르고 있어요."</string>
+    <string name="none_selected_gpx">"선택한 GPX 파일 없음. 사용 가능한 GPX트랙을 선택 하려면  누르고 있어요."</string>
     <string name="local_index_unselect_gpx_file">선택을 취소합니다.</string>
     <string name="local_index_select_gpx_file">보이기위해 선택</string>
     <string name="sort_by_distance">거리로 정렬</string>
@@ -2071,14 +2020,15 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="osmo_auth_error_short">인증 실패</string>
     <string name="osmo_auth_error">OsMo 인증 오류가 발생 했습니다: %1$s.\n임시로 서비스가 다운되었거나 또는 등록 만료가 되었습니다.\n신규 등록을 진행 하시겠습니까?.</string>
     <string name="osmo_group_by_invite">메시지를 입력하세요</string>
-    <string name="osmo_group_information_desc">" -모든 생성된 그룹은 공용입니다! 익명으로 하려면 트랙 id 통해 직접 장치를 연결 합니다.\n -그룹는 16 명까지 등록 할 수 있습니다.\n -비활동성 또는 2 주 동안 단 1 사람 활동의 경우, 그룹는 삭제 됩니다.\n -관리 콘솔에 가야만 초대, 하지만 컨트롤 그룹으로 그룹 입구를 제한할 수 있습니다.\n -그룹을 만들고 그러나 다른 조건 http://osmo.mobi 연락 해야 할 경우"</string>
+    <string name="osmo_group_information_desc">" -모든 그룹은 공용입니다! 익명으로 하려면 트랙커 id 통해 직접 장치를 연결 합니다.\n -그룹는 16 명까지 등록 할 수 있습니다.\n -비활동적인 그룹이나 또는 2 주 동안 단 1 사람만  활동한 경우, 그룹는 삭제 됩니다.\n -컨트롤 그룹으로 그룹 입구를 제한할 수 있습니다. 관리 콘솔에 가는 것이 필요합니다.
+\n -그룹을 만들고 싶으면 http://osmo.mobi 에 접속하세요"</string>
     <string name="osmo_group_information">그룹을 만들기 전에 읽어 보시기 바랍니다!</string>
     <string name="osmo_not_signed_in">OsMo 로그인 실패</string>
     <string name="osmo_gpx_points_downloaded">OsMo 포인트 %1$s 다운로드됨.</string>
     <string name="osmo_auto_connect_descr">응용 프로그램 시작 후 서비스에 자동으로 연결</string>
     <string name="osmo_auto_connect">자동 연결</string>
     <string name="osmo_start_service">OsMo 서비스</string>
-    <string name="osmo_gpx_track_downloaded">OsMo 트랙 %1$s 다운로드됨.</string>
+    <string name="osmo_gpx_track_downloaded">OsMo GPX트랙 %1$s 다운로드됨.</string>
     <string name="rendering_attr_hideBuildings_name">건물 숨기기</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">비 차량 고속도로 숨기기</string>
     <string name="rendering_attr_hideText_name">텍스트 숨기기</string>
