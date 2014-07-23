@@ -36,7 +36,7 @@
 	<string name="accessibility_mode_descr">접근성(내게 필요한 옵션) 기능을 켭니다</string>
 	<string name="accessibility_on">접근성 켜기</string>
 	<string name="accessibility_off">접근성 끄기</string>
-	<string name="accessibility_default">일반 시스템 설정에 따름</string>
+	<string name="accessibility_default">전체 시스템 설정에 따름</string>
 	
 	<string name="backToMenu">메뉴로 돌아감</string>
 	<string name="zoomOut">줌아웃(축소)</string>
@@ -51,7 +51,7 @@
 	<string name="scroll_map_by_gestures">자연스런 지도 스크롤</string>
 	<string name="i_am_here">현재 나의 위치</string>
 	<string name="zoom_by_trackball_descr">수평으로 트랙볼을 움직여 지도의 확대와 축소를 변경합니다</string>
-	<string name="zoom_by_trackball">줌(확대와 축소) 제어를 위한 트랙볼 사용</string>
+	<string name="zoom_by_trackball">줌 제어를 위한 트랙볼 사용</string>
 	<string name="use_short_object_names_descr">터치 탐색 모드에서 짧은 개체 이름을 사용합니다</string>
 	<string name="use_short_object_names">개체 이름 사용</string>
 	<string name="accessibility_preferences_descr">접근성(내게 필요한 옵션) 관련 선호도를 선택합니다</string>
@@ -129,12 +129,12 @@
 	
 	<string name="routing_settings">길안내</string>
 	<string name="routing_settings_descr">운행을 위한 옵션을 지정합니다</string>
-	<string name="global_settings">일반 설정</string>
+	<string name="global_settings">전체 설정</string>
 	<string name="index_settings">지도 관리</string>
 	<string name="index_settings_descr">기기에 저장된 오프라인 지도를 다운로드하고 관리합니다</string>
-	<string name="general_settings">일반 설정</string>
+	<string name="general_settings">일반</string>
 	<string name="general_settings_descr">앱에 대한 디스플레이와 일반 설정을 구성합니다</string>
-	<string name="global_app_settings">일반 앱 설정</string>
+	<string name="global_app_settings">전체 앱 설정</string>
 	<string name="user_name">OSM 사용자 이름</string>
 	<string name="user_name_descr">http://openstreetmap.org 에 데이터 제출을 위해 필요합니다</string>
 	<string name="user_password">OSM 패스워드</string>
@@ -262,7 +262,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 \n\t- TTS 엔진 개선 (정확한 거리 안내, 마일 가능)
 \n\t- 버그 픽스
 	</string>
-	<string name="save_route_dialog_title">루트를 GPX 트랙파일로 저장</string>
+	<string name="save_route_dialog_title">루트를 GPX 트랙으로 저장</string>
 	<string name="route_successfully_saved_at">루트가 \'%1$s\'로 성공적으로 저장되었습니다.</string>
 	<string name="filename_input">파일 이름 : </string>
 	<string name="file_with_name_already_exist">같은 이름의 파일이 이미 존재합니다.</string>
@@ -354,9 +354,9 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="warning_tile_layer_not_downloadable">앱이 지도 레이어 %1$s 를 다운로드할 수 없으니 재설치하시기 바랍니다.</string>
 	<string name="overlay_transparency_descr">오버레이 맵 투명도를 수정합니다</string>
 	<string name="overlay_transparency">오버레이 투명도</string>
-	<string name="map_transparency_descr">기본 맵 투명도를 수정합니다</string>
-	<string name="map_transparency">기본 맵 투명도</string>
-	<string name="modify_transparency">투명도를 수정합니다(0:투명 ~ 255:투명)</string>
+	<string name="map_transparency_descr">언더레이 맵 투명도를 수정합니다</string>
+	<string name="map_transparency">언더레이 투명도</string>
+	<string name="modify_transparency">투명도 수정(0:투명 ~ 255:불투명)</string>
 	<string name="layer_underlay">언더레이 맵…</string>
 	<string name="map_underlay">언더레이 맵</string>
 	<string name="map_underlay_descr">언더레이 맵을 선택합니다</string>
@@ -454,7 +454,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="send_location">위치 전송</string>
 	<string name="context_menu_item_share_location">위치 공유</string>
 	<string name="add_waypoint_dialog_added">GPX 포인트 \'\'{0}\'\' 가 성공적으로 추가되었습니다</string>
-	<string name="add_waypoint_dialog_title">기록된 GPX 트랙파일에 포인트 추가</string>
+	<string name="add_waypoint_dialog_title">기록된 GPX 트랙에 포인트 추가</string>
 	<string name="context_menu_item_add_waypoint">GPX 포인트 추가</string>
 	<string name="amenity_type_administrative">관리</string>
 	<string name="amenity_type_barrier">배리어(Barrier)</string>
@@ -542,7 +542,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="continuous_rendering">연속 렌더링</string>
 	<string name="continuous_rendering_descr">전체 이미지 대신 연속 렌더링을 표시합니다</string>
 	<string name="rendering_exception">선택 영역을 렌더링하는 도중 오류가 발생하였습니다</string>
-	<string name="show_point_options">위치 사용하기…</string>
+	<string name="show_point_options">포인트…</string>
 	<string name="renderer_load_sucess">렌더러가 성공적으로 적재되었습니다</string>
 	<string name="renderer_load_exception">예외발생: 렌더러가 적재되지 않았습니다</string>
 	<string name="renderers">벡터 렌더러</string>
@@ -569,7 +569,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 
 	<string name="map_route_by_gpx">GPX를 이용한 탐색</string>
 	<string name="gpx_files_not_found">GPX 파일을 /osmand/tracks 폴더에서 찾을 수 없습니다</string>
-	<string name="layer_gpx_layer">GPX 트랙파일…</string>
+	<string name="layer_gpx_layer">GPX 트랙…</string>
 	<string name="error_reading_gpx">GPX 데이터를 읽는 도중 오류</string>
 
 	<string name="vector_data">오프라인 벡터 맵</string>
@@ -614,7 +614,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="background_service_wait_int_descr">위치를 찾는 최대 대기시간을 설정합니다</string>
 	<string name="background_service_wait_int">최대 대기시간</string>
 	<string name="service_stop_background_service">OsmAnd 절전 모드 길안내 서비스 정지</string>
-	<string name="where_am_i">현재 위치?</string>
+	<string name="where_am_i">GPS 위치</string>
 	<string name="process_navigation_service">OsmAnd 네비게이션 서비스</string>
 	<string name="network_provider">네트워크</string>
 	<string name="gps_provider">GPS</string>
@@ -730,7 +730,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="recalculate_route_to_your_location">전송 모드 :</string>
 	<string name="mark_final_location_first">먼저 목적지 포인트를 선택하세요</string>
 	<string name="get_directions">길안내</string>
-    <string name="show_gps_status">GPS 상태 표시</string>
+    <string name="show_gps_status">GPS 정보</string>
 	<string name="opening_hours">오프닝 시간</string>
 	<string name="opening_changeset">변경사항 여는중…</string>
 	<string name="closing_changeset">변경사항 닫는중…</string>
@@ -757,7 +757,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="loading_data">데이터 로딩…</string>
 	<string name="reading_indexes">로컬 데이터 읽기…</string>
 	<string name="previous_run_crashed">이전에 실행한 앱이 죽었습니다. 로그 파일은 {0}입니다. 문제를 알리고 로그 파일을 첨부하세요.</string>
-	<string name="saving_gpx_tracks">GPX 트랙파일을 SD로 저장 중…</string>
+	<string name="saving_gpx_tracks">GPX 트랙을 SD에 저장 중…</string>
 	<string name="finished_task">종료되었습니다</string>
     <string name="reload_indexes_descr">SD 카드로부터 오프라인 데이터를 재적재합니다</string>
     <string name="reload_indexes">오프라인 데이터 재적재</string>
@@ -775,7 +775,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="additional_settings">추가 설정</string>
     <string name="settings">설정</string>
     <string name="save_current_track_descr">현재 트랙을 SD 카드에 저장합니다</string>
-    <string name="save_current_track">현재 GPX 트랙파일을 저장</string>
+    <string name="save_current_track">현재의 GPX 트랙을 저장합니다</string>
     <string name="save_track_interval_descr">트랙을 저장하는 시간 주기를 선택합니다</string>
     <string name="save_track_interval">트랙로깅 간격</string>
     <string name="save_track_to_gpx_descrp">트랙이 날짜 단위로 구분된 폴더에 저장됩니다</string>
@@ -962,7 +962,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="index_name_gb">유럽 - 영국</string>
     <string name="calculate_osmand_route_without_internet">인터넷 연결없이 OsmAnd 루트구간 계산</string>
     <string name="gpx_option_calculate_first_last_segment">첫번째와 마지막 루트구간 계산</string>
-    <string name="use_displayed_track_for_navigation">길안내를 위해 표시된 트랙을 사용하시겠습니까?</string>
+    <string name="use_displayed_track_for_navigation">길안내를 위해 GPX 트랙을 사용하시겠습니까?</string>
     <string name="keep_and_add_destination_point">목적지로 추가</string>
     <string name="select_gpx">GPX파일 선택…</string>
     <string name="route_descr_select_destination">목적지 선택</string>
@@ -996,7 +996,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="speech_rate_descr">TTS에 대한 음성속도를 지정합니다</string>
     <string name="speech_rate">음성 속도</string>
     <string name="complex_route_calculation_failed">빠른 루트 계산 실패(%s), 느린 계산으로 돌아감.</string>
-    <string name="disable_complex_routing">복잡한 라우팅을 사용하지 않도록 설정</string>
+    <string name="disable_complex_routing">복잡한 라우팅 비활성화</string>
     <string name="amenity_type_seamark">등대</string>
     <string name="app_modes_choose">앱 프로필</string>
 	<string name="map_widget_map_rendering">지도 렌더링:</string>
@@ -1011,7 +1011,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="animate_routing_route">계산된 루트를 사용하여 모의주행하기 </string>
     <string name="animate_routing_gpx">GPX트랙파일을 이용하여 모의주행하기</string>
     <string name="remember_choice">나의 선택을 기억하기</string>
-    <string name="gps_status_eclipsim">GPS 상태 보기</string>
+    <string name="gps_status_eclipsim">GPS 상태</string>
     <string name="default_and">그리고</string>
     <string name="default_or">또는</string>
 	<string name="auto_zoom_none">자동 줌 안됨</string>
@@ -1187,7 +1187,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
     <string name="local_indexes_cat_srtm">등고선 데이터</string>
     <string name="local_indexes_cat_av">오디오/비디오 데이터</string>
     <string name="stop_routing_confirm">운행을 중지하시겠습니까 ?</string>
-    <string name="clear_dest_confirm">목적지(와 중간포인트)를 취소하시겠습니까?</string>
+    <string name="clear_dest_confirm">목적지를 취소하시겠습니까?</string>
     <string name="precise_routing_mode_descr">고장 없이 정확한 루트를 계산할 수 있습니다(여전히 거리 제한 하고 느린 속도로).</string>
     <string name="precise_routing_mode">정확한 길찾기:라우팅 (알파)</string>
     <string name="recording_context_menu_show">표시</string>
@@ -1228,7 +1228,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
     <string name="recording_description">레코딩 %1$s %2$s of %3$s</string>
     <string name="recording_default_name">레코딩</string>
     <string name="av_control_stop">정지</string>
-    <string name="av_control_start">시작</string>
+    <string name="av_control_start">찍기</string>
     <string name="map_widget_av_notes">오디오/비디오 메모</string>
     <string name="osmand_srtm_short_description_80_chars">오프라인 등고선에 대한 OsmAnd 플러그인</string>
     <string name="map_widget_distancemeasurement">거리 측정</string>
@@ -1284,7 +1284,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
     <string name="map_widget_monitoring_services">트랙로깅 서비스</string>
 	<string name="no_route">어떠한 루트도 없음</string>
 	<string name="delete_target_point">포인트 제거</string>
-	<string name="target_point">목적지 포인트 %1$s</string>
+	<string name="target_point">목적지 %1$s</string>
     <string name="intermediate_point">중간 포인트 %1$s</string>
     <string name="context_menu_item_last_intermediate_point">마지막 포인트로 추가</string>
     <string name="context_menu_item_first_intermediate_point">첫번째 포인트로 추가</string>
@@ -1293,7 +1293,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
 
     <string name="replace_destination_point">목적지 포인트 대체</string>
     <string name="new_destination_point_dialog">이미 목적지 포인트 세트가 있다.</string>
-    <string name="target_points">목적지 포인트</string>
+    <string name="target_points">목적지</string>
     <string name="intermediate_point_too_far">도로에서 너무 멀리 떨어진 중간 포인트 %1$s .</string>
     <string name="arrived_at_intermediate_point">중간 포인트에 도착했습니다</string>
     <string name="context_menu_item_intermediate_point">중간 포인트로 추가</string>
@@ -1446,7 +1446,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_renderer">지도 스타일</string>
 	
 	
-	<string name="layer_map_appearance">화면 구성</string>
+	<string name="layer_map_appearance">맵뷰어 구성</string>
 	<string name="show_lanes">레인 표시</string>
 	<string name="avoid_unpaved">비포장 도로 회피</string>
 	<string name="avoid_ferries">뱃길 회피</string>
@@ -1464,8 +1464,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="int_continuosly">연속적인</string>
 	<string name="screen_is_locked">화면을 해제하려면 잠금아이콘을 누르세요</string>
 	<string name="map_widget_top_text">거리 이름</string>
-	<string name="map_widget_config">화면 구성</string>
-	<string name="map_widget_back_to_loc">현재 나의 위치</string>
+	<string name="map_widget_config">맵뷰어 구성</string>
+	<string name="map_widget_back_to_loc">현재 위치</string>
 	<string name="map_widget_lock_screen">화면 잠금</string>
 	<string name="map_widget_compass">나침반</string>
 	<string name="map_widget_top_stack">상태 표시줄 :</string>
@@ -1634,7 +1634,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="monitoring_control_start">GPX</string>
     <string name="osb_author_dialog_password">OSM 패스워드(선택)</string>
 	<string name="email">이메일</string>
-	<string name="av_camera_focus">카메라 포거스 유형</string>
+	<string name="av_camera_focus">카메라 포커스 유형</string>
 	<string name="av_camera_focus_descr">내부 카메라 포커스 유형 선택</string>
 	<string name="av_camera_focus_auto">자동 포커스</string>
 	<string name="av_camera_focus_infinity">포커스는 무한대로 설정</string>
@@ -1921,7 +1921,7 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	</string>
 	<string name="osmo_settings_uuid">고유 장치 id</string>
     <string name="osmo_settings_descr">모니터링 설정 및 설정 개인 모니터링 채널을 구성</string>
-    <string name="osmo_plugin_description">"OpenStreetMap 모니터링 - 고급 실시간 모니터링. 다른 장치를 추적하고 추적받는 가능성을 제공 합니다. 익명 그룹을 만들고, 서로의 위치를 공유하고 소통한다. 세션 트래킹 또는 영구 트래킹에 대한 다양한 설정을 합니다. 익명그룹는 수많은 날에 제한되며  일부 기능 즉, 원격 제어 및 그룹 관리자는 제한된다. 완벽하게 기능적인 그룹은 웹사이트에 생성하고 그들에게 등록된 사용자만 액세스할 수 있습니다. 이에 대해서는 http://osmo.mobi를 참조 하십시오."</string>
+    <string name="osmo_plugin_description">"OpenStreetMap 고급 실시간 모니터링. 이에 대해서는 http://osmo.mobi를 참조 하십시오. 다른 장치를 추적하고 추적받는 가능성을 제공 합니다. 익명 그룹을 만들고, 서로의 위치를 공유하고 소통한다. 세션 트래킹 또는 영구 트래킹에 대한 다양한 설정을 합니다. 익명그룹는 수많은 날에 제한되며  일부 기능 즉, 원격 제어 및 그룹 관리자는 제한된다. 완벽하게 기능적인 그룹은 웹사이트에 생성하고 그들에게 등록된 사용자만 액세스할 수 있습니다. "</string>
     <string name="osmo_plugin_name">OsMo (실시간 친구위치 공유)</string>
     <string name="osmo_settings">OsMo (실시간 친구찾기)</string>
    	<string name="share_route_as_gpx">GPX 파일로 루트 공유</string>
@@ -2103,12 +2103,18 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
     <string name="lang_he">히브리어</string>
     <string name="forward">앞으로</string>
     <string name="home">홈</string>
-    <string name="live_monitoring_m_descr">GPX 트랙을 기록할 때, 지정된 웹 서비스에 트래킹을 전송합니다.</string>
+    <string name="live_monitoring_m_descr">GPX 기록이 활성화 될때, 지정된 웹 서비스에 트래킹을 전송합니다.</string>
 	<string name="live_monitoring_m">온라인 트래킹 (GPX트랙 파일 필요)</string>
     <string name="live_monitoring_start">온라인 트래킹 시작</string>
 	<string name="live_monitoring_stop">온라인 트래킹 중지</string>
-	<string name="gpx_monitoring_start">GPX 트랙기록 시작</string>
-	<string name="gpx_monitoring_stop">GPX 트랙기록 중지</string>
+	<string name="gpx_monitoring_start">GPX 기록 시작</string>
+	<string name="gpx_monitoring_stop">GPX 기록 중지</string>
     <string name="gpx_start_new_segment">새로운 세그먼트 시작</string>
     <string name="lang_fa">페르시아어</string>
+	<string name="lang_al">알바니아어</string>
+	<string name="lang_ar">아랍어</string>
+	<string name="lang_sc">사르디니아어</string>
+	<string name="lang_sr">세르비아어</string>
+	<string name="lang_zh_CN">중국어 간체</string>
+	<string name="lang_zh_TW">중국어 번체</string>
 	</resources>

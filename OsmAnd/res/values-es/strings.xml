@@ -86,7 +86,7 @@
   <string name="user_name_descr">Necesario para envíos a openstreetmap.org</string>
   <string name="user_password">Su clave OSM</string>
   <string name="user_password_descr">Necesario para envíos a openstreetmap.org</string>
-  <string name="osmand_service">Funcionalidad de bajo consumo</string>
+  <string name="osmand_service">Funcionalidad de modo reposo</string>
   <string name="osmand_service_descr">Para ejecutar OsmAnd mientras la pantalla está apagada</string>
   <string name="tip_rotation_switching">Rotación del mapa</string>
   
@@ -467,7 +467,7 @@
   <string name="use_trackball">Usar trackball</string>
   <string name="background_service_wait_int_descr">Fijar el tiempo de espera máximo para determinar la posición en cada lectura del servicio de fondo</string>
   <string name="background_service_wait_int">Máx. espera para posicionamiento</string>
-  <string name="service_stop_background_service">Apagar servicio de navegación de fondo</string>
+  <string name="service_stop_background_service">Apagar servicio de navegación en modo reposo</string>
   <string name="where_am_i">¿Dónde estoy?</string>
   <string name="process_navigation_service">Servicio de navegación OsmAnd</string>
   <string name="network_provider">Red</string>
@@ -476,10 +476,10 @@
   <string name="int_min">min.</string>
   <string name="background_service_int_descr">Fija el intervalo de activación del servicio de fondo</string>
   <string name="background_service_int">Intervalo de activación</string>
-  <string name="background_service_provider_descr">Elige el proveedor de localización para la ejecución de fondo</string>
+  <string name="background_service_provider_descr">Elige el proveedor de localización para el modo reposo</string>
   <string name="background_service_provider">Proveedor de localización</string>
   <string name="background_router_service_descr">Ejecuta OsmAnd de fondo para trazar su posición con la pantalla apagada</string>
-  <string name="background_router_service">Ejecutar de fondo</string>
+  <string name="background_router_service">Ejecutar en modo reposo</string>
   <string name="off_router_service_no_gps_available">El servicio de navegación de fondo necesita que un proveedor de localización esté encendido.</string>
   <string name="hide_poi_filter">Ocultar filtro</string>
   <string name="show_poi_filter">Mostrar filtro</string>
@@ -969,8 +969,8 @@ Para poder usar muchas características de la aplicación necesitas algunos dato
   <string name="bg_service_interval">Fija el intervalo de activación:</string>
   <string name="screen_is_locked">Para desbloquear la pantalla presiona el icono del candado</string>
   <string name="bg_service_screen_unlock">Desbloquear pantalla</string>
-  <string name="bg_service_sleep_mode_off">Activar\n modo de bajo consumo</string>
-  <string name="bg_service_sleep_mode_on">Parar\n modo de bajo consumo</string>
+  <string name="bg_service_sleep_mode_off">Activar\n modo reposo</string>
+  <string name="bg_service_sleep_mode_on">Parar\n modo reposo</string>
 <string name="gps_wakeup_interval">Intervalo de activación del GPS: %s</string>
 <string name="int_continuosly">Continuamente</string>
 <string name="email">correo electrónico</string>
@@ -1285,7 +1285,7 @@ La lista de países incluídos (¡básicamente todo el mundo!): Afganistán, Alb
     <string name="tip_recent_changes_1_3_t">"Cambio en 1.5:\n\t* Tema Holo (personalización de tema) "
     </string>
     <string name="monitoring_settings">Servicios de registro</string>
-    <string name="monitoring_settings_descr">Configura la forma de registrar los recorridos y activar el modo de suspensión</string>
+    <string name="monitoring_settings_descr">Configura la forma de registrar los recorridos y activar el modo reposo</string>
     <string name="osmand_monitoring_plugin_description">Activa el seguimiento y la navegación en modo suspensión (pantalla apagada) despertando periódicamente el dispositivo GPS. Muestra opciones que permiten registrar tus recorridos en archivos GPX locales o en línea mediante un servicio web.</string>
     <string name="osmand_monitoring_plugin_name">Servicios de registro</string>
     <string name="choose_osmand_theme_descr">Elije el tema, el aspecto, de la aplicación</string>
@@ -1637,11 +1637,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="interrupt_music">Interrumpir música</string>
 	<string name="osmo_settings_uuid">Id único del dispositivo</string>
     <string name="osmo_settings_descr">Configurar opciones de monitorización y configurar canal de monitoreo</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitoreo avanzado en directo. Proporcionar la posibilidad de seguir otros dispositivos y ser seguido.
-        Cree grupos anónimos, compartan sus localizaciones y comuníquense. Tiene varias opciones para seguimiento por sesión o permanente.
-        Los grupos anónimos están limitados a varios días y a algunas funcionalidades, p.e. no hay control remoto ni administrador de grupo.
-        Los grupos completamente funcionales deben ser creados en la web y solo los usuarios registrados tienen acceso a ellos.
-        Por favor, lea más en http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">"OpenStreetMap-Monitoring - Monitorización avanzada en directo. Proporciona la posibilidad de seguir otros dispositivos y ser seguido. Crea grupos anónimos, comparte las localizaciones de cada uno y comuníquense. Tiene varias opciones para seguimiento por sesión o permanente. Los grupos anónimos están limitados a varios días y a algunas funcionalidades, p.e. no hay control remoto ni administrador de grupo. Los grupos completamente funcionales deben ser creados en la web y solo los usuarios registrados tienen acceso a ellos. Por favor, lee más en http://osmo.mobi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitoreo avanzado en directo)</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitoring (beta)</string>
    	<string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
@@ -1808,7 +1804,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_gpx_track_downloaded">Pista OsMo %1$s descargada.</string>
     <string name="keep_navigation_service">Mantener</string>
 	<string name="stop_navigation_service">Parar</string>
-	<string name="enable_sleep_mode">Habilitar modo de reposo</string>
+	<string name="enable_sleep_mode">Habilita modo reposo</string>
 	<string name="gps_wake_up_timer">Intervalo despertar GPS</string>
 	<string name="sleep_mode_stop_dialog">¿Mantener el GPS encendido?</string>
 	<string name="map_preferred_locale_descr">Lenguaje preferido para las etiquetas en el mapa (si no está disponible se cambiará a Ingles o a los nombres locales)</string>

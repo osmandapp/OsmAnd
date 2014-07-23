@@ -1563,7 +1563,7 @@
 	</string>
     <string name="osmo_settings_uuid">Identificació única de dispositiu</string>
     <string name="osmo_settings_descr">Configurar paràmetres de monitorització i fixar el canal de seguiment personal</string>
-    <string name="osmo_plugin_description">OpenStreetMap-Monitoring - Monitorització avançada en temps real. Proporciona la possibilitat de fer el seguiment d\'altres dispositius així com de ser seguit. Crea grups anònims, comparteix posicions amb els altres membres i permet comunicar-se. Hi ha diferents paràmetres de seguiment, tant permanents com de la sessió actual. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi.</string>
+    <string name="osmo_plugin_description">"Monitorització avançada en temps real OpenStreetMap, veieu http://osmo.mobi. Seguiment d\'altres dispositius així com de ser seguit. Crea grups anònims, comparteix posicions amb els altres membres i permet comunicar-se. Hi ha diferents paràmetres de seguiment puntual així com de seguiment permanent. Els grups anònims estan limitats tant pels dies de durada com en funcionalitats, p. e. no tenen control remot ni administració de grup. Els grups totalment operatius s\'han de crear via web i només els usuaris registrats en tenen accés. Si us plau, llegiu-ne més a http://osmo.mobi. "</string>
     <string name="osmo_plugin_name">OsMo (Monitorització avançada en temps real)</string>
     <string name="osmo_settings">OsMo Monitorització OpenStreetMap (beta)</string>
    	
