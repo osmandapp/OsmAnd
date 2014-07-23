@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -300,7 +300,7 @@
 	<string name="front_right">右前方</string>
 	<string name="right">右邊</string>
 	<string name="back_right">右後方</string>
-	<string name="back">後方</string>
+	<string name="back">往後</string>
 	<string name="back_left">左後方</string>
 	<string name="left">左邊</string>
 	<string name="front_left">左前方</string>
@@ -768,7 +768,7 @@
 	<string name="background_service_provider_descr">選擇位置提供給休眠模式服務使用</string>
 	<string name="background_service_provider">位置提供者</string>
 	<string name="background_router_service_descr">當螢幕關閉時，在背景執行 OsmAnd 追蹤您的位置</string>
-	<string name="background_router_service">背景執行</string>
+	<string name="background_router_service">在背景執行</string>
 	<string name="off_router_service_no_gps_available">休眠模式導航服務，需要提供一個已開啟的位置。</string>
 	<string name="hide_poi_filter">隱藏篩選器</string>
 	<string name="show_poi_filter">顯示篩選</string>
