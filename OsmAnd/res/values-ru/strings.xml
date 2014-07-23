@@ -1766,4 +1766,11 @@ OsmAnd - открытый источник и активно развается.
     <string name="osmo_gpx_points_downloaded">Точки OsMo %1$s загружены.</string>
     <string name="osmo_session_not_available">Сессия недоступна, пожалуйста проверьте, что \"отправка местоположения\" включена.</string>
     <string name="osmo_tracker_id_share">Чтобы присоединиться к устройству %2$s, нажмите на ссылку %3$s или укажите ID трекера (%1$s)</string>
-    </resources>
+    <string name="lang_al">Албанский</string>
+	<string name="lang_ar">Арабский</string>
+	<string name="lang_fa">Персидский</string>
+	<string name="lang_sc">Сардинский</string>
+	<string name="lang_sr">Сербский</string>
+	<string name="lang_zh_CN">Упрощенный китайский</string>
+	<string name="lang_zh_TW">Традиционный китайский</string>
+	</resources>
