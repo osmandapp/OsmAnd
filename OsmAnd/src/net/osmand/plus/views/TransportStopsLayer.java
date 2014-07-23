@@ -54,7 +54,9 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			try {
 				for (int i = 0; i < objects.size(); i++) {
 					TransportStop n = objects.get(i);
-						continue;
+					if (n.getLocation() == null){
+						contunue;
+					}
 					int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					int y = (int) tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
