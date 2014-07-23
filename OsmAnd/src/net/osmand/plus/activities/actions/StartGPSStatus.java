@@ -157,7 +157,7 @@ public class StartGPSStatus extends OsmAndAction {
 			// if (g.activity.length() == 0) {
 				PackageManager pm = mapActivity.getPackageManager();
 				try {
-					String appName = !g.paidAppName.isEmpty() && 
+					String appName = !g.paidAppName.equals("") &&
 							g.installed(mapActivity, g.paidAppName) ? g.paidAppName : g.appName;
 					intent = pm.getLaunchIntentForPackage(appName);
 				} catch (RuntimeException e) {
