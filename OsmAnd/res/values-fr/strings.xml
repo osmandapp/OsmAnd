@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -1777,4 +1777,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_showSurfaces_name">Montrer la surface des routes</string>
     <string name="rendering_attr_showCycleRoutes_name">Montrer les pistes cyclables</string>
     <string name="lang_fa">perse</string>
+	<string name="lang_al">albanais</string>
+	<string name="lang_ar">arabe</string>
+	<string name="lang_sc">sarde</string>
+	<string name="lang_sr">serbe</string>
+	<string name="lang_zh_CN">chinois simplifié</string>
+	<string name="lang_zh_TW">chinois traditionnel</string>
 	</resources>
