@@ -730,7 +730,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
 	<string name="recalculate_route_to_your_location">전송 모드 :</string>
 	<string name="mark_final_location_first">먼저 목적지 포인트를 선택하세요</string>
 	<string name="get_directions">길안내</string>
-    <string name="show_gps_status">GPS 상태 표시</string>
+    <string name="show_gps_status">GPS 정보</string>
 	<string name="opening_hours">오프닝 시간</string>
 	<string name="opening_changeset">변경사항 여는중…</string>
 	<string name="closing_changeset">변경사항 닫는중…</string>
@@ -962,7 +962,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="index_name_gb">유럽 - 영국</string>
     <string name="calculate_osmand_route_without_internet">인터넷 연결없이 OsmAnd 루트구간 계산</string>
     <string name="gpx_option_calculate_first_last_segment">첫번째와 마지막 루트구간 계산</string>
-    <string name="use_displayed_track_for_navigation">길안내를 위해 표시된 트랙을 사용하시겠습니까?</string>
+    <string name="use_displayed_track_for_navigation">길안내를 위해 GPX 트랙을 사용하시겠습니까?</string>
     <string name="keep_and_add_destination_point">목적지로 추가</string>
     <string name="select_gpx">GPX파일 선택…</string>
     <string name="route_descr_select_destination">목적지 선택</string>
@@ -1011,7 +1011,7 @@ OsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 
     <string name="animate_routing_route">계산된 루트를 사용하여 모의주행하기 </string>
     <string name="animate_routing_gpx">GPX트랙파일을 이용하여 모의주행하기</string>
     <string name="remember_choice">나의 선택을 기억하기</string>
-    <string name="gps_status_eclipsim">GPS 상태 보기</string>
+    <string name="gps_status_eclipsim">GPS 상태</string>
     <string name="default_and">그리고</string>
     <string name="default_or">또는</string>
 	<string name="auto_zoom_none">자동 줌 안됨</string>
@@ -1187,7 +1187,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
     <string name="local_indexes_cat_srtm">등고선 데이터</string>
     <string name="local_indexes_cat_av">오디오/비디오 데이터</string>
     <string name="stop_routing_confirm">운행을 중지하시겠습니까 ?</string>
-    <string name="clear_dest_confirm">목적지(와 중간포인트)를 취소하시겠습니까?</string>
+    <string name="clear_dest_confirm">목적지를 취소하시겠습니까?</string>
     <string name="precise_routing_mode_descr">고장 없이 정확한 루트를 계산할 수 있습니다(여전히 거리 제한 하고 느린 속도로).</string>
     <string name="precise_routing_mode">정확한 길찾기:라우팅 (알파)</string>
     <string name="recording_context_menu_show">표시</string>
@@ -1284,7 +1284,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
     <string name="map_widget_monitoring_services">트랙로깅 서비스</string>
 	<string name="no_route">어떠한 루트도 없음</string>
 	<string name="delete_target_point">포인트 제거</string>
-	<string name="target_point">목적지 포인트 %1$s</string>
+	<string name="target_point">목적지 %1$s</string>
     <string name="intermediate_point">중간 포인트 %1$s</string>
     <string name="context_menu_item_last_intermediate_point">마지막 포인트로 추가</string>
     <string name="context_menu_item_first_intermediate_point">첫번째 포인트로 추가</string>
@@ -1293,7 +1293,7 @@ GPX로 저장하여, GPX 루트를 계획할 수 있습니다.</string>
 
     <string name="replace_destination_point">목적지 포인트 대체</string>
     <string name="new_destination_point_dialog">이미 목적지 포인트 세트가 있다.</string>
-    <string name="target_points">목적지 포인트</string>
+    <string name="target_points">목적지</string>
     <string name="intermediate_point_too_far">도로에서 너무 멀리 떨어진 중간 포인트 %1$s .</string>
     <string name="arrived_at_intermediate_point">중간 포인트에 도착했습니다</string>
     <string name="context_menu_item_intermediate_point">중간 포인트로 추가</string>
@@ -2111,4 +2111,10 @@ Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Z
 	<string name="gpx_monitoring_stop">GPX 기록 중지</string>
     <string name="gpx_start_new_segment">새로운 세그먼트 시작</string>
     <string name="lang_fa">페르시아어</string>
+	<string name="lang_al">알바니아어</string>
+	<string name="lang_ar">아랍어</string>
+	<string name="lang_sc">사르디니아어</string>
+	<string name="lang_sr">세르비아어</string>
+	<string name="lang_zh_CN">중국어 간체</string>
+	<string name="lang_zh_TW">중국어 번체</string>
 	</resources>
