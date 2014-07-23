@@ -225,7 +225,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public void hideProgressBar() {
-		getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+		if (getSherlockActivity() != null){
+			getSherlockActivity().setSupportProgressBarIndeterminateVisibility(false);
+		}
 	}
 
 	private void updateSelectionMode(ActionMode m) {
@@ -963,7 +965,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			@Override
 			protected void onPostExecute(Void result) {
-				getSherlockActivity().setProgressBarIndeterminateVisibility(false);
+				if (getSherlockActivity() != null){
+					getSherlockActivity().setProgressBarIndeterminateVisibility(false);
+				}
 				if (info.gpx != null){
 					getMyApplication().getSelectedGpxHelper().selectGpxFile(info.gpx, selected, true);
 					listAdapter.notifyDataSetChanged();
