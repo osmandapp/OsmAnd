@@ -320,6 +320,9 @@ public class GeoIntentActivity extends OsmandListActivity {
 				} else {
 					matcher = Pattern.compile(pattern).matcher(schemeSpecific);
 				}
+				
+				final String pattern2 = "([\\-0-9.]+),([\\-0-9.]+)(?:.*)"; //c:geo
+				final Matcher matcher2 = Pattern.compile(pattern2).matcher(schemeSpecific);
 
                 if (matcher.matches())
                 {
@@ -333,11 +336,13 @@ public class GeoIntentActivity extends OsmandListActivity {
                     {
                         return new GeoPointSearch(lat, lon, Integer.valueOf(matcher.group(4)));
                     }
-                }
-                else
-                {
-                    return null;
-                }
+				} else if (matcher2.matches()) {
+					final double lat = Double.valueOf(matcher2.group(1));
+					final double lon = Double.valueOf(matcher2.group(2));
+					return new GeoPointSearch(lat, lon);
+				} else {
+					return null;
+				}
             }
         }
         return null;
