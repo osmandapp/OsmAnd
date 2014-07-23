@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+    <string name="sherpafy_stage_tab_fav">Fav</string>
+    <string name="sherpafy_stage_tab_target">Target</string>
+    <string name="sherpafy_stage_tab_route">Route</string>
+    <string name="sherpafy_stage_tab_info">Info</string>
     <string name="sherpafy_tour_info_txt">Tour Information</string>
     <string name="sherpafy_stages_txt">Stages</string>
     <string name="sherpafy_instructions">Instructions</string>

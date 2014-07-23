@@ -24,6 +24,7 @@ public class SherpafyHtmlFragment extends SherlockFragment {
 		wv = new WebView(getActivity());
 		WebSettings settings = wv.getSettings();
 		settings.setDefaultTextEncodingName("utf-8");
+		setHasOptionsMenu(true);
 		return wv;
 	}
 	
@@ -35,7 +36,7 @@ public class SherpafyHtmlFragment extends SherlockFragment {
 		if(tl != null){
 			getSherlockActivity().getSupportActionBar().setTitle(tl);
 		}
-		wv.loadData("<html><body>"+data+"</body></html", "text/html", "utf-8");
+		wv.loadData("<html><body>"+data+"</body></html", "text/html; charset=utf-8", "utf-8");
 	}
 	
 	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {

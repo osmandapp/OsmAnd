@@ -50,7 +50,7 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	private ListView mDrawerList;
 	private ArrayAdapter<Object> drawerAdapter;
 	private WeakHashMap<Object, Fragment> fragments = new WeakHashMap<Object, Fragment>();
-	private Object selectedItem;
+	private static Object selectedItem;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,15 +97,14 @@ public class TourViewActivity extends SherlockFragmentActivity {
 
 		displaySize = new Point();
 		getWindowManager().getDefaultDisplay().getSize(displaySize);
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
+				R.string.default_buttons_other_actions, R.string.close);
 		if (getMyApplication().isApplicationInitializing()) {
 			FragmentManager fragmentManager = getSupportFragmentManager();
 			fragmentManager.beginTransaction().replace(R.id.content_frame, new SherpafyLoadingFragment()).commit();
 		} else {
 			showSelectedItem();
 		}
-		
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer_light,
-				R.string.default_buttons_other_actions, R.string.close);
 	}
 	
 
@@ -124,7 +123,11 @@ public class TourViewActivity extends SherlockFragmentActivity {
 						setImageResource(R.drawable.icon_sherpafy);
 					tv.setText(getString(R.string.sherpafy_tours));
 				} else if(it instanceof TourInformation){
-					imView.setImageResource(R.drawable.ic_action_globus_light);
+					if(selectedItem == it) {
+						imView.setImageResource(R.drawable.ic_action_ok_light);
+					} else {
+						imView.setImageResource(R.drawable.ic_action_globus_light);
+					}
 					tv.setText(((TourInformation) it).getName());
 				} else if(it instanceof StageInformation){
 					if(customization.getSelectedStage() == it) {
@@ -281,12 +284,14 @@ public class TourViewActivity extends SherlockFragmentActivity {
 	}
 	
 	private void setDrawerIndicatorVisible(boolean b) {
-		mDrawerToggle.setDrawerIndicatorEnabled(b);		
+		if(mDrawerToggle.isDrawerIndicatorEnabled() != b) {
+			mDrawerToggle.setDrawerIndicatorEnabled(b);
+		}
 	}
 
 
 	public void showSelectedItem() {
-		if(selectedItem == null) {
+		if(selectedItem != null) {
 			selectMenu(selectedItem);
 		} else {
 			if(customization.getSelectedStage() != null) {

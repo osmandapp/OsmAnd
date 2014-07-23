@@ -63,15 +63,21 @@ public class SherpafyTourFragment extends SherlockListFragment {
 		super.onAttach(activity);
 		app = (OsmandApplication) getSherlockActivity().getApplication();
 		customization = (SherpafyCustomization) app.getAppCustomization();
-
-		setHasOptionsMenu(true);
 		String id = getArguments().getString("TOUR");
 		for (TourInformation ti : customization.getTourInformations()) {
 			if (ti.getId().equals(id)) {
 				tour = ti;
-				getSherlockActivity().getSupportActionBar().setTitle(tour.getName());
 				break;
 			}
+		}
+		setHasOptionsMenu(true);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		if(tour != null) {
+			getSherlockActivity().getSupportActionBar().setTitle(tour.getName());
 		}
 	}
 

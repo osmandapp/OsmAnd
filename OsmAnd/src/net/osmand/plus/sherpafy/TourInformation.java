@@ -82,6 +82,12 @@ public class TourInformation {
 					String name = getDefAttribute(parser, "name", "");
 					stage = new StageInformation(this, stageInformation.size());
 					stage.name = name;
+				} else if (tag.equals("itinerary") && stage != null){
+					String img = getDefAttribute(parser, "image", "");
+					if(img.startsWith(FILE_PREFIX)) {
+						stage.itineraryFile = getFile(img);
+					}
+					stage.itinerary = getInnerXml(parser);
 				} else if (tag.equals("fullDescription")){
 					fulldescription = getInnerXml(parser);
 				} else if (tag.equals("instructions")){
@@ -185,16 +191,23 @@ public class TourInformation {
 	
 	public static class StageInformation {
 		
+		String itinerary = "";
 		File gpxFile;
 		public GPXFile gpx;
 		String name = "";
 		String shortDescription = "";
 		String fullDescription = "";
-		Bitmap img = null;
+		Bitmap img;
 		File imgFile;
+		private Bitmap itineraryImg;
+		File itineraryFile;
 		double distance;
 		private TourInformation tour;
 		private int order;
+		
+		public String getItinerary() {
+			return itinerary;
+		}
 		
 		public TourInformation getTour() {
 			return tour;
@@ -235,6 +248,13 @@ public class TourInformation {
 				img = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 			}
 			return img;
+		}
+		
+		public Bitmap getItineraryBitmap() {
+			if(itineraryImg == null && itineraryFile != null && itineraryFile.exists()) {
+				itineraryImg = BitmapFactory.decodeFile(itineraryFile.getAbsolutePath());
+			}
+			return itineraryImg;
 		}
 		
 		@Override
