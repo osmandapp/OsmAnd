@@ -343,7 +343,7 @@ public class MapActivity extends AccessibleActivity  {
 					} else if ("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme)) {
 						final String schemeSpecificPart = data.getSchemeSpecificPart();
 
-						final Matcher matcher = Pattern.compile("q=(.+?),(.+?)").matcher(schemeSpecificPart);
+						final Matcher matcher = Pattern.compile("(?:q|ll)=([\\-0-9.]+),([\\-0-9.]+)(?:.*)").matcher(schemeSpecificPart);
 						if (matcher.matches()) {
 							try {
 								final double lat = Double.valueOf(matcher.group(1));
